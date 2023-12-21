@@ -5,7 +5,7 @@ A container that displays a process or operation as a progress bar
 ### Usage
 
 ```js
-import ProgressBar from "@docspace/components/progress-bar";
+import { ProgressBar } from "@docspace/shared/components";
 ```
 
 ```jsx

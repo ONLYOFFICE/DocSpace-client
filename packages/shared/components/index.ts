@@ -72,6 +72,7 @@ import {
 } from "./table";
 import { Label } from "./label";
 import { FieldContainer } from "./field-container";
+import { ProgressBar } from "./progress-bar";
 
 export type {
   TFallbackAxisSideDirection,
@@ -83,6 +84,7 @@ export type {
 };
 
 export {
+  ProgressBar,
   FieldContainer,
   Label,
   TableGroupMenu,

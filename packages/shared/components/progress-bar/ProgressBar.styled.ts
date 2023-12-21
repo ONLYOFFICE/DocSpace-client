@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import Base from "../themes/base";
+import { Base } from "../../themes";
 
-const StyledProgressBar = styled.div`
+const StyledProgressBar = styled.div<{ percent: number }>`
   position: relative;
   height: 4px;
   border-radius: 3px;
@@ -20,7 +20,6 @@ const StyledProgressBar = styled.div`
     min-height: 4px;
     transition: width 0.6s ease;
     border-radius: 3px;
-    // @ts-expect-error TS(2339): Property 'percent' does not exist on type 'ThemedS... Remove this comment to see the full error message
     width: ${(props) => props.percent}%;
     background: ${(props) => props.theme.progressBar.percent.background};
   }

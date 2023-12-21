@@ -132,8 +132,8 @@ class UserStore {
   }
 
   get personalQuotaLimitReached() {
-    if (this.user.quotaLimit === -1) return false;
-    return this.user.quotaLimit <= this.user.usedSpace;
+    if (this.user?.quotaLimit === -1) return false;
+    return this.user?.quotaLimit <= this.user?.usedSpace;
   }
 }
 

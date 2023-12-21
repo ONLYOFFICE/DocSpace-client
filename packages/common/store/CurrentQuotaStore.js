@@ -138,12 +138,12 @@ class QuotasStore {
 
     return result?.value;
   }
-  get isItemQuotaAvailable() {
+  get isStatisticsAvailable() {
     const result = this.currentPortalQuotaFeatures.find(
       (obj) => obj.id === "statistic"
     );
 
-    return true;
+    return result?.value;
   }
   get isRestoreAndAutoBackupAvailable() {
     const result = this.currentPortalQuotaFeatures.find(
@@ -225,11 +225,11 @@ class QuotasStore {
   }
 
   get defaultRoomsQuota() {
-    return this.currentPortalQuota?.roomsQuota.defaultQuota;
+    return this.currentPortalQuota?.roomsQuota?.defaultQuota;
   }
 
   get defaultUsersQuota() {
-    return this.currentPortalQuota?.usersQuota.defaultQuota;
+    return this.currentPortalQuota?.usersQuota?.defaultQuota;
   }
 
   setPortalQuotaValue = (res) => {

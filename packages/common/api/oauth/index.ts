@@ -72,17 +72,12 @@ export const addClient = async (data: IClientReqDTO): Promise<IClientProps> => {
   return transformToClientProps(client);
 };
 
-export const updateClient = async (
-  clientId: string,
-  data: IClientReqDTO
-): Promise<IClientProps> => {
+export const updateClient = async (clientId: string, data: IClientReqDTO) => {
   const client: IClientResDTO = await request({
     method: "put",
     url: `/clients/${clientId}`,
     data,
   });
-
-  return transformToClientProps(client);
 };
 
 export const changeClientStatus = async (

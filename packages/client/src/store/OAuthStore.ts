@@ -33,6 +33,8 @@ import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
 import OauthRevokeSvgUrl from "PUBLIC_DIR/images/oauth.revoke.svg?url";
+import { transformToClientProps } from "@docspace/common/utils/oauth";
+import { AuthenticationMethod } from "@docspace/common/utils/oauth/enums";
 
 const PAGE_LIMIT = 100;
 
@@ -348,16 +350,27 @@ class OAuthStore implements OAuthStoreProps {
 
   updateClient = async (clientId: string, client: IClientReqDTO) => {
     try {
-      const newClient = await updateClient(clientId, client);
+      await updateClient(clientId, client);
 
       const idx = this.clients.findIndex((c) => c.clientId === clientId);
+
+      const newClient = { ...this.clients[idx] };
+
+      newClient.name = client.name;
+      newClient.allowedOrigins = client.allowed_origins;
+      newClient.logo = client.logo;
+      newClient.description = client.description;
+
+      if (
+        client.allow_pkce &&
+        !newClient.authenticationMethods.includes(AuthenticationMethod.none)
+      )
+        newClient.authenticationMethods.push(AuthenticationMethod.none);
 
       if (idx > -1) {
         runInAction(() => {
           this.clients[idx] = {
             ...newClient,
-            creatorAvatar: this.clients[idx].creatorAvatar,
-            creatorDisplayName: this.clients[idx].creatorDisplayName,
           };
         });
       }

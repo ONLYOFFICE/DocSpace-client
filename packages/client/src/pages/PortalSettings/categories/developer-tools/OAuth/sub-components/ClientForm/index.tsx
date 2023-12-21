@@ -114,6 +114,7 @@ const ClientForm = ({
                 if (!requiredErrorFields.includes(key))
                   setRequiredErrorFields((s) => [...s, key]);
 
+                console.log(key);
                 isValid = false;
               }
               isValid = isValid && !errorFields.includes(key);
@@ -130,10 +131,12 @@ const ClientForm = ({
                 isValid = false;
               }
               isValid = isValid && !errorFields.includes(key);
-
+              console.log(key);
               break;
           }
         }
+
+        console.log(isValid);
 
         if (!isValid) return;
 

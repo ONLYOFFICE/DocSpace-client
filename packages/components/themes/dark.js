@@ -3183,6 +3183,12 @@ const Dark = {
     descriptionColor: "#ADADAD",
   },
 
+  infoBar: {
+    background: "#282828",
+    title: white,
+    description: "#ADADAD",
+  },
+
   roomIcon: {
     backgroundArchive: "#FFFFFF",
     opacityBackground: "0.1",

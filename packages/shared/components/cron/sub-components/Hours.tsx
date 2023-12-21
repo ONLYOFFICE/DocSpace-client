@@ -1,9 +1,9 @@
 import React, { memo } from "react";
-import { Select } from "../../Select";
+import { Select } from "./Select";
 
-import type HoursProps from "./Hours.props";
+import type { HoursProps } from "../Cron.types";
 
-function Hours({ hours, setHours, unit, t }: HoursProps) {
+export const Hours = memo(({ hours, setHours, unit, t }: HoursProps) => {
   return (
     <Select
       value={hours}
@@ -14,6 +14,6 @@ function Hours({ hours, setHours, unit, t }: HoursProps) {
       dropDownMaxHeight={300}
     />
   );
-}
+});
 
-export default memo(Hours);
+Hours.displayName = "Hours";

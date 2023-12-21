@@ -15,3 +15,15 @@ export const Suffix = styled.span`
 `;
 
 Suffix.defaultProps = { theme: Base };
+
+export const SelectWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  & > span {
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+  }
+`;
+
+SelectWrapper.defaultProps = { theme: Base };

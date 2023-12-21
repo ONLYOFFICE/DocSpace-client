@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
-import Base from "../themes/base";
+import { Base } from "../../themes";
 
-const StyledButton = styled.div`
+const StyledButton = styled.div<{ isDisabled?: boolean }>`
   display: inline-block;
   background: ${(props) => props.theme.selectorAddButton.background};
   border: ${(props) => props.theme.selectorAddButton.border};
@@ -11,13 +11,11 @@ const StyledButton = styled.div`
   width: ${(props) => props.theme.selectorAddButton.width};
   padding: ${(props) => props.theme.selectorAddButton.padding};
 
-  // @ts-expect-error TS(2339): Property 'isDisabled' does not exist on type 'Them... Remove this comment to see the full error message
   cursor: ${(props) => (!props.isDisabled ? "pointer" : "default")};
 
   svg {
     path {
       ${(props) =>
-        // @ts-expect-error TS(2339): Property 'isDisabled' does not exist on type 'Them... Remove this comment to see the full error message
         !props.isDisabled &&
         css`
           fill: ${props.theme.selectorAddButton.iconColor};
@@ -27,13 +25,11 @@ const StyledButton = styled.div`
 
   &:hover {
     background: ${(props) =>
-      // @ts-expect-error TS(2339): Property 'isDisabled' does not exist on type 'Them... Remove this comment to see the full error message
       !props.isDisabled && props.theme.selectorAddButton.hoverBackground};
 
     svg {
       path {
         ${(props) =>
-          // @ts-expect-error TS(2339): Property 'isDisabled' does not exist on type 'Them... Remove this comment to see the full error message
           !props.isDisabled &&
           css`
             fill: ${props.theme.selectorAddButton.iconColorHover};
@@ -44,12 +40,10 @@ const StyledButton = styled.div`
 
   &:active {
     background: ${(props) =>
-      // @ts-expect-error TS(2339): Property 'isDisabled' does not exist on type 'Them... Remove this comment to see the full error message
       !props.isDisabled && props.theme.selectorAddButton.activeBackground};
     svg {
       path {
         ${(props) =>
-          // @ts-expect-error TS(2339): Property 'isDisabled' does not exist on type 'Them... Remove this comment to see the full error message
           !props.isDisabled &&
           css`
             fill: ${props.theme.selectorAddButton.iconColorActive};

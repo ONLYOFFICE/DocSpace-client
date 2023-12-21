@@ -75,6 +75,10 @@ import { Label } from "./label";
 import { FieldContainer } from "./field-container";
 import { ProgressBar } from "./progress-bar";
 import { BarConfig, SnackBar } from "./snackbar";
+import TopLoaderService from "./top-loading-indicator";
+import { SelectionArea } from "./selection-area";
+import { ColorTheme } from "./color-theme";
+import { SelectedItem } from "./selected-item";
 
 export type {
   TFallbackAxisSideDirection,
@@ -87,6 +91,10 @@ export type {
 };
 
 export {
+  SelectedItem,
+  ColorTheme,
+  SelectionArea,
+  TopLoaderService,
   SnackBar,
   ProgressBar,
   FieldContainer,

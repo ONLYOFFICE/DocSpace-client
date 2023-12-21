@@ -30,6 +30,7 @@ import {
   SeparatorType,
 } from "./context-menu";
 import { Checkbox } from "./checkbox";
+import { Cron, getNextSynchronization } from "./cron";
 import { Toast, toastr, ToastType } from "./toast";
 import { Textarea } from "./textarea";
 import { TextInput, InputSize, InputType } from "./text-input";
@@ -114,6 +115,8 @@ export {
   ComboBox,
   ComboBoxDisplayType,
   ComboBoxSize,
+  Cron,
+  getNextSynchronization,
   DropDown,
   DropDownItem,
   ModalDialog,

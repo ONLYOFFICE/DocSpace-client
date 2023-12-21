@@ -1,20 +1,22 @@
 import styled, { css } from "styled-components";
-import Base from "../themes/base";
-import { mobileMore, mobile } from "../utils/device";
+import { Base } from "../../themes";
+import { mobileMore, mobile } from "../../utils";
 
-const displaySettings = css`
+const displaySettings = css<{
+  hasScroll?: boolean;
+  showReminder?: boolean;
+  hideBorder?: boolean;
+}>`
   position: absolute;
   display: block;
   flex-direction: column-reverse;
   align-items: flex-start;
   border-top: ${(props) =>
-    // @ts-expect-error TS(2339): Property 'hasScroll' does not exist on type 'Theme... Remove this comment to see the full error message
     props.hasScroll && !props.showReminder && !props.hideBorder
       ? "1px solid #ECEEF1"
       : "none"};
 
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'hasScroll' does not exist on type 'Theme... Remove this comment to see the full error message
     props.hasScroll &&
     css`
       bottom: auto;
@@ -41,7 +43,6 @@ const displaySettings = css`
     width: calc(100% - 32px);
     bottom: 56px;
     background-color: ${(props) =>
-      // @ts-expect-error TS(2339): Property 'hasScroll' does not exist on type 'Theme... Remove this comment to see the full error message
       props.hasScroll
         ? props.theme.mainButtonMobile.buttonWrapper.background
         : "none"};
@@ -59,9 +60,7 @@ const displaySettings = css`
   }
 
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'showReminder' does not exist on type 'Th... Remove this comment to see the full error message
     props.showReminder &&
-    // @ts-expect-error TS(2339): Property 'hasScroll' does not exist on type 'Theme... Remove this comment to see the full error message
     props.hasScroll &&
     css`
       .unsaved-changes {
@@ -108,7 +107,12 @@ const tabletButtons = css`
   }
 `;
 
-const StyledSaveCancelButtons = styled.div`
+const StyledSaveCancelButtons = styled.div<{
+  displaySettings?: boolean;
+  showReminder?: boolean;
+  hasScroll?: boolean;
+  hideBorder?: boolean;
+}>`
   display: flex;
   position: absolute;
   justify-content: space-between;
@@ -132,14 +136,11 @@ const StyledSaveCancelButtons = styled.div`
     color: ${(props) => props.theme.saveCancelButtons.unsavedColor};
   }
 
-  // @ts-expect-error TS(2339): Property 'displaySettings' does not exist on type ... Remove this comment to see the full error message
   ${(props) => props.displaySettings && displaySettings};
 
   @media ${mobileMore} {
-    // @ts-expect-error TS(2339): Property 'displaySettings' does not exist on type ... Remove this comment to see the full error message
     ${(props) => props.displaySettings && tabletButtons}
     ${(props) =>
-      // @ts-expect-error TS(2339): Property 'displaySettings' does not exist on type ... Remove this comment to see the full error message
       !props.displaySettings &&
       `
         justify-content: flex-end;

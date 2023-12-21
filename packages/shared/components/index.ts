@@ -79,6 +79,7 @@ import TopLoaderService from "./top-loading-indicator";
 import { SelectionArea } from "./selection-area";
 import { ColorTheme } from "./color-theme";
 import { SelectedItem } from "./selected-item";
+import { SaveCancelButtons } from "./save-cancel-buttons";
 
 export type {
   TFallbackAxisSideDirection,
@@ -91,6 +92,7 @@ export type {
 };
 
 export {
+  SaveCancelButtons,
   SelectedItem,
   ColorTheme,
   SelectionArea,

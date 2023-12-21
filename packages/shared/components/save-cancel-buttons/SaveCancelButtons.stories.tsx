@@ -1,8 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import SaveCancelButtons from "./";
+import { Meta, StoryObj } from "@storybook/react";
 
-export default {
+import { SaveCancelButtons } from "./SaveCancelButton";
+import { SaveCancelButtonProps } from "./SaveCancelButton.types";
+
+const meta = {
   title: "Components/SaveCancelButtons",
   component: SaveCancelButtons,
   parameters: {
@@ -17,7 +20,10 @@ export default {
     onSaveClick: { action: "onSaveClick" },
     onCancelClick: { action: "onCancelClick" },
   },
-};
+} satisfies Meta<typeof SaveCancelButtons>;
+type Story = StoryObj<typeof meta>;
+
+export default meta;
 
 const StyledWrapper = styled.div`
   position: relative;
@@ -32,7 +38,7 @@ const Template = ({
   onSaveClick,
   onCancelClick,
   ...args
-}: any) => {
+}: SaveCancelButtonProps) => {
   const isAutoDocs =
     typeof window !== "undefined" && window?.location?.href.includes("docs");
 
@@ -45,18 +51,19 @@ const Template = ({
             ? `positionAbsolute ${args.className}`
             : args.className
         }
-        onSaveClick={() => onSaveClick("on Save button clicked")}
-        onCancelClick={() => onCancelClick("on Cancel button clicked")}
+        onSaveClick={() => onSaveClick?.()}
+        onCancelClick={() => onCancelClick?.()}
       />
     </StyledWrapper>
   );
 };
 
-export const Default = Template.bind({});
-// @ts-expect-error TS(2339): Property 'args' does not exist on type '({ onSaveC... Remove this comment to see the full error message
-Default.args = {
-  showReminder: false,
-  reminderText: "You have unsaved changes",
-  saveButtonLabel: "Save",
-  cancelButtonLabel: "Cancel",
+export const Default: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    showReminder: false,
+    reminderText: "You have unsaved changes",
+    saveButtonLabel: "Save",
+    cancelButtonLabel: "Cancel",
+  },
 };

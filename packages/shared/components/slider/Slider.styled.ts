@@ -1,11 +1,11 @@
 import styled, { css } from "styled-components";
-import { Base } from "../themes";
+import { Base } from "../../themes";
+import { SliderThemeProps } from "./Slider.types";
 
-const StyledSlider = styled.input.attrs((props) => ({
+const StyledSlider = styled.input.attrs((props: SliderThemeProps) => ({
   type: "range",
-  // @ts-expect-error TS(2551): Property 'isDisabled' does not exist on type 'Them... Remove this comment to see the full error message
   disabled: props.isDisabled,
-}))`
+}))<SliderThemeProps>`
   width: ${(props) => props.theme.avatarEditorBody.slider.width};
   margin: ${(props) => props.theme.avatarEditorBody.slider.margin};
   background: ${(props) =>
@@ -17,16 +17,14 @@ const StyledSlider = styled.input.attrs((props) => ({
   -webkit-appearance: none;
 
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'withPouring' does not exist on type 'The... Remove this comment to see the full error message
     props.withPouring &&
     css`
-      // @ts-expect-error TS(2551): Property 'isDisabled' does not exist on type 'Them... Remove this comment to see the full error message
       background-image: ${props.isDisabled
         ? `linear-gradient(#A6DCF2, #A6DCF2)`
         : `linear-gradient(#2da7db, #2da7db)`};
     `}
 
-  background-size: ${(props) => `${props.size} 100%`};
+  background-size: ${(props) => `${props.sizeProp} 100%`};
   ${({ theme }) =>
     theme.interfaceDirection === "rtl" && "background-position-x: right;"}
 
@@ -44,12 +42,9 @@ const StyledSlider = styled.input.attrs((props) => ({
     width: ${(props) =>
       props.theme.avatarEditorBody.slider.runnableTrack.width};
     height: ${(props) =>
-      // @ts-expect-error TS(2339): Property 'runnableTrackHeight' does not exist on t... Remove this comment to see the full error message
       props.runnableTrackHeight
-        // @ts-expect-error TS(2339): Property 'runnableTrackHeight' does not exist on t... Remove this comment to see the full error message
         ? props.runnableTrackHeight
         : props.theme.avatarEditorBody.slider.runnableTrack.height};
-    // @ts-expect-error TS(2551): Property 'isDisabled' does not exist on type 'Them... Remove this comment to see the full error message
     cursor: ${(props) => (props.isDisabled ? "default" : "pointer")};
   }
 
@@ -57,28 +52,21 @@ const StyledSlider = styled.input.attrs((props) => ({
     margin-top: ${(props) =>
       props.theme.avatarEditorBody.slider.sliderThumb.marginTop};
     width: ${(props) =>
-      // @ts-expect-error TS(2339): Property 'thumbWidth' does not exist on type 'Them... Remove this comment to see the full error message
       props.thumbWidth
-        // @ts-expect-error TS(2339): Property 'thumbWidth' does not exist on type 'Them... Remove this comment to see the full error message
         ? props.thumbWidth
         : props.theme.avatarEditorBody.slider.sliderThumb.width};
     height: ${(props) =>
-      // @ts-expect-error TS(2339): Property 'thumbHeight' does not exist on type 'The... Remove this comment to see the full error message
       props.thumbHeight
-        // @ts-expect-error TS(2339): Property 'thumbHeight' does not exist on type 'The... Remove this comment to see the full error message
         ? props.thumbHeight
         : props.theme.avatarEditorBody.slider.sliderThumb.height};
 
     background: ${(props) =>
-      // @ts-expect-error TS(2551): Property 'isDisabled' does not exist on type 'Them... Remove this comment to see the full error message
       props.isDisabled
         ? props.theme.avatarEditorBody.slider.sliderThumb.disabledBackground
         : props.theme.avatarEditorBody.slider.sliderThumb.background};
 
     border-width: ${(props) =>
-      // @ts-expect-error TS(2339): Property 'thumbBorderWidth' does not exist on type... Remove this comment to see the full error message
       props.thumbBorderWidth
-        // @ts-expect-error TS(2339): Property 'thumbBorderWidth' does not exist on type... Remove this comment to see the full error message
         ? props.thumbBorderWidth
         : props.theme.avatarEditorBody.slider.sliderThumb.borderWidth};
 
@@ -90,7 +78,6 @@ const StyledSlider = styled.input.attrs((props) => ({
 
     border-radius: ${(props) =>
       props.theme.avatarEditorBody.slider.sliderThumb.height};
-    // @ts-expect-error TS(2551): Property 'isDisabled' does not exist on type 'Them... Remove this comment to see the full error message
     cursor: ${(props) => (props.isDisabled ? "default" : "pointer")};
     -webkit-appearance: none;
     -webkit-box-shadow: ${(props) =>
@@ -103,14 +90,12 @@ const StyledSlider = styled.input.attrs((props) => ({
     width: ${(props) => props.theme.avatarEditorBody.slider.rangeThumb.width};
     height: ${(props) => props.theme.avatarEditorBody.slider.rangeThumb.height};
     background: ${(props) =>
-      // @ts-expect-error TS(2551): Property 'isDisabled' does not exist on type 'Them... Remove this comment to see the full error message
       props.isDisabled
         ? props.theme.avatarEditorBody.slider.sliderThumb.disabledBackground
         : props.theme.avatarEditorBody.slider.sliderThumb.background};
     border: ${(props) => props.theme.avatarEditorBody.slider.rangeThumb.border};
     border-radius: ${(props) =>
       props.theme.avatarEditorBody.slider.rangeThumb.borderRadius};
-    // @ts-expect-error TS(2551): Property 'isDisabled' does not exist on type 'Them... Remove this comment to see the full error message
     cursor: ${(props) => (props.isDisabled ? "default" : "pointer")};
     -moz-box-shadow: ${(props) =>
       props.theme.avatarEditorBody.slider.rangeThumb.boxShadow};
@@ -128,7 +113,6 @@ const StyledSlider = styled.input.attrs((props) => ({
     color: ${(props) => props.theme.avatarEditorBody.slider.track.color};
     width: ${(props) => props.theme.avatarEditorBody.slider.track.width};
     height: ${(props) => props.theme.avatarEditorBody.slider.track.height};
-    // @ts-expect-error TS(2551): Property 'isDisabled' does not exist on type 'Them... Remove this comment to see the full error message
     cursor: ${(props) => (props.isDisabled ? "default" : "pointer")};
   }
 
@@ -156,7 +140,6 @@ const StyledSlider = styled.input.attrs((props) => ({
     border: ${(props) => props.theme.avatarEditorBody.slider.thumb.border};
     border-radius: ${(props) =>
       props.theme.avatarEditorBody.slider.thumb.borderRadius};
-    // @ts-expect-error TS(2551): Property 'isDisabled' does not exist on type 'Them... Remove this comment to see the full error message
     cursor: ${(props) => (props.isDisabled ? "default" : "pointer")};
     margin-top: ${(props) =>
       props.theme.avatarEditorBody.slider.thumb.marginTop};
@@ -181,4 +164,35 @@ const StyledRangeSlider = styled.div`
   background: red;
 `;
 
-export { StyledSlider, StyledRangeSlider };
+const StyledSliderTheme = styled(StyledSlider)<SliderThemeProps>`
+  background-image: ${(props) =>
+    props.withPouring &&
+    ((props.theme.isBase &&
+      `linear-gradient( ${props.$currentColorScheme?.main.accent}, ${props.$currentColorScheme?.main.accent})`) ||
+      (!props.theme.isBase && `linear-gradient(#FFFFFF, #FFFFFF)`))};
+
+  &::-webkit-slider-thumb {
+    background: ${(props) =>
+      (props.theme.isBase && props.$currentColorScheme?.main.accent) ||
+      (!props.theme.isBase && "#FFFFFF")};
+    box-shadow: ${(props) =>
+      !props.theme.isBase && "0px 3px 12px rgba(0, 0, 0, 0.25); !important"};
+  }
+
+  &:hover {
+    background-image: ${(props) =>
+      props.withPouring &&
+      ((props.theme.isBase &&
+        `linear-gradient( ${props.$currentColorScheme?.main.accent}, ${props.$currentColorScheme?.main.accent})`) ||
+        (!props.theme.isBase && `linear-gradient(#FFFFFF, #FFFFFF)`))};
+  }
+
+  ${(props) =>
+    props.isDisabled &&
+    css`
+      opacity: 0.32;
+    `}
+`;
+StyledSliderTheme.defaultProps = { theme: Base };
+
+export { StyledSlider, StyledRangeSlider, StyledSliderTheme };

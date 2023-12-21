@@ -41,7 +41,7 @@ export const SelectedItemPure = (props: SelectedItemProps) => {
       isDisabled={isDisabled}
       id={id}
       ref={forwardedRef}
-      datat-testid="selected-item"
+      data-testid="selected-item"
     >
       <StyledLabel
         className="selected-item_label"

@@ -1,7 +1,8 @@
 import React from "react";
-import { CalendarContainer } from "../styled-components";
 
 import { getDayElements, getWeekdayElements } from "../utils";
+import { CalendarContainer } from "../Calendar.styled";
+import { DaysBodyProps } from "../Calendar.types";
 
 export const DaysBody = ({
   observedDate,
@@ -9,20 +10,19 @@ export const DaysBody = ({
   selectedDate,
   minDate,
   maxDate,
-  isMobile
-}: any) => {
+  isMobile,
+}: DaysBodyProps) => {
   const daysElements = getDayElements(
     observedDate,
     selectedDate,
     handleDateChange,
     minDate,
     maxDate,
-    isMobile
+    isMobile,
   );
   const weekdayElements = getWeekdayElements(isMobile);
 
   return (
-    // @ts-expect-error TS(2769): No overload matches this call.
     <CalendarContainer isMobile={isMobile}>
       {weekdayElements} {daysElements}
     </CalendarContainer>

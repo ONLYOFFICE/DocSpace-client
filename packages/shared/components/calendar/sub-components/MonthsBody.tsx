@@ -1,6 +1,7 @@
 import React from "react";
-import { CalendarContainer } from "../styled-components";
+import { CalendarContainer } from "../Calendar.styled";
 import { getCalendarMonths, getMonthElements } from "../utils";
+import { MonthsBodyProps } from "../Calendar.types";
 
 export const MonthsBody = ({
   observedDate,
@@ -9,8 +10,8 @@ export const MonthsBody = ({
   selectedDate,
   minDate,
   maxDate,
-  isMobile
-}: any) => {
+  isMobile,
+}: MonthsBodyProps) => {
   const months = getCalendarMonths(observedDate);
   const monthsElements = getMonthElements(
     months,
@@ -19,11 +20,10 @@ export const MonthsBody = ({
     selectedDate,
     minDate,
     maxDate,
-    isMobile
+    isMobile,
   );
 
   return (
-    // @ts-expect-error TS(2769): No overload matches this call.
     <CalendarContainer big isMobile={isMobile}>
       {monthsElements}
     </CalendarContainer>

@@ -1,6 +1,7 @@
 import React from "react";
-import { HeaderContainer, Title, HeaderActionIcon } from "../styled-components";
+import { HeaderContainer, Title, HeaderActionIcon } from "../Calendar.styled";
 import { HeaderButtons } from "./HeaderButtons";
+import { DaysHeaderProps } from "../Calendar.types";
 
 export const DaysHeader = ({
   observedDate,
@@ -8,17 +9,19 @@ export const DaysHeader = ({
   setSelectedScene,
   minDate,
   maxDate,
-  isMobile
-}: any) => {
+  isMobile,
+}: DaysHeaderProps) => {
   const onTitleClick = () =>
-    setSelectedScene((prevSelectedScene: any) => prevSelectedScene + 1);
+    setSelectedScene((prevSelectedScene) => prevSelectedScene + 1);
 
   const onLeftClick = () =>
-    setObservedDate((prevObservedDate: any) => prevObservedDate.clone().subtract(1, "month")
+    setObservedDate((prevObservedDate) =>
+      prevObservedDate.clone().subtract(1, "month"),
     );
 
   const onRightClick = () =>
-    setObservedDate((prevObservedDate: any) => prevObservedDate.clone().add(1, "month")
+    setObservedDate((prevObservedDate) =>
+      prevObservedDate.clone().add(1, "month"),
     );
 
   const isLeftDisabled =
@@ -28,12 +31,10 @@ export const DaysHeader = ({
 
   return (
     <HeaderContainer>
-      // @ts-expect-error TS(2769): No overload matches this call.
       <Title onClick={onTitleClick} className="days-header" isMobile={isMobile}>
         {observedDate.format("MMMM").charAt(0).toUpperCase() +
           observedDate.format("MMMM").substring(1)}{" "}
         {observedDate.format("YYYY")}
-        // @ts-expect-error TS(2769): No overload matches this call.
         <HeaderActionIcon isMobile={isMobile} />
       </Title>
       <HeaderButtons

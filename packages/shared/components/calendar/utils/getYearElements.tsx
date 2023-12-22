@@ -1,52 +1,53 @@
 import React from "react";
 import moment from "moment";
 
-import { ColorTheme, ThemeType } from "../../ColorTheme";
+import { StyledDateItemTheme } from "../Calendar.styled";
 
 export const getYearElements = (
-  years: any,
-  setObservedDate: any,
-  setSelectedScene: any,
-  selectedDate: any,
-  minDate: any,
-  maxDate: any,
-  isMobile: any
+  years: string[],
+  setObservedDate: React.Dispatch<React.SetStateAction<moment.Moment>>,
+  setSelectedScene: React.Dispatch<React.SetStateAction<number>>,
+  selectedDate: moment.Moment,
+  minDate: moment.Moment,
+  maxDate: moment.Moment,
+  isMobile: boolean,
 ) => {
-  const onDateClick = (year: any) => {
-    setObservedDate((prevObservedDate: any) => moment(
-      `${moment(year, "YYYY").format("YYYY")}-${prevObservedDate.format(
-        "MM-DD"
-      )}`,
-      "YYYY-MM-DD"
-    )
+  const onDateClick = (year: string) => {
+    setObservedDate((prevObservedDate) =>
+      moment(
+        `${moment(year, "YYYY").format("YYYY")}-${prevObservedDate.format(
+          "MM-DD",
+        )}`,
+        "YYYY-MM-DD",
+      ),
     );
-    setSelectedScene((prevSelectedScene: any) => prevSelectedScene - 1);
+    setSelectedScene((prevSelectedScene) => prevSelectedScene - 1);
   };
 
-  // @ts-expect-error TS(2322): Type '{ children: any; className: string; themeId:... Remove this comment to see the full error message
-  const yearElements = years.map((year: any) => <ColorTheme
-    className="year"
-    themeId={ThemeType.DateItem}
-    isSecondary
-    big
-    key={year}
-    onClick={() => onDateClick(year)}
-    disabled={
-      moment(year.toString()).endOf("year").endOf("month") < minDate ||
-      moment(year.toString()) > maxDate
-    }
-    isMobile={isMobile}
-  >
-    {year}
-  </ColorTheme>);
+  const yearElements = years.map((year) => (
+    <StyledDateItemTheme
+      className="year"
+      isSecondary
+      big
+      focused={false}
+      key={year}
+      onClick={() => onDateClick(year)}
+      disabled={
+        moment(year.toString()).endOf("year").endOf("month") < minDate ||
+        moment(year.toString()) > maxDate
+      }
+      isMobile={isMobile}
+    >
+      {year}
+    </StyledDateItemTheme>
+  ));
 
-  for (let i = 1; i < 11; i++) {
+  for (let i = 1; i < 11; i += 1) {
     yearElements[i] = (
-      // @ts-expect-error TS(2322): Type '{ children: any; className: string; themeId:... Remove this comment to see the full error message
-      <ColorTheme
+      <StyledDateItemTheme
         className="year"
-        themeId={ThemeType.DateItem}
         big
+        focused={false}
         key={years[i]}
         onClick={() => onDateClick(years[i])}
         disabled={
@@ -56,7 +57,7 @@ export const getYearElements = (
         isMobile={isMobile}
       >
         {years[i]}
-      </ColorTheme>
+      </StyledDateItemTheme>
     );
   }
 
@@ -64,10 +65,8 @@ export const getYearElements = (
   const selectedYearIndex = years.indexOf(moment(selectedDate).format("YYYY"));
   if (selectedYearIndex !== -1) {
     yearElements[selectedYearIndex] = (
-      // @ts-expect-error TS(2322): Type '{ children: any; className: string; themeId:... Remove this comment to see the full error message
-      <ColorTheme
+      <StyledDateItemTheme
         className="year"
-        themeId={ThemeType.DateItem}
         big
         focused
         key={years[selectedYearIndex]}
@@ -81,17 +80,16 @@ export const getYearElements = (
         isMobile={isMobile}
       >
         {years[selectedYearIndex]}
-      </ColorTheme>
+      </StyledDateItemTheme>
     );
   }
   if (currentYearIndex !== -1) {
     yearElements[currentYearIndex] = (
-      // @ts-expect-error TS(2322): Type '{ children: any; className: string; themeId:... Remove this comment to see the full error message
-      <ColorTheme
+      <StyledDateItemTheme
         className="year"
-        themeId={ThemeType.DateItem}
         isCurrent
         big
+        focused={false}
         key={years[currentYearIndex]}
         onClick={() => onDateClick(years[currentYearIndex])}
         disabled={
@@ -103,7 +101,7 @@ export const getYearElements = (
         isMobile={isMobile}
       >
         {years[currentYearIndex]}
-      </ColorTheme>
+      </StyledDateItemTheme>
     );
   }
 

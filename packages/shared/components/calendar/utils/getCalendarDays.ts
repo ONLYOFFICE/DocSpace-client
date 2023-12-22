@@ -1,6 +1,6 @@
 import moment from "moment";
 
-export const getCalendarDays = (date: any) => {
+export const getCalendarDays = (date: moment.Moment) => {
   const observedDate = moment(date);
 
   const prevMonthDays = [];
@@ -16,7 +16,7 @@ export const getCalendarDays = (date: any) => {
 
   let yearMonthDate = observedDate.clone().format("YYYY-MM-");
 
-  for (let i = 1; i <= observedDate.clone().daysInMonth(); i++) {
+  for (let i = 1; i <= observedDate.clone().daysInMonth(); i += 1) {
     currentMonthDays.push({
       key: yearMonthDate + moment(yearMonthDate + i, "YYYY-MM-D").format("D"),
       value: moment(yearMonthDate + i, "YYYY-MM-D").format("D"),
@@ -34,7 +34,7 @@ export const getCalendarDays = (date: any) => {
       .subtract(1, "months")
       .format("YYYY-MM-");
 
-    for (let i = firstCalendarMonday; i <= prevMonthLength; i++) {
+    for (let i = firstCalendarMonday; i <= prevMonthLength; i += 1) {
       prevMonthDays.push({
         key: yearMonthDate + moment(yearMonthDate + i, "YYYY-MM-D").format("D"),
         value: moment(yearMonthDate + i, "YYYY-MM-D").format("D"),
@@ -47,7 +47,7 @@ export const getCalendarDays = (date: any) => {
   for (
     let i = 1;
     i <= maxCalendarDays - currentMonthDays.length - prevMonthDays.length;
-    i++
+    i += 1
   ) {
     nextMonthDays.push({
       key: yearMonthDate + moment(yearMonthDate + i, "YYYY-MM-D").format("D"),

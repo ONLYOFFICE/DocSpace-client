@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import Calendar from "./";
 import moment from "moment";
+import { Meta, StoryObj } from "@storybook/react";
 
-export default {
+import { Calendar } from "./Calendar";
+import { CalendarProps } from "./Calendar.types";
+
+const meta = {
   title: "Components/Calendar",
   component: Calendar,
   argTypes: {
@@ -10,7 +13,7 @@ export default {
     minDate: { control: "date" },
     initialDate: { control: "date" },
     locale: {
-      type: "select",
+      type: "string",
       options: [
         "az",
         "ar-SA",
@@ -53,32 +56,31 @@ export default {
       url: "https://www.figma.com/file/ZiW5KSwb4t7Tj6Nz5TducC/UI-Kit-DocSpace-1.0.0?type=design&node-id=651-4406&mode=design&t=RrB9MOQGCnUPghij-0",
     },
   },
-};
+} satisfies Meta<typeof Calendar>;
+type Story = StoryObj<typeof Calendar>;
 
-const Template = ({
-  locale,
-  minDate,
-  maxDate,
-  ...args
-}: any) => {
+export default meta;
+
+const Template = ({ locale, minDate, maxDate, ...args }: CalendarProps) => {
   const [selectedDate, setSelectedDate] = useState(moment());
   return (
     <Calendar
+      {...args}
       selectedDate={selectedDate}
       setSelectedDate={setSelectedDate}
       minDate={minDate}
       maxDate={maxDate}
       locale={locale}
-      {...args}
     />
   );
 };
 
-export const Default = Template.bind({});
-// @ts-expect-error TS(2339): Property 'args' does not exist on type '({ locale,... Remove this comment to see the full error message
-Default.args = {
-  locale: "en",
-  maxDate: new Date(new Date().getFullYear() + 10 + "/01/01"),
-  minDate: new Date("1970/01/01"),
-  initialDate: new Date(),
+export const Default: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    locale: "en",
+    maxDate: new Date(`${new Date().getFullYear() + 10}/01/01`),
+    minDate: new Date("1970/01/01"),
+    initialDate: moment(),
+  },
 };

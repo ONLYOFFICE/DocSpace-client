@@ -1,6 +1,6 @@
 import moment from "moment";
 
-export const getCalendarMonths = (observedDate: any) => {
+export const getCalendarMonths = (observedDate: moment.Moment) => {
   const months = moment
     .monthsShort()
     .map((month) => month[0].toUpperCase() + month.substring(1));
@@ -10,7 +10,7 @@ export const getCalendarMonths = (observedDate: any) => {
     value: month,
   }));
 
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 4; i += 1) {
     monthsObjs.push({
       key: `${observedDate.clone().add(1, "year").format("YYYY")}-${moment()
         .month(months[i])

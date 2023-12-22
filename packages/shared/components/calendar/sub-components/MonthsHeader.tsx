@@ -1,6 +1,7 @@
 import React from "react";
-import { HeaderActionIcon, HeaderContainer, Title } from "../styled-components";
+import { HeaderActionIcon, HeaderContainer, Title } from "../Calendar.styled";
 import { HeaderButtons } from "./HeaderButtons";
+import { MonthsHeaderProps } from "../Calendar.types";
 
 export const MonthsHeader = ({
   observedDate,
@@ -8,17 +9,19 @@ export const MonthsHeader = ({
   setSelectedScene,
   minDate,
   maxDate,
-  isMobile
-}: any) => {
+  isMobile,
+}: MonthsHeaderProps) => {
   const onTitleClick = () =>
-    setSelectedScene((prevSelectedScene: any) => prevSelectedScene + 1);
+    setSelectedScene((prevSelectedScene) => prevSelectedScene + 1);
 
   const onLeftClick = () =>
-    setObservedDate((prevObservedDate: any) => prevObservedDate.clone().subtract(1, "year")
+    setObservedDate((prevObservedDate) =>
+      prevObservedDate.clone().subtract(1, "year"),
     );
 
   const onRightClick = () =>
-    setObservedDate((prevObservedDate: any) => prevObservedDate.clone().add(1, "year")
+    setObservedDate((prevObservedDate) =>
+      prevObservedDate.clone().add(1, "year"),
     );
 
   const isLeftDisabled =
@@ -34,11 +37,9 @@ export const MonthsHeader = ({
       <Title
         className="months-header"
         onClick={onTitleClick}
-        // @ts-expect-error TS(2769): No overload matches this call.
         isMobile={isMobile}
       >
         {observedDate.format("YYYY")}
-        // @ts-expect-error TS(2769): No overload matches this call.
         <HeaderActionIcon isMobile={isMobile} />
       </Title>
       <HeaderButtons

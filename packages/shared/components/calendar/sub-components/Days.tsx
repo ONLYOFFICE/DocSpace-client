@@ -1,19 +1,21 @@
 import React from "react";
-import { MonthsBody } from "./MonthsBody";
-import { MonthsHeader } from "./MonthsHeader";
+import { DaysBody } from "./DaysBody";
+import { DaysHeader } from "./DaysHeader";
+import { DaysProps } from "../Calendar.types";
 
-export const Months = ({
+export const Days = ({
   observedDate,
   setObservedDate,
-  selectedDate,
   setSelectedScene,
+  handleDateChange,
+  selectedDate,
   minDate,
   maxDate,
-  isMobile
-}: any) => {
+  isMobile,
+}: DaysProps) => {
   return (
     <>
-      <MonthsHeader
+      <DaysHeader
         observedDate={observedDate}
         setObservedDate={setObservedDate}
         setSelectedScene={setSelectedScene}
@@ -21,10 +23,9 @@ export const Months = ({
         maxDate={maxDate}
         isMobile={isMobile}
       />
-      <MonthsBody
+      <DaysBody
         observedDate={observedDate}
-        setObservedDate={setObservedDate}
-        setSelectedScene={setSelectedScene}
+        handleDateChange={handleDateChange}
         selectedDate={selectedDate}
         minDate={minDate}
         maxDate={maxDate}

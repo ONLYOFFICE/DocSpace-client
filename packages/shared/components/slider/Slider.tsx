@@ -32,6 +32,9 @@ const Slider = (props: SliderProps) => {
     setSize(`${((value - min) * 100) / (max - min)}%`);
   }, [max, min, value]);
 
+  const onChangeAction = (e: React.ChangeEvent<HTMLInputElement>) =>
+    onChange?.(e);
+
   return (
     <StyledSliderTheme
       {...props}
@@ -46,7 +49,7 @@ const Slider = (props: SliderProps) => {
       value={value}
       sizeProp={!!value && withPouring ? size : "0%"}
       withPouring={withPouring}
-      onChange={onChange}
+      onChange={onChangeAction}
       thumbBorderWidth={thumbBorderWidth}
       thumbHeight={thumbHeight}
       thumbWidth={thumbWidth}

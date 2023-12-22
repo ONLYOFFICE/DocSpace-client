@@ -4,7 +4,15 @@ import Tag from "../tag";
 
 import StyledTags from "./StyledTags";
 
-const Tags = ({ id, className, style, tags, columnCount, onSelectTag }) => {
+const Tags = ({
+  id,
+  className,
+  style,
+  tags,
+  columnCount,
+  onSelectTag,
+  removeTagIcon,
+}) => {
   const [renderedTags, setRenderedTags] = React.useState(null);
 
   const tagsRef = React.useRef(null);
@@ -113,6 +121,7 @@ const Tags = ({ id, className, style, tags, columnCount, onSelectTag }) => {
             isNewTag={false}
             onClick={onSelectTag}
             isLast={index === renderedTags.length - 1}
+            removeTagIcon={removeTagIcon}
             {...tag}
           />
         ))}

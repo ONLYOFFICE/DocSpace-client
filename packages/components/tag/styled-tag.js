@@ -98,15 +98,17 @@ const StyledDropdownIcon = styled(ReactSVG)`
 
 const StyledDropdownText = styled(Text)`
   line-height: 30px;
-
   ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: 8px !important;
-        `
-      : css`
-          margin-left: 8px !important;
-        `}
+    !props.removeTagIcon &&
+    css`
+      ${props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: 8px !important;
+          `
+        : css`
+            margin-left: 8px !important;
+          `}
+    `}
 
   display: block;
 

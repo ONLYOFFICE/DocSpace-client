@@ -29,6 +29,7 @@ const Tag = ({
   className,
   style,
   icon,
+  removeTagIcon,
 }) => {
   const [openDropdown, setOpenDropdown] = React.useState(false);
 
@@ -116,15 +117,18 @@ const Tag = ({
                 onClick={onClickAction}
                 data-tag={tag}
               >
-                <StyledDropdownIcon
-                  className="tag__dropdown-item-icon"
-                  src={TagIconReactSvgUrl}
-                />
+                {!removeTagIcon && (
+                  <StyledDropdownIcon
+                    className="tag__dropdown-item-icon"
+                    src={TagIconReactSvgUrl}
+                  />
+                )}
                 <StyledDropdownText
                   className="tag__dropdown-item-text"
                   fontWeight={600}
                   fontSize={"12px"}
                   truncate
+                  removeTagIcon={removeTagIcon}
                 >
                   {tag}
                 </StyledDropdownText>

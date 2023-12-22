@@ -9,6 +9,7 @@
   "ConfirmationText": "Se perderán todos los datos introducidos. ¿Está seguro de que desea continuar?",
   "CustomEntryButton": "Leyenda personalizada del botón de inicio de sesión",
   "CustomEntryTooltip": "Leyenda del botón utilizado para iniciar sesión en el espacio con el servicio de inicio de sesión único.",
+  "DownloadMetadataXML": "Descargar XML de metadatos SP",
   "Encryption": "Cifrado",
   "GenerateCertificate": "Generar nuevo certificado autofirmado",
   "Hide": "Ocultar",

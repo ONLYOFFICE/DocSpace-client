@@ -9,6 +9,7 @@
   "ConfirmationText": "Vsi vneseni podatki bodo izgubljeni. Ali ste prepričani, da želite nadaljevati?",
   "CustomEntryButton": "Prilagojen naslov gumba za prijavo",
   "CustomEntryTooltip": "Napis za gumbu za prijavo v prostor s storitvijo enkratne prijave",
+  "DownloadMetadataXML": "Prenesi SP metapodatke v XML",
   "Encryption": "Šifriranje",
   "GenerateCertificate": "Ustvarite nov samopodpisni certifikat",
   "Hide": "Skrij",

@@ -9,6 +9,7 @@
   "ConfirmationText": "Všetky zadané údaje sa stratia. Ste si istý, že chcete pokračovať?",
   "CustomEntryButton": "Vlastný popis tlačidla prihlásenia",
   "CustomEntryTooltip": "Popis tlačidla, ktoré sa používa na prihlásenie do priestoru so službou jednotného prihlásenia",
+  "DownloadMetadataXML": "Načítať SP metadáta XML",
   "Encryption": "Šifrovanie",
   "GenerateCertificate": "Vygenerujte nový certifikát s vlastným podpisom",
   "Hide": "Skryť",

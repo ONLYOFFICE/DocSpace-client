@@ -9,6 +9,7 @@
   "ConfirmationText": "Kaikki syöttämäsi tieto menetetään. Haluatko varmasti jatkaa?",
   "CustomEntryButton": "Mukautetun sisäänkirjautumispainikkeen teksti",
   "CustomEntryTooltip": "Painikkeen kuvateksti, jota käytetään tilaan sisäänkirjautumiseen kertakirjautumispalvelun avulla",
+  "DownloadMetadataXML": "Lataa SP-metadata XML",
   "Encryption": "Salaus",
   "GenerateCertificate": "Luo Uusi Itse-allekirjoitettu Todistus",
   "Hide": "Piilota",

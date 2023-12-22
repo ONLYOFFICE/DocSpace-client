@@ -9,6 +9,7 @@
   "ConfirmationText": "Tất cả dữ liệu bạn đã nhập sẽ bị mất. Bạn có chắc chắn muốn tiếp tục không?",
   "CustomEntryButton": "Chú thích nút đăng nhập tùy chỉnh",
   "CustomEntryTooltip": "Chú thích cho nút được sử dụng để đăng nhập vào không gian với dịch vụ Đăng nhập một lần",
+  "DownloadMetadataXML": "Tải siêu dữ liệu SP metadata XML",
   "Encryption": "Mã hóa",
   "GenerateCertificate": "Tạo chứng chỉ tự ký mới",
   "Hide": "Ẩn",

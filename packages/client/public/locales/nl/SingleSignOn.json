@@ -9,6 +9,7 @@
   "ConfirmationText": "Alle ingevoerde gegevens gaan verloren. Weet u zeker dat u door wilt gaan?",
   "CustomEntryButton": "Aangepaste aanmeldingsknop bijschrift",
   "CustomEntryTooltip": "Het bijschrift voor de knop die wordt gebruikt om in te loggen in de ruimte met de Single Sign-On dienst",
+  "DownloadMetadataXML": "Download SP metadata XML",
   "Encryption": "Versleuteling",
   "GenerateCertificate": "Nieuw Zelfondertekend Certificaat Genereren",
   "Hide": "Verbergen",

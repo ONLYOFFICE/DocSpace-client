@@ -9,6 +9,7 @@
   "ConfirmationText": "Tutti i dati inseriti andranno persi. Sei sicuro di voler continuare?",
   "CustomEntryButton": "Didascalia del pulsante di accesso personalizzata",
   "CustomEntryTooltip": "Didascalia del pulsante utilizzato per effettuare l’accesso nello spazio con il servizio Single Sign-On",
+  "DownloadMetadataXML": "Scarica SP file XML per metadati",
   "Encryption": "Crittografia",
   "GenerateCertificate": "Genera nuovo certificato autofirmato",
   "Hide": "Nascondi",

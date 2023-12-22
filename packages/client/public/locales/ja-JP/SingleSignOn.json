@@ -9,6 +9,7 @@
   "ConfirmationText": "入力したデータはすべて失われます。このまま続けますか？",
   "CustomEntryButton": "カスタムログインボタンのキャプション",
   "CustomEntryTooltip": "シングルサインオンサービスを利用してスペースにログインする際に使用するボタンのキャプション",
+  "DownloadMetadataXML": "SPメタデータXMLのダウンロード",
   "Encryption": "暗号化",
   "GenerateCertificate": "新しい自己署名証明書を生成する",
   "Hide": "非表示にする",

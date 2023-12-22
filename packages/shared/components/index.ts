@@ -85,6 +85,7 @@ import { TimePicker } from "./time-picker";
 import { ArticleItem } from "./article-item";
 import { ToggleContent } from "./toggle-content";
 import { Tag } from "./tag";
+import { Tags } from "./tags";
 import { DragAndDrop } from "./drag-and-drop";
 import { AccessRightSelect } from "./access-right-select";
 
@@ -102,6 +103,7 @@ export {
   AccessRightSelect,
   DragAndDrop,
   Tag,
+  Tags,
   ToggleContent,
   ArticleItem,
   TimePicker,

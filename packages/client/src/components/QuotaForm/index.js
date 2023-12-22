@@ -37,11 +37,12 @@ const QuotaForm = ({
   description,
   isAutoFocussed = false,
 }) => {
-  const initPower =
-    initialSize && initialSize !== -1 ? getPowerFromBytes(initialSize, 4) : 0;
+  const initPower = initialSize > 0 ? getPowerFromBytes(initialSize, 4) : 0;
   const initSize =
-    initialSize && initialSize !== -1
+    initialSize > 0
       ? getSizeFromBytes(initialSize, initPower)
+      : initialSize === 0
+      ? "0"
       : "";
 
   useEffect(() => {
@@ -127,8 +128,6 @@ const QuotaForm = ({
 
     setSize(initSize);
     setPower(initPower);
-
-    console.log("onCancel");
   };
 
   const isDisable = isLoading || isDisabled || (checkboxLabel && isChecked);

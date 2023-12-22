@@ -1,3 +1,9 @@
+/* eslint-disable prefer-template */
+/* eslint-disable prefer-promise-reject-errors */
+/* eslint-disable no-plusplus */
+/* eslint-disable @typescript-eslint/no-use-before-define */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 function toFileWithPath(file: any, path: any) {
   if (typeof file?.path === "string") return file;
 
@@ -8,11 +14,12 @@ function toFileWithPath(file: any, path: any) {
       typeof path === "string"
         ? path
         : // If <input webkitdirectory> is set,
-        // the File will have a {webkitRelativePath} property
-        // https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/webkitdirectory
-        typeof webkitRelativePath === "string" && webkitRelativePath.length > 0
-        ? webkitRelativePath
-        : file.name,
+          // the File will have a {webkitRelativePath} property
+          // https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/webkitdirectory
+          typeof webkitRelativePath === "string" &&
+            webkitRelativePath.length > 0
+          ? webkitRelativePath
+          : file.name,
   });
 
   return file;
@@ -109,7 +116,7 @@ function flatten(items: any) {
       ...acc,
       ...(Array.isArray(files) ? flatten(files) : [files]),
     ],
-    []
+    [],
   );
 }
 
@@ -160,7 +167,7 @@ function fromDirEntry(entry: any) {
         },
         (err: any) => {
           reject(err);
-        }
+        },
       );
     }
     readEntries();
@@ -187,7 +194,7 @@ async function fromFileEntry(entry: any) {
       },
       (err: any) => {
         reject(err);
-      }
+      },
     );
   });
 }

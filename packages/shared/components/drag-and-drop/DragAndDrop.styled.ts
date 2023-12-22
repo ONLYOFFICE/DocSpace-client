@@ -1,9 +1,12 @@
 import styled from "styled-components";
 
-import Base from "../themes/base";
-import { tablet } from "../utils/device";
+import { Base } from "../../themes";
+import { tablet } from "../../utils";
 
-const StyledDragAndDrop = styled.div`
+const StyledDragAndDrop = styled.div<{
+  dragging?: boolean;
+  isDragAccept?: boolean;
+}>`
   /*-webkit-touch-callout: none;
 -webkit-user-select: none;
 -moz-user-select: none;
@@ -26,9 +29,7 @@ user-select: none;*/
   }
   outline: none;
   background: ${(props) =>
-    // @ts-expect-error TS(2339): Property 'dragging' does not exist on type 'Themed... Remove this comment to see the full error message
     props.dragging
-      // @ts-expect-error TS(2339): Property 'isDragAccept' does not exist on type 'Th... Remove this comment to see the full error message
       ? props.isDragAccept
         ? props.theme.dragAndDrop.acceptBackground
         : props.theme.dragAndDrop.background

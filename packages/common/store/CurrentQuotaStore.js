@@ -21,8 +21,9 @@ class QuotasStore {
 
   isLoaded = false;
 
-  constructor() {
+  constructor(userStore) {
     makeAutoObservable(this);
+    this.userStore = userStore;
   }
 
   setIsLoaded = (isLoaded) => {
@@ -210,6 +211,14 @@ class QuotasStore {
         COUNT_FOR_SHOWING_BAR &&
       this.maxCountManagersByQuota >= this.addedManagersCount
     );
+  }
+
+  get showUserPersonalQuotaBar() {
+    const { personalQuotaLimitReached } = this.userStore;
+
+    if (!this.isDefaultUsersQuotaSet) return false;
+
+    return personalQuotaLimitReached;
   }
 
   get isNonProfit() {

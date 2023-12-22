@@ -41,7 +41,7 @@ class AuthStore {
     this.settingsStore = new SettingsStore();
     this.tfaStore = new TfaStore();
     this.infoPanelStore = new InfoPanelStore();
-    this.currentQuotaStore = new CurrentQuotasStore();
+    this.currentQuotaStore = new CurrentQuotasStore(this.userStore);
     this.currentTariffStatusStore = new CurrentTariffStatusStore(this);
     this.paymentQuotasStore = new PaymentQuotasStore();
     this.bannerStore = new BannerStore();

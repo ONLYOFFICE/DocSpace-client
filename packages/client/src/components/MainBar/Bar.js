@@ -45,7 +45,7 @@ const Bar = (props) => {
     currentColorScheme,
 
     setMainBarVisible,
-    personalQuotaLimitReached,
+    showUserPersonalQuotaBar,
   } = props;
 
   const [barVisible, setBarVisible] = useState({
@@ -251,7 +251,7 @@ const Bar = (props) => {
       };
     }
 
-    if (personalQuotaLimitReached && barVisible.personalUserQuota) {
+    if (showUserPersonalQuotaBar && barVisible.personalUserQuota) {
       return {
         type: QuotaBarTypes.PersonalUserQuota,
         //maxValue: maxCountManagersByQuota,
@@ -312,12 +312,7 @@ const Bar = (props) => {
 };
 
 export default inject(({ auth, profileActionsStore }) => {
-  const {
-    user,
-    withActivationBar,
-    sendActivationLink,
-    personalQuotaLimitReached,
-  } = auth.userStore;
+  const { user, withActivationBar, sendActivationLink } = auth.userStore;
 
   const { onPaymentsClick } = profileActionsStore;
 
@@ -334,6 +329,7 @@ export default inject(({ auth, profileActionsStore }) => {
     showRoomQuotaBar,
     showStorageQuotaBar,
     showUserQuotaBar,
+    showUserPersonalQuotaBar,
   } = auth.currentQuotaStore;
 
   const { currentColorScheme, setMainBarVisible } = auth.settingsStore;
@@ -362,6 +358,6 @@ export default inject(({ auth, profileActionsStore }) => {
     currentColorScheme,
     setMainBarVisible,
 
-    personalQuotaLimitReached,
+    showUserPersonalQuotaBar,
   };
 })(withTranslation(["Profile", "Common"])(observer(Bar)));

@@ -47,7 +47,7 @@ export const AccessRightSelectPure = ({
           className="access-right-item"
           key={item.key}
           data-key={item.key}
-          //   onClick={onSelectCurrentItem}
+          onClick={() => onSelectCurrentItem(item)}
         >
           <StyledItem>
             {item.icon && <StyledItemIcon src={item.icon} />}
@@ -70,11 +70,13 @@ export const AccessRightSelectPure = ({
       );
     });
 
-    return { items };
+    return items;
   };
 
   const formattedOptions =
     advancedOptions || formatToAccessRightItem(accessOptions);
+
+  // console.log(formattedOptions);
 
   return (
     <StyledWrapper

@@ -4,6 +4,11 @@ export const enum ParseErrorTypes {
   IncorrectEmail = 2,
 }
 
+export const enum ButtonKeys {
+  enter = "enter",
+  esc = "esc",
+}
+
 export const enum ErrorKeys {
   LocalDomain = "LocalDomain",
   IncorrectDomain = "IncorrectDomain",

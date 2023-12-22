@@ -1,4 +1,3 @@
-/* eslint-disable react/no-this-in-sfc */
 import React from "react";
 import { DebouncedFunc } from "lodash";
 import throttle from "lodash/throttle";

@@ -37,6 +37,7 @@ export interface TextInputProps {
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   onClick?: (e: React.MouseEvent<HTMLInputElement>) => void;
+  onContextMenu?: (e: React.MouseEvent<HTMLInputElement>) => void;
   /** Focus the input field on initial render */
   isAutoFocussed?: boolean;
   /** Indicates that the field cannot be used (e.g not authorised, or changes not saved) */
@@ -60,4 +61,5 @@ export interface TextInputProps {
   /** Indicates that component contain border */
   withBorder?: boolean;
   dir?: string;
+  inputmode?: string;
 }

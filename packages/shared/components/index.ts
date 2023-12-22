@@ -85,6 +85,7 @@ import { TimePicker } from "./time-picker";
 import { ArticleItem } from "./article-item";
 import { ToggleContent } from "./toggle-content";
 import { Tag } from "./tag";
+import { Tags } from "./tags";
 
 export type {
   TFallbackAxisSideDirection,
@@ -98,6 +99,7 @@ export type {
 
 export {
   Tag,
+  Tags,
   ToggleContent,
   ArticleItem,
   TimePicker,

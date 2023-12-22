@@ -81,6 +81,7 @@ import { ColorTheme } from "./color-theme";
 import { SelectedItem } from "./selected-item";
 import { SaveCancelButtons } from "./save-cancel-buttons";
 import { TimePicker } from "./time-picker";
+import { ArticleItem } from "./article-item";
 
 export type {
   TFallbackAxisSideDirection,
@@ -93,6 +94,7 @@ export type {
 };
 
 export {
+  ArticleItem,
   TimePicker,
   SaveCancelButtons,
   SelectedItem,

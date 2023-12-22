@@ -1,11 +1,10 @@
 import styled, { css } from "styled-components";
-
-import Base from "../themes/base";
-
-import { tablet } from "../utils/device";
 import { isMobile } from "react-device-detect";
 
-import Text from "../text";
+import { Base, TColorScheme } from "../../themes";
+import { tablet } from "../../utils";
+
+import { Text } from "../text";
 
 const badgeWithoutText = css`
   position: absolute;
@@ -15,7 +14,7 @@ const badgeWithoutText = css`
   ${(props) =>
     props.theme.interfaceDirection === "rtl" &&
     css`
-      left: ${(props) => props.theme.catalogItem.badgeWithoutText.position};
+      left: ${props.theme.catalogItem.badgeWithoutText.position};
       right: auto;
     `}
   border-radius: 1000px;
@@ -34,7 +33,10 @@ const badgeWithoutText = css`
   margin: 0 !important;
 `;
 
-const StyledCatalogItemHeaderContainer = styled.div`
+const StyledArticleItemHeaderContainer = styled.div<{
+  isFirstHeader?: boolean;
+  showText?: boolean;
+}>`
   width: 100%;
 
   height: 24px;
@@ -43,7 +45,6 @@ const StyledCatalogItemHeaderContainer = styled.div`
 
   box-sizing: border-box;
 
-  // @ts-expect-error TS(2339): Property 'isFirstHeader' does not exist on type 'T... Remove this comment to see the full error message
   margin-top: ${(props) => (props.isFirstHeader ? "0" : "8px")};
 
   .catalog-item__header-text {
@@ -55,14 +56,11 @@ const StyledCatalogItemHeaderContainer = styled.div`
   }
 
   @media ${tablet} {
-    // @ts-expect-error TS(2339): Property 'showText' does not exist on type 'Themed... Remove this comment to see the full error message
     padding: ${(props) => (props.showText ? "0px 9px 12px" : "4px 12px 19px")};
 
-    // @ts-expect-error TS(2339): Property 'isFirstHeader' does not exist on type 'T... Remove this comment to see the full error message
     margin-top: ${(props) => (props.isFirstHeader ? "0" : "16px")};
 
     ${(props) =>
-      // @ts-expect-error TS(2339): Property 'showText' does not exist on type 'Themed... Remove this comment to see the full error message
       !props.showText &&
       css`
         display: flex;
@@ -80,7 +78,7 @@ const StyledCatalogItemHeaderContainer = styled.div`
   }
 `;
 
-const StyledCatalogItemBadgeWrapper = styled.div`
+const StyledArticleItemBadgeWrapper = styled.div<{ showText?: boolean }>`
   z-index: 3;
 
   margin-left: ${(props) => props.theme.catalogItem.badgeWrapper.marginLeft};
@@ -89,10 +87,8 @@ const StyledCatalogItemBadgeWrapper = styled.div`
   ${(props) =>
     props.theme.interfaceDirection === "rtl" &&
     css`
-      margin-right: ${(props) =>
-        props.theme.catalogItem.badgeWrapper.marginLeft};
-      margin-left: ${(props) =>
-        props.theme.catalogItem.badgeWrapper.marginRight};
+      margin-right: ${props.theme.catalogItem.badgeWrapper.marginLeft};
+      margin-left: ${props.theme.catalogItem.badgeWrapper.marginRight};
     `}
 
   div {
@@ -112,7 +108,6 @@ const StyledCatalogItemBadgeWrapper = styled.div`
       props.theme.catalogItem.badgeWrapper.tablet.marginRight};
   }
 
-  // @ts-expect-error TS(2339): Property 'showText' does not exist on type 'Themed... Remove this comment to see the full error message
   ${(props) => !props.showText && badgeWithoutText}
 
   .catalog-item__badge {
@@ -143,9 +138,9 @@ const StyledCatalogItemBadgeWrapper = styled.div`
   }
 `;
 
-StyledCatalogItemBadgeWrapper.defaultProps = { theme: Base };
+StyledArticleItemBadgeWrapper.defaultProps = { theme: Base };
 
-const StyledCatalogItemInitialText = styled(Text)`
+const StyledArticleItemInitialText = styled(Text)`
   position: absolute;
   top: 2px;
   left: 0;
@@ -162,7 +157,7 @@ const StyledCatalogItemInitialText = styled(Text)`
   color: ${(props) => props.theme.catalogItem.initialText.color};
   font-size: ${(props) =>
     props.theme.getCorrectFontSize(
-      props.theme.catalogItem.initialText.fontSize
+      props.theme.catalogItem.initialText.fontSize,
     )};
   font-weight: ${(props) => props.theme.catalogItem.initialText.fontWeight};
   pointer-events: none;
@@ -173,14 +168,14 @@ const StyledCatalogItemInitialText = styled(Text)`
       props.theme.catalogItem.initialText.tablet.lineHeight};
     font-size: ${(props) =>
       props.theme.getCorrectFontSize(
-        props.theme.catalogItem.initialText.tablet.fontSize
+        props.theme.catalogItem.initialText.tablet.fontSize,
       )};
   }
 `;
 
-StyledCatalogItemInitialText.defaultProps = { theme: Base };
+StyledArticleItemInitialText.defaultProps = { theme: Base };
 
-const StyledCatalogItemText = styled(Text)`
+const StyledArticleItemText = styled(Text)<{ isActive?: boolean }>`
   width: ${(props) => props.theme.catalogItem.text.width};
 
   margin-left: ${(props) => props.theme.catalogItem.text.marginLeft};
@@ -189,7 +184,7 @@ const StyledCatalogItemText = styled(Text)`
     props.theme.interfaceDirection === "rtl" &&
     css`
       margin-left: 0;
-      margin-right: ${(props) => props.theme.catalogItem.text.marginLeft};
+      margin-right: ${props.theme.catalogItem.text.marginLeft};
     `}
 
   line-height: ${(props) => props.theme.catalogItem.text.lineHeight};
@@ -217,15 +212,15 @@ const StyledCatalogItemText = styled(Text)`
     line-height: ${(props) => props.theme.catalogItem.text.tablet.lineHeight};
     font-size: ${(props) =>
       props.theme.getCorrectFontSize(
-        props.theme.catalogItem.text.tablet.fontSize
+        props.theme.catalogItem.text.tablet.fontSize,
       )};
     font-weight: ${(props) => props.theme.catalogItem.text.tablet.fontWeight};
   }
 `;
 
-StyledCatalogItemText.defaultProps = { theme: Base };
+StyledArticleItemText.defaultProps = { theme: Base };
 
-const StyledCatalogItemImg = styled.div`
+const StyledArticleItemImg = styled.div<{ isActive?: boolean }>`
   position: relative;
 
   display: flex;
@@ -250,7 +245,6 @@ const StyledCatalogItemImg = styled.div`
     path,
     circle {
       fill: ${(props) =>
-        // @ts-expect-error TS(2339): Property 'isActive' does not exist on type 'Themed... Remove this comment to see the full error message
         props.isActive
           ? props.theme.catalogItem.img.svg.isActiveFill
           : props.theme.catalogItem.img.svg.fill};
@@ -266,7 +260,7 @@ const StyledCatalogItemImg = styled.div`
   }
 `;
 
-StyledCatalogItemImg.defaultProps = { theme: Base };
+StyledArticleItemImg.defaultProps = { theme: Base };
 
 const draggingSiblingCss = css`
   background: ${(props) => props.theme.dragAndDrop.background} !important;
@@ -277,7 +271,11 @@ const draggingSiblingCss = css`
   }
 `;
 
-const StyledCatalogItemSibling = styled.div`
+const StyledArticleItemSibling = styled.div<{
+  isActive?: boolean;
+  isDragActive?: boolean;
+  isDragging?: boolean;
+}>`
   position: absolute;
   top: 0;
   left: 0;
@@ -298,7 +296,6 @@ const StyledCatalogItemSibling = styled.div`
   max-height: ${(props) => props.theme.catalogItem.container.height};
 
   background-color: ${(props) =>
-    // @ts-expect-error TS(2339): Property 'isActive' does not exist on type 'Themed... Remove this comment to see the full error message
     props.isActive && props.theme.catalogItem.sibling.active.background};
 
   ${!isMobile &&
@@ -314,23 +311,22 @@ const StyledCatalogItemSibling = styled.div`
     max-height: ${(props) => props.theme.catalogItem.container.tablet.height};
   }
 
-  // @ts-expect-error TS(2339): Property 'isDragging' does not exist on type 'Them... Remove this comment to see the full error message
   ${(props) => props.isDragging && draggingSiblingCss}
 
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'isDragActive' does not exist on type 'Th... Remove this comment to see the full error message
     props.isDragActive &&
     css`
-      background: ${(props) =>
-        props.theme.dragAndDrop.acceptBackground} !important;
+      background: ${props.theme.dragAndDrop.acceptBackground} !important;
     `}
 `;
 
-StyledCatalogItemSibling.defaultProps = { theme: Base };
+StyledArticleItemSibling.defaultProps = { theme: Base };
 
-const StyledCatalogItemContainer = styled.div`
+const StyledArticleItemContainer = styled.div<{
+  showText?: boolean;
+  isEndOfBlock?: boolean;
+}>`
   display: flex;
-  // @ts-expect-error TS(2339): Property 'showText' does not exist on type 'Themed... Remove this comment to see the full error message
   justify-content: ${(props) => (props.showText ? "space-between" : "center")};
   align-items: center;
 
@@ -342,10 +338,8 @@ const StyledCatalogItemContainer = styled.div`
   box-sizing: border-box;
 
   padding: ${(props) =>
-    // @ts-expect-error TS(2339): Property 'showText' does not exist on type 'Themed... Remove this comment to see the full error message
     props.showText && props.theme.catalogItem.container.padding};
   margin-bottom: ${(props) =>
-    // @ts-expect-error TS(2339): Property 'isEndOfBlock' does not exist on type 'Th... Remove this comment to see the full error message
     props.isEndOfBlock && props.theme.catalogItem.container.marginBottom};
 
   cursor: pointer;
@@ -355,10 +349,8 @@ const StyledCatalogItemContainer = styled.div`
     max-height: ${(props) => props.theme.catalogItem.container.tablet.height};
 
     padding: ${(props) =>
-      // @ts-expect-error TS(2339): Property 'showText' does not exist on type 'Themed... Remove this comment to see the full error message
       props.showText && props.theme.catalogItem.container.tablet.padding};
     margin-bottom: ${(props) =>
-      // @ts-expect-error TS(2339): Property 'isEndOfBlock' does not exist on type 'Th... Remove this comment to see the full error message
       props.isEndOfBlock &&
       props.theme.catalogItem.container.tablet.marginBottom};
   }
@@ -388,14 +380,64 @@ const StyledCatalogItemContainer = styled.div`
   }
 `;
 
-StyledCatalogItemContainer.defaultProps = { theme: Base };
+StyledArticleItemContainer.defaultProps = { theme: Base };
+
+const StyledArticleItemTheme = styled(StyledArticleItemContainer)<{
+  isActive?: boolean;
+  $currentColorScheme?: TColorScheme;
+}>`
+  ${StyledArticleItemText} {
+    color: ${(props) =>
+      props.isActive &&
+      props.theme.isBase &&
+      props.$currentColorScheme?.main.accent};
+
+    &:hover {
+      color: ${(props) =>
+        props.isActive &&
+        props.theme.isBase &&
+        props.$currentColorScheme?.main.accent};
+    }
+  }
+
+  ${StyledArticleItemImg} {
+    svg {
+      path {
+        fill: ${(props) =>
+          props.isActive &&
+          props.theme.isBase &&
+          props.$currentColorScheme?.main.accent} !important;
+      }
+      circle {
+        fill: ${(props) =>
+          props.isActive &&
+          props.theme.isBase &&
+          props.$currentColorScheme?.main.accent} !important;
+      }
+    }
+
+    &:hover {
+      svg {
+        path {
+          fill: ${(props) =>
+            props.isActive &&
+            props.theme.isBase &&
+            props.$currentColorScheme?.main.accent} !important;
+        }
+      }
+    }
+  }
+`;
+
+StyledArticleItemTheme.defaultProps = { theme: Base };
 
 export {
-  StyledCatalogItemContainer,
-  StyledCatalogItemImg,
-  StyledCatalogItemInitialText,
-  StyledCatalogItemText,
-  StyledCatalogItemSibling,
-  StyledCatalogItemBadgeWrapper,
-  StyledCatalogItemHeaderContainer,
+  StyledArticleItemContainer,
+  StyledArticleItemImg,
+  StyledArticleItemInitialText,
+  StyledArticleItemText,
+  StyledArticleItemSibling,
+  StyledArticleItemBadgeWrapper,
+  StyledArticleItemHeaderContainer,
+  StyledArticleItemTheme,
 };

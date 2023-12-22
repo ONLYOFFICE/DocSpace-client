@@ -9,7 +9,6 @@
   "ConfirmationText": "您所输入的所有数据都将丢失。确定要继续吗？",
   "CustomEntryButton": "自定义登录按钮标题",
   "CustomEntryTooltip": "用于通过单点登录服务登录空间的按钮文本",
-  "DownloadMetadataXML": "下载 SP 元数据 XML",
   "Encryption": "加密",
   "GenerateCertificate": "生成新的自签名证书",
   "Hide": "隐藏",

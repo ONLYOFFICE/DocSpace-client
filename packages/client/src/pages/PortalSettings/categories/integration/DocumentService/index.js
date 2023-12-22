@@ -6,6 +6,7 @@ import { Link, Button, InputBlock, Label, Text } from "@docspace/components";
 import toastr from "@docspace/components/toast/toastr";
 import Loaders from "@docspace/common/components/Loaders";
 import { DeviceType } from "@docspace/common/constants";
+import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 
 const URL_REGEX = /^https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{1,256}\/?$/;
 const DNS_PLACEHOLDER = `${window.location.protocol}//<docspace-dns-name>/`;
@@ -224,31 +225,25 @@ const DocumentService = ({
             </Text>
           </div>
         </div>
-        <div className="form-buttons">
-          <Button
-            onClick={onSubmit}
-            className="button"
-            primary
-            size={buttonSize}
-            label={t("Common:SaveButton")}
-            isDisabled={
-              isFormEmpty ||
-              isValuesInit ||
-              !allInputsValid ||
-              isSaveLoading ||
-              isResetLoading
-            }
-            isLoading={isSaveLoading}
-          />
-          <Button
-            onClick={onReset}
-            className="button"
-            size={buttonSize}
-            label={t("Common:Restore")}
-            isDisabled={isDefaultSettings || isSaveLoading || isResetLoading}
-            isLoading={isResetLoading}
-          />
-        </div>
+
+        <SaveCancelButtons
+          onSaveClick={onSubmit}
+          onCancelClick={onReset}
+          saveButtonLabel={t("Common:SaveButton")}
+          cancelButtonLabel={t("Common:Restore")}
+          saveButtonDisabled={
+            isFormEmpty ||
+            isValuesInit ||
+            !allInputsValid ||
+            isSaveLoading ||
+            isResetLoading
+          }
+          cancelButtonDisabled={
+            isDefaultSettings || isSaveLoading || isResetLoading
+          }
+          displaySettings={true}
+          isSaving={isSaveLoading || isResetLoading}
+        />
       </Styled.LocationForm>
     </Styled.Location>
   );

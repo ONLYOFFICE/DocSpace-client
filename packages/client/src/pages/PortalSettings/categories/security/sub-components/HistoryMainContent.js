@@ -86,6 +86,18 @@ const DownLoadWrapper = styled.div`
   align-items: center;
   gap: 12px;
 
+  padding-block: 16px 30px;
+  position: sticky;
+  bottom: 0;
+  margin-top: 32px;
+  background-color: ${({ theme }) => theme.backgroundColor};
+
+  @media ${mobile} {
+    position: fixed;
+    padding-inline: 16px;
+    inset-inline: 0;
+  }
+
   .download-report_button {
     width: auto;
     height: auto;

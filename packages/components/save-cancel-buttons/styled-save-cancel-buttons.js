@@ -111,6 +111,7 @@ const StyledSaveCancelButtons = styled.div`
   align-items: center;
   bottom: ${(props) => props.theme.saveCancelButtons.bottom};
   width: ${(props) => props.theme.saveCancelButtons.width};
+  background-color: ${({ theme }) => theme.backgroundColor};
 
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
@@ -120,8 +121,12 @@ const StyledSaveCancelButtons = styled.div`
   .save-button {
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
-        ? `margin-left: ${props.theme.saveCancelButtons.marginRight};`
-        : `margin-right: ${props.theme.saveCancelButtons.marginRight};`}
+        ? css`
+            margin-left: ${props.theme.saveCancelButtons.marginRight};
+          `
+        : css`
+            margin-right: ${props.theme.saveCancelButtons.marginRight};
+          `}
   }
   .unsaved-changes {
     color: ${(props) => props.theme.saveCancelButtons.unsavedColor};
@@ -133,14 +138,25 @@ const StyledSaveCancelButtons = styled.div`
     ${(props) => props.displaySettings && tabletButtons}
     ${(props) =>
       !props.displaySettings &&
-      `
+      css`
         justify-content: flex-end;
         position: fixed;
 
         .unsaved-changes {
           display: none;
         }
-  `}
+      `}
+  }
+
+  @media ${mobile} {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    ${({ showReminder }) =>
+      showReminder &&
+      css`
+        padding-top: 30px;
+      `}
   }
 `;
 StyledSaveCancelButtons.defaultProps = { theme: Base };

@@ -51,7 +51,7 @@ The `InfoBadge` component is used to display information badges with tooltips.
 
 ```jsx
 import React from "react";
-import InfoBadge from "path/to/InfoBadge";
+import InfoBadge from "@docspace/shared/components";
 
 const MyComponent = () => {
   return (

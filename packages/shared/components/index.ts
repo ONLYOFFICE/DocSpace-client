@@ -80,6 +80,7 @@ import { SelectionArea } from "./selection-area";
 import { ColorTheme } from "./color-theme";
 import { SelectedItem } from "./selected-item";
 import { SaveCancelButtons } from "./save-cancel-buttons";
+import { InfoBadge } from "./info-badge";
 
 export type {
   TFallbackAxisSideDirection,
@@ -176,4 +177,5 @@ export {
   Text,
   Tooltip,
   ToggleButton,
+  InfoBadge,
 };

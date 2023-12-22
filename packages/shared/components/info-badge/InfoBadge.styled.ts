@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
-import Tooltip from "../tooltip";
-import { mobile } from "../utils/device";
+import { Tooltip } from "../tooltip";
+import { mobile } from "../../utils/device";
+import { Base } from "../../themes";
 
 export const StyledToolTip = styled(Tooltip)`
   .__react_component_tooltip {
@@ -16,6 +17,8 @@ export const StyledToolTip = styled(Tooltip)`
     }
   }
 `;
+
+StyledToolTip.defaultProps = { theme: Base };
 
 export const InfoBadgeContent = styled.div`
   display: flex;
@@ -40,8 +43,10 @@ export const InfoBadgeTitle = styled.h3`
   font-weight: 700;
   line-height: 22px;
 
-  color: ${(props) => props.theme.betaBadgeTooltip.color};
+  color: ${(props) => props.theme.tooltip.textColor};
 `;
+
+InfoBadgeTitle.defaultProps = { theme: Base };
 
 export const InfoBadgeDescription = styled.p`
   margin: 0;

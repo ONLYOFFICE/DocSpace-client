@@ -1,10 +1,10 @@
-import React, { useId, useRef, useCallback } from "react";
+import React, { useId, useRef, useCallback, FC } from "react";
 import type { TooltipRefProps } from "react-tooltip";
 
-import Badge from "../badge";
-import IconButton from "../icon-button";
-
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg?url";
+
+import { Badge } from "../badge";
+import { IconButton } from "../icon-button";
 
 import {
   InfoBadgeContent,
@@ -13,56 +13,57 @@ import {
   InfoBadgeTitle,
   StyledToolTip,
 } from "./InfoBadge.styled";
-import type InfoBadgeProps from "./InfoBadge.props";
+import type InfoBadgeProps from "./InfoBadge.types";
 
-function InfoBadge(props: InfoBadgeProps) {
+export const InfoBadge: FC<InfoBadgeProps> = ({
+  label,
+  offset,
+  place,
+  tooltipDescription,
+  tooltipTitle,
+}) => {
   const id = useId();
 
-  const tooltipRef = useRef<TooltipRefProps>();
+  const tooltipRef = useRef<TooltipRefProps>(null);
 
   const onClose = useCallback(() => {
     tooltipRef.current?.close();
   }, []);
 
   return (
-    <div>
+    <div data-testid="info-badge">
       <Badge
         noHover
         fontSize="9px"
         isHovered={false}
         borderRadius="50px"
-        label={props.label}
+        label={label}
         data-tooltip-id={id}
         backgroundColor="#533ED1"
       />
-      {/*@ts-ignore */}
+
       <StyledToolTip
         id={id}
         clickable
         openOnClick
+        place={place}
+        offset={offset}
         ref={tooltipRef}
-        place={props.place}
-        offset={props.offset}
       >
         <InfoBadgeContent>
           <InfoBadgeHeader>
-            <InfoBadgeTitle>{props.tooltipTitle}</InfoBadgeTitle>
+            <InfoBadgeTitle>{tooltipTitle}</InfoBadgeTitle>
             <IconButton
               isFill
-              size="16"
+              size={16}
               onClick={onClose}
               iconName={CrossIcon}
               className="info-badge__close"
             />
           </InfoBadgeHeader>
-          {/*@ts-ignore */}
-          <InfoBadgeDescription>
-            {props.tooltipDescription}
-          </InfoBadgeDescription>
+          <InfoBadgeDescription>{tooltipDescription}</InfoBadgeDescription>
         </InfoBadgeContent>
       </StyledToolTip>
     </div>
   );
-}
-
-export default InfoBadge;
+};

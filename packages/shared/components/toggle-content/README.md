@@ -5,7 +5,7 @@ ToggleContent allow you to adding information, which you may hide/show by clicki
 ### Usage
 
 ```js
-import ToggleContent from "@docspace/components/toggle-content";
+import { ToggleContent } from "@docspace/shared/components";
 ```
 
 ```jsx

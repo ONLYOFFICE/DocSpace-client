@@ -1,16 +1,19 @@
 import React from "react";
-import styled, { css } from "styled-components";
-import CatalogItem from "./";
-// @ts-expect-error TS(2307): Cannot find module 'PUBLIC_DIR/images/catalog.fold... Remove this comment to see the full error message
+import styled from "styled-components";
+import { Meta, StoryObj } from "@storybook/react";
+
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
-// @ts-expect-error TS(2307): Cannot find module 'PUBLIC_DIR/images/catalog.gues... Remove this comment to see the full error message
 import CatalogGuestReactSvgUrl from "PUBLIC_DIR/images/catalog.guest.react.svg?url";
-// @ts-expect-error TS(2307): Cannot find module 'PUBLIC_DIR/images/catalog.tras... Remove this comment to see the full error message
 import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/catalog.trash.react.svg?url";
 
-export default {
-  title: "Components/CatalogItem",
-  component: CatalogItem,
+import { Base } from "../../themes";
+
+import { ArticleItemPure } from "./ArticleItem";
+import { ArticleItemProps } from "./ArticleItem.types";
+
+const meta = {
+  title: "Components/ArticleItem",
+  component: ArticleItemPure,
   parameters: {
     docs: {
       description: {
@@ -23,48 +26,44 @@ export default {
       url: "https://www.figma.com/file/ZiW5KSwb4t7Tj6Nz5TducC/UI-Kit-DocSpace-1.0.0?type=design&node-id=474-2027&mode=design&t=TBNCKMQKQMxr44IZ-0",
     },
   },
-};
+} satisfies Meta<typeof ArticleItemPure>;
+type Story = StoryObj<typeof ArticleItemPure>;
+
+export default meta;
 
 const CatalogWrapper = styled.div`
   background-color: ${(props) => props.theme.catalogItem.container.background};
   padding: 15px;
 `;
 
-const Template = (args: any) => {
+CatalogWrapper.defaultProps = { theme: Base };
+
+const Template = (args: ArticleItemProps) => {
   return (
     <CatalogWrapper style={{ width: "250px" }}>
-      <CatalogItem
-        {...args}
-        icon={args.icon}
-        text={args.text}
-        showText={args.showText}
-        showBadge={args.showBadge}
-        onClick={() => {}}
-        isEndOfBlock={args.isEndOfBlock}
-        labelBadge={args.labelBadge}
-        onClickBadge={() => {}}
-      />
+      <ArticleItemPure {...args} onClick={() => {}} onClickBadge={() => {}} />
     </CatalogWrapper>
   );
 };
 
-export const Default = Template.bind({});
-// @ts-expect-error TS(2339): Property 'args' does not exist on type '(args: any... Remove this comment to see the full error message
-Default.args = {
-  icon: CatalogFolderReactSvgUrl,
-  text: "Documents",
-  showText: true,
-  showBadge: true,
-  isEndOfBlock: false,
-  labelBadge: "2",
+export const Default: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    icon: CatalogFolderReactSvgUrl,
+    text: "Documents",
+    showText: true,
+    showBadge: true,
+    isEndOfBlock: false,
+    labelBadge: "2",
+  },
 };
 
 const OnlyIcon = () => {
   return (
     <CatalogWrapper style={{ width: "52px" }}>
-      <CatalogItem
+      <ArticleItemPure
         icon={CatalogFolderReactSvgUrl}
-        text={"My documents"}
+        text="My documents"
         showText={false}
         showBadge={false}
       />
@@ -72,74 +71,74 @@ const OnlyIcon = () => {
   );
 };
 
-export const IconWithoutBadge = OnlyIcon.bind({});
+export const IconWithoutBadge: Story = { render: () => <OnlyIcon /> };
 
 const OnlyIconWithBadge = () => {
   return (
     <CatalogWrapper style={{ width: "52px" }}>
-      <CatalogItem
+      <ArticleItemPure
         icon={CatalogGuestReactSvgUrl}
-        text={"My documents"}
+        text="My documents"
         showText={false}
-        showBadge={true}
+        showBadge
       />
     </CatalogWrapper>
   );
 };
 
-export const IconWithBadge = OnlyIconWithBadge.bind({});
+export const IconWithBadge: Story = { render: () => <OnlyIconWithBadge /> };
 
 const InitialIcon = () => {
   return (
     <CatalogWrapper style={{ width: "52px" }}>
-      <CatalogItem
+      <ArticleItemPure
         icon={CatalogFolderReactSvgUrl}
-        text={"Documents"}
+        text="Documents"
         showText={false}
         showBadge={false}
-        showInitial={true}
+        showInitial
         onClick={() => {}}
       />
     </CatalogWrapper>
   );
 };
 
-export const IconWithInitialText = InitialIcon.bind({});
+export const IconWithInitialText: Story = { render: () => <InitialIcon /> };
 
 const WithBadgeIcon = () => {
   return (
     <CatalogWrapper style={{ width: "250px" }}>
-      <CatalogItem
+      <ArticleItemPure
         icon={CatalogFolderReactSvgUrl}
-        text={"My documents"}
-        showText={true}
-        showBadge={true}
+        text="My documents"
+        showText
+        showBadge
         iconBadge={CatalogTrashReactSvgUrl}
       />
     </CatalogWrapper>
   );
 };
 
-export const ItemWithBadgeIcon = WithBadgeIcon.bind({});
+export const ItemWithBadgeIcon: Story = { render: () => <WithBadgeIcon /> };
 
 const TwoItem = () => {
   return (
     <CatalogWrapper style={{ width: "250px" }}>
-      <CatalogItem
+      <ArticleItemPure
         icon={CatalogFolderReactSvgUrl}
-        text={"My documents"}
-        showText={true}
-        showBadge={true}
+        text="My documents"
+        showText
+        showBadge
         onClick={() => {}}
-        isEndOfBlock={true}
+        isEndOfBlock
         labelBadge={3}
         onClickBadge={() => {}}
       />
-      <CatalogItem
+      <ArticleItemPure
         icon={CatalogFolderReactSvgUrl}
-        text={"Some text"}
-        showText={true}
-        showBadge={true}
+        text="Some text"
+        showText
+        showBadge
         onClick={() => {}}
         iconBadge={CatalogTrashReactSvgUrl}
         onClickBadge={() => {}}
@@ -148,4 +147,4 @@ const TwoItem = () => {
   );
 };
 
-export const ItemIsEndOfBlock = TwoItem.bind({});
+export const ItemIsEndOfBlock: Story = { render: () => <TwoItem /> };

@@ -1,8 +1,11 @@
 import styled, { css } from "styled-components";
 
-import Base from "../themes/base";
+import { Base } from "../../themes";
 
-const StyledContainer = styled.div`
+const StyledContainer = styled.div<{
+  enableToggle?: boolean;
+  isOpen?: boolean;
+}>`
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
   .toggle-container {
@@ -15,14 +18,12 @@ const StyledContainer = styled.div`
 
     display: grid;
     grid-template-columns: ${(props) =>
-      // @ts-expect-error TS(2339): Property 'enableToggle' does not exist on type 'Th... Remove this comment to see the full error message
       props.enableToggle ? "16px 1fr" : "1fr"};
     grid-column-gap: 9px;
     max-width: 660px;
 
     svg {
       ${(props) =>
-        // @ts-expect-error TS(2339): Property 'enableToggle' does not exist on type 'Th... Remove this comment to see the full error message
         !props.enableToggle &&
         css`
           display: none;
@@ -37,7 +38,6 @@ const StyledContainer = styled.div`
   .arrow-toggle-content {
     margin: auto 0;
     transform: ${(props) =>
-      // @ts-expect-error TS(2339): Property 'isOpen' does not exist on type 'ThemedSt... Remove this comment to see the full error message
       props.isOpen && props.theme.toggleContent.transform};
   }
 
@@ -49,12 +49,10 @@ const StyledContainer = styled.div`
     font-style: normal;
 
     ${(props) =>
-      // @ts-expect-error TS(2339): Property 'enableToggle' does not exist on type 'Th... Remove this comment to see the full error message
       props.enableToggle
         ? css`
             &:hover {
-              border-bottom: ${(props) =>
-                props.theme.toggleContent.hoverBorderBottom};
+              border-bottom: ${props.theme.toggleContent.hoverBorderBottom};
             }
           `
         : css`
@@ -64,11 +62,10 @@ const StyledContainer = styled.div`
 `;
 StyledContainer.defaultProps = { theme: Base };
 
-const StyledContent = styled.div`
+const StyledContent = styled.div<{ isOpen?: boolean }>`
   color: ${(props) => props.theme.toggleContent.childrenContent.color};
   padding-top: ${(props) =>
     props.theme.toggleContent.childrenContent.paddingTop};
-  // @ts-expect-error TS(2339): Property 'isOpen' does not exist on type 'ThemedSt... Remove this comment to see the full error message
   display: ${(props) => (props.isOpen ? "block" : "none")};
 `;
 

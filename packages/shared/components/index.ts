@@ -85,6 +85,7 @@ import { TimePicker } from "./time-picker";
 import { ArticleItem } from "./article-item";
 import { ToggleContent } from "./toggle-content";
 import { Tag } from "./tag";
+import { DragAndDrop } from "./drag-and-drop";
 
 export type {
   TFallbackAxisSideDirection,
@@ -97,6 +98,7 @@ export type {
 };
 
 export {
+  DragAndDrop,
   Tag,
   ToggleContent,
   ArticleItem,

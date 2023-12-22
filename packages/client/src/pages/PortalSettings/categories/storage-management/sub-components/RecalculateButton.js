@@ -17,6 +17,7 @@ const RecalculateButton = (props) => {
     getIntervalCheckRecalculate,
     clearIntervalCheckRecalculate,
     setIsRecalculating,
+    lastRecalculateDate,
   } = props;
 
   useEffect(() => {
@@ -38,7 +39,6 @@ const RecalculateButton = (props) => {
       toastr.error(e);
     }
   };
-  const lastUpdateDate = moment("2023-03-09T17:46:59").format("l LT");
 
   return (
     <div className="button-container">
@@ -52,9 +52,11 @@ const RecalculateButton = (props) => {
       <div className="text-container">
         <Text>{t("UpdatingStatistics")}</Text>
 
-        {!isRecalculating && (
+        {!isRecalculating && lastRecalculateDate && (
           <Text fontSize="12px" className="last-update">
-            {t("LastUpdate", { date: lastUpdateDate })}
+            {t("LastUpdate", {
+              date: moment(lastRecalculateDate).format("l LT"),
+            })}
           </Text>
         )}
       </div>
@@ -68,12 +70,16 @@ export default inject(({ storageManagement }) => {
     getIntervalCheckRecalculate,
     clearIntervalCheckRecalculate,
     setIsRecalculating,
+    quotaSettings,
   } = storageManagement;
+
+  const { lastRecalculateDate } = quotaSettings;
 
   return {
     isRecalculating,
     getIntervalCheckRecalculate,
     clearIntervalCheckRecalculate,
     setIsRecalculating,
+    lastRecalculateDate,
   };
 })(observer(RecalculateButton));

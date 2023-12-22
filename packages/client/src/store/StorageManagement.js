@@ -5,7 +5,10 @@ import RoomsFilter from "@docspace/common/api/rooms/filter";
 import { getPortal, getPortalUsersCount } from "@docspace/common/api/portal";
 import { getFilesUsedSpace } from "@docspace/common/api/files";
 import toastr from "@docspace/components/toast/toastr";
-import { checkRecalculateQuota } from "@docspace/common/api/settings";
+import {
+  checkRecalculateQuota,
+  getQuotaSettings,
+} from "@docspace/common/api/settings";
 
 const FILTER_COUNT = 5;
 
@@ -14,6 +17,7 @@ class StorageManagement {
   portalInfo = null;
   activeUsersCount = null;
   filesUsedSpace = {};
+  quotaSettings = {};
   intervalId = null;
 
   isRecalculating = false;
@@ -37,14 +41,19 @@ class StorageManagement {
     roomFilterData.pageCount = FILTER_COUNT;
 
     try {
-      [this.portalInfo, this.activeUsersCount, this.filesUsedSpace] =
-        await Promise.all([
-          getPortal(),
-          getPortalUsersCount(),
-          getFilesUsedSpace(),
-          getUsersList(userFilterData),
-          fetchRooms(null, roomFilterData),
-        ]);
+      [
+        this.portalInfo,
+        this.activeUsersCount,
+        this.filesUsedSpace,
+        this.quotaSettings,
+      ] = await Promise.all([
+        getPortal(),
+        getPortalUsersCount(),
+        getFilesUsedSpace(),
+        getQuotaSettings(),
+        getUsersList(userFilterData),
+        fetchRooms(null, roomFilterData),
+      ]);
 
       this.isInit = true;
     } catch (e) {

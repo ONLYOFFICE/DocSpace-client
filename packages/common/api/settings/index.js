@@ -828,6 +828,14 @@ export function setDefaultRoomQuota(enableQuota, defaultQuota) {
 
   return request(options);
 }
+
+export function getQuotaSettings() {
+  return request({
+    method: "get",
+    url: "/settings/userquotasettings",
+  });
+}
+
 export function createWebhook(name, uri, secretKey, ssl) {
   return request({
     method: "post",

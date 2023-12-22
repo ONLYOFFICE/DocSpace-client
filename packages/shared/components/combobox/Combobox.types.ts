@@ -13,6 +13,9 @@ export type TOption = {
   border?: string;
   default?: boolean;
   disabled?: boolean;
+  description?: string;
+  quota?: "free" | "paid";
+  isSeparator?: boolean;
 };
 
 export interface ComboboxProps {

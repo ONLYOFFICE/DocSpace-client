@@ -86,6 +86,7 @@ import { ArticleItem } from "./article-item";
 import { ToggleContent } from "./toggle-content";
 import { Tag } from "./tag";
 import { DragAndDrop } from "./drag-and-drop";
+import { AccessRightSelect } from "./access-right-select";
 
 export type {
   TFallbackAxisSideDirection,
@@ -98,6 +99,7 @@ export type {
 };
 
 export {
+  AccessRightSelect,
   DragAndDrop,
   Tag,
   ToggleContent,

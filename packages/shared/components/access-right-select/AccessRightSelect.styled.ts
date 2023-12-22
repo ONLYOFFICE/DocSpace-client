@@ -1,7 +1,9 @@
 import styled, { css } from "styled-components";
-import ComboBox from "../combobox/index.js";
-import Base from "../themes/base";
-import { mobile } from "../utils/device";
+
+import { Base } from "../../themes";
+import { mobile } from "../../utils";
+
+import { ComboBox } from "../combobox";
 
 const StyledWrapper = styled(ComboBox)`
   .combo-button {

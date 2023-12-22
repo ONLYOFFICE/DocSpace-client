@@ -2298,8 +2298,8 @@ const Dark = {
     border: `1px solid #474747`,
 
     breadCrumbs: {
-      prevItemColor: "#858585",
-      arrowRightColor: "#858585",
+      prevItemColor: "#ADADAD",
+      arrowRightColor: "#ADADAD",
     },
 
     bodyDescriptionText: "#858585",

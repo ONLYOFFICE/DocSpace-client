@@ -2296,8 +2296,8 @@ const Base = {
     border: `1px solid ${grayLightMid}`,
 
     breadCrumbs: {
-      prevItemColor: "#A3A9AE",
-      arrowRightColor: "#A3A9AE",
+      prevItemColor: "#657077",
+      arrowRightColor: "#657077",
     },
 
     bodyDescriptionText: "#A3A9AE",

@@ -1950,7 +1950,7 @@ const Base = {
   navigation: {
     expanderColor: black,
     background: white,
-    rootFolderTitleColor: "#A3A9AE",
+    rootFolderTitleColor: "#657077",
     publicIcon: black,
     boxShadow: " 0px 12px 40px 0px #040F1B1F",
 
@@ -2296,8 +2296,8 @@ const Base = {
     border: `1px solid ${grayLightMid}`,
 
     breadCrumbs: {
-      prevItemColor: "#A3A9AE",
-      arrowRightColor: "#A3A9AE",
+      prevItemColor: "#657077",
+      arrowRightColor: "#657077",
     },
 
     bodyDescriptionText: "#A3A9AE",

@@ -45,6 +45,10 @@ const SectionBodyContent = ({
   resetFilters,
   submitToGalleryTileIsVisible,
   canSubmitToFormGallery,
+  setOformFilesLoaded,
+  categoryFilterLoaded,
+  languageFilterLoaded,
+  oformFilesLoaded,
 }) => {
   const onMouseDown = (e) => {
     if (
@@ -66,7 +70,11 @@ const SectionBodyContent = ({
     };
   }, [onMouseDown]);
 
-  return !tReady || !oformFiles ? (
+  useEffect(() => {
+    setOformFilesLoaded(tReady && oformFiles);
+  }, [tReady, oformFiles]);
+
+  return !(categoryFilterLoaded && languageFilterLoaded && oformFilesLoaded) ? (
     <Loaders.Tiles foldersCount={0} withTitle={false} />
   ) : !hasGalleryFiles ? (
     <EmptyScreenContainer
@@ -120,4 +128,8 @@ export default inject(({ auth, accessRightsStore, oformsStore }) => ({
   resetFilters: oformsStore.resetFilters,
   submitToGalleryTileIsVisible: oformsStore.submitToGalleryTileIsVisible,
   canSubmitToFormGallery: accessRightsStore.canSubmitToFormGallery,
+  setOformFilesLoaded: oformsStore.setOformFilesLoaded,
+  categoryFilterLoaded: oformsStore.categoryFilterLoaded,
+  languageFilterLoaded: oformsStore.languageFilterLoaded,
+  oformFilesLoaded: oformsStore.oformFilesLoaded,
 }))(withTranslation("Common, FormGallery")(observer(SectionBodyContent)));

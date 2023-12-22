@@ -104,6 +104,8 @@ const FilesSelector = ({
   withCancelButton = true,
   getIcon,
   isRoomBackup,
+
+  roomsFolderId,
 }: FilesSelectorProps) => {
   const { t } = useTranslation(["Files", "Common", "Translations"]);
 
@@ -208,6 +210,7 @@ const FilesSelector = ({
     getIcon,
     t,
     setIsSelectedParentFolder,
+    roomsFolderId,
   });
 
   const onSelectAction = (item: Item) => {
@@ -272,7 +275,9 @@ const FilesSelector = ({
 
     if (
       needRoomList ||
-      (!isThirdParty && parentId === 0 && rootFolderType === FolderType.Rooms)
+      (!isThirdParty &&
+        parentId === roomsFolderId &&
+        rootFolderType === FolderType.Rooms)
     ) {
       getRoomSettings();
 
@@ -633,7 +638,7 @@ export default inject(
 
     const sessionPath = window.sessionStorage.getItem("filesSelectorPath");
 
-    const { treeFolders } = treeFoldersStore;
+    const { treeFolders, roomsFolderId } = treeFoldersStore;
 
     const {
       restorePanelVisible,
@@ -747,6 +752,8 @@ export default inject(
       setBackupToPublicRoomVisible,
       currentDeviceType,
       getIcon,
+
+      roomsFolderId,
     };
   }
 )(observer(FilesSelector));

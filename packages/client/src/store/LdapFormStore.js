@@ -60,6 +60,13 @@ class LdapFormStore {
   isSendWelcomeEmail = false;
   errors = {};
 
+  groupMembership = false;
+  groupDN = "";
+  userAttribute = "distinguishedName";
+  groupFilter = "(objectClass=group)";
+  groupAttribute = "member";
+  groupNameAttribute = "cn";
+
   cron = null;
 
   inProgress = false;
@@ -96,11 +103,8 @@ class LdapFormStore {
       acceptCertificate,
     } = data;
 
-    const {
-      FirstNameAttribute,
-      SecondNameAttribute,
-      MailAttribute,
-    } = ldapMapping;
+    const { FirstNameAttribute, SecondNameAttribute, MailAttribute } =
+      ldapMapping;
 
     this.isLdapEnabled = enableLdapAuthentication;
     this.isTlsEnabled = startTls;
@@ -214,6 +218,30 @@ class LdapFormStore {
     this.isSendWelcomeEmail = sendWelcomeEmail;
   };
 
+  setIsGroupMembership = () => {
+    this.groupMembership = !this.groupMembership;
+  };
+
+  setGroupDN = (groupDN) => {
+    this.groupDN = groupDN;
+  };
+
+  setUserAttribute = (userAttribute) => {
+    this.userAttribute = userAttribute;
+  };
+
+  setGroupFilter = (groupFilter) => {
+    this.groupFilter = groupFilter;
+  };
+
+  setGroupAttribute = (groupAttribute) => {
+    this.groupAttribute = groupAttribute;
+  };
+
+  setGroupNameAttribute = (groupNameAttribute) => {
+    this.groupNameAttribute = groupNameAttribute;
+  };
+
   restoreToDefault = async () => {
     const response = await getLdapDefaultSettings();
     this.mapSettings(response);
@@ -291,12 +319,12 @@ class LdapFormStore {
         mailAttribute: this.requiredSettings.mail,
       },
       accessRights: {},
-      groupMembership: false,
-      groupDN: "",
-      userAttribute: "",
-      groupFilter: "",
-      groupAttribute: "",
-      groupNameAttribute: "",
+      groupMembership: this.groupMembership,
+      groupDN: this.groupDN,
+      userAttribute: this.userAttribute,
+      groupFilter: this.groupFilter,
+      groupAttribute: this.groupAttribute,
+      groupNameAttribute: this.groupNameAttribute,
       authentication: this.authentication,
       login: this.login,
       password: this.password,

@@ -11,12 +11,60 @@ import Textarea from "@docspace/components/textarea";
 
 const FIELD_STYLE = { marginBottom: "0px" };
 
-const GroupMembership = () => {
+const GROUP_DN = "groupDN",
+  GROUP_ATTRIBUTE = "groupAttribute",
+  GROUP_NAME_ATTRIBUTE = "groupNameAttribute",
+  USER_ATTRIBUTE = "userAttribute",
+  GROUP_FILTER = "groupFilter";
+
+const GroupMembership = (props) => {
+  const {
+    groupMembership,
+    setIsGroupMembership,
+    groupDN,
+    userAttribute,
+    groupFilter,
+    groupAttribute,
+    groupNameAttribute,
+    setGroupDN,
+    setUserAttribute,
+    setGroupFilter,
+    setGroupAttribute,
+    setGroupNameAttribute,
+  } = props;
   const { t } = useTranslation(["Ldap", "Common"]);
+
+  const onChange = (e) => {
+    const { value, name } = e.target;
+
+    switch (name) {
+      case GROUP_DN:
+        setGroupDN(value);
+        break;
+      case USER_ATTRIBUTE:
+        setUserAttribute(value);
+        break;
+      case GROUP_FILTER:
+        setGroupFilter(value);
+        break;
+      case GROUP_NAME_ATTRIBUTE:
+        setGroupNameAttribute(value);
+        break;
+      case GROUP_ATTRIBUTE:
+        setGroupAttribute(value);
+        break;
+    }
+  };
+
   return (
     <>
       <div className="group_membership-header">
-        <ToggleButton className="toggle" label={"GroupMembership"} />
+        <ToggleButton
+          className="toggle"
+          isChecked={groupMembership}
+          onChange={setIsGroupMembership}
+          label={"GroupMembership"}
+        />
         <HelpButton tooltipContent={"LdapGroupMembershipTooltip"} />
       </div>
       <Box className="group_membership-container">
@@ -28,7 +76,14 @@ const GroupMembership = () => {
           isRequired
           tooltipContent="GroupDNTooltip"
         >
-          <TextInput className="field-input" scale />
+          <TextInput
+            className="field-input"
+            onChange={onChange}
+            name={GROUP_DN}
+            value={groupDN}
+            isDisabled={!groupMembership}
+            scale
+          />
         </FieldContainer>
         <FieldContainer
           isVertical
@@ -40,7 +95,10 @@ const GroupMembership = () => {
         >
           <TextInput
             className="field-input"
-            value={"distinguishedName"}
+            onChange={onChange}
+            name={USER_ATTRIBUTE}
+            value={userAttribute}
+            isDisabled={!groupMembership}
             scale
           />
         </FieldContainer>
@@ -54,7 +112,13 @@ const GroupMembership = () => {
           inlineHelpButton
           isRequired
         >
-          <Textarea value={"(objectClass=group)"} heightTextArea={100} />
+          <Textarea
+            value={groupFilter}
+            onChange={onChange}
+            name={GROUP_FILTER}
+            isDisabled={!groupMembership}
+            heightTextArea={100}
+          />
         </FieldContainer>
         <FieldContainer
           style={FIELD_STYLE}
@@ -64,7 +128,14 @@ const GroupMembership = () => {
           isRequired
           tooltipContent="GroupNameAttributeTooltip"
         >
-          <TextInput className="field-input" value={"cn"} scale />
+          <TextInput
+            className="field-input"
+            onChange={onChange}
+            name={GROUP_NAME_ATTRIBUTE}
+            isDisabled={!groupMembership}
+            value={groupNameAttribute}
+            scale
+          />
         </FieldContainer>
         <FieldContainer
           isVertical
@@ -73,7 +144,14 @@ const GroupMembership = () => {
           isRequired
           tooltipContent="GroupAttributeTooltip"
         >
-          <TextInput className="field-input" value={"member"} scale />
+          <TextInput
+            className="field-input"
+            onChange={onChange}
+            name={GROUP_ATTRIBUTE}
+            isDisabled={!groupMembership}
+            value={groupAttribute}
+            scale
+          />
         </FieldContainer>
       </Box>
     </>
@@ -81,7 +159,33 @@ const GroupMembership = () => {
 };
 
 export default inject(({ ldapStore }) => {
-  //  const {} = ldapStore;
+  const {
+    groupMembership,
+    setIsGroupMembership,
+    groupDN,
+    userAttribute,
+    groupFilter,
+    groupAttribute,
+    groupNameAttribute,
+    setGroupDN,
+    setUserAttribute,
+    setGroupFilter,
+    setGroupAttribute,
+    setGroupNameAttribute,
+  } = ldapStore;
 
-  return {};
+  return {
+    groupMembership,
+    setIsGroupMembership,
+    groupDN,
+    userAttribute,
+    groupFilter,
+    groupAttribute,
+    groupNameAttribute,
+    setGroupDN,
+    setUserAttribute,
+    setGroupFilter,
+    setGroupAttribute,
+    setGroupNameAttribute,
+  };
 })(observer(GroupMembership));

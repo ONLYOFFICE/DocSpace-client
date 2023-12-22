@@ -21,7 +21,7 @@ const globalCloseEvents = {
   clickOutsideAnchor: true,
 };
 
-const Tooltip = React.forwardRef<React.Ref<TooltipRefProps>, TooltipProps>(
+const Tooltip = React.forwardRef<TooltipRefProps, TooltipProps>(
   (
     {
       id,
@@ -66,7 +66,7 @@ const Tooltip = React.forwardRef<React.Ref<TooltipRefProps>, TooltipProps>(
         data-testid="tooltip"
       >
         <ReactTooltip
-          ref={ref as React.Ref<TooltipRefProps>}
+          ref={ref}
           id={id}
           opacity={opacity}
           float={float}

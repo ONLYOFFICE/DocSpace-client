@@ -123,7 +123,7 @@
   "ErrorMessageBruteForceProtection": "Specified argument was out of the range of valid values.",
   "ExistingAccount": "Existing account",
   "ForcePathStyle": "Force Path Style",
-  "GroupsDescription": "Users which you selected in the previous step will be imported into groups created in {{serviceName}}. Groups will appear in the \"Accounts\" section.",
+  "GroupsDescription": "Users which you selected in the previous step will be imported into groups created in {{serviceName}}. Groups will appear in the Accounts section.",
   "IncludedInBusiness": "Included in Business plan",
   "IntegrationRequest": "Missing a useful integration or component in ONLYOFFICE DocSpace? Leave a request to our team and we will look into that.",
   "Import": "Import",

@@ -4,12 +4,12 @@ import styled from "styled-components";
 import ImportSection from "../../../sub-components/ImportSection";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import AccountsIcon from "PUBLIC_DIR/images/catalog.accounts.react.svg";
-import UserIcon from "PUBLIC_DIR/images/catalog.user.react.svg";
 import UserSolidIcon from "PUBLIC_DIR/images/catalog.user.solid.react.svg";
 import SharedIcon from "PUBLIC_DIR/images/catalog.old.share.react.svg";
 import RoomsIcon from "PUBLIC_DIR/images/catalog.rooms.react.svg";
 import PortfolioIcon from "PUBLIC_DIR/images/catalog.portfolio.react.svg";
 import ProjectsIcon from "PUBLIC_DIR/images/catalog.projects.react.svg";
+import DocumentsIcon from "PUBLIC_DIR/images/catalog.documents.react.svg";
 
 const Wrapper = styled.div`
   display: flex;
@@ -57,35 +57,66 @@ const ImportStep = ({
         isDisabled
       />
       <ImportSection
+        isChecked={importOptions.importGroups}
+        onChange={(e) => onChange(e, "importGroups")}
+        sectionName={t("Common:Groups")}
+        description={t("Settings:GroupsDescription", { serviceName })}
+        exportSection={{
+          sectionName: t("Common:Groups"),
+          workspace: serviceName,
+        }}
+        importSection={{
+          sectionName: t("Common:Accounts"),
+          workspace: "DocSpace",
+          SectionIcon: AccountsIcon,
+        }}
+      />
+      <ImportSection
         isChecked={importOptions.importPersonalFiles}
         onChange={(e) => onChange(e, "importPersonalFiles")}
         sectionName={t("Settings:PersonalFiles")}
-        description={t("Settings:PersonalFilesDescription", { serviceName })}
+        description={t("Settings:PersonalFilesDescription")}
         exportSection={{
           sectionName: t("Settings:MyDocuments"),
           workspace: serviceName,
           SectionIcon: UserSolidIcon,
         }}
         importSection={{
-          sectionName: t("Settings:MyDocuments"),
+          sectionName: t("Settings:Documents"),
           workspace: "DocSpace",
-          SectionIcon: UserIcon,
+          SectionIcon: DocumentsIcon,
         }}
       />
       <ImportSection
         isChecked={importOptions.importSharedFiles}
         onChange={(e) => onChange(e, "importSharedFiles")}
         sectionName={t("Settings:SharedFiles")}
-        description={t("Settings:SharedFilesDescription", { serviceName })}
+        description={t("Settings:SharedFilesDescription")}
         exportSection={{
           sectionName: t("Common:SharedWithMe"),
           workspace: serviceName,
           SectionIcon: SharedIcon,
         }}
         importSection={{
-          sectionName: t("Settings:MyDocuments"),
+          sectionName: t("Settings:Documents"),
           workspace: "DocSpace",
-          SectionIcon: UserIcon,
+          SectionIcon: DocumentsIcon,
+        }}
+      />
+      <ImportSection
+        isChecked={importOptions.importSharedFolders}
+        onChange={(e) => onChange(e, "importSharedFolders")}
+        sectionName={t("Settings:SharedFolders")}
+        description={t("Settings:SharedFoldersDescription")}
+        exportSection={{
+          sectionName: t("Common:SharedWithMe"),
+          workspace: serviceName,
+          SectionIcon: SharedIcon,
+        }}
+        importSection={{
+          sectionName: t("Common:Rooms"),
+          workspace: "DocSpace",
+          SectionIcon: DocumentsIcon,
         }}
       />
       <ImportSection
@@ -106,7 +137,7 @@ const ImportStep = ({
       />
       <ImportSection
         isChecked={importOptions.importProjects}
-        onChange={(e) => onChange(e, "importProjects")}
+        onChange={(e) => onChange(e, "importProjectFiles")}
         sectionName={t("Common:Projects")}
         description={t("Settings:ProjectsDescription")}
         exportSection={{

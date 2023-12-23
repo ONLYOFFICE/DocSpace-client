@@ -2,18 +2,16 @@ import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
 import Text from "@docspace/components/text";
+import Box from "@docspace/components/box";
 import RowContent from "@docspace/components/row-content";
 import ComboBox from "@docspace/components/combobox";
 
 const StyledRowContent = styled(RowContent)`
   display: flex;
-  align-items: center;
 
-  .import-accounts-name {
-    font-weight: 600;
-    font-size: 14px;
-    display: flex;
-    flex-direction: column;
+  .row-main-container-wrapper {
+    width: 100%;
+    margin-right: 0px;
   }
 
   .rowMainContainer {
@@ -21,34 +19,42 @@ const StyledRowContent = styled(RowContent)`
     width: 100%;
   }
 
-  .row-main-container-wrapper {
-    margin: 0;
+  .username {
+    font-size: 14px;
+    font-weight: 600;
+    color: ${(props) => props.theme.client.settings.migration.subtitleColor};
   }
 
-  .mainIcons {
-    height: auto;
+  .user-email {
+    margin-right: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    color: ${(props) =>
+      props.theme.client.settings.migration.tableRowTextColor};
   }
 
-  .role-type-selector {
+  .user-type {
     .combo-button {
       border: none;
-      padding: 0;
+      padding: 4px 8px;
       justify-content: flex-end;
       background-color: transparent;
     }
 
     .combo-button-label {
-      color: #a3a9ae;
+      color: ${(props) =>
+        props.theme.client.settings.migration.tableRowTextColor};
     }
 
     .combo-buttons_arrow-icon {
       flex: initial;
-      margin-left: 0;
+      margin-right: 0px;
     }
 
     svg {
       path {
-        fill: #a3a9ae;
+        fill: ${(props) =>
+          props.theme.client.settings.migration.tableRowTextColor};
       }
     }
   }
@@ -68,18 +74,21 @@ const UsersRowContent = ({
     changeUserType(id, e.key);
   };
 
-  const selectedOption = typeOptions.find((option) => option.key === type) || {};
+  const selectedOption =
+    typeOptions.find((option) => option.key === type) || {};
 
-  return (
-    <StyledRowContent sectionWidth={sectionWidth}>
-      <div className="import-accounts-name">
-        <Text fontWeight={600} fontSize="14px">
-          {displayName}
-        </Text>
-        <Text fontWeight={600} fontSize="12px" color="#A3A9AE">
-          {email}
-        </Text>
-      </div>
+  const contentData = [
+    <Box
+      key={id}
+      displayProp="flex"
+      justifyContent="space-between"
+      alignItems="center"
+    >
+      <Box>
+        <Text className="username">{displayName}</Text>
+        <Text className="user-email">{email}</Text>
+      </Box>
+
       <div ref={roleSelectorRef}>
         <ComboBox
           className="user-type"
@@ -93,6 +102,12 @@ const UsersRowContent = ({
           manualWidth="fit-content"
         />
       </div>
+    </Box>,
+  ];
+
+  return (
+    <StyledRowContent sectionWidth={sectionWidth}>
+      {contentData}
     </StyledRowContent>
   );
 };

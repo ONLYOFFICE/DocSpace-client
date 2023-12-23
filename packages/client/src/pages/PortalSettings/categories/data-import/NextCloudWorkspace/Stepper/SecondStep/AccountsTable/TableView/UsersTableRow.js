@@ -10,44 +10,61 @@ const StyledTableRow = styled(TableRow)`
     text-overflow: ellipsis;
   }
 
-  .user-email {
-    margin-right: 5px;
+  .username {
+    font-size: 13px;
+    font-weight: 600;
+    color: ${(props) => props.theme.client.settings.migration.subtitleColor};
   }
 
-  .textOverflow {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  .user-email {
+    margin-right: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    color: ${(props) =>
+      props.theme.client.settings.migration.tableRowTextColor};
+  }
+
+  .not-existing {
+    font-size: 13px;
+    font-weight: 600;
+    color: ${(props) =>
+      props.theme.client.settings.migration.tableRowTextColor};
+  }
+
+  .user-existing {
+    font-size: 13px;
+    font-weight: 600;
+    color: ${(props) =>
+      props.theme.client.settings.migration.existingTextColor};
   }
 `;
 
 const NOT_EXIST = "—";
 
-const UsersTableRow = ({ t, displayName, email, isDuplicate, isChecked, toggleAccount }) => {
+const UsersTableRow = ({
+  t,
+  displayName,
+  email,
+  isDuplicate,
+  isChecked,
+  toggleAccount,
+}) => {
   return (
     <StyledTableRow checked={isChecked} onClick={toggleAccount}>
       <TableCell className="checkboxWrapper">
-        <Checkbox onChange={toggleAccount} isChecked={isChecked} />
-        <Text fontWeight={600} className="textOverflow">
-          {displayName}
-        </Text>
+        <Checkbox isChecked={isChecked} onChange={toggleAccount} />
+        <Text className="username">{displayName}</Text>
       </TableCell>
 
       <TableCell>
-        <Text fontWeight={600} color="#a3a9ae" className="user-email textOverflow">
-          {email}
-        </Text>
+        <Text className="user-email">{email}</Text>
       </TableCell>
 
       <TableCell>
         {isDuplicate ? (
-          <Text fontWeight={600} color="#2db482" className="textOverflow">
-            {t("Settings:ExistingAccount")}
-          </Text>
+          <Text className="user-existing">{t("Settings:ExistingAccount")}</Text>
         ) : (
-          <Text fontWeight={600} color="#a3a9ae" className="textOverflow">
-            {NOT_EXIST}
-          </Text>
+          <Text className="not-existing">{NOT_EXIST}</Text>
         )}
       </TableCell>
     </StyledTableRow>

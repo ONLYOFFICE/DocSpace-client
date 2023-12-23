@@ -46,7 +46,9 @@ const UsersRowContent = ({
       <Box displayProp="flex">
         <Text className="username">{displayName}</Text>
         {isDuplicate && (
-          <Text className="user-existing">{t("Settings:ExistingAccount")}</Text>
+          <Text className="user-existing">
+            ({t("Settings:ExistingAccount")})
+          </Text>
         )}
       </Box>
 

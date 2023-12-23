@@ -14,50 +14,48 @@ const StyledTableRow = styled(TableRow)`
     text-overflow: ellipsis;
   }
 
+  .username {
+    font-size: 13px;
+    font-weight: 600;
+    color: ${(props) => props.theme.client.settings.migration.subtitleColor};
+  }
+
   .user-email {
-    display: flex;
-    gap: 8px;
-    path {
-      fill: #a3a9ae;
-    }
+    margin-right: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    color: ${(props) =>
+      props.theme.client.settings.migration.tableRowTextColor};
   }
 
-  .email-input {
-    max-width: 357.67px;
-  }
-
-  .textOverflow {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .role-type-selector {
+  .user-type {
     .combo-button {
       border: none;
-      padding: 0;
+      padding: 4px 8px;
       justify-content: flex-start;
       background-color: transparent;
     }
 
     .combo-button-label {
-      color: #a3a9ae;
+      color: ${(props) =>
+        props.theme.client.settings.migration.tableRowTextColor};
     }
 
     .combo-buttons_arrow-icon {
       flex: initial;
-      margin-left: 0;
+      margin-right: 0px;
     }
 
     svg {
       path {
-        fill: #a3a9ae;
+        fill: ${(props) =>
+          props.theme.client.settings.migration.tableRowTextColor};
       }
     }
   }
 `;
 
-const UsersTableRow = ({
+const UsersTypeTableRow = ({
   id,
   displayName,
   email,
@@ -67,19 +65,20 @@ const UsersTableRow = ({
   type,
   changeUserType,
 }) => {
-  const roleSelectorRef = useRef();
+  const userTypeRef = useRef();
 
   const onSelectUser = (e) => {
     changeUserType(id, e.key);
   };
 
-  const selectedOption = typeOptions.find((option) => option.key === type) || {};
+  const selectedOption =
+    typeOptions.find((option) => option.key === type) || {};
 
   const handleAccountToggle = (e) => {
     e.preventDefault();
     e.stopPropagation();
     e.target.closest(".dropdown-container") ||
-      roleSelectorRef.current?.contains(e.target) ||
+      userTypeRef.current?.contains(e.target) ||
       toggleAccount();
   };
 
@@ -87,13 +86,11 @@ const UsersTableRow = ({
     <StyledTableRow checked={isChecked} onClick={handleAccountToggle}>
       <TableCell className="checkboxWrapper">
         <Checkbox isChecked={isChecked} onChange={handleAccountToggle} />
-        <Text fontWeight={600} className="textOverflow">
-          {displayName}
-        </Text>
+        <Text className="username">{displayName}</Text>
       </TableCell>
 
       <TableCell>
-        <div ref={roleSelectorRef}>
+        <div ref={userTypeRef}>
           <ComboBox
             className="user-type"
             selectedOption={selectedOption}
@@ -107,10 +104,9 @@ const UsersTableRow = ({
           />
         </div>
       </TableCell>
+
       <TableCell>
-        <Text lineHeight="20px" fontWeight={600} color="#A3A9AE" className="textOverflow">
-          {email}
-        </Text>
+        <Text className="user-email">{email}</Text>
       </TableCell>
     </StyledTableRow>
   );
@@ -122,4 +118,4 @@ export default inject(({ importAccountsStore }) => {
   return {
     changeUserType,
   };
-})(observer(UsersTableRow));
+})(observer(UsersTypeTableRow));

@@ -27,6 +27,15 @@ const Wrapper = styled.div`
   .upload-backup-input {
     height: 32px;
     margin-bottom: 12px;
+
+    .icon-button_svg {
+      svg {
+        path {
+          fill: ${(props) =>
+            props.theme.client.settings.migration.fileInputIconColor};
+        }
+      }
+    }
   }
 
   .upload-back-buttons {

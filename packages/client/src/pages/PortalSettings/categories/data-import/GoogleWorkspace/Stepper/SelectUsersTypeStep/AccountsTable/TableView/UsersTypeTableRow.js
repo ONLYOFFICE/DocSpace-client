@@ -24,29 +24,32 @@ const StyledTableRow = styled(TableRow)`
     margin-right: 5px;
     font-size: 13px;
     font-weight: 600;
-    color: ${(props) => props.theme.client.settings.migration.tableRowTextColor};
+    color: ${(props) =>
+      props.theme.client.settings.migration.tableRowTextColor};
   }
 
   .user-type {
     .combo-button {
       border: none;
-      padding: 0;
+      padding: 4px 8px;
       justify-content: flex-start;
       background-color: transparent;
     }
 
     .combo-button-label {
-      color: ${(props) => props.theme.client.settings.migration.tableRowTextColor};
+      color: ${(props) =>
+        props.theme.client.settings.migration.tableRowTextColor};
     }
 
     .combo-buttons_arrow-icon {
       flex: initial;
-      margin-left: 0;
+      margin-right: 0px;
     }
 
     svg {
       path {
-        fill: ${(props) => props.theme.client.settings.migration.tableRowTextColor};
+        fill: ${(props) =>
+          props.theme.client.settings.migration.tableRowTextColor};
       }
     }
   }
@@ -68,7 +71,8 @@ const UsersTypeTableRow = ({
     changeUserType(id, e.key);
   };
 
-  const selectedOption = typeOptions.find((option) => option.key === type) || {};
+  const selectedOption =
+    typeOptions.find((option) => option.key === type) || {};
 
   const handleAccountToggle = (e) => {
     e.preventDefault();

@@ -36,7 +36,7 @@ const StyledRowContent = styled(RowContent)`
   .user-type {
     .combo-button {
       border: none;
-      padding: 5px;
+      padding: 4px 8px;
       justify-content: flex-end;
       background-color: transparent;
     }

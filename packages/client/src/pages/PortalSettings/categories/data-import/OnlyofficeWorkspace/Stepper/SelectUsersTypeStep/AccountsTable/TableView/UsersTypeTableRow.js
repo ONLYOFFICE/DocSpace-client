@@ -31,7 +31,7 @@ const StyledTableRow = styled(TableRow)`
   .user-type {
     .combo-button {
       border: none;
-      padding: 0;
+      padding: 4px 8px;
       justify-content: flex-start;
       background-color: transparent;
     }
@@ -43,7 +43,7 @@ const StyledTableRow = styled(TableRow)`
 
     .combo-buttons_arrow-icon {
       flex: initial;
-      margin-left: 0;
+      margin-right: 0px;
     }
 
     svg {

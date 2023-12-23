@@ -198,6 +198,5 @@ export default inject(({ importAccountsStore }) => {
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
-    currentDeviceType,
   };
 })(observer(RowView));

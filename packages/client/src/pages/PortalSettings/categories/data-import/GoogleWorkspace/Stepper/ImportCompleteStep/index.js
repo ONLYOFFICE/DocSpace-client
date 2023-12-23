@@ -7,7 +7,6 @@ import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import Text from "@docspace/components/text";
 import Checkbox from "@docspace/components/checkbox";
 import HelpButton from "@docspace/components/help-button";
-import Box from "@docspace/components/box";
 
 const Wrapper = styled.div`
   margin: 0 0 16px;
@@ -19,11 +18,17 @@ const Wrapper = styled.div`
   }
 `;
 
-const StyledText = styled(Text)`
+const InfoText = styled(Text)`
   margin-top: -8px;
   margin-bottom: 16px;
   font-size: 12px;
   color: ${(props) => props.theme.client.settings.migration.subtitleColor};
+`;
+
+const ErrorText = styled(Text)`
+  font-size: 12px;
+  color: ${(props) => props.theme.client.settings.migration.errorTextColor};
+  margin-bottom: 16px;
 `;
 
 const ImportCompleteStep = ({
@@ -68,19 +73,19 @@ const ImportCompleteStep = ({
 
   return (
     <>
-      <StyledText>
+      <InfoText>
         {t("Settings:ImportedUsers", {
           selectedUsers: importResult.succeedUsers,
           importedUsers: checkedUsers.result.length,
         })}
-      </StyledText>
+      </InfoText>
 
       {importResult.failedUsers > 0 && (
-        <Box marginProp='8px 0 0'> 
-          <Text fontSize="12px" color="#F21C0E">
-            {t("Settings:ErrorsWereFound", { errors: importResult.failedUsers })}
-          </Text>
-        </Box>
+        <ErrorText>
+          {t("Settings:ErrorsWereFound", {
+            errors: importResult.failedUsers,
+          })}
+        </ErrorText>
       )}
 
       <Wrapper>
@@ -93,7 +98,9 @@ const ImportCompleteStep = ({
           place="right"
           offsetRight={0}
           style={{ marginLeft: "4px" }}
-          tooltipContent={<Text fontSize="12px">{t("Settings:WelcomeLetterTooltip")}</Text>}
+          tooltipContent={
+            <Text fontSize="12px">{t("Settings:WelcomeLetterTooltip")}</Text>
+          }
         />
       </Wrapper>
 
@@ -111,8 +118,13 @@ const ImportCompleteStep = ({
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { checkedUsers, importResult, getMigrationLog, clearCheckedAccounts, sendWelcomeLetter } =
-    importAccountsStore;
+  const {
+    checkedUsers,
+    importResult,
+    getMigrationLog,
+    clearCheckedAccounts,
+    sendWelcomeLetter,
+  } = importAccountsStore;
 
   return {
     checkedUsers,

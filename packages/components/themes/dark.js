@@ -3032,7 +3032,7 @@ const Dark = {
         fileInputIconColor: "#5c5c5c",
         infoBlockBackground: "#282828",
         infoBlockTextColor: "#858585",
-        exceededTextColor: "#E06451",
+        errorTextColor: "#E06451",
         existingTextColor: "#3BA420",
         tableHeaderText: "#858585",
         tableRowHoverColor: "#3D3D3D",

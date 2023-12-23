@@ -10,8 +10,7 @@ const Wrapper = styled.div`
     font-size: 12px;
     font-weight: 600;
     margin-bottom: 16px;
-    color: ${(props) =>
-      props.theme.client.settings.migration.exceededTextColor};
+    color: ${(props) => props.theme.client.settings.migration.errorTextColor};
   }
 `;
 
@@ -52,7 +51,7 @@ const UsersInfoWrapper = styled.div`
       margin-left: 4px;
       color: ${(props) =>
         props.selectedUsers > props.totalLicenceLimit
-          ? props.theme.client.settings.migration.exceededTextColor
+          ? props.theme.client.settings.migration.errorTextColor
           : props.theme.client.settings.migration.infoBlockTextColor};
     }
   }

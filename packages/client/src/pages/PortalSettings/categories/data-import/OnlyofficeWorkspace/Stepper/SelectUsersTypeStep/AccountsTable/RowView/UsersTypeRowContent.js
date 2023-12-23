@@ -11,7 +11,7 @@ const StyledRowContent = styled(RowContent)`
 
   .row-main-container-wrapper {
     width: 100%;
-    margin: 0px;
+    margin-right: 0px;
   }
 
   .rowMainContainer {

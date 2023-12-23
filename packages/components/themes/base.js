@@ -3031,7 +3031,7 @@ const Base = {
         fileInputIconColor: "#A3A9AE",
         infoBlockBackground: "#f8f9f9",
         infoBlockTextColor: "#555F65",
-        exceededTextColor: "#F21C0E",
+        errorTextColor: "#F21C0E",
         existingTextColor: "#2db482",
         tableHeaderText: "#A3A9AE",
         tableRowHoverColor: "#F3F4F4",

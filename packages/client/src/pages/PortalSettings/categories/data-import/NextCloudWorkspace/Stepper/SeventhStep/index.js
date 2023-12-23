@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import Text from "@docspace/components/text";
@@ -8,6 +9,12 @@ import Checkbox from "@docspace/components/checkbox";
 import HelpButton from "@docspace/components/help-button";
 
 import { Wrapper } from "../StyledStepper";
+
+const ErrorText = styled(Text)`
+  font-size: 12px;
+  color: ${(props) => props.theme.client.settings.migration.errorTextColor};
+  margin-bottom: 16px;
+`;
 
 const SeventhStep = ({
   t,
@@ -57,10 +64,11 @@ const SeventhStep = ({
           importedUsers: checkedUsers.result.length,
         })}
       </Text>
+
       {importResult.failedUsers > 0 && (
-        <Text fontSize="12px" color="#F21C0E" className="mt-8">
+        <ErrorText>
           {t("Settings:ErrorsWereFound", { errors: importResult.failedUsers })}
-        </Text>
+        </ErrorText>
       )}
 
       <div className="sendLetterBlockWrapper">

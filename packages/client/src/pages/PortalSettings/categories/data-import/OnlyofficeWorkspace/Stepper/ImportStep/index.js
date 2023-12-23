@@ -136,7 +136,7 @@ const ImportStep = ({
         }}
       />
       <ImportSection
-        isChecked={importOptions.importProjects}
+        isChecked={importOptions.importProjectFiles}
         onChange={(e) => onChange(e, "importProjectFiles")}
         sectionName={t("Common:Projects")}
         description={t("Settings:ProjectsDescription")}

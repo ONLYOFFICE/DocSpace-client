@@ -82,7 +82,7 @@ const ImportStep = ({
           SectionIcon: UserSolidIcon,
         }}
         importSection={{
-          sectionName: t("Settings:Documents"),
+          sectionName: t("Common:Documents"),
           workspace: "DocSpace",
           SectionIcon: DocumentsIcon,
         }}
@@ -98,7 +98,7 @@ const ImportStep = ({
           SectionIcon: SharedIcon,
         }}
         importSection={{
-          sectionName: t("Settings:Documents"),
+          sectionName: t("Common:Documents"),
           workspace: "DocSpace",
           SectionIcon: DocumentsIcon,
         }}
@@ -116,7 +116,7 @@ const ImportStep = ({
         importSection={{
           sectionName: t("Common:Rooms"),
           workspace: "DocSpace",
-          SectionIcon: DocumentsIcon,
+          SectionIcon: RoomsIcon,
         }}
       />
       <ImportSection

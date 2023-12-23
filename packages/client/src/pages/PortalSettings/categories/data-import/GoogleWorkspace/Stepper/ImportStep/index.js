@@ -6,6 +6,7 @@ import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import PeopleIcon from "PUBLIC_DIR/images/catalog.accounts.react.svg";
 import AccountsIcon from "PUBLIC_DIR/images/catalog.accounts.react.svg";
 import DocumentsIcon from "PUBLIC_DIR/images/catalog.documents.react.svg";
+import RoomsIcon from "PUBLIC_DIR/images/catalog.rooms.react.svg";
 
 const Wrapper = styled.div`
   display: flex;
@@ -73,7 +74,7 @@ const ImportStep = ({
           workspace: serviceName,
         }}
         importSection={{
-          sectionName: t("Settings:Documents"),
+          sectionName: t("Common:Documents"),
           workspace: "DocSpace",
           SectionIcon: DocumentsIcon,
         }}
@@ -88,7 +89,7 @@ const ImportStep = ({
           workspace: serviceName,
         }}
         importSection={{
-          sectionName: t("Settings:Documents"),
+          sectionName: t("Common:Documents"),
           workspace: "DocSpace",
           SectionIcon: DocumentsIcon,
         }}
@@ -105,7 +106,7 @@ const ImportStep = ({
         importSection={{
           sectionName: t("Common:Rooms"),
           workspace: "DocSpace",
-          SectionIcon: DocumentsIcon,
+          SectionIcon: RoomsIcon,
         }}
       />
 

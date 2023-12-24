@@ -23,6 +23,7 @@ import Text from "@docspace/components/text";
 import Link from "@docspace/components/link";
 import BetaBadge from "@docspace/common/components/BetaBadge";
 import { isBetaLanguage } from "@docspace/common/utils";
+import withCultureNames from "@docspace/common/hoc/withCultureNames";
 
 const mapTimezonesToArray = (timezones) => {
   return timezones.map((timezone) => {
@@ -566,7 +567,9 @@ export default inject(({ auth, setup, common }) => {
     currentDeviceType,
   };
 })(
-  withLoading(
-    withTranslation(["Settings", "Common"])(observer(LanguageAndTimeZone))
+  withCultureNames(
+    withLoading(
+      withTranslation(["Settings", "Common"])(observer(LanguageAndTimeZone))
+    )
   )
 );

@@ -3,6 +3,7 @@ import { inject, observer } from "mobx-react";
 import CategoryFilterDesktop from "./DesktopView";
 import CategoryFilterMobile from "./MobileView";
 import { mobile } from "@docspace/components/utils/device";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 import styled, { css } from "styled-components";
 
@@ -34,21 +35,43 @@ export const StyledCategoryFilterWrapper = styled.div`
   }
 `;
 
+export const StyledSkeleton = styled(RectangleSkeleton)`
+  width: 220px;
+  height: 32px;
+
+  @media ${mobile} {
+    width: 100%;
+  }
+
+  ${({ noLocales }) =>
+    !noLocales &&
+    css`
+      @media ${mobile} {
+        max-width: calc(100% - 49px);
+      }
+    `}
+`;
+
 const CategoryFilter = ({
   oformsFilter,
   noLocales,
   fetchCategoryTypes,
   fetchCategoriesOfCategoryType,
+  filterOformsByLocaleIsLoading,
+  setFilterOformsByLocaleIsLoading,
+  setCategoryFilterLoaded,
+  categoryFilterLoaded,
+  languageFilterLoaded,
+  oformFilesLoaded,
 }) => {
   const [menuItems, setMenuItems] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     (async () => {
-      setIsLoading(true);
       let newMenuItems = await fetchCategoryTypes();
       if (!newMenuItems) {
-        setIsLoading(false);
+        filterOformsByLocaleIsLoading &&
+          setFilterOformsByLocaleIsLoading(false);
         return;
       }
 
@@ -77,12 +100,21 @@ const CategoryFilter = ({
         })
         .finally(() => {
           setMenuItems(newMenuItems);
-          setIsLoading(false);
+          filterOformsByLocaleIsLoading &&
+            setFilterOformsByLocaleIsLoading(false);
         });
     })();
   }, [oformsFilter.locale]);
 
-  if (!isLoading && menuItems.length === 0) return null;
+  useEffect(() => {
+    setCategoryFilterLoaded(menuItems.length !== 0);
+  }, [menuItems.length]);
+
+  if (
+    filterOformsByLocaleIsLoading ||
+    !(categoryFilterLoaded && languageFilterLoaded && oformFilesLoaded)
+  )
+    return <StyledSkeleton $noLocales={noLocales} />;
 
   return (
     <StyledCategoryFilterWrapper
@@ -100,4 +132,11 @@ export default inject(({ oformsStore }) => ({
     oformsStore.oformLocales !== null && oformsStore.oformLocales?.length === 0,
   fetchCategoryTypes: oformsStore.fetchCategoryTypes,
   fetchCategoriesOfCategoryType: oformsStore.fetchCategoriesOfCategoryType,
+  filterOformsByLocaleIsLoading: oformsStore.filterOformsByLocaleIsLoading,
+  setFilterOformsByLocaleIsLoading:
+    oformsStore.setFilterOformsByLocaleIsLoading,
+  setCategoryFilterLoaded: oformsStore.setCategoryFilterLoaded,
+  categoryFilterLoaded: oformsStore.categoryFilterLoaded,
+  languageFilterLoaded: oformsStore.languageFilterLoaded,
+  oformFilesLoaded: oformsStore.oformFilesLoaded,
 }))(observer(CategoryFilter));

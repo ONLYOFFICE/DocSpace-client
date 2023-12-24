@@ -91,6 +91,7 @@ export type useRoomsHelperProps = {
 };
 
 export type useFilesHelpersProps = {
+  roomsFolderId?: number;
   setBreadCrumbs: (items: BreadCrumb[]) => void;
   setIsBreadCrumbsLoading: (value: boolean) => void;
   setIsSelectedParentFolder: (value: boolean) => void;
@@ -221,4 +222,6 @@ export type FilesSelectorProps = {
   withHeader: boolean;
   withCancelButton: boolean;
   settings: any;
+
+  roomsFolderId?: number;
 };

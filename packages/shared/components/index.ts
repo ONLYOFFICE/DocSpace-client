@@ -88,6 +88,7 @@ import { Tag } from "./tag";
 import { Tags } from "./tags";
 import { DragAndDrop } from "./drag-and-drop";
 import { AccessRightSelect } from "./access-right-select";
+import { SocialButton } from "./social-button";
 
 export type {
   TFallbackAxisSideDirection,
@@ -129,6 +130,7 @@ export {
   RadioButton,
   HelpButton,
   Selector,
+  SocialButton,
   ContextMenuButton,
   ContextMenuButtonDisplayType,
   EmptyScreenContainer,

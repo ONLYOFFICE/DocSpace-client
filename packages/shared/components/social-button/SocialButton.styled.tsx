@@ -1,26 +1,18 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import styled, { css } from "styled-components";
-import Base from "../themes/base";
-import PropTypes from "prop-types";
+
+import { Base } from "../../themes";
+
+import type { StyledSocialButtonProps } from "./SocialButton.types";
 
 const ButtonWrapper = ({
-  label,
-  iconName,
   isDisabled,
   noHover,
   isConnect,
   ...props
-}: any) => <button type="button" {...props}></button>;
-
-ButtonWrapper.propTypes = {
-  label: PropTypes.string,
-  iconName: PropTypes.string,
-  tabIndex: PropTypes.number,
-  isDisabled: PropTypes.bool,
-  onClick: PropTypes.func,
-  $iconOptions: PropTypes.object,
-  isConnect: PropTypes.bool,
-};
+}: PropsWithChildren<StyledSocialButtonProps>) => (
+  <button type="button" {...props} />
+);
 
 const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
   disabled: props.isDisabled ? "disabled" : "",
@@ -35,7 +27,6 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
   justify-content: center;
   font-weight: ${(props) => props.theme.socialButton.fontWeight};
   text-decoration: ${(props) => props.theme.socialButton.textDecoration};
-  margin: ${(props) => props.theme.socialButton.margin};
   padding: ${(props) => props.theme.socialButton.padding};
   border-radius: ${(props) => props.theme.socialButton.borderRadius};
   width: ${(props) => props.theme.socialButton.width};
@@ -67,48 +58,47 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
 
   ${(props) =>
     !props.isDisabled
-      ? css`
-          background: ${(props) =>
-            // @ts-expect-error TS(2339): Property 'isConnect' does not exist on type 'Theme... Remove this comment to see the full error message
+      ? css<StyledSocialButtonProps>`
+          background: ${({ theme }) =>
             props.isConnect
-              ? props.theme.socialButton.connectBackground
-              : props.theme.socialButton.background};
-          box-shadow: ${(props) => props.theme.socialButton.boxShadow};
+              ? theme.socialButton.connectBackground
+              : theme.socialButton.background};
+          box-shadow: ${(Cssprops) => Cssprops.theme.socialButton.boxShadow};
 
-          ${(props) =>
+          ${() =>
             !props.noHover &&
             css`
               :hover,
               :active {
                 cursor: pointer;
-                box-shadow: ${(props) => props.theme.socialButton.boxShadow};
+                box-shadow: ${(cssProps) =>
+                  cssProps.theme.socialButton.boxShadow};
 
                 .social_button_text {
-                  color: ${(props) =>
-                    !props.isConnect &&
-                    props.theme.socialButton.text.hoverColor};
+                  color: ${({ theme }) =>
+                    !props.isConnect && theme.socialButton.text.hoverColor};
                 }
               }
 
               :hover {
-                background: ${(props) =>
+                background: ${({ theme }) =>
                   props.isConnect
-                    ? props.theme.socialButton.hoverConnectBackground
-                    : props.theme.socialButton.hoverBackground};
+                    ? theme.socialButton.hoverConnectBackground
+                    : theme.socialButton.hoverBackground};
               }
 
               :active {
-                background: ${(props) =>
-                  props.theme.socialButton.activeBackground};
+                background: ${({ theme }) =>
+                  theme.socialButton.activeBackground};
                 border: none;
               }
             `}
         `
       : css`
           box-shadow: none;
-          background: ${(props) =>
-            props.theme.socialButton.disableBackgroundColor};
-          color: ${(props) => props.theme.socialButton.disableColor};
+          background: ${({ theme }) =>
+            theme.socialButton.disableBackgroundColor};
+          color: ${({ theme }) => theme.socialButton.disableColor};
 
           ${
             props.theme.isBase &&
@@ -155,7 +145,7 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
     white-space: ${(props) => props.theme.socialButton.text.whiteSpace};
 
     ${(props) =>
-      props.interfaceDirection === "rtl"
+      props.theme.interfaceDirection === "rtl"
         ? css`
             padding-left: 16px;
           `

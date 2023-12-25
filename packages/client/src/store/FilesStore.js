@@ -3043,6 +3043,7 @@ class FilesStore {
         inRoom = true,
         quotaLimit,
         usedSpace,
+        isCustomQuota,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3199,6 +3200,7 @@ class FilesStore {
         isForm,
         quotaLimit,
         usedSpace,
+        isCustomQuota,
       };
     });
 
@@ -3456,46 +3458,35 @@ class FilesStore {
 
   get hasRoomsToResetQuota() {
     const canResetCustomQuota = (item) => {
-      const { isOwner, isAdmin } = this.authStore.userStore.user;
       const { isDefaultRoomsQuotaSet } = this.authStore.currentQuotaStore;
 
       if (!isDefaultRoomsQuotaSet) return false;
 
-      if (!isOwner && !isAdmin) return false;
-
-      if (isAdmin && !item.security?.EditRoom) return false;
-
-      return item.isCustomQuota;
+      return item.security?.EditRoom && item.isCustomQuota;
     };
 
     return this.selection.every((x) => canResetCustomQuota(x));
   }
 
   get hasRoomsToDisableQuota() {
-    const { isOwner, isAdmin } = this.authStore.userStore.user;
     const { isDefaultRoomsQuotaSet } = this.authStore.currentQuotaStore;
 
     const canDisableQuota = (item) => {
-      if (!isOwner && !isAdmin) return false;
+      if (!isDefaultRoomsQuotaSet) return false;
 
-      if (isAdmin && !item.security?.EditRoom) return false;
-
-      return isDefaultRoomsQuotaSet;
+      return item.security?.EditRoom;
     };
 
     return this.selection.every((x) => canDisableQuota(x));
   }
 
   get hasRoomsToChangeQuota() {
-    const { isOwner, isAdmin } = this.authStore.userStore.user;
     const { isDefaultRoomsQuotaSet } = this.authStore.currentQuotaStore;
 
     const canChangeQuota = (item) => {
-      if (!isOwner && !isAdmin) return false;
+      if (!isDefaultRoomsQuotaSet) return false;
 
-      if (isAdmin && !item.security?.EditRoom) return false;
-
-      return isDefaultRoomsQuotaSet;
+      return item.security?.EditRoom;
     };
 
     return this.selection.every((x) => canChangeQuota(x));

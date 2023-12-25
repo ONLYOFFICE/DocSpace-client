@@ -1,6 +1,6 @@
 import { inject, observer } from "mobx-react";
 import { tablet } from "@docspace/components/utils/device";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import UsersTypeRow from "./UsersTypeRow";
 
@@ -23,10 +23,17 @@ const StyledRowContainer = styled(RowContainer)`
     height: 61px;
     position: absolute;
     z-index: 201;
-    left: -16px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            right: -16px;
+          `
+        : css`
+            left: -16px;
+          `}
     width: 100%;
 
-    margin-top: -37.5px;
+    margin-top: -35.5px;
 
     .table-container_group-menu {
       padding: 0px 16px;
@@ -35,7 +42,14 @@ const StyledRowContainer = styled(RowContainer)`
     }
 
     .table-container_group-menu-checkbox {
-      margin-left: 7px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-right: 8px;
+            `
+          : css`
+              margin-left: 8px;
+            `}
     }
 
     .table-container_group-menu-separator {

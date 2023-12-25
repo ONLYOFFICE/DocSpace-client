@@ -1,6 +1,5 @@
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
-
+import styled, { css } from "styled-components";
 import Text from "@docspace/components/text";
 import Box from "@docspace/components/box";
 import RowContent from "@docspace/components/row-content";
@@ -11,7 +10,14 @@ const StyledRowContent = styled(RowContent)`
 
   .row-main-container-wrapper {
     width: 100%;
-    margin-right: 0px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 0px;
+          `
+        : css`
+            margin-right: 0px;
+          `}
   }
 
   .rowMainContainer {

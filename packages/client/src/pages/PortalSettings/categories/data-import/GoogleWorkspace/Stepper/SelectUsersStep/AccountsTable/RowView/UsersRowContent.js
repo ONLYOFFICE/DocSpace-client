@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Text from "@docspace/components/text";
 import Box from "@docspace/components/box";
 import RowContent from "@docspace/components/row-content";
@@ -12,7 +12,14 @@ const StyledRowContent = styled(RowContent)`
   }
 
   .username {
-    margin-right: 5px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 5px;
+          `
+        : css`
+            margin-right: 5px;
+          `}
     font-size: 14px;
     font-weight: 600;
     color: ${(props) => props.theme.client.settings.migration.subtitleColor};

@@ -1,6 +1,6 @@
 import { inject, observer } from "mobx-react";
 import { tablet } from "@docspace/components/utils/device";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import EmptyScreenContainer from "@docspace/components/empty-screen-container";
 import IconButton from "@docspace/components/icon-button";
@@ -34,7 +34,14 @@ const StyledRow = styled(Row)`
   .row-header-item {
     display: flex;
     align-items: center;
-    margin-left: 7px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: 6px;
+          `
+        : css`
+            margin-left: 6px;
+          `}
   }
 
   .row-header-title {

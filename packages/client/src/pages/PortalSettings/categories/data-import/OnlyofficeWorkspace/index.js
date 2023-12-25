@@ -4,7 +4,7 @@ import { Trans, withTranslation } from "react-i18next";
 import { getStepTitle, getWorkspaceStepDescription } from "../../../utils";
 import { tablet, isMobile } from "@docspace/components/utils/device";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import StepContent from "./Stepper";
 import BreakpointWarning from "SRC_DIR/components/BreakpointWarning";
@@ -29,7 +29,15 @@ const WorkspaceWrapper = styled.div`
   }
 
   .step-counter {
-    margin-right: 5px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 5px;
+          `
+        : css`
+            margin-right: 5px;
+          `}
+
     font-size: 16px;
     font-weight: 700;
     color: ${(props) => props.theme.client.settings.migration.subtitleColor};
@@ -93,17 +101,19 @@ const OnlyofficeWorkspace = ({
     </Text>
   );
 
+  const tooltipStyle = {
+    display: "inline-block",
+    position: "relative",
+    bottom: "-2px",
+    margin: "0px 5px",
+  };
+
   const renderTooltip = (
     <HelpButton
       place="bottom"
       offsetRight={0}
       getContent={helpContent}
-      style={{
-        display: "inline-block",
-        position: "relative",
-        bottom: "-2px",
-        marginLeft: "4px",
-      }}
+      style={tooltipStyle}
     />
   );
 

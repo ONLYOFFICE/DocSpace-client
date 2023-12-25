@@ -80,7 +80,7 @@ const SeventhStep = ({
         <HelpButton
           place="right"
           offsetRight={0}
-          style={{ marginLeft: "4px" }}
+          style={{ margin: "0px 5px" }}
           tooltipContent={
             <Text fontSize="12px">{t("Settings:WelcomeLetterTooltip")}</Text>
           }

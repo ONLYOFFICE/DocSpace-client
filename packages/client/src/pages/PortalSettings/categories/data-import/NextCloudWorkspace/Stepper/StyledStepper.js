@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import TableContainer from "@docspace/components/table-container/TableContainer";
 import { Base } from "@docspace/components/themes";
 
@@ -68,8 +68,14 @@ export const StyledTableContainer = styled(TableContainer)`
 
   .table-container_header {
     position: absolute;
-    padding: 0px 28px;
-    padding-right: 15px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding: 0px 28px 0 15px;
+          `
+        : css`
+            padding: 0px 15px 0 28px;
+          `}
   }
 
   .header-container-text {

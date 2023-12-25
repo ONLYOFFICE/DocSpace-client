@@ -5,11 +5,19 @@ import { useTranslation } from "react-i18next";
 import Box from "@docspace/components/box";
 import Text from "@docspace/components/text";
 import Button from "@docspace/components/button";
+import Cron from "@docspace/components/cron";
 
 import ProgressContainer from "./ProgressContainer";
 import ToggleAutoSync from "./ToggleAutoSync";
 
-const SyncContainer = ({ isLdapAvailable, isLdapEnabled, syncLdap }) => {
+const SyncContainer = ({
+  isLdapAvailable,
+  isLdapEnabled,
+  syncLdap,
+  onChangeCron,
+  cron,
+  nextSyncDate,
+}) => {
   const { t } = useTranslation(["Ldap", "Common"]);
 
   return (
@@ -48,6 +56,34 @@ const SyncContainer = ({ isLdapAvailable, isLdapEnabled, syncLdap }) => {
       <ProgressContainer />
 
       <ToggleAutoSync isLDAPAvailable={isLdapAvailable} />
+
+      <Text
+        fontSize="13px"
+        fontWeight={400}
+        lineHeight="20px"
+        className="ldap_cron-title"
+        noSelect
+      >
+        {t("Here you can set how often you want to auto sync LDAP users")}
+      </Text>
+
+      <div className="ldap_cron-container">
+        <Cron value={cron} setValue={onChangeCron} />
+      </div>
+
+      {nextSyncDate && (
+        <Text
+          fontSize="12px"
+          fontWeight={600}
+          lineHeight="16px"
+          color={"#A3A9AE"}
+          noSelect
+        >
+          {`${t("Next synchronization")}: ${nextSyncDate
+            .toUTC()
+            .toFormat("DDDD tt")}`}
+        </Text>
+      )}
     </Box>
   );
 };
@@ -55,11 +91,15 @@ const SyncContainer = ({ isLdapAvailable, isLdapEnabled, syncLdap }) => {
 export default inject(({ auth, ldapStore }) => {
   const { currentQuotaStore } = auth;
   const { isLdapAvailable } = currentQuotaStore;
-  const { isLdapEnabled, syncLdap } = ldapStore;
+  const { isLdapEnabled, syncLdap, onChangeCron, cron, nextSyncDate } =
+    ldapStore;
 
   return {
     isLdapAvailable,
     isLdapEnabled,
     syncLdap,
+    onChangeCron,
+    cron,
+    nextSyncDate,
   };
 })(observer(SyncContainer));

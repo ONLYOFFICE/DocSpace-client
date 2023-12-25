@@ -6,6 +6,7 @@ import {
   syncLdap,
   getCronLdap,
 } from "@docspace/common/api/settings";
+import { getNextSynchronization } from "@docspace/components/cron";
 import { makeAutoObservable } from "mobx";
 
 const constants = {
@@ -67,7 +68,8 @@ class LdapFormStore {
   groupAttribute = "member";
   groupNameAttribute = "cn";
 
-  cron = null;
+  cron = "* * * * *";
+  nextSyncDate = "";
 
   inProgress = false;
   progressBarIntervalId = null;
@@ -540,6 +542,11 @@ class LdapFormStore {
     console.error(errorMessage);
   };
 
+  onChangeCron = (cron) => {
+    this.setCron(cron);
+    this.setNextSyncDate(cron);
+  };
+
   toggleLdap = () => {
     this.isLdapEnabled = !this.isLdapEnabled;
 
@@ -562,6 +569,15 @@ class LdapFormStore {
 
   setIsTlsEnabled = (enabled) => {
     this.isTlsEnabled = enabled;
+  };
+
+  setCron = (cron) => {
+    this.cron = cron;
+  };
+
+  setNextSyncDate = (cron) => {
+    const date = getNextSynchronization(cron);
+    this.nextSyncDate = date;
   };
 
   setIsSslEnabled = (enabled) => {

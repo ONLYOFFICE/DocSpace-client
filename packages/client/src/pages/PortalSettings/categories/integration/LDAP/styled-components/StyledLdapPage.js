@@ -77,6 +77,14 @@ const StyledLdapPage = styled(Box)`
     grid-gap: 12px;
   }
 
+  .ldap_cron-title {
+    margin-top: 20px;
+  }
+
+  .ldap_cron-container {
+    margin: 12px 0;
+  }
+
   .ldap_group-filter {
     grid-column: span 2;
   }

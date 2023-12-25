@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import * as React from "react";
 
 import {
@@ -15,7 +16,7 @@ import {
   SwipeableState,
   UP,
   Vector2,
-  Tuple,
+  // Tuple,
   Point,
 } from "./types";
 
@@ -52,14 +53,15 @@ function getDirection(
   absX: number,
   absY: number,
   deltaX: number,
-  deltaY: number
+  deltaY: number,
 ): SwipeDirections {
   if (absX > absY) {
     if (deltaX > 0) {
       return RIGHT;
     }
     return LEFT;
-  } else if (deltaY > 0) {
+  }
+  if (deltaY > 0) {
     return DOWN;
   }
   return UP;
@@ -69,27 +71,24 @@ function getDistance(p1: Point, p2: Point): number {
   return Math.hypot(p2.x - p1.x, p2.y - p1.y);
 }
 
-
-
-function getXYfromEvent(event: TouchEvent): Tuple<Point> {
-  return [...event.touches]
-    .map((touch) =>
-      ({ x: touch.pageX, y: touch.pageY })
-    ) as Tuple<Point>;
-}
+// function getXYfromEvent(event: TouchEvent): Tuple<Point> {
+//   return [...event.touches].map((touch) => ({
+//     x: touch.pageX,
+//     y: touch.pageY,
+//   })) as Tuple<Point>;
+// }
 
 function getMiddleSegment(p1: Point, p2: Point): Point {
   return {
     x: (p1.x + p2.x) / 2,
     y: (p1.y + p2.y) / 2,
-  }
+  };
 }
 
 const getPointByPageCoordinates = (touch: Touch): Point => ({
   x: touch.pageX,
   y: touch.pageY,
 });
-
 
 function rotateXYByAngle(pos: Vector2, angle: number): Vector2 {
   if (angle === 0) return pos;
@@ -103,19 +102,19 @@ function rotateXYByAngle(pos: Vector2, angle: number): Vector2 {
 
 function getHandlers(
   set: Setter,
-  handlerProps: { trackMouse: boolean | undefined }
+  handlerProps: { trackMouse: boolean | undefined },
 ): [
-    {
-      ref: (element: HTMLElement | null) => void;
-      onMouseDown?: (event: React.MouseEvent) => void;
-    },
-    AttachTouch
-  ] {
+  {
+    ref: (element: HTMLElement | null) => void;
+    onMouseDown?: (event: React.MouseEvent) => void;
+  },
+  AttachTouch,
+] {
   const onStart = (event: HandledEvents) => {
     const isTouch = "touches" in event;
     event.stopPropagation();
 
-    if (!isTouch) return
+    if (!isTouch) return;
 
     set((state, props) => {
       // setup mouse listeners on document to track swipe since swipe can leave container
@@ -124,20 +123,16 @@ function getHandlers(
       //   document.addEventListener(mouseUp, onUp);
       // }
 
-
       const { clientX, clientY } = isTouch ? event.touches[0] : event;
       const xy = rotateXYByAngle([clientX, clientY], props.rotationAngle);
 
-      props.onTouchStartOrOnMouseDown &&
-        props.onTouchStartOrOnMouseDown({ event });
+      props.onTouchStartOrOnMouseDown?.({ event });
 
       const time = new Date().getTime();
 
-
       if (event.touches.length > 1) {
-        state.lastTouchStart = 0
+        state.lastTouchStart = 0;
       }
-
 
       if (time - state.lastTouchStart < 300) {
         state.isDoubleTap = true;
@@ -159,7 +154,7 @@ function getHandlers(
         xy,
         start: event.timeStamp || 0,
         fingers: isTouch ? event.touches.length : 0,
-        isDoubleTap: state.isDoubleTap
+        isDoubleTap: state.isDoubleTap,
       };
     });
   };
@@ -169,12 +164,13 @@ function getHandlers(
       const isTouch = "touches" in event;
 
       if (state.isDoubleTap || !isTouch) {
-        return state
+        return state;
       }
 
-
       if (state.first) {
-        state.startTouches = [...event.touches].map(touch => getPointByPageCoordinates(touch));
+        state.startTouches = [...event.touches].map((touch) =>
+          getPointByPageCoordinates(touch),
+        );
 
         const fingers = event.touches.length;
 
@@ -187,7 +183,6 @@ function getHandlers(
         }
       }
 
-
       // Discount a swipe if additional touches are present after
       // a swipe has started.
       if (isTouch && event.touches.length > 1) {
@@ -195,16 +190,16 @@ function getHandlers(
           const touchFist = event.touches[0];
           const touchSecond = event.touches[1];
 
-          const move = getXYfromEvent(event);
+          // const move = getXYfromEvent(event);
 
           const middleSegment = getMiddleSegment(
             { x: touchFist.clientX, y: touchFist.clientY },
-            { x: touchSecond.clientX, y: touchSecond.clientY }
-          )
+            { x: touchSecond.clientX, y: touchSecond.clientY },
+          );
           const distance = getDistance(
             { x: touchFist.clientX, y: touchFist.clientY },
-            { x: touchSecond.clientX, y: touchSecond.clientY }
-          )
+            { x: touchSecond.clientX, y: touchSecond.clientY },
+          );
 
           if (state.lastDistance === 0) {
             state.lastDistance = distance;
@@ -218,7 +213,7 @@ function getHandlers(
             ...state,
             first: false,
             lastDistance: distance,
-          }
+          };
         }
 
         return state;
@@ -246,8 +241,14 @@ function getHandlers(
         typeof props.delta === "number"
           ? props.delta
           : props.delta[dir.toLowerCase() as Lowercase<SwipeDirections>] ||
-          defaultProps.delta;
-      if (absX < delta && absY < delta && !state.swiping) return state;
+            defaultProps.delta;
+      if (
+        typeof delta === "number" &&
+        absX < delta &&
+        absY < delta &&
+        !state.swiping
+      )
+        return state;
 
       const eventData = {
         absX,
@@ -264,10 +265,10 @@ function getHandlers(
       };
 
       // call onSwipeStart if present and is first swipe event
-      eventData.first && props.onSwipeStart && props.onSwipeStart(eventData);
+      if (eventData.first) props.onSwipeStart?.(eventData);
 
       // call onSwiping if present
-      props.onSwiping && props.onSwiping(eventData);
+      props.onSwiping?.(eventData);
 
       // track if a swipe is cancelable (handler for swiping or swiped(dir) exists)
       // so we can call preventDefault if needed
@@ -306,33 +307,38 @@ function getHandlers(
         // if swipe is less than duration fire swiped callbacks
         if (event.timeStamp - state.start < props.swipeDuration) {
           eventData = { ...state.eventData, event };
-          props.onSwiped && props.onSwiped(eventData);
+          props.onSwiped?.(eventData);
 
           const onSwipedDir =
             props[
-            `onSwiped${eventData.dir}` as keyof SwipeableDirectionCallbacks
+              `onSwiped${eventData.dir}` as keyof SwipeableDirectionCallbacks
             ];
-          onSwipedDir && onSwipedDir(eventData);
+          onSwipedDir?.(eventData);
         }
       } else {
-        props.onTap && props.onTap({ event });
+        props.onTap?.({ event });
       }
 
-      props.onTouchEndOrOnMouseUp && props.onTouchEndOrOnMouseUp({ event });
+      props.onTouchEndOrOnMouseUp?.({ event });
 
-      return { ...state, ...initialState, eventData, lastTouchStart: state.lastTouchStart };
+      return {
+        ...state,
+        ...initialState,
+        eventData,
+        lastTouchStart: state.lastTouchStart,
+      };
     });
+  };
+
+  const onUp = (e: HandledEvents) => {
+    cleanUpMouse();
+    onEnd(e);
   };
 
   const cleanUpMouse = () => {
     // safe to just call removeEventListener
     document.removeEventListener(mouseMove, onMove);
     document.removeEventListener(mouseUp, onUp);
-  };
-
-  const onUp = (e: HandledEvents) => {
-    cleanUpMouse();
-    onEnd(e);
   };
 
   /**
@@ -348,7 +354,7 @@ function getHandlers(
    *
    */
   const attachTouch: AttachTouch = (el, props) => {
-    let cleanup = () => { };
+    let cleanup = () => {};
     if (el && el.addEventListener) {
       const baseOptions = {
         ...defaultProps.touchEventOptions,
@@ -358,20 +364,20 @@ function getHandlers(
       const tls: [
         typeof touchStart | typeof touchMove | typeof touchEnd,
         (e: HandledEvents) => void,
-        { passive: boolean }
+        { passive: boolean },
       ][] = [
-          [touchStart, onStart, baseOptions],
-          // preventScrollOnSwipe option supersedes touchEventOptions.passive
-          [
-            touchMove,
-            onMove,
-            {
-              ...baseOptions,
-              ...(props.preventScrollOnSwipe ? { passive: false } : {}),
-            },
-          ],
-          [touchEnd, onEnd, baseOptions],
-        ];
+        [touchStart, onStart, baseOptions],
+        // preventScrollOnSwipe option supersedes touchEventOptions.passive
+        [
+          touchMove,
+          onMove,
+          {
+            ...baseOptions,
+            ...(props.preventScrollOnSwipe ? { passive: false } : {}),
+          },
+        ],
+        [touchEnd, onEnd, baseOptions],
+      ];
       tls.forEach(([e, h, o]) => el.addEventListener(e, h, o));
       // return properly scoped cleanup method for removing listeners, options not required
       cleanup = () => tls.forEach(([e, h]) => el.removeEventListener(e, h));
@@ -391,7 +397,7 @@ function getHandlers(
       // if new DOM el clean up old DOM and reset cleanUpTouch
       if (state.el && state.el !== el && state.cleanUpTouch) {
         state.cleanUpTouch();
-        addState.cleanUpTouch = void 0;
+        addState.cleanUpTouch = undefined;
       }
       // only attach if we want to track touch
       if (props.trackTouch && el) {
@@ -420,7 +426,7 @@ function updateTransientState(
   state: SwipeableState,
   props: SwipeablePropsWithDefaultOptions,
   previousProps: SwipeablePropsWithDefaultOptions,
-  attachTouch: AttachTouch
+  attachTouch: AttachTouch,
 ) {
   // if trackTouch is off or there is no el, then remove handlers if necessary and exit
   if (!props.trackTouch || !state.el) {
@@ -460,7 +466,7 @@ function updateTransientState(
   return state;
 }
 
-export function useSwipeable(options: any) {
+export function useSwipeable(options: { trackMouse: boolean }) {
   const { trackMouse } = options;
   const transientState = React.useRef({ ...initialState });
   const transientProps = React.useRef<SwipeablePropsWithDefaultOptions>({
@@ -479,31 +485,36 @@ export function useSwipeable(options: any) {
     ...options,
   };
   // Force defaults for config properties
-  let defaultKey: keyof ConfigurationOptions;
-  for (defaultKey in defaultProps) {
-    if (transientProps.current[defaultKey] === void 0) {
-      (transientProps.current[defaultKey] as any) = defaultProps[defaultKey];
+
+  Object.keys(defaultProps).forEach((defaultKey) => {
+    if (
+      defaultKey in transientProps.current &&
+      // @ts-expect-error its good
+      transientProps.current[defaultKey] === undefined
+    ) {
+      // @ts-expect-error its good
+      transientProps.current[defaultKey] = defaultProps[defaultKey];
     }
-  }
+  });
 
   const [handlers, attachTouch] = React.useMemo(
     () =>
       getHandlers(
         (stateSetter) =>
-        (transientState.current = stateSetter(
-          transientState.current,
-          transientProps.current
-        )),
-        { trackMouse }
+          (transientState.current = stateSetter(
+            transientState.current,
+            transientProps.current,
+          )),
+        { trackMouse },
       ),
-    [trackMouse]
+    [trackMouse],
   );
 
   transientState.current = updateTransientState(
     transientState.current,
     transientProps.current,
     previousProps.current,
-    attachTouch
+    attachTouch,
   );
 
   return handlers;

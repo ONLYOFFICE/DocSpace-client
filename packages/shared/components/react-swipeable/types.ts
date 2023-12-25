@@ -1,5 +1,3 @@
-// @ts-expect-error TS(2440): Import declaration conflicts with local declaratio... Remove this comment to see the full error message
-import { Point } from './types';
 import * as React from "react";
 
 export const LEFT = "Left";
@@ -9,13 +7,12 @@ export const DOWN = "Down";
 export type HandledEvents = React.MouseEvent | TouchEvent | MouseEvent;
 export type Vector2 = [number, number];
 export type Tuple<T> = [T, T];
-export type Point = { x: number; y: number }
+export type Point = { x: number; y: number };
 export type ZoomEvent = {
-  event: TouchEvent,
-  scale: number,
-  middleSegment: Point,
-}
-
+  event: TouchEvent;
+  scale: number;
+  middleSegment: Point;
+};
 
 export type SwipeDirections =
   | typeof LEFT
@@ -110,13 +107,12 @@ export type SwipeableCallbacks = SwipeableDirectionCallbacks & {
 
   /**
    * Called for `touchstart` and `mousedown`.
-  */
+   */
   onTouchStartOrOnMouseDown: TapCallback;
   /**
    * Called for `touchend` and `mouseup`.
-  */
+   */
   onTouchEndOrOnMouseUp: TapCallback;
-
 
   onZoom: ZoomCallback;
   onDoubleTap: (event: TouchEvent) => void;
@@ -189,10 +185,10 @@ export type SwipeableState = {
 
 export type StateSetter = (
   state: SwipeableState,
-  props: SwipeablePropsWithDefaultOptions
+  props: SwipeablePropsWithDefaultOptions,
 ) => SwipeableState;
 export type Setter = (stateSetter: StateSetter) => void;
 export type AttachTouch = (
   el: HTMLElement,
-  props: SwipeablePropsWithDefaultOptions
+  props: SwipeablePropsWithDefaultOptions,
 ) => () => void;

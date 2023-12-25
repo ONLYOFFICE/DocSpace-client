@@ -78,6 +78,7 @@ class DetailsHelper {
     this.isVisitor = props.isVisitor;
     this.isCollaborator = props.isCollaborator;
     this.selectTag = props.selectTag;
+    this.isDefaultRoomsQuotaSet = props.isDefaultRoomsQuotaSet;
   }
 
   getPropertyList = () => {
@@ -195,7 +196,9 @@ class DetailsHelper {
       case "Tags":
         return this.t("Common:Tags");
       case "Storage":
-        return this.t("Common:Storage");
+        return this.isDefaultRoomsQuotaSet
+          ? this.t("Common:StorageAndQuota")
+          : this.t("Common:Storage");
     }
   };
 

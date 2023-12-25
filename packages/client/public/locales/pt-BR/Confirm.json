@@ -28,5 +28,10 @@
   "SetAppTitle": "Configure seu aplicativo autenticador",
   "SuccessDeactivate": "Sua conta foi desativada com sucesso. Em 10 segundos você será redirecionado para o <1>site</1>.",
   "SuccessReactivate": "Sua conta foi reativada com sucesso. Em 10 segundos você será redirecionado para o <1>portal</1>.",
-  "SuccessRemoved": "Sua conta foi removida com sucesso. Em 10 segundos você será redirecionado para o <1>site</1>."
+  "SuccessRemoved": "Sua conta foi removida com sucesso. Em 10 segundos você será redirecionado para o <1>site</1>.",
+  "WelcomeRegister": "Para começar cadastre-se",
+  "WelcomeRegisterViaSocial": "Para começar cadastre-se ou faça login através das redes sociais",
+  "WelcomeRegisterViaSSO": "Para começar, registre-se ou faça login via SSO",
+  "WelcomeToDocspace": "Bem-vindo ao nosso DocSpace!",
+  "WelcomeToRoom": "Bem-vindo à sala <1>{{ roomName }}</1>!"
 }

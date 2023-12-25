@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -25,7 +25,10 @@ import {
   combineUrl,
   createPasswordHash,
   convertLanguage,
+  setCookie,
 } from "@docspace/common/utils";
+import { LANGUAGE, COOKIE_EXPIRATION_YEAR } from "@docspace/common/constants";
+import BetaBadge from "@docspace/common/components/BetaBadge";
 
 import {
   Wrapper,
@@ -254,13 +257,12 @@ const Wizard = (props) => {
         wizardToken,
         analytics
       );
+
+      setCookie(LANGUAGE, selectedLanguage.key, {
+        "max-age": COOKIE_EXPIRATION_YEAR,
+      });
+
       setWizardComplete();
-
-      // navigate(combineUrl(window.DocSpaceConfig?.proxy?.url, "/login"));
-
-      window.location.replace(
-        combineUrl(window.DocSpaceConfig?.proxy?.url, "/login")
-      );
     } catch (error) {
       console.error(error);
       setIsCreated(false);
@@ -379,7 +381,7 @@ const Wizard = (props) => {
                 <FileInput
                   scale
                   size="large"
-                  accept=".lic"
+                  accept={[".lic"]}
                   placeholder={t("PlaceholderLicense")}
                   onInput={onLicenseFileHandler}
                   hasError={hasErrorLicense}
@@ -398,24 +400,29 @@ const Wizard = (props) => {
               <Text color="#A3A9AE" fontWeight={400}>
                 {t("Common:Language")}
               </Text>
-              <ComboBox
-                withoutPadding
-                directionY="both"
-                options={cultureNames}
-                selectedOption={selectedLanguage}
-                onSelect={onLanguageSelect}
-                isDisabled={isCreated}
-                scaled={isMobile()}
-                scaledOptions={false}
-                size="content"
-                showDisabledItems={true}
-                dropDownMaxHeight={364}
-                manualWidth="250px"
-                isDefaultMode={!isMobile()}
-                withBlur={isMobile()}
-                fillIcon={false}
-                modernView={true}
-              />
+              <div className="wrapper__language-selector">
+                <ComboBox
+                  withoutPadding
+                  directionY="both"
+                  options={cultureNames || []}
+                  selectedOption={selectedLanguage || {}}
+                  onSelect={onLanguageSelect}
+                  isDisabled={isCreated}
+                  scaled={isMobile()}
+                  scaledOptions={false}
+                  size="content"
+                  showDisabledItems={true}
+                  dropDownMaxHeight={364}
+                  manualWidth="250px"
+                  isDefaultMode={!isMobile()}
+                  withBlur={isMobile()}
+                  fillIcon={false}
+                  modernView={true}
+                />
+                {selectedLanguage?.isBeta && (
+                  <BetaBadge withOutFeedbackLink place="bottom" />
+                )}
+              </div>
             </StyledInfo>
             <StyledInfo>
               <Text color="#A3A9AE" fontWeight={400}>
@@ -425,8 +432,8 @@ const Wizard = (props) => {
                 textOverflow
                 withoutPadding
                 directionY="both"
-                options={timezones}
-                selectedOption={selectedTimezone}
+                options={timezones || []}
+                selectedOption={selectedTimezone || {}}
                 onSelect={onTimezoneSelect}
                 isDisabled={isCreated}
                 scaled={isMobile()}

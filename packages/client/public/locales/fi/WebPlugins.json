@@ -1,1 +1,18 @@
-{}
+{
+  "DeletePlugin": "Poista liitännäinen",
+  "DeletePluginDescription": "Tämä liitännäinen ei ole enää saatavilla DocSpacen käyttäjille. Haluako varmasti jatkaa?",
+  "DeletePluginTitle": "Poistetaanko liitännäinen?",
+  "Description": "Voit lisätä liitännäiset laajentamaan DocSpacen toiminnallisuutta extraominaisuuksilla. Klikkaa ladataksesi liitännäisen ja valitse liitännäistiedosto ZIP-arkistossa.",
+  "ExpandFunctionality": "Laajenna toimintoja SDK-laajennuksen avulla",
+  "GoToRepo": "Siirry arkistoon",
+  "Metadata": "Metatiedot",
+  "NeedSettings": "Tarvitsee sisäänpääsyasetukset",
+  "NoPlugins": "Ei liitännäisiä lisätty",
+  "NotNeedSettings": "Tarvitsee sisäänpääsyasetukset",
+  "PluginSamples": "Laajennusmallit",
+  "PluginSDK": "SDK-laajennus",
+  "PluginSDKDescription": "Käyttämällä SDK-laajennusta voit laajentaa DocSpacen toiminnallisuutta, yhdistää kolmansien osapuolien palveluihin tai parantaa olemassaolevaa käyttäjäkokemusta. Täältä löydät GitHubissa saatavilla olevat laajennusmallit.",
+  "PluginSDKInstruction": "Klikkaa painiketta saadaksesi yksityiskohtaiset ohjeet omien laajennusten luomiseen.",
+  "PluginsHelp": "Liitännäiset mahdollistavat DocSpacen toiminnallisuuden laajentamisen ",
+  "UploadPlugin": "Lataa liitännäinen"
+}

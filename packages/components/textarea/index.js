@@ -78,7 +78,7 @@ const Textarea = ({
   }
 
   function onTextareaClick() {
-    areaRef.current.select();
+    if (enableCopy) areaRef.current.select();
   }
 
   useEffect(() => {
@@ -104,7 +104,7 @@ const Textarea = ({
       className="textarea-wrapper"
       isJSONField={isJSONField}
       enableCopy={enableCopy}
-      onFocus={enableCopy ? onTextareaClick : undefined}
+      onClick={onTextareaClick}
     >
       {enableCopy && (
         <CopyIconWrapper
@@ -122,7 +122,6 @@ const Textarea = ({
         themeId={ThemeType.Textarea}
         className={className}
         style={style}
-        stype="preMediumBlack"
         isDisabled={isDisabled}
         hasError={isError}
         heightScale={heightScale}
@@ -136,6 +135,7 @@ const Textarea = ({
           </Numeration>
         )}
         <StyledTextarea
+          heightTextArea={textareaHeight}
           id={id}
           paddingLeftProp={paddingLeftProp}
           isJSONField={isJSONField}

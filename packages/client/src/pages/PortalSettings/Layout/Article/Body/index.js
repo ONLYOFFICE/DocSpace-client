@@ -36,6 +36,7 @@ const ArticleBodyContent = (props) => {
     isCommunity,
     currentDeviceType,
     isProfileLoading,
+    limitedAccessSpace
   } = props;
 
   const [selectedKeys, setSelectedKeys] = React.useState([]);
@@ -225,7 +226,7 @@ const ArticleBodyContent = (props) => {
       }
     }
 
-    if (!isOwner || standalone) {
+    if (!isOwner || limitedAccessSpace) {
       const index = resultTree.findIndex((n) => n.tKey === "PortalDeletion");
       if (index !== -1) {
         resultTree.splice(index, 1);
@@ -282,7 +283,7 @@ export default inject(({ auth, common, clientLoadingStore }) => {
   const { isNotPaidPeriod } = currentTariffStatusStore;
   const { user } = userStore;
   const { isOwner } = user;
-  const { standalone, showText, toggleArticleOpen, currentDeviceType } =
+  const { standalone, showText, toggleArticleOpen, currentDeviceType, limitedAccessSpace } =
     settingsStore;
 
   const isProfileLoading =
@@ -302,6 +303,7 @@ export default inject(({ auth, common, clientLoadingStore }) => {
     isCommunity,
     currentDeviceType,
     isProfileLoading,
+    limitedAccessSpace,
   };
 })(
   withLoading(

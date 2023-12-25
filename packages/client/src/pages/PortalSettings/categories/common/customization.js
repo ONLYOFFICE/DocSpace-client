@@ -79,12 +79,17 @@ const Customization = (props) => {
     viewMobile,
     isSettingPaid,
     enablePortalRename,
+    resetIsInit,
   } = props;
 
   const isLoadedSetting = isLoaded && tReady;
 
   useEffect(() => {
     setDocumentTitle(t("Customization"));
+
+    return () => {
+      resetIsInit();
+    };
   }, []);
 
   useEffect(() => {
@@ -112,8 +117,13 @@ const Customization = (props) => {
       <WelcomePageSettings isMobileView={viewMobile} />
       <StyledSettingsSeparator />
       <DNSSettings isMobileView={viewMobile} />
-      <StyledSettingsSeparator />
-      {enablePortalRename && <PortalRenaming isMobileView={viewMobile} />}
+
+      {enablePortalRename && (
+        <>
+          <StyledSettingsSeparator />
+          <PortalRenaming isMobileView={viewMobile} />
+        </>
+      )}
     </StyledComponent>
   );
 };
@@ -122,13 +132,14 @@ export default inject(({ auth, common }) => {
   const { currentQuotaStore, settingsStore } = auth;
   const { enablePortalRename } = settingsStore;
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
-  const { isLoaded, setIsLoadedCustomization } = common;
+  const { isLoaded, setIsLoadedCustomization, resetIsInit } = common;
 
   return {
     isLoaded,
     setIsLoadedCustomization,
     isSettingPaid: isBrandingAndCustomizationAvailable,
     enablePortalRename,
+    resetIsInit,
   };
 })(
   withLoading(withTranslation(["Settings", "Common"])(observer(Customization)))

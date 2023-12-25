@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import DomHelpers from "../utils/domHelpers";
 import { classNames } from "../utils/classNames";
+import { trimSeparator } from "../utils/trimSeparator";
 import { CSSTransition } from "react-transition-group";
 import { withTheme } from "styled-components";
 
@@ -54,7 +55,7 @@ class ContextMenu extends Component {
 
   show = (e) => {
     if (this.props.getContextModel) {
-      const model = this.props.getContextModel();
+      const model = trimSeparator(this.props.getContextModel());
       this.setState({ model });
     }
 
@@ -403,7 +404,7 @@ class ContextMenu extends Component {
                       />
                     </div>
                   )}
-                  <Text className="text" truncate={true}>
+                  <Text className="text" truncate={true} dir="auto">
                     {this.props.header.title}
                   </Text>
                 </div>

@@ -42,6 +42,7 @@ const PureHome = (props) => {
     setToPreviewFile,
     playlist,
 
+    folderSecurity,
     getFileInfo,
     gallerySelected,
     setIsUpdatingRowItem,
@@ -123,6 +124,7 @@ const PureHome = (props) => {
     loadCurrentUser,
     updateProfileCulture,
     getRooms,
+    setSelectedFolder,
   } = props;
 
   const location = useLocation();
@@ -158,6 +160,7 @@ const PureHome = (props) => {
     removeFirstUrl,
 
     gallerySelected,
+    folderSecurity,
   });
 
   const { showUploadPanel } = useOperations({
@@ -224,6 +227,7 @@ const PureHome = (props) => {
     window.addEventListener("popstate", onClickBack);
 
     return () => {
+      setSelectedFolder(null);
       window.removeEventListener("popstate", onClickBack);
     };
   }, []);
@@ -351,6 +355,7 @@ export default inject(
     selectedFolderStore,
     clientLoadingStore,
   }) => {
+    const { setSelectedFolder, security: folderSecurity } = selectedFolderStore;
     const {
       secondaryProgressDataStore,
       primaryProgressDataStore,
@@ -491,7 +496,7 @@ export default inject(
       isRecycleBinFolder,
       isPrivacyFolder,
       isVisitor: auth.userStore.user.isVisitor,
-
+      folderSecurity,
       primaryProgressDataVisible,
       primaryProgressDataPercent,
       primaryProgressDataIcon,
@@ -578,6 +583,7 @@ export default inject(
       loadCurrentUser: auth.userStore.loadCurrentUser,
       updateProfileCulture,
       getRooms,
+      setSelectedFolder,
     };
   }
 )(observer(Home));

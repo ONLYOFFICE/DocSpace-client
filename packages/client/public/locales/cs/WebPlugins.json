@@ -1,1 +1,18 @@
-{}
+{
+  "DeletePlugin": "Odstranění zásuvného modulu",
+  "DeletePluginDescription": "Tento zásuvný modul již nebude uživatelům služby DocSpace k dispozici. Jste si jisti, že chcete pokračovat?",
+  "DeletePluginTitle": "Smazat zásuvný modul?",
+  "Description": "Můžete přidat zásuvné moduly a rozšířit tak funkce DocSpace o další funkce. Klikněte na tlačítko Nahrát zásuvný modul a vyberte soubor zásuvného modulu v archivu ZIP.",
+  "ExpandFunctionality": "Rozšíření funkcí pomocí sady zásuvných modulů SDK",
+  "GoToRepo": "Přejít do úložiště",
+  "Metadata": "Metadata",
+  "NeedSettings": "Potřebujete zadat nastavení",
+  "NoPlugins": "Nebyly přidány žádné zásuvné moduly",
+  "NotNeedSettings": "Potřebujete zadat nastavení",
+  "PluginSamples": "Ukázky zásuvných modulů",
+  "PluginSDK": "Plugin SDK",
+  "PluginSDKDescription": "Pomocí sady Plugin SDK můžete rozšířit funkčnost svého systému DocSpace, připojit služby třetích stran nebo vylepšit stávající uživatelské prostředí. Zde najdete ukázky zásuvných modulů se zdrojovým kódem, které jsou k dispozici na GitHubu.",
+  "PluginSDKInstruction": "Kliknutím na tlačítko získáte podrobný návod, jak vytvořit vlastní zásuvné moduly.",
+  "PluginsHelp": "Zásuvné moduly umožňují rozšířit funkce DocSpace",
+  "UploadPlugin": "Nahrát zásuvný modul"
+}

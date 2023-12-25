@@ -254,6 +254,7 @@ const SectionFilterContent = ({
   setRoomsFilter,
   standalone,
   currentDeviceType,
+  isRoomAdmin,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -1001,13 +1002,15 @@ const SectionFilterContent = ({
           group: "filter-status",
           label: t("PeopleTranslations:PendingTitle"),
         },
-        {
+      ];
+
+      if (!isRoomAdmin)
+        statusItems.push({
           id: "filter_status-disabled",
           key: 3,
           group: "filter-status",
           label: t("PeopleTranslations:DisabledEmployeeStatus"),
-        },
-      ];
+        });
 
       const typeItems = [
         {
@@ -2095,7 +2098,7 @@ export default inject(
     const { providers } = thirdPartyStore;
 
     const { fetchTags } = tagsStore;
-
+    const { isRoomAdmin } = auth;
     const { user } = auth.userStore;
     const { personal, standalone, currentDeviceType } = auth.settingsStore;
     const {
@@ -2126,6 +2129,7 @@ export default inject(
     const { canSearchByContent } = filesSettingsStore;
 
     return {
+      isRoomAdmin,
       user,
       userId: user?.id,
 

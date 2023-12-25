@@ -87,7 +87,12 @@ const SettingsPluginDialog = ({
           setSaveButtonProps={setSaveButtonProps}
           setModalRequestRunning={setModalRequestRunning}
         />
-        <Info t={t} plugin={plugin} withDelete={withDelete} />
+        <Info
+          t={t}
+          plugin={plugin}
+          withDelete={withDelete}
+          withSeparator={!!customSettingsProps?.children}
+        />
         {withDelete && (
           <Button
             label={t("DeletePlugin")}
@@ -130,7 +135,7 @@ export default inject(({ auth, pluginStore }) => {
 
   const plugin = pluginList.find((p) => p.name === pluginName);
 
-  const withDelete = pluginOptions.includes("delete") && !plugin.system;
+  const withDelete = pluginOptions.delete && !plugin.system;
 
   const pluginSettings = plugin?.getAdminPluginSettings();
 

@@ -1,4 +1,14 @@
 {
+  "ActionCannotBeUndone": "選択された無効なユーザーはDocSpaceから削除されます。この操作は取り消すことができません。",
+  "CannotReassignFiles": "複数のユーザーを一度に削除した場合、そのユーザーのファイルを他のユーザーに再割り当てすることはできません。",
+  "DeleteGroupUsersSuccessMessage": "ユーザーが正常に削除されました。",
+  "DeleteMyDocumentsUser": "このユーザーの「私の文書」セクションにあるすべての個人ファイルおよびフォルダは永久に削除されます。",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} このユーザが作成したルームとそのルームに保存されているドキュメントは、削除を実行する管理者に自動的に再割り当てされます： <strong>{{userPerformedDeletion}} ({{userYou}})</strong>。手動でデータを再割り当てする場合は、別の割り当て先ユーザーを選択することができます。",
   "DeleteUser": "ユーザーを削除します",
-  "SuccessfullyDeleteUserInfoMessage": "ユーザーの削除に成功しました。"
+  "DeleteUserMessage": "{{userCaption}}<strong>{{user}}</strong>は削除されます。このアクションは元に戻せません。",
+  "DeletingUsers": "ユーザーの削除",
+  "PleaseNote": "ご注意ください：",
+  "ReassignDataToAnotherUser": "データを別のユーザーに再割り当てする",
+  "SuccessfullyDeleteUserInfoMessage": "ユーザーの削除に成功しました。",
+  "ToBeAbleToReassignData": "データを再割り当てするためには、一度に一人のユーザーを削除してください。"
 }

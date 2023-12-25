@@ -1,9 +1,11 @@
 {
   "AccountsEmptyScreenText": "Podrobnosti o uživatelích naleznete zde",
+  "Administration": "Správa",
   "AndMoreLabel": "a <strong>{{count}} další</strong>",
   "CreationDate": "Datum vytvoření",
   "Data": "Data",
   "DateModified": "Datum úpravy",
+  "ExpectUsers": "Očekávejte, že uživatelé",
   "FeedCreateFileSeveral": "Přidané soubory",
   "FeedCreateFileSingle": "Vytvořený soubor",
   "FeedCreateFolderSeveral": "Složky přidány",
@@ -26,7 +28,9 @@
   "FeedUpdateUser": "byla přidělena role {{role}}",
   "FileExtension": "Přípona souboru",
   "FilesEmptyScreenText": "Podrobnosti o souboru a složce naleznete zde",
+  "GalleryEmptyScreenText": "Podrobnosti o šabloně formuláře naleznete zde",
   "HistoryEmptyScreenText": "Historie aktivit se zobrazí zde",
+  "InfoBanner": "Seznam pozvaných uživatelů zahrnuje vlastníka a/nebo správce tohoto prostoru DocSpace s plným přístupem do všech místností. Vlastníkovi a/nebo správci nelze přidělit jiná přístupová práva. Po přidání do místnosti budou informováni o všech změnách.",
   "ItemsSelected": "Vybrané položky",
   "LastModifiedBy": "Naposledy upravil(a)",
   "Properties": "Vlastnosti",
@@ -35,5 +39,6 @@
   "StorageType": "Typ úložiště",
   "SubmenuDetails": "Podrobnosti",
   "SubmenuHistory": "Historie",
+  "Users": "Uživatelé",
   "Versions": "Verze"
 }

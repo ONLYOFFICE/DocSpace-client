@@ -69,7 +69,7 @@ const LicenseContainer = (props) => {
         className="payments_file-input"
         scale
         size="base"
-        accept=".lic"
+        accept={[".lic"]}
         placeholder={t("UploadLicenseFile")}
         onInput={onLicenseFileHandler}
         isDisabled={isLicenseUploading || isLoading}

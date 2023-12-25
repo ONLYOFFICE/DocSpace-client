@@ -171,8 +171,8 @@ const NewFilesPanel = (props) => {
       const isMediaActive = playlist.findIndex((el) => el.fileId === id) !== -1;
 
       const isMedia =
-        item?.viewAccessability?.ImageView ||
-        item?.viewAccessability?.MediaView;
+        item?.viewAccessibility?.ImageView ||
+        item?.viewAccessibility?.MediaView;
 
       if (canEdit && providerKey) {
         return addFileToRecentlyViewed(id)
@@ -278,7 +278,7 @@ const NewFilesPanel = (props) => {
           </StyledHeaderContent>
           {!isLoading ? (
             <StyledBody className="files-operations-body">
-              <StyledSharingBody stype="mediumBlack" style={SharingBodyStyle}>
+              <StyledSharingBody style={SharingBodyStyle}>
                 {filesListNode}
               </StyledSharingBody>
             </StyledBody>

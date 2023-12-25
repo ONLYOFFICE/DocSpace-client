@@ -17,6 +17,10 @@
       "path": "packages/editor"
     },
     {
+      "name": "🗂 @docspace/management",
+      "path": "packages/management"
+    },
+    {
       "name": "📦 @docspace/common",
       "path": "packages/common"
     },
@@ -37,7 +41,8 @@
       "🔑 @docspace/login",
       "🚀 @docspace/client",
       "📄 @docspace/editor",
-      "📦 @docspace/common"
+      "📦 @docspace/common",
+      "🗂 @docspace/management"
     ],
     "[javascript]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -108,9 +113,19 @@
             "tooltip": "🛠️ Start the \"frontend install packages\" task"
           },
           {
+            "label": "Update yarn.lock",
+            "task": "Frontend | update yarn.lock",
+            "tooltip": "🛠️ Start the \"frontend update yarn.lock\" task"
+          },
+          {
             "label": "Build",
             "task": "Frontend | build",
             "tooltip": "🛠️ Start the \"frontend build\" task"
+          },
+          {
+            "label": "Build and start prod",
+            "task": "Frontend | build-and-start-prod",
+            "tooltip": "🛠️ Start the \"frontend build and start production\" task"
           },
           {
             "label": "Start",

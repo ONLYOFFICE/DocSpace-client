@@ -11,6 +11,8 @@ import Filter from "@docspace/common/api/people/filter";
 import { getUserList } from "@docspace/common/api/people";
 import Loaders from "@docspace/common/components/Loaders";
 import { EmployeeStatus } from "@docspace/common/constants";
+import { LOADER_TIMEOUT } from "@docspace/common/constants";
+
 import useLoadingWithTimeout from "SRC_DIR/Hooks/useLoadingWithTimeout";
 
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
@@ -57,6 +59,7 @@ const PeopleSelector = ({
   withFooterCheckbox,
   footerCheckboxLabel,
   isChecked,
+  setIsChecked,
   filterUserId,
 }) => {
   const [itemsList, setItemsList] = useState(items);
@@ -64,7 +67,10 @@ const PeopleSelector = ({
   const [total, setTotal] = useState(0);
   const [hasNextPage, setHasNextPage] = useState(true);
   const [isNextPageLoading, setIsNextPageLoading] = useState(false);
-  const [isLoading, setIsLoading] = useLoadingWithTimeout(100, false);
+  const [isLoading, setIsLoading] = useLoadingWithTimeout(
+    LOADER_TIMEOUT,
+    false
+  );
 
   useEffect(() => {
     loadNextPage(0);
@@ -99,6 +105,7 @@ const PeopleSelector = ({
       isAdmin,
       isVisitor,
       isCollaborator,
+      hasAvatar,
     };
   };
 
@@ -231,7 +238,7 @@ const PeopleSelector = ({
         searchEmptyScreenHeader || t("People:NotFoundUsers")
       }
       searchEmptyScreenDescription={
-        searchEmptyScreenDescription || t("SearchEmptyDescription")
+        searchEmptyScreenDescription || t("People:NotFoundUsersDescription")
       }
       hasNextPage={hasNextPage}
       isNextPageLoading={isNextPageLoading}
@@ -241,6 +248,7 @@ const PeopleSelector = ({
       withFooterCheckbox={withFooterCheckbox}
       footerCheckboxLabel={footerCheckboxLabel}
       isChecked={isChecked}
+      setIsChecked={setIsChecked}
       searchLoader={<Loaders.SelectorSearchLoader />}
       isSearchLoading={isLoading}
       rowLoader={<Loaders.SelectorRowLoader isUser isContainer={isLoading} />}

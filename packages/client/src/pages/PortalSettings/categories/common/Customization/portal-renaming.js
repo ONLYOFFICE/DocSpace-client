@@ -78,7 +78,8 @@ const PortalRenaming = (props) => {
 
   useEffect(() => {
     setDocumentTitle(t("PortalRenaming"));
-    if (!isLoaded) initSettings().then(() => setIsLoaded(true));
+    const page = isMobileView ? "language-and-time-zone" : "general";
+    if (!isLoaded) initSettings(page).then(() => setIsLoaded(true));
 
     const checkScroll = checkScrollSettingsBlock();
     checkInnerWidth();
@@ -130,8 +131,13 @@ const PortalRenaming = (props) => {
           errorMessage = error;
         }
 
+        toastr.error(errorMessage);
+        setIsShowModal(false);
         setErrorValue(errorMessage);
         saveToSessionStorage("errorValue", errorMessage);
+      })
+      .finally(() => {
+        setIsLoadingPortalNameSave(false);
       });
 
     saveToSessionStorage("portalName", portalName);
@@ -323,6 +329,7 @@ const PortalRenaming = (props) => {
         reminderText={t("YouHaveUnsavedChanges")}
         displaySettings={true}
         hasScroll={hasScroll}
+        saveButtonDisabled={!!errorValue}
         additionalClassSaveButton="portal-renaming-save"
         additionalClassCancelButton="portal-renaming-cancel"
       />

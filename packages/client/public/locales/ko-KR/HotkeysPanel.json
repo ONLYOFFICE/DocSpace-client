@@ -5,6 +5,7 @@
   "HotkeysChangeView": "그리드 및 목록 보기 간 전환",
   "HotkeysClearAll": "모든 선택 삭제",
   "HotkeysClose": "닫기/작업 실행 취소",
+  "HotkeysCopySelected": "선택한 항목을 클립보드에 복사",
   "HotkeysCreateDocument": "문서 만들기",
   "HotkeysCreateFolder": "폴더 만들기",
   "HotkeysCreateForm": "빈 양식 템플릿 만들기",
@@ -12,6 +13,7 @@
   "HotkeysCreatePresentation": "프리젠 테이션을 만듭니다",
   "HotkeysCreateSpreadsheet": "스프레드 시트를 만듭니다",
   "HotkeysCreatingObjects": "항목 생성",
+  "HotkeysCutSelected": "선택한 항목을 클립보드로 잘라내기",
   "HotkeysEnterKey": "입력",
   "HotkeysExtendSelectionDown": "아래쪽으로 선택 확장",
   "HotkeysExtendSelectionLeft": "왼쪽으로 선택 확장",
@@ -25,6 +27,7 @@
   "HotkeysMoveUp": "선택 변경 없이 위로 이동",
   "HotkeysNavigation": "네비게이션",
   "HotkeysOpen": "선택된 항목 열기/작업 확인",
+  "HotkeysPasteSelected": "클립보드에서 선택한 항목 붙여넣기",
   "HotkeysPlayPause": "재생/일시 정지",
   "HotkeysRedoLastUndoneAction": "마지막으로 실행 취소한 작업 다시 실행",
   "HotkeysRemove": "선택된 항목 삭제",
@@ -39,5 +42,7 @@
   "HotkeysSpaceKey": "공간",
   "HotkeysUndoLastAction": "마지막 작업 실행 취소",
   "HotkeysUploadFile": "파일 업로드",
-  "HotkeysUploadingObjects": "항목 업로드"
+  "HotkeysUploadingObjects": "항목 업로드",
+  "HotkeysZoomIn": "확대",
+  "HotkeysZoomOut": "축소"
 }

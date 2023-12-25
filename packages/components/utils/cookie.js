@@ -1,5 +1,16 @@
+import { LANGUAGE } from "COMMON_DIR/constants";
+
 export function getCookie(name) {
-  let matches = document.cookie.match(
+  if (name === LANGUAGE) {
+    const url = new URL(window.location.href);
+    const culture = url.searchParams.get("culture");
+
+    if (url.pathname == "/confirm/LinkInvite" && culture) {
+      return culture;
+    }
+  }
+
+  const matches = document.cookie.match(
     new RegExp(
       "(?:^|; )" +
         name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +

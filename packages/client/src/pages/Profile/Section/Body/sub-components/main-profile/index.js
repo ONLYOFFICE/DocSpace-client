@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import Avatar from "@docspace/components/avatar";
+
 import Text from "@docspace/components/text";
 import Box from "@docspace/components/box";
 import Link from "@docspace/components/link";
@@ -17,6 +18,7 @@ import { isMobileOnly } from "react-device-detect";
 import toastr from "@docspace/components/toast/toastr";
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
 import { getUserRole, convertLanguage } from "@docspace/common/utils";
+import BetaBadge from "@docspace/common/components/BetaBadge";
 
 import { Trans } from "react-i18next";
 //import TimezoneCombo from "./timezoneCombo";
@@ -59,8 +61,10 @@ const MainProfile = (props) => {
   } = props;
 
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
+  const [dimension, setDimension] = useState(window.innerHeight);
   const { interfaceDirection } = useTheme();
   const dirTooltip = interfaceDirection === "rtl" ? "left" : "right";
+
   useEffect(() => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
@@ -68,6 +72,7 @@ const MainProfile = (props) => {
   }, []);
 
   const checkWidth = () => {
+    setDimension(innerHeight);
     if (!isMobileOnly) return;
 
     if (!isMobile()) {
@@ -116,7 +121,6 @@ const MainProfile = (props) => {
         <Link
           isHovered
           isBold
-          color="#333333"
           fontSize="13px"
           href={`${helpLink}/guides/become-translator.aspx`}
           target="_blank"
@@ -147,6 +151,8 @@ const MainProfile = (props) => {
         toastr.error(error && error.message ? error.message : error);
       });
   };
+
+  const isBetaLanguage = selectedLanguage?.isBeta;
 
   return (
     <StyledWrapper>
@@ -302,7 +308,7 @@ const MainProfile = (props) => {
                 scaledOptions={false}
                 size="content"
                 showDisabledItems={true}
-                dropDownMaxHeight={364}
+                dropDownMaxHeight={dimension < 620 ? 200 : 364}
                 manualWidth="280px"
                 isDefaultMode={
                   isMobileHorizontalOrientation
@@ -313,6 +319,7 @@ const MainProfile = (props) => {
                 fillIcon={false}
                 modernView={!isMobile()}
               />
+              {isBetaLanguage && <BetaBadge place="bottom-end" />}
             </div>
           </div>
         </div>
@@ -414,28 +421,31 @@ const MainProfile = (props) => {
                 tooltipContent={tooltipLanguage}
               />
             </Text>
-            <ComboBox
-              className="language-combo-box"
-              directionY={isMobileHorizontalOrientation ? "bottom" : "both"}
-              options={cultureNames}
-              selectedOption={selectedLanguage}
-              onSelect={onLanguageSelect}
-              isDisabled={false}
-              scaled={isMobile()}
-              scaledOptions={false}
-              size="content"
-              showDisabledItems={true}
-              dropDownMaxHeight={364}
-              manualWidth="250px"
-              isDefaultMode={
-                isMobileHorizontalOrientation
-                  ? isMobileHorizontalOrientation
-                  : !isMobile()
-              }
-              withBlur={isMobileHorizontalOrientation ? false : isMobile()}
-              fillIcon={false}
-              modernView={!isMobile()}
-            />
+            <div className="mobile-language__wrapper-combo-box">
+              <ComboBox
+                className="language-combo-box"
+                directionY={isMobileHorizontalOrientation ? "bottom" : "both"}
+                options={cultureNames}
+                selectedOption={selectedLanguage}
+                onSelect={onLanguageSelect}
+                isDisabled={false}
+                scaled={isMobile()}
+                scaledOptions={false}
+                size="content"
+                showDisabledItems={true}
+                dropDownMaxHeight={364}
+                manualWidth="250px"
+                isDefaultMode={
+                  isMobileHorizontalOrientation
+                    ? isMobileHorizontalOrientation
+                    : !isMobile()
+                }
+                withBlur={isMobileHorizontalOrientation ? false : isMobile()}
+                fillIcon={false}
+                modernView={!isMobile()}
+              />
+              {isBetaLanguage && <BetaBadge place="bottom-end" />}
+            </div>
           </div>
         </div>
         {/* <TimezoneCombo title={t("Common:ComingSoon")} /> */}

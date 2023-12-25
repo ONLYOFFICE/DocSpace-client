@@ -399,6 +399,20 @@ const StyledRestoreBackup = styled.div`
     margin-bottom: 16px;
   }
 
+  .restore-backup_button-container {
+    padding-block: 30px;
+    position: sticky;
+    bottom: 0;
+    margin-top: 32px;
+    background-color: ${({ theme }) => theme.backgroundColor};
+
+    @media ${mobile} {
+      position: fixed;
+      padding-inline: 16px;
+      inset-inline: 0;
+    }
+  }
+
   .restore-backup_button {
     @media ${mobile} {
       width: 100%;

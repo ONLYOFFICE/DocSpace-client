@@ -137,7 +137,7 @@ const SimulatePassword = memo(
           iconSize={16}
           iconColor={iconColor}
           hoverColor={iconColor}
-          placeholder={t("EnterPassword")}
+          placeholder={t("UploadPanel:EnterPassword")}
           forwardedRef={forwardedRef}
           isAutoFocussed
         />

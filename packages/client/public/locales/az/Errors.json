@@ -1,8 +1,14 @@
 {
+  "AccessDenied": "Giriş qadağandır",
   "Error401Text": "Təəssüf ki, resurs hal-hazırda əlçatan deyil.",
   "Error403Text": "Təəssüf ki, giriş rədd edilmişdir.",
   "Error404Text": "Təəssüf ki, resurs tapıla bilmir.",
+  "ErrorDeactivatedText": "Bu DocSpace deaktiv edilib",
   "ErrorEmptyResponse": "Boş cavab",
   "ErrorOfflineText": "İnternet bağlantısı tapılmadı",
-  "ErrorUnavailableText": "DocSpace əlçatan deyil"
+  "ErrorUnavailableText": "DocSpace əlçatan deyil",
+  "InvalidLink": "Etibarsız keçid",
+  "LinkDoesNotExist": "Açmağa çalışdığınız keçid mövcud deyil.",
+  "LinkHasExpired": "İzlədiyiniz keçidin vaxtı keçib.",
+  "PortalRestriction": "IP ünvanınız bu DocSpace-ə daxil olmağa icazə verilən IP ünvanlarının siyahısına daxil edilməyib. Aktivdirsə, VPN-i söndürün və səhifəni yenidən yükləyin və ya daxil olmaq üçün başqa IP ünvanından istifadə edin."
 }

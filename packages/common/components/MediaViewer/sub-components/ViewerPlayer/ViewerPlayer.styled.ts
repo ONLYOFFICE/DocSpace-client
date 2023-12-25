@@ -1,6 +1,7 @@
-import { isMobile, isMobileOnly } from "react-device-detect";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { animated } from "@react-spring/web";
+
+import { tablet, mobile } from "@docspace/components/utils/device";
 
 export const ContainerPlayer = styled.div<{ $isFullScreen: boolean }>`
   position: fixed;
@@ -30,11 +31,6 @@ export const VideoWrapper = styled(animated.div)<{ $visible: boolean }>`
   }
 `;
 
-const StyledMobilePlayerControls = css`
-  background-color: rgba(0, 0, 0, 0.8);
-  height: 80px;
-`;
-
 export const StyledPlayerControls = styled.div<{ $isShow: boolean }>`
   position: fixed;
   right: 0px;
@@ -55,7 +51,10 @@ export const StyledPlayerControls = styled.div<{ $isShow: boolean }>`
     rgba(0, 0, 0, 0.89) 100%
   );
 
-  ${isMobile && StyledMobilePlayerControls}
+  @media ${tablet} {
+    background-color: rgba(0, 0, 0, 0.8);
+    height: 80px;
+  }
 `;
 
 export const ControlContainer = styled.div`
@@ -71,13 +70,12 @@ export const ControlContainer = styled.div`
     justify-content: space-between;
   }
 
-  ${isMobile &&
-  css`
+  @media ${tablet} {
     margin-top: 8px;
     .player_right-control {
       margin-right: -8px;
     }
-  `}
+  }
 `;
 
 export const PlayerControlsWrapper = styled.div`
@@ -85,13 +83,11 @@ export const PlayerControlsWrapper = styled.div`
   width: 100%;
   margin-top: 80px;
 
-  ${isMobile &&
-  css`
+  @media ${tablet} {
     margin-top: 0px;
-  `}
+  }
 
-  ${isMobileOnly &&
-  css`
+  @media ${mobile} {
     padding: 0 15px;
-  `}
+  }
 `;

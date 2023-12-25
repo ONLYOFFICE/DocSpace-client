@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { isMobile, isIOS, deviceType, isMobileOnly } from "react-device-detect";
+import { isMobile, isIOS, deviceType } from "react-device-detect";
 import combineUrl from "@docspace/common/utils/combineUrl";
 import { FolderType, EDITOR_ID } from "@docspace/common/constants";
 import throttle from "lodash/throttle";
@@ -107,6 +107,7 @@ function Editor({
   onSDKRequestInsertImage,
   onSDKRequestSelectSpreadsheet,
   onSDKRequestSelectDocument,
+  onSDKRequestReferenceSource,
   selectFolderDialog,
   onSDKRequestSaveAs,
   isDesktopEditor,
@@ -143,7 +144,7 @@ function Editor({
     const withoutRedirect = params.get("without_redirect");
 
     if (
-      isMobileOnly &&
+      isMobile &&
       !defaultOpenDocument &&
       androidID &&
       iOSId &&
@@ -153,27 +154,14 @@ function Editor({
       setIsShowDeepLink(true);
     }
 
-    if (isMobileOnly && defaultOpenDocument === "app") {
-      const nav = navigator.userAgent;
-      const storeUrl =
-        nav.includes("iPhone;") || nav.includes("iPad;")
-          ? `https://apps.apple.com/app/id${iOSId}`
-          : `https://play.google.com/store/apps/details?id=${androidID}`;
-
-      window.location = getDeepLink(
+    if (isMobile && defaultOpenDocument === "app") {
+      getDeepLink(
         window.location.origin,
         user.email,
         fileInfo,
-        deepLinkUrl
+        portalSettings?.deepLink,
+        window.location.href
       );
-
-      setTimeout(() => {
-        if (document.hasFocus()) {
-          window.location.replace(storeUrl);
-        } else {
-          history.goBack();
-        }
-      }, 3000);
     }
   }, []);
 
@@ -202,7 +190,7 @@ function Editor({
     if (
       !view &&
       fileInfo &&
-      fileInfo.viewAccessability.WebRestrictedEditing &&
+      fileInfo.viewAccessibility.WebRestrictedEditing &&
       fileInfo.security.FillForms &&
       !fileInfo.security.Edit &&
       !config?.document?.isLinkedForMe
@@ -238,7 +226,7 @@ function Editor({
         url.indexOf("#message/") > -1 &&
         fileInfo &&
         fileInfo?.fileExst &&
-        fileInfo?.viewAccessability?.Convert &&
+        fileInfo?.viewAccessibility?.MustConvert &&
         fileInfo?.security?.Convert
       ) {
         showDocEditorMessage(url);
@@ -321,7 +309,10 @@ function Editor({
     if (index) {
       let convertUrl = url.substring(0, index);
 
-      if (fileInfo?.viewAccessability?.Convert && fileInfo?.security?.Convert) {
+      if (
+        fileInfo?.viewAccessibility?.MustConvert &&
+        fileInfo?.security?.Convert
+      ) {
         const newUrl = await convertDocumentUrl();
         if (newUrl) {
           convertUrl = newUrl.webUrl;
@@ -806,6 +797,7 @@ function Editor({
         onRequestInsertImage,
         onRequestSelectSpreadsheet,
         onRequestSelectDocument,
+        onRequestReferenceSource,
         onRequestRestore,
         onRequestHistory,
         onRequestReferenceData,
@@ -861,6 +853,7 @@ function Editor({
         onRequestInsertImage = onSDKRequestInsertImage;
         onRequestSelectSpreadsheet = onSDKRequestSelectSpreadsheet;
         onRequestSelectDocument = onSDKRequestSelectDocument;
+        onRequestReferenceSource = onSDKRequestReferenceSource;
       }
 
       if (userAccessRights.EditHistory) {
@@ -902,6 +895,7 @@ function Editor({
           onRequestSaveAs,
           onRequestSelectSpreadsheet,
           onRequestSelectDocument,
+          onRequestReferenceSource,
           onRequestEditRights: onSDKRequestEditRights,
           onRequestHistory: onRequestHistory,
           onRequestHistoryClose: onSDKRequestHistoryClose,
@@ -949,7 +943,7 @@ function Editor({
         userEmail={user.email}
         setIsShowDeepLink={setIsShowDeepLink}
         currentColorScheme={currentColorScheme}
-        deepLinkUrl={portalSettings.deepLink.url}
+        deepLinkConfig={portalSettings?.deepLink}
       />
     );
 

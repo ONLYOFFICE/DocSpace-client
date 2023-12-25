@@ -32,6 +32,8 @@ interface ViewerProps {
     bottom?: string
   ) => JSX.Element;
   onSetSelectionFile: VoidFunction;
+
+  currentDeviceType?: string;
 }
 
 export default ViewerProps;

@@ -113,7 +113,7 @@ const SecretKeyInput = (props) => {
                 href={webhooksGuideUrl}
                 target="_blank"
                 className="link"
-                color="#333333">
+              >
                 {t("ReadMore")}
               </Link>
             </Text>
@@ -131,7 +131,8 @@ const SecretKeyInput = (props) => {
             isHovered={true}
             onClick={hideReset}
             className="link"
-            color="#333333">
+            color="#333333"
+          >
             {t("ResetKey")}
           </Link>
         </Hint>
@@ -158,7 +159,8 @@ const SecretKeyInput = (props) => {
           fontWeight={600}
           isHovered={true}
           onClick={generatePassword}
-          className="link dotted">
+          className="link dotted"
+        >
           {t("Generate")}
         </Link>
       </div>

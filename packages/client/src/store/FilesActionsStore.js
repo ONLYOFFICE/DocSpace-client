@@ -30,6 +30,7 @@ import {
   FileStatus,
   FolderType,
   RoomsType,
+  ShareAccessRights,
 } from "@docspace/common/constants";
 import { makeAutoObservable } from "mobx";
 
@@ -337,13 +338,6 @@ class FilesActionStore {
     addActiveItems(fileIds, null, destFolderId);
     addActiveItems(null, folderIds, destFolderId);
 
-    if (this.dialogsStore.isFolderActions && withoutDialog) {
-      folderIds = [];
-      fileIds = [];
-
-      folderIds.push(selection[0]);
-    }
-
     if (folderIds.length || fileIds.length) {
       this.isMediaOpen();
 
@@ -622,7 +616,7 @@ class FilesActionStore {
 
     const selection = this.filesStore.selection.length
       ? this.filesStore.selection
-      : bufferSelection != null
+      : bufferSelection
       ? [bufferSelection]
       : infoPanelIsVisible && infoPanelSelection != null
       ? [infoPanelSelection]
@@ -647,14 +641,6 @@ class FilesActionStore {
         folderIds.push(item.id);
         items.push({ id: item.id });
       }
-    }
-
-    if (this.dialogsStore.isFolderActions) {
-      fileIds = [];
-      folderIds = [];
-
-      folderIds.push(bufferSelection);
-      this.dialogsStore.setIsFolderActions(false);
     }
 
     this.setGroupMenuBlocked(true);
@@ -768,6 +754,8 @@ class FilesActionStore {
         operationId,
       });
 
+      const id = Array.isArray(itemId) ? itemId : [itemId];
+
       try {
         await this.deleteItemOperation(
           isFile,
@@ -776,12 +764,7 @@ class FilesActionStore {
           isRoom,
           operationId
         );
-
-        const id = Array.isArray(itemId) ? itemId : [itemId];
-
-        clearActiveOperations(isFile && id, !isFile && id);
       } catch (err) {
-        clearActiveOperations(isFile && [itemId], !isFile && [itemId]);
         setSecondaryProgressBarData({
           visible: true,
           alert: true,
@@ -789,6 +772,11 @@ class FilesActionStore {
         });
         setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
         return toastr.error(err.message ? err.message : err);
+      } finally {
+        setTimeout(
+          () => clearActiveOperations(isFile && id, !isFile && id),
+          TIMEOUT
+        );
       }
     }
   };
@@ -1484,7 +1472,7 @@ class FilesActionStore {
       : this.filesStore.selection;
 
     selection = selection.filter(
-      (el) => !el.isFolder && el.id !== destFolderId
+      (el) => !el.isFolder || el.id !== destFolderId
     );
 
     const isCopy = selection.findIndex((f) => f.security.Move) === -1;
@@ -1712,6 +1700,8 @@ class FilesActionStore {
       operationId,
     });
 
+    const id = Array.isArray(itemId) ? itemId : [itemId];
+
     try {
       this.setGroupMenuBlocked(true);
       await this.deleteItemOperation(
@@ -1721,13 +1711,9 @@ class FilesActionStore {
         true,
         operationId
       );
-
-      const id = Array.isArray(itemId) ? itemId : [itemId];
-
-      clearActiveOperations(null, id);
     } catch (err) {
       console.log(err);
-      clearActiveOperations(null, [itemId]);
+
       setSecondaryProgressBarData({
         visible: true,
         alert: true,
@@ -1737,6 +1723,7 @@ class FilesActionStore {
       return toastr.error(err.message ? err.message : err);
     } finally {
       this.setGroupMenuBlocked(false);
+      setTimeout(() => clearActiveOperations(null, id), TIMEOUT);
     }
   };
 
@@ -2120,11 +2107,11 @@ class FilesActionStore {
     };
 
     const isMediaOrImage =
-      item.viewAccessability?.ImageView || item.viewAccessability?.MediaView;
+      item.viewAccessibility?.ImageView || item.viewAccessibility?.MediaView;
     const canConvert =
-      item.viewAccessability?.Convert && item.security?.Convert;
-    const canWebEdit = item.viewAccessability?.WebEdit;
-    const canViewedDocs = item.viewAccessability?.WebView;
+      item.viewAccessibility?.MustConvert && item.security?.Convert;
+    const canWebEdit = item.viewAccessibility?.WebEdit;
+    const canViewedDocs = item.viewAccessibility?.WebView;
 
     const { id, viewUrl, providerKey, fileStatus, encrypted, isFolder } = item;
     if (encrypted && isPrivacyFolder) return checkProtocol(item.id, true);
@@ -2431,6 +2418,78 @@ class FilesActionStore {
     };
 
     this.uploadDataStore.itemOperationToFolder(operationData);
+  };
+
+  onLeaveRoom = (t, isOwner = false) => {
+    const {
+      updateRoomMemberRole,
+      removeFiles,
+      folders,
+      setFolders,
+      selection,
+      bufferSelection,
+    } = this.filesStore;
+    const { user } = this.authStore.userStore;
+
+    const roomId = selection.length
+      ? selection[0].id
+      : bufferSelection
+      ? bufferSelection.id
+      : this.selectedFolderStore.id;
+
+    const isAdmin = user.isOwner || user.isAdmin;
+    const isRoot = this.selectedFolderStore.isRootFolder;
+
+    return updateRoomMemberRole(roomId, {
+      invitations: [{ id: user?.id, access: ShareAccessRights.None }],
+    }).then(() => {
+      if (!isAdmin) {
+        if (!isRoot) {
+          const filter = RoomsFilter.getDefault();
+          window.DocSpace.navigate(
+            `rooms/shared/filter?${filter.toUrlParams()}`
+          );
+        } else {
+          removeFiles(null, [roomId]);
+        }
+      } else {
+        const newFolders = folders;
+        const folderIndex = newFolders.findIndex((r) => r.id === roomId);
+        newFolders[folderIndex].inRoom = false;
+        setFolders(newFolders);
+      }
+
+      isOwner
+        ? toastr.success(t("Files:LeftAndAppointNewOwner"))
+        : toastr.success(t("Files:YouLeftTheRoom"));
+    });
+  };
+
+  changeRoomOwner = (t, userId, isLeaveChecked = false) => {
+    const { setRoomOwner, setFolder, setSelected, selection, bufferSelection } =
+      this.filesStore;
+    const { isRootFolder, setCreatedBy, id } = this.selectedFolderStore;
+
+    const roomId = selection.length
+      ? selection[0].id
+      : bufferSelection
+      ? bufferSelection.id
+      : id;
+
+    return setRoomOwner(userId, [roomId])
+      .then(async (res) => {
+        if (isRootFolder) {
+          setFolder(res[0]);
+        } else {
+          setCreatedBy(res[0].createdBy);
+        }
+
+        if (isLeaveChecked) await this.onLeaveRoom(t);
+        else toastr.success(t("Files:AppointNewOwner"));
+      })
+      .finally(() => {
+        setSelected("none");
+      });
   };
 }
 

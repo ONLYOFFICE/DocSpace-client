@@ -12,9 +12,11 @@ import { parseAddresses } from "@docspace/components/utils/email";
 import ComboBox from "@docspace/components/combobox";
 
 import Filter from "@docspace/common/api/people/filter";
+import BetaBadge from "@docspace/common/components/BetaBadge";
 import { getMembersList } from "@docspace/common/api/people";
 import { ShareAccessRights } from "@docspace/common/constants";
 import withCultureNames from "@docspace/common/hoc/withCultureNames";
+import { isBetaLanguage } from "@docspace/common/utils";
 
 import AddUsersPanel from "../../AddUsersPanel";
 import { getAccessOptions } from "../utils";
@@ -32,7 +34,7 @@ import {
   ResetLink,
 } from "../StyledInvitePanel";
 
-const searchUsersThreshold = 2;
+const minSearchValue = 2;
 
 const InviteInput = ({
   defaultAccess,
@@ -66,9 +68,10 @@ const InviteInput = ({
   const searchRef = useRef();
 
   const selectedLanguage = cultureNames.find((item) => item.key === language) ||
-    cultureNames.find((item) => item.key === culture) || {
+    cultureNames.find((item) => item.key === culture.key) || {
       key: language,
       label: "",
+      isBeta: isBetaLanguage(language),
     };
 
   useEffect(() => {
@@ -76,6 +79,7 @@ const InviteInput = ({
       setInviteLanguage({
         key: language,
         label: selectedLanguage.label,
+        isBeta: isBetaLanguage(language),
       });
   }, []);
 
@@ -107,7 +111,7 @@ const InviteInput = ({
   const searchByQuery = async (value) => {
     const query = value.trim();
 
-    if (query.length >= searchUsersThreshold) {
+    if (query.length >= minSearchValue) {
       const filter = Filter.getFilterWithOutDisabledUser();
       filter.search = query;
 
@@ -135,14 +139,14 @@ const InviteInput = ({
 
     setInputValue(value);
 
-    if (clearValue.length < searchUsersThreshold) {
+    if (clearValue.length < minSearchValue) {
       setUsersList([]);
       setIsAddEmailPanelBlocked(true);
       return;
     }
 
     if (
-      (!!usersList.length || clearValue.length >= searchUsersThreshold) &&
+      (!!usersList.length || clearValue.length >= minSearchValue) &&
       !searchPanelVisible
     ) {
       openInviteInputPanel();
@@ -150,7 +154,11 @@ const InviteInput = ({
 
     if (roomId !== -1) {
       debouncedSearch(clearValue);
+
+      return;
     }
+
+    setIsAddEmailPanelBlocked(false);
   };
 
   const removeExist = (items) => {
@@ -300,6 +308,7 @@ const InviteInput = ({
     setInviteLanguage({
       key: selectedLanguage.key,
       label: selectedLanguage.label,
+      isBeta: selectedLanguage.isBeta,
     });
     setIsChangeLangMail(false);
   };
@@ -307,6 +316,7 @@ const InviteInput = ({
   const cultureNamesNew = cultureNames.map((item) => ({
     label: item.label,
     key: item.key,
+    isBeta: isBetaLanguage(item.key),
   }));
 
   return (
@@ -341,7 +351,6 @@ const InviteInput = ({
             onSelect={onLanguageSelect}
             isDisabled={false}
             scaled={isMobileView}
-            textOverflow
             scaledOptions={false}
             size="content"
             manualWidth="280px"
@@ -352,6 +361,9 @@ const InviteInput = ({
             fillIcon={false}
             modernView
           />
+          {culture?.isBeta && (
+            <BetaBadge place="bottom-end" mobilePlace="bottom" />
+          )}
         </div>
         {isChangeLangMail && !isMobileView && (
           <StyledLink
@@ -394,24 +406,23 @@ const InviteInput = ({
             onKeyDown={onKeyDown}
           />
         </StyledInviteInput>
-        {inputValue.length >= searchUsersThreshold && (
-          <StyledDropDown
-            width={searchRef?.current?.offsetWidth}
-            isDefaultMode={false}
-            open={
-              !!usersList.length
-                ? searchPanelVisible
-                : searchPanelVisible && !isAddEmailPanelBlocked
-            }
-            manualX="16px"
-            showDisabledItems
-            clickOutsideAction={closeInviteInputPanel}
-            eventTypes="click"
-            {...dropDownMaxHeight}
-          >
-            {!!usersList.length ? foundUsers : addEmailPanel}
-          </StyledDropDown>
-        )}
+        {inputValue.length >= minSearchValue &&
+          (isAddEmailPanelBlocked ? (
+            <></>
+          ) : (
+            <StyledDropDown
+              width={searchRef?.current?.offsetWidth}
+              isDefaultMode={false}
+              open={searchPanelVisible}
+              manualX="16px"
+              showDisabledItems
+              clickOutsideAction={closeInviteInputPanel}
+              eventTypes="click"
+              {...dropDownMaxHeight}
+            >
+              {!!usersList.length ? foundUsers : addEmailPanel}
+            </StyledDropDown>
+          ))}
 
         <AccessSelector
           className="add-manually-access"

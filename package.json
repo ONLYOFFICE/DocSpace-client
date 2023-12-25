@@ -1,6 +1,6 @@
 {
   "name": "docspace",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "private": true,
   "workspaces": {
     "packages": [
@@ -12,12 +12,12 @@
     "yarn": ">=3"
   },
   "scripts": {
-    "build": "node ./common/scripts/before-build.js && yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login,@docspace/editor}' run build",
+    "build": "node ./common/scripts/before-build.js && yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login,@docspace/editor,@docspace/management}' run build",
     "bump": "yarn version apply --all",
     "clean": "yarn workspaces foreach -vptiR run clean",
-    "deploy": "shx rm -rf ../publish/web && yarn workspaces foreach -ptR --from '{@docspace/client,@docspace/login,@docspace/editor}' run deploy && shx cp -r public ../publish/web/ && node common/scripts/minify-common-locales.js",
-    "start": "node ./common/scripts/before-build.js && yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login,@docspace/editor}' run start",
-    "start-prod": "yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login,@docspace/editor}' run start-prod",
+    "deploy": "shx rm -rf ../publish/web && yarn workspaces foreach -ptR --from '{@docspace/client,@docspace/login,@docspace/editor,@docspace/management}' run deploy && shx cp -r public ../publish/web/ && node common/scripts/minify-common-locales.js",
+    "start": "node ./common/scripts/before-build.js && yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login,@docspace/editor,@docspace/management}' run start",
+    "start-prod": "yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login,@docspace/editor,@docspace/management}' run start-prod",
     "storybook": "yarn workspace @docspace/components storybook",
     "storybook-build": "yarn workspace @docspace/components run storybook-build",
     "storybook-serve": "yarn workspace @docspace/components run storybook-serve",

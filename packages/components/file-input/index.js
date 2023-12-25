@@ -94,8 +94,8 @@ class FileInput extends Component {
     return (
       <Dropzone
         onDrop={this.onDrop}
-        {...(accept && { accept: [accept] })}
         noClick={isDisabled || isLoading}
+        accept={accept}
       >
         {({ getRootProps, getInputProps }) => (
           <StyledFileInput
@@ -184,7 +184,7 @@ FileInput.propTypes = {
   /** Called when a file is selected */
   onInput: PropTypes.func,
   /** Specifies the files visible for upload */
-  accept: PropTypes.string,
+  accept: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   /** Specifies the label for the upload button */
   buttonLabel: PropTypes.string,
 };

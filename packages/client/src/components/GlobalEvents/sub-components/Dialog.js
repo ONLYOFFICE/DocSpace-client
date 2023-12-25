@@ -52,9 +52,9 @@ const Dialog = ({
     (e) => {
       if (e.keyCode === 27) onCancelAction(e);
 
-      if (e.keyCode === 13 && !withForm) onSaveAction(e);
+      if (e.keyCode === 13 && !withForm && !isError) onSaveAction(e);
     },
-    [value]
+    [value, isError]
   );
 
   useEffect(() => {

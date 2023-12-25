@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -26,6 +26,7 @@ import {
 } from "../../../utils/whiteLabelHelper";
 
 import isEqual from "lodash/isEqual";
+import { DeviceType } from "@docspace/common/constants";
 
 const WhiteLabel = (props) => {
   const {
@@ -42,6 +43,9 @@ const WhiteLabel = (props) => {
     setLogoUrlsWhiteLabel,
     defaultLogoTextWhiteLabel,
     enableRestoreButton,
+    isManagement,
+    currentDeviceType,
+    resetIsInit,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -50,21 +54,35 @@ const WhiteLabel = (props) => {
   const [logoTextWhiteLabel, setLogoTextWhiteLabel] = useState("");
   const [isSaving, setIsSaving] = useState(false);
 
+  const isMobileView = currentDeviceType === DeviceType.mobile;
+
   const init = async () => {
-    await initSettings();
+    const isWhiteLabelPage = location.pathname.includes("white-label");
+
+    if ((isMobileView && isWhiteLabelPage) || !isMobileView) {
+      const page = isMobileView ? "white-label" : "branding";
+      await initSettings(page);
+    }
   };
 
   useEffect(() => {
     init();
     checkWidth();
     window.addEventListener("resize", checkWidth);
-    return () => window.removeEventListener("resize", checkWidth);
+    return () => {
+      window.removeEventListener("resize", checkWidth);
+      resetIsInit();
+    };
   }, []);
 
   const checkWidth = () => {
+    const url = isManagement
+      ? "/branding"
+      : "/portal-settings/customization/branding";
+
     window.innerWidth > size.mobile &&
       location.pathname.includes("white-label") &&
-      navigate("/portal-settings/customization/branding");
+      navigate(url);
   };
 
   useEffect(() => {
@@ -491,7 +509,7 @@ const WhiteLabel = (props) => {
   );
 };
 
-export default inject(({ setup, auth, common }) => {
+export default inject(({ auth, common }) => {
   const {
     setLogoText,
     whiteLabelLogoText,
@@ -503,10 +521,13 @@ export default inject(({ setup, auth, common }) => {
     setLogoUrlsWhiteLabel,
     defaultLogoTextWhiteLabel,
     enableRestoreButton,
+    resetIsInit,
   } = common;
 
-  const { whiteLabelLogoUrls: defaultWhiteLabelLogoUrls } = auth.settingsStore;
+  const { whiteLabelLogoUrls: defaultWhiteLabelLogoUrls, currentDeviceType } =
+    auth.settingsStore;
   const { isBrandingAndCustomizationAvailable } = auth.currentQuotaStore;
+  const { isManagement } = auth;
 
   return {
     setLogoText,
@@ -522,5 +543,8 @@ export default inject(({ setup, auth, common }) => {
     setLogoUrlsWhiteLabel,
     defaultLogoTextWhiteLabel,
     enableRestoreButton,
+    isManagement,
+    currentDeviceType,
+    resetIsInit,
   };
 })(withTranslation(["Settings", "Profile", "Common"])(observer(WhiteLabel)));

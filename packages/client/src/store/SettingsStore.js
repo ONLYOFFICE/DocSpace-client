@@ -29,7 +29,6 @@ class SettingsStore {
   forcesave = null;
   storeForcesave = null;
   storeOriginalFiles = null;
-  updateIfExist = null;
   favoritesSection = null;
   recentSection = null;
   hideConfirmConvertSave = null;
@@ -93,8 +92,7 @@ class SettingsStore {
       this.enableThirdParty !== null &&
       this.forcesave !== null &&
       this.storeForcesave !== null &&
-      this.storeOriginalFiles !== null &&
-      this.updateIfExist !== null
+      this.storeOriginalFiles !== null
     );
   }
 
@@ -146,11 +144,6 @@ class SettingsStore {
   setFilesSetting = (setting, val) => {
     this[setting] = val;
   };
-
-  setUpdateIfExist = (data, setting) =>
-    api.files
-      .updateIfExist(data)
-      .then((res) => this.setFilesSetting(setting, res));
 
   setStoreOriginal = (data, setting) =>
     api.files

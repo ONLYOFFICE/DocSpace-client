@@ -94,6 +94,7 @@ import { DateTimePicker } from "./date-time-picker";
 import { CampaignsBanner } from "./campaigns-banner";
 import { FillingRoleSelector } from "./filling-role-selector";
 import { FillingStatusLine } from "./filling-status-line";
+import { Grid } from "./grid";
 
 export type {
   TFallbackAxisSideDirection,
@@ -106,6 +107,7 @@ export type {
 };
 
 export {
+  Grid,
   FillingStatusLine,
   FillingRoleSelector,
   CampaignsBanner,

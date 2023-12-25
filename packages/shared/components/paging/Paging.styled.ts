@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Base from "../themes/base";
-import { mobile } from "../utils/device";
+import { Base } from "../../themes";
+import { mobile } from "../../utils";
 
 const StyledPaging = styled.div`
   display: flex;

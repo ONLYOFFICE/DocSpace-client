@@ -97,6 +97,7 @@ import { FillingStatusLine } from "./filling-status-line";
 import { Grid } from "./grid";
 import { Slider } from "./slider";
 import { ImageEditor } from "./image-editor";
+import { Paging } from "./paging";
 
 export type {
   TFallbackAxisSideDirection,
@@ -109,6 +110,7 @@ export type {
 };
 
 export {
+  Paging,
   ImageEditor,
   Slider,
   Grid,

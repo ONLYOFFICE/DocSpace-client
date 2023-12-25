@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
-import Paging from "./";
 
-const disable = {
-  table: {
-    disable: true,
-  },
-};
+import { Meta, StoryObj } from "@storybook/react";
 
-export default {
+import { Paging } from "./Paging";
+import { PagingProps } from "./Paging.types";
+
+// const disable = {
+//   table: {
+//     disable: true,
+//   },
+// };
+
+const meta = {
   title: "Components/Paging",
   component: Paging,
   parameters: {
@@ -21,20 +25,23 @@ export default {
     onSelectPage: { action: "onSelectPage" },
     onSelectCount: { action: "onSelectCount" },
     previousAction: { action: "onPrevious" },
-    nextAction: { action: "onNext" },
-    selectedCount: disable,
-    pageCount: disable,
-    displayItems: disable,
-    displayCount: disable,
+    // nextAction: { action: "onNext" },
+    // selectedCount: disable,
+    // pageCount: disable,
+    // displayItems: disable,
+    // displayCount: disable,
   },
-};
+} satisfies Meta<typeof Paging>;
+type Story = StoryObj<typeof Paging>;
 
-const createPageItems = (count: any) => {
-  let pageItems = [];
-  for (let i = 1; i <= count; i++) {
+export default meta;
+
+const createPageItems = (count: number) => {
+  const pageItems = [];
+  for (let i = 1; i <= count; i += 1) {
     pageItems.push({
       key: i,
-      label: i + " of " + count,
+      label: `${i} of ${count}`,
     });
   }
   return pageItems;
@@ -55,42 +62,43 @@ const countItems = [
   },
 ];
 
-const selectedCountPageHandler = (count: any) => {
+const selectedCountPageHandler = (count: number) => {
   return countItems.filter((item) => {
     if (item.key === count) {
-      return item;
+      return true;
     }
+    return false;
   });
 };
 
 const Template = ({
-  pageCount,
-  displayItems,
-  displayCount,
+  // pageCount,
+  // displayItems,
+  // displayCount,
   nextAction,
   previousAction,
   onSelectPage,
   onSelectCount,
-  selectedCount,
+  // selectedCount,
   ...args
-}: any) => {
-  const pageItems = createPageItems(pageCount);
+}: PagingProps) => {
+  const pageItems = createPageItems(200);
   const [selectedPageItem, setSelectedPageItems] = useState(pageItems[0]);
 
   useEffect(() => {
     setSelectedPageItems(pageItems[0]);
-  }, [pageCount]);
+  }, [pageItems]);
 
   const onSelectPageNextHandler = () => {
     const currentPage = pageItems.filter(
-      (item) => item.key === selectedPageItem.key + 1
+      (item) => item.key === selectedPageItem.key + 1,
     );
     if (currentPage[0]) setSelectedPageItems(currentPage[0]);
   };
 
   const onSelectPagePrevHandler = () => {
     const currentPage = pageItems.filter(
-      (item) => item.key === selectedPageItem.key - 1
+      (item) => item.key === selectedPageItem.key - 1,
     );
     if (currentPage[0]) setSelectedPageItems(currentPage[0]);
   };
@@ -99,41 +107,40 @@ const Template = ({
     <div style={{ height: "100px" }}>
       <Paging
         {...args}
-        pageItems={displayItems ? pageItems : null}
+        pageItems={pageItems}
         style={{ justifyContent: "center", alignItems: "center" }}
-        countItems={displayCount ? countItems : null}
-        previousAction={() => {
-          previousAction("Prev");
+        countItems={countItems}
+        previousAction={async () => {
+          previousAction();
           onSelectPagePrevHandler();
         }}
-        nextAction={() => {
+        nextAction={async () => {
           onSelectPageNextHandler();
-          nextAction("Next");
+          nextAction();
         }}
         onSelectPage={(a) => onSelectPage(a)}
         onSelectCount={(a) => onSelectCount(a)}
         selectedPageItem={selectedPageItem}
-        selectedCountItem={selectedCountPageHandler(selectedCount)[0]}
+        selectedCountItem={selectedCountPageHandler(25)[0]}
       />
     </div>
   );
 };
 
-export const Default = Template.bind({});
-// @ts-expect-error TS(2339): Property 'args' does not exist on type '({ pageCou... Remove this comment to see the full error message
-Default.args = {
-  previousLabel: "Previous",
-  nextLabel: "Next",
-  displayItems: true,
-  displayCount: true,
-  disablePrevious: false,
-  disableNext: false,
-  openDirection: "bottom",
-  selectedCount: 100,
-  pageCount: 10,
-  selectedCountItem: {
-    key: 100,
-    label: "100 per page",
+export const Default: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    previousLabel: "Previous",
+    nextLabel: "Next",
+
+    disablePrevious: false,
+    disableNext: false,
+    openDirection: "bottom",
+
+    selectedCountItem: {
+      key: 100,
+      label: "100 per page",
+    },
+    selectedPageItem: { key: 1, label: "1 of 10" },
   },
-  selectedPageItem: { key: 1, label: "1 of 10" },
 };

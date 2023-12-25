@@ -35,7 +35,7 @@ const DatePicker = (props: DatePickerProps) => {
   const selectorRef = useRef<HTMLDivElement | null>(null);
   const selectedItemRef = useRef<HTMLDivElement | null>(null);
 
-  const [date, setDate] = useState<moment.Moment>(
+  const [date, setDate] = useState<moment.Moment | null>(
     initialDate ? moment(initialDate) : moment(),
   );
 
@@ -50,7 +50,7 @@ const DatePicker = (props: DatePickerProps) => {
 
   const handleChange = (d: null | moment.Moment) => {
     onChange?.(d);
-    setDate(date);
+    setDate(d);
     closeCalendar();
   };
 
@@ -135,7 +135,7 @@ const DatePicker = (props: DatePickerProps) => {
       {isCalendarOpen && (
         <StyledCalendar
           isMobile={isMobile}
-          selectedDate={date}
+          selectedDate={date || moment()}
           setSelectedDate={handleChange}
           onChange={closeCalendar}
           forwardedRef={calendarRef}

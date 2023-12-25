@@ -236,8 +236,17 @@ class DetailsHelper {
     const onOpenUser = () => this.openUser(this.item.createdBy, this.navigate);
 
     return this.personal || this.isVisitor || this.isCollaborator
-      ? text(decode(this.item.createdBy?.displayName))
-      : link(decode(this.item.createdBy?.displayName), onOpenUser);
+      ? text(
+          this.item.createdBy?.displayName
+            ? decode(this.item.createdBy?.displayName)
+            : ""
+        )
+      : link(
+          this.item.createdBy?.displayName
+            ? decode(this.item.createdBy?.displayName)
+            : "",
+          onOpenUser
+        );
   };
 
   getItemLocation = () => {
@@ -288,8 +297,17 @@ class DetailsHelper {
     const onOpenUser = () => this.openUser(this.item.updatedBy, this.navigate);
 
     return this.personal || this.isVisitor || this.isCollaborator
-      ? text(decode(this.item.updatedBy?.displayName))
-      : link(decode(this.item.updatedBy?.displayName), onOpenUser);
+      ? text(
+          this.item.updatedBy?.displayName
+            ? decode(this.item.updatedBy?.displayName)
+            : ""
+        )
+      : link(
+          this.item.updatedBy?.displayName
+            ? decode(this.item.updatedBy?.displayName)
+            : "",
+          onOpenUser
+        );
   };
 
   getItemCreationDate = () => {

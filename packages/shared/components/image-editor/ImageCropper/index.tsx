@@ -1,21 +1,17 @@
 import React, { useEffect } from "react";
 import { ReactSVG } from "react-svg";
 import throttle from "lodash/throttle";
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
-import AvatarEditor from "react-avatar-editor";
+import AvatarEditor, { Position } from "react-avatar-editor";
 
-// @ts-expect-error TS(2307): Cannot find module 'PUBLIC_DIR/images/zoom-minus.r... Remove this comment to see the full error message
 import ZoomMinusReactSvgUrl from "PUBLIC_DIR/images/zoom-minus.react.svg?url";
-// @ts-expect-error TS(2307): Cannot find module 'PUBLIC_DIR/images/zoom-plus.re... Remove this comment to see the full error message
 import ZoomPlusReactSvgUrl from "PUBLIC_DIR/images/zoom-plus.react.svg?url";
-// @ts-expect-error TS(2307): Cannot find module 'PUBLIC_DIR/images/icon-cropper... Remove this comment to see the full error message
 import IconCropperGridSvgUrl from "PUBLIC_DIR/images/icon-cropper-grid.svg?url";
-// @ts-expect-error TS(2307): Cannot find module 'PUBLIC_DIR/images/trash.react.... Remove this comment to see the full error message
 import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 
-import Slider from "../../slider";
-import IconButton from "../../icon-button";
-import StyledImageCropper from "./StyledImageCropper";
+import { Slider } from "../../slider";
+import { IconButton } from "../../icon-button";
+import { StyledImageCropper } from "../ImageEditor.styled";
+import { ImageCropperProps } from "../ImageEditor.types";
 
 const ImageCropper = ({
   t,
@@ -24,48 +20,54 @@ const ImageCropper = ({
   uploadedFile,
   setUploadedFile,
   setPreviewImage,
-  isDisabled
-}: any) => {
-  let editorRef: any = null;
-  const setEditorRef = (editor: any) => editorRef = editor;
+  isDisabled,
+}: ImageCropperProps) => {
+  const editorRef = React.useRef<null | AvatarEditor>(null);
+  const setEditorRef = (editor: AvatarEditor) => (editorRef.current = editor);
 
-  const handlePositionChange = (position: any) => {
+  const handlePositionChange = (position: Position) => {
     if (isDisabled) return;
 
     onChangeImage({ ...image, x: position.x, y: position.y });
   };
 
-  const handleSliderChange = (e: any, newZoom = null) => {
+  const handleSliderChange = (
+    e?: React.ChangeEvent<HTMLInputElement>,
+    newZoom: null | number = null,
+  ) => {
     if (isDisabled) return;
 
-    onChangeImage({ ...image, zoom: newZoom ? newZoom : +e.target.value });
+    const val = e ? e?.target.value : 0;
+
+    onChangeImage({ ...image, zoom: newZoom || +val });
   };
 
   const handleZoomInClick = () => {
     if (isDisabled) return;
 
-    handleSliderChange({}, image.zoom <= 4.5 ? image.zoom + 0.5 : 5);
+    handleSliderChange(undefined, image.zoom <= 4.5 ? image.zoom + 0.5 : 5);
   };
 
   const handleZoomOutClick = () => {
     if (isDisabled) return;
 
-    // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
-    handleSliderChange({}, image.zoom >= 1.5 ? image.zoom - 0.5 : 1);
+    handleSliderChange(undefined, image.zoom >= 1.5 ? image.zoom - 0.5 : 1);
   };
 
   const handleDeleteImage = () => {
     if (isDisabled) return;
-    setUploadedFile(null);
+    setUploadedFile();
   };
 
   const handleImageChange = throttle(() => {
     try {
-      if (!editorRef) return;
-      const newPreveiwImage = editorRef.getImageScaledToCanvas()?.toDataURL();
+      if (!editorRef.current) return;
+      const newPreveiwImage = editorRef.current
+        .getImageScaledToCanvas()
+        ?.toDataURL();
       setPreviewImage(newPreveiwImage);
     } catch (e) {
-      console.error(e);
+      // console.error(e);
     }
   }, 300);
 
@@ -74,7 +76,7 @@ const ImageCropper = ({
     return () => {
       setPreviewImage("");
     };
-  }, [image]);
+  }, [handleImageChange, image, setPreviewImage]);
 
   return (
     <StyledImageCropper className="icon_cropper">
@@ -110,12 +112,11 @@ const ImageCropper = ({
 
       <div className="icon_cropper-zoom-container">
         <IconButton
-          // @ts-expect-error TS(2322): Type '{ className: string; size: string; onClick: ... Remove this comment to see the full error message
           className="icon_cropper-zoom-container-button"
-          size="16"
+          size={16}
           onClick={handleZoomOutClick}
           iconName={ZoomMinusReactSvgUrl}
-          isFill={true}
+          isFill
           isClickable={false}
           isDisabled={isDisabled}
         />
@@ -129,12 +130,11 @@ const ImageCropper = ({
           isDisabled={isDisabled}
         />
         <IconButton
-          // @ts-expect-error TS(2322): Type '{ className: string; size: string; onClick: ... Remove this comment to see the full error message
           className="icon_cropper-zoom-container-button"
-          size="16"
+          size={16}
           onClick={handleZoomInClick}
           iconName={ZoomPlusReactSvgUrl}
-          isFill={true}
+          isFill
           isClickable={false}
           isDisabled={isDisabled}
         />

@@ -95,6 +95,8 @@ import { CampaignsBanner } from "./campaigns-banner";
 import { FillingRoleSelector } from "./filling-role-selector";
 import { FillingStatusLine } from "./filling-status-line";
 import { Grid } from "./grid";
+import { Slider } from "./slider";
+import { ImageEditor } from "./image-editor";
 
 export type {
   TFallbackAxisSideDirection,
@@ -107,6 +109,8 @@ export type {
 };
 
 export {
+  ImageEditor,
+  Slider,
   Grid,
   FillingStatusLine,
   FillingRoleSelector,

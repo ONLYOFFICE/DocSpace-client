@@ -137,7 +137,7 @@ function getHandlers(
       if (time - state.lastTouchStart < 300) {
         state.isDoubleTap = true;
         props.onDoubleTap?.(event);
-        console.log("Double Click");
+        // console.log("Double Click");
       } else {
         state.isDoubleTap = false;
       }

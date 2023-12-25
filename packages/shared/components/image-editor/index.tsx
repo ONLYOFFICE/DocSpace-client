@@ -1,6 +1,7 @@
 import React from "react";
 import Dropzone from "./Dropzone";
 import ImageCropper from "./ImageCropper";
+import { ImageEditorProps } from "./ImageEditor.types";
 
 const ImageEditor = ({
   t,
@@ -10,9 +11,11 @@ const ImageEditor = ({
   setPreview,
   isDisabled,
   classNameWrapperImageCropper,
-  className
-}: any) => {
-  const setUploadedFile = (uploadedFile: any) => onChangeImage({ ...image, uploadedFile });
+  className,
+}: ImageEditorProps) => {
+  const setUploadedFile = (uploadedFile?: File) => {
+    if (uploadedFile) onChangeImage({ ...image, uploadedFile });
+  };
 
   const isDefaultAvatar =
     typeof image.uploadedFile === "string" &&
@@ -43,4 +46,4 @@ const ImageEditor = ({
   );
 };
 
-export default ImageEditor;
+export { ImageEditor };

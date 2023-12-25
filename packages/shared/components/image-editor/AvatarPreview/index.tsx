@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-import Avatar from "../../avatar";
-import Text from "../../text";
+import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
+import { Text } from "../../text";
 
-import { mobile } from "../../utils/device";
+import { mobile } from "../../../utils";
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -35,28 +35,30 @@ const StyledWrapper = styled.div`
 
 const AvatarPreview = ({
   avatar,
-  userName
-}: any) => {
+  userName,
+}: {
+  avatar: string;
+  userName: string;
+}) => {
   return (
     <StyledWrapper>
       <Avatar
         className="avatar"
-        size="max"
-        role="user"
+        size={AvatarSize.max}
+        role={AvatarRole.user}
         source={avatar}
         userName={userName}
         editing={false}
       />
       <div className="name-preview">
         <Avatar
-          size="min"
-          role="user"
+          size={AvatarSize.min}
+          role={AvatarRole.user}
           source={avatar}
           userName={userName}
           editing={false}
         />
-        // @ts-expect-error TS(2322): Type '{ children: any; fontWeight: number; fontSiz... Remove this comment to see the full error message
-        <Text fontWeight={600} fontSize="15px" truncate={true}>
+        <Text fontWeight={600} fontSize="15px" truncate>
           {userName}
         </Text>
       </div>

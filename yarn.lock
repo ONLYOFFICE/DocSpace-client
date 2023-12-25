@@ -3613,6 +3613,7 @@ __metadata:
     "@types/luxon": ^3.3.1
     "@types/node": ^20.9.4
     "@types/punycode": ^2.1.3
+    "@types/react-avatar-editor": ^13.0.2
     "@types/react-transition-group": ^4.4.9
     "@types/react-virtualized": ^9.21.29
     "@types/react-window": ^1.8.8
@@ -9416,6 +9417,15 @@ __metadata:
   dependencies:
     "@types/react": "*"
   checksum: 39e985dd9c8dfbf5fcd7a6a4b1a8d2593a1b34dc841143d370bb52f46f13407f8f1effc41fb426280c0e58eff9f1f515e3925dae2d3d4a61cf02ebcd5ab691f2
+  languageName: node
+  linkType: hard
+
+"@types/react-avatar-editor@npm:^13.0.2":
+  version: 13.0.2
+  resolution: "@types/react-avatar-editor@npm:13.0.2"
+  dependencies:
+    "@types/react": "*"
+  checksum: 8e8988e56c85e734df391cfa4d084df0e12ed17b347654351306be703d94d3380ad869737d47afd788e0a95582b932ee02875e36c62e3c47535415dfe4d34782
   languageName: node
   linkType: hard
 

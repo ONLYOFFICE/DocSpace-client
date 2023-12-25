@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import Base from "../themes/base";
-import NoUserSelect from "../utils/commonStyles";
-import { tablet } from "../utils/device";
+import { Base } from "../../themes";
+import { tablet, NoUserSelect } from "../../utils";
 
 const BannerWrapper = styled.div`
   max-width: 185px;

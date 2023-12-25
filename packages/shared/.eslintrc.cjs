@@ -50,6 +50,7 @@ module.exports = {
     "no-return-assign": "off",
     // "no-unneeded-ternary": "off",
     "react/require-default-props": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
   },
   ignorePatterns: ["./tsconfig.json", "coverage/**"],
 };

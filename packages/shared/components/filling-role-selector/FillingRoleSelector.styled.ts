@@ -1,6 +1,9 @@
 import styled, { css } from "styled-components";
-import Base from "../themes/base";
-import { AddRoleButton, EveryoneRoleIcon } from "./svg";
+
+import AddRoleButton from "PUBLIC_DIR/images/add.role.button.react.svg";
+import EveryoneRoleIcon from "PUBLIC_DIR/images/everyone.role.button.react.svg";
+
+import { Base } from "../../themes";
 
 const StyledFillingRoleSelector = styled.div`
   display: flex;

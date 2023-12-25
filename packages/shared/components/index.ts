@@ -92,6 +92,7 @@ import { SocialButton } from "./social-button";
 import { DatePicker } from "./date-picker";
 import { DateTimePicker } from "./date-time-picker";
 import { CampaignsBanner } from "./campaigns-banner";
+import { FillingRoleSelector } from "./filling-role-selector";
 
 export type {
   TFallbackAxisSideDirection,
@@ -104,6 +105,7 @@ export type {
 };
 
 export {
+  FillingRoleSelector,
   CampaignsBanner,
   DateTimePicker,
   DatePicker,

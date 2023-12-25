@@ -3,7 +3,7 @@
 ### Usage
 
 ```js
-import FillingRoleSelector from "@docspace/components/filling-role-selector";
+import { FillingRoleSelector } from "@docspace/shared/components";
 ```
 
 ```jsx

@@ -1,6 +1,10 @@
 import React from "react";
-import DatePicker from "./";
+import moment from "moment";
+import { StoryObj, Meta } from "@storybook/react";
 import styled from "styled-components";
+
+import { DatePicker } from "./DatePicker";
+import { DatePickerProps } from "./DatePicker.types";
 
 const locales = [
   "az",
@@ -31,7 +35,7 @@ const locales = [
   "vi",
 ];
 
-export default {
+const meta = {
   title: "Components/DatePicker",
   component: DatePicker,
 
@@ -54,27 +58,31 @@ export default {
       url: "https://www.figma.com/file/9AtdOHnhjhZCIRDrj4Unta/Public-room?type=design&node-id=1846-218508&mode=design&t=xSsXehQdoxpp5o7F-4",
     },
   },
-};
+} satisfies Meta<typeof DatePicker>;
+type Story = StoryObj<typeof meta>;
+
+export default meta;
 
 const Wrapper = styled.div`
   height: 500px;
 `;
 
-const Template = ({ ...args }) => {
+const Template = ({ ...args }: DatePickerProps) => {
   return (
     <Wrapper>
-      // @ts-expect-error TS(2741): Property 'onChange' is missing in type '{}' but re... Remove this comment to see the full error message
       <DatePicker {...args} />
     </Wrapper>
   );
 };
 
-export const Default = Template.bind({});
-
-// @ts-expect-error TS(2339): Property 'args' does not exist on type '({ ...args... Remove this comment to see the full error message
-Default.args = {
-  maxDate: new Date(new Date().getFullYear() + 10 + "/01/01"),
-  minDate: new Date("1970/01/01"),
-  openDate: new Date(),
-  initialDate: null,
+export const Default: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    maxDate: new Date(`${new Date().getFullYear() + 10}/01/01`),
+    minDate: new Date("1970/01/01"),
+    openDate: moment(),
+    initialDate: moment(),
+    onChange: () => {},
+    locale: "en",
+  },
 };

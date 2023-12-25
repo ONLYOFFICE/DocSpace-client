@@ -5,7 +5,7 @@ Base DatePicker component
 ### Usage
 
 ```js
-import DatePicker from "@docspace/components/date-picker";
+import { DatePicker } from "@docspace/shared/components";
 ```
 
 ```jsx

@@ -1,6 +1,8 @@
-import styled from "styled-components";
-import Base from "../themes/base";
-import { mobile } from "../utils/device";
+import styled, { css } from "styled-components";
+import { Base } from "../../themes";
+import { mobile } from "../../utils";
+
+import { Calendar } from "../calendar";
 
 const DateInputStyle = styled.div`
   width: ${(props) => props.theme.datePicker.width};
@@ -70,4 +72,61 @@ const Body = styled.div`
 `;
 Body.defaultProps = { theme: Base };
 
-export { Body, Header, Content, DropDownStyle, DateInputStyle };
+const Wrapper = styled.div`
+  .selectedItem {
+    cursor: pointer;
+    .calendarIcon {
+      width: 12px;
+      height: 12px;
+      padding: 0 10px 0 2px;
+      path {
+        fill: #657077;
+      }
+    }
+  }
+`;
+
+const DateSelector = styled.div`
+  width: fit-content;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+
+  .mr-8 {
+    margin-right: 8px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl" &&
+      css`
+        margin-right: 0px;
+        margin-left: 8px;
+      `}
+  }
+`;
+
+const SelectedLabel = styled.span`
+  display: flex;
+  align-items: center;
+`;
+
+const StyledCalendar = styled(Calendar)`
+  position: absolute;
+
+  @media ${mobile} {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+  }
+`;
+
+export {
+  Body,
+  Header,
+  Content,
+  DropDownStyle,
+  DateInputStyle,
+  Wrapper,
+  SelectedLabel,
+  StyledCalendar,
+  DateSelector,
+};

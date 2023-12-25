@@ -1511,8 +1511,12 @@ class FilesStore {
             .reverse();
         });
 
+        const isRoom = !!data.current.roomType;
+        const inRoom = data.current.inRoom;
+
         this.selectedFolderStore.setSelectedFolder({
           folders: data.folders,
+          inRoom: inRoom ? inRoom : isRoom ? true : false,
           ...data.current,
           pathParts: data.pathParts,
           navigationPath,

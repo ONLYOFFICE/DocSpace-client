@@ -89,6 +89,7 @@ import { Tags } from "./tags";
 import { DragAndDrop } from "./drag-and-drop";
 import { AccessRightSelect } from "./access-right-select";
 import { SocialButton } from "./social-button";
+import { DatePicker } from "./date-picker";
 
 export type {
   TFallbackAxisSideDirection,
@@ -101,6 +102,7 @@ export type {
 };
 
 export {
+  DatePicker,
   AccessRightSelect,
   DragAndDrop,
   Tag,

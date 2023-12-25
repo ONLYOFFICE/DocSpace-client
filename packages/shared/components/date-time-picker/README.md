@@ -5,7 +5,7 @@ Date-time input
 ### Usage
 
 ```js
-import DateTimePicker from "@docspace/components/date-time-picker";
+import { DateTimePicker } from "@docspace/shared/components";
 ```
 
 ```jsx

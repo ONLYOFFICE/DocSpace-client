@@ -20,7 +20,7 @@ export interface DatePickerProps {
   /** Shows calendar icon in selected item */
   showCalendarIcon?: boolean;
   /** Allows to track date outside the component */
-  outerDate?: moment.Moment;
+  outerDate?: moment.Moment | null;
   /** Allows to set first shown date in calendar */
   openDate: moment.Moment;
   isMobile?: boolean;

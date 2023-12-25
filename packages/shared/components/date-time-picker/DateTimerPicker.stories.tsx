@@ -1,6 +1,10 @@
 import React from "react";
-import DateTimePicker from "./";
 import styled from "styled-components";
+import { StoryObj, Meta } from "@storybook/react";
+import moment from "moment";
+
+import { DateTimePicker } from "./DateTimePicker";
+import { DateTimePickerProps } from "./DateTimerPicker.types";
 
 const locales = [
   "az",
@@ -31,7 +35,7 @@ const locales = [
   "vi",
 ];
 
-export default {
+const meta = {
   title: "Components/DateTimePicker",
   component: DateTimePicker,
   argTypes: {
@@ -49,13 +53,16 @@ export default {
       },
     },
   },
-};
+} satisfies Meta<typeof DateTimePicker>;
+type Story = StoryObj<typeof DateTimePicker>;
+
+export default meta;
 
 const Wrapper = styled.div`
   height: 500px;
 `;
 
-const Template = ({ ...args }) => {
+const Template = ({ ...args }: DateTimePickerProps) => {
   return (
     <Wrapper>
       <DateTimePicker {...args} />
@@ -63,12 +70,12 @@ const Template = ({ ...args }) => {
   );
 };
 
-export const Default = Template.bind({});
-
-// @ts-expect-error TS(2339): Property 'args' does not exist on type '({ ...args... Remove this comment to see the full error message
-Default.args = {
-  locale: "en",
-  maxDate: new Date(new Date().getFullYear() + 10 + "/01/01"),
-  minDate: new Date("1970/01/01"),
-  openDate: new Date(),
+export const Default: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    locale: "en",
+    maxDate: new Date(`${new Date().getFullYear() + 10}/01/01`),
+    minDate: new Date("1970/01/01"),
+    openDate: moment(),
+  },
 };

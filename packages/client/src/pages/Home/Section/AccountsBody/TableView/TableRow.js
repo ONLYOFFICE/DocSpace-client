@@ -9,7 +9,7 @@ import Text from "@docspace/components/text";
 import Checkbox from "@docspace/components/checkbox";
 import ComboBox from "@docspace/components/combobox";
 import DropDownItem from "@docspace/components/drop-down-item";
-
+import uniqueId from "lodash/uniqueId";
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 
 import Badges from "../Badges";
@@ -25,9 +25,6 @@ const StyledPeopleRow = styled(TableRow)`
       cursor: pointer;
       background: ${(props) =>
         `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
-      border-top: ${(props) =>
-        `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
-      margin-top: -1px;
     }
 
     .table-container_user-name-cell {
@@ -38,8 +35,8 @@ const StyledPeopleRow = styled(TableRow)`
               padding-right: 24px;
             `
           : css`
-              margin-left: -24px;
-              padding-left: 24px;
+              margin-left: -24px !important;
+              padding-left: 24px !important;
             `}
     }
     .table-container_row-context-menu-wrapper {
@@ -50,8 +47,8 @@ const StyledPeopleRow = styled(TableRow)`
               padding-left: 20px;
             `
           : css`
-              margin-right: -20px;
-              padding-right: 20px;
+              margin-right: -20px !important;
+              padding-right: 20px !important;
             `}
     }
   }
@@ -238,10 +235,64 @@ const PeopleTableRow = (props) => {
 
   const [isLoading, setIsLoading] = React.useState(false);
 
+  let previousSibling = null;
+  let previousSiblingUserNameCell = null;
+  let previousSiblingContextMenu = null;
+
+  const id = uniqueId();
+
   const nameColor = isPending
     ? theme.peopleTableRow.pendingNameColor
     : theme.peopleTableRow.nameColor;
   const sideInfoColor = theme.peopleTableRow.sideInfoColor;
+
+  const onHover = () => {
+    const row = document.getElementById(id);
+
+    if (!row) return;
+
+    const parent = row.closest(".table-list-item");
+    previousSibling = parent.previousSibling;
+
+    if (!previousSibling) return;
+
+    previousSiblingUserNameCell = previousSibling.querySelector(
+      ".table-container_user-name-cell"
+    );
+    previousSiblingContextMenu = previousSibling.querySelector(
+      ".table-container_row-context-menu-wrapper"
+    );
+
+    previousSiblingUserNameCell.style.marginLeft = "-24px";
+    previousSiblingUserNameCell.style.paddingLeft = "24px";
+
+    previousSiblingContextMenu.style.marginRight = "-20px";
+    previousSiblingContextMenu.style.paddingRight = "20px";
+  };
+
+  const onHoverRemove = () => {
+    if (!previousSibling) return;
+
+    previousSiblingUserNameCell.style.marginLeft = "0";
+    previousSiblingUserNameCell.style.paddingLeft = "0";
+
+    previousSiblingContextMenu.style.marginRight = "0";
+    previousSiblingContextMenu.style.paddingRight = "0";
+  };
+
+  React.useEffect(() => {
+    let row = document.getElementById(id);
+
+    if (!row) return;
+
+    row.addEventListener("mouseover", onHover);
+    row.addEventListener("mouseout", onHoverRemove);
+
+    return () => {
+      row.removeEventListener("mouseover", onHover);
+      row.removeEventListener("mouseout", onHoverRemove);
+    };
+  }, [id]);
 
   const getTypesOptions = React.useCallback(() => {
     const options = [];
@@ -415,6 +466,7 @@ const PeopleTableRow = (props) => {
       value={value}
     >
       <StyledPeopleRow
+        id={id}
         key={item.id}
         className="table-row"
         sideInfoColor={sideInfoColor}

@@ -1,12 +1,14 @@
 import React from "react";
-import FillingStatusLine from "./";
+
+import { FillingStatusLine } from "./FillingStatusLine";
+import { FillingStatusLineProps } from "./FillingStatusLine.types";
 
 export default {
   title: "Components/FillingStatusLine",
   component: FillingStatusLine,
 };
 
-const Template = (args: any) => {
+const Template = (args: FillingStatusLineProps) => {
   return <FillingStatusLine {...args} />;
 };
 

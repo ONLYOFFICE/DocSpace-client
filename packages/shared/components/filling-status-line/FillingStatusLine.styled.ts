@@ -1,33 +1,32 @@
 import styled from "styled-components";
-import { Base } from "../themes";
+import { Base } from "../../themes";
 
-const FillingStatusContainer = styled.div`
+const FillingStatusContainer = styled.div<{
+  isDone?: boolean;
+  isInterrupted?: boolean;
+}>`
   width: 100%;
   max-width: 425px;
   padding: 10px;
 
   .status-done-text {
-    // @ts-expect-error TS(2339): Property 'isDone' does not exist on type 'ThemedSt... Remove this comment to see the full error message
     color: ${(props) => (props.isDone ? "#4781D1" : "#A3A9AE")};
   }
 
   .status-done-icon {
     circle,
     path {
-      // @ts-expect-error TS(2339): Property 'isDone' does not exist on type 'ThemedSt... Remove this comment to see the full error message
       stroke: ${(props) => (props.isDone ? "#4781D1" : "#A3A9AE")};
     }
   }
 
   .status-interrupted-text {
-    // @ts-expect-error TS(2339): Property 'isInterrupted' does not exist on type 'T... Remove this comment to see the full error message
     color: ${(props) => props.isInterrupted && "#F2675A"};
   }
 
   .status-interrupted-icon {
     circle,
     path {
-      // @ts-expect-error TS(2339): Property 'isInterrupted' does not exist on type 'T... Remove this comment to see the full error message
       stroke: ${(props) => props.isInterrupted && "#F2675A"};
     }
   }
@@ -41,7 +40,13 @@ const FillingStatusContainer = styled.div`
   }
 `;
 
-const AccordionItem = styled.div`
+FillingStatusContainer.defaultProps = { theme: Base };
+
+const AccordionItem = styled.div<{
+  isInterrupted?: boolean;
+  isDone?: boolean;
+  isOpen?: boolean;
+}>`
   width: 100%;
 
   .accordion-item-info {
@@ -56,7 +61,6 @@ const AccordionItem = styled.div`
       padding: 1px;
       border: 2px solid #a3a9ae;
       border-color: ${(props) =>
-        // @ts-expect-error TS(2339): Property 'isDone' does not exist on type 'ThemedSt... Remove this comment to see the full error message
         (props.isDone && "#4781D1") || (props.isInterrupted && "#F2675A")};
       border-radius: 50%;
     }
@@ -75,10 +79,8 @@ const AccordionItem = styled.div`
       justify-content: center;
       cursor: pointer;
       transform: ${(props) =>
-        // @ts-expect-error TS(2339): Property 'isOpen' does not exist on type 'ThemedSt... Remove this comment to see the full error message
         props.isOpen ? "rotate(270deg)" : "rotate(90deg)"};
       path {
-        // @ts-expect-error TS(2339): Property 'isOpen' does not exist on type 'ThemedSt... Remove this comment to see the full error message
         fill: ${(props) => (props.isOpen ? "#4781d1" : "#A3A9AE")};
       }
     }
@@ -99,12 +101,10 @@ const AccordionItem = styled.div`
     display: flex;
     align-items: center;
     min-height: 40px;
-    // @ts-expect-error TS(2339): Property 'isDone' does not exist on type 'ThemedSt... Remove this comment to see the full error message
     margin: ${(props) => (props.isDone || props.isInterrupted ? "0" : "2px 0")};
 
     ${(props) => {
       const borderValue = `2px ${
-        // @ts-expect-error TS(2339): Property 'isDone' does not exist on type 'ThemedSt... Remove this comment to see the full error message
         props.isDone || props.isInterrupted ? "solid" : "dashed"
       } #A3A9AE;`;
 
@@ -113,7 +113,6 @@ const AccordionItem = styled.div`
         : `border-left: ${borderValue}`;
     }}
     border-color: ${(props) =>
-      // @ts-expect-error TS(2339): Property 'isDone' does not exist on type 'ThemedSt... Remove this comment to see the full error message
       (props.isDone && "#4781D1") || (props.isInterrupted && "#F2675A")};
 
     .status-text {
@@ -133,7 +132,6 @@ const AccordionItem = styled.div`
         props.theme.interfaceDirection === "rtl"
           ? `margin-right: 15px;`
           : `margin-left: 15px;`}
-      // @ts-expect-error TS(2339): Property 'isDone' does not exist on type 'ThemedSt... Remove this comment to see the full error message
       color: ${(props) => (props.isDone ? "#4781D1" : "#657077")};
     }
   }

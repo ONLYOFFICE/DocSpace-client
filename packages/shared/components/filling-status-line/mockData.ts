@@ -9,7 +9,8 @@ export const mockData = [
     filledAndSignedDate: "26.01.2023 13:56",
     returnedByUser: "Returned by Teacher",
     returnedByUserDate: "25.01.2023 13:56",
-    comment: "The registration block is filled in incorrectly. It is necessary to specify the user ID, and the email is specified. The user ID can be viewed on the profile page.",
+    comment:
+      "The registration block is filled in incorrectly. It is necessary to specify the user ID, and the email is specified. The user ID can be viewed on the profile page.",
     avatar: null,
   },
   {

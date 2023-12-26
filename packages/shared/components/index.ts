@@ -98,6 +98,7 @@ import { Grid } from "./grid";
 import { Slider } from "./slider";
 import { ImageEditor } from "./image-editor";
 import { Paging } from "./paging";
+import { TabsContainer, TElement } from "./tabs-container";
 
 export type {
   TFallbackAxisSideDirection,
@@ -107,9 +108,11 @@ export type {
   TTableColumn,
   TGroupMenuItem,
   BarConfig,
+  TElement,
 };
 
 export {
+  TabsContainer,
   Paging,
   ImageEditor,
   Slider,

@@ -1,17 +1,23 @@
 import React from "react";
-import TabContainer from "./";
 import styled from "styled-components";
+import { Meta, StoryObj } from "@storybook/react";
 
-export default {
-  title: "Components/TabContainer",
-  component: TabContainer,
+import { TabsContainer } from "./TabsContainer";
+import { TElement, TabsContainerProps } from "./TabsContainer.types";
+
+const meta = {
+  title: "Components/TabsContainer",
+  component: TabsContainer,
   parameters: {
     design: {
       type: "figma",
       url: "https://www.figma.com/file/ZiW5KSwb4t7Tj6Nz5TducC/UI-Kit-DocSpace-1.0.0?type=design&node-id=638-4439&mode=design&t=TBNCKMQKQMxr44IZ-0",
     },
   },
-};
+} satisfies Meta<typeof TabsContainer>;
+type Story = StoryObj<typeof TabsContainer>;
+
+export default meta;
 
 const arrayItems = [
   {
@@ -20,16 +26,19 @@ const arrayItems = [
     content: (
       <div>
         <div>
-          <button>BUTTON</button> <button>BUTTON</button>
-          <button>BUTTON</button>
+          <button type="button">BUTTON</button>
+          <button type="button">BUTTON</button>
+          <button type="button">BUTTON</button>
         </div>
         <div>
-          <button>BUTTON</button> <button>BUTTON</button>
-          <button>BUTTON</button>
+          <button type="button">BUTTON</button>
+          <button type="button">BUTTON</button>
+          <button type="button">BUTTON</button>
         </div>
         <div>
-          <button>BUTTON</button> <button>BUTTON</button>
-          <button>BUTTON</button>
+          <button type="button">BUTTON</button>
+          <button type="button">BUTTON</button>
+          <button type="button">BUTTON</button>
         </div>
       </div>
     ),
@@ -74,16 +83,19 @@ const arrayItems = [
     content: (
       <div>
         <div>
-          <button>BUTTON</button> <button>BUTTON</button>
-          <button>BUTTON</button>
+          <button type="button">BUTTON</button>
+          <button type="button">BUTTON</button>
+          <button type="button">BUTTON</button>
         </div>
         <div>
-          <button>BUTTON</button> <button>BUTTON</button>
-          <button>BUTTON</button>
+          <button type="button">BUTTON</button>
+          <button type="button">BUTTON</button>
+          <button type="button">BUTTON</button>
         </div>
         <div>
-          <button>BUTTON</button> <button>BUTTON</button>
-          <button>BUTTON</button>
+          <button type="button">BUTTON</button>
+          <button type="button">BUTTON</button>
+          <button type="button">BUTTON</button>
         </div>
       </div>
     ),
@@ -404,18 +416,15 @@ const StyledTitle = styled.h5.attrs({ dir: "auto" })`
     theme.interfaceDirection === "rtl" ? `right` : `left`};
 `;
 
-const Template = ({
-  onSelect,
-  ...args
-}: any) => {
+const Template = ({ onSelect, ...args }: TabsContainerProps) => {
   return (
     <div>
       <StyledTitle style={{ marginBottom: 20 }}>
         Base TabsContainer:
       </StyledTitle>
-      <TabContainer
+      <TabsContainer
         {...args}
-        onSelect={(index: any) => onSelect(index)}
+        onSelect={(index: TElement) => onSelect(index)}
         selectedItem={arrayItems.indexOf(arrayItems[0])}
         elements={arrayItems}
       />
@@ -424,11 +433,11 @@ const Template = ({
         <StyledTitle style={{ marginTop: 100, marginBottom: 20 }}>
           Autoscrolling with different tab widths:
         </StyledTitle>
-        <TabContainer
+        <TabsContainer
           {...args}
           selectedItem={3}
           elements={scrollArrayItems}
-          onSelect={(index: any) => onSelect(index)}
+          onSelect={(index: TElement) => onSelect(index)}
         />
       </div>
 
@@ -436,19 +445,23 @@ const Template = ({
         <StyledTitle style={{ marginTop: 100, marginBottom: 20 }}>
           Autoscrolling with the same tabs width:
         </StyledTitle>
-        <TabContainer
+        <TabsContainer
           {...args}
           selectedItem={5}
           elements={tabsItems}
-          onSelect={(index: any) => onSelect(index)}
+          onSelect={(index: TElement) => onSelect(index)}
         />
       </div>
     </div>
   );
 };
 
-export const basic = Template.bind({});
-// @ts-expect-error TS(2339): Property 'args' does not exist on type '({ onSelec... Remove this comment to see the full error message
-basic.args = {
-  isDisabled: false,
+export const basic: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    elements: tabsItems,
+    isDisabled: false,
+    selectedItem: 0,
+    onSelect: () => {},
+  },
 };

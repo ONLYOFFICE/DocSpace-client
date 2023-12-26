@@ -1,7 +1,8 @@
-import Scrollbar from "../scrollbar";
 import styled, { css } from "styled-components";
-import NoUserSelect from "../utils/commonStyles";
-import Base from "../themes/base";
+import { NoUserSelect } from "../../utils";
+import { Base, TColorScheme } from "../../themes";
+
+import { Scrollbar } from "../scrollbar";
 
 const StyledScrollbar = styled(Scrollbar)`
   width: ${(props) => props.theme.tabsContainer.scrollbar.width} !important;
@@ -17,7 +18,7 @@ const NavItem = styled.div`
 `;
 NavItem.defaultProps = { theme: Base };
 
-const Label = styled.div`
+const Label = styled.div<{ isDisabled?: boolean; selected?: boolean }>`
   height: ${(props) => props.theme.tabsContainer.label.height};
   border-radius: ${(props) => props.theme.tabsContainer.label.borderRadius};
   min-width: ${(props) => props.theme.tabsContainer.label.minWidth};
@@ -32,48 +33,53 @@ const Label = styled.div`
   }
 
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'isDisabled' does not exist on type 'Them... Remove this comment to see the full error message
     props.isDisabled &&
     css`
       pointer-events: none;
     `}
 
   ${(props) =>
-    // @ts-expect-error TS(2339): Property 'selected' does not exist on type 'Themed... Remove this comment to see the full error message
     props.selected
       ? css`
           cursor: default;
-          background-color: ${(props) =>
-            props.theme.tabsContainer.label.backgroundColor};
+          background-color: ${props.theme.tabsContainer.label.backgroundColor};
           .title_style {
-            color: ${(props) => props.theme.tabsContainer.label.title.color};
+            color: ${props.theme.tabsContainer.label.title.color};
           }
         `
       : css`
           &:hover {
             cursor: pointer;
-            background-color: ${(props) =>
-              props.theme.tabsContainer.label.hoverBackgroundColor};
+            background-color: ${props.theme.tabsContainer.label
+              .hoverBackgroundColor};
             .title_style {
-              color: ${(props) =>
-                props.theme.tabsContainer.label.title.hoverColor};
+              color: ${props.theme.tabsContainer.label.title.hoverColor};
             }
           }
         `}
 
 ${(props) =>
-    // @ts-expect-error TS(2339): Property 'isDisabled' does not exist on type 'Them... Remove this comment to see the full error message
     props.isDisabled &&
-    // @ts-expect-error TS(2339): Property 'selected' does not exist on type 'Themed... Remove this comment to see the full error message
     props.selected &&
     css`
-      background-color: ${(props) =>
-        props.theme.tabsContainer.label.disableBackgroundColor};
+      background-color: ${props.theme.tabsContainer.label
+        .disableBackgroundColor};
       .title_style {
-        color: ${(props) => props.theme.tabsContainer.label.title.disableColor};
+        color: ${props.theme.tabsContainer.label.title.disableColor};
       }
     `}
 `;
 
 Label.defaultProps = { theme: Base };
-export { NavItem, Label, StyledScrollbar };
+
+const StyledLabelTheme = styled(Label)<{ $currentColorScheme?: TColorScheme }>`
+  background-color: ${(props) =>
+    props.selected && props.$currentColorScheme?.main.accent} !important;
+
+  .title_style {
+    color: ${(props) =>
+      props.selected && props.$currentColorScheme?.text.accent};
+  }
+`;
+
+export { NavItem, Label, StyledScrollbar, StyledLabelTheme };

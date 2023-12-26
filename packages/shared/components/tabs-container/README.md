@@ -5,7 +5,7 @@ Custom Tabs menu
 ### Usage
 
 ```js
-import TabContainer from "@docspace/components/tabs-container";
+import { TabContainer } from "@docspace/shared/components";
 ```
 
 ```js

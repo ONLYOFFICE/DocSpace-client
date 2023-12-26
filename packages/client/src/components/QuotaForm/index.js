@@ -65,6 +65,8 @@ const QuotaForm = ({
   ];
 
   const getConvertedSize = (value) => {
+    if (typeof value === "number") return conversionToBytes(value, power);
+
     return value.trim() !== "" ? conversionToBytes(value, power) : "";
   };
   const onChangeTextInput = (e) => {

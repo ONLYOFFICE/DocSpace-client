@@ -165,6 +165,7 @@
   "ServerSideEncryptionMethod": "Server Side Encryption Method",
   "ServiceUrl": "Service Url",
   "SessionLifetime": "Session Lifetime",
+  "SessionsSubtitle": "The last active sessions of all users for the last 3 days. If you want the full report, you can download it using the button below. Here you can disable individual user sessions or remove a user from DocSpace.",
   "SessionLifetimeMobileDescription": "Session Lifetime allows to set time (in minutes) before the DocSpace users will need to enter the space credentials again in order to access the space.",
   "SessionLifetimeSettingDescription": "Adjust Session Lifetime to define the time period before automatic logoff. After saving, logoff will be performed for all users.",
   "SettingPasswordDescription": "Configure Password Strength Settings to enforce more secure, computation-resistant passwords.",

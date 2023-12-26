@@ -16,6 +16,12 @@ declare module "*.svg" {
 
 declare module "external-remotes-plugin" {}
 declare module "csvjson-json_beautifier" {}
+declare module "react-values" {
+  const StringValue: React.ReactNode;
+  const BooleanValue: React.ReactNode;
+
+  export { StringValue, BooleanValue };
+}
 
 declare module "resize-image" {
   type ImageFormat = "png" | "gif" | "bmp" | "jpeg" | "webp";

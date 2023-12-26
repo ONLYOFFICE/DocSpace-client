@@ -196,11 +196,13 @@ class DetailsHelper {
       case "Tags":
         return this.t("Common:Tags");
       case "Storage":
-        if (!this.item?.security?.EditRoom) return <></>;
+        if (this.item.security.Create || this.item?.security?.EditRoom) {
+          return this.isDefaultRoomsQuotaSet
+            ? this.t("Common:StorageAndQuota")
+            : this.t("Common:Storage");
+        }
 
-        return this.isDefaultRoomsQuotaSet
-          ? this.t("Common:StorageAndQuota")
-          : this.t("Common:Storage");
+        return <></>;
     }
   };
 
@@ -325,9 +327,16 @@ class DetailsHelper {
   };
 
   getQuotaItem = () => {
-    if (!this.item?.security?.EditRoom) return <></>;
+    if (this.item.security.Create) {
+      return (
+        <SpaceQuota
+          item={this.item}
+          isReadOnly={!this.item?.security?.EditRoom}
+        />
+      );
+    }
 
-    return <SpaceQuota item={this.item} />;
+    return <></>;
   };
 }
 

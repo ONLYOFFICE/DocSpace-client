@@ -128,6 +128,13 @@ const RoomsRowDataComponent = (props) => {
       ) : (
         <div />
       )}
+      {roomQuotaColumnIsEnable ? (
+        <TableCell className={"table-cell_Storage/Quota"}>
+          <SpaceQuota item={item} type="room" />
+        </TableCell>
+      ) : (
+        <div />
+      )}
 
       {roomColumnQuickButtonsIsEnabled ? (
         <TableCell
@@ -145,13 +152,6 @@ const RoomsRowDataComponent = (props) => {
           <StyledQuickButtonsContainer>
             {quickButtonsComponent}
           </StyledQuickButtonsContainer>
-        </TableCell>
-      ) : (
-        <div />
-      )}
-      {roomQuotaColumnIsEnable ? (
-        <TableCell className={"table-cell_Storage/Quota"}>
-          <SpaceQuota item={item} type="room" />
         </TableCell>
       ) : (
         <div />

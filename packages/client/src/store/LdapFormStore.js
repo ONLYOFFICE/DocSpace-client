@@ -68,7 +68,7 @@ class LdapFormStore {
   groupAttribute = "member";
   groupNameAttribute = "cn";
 
-  cron = "* * * * *";
+  cron = null;
   nextSyncDate = "";
 
   inProgress = false;

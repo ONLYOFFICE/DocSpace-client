@@ -57,32 +57,43 @@ const SyncContainer = ({
 
       <ToggleAutoSync isLDAPAvailable={isLdapAvailable} />
 
-      <Text
-        fontSize="13px"
-        fontWeight={400}
-        lineHeight="20px"
-        className="ldap_cron-title"
-        noSelect
-      >
-        {t("Here you can set how often you want to auto sync LDAP users")}
-      </Text>
-
-      <div className="ldap_cron-container">
-        <Cron value={cron} setValue={onChangeCron} />
-      </div>
-
-      {nextSyncDate && (
-        <Text
-          fontSize="12px"
-          fontWeight={600}
-          lineHeight="16px"
-          color={"#A3A9AE"}
-          noSelect
-        >
-          {`${t("Next synchronization")}: ${nextSyncDate
-            .toUTC()
-            .toFormat("DDDD tt")}`}
-        </Text>
+      {cron && (
+        <>
+          {" "}
+          <Text
+            fontSize="13px"
+            fontWeight={400}
+            lineHeight="20px"
+            className="ldap_cron-title"
+            noSelect
+          >
+            {t("LdapSyncCronTitle")}
+          </Text>
+          <div className="ldap_cron-container">
+            <Cron value={cron} setValue={onChangeCron} />
+          </div>
+          {nextSyncDate && (
+            <Text
+              fontSize="12px"
+              fontWeight={600}
+              lineHeight="16px"
+              color={"#A3A9AE"}
+              noSelect
+            >
+              {`${t("LdapNextSync")}: ${nextSyncDate
+                .toUTC()
+                .toFormat("DDDD tt")}`}
+            </Text>
+          )}
+          <Button
+            tabIndex={-1}
+            className="manual-sync-button"
+            size="normal"
+            primary
+            // onClick={syncLdap} TODO: add saving logic
+            label={t("Common:SaveButton")}
+          />
+        </>
       )}
     </Box>
   );

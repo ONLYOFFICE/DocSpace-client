@@ -12,6 +12,7 @@ import LoginHistory from "./login-history/index.js";
 import MobileSecurityLoader from "./sub-components/loaders/mobile-security-loader";
 import AccessLoader from "./sub-components/loaders/access-loader";
 import AuditTrail from "./audit-trail/index.js";
+import Sessions from "./sessions/index";
 import { resetSessionStorage } from "../../utils";
 import { DeviceType } from "@docspace/common/constants/index.js";
 
@@ -36,6 +37,11 @@ const SecurityWrapper = (props) => {
       id: "audit-trail",
       name: t("AuditTrailNav"),
       content: <AuditTrail />,
+    },
+    {
+      id: "sessions",
+      name: t("Sessions"),
+      content: <Sessions />,
     },
   ];
 

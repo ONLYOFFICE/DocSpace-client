@@ -20,6 +20,7 @@ export const MainContainer = styled.div`
   width: 100%;
 
   .subtitle {
+    max-width: 700px;
     margin-bottom: 20px;
     color: ${(props) => props.theme.client.settings.common.descriptionColor};
   }

@@ -200,6 +200,14 @@ export const settingsTree = [
         tKey: "AuditTrailNav",
         isCategory: true,
       },
+      {
+        id: "portal-settings_catalog-sessions",
+        key: "1-4",
+        icon: "",
+        link: "sessions",
+        tKey: "Sessions",
+        isCategory: true,
+      },
     ],
   },
   {

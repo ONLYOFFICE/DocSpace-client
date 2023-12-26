@@ -211,6 +211,10 @@ const PortalSettingsRoutes = {
       element: <SecuritySettings />,
     },
     {
+      path: "security/sessions",
+      element: <SecuritySettings />,
+    },
+    {
       path: "security/access-portal/tfa",
       element: <TfaPage />,
     },

@@ -55,6 +55,7 @@ import {
   RoomsType,
   DeviceType,
   FolderType,
+  ShareAccessRights,
 } from "@docspace/common/constants";
 
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -601,6 +602,7 @@ const SectionHeaderContent = (props) => {
       canDeleteAll,
 
       security,
+      haveLinksRight,
       isPublicRoomType,
       isPublicRoom,
     } = props;
@@ -674,8 +676,7 @@ const SectionHeaderContent = (props) => {
         disabled:
           isRecycleBinFolder ||
           isPersonalRoom ||
-          isPublicRoomType ||
-          isCustomRoomType,
+          ((isPublicRoomType || isCustomRoomType) && haveLinksRight),
         icon: InvitationLinkReactSvgUrl,
       },
       {
@@ -736,7 +737,7 @@ const SectionHeaderContent = (props) => {
             }
           }
         },
-        disabled: !isPublicRoomType && !isCustomRoomType,
+        disabled: (!isPublicRoomType && !isCustomRoomType) || !haveLinksRight,
       },
       {
         id: "header_option_invite-users-to-room",
@@ -1210,15 +1211,24 @@ export default inject(
       onClickBack,
       emptyTrashInProgress,
       moveToPublicRoom,
-      onClickCreateRoom
+      onClickCreateRoom,
     } = filesActionsStore;
 
     const { oformsFilter } = oformsStore;
 
     const { setIsVisible, isVisible } = auth.infoPanelStore;
 
-    const { title, id, roomType, pathParts, navigationPath, security, inRoom } =
-      selectedFolderStore;
+    const {
+      title,
+      id,
+      roomType,
+      pathParts,
+      navigationPath,
+      security,
+      inRoom,
+      access,
+      canCopyPublicLink,
+    } = selectedFolderStore;
 
     const selectedFolder = { ...selectedFolderStore };
 
@@ -1314,6 +1324,7 @@ export default inject(
 
       setSelected,
       security,
+      canCopyPublicLink,
 
       setSharingPanelVisible,
       setMoveToPanelVisible,

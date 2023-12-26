@@ -10,12 +10,12 @@ import Checkbox from "@docspace/components/checkbox";
 import ComboBox from "@docspace/components/combobox";
 import TabContainer from "@docspace/components/tabs-container";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
+import RadioButtonGroup from "@docspace/components/radio-button-group";
 import { objectToGetParams, loadScript } from "@docspace/common/utils";
 import { inject, observer } from "mobx-react";
 
 import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 import HelpButton from "@docspace/components/help-button";
-import Link from "@docspace/components/link";
 
 import GetCodeDialog from "../sub-components/GetCodeDialog";
 import Button from "@docspace/components/button";
@@ -34,57 +34,75 @@ import {
   Frame,
   Container,
   RowContainer,
-  ColumnContainer,
   Preview,
   GetCodeButtonWrapper,
   FilesSelectorInputWrapper,
 } from "./StyledPresets";
 
 const FileSelector = (props) => {
-  const { t, setDocumentTitle, currentColorScheme, sdkLink } = props;
+  const { t, setDocumentTitle } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
   const scriptUrl = `${window.location.origin}/static/scripts/api.js`;
-
-  const dataSortBy = [
-    { key: "DateAndTime", label: t("Common:LastModifiedDate"), default: true },
-    { key: "AZ", label: t("Common:Title") },
-    { key: "Type", label: t("Common:Type") },
-    { key: "Size", label: t("Common:Size") },
-    { key: "DateAndTimeCreation", label: t("Files:ByCreation") },
-    { key: "Author", label: t("Files:ByAuthor") },
-  ];
-
-  const dataSortOrder = [
-    { key: "descending", label: t("Descending"), default: true },
-    { key: "ascending", label: t("Ascending") },
-  ];
 
   const dataDimensions = [
     { key: "percent", label: "%", default: true },
     { key: "pixel", label: "px" },
   ];
 
-  const [sortBy, setSortBy] = useState(dataSortBy[0]);
-  const [sortOrder, setSortOrder] = useState(dataSortOrder[0]);
+  const elementDisplayOptions = [
+    { value: "element", label: t("ElementItself") },
+    {
+      value: "button",
+      label: (
+        <RowContainer>
+          {t("Common:Button")}
+          <Text color="gray">{`(${t("ElementCalledAfterClicking")})`}</Text>
+        </RowContainer>
+      ),
+    },
+  ];
+
+  const fileTypeDisplay = [
+    { value: "all-types", label: "All types" },
+    { value: "custom-types", label: "Select types" },
+  ];
+
+  const fileOptions = [
+    { key: "file-type-all", label: t("Files:AllFiles") },
+    { key: "file-type-documents", label: t("Common:Documents") },
+    { key: "file-type-folders", label: t("Translations:Folders") },
+    { key: "file-type-spreadsheets", label: t("Translations:Spreadsheets") },
+    { key: "file-type-archives", label: t("Files:Archives") },
+    { key: "file-type-presentations", label: t("Translations:Presentations") },
+    { key: "file-type-images", label: t("Filse:Images") },
+    { key: "file-type-media", label: t("Files:Media") },
+    { key: "file-type-forms-templates", label: t("Files:FormsTemplates") },
+    { key: "file-type-forms", label: t("Files:Forms") },
+  ];
+
   const [widthDimension, setWidthDimension] = useState(dataDimensions[0]);
   const [heightDimension, setHeightDimension] = useState(dataDimensions[1]);
   const [width, setWidth] = useState("100");
   const [height, setHeight] = useState("600");
-  const [withSubfolders, setWithSubfolders] = useState(true);
   const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
   const [showPreview, setShowPreview] = useState(window.innerWidth > showPreviewThreshold);
+  const [selectedElementType, setSelectedElementType] = useState(elementDisplayOptions[0].value);
+  const [typeDisplay, setTypeDisplay] = useState(fileTypeDisplay[0].value);
+  const [selectedTypeOption, setSelectedTypeOption] = useState({
+    key: "select",
+    label: t("Common:SelectAction"),
+  });
 
   const [config, setConfig] = useState({
+    mode: "file-selector",
     width: `${width}${widthDimension.label}`,
     height: `${height}${heightDimension.label}`,
     frameId: "ds-frame",
-    showHeader: true,
-    showTitle: true,
-    showMenu: true,
-    showFilter: true,
     init: true,
+    showSelectorCancel: true,
+    showSelectorHeader: true,
   });
 
   const params = objectToGetParams(config);
@@ -144,28 +162,8 @@ const FileSelector = (props) => {
     });
   };
 
-  const onChangeWithSubfolders = (e) => {
-    setConfig((config) => {
-      return { ...config, withSubfolders: !withSubfolders };
-    });
-
-    setWithSubfolders(!withSubfolders);
-  };
-
-  const onChangeSortBy = (item) => {
-    setConfig((config) => {
-      return { ...config, sortby: item.key };
-    });
-
-    setSortBy(item);
-  };
-
-  const onChangeSortOrder = (item) => {
-    setConfig((config) => {
-      return { ...config, sortorder: item.key };
-    });
-
-    setSortOrder(item);
+  const changeColumnsOption = (e) => {
+    setTypeDisplay(e.target.value);
   };
 
   const onChangeWidthDimension = (item) => {
@@ -184,51 +182,13 @@ const FileSelector = (props) => {
     setHeightDimension(item);
   };
 
-  const onChangeShowHeader = (e) => {
-    setConfig((config) => {
-      return { ...config, showHeader: !config.showHeader };
-    });
-  };
-
-  const onChangeShowTitle = () => {
-    setConfig((config) => {
-      return { ...config, showTitle: !config.showTitle };
-    });
-  };
-
-  const onChangeShowMenu = (e) => {
-    setConfig((config) => {
-      return { ...config, showMenu: !config.showMenu };
-    });
-  };
-
-  const onChangeShowFilter = (e) => {
-    setConfig((config) => {
-      return { ...config, showFilter: !config.showFilter };
-    });
-  };
-
-  const onChangeCount = (e) => {
-    setConfig((config) => {
-      return { ...config, count: e.target.value };
-    });
-  };
-
-  const onChangePage = (e) => {
-    setConfig((config) => {
-      return { ...config, page: e.target.value };
-    });
-  };
-
-  const onChangeSearch = (e) => {
-    setConfig((config) => {
-      return { ...config, search: e.target.value };
-    });
-  };
-
   const openGetCodeModal = () => setIsGetCodeDialogOpened(true);
 
   const closeGetCodeModal = () => setIsGetCodeDialogOpened(false);
+
+  const onTypeSelect = (option) => {
+    setSelectedTypeOption(option);
+  };
 
   const onResize = () => {
     const isEnoughWidthForPreview = window.innerWidth > showPreviewThreshold;
@@ -274,14 +234,7 @@ const FileSelector = (props) => {
   return (
     <SDKContainer>
       <CategoryDescription>
-        <Text className="sdk-description">{t("SDKDescription")}</Text>
-        <Link
-          color={currentColorScheme?.main?.accent}
-          fontSize="12px"
-          fontWeight="400"
-          onClick={() => window.open(sdkLink, "_blank")}>
-          {t("APILink")}.
-        </Link>
+        <Text className="sdk-description">{t("FileSelectorDescription")}</Text>
       </CategoryDescription>
       <CategoryHeader>{t("CreateSampleHeader")}</CategoryHeader>
       <Container>
@@ -291,6 +244,14 @@ const FileSelector = (props) => {
           </Preview>
         )}
         <Controls>
+          <CategorySubHeader>{t("MainElementParameter")}</CategorySubHeader>
+          <RadioButtonGroup
+            orientation="vertical"
+            options={elementDisplayOptions}
+            name="elementDisplayInput"
+            selected={selectedElementType}
+            onClick={() => {}}
+          />
           <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
           <ControlsGroup>
             <Label className="label" text={t("EmbeddingPanel:Width")} />
@@ -348,30 +309,38 @@ const FileSelector = (props) => {
             <Label className="label">{t("InterfaceElements")}</Label>
             <Checkbox
               className="checkbox"
-              label={t("Menu")}
-              onChange={onChangeShowMenu}
-              isChecked={config.showMenu}
+              label={t("Common:Title")}
+              onChange={() => {}}
+              isChecked={true}
             />
             <Checkbox
               className="checkbox"
-              label={t("Header")}
-              onChange={onChangeShowHeader}
-              isChecked={config.showHeader}
+              label={t("Subtitle")}
+              onChange={() => {}}
+              isChecked={true}
             />
             <Checkbox
               className="checkbox"
-              label={t("Filter")}
-              onChange={onChangeShowFilter}
-              isChecked={config.showFilter}
+              label={t("Common:Search")}
+              onChange={() => {}}
+              isChecked={true}
             />
-            <RowContainer>
-              <Checkbox
-                label={t("Title")}
-                onChange={onChangeShowTitle}
-                isChecked={config.showTitle}
-              />
-              <Text color="gray">{`(${t("MobileOnly")})`}</Text>
-            </RowContainer>
+            <Label className="label" text={t("SelectButtonText")} />
+            <TextInput
+              scale={true}
+              onChange={() => {}}
+              placeholder={t("Common:SelectAction")}
+              value={t("Common:SelectAction")}
+              tabIndex={4}
+            />
+            <Label className="label" text={t("CancelButtonText")} />
+            <TextInput
+              scale={true}
+              onChange={() => {}}
+              placeholder={t("Common:CancelButton")}
+              value={t("Common:CancelButton")}
+              tabIndex={4}
+            />
           </InterfaceElements>
           <CategorySubHeader>{t("DataDisplay")}</CategorySubHeader>
           <ControlsGroup>
@@ -389,72 +358,23 @@ const FileSelector = (props) => {
           </ControlsGroup>
           <CategorySubHeader>{t("AdvancedDisplay")}</CategorySubHeader>
           <ControlsGroup>
-            <Label className="label" text={t("SearchTerm")} />
-            <ColumnContainer>
-              <TextInput
-                scale={true}
-                onChange={onChangeSearch}
-                placeholder={t("Common:Search")}
-                value={config.search}
-                tabIndex={5}
+            <Label className="label" text={t("FileTypeDisplay")} />
+            <RadioButtonGroup
+              orientation="vertical"
+              options={fileTypeDisplay}
+              name="columnsDisplayOptions"
+              selected={typeDisplay}
+              onClick={changeColumnsOption}
+            />
+            {typeDisplay === "custom-types" && (
+              <ComboBox
+                onSelect={onTypeSelect}
+                options={fileOptions}
+                scaled={true}
+                directionY="top"
+                selectedOption={selectedTypeOption}
               />
-              <Checkbox
-                className="checkbox"
-                label={t("Files:WithSubfolders")}
-                onChange={onChangeWithSubfolders}
-                isChecked={withSubfolders}
-              />
-            </ColumnContainer>
-          </ControlsGroup>
-          <ControlsGroup>
-            <Label className="label" text={t("Common:SortBy")} />
-            <ComboBox
-              onSelect={onChangeSortBy}
-              options={dataSortBy}
-              scaled={true}
-              selectedOption={sortBy}
-              displaySelectedOption
-              directionY="top"
-            />
-          </ControlsGroup>
-          <ControlsGroup>
-            <Label className="label" text={t("SortOrder")} />
-            <ComboBox
-              onSelect={onChangeSortOrder}
-              options={dataSortOrder}
-              scaled={true}
-              selectedOption={sortOrder}
-              displaySelectedOption
-              directionY="top"
-            />
-          </ControlsGroup>
-          <ControlsGroup>
-            <LabelGroup>
-              <Label className="label" text={t("ItemsCount")} />
-              <HelpButton
-                offsetRight={0}
-                size={12}
-                tooltipContent={<Text fontSize="12px">{t("ItemsCountDescription")}</Text>}
-              />
-            </LabelGroup>
-            <TextInput
-              scale={true}
-              onChange={onChangeCount}
-              placeholder={t("EnterCount")}
-              value={config.count}
-              tabIndex={6}
-            />
-          </ControlsGroup>
-          <ControlsGroup>
-            <Label className="label" text={t("Page")} />
-            <TextInput
-              scale={true}
-              onChange={onChangePage}
-              placeholder={t("EnterPage")}
-              value={config.page}
-              isDisabled={!config.count}
-              tabIndex={7}
-            />
+            )}
           </ControlsGroup>
         </Controls>
       </Container>
@@ -486,12 +406,14 @@ const FileSelector = (props) => {
 
 export default inject(({ auth }) => {
   const { settingsStore, setDocumentTitle } = auth;
-  const { theme, currentColorScheme, sdkLink } = settingsStore;
+  const { theme } = settingsStore;
 
   return {
     theme,
     setDocumentTitle,
-    currentColorScheme,
-    sdkLink,
   };
-})(withTranslation(["JavascriptSdk", "Files", "EmbeddingPanel", "Common"])(observer(FileSelector)));
+})(
+  withTranslation(["JavascriptSdk", "Files", "EmbeddingPanel", "Common", "Translations"])(
+    observer(FileSelector),
+  ),
+);

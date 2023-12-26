@@ -225,7 +225,9 @@ class AuthStore {
 
     if (!user) return false;
 
-    return user.isOwner || user.isAdmin || this.isRoomAdmin;
+    return (
+      user.isOwner || user.isAdmin || this.isRoomAdmin || user.isCollaborator
+    );
   }
 
   get isPaymentPageAvailable() {

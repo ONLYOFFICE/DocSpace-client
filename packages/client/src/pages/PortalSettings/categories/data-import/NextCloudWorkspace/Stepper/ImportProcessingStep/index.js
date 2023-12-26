@@ -7,7 +7,7 @@ import { Wrapper } from "../StyledStepper";
 import ProgressBar from "@docspace/components/progress-bar";
 import Button from "@docspace/components/button";
 
-const SixthStep = ({
+const ImportProcessingStep = ({
   t,
   incrementStep,
   isSixthStep,
@@ -93,4 +93,4 @@ export default inject(({ importAccountsStore }) => {
     getMigrationStatus,
     setImportResult,
   };
-})(observer(SixthStep));
+})(observer(ImportProcessingStep));

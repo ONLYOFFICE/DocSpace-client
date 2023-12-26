@@ -74,7 +74,7 @@ const ErrorBlock = styled.div`
   }
 `;
 
-const FirstStep = ({
+const SelectFileStep = ({
   t,
   incrementStep,
   cancelDialogVisible,
@@ -268,4 +268,4 @@ export default inject(({ dialogsStore, importAccountsStore }) => {
     cancelDialogVisible: cancelUploadDialogVisible,
     setCancelDialogVisibile: setCancelUploadDialogVisible,
   };
-})(observer(FirstStep));
+})(observer(SelectFileStep));

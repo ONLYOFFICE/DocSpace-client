@@ -20,7 +20,7 @@ const SectionsWrapper = styled.div`
   }
 `;
 
-const FifthStep = ({
+const ImportStep = ({
   t,
   incrementStep,
   decrementStep,
@@ -131,4 +131,4 @@ export default inject(({ importAccountsStore }) => {
     importOptions,
     setImportOptions,
   };
-})(observer(FifthStep));
+})(observer(ImportStep));

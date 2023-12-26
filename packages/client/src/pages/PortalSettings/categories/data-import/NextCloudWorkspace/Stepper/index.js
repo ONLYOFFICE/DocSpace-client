@@ -1,10 +1,10 @@
-import FirstStep from "./FirstStep";
-import SecondStep from "./SecondStep";
-import ThirdStep from "./ThirdStep";
-import FourthStep from "./FourthStep";
-import FifthStep from "./FifthStep";
-import SixthStep from "./SixthStep";
-import SeventhStep from "./SeventhStep";
+import SelectFileStep from "./SelectFileStep";
+import SelectUsersStep from "./SelectUsersStep";
+import AddEmailsStep from "./AddEmailsStep";
+import SelectUsersTypeStep from "./SelectUsersTypeStep";
+import ImportStep from "./ImportStep";
+import ImportProcessingStep from "./ImportProcessingStep";
+import ImportCompleteStep from "./ImportCompleteStep";
 
 import HelpButton from "@docspace/components/help-button";
 import Text from "@docspace/components/text";
@@ -31,7 +31,7 @@ export const getStepsData = (t, currentStep, setCurrentStep) => {
       title: t("Common:SelectFile"),
       description: t("Settings:SelectFileDescriptionNextcloud"),
       component: (
-        <FirstStep
+        <SelectFileStep
           t={t}
           incrementStep={incrementStep}
           decrementStep={decrementStep}
@@ -42,7 +42,7 @@ export const getStepsData = (t, currentStep, setCurrentStep) => {
       title: t("Settings:SelectUsersWithEmail"),
       description: t("Settings:SelectUsersDescriptionNextcloud"),
       component: (
-        <SecondStep
+        <SelectUsersStep
           t={t}
           incrementStep={incrementStep}
           decrementStep={decrementStep}
@@ -53,7 +53,7 @@ export const getStepsData = (t, currentStep, setCurrentStep) => {
       title: t("Settings:AddEmails"),
       description: t("Settings:AddEmailsDescription"),
       component: (
-        <ThirdStep
+        <AddEmailsStep
           t={t}
           incrementStep={incrementStep}
           decrementStep={decrementStep}
@@ -98,7 +98,7 @@ export const getStepsData = (t, currentStep, setCurrentStep) => {
         </>
       ),
       component: (
-        <FourthStep
+        <SelectUsersTypeStep
           t={t}
           incrementStep={incrementStep}
           decrementStep={decrementStep}
@@ -109,7 +109,7 @@ export const getStepsData = (t, currentStep, setCurrentStep) => {
       title: t("Settings:DataImport"),
       description: t("Settings:ImportSectionDescription"),
       component: (
-        <FifthStep
+        <ImportStep
           t={t}
           incrementStep={incrementStep}
           decrementStep={decrementStep}
@@ -120,7 +120,7 @@ export const getStepsData = (t, currentStep, setCurrentStep) => {
       title: t("Settings:DataImportProcessing"),
       description: t("Settings:ImportProcessingDescription"),
       component: (
-        <SixthStep
+        <ImportProcessingStep
           t={t}
           incrementStep={incrementStep}
           decrementStep={decrementStep}
@@ -132,7 +132,7 @@ export const getStepsData = (t, currentStep, setCurrentStep) => {
       title: t("Settings:DataImportComplete"),
       description: t("Settings:ImportCompleteDescriptionNextcloud"),
       component: (
-        <SeventhStep
+        <ImportCompleteStep
           t={t}
           incrementStep={incrementStep}
           decrementStep={decrementStep}

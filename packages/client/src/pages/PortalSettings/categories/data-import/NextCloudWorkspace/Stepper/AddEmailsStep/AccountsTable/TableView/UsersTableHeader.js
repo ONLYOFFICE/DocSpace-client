@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 
 import TableHeader from "@docspace/components/table-container/TableHeader";
@@ -73,8 +73,8 @@ const UsersTableHeader = (props) => {
 
     setColumns((prevColumns) =>
       prevColumns.map((item, index) =>
-        index === columnIndex ? { ...item, enable: !item.enable } : item,
-      ),
+        index === columnIndex ? { ...item, enable: !item.enable } : item
+      )
     );
 
     const tableColumns = columns.map((c) => c.enable && c.key);

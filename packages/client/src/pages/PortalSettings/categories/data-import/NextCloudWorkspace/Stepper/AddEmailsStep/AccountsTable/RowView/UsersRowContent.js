@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -116,7 +116,10 @@ const UsersRowContent = ({
   };
 
   useEffect(() => {
-    isEmailOpen || prevEmail === tempEmail || setTempEmail(prevEmail) || setHasError(false);
+    isEmailOpen ||
+      prevEmail === tempEmail ||
+      setTempEmail(prevEmail) ||
+      setHasError(false);
   }, [isEmailOpen]);
 
   if (!ready) return <></>;

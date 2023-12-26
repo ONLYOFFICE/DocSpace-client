@@ -14,7 +14,7 @@ import { NoEmailUsersBlock } from "../../../sub-components/NoEmailUsersBlock";
 
 // const LICENSE_LIMIT = 100;
 
-const SecondStep = (props) => {
+const SelectUsersStep = (props) => {
   const {
     t,
     incrementStep,
@@ -122,4 +122,4 @@ export default inject(({ importAccountsStore }) => {
     searchValue,
     setSearchValue,
   };
-})(observer(SecondStep));
+})(observer(SelectUsersStep));

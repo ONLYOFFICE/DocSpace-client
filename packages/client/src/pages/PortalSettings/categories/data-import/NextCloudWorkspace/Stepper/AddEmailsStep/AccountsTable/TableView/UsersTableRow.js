@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
-import styled from "styled-components";
+import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import styled from "styled-components";
 
 import TableRow from "@docspace/components/table-container/TableRow";
 import TableCell from "@docspace/components/table-container/TableCell";
@@ -124,13 +124,19 @@ const UsersTableRow = ({
   };
 
   useEffect(() => {
-    isEmailOpen || prevEmail === tempEmail || setTempEmail(prevEmail) || setHasError(false);
+    isEmailOpen ||
+      prevEmail === tempEmail ||
+      setTempEmail(prevEmail) ||
+      setHasError(false);
   }, [isEmailOpen]);
 
   if (!ready) return <></>;
 
   return (
-    <StyledTableRow onClick={handleAccountToggle} isDisabled={!isPrevEmailValid}>
+    <StyledTableRow
+      onClick={handleAccountToggle}
+      isDisabled={!isPrevEmailValid}
+    >
       <TableCell className="checkboxWrapper">
         <Checkbox
           onChange={handleAccountToggle}
@@ -157,10 +163,7 @@ const UsersTableRow = ({
               onBlur={checkEmailValidity}
             />
 
-            <DecisionButton
-              icon={<CheckSvg />}
-              onClick={handleSaveClick}
-            />
+            <DecisionButton icon={<CheckSvg />} onClick={handleSaveClick} />
             <DecisionButton icon={<CrossSvg />} onClick={clearEmail} />
           </EmailInputWrapper>
         ) : (

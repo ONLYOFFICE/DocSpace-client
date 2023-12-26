@@ -8,7 +8,7 @@ import AccountsPaging from "../../../sub-components/AccountsPaging";
 
 import { Wrapper } from "../StyledStepper";
 
-const FourthStep = (props) => {
+const SelectUsersTypeStep = (props) => {
   const {
     t,
     incrementStep,
@@ -106,4 +106,4 @@ export default inject(({ importAccountsStore }) => {
     searchValue,
     setSearchValue,
   };
-})(observer(FourthStep));
+})(observer(SelectUsersTypeStep));

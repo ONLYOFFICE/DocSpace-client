@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { inject, observer } from "mobx-react";
 
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
@@ -15,7 +15,7 @@ import { NoEmailUsersBlock } from "../../../sub-components/NoEmailUsersBlock";
 
 // const LICENSE_LIMIT = 100;
 
-const ThirdStep = (props) => {
+const AddEmailsStep = (props) => {
   const {
     t,
     incrementStep,
@@ -28,7 +28,9 @@ const ThirdStep = (props) => {
     areCheckedUsersEmpty,
   } = props;
 
-  const [dataPortion, setDataPortion] = useState(users.withoutEmail.slice(0, 25));
+  const [dataPortion, setDataPortion] = useState(
+    users.withoutEmail.slice(0, 25)
+  );
 
   const handleDataChange = (leftBoundary, rightBoundary) => {
     setDataPortion(users.withoutEmail.slice(leftBoundary, rightBoundary));
@@ -45,7 +47,7 @@ const ThirdStep = (props) => {
   const filteredAccounts = dataPortion.filter(
     (data) =>
       data.displayName.toLowerCase().startsWith(searchValue.toLowerCase()) ||
-      data.email.toLowerCase().startsWith(searchValue.toLowerCase()),
+      data.email.toLowerCase().startsWith(searchValue.toLowerCase())
   );
 
   const handleStepIncrement = () => {
@@ -56,7 +58,11 @@ const ThirdStep = (props) => {
   return (
     <Wrapper>
       {users.withoutEmail.length > 0 && (
-        <NoEmailUsersBlock users={users.withoutEmail.length} t={t} isCurrentStep />
+        <NoEmailUsersBlock
+          users={users.withoutEmail.length}
+          t={t}
+          isCurrentStep
+        />
       )}
 
       {users.withoutEmail.length > 0 ? (
@@ -140,4 +146,4 @@ export default inject(({ setup, importAccountsStore }) => {
     setResultUsers,
     areCheckedUsersEmpty,
   };
-})(observer(ThirdStep));
+})(observer(AddEmailsStep));

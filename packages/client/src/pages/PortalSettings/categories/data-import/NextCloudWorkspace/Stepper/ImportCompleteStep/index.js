@@ -16,7 +16,7 @@ const ErrorText = styled(Text)`
   margin-bottom: 16px;
 `;
 
-const SeventhStep = ({
+const ImportCompleteStep = ({
   t,
   checkedUsers,
   importResult,
@@ -116,4 +116,4 @@ export default inject(({ importAccountsStore }) => {
     clearCheckedAccounts,
     sendWelcomeLetter,
   };
-})(observer(SeventhStep));
+})(observer(ImportCompleteStep));

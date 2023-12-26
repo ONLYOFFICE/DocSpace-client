@@ -11,7 +11,7 @@ import { FillingStatusAccordion } from "./FillingStatusLine.accordion";
 import { FillingStatusLineProps } from "./FillingStatusLine.types";
 import { FillingStatusContainer } from "./FillingStatusLine.styled";
 
-import { mockData } from "./mockData.js";
+import { mockData } from "./mockData";
 
 const FillingStatusLine = ({
   statusDoneText = "Done",

@@ -256,9 +256,6 @@ class InfoPanelStore {
   };
 
   openAccountsWithSelectedUser = async (user, navigate) => {
-    const { getUsersList } = this.peopleStore.usersStore;
-    const { setSelection } = this.peopleStore.selectionStore;
-
     const path = [
       window.DocSpaceConfig?.proxy?.url,
       config.homepage,
@@ -268,13 +265,12 @@ class InfoPanelStore {
     const newFilter = Filter.getDefault();
     newFilter.page = 0;
     newFilter.search = user.email;
+    newFilter.selectUserId = user.id;
     path.push(`filter?${newFilter.toUrlParams()}`);
-    const userList = await getUsersList(newFilter);
 
-    navigate(combineUrl(...path));
     this.selectedFolderStore.setSelectedFolder(null);
     this.treeFoldersStore.setSelectedNode(["accounts"]);
-    setSelection([user]);
+    navigate(combineUrl(...path), { state: { user } });
   };
 
   fetchUser = async (userId) => {

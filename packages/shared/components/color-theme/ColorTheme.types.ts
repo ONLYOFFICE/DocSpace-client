@@ -2,6 +2,7 @@ import { TColorScheme, TTheme } from "../../themes";
 
 import { IconButtonProps } from "../icon-button/IconButton.types";
 import { LinkProps } from "../link/Link.types";
+import { TextProps } from "../text/Text.types";
 
 import { ThemeId } from "./ColorTheme.enums";
 
@@ -83,6 +84,11 @@ export interface LinkColorTheme extends LinkProps, DefaultColorThemeProps {
   onClick?: (e: React.MouseEvent<Element>) => void;
 }
 
+export interface SubmenuTextTheme extends TextProps, DefaultColorThemeProps {
+  themeId: ThemeId.SubmenuText;
+  isActive?: boolean;
+}
+
 export type ColorThemeProps =
   | IconButtonColorTheme
   | FilterBlockItemTagColorTheme
@@ -96,4 +102,5 @@ export type ColorThemeProps =
   | LoadingButtonColorTheme
   | ProgressColorTheme
   | VersionBadgeTheme
-  | LinkColorTheme;
+  | LinkColorTheme
+  | SubmenuTextTheme;

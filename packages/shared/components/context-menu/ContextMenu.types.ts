@@ -8,7 +8,7 @@ export type ContextMenuType = {
     originalEvent: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
     action?: string | boolean,
     item?: ContextMenuType,
-  ) => VoidFunction;
+  ) => void;
   isSeparator?: undefined;
   url?: string;
   items?: ContextMenuType[];

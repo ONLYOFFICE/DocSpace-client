@@ -1,12 +1,16 @@
 import styled, { css } from "styled-components";
-import StyledText from "../../text/styled-text";
-import Base from "../../themes/base";
+import StyledText from "../../text/Text.styled";
+import { Base, TColorScheme, TTheme } from "../../../themes";
 
 const getDefaultStyles = ({
   $currentColorScheme,
   isActive,
-  theme
-}: any) =>
+  theme,
+}: {
+  $currentColorScheme?: TColorScheme;
+  isActive?: boolean;
+  theme: TTheme;
+}) =>
   $currentColorScheme &&
   css`
     color: ${isActive &&

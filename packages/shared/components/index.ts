@@ -99,8 +99,10 @@ import { Slider } from "./slider";
 import { ImageEditor } from "./image-editor";
 import { Paging } from "./paging";
 import { TabsContainer, TElement } from "./tabs-container";
+import { Submenu, TSubmenuItem } from "./submenu";
 
 export type {
+  TSubmenuItem,
   TFallbackAxisSideDirection,
   TTooltipPlace,
   TGetTooltipContent,
@@ -112,6 +114,7 @@ export type {
 };
 
 export {
+  Submenu,
   TabsContainer,
   Paging,
   ImageEditor,

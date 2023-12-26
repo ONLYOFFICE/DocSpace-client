@@ -3,7 +3,7 @@
 ### Usage
 
 ```js
-import Submenu from "@docspace/components/submenu";
+import { Submenu } from "@docspace/shared/components";
 ```
 
 ```jsx

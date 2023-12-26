@@ -17,6 +17,7 @@ import LinkForgotPasswordColorTheme from "./styled-components/linkForgotPassword
 import LoadingButton from "./styled-components/loadingButton";
 import ProgressColorTheme from "./styled-components/progress";
 import VersionBadgeTheme from "./styled-components/versionBadge";
+import SubmenuTextTheme from "./styled-components/submenuText";
 
 const ColorTheme = forwardRef<
   HTMLDivElement,
@@ -161,6 +162,10 @@ const ColorTheme = forwardRef<
             $currentColorScheme={currentColorScheme}
           />
         );
+      }
+
+      case ThemeId.SubmenuText: {
+        return <SubmenuTextTheme {...props} />;
       }
 
       default:

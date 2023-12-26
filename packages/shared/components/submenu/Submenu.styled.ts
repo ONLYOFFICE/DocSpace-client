@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
-import Base from "../themes/base";
+import { Base, TColorScheme } from "../../themes";
 
-export const StyledSubmenu = styled.div`
+export const StyledSubmenu = styled.div<{ topProps?: string }>`
   display: flex;
   flex-direction: column;
 
@@ -18,7 +18,6 @@ export const StyledSubmenu = styled.div`
 
   .sticky {
     position: sticky;
-    // @ts-expect-error TS(2339): Property 'topProps' does not exist on type 'Themed... Remove this comment to see the full error message
     top: ${(props) => (props.topProps ? props.topProps : 0)};
     background: ${(props) => props.theme.submenu.backgroundColor};
     z-index: 1;
@@ -83,13 +82,12 @@ export const StyledSubmenuItem = styled.div.attrs((props) => ({
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 `;
 
-export const StyledSubmenuItemText = styled.div`
+export const StyledSubmenuItemText = styled.div<{ isActive?: boolean }>`
   width: max-content;
   display: flex;
 
   .item-text {
     color: ${(props) =>
-      // @ts-expect-error TS(2339): Property 'isActive' does not exist on type 'Themed... Remove this comment to see the full error message
       props.isActive
         ? props.theme.submenu.activeTextColor
         : props.theme.submenu.textColor};
@@ -99,14 +97,13 @@ export const StyledSubmenuItemText = styled.div`
 
 StyledSubmenuItemText.defaultProps = { theme: Base };
 
-export const StyledSubmenuItemLabel = styled.div`
+export const StyledSubmenuItemLabel = styled.div<{ isActive?: boolean }>`
   z-index: 1;
   width: 100%;
   height: 4px;
   bottom: 0px;
   border-radius: 4px 4px 0 0;
   background-color: ${(props) =>
-    // @ts-expect-error TS(2339): Property 'isActive' does not exist on type 'Themed... Remove this comment to see the full error message
     props.isActive ? props.theme.submenu.bottomLineColor : ""};
 `;
 
@@ -143,5 +140,17 @@ export const SubmenuScrollbarSize = styled.div`
   scrollbar-width: none; // Firefox
   &::-webkit-scrollbar {
     display: none; // Safari + Chrome
+  }
+`;
+
+export const StyledItemLabelTheme = styled(StyledSubmenuItemLabel)<{
+  $currentColorScheme?: TColorScheme;
+}>`
+  background-color: ${(props) =>
+    props.isActive ? props.$currentColorScheme?.main.accent : "none"};
+
+  &:hover {
+    background-color: ${(props) =>
+      props.isActive && props.$currentColorScheme?.main.accent};
   }
 `;

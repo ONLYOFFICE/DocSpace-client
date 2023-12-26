@@ -1,7 +1,9 @@
 import React from "react";
-import FileInput from "../file-input";
-import Row from "../row";
-import Text from "../text";
+
+import { FileInput } from "../file-input";
+import { Row } from "../row";
+import { Text } from "../text";
+import { InputSize } from "../text-input";
 
 export const data = [
   {
@@ -14,6 +16,7 @@ export const data = [
         name="demoFileInputName"
         onInput={() => {}}
         placeholder="Input file"
+        size={InputSize.base}
       />
     ),
   },
@@ -26,7 +29,6 @@ export const data = [
     id: "Milestones",
     name: "Milestones",
     content: (
-      // @ts-expect-error TS(2322): Type '{ children: Element; key: string; checked: t... Remove this comment to see the full error message
       <Row
         key="1"
         checked
@@ -39,11 +41,11 @@ export const data = [
           {
             key: "key2",
             label: "Delete",
-            onClick: function noRefCheck() {},
+            onClick: () => {},
           },
         ]}
-        onRowClick={function noRefCheck() {}}
-        onSelect={function noRefCheck() {}}
+        onRowClick={() => {}}
+        onSelect={() => {}}
       >
         <div
           style={{
@@ -52,7 +54,6 @@ export const data = [
             display: "flex",
           }}
         >
-          // @ts-expect-error TS(2322): Type '{ children: string; truncate: true; }' is no... Remove this comment to see the full error message
           <Text truncate>Sample text</Text>
         </div>
       </Row>

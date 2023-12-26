@@ -34,5 +34,7 @@
   "LdapUserAttribute": "User Attribute",
   "LdapGroupFilter": "Group Filter",
   "LdapGroupNameAttribute": "Group Name Attribute",
-  "LdapGroupAttribute": "Group Attribute"
+  "LdapGroupAttribute": "Group Attribute",
+  "LdapSyncCronTitle": "Here you can set how often you want to auto sync LDAP users",
+  "LdapNextSync": "Next synchronization"
 }

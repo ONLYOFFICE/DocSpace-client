@@ -146,7 +146,7 @@ const SpaceQuota = (props) => {
 
   if (isReadOnly) {
     return (
-      <StyledText fontWeight={600}>
+      <StyledText fontWeight={600} isReadOnly>
         {usedQuota} / {spaceLimited}
       </StyledText>
     );

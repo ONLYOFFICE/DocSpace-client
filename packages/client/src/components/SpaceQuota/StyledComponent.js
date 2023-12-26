@@ -22,7 +22,8 @@ const StyledText = styled(Text)`
   width: 100%;
   max-width: max-content;
 
-  padding-top: ${(props) => (props.withoutLimitQuota ? "0px" : "8px")};
+  padding-top: ${(props) =>
+    props.withoutLimitQuota || props.isReadOnly ? "0px" : "8px"};
 
   white-space: nowrap;
   overflow: hidden;

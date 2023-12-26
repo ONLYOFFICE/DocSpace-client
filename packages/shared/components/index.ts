@@ -100,6 +100,7 @@ import { ImageEditor } from "./image-editor";
 import { Paging } from "./paging";
 import { TabsContainer, TElement } from "./tabs-container";
 import { Submenu, TSubmenuItem } from "./submenu";
+import { LinkWithDropdown } from "./link-with-dropdown";
 
 export type {
   TSubmenuItem,
@@ -114,6 +115,7 @@ export type {
 };
 
 export {
+  LinkWithDropdown,
   Submenu,
   TabsContainer,
   Paging,

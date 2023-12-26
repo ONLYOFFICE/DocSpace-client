@@ -1,13 +1,17 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import PropTypes from "prop-types";
-
-import Text from "../text";
-import Base from "../themes/base";
-// @ts-expect-error TS(2307): Cannot find module 'PUBLIC_DIR/images/expander-dow... Remove this comment to see the full error message
 import ExpanderDownReactSvg from "PUBLIC_DIR/images/expander-down.react.svg";
-import { transform } from "lodash";
-// eslint-disable-next-line no-unused-vars
+
+import { Base } from "../../themes";
+import { Text } from "../text";
+import { TextProps } from "../text/Text.types";
+
+// import { transform } from "lodash";
+import {
+  SimpleLinkWithDropdownProps,
+  TDropdownType,
+} from "./LinkWithDropdown.types";
+
 const SimpleLinkWithDropdown = ({
   isBold,
   fontSize,
@@ -20,24 +24,9 @@ const SimpleLinkWithDropdown = ({
   dropdownType,
   data,
   isDisabled,
+  children,
   ...props
-}: any) => <a {...props}></a>;
-
-SimpleLinkWithDropdown.propTypes = {
-  isBold: PropTypes.bool,
-  fontSize: PropTypes.number,
-  fontWeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  isTextOverflow: PropTypes.bool,
-  isHovered: PropTypes.bool,
-  isSemitransparent: PropTypes.bool,
-  color: PropTypes.string,
-  title: PropTypes.string,
-  dropdownType: PropTypes.oneOf(["alwaysDashed", "appearDashedAfterHover"])
-    .isRequired,
-  data: PropTypes.array,
-};
-
-const color = (props: any) => props.isDisabled ? props.theme.linkWithDropdown.disableColor : props.color;
+}: SimpleLinkWithDropdownProps) => <a {...props}>{children}</a>;
 
 // eslint-disable-next-line react/prop-types, no-unused-vars
 const ExpanderDownIconWrapper = ({
@@ -46,9 +35,14 @@ const ExpanderDownIconWrapper = ({
   isOpen,
   isDisabled,
   ...props
-}: any) => <ExpanderDownReactSvg {...props} />;
+}: {
+  isSemitransparent: boolean;
+  dropdownType: TDropdownType;
+  isOpen: boolean;
+  isDisabled: boolean;
+}) => <ExpanderDownReactSvg {...props} />;
 
-const Caret = styled(ExpanderDownIconWrapper)`
+const Caret = styled(ExpanderDownIconWrapper)<{ color?: string }>`
   position: absolute;
 
   width: ${(props) => props.theme.linkWithDropdown.caret.width};
@@ -65,16 +59,19 @@ const Caret = styled(ExpanderDownIconWrapper)`
   ${(props) =>
     props.theme.interfaceDirection === "rtl" &&
     css`
-      margin-right: ${(props) => props.theme.linkWithDropdown.caret.marginLeft};
+      margin-right: ${props.theme.linkWithDropdown.caret.marginLeft};
       margin-left: 0;
-      left: ${(props) => props.theme.linkWithDropdown.caret.right};
+      left: ${props.theme.linkWithDropdown.caret.right};
       right: 0;
     `}
 
   margin: ${(props) => props.theme.linkWithDropdown.caret.margin};
 
   path {
-    fill: ${color};
+    fill: ${(props) =>
+      props.isDisabled
+        ? props.theme.linkWithDropdown.disableColor
+        : props.color};
   }
 
   ${(props) =>
@@ -103,11 +100,12 @@ const StyledLinkWithDropdown = styled(SimpleLinkWithDropdown)`
   ${(props) =>
     props.theme.interfaceDirection === "rtl" &&
     css`
-      padding-left: ${(props) => props.theme.linkWithDropdown.paddingRight};
+      padding-left: ${props.theme.linkWithDropdown.paddingRight};
       padding-right: 0;
     `}
 
-  color: ${color};
+  color: ${(props) =>
+    props.isDisabled ? props.theme.linkWithDropdown.disableColor : props.color};
 
   ${(props) => props.isSemitransparent && `opacity: 0.5`};
   ${(props) =>
@@ -118,17 +116,26 @@ const StyledLinkWithDropdown = styled(SimpleLinkWithDropdown)`
     ${(props) =>
       props.dropdownType === "alwaysDashed" &&
       `text-decoration:  ${props.theme.linkWithDropdown.textDecoration};`};
-    color: ${color};
+    color: ${(props) =>
+      props.isDisabled
+        ? props.theme.linkWithDropdown.disableColor
+        : props.color};
 
     &:hover {
       text-decoration: ${(props) =>
         props.theme.linkWithDropdown.textDecoration};
-      color: ${color};
+      color: ${(props) =>
+        props.isDisabled
+          ? props.theme.linkWithDropdown.disableColor
+          : props.color};
     }
   }
 
   :hover {
-    color: ${color};
+    color: ${(props) =>
+      props.isDisabled
+        ? props.theme.linkWithDropdown.disableColor
+        : props.color};
 
     svg {
       ${(props) =>
@@ -142,7 +149,7 @@ const StyledLinkWithDropdown = styled(SimpleLinkWithDropdown)`
 `;
 StyledLinkWithDropdown.defaultProps = { theme: Base };
 
-const StyledTextWithExpander = styled.div`
+const StyledTextWithExpander = styled.div<{ isOpen?: boolean }>`
   display: flex;
   gap: 4px;
 
@@ -152,7 +159,6 @@ const StyledTextWithExpander = styled.div`
     justify-content: center;
     width: 6.35px;
     svg {
-      // @ts-expect-error TS(2339): Property 'isOpen' does not exist on type 'ThemedSt... Remove this comment to see the full error message
       transform: ${(props) => (props.isOpen ? "rotate(180deg)" : "rotate(0)")};
       width: 6.35px;
       height: auto;
@@ -160,18 +166,17 @@ const StyledTextWithExpander = styled.div`
   }
 `;
 
-// eslint-disable-next-line react/prop-types, no-unused-vars
-const SimpleText = ({
-  color,
-  ...props
-}: any) => <Text as="span" {...props} />;
-const StyledText = styled(SimpleText)`
+const SimpleText = ({ c, ...props }: TextProps & { c?: string }) => (
+  <Text as="span" {...props} />
+);
+
+const StyledText = styled(SimpleText)<{ isTextOverflow?: boolean }>`
   color: inherit;
   ${(props) =>
     props.isTextOverflow &&
     css`
       display: inline-block;
-      max-width: ${(props) => props.theme.linkWithDropdown.text.maxWidth};
+      max-width: ${props.theme.linkWithDropdown.text.maxWidth};
     `};
 `;
 StyledText.defaultProps = { theme: Base };
@@ -186,7 +191,7 @@ const focusColor = css`
   }
 `;
 
-const StyledSpan = styled.span`
+const StyledSpan = styled.span<{ $isOpen?: boolean }>`
   display: inline-block;
   padding: 4px 8px;
   border-radius: 3px;
@@ -209,23 +214,21 @@ const StyledSpan = styled.span`
   }
 
   ${(props) =>
-    // @ts-expect-error TS(2339): Property '$isOpen' does not exist on type 'ThemedS... Remove this comment to see the full error message
     !props.$isOpen &&
     css`
       :hover {
-        color: ${(props) => props.theme.linkWithDropdown.color.hover};
+        color: ${props.theme.linkWithDropdown.color.hover};
 
-        background: ${(props) => props.theme.linkWithDropdown.background.hover};
+        background: ${props.theme.linkWithDropdown.background.hover};
         .expander {
           path {
-            fill: ${(props) => props.theme.linkWithDropdown.color.hover};
+            fill: ${props.theme.linkWithDropdown.color.hover};
           }
         }
       }
     `}
 
   ${(props) =>
-    // @ts-expect-error TS(2339): Property '$isOpen' does not exist on type 'ThemedS... Remove this comment to see the full error message
     props.$isOpen
       ? focusColor
       : css`

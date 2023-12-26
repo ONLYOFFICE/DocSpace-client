@@ -196,6 +196,8 @@ class DetailsHelper {
       case "Tags":
         return this.t("Common:Tags");
       case "Storage":
+        if (!this.item?.security?.EditRoom) return <></>;
+
         return this.isDefaultRoomsQuotaSet
           ? this.t("Common:StorageAndQuota")
           : this.t("Common:Storage");
@@ -323,6 +325,8 @@ class DetailsHelper {
   };
 
   getQuotaItem = () => {
+    if (!this.item?.security?.EditRoom) return <></>;
+
     return <SpaceQuota item={this.item} />;
   };
 }

@@ -15,6 +15,7 @@ import { inject, observer } from "mobx-react";
 import ImageEditor from "@docspace/components/ImageEditor";
 import { FilesSelectorFilterTypes } from "@docspace/common/constants";
 
+import EmptyIframeContainer from "../sub-components/EmptyIframeContainer";
 import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 import GetCodeDialog from "../sub-components/GetCodeDialog";
@@ -64,7 +65,7 @@ const Viewer = (props) => {
     width: `${width}${widthDimension.label}`,
     height: `${height}${heightDimension.label}`,
     frameId: "ds-frame",
-    init: true,
+    init: false,
   });
 
   const params = objectToGetParams(config);
@@ -112,9 +113,9 @@ const Viewer = (props) => {
     setHeight(e.target.value);
   };
 
-  const onChangeFileId = (id) => {
+  const onChangeFileId = (file) => {
     setConfig((config) => {
-      return { ...config, id };
+      return { ...config, id: file.id };
     });
   };
 
@@ -160,8 +161,14 @@ const Viewer = (props) => {
 
   const preview = (
     <Frame width={width} height={width} targetId={frameId}>
-      <Box id={frameId}></Box>
-      <RectangleSkeleton height={height} borderRadius="6px" />
+      {config.id !== undefined ? (
+        <>
+          <Box id={frameId}></Box>
+          <RectangleSkeleton height={height} borderRadius="6px" />
+        </>
+      ) : (
+        <EmptyIframeContainer text={t("SelectFile")} width={width} height={height} />
+      )}
     </Frame>
   );
 

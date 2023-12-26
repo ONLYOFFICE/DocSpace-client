@@ -14,6 +14,7 @@ import { objectToGetParams, loadScript } from "@docspace/common/utils";
 import { inject, observer } from "mobx-react";
 import { FilesSelectorFilterTypes } from "@docspace/common/constants";
 
+import EmptyIframeContainer from "../sub-components/EmptyIframeContainer";
 import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 import GetCodeDialog from "../sub-components/GetCodeDialog";
@@ -62,13 +63,7 @@ const Editor = (props) => {
     width: `${width}${widthDimension.label}`,
     height: `${height}${heightDimension.label}`,
     frameId: "ds-frame",
-    init: true,
-    editorType: "desktop",
-    // id: {
-    //   id: 4,
-    //   title: "ONLYOFFICE Sample Presentation.pptx",
-    //   fileExst: ".pptx",
-    // },
+    init: false,
   });
 
   const params = objectToGetParams(config);
@@ -116,9 +111,9 @@ const Editor = (props) => {
     setHeight(e.target.value);
   };
 
-  const onChangeFileId = (id) => {
+  const onChangeFileId = (file) => {
     setConfig((config) => {
-      return { ...config, id };
+      return { ...config, id: file.id };
     });
   };
 
@@ -164,8 +159,14 @@ const Editor = (props) => {
 
   const preview = (
     <Frame width={width} height={width} targetId={frameId}>
-      <Box id={frameId}></Box>
-      <RectangleSkeleton height={height} borderRadius="6px" />
+      {config.id !== undefined ? (
+        <>
+          <Box id={frameId}></Box>
+          <RectangleSkeleton height={height} borderRadius="6px" />
+        </>
+      ) : (
+        <EmptyIframeContainer text={t("SelectFile")} width={width} height={height} />
+      )}
     </Frame>
   );
 

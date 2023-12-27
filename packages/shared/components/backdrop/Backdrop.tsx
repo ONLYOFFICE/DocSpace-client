@@ -8,11 +8,11 @@ const Backdrop = (props: BackdropProps) => {
   const {
     visible,
     className,
-    withBackground,
-    withoutBlur,
-    isAside,
-    withoutBackground,
-    isModalDialog,
+    withBackground = false,
+    withoutBlur = false,
+    isAside = false,
+    withoutBackground = false,
+    isModalDialog = false,
   } = props;
 
   const backdropRef = React.useRef<HTMLDivElement | null>(null);

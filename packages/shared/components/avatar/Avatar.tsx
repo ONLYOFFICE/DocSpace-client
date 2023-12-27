@@ -82,7 +82,10 @@ const AvatarPure = ({
   hideRoleIcon,
   tooltipContent,
   withTooltip,
+  className,
 }: AvatarProps) => {
+  console.log(className, "render");
+
   const defaultTheme = useTheme();
 
   const interfaceDirection = defaultTheme?.interfaceDirection;
@@ -118,8 +121,10 @@ const AvatarPure = ({
     <Text fontSize="12px">{content}</Text>
   );
 
+  console.log(className);
+
   return (
-    <StyledAvatar size={size} data-testid="avatar">
+    <StyledAvatar size={size} data-testid="avatar" className={className}>
       <AvatarWrapper
         source={source}
         userName={userName || ""}

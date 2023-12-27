@@ -59,8 +59,6 @@ function TableHeader({
       .filter((x: TTableColumn) => !x.defaultSize)
       .filter((x: TTableColumn) => !x.default);
 
-    console.log(containerRef);
-
     const container = containerRef.current
       ? containerRef.current
       : document.getElementById("table-container");

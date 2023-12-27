@@ -73,8 +73,9 @@ const CheckboxPure = ({
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (isDisabled) e.preventDefault();
     e.stopPropagation();
+    console.log(e);
     setChecked(e.target.checked);
-    onChange?.();
+    onChange?.(e);
   };
 
   const onClick = (e: React.MouseEvent<HTMLSpanElement>) => {

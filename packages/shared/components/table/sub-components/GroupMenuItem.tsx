@@ -3,10 +3,10 @@ import { isChrome, browserVersion } from "react-device-detect";
 import { ReactSVG } from "react-svg";
 import styled from "styled-components";
 
-import { mobile, tablet } from "../../../utils";
+import { isDesktop, mobile, tablet } from "../../../utils";
 import { Base } from "../../../themes";
 
-import { Button } from "../../button";
+import { Button, ButtonSize } from "../../button";
 import { DropDown } from "../../drop-down";
 import { DropDownItem } from "../../drop-down-item";
 import { TGroupMenuItem } from "../Table.types";
@@ -167,6 +167,7 @@ const GroupMenuItem = ({
         onClick={onClickAction}
         icon={<ReactSVG src={iconUrl} className="combo-button_selected-icon" />}
         ref={buttonRef}
+        size={ButtonSize.extraSmall}
       />
       {withDropDown && (
         <DropDown

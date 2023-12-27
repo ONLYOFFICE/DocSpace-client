@@ -124,6 +124,8 @@ class ProfileActions extends React.PureComponent {
     const { user, opened, avatar } = this.state;
     const userRole = this.getUserRole(user);
 
+    console.log("render");
+
     return (
       <StyledDiv isProduct={this.props.isProduct} ref={this.ref}>
         <Avatar

@@ -72,7 +72,7 @@ export const parseChildren = (
             name?: string;
             displayName?: string;
           }>
-        | string = child.type;
+        | string = child?.type;
 
       const childType =
         child &&

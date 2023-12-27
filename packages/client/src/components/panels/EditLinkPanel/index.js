@@ -15,8 +15,8 @@ import ToggleBlock from "./ToggleBlock";
 import PasswordAccessBlock from "./PasswordAccessBlock";
 import LimitTimeBlock from "./LimitTimeBlock";
 import { RoomsType } from "@docspace/common/constants";
-
 import { DeviceType } from "@docspace/common/constants";
+import moment from "moment";
 
 const EditLinkPanel = (props) => {
   const {
@@ -121,7 +121,6 @@ const EditLinkPanel = (props) => {
 
   const initState = {
     passwordValue: password,
-    expirationDate: date,
     passwordAccessIsChecked: isLocked,
     denyDownload: isDenyDownload,
     linkNameValue: link?.sharedTo?.title || "",
@@ -130,13 +129,14 @@ const EditLinkPanel = (props) => {
   useEffect(() => {
     const data = {
       passwordValue,
-      expirationDate,
       passwordAccessIsChecked,
       denyDownload,
       linkNameValue,
     };
 
-    if (!isEqual(data, initState)) {
+    const isSameDate = moment(date).isSame(expirationDate);
+
+    if (!isEqual(data, initState) || !isSameDate) {
       setHasChanges(true);
     } else setHasChanges(false);
   });
@@ -163,12 +163,15 @@ const EditLinkPanel = (props) => {
 
   const isPrimary = link?.sharedTo?.primary;
 
+  const isDisabledSaveButton =
+    !hasChanges || isLoading || !linkNameIsValid || isExpired;
+
   const editLinkPanelComponent = (
     <StyledEditLinkPanel
       isExpired={isExpired}
       displayType="aside"
       visible={visible}
-      onClose={onClose}
+      onClose={onClosePanel}
       isLarge
       zIndex={310}
       withBodyScroll={true}
@@ -234,7 +237,7 @@ const EditLinkPanel = (props) => {
           primary
           size="normal"
           label={isEdit ? t("Common:SaveButton") : t("Common:Create")}
-          isDisabled={isLoading || !linkNameIsValid || isExpired}
+          isDisabled={isDisabledSaveButton}
           onClick={onSave}
         />
         <Button

@@ -76,18 +76,18 @@ const DocumentService = ({
     e.preventDefault();
     setSaveIsLoading(true);
     changeDocumentServiceLocation(docServiceUrl, internalUrl, portalUrl)
-      .then((response) => {
+      .then((result) => {
         toastr.success(t("Common:ChangesSavedSuccessfully"));
 
-        setDocServiceUrl(response[0]);
-        setInternalUrl(response[1]);
-        setPortalUrl(response[2]);
+        setIsDefaultSettiings(result?.isDefault || false);
 
-        setInitDocServiceUrl(response[0]);
-        setInitInternalUrl(response[1]);
-        setInitPortalUrl(response[2]);
+        setPortalUrl(result?.docServicePortalUrl);
+        setInternalUrl(result?.docServiceUrlInternal);
+        setDocServiceUrl(result?.docServiceUrl);
 
-        setIsDefaultSettiings(false);
+        setInitPortalUrl(result?.docServicePortalUrl);
+        setInitInternalUrl(result?.docServiceUrlInternal);
+        setInitDocServiceUrl(result?.docServiceUrl);
       })
       .catch((e) => toastr.error(e))
       .finally(() => setSaveIsLoading(false));
@@ -100,18 +100,18 @@ const DocumentService = ({
 
     setResetIsLoading(true);
     changeDocumentServiceLocation(null, null, null)
-      .then((response) => {
+      .then((result) => {
         toastr.success(t("Common:ChangesSavedSuccessfully"));
 
-        setDocServiceUrl(response[0]);
-        setInternalUrl(response[1]);
-        setPortalUrl(response[2]);
+        setIsDefaultSettiings(result?.isDefault || false);
 
-        setInitDocServiceUrl(response[0]);
-        setInitInternalUrl(response[1]);
-        setInitPortalUrl(response[2]);
+        setPortalUrl(result?.docServicePortalUrl);
+        setInternalUrl(result?.docServiceUrlInternal);
+        setDocServiceUrl(result?.docServiceUrl);
 
-        setIsDefaultSettiings(true);
+        setInitPortalUrl(result?.docServicePortalUrl);
+        setInitInternalUrl(result?.docServiceUrlInternal);
+        setInitDocServiceUrl(result?.docServiceUrl);
       })
       .catch((e) => toastr.error(e))
       .finally(() => setResetIsLoading(false));

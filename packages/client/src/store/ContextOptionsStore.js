@@ -1676,7 +1676,7 @@ class ContextOptionsStore {
         label: t("Translations:DownloadAs"),
         icon: DownloadAsReactSvgUrl,
         onClick: this.onClickDownloadAs,
-        disabled: !hasDownloadAccess || this.publicRoomStore.isPublicRoom,
+        disabled: !hasDownloadAccess,
       },
       {
         key: "move-to",

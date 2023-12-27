@@ -87,7 +87,7 @@ const SpaceQuota = (props) => {
     onAbort && onAbort();
     setIsLoading(false);
 
-    setSelected("close");
+    needResetSelection && setSelected("close");
   };
 
   const onChange = async ({ action }) => {
@@ -181,7 +181,7 @@ export default inject(
       getPeopleListItem,
     } = usersStore;
     const { changeRoomQuota } = filesActionsStore;
-    const { updateRoomQuota } = filesStore;
+    const { updateRoomQuota, setSelected: setRoomsSelected } = filesStore;
     const { currentQuotaStore, infoPanelStore } = auth;
     const {
       isDefaultUsersQuotaSet,
@@ -202,9 +202,9 @@ export default inject(
 
     const defaultSize = type === "user" ? defaultUsersQuota : defaultRoomsQuota;
 
-    const needResetSelection = type === "user" ? needResetUserSelection : null;
+    const needResetSelection = type === "user" ? needResetUserSelection : false;
 
-    const setSelected = type === "user" ? setUsersSelected : null;
+    const setSelected = type === "user" ? setUsersSelected : setRoomsSelected;
 
     return {
       setSelected,

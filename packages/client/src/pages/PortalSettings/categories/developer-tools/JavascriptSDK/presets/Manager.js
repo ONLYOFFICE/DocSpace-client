@@ -39,6 +39,7 @@ import {
   Preview,
   GetCodeButtonWrapper,
   FilesSelectorInputWrapper,
+  SelectedItemsContainer,
 } from "./StyledPresets";
 
 const Manager = (props) => {
@@ -87,10 +88,6 @@ const Manager = (props) => {
   ];
 
   const [columnsOptions, setColumnsOptions] = useState([
-    {
-      key: "Select",
-      label: t("Common:SelectAction"),
-    },
     // { key: "Owner", label: t("Common:Owner") },
     // { key: "Modified", label: t("Files:ByLastModified") },
   ]);
@@ -110,7 +107,6 @@ const Manager = (props) => {
     { key: "Type", label: t("Common:Type") },
     { key: "Tags", label: t("Common:Tags") },
   ]);
-  const [selectedColumnOption, setSelectedColumnOption] = useState(columnsOptions[0]);
   const [filterBy, setFilterBy] = useState({
     key: "filter-type-default",
     label: t("Common:SelectAction"),
@@ -283,7 +279,9 @@ const Manager = (props) => {
   const closeGetCodeModal = () => setIsGetCodeDialogOpened(false);
 
   const onColumnSelect = (option) => {
-    setSelectedColumnOption(option);
+    setColumnsOptions((prevColumnsOptions) =>
+      prevColumnsOptions.filter((column) => column.key !== option.key),
+    );
     if (!selectedColumns.find((column) => column.key === option.key)) {
       setConfig((config) => ({
         ...config,
@@ -294,7 +292,7 @@ const Manager = (props) => {
   };
 
   const deleteSelectedColumn = (option) => {
-    setColumnsOptions((prevColumnsOptions) => [...prevColumnsOptions, option]);
+    setColumnsOptions((prevColumnsOptions) => [option, ...prevColumnsOptions]);
     const filteredColumns = selectedColumns.filter((column) => column.key !== option.key);
     setConfig((config) => ({
       ...config,
@@ -575,21 +573,30 @@ const Manager = (props) => {
               <>
                 <ComboBox
                   onSelect={onColumnSelect}
-                  options={columnsOptions}
+                  options={
+                    columnsOptions || {
+                      key: "Select",
+                      label: t("Common:SelectAction"),
+                    }
+                  }
                   scaled={true}
                   directionY="top"
-                  selectedOption={selectedColumnOption}
+                  selectedOption={{
+                    key: "Select",
+                    label: t("Common:SelectAction"),
+                  }}
                 />
 
-                {selectedColumns.map((column) => (
-                  <SelectedItem
-                    key={column.key}
-                    isDisabled={column.key === "Name"}
-                    onClose={() => deleteSelectedColumn(column)}
-                    onClick={() => deleteSelectedColumn(column)}
-                    label={column.label}
-                  />
-                ))}
+                <SelectedItemsContainer>
+                  {selectedColumns.map((column) => (
+                    <SelectedItem
+                      key={column.key}
+                      isDisabled={column.key === "Name"}
+                      onClick={() => deleteSelectedColumn(column)}
+                      label={column.label}
+                    />
+                  ))}
+                </SelectedItemsContainer>
               </>
             )}
           </ControlsGroup>

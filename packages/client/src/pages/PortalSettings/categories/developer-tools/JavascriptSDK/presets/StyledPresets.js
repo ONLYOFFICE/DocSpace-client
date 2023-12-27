@@ -221,3 +221,8 @@ export const FilesSelectorInputWrapper = styled.div`
     margin: 0;
   }
 `;
+
+export const SelectedItemsContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;

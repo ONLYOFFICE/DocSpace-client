@@ -11,6 +11,7 @@ import ComboBox from "@docspace/components/combobox";
 import TabContainer from "@docspace/components/tabs-container";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import RadioButtonGroup from "@docspace/components/radio-button-group";
+import SelectedItem from "@docspace/components/selected-item";
 import { objectToGetParams, loadScript } from "@docspace/common/utils";
 import { inject, observer } from "mobx-react";
 
@@ -37,6 +38,7 @@ import {
   Preview,
   GetCodeButtonWrapper,
   FilesSelectorInputWrapper,
+  SelectedItemsContainer,
 } from "./StyledPresets";
 
 const FileSelector = (props) => {
@@ -69,18 +71,7 @@ const FileSelector = (props) => {
     { value: "custom-types", label: "Select types" },
   ];
 
-  const fileOptions = [
-    { key: "file-type-all", label: t("Files:AllFiles") },
-    { key: "file-type-documents", label: t("Common:Documents") },
-    { key: "file-type-folders", label: t("Translations:Folders") },
-    { key: "file-type-spreadsheets", label: t("Translations:Spreadsheets") },
-    { key: "file-type-archives", label: t("Files:Archives") },
-    { key: "file-type-presentations", label: t("Translations:Presentations") },
-    { key: "file-type-images", label: t("Filse:Images") },
-    { key: "file-type-media", label: t("Files:Media") },
-    { key: "file-type-forms-templates", label: t("Files:FormsTemplates") },
-    { key: "file-type-forms", label: t("Files:Forms") },
-  ];
+  const [fileOptions, setFileOptions] = useState([]);
 
   const [widthDimension, setWidthDimension] = useState(dataDimensions[0]);
   const [heightDimension, setHeightDimension] = useState(dataDimensions[1]);
@@ -90,10 +81,17 @@ const FileSelector = (props) => {
   const [showPreview, setShowPreview] = useState(window.innerWidth > showPreviewThreshold);
   const [selectedElementType, setSelectedElementType] = useState(elementDisplayOptions[0].value);
   const [typeDisplay, setTypeDisplay] = useState(fileTypeDisplay[0].value);
-  const [selectedTypeOption, setSelectedTypeOption] = useState({
-    key: "select",
-    label: t("Common:SelectAction"),
-  });
+  const [selectedFileTypes, setSelectedFileTypes] = useState([
+    { key: "file-type-documents", label: t("Common:Documents") },
+    { key: "file-type-folders", label: t("Translations:Folders") },
+    { key: "file-type-spreadsheets", label: t("Translations:Spreadsheets") },
+    { key: "file-type-archives", label: t("Files:Archives") },
+    { key: "file-type-presentations", label: t("Translations:Presentations") },
+    { key: "file-type-images", label: t("Filse:Images") },
+    { key: "file-type-media", label: t("Files:Media") },
+    { key: "file-type-forms-templates", label: t("Files:FormsTemplates") },
+    { key: "file-type-forms", label: t("Files:Forms") },
+  ]);
 
   const [config, setConfig] = useState({
     mode: "file-selector",
@@ -187,7 +185,17 @@ const FileSelector = (props) => {
   const closeGetCodeModal = () => setIsGetCodeDialogOpened(false);
 
   const onTypeSelect = (option) => {
-    setSelectedTypeOption(option);
+    setFileOptions((prevFileOptions) => prevFileOptions.filter((file) => file.key !== option.key));
+
+    if (!selectedFileTypes.find((type) => type.key === option.key)) {
+      setSelectedFileTypes((prevFileTypes) => [...prevFileTypes, option]);
+    }
+  };
+
+  const deleteSelectedType = (option) => {
+    setFileOptions((prevFileOptions) => [option, ...prevFileOptions]);
+    const filteredTypes = selectedFileTypes.filter((type) => type.key !== option.key);
+    setSelectedFileTypes(filteredTypes);
   };
 
   const onResize = () => {
@@ -367,13 +375,33 @@ const FileSelector = (props) => {
               onClick={changeColumnsOption}
             />
             {typeDisplay === "custom-types" && (
-              <ComboBox
-                onSelect={onTypeSelect}
-                options={fileOptions}
-                scaled={true}
-                directionY="top"
-                selectedOption={selectedTypeOption}
-              />
+              <>
+                <ComboBox
+                  onSelect={onTypeSelect}
+                  options={
+                    fileOptions || {
+                      key: "Select",
+                      label: t("Common:SelectAction"),
+                    }
+                  }
+                  scaled={true}
+                  directionY="top"
+                  selectedOption={{
+                    key: "Select",
+                    label: t("Common:SelectAction"),
+                  }}
+                />
+
+                <SelectedItemsContainer>
+                  {selectedFileTypes.map((type) => (
+                    <SelectedItem
+                      key={type.key}
+                      onClick={() => deleteSelectedType(type)}
+                      label={type.label}
+                    />
+                  ))}
+                </SelectedItemsContainer>
+              </>
             )}
           </ControlsGroup>
         </Controls>

@@ -1,6 +1,6 @@
 import React from "react";
-import Row from "@docspace/components/row";
-import Text from "@docspace/components/text";
+import { Row } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components";
 
 const NavigationBlock = ({ t, textStyles, keyTextStyles, AltKey }) => {
   return (

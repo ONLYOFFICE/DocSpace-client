@@ -17,15 +17,16 @@ import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.patt
 
 import moment from "moment-timezone";
 
-import { LANGUAGE, ThemeKeys, RtlLanguages } from "../constants";
+import { ThemeKeys, RtlLanguages } from "../constants";
 import sjcl from "sjcl";
 import { isMobile } from "react-device-detect";
-import TopLoaderService from "@docspace/components/top-loading-indicator";
+import { TopLoaderService } from "@docspace/shared/components";
+import { LANGUAGE } from "@docspace/shared/constants";
 import { Encoder } from "./encoder";
 import FilesFilter from "../api/files/filter";
 import combineUrlFunc from "./combineUrl";
 
-import { getCookie } from "@docspace/components/utils/cookie";
+import { getCookie } from "@docspace/shared/utils";
 // import { translations } from "./i18next-http-backend/lib/translations";
 export const toUrlParams = (obj, skipNull) => {
   let str = "";

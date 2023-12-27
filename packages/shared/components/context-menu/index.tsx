@@ -4,6 +4,6 @@ import {
   SeparatorType,
 } from "./ContextMenu.types";
 
-export { ContextMenuModel, ContextMenuType, SeparatorType };
+export type { ContextMenuModel, ContextMenuType, SeparatorType };
 
 export { ContextMenu } from "./ContextMenu";

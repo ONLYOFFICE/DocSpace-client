@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import ModalDialogContainer from "@docspace/client/src/components/dialogs/ModalDialogContainer";
-import Text from "@docspace/components/text";
-import Button from "@docspace/components/button";
-import ModalDialog from "@docspace/components/modal-dialog";
+import { Text } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components";
+import { ModalDialog } from "@docspace/shared/components";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
-import { TextInput, Checkbox } from "@docspace/components";
+import { TextInput, Checkbox } from "@docspace/shared/components";
 import { useStore } from "SRC_DIR/store";
 import { parseDomain } from "SRC_DIR/utils";
 
@@ -22,7 +22,8 @@ const StyledModal = styled(ModalDialogContainer)`
 const ChangeDomainDialogComponent = () => {
   const { t } = useTranslation(["Management", "Common"]);
   const { spacesStore, authStore } = useStore();
-  const [domainNameError, setDomainNameError] = React.useState<null | Array<object>>(null);
+  const [domainNameError, setDomainNameError] =
+    React.useState<null | Array<object>>(null);
 
   const {
     setDomainName,
@@ -43,7 +44,6 @@ const ChangeDomainDialogComponent = () => {
   };
 
   const onClickDomainChange = async () => {
-
     const isValidDomain = parseDomain(domain, setDomainNameError, t);
 
     if (!isValidDomain) return;
@@ -81,11 +81,19 @@ const ChangeDomainDialogComponent = () => {
             placeholder={t("EnterDomain")}
             className="create-docspace-input"
           />
-             <div>
-              {domainNameError && domainNameError.map((err, index) => (
-                <Text key={index} fontSize="12px" fontWeight="400" color="#F24724">{err}</Text>
+          <div>
+            {domainNameError &&
+              domainNameError.map((err, index) => (
+                <Text
+                  key={index}
+                  fontSize="12px"
+                  fontWeight="400"
+                  color="#F24724"
+                >
+                  {err}
+                </Text>
               ))}
-            </div>
+          </div>
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>

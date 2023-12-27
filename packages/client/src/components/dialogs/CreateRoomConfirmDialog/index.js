@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import ModalDialog from "@docspace/components/modal-dialog";
+import { ModalDialog } from "@docspace/shared/components";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { Button } from "@docspace/components";
+import { Button } from "@docspace/shared/components";
 
 const CreateRoomConfirmDialog = ({
   t,

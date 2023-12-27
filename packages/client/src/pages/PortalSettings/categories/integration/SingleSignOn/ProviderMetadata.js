@@ -4,10 +4,10 @@ import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import Text from "@docspace/components/text";
-import Button from "@docspace/components/button";
+import { Text } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components";
 
-import { mobile, size } from "@docspace/components/utils/device";
+import { mobile, size } from "@docspace/shared/utils";
 
 import MetadataUrlField from "./sub-components/MetadataUrlField";
 import { useIsMobileView } from "../../../utils/useIsMobileView";

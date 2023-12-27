@@ -12,8 +12,7 @@ import {
 } from "@docspace/common/constants";
 import { getCatalogIconUrlByType } from "@docspace/common/utils/catalogIcon.helper";
 
-import CatalogItem from "@docspace/components/catalog-item";
-import DragAndDrop from "@docspace/components/drag-and-drop";
+import { ArticleItem, DragAndDrop } from "@docspace/shared/components";
 
 import BonusItem from "./BonusItem";
 import AccountsItem from "./AccountsItem";
@@ -127,7 +126,7 @@ const Item = ({
       onDragLeave={onDragLeave}
       className={"document-catalog"}
     >
-      <CatalogItem
+      <ArticleItem
         key={item.id}
         id={item.id}
         folderId={folderId}

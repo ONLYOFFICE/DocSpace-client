@@ -21,7 +21,7 @@ import MyspaceIconUrl from "PUBLIC_DIR/images/myspace.react.svg?url";
 import TwitterIconUrl from "PUBLIC_DIR/images/share.twitter.react.svg?url";
 import BloggerIconUrl from "PUBLIC_DIR/images/blogger.react.svg?url";
 import YahooIconUrl from "PUBLIC_DIR/images/yahoo.react.svg?url";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components";
 
 export const getUserStatus = (user) => {
   if (

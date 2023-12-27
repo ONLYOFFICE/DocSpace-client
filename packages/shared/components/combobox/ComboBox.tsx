@@ -47,7 +47,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
 
   const comboBoxClick = (e: React.MouseEvent) => {
     const {
-      disableIconClick,
+      disableIconClick = true,
       disableItemClick,
       isDisabled,
       onToggle,
@@ -90,8 +90,8 @@ const ComboBoxPure = (props: ComboboxProps) => {
     dropDownMaxHeight,
     directionX,
     directionY,
-    scaled,
-    size,
+    scaled = true,
+    size = ComboBoxSize.base,
     type,
     options,
     advancedOptions,
@@ -106,7 +106,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
     comboIcon,
     manualY,
     manualX,
-    isDefaultMode,
+    isDefaultMode = true,
     manualWidth = "200px",
     displaySelectedOption,
     fixedDirection,
@@ -129,6 +129,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
     setIsOpenItemAccess,
     dropDownId,
     title,
+    className,
   } = props;
 
   const { tabIndex, onClickSelectedItem } = props;
@@ -222,6 +223,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
       withoutPadding={withoutPadding}
       data-testid="combobox"
       title={title}
+      className={className}
       // {...rest}
     >
       <ComboButton
@@ -276,27 +278,6 @@ const ComboBoxPure = (props: ComboboxProps) => {
       )}
     </StyledComboBox>
   );
-};
-
-ComboBoxPure.defaultProps = {
-  displayType: "default",
-  isDisabled: false,
-  noBorder: false,
-  scaled: true,
-  scaledOptions: false,
-  size: ComboBoxSize.base,
-  disableIconClick: true,
-  showDisabledItems: false,
-  manualY: "102%",
-  isDefaultMode: true,
-
-  displaySelectedOption: false,
-  fixedDirection: false,
-  disableItemClick: false,
-  modernView: false,
-  tabIndex: -1,
-  withoutPadding: false,
-  isLoading: false,
 };
 
 export { ComboBoxPure };

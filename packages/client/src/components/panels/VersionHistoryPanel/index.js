@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Backdrop from "@docspace/components/backdrop";
-import Heading from "@docspace/components/heading";
-import Aside from "@docspace/components/aside";
+import { Backdrop } from "@docspace/shared/components";
+import { Heading } from "@docspace/shared/components";
+import { Aside } from "@docspace/shared/components";
 import Loaders from "@docspace/common/components/Loaders";
-import FloatingButton from "@docspace/components/floating-button";
-import Portal from "@docspace/components/portal";
+import { FloatingButton } from "@docspace/shared/components";
+import { Portal } from "@docspace/shared/components";
 import { DeviceType } from "@docspace/common/constants";
 import { withTranslation } from "react-i18next";
 import {

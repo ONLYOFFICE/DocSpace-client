@@ -1,10 +1,10 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
-import ContextMenuButton from "@docspace/components/context-menu-button";
+import { ContextMenuButton } from "@docspace/shared/components";
 
-import { tablet } from "@docspace/components/utils/device";
-import { Base } from "@docspace/components/themes";
+import { tablet } from "@docspace/shared/utils";
+import { Base } from "@docspace/shared/themes";
 import ToggleInfoPanelButton from "./toggle-infopanel-btn";
 import PlusButton from "./plus-btn";
 import ContextButton from "./context-btn";

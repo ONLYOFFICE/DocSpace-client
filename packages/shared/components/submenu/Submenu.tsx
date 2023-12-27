@@ -5,13 +5,13 @@ import {
   StyledSubmenu,
   StyledSubmenuBottomLine,
   StyledSubmenuContentWrapper,
-  //   StyledSubmenuItem,
   StyledSubmenuItems,
   StyledSubmenuItemText,
   SubmenuScroller,
   SubmenuRoot,
   SubmenuScrollbarSize,
   StyledItemLabelTheme,
+  StyledSubmenuItem,
 } from "./Submenu.styled";
 
 import { ColorTheme, ThemeId } from "../color-theme";
@@ -131,7 +131,7 @@ const Submenu = (props: SubmenuProps) => {
                   d.id === (forsedActiveItemId || currentItem?.id);
 
                 return (
-                  <StyledSubmenuItemText
+                  <StyledSubmenuItem
                     key={d.id}
                     id={d.id}
                     onClick={(e) => {
@@ -157,7 +157,7 @@ const Submenu = (props: SubmenuProps) => {
                       isActive={isActive}
                       $currentColorScheme={theme.currentColorScheme}
                     />
-                  </StyledSubmenuItemText>
+                  </StyledSubmenuItem>
                 );
               })}
             </StyledSubmenuItems>

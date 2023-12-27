@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Box from "@docspace/components/box";
-import { mobile, tablet } from "@docspace/components/utils/device";
+import { Box } from "@docspace/shared/components";
+import { mobile, tablet } from "@docspace/shared/utils";
 
 export const ButtonsWrapper = styled.div`
   display: flex;

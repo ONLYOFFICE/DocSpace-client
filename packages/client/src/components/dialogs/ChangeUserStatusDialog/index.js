@@ -1,14 +1,18 @@
 import React, { memo } from "react";
 import PropTypes from "prop-types";
 
-import ModalDialog from "@docspace/components/modal-dialog";
-import Button from "@docspace/components/button";
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
+import {
+  ModalDialog,
+  Button,
+  Text,
+  Link,
+  toastr,
+} from "@docspace/shared/components";
+
 import { combineUrl } from "@docspace/common/utils";
 
 import { withTranslation } from "react-i18next";
-import toastr from "@docspace/components/toast/toastr";
+
 import { EmployeeStatus } from "@docspace/common/constants";
 import ModalDialogContainer from "../ModalDialogContainer";
 import { inject, observer } from "mobx-react";

@@ -1,12 +1,12 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
-import TableCell from "@docspace/components/table-container/TableCell";
+import { TableCell } from "@docspace/shared/components";
 import FileNameCell from "./FileNameCell";
 import TypeCell from "./TypeCell";
 import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
 import SizeCell from "./SizeCell";
-import { classNames } from "@docspace/components/utils/classNames";
+import { classNames } from "@docspace/shared/utils";
 import {
   StyledBadgesContainer,
   StyledQuickButtonsContainer,

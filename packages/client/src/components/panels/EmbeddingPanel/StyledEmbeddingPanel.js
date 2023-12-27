@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import Scrollbar from "@docspace/components/scrollbar";
-import { Base } from "@docspace/components/themes";
+import { Scrollbar } from "@docspace/shared/components";
+import { Base } from "@docspace/shared/themes";
 
 const StyledEmbeddingPanel = styled.div`
   .embedding-panel {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Button from "@docspace/components/button";
+import { ModalDialog } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components";
 import { LabledInput } from "./LabledInput";
 import styled, { css } from "styled-components";
 import { Hint } from "../styled-components";
@@ -51,7 +51,15 @@ function validateUrl(url) {
 }
 
 const WebhookDialog = (props) => {
-  const { visible, onClose, header, isSettingsModal, onSubmit, webhook, additionalId } = props;
+  const {
+    visible,
+    onClose,
+    header,
+    isSettingsModal,
+    onSubmit,
+    webhook,
+    additionalId,
+  } = props;
 
   const [isResetVisible, setIsResetVisible] = useState(isSettingsModal);
 
@@ -145,14 +153,16 @@ const WebhookDialog = (props) => {
     });
   }, [webhook]);
 
-  const onKeyPress = (e) => (e.key === "Esc" || e.key === "Escape") && onModalClose();
+  const onKeyPress = (e) =>
+    (e.key === "Esc" || e.key === "Escape") && onModalClose();
 
   return (
     <ModalDialogContainer
       withFooterBorder
       visible={visible}
       onClose={onModalClose}
-      displayType="aside">
+      displayType="aside"
+    >
       <ModalDialog.Header>{header}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledWebhookForm onSubmit={onFormSubmit}>
@@ -199,7 +209,9 @@ const WebhookDialog = (props) => {
         <Footer>
           <Button
             id={isSettingsModal ? "save-button" : "create-button"}
-            label={isSettingsModal ? t("Common:SaveButton") : t("Common:Create")}
+            label={
+              isSettingsModal ? t("Common:SaveButton") : t("Common:Create")
+            }
             size="normal"
             primary={true}
             onClick={handleSubmitClick}

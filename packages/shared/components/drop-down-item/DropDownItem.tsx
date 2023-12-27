@@ -28,7 +28,7 @@ const DropDownItem = (props: DropDownItemProps) => {
     disabled,
     className,
 
-    fillIcon,
+    fillIcon = true,
     isSubMenu,
     isActive,
     withoutIcon,

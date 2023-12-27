@@ -5,7 +5,7 @@ Used to display an campaigns banner.
 ### Usage
 
 ```js
-import CampaignsBanner from "@docspace/components/campaigns-banner";
+import CampaignsBanner , from "@docspace/shared/components/campaigns-banner";
 ```
 
 ```jsx

@@ -7,10 +7,10 @@ import AddEmployeeReactSvgUrl from "ASSETS/images/add.employee.react.svg?url";
 import React from "react";
 //import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import MainButton from "@docspace/components/main-button";
+import { MainButton } from "@docspace/shared/components";
 import InviteDialog from "../../dialogs/InviteDialog/index";
 import { withTranslation } from "react-i18next";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components";
 import Loaders from "@docspace/common/components/Loaders";
 import { inject, observer } from "mobx-react";
 import config from "PACKAGE_FILE";
@@ -19,7 +19,7 @@ import { isMobile } from "react-device-detect";
 import {
   isMobile as isMobileUtils,
   isTablet as isTabletUtils,
-} from "@docspace/components/utils/device";
+} from "@docspace/shared/utils";
 import MobileView from "./MobileView";
 
 import withLoader from "../../../HOCs/withLoader";

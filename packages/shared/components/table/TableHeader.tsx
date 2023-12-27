@@ -59,6 +59,8 @@ function TableHeader({
       .filter((x: TTableColumn) => !x.defaultSize)
       .filter((x: TTableColumn) => !x.default);
 
+    console.log(containerRef);
+
     const container = containerRef.current
       ? containerRef.current
       : document.getElementById("table-container");
@@ -771,9 +773,10 @@ function TableHeader({
 
     // if (!state.columnIndex) return;
     const column = document.getElementById(
-      `column_ + ${state.columnIndex}`,
+      `column_${state.columnIndex}`,
     ) as HTMLElement;
-    const columnSize = column.getBoundingClientRect();
+
+    const columnSize = column?.getBoundingClientRect();
     const newWidth = isRtl
       ? columnSize.right - e.clientX
       : e.clientX - columnSize.left;

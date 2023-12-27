@@ -1,9 +1,7 @@
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
-import Avatar from "@docspace/components/avatar";
+import { Text, Link, Avatar } from "@docspace/shared/components";
 
 import * as Styled from "./index.styled";
 

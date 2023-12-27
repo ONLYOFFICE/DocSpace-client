@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import { useState, useRef } from "react";
 
-import { Base } from "@docspace/components/themes";
-import TableBody from "@docspace/components/table-container/TableBody";
-import TableContainer from "@docspace/components/table-container/TableContainer";
+import { Base } from "@docspace/shared/themes";
+import { TableBody } from "@docspace/shared/components";
+import { TableContainer } from "@docspace/shared/components";
 
 import HistoryTableRow from "./HistoryTableRow";
 import HistoryTableHeader from "./HistoryTableHeader";

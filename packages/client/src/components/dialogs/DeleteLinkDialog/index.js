@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import ModalDialog from "@docspace/components/modal-dialog";
+import { ModalDialog, Button, Text, toastr } from "@docspace/shared/components";
 import { StyledDeleteLinkDialog } from "./StyledDeleteLinkDialog";
-import Button from "@docspace/components/button";
-import Text from "@docspace/components/text";
+
 import { withTranslation } from "react-i18next";
-import toastr from "@docspace/components/toast/toastr";
+
 import { inject, observer } from "mobx-react";
 import { RoomsType } from "@docspace/common/constants";
 

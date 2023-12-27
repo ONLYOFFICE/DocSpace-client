@@ -1,7 +1,7 @@
 import React from "react";
 
 import { inject, observer } from "mobx-react";
-import { Consumer } from "@docspace/components/utils/context";
+import { Consumer } from "@docspace/shared/utils";
 
 import WebhooksTableView from "./WebhooksTableView";
 import WebhooksRowView from "./WebhooksRowView";

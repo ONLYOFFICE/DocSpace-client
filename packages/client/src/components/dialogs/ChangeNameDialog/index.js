@@ -2,16 +2,22 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import ModalDialog from "@docspace/components/modal-dialog";
-import FieldContainer from "@docspace/components/field-container";
-import TextInput from "@docspace/components/text-input";
-import Button from "@docspace/components/button";
-import toastr from "@docspace/components/toast/toastr";
+import {
+  ModalDialog,
+  FieldContainer,
+  TextInput,
+  Button,
+  toastr,
+} from "@docspace/shared/components";
 
 import { ChangeNameContainer } from "./StyledChangeName";
 
 const ChangeNameDialog = (props) => {
-  const { t, ready } = useTranslation(["ProfileAction", "PeopleTranslations", "Common"]);
+  const { t, ready } = useTranslation([
+    "ProfileAction",
+    "PeopleTranslations",
+    "Common",
+  ]);
   const {
     visible,
     onClose,
@@ -81,8 +87,11 @@ const ChangeNameDialog = (props) => {
       isLoading={!ready}
       visible={visible}
       onClose={onCloseAction}
-      displayType="modal">
-      <ModalDialog.Header>{t("PeopleTranslations:NameChangeButton")}</ModalDialog.Header>
+      displayType="modal"
+    >
+      <ModalDialog.Header>
+        {t("PeopleTranslations:NameChangeButton")}
+      </ModalDialog.Header>
       <ModalDialog.Body className="change-name-dialog-body">
         <FieldContainer
           isVertical
@@ -93,7 +102,8 @@ const ChangeNameDialog = (props) => {
             firstName.trim().length === 0
               ? t("Common:RequiredField")
               : t("Common:IncorrectFirstName")
-          }>
+          }
+        >
           <TextInput
             className="first-name"
             scale={true}
@@ -114,8 +124,11 @@ const ChangeNameDialog = (props) => {
           className="field"
           hasError={!isSurnameValid}
           errorMessage={
-            lastName.trim().length === 0 ? t("Common:RequiredField") : t("Common:IncorrectLastName")
-          }>
+            lastName.trim().length === 0
+              ? t("Common:RequiredField")
+              : t("Common:IncorrectLastName")
+          }
+        >
           <TextInput
             className="last-name"
             scale={true}

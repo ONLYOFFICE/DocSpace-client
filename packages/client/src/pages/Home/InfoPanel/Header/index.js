@@ -3,15 +3,15 @@ import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import IconButton from "@docspace/components/icon-button";
-import Text from "@docspace/components/text";
+import { IconButton } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components";
 
-import Submenu from "@docspace/components/submenu";
+import { Submenu } from "@docspace/shared/components";
 import {
   isDesktop as isDesktopUtils,
   isMobile as isMobileUtils,
   isTablet as isTabletUtils,
-} from "@docspace/components/utils/device";
+} from "@docspace/shared/utils";
 
 import { StyledInfoPanelHeader } from "./styles/common";
 

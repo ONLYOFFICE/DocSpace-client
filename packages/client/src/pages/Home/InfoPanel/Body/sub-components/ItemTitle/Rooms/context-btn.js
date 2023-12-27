@@ -2,7 +2,7 @@ import { useRef, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
-import { ContextMenu, ContextMenuButton } from "@docspace/components";
+import { ContextMenu, ContextMenuButton } from "@docspace/shared/components";
 
 const generalKeys = ["select", "show-info"];
 const roomKeys = ["separator0", "room-info"];

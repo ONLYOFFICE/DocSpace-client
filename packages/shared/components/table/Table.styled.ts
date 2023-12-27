@@ -22,12 +22,10 @@ const reactWindowBodyStyles = css`
 
 const StyledTableContainer = styled.div<{ useReactWindow?: boolean }>`
   user-select: none;
-
+  display: grid;
   width: 100%;
   max-width: 100%;
   margin-top: -25px;
-
-  display: grid;
 
   .table-column {
     user-select: none;

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
 import { withTranslation } from "react-i18next";
-import Text from "@docspace/components/text";
-import TextInput from "@docspace/components/text-input";
-import Button from "@docspace/components/button";
+import { Text } from "@docspace/shared/components";
+import { TextInput } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components";
 import { inject, observer } from "mobx-react";
 import { StyledPage, StyledBody, StyledContent } from "./StyledConfirm";
 import withLoader from "../withLoader";
-import FormWrapper from "@docspace/components/form-wrapper";
+import { FormWrapper } from "@docspace/shared/components";
 import DocspaceLogo from "../../../DocspaceLogo";
 
 const ChangePhoneForm = (props) => {

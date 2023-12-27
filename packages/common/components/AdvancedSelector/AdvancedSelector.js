@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
 import { isMobile } from "react-device-detect";
-import { tablet, mobile } from "@docspace/components/utils/device";
-import { Base } from "@docspace/components/themes";
+import { tablet, mobile } from "@docspace/shared/utils";
+import { Base } from "@docspace/shared/themes";
 
 import Selector from "./sub-components/Selector";
-import Backdrop from "@docspace/components/backdrop";
+import { Backdrop } from "@docspace/shared/components";
 
 import CrossIcon from "PUBLIC_DIR/images/cross.react.svg";
 

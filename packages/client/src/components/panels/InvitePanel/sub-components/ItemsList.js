@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, memo, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { FixedSizeList as List } from "react-window";
-import CustomScrollbarsVirtualList from "@docspace/components/scrollbar/custom-scrollbars-virtual-list";
+import { CustomScrollbarsVirtualList } from "@docspace/shared/components";
 import useResizeObserver from "use-resize-observer";
 import Item from "./Item";
 

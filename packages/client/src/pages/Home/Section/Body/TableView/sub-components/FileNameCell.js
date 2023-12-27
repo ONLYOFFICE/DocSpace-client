@@ -1,8 +1,8 @@
 import React from "react";
-import Link from "@docspace/components/link";
-import Checkbox from "@docspace/components/checkbox";
-import TableCell from "@docspace/components/table-container/TableCell";
-import Loader from "@docspace/components/loader";
+import { Link } from "@docspace/shared/components";
+import { Checkbox } from "@docspace/shared/components";
+import { TableCell } from "@docspace/shared/components";
+import { Loader } from "@docspace/shared/components";
 
 const FileNameCell = ({
   item,

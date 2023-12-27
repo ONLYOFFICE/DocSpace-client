@@ -4,7 +4,7 @@ import { Meta, StoryObj } from "@storybook/react";
 
 import { InputSize, InputType, TextInput } from "../text-input";
 
-import { PasswordInputPure } from "./PasswordInput";
+import { PasswordInput } from "./PasswordInput";
 
 import PasswordInputDocs from "./PasswordInput.mdx";
 import { PasswordInputProps, TPasswordValidation } from "./PasswordInput.types";
@@ -17,7 +17,7 @@ import { PasswordInputProps, TPasswordValidation } from "./PasswordInput.types";
 
 const meta = {
   title: "Components/PasswordInput",
-  component: PasswordInputPure,
+  component: PasswordInput,
   parameters: {
     docs: {
       description: {
@@ -32,8 +32,8 @@ const meta = {
     // settingsDigits: disable,
     // settingsSpecSymbols: disable,
   },
-} satisfies Meta<typeof PasswordInputPure>;
-type Story = StoryObj<typeof PasswordInputPure>;
+} satisfies Meta<typeof PasswordInput>;
+type Story = StoryObj<typeof PasswordInput>;
 
 export default meta;
 
@@ -77,7 +77,7 @@ const Template = ({
         value="demo@gmail.com"
       />
 
-      <PasswordInputPure
+      <PasswordInput
         {...args}
         size={InputSize.base}
         inputValue={value}

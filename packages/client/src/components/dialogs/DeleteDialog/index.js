@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
-import ModalDialog from "@docspace/components/modal-dialog";
+import { ModalDialog, toastr, Text, Button } from "@docspace/shared/components";
 import { StyledDeleteDialog } from "./StyledDeleteDialog";
-import Button from "@docspace/components/button";
-import Text from "@docspace/components/text";
+
 import { withTranslation } from "react-i18next";
-import toastr from "@docspace/components/toast/toastr";
+
 import { inject, observer } from "mobx-react";
 
 const DeleteDialogComponent = (props) => {

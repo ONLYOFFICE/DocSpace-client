@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { observer, inject } from "mobx-react";
 import { useNavigate } from "react-router-dom";
-import Loader from "@docspace/components/loader";
+import { Loader } from "@docspace/shared/components";
 import axios from "axios";
 import { combineUrl } from "@docspace/common/utils";
 import ConfirmWrapper from "./ConfirmWrapper";

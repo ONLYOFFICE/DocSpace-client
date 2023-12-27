@@ -22,7 +22,7 @@ import {
   FolderType,
 } from "@docspace/common/constants";
 //@ts-ignore
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components";
 
 const DEFAULT_FILE_EXTS = "file";
 

@@ -3,7 +3,7 @@ import Editor from "./components/Editor.js";
 import { useSSR } from "react-i18next";
 import useMfScripts from "./helpers/useMfScripts";
 import { combineUrl, isRetina, setCookie } from "@docspace/common/utils";
-import { getCookie } from "@docspace/components/utils/cookie";
+import { getCookie } from "@docspace/shared/utils";
 
 import initDesktop from "./helpers/initDesktop";
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -12,7 +12,7 @@ import i18n from "./i18n";
 import { I18nextProvider } from "react-i18next";
 import GlobalStyle from "./components/GlobalStyle.js";
 import { inject, observer, Provider as MobxProvider } from "mobx-react";
-import ThemeProvider from "@docspace/components/theme-provider";
+import { ThemeProvider } from "@docspace/shared/components";
 
 const isDesktopEditor = window["AscDesktopEditor"] !== undefined;
 

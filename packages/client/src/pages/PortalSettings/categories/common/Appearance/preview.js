@@ -1,7 +1,7 @@
 ﻿import PlusPreviewSvgUrl from "PUBLIC_DIR/images/plus.preview.svg?url";
 import { useState, useEffect, useLayoutEffect } from "react";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
-import ContextMenuButton from "@docspace/components/context-menu-button";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { ContextMenuButton } from "@docspace/shared/components";
 
 import {
   StyledComponent,
@@ -13,7 +13,7 @@ import {
 import ButtonPlusIcon from "PUBLIC_DIR/images/actions.button.plus.react.svg";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 
-import { isMobile, isTablet } from "@docspace/components/utils/device";
+import { isMobile, isTablet } from "@docspace/shared/utils";
 
 const Preview = (props) => {
   const {

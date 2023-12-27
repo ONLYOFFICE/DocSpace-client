@@ -2,18 +2,18 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
 
-import ComboBox from "@docspace/components/combobox";
-import DropDownItem from "@docspace/components/drop-down-item";
-import IconButton from "@docspace/components/icon-button";
-import ViewSelector from "@docspace/components/view-selector";
-import Text from "@docspace/components/text";
+import { ComboBox } from "@docspace/shared/components";
+import { DropDownItem } from "@docspace/shared/components";
+import { IconButton } from "@docspace/shared/components";
+import { ViewSelector } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components";
 
-import { isMobile, mobile } from "@docspace/components/utils/device";
-import { Base } from "@docspace/components/themes";
+import { isMobile, mobile } from "@docspace/shared/utils";
+import { Base } from "@docspace/shared/themes";
 
 import SortDesc from "PUBLIC_DIR/images/sort.desc.react.svg";
 import SortReactSvgUrl from "PUBLIC_DIR/images/sort.react.svg?url";
-import Backdrop from "@docspace/components/backdrop";
+import { Backdrop } from "@docspace/shared/components";
 import { Events } from "../../../constants";
 
 const selectedViewIcon = css`
@@ -337,14 +337,15 @@ const SortButton = ({
           selectedOption={{}}
           directionX={"right"}
           directionY={"both"}
-          scaled={true}
+          scaled
           size={"content"}
           advancedOptions={advancedOptions}
           disableIconClick={false}
-          disableItemClick={true}
+          disableItemClick
           isDefaultMode={false}
           manualY={"102%"}
           advancedOptionsCount={advancedOptionsCount}
+          displayArrow={false}
         >
           <IconButton iconName={SortReactSvgUrl} size={16} />
         </ComboBox>

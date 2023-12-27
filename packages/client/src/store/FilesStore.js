@@ -14,7 +14,7 @@ import {
 import { combineUrl } from "@docspace/common/utils";
 import { updateTempContent } from "@docspace/common/utils";
 
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components";
 import config from "PACKAGE_FILE";
 import { thumbnailStatuses } from "@docspace/client/src/helpers/filesConstants";
 import { openDocEditor as openEditor } from "@docspace/client/src/helpers/filesUtils";
@@ -25,7 +25,7 @@ import {
   getCategoryUrl,
   getCategoryTypeByFolderType,
 } from "SRC_DIR/helpers/utils";
-import { isDesktop, isMobile } from "@docspace/components/utils/device";
+import { isDesktop, isMobile } from "@docspace/shared/utils";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/constants";
 

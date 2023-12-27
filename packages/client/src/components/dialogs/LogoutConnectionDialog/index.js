@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Button from "@docspace/components/button";
+import { ModalDialog, Button } from "@docspace/shared/components";
+
 import ModalDialogContainer from "../ModalDialogContainer";
 
 const LogoutConnectionDialog = ({

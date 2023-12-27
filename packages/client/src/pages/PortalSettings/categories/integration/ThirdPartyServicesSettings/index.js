@@ -9,13 +9,13 @@ import styled from "styled-components";
 
 import { showLoader, hideLoader } from "@docspace/common/utils";
 
-import Box from "@docspace/components/box";
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
-import Badge from "@docspace/components/badge";
-import toastr from "@docspace/components/toast/toastr";
-import Button from "@docspace/components/button";
-import { mobile, isMobile } from "@docspace/components/utils/device";
+import { Box } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components";
+import { Link } from "@docspace/shared/components";
+import { Badge } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components";
+import { mobile, isMobile } from "@docspace/shared/utils";
 
 import ConsumerItem from "./sub-components/consumerItem";
 import ConsumerModalDialog from "./sub-components/consumerModalDialog";

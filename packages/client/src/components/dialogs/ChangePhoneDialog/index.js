@@ -1,10 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Button from "@docspace/components/button";
-import Text from "@docspace/components/text";
+import { ModalDialog, Button, Text, toastr } from "@docspace/shared/components";
+
 import { withTranslation } from "react-i18next";
-import toastr from "@docspace/components/toast/toastr";
 
 class ChangePhoneDialogComponent extends React.Component {
   constructor(props) {

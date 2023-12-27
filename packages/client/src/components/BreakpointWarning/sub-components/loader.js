@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import RectangleSkeleton from "@docspace/shared/skeletons";
 
-import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
-import { isMobile, mobileMore } from "@docspace/components/utils/device";
+import {
+  getCorrectFourValuesStyle,
+  isMobile,
+  mobileMore,
+} from "@docspace/shared/utils";
 
 const StyledLoader = styled.div`
   padding-top: 25px;

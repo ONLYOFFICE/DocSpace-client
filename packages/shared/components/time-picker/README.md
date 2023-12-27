@@ -5,7 +5,7 @@ Time input
 ### Usage
 
 ```js
-import TimePicker from "@docspace/components/time-picker";
+import { TimePicker } from "@docspace/shared/components";
 ```
 
 ```jsx

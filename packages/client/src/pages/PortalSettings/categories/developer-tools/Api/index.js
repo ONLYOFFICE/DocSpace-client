@@ -3,9 +3,9 @@ import { withTranslation } from "react-i18next";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
-import { mobile } from "@docspace/components/utils/device";
-import Button from "@docspace/components/button";
-import EmptyScreenContainer from "@docspace/components/empty-screen-container";
+import { mobile } from "@docspace/shared/utils";
+import { Button } from "@docspace/shared/components";
+import { EmptyScreenContainer } from "@docspace/shared/components";
 import ConfirmWrapper from "../../../../Confirm/ConfirmWrapper";
 
 import ApiSvgUrl from "PUBLIC_DIR/images/settings.api.svg?url";

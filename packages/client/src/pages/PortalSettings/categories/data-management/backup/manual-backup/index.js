@@ -1,12 +1,12 @@
 import React from "react";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import Text from "@docspace/components/text";
-import Button from "@docspace/components/button";
-import Link from "@docspace/components/link";
+import { Text } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components";
+import { Link } from "@docspace/shared/components";
 import { startBackup } from "@docspace/common/api/portal";
-import RadioButton from "@docspace/components/radio-button";
-import toastr from "@docspace/components/toast/toastr";
+import { RadioButton } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components";
 import { BackupStorageType, FolderType } from "@docspace/common/constants";
 import ThirdPartyModule from "./sub-components/ThirdPartyModule";
 import RoomsModule from "./sub-components/RoomsModule";
@@ -19,7 +19,7 @@ import {
   getBackupStorage,
   getStorageRegions,
 } from "@docspace/common/api/settings";
-import FloatingButton from "@docspace/components/floating-button";
+import { FloatingButton } from "@docspace/shared/components";
 import { getSettingsThirdParty } from "@docspace/common/api/files";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 

@@ -21,6 +21,7 @@ const EmptyScreenContainer = (props: EmptyScreenContainerProps) => {
     imageStyle,
     buttonStyle,
     withoutFilter,
+    className,
   } = props;
   return (
     <EmptyContentBody
@@ -28,6 +29,7 @@ const EmptyScreenContainer = (props: EmptyScreenContainerProps) => {
       subheadingText={!!subheadingText}
       descriptionText={!!descriptionText}
       data-testid="empty-screen-container"
+      className={className}
     >
       <EmptyContentImage
         src={imageSrc}

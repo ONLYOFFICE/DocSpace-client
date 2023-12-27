@@ -1,5 +1,5 @@
 import React from "react";
-import CustomScrollbarsVirtualList from "@docspace/components/scrollbar/custom-scrollbars-virtual-list";
+import { CustomScrollbarsVirtualList } from "@docspace/shared/components";
 
 import BookmarksProps from "./Bookmarks.props";
 import { Item, List, Text } from "./Bookmarks.styled";

@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-import Heading from "@docspace/components/heading";
-import Badge from "@docspace/components/badge";
-import ContextMenuButton from "@docspace/components/context-menu-button";
+import { Heading } from "@docspace/shared/components";
+import { Badge } from "@docspace/shared/components";
+import { ContextMenuButton } from "@docspace/shared/components";
 
 const StyledPluginHeader = styled.div`
   display: flex;

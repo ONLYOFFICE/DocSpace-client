@@ -1,9 +1,9 @@
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components";
 import styled, { css } from "styled-components";
 
-import ToggleButton from "@docspace/components/toggle-button";
-import { tablet, mobile } from "@docspace/components/utils/device";
-import { Base } from "@docspace/components/themes";
+import { ToggleButton } from "@docspace/shared/components";
+import { tablet, mobile } from "@docspace/shared/utils";
+import { Base } from "@docspace/shared/themes";
 import CrossIcon from "PUBLIC_DIR/images/cross.react.svg";
 
 const StyledFilterBlock = styled.div`

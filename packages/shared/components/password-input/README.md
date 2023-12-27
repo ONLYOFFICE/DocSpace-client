@@ -5,7 +5,7 @@ Password entry field with advanced capabilities for displaying, validation of co
 ### Usage
 
 ```js
-import PasswordInput from "@docspace/components/password-input";
+import { PasswordInput } from "@docspace/shared/components";
 ```
 
 ```js

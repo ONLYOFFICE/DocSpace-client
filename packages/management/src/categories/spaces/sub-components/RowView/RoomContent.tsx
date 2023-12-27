@@ -1,8 +1,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import RowContent from "@docspace/components/row-content";
-import Text from "@docspace/components/text";
-import styled, {css} from "styled-components";
+import { RowContent } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components";
+import styled, { css } from "styled-components";
 import { isMobileOnly } from "react-device-detect";
 import { getConvertedSize } from "@docspace/common/utils";
 import { TPortals } from "SRC_DIR/types/spaces";
@@ -24,18 +24,18 @@ const StyledRowContent = styled(RowContent)`
 `;
 
 type TRoomContent = {
-  item: TPortals,
-  isCurrentPortal: boolean
-}
+  item: TPortals;
+  isCurrentPortal: boolean;
+};
 
 export const RoomContent = ({ item, isCurrentPortal }: TRoomContent) => {
   const { t } = useTranslation(["Management", "Common", "Settings"]);
 
-  const { roomAdminCount, usersCount, storageSize, roomsCount, usedSize
-  } = item?.quotaUsage;
+  const { roomAdminCount, usersCount, storageSize, roomsCount, usedSize } =
+    item?.quotaUsage;
 
- const maxStorage = getConvertedSize(t, storageSize);
- const usedStorage = getConvertedSize(t, usedSize);
+  const maxStorage = getConvertedSize(t, storageSize);
+  const usedStorage = getConvertedSize(t, usedSize);
 
   return (
     <StyledRowContent
@@ -65,7 +65,7 @@ export const RoomContent = ({ item, isCurrentPortal }: TRoomContent) => {
           roomCount: roomsCount,
           userCount: roomAdminCount + usersCount,
           usedStorage,
-          maxStorage
+          maxStorage,
         })}`}
       </Text>
     </StyledRowContent>

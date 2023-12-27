@@ -5,12 +5,12 @@ import ClearReactSvgUrl from "PUBLIC_DIR/images/clear.react.svg?url";
 
 import Loaders from "../../Loaders";
 
-import Backdrop from "@docspace/components/backdrop";
-import Button from "@docspace/components/button";
-import Heading from "@docspace/components/heading";
-import IconButton from "@docspace/components/icon-button";
-import Scrollbar from "@docspace/components/scrollbar";
-import Portal from "@docspace/components/portal";
+import { Backdrop } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components";
+import { Heading } from "@docspace/shared/components";
+import { IconButton } from "@docspace/shared/components";
+import { Scrollbar } from "@docspace/shared/components";
+import { Portal } from "@docspace/shared/components";
 
 import FilterBlockItem from "./FilterBlockItem";
 

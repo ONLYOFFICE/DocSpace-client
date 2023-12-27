@@ -1,18 +1,18 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Trans, withTranslation } from "react-i18next";
 import styled from "styled-components";
-import Button from "@docspace/components/button";
-import TextInput from "@docspace/components/text-input";
-import FieldContainer from "@docspace/components/field-container";
-import Text from "@docspace/components/text";
+import { Button } from "@docspace/shared/components";
+import { TextInput } from "@docspace/shared/components";
+import { FieldContainer } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components";
 import { inject, observer } from "mobx-react";
-import Box from "@docspace/components/box";
+import { Box } from "@docspace/shared/components";
 import withLoader from "../withLoader";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components";
 import ErrorContainer from "@docspace/common/components/ErrorContainer";
-import { mobile, tablet } from "@docspace/components/utils/device";
-import Link from "@docspace/components/link";
-import FormWrapper from "@docspace/components/form-wrapper";
+import { mobile, tablet } from "@docspace/shared/utils";
+import { Link } from "@docspace/shared/components";
+import { FormWrapper } from "@docspace/shared/components";
 import DocspaceLogo from "../../../DocspaceLogo";
 import { StyledPage, StyledContent } from "./StyledConfirm";
 

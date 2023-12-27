@@ -44,11 +44,11 @@ import Navigation from "@docspace/common/components/Navigation";
 import FilesFilter from "@docspace/common/api/files/filter";
 import { resendInvitesAgain } from "@docspace/common/api/people";
 
-import DropDownItem from "@docspace/components/drop-down-item";
-import { tablet, mobile } from "@docspace/components/utils/device";
-import { Consumer } from "@docspace/components/utils/context";
-import toastr from "@docspace/components/toast/toastr";
-import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu";
+import { DropDownItem } from "@docspace/shared/components";
+import { tablet, mobile, Consumer } from "@docspace/shared/utils";
+
+import { toastr } from "@docspace/shared/components";
+import { TableGroupMenu } from "@docspace/shared/components";
 import {
   Events,
   EmployeeType,
@@ -1210,7 +1210,7 @@ export default inject(
       onClickBack,
       emptyTrashInProgress,
       moveToPublicRoom,
-      onClickCreateRoom
+      onClickCreateRoom,
     } = filesActionsStore;
 
     const { oformsFilter } = oformsStore;

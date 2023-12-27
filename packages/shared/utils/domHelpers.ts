@@ -4,14 +4,17 @@ export default class DomHelpers {
   static zIndex: number;
 
   static getViewport() {
-    const win = window;
-    const d = document;
-    const e = d.documentElement;
-    const g = d.getElementsByTagName("body")[0];
-    const w = win.innerWidth || e.clientWidth || g.clientWidth;
-    const h = win.innerHeight || e.clientHeight || g.clientHeight;
+    if (typeof window !== "undefined") {
+      const win = window;
+      const d = document;
+      const e = d.documentElement;
+      const g = d.getElementsByTagName("body")[0];
+      const w = win.innerWidth || e.clientWidth || g.clientWidth;
+      const h = win.innerHeight || e.clientHeight || g.clientHeight;
 
-    return { width: w, height: h };
+      return { width: w, height: h };
+    }
+    return { width: 0, height: 0 };
   }
 
   static getOffset(el?: HTMLElement | null) {

@@ -1,6 +1,6 @@
-import { mobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/shared/utils";
 import styled from "styled-components";
-import EmptyScreenContainer from "@docspace/components/empty-screen-container";
+import { EmptyScreenContainer } from "@docspace/shared/components";
 
 export const ErrorView = styled(EmptyScreenContainer)`
   padding: 56px 0 0 0;

@@ -5,15 +5,13 @@ import { ReactSVG } from "react-svg";
 
 import { StyledDropDown, StyledDropDownWrapper } from "../StyledDropdown";
 
-import { isMobile } from "@docspace/components/utils/device";
-import DomHelpers from "@docspace/components/utils/domHelpers";
+import { isMobile, DomHelpers } from "@docspace/shared/utils";
 
-import Text from "@docspace/components/text";
-import Button from "@docspace/components/button";
-import DropDownItem from "@docspace/components/drop-down-item";
+import { Text, Button, DropDownItem } from "@docspace/shared/components";
+
 import { connectedCloudsTypeTitleTranslation as ProviderKeyTranslation } from "@docspace/client/src/helpers/filesUtils";
-import { Base } from "@docspace/components/themes";
-import { toastr } from "@docspace/components";
+import { Base } from "@docspace/shared/themes";
+import { toastr } from "@docspace/shared/components";
 
 const StyledStorageLocation = styled.div`
   display: flex;

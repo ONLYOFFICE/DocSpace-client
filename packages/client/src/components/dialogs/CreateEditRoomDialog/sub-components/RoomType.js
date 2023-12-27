@@ -3,10 +3,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
-import IconButton from "@docspace/components/icon-button";
-import Text from "@docspace/components/text";
-import RoomLogo from "@docspace/components/room-logo";
-import { Base } from "@docspace/components/themes";
+import { IconButton, Text, RoomLogo } from "@docspace/shared/components";
+
+import { Base } from "@docspace/shared/themes";
 import {
   getRoomTypeDescriptionTranslation,
   getRoomTypeTitleTranslation,

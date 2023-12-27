@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import Submenu from "@docspace/components/submenu";
+import { Submenu } from "@docspace/shared/components";
 import { inject, observer } from "mobx-react";
 import PortalDeactivationSection from "./portalDeactivation";
 import PortalDeletionSection from "./portalDeletion";

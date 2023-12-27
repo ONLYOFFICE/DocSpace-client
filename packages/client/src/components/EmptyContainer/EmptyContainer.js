@@ -1,8 +1,8 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import EmptyScreenContainer from "@docspace/components/empty-screen-container";
+import { EmptyScreenContainer } from "@docspace/shared/components";
 
-import { classNames } from "@docspace/components/utils/classNames";
+import { classNames } from "@docspace/shared/utils";
 
 const EmptyFolderWrapper = styled.div`
   .empty-folder_container {

@@ -1,13 +1,11 @@
 import React from "react";
 import { Trans, useTranslation } from "react-i18next";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Button from "@docspace/components/button";
-import toastr from "@docspace/components/toast/toastr";
+import { ModalDialog, Button, toastr } from "@docspace/shared/components";
 
 import { sendDeletePortalEmail } from "@docspace/common/api/portal";
 
 import ModalDialogContainer from "../ModalDialogContainer";
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { ColorTheme, ThemeId } from "@docspace/shared/components";
 
 const DeletePortalDialog = (props) => {
   const { t, ready } = useTranslation("Settings", "Common");
@@ -40,7 +38,7 @@ const DeletePortalDialog = (props) => {
           <ColorTheme
             className="stripe-url-link"
             tag="a"
-            themeId={ThemeType.Link}
+            themeId={ThemeId.Link}
             fontSize="13px"
             fontWeight="600"
             href={stripeUrl}

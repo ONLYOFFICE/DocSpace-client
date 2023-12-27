@@ -10,11 +10,11 @@ import {
   getCategoryTypes,
   getCategoriesOfCategoryType,
 } from "@docspace/common/api/oforms";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components";
 
 import { combineUrl, convertToLanguage } from "@docspace/common/utils";
-import { LANGUAGE } from "@docspace/common/constants";
-import { getCookie } from "@docspace/components/utils/cookie";
+import { LANGUAGE } from "@docspace/shared/constants";
+import { getCookie } from "@docspace/shared/utils";
 
 const myDocumentsFolderId = 2;
 

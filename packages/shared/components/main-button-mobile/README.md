@@ -3,7 +3,7 @@
 ### Usage
 
 ```js
-import MainButtonMobile from "@docspace/components/main-button-mobile";
+import MainButtonMobile , from "@docspace/shared/components/main-button-mobile";
 import MobileActionsFolderReactSvgUrl from "PUBLIC_DIR/images/mobile.actions.folder.react.svg?url";
 ```
 

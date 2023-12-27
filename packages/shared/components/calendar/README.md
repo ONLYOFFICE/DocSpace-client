@@ -5,7 +5,7 @@ Used to display custom calendar
 ### Usage
 
 ```js
-import Calendar from "@docspace/components/calendar";
+import { Calendar } from "@docspace/shared/components";
 ```
 
 ```jsx

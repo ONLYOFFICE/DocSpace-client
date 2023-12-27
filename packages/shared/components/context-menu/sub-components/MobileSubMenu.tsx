@@ -118,6 +118,7 @@ const MobileSubMenu = (props: {
       { "p-menuitem-active": false },
       item?.className || "",
     );
+
     const linkClassName = classNames("p-menuitem-link", "not-selectable", {
       "p-disabled": item.disabled || item.disableColor,
     });

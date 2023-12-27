@@ -5,7 +5,7 @@ Required for formatted output of elements inside Row
 ### Usage
 
 ```js
-import RowContent from "@docspace/components/row-content";
+import { RowContent } from "@docspace/shared/components";
 import SendClockReactSvg from "PUBLIC_DIR/images/send.clock.react.svg";
 import CatalogSpamReactSvg from "PUBLIC_DIR/images/catalog.spam.react.svg";
 ```

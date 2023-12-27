@@ -1,7 +1,7 @@
 ﻿import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
 import React from "react";
 import ShareButton from "./ShareButton";
-import IconButton from "@docspace/components/icon-button";
+import { IconButton } from "@docspace/shared/components";
 import LoadingButton from "./LoadingButton";
 const ActionsUploadedFile = ({ item, isPersonal, onCancelCurrentUpload }) => {
   const onCancelClick = !item.inConversion

@@ -6,9 +6,9 @@ import { Outlet } from "react-router-dom";
 
 import { isMobileOnly } from "react-device-detect";
 
-import ThemeProvider from "@docspace/components/theme-provider";
-import { Portal } from "@docspace/components";
-import Toast from "@docspace/components/toast";
+import { ThemeProvider } from "@docspace/shared/components";
+import { Portal } from "@docspace/shared/components";
+import { Toast } from "@docspace/shared/components";
 
 import "@docspace/common/custom.scss";
 
@@ -28,7 +28,8 @@ const App = observer(() => {
 
   const { authStore } = useStore();
   const { init, settingsStore, userStore } = authStore;
-  const { theme, setTheme, currentColorScheme, limitedAccessSpace } = settingsStore;
+  const { theme, setTheme, currentColorScheme, limitedAccessSpace } =
+    settingsStore;
 
   const userTheme = userStore?.user?.theme ? userStore?.user?.theme : "Dark";
 
@@ -52,8 +53,10 @@ const App = observer(() => {
     <Toast />
   );
 
-  if (userStore?.user && !userStore?.user?.isAdmin || limitedAccessSpace) return <Error403 />
-  if (userStore?.isLoaded && !userStore?.user) return tryRedirectTo(window.location.origin);
+  if ((userStore?.user && !userStore?.user?.isAdmin) || limitedAccessSpace)
+    return <Error403 />;
+  if (userStore?.isLoaded && !userStore?.user)
+    return tryRedirectTo(window.location.origin);
 
   return (
     <ThemeProvider

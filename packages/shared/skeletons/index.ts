@@ -5,11 +5,11 @@ import { DialogSkeleton, DialogAsideSkeleton } from "./dialog";
 import { RowsSkeleton } from "./rows";
 import { TableSkeleton } from "./table";
 
+export type { CircleSkeletonProps, RectangleSkeletonProps };
+
 export {
   RectangleSkeleton,
-  RectangleSkeletonProps,
   CircleSkeleton,
-  CircleSkeletonProps,
   ContextMenuSkeleton,
   DialogSkeleton,
   DialogAsideSkeleton,

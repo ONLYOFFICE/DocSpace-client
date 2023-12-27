@@ -1,11 +1,11 @@
 import React from "react";
-import RowContainer from "@docspace/components/row-container";
+import { RowContainer } from "@docspace/shared/components";
 import SpacesRoomRow from "./SpacesRoomRow";
 import styled, { css } from "styled-components";
-import Base from "@docspace/components/themes/base";
+import Base from "@docspace/shared/themes/base";
 import { TPortals } from "SRC_DIR/types/spaces";
 
-import { desktop } from "@docspace/components/utils/device";
+import { desktop } from "@docspace/shared/utils";
 
 const StyledRowContainer = styled(RowContainer)`
   @media ${desktop} {

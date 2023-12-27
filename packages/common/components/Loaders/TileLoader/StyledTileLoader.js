@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import { mobile, tablet } from "@docspace/components/utils/device";
-import Base from "@docspace/components/themes/base";
+import { mobile, tablet } from "@docspace/shared/utils";
+import Base from "@docspace/shared/themes/base";
 
 const StyledTile = styled.div`
   position: relative;

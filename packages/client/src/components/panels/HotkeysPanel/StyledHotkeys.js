@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
-import Scrollbar from "@docspace/components/scrollbar";
-import { Base } from "@docspace/components/themes";
-import { tablet, mobile } from "@docspace/components/utils/device";
+import { Scrollbar } from "@docspace/shared/components";
+import { Base } from "@docspace/shared/themes";
+import { tablet, mobile } from "@docspace/shared/utils";
 
 const StyledHotkeysPanel = styled.div`
   .hotkeys-panel {

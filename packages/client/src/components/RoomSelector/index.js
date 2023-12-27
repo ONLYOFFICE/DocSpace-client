@@ -9,7 +9,7 @@ import { iconSize32 } from "@docspace/common/utils/image-helpers";
 
 import Loaders from "@docspace/common/components/Loaders";
 
-import Selector from "@docspace/components/selector";
+import { Selector } from "@docspace/shared/components";
 
 const pageCount = 100;
 

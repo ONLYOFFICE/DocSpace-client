@@ -1,6 +1,6 @@
 import React from "react";
-import Text from "@docspace/components/text";
-import ToggleButton from "@docspace/components/toggle-button";
+import { Text } from "@docspace/shared/components";
+import { ToggleButton } from "@docspace/shared/components";
 
 const ToggleBlock = ({
   isLoading,

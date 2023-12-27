@@ -2,6 +2,7 @@ import React from "react";
 import Dropzone from "./Dropzone";
 import ImageCropper from "./ImageCropper";
 import { ImageEditorProps } from "./ImageEditor.types";
+import AvatarPreview from "./AvatarPreview";
 
 const ImageEditor = ({
   t,
@@ -46,4 +47,4 @@ const ImageEditor = ({
   );
 };
 
-export { ImageEditor };
+export { ImageEditor, AvatarPreview };

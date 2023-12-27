@@ -1,7 +1,7 @@
 import React from "react";
 
-import Heading from "@docspace/components/heading";
-import IconButton from "@docspace/components/icon-button";
+import { Heading } from "@docspace/shared/components";
+import { IconButton } from "@docspace/shared/components";
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 

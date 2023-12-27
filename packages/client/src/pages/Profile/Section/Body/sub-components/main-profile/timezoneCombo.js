@@ -1,12 +1,12 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import ComboBox from "@docspace/components/combobox";
-import Text from "@docspace/components/text";
-import toastr from "@docspace/components/toast/toastr";
+import { ComboBox } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components";
 
 import { StyledRow } from "./styled-main-profile";
-import { isMobile } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/shared/utils";
 
 const TimezoneCombo = ({ title }) => {
   const { t } = useTranslation("Wizard");

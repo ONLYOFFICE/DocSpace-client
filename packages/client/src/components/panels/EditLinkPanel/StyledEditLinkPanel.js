@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
-import Box from "@docspace/components/box";
-import Scrollbar from "@docspace/components/scrollbar";
-import ModalDialog from "@docspace/components/modal-dialog";
+import { Box } from "@docspace/shared/components";
+import { Scrollbar } from "@docspace/shared/components";
+import { ModalDialog } from "@docspace/shared/components";
 
 const StyledEditLinkPanel = styled(ModalDialog)`
   .edit-link-panel {

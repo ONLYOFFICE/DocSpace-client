@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import ToggleButton from "@docspace/components/toggle-button";
-import toastr from "@docspace/components/toast/toastr";
+import { ToggleButton } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components";
 
 const StyledToggle = styled(ToggleButton)`
   position: relative;

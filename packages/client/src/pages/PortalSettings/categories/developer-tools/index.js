@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useTransition, Suspense } from "react";
 import styled, { css } from "styled-components";
-import Submenu from "@docspace/components/submenu";
+import { Submenu } from "@docspace/shared/components";
 
-import Box from "@docspace/components/box";
+import { Box } from "@docspace/shared/components";
 import { inject, observer } from "mobx-react";
 import { combineUrl } from "@docspace/common/utils";
 import config from "PACKAGE_FILE";
@@ -20,7 +20,7 @@ import SSOLoader from "./sub-components/ssoLoader";
 import { WebhookConfigsLoader } from "./Webhooks/sub-components/Loaders";
 import { DeviceType } from "@docspace/common/constants";
 import PluginSDK from "./PluginSDK";
-import Badge from "@docspace/components/badge";
+import { Badge } from "@docspace/shared/components";
 
 const StyledSubmenu = styled(Submenu)`
   .sticky {

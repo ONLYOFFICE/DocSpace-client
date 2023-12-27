@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import Text from "@docspace/components/text";
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { Text } from "@docspace/shared/components";
+import { ColorTheme, ThemeId } from "@docspace/shared/components";
 import VersionSvg from "PUBLIC_DIR/images/versionrevision_active.react.svg";
 import { useTranslation } from "react-i18next";
 
@@ -64,7 +64,7 @@ const VersionBadge = ({
 
   return (
     <ColorTheme
-      themeId={ThemeType.VersionBadge}
+      themeId={ThemeId.VersionBadge}
       className={className}
       marginProp="0 8px"
       displayProp="flex"

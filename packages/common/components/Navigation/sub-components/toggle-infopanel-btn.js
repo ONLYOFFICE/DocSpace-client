@@ -1,10 +1,10 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import PanelReactSvgUrl from "PUBLIC_DIR/images/panel.react.svg?url";
-import IconButton from "@docspace/components/icon-button";
-import { tablet } from "@docspace/components/utils/device";
-import { Base } from "@docspace/components/themes";
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { IconButton } from "@docspace/shared/components";
+import { tablet } from "@docspace/shared/utils";
+import { Base } from "@docspace/shared/themes";
+import { ColorTheme, ThemeId } from "@docspace/shared/components";
 
 const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme)`
   align-self: center;
@@ -66,7 +66,7 @@ const ToggleInfoPanelButton = ({
   return (
     <StyledInfoPanelToggleColorThemeWrapper
       isRootFolder={isRootFolder}
-      themeId={ThemeType.InfoPanelToggle}
+      themeId={ThemeId.InfoPanelToggle}
       isInfoPanelVisible={isInfoPanelVisible}
     >
       <div className="info-panel-toggle-bg">

@@ -5,7 +5,7 @@ Background for displaying modal dialogs
 ### Usage
 
 ```js
-import Backdrop from "@docspace/components/backdrop";
+import { Backdrop } from "@docspace/shared/components";
 ```
 
 ```jsx

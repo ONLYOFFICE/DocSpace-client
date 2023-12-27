@@ -7,13 +7,13 @@ import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
 import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import React from "react";
-import ComboBox from "@docspace/components/combobox";
+import { ComboBox } from "@docspace/shared/components";
 import { ShareAccessRights } from "@docspace/common/constants";
-import DropDownItem from "@docspace/components/drop-down-item";
-import AccessRightSelect from "@docspace/components/access-right-select";
+import { DropDownItem } from "@docspace/shared/components";
+import { AccessRightSelect } from "@docspace/shared/components";
 import { getAccessIcon } from "../../../helpers/files-helpers";
 import { ReactSVG } from "react-svg";
-import Backdrop from "@docspace/components/backdrop";
+import { Backdrop } from "@docspace/shared/components";
 
 const {
   FullAccess,

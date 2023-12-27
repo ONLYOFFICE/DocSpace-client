@@ -2,9 +2,8 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import PropTypes from "prop-types";
 
-import Button from "@docspace/components/button";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Text from "@docspace/components/text";
+import { Button, ModalDialog, Text } from "@docspace/shared/components";
+
 import { withTranslation } from "react-i18next";
 import ModalDialogContainer from "../ModalDialogContainer";
 

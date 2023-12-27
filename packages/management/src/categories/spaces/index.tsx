@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components";
 import MultipleSpaces from "./sub-components/MultipleSpaces";
 import { SpaceContainer } from "./StyledSpaces";
 import ConfigurationSection from "./sub-components/ConfigurationSection";
@@ -11,14 +11,17 @@ import CreatePortalDialog from "./sub-components/dialogs/CreatePortalDialog";
 import DeletePortalDialog from "./sub-components/dialogs/DeletePortalDialog";
 import { SpacesLoader } from "./sub-components/SpacesLoader";
 
-
 const Spaces = () => {
   const { t } = useTranslation(["Management", "Common", "Settings"]);
 
   const { spacesStore, authStore } = useStore();
 
-  const { isConnected, domainDialogVisible, createPortalDialogVisible, deletePortalDialogVisible } =
-    spacesStore;
+  const {
+    isConnected,
+    domainDialogVisible,
+    createPortalDialogVisible,
+    deletePortalDialogVisible,
+  } = spacesStore;
   const { setDocumentTitle } = authStore;
   const { portals } = authStore.settingsStore;
 
@@ -31,13 +34,17 @@ const Spaces = () => {
 
   return (
     <SpaceContainer>
-      {deletePortalDialogVisible && <DeletePortalDialog key="delete-portal-dialog" />}
+      {deletePortalDialogVisible && (
+        <DeletePortalDialog key="delete-portal-dialog" />
+      )}
       {domainDialogVisible && <ChangeDomainDialog key="change-domain-dialog" />}
       {createPortalDialogVisible && (
         <CreatePortalDialog key="create-portal-dialog" />
       )}
       <div className="spaces-header">
-        <Text fontSize="12px" fontWeight={400} >{t("Subheader")}</Text>
+        <Text fontSize="12px" fontWeight={400}>
+          {t("Subheader")}
+        </Text>
       </div>
       {isConnected && portals.length > 0 ? (
         <MultipleSpaces t={t} />

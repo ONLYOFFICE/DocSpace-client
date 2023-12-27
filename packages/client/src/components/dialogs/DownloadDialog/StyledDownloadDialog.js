@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import ModalDialog from "@docspace/components/modal-dialog";
+import { ModalDialog } from "@docspace/shared/components";
 
 const StyledDownloadDialog = styled(ModalDialog)`
   .download-dialog-description {

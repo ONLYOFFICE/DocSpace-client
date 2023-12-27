@@ -1,7 +1,7 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import Button from "@docspace/components/button";
+import { Button } from "@docspace/shared/components";
 import SelectelSettings from "../../../consumer-storage-settings/SelectelSettings";
 import { ThirdPartyStorages } from "@docspace/common/constants";
 import { getFromLocalStorage } from "../../../../../../utils";

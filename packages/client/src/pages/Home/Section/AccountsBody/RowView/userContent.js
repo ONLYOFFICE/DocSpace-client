@@ -3,11 +3,11 @@ import styled, { css } from "styled-components";
 
 import { withTranslation } from "react-i18next";
 
-import RowContent from "@docspace/components/row-content";
-import Link from "@docspace/components/link";
+import { RowContent } from "@docspace/shared/components";
+import { Link } from "@docspace/shared/components";
 
 import Badges from "../Badges";
-import { tablet, mobile } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/shared/utils";
 
 const StyledRowContent = styled(RowContent)`
   @media ${tablet} {

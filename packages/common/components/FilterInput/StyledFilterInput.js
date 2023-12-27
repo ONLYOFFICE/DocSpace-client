@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import SearchInput from "@docspace/components/search-input";
+import { SearchInput } from "@docspace/shared/components";
 
 const StyledFilterInput = styled.div`
   width: 100%;
@@ -34,7 +34,7 @@ const StyledFilterInput = styled.div`
     margin-bottom: 8px;
 
     .clear-all-link {
-      ${props =>
+      ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
               margin-right: 12px;

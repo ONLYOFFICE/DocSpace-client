@@ -12,7 +12,7 @@ import {
 } from "./Tooltip.types";
 import { DEFAULT_OFFSET } from "./Tooltip.constants";
 
-export { TFallbackAxisSideDirection, TTooltipPlace };
+export type { TFallbackAxisSideDirection, TTooltipPlace };
 
 const globalCloseEvents = {
   escape: true,

@@ -1,10 +1,10 @@
 import React, { useRef } from "react";
 import { withTranslation } from "react-i18next";
 
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
-import { Avatar, ContextMenuButton } from "@docspace/components";
-import Badge from "@docspace/components/badge";
+import { Avatar, ContextMenuButton } from "@docspace/shared/components";
+import { Badge } from "@docspace/shared/components";
 import Badges from "@docspace/client/src/pages/Home/Section/AccountsBody/Badges";
 import { StyledAccountsItemTitle } from "../../styles/accounts";
 import { StyledTitle } from "../../styles/common";

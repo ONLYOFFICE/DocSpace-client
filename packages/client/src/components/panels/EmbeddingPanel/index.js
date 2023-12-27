@@ -1,13 +1,13 @@
 ﻿import React, { useRef, useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import Backdrop from "@docspace/components/backdrop";
-import Heading from "@docspace/components/heading";
-import Aside from "@docspace/components/aside";
+import { Backdrop } from "@docspace/shared/components";
+import { Heading } from "@docspace/shared/components";
+import { Aside } from "@docspace/shared/components";
 import { withTranslation } from "react-i18next";
 import { StyledEmbeddingPanel, StyledScrollbar } from "./StyledEmbeddingPanel";
 import EmbeddingBody from "./EmbeddingBody";
 import { DeviceType } from "@docspace/common/constants";
-import Portal from "@docspace/components/portal";
+import { Portal } from "@docspace/shared/components";
 const EmbeddingPanelComponent = (props) => {
   const {
     t,

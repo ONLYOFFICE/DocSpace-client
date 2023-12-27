@@ -1,9 +1,9 @@
 import React from "react";
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { ColorTheme, ThemeId } from "@docspace/shared/components";
 
 const IndicatorLoader = () => {
   return (
-    <ColorTheme themeId={ThemeType.IndicatorLoader}>
+    <ColorTheme themeId={ThemeId.IndicatorLoader}>
       <div id="ipl-progress-indicator"></div>
     </ColorTheme>
   );

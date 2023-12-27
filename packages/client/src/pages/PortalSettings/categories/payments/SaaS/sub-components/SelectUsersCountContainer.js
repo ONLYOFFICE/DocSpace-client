@@ -1,10 +1,10 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import Text from "@docspace/components/text";
-import Slider from "@docspace/components/slider";
+import { Text } from "@docspace/shared/components";
+import { Slider } from "@docspace/shared/components";
 import PlusIcon from "PUBLIC_DIR/images/payment.plus.react.svg";
 import MinusIcon from "PUBLIC_DIR/images/minus.react.svg";
-import TextInput from "@docspace/components/text-input";
+import { TextInput } from "@docspace/shared/components";
 import { inject, observer } from "mobx-react";
 import SelectTotalSizeContainer from "./SelectTotalSizeContainer";
 

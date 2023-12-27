@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Submenu from "@docspace/components/submenu";
+import { Submenu } from "@docspace/shared/components";
 import { useNavigate } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import { combineUrl } from "@docspace/common/utils";

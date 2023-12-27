@@ -2,9 +2,7 @@ import React from "react";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { StyledDownloadDialog } from "./StyledDownloadDialog";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Button from "@docspace/components/button";
-import Text from "@docspace/components/text";
+import { Text, Button, ModalDialog } from "@docspace/shared/components";
 
 import DownloadContent from "./DownloadContent";
 

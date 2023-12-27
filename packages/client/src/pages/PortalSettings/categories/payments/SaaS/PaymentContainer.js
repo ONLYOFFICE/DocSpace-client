@@ -4,10 +4,10 @@ import styled, { css } from "styled-components";
 import { Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import Text from "@docspace/components/text";
-import { size, desktop, mobile } from "@docspace/components/utils/device";
-import { Consumer } from "@docspace/components/utils/context";
-import { HelpButton } from "@docspace/components";
+import { Text } from "@docspace/shared/components";
+import { size, desktop, mobile, Consumer } from "@docspace/shared/utils";
+
+import { HelpButton } from "@docspace/shared/components";
 
 import CurrentTariffContainer from "./CurrentTariffContainer";
 import PriceCalculation from "./PriceCalculation";

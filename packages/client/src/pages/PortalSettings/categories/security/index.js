@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Submenu from "@docspace/components/submenu";
+import { Submenu } from "@docspace/shared/components";
 import { useNavigate } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -13,7 +13,7 @@ import MobileSecurityLoader from "./sub-components/loaders/mobile-security-loade
 import AccessLoader from "./sub-components/loaders/access-loader";
 import AuditTrail from "./audit-trail/index.js";
 import { resetSessionStorage } from "../../utils";
-import { DeviceType } from "@docspace/common/constants/index.js";
+import { DeviceType } from "@docspace/common/constants";
 
 const SecurityWrapper = (props) => {
   const { t, loadBaseInfo, resetIsInit, currentDeviceType } = props;

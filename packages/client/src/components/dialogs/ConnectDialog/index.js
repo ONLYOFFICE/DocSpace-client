@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useCallback } from "react";
-import toastr from "@docspace/components/toast/toastr";
-import Button from "@docspace/components/button";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Checkbox from "@docspace/components/checkbox";
-import TextInput from "@docspace/components/text-input";
-import PasswordInput from "@docspace/components/password-input";
-import FieldContainer from "@docspace/components/field-container";
+import {
+  toastr,
+  Button,
+  ModalDialog,
+  TextInput,
+  Checkbox,
+  PasswordInput,
+  FieldContainer,
+} from "@docspace/shared/components";
+
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { getOAuthToken } from "@docspace/common/utils";

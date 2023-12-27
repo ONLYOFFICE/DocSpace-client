@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-import { Base } from "@docspace/components/themes";
-import { desktop, mobile } from "@docspace/components/utils/device";
+import { Base } from "@docspace/shared/themes";
+import { desktop, mobile } from "@docspace/shared/utils";
 
 const StyledErrorContainer = styled.div`
   background: ${(props) => props.theme.errorContainer.background};

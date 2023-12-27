@@ -34,7 +34,7 @@ import QuestionReactSvgUrl from 'PUBLIC_DIR/images/question.react.svg?url";
 ### Usage with array
 
 ```js
-import { Tooltip, Link, Text } from "@docspace/components";
+import { Tooltip, Link, Text } from "@docspace/shared/components";
 ```
 
 ```js

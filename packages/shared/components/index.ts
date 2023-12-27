@@ -44,7 +44,12 @@ import { FormWrapper } from "./form-wrapper";
 import { ModalDialog, ModalDialogType } from "./modal-dialog";
 import { DropDownItem } from "./drop-down-item";
 import { DropDown } from "./drop-down";
-import { ComboBox, ComboBoxDisplayType, ComboBoxSize } from "./combobox";
+import {
+  ComboBox,
+  ComboBoxDisplayType,
+  ComboBoxSize,
+  ComboButton,
+} from "./combobox";
 import { RoomLogo } from "./room-logo";
 import { MainButton } from "./main-button";
 import { FloatingButton, FloatingButtonIcons } from "./floating-button";
@@ -70,6 +75,7 @@ import {
   TableRow,
   TTableColumn,
   TGroupMenuItem,
+  TableCell,
 } from "./table";
 import { Label } from "./label";
 import { FieldContainer } from "./field-container";
@@ -77,16 +83,23 @@ import { ProgressBar } from "./progress-bar";
 import { BarConfig, SnackBar } from "./snackbar";
 import TopLoaderService from "./top-loading-indicator";
 import { SelectionArea } from "./selection-area";
-import { ColorTheme } from "./color-theme";
+import {
+  ColorTheme,
+  ThemeId,
+  LoginContainer,
+  StyledLoadingButton,
+  StyledCircle,
+} from "./color-theme";
 import { SelectedItem } from "./selected-item";
 import { SaveCancelButtons } from "./save-cancel-buttons";
 import { InfoBadge } from "./info-badge";
+import { Badge } from "./badge";
 import { TimePicker } from "./time-picker";
 import { ArticleItem } from "./article-item";
 import { ToggleContent } from "./toggle-content";
 import { Tag } from "./tag";
 import { Tags } from "./tags";
-import { DragAndDrop } from "./drag-and-drop";
+import { DragAndDrop, getFilesFromEvent } from "./drag-and-drop";
 import { AccessRightSelect } from "./access-right-select";
 import { SocialButton } from "./social-button";
 import { DatePicker } from "./date-picker";
@@ -96,11 +109,16 @@ import { FillingRoleSelector } from "./filling-role-selector";
 import { FillingStatusLine } from "./filling-status-line";
 import { Grid } from "./grid";
 import { Slider } from "./slider";
-import { ImageEditor } from "./image-editor";
+import { ImageEditor, AvatarPreview } from "./image-editor";
 import { Paging } from "./paging";
 import { TabsContainer, TElement } from "./tabs-container";
 import { Submenu, TSubmenuItem } from "./submenu";
 import { LinkWithDropdown } from "./link-with-dropdown";
+import { SelectorAddButton } from "./selector-add-button";
+import { PasswordInput } from "./password-input";
+import { Calendar } from "./calendar";
+import PreviewTile from "./image-editor/PreviewTile";
+import { MainButtonMobile } from "./main-button-mobile";
 
 export type {
   TSubmenuItem,
@@ -112,9 +130,19 @@ export type {
   TGroupMenuItem,
   BarConfig,
   TElement,
+  SeparatorType,
+  ContextMenuModel,
+  ContextMenuType,
 };
 
 export {
+  MainButtonMobile,
+  PreviewTile,
+  Badge,
+  PasswordInput,
+  SelectorAddButton,
+  AvatarPreview,
+  ThemeId,
   LinkWithDropdown,
   Submenu,
   TabsContainer,
@@ -129,6 +157,7 @@ export {
   DatePicker,
   AccessRightSelect,
   DragAndDrop,
+  getFilesFromEvent,
   Tag,
   Tags,
   ToggleContent,
@@ -137,6 +166,7 @@ export {
   SaveCancelButtons,
   SelectedItem,
   ColorTheme,
+  LoginContainer,
   SelectionArea,
   TopLoaderService,
   SnackBar,
@@ -192,9 +222,6 @@ export {
   ToastType,
   Checkbox,
   ContextMenu,
-  ContextMenuModel,
-  ContextMenuType,
-  SeparatorType,
   RoomIcon,
   Backdrop,
   Loader,
@@ -220,4 +247,9 @@ export {
   Tooltip,
   ToggleButton,
   InfoBadge,
+  TableCell,
+  Calendar,
+  ComboButton,
+  StyledLoadingButton,
+  StyledCircle,
 };

@@ -1,6 +1,6 @@
-import * as isArrayEqual from "./array";
+import { isArrayEqual } from "./array";
 import * as email from "./email";
-import { EmailSettings, parseAddress } from "./email";
+import { EmailSettings, parseAddress, parseAddresses } from "./email";
 import useId from "./useId";
 import {
   getCorrectTextAlign,
@@ -10,7 +10,7 @@ import {
 } from "./rtlUtils";
 import * as useClickOutside from "./useClickOutside";
 import { trimSeparator } from "./trimSeparator";
-import * as getCorrectDate from "./getCorrectDate";
+import getCorrectDate from "./getCorrectDate";
 import { handleAnyClick } from "./event";
 import DomHelpers from "./domHelpers";
 import ObjectUtils from "./objectUtils";
@@ -40,6 +40,7 @@ import { commonTextStyles } from "./commonTextStyles";
 export type { TInterfaceDirection };
 
 export {
+  parseAddresses,
   NoUserSelect,
   commonInputStyles,
   commonTextStyles,

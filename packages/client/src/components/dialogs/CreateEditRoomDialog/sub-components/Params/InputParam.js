@@ -2,9 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { StyledParam } from "./StyledParam";
 
-import Label from "@docspace/components/label";
-import TextInput from "@docspace/components/text-input";
-import FieldContainer from "@docspace/components/field-container";
+import { Label, TextInput, FieldContainer } from "@docspace/shared/components";
 
 const StyledInputParam = styled(StyledParam)`
   flex-direction: column;

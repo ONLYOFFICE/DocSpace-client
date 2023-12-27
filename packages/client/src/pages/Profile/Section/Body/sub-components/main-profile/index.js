@@ -6,16 +6,16 @@ import { ReactSVG } from "react-svg";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import Avatar from "@docspace/components/avatar";
+import { Avatar } from "@docspace/shared/components";
 
-import Text from "@docspace/components/text";
-import Box from "@docspace/components/box";
-import Link from "@docspace/components/link";
-import ComboBox from "@docspace/components/combobox";
-import IconButton from "@docspace/components/icon-button";
-import Badge from "@docspace/components/badge";
+import { Text } from "@docspace/shared/components";
+import { Box } from "@docspace/shared/components";
+import { Link } from "@docspace/shared/components";
+import { ComboBox } from "@docspace/shared/components";
+import { IconButton } from "@docspace/shared/components";
+import { Badge } from "@docspace/shared/components";
 import { isMobileOnly } from "react-device-detect";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components";
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
 import { getUserRole, convertLanguage } from "@docspace/common/utils";
 import BetaBadge from "@docspace/common/components/BetaBadge";
@@ -31,9 +31,9 @@ import {
   StyledLabel,
   StyledAvatarWrapper,
 } from "./styled-main-profile";
-import { HelpButton, Tooltip } from "@docspace/components";
+import { HelpButton, Tooltip } from "@docspace/shared/components";
 import withCultureNames from "@docspace/common/hoc/withCultureNames";
-import { isMobile } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/shared/utils";
 import { SSO_LABEL } from "SRC_DIR/helpers/constants";
 import { useTheme } from "styled-components";
 

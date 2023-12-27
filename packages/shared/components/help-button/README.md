@@ -5,7 +5,7 @@ HelpButton is used for a action on a page
 ### Usage
 
 ```js
-import HelpButton from "@docspace/components/help-button";
+import { HelpButton } from "@docspace/shared/components";
 ```
 
 ```jsx
@@ -48,7 +48,7 @@ import HelpButton from "@docspace/components/help-button";
 ### Properties
 
 | Props                     |   Type   | Required |           Values            | Default | Description                                      |
-| ------------------------- | :------: | :------: | :-------------------------: | :-----: | ------------------------------------------------ |
+| ------------------------- | :------: | :------: | :-------------------------: | :-----: | ------------------------------------------------ | --- | ---- | -------- | --- | --- | --- | ---------- |
 | `className`               | `string` |    -     |              -              |    -    | Accepts class                                    |
 | `displayType`             | `oneOf`  |    -     | `dropdown`, `aside`, `auto` | `auto`  | Tooltip display type                             |
-| `helpButtonHeaderContent` | `string` |    -     |              -              |    -    | Tooltip header content (tooltip opened in aside) |  | `id` | `string` | - | - | - | Accepts id |
+| `helpButtonHeaderContent` | `string` |    -     |              -              |    -    | Tooltip header content (tooltip opened in aside) |     | `id` | `string` | -   | -   | -   | Accepts id |

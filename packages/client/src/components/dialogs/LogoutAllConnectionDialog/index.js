@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Checkbox from "@docspace/components/checkbox";
-import Button from "@docspace/components/button";
-import Box from "@docspace/components/box";
-import Text from "@docspace/components/text";
+import {
+  ModalDialog,
+  Checkbox,
+  Button,
+  Box,
+  Text,
+} from "@docspace/shared/components";
+
 import ModalDialogContainer from "../ModalDialogContainer";
 
 const LogoutAllConnectionDialog = ({

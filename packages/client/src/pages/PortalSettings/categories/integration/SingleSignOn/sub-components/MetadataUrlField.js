@@ -5,10 +5,10 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import copy from "copy-to-clipboard";
 
-import { Text, HelpButton, InputBlock } from "@docspace/components";
-import toastr from "@docspace/components/toast/toastr";
+import { Text, HelpButton, InputBlock } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components";
 
-import { mobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/shared/utils";
 
 const StyledWrapper = styled.div`
   display: flex;

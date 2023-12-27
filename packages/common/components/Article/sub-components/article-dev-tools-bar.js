@@ -7,8 +7,8 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { ReactSVG } from "react-svg";
 
-import Text from "@docspace/components/text";
-import { mobile } from "@docspace/components/utils/device";
+import { Text } from "@docspace/shared/components";
+import { mobile } from "@docspace/shared/utils";
 
 import { DeviceType } from "../../../constants";
 

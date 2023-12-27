@@ -1,12 +1,12 @@
 import React from "react";
 import { useSSR, useTranslation } from "react-i18next";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components";
 import ErrorBoundary from "./ErrorBoundary";
 import App from "../App";
 import i18n from "../i18n";
 import { I18nextProvider } from "react-i18next";
 import { inject, observer, Provider as MobxProvider } from "mobx-react";
-import ThemeProvider from "@docspace/components/theme-provider";
+import { ThemeProvider } from "@docspace/shared/components";
 import store from "client/store";
 import { BrowserRouter } from "react-router-dom";
 import GlobalStyles from "./GlobalStyle";

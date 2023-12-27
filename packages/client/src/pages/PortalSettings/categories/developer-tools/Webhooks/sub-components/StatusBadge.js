@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Badge from "@docspace/components/badge";
+import { Badge } from "@docspace/shared/components";
 
 import { useTranslation } from "react-i18next";
 

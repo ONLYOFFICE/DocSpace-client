@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import { inject, observer } from "mobx-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Text from "@docspace/components/text";
-import Box from "@docspace/components/box";
-import Scrollbar from "@docspace/components/scrollbar";
+import { ModalDialog } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components";
+import { Box } from "@docspace/shared/components";
+import { Scrollbar } from "@docspace/shared/components";
 import axios from "axios";
 import styled from "styled-components";
 

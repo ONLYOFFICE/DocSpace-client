@@ -205,6 +205,7 @@ const SubMenu = (props: {
       { "p-menuitem-active": active },
       item.className || "",
     );
+
     const linkClassName = classNames("p-menuitem-link", "not-selectable", {
       "p-disabled": item.disabled || item.disableColor,
     });

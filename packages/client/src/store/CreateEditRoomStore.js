@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
-import toastr from "@docspace/components/toast/toastr";
-import { isDesktop } from "@docspace/components/utils/device";
+import { toastr } from "@docspace/shared/components";
+import { isDesktop } from "@docspace/shared/utils";
 import FilesFilter from "@docspace/common/api/files/filter";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";

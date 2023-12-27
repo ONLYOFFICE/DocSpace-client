@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import Button from "@docspace/components/button";
+import { Button } from "@docspace/shared/components";
 import styled, { css } from "styled-components";
 import SalesDepartmentRequestDialog from "../../../../../../components/dialogs/SalesDepartmentRequestDialog";
 import { inject, observer } from "mobx-react";

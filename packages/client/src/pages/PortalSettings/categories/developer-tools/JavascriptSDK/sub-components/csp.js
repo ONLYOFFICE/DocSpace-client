@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
-import TextInput from "@docspace/components/text-input";
-import HelpButton from "@docspace/components/help-button";
-import Text from "@docspace/components/text";
-import SelectorAddButton from "@docspace/components/selector-add-button";
-import SelectedItem from "@docspace/components/selected-item";
-import { tablet } from "@docspace/components/utils/device";
+import { TextInput } from "@docspace/shared/components";
+import { HelpButton } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components";
+import { SelectorAddButton } from "@docspace/shared/components";
+import { SelectedItem } from "@docspace/shared/components";
+import { tablet } from "@docspace/shared/utils";
 
 const CategoryHeader = styled.div`
   margin-top: 24px;

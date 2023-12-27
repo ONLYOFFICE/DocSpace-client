@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 
-import FileInput from "@docspace/components/file-input";
+import { FileInput } from "@docspace/shared/components";
 
 import FilesSelector from "../FilesSelector";
 import { StyledBodyWrapper } from "./StyledComponents";

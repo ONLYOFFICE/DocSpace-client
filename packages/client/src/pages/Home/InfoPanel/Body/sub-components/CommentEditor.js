@@ -3,8 +3,8 @@ import React, { useState, useEffect } from "react";
 import { inject } from "mobx-react";
 import { ReactSVG } from "react-svg";
 
-import toastr from "@docspace/components/toast/toastr";
-import { Button, Text, Textarea } from "@docspace/components";
+import { toastr } from "@docspace/shared/components";
+import { Button, Text, Textarea } from "@docspace/shared/components";
 import { MAX_FILE_COMMENT_LENGTH } from "@docspace/common/constants";
 // import infoPanel from "@docspace/common/components/Section/sub-components/info-panel";
 

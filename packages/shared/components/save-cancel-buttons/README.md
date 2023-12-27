@@ -5,7 +5,7 @@ Save and cancel buttons are located in the settings sections.
 ### Usage
 
 ```js
-import SaveCancelButtons from "@docspace/components/save-cancel-button";
+import SaveCancelButtons , from "@docspace/shared/components/save-cancel-button";
 ```
 
 ```jsx

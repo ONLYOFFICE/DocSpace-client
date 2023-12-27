@@ -2,20 +2,20 @@ import React from "react";
 import moment from "moment";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import RadioButton from "@docspace/components/radio-button";
-import Text from "@docspace/components/text";
+import { RadioButton } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components";
 import {
   deleteBackupSchedule,
   getBackupSchedule,
   createBackupSchedule,
 } from "@docspace/common/api/portal";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components";
 import {
   BackupStorageType,
   AutoBackupPeriod,
   FolderType,
 } from "@docspace/common/constants";
-import ToggleButton from "@docspace/components/toggle-button";
+import { ToggleButton } from "@docspace/shared/components";
 import {
   getBackupStorage,
   getStorageRegions,
@@ -27,9 +27,9 @@ import ThirdPartyStorageModule from "./sub-components/ThirdPartyStorageModule";
 //import { getThirdPartyCommonFolderTree } from "@docspace/common/api/files";
 import ButtonContainer from "./sub-components/ButtonContainer";
 import AutoBackupLoader from "@docspace/common/components/Loaders/AutoBackupLoader";
-import FloatingButton from "@docspace/components/floating-button";
-import Badge from "@docspace/components/badge";
-import Link from "@docspace/components/link";
+import { FloatingButton } from "@docspace/shared/components";
+import { Badge } from "@docspace/shared/components";
+import { Link } from "@docspace/shared/components";
 import { getSettingsThirdParty } from "@docspace/common/api/files";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 

@@ -1,9 +1,9 @@
 import styled, { css } from "styled-components";
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 import {
   getCorrectBorderRadius,
   getCorrectFourValuesStyle,
-} from "@docspace/components/utils/rtlUtils";
+} from "@docspace/shared/utils";
 
 const StyledComponent = styled.div`
   display: inline-flex;

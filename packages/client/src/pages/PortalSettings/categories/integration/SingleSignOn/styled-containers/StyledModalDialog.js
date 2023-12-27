@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-import ModalDialog from "@docspace/components/modal-dialog";
-import { mobile } from "@docspace/components/utils/device";
+import { ModalDialog } from "@docspace/shared/components";
+import { mobile } from "@docspace/shared/utils";
 
 const StyledModalDialog = styled(ModalDialog)`
   .heading {

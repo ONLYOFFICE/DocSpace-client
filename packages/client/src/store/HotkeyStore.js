@@ -4,9 +4,9 @@ import { combineUrl } from "@docspace/common/utils";
 import { RoomsType } from "@docspace/common/constants";
 import { checkDialogsOpen } from "@docspace/common/utils/checkDialogsOpen";
 
-import toastr from "@docspace/components/toast/toastr";
-import { isDesktop, isMobile } from "@docspace/components/utils/device";
-import getFilesFromEvent from "@docspace/components/drag-and-drop/get-files-from-event";
+import { toastr } from "@docspace/shared/components";
+import { isDesktop, isMobile } from "@docspace/shared/utils";
+import { getFilesFromEvent } from "@docspace/shared/components";
 
 import config from "PACKAGE_FILE";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";

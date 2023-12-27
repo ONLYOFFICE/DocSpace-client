@@ -25,10 +25,6 @@
       "path": "packages/common"
     },
     {
-      "name": "📦 @docspace/components",
-      "path": "packages/components"
-    },
-    {
       "name": "📦 @docspace/shared",
       "path": "packages/shared"
     }

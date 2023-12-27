@@ -1,8 +1,8 @@
-import DropDownItem from "@docspace/components/drop-down-item";
+import { DropDownItem } from "@docspace/shared/components";
 import styled, { css } from "styled-components";
-import Base from "@docspace/components/themes/base";
-import ComboBox from "@docspace/components/combobox";
-import { mobile } from "@docspace/components/utils/device";
+import Base from "@docspace/shared/themes/base";
+import { ComboBox } from "@docspace/shared/components";
+import { mobile } from "@docspace/shared/utils";
 
 export const LanguageFilter = styled.div`
   width: 41px;

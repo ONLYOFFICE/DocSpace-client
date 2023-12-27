@@ -1,6 +1,6 @@
 import combineUrl from "@docspace/common/utils/combineUrl";
 
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components";
 
 import config from "PACKAGE_FILE";
 

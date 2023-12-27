@@ -2,7 +2,7 @@ import React from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import FieldContainer from "@docspace/components/field-container";
+import { FieldContainer } from "@docspace/shared/components";
 
 import SsoTextInput from "./SsoTextInput";
 

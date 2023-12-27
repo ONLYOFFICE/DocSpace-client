@@ -4,8 +4,8 @@ import styled, { css } from "styled-components";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import RowContainer from "@docspace/components/row-container";
-import { tablet } from "@docspace/components/utils/device";
+import { RowContainer } from "@docspace/shared/components";
+import { tablet } from "@docspace/shared/utils";
 
 import EmptyScreen from "../EmptyScreen";
 import SimpleUserRow from "./SimpleUserRow";

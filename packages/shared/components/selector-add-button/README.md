@@ -3,7 +3,7 @@
 ### Usage
 
 ```js
-import SelectorAddButton from "@docspace/components/selector-add-button";
+import { SelectorAddButton } from "@docspace/shared/components";
 ```
 
 ```jsx

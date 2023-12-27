@@ -4,13 +4,12 @@ Is a item of catalog
 
 ### Usage
 
-```js
-import CatalogItem from "@docspace/components/catalog-item";
-```
+````js
+import {ArticleItem} from "@docspace/shared/components";```
 
 ```jsx
-<CatalogItem />
-```
+<ArticleItem />
+````
 
 Display catalog item. Can show only icon (showText property). If is it end of block - adding margin bottom.
 

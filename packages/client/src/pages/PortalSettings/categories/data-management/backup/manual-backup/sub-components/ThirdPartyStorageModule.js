@@ -1,6 +1,6 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
-import ComboBox from "@docspace/components/combobox";
+import { ComboBox } from "@docspace/shared/components";
 import {
   BackupStorageType,
   ThirdPartyStorages,

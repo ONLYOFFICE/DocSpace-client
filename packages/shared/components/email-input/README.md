@@ -74,7 +74,7 @@ const emailSettings = {
 or instance of `EmailSettings` class:
 
 ```js
-import { EmailInput, utils } from "@docspace/components";
+import { EmailInput, utils } from "@docspace/shared/components";
 const { EmailSettings } = utils.email;
 
 const emailSettings = new EmailSettings();
@@ -124,7 +124,7 @@ Base colors:
 
 ```js
 import React from "react";
-import { EmailInput } from "@docspace/components";
+import { EmailInput } from "@docspace/shared/components";
 
 const onChange = (e) => {
   // your event handling

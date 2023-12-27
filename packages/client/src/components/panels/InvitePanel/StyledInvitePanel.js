@@ -1,23 +1,21 @@
 import styled, { css } from "styled-components";
-import Heading from "@docspace/components/heading";
-import TextInput from "@docspace/components/text-input";
-import ComboBox from "@docspace/components/combobox";
-import Box from "@docspace/components/box";
-import DropDown from "@docspace/components/drop-down";
-import Text from "@docspace/components/text";
-import Button from "@docspace/components/button";
-import HelpButton from "@docspace/components/help-button";
-import Link from "@docspace/components/link";
-import ToggleButton from "@docspace/components/toggle-button";
-import { mobile } from "@docspace/components/utils/device";
+import { Heading } from "@docspace/shared/components";
+import { TextInput } from "@docspace/shared/components";
+import { ComboBox } from "@docspace/shared/components";
+import { Box } from "@docspace/shared/components";
+import { DropDown } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components";
+import { HelpButton } from "@docspace/shared/components";
+import { Link } from "@docspace/shared/components";
+import { ToggleButton } from "@docspace/shared/components";
+import { mobile, commonIconsStyles } from "@docspace/shared/utils";
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 import CrossIconMobile from "PUBLIC_DIR/images/cross.react.svg";
 import DeleteIcon from "PUBLIC_DIR/images/mobile.actions.remove.react.svg";
 
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
-
-import Base from "@docspace/components/themes/base";
+import Base from "@docspace/shared/themes/base";
 
 const fillAvailableWidth = css`
   width: 100%;

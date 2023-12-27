@@ -1,5 +1,5 @@
 import React from "react";
-import ModalDialog from "@docspace/components/modal-dialog";
+import { ModalDialog } from "@docspace/shared/components";
 import { withTranslation, I18nextProvider } from "react-i18next";
 import i18n from "./i18n";
 import { inject, observer } from "mobx-react";

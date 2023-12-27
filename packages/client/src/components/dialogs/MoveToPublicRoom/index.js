@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
-import ModalDialog from "@docspace/components/modal-dialog";
 import { StyledMoveToPublicRoomDialog } from "./StyledMoveToPublicRoomDialog";
-import Button from "@docspace/components/button";
-import Text from "@docspace/components/text";
+import { Button, ModalDialog, Text, toastr } from "@docspace/shared/components";
 import { withTranslation } from "react-i18next";
-import toastr from "@docspace/components/toast/toastr";
 import { inject, observer } from "mobx-react";
 
 let timerId;

@@ -37,6 +37,7 @@ const DropDown = ({
   zIndex,
   clickOutsideAction,
   manualWidth,
+  className,
 }: DropDownProps) => {
   const theme = useTheme();
 
@@ -381,6 +382,7 @@ const DropDown = ({
         maxHeight={maxHeight}
         zIndex={zIndex}
         manualWidth={manualWidth}
+        className={className}
       >
         <VirtualList
           Row={Row}

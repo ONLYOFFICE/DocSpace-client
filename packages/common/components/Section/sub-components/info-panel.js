@@ -1,9 +1,6 @@
-import { Base } from "@docspace/components/themes";
-import {
-  tablet,
-  mobile,
-  infoPanelWidth,
-} from "@docspace/components/utils/device";
+import { Base } from "@docspace/shared/themes";
+import { tablet, mobile } from "@docspace/shared/utils";
+import { INFO_PANEL_WIDTH } from "@docspace/shared/utils";
 import { isMobileOnly, isIOS } from "react-device-detect";
 import { inject } from "mobx-react";
 import PropTypes from "prop-types";
@@ -11,7 +8,7 @@ import React, { useEffect, useState, useRef, useCallback } from "react";
 import styled, { css } from "styled-components";
 import CrossIcon from "PUBLIC_DIR/images/icons/17/cross.react.svg";
 
-import { Portal } from "@docspace/components";
+import { Portal } from "@docspace/shared/components";
 import { DeviceType } from "../../../constants";
 
 const StyledInfoPanelWrapper = styled.div.attrs(({ id }) => ({
@@ -35,7 +32,7 @@ const StyledInfoPanelWrapper = styled.div.attrs(({ id }) => ({
 
 const StyledInfoPanel = styled.div`
   height: 100%;
-  width: ${infoPanelWidth}px;
+  width: ${INFO_PANEL_WIDTH}px;
   background-color: ${(props) => props.theme.infoPanel.backgroundColor};
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
@@ -216,8 +213,8 @@ const InfoPanel = ({
     (currentDeviceType !== DeviceType.desktop && isMobileHidden)
     ? null
     : currentDeviceType === DeviceType.mobile
-    ? renderPortalInfoPanel()
-    : infoPanelComponent;
+      ? renderPortalInfoPanel()
+      : infoPanelComponent;
 };
 
 InfoPanel.propTypes = {

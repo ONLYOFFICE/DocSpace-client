@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import Box from "@docspace/components/box";
+import { Box } from "@docspace/shared/components";
 
 import HideButton from "./sub-components/HideButton";
 import SPSettings from "./SPSettings";

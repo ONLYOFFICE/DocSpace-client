@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import Text from "@docspace/components/text";
-import Checkbox from "@docspace/components/checkbox";
-import Button from "@docspace/components/button";
-import Link from "@docspace/components/link";
-import FormWrapper from "@docspace/components/form-wrapper";
+import { Text } from "@docspace/shared/components";
+import { Checkbox } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components";
+import { Link } from "@docspace/shared/components";
+import { FormWrapper } from "@docspace/shared/components";
 
 import { getLogoFromPath, getBgPattern } from "@docspace/common/utils";
 import { DeviceType } from "@docspace/common/constants";

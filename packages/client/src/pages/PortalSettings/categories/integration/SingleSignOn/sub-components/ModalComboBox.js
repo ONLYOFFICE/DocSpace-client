@@ -2,8 +2,8 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import ComboBox from "@docspace/components/combobox";
-import FieldContainer from "@docspace/components/field-container";
+import { ComboBox } from "@docspace/shared/components";
+import { FieldContainer } from "@docspace/shared/components";
 
 const ModalComboBox = (props) => {
   const { t } = useTranslation("SingleSignOn");

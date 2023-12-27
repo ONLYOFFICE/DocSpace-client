@@ -2,27 +2,27 @@ import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import debounce from "lodash.debounce";
 import styled, { css } from "styled-components";
-import Box from "@docspace/components/box";
-import TextInput from "@docspace/components/text-input";
-import Textarea from "@docspace/components/textarea";
-import Label from "@docspace/components/label";
-import Text from "@docspace/components/text";
-import Checkbox from "@docspace/components/checkbox";
-import ComboBox from "@docspace/components/combobox";
-import TabContainer from "@docspace/components/tabs-container";
+import { Box } from "@docspace/shared/components";
+import { TextInput } from "@docspace/shared/components";
+import { Textarea } from "@docspace/shared/components";
+import { Label } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components";
+import { Checkbox } from "@docspace/shared/components";
+import { ComboBox } from "@docspace/shared/components";
+import { TabsContainer } from "@docspace/shared/components";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
-import { mobile, tablet } from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/shared/utils";
 import { objectToGetParams, loadScript } from "@docspace/common/utils";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
-import HelpButton from "@docspace/components/help-button";
-import Link from "@docspace/components/link";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { HelpButton } from "@docspace/shared/components";
+import { Link } from "@docspace/shared/components";
 
 import GetCodeDialog from "./sub-components/GetCodeDialog";
 import CSP from "./sub-components/csp";
-import Button from "@docspace/components/button";
+import { Button } from "@docspace/shared/components";
 
 const showPreviewThreshold = 720;
 
@@ -501,7 +501,7 @@ const PortalIntegration = (props) => {
       <Container>
         {showPreview && (
           <Preview>
-            <TabContainer onSelect={onChangeTab} elements={dataTabs} />
+            <TabsContainer onSelect={onChangeTab} elements={dataTabs} />
           </Preview>
         )}
         <Controls>

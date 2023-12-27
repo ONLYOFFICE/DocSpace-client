@@ -4,7 +4,7 @@ import ContentLoader from "react-content-loader";
 import { LoaderStyle } from "../../constants";
 import { RectangleSkeletonProps } from "./Rectangle.types";
 
-export { RectangleSkeletonProps };
+export type { RectangleSkeletonProps };
 
 const RectangleSkeleton = ({
   title,

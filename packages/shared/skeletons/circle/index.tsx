@@ -4,7 +4,7 @@ import ContentLoader from "react-content-loader";
 import { LoaderStyle } from "../../constants";
 import { CircleSkeletonProps } from "./Circle.types";
 
-export { CircleSkeletonProps };
+export type { CircleSkeletonProps };
 
 const CircleSkeleton = ({
   title,

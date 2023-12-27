@@ -49,7 +49,7 @@ settings.allowLocalDomainName = false;
 ```
 
 ```js
-import { EmailInput, utils } from "@docspace/components";
+import { EmailInput, utils } from "@docspace/shared/components";
 const { EmailSettings } = utils.email;
 const emailSettings = new EmailSettings();
 emailSettings.toObject(); /* returned Object with default settings:
@@ -95,7 +95,7 @@ You should use custom validation with the `customValidate` prop. This prop conta
 
 ```jsx
 import React from "react";
-import EmailInput from "@docspace/components/email-input";
+import {EmailInput } from "@docspace/shared/components";
 
 const onChange = (e) => {
   // your event handling
@@ -123,7 +123,7 @@ const onValidateInput = (result) => {
 ```
 
 ```jsx
-import { EmailSettings } from "@docspace/components/utils/email";
+import { EmailSettings } from "@docspace/shared/utils/email";
 const settings = new EmailSettings();
 settings.allowDomainPunycode = true;
 ```

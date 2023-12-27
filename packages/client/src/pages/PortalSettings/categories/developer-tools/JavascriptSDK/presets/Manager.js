@@ -72,12 +72,28 @@ const Manager = (props) => {
     { value: "custom", label: t("SetItUp") },
   ];
 
-  const columnsOptions = [
-    { key: "Type", label: t("Common:Type") },
-    { key: "Tags", label: t("Common:Tags") },
+  const filterOptions = [
+    { key: "filter-type-author", label: t("Files:ByAuthor") },
+    { key: "filter-type-all", label: t("Files:AllFiles") },
+    { key: "filter-type-documents", label: t("Common:Documents") },
+    { key: "filter-type-folders", label: t("Translations:Folders") },
+    { key: "filter-type-spreadsheets", label: t("Translations:Spreadsheets") },
+    { key: "filter-type-archives", label: t("Files:Archives") },
+    { key: "filter-type-presentations", label: t("Translations:Presentations") },
+    { key: "filter-type-images", label: t("Filse:Images") },
+    { key: "filter-type-media", label: t("Files:Media") },
+    { key: "filter-type-forms-templates", label: t("Files:FormsTemplates") },
+    { key: "filter-type-forms", label: t("Files:Forms") },
+  ];
+
+  const [columnsOptions, setColumnsOptions] = useState([
+    {
+      key: "Select",
+      label: t("Common:SelectAction"),
+    },
     // { key: "Owner", label: t("Common:Owner") },
     // { key: "Modified", label: t("Files:ByLastModified") },
-  ];
+  ]);
 
   const [sortBy, setSortBy] = useState(dataSortBy[0]);
   const [sortOrder, setSortOrder] = useState(dataSortOrder[0]);
@@ -91,13 +107,16 @@ const Manager = (props) => {
   const [columnDisplay, setColumnDisplay] = useState(columnDisplayOptions[0].value);
   const [selectedColumns, setSelectedColumns] = useState([
     { key: "Name", label: t("Common:Name") },
-    columnsOptions[0],
-    columnsOptions[1],
+    { key: "Type", label: t("Common:Type") },
+    { key: "Tags", label: t("Common:Tags") },
   ]);
-  const [selectedColumnOption, setSelectedColumnOption] = useState({
-    key: "Select",
+  const [selectedColumnOption, setSelectedColumnOption] = useState(columnsOptions[0]);
+  const [filterBy, setFilterBy] = useState({
+    key: "filter-type-default",
     label: t("Common:SelectAction"),
+    default: true,
   });
+  const [author, setAuthor] = useState("");
 
   const [config, setConfig] = useState({
     mode: "manager",
@@ -255,6 +274,10 @@ const Manager = (props) => {
     setColumnDisplay(e.target.value);
   };
 
+  const onChangeAuthor = (e) => {
+    setAuthor(e.target.value);
+  };
+
   const openGetCodeModal = () => setIsGetCodeDialogOpened(true);
 
   const closeGetCodeModal = () => setIsGetCodeDialogOpened(false);
@@ -271,12 +294,17 @@ const Manager = (props) => {
   };
 
   const deleteSelectedColumn = (option) => {
+    setColumnsOptions((prevColumnsOptions) => [...prevColumnsOptions, option]);
     const filteredColumns = selectedColumns.filter((column) => column.key !== option.key);
     setConfig((config) => ({
       ...config,
       viewTableColumns: filteredColumns.map((column) => column.key).join(","),
     }));
     setSelectedColumns(filteredColumns);
+  };
+
+  const onFilterSelect = (option) => {
+    setFilterBy(option);
   };
 
   const onResize = () => {
@@ -446,13 +474,25 @@ const Manager = (props) => {
           <ControlsGroup>
             <Label className="label" text={t("Common:Filter")} />
             <ComboBox
-              onSelect={() => {}}
-              options={[{ key: "1", label: t("Common:SelectAction"), default: true }]}
+              onSelect={onFilterSelect}
+              options={filterOptions}
               scaled={true}
-              selectedOption={{ key: "1", label: t("Common:SelectAction"), default: true }}
+              selectedOption={filterBy}
               displaySelectedOption
               directionY="top"
             />
+            {filterBy.key === "filter-type-author" && (
+              <>
+                <Label className="label" text={t("Files:ByAuthor")} />
+                <TextInput
+                  scale={true}
+                  onChange={onChangeAuthor}
+                  placeholder={t("Files:ByAuthor")}
+                  value={author}
+                  tabIndex={5}
+                />
+              </>
+            )}
           </ControlsGroup>
           <ControlsGroup>
             <Label className="label" text={t("SearchTerm")} />
@@ -590,7 +630,7 @@ export default inject(({ auth }) => {
     setDocumentTitle,
   };
 })(
-  withTranslation(["JavascriptSdk", "Files", "EmbeddingPanel", "Common", "Files"])(
+  withTranslation(["JavascriptSdk", "Files", "EmbeddingPanel", "Common", "Files", "Translations"])(
     observer(Manager),
   ),
 );

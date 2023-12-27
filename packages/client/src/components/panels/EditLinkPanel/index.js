@@ -56,6 +56,7 @@ const EditLinkPanel = (props) => {
 
   const [linkValue, setLinkValue] = useState(shareLink);
   const [hasChanges, setHasChanges] = useState(false);
+  const [isSameDate, setIsSameDate] = useState(false);
 
   const [passwordAccessIsChecked, setPasswordAccessIsChecked] =
     useState(isLocked);
@@ -96,7 +97,7 @@ const EditLinkPanel = (props) => {
     newLink.sharedTo.title = linkNameValue;
     newLink.sharedTo.password = passwordAccessIsChecked ? passwordValue : null;
     newLink.sharedTo.denyDownload = denyDownload;
-    newLink.sharedTo.expirationDate = expirationDate;
+    if (!isSameDate) newLink.sharedTo.expirationDate = expirationDate;
 
     setIsLoading(true);
     editExternalLink(roomId, newLink)
@@ -135,6 +136,7 @@ const EditLinkPanel = (props) => {
     };
 
     const isSameDate = moment(date).isSame(expirationDate);
+    setIsSameDate(isSameDate);
 
     if (!isEqual(data, initState) || !isSameDate) {
       setHasChanges(true);

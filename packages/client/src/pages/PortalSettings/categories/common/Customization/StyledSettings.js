@@ -150,19 +150,17 @@ const StyledSettingsComponent = styled.div`
       `}
 
     .send-request-container {
-      box-sizing: border-box;
-      position: absolute;
+      padding-block: 30px;
+      position: sticky;
       bottom: 0;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              right: 0;
-            `
-          : css`
-              left: 0;
-            `}
-      padding: 16px;
-      width: 100%;
+      margin-top: 32px;
+      background-color: ${({ theme }) => theme.backgroundColor};
+
+      @media ${mobile} {
+        position: fixed;
+        padding-inline: 16px;
+        inset-inline: 0;
+      }
     }
 
     .send-request-button {

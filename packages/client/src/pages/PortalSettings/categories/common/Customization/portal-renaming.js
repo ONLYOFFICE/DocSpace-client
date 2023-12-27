@@ -78,7 +78,8 @@ const PortalRenaming = (props) => {
 
   useEffect(() => {
     setDocumentTitle(t("PortalRenaming"));
-    if (!isLoaded) initSettings().then(() => setIsLoaded(true));
+    const page = isMobileView ? "language-and-time-zone" : "general";
+    if (!isLoaded) initSettings(page).then(() => setIsLoaded(true));
 
     const checkScroll = checkScrollSettingsBlock();
     checkInnerWidth();

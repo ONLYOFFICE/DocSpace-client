@@ -255,6 +255,11 @@ const StyledBreadCrumbs = styled.div<{
 
   .context-menu-button {
     transform: rotate(90deg);
+    svg {
+      path {
+        fill: ${(props) => props.theme.selector.breadCrumbs.prevItemColor};
+      }
+    }
   }
 `;
 

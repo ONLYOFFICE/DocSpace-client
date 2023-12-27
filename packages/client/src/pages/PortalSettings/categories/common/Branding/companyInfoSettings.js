@@ -46,12 +46,6 @@ const StyledComponent = styled.div`
       display: none;
     }
   }
-
-  @media (max-height: 700px) {
-    .save-cancel-buttons {
-      bottom: auto;
-    }
-  }
 `;
 
 const CompanyInfoSettings = (props) => {

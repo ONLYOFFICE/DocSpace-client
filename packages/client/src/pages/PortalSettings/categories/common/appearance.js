@@ -42,6 +42,8 @@ const Appearance = (props) => {
   const defaultAppliedColorAccent = currentColorScheme.main.accent;
   const defaultAppliedColorButtons = currentColorScheme.main.buttons;
 
+  const isMobileView = currentDeviceType === DeviceType.mobile;
+
   const headerAddTheme = t("Settings:NewColorScheme");
   const headerEditTheme = t("Settings:EditColorScheme");
 
@@ -166,7 +168,7 @@ const Appearance = (props) => {
 
     return () => {
       window.removeEventListener("resize", onCheckView);
-      resetIsInit();
+      !isMobileView && resetIsInit();
     };
   }, []);
 

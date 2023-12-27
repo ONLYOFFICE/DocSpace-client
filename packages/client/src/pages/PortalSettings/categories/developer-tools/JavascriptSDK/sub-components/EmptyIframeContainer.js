@@ -12,6 +12,9 @@ const StyledContainer = styled.div`
   justify-content: center;
   align-items: center;
 
+  border: 1px solid ${(props) => props.theme.plugins.borderColor};
+  border-radius: 6px;
+
   .emptyIframeText {
     position: absolute;
     font-size: 44px;

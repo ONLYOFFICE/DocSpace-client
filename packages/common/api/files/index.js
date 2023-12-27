@@ -1038,3 +1038,10 @@ export function changeDocumentServiceLocation(
     },
   });
 }
+
+export function getFileLink(fileId) {
+  return request({
+    method: "get",
+    url: `/files/file/${fileId}/link`,
+  });
+}

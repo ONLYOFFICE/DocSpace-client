@@ -183,7 +183,7 @@ const RoomSelector = (props) => {
   const preview = (
     <Frame width={width} height={width} targetId={frameId}>
       <Box id={frameId}></Box>
-      <RectangleSkeleton height={height} borderRadius="6px" />
+      <RectangleSkeleton width={width} height={height} borderRadius="6px" />
     </Frame>
   );
 

@@ -45,7 +45,7 @@ import {
 } from "./StyledPresets";
 
 const Manager = (props) => {
-  const { t, setDocumentTitle } = props;
+  const { t, setDocumentTitle, fetchExternalLinks } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
@@ -100,9 +100,10 @@ const Manager = (props) => {
   const [heightDimension, setHeightDimension] = useState(dataDimensions[1]);
   const [width, setWidth] = useState("100");
   const [height, setHeight] = useState(isTablet() ? "400" : isMobile() ? "206" : "600");
-  const [withSubfolders, setWithSubfolders] = useState(true);
+  const [withSubfolders, setWithSubfolders] = useState(false);
   const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
   const [showPreview, setShowPreview] = useState(window.innerWidth > showPreviewThreshold);
+  const [sharedLinks, setSharedLinks] = useState(null);
   const [columnDisplay, setColumnDisplay] = useState(columnDisplayOptions[0].value);
   const [selectedColumns, setSelectedColumns] = useState([
     { key: "Name", label: t("Common:Name") },
@@ -174,9 +175,40 @@ const Manager = (props) => {
     setHeight(e.target.value);
   };
 
-  const onChangeFolderId = (id) => {
+  const onChangeFolderId = async (id, publicInPath) => {
+    let newConfig = { id, requestToken: null, rootPath: "/rooms/shared/" };
+
+    if (!!publicInPath) {
+      const links = await fetchExternalLinks(publicInPath.id);
+
+      if (links.length > 1) {
+        const linksOptions = links.map((link) => {
+          const { id, title, requestToken } = link.sharedTo;
+
+          return {
+            key: id,
+            label: title,
+            requestToken: requestToken,
+          };
+        });
+
+        setSharedLinks(linksOptions);
+      }
+
+      newConfig.requestToken = links[0].sharedTo?.requestToken;
+      newConfig.rootPath = "/rooms/share";
+    } else {
+      setSharedLinks(null);
+    }
+
     setConfig((config) => {
-      return { ...config, id };
+      return { ...config, ...newConfig };
+    });
+  };
+
+  const onChangeSharedLink = (link) => {
+    setConfig((config) => {
+      return { ...config, requestToken: link.requestToken };
     });
   };
 
@@ -324,7 +356,7 @@ const Manager = (props) => {
   const preview = (
     <Frame width={width} height={height} targetId={frameId}>
       <Box id={frameId}></Box>
-      <RectangleSkeleton height={height} borderRadius="6px" />
+      <RectangleSkeleton width={width} height={height} borderRadius="6px" />
     </Frame>
   );
 
@@ -470,6 +502,28 @@ const Manager = (props) => {
               <FilesSelectorInput onSelectFolder={onChangeFolderId} isSelect />
             </FilesSelectorInputWrapper>
           </ControlsGroup>
+          {sharedLinks && (
+            <ControlsGroup>
+              <LabelGroup>
+                <Label className="label" text={t("SharingPanel:ExternalLink")} />
+                <HelpButton
+                  offsetRight={0}
+                  size={12}
+                  tooltipContent={
+                    <Text fontSize="12px">{t("CreateEditRoomDialog:PublicRoomDescription")}</Text>
+                  }
+                />
+              </LabelGroup>
+              <ComboBox
+                scaled={true}
+                onSelect={onChangeSharedLink}
+                options={sharedLinks}
+                selectedOption={sharedLinks[0]}
+                displaySelectedOption
+                directionY="bottom"
+              />
+            </ControlsGroup>
+          )}
           <CategorySubHeader>{t("AdvancedDisplay")}</CategorySubHeader>
           <ControlsGroup>
             <Label className="label" text={t("Common:Filter")} />
@@ -630,16 +684,24 @@ const Manager = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
+export default inject(({ auth, publicRoomStore }) => {
   const { settingsStore, setDocumentTitle } = auth;
   const { theme } = settingsStore;
+  const { fetchExternalLinks } = publicRoomStore;
 
   return {
     theme,
     setDocumentTitle,
+    fetchExternalLinks,
   };
 })(
-  withTranslation(["JavascriptSdk", "Files", "EmbeddingPanel", "Common", "Files", "Translations"])(
-    observer(Manager),
-  ),
+  withTranslation([
+    "JavascriptSdk",
+    "Files",
+    "EmbeddingPanel",
+    "Common",
+    "Files",
+    "Translations",
+    "SharingPanel",
+  ])(observer(Manager)),
 );

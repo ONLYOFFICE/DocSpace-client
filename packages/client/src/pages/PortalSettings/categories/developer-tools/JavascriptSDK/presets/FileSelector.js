@@ -44,7 +44,7 @@ import {
 } from "./StyledPresets";
 
 const FileSelector = (props) => {
-  const { t, setDocumentTitle } = props;
+  const { t, setDocumentTitle, fetchExternalLinks } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
@@ -81,6 +81,7 @@ const FileSelector = (props) => {
   const [height, setHeight] = useState(isTablet() ? "400" : isMobile() ? "206" : "778");
   const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
   const [showPreview, setShowPreview] = useState(window.innerWidth > showPreviewThreshold);
+  const [sharedLinks, setSharedLinks] = useState(null);
   const [selectedElementType, setSelectedElementType] = useState(elementDisplayOptions[0].value);
   const [typeDisplay, setTypeDisplay] = useState(fileTypeDisplay[0].value);
   const [selectedFileTypes, setSelectedFileTypes] = useState([
@@ -150,9 +151,40 @@ const FileSelector = (props) => {
     setHeight(e.target.value);
   };
 
-  const onChangeFolderId = (id) => {
+  const onChangeFolderId = async (id, publicInPath) => {
+    let newConfig = { id, requestToken: null, rootPath: "/rooms/shared/" };
+
+    if (!!publicInPath) {
+      const links = await fetchExternalLinks(publicInPath.id);
+
+      if (links.length > 1) {
+        const linksOptions = links.map((link) => {
+          const { id, title, requestToken } = link.sharedTo;
+
+          return {
+            key: id,
+            label: title,
+            requestToken: requestToken,
+          };
+        });
+
+        setSharedLinks(linksOptions);
+      }
+
+      newConfig.requestToken = links[0].sharedTo?.requestToken;
+      newConfig.rootPath = "/rooms/share";
+    } else {
+      setSharedLinks(null);
+    }
+
     setConfig((config) => {
-      return { ...config, id };
+      return { ...config, ...newConfig };
+    });
+  };
+
+  const onChangeSharedLink = (link) => {
+    setConfig((config) => {
+      return { ...config, requestToken: link.requestToken };
     });
   };
 
@@ -217,7 +249,7 @@ const FileSelector = (props) => {
   const preview = (
     <Frame width={width} height={width} targetId={frameId}>
       <Box id={frameId}></Box>
-      <RectangleSkeleton height={height} borderRadius="6px" />
+      <RectangleSkeleton width={width} height={height} borderRadius="6px" />
     </Frame>
   );
 
@@ -366,6 +398,28 @@ const FileSelector = (props) => {
               <FilesSelectorInput onSelectFolder={onChangeFolderId} isSelect />
             </FilesSelectorInputWrapper>
           </ControlsGroup>
+          {sharedLinks && (
+            <ControlsGroup>
+              <LabelGroup>
+                <Label className="label" text={t("SharingPanel:ExternalLink")} />
+                <HelpButton
+                  offsetRight={0}
+                  size={12}
+                  tooltipContent={
+                    <Text fontSize="12px">{t("CreateEditRoomDialog:PublicRoomDescription")}</Text>
+                  }
+                />
+              </LabelGroup>
+              <ComboBox
+                scaled={true}
+                onSelect={onChangeSharedLink}
+                options={sharedLinks}
+                selectedOption={sharedLinks[0]}
+                displaySelectedOption
+                directionY="bottom"
+              />
+            </ControlsGroup>
+          )}
           <CategorySubHeader>{t("AdvancedDisplay")}</CategorySubHeader>
           <ControlsGroup>
             <Label className="label" text={t("FileTypeDisplay")} />
@@ -434,16 +488,23 @@ const FileSelector = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
+export default inject(({ auth, publicRoomStore }) => {
   const { settingsStore, setDocumentTitle } = auth;
   const { theme } = settingsStore;
+  const { fetchExternalLinks } = publicRoomStore;
 
   return {
     theme,
     setDocumentTitle,
+    fetchExternalLinks,
   };
 })(
-  withTranslation(["JavascriptSdk", "Files", "EmbeddingPanel", "Common", "Translations"])(
-    observer(FileSelector),
-  ),
+  withTranslation([
+    "JavascriptSdk",
+    "Files",
+    "EmbeddingPanel",
+    "Common",
+    "Translations",
+    "SharingPanel",
+  ])(observer(FileSelector)),
 );

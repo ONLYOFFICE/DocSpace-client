@@ -222,14 +222,14 @@ class InfoPanelStore {
     return item.isRoom || !!item.roomType
       ? item.rootFolderType === FolderType.Archive
         ? item.logo && item.logo.medium
-        :  this.settingsStore.getIcon(
-          size,
-          null,
-          null,
-          null,
-          item.roomType,
-          true
-        )
+        : this.settingsStore.getIcon(
+            size,
+            null,
+            null,
+            null,
+            item.roomType,
+            true
+          )
         ? item.logo.medium
         : item.icon
         ? item.icon
@@ -243,7 +243,7 @@ class InfoPanelStore {
 
   openUser = async (user, navigate) => {
     if (user.id === this.authStore.userStore.user.id) {
-      this.openSelfProfile(navigate);
+      this.openSelfProfile();
       return;
     }
 
@@ -251,21 +251,11 @@ class InfoPanelStore {
     this.openAccountsWithSelectedUser(fetchedUser, navigate);
   };
 
-  openSelfProfile = (navigate) => {
-    const path = [
-      window.DocSpaceConfig?.proxy?.url,
-      config.homepage,
-      "/profile",
-    ];
-    this.selectedFolderStore.setSelectedFolder(null);
-    this.treeFoldersStore.setSelectedNode(["accounts", "filter"]);
-    navigate(combineUrl(...path));
+  openSelfProfile = () => {
+    this.peopleStore.profileActionsStore.onProfileClick();
   };
 
   openAccountsWithSelectedUser = async (user, navigate) => {
-    const { getUsersList } = this.peopleStore.usersStore;
-    const { setSelection } = this.peopleStore.selectionStore;
-
     const path = [
       window.DocSpaceConfig?.proxy?.url,
       config.homepage,
@@ -275,13 +265,12 @@ class InfoPanelStore {
     const newFilter = Filter.getDefault();
     newFilter.page = 0;
     newFilter.search = user.email;
+    newFilter.selectUserId = user.id;
     path.push(`filter?${newFilter.toUrlParams()}`);
-    const userList = await getUsersList(newFilter);
 
-    navigate(combineUrl(...path));
     this.selectedFolderStore.setSelectedFolder(null);
     this.treeFoldersStore.setSelectedNode(["accounts"]);
-    setSelection([user]);
+    navigate(combineUrl(...path), { state: { user } });
   };
 
   fetchUser = async (userId) => {

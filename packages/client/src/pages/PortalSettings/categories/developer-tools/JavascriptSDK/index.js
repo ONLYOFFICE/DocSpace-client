@@ -2,6 +2,7 @@ import React from "react";
 import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { RoomsType } from "@docspace/common/constants";
 import { inject, observer } from "mobx-react";
 
 import { mobile, tablet } from "@docspace/components/utils/device";
@@ -160,7 +161,12 @@ export default inject(({ auth }) => {
     sdkLink,
   };
 })(
-  withTranslation(["JavascriptSdk", "Files", "EmbeddingPanel", "Common"])(
-    observer(PortalIntegration),
-  ),
+  withTranslation([
+    "JavascriptSdk",
+    "Files",
+    "EmbeddingPanel",
+    "CreateEditRoomDialog",
+    "SharingPanel",
+    "Common",
+  ])(observer(PortalIntegration)),
 );

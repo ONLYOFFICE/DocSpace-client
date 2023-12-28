@@ -164,7 +164,7 @@ const Editor = (props) => {
       {config.id !== undefined ? (
         <>
           <Box id={frameId}></Box>
-          <RectangleSkeleton height={height} borderRadius="6px" />
+          <RectangleSkeleton width={width} height={height} borderRadius="6px" />
         </>
       ) : (
         <EmptyIframeContainer text={t("SelectFile")} width={width} height={height} />

@@ -50,6 +50,8 @@ const NewFilesPanel = (props) => {
     visible,
     isLoading,
     currentDeviceType,
+    fileItemsList,
+    enablePlugins,
   } = props;
 
   const [listFiles, setListFiles] = useState(newFiles);
@@ -227,6 +229,21 @@ const NewFilesPanel = (props) => {
         return;
       }
 
+      if (fileItemsList && enablePlugins) {
+        let currPluginItem = null;
+
+        fileItemsList.forEach((i) => {
+          if (i.key === item.fileExst) currPluginItem = i.value;
+        });
+
+        if (currPluginItem) {
+          const correctDevice = currPluginItem.devices
+            ? currPluginItem.devices.includes(currentDeviceType)
+            : true;
+          if (correctDevice) return currPluginItem.onClick(item);
+        }
+      }
+
       return window.open(webUrl, "_blank");
     }
   };
@@ -329,6 +346,7 @@ export default inject(
     dialogsStore,
     settingsStore,
     clientLoadingStore,
+    pluginStore,
   }) => {
     const { addFileToRecentlyViewed, hasNew, refreshFiles } = filesStore;
 
@@ -351,7 +369,11 @@ export default inject(
       newFiles,
     } = dialogsStore;
 
+    const { fileItemsList } = pluginStore;
+
     return {
+      fileItemsList,
+      enablePlugins: auth.settingsStore.enablePlugins,
       visible,
       newFiles,
       newFilesIds,

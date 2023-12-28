@@ -99,7 +99,7 @@ import { ArticleItem } from "./article-item";
 import { ToggleContent } from "./toggle-content";
 import { Tag } from "./tag";
 import { Tags } from "./tags";
-import { DragAndDrop, getFilesFromEvent } from "./drag-and-drop";
+// import { DragAndDrop, getFilesFromEvent } from "./drag-and-drop";
 import { AccessRightSelect } from "./access-right-select";
 import { SocialButton } from "./social-button";
 import { DatePicker } from "./date-picker";
@@ -156,8 +156,8 @@ export {
   DateTimePicker,
   DatePicker,
   AccessRightSelect,
-  DragAndDrop,
-  getFilesFromEvent,
+  // DragAndDrop,
+  // getFilesFromEvent,
   Tag,
   Tags,
   ToggleContent,

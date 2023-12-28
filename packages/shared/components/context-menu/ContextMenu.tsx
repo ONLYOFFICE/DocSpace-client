@@ -315,7 +315,8 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
   };
 
   React.useEffect(() => {
-    document.addEventListener("contextmenu", documentContextMenuListener);
+    if (global)
+      document.addEventListener("contextmenu", documentContextMenuListener);
     return () => {
       document.removeEventListener("contextmenu", documentContextMenuListener);
       document.removeEventListener("click", documentClickListener);
@@ -349,7 +350,7 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
   React.useImperativeHandle(
     ref,
     () => {
-      return { show, hide };
+      return { show, hide, menuRef };
     },
     [hide, show],
   );

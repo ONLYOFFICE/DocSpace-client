@@ -118,7 +118,7 @@ const Textarea = ({
         isDisabled={isDisabled}
         hasError={isError}
         heightScale={heightScale}
-        heightTextArea={textareaHeight}
+        heightTextAreaProp={textareaHeight}
       >
         <Toast />
 
@@ -128,7 +128,7 @@ const Textarea = ({
           </Numeration>
         )}
         <StyledTextarea
-          heightTextArea={textareaHeight}
+          heightTextAreaProp={textareaHeight}
           id={id}
           paddingLeftProp={paddingLeftProp}
           isJSONField={isJSONField}

@@ -28,9 +28,9 @@ const RoomsContextBtn = ({
   if (!selection) return null;
 
   const onContextMenu = (e) => {
-    if (!contextMenuRef?.current.menuRef.current)
+    if (!contextMenuRef?.current?.menuRef.current)
       itemTitleRef?.current.click(e);
-    contextMenuRef?.current.show(e);
+    contextMenuRef?.current?.show(e);
   };
 
   const getData = () => {

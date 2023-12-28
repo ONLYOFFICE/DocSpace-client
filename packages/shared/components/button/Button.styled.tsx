@@ -113,25 +113,33 @@ const heightStyle = (props: { size?: ButtonSize; theme: TTheme }) =>
 const fontSizeStyle = (props: { size?: ButtonSize; theme: TTheme }) =>
   props.theme.button.fontSize[props.size || ButtonSize.normal];
 
-const ButtonWrapper = ({
-  primary,
-  scale,
-  size,
-  isHovered,
-  isClicked,
-  isDisabled,
-  disableHover,
-  isLoading,
-  label,
-  innerRef,
-  minWidth,
-  ...props
-}: ButtonProps & {
-  innerRef?: React.LegacyRef<HTMLButtonElement>;
-  interfaceDirection?: boolean | string;
-}) => {
-  return <button ref={innerRef} type="button" {...props} />;
-};
+const ButtonWrapper = React.forwardRef<
+  HTMLButtonElement,
+  ButtonProps & {
+    interfaceDirection?: boolean | string;
+  }
+>(
+  (
+    {
+      primary,
+      scale,
+      size,
+      isHovered,
+      isClicked,
+      isDisabled,
+      disableHover,
+      isLoading,
+      label,
+      minWidth,
+      ...props
+    },
+    ref,
+  ) => {
+    return <button ref={ref} type="button" {...props} />;
+  },
+);
+
+ButtonWrapper.displayName = "ButtonWrapper";
 
 const StyledButton = styled(ButtonWrapper).attrs((props: ButtonProps) => ({
   disabled: props.isDisabled || props.isLoading ? "disabled" : "",

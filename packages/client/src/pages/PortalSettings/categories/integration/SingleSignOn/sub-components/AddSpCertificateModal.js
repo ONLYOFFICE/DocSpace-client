@@ -50,7 +50,7 @@ const AddSpCertificateModal = (props) => {
           {t("OpenCertificate")}
         </Text>
 
-        <TextArea
+        <Textarea
           id="sp-certificate"
           className="text-area"
           name="spCertificate"
@@ -64,7 +64,7 @@ const AddSpCertificateModal = (props) => {
           {t("PrivateKey")}
         </Text>
 
-        <TextArea
+        <Textarea
           id="sp-privateKey"
           className="text-area"
           name="spPrivateKey"

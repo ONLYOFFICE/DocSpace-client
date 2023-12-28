@@ -42,6 +42,7 @@ const Row = (props: RowProps) => {
     mode = "default",
     inProgress,
     rowContextClose,
+    className,
   } = props;
 
   const cm = useRef<null | {
@@ -53,6 +54,7 @@ const Row = (props: RowProps) => {
         | Event
         | React.ChangeEvent<HTMLInputElement>,
     ) => void;
+    menuRef: { current: HTMLDivElement };
   }>(null);
   const row = useRef<null | HTMLDivElement>(null);
 
@@ -74,7 +76,7 @@ const Row = (props: RowProps) => {
     contextData.contextOptions.length > 0;
 
   const changeCheckbox = () => {
-    onSelect?.(checked, data);
+    onSelect?.(!checked, data);
   };
 
   const getOptions = () => {
@@ -84,9 +86,9 @@ const Row = (props: RowProps) => {
 
   const onContextMenu = (e: React.MouseEvent) => {
     onContextClick?.(e.button === 2);
-    // if (!cm.current.menuRef.current) {
-    //   if (row.current) row.current.click(); //TODO: need fix context menu to global
-    // }
+    if (!cm.current?.menuRef.current) {
+      if (row.current) row.current.click(); // TODO: need fix context menu to global
+    }
     if (cm.current) cm.current.show(e);
   };
 
@@ -121,6 +123,8 @@ const Row = (props: RowProps) => {
       onContextMenu={onContextMenu}
       withoutBorder={withoutBorder}
       data-testid="row"
+      checked={checked}
+      className={className}
     >
       {inProgress ? (
         <Loader

@@ -1,5 +1,5 @@
 import React from "react";
-import { isTablet } from "../../utils";
+import { isMobile, isTablet } from "../../utils";
 
 import StyledBackdrop from "./Backdrop.styled";
 import { BackdropProps } from "./Backdrop.types";
@@ -22,7 +22,7 @@ const Backdrop = (props: BackdropProps) => {
 
   const checkingExistBackdrop = React.useCallback(() => {
     if (visible) {
-      const tablet = isTablet();
+      const tablet = isTablet() || isMobile();
       const backdrops = document.querySelectorAll(".backdrop-active");
 
       const currentNeedBackdrop =

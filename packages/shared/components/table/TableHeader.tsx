@@ -227,6 +227,7 @@ function TableHeader({
   );
 
   const onResize = React.useCallback<() => void>(() => {
+    console.log("call resize");
     let activeColumnIndex = null;
 
     const container = containerRef.current
@@ -668,7 +669,7 @@ function TableHeader({
       if (throttledResize.current)
         window.removeEventListener("resize", throttledResize.current);
     };
-  }, [onResize]);
+  }, [onResize, state]);
 
   const getNextColumn = React.useCallback(
     (array: TTableColumn[], index: number) => {

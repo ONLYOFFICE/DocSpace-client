@@ -1,6 +1,6 @@
 export type TFunc = (key: string) => string;
 export type TImage = {
-  uploadedFile: string | File;
+  uploadedFile?: string | File;
   zoom: number;
   x: number;
   y: number;

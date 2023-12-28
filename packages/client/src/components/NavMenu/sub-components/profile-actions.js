@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
-import { Avatar } from "@docspace/shared/components";
+import { Avatar, AvatarSize } from "@docspace/shared/components";
 import { DropDownItem } from "@docspace/shared/components";
 import { Link } from "@docspace/shared/components";
 import ProfileMenu from "./profile-menu";
@@ -124,15 +124,12 @@ class ProfileActions extends React.PureComponent {
     const { user, opened, avatar } = this.state;
     const userRole = this.getUserRole(user);
 
-    console.log("render");
-
     return (
       <StyledDiv isProduct={this.props.isProduct} ref={this.ref}>
         <Avatar
-          style={{ width: "32px", height: "32px" }}
           onClick={this.onClick}
           role={userRole}
-          size="min"
+          size={AvatarSize.min}
           source={avatar}
           userName={user.displayName}
           className="icon-profile-menu"

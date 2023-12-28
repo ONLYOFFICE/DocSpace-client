@@ -28,4 +28,5 @@ export interface AvatarProps {
   withTooltip?: boolean;
   /** Tooltip content */
   tooltipContent?: string;
+  onClick?: () => void;
 }

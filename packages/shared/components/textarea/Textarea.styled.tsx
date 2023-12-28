@@ -14,13 +14,13 @@ const ClearScrollbar = ({
   isDisabled,
   heightScale,
   hasError,
-  heightTextArea,
+  heightTextAreaProp,
   ...props
 }: {
   isDisabled?: boolean;
   heightScale?: boolean;
   hasError?: boolean;
-  heightTextArea?: number;
+  heightTextAreaProp?: number;
   ref?: React.Ref<HTMLDivElement>;
 } & ScrollbarProps) => <Scrollbar {...props} />;
 
@@ -40,8 +40,8 @@ const StyledScrollbar = styled(ClearScrollbar)`
   height: ${(props) => {
     return props.heightScale
       ? "67vh"
-      : props.heightTextArea
-        ? `${props.heightTextArea + 2}px`
+      : props.heightTextAreaProp
+        ? `${props.heightTextAreaProp + 2}px`
         : "91px";
   }} !important;
 
@@ -49,8 +49,8 @@ const StyledScrollbar = styled(ClearScrollbar)`
     height: ${(props) => {
       return props.heightScale
         ? "65vh"
-        : props.heightTextArea
-          ? `${props.heightTextArea}px`
+        : props.heightTextAreaProp
+          ? `${props.heightTextAreaProp}px`
           : "89px";
     }};
   }

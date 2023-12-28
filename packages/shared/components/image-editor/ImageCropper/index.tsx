@@ -56,6 +56,7 @@ const ImageCropper = ({
 
   const handleDeleteImage = () => {
     if (isDisabled) return;
+
     setUploadedFile();
   };
 

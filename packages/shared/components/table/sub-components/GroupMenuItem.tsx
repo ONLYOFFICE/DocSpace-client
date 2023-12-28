@@ -3,7 +3,7 @@ import { isChrome, browserVersion } from "react-device-detect";
 import { ReactSVG } from "react-svg";
 import styled from "styled-components";
 
-import { isDesktop, mobile, tablet } from "../../../utils";
+import { mobile, tablet } from "../../../utils";
 import { Base } from "../../../themes";
 
 import { Button, ButtonSize } from "../../button";

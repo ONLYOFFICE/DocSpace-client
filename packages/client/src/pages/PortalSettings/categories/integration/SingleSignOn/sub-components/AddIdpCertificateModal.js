@@ -34,7 +34,7 @@ const AddIdpCertificateModal = (props) => {
           {t("OpenCertificate")}
         </Text>
 
-        <TextArea
+        <Textarea
           className="text-area"
           id="idp-certificate"
           name="idpCertificate"

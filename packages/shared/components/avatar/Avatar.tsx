@@ -83,9 +83,8 @@ const AvatarPure = ({
   tooltipContent,
   withTooltip,
   className,
+  onClick,
 }: AvatarProps) => {
-  console.log(className, "render");
-
   const defaultTheme = useTheme();
 
   const interfaceDirection = defaultTheme?.interfaceDirection;
@@ -121,10 +120,13 @@ const AvatarPure = ({
     <Text fontSize="12px">{content}</Text>
   );
 
-  console.log(className);
-
   return (
-    <StyledAvatar size={size} data-testid="avatar" className={className}>
+    <StyledAvatar
+      size={size}
+      data-testid="avatar"
+      className={className}
+      onClick={onClick}
+    >
       <AvatarWrapper
         source={source}
         userName={userName || ""}

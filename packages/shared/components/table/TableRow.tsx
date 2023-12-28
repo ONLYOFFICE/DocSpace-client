@@ -34,14 +34,15 @@ const TableRow = (props: TableRowProps) => {
         | Event
         | React.ChangeEvent<HTMLInputElement>,
     ) => void;
+    menuRef: { current: HTMLDivElement };
   }>(null);
   const row = useRef<HTMLDivElement | null>(null);
 
   const onContextMenu = (e: React.MouseEvent) => {
     fileContextClick?.(e.button === 2);
-    // if (cm.current && !cm.current.menuRef.current) {
-    //   row.current.click(e);
-    // }
+    if (cm.current && !cm.current?.menuRef.current) {
+      row.current?.click();
+    }
     if (cm.current) cm.current.show(e);
   };
 

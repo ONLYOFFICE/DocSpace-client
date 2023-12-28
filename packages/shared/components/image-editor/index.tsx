@@ -14,8 +14,8 @@ const ImageEditor = ({
   classNameWrapperImageCropper,
   className,
 }: ImageEditorProps) => {
-  const setUploadedFile = (uploadedFile?: File) => {
-    if (uploadedFile) onChangeImage({ ...image, uploadedFile });
+  const setUploadedFile = (f?: File) => {
+    onChangeImage({ ...image, uploadedFile: f });
   };
 
   const isDefaultAvatar =

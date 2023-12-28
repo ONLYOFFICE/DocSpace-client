@@ -114,7 +114,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
     fillIcon,
     offsetLeft,
     modernView,
-    withBackdrop,
+    withBackdrop = true,
     isAside,
     withBackground,
     advancedOptionsCount,

@@ -1,6 +1,7 @@
 import { IndexRange } from "react-virtualized";
 
 import { ContextMenuModel } from "../context-menu";
+import { TTheme } from "../../themes";
 
 export interface TableContainerProps {
   forwardedRef: React.ForwardedRef<HTMLDivElement>;
@@ -43,6 +44,7 @@ export interface TableHeaderProps {
   columnInfoPanelStorageName: string;
   settingsTitle?: string;
   tagRef: React.ForwardedRef<HTMLDivElement>;
+  theme: TTheme;
 }
 
 export interface TableHeaderCellProps {

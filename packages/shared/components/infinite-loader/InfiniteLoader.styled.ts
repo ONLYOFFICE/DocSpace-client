@@ -84,10 +84,10 @@ const tableStyles = css<{ width: number }>`
     theme.interfaceDirection === "rtl"
       ? `margin-right: -20px;`
       : `margin-left: -20px;`}
-  width: ${({ width }) => `${width + 40}px !important"`};
+  width: ${({ width }) => `${width + 40}px !important`};
 
   .ReactVirtualized__Grid__innerScrollContainer {
-    max-width: ${({ width }) => `${width + 40}px !important"`};
+    max-width: ${({ width }) => `${width + 40}px !important`};
   }
   .table-container_body-loader {
     width: calc(100% - 48px) !important;

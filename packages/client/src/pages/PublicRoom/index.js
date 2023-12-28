@@ -24,6 +24,8 @@ const PublicRoom = (props) => {
     setIsArticleLoading,
   } = props;
 
+  console.log("render");
+
   const navigate = useNavigate();
   const location = useLocation();
 

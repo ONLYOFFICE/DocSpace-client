@@ -18,6 +18,8 @@ const RoomPassword = (props) => {
   const { t, roomKey, validatePublicRoomPassword, setRoomData, roomTitle } =
     props;
 
+  console.log("render");
+
   const [password, setPassword] = useState("");
   const [passwordValid, setPasswordValid] = useState(true);
   const [isLoading, setIsLoading] = useState(false);

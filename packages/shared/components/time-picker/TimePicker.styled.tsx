@@ -5,7 +5,7 @@ const TimeInput = styled.div<{ hasError?: boolean; isFocused?: boolean }>`
   width: 57px;
   height: 32px;
   box-sizing: border-box;
-  padding: 0px 8px;
+  padding: 0px 6px;
   direction: ltr;
 
   border: 1px solid #d0d5da;
@@ -32,6 +32,8 @@ const TimeInput = styled.div<{ hasError?: boolean; isFocused?: boolean }>`
 
   input {
     padding: 0;
+    padding-left: 2.5px;
+    margin-right: -2.5px;
   }
 
   input:last-of-type {

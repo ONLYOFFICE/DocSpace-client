@@ -63,6 +63,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
       isLoading ||
       (disableIconClick && e && target.closest(".optionalBlock")) ||
       target.classList.contains("nav-thumb-vertical") ||
+      target.classList.contains("ScrollbarsCustom") ||
       target.classList.contains("backdrop-active")
     )
       return;

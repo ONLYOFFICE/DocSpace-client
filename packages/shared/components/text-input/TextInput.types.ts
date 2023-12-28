@@ -61,5 +61,5 @@ export interface TextInputProps {
   /** Indicates that component contain border */
   withBorder?: boolean;
   dir?: string;
-  inputmode?: string;
+  inputMode?: string;
 }

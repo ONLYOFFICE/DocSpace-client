@@ -55,7 +55,8 @@ const FilesSelectorInput = (props) => {
   };
 
   const onSelectFolder = (folderId, folders) => {
-    setSelectedFolder && setSelectedFolder(folderId);
+    const publicRoomInPath = folders.filter((folder) => folder.roomType === 6);
+    setSelectedFolder && setSelectedFolder(folderId, publicRoomInPath[0]);
 
     folders && setNewPath(folders);
   };

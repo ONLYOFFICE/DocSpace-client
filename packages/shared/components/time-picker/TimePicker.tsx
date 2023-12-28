@@ -180,7 +180,7 @@ const TimePicker = ({
         type={InputType.search}
         onContextMenu={preventDefaultContext}
         autoComplete="off"
-        inputmode="numeric"
+        inputMode="numeric"
         size={InputSize.base}
       />
       :
@@ -196,7 +196,7 @@ const TimePicker = ({
         type={InputType.search}
         onContextMenu={preventDefaultContext}
         autoComplete="off"
-        inputmode="numeric"
+        inputMode="numeric"
         size={InputSize.base}
       />
     </TimeInput>

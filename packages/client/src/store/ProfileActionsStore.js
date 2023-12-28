@@ -109,7 +109,6 @@ class ProfileActionsStore {
 
     if ((isAdmin || isOwner || isRoomAdmin) && !prefix) {
       this.selectedFolderStore.setSelectedFolder(null);
-      this.treeFoldersStore.setSelectedNode(["accounts"]);
     }
 
     const state = {

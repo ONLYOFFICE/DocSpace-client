@@ -955,3 +955,59 @@ export function getCSPSettings() {
     url: `/security/csp`,
   });
 }
+
+export function getLdapSettings() {
+  const options = {
+    method: "get",
+    url: "/settings/ldap",
+  };
+
+  return request(options);
+}
+
+export function saveLdapSettings(data) {
+  const options = {
+    method: "post",
+    url: "/settings/ldap",
+    data,
+  };
+
+  return request(options);
+}
+
+export function getLdapStatus() {
+  const options = {
+    method: "get",
+    url: "/settings/ldap/status",
+  };
+
+  return request(options);
+}
+
+export function getLdapDefaultSettings() {
+  const options = {
+    method: "get",
+    url: "/settings/ldap/default",
+  };
+
+  return request(options);
+}
+
+export function syncLdap() {
+  const options = {
+    method: "get",
+    url: "/settings/ldap/sync",
+  };
+
+  return request(options);
+}
+
+export function getCronLdap() {
+  const options = {
+    method: "get",
+    url: "/settings/ldap/cron",
+  };
+
+  return request(options);
+
+}

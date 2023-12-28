@@ -243,6 +243,10 @@ const PortalSettingsRoutes = {
       element: <Navigate to="integration/third-party-services" />,
     },
     {
+      path: "integration/ldap",
+      element: <Integration />,
+    },
+    {
       path: "integration/third-party-services",
       element: <Integration />,
     },

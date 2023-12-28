@@ -139,6 +139,10 @@ class SelectedFolderStore {
     this.tags = tags;
   };
 
+  setInRoom = (inRoom) => {
+    this.inRoom = inRoom;
+  };
+
   addDefaultLogoPaths = () => {
     const cachebreaker = new Date().getTime();
     this.logo = {

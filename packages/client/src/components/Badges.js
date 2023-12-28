@@ -189,7 +189,7 @@ const Badges = ({
 
   return fileExst ? (
     <div className="badges additional-badges file__badges">
-      {isPdf && hasDraft && (
+      {hasDraft && (
         <BadgeWrapper isTile={isTile}>
           <Badge
             noHover

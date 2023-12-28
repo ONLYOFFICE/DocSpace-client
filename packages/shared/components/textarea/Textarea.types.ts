@@ -54,6 +54,7 @@ export interface TextareaProps {
 
 export interface TextareaThemeProps extends TextareaProps {
   ref: React.LegacyRef<HTMLTextAreaElement>;
+  heightTextAreaProp?: number;
   $currentColorScheme?: TColorScheme;
   interfaceDirection?: string;
 }

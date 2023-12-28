@@ -33,7 +33,6 @@ const EmailInput = ({
 
   const checkEmail = React.useCallback(
     (v: string) => {
-      console.log(v);
       if (customValidate) {
         return customValidate(v);
       }
@@ -68,7 +67,7 @@ const EmailInput = ({
       onChange?.(e);
 
       const validEmail = checkEmail(e.target.value);
-      console.log(validEmail);
+
       setIsValidEmail(validEmail);
       setInputValue(e.target.value);
 

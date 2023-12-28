@@ -15,6 +15,8 @@ import { inject, observer } from "mobx-react";
 import ImageEditor from "@docspace/components/ImageEditor";
 import { FilesSelectorFilterTypes } from "@docspace/common/constants";
 
+import { isTablet, isMobile } from "@docspace/components/utils/device";
+
 import EmptyIframeContainer from "../sub-components/EmptyIframeContainer";
 import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
@@ -56,7 +58,7 @@ const Viewer = (props) => {
   const [widthDimension, setWidthDimension] = useState(dataDimensions[0]);
   const [heightDimension, setHeightDimension] = useState(dataDimensions[1]);
   const [width, setWidth] = useState("100");
-  const [height, setHeight] = useState("600");
+  const [height, setHeight] = useState(isTablet() ? "400" : isMobile() ? "206" : "770");
   const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
   const [showPreview, setShowPreview] = useState(window.innerWidth > showPreviewThreshold);
 

@@ -15,6 +15,8 @@ import SelectedItem from "@docspace/components/selected-item";
 import { objectToGetParams, loadScript } from "@docspace/common/utils";
 import { inject, observer } from "mobx-react";
 
+import { isTablet, isMobile } from "@docspace/components/utils/device";
+
 import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 import HelpButton from "@docspace/components/help-button";
 
@@ -73,10 +75,10 @@ const FileSelector = (props) => {
 
   const [fileOptions, setFileOptions] = useState([]);
 
-  const [widthDimension, setWidthDimension] = useState(dataDimensions[0]);
+  const [widthDimension, setWidthDimension] = useState(dataDimensions[1]);
   const [heightDimension, setHeightDimension] = useState(dataDimensions[1]);
-  const [width, setWidth] = useState("100");
-  const [height, setHeight] = useState("600");
+  const [width, setWidth] = useState("600");
+  const [height, setHeight] = useState(isTablet() ? "400" : isMobile() ? "206" : "778");
   const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
   const [showPreview, setShowPreview] = useState(window.innerWidth > showPreviewThreshold);
   const [selectedElementType, setSelectedElementType] = useState(elementDisplayOptions[0].value);

@@ -15,6 +15,8 @@ import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { objectToGetParams, loadScript } from "@docspace/common/utils";
 import { inject, observer } from "mobx-react";
 
+import { isTablet, isMobile } from "@docspace/components/utils/device";
+
 import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 import HelpButton from "@docspace/components/help-button";
 
@@ -97,7 +99,7 @@ const Manager = (props) => {
   const [widthDimension, setWidthDimension] = useState(dataDimensions[0]);
   const [heightDimension, setHeightDimension] = useState(dataDimensions[1]);
   const [width, setWidth] = useState("100");
-  const [height, setHeight] = useState("600");
+  const [height, setHeight] = useState(isTablet() ? "400" : isMobile() ? "206" : "600");
   const [withSubfolders, setWithSubfolders] = useState(true);
   const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
   const [showPreview, setShowPreview] = useState(window.innerWidth > showPreviewThreshold);
@@ -320,7 +322,7 @@ const Manager = (props) => {
   const codeBlock = `<div id="${frameId}">Fallback text</div>\n<script src="${scriptUrl}${params}"></script>`;
 
   const preview = (
-    <Frame width={width} height={width} targetId={frameId}>
+    <Frame width={width} height={height} targetId={frameId}>
       <Box id={frameId}></Box>
       <RectangleSkeleton height={height} borderRadius="6px" />
     </Frame>

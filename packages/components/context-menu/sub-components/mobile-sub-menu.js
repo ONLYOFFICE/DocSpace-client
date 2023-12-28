@@ -195,7 +195,7 @@ const MobileSubMenu = (props) => {
         height + 61 > viewport.height - 64 ? viewport.height - 125 : height + 5;
 
       return (
-        <Scrollbar style={{ height: listHeight }} stype="mediumBlack">
+        <Scrollbar style={{ height: listHeight }}>
           {model.map((item, index) => {
             if (item.disabled) return null;
             return renderItem(item, index);

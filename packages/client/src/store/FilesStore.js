@@ -9,6 +9,7 @@ import {
   RoomsType,
   RoomsTypeValues,
   RoomsProviderType,
+  ShareAccessRights,
 } from "@docspace/common/constants";
 
 import { combineUrl } from "@docspace/common/utils";
@@ -1483,11 +1484,16 @@ class FilesStore {
               (data.current.rootFolderType === Rooms ||
                 data.current.rootFolderType === Archive);
 
+            let shared, canCopyPublicLink;
             if (idx === 1) {
               let room = data.current;
 
               if (!isCurrentFolder) {
                 room = await api.files.getFolderInfo(folderId);
+                shared = room.shared;
+                canCopyPublicLink =
+                  room.access === ShareAccessRights.RoomManager ||
+                  room.access === ShareAccessRights.None;
               }
 
               const { mute } = room;
@@ -1503,6 +1509,8 @@ class FilesStore {
               isRoom: !!roomType,
               roomType,
               isRootRoom,
+              shared,
+              canCopyPublicLink,
             };
           })
         ).then((res) => {
@@ -1513,8 +1521,12 @@ class FilesStore {
             .reverse();
         });
 
+        const isRoom = !!data.current.roomType;
+        const inRoom = data.current.inRoom;
+
         this.selectedFolderStore.setSelectedFolder({
           folders: data.folders,
+          inRoom: inRoom ? inRoom : isRoom ? true : false,
           ...data.current,
           pathParts: data.pathParts,
           navigationPath,
@@ -3121,6 +3133,10 @@ class FilesStore {
 
       const isForm = fileExst === ".oform";
 
+      const canCopyPublicLink =
+        access === ShareAccessRights.RoomManager ||
+        access === ShareAccessRights.None;
+
       return {
         access,
         daysRemaining: autoDelete && getDaysRemaining(autoDelete),
@@ -3189,6 +3205,7 @@ class FilesStore {
         type,
         hasDraft,
         isForm,
+        canCopyPublicLink,
       };
     });
 
@@ -3971,6 +3988,18 @@ class FilesStore {
     if (roomIndex !== -1) {
       this.folders[roomIndex].shared = shared;
     }
+
+    const navigationPath = [...this.selectedFolderStore.navigationPath];
+
+    if (this.selectedFolderStore.id === roomId) {
+      this.selectedFolderStore.setShared(shared);
+      return;
+    }
+
+    const pathPartsRoomIndex = navigationPath.findIndex((f) => f.id === roomId);
+    if (pathPartsRoomIndex === -1) return;
+    navigationPath[pathPartsRoomIndex].shared = shared;
+    this.selectedFolderStore.setPathParts(navigationPath);
   };
 
   get isFiltered() {

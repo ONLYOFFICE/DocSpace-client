@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import moment from "moment";
+import moment from "moment-timezone";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
@@ -42,11 +42,17 @@ const StatusBar = (props) => {
     return (
       <SelectedItem
         label={
-          moment(historyFilters.deliveryDate).format("DD MMM YYYY") +
+          moment(historyFilters.deliveryDate)
+            .format("DD MMM YYYY")
+            .tz(window.timezone || "") +
           " " +
-          moment(historyFilters.deliveryFrom).format("HH:mm") +
+          moment(historyFilters.deliveryFrom)
+            .format("HH:mm")
+            .tz(window.timezone || "") +
           " - " +
-          moment(historyFilters.deliveryTo).format("HH:mm")
+          moment(historyFilters.deliveryTo)
+            .format("HH:mm")
+            .tz(window.timezone || "")
         }
         onClose={clearDate}
         onClick={clearDate}

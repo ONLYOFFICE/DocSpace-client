@@ -1,3 +1,4 @@
+import { ShareAccessRights } from "@docspace/common/constants";
 import { makeAutoObservable } from "mobx";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
@@ -76,6 +77,13 @@ class SelectedFolderStore {
     return this.pathParts && this.pathParts.length <= 1;
   }
 
+  get canCopyPublicLink() {
+    return (
+      this.access === ShareAccessRights.RoomManager ||
+      this.access === ShareAccessRights.None
+    );
+  }
+
   toDefault = () => {
     this.folders = null;
     this.parentId = null;
@@ -118,6 +126,14 @@ class SelectedFolderStore {
 
   setCreatedBy = (createdBy) => {
     this.createdBy = createdBy;
+  };
+
+  setNavigationPath = (navigationPath) => {
+    this.navigationPath = navigationPath;
+  };
+
+  setShared = (shared) => {
+    this.shared = shared;
   };
 
   updateEditedSelectedRoom = (title = this.title, tags = this.tags) => {

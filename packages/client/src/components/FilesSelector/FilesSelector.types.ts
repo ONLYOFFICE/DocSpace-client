@@ -71,6 +71,7 @@ export type useRootHelperProps = {
   onSetBaseFolderPath?: (
     value: number | string | undefined | BreadCrumb[]
   ) => void;
+  isUserOnly?: boolean;
 };
 
 export type useRoomsHelperProps = {
@@ -90,6 +91,7 @@ export type useRoomsHelperProps = {
 };
 
 export type useFilesHelpersProps = {
+  roomsFolderId?: number;
   setBreadCrumbs: (items: BreadCrumb[]) => void;
   setIsBreadCrumbsLoading: (value: boolean) => void;
   setIsSelectedParentFolder: (value: boolean) => void;
@@ -129,6 +131,7 @@ export type FilesSelectorProps = {
   isThirdParty: boolean;
   rootThirdPartyId?: string;
   isRoomsOnly: boolean;
+  isUserOnly: boolean;
   isRoomBackup: boolean;
   isEditorDialog: boolean;
   setMoveToPublicRoomVisible: (visible: boolean, operationData: object) => void;
@@ -217,5 +220,8 @@ export type FilesSelectorProps = {
 
   embedded: boolean;
   withHeader: boolean;
+  withCancelButton: boolean;
   settings: any;
+
+  roomsFolderId?: number;
 };

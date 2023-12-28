@@ -1,8 +1,8 @@
 import { makeAutoObservable } from "mobx";
 
-import { getUserById } from "@docspace/common/api/people";
-import { combineUrl, getUserRole } from "@docspace/common/utils";
-import { FolderType } from "@docspace/common/constants";
+import { getUserById } from "../api/people";
+import { combineUrl, getUserRole } from "../utils";
+import { FolderType } from "../constants";
 import config from "PACKAGE_FILE";
 import Filter from "../api/people/filter";
 import { getRoomInfo } from "../api/rooms";
@@ -221,7 +221,8 @@ class InfoPanelStore {
   getInfoPanelItemIcon = (item, size) => {
     return item.isRoom || !!item.roomType
       ? item.rootFolderType === FolderType.Archive
-        ? this.settingsStore.getIcon(
+        ? item.logo && item.logo.medium
+        : this.settingsStore.getIcon(
             size,
             null,
             null,
@@ -229,7 +230,6 @@ class InfoPanelStore {
             item.roomType,
             true
           )
-        : item.logo && item.logo.medium
         ? item.logo.medium
         : item.icon
         ? item.icon
@@ -245,7 +245,7 @@ class InfoPanelStore {
 
   openUser = async (user, navigate) => {
     if (user.id === this.authStore.userStore.user.id) {
-      this.openSelfProfile(navigate);
+      this.openSelfProfile();
       return;
     }
 
@@ -253,21 +253,11 @@ class InfoPanelStore {
     this.openAccountsWithSelectedUser(fetchedUser, navigate);
   };
 
-  openSelfProfile = (navigate) => {
-    const path = [
-      window.DocSpaceConfig?.proxy?.url,
-      config.homepage,
-      "/profile",
-    ];
-    this.selectedFolderStore.setSelectedFolder(null);
-    this.treeFoldersStore.setSelectedNode(["accounts", "filter"]);
-    navigate(combineUrl(...path));
+  openSelfProfile = () => {
+    this.peopleStore.profileActionsStore.onProfileClick();
   };
 
   openAccountsWithSelectedUser = async (user, navigate) => {
-    const { getUsersList } = this.peopleStore.usersStore;
-    const { setSelection } = this.peopleStore.selectionStore;
-
     const path = [
       window.DocSpaceConfig?.proxy?.url,
       config.homepage,
@@ -277,13 +267,12 @@ class InfoPanelStore {
     const newFilter = Filter.getDefault();
     newFilter.page = 0;
     newFilter.search = user.email;
+    newFilter.selectUserId = user.id;
     path.push(`filter?${newFilter.toUrlParams()}`);
-    const userList = await getUsersList(newFilter);
 
-    navigate(combineUrl(...path));
     this.selectedFolderStore.setSelectedFolder(null);
     this.treeFoldersStore.setSelectedNode(["accounts"]);
-    setSelection([user]);
+    navigate(combineUrl(...path), { state: { user } });
   };
 
   fetchUser = async (userId) => {

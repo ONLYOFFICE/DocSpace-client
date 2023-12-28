@@ -15,7 +15,8 @@ const StyledHideArticleMenuButton = styled.div`
   position: ${(props) => (props.isVirtualKeyboardOpen ? "absolute" : "fixed")};
   height: 44px;
   z-index: 209;
-  bottom: 89px;
+  bottom: ${(props) => (props.hideProfileBlock ? "16px" : "89px")};
+
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
@@ -57,7 +58,7 @@ const StyledHideArticleMenuButton = styled.div`
           : css`
               margin-left: 8px;
             `}
-      color: ${({ currentColorScheme }) => currentColorScheme.main.accent};
+      color: ${({ currentColorScheme }) => currentColorScheme?.main?.accent};
     }
 
     @media ${tablet} {
@@ -92,7 +93,7 @@ const StyledHideArticleMenuButton = styled.div`
       `}
     svg {
       path {
-        fill: ${({ currentColorScheme }) => currentColorScheme.main.accent};
+        fill: ${({ currentColorScheme }) => currentColorScheme?.main?.accent};
       }
     }
   }
@@ -113,6 +114,7 @@ const HideArticleMenuButton = ({
   toggleShowText,
   currentColorScheme,
   isVirtualKeyboardOpen,
+  hideProfileBlock,
 }) => {
   const { t } = useTranslation("Common");
 
@@ -122,6 +124,7 @@ const HideArticleMenuButton = ({
       onClick={toggleShowText}
       currentColorScheme={currentColorScheme}
       isVirtualKeyboardOpen={isVirtualKeyboardOpen}
+      hideProfileBlock={hideProfileBlock}
     >
       {showText ? (
         <div

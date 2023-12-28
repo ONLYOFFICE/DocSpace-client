@@ -10,7 +10,7 @@ const TimeInput = styled.div`
   width: 57px;
   height: 32px;
   box-sizing: border-box;
-  padding: 0px 8px;
+  padding: 0px 6px;
   direction: ltr;
 
   border: 1px solid #d0d5da;
@@ -37,10 +37,8 @@ const TimeInput = styled.div`
 
   input {
     padding: 0;
-  }
-
-  input:last-of-type {
-    text-align: end;
+    padding-left: 2.5px;
+    margin-right: -2.5px;
   }
 
   input[type="search"]::-webkit-search-decoration,
@@ -222,8 +220,8 @@ const TimePicker = ({
         onFocus={focusInput}
         type="search"
         onContextMenu={preventDefaultContext}
-        autocomplete="off"
-        inputmode="numeric"
+        autoComplete="off"
+        inputMode="numeric"
       />
       :
       <TextInput
@@ -237,8 +235,8 @@ const TimePicker = ({
         onFocus={focusInput}
         type="search"
         onContextMenu={preventDefaultContext}
-        autocomplete="off"
-        inputmode="numeric"
+        autoComplete="off"
+        inputMode="numeric"
       />
     </TimeInput>
   );

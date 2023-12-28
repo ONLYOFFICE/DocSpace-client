@@ -15,6 +15,7 @@ import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettings
 import { size } from "@docspace/components/utils/device";
 import { inject, observer } from "mobx-react";
 import Link from "@docspace/components/link";
+import { DeviceType } from "@docspace/common/constants";
 
 const AccessPortal = (props) => {
   const {
@@ -26,21 +27,12 @@ const AccessPortal = (props) => {
     administratorMessageSettingsUrl,
     lifetimeSettingsUrl,
     ipSettingsUrl,
+    isMobileView,
   } = props;
-  const [isMobileView, setIsMobileView] = useState(false);
 
   useEffect(() => {
     setDocumentTitle(t("PortalAccess"));
-    checkWidth();
-    window.addEventListener("resize", checkWidth);
-    return () => window.removeEventListener("resize", checkWidth);
   }, []);
-
-  const checkWidth = () => {
-    window.innerWidth <= size.mobile
-      ? setIsMobileView(true)
-      : setIsMobileView(false);
-  };
 
   if (isMobileView) return <MobileView />;
   return (
@@ -209,7 +201,11 @@ export default inject(({ auth }) => {
     administratorMessageSettingsUrl,
     lifetimeSettingsUrl,
     ipSettingsUrl,
+    currentDeviceType,
   } = auth.settingsStore;
+
+  const isMobileView = currentDeviceType === DeviceType.mobile;
+
   return {
     currentColorScheme,
     passwordStrengthSettingsUrl,
@@ -218,5 +214,6 @@ export default inject(({ auth }) => {
     administratorMessageSettingsUrl,
     lifetimeSettingsUrl,
     ipSettingsUrl,
+    isMobileView,
   };
 })(withTranslation(["Settings", "Profile"])(observer(AccessPortal)));

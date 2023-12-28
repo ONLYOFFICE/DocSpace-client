@@ -11,7 +11,7 @@ import Badge from "@docspace/components/badge";
 import { Base } from "@docspace/components/themes";
 import HelpButton from "@docspace/components/help-button";
 import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
-import { isTablet, isDesktop } from "@docspace/components/utils/device";
+import { isTablet, isDesktop, size } from "@docspace/components/utils/device";
 import { classNames } from "@docspace/components/utils/classNames";
 
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
@@ -24,6 +24,8 @@ import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.reat.svg?url";
 import Refresh12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/refresh.react.svg?url";
 import Mute12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/mute.react.svg?url";
 import Mute16ReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
+
+import { isMobile as isMobileDevice } from "react-device-detect";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -115,7 +117,10 @@ const Badges = ({
 
   const contentNewItems = newItems > 999 ? "999+" : newItems;
 
-  const tabletViewBadge = !isTile && isTablet();
+  const isLargeTabletDevice =
+    isMobileDevice && window.innerWidth >= size.desktop;
+
+  const tabletViewBadge = !isTile && (isTablet() || isLargeTabletDevice);
   const desktopView = !isTile && isDesktop();
 
   const sizeBadge = isTile || tabletViewBadge ? "medium" : "small";

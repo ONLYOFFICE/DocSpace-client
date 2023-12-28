@@ -159,7 +159,7 @@
   "RestoreBackupWarningText": "Während der Wiederherstellung wird DocSpace nicht verfügbar sein. Nach Abschluss der Wiederherstellung gehen alle Änderungen verloren, die nach dem Datum des ausgewählten Wiederherstellungspunktes vorgenommen wurden.",
   "RoomsModule": "Ersatzraum",
   "RoomsModuleDescription": "Sie können einen neuen Raum speziell für die Sicherung erstellen, einen der vorhandenen Räume wählen oder die Kopie in ihrem {{roomName}}-Raum speichern.",
-  "SaveToApply": "Klicken Sie auf die Schaltfläche <strong>Speichern</strong> am Ende der Seite, um die Einstellungen zu übernehmen.\n",
+  "SaveToApply": "Klicken Sie auf die Schaltfläche <strong>Speichern</strong> am Ende der Seite, um die Einstellungen zu übernehmen.",
   "SelectFileInGZFormat": "Die Datei im GZ-Format auswählen",
   "SendNotificationAboutRestoring": "Benutzer über Wiederherstellung des Bereichs benachrichtigen",
   "ServerSideEncryptionMethod": "Methode der Server-seitigen Verschlüsselung",

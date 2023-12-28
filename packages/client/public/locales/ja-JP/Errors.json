@@ -1,4 +1,5 @@
 {
+  "AccessDenied": "アクセス拒否",
   "Error401Text": "申し訳ありませんが、このリソースは現在アクセスできません。",
   "Error403Text": "申し訳ありませんが、アクセスが拒否されました。",
   "Error404Text": "申し訳ありませんが、リソースが見つかりません。",
@@ -8,5 +9,6 @@
   "ErrorUnavailableText": "DocSpaceは現在、ご利用いただけません",
   "InvalidLink": "無効なリンク",
   "LinkDoesNotExist": "開こうとしているリンクは存在しません。",
-  "LinkHasExpired": "リンクの有効期限が切れています。"
+  "LinkHasExpired": "リンクの有効期限が切れています。",
+  "PortalRestriction": "現在のIPアドレスは、このDocSpaceへのアクセスを許可するIPアドレスリストに含まれていません。VPNが有効になっている場合はオフにしてページを再読み込みするか、別のIPアドレスを使ってログインしてください。"
 }

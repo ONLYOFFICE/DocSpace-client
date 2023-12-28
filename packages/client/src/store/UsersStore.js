@@ -136,7 +136,7 @@ class UsersStore {
       throw new Error(e);
     }
 
-    await this.getUsersList(filter);
+    await this.getUsersList(filter, true);
 
     if (users && !this.needResetUserSelection) {
       this.peopleStore.selectionStore.updateSelection(this.peopleList);

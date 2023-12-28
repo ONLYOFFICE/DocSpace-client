@@ -113,9 +113,7 @@ function VirtualList({
     <>
       {isNoFixedHeightOptions ? (
         //@ts-ignore
-        <Scrollbar style={{ height: maxHeight }} stype="mediumBlack">
-          {cleanChildren}
-        </Scrollbar>
+        <Scrollbar style={{ height: maxHeight }}>{cleanChildren}</Scrollbar>
       ) : (
         <VariableSizeList
           ref={ref}

@@ -29,11 +29,10 @@ const DeepLink = ({
   userEmail,
   setIsShowDeepLink,
   currentColorScheme,
-  deepLinkUrl,
   theme,
   currentDeviceType,
+  deepLinkConfig,
 }) => {
-  console.log("currentDeviceType", currentDeviceType);
   const { t } = useTranslation(["DeepLink", "Common"]);
 
   const [isRemember, setIsRemember] = useState(false);
@@ -43,11 +42,11 @@ const DeepLink = ({
 
   const onOpenAppClick = () => {
     if (isRemember) localStorage.setItem("defaultOpenDocument", "app");
-    window.location = getDeepLink(
+    getDeepLink(
       window.location.origin,
       userEmail,
       fileInfo,
-      deepLinkUrl,
+      deepLinkConfig,
       window.location.href
     );
   };

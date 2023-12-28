@@ -17,6 +17,10 @@
       "path": "packages/editor"
     },
     {
+      "name": "🗂 @docspace/management",
+      "path": "packages/management"
+    },
+    {
       "name": "📦 @docspace/common",
       "path": "packages/common"
     },
@@ -37,7 +41,8 @@
       "🔑 @docspace/login",
       "🚀 @docspace/client",
       "📄 @docspace/editor",
-      "📦 @docspace/common"
+      "📦 @docspace/common",
+      "🗂 @docspace/management"
     ],
     "[javascript]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"

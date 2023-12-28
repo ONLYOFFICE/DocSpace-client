@@ -16,15 +16,13 @@ export class CustomScrollbars extends React.Component {
   };
 
   render() {
-    const { onScroll, forwardedRef, style, children, className, stype } =
-      this.props;
+    const { onScroll, forwardedRef, style, children, className } = this.props;
     //console.log("CustomScrollbars", this.props);
     return (
       <Scrollbar
         ref={(scrollbarsRef) => this.refSetter(scrollbarsRef, forwardedRef)}
         style={{ ...style, overflow: "hidden" }}
         onScroll={onScroll}
-        stype={stype}
         className={className}
       >
         {children}
@@ -33,10 +31,6 @@ export class CustomScrollbars extends React.Component {
     );
   }
 }
-
-CustomScrollbars.defaultProps = {
-  stype: "mediumBlack",
-};
 
 const CustomScrollbarsVirtualList = React.forwardRef((props, ref) => (
   <CustomScrollbars {...props} forwardedRef={ref} />

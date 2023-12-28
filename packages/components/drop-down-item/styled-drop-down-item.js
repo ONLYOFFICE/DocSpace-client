@@ -24,6 +24,14 @@ const disabledAndHeaderStyle = css`
   }
 `;
 
+const WrapperBadge = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-inline-start: auto;
+`;
+
 const WrapperToggle = styled.div`
   display: flex;
   align-items: center;
@@ -246,4 +254,4 @@ const IconWrapper = styled.div`
 `;
 IconWrapper.defaultProps = { theme: Base };
 
-export { StyledDropdownItem, IconWrapper, WrapperToggle };
+export { StyledDropdownItem, IconWrapper, WrapperToggle, WrapperBadge };

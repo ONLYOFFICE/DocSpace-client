@@ -14,6 +14,7 @@ import SSOLoader from "./sub-components/ssoLoader";
 
 import MobileView from "./MobileView";
 import { useIsMobileView } from "../../../utils/useIsMobileView";
+import { DeviceType } from "@docspace/common/constants";
 
 const SERVICE_PROVIDER_SETTINGS = "serviceProviderSettings";
 const SP_METADATA = "spMetadata";
@@ -26,16 +27,17 @@ const SingleSignOn = (props) => {
     isSSOAvailable,
     setDocumentTitle,
     isInit,
+    currentDeviceType,
   } = props;
   const { t } = useTranslation(["SingleSignOn", "Settings"]);
-  const isMobileView = useIsMobileView();
+  const isMobileView = currentDeviceType === DeviceType.mobile;
 
   useEffect(() => {
-    isSSOAvailable && init();
+    isSSOAvailable && !isMobileView && init();
     setDocumentTitle(t("Settings:SingleSignOn"));
   }, []);
 
-  if (!isInit && isSSOAvailable) return <SSOLoader />;
+  if (!isInit && !isMobileView && isSSOAvailable) return <SSOLoader />;
 
   return (
     <StyledSsoPage
@@ -79,6 +81,7 @@ const SingleSignOn = (props) => {
 export default inject(({ auth, ssoStore }) => {
   const { currentQuotaStore, setDocumentTitle } = auth;
   const { isSSOAvailable } = currentQuotaStore;
+  const { currentDeviceType } = auth.settingsStore;
 
   const { init, serviceProviderSettings, spMetadata, isInit } = ssoStore;
 
@@ -89,5 +92,6 @@ export default inject(({ auth, ssoStore }) => {
     isSSOAvailable,
     setDocumentTitle,
     isInit,
+    currentDeviceType,
   };
 })(observer(SingleSignOn));

@@ -757,6 +757,8 @@ class FilesActionStore {
         operationId,
       });
 
+      const id = Array.isArray(itemId) ? itemId : [itemId];
+
       try {
         await this.deleteItemOperation(
           isFile,
@@ -765,12 +767,7 @@ class FilesActionStore {
           isRoom,
           operationId
         );
-
-        const id = Array.isArray(itemId) ? itemId : [itemId];
-
-        clearActiveOperations(isFile && id, !isFile && id);
       } catch (err) {
-        clearActiveOperations(isFile && [itemId], !isFile && [itemId]);
         setSecondaryProgressBarData({
           visible: true,
           alert: true,
@@ -778,6 +775,11 @@ class FilesActionStore {
         });
         setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
         return toastr.error(err.message ? err.message : err);
+      } finally {
+        setTimeout(
+          () => clearActiveOperations(isFile && id, !isFile && id),
+          TIMEOUT
+        );
       }
     }
   };
@@ -1701,6 +1703,8 @@ class FilesActionStore {
       operationId,
     });
 
+    const id = Array.isArray(itemId) ? itemId : [itemId];
+
     try {
       this.setGroupMenuBlocked(true);
       await this.deleteItemOperation(
@@ -1710,13 +1714,9 @@ class FilesActionStore {
         true,
         operationId
       );
-
-      const id = Array.isArray(itemId) ? itemId : [itemId];
-
-      clearActiveOperations(null, id);
     } catch (err) {
       console.log(err);
-      clearActiveOperations(null, [itemId]);
+
       setSecondaryProgressBarData({
         visible: true,
         alert: true,
@@ -1726,6 +1726,7 @@ class FilesActionStore {
       return toastr.error(err.message ? err.message : err);
     } finally {
       this.setGroupMenuBlocked(false);
+      setTimeout(() => clearActiveOperations(null, id), TIMEOUT);
     }
   };
 

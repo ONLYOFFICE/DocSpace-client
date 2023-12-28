@@ -1,9 +1,14 @@
 {
+  "ActionCannotBeUndone": "Izbrani onemogočeni uporabniki bodo odstranjeni iz DocSpace. Tega dejanja ni mogoče razveljaviti.",
+  "CannotReassignFiles": "Če izbrišete več uporabnikov hkrati, ne morete dodeliti njihovih datotek drugim uporabnikom.",
   "DeleteGroupUsersSuccessMessage": "Uporabniki so bili uspešno izbrisani.",
   "DeleteMyDocumentsUser": "Vse osebne datoteke in mape v razdelku Moji dokumenti tega uporabnika bodo trajno izbrisane.",
   "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Sobe, ki jih je ustvaril ta uporabnik, in dokumenti, shranjeni v teh sobah, bodo samodejno dodeljeni skrbniku, ki izvede brisanje: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Podatke znova dodelite ročno, da izberete drugega ciljnega uporabnika za ponovno dodelitev.",
   "DeleteUser": "Izbriši uporabnika",
   "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> bo izbrisan. Tega dejanja ni mogoče razveljaviti.",
+  "DeletingUsers": "Brisanje uporabnikov",
+  "PleaseNote": "Prosimo, upoštevajte:",
   "ReassignDataToAnotherUser": "Ponovno dodelite podatke drugemu uporabniku",
-  "SuccessfullyDeleteUserInfoMessage": "Uporabnik je bil uspešno izbrisan"
+  "SuccessfullyDeleteUserInfoMessage": "Uporabnik je bil uspešno izbrisan",
+  "ToBeAbleToReassignData": "Če želite znova dodeliti podatke, izbrišite le enega uporabnika naenkrat."
 }

@@ -13,6 +13,7 @@ import TabContainer from "@docspace/components/tabs-container";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { mobile, tablet } from "@docspace/components/utils/device";
 import { objectToGetParams, loadScript } from "@docspace/common/utils";
+import { RoomsType } from "@docspace/common/constants";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 
@@ -246,7 +247,13 @@ const FilesSelectorInputWrapper = styled.div`
 `;
 
 const PortalIntegration = (props) => {
-  const { t, setDocumentTitle, currentColorScheme, sdkLink } = props;
+  const {
+    t,
+    setDocumentTitle,
+    currentColorScheme,
+    sdkLink,
+    fetchExternalLinks,
+  } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
@@ -277,14 +284,14 @@ const PortalIntegration = (props) => {
   const [heightDimension, setHeightDimension] = useState(dataDimensions[1]);
   const [width, setWidth] = useState("100");
   const [height, setHeight] = useState("600");
-  const [withSubfolders, setWithSubfolders] = useState(true);
+  const [withSubfolders, setWithSubfolders] = useState(false);
   const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
   const [showPreview, setShowPreview] = useState(
     window.innerWidth > showPreviewThreshold
   );
+  const [sharedLinks, setSharedLinks] = useState(null);
 
   const [config, setConfig] = useState({
-    hash: `${API_JS_HASH}`,
     width: `${width}${widthDimension.label}`,
     height: `${height}${heightDimension.label}`,
     frameId: "ds-frame",
@@ -342,9 +349,40 @@ const PortalIntegration = (props) => {
     setHeight(e.target.value);
   };
 
-  const onChangeFolderId = (id) => {
+  const onChangeFolderId = async (id, publicInPath) => {
+    let newConfig = { id, requestToken: null, rootPath: "/rooms/shared/" };
+
+    if (!!publicInPath) {
+      const links = await fetchExternalLinks(publicInPath.id);
+
+      if (links.length > 1) {
+        const linksOptions = links.map((link) => {
+          const { id, title, requestToken } = link.sharedTo;
+
+          return {
+            key: id,
+            label: title,
+            requestToken: requestToken,
+          };
+        });
+
+        setSharedLinks(linksOptions);
+      }
+
+      newConfig.requestToken = links[0].sharedTo?.requestToken;
+      newConfig.rootPath = "/rooms/share";
+    } else {
+      setSharedLinks(null);
+    }
+
     setConfig((config) => {
-      return { ...config, id };
+      return { ...config, ...newConfig };
+    });
+  };
+
+  const onChangeSharedLink = (link) => {
+    setConfig((config) => {
+      return { ...config, requestToken: link.requestToken };
     });
   };
 
@@ -458,7 +496,7 @@ const PortalIntegration = (props) => {
   const preview = (
     <Frame width={width} height={width} targetId={frameId}>
       <Box id={frameId}></Box>
-      <RectangleSkeleton height={height} borderRadius="6px" />
+      <RectangleSkeleton width={width} height={height} borderRadius="6px" />
     </Frame>
   );
 
@@ -604,6 +642,33 @@ const PortalIntegration = (props) => {
               <FilesSelectorInput onSelectFolder={onChangeFolderId} isSelect />
             </FilesSelectorInputWrapper>
           </ControlsGroup>
+          {sharedLinks && (
+            <ControlsGroup>
+              <LabelGroup>
+                <Label
+                  className="label"
+                  text={t("SharingPanel:ExternalLink")}
+                />
+                <HelpButton
+                  offsetRight={0}
+                  size={12}
+                  tooltipContent={
+                    <Text fontSize="12px">
+                      {t("CreateEditRoomDialog:PublicRoomDescription")}
+                    </Text>
+                  }
+                />
+              </LabelGroup>
+              <ComboBox
+                scaled={true}
+                onSelect={onChangeSharedLink}
+                options={sharedLinks}
+                selectedOption={sharedLinks[0]}
+                displaySelectedOption
+                directionY="bottom"
+              />
+            </ControlsGroup>
+          )}
           <CategorySubHeader>{t("AdvancedDisplay")}</CategorySubHeader>
           <ControlsGroup>
             <Label className="label" text={t("SearchTerm")} />
@@ -703,18 +768,25 @@ const PortalIntegration = (props) => {
   );
 };
 
-export default inject(({ setup, auth }) => {
+export default inject(({ setup, auth, publicRoomStore }) => {
   const { settingsStore, setDocumentTitle } = auth;
   const { theme, currentColorScheme, sdkLink } = settingsStore;
+  const { fetchExternalLinks } = publicRoomStore;
 
   return {
     theme,
     setDocumentTitle,
     currentColorScheme,
     sdkLink,
+    fetchExternalLinks,
   };
 })(
-  withTranslation(["JavascriptSdk", "Files", "EmbeddingPanel", "Common"])(
-    observer(PortalIntegration)
-  )
+  withTranslation([
+    "JavascriptSdk",
+    "Files",
+    "EmbeddingPanel",
+    "CreateEditRoomDialog",
+    "SharingPanel",
+    "Common",
+  ])(observer(PortalIntegration))
 );

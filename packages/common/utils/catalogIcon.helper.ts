@@ -1,4 +1,4 @@
-import { FolderType, PageType } from "@docspace/common/constants";
+import { FolderType, PageType } from "../constants";
 
 import { isMobile, isTablet } from "@docspace/components/utils/device";
 

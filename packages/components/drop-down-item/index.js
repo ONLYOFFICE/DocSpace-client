@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { ReactSVG } from "react-svg";
+import { useTranslation } from "react-i18next";
 
 import RightArrowReactSvgUrl from "PUBLIC_DIR/images/right.arrow.react.svg?url";
 import ArrowLeftReactUrl from "PUBLIC_DIR/images/arrow-left.react.svg?url";
@@ -9,8 +10,10 @@ import {
   StyledDropdownItem,
   IconWrapper,
   WrapperToggle,
+  WrapperBadge,
 } from "./styled-drop-down-item";
 import ToggleButton from "../toggle-button";
+import Badge from "../badge";
 
 const DropDownItem = (props) => {
   const {
@@ -32,7 +35,10 @@ const DropDownItem = (props) => {
     height,
     isSelected,
     isActiveDescendant,
+    isBeta,
   } = props;
+
+  const { t } = useTranslation(["Settings"]);
 
   const { withToggle, checked, onClick, onClickSelectedItem, ...rest } = props;
 
@@ -109,6 +115,19 @@ const DropDownItem = (props) => {
         <WrapperToggle onClick={stopPropagation}>
           <ToggleButton isChecked={checked} onChange={onChange} noAnimation />
         </WrapperToggle>
+      )}
+
+      {isBeta && (
+        <WrapperBadge>
+          <Badge
+            noHover
+            fontSize="9px"
+            isHovered={false}
+            borderRadius="50px"
+            backgroundColor="#533ED1"
+            label={t("Settings:BetaLabel")}
+          />
+        </WrapperBadge>
       )}
     </StyledDropdownItem>
   );

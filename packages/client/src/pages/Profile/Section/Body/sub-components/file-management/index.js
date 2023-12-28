@@ -12,14 +12,12 @@ import StyledWrapper from "./styled-file-management";
 const FileManagement = ({
   storeOriginalFiles,
   confirmDelete,
-  updateIfExist,
   forceSave,
 
   isVisitor,
   //favoritesSection,
   //recentSection,
 
-  setUpdateIfExist,
   setStoreOriginal,
 
   setConfirmDelete,
@@ -50,10 +48,6 @@ const FileManagement = ({
   const onChangeDeleteConfirm = React.useCallback(() => {
     setConfirmDelete(!confirmDelete, "confirmDelete");
   }, [setConfirmDelete, confirmDelete]);
-
-  const onChangeUpdateIfExist = React.useCallback(() => {
-    setUpdateIfExist(!updateIfExist, "updateIfExist");
-  }, [setUpdateIfExist, updateIfExist]);
 
   const onChangeForceSave = React.useCallback(() => {
     setForceSave(!forceSave);
@@ -133,16 +127,6 @@ const FileManagement = ({
             <Text>{t("DisplayNotification")}</Text>
           </div>
         )}
-        {!isVisitor && (
-          <div className="toggle-btn-wrapper">
-            <ToggleButton
-              className="toggle-btn"
-              onChange={onChangeUpdateIfExist}
-              isChecked={updateIfExist}
-            />
-            <Text>{t("UpdateOrCreate")}</Text>
-          </div>
-        )}
       </Box>
 
       {/* <Box className="settings-section">
@@ -204,10 +188,8 @@ export default inject(({ auth, settingsStore, treeFoldersStore }) => {
   const {
     storeOriginalFiles,
     confirmDelete,
-    updateIfExist,
     forcesave,
 
-    setUpdateIfExist,
     setStoreOriginal,
 
     setConfirmDelete,
@@ -231,7 +213,6 @@ export default inject(({ auth, settingsStore, treeFoldersStore }) => {
   return {
     storeOriginalFiles,
     confirmDelete,
-    updateIfExist,
     forceSave: forcesave,
 
     myFolderId,
@@ -240,7 +221,6 @@ export default inject(({ auth, settingsStore, treeFoldersStore }) => {
     favoritesSection,
     recentSection,
 
-    setUpdateIfExist,
     setStoreOriginal,
 
     setConfirmDelete,

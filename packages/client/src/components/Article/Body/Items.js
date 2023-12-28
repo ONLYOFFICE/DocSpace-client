@@ -104,7 +104,14 @@ const Item = ({
   const onClickAction = React.useCallback(
     (folderId) => {
       setBufferSelection(null);
-      onClick && onClick(folderId, item.title, item.rootFolderType);
+
+      onClick &&
+        onClick(
+          folderId,
+          item.title,
+          item.rootFolderType,
+          item.security.Create
+        );
     },
     [onClick, item.title, item.rootFolderType]
   );
@@ -139,7 +146,7 @@ const Item = ({
         labelBadge={labelBadge}
         onClickBadge={onBadgeClick}
         iconBadge={iconBadge}
-        badgeTitle={t("RecycleBinAction")}
+        badgeTitle={labelBadge ? "" : t("RecycleBinAction")}
       />
     </StyledDragAndDrop>
   );

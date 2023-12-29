@@ -216,7 +216,7 @@ class ThirdPartyServices extends React.Component {
               label={t("Submit")}
               primary
               size="normal"
-              minwidth="138px"
+              minWidth="138px"
               onClick={submitRequest}
               scale={isMobile()}
             />

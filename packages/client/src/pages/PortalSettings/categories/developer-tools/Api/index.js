@@ -48,7 +48,7 @@ const Api = (props) => {
             label={t("Common:LearnMore")}
             primary
             size="normal"
-            minwidth="135px"
+            minWidth="135px"
             onClick={() => window.open(apiBasicLink, "_blank")}
             scale={currentDeviceType === DeviceType.mobile}
           />

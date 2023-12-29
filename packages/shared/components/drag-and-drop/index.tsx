@@ -1,4 +1,4 @@
 import getFilesFromEvent from "./get-files-from-event";
+import { DragAndDrop } from "./DragAndDrop";
 
-export { DragAndDrop } from "./DragAndDrop";
-export { getFilesFromEvent };
+export { DragAndDrop, getFilesFromEvent };

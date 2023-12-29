@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
+import { DragAndDrop } from "@docspace/shared/components/drag-and-drop/DragAndDrop";
 
 import Tile from "./sub-components/Tile";
 import FilesTileContent from "./FilesTileContent";
@@ -11,6 +11,8 @@ import withFileActions from "../../../../../HOCs/withFileActions";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";
 import ItemIcon from "../../../../../components/ItemIcon";
 import withBadges from "../../../../../HOCs/withBadges";
+
+console.log(DragAndDrop);
 
 const StyledDragAndDrop = styled(DragAndDrop)`
   border-radius: 6px;

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
-import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
+import { DragAndDrop } from "@docspace/shared/components/drag-and-drop/DragAndDrop";
 import { Row } from "@docspace/shared/components";
 import FilesRowContent from "./FilesRowContent";
 import { isMobile, isMobileOnly } from "react-device-detect";

@@ -9,6 +9,7 @@ import { useStore } from "SRC_DIR/store";
 import ChangeDomainDialog from "./sub-components/dialogs/ChangeDomainDialog";
 import CreatePortalDialog from "./sub-components/dialogs/CreatePortalDialog";
 import DeletePortalDialog from "./sub-components/dialogs/DeletePortalDialog";
+import SpaceCreatedDialog from "./sub-components/dialogs/SpaceCreatedDialog";
 import { SpacesLoader } from "./sub-components/SpacesLoader";
 
 const Spaces = () => {
@@ -21,6 +22,7 @@ const Spaces = () => {
     domainDialogVisible,
     createPortalDialogVisible,
     deletePortalDialogVisible,
+    spaceCreatedDialogVisible,
   } = spacesStore;
   const { setDocumentTitle } = authStore;
   const { portals } = authStore.settingsStore;
@@ -38,6 +40,9 @@ const Spaces = () => {
         <DeletePortalDialog key="delete-portal-dialog" />
       )}
       {domainDialogVisible && <ChangeDomainDialog key="change-domain-dialog" />}
+      {spaceCreatedDialogVisible && (
+        <SpaceCreatedDialog key="space-created-dialog" />
+      )}
       {createPortalDialogVisible && (
         <CreatePortalDialog key="create-portal-dialog" />
       )}

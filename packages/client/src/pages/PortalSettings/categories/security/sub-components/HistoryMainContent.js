@@ -364,7 +364,7 @@ const HistoryMainContent = (props) => {
           primary
           label={downloadReport}
           size="normal"
-          minwidth="auto"
+          minWidth="auto"
           onClick={() => getReport()}
           isDisabled={isSettingNotPaid}
           isLoading={isLoadingDownloadReport}

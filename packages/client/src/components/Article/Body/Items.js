@@ -12,7 +12,8 @@ import {
 import { FOLDER_NAMES } from "@docspace/shared/constants";
 import { getCatalogIconUrlByType } from "@docspace/common/utils/catalogIcon.helper";
 
-import { ArticleItem, DragAndDrop } from "@docspace/shared/components";
+import { ArticleItem } from "@docspace/shared/components";
+import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
 
 import BonusItem from "./BonusItem";
 import AccountsItem from "./AccountsItem";

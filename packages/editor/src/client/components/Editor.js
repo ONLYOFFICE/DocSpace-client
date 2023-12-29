@@ -138,6 +138,8 @@ function Editor({
     const androidID = portalSettings?.deepLink?.androidPackageName;
     const iOSId = portalSettings?.deepLink?.iosPackageId;
     const deepLinkUrl = portalSettings?.deepLink?.url;
+    const isAndroidWebView =
+      window.navigator.userAgent.includes("AscAndroidWebView");
 
     const defaultOpenDocument = localStorage.getItem("defaultOpenDocument");
     const params = new URLSearchParams(window.location.search);
@@ -149,7 +151,8 @@ function Editor({
       androidID &&
       iOSId &&
       deepLinkUrl &&
-      !withoutRedirect
+      !withoutRedirect &&
+      !isAndroidWebView
     ) {
       setIsShowDeepLink(true);
     }

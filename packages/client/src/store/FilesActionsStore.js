@@ -2453,10 +2453,16 @@ class FilesActionStore {
           removeFiles(null, [roomId]);
         }
       } else {
-        const newFolders = folders;
-        const folderIndex = newFolders.findIndex((r) => r.id === roomId);
-        newFolders[folderIndex].inRoom = false;
-        setFolders(newFolders);
+        if (!isRoot) {
+          this.selectedFolderStore.setInRoom(false);
+        } else {
+          const newFolders = folders;
+          const folderIndex = newFolders.findIndex((r) => r.id === roomId);
+          if (folderIndex > -1) {
+            newFolders[folderIndex].inRoom = false;
+            setFolders(newFolders);
+          }
+        }
       }
 
       isOwner
@@ -2468,7 +2474,8 @@ class FilesActionStore {
   changeRoomOwner = (t, userId, isLeaveChecked = false) => {
     const { setRoomOwner, setFolder, setSelected, selection, bufferSelection } =
       this.filesStore;
-    const { isRootFolder, setCreatedBy, id } = this.selectedFolderStore;
+    const { isRootFolder, setCreatedBy, id, setInRoom } =
+      this.selectedFolderStore;
 
     const roomId = selection.length
       ? selection[0].id
@@ -2482,6 +2489,9 @@ class FilesActionStore {
           setFolder(res[0]);
         } else {
           setCreatedBy(res[0].createdBy);
+
+          const isMe = userId === this.authStore.userStore.user.id;
+          if (isMe) setInRoom(true);
         }
 
         if (isLeaveChecked) await this.onLeaveRoom(t);

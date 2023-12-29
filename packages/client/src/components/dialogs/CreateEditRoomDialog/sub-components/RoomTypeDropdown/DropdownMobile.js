@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import RoomType from "../RoomType";
-import { RoomsType } from "./../../../../../../../common/constants/index";
+import { RoomsType } from "@docspace/shared/enums";
 import { Backdrop } from "@docspace/shared/components";
 
 import { Base } from "@docspace/shared/themes";

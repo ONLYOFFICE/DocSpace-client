@@ -7,10 +7,11 @@ import {
   FolderType,
   FileStatus,
   RoomsType,
-  RoomsTypeValues,
   RoomsProviderType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
+
+import { RoomsTypeValues } from "@docspace/shared/utils";
 
 import { combineUrl } from "@docspace/common/utils";
 import { updateTempContent } from "@docspace/common/utils";

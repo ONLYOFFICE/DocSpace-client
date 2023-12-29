@@ -6,7 +6,7 @@ import RoomType from "./RoomType";
 
 import withLoader from "@docspace/client/src/HOCs/withLoader";
 import Loaders from "@docspace/common/components/Loaders";
-import { RoomsType } from "./../../../../../../common/constants/index";
+import { RoomsType } from "@docspace/shared/enums";
 
 const StyledRoomTypeList = styled.div`
   width: 100%;

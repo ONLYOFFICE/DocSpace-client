@@ -34,12 +34,12 @@ import {
 } from "@docspace/common/constants";
 import { makeAutoObservable } from "mobx";
 
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components";
 import { TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
 import { checkProtocol } from "../helpers/files-helpers";
 import { combineUrl } from "@docspace/common/utils";
 import config from "PACKAGE_FILE";
-import { isDesktop } from "@docspace/components/utils/device";
+import { isDesktop } from "@docspace/shared/utils";
 import { getCategoryType } from "SRC_DIR/helpers/utils";
 import { muteRoomNotification } from "@docspace/common/api/settings";
 import { CategoryType } from "SRC_DIR/helpers/constants";

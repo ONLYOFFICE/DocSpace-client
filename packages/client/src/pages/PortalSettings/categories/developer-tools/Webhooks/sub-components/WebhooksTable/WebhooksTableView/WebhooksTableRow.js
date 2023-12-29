@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import TableRow from "@docspace/components/table-container/TableRow";
-import TableCell from "@docspace/components/table-container/TableCell";
-import Text from "@docspace/components/text";
+import { TableRow } from "@docspace/shared/components";
+import { TableCell } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components";
 
-import ToggleButton from "@docspace/components/toggle-button";
+import { ToggleButton } from "@docspace/shared/components";
 import SettingsIcon from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
 import HistoryIcon from "PUBLIC_DIR/images/history.react.svg?url";
 import DeleteIcon from "PUBLIC_DIR/images/delete.react.svg?url";

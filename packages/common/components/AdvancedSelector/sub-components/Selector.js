@@ -10,8 +10,8 @@ import Option from "./Option";
 
 import Footer from "./Footer";
 
-import Text from "@docspace/components/text";
-import Tooltip from "@docspace/components/tooltip";
+import { Text } from "@docspace/shared/components";
+import { Tooltip } from "@docspace/shared/components";
 
 import StyledSelector from "./StyledSelector";
 
@@ -138,9 +138,8 @@ const Selector = (props) => {
       const newGroupList = groupList;
 
       if (newGroupList.length > 0) {
-        newGroupList.find(
-          (group) => group.key === groupHeader.key
-        ).total = total;
+        newGroupList.find((group) => group.key === groupHeader.key).total =
+          total;
       }
 
       setGroupList(newGroupList);

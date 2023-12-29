@@ -2,9 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { decode } from "he";
 
-import Link from "@docspace/components/link";
+import { Link } from "@docspace/shared/components";
 import { StyledUserNameLink } from "../../styles/history";
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components";
 const HistoryBlockUser = ({
   user,
   withComma,

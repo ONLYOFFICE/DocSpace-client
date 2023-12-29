@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Button from "@docspace/components/button";
-import EmailInput from "@docspace/components/email-input";
-import Text from "@docspace/components/text";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Textarea from "@docspace/components/textarea";
-import FieldContainer from "@docspace/components/field-container";
-import { mobile, tablet } from "@docspace/components/utils/device";
+import { Button } from "@docspace/shared/components";
+import { EmailInput } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components";
+import { ModalDialog } from "@docspace/shared/components";
+import { Textarea } from "@docspace/shared/components";
+import { FieldContainer } from "@docspace/shared/components";
+import { mobile, tablet } from "@docspace/shared/utils";
 import { sendRecoverRequest } from "../../../api/settings";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components";
 import { useTranslation } from "react-i18next";
 
 interface IRecoverAccessModalDialogProps {

@@ -2,15 +2,15 @@ import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import moment from "moment-timezone";
 
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components";
 import { useTranslation } from "react-i18next";
-import DatePicker from "@docspace/components/date-picker";
-import Calendar from "@docspace/components/calendar";
-import TimePicker from "@docspace/components/time-picker";
-import SelectorAddButton from "@docspace/components/selector-add-button";
-import SelectedItem from "@docspace/components/selected-item";
+import { DatePicker } from "@docspace/shared/components";
+import { Calendar } from "@docspace/shared/components";
+import { TimePicker } from "@docspace/shared/components";
+import { SelectorAddButton } from "@docspace/shared/components";
+import { SelectedItem } from "@docspace/shared/components";
 
-import { isMobile } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/shared/utils";
 
 const Selectors = styled.div`
   position: relative;

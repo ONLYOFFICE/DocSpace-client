@@ -1,4 +1,4 @@
-import { mobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/shared/utils";
 import styled from "styled-components";
 
 export const Location = styled.div`

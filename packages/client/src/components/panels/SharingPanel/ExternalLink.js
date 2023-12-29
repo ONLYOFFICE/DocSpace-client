@@ -4,10 +4,10 @@ import copy from "copy-to-clipboard";
 import { objectToGetParams } from "@docspace/common/utils";
 import { ShareAccessRights } from "@docspace/common/constants";
 
-import toastr from "@docspace/components/toast/toastr";
-import ToggleButton from "@docspace/components/toggle-button";
-import InputBlock from "@docspace/components/input-block";
-import Button from "@docspace/components/button";
+import { toastr } from "@docspace/shared/components";
+import { ToggleButton } from "@docspace/shared/components";
+import { InputBlock } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components";
 
 import AccessComboBox from "./AccessComboBox";
 
@@ -15,9 +15,9 @@ import ShareIcon from "PUBLIC_DIR/images/share.react.svg";
 import CodeIcon from "PUBLIC_DIR/images/code.react.svg";
 
 import { StyledExternalLink } from "./StyledSharingPanel";
-import Text from "@docspace/components/text";
-import DropDownContainer from "@docspace/components/drop-down";
-import DropDownItem from "@docspace/components/drop-down-item";
+import { Text } from "@docspace/shared/components";
+import { DropDown } from "@docspace/shared/components";
+import { DropDownItem } from "@docspace/shared/components";
 
 const ExternalLink = ({
   t,
@@ -149,7 +149,7 @@ const ExternalLink = ({
                   className="external-link__share-icon"
                   onClick={onToggleShareAction}
                 />
-                <DropDownContainer
+                <DropDown
                   className="external-link__share-dropdown"
                   open={shareActionOpen}
                   clickOutsideAction={closeShareAction}
@@ -163,7 +163,7 @@ const ExternalLink = ({
                       onClick={option.onClick}
                     />
                   ))}
-                </DropDownContainer>
+                </DropDown>
               </div>
             </InputBlock>
 

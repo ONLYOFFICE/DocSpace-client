@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 const LoaderWrapper = styled.div`
   width: 100%;

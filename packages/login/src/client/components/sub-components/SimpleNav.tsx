@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
-import { mobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/shared/utils";
 import { getLogoFromPath } from "@docspace/common/utils";
 
 const StyledNav = styled.div`

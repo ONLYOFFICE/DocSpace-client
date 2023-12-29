@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Loader from "@docspace/components/loader";
+import { Loader } from "@docspace/shared/components";
 import Section from "../Section";
 
 export class ExternalRedirect extends Component {

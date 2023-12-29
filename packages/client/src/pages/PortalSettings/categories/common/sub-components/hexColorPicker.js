@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
-import Button from "@docspace/components/button";
+import { Button } from "@docspace/shared/components";
 import { HexColorPicker, HexColorInput } from "react-colorful";
 import { isMobileOnly } from "react-device-detect";
 

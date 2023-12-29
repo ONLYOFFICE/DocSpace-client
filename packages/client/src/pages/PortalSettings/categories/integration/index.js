@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Submenu from "@docspace/components/submenu";
+import { Submenu } from "@docspace/shared/components";
 import { useNavigate } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -13,8 +13,8 @@ import SMTPSettings from "./SMTPSettings";
 import DocumentService from "./DocumentService";
 import PluginPage from "./Plugins";
 import { DeviceType } from "@docspace/common/constants";
-import Badge from "@docspace/components/badge";
-import Box from "@docspace/components/box";
+import { Badge } from "@docspace/shared/components";
+import { Box } from "@docspace/shared/components";
 
 const IntegrationWrapper = (props) => {
   const {

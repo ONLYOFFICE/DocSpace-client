@@ -1,10 +1,10 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
-import { tablet, mobile } from "@docspace/components/utils/device";
-import NoUserSelect from "@docspace/components/utils/commonStyles";
+import { tablet, mobile } from "@docspace/shared/utils";
+import { NoUserSelect } from "@docspace/shared/utils";
 
-import Base from "@docspace/components/themes/base";
+import Base from "@docspace/shared/themes/base";
 
 const StyledSectionHeader = styled.div`
   position: relative;

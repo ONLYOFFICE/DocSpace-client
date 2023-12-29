@@ -6,7 +6,7 @@ import { useTranslation, Trans } from "react-i18next";
 import { combineUrl } from "../../../utils";
 
 import AlertComponent from "../../AlertComponent";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 const PROXY_BASE_URL = combineUrl(
   window.DocSpaceConfig?.proxy?.url,

@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-import ModalDialog from "@docspace/components/modal-dialog";
-import RadioButtonGroup from "@docspace/components/radio-button-group";
-import Button from "@docspace/components/button";
-import Text from "@docspace/components/text";
+import {
+  ModalDialog,
+  RadioButtonGroup,
+  Button,
+  Text,
+  toastr,
+} from "@docspace/shared/components";
+
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { ConflictResolveType } from "@docspace/common/constants";
-import toastr from "@docspace/components/toast/toastr";
+
 import styled from "styled-components";
 
 const StyledModalDialog = styled(ModalDialog)`
@@ -90,7 +94,7 @@ const ConflictResolveDialog = (props) => {
     folderTitle,
     isCopy,
     translations,
-    isUploadConflict
+    isUploadConflict,
   } = conflictResolveDialogData;
 
   const [resolveType, setResolveType] = useState("overwrite");
@@ -178,20 +182,20 @@ const ConflictResolveDialog = (props) => {
   const onAcceptUploadType = async () => {
     const conflictResolveType = getResolveType();
 
-    let data = conflictResolveDialogData.newUploadData
-    
-    if(conflictResolveType === ConflictResolveType.Skip){
-      let filesSize = 0;
-      const newFiles = []
+    let data = conflictResolveDialogData.newUploadData;
 
-      for(let i = 0; i < data.files.length; i++){
-        if(!items.includes(data.files[i].file.name)){
+    if (conflictResolveType === ConflictResolveType.Skip) {
+      let filesSize = 0;
+      const newFiles = [];
+
+      for (let i = 0; i < data.files.length; i++) {
+        if (!items.includes(data.files[i].file.name)) {
           filesSize += data.files[i].file.size;
-          newFiles.push(data.files[i])
+          newFiles.push(data.files[i]);
         }
       }
 
-      data = {...data, files: newFiles, filesSize};
+      data = { ...data, files: newFiles, filesSize };
     }
 
     if (data.files.length === 0) {
@@ -203,11 +207,15 @@ const ConflictResolveDialog = (props) => {
     setSelected("none");
     onClosePanels();
     try {
-      handleFilesUpload(data, t, conflictResolveType === ConflictResolveType.Duplicate )
+      handleFilesUpload(
+        data,
+        t,
+        conflictResolveType === ConflictResolveType.Duplicate
+      );
     } catch (error) {
       toastr.error(error.message ? error.message : error);
     }
-  }
+  };
 
   const radioOptions = [
     {
@@ -352,7 +360,7 @@ export default inject(({ auth, dialogsStore, uploadDataStore, filesStore }) => {
     setRestoreAllPanelVisible,
     setCopyPanelVisible,
     setMoveToPublicRoomVisible,
-    handleFilesUpload
+    handleFilesUpload,
   };
 })(
   withTranslation(["ConflictResolveDialog", "Common"])(

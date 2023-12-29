@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { ReactSVG } from "react-svg";
 
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 
 const StyledPrivacyLimitationsWarning = styled.div`
   box-sizing: border-box;

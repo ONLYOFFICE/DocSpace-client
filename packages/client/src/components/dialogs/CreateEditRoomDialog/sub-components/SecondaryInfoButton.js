@@ -2,7 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import HelpButton from "@docspace/components/help-button";
+import { HelpButton } from "@docspace/shared/components";
 
 const StyledHelpButton = styled(HelpButton)`
   border-radius: 50%;

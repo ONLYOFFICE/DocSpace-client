@@ -1,9 +1,9 @@
 import styled, { css } from "styled-components";
-import { desktop, tablet } from "@docspace/components/utils/device";
+import { desktop, tablet } from "@docspace/shared/utils";
 
 const paddingCss = css`
   @media ${desktop} {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-right: 1px;
@@ -16,7 +16,7 @@ const paddingCss = css`
   }
 
   @media ${tablet} {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-right: -1px;

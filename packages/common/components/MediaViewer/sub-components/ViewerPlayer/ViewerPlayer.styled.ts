@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { animated } from "@react-spring/web";
 
-import { tablet, mobile } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/shared/utils";
 
 export const ContainerPlayer = styled.div<{ $isFullScreen: boolean }>`
   position: fixed;

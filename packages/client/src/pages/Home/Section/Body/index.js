@@ -9,9 +9,9 @@ import EmptyContainer from "../../../../components/EmptyContainer";
 import withLoader from "../../../../HOCs/withLoader";
 import TableView from "./TableView/TableContainer";
 import withHotkeys from "../../../../HOCs/withHotkeys";
-import { Consumer } from "@docspace/components/utils/context";
+import { Consumer, isMobile, isTablet } from "@docspace/shared/utils";
 import { isElementInViewport } from "@docspace/common/utils";
-import { isMobile, isTablet } from "@docspace/components/utils/device";
+
 import { DeviceType } from "@docspace/common/constants";
 
 let currentDroppable = null;

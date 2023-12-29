@@ -18,13 +18,9 @@ import InviteLinksStore from "./InviteLinksStore";
 import DialogStore from "./DialogStore";
 
 import AccountsContextOptionsStore from "./AccountsContextOptionsStore";
-import {
-  isMobile,
-  isTablet,
-  isDesktop,
-} from "@docspace/components/utils/device";
+import { isMobile, isTablet, isDesktop } from "@docspace/shared/utils";
 
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components";
 import { EmployeeStatus, Events } from "@docspace/common/constants";
 import Filter from "@docspace/common/api/people/filter";
 

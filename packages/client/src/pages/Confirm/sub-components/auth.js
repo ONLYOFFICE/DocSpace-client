@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import Loader from "@docspace/components/loader";
+import { Loader } from "@docspace/shared/components";
 import Section from "@docspace/common/components/Section";
 import { loginWithConfirmKey } from "@docspace/common/api/user";
 import { useSearchParams } from "react-router-dom";
 import { combineUrl } from "@docspace/common/utils";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components";
 import { frameCallEvent } from "@docspace/common/utils";
 
 const Auth = (props) => {
@@ -28,7 +28,7 @@ const Auth = (props) => {
             combineUrl(window.location.origin, url)
           );
         }
-        
+
         if (typeof res === "string") window.location.replace(res);
         else window.location.replace("/");
       })

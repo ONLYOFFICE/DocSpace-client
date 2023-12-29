@@ -1,14 +1,12 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr, Link, Text } from "@docspace/shared/components";
 
 import { StyledParam } from "../Params/StyledParam";
 import ToggleParam from "../Params/ToggleParam";
 import ThirdPartyComboBox from "./ThirdPartyComboBox";
 
-import Link from "@docspace/components/link";
-import Text from "@docspace/components/text";
 import FolderInput from "./FolderInput";
 import { getOAuthToken } from "@docspace/common/utils";
 

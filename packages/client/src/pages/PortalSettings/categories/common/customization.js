@@ -8,12 +8,12 @@ import WelcomePageSettings from "./Customization/welcome-page-settings";
 import PortalRenaming from "./Customization/portal-renaming";
 import DNSSettings from "./Customization/dns-settings";
 import CustomizationNavbar from "./customization-navbar";
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import LoaderDescriptionCustomization from "./sub-components/loaderDescriptionCustomization";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
-import { mobileMore } from "@docspace/components/utils/device";
+import { mobileMore } from "@docspace/shared/utils";
 
 const StyledComponent = styled.div`
   width: 100%;

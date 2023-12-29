@@ -1,7 +1,7 @@
-import { Button } from "@docspace/components";
+import { Button } from "@docspace/shared/components";
 import styled, { css } from "styled-components";
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
-import { Base } from "@docspace/components/themes";
+import { commonIconsStyles } from "@docspace/shared/utils";
+import { Base } from "@docspace/shared/themes";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import hexToRgba from "hex-to-rgba";

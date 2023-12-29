@@ -3,8 +3,8 @@ import styled, { css } from "styled-components";
 import { isIOS, isFirefox, isMobileOnly } from "react-device-detect";
 import { inject, observer } from "mobx-react";
 import { getBgPattern } from "@docspace/common/utils";
-import { mobile } from "@docspace/components/utils/device";
-import Scrollbar from "@docspace/components/scrollbar";
+import { mobile } from "@docspace/shared/utils";
+import { Scrollbar } from "@docspace/shared/components";
 
 const StyledWrapper = styled.div`
   height: ${(props) =>

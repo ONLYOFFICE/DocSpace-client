@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components";
 import { NotificationsType } from "@docspace/common/constants";
 import { getNotificationSubscription } from "@docspace/common/api/settings";
 import Loaders from "@docspace/common/components/Loaders";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
-import toastr from "@docspace/components/toast/toastr";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { toastr } from "@docspace/shared/components";
 
 import UsefulTipsContainer from "./sub-components/UsefulTipsContainer";
 import RoomsActionsContainer from "./sub-components/RoomsActionsContainer";

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 
 import { inject, observer } from "mobx-react";
 
-import Text from "@docspace/components/text";
-import FileInput from "@docspace/components/file-input";
-import Button from "@docspace/components/button";
+import { Text } from "@docspace/shared/components";
+import { FileInput } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components";
 import { StyledButtonComponent } from "./StyledComponent";
 
 let timerId;

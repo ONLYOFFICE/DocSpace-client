@@ -4,23 +4,22 @@ import { useNavigate } from "react-router-dom";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Link from "@docspace/components/link";
-import Text from "@docspace/components/text";
-import Box from "@docspace/components/box";
-import Textarea from "@docspace/components/textarea";
-import Button from "@docspace/components/button";
+import { Link } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components";
+import { Box } from "@docspace/shared/components";
+import { Textarea } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components";
 import { withTranslation } from "react-i18next";
 import VersionBadge from "./VersionBadge";
 import { StyledVersionRow } from "./StyledVersionHistory";
 import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.react.svg?url";
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
+import { commonIconsStyles, getCorrectDate } from "@docspace/shared/utils";
 import { inject, observer } from "mobx-react";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components";
 import { Encoder } from "@docspace/common/utils/encoder";
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 import { MAX_FILE_COMMENT_LENGTH } from "@docspace/common/constants";
 import moment from "moment-timezone";
-import getCorrectDate from "@docspace/components/utils/getCorrectDate";
 
 const StyledExternalLinkIcon = styled(ExternalLinkIcon)`
   ${commonIconsStyles}

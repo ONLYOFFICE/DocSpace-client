@@ -1,7 +1,7 @@
 import React from "react";
-import { LoaderStyle } from "@docspace/components/utils/constants";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
-import Box from "@docspace/components/box";
+import { LoaderStyle } from "@docspace/shared/constants";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { Box } from "@docspace/shared/components";
 
 const speed = 2;
 const heightText = "20px";

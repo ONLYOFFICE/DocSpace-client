@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { mobile, tablet } from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/shared/utils";
 
 export const StyledPage = styled.div`
   display: flex;

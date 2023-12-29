@@ -1,4 +1,4 @@
-import { mobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/shared/utils";
 import React, { forwardRef, useState } from "react";
 import styled, { css } from "styled-components";
 import { formatTime } from "../../helpers";

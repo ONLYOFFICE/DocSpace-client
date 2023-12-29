@@ -3,14 +3,14 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 
-import Link from "@docspace/components/link";
+import { Link } from "@docspace/shared/components";
 
 import TileContent from "./sub-components/TileContent";
 import withContent from "../../../../../HOCs/withContent";
 import withBadges from "../../../../../HOCs/withBadges";
 
 import { DeviceType } from "@docspace/common/constants";
-import { tablet } from "@docspace/components/utils/device";
+import { tablet } from "@docspace/shared/utils";
 
 const SimpleFilesTileContent = styled(TileContent)`
   .row-main-container {

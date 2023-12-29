@@ -1,4 +1,4 @@
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 import styled from "styled-components";
 
 export const ChangeRoomOwner = styled.div`

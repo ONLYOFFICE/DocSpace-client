@@ -2,7 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import equal from "fast-deep-equal/react";
 import { isMobile } from "react-device-detect";
-import { tablet, desktop } from "@docspace/components/utils/device";
+import { tablet, desktop } from "@docspace/shared/utils";
 
 const StyledSectionFilter = styled.div`
   ${(props) =>

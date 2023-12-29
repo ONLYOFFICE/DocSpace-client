@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { observer, inject } from "mobx-react";
-import { isMobile } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/shared/utils";
 
 const withLoading = (WrappedComponent) => {
   const withLoading = (props) => {

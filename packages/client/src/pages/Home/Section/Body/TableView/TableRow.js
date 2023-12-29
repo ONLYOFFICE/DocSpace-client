@@ -5,7 +5,7 @@ import withQuickButtons from "../../../../../HOCs/withQuickButtons";
 import withFileActions from "../../../../../HOCs/withFileActions";
 import ItemIcon from "../../../../../components/ItemIcon";
 import { withTranslation } from "react-i18next";
-import { classNames } from "@docspace/components/utils/classNames";
+import { classNames } from "@docspace/shared/utils";
 import RoomsRowDataComponent from "./sub-components/RoomsRowData";
 import TrashRowDataComponent from "./sub-components/TrashRowData";
 import RowDataComponent from "./sub-components/RowData";

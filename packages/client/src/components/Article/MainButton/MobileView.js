@@ -4,9 +4,9 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";
 
-import { mobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/shared/utils";
 
-import MainButtonMobile from "@docspace/components/main-button-mobile";
+import { MainButtonMobile } from "@docspace/shared/components";
 
 const StyledMainButtonMobile = styled(MainButtonMobile)`
   position: fixed;

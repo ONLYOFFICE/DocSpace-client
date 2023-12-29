@@ -6,7 +6,7 @@ import { withTranslation } from "react-i18next";
 import find from "lodash/find";
 import result from "lodash/result";
 
-import { isTablet, isMobile } from "@docspace/components/utils/device";
+import { isTablet, isMobile } from "@docspace/shared/utils";
 import FilterInput from "@docspace/common/components/FilterInput";
 import Loaders from "@docspace/common/components/Loaders";
 import { withLayoutSize } from "@docspace/common/utils";

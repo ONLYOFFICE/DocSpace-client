@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useEffect } from "react";
 import { isMobile } from "react-device-detect";
 import { useLocation } from "react-router-dom";
-import Paging from "@docspace/components/paging";
+import { Paging } from "@docspace/shared/components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 

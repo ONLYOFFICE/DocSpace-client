@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
-import { isTablet, isDesktop } from "@docspace/components/utils/device";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { isTablet, isDesktop } from "@docspace/shared/utils";
 
 const StyledLoader = styled.div`
   display: flex;

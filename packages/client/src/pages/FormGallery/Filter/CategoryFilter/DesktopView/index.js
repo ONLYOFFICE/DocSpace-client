@@ -1,6 +1,6 @@
 import * as Styled from "./index.styled";
 
-import DropDownItem from "@docspace/components/drop-down-item";
+import { DropDownItem } from "@docspace/shared/components";
 import { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";

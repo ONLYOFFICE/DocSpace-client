@@ -1,13 +1,13 @@
 ﻿import SecuritySvgUrl from "PUBLIC_DIR/images/security.svg?url";
 import styled from "styled-components";
 
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
+import { commonIconsStyles } from "@docspace/shared/utils";
 
 import FavoriteIcon from "PUBLIC_DIR/images/favorite.react.svg";
 import FileActionsConvertEditDocIcon from "PUBLIC_DIR/images/file.actions.convert.edit.doc.react.svg";
 import FileActionsLockedIcon from "PUBLIC_DIR/images/file.actions.locked.react.svg";
 import EditFormIcon from "PUBLIC_DIR/images/access.edit.form.react.svg";
-import Base from "@docspace/components/themes/base";
+import { Base } from "@docspace/shared/themes";
 
 export const EncryptedFileIcon = styled.div`
   background: url(${SecuritySvgUrl}) no-repeat 0 0 / 16px 16px transparent;
@@ -15,14 +15,14 @@ export const EncryptedFileIcon = styled.div`
   position: absolute;
   width: 16px;
   margin-top: 14px;
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
-              margin-right: 12px;
-            `
+          margin-right: 12px;
+        `
       : css`
-              margin-left: 12px;
-            `}
+          margin-left: 12px;
+        `}
 `;
 
 export const StyledFavoriteIcon = styled(FavoriteIcon)`

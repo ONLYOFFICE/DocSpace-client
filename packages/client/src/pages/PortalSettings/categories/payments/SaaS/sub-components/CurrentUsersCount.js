@@ -1,4 +1,4 @@
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components";
 import React from "react";
 import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";

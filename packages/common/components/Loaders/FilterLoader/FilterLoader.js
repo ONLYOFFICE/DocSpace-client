@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import StyledFilter from "./StyledFilterLoader";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 const FilterLoader = ({ id, className, style, ...rest }) => {
   const {

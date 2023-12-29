@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import Scrollbar from "@docspace/components/scrollbar";
+import { Scrollbar } from "@docspace/shared/components";
 import { isMobileOnly, isMobile } from "react-device-detect";
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 
 const StyledNav = styled.nav`
   background-color: ${(props) => props.theme.nav.backgroundColor};

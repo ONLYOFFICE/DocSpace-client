@@ -7,10 +7,9 @@ import Text from "./sub-components/text";
 import ControlButtons from "./sub-components/control-btn";
 import DropBox from "./sub-components/drop-box";
 
-import { Consumer } from "@docspace/components/utils/context";
+import { Consumer, DomHelpers } from "@docspace/shared/utils";
 
-import DomHelpers from "@docspace/components/utils/domHelpers";
-import Backdrop from "@docspace/components/backdrop";
+import { Backdrop } from "@docspace/shared/components";
 
 import { ReactSVG } from "react-svg";
 

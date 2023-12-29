@@ -1,8 +1,8 @@
 import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 
 import styled from "styled-components";
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
-import { Base } from "@docspace/components/themes";
+import { commonIconsStyles } from "@docspace/shared/utils";
+import { Base } from "@docspace/shared/themes";
 
 export const StyledArrowRightIcon = styled(ArrowRightIcon)`
   ${commonIconsStyles}

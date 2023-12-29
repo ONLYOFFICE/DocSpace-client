@@ -4,7 +4,7 @@ import { isMobile, isIOS } from "react-device-detect";
 import { inject, observer } from "mobx-react";
 import { useLocation } from "react-router-dom";
 import SmartBanner from "react-smartbanner";
-import { getCookie } from "@docspace/components/utils/cookie";
+import { getCookie } from "@docspace/shared/utils";
 import "./main.css";
 
 const Wrapper = styled.div`

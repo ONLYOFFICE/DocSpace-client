@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { desktop } from "@docspace/components/utils/device";
+import { desktop } from "@docspace/shared/utils";
 
 const StyledTreeFolder = styled.div`
   ${({ theme }) =>

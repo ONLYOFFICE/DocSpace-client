@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import CategoryFilterDesktop from "./DesktopView";
 import CategoryFilterMobile from "./MobileView";
-import { mobile } from "@docspace/components/utils/device";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { mobile } from "@docspace/shared/utils";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 import styled, { css } from "styled-components";
 

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import StyledContainer from "./StyledMainButton";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 const ArticleButtonLoader = ({ id, className, style, ...rest }) => {
   const {

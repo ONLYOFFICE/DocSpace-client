@@ -7,7 +7,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 import { DeviceType, RoomSearchArea } from "@docspace/common/constants";
 import Items from "./Items";
-import { tablet } from "@docspace/components/utils/device";
+import { tablet } from "@docspace/shared/utils";
 
 import FilesFilter from "@docspace/common/api/files/filter";
 import RoomsFilter from "@docspace/common/api/rooms/filter";

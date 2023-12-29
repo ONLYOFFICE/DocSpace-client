@@ -3,8 +3,8 @@ import { ReactSVG } from "react-svg";
 import styled from "styled-components";
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg?url";
-import IconButton from "@docspace/components/icon-button";
-import Text from "@docspace/components/text";
+import { IconButton } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components";
 
 const StyledInfoBar = styled.div`
   display: flex;

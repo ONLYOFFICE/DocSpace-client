@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import { ReactSVG } from "react-svg";
 
 import SecondaryInfoButton from "../SecondaryInfoButton";
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 
 const StyledPermanentSetting = styled.div`
   box-sizing: border-box;

@@ -5,14 +5,14 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import Button from "@docspace/components/button";
-import FieldContainer from "@docspace/components/field-container";
-import Text from "@docspace/components/text";
+import { Button } from "@docspace/shared/components";
+import { FieldContainer } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components";
 
 import SsoTextInput from "./SsoTextInput";
-import FileInput from "@docspace/components/file-input";
-import { Base } from "@docspace/components/themes";
-import { mobile } from "@docspace/components/utils/device";
+import { FileInput } from "@docspace/shared/components";
+import { Base } from "@docspace/shared/themes";
+import { mobile } from "@docspace/shared/utils";
 
 const StyledWrapper = styled.div`
   display: flex;

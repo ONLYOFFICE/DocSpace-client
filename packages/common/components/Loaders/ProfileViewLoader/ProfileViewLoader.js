@@ -8,11 +8,11 @@ import {
   SubBlock,
   ThemeBlock,
 } from "./StyledProfileView";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
-import CircleSkeleton from "@docspace/components/skeletons/circle";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { CircleSkeleton } from "@docspace/shared/skeletons";
 
 import MobileViewLoader from "./MobileView";
-import { isMobile } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/shared/utils";
 
 const ProfileViewLoader = ({ id, className, style, ...rest }) => {
   const {

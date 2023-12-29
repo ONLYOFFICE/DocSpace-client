@@ -2,9 +2,8 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 
 import ModalDialogContainer from "../ModalDialogContainer";
-import Text from "@docspace/components/text";
-import Button from "@docspace/components/button";
-import ModalDialog from "@docspace/components/modal-dialog";
+import { Text, Button, ModalDialog } from "@docspace/shared/components";
+
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 

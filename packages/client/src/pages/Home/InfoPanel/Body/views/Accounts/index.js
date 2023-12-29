@@ -5,8 +5,8 @@ import { withTranslation } from "react-i18next";
 import withLoader from "@docspace/client/src/HOCs/withLoader";
 import Loaders from "@docspace/common/components/Loaders";
 
-import Text from "@docspace/components/text";
-import ComboBox from "@docspace/components/combobox";
+import { Text } from "@docspace/shared/components";
+import { ComboBox } from "@docspace/shared/components";
 
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 import { StyledAccountContent } from "../../styles/accounts";

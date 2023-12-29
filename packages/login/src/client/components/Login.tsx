@@ -2,25 +2,25 @@ import React, { useState, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { ButtonsWrapper, LoginFormWrapper, LoginContent } from "./StyledLogin";
-import Text from "@docspace/components/text";
-import SocialButton from "@docspace/components/social-button";
+import { Text } from "@docspace/shared/components";
+import { SocialButton } from "@docspace/shared/components";
 import {
   getProviderTranslation,
   getOAuthToken,
   getLoginLink,
-  checkIsSSR,
 } from "@docspace/common/utils";
+import { checkIsSSR } from "@docspace/shared/utils";
 import { providersData } from "@docspace/common/constants";
-import Link from "@docspace/components/link";
-import Toast from "@docspace/components/toast";
+import { Link } from "@docspace/shared/components";
+import { Toast } from "@docspace/shared/components";
 import LoginForm from "./sub-components/LoginForm";
 import MoreLoginModal from "@docspace/common/components/MoreLoginModal";
 import RecoverAccessModalDialog from "@docspace/common/components/Dialogs/RecoverAccessModalDialog";
-import FormWrapper from "@docspace/components/form-wrapper";
+import { FormWrapper } from "@docspace/shared/components";
 import Register from "./sub-components/register-container";
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { ColorTheme, ThemeId } from "@docspace/shared/components";
 import SSOIcon from "PUBLIC_DIR/images/sso.react.svg";
-import { Dark, Base } from "@docspace/components/themes";
+import { Dark, Base } from "@docspace/shared/themes";
 import { useMounted } from "../helpers/useMounted";
 import { getBgPattern } from "@docspace/common/utils";
 import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
@@ -215,8 +215,8 @@ const Login: React.FC<ILoginProps> = ({
   const logoUrl = !logo
     ? undefined
     : !theme?.isBase
-    ? getLogoFromPath(logo.path.dark)
-    : getLogoFromPath(logo.path.light);
+      ? getLogoFromPath(logo.path.dark)
+      : getLogoFromPath(logo.path.light);
 
   if (!mounted) return <></>;
   if (isRestoringPortal) return <></>;
@@ -230,7 +230,7 @@ const Login: React.FC<ILoginProps> = ({
     >
       <div className="bg-cover"></div>
       <LoginContent enabledJoin={enabledJoin}>
-        <ColorTheme themeId={ThemeType.LinkForgotPassword}>
+        <ColorTheme themeId={ThemeId.LinkForgotPassword}>
           <img src={logoUrl} className="logo-wrapper" />
           <Text
             fontSize="23px"

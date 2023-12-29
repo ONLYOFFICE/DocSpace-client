@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
+import { commonIconsStyles, mobile } from "@docspace/shared/utils";
 import TrashIcon from "PUBLIC_DIR/images/trash.react.svg";
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg";
-import Link from "@docspace/components/link";
-import TextInput from "@docspace/components/text-input";
-import { Base } from "@docspace/components/themes";
-import { mobile } from "@docspace/components/utils/device";
+import { Link } from "@docspace/shared/components";
+import { TextInput } from "@docspace/shared/components";
+import { Base } from "@docspace/shared/themes";
 
 const StyledPlusIcon = styled(PlusIcon)`
   ${commonIconsStyles}

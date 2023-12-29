@@ -1,9 +1,9 @@
 import React from "react";
 
-import SelectorAddButton from "@docspace/components/selector-add-button";
-import Heading from "@docspace/components/heading";
-import ComboBox from "@docspace/components/combobox";
-import Checkbox from "@docspace/components/checkbox";
+import { SelectorAddButton } from "@docspace/shared/components";
+import { Heading } from "@docspace/shared/components";
+import { ComboBox } from "@docspace/shared/components";
+import { Checkbox } from "@docspace/shared/components";
 
 import {
   StyledFilterBlockItem,
@@ -20,7 +20,7 @@ import {
   StyledFilterBlockItemSeparator,
 } from "./StyledFilterBlock";
 
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { ColorTheme, ThemeId } from "@docspace/shared/components";
 
 import XIcon from "PUBLIC_DIR/images/x.react.svg";
 import {
@@ -115,7 +115,7 @@ const FilterBlockItem = ({
             clearSelectorRef.current
           )
         }
-        themeId={ThemeType.FilterBlockItemTag}
+        themeId={ThemeId.FilterBlockItemTag}
       >
         <StyledFilterBlockItemTagText
           className="filter-text"
@@ -230,7 +230,7 @@ const FilterBlockItem = ({
                   item.isMultiSelect
                 )
         }
-        themeId={ThemeType.FilterBlockItemTag}
+        themeId={ThemeId.FilterBlockItemTag}
       >
         <StyledFilterBlockItemTagText
           className="filter-text"

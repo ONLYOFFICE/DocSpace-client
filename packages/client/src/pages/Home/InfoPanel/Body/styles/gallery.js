@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { isMobileOnly } from "react-device-detect";
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 
 const StyledGalleryThumbnail = styled.div`
   box-sizing: border-box;

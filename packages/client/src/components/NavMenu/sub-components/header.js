@@ -7,11 +7,11 @@ import { Link as LinkWithoutRedirect } from "react-router-dom";
 import { isMobileOnly, isMobile } from "react-device-detect";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { isDesktop, tablet, mobile } from "@docspace/components/utils/device";
+import { isDesktop, tablet, mobile } from "@docspace/shared/utils";
 import { combineUrl } from "@docspace/common/utils";
-import NoUserSelect from "@docspace/components/utils/commonStyles";
+import { NoUserSelect } from "@docspace/shared/utils";
 import HeaderCatalogBurger from "./header-catalog-burger";
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 import { getLogoFromPath } from "@docspace/common/utils";
 
 const Header = styled.header`

@@ -1,6 +1,9 @@
 import styled from "styled-components";
-import { mobile, tablet } from "@docspace/components/utils/device";
-import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
+import {
+  mobile,
+  tablet,
+  getCorrectFourValuesStyle,
+} from "@docspace/shared/utils";
 
 export const StyledPage = styled.div`
   display: flex;

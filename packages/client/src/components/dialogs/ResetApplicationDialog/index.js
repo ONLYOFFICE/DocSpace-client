@@ -1,12 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Button from "@docspace/components/button";
-import Text from "@docspace/components/text";
+import { ModalDialog, toastr, Text, Button } from "@docspace/shared/components";
+
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import ModalDialogContainer from "../ModalDialogContainer";
-import toastr from "@docspace/components/toast/toastr";
 
 const ResetApplicationDialogComponent = (props) => {
   const { t, resetTfaApp, id, onClose, tReady, visible } = props;

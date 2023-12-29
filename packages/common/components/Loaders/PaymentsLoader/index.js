@@ -1,5 +1,5 @@
 import React from "react";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import StyledPaymentsLoader from "./StyledPaymentsLoader";
 const PaymentsLoader = ({ id, className, style, isRectangle, ...rest }) => {
   const {

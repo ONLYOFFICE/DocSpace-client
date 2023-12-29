@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import DropDownItem from "@docspace/components/drop-down-item";
+import { DropDownItem } from "@docspace/shared/components";
 
 export const StyledDropDownItem = styled(DropDownItem)`
   color: #fff;

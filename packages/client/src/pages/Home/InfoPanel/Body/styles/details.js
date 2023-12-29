@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { isMobile, isTablet } from "react-device-detect";
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 
 const StyledThumbnail = styled.div`
   display: flex;

@@ -1,6 +1,6 @@
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 import styled from "styled-components";
-import { mobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/shared/utils";
 
 const StyledDialogLoader = styled.div`
   height: auto;

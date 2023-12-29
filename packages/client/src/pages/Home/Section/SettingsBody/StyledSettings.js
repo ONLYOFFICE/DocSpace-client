@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { tablet } from "@docspace/components/utils/device";
+import { tablet } from "@docspace/shared/utils";
 
 const StyledSettings = styled.div`
   margin-top: ${(props) =>

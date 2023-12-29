@@ -7,13 +7,13 @@ import styled, { css } from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import Headline from "@docspace/common/components/Headline";
-import IconButton from "@docspace/components/icon-button";
-import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu";
-import DropDownItem from "@docspace/components/drop-down-item";
+import { IconButton } from "@docspace/shared/components";
+import { TableGroupMenu } from "@docspace/shared/components";
+import { DropDownItem } from "@docspace/shared/components";
 import LoaderSectionHeader from "../loaderSectionHeader";
-import { tablet, desktop } from "@docspace/components/utils/device";
+import { tablet, desktop } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
-import Badge from "@docspace/components/badge";
+import { Badge } from "@docspace/shared/components";
 import {
   getKeyByLink,
   settingsTree,

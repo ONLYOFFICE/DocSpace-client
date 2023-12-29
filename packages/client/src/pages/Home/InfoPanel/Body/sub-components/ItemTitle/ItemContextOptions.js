@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
-import { ContextMenu, ContextMenuButton } from "@docspace/components";
+import { ContextMenu, ContextMenuButton } from "@docspace/shared/components";
 import ContextHelper from "../../helpers/ContextHelper";
 
 const StyledItemContextOptions = styled.div`

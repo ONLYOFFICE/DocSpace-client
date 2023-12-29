@@ -1,6 +1,6 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components";
 import QuickButtons from "../components/QuickButtons";
 import copy from "copy-to-clipboard";
 

@@ -7,11 +7,11 @@ import Loaders from "@docspace/common/components/Loaders";
 import { inject, observer } from "mobx-react";
 import { getSelectedGroup } from "../../../helpers/people-helpers";
 import { useNavigate } from "react-router-dom";
-import { isMobile } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/shared/utils";
 import { isMobileOnly } from "react-device-detect";
 import config from "PACKAGE_FILE";
 import { combineUrl } from "@docspace/common/utils";
-import CatalogItem from "@docspace/components/catalog-item";
+import { ArticleItem } from "@docspace/shared/components";
 import withLoader from "../../../HOCs/withLoader";
 
 const departmentsIcon = DepartmentsGroupReactSvgUrl;
@@ -86,7 +86,7 @@ const ArticleBodyContent = ({
       const items = data.map((group) => {
         const active = isActive(group.id);
         return (
-          <CatalogItem
+          <ArticleItem
             key={group.id}
             id={group.id}
             icon={groupIcon}
@@ -111,7 +111,7 @@ const ArticleBodyContent = ({
     <>
       {!isVisitor && (
         <div style={!isAdmin && isMobileOnly ? { marginTop: "16px" } : null}>
-          <CatalogItem
+          <ArticleItem
             key={"root"}
             id={"departments"}
             icon={departmentsIcon}

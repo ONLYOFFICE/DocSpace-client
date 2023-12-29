@@ -1,14 +1,14 @@
 import React, { useEffect, useCallback, useState } from "react";
 import { inject, observer } from "mobx-react";
 
-import toastr from "@docspace/components/toast/toastr";
-import ModalDialog from "@docspace/components/modal-dialog";
-import TextInput from "@docspace/components/text-input";
-import Button from "@docspace/components/button";
-import ComboBox from "@docspace/components/combobox";
-import Checkbox from "@docspace/components/checkbox";
-import Box from "@docspace/components/box";
-import FieldContainer from "@docspace/components/field-container";
+import { toastr } from "@docspace/shared/components";
+import { ModalDialog } from "@docspace/shared/components";
+import { TextInput } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components";
+import { ComboBox } from "@docspace/shared/components";
+import { Checkbox } from "@docspace/shared/components";
+import { Box } from "@docspace/shared/components";
+import { FieldContainer } from "@docspace/shared/components";
 
 const Dialog = ({
   t,

@@ -45,13 +45,13 @@ export const getOptions = (storageBackup, needDefaultParameter = false) => {
   }
 
   if (!isDefaultStorageExist && !isFirstSet) {
-    selectedStorageTitle = storagesInfo[googleStorageId].title;
-    selectedStorageId = storagesInfo[googleStorageId].id;
+    selectedStorageTitle = storagesInfo?.[googleStorageId]?.title;
+    selectedStorageId = storagesInfo?.[googleStorageId]?.id;
   }
 
   if (!isDefaultStorageExist && isFirstSet) {
-    selectedStorageTitle = storagesInfo[firstSetId].title;
-    selectedStorageId = storagesInfo[firstSetId].id;
+    selectedStorageTitle = storagesInfo?.[firstSetId]?.title;
+    selectedStorageId = storagesInfo?.[firstSetId]?.id;
   }
 
   return {

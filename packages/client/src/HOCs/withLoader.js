@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { observer, inject } from "mobx-react";
 import { useLocation } from "react-router-dom";
-import TableSkeleton from "@docspace/components/skeletons/table";
-import RowsSkeleton from "@docspace/components/skeletons/rows";
+import { TableSkeleton } from "@docspace/shared/skeletons";
+import { RowsSkeleton } from "@docspace/shared/skeletons";
 import Loaders from "@docspace/common/components/Loaders";
 
 const pathname = window.location.pathname.toLowerCase();

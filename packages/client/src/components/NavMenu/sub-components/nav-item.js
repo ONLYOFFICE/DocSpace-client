@@ -3,14 +3,17 @@ import { ReactSVG } from "react-svg";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
-import Badge from "@docspace/components/badge";
-import Link from "@docspace/components/link";
-import Text from "@docspace/components/text";
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
-import { tablet } from "@docspace/components/utils/device";
+import { Badge } from "@docspace/shared/components";
+import { Link } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components";
+import {
+  commonIconsStyles,
+  getCorrectFourValuesStyle,
+  tablet,
+} from "@docspace/shared/utils";
+
 import MenuIcon from "PUBLIC_DIR/images/menu.react.svg";
-import { Base } from "@docspace/components/themes";
-import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
+import { Base } from "@docspace/shared/themes";
 
 const NavItemSeparator = styled.div`
   border-bottom: 1px ${(props) => (props.dashed ? "dashed" : "solid")}

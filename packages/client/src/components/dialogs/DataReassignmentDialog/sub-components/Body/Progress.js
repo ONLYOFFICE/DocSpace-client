@@ -1,12 +1,11 @@
-import Text from "@docspace/components/text";
+import { Text, Loader, ProgressBar } from "@docspace/shared/components";
 import styled from "styled-components";
-import Loader from "@docspace/components/loader";
+
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import InterruptIcon from "PUBLIC_DIR/images/interrupt.icon.react.svg";
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
-import { Base } from "@docspace/components/themes";
+import { commonIconsStyles } from "@docspace/shared/utils";
+import { Base } from "@docspace/shared/themes";
 import { withTranslation, Trans } from "react-i18next";
-import ProgressBar from "@docspace/components/progress-bar";
 
 const StyledCheckIcon = styled(CheckIcon)`
   ${commonIconsStyles}

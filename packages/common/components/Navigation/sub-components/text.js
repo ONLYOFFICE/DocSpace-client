@@ -4,12 +4,12 @@ import PropTypes from "prop-types";
 
 import ExpanderDownIcon from "PUBLIC_DIR/images/expander-down.react.svg";
 import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg";
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
-import Heading from "@docspace/components/heading";
 
-import { tablet, mobile } from "@docspace/components/utils/device";
+import { Heading } from "@docspace/shared/components";
 
-import { Base } from "@docspace/components/themes";
+import { tablet, mobile, commonIconsStyles } from "@docspace/shared/utils";
+
+import { Base } from "@docspace/shared/themes";
 
 const StyledTextContainer = styled.div`
   display: flex;

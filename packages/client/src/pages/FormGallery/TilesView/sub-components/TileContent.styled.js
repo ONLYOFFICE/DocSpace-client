@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import { tablet } from "@docspace/components/utils/device";
+import { tablet } from "@docspace/shared/utils";
 
 const commonCss = css`
   margin: 0;

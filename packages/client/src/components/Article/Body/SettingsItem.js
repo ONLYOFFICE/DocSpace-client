@@ -2,7 +2,7 @@
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import CatalogItem from "@docspace/components/catalog-item";
+import { ArticleItem } from "@docspace/shared/components";
 
 import CatalogSettingsReactSvgUrl from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
 
@@ -12,7 +12,7 @@ const PureSettingsItem = ({ t, showText, isActive, onClick }) => {
   }, [onClick]);
 
   return (
-    <CatalogItem
+    <ArticleItem
       key="settings"
       text={t("Common:Settings")}
       icon={CatalogSettingsReactSvgUrl}

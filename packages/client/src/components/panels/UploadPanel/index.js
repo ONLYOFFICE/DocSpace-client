@@ -2,10 +2,10 @@
 import ClearActiveReactSvgUrl from "PUBLIC_DIR/images/clear.active.react.svg?url";
 import ButtonCancelReactSvgUrl from "PUBLIC_DIR/images/button.cancel.react.svg?url";
 import React from "react";
-import IconButton from "@docspace/components/icon-button";
-import Backdrop from "@docspace/components/backdrop";
-import Heading from "@docspace/components/heading";
-import Aside from "@docspace/components/aside";
+import { IconButton } from "@docspace/shared/components";
+import { Backdrop } from "@docspace/shared/components";
+import { Heading } from "@docspace/shared/components";
+import { Aside } from "@docspace/shared/components";
 import { withTranslation } from "react-i18next";
 import {
   StyledAsidePanel,

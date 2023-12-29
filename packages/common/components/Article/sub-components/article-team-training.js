@@ -4,7 +4,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import AlertComponent from "../../AlertComponent";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { ARTICLE_ALERTS } from "@docspace/client/src/helpers/constants";
 
 const ArticleTeamTrainingAlert = ({

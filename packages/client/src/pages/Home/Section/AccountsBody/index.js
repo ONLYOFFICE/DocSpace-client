@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
-import { Consumer } from "@docspace/components/utils/context";
+import { Consumer } from "@docspace/shared/utils";
 
 import withLoader from "SRC_DIR/HOCs/withLoader";
 

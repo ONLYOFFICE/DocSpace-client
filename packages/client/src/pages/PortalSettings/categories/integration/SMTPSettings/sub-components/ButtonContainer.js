@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 
-import Button from "@docspace/components/button";
-import toastr from "@docspace/components/toast/toastr";
+import { Button } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components";
 import {
   getSendingTestMailStatus,
   sendingTestMail,

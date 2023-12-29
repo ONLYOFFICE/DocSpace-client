@@ -1,13 +1,13 @@
 ﻿import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 import React from "react";
 import { inject, observer } from "mobx-react";
-import TextInput from "@docspace/components/text-input";
-import Checkbox from "@docspace/components/checkbox";
-import ComboBox from "@docspace/components/combobox";
-import RadioButton from "@docspace/components/radio-button";
-import Text from "@docspace/components/text";
+import { TextInput } from "@docspace/shared/components";
+import { Checkbox } from "@docspace/shared/components";
+import { ComboBox } from "@docspace/shared/components";
+import { RadioButton } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components";
 import styled from "styled-components";
-import HelpButton from "@docspace/components/help-button";
+import { HelpButton } from "@docspace/shared/components";
 import { Trans } from "react-i18next";
 
 const bucket = "bucket";

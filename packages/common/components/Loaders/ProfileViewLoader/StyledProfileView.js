@@ -1,6 +1,9 @@
 import styled from "styled-components";
-import { desktop, tablet } from "@docspace/components/utils/device";
-import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
+import {
+  desktop,
+  tablet,
+  getCorrectFourValuesStyle,
+} from "@docspace/shared/utils";
 
 const StyledWrapper = styled.div`
   width: 660px;

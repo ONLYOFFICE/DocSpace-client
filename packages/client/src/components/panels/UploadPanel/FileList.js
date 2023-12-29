@@ -1,10 +1,10 @@
 import React, { useState, useCallback, useRef } from "react";
-import CustomScrollbars from "@docspace/components/scrollbar/custom-scrollbars-virtual-list";
+import { CustomScrollbarsVirtualList as CustomScrollbars } from "@docspace/shared/components";
 import AutoSizer from "react-virtualized-auto-sizer";
 import { VariableSizeList as List } from "react-window";
 import { inject, observer } from "mobx-react";
 import FileRow from "./FileRow";
-import { isDesktop } from "@docspace/components/utils/device";
+import { isDesktop } from "@docspace/shared/utils";
 
 const CustomScrollbarsVirtualList = React.forwardRef((props, ref) => (
   <CustomScrollbars {...props} forwardedRef={ref} />

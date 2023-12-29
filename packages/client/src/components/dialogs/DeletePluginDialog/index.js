@@ -2,9 +2,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import ModalDialog from "@docspace/components/modal-dialog";
-import Button from "@docspace/components/button";
-import toastr from "@docspace/components/toast/toastr";
+import { ModalDialog, Button, toastr } from "@docspace/shared/components";
 
 import ModalDialogContainer from "../ModalDialogContainer";
 

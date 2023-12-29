@@ -2,7 +2,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
 
-import { mobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/shared/utils";
 import Bar from "./Bar";
 
 const StyledContainer = styled.div`

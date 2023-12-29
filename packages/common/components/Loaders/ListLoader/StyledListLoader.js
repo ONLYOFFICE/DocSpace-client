@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { desktop } from "@docspace/components/utils/device";
+import { desktop } from "@docspace/shared/utils";
 
 const StyledList = styled.div`
   padding: 0 16px;

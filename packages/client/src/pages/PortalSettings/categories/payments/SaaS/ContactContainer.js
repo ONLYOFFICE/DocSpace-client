@@ -2,14 +2,14 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
-import Text from "@docspace/components/text";
+import { ColorTheme, ThemeId } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components";
 
 const StyledContactContainer = styled.div`
   display: flex;
   width: 100%;
   a {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-right: 4px;
@@ -29,9 +29,10 @@ const ContactContainer = ({ t, salesEmail }) => {
           <ColorTheme
             className="sales-email-link"
             tag="a"
-            themeId={ThemeType.Link}
+            themeId={ThemeId.Link}
             fontWeight="600"
-            href={`mailto:${salesEmail}`}>
+            href={`mailto:${salesEmail}`}
+          >
             {salesEmail}
           </ColorTheme>
         </Text>

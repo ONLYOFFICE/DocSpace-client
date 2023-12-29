@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import { tablet, mobile } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/shared/utils";
 import Headline from "@docspace/common/components/Headline";
 
 const StyledHeadline = styled(Headline)`

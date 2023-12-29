@@ -1,7 +1,7 @@
 import React from "react";
 
-import Avatar from "@docspace/components/avatar";
-import Text from "@docspace/components/text";
+import { Avatar } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components";
 import AccessComboBox from "./AccessComboBox";
 import { StyledItem } from "./StyledSharingPanel";
 

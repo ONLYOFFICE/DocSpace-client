@@ -3,8 +3,8 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 
 import MenuIcon from "PUBLIC_DIR/images/menu.react.svg";
-import { mobile } from "@docspace/components/utils/device";
-import { Base } from "@docspace/components/themes";
+import { mobile } from "@docspace/shared/utils";
+import { Base } from "@docspace/shared/themes";
 
 const StyledIconBox = styled.div`
   display: none;

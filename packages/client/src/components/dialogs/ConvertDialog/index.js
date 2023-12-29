@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ModalDialogContainer from "../ModalDialogContainer";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Button from "@docspace/components/button";
-import Text from "@docspace/components/text";
-import Checkbox from "@docspace/components/checkbox";
+import {
+  ModalDialog,
+  Button,
+  Text,
+  Checkbox,
+} from "@docspace/shared/components";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import Loaders from "@docspace/common/components/Loaders";

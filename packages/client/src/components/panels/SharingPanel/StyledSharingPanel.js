@@ -1,4 +1,4 @@
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 import styled, { css } from "styled-components";
 
 import { isMobile, isMobileOnly } from "react-device-detect";

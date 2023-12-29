@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { observer, inject } from "mobx-react";
 
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components";
 import Loaders from "@docspace/common/components/Loaders";
 
 import BenefitsContainer from "SRC_DIR/components/StandaloneComponents/BenefitsContainer";

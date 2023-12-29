@@ -3,7 +3,7 @@ import { useHotkeys } from "react-hotkeys-hook";
 import { observer, inject } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import { Events } from "@docspace/common/constants";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components";
 import throttle from "lodash/throttle";
 import { checkDialogsOpen } from "@docspace/common/utils/checkDialogsOpen";
 

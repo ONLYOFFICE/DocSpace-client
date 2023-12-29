@@ -6,11 +6,11 @@ import { useTheme } from "styled-components";
 
 import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 
-import Submenu from "@docspace/components/submenu";
-import Link from "@docspace/components/link";
-import Text from "@docspace/components/text";
-import Box from "@docspace/components/box";
-import HelpButton from "@docspace/components/help-button";
+import { Submenu } from "@docspace/shared/components";
+import { Link } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components";
+import { Box } from "@docspace/shared/components";
+import { HelpButton } from "@docspace/shared/components";
 import { combineUrl } from "@docspace/common/utils";
 import AppLoader from "@docspace/common/components/AppLoader";
 import { removeLocalStorage } from "../../utils";

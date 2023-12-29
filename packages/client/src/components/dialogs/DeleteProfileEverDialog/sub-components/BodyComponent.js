@@ -2,8 +2,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { Trans } from "react-i18next";
 
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
+import { Text, Link } from "@docspace/shared/components";
 
 const BodyComponent = (props) => {
   const {

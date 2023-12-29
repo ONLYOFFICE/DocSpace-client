@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 const StyledDetailsLoader = styled.div`
   width: 100%;
@@ -54,7 +54,11 @@ const DetailsLoader = () => {
   return (
     <StyledDetailsLoader>
       <StyledSubtitleLoader>
-        <RectangleSkeleton width={"71px"} height={"16px"} borderRadius={"3px"} />
+        <RectangleSkeleton
+          width={"71px"}
+          height={"16px"}
+          borderRadius={"3px"}
+        />
       </StyledSubtitleLoader>
 
       <StyledProperty>

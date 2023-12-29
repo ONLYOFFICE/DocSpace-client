@@ -12,8 +12,9 @@ import renderApp from "./lib/helpers/render-app";
 import i18nextMiddleware from "i18next-express-middleware";
 import i18next from "./i18n";
 import cookieParser from "cookie-parser";
-import { LANGUAGE, COOKIE_EXPIRATION_YEAR } from "@docspace/common/constants";
-import { getLanguage } from "@docspace/common/utils";
+import { COOKIE_EXPIRATION_YEAR } from "@docspace/common/constants";
+import { LANGUAGE } from "@docspace/shared/constants";
+import { getLanguage } from "@docspace/shared/utils";
 import { initSSR } from "@docspace/common/api/client";
 import { checkIsAuthenticated } from "@docspace/common/api/user";
 import dns from "dns";
@@ -44,16 +45,18 @@ app.use(
   })
 );
 
-app.use(logger("dev", { 
-  stream: stream,
-  skip: function (req, res) {
-    if (req.url == '/health') {
+app.use(
+  logger("dev", {
+    stream: stream,
+    skip: function (req, res) {
+      if (req.url == "/health") {
         return true;
-    } else {
+      } else {
         return false;
-    }
-  }
-}));
+      }
+    },
+  })
+);
 
 app.get("*", async (req: ILoginRequest, res: Response, next) => {
   const { i18n, cookies, headers, query, t, url } = req;

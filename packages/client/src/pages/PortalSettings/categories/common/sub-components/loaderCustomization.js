@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
-import { desktop, mobileMore } from "@docspace/components/utils/device";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { desktop, mobileMore } from "@docspace/shared/utils";
 
 const tabletStyles = css`
   .header {

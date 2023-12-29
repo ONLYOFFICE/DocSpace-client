@@ -1,4 +1,4 @@
-﻿import { mobile } from "@docspace/components/utils/device";
+﻿import { mobile } from "@docspace/shared/utils";
 import PlusThemeSvgUrl from "PUBLIC_DIR/images/plus.theme.svg?url";
 import styled, { css } from "styled-components";
 

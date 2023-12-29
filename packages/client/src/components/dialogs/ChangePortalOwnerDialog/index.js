@@ -7,13 +7,15 @@ import { withTranslation } from "react-i18next";
 import PeopleSelector from "SRC_DIR/components/PeopleSelector";
 
 import Filter from "@docspace/common/api/people/filter";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Avatar from "@docspace/components/avatar";
-import Text from "@docspace/components/text";
-import SelectorAddButton from "@docspace/components/selector-add-button";
-import Button from "@docspace/components/button";
-import Link from "@docspace/components/link";
-import toastr from "@docspace/components/toast/toastr";
+import {
+  ModalDialog,
+  Avatar,
+  Text,
+  SelectorAddButton,
+  Button,
+  Link,
+  toastr,
+} from "@docspace/shared/components";
 
 import {
   StyledOwnerInfo,

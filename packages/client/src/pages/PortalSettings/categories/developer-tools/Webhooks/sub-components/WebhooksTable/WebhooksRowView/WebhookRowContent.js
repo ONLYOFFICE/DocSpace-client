@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-import Text from "@docspace/components/text";
-import RowContent from "@docspace/components/row-content";
-import ToggleButton from "@docspace/components/toggle-button";
+import { Text } from "@docspace/shared/components";
+import { RowContent } from "@docspace/shared/components";
+import { ToggleButton } from "@docspace/shared/components";
 
 import StatusBadge from "../../StatusBadge";
 
-import { isMobile, tablet } from "@docspace/components/utils/device";
+import { isMobile, tablet } from "@docspace/shared/utils";
 
 const StyledRowContent = styled(RowContent)`
   display: flex;
@@ -49,12 +49,21 @@ const FlexWrapper = styled.div`
   display: flex;
 `;
 
-export const WebhookRowContent = ({ sectionWidth, webhook, isChecked, handleToggleEnabled }) => {
+export const WebhookRowContent = ({
+  sectionWidth,
+  webhook,
+  isChecked,
+  handleToggleEnabled,
+}) => {
   return (
     <StyledRowContent sectionWidth={sectionWidth}>
       <ContentWrapper>
         <FlexWrapper>
-          <Text fontWeight={600} fontSize="14px" style={{ marginInlineEnd: "8px" }}>
+          <Text
+            fontWeight={600}
+            fontSize="14px"
+            style={{ marginInlineEnd: "8px" }}
+          >
             {webhook.name}
           </Text>
           <StatusBadge status={webhook.status} />

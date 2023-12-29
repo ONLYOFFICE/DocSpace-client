@@ -4,8 +4,7 @@ import TagHandler from "./handlers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
 import DialogHeader from "./sub-components/DialogHeader";
 
-import ModalDialog from "@docspace/components/modal-dialog";
-import Button from "@docspace/components/button";
+import { ModalDialog, Button } from "@docspace/shared/components";
 
 const EditRoomDialog = ({
   t,

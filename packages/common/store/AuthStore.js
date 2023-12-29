@@ -9,12 +9,13 @@ import TfaStore from "./TfaStore";
 import InfoPanelStore from "./InfoPanelStore";
 import { logout as logoutDesktop, desktopConstants } from "../desktop";
 import { isAdmin, setCookie } from "../utils";
-import { getCookie } from "@docspace/components/utils/cookie";
+import { getCookie } from "@docspace/shared/utils";
 import CurrentQuotasStore from "./CurrentQuotaStore";
 import CurrentTariffStatusStore from "./CurrentTariffStatusStore";
 import PaymentQuotasStore from "./PaymentQuotasStore";
 
-import { LANGUAGE, COOKIE_EXPIRATION_YEAR, TenantStatus } from "../constants";
+import { COOKIE_EXPIRATION_YEAR, TenantStatus } from "../constants";
+import { LANGUAGE } from "@docspace/shared/constants";
 import { getPortalTenantExtra } from "../api/portal";
 
 class AuthStore {

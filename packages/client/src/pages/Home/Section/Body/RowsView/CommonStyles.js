@@ -1,4 +1,4 @@
-import { mobile, tablet } from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/shared/utils";
 import { css } from "styled-components";
 
 const marginStyles = css`

@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { ReactSVG } from "react-svg";
-import Badge from "@docspace/components/badge";
-import { Base } from "@docspace/components/themes";
+import { Badge } from "@docspace/shared/components";
+import { Base } from "@docspace/shared/themes";
 
 const StyledContainer = styled.div`
   position: relative;

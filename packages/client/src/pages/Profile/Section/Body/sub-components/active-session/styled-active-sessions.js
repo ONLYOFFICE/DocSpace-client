@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { mobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/shared/utils";
 
 export const StyledFooter = styled.div`
   .session-logout {

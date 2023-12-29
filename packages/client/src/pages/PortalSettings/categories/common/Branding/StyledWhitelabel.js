@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { Base } from "@docspace/components/themes";
-import { mobile } from "@docspace/components/utils/device";
+import { Base } from "@docspace/shared/themes";
+import { mobile } from "@docspace/shared/utils";
 
 const WhiteLabelWrapper = styled.div`
   .subtitle {

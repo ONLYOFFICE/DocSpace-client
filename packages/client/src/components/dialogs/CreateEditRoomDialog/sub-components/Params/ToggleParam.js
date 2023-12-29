@@ -1,4 +1,4 @@
-import ToggleButton from "@docspace/components/toggle-button";
+import { ToggleButton } from "@docspace/shared/components";
 import React from "react";
 import styled from "styled-components";
 import { StyledParam } from "./StyledParam";

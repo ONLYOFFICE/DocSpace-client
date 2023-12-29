@@ -1,8 +1,8 @@
 import React from "react";
 
-import Checkbox from "@docspace/components/checkbox";
-import Button from "@docspace/components/button";
-import Textarea from "@docspace/components/textarea";
+import { Checkbox } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components";
+import { Textarea } from "@docspace/shared/components";
 
 import { StyledFooterContent } from "./StyledSharingPanel";
 

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Consumer } from "@docspace/components/utils/context";
+import { Consumer } from "@docspace/shared/utils";
 
 export function withLayoutSize(Component) {
   return function LayoutSizeComponent(props) {

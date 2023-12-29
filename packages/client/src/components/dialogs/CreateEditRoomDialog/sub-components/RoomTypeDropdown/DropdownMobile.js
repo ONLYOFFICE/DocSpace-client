@@ -3,9 +3,9 @@ import styled from "styled-components";
 
 import RoomType from "../RoomType";
 import { RoomsType } from "./../../../../../../../common/constants/index";
-import { Backdrop } from "@docspace/components";
+import { Backdrop } from "@docspace/shared/components";
 
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 
 const StyledDropdownMobile = styled.div`
   visibility: ${(props) => (props.isOpen ? "visible" : "hidden")};

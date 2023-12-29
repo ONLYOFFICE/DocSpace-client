@@ -3,8 +3,8 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { Trans, useTranslation } from "react-i18next";
 
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
+import { Text } from "@docspace/shared/components";
+import { Link } from "@docspace/shared/components";
 
 import { StyledContactComponent } from "./StyledComponent";
 const ContactContainer = (props) => {

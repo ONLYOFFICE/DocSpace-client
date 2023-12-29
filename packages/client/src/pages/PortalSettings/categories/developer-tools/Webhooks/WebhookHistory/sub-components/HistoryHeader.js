@@ -8,26 +8,21 @@ import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import RetryIcon from "PUBLIC_DIR/images/refresh.react.svg?url";
 
 import Headline from "@docspace/common/components/Headline";
-import IconButton from "@docspace/components/icon-button";
+import { IconButton } from "@docspace/shared/components";
 // import { Hint } from "../../styled-components";
 
-import {
-  tablet,
-  mobile,
-  isTablet,
-  isMobile,
-} from "@docspace/components/utils/device";
+import { tablet, mobile, isTablet, isMobile } from "@docspace/shared/utils";
 
-import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu";
-import DropDownItem from "@docspace/components/drop-down-item";
+import { TableGroupMenu } from "@docspace/shared/components";
+import { DropDownItem } from "@docspace/shared/components";
 
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 
-import FloatingButton from "@docspace/components/floating-button";
+import { FloatingButton } from "@docspace/shared/components";
 
-import Base from "@docspace/components/themes/base";
+import Base from "@docspace/shared/themes/base";
 
 const HeaderContainer = styled.div`
   position: sticky;

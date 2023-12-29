@@ -4,10 +4,10 @@ import { withTranslation } from "react-i18next";
 import copy from "copy-to-clipboard";
 import isEqual from "lodash/isEqual";
 
-import Button from "@docspace/components/button";
-import toastr from "@docspace/components/toast/toastr";
-import Portal from "@docspace/components/portal";
-import ModalDialog from "@docspace/components/modal-dialog";
+import { Button } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components";
+import { Portal } from "@docspace/shared/components";
+import { ModalDialog } from "@docspace/shared/components";
 import { StyledEditLinkPanel } from "./StyledEditLinkPanel";
 
 import LinkBlock from "./LinkBlock";

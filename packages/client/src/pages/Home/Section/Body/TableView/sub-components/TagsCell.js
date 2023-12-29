@@ -1,9 +1,9 @@
 import React from "react";
 
-import Tags from "@docspace/components/tags";
+import { Tags } from "@docspace/shared/components";
 
 //import { RoomsTypeTranslations } from "@docspace/common/constants";
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components";
 
 const TagsCell = ({
   t,

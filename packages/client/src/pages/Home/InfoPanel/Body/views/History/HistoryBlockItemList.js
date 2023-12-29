@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import { Trans } from "react-i18next";
 
-import Text from "@docspace/components/text";
-import IconButton from "@docspace/components/icon-button";
+import { Text } from "@docspace/shared/components";
+import { IconButton } from "@docspace/shared/components";
 import { ReactSVG } from "react-svg";
 import {
   StyledHistoryBlockFile,

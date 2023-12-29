@@ -3,7 +3,7 @@ import { cloneDeep } from "lodash";
 
 import api from "@docspace/common/api";
 
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components";
 
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 

@@ -1,4 +1,4 @@
-import { tablet } from "@docspace/components/utils/device";
+import { tablet } from "@docspace/shared/utils";
 
 import styled from "styled-components";
 

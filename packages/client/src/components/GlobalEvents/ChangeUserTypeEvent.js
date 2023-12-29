@@ -4,9 +4,8 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 import { ChangeUserTypeDialog } from "../dialogs";
-import toastr from "@docspace/components/toast/toastr";
-import Link from "@docspace/components/link";
-import Text from "@docspace/components/text";
+import { toastr, Link, Text } from "@docspace/shared/components";
+
 import { combineUrl } from "@docspace/common/utils";
 
 const ChangeUserTypeEvent = ({

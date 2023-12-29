@@ -1,11 +1,15 @@
 import styled, { css } from "styled-components";
 import { isMobileOnly } from "react-device-detect";
-import Scrollbar from "@docspace/components/scrollbar";
+import { Scrollbar } from "@docspace/shared/components";
 import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
-import { Base } from "@docspace/components/themes";
+import {
+  commonIconsStyles,
+  mobile,
+  desktop,
+  mobileMore,
+} from "@docspace/shared/utils";
+import { Base } from "@docspace/shared/themes";
 import { UnavailableStyles } from "../../../utils/commonSettingsStyles";
-import { mobile, desktop, mobileMore } from "@docspace/components/utils/device";
 
 const menuHeight = "48px";
 const sectionHeight = "50px";

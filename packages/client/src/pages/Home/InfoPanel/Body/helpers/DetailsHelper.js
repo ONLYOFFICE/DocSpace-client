@@ -1,12 +1,12 @@
 import React from "react";
 
-import { LANGUAGE } from "@docspace/common/constants";
+import { LANGUAGE } from "@docspace/shared/constants";
 
-import getCorrectDate from "@docspace/components/utils/getCorrectDate";
+import { getCorrectDate, getCookie } from "@docspace/shared/utils";
 
-import Link from "@docspace/components/link";
-import Text from "@docspace/components/text";
-import Tag from "@docspace/components/tag";
+import { Link } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components";
+import { Tag } from "@docspace/shared/components";
 import { decode } from "he";
 
 import {
@@ -15,7 +15,7 @@ import {
   getFileTypeName,
 } from "@docspace/client/src/helpers/filesUtils";
 import CommentEditor from "../sub-components/CommentEditor";
-import { getCookie } from "@docspace/components/utils/cookie";
+
 // Property Content Components
 
 const text = (text) => (
@@ -132,27 +132,27 @@ class DetailsHelper {
             this.item.tags.length && "Tags",
           ]
         : this.item.isFolder
-        ? [
-            "Owner",
-            //"Location",
-            "Type",
-            "Content",
-            "Date modified",
-            "Last modified by",
-            "Creation date",
-          ]
-        : [
-            "Owner",
-            //"Location",
-            "Type",
-            "File extension",
-            "Size",
-            "Date modified",
-            "Last modified by",
-            "Creation date",
-            "Versions",
-            "Comments",
-          ]
+          ? [
+              "Owner",
+              //"Location",
+              "Type",
+              "Content",
+              "Date modified",
+              "Last modified by",
+              "Creation date",
+            ]
+          : [
+              "Owner",
+              //"Location",
+              "Type",
+              "File extension",
+              "Size",
+              "Date modified",
+              "Last modified by",
+              "Creation date",
+              "Versions",
+              "Comments",
+            ]
     ).filter((nP) => !!nP);
   };
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { toastr } from "@docspace/components";
+import { toastr } from "@docspace/shared/components";
 import { makeAutoObservable, runInAction } from "mobx";
 import { Trans } from "react-i18next";
 import api from "../api";

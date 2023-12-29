@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import { Base } from "@docspace/components/themes";
-import { mobile, tablet } from "@docspace/components/utils/device";
+import { Base } from "@docspace/shared/themes";
+import { mobile, tablet } from "@docspace/shared/utils";
 
 const StyledAccountsItemTitle = styled.div`
   min-height: 80px;

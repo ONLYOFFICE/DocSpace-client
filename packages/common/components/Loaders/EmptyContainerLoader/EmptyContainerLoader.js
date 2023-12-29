@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import RowsSkeleton from "@docspace/components/skeletons/rows";
+import { RowsSkeleton } from "@docspace/shared/skeletons";
 
-import { isMobile, isTablet } from "@docspace/components/utils/device";
+import { isMobile, isTablet } from "@docspace/shared/utils";
 
 const EmptyContainerLoader = ({ viewAs, style, ...rest }) => {
   const [viewMobile, setViewMobile] = useState(false);

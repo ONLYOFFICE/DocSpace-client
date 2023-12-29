@@ -1,16 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Button from "@docspace/components/button";
-import Text from "@docspace/components/text";
+import {
+  ModalDialog,
+  Button,
+  Text,
+  Link,
+  toastr,
+} from "@docspace/shared/components";
+
 import { withTranslation } from "react-i18next";
 import ModalDialogContainer from "../ModalDialogContainer";
-import toastr from "@docspace/components/toast/toastr";
-import Link from "@docspace/components/link";
 
 import { DeviceType } from "@docspace/common/constants";
-import { isDesktop } from "@docspace/components/utils/device";
+import { isDesktop } from "@docspace/shared/utils";
 
 const StyledModal = styled(ModalDialogContainer)`
   .backup-codes-counter {

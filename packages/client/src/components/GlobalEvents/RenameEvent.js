@@ -1,7 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components";
 import Dialog from "./sub-components/Dialog";
 import { getTitleWithoutExtension } from "SRC_DIR/helpers/filesUtils";
 

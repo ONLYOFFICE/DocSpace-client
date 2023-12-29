@@ -2,7 +2,7 @@
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import IconButton from "@docspace/components/icon-button";
+import { IconButton } from "@docspace/shared/components";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import {

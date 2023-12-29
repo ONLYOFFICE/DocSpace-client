@@ -3,7 +3,7 @@ import InfoPanelRoomEmptyScreenDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_c
 
 import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components";
 
 import { StyledNoItemContainer } from "../../styles/noItem";
 

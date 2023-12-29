@@ -1,13 +1,16 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import PropTypes from "prop-types";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Button from "@docspace/components/button";
-import Link from "@docspace/components/link";
-import Text from "@docspace/components/text";
+import {
+  ModalDialog,
+  Button,
+  Link,
+  Text,
+  toastr,
+} from "@docspace/shared/components";
+
 import { withTranslation, Trans } from "react-i18next";
 import { sendInstructionsToChangePassword } from "@docspace/common/api/people";
-import toastr from "@docspace/components/toast/toastr";
 
 class ChangePasswordDialogComponent extends React.Component {
   constructor() {

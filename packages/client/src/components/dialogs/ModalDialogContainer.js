@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { tablet } from "@docspace/components/utils/device";
-import ModalDialog from "@docspace/components/modal-dialog";
-import { Base } from "@docspace/components/themes";
+import { tablet } from "@docspace/shared/utils";
+import { ModalDialog } from "@docspace/shared/components";
+import { Base } from "@docspace/shared/themes";
 
 const ModalDialogContainer = styled(ModalDialog)`
   .row-main-container-wrapper {

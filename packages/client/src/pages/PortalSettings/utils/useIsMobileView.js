@@ -1,5 +1,5 @@
 import { useState, useLayoutEffect } from "react";
-import { size } from "@docspace/components/utils/device";
+import { size } from "@docspace/shared/utils";
 
 export const useIsMobileView = () => {
   const [isMobileView, setIsMobileView] = useState(false);

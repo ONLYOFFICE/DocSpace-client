@@ -1,11 +1,11 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import equal from "fast-deep-equal/react";
-import { tablet } from "@docspace/components/utils/device";
+import { tablet } from "@docspace/shared/utils";
 
 const StyledSectionPaging = styled.div`
   margin: 16px 0 0;
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           padding-left: 3px;
@@ -15,7 +15,7 @@ const StyledSectionPaging = styled.div`
         `}
 
   @media ${tablet} {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             padding-left: 0px;

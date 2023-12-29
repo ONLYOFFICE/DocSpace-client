@@ -5,11 +5,11 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import EmptyScreenContainer from "@docspace/components/empty-screen-container";
-import IconButton from "@docspace/components/icon-button";
-import Link from "@docspace/components/link";
-import Box from "@docspace/components/box";
-import Grid from "@docspace/components/grid";
+import { EmptyScreenContainer } from "@docspace/shared/components";
+import { IconButton } from "@docspace/shared/components";
+import { Link } from "@docspace/shared/components";
+import { Box } from "@docspace/shared/components";
+import { Grid } from "@docspace/shared/components";
 
 const EmptyScreen = ({ resetFilter, setIsLoading, theme }) => {
   const { t } = useTranslation(["People", "Common"]);

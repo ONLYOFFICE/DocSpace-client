@@ -2,9 +2,9 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
-import TableRow from "@docspace/components/table-container/TableRow";
-import TableCell from "@docspace/components/table-container/TableCell";
-import Text from "@docspace/components/text";
+import { TableRow } from "@docspace/shared/components";
+import { TableCell } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components";
 import { convertTime } from "@docspace/common/utils/convertTime";
 
 import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { StyledGroup, StyledLastRow, StyledSpacer } from "./StyledGroupLoader";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 const GroupLoader = ({ id, className, style, ...rest }) => {
   const {

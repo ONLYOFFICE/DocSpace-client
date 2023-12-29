@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Button from "@docspace/components/button";
+import { ModalDialog } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components";
 import styled from "styled-components";
 import { withTranslation } from "react-i18next";
 

@@ -235,6 +235,8 @@ const PeopleTableRow = (props) => {
 
   const [isLoading, setIsLoading] = React.useState(false);
 
+  const isChecked = checkedProps.checked;
+
   let previousSibling = null;
   let previousSiblingUserNameCell = null;
   let previousSiblingContextMenu = null;
@@ -273,6 +275,14 @@ const PeopleTableRow = (props) => {
   const onHoverRemove = () => {
     if (!previousSibling) return;
 
+    const row = document.getElementById(id);
+
+    if (!row) return;
+
+    const isCheckedRow = row.closest(".table-row-selected");
+
+    if (!!isCheckedRow) return;
+
     previousSiblingUserNameCell.style.marginLeft = "0";
     previousSiblingUserNameCell.style.paddingLeft = "0";
 
@@ -293,6 +303,37 @@ const PeopleTableRow = (props) => {
       row.removeEventListener("mouseout", onHoverRemove);
     };
   }, [id]);
+
+  React.useEffect(() => {
+    if (!isChecked && !isActive) {
+      let row = document.getElementById(id);
+      if (!row) return;
+
+      const parent = row.closest(".table-list-item");
+      previousSibling = parent.previousSibling;
+
+      if (!previousSibling) return;
+
+      previousSiblingUserNameCell = previousSibling.querySelector(
+        ".table-container_user-name-cell"
+      );
+      previousSiblingContextMenu = previousSibling.querySelector(
+        ".table-container_row-context-menu-wrapper"
+      );
+
+      let marginLeftUserNameCell = window.getComputedStyle(
+        previousSiblingUserNameCell
+      ).marginLeft;
+
+      if (marginLeftUserNameCell === "0px") return;
+
+      previousSiblingUserNameCell.style.marginLeft = "0";
+      previousSiblingUserNameCell.style.paddingLeft = "0";
+
+      previousSiblingContextMenu.style.marginRight = "0";
+      previousSiblingContextMenu.style.paddingRight = "0";
+    }
+  }, [isChecked, isActive]);
 
   const getTypesOptions = React.useCallback(() => {
     const options = [];
@@ -384,8 +425,6 @@ const PeopleTableRow = (props) => {
   }, []);
 
   const typeLabel = getUserTypeLabel(role);
-
-  const isChecked = checkedProps.checked;
 
   const renderTypeCell = () => {
     const typesOptions = getTypesOptions();

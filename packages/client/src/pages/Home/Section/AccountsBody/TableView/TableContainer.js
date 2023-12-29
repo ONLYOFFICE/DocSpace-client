@@ -17,12 +17,6 @@ import { TableVersions } from "SRC_DIR/helpers/constants";
 const COLUMNS_SIZE = `peopleColumnsSize_ver-${TableVersions.Accounts}`;
 const INFO_PANEL_COLUMNS_SIZE = `infoPanelPeopleColumnsSize_ver-${TableVersions.Accounts}`;
 
-const marginCss = css`
-  margin-top: -1px;
-  border-top: ${(props) =>
-    `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
-`;
-
 const userNameCss = css`
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
@@ -31,11 +25,9 @@ const userNameCss = css`
           padding-right: 24px;
         `
       : css`
-          margin-left: -24px;
-          padding-left: 24px;
+          margin-left: -24px !important;
+          padding-left: 24px !important;
         `}
-
-  ${marginCss}
 `;
 
 const contextCss = css`
@@ -46,11 +38,9 @@ const contextCss = css`
           padding-left: 20px;
         `
       : css`
-          margin-right: -20px;
-          padding-right: 20px;
+          margin-right: -20px !important;
+          padding-right: 20px !important;
         `}
-
-  ${marginCss}
 `;
 
 const StyledTableContainer = styled(TableContainer)`

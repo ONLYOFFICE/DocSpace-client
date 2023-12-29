@@ -970,7 +970,7 @@ class TableHeader extends React.Component<
         this.moveToLeft(widths, newWidth, colIndex - 1);
         return;
       }
-      if (columnIndex) {
+      if (columnIndex !== null) {
         const offset = getSubstring(widths[+columnIndex]) - newWidth;
         const column2Width = getSubstring(widths[colIndex]);
 
@@ -1082,8 +1082,9 @@ class TableHeader extends React.Component<
     const { containerRef, theme } = this.props;
     const isRtl = theme.interfaceDirection === "rtl";
 
-    if (!columnIndex) return;
+    if (columnIndex === null) return;
     const column = document.getElementById(`column_${columnIndex}`);
+
     if (!column) return;
 
     const columnSize = column.getBoundingClientRect();

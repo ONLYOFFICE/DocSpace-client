@@ -167,6 +167,11 @@
             "label": "spellcheck-force-save",
             "task": "Test | frontend-translations-spellcheck-force-save",
             "tooltip": "🛠️ Start the \"frontend translation spellcheck tests\" task"
+          },
+          {
+            "label": "unit",
+            "task": "Test | Jest:unit",
+            "tooltip": "🛠️ Start the \"Test | Jest:unit\" task"
           }
         ],
         "tooltip": "🛠️ Client tests tasks"

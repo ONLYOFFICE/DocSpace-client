@@ -52,5 +52,5 @@ module.exports = {
     "react/require-default-props": "off",
     "jsx-a11y/no-noninteractive-element-interactions": "off",
   },
-  ignorePatterns: ["./tsconfig.json", "coverage/**"],
+  ignorePatterns: ["./tsconfig.json", "coverage/**", "storybook-static/**"],
 };

@@ -258,6 +258,21 @@
       }
     },
     {
+      "label": "Frontend | storybook prod",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn storybook-build ; yarn storybook-serve",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Test | frontend-translations",
       "type": "shell",
       "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/run.translations.tests.py",

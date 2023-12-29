@@ -331,6 +331,36 @@
         "focus": true,
         "close": false
       }
+    },
+    {
+      "label": "Frontend | Eslint",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn lint ; ",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | Eslint:fix",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn lint:fix ; ",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
     }
   ]
 }

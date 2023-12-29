@@ -146,6 +146,16 @@
             "label": "Start storybook prod",
             "task": "Frontend | storybook prod",
             "tooltip": "🛠️ Start the \"frontend start storybook\" task"
+          },
+          {
+            "label": "Lint",
+            "task": "Frontend | Eslint",
+            "tooltip": "🛠️ Start the \"frontend start storybook\" task"
+          },
+          {
+            "label": "Lint:fix",
+            "task": "Frontend | Eslint:fix",
+            "tooltip": "🛠️ Start the \"frontend start storybook\" task"
           }
         ],
         "tooltip": "🛠️ Client tasks"

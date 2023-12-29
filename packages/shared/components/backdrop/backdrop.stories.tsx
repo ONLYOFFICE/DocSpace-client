@@ -27,7 +27,7 @@ type Story = StoryObj<typeof Backdrop>;
 export default meta;
 
 const Template = (args: BackdropProps) => {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
   const toggleVisible = () => setIsVisible(!isVisible);
 
   return (
@@ -51,5 +51,5 @@ const Template = (args: BackdropProps) => {
 
 export const Default: Story = {
   render: (args) => <Template {...args} />,
-  args: { withBackground: true },
+  args: { withBackground: true, visible: false },
 };

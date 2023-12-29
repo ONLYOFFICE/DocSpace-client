@@ -136,6 +136,11 @@
             "label": "Start prod",
             "task": "Frontend | start-prod",
             "tooltip": "🛠️ Start the \"frontend start production\" task"
+          },
+          {
+            "label": "Start storybook",
+            "task": "Frontend | storybook",
+            "tooltip": "🛠️ Start the \"frontend start storybook\" task"
           }
         ],
         "tooltip": "🛠️ Client tasks"

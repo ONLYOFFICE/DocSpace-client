@@ -36,5 +36,6 @@ export const Default: Story = {
     label: "Base SocialButton",
     iconName: ShareGoogleReactSvgUrl,
     isDisabled: false,
+    style: { maxWidth: "250px" },
   },
 };

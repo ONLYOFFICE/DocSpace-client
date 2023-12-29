@@ -69,5 +69,8 @@ export const Default: Story = {
     isDropdown: true,
     text: "Actions",
     model: itemsModel,
+    style: {
+      maxWidth: "210px",
+    },
   },
 };

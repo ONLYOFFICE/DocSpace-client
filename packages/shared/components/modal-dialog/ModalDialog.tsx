@@ -76,6 +76,8 @@ const ModalDialog = ({
       );
     }, 300);
 
+    onResize();
+
     const onSwipe = (e: TouchEvent) =>
       setModalSwipeOffset(handleTouchMove(e, onClose));
 

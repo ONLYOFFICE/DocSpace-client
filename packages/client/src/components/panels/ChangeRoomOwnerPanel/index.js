@@ -6,8 +6,8 @@ import { Backdrop } from "@docspace/shared/components";
 import PeopleSelector from "@docspace/client/src/components/PeopleSelector";
 import { withTranslation } from "react-i18next";
 import Filter from "@docspace/common/api/people/filter";
-import { EmployeeType } from "@docspace/common/constants";
-import { DeviceType } from "@docspace/common/constants";
+import { EmployeeType } from "@docspace/shared/enums";
+import { DeviceType } from "@docspace/shared/enums";
 import { Portal } from "@docspace/shared/components";
 
 const StyledChangeRoomOwner = styled.div`
@@ -153,8 +153,8 @@ export default inject(
     const room = selection.length
       ? selection[0]
       : bufferSelection
-      ? bufferSelection
-      : selectedFolderStore;
+        ? bufferSelection
+        : selectedFolderStore;
 
     const { currentDeviceType } = settingsStore;
 

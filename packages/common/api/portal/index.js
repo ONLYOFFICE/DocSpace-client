@@ -1,4 +1,4 @@
-import { EmployeeType } from "../../constants";
+import { EmployeeType } from "@docspace/shared/enums";
 import { request } from "../client";
 
 export function getShortenedLink(link) {

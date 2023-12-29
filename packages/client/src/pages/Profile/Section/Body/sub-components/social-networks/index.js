@@ -13,7 +13,7 @@ import {
   getOAuthToken,
   getLoginLink,
 } from "@docspace/common/utils";
-import { providersData } from "@docspace/common/constants";
+import { PROVIDERS_DATA } from "@docspace/shared/constants";
 
 import { StyledWrapper } from "./styled-social-networks";
 
@@ -98,8 +98,8 @@ const SocialNetworks = (props) => {
   const providerButtons =
     providers &&
     providers.map((item) => {
-      if (!providersData[item.provider]) return;
-      const { icon, label, iconOptions } = providersData[item.provider];
+      if (!PROVIDERS_DATA[item.provider]) return;
+      const { icon, label, iconOptions } = PROVIDERS_DATA[item.provider];
       if (!icon || !label) return <></>;
 
       const onClick = (e) => {

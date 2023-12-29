@@ -9,7 +9,7 @@ import {
 import RestoreBackupLoader from "@docspace/common/components/Loaders/RestoreBackupLoader";
 import { toastr } from "@docspace/shared/components";
 import { RadioButtonGroup } from "@docspace/shared/components";
-import { BackupStorageType, DeviceType } from "@docspace/common/constants";
+import { BackupStorageType, DeviceType } from "@docspace/shared/enums";
 import { Checkbox } from "@docspace/shared/components";
 import { Text } from "@docspace/shared/components";
 

@@ -56,7 +56,7 @@ import {
   DeviceType,
   FolderType,
   ShareAccessRights,
-} from "@docspace/common/constants";
+} from "@docspace/shared/enums";
 
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import {
@@ -1007,10 +1007,10 @@ const SectionHeaderContent = (props) => {
   const currentTitle = isSettingsPage
     ? t("Common:Settings")
     : isAccountsPage
-    ? t("Common:Accounts")
-    : isLoading && stateTitle
-    ? stateTitle
-    : title;
+      ? t("Common:Accounts")
+      : isLoading && stateTitle
+        ? stateTitle
+        : title;
 
   const currentCanCreate =
     isLoading && location?.state?.hasOwnProperty("canCreate")

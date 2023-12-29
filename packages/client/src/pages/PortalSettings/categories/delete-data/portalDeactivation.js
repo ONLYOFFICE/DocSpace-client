@@ -9,7 +9,7 @@ import { MainContainer, ButtonWrapper } from "./StyledDeleteData";
 import { setDocumentTitle } from "../../../../helpers/utils";
 import { sendSuspendPortalEmail } from "@docspace/common/api/portal";
 import { isDesktop } from "@docspace/shared/utils";
-import { EmployeeActivationStatus } from "@docspace/common/constants";
+import { EmployeeActivationStatus } from "@docspace/shared/enums";
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
 
 const PortalDeactivation = (props) => {

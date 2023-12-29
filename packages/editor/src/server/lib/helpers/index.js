@@ -13,7 +13,7 @@ import {
   getSettingsFiles,
   // getShareFiles,
 } from "@docspace/common/api/files";
-import { TenantStatus } from "@docspace/common/constants";
+import { TenantStatus } from "@docspace/shared/enums";
 
 import {
   getLtrLanguageForEditor,

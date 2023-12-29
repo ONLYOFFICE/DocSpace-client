@@ -22,7 +22,7 @@ import { HelpButton } from "@docspace/shared/components";
 import config from "PACKAGE_FILE";
 import { StyledBackupList } from "../../../StyledBackup";
 import BackupListBody from "./BackupListBody";
-import { TenantStatus } from "@docspace/common/constants";
+import { TenantStatus } from "@docspace/shared/enums";
 import styled from "styled-components";
 
 const StyledModalDialog = styled(ModalDialog)`

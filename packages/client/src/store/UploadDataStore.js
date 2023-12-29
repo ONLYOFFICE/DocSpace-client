@@ -2,7 +2,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
 import uniqueid from "lodash/uniqueId";
 import sumBy from "lodash/sumBy";
-import { ConflictResolveType } from "@docspace/common/constants";
+import { ConflictResolveType } from "@docspace/shared/enums";
 import {
   getFileInfo,
   getFolderInfo,
@@ -718,8 +718,8 @@ class UploadDataStore {
         const filePath = file.path
           ? file.path
           : file.webkitRelativePath
-          ? file.webkitRelativePath
-          : file.name;
+            ? file.webkitRelativePath
+            : file.name;
 
         return file.name !== filePath;
       }) > -1;
@@ -1130,8 +1130,8 @@ class UploadDataStore {
     const relativePath = file.path
       ? file.path.slice(1, -file.name.length)
       : file.webkitRelativePath
-      ? file.webkitRelativePath.slice(0, -file.name.length)
-      : "";
+        ? file.webkitRelativePath.slice(0, -file.name.length)
+        : "";
 
     return startUploadSession(
       toFolderId,

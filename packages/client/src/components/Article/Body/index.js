@@ -5,7 +5,7 @@ import { withTranslation } from "react-i18next";
 
 import { useNavigate, useLocation } from "react-router-dom";
 
-import { DeviceType, RoomSearchArea } from "@docspace/common/constants";
+import { DeviceType, RoomSearchArea } from "@docspace/shared/enums";
 import Items from "./Items";
 import { tablet } from "@docspace/shared/utils";
 

@@ -25,7 +25,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 import MobileView from "./MobileView";
 
-import { Events, EmployeeType, DeviceType } from "@docspace/common/constants";
+import { Events, EmployeeType, DeviceType } from "@docspace/shared/enums";
 
 import styled, { css } from "styled-components";
 
@@ -490,8 +490,8 @@ const ArticleMainButtonContent = (props) => {
   const isDisabled = isSettingsPage
     ? isSettingsPage
     : isAccountsPage
-    ? !isAccountsPage
-    : !security?.Create;
+      ? !isAccountsPage
+      : !security?.Create;
 
   const isProfile = location.pathname.includes("/profile");
 

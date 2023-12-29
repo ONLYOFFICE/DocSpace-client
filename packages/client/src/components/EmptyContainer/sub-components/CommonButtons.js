@@ -7,7 +7,7 @@ import { withTranslation } from "react-i18next";
 
 import { Link, Box, Text, IconButton } from "@docspace/shared/components";
 
-import { FolderType, RoomSearchArea } from "@docspace/common/constants";
+import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
 import RoomsFilter from "@docspace/common/api/rooms/filter";
 import FilesFilter from "@docspace/common/api/files/filter";
 

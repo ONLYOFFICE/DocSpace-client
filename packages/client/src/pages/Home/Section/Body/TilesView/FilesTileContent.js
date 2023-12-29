@@ -9,7 +9,7 @@ import TileContent from "./sub-components/TileContent";
 import withContent from "../../../../../HOCs/withContent";
 import withBadges from "../../../../../HOCs/withBadges";
 
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 import { tablet } from "@docspace/shared/utils";
 
 const SimpleFilesTileContent = styled(TileContent)`

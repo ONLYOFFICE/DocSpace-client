@@ -13,7 +13,7 @@ import { tablet, mobile } from "@docspace/shared/utils";
 import { Base } from "@docspace/shared/themes";
 
 import { ColorTheme, ThemeId } from "@docspace/shared/components";
-import { DeviceType } from "../../../constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const StyledItem = styled.div`
   height: auto;

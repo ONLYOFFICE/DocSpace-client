@@ -3,7 +3,7 @@ import { toastr } from "@docspace/shared/components";
 import { makeAutoObservable, runInAction } from "mobx";
 import { Trans } from "react-i18next";
 import api from "../api";
-import { EmployeeActivationStatus } from "../constants";
+import { EmployeeActivationStatus } from "@docspace/shared/enums";
 
 class UserStore {
   user = null;

@@ -9,13 +9,9 @@ import {
   getSystemTheme,
 } from "../utils";
 import FirebaseHelper from "../utils/firebase";
-import {
-  ThemeKeys,
-  COOKIE_EXPIRATION_YEAR,
-  TenantStatus,
-  DeviceType,
-} from "../constants";
-import { LANGUAGE } from "@docspace/shared/constants";
+import { ThemeKeys, TenantStatus, DeviceType } from "@docspace/shared/enums";
+
+import { LANGUAGE, COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
 import { version } from "../package.json";
 import SocketIOHelper from "../utils/socket";
 import { Dark, Base } from "@docspace/shared/themes";
@@ -25,7 +21,7 @@ import {
   isTablet,
   getCookie,
 } from "@docspace/shared/utils";
-import { wrongPortalNameUrl } from "../constants";
+import { WRONG_PORTAL_NAME_URL } from "@docspace/shared/constants";
 import { ARTICLE_ALERTS } from "@docspace/client/src/helpers/constants";
 import { toastr } from "@docspace/shared/components";
 //import { getFromLocalStorage } from "@docspace/client/src/pages/PortalSettings/utils";
@@ -480,7 +476,7 @@ class SettingsStore {
     const origSettings = await this.getSettings().catch((err) => {
       if (err?.response?.status === 404) {
         // portal not found
-        const url = new URL(wrongPortalNameUrl);
+        const url = new URL(WRONG_PORTAL_NAME_URL);
         url.searchParams.append("url", window.location.hostname);
         url.searchParams.append("ref", window.location.href);
         return window.location.replace(url);

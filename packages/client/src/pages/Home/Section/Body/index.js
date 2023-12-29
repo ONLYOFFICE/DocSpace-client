@@ -12,7 +12,7 @@ import withHotkeys from "../../../../HOCs/withHotkeys";
 import { Consumer, isMobile, isTablet } from "@docspace/shared/utils";
 import { isElementInViewport } from "@docspace/common/utils";
 
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 let currentDroppable = null;
 let isDragActive = false;
@@ -113,8 +113,8 @@ const SectionBodyContent = (props) => {
           (isMobile() || currentDeviceType === DeviceType.mobile
             ? 57
             : viewAs === "table"
-            ? 40
-            : 48);
+              ? 40
+              : 48);
 
         bodyScroll.scrollTo(0, count);
       }

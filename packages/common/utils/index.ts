@@ -17,7 +17,9 @@ import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.patt
 
 import moment from "moment-timezone";
 
-import { ThemeKeys, RtlLanguages } from "../constants";
+import { RTL_LANGUAGES } from "@docspace/shared/constants";
+
+import { ThemeKeys } from "@docspace/shared/enums";
 import sjcl from "sjcl";
 import { isMobile } from "react-device-detect";
 import { TopLoaderService } from "@docspace/shared/components";
@@ -312,7 +314,7 @@ export const isLanguageRtl = (lng: string) => {
   if (!lng) return;
 
   const splittedLng = lng.split("-");
-  return RtlLanguages.includes(splittedLng[0]);
+  return RTL_LANGUAGES.includes(splittedLng[0]);
 };
 
 // temporary function needed to replace rtl language in Editor to ltr
@@ -637,9 +639,9 @@ export const getSystemTheme = () => {
       ? ThemeKeys.DarkStr
       : ThemeKeys.BaseStr
     : window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? ThemeKeys.DarkStr
-    : ThemeKeys.BaseStr;
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? ThemeKeys.DarkStr
+      : ThemeKeys.BaseStr;
 };
 
 export const getEditorTheme = (theme) => {

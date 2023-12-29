@@ -15,7 +15,7 @@ import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettings
 import { size } from "@docspace/shared/utils";
 import { inject, observer } from "mobx-react";
 import { Link } from "@docspace/shared/components";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const AccessPortal = (props) => {
   const {

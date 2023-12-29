@@ -5,7 +5,7 @@ import { ReactSVG } from "react-svg";
 
 import { toastr } from "@docspace/shared/components";
 import { Button, Text, Textarea } from "@docspace/shared/components";
-import { MAX_FILE_COMMENT_LENGTH } from "@docspace/common/constants";
+import { MAX_FILE_COMMENT_LENGTH } from "@docspace/shared/constants";
 // import infoPanel from "@docspace/common/components/Section/sub-components/info-panel";
 
 const CommentEditor = ({

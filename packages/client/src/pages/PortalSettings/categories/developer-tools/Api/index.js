@@ -10,7 +10,7 @@ import ConfirmWrapper from "../../../../Confirm/ConfirmWrapper";
 
 import ApiSvgUrl from "PUBLIC_DIR/images/settings.api.svg?url";
 import ApiDarkSvgUrl from "PUBLIC_DIR/images/settings.api.dark.svg?url";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const EmptyContainer = styled(EmptyScreenContainer)`
   .ec-header {

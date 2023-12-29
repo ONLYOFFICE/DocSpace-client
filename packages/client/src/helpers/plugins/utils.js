@@ -5,7 +5,7 @@ import { toastr } from "@docspace/shared/components";
 import config from "PACKAGE_FILE";
 
 import { PluginActions, PluginToastType } from "./constants";
-import { Events } from "@docspace/common/constants";
+import { Events } from "@docspace/shared/enums";
 
 export const messageActions = (
   message,

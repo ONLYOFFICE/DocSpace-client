@@ -14,8 +14,8 @@ import LinkBlock from "./LinkBlock";
 import ToggleBlock from "./ToggleBlock";
 import PasswordAccessBlock from "./PasswordAccessBlock";
 import LimitTimeBlock from "./LimitTimeBlock";
-import { RoomsType } from "@docspace/common/constants";
-import { DeviceType } from "@docspace/common/constants";
+import { RoomsType } from "@docspace/shared/enums";
+import { DeviceType } from "@docspace/shared/enums";
 import moment from "moment";
 
 const EditLinkPanel = (props) => {
@@ -160,8 +160,8 @@ const EditLinkPanel = (props) => {
   const expiredLinkText = isExpired
     ? t("Translations:LinkHasExpiredAndHasBeenDisabled")
     : expirationDate
-    ? `${t("Files:LinkValidUntil")}:`
-    : t("Files:ChooseExpirationDate");
+      ? `${t("Files:LinkValidUntil")}:`
+      : t("Files:ChooseExpirationDate");
 
   const isPrimary = link?.sharedTo?.primary;
 
@@ -184,8 +184,8 @@ const EditLinkPanel = (props) => {
           ? isPrimary
             ? t("Files:EditGeneralLink")
             : isPublic
-            ? t("Files:EditAdditionalLink")
-            : t("Files:EditLink")
+              ? t("Files:EditAdditionalLink")
+              : t("Files:EditLink")
           : t("Files:CreateNewLink")}
       </ModalDialog.Header>
       <ModalDialog.Body>

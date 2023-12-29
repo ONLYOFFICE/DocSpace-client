@@ -4,7 +4,7 @@ import moment from "moment-timezone";
 import { getDaysLeft, getDaysRemaining } from "../utils";
 
 import api from "../api";
-import { TariffState } from "../constants";
+import { TariffState } from "@docspace/shared/enums";
 import { getUserByEmail } from "../api/people";
 
 class CurrentTariffStatusStore {

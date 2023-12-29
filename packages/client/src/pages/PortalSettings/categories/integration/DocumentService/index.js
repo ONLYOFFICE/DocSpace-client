@@ -11,7 +11,7 @@ import {
 } from "@docspace/shared/components";
 import { toastr } from "@docspace/shared/components";
 import Loaders from "@docspace/common/components/Loaders";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 import { SaveCancelButtons } from "@docspace/shared/components";
 
 const URL_REGEX = /^https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{1,256}\/?$/;

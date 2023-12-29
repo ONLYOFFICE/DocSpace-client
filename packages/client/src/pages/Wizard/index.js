@@ -27,7 +27,7 @@ import {
   convertLanguage,
   setCookie,
 } from "@docspace/common/utils";
-import { COOKIE_EXPIRATION_YEAR } from "@docspace/common/constants";
+import { COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
 import { LANGUAGE } from "@docspace/shared/constants";
 import BetaBadge from "@docspace/common/components/BetaBadge";
 import { EmailSettings } from "@docspace/shared/utils";

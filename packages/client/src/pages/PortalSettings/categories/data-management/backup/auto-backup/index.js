@@ -14,7 +14,7 @@ import {
   BackupStorageType,
   AutoBackupPeriod,
   FolderType,
-} from "@docspace/common/constants";
+} from "@docspace/shared/enums";
 import { ToggleButton } from "@docspace/shared/components";
 import {
   getBackupStorage,
@@ -294,8 +294,8 @@ class AutomaticBackup extends React.PureComponent {
       const storageType = isCheckedDocuments
         ? DocumentModuleType
         : isCheckedThirdParty
-        ? ResourcesModuleType
-        : StorageModuleType;
+          ? ResourcesModuleType
+          : StorageModuleType;
 
       const storageParams = getStorageParams(
         isCheckedThirdPartyStorage,

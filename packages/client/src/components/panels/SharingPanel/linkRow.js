@@ -5,7 +5,7 @@ import { LinkWithDropdown } from "@docspace/shared/components";
 import { ToggleButton } from "@docspace/shared/components";
 import { StyledLinkRow } from "../StyledPanels";
 import AccessComboBox from "./AccessComboBox";
-import { ShareAccessRights } from "@docspace/common/constants";
+import { ShareAccessRights } from "@docspace/shared/enums";
 import AccessEditIcon from "PUBLIC_DIR/images/access.edit.react.svg";
 import CopyIcon from "PUBLIC_DIR/images/copy.react.svg";
 import { commonIconsStyles } from "@docspace/shared/utils";

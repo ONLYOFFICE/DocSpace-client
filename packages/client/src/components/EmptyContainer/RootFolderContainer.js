@@ -4,7 +4,7 @@ import PlusSvgUrl from "PUBLIC_DIR/images/plus.svg?url";
 import RoomsReactSvgUrl from "PUBLIC_DIR/images/rooms.react.svg?url";
 
 import { useNavigate, useLocation } from "react-router-dom";
-import { FolderType, RoomSearchArea } from "@docspace/common/constants";
+import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
 import { inject, observer } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
 import EmptyContainer from "./EmptyContainer";

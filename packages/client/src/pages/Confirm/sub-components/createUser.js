@@ -22,7 +22,7 @@ import {
   getLoginLink,
 } from "@docspace/common/utils";
 import { login } from "@docspace/common/utils/loginUtils";
-import { providersData } from "@docspace/common/constants";
+import { PROVIDERS_DATA } from "@docspace/shared/constants";
 import withLoader from "../withLoader";
 import MoreLoginModal from "@docspace/common/components/MoreLoginModal";
 import { EmailInput } from "@docspace/shared/components";
@@ -340,11 +340,11 @@ const CreateUserForm = (props) => {
     const providerButtons =
       providers &&
       providers.map((item, index) => {
-        if (!providersData[item.provider]) return;
+        if (!PROVIDERS_DATA[item.provider]) return;
         if (index > 1) return;
 
         const { icon, label, iconOptions, className } =
-          providersData[item.provider];
+          PROVIDERS_DATA[item.provider];
 
         return (
           <div className="buttonWrapper" key={`${item.provider}ProviderItem`}>
@@ -386,7 +386,7 @@ const CreateUserForm = (props) => {
     let existProviders = 0;
     providers && providers.length > 0;
     providers.map((item) => {
-      if (!providersData[item.provider]) return;
+      if (!PROVIDERS_DATA[item.provider]) return;
       existProviders++;
     });
 
@@ -477,8 +477,8 @@ const CreateUserForm = (props) => {
                     {ssoExists() && !oauthDataExists()
                       ? t("WelcomeRegisterViaSSO")
                       : oauthDataExists()
-                      ? t("WelcomeRegisterViaSocial")
-                      : t("WelcomeRegister")}
+                        ? t("WelcomeRegisterViaSocial")
+                        : t("WelcomeRegister")}
                   </p>
                 </div>
               </>
@@ -566,8 +566,8 @@ const CreateUserForm = (props) => {
                         errorText
                           ? errorText
                           : fname.trim().length === 0
-                          ? t("Common:RequiredField")
-                          : t("Common:IncorrectFirstName")
+                            ? t("Common:RequiredField")
+                            : t("Common:IncorrectFirstName")
                       }
                     >
                       <TextInput
@@ -595,8 +595,8 @@ const CreateUserForm = (props) => {
                         errorText
                           ? errorText
                           : sname.trim().length === 0
-                          ? t("Common:RequiredField")
-                          : t("Common:IncorrectLastName")
+                            ? t("Common:RequiredField")
+                            : t("Common:IncorrectLastName")
                       }
                     >
                       <TextInput

@@ -13,7 +13,7 @@ import { combineUrl } from "@docspace/common/utils";
 
 import { withTranslation } from "react-i18next";
 
-import { EmployeeStatus } from "@docspace/common/constants";
+import { EmployeeStatus } from "@docspace/shared/enums";
 import ModalDialogContainer from "../ModalDialogContainer";
 import { inject, observer } from "mobx-react";
 

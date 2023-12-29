@@ -1,5 +1,5 @@
 import React from "react";
-import { RoomsType } from "../../../constants";
+import { RoomsType } from "@docspace/shared/enums";
 
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 

@@ -14,7 +14,8 @@ import CurrentQuotasStore from "./CurrentQuotaStore";
 import CurrentTariffStatusStore from "./CurrentTariffStatusStore";
 import PaymentQuotasStore from "./PaymentQuotasStore";
 
-import { COOKIE_EXPIRATION_YEAR, TenantStatus } from "../constants";
+import { TenantStatus } from "@docspace/shared/enums";
+import { COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getPortalTenantExtra } from "../api/portal";
 

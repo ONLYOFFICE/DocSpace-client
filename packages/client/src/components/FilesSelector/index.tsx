@@ -4,8 +4,8 @@ import { useTranslation } from "react-i18next";
 
 // @ts-ignore
 import Loaders from "@docspace/common/components/Loaders";
-import { FolderType, RoomsType } from "@docspace/common/constants";
-import { DeviceType } from "@docspace/common/constants";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { DeviceType } from "@docspace/shared/enums";
 
 import {
   Aside,
@@ -679,19 +679,19 @@ export default inject(
         ? isRestoreAll
           ? filesList
           : selection.length > 0 && selection?.[0] != null
-          ? selection
-          : bufferSelection != null
-          ? [bufferSelection]
-          : infoPanelIsVisible && infoPanelSelection != null
-          ? [infoPanelSelection]
-          : []
+            ? selection
+            : bufferSelection != null
+              ? [bufferSelection]
+              : infoPanelIsVisible && infoPanelSelection != null
+                ? [infoPanelSelection]
+                : []
         : [];
 
     const selectionsWithoutEditing = isRestoreAll
       ? filesList
       : isCopy
-      ? selections
-      : selections.filter((f: any) => f && !f?.isEditing);
+        ? selections
+        : selections.filter((f: any) => f && !f?.isEditing);
 
     const disabledItems: any[] = [];
 
@@ -707,11 +707,11 @@ export default inject(
     const fromFolderId = id
       ? id
       : rootFolderType === FolderType.Archive ||
-        rootFolderType === FolderType.TRASH
-      ? undefined
-      : selectedId === selectionsWithoutEditing[0]?.id
-      ? parentId
-      : selectedId;
+          rootFolderType === FolderType.TRASH
+        ? undefined
+        : selectedId === selectionsWithoutEditing[0]?.id
+          ? parentId
+          : selectedId;
 
     const currentFolderId =
       sessionPath && (isMove || isCopy || isRestore || isRestoreAll)

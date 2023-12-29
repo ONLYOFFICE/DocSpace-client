@@ -45,15 +45,15 @@ import saveAs from "file-saver";
 import { isMobile, isIOS } from "react-device-detect";
 import config from "PACKAGE_FILE";
 import { toastr } from "@docspace/shared/components";
-import { ShareAccessRights, RoomsType } from "@docspace/common/constants";
+import { ShareAccessRights, RoomsType } from "@docspace/shared/enums";
 import combineUrl from "@docspace/common/utils/combineUrl";
 import { isDesktop } from "@docspace/shared/utils";
-import { Events } from "@docspace/common/constants";
+import { Events } from "@docspace/shared/enums";
 
 import { connectedCloudsTypeTitleTranslation } from "@docspace/client/src/helpers/filesUtils";
 import { getOAuthToken } from "@docspace/common/utils";
 import api from "@docspace/common/api";
-import { FolderType } from "@docspace/common/constants";
+import { FolderType } from "@docspace/shared/enums";
 import FilesFilter from "@docspace/common/api/files/filter";
 import { getFileLink } from "@docspace/common/api/files";
 

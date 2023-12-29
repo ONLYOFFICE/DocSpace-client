@@ -27,7 +27,7 @@ import {
   TableBody,
   TableDataCell,
 } from "./styled-active-sessions";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 import moment from "moment-timezone";
 
 const removeIcon = (

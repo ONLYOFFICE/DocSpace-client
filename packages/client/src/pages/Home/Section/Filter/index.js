@@ -20,7 +20,6 @@ import {
   FilterType,
   RoomsType,
   RoomsProviderType,
-  RoomsProviderTypeName,
   FilterSubject,
   RoomSearchArea,
   EmployeeType,
@@ -28,7 +27,8 @@ import {
   PaymentsType,
   AccountLoginType,
   DeviceType,
-} from "@docspace/common/constants";
+} from "@docspace/shared/enums";
+import { ROOMS_PROVIDER_TYPE_NAME } from "@docspace/shared/constants";
 
 import { getDefaultRoomName } from "SRC_DIR/helpers/filesUtils";
 
@@ -504,8 +504,8 @@ const SectionFilterContent = ({
       const newFilter = isAccountsPage
         ? accountsFilter.clone()
         : isRooms
-        ? roomsFilter.clone()
-        : filter.clone();
+          ? roomsFilter.clone()
+          : filter.clone();
       newFilter.page = 0;
       newFilter.sortBy = sortBy;
       newFilter.sortOrder = sortOrder;
@@ -555,12 +555,12 @@ const SectionFilterContent = ({
         ? accountsFilter.search
         : ""
       : isRooms
-      ? roomsFilter.filterValue
         ? roomsFilter.filterValue
-        : ""
-      : filter.search
-      ? filter.search
-      : "";
+          ? roomsFilter.filterValue
+          : ""
+        : filter.search
+          ? filter.search
+          : "";
   }, [
     isRooms,
     isAccountsPage,
@@ -573,8 +573,8 @@ const SectionFilterContent = ({
     const currentFilter = isAccountsPage
       ? accountsFilter
       : isRooms
-      ? roomsFilter
-      : filter;
+        ? roomsFilter
+        : filter;
     return {
       sortDirection: currentFilter.sortOrder === "ascending" ? "asc" : "desc",
       sortId: currentFilter.sortBy,
@@ -663,9 +663,9 @@ const SectionFilterContent = ({
           AccountLoginType.SSO === accountsFilter.accountLoginType.toString()
             ? SSO_LABEL
             : AccountLoginType.LDAP ===
-              accountsFilter.accountLoginType.toString()
-            ? t("PeopleTranslations:LDAPLbl")
-            : t("PeopleTranslations:StandardLogin");
+                accountsFilter.accountLoginType.toString()
+              ? t("PeopleTranslations:LDAPLbl")
+              : t("PeopleTranslations:StandardLogin");
         filterValues.push({
           key: accountsFilter.accountLoginType.toString(),
           label: label,
@@ -800,7 +800,7 @@ const SectionFilterContent = ({
       if (roomsFilter.provider) {
         const provider = +roomsFilter.provider;
 
-        const label = RoomsProviderTypeName[provider];
+        const label = ROOMS_PROVIDER_TYPE_NAME[provider];
 
         filterValues.push({
           key: provider,
@@ -1417,7 +1417,7 @@ const SectionFilterContent = ({
             (item) => item[0] === thirdParty
           )[1];
 
-          const label = RoomsProviderTypeName[key];
+          const label = ROOMS_PROVIDER_TYPE_NAME[key];
 
           return {
             key,

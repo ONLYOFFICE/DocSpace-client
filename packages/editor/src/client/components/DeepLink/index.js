@@ -9,7 +9,7 @@ import { Link } from "@docspace/shared/components";
 import { FormWrapper } from "@docspace/shared/components";
 
 import { getLogoFromPath, getBgPattern } from "@docspace/common/utils";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 import { getDeepLink } from "../../helpers/deepLinkHelper";
 
 import {

@@ -5,7 +5,7 @@ import { getRooms } from "@docspace/common/api/rooms";
 // @ts-ignore
 import RoomsFilter from "@docspace/common/api/rooms/filter";
 // @ts-ignore
-import { RoomsType } from "@docspace/common/constants";
+import { RoomsType } from "@docspace/shared/enums";
 // @ts-ignore
 import { iconSize32 } from "@docspace/common/utils/image-helpers";
 
@@ -92,8 +92,8 @@ const useRoomsHelper = ({
       const filterValue = search
         ? search
         : search === null
-        ? ""
-        : searchValue || "";
+          ? ""
+          : searchValue || "";
 
       const page = startIndex / PAGE_COUNT;
 

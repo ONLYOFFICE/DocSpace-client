@@ -6,7 +6,7 @@ import { Aside } from "@docspace/shared/components";
 import { withTranslation } from "react-i18next";
 import { StyledEmbeddingPanel, StyledScrollbar } from "./StyledEmbeddingPanel";
 import EmbeddingBody from "./EmbeddingBody";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 import { Portal } from "@docspace/shared/components";
 const EmbeddingPanelComponent = (props) => {
   const {

@@ -6,7 +6,7 @@ import { PasswordInput } from "@docspace/shared/components";
 import { Button } from "@docspace/shared/components";
 import { FieldContainer } from "@docspace/shared/components";
 import { inject, observer } from "mobx-react";
-import { EmployeeActivationStatus } from "@docspace/common/constants";
+import { EmployeeActivationStatus } from "@docspace/shared/enums";
 import {
   changePassword,
   updateActivationStatus,

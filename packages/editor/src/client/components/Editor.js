@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { isMobile, isIOS, deviceType } from "react-device-detect";
 import combineUrl from "@docspace/common/utils/combineUrl";
-import { FolderType, EDITOR_ID } from "@docspace/common/constants";
+import { FolderType, EDITOR_ID } from "@docspace/shared/enums";
 import throttle from "lodash/throttle";
 import { Toast } from "@docspace/shared/components";
 import { toast } from "react-toastify";
@@ -266,10 +266,10 @@ function Editor({
       documentType === "word"
         ? "docx"
         : documentType === "slide"
-        ? "pptx"
-        : documentType === "cell"
-        ? "xlsx"
-        : "docxf";
+          ? "pptx"
+          : documentType === "cell"
+            ? "xlsx"
+            : "docxf";
 
     let fileName = t("Common:NewDocument");
 

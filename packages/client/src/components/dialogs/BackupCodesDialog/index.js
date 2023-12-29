@@ -12,7 +12,7 @@ import {
 import { withTranslation } from "react-i18next";
 import ModalDialogContainer from "../ModalDialogContainer";
 
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 import { isDesktop } from "@docspace/shared/utils";
 
 const StyledModal = styled(ModalDialogContainer)`

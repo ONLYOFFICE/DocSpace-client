@@ -4,7 +4,7 @@ import styled from "styled-components";
 import RoomType from "../RoomType";
 
 import { Base } from "@docspace/shared/themes";
-import { RoomsType } from "@docspace/common/constants";
+import { RoomsType } from "@docspace/shared/enums";
 
 const StyledDropdownDesktop = styled.div`
   max-width: 100%;

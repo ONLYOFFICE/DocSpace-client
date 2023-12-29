@@ -10,8 +10,8 @@ import { getUserRole } from "@docspace/common/utils";
 import Filter from "@docspace/common/api/people/filter";
 import { getUserList } from "@docspace/common/api/people";
 import Loaders from "@docspace/common/components/Loaders";
-import { EmployeeStatus } from "@docspace/common/constants";
-import { LOADER_TIMEOUT } from "@docspace/common/constants";
+import { EmployeeStatus } from "@docspace/shared/enums";
+import { LOADER_TIMEOUT } from "@docspace/shared/constants";
 
 import useLoadingWithTimeout from "SRC_DIR/Hooks/useLoadingWithTimeout";
 

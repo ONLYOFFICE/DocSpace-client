@@ -7,7 +7,7 @@ import Error403 from "client/Error403";
 import AppLoader from "../AppLoader";
 
 import combineUrl from "../../utils/combineUrl";
-import { TenantStatus } from "../../constants";
+import { TenantStatus } from "@docspace/shared/enums";
 
 const PrivateRoute = ({ children, ...rest }) => {
   const {
@@ -30,7 +30,7 @@ const PrivateRoute = ({ children, ...rest }) => {
     isEnterprise,
     isPortalDeactivate,
     enablePortalRename,
-    limitedAccessSpace
+    limitedAccessSpace,
   } = rest;
 
   const location = useLocation();
@@ -105,7 +105,7 @@ const PrivateRoute = ({ children, ...rest }) => {
     }
 
     if (isLoaded && limitedAccessSpace && isPortalDeletionUrl) {
-      return <Error403 />
+      return <Error403 />;
     }
 
     if (
@@ -242,7 +242,7 @@ export default inject(({ auth }) => {
     standalone,
     isPortalDeactivate,
     enablePortalRename,
-    limitedAccessSpace
+    limitedAccessSpace,
   } = settingsStore;
 
   return {
@@ -261,6 +261,6 @@ export default inject(({ auth }) => {
     standalone,
     isEnterprise,
     enablePortalRename,
-    limitedAccessSpace
+    limitedAccessSpace,
   };
 })(observer(PrivateRoute));

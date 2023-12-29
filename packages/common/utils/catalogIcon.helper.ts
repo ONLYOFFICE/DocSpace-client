@@ -1,4 +1,4 @@
-import { FolderType, PageType } from "../constants";
+import { FolderType, PageType } from "@docspace/shared/enums";
 
 import { isMobile, isTablet } from "@docspace/shared/utils";
 

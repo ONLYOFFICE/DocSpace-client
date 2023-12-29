@@ -8,7 +8,7 @@ import SortButton from "./sub-components/SortButton";
 import { SelectedItem } from "@docspace/shared/components";
 import { useTheme } from "styled-components";
 import { StyledFilterInput, StyledSearchInput } from "./StyledFilterInput";
-import { DeviceType } from "../../constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const FilterInput = React.memo(
   ({

@@ -9,7 +9,7 @@ import {
 
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { ConflictResolveType } from "@docspace/common/constants";
+import { ConflictResolveType } from "@docspace/shared/enums";
 
 import styled from "styled-components";
 

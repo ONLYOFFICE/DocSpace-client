@@ -5,7 +5,7 @@ import { StyledDeleteLinkDialog } from "./StyledDeleteLinkDialog";
 import { withTranslation } from "react-i18next";
 
 import { inject, observer } from "mobx-react";
-import { RoomsType } from "@docspace/common/constants";
+import { RoomsType } from "@docspace/shared/enums";
 
 const DeleteLinkDialogComponent = (props) => {
   const {

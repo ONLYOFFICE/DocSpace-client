@@ -7,7 +7,7 @@ import { Link } from "@docspace/shared/components";
 import { startBackup } from "@docspace/common/api/portal";
 import { RadioButton } from "@docspace/shared/components";
 import { toastr } from "@docspace/shared/components";
-import { BackupStorageType, FolderType } from "@docspace/common/constants";
+import { BackupStorageType, FolderType } from "@docspace/shared/enums";
 import ThirdPartyModule from "./sub-components/ThirdPartyModule";
 import RoomsModule from "./sub-components/RoomsModule";
 import ThirdPartyStorageModule from "./sub-components/ThirdPartyStorageModule";

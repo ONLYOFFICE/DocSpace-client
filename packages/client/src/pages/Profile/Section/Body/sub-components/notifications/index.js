@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components";
-import { NotificationsType } from "@docspace/common/constants";
+import { NotificationsType } from "@docspace/shared/enums";
 import { getNotificationSubscription } from "@docspace/common/api/settings";
 import Loaders from "@docspace/common/components/Loaders";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
@@ -32,9 +32,8 @@ const Notifications = ({ setSubscriptions, isFirstSubscriptionsLoad }) => {
     ];
 
     try {
-      const [badges, roomsActivity, dailyFeed, tips] = await Promise.all(
-        requests
-      );
+      const [badges, roomsActivity, dailyFeed, tips] =
+        await Promise.all(requests);
 
       setSubscriptions(
         badges.isEnabled,

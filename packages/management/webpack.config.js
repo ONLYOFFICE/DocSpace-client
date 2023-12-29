@@ -10,7 +10,7 @@ const TerserPlugin = require("terser-webpack-plugin");
 const combineUrl = require("@docspace/common/utils/combineUrl");
 const minifyJson = require("@docspace/common/utils/minifyJson");
 const beforeBuild = require("@docspace/common/utils/beforeBuild");
-const sharedDeps = require("@docspace/common/constants/sharedDependencies");
+const sharedDeps = require("@docspace/shared/constants");
 const fs = require("fs");
 const { readdir } = require("fs").promises;
 

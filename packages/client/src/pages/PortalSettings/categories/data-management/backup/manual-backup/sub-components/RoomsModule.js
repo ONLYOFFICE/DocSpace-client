@@ -2,7 +2,7 @@ import React from "react";
 import { withTranslation } from "react-i18next";
 import { Button } from "@docspace/shared/components";
 import { getFromLocalStorage } from "../../../../../utils";
-import { BackupStorageType } from "@docspace/common/constants";
+import { BackupStorageType } from "@docspace/shared/enums";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 
 let folder = "";

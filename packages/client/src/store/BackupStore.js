@@ -6,7 +6,7 @@ import {
   removeLocalStorage,
 } from "../pages/PortalSettings/utils";
 import { toastr } from "@docspace/shared/components";
-import { AutoBackupPeriod } from "@docspace/common/constants";
+import { AutoBackupPeriod } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/common/utils";
 import config from "PACKAGE_FILE";
 import { uploadBackup } from "@docspace/common/api/files";

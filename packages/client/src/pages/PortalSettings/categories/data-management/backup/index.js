@@ -2,7 +2,7 @@
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { combineUrl } from "@docspace/common/utils";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 import ManualBackup from "./manual-backup";
 import AutoBackup from "./auto-backup";
 import { Submenu } from "@docspace/shared/components";

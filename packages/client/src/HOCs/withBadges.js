@@ -1,6 +1,6 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { ShareAccessRights, FileStatus } from "@docspace/common/constants";
+import { ShareAccessRights, FileStatus } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/common/utils";
 
 import Badges from "../components/Badges";

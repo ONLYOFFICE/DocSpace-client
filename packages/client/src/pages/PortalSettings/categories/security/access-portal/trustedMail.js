@@ -15,7 +15,7 @@ import isEqual from "lodash/isEqual";
 import { SaveCancelButtons } from "@docspace/shared/components";
 
 import TrustedMailLoader from "../sub-components/loaders/trusted-mail-loader";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const MainContainer = styled.div`
   width: 100%;

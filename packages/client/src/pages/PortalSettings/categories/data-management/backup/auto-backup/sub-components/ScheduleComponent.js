@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { ComboBox } from "@docspace/shared/components";
 import { Text } from "@docspace/shared/components";
 import { StyledScheduleComponent } from "../../StyledBackup";
-import { AutoBackupPeriod } from "@docspace/common/constants";
+import { AutoBackupPeriod } from "@docspace/shared/enums";
 
 import { HelpButton } from "@docspace/shared/components";
 

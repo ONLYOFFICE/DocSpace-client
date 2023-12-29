@@ -12,7 +12,7 @@ import {
   createPasswordHash,
   frameCallCommand,
 } from "@docspace/common/utils";
-import { RoomsType } from "@docspace/common/constants";
+import { RoomsType } from "@docspace/shared/enums";
 
 const Sdk = ({
   frameConfig,

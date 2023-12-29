@@ -1,5 +1,5 @@
 import { getObjectByLocation, toUrlParams } from "../../utils";
-import { RoomSearchArea } from "../../constants";
+import { RoomSearchArea } from "@docspace/shared/enums";
 
 const PAGE = "page";
 const PAGE_COUNT = "count";

@@ -18,5 +18,6 @@ declare global {
     };
     timezone: string;
     snackbar?: {};
+    DocSpaceConfig: { wrongPortalNameUrl?: string };
   }
 }

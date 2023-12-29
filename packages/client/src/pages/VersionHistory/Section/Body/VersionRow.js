@@ -18,7 +18,7 @@ import { inject, observer } from "mobx-react";
 import { toastr } from "@docspace/shared/components";
 import { Encoder } from "@docspace/common/utils/encoder";
 import { Base } from "@docspace/shared/themes";
-import { MAX_FILE_COMMENT_LENGTH } from "@docspace/common/constants";
+import { MAX_FILE_COMMENT_LENGTH } from "@docspace/shared/constants";
 import moment from "moment-timezone";
 
 const StyledExternalLinkIcon = styled(ExternalLinkIcon)`

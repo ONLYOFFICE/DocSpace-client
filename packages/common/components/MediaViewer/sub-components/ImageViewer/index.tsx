@@ -4,7 +4,7 @@ import { useSpring, config } from "@react-spring/web";
 import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
 
 import indexedDBHelper from "../../../../utils/indexedDBHelper";
-import { IndexedDBStores } from "../../../../constants";
+import { IndexedDBStores } from "@docspace/shared/enums";
 
 import ViewerLoader from "../ViewerLoader";
 import ImageViewerToolbar from "../ImageViewerToolbar";
@@ -1026,8 +1026,8 @@ function ImageViewer({
               !window.DocSpaceConfig.imageThumbnails
                 ? src
                 : thumbnailSrc
-                ? `${thumbnailSrc}&size=1280x720`
-                : ""
+                  ? `${thumbnailSrc}&size=1280x720`
+                  : ""
             }
             ref={imgRef}
             style={style}

@@ -7,7 +7,7 @@ import RoomsFilter from "@docspace/common/api/rooms/filter";
 import { getGroup } from "@docspace/common/api/groups";
 import { getUserById } from "@docspace/common/api/people";
 
-import { Events, RoomSearchArea } from "@docspace/common/constants";
+import { Events, RoomSearchArea } from "@docspace/shared/enums";
 import { getObjectByLocation } from "@docspace/common/utils";
 
 import { getCategoryType, getCategoryUrl } from "SRC_DIR/helpers/utils";
@@ -201,8 +201,8 @@ const useFiles = ({
     const newFilter = filter
       ? filter.clone()
       : isRooms
-      ? RoomsFilter.getDefault()
-      : FilesFilter.getDefault();
+        ? RoomsFilter.getDefault()
+        : FilesFilter.getDefault();
     const requests = [Promise.resolve(newFilter)];
 
     if (type === "group") {

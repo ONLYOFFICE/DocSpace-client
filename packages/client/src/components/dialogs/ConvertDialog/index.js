@@ -9,7 +9,7 @@ import {
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import Loaders from "@docspace/common/components/Loaders";
-import { FolderType } from "@docspace/common/constants";
+import { FolderType } from "@docspace/shared/enums";
 
 const ConvertDialogComponent = (props) => {
   const {

@@ -5,7 +5,7 @@ import {
   EmployeeStatus,
   EmployeeType,
   EmployeeActivationStatus,
-} from "@docspace/common/constants";
+} from "@docspace/shared/enums";
 const { Filter } = api;
 
 const fullAccessId = "00000000-0000-0000-0000-000000000000";

@@ -8,7 +8,7 @@ import { IconButton } from "@docspace/shared/components";
 import { StyledTitle } from "../../../styles/common";
 import { RoomIcon } from "@docspace/shared/components";
 import RoomsContextBtn from "./context-btn";
-import { RoomsType, ShareAccessRights } from "@docspace/common/constants";
+import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 
 const RoomsItemHeader = ({
   t,
@@ -108,8 +108,8 @@ export default inject(({ auth, dialogsStore, selectedFolderStore }) => {
     selectionItem.length > 1
       ? null
       : isShowParentRoom
-      ? selectionParentRoom
-      : selectionItem;
+        ? selectionParentRoom
+        : selectionItem;
 
   return {
     selection,

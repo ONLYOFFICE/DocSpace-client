@@ -14,7 +14,7 @@ import { Base } from "@docspace/shared/themes";
 import SortDesc from "PUBLIC_DIR/images/sort.desc.react.svg";
 import SortReactSvgUrl from "PUBLIC_DIR/images/sort.react.svg?url";
 import { Backdrop } from "@docspace/shared/components";
-import { Events } from "../../../constants";
+import { Events } from "@docspace/shared/enums";
 
 const selectedViewIcon = css`
   svg {

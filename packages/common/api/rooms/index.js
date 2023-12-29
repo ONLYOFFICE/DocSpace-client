@@ -4,7 +4,7 @@ import {
   decodeDisplayName,
   toUrlParams,
 } from "../../utils";
-import { FolderType } from "../../constants";
+import { FolderType } from "@docspace/shared/enums";
 import RoomsFilter from "./filter";
 
 export function getRooms(filter, signal) {

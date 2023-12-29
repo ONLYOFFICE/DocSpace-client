@@ -27,7 +27,7 @@ import {
   FilterGroups,
   FilterKeys,
   FilterSelectorTypes,
-} from "../../../constants";
+} from "@docspace/shared/enums";
 
 const FilterBlockItem = ({
   group,

@@ -1,9 +1,7 @@
 import api from "@docspace/common/api";
-import {
-  COOKIE_EXPIRATION_YEAR,
-  NotificationsType,
-} from "@docspace/common/constants";
-import { LANGUAGE } from "@docspace/shared/constants";
+import { NotificationsType } from "@docspace/shared/enums";
+
+import { LANGUAGE, COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
 import { makeAutoObservable } from "mobx";
 import { setCookie } from "@docspace/common/utils";
 import {

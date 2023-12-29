@@ -13,7 +13,8 @@ import Filter from "@docspace/common/api/people/filter";
 import Loaders from "@docspace/common/components/Loaders";
 import { getMembersList } from "@docspace/common/api/people";
 import useLoadingWithTimeout from "SRC_DIR/Hooks/useLoadingWithTimeout";
-import { ShareAccessRights, LOADER_TIMEOUT } from "@docspace/common/constants";
+import { ShareAccessRights } from "@docspace/shared/enums";
+import { LOADER_TIMEOUT } from "@docspace/shared/constants";
 
 import withLoader from "../../../HOCs/withLoader";
 
@@ -43,8 +44,8 @@ const AddUsersPanel = ({
   const accessRight = defaultAccess
     ? defaultAccess
     : isEncrypted
-    ? ShareAccessRights.FullAccess
-    : ShareAccessRights.ReadOnly;
+      ? ShareAccessRights.FullAccess
+      : ShareAccessRights.ReadOnly;
 
   const onBackClick = () => onClose();
   const getFilterWithOutDisabledUser = useCallback(

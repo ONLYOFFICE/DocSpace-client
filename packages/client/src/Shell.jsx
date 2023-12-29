@@ -30,7 +30,7 @@ import DialogsWrapper from "./components/dialogs/DialogsWrapper";
 import MainBar from "./components/MainBar";
 
 import indexedDbHelper from "@docspace/common/utils/indexedDBHelper";
-import { DeviceType, IndexedDBStores } from "@docspace/common/constants";
+import { DeviceType, IndexedDBStores } from "@docspace/shared/enums";
 import { getRestoreProgress } from "@docspace/common/api/portal";
 import { useTheme } from "styled-components";
 

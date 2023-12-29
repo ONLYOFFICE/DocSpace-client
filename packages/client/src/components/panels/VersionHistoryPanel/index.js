@@ -6,7 +6,7 @@ import { Aside } from "@docspace/shared/components";
 import Loaders from "@docspace/common/components/Loaders";
 import { FloatingButton } from "@docspace/shared/components";
 import { Portal } from "@docspace/shared/components";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 import { withTranslation } from "react-i18next";
 import {
   StyledVersionHistoryPanel,

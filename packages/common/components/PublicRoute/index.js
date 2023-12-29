@@ -4,7 +4,7 @@ import { Navigate, Route, useLocation } from "react-router-dom";
 //import AppLoader from "../AppLoader";
 import { combineUrl } from "../../utils";
 import { inject, observer } from "mobx-react";
-import { TenantStatus } from "../../constants";
+import { TenantStatus } from "@docspace/shared/enums";
 
 export const PublicRoute = ({ children, ...rest }) => {
   const { wizardCompleted, isAuthenticated, tenantStatus, isPortalDeactivate } =

@@ -9,7 +9,7 @@ import styled, { css } from "styled-components";
 import CrossIcon from "PUBLIC_DIR/images/icons/17/cross.react.svg";
 
 import { Portal } from "@docspace/shared/components";
-import { DeviceType } from "../../../constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const StyledInfoPanelWrapper = styled.div.attrs(({ id }) => ({
   id: id,

@@ -5,7 +5,7 @@ import {
   EDITOR_ID,
   FilesSelectorFilterTypes,
   FilterType,
-} from "@docspace/common/constants";
+} from "@docspace/shared/enums";
 import { useTranslation } from "react-i18next";
 //import SharingDialog from "../components/SharingDialog";
 import SelectFileDialog from "../components/SelectFileDialog";

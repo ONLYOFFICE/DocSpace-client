@@ -2,7 +2,7 @@ import React from "react";
 import copy from "copy-to-clipboard";
 
 import { objectToGetParams } from "@docspace/common/utils";
-import { ShareAccessRights } from "@docspace/common/constants";
+import { ShareAccessRights } from "@docspace/shared/enums";
 
 import { toastr } from "@docspace/shared/components";
 import { ToggleButton } from "@docspace/shared/components";

@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import { Text } from "@docspace/shared/components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { PortalFeaturesLimitations } from "@docspace/common/constants";
+import { PortalFeaturesLimitations } from "@docspace/shared/enums";
 import { getConvertedSize } from "@docspace/common/utils";
 import { mobile } from "@docspace/shared/utils";
 
@@ -71,8 +71,8 @@ const CurrentTariffContainer = ({ style, quotaCharacteristics }) => {
           item.type === "size" && isExistsMaxValue
             ? getConvertedSize(t, maxValue)
             : isExistsMaxValue
-            ? maxValue
-            : null;
+              ? maxValue
+              : null;
 
         const resultingUsedValue =
           item.type === "size" ? getConvertedSize(t, usedValue) : usedValue;

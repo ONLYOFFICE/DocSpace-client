@@ -5,10 +5,10 @@ import { toastr } from "@docspace/shared/components";
 
 import {
   EmployeeActivationStatus,
-  LINKS_LIMIT_COUNT,
   RoomsType,
   ShareAccessRights,
-} from "@docspace/common/constants";
+} from "@docspace/shared/enums";
+import { LINKS_LIMIT_COUNT } from "@docspace/shared/constants";
 import Loaders from "@docspace/common/components/Loaders";
 import MembersHelper from "../../helpers/MembersHelper";
 import MembersList from "./sub-components/MembersList";
@@ -488,10 +488,10 @@ export default inject(
     const room = selectionParentRoom
       ? selectionParentRoom
       : selection.length
-      ? selection[0]
-      : bufferSelection
-      ? bufferSelection
-      : null;
+        ? selection[0]
+        : bufferSelection
+          ? bufferSelection
+          : null;
 
     const withPublicRoomBlock =
       room?.access === ShareAccessRights.RoomManager ||

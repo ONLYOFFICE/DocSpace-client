@@ -1,4 +1,4 @@
-import { ApplyFilterOption } from "../../constants";
+import { ApplyFilterOption } from "@docspace/shared/enums";
 import { getObjectByLocation, toUrlParams } from "../../utils";
 import queryString from "query-string";
 

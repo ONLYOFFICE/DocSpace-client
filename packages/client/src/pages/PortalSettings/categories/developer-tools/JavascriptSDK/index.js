@@ -13,7 +13,7 @@ import { TabsContainer } from "@docspace/shared/components";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { mobile, tablet } from "@docspace/shared/utils";
 import { objectToGetParams, loadScript } from "@docspace/common/utils";
-import { RoomsType } from "@docspace/common/constants";
+import { RoomsType } from "@docspace/shared/enums";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 

@@ -8,7 +8,7 @@ import { Checkbox } from "@docspace/shared/components";
 import { RadioButtonGroup } from "@docspace/shared/components";
 import { toastr } from "@docspace/shared/components";
 
-import { ThemeKeys } from "@docspace/common/constants";
+import { ThemeKeys } from "@docspace/shared/enums";
 
 import { mobile } from "@docspace/shared/utils";
 import {

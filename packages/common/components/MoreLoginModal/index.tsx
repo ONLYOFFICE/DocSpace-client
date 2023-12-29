@@ -2,7 +2,7 @@ import React from "react";
 import { ModalDialog } from "@docspace/shared/components";
 import { Text } from "@docspace/shared/components";
 import { Button } from "@docspace/shared/components";
-import { providersData } from "../../constants";
+import { PROVIDERS_DATA } from "@docspace/shared/constants";
 import styled, { css } from "styled-components";
 import { ReactSVG } from "react-svg";
 import { getProviderTranslation } from "../../utils";
@@ -129,9 +129,9 @@ const MoreLoginModal: React.FC<IMoreLoginNodalProps> = (props) => {
           </ProviderRow>
         )}
         {providers?.map((item, index) => {
-          if (!providersData[item.provider]) return;
+          if (!PROVIDERS_DATA[item.provider]) return;
 
-          const { icon, label } = providersData[item.provider];
+          const { icon, label } = PROVIDERS_DATA[item.provider];
 
           return (
             <ProviderRow key={`ProviderItem${index}`}>

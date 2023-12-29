@@ -14,7 +14,7 @@ import { ComboBox } from "@docspace/shared/components";
 import Filter from "@docspace/common/api/people/filter";
 import BetaBadge from "@docspace/common/components/BetaBadge";
 import { getMembersList } from "@docspace/common/api/people";
-import { ShareAccessRights } from "@docspace/common/constants";
+import { ShareAccessRights } from "@docspace/shared/enums";
 import withCultureNames from "@docspace/common/hoc/withCultureNames";
 import { isBetaLanguage } from "@docspace/common/utils";
 

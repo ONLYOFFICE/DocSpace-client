@@ -4,7 +4,7 @@ import { Button } from "@docspace/shared/components";
 import AmazonSettings from "../../../consumer-storage-settings/AmazonSettings";
 import { inject, observer } from "mobx-react";
 import { getFromLocalStorage } from "../../../../../../utils";
-import { ThirdPartyStorages } from "@docspace/common/constants";
+import { ThirdPartyStorages } from "@docspace/shared/enums";
 class AmazonStorage extends React.Component {
   constructor(props) {
     super(props);

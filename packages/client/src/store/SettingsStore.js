@@ -3,7 +3,7 @@ import {
   setFavoritesSetting,
   setRecentSetting,
 } from "@docspace/common/api/files";
-import { RoomsType } from "@docspace/common/constants";
+import { RoomsType } from "@docspace/shared/enums";
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
 import { presentInArray } from "../helpers/files-helpers";

@@ -1,4 +1,4 @@
-import { ShareAccessRights } from "@docspace/common/constants";
+import { ShareAccessRights } from "@docspace/shared/enums";
 import { makeAutoObservable } from "mobx";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 

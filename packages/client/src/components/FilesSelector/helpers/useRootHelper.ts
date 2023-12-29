@@ -1,6 +1,6 @@
 import React from "react";
 
-import { FolderType } from "@docspace/common/constants";
+import { FolderType } from "@docspace/shared/enums";
 // @ts-ignore
 import { getFoldersTree } from "@docspace/common/api/files";
 

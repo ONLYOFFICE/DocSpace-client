@@ -14,7 +14,7 @@ import { SaveCancelButtons } from "@docspace/shared/components";
 import isEqual from "lodash/isEqual";
 
 import AdmMsgLoader from "../sub-components/loaders/admmsg-loader";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const MainContainer = styled.div`
   width: 100%;

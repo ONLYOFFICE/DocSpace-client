@@ -20,7 +20,7 @@ import { makeAutoObservable } from "mobx";
 import { toastr } from "@docspace/shared/components";
 
 import { combineUrl } from "@docspace/common/utils";
-import { EmployeeStatus, FilterSubject } from "@docspace/common/constants";
+import { EmployeeStatus, FilterSubject } from "@docspace/shared/enums";
 import { resendUserInvites } from "@docspace/common/api/people";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";

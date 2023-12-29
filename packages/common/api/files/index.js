@@ -1,7 +1,7 @@
 import { request } from "../client";
 import axios from "axios";
 import FilesFilter from "./filter";
-import { FolderType, RoomSearchArea } from "../../constants";
+import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
 import find from "lodash/find";
 import { checkFilterInstance, decodeDisplayName } from "../../utils";
 import { getRooms } from "../rooms";

@@ -2,7 +2,7 @@ import { Text } from "@docspace/shared/components";
 import { ToggleButton } from "@docspace/shared/components";
 import { inject, observer } from "mobx-react";
 
-import { NotificationsType } from "@docspace/common/constants";
+import { NotificationsType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components";
 const UsefulTipsContainer = ({
   t,

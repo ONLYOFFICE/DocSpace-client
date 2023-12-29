@@ -13,7 +13,7 @@ import { Loader } from "@docspace/shared/components";
 import { Base } from "@docspace/shared/themes";
 import { Tags } from "@docspace/shared/components";
 import { Tag } from "@docspace/shared/components";
-import { RoomsTypeTranslations } from "@docspace/common/constants";
+import { ROOMS_TYPE_TRANSLATIONS } from "@docspace/shared/constants";
 
 const svgLoader = () => <div style={{ width: "96px" }} />;
 
@@ -531,8 +531,8 @@ class Tile extends React.PureComponent {
     const icon = item.isPlugin
       ? item.fileTileIcon
       : thumbnail && !this.state.errorLoadSrc
-      ? thumbnail
-      : temporaryIcon;
+        ? thumbnail
+        : temporaryIcon;
 
     return (
       <Link type="page" onClick={thumbnailClick}>
@@ -697,7 +697,7 @@ class Tile extends React.PureComponent {
     } else {
       tags.push({
         isDefault: true,
-        label: t(RoomsTypeTranslations[item.roomType]),
+        label: t(ROOMS_TYPE_TRANSLATIONS[item.roomType]),
         onClick: () =>
           selectOption({
             option: "defaultTypeRoom",
@@ -813,7 +813,7 @@ class Tile extends React.PureComponent {
                 {/* ) : (
                     <Tag
                       isDefault
-                      label={t(RoomsTypeTranslations[item.roomType])}
+                      label={t(ROOMS_TYPE_TRANSLATIONS[item.roomType])}
                       onClick={() =>
                         selectOption({
                           option: "defaultTypeRoom",

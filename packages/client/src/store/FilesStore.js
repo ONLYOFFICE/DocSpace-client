@@ -10,7 +10,7 @@ import {
   RoomsTypeValues,
   RoomsProviderType,
   ShareAccessRights,
-} from "@docspace/common/constants";
+} from "@docspace/shared/enums";
 
 import { combineUrl } from "@docspace/common/utils";
 import { updateTempContent } from "@docspace/common/utils";
@@ -1092,8 +1092,10 @@ class FilesStore {
         this.viewAs === "tile"
           ? item.getAttribute("value")
           : item.getElementsByClassName("files-item")
-          ? item.getElementsByClassName("files-item")[0]?.getAttribute("value")
-          : null;
+            ? item
+                .getElementsByClassName("files-item")[0]
+                ?.getAttribute("value")
+            : null;
 
       if (!value) return;
       const splitValue = value && value.split("_");
@@ -1127,8 +1129,10 @@ class FilesStore {
         this.viewAs === "tile"
           ? item.getAttribute("value")
           : item.getElementsByClassName("files-item")
-          ? item.getElementsByClassName("files-item")[0]?.getAttribute("value")
-          : null;
+            ? item
+                .getElementsByClassName("files-item")[0]
+                ?.getAttribute("value")
+            : null;
 
       const splitValue = value && value.split("_");
 
@@ -3079,10 +3083,10 @@ class FilesStore {
       const href = isRecycleBinFolder
         ? null
         : previewUrl
-        ? previewUrl
-        : !isFolder
-        ? docUrl
-        : folderUrl;
+          ? previewUrl
+          : !isFolder
+            ? docUrl
+            : folderUrl;
 
       const isRoom = !!roomType;
 
@@ -3341,8 +3345,8 @@ class FilesStore {
     let selection = this.selection.length
       ? this.selection
       : this.bufferSelection
-      ? [this.bufferSelection]
-      : [];
+        ? [this.bufferSelection]
+        : [];
 
     selection = JSON.parse(JSON.stringify(selection));
 
@@ -3411,8 +3415,8 @@ class FilesStore {
     const selection = this.selection.length
       ? this.selection
       : this.bufferSelection
-      ? [this.bufferSelection]
-      : [];
+        ? [this.bufferSelection]
+        : [];
 
     return selection.some((selected) => {
       if (

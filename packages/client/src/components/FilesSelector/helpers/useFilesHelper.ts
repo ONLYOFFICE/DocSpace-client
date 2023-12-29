@@ -20,7 +20,7 @@ import {
   FilesSelectorFilterTypes,
   FilterType,
   FolderType,
-} from "@docspace/common/constants";
+} from "@docspace/shared/enums";
 //@ts-ignore
 import { toastr } from "@docspace/shared/components";
 
@@ -147,8 +147,8 @@ export const useFilesHelper = ({
       const currentSearch = search
         ? search
         : search === null
-        ? ""
-        : searchValue || "";
+          ? ""
+          : searchValue || "";
 
       const page = startIndex / PAGE_COUNT;
 

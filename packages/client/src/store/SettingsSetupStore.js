@@ -12,7 +12,7 @@ import {
 import { combineUrl } from "@docspace/common/utils";
 import config from "PACKAGE_FILE";
 import { isDesktop } from "@docspace/shared/utils";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 class SettingsSetupStore {
   selectionStore = null;

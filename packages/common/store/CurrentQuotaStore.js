@@ -2,7 +2,7 @@ import { makeAutoObservable } from "mobx";
 import { toastr } from "@docspace/shared/components";
 
 import api from "../api";
-import { PortalFeaturesLimitations } from "../constants";
+import { PortalFeaturesLimitations } from "@docspace/shared/enums";
 
 const MANAGER = "manager";
 const TOTAL_SIZE = "total_size";

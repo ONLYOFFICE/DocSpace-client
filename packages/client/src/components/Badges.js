@@ -19,7 +19,7 @@ import {
   FileStatus,
   RoomsType,
   ShareAccessRights,
-} from "@docspace/common/constants";
+} from "@docspace/shared/enums";
 import { Base } from "@docspace/shared/themes";
 
 import { isTablet, isDesktop, size, classNames } from "@docspace/shared/utils";

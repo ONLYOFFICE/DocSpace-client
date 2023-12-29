@@ -17,7 +17,7 @@ import { RowContent } from "@docspace/shared/components";
 import withContent from "../../../../../HOCs/withContent";
 
 import { Base } from "@docspace/shared/themes";
-import { RoomsTypeTranslations } from "@docspace/common/constants";
+import { ROOMS_TYPE_TRANSLATIONS } from "@docspace/shared/constants";
 
 import { getFileTypeName } from "../../../../../helpers/filesUtils";
 import { SortByFieldName } from "../../../../../helpers/constants";
@@ -267,14 +267,14 @@ const FilesRowContent = ({
           truncate={true}
         >
           {isRooms
-            ? t(RoomsTypeTranslations[item.roomType])
+            ? t(ROOMS_TYPE_TRANSLATIONS[item.roomType])
             : !fileExst && !contentLength && !providerKey
-            ? `${foldersCount} ${t("Translations:Folders")} | ${filesCount} ${t(
-                "Translations:Files"
-              )}`
-            : fileExst
-            ? `${fileExst.toUpperCase().replace(/^\./, "")}`
-            : ""}
+              ? `${foldersCount} ${t(
+                  "Translations:Folders"
+                )} | ${filesCount} ${t("Translations:Files")}`
+              : fileExst
+                ? `${fileExst.toUpperCase().replace(/^\./, "")}`
+                : ""}
         </Text>
       </SimpleFilesRowContent>
     </>

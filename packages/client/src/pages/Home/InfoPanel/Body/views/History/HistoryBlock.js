@@ -5,7 +5,7 @@ import { Text } from "@docspace/shared/components";
 import HistoryBlockMessage from "./HistoryBlockMessage";
 import HistoryBlockItemList from "./HistoryBlockItemList";
 import HistoryBlockUser from "./HistoryBlockUser";
-import { FeedItemTypes } from "@docspace/common/constants";
+import { FeedItemTypes } from "@docspace/shared/enums";
 import DefaultUserAvatarSmall from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
 import { StyledHistoryBlock } from "../../styles/history";
 import { getDateTime } from "../../helpers/HistoryHelper";

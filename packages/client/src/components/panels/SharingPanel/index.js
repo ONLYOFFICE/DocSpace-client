@@ -11,7 +11,7 @@ import { ModalDialog } from "@docspace/shared/components";
 import { SaveCancelButtons } from "@docspace/shared/components";
 
 import Loaders from "@docspace/common/components/Loaders";
-import { ShareAccessRights } from "@docspace/common/constants";
+import { ShareAccessRights } from "@docspace/shared/enums";
 import SharingPanelLoader from "@docspace/common/components/Loaders/SharingPanelLoader";
 import SharingPanelLoaderModal from "@docspace/common/components/Loaders/SharingPanelLoader/modal";
 

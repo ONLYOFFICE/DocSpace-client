@@ -17,7 +17,11 @@ import FilterBlockItem from "./FilterBlockItem";
 import PeopleSelector from "client/PeopleSelector";
 import RoomSelector from "@docspace/client/src/components/RoomSelector";
 
-import { DeviceType, FilterGroups } from "../../../constants";
+import {
+  DeviceType,
+  FilterGroups,
+  FilterSelectorTypes,
+} from "@docspace/shared/enums";
 
 import {
   StyledFilterBlock,
@@ -26,7 +30,6 @@ import {
   StyledControlContainer,
   StyledCrossIcon,
 } from "./StyledFilterBlock";
-import { FilterSelectorTypes } from "../../../constants";
 
 //TODO: fix translate
 const FilterBlock = ({

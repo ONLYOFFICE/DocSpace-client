@@ -83,11 +83,11 @@ export const Default: Story = {
   render: (args) => <Template {...args} />,
   args: {
     displayType: ModalDialogType.aside,
-    displayTypeDetailed: {
-      desktop: ModalDialogType.aside,
-      tablet: ModalDialogType.aside,
-      mobile: ModalDialogType.aside,
-    },
+    // displayTypeDetailed: {
+    //   desktop: ModalDialogType.aside,
+    //   tablet: ModalDialogType.aside,
+    //   mobile: ModalDialogType.aside,
+    // },
     children: <>123</>,
   },
 };

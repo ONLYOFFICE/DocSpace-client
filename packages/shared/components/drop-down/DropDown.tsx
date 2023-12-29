@@ -18,8 +18,8 @@ const DropDown = ({
   manualY,
   open,
   enableOnClickOutside,
-  isDefaultMode,
-  fixedDirection,
+  isDefaultMode = true,
+  fixedDirection = false,
   smallSectionWidth,
   forwardedRef,
   disableOnClickOutside,
@@ -38,6 +38,7 @@ const DropDown = ({
   clickOutsideAction,
   manualWidth,
   className,
+  style,
 }: DropDownProps) => {
   const theme = useTheme();
 
@@ -57,7 +58,11 @@ const DropDown = ({
     const parent = forwardedRef;
 
     if (!parent?.current || fixedDirection) {
-      setState((s) => ({ ...s, isDropdownReady: true }));
+      setState((s) => ({
+        ...s,
+        isDropdownReady: true,
+        width: dropDownRef.current?.offsetWidth || 0,
+      }));
       return;
     }
 
@@ -149,7 +154,11 @@ const DropDown = ({
 
   const checkPosition = React.useCallback(() => {
     if (!dropDownRef.current || fixedDirection) {
-      setState((s) => ({ ...s, isDropdownReady: true }));
+      setState((s) => ({
+        ...s,
+        isDropdownReady: true,
+        width: dropDownRef.current?.offsetWidth || 0,
+      }));
       return;
     }
 
@@ -369,6 +378,7 @@ const DropDown = ({
     return (
       <StyledDropdown
         ref={dropDownRef}
+        style={style}
         // {...this.props}
         directionX={state.directionX}
         directionY={state.directionY}

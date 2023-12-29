@@ -73,13 +73,11 @@ const Template = ({
         size={InputSize.base}
         isDisabled={args.isDisabled}
         isReadOnly
-        scale
         value="demo@gmail.com"
       />
 
       <PasswordInput
         {...args}
-        size={InputSize.base}
         inputValue={value}
         onChange={onChangeHandler}
         tooltipPasswordLength={`${tooltipPasswordLength} ${passwordSettings?.minLength}`}
@@ -117,5 +115,6 @@ export const Default: Story = {
     generatorSpecial: "!@#$%^&*",
     placeholder: "password",
     maxLength: 30,
+    size: InputSize.base,
   },
 };

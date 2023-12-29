@@ -199,7 +199,7 @@ const Template = (args: RowContainerProps) => {
 export const Default: Story = {
   render: (args) => <Template {...args} />,
   args: {
-    useReactWindow: true,
+    useReactWindow: false,
     itemCount: 20,
     itemHeight: 50,
     children: fakeData.map(() => <div key={getRndString(10)}>13</div>),

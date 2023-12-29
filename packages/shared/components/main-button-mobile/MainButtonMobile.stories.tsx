@@ -36,15 +36,6 @@ const StyledWrapper = styled.div<{ isAutoDocs: boolean; isMobile?: boolean }>`
       position: relative;
       margin: 0 0 -20px -20px;
     `}
-
-  ${(props) =>
-    props.isMobile &&
-    css`
-      .mainBtnDropdown {
-        right: 5px !important;
-        bottom: 5px !important;
-      }
-    `}
 `;
 
 const Template = ({ ...args }) => {
@@ -158,25 +149,6 @@ const Template = ({ ...args }) => {
     typeof window !== "undefined" && window?.location?.href.includes("docs");
 
   const { interfaceDirection } = useTheme();
-  const style = {
-    // position: "absolute",
-    bottom: "26px",
-    left: "unset",
-    right: "unset",
-  };
-  const dropdownStyle = {
-    // position: "absolute",
-    bottom: "25px",
-    left: "unset",
-    right: "unset",
-  };
-  if (interfaceDirection === "rtl") {
-    style.left = "44px";
-    dropdownStyle.left = "60px";
-  } else {
-    style.right = "44px";
-    dropdownStyle.right = "60px";
-  }
 
   const actionOptions = [
     {
@@ -230,9 +202,19 @@ const Template = ({ ...args }) => {
     <StyledWrapper isAutoDocs={isAutoDocs} isMobile={isMobile}>
       <MainButtonMobile
         {...args}
-        style={style}
+        style={{
+          position: "absolute",
+          bottom: "26px",
+          left: interfaceDirection === "rtl" ? "44px" : "unset",
+          right: interfaceDirection !== "rtl" ? "44px" : "unset",
+        }}
         actionOptions={actionOptions}
-        dropdownStyle={dropdownStyle}
+        dropdownStyle={{
+          position: "absolute",
+          bottom: "25px",
+          left: interfaceDirection === "rtl" ? "60px" : "unset",
+          right: interfaceDirection !== "rtl" ? "60px" : "unset",
+        }}
         progressOptions={progressOptions}
         buttonOptions={buttonOptions}
         onUploadClick={onUploadClick}

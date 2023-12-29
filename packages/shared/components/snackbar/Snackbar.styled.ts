@@ -15,7 +15,7 @@ const StyledIframe = styled.iframe<{ sectionWidth: number }>`
 
 const StyledSnackBar = styled(Box)<{
   opacity?: number;
-  backgroundColor?: string;
+  backgroundColor: string;
   backgroundImg?: string;
   textalign?: string;
 }>`

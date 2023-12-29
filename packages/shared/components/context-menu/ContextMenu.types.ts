@@ -5,8 +5,14 @@ export type ContextMenuType = {
   icon?: string;
   disabled?: boolean;
   onClick?: (
-    originalEvent: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
-    action?: string | boolean,
+    value:
+      | {
+          originalEvent: React.MouseEvent | React.ChangeEvent<HTMLInputElement>;
+          action?: string | boolean;
+          item?: ContextMenuType;
+        }
+      | React.MouseEvent
+      | React.ChangeEvent<HTMLInputElement>,
     item?: ContextMenuType,
   ) => void;
   isSeparator?: undefined;

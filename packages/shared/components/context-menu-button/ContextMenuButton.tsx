@@ -179,7 +179,7 @@ const ContextMenuButtonPure = ({
   ) => {
     if ("onClick" in item) {
       const open = state.displayType === "dropdown";
-      item.onClick?.(e, open, item);
+      item.onClick?.({ originalEvent: e, action: open, item });
     }
     toggle();
   };

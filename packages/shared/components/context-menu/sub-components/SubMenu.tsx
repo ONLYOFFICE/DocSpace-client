@@ -92,7 +92,7 @@ const SubMenu = (props: {
     }
 
     if (onClick) {
-      onClick(e, action, item);
+      onClick({ originalEvent: e, action, item });
     }
 
     if (!items) {

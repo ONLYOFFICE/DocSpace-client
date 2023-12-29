@@ -139,5 +139,9 @@
     "svg-inline-loader": "^0.8.2",
     "ts-migrate": "^0.1.35",
     "ts-node": "^10.9.1"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }

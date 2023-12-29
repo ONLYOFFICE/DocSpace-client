@@ -20,6 +20,8 @@ const TableBody = (props: TableBodyProps) => {
     infoPanelVisible = false,
   } = props;
 
+  console.log("body render");
+
   return useReactWindow ? (
     <StyledTableBody
       useReactWindow={useReactWindow}

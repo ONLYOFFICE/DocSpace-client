@@ -100,6 +100,7 @@ export function getObjectByLocation(location) {
 }
 
 export function changeLanguage(i18n, currentLng = getCookie(LANGUAGE)) {
+  console.log("call");
   return currentLng
     ? i18n.language !== currentLng
       ? i18n.changeLanguage(currentLng)
@@ -637,9 +638,9 @@ export const getSystemTheme = () => {
       ? ThemeKeys.DarkStr
       : ThemeKeys.BaseStr
     : window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? ThemeKeys.DarkStr
-    : ThemeKeys.BaseStr;
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? ThemeKeys.DarkStr
+      : ThemeKeys.BaseStr;
 };
 
 export const getEditorTheme = (theme) => {

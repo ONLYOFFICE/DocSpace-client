@@ -61,7 +61,7 @@ const Bar = (props) => {
 
   const { loadLanguagePath } = getBannerAttribute();
 
-  const updateBanner = async () => {
+  const updateBanner = React.useCallback(async () => {
     const bar = (localStorage.getItem("bar") || "")
       .split(",")
       .filter((bar) => bar.length > 0);
@@ -119,7 +119,7 @@ const Bar = (props) => {
 
     localStorage.setItem("barIndex", index);
     return;
-  };
+  }, []);
 
   useEffect(() => {
     const updateTimeout = setTimeout(() => updateBanner(), 1000);

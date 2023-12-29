@@ -186,11 +186,11 @@ const MobileSubMenu = (props: {
     idx: number,
   ) => {
     let item: ContextMenuType | SeparatorType | null =
-      "data" in data ? null : data;
+      data && "data" in data ? null : data;
     let index = idx;
     let style = {};
 
-    if ("data" in data && Array.isArray(data.data)) {
+    if (data && "data" in data && Array.isArray(data.data)) {
       item = data.data[data.index] ? data.data[data.index] : null;
       index = data.index;
       style = data.style;

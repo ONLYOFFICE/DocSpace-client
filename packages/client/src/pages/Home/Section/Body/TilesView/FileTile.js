@@ -12,8 +12,6 @@ import withQuickButtons from "../../../../../HOCs/withQuickButtons";
 import ItemIcon from "../../../../../components/ItemIcon";
 import withBadges from "../../../../../HOCs/withBadges";
 
-console.log(DragAndDrop);
-
 const StyledDragAndDrop = styled(DragAndDrop)`
   border-radius: 6px;
 `;

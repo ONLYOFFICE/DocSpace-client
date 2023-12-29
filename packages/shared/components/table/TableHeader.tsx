@@ -912,6 +912,7 @@ class TableHeader extends React.Component<
 
   componentDidUpdate() {
     this.onResize();
+    console.log("header update");
   }
 
   componentWillUnmount() {
@@ -1718,6 +1719,8 @@ class TableHeader extends React.Component<
     const { hideColumns } = this.state;
 
     // console.log("TABLE HEADER RENDER", columns);
+
+    console.log("header render");
 
     return (
       <>

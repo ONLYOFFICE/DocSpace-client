@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import ModalDialogContainer from "@docspace/client/src/components/dialogs/ModalDialogContainer";
 import { Text } from "@docspace/shared/components";
 import { Button } from "@docspace/shared/components";
@@ -13,9 +12,6 @@ import { Link } from "@docspace/shared/components";
 const DeletePortalDialog = () => {
   const { spacesStore, authStore } = useStore();
   const { currentColorScheme } = authStore.settingsStore;
-  const { logout } = authStore;
-
-  const { user } = authStore.userStore;
 
   const {
     currentPortal,
@@ -26,7 +22,7 @@ const DeletePortalDialog = () => {
   const { t } = useTranslation(["Management", "Common"]);
 
   const { owner, domain } = currentPortal;
-  const { displayName, email, id } = owner;
+  const { displayName, email } = owner;
 
   const onClose = () => setDeletePortalDialogVisible(false);
 

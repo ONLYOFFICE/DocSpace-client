@@ -7,7 +7,7 @@ import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";
 
 import { Scrollbar } from "@docspace/shared/components";
-import { DragAndDrop } from "@docspace/shared/components";
+import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
 import { tablet, desktop, mobile, mobileMore } from "@docspace/shared/utils";
 import { DeviceType } from "../../../constants";
 

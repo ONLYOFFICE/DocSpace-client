@@ -72,6 +72,8 @@ const ClearTextareaAutosize = React.forwardRef(
       paddingLeftProp,
       isJSONField,
       enableCopy,
+      heightTextAreaProp,
+      heightTextArea,
       ...props
     }: TextareaProps & {
       disabled?: boolean;

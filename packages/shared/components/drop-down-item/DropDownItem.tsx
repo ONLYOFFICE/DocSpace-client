@@ -22,7 +22,7 @@ const DropDownItem = (props: DropDownItemProps) => {
     isHeader,
     withHeaderArrow,
     headerArrowAction,
-    label,
+
     icon,
     children,
     disabled,
@@ -41,7 +41,8 @@ const DropDownItem = (props: DropDownItemProps) => {
 
   const { t } = useTranslation(["Settings"]);
 
-  const { withToggle, checked, onClick, onClickSelectedItem, ...rest } = props;
+  const { withToggle, checked, onClick, onClickSelectedItem, label, ...rest } =
+    props;
 
   const onClickAction = (
     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,

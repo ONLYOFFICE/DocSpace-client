@@ -9,9 +9,9 @@ import {
   showLoader,
   hideLoader,
 } from "@docspace/common/utils";
-import { regDesktop } from "@docspace/common/desktop";
+import { regDesktop } from "@docspace/shared/utils/desktop";
 
-import {toastr} from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components";
 
 import FilesPanels from "./components/FilesPanels";
 import GlobalEvents from "./components/GlobalEvents";

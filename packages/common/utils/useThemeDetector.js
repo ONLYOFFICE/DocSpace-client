@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getSystemTheme } from "../utils";
+import { getSystemTheme } from "@docspace/shared/utils";
 
 export const useThemeDetector = () => {
   const isDesktopClient = window["AscDesktopEditor"] !== undefined;

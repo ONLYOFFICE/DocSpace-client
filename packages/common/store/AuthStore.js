@@ -7,7 +7,10 @@ import BannerStore from "./BannerStore";
 import UserStore from "./UserStore";
 import TfaStore from "./TfaStore";
 import InfoPanelStore from "./InfoPanelStore";
-import { logout as logoutDesktop, desktopConstants } from "../desktop";
+import {
+  logout as logoutDesktop,
+  desktopConstants,
+} from "@docspace/shared/utils/desktop";
 import { isAdmin, setCookie } from "../utils";
 import { getCookie } from "@docspace/shared/utils";
 import CurrentQuotasStore from "./CurrentQuotaStore";

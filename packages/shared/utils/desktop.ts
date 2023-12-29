@@ -1,8 +1,11 @@
-import { toastr } from "@docspace/shared/components";
 import isEmpty from "lodash/isEmpty";
 import omit from "lodash/omit";
-import { getEditorTheme } from "../utils";
-import { checkIsSSR } from "@docspace/shared/utils";
+
+import { toastr } from "../components/toast";
+import { TTranslation, TUser } from "../types";
+
+import { getEditorTheme } from "./common";
+import { checkIsSSR } from "./device";
 
 const isSSR = checkIsSSR();
 
@@ -13,13 +16,13 @@ export const desktopConstants = Object.freeze({
 });
 
 export function regDesktop(
-  user,
-  isEncryption,
-  keys,
-  setEncryptionKeys,
-  isEditor,
-  getEncryptionAccess,
-  t
+  user: TUser,
+  isEncryption: boolean,
+  keys: string[],
+  setEncryptionKeys: (value: string[]) => void,
+  isEditor: boolean,
+  getEncryptionAccess: (callback?: () => void) => void,
+  t: TTranslation,
 ) {
   if (!isSSR) {
     const data = {
@@ -28,7 +31,7 @@ export function regDesktop(
       domain: desktopConstants.domain,
       provider: desktopConstants.provider,
       userId: user.id,
-      uiTheme: getEditorTheme(user?.theme),
+      uiTheme: getEditorTheme(user.theme),
     };
 
     let extendedData;
@@ -52,9 +55,9 @@ export function regDesktop(
       extendedData = { ...data };
     }
 
-    window.AscDesktopEditor.execCommand(
+    window.AscDesktopEditor?.execCommand(
       "portal:login",
-      JSON.stringify(extendedData)
+      JSON.stringify(extendedData),
     );
 
     if (isEncryption) {
@@ -70,7 +73,7 @@ export function regDesktop(
           }
           case "relogin": {
             // toastr.info(t("Common:EncryptionKeysReload"));
-            //relogin();
+            // relogin();
             break;
           }
           case "getsharingkeys":
@@ -120,7 +123,7 @@ export function relogin() {
       };
       window.AscDesktopEditor.execCommand(
         "portal:logout",
-        JSON.stringify(data)
+        JSON.stringify(data),
       );
     }, 1000);
 }
@@ -134,7 +137,7 @@ export function checkPwd() {
     };
     window.AscDesktopEditor.execCommand(
       "portal:checkpwd",
-      JSON.stringify(data)
+      JSON.stringify(data),
     );
   }
 }

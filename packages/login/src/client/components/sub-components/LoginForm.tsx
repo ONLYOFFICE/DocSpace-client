@@ -11,7 +11,7 @@ import ForgotPasswordModalDialog from "./forgot-password-modal-dialog";
 import { Button } from "@docspace/shared/components";
 import { createPasswordHash } from "@docspace/common/utils";
 import { checkIsSSR } from "@docspace/shared/utils";
-import { checkPwd } from "@docspace/common/desktop";
+import { checkPwd } from "@docspace/shared/utils/desktop";
 import { login } from "@docspace/common/utils/loginUtils";
 import { toastr } from "@docspace/shared/components";
 import { thirdPartyLogin } from "@docspace/common/api/user";

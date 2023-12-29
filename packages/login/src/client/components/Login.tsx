@@ -24,7 +24,7 @@ import { Dark, Base } from "@docspace/shared/themes";
 import { useMounted } from "../helpers/useMounted";
 import { getBgPattern } from "@docspace/common/utils";
 import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
-import { getLogoFromPath, getSystemTheme } from "@docspace/common/utils";
+import { getLogoFromPath, getSystemTheme } from "@docspace/shared/utils";
 import { TenantStatus } from "@docspace/shared/enums";
 
 const themes = {

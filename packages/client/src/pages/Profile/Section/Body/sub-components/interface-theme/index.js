@@ -10,12 +10,8 @@ import { toastr } from "@docspace/shared/components";
 
 import { ThemeKeys } from "@docspace/shared/enums";
 
-import { mobile } from "@docspace/shared/utils";
-import {
-  showLoader,
-  getSystemTheme,
-  getEditorTheme,
-} from "@docspace/common/utils";
+import { mobile, getSystemTheme, getEditorTheme } from "@docspace/shared/utils";
+import { showLoader } from "@docspace/common/utils";
 
 import ThemePreview from "./theme-preview";
 

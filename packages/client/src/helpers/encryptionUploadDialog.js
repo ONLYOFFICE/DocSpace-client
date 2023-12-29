@@ -1,4 +1,4 @@
-import { desktopConstants } from "@docspace/common/desktop";
+import { desktopConstants } from "@docspace/shared/utils/desktop";
 
 export function encryptionUploadDialog(extsWebEncrypt, callback) {
   const filter = extsWebEncrypt.map((f) => "*" + f).join(" ");

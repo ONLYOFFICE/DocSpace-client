@@ -2,12 +2,8 @@ import { makeAutoObservable, runInAction } from "mobx";
 
 import api from "../api";
 
-import {
-  combineUrl,
-  setCookie,
-  frameCallEvent,
-  getSystemTheme,
-} from "../utils";
+import { getSystemTheme } from "@docspace/shared/utils";
+import { setCookie, combineUrl, frameCallEvent } from "../utils";
 import FirebaseHelper from "../utils/firebase";
 import { ThemeKeys, TenantStatus, DeviceType } from "@docspace/shared/enums";
 

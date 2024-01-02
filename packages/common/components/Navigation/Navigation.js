@@ -54,6 +54,7 @@ const Navigation = ({
   titleIcon,
   currentDeviceType,
   rootRoomTitle,
+  showTitle,
 
   ...rest
 }) => {
@@ -171,6 +172,7 @@ const Navigation = ({
           }
         }}
       />
+      
       {navigationTitleNode}
     </div>
   ) : (
@@ -245,7 +247,7 @@ const Navigation = ({
               onBackToParentFolder={onBackToParentFolder}
             />
 
-            {navigationTitleContainerNode}
+            {showTitle && navigationTitleContainerNode}
 
             <ControlButtons
               personal={personal}

@@ -229,6 +229,7 @@ const SectionHeaderContent = (props) => {
     moveToPublicRoom,
     currentDeviceType,
     isFrame,
+    showTitle,
     onClickArchive,
     setLeaveRoomDialogVisible,
     inRoom,
@@ -1108,6 +1109,7 @@ const SectionHeaderContent = (props) => {
                 showRootFolderTitle={insideTheRoom}
                 currentDeviceType={currentDeviceType}
                 isFrame={isFrame}
+                showTitle={isFrame ? showTitle : true}
               />
             </div>
           )}
@@ -1236,9 +1238,11 @@ export default inject(
       enablePlugins,
       theme,
       whiteLabelLogoUrls,
+      frameConfig,
       isFrame,
       currentDeviceType,
     } = auth.settingsStore;
+
     const { isGracePeriod } = auth.currentTariffStatusStore;
 
     const isRoom = !!roomType;
@@ -1407,6 +1411,7 @@ export default inject(
       whiteLabelLogoUrls,
       setRoomSharingPanelVisible,
       isFrame,
+      showTitle: frameConfig?.showTitle,
       currentDeviceType,
       setLeaveRoomDialogVisible,
       inRoom,

@@ -292,11 +292,7 @@ const PureHome = (props) => {
       <Section {...sectionProps}>
         {(!isErrorRoomNotAvailable || isAccountsPage || isSettingsPage) && (
           <Section.SectionHeader>
-            {isFrame ? (
-              showTitle && <SectionHeaderContent />
-            ) : (
-              <SectionHeaderContent />
-            )}
+            <SectionHeaderContent />
           </Section.SectionHeader>
         )}
 

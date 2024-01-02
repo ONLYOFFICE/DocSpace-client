@@ -456,7 +456,7 @@ const Manager = (props) => {
             />
             <Checkbox
               className="checkbox"
-              label={t("Title")}
+              label={t("Common:Title")}
               onChange={onChangeShowTitle}
               isChecked={config.showTitle}
             />

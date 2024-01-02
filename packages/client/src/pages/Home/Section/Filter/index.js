@@ -987,7 +987,7 @@ const SectionFilterContent = ({
           id: "filter_status-user",
           key: "filter-status",
           group: "filter-status",
-          label: t("People:UserStatus"),
+          label: t("Common:UserStatus"),
           isHeader: true,
         },
         {
@@ -1085,7 +1085,7 @@ const SectionFilterContent = ({
       //   {
       //     key: "filter-status",
       //     group: "filter-status",
-      //     label: t("People:UserStatus"),
+      //     label: t("Common:UserStatus"),
       //     isHeader: true,
       //   },
       //   {

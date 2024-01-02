@@ -114,8 +114,4 @@ export default inject(({ auth, setup }) => {
     currentDeviceType,
     isLoadingDownloadReport,
   };
-})(
-  withTranslation(["Settings", "Common", "PeopleTranslations"])(
-    observer(Sessions)
-  )
-);
+})(withTranslation(["Settings", "Common"])(observer(Sessions)));

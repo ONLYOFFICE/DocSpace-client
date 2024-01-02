@@ -49,7 +49,7 @@ const HistoryTableHeader = (props) => {
     },
     {
       key: "Status",
-      title: t("People:UserStatus"),
+      title: t("Common:UserStatus"),
       enable: true,
       resizable: true,
       onChange: onColumnChange,

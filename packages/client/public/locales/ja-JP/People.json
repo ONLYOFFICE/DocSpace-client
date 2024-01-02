@@ -2,6 +2,5 @@
   "LblInviteAgain": "もう一度招待する",
   "MessageEmailActivationInstuctionsSentOnEmail": "電子メールによるアクティベーションの指示は、<1>{{email}}</1>のメールアドレスに送信されています。",
   "NotFoundUsers": "ユーザーが見つかりません",
-  "NotFoundUsersDescription": "検索条件に一致するユーザーがいません。検索パラメータを調整するか、検索フィールドをクリアして全ユーザーリストを表示してください。",
-  "UserStatus": "ステータス"
+  "NotFoundUsersDescription": "検索条件に一致するユーザーがいません。検索パラメータを調整するか、検索フィールドをクリアして全ユーザーリストを表示してください。"
 }

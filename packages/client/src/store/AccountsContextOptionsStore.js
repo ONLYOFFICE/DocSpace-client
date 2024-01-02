@@ -112,7 +112,7 @@ class AccountsContextOptionsStore {
             id: "option_disable",
             key: option,
             icon: RemoveReactSvgUrl,
-            label: t("PeopleTranslations:DisableUserButton"),
+            label: t("Common:DisableUserButton"),
             onClick: () => this.onDisableClick(t, item),
           };
         case "reassign-data":
@@ -261,7 +261,7 @@ class AccountsContextOptionsStore {
       },
       {
         key: "cm-disable",
-        label: t("PeopleTranslations:DisableUserButton"),
+        label: t("Common:DisableUserButton"),
         disabled: !hasUsersToDisable,
         onClick: () => onChangeStatus(EmployeeStatus.Disabled),
         icon: DisableReactSvgUrl,

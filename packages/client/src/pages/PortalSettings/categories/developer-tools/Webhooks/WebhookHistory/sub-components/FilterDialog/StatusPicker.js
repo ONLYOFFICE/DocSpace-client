@@ -83,7 +83,7 @@ const StatusPicker = ({ filters, setFilters }) => {
   return (
     <>
       <Text fontWeight={600} fontSize="15px">
-        {t("People:UserStatus")}
+        {t("Common:UserStatus")}
       </Text>
       <Selectors>{StatusBadgeElements}</Selectors>
     </>

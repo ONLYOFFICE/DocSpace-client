@@ -156,7 +156,7 @@ const Info = ({ t, plugin, withDelete, withSeparator }) => {
           noSelect
           truncate
         >
-          {t("People:UserStatus")}
+          {t("Common:UserStatus")}
         </Text>
         <Text fontSize={"13px"} fontWeight={600} lineHeight={"20px"} noSelect>
           {pluginStatus}

@@ -2,7 +2,11 @@ import TableRow from "@docspace/components/table-container/TableRow";
 import TableCell from "@docspace/components/table-container/TableCell";
 import Text from "@docspace/components/text";
 import Avatar from "@docspace/components/avatar";
-import SettingsIcon from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
+
+import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";
+import RemoveSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
+import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
+
 import styled from "styled-components";
 
 const StyledTableRow = styled(TableRow)`
@@ -28,13 +32,13 @@ const SessionsTableRow = ({
     {
       key: "ViewSessions",
       label: t("Settings:ViewSessions"),
-      icon: SettingsIcon,
+      icon: HistoryFinalizedReactSvgUrl,
       onClick: () => console.log("view session"),
     },
     {
       key: "LogoutAllSessions",
       label: t("Settings:LogoutAllSessions"),
-      icon: SettingsIcon,
+      icon: RemoveSvgUrl,
       onClick: () => console.log("logout session"),
     },
     {
@@ -43,8 +47,8 @@ const SessionsTableRow = ({
     },
     {
       key: "Disable",
-      label: t("PeopleTranslations:DisableUserButton"),
-      icon: SettingsIcon,
+      label: t("Common:DisableUserButton"),
+      icon: TrashReactSvgUrl,
       onClick: () => console.log("disable"),
     },
   ];

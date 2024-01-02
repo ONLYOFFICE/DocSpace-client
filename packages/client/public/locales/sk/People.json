@@ -2,6 +2,5 @@
   "LblInviteAgain": "Pozvať znova",
   "MessageEmailActivationInstuctionsSentOnEmail": "Pokyny na aktiváciu e-mailu boli odoslané na <1>{{email}}</1> e-mail.",
   "NotFoundUsers": "Používatelia sa nenašli",
-  "NotFoundUsersDescription": "Vyhľadávaniu nevyhovujú žiadni používatelia. Upravte parametre vyhľadávania alebo vymažte políčko vyhľadávania, aby sa zobrazil úplný zoznam používateľov.",
-  "UserStatus": "Stav"
+  "NotFoundUsersDescription": "Vyhľadávaniu nevyhovujú žiadni používatelia. Upravte parametre vyhľadávania alebo vymažte políčko vyhľadávania, aby sa zobrazil úplný zoznam používateľov."
 }

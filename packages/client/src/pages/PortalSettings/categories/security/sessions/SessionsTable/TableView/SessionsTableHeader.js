@@ -53,7 +53,7 @@ const SessionsTableHeader = (props) => {
     },
     {
       key: "Status",
-      title: t("Common:Status"),
+      title: t("Common:UserStatus"),
       enable: true,
       resizable: true,
       onChange: onColumnChange,

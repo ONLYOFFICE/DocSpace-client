@@ -108,7 +108,7 @@ class ChangeUserStatusDialogComponent extends React.Component {
 
       bodyText = bodyText + t("DisableGeneralDescription");
 
-      buttonLabelSave = t("PeopleTranslations:DisableUserButton");
+      buttonLabelSave = t("Common:DisableUserButton");
     } else {
       header = onlyOneUser ? t("EnableUser") : t("EnableUsers");
 

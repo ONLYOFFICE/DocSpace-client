@@ -130,6 +130,9 @@ const ArticleMainButtonContent = (props) => {
     isGracePeriod,
     setInviteUsersWarningDialogVisible,
     currentDeviceType,
+    
+    isFrame,
+    disableActionButton,
   } = props;
 
   const navigate = useNavigate();
@@ -488,7 +491,9 @@ const ArticleMainButtonContent = (props) => {
     ? t("Common:Invite")
     : t("Common:Actions");
 
-  const isDisabled = isSettingsPage
+  const isDisabled = isFrame 
+    ? disableActionButton 
+    : isSettingsPage
     ? isSettingsPage
     : isAccountsPage
     ? !isAccountsPage
@@ -632,6 +637,8 @@ export default inject(
     const { setOformFromFolderId, oformsFilter } = oformsStore;
     const { mainButtonItemsList } = pluginStore;
 
+    const { frameConfig, isFrame } = auth.settingsStore
+
     return {
       isGracePeriod,
       setInviteUsersWarningDialogVisible,
@@ -674,6 +681,9 @@ export default inject(
       versionHistoryPanelVisible,
       security,
       currentDeviceType,
+
+      isFrame,
+      disableActionButton: frameConfig?.disableActionButton,
     };
   }
 )(

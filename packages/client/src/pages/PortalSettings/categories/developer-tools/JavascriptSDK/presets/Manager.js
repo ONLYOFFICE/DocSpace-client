@@ -126,6 +126,7 @@ const Manager = (props) => {
     showTitle: true,
     showMenu: true,
     showFilter: true,
+    disableActionButton: false,
     init: true,
     viewTableColumns: selectedColumns.map((column) => column.key).join(","),
   });
@@ -267,6 +268,12 @@ const Manager = (props) => {
   const onChangeShowTitle = () => {
     setConfig((config) => {
       return { ...config, showTitle: !config.showTitle };
+    });
+  };
+
+  const toggleActionButton = () => {
+    setConfig((config) => {
+      return { ...config, disableActionButton: !config.disableActionButton };
     });
   };
 
@@ -469,8 +476,8 @@ const Manager = (props) => {
             <Checkbox
               className="checkbox"
               label={t("ActionButton")}
-              onChange={() => {}}
-              isChecked={true}
+              onChange={toggleActionButton}
+              isChecked={config.disableActionButton}
             />
             <Checkbox
               className="checkbox"

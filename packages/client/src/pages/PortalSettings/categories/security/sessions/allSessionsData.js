@@ -77,21 +77,6 @@ const allSessionsData = [
     tenantId: 1,
     userId: "66faa6e4-f133-11ea-b126-00ffeec8b4ed",
   },
-  {
-    id: 5,
-    displayName: "Djalilova Saida",
-    status: "Yesterday, 5:12 PM",
-    platform: "Windows 11",
-    browser: "Chrome 120",
-    country: "Uzbekistan",
-    city: " Tashkent",
-    date: "2023-12-26T17:13:28+00:00",
-    ip: "172.22.0.1",
-    mobile: false,
-    page: "http://192.168.0.239/wizard",
-    tenantId: 1,
-    userId: "66faa6e4-f133-11ea-b126-00ffeec8b4ed",
-  },
 ];
 
 export default allSessionsData;

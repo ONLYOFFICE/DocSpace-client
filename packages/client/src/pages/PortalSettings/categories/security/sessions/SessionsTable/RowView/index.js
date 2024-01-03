@@ -12,35 +12,27 @@ const RowView = (props) => {
   const { t, sectionWidth, sessionsData } = props;
 
   return (
-    sessionsData.length !== 0 && (
-      <StyledRowContainer
-        className="people-row-container"
-        useReactWindow={false}
-        itemHeight={58}
-        itemCount={6}
-        filesLength={sessionsData.length}
-      >
-        {sessionsData.map((session) => (
-          <SessionsRow
-            t={t}
-            sectionWidth={sectionWidth}
-            data={session}
-            key={session.id}
-            avatar={session.avatar}
-            displayName={session.displayName}
-            status={session.status}
-            browser={session.browser}
-            platform={session.platform}
-            country={session.country}
-            city={session.city}
-            ip={session.ip}
-            userId={session.userId}
-            // isChecked={isAccountChecked(data.key, checkedAccountType)}
-            // toggleAccount={() => handleToggle(data)}
-          />
-        ))}
-      </StyledRowContainer>
-    )
+    <StyledRowContainer useReactWindow={false}>
+      {sessionsData.map((session) => (
+        <SessionsRow
+          t={t}
+          sectionWidth={sectionWidth}
+          data={session}
+          key={session.id}
+          avatar={session.avatar}
+          displayName={session.displayName}
+          status={session.status}
+          browser={session.browser}
+          platform={session.platform}
+          country={session.country}
+          city={session.city}
+          ip={session.ip}
+          userId={session.userId}
+          // isChecked={isAccountChecked(data.key, checkedAccountType)}
+          // toggleAccount={() => handleToggle(data)}
+        />
+      ))}
+    </StyledRowContainer>
   );
 };
 

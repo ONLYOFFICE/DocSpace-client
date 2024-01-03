@@ -33,6 +33,7 @@ const SessionsTableHeader = (props) => {
     tableRef,
     columnStorageName,
     columnInfoPanelStorageName,
+    setHideColumns,
   } = props;
 
   const defaultColumns = [
@@ -113,6 +114,7 @@ const SessionsTableHeader = (props) => {
       checkboxMargin="12px"
       showSettings={true}
       useReactWindow
+      setHideColumns={setHideColumns}
       infoPanelVisible={false}
     />
   );

@@ -7,11 +7,18 @@ import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.rea
 import RemoveSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const StyledTableRow = styled(TableRow)`
   .avatar {
-    margin-right: 6px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 6px;
+          `
+        : css`
+            margin-right: 6px;
+          `}
   }
 `;
 
@@ -27,6 +34,7 @@ const SessionsTableRow = ({
   city,
   ip,
   userId,
+  hideColumns,
 }) => {
   const contextOptions = [
     {
@@ -57,6 +65,7 @@ const SessionsTableRow = ({
     <StyledTableRow
       onClick={() => console.log("selected row")}
       contextOptions={contextOptions}
+      hideColumns={hideColumns}
     >
       <TableCell>
         <Avatar

@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { Base } from "@docspace/components/themes";
 import styled, { css } from "styled-components";
@@ -64,6 +64,7 @@ const COLUMNS_SIZE = `sessionsColumnsSize_ver-${TABLE_VERSION}`;
 const INFO_PANEL_COLUMNS_SIZE = `infoPanelSessionsColumnsSize_ver-${TABLE_VERSION}`;
 
 const TableView = ({ t, sectionWidth, userId, sessionsData }) => {
+  const [hideColumns, setHideColumns] = useState(false);
   const tableRef = useRef(null);
 
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
@@ -78,6 +79,7 @@ const TableView = ({ t, sectionWidth, userId, sessionsData }) => {
         userId={userId}
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
+        setHideColumns={setHideColumns}
         // isIndeterminate={isIndeterminate}
         // isChecked={checkedUsers.withEmail.length === withEmailUsers.length}
         // toggleAll={toggleAll}
@@ -106,6 +108,7 @@ const TableView = ({ t, sectionWidth, userId, sessionsData }) => {
             city={session.city}
             ip={session.ip}
             userId={session.userId}
+            hideColumns={hideColumns}
             // isChecked={isAccountChecked(data.key, checkedAccountType)}
             // toggleAccount={(e) => handleToggle(e, data)}
           />

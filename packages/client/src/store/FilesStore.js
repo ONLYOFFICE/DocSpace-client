@@ -1519,12 +1519,8 @@ class FilesStore {
             .reverse();
         });
 
-        const isRoom = !!data.current.roomType;
-        const inRoom = data.current.inRoom;
-
         this.selectedFolderStore.setSelectedFolder({
           folders: data.folders,
-          inRoom: inRoom ? inRoom : isRoom ? true : false,
           ...data.current,
           pathParts: data.pathParts,
           navigationPath,
@@ -3036,7 +3032,7 @@ class FilesStore {
         security,
         viewAccessibility,
         mute,
-        inRoom = true,
+        inRoom,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(

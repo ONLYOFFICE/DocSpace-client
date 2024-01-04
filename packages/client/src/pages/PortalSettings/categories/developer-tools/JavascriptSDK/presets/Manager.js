@@ -90,8 +90,8 @@ const Manager = (props) => {
   ];
 
   const [columnsOptions, setColumnsOptions] = useState([
-    // { key: "Owner", label: t("Common:Owner") },
-    // { key: "Modified", label: t("Files:ByLastModified") },
+    { key: "Owner", label: t("Common:Owner") },
+    { key: "Activity", label: t("Files:ByLastModified") },
   ]);
 
   const [sortBy, setSortBy] = useState(dataSortBy[0]);
@@ -483,7 +483,7 @@ const Manager = (props) => {
               className="checkbox"
               label={t("ActionButton")}
               onChange={toggleActionButton}
-              isChecked={config.disableActionButton}
+              isChecked={!config.disableActionButton}
             />
             <Checkbox
               className="checkbox"

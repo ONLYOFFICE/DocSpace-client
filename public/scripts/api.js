@@ -23,7 +23,7 @@
     showFilter: false,
     destroyText: "",
     viewAs: "row", //TODO: ["row", "table", "tile"]
-    viewTableColumns: "Name,Size,Type",
+    viewTableColumns: "Name,Type,Tags",
     checkCSP: true,
     disableActionButton: false,
     showSettings: false,

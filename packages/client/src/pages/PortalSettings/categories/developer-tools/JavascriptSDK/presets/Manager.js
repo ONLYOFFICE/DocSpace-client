@@ -271,6 +271,12 @@ const Manager = (props) => {
     });
   };
 
+  const toggleShowSettings = () => {
+    setConfig((config) => {
+      return { ...config, showSettings: !config.showSettings };
+    });
+  };
+
   const toggleActionButton = () => {
     setConfig((config) => {
       return { ...config, disableActionButton: !config.disableActionButton };
@@ -470,8 +476,8 @@ const Manager = (props) => {
             <Checkbox
               className="checkbox"
               label={t("SettingUpColumns")}
-              onChange={() => {}}
-              isChecked={true}
+              onChange={toggleShowSettings}
+              isChecked={config.showSettings}
             />
             <Checkbox
               className="checkbox"

@@ -26,6 +26,7 @@
     viewTableColumns: "Name,Size,Type",
     checkCSP: true,
     disableActionButton: false,
+    showSettings: false,
     filter: {
       count: 100,
       page: 1,

@@ -1054,6 +1054,45 @@ export function getFileLink(fileId) {
   });
 }
 
+export function getExternalLinks(fileId, startIndex = 0, count = 50) {
+  const linkParams = `?startIndex=${startIndex}&count=${count}`;
+
+  return request({
+    method: "get",
+    url: `files/file/${fileId}/links${linkParams}`,
+  });
+}
+
+export function getPrimaryLink(fileId) {
+  return request({
+    method: "get",
+    url: `files/file/${fileId}/link`,
+  });
+}
+
+export function editExternalLink(
+  fileId,
+  linkId,
+  access,
+  primary,
+  internal,
+  expirationDate
+) {
+  return request({
+    method: "put",
+    url: `/files/file/${fileId}/links`,
+    data: { linkId, access, primary, internal, expirationDate },
+  });
+}
+
+export function addExternalLink(fileId, access, primary, internal) {
+  return request({
+    method: "put",
+    url: `/files/file/${fileId}/links`,
+    data: { access, primary, internal },
+  });
+}
+
 export function checkIsFileExist(folderId, fileTitles) {
   return request({
     method: "post",

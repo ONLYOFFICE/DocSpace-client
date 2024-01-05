@@ -569,10 +569,15 @@ class ContextOptionsStore {
     );
   };
 
-  onClickShare = () => {
-    setTimeout(() => {
-      this.dialogsStore.setSharingPanelVisible(true);
-    }, 10); //TODO: remove delay after fix context menu callback
+  onClickShare = (item) => {
+    const { openShareTab } = this.authStore.infoPanelStore;
+    const { setShareFolderDialogVisible } = this.dialogsStore;
+
+    if (item.isFolder) {
+      setShareFolderDialogVisible(true);
+    } else {
+      openShareTab();
+    }
   };
 
   onClickMarkRead = (item) => {
@@ -971,7 +976,9 @@ class ContextOptionsStore {
     const isRootThirdPartyFolder =
       item.providerKey && item.id === item.rootFolderId;
 
-    const isShareable = item.canShare;
+    const isShareable = this.treeFoldersStore.isPersonalRoom
+      ? item.canShare || item.isFolder
+      : false;
 
     const isMedia =
       item.viewAccessibility?.ImageView || item.viewAccessibility?.MediaView;
@@ -1237,6 +1244,14 @@ class ContextOptionsStore {
         disabled: false,
         action: item.id,
       },
+      {
+        id: "option_sharing-settings",
+        key: "sharing-settings",
+        label: t("Files:Share"),
+        icon: ShareReactSvgUrl,
+        onClick: () => this.onClickShare(item),
+        disabled: !isShareable,
+      },
       ...versionActions,
       {
         id: "option_link-for-room-members",
@@ -1284,14 +1299,6 @@ class ContextOptionsStore {
       },
       ...pinOptions,
       ...muteOptions,
-      {
-        id: "option_sharing-settings",
-        key: "sharing-settings",
-        label: t("SharingPanel:SharingSettingsTitle"),
-        icon: ShareReactSvgUrl,
-        onClick: this.onClickShare,
-        disabled: !isShareable,
-      },
       {
         id: "option_owner-change",
         key: "owner-change",

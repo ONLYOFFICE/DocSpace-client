@@ -1,4 +1,5 @@
 import { makeAutoObservable } from "mobx";
+import moment from "moment";
 
 import { getUserById } from "../api/people";
 import { combineUrl, getUserRole } from "../utils";
@@ -6,6 +7,12 @@ import { FolderType } from "../constants";
 import config from "PACKAGE_FILE";
 import Filter from "../api/people/filter";
 import { getRoomInfo } from "../api/rooms";
+import {
+  getPrimaryLink,
+  getExternalLinks,
+  editExternalLink,
+  addExternalLink,
+} from "../api/files";
 
 const observedKeys = [
   "id",
@@ -45,6 +52,8 @@ class InfoPanelStore {
   selectedFolderStore = null;
   treeFoldersStore = null;
   membersList = null;
+
+  shareChanged = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -334,6 +343,59 @@ class InfoPanelStore {
 
   setMembersList = (membersList) => {
     this.membersList = membersList;
+  };
+
+  openShareTab = () => {
+    this.setView("info_share");
+    this.isVisible = true;
+  };
+
+  getPrimaryFileLink = async (fileId) => {
+    const { getFileInfo } = this.filesStore;
+
+    const res = await getPrimaryLink(fileId);
+    await getFileInfo(fileId);
+    return res;
+  };
+
+  getFileLinks = async (fileId) => {
+    const res = await getExternalLinks(fileId);
+    return res;
+  };
+
+  editFileLink = async (
+    fileId,
+    linkId,
+    access,
+    primary,
+    internal,
+    expirationDate
+  ) => {
+    const { getFileInfo } = this.filesStore;
+
+    const expDate = moment(expirationDate);
+    const res = await editExternalLink(
+      fileId,
+      linkId,
+      access,
+      primary,
+      internal,
+      expDate
+    );
+    await getFileInfo(fileId);
+    return res;
+  };
+
+  addFileLink = async (fileId, access, primary, internal) => {
+    const { getFileInfo } = this.filesStore;
+
+    const res = await addExternalLink(fileId, access, primary, internal);
+    await getFileInfo(fileId);
+    return res;
+  };
+
+  setShareChanged = (shareChanged) => {
+    this.shareChanged = shareChanged;
   };
 }
 

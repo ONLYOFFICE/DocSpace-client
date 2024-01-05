@@ -1,4 +1,3 @@
-import SharingPanel from "./SharingPanel";
 import AddUsersPanel from "./AddUsersPanel";
 import EmbeddingPanel from "./EmbeddingPanel";
 import NewFilesPanel from "./NewFilesPanel";
@@ -10,7 +9,6 @@ import InvitePanel from "./InvitePanel";
 import EditLinkPanel from "./EditLinkPanel";
 
 export {
-  SharingPanel,
   AddUsersPanel,
   EmbeddingPanel,
   NewFilesPanel,

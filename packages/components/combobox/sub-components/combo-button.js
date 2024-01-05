@@ -95,7 +95,7 @@ const ComboButton = (props) => {
           border={`2px solid ${selectedOption.border}`}
           compact={!!selectedOption.border}
         />
-      ) : (
+      ) : type !== "onlyIcon" ? (
         <Text
           noBorder={noBorder}
           title={selectedOption?.label}
@@ -106,6 +106,8 @@ const ComboButton = (props) => {
         >
           {selectedOption?.label}
         </Text>
+      ) : (
+        <></>
       )}
       <StyledArrowIcon
         displayArrow={displayArrow}
@@ -157,7 +159,7 @@ ComboButton.propTypes = {
   modernView: PropTypes.bool,
   tabIndex: PropTypes.number,
   isLoading: PropTypes.bool,
-  type: PropTypes.oneOf(["badge", null]),
+  type: PropTypes.oneOf(["badge", "onlyIcon", null]),
 };
 
 ComboButton.defaultProps = {

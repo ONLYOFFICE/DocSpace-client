@@ -205,39 +205,45 @@ const StyledSpan = styled.span`
   }
 
   ${(props) =>
-    !props.$isOpen &&
+    !props.withoutHover &&
     css`
-      :hover {
-        color: ${(props) => props.theme.linkWithDropdown.color.hover};
+      ${(props) =>
+        !props.$isOpen &&
+        css`
+          :hover {
+            color: ${(props) => props.theme.linkWithDropdown.color.hover};
 
-        background: ${(props) => props.theme.linkWithDropdown.background.hover};
+            background: ${(props) =>
+              props.theme.linkWithDropdown.background.hover};
+            .expander {
+              path {
+                fill: ${(props) => props.theme.linkWithDropdown.color.hover};
+              }
+            }
+          }
+        `}
+
+      ${(props) =>
+        props.$isOpen
+          ? focusColor
+          : css`
+              :focus-within,
+              :focus {
+                ${focusColor}
+              }
+            `}
+
+  :active {
+        color: ${(props) => props.theme.linkWithDropdown.color.active};
+        background: ${(props) =>
+          props.theme.linkWithDropdown.background.active};
         .expander {
           path {
-            fill: ${(props) => props.theme.linkWithDropdown.color.hover};
+            fill: ${(props) => props.theme.linkWithDropdown.color.active};
           }
         }
       }
     `}
-
-  ${(props) =>
-    props.$isOpen
-      ? focusColor
-      : css`
-          :focus-within,
-          :focus {
-            ${focusColor}
-          }
-        `}
-
-  :active {
-    color: ${(props) => props.theme.linkWithDropdown.color.active};
-    background: ${(props) => props.theme.linkWithDropdown.background.active};
-    .expander {
-      path {
-        fill: ${(props) => props.theme.linkWithDropdown.color.active};
-      }
-    }
-  }
 `;
 StyledSpan.defaultProps = { theme: Base };
 

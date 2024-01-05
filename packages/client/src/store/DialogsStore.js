@@ -10,7 +10,6 @@ class DialogsStore {
   selectedFolderStore;
   versionHistoryStore;
 
-  sharingPanelVisible = false;
   roomSharingPanelVisible = false;
   ownerPanelVisible = false;
   moveToPanelVisible = false;
@@ -79,6 +78,8 @@ class DialogsStore {
   changeRoomOwnerIsVisible = false;
   changeRoomOwnerData = null;
 
+  shareFolderDialogVisible = false;
+
   constructor(
     authStore,
     treeFoldersStore,
@@ -111,10 +112,6 @@ class DialogsStore {
 
   setRestoreRoomDialogVisible = (visible) => {
     this.restoreRoomDialogVisible = visible;
-  };
-
-  setSharingPanelVisible = (sharingPanelVisible) => {
-    this.sharingPanelVisible = sharingPanelVisible;
   };
 
   setRoomSharingPanelVisible = (roomSharingPanelVisible) => {
@@ -434,6 +431,10 @@ class DialogsStore {
   };
   deselectActiveFiles = () => {
     this.filesStore.setSelected("none");
+  };
+
+  setShareFolderDialogVisible = (visible) => {
+    this.shareFolderDialogVisible = visible;
   };
 }
 

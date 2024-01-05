@@ -75,7 +75,7 @@ class UploadPanelComponent extends React.Component {
     const {
       t,
       uploadPanelVisible,
-      /* sharingPanelVisible, */ uploaded,
+      uploaded,
       converted,
       uploadDataFiles,
       cancelConversion,
@@ -157,9 +157,7 @@ const UploadPanel = withTranslation(["UploadPanel", "Files"])(
   withLoader(UploadPanelComponent)(<Loaders.DialogAsideLoader isPanel />)
 );
 
-export default inject(({ /* dialogsStore, */ auth, uploadDataStore }) => {
-  //const { sharingPanelVisible } = dialogsStore;
-
+export default inject(({ auth, uploadDataStore }) => {
   const {
     uploaded,
     converted,
@@ -178,7 +176,6 @@ export default inject(({ /* dialogsStore, */ auth, uploadDataStore }) => {
   const { clearPrimaryProgressData } = primaryProgressDataStore;
 
   return {
-    //sharingPanelVisible,
     uploadPanelVisible,
     uploaded,
     converted,

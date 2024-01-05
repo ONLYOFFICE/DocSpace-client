@@ -60,6 +60,7 @@ const RoomSelector = ({
   headerLabel,
   onBackClick,
 
+  withSearch,
   searchPlaceholder,
   onSearch,
   onClearSearch,
@@ -224,6 +225,7 @@ const RoomSelector = ({
           isUser={false}
         />
       }
+      withSearch={withSearch}
     />
   );
 };

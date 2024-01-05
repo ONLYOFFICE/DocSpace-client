@@ -89,6 +89,7 @@ const RoomSelector = (props) => {
     init: true,
     showSelectorCancel: true,
     showSelectorHeader: true,
+    withSearch: true,
   });
 
   const params = objectToGetParams(config);
@@ -160,6 +161,10 @@ const RoomSelector = (props) => {
     });
 
     setHeightDimension(item);
+  };
+
+  const toggleWithSearch = () => {
+    setConfig((config) => ({ ...config, withSearch: !config.withSearch }));
   };
 
   const openGetCodeModal = () => setIsGetCodeDialogOpened(true);
@@ -286,8 +291,8 @@ const RoomSelector = (props) => {
             <Checkbox
               className="checkbox"
               label={t("Common:Search")}
-              onChange={() => {}}
-              isChecked={true}
+              onChange={toggleWithSearch}
+              isChecked={config.withSearch}
             />
             <Label className="label" text={t("SelectButtonText")} />
             <TextInput

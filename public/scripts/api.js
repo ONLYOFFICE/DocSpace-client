@@ -27,6 +27,7 @@
     checkCSP: true,
     disableActionButton: false,
     showSettings: false,
+    withSearch: true,
     filter: {
       count: 100,
       page: 1,

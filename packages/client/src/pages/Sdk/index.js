@@ -167,6 +167,7 @@ const Sdk = ({
           withHeader={frameConfig?.showSelectorHeader}
           onAccept={onSelectRoom}
           onCancel={onClose}
+          withSearch={frameConfig?.withSearch}
         />
       );
       break;

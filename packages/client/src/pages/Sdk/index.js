@@ -169,6 +169,8 @@ const Sdk = ({
           onCancel={onClose}
           withSearch={frameConfig?.withSearch}
           withoutBackButton
+          acceptButtonLabel={frameConfig?.acceptButtonLabel}
+          cancelButtonLabel={frameConfig?.cancelButtonLabel}
         />
       );
       break;

@@ -90,6 +90,8 @@ const RoomSelector = (props) => {
     showSelectorCancel: true,
     showSelectorHeader: true,
     withSearch: true,
+    acceptButtonLabel: t("Common:SelectAction"),
+    cancelButtonLabel: t("Common:CancelButton"),
   });
 
   const params = objectToGetParams(config);
@@ -165,6 +167,18 @@ const RoomSelector = (props) => {
 
   const toggleWithSearch = () => {
     setConfig((config) => ({ ...config, withSearch: !config.withSearch }));
+  };
+
+  const onChangeAcceptLabel = (e) => {
+    setConfig((config) => {
+      return { ...config, acceptButtonLabel: e.target.value };
+    });
+  };
+
+  const onChangeCancelLabel = (e) => {
+    setConfig((config) => {
+      return { ...config, cancelButtonLabel: e.target.value };
+    });
   };
 
   const openGetCodeModal = () => setIsGetCodeDialogOpened(true);
@@ -297,17 +311,17 @@ const RoomSelector = (props) => {
             <Label className="label" text={t("SelectButtonText")} />
             <TextInput
               scale={true}
-              onChange={() => {}}
+              onChange={onChangeAcceptLabel}
               placeholder={t("Common:SelectAction")}
-              value={t("Common:SelectAction")}
+              value={config.acceptButtonLabel}
               tabIndex={4}
             />
             <Label className="label" text={t("CancelButtonText")} />
             <TextInput
               scale={true}
-              onChange={() => {}}
+              onChange={onChangeCancelLabel}
               placeholder={t("Common:CancelButton")}
-              value={t("Common:CancelButton")}
+              value={config.cancelButtonLabel}
               tabIndex={4}
             />
           </InterfaceElements>

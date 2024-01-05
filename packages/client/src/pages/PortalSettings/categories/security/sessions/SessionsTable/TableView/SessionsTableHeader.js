@@ -4,7 +4,7 @@ import { inject, observer } from "mobx-react";
 import TableHeader from "@docspace/components/table-container/TableHeader";
 
 const TABLE_VERSION = "5";
-const TABLE_COLUMNS = `GoogleWorkspaceColumns_ver-${TABLE_VERSION}`;
+const TABLE_COLUMNS = `SessionsColumns_ver-${TABLE_VERSION}`;
 
 const getColumns = (defaultColumns, userId) => {
   const storageColumns = localStorage.getItem(`${TABLE_COLUMNS}=${userId}`);
@@ -30,10 +30,10 @@ const SessionsTableHeader = (props) => {
     t,
     userId,
     sectionWidth,
+    setHideColumns,
     tableRef,
     columnStorageName,
     columnInfoPanelStorageName,
-    setHideColumns,
   } = props;
 
   const defaultColumns = [
@@ -45,11 +45,6 @@ const SessionsTableHeader = (props) => {
       default: true,
       active: true,
       minWidth: 180,
-      //   checkbox: {
-      //     value: isChecked,
-      //     isIndeterminate,
-      //     onChange: toggleAll,
-      //   },
       onChange: onColumnChange,
     },
     {
@@ -76,13 +71,17 @@ const SessionsTableHeader = (props) => {
     {
       key: "IpAddress",
       title: t("Common:IpAddress"),
-      enable: true,
+      enable: false,
       resizable: true,
       onChange: onColumnChange,
     },
   ];
 
   const [columns, setColumns] = useState(getColumns(defaultColumns, userId));
+
+  useEffect(() => {
+    setColumns(getColumns(defaultColumns));
+  }, []);
 
   function onColumnChange(key, e) {
     const columnIndex = columns.findIndex((c) => c.key === key);
@@ -98,10 +97,6 @@ const SessionsTableHeader = (props) => {
     const tableColumns = columns.map((c) => c.enable && c.key);
     localStorage.setItem(`${TABLE_COLUMNS}=${userId}`, tableColumns);
   }
-
-  useEffect(() => {
-    setColumns(getColumns(defaultColumns));
-  }, []);
 
   return (
     <TableHeader
@@ -120,8 +115,4 @@ const SessionsTableHeader = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
-  return {
-    userId: auth.userStore.user.id,
-  };
-})(observer(SessionsTableHeader));
+export default SessionsTableHeader;

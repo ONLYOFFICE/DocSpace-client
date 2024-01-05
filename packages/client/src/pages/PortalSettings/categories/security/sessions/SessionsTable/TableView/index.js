@@ -5,13 +5,47 @@ import styled, { css } from "styled-components";
 
 import SessionsTableHeader from "./SessionsTableHeader";
 import SessionsTableRow from "./SessionsTableRow";
+
+import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";
+import RemoveSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
+import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
+
 import TableContainer from "@docspace/components/table-container/TableContainer";
+import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu";
 import TableBody from "@docspace/components/table-container/TableBody";
 
 const StyledTableContainer = styled(TableContainer)`
   margin: 0 0 24px;
 
+  .table-group-menu {
+    height: 69px;
+    position: absolute;
+    z-index: 201;
+    top: 0;
+    left: 0px;
+    width: 100%;
+
+    .table-container_group-menu {
+      border-image-slice: 0;
+      border-image-source: none;
+      border-bottom: ${(props) =>
+        props.theme.filesSection.tableView.row.borderColor};
+      box-shadow: rgba(4, 15, 27, 0.07) 0px 15px 20px;
+      padding: 0px;
+    }
+
+    .table-container_group-menu-separator {
+      margin: 0 16px;
+    }
+  }
+
+  .table-container_header {
+    position: absolute;
+    padding: 0px 20px;
+  }
+
   .header-container-text {
+    color: #a3a9ae;
     font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
   }
 
@@ -59,30 +93,91 @@ const StyledTableContainer = styled(TableContainer)`
 
 StyledTableContainer.defaultProps = { theme: Base };
 
-const TABLE_VERSION = "6";
+const TABLE_VERSION = "5";
 const COLUMNS_SIZE = `sessionsColumnsSize_ver-${TABLE_VERSION}`;
 const INFO_PANEL_COLUMNS_SIZE = `infoPanelSessionsColumnsSize_ver-${TABLE_VERSION}`;
 
-const TableView = ({ t, sectionWidth, userId, sessionsData }) => {
+const TableView = ({
+  t,
+  sectionWidth,
+  userId,
+  sessionsData,
+  allSessions,
+  checkedSessions,
+  toggleSession,
+  toggleAllSessions,
+  isSessionChecked,
+}) => {
   const [hideColumns, setHideColumns] = useState(false);
   const tableRef = useRef(null);
+
+  const handleToggle = (e, id) => {
+    e.stopPropagation();
+    toggleSession(id);
+  };
+
+  const handleAllToggles = (checked) => {
+    toggleAllSessions(checked, allSessions);
+  };
 
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
+  const headerMenu = [
+    {
+      id: "sessions",
+      key: "Sessions",
+      label: t("Common:Sessions"),
+      onClick: () => console.log("Sessions"),
+      iconUrl: HistoryFinalizedReactSvgUrl,
+    },
+    {
+      id: "logout",
+      key: "Logout",
+      label: t("Common:Logout"),
+      onClick: () => console.log("Logout"),
+      iconUrl: RemoveSvgUrl,
+    },
+    {
+      id: "Disable",
+      key: "Disable",
+      label: t("Common:DisableUserButton"),
+      onClick: () => console.log("Disable"),
+      iconUrl: TrashReactSvgUrl,
+    },
+  ];
+
+  const isChecked = checkedSessions.length === allSessions.length;
+
+  const isIndeterminate =
+    checkedSessions.length > 0 && checkedSessions.length !== allSessions.length;
+
   return (
     <StyledTableContainer forwardedRef={tableRef} useReactWindow>
+      {checkedSessions.length > 0 && (
+        <div className="table-group-menu">
+          <TableGroupMenu
+            sectionWidth={sectionWidth}
+            headerMenu={headerMenu}
+            withoutInfoPanelToggler
+            withComboBox={false}
+            checkboxOptions={[]}
+            isChecked={isChecked}
+            isIndeterminate={isIndeterminate}
+            onChange={handleAllToggles}
+          />
+        </div>
+      )}
       <SessionsTableHeader
         t={t}
         sectionWidth={sectionWidth}
-        tableRef={tableRef}
+        setHideColumns={setHideColumns}
         userId={userId}
+        tableRef={tableRef}
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
-        setHideColumns={setHideColumns}
-        // isIndeterminate={isIndeterminate}
-        // isChecked={checkedUsers.withEmail.length === withEmailUsers.length}
-        // toggleAll={toggleAll}
+        isChecked={isChecked}
+        isIndeterminate={isIndeterminate}
       />
       <TableBody
         itemHeight={49}
@@ -98,7 +193,7 @@ const TableView = ({ t, sectionWidth, userId, sessionsData }) => {
         {sessionsData.map((session) => (
           <SessionsTableRow
             t={t}
-            key={session.id}
+            key={session.userId}
             avatar={session.avatar}
             displayName={session.displayName}
             status={session.status}
@@ -107,10 +202,9 @@ const TableView = ({ t, sectionWidth, userId, sessionsData }) => {
             country={session.country}
             city={session.city}
             ip={session.ip}
-            userId={session.userId}
             hideColumns={hideColumns}
-            // isChecked={isAccountChecked(data.key, checkedAccountType)}
-            // toggleAccount={(e) => handleToggle(e, data)}
+            isChecked={isSessionChecked(session.userId)}
+            toggleSession={(e) => handleToggle(e, session.userId)}
           />
         ))}
       </TableBody>
@@ -118,10 +212,22 @@ const TableView = ({ t, sectionWidth, userId, sessionsData }) => {
   );
 };
 
-export default inject(({ auth }) => {
+export default inject(({ auth, setup }) => {
   const { id: userId } = auth.userStore.user;
+  const {
+    allSessions,
+    checkedSessions,
+    toggleSession,
+    toggleAllSessions,
+    isSessionChecked,
+  } = setup;
 
   return {
     userId,
+    allSessions,
+    checkedSessions,
+    toggleSession,
+    toggleAllSessions,
+    isSessionChecked,
   };
 })(observer(TableView));

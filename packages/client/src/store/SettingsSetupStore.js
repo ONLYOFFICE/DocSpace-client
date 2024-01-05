@@ -78,6 +78,8 @@ class SettingsSetupStore {
   securityLifetime = [];
 
   sessionsIsInit = false;
+  allSessions = [];
+  checkedSessions = [];
   sessions = [];
   currentSession = [];
 
@@ -181,6 +183,22 @@ class SettingsSetupStore {
   setConsumers = (consumers) => {
     this.integration.consumers = consumers;
   };
+
+  setAllSessions = (sessions) => {
+    this.allSessions = sessions;
+  };
+
+  toggleSession = (id) => {
+    this.checkedSessions = this.checkedSessions.includes(id)
+      ? this.checkedSessions.filter((itemId) => itemId !== id)
+      : [...this.checkedSessions, id];
+  };
+
+  toggleAllSessions = (checked, sessions) => {
+    this.checkedSessions = checked ? sessions.map((data) => data.userId) : [];
+  };
+
+  isSessionChecked = (userId) => this.checkedSessions.includes(userId);
 
   get isSMTPInitialSettings() {
     const settings = this.integration.smtpSettings.settings;

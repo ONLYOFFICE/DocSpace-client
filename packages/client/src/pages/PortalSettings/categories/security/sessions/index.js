@@ -1,11 +1,13 @@
+import { useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { mobile, tablet } from "@docspace/components/utils/device";
+import styled from "styled-components";
+
 import { MainContainer } from "../StyledSecurity";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import SessionsTable from "./SessionsTable";
-import allSessionsData from "./allSessionsData";
-import styled from "styled-components";
+import mockData from "./mockData";
 
 import Text from "@docspace/components/text";
 import Button from "@docspace/components/button";
@@ -69,8 +71,14 @@ const Sessions = ({
   viewAs,
   setViewAs,
   currentDeviceType,
+  allSessions,
+  setAllSessions,
   isLoadingDownloadReport,
 }) => {
+  useEffect(() => {
+    setAllSessions(mockData);
+  }, []);
+
   useViewEffect({
     view: viewAs,
     setView: setViewAs,
@@ -81,7 +89,7 @@ const Sessions = ({
     <MainContainer>
       <Text className="subtitle">{t("SessionsSubtitle")}</Text>
 
-      <SessionsTable t={t} sessionsData={allSessionsData} />
+      <SessionsTable t={t} sessionsData={allSessions} />
 
       <DownLoadWrapper>
         <Button
@@ -104,14 +112,22 @@ const Sessions = ({
 export default inject(({ auth, setup }) => {
   const { culture, currentDeviceType } = auth.settingsStore;
   const { user } = auth.userStore;
-  const { viewAs, setViewAs, isLoadingDownloadReport } = setup;
   const locale = (user && user.cultureName) || culture || "en";
+  const {
+    viewAs,
+    setViewAs,
+    allSessions,
+    setAllSessions,
+    isLoadingDownloadReport,
+  } = setup;
 
   return {
     locale,
     viewAs,
     setViewAs,
     currentDeviceType,
+    allSessions,
+    setAllSessions,
     isLoadingDownloadReport,
   };
 })(withTranslation(["Settings", "Common"])(observer(Sessions)));

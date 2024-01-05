@@ -104,6 +104,7 @@ const FileSelector = (props) => {
     init: true,
     showSelectorCancel: true,
     showSelectorHeader: true,
+    withSearch: true,
   });
 
   const params = objectToGetParams(config);
@@ -230,6 +231,22 @@ const FileSelector = (props) => {
     setFileOptions((prevFileOptions) => [option, ...prevFileOptions]);
     const filteredTypes = selectedFileTypes.filter((type) => type.key !== option.key);
     setSelectedFileTypes(filteredTypes);
+  };
+
+  const toggleWithSearch = () => {
+    setConfig((config) => ({ ...config, withSearch: !config.withSearch }));
+  };
+
+  const onChangeAcceptLabel = (e) => {
+    setConfig((config) => {
+      return { ...config, acceptButtonLabel: e.target.value };
+    });
+  };
+
+  const onChangeCancelLabel = (e) => {
+    setConfig((config) => {
+      return { ...config, cancelButtonLabel: e.target.value };
+    });
   };
 
   const onResize = () => {
@@ -364,8 +381,8 @@ const FileSelector = (props) => {
             <Checkbox
               className="checkbox"
               label={t("Common:Search")}
-              onChange={() => {}}
-              isChecked={true}
+              onChange={toggleWithSearch}
+              isChecked={config.withSearch}
             />
             <Label className="label" text={t("SelectButtonText")} />
             <TextInput

@@ -187,6 +187,7 @@ const Sdk = ({
           isUserOnly={selectorType === "userFolderOnly"}
           isRoomsOnly={selectorType === "roomsOnly"}
           withCancelButton={frameConfig?.showSelectorCancel}
+          withSearch={frameConfig?.withSearch}
         />
       );
       break;

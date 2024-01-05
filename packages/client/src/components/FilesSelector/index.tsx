@@ -46,6 +46,8 @@ const FilesSelector = ({
 
   onClose,
 
+  withSearch = true,
+
   isMove,
   isCopy,
   isRestore,
@@ -551,7 +553,7 @@ const FilesSelector = ({
       onSelectBreadCrumb={onClickBreadCrumb}
       isLoading={showLoader}
       isBreadCrumbsLoading={showBreadCrumbsLoader}
-      withSearch={!isRoot && items ? items.length > 0 : !isRoot && isFirstLoad}
+      withSearch={withSearch && !isRoot && items ? items.length > 0 : !isRoot && isFirstLoad}
       rowLoader={
         <Loaders.SelectorRowLoader
           isMultiSelect={false}

@@ -188,6 +188,8 @@ const Sdk = ({
           isRoomsOnly={selectorType === "roomsOnly"}
           withCancelButton={frameConfig?.showSelectorCancel}
           withSearch={frameConfig?.withSearch}
+          acceptButtonLabel={frameConfig?.acceptButtonLabel}
+          cancelButtonLabel={frameConfig?.cancelButtonLabel}
         />
       );
       break;

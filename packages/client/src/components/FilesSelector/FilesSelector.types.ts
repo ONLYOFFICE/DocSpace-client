@@ -223,6 +223,8 @@ export type FilesSelectorProps = {
   embedded: boolean;
   withHeader: boolean;
   withCancelButton: boolean;
+  cancelButtonLabel: string;
+  acceptButtonLabel: string;
   settings: any;
 
   roomsFolderId?: number;

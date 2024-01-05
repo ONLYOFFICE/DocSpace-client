@@ -105,6 +105,8 @@ const FileSelector = (props) => {
     showSelectorCancel: true,
     showSelectorHeader: true,
     withSearch: true,
+    acceptButtonLabel: t("Common:SelectAction"),
+    cancelButtonLabel: t("Common:CancelButton"),
   });
 
   const params = objectToGetParams(config);
@@ -387,17 +389,17 @@ const FileSelector = (props) => {
             <Label className="label" text={t("SelectButtonText")} />
             <TextInput
               scale={true}
-              onChange={() => {}}
+              onChange={onChangeAcceptLabel}
               placeholder={t("Common:SelectAction")}
-              value={t("Common:SelectAction")}
+              value={config.acceptButtonLabel}
               tabIndex={4}
             />
             <Label className="label" text={t("CancelButtonText")} />
             <TextInput
               scale={true}
-              onChange={() => {}}
+              onChange={onChangeCancelLabel}
               placeholder={t("Common:CancelButton")}
-              value={t("Common:CancelButton")}
+              value={config.cancelButtonLabel}
               tabIndex={4}
             />
           </InterfaceElements>

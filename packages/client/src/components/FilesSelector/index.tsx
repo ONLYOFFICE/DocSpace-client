@@ -104,6 +104,8 @@ const FilesSelector = ({
   embedded,
   withHeader,
   withCancelButton = true,
+  cancelButtonLabel,
+  acceptButtonLabel,
   getIcon,
   isRoomBackup,
 
@@ -493,7 +495,7 @@ const FilesSelector = ({
     isRestore
   );
 
-  const acceptButtonLabel = getAcceptButtonLabel(
+  const defaultAcceptButtonLabel = getAcceptButtonLabel(
     t,
     isCopy,
     isRestoreAll,
@@ -531,10 +533,10 @@ const FilesSelector = ({
       onClearSearch={onClearSearchAction}
       items={items ? items : []}
       onSelect={onSelectAction}
-      acceptButtonLabel={acceptButtonLabel}
+      acceptButtonLabel={acceptButtonLabel || defaultAcceptButtonLabel}
       onAccept={onAcceptAction}
       withCancelButton={withCancelButton}
-      cancelButtonLabel={t("Common:CancelButton")}
+      cancelButtonLabel={cancelButtonLabel || t("Common:CancelButton")}
       onCancel={onCloseAction}
       emptyScreenImage={
         theme.isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl

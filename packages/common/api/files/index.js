@@ -1047,6 +1047,13 @@ export function changeDocumentServiceLocation(
   });
 }
 
+export function getFileLink(fileId) {
+  return request({
+    method: "get",
+    url: `/files/file/${fileId}/link`,
+  });
+}
+
 export function getExternalLinks(fileId, startIndex = 0, count = 50) {
   const linkParams = `?startIndex=${startIndex}&count=${count}`;
 

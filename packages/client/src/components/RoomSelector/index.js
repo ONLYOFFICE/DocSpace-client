@@ -58,6 +58,7 @@ const RoomSelector = ({
   excludeItems,
 
   headerLabel,
+  withoutBackButton,
   onBackClick,
 
   withSearch,
@@ -226,6 +227,7 @@ const RoomSelector = ({
         />
       }
       withSearch={withSearch}
+      withoutBackButton={withoutBackButton}
     />
   );
 };

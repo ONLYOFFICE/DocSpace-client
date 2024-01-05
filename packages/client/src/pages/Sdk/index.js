@@ -168,6 +168,7 @@ const Sdk = ({
           onAccept={onSelectRoom}
           onCancel={onClose}
           withSearch={frameConfig?.withSearch}
+          withoutBackButton
         />
       );
       break;

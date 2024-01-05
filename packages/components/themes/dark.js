@@ -1949,7 +1949,7 @@ const Dark = {
   navigation: {
     expanderColor: "#eeeeee",
     background: black,
-    rootFolderTitleColor: "#858585",
+    rootFolderTitleColor: "#ADADAD",
     publicIcon: "#858585",
     boxShadow: "0px 12px 40px 0px #00000066",
 
@@ -2302,8 +2302,8 @@ const Dark = {
     border: `1px solid #474747`,
 
     breadCrumbs: {
-      prevItemColor: "#858585",
-      arrowRightColor: "#858585",
+      prevItemColor: "#ADADAD",
+      arrowRightColor: "#ADADAD",
     },
 
     bodyDescriptionText: "#858585",

@@ -55,16 +55,4 @@ export const LocationForm = styled.form`
       color: ${(props) => props.theme.client.settings.common.descriptionColor};
     }
   }
-
-  .form-buttons {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-
-    @media ${mobile} {
-      .button {
-        width: 100%;
-      }
-    }
-  }
 `;

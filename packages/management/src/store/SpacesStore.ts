@@ -1,7 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { getLogoFromPath } from "@docspace/common/utils";
 import {
-  deletePortal,
   getDomainName,
   setDomainName,
   setPortalName,
@@ -16,6 +15,10 @@ class SpacesStore {
   createPortalDialogVisible = false;
   deletePortalDialogVisible = false;
   domainDialogVisible = false;
+  spaceCreatedDialogVisible = false;
+
+  referenceLink: URL | string = "";
+
   currentPortal = false;
 
   constructor(authStore) {
@@ -31,13 +34,13 @@ class SpacesStore {
   };
 
   get isConnected() {
-    return this.authStore.settingsStore.baseDomain &&
-    this.authStore.settingsStore.baseDomain !== "localhost" && 
-    this.authStore.settingsStore.tenantAlias &&
-    this.authStore.settingsStore.tenantAlias !== "localhost"
+    return (
+      this.authStore.settingsStore.baseDomain &&
+      this.authStore.settingsStore.baseDomain !== "localhost" &&
+      this.authStore.settingsStore.tenantAlias &&
+      this.authStore.settingsStore.tenantAlias !== "localhost"
+    );
   }
-
-
 
   get faviconLogo() {
     const logos = this.authStore.settingsStore.whiteLabelLogoUrls;
@@ -54,18 +57,17 @@ class SpacesStore {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   setDomainName = async (domain: string) => {
     try {
       const res = await setDomainName(domain);
       const { settings } = res;
       this.authStore.settingsStore.setPortalDomain(settings);
-    } catch(error) {
+    } catch (error) {
       console.log(error);
     }
-    
-  }
+  };
 
   checkDomain = async (domain) => {
     const res = await checkDomain(domain);
@@ -79,7 +81,11 @@ class SpacesStore {
 
   setCurrentPortal = (portal) => {
     this.currentPortal = portal;
-  }
+  };
+
+  setReferenceLink = (link: URL | string) => {
+    this.referenceLink = link;
+  };
 
   setCreatePortalDialogVisible = (createPortalDialogVisible: boolean) => {
     this.createPortalDialogVisible = createPortalDialogVisible;
@@ -91,6 +97,9 @@ class SpacesStore {
 
   setDeletePortalDialogVisible = (deletePortalDialogVisible: boolean) => {
     this.deletePortalDialogVisible = deletePortalDialogVisible;
+  };
+  setSpaceCreatedDialogVisible = (spaceCreatedDialogVisible: boolean) => {
+    this.spaceCreatedDialogVisible = spaceCreatedDialogVisible;
   };
 }
 

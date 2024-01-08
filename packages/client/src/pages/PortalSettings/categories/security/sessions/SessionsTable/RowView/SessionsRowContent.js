@@ -103,9 +103,10 @@ const SessionsRowContent = (props) => {
     city,
     ip,
     userId,
+    rowRef,
   } = props;
 
-  // const isOnline = status === "Online";
+  const isOnline = status === "Online";
 
   const contentData = [
     <Box key={userId} displayProp="flex" alignItems="center">
@@ -115,7 +116,7 @@ const SessionsRowContent = (props) => {
         source={avatar}
         size={"small"}
       />
-      <Box className="session-info">
+      <Box className="session-info" ref={rowRef}>
         <Box className="main-row-content">
           <div className="username">
             {displayName} <span>{status}</span>

@@ -1,5 +1,8 @@
+import { useRef } from "react";
 import Row from "@docspace/components/row";
 import SessionsRowContent from "./SessionsRowContent";
+import Avatar from "@docspace/components/avatar";
+import Checkbox from "@docspace/components/checkbox";
 
 import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";
 import RemoveSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
@@ -8,7 +11,6 @@ import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 const SessionsRow = (props) => {
   const {
     t,
-    data,
     sectionWidth,
     avatar,
     displayName,
@@ -18,7 +20,9 @@ const SessionsRow = (props) => {
     country,
     city,
     ip,
-    userId,
+    data,
+    isChecked,
+    toggleSession,
   } = props;
   const contextOptions = [
     {
@@ -45,21 +49,27 @@ const SessionsRow = (props) => {
     },
   ];
 
+  const rowRef = useRef();
+
+  const handleSessionToggle = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    rowRef.current?.contains(e.target) || toggleSession(e);
+  };
+
   return (
     <Row
       key={data.id}
       data={data}
       sectionWidth={sectionWidth}
-      checkbox
       contextButton
       contextOptions={contextOptions}
-      //   checked={isChecked}
-      //   onClick={toggleAccount}
-      //   onSelect={toggleAccount}
-      //   contextButtonSpacerWidth="0"
+      checked={isChecked}
+      onClick={handleSessionToggle}
+      onSelect={handleSessionToggle}
+      contextButtonSpacerWidth="0"
     >
       <SessionsRowContent
-        userId={userId}
         avatar={avatar}
         displayName={displayName}
         status={status}
@@ -68,6 +78,7 @@ const SessionsRow = (props) => {
         country={country}
         city={city}
         ip={ip}
+        rowRef={rowRef}
       />
     </Row>
   );

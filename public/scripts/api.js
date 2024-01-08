@@ -32,6 +32,8 @@
     withSubtitle: true,
     filterParam: "ALL",
     filter: {
+      // filterType: 0,
+      // type: 0,
       count: 100,
       page: 1,
       sortorder: "descending", //TODO: ["descending", "ascending"]

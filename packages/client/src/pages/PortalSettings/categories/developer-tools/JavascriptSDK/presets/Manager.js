@@ -23,6 +23,8 @@ import HelpButton from "@docspace/components/help-button";
 import GetCodeDialog from "../sub-components/GetCodeDialog";
 import Button from "@docspace/components/button";
 
+import { FilterType, RoomsType } from "@docspace/common/constants";
+
 const showPreviewThreshold = 720;
 
 import {
@@ -76,17 +78,38 @@ const Manager = (props) => {
   ];
 
   const filterOptions = [
-    { key: "filter-type-author", label: t("Files:ByAuthor") },
-    { key: "filter-type-all", label: t("Files:AllFiles") },
-    { key: "filter-type-documents", label: t("Common:Documents") },
-    { key: "filter-type-folders", label: t("Translations:Folders") },
-    { key: "filter-type-spreadsheets", label: t("Translations:Spreadsheets") },
-    { key: "filter-type-archives", label: t("Files:Archives") },
-    { key: "filter-type-presentations", label: t("Translations:Presentations") },
-    { key: "filter-type-images", label: t("Filse:Images") },
-    { key: "filter-type-media", label: t("Files:Media") },
-    { key: "filter-type-forms-templates", label: t("Files:FormsTemplates") },
-    { key: "filter-type-forms", label: t("Files:Forms") },
+    { key: "filter-type-none", label: t("Files:All"), typeKey: FilterType.None },
+    { key: "filter-type-author", label: t("Files:ByAuthor"), typeKey: FilterType.ByUser },
+    { key: "filter-type-all", label: t("Files:AllFiles"), typeKey: FilterType.FilesOnly },
+    {
+      key: "filter-type-documents",
+      label: t("Common:Documents"),
+      typeKey: FilterType.DocumentsOnly,
+    },
+    {
+      key: "filter-type-folders",
+      label: t("Translations:Folders"),
+      typeKey: FilterType.FoldersOnly,
+    },
+    {
+      key: "filter-type-spreadsheets",
+      label: t("Translations:Spreadsheets"),
+      typeKey: FilterType.SpreadsheetsOnly,
+    },
+    { key: "filter-type-archives", label: t("Files:Archives"), typeKey: FilterType.ArchiveOnly },
+    {
+      key: "filter-type-presentations",
+      label: t("Translations:Presentations"),
+      typeKey: FilterType.PresentationsOnly,
+    },
+    { key: "filter-type-images", label: t("Filse:Images"), typeKey: FilterType.ImagesOnly },
+    { key: "filter-type-media", label: t("Files:Media"), typeKey: FilterType.MediaOnly },
+    {
+      key: "filter-type-forms-templates",
+      label: t("Files:FormsTemplates"),
+      typeKey: FilterType.OFormTemplateOnly,
+    },
+    { key: "filter-type-forms", label: t("Files:Forms"), typeKey: FilterType.OFormOnly },
   ];
 
   const [columnsOptions, setColumnsOptions] = useState([
@@ -350,6 +373,22 @@ const Manager = (props) => {
 
   const onFilterSelect = (option) => {
     setFilterBy(option);
+    if (option.typeKey === FilterType.ByUser) {
+      //handle author filter
+    } else {
+      setConfig((config) => ({
+        ...config,
+        filter: {
+          filterType: option.typeKey,
+          count: 100,
+          page: 1,
+          sortorder: "descending",
+          sortby: "DateAndTime",
+          search: "",
+          withSubfolders: false,
+        },
+      }));
+    }
   };
 
   const onResize = () => {

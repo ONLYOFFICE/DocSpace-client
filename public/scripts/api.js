@@ -28,6 +28,9 @@
     disableActionButton: false,
     showSettings: false,
     withSearch: true,
+    withBreadCrumbs: true,
+    withSubtitle: true,
+    filterParam: "ALL",
     filter: {
       count: 100,
       page: 1,

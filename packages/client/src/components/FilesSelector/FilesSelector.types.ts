@@ -141,6 +141,8 @@ export type FilesSelectorProps = {
   onClose?: () => void;
 
   withSearch: boolean;
+  withBreadCrumbs: boolean;
+  withSubtitle: boolean;
 
   isMove?: boolean;
   isCopy?: boolean;

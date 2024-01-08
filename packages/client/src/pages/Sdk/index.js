@@ -183,7 +183,9 @@ const Sdk = ({
           isSelect={true}
           onSelectFile={onSelectFile}
           onClose={onClose}
-          filterParam={"ALL"}
+          withBreadCrumbs={frameConfig?.withBreadCrumbs}
+          withSubtitle={frameConfig?.withSubtitle}
+          filterParam={frameConfig?.filterParam}
           isUserOnly={selectorType === "userFolderOnly"}
           isRoomsOnly={selectorType === "roomsOnly"}
           withCancelButton={frameConfig?.showSelectorCancel}

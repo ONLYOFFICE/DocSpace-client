@@ -23,6 +23,8 @@ import HelpButton from "@docspace/components/help-button";
 import GetCodeDialog from "../sub-components/GetCodeDialog";
 import Button from "@docspace/components/button";
 
+import { FilesSelectorFilterTypes } from "@docspace/common/constants";
+
 const showPreviewThreshold = 720;
 
 import {
@@ -69,11 +71,17 @@ const FileSelector = (props) => {
   ];
 
   const fileTypeDisplay = [
-    { value: "all-types", label: "All types" },
-    { value: "custom-types", label: "Select types" },
+    { value: FilesSelectorFilterTypes.ALL, label: t("AllTypes") },
+    { value: "custom-types", label: t("SelectTypes") },
   ];
 
-  const [fileOptions, setFileOptions] = useState([]);
+  const [fileOptions, setFileOptions] = useState([
+    { key: FilesSelectorFilterTypes.DOCX, label: FilesSelectorFilterTypes.DOCX },
+    { key: FilesSelectorFilterTypes.IMG, label: FilesSelectorFilterTypes.IMG },
+    { key: FilesSelectorFilterTypes.BackupOnly, label: FilesSelectorFilterTypes.BackupOnly },
+    { key: FilesSelectorFilterTypes.DOCXF, label: FilesSelectorFilterTypes.DOCXF },
+    { key: FilesSelectorFilterTypes.XLSX, label: FilesSelectorFilterTypes.XLSX },
+  ]);
 
   const [widthDimension, setWidthDimension] = useState(dataDimensions[1]);
   const [heightDimension, setHeightDimension] = useState(dataDimensions[1]);
@@ -84,6 +92,7 @@ const FileSelector = (props) => {
   const [sharedLinks, setSharedLinks] = useState(null);
   const [selectedElementType, setSelectedElementType] = useState(elementDisplayOptions[0].value);
   const [typeDisplay, setTypeDisplay] = useState(fileTypeDisplay[0].value);
+  const [selectedType, setSelectedType] = useState(fileOptions[0]);
   const [selectedFileTypes, setSelectedFileTypes] = useState([
     { key: "file-type-documents", label: t("Common:Documents") },
     { key: "file-type-folders", label: t("Translations:Folders") },
@@ -107,6 +116,9 @@ const FileSelector = (props) => {
     withSearch: true,
     acceptButtonLabel: t("Common:SelectAction"),
     cancelButtonLabel: t("Common:CancelButton"),
+    withBreadCrumbs: true,
+    withSubtitle: true,
+    filterParam: FilesSelectorFilterTypes.ALL,
   });
 
   const params = objectToGetParams(config);
@@ -199,6 +211,15 @@ const FileSelector = (props) => {
 
   const changeColumnsOption = (e) => {
     setTypeDisplay(e.target.value);
+    setConfig((config) => {
+      return {
+        ...config,
+        filterParam:
+          e.target.value === FilesSelectorFilterTypes.ALL
+            ? FilesSelectorFilterTypes.ALL
+            : selectedType,
+      };
+    });
   };
 
   const onChangeWidthDimension = (item) => {
@@ -222,11 +243,15 @@ const FileSelector = (props) => {
   const closeGetCodeModal = () => setIsGetCodeDialogOpened(false);
 
   const onTypeSelect = (option) => {
-    setFileOptions((prevFileOptions) => prevFileOptions.filter((file) => file.key !== option.key));
+    // setFileOptions((prevFileOptions) => prevFileOptions.filter((file) => file.key !== option.key));
+    setSelectedType(option);
+    setConfig((config) => {
+      return { ...config, filterParam: option.key };
+    });
 
-    if (!selectedFileTypes.find((type) => type.key === option.key)) {
-      setSelectedFileTypes((prevFileTypes) => [...prevFileTypes, option]);
-    }
+    // if (!selectedFileTypes.find((type) => type.key === option.key)) {
+    //   setSelectedFileTypes((prevFileTypes) => [...prevFileTypes, option]);
+    // }
   };
 
   const deleteSelectedType = (option) => {
@@ -237,6 +262,14 @@ const FileSelector = (props) => {
 
   const toggleWithSearch = () => {
     setConfig((config) => ({ ...config, withSearch: !config.withSearch }));
+  };
+
+  const toggleBreadCrumbs = () => {
+    setConfig((config) => ({ ...config, withBreadCrumbs: !config.withBreadCrumbs }));
+  };
+
+  const toggleWithSubtitle = () => {
+    setConfig((config) => ({ ...config, withSubtitle: !config.withSubtitle }));
   };
 
   const onChangeAcceptLabel = (e) => {
@@ -371,14 +404,14 @@ const FileSelector = (props) => {
             <Checkbox
               className="checkbox"
               label={t("Common:Title")}
-              onChange={() => {}}
-              isChecked={true}
+              onChange={toggleBreadCrumbs}
+              isChecked={config.withBreadCrumbs}
             />
             <Checkbox
               className="checkbox"
               label={t("Subtitle")}
-              onChange={() => {}}
-              isChecked={true}
+              onChange={toggleWithSubtitle}
+              isChecked={config.withSubtitle}
             />
             <Checkbox
               className="checkbox"
@@ -461,13 +494,14 @@ const FileSelector = (props) => {
                   }
                   scaled={true}
                   directionY="top"
-                  selectedOption={{
-                    key: "Select",
-                    label: t("Common:SelectAction"),
-                  }}
+                  selectedOption={selectedType}
+                  // selectedOption={{
+                  //   key: "Select",
+                  //   label: t("Common:SelectAction"),
+                  // }}
                 />
 
-                <SelectedItemsContainer>
+                {/* <SelectedItemsContainer>
                   {selectedFileTypes.map((type) => (
                     <SelectedItem
                       key={type.key}
@@ -475,7 +509,7 @@ const FileSelector = (props) => {
                       label={type.label}
                     />
                   ))}
-                </SelectedItemsContainer>
+                </SelectedItemsContainer> */}
               </>
             )}
           </ControlsGroup>

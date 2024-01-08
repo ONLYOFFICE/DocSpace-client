@@ -47,6 +47,8 @@ const FilesSelector = ({
   onClose,
 
   withSearch = true,
+  withBreadCrumbs = true,
+  withSubtitle = true,
 
   isMove,
   isCopy,
@@ -550,7 +552,7 @@ const FilesSelector = ({
       }
       searchEmptyScreenHeader={t("Common:NotFoundTitle")}
       searchEmptyScreenDescription={t("EmptyFilterDescriptionText")}
-      withBreadCrumbs
+      withBreadCrumbs={withBreadCrumbs}
       breadCrumbs={breadCrumbs}
       onSelectBreadCrumb={onClickBreadCrumb}
       isLoading={showLoader}
@@ -579,7 +581,7 @@ const FilesSelector = ({
       currentFooterInputValue={currentFooterInputValue}
       footerCheckboxLabel={footerCheckboxLabel}
       descriptionText={
-        !filterParam || filterParam === "ALL"
+        !withSubtitle || !filterParam || filterParam === "ALL"
           ? ""
           : descriptionText ?? t("Common:SelectDOCXFormat")
       }

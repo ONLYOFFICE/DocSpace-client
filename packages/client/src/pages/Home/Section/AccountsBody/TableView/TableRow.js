@@ -1,6 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
 
 import TableRow from "@docspace/components/table-container/TableRow";
 import TableCell from "@docspace/components/table-container/TableCell";
@@ -218,6 +219,8 @@ const PeopleTableRow = (props) => {
     hideColumns,
     standalone,
     value,
+
+    showStorageInfo,
   } = props;
 
   const {
@@ -516,14 +519,26 @@ const PeopleTableRow = (props) => {
           </Link>
         </TableCell>
 
-        <TableCell className={"table-cell_Storage/Quota"}>
-          <SpaceQuota hideColumns={hideColumns} item={item} type="user" />
-        </TableCell>
+        {showStorageInfo && (
+          <TableCell className={"table-cell_Storage/Quota"}>
+            <SpaceQuota hideColumns={hideColumns} item={item} type="user" />
+          </TableCell>
+        )}
       </StyledPeopleRow>
     </StyledWrapper>
   );
 };
 
-export default withContent(
-  withTranslation(["People", "Common", "Settings"])(PeopleTableRow)
+export default inject(({ auth }) => {
+  const { currentQuotaStore } = auth;
+
+  const { showStorageInfo } = currentQuotaStore;
+
+  return {
+    showStorageInfo,
+  };
+})(
+  withContent(
+    withTranslation(["People", "Common", "Settings"])(observer(PeopleTableRow))
+  )
 );

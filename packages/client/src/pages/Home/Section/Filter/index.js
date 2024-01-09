@@ -266,7 +266,7 @@ const SectionFilterContent = ({
   standalone,
   currentDeviceType,
   isRoomAdmin,
-  isStatisticsAvailable,
+  showStorageInfo,
   isDefaultRoomsQuotaSet,
 }) => {
   const location = useLocation();
@@ -1207,7 +1207,7 @@ const SectionFilterContent = ({
       if (!standalone) filterOptions.push(...accountItems);
       // filterOptions.push(...roomItems);
       filterOptions.push(...accountLoginTypeItems);
-      isStatisticsAvailable &&
+      showStorageInfo &&
         isDefaultRoomsQuotaSet &&
         filterOptions.push(...quotaFilter);
       return filterOptions;
@@ -1515,7 +1515,7 @@ const SectionFilterContent = ({
         filterOptions.push(...thirdPartyOptions);
       }
 
-      isStatisticsAvailable &&
+      showStorageInfo &&
         isDefaultRoomsQuotaSet &&
         filterOptions.push(...quotaFilter);
     } else {
@@ -1687,7 +1687,7 @@ const SectionFilterContent = ({
         },
       ];
 
-      isStatisticsAvailable &&
+      showStorageInfo &&
         accountsOptions.push({
           id: "sort-quota",
           key: SortByFieldName.UsedSpace,
@@ -1817,7 +1817,7 @@ const SectionFilterContent = ({
           !hide && commonOptions.push(modifiedDate);
         }
 
-        if (isStatisticsAvailable && availableSort?.includes("Storage")) {
+        if (showStorageInfo && availableSort?.includes("Storage")) {
           const idx = availableSort.findIndex(
             (x) => x === SortByFieldName.UsedSpace
           );
@@ -2213,7 +2213,7 @@ export default inject(
     const isRooms = isRoomsFolder || isArchiveFolder;
 
     const { isVisible: infoPanelVisible } = auth.infoPanelStore;
-    const { isStatisticsAvailable, isDefaultRoomsQuotaSet } = currentQuotaStore;
+    const { showStorageInfo, isDefaultRoomsQuotaSet } = currentQuotaStore;
 
     const {
       filterStore,
@@ -2231,7 +2231,7 @@ export default inject(
 
     return {
       isRoomAdmin,
-      isStatisticsAvailable,
+      showStorageInfo,
       isDefaultRoomsQuotaSet,
 
       user,

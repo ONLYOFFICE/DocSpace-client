@@ -13,7 +13,7 @@ class PeopleTableHeader extends React.Component {
     super(props);
 
     const { t } = props;
-    const { isDefaultUsersQuotaSet, isStatisticsAvailable } = this.props;
+    const { isDefaultUsersQuotaSet, showStorageInfo } = this.props;
 
     const defaultColumns = [
       {
@@ -54,7 +54,7 @@ class PeopleTableHeader extends React.Component {
       },
     ];
 
-    isStatisticsAvailable &&
+    showStorageInfo &&
       defaultColumns.push({
         key: "Storage",
         title: isDefaultUsersQuotaSet
@@ -195,7 +195,8 @@ export default inject(({ auth, peopleStore, clientLoadingStore }) => {
   const { isVisible: infoPanelVisible } = auth.infoPanelStore;
   const { withPaging } = auth.settingsStore;
   const { currentQuotaStore } = auth;
-  const { isDefaultUsersQuotaSet, isStatisticsAvailable } = currentQuotaStore;
+
+  const { isDefaultUsersQuotaSet, showStorageInfo } = currentQuotaStore;
 
   return {
     filter,
@@ -205,7 +206,7 @@ export default inject(({ auth, peopleStore, clientLoadingStore }) => {
     infoPanelVisible,
     withPaging,
     isDefaultUsersQuotaSet,
-    isStatisticsAvailable,
+    showStorageInfo,
   };
 })(
   withTranslation(["People", "Common", "PeopleTranslations"])(

@@ -24,9 +24,7 @@ class FilesTableHeader extends React.Component {
       columnInfoPanelStorageName,
       isPublicRoom,
       isDefaultRoomsQuotaSet,
-      isStatisticsAvailable,
-      isOwner,
-      isAdmin,
+      showStorageInfo,
     } = this.props;
 
     const defaultColumns = [];
@@ -89,8 +87,7 @@ class FilesTableHeader extends React.Component {
         },
       ];
 
-      isStatisticsAvailable &&
-        (isOwner || isAdmin) &&
+      showStorageInfo &&
         columns.push({
           key: "Storage",
           title: isDefaultRoomsQuotaSet
@@ -473,10 +470,10 @@ export default inject(
     clientLoadingStore,
   }) => {
     const { currentQuotaStore } = auth;
-    const { isDefaultRoomsQuotaSet, isStatisticsAvailable } = currentQuotaStore;
+    const { isDefaultRoomsQuotaSet, showStorageInfo } = currentQuotaStore;
 
     const { isVisible: infoPanelVisible } = auth.infoPanelStore;
-    const { isOwner, isAdmin } = auth.userStore.user;
+
     const {
       isHeaderChecked,
 
@@ -579,9 +576,7 @@ export default inject(
       isPublicRoom,
       publicRoomKey,
       isDefaultRoomsQuotaSet,
-      isStatisticsAvailable,
-      isOwner,
-      isAdmin,
+      showStorageInfo,
     };
   }
 )(

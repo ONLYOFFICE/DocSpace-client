@@ -20,6 +20,8 @@ const Accounts = ({
   canChangeUserType,
   setSelection,
   getPeopleListItem,
+
+  showStorageInfo,
 }) => {
   const [statusLabel, setStatusLabel] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
@@ -215,16 +217,24 @@ const Accounts = ({
           >
             {statusText}
           </Text>
-          <Text className={"info_field"} noSelect title={t("Common:Storage")}>
-            {t("Common:Storage")}
-          </Text>
-          <SpaceQuota
-            type="user"
-            item={selection}
-            className="type-combobox"
-            onSuccess={onSuccess}
-            onAbort={onAbort}
-          />
+          {showStorageInfo && (
+            <>
+              <Text
+                className={"info_field"}
+                noSelect
+                title={t("Common:Storage")}
+              >
+                {t("Common:Storage")}
+              </Text>
+              <SpaceQuota
+                type="user"
+                item={selection}
+                className="type-combobox"
+                onSuccess={onSuccess}
+                onAbort={onAbort}
+              />{" "}
+            </>
+          )}
 
           {/* <Text className={"info_field"} noSelect title={t("Common:Room")}>
             {t("Common:Room")}
@@ -242,7 +252,9 @@ export default inject(({ auth, peopleStore, accessRightsStore }) => {
   const { canChangeUserType } = accessRightsStore;
 
   const { setSelection } = auth.infoPanelStore;
+  const { currentQuotaStore } = auth;
 
+  const { showStorageInfo } = currentQuotaStore;
   return {
     isOwner,
     isAdmin,
@@ -252,6 +264,7 @@ export default inject(({ auth, peopleStore, accessRightsStore }) => {
     loading: usersStore.operationRunning,
     getPeopleListItem: usersStore.getPeopleListItem,
     setSelection,
+    showStorageInfo,
   };
 })(
   withTranslation([

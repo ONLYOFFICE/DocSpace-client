@@ -19,6 +19,7 @@ const RoomsRowDataComponent = (props) => {
     roomColumnTagsIsEnabled,
     roomColumnActivityIsEnabled,
     roomQuotaColumnIsEnable,
+    showStorageInfo,
 
     dragStyles,
     selectionProp,
@@ -128,7 +129,7 @@ const RoomsRowDataComponent = (props) => {
       ) : (
         <div />
       )}
-      {roomQuotaColumnIsEnable ? (
+      {roomQuotaColumnIsEnable && showStorageInfo ? (
         <TableCell className={"table-cell_Storage/Quota"}>
           <SpaceQuota item={item} type="room" />
         </TableCell>
@@ -160,7 +161,7 @@ const RoomsRowDataComponent = (props) => {
   );
 };
 
-export default inject(({ tableStore }) => {
+export default inject(({ auth, tableStore }) => {
   const {
     roomColumnTypeIsEnabled,
     roomColumnOwnerIsEnabled,
@@ -170,6 +171,9 @@ export default inject(({ tableStore }) => {
     roomQuotaColumnIsEnable,
   } = tableStore;
 
+  const { currentQuotaStore } = auth;
+
+  const { showStorageInfo } = currentQuotaStore;
   return {
     roomQuotaColumnIsEnable,
     roomColumnTypeIsEnabled,
@@ -177,5 +181,6 @@ export default inject(({ tableStore }) => {
     roomColumnQuickButtonsIsEnabled,
     roomColumnTagsIsEnabled,
     roomColumnActivityIsEnabled,
+    showStorageInfo,
   };
 })(observer(RoomsRowDataComponent));

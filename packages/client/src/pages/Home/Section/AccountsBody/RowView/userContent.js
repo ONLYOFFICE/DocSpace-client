@@ -71,7 +71,7 @@ const UserContent = ({
   standalone,
 
   isDefaultUsersQuotaSet,
-  isStatisticsAvailable,
+  showStorageInfo,
 }) => {
   const {
     displayName,
@@ -161,7 +161,7 @@ const UserContent = ({
         {email}
       </Link>
 
-      {isStatisticsAvailable && (
+      {showStorageInfo && (
         <Link
           containerMinWidth="140px"
           containerWidth="17%"
@@ -180,9 +180,9 @@ const UserContent = ({
 
 export default inject(({ auth }) => {
   const { currentQuotaStore } = auth;
-  const { isDefaultUsersQuotaSet, isStatisticsAvailable } = currentQuotaStore;
+  const { isDefaultUsersQuotaSet, showStorageInfo } = currentQuotaStore;
   return {
     isDefaultUsersQuotaSet,
-    isStatisticsAvailable,
+    showStorageInfo,
   };
 })(withTranslation(["People", "Common"])(observer(UserContent)));

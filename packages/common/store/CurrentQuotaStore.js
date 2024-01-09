@@ -241,6 +241,12 @@ class QuotasStore {
     return this.currentPortalQuota?.usersQuota?.defaultQuota;
   }
 
+  get showStorageInfo() {
+    const { user } = this.userStore;
+
+    return this.isStatisticsAvailable && (user.isOwner || user.isAdmin);
+  }
+
   setPortalQuotaValue = (res) => {
     this.currentPortalQuota = res;
     this.currentPortalQuotaFeatures = res.features;

@@ -27,6 +27,7 @@ const SpaceQuota = (props) => {
     getPeopleListItem,
     setSelection,
     setSelected,
+    type,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -72,7 +73,7 @@ const SpaceQuota = (props) => {
     onSuccess && onSuccess(users);
     setIsLoading(false);
 
-    if (!needResetSelection) {
+    if (type === "user" && !needResetSelection) {
       const user = getPeopleListItem(users[0]);
 
       setSelection(user);

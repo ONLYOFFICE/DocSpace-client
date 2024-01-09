@@ -2,10 +2,16 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import Submenu from "@docspace/components/submenu";
+import Loaders from "@docspace/common/components/Loaders";
 import FilesFilter from "@docspace/common/api/files/filter";
 import { getObjectByLocation } from "@docspace/common/utils";
 
-const SectionSubmenuContent = ({ isPersonalRoom, isRecentTab, setFilter }) => {
+const SectionSubmenuContent = ({
+  isPersonalRoom,
+  isRecentTab,
+  setFilter,
+  showBodyLoader,
+}) => {
   const { t } = useTranslation("Files");
 
   const submenu = [
@@ -38,18 +44,24 @@ const SectionSubmenuContent = ({ isPersonalRoom, isRecentTab, setFilter }) => {
   const startSelect =
     getObjectByLocation(window.DocSpace.location)?.folder === "recent" ? 1 : 0;
 
+  if (showBodyLoader) return <Loaders.SectionSubmenuLoader />;
+
   return showSubmenu ? (
     <Submenu data={submenu} startSelect={startSelect} onSelect={onSelect} />
   ) : null;
 };
 
-export default inject(({ treeFoldersStore, filesStore }) => {
-  const { isPersonalRoom, isRecentTab } = treeFoldersStore;
-  const { setFilter } = filesStore;
+export default inject(
+  ({ treeFoldersStore, filesStore, clientLoadingStore }) => {
+    const { isPersonalRoom, isRecentTab } = treeFoldersStore;
+    const { setFilter } = filesStore;
+    const { showBodyLoader } = clientLoadingStore;
 
-  return {
-    isPersonalRoom,
-    isRecentTab,
-    setFilter,
-  };
-})(observer(SectionSubmenuContent));
+    return {
+      isPersonalRoom,
+      isRecentTab,
+      setFilter,
+      showBodyLoader,
+    };
+  }
+)(observer(SectionSubmenuContent));

@@ -44,7 +44,7 @@ const SectionSubmenuContent = ({
   const startSelect =
     getObjectByLocation(window.DocSpace.location)?.folder === "recent" ? 1 : 0;
 
-  if (showBodyLoader) return <Loaders.SectionSubmenuLoader />;
+  if (showSubmenu && showBodyLoader) return <Loaders.SectionSubmenuLoader />;
 
   return showSubmenu ? (
     <Submenu data={submenu} startSelect={startSelect} onSelect={onSelect} />

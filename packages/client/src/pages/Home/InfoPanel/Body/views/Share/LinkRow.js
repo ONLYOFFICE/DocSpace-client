@@ -65,6 +65,8 @@ const LinkRow = ({
           const avatar =
             shareOption.key === "anyone" ? UniverseIcon : PeopleIcon;
 
+          const isExpiredLink = link.sharedTo.isExpired;
+
           return (
             <StyledLinkRow key={`share-link-row-${index}`}>
               <Avatar size="min" source={avatar} />
@@ -82,6 +84,7 @@ const LinkRow = ({
                   fillIcon={false}
                   withBlur={isMobileOnly}
                   modernView={true}
+                  isDisabled={isExpiredLink}
                 />
                 <ExpiredComboBox
                   link={link}
@@ -94,6 +97,7 @@ const LinkRow = ({
                   iconName={CopyIcon}
                   onClick={() => onCopyLink(link)}
                   title={t("CreateAndCopy")}
+                  isDisabled={isExpiredLink}
                 />
                 <ComboBox
                   directionY={"both"}
@@ -104,10 +108,11 @@ const LinkRow = ({
                   scaledOptions={false}
                   showDisabledItems={true}
                   size="content"
-                  fillIcon={false}
+                  fillIcon={true}
                   withBlur={isMobileOnly}
                   modernView={true}
                   type="onlyIcon"
+                  isDisabled={isExpiredLink}
                 />
               </div>
             </StyledLinkRow>

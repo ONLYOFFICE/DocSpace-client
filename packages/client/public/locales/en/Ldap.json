@@ -36,5 +36,8 @@
   "LdapGroupNameAttribute": "Group Name Attribute",
   "LdapGroupAttribute": "Group Attribute",
   "LdapSyncCronTitle": "Here you can set how often you want to auto sync LDAP users",
-  "LdapNextSync": "Next synchronization"
+  "LdapNextSync": "Next synchronization",
+  "LdapSettings": "LDAP settings",
+  "LdapMobileSettingsDescription": "Use this option to provide on-brand experience to your users. These settings will be effective for all of your portals.",
+  "LdapMobileSyncDescription": "Specify your company information, add links to external resources, and email addresses displayed within the online office interface."
 }

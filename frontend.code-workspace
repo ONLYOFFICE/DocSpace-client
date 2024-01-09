@@ -17,6 +17,10 @@
       "path": "packages/editor"
     },
     {
+      "name": "📄 @docspace/doceditor",
+      "path": "packages/doceditor"
+    },
+    {
       "name": "🗂 @docspace/management",
       "path": "packages/management"
     },

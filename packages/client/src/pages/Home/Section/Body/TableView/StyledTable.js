@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import Base from "@docspace/shared/themes/base";
 import { TableRow } from "@docspace/shared/components";
-import { DragAndDrop } from "@docspace/shared/components/drag-and-drop/DragAndDrop";
+import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
 import CursorPalmSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
 
 const hotkeyBorderStyle = css`

@@ -6,6 +6,7 @@ import { inject, observer } from "mobx-react";
 import Text from "@docspace/components/text";
 import Box from "@docspace/components/box";
 import Link from "@docspace/components/link";
+import { DeviceType } from "@docspace/common/constants";
 
 import BreakpointWarning from "SRC_DIR/components/BreakpointWarning";
 
@@ -21,7 +22,8 @@ import ButtonsContainer from "./sub-components/ButtonsContainer";
 import AuthenticationContainer from "./sub-components/AuthenticationContainer";
 import AdvancedSettings from "./sub-components/AdvancedSettings";
 import SyncContainer from "./sub-components/SyncContainer";
-import GroupMembership from './sub-components/GroupMembership';
+import GroupMembership from "./sub-components/GroupMembership";
+import LdapMobileView from "./sub-components/LdapMobileView";
 
 const LDAP = ({
   ldapSettingsUrl,
@@ -30,6 +32,7 @@ const LDAP = ({
   isLdapAvailable,
   isSettingsShown,
   load,
+  isMobileView,
 }) => {
   const { t } = useTranslation(["Ldap", "Settings", "Common"]);
   const [isSmallWindow, setIsSmallWindow] = useState(false);
@@ -50,13 +53,12 @@ const LDAP = ({
     }
   };
 
-  if (isSmallWindow)
-    return <BreakpointWarning sectionName={t("Settings:LDAP")} isSmallWindow />;
-
-  if (isMobile) return <BreakpointWarning sectionName={t("Settings:LDAP")} />;
-
   return (
-    <StyledLdapPage theme={theme} isSettingPaid={isLdapAvailable}>
+    <StyledLdapPage
+      isSmallWindow={isSmallWindow}
+      theme={theme}
+      isSettingPaid={isLdapAvailable}
+    >
       <Text className="intro-text settings_unavailable">{t("LdapIntro")}</Text>
       <Box marginProp="8px 0 24px 0">
         <Link
@@ -71,31 +73,37 @@ const LDAP = ({
 
       <ToggleLDAP isLDAPAvailable={isLdapAvailable} />
 
-      <HideButton
-        text={t("Settings:LDAP")}
-        value={isSettingsShown}
-        isDisabled={!isLdapAvailable}
-      />
-
-      {isSettingsShown && (
+      {isMobileView ? (
+        <LdapMobileView />
+      ) : (
         <>
-          <Box>
-            <Text>{t("LdapDisclaimer")}</Text>
-            <Checkboxes />
-          </Box>
+          <HideButton
+            text={t("Settings:LDAP")}
+            value={isSettingsShown}
+            isDisabled={!isLdapAvailable}
+          />
 
-          <ConnectionSettings />
-          <AttributeMapping />
-          <GroupMembership />
-          <AuthenticationContainer />
-          <AdvancedSettings />
-          <ButtonsContainer />
+          {isSettingsShown && (
+            <>
+              <Box>
+                <Text>{t("LdapDisclaimer")}</Text>
+                <Checkboxes />
+              </Box>
+
+              <ConnectionSettings />
+              <AttributeMapping />
+              <GroupMembership />
+              <AuthenticationContainer />
+              <AdvancedSettings />
+              <ButtonsContainer />
+            </>
+          )}
+
+          <StyledSettingsSeparator />
+
+          <SyncContainer />
         </>
       )}
-
-      <StyledSettingsSeparator />
-
-      <SyncContainer />
     </StyledLdapPage>
   );
 };
@@ -103,8 +111,12 @@ const LDAP = ({
 export default inject(({ auth, ldapStore }) => {
   const { settingsStore, currentQuotaStore } = auth;
   const { isLdapAvailable } = currentQuotaStore;
-  const { ldapSettingsUrl, theme, currentColorScheme } = settingsStore;
+  const { ldapSettingsUrl, theme, currentColorScheme, currentDeviceType } =
+    settingsStore;
   const { isSettingsShown, load } = ldapStore;
+
+  const isMobileView = currentDeviceType === DeviceType.mobile;
+
   return {
     ldapSettingsUrl,
     theme,
@@ -112,5 +124,6 @@ export default inject(({ auth, ldapStore }) => {
     isLdapAvailable,
     isSettingsShown,
     load,
+    isMobileView,
   };
 })(observer(LDAP));

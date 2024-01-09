@@ -3,7 +3,7 @@ import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 import Box from "@docspace/components/box";
 
 const StyledLdapPage = styled(Box)`
-  max-width: 700px;
+  max-width: ${(props) => (props.isSmallWindow ? "100%" : "700px")};
   width: 100%;
 
   .intro-text {

@@ -25,6 +25,7 @@ const EmptyFilterContainer = ({
   theme,
   isPublicRoom,
   publicRoomKey,
+  isRecentTab,
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -49,7 +50,11 @@ const EmptyFilterContainer = ({
     } else {
       const newFilter = FilesFilter.getDefault();
 
-      newFilter.folder = selectedFolderId;
+      if (isRecentTab) {
+        newFilter.folder = "recent";
+      } else {
+        newFilter.folder = selectedFolderId;
+      }
 
       if (isPublicRoom) {
         navigate(
@@ -99,7 +104,7 @@ export default inject(
     clientLoadingStore,
     publicRoomStore,
   }) => {
-    const { isRoomsFolder, isArchiveFolder } = treeFoldersStore;
+    const { isRoomsFolder, isArchiveFolder, isRecentTab } = treeFoldersStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder;
     const { isPublicRoom, publicRoomKey } = publicRoomStore;
@@ -115,6 +120,7 @@ export default inject(
 
       isPublicRoom,
       publicRoomKey,
+      isRecentTab,
     };
   }
 )(withTranslation(["Files", "Common"])(observer(EmptyFilterContainer)));

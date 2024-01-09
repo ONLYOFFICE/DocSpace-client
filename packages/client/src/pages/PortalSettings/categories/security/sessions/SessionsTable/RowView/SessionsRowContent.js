@@ -21,79 +21,54 @@ const StyledRowContent = styled(RowContent)`
           `}
   }
 
-  .session-info {
-    .username {
+  .session-info-wrapper {
+    min-width: 250px;
+    .session-info {
+      font-weight: 600;
+      color: #a3a9ae;
+      font-size: 12px;
+    }
+
+    .online {
+      font-weight: 600;
+      color: #35ad17;
+      margin-left: 4px;
       font-size: 14px;
+    }
+
+    .offline {
+      font-weight: 600;
+      color: #a3a9ae;
+      font-size: 14px;
+      margin-left: 4px;
+    }
+
+    .username {
       font-weight: 600;
       color: #333333;
-      span {
-        color: #a3a9ae;
-      }
+      font-size: 14px;
     }
+
     .additional-row-content {
       display: flex;
       align-items: center;
     }
 
-    .session-platform,
-    .session-location,
-    .session-ip {
-      font-size: 12px;
-      font-weight: 600;
-      color: #a3a9ae;
+    .browser,
+    .city {
+      margin-left: 4px;
     }
 
-    .session-platform,
-    .session-location {
-      position: relative;
-      span {
-        :after {
-          content: "";
-          position: absolute;
-          top: 2px;
-          ${(props) =>
-            props.theme.interfaceDirection === "rtl"
-              ? css`
-                  left: -7px;
-                `
-              : css`
-                  right: -7px;
-                `}
-          width: 2px;
-          height: 12px;
-          background: ${(props) => props.theme.activeSessions.sortHeaderColor};
-        }
-      }
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 6px;
-            `
-          : css`
-              margin-right: 6px;
-            `}
-    }
-
-    .session-location {
-      margin: 0px 6px;
-    }
-
-    .session-ip {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: 6px;
-            `
-          : css`
-              margin-left: 6px;
-            `}
+    .vr {
+      margin: 0px 4px;
     }
   }
 `;
 
 const SessionsRowContent = (props) => {
+  const { sectionWidth, data } = props;
+
   const {
-    sectionWidth,
     avatar,
     displayName,
     status,
@@ -103,8 +78,7 @@ const SessionsRowContent = (props) => {
     city,
     ip,
     userId,
-    rowRef,
-  } = props;
+  } = data;
 
   const isOnline = status === "Online";
 
@@ -116,22 +90,31 @@ const SessionsRowContent = (props) => {
         source={avatar}
         size={"small"}
       />
-      <Box className="session-info" ref={rowRef}>
+      <Box className="session-info-wrapper">
         <Box className="main-row-content">
-          <div className="username">
-            {displayName} <span>{status}</span>
+          <div className="session-info username">
+            {displayName}
+            <span className={isOnline ? "online" : "offline"}>{status}</span>
           </div>
         </Box>
 
-        <Box className="additional-row-content">
-          <div className="session-platform">
-            {platform}, <span>{browser}</span>
-          </div>
-          <div className="session-location">
-            {country}, <span>{city}</span>
-          </div>
-          <div className="session-ip">{ip}</div>
-        </Box>
+        <div className="additional-row-content">
+          <Text className="session-info">
+            {platform},
+            <span className="browser">
+              {browser}
+              <span className="vr">{"|"}</span>
+            </span>
+          </Text>
+          <Text className="session-info" truncate>
+            {country},
+            <span className="city">
+              {city}
+              <span className="vr">{"|"}</span>
+            </span>
+            <span>{ip}</span>
+          </Text>
+        </div>
       </Box>
     </Box>,
   ];

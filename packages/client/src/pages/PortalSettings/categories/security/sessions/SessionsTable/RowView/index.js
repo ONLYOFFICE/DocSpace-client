@@ -161,14 +161,6 @@ const RowView = (props) => {
           t={t}
           key={session.id}
           sectionWidth={sectionWidth}
-          avatar={session.avatar}
-          displayName={session.displayName}
-          status={session.status}
-          platform={session.platform}
-          browser={session.browser}
-          country={session.country}
-          city={session.city}
-          ip={session.ip}
           data={session}
           isChecked={isSessionChecked(session.userId)}
           toggleSession={(e) => handleToggle(e, session.userId)}

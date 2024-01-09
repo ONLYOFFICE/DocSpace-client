@@ -1,4 +1,11 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+  basePath: "/doceditor",
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

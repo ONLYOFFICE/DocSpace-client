@@ -325,7 +325,7 @@ class DropDown extends React.PureComponent {
       !this.props.fixedDirection;
 
     let cleanChildren = children;
-    let itemCount = children.length;
+    let itemCount = children?.length;
 
     if (!showDisabledItems) {
       cleanChildren = this.hideDisabledItems();

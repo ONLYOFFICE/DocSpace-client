@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import * as Styled from "./index.styled";
 import Link from "@docspace/components/link";
+import { Events } from "@docspace/common/constants";
 
 const GroupsRow = ({
   item,
@@ -49,12 +50,18 @@ const GroupsRow = ({
         key: "change-name",
         icon: "http://192.168.0.105/static/images/pencil.react.svg?hash=7b1050767036ee383c82",
         label: "Edit department",
+        onClick: () => {
+          const event = new Event(Events.GROUP_CREATE);
+          window.dispatchEvent(event);
+        },
       },
       {
         icon: "http://192.168.0.105/static/images/info.outline.react.svg?hash=1341c2413ad79879439d",
         id: "option_details",
         key: "details",
-        label: "Info",
+        onClick: () => {
+          onSelect();
+        },
       },
       {
         key: "separator-2",
@@ -68,6 +75,15 @@ const GroupsRow = ({
       },
     ],
   };
+
+  const titleWithoutSpaces = item.name.replace(/\s+/g, " ").trim();
+  const indexAfterLastSpace = titleWithoutSpaces.lastIndexOf(" ");
+  const secondCharacter =
+    indexAfterLastSpace === -1
+      ? ""
+      : titleWithoutSpaces[indexAfterLastSpace + 1];
+
+  const groupName = (item.name[0] + secondCharacter).toUpperCase();
 
   return (
     <Styled.GroupsRowWrapper
@@ -102,7 +118,7 @@ const GroupsRow = ({
               borderRadius: "50%",
             }}
           >
-            {item.shortTitle}
+            {groupName}
           </div>
         }
         checked={isChecked}
@@ -122,14 +138,14 @@ const GroupsRow = ({
             <Link
               containerWidth="28%"
               target="_blank"
-              title={item.displayName}
+              title={item.name}
               fontWeight={600}
               fontSize="15px"
               color={nameColor}
               isTextOverflow={true}
               onClick={onOpenGroup}
             >
-              {item.title}
+              {item.name}
             </Link>,
           ]}
         </Styled.GroupsRowContent>

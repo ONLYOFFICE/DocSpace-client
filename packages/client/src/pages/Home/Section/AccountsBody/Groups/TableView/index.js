@@ -13,7 +13,6 @@ import GroupsTableItem from "./GroupsTableItem";
 import GroupsTableHeader from "./GroupsTableHeader";
 import EmptyScreen from "../../EmptyScreen";
 import { TableVersions } from "SRC_DIR/helpers/constants";
-import { groups } from "../mockdata";
 
 const COLUMNS_SIZE = `groupsColumnsSize_ver-${TableVersions.Groups}`;
 const INFO_PANEL_COLUMNS_SIZE = `infoPanelGroupsColumnsSize_ver-${TableVersions.Groups}`;
@@ -158,8 +157,6 @@ const GroupsTableContainer = ({
 
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
-
-  console.log(groups);
 
   return groups.length !== 0 || !isFiltered ? (
     <StyledTableContainer useReactWindow={!withPaging} forwardedRef={ref}>

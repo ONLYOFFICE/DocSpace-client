@@ -19,6 +19,8 @@ import ResetApplicationDialog from "./ResetApplicationDialog";
 import BackupCodesDialog from "./BackupCodesDialog";
 import CreateRoomDialog from "./CreateEditRoomDialog/CreateRoomDialog";
 import EditRoomDialog from "./CreateEditRoomDialog/EditRoomDialog";
+import CreateGroupDialog from "./CreateEditGroupDialog/CreateGroupDialog";
+import EditGroupDialog from "./CreateEditGroupDialog/EditGroupDialog";
 import ChangePortalOwnerDialog from "./ChangePortalOwnerDialog";
 import ChangeNameDialog from "./ChangeNameDialog";
 import AvatarEditorDialog from "./AvatarEditorDialog";
@@ -63,6 +65,8 @@ export {
   CreateRoomDialog,
   CreateRoomConfirmDialog,
   EditRoomDialog,
+  CreateGroupDialog,
+  EditGroupDialog,
   ChangePortalOwnerDialog,
   ChangeNameDialog,
   AvatarEditorDialog,

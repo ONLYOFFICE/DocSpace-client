@@ -50,6 +50,25 @@ class GroupsStore {
     await this.getGroupList();
     return Promise.resolve(res);
   };
+
+  getGroupContextOptions = (t, options, item) => {
+    const contextMenu = options.map((option) => {
+      switch (option) {
+        case "profile":
+        // return {
+        //   id: "option_profile",
+        //   key: option,
+        //   icon: ProfileReactSvgUrl,
+        //   label: t("Common:Profile"),
+        //   onClick: this.peopleStore.profileActionsStore.onProfileClick,
+        // };
+        default:
+          return undefined;
+      }
+    });
+
+    return contextMenu;
+  };
 }
 
 export default GroupsStore;

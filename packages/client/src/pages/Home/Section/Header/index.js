@@ -299,54 +299,72 @@ const SectionHeaderContent = (props) => {
   const getContextOptionsPlus = () => {
     if (isAccountsPage) {
       return [
-        isOwner && {
-          id: "accounts-add_administrator",
-          className: "main-button_drop-down",
-          icon: PersonAdminReactSvgUrl,
-          label: t("Common:DocSpaceAdmin"),
-          onClick: onInvite,
-          "data-type": EmployeeType.Admin,
-          key: "administrator",
-        },
         {
-          id: "accounts-add_manager",
-          className: "main-button_drop-down",
-          icon: PersonManagerReactSvgUrl,
-          label: t("Common:RoomAdmin"),
-          onClick: onInvite,
-          "data-type": EmployeeType.User,
-          key: "manager",
-        },
-        {
-          id: "accounts-add_collaborator",
-          className: "main-button_drop-down",
-          icon: PersonReactSvgUrl,
-          label: t("Common:PowerUser"),
-          onClick: onInvite,
-          "data-type": EmployeeType.Collaborator,
-          key: "collaborator",
-        },
-        {
-          id: "accounts-add_user",
+          id: "actions_invite_user",
           className: "main-button_drop-down",
           icon: PersonUserReactSvgUrl,
-          label: t("Common:User"),
-          onClick: onInvite,
-          "data-type": EmployeeType.Guest,
-          key: "user",
+          label: t("Common:Invite"),
+          key: "new-user",
+          items: [
+            isOwner && {
+              id: "accounts-add_administrator",
+              className: "main-button_drop-down",
+              icon: PersonAdminReactSvgUrl,
+              label: t("Common:DocSpaceAdmin"),
+              onClick: onInvite,
+              "data-type": EmployeeType.Admin,
+              key: "administrator",
+            },
+            {
+              id: "accounts-add_manager",
+              className: "main-button_drop-down",
+              icon: PersonManagerReactSvgUrl,
+              label: t("Common:RoomAdmin"),
+              onClick: onInvite,
+              "data-type": EmployeeType.User,
+              key: "manager",
+            },
+            {
+              id: "accounts-add_collaborator",
+              className: "main-button_drop-down",
+              icon: PersonReactSvgUrl,
+              label: t("Common:PowerUser"),
+              onClick: onInvite,
+              "data-type": EmployeeType.Collaborator,
+              key: "collaborator",
+            },
+            {
+              id: "accounts-add_user",
+              className: "main-button_drop-down",
+              icon: PersonUserReactSvgUrl,
+              label: t("Common:User"),
+              onClick: onInvite,
+              "data-type": EmployeeType.Guest,
+              key: "user",
+            },
+            {
+              key: "separator",
+              isSeparator: true,
+            },
+            {
+              id: "accounts-add_invite-again",
+              className: "main-button_drop-down",
+              icon: InviteAgainReactSvgUrl,
+              label: t("People:LblInviteAgain"),
+              onClick: onInviteAgain,
+              "data-action": "invite-again",
+              key: "invite-again",
+            },
+          ],
         },
         {
-          key: "separator",
-          isSeparator: true,
-        },
-        {
-          id: "accounts-add_invite-again",
+          id: "create_group",
           className: "main-button_drop-down",
-          icon: InviteAgainReactSvgUrl,
-          label: t("People:LblInviteAgain"),
-          onClick: onInviteAgain,
-          "data-action": "invite-again",
-          key: "invite-again",
+          icon: PersonUserReactSvgUrl,
+          label: t("Create Group"),
+          onClick: onCreateGroup,
+          action: "group",
+          key: "group",
         },
       ];
     }
@@ -960,6 +978,11 @@ const SectionHeaderContent = (props) => {
       .catch((err) => toastr.error(err));
   }, [resendInvitesAgain]);
 
+  const onCreateGroup = React.useCallback(() => {
+    const event = new Event(Events.GROUP_CREATE);
+    window.dispatchEvent(event);
+  }, []);
+
   const headerMenu = isAccountsPage
     ? getAccountsHeaderMenu(t)
     : getHeaderMenu(t);
@@ -1223,7 +1246,7 @@ export default inject(
       onClickBack,
       emptyTrashInProgress,
       moveToPublicRoom,
-      onClickCreateRoom
+      onClickCreateRoom,
     } = filesActionsStore;
 
     const { oformsFilter } = oformsStore;

@@ -242,13 +242,13 @@ class ComboBox extends React.Component {
                   const disabled =
                     option.disabled ||
                     (!displaySelectedOption &&
-                      option.label === selectedOption.label);
+                      option?.label === selectedOption?.label);
 
                   const isActive =
                     displaySelectedOption &&
-                    option.label === selectedOption.label;
+                    option?.label === selectedOption?.label;
 
-                  const isSelected = option.label === selectedOption.label;
+                  const isSelected = option?.label === selectedOption?.label;
                   return (
                     <DropDownItem
                       {...option}

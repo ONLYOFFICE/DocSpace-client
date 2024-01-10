@@ -11,6 +11,7 @@ import withContent from "SRC_DIR/HOCs/withPeopleContent";
 
 import Badges from "../../Badges";
 import { Base } from "@docspace/components/themes";
+import { Events } from "@docspace/common/constants";
 
 const StyledWrapper = styled.div`
   display: contents;
@@ -220,9 +221,8 @@ const GroupsTableItem = (props) => {
       e.target.closest(".pending-badge") ||
       e.target.closest(".disabled-badge") ||
       e.detail === 0
-    ) {
+    )
       return;
-    }
 
     onContentRowClick && onContentRowClick(!isChecked, item);
   };
@@ -248,12 +248,19 @@ const GroupsTableItem = (props) => {
         key: "change-name",
         icon: "http://192.168.0.105/static/images/pencil.react.svg?hash=7b1050767036ee383c82",
         label: "Edit department",
+        onClick: () => {
+          const event = new Event(Events.GROUP_CREATE);
+          window.dispatchEvent(event);
+        },
       },
       {
         icon: "http://192.168.0.105/static/images/info.outline.react.svg?hash=1341c2413ad79879439d",
         id: "option_details",
         key: "details",
         label: "Info",
+        onClick: () => {
+          onSelect();
+        },
       },
       {
         key: "separator-2",
@@ -267,6 +274,15 @@ const GroupsTableItem = (props) => {
       },
     ],
   };
+
+  const titleWithoutSpaces = item.name.replace(/\s+/g, " ").trim();
+  const indexAfterLastSpace = titleWithoutSpaces.lastIndexOf(" ");
+  const secondCharacter =
+    indexAfterLastSpace === -1
+      ? ""
+      : titleWithoutSpaces[indexAfterLastSpace + 1];
+
+  const groupName = (item.name[0] + secondCharacter).toUpperCase();
 
   return (
     <StyledWrapper
@@ -309,7 +325,7 @@ const GroupsTableItem = (props) => {
                   borderRadius: "50%",
                 }}
               >
-                {"G"}
+                {groupName}
               </div>
             </div>
             <Checkbox
@@ -321,7 +337,7 @@ const GroupsTableItem = (props) => {
 
           <Link
             onClick={onLinkClick}
-            title={item.title}
+            title={item.name}
             fontWeight="600"
             fontSize="13px"
             isTextOverflow

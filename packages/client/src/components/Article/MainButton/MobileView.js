@@ -41,7 +41,8 @@ const MobileView = ({
   titleProp,
   actionOptions,
   buttonOptions,
-  isRooms,
+  withoutButton,
+  withMenu,
   files,
   clearUploadData,
   setUploadPanelVisible,
@@ -184,9 +185,9 @@ const MobileView = ({
           percent={percentProgress}
           progressOptions={progressOptions}
           title={titleProp}
-          withoutButton={isRooms}
+          withoutButton={withoutButton}
           alert={primaryProgressDataAlert}
-          withMenu={!isRooms}
+          withMenu={withMenu}
           onClick={onMainButtonClick}
           onAlertClick={showUploadPanel}
           withAlertClick={isRoomsFolder}

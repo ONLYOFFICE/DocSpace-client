@@ -4,11 +4,10 @@ import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import * as Styled from "./index.styled";
 import EmptyScreen from "../../EmptyScreen";
-import { groups } from "../mockdata";
 import GroupsRow from "./GroupsRow";
 
 const RowView = ({
-  peopleList,
+  groups,
   sectionWidth,
   accountsViewAs,
   setViewAs,
@@ -34,7 +33,7 @@ const RowView = ({
       fetchMoreFiles={fetchMoreAccounts}
       hasMoreFiles={hasMoreAccounts}
       itemCount={filterTotal}
-      filesLength={peopleList.length}
+      filesLength={groups.length}
       itemHeight={58}
     >
       {groups.map((item, index) => (
@@ -50,6 +49,7 @@ const RowView = ({
 };
 
 export default inject(({ peopleStore, auth }) => ({
+  groups: peopleStore.groupsStore.groups,
   accountsViewAs: peopleStore.viewAs,
   setViewAs: peopleStore.setViewAs,
 

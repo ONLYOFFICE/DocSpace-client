@@ -172,7 +172,7 @@ const GroupMenuItem = ({ item, isBlocked }) => {
               forwardedRef={buttonRef}
               zIndex={250}
             >
-              {options.map((option) => (
+              {options?.map((option) => (
                 <DropDownItem {...option} />
               ))}
             </DropDown>

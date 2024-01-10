@@ -11,7 +11,7 @@ import toastr from "@docspace/components/toast/toastr";
 import { getUserRole } from "@docspace/common/utils";
 import Filter from "@docspace/common/api/people/filter";
 import Loaders from "@docspace/common/components/Loaders";
-import { getMembersList, getUserList } from "@docspace/common/api/people";
+import { getMembersList } from "@docspace/common/api/people";
 import useLoadingWithTimeout from "SRC_DIR/Hooks/useLoadingWithTimeout";
 import { ShareAccessRights, LOADER_TIMEOUT } from "@docspace/common/constants";
 
@@ -22,90 +22,28 @@ import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.pn
 import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
 import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/catalog.accounts.react.svg?url";
 import EmptyScreenPersonsSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
+import { getAccessOptions } from "../InvitePanel/utils";
 
-const AddUsersPanel = ({
-  isEncrypted,
-  defaultAccess,
-  onClose,
-  onParentPanelClose,
-  withAccessRights,
-  tempDataItems,
-  setDataItems,
+interface AddGroupManagerPanelProps {
+  t: any;
+  theme: any;
+  visible: boolean;
+  onClosePanels: () => void;
+  onBackClick: () => void;
+}
+
+const AddGroupManagerPanel = ({
   t,
-  visible,
-  groupsCaption,
-  accessOptions,
-  isMultiSelect,
   theme,
-  withoutBackground,
-  withBlur,
-  roomId,
-  userIdsToFilterOut,
-}) => {
-  const accessRight = defaultAccess
-    ? defaultAccess
-    : isEncrypted
-    ? ShareAccessRights.FullAccess
-    : ShareAccessRights.ReadOnly;
-
-  const onBackClick = () => onClose();
-  const getFilterWithOutDisabledUser = useCallback(
-    () => Filter.getFilterWithOutDisabledUser(),
-    []
-  );
-
-  const onKeyPress = (e) => {
-    if (e.key === "Esc" || e.key === "Escape") onClose();
-  };
-
-  useEffect(() => {
-    window.addEventListener("keyup", onKeyPress);
-
-    return () => window.removeEventListener("keyup", onKeyPress);
-  });
-
-  const onClosePanels = () => {
-    onClose();
-    onParentPanelClose();
-  };
-
-  const onUsersSelect = (users, access) => {
-    const items = [];
-
-    for (let item of users) {
-      const currentAccess =
-        item.isOwner || item.isAdmin
-          ? ShareAccessRights.RoomManager
-          : access?.access;
-
-      const newItem = {
-        access: currentAccess,
-        email: item.email,
-        id: item.id,
-        displayName: item.label,
-        avatar: item.avatar,
-        isOwner: item.isOwner,
-        isAdmin: item.isAdmin,
-      };
-      items.push(newItem);
-    }
-
-    if (users.length > items.length)
-      toastr.warning("Some users are already in room");
-
-    setDataItems(items);
-    onClose();
-  };
-
-  const selectedAccess = accessOptions.filter(
-    (access) => access.access === accessRight
-  )[0];
-
-  const [itemsList, setItemsList] = useState(null);
-  const [searchValue, setSearchValue] = useState("");
-  const [hasNextPage, setHasNextPage] = useState(true);
-  const [isNextPageLoading, setIsNextPageLoading] = useState(false);
+  visible,
+  onClosePanels,
+  onBackClick,
+}: AddGroupManagerPanelProps) => {
   const [total, setTotal] = useState(0);
+  const [hasNextPage, setHasNextPage] = useState<boolean>(false);
+
+  const [searchValue, setSearchValue] = useState<string>("");
+
   const [isLoading, setIsLoading] = useLoadingWithTimeout(
     LOADER_TIMEOUT,
     false
@@ -114,56 +52,28 @@ const AddUsersPanel = ({
     LOADER_TIMEOUT,
     false
   );
+  const [isLoadingNextPage, setIsLoadingNextPage] = useState<boolean>(false);
 
-  useEffect(() => {
-    loadNextPage(0);
-  }, []);
+  const accessOptions = getAccessOptions(t);
+  const selectedAccess = accessOptions.filter(
+    (access) => access.access === ShareAccessRights.FullAccess
+  )[0];
 
-  const onSearch = (value, callback) => {
+  const onSearch = (value: string, callback) => {
     if (value === searchValue) return;
 
     setIsLoadingSearch(true);
     setSearchValue(value);
-    loadNextPage(0, value, callback);
+    onLoadNextPage(0, value, callback);
   };
 
-  const onClearSearch = (callback) => {
-    onSearch("", callback);
-  };
+  const onClearSearch = (callback) => onSearch("", callback);
 
-  const toListItem = (item) => {
-    const {
-      id,
-      email,
-      avatar,
-      icon,
-      displayName,
-      hasAvatar,
-      isOwner,
-      isAdmin,
-      isVisitor,
-      isCollaborator,
-    } = item;
-
-    const role = getUserRole(item);
-
-    const userAvatar = hasAvatar ? avatar : DefaultUserPhoto;
-
-    return {
-      id,
-      email,
-      avatar: userAvatar,
-      icon,
-      label: displayName || email,
-      role,
-      isOwner,
-      isAdmin,
-      isVisitor,
-      isCollaborator,
-    };
-  };
-
-  const loadNextPage = (startIndex, search = searchValue, callback) => {
+  const onLoadNextPage = (
+    startIndex: number,
+    search = searchValue,
+    callback
+  ) => {
     const pageCount = 100;
 
     setIsNextPageLoading(true);
@@ -182,22 +92,16 @@ const AddUsersPanel = ({
       currentFilter.search = search;
     }
 
-    (!roomId
-      ? getUserList(currentFilter)
-      : getMembersList(roomId, currentFilter)
-    )
+    getMembersList(roomId, currentFilter)
       .then((response) => {
         let newItems = startIndex ? itemsList : [];
         let totalDifferent = startIndex ? response.total - total : 0;
 
-        let items = response.items.map((item) => toListItem(item));
-        if (userIdsToFilterOut && userIdsToFilterOut.length)
-          items = items.filter((item) => !userIdsToFilterOut.includes(item.id));
+        const items = response.items.map((item) => toListItem(item));
 
         newItems = [...newItems, ...items];
 
-        const newTotal =
-          response.total - totalDifferent - userIdsToFilterOut?.length;
+        const newTotal = response.total - totalDifferent;
 
         setHasNextPage(newItems.length < newTotal);
         setItemsList(newItems);
@@ -213,9 +117,11 @@ const AddUsersPanel = ({
       });
   };
 
-  const emptyScreenImage = theme.isBase
-    ? EmptyScreenPersonsSvgUrl
-    : EmptyScreenPersonsSvgDarkUrl;
+  useEffect(() => {
+    onLoadNextPage(0);
+  }, []);
+
+  const onAccept = () => {};
 
   return (
     <>
@@ -224,8 +130,8 @@ const AddUsersPanel = ({
         visible={visible}
         zIndex={310}
         isAside={true}
-        withoutBackground={withoutBackground}
-        withoutBlur={!withBlur}
+        withoutBackground={true}
+        withoutBlur={true}
       />
       <Aside
         className="header_aside-panel"
@@ -241,27 +147,35 @@ const AddUsersPanel = ({
           onSearch={onSearch}
           onClearSearch={onClearSearch}
           items={itemsList}
-          isMultiSelect={isMultiSelect}
+          isMultiSelect={false}
           acceptButtonLabel={t("Common:AddButton")}
-          onAccept={onUsersSelect}
-          withSelectAll={isMultiSelect}
+          onAccept={onAccept}
+          withSelectAll={false}
           selectAllLabel={t("PeopleSelector:AllAccounts")}
           selectAllIcon={CatalogAccountsReactSvgUrl}
-          withAccessRights={withAccessRights && isMultiSelect}
+          withAccessRights={false}
           accessRights={accessOptions}
           selectedAccessRight={selectedAccess}
-          withCancelButton={!isMultiSelect}
+          withCancelButton={true}
           cancelButtonLabel={t("Common:CancelButton")}
           onCancel={onClosePanels}
-          emptyScreenImage={emptyScreenImage}
+          emptyScreenImage={
+            theme.isBase
+              ? EmptyScreenPersonsSvgUrl
+              : EmptyScreenPersonsSvgDarkUrl
+          }
           emptyScreenHeader={t("PeopleSelector:EmptyHeader")}
           emptyScreenDescription={t("PeopleSelector:EmptyDescription")}
-          searchEmptyScreenImage={emptyScreenImage}
+          searchEmptyScreenImage={
+            theme.isBase
+              ? EmptyScreenPersonsSvgUrl
+              : EmptyScreenPersonsSvgDarkUrl
+          }
           searchEmptyScreenHeader={t("People:NotFoundUsers")}
           searchEmptyScreenDescription={t("People:NotFoundUsersDescription")}
           hasNextPage={hasNextPage}
-          isNextPageLoading={isNextPageLoading}
-          loadNextPage={loadNextPage}
+          isNextPageLoading={isLoadingNextPage}
+          loadNextPage={onLoadNextPage}
           totalItems={total}
           isLoading={isLoading}
           searchLoader={<Loaders.SelectorSearchLoader />}
@@ -271,7 +185,7 @@ const AddUsersPanel = ({
               isUser
               count={15}
               isContainer={isLoading}
-              isMultiSelect={isMultiSelect}
+              isMultiSelect={false}
               withAllSelect={!isLoadingSearch}
             />
           }
@@ -281,20 +195,12 @@ const AddUsersPanel = ({
   );
 };
 
-AddUsersPanel.propTypes = {
-  visible: PropTypes.bool,
-  onParentPanelClose: PropTypes.func,
-  onClose: PropTypes.func,
-};
-
-export default inject(({ auth }) => {
-  return {
-    theme: auth.settingsStore.theme,
-  };
-})(
+export default inject(({ auth }) => ({
+  theme: auth.settingsStore.theme,
+}))(
   observer(
     withTranslation(["SharingPanel", "PeopleTranslations", "Common"])(
-      withLoader(AddUsersPanel)(<Loaders.DialogAsideLoader isPanel />)
+      withLoader(AddGroupManagerPanel)(<Loaders.DialogAsideLoader isPanel />)
     )
   )
 );

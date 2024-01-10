@@ -437,7 +437,7 @@ class ContextOptionsStore {
     isFile
       ? window.open(viewUrl, "_self")
       : this.filesActionsStore
-          .downloadAction(t("Translations:ArchivingData"))
+          .downloadAction(t("Translations:ArchivingData"), item)
           .catch((err) => toastr.error(err));
   };
 
@@ -770,7 +770,7 @@ class ContextOptionsStore {
     this.filesActionsStore.setPinAction(action, id, t);
   };
 
-  onClickArchive = (e) => {
+  onClickArchive = (e, item) => {
     const data = (e.currentTarget && e.currentTarget.dataset) || e;
     const { action } = data;
     const { isGracePeriod } = this.authStore.currentTariffStatusStore;
@@ -779,6 +779,8 @@ class ContextOptionsStore {
       setRestoreRoomDialogVisible,
       setInviteUsersWarningDialogVisible,
     } = this.dialogsStore;
+
+    this.filesStore.setBufferSelection(item);
 
     if (action === "unarchive" && isGracePeriod) {
       setInviteUsersWarningDialogVisible(true);
@@ -1128,10 +1130,17 @@ class ContextOptionsStore {
       t
     );
 
-    const withOpen = item.id !== this.selectedFolderStore.id;
+    let withOpen = item.id !== this.selectedFolderStore.id;
     const isPublicRoomType =
       item.roomType === RoomsType.PublicRoom ||
       item.roomType === RoomsType.CustomRoom;
+
+    if (item.isRoom && withOpen) {
+      withOpen =
+        this.selectedFolderStore.navigationPath.findIndex(
+          (f) => f.id === item.id
+        ) === -1;
+    }
 
     const optionsModel = [
       {
@@ -1437,7 +1446,7 @@ class ContextOptionsStore {
         key: "archive-room",
         label: t("MoveToArchive"),
         icon: RoomArchiveSvgUrl,
-        onClick: (e) => this.onClickArchive(e),
+        onClick: (e) => this.onClickArchive(e, item),
         disabled: false,
         "data-action": "archive",
         action: "archive",
@@ -1458,7 +1467,7 @@ class ContextOptionsStore {
         key: "unarchive-room",
         label: t("Common:Restore"),
         icon: MoveReactSvgUrl,
-        onClick: (e) => this.onClickArchive(e),
+        onClick: (e) => this.onClickArchive(e, item),
         disabled: false,
         "data-action": "unarchive",
         action: "unarchive",
@@ -1554,7 +1563,7 @@ class ContextOptionsStore {
           key: "archive-room",
           label: t("MoveToArchive"),
           icon: RoomArchiveSvgUrl,
-          onClick: (e) => this.onClickArchive(e),
+          onClick: (e) => this.onClickArchive(e, item),
           disabled: false,
           "data-action": "archive",
           action: "archive",
@@ -1565,7 +1574,7 @@ class ContextOptionsStore {
           key: "unarchive-room",
           label: t("Common:Restore"),
           icon: MoveReactSvgUrl,
-          onClick: (e) => this.onClickArchive(e),
+          onClick: (e) => this.onClickArchive(e, item),
           disabled: false,
           "data-action": "unarchive",
           action: "unarchive",

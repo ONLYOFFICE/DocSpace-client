@@ -1,10 +1,10 @@
 import React, { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { Avatar } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
-import { IconButton } from "@docspace/shared/components";
-import { ContextMenu } from "@docspace/shared/components";
+import { Avatar } from "@docspace/shared/components/avatar";
+import { Text } from "@docspace/shared/components/text";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { ContextMenu } from "@docspace/shared/components/context-menu";
 
 import {
   StyledArticleProfile,

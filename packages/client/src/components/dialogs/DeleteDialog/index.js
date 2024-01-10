@@ -1,5 +1,8 @@
 import React, { useEffect } from "react";
-import { ModalDialog, toastr, Text, Button } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components/button";
+import { Text } from "@docspace/shared/components/text";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { toastr } from "@docspace/shared/components/toast";
 import { StyledDeleteDialog } from "./StyledDeleteDialog";
 
 import { withTranslation } from "react-i18next";
@@ -200,8 +203,8 @@ const DeleteDialogComponent = (props) => {
     isRoomDelete || isRecycleBinFolder
       ? t("EmptyTrashDialog:DeleteForeverTitle")
       : isPrivacyFolder || selection[0]?.providerKey
-      ? t("Common:Confirmation")
-      : moveToTrashTitle();
+        ? t("Common:Confirmation")
+        : moveToTrashTitle();
 
   const noteText = unsubscribe ? t("UnsubscribeNote") : moveToTrashNoteText();
 
@@ -209,10 +212,10 @@ const DeleteDialogComponent = (props) => {
     isRoomDelete || isRecycleBinFolder
       ? t("EmptyTrashDialog:DeleteForeverButton")
       : isPrivacyFolder || selection[0]?.providerKey
-      ? t("Common:OKButton")
-      : unsubscribe
-      ? t("UnsubscribeButton")
-      : t("MoveToTrashButton");
+        ? t("Common:OKButton")
+        : unsubscribe
+          ? t("UnsubscribeButton")
+          : t("MoveToTrashButton");
 
   const onDeleteAction = () => {
     if (isRoomDelete) onDeleteRoom();
@@ -290,8 +293,8 @@ export default inject(
       selection: removeMediaItem
         ? [removeMediaItem]
         : selection.length
-        ? selection
-        : [bufferSelection],
+          ? selection
+          : [bufferSelection],
       isLoading,
       visible,
       isPrivacyFolder,

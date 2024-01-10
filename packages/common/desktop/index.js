@@ -1,4 +1,4 @@
-import { toastr } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
 import isEmpty from "lodash/isEmpty";
 import omit from "lodash/omit";
 import { getEditorTheme } from "../utils";

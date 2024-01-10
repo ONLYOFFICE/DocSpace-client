@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 
 import styled, { css } from "styled-components";
 
-import { Text } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
 import { commonIconsStyles } from "@docspace/shared/utils";
 
 import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
@@ -11,7 +11,7 @@ import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg";
 
 import Loaders from "../Loaders";
 import { StyledAlertComponent } from "./StyledComponent";
-import { Link } from "@docspace/shared/components";
+import { Link } from "@docspace/shared/components/link";
 
 const StyledArrowRightIcon = styled(ArrowRightIcon)`
   margin: auto 0;

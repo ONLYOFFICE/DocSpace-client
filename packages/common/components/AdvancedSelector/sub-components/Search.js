@@ -1,6 +1,6 @@
 import React from "react";
 
-import { SearchInput } from "@docspace/shared/components";
+import { SearchInput } from "@docspace/shared/components/search-input";
 
 const Search = ({
   isDisabled,

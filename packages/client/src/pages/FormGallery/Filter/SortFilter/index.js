@@ -4,11 +4,11 @@ import { useState } from "react";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import SortReactSvgUrl from "PUBLIC_DIR/images/sort.react.svg?url";
-import { IconButton } from "@docspace/shared/components";
+import { IconButton } from "@docspace/shared/components/icon-button";
 import SortDesc from "PUBLIC_DIR/images/sort.desc.react.svg";
-import { Text } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
 import { isMobile } from "@docspace/shared/utils";
-import { Backdrop } from "@docspace/shared/components";
+import { Backdrop } from "@docspace/shared/components/backdrop";
 
 const SortFilter = ({ t, oformsFilter, sortOforms }) => {
   const [isOpen, setIsOpen] = useState(false);

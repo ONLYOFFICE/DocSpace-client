@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import { StyledUser } from "../../styles/members";
-import { Avatar } from "@docspace/shared/components";
-import { ComboBox } from "@docspace/shared/components";
+import { Avatar } from "@docspace/shared/components/avatar";
+import { ComboBox } from "@docspace/shared/components/combobox";
 import DefaultUserPhotoUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
-import { toastr } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
 import { isMobileOnly, isMobile } from "react-device-detect";
 import { decode } from "he";
 import { filterUserRoleOptions } from "SRC_DIR/helpers/utils";
 import { getUserRole } from "@docspace/common/utils";
-import { Text } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
 import EmailPlusReactSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
 import { StyledUserTypeHeader } from "../../styles/members";
-import { IconButton } from "@docspace/shared/components";
+import { IconButton } from "@docspace/shared/components/icon-button";
 
 const User = ({
   t,
@@ -180,10 +180,10 @@ const User = ({
       option.key === "owner"
         ? "admin"
         : option.key === "roomAdmin"
-        ? "manager"
-        : option.key === "collaborator"
-        ? "collaborator"
-        : "user";
+          ? "manager"
+          : option.key === "collaborator"
+            ? "collaborator"
+            : "user";
 
     const successCallback = () => {
       updateRole(option);

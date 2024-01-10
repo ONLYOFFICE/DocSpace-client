@@ -7,13 +7,11 @@ import Loaders from "@docspace/common/components/Loaders";
 import { FolderType, RoomsType } from "@docspace/common/constants";
 import { DeviceType } from "@docspace/common/constants";
 
-import {
-  Aside,
-  Backdrop,
-  Selector,
-  Portal,
-  toastr,
-} from "@docspace/shared/components";
+import { Selector } from "@docspace/shared/components/selector";
+import { Aside } from "@docspace/shared/components/aside";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Portal } from "@docspace/shared/components/portal";
+import { toastr } from "@docspace/shared/components/toast";
 
 import EmptyScreenFilterAltSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt.svg?url";
 import EmptyScreenFilterAltDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt_dark.svg?url";
@@ -679,19 +677,19 @@ export default inject(
         ? isRestoreAll
           ? filesList
           : selection.length > 0 && selection?.[0] != null
-          ? selection
-          : bufferSelection != null
-          ? [bufferSelection]
-          : infoPanelIsVisible && infoPanelSelection != null
-          ? [infoPanelSelection]
-          : []
+            ? selection
+            : bufferSelection != null
+              ? [bufferSelection]
+              : infoPanelIsVisible && infoPanelSelection != null
+                ? [infoPanelSelection]
+                : []
         : [];
 
     const selectionsWithoutEditing = isRestoreAll
       ? filesList
       : isCopy
-      ? selections
-      : selections.filter((f: any) => f && !f?.isEditing);
+        ? selections
+        : selections.filter((f: any) => f && !f?.isEditing);
 
     const disabledItems: any[] = [];
 
@@ -707,11 +705,11 @@ export default inject(
     const fromFolderId = id
       ? id
       : rootFolderType === FolderType.Archive ||
-        rootFolderType === FolderType.TRASH
-      ? undefined
-      : selectedId === selectionsWithoutEditing[0]?.id
-      ? parentId
-      : selectedId;
+          rootFolderType === FolderType.TRASH
+        ? undefined
+        : selectedId === selectionsWithoutEditing[0]?.id
+          ? parentId
+          : selectedId;
 
     const currentFolderId =
       sessionPath && (isMove || isCopy || isRestore || isRestoreAll)

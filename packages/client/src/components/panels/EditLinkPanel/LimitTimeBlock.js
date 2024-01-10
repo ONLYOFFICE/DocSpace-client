@@ -1,6 +1,6 @@
 import React from "react";
 import ToggleBlock from "./ToggleBlock";
-import { DateTimePicker } from "@docspace/shared/components";
+import { DateTimePicker } from "@docspace/shared/components/date-time-picker";
 
 const LimitTimeBlock = (props) => {
   const {

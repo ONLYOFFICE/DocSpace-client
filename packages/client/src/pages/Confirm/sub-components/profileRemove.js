@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 
 import { withTranslation, Trans } from "react-i18next";
-import { Text } from "@docspace/shared/components";
-import { Button } from "@docspace/shared/components";
-import { Link } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
+import { Link } from "@docspace/shared/components/link";
 import { inject, observer } from "mobx-react";
 import { deleteSelf } from "@docspace/common/api/people";
-import { toastr } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
 import { StyledPage, StyledBody, StyledContent } from "./StyledConfirm";
 import withLoader from "../withLoader";
-import { FormWrapper } from "@docspace/shared/components";
+import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import DocspaceLogo from "../../../DocspaceLogo";
 
 const ProfileRemoveForm = (props) => {

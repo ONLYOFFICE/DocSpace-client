@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
 
-import { ModalDialog, Button } from "@docspace/shared/components";
-
+import { Button } from "@docspace/shared/components/button";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import TagHandler from "./handlers/TagHandler";
 
 import SetRoomParams from "./sub-components/SetRoomParams";

@@ -5,7 +5,7 @@ Button is used for a action on a page.
 ### Usage
 
 ```js
-import { Button } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components/button";
 ```
 
 ```jsx

@@ -10,7 +10,7 @@ import {
   changeNotificationSubscription,
   getNotificationSubscription,
 } from "@docspace/common/api/settings";
-import { toastr } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
 const { Badges, RoomsActivity, DailyFeed, UsefulTips } = NotificationsType;
 class TargetUserStore {
   peopleStore = null;

@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
-import { DropDown } from "@docspace/shared/components";
-import { DropDownItem } from "@docspace/shared/components";
+import { DropDown } from "@docspace/shared/components/drop-down";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { Base } from "@docspace/shared/themes";
 import { mobile, tablet } from "@docspace/shared/utils";
 

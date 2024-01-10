@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { Heading } from "@docspace/shared/components";
-import Base from "@docspace/shared/themes/base";
+import { Heading } from "@docspace/shared/components/heading";
+import { Base } from "@docspace/shared/themes";
 import { NoUserSelect, tablet } from "@docspace/shared/utils";
 
 const size = {

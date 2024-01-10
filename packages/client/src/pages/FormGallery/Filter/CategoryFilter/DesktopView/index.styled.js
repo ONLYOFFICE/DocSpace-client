@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components";
 
-import { DropDown } from "@docspace/shared/components";
-import { DropDownItem } from "@docspace/shared/components";
-import { ComboBox } from "@docspace/shared/components";
+import { DropDown } from "@docspace/shared/components/drop-down";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { ComboBox } from "@docspace/shared/components/combobox";
 import { Base } from "@docspace/shared/themes";
 
 export const CategoryFilterWrapper = styled.div`

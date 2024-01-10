@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-import {
-  Button,
-  TextInput,
-  Text,
-  Textarea,
-  ModalDialog,
-  FieldContainer,
-} from "@docspace/shared/components";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { Button } from "@docspace/shared/components/button";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { Text } from "@docspace/shared/components/text";
+import { Textarea } from "@docspace/shared/components/textarea";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
 import { inject, observer } from "mobx-react";
 import { tablet } from "@docspace/shared/utils";

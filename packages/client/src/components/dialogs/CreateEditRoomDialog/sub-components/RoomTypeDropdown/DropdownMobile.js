@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import RoomType from "../RoomType";
 import { RoomsType } from "./../../../../../../../common/constants/index";
-import { Backdrop } from "@docspace/shared/components";
+import { Backdrop } from "@docspace/shared/components/backdrop";
 
 import { Base } from "@docspace/shared/themes";
 

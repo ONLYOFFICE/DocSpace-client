@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 
-import { Link } from "@docspace/shared/components";
+import { Link } from "@docspace/shared/components/link";
 
 import TileContent from "./sub-components/TileContent";
 import withContent from "../../../../../HOCs/withContent";

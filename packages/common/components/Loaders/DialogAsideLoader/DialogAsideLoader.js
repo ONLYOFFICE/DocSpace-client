@@ -1,8 +1,8 @@
 import React from "react";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import StyledDialogAsideLoader from "./StyledDialogAsideLoader";
-import { Aside } from "@docspace/shared/components";
-import { Backdrop } from "@docspace/shared/components";
+import { Aside } from "@docspace/shared/components/aside";
+import { Backdrop } from "@docspace/shared/components/backdrop";
 
 const DialogAsideLoader = ({
   isPanel,

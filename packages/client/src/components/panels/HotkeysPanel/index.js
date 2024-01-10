@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { Heading } from "@docspace/shared/components";
-import { Backdrop } from "@docspace/shared/components";
-import { Aside } from "@docspace/shared/components";
+import { Heading } from "@docspace/shared/components/heading";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Aside } from "@docspace/shared/components/aside";
 import { StyledHotkeysPanel, StyledScrollbar } from "./StyledHotkeys";
 import SelectionBlock from "./SelectionBlock";
 import MoveBlock from "./MoveBlock";

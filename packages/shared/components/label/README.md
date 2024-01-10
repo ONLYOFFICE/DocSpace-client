@@ -5,7 +5,7 @@ Component displays the field name in the form
 ### Usage
 
 ```js
-import { Label } from "@docspace/shared/components";
+import { Label } from "@docspace/shared/components/label";
 ```
 
 ```jsx

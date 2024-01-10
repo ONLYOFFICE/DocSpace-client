@@ -1,8 +1,8 @@
 import React from "react";
 import copy from "copy-to-clipboard";
 
-import { toastr } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
+import { Text } from "@docspace/shared/components/text";
 
 import { StyledInternalLink } from "./StyledSharingPanel";
 

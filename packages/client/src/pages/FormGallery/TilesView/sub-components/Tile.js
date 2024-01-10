@@ -1,9 +1,9 @@
 import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
-import { ContextMenuButton } from "@docspace/shared/components";
+import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import PropTypes from "prop-types";
-import { ContextMenu } from "@docspace/shared/components";
-import { Link } from "@docspace/shared/components";
+import { ContextMenu } from "@docspace/shared/components/context-menu";
+import { Link } from "@docspace/shared/components/link";
 import { withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 import { useNavigate } from "react-router-dom";
@@ -16,7 +16,7 @@ import {
   StyledOptionButton,
   StyledContextMenu,
 } from "../StyledTileView";
-import { Backdrop } from "@docspace/shared/components";
+import { Backdrop } from "@docspace/shared/components/backdrop";
 import { isMobile } from "@docspace/shared/utils";
 
 const Tile = ({

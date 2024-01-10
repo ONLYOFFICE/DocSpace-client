@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import { Loader } from "@docspace/shared/components";
+import { Loader } from "@docspace/shared/components/loader";
 import Section from "@docspace/common/components/Section";
 import { loginWithConfirmKey } from "@docspace/common/api/user";
 import { useSearchParams } from "react-router-dom";
 import { combineUrl } from "@docspace/common/utils";
-import { toastr } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
 import { frameCallEvent } from "@docspace/common/utils";
 
 const Auth = (props) => {

@@ -1,15 +1,12 @@
 import React, { memo } from "react";
 import PropTypes from "prop-types";
 
-import {
-  ModalDialog,
-  Button,
-  Text,
-  toastr,
-  CustomScrollbarsVirtualList,
-  Checkbox,
-  ToggleContent,
-} from "@docspace/shared/components";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Button } from "@docspace/shared/components/button";
+import { Text } from "@docspace/shared/components/text";
+import { toastr } from "@docspace/shared/components/toast";
+import { CustomScrollbarsVirtualList } from "@docspace/shared/components/scrollbar";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 
 import { FixedSizeList as List, areEqual } from "react-window";
 // import AutoSizer from "react-virtualized-auto-sizer";

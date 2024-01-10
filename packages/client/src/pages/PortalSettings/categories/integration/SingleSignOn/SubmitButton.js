@@ -2,7 +2,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { SaveCancelButtons } from "@docspace/shared/components";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
 import ResetConfirmationModal from "./sub-components/ResetConfirmationModal";
 

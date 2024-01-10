@@ -19,6 +19,7 @@ import {
   MODAL_DIALOG_HEADER_NAME,
 } from "./ModalDialog.constants";
 import { ModalDialogProps } from "./ModalDialog.types";
+import { ModalDialogType } from "./ModalDialog.enums";
 
 const Header = ({ children }: { children: React.ReactNode }) => null;
 Header.displayName = MODAL_DIALOG_HEADER_NAME;
@@ -41,7 +42,7 @@ const ModalDialog = ({
   isLarge,
   zIndex,
   className,
-  displayType,
+  displayType = ModalDialogType.modal,
   displayTypeDetailed,
   isLoading,
   autoMaxHeight,

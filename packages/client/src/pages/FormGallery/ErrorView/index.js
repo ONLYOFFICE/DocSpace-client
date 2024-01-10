@@ -1,4 +1,4 @@
-import { Button } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components/button";
 import * as Styled from "./index.styled";
 import ErrorImageSvgUrl from "PUBLIC_DIR/images/form-gallery-error.svg?url";
 import { isMobile as isMobileUtils } from "@docspace/shared/utils";

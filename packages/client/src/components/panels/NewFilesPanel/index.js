@@ -1,14 +1,14 @@
 import { useState, useEffect, useMemo } from "react";
-import { Backdrop } from "@docspace/shared/components";
-import { Loader } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
-import { Heading } from "@docspace/shared/components";
-import { Aside } from "@docspace/shared/components";
-import { Row } from "@docspace/shared/components";
-import { Button } from "@docspace/shared/components";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Loader } from "@docspace/shared/components/loader";
+import { Text } from "@docspace/shared/components/text";
+import { Heading } from "@docspace/shared/components/heading";
+import { Aside } from "@docspace/shared/components/aside";
+import { Row } from "@docspace/shared/components/row";
+import { Button } from "@docspace/shared/components/button";
 import { withTranslation } from "react-i18next";
-import { toastr } from "@docspace/shared/components";
-import { Portal } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
+import { Portal } from "@docspace/shared/components/portal";
 
 import { ReactSVG } from "react-svg";
 import {

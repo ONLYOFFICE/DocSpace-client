@@ -27,7 +27,7 @@ import {
 } from "@docspace/shared/utils";
 import { wrongPortalNameUrl } from "../constants";
 import { ARTICLE_ALERTS } from "@docspace/client/src/helpers/constants";
-import { toastr } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
 //import { getFromLocalStorage } from "@docspace/client/src/pages/PortalSettings/utils";
 
 const themes = {

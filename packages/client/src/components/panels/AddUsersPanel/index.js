@@ -3,10 +3,10 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import React, { useState, useEffect, useCallback } from "react";
 
-import { Aside } from "@docspace/shared/components";
-import { Backdrop } from "@docspace/shared/components";
-import { Selector } from "@docspace/shared/components";
-import { toastr } from "@docspace/shared/components";
+import { Aside } from "@docspace/shared/components/aside";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Selector } from "@docspace/shared/components/selector";
+import { toastr } from "@docspace/shared/components/toast";
 
 import { getUserRole } from "@docspace/common/utils";
 import Filter from "@docspace/common/api/people/filter";
@@ -43,8 +43,8 @@ const AddUsersPanel = ({
   const accessRight = defaultAccess
     ? defaultAccess
     : isEncrypted
-    ? ShareAccessRights.FullAccess
-    : ShareAccessRights.ReadOnly;
+      ? ShareAccessRights.FullAccess
+      : ShareAccessRights.ReadOnly;
 
   const onBackClick = () => onClose();
   const getFilterWithOutDisabledUser = useCallback(

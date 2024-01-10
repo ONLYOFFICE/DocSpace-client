@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useTransition, Suspense } from "react";
 import styled, { css } from "styled-components";
-import { Submenu } from "@docspace/shared/components";
+import { Submenu } from "@docspace/shared/components/submenu";
 
-import { Box } from "@docspace/shared/components";
+import { Box } from "@docspace/shared/components/box";
 import { inject, observer } from "mobx-react";
 import { combineUrl } from "@docspace/common/utils";
 import config from "PACKAGE_FILE";
@@ -20,7 +20,7 @@ import SSOLoader from "./sub-components/ssoLoader";
 import { WebhookConfigsLoader } from "./Webhooks/sub-components/Loaders";
 import { DeviceType } from "@docspace/common/constants";
 import PluginSDK from "./PluginSDK";
-import { Badge } from "@docspace/shared/components";
+import { Badge } from "@docspace/shared/components/badge";
 
 const StyledSubmenu = styled(Submenu)`
   .sticky {
@@ -128,8 +128,8 @@ const DeveloperToolsWrapper = (props) => {
           currentDeviceType === DeviceType.desktop
             ? 0
             : currentDeviceType === DeviceType.mobile
-            ? "53px"
-            : "61px"
+              ? "53px"
+              : "61px"
         }
       />
     </Suspense>

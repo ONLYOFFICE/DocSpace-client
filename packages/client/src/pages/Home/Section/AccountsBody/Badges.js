@@ -6,7 +6,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 import { PaymentsType, AccountLoginType } from "@docspace/common/constants";
 
-import { Badge } from "@docspace/shared/components";
+import { Badge } from "@docspace/shared/components/badge";
 import { commonIconsStyles } from "@docspace/shared/utils";
 
 import SendClockIcon from "PUBLIC_DIR/images/send.clock.react.svg";

@@ -1,12 +1,12 @@
 ﻿import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 import React from "react";
 import styled, { css } from "styled-components";
-import { Text } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
 import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { HelpButton, Link } from "@docspace/shared/components";
-import { Avatar } from "@docspace/shared/components";
-import { ColorTheme, ThemeId } from "@docspace/shared/components";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { Avatar } from "@docspace/shared/components/avatar";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 const StyledContainer = styled.div`
   display: flex;

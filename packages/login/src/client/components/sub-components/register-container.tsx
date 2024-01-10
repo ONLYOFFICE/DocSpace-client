@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Box } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
-import { toastr } from "@docspace/shared/components";
+import { Box } from "@docspace/shared/components/box";
+import { Text } from "@docspace/shared/components/text";
+import { toastr } from "@docspace/shared/components/toast";
 import RegisterModalDialog from "./register-modal-dialog";
 import styled from "styled-components";
 import { sendRegisterRequest } from "@docspace/common/api/settings";

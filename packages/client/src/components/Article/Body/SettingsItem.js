@@ -2,7 +2,7 @@
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { ArticleItem } from "@docspace/shared/components";
+import { ArticleItem } from "@docspace/shared/components/article-item";
 
 import CatalogSettingsReactSvgUrl from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
 

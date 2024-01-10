@@ -2,13 +2,11 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import {
-  ModalDialog,
-  FieldContainer,
-  TextInput,
-  Button,
-  toastr,
-} from "@docspace/shared/components";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { Button } from "@docspace/shared/components/button";
+import { toastr } from "@docspace/shared/components/toast";
 
 import { ChangeNameContainer } from "./StyledChangeName";
 

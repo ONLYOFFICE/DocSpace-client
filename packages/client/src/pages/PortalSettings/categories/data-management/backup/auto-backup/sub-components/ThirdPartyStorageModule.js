@@ -1,7 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { ComboBox } from "@docspace/shared/components";
+import { ComboBox } from "@docspace/shared/components/combobox";
 import { ThirdPartyStorages } from "@docspace/common/constants";
 import GoogleCloudStorage from "./storages/GoogleCloudStorage";
 import RackspaceStorage from "./storages/RackspaceStorage";

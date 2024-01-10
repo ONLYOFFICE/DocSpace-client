@@ -1,18 +1,18 @@
-import { Checkbox } from "@docspace/shared/components";
-import { ContextMenuButton } from "@docspace/shared/components";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import PropTypes from "prop-types";
 import React from "react";
 import { ReactSVG } from "react-svg";
 import styled, { css } from "styled-components";
-import { ContextMenu } from "@docspace/shared/components";
+import { ContextMenu } from "@docspace/shared/components/context-menu";
 import { tablet, isMobile as isMobileUtils } from "@docspace/shared/utils";
 import { isMobile } from "react-device-detect";
 import { withTheme } from "styled-components";
-import { Link } from "@docspace/shared/components";
-import { Loader } from "@docspace/shared/components";
+import { Link } from "@docspace/shared/components/link";
+import { Loader } from "@docspace/shared/components/loader";
 import { Base } from "@docspace/shared/themes";
-import { Tags } from "@docspace/shared/components";
-import { Tag } from "@docspace/shared/components";
+import { Tags } from "@docspace/shared/components/tags";
+import { Tag } from "@docspace/shared/components/tag";
 import { RoomsTypeTranslations } from "@docspace/common/constants";
 
 const svgLoader = () => <div style={{ width: "96px" }} />;
@@ -531,8 +531,8 @@ class Tile extends React.PureComponent {
     const icon = item.isPlugin
       ? item.fileTileIcon
       : thumbnail && !this.state.errorLoadSrc
-      ? thumbnail
-      : temporaryIcon;
+        ? thumbnail
+        : temporaryIcon;
 
     return (
       <Link type="page" onClick={thumbnailClick}>

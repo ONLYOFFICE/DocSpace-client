@@ -9,7 +9,7 @@ import DropBox from "./sub-components/drop-box";
 
 import { Consumer, DomHelpers } from "@docspace/shared/utils";
 
-import { Backdrop } from "@docspace/shared/components";
+import { Backdrop } from "@docspace/shared/components/backdrop";
 
 import { ReactSVG } from "react-svg";
 

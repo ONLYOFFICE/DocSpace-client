@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import { toastr } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
 import { isDesktop } from "@docspace/shared/utils";
 import FilesFilter from "@docspace/common/api/files/filter";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
@@ -162,8 +162,8 @@ class CreateEditRoomStore {
           selection.length > 0 && selection[0] != null
             ? selection
             : bufferSelection != null
-            ? [bufferSelection]
-            : [];
+              ? [bufferSelection]
+              : [];
 
         preparingDataForCopyingToRoom(room.id, selections, t);
       }

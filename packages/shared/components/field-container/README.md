@@ -5,7 +5,7 @@ Responsive form field container
 ### Usage
 
 ```js
-import { FieldContainer } from "@docspace/shared/components";
+import { FieldContainer } from "@docspace/shared/components/field-container";
 ```
 
 ```jsx

@@ -6,7 +6,7 @@ import { inject, observer } from "mobx-react";
 
 import { mobile } from "@docspace/shared/utils";
 
-import { MainButtonMobile } from "@docspace/shared/components";
+import { MainButtonMobile } from "@docspace/shared/components/main-button-mobile";
 
 const StyledMainButtonMobile = styled(MainButtonMobile)`
   position: fixed;

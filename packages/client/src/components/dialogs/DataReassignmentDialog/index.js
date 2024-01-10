@@ -3,8 +3,9 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import PeopleSelector from "@docspace/client/src/components/PeopleSelector";
-import { ModalDialog, Backdrop, toastr } from "@docspace/shared/components";
-
+import { toastr } from "@docspace/shared/components/toast";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Backdrop } from "@docspace/shared/components/backdrop";
 import { useNavigate } from "react-router-dom";
 
 import Body from "./sub-components/Body";

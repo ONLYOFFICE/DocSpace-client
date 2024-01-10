@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import ModalDialogContainer from "@docspace/client/src/components/dialogs/ModalDialogContainer";
-import { Text } from "@docspace/shared/components";
-import { Button } from "@docspace/shared/components";
-import { ModalDialog } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
-import { TextInput, Checkbox } from "@docspace/shared/components";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 import { useStore } from "SRC_DIR/store";
 import { validatePortalName } from "SRC_DIR/utils";
 

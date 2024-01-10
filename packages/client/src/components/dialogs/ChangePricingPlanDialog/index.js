@@ -2,7 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { useTranslation, Trans } from "react-i18next";
-import { Button, Text, ModalDialog } from "@docspace/shared/components";
+
+import { Button } from "@docspace/shared/components/button";
+import { Text } from "@docspace/shared/components/text";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
 import { inject, observer } from "mobx-react";
 import { getConvertedSize } from "@docspace/common/utils";

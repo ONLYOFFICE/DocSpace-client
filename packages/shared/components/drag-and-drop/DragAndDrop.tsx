@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
+import React from "react";
 import { useDropzone } from "react-dropzone";
 import getFilesFromEvent from "./get-files-from-event";
 
@@ -53,4 +54,4 @@ const DragAndDrop = (props: DragAndDropProps) => {
   );
 };
 
-export { DragAndDrop };
+export default DragAndDrop;

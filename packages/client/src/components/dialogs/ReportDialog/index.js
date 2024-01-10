@@ -6,15 +6,12 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import {
-  ModalDialog,
-  Text,
-  Button,
-  Textarea,
-  IconButton,
-  toastr,
-} from "@docspace/shared/components";
-
+import { Textarea } from "@docspace/shared/components/textarea";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { toastr } from "@docspace/shared/components/toast";
 import {
   getCrashReport,
   downloadJson,

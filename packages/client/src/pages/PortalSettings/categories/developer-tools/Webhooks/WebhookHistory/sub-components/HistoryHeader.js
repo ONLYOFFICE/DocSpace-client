@@ -8,19 +8,19 @@ import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import RetryIcon from "PUBLIC_DIR/images/refresh.react.svg?url";
 
 import Headline from "@docspace/common/components/Headline";
-import { IconButton } from "@docspace/shared/components";
+import { IconButton } from "@docspace/shared/components/icon-button";
 // import { Hint } from "../../styled-components";
 
 import { tablet, mobile, isTablet, isMobile } from "@docspace/shared/utils";
 
-import { TableGroupMenu } from "@docspace/shared/components";
-import { DropDownItem } from "@docspace/shared/components";
+import { TableGroupMenu } from "@docspace/shared/components/table";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 
-import { toastr } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 
-import { FloatingButton } from "@docspace/shared/components";
+import { FloatingButton } from "@docspace/shared/components/floating-button";
 
 import Base from "@docspace/shared/themes/base";
 

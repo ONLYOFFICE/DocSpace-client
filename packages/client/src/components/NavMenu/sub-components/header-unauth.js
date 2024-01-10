@@ -1,7 +1,7 @@
 ﻿import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { Box } from "@docspace/shared/components";
+import { Box } from "@docspace/shared/components/box";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { Base } from "@docspace/shared/themes";

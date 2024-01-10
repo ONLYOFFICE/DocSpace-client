@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { ModalDialog, Button, toastr } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Button } from "@docspace/shared/components/button";
 
 import { withTranslation } from "react-i18next";
 

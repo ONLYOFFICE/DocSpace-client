@@ -1,5 +1,6 @@
-import { Loader, Tooltip } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
+import { Loader } from "@docspace/shared/components/loader";
+import { Tooltip } from "@docspace/shared/components/tooltip";
+import { Text } from "@docspace/shared/components/text";
 import React, { useState } from "react";
 import { StyledText } from "./CellStyles";
 import { getFolderPath } from "@docspace/common/api/files";

@@ -4,8 +4,8 @@ import { inject, observer } from "mobx-react";
 
 import { Base } from "@docspace/shared/themes";
 
-import { Link } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
+import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
 
 import { useTranslation } from "react-i18next";
 

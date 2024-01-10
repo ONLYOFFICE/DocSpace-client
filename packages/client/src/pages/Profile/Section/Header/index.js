@@ -9,8 +9,8 @@ import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 
-import { IconButton } from "@docspace/shared/components";
-import { ContextMenuButton } from "@docspace/shared/components";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import Headline from "@docspace/common/components/Headline";
 import Loaders from "@docspace/common/components/Loaders";
 import { DeleteSelfProfileDialog } from "SRC_DIR/components/dialogs";

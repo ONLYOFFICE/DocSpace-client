@@ -2,8 +2,8 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { Trans, useTranslation } from "react-i18next";
 
-import { InfoBadge } from "@docspace/shared/components";
-import { Link } from "@docspace/shared/components";
+import { InfoBadge } from "@docspace/shared/components/info-badge";
+import { Link } from "@docspace/shared/components/link";
 
 import type BetaBadgeProps from "./BetaBadge.props";
 import { DeviceType } from "../../constants";

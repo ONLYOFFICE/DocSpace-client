@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { tablet } from "@docspace/shared/utils";
-import { ModalDialog } from "@docspace/shared/components";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
 const ModalDialogContainer = styled(ModalDialog)`
   .modal-dialog-aside-footer {

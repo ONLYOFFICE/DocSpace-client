@@ -2,20 +2,20 @@ import React from "react";
 import moment from "moment";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { RadioButton } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
+import { RadioButton } from "@docspace/shared/components/radio-button";
+import { Text } from "@docspace/shared/components/text";
 import {
   deleteBackupSchedule,
   getBackupSchedule,
   createBackupSchedule,
 } from "@docspace/common/api/portal";
-import { toastr } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
 import {
   BackupStorageType,
   AutoBackupPeriod,
   FolderType,
 } from "@docspace/common/constants";
-import { ToggleButton } from "@docspace/shared/components";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import {
   getBackupStorage,
   getStorageRegions,
@@ -27,9 +27,9 @@ import ThirdPartyStorageModule from "./sub-components/ThirdPartyStorageModule";
 //import { getThirdPartyCommonFolderTree } from "@docspace/common/api/files";
 import ButtonContainer from "./sub-components/ButtonContainer";
 import AutoBackupLoader from "@docspace/common/components/Loaders/AutoBackupLoader";
-import { FloatingButton } from "@docspace/shared/components";
-import { Badge } from "@docspace/shared/components";
-import { Link } from "@docspace/shared/components";
+import { FloatingButton } from "@docspace/shared/components/floating-button";
+import { Badge } from "@docspace/shared/components/badge";
+import { Link } from "@docspace/shared/components/link";
 import { getSettingsThirdParty } from "@docspace/common/api/files";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
@@ -294,8 +294,8 @@ class AutomaticBackup extends React.PureComponent {
       const storageType = isCheckedDocuments
         ? DocumentModuleType
         : isCheckedThirdParty
-        ? ResourcesModuleType
-        : StorageModuleType;
+          ? ResourcesModuleType
+          : StorageModuleType;
 
       const storageParams = getStorageParams(
         isCheckedThirdPartyStorage,

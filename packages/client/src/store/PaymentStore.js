@@ -5,7 +5,7 @@ import {
 } from "@docspace/common/api/settings";
 import { makeAutoObservable } from "mobx";
 import api from "@docspace/common/api";
-import { toastr } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
 import authStore from "@docspace/common/store/AuthStore";
 import { getPaymentLink } from "@docspace/common/api/portal";
 import axios from "axios";

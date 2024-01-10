@@ -1,7 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { Button } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components/button";
 
 import { StyledButtonComponent } from "../StyledComponent";
 

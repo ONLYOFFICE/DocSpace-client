@@ -5,7 +5,7 @@ Used to display empty screen page
 ### Usage
 
 ```js
-import { EmptyScreenContainer } from "@docspace/shared/components";
+import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 ```
 
 ```jsx

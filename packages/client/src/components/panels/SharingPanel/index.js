@@ -4,11 +4,11 @@ import { I18nextProvider } from "react-i18next";
 import { isMobileOnly } from "react-device-detect";
 import { withTranslation, Trans } from "react-i18next";
 
-import { Aside } from "@docspace/shared/components";
-import { Backdrop } from "@docspace/shared/components";
-import { toastr } from "@docspace/shared/components";
-import { ModalDialog } from "@docspace/shared/components";
-import { SaveCancelButtons } from "@docspace/shared/components";
+import { Aside } from "@docspace/shared/components/aside";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { toastr } from "@docspace/shared/components/toast";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
 import Loaders from "@docspace/common/components/Loaders";
 import { ShareAccessRights } from "@docspace/common/constants";

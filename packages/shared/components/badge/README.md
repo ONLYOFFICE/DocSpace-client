@@ -5,7 +5,7 @@ Used for buttons, numbers or status markers next to icons.
 ### Usage
 
 ```js
-import { Badge } from "@docspace/shared/components";
+import { Badge } from "@docspace/shared/components/badge";
 ```
 
 ```jsx

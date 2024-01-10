@@ -11,7 +11,7 @@ import { isMobile } from "@docspace/shared/utils";
 import { isMobileOnly } from "react-device-detect";
 import config from "PACKAGE_FILE";
 import { combineUrl } from "@docspace/common/utils";
-import { ArticleItem } from "@docspace/shared/components";
+import { ArticleItem } from "@docspace/shared/components/article-item";
 import withLoader from "../../../HOCs/withLoader";
 
 const departmentsIcon = DepartmentsGroupReactSvgUrl;

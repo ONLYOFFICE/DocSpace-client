@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import ExpanderDownIcon from "PUBLIC_DIR/images/expander-down.react.svg";
 import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg";
 
-import { Heading } from "@docspace/shared/components";
+import { Heading } from "@docspace/shared/components/heading";
 
 import { tablet, mobile, commonIconsStyles } from "@docspace/shared/utils";
 

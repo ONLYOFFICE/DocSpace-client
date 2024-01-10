@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled, { css, useTheme } from "styled-components";
 
 import { VariableSizeList } from "react-window";
-import { CustomScrollbarsVirtualList } from "@docspace/shared/components";
+import { CustomScrollbarsVirtualList } from "@docspace/shared/components/scrollbar";
 
 import ArrowButton from "./arrow-btn";
 import Text from "./text";

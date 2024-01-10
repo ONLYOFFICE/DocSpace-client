@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import moment from "moment-timezone";
 
-import { ModalDialog } from "@docspace/shared/components";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import styled, { css } from "styled-components";
 
-import { Button } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components/button";
 import DeliveryDatePicker from "./DeliveryDatePicker";
 import StatusPicker from "./StatusPicker";
 

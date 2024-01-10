@@ -6,7 +6,7 @@ import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 
 import Loaders from "@docspace/common/components/Loaders";
-import { Submenu } from "@docspace/shared/components";
+import { Submenu } from "@docspace/shared/components/submenu";
 
 import MainProfile from "./sub-components/main-profile";
 import LoginContent from "./sub-components/LoginContent";
@@ -84,8 +84,8 @@ const SectionBodyContent = (props) => {
           currentDeviceType === DeviceType.desktop
             ? 0
             : currentDeviceType === DeviceType.mobile
-            ? "53px"
-            : "61px"
+              ? "53px"
+              : "61px"
         }
       />
     </Wrapper>

@@ -2,7 +2,8 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { ModalDialog, Button } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components/button";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
 import { PluginComponents } from "SRC_DIR/helpers/plugins/constants";
 import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";

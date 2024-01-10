@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import Section from "../../../.storybook/decorators/section";
 import MediaViewer from ".";
-import { Button } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components/button";
 import withReadme from "storybook-readme/with-readme";
 import { withKnobs, boolean, text } from "@storybook/addon-knobs/react";
 import Readme from "./README.md";

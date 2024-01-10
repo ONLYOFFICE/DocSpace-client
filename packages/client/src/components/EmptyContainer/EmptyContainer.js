@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { EmptyScreenContainer } from "@docspace/shared/components";
+import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 
 import { classNames } from "@docspace/shared/utils";
 

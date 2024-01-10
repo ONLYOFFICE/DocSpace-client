@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Trans, withTranslation } from "react-i18next";
-import { Text } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { MainContainer } from "../StyledSecurity";
 import TfaSection from "./tfa";
@@ -14,7 +14,7 @@ import MobileView from "./mobileView";
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
 import { size } from "@docspace/shared/utils";
 import { inject, observer } from "mobx-react";
-import { Link } from "@docspace/shared/components";
+import { Link } from "@docspace/shared/components/link";
 import { DeviceType } from "@docspace/common/constants";
 
 const AccessPortal = (props) => {

@@ -5,7 +5,7 @@ import VersionRow from "./VersionRow";
 import { inject, observer } from "mobx-react";
 import { VariableSizeList as List, areEqual } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
-import { CustomScrollbarsVirtualList } from "@docspace/shared/components";
+import { CustomScrollbarsVirtualList } from "@docspace/shared/components/scrollbar";
 import { StyledBody, StyledVersionList } from "./StyledVersionHistory";
 class SectionBodyContent extends React.Component {
   constructor(props) {

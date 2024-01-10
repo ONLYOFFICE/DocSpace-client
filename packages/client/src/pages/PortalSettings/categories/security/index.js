@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Submenu } from "@docspace/shared/components";
+import { Submenu } from "@docspace/shared/components/submenu";
 import { useNavigate } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -88,8 +88,8 @@ const SecurityWrapper = (props) => {
         currentDeviceType === DeviceType.desktop
           ? 0
           : currentDeviceType === DeviceType.mobile
-          ? "53px"
-          : "61px"
+            ? "53px"
+            : "61px"
       }
     />
   );

@@ -2,9 +2,9 @@ import styled, { css } from "styled-components";
 
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
 
-import { RadioButtonGroup } from "@docspace/shared/components";
-import { HelpButton } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
+import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { Text } from "@docspace/shared/components/text";
 
 import { useTranslation } from "react-i18next";
 

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
-import { Text } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
 
 import DefaultIcon from "PUBLIC_DIR/images/default.react.svg";
 import RootIcon from "PUBLIC_DIR/images/root.react.svg";
@@ -12,7 +12,7 @@ import RootTabletIcon from "PUBLIC_DIR/images/root.tablet.react.svg";
 import { tablet, mobile } from "@docspace/shared/utils";
 import { Base } from "@docspace/shared/themes";
 
-import { ColorTheme, ThemeId } from "@docspace/shared/components";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { DeviceType } from "../../../constants";
 
 const StyledItem = styled.div`

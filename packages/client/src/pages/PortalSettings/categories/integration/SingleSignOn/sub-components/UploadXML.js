@@ -5,12 +5,12 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Button } from "@docspace/shared/components";
-import { FieldContainer } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components/button";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { Text } from "@docspace/shared/components/text";
 
 import SsoTextInput from "./SsoTextInput";
-import { FileInput } from "@docspace/shared/components";
+import { FileInput } from "@docspace/shared/components/file-input";
 import { Base } from "@docspace/shared/themes";
 import { mobile } from "@docspace/shared/utils";
 

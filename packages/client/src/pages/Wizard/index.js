@@ -4,20 +4,20 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/shared/components";
-import { FormWrapper } from "@docspace/shared/components";
-import { EmailInput } from "@docspace/shared/components";
-import { PasswordInput } from "@docspace/shared/components";
-import { IconButton } from "@docspace/shared/components";
-import { ComboBox } from "@docspace/shared/components";
-import { Link } from "@docspace/shared/components";
-import { Checkbox } from "@docspace/shared/components";
-import { Button } from "@docspace/shared/components";
-import { FieldContainer } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
+import { FormWrapper } from "@docspace/shared/components/form-wrapper";
+import { EmailInput } from "@docspace/shared/components/email-input";
+import { PasswordInput } from "@docspace/shared/components/password-input";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { ComboBox } from "@docspace/shared/components/combobox";
+import { Link } from "@docspace/shared/components/link";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Button } from "@docspace/shared/components/button";
+import { FieldContainer } from "@docspace/shared/components/field-container";
 import ErrorContainer from "@docspace/common/components/ErrorContainer";
-import { FileInput } from "@docspace/shared/components";
+import { FileInput } from "@docspace/shared/components/file-input";
 
-import { Loader } from "@docspace/shared/components";
+import { Loader } from "@docspace/shared/components/loader";
 
 import withCultureNames from "@docspace/common/hoc/withCultureNames";
 

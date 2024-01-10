@@ -1,10 +1,11 @@
 import { useRef } from "react";
 import { withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
-import { ContextMenu, ContextMenuButton } from "@docspace/shared/components";
+import { ContextMenu } from "@docspace/shared/components/context-menu";
+import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { inject } from "mobx-react";
 
-import { Text } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
 import { StyledTitle } from "../../styles/common";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";

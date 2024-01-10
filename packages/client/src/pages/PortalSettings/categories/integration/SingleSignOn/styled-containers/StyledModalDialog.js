@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { ModalDialog } from "@docspace/shared/components";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { mobile } from "@docspace/shared/utils";
 
 const StyledModalDialog = styled(ModalDialog)`

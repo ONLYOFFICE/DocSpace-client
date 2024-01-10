@@ -1,8 +1,9 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
-import { toastr, Link, Text } from "@docspace/shared/components";
-
+import { Text } from "@docspace/shared/components/text";
+import { toastr } from "@docspace/shared/components/toast";
+import { Link } from "@docspace/shared/components/link";
 import { StyledParam } from "../Params/StyledParam";
 import ToggleParam from "../Params/ToggleParam";
 import ThirdPartyComboBox from "./ThirdPartyComboBox";

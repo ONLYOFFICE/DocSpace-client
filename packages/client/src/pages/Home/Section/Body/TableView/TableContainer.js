@@ -7,8 +7,8 @@ import React, { useEffect, useRef, useCallback, useMemo } from "react";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { Base } from "@docspace/shared/themes";
-import { TableContainer } from "@docspace/shared/components";
-import { TableBody } from "@docspace/shared/components";
+import { TableContainer } from "@docspace/shared/components/table";
+import { TableBody } from "@docspace/shared/components/table";
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";

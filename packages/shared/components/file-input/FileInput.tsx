@@ -16,7 +16,7 @@ import { FileInputProps } from "./FileInput.types";
 
 const FileInputPure = ({
   onInput,
-  size,
+  size = InputSize.base,
   placeholder,
   isDisabled,
   scale,

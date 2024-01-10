@@ -5,7 +5,7 @@ Is a dropdown with any number of action
 ### Usage
 
 ```js
-import { DropDown } from "@docspace/shared/components";
+import { DropDown } from "@docspace/shared/components/drop-down";
 ```
 
 ```jsx

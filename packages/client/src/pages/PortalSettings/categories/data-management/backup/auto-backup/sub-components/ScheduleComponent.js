@@ -2,12 +2,12 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { ComboBox } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
+import { ComboBox } from "@docspace/shared/components/combobox";
+import { Text } from "@docspace/shared/components/text";
 import { StyledScheduleComponent } from "../../StyledBackup";
 import { AutoBackupPeriod } from "@docspace/common/constants";
 
-import { HelpButton } from "@docspace/shared/components";
+import { HelpButton } from "@docspace/shared/components/help-button";
 
 const { EveryWeekType, EveryMonthType } = AutoBackupPeriod;
 const ScheduleComponent = ({

@@ -3,7 +3,8 @@ import styled, { css } from "styled-components";
 
 import { LANGUAGE } from "@docspace/shared/constants";
 
-import { Text, Link } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
 import { getCorrectDate, getCookie } from "@docspace/shared/utils";
 
 import { PluginStatus } from "SRC_DIR/helpers/plugins/constants";

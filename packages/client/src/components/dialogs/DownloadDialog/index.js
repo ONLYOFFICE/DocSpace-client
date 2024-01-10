@@ -2,8 +2,9 @@ import React from "react";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { StyledDownloadDialog } from "./StyledDownloadDialog";
-import { Text, Button, ModalDialog } from "@docspace/shared/components";
-
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
 import DownloadContent from "./DownloadContent";
 
 class DownloadDialogComponent extends React.Component {

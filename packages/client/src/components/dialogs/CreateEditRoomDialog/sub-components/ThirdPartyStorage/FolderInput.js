@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-import { IconButton } from "@docspace/shared/components";
+import { IconButton } from "@docspace/shared/components/icon-button";
 import { Base } from "@docspace/shared/themes";
 
 import FilesSelector from "SRC_DIR/components/FilesSelector";

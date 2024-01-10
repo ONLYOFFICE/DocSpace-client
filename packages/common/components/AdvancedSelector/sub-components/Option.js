@@ -1,8 +1,8 @@
 import React from "react";
 
-import { Avatar } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
-import { Checkbox } from "@docspace/shared/components";
+import { Avatar } from "@docspace/shared/components/avatar";
+import { Text } from "@docspace/shared/components/text";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 import Loaders from "../../Loaders";
 
 const Option = ({

@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
-import { TextInput } from "@docspace/shared/components";
-import { HelpButton } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
-import { SelectorAddButton } from "@docspace/shared/components";
-import { SelectedItem } from "@docspace/shared/components";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { Text } from "@docspace/shared/components/text";
+import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
+import { SelectedItem } from "@docspace/shared/components/selected-item";
 import { tablet } from "@docspace/shared/utils";
 
 const CategoryHeader = styled.div`

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { Text, Checkbox, LinkWithDropdown } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { LinkWithDropdown } from "@docspace/shared/components/link-with-dropdown";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg";
 import { StyledDownloadContent } from "./StyledDownloadDialog";

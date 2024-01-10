@@ -2,7 +2,7 @@ import { inject } from "mobx-react";
 import { useState, useRef, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 
-import { SearchInput } from "@docspace/shared/components";
+import { SearchInput } from "@docspace/shared/components/search-input";
 
 const SearchFilter = ({ t, oformsFilter, filterOformsBySearch }) => {
   const [value, setValue] = useState(oformsFilter.search);

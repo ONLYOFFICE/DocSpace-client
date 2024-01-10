@@ -8,7 +8,7 @@ import {
   uploadXmlMetadata,
   validateCerts,
 } from "@docspace/common/api/settings";
-import { toastr } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
 import {
   BINDING_POST,
   BINDING_REDIRECT,

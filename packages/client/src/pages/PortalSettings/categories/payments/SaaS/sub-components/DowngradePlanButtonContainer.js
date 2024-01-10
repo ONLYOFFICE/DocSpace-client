@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
-import { Button } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components/button";
 import styled from "styled-components";
 import ChangePricingPlanDialog from "../../../../../../components/dialogs/ChangePricingPlanDialog";
 

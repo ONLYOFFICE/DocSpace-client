@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  ModalDialog,
-  Checkbox,
-  Button,
-  Box,
-  Text,
-} from "@docspace/shared/components";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Button } from "@docspace/shared/components/button";
+import { Box } from "@docspace/shared/components/box";
+import { Text } from "@docspace/shared/components/text";
 
 import ModalDialogContainer from "../ModalDialogContainer";
 

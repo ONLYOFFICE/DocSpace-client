@@ -1,10 +1,10 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import PanelReactSvgUrl from "PUBLIC_DIR/images/panel.react.svg?url";
-import { IconButton } from "@docspace/shared/components";
+import { IconButton } from "@docspace/shared/components/icon-button";
 import { tablet } from "@docspace/shared/utils";
 import { Base } from "@docspace/shared/themes";
-import { ColorTheme, ThemeId } from "@docspace/shared/components";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme)`
   align-self: center;

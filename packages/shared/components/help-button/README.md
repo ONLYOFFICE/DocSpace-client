@@ -5,7 +5,7 @@ HelpButton is used for a action on a page
 ### Usage
 
 ```js
-import { HelpButton } from "@docspace/shared/components";
+import { HelpButton } from "@docspace/shared/components/help-button";
 ```
 
 ```jsx

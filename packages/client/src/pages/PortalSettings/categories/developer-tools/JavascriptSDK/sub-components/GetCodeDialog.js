@@ -1,9 +1,9 @@
 import React from "react";
 import copy from "copy-to-clipboard";
-import { ModalDialog } from "@docspace/shared/components";
-import { Textarea } from "@docspace/shared/components";
-import { Button } from "@docspace/shared/components";
-import { toastr } from "@docspace/shared/components";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Textarea } from "@docspace/shared/components/textarea";
+import { Button } from "@docspace/shared/components/button";
+import { toastr } from "@docspace/shared/components/toast";
 import styled from "styled-components";
 
 const StyledTextarea = styled(Textarea).attrs(({ theme }) => ({

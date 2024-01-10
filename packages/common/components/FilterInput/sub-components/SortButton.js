@@ -2,18 +2,18 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
 
-import { ComboBox } from "@docspace/shared/components";
-import { DropDownItem } from "@docspace/shared/components";
-import { IconButton } from "@docspace/shared/components";
-import { ViewSelector } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
+import { ComboBox } from "@docspace/shared/components/combobox";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { ViewSelector } from "@docspace/shared/components/view-selector";
+import { Text } from "@docspace/shared/components/text";
 
 import { isMobile, mobile } from "@docspace/shared/utils";
 import { Base } from "@docspace/shared/themes";
 
 import SortDesc from "PUBLIC_DIR/images/sort.desc.react.svg";
 import SortReactSvgUrl from "PUBLIC_DIR/images/sort.react.svg?url";
-import { Backdrop } from "@docspace/shared/components";
+import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Events } from "../../../constants";
 
 const selectedViewIcon = css`

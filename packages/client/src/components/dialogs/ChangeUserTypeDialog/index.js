@@ -1,6 +1,8 @@
 import React from "react";
-import { Text, Button, ModalDialog } from "@docspace/shared/components";
 
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { withTranslation, Trans } from "react-i18next";
 
 const ChangeUserTypeDialog = ({

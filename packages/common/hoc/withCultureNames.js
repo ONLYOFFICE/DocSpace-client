@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { Loader } from "@docspace/shared/components";
+import { Loader } from "@docspace/shared/components/loader";
 import { flagsIcons } from "../utils/image-flags";
 import { isBetaLanguage } from "../utils";
 

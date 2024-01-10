@@ -55,6 +55,7 @@ import { getOAuthToken } from "@docspace/common/utils";
 import api from "@docspace/common/api";
 import { FolderType } from "@docspace/common/constants";
 import FilesFilter from "@docspace/common/api/files/filter";
+import { getFileLink } from "@docspace/common/api/files";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -314,8 +315,22 @@ class ContextOptionsStore {
     toastr.success(t("Translations:LinkCopySuccess"));
   };
 
-  onCopyLink = (item, t) => {
+  onCopyLink = async (item, t) => {
+    const { shared, navigationPath, canCopyPublicLink } =
+      this.selectedFolderStore;
+
     const { href } = item;
+    const sharedItem = navigationPath.find((r) => r.shared);
+
+    const isShared =
+      (sharedItem && sharedItem.canCopyPublicLink) ||
+      (shared && canCopyPublicLink);
+
+    if (isShared && !item.isFolder) {
+      const fileLinkData = await getFileLink(item.id);
+      copy(fileLinkData.sharedTo.shareLink);
+      return toastr.success(t("Translations:LinkCopySuccess"));
+    }
 
     if (href) {
       copy(href);
@@ -430,9 +445,12 @@ class ContextOptionsStore {
     this.dialogsStore.setDownloadDialogVisible(true);
   };
 
-  onClickCreateRoom = () => {
+  onClickCreateRoom = (item) => {
     this.filesActionsStore.setProcessCreatingRoomFromData(true);
     const event = new Event(Events.ROOM_CREATE);
+    if (item && item.isFolder) {
+      event.title = item.title;
+    }
     window.dispatchEvent(event);
   };
 
@@ -1111,6 +1129,9 @@ class ContextOptionsStore {
     );
 
     const withOpen = item.id !== this.selectedFolderStore.id;
+    const isPublicRoomType =
+      item.roomType === RoomsType.PublicRoom ||
+      item.roomType === RoomsType.CustomRoom;
 
     const optionsModel = [
       {
@@ -1224,9 +1245,10 @@ class ContextOptionsStore {
         icon: InvitationLinkReactSvgUrl,
         onClick: () => this.onCopyLink(item, t),
         disabled:
-          (item.roomType === RoomsType.PublicRoom ||
-            item.roomType === RoomsType.CustomRoom) &&
-          !this.treeFoldersStore.isArchiveFolder,
+          (isPublicRoomType &&
+            item.canCopyPublicLink &&
+            !this.treeFoldersStore.isArchiveFolder) ||
+          this.publicRoomStore.isPublicRoom,
       },
       {
         id: "option_copy-external-link",
@@ -1236,8 +1258,8 @@ class ContextOptionsStore {
         disabled:
           this.publicRoomStore.isPublicRoom ||
           this.treeFoldersStore.isArchiveFolder ||
-          (item.roomType !== RoomsType.PublicRoom &&
-            item.roomType !== RoomsType.CustomRoom),
+          !item.canCopyPublicLink ||
+          !isPublicRoomType,
         onClick: async () => {
           const primaryLink = await this.filesStore.getPrimaryLink(item.id);
 
@@ -1354,7 +1376,7 @@ class ContextOptionsStore {
         key: "create-room",
         label: t("Files:CreateRoom"),
         icon: CatalogRoomsReactSvgUrl,
-        onClick: this.onClickCreateRoom,
+        onClick: () => this.onClickCreateRoom(item),
         disabled: this.selectedFolderStore.rootFolderType !== FolderType.USER,
       },
       {
@@ -1672,7 +1694,7 @@ class ContextOptionsStore {
         label: t("Translations:DownloadAs"),
         icon: DownloadAsReactSvgUrl,
         onClick: this.onClickDownloadAs,
-        disabled: !hasDownloadAccess || this.publicRoomStore.isPublicRoom,
+        disabled: !hasDownloadAccess,
       },
       {
         key: "move-to",

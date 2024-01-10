@@ -1,3 +1,14 @@
 {
-  "TemplateInfo": "Informácie o šablóne"
+  "Categories": "Kategórie",
+  "EmptyFormGalleryScreenDescription": "Neboli nájdené žiadne výsledky zodpovedajúce vašej požiadavke",
+  "ErrorViewDescription": "Prosím, skúste to znova neskôr",
+  "ErrorViewHeader": "Galéria formulárov je dočasne nedostupná",
+  "SelectForm": "Vyberte formulár",
+  "SubmitToGalleryBlockBody": "Pošlite svoje šablóny, aby ste ich mohli zdieľať s komunitou ONLYOFFICE.",
+  "SubmitToGalleryBlockHeader": "Galéria formulárov ONLYOFFICE",
+  "SubmitToGalleryDialogGuideInfo": "V našej <1>guide</1> sa dozviete, ako vytvoriť dokonalé formuláre a zvýšiť svoju šancu na schválenie.",
+  "SubmitToGalleryDialogMainInfo": "Odošlite svoj formulár do verejnej galérie a umožnite ostatným, používať ho v ich práci. Po tom, ako formulár bude skalený moderátormi, budete informovaní a odmenení za svoj vklad.",
+  "SuggestChanges": "Navrhnúť zmeny",
+  "TemplateInfo": "Informácie o šablóne",
+  "ViewAllTemplates": "Zobraziť všetky šablóny"
 }

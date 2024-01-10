@@ -96,7 +96,20 @@ Tooltip.propTypes = {
   /** Used as HTML id property  */
   id: PropTypes.string,
   /** Global tooltip placement */
-  place: PropTypes.oneOf(["top", "right", "bottom", "left"]),
+  place: PropTypes.oneOf([
+    "top",
+    "top-start",
+    "top-end",
+    "right",
+    "right-start",
+    "right-end",
+    "bottom",
+    "bottom-start",
+    "bottom-end",
+    "left",
+    "left-start",
+    "left-end",
+  ]),
   /** Sets a callback function that generates the tip content dynamically */
   getContent: PropTypes.func,
   /** A function to be called after the tooltip is hidden */

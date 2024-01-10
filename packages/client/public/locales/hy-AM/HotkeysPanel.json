@@ -5,6 +5,7 @@
   "HotkeysChangeView": "Անցում ցանցի և ցանկի տեսքի միջև",
   "HotkeysClearAll": "Մաքրել բոլոր ընտրվածքները",
   "HotkeysClose": "Փակել/հետարկել գործողությունը",
+  "HotkeysCopySelected": "Պատճենեք ընտրված տարրերը սեղմատախտակում",
   "HotkeysCreateDocument": "Ստեղծել փաստաթուղթ",
   "HotkeysCreateFolder": "Ստեղծել պանակ",
   "HotkeysCreateForm": "Ստեղծել դատարկ ձևանմուշ",
@@ -12,6 +13,7 @@
   "HotkeysCreatePresentation": "Ստեղծել ներկայացում",
   "HotkeysCreateSpreadsheet": "Ստեղծել աղյուսակաթերթ",
   "HotkeysCreatingObjects": "Միավորների ստեղծում",
+  "HotkeysCutSelected": "Կտրեք ընտրված տարրերը սեղմատախտակի վրա",
   "HotkeysEnterKey": "Մուտքագրել",
   "HotkeysExtendSelectionDown": "Ընդարձակում է ընտրարկումը վար",
   "HotkeysExtendSelectionLeft": "Ընդարձակում է ընտրարկումը ձախ",
@@ -25,6 +27,7 @@
   "HotkeysMoveUp": "Տեղափոխել վեր՝՝ առանց ընտրությունը փոխելու",
   "HotkeysNavigation": "Նավիգացիա",
   "HotkeysOpen": "Բացել ընտրված միավորը/հաստատել գործողությունը",
+  "HotkeysPasteSelected": "Տեղադրեք ընտրված տարրերը սեղմատախտակից",
   "HotkeysPlayPause": "Նվագարկել/Դադարեցնել",
   "HotkeysRedoLastUndoneAction": "Վերարկել վերջին չեղարկված գործողությունը",
   "HotkeysRemove": "Հեռացնել ընտրված միավորները",
@@ -39,5 +42,7 @@
   "HotkeysSpaceKey": "Բացատ",
   "HotkeysUndoLastAction": "Հետարկել վերջին գործողությունը",
   "HotkeysUploadFile": "Վերբեռնել ֆայլը",
-  "HotkeysUploadingObjects": "Միավորների վերբեռնում"
+  "HotkeysUploadingObjects": "Միավորների վերբեռնում",
+  "HotkeysZoomIn": "Մեծացնել",
+  "HotkeysZoomOut": "Փոքրացնել"
 }

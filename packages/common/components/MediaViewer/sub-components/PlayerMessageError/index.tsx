@@ -1,5 +1,4 @@
 import React from "react";
-import { isMobile } from "react-device-detect";
 import { ReactSVG } from "react-svg";
 
 import Text from "@docspace/components/text";
@@ -11,8 +10,9 @@ import {
 import { isSeparator } from "../../helpers";
 
 function PlayerMessageError({
-  errorTitle,
   model,
+  isMobile,
+  errorTitle,
   onMaskClick,
 }: PlayerMessageErrorProps) {
   const items = !isMobile

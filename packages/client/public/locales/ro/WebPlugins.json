@@ -1,1 +1,18 @@
-{}
+{
+  "DeletePlugin": "Ștergere plugin",
+  "DeletePluginDescription": "Acest plugin nu va mai fi disponibil pentru utilizatorii spațiului DocSpace. Sigur doriți să continuați?",
+  "DeletePluginTitle": "Doriți să ștergeți pluginul?",
+  "Description": "Puteți adăuga plugin-uri pentru a extinde funcționalitatea spațiului DocSpace și pentru a adăuga caracteristici suplimentare. Faceți clic pe Încărcare plugin și alegeți arhivă Zip care cuprinde plugin-ul.",
+  "ExpandFunctionality": "Extinderea funcționalității cu ajutorul kit-ului de dezvoltare a plugin-urilor",
+  "GoToRepo": "Acces depozit",
+  "Metadata": "Metadată",
+  "NeedSettings": "Trebuie să definiți setările",
+  "NoPlugins": "Niciun plugin nu a fost adăugat",
+  "NotNeedSettings": "Nu trebuie să definiți setările",
+  "PluginSamples": "Exemple de plugin-uri",
+  "PluginSDK": "Kit de dezvoltare a plugin-urilor",
+  "PluginSDKDescription": "Cu ajutorul kit-ului de dezvoltare a pligin-urilor puteți extinde funcționalitatea spațiului DocSpace, puteți conecta servicii terțe sau puteți îmbunătăți experiența utilizatorilor. Aici puteți găsi exemple de plugin-uri cu codul sursă disponibil pe GitHub. ",
+  "PluginSDKInstruction": "Faceți clic pe butonul pentru a vedea instrucțiunile detaliate de creare a plugin-urilor proprii ale dvs.",
+  "PluginsHelp": "Plugin-uri vă permit extinderea funcţionalităţii spațiului DocSpace",
+  "UploadPlugin": "Încărcare plugin"
+}

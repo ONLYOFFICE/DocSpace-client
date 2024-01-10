@@ -15,6 +15,7 @@ import {
   moveToFolder,
   fileCopyAs,
   getFolder,
+  checkIsFileExist,
 } from "@docspace/common/api/files";
 import toastr from "@docspace/components/toast/toastr";
 
@@ -25,6 +26,10 @@ import {
 import { combineUrl } from "@docspace/common/utils";
 import config from "PACKAGE_FILE";
 import { getUnexpectedErrorText } from "SRC_DIR/helpers/filesUtils";
+import {
+  getCategoryTypeByFolderType,
+  getCategoryUrl,
+} from "SRC_DIR/helpers/utils";
 
 const UPLOAD_LIMIT_AT_ONCE = 5;
 
@@ -652,9 +657,39 @@ class UploadDataStore {
     this.tempConversionFiles = [];
   };
 
+  setConflictDialogData = (conflicts, operationData) => {
+    this.dialogsStore.setConflictResolveDialogItems(conflicts);
+    this.dialogsStore.setConflictResolveDialogData(operationData);
+    this.dialogsStore.setConflictResolveDialogVisible(true);
+  };
+
+  handleFilesUpload = (newUploadData, t, createNewIfExist) => {
+    this.uploadedFilesHistory = newUploadData.files;
+    this.setUploadData(newUploadData);
+    this.startUploadFiles(t, createNewIfExist);
+  }
+
+  handleUploadConflicts = async (t, toFolderId, newUploadData) => {
+    const filesArray = newUploadData.files.map((fileInfo) => fileInfo.file.name);
+    let conflicts = await checkIsFileExist(toFolderId, filesArray);
+    const folderInfo = await getFolderInfo(toFolderId);
+
+    conflicts = conflicts.map((fileTitle) => ({ title: fileTitle }));
+
+    if (conflicts.length > 0) {
+      this.setConflictDialogData(conflicts, {
+        isUploadConflict: true,
+        newUploadData,
+        folderTitle: folderInfo.title,
+      });
+    } else {
+      this.handleFilesUpload(newUploadData, t, true);
+    }
+  };
+
   startUpload = (uploadFiles, folderId, t) => {
     const { canConvert } = this.settingsStore;
-
+    
     const toFolderId = folderId ? folderId : this.selectedFolderStore.id;
 
     if (this.uploaded) {
@@ -769,8 +804,7 @@ class UploadDataStore {
     const isParallel = this.isParallel ? true : this.uploaded;
 
     if (isParallel && countUploadingFiles) {
-      this.setUploadData(newUploadData);
-      this.startUploadFiles(t);
+      this.handleUploadConflicts(t, toFolderId, newUploadData);
     }
   };
 
@@ -992,7 +1026,7 @@ class UploadDataStore {
     }
   };
 
-  startUploadFiles = async (t) => {
+  startUploadFiles = async (t, createNewIfExist = true) => {
     let files = this.files;
 
     if (files.length === 0 || this.filesSize === 0) {
@@ -1024,7 +1058,7 @@ class UploadDataStore {
           );
           if (fileIndex !== -1) {
             this.currentUploadNumber += 1;
-            this.startSessionFunc(fileIndex, t);
+            this.startSessionFunc(fileIndex, t, createNewIfExist);
           }
         }
       }
@@ -1033,7 +1067,7 @@ class UploadDataStore {
       let index = 0;
       let len = files.length;
       while (index < len) {
-        await this.startSessionFunc(index, t);
+        await this.startSessionFunc(index, t, createNewIfExist);
         index++;
 
         files = this.files;
@@ -1061,7 +1095,7 @@ class UploadDataStore {
     }
   };
 
-  startSessionFunc = (indexOfFile, t) => {
+  startSessionFunc = (indexOfFile, t, createNewIfExist = true) => {
     // console.log("START UPLOAD SESSION FUNC");
 
     if (!this.uploaded && this.files.length === 0) {
@@ -1103,7 +1137,8 @@ class UploadDataStore {
       fileSize,
       relativePath,
       file.encrypted,
-      file.lastModifiedDate
+      file.lastModifiedDate,
+      createNewIfExist
     )
       .then((res) => {
         const location = res.data.location;
@@ -1192,7 +1227,7 @@ class UploadDataStore {
           const nextFileIndex = this.files.findIndex((f) => !f.inAction);
 
           if (nextFileIndex !== -1) {
-            this.startSessionFunc(nextFileIndex, t);
+            this.startSessionFunc(nextFileIndex, t, createNewIfExist);
           }
         }
 
@@ -1527,6 +1562,26 @@ class UploadDataStore {
     return operationItem;
   };
 
+  navigateToNewFolderLocation = async (folderId) => {
+    const { filter } = this.filesStore;
+
+    filter.folder = folderId;
+
+    try {
+      const { rootFolderType, parentId } = await getFolderInfo(folderId);
+      const path = getCategoryUrl(
+        getCategoryTypeByFolderType(rootFolderType, parentId),
+        folderId
+      );
+
+      window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`, {
+        replace: true,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   moveToCopyTo = (destFolderId, pbData, isCopy, fileIds, folderIds) => {
     const {
       fetchFiles,
@@ -1539,6 +1594,7 @@ class UploadDataStore {
     const { clearSecondaryProgressData, setSecondaryProgressBarData, label } =
       this.secondaryProgressDataStore;
     const { withPaging } = this.authStore.settingsStore;
+    const isMovingCurrentFolder = !isCopy && this.dialogsStore.isFolderActions;
 
     let receivedFolder = destFolderId;
     let updatedFolder = this.selectedFolderStore.id;
@@ -1558,6 +1614,8 @@ class UploadDataStore {
           () => clearSecondaryProgressData(pbData.operationId),
           TIMEOUT
         );
+        isMovingCurrentFolder &&
+          this.navigateToNewFolderLocation(this.selectedFolderStore.id);
         this.dialogsStore.setIsFolderActions(false);
         return;
       }
@@ -1578,6 +1636,8 @@ class UploadDataStore {
           () => clearSecondaryProgressData(pbData.operationId),
           TIMEOUT
         );
+        isMovingCurrentFolder &&
+          this.navigateToNewFolderLocation(this.selectedFolderStore.id);
         this.dialogsStore.setIsFolderActions(false);
       });
     } else {

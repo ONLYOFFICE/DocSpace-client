@@ -59,6 +59,7 @@ const PeopleSelector = ({
   withFooterCheckbox,
   footerCheckboxLabel,
   isChecked,
+  setIsChecked,
   filterUserId,
 }) => {
   const [itemsList, setItemsList] = useState(items);
@@ -104,6 +105,7 @@ const PeopleSelector = ({
       isAdmin,
       isVisitor,
       isCollaborator,
+      hasAvatar,
     };
   };
 
@@ -236,7 +238,7 @@ const PeopleSelector = ({
         searchEmptyScreenHeader || t("People:NotFoundUsers")
       }
       searchEmptyScreenDescription={
-        searchEmptyScreenDescription || t("SearchEmptyDescription")
+        searchEmptyScreenDescription || t("People:NotFoundUsersDescription")
       }
       hasNextPage={hasNextPage}
       isNextPageLoading={isNextPageLoading}
@@ -246,6 +248,7 @@ const PeopleSelector = ({
       withFooterCheckbox={withFooterCheckbox}
       footerCheckboxLabel={footerCheckboxLabel}
       isChecked={isChecked}
+      setIsChecked={setIsChecked}
       searchLoader={<Loaders.SelectorSearchLoader />}
       isSearchLoading={isLoading}
       rowLoader={<Loaders.SelectorRowLoader isUser isContainer={isLoading} />}

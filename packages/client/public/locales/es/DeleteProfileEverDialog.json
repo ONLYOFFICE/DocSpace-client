@@ -1,5 +1,14 @@
 {
-  "DeleteUser": "Eliminar el usuario",
+  "ActionCannotBeUndone": "Los usuarios desactivados seleccionados se eliminarán de DocSpace. Esta acción no se puede deshacer.",
+  "CannotReassignFiles": "Si elimina varios usuarios a la vez, no podrá reasignar sus archivos a otros usuarios.",
   "DeleteGroupUsersSuccessMessage": "Los usuarios se han eliminado correctamente.",
-  "SuccessfullyDeleteUserInfoMessage": "El usuario se ha eliminado correctamente"
+  "DeleteMyDocumentsUser": "Todos los archivos y carpetas personales de la sección Mis documentos de este usuario se eliminarán de forma permanente.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Las salas creadas por este usuario y los documentos almacenados en estas salas se reasignarán automáticamente al administrador que realice la eliminación: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Reasigne los datos manualmente para elegir otro usuario de destino para la reasignación.",
+  "DeleteUser": "Eliminar el usuario",
+  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> se eliminará. Esta acción no se puede deshacer.",
+  "DeletingUsers": "Eliminando usuarios",
+  "PleaseNote": "Por favor, tenga en cuenta:",
+  "ReassignDataToAnotherUser": "Reasignar datos a otro usuario",
+  "SuccessfullyDeleteUserInfoMessage": "El usuario se ha eliminado correctamente",
+  "ToBeAbleToReassignData": "Para poder reasignar datos, elimine un usuario cada vez."
 }

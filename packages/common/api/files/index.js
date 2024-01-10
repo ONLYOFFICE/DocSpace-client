@@ -554,9 +554,17 @@ export function startUploadSession(
   fileSize,
   relativePath,
   encrypted,
-  createOn
+  createOn,
+  CreateNewIfExist
 ) {
-  const data = { fileName, fileSize, relativePath, encrypted, createOn };
+  const data = {
+    fileName,
+    fileSize,
+    relativePath,
+    encrypted,
+    createOn,
+    CreateNewIfExist,
+  };
   return request({
     method: "post",
     url: `/files/${folderId}/upload/create_session`,
@@ -1035,6 +1043,23 @@ export function changeDocumentServiceLocation(
       DocServiceUrl: docServiceUrl,
       DocServiceUrlInternal: internalUrl,
       DocServiceUrlPortal: portalUrl,
+    },
+  });
+}
+
+export function getFileLink(fileId) {
+  return request({
+    method: "get",
+    url: `/files/file/${fileId}/link`,
+  });
+}
+
+export function checkIsFileExist(folderId, fileTitles) {
+  return request({
+    method: "post",
+    url: `files/${folderId}/upload/check`,
+    data: {
+      filesTitle: fileTitles,
     },
   });
 }

@@ -23,6 +23,8 @@ class FilesTableHeader extends React.Component {
       columnStorageName,
       columnInfoPanelStorageName,
       isPublicRoom,
+      isFrame,
+      frameTableColumns,
       isDefaultRoomsQuotaSet,
       showStorageInfo,
     } = this.props;
@@ -249,13 +251,25 @@ class FilesTableHeader extends React.Component {
       defaultColumns.push(...columns);
     }
 
-    const columns = getColumns(defaultColumns);
+    let columns = getColumns(defaultColumns);
     const storageColumns = localStorage.getItem(this.props.tableStorageName);
     const splitColumns = storageColumns && storageColumns.split(",");
     const resetColumnsSize =
-      (splitColumns && splitColumns.length !== columns.length) || !splitColumns;
+      (splitColumns && splitColumns.length !== columns.length) ||
+      !splitColumns ||
+      isFrame;
 
     const tableColumns = columns.map((c) => c.enable && c.key);
+
+    if (isFrame && frameTableColumns) {
+      const frameTableArray = frameTableColumns.split(",");
+
+      columns = columns.map((col) => {
+        col.enable = frameTableArray.includes(col.key) ? true : false;
+        return col;
+      });
+    }
+
     this.setTableColumns(tableColumns);
     if (fromUpdate) {
       this.setState({
@@ -424,6 +438,7 @@ class FilesTableHeader extends React.Component {
       withPaging,
       tagRef,
       setHideColumns,
+      isFrame,
     } = this.props;
 
     const {
@@ -454,6 +469,7 @@ class FilesTableHeader extends React.Component {
         tagRef={tagRef}
         setHideColumns={setHideColumns}
         settingsTitle={t("Files:TableSettingsTitle")}
+        showSettings={!isFrame}
       />
     );
   }
@@ -490,7 +506,7 @@ export default inject(
     const isRooms = isRoomsFolder || isArchiveFolder;
     const withContent = canShare;
     const sortingVisible = !isRecentFolder;
-    const { withPaging } = auth.settingsStore;
+    const { withPaging, isFrame, frameConfig } = auth.settingsStore;
 
     const {
       tableStorageName,
@@ -575,6 +591,9 @@ export default inject(
       isTrashFolder,
       isPublicRoom,
       publicRoomKey,
+
+      isFrame,
+      frameTableColumns: frameConfig?.viewTableColumns,
       isDefaultRoomsQuotaSet,
       showStorageInfo,
     };

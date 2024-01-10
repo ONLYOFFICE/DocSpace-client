@@ -1,5 +1,14 @@
 {
-  "DeleteUser": "Gebruiker verwijderen",
+  "ActionCannotBeUndone": "De geselecteerde uitgeschakelde gebruikers worden verwijderd uit DocSpace. Deze actie kan niet ongedaan worden gemaakt.",
+  "CannotReassignFiles": "Als u meerdere gebruikers tegelijk verwijdert, kunt u hun bestanden niet opnieuw toewijzen aan andere gebruikers.",
   "DeleteGroupUsersSuccessMessage": "Gebruikers zijn met succes verwijderd.",
-  "SuccessfullyDeleteUserInfoMessage": "De gebruiker is met succes verwijderd"
+  "DeleteMyDocumentsUser": "Alle persoonlijke bestanden en mappen in Mijn documenten van deze gebruiker worden definitief verwijderd.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Kamers aangemaakt door deze gebruiker en documenten opgeslagen in deze kamers worden automatisch toegewezen aan een beheerder die gaat verwijderen: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Gegevens handmatig opnieuw toewijzen om een andere bestemmingsgebruiker te kiezen om opnieuw toe te wijzen.",
+  "DeleteUser": "Gebruiker verwijderen",
+  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> zal worden verwijderd. Deze actie kan niet ongedaan worden gemaakt.",
+  "DeletingUsers": "Gebruikers aan het verwijderen",
+  "PleaseNote": "Let op:",
+  "ReassignDataToAnotherUser": "Gegevens opnieuw toewijzen aan een andere gebruiker",
+  "SuccessfullyDeleteUserInfoMessage": "De gebruiker is met succes verwijderd",
+  "ToBeAbleToReassignData": "Verwijder één gebruiker per keer om gegevens opnieuw te kunnen toewijzen."
 }

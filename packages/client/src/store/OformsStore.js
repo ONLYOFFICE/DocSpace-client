@@ -34,6 +34,10 @@ class OformsStore {
   categoryTitles = [];
 
   oformLocales = null;
+  filterOformsByLocaleIsLoading = false;
+  categoryFilterLoaded = false;
+  languageFilterLoaded = false;
+  oformFilesLoaded = false;
 
   submitToGalleryTileIsVisible = !localStorage.getItem(
     "submitToGalleryTileIsHidden"
@@ -45,8 +49,13 @@ class OformsStore {
   }
 
   get defaultOformLocale() {
-    const userLocale = convertToLanguage(getCookie(LANGUAGE)) || "en";
-    return this.oformLocales?.includes(userLocale) ? userLocale : "en";
+    const userLocale =
+      getCookie(LANGUAGE) || this.authStore.userStore.user?.cultureName || "en";
+    const convertedLocale = convertToLanguage(userLocale);
+
+    return this.oformLocales?.includes(convertedLocale)
+      ? convertedLocale
+      : "en";
   }
 
   setOformFiles = (oformFiles) => (this.oformFiles = oformFiles);
@@ -70,6 +79,22 @@ class OformsStore {
 
   setOformLocales = (oformLocales) => (this.oformLocales = oformLocales);
 
+  setFilterOformsByLocaleIsLoading = (filterOformsByLocaleIsLoading) => {
+    this.filterOformsByLocaleIsLoading = filterOformsByLocaleIsLoading;
+  };
+
+  setCategoryFilterLoaded = (categoryFilterLoaded) => {
+    this.categoryFilterLoaded = categoryFilterLoaded;
+  };
+
+  setLanguageFilterLoaded = (languageFilterLoaded) => {
+    this.languageFilterLoaded = languageFilterLoaded;
+  };
+
+  setOformFilesLoaded = (oformFilesLoaded) => {
+    this.oformFilesLoaded = oformFilesLoaded;
+  };
+
   fetchOformLocales = async () => {
     const { uploadDomain, uploadDashboard } =
       this.authStore.settingsStore.formGallery;
@@ -78,9 +103,7 @@ class OformsStore {
 
     try {
       const fetchedLocales = await getOformLocales(url);
-      const localeKeys = fetchedLocales.map((locale) =>
-        convertToLanguage(locale.code)
-      );
+      const localeKeys = fetchedLocales.map((locale) => locale.code);
       this.setOformLocales(localeKeys);
     } catch (err) {
       this.setOformLocales([]);
@@ -259,6 +282,9 @@ class OformsStore {
 
   filterOformsByLocale = async (locale) => {
     if (!locale) return;
+
+    if (locale !== this.oformsFilter.locale)
+      this.setFilterOformsByLocaleIsLoading(true);
 
     this.currentCategory = null;
 

@@ -1,5 +1,6 @@
 {
   "DocumentsFileType": "문서",
+  "ErrorConnectionLost": "연결이 끊어졌습니다",
   "FileLocation": "파일 위치 열기",
   "FileName": "파일명",
   "ImageFileType": "이미지",

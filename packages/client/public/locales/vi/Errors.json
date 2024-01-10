@@ -1,8 +1,14 @@
 {
+  "AccessDenied": "Truy cập bị từ chối",
   "Error401Text": " Xin lỗi, hiện không thể truy cập tài nguyên.",
   "Error403Text": " Xin lỗi, truy cập bị từ chối.",
   "Error404Text": " Xin lỗi, không thể tìm thấy tài nguyên.",
+  "ErrorDeactivatedText": "DocSpace này đã bị vô hiệu hóa",
   "ErrorEmptyResponse": "Không có hồi đáp",
   "ErrorOfflineText": "Không tìm thấy kết nối internet",
-  "ErrorUnavailableText": "DocSpace không khả dụng"
+  "ErrorUnavailableText": "DocSpace không khả dụng",
+  "InvalidLink": "Liên kết không hợp lệ",
+  "LinkDoesNotExist": "Liên kết bạn đang cố gắng mở không tồn tại.",
+  "LinkHasExpired": "Liên kết bạn theo dõi đã hết hạn.",
+  "PortalRestriction": "Địa chỉ IP của bạn không được bao gồm trong danh sách các địa chỉ IP được phép truy cập DocSpace này. Hãy tắt VPN nếu nó được bật và tải lại trang hoặc sử dụng một địa chỉ IP khác để đăng nhập."
 }

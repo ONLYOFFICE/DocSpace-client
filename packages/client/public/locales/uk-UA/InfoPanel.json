@@ -1,9 +1,11 @@
 {
   "AccountsEmptyScreenText": "Див. інформацію про користувачів тут",
+  "Administration": "Адміністрування",
   "AndMoreLabel": "і ще <strong>{{count}}</strong>",
   "CreationDate": "Дата створення",
   "Data": "Дані",
   "DateModified": "Дата змінення",
+  "ExpectUsers": "Очікувати користувачів",
   "FeedCreateFileSeveral": "Файли додано",
   "FeedCreateFileSingle": "Файл створено",
   "FeedCreateFolderSeveral": "Папки додано",
@@ -26,7 +28,9 @@
   "FeedUpdateUser": "призначено роль {{role}}",
   "FileExtension": "Розширення файлу",
   "FilesEmptyScreenText": "Подробиці про файли та папки дивіться тут",
+  "GalleryEmptyScreenText": "Перегляньте деталі шаблону форми тут",
   "HistoryEmptyScreenText": "Тут буде показано історію активності",
+  "InfoBanner": "Список запрошених користувачів містить власника та/або адміністраторів цього DocSpace з повним доступом до всіх кімнат. Власнику та/або адміністратору не можна призначати інші права доступу. Після додавання до кімнати вони будуть сповіщені про всі зміни.",
   "ItemsSelected": "Вибрані елементи",
   "LastModifiedBy": "Автор останньої зміни",
   "Properties": "Властивості",
@@ -35,5 +39,6 @@
   "StorageType": "Тип сховища",
   "SubmenuDetails": "Подробиці",
   "SubmenuHistory": "Історія",
+  "Users": "Користувачі",
   "Versions": "Версії"
 }

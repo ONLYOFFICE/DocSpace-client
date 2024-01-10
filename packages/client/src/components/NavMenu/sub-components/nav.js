@@ -64,7 +64,7 @@ const Nav = React.memo((props) => {
       onMouseLeave={onMouseLeave}
       numberOfModules={numberOfModules}
     >
-      <StyledScrollbar stype="smallWhite">{children}</StyledScrollbar>
+      <StyledScrollbar>{children}</StyledScrollbar>
     </StyledNav>
   );
 });

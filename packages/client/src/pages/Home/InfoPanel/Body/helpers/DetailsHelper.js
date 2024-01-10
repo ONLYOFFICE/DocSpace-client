@@ -209,7 +209,7 @@ class DetailsHelper {
   getPropertyContent = (propertyId) => {
     switch (propertyId) {
       case "Owner":
-        return this.getItemOwner();
+        return this.getAuthorDecoration("createdBy");
       case "Location":
         return this.getItemLocation();
 
@@ -231,7 +231,7 @@ class DetailsHelper {
       case "Date modified":
         return this.getItemDateModified();
       case "Last modified by":
-        return this.getItemLastModifiedBy();
+        return this.getAuthorDecoration("updatedBy");
       case "Creation date":
         return this.getItemCreationDate();
 
@@ -248,12 +248,17 @@ class DetailsHelper {
 
   /// Property  //
 
-  getItemOwner = () => {
-    const onOpenUser = () => this.openUser(this.item.createdBy, this.navigate);
+  getAuthorDecoration = (byField = "createdBy") => {
+    const onClick = () => this.openUser(this.item[byField], this.navigate);
+
+    const displayName = this.item[byField]?.displayName;
+    const name = displayName ? decode(displayName) : "";
+
+    //console.log("getAuthorDecoration", { name, displayName });
 
     return this.personal || this.isVisitor || this.isCollaborator
-      ? text(decode(this.item.createdBy?.displayName))
-      : link(decode(this.item.createdBy?.displayName), onOpenUser);
+      ? text(name)
+      : link(name, onClick);
   };
 
   getItemLocation = () => {
@@ -298,14 +303,6 @@ class DetailsHelper {
     return text(
       parseAndFormatDate(this.item.updated, this.personal, this.culture)
     );
-  };
-
-  getItemLastModifiedBy = () => {
-    const onOpenUser = () => this.openUser(this.item.updatedBy, this.navigate);
-
-    return this.personal || this.isVisitor || this.isCollaborator
-      ? text(decode(this.item.updatedBy?.displayName))
-      : link(decode(this.item.updatedBy?.displayName), onOpenUser);
   };
 
   getItemCreationDate = () => {

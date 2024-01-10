@@ -41,7 +41,12 @@ export function getInvitationLinks() {
   );
 }
 
-export function startBackup(storageType, storageParams, backupMail = false) {
+export function startBackup(
+  storageType,
+  storageParams,
+  backupMail = false,
+  dump = false
+) {
   const options = {
     method: "post",
     url: `/portal/startbackup`,
@@ -49,6 +54,7 @@ export function startBackup(storageType, storageParams, backupMail = false) {
       storageType,
       storageParams: storageParams,
       backupMail,
+      dump,
     },
   };
 
@@ -86,7 +92,8 @@ export function createBackupSchedule(
   Period,
   Hour,
   Day = null,
-  backupMail = false
+  backupMail = false,
+  dump = false
 ) {
   const cronParams = {
     Period: Period,
@@ -102,6 +109,7 @@ export function createBackupSchedule(
       backupsStored,
       cronParams: cronParams,
       backupMail,
+      dump,
     },
   };
   return request(options);

@@ -5,6 +5,7 @@
   "HotkeysChangeView": "Passer de l'affichage en grille à l'affichage liste",
   "HotkeysClearAll": "Effacer toutes les sélections",
   "HotkeysClose": "Fermer/Annuler l'action",
+  "HotkeysCopySelected": "Copier les éléments sélectionnés dans le presse-papiers",
   "HotkeysCreateDocument": "Créer un document",
   "HotkeysCreateFolder": "Créer un dossier",
   "HotkeysCreateForm": "Créer un modèle de formulaire vierge",
@@ -12,6 +13,7 @@
   "HotkeysCreatePresentation": "Créer une présentation",
   "HotkeysCreateSpreadsheet": "Créer une feuille de calcul",
   "HotkeysCreatingObjects": "Création d'éléments",
+  "HotkeysCutSelected": "Couper les éléments sélectionnés dans le presse-papiers",
   "HotkeysEnterKey": "Entrer",
   "HotkeysExtendSelectionDown": "Étendre la sélection vers le bas",
   "HotkeysExtendSelectionLeft": "Étendre la sélection vers la gauche",
@@ -25,6 +27,7 @@
   "HotkeysMoveUp": "Déplacer vers le haut sans modifier la sélection",
   "HotkeysNavigation": "Navigation",
   "HotkeysOpen": "Ouvrir l'élément sélectionné/Confirmer l'action",
+  "HotkeysPasteSelected": "Coller les éléments sélectionnés dans le presse-papiers",
   "HotkeysPlayPause": "Lecture/Pause",
   "HotkeysRedoLastUndoneAction": "Refaire la dernière action non effectuée",
   "HotkeysRemove": "Supprimer les éléments sélectionnés",
@@ -39,5 +42,7 @@
   "HotkeysSpaceKey": "Espace",
   "HotkeysUndoLastAction": "Annuler la dernière action",
   "HotkeysUploadFile": "Télécharger le fichier",
-  "HotkeysUploadingObjects": "Chargement d'éléments"
+  "HotkeysUploadingObjects": "Chargement d'éléments",
+  "HotkeysZoomIn": "Zoom avan",
+  "HotkeysZoomOut": "Zoom arrière"
 }

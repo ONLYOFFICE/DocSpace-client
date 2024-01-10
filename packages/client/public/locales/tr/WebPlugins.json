@@ -1,1 +1,18 @@
-{}
+{
+  "DeletePlugin": "Eklentiyi sil",
+  "DeletePluginDescription": "Bu eklenti artık DocSpace kullanıcıları tarafından kullanılamayacak. Devam etmek istediğinize emin misiniz?",
+  "DeletePluginTitle": "Eklenti silinsin mi?",
+  "Description": "DocSpace'in işlevselliğini ekstra özelliklerle genişletmek için eklentiler ekleyebilirsiniz. Eklenti yükle'ye tıklayın ve ZIP arşivindeki eklenti dosyasını seçin.",
+  "ExpandFunctionality": "Eklenti SDK'sını kullanarak işlevselliği genişletin",
+  "GoToRepo": "Depoya git",
+  "Metadata": "Meta veri",
+  "NeedSettings": "Ayarları girmeniz gerekiyor",
+  "NoPlugins": "Hiçbir eklenti eklenmedi",
+  "NotNeedSettings": "Ayarlara girmenize gerek yok",
+  "PluginSamples": "Eklenti örnekleri",
+  "PluginSDK": "Eklenti SDK'sı",
+  "PluginSDKDescription": "Eklenti SDK'sını kullanarak DocSpace işlevselliğinizi genişletebilir, üçüncü taraf hizmetlerine bağlanabilir veya mevcut kullanıcı deneyimini geliştirebilirsiniz. Burada GitHub'da bulunan kod kaynağına sahip eklenti örneklerini bulabilirsiniz.",
+  "PluginSDKInstruction": "Kendi eklentilerinizi nasıl oluşturacağınızla ilgili ayrıntılı talimatlar için düğmeye tıklayın.",
+  "PluginsHelp": "Eklentiler DocSpace'in işlevselliğini genişletmenize olanak sağlar",
+  "UploadPlugin": "Eklentiyi yükle"
+}

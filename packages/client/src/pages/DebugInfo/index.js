@@ -110,7 +110,7 @@ const DebugInfoDialog = (props) => {
           overflowProp="auto"
           heightProp={"362px"}
         >
-          <Scrollbar stype="mediumBlack">
+          <Scrollbar>
             {md && (
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}

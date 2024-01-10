@@ -1,5 +1,14 @@
 {
-  "DeleteUser": "İstifadəçini sil",
+  "ActionCannotBeUndone": "Seçilmiş deaktiv istifadəçilər DocSpace-dən silinəcək. Bu əməliyyat geri qaytarıla bilməz.",
+  "CannotReassignFiles": "Eyni anda birdən çox istifadəçini silsəniz, onların fayllarını başqa istifadəçilərə təyin edə bilməzsiniz.",
   "DeleteGroupUsersSuccessMessage": "İstifadəçilər müvəffəqiyyətlə silinmişdir.",
-  "SuccessfullyDeleteUserInfoMessage": "İstifadəçi müvəffəqiyyətlə silinmişdir"
+  "DeleteMyDocumentsUser": "Bu istifadəçinin Sənədlərimdəki bütün şəxsi faylları və qovluqları həmişəlik silinəcək.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Bu istifadəçi tərəfindən yaradılan otaqlar və onlarda saxlanılan sənədlər avtomatik olaraq silməni həyata keçirən administratora yenidən təyin ediləcək: <strong>{{{userPerformedDeletion}} ({{userYou}})</strong>. Yenidən təyinata başqa bir hədəf istifadəçi seçmək üçün məlumatları əl ilə yenidən təyin edin.",
+  "DeleteUser": "İstifadəçini sil",
+  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> silinəcək. Bu əməliyyat geri qaytarıla bilməz.",
+  "DeletingUsers": "İstifadəçilər silinir",
+  "PleaseNote": "Lütfən, nəzərə alın",
+  "ReassignDataToAnotherUser": "Məlumatı başqa istifadəçiyə təyin edin",
+  "SuccessfullyDeleteUserInfoMessage": "İstifadəçi müvəffəqiyyətlə silinmişdir",
+  "ToBeAbleToReassignData": "Məlumatı yenidən təyin etmək üçün bir istifadəçini silin."
 }

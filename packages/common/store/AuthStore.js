@@ -35,6 +35,7 @@ class AuthStore {
   isUpdatingTariff = false;
 
   tenantExtra = {};
+
   constructor() {
     this.userStore = new UserStore();
 
@@ -99,6 +100,8 @@ class AuthStore {
     const isPortalRestore =
       this.settingsStore.tenantStatus === TenantStatus.PortalRestore;
 
+    const { user } = this.userStore;
+
     if (
       this.settingsStore.isLoaded &&
       this.settingsStore.socketUrl &&
@@ -128,7 +131,18 @@ class AuthStore {
       }
     }
 
-    return Promise.all(requests);
+    return Promise.all(requests).then(() => {
+      const { user } = this.userStore;
+
+      if (
+        this.settingsStore.standalone &&
+        !this.settingsStore.wizardToken &&
+        this.isAuthenticated &&
+        user.isAdmin
+      ) {
+        requests.push(this.settingsStore.getPortals());
+      }
+    });
   };
 
   get isEnterprise() {
@@ -329,19 +343,20 @@ class AuthStore {
     this.settingsStore = new SettingsStore();
   };
 
-  logout = async () => {
+  logout = async (reset = true) => {
     const ssoLogoutUrl = await api.user.logout();
 
     this.isLogout = true;
 
-    setWithCredentialsStatus(false);
-
-    const { isDesktopClient: isDesktop, personal } = this.settingsStore;
+    const { isDesktopClient: isDesktop } = this.settingsStore;
 
     isDesktop && logoutDesktop();
 
     if (ssoLogoutUrl) return ssoLogoutUrl;
 
+    if (!reset) return;
+
+    setWithCredentialsStatus(false);
     this.reset(true);
     this.userStore.setUser(null);
     this.init();
@@ -439,6 +454,10 @@ class AuthStore {
     const capabilities = await api.settings.getCapabilities();
     if (capabilities) this.setCapabilities(capabilities);
   };
+
+  get isManagement() {
+    return window.location.pathname.includes("management");
+  }
 }
 
 export default new AuthStore();

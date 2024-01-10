@@ -41,7 +41,7 @@ const StyledRow = styled.div`
   }
 `;
 
-const Row = () => {
+export const RowLoader = () => {
   return (
     <StyledRow>
       <CircleSkeleton x="16" y="16" radius="16" width="32" height="32" />
@@ -63,11 +63,11 @@ const ShareLoader = ({ t }) => {
       <Text fontSize="14px" fontWeight={600} className="title-link">
         {t("GeneralAccessLink")}
       </Text>
-      <Row />
+      <RowLoader />
       <div className="title">
         <RectangleSkeleton width="154px" height="16px" />
       </div>
-      <Row />
+      <RowLoader />
     </StyledWrapper>
   );
 };

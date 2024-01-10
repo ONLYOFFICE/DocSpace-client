@@ -770,7 +770,7 @@ class ContextOptionsStore {
     this.filesActionsStore.setPinAction(action, id, t);
   };
 
-  onClickArchive = (e, item) => {
+  onClickArchive = (e) => {
     const data = (e.currentTarget && e.currentTarget.dataset) || e;
     const { action } = data;
     const { isGracePeriod } = this.authStore.currentTariffStatusStore;
@@ -779,8 +779,6 @@ class ContextOptionsStore {
       setRestoreRoomDialogVisible,
       setInviteUsersWarningDialogVisible,
     } = this.dialogsStore;
-
-    this.filesStore.setBufferSelection(item);
 
     if (action === "unarchive" && isGracePeriod) {
       setInviteUsersWarningDialogVisible(true);
@@ -1446,7 +1444,7 @@ class ContextOptionsStore {
         key: "archive-room",
         label: t("MoveToArchive"),
         icon: RoomArchiveSvgUrl,
-        onClick: (e) => this.onClickArchive(e, item),
+        onClick: (e) => this.onClickArchive(e),
         disabled: false,
         "data-action": "archive",
         action: "archive",
@@ -1467,7 +1465,7 @@ class ContextOptionsStore {
         key: "unarchive-room",
         label: t("Common:Restore"),
         icon: MoveReactSvgUrl,
-        onClick: (e) => this.onClickArchive(e, item),
+        onClick: (e) => this.onClickArchive(e),
         disabled: false,
         "data-action": "unarchive",
         action: "unarchive",
@@ -1563,7 +1561,7 @@ class ContextOptionsStore {
           key: "archive-room",
           label: t("MoveToArchive"),
           icon: RoomArchiveSvgUrl,
-          onClick: (e) => this.onClickArchive(e, item),
+          onClick: (e) => this.onClickArchive(e),
           disabled: false,
           "data-action": "archive",
           action: "archive",
@@ -1574,7 +1572,7 @@ class ContextOptionsStore {
           key: "unarchive-room",
           label: t("Common:Restore"),
           icon: MoveReactSvgUrl,
-          onClick: (e) => this.onClickArchive(e, item),
+          onClick: (e) => this.onClickArchive(e),
           disabled: false,
           "data-action": "unarchive",
           action: "unarchive",

@@ -22,12 +22,16 @@ const RoomsContextBtn = ({
 
   getItemContextOptionsKeys,
   getItemContextOptionsActions,
+
+  onSelectItem,
 }) => {
   const contextMenuRef = useRef();
 
   if (!selection) return null;
 
   const onContextMenu = (e) => {
+    onSelectItem();
+
     if (!contextMenuRef?.current.menuRef.current)
       itemTitleRef?.current.click(e);
     contextMenuRef?.current.show(e);
@@ -71,9 +75,9 @@ const RoomsContextBtn = ({
     return options;
   };
 
-  useEffect(() => {
-    contextMenuRef?.current.hide();
-  }, [selection]);
+  // useEffect(() => {
+  //   contextMenuRef?.current.hide();
+  // }, [selection]);
 
   return (
     <StyledItemContextOptions>

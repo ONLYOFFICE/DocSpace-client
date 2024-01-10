@@ -6,8 +6,26 @@
 
 html,
 body {
-  max-width: 100vw;
-  min-height: 700px;
-  min-height: -webkit-fill-available;
-  overflow-x: hidden;
+  height: 100%;
+
+  font-family: "Open Sans", sans-serif, Arial;
+  font-size: 13px;
+  overscroll-behavior: none;
+}
+
+#root {
+  min-height: 100%;
+
+  .pageLoader {
+    position: fixed;
+    left: calc(50% - 20px);
+    top: 35%;
+  }
+}
+body {
+  margin: 0;
+}
+
+body.loading * {
+  cursor: wait !important;
 }

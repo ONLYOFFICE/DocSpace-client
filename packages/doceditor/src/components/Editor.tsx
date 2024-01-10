@@ -16,7 +16,7 @@ const Editor = ({ config }: { config: IConfig }) => {
       id={"docspace_editor"}
       documentServerUrl={documentserverUrl}
       config={config}
-      height="700px"
+      height="100%"
       width="100%"
       events_onDocumentReady={onDocumentReady}
     ></DocumentEditor>

@@ -1,18 +1,18 @@
 ﻿import CheckWhiteSvgUrl from "PUBLIC_DIR/images/check.white.svg?url";
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { withTranslation } from "react-i18next";
-import { toastr } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
 import { inject, observer } from "mobx-react";
-import { Button } from "@docspace/shared/components";
-import { Tooltip } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
-import { TabsContainer } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components/button";
+import { Tooltip } from "@docspace/shared/components/tooltip";
+import { Text } from "@docspace/shared/components/text";
+import { TabsContainer } from "@docspace/shared/components/tabs-container";
 import Preview from "./Appearance/preview";
 import { saveToSessionStorage, getFromSessionStorage } from "../../utils";
 import ColorSchemeDialog from "./sub-components/colorSchemeDialog";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import { DropDownItem } from "@docspace/shared/components";
-import { DropDown } from "@docspace/shared/components";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { DropDown } from "@docspace/shared/components/drop-down";
 
 import HexColorPickerComponent from "./sub-components/hexColorPicker";
 

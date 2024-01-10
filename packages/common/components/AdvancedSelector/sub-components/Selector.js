@@ -10,8 +10,8 @@ import Option from "./Option";
 
 import Footer from "./Footer";
 
-import { Text } from "@docspace/shared/components";
-import { Tooltip } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
+import { Tooltip } from "@docspace/shared/components/tooltip";
 
 import StyledSelector from "./StyledSelector";
 

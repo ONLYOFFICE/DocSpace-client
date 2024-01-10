@@ -1,5 +1,5 @@
 import React from "react";
-import { RowContainer } from "@docspace/shared/components";
+import { RowContainer } from "@docspace/shared/components/row-container";
 import SpacesRoomRow from "./SpacesRoomRow";
 import styled, { css } from "styled-components";
 import Base from "@docspace/shared/themes/base";

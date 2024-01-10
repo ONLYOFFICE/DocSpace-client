@@ -14,7 +14,7 @@ import ArticleApps from "./sub-components/article-apps";
 import ArticleDevToolsBar from "./sub-components/article-dev-tools-bar";
 import { StyledArticle } from "./styled-article";
 import HideArticleMenuButton from "./sub-components/article-hide-menu-button";
-import { Portal } from "@docspace/shared/components";
+import { Portal } from "@docspace/shared/components/portal";
 import { DeviceType } from "@docspace/shared/enums";
 import ArticleProfileLoader from "../Loaders/ArticleProfileLoader/ArticleProfileLoader";
 

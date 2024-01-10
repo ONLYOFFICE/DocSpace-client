@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Text } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
 import MultipleSpaces from "./sub-components/MultipleSpaces";
 import { SpaceContainer } from "./StyledSpaces";
 import ConfigurationSection from "./sub-components/ConfigurationSection";

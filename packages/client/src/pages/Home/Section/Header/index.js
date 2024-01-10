@@ -44,11 +44,11 @@ import Navigation from "@docspace/common/components/Navigation";
 import FilesFilter from "@docspace/common/api/files/filter";
 import { resendInvitesAgain } from "@docspace/common/api/people";
 
-import { DropDownItem } from "@docspace/shared/components";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { tablet, mobile, Consumer } from "@docspace/shared/utils";
 
-import { toastr } from "@docspace/shared/components";
-import { TableGroupMenu } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
+import { TableGroupMenu } from "@docspace/shared/components/table";
 import {
   Events,
   EmployeeType,

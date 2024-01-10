@@ -1,7 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { TextInput } from "@docspace/shared/components";
+import { TextInput } from "@docspace/shared/components/text-input";
 
 import StyledInputWrapper from "../styled-containers/StyledInputWrapper";
 

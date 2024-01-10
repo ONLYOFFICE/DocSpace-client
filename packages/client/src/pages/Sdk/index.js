@@ -1,8 +1,8 @@
 import React, { useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useParams } from "react-router-dom";
-import { Button } from "@docspace/shared/components";
-import { ColorTheme, ThemeId } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components/button";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import AppLoader from "@docspace/common/components/AppLoader";
 import RoomSelector from "../../components/RoomSelector";
 import FilesSelector from "../../components/FilesSelector";

@@ -2,9 +2,9 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Link } from "@docspace/shared/components";
-import { LinkWithDropdown } from "@docspace/shared/components";
-import { Avatar } from "@docspace/shared/components";
+import { Link } from "@docspace/shared/components/link";
+import { LinkWithDropdown } from "@docspace/shared/components/link-with-dropdown";
+import { Avatar } from "@docspace/shared/components/avatar";
 
 export default function withContent(WrappedContent) {
   const WithContent = (props) => {

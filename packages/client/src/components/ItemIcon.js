@@ -4,7 +4,7 @@ import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
 import { Base } from "@docspace/shared/themes";
 import { NoUserSelect } from "@docspace/shared/utils";
-import { RoomIcon } from "@docspace/shared/components";
+import { RoomIcon } from "@docspace/shared/components/room-icon";
 
 const StyledIcon = styled.img`
   ${NoUserSelect}

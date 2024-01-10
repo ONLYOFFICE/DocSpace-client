@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Submenu } from "@docspace/shared/components";
+import { Submenu } from "@docspace/shared/components/submenu";
 
 import RequestDetails from "./RequestDetails";
 import ResponseDetails from "./ResponseDetails";

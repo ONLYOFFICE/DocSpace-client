@@ -3,8 +3,8 @@ import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Link } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
+import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -68,8 +68,8 @@ const HideButton = (props) => {
             ? t("HideAdditionalParameters")
             : t("Hide")
           : isAdditionalParameters
-          ? t("ShowAdditionalParameters")
-          : t("Show")}
+            ? t("ShowAdditionalParameters")
+            : t("Show")}
       </Link>
     </StyledWrapper>
   );

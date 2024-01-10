@@ -1,15 +1,15 @@
 import React, { useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
 
-import { Link } from "@docspace/shared/components";
+import { Link } from "@docspace/shared/components/link";
 
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
 
 import { Hint } from "../styled-components";
-import { HelpButton } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { Text } from "@docspace/shared/components/text";
 
-import { PasswordInput } from "@docspace/shared/components";
+import { PasswordInput } from "@docspace/shared/components/password-input";
 import { inject, observer } from "mobx-react";
 
 import { useTranslation } from "react-i18next";

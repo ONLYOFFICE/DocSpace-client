@@ -43,20 +43,7 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
   }
 
   constructor(props: SnackbarProps) {
-    const defaultProps: SnackbarProps = {
-      backgroundColor: "#F7E6BE",
-      textColor: "#000",
-      showIcon: true,
-      fontSize: "13px",
-      fontWeight: 400,
-      textAlign: "left",
-      htmlContent: "",
-      countDownTime: -1,
-      isCampaigns: false,
-      sectionWidth: 0,
-    };
-
-    super({ ...defaultProps, ...props });
+    super(props);
     this.state = { isLoaded: false };
   }
 
@@ -115,7 +102,7 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
       text,
       headerText,
       btnText,
-      textColor,
+      textColor = "#000",
       showIcon,
       fontSize,
       fontWeight,
@@ -126,6 +113,7 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
       isCampaigns,
       onAction,
       sectionWidth,
+      backgroundColor = "#F7E6BE",
       ...rest
     } = this.props;
 
@@ -151,7 +139,12 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
         )}
       </div>
     ) : (
-      <StyledSnackBar id="snackbar-container" style={style} {...rest}>
+      <StyledSnackBar
+        {...rest}
+        id="snackbar-container"
+        style={style}
+        backgroundColor={backgroundColor}
+      >
         {htmlContent ? (
           <div
             dangerouslySetInnerHTML={{

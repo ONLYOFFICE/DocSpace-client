@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ModalDialog } from "@docspace/shared/components";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { tablet } from "@docspace/shared/utils";
 
 const ModalDialogContainer = styled(ModalDialog)`

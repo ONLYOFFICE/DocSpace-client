@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { Text } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
 import { ReactSVG } from "react-svg";
 import { desktop, mobile, tablet } from "@docspace/shared/utils";
 

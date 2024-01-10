@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { observer, inject } from "mobx-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Section from "@docspace/common/components/Section";
-import { Loader } from "@docspace/shared/components";
+import { Loader } from "@docspace/shared/components/loader";
 import { ValidationStatus } from "../../helpers/constants";
 
 import RoomPassword from "./sub-components/RoomPassword";
@@ -23,8 +23,6 @@ const PublicRoom = (props) => {
     setPublicRoomKey,
     setIsArticleLoading,
   } = props;
-
-  console.log("render");
 
   const navigate = useNavigate();
   const location = useLocation();

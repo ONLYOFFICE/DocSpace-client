@@ -2,8 +2,8 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
-import { Text } from "@docspace/shared/components";
-import { RowContent } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
+import { RowContent } from "@docspace/shared/components/row-content";
 import { convertTime } from "@docspace/common/utils/convertTime";
 
 const StyledRowContent = styled(RowContent)`

@@ -1,12 +1,12 @@
 import React, { useRef } from "react";
 import ToggleBlock from "./ToggleBlock";
-import { PasswordInput } from "@docspace/shared/components";
-import { IconButton } from "@docspace/shared/components";
-import { Link } from "@docspace/shared/components";
+import { PasswordInput } from "@docspace/shared/components/password-input";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { Link } from "@docspace/shared/components/link";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
-import { FieldContainer } from "@docspace/shared/components";
+import { FieldContainer } from "@docspace/shared/components/field-container";
 import copy from "copy-to-clipboard";
-import { toastr } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
 
 const PasswordAccessBlock = (props) => {
   const {

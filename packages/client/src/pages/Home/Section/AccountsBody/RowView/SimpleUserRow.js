@@ -2,7 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { isMobile } from "react-device-detect";
 
-import { Row } from "@docspace/shared/components";
+import { Row } from "@docspace/shared/components/row";
 import { Base } from "@docspace/shared/themes";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";

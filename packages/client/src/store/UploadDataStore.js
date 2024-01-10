@@ -17,7 +17,7 @@ import {
   getFolder,
   checkIsFileExist,
 } from "@docspace/common/api/files";
-import { toastr } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
 
 import {
   isMobile as isMobileUtils,

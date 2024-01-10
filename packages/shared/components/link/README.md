@@ -8,7 +8,7 @@ It is a link with 2 types:
 ### Usage
 
 ```js
-import { Link } from "@docspace/shared/components";
+import { Link } from "@docspace/shared/components/link";
 ```
 
 ```jsx

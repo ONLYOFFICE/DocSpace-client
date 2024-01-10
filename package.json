@@ -25,7 +25,9 @@
     "wipe": "shx rm -rf node_modules yarn.lock packages/**/node_modules",
     "licenses-audit": "yarn licenses audit --output-csv=licenses.csv --config=licenses.config.js --summary",
     "check-circular": "yarn madge --circular ./packages",
-    "check-circular:graph": "yarn madge --circular --image graph.svg ./packages"
+    "check-circular:graph": "yarn madge --circular --image graph.svg ./packages",
+    "lint": "yarn workspace @docspace/shared lint",
+    "lint:fix": "yarn workspace @docspace/shared lint:fix"
   },
   "old-scripts": {
     "build:test": "yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login,@docspace/editor}' run build:test",

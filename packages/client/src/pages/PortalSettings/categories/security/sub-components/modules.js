@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
 import styled from "styled-components";
-import { Text } from "@docspace/shared/components";
-import { ToggleContent } from "@docspace/shared/components";
-import { RadioButtonGroup } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
+import { ToggleContent } from "@docspace/shared/components/toggle-content";
+import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 
 const ProjectsContainer = styled.div`
   display: flex;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { toastr } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
 
 import {
   EmployeeActivationStatus,
@@ -16,14 +16,14 @@ import User from "./User";
 import PublicRoomBar from "./sub-components/PublicRoomBar";
 import { LinksBlock, StyledLinkRow } from "./sub-components/StyledPublicRoom";
 
-import { Text } from "@docspace/shared/components";
-import { Link } from "@docspace/shared/components";
-import { IconButton } from "@docspace/shared/components";
-import { Tooltip } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { Tooltip } from "@docspace/shared/components/tooltip";
 import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
 import PlusReactSvgUrl from "PUBLIC_DIR/images/actions.button.plus.react.svg?url";
 
-import { Avatar } from "@docspace/shared/components";
+import { Avatar } from "@docspace/shared/components/avatar";
 import copy from "copy-to-clipboard";
 import LinkRow from "./sub-components/LinkRow";
 

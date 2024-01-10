@@ -23,7 +23,7 @@ import { CronWrapper, Suffix } from "./Cron.styled";
 
 import type { PeriodType, CronProps } from "./Cron.types";
 
-function Cron({ value = defaultCronString, setValue, onError }: CronProps) {
+const Cron = ({ value = defaultCronString, setValue, onError }: CronProps) => {
   const { t } = useTranslation("Common");
 
   const didMountRef = useRef<boolean>(false);
@@ -162,6 +162,6 @@ function Cron({ value = defaultCronString, setValue, onError }: CronProps) {
       <Suffix>{t("Common:UTC")}</Suffix>
     </CronWrapper>
   );
-}
+};
 
 export default Cron;

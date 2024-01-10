@@ -6,7 +6,7 @@ import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_alt_dark.sv
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { Text } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
 import { StyledSeveralItemsContainer } from "../../styles/severalItems";
 
 const SeveralItems = ({ isAccounts, theme, selectedItems }) => {

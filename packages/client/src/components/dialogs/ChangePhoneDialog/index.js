@@ -1,6 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { ModalDialog, Button, Text, toastr } from "@docspace/shared/components";
+
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Button } from "@docspace/shared/components/button";
+import { Text } from "@docspace/shared/components/text";
+import { toastr } from "@docspace/shared/components/toast";
 
 import { withTranslation } from "react-i18next";
 

@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
-import { Heading } from "@docspace/shared/components";
+import { Heading } from "@docspace/shared/components/heading";
 import { tablet, desktop } from "@docspace/shared/utils";
 import { Base } from "@docspace/shared/themes";
 import InfiniteGrid from "./InfiniteGrid";

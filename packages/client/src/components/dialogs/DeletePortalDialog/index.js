@@ -1,11 +1,14 @@
 import React from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { ModalDialog, Button, toastr } from "@docspace/shared/components";
+
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Button } from "@docspace/shared/components/button";
+import { toastr } from "@docspace/shared/components/toast";
 
 import { sendDeletePortalEmail } from "@docspace/common/api/portal";
 
 import ModalDialogContainer from "../ModalDialogContainer";
-import { ColorTheme, ThemeId } from "@docspace/shared/components";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 const DeletePortalDialog = (props) => {
   const { t, ready } = useTranslation("Settings", "Common");

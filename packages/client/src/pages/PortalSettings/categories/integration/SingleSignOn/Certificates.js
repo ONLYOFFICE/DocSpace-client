@@ -3,10 +3,10 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Box } from "@docspace/shared/components";
-import { Button } from "@docspace/shared/components";
-import { HelpButton } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
+import { Box } from "@docspace/shared/components/box";
+import { Button } from "@docspace/shared/components/button";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { Text } from "@docspace/shared/components/text";
 
 import AddIdpCertificateModal from "./sub-components/AddIdpCertificateModal";
 import AddSpCertificateModal from "./sub-components/AddSpCertificateModal";

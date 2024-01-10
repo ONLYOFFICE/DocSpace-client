@@ -3,7 +3,7 @@ import { cloneDeep } from "lodash";
 
 import api from "@docspace/common/api";
 
-import { toastr } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
 
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
@@ -403,12 +403,12 @@ class PluginStore {
     const userRole = isOwner
       ? PluginUsersType.owner
       : isAdmin
-      ? PluginUsersType.docSpaceAdmin
-      : isCollaborator
-      ? PluginUsersType.collaborator
-      : isVisitor
-      ? PluginUsersType.user
-      : PluginUsersType.roomAdmin;
+        ? PluginUsersType.docSpaceAdmin
+        : isCollaborator
+          ? PluginUsersType.collaborator
+          : isVisitor
+            ? PluginUsersType.user
+            : PluginUsersType.roomAdmin;
 
     return userRole;
   };

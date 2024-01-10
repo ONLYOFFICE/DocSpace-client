@@ -5,7 +5,7 @@ import {
   getFromLocalStorage,
   removeLocalStorage,
 } from "../pages/PortalSettings/utils";
-import { toastr } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
 import { AutoBackupPeriod } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/common/utils";
 import config from "PACKAGE_FILE";

@@ -5,7 +5,7 @@ Tag allow you display virtual room tag
 ### Usage
 
 ```js
-import { Tag } from "@docspace/shared/components";
+import { Tag } from "@docspace/shared/components/tag";
 ```
 
 ```jsx

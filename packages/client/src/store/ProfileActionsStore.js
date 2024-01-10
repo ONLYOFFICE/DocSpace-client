@@ -17,7 +17,7 @@ import { isMobile } from "react-device-detect";
 
 import { ZendeskAPI } from "@docspace/common/components/Zendesk";
 import { LIVE_CHAT_LOCAL_STORAGE_KEY } from "@docspace/shared/constants";
-import { toastr } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
 import { isDesktop, isTablet } from "@docspace/shared/utils";
 
 const PROXY_HOMEPAGE_URL = combineUrl(window.DocSpaceConfig?.proxy?.url, "/");

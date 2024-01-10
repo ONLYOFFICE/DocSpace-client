@@ -13,7 +13,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { isMobile as isMobileDevice } from "react-device-detect";
 
-import { Badge, ColorTheme, ThemeId } from "@docspace/shared/components";
+import { Badge } from "@docspace/shared/components/badge";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 import {
   FileStatus,

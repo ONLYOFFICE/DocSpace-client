@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 
 import "@testing-library/jest-dom";
 
-import { Cron } from ".";
+import Cron from "./Cron";
 
 test("<Cron />: render without error", () => {
   render(<Cron value="* * * * *" setValue={() => {}} />);

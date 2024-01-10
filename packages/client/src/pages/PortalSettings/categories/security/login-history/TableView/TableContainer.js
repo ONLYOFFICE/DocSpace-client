@@ -2,8 +2,8 @@ import { useRef } from "react";
 import { inject, observer } from "mobx-react";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import { TableContainer } from "@docspace/shared/components";
-import { TableBody } from "@docspace/shared/components";
+import { TableContainer } from "@docspace/shared/components/table";
+import { TableBody } from "@docspace/shared/components/table";
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";

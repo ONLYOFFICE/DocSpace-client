@@ -2,14 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
-import { Avatar, AvatarSize } from "@docspace/shared/components";
-import { DropDownItem } from "@docspace/shared/components";
-import { Link } from "@docspace/shared/components";
+import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { Link } from "@docspace/shared/components/link";
 import ProfileMenu from "./profile-menu";
 import api from "@docspace/common/api";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
-import { ToggleButton } from "@docspace/shared/components";
-import { Button } from "@docspace/shared/components";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { Button } from "@docspace/shared/components/button";
 
 const StyledDiv = styled.div`
   width: 32px;

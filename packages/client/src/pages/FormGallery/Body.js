@@ -3,15 +3,15 @@ import EmptyScreenFilterAltDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_filte
 
 import { useEffect } from "react";
 import { observer, inject } from "mobx-react";
-import { EmptyScreenContainer } from "@docspace/shared/components";
+import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 import { withTranslation } from "react-i18next";
 import TileContainer from "./TilesView/sub-components/TileContainer";
 import FileTile from "./TilesView/FileTile";
 import Loaders from "@docspace/common/components/Loaders";
 import SubmitToGalleryTile from "./TilesView/sub-components/SubmitToGalleryTile";
-import { Link } from "@docspace/shared/components";
+import { Link } from "@docspace/shared/components/link";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
-import { IconButton } from "@docspace/shared/components";
+import { IconButton } from "@docspace/shared/components/icon-button";
 import styled from "styled-components";
 
 const StyledEmptyContainerLinks = styled.div`

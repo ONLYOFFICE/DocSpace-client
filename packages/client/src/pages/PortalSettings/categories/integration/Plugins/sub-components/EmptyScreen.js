@@ -1,7 +1,7 @@
 import React from "react";
 
-import { Text } from "@docspace/shared/components";
-import { Link } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
 
 import EmptyScreenPluginsUrl from "PUBLIC_DIR/images/empty_screen_plugins.svg?url";
 import EmptyScreenPluginsDarkUrl from "PUBLIC_DIR/images/empty_screen_plugins_dark.svg?url";

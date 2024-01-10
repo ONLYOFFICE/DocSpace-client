@@ -16,7 +16,7 @@ import { RoomsTypeValues } from "@docspace/shared/utils";
 import { combineUrl } from "@docspace/common/utils";
 import { updateTempContent } from "@docspace/common/utils";
 
-import { toastr } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
 import config from "PACKAGE_FILE";
 import { thumbnailStatuses } from "@docspace/client/src/helpers/filesConstants";
 import { openDocEditor as openEditor } from "@docspace/client/src/helpers/filesUtils";

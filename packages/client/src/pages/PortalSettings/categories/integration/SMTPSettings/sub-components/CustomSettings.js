@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 
-import { TextInput } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
-import { ToggleButton } from "@docspace/shared/components";
-import { Checkbox } from "@docspace/shared/components";
-import { FieldContainer } from "@docspace/shared/components";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { Text } from "@docspace/shared/components/text";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { FieldContainer } from "@docspace/shared/components/field-container";
 
 import { StyledComponent } from "../StyledComponent";
 import { SMTPSettingsFields } from "../constants";
-import { EmailInput } from "@docspace/shared/components";
+import { EmailInput } from "@docspace/shared/components/email-input";
 import ButtonContainer from "./ButtonContainer";
 
 const {

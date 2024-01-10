@@ -1,7 +1,7 @@
 import React from "react";
 import { ReactSVG } from "react-svg";
 
-import { Text } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
 import PlayerMessageErrorProps from "./PlayerMessageError.props";
 import {
   StyledErrorToolbar,

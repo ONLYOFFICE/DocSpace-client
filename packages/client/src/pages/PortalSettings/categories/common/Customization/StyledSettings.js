@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { isMobileOnly } from "react-device-detect";
-import { Scrollbar } from "@docspace/shared/components";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import {
   commonIconsStyles,

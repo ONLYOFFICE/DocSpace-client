@@ -4,13 +4,13 @@ import React, { useState, useRef, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import copy from "copy-to-clipboard";
 
-import { toastr } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
 import { objectToGetParams } from "@docspace/common/utils";
 
-import { InputBlock } from "@docspace/shared/components";
-import { IconButton } from "@docspace/shared/components";
-import { DropDown } from "@docspace/shared/components";
-import { DropDownItem } from "@docspace/shared/components";
+import { InputBlock } from "@docspace/shared/components/input-block";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { DropDown } from "@docspace/shared/components/drop-down";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 
 import AccessSelector from "./AccessSelector";
 

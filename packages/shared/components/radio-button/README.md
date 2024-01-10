@@ -5,7 +5,7 @@ RadioButton allow you to add radiobutton
 ### Usage
 
 ```js
-import { RadioButton } from "@docspace/shared/components";
+import { RadioButton } from "@docspace/shared/components/radio-button";
 ```
 
 ```jsx

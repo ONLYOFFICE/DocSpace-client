@@ -5,7 +5,7 @@ Custom checkbox input
 ### Usage
 
 ```js
-import { Checkbox } from "@docspace/shared/components";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 ```
 
 ```jsx

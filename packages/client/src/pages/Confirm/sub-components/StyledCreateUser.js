@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Box } from "@docspace/shared/components";
+import { Box } from "@docspace/shared/components/box";
 import { mobile, tablet } from "@docspace/shared/utils";
 
 export const ButtonsWrapper = styled.div`

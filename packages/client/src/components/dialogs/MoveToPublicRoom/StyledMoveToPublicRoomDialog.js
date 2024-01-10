@@ -1,4 +1,4 @@
-import { ModalDialog } from "@docspace/shared/components";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { tablet, getCorrectFourValuesStyle } from "@docspace/shared/utils";
 import styled from "styled-components";
 

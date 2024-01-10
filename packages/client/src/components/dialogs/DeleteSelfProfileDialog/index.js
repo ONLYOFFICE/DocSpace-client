@@ -2,14 +2,11 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import PropTypes from "prop-types";
 
-import {
-  Button,
-  ModalDialog,
-  Link,
-  Text,
-  toastr,
-} from "@docspace/shared/components";
-
+import { toastr } from "@docspace/shared/components/toast";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Link } from "@docspace/shared/components/link";
 import { Trans, withTranslation } from "react-i18next";
 import ModalDialogContainer from "../ModalDialogContainer";
 import { sendInstructionsToDelete } from "@docspace/common/api/people";

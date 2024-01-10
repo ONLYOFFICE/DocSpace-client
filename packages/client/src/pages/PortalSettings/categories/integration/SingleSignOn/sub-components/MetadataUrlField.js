@@ -5,8 +5,10 @@ import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import copy from "copy-to-clipboard";
 
-import { Text, HelpButton, InputBlock } from "@docspace/shared/components";
-import { toastr } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { InputBlock } from "@docspace/shared/components/input-block";
+import { toastr } from "@docspace/shared/components/toast";
 
 import { mobile } from "@docspace/shared/utils";
 

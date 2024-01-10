@@ -1,6 +1,6 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { TableCell } from "@docspace/shared/components";
+import { TableCell } from "@docspace/shared/components/table";
 import FileNameCell from "./FileNameCell";
 import TypeCell from "./TypeCell";
 import TagsCell from "./TagsCell";

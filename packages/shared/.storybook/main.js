@@ -1,3 +1,4 @@
+import { dirname, join } from "path";
 module.exports = {
   stories: [
     // "../all/all.stories.js",
@@ -8,14 +9,14 @@ module.exports = {
   staticDirs: ["../../../public"],
 
   addons: [
-    "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "@storybook/addon-actions",
-    "@storybook/addon-controls",
-    "@storybook/addon-viewport",
-    "@storybook/addon-contexts/register",
-    "@react-theming/storybook-addon",
-    "storybook-addon-designs",
+    getAbsolutePath("@storybook/addon-links"),
+    getAbsolutePath("@storybook/addon-essentials"),
+    getAbsolutePath("@storybook/addon-actions"),
+    getAbsolutePath("@storybook/addon-controls"),
+    getAbsolutePath("@storybook/addon-viewport"),
+    getAbsolutePath("@storybook/addon-contexts"),
+    getAbsolutePath("@react-theming/storybook-addon"),
+    getAbsolutePath("storybook-addon-designs"),
     {
       name: "@storybook/addon-docs",
       options: {
@@ -32,15 +33,19 @@ module.exports = {
         },
       },
     },
-    "@storybook/addon-mdx-gfm",
-    "storybook-dark-mode",
+    getAbsolutePath("@storybook/addon-mdx-gfm"),
+    getAbsolutePath("storybook-dark-mode"),
   ],
 
   framework: {
-    name: "@storybook/react-webpack5",
+    name: getAbsolutePath("@storybook/react-webpack5"),
     options: {},
   },
   docs: {
     autodocs: true,
   },
 };
+
+function getAbsolutePath(value) {
+  return dirname(require.resolve(join(value, "package.json")));
+}

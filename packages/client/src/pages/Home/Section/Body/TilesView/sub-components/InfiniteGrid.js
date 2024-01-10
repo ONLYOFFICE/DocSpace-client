@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
-import { InfiniteLoaderComponent } from "@docspace/shared/components";
+import { InfiniteLoaderComponent } from "@docspace/shared/components/infinite-loader";
 import { StyledCard, StyledItem, StyledHeaderItem } from "./StyledInfiniteGrid";
 import Loaders from "@docspace/common/components/Loaders";
 import uniqueid from "lodash/uniqueId";

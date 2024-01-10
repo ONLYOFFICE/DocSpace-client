@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { inject } from "mobx-react";
-import { Text } from "@docspace/shared/components";
-import { Button } from "@docspace/shared/components";
-import { Link } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
+import { Link } from "@docspace/shared/components/link";
 import { MainContainer, ButtonWrapper } from "./StyledDeleteData";
 import { setDocumentTitle } from "../../../../helpers/utils";
 import { DeletePortalDialog } from "SRC_DIR/components/dialogs";
-import { toastr } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
 import {
   getPaymentAccount,
   sendDeletePortalEmail,

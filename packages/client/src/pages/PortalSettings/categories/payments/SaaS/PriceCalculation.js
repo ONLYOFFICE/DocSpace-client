@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
-import { Text } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
 import { inject, observer } from "mobx-react";
 import SelectUsersCountContainer from "./sub-components/SelectUsersCountContainer";
 import TotalTariffContainer from "./sub-components/TotalTariffContainer";

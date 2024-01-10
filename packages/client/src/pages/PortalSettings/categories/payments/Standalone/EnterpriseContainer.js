@@ -3,8 +3,8 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { Trans } from "react-i18next";
 
-import { Text } from "@docspace/shared/components";
-import { ColorTheme, ThemeId } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 import { StyledEnterpriseComponent } from "./StyledComponent";
 import BenefitsContainer from "SRC_DIR/components/StandaloneComponents/BenefitsContainer";

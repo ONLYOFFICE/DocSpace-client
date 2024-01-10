@@ -1,8 +1,8 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { Textarea } from "@docspace/shared/components";
-import { Button } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
+import { Textarea } from "@docspace/shared/components/textarea";
+import { Button } from "@docspace/shared/components/button";
+import { Text } from "@docspace/shared/components/text";
 import { inject, observer } from "mobx-react";
 
 import json_beautifier from "csvjson-json_beautifier";

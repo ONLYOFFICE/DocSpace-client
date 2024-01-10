@@ -58,9 +58,7 @@ export const getBannerAttribute = () => {
 
     const localItem = localStorage.getItem("barClose");
 
-    if (!localItem) return;
-
-    const closed = JSON.parse(localItem);
+    const closed = localItem ? JSON.parse(localItem) : [];
 
     const banner = difference(localBar, closed);
 

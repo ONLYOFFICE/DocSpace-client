@@ -2,8 +2,8 @@ import React, { useState, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { ButtonsWrapper, LoginFormWrapper, LoginContent } from "./StyledLogin";
-import { Text } from "@docspace/shared/components";
-import { SocialButton } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
+import { SocialButton } from "@docspace/shared/components/social-button";
 import {
   getProviderTranslation,
   getOAuthToken,
@@ -11,14 +11,14 @@ import {
 } from "@docspace/common/utils";
 import { checkIsSSR } from "@docspace/shared/utils";
 import { PROVIDERS_DATA } from "@docspace/shared/constants";
-import { Link } from "@docspace/shared/components";
-import { Toast } from "@docspace/shared/components";
+import { Link } from "@docspace/shared/components/link";
+import { Toast } from "@docspace/shared/components/toast";
 import LoginForm from "./sub-components/LoginForm";
 import MoreLoginModal from "@docspace/common/components/MoreLoginModal";
 import RecoverAccessModalDialog from "@docspace/common/components/Dialogs/RecoverAccessModalDialog";
-import { FormWrapper } from "@docspace/shared/components";
+import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import Register from "./sub-components/register-container";
-import { ColorTheme, ThemeId } from "@docspace/shared/components";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import SSOIcon from "PUBLIC_DIR/images/sso.react.svg";
 import { Dark, Base } from "@docspace/shared/themes";
 import { useMounted } from "../helpers/useMounted";

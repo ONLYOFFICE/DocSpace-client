@@ -5,8 +5,8 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components";
-import { ContextMenuButton } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
+import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 
 import StyledCertificatesTable from "../styled-containers/StyledCertificatesTable";
 import { ReactSVG } from "react-svg";

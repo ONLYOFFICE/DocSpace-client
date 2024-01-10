@@ -1,7 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
-import { ContextMenuButton } from "@docspace/shared/components";
 
 import { tablet } from "@docspace/shared/utils";
 import { Base } from "@docspace/shared/themes";

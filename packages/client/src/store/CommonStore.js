@@ -2,7 +2,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import authStore from "@docspace/common/store/AuthStore";
 import api from "@docspace/common/api";
 import { setDNSSettings } from "@docspace/common/api/settings";
-import { toastr } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
 import { DeviceType } from "@docspace/shared/enums";
 
 class CommonStore {

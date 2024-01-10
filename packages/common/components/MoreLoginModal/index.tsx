@@ -1,7 +1,7 @@
 import React from "react";
-import { ModalDialog } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
-import { Button } from "@docspace/shared/components";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
 import { PROVIDERS_DATA } from "@docspace/shared/constants";
 import styled, { css } from "styled-components";
 import { ReactSVG } from "react-svg";

@@ -4,8 +4,8 @@ import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components";
-import { Button } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
 
 import { mobile, size } from "@docspace/shared/utils";
 

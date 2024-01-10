@@ -6,7 +6,7 @@ import { combineUrl } from "@docspace/common/utils";
 import Badges from "../components/Badges";
 import config from "PACKAGE_FILE";
 import copy from "copy-to-clipboard";
-import { toastr } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
 import { isMobileOnly } from "react-device-detect";
 
 export default function withBadges(WrappedComponent) {

@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { mobile, tablet } from "@docspace/shared/utils";
-import { Text } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
 
 export const StyledWrapper = styled.div`
   width: 100%;

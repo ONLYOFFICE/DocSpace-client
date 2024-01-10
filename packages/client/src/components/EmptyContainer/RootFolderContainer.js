@@ -8,7 +8,10 @@ import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
 import { inject, observer } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
 import EmptyContainer from "./EmptyContainer";
-import { Link, Box, Text, IconButton } from "@docspace/shared/components";
+import { Link } from "@docspace/shared/components/link";
+import { Box } from "@docspace/shared/components/box";
+import { Text } from "@docspace/shared/components/text";
+import { IconButton } from "@docspace/shared/components/icon-button";
 
 import RoomsFilter from "@docspace/common/api/rooms/filter";
 import FilesFilter from "@docspace/common/api/files/filter";

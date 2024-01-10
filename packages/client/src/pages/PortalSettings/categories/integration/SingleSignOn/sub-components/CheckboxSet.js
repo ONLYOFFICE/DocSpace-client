@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Checkbox } from "@docspace/shared/components";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 
 const checkboxesNames = {
   idp: [

@@ -7,13 +7,11 @@ import Loaders from "@docspace/common/components/Loaders";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
 import { DeviceType } from "@docspace/shared/enums";
 
-import {
-  Aside,
-  Backdrop,
-  Selector,
-  Portal,
-  toastr,
-} from "@docspace/shared/components";
+import { Selector } from "@docspace/shared/components/selector";
+import { Aside } from "@docspace/shared/components/aside";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Portal } from "@docspace/shared/components/portal";
+import { toastr } from "@docspace/shared/components/toast";
 
 import EmptyScreenFilterAltSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt.svg?url";
 import EmptyScreenFilterAltDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt_dark.svg?url";

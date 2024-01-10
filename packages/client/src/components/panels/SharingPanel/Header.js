@@ -2,10 +2,10 @@
 import ActionsHeaderTouchReactSvgUrl from "PUBLIC_DIR/images/actions.header.touch.react.svg?url";
 import React from "react";
 
-import { IconButton } from "@docspace/shared/components";
-import { Heading } from "@docspace/shared/components";
-import { DropDown } from "@docspace/shared/components";
-import { DropDownItem } from "@docspace/shared/components";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { Heading } from "@docspace/shared/components/heading";
+import { DropDown } from "@docspace/shared/components/drop-down";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 
 import { StyledHeaderContent } from "./StyledSharingPanel";
 

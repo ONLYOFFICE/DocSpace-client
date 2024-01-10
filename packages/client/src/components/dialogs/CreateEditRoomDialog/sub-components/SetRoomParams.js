@@ -16,7 +16,9 @@ import withLoader from "@docspace/client/src/HOCs/withLoader";
 import Loaders from "@docspace/common/components/Loaders";
 import { getRoomTypeDefaultTagTranslation } from "../data";
 
-import { ImageEditor, PreviewTile, Text } from "@docspace/shared/components";
+import { ImageEditor } from "@docspace/shared/components/image-editor";
+import PreviewTile from "@docspace/shared/components/image-editor/PreviewTile";
+import { Text } from "@docspace/shared/components/text";
 
 import ChangeRoomOwner from "./ChangeRoomOwner";
 

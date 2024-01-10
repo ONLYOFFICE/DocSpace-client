@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Text } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
-import { TextInput } from "@docspace/shared/components";
-import { SaveCancelButtons } from "@docspace/shared/components";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import styled from "styled-components";
-import { Button } from "@docspace/shared/components";
-import { toastr } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components/button";
+import { toastr } from "@docspace/shared/components/toast";
 import { UnavailableStyles } from "../../../utils/commonSettingsStyles";
 import { mobile, tablet } from "@docspace/shared/utils";
-import { Badge } from "@docspace/shared/components";
+import { Badge } from "@docspace/shared/components/badge";
 
 const StyledTextInput = styled(TextInput)`
   margin-top: 4px;

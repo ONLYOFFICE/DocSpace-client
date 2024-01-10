@@ -1,11 +1,11 @@
 import React from "react";
 
-import { ViewSelector } from "@docspace/shared/components";
-import { Link } from "@docspace/shared/components";
+import { ViewSelector } from "@docspace/shared/components/view-selector";
+import { Link } from "@docspace/shared/components/link";
 
 import FilterButton from "./sub-components/FilterButton";
 import SortButton from "./sub-components/SortButton";
-import { SelectedItem } from "@docspace/shared/components";
+import { SelectedItem } from "@docspace/shared/components/selected-item";
 import { useTheme } from "styled-components";
 import { StyledFilterInput, StyledSearchInput } from "./StyledFilterInput";
 import { DeviceType } from "@docspace/shared/enums";

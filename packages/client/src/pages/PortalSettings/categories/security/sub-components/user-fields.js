@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { commonIconsStyles, mobile } from "@docspace/shared/utils";
 import TrashIcon from "PUBLIC_DIR/images/trash.react.svg";
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg";
-import { Link } from "@docspace/shared/components";
-import { TextInput } from "@docspace/shared/components";
+import { Link } from "@docspace/shared/components/link";
+import { TextInput } from "@docspace/shared/components/text-input";
 import { Base } from "@docspace/shared/themes";
 
 const StyledPlusIcon = styled(PlusIcon)`

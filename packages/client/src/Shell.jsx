@@ -6,13 +6,11 @@ import Main from "./components/Main";
 
 import Layout from "./components/Layout";
 import ScrollToTop from "./components/Layout/ScrollToTop";
-import {
-  Toast,
-  toastr,
-  ThemeProvider,
-  SnackBar,
-  Portal,
-} from "@docspace/shared/components";
+import { Toast, toastr } from "@docspace/shared/components/toast";
+import { ThemeProvider } from "@docspace/shared/components/theme-provider";
+import { SnackBar } from "@docspace/shared/components/snackbar";
+import { Portal } from "@docspace/shared/components/portal";
+
 import { getLogoFromPath, updateTempContent } from "@docspace/common/utils";
 
 import store from "client/store";

@@ -6,7 +6,7 @@ import RackspaceStorage from "./storages/RackspaceStorage";
 import SelectelStorage from "./storages/SelectelStorage";
 import { getOptions } from "../../common-container/GetThirdPartyStoragesOptions";
 import { ThirdPartyStorages } from "@docspace/shared/enums";
-import { ComboBox } from "@docspace/shared/components";
+import { ComboBox } from "@docspace/shared/components/combobox";
 
 class ThirdPartyStoragesModule extends React.PureComponent {
   constructor(props) {

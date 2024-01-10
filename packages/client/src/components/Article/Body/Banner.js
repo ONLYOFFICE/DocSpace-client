@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { CampaignsBanner } from "@docspace/shared/components";
+import { CampaignsBanner } from "@docspace/shared/components/campaigns-banner";
 import { ADS_TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getLanguage } from "@docspace/shared/utils";

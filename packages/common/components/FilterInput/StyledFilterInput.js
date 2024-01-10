@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { SearchInput } from "@docspace/shared/components";
+import { SearchInput } from "@docspace/shared/components/search-input";
 
 const StyledFilterInput = styled.div`
   width: 100%;

@@ -5,7 +5,7 @@ Component that displays floating button
 ### Usage
 
 ```js
-import { FloatingButton } from "@docspace/shared/components";
+import { FloatingButton } from "@docspace/shared/components/floating-button";
 ```
 
 ```jsx

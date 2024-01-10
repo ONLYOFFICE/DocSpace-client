@@ -22,7 +22,7 @@ import {
   FolderType,
 } from "@docspace/shared/enums";
 //@ts-ignore
-import { toastr } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
 
 const DEFAULT_FILE_EXTS = "file";
 

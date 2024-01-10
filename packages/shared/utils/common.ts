@@ -8,7 +8,7 @@ export const RoomsTypeValues = Object.values(RoomsType).reduce(
 );
 
 export const getSystemTheme = () => {
-  const isDesktopClient = window.AscDesktopEditor !== undefined;
+  const isDesktopClient = window["AscDesktopEditor"] !== undefined;
   const desktopClientTheme = window?.RendererProcessVariable?.theme;
   const isDark =
     desktopClientTheme?.id === "theme-dark" ||
@@ -21,9 +21,9 @@ export const getSystemTheme = () => {
       ? ThemeKeys.DarkStr
       : ThemeKeys.BaseStr
     : window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? ThemeKeys.DarkStr
-      : ThemeKeys.BaseStr;
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? ThemeKeys.DarkStr
+    : ThemeKeys.BaseStr;
 };
 
 export const getEditorTheme = (theme: ThemeKeys) => {

@@ -17,7 +17,10 @@ import React from "react";
 
 import { inject, observer } from "mobx-react";
 
-import { MainButton, toastr, Button } from "@docspace/shared/components";
+import { MainButton } from "@docspace/shared/components/main-button";
+import { toastr } from "@docspace/shared/components/toast";
+import { Button } from "@docspace/shared/components/button";
+
 import { withTranslation } from "react-i18next";
 import Loaders from "@docspace/common/components/Loaders";
 import { encryptionUploadDialog } from "../../../helpers/desktop";

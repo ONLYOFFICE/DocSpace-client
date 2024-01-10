@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/shared/components";
-import { PasswordInput } from "@docspace/shared/components";
-import { Button } from "@docspace/shared/components";
-import { FieldContainer } from "@docspace/shared/components";
-import { toastr } from "@docspace/shared/components";
-import { FormWrapper } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
+import { PasswordInput } from "@docspace/shared/components/password-input";
+import { Button } from "@docspace/shared/components/button";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { toastr } from "@docspace/shared/components/toast";
+import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
 import { createPasswordHash } from "@docspace/common/utils";
 import { login } from "@docspace/common/utils/loginUtils";

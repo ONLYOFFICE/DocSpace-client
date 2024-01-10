@@ -1,5 +1,5 @@
 import React from "react";
-import { TableHeader } from "@docspace/shared/components";
+import { TableHeader } from "@docspace/shared/components/table";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 

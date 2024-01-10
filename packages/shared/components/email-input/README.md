@@ -5,7 +5,7 @@ Email entry field with advanced capabilities for validation based on settings
 ### Usage
 
 ```js
-import { EmailInput } from "@docspace/shared/components";
+import { EmailInput } from "@docspace/shared/components/email-input";
 import { EmailSettings } from "@docspace/shared/utils";
 
 const settings = new EmailSettings();
@@ -124,7 +124,7 @@ Base colors:
 
 ```js
 import React from "react";
-import { EmailInput } from "@docspace/shared/components";
+import { EmailInput } from "@docspace/shared/components/email-input";
 
 const onChange = (e) => {
   // your event handling

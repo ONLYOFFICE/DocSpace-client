@@ -1,6 +1,6 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { ComboBox } from "@docspace/shared/components";
+import { ComboBox } from "@docspace/shared/components/combobox";
 import { BackupStorageType, ThirdPartyStorages } from "@docspace/shared/enums";
 import GoogleCloudStorage from "./storages/GoogleCloudStorage";
 import RackspaceStorage from "./storages/RackspaceStorage";

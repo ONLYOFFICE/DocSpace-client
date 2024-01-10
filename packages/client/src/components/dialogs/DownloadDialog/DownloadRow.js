@@ -1,13 +1,9 @@
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { ReactSVG } from "react-svg";
-import {
-  Text,
-  Checkbox,
-  LinkWithDropdown,
-  DropDownItem,
-} from "@docspace/shared/components";
-
+import { LinkWithDropdown } from "@docspace/shared/components/link-with-dropdown";
+import { Text } from "@docspace/shared/components/text";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 import { isMobile } from "@docspace/shared/utils";
 
 const DownloadRow = (props) => {

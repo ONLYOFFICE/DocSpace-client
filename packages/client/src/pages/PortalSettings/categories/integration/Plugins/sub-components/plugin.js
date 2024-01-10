@@ -1,8 +1,8 @@
-import { Heading } from "@docspace/shared/components";
-import { IconButton } from "@docspace/shared/components";
-import { ToggleButton } from "@docspace/shared/components";
-import { Badge } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
+import { Heading } from "@docspace/shared/components/heading";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { Badge } from "@docspace/shared/components/badge";
+import { Text } from "@docspace/shared/components/text";
 
 import PluginSettingsIconUrl from "PUBLIC_DIR/images/plugin.settings.react.svg?url";
 import PluginDefaultLogoUrl from "PUBLIC_DIR/images/plugin.default-logo.png";

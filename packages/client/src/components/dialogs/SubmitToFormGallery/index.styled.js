@@ -1,4 +1,4 @@
-import { ModalDialog } from "@docspace/shared/components";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import styled from "styled-components";
 
 export const SubmitToGalleryDialog = styled(ModalDialog)`

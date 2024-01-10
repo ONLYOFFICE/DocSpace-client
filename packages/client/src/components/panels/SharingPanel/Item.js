@@ -1,7 +1,7 @@
 import React from "react";
 
-import { Avatar } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
+import { Avatar } from "@docspace/shared/components/avatar";
+import { Text } from "@docspace/shared/components/text";
 import AccessComboBox from "./AccessComboBox";
 import { StyledItem } from "./StyledSharingPanel";
 
@@ -29,10 +29,10 @@ const Item = ({
       item.sharedTo.id === isMyId
         ? t("Common:MeLabel")
         : !!item.sharedTo.displayName
-        ? item.sharedTo.displayName
-        : !!item.sharedTo.name
-        ? item.sharedTo.name
-        : item.sharedTo.label;
+          ? item.sharedTo.displayName
+          : !!item.sharedTo.name
+            ? item.sharedTo.name
+            : item.sharedTo.label;
 
     avatarUrl = !!item.avatarSmall ? item.avatarSmall : item.avatarUrl;
   }

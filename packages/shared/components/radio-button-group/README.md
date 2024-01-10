@@ -5,7 +5,7 @@ RadioButtonGroup allow you to add group radiobutton
 ### Usage
 
 ```js
-import { RadioButtonGroup } from "@docspace/shared/components";
+import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 ```
 
 ```jsx

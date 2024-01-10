@@ -1,5 +1,5 @@
 import React from "react";
-import { Row } from "@docspace/shared/components";
+import { Row } from "@docspace/shared/components/row";
 import HistoryContent from "./HistoryContent";
 
 export const HistoryUserRow = ({ item, sectionWidth }) => {

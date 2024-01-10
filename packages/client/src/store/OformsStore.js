@@ -10,7 +10,7 @@ import {
   getCategoryTypes,
   getCategoriesOfCategoryType,
 } from "@docspace/common/api/oforms";
-import { toastr } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
 
 import { combineUrl, convertToLanguage } from "@docspace/common/utils";
 import { LANGUAGE } from "@docspace/shared/constants";

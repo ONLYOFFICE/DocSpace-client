@@ -8,7 +8,7 @@ import React, { useEffect, useState, useRef, useCallback } from "react";
 import styled, { css } from "styled-components";
 import CrossIcon from "PUBLIC_DIR/images/icons/17/cross.react.svg";
 
-import { Portal } from "@docspace/shared/components";
+import { Portal } from "@docspace/shared/components/portal";
 import { DeviceType } from "@docspace/shared/enums";
 
 const StyledInfoPanelWrapper = styled.div.attrs(({ id }) => ({

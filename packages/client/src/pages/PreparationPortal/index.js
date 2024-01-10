@@ -3,11 +3,11 @@ import ErrorContainer from "@docspace/common/components/ErrorContainer";
 import { withTranslation } from "react-i18next";
 
 import { StyledPreparationPortal } from "./StyledPreparationPortal";
-import { Text } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
 import { getRestoreProgress } from "@docspace/common/api/portal";
 import { observer, inject } from "mobx-react";
 import PropTypes from "prop-types";
-import { ColorTheme, ThemeId } from "@docspace/shared/components";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 const baseSize = 1073741824; //number of bytes in one GB
 const unSizeMultiplicationFactor = 3;

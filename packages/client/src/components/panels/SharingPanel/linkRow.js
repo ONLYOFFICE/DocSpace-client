@@ -1,8 +1,8 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { Row } from "@docspace/shared/components";
-import { LinkWithDropdown } from "@docspace/shared/components";
-import { ToggleButton } from "@docspace/shared/components";
+import { Row } from "@docspace/shared/components/row";
+import { LinkWithDropdown } from "@docspace/shared/components/link-with-dropdown";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { StyledLinkRow } from "../StyledPanels";
 import AccessComboBox from "./AccessComboBox";
 import { ShareAccessRights } from "@docspace/shared/enums";

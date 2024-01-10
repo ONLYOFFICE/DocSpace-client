@@ -10,9 +10,9 @@ import {
   desktop,
 } from "@docspace/shared/utils";
 
-import { Link } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
-import { RowContent } from "@docspace/shared/components";
+import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { RowContent } from "@docspace/shared/components/row-content";
 
 import withContent from "../../../../../HOCs/withContent";
 

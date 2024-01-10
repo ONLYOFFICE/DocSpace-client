@@ -5,7 +5,10 @@ import { inject, observer } from "mobx-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 
-import { Link, Box, Text, IconButton } from "@docspace/shared/components";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { Link } from "@docspace/shared/components/link";
+import { Box } from "@docspace/shared/components/box";
+import { Text } from "@docspace/shared/components/text";
 
 import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
 import RoomsFilter from "@docspace/common/api/rooms/filter";

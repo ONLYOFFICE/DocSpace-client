@@ -1522,6 +1522,7 @@ class FilesStore {
         this.selectedFolderStore.setSelectedFolder({
           folders: data.folders,
           ...data.current,
+          inRoom: !!data.current.inRoom,
           pathParts: data.pathParts,
           navigationPath,
           ...{ new: data.new },

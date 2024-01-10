@@ -32,7 +32,7 @@ class SelectedFolderStore {
   rootFolderId = null;
   settingsStore = null;
   security = null;
-  inRoom = true;
+  inRoom = false;
 
   constructor(settingsStore) {
     makeAutoObservable(this);
@@ -111,7 +111,7 @@ class SelectedFolderStore {
     this.tags = null;
     this.rootFolderId = null;
     this.security = null;
-    this.inRoom = true;
+    this.inRoom = false;
   };
 
   setParentId = (parentId) => {

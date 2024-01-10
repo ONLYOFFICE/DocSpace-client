@@ -5,7 +5,7 @@ Displays content as row
 ### Usage
 
 ```js
-import { Row } from "@docspace/shared/components";
+import { Row } from "@docspace/shared/components/row";
 ```
 
 ```jsx

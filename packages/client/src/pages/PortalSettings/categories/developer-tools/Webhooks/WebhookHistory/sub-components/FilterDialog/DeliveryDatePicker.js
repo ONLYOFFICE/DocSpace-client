@@ -2,13 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import moment from "moment-timezone";
 
-import { Text } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
 import { useTranslation } from "react-i18next";
-import { DatePicker } from "@docspace/shared/components";
-import { Calendar } from "@docspace/shared/components";
-import { TimePicker } from "@docspace/shared/components";
-import { SelectorAddButton } from "@docspace/shared/components";
-import { SelectedItem } from "@docspace/shared/components";
+import { DatePicker } from "@docspace/shared/components/date-picker";
+import { Calendar } from "@docspace/shared/components/calendar";
+import { TimePicker } from "@docspace/shared/components/time-picker";
+import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
+import { SelectedItem } from "@docspace/shared/components/selected-item";
 
 import { isMobile } from "@docspace/shared/utils";
 

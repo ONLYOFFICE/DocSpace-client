@@ -14,7 +14,7 @@ import {
   ShareAccessRights,
 } from "@docspace/common/constants";
 
-import { ColorTheme, ThemeId } from "@docspace/shared/components";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 const QuickButtons = (props) => {
   const {

@@ -3,9 +3,9 @@ import styled, { useTheme } from "styled-components";
 import { FixedSizeList as List, areEqual } from "react-window";
 import InfiniteLoader from "react-window-infinite-loader";
 import Loaders from "@docspace/common/components/Loaders";
-import { CustomScrollbarsVirtualList } from "@docspace/shared/components";
+import { CustomScrollbarsVirtualList } from "@docspace/shared/components/scrollbar";
 import { isMobile } from "@docspace/shared/utils";
-import { Text } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
 import { StyledUserTypeHeader } from "../../../styles/members";
 
 const MainStyles = styled.div`

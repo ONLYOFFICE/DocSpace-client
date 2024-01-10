@@ -1,4 +1,6 @@
-import { Text, Loader, ProgressBar } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
+import { Loader } from "@docspace/shared/components/loader";
+import { ProgressBar } from "@docspace/shared/components/progress-bar";
 import styled from "styled-components";
 
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
@@ -187,10 +189,10 @@ const Progress = ({
           {isAbortTransfer && percent !== percentAllReassignment
             ? interruptedNode
             : percent < percentRoomReassignment
-            ? pendingNode
-            : percent < percentFilesInRoomsReassignment
-            ? inProgressNode
-            : allDataTransferredNode}
+              ? pendingNode
+              : percent < percentFilesInRoomsReassignment
+                ? inProgressNode
+                : allDataTransferredNode}
         </div>
       </div>
 

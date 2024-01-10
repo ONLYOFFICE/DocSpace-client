@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment-timezone";
 import styled from "styled-components";
 
-import { Text } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
 import StatusBadge from "../../sub-components/StatusBadge";
 
 import { inject, observer } from "mobx-react";

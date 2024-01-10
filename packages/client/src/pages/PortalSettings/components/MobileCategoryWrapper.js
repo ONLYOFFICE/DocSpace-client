@@ -1,6 +1,6 @@
-import { Text } from "@docspace/shared/components";
-import { Link } from "@docspace/shared/components";
-import { Badge } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { Badge } from "@docspace/shared/components/badge";
 import { Base } from "@docspace/shared/themes";
 import { StyledMobileCategoryWrapper, StyledArrowRightIcon } from "./styles";
 import { combineUrl } from "@docspace/common/utils";

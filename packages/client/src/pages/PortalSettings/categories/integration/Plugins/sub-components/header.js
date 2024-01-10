@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-import { Heading } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
-import { Link } from "@docspace/shared/components";
+import { Heading } from "@docspace/shared/components/heading";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
 
 const StyledHeader = styled.div`
   width: 100%;

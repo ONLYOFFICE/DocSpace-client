@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
-import { SelectionArea as SelectionAreaComponent } from "@docspace/shared/components";
+import { SelectionArea as SelectionAreaComponent } from "@docspace/shared/components/selection-area";
 
 const SelectionArea = (props) => {
   const {

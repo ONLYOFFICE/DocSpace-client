@@ -5,7 +5,7 @@ import { getAccessOptions } from "../utils";
 import { StyledAccessSelector } from "../StyledInvitePanel";
 
 import { isMobile } from "@docspace/shared/utils";
-import { AccessRightSelect } from "@docspace/shared/components";
+import { AccessRightSelect } from "@docspace/shared/components/access-right-select";
 
 const AccessSelector = ({
   t,

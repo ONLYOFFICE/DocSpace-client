@@ -5,7 +5,7 @@ Container for Row component
 ### Usage
 
 ```js
-import { RowContainer } from "@docspace/shared/components";
+import { RowContainer } from "@docspace/shared/components/row-container";
 ```
 
 ```jsx

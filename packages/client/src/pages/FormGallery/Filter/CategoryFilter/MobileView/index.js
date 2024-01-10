@@ -1,12 +1,12 @@
 import * as Styled from "./index.styled";
 
-import { DropDownItem } from "@docspace/shared/components";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { Scrollbar } from "@docspace/shared/components";
-import { ComboButton } from "@docspace/shared/components";
-import { Backdrop } from "@docspace/shared/components";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import { ComboButton } from "@docspace/shared/components/combobox";
+import { Backdrop } from "@docspace/shared/components/backdrop";
 import { isMobile } from "@docspace/shared/utils";
 
 const CategoryFilterMobile = ({

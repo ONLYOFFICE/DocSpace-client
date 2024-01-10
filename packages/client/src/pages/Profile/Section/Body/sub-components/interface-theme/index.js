@@ -3,10 +3,10 @@ import styled, { css } from "styled-components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/shared/components";
-import { Checkbox } from "@docspace/shared/components";
-import { RadioButtonGroup } from "@docspace/shared/components";
-import { toastr } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
+import { toastr } from "@docspace/shared/components/toast";
 
 import { ThemeKeys } from "@docspace/common/constants";
 

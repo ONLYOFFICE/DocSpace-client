@@ -5,7 +5,7 @@ File entry field
 ### Usage
 
 ```js
-import { FileInput } from "@docspace/shared/components";
+import { FileInput } from "@docspace/shared/components/file-input";
 ```
 
 ```jsx

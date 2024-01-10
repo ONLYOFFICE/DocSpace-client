@@ -16,7 +16,7 @@ import SubInfoPanelHeader from "./sub-components/info-panel-header";
 import SubSectionFooter from "./sub-components/section-footer";
 import SectionWarning from "./sub-components/section-warning";
 
-import { FloatingButton } from "@docspace/shared/components";
+import { FloatingButton } from "@docspace/shared/components/floating-button";
 import { DeviceType } from "../../constants";
 
 const Section = (props) => {

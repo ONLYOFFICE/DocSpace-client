@@ -4,7 +4,7 @@ import { inject, observer } from "mobx-react";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { isMobile } from "@docspace/shared/utils";
-import { RowContainer } from "@docspace/shared/components";
+import { RowContainer } from "@docspace/shared/components/row-container";
 import { Base } from "@docspace/shared/themes";
 
 import HistoryRow from "./HistoryRow";

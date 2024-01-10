@@ -8,7 +8,8 @@ import { ReactSVG } from "react-svg";
 import throttle from "lodash/throttle";
 import AvatarEditor from "react-avatar-editor";
 
-import { Slider, IconButton } from "@docspace/shared/components";
+import { Slider } from "@docspace/shared/components/slider";
+import { IconButton } from "@docspace/shared/components/icon-button";
 import { Base } from "@docspace/shared/themes";
 
 const StyledAvatarCropper = styled.div`

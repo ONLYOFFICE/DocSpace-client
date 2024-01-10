@@ -1,7 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { Button } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components/button";
 import { getFromLocalStorage } from "../../../../../utils";
 import { BackupStorageType } from "@docspace/common/constants";
 import DirectThirdPartyConnection from "../../common-container/DirectThirdPartyConnection";

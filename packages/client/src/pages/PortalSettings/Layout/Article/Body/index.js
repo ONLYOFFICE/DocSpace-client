@@ -18,7 +18,7 @@ import {
   getCurrentSettingsCategory,
 } from "../../../utils";
 
-import { ArticleItem } from "@docspace/shared/components";
+import { ArticleItem } from "@docspace/shared/components/article-item";
 import LoaderArticleBody from "./loaderArticleBody";
 
 const ArticleBodyContent = (props) => {

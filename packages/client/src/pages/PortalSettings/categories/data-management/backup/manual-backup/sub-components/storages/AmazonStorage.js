@@ -1,6 +1,6 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
-import { Button } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components/button";
 import AmazonSettings from "../../../consumer-storage-settings/AmazonSettings";
 import { inject, observer } from "mobx-react";
 import { getFromLocalStorage } from "../../../../../../utils";

@@ -4,7 +4,7 @@ import { combineUrl } from "@docspace/common/utils";
 import { RoomsType } from "@docspace/common/constants";
 import { checkDialogsOpen } from "@docspace/common/utils/checkDialogsOpen";
 
-import { toastr } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
 import { getFilesFromEvent } from "@docspace/shared/components/drag-and-drop";
 

@@ -7,7 +7,7 @@ ContextMenu is used for a call context actions on a page.
 ### Usage
 
 ```js
-import { ContextMenu } from "@docspace/shared/components";
+import { ContextMenu } from "@docspace/shared/components/context-menu";
 ```
 
 ```jsx

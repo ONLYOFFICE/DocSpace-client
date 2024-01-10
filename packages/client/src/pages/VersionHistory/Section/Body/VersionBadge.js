@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { Text } from "@docspace/shared/components";
-import { ColorTheme, ThemeId } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import VersionSvg from "PUBLIC_DIR/images/versionrevision_active.react.svg";
 import { useTranslation } from "react-i18next";
 
@@ -11,14 +11,14 @@ const VersionMarkIcon = styled(VersionSvg)`
       !props.$isVersion
         ? props.theme.filesVersionHistory.badge.defaultFill
         : props.index === 0
-        ? props.theme.filesVersionHistory.badge.fill
-        : props.theme.filesVersionHistory.badge.badgeFill};
+          ? props.theme.filesVersionHistory.badge.fill
+          : props.theme.filesVersionHistory.badge.badgeFill};
     stroke: ${(props) =>
       !props.$isVersion
         ? props.theme.filesVersionHistory.badge.stroke
         : props.index === 0
-        ? props.theme.filesVersionHistory.badge.fill
-        : props.theme.filesVersionHistory.badge.badgeFill};
+          ? props.theme.filesVersionHistory.badge.fill
+          : props.theme.filesVersionHistory.badge.badgeFill};
 
     stroke-dasharray: ${(props) => (props.$isVersion ? "2 0" : "3 1")};
     stroke-linejoin: ${(props) => (props.$isVersion ? "unset" : "round")};

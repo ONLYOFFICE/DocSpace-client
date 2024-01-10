@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
 import { isMobile, mobile } from "@docspace/shared/utils";
-import { Backdrop } from "@docspace/shared/components";
-import { Aside } from "@docspace/shared/components";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Aside } from "@docspace/shared/components/aside";
 
 import Header from "./sub-components/header";
 import HeaderNav from "./sub-components/header-nav";

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { mobile } from "@docspace/shared/utils";
 
-import { DropDown } from "@docspace/shared/components";
+import { DropDown } from "@docspace/shared/components/drop-down";
 import { Base } from "@docspace/shared/themes";
 
 const StyledDropDownWrapper = styled.div`

@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { RowContent } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
+import { RowContent } from "@docspace/shared/components/row-content";
+import { Text } from "@docspace/shared/components/text";
 import styled, { css } from "styled-components";
 import { isMobileOnly } from "react-device-detect";
 import { getConvertedSize } from "@docspace/common/utils";

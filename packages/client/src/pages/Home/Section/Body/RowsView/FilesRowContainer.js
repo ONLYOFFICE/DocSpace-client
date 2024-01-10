@@ -5,7 +5,7 @@ import { inject, observer } from "mobx-react";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { Base } from "@docspace/shared/themes";
-import { RowContainer } from "@docspace/shared/components";
+import { RowContainer } from "@docspace/shared/components/row-container";
 
 import marginStyles from "./CommonStyles";
 import SimpleFilesRow from "./SimpleFilesRow";

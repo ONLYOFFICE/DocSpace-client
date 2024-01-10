@@ -2,13 +2,13 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
 
-import { TableRow } from "@docspace/shared/components";
-import { TableCell } from "@docspace/shared/components";
-import { Link } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
-import { Checkbox } from "@docspace/shared/components";
-import { ComboBox } from "@docspace/shared/components";
-import { DropDownItem } from "@docspace/shared/components";
+import { TableRow } from "@docspace/shared/components/table";
+import { TableCell } from "@docspace/shared/components/table";
+import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { ComboBox } from "@docspace/shared/components/combobox";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 
@@ -452,8 +452,8 @@ const PeopleTableRow = (props) => {
             {statusType === "pending"
               ? email
               : displayName?.trim()
-              ? displayName
-              : email}
+                ? displayName
+                : email}
           </Link>
           <Badges statusType={statusType} isPaid={isPaidUser} isSSO={isSSO} />
         </TableCell>

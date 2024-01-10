@@ -4,12 +4,12 @@ import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import { FileType } from "@docspace/common/constants";
-import { Text } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
 
 import DetailsHelper from "../../helpers/DetailsHelper.js";
 import { StyledNoThumbnail, StyledThumbnail } from "../../styles/details.js";
 import { StyledProperties, StyledSubtitle } from "../../styles/common.js";
-import { RoomIcon } from "@docspace/shared/components";
+import { RoomIcon } from "@docspace/shared/components/room-icon";
 const Details = ({
   t,
   selection,

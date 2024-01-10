@@ -1,4 +1,4 @@
-import { Button } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components/button";
 import React, { useState, useEffect, useTransition, Suspense } from "react";
 import WebhookDialog from "./sub-components/WebhookDialog";
 import WebhookInfo from "./sub-components/WebhookInfo";
@@ -16,7 +16,7 @@ import { useTranslation } from "react-i18next";
 
 import { DeleteWebhookDialog } from "./sub-components/DeleteWebhookDialog";
 import { NoBoxShadowToast } from "./styled-components";
-import { toastr } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
 
 const MainWrapper = styled.div`
   width: 100%;

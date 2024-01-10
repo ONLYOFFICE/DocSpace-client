@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 
 import PlusReactSvgUrl from "PUBLIC_DIR/images/icons/17/plus.svg?url";
 
-import { IconButton } from "@docspace/shared/components";
-import { ContextMenu } from "@docspace/shared/components";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { ContextMenu } from "@docspace/shared/components/context-menu";
 
 const PlusButton = (props) => {
   const [isOpen, setIsOpen] = useState(false);

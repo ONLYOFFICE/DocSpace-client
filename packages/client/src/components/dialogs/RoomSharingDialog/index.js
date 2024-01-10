@@ -2,14 +2,10 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 import { withTranslation } from "react-i18next";
-import {
-  ModalDialog,
-  Button,
-  InputBlock,
-  TextInput,
-  toastr,
-} from "@docspace/shared/components";
-
+import { toastr } from "@docspace/shared/components/toast";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Button } from "@docspace/shared/components/button";
+import { TextInput } from "@docspace/shared/components/text-input";
 import copy from "copy-to-clipboard";
 
 import { getCorrectFourValuesStyle } from "@docspace/shared/utils";

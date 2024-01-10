@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { isMobileOnly } from "react-device-detect";
 
 import { isMobile } from "@docspace/shared/utils";
-import { ArticleItem } from "@docspace/shared/components";
+import { ArticleItem } from "@docspace/shared/components/article-item";
 import { settingsTree } from "SRC_DIR/utils/settingsTree";
 import { getItemByLink } from "SRC_DIR/utils";
 import { TSettingsTreeItem } from "SRC_DIR/types/index";

@@ -1,4 +1,4 @@
-import { Tag } from "@docspace/shared/components";
+import { Tag } from "@docspace/shared/components/tag";
 import React from "react";
 import styled from "styled-components";
 

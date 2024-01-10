@@ -3,10 +3,10 @@ import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { IconButton } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { Text } from "@docspace/shared/components/text";
 
-import { Submenu } from "@docspace/shared/components";
+import { Submenu } from "@docspace/shared/components/submenu";
 import {
   isDesktop as isDesktopUtils,
   isMobile as isMobileUtils,

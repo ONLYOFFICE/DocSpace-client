@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { Scrollbar } from "@docspace/shared/components";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { isMobileOnly, isMobile } from "react-device-detect";
 import { Base } from "@docspace/shared/themes";
 

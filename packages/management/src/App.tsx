@@ -6,9 +6,9 @@ import { Outlet } from "react-router-dom";
 
 import { isMobileOnly } from "react-device-detect";
 
-import { ThemeProvider } from "@docspace/shared/components";
-import { Portal } from "@docspace/shared/components";
-import { Toast } from "@docspace/shared/components";
+import { ThemeProvider } from "@docspace/shared/components/theme-provider";
+import { Portal } from "@docspace/shared/components/portal";
+import { Toast } from "@docspace/shared/components/toast";
 
 import "@docspace/common/custom.scss";
 

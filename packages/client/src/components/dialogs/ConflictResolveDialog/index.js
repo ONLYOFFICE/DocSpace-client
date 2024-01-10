@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import {
-  ModalDialog,
-  RadioButtonGroup,
-  Button,
-  Text,
-  toastr,
-} from "@docspace/shared/components";
+
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
+import { Button } from "@docspace/shared/components/button";
+import { Text } from "@docspace/shared/components/text";
+import { toastr } from "@docspace/shared/components/toast";
 
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";

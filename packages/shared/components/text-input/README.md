@@ -5,7 +5,7 @@ Input field for single-line strings
 ### Usage
 
 ```js
-import { TextInput } from "@docspace/shared/components";
+import { TextInput } from "@docspace/shared/components/text-input";
 ```
 
 ```js

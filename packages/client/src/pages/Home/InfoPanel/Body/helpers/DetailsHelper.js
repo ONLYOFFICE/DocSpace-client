@@ -4,9 +4,9 @@ import { LANGUAGE } from "@docspace/shared/constants";
 
 import { getCorrectDate, getCookie } from "@docspace/shared/utils";
 
-import { Link } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
-import { Tag } from "@docspace/shared/components";
+import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { Tag } from "@docspace/shared/components/tag";
 import { decode } from "he";
 
 import {

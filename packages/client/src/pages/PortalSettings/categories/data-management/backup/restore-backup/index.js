@@ -7,11 +7,11 @@ import {
   getStorageRegions,
 } from "@docspace/common/api/settings";
 import RestoreBackupLoader from "@docspace/common/components/Loaders/RestoreBackupLoader";
-import { toastr } from "@docspace/shared/components";
-import { RadioButtonGroup } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
+import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { BackupStorageType, DeviceType } from "@docspace/common/constants";
-import { Checkbox } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Text } from "@docspace/shared/components/text";
 
 import LocalFileModule from "./sub-components/LocalFileModule";
 import ThirdPartyStoragesModule from "./sub-components/ThirdPartyStoragesModule";

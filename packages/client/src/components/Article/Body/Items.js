@@ -12,7 +12,7 @@ import {
 } from "@docspace/common/constants";
 import { getCatalogIconUrlByType } from "@docspace/common/utils/catalogIcon.helper";
 
-import { ArticleItem } from "@docspace/shared/components";
+import { ArticleItem } from "@docspace/shared/components/article-item";
 import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
 
 import BonusItem from "./BonusItem";

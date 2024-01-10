@@ -4,16 +4,16 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { StyledBruteForceProtection } from "../StyledSecurity";
 import isEqual from "lodash/isEqual";
-import { FieldContainer } from "@docspace/shared/components";
-import { toastr } from "@docspace/shared/components";
-import { TextInput } from "@docspace/shared/components";
-import { SaveCancelButtons } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { toastr } from "@docspace/shared/components/toast";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
+import { Text } from "@docspace/shared/components/text";
 import { size } from "@docspace/shared/utils";
 import { useNavigate, useLocation } from "react-router-dom";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import BruteForceProtectionLoader from "../sub-components/loaders/brute-force-protection-loader";
-import { Link } from "@docspace/shared/components";
+import { Link } from "@docspace/shared/components/link";
 import { DeviceType } from "@docspace/common/constants";
 
 const BruteForceProtection = (props) => {

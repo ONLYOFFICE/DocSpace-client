@@ -2,9 +2,9 @@ import React from "react";
 import { withTranslation } from "react-i18next";
 import styled from "styled-components";
 
-import { SnackBar } from "@docspace/shared/components";
+import { SnackBar } from "@docspace/shared/components/snackbar";
 
-import { Link } from "@docspace/shared/components";
+import { Link } from "@docspace/shared/components/link";
 
 const ConfirmEmailBar = ({
   t,

@@ -2,12 +2,12 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Box } from "@docspace/shared/components";
-import { Button } from "@docspace/shared/components";
-import { Link } from "@docspace/shared/components";
-import { ModalDialog } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
-import { Textarea } from "@docspace/shared/components";
+import { Box } from "@docspace/shared/components/box";
+import { Button } from "@docspace/shared/components/button";
+import { Link } from "@docspace/shared/components/link";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Text } from "@docspace/shared/components/text";
+import { Textarea } from "@docspace/shared/components/textarea";
 
 import ModalComboBox from "./ModalComboBox";
 import StyledModalDialog from "../styled-containers/StyledModalDialog";

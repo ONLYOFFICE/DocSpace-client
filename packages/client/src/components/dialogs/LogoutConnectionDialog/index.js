@@ -1,6 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { ModalDialog, Button } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components/button";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
 import ModalDialogContainer from "../ModalDialogContainer";
 

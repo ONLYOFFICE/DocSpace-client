@@ -2,8 +2,8 @@ import React from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { observer, inject } from "mobx-react";
 
-import { Text } from "@docspace/shared/components";
-import { ColorTheme, ThemeId } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 import StyledComponent from "../StyledComponent";
 

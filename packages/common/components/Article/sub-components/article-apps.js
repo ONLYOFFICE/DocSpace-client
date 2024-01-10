@@ -7,8 +7,8 @@ import IOSReactSvgUrl from "PUBLIC_DIR/images/iOS.react.svg?url";
 import React from "react";
 import styled, { css } from "styled-components";
 import { useTranslation } from "react-i18next";
-import { Text } from "@docspace/shared/components";
-import { IconButton } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
+import { IconButton } from "@docspace/shared/components/icon-button";
 
 import { Base } from "@docspace/shared/themes";
 import { tablet, mobile } from "@docspace/shared/utils";

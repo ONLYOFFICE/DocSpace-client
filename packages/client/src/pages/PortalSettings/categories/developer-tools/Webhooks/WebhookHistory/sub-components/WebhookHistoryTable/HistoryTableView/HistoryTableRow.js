@@ -5,13 +5,13 @@ import { inject, observer } from "mobx-react";
 
 import { useNavigate, useParams } from "react-router-dom";
 
-import { TableRow } from "@docspace/shared/components";
-import { TableCell } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
-import { Checkbox } from "@docspace/shared/components";
+import { TableRow } from "@docspace/shared/components/table";
+import { TableCell } from "@docspace/shared/components/table";
+import { Text } from "@docspace/shared/components/text";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 import StatusBadge from "../../../../sub-components/StatusBadge";
 
-import { toastr } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
 
 import RetryIcon from "PUBLIC_DIR/images/refresh.react.svg?url";
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";

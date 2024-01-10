@@ -5,7 +5,7 @@ ModalDialog is used for displaying modal dialogs
 ### Usage
 
 ```js
-import { ModalDialog } from "@docspace/shared/components";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 ```
 
 ```jsx

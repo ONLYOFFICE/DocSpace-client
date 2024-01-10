@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { Scrollbar } from "@docspace/shared/components";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { Base } from "@docspace/shared/themes";
 import { tablet, mobile } from "@docspace/shared/utils";
 

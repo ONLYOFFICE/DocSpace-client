@@ -5,7 +5,7 @@ import { combineUrl } from "@docspace/common/utils";
 import { DeviceType } from "@docspace/common/constants";
 import ManualBackup from "./manual-backup";
 import AutoBackup from "./auto-backup";
-import { Submenu } from "@docspace/shared/components";
+import { Submenu } from "@docspace/shared/components/submenu";
 import config from "PACKAGE_FILE";
 
 const Backup = ({ t, buttonSize, isNotPaidPeriod }) => {

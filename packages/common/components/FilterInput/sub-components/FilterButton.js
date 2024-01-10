@@ -1,14 +1,14 @@
 import React from "react";
 import FilterReactSvrUrl from "PUBLIC_DIR/images/filter.react.svg?url";
 
-import { IconButton } from "@docspace/shared/components";
+import { IconButton } from "@docspace/shared/components/icon-button";
 import { Base } from "@docspace/shared/themes";
 
 import FilterBlock from "./FilterBlock";
 
 import StyledButton from "./StyledButton";
 
-import { ColorTheme, ThemeId } from "@docspace/shared/components";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 const FilterButton = ({
   t,
   onFilter,

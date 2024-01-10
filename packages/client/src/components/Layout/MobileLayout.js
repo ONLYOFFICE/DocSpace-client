@@ -4,7 +4,7 @@ import {
   isTouchDevice,
   getBannerAttribute,
 } from "@docspace/shared/utils";
-import { Scrollbar } from "@docspace/shared/components";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { LayoutContextProvider } from "./context";
 
 import PropTypes from "prop-types";

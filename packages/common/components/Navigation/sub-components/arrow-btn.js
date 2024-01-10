@@ -1,5 +1,5 @@
 import React from "react";
-import { IconButton } from "@docspace/shared/components";
+import { IconButton } from "@docspace/shared/components/icon-button";
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 

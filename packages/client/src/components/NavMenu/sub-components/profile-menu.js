@@ -2,16 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import { inject, observer } from "mobx-react";
 
-import { Avatar } from "@docspace/shared/components";
-import { DropDown } from "@docspace/shared/components";
+import { Avatar } from "@docspace/shared/components/avatar";
+import { DropDown } from "@docspace/shared/components/drop-down";
 
 import styled, { css, withTheme } from "styled-components";
-import { DropDownItem } from "@docspace/shared/components";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 
 import { Base } from "@docspace/shared/themes";
 import { mobile, tablet } from "@docspace/shared/utils";
 import CrossIcon from "PUBLIC_DIR/images/icons/17/cross.react.svg";
-import { Portal } from "@docspace/shared/components";
+import { Portal } from "@docspace/shared/components/portal";
 
 const StyledWrapper = styled.div``;
 

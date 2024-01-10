@@ -1,7 +1,7 @@
 ﻿import PlusPreviewSvgUrl from "PUBLIC_DIR/images/plus.preview.svg?url";
 import { useState, useEffect, useLayoutEffect } from "react";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { ContextMenuButton } from "@docspace/shared/components";
+import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 
 import {
   StyledComponent,

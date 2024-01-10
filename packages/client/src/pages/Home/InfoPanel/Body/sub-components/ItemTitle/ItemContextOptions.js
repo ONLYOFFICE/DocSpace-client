@@ -1,7 +1,9 @@
 import { useRef, useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
-import { ContextMenu, ContextMenuButton } from "@docspace/shared/components";
+import { ContextMenu } from "@docspace/shared/components/context-menu";
+import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
+
 import ContextHelper from "../../helpers/ContextHelper";
 
 const StyledItemContextOptions = styled.div`
@@ -12,8 +14,8 @@ const StyledItemContextOptions = styled.div`
         ? "0 8px 0 0"
         : "0 auto 0 0"
       : withLabel
-      ? "0 0 0 8px"
-      : "0 0 0 auto"};
+        ? "0 0 0 8px"
+        : "0 0 0 auto"};
 `;
 
 const ItemContextOptions = ({

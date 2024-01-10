@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Button } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components/button";
 
 import { PluginComponent } from "SRC_DIR/helpers/plugins/WrappedComponent";
 

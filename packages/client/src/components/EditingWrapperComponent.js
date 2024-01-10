@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
-import { Button, TextInput, Text } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components/button";
+import { Text } from "@docspace/shared/components/text";
+import { TextInput } from "@docspace/shared/components/text-input";
 
 import { commonIconsStyles, tablet } from "@docspace/shared/utils";
 
@@ -87,8 +89,8 @@ const EditingWrapper = styled.div`
         props.viewAs === "table"
           ? "13px"
           : props.viewAs === "tile"
-          ? "14px"
-          : "15px"
+            ? "14px"
+            : "15px"
       )};
     outline: 0 !important;
     font-weight: 600;

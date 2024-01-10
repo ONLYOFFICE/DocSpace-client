@@ -2,7 +2,7 @@ import React from "react";
 
 import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
 
 import { StyledEnterpriseComponent } from "./StyledComponent";
 import BenefitsContainer from "SRC_DIR/components/StandaloneComponents/BenefitsContainer";

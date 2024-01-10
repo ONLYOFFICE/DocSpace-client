@@ -4,8 +4,8 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
 import { mobile } from "@docspace/shared/utils";
-import { Button } from "@docspace/shared/components";
-import { EmptyScreenContainer } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components/button";
+import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 import ConfirmWrapper from "../../../../Confirm/ConfirmWrapper";
 
 import ApiSvgUrl from "PUBLIC_DIR/images/settings.api.svg?url";

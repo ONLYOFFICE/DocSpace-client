@@ -1,4 +1,4 @@
-import { Button } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components/button";
 import styled, { css } from "styled-components";
 import { commonIconsStyles } from "@docspace/shared/utils";
 import { Base } from "@docspace/shared/themes";

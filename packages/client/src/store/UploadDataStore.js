@@ -17,7 +17,7 @@ import {
   getFolder,
   checkIsFileExist,
 } from "@docspace/common/api/files";
-import { toastr } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
 
 import {
   isMobile as isMobileUtils,
@@ -718,8 +718,8 @@ class UploadDataStore {
         const filePath = file.path
           ? file.path
           : file.webkitRelativePath
-          ? file.webkitRelativePath
-          : file.name;
+            ? file.webkitRelativePath
+            : file.name;
 
         return file.name !== filePath;
       }) > -1;
@@ -1130,8 +1130,8 @@ class UploadDataStore {
     const relativePath = file.path
       ? file.path.slice(1, -file.name.length)
       : file.webkitRelativePath
-      ? file.webkitRelativePath.slice(0, -file.name.length)
-      : "";
+        ? file.webkitRelativePath.slice(0, -file.name.length)
+        : "";
 
     return startUploadSession(
       toFolderId,

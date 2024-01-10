@@ -2,12 +2,12 @@ import React, { useState, useEffect, useCallback } from "react";
 import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import { SaveCancelButtons } from "@docspace/shared/components";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { inject, observer } from "mobx-react";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import styled, { css } from "styled-components";
-import { Checkbox } from "@docspace/shared/components";
-import { toastr } from "@docspace/shared/components";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { toastr } from "@docspace/shared/components/toast";
 import LoaderAdditionalResources from "../sub-components/loaderAdditionalResources";
 import isEqual from "lodash/isEqual";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";

@@ -5,8 +5,8 @@ import { useParams } from "react-router-dom";
 
 import { Base } from "@docspace/shared/themes";
 import FilterReactSvrUrl from "PUBLIC_DIR/images/filter.react.svg?url";
-import { IconButton } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { Text } from "@docspace/shared/components/text";
 
 import FilterDialog from "./FilterDialog";
 import StatusBar from "./StatusBar";

@@ -20,7 +20,7 @@ import moment from "moment-timezone";
 import { ThemeKeys, RtlLanguages } from "../constants";
 import sjcl from "sjcl";
 import { isMobile } from "react-device-detect";
-import { TopLoaderService } from "@docspace/shared/components";
+import TopLoaderService from "@docspace/shared/components/top-loading-indicator";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { Encoder } from "./encoder";
 import FilesFilter from "../api/files/filter";

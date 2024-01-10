@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { Base } from "@docspace/shared/themes";
 import TileContent from "./sub-components/TileContent";
-import { ContextMenu } from "@docspace/shared/components";
+import { ContextMenu } from "@docspace/shared/components/context-menu";
 
 import {
   tablet,

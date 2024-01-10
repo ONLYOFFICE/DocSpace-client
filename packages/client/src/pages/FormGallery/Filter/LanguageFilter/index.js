@@ -7,7 +7,7 @@ import { inject, observer } from "mobx-react";
 
 import { flagsIcons } from "@docspace/common/utils/image-flags";
 import { convertToCulture } from "@docspace/common/utils";
-import { Backdrop } from "@docspace/shared/components";
+import { Backdrop } from "@docspace/shared/components/backdrop";
 import { isMobile } from "@docspace/shared/utils";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 

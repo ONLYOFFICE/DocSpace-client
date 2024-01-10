@@ -1,5 +1,5 @@
 import { inject, observer } from "mobx-react";
-import { FileInput } from "@docspace/shared/components";
+import { FileInput } from "@docspace/shared/components/file-input";
 
 const LocalFile = ({ setRestoreResource, isEnableRestore, t }) => {
   const onClickInput = (file) => {

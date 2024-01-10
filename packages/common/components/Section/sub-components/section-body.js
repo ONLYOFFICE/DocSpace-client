@@ -6,7 +6,7 @@ import styled, { css } from "styled-components";
 // import { isMobile, isMobileOnly } from "react-device-detect";
 import { inject, observer } from "mobx-react";
 
-import { Scrollbar } from "@docspace/shared/components";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
 import { tablet, desktop, mobile, mobileMore } from "@docspace/shared/utils";
 import { DeviceType } from "../../../constants";

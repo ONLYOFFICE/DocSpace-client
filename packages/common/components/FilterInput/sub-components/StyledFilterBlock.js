@@ -1,7 +1,7 @@
-import { Text } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
 import styled, { css } from "styled-components";
 
-import { ToggleButton } from "@docspace/shared/components";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { tablet, mobile } from "@docspace/shared/utils";
 import { Base } from "@docspace/shared/themes";
 import CrossIcon from "PUBLIC_DIR/images/cross.react.svg";

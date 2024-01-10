@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { ModalDialog } from "@docspace/shared/components";
-import { Button } from "@docspace/shared/components";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Button } from "@docspace/shared/components/button";
 import { LabledInput } from "./LabledInput";
 import styled, { css } from "styled-components";
 import { Hint } from "../styled-components";

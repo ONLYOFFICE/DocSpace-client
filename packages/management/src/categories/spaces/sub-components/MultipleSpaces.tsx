@@ -1,7 +1,8 @@
 import React from "react";
-import { Button, TextInput } from "@docspace/shared/components";
+import { TextInput } from "@docspace/shared/components/text-input";
 import { observer } from "mobx-react";
-import { Text } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
 import { isMobile } from "react-device-detect";
 import { SpacesRowContainer } from "./RowView/SpacesRowContainer";
 import { StyledMultipleSpaces } from "../StyledSpaces";

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import styled, { css } from "styled-components";
-import { Row } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
-import { Link } from "@docspace/shared/components";
+import { Row } from "@docspace/shared/components/row";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
 import LoadingButton from "./SubComponents/LoadingButton";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -11,7 +11,7 @@ import ErrorFileUpload from "./SubComponents/ErrorFileUpload.js";
 import ActionsUploadedFile from "./SubComponents/ActionsUploadedFile";
 import { isMobile } from "react-device-detect";
 import { NoUserSelect } from "@docspace/shared/utils";
-import { Button } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components/button";
 
 const StyledFileRow = styled(Row)`
   width: calc(100% - 16px);

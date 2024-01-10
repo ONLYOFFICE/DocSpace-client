@@ -7,11 +7,12 @@ import { StyledDropDown, StyledDropDownWrapper } from "../StyledDropdown";
 
 import { isMobile, DomHelpers } from "@docspace/shared/utils";
 
-import { Text, Button, DropDownItem } from "@docspace/shared/components";
-
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { connectedCloudsTypeTitleTranslation as ProviderKeyTranslation } from "@docspace/client/src/helpers/filesUtils";
 import { Base } from "@docspace/shared/themes";
-import { toastr } from "@docspace/shared/components";
+import { toastr } from "@docspace/shared/components/toast";
 
 const StyledStorageLocation = styled.div`
   display: flex;

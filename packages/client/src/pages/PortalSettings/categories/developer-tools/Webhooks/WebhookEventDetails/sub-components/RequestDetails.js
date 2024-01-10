@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Text } from "@docspace/shared/components";
-import { Textarea } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
+import { Textarea } from "@docspace/shared/components/textarea";
 import { inject, observer } from "mobx-react";
 
 import DangerIcon from "PUBLIC_DIR/images/danger.toast.react.svg?url";

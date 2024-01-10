@@ -2,11 +2,11 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Button } from "@docspace/shared/components";
-import { ModalDialog } from "@docspace/shared/components";
+import { Button } from "@docspace/shared/components/button";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import StyledModalDialog from "../styled-containers/StyledModalDialog";
-import { Text } from "@docspace/shared/components";
-import { Textarea } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
+import { Textarea } from "@docspace/shared/components/textarea";
 
 const AddIdpCertificateModal = (props) => {
   const { t } = useTranslation(["SingleSignOn", "Common"]);

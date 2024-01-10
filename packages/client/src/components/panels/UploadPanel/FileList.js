@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useRef } from "react";
-import { CustomScrollbarsVirtualList as CustomScrollbars } from "@docspace/shared/components";
+import { CustomScrollbarsVirtualList as CustomScrollbars } from "@docspace/shared/components/scrollbar";
 import AutoSizer from "react-virtualized-auto-sizer";
 import { VariableSizeList as List } from "react-window";
 import { inject, observer } from "mobx-react";

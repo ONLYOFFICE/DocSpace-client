@@ -3,14 +3,14 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import { Text } from "@docspace/shared/components";
-import { HelpButton } from "@docspace/shared/components";
-import { FieldContainer } from "@docspace/shared/components";
-import { TextInput } from "@docspace/shared/components";
-import { Button } from "@docspace/shared/components";
-import { Badge } from "@docspace/shared/components";
-import { SaveCancelButtons } from "@docspace/shared/components";
-import { toastr } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { Button } from "@docspace/shared/components/button";
+import { Badge } from "@docspace/shared/components/badge";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
+import { toastr } from "@docspace/shared/components/toast";
 
 import { size } from "@docspace/shared/utils";
 

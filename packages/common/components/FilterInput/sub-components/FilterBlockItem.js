@@ -1,9 +1,9 @@
 import React from "react";
 
-import { SelectorAddButton } from "@docspace/shared/components";
-import { Heading } from "@docspace/shared/components";
-import { ComboBox } from "@docspace/shared/components";
-import { Checkbox } from "@docspace/shared/components";
+import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
+import { Heading } from "@docspace/shared/components/heading";
+import { ComboBox } from "@docspace/shared/components/combobox";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 
 import {
   StyledFilterBlockItem,
@@ -20,7 +20,7 @@ import {
   StyledFilterBlockItemSeparator,
 } from "./StyledFilterBlock";
 
-import { ColorTheme, ThemeId } from "@docspace/shared/components";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 import XIcon from "PUBLIC_DIR/images/x.react.svg";
 import {

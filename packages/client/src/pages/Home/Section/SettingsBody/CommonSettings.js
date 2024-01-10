@@ -1,9 +1,9 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { ToggleButton } from "@docspace/shared/components";
-import { Heading } from "@docspace/shared/components";
-import { Box } from "@docspace/shared/components";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { Heading } from "@docspace/shared/components/heading";
+import { Box } from "@docspace/shared/components/box";
 import StyledSettings from "./StyledSettings";
 
 const PersonalSettings = ({

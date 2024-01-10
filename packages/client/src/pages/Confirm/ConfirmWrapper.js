@@ -4,15 +4,15 @@ import { isIOS, isFirefox, isMobileOnly } from "react-device-detect";
 import { inject, observer } from "mobx-react";
 import { getBgPattern } from "@docspace/common/utils";
 import { mobile } from "@docspace/shared/utils";
-import { Scrollbar } from "@docspace/shared/components";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 const StyledWrapper = styled.div`
   height: ${(props) =>
     props.height
       ? props.height
       : isIOS && !isFirefox
-      ? "calc(var(--vh, 1vh) * 100)"
-      : "100vh"};
+        ? "calc(var(--vh, 1vh) * 100)"
+        : "100vh"};
   width: 100vw;
   z-index: 0;
   display: flex;

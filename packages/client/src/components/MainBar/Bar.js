@@ -8,7 +8,7 @@ import { ADS_TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
 import { getConvertedSize } from "@docspace/common/utils";
 
 import { getBannerAttribute } from "@docspace/shared/utils";
-import { SnackBar } from "@docspace/shared/components";
+import { SnackBar } from "@docspace/shared/components/snackbar";
 import { QuotaBarTypes } from "SRC_DIR/helpers/constants";
 
 import QuotasBar from "./QuotasBar";

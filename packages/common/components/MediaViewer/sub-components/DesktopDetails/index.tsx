@@ -1,8 +1,8 @@
 import React, { CSSProperties } from "react";
 import styled, { css } from "styled-components";
 
-import { Text } from "@docspace/shared/components";
-import { IconButton } from "@docspace/shared/components";
+import { Text } from "@docspace/shared/components/text";
+import { IconButton } from "@docspace/shared/components/icon-button";
 
 import { ControlBtn } from "../../StyledComponents";
 

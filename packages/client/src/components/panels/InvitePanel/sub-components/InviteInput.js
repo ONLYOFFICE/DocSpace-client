@@ -3,13 +3,13 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useState, useCallback, useEffect, useRef } from "react";
 
-import { Avatar } from "@docspace/shared/components";
-import { Text } from "@docspace/shared/components";
-import { TextInput } from "@docspace/shared/components";
-import { DropDownItem } from "@docspace/shared/components";
-import { toastr } from "@docspace/shared/components";
+import { Avatar } from "@docspace/shared/components/avatar";
+import { Text } from "@docspace/shared/components/text";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { toastr } from "@docspace/shared/components/toast";
 import { parseAddresses } from "@docspace/shared/utils";
-import { ComboBox } from "@docspace/shared/components";
+import { ComboBox } from "@docspace/shared/components/combobox";
 
 import Filter from "@docspace/common/api/people/filter";
 import BetaBadge from "@docspace/common/components/BetaBadge";

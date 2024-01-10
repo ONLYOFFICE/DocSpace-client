@@ -26,6 +26,7 @@ const ButtonContainer = ({ saveLdapSettings, restoreToDefault }) => {
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Settings:DefaultSettings")}
         displaySettings
+        className="save-cancel-buttons"
         cancelEnable
         showReminder
       />

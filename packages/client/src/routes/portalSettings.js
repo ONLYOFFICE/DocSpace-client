@@ -8,10 +8,7 @@ import ErrorBoundary from "@docspace/common/components/ErrorBoundary";
 import Error404 from "SRC_DIR/pages/Errors/404";
 
 import { generalRoutes } from "./general";
-import ConnectionSettings from "../pages/PortalSettings/categories/integration/LDAP/sub-components/ConnectionSettings";
-import AttributeMapping from "../pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping";
-import GroupMembership from "../pages/PortalSettings/categories/integration/LDAP/sub-components/GroupMembership";
-import StyledLdapPage from "../pages/PortalSettings/categories/integration/LDAP/styled-components/StyledLdapPage";
+import SettingsContainer from "../pages/PortalSettings/categories/integration/LDAP/sub-components/SettingsContainer";
 
 const PortalSettings = loadable(() => import("../pages/PortalSettings"));
 
@@ -252,13 +249,7 @@ const PortalSettingsRoutes = {
     },
     {
       path: "integration/ldap/settings",
-      element: (
-        <StyledLdapPage>
-          <ConnectionSettings />
-          <AttributeMapping />
-          <GroupMembership />
-        </StyledLdapPage>
-      ),
+      element: <SettingsContainer />,
     },
     {
       path: "integration/ldap/sync-data",

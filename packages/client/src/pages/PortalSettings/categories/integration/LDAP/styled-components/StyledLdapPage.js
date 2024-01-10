@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 import Box from "@docspace/components/box";
 
@@ -46,7 +46,11 @@ const StyledLdapPage = styled(Box)`
   .ldap_connection-container {
     margin: 20px 0 28px 0;
     display: grid;
-    grid-template-columns: minmax(100px, 340px) 1fr;
+    ${(props) =>
+      !props.isMobileView &&
+      css`
+        grid-template-columns: minmax(100px, 340px) 1fr;
+      `}
     grid-gap: 12px;
   }
 
@@ -57,7 +61,11 @@ const StyledLdapPage = styled(Box)`
       margin-bottom: 16px;
     }
     display: grid;
-    grid-template-columns: minmax(100px, 340px) 1fr;
+    ${(props) =>
+      !props.isMobileView &&
+      css`
+        grid-template-columns: minmax(100px, 340px) 1fr;
+      `}
     grid-gap: 12px;
   }
 
@@ -73,7 +81,11 @@ const StyledLdapPage = styled(Box)`
     margin-top: 18px;
     margin-bottom: 12px;
     display: grid;
-    grid-template-columns: minmax(100px, 340px) 1fr;
+    ${(props) =>
+      !props.isMobileView &&
+      css`
+        grid-template-columns: minmax(100px, 340px) 1fr;
+      `}
     grid-gap: 12px;
   }
 
@@ -86,7 +98,11 @@ const StyledLdapPage = styled(Box)`
   }
 
   .ldap_group-filter {
-    grid-column: span 2;
+    ${(props) =>
+      !props.isMobileView &&
+      css`
+        grid-column: span 2;
+      `}
   }
 
   .ldap_attribute-mapping-text {
@@ -100,11 +116,18 @@ const StyledLdapPage = styled(Box)`
     button:first-child {
       margin-right: 8px;
     }
+    .save-cancel-buttons {
+      bottom: ${(props) => (props.isMobileView ? "auto" : "0px")};
+    }
   }
   .ldap_authentication {
     margin: 16px 0;
     display: grid;
-    grid-template-columns: minmax(100px, 340px) 1fr;
+    ${(props) =>
+      !props.isMobileView &&
+      css`
+        grid-template-columns: minmax(100px, 340px) 1fr;
+      `}
     grid-gap: 12px;
   }
   .ldap_advanced-settings {

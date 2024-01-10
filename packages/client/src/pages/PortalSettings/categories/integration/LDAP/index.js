@@ -24,6 +24,7 @@ import AdvancedSettings from "./sub-components/AdvancedSettings";
 import SyncContainer from "./sub-components/SyncContainer";
 import GroupMembership from "./sub-components/GroupMembership";
 import LdapMobileView from "./sub-components/LdapMobileView";
+import SettingsContainer from "./sub-components/SettingsContainer";
 
 const LDAP = ({
   ldapSettingsUrl,
@@ -77,27 +78,7 @@ const LDAP = ({
         <LdapMobileView />
       ) : (
         <>
-          <HideButton
-            text={t("Settings:LDAP")}
-            value={isSettingsShown}
-            isDisabled={!isLdapAvailable}
-          />
-
-          {isSettingsShown && (
-            <>
-              <Box>
-                <Text>{t("LdapDisclaimer")}</Text>
-                <Checkboxes />
-              </Box>
-
-              <ConnectionSettings />
-              <AttributeMapping />
-              <GroupMembership />
-              <AuthenticationContainer />
-              <AdvancedSettings />
-              <ButtonsContainer />
-            </>
-          )}
+          <SettingsContainer />
 
           <StyledSettingsSeparator />
 

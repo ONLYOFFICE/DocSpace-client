@@ -133,6 +133,7 @@ export const useFilesHelper = ({
   getIcon,
   t,
   setIsSelectedParentFolder,
+  roomsFolderId,
 }: useFilesHelpersProps) => {
   const getFileList = React.useCallback(
     async (
@@ -278,7 +279,7 @@ export const useFilesHelper = ({
               return {
                 label: title,
                 id: id,
-                isRoom: currentFolder?.current?.rootFolderId === id,
+                isRoom: roomsFolderId === id,
                 roomType,
               };
             }
@@ -334,7 +335,7 @@ export const useFilesHelper = ({
         }
       }
     },
-    [selectedItemId, searchValue, isFirstLoad, disabledItems]
+    [selectedItemId, searchValue, isFirstLoad, disabledItems, roomsFolderId]
   );
 
   return { getFileList };

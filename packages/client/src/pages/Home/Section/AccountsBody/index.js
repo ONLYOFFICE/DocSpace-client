@@ -7,13 +7,37 @@ import People from "./People";
 import Groups from "./Groups";
 import InsideGroup from "./InsideGroup";
 
-const SectionBodyContent = ({
-  setSelection,
-  setBufferSelection,
-  setChangeOwnerDialogVisible,
-}) => {
+import { withTranslation } from "react-i18next";
+import withLoader from "SRC_DIR/HOCs/withLoader";
+
+const SectionBodyContent = (props) => {
+  const {
+    tReady,
+    accountsViewAs,
+    setSelection,
+    setBufferSelection,
+    setChangeOwnerDialogVisible,
+    selectUser,
+  } = props;
+
   const location = useLocation();
   const { groupId } = useParams();
+
+  useEffect(() => {
+    window.addEventListener("mousedown", onMouseDown);
+
+    if (location?.state?.openChangeOwnerDialog) {
+      setChangeOwnerDialogVisible(true);
+    }
+
+    if (location?.state?.user) {
+      selectUser(location?.state?.user);
+    }
+
+    return () => {
+      window.removeEventListener("mousedown", onMouseDown);
+    };
+  }, []);
 
   const onMouseDown = (e) => {
     if (
@@ -54,9 +78,22 @@ const SectionBodyContent = ({
   );
 };
 
-export default inject(({ peopleStore }) => ({
-  setSelection: peopleStore.selectionStore.setSelection,
-  setBufferSelection: peopleStore.selectionStore.setBufferSelection,
-  setChangeOwnerDialogVisible:
-    peopleStore.dialogStore.setChangeOwnerDialogVisible,
-}))(observer(SectionBodyContent));
+export default inject(({ peopleStore }) => {
+  const { viewAs: accountsViewAs } = peopleStore;
+
+  const { setSelection, setBufferSelection, selectUser } =
+    peopleStore.selectionStore;
+  const { setChangeOwnerDialogVisible } = peopleStore.dialogStore;
+
+  return {
+    accountsViewAs,
+    setSelection,
+    setBufferSelection,
+    setChangeOwnerDialogVisible,
+    selectUser,
+  };
+})(
+  withTranslation(["People", "Common", "PeopleTranslations"])(
+    withLoader(observer(SectionBodyContent))()
+  )
+);

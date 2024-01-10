@@ -134,23 +134,39 @@ class TableHeader extends React.Component {
 
   addNewColumns = (gridTemplateColumns, activeColumnIndex, containerWidth) => {
     const { columns, columnStorageName } = this.props;
-    const filterColumns = columns.filter((x) => !x.defaultSize);
-
     const clearSize = gridTemplateColumns.map((c) => this.getSubstring(c));
     const maxSize = Math.max.apply(Math, clearSize);
 
     const defaultSize = columns[activeColumnIndex - 1].defaultSize;
+    const indexOfMaxSize = clearSize.findLastIndex((s) => s === maxSize);
 
-    const defaultColSize = defaultSize
+    const addedColumn = 1;
+    const enableColumnsLength =
+      columns.filter((column) => !column.defaultSize && column.enable).length -
+      addedColumn;
+
+    const allColumnsLength = columns.filter(
+      (column) => !column.defaultSize
+    ).length;
+
+    const defaultSizeColumn = columns.find(
+      (column) => column.defaultSize
+    )?.defaultSize;
+
+    const widthColumns =
+      containerWidth -
+      settingsSize -
+      (defaultSizeColumn ? defaultSizeColumn : 0);
+
+    const newColumnSize = defaultSize
       ? defaultSize
-      : containerWidth / filterColumns.length;
-    const indexOfMaxSize = clearSize.findIndex((s) => s === maxSize);
+      : widthColumns / allColumnsLength;
 
-    const newSize = maxSize - defaultColSize;
+    const newSizeMaxColumn = maxSize - newColumnSize;
 
     const AddColumn = () => {
-      gridTemplateColumns[indexOfMaxSize] = newSize + "px";
-      gridTemplateColumns[activeColumnIndex] = defaultColSize + "px";
+      gridTemplateColumns[indexOfMaxSize] = newSizeMaxColumn + "px";
+      gridTemplateColumns[activeColumnIndex] = newColumnSize + "px";
       return false;
     };
 
@@ -161,8 +177,10 @@ class TableHeader extends React.Component {
     };
 
     if (
-      (indexOfMaxSize === 0 && newSize < minSizeFirstColumn) ||
-      newSize <= defaultColSize
+      (indexOfMaxSize === 0 && newSizeMaxColumn < minSizeFirstColumn) ||
+      (indexOfMaxSize !== 0 && newSizeMaxColumn < defaultMinColumnSize) ||
+      newColumnSize < defaultMinColumnSize ||
+      enableColumnsLength === 1
     )
       return ResetColumnsSize();
     else return AddColumn();
@@ -297,13 +315,13 @@ class TableHeader extends React.Component {
       });
 
       //If content column sizes are calculated as empty after changing view
-      if (!hasContent) return this.resetColumns(true);
+      if (!hasContent) return this.resetColumns();
     }
 
     // columns.length + 1 - its settings column
     console.log(tableContainer.length, columns.length);
     if (tableContainer.length !== columns.length + 1) {
-      return this.resetColumns(true);
+      return this.resetColumns();
     }
 
     if (!container) return;
@@ -637,7 +655,7 @@ class TableHeader extends React.Component {
         ? gridTemplateColumnsWithoutOverfilling.join(" ")
         : gridTemplateColumns.join(" ");
     } else {
-      this.resetColumns(true);
+      this.resetColumns();
     }
 
     if (str) {
@@ -725,7 +743,7 @@ class TableHeader extends React.Component {
     }
   };
 
-  resetColumns = (resetToDefault = false) => {
+  resetColumns = () => {
     const {
       containerRef,
       columnStorageName,
@@ -733,7 +751,7 @@ class TableHeader extends React.Component {
       columns,
       infoPanelVisible,
     } = this.props;
-    console.log("resetColumns");
+
     const defaultSize = this.props.columns.find(
       (col) => col.defaultSize
     )?.defaultSize;
@@ -750,39 +768,21 @@ class TableHeader extends React.Component {
       : document.getElementById("table-container");
     const containerWidth = +container.clientWidth;
 
-    if (resetToDefault) {
-      const firstColumnPercent = 40;
-      const percent = 60 / enableColumns.length;
+    const firstColumnPercent = 40;
+    const percent = 60 / enableColumns.length;
 
-      const wideColumnSize = (containerWidth * firstColumnPercent) / 100 + "px";
-      const otherColumns = (containerWidth * percent) / 100 + "px";
+    const wideColumnSize = (containerWidth * firstColumnPercent) / 100 + "px";
+    const otherColumns = (containerWidth * percent) / 100 + "px";
 
-      for (let col of columns) {
-        if (col.default) {
-          str += `${wideColumnSize} `;
-        } else
-          str += col.enable
-            ? col.defaultSize
-              ? `${col.defaultSize}px `
-              : `${otherColumns} `
-            : "0px ";
-      }
-    } else {
-      const percent = 100 / enableColumns.length;
-      const newContainerWidth =
-        containerWidth - containerMargin - (defaultSize || 0);
-      const otherColumns = (newContainerWidth * percent) / 100 + "px";
-
-      str = "";
-      for (let col of this.props.columns) {
+    for (let col of columns) {
+      if (col.default) {
+        str += `${wideColumnSize} `;
+      } else
         str += col.enable
-          ? /*  col.minWidth
-            ? `${col.minWidth}px `
-            :  */ col.defaultSize
+          ? col.defaultSize
             ? `${col.defaultSize}px `
             : `${otherColumns} `
           : "0px ";
-      }
     }
 
     str += `${settingsSize}px`;

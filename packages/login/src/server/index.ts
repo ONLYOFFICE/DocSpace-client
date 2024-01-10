@@ -12,8 +12,8 @@ import renderApp from "./lib/helpers/render-app";
 import i18nextMiddleware from "i18next-express-middleware";
 import i18next from "./i18n";
 import cookieParser from "cookie-parser";
-import { COOKIE_EXPIRATION_YEAR } from "@docspace/shared/enums";
-import { LANGUAGE } from "@docspace/shared/constants";
+
+import { LANGUAGE, COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
 import { getLanguage } from "@docspace/shared/utils";
 import { initSSR } from "@docspace/common/api/client";
 import { checkIsAuthenticated } from "@docspace/common/api/user";

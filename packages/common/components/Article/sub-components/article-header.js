@@ -11,7 +11,7 @@ import {
   StyledHeading,
   StyledIconBox,
 } from "../styled-article";
-import { getLogoFromPath } from "../../../utils";
+import { getLogoFromPath } from "@docspace/shared/utils";
 import { DeviceType } from "@docspace/shared/enums";
 
 const ArticleHeader = ({

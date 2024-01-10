@@ -1,12 +1,3 @@
-import LoginPageSvgUrl from "PUBLIC_DIR/images/logo/loginpage.svg?url";
-import DarkLoginPageSvgUrl from "PUBLIC_DIR/images/logo/dark_loginpage.svg?url";
-import LeftMenuSvgUrl from "PUBLIC_DIR/images/logo/leftmenu.svg?url";
-import DocseditorSvgUrl from "PUBLIC_DIR/images/logo/docseditor.svg?url";
-import LightSmallSvgUrl from "PUBLIC_DIR/images/logo/lightsmall.svg?url";
-import DocsEditoRembedSvgUrl from "PUBLIC_DIR/images/logo/docseditorembed.svg?url";
-import DarkLightSmallSvgUrl from "PUBLIC_DIR/images/logo/dark_lightsmall.svg?url";
-import FaviconIco from "PUBLIC_DIR/favicon.ico";
-
 import BackgroundPatternReactSvgUrl from "PUBLIC_DIR/images/background.pattern.react.svg?url";
 import BackgroundPatternOrangeReactSvgUrl from "PUBLIC_DIR/images/background.pattern.orange.react.svg?url";
 import BackgroundPatternGreenReactSvgUrl from "PUBLIC_DIR/images/background.pattern.green.react.svg?url";
@@ -563,38 +554,6 @@ export const getBgPattern = (colorSchemeId: number | undefined) => {
   }
 };
 
-export const getLogoFromPath = (path) => {
-  if (!path || path.indexOf("images/logo/") === -1) return path;
-
-  const name = path.split("/").pop();
-
-  switch (name) {
-    case "aboutpage.svg":
-    case "loginpage.svg":
-      return LoginPageSvgUrl;
-    case "dark_loginpage.svg":
-      return DarkLoginPageSvgUrl;
-    case "leftmenu.svg":
-    case "dark_leftmenu.svg":
-      return LeftMenuSvgUrl;
-    case "dark_aboutpage.svg":
-    case "dark_lightsmall.svg":
-      return DarkLightSmallSvgUrl;
-    case "docseditor.svg":
-      return DocseditorSvgUrl;
-    case "lightsmall.svg":
-      return LightSmallSvgUrl;
-    case "docseditorembed.svg":
-      return DocsEditoRembedSvgUrl;
-    case "favicon.ico":
-      return FaviconIco;
-    default:
-      break;
-  }
-
-  return path;
-};
-
 export const getDaysLeft = (date) => {
   return moment(date).startOf("day").diff(moment().startOf("day"), "days");
 };
@@ -625,4 +584,3 @@ export const getFileExtension = (fileTitle: string) => {
   const posExt = fileTitle.lastIndexOf(".");
   return 0 <= posExt ? fileTitle.substring(posExt).trim().toLowerCase() : "";
 };
-

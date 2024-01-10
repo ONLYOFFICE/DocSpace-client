@@ -20,7 +20,7 @@ import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import BetaBadge from "@docspace/common/components/BetaBadge";
-import { isBetaLanguage } from "@docspace/common/utils";
+import { isBetaLanguage } from "@docspace/shared/utils";
 import withCultureNames from "@docspace/common/hoc/withCultureNames";
 
 const mapTimezonesToArray = (timezones) => {

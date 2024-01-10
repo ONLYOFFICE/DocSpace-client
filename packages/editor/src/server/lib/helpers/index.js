@@ -15,10 +15,8 @@ import {
 } from "@docspace/common/api/files";
 import { TenantStatus } from "@docspace/shared/enums";
 
-import {
-  getLtrLanguageForEditor,
-  getLogoFromPath,
-} from "@docspace/common/utils";
+import { getLtrLanguageForEditor } from "@docspace/common/utils";
+import { getLogoFromPath } from "@docspace/shared/utils";
 
 export const getFavicon = (logoUrls) => {
   if (!logoUrls) return null;

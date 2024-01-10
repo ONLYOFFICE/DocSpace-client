@@ -11,7 +11,8 @@ import { ThemeProvider } from "@docspace/shared/components/theme-provider";
 import { SnackBar } from "@docspace/shared/components/snackbar";
 import { Portal } from "@docspace/shared/components/portal";
 
-import { getLogoFromPath, updateTempContent } from "@docspace/common/utils";
+import { updateTempContent } from "@docspace/common/utils";
+import { getLogoFromPath } from "@docspace/shared/utils";
 
 import store from "client/store";
 

@@ -14,7 +14,7 @@ const dateHash = runtime?.date || "";
 
 //const beforeBuild = require("@docspace/common/utils/beforeBuild");
 
-const sharedDeps = require("@docspace/shared/constants");
+const sharedDeps = require("@docspace/shared/constants/sharedDependencies");
 const baseConfig = require("./webpack.base.js");
 
 for (let dep in sharedDeps) {

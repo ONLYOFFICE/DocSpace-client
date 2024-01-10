@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import { getLogoFromPath } from "@docspace/common/utils";
+import { getLogoFromPath } from "@docspace/shared/utils";
 import {
   getDomainName,
   setDomainName,

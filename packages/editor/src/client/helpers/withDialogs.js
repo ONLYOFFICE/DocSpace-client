@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { getPresignedUri, getReferenceData } from "@docspace/common/api/files";
 import { getRestoreProgress } from "@docspace/common/api/portal";
-import {
-  EDITOR_ID,
-  FilesSelectorFilterTypes,
-  FilterType,
-} from "@docspace/shared/enums";
+import { FilesSelectorFilterTypes, FilterType } from "@docspace/shared/enums";
+import { EDITOR_ID } from "@docspace/shared/constants";
 import { useTranslation } from "react-i18next";
 //import SharingDialog from "../components/SharingDialog";
 import SelectFileDialog from "../components/SelectFileDialog";

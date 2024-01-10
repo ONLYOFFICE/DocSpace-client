@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable import/no-import-module-exports */
 // const pkg = require("../package.json");
 
-import comPkg from "../package.json";
+const comPkg = require("../package.json");
 
 const deps = comPkg.dependencies || {};
 const compDeps = comPkg.dependencies || {};

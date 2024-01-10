@@ -164,7 +164,7 @@ const Members = ({
   };
 
   const updateSelectionParentRoomActionSelection = useCallback(async () => {
-    if (!selection.isRoom || selection.id === members?.roomId) return;
+    if (!selection?.isRoom || selection.id === members?.roomId) return;
 
     const fetchedMembers = await fetchMembers(selection.id);
     setMembersList(fetchedMembers);

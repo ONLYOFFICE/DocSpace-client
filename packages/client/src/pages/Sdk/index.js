@@ -171,6 +171,7 @@ const Sdk = ({
           withoutBackButton
           acceptButtonLabel={frameConfig?.acceptButtonLabel}
           cancelButtonLabel={frameConfig?.cancelButtonLabel}
+          roomType={frameConfig?.roomType}
         />
       );
       break;
@@ -192,6 +193,7 @@ const Sdk = ({
           withSearch={frameConfig?.withSearch}
           acceptButtonLabel={frameConfig?.acceptButtonLabel}
           cancelButtonLabel={frameConfig?.cancelButtonLabel}
+          currentFolderId={frameConfig?.id}
         />
       );
       break;

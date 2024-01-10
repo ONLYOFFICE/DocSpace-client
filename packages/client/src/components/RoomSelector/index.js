@@ -93,6 +93,8 @@ const RoomSelector = ({
   searchEmptyScreenImage,
   searchEmptyScreenHeader,
   searchEmptyScreenDescription,
+
+  roomType,
 }) => {
   const [isFirstLoad, setIsFirstLoad] = React.useState(true);
   const [searchValue, setSearchValue] = React.useState("");
@@ -142,7 +144,10 @@ const RoomSelector = ({
         .then(({ folders, total, count }) => {
           const rooms = convertToItems(folders);
 
-          const itemList = rooms.filter((x) => !excludeItems.includes(x.id));
+          const itemList =
+            roomType && roomType !== 0
+              ? rooms.filter((x) => !excludeItems.includes(x.id) && x.roomType === roomType)
+              : rooms.filter((x) => !excludeItems.includes(x.id));
 
           setHasNextPage(count === pageCount);
 
@@ -163,12 +168,12 @@ const RoomSelector = ({
           setIsNextPageLoading(false);
         });
     },
-    [isFirstLoad, excludeItems, searchValue]
+    [isFirstLoad, excludeItems, searchValue, roomType],
   );
 
   React.useEffect(() => {
     onLoadNextPage(0);
-  }, [searchValue]);
+  }, [searchValue, roomType]);
 
   return (
     <Selector

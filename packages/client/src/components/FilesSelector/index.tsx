@@ -260,24 +260,31 @@ const FilesSelector = ({
   }, [selectedItemId, isRoot]);
 
   React.useEffect(() => {
+    const sessionPath = window.sessionStorage.getItem("filesSelectorPath");
+    let folderId = currentFolderId
+      ? currentFolderId
+      : sessionPath && (isMove || isCopy || isRestore || isRestoreAll)
+      ? +sessionPath
+      : fromFolderId;
+
     const getRoomSettings = () => {
       setSelectedItemType("rooms");
       getRoomList(0, true);
     };
 
-    const needRoomList = isRoomsOnly && !currentFolderId;
+    const needRoomList = isRoomsOnly && !folderId;
 
     if (needRoomList) {
       getRoomSettings();
       return;
     }
 
-    if (!currentFolderId) {
+    if (!folderId) {
       getRootData();
       return;
     }
 
-    setSelectedItemId(currentFolderId);
+    setSelectedItemId(folderId);
 
     if (
       needRoomList ||
@@ -291,8 +298,8 @@ const FilesSelector = ({
     }
 
     setSelectedItemType("files");
-    getFileList(0, currentFolderId, true);
-  }, []);
+    getFileList(0, folderId, true);
+  }, [currentFolderId]);
 
   const onClickBreadCrumb = (item: BreadCrumb) => {
     if (!isFirstLoad) {
@@ -642,8 +649,6 @@ export default inject(
       filesActionsStore;
     const { itemOperationToFolder, clearActiveOperations } = uploadDataStore;
 
-    const sessionPath = window.sessionStorage.getItem("filesSelectorPath");
-
     const { treeFolders, roomsFolderId } = treeFoldersStore;
 
     const {
@@ -718,13 +723,8 @@ export default inject(
       ? parentId
       : selectedId;
 
-    const currentFolderId =
-      sessionPath && (isMove || isCopy || isRestore || isRestoreAll)
-        ? +sessionPath
-        : fromFolderId;
 
     return {
-      currentFolderId,
       fromFolderId,
       parentId,
       rootFolderType,

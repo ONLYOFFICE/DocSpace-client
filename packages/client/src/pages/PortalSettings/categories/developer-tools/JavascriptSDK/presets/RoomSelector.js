@@ -20,6 +20,8 @@ import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 import GetCodeDialog from "../sub-components/GetCodeDialog";
 import Button from "@docspace/components/button";
 
+import { RoomsType } from "@docspace/common/constants";
+
 const showPreviewThreshold = 720;
 
 import {
@@ -63,13 +65,18 @@ const RoomSelector = (props) => {
   ];
 
   const roomTypeOptions = [
-    { key: "room-type-all", label: t("AllTypes"), default: true },
+    { key: "room-type-all", label: t("AllTypes"), roomType: undefined, default: true },
     {
       key: "room-type-collaboration",
       label: t("CreateEditRoomDialog:CollaborationRoomTitle"),
+      roomType: RoomsType.EditingRoom,
     },
-    { key: "room-type-public", label: t("Files:PublicRoom") },
-    { key: "room-type-custom", label: t("CreateEditRoomDialog:CustomRoomTitle") },
+    { key: "room-type-public", label: t("Files:PublicRoom"), roomType: RoomsType.PublicRoom },
+    {
+      key: "room-type-custom",
+      label: t("CreateEditRoomDialog:CustomRoomTitle"),
+      roomType: RoomsType.CustomRoom,
+    },
   ];
 
   const [widthDimension, setWidthDimension] = useState(dataDimensions[1]);
@@ -121,6 +128,7 @@ const RoomSelector = (props) => {
 
   const changeRoomType = (option) => {
     setRoomType(option);
+    setConfig((config) => ({ ...config, roomType: option.roomType }));
   };
 
   const onChangeTab = () => {

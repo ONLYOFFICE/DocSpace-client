@@ -274,7 +274,9 @@ class FilesStore {
 
       const foundIndex = fileId && this.files.findIndex((x) => x.id === fileId);
 
-      this.treeFoldersStore.fetchTreeFolders();
+      if (!this.publicRoomStore.isPublicRoom) {
+        this.treeFoldersStore.fetchTreeFolders();
+      }
       if (foundIndex == -1) return;
 
       this.updateFileStatus(

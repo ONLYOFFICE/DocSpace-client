@@ -2,32 +2,46 @@
 import { cookies, headers } from "next/headers";
 import IConfig from "@onlyoffice/document-editor-react/dist/esm/model/config";
 
+const API_PREFIX = "api/2.0";
+
 export async function getData(
-  fileId: string
-  //fileVersion: string | undefined,
-  //doc: string | undefined,
-  //view: boolean,
-  //shareKey: string | undefined
+  fileId: string,
+  version?: string | undefined,
+  doc?: string | undefined,
+  view?: boolean | undefined,
+  share?: string | undefined
 ) {
-  const token = cookies().get("asc_auth_key");
+  //const token = cookies().get("asc_auth_key");
 
-  const host = headers().get("x-forwarded-host");
-  const proto = headers().get("x-forwarded-proto");
+  const hdrs = headers();
 
-  let headersList = new Headers({
-    "Content-Type": "application/json",
+  const host = hdrs.get("x-forwarded-host");
+  const proto = hdrs.get("x-forwarded-proto");
+
+  //let headersList = new Headers(hdrs);
+
+  //   if (token?.value) {
+  //     headersList.append("Authorization", token.value);
+  //   }
+
+  const baseAPIUrl = `${proto}://${host}/${API_PREFIX}`;
+
+  const url = new URL(`${baseAPIUrl}/files/file/${fileId}/openedit`);
+
+  view && url.searchParams.append("view", view ? "true" : "false");
+  version && url.searchParams.append("version", version);
+  doc && url.searchParams.append("doc", doc);
+  share && url.searchParams.append("share", share);
+
+  //console.log(url.toString());
+
+  const req = new Request(url, {
+    headers: hdrs,
   });
 
-  if (token?.value) {
-    headersList.append("Authorization", token.value);
-  }
+  const res = await fetch(req);
 
-  const res = await fetch(
-    `${proto}://${host}/api/2.0/files/file/${fileId}/openedit`,
-    {
-      headers: headersList,
-    }
-  );
+  if (!res.ok) throw new Error(res.statusText);
 
   const { response } = await res.json();
 

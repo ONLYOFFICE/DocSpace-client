@@ -13,11 +13,23 @@ export default async function Page({
 }: {
   searchParams?: { [key: string]: string | undefined };
 }) {
-  const { fileId } = searchParams || { fileId: undefined };
+  const {
+    fileId,
+    fileVersion: version,
+    doc,
+    action,
+    share,
+  } = searchParams || {
+    fileId: undefined,
+    fileVersion: undefined,
+    doc: undefined,
+    action: undefined,
+    share: undefined,
+  };
 
   if (!fileId) return redirect("/error");
 
-  const config = await getData(fileId);
+  const config = await getData(fileId, version, doc, action === "view", share);
 
   return <Editor config={config} />;
 }

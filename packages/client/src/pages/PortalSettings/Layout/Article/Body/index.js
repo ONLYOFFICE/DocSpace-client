@@ -36,7 +36,7 @@ const ArticleBodyContent = (props) => {
     isCommunity,
     currentDeviceType,
     isProfileLoading,
-    limitedAccessSpace
+    limitedAccessSpace,
   } = props;
 
   const [selectedKeys, setSelectedKeys] = React.useState([]);
@@ -179,6 +179,10 @@ const ArticleBodyContent = (props) => {
         return t("Common:PaymentsTitle");
       case "ManagementCategoryDataManagement":
         return t("ManagementCategoryDataManagement");
+      case "LdapSettings":
+        return t("Ldap:LdapSettings");
+      case "LdapSyncTitle":
+        return t("Ldap:LdapSyncTitle");
       case "RestoreBackup":
         return t("RestoreBackup");
       case "PortalDeletion":
@@ -283,8 +287,13 @@ export default inject(({ auth, common, clientLoadingStore }) => {
   const { isNotPaidPeriod } = currentTariffStatusStore;
   const { user } = userStore;
   const { isOwner } = user;
-  const { standalone, showText, toggleArticleOpen, currentDeviceType, limitedAccessSpace } =
-    settingsStore;
+  const {
+    standalone,
+    showText,
+    toggleArticleOpen,
+    currentDeviceType,
+    limitedAccessSpace,
+  } = settingsStore;
 
   const isProfileLoading =
     window.location.pathname.includes("profile") &&
@@ -307,6 +316,8 @@ export default inject(({ auth, common, clientLoadingStore }) => {
   };
 })(
   withLoading(
-    withTranslation(["Settings", "Common"])(observer(ArticleBodyContent))
+    withTranslation(["Ldap", "Settings", "Common"])(
+      observer(ArticleBodyContent)
+    )
   )
 );

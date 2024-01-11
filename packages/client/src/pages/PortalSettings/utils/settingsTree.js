@@ -260,6 +260,22 @@ export const settingsTree = [
         link: "ldap",
         tKey: "LdapSettings",
         isCategory: true,
+        children: [
+          {
+            id: "portal-settings_catalog-ldap-settings",
+            key: "4-0-0",
+            icon: "",
+            link: "settings",
+            tKey: "Ldap:LdapSettings",
+          },
+          {
+            id: "portal-settings_catalog-ldap-sync-data",
+            key: "4-0-1",
+            icon: "",
+            link: "sync-data",
+            tKey: "Ldap:LdapSettings",
+          },
+        ],
       },
       {
         id: "portal-settings_catalog-third-party-services",

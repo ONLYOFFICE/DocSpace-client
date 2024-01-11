@@ -15,6 +15,7 @@ import Text from "@docspace/components/text";
 import StyledLdapPage from "../styled-components/StyledLdapPage";
 
 import GroupMembership from "./GroupMembership";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const SettingsContainer = ({
   isSettingsShown,
@@ -23,6 +24,10 @@ const SettingsContainer = ({
 }) => {
   console.log(isSettingsShown, isLdapAvailable);
   const { t } = useTranslation(["Ldap", "Settings", "Common"]);
+
+  useEffect(() => {
+    setDocumentTitle(t("Ldap:LdapSettings"));
+  }, []);
 
   const renderBody = () => (
     <>

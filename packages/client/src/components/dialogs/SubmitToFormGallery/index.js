@@ -9,7 +9,7 @@ import FilesSelector from "@docspace/client/src/components/FilesSelector";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import * as Styled from "./index.styled";
 

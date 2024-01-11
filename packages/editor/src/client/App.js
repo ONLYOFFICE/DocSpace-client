@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import Editor from "./components/Editor.js";
 import { useSSR } from "react-i18next";
 import useMfScripts from "./helpers/useMfScripts";
-import { combineUrl, isRetina, setCookie } from "@docspace/common/utils";
+import { isRetina, setCookie } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { getCookie } from "@docspace/shared/utils";
 
 import initDesktop from "./helpers/initDesktop";

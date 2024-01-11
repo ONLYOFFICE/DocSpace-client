@@ -19,7 +19,7 @@ import ReassignDataReactSvgUrl from "PUBLIC_DIR/images/reassign.data.svg?url";
 import { makeAutoObservable } from "mobx";
 import { toastr } from "@docspace/shared/components/toast";
 
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { EmployeeStatus, FilterSubject } from "@docspace/shared/enums";
 import { resendUserInvites } from "@docspace/common/api/people";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";

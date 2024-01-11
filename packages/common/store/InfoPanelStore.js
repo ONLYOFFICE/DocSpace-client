@@ -1,7 +1,8 @@
 import { makeAutoObservable } from "mobx";
 
 import { getUserById } from "../api/people";
-import { combineUrl, getUserRole } from "../utils";
+import { getUserRole } from "../utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { FolderType } from "@docspace/shared/enums";
 import config from "PACKAGE_FILE";
 import Filter from "../api/people/filter";

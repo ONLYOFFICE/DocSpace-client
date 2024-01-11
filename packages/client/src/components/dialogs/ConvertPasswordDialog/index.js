@@ -11,7 +11,7 @@ import SimulatePassword from "../../SimulatePassword";
 import StyledComponent from "./StyledConvertPasswordDialog";
 import config from "PACKAGE_FILE";
 import { openDocEditor } from "@docspace/client/src/helpers/filesUtils";
-import combineUrl from "@docspace/common/utils/combineUrl";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 let tab, _isMounted;
 const ConvertPasswordDialogComponent = (props) => {

@@ -1,7 +1,7 @@
 ﻿import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { DeviceType } from "@docspace/shared/enums";
 import ManualBackup from "./manual-backup";
 import AutoBackup from "./auto-backup";

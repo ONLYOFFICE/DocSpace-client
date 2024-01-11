@@ -7,7 +7,7 @@ const DefinePlugin = require("webpack").DefinePlugin;
 
 const ExternalTemplateRemotesPlugin = require("external-remotes-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-const combineUrl = require("@docspace/common/utils/combineUrl");
+
 const minifyJson = require("@docspace/shared/utils/minifyJson");
 
 const sharedDeps = require("@docspace/shared/constants/sharedDependencies");
@@ -18,7 +18,7 @@ const path = require("path");
 
 const pkg = require("./package.json");
 const deps = pkg.dependencies || {};
-const homepage = pkg.homepage; //combineUrl(window.DocSpaceConfig?.proxy?.url, pkg.homepage);
+const homepage = pkg.homepage;
 const title = pkg.title;
 const version = pkg.version;
 

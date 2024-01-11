@@ -2,7 +2,7 @@ import { request } from "../client";
 //import axios from "axios";
 import Filter from "./filter";
 import * as fakePeople from "./fake";
-import { Encoder } from "../../utils/encoder";
+import { Encoder } from "@docspace/shared/utils/encoder";
 import { checkFilterInstance } from "../../utils";
 
 export function getUserList(filter = Filter.getDefault(), fake = false) {

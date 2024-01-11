@@ -37,7 +37,7 @@ import {
   GreetingContainer,
   RegisterContainer,
 } from "./StyledCreateUser";
-import combineUrl from "@docspace/common/utils/combineUrl";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 const CreateUserForm = (props) => {
   const {

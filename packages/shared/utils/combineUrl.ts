@@ -1,4 +1,4 @@
-const combineUrl = (host = "", ...params) => {
+const combineUrl = (host = "", ...params: string[]) => {
   let url = host.replace(/\/+$/, "");
 
   params.forEach((part) => {
@@ -14,4 +14,4 @@ const combineUrl = (host = "", ...params) => {
   return url;
 };
 
-module.exports = combineUrl;
+export { combineUrl };

@@ -1,7 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { ShareAccessRights, FileStatus } from "@docspace/shared/enums";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import Badges from "../components/Badges";
 import config from "PACKAGE_FILE";

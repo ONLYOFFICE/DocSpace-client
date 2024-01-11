@@ -46,7 +46,7 @@ import { isMobile, isIOS } from "react-device-detect";
 import config from "PACKAGE_FILE";
 import { toastr } from "@docspace/shared/components/toast";
 import { ShareAccessRights, RoomsType } from "@docspace/shared/enums";
-import combineUrl from "@docspace/common/utils/combineUrl";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isDesktop } from "@docspace/shared/utils";
 import { Events } from "@docspace/shared/enums";
 

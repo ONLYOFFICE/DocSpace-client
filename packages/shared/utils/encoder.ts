@@ -263,7 +263,7 @@ export const Encoder = {
       "&spades;",
       "&clubs;",
       "&hearts;",
-      "&diams;"
+      "&diams;",
     );
     var arr2 = new Array(
       "&#160;",
@@ -517,7 +517,7 @@ export const Encoder = {
       "&#9824;",
       "&#9827;",
       "&#9829;",
-      "&#9830;"
+      "&#9830;",
     );
     return this.swapArrayVals(s, arr1, arr2);
   },
@@ -774,7 +774,7 @@ export const Encoder = {
       "&#9824;",
       "&#9827;",
       "&#9829;",
-      "&#9830;"
+      "&#9830;",
     );
     var arr2 = new Array(
       "&nbsp;",
@@ -1028,7 +1028,7 @@ export const Encoder = {
       "&spades;",
       "&clubs;",
       "&hearts;",
-      "&diams;"
+      "&diams;",
     );
     return this.swapArrayVals(s, arr1, arr2);
   },

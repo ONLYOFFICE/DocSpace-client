@@ -22,11 +22,11 @@ import { Loader } from "@docspace/shared/components/loader";
 import withCultureNames from "@docspace/common/hoc/withCultureNames";
 
 import {
-  combineUrl,
   createPasswordHash,
   convertLanguage,
   setCookie,
 } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
 import { LANGUAGE } from "@docspace/shared/constants";
 import BetaBadge from "@docspace/common/components/BetaBadge";

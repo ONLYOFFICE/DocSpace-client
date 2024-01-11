@@ -1,5 +1,4 @@
-import combineUrl from "@docspace/common/utils/combineUrl";
-
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { toastr } from "@docspace/shared/components/toast";
 
 import config from "PACKAGE_FILE";

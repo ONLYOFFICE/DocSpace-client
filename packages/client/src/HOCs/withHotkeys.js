@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Events } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import throttle from "lodash/throttle";
-import { checkDialogsOpen } from "@docspace/common/utils/checkDialogsOpen";
+import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 
 const withHotkeys = (Component) => {
   const WithHotkeys = (props) => {

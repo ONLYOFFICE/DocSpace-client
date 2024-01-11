@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { isMobile, isIOS, deviceType } from "react-device-detect";
-import combineUrl from "@docspace/common/utils/combineUrl";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { FolderType } from "@docspace/shared/enums";
 import { EDITOR_ID } from "@docspace/shared/constants";
 import throttle from "lodash/throttle";

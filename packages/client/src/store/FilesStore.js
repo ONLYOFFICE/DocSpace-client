@@ -13,7 +13,7 @@ import {
 
 import { RoomsTypeValues } from "@docspace/shared/utils";
 
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { updateTempContent } from "@docspace/common/utils";
 
 import { toastr } from "@docspace/shared/components/toast";

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Submenu } from "@docspace/shared/components/submenu";
 import { useNavigate } from "react-router-dom";
 import { withTranslation } from "react-i18next";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 import { inject, observer } from "mobx-react";
 import Customization from "./customization";

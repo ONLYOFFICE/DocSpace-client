@@ -1,6 +1,6 @@
 import axios from "axios";
 import config from "PACKAGE_FILE";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 export const generateLogo = (
   width,

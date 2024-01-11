@@ -3,7 +3,7 @@ import { Submenu } from "@docspace/shared/components/submenu";
 import { useNavigate } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 
 import SSO from "./SingleSignOn";
@@ -114,8 +114,8 @@ const IntegrationWrapper = (props) => {
         currentDeviceType === DeviceType.desktop
           ? 0
           : currentDeviceType === DeviceType.mobile
-          ? "53px"
-          : "61px"
+            ? "53px"
+            : "61px"
       }
     />
   );

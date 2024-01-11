@@ -22,7 +22,7 @@ import {
 } from "../ImageViewerToolbar/ImageViewerToolbar.props";
 import { ToolbarActionType, KeyboardEventKeys, compareTo } from "../../helpers";
 import PlayerMessageError from "../PlayerMessageError";
-import { checkDialogsOpen } from "../../../../utils/checkDialogsOpen";
+import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 
 const MaxScale = 5;
 const MinScale = 0.5;

@@ -9,7 +9,7 @@ import {
   resetSMTPSettings,
   setSMTPSettings,
 } from "@docspace/common/api/settings";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 import { isDesktop } from "@docspace/shared/utils";
 import { DeviceType } from "@docspace/shared/enums";

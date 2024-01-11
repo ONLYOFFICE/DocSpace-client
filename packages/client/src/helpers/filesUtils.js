@@ -10,7 +10,8 @@ import CloudServicesWebdavReactSvgUrl from "PUBLIC_DIR/images/cloud.services.web
 import authStore from "@docspace/common/store/AuthStore";
 import { FileType, RoomsType } from "@docspace/shared/enums";
 import config from "PACKAGE_FILE";
-import { combineUrl, toUrlParams } from "@docspace/common/utils";
+import { toUrlParams } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { addFileToRecentlyViewed } from "@docspace/common/api/files";
 import i18n from "./i18n";
 

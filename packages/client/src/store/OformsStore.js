@@ -12,9 +12,10 @@ import {
 } from "@docspace/common/api/oforms";
 import { toastr } from "@docspace/shared/components/toast";
 
-import { combineUrl, convertToLanguage } from "@docspace/common/utils";
+import { convertToLanguage } from "@docspace/common/utils";
 import { LANGUAGE } from "@docspace/shared/constants";
-import { getCookie } from "@docspace/shared/utils";
+import { getCookie } from "@docspace/shared/utils/cookie";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 const myDocumentsFolderId = 2;
 

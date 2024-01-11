@@ -7,7 +7,7 @@ import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import config from "PACKAGE_FILE";
 import FilesFilter from "@docspace/common/api/files/filter";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
 const ErrorView = ({

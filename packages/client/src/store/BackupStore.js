@@ -7,7 +7,7 @@ import {
 } from "../pages/PortalSettings/utils";
 import { toastr } from "@docspace/shared/components/toast";
 import { AutoBackupPeriod } from "@docspace/shared/enums";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 import { uploadBackup } from "@docspace/common/api/files";
 

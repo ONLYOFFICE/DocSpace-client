@@ -6,7 +6,7 @@ import Error403 from "client/Error403";
 
 import AppLoader from "../AppLoader";
 
-import combineUrl from "../../utils/combineUrl";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { TenantStatus } from "@docspace/shared/enums";
 
 const PrivateRoute = ({ children, ...rest }) => {

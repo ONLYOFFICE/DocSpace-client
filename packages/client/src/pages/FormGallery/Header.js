@@ -14,7 +14,7 @@ import {
 } from "./StyledGallery";
 import config from "PACKAGE_FILE";
 import FilesFilter from "@docspace/common/api/files/filter";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
 const SectionHeaderContent = ({

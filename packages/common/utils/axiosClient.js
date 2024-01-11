@@ -1,5 +1,5 @@
 import axios from "axios";
-import combineUrl from "./combineUrl";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
 let { api: apiConf, proxy: proxyConf } = defaultConfig;
@@ -13,7 +13,8 @@ class AxiosClient {
 
   initCSR = () => {
     this.isSSR = false;
-    const origin = window.DocSpaceConfig?.api?.origin || apiOrigin || window.location.origin;
+    const origin =
+      window.DocSpaceConfig?.api?.origin || apiOrigin || window.location.origin;
     const proxy = window.DocSpaceConfig?.proxy?.url || proxyURL;
     const prefix = window.DocSpaceConfig?.api?.prefix || apiPrefix;
 
@@ -29,16 +30,22 @@ class AxiosClient {
     const sharedIndex = location.pathname.indexOf("shared");
 
     const lastKeySymbol = location.search.indexOf("&");
-    const lastIndex = lastKeySymbol === -1 ? location.search.length : lastKeySymbol;
+    const lastIndex =
+      lastKeySymbol === -1 ? location.search.length : lastKeySymbol;
     const publicRoomKey =
-      shareIndex > -1 && sharedIndex === -1 ? location.search.substring(5, lastIndex) : null;
+      shareIndex > -1 && sharedIndex === -1
+        ? location.search.substring(5, lastIndex)
+        : null;
 
     if (publicRoomKey) {
       headers = { ...headers, "Request-Token": publicRoomKey };
     }
 
     const apiBaseURL = combineUrl(origin, proxy, prefix);
-    const paymentsURL = combineUrl(proxy, "/portal-settings/payments/portal-payments");
+    const paymentsURL = combineUrl(
+      proxy,
+      "/portal-settings/payments/portal-payments"
+    );
     this.paymentsURL = paymentsURL;
 
     const apxiosConfig = {
@@ -166,7 +173,8 @@ class AxiosClient {
             const pathname = window.location.pathname;
             const isArchived = pathname.indexOf("/rooms/archived") !== -1;
 
-            const isRooms = pathname.indexOf("/rooms/shared") !== -1 || isArchived;
+            const isRooms =
+              pathname.indexOf("/rooms/shared") !== -1 || isArchived;
 
             if (isRooms && !skipRedirect) {
               setTimeout(() => {

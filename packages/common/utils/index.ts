@@ -15,9 +15,9 @@ import sjcl from "sjcl";
 import { isMobile } from "react-device-detect";
 import TopLoaderService from "@docspace/shared/components/top-loading-indicator";
 import { LANGUAGE } from "@docspace/shared/constants";
-import { Encoder } from "./encoder";
+import { Encoder } from "@docspace/shared/utils/encoder";
 import FilesFilter from "../api/files/filter";
-import combineUrlFunc from "./combineUrl";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { getCookie } from "@docspace/shared/utils";
 // import { translations } from "./i18next-http-backend/lib/translations";
@@ -192,8 +192,6 @@ export const getUserRole = (user) => {
   else if (user.isCollaborator) return "collaborator";
   else return "manager";
 };
-
-export const combineUrl = combineUrlFunc;
 
 export function setCookie(name, value, options = {}) {
   options = {

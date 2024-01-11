@@ -90,10 +90,6 @@ export const initDocEditor = async (req) => {
     if (!successAuth && !doc && !shareKey) {
       error = {
         unAuthorized: true,
-        // redirectPath: combineUrl(
-        //   window?.DocSpaceConfig?.proxy?.url,
-        //   personal ? "/sign-in" : "/login"
-        // ),
       };
       return { error };
     }

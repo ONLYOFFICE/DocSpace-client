@@ -10,7 +10,7 @@ import { isMobile as isMobileUtils, isTablet } from "@docspace/shared/utils";
 
 import { FileStatus } from "@docspace/shared/enums";
 import { getFileExtension } from "../../utils";
-import { checkDialogsOpen } from "../../utils/checkDialogsOpen";
+import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 
 import {
   isNullOrUndefined,

@@ -1,5 +1,5 @@
 import { request } from "../client";
-import { combineUrl } from "../../utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 export function getModulesList() {
   return request({

@@ -1,7 +1,3 @@
-import { FolderType, PageType } from "@docspace/shared/enums";
-
-import { isMobile, isTablet } from "@docspace/shared/utils";
-
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
 import CatalogUserReactSvgUrl from "PUBLIC_DIR/images/catalog.user.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/catalog.rooms.react.svg?url";
@@ -44,13 +40,16 @@ import CatalogSettingsDeveloper20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/ca
 import CatalogSettingsPayment20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-payment.svg?url";
 import CatalogSettingsGift20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-gift.svg?url";
 
+import { FolderType, PageType } from "../enums";
+import { isMobile, isTablet } from "./device";
+
 type FolderUnionType = (typeof FolderType)[keyof typeof FolderType];
 type SettingsPageUnionType = (typeof PageType)[keyof typeof PageType];
 
 type PageUnionType = FolderUnionType | SettingsPageUnionType;
 type SizeType = 16 | 20;
 type OptionsType = {
-  [P in string]: any;
+  [P in string]: string | boolean;
 };
 
 const defaultIcon: Record<SizeType, string> = {
@@ -109,15 +108,15 @@ const MobileIconSize = 20;
 const DesktopIconSize = 16;
 const NullURL = "";
 
-const isSettingsCatalog = (
-  pageType: PageUnionType
-): pageType is SettingsPageUnionType => {
-  return typeof pageType === "string";
-};
+// const isSettingsCatalog = (
+//   pageType: PageUnionType
+// ): pageType is SettingsPageUnionType => {
+//   return typeof pageType === "string";
+// };
 
 export const getCatalogIconUrlByType = (
   pageType: PageUnionType,
-  options?: OptionsType
+  options?: OptionsType,
 ): string => {
   const size: SizeType =
     isMobile() || isTablet() ? MobileIconSize : DesktopIconSize;

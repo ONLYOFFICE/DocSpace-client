@@ -10,7 +10,7 @@ import {
   DeviceType,
 } from "@docspace/shared/enums";
 import { FOLDER_NAMES } from "@docspace/shared/constants";
-import { getCatalogIconUrlByType } from "@docspace/common/utils/catalogIcon.helper";
+import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 
 import { ArticleItem } from "@docspace/shared/components/article-item";
 import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";

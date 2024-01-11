@@ -4,7 +4,7 @@ import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import { DeviceType } from "@docspace/shared/enums";
-import { getCatalogIconUrlByType } from "@docspace/common/utils/catalogIcon.helper";
+import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 
 import { isArrayEqual } from "@docspace/shared/utils";
 

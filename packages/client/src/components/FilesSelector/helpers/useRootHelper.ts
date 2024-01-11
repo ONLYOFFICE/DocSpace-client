@@ -10,7 +10,7 @@ import CatalogUserReactSvgUrl from "PUBLIC_DIR/images/catalog.user.react.svg?url
 import { useRootHelperProps, Item } from "../FilesSelector.types";
 
 import { defaultBreadCrumb } from "../utils";
-import { getCatalogIconUrlByType } from "@docspace/common/utils/catalogIcon.helper";
+import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 
 const useRootHelper = ({
   setBreadCrumbs,

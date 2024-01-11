@@ -5,6 +5,7 @@
   "DisableUserButton": "Disable",
   "EmailChangeButton": "Change email",
   "EnableUserButton": "Enable",
+  "Group": "Group",
   "InviteLinkTitle": "Invitation link",
   "LDAPLbl": "LDAP",
   "NameChangeButton": "Change name",
@@ -17,5 +18,6 @@
   "SuccessChangeUserStatus": "The user status was successfully changed",
   "SuccessDeletePersonalData": "Personal data has been successfully deleted",
   "SuccessSentInvitation": "The invitation was successfully sent",
-  "SuccessSentMultipleInvitatios": "Invitations were successfully sent"
+  "SuccessSentMultipleInvitatios": "Invitations were successfully sent",
+  "WithoutGroup": "Without group"
 }

@@ -381,6 +381,8 @@ const FilterBlock = ({
                 onBackClick={onArrowClick}
                 headerLabel={selectorLabel}
               />
+            ) : showSelector.type === "groupSelector" ? (
+              <div>Group selector</div>
             ) : (
               <RoomSelector
                 className="people-selector"

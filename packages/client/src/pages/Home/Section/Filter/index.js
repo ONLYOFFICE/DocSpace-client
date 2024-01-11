@@ -984,6 +984,28 @@ const SectionFilterContent = ({
 
   const getFilterData = React.useCallback(async () => {
     if (isAccountsPage) {
+      const groupItems = [
+        {
+          id: "filter_group",
+          key: "filter-group",
+          group: "filter-group",
+          label: t("PeopleTranslations:Group"), // Add translation
+          isHeader: true,
+        },
+        {
+          id: "filter_group-without-group",
+          key: "filter_group-without-group",
+          group: "filter-group",
+          label: t("PeopleTranslations:WithoutGroup"), // Add translation
+        },
+        {
+          id: "filter_group-other",
+          key: "filter_group-other",
+          group: "filter-group",
+          label: t("Common:OtherLabel"), // Add translation
+        },
+      ];
+
       const statusItems = [
         {
           id: "filter_status-user",
@@ -1127,6 +1149,7 @@ const SectionFilterContent = ({
 
       const filterOptions = [];
 
+      filterOptions.push(...groupItems);
       filterOptions.push(...statusItems);
       filterOptions.push(...typeItems);
       // filterOptions.push(...roleItems);

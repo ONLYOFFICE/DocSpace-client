@@ -195,9 +195,12 @@ const FilterBlockItem = ({
 
   const getTagItem = (item) => {
     const isRoomsSelector = item.group === FilterGroups.filterRoom;
+    const isGroupsSelector = item.group === "filter-group";
 
     const selectorType = isRoomsSelector
       ? FilterSelectorTypes.rooms
+      : isGroupsSelector
+      ? "groupSelector"
       : FilterSelectorTypes.people;
 
     if (
@@ -221,7 +224,7 @@ const FilterBlockItem = ({
         name={`${item.label}-${item.key}`}
         id={item.id}
         onClick={
-          item.key === FilterKeys.other
+          item.key === FilterKeys.other || item.key === "filter_group-other"
             ? (event) => showSelectorAction(event, selectorType, item.group, [])
             : () =>
                 changeFilterValueAction(

@@ -200,7 +200,7 @@ export default function withBadges(WrappedComponent) {
         isArchiveFolderRoot,
         theme,
         isAdmin: auth.isAdmin,
-        isVisitor: auth?.userStore?.user?.isVisitor,
+        isVisitor: auth?.userStore?.user?.isVisitor || !auth?.userStore?.user,
         isTrashFolder: isRecycleBinFolder,
         isPrivacyFolder,
         homepage: config.homepage,

@@ -20,6 +20,8 @@ const RoomsItemHeader = ({
   setInviteUsersWarningDialogVisible,
   isPublicRoomType,
   roomsView,
+  setSelected,
+  setBufferSelection,
 }) => {
   const itemTitleRef = useRef();
 
@@ -31,6 +33,11 @@ const RoomsItemHeader = ({
   const security = selectionParentRoom ? selectionParentRoom.security : {};
   const canInviteUserInRoomAbility = security?.EditAccess;
   const showInviteUserIcon = selection?.isRoom && roomsView === "info_members";
+
+  const onSelectItem = () => {
+    setSelected("none");
+    setBufferSelection(selection);
+  };
 
   const onClickInviteUsers = () => {
     setIsMobileHidden(true);
@@ -84,51 +91,60 @@ const RoomsItemHeader = ({
           />
         )}
 
-        <RoomsContextBtn selection={selection} itemTitleRef={itemTitleRef} />
+        <RoomsContextBtn
+          selection={selection}
+          itemTitleRef={itemTitleRef}
+          onSelectItem={onSelectItem}
+        />
       </div>
     </StyledTitle>
   );
 };
 
-export default inject(({ auth, dialogsStore, selectedFolderStore }) => {
-  const {
-    selection: selectionItem,
-    selectionParentRoom,
-    getIsRooms,
-    roomsView,
-  } = auth.infoPanelStore;
+export default inject(
+  ({ auth, dialogsStore, selectedFolderStore, filesStore }) => {
+    const {
+      selection: selectionItem,
+      selectionParentRoom,
+      getIsRooms,
+      roomsView,
+    } = auth.infoPanelStore;
 
-  const isShowParentRoom =
-    getIsRooms() &&
-    roomsView === "info_members" &&
-    !selectionItem.isRoom &&
-    !!selectionParentRoom;
+    const isShowParentRoom =
+      getIsRooms() &&
+      roomsView === "info_members" &&
+      !selectionItem.isRoom &&
+      !!selectionParentRoom;
 
-  const selection =
-    selectionItem.length > 1
-      ? null
-      : isShowParentRoom
-      ? selectionParentRoom
-      : selectionItem;
+    const selection =
+      selectionItem.length > 1
+        ? null
+        : isShowParentRoom
+        ? selectionParentRoom
+        : selectionItem;
 
-  return {
-    selection,
-    roomsView,
-    selectionParentRoom: auth.infoPanelStore.selectionParentRoom,
-    setIsMobileHidden: auth.infoPanelStore.setIsMobileHidden,
+    return {
+      selection,
+      roomsView,
+      selectionParentRoom: auth.infoPanelStore.selectionParentRoom,
+      setIsMobileHidden: auth.infoPanelStore.setIsMobileHidden,
 
-    isGracePeriod: auth.currentTariffStatusStore.isGracePeriod,
+      isGracePeriod: auth.currentTariffStatusStore.isGracePeriod,
 
-    setInvitePanelOptions: dialogsStore.setInvitePanelOptions,
-    setInviteUsersWarningDialogVisible:
-      dialogsStore.setInviteUsersWarningDialogVisible,
+      setInvitePanelOptions: dialogsStore.setInvitePanelOptions,
+      setInviteUsersWarningDialogVisible:
+        dialogsStore.setInviteUsersWarningDialogVisible,
 
-    isPublicRoomType:
-      (selectedFolderStore.roomType ??
-        auth.infoPanelStore.selectionParentRoom?.roomType) ===
-      RoomsType.PublicRoom,
-  };
-})(
+      isPublicRoomType:
+        (selectedFolderStore.roomType ??
+          auth.infoPanelStore.selectionParentRoom?.roomType) ===
+        RoomsType.PublicRoom,
+
+      setSelected: filesStore.setSelected,
+      setBufferSelection: filesStore.setBufferSelection,
+    };
+  }
+)(
   withTranslation([
     "Files",
     "Common",

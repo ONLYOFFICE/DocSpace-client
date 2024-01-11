@@ -2272,9 +2272,9 @@ class FilesStore {
         }
       }
 
-      if (fromInfoPanel) {
-        roomOptions = this.removeOptions(roomOptions, ["external-link"]);
-      }
+      // if (fromInfoPanel) {
+      //   roomOptions = this.removeOptions(roomOptions, ["external-link"]);
+      // }
 
       roomOptions = this.removeSeparator(roomOptions);
 
@@ -3985,7 +3985,7 @@ class FilesStore {
     const pathPartsRoomIndex = navigationPath.findIndex((f) => f.id === roomId);
     if (pathPartsRoomIndex === -1) return;
     navigationPath[pathPartsRoomIndex].shared = shared;
-    this.selectedFolderStore.setPathParts(navigationPath);
+    this.selectedFolderStore.setNavigationPath(navigationPath);
   };
 
   get isFiltered() {

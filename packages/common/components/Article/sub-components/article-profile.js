@@ -53,6 +53,22 @@ const ArticleProfile = (props) => {
 
   const model = getActions(t);
 
+  const firstName = user.firstName
+    .split(" ")
+    .filter((name) => name.trim().length > 0)
+    .join(" ");
+  const lastName = user.lastName
+    .split(" ")
+    .filter((name) => name.trim().length > 0)
+    .join(" ");
+
+  const displayName = user.displayName;
+
+  const [firstTerm, secondTerm] =
+    displayName.indexOf(user.firstName) > displayName.indexOf(user.lastName)
+      ? [lastName, firstName]
+      : [firstName, lastName];
+
   const { interfaceDirection } = useTheme();
   const isRtl = interfaceDirection === "rtl";
   const userAvatar = user.hasAvatar ? user.avatar : DefaultUserPhotoPngUrl;
@@ -87,16 +103,13 @@ const ArticleProfile = (props) => {
         </div>
         {(!isTabletView || showText) && (
           <>
-            <StyledUserName
-              length={user.displayName.length}
-              onClick={onProfileClick}
-            >
+            <StyledUserName onClick={onProfileClick}>
               <Text fontWeight={600} noSelect truncate dir="auto">
-                {user.lastName}
+                {firstTerm}
                 &nbsp;
               </Text>
               <Text fontWeight={600} noSelect truncate dir="auto">
-                {user.firstName}
+                {secondTerm}
                 &nbsp;
               </Text>
             </StyledUserName>

@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { getSystemTheme } from "@docspace/shared/utils";
+import { ThemeKeys } from "../enums";
 
 export const useThemeDetector = () => {
-  const isDesktopClient = window["AscDesktopEditor"] !== undefined;
+  const isDesktopClient = window.AscDesktopEditor !== undefined;
   const [systemTheme, setSystemTheme] = useState(getSystemTheme());
 
-  const systemThemeListener = (e) => {
-    setSystemTheme(e.matches ? "Dark" : "Base");
+  const systemThemeListener = (e: MediaQueryListEvent) => {
+    setSystemTheme(e.matches ? ThemeKeys.DarkStr : ThemeKeys.BaseStr);
   };
 
   useEffect(() => {
@@ -20,7 +21,7 @@ export const useThemeDetector = () => {
 
       mediaQuery.removeEventListener("change", systemThemeListener);
     };
-  }, []);
+  }, [isDesktopClient]);
 
   return systemTheme;
 };

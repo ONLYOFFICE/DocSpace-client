@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import MobileCategoryWrapper from "../../../../components/MobileCategoryWrapper";
 
 const LdapMobileView = (props) => {
-  const { t } = props;
+  const { t, isLdapEnabled } = props;
   const navigate = useNavigate();
 
   const onClickLink = (e) => {
@@ -15,6 +15,7 @@ const LdapMobileView = (props) => {
   return (
     <div style={{ marginTop: "28px" }}>
       <MobileCategoryWrapper
+        disabled={!isLdapEnabled}
         title={t("Ldap:LdapSettings")}
         subtitle={
           <Trans i18nKey="LdapMobileSettingsDescription" ns="Ldap" t={t} />
@@ -23,6 +24,7 @@ const LdapMobileView = (props) => {
         onClickLink={onClickLink}
       />
       <MobileCategoryWrapper
+        disabled={!isLdapEnabled}
         title={t("Ldap:LdapSyncTitle")}
         subtitle={<Trans i18nKey="LdapMobileSyncDescription" ns="Ldap" t={t} />}
         url="/portal-settings/integration/ldap/sync-data"

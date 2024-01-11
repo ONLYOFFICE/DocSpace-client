@@ -34,6 +34,7 @@ const LDAP = ({
   isSettingsShown,
   load,
   isMobileView,
+  isLdapEnabled,
 }) => {
   const { t } = useTranslation(["Ldap", "Settings", "Common"]);
   const [isSmallWindow, setIsSmallWindow] = useState(false);
@@ -75,7 +76,7 @@ const LDAP = ({
       <ToggleLDAP isLDAPAvailable={isLdapAvailable} />
 
       {isMobileView ? (
-        <LdapMobileView />
+        <LdapMobileView isLdapEnabled={isLdapEnabled} />
       ) : (
         <>
           <SettingsContainer />
@@ -94,7 +95,7 @@ export default inject(({ auth, ldapStore }) => {
   const { isLdapAvailable } = currentQuotaStore;
   const { ldapSettingsUrl, theme, currentColorScheme, currentDeviceType } =
     settingsStore;
-  const { isSettingsShown, load } = ldapStore;
+  const { isSettingsShown, load, isLdapEnabled } = ldapStore;
 
   const isMobileView = currentDeviceType === DeviceType.mobile;
 
@@ -106,5 +107,6 @@ export default inject(({ auth, ldapStore }) => {
     isSettingsShown,
     load,
     isMobileView,
+    isLdapEnabled,
   };
 })(observer(LDAP));

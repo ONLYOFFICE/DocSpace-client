@@ -3,6 +3,7 @@ import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import styled from "styled-components";
 import commonIconsStyles from "@docspace/components/utils/common-icons-style";
 import { Base } from "@docspace/components/themes";
+import { UnavailableStyles } from "../utils/commonSettingsStyles";
 
 export const StyledArrowRightIcon = styled(ArrowRightIcon)`
   ${commonIconsStyles}
@@ -50,6 +51,8 @@ export const StyledMobileCategoryWrapper = styled.div`
   .link-text {
     margin: 0;
   }
+
+  ${(props) => props.disabled && UnavailableStyles}
 `;
 
 StyledMobileCategoryWrapper.defaultProps = { theme: Base };

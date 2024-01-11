@@ -2556,8 +2556,8 @@ class FilesStore {
     return api.rooms.updateRoomMemberRole(id, data);
   }
 
-  getHistory(module, id, signal = null) {
-    return api.rooms.getHistory(module, id, signal);
+  getHistory(module, id, signal = null, requestToken) {
+    return api.rooms.getHistory(module, id, signal, requestToken);
   }
 
   getRoomHistory(id) {
@@ -3034,6 +3034,7 @@ class FilesStore {
         viewAccessibility,
         mute,
         inRoom,
+        requestToken,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3194,6 +3195,7 @@ class FilesStore {
         inRoom,
         isForm,
         canCopyPublicLink,
+        requestToken,
       };
     });
 

@@ -476,7 +476,12 @@ function Editor({
 
   const onSDKRequestHistory = async () => {
     try {
-      const fileHistory = await getEditHistory(fileId, doc);
+      const search = window.location.search;
+      const shareIndex = search.indexOf("share=");
+      const requestToken =
+        shareIndex > -1 ? search.substring(shareIndex + 6) : null;
+
+      const fileHistory = await getEditHistory(fileId, doc, requestToken);
       const historyLength = fileHistory.length;
 
       docEditor.refreshHistory({
@@ -504,7 +509,17 @@ function Editor({
     const version = event.data;
 
     try {
-      const versionDifference = await getEditDiff(fileId, version, doc);
+      const search = window.location.search;
+      const shareIndex = search.indexOf("share=");
+      const requestToken =
+        shareIndex > -1 ? search.substring(shareIndex + 6) : null;
+
+      const versionDifference = await getEditDiff(
+        fileId,
+        version,
+        doc,
+        requestToken
+      );
       const changesUrl = versionDifference.changesUrl;
       const previous = versionDifference.previous;
       const token = versionDifference.token;

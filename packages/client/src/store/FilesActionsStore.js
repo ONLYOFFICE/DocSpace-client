@@ -609,17 +609,15 @@ class FilesActionStore {
     }
   };
 
-  downloadAction = (label, folderId) => {
+  downloadAction = (label, item, folderId) => {
     const { bufferSelection } = this.filesStore;
-    const { isVisible: infoPanelIsVisible, selection: infoPanelSelection } =
-      this.authStore.infoPanelStore;
 
-    const selection = this.filesStore.selection.length
+    const selection = item
+      ? [item]
+      : this.filesStore.selection.length
       ? this.filesStore.selection
       : bufferSelection
       ? [bufferSelection]
-      : infoPanelIsVisible && infoPanelSelection != null
-      ? [infoPanelSelection]
       : null;
 
     if (!selection.length) return;

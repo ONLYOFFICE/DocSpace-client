@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { StyledSubmenu } from "./StyledSubmenuLoader";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 const SectionSubmenuLoader = ({ id, className, style, ...rest }) => {
   const { title } = rest;

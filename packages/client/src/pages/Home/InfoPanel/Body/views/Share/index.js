@@ -63,6 +63,7 @@ const Share = (props) => {
   };
 
   const addGeneralLink = async () => {
+    addLoaderLink(true);
     const link = await getPrimaryFileLink(selection.id);
     setPrimaryFileLink([link]);
     copy(link.sharedTo.shareLink);
@@ -70,6 +71,7 @@ const Share = (props) => {
   };
 
   const addAdditionalLinks = async () => {
+    addLoaderLink(false);
     const newLink = await addFileLink(
       selection.id,
       ShareAccessRights.ReadOnly,
@@ -77,6 +79,15 @@ const Share = (props) => {
       false
     );
     setAdditionalFileLinks([...additionalFileLinks, ...[newLink]]);
+  };
+
+  const addLoaderLink = (primary) => {
+    const link = { isLoaded: true };
+    if (primary) {
+      setPrimaryFileLink([link]);
+    } else {
+      setAdditionalFileLinks([...additionalFileLinks, ...[link]]);
+    }
   };
 
   const changeShareOption = async (item, link) => {

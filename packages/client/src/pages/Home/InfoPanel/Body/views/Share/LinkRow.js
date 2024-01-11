@@ -16,6 +16,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { StyledLinkRow } from "./StyledShare";
 import { getShareOptions, getAccessOptions } from "./optionsHelper";
 import ExpiredComboBox from "./ExpiredComboBox";
+import { RowLoader } from "./ShareLoader";
 
 const LinkRow = ({
   onAddClick,
@@ -56,6 +57,8 @@ const LinkRow = ({
         </StyledLinkRow>
       ) : (
         links.map((link, index) => {
+          if (link.isLoaded) return <RowLoader />;
+
           const shareOption = shareOptions.find(
             (option) => option.internal === link.sharedTo.internal
           );

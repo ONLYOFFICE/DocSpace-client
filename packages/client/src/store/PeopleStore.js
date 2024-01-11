@@ -91,7 +91,13 @@ class PeopleStore {
   resetFilter = () => {
     const filter = Filter.getDefault();
 
-    window.DocSpace.navigate(`accounts/filter?${filter.toUrlParams()}`);
+    const subRoute = window.location.pathname.includes("groups")
+      ? "groups"
+      : "people";
+
+    window.DocSpace.navigate(
+      `accounts/${subRoute}/filter?${filter.toUrlParams()}`
+    );
   };
 
   onChangeType = (e) => {

@@ -306,8 +306,10 @@ const SectionFilterContent = ({
         newFilter.accountLoginType = accountLoginType;
 
         //console.log(newFilter);
-
-        navigate(`accounts/filter?${newFilter.toUrlParams()}`);
+        const subRoute = location.pathname.includes("groups")
+          ? "groups"
+          : "people";
+        navigate(`accounts/${subRoute}/filter?${newFilter.toUrlParams()}`);
       } else if (isRooms) {
         const type = getType(data) || null;
 
@@ -1906,7 +1908,11 @@ const SectionFilterContent = ({
           newFilter.accountLoginType = null;
         }
 
-        navigate(`accounts/filter?${newFilter.toUrlParams()}`);
+        const subRoute = location.pathname.includes("groups")
+          ? "groups"
+          : "people";
+
+        navigate(`accounts/${subRoute}/filter?${newFilter.toUrlParams()}`);
       } else if (isRooms) {
         const newFilter = roomsFilter.clone();
 
@@ -2000,7 +2006,11 @@ const SectionFilterContent = ({
     if (isAccountsPage) {
       const newFilter = AccountsFilter.getDefault();
 
-      navigate(`accounts/filter?${newFilter.toUrlParams()}`);
+      const subRoute = location.pathname.includes("groups")
+        ? "groups"
+        : "people";
+
+      navigate(`accounts/${subRoute}/filter?${newFilter.toUrlParams()}`);
     } else if (isRooms) {
       const newFilter = RoomsFilter.getDefault();
 

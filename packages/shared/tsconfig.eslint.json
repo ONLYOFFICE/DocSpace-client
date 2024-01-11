@@ -10,7 +10,7 @@
     "themes",
     "types",
     "skeletons",
-
+    "HOC",
     // add all files in which you see
     // the "parserOptions.project" error
     ".eslintrc.cjs",

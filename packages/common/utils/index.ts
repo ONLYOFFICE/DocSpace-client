@@ -168,8 +168,6 @@ export function showLoader() {
   timer = setTimeout(() => TopLoaderService.start(), 500);
 }
 
-export { withLayoutSize } from "./withLayoutSize";
-
 export function isMe(user, userName) {
   return (
     user && user.id && (userName === "@self" || user.userName === userName)

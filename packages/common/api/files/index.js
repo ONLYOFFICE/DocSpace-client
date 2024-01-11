@@ -970,18 +970,30 @@ export function fileCopyAs(
   });
 }
 
-export function getEditHistory(fileId, doc) {
-  return request({
+export function getEditHistory(fileId, doc, requestToken) {
+  const options = {
     method: "get",
     url: `files/file/${fileId}/edit/history?doc=${doc}`,
-  });
+  };
+
+  if (requestToken) {
+    options.headers = { "Request-Token": requestToken };
+  }
+
+  return request(options);
 }
 
-export function getEditDiff(fileId, version, doc) {
-  return request({
+export function getEditDiff(fileId, version, doc, requestToken) {
+  const options = {
     method: "get",
     url: `files/file/${fileId}/edit/diff?version=${version}&doc=${doc}`,
-  });
+  };
+
+  if (requestToken) {
+    options.headers = { "Request-Token": requestToken };
+  }
+
+  return request(options);
 }
 
 export function restoreDocumentsVersion(fileId, version, doc) {

@@ -77,12 +77,16 @@ export function updateRoomMemberRole(id, data) {
   });
 }
 
-export function getHistory(module, id, signal = null) {
+export function getHistory(module, id, signal = null, requestToken) {
   const options = {
     method: "get",
     url: `/feed/filter?module=${module}&withRelated=true&id=${id}`,
     signal,
   };
+
+  if (requestToken) {
+    options.headers = { "Request-Token": requestToken };
+  }
 
   return request(options).then((res) => {
     return res;

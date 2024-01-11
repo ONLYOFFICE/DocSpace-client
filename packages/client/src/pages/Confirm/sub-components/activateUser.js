@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { withTranslation } from "react-i18next";
-import Text from "@docspace/components/text";
-import TextInput from "@docspace/components/text-input";
-import PasswordInput from "@docspace/components/password-input";
-import Button from "@docspace/components/button";
-import FieldContainer from "@docspace/components/field-container";
+import { Text } from "@docspace/shared/components/text";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { PasswordInput } from "@docspace/shared/components/password-input";
+import { Button } from "@docspace/shared/components/button";
+import { FieldContainer } from "@docspace/shared/components/field-container";
 import { inject, observer } from "mobx-react";
 import { EmployeeActivationStatus } from "@docspace/common/constants";
 import {
@@ -13,7 +13,7 @@ import {
   updateUser,
 } from "@docspace/common/api/people";
 import { createPasswordHash } from "@docspace/common/utils";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 import {
   StyledPage,
   StyledContent,

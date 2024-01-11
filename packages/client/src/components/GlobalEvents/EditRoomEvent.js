@@ -5,7 +5,7 @@ import { EditRoomDialog } from "../dialogs";
 import { Encoder } from "@docspace/common/utils/encoder";
 import api from "@docspace/common/api";
 import { getRoomInfo } from "@docspace/common/api/rooms";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 
 const EditRoomEvent = ({
   addActiveItems,

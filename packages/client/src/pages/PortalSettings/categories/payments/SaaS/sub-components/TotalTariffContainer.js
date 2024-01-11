@@ -1,9 +1,9 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import { Trans } from "react-i18next";
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 import { inject, observer } from "mobx-react";
-import { mobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/shared/utils";
 
 const StyledBody = styled.div`
   max-width: 272px;

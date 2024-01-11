@@ -1,6 +1,6 @@
-import Checkbox from "@docspace/components/checkbox";
-import Button from "@docspace/components/button";
-import Text from "@docspace/components/text";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Button } from "@docspace/shared/components/button";
+import { Text } from "@docspace/shared/components/text";
 import { StyledFooterWrapper } from "../../../ChangePortalOwnerDialog/StyledDialog";
 
 const Footer = ({
@@ -25,8 +25,8 @@ const Footer = ({
               isAbortTransfer && percent !== 100
                 ? t("DataReassignmentDialog:StartTransferAgain")
                 : percent === 100
-                ? t("Common:OkButton")
-                : t("DataReassignmentDialog:AbortTransfer")
+                  ? t("Common:OkButton")
+                  : t("DataReassignmentDialog:AbortTransfer")
             }
             size="normal"
             scale
@@ -34,8 +34,8 @@ const Footer = ({
               isAbortTransfer && percent !== 100
                 ? onStartAgain
                 : percent === 100
-                ? onClose
-                : onTerminate
+                  ? onClose
+                  : onTerminate
             }
           />
         </div>

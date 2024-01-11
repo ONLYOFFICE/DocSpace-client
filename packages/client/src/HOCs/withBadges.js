@@ -6,7 +6,7 @@ import { combineUrl } from "@docspace/common/utils";
 import Badges from "../components/Badges";
 import config from "PACKAGE_FILE";
 import copy from "copy-to-clipboard";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 import { isMobileOnly } from "react-device-detect";
 
 export default function withBadges(WrappedComponent) {
@@ -76,7 +76,7 @@ export default function withBadges(WrappedComponent) {
       const elem = e.target.closest(".is-mute");
       const data = elem.dataset;
       const { id, rootfolderid } = data;
-      
+
       setMuteAction(
         "unmute",
         { id, rootFolderId: rootfolderid, new: data.new },

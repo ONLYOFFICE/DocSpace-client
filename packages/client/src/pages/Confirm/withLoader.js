@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { observer, inject } from "mobx-react";
 import { useNavigate } from "react-router-dom";
-import Loader from "@docspace/components/loader";
+import { Loader } from "@docspace/shared/components/loader";
 import axios from "axios";
 import { combineUrl } from "@docspace/common/utils";
 import ConfirmWrapper from "./ConfirmWrapper";
@@ -88,11 +88,11 @@ export default function withLoader(WrappedComponent) {
       type === "TfaActivation" || type === "TfaAuth"
         ? props.isLoaded
         : type === "PasswordChange" ||
-          type === "LinkInvite" ||
-          type === "Activation" ||
-          type === "EmpInvite"
-        ? !!passwordSettings
-        : true;
+            type === "LinkInvite" ||
+            type === "Activation" ||
+            type === "EmpInvite"
+          ? !!passwordSettings
+          : true;
 
     const cleanTimer = () => {
       loadTimeout && clearTimeout(loadTimeout);

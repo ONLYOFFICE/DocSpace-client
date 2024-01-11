@@ -1,7 +1,7 @@
 import React from "react";
 import { Trans } from "react-i18next";
 
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 
 const useOperations = ({
   t,

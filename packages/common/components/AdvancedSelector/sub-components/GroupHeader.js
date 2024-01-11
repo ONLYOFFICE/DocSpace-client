@@ -1,8 +1,8 @@
 import React from "react";
 
-import Avatar from "@docspace/components/avatar";
-import Text from "@docspace/components/text";
-import Checkbox from "@docspace/components/checkbox";
+import { Avatar } from "@docspace/shared/components/avatar";
+import { Text } from "@docspace/shared/components/text";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 const GroupHeader = ({
   avatarUrl,
   label,

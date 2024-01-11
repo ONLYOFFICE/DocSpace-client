@@ -34,12 +34,12 @@ import {
 } from "@docspace/common/constants";
 import { makeAutoObservable } from "mobx";
 
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 import { TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
 import { checkProtocol } from "../helpers/files-helpers";
 import { combineUrl } from "@docspace/common/utils";
 import config from "PACKAGE_FILE";
-import { isDesktop } from "@docspace/components/utils/device";
+import { isDesktop } from "@docspace/shared/utils";
 import { getCategoryType } from "SRC_DIR/helpers/utils";
 import { muteRoomNotification } from "@docspace/common/api/settings";
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -288,8 +288,8 @@ class FilesActionStore {
     const selection = newSelection
       ? newSelection
       : this.filesStore.selection.length
-      ? this.filesStore.selection
-      : [bufferSelection];
+        ? this.filesStore.selection
+        : [bufferSelection];
     const isThirdPartyFile = selection.some((f) => f.providerKey);
 
     const currentFolderId = this.selectedFolderStore.id;
@@ -615,10 +615,10 @@ class FilesActionStore {
     const selection = item
       ? [item]
       : this.filesStore.selection.length
-      ? this.filesStore.selection
-      : bufferSelection
-      ? [bufferSelection]
-      : null;
+        ? this.filesStore.selection
+        : bufferSelection
+          ? [bufferSelection]
+          : null;
 
     if (!selection.length) return;
 
@@ -1166,8 +1166,8 @@ class FilesActionStore {
               folders.length !== 1 && Array.isArray(folders)
                 ? t("ArchivedRoomsAction")
                 : Array.isArray(folders)
-                ? t("ArchivedRoomAction", { name: folders[0].title })
-                : t("ArchivedRoomAction", { name: folders.title });
+                  ? t("ArchivedRoomAction", { name: folders[0].title })
+                  : t("ArchivedRoomAction", { name: folders.title });
 
             toastr.success(successTranslation);
           })
@@ -1219,8 +1219,8 @@ class FilesActionStore {
               folders.length !== 1 && Array.isArray(folders)
                 ? t("UnarchivedRoomsAction")
                 : Array.isArray(folders)
-                ? t("UnarchivedRoomAction", { name: folders[0].title })
-                : t("UnarchivedRoomAction", { name: folders.title });
+                  ? t("UnarchivedRoomAction", { name: folders[0].title })
+                  : t("UnarchivedRoomAction", { name: folders.title });
 
             toastr.success(successTranslation);
           })
@@ -2281,8 +2281,8 @@ class FilesActionStore {
       categoryType === CategoryType.SharedRoom
         ? CategoryType.Shared
         : CategoryType.ArchivedRoom === categoryType
-        ? CategoryType.Archive
-        : categoryType;
+          ? CategoryType.Archive
+          : categoryType;
 
     const path = getCategoryUrl(correctCategoryType);
 
@@ -2434,8 +2434,8 @@ class FilesActionStore {
     const roomId = selection.length
       ? selection[0].id
       : bufferSelection
-      ? bufferSelection.id
-      : this.selectedFolderStore.id;
+        ? bufferSelection.id
+        : this.selectedFolderStore.id;
 
     const isAdmin = user.isOwner || user.isAdmin;
     const isRoot = this.selectedFolderStore.isRootFolder;
@@ -2480,8 +2480,8 @@ class FilesActionStore {
     const roomId = selection.length
       ? selection[0].id
       : bufferSelection
-      ? bufferSelection.id
-      : id;
+        ? bufferSelection.id
+        : id;
 
     return setRoomOwner(userId, [roomId])
       .then(async (res) => {

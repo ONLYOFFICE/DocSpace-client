@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import StyledErrorContainer from "./StyledErrorContainer";
 import Headline from "../Headline";
-import Text from "@docspace/components/text";
-import Button from "@docspace/components/button";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
 
 const ErrorContainer = (props) => {
   //console.log("ErrorContainer render");

@@ -4,10 +4,10 @@ import { withTranslation } from "react-i18next";
 import copy from "copy-to-clipboard";
 import isEqual from "lodash/isEqual";
 
-import Button from "@docspace/components/button";
-import toastr from "@docspace/components/toast/toastr";
-import Portal from "@docspace/components/portal";
-import ModalDialog from "@docspace/components/modal-dialog";
+import { Button } from "@docspace/shared/components/button";
+import { toastr } from "@docspace/shared/components/toast";
+import { Portal } from "@docspace/shared/components/portal";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { StyledEditLinkPanel } from "./StyledEditLinkPanel";
 
 import LinkBlock from "./LinkBlock";
@@ -160,8 +160,8 @@ const EditLinkPanel = (props) => {
   const expiredLinkText = isExpired
     ? t("Translations:LinkHasExpiredAndHasBeenDisabled")
     : expirationDate
-    ? `${t("Files:LinkValidUntil")}:`
-    : t("Files:ChooseExpirationDate");
+      ? `${t("Files:LinkValidUntil")}:`
+      : t("Files:ChooseExpirationDate");
 
   const isPrimary = link?.sharedTo?.primary;
 
@@ -184,8 +184,8 @@ const EditLinkPanel = (props) => {
           ? isPrimary
             ? t("Files:EditGeneralLink")
             : isPublic
-            ? t("Files:EditAdditionalLink")
-            : t("Files:EditLink")
+              ? t("Files:EditAdditionalLink")
+              : t("Files:EditLink")
           : t("Files:CreateNewLink")}
       </ModalDialog.Header>
       <ModalDialog.Body>

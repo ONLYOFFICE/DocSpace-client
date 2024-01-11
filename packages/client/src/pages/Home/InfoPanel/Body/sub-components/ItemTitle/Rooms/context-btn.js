@@ -2,7 +2,8 @@ import { useRef, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
-import { ContextMenu, ContextMenuButton } from "@docspace/components";
+import { ContextMenu } from "@docspace/shared/components/context-menu";
+import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 
 const generalKeys = ["select", "show-info"];
 const roomKeys = ["separator0", "room-info"];
@@ -34,7 +35,7 @@ const RoomsContextBtn = ({
 
     if (!contextMenuRef?.current.menuRef.current)
       itemTitleRef?.current.click(e);
-    contextMenuRef?.current.show(e);
+    contextMenuRef?.current?.show(e);
   };
 
   const getData = () => {

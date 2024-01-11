@@ -11,7 +11,7 @@ import {
   StyledItem,
   StyledButtons,
 } from "./StyledSharingPanel";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 const SharingPanelLoaderModal = ({
   id,

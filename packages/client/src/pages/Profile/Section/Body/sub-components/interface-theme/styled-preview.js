@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { tablet } from "@docspace/components/utils/device";
+import { tablet } from "@docspace/shared/utils";
 
 export const StyledWrapper = styled.div`
   display: flex;

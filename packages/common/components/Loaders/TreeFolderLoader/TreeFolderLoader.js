@@ -5,7 +5,7 @@ import {
   StyledContainer,
   StyledBox,
 } from "./StyledTreeFolderLoader";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import TreeNodeLoader from "../TreeNodeLoader";
 
 const TreeFolderLoader = ({ id, className, style, ...rest }) => {

@@ -1,12 +1,12 @@
 import { useRef } from "react";
 import { withTranslation } from "react-i18next";
 
-import { Text } from "@docspace/components";
+import { Text } from "@docspace/shared/components/text";
 import { inject, observer } from "mobx-react";
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
-import IconButton from "@docspace/components/icon-button";
+import { IconButton } from "@docspace/shared/components/icon-button";
 import { StyledTitle } from "../../../styles/common";
-import RoomIcon from "@docspace/components/room-icon";
+import { RoomIcon } from "@docspace/shared/components/room-icon";
 import RoomsContextBtn from "./context-btn";
 import { RoomsType, ShareAccessRights } from "@docspace/common/constants";
 
@@ -120,8 +120,8 @@ export default inject(
       selectionItem.length > 1
         ? null
         : isShowParentRoom
-        ? selectionParentRoom
-        : selectionItem;
+          ? selectionParentRoom
+          : selectionItem;
 
     return {
       selection,

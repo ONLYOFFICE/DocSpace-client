@@ -53,13 +53,6 @@ const ArticleProfile = (props) => {
 
   const model = getActions(t);
 
-  const username = user.displayName
-    .split(" ")
-    .filter((name) => name.trim().length > 0);
-
-  const lastName = username.shift();
-  const firstName = username.join(" ");
-
   const { interfaceDirection } = useTheme();
   const isRtl = interfaceDirection === "rtl";
   const userAvatar = user.hasAvatar ? user.avatar : DefaultUserPhotoPngUrl;
@@ -99,11 +92,12 @@ const ArticleProfile = (props) => {
               onClick={onProfileClick}
             >
               <Text fontWeight={600} noSelect truncate dir="auto">
-                {lastName}
+                {user.lastName}
+                &nbsp;
               </Text>
-              &nbsp;
               <Text fontWeight={600} noSelect truncate dir="auto">
-                {firstName}
+                {user.firstName}
+                &nbsp;
               </Text>
             </StyledUserName>
             <ContextMenuButton

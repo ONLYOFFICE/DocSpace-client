@@ -1,4 +1,4 @@
-export default function (page) {
+function tryRedirectTo(page: string) {
   if (
     window.location.pathname === page ||
     window.location.pathname.indexOf(page) !== -1
@@ -10,3 +10,5 @@ export default function (page) {
 
   return true;
 }
+
+export default tryRedirectTo;

@@ -14,7 +14,7 @@ import { getLogoFromPath } from "@docspace/shared/utils";
 import { useMounted } from "../helpers/useMounted";
 import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 import LoginContainer from "@docspace/shared/components/color-theme/sub-components/LoginContainer";
-import { useThemeDetector } from "@docspace/common/utils/useThemeDetector";
+import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
 
 interface ILoginProps extends IInitialState {
   isDesktopEditor?: boolean;

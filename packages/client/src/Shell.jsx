@@ -22,7 +22,7 @@ import i18n from "./i18n";
 
 import moment from "moment-timezone";
 //import ReactSmartBanner from "./components/SmartBanner";
-import { useThemeDetector } from "@docspace/common/utils/useThemeDetector";
+import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
 import { isMobile, isIOS, isFirefox } from "react-device-detect";
 import IndicatorLoader from "./components/IndicatorLoader";
 import DialogsWrapper from "./components/dialogs/DialogsWrapper";

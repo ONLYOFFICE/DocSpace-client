@@ -154,7 +154,7 @@ const EditRoomEvent = ({
           }
 
           !withPaging && updateRoom(item, room);
-
+          reloadSelectionParentRoom();
           reloadInfoPanelSelection();
           URL.revokeObjectURL(img.src);
           setActiveFolders([]);

@@ -7,16 +7,15 @@ import FavoriteReactSvgUrl from "PUBLIC_DIR/images/favorite.react.svg?url";
 
 import React from "react";
 import styled from "styled-components";
-import IconButton from "@docspace/components/icon-button";
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
-import { isTablet, isMobile } from "@docspace/components/utils/device";
+
+import { isTablet, commonIconsStyles } from "@docspace/shared/utils";
 import {
   FileStatus,
   RoomsType,
   ShareAccessRights,
 } from "@docspace/common/constants";
 
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 const QuickButtons = (props) => {
   const {
@@ -101,7 +100,7 @@ const QuickButtons = (props) => {
     <div className="badges additional-badges  badges__quickButtons">
       {isAvailableLockFile && (
         <ColorTheme
-          themeId={ThemeType.IconButton}
+          themeId={ThemeId.IconButton}
           iconName={iconLock}
           className="badge lock-file icons-group"
           size={sizeQuickButton}
@@ -116,7 +115,7 @@ const QuickButtons = (props) => {
       )}
       {isAvailableDownloadFile && (
         <ColorTheme
-          themeId={ThemeType.IconButton}
+          themeId={ThemeId.IconButton}
           iconName={FileActionsDownloadReactSvgUrl}
           className="badge download-file icons-group"
           size={sizeQuickButton}
@@ -129,7 +128,7 @@ const QuickButtons = (props) => {
       )}
       {showCopyLinkIcon && (
         <ColorTheme
-          themeId={ThemeType.IconButton}
+          themeId={ThemeId.IconButton}
           iconName={LinkReactSvgUrl}
           className="badge copy-link icons-group"
           size={sizeQuickButton}
@@ -155,7 +154,7 @@ const QuickButtons = (props) => {
       )}
       {/* {fileExst && !isTrashFolder && displayBadges && (
         <ColorTheme
-          themeId={ThemeType.IconButton}
+          themeId={ThemeId.IconButton}
           iconName={iconFavorite}
           isFavorite={isFavorite}
           className="favorite badge icons-group"

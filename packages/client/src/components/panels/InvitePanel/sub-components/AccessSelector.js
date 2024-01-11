@@ -4,8 +4,8 @@ import { inject, observer } from "mobx-react";
 import { getAccessOptions } from "../utils";
 import { StyledAccessSelector } from "../StyledInvitePanel";
 
-import { isMobile } from "@docspace/components/utils/device";
-import AccessRightSelect from "@docspace/components/access-right-select";
+import { isMobile } from "@docspace/shared/utils";
+import { AccessRightSelect } from "@docspace/shared/components/access-right-select";
 
 const AccessSelector = ({
   t,

@@ -16,9 +16,10 @@ import withLoader from "@docspace/client/src/HOCs/withLoader";
 import Loaders from "@docspace/common/components/Loaders";
 import { getRoomTypeDefaultTagTranslation } from "../data";
 
-import ImageEditor from "@docspace/components/ImageEditor";
-import PreviewTile from "@docspace/components/ImageEditor/PreviewTile";
-import Text from "@docspace/components/text";
+import { ImageEditor } from "@docspace/shared/components/image-editor";
+import PreviewTile from "@docspace/shared/components/image-editor/PreviewTile";
+import { Text } from "@docspace/shared/components/text";
+
 import ChangeRoomOwner from "./ChangeRoomOwner";
 
 const StyledSetRoomParams = styled.div`

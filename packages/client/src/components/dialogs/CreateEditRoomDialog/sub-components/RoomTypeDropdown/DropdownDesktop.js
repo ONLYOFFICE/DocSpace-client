@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import RoomType from "../RoomType";
 
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 import { RoomsType } from "@docspace/common/constants";
 
 const StyledDropdownDesktop = styled.div`

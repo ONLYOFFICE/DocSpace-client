@@ -17,7 +17,10 @@ import React from "react";
 
 import { inject, observer } from "mobx-react";
 
-import MainButton from "@docspace/components/main-button";
+import { MainButton } from "@docspace/shared/components/main-button";
+import { toastr } from "@docspace/shared/components/toast";
+import { Button } from "@docspace/shared/components/button";
+
 import { withTranslation } from "react-i18next";
 import Loaders from "@docspace/common/components/Loaders";
 import { encryptionUploadDialog } from "../../../helpers/desktop";
@@ -26,12 +29,11 @@ import { useNavigate, useLocation } from "react-router-dom";
 import MobileView from "./MobileView";
 
 import { Events, EmployeeType, DeviceType } from "@docspace/common/constants";
-import toastr from "@docspace/components/toast/toastr";
+
 import styled, { css } from "styled-components";
-import Button from "@docspace/components/button";
 
 import { resendInvitesAgain } from "@docspace/common/api/people";
-import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
+import { getCorrectFourValuesStyle } from "@docspace/shared/utils";
 
 const StyledButton = styled(Button)`
   font-weight: 700;
@@ -491,8 +493,8 @@ const ArticleMainButtonContent = (props) => {
   const isDisabled = isSettingsPage
     ? isSettingsPage
     : isAccountsPage
-    ? !isAccountsPage
-    : !security?.Create;
+      ? !isAccountsPage
+      : !security?.Create;
 
   const isProfile = location.pathname.includes("/profile");
 

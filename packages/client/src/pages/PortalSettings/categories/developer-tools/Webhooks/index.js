@@ -1,4 +1,4 @@
-import Button from "@docspace/components/button";
+import { Button } from "@docspace/shared/components/button";
 import React, { useState, useEffect, useTransition, Suspense } from "react";
 import WebhookDialog from "./sub-components/WebhookDialog";
 import WebhookInfo from "./sub-components/WebhookInfo";
@@ -8,15 +8,15 @@ import { inject, observer } from "mobx-react";
 
 import styled from "styled-components";
 import { WebhookConfigsLoader } from "./sub-components/Loaders";
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 
-import { isMobile } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/shared/utils";
 
 import { useTranslation } from "react-i18next";
 
 import { DeleteWebhookDialog } from "./sub-components/DeleteWebhookDialog";
 import { NoBoxShadowToast } from "./styled-components";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 
 const MainWrapper = styled.div`
   width: 100%;
@@ -121,7 +121,10 @@ const Webhooks = (props) => {
         )}
 
         {!isWebhooksEmpty && (
-          <WebhooksTable openSettingsModal={openSettingsModal} openDeleteModal={openDeleteModal} />
+          <WebhooksTable
+            openSettingsModal={openSettingsModal}
+            openDeleteModal={openDeleteModal}
+          />
         )}
         <WebhookDialog
           visible={isCreateOpened}

@@ -6,10 +6,7 @@ import React, {
   useRef,
 } from "react";
 
-import {
-  isMobile as isMobileUtils,
-  isTablet,
-} from "@docspace/components/utils/device";
+import { isMobile as isMobileUtils, isTablet } from "@docspace/shared/utils";
 
 import { FileStatus } from "../../constants";
 import { getFileExtension } from "../../utils";

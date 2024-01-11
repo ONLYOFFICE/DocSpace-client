@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes, { element } from "prop-types";
 import { inject, observer } from "mobx-react";
 
-import { Provider } from "@docspace/components/utils/context";
+import { Provider } from "@docspace/shared/utils";
 
 import SectionContainer from "./sub-components/section-container";
 import SubSectionHeader from "./sub-components/section-header";
@@ -17,7 +17,7 @@ import SubSectionFooter from "./sub-components/section-footer";
 import SectionWarning from "./sub-components/section-warning";
 import SubSectionSubmenu from "./sub-components/section-submenu";
 
-import FloatingButton from "@docspace/components/floating-button";
+import { FloatingButton } from "@docspace/shared/components/floating-button";
 import { DeviceType } from "../../constants";
 
 const Section = (props) => {

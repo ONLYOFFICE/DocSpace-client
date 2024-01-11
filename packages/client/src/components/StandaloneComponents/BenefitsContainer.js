@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import { ReactSVG } from "react-svg";
 import { useTranslation } from "react-i18next";
 
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 
 import LifetimeLicenseReactSvgUrl from "PUBLIC_DIR/images/lifetime_license.react.svg?url";
 import TechSupportReactSvgUrl from "PUBLIC_DIR/images/tech_support.react.svg?url";

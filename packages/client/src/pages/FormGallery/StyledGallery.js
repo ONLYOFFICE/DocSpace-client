@@ -1,9 +1,9 @@
 import styled, { css } from "styled-components";
 
-import { tablet, mobile } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/shared/utils";
 import Headline from "@docspace/common/components/Headline";
-import { Base } from "@docspace/components/themes";
-import { Button } from "@docspace/components";
+import { Base } from "@docspace/shared/themes";
+import { Button } from "@docspace/shared/components/button";
 
 const StyledContainer = styled.div`
   height: 69px;

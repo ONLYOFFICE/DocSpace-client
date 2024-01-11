@@ -5,7 +5,7 @@ import { withTranslation } from "react-i18next";
 import { PageType } from "@docspace/common/constants";
 import { getCatalogIconUrlByType } from "@docspace/common/utils/catalogIcon.helper";
 
-import CatalogItem from "@docspace/components/catalog-item";
+import { ArticleItem } from "@docspace/shared/components/article-item";
 
 const PureAccountsItem = ({ showText, isActive, onClick, t }) => {
   const onClickAction = React.useCallback(() => {
@@ -15,7 +15,7 @@ const PureAccountsItem = ({ showText, isActive, onClick, t }) => {
   const icon = getCatalogIconUrlByType(PageType.account);
 
   return (
-    <CatalogItem
+    <ArticleItem
       key="accounts"
       text={t("Accounts")}
       icon={icon}

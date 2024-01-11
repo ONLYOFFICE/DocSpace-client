@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import Box from "@docspace/components/box";
-import Text from "@docspace/components/text";
-import toastr from "@docspace/components/toast/toastr";
+import { Box } from "@docspace/shared/components/box";
+import { Text } from "@docspace/shared/components/text";
+import { toastr } from "@docspace/shared/components/toast";
 import RegisterModalDialog from "./register-modal-dialog";
 import styled from "styled-components";
 import { sendRegisterRequest } from "@docspace/common/api/settings";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 
 interface IRegisterProps {
   language?: string;

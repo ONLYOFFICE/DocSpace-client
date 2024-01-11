@@ -1,14 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Button from "@docspace/components/button";
-import ModalDialog from "@docspace/components/modal-dialog";
+import { Button } from "@docspace/shared/components/button";
+import { toastr } from "@docspace/shared/components/toast";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { withTranslation } from "react-i18next";
 import api from "@docspace/common/api";
-import toastr from "@docspace/components/toast/toastr";
+
 import ModalDialogContainer from "../ModalDialogContainer";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
-import { mobileMore } from "@docspace/components/utils/device";
+import { mobileMore } from "@docspace/shared/utils";
 import BodyComponent from "./sub-components/BodyComponent";
 
 const { deleteUser } = api.people;

@@ -4,7 +4,7 @@ import { inject, observer } from "mobx-react";
 import React, { useState, useEffect } from "react";
 import { I18nextProvider, withTranslation } from "react-i18next";
 
-import Selector from "@docspace/components/selector";
+import { Selector } from "@docspace/shared/components/selector";
 
 import { getUserRole } from "@docspace/common/utils";
 import Filter from "@docspace/common/api/people/filter";

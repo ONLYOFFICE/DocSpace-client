@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import Button from "@docspace/components/button";
+import { Button } from "@docspace/shared/components/button";
 import styled from "styled-components";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 import DowngradePlanButtonContainer from "./DowngradePlanButtonContainer";
 import api from "@docspace/common/api";
 import { Trans } from "react-i18next";

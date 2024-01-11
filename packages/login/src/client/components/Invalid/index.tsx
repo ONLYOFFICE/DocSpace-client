@@ -2,10 +2,10 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate, Link } from "react-router-dom";
 import ErrorContainer from "@docspace/common/components/ErrorContainer";
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 import { useTranslation, Trans } from "react-i18next";
 import { combineUrl } from "@docspace/common/utils";
-import { Dark, Base } from "@docspace/components/themes";
+import { Dark, Base } from "@docspace/shared/themes";
 import useIsomorphicLayoutEffect from "../../hooks/useIsomorphicLayoutEffect";
 import { getMessageFromKey, getMessageKeyTranslate } from "../../helpers/utils";
 

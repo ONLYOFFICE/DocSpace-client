@@ -1,5 +1,6 @@
 import authStore from "@docspace/common/store/AuthStore";
-import { toCommunityHostname, getLanguage } from "@docspace/common/utils";
+import { getLanguage } from "@docspace/shared/utils";
+import { toCommunityHostname } from "@docspace/common/utils";
 
 import { CategoryType } from "./constants";
 import { FolderType, ShareAccessRights } from "@docspace/common/constants";

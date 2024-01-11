@@ -480,10 +480,9 @@ const SectionHeaderContent = (props) => {
   };
 
   const onDownloadAction = () => {
-    setBufferSelection(selectedFolder);
-    downloadAction(t("Translations:ArchivingData"), [currentFolderId]).catch(
-      (err) => toastr.error(err)
-    );
+    downloadAction(t("Translations:ArchivingData"), selectedFolder, [
+      currentFolderId,
+    ]).catch((err) => toastr.error(err));
   };
 
   const onClickArchiveAction = (e) => {

@@ -164,7 +164,7 @@ const Members = ({
   };
 
   const updateSelectionParentRoomActionSelection = useCallback(async () => {
-    if (!selection.isRoom || selection.id === members?.roomId) return;
+    if (!selection?.isRoom || selection.id === members?.roomId) return;
 
     const fetchedMembers = await fetchMembers(selection.id);
     setMembersList(fetchedMembers);
@@ -453,6 +453,8 @@ export default inject(
       setIsScrollLocked,
       membersList,
       setMembersList,
+      selection: selectionItem,
+      getIsRooms,
     } = auth.infoPanelStore;
     const {
       getRoomMembers,
@@ -497,9 +499,23 @@ export default inject(
       room?.access === ShareAccessRights.RoomManager ||
       room?.access === ShareAccessRights.None;
 
+    const isShowParentRoom =
+      getIsRooms() &&
+      roomsView === "info_members" &&
+      !selectionItem?.isRoom &&
+      !!selectionParentRoom;
+
+    const infoSelection =
+      selectionItem?.length > 1
+        ? null
+        : isShowParentRoom
+        ? selectionParentRoom
+        : selectionItem;
+
     return {
       setView,
       roomsView,
+      selection: infoSelection,
       selectionParentRoom,
       setSelectionParentRoom,
 

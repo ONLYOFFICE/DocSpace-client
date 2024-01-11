@@ -642,11 +642,17 @@ export function moveToFolder(
   return request({ method: "put", url: "/files/fileops/move", data });
 }
 
-export function getFileVersionInfo(fileId) {
-  return request({
+export function getFileVersionInfo(fileId, requestToken) {
+  const options = {
     method: "get",
     url: `/files/file/${fileId}/history`,
-  });
+  };
+
+  if (requestToken) {
+    options.headers = { "Request-Token": requestToken };
+  }
+
+  return request(options);
 }
 
 export function markAsRead(folderIds, fileIds) {

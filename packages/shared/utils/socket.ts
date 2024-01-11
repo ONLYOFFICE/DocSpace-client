@@ -1,13 +1,33 @@
-import io from "socket.io-client";
+/* eslint-disable class-methods-use-this */
+/* eslint-disable no-console */
+import { DefaultEventsMap } from "@socket.io/component-emitter";
+import io, { Socket } from "socket.io-client";
 
-let client = null;
-let callbacks = [];
+let client: Socket<DefaultEventsMap, DefaultEventsMap> | null = null;
+let callbacks: { eventName: string; callback: () => void }[] = [];
+
 const subscribers = new Set();
 
-class SocketIOHelper {
-  socketUrl = null;
+export type TEmit = {
+  command: string;
+  data: { roomParts: string | [] };
+  room?: null | boolean;
+};
 
-  constructor(url, publicRoomKey) {
+export type TConfig = {
+  withCredentials: boolean;
+  transports: string[];
+  eio: number;
+  path: string;
+  query?: {
+    [key: string]: string;
+  };
+};
+
+class SocketIOHelper {
+  socketUrl: string | null = null;
+
+  constructor(url: string, publicRoomKey: string) {
     if (!url) return;
 
     this.socketUrl = url;
@@ -16,7 +36,7 @@ class SocketIOHelper {
 
     const origin = window.location.origin;
 
-    const config = {
+    const config: TConfig = {
       withCredentials: true,
       transports: ["websocket", "polling"],
       eio: 4,
@@ -34,19 +54,20 @@ class SocketIOHelper {
     client.on("connect", () => {
       console.log("socket is connected");
       if (callbacks?.length > 0) {
-        callbacks.forEach(({ eventName, callback }) =>
-          client.on(eventName, callback)
-        );
+        callbacks.forEach(({ eventName, callback }) => {
+          if (!client) return;
+          client.on(eventName, callback);
+        });
         callbacks = [];
       }
     });
     client.on("connect_error", (err) =>
-      console.log("socket connect error", err)
+      console.log("socket connect error", err),
     );
     client.on("disconnect", () => console.log("socket is disconnected"));
 
     // DEV tests
-    //window.socketHelper = this;
+    // window.socketHelper = this;
   }
 
   get isEnabled() {
@@ -57,17 +78,17 @@ class SocketIOHelper {
     return subscribers;
   }
 
-  emit = ({ command, data, room = null }) => {
+  emit = ({ command, data, room = null }: TEmit) => {
     if (!this.isEnabled) return;
 
     const ids =
       !data || !data.roomParts
         ? []
         : typeof data.roomParts === "object"
-        ? data.roomParts
-        : [data.roomParts];
+          ? data.roomParts
+          : [data.roomParts];
 
-    ids.forEach((id) => {
+    ids.forEach((id: string) => {
       if (command === "subscribe") {
         if (subscribers.has(id)) return;
 
@@ -79,27 +100,38 @@ class SocketIOHelper {
       }
     });
 
+    if (!client) return;
+
     if (!client.connected) {
       client.on("connect", () => {
         if (room !== null) {
+          if (!client) return;
+          // @ts-expect-error need refactoring
           client.to(room).emit(command, data);
         } else {
+          if (!client) return;
           client.emit(command, data);
         }
       });
+    } else if (room) {
+      // @ts-expect-error need refactoring
+      client.to(room).emit(command, data);
     } else {
-      room ? client.to(room).emit(command, data) : client.emit(command, data);
+      client.emit(command, data);
     }
   };
 
-  on = (eventName, callback) => {
+  on = (eventName: string, callback: () => void) => {
     if (!this.isEnabled) {
       callbacks.push({ eventName, callback });
       return;
     }
 
+    if (!client) return;
+
     if (!client.connected) {
       client.on("connect", () => {
+        if (!client) return;
         client.on(eventName, callback);
       });
     } else {

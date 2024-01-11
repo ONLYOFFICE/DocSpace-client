@@ -9,7 +9,7 @@ import { ThemeKeys, TenantStatus, DeviceType } from "@docspace/shared/enums";
 
 import { LANGUAGE, COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
 import { version } from "../package.json";
-import SocketIOHelper from "../utils/socket";
+import SocketIOHelper from "@docspace/shared/utils/socket";
 import { Dark, Base } from "@docspace/shared/themes";
 
 import {

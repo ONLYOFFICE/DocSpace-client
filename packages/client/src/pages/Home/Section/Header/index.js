@@ -1097,7 +1097,7 @@ const SectionHeaderContent = (props) => {
                 withMenu={!isRoomsFolder}
                 onPlusClick={onCreateRoom}
                 isEmptyPage={isEmptyPage}
-                isRoom={isCurrentRoom}
+                isRoom={isCurrentRoom || isAccountsPage}
                 hideInfoPanel={isSettingsPage || isPublicRoom}
                 withLogo={isPublicRoom && logo}
                 burgerLogo={isPublicRoom && burgerLogo}

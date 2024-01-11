@@ -278,7 +278,7 @@ class PeopleStore {
       selectionUsersRights;
 
     if (isVisitor > 0) {
-    isOwner && options.push(adminOption);
+      isOwner && options.push(adminOption);
       options.push(managerOption);
       options.push(collaboratorOption);
 
@@ -287,7 +287,7 @@ class PeopleStore {
 
     if (isCollaborator > 0 || (isRoomAdmin > 0 && isAdmin > 0)) {
       isOwner && options.push(adminOption);
-    options.push(managerOption);
+      options.push(managerOption);
 
       return options;
     }
@@ -311,6 +311,9 @@ class PeopleStore {
       hasUsersToDisable,
       hasUsersToInvite,
       hasUsersToRemove,
+      hasUsersToChangeQuota,
+      hasUsersToResetQuota,
+      hasUsersToDisableQuota,
       selection,
     } = this.selectionStore;
 

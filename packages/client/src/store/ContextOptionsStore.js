@@ -249,7 +249,7 @@ class ContextOptionsStore {
     this.dialogsStore.setCopyPanelVisible(true);
   };
 
-  showVersionHistory = (id, security) => {
+  showVersionHistory = (id, security, requestToken) => {
     const { fetchFileVersions, setIsVerHistoryPanel } =
       this.versionHistoryStore;
 
@@ -257,7 +257,7 @@ class ContextOptionsStore {
 
     if (this.treeFoldersStore.isRecycleBinFolder) return;
 
-    fetchFileVersions(id + "", security);
+    fetchFileVersions(id + "", security, requestToken);
     setIsVerHistoryPanel(true);
     setIsMobileHidden(true);
   };
@@ -1008,7 +1008,12 @@ class ContextOptionsStore {
               key: "show-version-history",
               label: t("ShowVersionHistory"),
               icon: HistoryReactSvgUrl,
-              onClick: () => this.showVersionHistory(item.id, item.security),
+              onClick: () =>
+                this.showVersionHistory(
+                  item.id,
+                  item.security,
+                  item?.requestToken
+                ),
               disabled: false,
             },
           ]
@@ -1036,7 +1041,11 @@ class ContextOptionsStore {
                   label: t("ShowVersionHistory"),
                   icon: HistoryReactSvgUrl,
                   onClick: () =>
-                    this.showVersionHistory(item.id, item.security),
+                    this.showVersionHistory(
+                      item.id,
+                      item.security,
+                      item?.requestToken
+                    ),
                   disabled: false,
                 },
               ],
@@ -1059,7 +1068,12 @@ class ContextOptionsStore {
             key: "show-version-history",
             label: t("ShowVersionHistory"),
             icon: HistoryReactSvgUrl,
-            onClick: () => this.showVersionHistory(item.id, item.security),
+            onClick: () =>
+              this.showVersionHistory(
+                item.id,
+                item.security,
+                item?.requestToken
+              ),
             disabled: false,
           },
         ];

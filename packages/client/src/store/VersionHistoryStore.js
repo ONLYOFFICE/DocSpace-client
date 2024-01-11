@@ -99,13 +99,13 @@ class VersionHistoryStore {
     this.versions = versions;
   };
 
-  fetchFileVersions = (fileId, access) => {
+  fetchFileVersions = (fileId, access, requestToken) => {
     if (this.fileId !== fileId || !this.versions) {
       this.setVerHistoryFileId(fileId);
       this.setVerHistoryFileSecurity(access);
 
       return api.files
-        .getFileVersionInfo(fileId)
+        .getFileVersionInfo(fileId, requestToken)
         .then((versions) => this.setVerHistoryFileVersions(versions));
     } else {
       return Promise.resolve(this.versions);

@@ -7,11 +7,11 @@ import { useTranslation } from "react-i18next";
 import { isMobileOnly } from "react-device-detect";
 import copy from "copy-to-clipboard";
 
-import Avatar from "@docspace/components/avatar";
-import Link from "@docspace/components/link";
-import ComboBox from "@docspace/components/combobox";
-import IconButton from "@docspace/components/icon-button";
-import toastr from "@docspace/components/toast/toastr";
+import { Avatar } from "@docspace/shared/components/avatar";
+import { Link } from "@docspace/shared/components/link";
+import { ComboBox } from "@docspace/shared/components/combobox";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { toastr } from "@docspace/shared/components/toast";
 
 import { StyledLinkRow } from "./StyledShare";
 import { getShareOptions, getAccessOptions } from "./optionsHelper";

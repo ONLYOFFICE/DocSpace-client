@@ -3,12 +3,12 @@ import styled from "styled-components";
 import { Provider as MobxProvider, inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import Backdrop from "@docspace/components/backdrop";
-import Aside from "@docspace/components/aside";
-import Text from "@docspace/components/text";
-import Button from "@docspace/components/button";
-import NoUserSelect from "@docspace/components/utils/commonStyles";
-import Scrollbar from "@docspace/components/scrollbar";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Aside } from "@docspace/shared/components/aside";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
+import { NoUserSelect } from "@docspace/shared/utils/commonStyles";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 import Share from "SRC_DIR/pages/Home/InfoPanel/Body/views/Share";
 import store from "client/store";

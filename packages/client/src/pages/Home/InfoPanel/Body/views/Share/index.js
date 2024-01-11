@@ -6,9 +6,9 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import copy from "copy-to-clipboard";
 
-import Text from "@docspace/components/text";
-import IconButton from "@docspace/components/icon-button";
-import toastr from "@docspace/components/toast/toastr";
+import { Text } from "@docspace/shared/components/text";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { toastr } from "@docspace/shared/components/toast";
 import { ShareAccessRights } from "@docspace/common/constants";
 
 import PublicRoomBar from "../Members/sub-components/PublicRoomBar";

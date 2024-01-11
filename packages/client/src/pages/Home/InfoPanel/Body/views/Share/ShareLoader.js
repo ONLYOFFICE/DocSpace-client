@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
-import CircleSkeleton from "@docspace/components/skeletons/circle";
-import Text from "@docspace/components/text";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { CircleSkeleton } from "@docspace/shared/skeletons";
+import { Text } from "@docspace/shared/components/text";
 
 const StyledWrapper = styled.div`
   display: flex;

@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components";
 import moment from "moment";
 
-import Calendar from "@docspace/components/calendar";
-import { isMobile } from "@docspace/components/utils/device";
+import { Calendar } from "@docspace/shared/components/calendar";
+import { isMobile } from "@docspace/shared/utils/device";
 
 const StyledCalendar = styled(Calendar)`
   position: absolute;

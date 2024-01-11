@@ -3,9 +3,9 @@ import { useTranslation, Trans } from "react-i18next";
 
 import moment from "moment";
 
-import Text from "@docspace/components/text";
-import LinkWithDropdown from "@docspace/components/link-with-dropdown";
-import Link from "@docspace/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { LinkWithDropdown } from "@docspace/shared/components/link-with-dropdown";
+import { Link } from "@docspace/shared/components/link";
 
 import { getExpiredOptions } from "./optionsHelper";
 import ShareCalendar from "./ShareCalendar";

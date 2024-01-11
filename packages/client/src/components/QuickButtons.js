@@ -141,7 +141,7 @@ const QuickButtons = (props) => {
       )}
       {isAvailableShareFile && (
         <ColorTheme
-          themeId={ThemeType.IconButton}
+          themeId={ThemeId.IconButton}
           iconName={LinkReactSvgUrl}
           className="badge copy-link icons-group"
           size={sizeQuickButton}

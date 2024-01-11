@@ -12,8 +12,6 @@ const minifyJson = require("@docspace/shared/utils/minifyJson");
 const runtime = require("../../runtime.json");
 const dateHash = runtime?.date || "";
 
-//const beforeBuild = require("@docspace/common/utils/beforeBuild");
-
 const sharedDeps = require("@docspace/shared/constants/sharedDependencies");
 const baseConfig = require("./webpack.base.js");
 

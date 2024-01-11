@@ -1,17 +1,26 @@
-const getSvgByName = (name) => `${name.replace(/^\./, "")}.svg`;
+/* eslint-disable import/no-dynamic-require */
+/* eslint-disable global-require */
+const getSvgByName = (name: string) => `${name.replace(/^\./, "")}.svg`;
 
-const getUrlByName = (name, size, type = "") =>
+const getUrlByName = (name: string, size: string | number, type = "") =>
   require(`PUBLIC_DIR/images/icons/${size}${type}/${getSvgByName(name)}?url`);
 
-const getIconsMap = (size, formats, folders, rooms = []) => {
-  const mapIcons = (icons, type = "") =>
+const getIconsMap = (
+  size: string | number,
+  formats: string[],
+  folders: string[],
+  rooms: string[] = [],
+) => {
+  const mapIcons = (icons: string[], type = ""): [string, string][] =>
     icons.map((icon) => [getSvgByName(icon), getUrlByName(icon, size, type)]);
 
   const formatsMap = mapIcons(formats);
   const foldersMap = mapIcons(folders, "/folder");
   const roomsMap = mapIcons(rooms, "/room");
 
-  return new Map([...formatsMap, ...foldersMap, ...roomsMap]);
+  const arr: [string, string][] = [...formatsMap, ...foldersMap, ...roomsMap];
+
+  return new Map(arr);
 };
 const formatIcons = [
   ".avi",

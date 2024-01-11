@@ -12,7 +12,7 @@ import {
   iconSize32,
   iconSize64,
   iconSize96,
-} from "@docspace/common/utils/image-helpers";
+} from "@docspace/shared/utils/image-helpers";
 
 class SettingsStore {
   thirdPartyStore;

@@ -7,7 +7,7 @@ import RoomsFilter from "@docspace/common/api/rooms/filter";
 // @ts-ignore
 import { RoomsType } from "@docspace/shared/enums";
 // @ts-ignore
-import { iconSize32 } from "@docspace/common/utils/image-helpers";
+import { iconSize32 } from "@docspace/shared/utils/image-helpers";
 
 import { PAGE_COUNT, defaultBreadCrumb } from "../utils";
 

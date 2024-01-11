@@ -1,3 +1,7 @@
+/* eslint-disable func-names */
+/* eslint-disable no-console */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require("path");
 const fs = require("fs");
 const { readdir } = require("fs").promises;
@@ -59,9 +63,9 @@ const beforeBuild = async (pathsToLocales, pathToFile, additionalPath) => {
 
     const fileName = splitPath[length - 1].split(".")[0];
 
-    let lng = splitPath[length - 2];
+    const lng = splitPath[length - 2];
 
-    let language = lng == "en-US" || lng == "en-GB" ? "en" : lng;
+    let language = lng === "en-US" || lng === "en-GB" ? "en" : lng;
 
     if (cultures.indexOf(language) === -1) {
       return;
@@ -69,7 +73,7 @@ const beforeBuild = async (pathsToLocales, pathToFile, additionalPath) => {
 
     const splitted = lng.split("-");
 
-    if (splitted.length == 2 && splitted[0] == splitted[1].toLowerCase()) {
+    if (splitted.length === 2 && splitted[0] === splitted[1].toLowerCase()) {
       language = splitted[0];
     }
 
@@ -90,17 +94,15 @@ const beforeBuild = async (pathsToLocales, pathToFile, additionalPath) => {
       additionalPath?.files?.indexOf(splitPath[length - 1].toString()) > -1
         ? additionalPath.alias
         : fileName.indexOf("Common") === -1
-        ? "ASSETS_DIR"
-        : "PUBLIC_DIR";
+          ? "ASSETS_DIR"
+          : "PUBLIC_DIR";
 
-    importString =
-      importString +
-      `import ${fileName}${language}Url from "${alias}/${url}?url";\n`;
+    importString = `${importString}
+      import ${fileName}${language}Url from "${alias}/${url}?url";\n`;
   });
 
-  let content =
-    `//THIS FILE IS AUTO GENERATED\n//DO NOT EDIT AND DELETE IT\n` +
-    importString;
+  let content = `//THIS FILE IS AUTO GENERATED\n//DO NOT EDIT AND DELETE IT\n
+    ${importString}`;
 
   let generalCollection = `\n export const translations = new Map([`;
 

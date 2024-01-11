@@ -5,7 +5,7 @@ import { getFolder, getFolderInfo } from "@docspace/common/api/files";
 // @ts-ignore
 import FilesFilter from "@docspace/common/api/files/filter";
 // @ts-ignore
-import { iconSize32 } from "@docspace/common/utils/image-helpers";
+import { iconSize32 } from "@docspace/shared/utils/image-helpers";
 
 import { PAGE_COUNT, defaultBreadCrumb } from "../utils";
 

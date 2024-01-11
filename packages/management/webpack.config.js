@@ -9,7 +9,7 @@ const ExternalTemplateRemotesPlugin = require("external-remotes-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const combineUrl = require("@docspace/common/utils/combineUrl");
 const minifyJson = require("@docspace/shared/utils/minifyJson");
-const beforeBuild = require("@docspace/common/utils/beforeBuild");
+
 const sharedDeps = require("@docspace/shared/constants/sharedDependencies");
 const fs = require("fs");
 const { readdir } = require("fs").promises;

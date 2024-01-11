@@ -3,7 +3,7 @@ import { isDesktop as isDesktopDeviceDetect } from "react-device-detect";
 import { useSpring, config } from "@react-spring/web";
 import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
 
-import indexedDBHelper from "../../../../utils/indexedDBHelper";
+import indexedDBHelper from "@docspace/shared/utils/indexedDBHelper";
 import { IndexedDBStores } from "@docspace/shared/enums";
 
 import ViewerLoader from "../ViewerLoader";

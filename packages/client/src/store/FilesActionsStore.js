@@ -609,17 +609,15 @@ class FilesActionStore {
     }
   };
 
-  downloadAction = (label, folderId) => {
+  downloadAction = (label, item, folderId) => {
     const { bufferSelection } = this.filesStore;
-    const { isVisible: infoPanelIsVisible, selection: infoPanelSelection } =
-      this.authStore.infoPanelStore;
 
-    const selection = this.filesStore.selection.length
-      ? this.filesStore.selection
-      : bufferSelection
-        ? [bufferSelection]
-        : infoPanelIsVisible && infoPanelSelection != null
-          ? [infoPanelSelection]
+    const selection = item
+      ? [item]
+      : this.filesStore.selection.length
+        ? this.filesStore.selection
+        : bufferSelection
+          ? [bufferSelection]
           : null;
 
     if (!selection.length) return;
@@ -2099,8 +2097,10 @@ class FilesActionStore {
 
     const { roomType, title: currentTitle } = this.selectedFolderStore;
 
-    if (this.publicRoomStore.isPublicRoom && item.isFolder)
+    if (this.publicRoomStore.isPublicRoom && item.isFolder) {
+      setSelection([]);
       return this.moveToPublicRoom(item.id);
+    }
 
     const setIsLoading = (param) => {
       setIsSectionFilterLoading(param);

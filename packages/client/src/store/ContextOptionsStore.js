@@ -437,7 +437,7 @@ class ContextOptionsStore {
     isFile
       ? window.open(viewUrl, "_self")
       : this.filesActionsStore
-          .downloadAction(t("Translations:ArchivingData"))
+          .downloadAction(t("Translations:ArchivingData"), item)
           .catch((err) => toastr.error(err));
   };
 
@@ -1128,10 +1128,17 @@ class ContextOptionsStore {
       t
     );
 
-    const withOpen = item.id !== this.selectedFolderStore.id;
+    let withOpen = item.id !== this.selectedFolderStore.id;
     const isPublicRoomType =
       item.roomType === RoomsType.PublicRoom ||
       item.roomType === RoomsType.CustomRoom;
+
+    if (item.isRoom && withOpen) {
+      withOpen =
+        this.selectedFolderStore.navigationPath.findIndex(
+          (f) => f.id === item.id
+        ) === -1;
+    }
 
     const optionsModel = [
       {

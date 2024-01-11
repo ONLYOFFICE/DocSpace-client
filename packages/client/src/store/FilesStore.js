@@ -275,7 +275,9 @@ class FilesStore {
 
       const foundIndex = fileId && this.files.findIndex((x) => x.id === fileId);
 
-      this.treeFoldersStore.fetchTreeFolders();
+      if (!this.publicRoomStore.isPublicRoom) {
+        this.treeFoldersStore.fetchTreeFolders();
+      }
       if (foundIndex == -1) return;
 
       this.updateFileStatus(
@@ -1527,6 +1529,7 @@ class FilesStore {
         this.selectedFolderStore.setSelectedFolder({
           folders: data.folders,
           ...data.current,
+          inRoom: !!data.current.inRoom,
           pathParts: data.pathParts,
           navigationPath,
           ...{ new: data.new },
@@ -2274,9 +2277,9 @@ class FilesStore {
         }
       }
 
-      if (fromInfoPanel) {
-        roomOptions = this.removeOptions(roomOptions, ["external-link"]);
-      }
+      // if (fromInfoPanel) {
+      //   roomOptions = this.removeOptions(roomOptions, ["external-link"]);
+      // }
 
       roomOptions = this.removeSeparator(roomOptions);
 
@@ -3987,7 +3990,7 @@ class FilesStore {
     const pathPartsRoomIndex = navigationPath.findIndex((f) => f.id === roomId);
     if (pathPartsRoomIndex === -1) return;
     navigationPath[pathPartsRoomIndex].shared = shared;
-    this.selectedFolderStore.setPathParts(navigationPath);
+    this.selectedFolderStore.setNavigationPath(navigationPath);
   };
 
   get isFiltered() {

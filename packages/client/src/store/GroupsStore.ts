@@ -24,6 +24,8 @@ class GroupsStore {
     const res = await api.groups.getGroupById(groupId);
     return res;
   };
+
+  setSelections = (added, removed, clear = false) => {};
 }
 
 export default GroupsStore;

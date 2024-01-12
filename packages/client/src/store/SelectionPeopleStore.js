@@ -4,6 +4,7 @@ import { getUserStatus } from "../helpers/people-helpers";
 
 class SelectionStore {
   peopleStore = null;
+  groupsStore = null;
   selection = [];
   selectionUsersRights = {
     isVisitor: 0,

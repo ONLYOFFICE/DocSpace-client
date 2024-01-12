@@ -9,7 +9,7 @@ import ArrowButton from "./arrow-btn";
 import Text from "./text";
 import ControlButtons from "./control-btn";
 import Item from "./item";
-import StyledContainer from "../StyledNavigation";
+import { StyledContainer } from "../StyledNavigation";
 import NavigationLogo from "./logo-block";
 
 import { tablet, mobile } from "@docspace/shared/utils";

@@ -22,8 +22,8 @@ const StyledContainer = styled.div`
         ? "1fr auto 1fr"
         : "auto 1fr"
       : withLogo
-      ? "1fr 49px auto 1fr"
-      : "49px auto 1fr"};
+        ? "1fr 49px auto 1fr"
+        : "49px auto 1fr"};
 
   .navigation-logo {
     display: flex;
@@ -183,8 +183,8 @@ const StyledContainer = styled.div`
           ? "59px 1fr auto"
           : "1fr auto"
         : withLogo
-        ? "43px 49px 1fr auto"
-        : "49px 1fr auto"};
+          ? "43px 49px 1fr auto"
+          : "49px 1fr auto"};
   }
 
   @media ${mobile} {
@@ -197,4 +197,21 @@ const StyledContainer = styled.div`
   }
 `;
 
-export default StyledContainer;
+const StyledWrapper = styled.div`
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: nowrap;
+  ${({ theme }) =>
+    theme.interfaceDirection === "rtl"
+      ? css`
+          justify-content: left;
+          margin-right: auto;
+        `
+      : css`
+          justify-content: right;
+          margin-left: auto;
+        `}
+`;
+
+export { StyledContainer, StyledWrapper };

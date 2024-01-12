@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import StyledContainer from "./StyledNavigation";
+import { StyledContainer, StyledWrapper } from "./StyledNavigation";
 import ArrowButton from "./sub-components/arrow-btn";
 import Text from "./sub-components/text";
 import ControlButtons from "./sub-components/control-btn";
@@ -16,6 +16,8 @@ import { ReactSVG } from "react-svg";
 import ToggleInfoPanelButton from "./sub-components/toggle-infopanel-btn";
 import TrashWarning from "./sub-components/trash-warning";
 import NavigationLogo from "./sub-components/logo-block";
+import TariffBar from "../TariffBar";
+
 import { DeviceType } from "../../constants";
 
 const Navigation = ({
@@ -271,15 +273,18 @@ const Navigation = ({
               isTabletView={isTabletView}
             />
           )}
-          {infoPanelIsVisible && !hideInfoPanel && (
-            <ToggleInfoPanelButton
-              id="info-panel-toggle--open"
-              isRootFolder={isRootFolder}
-              toggleInfoPanel={toggleInfoPanel}
-              isInfoPanelVisible={isInfoPanelVisible}
-              titles={titles}
-            />
-          )}
+          <StyledWrapper>
+            <TariffBar />
+            {infoPanelIsVisible && !hideInfoPanel && (
+              <ToggleInfoPanelButton
+                id="info-panel-toggle--open"
+                isRootFolder={isRootFolder}
+                toggleInfoPanel={toggleInfoPanel}
+                isInfoPanelVisible={isInfoPanelVisible}
+                titles={titles}
+              />
+            )}
+          </StyledWrapper>
         </>
       )}
     </Consumer>

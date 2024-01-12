@@ -10,14 +10,10 @@ const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme)`
   align-self: center;
 
   ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: auto;
-          transform: scaleX(-1);
-        `
-      : css`
-          margin-left: auto;
-        `}
+    props.theme.interfaceDirection === "rtl" &&
+    css`
+      transform: scaleX(-1);
+    `}
 
   margin-bottom: 1px;
   padding: 0;

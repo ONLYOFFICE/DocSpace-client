@@ -21,6 +21,7 @@ import {
   checkPropertyByLink,
 } from "../../../utils";
 import { combineUrl } from "@docspace/common/utils";
+import TariffBar from "@docspace/common/components/TariffBar";
 
 const HeaderContainer = styled.div`
   position: relative;
@@ -104,6 +105,17 @@ const HeaderContainer = styled.div`
       font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
       line-height: 59px !important;
     }
+  }
+
+  .tariff-bar {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: auto;
+          `
+        : css`
+            margin-left: auto;
+          `}
   }
 `;
 
@@ -326,6 +338,9 @@ const SectionHeaderContent = (props) => {
               )}
             </div>
           </Headline>
+          <div className="tariff-bar">
+            <TariffBar />
+          </div>
           {props.addUsers && (
             <div className="action-wrapper">
               <IconButton

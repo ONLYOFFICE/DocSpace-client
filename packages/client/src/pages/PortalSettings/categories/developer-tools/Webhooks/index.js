@@ -79,7 +79,11 @@ const Webhooks = (props) => {
 
   const onCreateWebhook = async (webhookInfo) => {
     if (!isWebhookExist(webhookInfo)) {
-      await addWebhook(webhookInfo);
+      try {
+        await addWebhook(webhookInfo);
+      } catch (error) {
+        toastr.error(error);
+      }
       closeCreateModal();
     }
   };

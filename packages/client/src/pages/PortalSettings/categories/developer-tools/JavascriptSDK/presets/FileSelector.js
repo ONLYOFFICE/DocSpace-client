@@ -116,7 +116,7 @@ const FileSelector = (props) => {
     withSearch: true,
     acceptButtonLabel: t("Common:SelectAction"),
     cancelButtonLabel: t("Common:CancelButton"),
-    withBreadCrumbs: true,
+    // withBreadCrumbs: true,
     withSubtitle: true,
     filterParam: FilesSelectorFilterTypes.ALL,
   });
@@ -264,9 +264,9 @@ const FileSelector = (props) => {
     setConfig((config) => ({ ...config, withSearch: !config.withSearch }));
   };
 
-  const toggleBreadCrumbs = () => {
-    setConfig((config) => ({ ...config, withBreadCrumbs: !config.withBreadCrumbs }));
-  };
+  // const toggleBreadCrumbs = () => {
+  //   setConfig((config) => ({ ...config, withBreadCrumbs: !config.withBreadCrumbs }));
+  // };
 
   const toggleWithSubtitle = () => {
     setConfig((config) => ({ ...config, withSubtitle: !config.withSubtitle }));
@@ -401,12 +401,12 @@ const FileSelector = (props) => {
           </ControlsGroup>
           <InterfaceElements>
             <Label className="label">{t("InterfaceElements")}</Label>
-            <Checkbox
+            {/* <Checkbox
               className="checkbox"
               label={t("Common:Title")}
               onChange={toggleBreadCrumbs}
               isChecked={config.withBreadCrumbs}
-            />
+            /> */}
             <Checkbox
               className="checkbox"
               label={t("Subtitle")}

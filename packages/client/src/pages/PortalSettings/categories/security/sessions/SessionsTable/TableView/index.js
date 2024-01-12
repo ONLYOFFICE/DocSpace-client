@@ -14,6 +14,46 @@ import TableContainer from "@docspace/components/table-container/TableContainer"
 import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu";
 import TableBody from "@docspace/components/table-container/TableBody";
 
+const TABLE_VERSION = "5";
+const COLUMNS_SIZE = `sessionsColumnsSize_ver-${TABLE_VERSION}`;
+const INFO_PANEL_COLUMNS_SIZE = `infoPanelSessionsColumnsSize_ver-${TABLE_VERSION}`;
+
+const marginCss = css`
+  margin-top: -1px;
+  border-top: ${(props) =>
+    `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+`;
+
+const userNameCss = css`
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          margin-right: -24px;
+          padding-right: 24px;
+        `
+      : css`
+          margin-left: -24px;
+          padding-left: 24px;
+        `}
+
+  ${marginCss}
+`;
+
+const contextCss = css`
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          margin-left: -20px;
+          padding-left: 20px;
+        `
+      : css`
+          margin-right: -20px;
+          padding-right: 20px;
+        `}
+
+  ${marginCss}
+`;
+
 const StyledTableContainer = styled(TableContainer)`
   margin: 0 0 24px;
 
@@ -21,7 +61,7 @@ const StyledTableContainer = styled(TableContainer)`
     height: 69px;
     position: absolute;
     z-index: 201;
-    top: 0;
+    top: -25px;
     left: 0px;
     width: 100%;
 
@@ -49,76 +89,91 @@ const StyledTableContainer = styled(TableContainer)`
     font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
   }
 
-  .table-list-item {
-    cursor: pointer;
+  :has(
+      .table-container_body
+        .table-list-item:first-child:first-child
+        > .table-row-selected
+    ) {
+    .table-container_header {
+      border-image-slice: 1;
+      border-image-source: ${(props) =>
+        props.theme.tableContainer.header.lengthenBorderImageSource};
+    }
+  }
 
-    &:hover {
-      background-color: ${(props) =>
-        props.theme.filesSection.tableView.row.backgroundActive};
+  .table-row-selected {
+    .table-container_user-name-cell {
+      ${userNameCss}
+    }
 
-      .table-container_cell {
-        margin-top: -1px;
-        border-top: ${(props) =>
-          `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+    .table-container_row-context-menu-wrapper {
+      ${contextCss}
+    }
+  }
 
-        margin-left: -24px;
-        padding-left: 24px;
-      }
-
+  .table-row-selected + .table-row-selected {
+    .table-row {
+      .table-container_user-name-cell,
       .table-container_row-context-menu-wrapper {
-        margin-right: -20px;
-        padding-right: 20px;
+        margin-top: -1px;
+        border-image-slice: 1;
+        border-top: 1px solid;
+      }
+      .table-container_user-name-cell {
+        ${userNameCss}
+        border-left: 0; //for Safari macOS
+        border-right: 0; //for Safari macOS
+
+        border-image-source: ${(props) =>
+          `linear-gradient(to right, ${props.theme.filesSection.tableView.row.borderColorTransition} 17px, ${props.theme.filesSection.tableView.row.borderColor} 31px)`};
+      }
+      .table-container_row-context-menu-wrapper {
+        ${contextCss}
+
+        border-image-source: ${(props) =>
+          `linear-gradient(to left, ${props.theme.filesSection.tableView.row.borderColorTransition} 17px, ${props.theme.filesSection.tableView.row.borderColor} 31px)`};
       }
     }
   }
 
-  .table-list-item:has(.selected-table-row) {
-    background-color: ${(props) =>
-      props.theme.filesSection.tableView.row.backgroundActive};
-  }
+  .user-item:not(.table-row-selected) + .table-row-selected {
+    .table-row {
+      .table-container_user-name-cell {
+        ${userNameCss}
+      }
 
-  .table-container_row-context-menu-wrapper {
-    justify-content: flex-end;
+      .table-container_row-context-menu-wrapper {
+        ${contextCss}
+      }
 
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-left: 0px;
-          `
-        : css`
-            padding-right: 0px;
-          `}
+      .table-container_user-name-cell,
+      .table-container_row-context-menu-wrapper {
+        border-bottom: ${(props) =>
+          `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+      }
+    }
   }
 `;
 
 StyledTableContainer.defaultProps = { theme: Base };
-
-const TABLE_VERSION = "5";
-const COLUMNS_SIZE = `sessionsColumnsSize_ver-${TABLE_VERSION}`;
-const INFO_PANEL_COLUMNS_SIZE = `infoPanelSessionsColumnsSize_ver-${TABLE_VERSION}`;
 
 const TableView = ({
   t,
   sectionWidth,
   userId,
   sessionsData,
-  allSessions,
-  checkedSessions,
-  toggleSession,
-  toggleAllSessions,
-  isSessionChecked,
+  // allSessions,
+  // checkedSessions,
+  // toggleSession,
+  // toggleAllSessions,
+  // isSessionChecked,
 }) => {
   const [hideColumns, setHideColumns] = useState(false);
-  const tableRef = useRef(null);
+  const ref = useRef(null);
 
-  const handleToggle = (e, id) => {
-    e.stopPropagation();
-    toggleSession(id);
-  };
-
-  const handleAllToggles = (checked) => {
-    toggleAllSessions(checked, allSessions);
-  };
+  // const handleAllToggles = (checked) => {
+  //   toggleAllSessions(checked, allSessions);
+  // };
 
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
@@ -147,14 +202,14 @@ const TableView = ({
     },
   ];
 
-  const isChecked = checkedSessions.length === allSessions.length;
+  // const isChecked = checkedSessions.length === allSessions.length;
 
-  const isIndeterminate =
-    checkedSessions.length > 0 && checkedSessions.length !== allSessions.length;
+  // const isIndeterminate =
+  //   checkedSessions.length > 0 && checkedSessions.length !== allSessions.length;
 
   return (
-    <StyledTableContainer forwardedRef={tableRef} useReactWindow>
-      {checkedSessions.length > 0 && (
+    <StyledTableContainer forwardedRef={ref} useReactWindow>
+      {/* {checkedSessions.length > 0 && (
         <div className="table-group-menu">
           <TableGroupMenu
             sectionWidth={sectionWidth}
@@ -167,17 +222,15 @@ const TableView = ({
             onChange={handleAllToggles}
           />
         </div>
-      )}
+      )} */}
       <SessionsTableHeader
         t={t}
+        userId={userId}
         sectionWidth={sectionWidth}
         setHideColumns={setHideColumns}
-        userId={userId}
-        tableRef={tableRef}
+        containerRef={ref}
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
-        isChecked={isChecked}
-        isIndeterminate={isIndeterminate}
       />
       <TableBody
         itemHeight={49}
@@ -190,21 +243,20 @@ const TableView = ({
         itemCount={sessionsData.length}
         fetchMoreFiles={() => {}}
       >
-        {sessionsData.map((session) => (
+        {sessionsData.map((item) => (
           <SessionsTableRow
             t={t}
-            key={session.userId}
-            avatar={session.avatar}
-            displayName={session.displayName}
-            status={session.status}
-            platform={session.platform}
-            browser={session.browser}
-            country={session.country}
-            city={session.city}
-            ip={session.ip}
+            key={item.userId}
+            item={item}
+            userId={userId}
             hideColumns={hideColumns}
-            isChecked={isSessionChecked(session.userId)}
-            toggleSession={(e) => handleToggle(e, session.userId)}
+            displayName={item.displayName}
+            status={item.status}
+            browser={item.browser}
+            platform={item.platform}
+            country={item.country}
+            city={item.city}
+            ip={item.ip}
           />
         ))}
       </TableBody>

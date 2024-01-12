@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { inject, observer } from "mobx-react";
 
 import TableHeader from "@docspace/components/table-container/TableHeader";
 
@@ -31,7 +30,7 @@ const SessionsTableHeader = (props) => {
     userId,
     sectionWidth,
     setHideColumns,
-    tableRef,
+    containerRef,
     columnStorageName,
     columnInfoPanelStorageName,
   } = props;
@@ -101,7 +100,7 @@ const SessionsTableHeader = (props) => {
   return (
     <TableHeader
       checkboxSize="48px"
-      containerRef={tableRef}
+      containerRef={containerRef}
       columns={columns}
       columnStorageName={columnStorageName}
       columnInfoPanelStorageName={columnInfoPanelStorageName}

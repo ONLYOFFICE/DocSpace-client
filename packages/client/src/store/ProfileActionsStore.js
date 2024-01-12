@@ -19,6 +19,7 @@ import { ZendeskAPI } from "@docspace/common/components/Zendesk";
 import { LIVE_CHAT_LOCAL_STORAGE_KEY } from "@docspace/common/constants";
 import { toastr } from "@docspace/shared/components/toast";
 import { isDesktop, isTablet } from "@docspace/shared/utils";
+import TariffBar from "@docspace/common/components/TariffBar";
 
 const PROXY_HOMEPAGE_URL = combineUrl(window.DocSpaceConfig?.proxy?.url, "/");
 const PROFILE_SELF_URL = combineUrl(PROXY_HOMEPAGE_URL, "/profile");
@@ -332,6 +333,7 @@ class ProfileActionsStore {
           icon: PaymentsReactSvgUrl,
           label: t("Common:PaymentsTitle"),
           onClick: this.onPaymentsClick,
+          additionalElement: <TariffBar />,
         },
       {
         isSeparator: true,

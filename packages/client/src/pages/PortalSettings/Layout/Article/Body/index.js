@@ -316,7 +316,7 @@ export default inject(({ auth, common, clientLoadingStore }) => {
   };
 })(
   withLoading(
-    withTranslation(["Ldap", "Settings", "Common"])(
+    withTranslation(["Settings", "Common", "Ldap"])(
       observer(ArticleBodyContent)
     )
   )

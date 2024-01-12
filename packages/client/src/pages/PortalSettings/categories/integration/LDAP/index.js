@@ -25,13 +25,13 @@ import SyncContainer from "./sub-components/SyncContainer";
 import GroupMembership from "./sub-components/GroupMembership";
 import LdapMobileView from "./sub-components/LdapMobileView";
 import SettingsContainer from "./sub-components/SettingsContainer";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const LDAP = ({
   ldapSettingsUrl,
   theme,
   currentColorScheme,
   isLdapAvailable,
-  isSettingsShown,
   load,
   isMobileView,
   isLdapEnabled,
@@ -42,6 +42,7 @@ const LDAP = ({
   useEffect(() => {
     isLdapAvailable && load();
     onCheckView();
+    setDocumentTitle(t("Settings:ManagementCategoryIntegration"));
     window.addEventListener("resize", onCheckView);
 
     return () => window.removeEventListener("resize", onCheckView);
@@ -95,7 +96,7 @@ export default inject(({ auth, ldapStore }) => {
   const { isLdapAvailable } = currentQuotaStore;
   const { ldapSettingsUrl, theme, currentColorScheme, currentDeviceType } =
     settingsStore;
-  const { isSettingsShown, load, isLdapEnabled } = ldapStore;
+  const { load, isLdapEnabled } = ldapStore;
 
   const isMobileView = currentDeviceType === DeviceType.mobile;
 
@@ -104,7 +105,6 @@ export default inject(({ auth, ldapStore }) => {
     theme,
     currentColorScheme,
     isLdapAvailable,
-    isSettingsShown,
     load,
     isMobileView,
     isLdapEnabled,

@@ -9,18 +9,42 @@ import Cron from "@docspace/components/cron";
 
 import ProgressContainer from "./ProgressContainer";
 import ToggleAutoSync from "./ToggleAutoSync";
+import { DeviceType } from "@docspace/common/constants";
+import StyledLdapPage from "../styled-components/StyledLdapPage";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import { onChangeUrl } from "../utils";
+import { useNavigate } from "react-router-dom";
+import { isMobile } from "@docspace/components/utils/device";
 
 const SyncContainer = ({
   isLdapAvailable,
   isLdapEnabled,
+  isMobileView,
   syncLdap,
   onChangeCron,
   cron,
   nextSyncDate,
+  theme,
 }) => {
   const { t } = useTranslation(["Ldap", "Common"]);
+  const navigate = useNavigate();
 
-  return (
+  React.useEffect(() => {
+    setDocumentTitle(t("Ldap:LdapSyncTitle"));
+    onCheckView();
+    window.addEventListener("resize", onCheckView);
+
+    return () => window.removeEventListener("resize", onCheckView);
+  }, []);
+
+  const onCheckView = () => {
+    if (!isMobile()) {
+      const newUrl = onChangeUrl();
+      if (newUrl) navigate(newUrl);
+    }
+  };
+
+  const renderBody = () => (
     <Box className="ldap_sync-container">
       <Text
         fontSize="16px"
@@ -97,20 +121,39 @@ const SyncContainer = ({
       )}
     </Box>
   );
+
+  if (isMobileView) {
+    return (
+      <StyledLdapPage
+        isMobileView={isMobileView}
+        theme={theme}
+        isSettingPaid={isLdapAvailable}
+      >
+        {renderBody()}
+      </StyledLdapPage>
+    );
+  }
+
+  return <>{renderBody()}</>;
 };
 
 export default inject(({ auth, ldapStore }) => {
-  const { currentQuotaStore } = auth;
+  const { currentQuotaStore, settingsStore } = auth;
+  const { currentDeviceType, theme } = settingsStore;
   const { isLdapAvailable } = currentQuotaStore;
   const { isLdapEnabled, syncLdap, onChangeCron, cron, nextSyncDate } =
     ldapStore;
 
+  const isMobileView = currentDeviceType === DeviceType.mobile;
+
   return {
     isLdapAvailable,
     isLdapEnabled,
+    isMobileView,
     syncLdap,
     onChangeCron,
     cron,
     nextSyncDate,
+    theme,
   };
 })(observer(SyncContainer));

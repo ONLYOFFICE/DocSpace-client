@@ -251,7 +251,7 @@ class InfoPanelStore {
             item.roomType,
             true
           )
-        ? item.logo.medium
+        ? item.logo?.medium
         : item.icon
         ? item.icon
         : this.settingsStore.getIcon(size, null, null, null, item.roomType)

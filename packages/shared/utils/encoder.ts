@@ -1,17 +1,17 @@
+/* eslint-disable no-useless-escape */
 /**
  * Encoder
  */
 export const Encoder = {
   EncodeType: "entity",
-  isEmpty: function (val) {
+  isEmpty(val: null | string) {
     if (val) {
-      return val === null || val.length == 0 || /^\s+$/.test(val);
-    } else {
-      return true;
+      return val === null || val.length === 0 || /^\s+$/.test(val);
     }
+    return true;
   },
-  HTML2Numerical: function (s) {
-    var arr1 = new Array(
+  HTML2Numerical(s: string) {
+    const arr1 = [
       "&nbsp;",
       "&iexcl;",
       "&cent;",
@@ -264,8 +264,8 @@ export const Encoder = {
       "&clubs;",
       "&hearts;",
       "&diams;",
-    );
-    var arr2 = new Array(
+    ];
+    const arr2 = [
       "&#160;",
       "&#161;",
       "&#162;",
@@ -518,11 +518,11 @@ export const Encoder = {
       "&#9827;",
       "&#9829;",
       "&#9830;",
-    );
+    ];
     return this.swapArrayVals(s, arr1, arr2);
   },
-  NumericalToHTML: function (s) {
-    var arr1 = new Array(
+  NumericalToHTML(s: string) {
+    const arr1 = [
       "&#160;",
       "&#161;",
       "&#162;",
@@ -775,8 +775,8 @@ export const Encoder = {
       "&#9827;",
       "&#9829;",
       "&#9830;",
-    );
-    var arr2 = new Array(
+    ];
+    const arr2 = [
       "&nbsp;",
       "&iexcl;",
       "&cent;",
@@ -1029,32 +1029,32 @@ export const Encoder = {
       "&clubs;",
       "&hearts;",
       "&diams;",
-    );
+    ];
     return this.swapArrayVals(s, arr1, arr2);
   },
-  numEncode: function (s) {
+  numEncode(s: string) {
     if (this.isEmpty(s)) return "";
-    var e = "";
-    for (var i = 0; i < s.length; i++) {
-      var c = s.charAt(i);
+    let e = "";
+    for (let i = 0; i < s.length; i = +1) {
+      let c = s.charAt(i);
       if (c < " " || c > "~") {
-        c = "&#" + c.charCodeAt() + ";";
+        c = `&#${c.charCodeAt(0)};`;
       }
       e += c;
     }
     return e;
   },
-  htmlDecode: function (s) {
-    var c,
-      m,
-      d = s;
+  htmlDecode(s: string) {
+    let c;
+    let m;
+    let d = s;
     if (this.isEmpty(d)) return "";
     d = this.HTML2Numerical(d);
     const arr = d.match(/&#[0-9]{1,5};/g);
     if (arr != null) {
-      for (var x = 0; x < arr.length; x++) {
+      for (let x = 0; x < arr.length; x += 1) {
         m = arr[x];
-        c = m.substring(2, m.length - 1);
+        c = +m.substring(2, m.length - 1);
         if (c >= -32768 && c <= 65535) {
           d = d.replace(m, String.fromCharCode(c));
         } else {
@@ -1064,24 +1064,24 @@ export const Encoder = {
     }
     return d;
   },
-  htmlEncode: function (s, dbl) {
+  htmlEncode(s: string, dbl: boolean) {
     if (this.isEmpty(s)) return "";
-    dbl = dbl | false;
+    dbl = dbl || false;
     if (dbl) {
-      if (this.EncodeType == "numerical") {
+      if (this.EncodeType === "numerical") {
         s = s.replace(/&/g, "&#38;");
       } else {
         s = s.replace(/&/g, "&amp;");
       }
     }
     s = this.XSSEncode(s, false);
-    if (this.EncodeType == "numerical" || !dbl) {
+    if (this.EncodeType === "numerical" || !dbl) {
       s = this.HTML2Numerical(s);
     }
     s = this.numEncode(s);
     if (!dbl) {
       s = s.replace(/&#/g, "##AMPHASH##");
-      if (this.EncodeType == "numerical") {
+      if (this.EncodeType === "numerical") {
         s = s.replace(/&/g, "&#38;");
       } else {
         s = s.replace(/&/g, "&amp;");
@@ -1092,12 +1092,12 @@ export const Encoder = {
     if (!dbl) {
       s = this.correctEncoding(s);
     }
-    if (this.EncodeType == "entity") {
+    if (this.EncodeType === "entity") {
       s = this.NumericalToHTML(s);
     }
     return s;
   },
-  XSSEncode: function (s, en) {
+  XSSEncode(s: string, en: boolean) {
     if (!this.isEmpty(s)) {
       en = en || true;
       if (en) {
@@ -1112,31 +1112,33 @@ export const Encoder = {
         s = s.replace(/>/g, "&#62;");
       }
       return s;
-    } else {
-      return "";
     }
+
+    return "";
   },
-  hasEncoded: function (s) {
+  hasEncoded(s: string) {
     if (/&#[0-9]{1,5};/g.test(s)) {
       return true;
-    } else if (/&[A-Z]{2,6};/gi.test(s)) {
-      return true;
-    } else {
-      return false;
     }
+
+    if (/&[A-Z]{2,6};/gi.test(s)) {
+      return true;
+    }
+
+    return false;
   },
-  stripUnicode: function (s) {
+  stripUnicode(s: string) {
     return s.replace(/[^\x20-\x7E]/g, "");
   },
-  correctEncoding: function (s) {
+  correctEncoding(s: string) {
     return s.replace(/(&amp;)(amp;)+/, "$1");
   },
-  swapArrayVals: function (s, arr1, arr2) {
+  swapArrayVals(s: string, arr1: string[], arr2: string[]) {
     if (this.isEmpty(s)) return "";
-    var re;
+    let re;
     if (arr1 && arr2) {
-      if (arr1.length == arr2.length) {
-        for (var x = 0, i = arr1.length; x < i; x++) {
+      if (arr1.length === arr2.length) {
+        for (let x = 0, i = arr1.length; x < i; x += 1) {
           re = new RegExp(arr1[x], "g");
           s = s.replace(re, arr2[x]);
         }

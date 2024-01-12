@@ -139,8 +139,6 @@ export const getCategoryType = (location) => {
     categoryType = CategoryType.Settings;
   } else if (pathname.startsWith("/accounts/filter")) {
     categoryType = CategoryType.Accounts;
-  } else if (pathname.startsWith("/form-gallery")) {
-    categoryType = CategoryType.Personal;
   }
 
   return categoryType;

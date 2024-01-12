@@ -53,12 +53,15 @@ const MembersParam = ({
         <div className="label">Add members</div>
       </Styled.AddMembersButton>
 
-      {groupMembers.map((member) => (
-        <GroupMemberRow
-          groupMember={member}
-          onClickRemove={() => onRemoveUserById(member.id)}
-        />
-      ))}
+      {groupMembers.map(
+        (member) =>
+          member.id !== groupManager?.id && (
+            <GroupMemberRow
+              groupMember={member}
+              onClickRemove={() => onRemoveUserById(member.id)}
+            />
+          )
+      )}
     </div>
   );
 };

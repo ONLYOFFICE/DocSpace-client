@@ -1,71 +1,134 @@
-import React, { useState } from "react";
-import styled, { css } from "styled-components";
-import { useTranslation } from "react-i18next";
-
+import { useState, ChangeEvent } from "react";
 import ModalDialog from "@docspace/components/modal-dialog";
 import Button from "@docspace/components/button";
+import toastr from "@docspace/components/toast/toastr";
+import { observer, inject } from "mobx-react";
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
-import TagHandler from "./handlers/TagHandler";
+import { GroupParams } from "./types";
+import { createGroup, updateGroup } from "@docspace/common/api/groups";
 
-import SetRoomParams from "./sub-components/SetRoomParams";
-import RoomTypeList from "./sub-components/RoomTypeList";
-import DialogHeader from "./sub-components/DialogHeader";
+import GroupNameParam from "./sub-components/GroupNameParam";
+import HeadOfGroup from "./sub-components/HeadOfGroupParam";
+import MembersParam from "./sub-components/MembersParam";
 
-interface CreateGroupDialogProps {}
+interface EditGroupDialogProps {
+  group: {
+    members: object[];
+    [key: string]: any;
+  };
+  visible: boolean;
+  onClose: () => void;
+  getGroups: () => void;
+}
 
 const EditGroupDialog = ({
+  group,
   visible,
-  title,
   onClose,
-  onCreate,
-
-  fetchedTags,
-  isLoading,
-  setIsLoading,
-
-  deleteThirdParty,
-  fetchThirdPartyProviders,
-  enableThirdParty,
-}: CreateGroupDialogProps) => {
+  getGroups,
+}: EditGroupDialogProps) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
+  const navigate = useNavigate();
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  console.log(group);
+  const [groupParams, setGroupParams] = useState<GroupParams>({
+    groupName: group.name,
+    groupManager: group.manager,
+    groupMembers: group.members,
+  });
+
+  const onChangeGroupName = (e: ChangeEvent<HTMLInputElement>) =>
+    setGroupParams({ ...groupParams, groupName: e.target.value });
+
+  const setGroupManager = (groupManager: object | null) =>
+    setGroupParams({ ...groupParams, groupManager });
+
+  const setGroupMembers = (groupMembers: object[]) =>
+    setGroupParams({ ...groupParams, groupMembers });
+
+  const onEditGroup = async () => {
+    setIsLoading(true);
+
+    const groupManagerId = groupParams.groupManager.id;
+    const groupMemebersIds = groupParams.groupMembers.map((gm) => gm.id);
+
+    updateGroup(
+      group.id,
+      groupParams.groupName,
+      groupManagerId,
+      groupMemebersIds
+    )
+      .then(() => {
+        navigate("/accounts/groups/filter");
+        getGroups();
+      })
+      .catch((err) => toastr.error(err.message))
+      .finally(() => {
+        setIsLoading(false);
+        onClose();
+      });
+  };
 
   return (
     <ModalDialog
       displayType="aside"
       withBodyScroll
-      visible={true}
+      visible={visible}
       onClose={onClose}
-      //   isScrollLocked={isScrollLocked}
       withFooterBorder
+      //   isScrollLocked={isScrollLocked}
       //   isOauthWindowOpen={isOauthWindowOpen}
     >
-      <ModalDialog.Header>Header</ModalDialog.Header>
-      <ModalDialog.Body>Body</ModalDialog.Body>
+      <ModalDialog.Header>Create department</ModalDialog.Header>
+
+      <ModalDialog.Body>
+        <GroupNameParam
+          groupName={groupParams.groupName}
+          onChangeGroupName={onChangeGroupName}
+        />
+        <HeadOfGroup
+          groupManager={groupParams.groupManager}
+          setGroupManager={setGroupManager}
+          onClose={onClose}
+        />
+        <MembersParam
+          groupManager={groupParams.groupManager}
+          groupMembers={groupParams.groupMembers}
+          setGroupMembers={setGroupMembers}
+          onClose={onClose}
+        />
+      </ModalDialog.Body>
 
       <ModalDialog.Footer>
         <Button
-          id="create-group-modal_submit"
+          id="edit-group-modal_submit"
           tabIndex={5}
-          label={t("Common:Create")}
+          label={t("Common:SaveButton")}
           size="normal"
           primary
           scale
-          // onClick={onCreateRoom}
-          // isDisabled={isRoomTitleChanged || isWrongTitle}
+          onClick={onEditGroup}
+          isDisabled={!groupParams.groupManager || !groupParams.groupName}
           isLoading={isLoading}
         />
         <Button
-          id="create-group-modal_cancel"
+          id="edit-group-modal_cancel"
           tabIndex={5}
           label={t("Common:CancelButton")}
           size="normal"
           scale
           isDisabled={isLoading}
-          // onClick={}
+          onClick={onClose}
         />
       </ModalDialog.Footer>
     </ModalDialog>
   );
 };
 
-export default EditGroupDialog;
+export default inject(({ peopleStore }) => ({
+  getGroups: peopleStore.groupsStore.getGroups,
+}))(observer(EditGroupDialog));

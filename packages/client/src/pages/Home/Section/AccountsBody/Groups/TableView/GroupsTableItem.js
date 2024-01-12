@@ -249,7 +249,8 @@ const GroupsTableItem = (props) => {
         icon: "http://192.168.0.105/static/images/pencil.react.svg?hash=7b1050767036ee383c82",
         label: "Edit department",
         onClick: () => {
-          const event = new Event(Events.GROUP_CREATE);
+          const event = new Event(Events.GROUP_EDIT);
+          event.item = item;
           window.dispatchEvent(event);
         },
       },
@@ -286,7 +287,7 @@ const GroupsTableItem = (props) => {
 
   return (
     <StyledWrapper
-      className={`user-item ${
+      className={`group-item ${
         isChecked || isActive ? "table-row-selected" : ""
       }`}
       value={value}

@@ -16,12 +16,13 @@ const GroupMemberRow = ({
   groupMember,
   onClickRemove,
 }: GroupMemberRowProps) => {
+  console.log(groupMember);
   return (
     <Styled.GroupMemberRow>
       <Avatar
         className={"avatar"}
         size={"min"}
-        source={groupMember.avatarSmall}
+        source={groupMember.avatarSmall || groupMember.avatar}
       />
       <div className="info">
         <div className="name">{groupMember.displayName}</div>

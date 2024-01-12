@@ -68,7 +68,11 @@ class AccessRightsStore {
   };
 
   canMakeEmployeeUser = (user) => {
-    const { id, isOwner } = this.authStore.userStore.user;
+    // const { id, isOwner } = this.authStore.userStore.user;
+    const id = this.authStore.userStore.user?.id;
+    const isOwner = this.authStore.userStore.user?.isOwner;
+
+    if (!user) return;
 
     const {
       status,
@@ -100,6 +104,7 @@ class AccessRightsStore {
 
   canActivateUser = (user) => {
     const { id, isOwner, isAdmin } = this.authStore.userStore.user;
+    if (!user) return;
 
     const {
       status,
@@ -119,6 +124,7 @@ class AccessRightsStore {
 
   canDisableUser = (user) => {
     const { id, isOwner, isAdmin } = this.authStore.userStore.user;
+    if (!user) return;
 
     const {
       status,
@@ -138,6 +144,7 @@ class AccessRightsStore {
 
   canInviteUser = (user) => {
     const { id, isOwner } = this.authStore.userStore.user;
+    if (!user) return;
 
     const {
       activationStatus,
@@ -159,6 +166,7 @@ class AccessRightsStore {
 
   canRemoveUser = (user) => {
     const { id, isOwner, isAdmin } = this.authStore.userStore.user;
+    if (!user) return;
 
     const {
       status,

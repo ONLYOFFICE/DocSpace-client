@@ -159,7 +159,7 @@ export default function withContent(WrappedContent) {
       currentUserId: userStore.user.id,
       selectGroup,
       fetchProfile: getTargetUser,
-      checked: selection.some((el) => el.id === item.id),
+      checked: selection.some((el) => el?.id === item.id),
       isSeveralSelection: selection.length > 1,
       isActive: bufferSelection?.id === item?.id,
       setBufferSelection,

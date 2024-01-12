@@ -9,6 +9,8 @@ import Error404 from "SRC_DIR/pages/Errors/404";
 
 import { generalRoutes } from "./general";
 import SettingsContainer from "../pages/PortalSettings/categories/integration/LDAP/sub-components/SettingsContainer";
+import SyncContainer from "../pages/PortalSettings/categories/integration/LDAP/sub-components/SyncContainer";
+import StyledLdapPage from "../pages/PortalSettings/categories/integration/LDAP/styled-components/StyledLdapPage";
 
 const PortalSettings = loadable(() => import("../pages/PortalSettings"));
 
@@ -253,7 +255,7 @@ const PortalSettingsRoutes = {
     },
     {
       path: "integration/ldap/sync-data",
-      element: <Integration />,
+      element: <SyncContainer />,
     },
     {
       path: "integration/third-party-services",

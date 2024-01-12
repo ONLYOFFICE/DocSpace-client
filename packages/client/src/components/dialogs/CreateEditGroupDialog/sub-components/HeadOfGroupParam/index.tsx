@@ -18,8 +18,10 @@ const HeadOfGroup = ({
 }: HeadOfGroupProps) => {
   const [selectGroupMangerPanelIsVisible, setSelectGroupMangerPanelIsVisible] =
     useState<boolean>(false);
+
   const onShowSelectGroupManagerPanel = () =>
     setSelectGroupMangerPanelIsVisible(true);
+
   const onHideSelectGroupManagerPanel = () =>
     setSelectGroupMangerPanelIsVisible(false);
 

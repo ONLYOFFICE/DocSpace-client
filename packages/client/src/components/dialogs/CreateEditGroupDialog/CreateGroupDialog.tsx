@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useState, ChangeEvent } from "react";
 import ModalDialog from "@docspace/components/modal-dialog";
 import Button from "@docspace/components/button";
 import toastr from "@docspace/components/toast/toastr";
 import { observer, inject } from "mobx-react";
 
 import { useTranslation } from "react-i18next";
-
-import CreateGroupDialogBody from "./sub-components/CreateGroupDialogBody";
+import { useNavigate } from "react-router-dom";
 import { GroupParams } from "./types";
 import { createGroup } from "@docspace/common/api/groups";
+import GroupNameParam from "./sub-components/GroupNameParam";
+import HeadOfGroup from "./sub-components/HeadOfGroupParam";
+import MembersParam from "./sub-components/MembersParam";
 
 interface CreateGroupDialogProps {
   visible: boolean;
@@ -21,15 +23,25 @@ const CreateGroupDialog = ({
   onClose,
   getGroups,
 }: CreateGroupDialogProps) => {
+  const navigate = useNavigate();
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
-
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [groupParams, setGroupParams] = useState<GroupParams>({
     groupName: "",
     groupManager: null,
     groupMembers: [],
   });
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const onChangeGroupName = (e: ChangeEvent<HTMLInputElement>) =>
+    setGroupParams({ ...groupParams, groupName: e.target.value });
+
+  const setGroupManager = (groupManager: object | null) =>
+    setGroupParams({ ...groupParams, groupManager });
+
+  const setGroupMembers = (groupMembers: object[]) =>
+    setGroupParams({ ...groupParams, groupMembers });
 
   const onCreateGroup = async () => {
     setIsLoading(true);
@@ -38,11 +50,14 @@ const CreateGroupDialog = ({
     const groupMemebersIds = groupParams.groupMembers.map((gm) => gm.id);
 
     createGroup(groupParams.groupName, groupManagerId, groupMemebersIds)
+      .then(() => {
+        navigate("/accounts/groups/filter");
+        getGroups();
+      })
       .catch((err) => toastr.error(err.message))
       .finally(() => {
         setIsLoading(false);
         onClose();
-        getGroups();
       });
   };
 
@@ -59,9 +74,19 @@ const CreateGroupDialog = ({
       <ModalDialog.Header>Create department</ModalDialog.Header>
 
       <ModalDialog.Body>
-        <CreateGroupDialogBody
-          groupParams={groupParams}
-          setGroupParams={setGroupParams}
+        <GroupNameParam
+          groupName={groupParams.groupName}
+          onChangeGroupName={onChangeGroupName}
+        />
+        <HeadOfGroup
+          groupManager={groupParams.groupManager}
+          setGroupManager={setGroupManager}
+          onClose={onClose}
+        />
+        <MembersParam
+          groupManager={groupParams.groupManager}
+          groupMembers={groupParams.groupMembers}
+          setGroupMembers={setGroupMembers}
           onClose={onClose}
         />
       </ModalDialog.Body>

@@ -51,7 +51,8 @@ const GroupsRow = ({
         icon: "http://192.168.0.105/static/images/pencil.react.svg?hash=7b1050767036ee383c82",
         label: "Edit department",
         onClick: () => {
-          const event = new Event(Events.GROUP_CREATE);
+          const event = new Event(Events.GROUP_EDIT);
+          event.item = item;
           window.dispatchEvent(event);
         },
       },
@@ -90,7 +91,7 @@ const GroupsRow = ({
       value={`folder_${item.id}_false_index_${itemIndex}`}
       isChecked={isChecked}
       isActive={isActive}
-      className={`user-item row-wrapper ${
+      className={`group-item row-wrapper ${
         isChecked || isActive ? "row-selected" : ""
       }`}
     >

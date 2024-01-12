@@ -34,7 +34,7 @@ class SelectionStore {
 
   incrementUsersRights = (selection) => {
     for (const key in this.selectionUsersRights) {
-      if (selection[key]) {
+      if (selection?.[key]) {
         this.selectionUsersRights[key]++;
       }
     }
@@ -42,29 +42,26 @@ class SelectionStore {
 
   decrementUsersRights = (selection) => {
     for (const key in this.selectionUsersRights) {
-      if (selection[key]) {
+      if (selection?.[key]) {
         this.selectionUsersRights[key]--;
       }
     }
   };
 
   setSelection = (selection) => {
-    // console.log("setSelection", { selection });
     this.selection = selection;
-
     selection.length === 0 && this.resetUsersRight();
   };
 
   setSelections = (added, removed, clear = false) => {
-    if (clear) {
-      this.selection = [];
-    }
+    if (clear) this.selection = [];
 
     let newSelections = JSON.parse(JSON.stringify(this.selection));
 
     for (let item of added) {
       if (!item) return;
 
+      console.log(item);
       const value = item.getElementsByClassName("user-item")
         ? item.getElementsByClassName("user-item")[0]?.getAttribute("value")
         : null;
@@ -73,7 +70,7 @@ class SelectionStore {
       const splitValue = value && value.split("_");
       const id = splitValue.slice(1, -3).join("_");
 
-      const isFound = this.selection.findIndex((f) => f.id == id) === -1;
+      const isFound = this.selection?.findIndex((f) => f?.id == id) === -1;
 
       if (isFound) {
         const user = this.peopleStore.usersStore.peopleList.find(
@@ -95,7 +92,7 @@ class SelectionStore {
       const splitValue = value && value.split("_");
       const id = splitValue.slice(1, -3).join("_");
 
-      const index = newSelections.findIndex((item) => item.id == id);
+      const index = newSelections.findIndex((item) => item?.id == id);
 
       if (index !== -1) {
         this.decrementUsersRights(newSelections[index]);
@@ -122,7 +119,7 @@ class SelectionStore {
   };
 
   selectUser = (user) => {
-    const index = this.selection.findIndex((el) => el.id === user.id);
+    const index = this.selection?.findIndex((el) => el.id === user.id);
 
     const exists = index > -1;
 
@@ -136,7 +133,7 @@ class SelectionStore {
   };
 
   deselectUser = (user) => {
-    const index = this.selection.findIndex((el) => el.id === user.id);
+    const index = this.selection?.findIndex((el) => el.id === user.id);
 
     const exists = index > -1;
 
@@ -148,7 +145,7 @@ class SelectionStore {
 
     newData.splice(index, 1);
 
-    this.decrementUsersRights(this.selection[index]);
+    this.decrementUsersRights(this.selection?.[index]);
 
     this.setSelection(newData);
   };
@@ -210,42 +207,42 @@ class SelectionStore {
   };
 
   get hasAnybodySelected() {
-    return this.selection.length > 0;
+    return this.selection?.length > 0;
   }
 
   get hasUsersToMakeEmployees() {
     const { canMakeEmployeeUser } = this.peopleStore.accessRightsStore;
 
-    const users = this.selection.filter((x) => canMakeEmployeeUser(x));
+    const users = this.selection?.filter((x) => canMakeEmployeeUser(x));
 
     return users.length > 0;
   }
   get hasUsersToMakePowerUser() {
     const { canMakePowerUser } = this.peopleStore.accessRightsStore;
-    const users = this.selection.filter((x) => canMakePowerUser(x));
+    const users = this.selection?.filter((x) => canMakePowerUser(x));
 
     return users.length > 0;
   }
   get getUsersToMakeEmployees() {
     const { canMakeEmployeeUser } = this.peopleStore.accessRightsStore;
 
-    const users = this.selection.filter((x) => canMakeEmployeeUser(x));
+    const users = this.selection?.filter((x) => canMakeEmployeeUser(x));
 
     return users.map((u) => u);
   }
 
   get userSelectionRole() {
-    if (this.selection.length !== 1) return null;
+    if (this.selection?.length !== 1) return null;
 
-    return this.selection[0].role;
+    return this.selection?.[0]?.role;
   }
 
   get isOneUserSelection() {
-    return this.selection.length > 0 && this.selection.length === 1;
+    return this.selection?.length > 0 && this.selection?.length === 1;
   }
 
   get hasFreeUsers() {
-    const users = this.selection.filter(
+    const users = this.selection?.filter(
       (x) => x.status !== EmployeeStatus.Disabled && x.isVisitor
     );
 
@@ -255,7 +252,7 @@ class SelectionStore {
   get hasUsersToActivate() {
     const { canActivateUser } = this.peopleStore.accessRightsStore;
 
-    const users = this.selection.filter((x) => canActivateUser(x));
+    const users = this.selection?.filter((x) => canActivateUser(x));
 
     return users.length > 0;
   }
@@ -263,7 +260,7 @@ class SelectionStore {
   get getUsersToActivate() {
     const { canActivateUser } = this.peopleStore.accessRightsStore;
 
-    const users = this.selection.filter((x) => canActivateUser(x));
+    const users = this.selection?.filter((x) => canActivateUser(x));
 
     return users.map((u) => u);
   }
@@ -271,7 +268,7 @@ class SelectionStore {
   get hasUsersToDisable() {
     const { canDisableUser } = this.peopleStore.accessRightsStore;
 
-    const users = this.selection.filter((x) => canDisableUser(x));
+    const users = this.selection?.filter((x) => canDisableUser(x));
 
     return users.length > 0;
   }
@@ -279,7 +276,7 @@ class SelectionStore {
   get getUsersToDisable() {
     const { canDisableUser } = this.peopleStore.accessRightsStore;
 
-    const users = this.selection.filter((x) => canDisableUser(x));
+    const users = this.selection?.filter((x) => canDisableUser(x));
 
     return users.map((u) => u);
   }
@@ -287,7 +284,7 @@ class SelectionStore {
   get hasUsersToInvite() {
     const { canInviteUser } = this.peopleStore.accessRightsStore;
 
-    const users = this.selection.filter((x) => canInviteUser(x));
+    const users = this.selection?.filter((x) => canInviteUser(x));
 
     return users.length > 0;
   }
@@ -295,7 +292,7 @@ class SelectionStore {
   get getUsersToInviteIds() {
     const { canInviteUser } = this.peopleStore.accessRightsStore;
 
-    const users = this.selection.filter((x) => canInviteUser(x));
+    const users = this.selection?.filter((x) => canInviteUser(x));
 
     return users.length > 0 ? users.map((u) => u.id) : [];
   }
@@ -303,7 +300,7 @@ class SelectionStore {
   get hasUsersToRemove() {
     const { canRemoveUser } = this.peopleStore.accessRightsStore;
 
-    const users = this.selection.filter((x) => canRemoveUser(x));
+    const users = this.selection?.filter((x) => canRemoveUser(x));
 
     return users.length > 0;
   }
@@ -311,7 +308,7 @@ class SelectionStore {
   get hasOnlyOneUserToRemove() {
     const { canRemoveUser } = this.peopleStore.accessRightsStore;
 
-    const users = this.selection.filter((x) => canRemoveUser(x));
+    const users = this.selection?.filter((x) => canRemoveUser(x));
 
     return users.length === 1;
   }
@@ -319,7 +316,7 @@ class SelectionStore {
   get getUsersToRemoveIds() {
     const { canRemoveUser } = this.peopleStore.accessRightsStore;
 
-    const users = this.selection.filter((x) => canRemoveUser(x));
+    const users = this.selection?.filter((x) => canRemoveUser(x));
 
     return users.map((u) => u.id);
   }

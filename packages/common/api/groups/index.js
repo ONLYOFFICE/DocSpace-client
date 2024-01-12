@@ -58,15 +58,15 @@ export const updateGroup = (groupId, groupName, groupManager, members) => {
   return request({
     method: "put",
     url: `/group/${groupId}`,
-    data: { groupId, groupName, groupManager, members },
+    data: { groupName, groupManager, members },
   });
 };
 
-export const addGroupMembers = (groupName, groupManager, members) => {
+export const addGroupMembers = (groupId, members) => {
   return request({
     method: "put",
-    url: `/group/${id}/members`,
-    data: { groupName, groupManager, members },
+    url: `/group/${groupId}/members`,
+    data: { members },
   });
 };
 

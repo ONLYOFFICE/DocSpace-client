@@ -2,12 +2,17 @@ import React from "react";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import SelectionAreaComponent from "@docspace/components/selection-area";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 
-const SelectionArea = (props) => {
-  const { viewAs, setSelections } = props;
+const SelectionArea = ({ viewAs, setSelections }) => {
+  const location = useLocation();
+
+  const isPeople = location.pathname.includes("/accounts/people");
 
   const onMove = ({ added, removed, clear }) => {
-    setSelections(added, removed, clear);
+    isPeople
+      ? setSelections(added, removed, clear)
+      : setSelections(added, removed, clear);
   };
 
   const itemHeight = viewAs === "table" ? 49 : 59;
@@ -20,7 +25,7 @@ const SelectionArea = (props) => {
       scrollClass="section-scroll"
       itemsContainerClass="ReactVirtualized__Grid__innerScrollContainer"
       selectableClass="window-item"
-      itemClass="user-item"
+      itemClass={isPeople ? "user-item" : "group-item"}
       onMove={onMove}
       viewAs={viewAs}
       itemHeight={itemHeight}

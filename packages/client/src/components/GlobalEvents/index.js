@@ -122,7 +122,8 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
   }, []);
 
   const onEditRoom = useCallback((e) => {
-    const visible = e.item ? true : false;
+    console.log(e);
+    const visible = !!e.item;
 
     setEditRoomDialogProps({
       visible: visible,
@@ -147,13 +148,15 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
   }, []);
 
   const onEditGroup = useCallback((e) => {
-    const visible = e.item ? true : false;
+    const visible = !!e.item;
 
     setEditGroupDialogProps({
       visible: visible,
+      item: e.item,
       onClose: () => {
         setEditGroupDialogProps({
           visible: false,
+          item: null,
           onClose: null,
         });
       },

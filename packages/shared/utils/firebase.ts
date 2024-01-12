@@ -1,3 +1,5 @@
+/* eslint-disable prefer-promise-reject-errors */
+/* eslint-disable class-methods-use-this */
 import firebase from "firebase/app";
 import "firebase/remote-config";
 import "firebase/storage";
@@ -9,19 +11,32 @@ import CampaignsEducationPngUrl from "PUBLIC_DIR/images/campaigns.education.png"
 import CampaignsEnterprisePngUrl from "PUBLIC_DIR/images/campaigns.enterprise.png";
 import CampaignsIntegrationPngUrl from "PUBLIC_DIR/images/campaigns.integration.png";
 
-class FirebaseHelper {
-  remoteConfig = null;
-  firebaseConfig = null;
-  firebaseStorage = null;
-  firebaseDB = null;
+export type TSettings = {
+  apiKey: string;
+  authDomain: string;
+  projectId: string;
+  storageBucket: string;
+  messagingSenderId: string;
+  appId: string;
+  databaseURL: string;
+};
 
-  constructor(settings) {
+class FirebaseHelper {
+  remoteConfig: firebase.remoteConfig.RemoteConfig | null = null;
+
+  firebaseConfig: TSettings | null = null;
+
+  firebaseStorage: firebase.storage.Storage | null = null;
+
+  firebaseDB: firebase.database.Database | null = null;
+
+  constructor(settings: TSettings) {
     this.firebaseConfig = settings;
 
     if (!this.isEnabled) return;
 
     if (!firebase.apps.length) {
-      firebase.initializeApp(this.config);
+      if (this.config) firebase.initializeApp(this.config);
     } else {
       firebase.app();
     }
@@ -38,7 +53,7 @@ class FirebaseHelper {
     };
 
     this.remoteConfig.defaultConfig = {
-      maintenance: null,
+      maintenance: false,
     };
 
     this.remoteConfig
@@ -58,38 +73,40 @@ class FirebaseHelper {
   get isEnabled() {
     return (
       !!this.config &&
-      !!this.config["apiKey"] &&
-      !!this.config["authDomain"] &&
-      !!this.config["projectId"] &&
-      !!this.config["storageBucket"] &&
-      !!this.config["messagingSenderId"] &&
-      !!this.config["appId"] &&
+      !!this.config?.apiKey &&
+      !!this.config?.authDomain &&
+      !!this.config?.projectId &&
+      !!this.config?.storageBucket &&
+      !!this.config?.messagingSenderId &&
+      !!this.config?.appId &&
       !window.navigator.userAgent.includes("ZoomWebKit") && // Disabled firebase for Zoom - unknown 403 error inside iframe
       !window.navigator.userAgent.includes("ZoomApps")
     );
   }
 
   get isEnabledDB() {
-    return this.isEnabled && !!this.config["databaseURL"];
+    return this.isEnabled && !!this.config?.databaseURL;
   }
 
   async checkMaintenance() {
     if (!this.isEnabled) return Promise.reject("Not enabled");
 
-    const res = await this.remoteConfig.fetchAndActivate();
-    //console.log("fetchAndActivate", res);
-    const maintenance = this.remoteConfig.getValue("maintenance");
+    // const res = await this.remoteConfig?.fetchAndActivate();
+    await this.remoteConfig?.fetchAndActivate();
+    // console.log("fetchAndActivate", res);
+    const maintenance = this.remoteConfig?.getValue("maintenance");
     if (!maintenance) {
       return Promise.resolve(null);
     }
-    return await Promise.resolve(JSON.parse(maintenance.asString()));
+    return Promise.resolve(JSON.parse(maintenance.asString()));
   }
 
   async checkBar() {
     if (!this.isEnabled) return Promise.reject("Not enabled");
 
-    const res = await this.remoteConfig.fetchAndActivate();
-    const barValue = this.remoteConfig.getValue("docspace_bar");
+    // const res = await this.remoteConfig?.fetchAndActivate();
+    await this.remoteConfig?.fetchAndActivate();
+    const barValue = this.remoteConfig?.getValue("docspace_bar");
     const barString = barValue && barValue.asString();
 
     if (!barValue || !barString) {
@@ -103,15 +120,16 @@ class FirebaseHelper {
       return typeof element === "string" && element.length > 0;
     });
 
-    return await Promise.resolve(bar);
+    return Promise.resolve(bar);
   }
 
   async checkCampaigns() {
     if (!this.isEnabled) return Promise.reject("Not enabled");
 
-    const res = await this.remoteConfig.fetchAndActivate();
+    // const res = await this.remoteConfig?.fetchAndActivate();
+    await this.remoteConfig?.fetchAndActivate();
 
-    const campaignsValue = this.remoteConfig.getValue("campaigns");
+    const campaignsValue = this.remoteConfig?.getValue("campaigns");
     const campaignsString = campaignsValue && campaignsValue.asString();
 
     if (!campaignsValue || !campaignsString) {
@@ -126,10 +144,10 @@ class FirebaseHelper {
       return typeof element === "string" && element.length > 0;
     });
 
-    return await Promise.resolve(campaigns);
+    return Promise.resolve(campaigns);
   }
 
-  async getCampaignsImages(banner) {
+  async getCampaignsImages(banner: string) {
     // const domain = this.config["authDomain"];
 
     switch (banner) {
@@ -150,16 +168,16 @@ class FirebaseHelper {
     // return `https://${domain}/images/campaigns.${banner}.png`;
   }
 
-  async getCampaignsTranslations(banner, lng) {
-    const domain = this.config["authDomain"];
+  async getCampaignsTranslations(banner: string, lng: string) {
+    const domain = this.config?.authDomain;
     return `https://${domain}/locales/${lng}/CampaignPersonal${banner}.json`;
   }
 
-  async sendCrashReport(report) {
+  async sendCrashReport(report: string) {
     try {
-      const reportListRef = this.firebaseDB.ref("reports");
-      const neReportRef = reportListRef.push();
-      neReportRef.set(report);
+      const reportListRef = this.firebaseDB?.ref("reports");
+      const neReportRef = reportListRef?.push();
+      neReportRef?.set(report);
     } catch (error) {
       return Promise.reject(error);
     }

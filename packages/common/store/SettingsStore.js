@@ -5,7 +5,7 @@ import api from "../api";
 import { getSystemTheme } from "@docspace/shared/utils";
 import { setCookie, frameCallEvent } from "../utils";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import FirebaseHelper from "../utils/firebase";
+import FirebaseHelper from "@docspace/shared/utils/firebase";
 import { ThemeKeys, TenantStatus, DeviceType } from "@docspace/shared/enums";
 
 import { LANGUAGE, COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";

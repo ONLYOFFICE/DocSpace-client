@@ -1,5 +1,6 @@
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
+import { tablet } from "@docspace/components/utils/device";
 
 import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu";
 import RowContainer from "@docspace/components/row-container";
@@ -8,6 +9,20 @@ import SessionsRow from "./SessionsRow";
 import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";
 import RemoveSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
+
+const marginStyles = css`
+  margin-left: -24px;
+  margin-right: -24px;
+  padding-left: 24px;
+  padding-right: 24px;
+
+  @media ${tablet} {
+    margin-left: -16px;
+    margin-right: -16px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+`;
 
 const StyledRowContainer = styled(RowContainer)`
   margin: 0 0 24px;
@@ -47,28 +62,53 @@ const StyledRowContainer = styled(RowContainer)`
     .table-container_group-menu-separator {
       margin: 0 16px;
     }
+  }
 
-    .table-list-item {
-      cursor: pointer;
+  .row-selected + .row-wrapper:not(.row-selected) {
+    .user-row {
+      border-top: ${(props) =>
+        `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
+      margin-top: -3px;
 
-      &:hover {
-        background-color: ${(props) =>
-          props.theme.filesSection.tableView.row.backgroundActive};
+      ${marginStyles}
+    }
+  }
 
-        .table-container_cell {
-          margin-top: -1px;
-          border-top: ${(props) =>
-            `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+  .row-wrapper:not(.row-selected) + .row-selected {
+    .user-row {
+      border-top: ${(props) =>
+        `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
+      margin-top: -3px;
 
-          margin-left: -24px;
-          padding-left: 24px;
-        }
+      ${marginStyles}
+    }
+  }
 
-        .table-container_row-context-menu-wrapper {
-          margin-right: -20px;
-          padding-right: 20px;
-        }
-      }
+  .row-hotkey-border + .row-selected {
+    .user-row {
+      border-top: 1px solid #2da7db !important;
+    }
+  }
+
+  .row-selected:last-child {
+    .user-row {
+      border-bottom: ${(props) =>
+        `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
+      padding-bottom: 1px;
+
+      ${marginStyles}
+    }
+    .user-row::after {
+      height: 0px;
+    }
+  }
+  .row-selected:first-child {
+    .user-row {
+      border-top: ${(props) =>
+        `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
+      margin-top: -3px;
+
+      ${marginStyles}
     }
   }
 
@@ -87,21 +127,16 @@ const RowView = (props) => {
     t,
     sectionWidth,
     sessionsData,
-    allSessions,
-    checkedSessions,
-    toggleSession,
-    toggleAllSessions,
-    isSessionChecked,
+    // allSessions,
+    // checkedSessions,
+    // toggleSession,
+    // toggleAllSessions,
+    // isSessionChecked,
   } = props;
 
-  const handleToggle = (e, id) => {
-    e.stopPropagation();
-    toggleSession(id);
-  };
-
-  const handleAllToggles = (checked) => {
-    toggleAllSessions(checked, allSessions);
-  };
+  // const handleAllToggles = (checked) => {
+  //   toggleAllSessions(checked, allSessions);
+  // };
 
   const headerMenu = [
     {
@@ -127,21 +162,22 @@ const RowView = (props) => {
     },
   ];
 
-  const isChecked = checkedSessions.length === allSessions.length;
+  // const isChecked = checkedSessions.length === allSessions.length;
 
-  const isIndeterminate =
-    checkedSessions.length > 0 && checkedSessions.length !== allSessions.length;
+  // const isIndeterminate =
+  //   checkedSessions.length > 0 && checkedSessions.length !== allSessions.length;
 
   return (
     <StyledRowContainer
-      itemHeight={58}
+      className="people-row-container"
       useReactWindow={false}
       hasMoreFiles={false}
+      itemHeight={58}
       itemCount={sessionsData.length}
       filesLength={sessionsData.length}
       fetchMoreFiles={() => {}}
     >
-      {checkedSessions.length > 0 && (
+      {/* {checkedSessions.length > 0 && (
         <div className="table-group-menu">
           <TableGroupMenu
             sectionWidth={sectionWidth}
@@ -154,16 +190,14 @@ const RowView = (props) => {
             onChange={handleAllToggles}
           />
         </div>
-      )}
+      )} */}
 
-      {sessionsData.map((session) => (
+      {sessionsData.map((item) => (
         <SessionsRow
           t={t}
-          key={session.id}
+          key={item.id}
+          item={item}
           sectionWidth={sectionWidth}
-          data={session}
-          isChecked={isSessionChecked(session.userId)}
-          toggleSession={(e) => handleToggle(e, session.userId)}
         />
       ))}
     </StyledRowContainer>

@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import Text from "@docspace/components/text";
 import Box from "@docspace/components/box";
 import RowContent from "@docspace/components/row-content";
-import Avatar from "@docspace/components/avatar";
+import { tablet, mobile } from "@docspace/components/utils/device";
 
 const StyledRowContent = styled(RowContent)`
   .rowMainContainer {
@@ -10,15 +10,19 @@ const StyledRowContent = styled(RowContent)`
     width: 100%;
   }
 
-  .avatar {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 10px;
-          `
-        : css`
-            margin-right: 10px;
-          `}
+  @media ${tablet} {
+    .row-main-container-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      max-width: inherit;
+    }
+  }
+
+  @media ${mobile} {
+    .row-main-container-wrapper {
+      justify-content: flex-start;
+    }
   }
 
   .session-info-wrapper {
@@ -65,12 +69,10 @@ const StyledRowContent = styled(RowContent)`
   }
 `;
 
-const SessionsRowContent = (props) => {
-  const { sectionWidth, data } = props;
-
+const SessionsRowContent = ({ sectionWidth, item }) => {
   const {
-    avatar,
     displayName,
+
     status,
     platform,
     browser,
@@ -78,18 +80,12 @@ const SessionsRowContent = (props) => {
     city,
     ip,
     userId,
-  } = data;
+  } = item;
 
   const isOnline = status === "Online";
 
   const contentData = [
     <Box key={userId} displayProp="flex" alignItems="center">
-      <Avatar
-        className="avatar"
-        userName={displayName}
-        source={avatar}
-        size={"small"}
-      />
       <Box className="session-info-wrapper">
         <Box className="main-row-content">
           <div className="session-info username">

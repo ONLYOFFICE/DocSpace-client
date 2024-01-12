@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import RowContent from "@docspace/components/row-content";
 import Text from "@docspace/components/text";
-import styled, {css} from "styled-components";
+import styled, { css } from "styled-components";
 import { isMobileOnly } from "react-device-detect";
 import { getConvertedSize } from "@docspace/common/utils";
 import { TPortals } from "SRC_DIR/types/spaces";
@@ -31,11 +31,19 @@ type TRoomContent = {
 export const RoomContent = ({ item, isCurrentPortal }: TRoomContent) => {
   const { t } = useTranslation(["Management", "Common", "Settings"]);
 
-  const { roomAdminCount, usersCount, storageSize, roomsCount, usedSize
-  } = item?.quotaUsage;
+ 
 
- const maxStorage = getConvertedSize(t, storageSize);
- const usedStorage = getConvertedSize(t, usedSize);
+  const { roomAdminCount, usersCount, storageSize, roomsCount, usedSize } =
+    item?.quotaUsage || {
+      roomAdminCount: null,
+      usersCount: null,
+      storageSize: null,
+      roomsCount: null,
+      usedSize: null,
+    };
+
+  const maxStorage = getConvertedSize(t, storageSize);
+  const usedStorage = getConvertedSize(t, usedSize);
 
   return (
     <StyledRowContent

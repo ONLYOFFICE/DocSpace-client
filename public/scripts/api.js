@@ -24,6 +24,7 @@
     destroyText: "",
     viewAs: "row", //TODO: ["row", "table", "tile"]
     viewTableColumns: "Name,Size,Type",
+    checkCSP: true,
     filter: {
       count: 100,
       page: 1,
@@ -57,16 +58,15 @@
   const checkCSP = (targetSrc, onAppError) => {
     const currentSrc = window.location.origin;
 
+    if (currentSrc.indexOf(targetSrc) !== -1) return true;
+
     const cspSettings = async () => {
       try {
         const settings = await fetch(`${targetSrc}/api/2.0/security/csp`);
         const res = await settings.json();
         const { header } = res.response;
 
-        return (
-          (header && header.indexOf(window.location.origin) !== -1) ||
-          targetSrc === currentSrc
-        );
+        return header && header.indexOf(currentSrc) !== -1;
       } catch (e) {
         onAppError(e);
       }
@@ -132,6 +132,10 @@
               ? { key: config.requestToken, ...config.filter }
               : config.filter;
 
+            if (!params.withSubfolders) {
+              delete params.withSubfolders;
+            }
+
             const urlParams = new URLSearchParams(params).toString();
 
             path = `${config.rootPath}${
@@ -169,6 +173,11 @@
           }
 
           path = `/doceditor/?fileId=${config.id}&type=${config.editorType}&editorGoBack=${goBack}`;
+
+          if (config.requestToken) {
+            path = `${path}&share=${config.requestToken}`;
+          }
+
           break;
         }
 
@@ -183,6 +192,11 @@
           }
 
           path = `/doceditor/?fileId=${config.id}&type=${config.editorType}&action=view&editorGoBack=${goBack}`;
+
+          if (config.requestToken) {
+            path = `${path}&share=${config.requestToken}`;
+          }
+
           break;
         }
 
@@ -196,12 +210,9 @@
       iframe.name = config.name;
       iframe.id = config.frameId;
 
-      iframe.loading = "lazy";
+      iframe.frameBorder = 0;
       iframe.allowFullscreen = true;
-      iframe.setAttribute("allowfullscreen", "");
-      iframe.setAttribute("allow", "autoplay");
-
-      //iframe.referrerpolicy = "unsafe-url";
+      iframe.setAttribute("allow", "storage-access");
 
       if (config.type == "mobile") {
         iframe.style.position = "fixed";
@@ -306,15 +317,17 @@
     };
 
     initFrame(config) {
-      const configFull = Object.assign(defaultConfig, config);
-      this.config = Object.assign(this.config, configFull);
+      const configFull = { ...defaultConfig, ...config };
+      this.config = { ...this.config, ...configFull };
 
       const target = document.getElementById(this.config.frameId);
 
-      this.#cspInstalled = checkCSP(
-        this.config.src,
-        this.config.events.onAppError
-      );
+      if (this.config.checkCSP) {
+        this.#cspInstalled = checkCSP(
+          this.config.src,
+          this.config.events.onAppError
+        );
+      }
 
       if (target) {
         this.#iframe = this.#createIframe(this.config);

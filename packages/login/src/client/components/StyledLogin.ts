@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { tablet, mobile } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/shared/utils";
 
 export const ButtonsWrapper = styled.div`
   display: flex;
@@ -29,11 +29,11 @@ interface IStyledCaptchaProps {
 
 export const LoginFormWrapper = styled.div`
   width: 100%;
-  height: ${props => props.enabledJoin ? "calc(100vh - 68px)" : "100vh"};
+  height: ${(props) => (props.enabledJoin ? "calc(100vh - 68px)" : "100vh")};
 
   box-sizing: border-box;
 
-  @media ${mobile}{
+  @media ${mobile} {
     height: 100%;
   }
 
@@ -77,8 +77,8 @@ export const StyledCaptcha = styled.div`
   width: fit-content;
   .captcha-wrapper {
     ${(props: IStyledCaptchaProps) =>
-    props.isCaptchaError &&
-    css`
+      props.isCaptchaError &&
+      css`
         border: ${props.theme.login.captcha.border};
         padding: 4px 4px 4px 2px;
       `};

@@ -2,10 +2,16 @@ import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./index.styled";
-import { Link, Button, InputBlock, Label, Text } from "@docspace/components";
-import toastr from "@docspace/components/toast/toastr";
+
+import { Link } from "@docspace/shared/components/link";
+import { Button } from "@docspace/shared/components/button";
+import { InputBlock } from "@docspace/shared/components/input-block";
+import { Label } from "@docspace/shared/components/label";
+import { Text } from "@docspace/shared/components/text";
+import { toastr } from "@docspace/shared/components/toast";
 import Loaders from "@docspace/common/components/Loaders";
 import { DeviceType } from "@docspace/common/constants";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
 const URL_REGEX = /^https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{1,256}\/?$/;
 const DNS_PLACEHOLDER = `${window.location.protocol}//<docspace-dns-name>/`;
@@ -76,18 +82,18 @@ const DocumentService = ({
     e.preventDefault();
     setSaveIsLoading(true);
     changeDocumentServiceLocation(docServiceUrl, internalUrl, portalUrl)
-      .then((response) => {
+      .then((result) => {
         toastr.success(t("Common:ChangesSavedSuccessfully"));
 
-        setDocServiceUrl(response[0]);
-        setInternalUrl(response[1]);
-        setPortalUrl(response[2]);
+        setIsDefaultSettiings(result?.isDefault || false);
 
-        setInitDocServiceUrl(response[0]);
-        setInitInternalUrl(response[1]);
-        setInitPortalUrl(response[2]);
+        setPortalUrl(result?.docServicePortalUrl);
+        setInternalUrl(result?.docServiceUrlInternal);
+        setDocServiceUrl(result?.docServiceUrl);
 
-        setIsDefaultSettiings(false);
+        setInitPortalUrl(result?.docServicePortalUrl);
+        setInitInternalUrl(result?.docServiceUrlInternal);
+        setInitDocServiceUrl(result?.docServiceUrl);
       })
       .catch((e) => toastr.error(e))
       .finally(() => setSaveIsLoading(false));
@@ -100,18 +106,18 @@ const DocumentService = ({
 
     setResetIsLoading(true);
     changeDocumentServiceLocation(null, null, null)
-      .then((response) => {
+      .then((result) => {
         toastr.success(t("Common:ChangesSavedSuccessfully"));
 
-        setDocServiceUrl(response[0]);
-        setInternalUrl(response[1]);
-        setPortalUrl(response[2]);
+        setIsDefaultSettiings(result?.isDefault || false);
 
-        setInitDocServiceUrl(response[0]);
-        setInitInternalUrl(response[1]);
-        setInitPortalUrl(response[2]);
+        setPortalUrl(result?.docServicePortalUrl);
+        setInternalUrl(result?.docServiceUrlInternal);
+        setDocServiceUrl(result?.docServiceUrl);
 
-        setIsDefaultSettiings(true);
+        setInitPortalUrl(result?.docServicePortalUrl);
+        setInitInternalUrl(result?.docServiceUrlInternal);
+        setInitDocServiceUrl(result?.docServiceUrl);
       })
       .catch((e) => toastr.error(e))
       .finally(() => setResetIsLoading(false));
@@ -224,31 +230,25 @@ const DocumentService = ({
             </Text>
           </div>
         </div>
-        <div className="form-buttons">
-          <Button
-            onClick={onSubmit}
-            className="button"
-            primary
-            size={buttonSize}
-            label={t("Common:SaveButton")}
-            isDisabled={
-              isFormEmpty ||
-              isValuesInit ||
-              !allInputsValid ||
-              isSaveLoading ||
-              isResetLoading
-            }
-            isLoading={isSaveLoading}
-          />
-          <Button
-            onClick={onReset}
-            className="button"
-            size={buttonSize}
-            label={t("Common:Restore")}
-            isDisabled={isDefaultSettings || isSaveLoading || isResetLoading}
-            isLoading={isResetLoading}
-          />
-        </div>
+
+        <SaveCancelButtons
+          onSaveClick={onSubmit}
+          onCancelClick={onReset}
+          saveButtonLabel={t("Common:SaveButton")}
+          cancelButtonLabel={t("Common:Restore")}
+          saveButtonDisabled={
+            isFormEmpty ||
+            isValuesInit ||
+            !allInputsValid ||
+            isSaveLoading ||
+            isResetLoading
+          }
+          cancelButtonDisabled={
+            isDefaultSettings || isSaveLoading || isResetLoading
+          }
+          displaySettings={true}
+          isSaving={isSaveLoading || isResetLoading}
+        />
       </Styled.LocationForm>
     </Styled.Location>
   );

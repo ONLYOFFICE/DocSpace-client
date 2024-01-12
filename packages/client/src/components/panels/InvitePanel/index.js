@@ -11,12 +11,12 @@ import { withTranslation } from "react-i18next";
 import { DeviceType } from "@docspace/common/constants";
 import { LOADER_TIMEOUT } from "@docspace/common/constants";
 
-import Backdrop from "@docspace/components/backdrop";
-import Aside from "@docspace/components/aside";
-import Button from "@docspace/components/button";
-import toastr from "@docspace/components/toast/toastr";
-import Portal from "@docspace/components/portal";
-import { isDesktop, isMobile, size } from "@docspace/components/utils/device";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Aside } from "@docspace/shared/components/aside";
+import { Button } from "@docspace/shared/components/button";
+import { toastr } from "@docspace/shared/components/toast";
+import { Portal } from "@docspace/shared/components/portal";
+import { isDesktop, isMobile, size } from "@docspace/shared/utils";
 
 import {
   StyledBlock,
@@ -30,7 +30,7 @@ import {
 import ItemsList from "./sub-components/ItemsList";
 import InviteInput from "./sub-components/InviteInput";
 import ExternalLinks from "./sub-components/ExternalLinks";
-import Scrollbar from "@docspace/components/scrollbar";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 import InfoBar from "./sub-components/InfoBar";
 import InvitePanelLoader from "./sub-components/InvitePanelLoader";

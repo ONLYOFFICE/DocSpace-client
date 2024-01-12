@@ -7,7 +7,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 import { DeviceType, RoomSearchArea } from "@docspace/common/constants";
 import Items from "./Items";
-import { tablet } from "@docspace/components/utils/device";
+import { tablet } from "@docspace/shared/utils";
 
 import FilesFilter from "@docspace/common/api/files/filter";
 import RoomsFilter from "@docspace/common/api/rooms/filter";
@@ -68,7 +68,7 @@ const ArticleBodyContent = (props) => {
   const isAccounts = location.pathname.includes("accounts/filter");
 
   const onClick = React.useCallback(
-    (folderId, title, rootFolderType) => {
+    (folderId, title, rootFolderType, canCreate) => {
       const { toggleArticleOpen } = props;
 
       let params = null;
@@ -79,6 +79,7 @@ const ArticleBodyContent = (props) => {
         isRoot: true,
         isPublicRoomType: false,
         rootFolderType,
+        canCreate,
       };
 
       let withTimer = !!selectedFolderId;

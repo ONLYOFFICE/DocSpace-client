@@ -1,23 +1,21 @@
 import styled, { css } from "styled-components";
-import Heading from "@docspace/components/heading";
-import TextInput from "@docspace/components/text-input";
-import ComboBox from "@docspace/components/combobox";
-import Box from "@docspace/components/box";
-import DropDown from "@docspace/components/drop-down";
-import Text from "@docspace/components/text";
-import Button from "@docspace/components/button";
-import HelpButton from "@docspace/components/help-button";
-import Link from "@docspace/components/link";
-import ToggleButton from "@docspace/components/toggle-button";
-import { mobile } from "@docspace/components/utils/device";
+import { Heading } from "@docspace/shared/components/heading";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { ComboBox } from "@docspace/shared/components/combobox";
+import { Box } from "@docspace/shared/components/box";
+import { DropDown } from "@docspace/shared/components/drop-down";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { Link } from "@docspace/shared/components/link";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { mobile, commonIconsStyles } from "@docspace/shared/utils";
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 import CrossIconMobile from "PUBLIC_DIR/images/cross.react.svg";
 import DeleteIcon from "PUBLIC_DIR/images/mobile.actions.remove.react.svg";
 
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
-
-import Base from "@docspace/components/themes/base";
+import Base from "@docspace/shared/themes/base";
 
 const fillAvailableWidth = css`
   width: 100%;
@@ -469,6 +467,12 @@ const StyledInviteLanguage = styled.div`
         }
       }
     }
+  }
+
+  .language-combo-box-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 2px;
   }
 `;
 const StyledCrossIconMobile = styled(CrossIconMobile)`

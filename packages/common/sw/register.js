@@ -2,12 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import { Workbox } from "workbox-window";
-import SnackBar from "@docspace/components/snackbar";
+import { SnackBar } from "@docspace/shared/components/snackbar";
 import i18n from "i18next";
 import { useTranslation, initReactI18next } from "react-i18next";
 import Backend from "../utils/i18next-http-backend";
-import { LANGUAGE } from "../constants";
-import { getCookie } from "@docspace/components/utils/cookie";
+import { LANGUAGE } from "@docspace/shared/constants";
+import { getCookie } from "@docspace/shared/utils";
 
 i18n
   .use(Backend)
@@ -119,12 +119,15 @@ export default function () {
 
       if (!window.swUpdateTimer) {
         console.log("SW timer checks for updates every hour");
-        window.swUpdateTimer = setInterval(() => {
-          console.log("SW update timer check");
-          reg.update().catch((e) => {
-            console.error("SW update timer FAILED", e);
-          });
-        }, 60 * 60 * 1000);
+        window.swUpdateTimer = setInterval(
+          () => {
+            console.log("SW update timer check");
+            reg.update().catch((e) => {
+              console.error("SW update timer FAILED", e);
+            });
+          },
+          60 * 60 * 1000
+        );
       }
     })
     .catch((err) => console.error("Service worker registration failed", err));

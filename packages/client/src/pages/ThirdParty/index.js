@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { getObjectByLocation } from "@docspace/common/utils";
 import ErrorContainer from "@docspace/common/components/ErrorContainer";
 import Section from "@docspace/common/components/Section";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const ThirdPartyResponsePage = ({ match }) => {

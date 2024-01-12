@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import RadioButtonGroup from "@docspace/components/radio-button-group";
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
-import toastr from "@docspace/components/toast/toastr";
+import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { toastr } from "@docspace/shared/components/toast";
 import { LearnMoreWrapper } from "../StyledSecurity";
-import { size } from "@docspace/components/utils/device";
+import { size } from "@docspace/shared/utils";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import isEqual from "lodash/isEqual";
 
 import AdmMsgLoader from "../sub-components/loaders/admmsg-loader";
@@ -65,7 +65,7 @@ const AdminMessage = (props) => {
   useEffect(() => {
     checkWidth();
 
-    if (!isInit) initSettings().then(() => setIsLoading(true));
+    if (!isInit) initSettings("admin-message").then(() => setIsLoading(true));
     else setIsLoading(true);
 
     window.addEventListener("resize", checkWidth);
@@ -75,7 +75,7 @@ const AdminMessage = (props) => {
   useEffect(() => {
     if (!isInit) return;
     getSettings();
-  }, [isLoading]);
+  }, [isLoading, isInit]);
 
   useEffect(() => {
     if (!isLoading) return;

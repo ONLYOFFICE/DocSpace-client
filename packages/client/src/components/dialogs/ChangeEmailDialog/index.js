@@ -1,15 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Button from "@docspace/components/button";
-import Text from "@docspace/components/text";
-import EmailInput from "@docspace/components/email-input";
-import FieldContainer from "@docspace/components/field-container";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Button } from "@docspace/shared/components/button";
+import { Text } from "@docspace/shared/components/text";
+import { EmailInput } from "@docspace/shared/components/email-input";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { toastr } from "@docspace/shared/components/toast";
+
 import { withTranslation } from "react-i18next";
 import ModalDialogContainer from "../ModalDialogContainer";
 import { sendInstructionsToChangeEmail } from "@docspace/common/api/people";
-import toastr from "@docspace/components/toast/toastr";
-import { errorKeys } from "@docspace/components/utils/constants";
+
+import { errorKeys } from "@docspace/shared/constants";
 import { inject, observer } from "mobx-react";
 class ChangeEmailDialogComponent extends React.Component {
   constructor(props) {

@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 
-import TextInput from "@docspace/components/text-input";
-import Text from "@docspace/components/text";
-import ToggleButton from "@docspace/components/toggle-button";
-import Checkbox from "@docspace/components/checkbox";
-import FieldContainer from "@docspace/components/field-container";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { Text } from "@docspace/shared/components/text";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { FieldContainer } from "@docspace/shared/components/field-container";
 
 import { StyledComponent } from "../StyledComponent";
 import { SMTPSettingsFields } from "../constants";
-import { EmailInput } from "@docspace/components";
+import { EmailInput } from "@docspace/shared/components/email-input";
 import ButtonContainer from "./ButtonContainer";
 
 const {
@@ -111,7 +111,7 @@ const CustomSettings = (props) => {
       <TextInput
         className="smtp-settings_input"
         name={HOST_PASSWORD}
-        placeholder={t("Common:EnterPassword")}
+        placeholder={t("UploadPanel:EnterPassword")}
         onChange={onChange}
         value={settings[HOST_PASSWORD]}
         isDisabled={isLoading || !settings[AUTHENTICATION]}

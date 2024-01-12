@@ -1,11 +1,11 @@
 ﻿import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import Box from "@docspace/components/box";
+import { Box } from "@docspace/shared/components/box";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { Base } from "@docspace/components/themes";
-import { mobile } from "@docspace/components/utils/device";
+import { Base } from "@docspace/shared/themes";
+import { mobile } from "@docspace/shared/utils";
 
 const Header = styled.header`
   align-items: left;

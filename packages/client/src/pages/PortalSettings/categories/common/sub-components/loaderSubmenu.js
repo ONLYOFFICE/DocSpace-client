@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
-import { mobileMore } from "@docspace/components/utils/device";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { mobileMore } from "@docspace/shared/utils";
 
 const StyledLoader = styled.div`
   margin-top: -4px;

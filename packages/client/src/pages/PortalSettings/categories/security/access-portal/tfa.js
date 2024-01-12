@@ -3,14 +3,14 @@ import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import RadioButtonGroup from "@docspace/components/radio-button-group";
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
-import toastr from "@docspace/components/toast/toastr";
+import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { toastr } from "@docspace/shared/components/toast";
 import { LearnMoreWrapper } from "../StyledSecurity";
-import { size } from "@docspace/components/utils/device";
+import { size } from "@docspace/shared/utils";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
 import TfaLoader from "../sub-components/loaders/tfa-loader";
 import { DeviceType } from "@docspace/common/constants";
@@ -32,7 +32,6 @@ const TwoFactorAuth = (props) => {
     currentColorScheme,
     tfaSettingsUrl,
     currentDeviceType,
-    getTfaType,
     smsAvailable,
     appAvailable,
     tfaSettings,
@@ -58,19 +57,15 @@ const TwoFactorAuth = (props) => {
     setIsLoading(true);
   };
 
-  const getTfaTypeFn = async () => {
-    await getTfaType();
-  };
-
   useEffect(() => {
     checkWidth();
+
+    if (!isInit) initSettings("tfa").then(() => setIsLoading(true));
+    else setIsLoading(true);
+
     window.addEventListener("resize", checkWidth);
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
-
-  useEffect(() => {
-    if (smsAvailable === null || appAvailable === null) getTfaTypeFn();
-  }, [smsAvailable, appAvailable]);
 
   useEffect(() => {
     tfaSettings && getSettings();
@@ -206,7 +201,6 @@ export default inject(({ auth, setup }) => {
     tfaSettings,
     smsAvailable,
     appAvailable,
-    getTfaType,
   } = auth.tfaStore;
 
   const { isInit, initSettings, setIsInit } = setup;
@@ -225,6 +219,5 @@ export default inject(({ auth, setup }) => {
     currentColorScheme,
     tfaSettingsUrl,
     currentDeviceType,
-    getTfaType,
   };
 })(withTranslation(["Settings", "Common"])(observer(TwoFactorAuth)));

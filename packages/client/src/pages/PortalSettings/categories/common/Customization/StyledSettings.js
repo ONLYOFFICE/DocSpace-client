@@ -1,11 +1,15 @@
 import styled, { css } from "styled-components";
 import { isMobileOnly } from "react-device-detect";
-import Scrollbar from "@docspace/components/scrollbar";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
-import { Base } from "@docspace/components/themes";
+import {
+  commonIconsStyles,
+  mobile,
+  desktop,
+  mobileMore,
+} from "@docspace/shared/utils";
+import { Base } from "@docspace/shared/themes";
 import { UnavailableStyles } from "../../../utils/commonSettingsStyles";
-import { mobile, desktop, mobileMore } from "@docspace/components/utils/device";
 
 const menuHeight = "48px";
 const sectionHeight = "50px";
@@ -70,6 +74,12 @@ const StyledSettingsComponent = styled.div`
     position: absolute;
     font-size: ${(props) => props.theme.getCorrectFontSize("10px")};
     color: #f21c0e;
+  }
+
+  .settings-block__wrapper-language {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
   .settings-block-description {
@@ -140,19 +150,17 @@ const StyledSettingsComponent = styled.div`
       `}
 
     .send-request-container {
-      box-sizing: border-box;
-      position: absolute;
+      padding-block: 30px;
+      position: sticky;
       bottom: 0;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              right: 0;
-            `
-          : css`
-              left: 0;
-            `}
-      padding: 16px;
-      width: 100%;
+      margin-top: 32px;
+      background-color: ${({ theme }) => theme.backgroundColor};
+
+      @media ${mobile} {
+        position: fixed;
+        padding-inline: 16px;
+        inset-inline: 0;
+      }
     }
 
     .send-request-button {

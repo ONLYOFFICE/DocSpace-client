@@ -29,7 +29,7 @@ function DeepLinker(options) {
           if (!didHide) {
             options.onFallback();
           }
-        }, 1000);
+        }, 3000);
       }
     }
 
@@ -62,6 +62,11 @@ function DeepLinker(options) {
   };
 }
 
+function bytesToBase64(bytes) {
+  const binString = String.fromCodePoint(...bytes);
+  return btoa(binString);
+}
+
 export const getDeepLink = (
   location,
   email,
@@ -84,9 +89,8 @@ export const getDeepLink = (
     },
     originalUrl: originalUrl,
   };
-  const deepLinkData = window.btoa(
-    encodeURIComponent(JSON.stringify(jsonData))
-  );
+  const stringifyData = JSON.stringify(jsonData);
+  const deepLinkData = bytesToBase64(new TextEncoder().encode(stringifyData));
 
   const linker = new DeepLinker({
     onIgnored: function () {

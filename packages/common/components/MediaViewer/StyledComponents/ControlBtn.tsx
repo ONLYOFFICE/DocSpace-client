@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 
 const ControlBtn = styled.div`
   display: inline-block;

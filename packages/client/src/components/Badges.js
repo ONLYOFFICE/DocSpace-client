@@ -13,20 +13,17 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { isMobile as isMobileDevice } from "react-device-detect";
 
-import Badge from "@docspace/components/badge";
-import IconButton from "@docspace/components/icon-button";
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
+import { Badge } from "@docspace/shared/components/badge";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 import {
   FileStatus,
   RoomsType,
   ShareAccessRights,
 } from "@docspace/common/constants";
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
-import { isTablet, isDesktop, size } from "@docspace/components/utils/device";
-import { classNames } from "@docspace/components/utils/classNames";
+import { isTablet, isDesktop, size, classNames } from "@docspace/shared/utils";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -195,7 +192,7 @@ const Badges = ({
     <div className="badges additional-badges file__badges">
       {isEditing && !isVisitor && !isPdf && (
         <ColorTheme
-          themeId={ThemeType.IconButton}
+          themeId={ThemeId.IconButton}
           isEditing={isEditing}
           iconName={iconEdit}
           className="badge icons-group is-editing tablet-badge tablet-edit"
@@ -210,7 +207,7 @@ const Badges = ({
         !isTrashFolder &&
         !isArchiveFolderRoot && (
           <ColorTheme
-            themeId={ThemeType.IconButton}
+            themeId={ThemeId.IconButton}
             onClick={setConvertDialogVisible}
             iconName={iconRefresh}
             className="badge tablet-badge icons-group can-convert"
@@ -252,7 +249,7 @@ const Badges = ({
     >
       {showCopyLinkIcon && (
         <ColorTheme
-          themeId={ThemeType.IconButton}
+          themeId={ThemeId.IconButton}
           iconName={LinkReactSvgUrl}
           className="badge row-copy-link icons-group tablet-badge"
           size={sizeBadge}
@@ -263,7 +260,7 @@ const Badges = ({
 
       {showCopyLinkIcon && (
         <ColorTheme
-          themeId={ThemeType.IconButton}
+          themeId={ThemeId.IconButton}
           iconName={TabletLinkReactSvgUrl}
           className="badge tablet-row-copy-link icons-group  tablet-badge"
           size={sizeBadge}
@@ -274,7 +271,7 @@ const Badges = ({
 
       {isRoom && mute && (
         <ColorTheme
-          themeId={ThemeType.IconButtonMute}
+          themeId={ThemeId.IconButtonMute}
           onClick={onUnmuteClick}
           iconName={iconMute}
           size={sizeBadge}
@@ -284,7 +281,7 @@ const Badges = ({
       )}
       {isRoom && pinned && (
         <ColorTheme
-          themeId={ThemeType.IconButtonPin}
+          themeId={ThemeId.IconButtonPin}
           onClick={onUnpinClick}
           className="badge icons-group is-pinned tablet-badge tablet-pinned"
           iconName={iconPin}

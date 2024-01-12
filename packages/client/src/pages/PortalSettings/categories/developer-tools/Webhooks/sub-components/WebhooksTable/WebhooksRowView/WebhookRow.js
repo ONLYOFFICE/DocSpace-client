@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 
-import Row from "@docspace/components/row";
+import { Row } from "@docspace/shared/components/row";
 
 import { WebhookRowContent } from "./WebhookRowContent";
 

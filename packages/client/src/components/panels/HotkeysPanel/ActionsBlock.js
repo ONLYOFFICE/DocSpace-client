@@ -1,6 +1,6 @@
 import React from "react";
-import Row from "@docspace/components/row";
-import Text from "@docspace/components/text";
+import { Row } from "@docspace/shared/components/row";
+import { Text } from "@docspace/shared/components/text";
 
 const ActionsBlock = ({ t, textStyles, keyTextStyles, CtrlKey }) => {
   return (

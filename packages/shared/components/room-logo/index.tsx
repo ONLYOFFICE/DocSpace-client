@@ -1,0 +1,1 @@
+export { RoomLogo } from "./RoomLogo";

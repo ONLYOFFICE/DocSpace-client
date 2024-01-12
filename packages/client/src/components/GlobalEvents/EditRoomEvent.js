@@ -5,7 +5,7 @@ import { EditRoomDialog } from "../dialogs";
 import { Encoder } from "@docspace/common/utils/encoder";
 import api from "@docspace/common/api";
 import { getRoomInfo } from "@docspace/common/api/rooms";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 
 const EditRoomEvent = ({
   addActiveItems,
@@ -46,6 +46,7 @@ const EditRoomEvent = ({
 
   reloadInfoPanelSelection,
   changeRoomOwner,
+  reloadSelectionParentRoom,
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
 
@@ -153,7 +154,7 @@ const EditRoomEvent = ({
           }
 
           !withPaging && updateRoom(item, room);
-
+          reloadSelectionParentRoom();
           reloadInfoPanelSelection();
           URL.revokeObjectURL(img.src);
           setActiveFolders([]);
@@ -179,6 +180,7 @@ const EditRoomEvent = ({
           updateLogoPathsCacheBreaker();
       }
 
+      reloadSelectionParentRoom();
       setIsLoading(false);
       onClose();
     }
@@ -270,7 +272,10 @@ export default inject(
     const { getThirdPartyIcon } = settingsStore.thirdPartyStore;
     const { setCreateRoomDialogVisible } = dialogsStore;
     const { withPaging } = auth.settingsStore;
-    const { reloadSelection: reloadInfoPanelSelection } = auth.infoPanelStore;
+    const {
+      reloadSelection: reloadInfoPanelSelection,
+      reloadSelectionParentRoom,
+    } = auth.infoPanelStore;
     return {
       addActiveItems,
       setActiveFolders,
@@ -305,6 +310,7 @@ export default inject(
 
       reloadInfoPanelSelection,
       changeRoomOwner,
+      reloadSelectionParentRoom,
     };
   }
 )(observer(EditRoomEvent));

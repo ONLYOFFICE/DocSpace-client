@@ -1,5 +1,5 @@
 import React from "react";
-import TableHeader from "@docspace/components/table-container/TableHeader";
+import { TableHeader } from "@docspace/shared/components/table";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
@@ -22,7 +22,7 @@ class PeopleTableHeader extends React.Component {
         default: true,
         sortBy: "AZ",
         active: true,
-        minWidth: 180,
+        minWidth: 210,
       },
       {
         key: "Date",

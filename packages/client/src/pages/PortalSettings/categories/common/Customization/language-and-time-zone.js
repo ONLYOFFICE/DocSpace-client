@@ -1,22 +1,26 @@
 ﻿import React from "react";
 import { withTranslation, Trans } from "react-i18next";
-import FieldContainer from "@docspace/components/field-container";
-import ComboBox from "@docspace/components/combobox";
-import toastr from "@docspace/components/toast/toastr";
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { ComboBox } from "@docspace/shared/components/combobox";
+import { toastr } from "@docspace/shared/components/toast";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject, observer } from "mobx-react";
-import { LANGUAGE, COOKIE_EXPIRATION_YEAR } from "@docspace/common/constants";
+import { COOKIE_EXPIRATION_YEAR, DeviceType } from "@docspace/common/constants";
+import { LANGUAGE } from "@docspace/shared/constants";
 import { setCookie } from "@docspace/common/utils";
 import { useNavigate } from "react-router-dom";
-import { isMobile } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/shared/utils";
 import checkScrollSettingsBlock from "../utils";
 import { StyledSettingsComponent, StyledScrollbar } from "./StyledSettings";
 import LoaderCustomization from "../sub-components/loaderCustomization";
 import withLoading from "SRC_DIR/HOCs/withLoading";
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import BetaBadge from "@docspace/common/components/BetaBadge";
+import { isBetaLanguage } from "@docspace/common/utils";
+import withCultureNames from "@docspace/common/hoc/withCultureNames";
 
 const mapTimezonesToArray = (timezones) => {
   return timezones.map((timezone) => {
@@ -27,7 +31,11 @@ const mapTimezonesToArray = (timezones) => {
 const mapCulturesToArray = (cultures, i18n) => {
   const t = i18n.getFixedT(null, "Common");
   return cultures.map((culture) => {
-    return { key: culture, label: t(`Culture_${culture}`) };
+    return {
+      key: culture,
+      label: t(`Culture_${culture}`),
+      isBeta: isBetaLanguage(culture),
+    };
   });
 };
 
@@ -59,7 +67,12 @@ const LanguageAndTimeZone = (props) => {
     timezone,
     languageAndTimeZoneSettingsUrl,
     initSettings,
+    isLoadedPage,
+    currentColorScheme,
+    currentDeviceType,
   } = props;
+
+  const isMobileView = currentDeviceType === DeviceType.mobile;
 
   const navigate = useNavigate();
 
@@ -88,7 +101,10 @@ const LanguageAndTimeZone = (props) => {
 
     setDocumentTitle(t("StudioTimeLanguageSettings"));
 
-    if (!isLoaded) initSettings().then(() => setIsLoaded(true));
+    if (!isLoaded) {
+      const page = isMobileView ? "language-and-time-zone" : "general";
+      initSettings(page).then(() => setIsLoaded(true));
+    }
 
     const isLoadedSetting =
       isLoaded &&
@@ -162,7 +178,7 @@ const LanguageAndTimeZone = (props) => {
     return () => {
       window.removeEventListener("resize", checkInnerWidth);
     };
-  }, []);
+  }, [isLoaded]);
 
   React.useState(() => {
     prevProps.current = {
@@ -399,16 +415,6 @@ const LanguageAndTimeZone = (props) => {
   };
 
   const {
-    theme,
-    isMobileView,
-
-    isLoadedPage,
-    helpLink,
-    organizationName,
-    currentColorScheme,
-  } = props;
-
-  const {
     isLoading,
 
     showReminder,
@@ -419,6 +425,8 @@ const LanguageAndTimeZone = (props) => {
   const timezones = mapTimezonesToArray(rawTimezones);
   const cultureNamesNew = mapCulturesToArray(cultures, i18n);
 
+  const isBetaLanguage = state?.language?.isBeta;
+
   const settingsBlock = !(state.language && state.timezone) ? null : (
     <div className="settings-block">
       <FieldContainer
@@ -426,21 +434,24 @@ const LanguageAndTimeZone = (props) => {
         labelText={`${t("Common:Language")}`}
         isVertical={true}
       >
-        <ComboBox
-          tabIndex={1}
-          id="comboBoxLanguage"
-          options={cultureNamesNew}
-          selectedOption={state.language}
-          onSelect={onLanguageSelect}
-          isDisabled={isLoading}
-          directionY="both"
-          noBorder={false}
-          scaled={true}
-          scaledOptions={true}
-          dropDownMaxHeight={300}
-          className="dropdown-item-width combo-box-settings"
-          showDisabledItems={true}
-        />
+        <div className="settings-block__wrapper-language">
+          <ComboBox
+            tabIndex={1}
+            id="comboBoxLanguage"
+            options={cultureNamesNew}
+            selectedOption={state.language}
+            onSelect={onLanguageSelect}
+            isDisabled={isLoading}
+            directionY="both"
+            noBorder={false}
+            scaled={true}
+            scaledOptions={true}
+            dropDownMaxHeight={300}
+            className="dropdown-item-width combo-box-settings"
+            showDisabledItems={true}
+          />
+          {isBetaLanguage && <BetaBadge place={"right-start"} />}
+        </div>
       </FieldContainer>
       <FieldContainer
         id="fieldContainerTimezone"
@@ -522,13 +533,11 @@ export default inject(({ auth, setup, common }) => {
     timezone,
     timezones,
     nameSchemaId,
-    organizationName,
     greetingSettings,
-    getPortalTimezones,
     cultures,
-    helpLink,
     currentColorScheme,
     languageAndTimeZoneSettingsUrl,
+    currentDeviceType,
   } = auth.settingsStore;
 
   const { user } = auth.userStore;
@@ -537,7 +546,6 @@ export default inject(({ auth, setup, common }) => {
   const { isLoaded, setIsLoadedLngTZSettings, initSettings, setIsLoaded } =
     common;
   return {
-    theme: auth.settingsStore.theme,
     user,
     portalLanguage: culture,
     portalTimeZoneId: timezone,
@@ -545,20 +553,20 @@ export default inject(({ auth, setup, common }) => {
     rawTimezones: timezones,
     greetingSettings,
     nameSchemaId,
-    organizationName,
     setLanguageAndTime,
-    getPortalTimezones,
     isLoaded,
     setIsLoadedLngTZSettings,
     cultures,
-    helpLink,
     initSettings,
     setIsLoaded,
     currentColorScheme,
     languageAndTimeZoneSettingsUrl,
+    currentDeviceType,
   };
 })(
-  withLoading(
-    withTranslation(["Settings", "Common"])(observer(LanguageAndTimeZone))
+  withCultureNames(
+    withLoading(
+      withTranslation(["Settings", "Common"])(observer(LanguageAndTimeZone))
+    )
   )
 );

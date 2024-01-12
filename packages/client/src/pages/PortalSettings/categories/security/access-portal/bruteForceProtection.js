@@ -4,16 +4,16 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { StyledBruteForceProtection } from "../StyledSecurity";
 import isEqual from "lodash/isEqual";
-import FieldContainer from "@docspace/components/field-container";
-import toastr from "@docspace/components/toast/toastr";
-import TextInput from "@docspace/components/text-input";
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
-import Text from "@docspace/components/text";
-import { size } from "@docspace/components/utils/device";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { toastr } from "@docspace/shared/components/toast";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
+import { Text } from "@docspace/shared/components/text";
+import { size } from "@docspace/shared/utils";
 import { useNavigate, useLocation } from "react-router-dom";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import BruteForceProtectionLoader from "../sub-components/loaders/brute-force-protection-loader";
-import Link from "@docspace/components/link";
+import { Link } from "@docspace/shared/components/link";
 import { DeviceType } from "@docspace/common/constants";
 
 const BruteForceProtection = (props) => {
@@ -28,6 +28,7 @@ const BruteForceProtection = (props) => {
     isInit,
     bruteForceProtectionUrl,
     currentDeviceType,
+    currentColorScheme,
   } = props;
 
   const defaultNumberAttempt = numberAttempt?.toString();
@@ -75,7 +76,7 @@ const BruteForceProtection = (props) => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
 
-    if (!isInit) initSettings();
+    if (!isInit) initSettings("brute-force-protection");
 
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
@@ -242,6 +243,7 @@ const BruteForceProtection = (props) => {
           target="_blank"
           isHovered
           href={bruteForceProtectionUrl}
+          color={currentColorScheme.main.accent}
         >
           {t("Common:LearnMore")}
         </Link>
@@ -331,6 +333,7 @@ export default inject(({ auth, setup }) => {
     getBruteForceProtection,
     bruteForceProtectionUrl,
     currentDeviceType,
+    currentColorScheme,
   } = auth.settingsStore;
 
   const { initSettings, isInit } = setup;
@@ -345,5 +348,6 @@ export default inject(({ auth, setup }) => {
     isInit,
     bruteForceProtectionUrl,
     currentDeviceType,
+    currentColorScheme,
   };
 })(withTranslation(["Settings", "Common"])(observer(BruteForceProtection)));

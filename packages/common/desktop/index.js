@@ -1,7 +1,8 @@
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 import isEmpty from "lodash/isEmpty";
 import omit from "lodash/omit";
-import { checkIsSSR, getEditorTheme } from "../utils";
+import { getEditorTheme } from "../utils";
+import { checkIsSSR } from "@docspace/shared/utils";
 
 const isSSR = checkIsSSR();
 

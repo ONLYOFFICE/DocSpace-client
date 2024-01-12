@@ -15,7 +15,7 @@ import {
 import config from "PACKAGE_FILE";
 import FilesFilter from "@docspace/common/api/files/filter";
 import { combineUrl } from "@docspace/common/utils";
-import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import { getCategoryUrl, getCategoryTypeByFolderType } from "SRC_DIR/helpers/utils";
 
 const SectionHeaderContent = ({
   t,
@@ -24,7 +24,6 @@ const SectionHeaderContent = ({
   oformFromFolderId,
 
   setGallerySelected,
-  categoryType,
   setSubmitToGalleryDialogVisible,
 
   currentCategory,
@@ -34,14 +33,18 @@ const SectionHeaderContent = ({
 
   setIsLoading,
   oformsLoadError,
+
+  getFolderInfo,
 }) => {
   const navigate = useNavigate();
 
-  const onNavigateBack = () => {
+  const onNavigateBack = async () => {
     setGallerySelected(null);
 
     const filter = FilesFilter.getDefault();
     filter.folder = oformFromFolderId;
+    const folderInfo = await getFolderInfo(oformFromFolderId);
+    const categoryType = getCategoryTypeByFolderType(folderInfo.rootFolderType, folderInfo.parentId);
     const url = getCategoryUrl(categoryType, oformFromFolderId);
     const filterParamsStr = filter.toUrlParams();
 
@@ -117,7 +120,6 @@ export default inject(
     clientLoadingStore,
   }) => {
     return {
-      categoryType: filesStore.categoryType,
       getCategoryTitle: oformsStore.getCategoryTitle,
 
       oformFromFolderId: oformsStore.oformFromFolderId,
@@ -141,6 +143,7 @@ export default inject(
       },
 
       oformsLoadError: oformsStore.oformsLoadError,
+      getFolderInfo: filesStore.getFolderInfo,
     };
   }
 )(withTranslation("Common")(observer(SectionHeaderContent)));

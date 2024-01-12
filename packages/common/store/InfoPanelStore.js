@@ -2,7 +2,7 @@ import { makeAutoObservable } from "mobx";
 
 import { getUserById } from "../api/people";
 import { combineUrl, getUserRole } from "../utils";
-import { FolderType } from "../constants";
+import { FolderType, ShareAccessRights } from "../constants";
 import config from "PACKAGE_FILE";
 import Filter from "../api/people/filter";
 import { getRoomInfo } from "../api/rooms";
@@ -169,6 +169,9 @@ class InfoPanelStore {
       icon: this.getInfoPanelItemIcon(selection, 32),
       isContextMenuSelection: false,
       wasContextMenuSelection: !!isContextMenuSelection,
+      canCopyPublicLink:
+        selection.access === ShareAccessRights.RoomManager ||
+        selection.access === ShareAccessRights.None,
     };
   };
 
@@ -195,13 +198,22 @@ class InfoPanelStore {
     const currentFolderRoomId =
       this.selectedFolderStore.pathParts &&
       this.selectedFolderStore.pathParts[1]?.id;
-    const prevRoomId = this.selectionParentRoom?.id;
+    // const prevRoomId = this.selectionParentRoom?.id;
 
-    if (!currentFolderRoomId || currentFolderRoomId === prevRoomId) return;
+    // if (!currentFolderRoomId || currentFolderRoomId === prevRoomId) return;
+    if (!currentFolderRoomId) return;
 
     const newSelectionParentRoom = await getRoomInfo(currentFolderRoomId);
 
-    if (prevRoomId === newSelectionParentRoom.id) return;
+    // if (prevRoomId === newSelectionParentRoom.id) return;
+
+    const roomIndex = this.selectedFolderStore.navigationPath.findIndex(
+      (f) => f.id === currentFolderRoomId
+    );
+    if (roomIndex > -1) {
+      this.selectedFolderStore.navigationPath[roomIndex].title =
+        newSelectionParentRoom.title;
+    }
 
     this.setSelectionParentRoom(
       this.normalizeSelection(newSelectionParentRoom)
@@ -230,7 +242,7 @@ class InfoPanelStore {
             item.roomType,
             true
           )
-        ? item.logo.medium
+        ? item.logo?.medium
         : item.icon
         ? item.icon
         : this.settingsStore.getIcon(size, null, null, null, item.roomType)

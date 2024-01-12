@@ -27,6 +27,7 @@ import {
   StyledCrossIcon,
 } from "./StyledFilterBlock";
 import { FilterSelectorTypes } from "../../../constants";
+import { GroupsSelector } from "@docspace/client/src/components/groups-selector";
 
 //TODO: fix translate
 const FilterBlock = ({
@@ -382,7 +383,11 @@ const FilterBlock = ({
                 headerLabel={selectorLabel}
               />
             ) : showSelector.type === "groupSelector" ? (
-              <div>Group selector</div>
+              <GroupsSelector
+                className="group-selector"
+                onBackClick={onArrowClick}
+                headerLabel={selectorLabel}
+              />
             ) : (
               <RoomSelector
                 className="people-selector"

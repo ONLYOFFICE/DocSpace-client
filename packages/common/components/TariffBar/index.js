@@ -25,6 +25,7 @@ const TariffBar = ({
   isLicenseDateExpired,
   isTrial,
   standalone,
+  paymentDate,
 }) => {
   const navigate = useNavigate();
   const { t } = useTranslation("Common");
@@ -63,8 +64,14 @@ const TariffBar = ({
           label: t("Common:TrialDaysLeft", { count: trialDaysLeft }),
           color: "#ED7309",
         };
+      } else {
+        if (isLicenseDateExpired)
+          return { label: t("Common:SubscriptionExpired"), color: "#F24724" };
+        return {
+          label: t("Common:SubscriptionIsExpiring", { date: paymentDate }),
+          color: "#ED7309",
+        };
       }
-      return { label: t("Common:SubscriptionExpired"), color: "#F24724" };
     }
   };
 
@@ -74,12 +81,13 @@ const TariffBar = ({
   return (
     <StyledWrapper>
       <Text
+        as="div"
         fontSize="12px"
         fontWeight={600}
         lineHeight="16px"
         color={tariffBar.color}
         onClick={onClick}
-        truncate
+        truncate={true}
       >
         {tariffBar.label}
       </Text>
@@ -96,8 +104,12 @@ export default inject(({ auth }) => {
     isEnterprise,
   } = auth;
   const { isFreeTariff, isNonProfit, isTrial } = currentQuotaStore;
-  const { isGracePeriod, isLicenseExpiring, isLicenseDateExpired } =
-    currentTariffStatusStore;
+  const {
+    isGracePeriod,
+    isLicenseExpiring,
+    isLicenseDateExpired,
+    paymentDate,
+  } = currentTariffStatusStore;
   const { standalone } = settingsStore;
 
   return {
@@ -110,5 +122,6 @@ export default inject(({ auth }) => {
     isLicenseDateExpired,
     isTrial,
     standalone,
+    paymentDate,
   };
 })(observer(TariffBar));

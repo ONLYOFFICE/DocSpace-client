@@ -15,6 +15,11 @@ export const StyledHeader = styled.div`
   }
 
   .action-button {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-direction: row;
+
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
@@ -24,6 +29,7 @@ export const StyledHeader = styled.div`
             margin-left: 16px;
           `}
     @media ${tablet} {
+      flex-direction: row-reverse;
       ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`

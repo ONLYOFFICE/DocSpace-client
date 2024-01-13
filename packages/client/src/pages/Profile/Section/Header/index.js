@@ -19,6 +19,7 @@ import { DeleteOwnerProfileDialog } from "SRC_DIR/components/dialogs";
 import { StyledHeader } from "./StyledHeader";
 import RoomsFilter from "@docspace/common/api/rooms/filter";
 import { RoomSearchArea } from "@docspace/common/constants";
+import TariffBar from "@docspace/common/components/TariffBar";
 
 const Header = (props) => {
   const {
@@ -143,18 +144,21 @@ const Header = (props) => {
         {t("Profile:MyProfile")}
         {profile?.isLDAP && ` (${t("PeopleTranslations:LDAPLbl")})`}
       </Headline>
-      {((isAdmin && !profile?.isOwner) || isMe) && (
-        <ContextMenuButton
-          className="action-button"
-          directionX="right"
-          title={t("Common:Actions")}
-          iconName={VerticalDotsReactSvgUrl}
-          size={17}
-          getData={getUserContextOptions}
-          isDisabled={false}
-          usePortal={false}
-        />
-      )}
+      <div className="action-button">
+        {((isAdmin && !profile?.isOwner) || isMe) && (
+          <ContextMenuButton
+            directionX="right"
+            title={t("Common:Actions")}
+            iconName={VerticalDotsReactSvgUrl}
+            size={17}
+            getData={getUserContextOptions}
+            isDisabled={false}
+            usePortal={false}
+          />
+        )}
+
+        <TariffBar />
+      </div>
 
       {deleteSelfProfileDialog && (
         <DeleteSelfProfileDialog

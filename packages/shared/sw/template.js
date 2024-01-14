@@ -1,5 +1,8 @@
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-undef */
 importScripts(
-  "https://storage.googleapis.com/workbox-cdn/releases/6.3.0/workbox-sw.js"
+  "https://storage.googleapis.com/workbox-cdn/releases/6.3.0/workbox-sw.js",
 );
 
 workbox.setConfig({
@@ -24,7 +27,7 @@ const prefix = "docspace";
 
 // Setting custom cache name
 setCacheNameDetails({
-  prefix: prefix,
+  prefix,
   precache: "precache",
   runtime: "runtime",
   suffix: "v1.0.0",
@@ -50,7 +53,7 @@ registerRoute(
   new StaleWhileRevalidate({
     // Use a custom cache name.
     cacheName: `${prefix}-translation`,
-  })
+  }),
 );
 
 // CONTENT

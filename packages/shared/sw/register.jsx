@@ -1,13 +1,16 @@
-import React from "react";
-import ReactDOM from "react-dom";
-
-import { Workbox } from "workbox-window";
-import { SnackBar } from "@docspace/shared/components/snackbar";
+/* eslint-disable no-undef */
+/* eslint-disable no-console */
+/* eslint-disable react/prop-types */
+// import React from "react";
+// import ReactDOM from "react-dom";
 import i18n from "i18next";
-import { useTranslation, initReactI18next } from "react-i18next";
-import Backend from "@docspace/shared/utils/i18next-http-backend";
-import { LANGUAGE } from "@docspace/shared/constants";
-import { getCookie } from "@docspace/shared/utils";
+import { Workbox } from "workbox-window";
+import { initReactI18next } from "react-i18next";
+
+// import { SnackBar } from "../components/snackbar";
+import Backend from "../utils/i18next-http-backend";
+import { LANGUAGE } from "../constants";
+import { getCookie } from "../utils/cookie";
 
 i18n
   .use(Backend)
@@ -16,11 +19,11 @@ i18n
     lng: getCookie(LANGUAGE) || "en",
     fallbackLng: "en",
     load: "currentOnly",
-    //debug: true,
+    // debug: true,
 
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
-      format: function (value, format) {
+      format(value, format) {
         if (format === "lowercase") return value.toLowerCase();
         return value;
       },
@@ -35,25 +38,27 @@ i18n
     },
   });
 
-const SnackBarWrapper = (props) => {
-  const { t, ready } = useTranslation("Common", { i18n });
+// const SnackBarWrapper = (props) => {
+//   const { t, ready } = useTranslation("Common", { i18n });
 
-  if (ready) {
-    const barConfig = {
-      parentElementId: "snackbar",
-      text: t("Common:NewVersionAvailable"),
-      btnText: t("Common:Load"),
-      onAction: () => props.onButtonClick(),
-      opacity: 1,
-      countDownTime: 5 * 60 * 1000,
-    };
+//   const { onButtonClick } = props;
 
-    return <SnackBar {...barConfig} />;
-  }
-  return <></>;
-};
+//   if (ready) {
+//     const barConfig = {
+//       parentElementId: "snackbar",
+//       text: t("Common:NewVersionAvailable"),
+//       btnText: t("Common:Load"),
+//       onAction: () => onButtonClick(),
+//       opacity: 1,
+//       countDownTime: 5 * 60 * 1000,
+//     };
 
-export default function () {
+//     return <SnackBar {...barConfig} />;
+//   }
+//   return null;
+// };
+
+function register() {
   if (
     process.env.NODE_ENV !== "production" &&
     !("serviceWorker" in navigator)
@@ -64,10 +69,10 @@ export default function () {
 
   const wb = new Workbox(`/sw.js`);
 
-  const showSkipWaitingPrompt = (event) => {
+  const showSkipWaitingPrompt = () => {
     console.log(
       `A new service worker has installed, but it can't activate` +
-        `until all tabs running the current version have fully unloaded.`
+        `until all tabs running the current version have fully unloaded.`,
     );
 
     function refresh() {
@@ -85,15 +90,15 @@ export default function () {
       snackbarNode.id = "snackbar";
       document.body.appendChild(snackbarNode);
 
-      ReactDOM.render(
-        <SnackBarWrapper
-          onButtonClick={() => {
-            snackbarNode.remove();
-            refresh();
-          }}
-        />,
-        document.getElementById("snackbar")
-      );
+      // ReactDOM.render(
+      //   <SnackBarWrapper
+      //     onButtonClick={() => {
+      //       snackbarNode.remove();
+      //       refresh();
+      //     }}
+      //   />,
+      //   document.getElementById("snackbar"),
+      // );
 
       localStorage.setItem("sw_need_activation", true);
     } catch (e) {
@@ -126,9 +131,11 @@ export default function () {
               console.error("SW update timer FAILED", e);
             });
           },
-          60 * 60 * 1000
+          60 * 60 * 1000,
         );
       }
     })
     .catch((err) => console.error("Service worker registration failed", err));
 }
+
+export default register;

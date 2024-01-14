@@ -1,3 +1,8 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-restricted-globals */
+/* eslint-disable func-names */
+/* eslint-disable no-console */
 function clearCaches() {
   try {
     if (!("caches" in window)) return;
@@ -12,7 +17,7 @@ function clearCaches() {
           ) {
             return caches.delete(key);
           }
-        })
+        }),
       );
     });
   } catch (error) {
@@ -28,7 +33,7 @@ export default function () {
   return navigator.serviceWorker
     .getRegistrations()
     .then(function (registrations) {
-      for (let registration of registrations) {
+      for (const registration of registrations) {
         registration
           .unregister()
           .then(function () {

@@ -51,11 +51,11 @@ import { isDesktop } from "@docspace/shared/utils";
 import { Events } from "@docspace/shared/enums";
 
 import { connectedCloudsTypeTitleTranslation } from "@docspace/client/src/helpers/filesUtils";
-import { getOAuthToken } from "@docspace/common/utils";
-import api from "@docspace/common/api";
+import { getOAuthToken } from "@docspace/shared/utils/common";
+import api from "@docspace/shared/api";
 import { FolderType } from "@docspace/shared/enums";
-import FilesFilter from "@docspace/common/api/files/filter";
-import { getFileLink } from "@docspace/common/api/files";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { getFileLink } from "@docspace/shared/api/files";
 
 const LOADER_TIMER = 500;
 let loadingTime;

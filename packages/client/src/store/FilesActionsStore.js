@@ -23,7 +23,7 @@ import {
   createFolder,
   moveToFolder,
   getFolder,
-} from "@docspace/common/api/files";
+} from "@docspace/shared/api/files";
 import {
   ConflictResolveType,
   FileAction,
@@ -41,15 +41,15 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 import { isDesktop } from "@docspace/shared/utils";
 import { getCategoryType } from "SRC_DIR/helpers/utils";
-import { muteRoomNotification } from "@docspace/common/api/settings";
+import { muteRoomNotification } from "@docspace/shared/api/settings";
 import { CategoryType } from "SRC_DIR/helpers/constants";
-import RoomsFilter from "@docspace/common/api/rooms/filter";
-import AccountsFilter from "@docspace/common/api/people/filter";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import AccountsFilter from "@docspace/shared/api/people/filter";
 import { RoomSearchArea } from "@docspace/shared/enums";
-import { getObjectByLocation } from "@docspace/common/utils";
+import { getObjectByLocation } from "@docspace/shared/utils/common";
 import { Events } from "@docspace/shared/enums";
 import uniqueid from "lodash/uniqueId";
-import FilesFilter from "@docspace/common/api/files/filter";
+import FilesFilter from "@docspace/shared/api/files/filter";
 import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
@@ -870,9 +870,9 @@ class FilesActionStore {
     const { setUnsubscribe } = this.dialogsStore;
     const { filter, fetchFiles } = this.filesStore;
 
-    return removeShareFiles(fileIds, folderIds)
-      .then(() => setUnsubscribe(false))
-      .then(() => fetchFiles(this.selectedFolderStore.id, filter, true, true));
+    // return removeShareFiles(fileIds, folderIds)
+    //   .then(() => setUnsubscribe(false))
+    //   .then(() => fetchFiles(this.selectedFolderStore.id, filter, true, true));
   };
 
   lockFileAction = async (id, locked) => {

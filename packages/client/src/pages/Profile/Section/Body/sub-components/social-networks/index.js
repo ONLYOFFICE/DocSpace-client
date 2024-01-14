@@ -6,13 +6,13 @@ import { Text } from "@docspace/shared/components/text";
 import { SocialButton } from "@docspace/shared/components/social-button";
 import { toastr } from "@docspace/shared/components/toast";
 
-import { getAuthProviders } from "@docspace/common/api/settings";
-import { unlinkOAuth, linkOAuth } from "@docspace/common/api/people";
+import { getAuthProviders } from "@docspace/shared/api/settings";
+import { unlinkOAuth, linkOAuth } from "@docspace/shared/api/people";
 import {
   getProviderTranslation,
   getOAuthToken,
   getLoginLink,
-} from "@docspace/common/utils";
+} from "@docspace/shared/utils/common";
 import { PROVIDERS_DATA } from "@docspace/shared/constants";
 
 import { StyledWrapper } from "./styled-social-networks";

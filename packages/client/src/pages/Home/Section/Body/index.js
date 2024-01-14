@@ -10,7 +10,7 @@ import withLoader from "../../../../HOCs/withLoader";
 import TableView from "./TableView/TableContainer";
 import withHotkeys from "../../../../HOCs/withHotkeys";
 import { Consumer, isMobile, isTablet } from "@docspace/shared/utils";
-import { isElementInViewport } from "@docspace/common/utils";
+import { isElementInViewport } from "@docspace/shared/utils/common";
 
 import { DeviceType } from "@docspace/shared/enums";
 

@@ -5,7 +5,7 @@ import { Button } from "@docspace/shared/components/button";
 import { PROVIDERS_DATA } from "@docspace/shared/constants";
 import styled, { css } from "styled-components";
 import { ReactSVG } from "react-svg";
-import { getProviderTranslation } from "../../utils";
+import { getProviderTranslation } from "@docspace/shared/utils/common";
 import SsoReactSvgUrl from "PUBLIC_DIR/images/sso.react.svg?url";
 import { mobile } from "@docspace/shared/utils";
 

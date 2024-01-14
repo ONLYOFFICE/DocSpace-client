@@ -5,7 +5,7 @@ import { Aside } from "@docspace/shared/components/aside";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import PeopleSelector from "@docspace/client/src/components/PeopleSelector";
 import { withTranslation } from "react-i18next";
-import Filter from "@docspace/common/api/people/filter";
+import Filter from "@docspace/shared/api/people/filter";
 import { EmployeeType, DeviceType } from "@docspace/shared/enums";
 import { Portal } from "@docspace/shared/components/portal";
 
@@ -152,8 +152,8 @@ export default inject(
     const room = selection.length
       ? selection[0]
       : bufferSelection
-      ? bufferSelection
-      : selectedFolderStore;
+        ? bufferSelection
+        : selectedFolderStore;
 
     const { currentDeviceType } = settingsStore;
 

@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { getSettingsThirdParty } from "@docspace/common/api/files";
+import { getSettingsThirdParty } from "@docspace/shared/api/files";
 import {
   getBackupStorage,
   getStorageRegions,
-} from "@docspace/common/api/settings";
+} from "@docspace/shared/api/settings";
 import RestoreBackupLoader from "@docspace/common/components/Loaders/RestoreBackupLoader";
 import { toastr } from "@docspace/shared/components/toast";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";

@@ -2,8 +2,8 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
 
-import api from "@docspace/common/api";
-import RoomsFilter from "@docspace/common/api/rooms/filter";
+import api from "@docspace/shared/api";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { RoomsType } from "@docspace/shared/enums";
 import { iconSize32 } from "@docspace/shared/utils/image-helpers";
 

@@ -1,9 +1,9 @@
 import React from "react";
 
 // @ts-ignore
-import { getFolder, getFolderInfo } from "@docspace/common/api/files";
+import { getFolder, getFolderInfo } from "@docspace/shared/api/files";
 // @ts-ignore
-import FilesFilter from "@docspace/common/api/files/filter";
+import FilesFilter from "@docspace/shared/api/files/filter";
 // @ts-ignore
 import { iconSize32 } from "@docspace/shared/utils/image-helpers";
 

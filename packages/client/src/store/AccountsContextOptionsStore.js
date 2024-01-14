@@ -21,10 +21,10 @@ import { toastr } from "@docspace/shared/components/toast";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { EmployeeStatus, FilterSubject } from "@docspace/shared/enums";
-import { resendUserInvites } from "@docspace/common/api/people";
+import { resendUserInvites } from "@docspace/shared/api/people";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
-import RoomsFilter from "@docspace/common/api/rooms/filter";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
 
 const PROXY_HOMEPAGE_URL = combineUrl(window.DocSpaceConfig?.proxy?.url, "/");

@@ -1,12 +1,12 @@
 import { makeAutoObservable } from "mobx";
 
-import { getUserById } from "../api/people";
-import { getUserRole } from "../utils";
+import { getUserById } from "@docspace/shared/api/people";
+import { getUserRole } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { FolderType, ShareAccessRights } from "@docspace/shared/enums";
 import config from "PACKAGE_FILE";
-import Filter from "../api/people/filter";
-import { getRoomInfo } from "../api/rooms";
+import Filter from "@docspace/shared/api/people/filter";
+import { getRoomInfo } from "@docspace/shared/api/rooms";
 
 const observedKeys = [
   "id",

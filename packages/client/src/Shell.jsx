@@ -11,7 +11,7 @@ import { ThemeProvider } from "@docspace/shared/components/theme-provider";
 import { SnackBar } from "@docspace/shared/components/snackbar";
 import { Portal } from "@docspace/shared/components/portal";
 
-import { updateTempContent } from "@docspace/common/utils";
+import { updateTempContent } from "@docspace/shared/utils/common";
 import { getLogoFromPath } from "@docspace/shared/utils";
 
 import store from "client/store";
@@ -30,7 +30,7 @@ import MainBar from "./components/MainBar";
 
 import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
 import { DeviceType, IndexedDBStores } from "@docspace/shared/enums";
-import { getRestoreProgress } from "@docspace/common/api/portal";
+import { getRestoreProgress } from "@docspace/shared/api/portal";
 import { useTheme } from "styled-components";
 
 const Shell = ({ items = [], page = "home", ...rest }) => {

@@ -9,7 +9,7 @@ import React, {
 import { isMobile as isMobileUtils, isTablet } from "@docspace/shared/utils";
 
 import { FileStatus } from "@docspace/shared/enums";
-import { getFileExtension } from "../../utils";
+import { getFileExtension } from "@docspace/shared/utils/common";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 
 import {

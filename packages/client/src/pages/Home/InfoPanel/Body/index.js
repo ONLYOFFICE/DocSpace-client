@@ -5,7 +5,7 @@ import ViewHelper from "./helpers/ViewHelper";
 import ItemTitle from "./sub-components/ItemTitle";
 
 import { StyledInfoPanelBody } from "./styles/common";
-import { getRoomInfo } from "@docspace/common/api/rooms";
+import { getRoomInfo } from "@docspace/shared/api/rooms";
 
 const InfoPanelBodyContent = ({
   selection,

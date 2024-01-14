@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable prefer-promise-reject-errors */
 /* eslint-disable class-methods-use-this */
 import firebase from "firebase/app";

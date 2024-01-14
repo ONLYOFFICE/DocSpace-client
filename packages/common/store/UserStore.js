@@ -2,7 +2,7 @@ import React from "react";
 
 import { makeAutoObservable, runInAction } from "mobx";
 import { Trans } from "react-i18next";
-import api from "../api";
+import api from "@docspace/shared/api";
 import { EmployeeActivationStatus } from "@docspace/shared/enums";
 
 class UserStore {

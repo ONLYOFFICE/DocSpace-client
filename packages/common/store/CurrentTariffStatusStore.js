@@ -1,11 +1,11 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import moment from "moment-timezone";
 
-import { getDaysLeft, getDaysRemaining } from "../utils";
+import { getDaysLeft, getDaysRemaining } from "@docspace/shared/utils/common";
 
-import api from "../api";
+import api from "@docspace/shared/api";
 import { TariffState } from "@docspace/shared/enums";
-import { getUserByEmail } from "../api/people";
+import { getUserByEmail } from "@docspace/shared/api/people";
 
 class CurrentTariffStatusStore {
   portalTariffStatus = {};

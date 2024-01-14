@@ -8,10 +8,10 @@ import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Selector } from "@docspace/shared/components/selector";
 import { toastr } from "@docspace/shared/components/toast";
 
-import { getUserRole } from "@docspace/common/utils";
-import Filter from "@docspace/common/api/people/filter";
+import { getUserRole } from "@docspace/shared/utils/common";
+import Filter from "@docspace/shared/api/people/filter";
 import Loaders from "@docspace/common/components/Loaders";
-import { getMembersList } from "@docspace/common/api/people";
+import { getMembersList } from "@docspace/shared/api/people";
 import useLoadingWithTimeout from "SRC_DIR/Hooks/useLoadingWithTimeout";
 import { ShareAccessRights } from "@docspace/shared/enums";
 import { LOADER_TIMEOUT } from "@docspace/shared/constants";

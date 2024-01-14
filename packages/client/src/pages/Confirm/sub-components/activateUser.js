@@ -11,8 +11,8 @@ import {
   changePassword,
   updateActivationStatus,
   updateUser,
-} from "@docspace/common/api/people";
-import { createPasswordHash } from "@docspace/common/utils";
+} from "@docspace/shared/api/people";
+import { createPasswordHash } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/shared/components/toast";
 import {
   StyledPage,

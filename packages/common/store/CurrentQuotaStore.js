@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx";
 import { toastr } from "@docspace/shared/components/toast";
 
-import api from "../api";
+import api from "@docspace/shared/api";
 import { PortalFeaturesLimitations } from "@docspace/shared/enums";
 
 const MANAGER = "manager";

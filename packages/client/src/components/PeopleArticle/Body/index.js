@@ -2,7 +2,7 @@
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
 import React from "react";
 import { withTranslation } from "react-i18next";
-import Filter from "@docspace/common/api/people/filter";
+import Filter from "@docspace/shared/api/people/filter";
 import Loaders from "@docspace/common/components/Loaders";
 import { inject, observer } from "mobx-react";
 import { getSelectedGroup } from "../../../helpers/people-helpers";

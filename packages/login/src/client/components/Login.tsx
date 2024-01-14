@@ -8,7 +8,7 @@ import {
   getProviderTranslation,
   getOAuthToken,
   getLoginLink,
-} from "@docspace/common/utils";
+} from "@docspace/shared/utils/common";
 import { checkIsSSR } from "@docspace/shared/utils";
 import { PROVIDERS_DATA } from "@docspace/shared/constants";
 import { Link } from "@docspace/shared/components/link";
@@ -22,7 +22,7 @@ import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import SSOIcon from "PUBLIC_DIR/images/sso.react.svg";
 import { Dark, Base } from "@docspace/shared/themes";
 import { useMounted } from "../helpers/useMounted";
-import { getBgPattern } from "@docspace/common/utils";
+import { getBgPattern } from "@docspace/shared/utils/common";
 import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 import { getLogoFromPath, getSystemTheme } from "@docspace/shared/utils";
 import { TenantStatus } from "@docspace/shared/enums";

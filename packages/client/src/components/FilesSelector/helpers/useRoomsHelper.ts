@@ -1,9 +1,9 @@
 import React from "react";
 
 // @ts-ignore
-import { getRooms } from "@docspace/common/api/rooms";
+import { getRooms } from "@docspace/shared/api/rooms";
 // @ts-ignore
-import RoomsFilter from "@docspace/common/api/rooms/filter";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
 // @ts-ignore
 import { RoomsType } from "@docspace/shared/enums";
 // @ts-ignore

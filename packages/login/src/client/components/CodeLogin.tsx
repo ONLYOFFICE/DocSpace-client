@@ -9,7 +9,7 @@ import { ReactSVG } from "react-svg";
 import { LoginFormWrapper } from "./StyledLogin";
 import BarLogo from "PUBLIC_DIR/images/danger.alert.react.svg";
 import { Dark, Base } from "@docspace/shared/themes";
-import { getBgPattern } from "@docspace/common/utils";
+import { getBgPattern } from "@docspace/shared/utils/common";
 import { getLogoFromPath } from "@docspace/shared/utils";
 import { useMounted } from "../helpers/useMounted";
 import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";

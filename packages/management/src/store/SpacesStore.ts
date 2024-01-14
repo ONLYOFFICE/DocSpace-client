@@ -6,7 +6,7 @@ import {
   setPortalName,
   createNewPortal,
   checkDomain,
-} from "@docspace/common/api/management";
+} from "@docspace/shared/api/management";
 import { TNewPortalData } from "SRC_DIR/types/spaces";
 
 class SpacesStore {

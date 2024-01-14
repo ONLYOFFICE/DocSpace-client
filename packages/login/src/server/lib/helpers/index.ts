@@ -9,7 +9,7 @@ import {
   getAppearanceTheme,
   getLogoUrls,
   getCurrentSsoSettings,
-} from "@docspace/common/api/settings";
+} from "@docspace/shared/api/settings";
 
 import { TenantStatus } from "@docspace/shared/enums";
 

@@ -29,7 +29,7 @@ import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
-import FilesFilter from "@docspace/common/api/files/filter";
+import FilesFilter from "@docspace/shared/api/files/filter";
 import { DeviceType } from "@docspace/shared/enums";
 
 const SharingBodyStyle = { height: `calc(100vh - 156px)` };

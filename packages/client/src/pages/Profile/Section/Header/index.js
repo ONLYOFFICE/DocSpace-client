@@ -17,7 +17,7 @@ import { DeleteSelfProfileDialog } from "SRC_DIR/components/dialogs";
 import { DeleteOwnerProfileDialog } from "SRC_DIR/components/dialogs";
 
 import { StyledHeader } from "./StyledHeader";
-import RoomsFilter from "@docspace/common/api/rooms/filter";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { RoomSearchArea } from "@docspace/shared/enums";
 
 const Header = (props) => {

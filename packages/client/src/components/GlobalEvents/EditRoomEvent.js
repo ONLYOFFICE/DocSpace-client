@@ -3,8 +3,8 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { EditRoomDialog } from "../dialogs";
 import { Encoder } from "@docspace/shared/utils/encoder";
-import api from "@docspace/common/api";
-import { getRoomInfo } from "@docspace/common/api/rooms";
+import api from "@docspace/shared/api";
+import { getRoomInfo } from "@docspace/shared/api/rooms";
 import { toastr } from "@docspace/shared/components/toast";
 
 const EditRoomEvent = ({

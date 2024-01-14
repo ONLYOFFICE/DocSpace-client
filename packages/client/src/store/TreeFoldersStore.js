@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import { getFoldersTree, getSubfolders } from "@docspace/common/api/files";
+import { getFoldersTree, getSubfolders } from "@docspace/shared/api/files";
 import { FolderType } from "@docspace/shared/enums";
 
 class TreeFoldersStore {

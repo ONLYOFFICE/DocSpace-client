@@ -13,7 +13,7 @@ import {
   deleteBackupHistory,
   getBackupHistory,
   startRestore,
-} from "@docspace/common/api/portal";
+} from "@docspace/shared/api/portal";
 import { toastr } from "@docspace/shared/components/toast";
 import Loaders from "@docspace/common/components/Loaders";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";

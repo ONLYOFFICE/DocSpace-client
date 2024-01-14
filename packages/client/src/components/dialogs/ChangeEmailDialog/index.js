@@ -9,7 +9,7 @@ import { toastr } from "@docspace/shared/components/toast";
 
 import { withTranslation } from "react-i18next";
 import ModalDialogContainer from "../ModalDialogContainer";
-import { sendInstructionsToChangeEmail } from "@docspace/common/api/people";
+import { sendInstructionsToChangeEmail } from "@docspace/shared/api/people";
 
 import { ErrorKeys } from "@docspace/shared/enums";
 import { inject, observer } from "mobx-react";

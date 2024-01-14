@@ -1,8 +1,8 @@
-import api from "@docspace/common/api";
+import api from "@docspace/shared/api";
 import {
   setFavoritesSetting,
   setRecentSetting,
-} from "@docspace/common/api/files";
+} from "@docspace/shared/api/files";
 import { RoomsType } from "@docspace/shared/enums";
 import axios from "axios";
 import { makeAutoObservable } from "mobx";

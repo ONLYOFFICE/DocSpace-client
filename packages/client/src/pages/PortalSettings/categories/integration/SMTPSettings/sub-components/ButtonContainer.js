@@ -6,7 +6,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import {
   getSendingTestMailStatus,
   sendingTestMail,
-} from "@docspace/common/api/settings";
+} from "@docspace/shared/api/settings";
 
 import { ButtonStyledComponent } from "../StyledComponent";
 import { SMTPSettingsFields } from "../constants";

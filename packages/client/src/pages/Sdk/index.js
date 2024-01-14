@@ -11,7 +11,7 @@ import {
   frameCallbackData,
   createPasswordHash,
   frameCallCommand,
-} from "@docspace/common/utils";
+} from "@docspace/shared/utils/common";
 import { RoomsType } from "@docspace/shared/enums";
 
 const Sdk = ({

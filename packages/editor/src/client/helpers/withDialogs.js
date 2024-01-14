@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { getPresignedUri, getReferenceData } from "@docspace/common/api/files";
-import { getRestoreProgress } from "@docspace/common/api/portal";
+import { getPresignedUri, getReferenceData } from "@docspace/shared/api/files";
+import { getRestoreProgress } from "@docspace/shared/api/portal";
 import { FilesSelectorFilterTypes, FilterType } from "@docspace/shared/enums";
 import { EDITOR_ID } from "@docspace/shared/constants";
 import { useTranslation } from "react-i18next";

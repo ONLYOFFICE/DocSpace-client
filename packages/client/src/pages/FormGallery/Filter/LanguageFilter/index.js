@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 
 import { flagsIcons } from "@docspace/shared/utils/image-flags";
-import { convertToCulture } from "@docspace/common/utils";
+import { convertToCulture } from "@docspace/shared/utils/common";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import { isMobile } from "@docspace/shared/utils";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";

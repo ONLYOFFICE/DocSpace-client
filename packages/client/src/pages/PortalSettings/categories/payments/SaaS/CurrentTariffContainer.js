@@ -4,7 +4,7 @@ import { Text } from "@docspace/shared/components/text";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { PortalFeaturesLimitations } from "@docspace/shared/enums";
-import { getConvertedSize } from "@docspace/common/utils";
+import { getConvertedSize } from "@docspace/shared/utils/common";
 import { mobile } from "@docspace/shared/utils";
 
 const StyledCurrentTariffContainer = styled.div`

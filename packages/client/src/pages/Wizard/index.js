@@ -24,8 +24,8 @@ import withCultureNames from "@docspace/common/hoc/withCultureNames";
 import {
   createPasswordHash,
   convertLanguage,
-  setCookie,
-} from "@docspace/common/utils";
+} from "@docspace/shared/utils/common";
+import { setCookie } from "@docspace/shared/utils/cookie";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
 import { LANGUAGE } from "@docspace/shared/constants";

@@ -11,7 +11,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import {
   getPaymentAccount,
   sendDeletePortalEmail,
-} from "@docspace/common/api/portal";
+} from "@docspace/shared/api/portal";
 import { isDesktop } from "@docspace/shared/utils";
 import { EmployeeActivationStatus } from "@docspace/shared/enums";
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";

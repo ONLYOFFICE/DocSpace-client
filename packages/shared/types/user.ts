@@ -5,4 +5,10 @@ export type TUser = {
   email: string;
   id: string;
   theme: ThemeKeys;
+  isOwner: boolean;
+  isAdmin: boolean;
+  isVisitor: boolean;
+  isCollaborator: boolean;
+  listAdminModules?: string[];
+  userName: string;
 };

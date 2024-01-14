@@ -1,4 +1,4 @@
-import { getNewFiles } from "@docspace/common/api/files";
+import { getNewFiles } from "@docspace/shared/api/files";
 import { ShareAccessRights } from "@docspace/shared/enums";
 import { makeAutoObservable, runInAction } from "mobx";
 import { Events } from "@docspace/shared/enums";

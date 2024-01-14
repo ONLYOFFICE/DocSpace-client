@@ -11,9 +11,9 @@ import { toastr } from "@docspace/shared/components/toast";
 import { parseAddresses } from "@docspace/shared/utils";
 import { ComboBox } from "@docspace/shared/components/combobox";
 
-import Filter from "@docspace/common/api/people/filter";
+import Filter from "@docspace/shared/api/people/filter";
 import BetaBadge from "@docspace/common/components/BetaBadge";
-import { getMembersList } from "@docspace/common/api/people";
+import { getMembersList } from "@docspace/shared/api/people";
 import { ShareAccessRights } from "@docspace/shared/enums";
 import withCultureNames from "@docspace/common/hoc/withCultureNames";
 import { isBetaLanguage } from "@docspace/shared/utils";

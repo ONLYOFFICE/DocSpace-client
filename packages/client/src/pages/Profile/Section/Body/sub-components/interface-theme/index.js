@@ -11,7 +11,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { ThemeKeys } from "@docspace/shared/enums";
 
 import { mobile, getSystemTheme, getEditorTheme } from "@docspace/shared/utils";
-import { showLoader } from "@docspace/common/utils";
+import { showLoader } from "@docspace/shared/utils/common";
 
 import ThemePreview from "./theme-preview";
 

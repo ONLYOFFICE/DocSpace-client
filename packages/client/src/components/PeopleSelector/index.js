@@ -6,9 +6,9 @@ import { I18nextProvider, withTranslation } from "react-i18next";
 
 import { Selector } from "@docspace/shared/components/selector";
 
-import { getUserRole } from "@docspace/common/utils";
-import Filter from "@docspace/common/api/people/filter";
-import { getUserList } from "@docspace/common/api/people";
+import { getUserRole } from "@docspace/shared/utils/common";
+import Filter from "@docspace/shared/api/people/filter";
+import { getUserList } from "@docspace/shared/api/people";
 import Loaders from "@docspace/common/components/Loaders";
 import { EmployeeStatus } from "@docspace/shared/enums";
 import { LOADER_TIMEOUT } from "@docspace/shared/constants";

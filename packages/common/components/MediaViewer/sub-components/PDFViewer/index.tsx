@@ -7,9 +7,9 @@ import React, {
 } from "react";
 import { isDesktop, isMobile } from "react-device-detect";
 
-import { loadScript } from "../../../../utils";
+import { loadScript } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { getDocumentServiceLocation } from "../../../../api/files";
+import { getDocumentServiceLocation } from "@docspace/shared/api/files";
 
 import PDFViewerProps, { BookMark } from "./PDFViewer.props";
 import ViewerLoader from "../ViewerLoader";

@@ -3272,6 +3272,7 @@ __metadata:
     "@types/react-virtualized": ^9.21.29
     "@types/react-window": ^1.8.8
     "@types/react-window-infinite-loader": ^1.0.9
+    "@types/sjcl": ^1.0.34
     "@typescript-eslint/eslint-plugin": ^6.12.0
     "@typescript-eslint/parser": ^6.12.0
     "@use-gesture/react": ^10.2.24
@@ -8778,6 +8779,13 @@ __metadata:
     "@types/mime": "*"
     "@types/node": "*"
   checksum: 0ff4b3703cf20ba89c9f9e345bc38417860a88e85863c8d6fe274a543220ab7f5f647d307c60a71bb57dc9559f0890a661e8dc771a6ec5ef195d91c8afc4a893
+  languageName: node
+  linkType: hard
+
+"@types/sjcl@npm:^1.0.34":
+  version: 1.0.34
+  resolution: "@types/sjcl@npm:1.0.34"
+  checksum: 2530e4662f22e0306af73adad8342655ed353af09a42271f953150434b73f5cae0a45a6462537880ab4b36920d2b49994c313467d418fbac6fea5e25127dc24c
   languageName: node
   linkType: hard
 

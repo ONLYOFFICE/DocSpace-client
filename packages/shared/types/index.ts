@@ -9,6 +9,12 @@ export type TTranslation = (key: string) => string;
 
 export type { TUser } from "./user";
 
+export type TI18n = {
+  language: string;
+  changeLanguage: (l: string) => string;
+  t: (...key: string[]) => string;
+};
+
 declare module "styled-components" {
   export interface DefaultTheme extends TTheme {}
 }
@@ -22,7 +28,19 @@ declare global {
     };
     timezone: string;
     snackbar?: {};
-    DocSpaceConfig: { wrongPortalNameUrl?: string };
+    DocSpace: {
+      navigate: (path: string) => void;
+    };
+    DocSpaceConfig: {
+      wrongPortalNameUrl?: string;
+      api: {
+        origin?: string;
+        prefix?: string;
+      };
+      proxy: {
+        url?: string;
+      };
+    };
     AscDesktopEditor: { execCommand: (key: string, value: string) => void };
     cloudCryptoCommand: (
       type: string,

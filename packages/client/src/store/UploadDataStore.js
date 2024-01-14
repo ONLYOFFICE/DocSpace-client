@@ -16,7 +16,7 @@ import {
   fileCopyAs,
   getFolder,
   checkIsFileExist,
-} from "@docspace/common/api/files";
+} from "@docspace/shared/api/files";
 import { toastr } from "@docspace/shared/components/toast";
 
 import {

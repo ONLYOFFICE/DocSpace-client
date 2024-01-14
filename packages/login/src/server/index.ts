@@ -1,4 +1,4 @@
-import { getAppearanceTheme } from "@docspace/common/api/settings";
+import { getAppearanceTheme } from "@docspace/shared/api/settings";
 import express, { Response } from "express";
 import template from "./lib/template";
 import path from "path";
@@ -15,8 +15,8 @@ import cookieParser from "cookie-parser";
 
 import { LANGUAGE, COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
 import { getLanguage } from "@docspace/shared/utils";
-import { initSSR } from "@docspace/common/api/client";
-import { checkIsAuthenticated } from "@docspace/common/api/user";
+import { initSSR } from "@docspace/shared/api/client";
+import { checkIsAuthenticated } from "@docspace/shared/api/user";
 import dns from "dns";
 import { xss } from "express-xss-sanitizer";
 

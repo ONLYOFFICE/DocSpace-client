@@ -1,7 +1,7 @@
 import {
   setEncryptionKeys,
   getEncryptionAccess,
-} from "@docspace/common/api/files";
+} from "@docspace/shared/api/files";
 import { regDesktop } from "@docspace/shared/utils/desktop";
 
 const initDesktop = (cfg, user, fileId, t) => {

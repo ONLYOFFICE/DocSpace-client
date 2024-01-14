@@ -10,7 +10,7 @@ import { inject, observer } from "mobx-react";
 import { DeviceType } from "@docspace/shared/enums";
 import { COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
 import { LANGUAGE } from "@docspace/shared/constants";
-import { setCookie } from "@docspace/common/utils";
+import { setCookie } from "@docspace/shared/utils/cookie";
 import { useNavigate } from "react-router-dom";
 import { isMobile } from "@docspace/shared/utils";
 import checkScrollSettingsBlock from "../utils";

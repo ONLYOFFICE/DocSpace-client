@@ -13,7 +13,7 @@ import {
   StyledInfoPanelToggleWrapper,
 } from "./StyledGallery";
 import config from "PACKAGE_FILE";
-import FilesFilter from "@docspace/common/api/files/filter";
+import FilesFilter from "@docspace/shared/api/files/filter";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 

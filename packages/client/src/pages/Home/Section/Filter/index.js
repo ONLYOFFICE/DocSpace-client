@@ -10,10 +10,10 @@ import { isTablet, isMobile } from "@docspace/shared/utils";
 import FilterInput from "@docspace/common/components/FilterInput";
 import Loaders from "@docspace/common/components/Loaders";
 import { withLayoutSize } from "@docspace/shared/HOC/withLayoutSize";
-import { getUser } from "@docspace/common/api/people";
-import RoomsFilter from "@docspace/common/api/rooms/filter";
-import AccountsFilter from "@docspace/common/api/people/filter";
-import FilesFilter from "@docspace/common/api/files/filter";
+import { getUser } from "@docspace/shared/api/people";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import AccountsFilter from "@docspace/shared/api/people/filter";
+import FilesFilter from "@docspace/shared/api/files/filter";
 import {
   FilterGroups,
   FilterKeys,
@@ -41,7 +41,7 @@ import {
 import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
 
-import { getRoomInfo } from "@docspace/common/api/rooms";
+import { getRoomInfo } from "@docspace/shared/api/rooms";
 
 const getAccountLoginType = (filterValues) => {
   const accountLoginType = result(

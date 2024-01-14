@@ -2,13 +2,13 @@ import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-import FilesFilter from "@docspace/common/api/files/filter";
-import RoomsFilter from "@docspace/common/api/rooms/filter";
-import { getGroup } from "@docspace/common/api/groups";
-import { getUserById } from "@docspace/common/api/people";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import { getGroup } from "@docspace/shared/api/groups";
+import { getUserById } from "@docspace/shared/api/people";
 
 import { Events, RoomSearchArea } from "@docspace/shared/enums";
-import { getObjectByLocation } from "@docspace/common/utils";
+import { getObjectByLocation } from "@docspace/shared/utils/common";
 
 import { getCategoryType, getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";

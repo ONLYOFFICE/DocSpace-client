@@ -19,11 +19,11 @@ import {
   getSharedUsers,
   getProtectUsers,
   sendEditorNotify,
-} from "@docspace/common/api/files";
+} from "@docspace/shared/api/files";
 import { EditorWrapper } from "../components/StyledEditor";
 import { useTranslation } from "react-i18next";
 import withDialogs from "../helpers/withDialogs";
-import { assign, frameCallEvent } from "@docspace/common/utils";
+import { assign, frameCallEvent } from "@docspace/shared/utils/common";
 import { getEditorTheme } from "@docspace/shared/utils";
 import { toastr } from "@docspace/shared/components/toast";
 import { DocumentEditor } from "@onlyoffice/document-editor-react";

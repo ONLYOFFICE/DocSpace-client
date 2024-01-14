@@ -1,6 +1,6 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import api from "../api";
-import { setWithCredentialsStatus } from "../api/client";
+import api from "@docspace/shared/api";
+import { setWithCredentialsStatus } from "@docspace/shared/api/client";
 
 import SettingsStore from "./SettingsStore";
 import BannerStore from "./BannerStore";
@@ -11,8 +11,8 @@ import {
   logout as logoutDesktop,
   desktopConstants,
 } from "@docspace/shared/utils/desktop";
-import { isAdmin, setCookie } from "../utils";
-import { getCookie } from "@docspace/shared/utils";
+import { isAdmin } from "@docspace/shared/utils/common";
+import { getCookie, setCookie } from "@docspace/shared/utils/cookie";
 import CurrentQuotasStore from "./CurrentQuotaStore";
 import CurrentTariffStatusStore from "./CurrentTariffStatusStore";
 import PaymentQuotasStore from "./PaymentQuotasStore";
@@ -20,7 +20,7 @@ import PaymentQuotasStore from "./PaymentQuotasStore";
 import { TenantStatus } from "@docspace/shared/enums";
 import { COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
 import { LANGUAGE } from "@docspace/shared/constants";
-import { getPortalTenantExtra } from "../api/portal";
+import { getPortalTenantExtra } from "@docspace/shared/api/portal";
 
 class AuthStore {
   userStore = null;

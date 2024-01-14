@@ -2,7 +2,7 @@ import React from "react";
 
 import { FolderType } from "@docspace/shared/enums";
 // @ts-ignore
-import { getFoldersTree } from "@docspace/common/api/files";
+import { getFoldersTree } from "@docspace/shared/api/files";
 
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
 import CatalogUserReactSvgUrl from "PUBLIC_DIR/images/catalog.user.react.svg?url";

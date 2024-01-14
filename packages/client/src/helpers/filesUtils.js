@@ -10,12 +10,12 @@ import CloudServicesWebdavReactSvgUrl from "PUBLIC_DIR/images/cloud.services.web
 import authStore from "@docspace/common/store/AuthStore";
 import { FileType, RoomsType } from "@docspace/shared/enums";
 import config from "PACKAGE_FILE";
-import { toUrlParams } from "@docspace/common/utils";
+import { toUrlParams } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { addFileToRecentlyViewed } from "@docspace/common/api/files";
+import { addFileToRecentlyViewed } from "@docspace/shared/api/files";
 import i18n from "./i18n";
 
-import { request } from "@docspace/common/api/client";
+import { request } from "@docspace/shared/api/client";
 
 export const getFileTypeName = (fileType) => {
   switch (fileType) {

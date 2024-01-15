@@ -4,6 +4,7 @@ import { getUserStatus } from "../helpers/people-helpers";
 
 class SelectionStore {
   peopleStore = null;
+  allSessions = [];
   selection = [];
   selectionUsersRights = {
     isVisitor: 0,
@@ -200,11 +201,15 @@ class SelectionStore {
     return newSelection;
   };
 
-  setSelected = (selected) => {
+  setSelected = (selected, isSessionsPage) => {
     this.bufferSelection = null;
     this.selected = selected;
+    const sessions = this.allSessions;
     const list = this.peopleStore.usersStore.peopleList;
-    this.setSelection(this.getUsersBySelected(list, selected));
+
+    isSessionsPage
+      ? this.setSelection(this.getUsersBySelected(sessions, selected))
+      : this.setSelection(this.getUsersBySelected(list, selected));
 
     return selected;
   };
@@ -323,6 +328,26 @@ class SelectionStore {
 
     return users.map((u) => u.id);
   }
+
+  get isHeaderVisible() {
+    return this.selection.length > 0;
+  }
+
+  get isHeaderIndeterminate() {
+    return (
+      this.isHeaderVisible && this.selection.length !== this.allSessions.length
+    );
+  }
+
+  get isHeaderChecked() {
+    return (
+      this.isHeaderVisible && this.selection.length === this.allSessions.length
+    );
+  }
+
+  setAllSessions = (sessions) => {
+    this.allSessions = sessions;
+  };
 }
 
 export default SelectionStore;

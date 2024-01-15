@@ -74,9 +74,13 @@ const Sessions = ({
   allSessions,
   setAllSessions,
   isLoadingDownloadReport,
+  clearSelection,
 }) => {
   useEffect(() => {
     setAllSessions(mockData);
+    return () => {
+      clearSelection();
+    };
   }, []);
 
   useViewEffect({
@@ -109,25 +113,23 @@ const Sessions = ({
   );
 };
 
-export default inject(({ auth, setup }) => {
+export default inject(({ auth, setup, peopleStore }) => {
   const { culture, currentDeviceType } = auth.settingsStore;
   const { user } = auth.userStore;
+  const { viewAs, setViewAs, isLoadingDownloadReport } = setup;
   const locale = (user && user.cultureName) || culture || "en";
-  const {
-    viewAs,
-    setViewAs,
-    allSessions,
-    setAllSessions,
-    isLoadingDownloadReport,
-  } = setup;
+
+  const { clearSelection, allSessions, setAllSessions } =
+    peopleStore.selectionStore;
 
   return {
     locale,
+    currentDeviceType,
     viewAs,
     setViewAs,
-    currentDeviceType,
+    isLoadingDownloadReport,
     allSessions,
     setAllSessions,
-    isLoadingDownloadReport,
+    clearSelection,
   };
 })(withTranslation(["Settings", "Common"])(observer(Sessions)));

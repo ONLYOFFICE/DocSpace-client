@@ -6,12 +6,7 @@ import styled, { css } from "styled-components";
 import SessionsTableHeader from "./SessionsTableHeader";
 import SessionsTableRow from "./SessionsTableRow";
 
-import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";
-import RemoveSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
-import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
-
 import TableContainer from "@docspace/components/table-container/TableContainer";
-import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu";
 import TableBody from "@docspace/components/table-container/TableBody";
 
 const TABLE_VERSION = "5";
@@ -56,28 +51,6 @@ const contextCss = css`
 
 const StyledTableContainer = styled(TableContainer)`
   margin: 0 0 24px;
-
-  .table-group-menu {
-    height: 69px;
-    position: absolute;
-    z-index: 201;
-    top: -25px;
-    left: 0px;
-    width: 100%;
-
-    .table-container_group-menu {
-      border-image-slice: 0;
-      border-image-source: none;
-      border-bottom: ${(props) =>
-        props.theme.filesSection.tableView.row.borderColor};
-      box-shadow: rgba(4, 15, 27, 0.07) 0px 15px 20px;
-      padding: 0px;
-    }
-
-    .table-container_group-menu-separator {
-      margin: 0 16px;
-    }
-  }
 
   .table-container_header {
     position: absolute;
@@ -157,72 +130,15 @@ const StyledTableContainer = styled(TableContainer)`
 
 StyledTableContainer.defaultProps = { theme: Base };
 
-const TableView = ({
-  t,
-  sectionWidth,
-  userId,
-  sessionsData,
-  // allSessions,
-  // checkedSessions,
-  // toggleSession,
-  // toggleAllSessions,
-  // isSessionChecked,
-}) => {
+const TableView = ({ t, sectionWidth, userId, sessionsData }) => {
   const [hideColumns, setHideColumns] = useState(false);
   const ref = useRef(null);
-
-  // const handleAllToggles = (checked) => {
-  //   toggleAllSessions(checked, allSessions);
-  // };
 
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
-  const headerMenu = [
-    {
-      id: "sessions",
-      key: "Sessions",
-      label: t("Common:Sessions"),
-      onClick: () => console.log("Sessions"),
-      iconUrl: HistoryFinalizedReactSvgUrl,
-    },
-    {
-      id: "logout",
-      key: "Logout",
-      label: t("Common:Logout"),
-      onClick: () => console.log("Logout"),
-      iconUrl: RemoveSvgUrl,
-    },
-    {
-      id: "Disable",
-      key: "Disable",
-      label: t("Common:DisableUserButton"),
-      onClick: () => console.log("Disable"),
-      iconUrl: TrashReactSvgUrl,
-    },
-  ];
-
-  // const isChecked = checkedSessions.length === allSessions.length;
-
-  // const isIndeterminate =
-  //   checkedSessions.length > 0 && checkedSessions.length !== allSessions.length;
-
   return (
     <StyledTableContainer forwardedRef={ref} useReactWindow>
-      {/* {checkedSessions.length > 0 && (
-        <div className="table-group-menu">
-          <TableGroupMenu
-            sectionWidth={sectionWidth}
-            headerMenu={headerMenu}
-            withoutInfoPanelToggler
-            withComboBox={false}
-            checkboxOptions={[]}
-            isChecked={isChecked}
-            isIndeterminate={isIndeterminate}
-            onChange={handleAllToggles}
-          />
-        </div>
-      )} */}
       <SessionsTableHeader
         t={t}
         userId={userId}

@@ -1,6 +1,9 @@
 ﻿import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import ActionsHeaderTouchReactSvgUrl from "PUBLIC_DIR/images/actions.header.touch.react.svg?url";
+import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";
+import RemoveSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
+import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 import React from "react";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
@@ -11,7 +14,7 @@ import IconButton from "@docspace/components/icon-button";
 import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu";
 import DropDownItem from "@docspace/components/drop-down-item";
 import LoaderSectionHeader from "../loaderSectionHeader";
-import { tablet, desktop } from "@docspace/components/utils/device";
+import { tablet, desktop, mobile } from "@docspace/components/utils/device";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import Badge from "@docspace/components/badge";
 import {
@@ -109,6 +112,34 @@ const HeaderContainer = styled.div`
 
 const StyledContainer = styled.div`
   .group-button-menu-container {
+    height: 69px;
+    position: absolute;
+    z-index: 201;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+
+    @media ${tablet} {
+      height: 60px;
+    }
+
+    @media ${mobile} {
+      height: 52px;
+    }
+
+    .table-container_group-menu {
+      border-image-slice: 0;
+      border-image-source: none;
+      border-bottom: ${(props) =>
+        props.theme.filesSection.tableView.row.borderColor};
+      box-shadow: rgba(4, 15, 27, 0.07) 0px 15px 20px;
+      padding: 0px;
+    }
+
+    .table-container_group-menu-separator {
+      margin: 0 16px;
+    }
+
     ${(props) =>
       props.viewAs === "table"
         ? css`
@@ -137,6 +168,8 @@ const SectionHeaderContent = (props) => {
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  const isSessionsPage = location.pathname.includes("/sessions");
 
   const [state, setState] = React.useState({
     header: "",
@@ -238,13 +271,17 @@ const SectionHeaderContent = (props) => {
   };
 
   const onCheck = (checked) => {
-    const { setSelected } = props;
-    setSelected(checked ? "all" : "close");
+    const { setupSetSelected, peopleSetSelected } = props;
+    isSessionsPage
+      ? peopleSetSelected(checked ? "all" : "close", isSessionsPage)
+      : setupSetSelected(checked ? "all" : "close");
   };
 
   const onSelectAll = () => {
-    const { setSelected } = props;
-    setSelected("all");
+    const { setupSetSelected, peopleSetSelected } = props;
+    isSessionsPage
+      ? peopleSetSelected("all", isSessionsPage)
+      : setupSetSelected("all");
   };
 
   const removeAdmins = () => {
@@ -257,9 +294,13 @@ const SectionHeaderContent = (props) => {
     t,
     isLoadedSectionHeader,
 
-    isHeaderIndeterminate,
-    isHeaderChecked,
-    isHeaderVisible,
+    isSetupleHeaderIndeterminate,
+    isSetupHeaderVisible,
+    isSetupHeaderChecked,
+
+    isPeopleHeaderIndeterminate,
+    isPeopleHeaderVisible,
+    isPeopleHeaderChecked,
     selection,
   } = props;
   const { header, isCategoryOrHeader, isNeedPaidIcon } = state;
@@ -276,14 +317,50 @@ const SectionHeaderContent = (props) => {
     </>
   );
 
-  const headerMenu = [
-    {
-      label: t("Common:Delete"),
-      disabled: !selection || !selection.length > 0,
-      onClick: removeAdmins,
-      iconUrl: DeleteReactSvgUrl,
-    },
-  ];
+  const headerMenu = isSessionsPage
+    ? [
+        {
+          id: "sessions",
+          key: "Sessions",
+          label: t("Common:Sessions"),
+          onClick: () => console.log("Sessions"),
+          iconUrl: HistoryFinalizedReactSvgUrl,
+        },
+        {
+          id: "logout",
+          key: "Logout",
+          label: t("Common:Logout"),
+          onClick: () => console.log("Logout"),
+          iconUrl: RemoveSvgUrl,
+        },
+        {
+          id: "Disable",
+          key: "Disable",
+          label: t("Common:DisableUserButton"),
+          onClick: () => console.log("Disable"),
+          iconUrl: TrashReactSvgUrl,
+        },
+      ]
+    : [
+        {
+          label: t("Common:Delete"),
+          disabled: !selection || !selection.length > 0,
+          onClick: removeAdmins,
+          iconUrl: DeleteReactSvgUrl,
+        },
+      ];
+
+  const isHeaderVisible = isSessionsPage
+    ? isPeopleHeaderVisible
+    : isSetupHeaderVisible;
+
+  const isHeaderChecked = isSessionsPage
+    ? isPeopleHeaderChecked
+    : isSetupHeaderChecked;
+
+  const isHeaderIndeterminate = isSessionsPage
+    ? isPeopleHeaderIndeterminate
+    : isSetupleHeaderIndeterminate;
 
   return (
     <StyledContainer isHeaderVisible={isHeaderVisible}>
@@ -295,6 +372,7 @@ const SectionHeaderContent = (props) => {
             isChecked={isHeaderChecked}
             isIndeterminate={isHeaderIndeterminate}
             headerMenu={headerMenu}
+            withoutInfoPanelToggler
           />
         </div>
       ) : !isLoadedSectionHeader ? (
@@ -343,7 +421,7 @@ const SectionHeaderContent = (props) => {
   );
 };
 
-export default inject(({ auth, setup, common }) => {
+export default inject(({ auth, setup, common, peopleStore }) => {
   const { currentQuotaStore } = auth;
   const {
     isBrandingAndCustomizationAvailable,
@@ -353,25 +431,32 @@ export default inject(({ auth, setup, common }) => {
   const { toggleSelector } = setup;
   const {
     selected,
-    setSelected,
-    isHeaderIndeterminate,
-    isHeaderChecked,
-    isHeaderVisible,
+    setSelected: setupSetSelected,
+    isHeaderIndeterminate: isSetupHeaderIndeterminate,
+    isHeaderChecked: isSetupHeaderChecked,
+    isHeaderVisible: isSetupHeaderVisible,
     deselectUser,
     selectAll,
     selection,
   } = setup.selectionStore;
+  const {
+    isHeaderIndeterminate: isPeopleHeaderIndeterminate,
+    isHeaderChecked: isPeopleHeaderChecked,
+    isHeaderVisible: isPeopleHeaderVisible,
+    setSelected: peopleSetSelected,
+  } = peopleStore.selectionStore;
+
   const { admins, selectorIsOpen } = setup.security.accessRight;
   const { isLoadedSectionHeader, setIsLoadedSectionHeader } = common;
   return {
     addUsers,
     removeAdmins,
     selected,
-    setSelected,
     admins,
-    isHeaderIndeterminate,
-    isHeaderChecked,
-    isHeaderVisible,
+    setupSetSelected,
+    isSetupHeaderIndeterminate,
+    isSetupHeaderChecked,
+    isSetupHeaderVisible,
     deselectUser,
     selectAll,
     toggleSelector,
@@ -381,6 +466,10 @@ export default inject(({ auth, setup, common }) => {
     setIsLoadedSectionHeader,
     isBrandingAndCustomizationAvailable,
     isRestoreAndAutoBackupAvailable,
+    peopleSetSelected,
+    isPeopleHeaderIndeterminate,
+    isPeopleHeaderChecked,
+    isPeopleHeaderVisible,
   };
 })(
   withLoading(

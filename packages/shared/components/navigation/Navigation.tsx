@@ -148,7 +148,7 @@ const Navigation = ({
         isOpen={isOpen}
         isRootFolder={isRootFolder}
         onClick={toggleDropBox}
-        isRootFolderTitle={showRootFolderTitle}
+        isRootFolderTitle={false}
       />
     </div>
   );

@@ -11,7 +11,8 @@ import { ThemeProvider } from "@docspace/shared/components/theme-provider";
 import { SnackBar } from "@docspace/shared/components/snackbar";
 import { Portal } from "@docspace/shared/components/portal";
 
-import { getLogoFromPath, updateTempContent } from "@docspace/common/utils";
+import { updateTempContent } from "@docspace/shared/utils/common";
+import { getLogoFromPath } from "@docspace/shared/utils";
 
 import store from "client/store";
 
@@ -21,15 +22,15 @@ import i18n from "./i18n";
 
 import moment from "moment-timezone";
 //import ReactSmartBanner from "./components/SmartBanner";
-import { useThemeDetector } from "@docspace/common/utils/useThemeDetector";
+import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
 import { isMobile, isIOS, isFirefox } from "react-device-detect";
 import IndicatorLoader from "./components/IndicatorLoader";
 import DialogsWrapper from "./components/dialogs/DialogsWrapper";
 import MainBar from "./components/MainBar";
 
-import indexedDbHelper from "@docspace/common/utils/indexedDBHelper";
-import { DeviceType, IndexedDBStores } from "@docspace/common/constants";
-import { getRestoreProgress } from "@docspace/common/api/portal";
+import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
+import { DeviceType, IndexedDBStores } from "@docspace/shared/enums";
+import { getRestoreProgress } from "@docspace/shared/api/portal";
 import { useTheme } from "styled-components";
 
 const Shell = ({ items = [], page = "home", ...rest }) => {

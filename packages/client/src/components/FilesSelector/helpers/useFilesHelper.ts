@@ -1,11 +1,11 @@
 import React from "react";
 
 // @ts-ignore
-import { getFolder, getFolderInfo } from "@docspace/common/api/files";
+import { getFolder, getFolderInfo } from "@docspace/shared/api/files";
 // @ts-ignore
-import FilesFilter from "@docspace/common/api/files/filter";
+import FilesFilter from "@docspace/shared/api/files/filter";
 // @ts-ignore
-import { iconSize32 } from "@docspace/common/utils/image-helpers";
+import { iconSize32 } from "@docspace/shared/utils/image-helpers";
 
 import { PAGE_COUNT, defaultBreadCrumb } from "../utils";
 
@@ -20,7 +20,7 @@ import {
   FilesSelectorFilterTypes,
   FilterType,
   FolderType,
-} from "@docspace/common/constants";
+} from "@docspace/shared/enums";
 //@ts-ignore
 import { toastr } from "@docspace/shared/components/toast";
 

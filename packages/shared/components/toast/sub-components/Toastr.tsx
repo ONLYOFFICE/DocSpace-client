@@ -7,7 +7,10 @@ import DangerToastReactSvg from "PUBLIC_DIR/images/danger.toast.react.svg";
 import InfoToastReactSvg from "PUBLIC_DIR/images/info.toast.react.svg";
 import CrossIconReactSvgUrl from "PUBLIC_DIR/images/cross.react.svg?url";
 
-import { IconSizeType, commonIconsStyles, getCookie } from "../../../utils";
+import commonIconsStyles, {
+  IconSizeType,
+} from "../../../utils/common-icons-style";
+import { getCookie } from "../../../utils/cookie";
 
 import { Text } from "../../text";
 

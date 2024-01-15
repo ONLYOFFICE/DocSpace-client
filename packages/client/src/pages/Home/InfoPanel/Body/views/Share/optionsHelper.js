@@ -5,7 +5,7 @@ import AccessCommentReactSvgUrl from "PUBLIC_DIR/images/access.comment.react.svg
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 import EyeOffReactSvgUrl from "PUBLIC_DIR/images/eye.off.react.svg?url";
 import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
-import { ShareAccessRights } from "@docspace/common/constants";
+import { ShareAccessRights } from "@docspace/shared/enums";
 
 export const getShareOptions = (t) => {
   return [

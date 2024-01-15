@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { mobile } from "@docspace/shared/utils";
-import { getLogoFromPath } from "@docspace/common/utils";
+import { getLogoFromPath } from "@docspace/shared/utils";
 
 const StyledNav = styled.div`
   display: none;
@@ -31,8 +31,8 @@ const SimpleNav = ({ theme, logoUrls }: ISimpleNav) => {
   const logoUrl = !logo
     ? undefined
     : !theme?.isBase
-    ? getLogoFromPath(logo.path.dark)
-    : getLogoFromPath(logo.path.light);
+      ? getLogoFromPath(logo.path.dark)
+      : getLogoFromPath(logo.path.light);
 
   return (
     <StyledNav id="login-header" theme={theme}>

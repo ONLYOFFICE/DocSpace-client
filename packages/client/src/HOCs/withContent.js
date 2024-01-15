@@ -5,8 +5,8 @@ import {
   // FileAction,
   FileStatus,
   ShareAccessRights,
-} from "@docspace/common/constants";
-//import { combineUrl } from "@docspace/common/utils";
+} from "@docspace/shared/enums";
+//import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { getCorrectDate, getCookie } from "@docspace/shared/utils";
 import { LANGUAGE } from "@docspace/shared/constants";
 import config from "PACKAGE_FILE";

@@ -10,7 +10,7 @@ import RoomErrors from "./sub-components/RoomErrors";
 
 import PublicRoomPage from "./PublicRoomPage";
 
-import FilesFilter from "@docspace/common/api/files/filter";
+import FilesFilter from "@docspace/shared/api/files/filter";
 
 const PublicRoom = (props) => {
   const {

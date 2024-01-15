@@ -1,5 +1,5 @@
 import { action, makeObservable, observable } from "mobx";
-import api from "@docspace/common/api";
+import api from "@docspace/shared/api";
 
 class GroupsStore {
   groups = [];

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { observer, Provider as MobxProvider } from "mobx-react";
 import { I18nextProvider, useTranslation } from "react-i18next";
-import tryRedirectTo from "@docspace/common/utils/tryRedirectTo";
+import tryRedirectTo from "@docspace/shared/utils/tryRedirectTo";
 import { Outlet } from "react-router-dom";
 
 import { isMobileOnly } from "react-device-detect";

@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
-import { Events } from "@docspace/common/constants";
+import { Events } from "@docspace/shared/enums";
 
 const ShareFolderDialog = ({
   visible,

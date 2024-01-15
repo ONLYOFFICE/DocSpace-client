@@ -8,14 +8,10 @@ import { Checkbox } from "@docspace/shared/components/checkbox";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { toastr } from "@docspace/shared/components/toast";
 
-import { ThemeKeys } from "@docspace/common/constants";
+import { ThemeKeys } from "@docspace/shared/enums";
 
-import { mobile } from "@docspace/shared/utils";
-import {
-  showLoader,
-  getSystemTheme,
-  getEditorTheme,
-} from "@docspace/common/utils";
+import { mobile, getSystemTheme, getEditorTheme } from "@docspace/shared/utils";
+import { showLoader } from "@docspace/shared/utils/common";
 
 import ThemePreview from "./theme-preview";
 

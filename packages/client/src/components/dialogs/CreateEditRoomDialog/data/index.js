@@ -1,4 +1,4 @@
-import { RoomsType } from "@docspace/common/constants";
+import { RoomsType } from "@docspace/shared/enums";
 
 export const getRoomTypeTitleTranslation = (roomType = 1, t) => {
   switch (roomType) {

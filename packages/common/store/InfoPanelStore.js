@@ -1,18 +1,19 @@
 import { makeAutoObservable } from "mobx";
 import moment from "moment";
 
-import { getUserById } from "../api/people";
-import { combineUrl, getUserRole } from "../utils";
-import { FolderType, ShareAccessRights } from "../constants";
+import { getUserById } from "@docspace/shared/api/people";
+import { getUserRole } from "@docspace/shared/utils/common";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { FolderType, ShareAccessRights } from "@docspace/shared/enums";
 import config from "PACKAGE_FILE";
-import Filter from "../api/people/filter";
-import { getRoomInfo } from "../api/rooms";
+import Filter from "@docspace/shared/api/people/filter";
+import { getRoomInfo } from "@docspace/shared/api/rooms";
 import {
   getPrimaryLink,
   getExternalLinks,
   editExternalLink,
   addExternalLink,
-} from "../api/files";
+} from "@docspace/shared/api/files";
 
 const observedKeys = [
   "id",
@@ -125,13 +126,13 @@ class InfoPanelStore {
       ? peopleStoreSelection.length
         ? [...peopleStoreSelection]
         : peopleStoreBufferSelection
-        ? [peopleStoreBufferSelection]
-        : []
+          ? [peopleStoreBufferSelection]
+          : []
       : filesStoreSelection?.length > 0
-      ? [...filesStoreSelection]
-      : filesStoreBufferSelection
-      ? [filesStoreBufferSelection]
-      : [];
+        ? [...filesStoreSelection]
+        : filesStoreBufferSelection
+          ? [filesStoreBufferSelection]
+          : [];
   };
 
   getSelectedFolder = () => {
@@ -162,12 +163,12 @@ class InfoPanelStore {
           isSelectedItem: false,
         })
       : selectedItems.length === 1
-      ? this.normalizeSelection({
-          ...selectedItems[0],
-          isSelectedFolder: false,
-          isSelectedItem: true,
-        })
-      : [...Array(selectedItems.length).keys()];
+        ? this.normalizeSelection({
+            ...selectedItems[0],
+            isSelectedFolder: false,
+            isSelectedItem: true,
+          })
+        : [...Array(selectedItems.length).keys()];
   };
 
   normalizeSelection = (selection) => {
@@ -244,20 +245,20 @@ class InfoPanelStore {
       ? item.rootFolderType === FolderType.Archive
         ? item.logo && item.logo.medium
         : this.settingsStore.getIcon(
-            size,
-            null,
-            null,
-            null,
-            item.roomType,
-            true
-          )
-        ? item.logo?.medium
-        : item.icon
-        ? item.icon
-        : this.settingsStore.getIcon(size, null, null, null, item.roomType)
+              size,
+              null,
+              null,
+              null,
+              item.roomType,
+              true
+            )
+          ? item.logo?.medium
+          : item.icon
+            ? item.icon
+            : this.settingsStore.getIcon(size, null, null, null, item.roomType)
       : item.isFolder
-      ? this.settingsStore.getFolderIcon(item.providerKey, size)
-      : this.settingsStore.getIcon(size, item.fileExst || ".file");
+        ? this.settingsStore.getFolderIcon(item.providerKey, size)
+        : this.settingsStore.getIcon(size, item.fileExst || ".file");
   };
 
   // User link actions //

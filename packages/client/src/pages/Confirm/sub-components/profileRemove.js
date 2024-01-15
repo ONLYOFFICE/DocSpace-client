@@ -5,7 +5,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { Link } from "@docspace/shared/components/link";
 import { inject, observer } from "mobx-react";
-import { deleteSelf } from "@docspace/common/api/people";
+import { deleteSelf } from "@docspace/shared/api/people";
 import { toastr } from "@docspace/shared/components/toast";
 import { StyledPage, StyledBody, StyledContent } from "./StyledConfirm";
 import withLoader from "../withLoader";

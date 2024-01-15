@@ -9,7 +9,7 @@ import copy from "copy-to-clipboard";
 import { Text } from "@docspace/shared/components/text";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { toastr } from "@docspace/shared/components/toast";
-import { ShareAccessRights } from "@docspace/common/constants";
+import { ShareAccessRights } from "@docspace/shared/enums";
 
 import PublicRoomBar from "../Members/sub-components/PublicRoomBar";
 import LinkRow from "./LinkRow";

@@ -18,7 +18,7 @@ import SectionWarning from "./sub-components/section-warning";
 import SubSectionSubmenu from "./sub-components/section-submenu";
 
 import { FloatingButton } from "@docspace/shared/components/floating-button";
-import { DeviceType } from "../../constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const Section = (props) => {
   const {

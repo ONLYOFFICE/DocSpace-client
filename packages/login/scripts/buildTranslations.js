@@ -1,5 +1,5 @@
 const path = require("path");
-const beforeBuild = require("@docspace/common/utils/beforeBuild");
+const beforeBuild = require("@docspace/shared/utils/beforeBuild");
 
 beforeBuild(
   [

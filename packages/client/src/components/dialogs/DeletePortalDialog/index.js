@@ -5,7 +5,7 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 
-import { sendDeletePortalEmail } from "@docspace/common/api/portal";
+import { sendDeletePortalEmail } from "@docspace/shared/api/portal";
 
 import ModalDialogContainer from "../ModalDialogContainer";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";

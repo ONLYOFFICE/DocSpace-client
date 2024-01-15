@@ -1,24 +1,22 @@
 import path from "path";
 import fs from "fs";
-import { initSSR } from "@docspace/common/api/client";
-import { getUser } from "@docspace/common/api/people";
+import { initSSR } from "@docspace/shared/api/client";
+import { getUser } from "@docspace/shared/api/people";
 import {
   getSettings,
   getBuildVersion,
   getAppearanceTheme,
   getLogoUrls,
-} from "@docspace/common/api/settings";
+} from "@docspace/shared/api/settings";
 import {
   openEdit,
   getSettingsFiles,
   // getShareFiles,
-} from "@docspace/common/api/files";
-import { TenantStatus } from "@docspace/common/constants";
+} from "@docspace/shared/api/files";
+import { TenantStatus } from "@docspace/shared/enums";
 
-import {
-  getLtrLanguageForEditor,
-  getLogoFromPath,
-} from "@docspace/common/utils";
+import { getLtrLanguageForEditor } from "@docspace/shared/utils/common";
+import { getLogoFromPath } from "@docspace/shared/utils";
 
 export const getFavicon = (logoUrls) => {
   if (!logoUrls) return null;
@@ -92,10 +90,6 @@ export const initDocEditor = async (req) => {
     if (!successAuth && !doc && !shareKey) {
       error = {
         unAuthorized: true,
-        // redirectPath: combineUrl(
-        //   window?.DocSpaceConfig?.proxy?.url,
-        //   personal ? "/sign-in" : "/login"
-        // ),
       };
       return { error };
     }

@@ -195,7 +195,7 @@ const FilterBlockItem = ({
 
   const getTagItem = (item) => {
     const isRoomsSelector = item.group === FilterGroups.filterRoom;
-    const isGroupsSelector = item.group === "filter-group";
+    const isGroupsSelector = item.group === FilterGroups.filterGroup;
 
     const selectorType = isRoomsSelector
       ? FilterSelectorTypes.rooms

@@ -475,6 +475,7 @@ export const FilterGroups = Object.freeze({
   roomFilterTags: "filter-tags",
   roomFilterFolders: "filter-withSubfolders",
   roomFilterContent: "filter-content",
+  filterGroup: "filter-group",
 });
 
 export const FilterKeys = Object.freeze({
@@ -484,6 +485,7 @@ export const FilterKeys = Object.freeze({
   me: "me",
   other: "other",
   user: "user",
+  withoutGroup: "withoutGroup",
 });
 
 export const IndexedDBStores = Object.freeze({

@@ -14,6 +14,7 @@ const SectionBodyContent = (props) => {
   const {
     tReady,
     accountsViewAs,
+    isFiltered,
     setSelection,
     setBufferSelection,
     setChangeOwnerDialogVisible,
@@ -66,7 +67,7 @@ const SectionBodyContent = (props) => {
 
   return (
     <>
-      <Tabs />
+      {!isFiltered && <Tabs />}
       {location.pathname.includes("/accounts/people") ? (
         <People />
       ) : !groupId ? (
@@ -79,7 +80,8 @@ const SectionBodyContent = (props) => {
 };
 
 export default inject(({ peopleStore }) => {
-  const { viewAs: accountsViewAs } = peopleStore;
+  const { viewAs: accountsViewAs, filterStore } = peopleStore;
+  const { isFiltered } = filterStore;
 
   const { setSelection, setBufferSelection, selectUser } =
     peopleStore.selectionStore;
@@ -87,6 +89,7 @@ export default inject(({ peopleStore }) => {
 
   return {
     accountsViewAs,
+    isFiltered,
     setSelection,
     setBufferSelection,
     setChangeOwnerDialogVisible,

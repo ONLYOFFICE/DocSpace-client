@@ -58,7 +58,8 @@ class FilterStore {
       this.filter.payments ||
       this.filter.search ||
       this.filter.role ||
-      this.filter.accountLoginType
+      this.filter.accountLoginType ||
+      this.filter.withoutGroup
     );
   }
 }

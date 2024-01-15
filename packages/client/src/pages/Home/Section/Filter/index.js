@@ -184,6 +184,10 @@ const getGroup = (filterValues) => {
   return groupId || null;
 };
 
+const getWithoutGroup = (filterValues) => {
+  return filterValues.some((value) => value.key === FilterKeys.withoutGroup);
+};
+
 const getFilterContent = (filterValues) => {
   const filterContent = result(
     find(filterValues, (value) => {
@@ -281,8 +285,11 @@ const SectionFilterContent = ({
         const group = getGroup(data);
         const payments = getPayments(data);
         const accountLoginType = getAccountLoginType(data);
+        const withoutGroup = getWithoutGroup(data);
 
         const newFilter = accountsFilter.clone();
+
+        newFilter.withoutGroup = withoutGroup;
 
         if (status === 3) {
           newFilter.employeeStatus = EmployeeStatus.Disabled;
@@ -687,6 +694,14 @@ const SectionFilterContent = ({
         }
       }
 
+      if (accountsFilter.withoutGroup) {
+        filterValues.push({
+          key: FilterKeys.withoutGroup,
+          label: t("PeopleTranslations:WithoutGroup"),
+          group: FilterGroups.filterGroup,
+        });
+      }
+
       const currentFilterValues = [];
 
       setSelectedFilterValues((value) => {
@@ -979,6 +994,7 @@ const SectionFilterContent = ({
     accountsFilter.payments,
     accountsFilter.group,
     accountsFilter.accountLoginType,
+    accountsFilter.withoutGroup,
     t,
   ]);
 
@@ -986,23 +1002,22 @@ const SectionFilterContent = ({
     if (isAccountsPage) {
       const groupItems = [
         {
-          id: "filter_group",
-          key: "filter-group",
-          group: "filter-group",
-          label: t("PeopleTranslations:Group"), // Add translation
+          key: FilterGroups.filterGroup,
+          group: FilterGroups.filterGroup,
+          label: t("PeopleTranslations:Group"),
           isHeader: true,
         },
         {
           id: "filter_group-without-group",
-          key: "filter_group-without-group",
-          group: "filter-group",
-          label: t("PeopleTranslations:WithoutGroup"), // Add translation
+          key: FilterKeys.withoutGroup,
+          group: FilterGroups.filterGroup,
+          label: t("PeopleTranslations:WithoutGroup"),
         },
         {
           id: "filter_group-other",
           key: "filter_group-other",
-          group: "filter-group",
-          label: t("Common:OtherLabel"), // Add translation
+          group: FilterGroups.filterGroup,
+          label: t("Common:OtherLabel"),
         },
       ];
 
@@ -1929,6 +1944,10 @@ const SectionFilterContent = ({
 
         if (group === "filter-login-type") {
           newFilter.accountLoginType = null;
+        }
+
+        if (group === FilterGroups.filterGroup) {
+          newFilter.withoutGroup = false;
         }
 
         const subRoute = location.pathname.includes("groups")

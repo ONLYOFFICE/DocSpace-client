@@ -8,14 +8,14 @@ import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { ComboBox } from "@docspace/shared/components/combobox";
-import { TabContainer } from "@docspace/shared/components/tabs-container";
+import { TabsContainer } from "@docspace/shared/components/tabs-container";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { objectToGetParams, loadScript } from "@docspace/common/utils";
 import { inject, observer } from "mobx-react";
 
 import { isTablet, isMobile } from "@docspace/shared/utils/device";
 
-import { RectangleSkeleton } from "@docspace/shared/components/skeletons/rectangle";
+import { RectangleSkeleton } from "@docspace/shared/skeletons/rectangle";
 
 import GetCodeDialog from "../sub-components/GetCodeDialog";
 import { Button } from "@docspace/shared/components/button";
@@ -243,7 +243,7 @@ const RoomSelector = (props) => {
       <Container>
         {showPreview && (
           <Preview>
-            <TabContainer onSelect={onChangeTab} elements={dataTabs} />
+            <TabsContainer onSelect={onChangeTab} elements={dataTabs} />
           </Preview>
         )}
         <Controls>

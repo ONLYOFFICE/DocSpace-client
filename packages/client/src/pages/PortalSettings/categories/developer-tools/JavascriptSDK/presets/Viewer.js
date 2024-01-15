@@ -8,17 +8,17 @@ import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { ComboBox } from "@docspace/shared/components/combobox";
-import { TabContainer } from "@docspace/shared/components/tabs-container";
+import { TabsContainer } from "@docspace/shared/components/tabs-container";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { objectToGetParams, loadScript } from "@docspace/common/utils";
 import { inject, observer } from "mobx-react";
-import { ImageEditor } from "@docspace/shared/components/ImageEditor";
+import { ImageEditor } from "@docspace/shared/components/image-editor";
 import { FilesSelectorFilterTypes } from "@docspace/common/constants";
 
 import { isTablet, isMobile } from "@docspace/shared/utils/device";
 
 import EmptyIframeContainer from "../sub-components/EmptyIframeContainer";
-import { RectangleSkeleton } from "@docspace/shared/components/skeletons/rectangle";
+import { RectangleSkeleton } from "@docspace/shared/skeletons/rectangle";
 
 import GetCodeDialog from "../sub-components/GetCodeDialog";
 import { Button } from "@docspace/shared/components/button";
@@ -203,7 +203,7 @@ const Viewer = (props) => {
       <Container>
         {showPreview && (
           <Preview>
-            <TabContainer onSelect={onChangeTab} elements={dataTabs} />
+            <TabsContainer onSelect={onChangeTab} elements={dataTabs} />
           </Preview>
         )}
         <Controls>

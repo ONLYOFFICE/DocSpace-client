@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import { RectangleSkeleton } from "@docspace/shared/components/skeletons/rectangle";
-import { Base } from "@docspace/components/themes";
+import { RectangleSkeleton } from "@docspace/shared/skeletons/rectangle";
+import { Base } from "@docspace/shared/themes";
 
 const StyledContainer = styled.div`
   width: ${(props) => props.width + "%"};

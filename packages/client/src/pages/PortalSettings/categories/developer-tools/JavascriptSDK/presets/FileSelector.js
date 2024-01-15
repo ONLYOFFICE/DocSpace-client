@@ -8,7 +8,7 @@ import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { ComboBox } from "@docspace/shared/components/combobox";
-import { TabContainer } from "@docspace/shared/components/tabs-container";
+import { TabsContainer } from "@docspace/shared/components/tabs-container";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { SelectedItem } from "@docspace/shared/components/selected-item";
@@ -334,7 +334,7 @@ const FileSelector = (props) => {
       <Container>
         {showPreview && (
           <Preview>
-            <TabContainer onSelect={onChangeTab} elements={dataTabs} />
+            <TabsContainer onSelect={onChangeTab} elements={dataTabs} />
           </Preview>
         )}
         <Controls>

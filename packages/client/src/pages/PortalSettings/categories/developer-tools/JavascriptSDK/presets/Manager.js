@@ -9,15 +9,15 @@ import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
-import { TabContainer } from "@docspace/shared/components/tabs-container";
+import { TabsContainer } from "@docspace/shared/components/tabs-container";
 import { SelectedItem } from "@docspace/shared/components/selected-item";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { objectToGetParams, loadScript } from "@docspace/common/utils";
 import { inject, observer } from "mobx-react";
 
-import { isTablet, isMobile } from "@docspace/components/utils/device";
+import { isTablet, isMobile } from "@docspace/shared/utils/device";
 
-import { RectangleSkeleton } from "@docspace/shared/components/skeletons/rectangle";
+import { RectangleSkeleton } from "@docspace/shared/skeletons/rectangle";
 import { HelpButton } from "@docspace/shared/components/help-button";
 
 import GetCodeDialog from "../sub-components/GetCodeDialog";
@@ -441,7 +441,7 @@ const Manager = (props) => {
       <Container>
         {showPreview && (
           <Preview>
-            <TabContainer onSelect={onChangeTab} elements={dataTabs} />
+            <TabsContainer onSelect={onChangeTab} elements={dataTabs} />
           </Preview>
         )}
         <Controls>

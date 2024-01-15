@@ -1,15 +1,15 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import Row from "@docspace/components/row";
-import LinkWithDropdown from "@docspace/components/link-with-dropdown";
-import ToggleButton from "@docspace/components/toggle-button";
+import { Row } from "@docspace/shared/components/row";
+import { LinkWithDropdown } from "@docspace/shared/components/link-with-dropdown";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { StyledLinkRow } from "../StyledPanels";
 import AccessComboBox from "./AccessComboBox";
 import { ShareAccessRights } from "@docspace/common/constants";
 import AccessEditIcon from "PUBLIC_DIR/images/access.edit.react.svg";
 import CopyIcon from "PUBLIC_DIR/images/copy.react.svg";
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
-import { Base } from "@docspace/components/themes";
+import { commonIconsStyles } from "@docspace/shared/utils";
+import { Base } from "@docspace/shared/themes";
 
 const StyledAccessEditIcon = styled(AccessEditIcon)`
   ${commonIconsStyles}

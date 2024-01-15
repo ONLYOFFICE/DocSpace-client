@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import Text from "@docspace/components/text";
-import Button from "@docspace/components/button";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
 import { inject, observer } from "mobx-react";
 import {
   StyledPage,
@@ -11,8 +11,8 @@ import {
   StyledContent,
 } from "./StyledConfirm";
 import withLoader from "../withLoader";
-import FormWrapper from "@docspace/components/form-wrapper";
-import toastr from "@docspace/components/toast/toastr";
+import { FormWrapper } from "@docspace/shared/components/form-wrapper";
+import { toastr } from "@docspace/shared/components/toast";
 import DocspaceLogo from "../../../DocspaceLogo";
 import { ownerChange } from "@docspace/common/api/settings";
 import { getUserFromConfirm } from "@docspace/common/api/people";

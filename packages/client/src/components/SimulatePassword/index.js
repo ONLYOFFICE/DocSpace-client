@@ -4,8 +4,8 @@ import React, { useState, useEffect, memo } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import InputBlock from "@docspace/components/input-block";
-import globalColors from "@docspace/components/utils/globalColors";
+import { InputBlock } from "@docspace/shared/components/input-block";
+import { globalColors } from "@docspace/shared/themes";
 
 const iconColor = globalColors.gray;
 

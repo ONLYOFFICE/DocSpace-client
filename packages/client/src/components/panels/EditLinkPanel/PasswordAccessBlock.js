@@ -1,12 +1,12 @@
 import React, { useRef } from "react";
 import ToggleBlock from "./ToggleBlock";
-import PasswordInput from "@docspace/components/password-input";
-import IconButton from "@docspace/components/icon-button";
-import Link from "@docspace/components/link";
+import { PasswordInput } from "@docspace/shared/components/password-input";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { Link } from "@docspace/shared/components/link";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
-import FieldContainer from "@docspace/components/field-container";
+import { FieldContainer } from "@docspace/shared/components/field-container";
 import copy from "copy-to-clipboard";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 
 const PasswordAccessBlock = (props) => {
   const {
@@ -26,7 +26,7 @@ const PasswordAccessBlock = (props) => {
   };
 
   const onCleanClick = () => {
-    passwordInputRef.current.state.inputValue = ""; //TODO: PasswordInput bug
+    passwordInputRef.current.setState((s) => ({ ...s, value: "" })); //TODO: PasswordInput bug
     setPasswordValue("");
   };
 

@@ -7,9 +7,9 @@ import { inject, observer } from "mobx-react";
 
 import { flagsIcons } from "@docspace/common/utils/image-flags";
 import { convertToCulture } from "@docspace/common/utils";
-import Backdrop from "@docspace/components/backdrop";
-import { isMobile } from "@docspace/components/utils/device";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { isMobile } from "@docspace/shared/utils";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 const LanguageFilter = ({
   t,

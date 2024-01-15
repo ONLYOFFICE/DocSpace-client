@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import ModalDialogContainer from "@docspace/client/src/components/dialogs/ModalDialogContainer";
-import Text from "@docspace/components/text";
-import Button from "@docspace/components/button";
-import ModalDialog from "@docspace/components/modal-dialog";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
-import { TextInput, Checkbox } from "@docspace/components";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 import { useStore } from "SRC_DIR/store";
 import { validatePortalName } from "SRC_DIR/utils";
 
@@ -73,25 +74,29 @@ const CreatePortalDialog = () => {
     const protocol = window?.location?.protocol;
     const host = `${tenantAlias}.${baseDomain}`;
 
-    const isValidPortalName = validatePortalName(name, domainValidator, setRegisterError, t)
+    const isValidPortalName = validatePortalName(
+      name,
+      domainValidator,
+      setRegisterError,
+      t
+    );
 
     if (isValidPortalName) {
       await createNewPortal(data)
-      .then( async (data) => {
-        const {tenant} = data;
-        if (visit) {
-          const portalUrl = `${protocol}//${tenant?.domain}/`;
-          
-          return window.open(portalUrl, "_self");
-        }
+        .then(async (data) => {
+          const { tenant } = data;
+          if (visit) {
+            const portalUrl = `${protocol}//${tenant?.domain}/`;
 
-        await authStore.settingsStore.getAllPortals()
-        onClose();
+            return window.open(portalUrl, "_self");
+          }
 
-      })
-      .catch((error) => {
-        setRegisterError(error?.response?.data?.message);
-      })
+          await authStore.settingsStore.getAllPortals();
+          onClose();
+        })
+        .catch((error) => {
+          setRegisterError(error?.response?.data?.message);
+        });
     }
   };
 
@@ -125,7 +130,9 @@ const CreatePortalDialog = () => {
             className="create-docspace-input"
           />
           <div>
-              <Text fontSize="12px" fontWeight="400" color="#F24724">{registerError}</Text>
+            <Text fontSize="12px" fontWeight="400" color="#F24724">
+              {registerError}
+            </Text>
           </div>
           <div style={{ marginTop: "6px", wordWrap: "break-word" }}>
             <Text

@@ -3,8 +3,8 @@ import moment from "moment-timezone";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
-import SelectedItem from "@docspace/components/selected-item";
-import Link from "@docspace/components/link";
+import { SelectedItem } from "@docspace/shared/components/selected-item";
+import { Link } from "@docspace/shared/components/link";
 
 const StatusBarWrapper = styled.div`
   margin-top: 9px;

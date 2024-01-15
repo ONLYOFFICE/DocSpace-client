@@ -1,9 +1,9 @@
 import { inject, observer } from "mobx-react";
 
-import ToggleButton from "@docspace/components/toggle-button";
-import Text from "@docspace/components/text";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { Text } from "@docspace/shared/components/text";
 import { NotificationsType } from "@docspace/common/constants";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 
 const RoomsActivityContainer = ({
   t,

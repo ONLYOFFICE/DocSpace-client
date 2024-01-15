@@ -4,31 +4,33 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 
-import Text from "@docspace/components/text";
-import FormWrapper from "@docspace/components/form-wrapper";
-import EmailInput from "@docspace/components/email-input";
-import PasswordInput from "@docspace/components/password-input";
-import IconButton from "@docspace/components/icon-button";
-import ComboBox from "@docspace/components/combobox";
-import Link from "@docspace/components/link";
-import Checkbox from "@docspace/components/checkbox";
-import Button from "@docspace/components/button";
-import FieldContainer from "@docspace/components/field-container";
+import { Text } from "@docspace/shared/components/text";
+import { FormWrapper } from "@docspace/shared/components/form-wrapper";
+import { EmailInput } from "@docspace/shared/components/email-input";
+import { PasswordInput } from "@docspace/shared/components/password-input";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { ComboBox } from "@docspace/shared/components/combobox";
+import { Link } from "@docspace/shared/components/link";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Button } from "@docspace/shared/components/button";
+import { FieldContainer } from "@docspace/shared/components/field-container";
 import ErrorContainer from "@docspace/common/components/ErrorContainer";
-import FileInput from "@docspace/components/file-input";
+import { FileInput } from "@docspace/shared/components/file-input";
 
-import Loader from "@docspace/components/loader";
+import { Loader } from "@docspace/shared/components/loader";
 
 import withCultureNames from "@docspace/common/hoc/withCultureNames";
-import { EmailSettings } from "@docspace/components/utils/email";
+
 import {
   combineUrl,
   createPasswordHash,
   convertLanguage,
   setCookie,
 } from "@docspace/common/utils";
-import { LANGUAGE, COOKIE_EXPIRATION_YEAR } from "@docspace/common/constants";
+import { COOKIE_EXPIRATION_YEAR } from "@docspace/common/constants";
+import { LANGUAGE } from "@docspace/shared/constants";
 import BetaBadge from "@docspace/common/components/BetaBadge";
+import { EmailSettings } from "@docspace/shared/utils";
 
 import {
   Wrapper,
@@ -46,7 +48,7 @@ import {
   DEFAULT_SELECT_TIMEZONE,
   DEFAULT_SELECT_LANGUAGE,
 } from "SRC_DIR/helpers/constants";
-import { isMobile } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/shared/utils";
 
 const emailSettings = new EmailSettings();
 emailSettings.allowDomainPunycode = true;
@@ -164,6 +166,7 @@ const Wizard = (props) => {
   }, []);
 
   const onEmailChangeHandler = (result) => {
+    console.log(result);
     setEmail(result.value);
     setHasErrorEmail(!result.isValid);
   };
@@ -178,6 +181,7 @@ const Wizard = (props) => {
 
   const generatePassword = () => {
     if (isCreated) return;
+
     refPassInput.current.onGeneratePassword();
   };
 
@@ -212,6 +216,8 @@ const Wizard = (props) => {
   const validateFields = () => {
     const emptyEmail = email.trim() === "";
     const emptyPassword = password.trim() === "";
+
+    console.log(emptyEmail, email);
 
     if (emptyEmail || emptyPassword) {
       emptyEmail && setHasErrorEmail(true);

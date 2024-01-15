@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { mobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/shared/utils";
 
 export const StyledContainer = styled.div`
   width: 100%;

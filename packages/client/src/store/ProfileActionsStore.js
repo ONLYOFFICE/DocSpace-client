@@ -17,8 +17,8 @@ import { isMobile } from "react-device-detect";
 
 import { ZendeskAPI } from "@docspace/common/components/Zendesk";
 import { LIVE_CHAT_LOCAL_STORAGE_KEY } from "@docspace/common/constants";
-import toastr from "@docspace/components/toast/toastr";
-import { isDesktop, isTablet } from "@docspace/components/utils/device";
+import { toastr } from "@docspace/shared/components/toast";
+import { isDesktop, isTablet } from "@docspace/shared/utils";
 
 const PROXY_HOMEPAGE_URL = combineUrl(window.DocSpaceConfig?.proxy?.url, "/");
 const PROFILE_SELF_URL = combineUrl(PROXY_HOMEPAGE_URL, "/profile");
@@ -109,7 +109,6 @@ class ProfileActionsStore {
 
     if ((isAdmin || isOwner || isRoomAdmin) && !prefix) {
       this.selectedFolderStore.setSelectedFolder(null);
-      this.treeFoldersStore.setSelectedNode(["accounts"]);
     }
 
     const state = {
@@ -198,8 +197,14 @@ class ProfileActionsStore {
   };
 
   getActions = (t) => {
-    const { enablePlugins, standalone, portals, baseDomain, tenantAlias, limitedAccessSpace } =
-      this.authStore.settingsStore;
+    const {
+      enablePlugins,
+      standalone,
+      portals,
+      baseDomain,
+      tenantAlias,
+      limitedAccessSpace,
+    } = this.authStore.settingsStore;
     const isAdmin = this.authStore.isAdmin;
     const isCommunity = this.authStore.isCommunity;
     const { isOwner } = this.authStore.userStore.user;
@@ -232,7 +237,7 @@ class ProfileActionsStore {
         label: portal.domain,
         onClick: () => window.open(`${protocol}//${portal.domain}/`, "_self"),
         disabled: false,
-        checked: tenantAlias === portal.portalName
+        checked: tenantAlias === portal.portalName,
       };
     });
 

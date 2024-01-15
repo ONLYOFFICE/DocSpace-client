@@ -1,6 +1,6 @@
 import { FolderType, PageType } from "../constants";
 
-import { isMobile, isTablet } from "@docspace/components/utils/device";
+import { isMobile, isTablet } from "@docspace/shared/utils";
 
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
 import CatalogUserReactSvgUrl from "PUBLIC_DIR/images/catalog.user.react.svg?url";

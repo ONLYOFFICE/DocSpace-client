@@ -5,15 +5,15 @@ import { createUser, signupOAuth } from "@docspace/common/api/people";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 import { useSearchParams } from "react-router-dom";
-import Avatar from "@docspace/components/avatar";
-import Button from "@docspace/components/button";
-import TextInput from "@docspace/components/text-input";
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
-import PasswordInput from "@docspace/components/password-input";
-import FieldContainer from "@docspace/components/field-container";
-import toastr from "@docspace/components/toast/toastr";
-import SocialButton from "@docspace/components/social-button";
+import { Avatar } from "@docspace/shared/components/avatar";
+import { Button } from "@docspace/shared/components/button";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { PasswordInput } from "@docspace/shared/components/password-input";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { toastr } from "@docspace/shared/components/toast";
+import { SocialButton } from "@docspace/shared/components/social-button";
 import { getUserFromConfirm } from "@docspace/common/api/people";
 import {
   createPasswordHash,
@@ -25,9 +25,9 @@ import { login } from "@docspace/common/utils/loginUtils";
 import { providersData } from "@docspace/common/constants";
 import withLoader from "../withLoader";
 import MoreLoginModal from "@docspace/common/components/MoreLoginModal";
-import EmailInput from "@docspace/components/email-input";
+import { EmailInput } from "@docspace/shared/components/email-input";
 import { getPasswordErrorMessage } from "../../../helpers/utils";
-import FormWrapper from "@docspace/components/form-wrapper";
+import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import DocspaceLogo from "../../../DocspaceLogo";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import { StyledPage, StyledContent } from "./StyledConfirm";
@@ -477,8 +477,8 @@ const CreateUserForm = (props) => {
                     {ssoExists() && !oauthDataExists()
                       ? t("WelcomeRegisterViaSSO")
                       : oauthDataExists()
-                      ? t("WelcomeRegisterViaSocial")
-                      : t("WelcomeRegister")}
+                        ? t("WelcomeRegisterViaSocial")
+                        : t("WelcomeRegister")}
                   </p>
                 </div>
               </>
@@ -566,8 +566,8 @@ const CreateUserForm = (props) => {
                         errorText
                           ? errorText
                           : fname.trim().length === 0
-                          ? t("Common:RequiredField")
-                          : t("Common:IncorrectFirstName")
+                            ? t("Common:RequiredField")
+                            : t("Common:IncorrectFirstName")
                       }
                     >
                       <TextInput
@@ -595,8 +595,8 @@ const CreateUserForm = (props) => {
                         errorText
                           ? errorText
                           : sname.trim().length === 0
-                          ? t("Common:RequiredField")
-                          : t("Common:IncorrectLastName")
+                            ? t("Common:RequiredField")
+                            : t("Common:IncorrectLastName")
                       }
                     >
                       <TextInput

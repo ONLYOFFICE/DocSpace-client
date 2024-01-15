@@ -2,9 +2,9 @@ import React from "react";
 
 import { getLogoFromPath } from "@docspace/common/utils";
 
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
-import { isMobile } from "@docspace/components/utils/device";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { isMobile } from "@docspace/shared/utils";
 
 const Logo = (props) => {
   const {

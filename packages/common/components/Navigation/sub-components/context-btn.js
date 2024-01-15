@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react";
 import PropTypes from "prop-types";
 import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/17/vertical-dots.react.svg?url";
-import IconButton from "@docspace/components/icon-button";
-import ContextMenu from "@docspace/components/context-menu";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { ContextMenu } from "@docspace/shared/components/context-menu";
 
 const ContextButton = (props) => {
   const [isOpen, setIsOpen] = useState(false);

@@ -1,6 +1,6 @@
 import React from "react";
-import { LoaderStyle } from "@docspace/components/utils/constants";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { LoaderStyle } from "@docspace/shared/constants";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { StyledSMTPContent } from "./StyledComponent";
 const speed = 2;
 

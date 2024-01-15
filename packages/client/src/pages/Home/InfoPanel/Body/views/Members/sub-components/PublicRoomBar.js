@@ -2,9 +2,9 @@ import React from "react";
 import { ReactSVG } from "react-svg";
 import PeopleIcon from "PUBLIC_DIR/images/people.react.svg?url";
 import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg?url";
-import IconButton from "@docspace/components/icon-button";
+import { IconButton } from "@docspace/shared/components/icon-button";
 import { StyledPublicRoomBar } from "./StyledPublicRoom";
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 
 const PublicRoomBar = (props) => {
   const { headerText, bodyText, iconName, onClose, ...rest } = props;

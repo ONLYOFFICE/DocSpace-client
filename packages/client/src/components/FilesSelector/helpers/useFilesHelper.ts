@@ -22,7 +22,7 @@ import {
   FolderType,
 } from "@docspace/common/constants";
 //@ts-ignore
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 
 const DEFAULT_FILE_EXTS = "file";
 
@@ -147,8 +147,8 @@ export const useFilesHelper = ({
       const currentSearch = search
         ? search
         : search === null
-        ? ""
-        : searchValue || "";
+          ? ""
+          : searchValue || "";
 
       const page = startIndex / PAGE_COUNT;
 

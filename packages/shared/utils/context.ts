@@ -1,6 +1,6 @@
 import React from "react";
 
-const defaultValue = {};
+const defaultValue: { sectionWidth?: number; sectionHeight?: number } = {};
 
 export const Context = React.createContext(defaultValue);
 

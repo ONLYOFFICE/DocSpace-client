@@ -1291,9 +1291,7 @@ export default inject(
       folderPath = navigationPath.filter((item) => !item.isRootRoom);
     }
 
-    const isRoot = isFrame
-      ? pathParts?.length === 1 || pathParts?.length === 2
-      : pathParts?.length === 1;
+    const isRoot = pathParts?.length === 1;
 
     const { isPublicRoom, primaryLink, setExternalLink } = publicRoomStore;
 

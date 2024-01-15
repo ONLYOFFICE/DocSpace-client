@@ -266,6 +266,7 @@ const Navigation = ({
               isFrame={isFrame}
               isPublicRoom={isPublicRoom}
               isTrashFolder={isTrashFolder}
+              showTitle={showTitle}
             />
           </StyledContainer>
           {isDesktop && isTrashFolder && !isEmptyPage && (
@@ -305,6 +306,7 @@ Navigation.propTypes = {
   titles: PropTypes.object,
   isEmptyPage: PropTypes.bool,
   isRoom: PropTypes.bool,
+  showTitle: PropTypes.bool,
 };
 
 export default React.memo(Navigation);

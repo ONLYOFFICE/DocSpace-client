@@ -12,13 +12,14 @@ import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/17/vertical-dots.re
 
 const StyledContainer = styled.div`
   ${(props) =>
-    props.theme.interfaceDirection === "rtl"
+    props.showTitle &&
+    (props.theme.interfaceDirection === "rtl"
       ? css`
           margin-right: 16px;
         `
       : css`
           margin-left: 16px;
-        `}
+        `)}
   display: flex;
   align-items: center;
 
@@ -148,6 +149,7 @@ const ControlButtons = ({
   isPublicRoom,
   isTrashFolder,
   isMobile,
+  showTitle,
 }) => {
   const toggleInfoPanelAction = () => {
     toggleInfoPanel && toggleInfoPanel();
@@ -155,7 +157,11 @@ const ControlButtons = ({
   };
 
   return (
-    <StyledContainer isDropBoxComponent={isDropBoxComponent} isFrame={isFrame}>
+    <StyledContainer
+      isDropBoxComponent={isDropBoxComponent}
+      isFrame={isFrame}
+      showTitle={showTitle}
+    >
       {!isRootFolder || (isTrashFolder && !isEmptyFilesList) ? (
         <>
           {!isMobile && canCreate && (
@@ -255,6 +261,7 @@ ControlButtons.propTypes = {
   canCreate: PropTypes.bool,
   getContextOptionsFolder: PropTypes.func,
   getContextOptionsPlus: PropTypes.func,
+  showTitle: PropTypes.bool,
 };
 
 export default React.memo(ControlButtons);

@@ -1,23 +1,36 @@
 import React, { useState, useRef } from "react";
-import PropTypes from "prop-types";
+
 import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/17/vertical-dots.react.svg?url";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { ContextMenu } from "@docspace/shared/components/context-menu";
 
-const ContextButton = (props) => {
+import { IconButton } from "../../icon-button";
+import { ContextMenu, TContextMenuRef } from "../../context-menu";
+
+import { IContextButtonProps } from "../Navigation.types";
+
+const ContextButton = ({
+  className,
+  getData,
+  withMenu = true,
+  isTrashFolder,
+  isMobile,
+  id,
+  ...rest
+}: IContextButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const ref = useRef(null);
-  const menuRef = useRef(null);
+  const ref = useRef<HTMLDivElement | null>(null);
+  const menuRef = useRef<TContextMenuRef | null>(null);
 
-  const { className, getData, withMenu, isTrashFolder, isMobile, ...rest } =
-    props;
+  const toggle = (e: React.MouseEvent<HTMLDivElement>, open: boolean) => {
+    if (open) {
+      menuRef.current?.show(e);
+    } else {
+      menuRef.current?.hide(e);
+    }
 
-  const toggle = (e, isOpen) => {
-    isOpen ? menuRef.current.show(e) : menuRef.current.hide(e);
-    setIsOpen(isOpen);
+    setIsOpen(open);
   };
 
-  const onClick = (e) => {
+  const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (withMenu) toggle(e, !isOpen);
   };
 
@@ -32,7 +45,7 @@ const ContextButton = (props) => {
       <IconButton
         onClick={onClick}
         iconName={VerticalDotsReactSvgUrl}
-        id={props.id}
+        id={id}
         size={17}
         isFill
       />
@@ -46,16 +59,6 @@ const ContextButton = (props) => {
       />
     </div>
   );
-};
-
-ContextButton.propTypes = {
-  className: PropTypes.string,
-  getData: PropTypes.func.isRequired,
-  id: PropTypes.string,
-};
-
-ContextButton.defaultProps = {
-  withMenu: true,
 };
 
 export default ContextButton;

@@ -52,6 +52,8 @@ export type HeaderType = {
 
 export type ContextMenuModel = ContextMenuType | SeparatorType;
 
+export type TGetContextMenuModel = () => ContextMenuModel[];
+
 export interface ContextMenuProps {
   /** Unique identifier of the element */
   id?: string;
@@ -98,7 +100,7 @@ export interface ContextMenuProps {
   /** Fills the icons with default colors */
   fillIcon?: boolean;
   /** Function that returns an object containing the elements of the context menu */
-  getContextModel?: () => ContextMenuModel[];
+  getContextModel?: TGetContextMenuModel;
   /** Specifies the offset  */
   leftOffset?: number;
   rightOffset?: number;
@@ -106,3 +108,8 @@ export interface ContextMenuProps {
   isArchive?: boolean;
   ref?: React.RefObject<HTMLDivElement>;
 }
+
+export type TContextMenuRef = {
+  show: (e: React.MouseEvent) => void;
+  hide: (e: React.MouseEvent) => {};
+};

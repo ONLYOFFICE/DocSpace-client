@@ -44,6 +44,7 @@ const SessionsTableHeader = (props) => {
       default: true,
       active: true,
       minWidth: 180,
+      isDisabled: true,
       onChange: onColumnChange,
     },
     {

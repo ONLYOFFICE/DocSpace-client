@@ -698,6 +698,7 @@ export function getObjectByLocation(location: Location) {
 
 export const RoomsTypeValues = Object.values(RoomsType).reduce(
   (acc, current) => {
+    if (typeof current === "string") return { ...acc };
     return { ...acc, [current]: current };
   },
   {},

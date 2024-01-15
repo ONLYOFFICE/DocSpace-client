@@ -1,7 +1,7 @@
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import TableView from "./TableView";
-import { Consumer } from "@docspace/components/utils/context";
+import { Consumer } from "@docspace/shared/utils/context";
 import withLoader from "SRC_DIR/HOCs/withLoader";
 import RowView from "./RowView";
 

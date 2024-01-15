@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import api from "@docspace/common/api";
-import Selector from "@docspace/components/selector";
+import { Selector } from "@docspace/shared/components/selector";
 
 import { GroupsSelectorProps } from "./GroupsSelector.types";
 

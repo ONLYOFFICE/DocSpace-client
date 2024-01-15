@@ -1,5 +1,5 @@
-import Submenu from "@docspace/components/submenu";
-import { tablet } from "@docspace/components/utils/device";
+import { Submenu } from "@docspace/shared/components/submenu";
+import { tablet } from "@docspace/shared/utils";
 import styled from "styled-components";
 
 export const Tabs = styled(Submenu)`

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import FilesFilter from "@docspace/common/api/files/filter";
 import RoomsFilter from "@docspace/common/api/rooms/filter";
-import { getGroup } from "@docspace/common/api/groups";
+// import { getGroup } from "@docspace/common/api/groups";
 import { getUserById } from "@docspace/common/api/people";
 
 import { Events, RoomSearchArea } from "@docspace/common/constants";
@@ -15,7 +15,6 @@ import { CategoryType } from "SRC_DIR/helpers/constants";
 
 const useFiles = ({
   t,
-
   dragging,
   setDragging,
   disableDrag,
@@ -201,12 +200,12 @@ const useFiles = ({
     const newFilter = filter
       ? filter.clone()
       : isRooms
-      ? RoomsFilter.getDefault()
-      : FilesFilter.getDefault();
+        ? RoomsFilter.getDefault()
+        : FilesFilter.getDefault();
     const requests = [Promise.resolve(newFilter)];
 
     if (type === "group") {
-      requests.push(getGroup(itemId));
+      // requests.push(getGroup(itemId));
     } else if (type === "user") {
       requests.push(getUserById(itemId));
     }

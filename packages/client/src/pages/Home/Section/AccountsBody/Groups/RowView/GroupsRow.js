@@ -2,7 +2,7 @@ import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 
 import * as Styled from "./index.styled";
-import Link from "@docspace/components/link";
+import { Link } from "@docspace/shared/components/link";
 import { Events } from "@docspace/common/constants";
 
 const GroupsRow = ({

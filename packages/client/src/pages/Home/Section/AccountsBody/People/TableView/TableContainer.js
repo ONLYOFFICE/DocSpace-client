@@ -5,9 +5,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import { Base } from "@docspace/components/themes";
-import TableContainer from "@docspace/components/table-container";
-import TableBody from "@docspace/components/table-container/TableBody";
+import { Base } from "@docspace/shared/themes";
+import { TableContainer, TableBody } from "@docspace/shared/components/table";
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";

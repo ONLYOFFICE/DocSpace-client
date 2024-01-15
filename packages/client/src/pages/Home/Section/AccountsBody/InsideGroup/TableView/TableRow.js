@@ -12,7 +12,7 @@ import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 
-import Badges from "../Badges";
+import Badges from "../../Badges";
 import { Base } from "@docspace/shared/themes";
 
 const StyledWrapper = styled.div`
@@ -452,8 +452,8 @@ const PeopleTableRow = (props) => {
             {statusType === "pending"
               ? email
               : displayName?.trim()
-              ? displayName
-              : email}
+                ? displayName
+                : email}
           </Link>
           <Badges statusType={statusType} isPaid={isPaidUser} isSSO={isSSO} />
         </TableCell>

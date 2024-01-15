@@ -3,10 +3,10 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import React, { useState, useEffect, useCallback } from "react";
 
-import Aside from "@docspace/components/aside";
-import Backdrop from "@docspace/components/backdrop";
-import Selector from "@docspace/components/selector";
-import toastr from "@docspace/components/toast/toastr";
+import { Aside } from "@docspace/shared/aside";
+import { Backdrop } from "@docspace/shared/backdrop";
+import { Selector } from "@docspace/shared/selector";
+import { toastr } from "@docspace/shared/toast";
 
 import { getUserRole } from "@docspace/common/utils";
 import Filter from "@docspace/common/api/people/filter";
@@ -14,9 +14,7 @@ import Loaders from "@docspace/common/components/Loaders";
 import { getMembersList } from "@docspace/common/api/people";
 import useLoadingWithTimeout from "SRC_DIR/Hooks/useLoadingWithTimeout";
 import { ShareAccessRights, LOADER_TIMEOUT } from "@docspace/common/constants";
-
 import withLoader from "../../../HOCs/withLoader";
-
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 
 import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";

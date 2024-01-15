@@ -1,10 +1,10 @@
 import styled, { css } from "styled-components";
-import RowContainer from "@docspace/components/row-container";
+import { RowContainer } from "@docspace/shared/components/row-container";
 import { isMobile } from "react-device-detect";
-import Row from "@docspace/components/row";
-import { Base } from "@docspace/components/themes";
-import { mobile, tablet } from "@docspace/components/utils/device";
-import RowContent from "@docspace/components/row-content";
+import { Row } from "@docspace/shared/components/row";
+import { Base } from "@docspace/shared/themes";
+import { mobile, tablet } from "@docspace/shared/utils/device";
+import { RowContent } from "@docspace/shared/components/row-content";
 
 export const GroupsRowContainer = styled(RowContainer)`
   .row-selected + .row-wrapper:not(.row-selected),

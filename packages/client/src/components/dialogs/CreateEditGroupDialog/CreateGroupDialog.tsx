@@ -1,7 +1,10 @@
 import { useState, ChangeEvent } from "react";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Button from "@docspace/components/button";
-import toastr from "@docspace/components/toast/toastr";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { toastr } from "@docspace/shared/components/toast";
 import { observer, inject } from "mobx-react";
 
 import { useTranslation } from "react-i18next";
@@ -63,7 +66,7 @@ const CreateGroupDialog = ({
 
   return (
     <ModalDialog
-      displayType="aside"
+      displayType={ModalDialogType.aside}
       withBodyScroll
       visible={visible}
       onClose={onClose}
@@ -96,7 +99,7 @@ const CreateGroupDialog = ({
           id="create-group-modal_submit"
           tabIndex={5}
           label={t("Common:Create")}
-          size="normal"
+          size={ButtonSize.normal}
           primary
           scale
           onClick={onCreateGroup}
@@ -107,7 +110,7 @@ const CreateGroupDialog = ({
           id="create-group-modal_cancel"
           tabIndex={5}
           label={t("Common:CancelButton")}
-          size="normal"
+          size={ButtonSize.normal}
           scale
           isDisabled={isLoading}
           onClick={onClose}

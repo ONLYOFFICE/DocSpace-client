@@ -2,13 +2,13 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { isMobile } from "react-device-detect";
 
-import Row from "@docspace/components/row";
-import { Base } from "@docspace/components/themes";
+import { Row } from "@docspace/shared/components/row";
+import { Base } from "@docspace/shared/themes";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 
 import UserContent from "./userContent";
-import { mobile, tablet } from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/shared/utils/device";
 
 const marginStyles = css`
   margin-left: -24px;

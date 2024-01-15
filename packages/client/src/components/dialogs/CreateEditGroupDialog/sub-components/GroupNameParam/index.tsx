@@ -1,8 +1,8 @@
 import { ChangeEvent } from "react";
 import { useState } from "react";
-import Label from "@docspace/components/label";
-import TextInput from "@docspace/components/text-input";
-import FieldContainer from "@docspace/components/field-container";
+import { Label } from "@docspace/shared/components/label";
+import { InputType, TextInput } from "@docspace/shared/components/text-input";
+import { FieldContainer } from "@docspace/shared/components/field-container";
 import * as Styled from "./index.styled";
 
 interface GroupNameParamProps {
@@ -33,6 +33,7 @@ const GroupNameParam = ({
       >
         <TextInput
           id={"create-group-name"}
+          type={InputType.text}
           value={groupName}
           onChange={onChangeGroupName}
           // onFocus={onFocus}

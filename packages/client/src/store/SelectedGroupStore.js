@@ -1,5 +1,5 @@
 import { action, computed, makeObservable, observable } from "mobx";
-import { getGroup } from "@docspace/common/api/groups";
+// import { getGroup } from "@docspace/common/api/groups";
 
 class SelectedGroupStore {
   selectedGroup = null;
@@ -36,7 +36,7 @@ class SelectedGroupStore {
   };
 
   setTargetedGroup = async (groupId) => {
-    const res = await getGroup(groupId);
+    // const res = await getGroup(groupId);
     this.targetedGroup = res;
   };
 
@@ -59,7 +59,7 @@ class SelectedGroupStore {
     groups.filter(async (el) => {
       if (el.id === group) {
         if (!el.members) {
-          const currGroup = await getGroup(el.id);
+          // const currGroup = await getGroup(el.id);
           countMembers = currGroup.members.length; // TODO: simplify after fixing server issues with getGroupListFull
         } else {
           countMembers = el.members.length;

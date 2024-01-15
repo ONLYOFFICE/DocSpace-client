@@ -685,7 +685,7 @@ export async function moveToFolder(
   };
   const res = (await request({
     method: "put",
-    url: "/files/fileops/copy",
+    url: "/files/fileops/move",
     data,
   })) as TOperation[];
 

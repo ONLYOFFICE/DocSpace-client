@@ -7,7 +7,7 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
-import { showLoader, hideLoader } from "@docspace/common/utils";
+import { showLoader, hideLoader } from "@docspace/shared/utils/common";
 
 import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";

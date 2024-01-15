@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { isMobile, isIOS, deviceType } from "react-device-detect";
-import combineUrl from "@docspace/common/utils/combineUrl";
-import { FolderType, EDITOR_ID } from "@docspace/common/constants";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { FolderType } from "@docspace/shared/enums";
+import { EDITOR_ID } from "@docspace/shared/constants";
 import throttle from "lodash/throttle";
 import { Toast } from "@docspace/shared/components/toast";
 import { toast } from "react-toastify";
@@ -18,11 +19,12 @@ import {
   getSharedUsers,
   getProtectUsers,
   sendEditorNotify,
-} from "@docspace/common/api/files";
+} from "@docspace/shared/api/files";
 import { EditorWrapper } from "../components/StyledEditor";
 import { useTranslation } from "react-i18next";
 import withDialogs from "../helpers/withDialogs";
-import { assign, frameCallEvent, getEditorTheme } from "@docspace/common/utils";
+import { assign, frameCallEvent } from "@docspace/shared/utils/common";
+import { getEditorTheme } from "@docspace/shared/utils";
 import { toastr } from "@docspace/shared/components/toast";
 import { DocumentEditor } from "@onlyoffice/document-editor-react";
 import ErrorContainer from "@docspace/common/components/ErrorContainer";

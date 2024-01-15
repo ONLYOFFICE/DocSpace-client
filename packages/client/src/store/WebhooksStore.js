@@ -7,7 +7,7 @@ import {
   retryWebhooks,
   toggleEnabledWebhook,
   updateWebhook,
-} from "@docspace/common/api/settings";
+} from "@docspace/shared/api/settings";
 import { makeAutoObservable, runInAction } from "mobx";
 
 class WebhooksStore {
@@ -26,15 +26,15 @@ class WebhooksStore {
   configName = "";
 
   PASSWORD_SETTINGS = {
-    "minLength": 12,
-    "allowedCharactersRegexStr": "[\\x21-\\x7E]",
-    "upperCase": true,
-    "digits": true,
-    "digitsRegexStr": "(?=.*\\d)",
-    "upperCaseRegexStr": "(?=.*[A-Z])",
-    "specSymbols": false,
-    "specSymbolsRegexStr": "(?=.*[\\x21-\\x2F\\x3A-\\x40\\x5B-\\x60\\x7B-\\x7E])"
-}
+    minLength: 12,
+    allowedCharactersRegexStr: "[\\x21-\\x7E]",
+    upperCase: true,
+    digits: true,
+    digitsRegexStr: "(?=.*\\d)",
+    upperCaseRegexStr: "(?=.*[A-Z])",
+    specSymbols: false,
+    specSymbolsRegexStr: "(?=.*[\\x21-\\x2F\\x3A-\\x40\\x5B-\\x60\\x7B-\\x7E])",
+  };
 
   constructor(authStore) {
     makeAutoObservable(this);
@@ -84,7 +84,7 @@ class WebhooksStore {
       webhook.name,
       webhook.uri,
       webhook.secretKey,
-      webhook.ssl,
+      webhook.ssl
     );
 
     this.webhooks = [
@@ -106,13 +106,17 @@ class WebhooksStore {
 
   toggleEnabled = async (desiredWebhook) => {
     await toggleEnabledWebhook(desiredWebhook);
-    const index = this.webhooks.findIndex((webhook) => webhook.id === desiredWebhook.id);
+    const index = this.webhooks.findIndex(
+      (webhook) => webhook.id === desiredWebhook.id
+    );
     this.webhooks[index].enabled = !this.webhooks[index].enabled;
   };
 
   deleteWebhook = async (webhook) => {
     await removeWebhook(webhook.id);
-    this.webhooks = this.webhooks.filter((currentWebhook) => currentWebhook.id !== webhook.id);
+    this.webhooks = this.webhooks.filter(
+      (currentWebhook) => currentWebhook.id !== webhook.id
+    );
   };
 
   editWebhook = async (prevWebhook, webhookInfo) => {
@@ -121,10 +125,12 @@ class WebhooksStore {
       webhookInfo.name,
       webhookInfo.uri,
       webhookInfo.secretKey || prevWebhook.secretKey,
-      webhookInfo.ssl,
+      webhookInfo.ssl
     );
     this.webhooks = this.webhooks.map((webhook) =>
-      webhook.id === prevWebhook.id ? { ...prevWebhook, ...webhookInfo } : webhook,
+      webhook.id === prevWebhook.id
+        ? { ...prevWebhook, ...webhookInfo }
+        : webhook
     );
   };
 
@@ -209,10 +215,14 @@ class WebhooksStore {
     const params = {};
     if (filters.deliveryDate !== null) {
       params.deliveryFrom =
-        filters.deliveryDate.format("YYYY-MM-DD") + "T" + filters.deliveryFrom.format("HH:mm:ss");
+        filters.deliveryDate.format("YYYY-MM-DD") +
+        "T" +
+        filters.deliveryFrom.format("HH:mm:ss");
 
       params.deliveryTo =
-        filters.deliveryDate.format("YYYY-MM-DD") + "T" + filters.deliveryTo.format("HH:mm:ss");
+        filters.deliveryDate.format("YYYY-MM-DD") +
+        "T" +
+        filters.deliveryTo.format("HH:mm:ss");
     }
 
     const statusEnum = {
@@ -226,7 +236,7 @@ class WebhooksStore {
     if (filters.status.length > 0) {
       const statusFlag = filters.status.reduce(
         (sum, currentValue) => sum + statusEnum[currentValue],
-        0,
+        0
       );
       params.groupStatus = statusFlag;
     }

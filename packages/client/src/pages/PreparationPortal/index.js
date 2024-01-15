@@ -4,7 +4,7 @@ import { withTranslation } from "react-i18next";
 
 import { StyledPreparationPortal } from "./StyledPreparationPortal";
 import { Text } from "@docspace/shared/components/text";
-import { getRestoreProgress } from "@docspace/common/api/portal";
+import { getRestoreProgress } from "@docspace/shared/api/portal";
 import { observer, inject } from "mobx-react";
 import PropTypes from "prop-types";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";

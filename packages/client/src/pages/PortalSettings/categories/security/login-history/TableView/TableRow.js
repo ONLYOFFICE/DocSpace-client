@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { TableRow } from "@docspace/shared/components/table";
 import { TableCell } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
-import { convertTime } from "@docspace/common/utils/convertTime";
+import { convertTime } from "@docspace/shared/utils/convertTime";
 
 const StyledPeopleRow = styled(TableRow)`
   .table-container_cell {

@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
 import { RowContent } from "@docspace/shared/components/row-content";
-import { convertTime } from "@docspace/common/utils/convertTime";
+import { convertTime } from "@docspace/shared/utils/convertTime";
 
 const StyledRowContent = styled(RowContent)`
   .row-main-container-wrapper {

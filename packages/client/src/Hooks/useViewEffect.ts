@@ -1,6 +1,6 @@
 import { useEffect, useContext } from "react";
 
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 //@ts-ignore
 import { isTablet, isMobile, Context } from "@docspace/shared/utils";
 import { isMobile as isMobileDevice } from "react-device-detect";

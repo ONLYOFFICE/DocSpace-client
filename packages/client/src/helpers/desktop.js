@@ -1,5 +1,5 @@
 import store from "../store";
-import { desktopConstants } from "@docspace/common/desktop";
+import { desktopConstants } from "@docspace/shared/utils/desktop";
 import { encryptionUploadDialog as encryptionUploadDialogHelper } from "./encryptionUploadDialog";
 
 export function encryptionUploadDialog(callback) {

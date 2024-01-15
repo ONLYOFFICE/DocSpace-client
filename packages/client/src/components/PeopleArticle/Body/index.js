@@ -2,7 +2,7 @@
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
 import React from "react";
 import { withTranslation } from "react-i18next";
-import Filter from "@docspace/common/api/people/filter";
+import Filter from "@docspace/shared/api/people/filter";
 import Loaders from "@docspace/common/components/Loaders";
 import { inject, observer } from "mobx-react";
 import { getSelectedGroup } from "../../../helpers/people-helpers";
@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { isMobile } from "@docspace/shared/utils";
 import { isMobileOnly } from "react-device-detect";
 import config from "PACKAGE_FILE";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { ArticleItem } from "@docspace/shared/components/article-item";
 import withLoader from "../../../HOCs/withLoader";
 

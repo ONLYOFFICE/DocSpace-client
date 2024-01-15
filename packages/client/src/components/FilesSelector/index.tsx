@@ -4,8 +4,8 @@ import { useTranslation } from "react-i18next";
 
 // @ts-ignore
 import Loaders from "@docspace/common/components/Loaders";
-import { FolderType, RoomsType } from "@docspace/common/constants";
-import { DeviceType } from "@docspace/common/constants";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { DeviceType } from "@docspace/shared/enums";
 
 import { Selector } from "@docspace/shared/components/selector";
 import { Aside } from "@docspace/shared/components/aside";

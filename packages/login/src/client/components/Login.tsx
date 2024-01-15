@@ -8,9 +8,9 @@ import {
   getProviderTranslation,
   getOAuthToken,
   getLoginLink,
-} from "@docspace/common/utils";
+} from "@docspace/shared/utils/common";
 import { checkIsSSR } from "@docspace/shared/utils";
-import { providersData } from "@docspace/common/constants";
+import { PROVIDERS_DATA } from "@docspace/shared/constants";
 import { Link } from "@docspace/shared/components/link";
 import { Toast } from "@docspace/shared/components/toast";
 import LoginForm from "./sub-components/LoginForm";
@@ -22,10 +22,10 @@ import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import SSOIcon from "PUBLIC_DIR/images/sso.react.svg";
 import { Dark, Base } from "@docspace/shared/themes";
 import { useMounted } from "../helpers/useMounted";
-import { getBgPattern } from "@docspace/common/utils";
+import { getBgPattern } from "@docspace/shared/utils/common";
 import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
-import { getLogoFromPath, getSystemTheme } from "@docspace/common/utils";
-import { TenantStatus } from "@docspace/common/constants";
+import { getLogoFromPath, getSystemTheme } from "@docspace/shared/utils";
+import { TenantStatus } from "@docspace/shared/enums";
 
 const themes = {
   Dark: Dark,
@@ -110,7 +110,7 @@ const Login: React.FC<ILoginProps> = ({
     let existProviders = 0;
     providers && providers.length > 0;
     providers?.map((item) => {
-      if (!providersData[item.provider]) return;
+      if (!PROVIDERS_DATA[item.provider]) return;
       existProviders++;
     });
 
@@ -168,11 +168,11 @@ const Login: React.FC<ILoginProps> = ({
     const providerButtons =
       providers &&
       providers.map((item, index) => {
-        if (!providersData[item.provider]) return;
+        if (!PROVIDERS_DATA[item.provider]) return;
         if (index > 1) return;
 
         const { icon, label, iconOptions, className } =
-          providersData[item.provider];
+          PROVIDERS_DATA[item.provider];
 
         return (
           <div className="buttonWrapper" key={`${item.provider}ProviderItem`}>

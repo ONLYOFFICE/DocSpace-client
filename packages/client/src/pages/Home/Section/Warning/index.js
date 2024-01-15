@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import TrashWarning from "@docspace/common/components/Navigation/sub-components/trash-warning";
+import TrashWarning from "@docspace/shared/components/Navigation/sub-components/TrashWarning";
 
 const Warning = () => {
   const { t } = useTranslation("Files");

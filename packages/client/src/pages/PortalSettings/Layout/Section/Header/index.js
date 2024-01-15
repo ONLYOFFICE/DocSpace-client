@@ -20,7 +20,7 @@ import {
   getTKeyByKey,
   checkPropertyByLink,
 } from "../../../utils";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import TariffBar from "@docspace/common/components/TariffBar";
 
 const HeaderContainer = styled.div`

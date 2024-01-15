@@ -9,9 +9,9 @@ import {
   getAppearanceTheme,
   getLogoUrls,
   getCurrentSsoSettings,
-} from "@docspace/common/api/settings";
+} from "@docspace/shared/api/settings";
 
-import { TenantStatus } from "@docspace/common/constants";
+import { TenantStatus } from "@docspace/shared/enums";
 
 export const getAssets = (): assetsType => {
   const manifest = fs.readFileSync(
@@ -68,9 +68,8 @@ export const getInitialState = async (
     getCurrentSsoSettings(),
   ];
 
-  [portalSettings, buildInfo, availableThemes, logoUrls] = await Promise.all(
-    baseSettings
-  );
+  [portalSettings, buildInfo, availableThemes, logoUrls] =
+    await Promise.all(baseSettings);
 
   if (portalSettings.tenantStatus !== TenantStatus.PortalRestore)
     [providers, capabilities, ssoSettings] = await Promise.all(settings);

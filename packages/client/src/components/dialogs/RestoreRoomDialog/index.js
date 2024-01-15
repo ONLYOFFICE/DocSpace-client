@@ -6,7 +6,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { RoomsType } from "@docspace/common/constants";
+import { RoomsType } from "@docspace/shared/enums";
 
 const StyledModal = styled(ModalDialogContainer)`
   max-width: 400px;

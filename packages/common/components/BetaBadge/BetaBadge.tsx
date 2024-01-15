@@ -6,7 +6,7 @@ import { InfoBadge } from "@docspace/shared/components/info-badge";
 import { Link } from "@docspace/shared/components/link";
 
 import type BetaBadgeProps from "./BetaBadge.props";
-import { DeviceType } from "../../constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const MobileOffset = 4;
 const OtherOffset = 10;

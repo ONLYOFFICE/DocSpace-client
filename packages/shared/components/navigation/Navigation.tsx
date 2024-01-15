@@ -14,7 +14,7 @@ import TrashWarning from "./sub-components/TrashWarning";
 import NavigationLogo from "./sub-components/LogoBlock";
 import DropBox from "./sub-components/DropBox";
 
-import { StyledContainer } from "./Navigation.styled";
+import { StyledContainer, StyledTariffWrapper } from "./Navigation.styled";
 import { INavigationProps } from "./Navigation.types";
 
 const Navigation = ({
@@ -52,6 +52,7 @@ const Navigation = ({
   titleIcon,
   currentDeviceType,
   rootRoomTitle,
+  tariffBar,
 
   ...rest
 }: INavigationProps) => {
@@ -257,15 +258,18 @@ const Navigation = ({
           {isDesktop && isTrashFolder && !isEmptyPage && (
             <TrashWarning title={titles.trashWarning} />
           )}
-          {infoPanelIsVisible && !hideInfoPanel && (
-            <ToggleInfoPanelButton
-              id="info-panel-toggle--open"
-              isRootFolder={isRootFolder}
-              toggleInfoPanel={toggleInfoPanel}
-              isInfoPanelVisible={isInfoPanelVisible}
-              titles={titles}
-            />
-          )}
+          <StyledTariffWrapper>
+            {tariffBar && tariffBar}
+            {infoPanelIsVisible && !hideInfoPanel && (
+              <ToggleInfoPanelButton
+                id="info-panel-toggle--open"
+                isRootFolder={isRootFolder}
+                toggleInfoPanel={toggleInfoPanel}
+                isInfoPanelVisible={isInfoPanelVisible}
+                titles={titles}
+              />
+            )}
+          </StyledTariffWrapper>
         </>
       )}
     </Consumer>

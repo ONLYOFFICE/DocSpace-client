@@ -160,4 +160,5 @@ export interface INavigationProps {
   titleIcon: string;
   currentDeviceType: DeviceType;
   rootRoomTitle: string;
+  tariffBar: React.ReactNode;
 }

@@ -8,7 +8,7 @@ import {
   uploadXmlMetadata,
   validateCerts,
 } from "@docspace/common/api/settings";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 import {
   BINDING_POST,
   BINDING_REDIRECT,
@@ -494,10 +494,10 @@ class SsoFormStore {
   setSloUrls = (o) => {
     switch (o.sloBinding) {
       case BINDING_POST:
-        this.sloUrlPost = o.ssoUrl;
+        this.sloUrlPost = o.sloUrl;
         break;
       case BINDING_REDIRECT:
-        this.sloUrlRedirect = o.ssoUrl;
+        this.sloUrlRedirect = o.sloUrl;
     }
   };
 

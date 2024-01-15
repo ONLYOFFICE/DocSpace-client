@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-import { tablet, mobile } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/shared/utils";
 
 const StyledContainer = styled.div`
   margin: 0;

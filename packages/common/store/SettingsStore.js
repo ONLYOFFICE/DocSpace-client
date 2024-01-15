@@ -12,21 +12,22 @@ import FirebaseHelper from "../utils/firebase";
 import {
   ThemeKeys,
   COOKIE_EXPIRATION_YEAR,
-  LANGUAGE,
   TenantStatus,
   DeviceType,
 } from "../constants";
+import { LANGUAGE } from "@docspace/shared/constants";
 import { version } from "../package.json";
 import SocketIOHelper from "../utils/socket";
-import { Dark, Base } from "@docspace/components/themes";
-import { getCookie } from "@docspace/components/utils/cookie";
+import { Dark, Base } from "@docspace/shared/themes";
+
 import {
   size as deviceSize,
   isTablet,
-} from "@docspace/components/utils/device";
+  getCookie,
+} from "@docspace/shared/utils";
 import { wrongPortalNameUrl } from "../constants";
 import { ARTICLE_ALERTS } from "@docspace/client/src/helpers/constants";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 //import { getFromLocalStorage } from "@docspace/client/src/pages/PortalSettings/utils";
 
 const themes = {

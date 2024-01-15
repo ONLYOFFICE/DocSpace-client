@@ -1,14 +1,14 @@
 import React from "react";
 import FilterReactSvrUrl from "PUBLIC_DIR/images/filter.react.svg?url";
 
-import IconButton from "@docspace/components/icon-button";
-import { Base } from "@docspace/components/themes";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { Base } from "@docspace/shared/themes";
 
 import FilterBlock from "./FilterBlock";
 
 import StyledButton from "./StyledButton";
 
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 const FilterButton = ({
   t,
   onFilter,
@@ -37,7 +37,7 @@ const FilterButton = ({
       <StyledButton id={id} onClick={changeShowFilterBlock} title={title}>
         <IconButton iconName={FilterReactSvrUrl} size={16} />
         {selectedFilterValue && selectedFilterValue.length > 0 && (
-          <ColorTheme themeId={ThemeType.IndicatorFilterButton} />
+          <ColorTheme themeId={ThemeId.IndicatorFilterButton} />
         )}
       </StyledButton>
 

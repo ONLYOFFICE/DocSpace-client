@@ -2,10 +2,9 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import toastr from "@docspace/components/toast/toastr";
-import Box from "@docspace/components/box";
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
-import { tablet } from "@docspace/components/utils/device";
+import {toastr} from "@docspace/shared/components/toast";
+import {Box} from "@docspace/shared/components/box";
+import {SaveCancelButtons} from "@docspace/shared/components/save-cancel-buttons";
 
 const ButtonContainer = ({ saveLdapSettings, restoreToDefault }) => {
   const { t } = useTranslation(["Settings", "Common"]);

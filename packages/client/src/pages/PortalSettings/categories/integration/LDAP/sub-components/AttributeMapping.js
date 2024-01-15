@@ -2,10 +2,10 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import Box from "@docspace/components/box";
-import TextInput from "@docspace/components/text-input";
-import Text from "@docspace/components/text";
-import HelpButton from "@docspace/components/help-button";
+import {Box} from "@docspace/shared/components/box";
+import {TextInput} from "@docspace/shared/components/text-input";
+import {Text} from "@docspace/shared/components/text";
+import {HelpButton} from "@docspace/shared/components/help-button";
 
 const FIRST_NAME = "firstName",
   SECOND_NAME = "secondName",

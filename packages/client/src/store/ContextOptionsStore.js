@@ -44,10 +44,10 @@ import copy from "copy-to-clipboard";
 import saveAs from "file-saver";
 import { isMobile, isIOS } from "react-device-detect";
 import config from "PACKAGE_FILE";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 import { ShareAccessRights, RoomsType } from "@docspace/common/constants";
 import combineUrl from "@docspace/common/utils/combineUrl";
-import { isDesktop } from "@docspace/components/utils/device";
+import { isDesktop } from "@docspace/shared/utils";
 import { Events } from "@docspace/common/constants";
 
 import { connectedCloudsTypeTitleTranslation } from "@docspace/client/src/helpers/filesUtils";
@@ -55,6 +55,7 @@ import { getOAuthToken } from "@docspace/common/utils";
 import api from "@docspace/common/api";
 import { FolderType } from "@docspace/common/constants";
 import FilesFilter from "@docspace/common/api/files/filter";
+import { getFileLink } from "@docspace/common/api/files";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -314,8 +315,22 @@ class ContextOptionsStore {
     toastr.success(t("Translations:LinkCopySuccess"));
   };
 
-  onCopyLink = (item, t) => {
+  onCopyLink = async (item, t) => {
+    const { shared, navigationPath, canCopyPublicLink } =
+      this.selectedFolderStore;
+
     const { href } = item;
+    const sharedItem = navigationPath.find((r) => r.shared);
+
+    const isShared =
+      (sharedItem && sharedItem.canCopyPublicLink) ||
+      (shared && canCopyPublicLink);
+
+    if (isShared && !item.isFolder) {
+      const fileLinkData = await getFileLink(item.id);
+      copy(fileLinkData.sharedTo.shareLink);
+      return toastr.success(t("Translations:LinkCopySuccess"));
+    }
 
     if (href) {
       copy(href);
@@ -422,7 +437,7 @@ class ContextOptionsStore {
     isFile
       ? window.open(viewUrl, "_self")
       : this.filesActionsStore
-          .downloadAction(t("Translations:ArchivingData"))
+          .downloadAction(t("Translations:ArchivingData"), item)
           .catch((err) => toastr.error(err));
   };
 
@@ -1113,7 +1128,17 @@ class ContextOptionsStore {
       t
     );
 
-    const withOpen = item.id !== this.selectedFolderStore.id;
+    let withOpen = item.id !== this.selectedFolderStore.id;
+    const isPublicRoomType =
+      item.roomType === RoomsType.PublicRoom ||
+      item.roomType === RoomsType.CustomRoom;
+
+    if (item.isRoom && withOpen) {
+      withOpen =
+        this.selectedFolderStore.navigationPath.findIndex(
+          (f) => f.id === item.id
+        ) === -1;
+    }
 
     const optionsModel = [
       {
@@ -1227,8 +1252,8 @@ class ContextOptionsStore {
         icon: InvitationLinkReactSvgUrl,
         onClick: () => this.onCopyLink(item, t),
         disabled:
-          ((item.roomType === RoomsType.PublicRoom ||
-            item.roomType === RoomsType.CustomRoom) &&
+          (isPublicRoomType &&
+            item.canCopyPublicLink &&
             !this.treeFoldersStore.isArchiveFolder) ||
           this.publicRoomStore.isPublicRoom,
       },
@@ -1240,8 +1265,8 @@ class ContextOptionsStore {
         disabled:
           this.publicRoomStore.isPublicRoom ||
           this.treeFoldersStore.isArchiveFolder ||
-          (item.roomType !== RoomsType.PublicRoom &&
-            item.roomType !== RoomsType.CustomRoom),
+          !item.canCopyPublicLink ||
+          !isPublicRoomType,
         onClick: async () => {
           const primaryLink = await this.filesStore.getPrimaryLink(item.id);
 
@@ -1676,7 +1701,7 @@ class ContextOptionsStore {
         label: t("Translations:DownloadAs"),
         icon: DownloadAsReactSvgUrl,
         onClick: this.onClickDownloadAs,
-        disabled: !hasDownloadAccess || this.publicRoomStore.isPublicRoom,
+        disabled: !hasDownloadAccess,
       },
       {
         key: "move-to",

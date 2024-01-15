@@ -2,10 +2,10 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import Box from "@docspace/components/box";
-import TextInput from "@docspace/components/text-input";
-import FieldContainer from "@docspace/components/field-container";
-import Textarea from "@docspace/components/textarea";
+import {Box} from "@docspace/shared/components/box";
+import {TextInput} from "@docspace/shared/components/text-input";
+import {FieldContainer} from "@docspace/shared/components/field-container";
+import {Textarea} from "@docspace/shared/components/textarea";
 
 const USER_DN = "userDN",
   SERVER = "server",

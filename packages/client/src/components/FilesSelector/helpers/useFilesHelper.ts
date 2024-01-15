@@ -22,7 +22,7 @@ import {
   FolderType,
 } from "@docspace/common/constants";
 //@ts-ignore
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 
 const DEFAULT_FILE_EXTS = "file";
 
@@ -133,6 +133,7 @@ export const useFilesHelper = ({
   getIcon,
   t,
   setIsSelectedParentFolder,
+  roomsFolderId,
 }: useFilesHelpersProps) => {
   const getFileList = React.useCallback(
     async (
@@ -146,8 +147,8 @@ export const useFilesHelper = ({
       const currentSearch = search
         ? search
         : search === null
-        ? ""
-        : searchValue || "";
+          ? ""
+          : searchValue || "";
 
       const page = startIndex / PAGE_COUNT;
 
@@ -278,7 +279,7 @@ export const useFilesHelper = ({
               return {
                 label: title,
                 id: id,
-                isRoom: currentFolder?.current?.rootFolderId === id,
+                isRoom: roomsFolderId === id,
                 roomType,
               };
             }
@@ -334,7 +335,7 @@ export const useFilesHelper = ({
         }
       }
     },
-    [selectedItemId, searchValue, isFirstLoad, disabledItems]
+    [selectedItemId, searchValue, isFirstLoad, disabledItems, roomsFolderId]
   );
 
   return { getFileList };

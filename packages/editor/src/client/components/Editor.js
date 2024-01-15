@@ -4,7 +4,7 @@ import { isMobile, isIOS, deviceType } from "react-device-detect";
 import combineUrl from "@docspace/common/utils/combineUrl";
 import { FolderType, EDITOR_ID } from "@docspace/common/constants";
 import throttle from "lodash/throttle";
-import Toast from "@docspace/components/toast";
+import { Toast } from "@docspace/shared/components/toast";
 import { toast } from "react-toastify";
 import {
   restoreDocumentsVersion,
@@ -23,7 +23,7 @@ import { EditorWrapper } from "../components/StyledEditor";
 import { useTranslation } from "react-i18next";
 import withDialogs from "../helpers/withDialogs";
 import { assign, frameCallEvent, getEditorTheme } from "@docspace/common/utils";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 import { DocumentEditor } from "@onlyoffice/document-editor-react";
 import ErrorContainer from "@docspace/common/components/ErrorContainer";
 import DeepLink from "./DeepLink";
@@ -138,6 +138,8 @@ function Editor({
     const androidID = portalSettings?.deepLink?.androidPackageName;
     const iOSId = portalSettings?.deepLink?.iosPackageId;
     const deepLinkUrl = portalSettings?.deepLink?.url;
+    const isAndroidWebView =
+      window.navigator.userAgent.includes("AscAndroidWebView");
 
     const defaultOpenDocument = localStorage.getItem("defaultOpenDocument");
     const params = new URLSearchParams(window.location.search);
@@ -149,7 +151,8 @@ function Editor({
       androidID &&
       iOSId &&
       deepLinkUrl &&
-      !withoutRedirect
+      !withoutRedirect &&
+      !isAndroidWebView
     ) {
       setIsShowDeepLink(true);
     }
@@ -266,10 +269,10 @@ function Editor({
       documentType === "word"
         ? "docx"
         : documentType === "slide"
-        ? "pptx"
-        : documentType === "cell"
-        ? "xlsx"
-        : "docxf";
+          ? "pptx"
+          : documentType === "cell"
+            ? "xlsx"
+            : "docxf";
 
     let fileName = t("Common:NewDocument");
 

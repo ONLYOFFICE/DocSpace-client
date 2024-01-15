@@ -2,12 +2,12 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import ToggleButton from "@docspace/components/toggle-button";
-import HelpButton from "@docspace/components/help-button";
-import Box from "@docspace/components/box";
-import TextInput from "@docspace/components/text-input";
-import FieldContainer from "@docspace/components/field-container";
-import Textarea from "@docspace/components/textarea";
+import {ToggleButton} from "@docspace/shared/components/toggle-button";
+import {HelpButton} from "@docspace/shared/components/help-button";
+import {Box} from "@docspace/shared/components/box";
+import {TextInput} from "@docspace/shared/components/text-input";
+import {FieldContainer} from "@docspace/shared/components/field-container";
+import {Textarea} from "@docspace/shared/components/textarea";
 
 const FIELD_STYLE = { marginBottom: "0px" };
 

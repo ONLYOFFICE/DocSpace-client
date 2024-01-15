@@ -1,24 +1,24 @@
 ﻿import CombinedShapeSvgUrl from "PUBLIC_DIR/images/combined.shape.svg?url";
 import React, { useState, useEffect, useCallback } from "react";
 import { withTranslation } from "react-i18next";
-import HelpButton from "@docspace/components/help-button";
-import FieldContainer from "@docspace/components/field-container";
-import TextInput from "@docspace/components/text-input";
-import Button from "@docspace/components/button";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { Button } from "@docspace/shared/components/button";
 import { inject, observer } from "mobx-react";
 
 import { useNavigate } from "react-router-dom";
-import { isMobile } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/shared/utils";
 import checkScrollSettingsBlock from "../utils";
 import { StyledSettingsComponent, StyledScrollbar } from "./StyledSettings";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import LoaderCustomization from "../sub-components/loaderCustomization";
 import withLoading from "SRC_DIR/HOCs/withLoading";
-import Badge from "@docspace/components/badge";
-import toastr from "@docspace/components/toast/toastr";
-import ToggleButton from "@docspace/components/toggle-button";
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
+import { Badge } from "@docspace/shared/components/badge";
+import { toastr } from "@docspace/shared/components/toast";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
 import { DeviceType } from "@docspace/common/constants";
 
 const toggleStyle = {
@@ -71,7 +71,10 @@ const DNSSettings = (props) => {
   useEffect(() => {
     setDocumentTitle(t("DNSSettings"));
 
-    if (!isLoaded) initSettings("dns-settings").then(() => setIsLoaded(true));
+    if (!isLoaded)
+      initSettings(isMobileView ? "dns-settings" : "general").then(() =>
+        setIsLoaded(true)
+      );
 
     const checkScroll = checkScrollSettingsBlock();
     checkInnerWidth();

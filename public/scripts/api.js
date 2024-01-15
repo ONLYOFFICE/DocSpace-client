@@ -58,16 +58,15 @@
   const checkCSP = (targetSrc, onAppError) => {
     const currentSrc = window.location.origin;
 
+    if (currentSrc.indexOf(targetSrc) !== -1) return true;
+
     const cspSettings = async () => {
       try {
         const settings = await fetch(`${targetSrc}/api/2.0/security/csp`);
         const res = await settings.json();
         const { header } = res.response;
 
-        return (
-          (header && header.indexOf(window.location.origin) !== -1) ||
-          targetSrc === currentSrc
-        );
+        return header && header.indexOf(currentSrc) !== -1;
       } catch (e) {
         onAppError(e);
       }
@@ -133,6 +132,10 @@
               ? { key: config.requestToken, ...config.filter }
               : config.filter;
 
+            if (!params.withSubfolders) {
+              delete params.withSubfolders;
+            }
+
             const urlParams = new URLSearchParams(params).toString();
 
             path = `${config.rootPath}${
@@ -170,6 +173,11 @@
           }
 
           path = `/doceditor/?fileId=${config.id}&type=${config.editorType}&editorGoBack=${goBack}`;
+
+          if (config.requestToken) {
+            path = `${path}&share=${config.requestToken}`;
+          }
+
           break;
         }
 
@@ -184,6 +192,11 @@
           }
 
           path = `/doceditor/?fileId=${config.id}&type=${config.editorType}&action=view&editorGoBack=${goBack}`;
+
+          if (config.requestToken) {
+            path = `${path}&share=${config.requestToken}`;
+          }
+
           break;
         }
 

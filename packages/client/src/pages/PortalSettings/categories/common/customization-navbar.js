@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
 import withCultureNames from "@docspace/common/hoc/withCultureNames";
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 
 import LoaderCustomizationNavbar from "./sub-components/loaderCustomizationNavbar";
 import MobileCategoryWrapper from "../../components/MobileCategoryWrapper";

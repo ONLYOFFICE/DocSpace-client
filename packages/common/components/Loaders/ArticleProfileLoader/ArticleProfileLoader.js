@@ -1,11 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {
-  StyledContainer,
-  StyledBlock,
-} from "./StyledArticleProfileLoader";
+import { StyledContainer, StyledBlock } from "./StyledArticleProfileLoader";
 import { inject, observer } from "mobx-react";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";;
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 const ArticleProfileLoader = ({
   id,

@@ -17,15 +17,16 @@ import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.patt
 
 import moment from "moment-timezone";
 
-import { LANGUAGE, ThemeKeys, RtlLanguages } from "../constants";
+import { ThemeKeys, RtlLanguages } from "../constants";
 import sjcl from "sjcl";
 import { isMobile } from "react-device-detect";
-import TopLoaderService from "@docspace/components/top-loading-indicator";
+import TopLoaderService from "@docspace/shared/components/top-loading-indicator";
+import { LANGUAGE } from "@docspace/shared/constants";
 import { Encoder } from "./encoder";
 import FilesFilter from "../api/files/filter";
 import combineUrlFunc from "./combineUrl";
 
-import { getCookie } from "@docspace/components/utils/cookie";
+import { getCookie } from "@docspace/shared/utils";
 // import { translations } from "./i18next-http-backend/lib/translations";
 export const toUrlParams = (obj, skipNull) => {
   let str = "";
@@ -99,6 +100,7 @@ export function getObjectByLocation(location) {
 }
 
 export function changeLanguage(i18n, currentLng = getCookie(LANGUAGE)) {
+  console.log("call");
   return currentLng
     ? i18n.language !== currentLng
       ? i18n.changeLanguage(currentLng)
@@ -307,26 +309,6 @@ export function getProviderTranslation(
   }
 }
 
-export function getLanguage(lng) {
-  try {
-    if (!lng) return lng;
-
-    let language = lng == "en-US" || lng == "en-GB" ? "en" : lng;
-
-    const splitted = lng.split("-");
-
-    if (splitted.length == 2 && splitted[0] == splitted[1].toLowerCase()) {
-      language = splitted[0];
-    }
-
-    return language;
-  } catch (error) {
-    console.error(error);
-  }
-
-  return lng;
-}
-
 export const isLanguageRtl = (lng: string) => {
   if (!lng) return;
 
@@ -429,7 +411,10 @@ export function convertToCulture(key: string) {
 }
 
 export function convertToLanguage(key: string) {
+  if (!key) return;
+
   const splittedKey = key.split("-");
+
   if (splittedKey.length > 1) return splittedKey[0];
 
   return key;
@@ -497,10 +482,6 @@ export function getLoginLink(token: string, code: string) {
     window.DocSpaceConfig?.proxy?.url,
     `/login.ashx?p=${token}&code=${code}`
   );
-}
-
-export function checkIsSSR() {
-  return typeof window === "undefined";
 }
 
 export const frameCallbackData = (methodReturnData: any) => {
@@ -657,9 +638,9 @@ export const getSystemTheme = () => {
       ? ThemeKeys.DarkStr
       : ThemeKeys.BaseStr
     : window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? ThemeKeys.DarkStr
-    : ThemeKeys.BaseStr;
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? ThemeKeys.DarkStr
+      : ThemeKeys.BaseStr;
 };
 
 export const getEditorTheme = (theme) => {

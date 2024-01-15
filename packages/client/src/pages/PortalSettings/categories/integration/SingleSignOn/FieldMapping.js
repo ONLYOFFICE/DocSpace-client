@@ -3,12 +3,12 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import Box from "@docspace/components/box";
-import FieldContainer from "@docspace/components/field-container";
-import HelpButton from "@docspace/components/help-button";
-import Text from "@docspace/components/text";
+import { Box } from "@docspace/shared/components/box";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { Text } from "@docspace/shared/components/text";
 
-import Checkbox from "@docspace/components/checkbox";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 import SsoFormField from "./sub-components/SsoFormField";
 
 import {

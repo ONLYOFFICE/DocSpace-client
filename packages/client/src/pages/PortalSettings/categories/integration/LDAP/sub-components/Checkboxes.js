@@ -1,8 +1,8 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import Checkbox from "@docspace/components/checkbox";
-import Box from "@docspace/components/box";
+import {Checkbox} from "@docspace/shared/components/checkbox";
+import {Box} from "@docspace/shared/components/box";
 
 const Checkboxes = ({
   isLdapAvailable,

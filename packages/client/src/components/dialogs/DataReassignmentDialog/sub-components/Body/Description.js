@@ -1,6 +1,6 @@
 import { StyledAvailableList } from "../../../ChangePortalOwnerDialog/StyledDialog";
-import Link from "@docspace/components/link";
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
 
 const Description = ({ t, dataReassignmentUrl }) => {
   return (

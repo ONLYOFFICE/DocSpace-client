@@ -3,8 +3,8 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 
 import TileLoader from "../TileLoader";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
-import { mobile, tablet } from "@docspace/components/utils/device";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { mobile, tablet } from "@docspace/shared/utils";
 
 const StyledTilesLoader = styled.div`
   display: grid;

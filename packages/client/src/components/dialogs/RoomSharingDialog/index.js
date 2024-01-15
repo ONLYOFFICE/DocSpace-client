@@ -2,13 +2,13 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 import { withTranslation } from "react-i18next";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Button from "@docspace/components/button";
-import InputBlock from "@docspace/components/input-block";
-import TextInput from "@docspace/components/text-input";
+import { toastr } from "@docspace/shared/components/toast";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Button } from "@docspace/shared/components/button";
+import { TextInput } from "@docspace/shared/components/text-input";
 import copy from "copy-to-clipboard";
-import toastr from "@docspace/components/toast/toastr";
-import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
+
+import { getCorrectFourValuesStyle } from "@docspace/shared/utils";
 
 const StyledDeleteDialog = styled(ModalDialog)`
   .modal-dialog-content-body {

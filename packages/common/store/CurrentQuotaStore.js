@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 
 import api from "../api";
 import { PortalFeaturesLimitations } from "../constants";

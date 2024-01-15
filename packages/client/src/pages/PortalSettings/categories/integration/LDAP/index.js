@@ -3,12 +3,11 @@ import { isMobile, isDesktop } from "react-device-detect";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import Text from "@docspace/components/text";
-import Box from "@docspace/components/box";
-import Link from "@docspace/components/link";
+import {Text} from "@docspace/shared/components/text";
+import {Box} from "@docspace/shared/components/box";
+import {Link} from "@docspace/shared/components/link";
 import { DeviceType } from "@docspace/common/constants";
 
-import BreakpointWarning from "SRC_DIR/components/BreakpointWarning";
 
 import StyledLdapPage from "./styled-components/StyledLdapPage";
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";

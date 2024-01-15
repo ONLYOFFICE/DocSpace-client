@@ -2,7 +2,8 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import ModalDialog from "@docspace/components/modal-dialog";
+import { Button } from "@docspace/shared/components/button";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
 import { PluginComponents } from "SRC_DIR/helpers/plugins/constants";
 import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
@@ -10,7 +11,6 @@ import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
 import Header from "./sub-components/Header";
 import Info from "./sub-components/Info";
 import Footer from "./sub-components/Footer";
-import Button from "@docspace/components/button";
 
 const SettingsPluginDialog = ({
   plugin,

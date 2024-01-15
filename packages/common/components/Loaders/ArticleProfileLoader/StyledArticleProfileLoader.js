@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components";
-import { tablet } from "@docspace/components/utils/device";
-
+import { tablet } from "@docspace/shared/utils";
 
 const StyledContainer = styled.div`
   z-index: 209;

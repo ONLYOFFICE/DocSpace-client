@@ -10,11 +10,11 @@ import AttributeMapping from "./AttributeMapping";
 import ButtonsContainer from "./ButtonsContainer";
 import AuthenticationContainer from "./AuthenticationContainer";
 import AdvancedSettings from "./AdvancedSettings";
-import Box from "@docspace/components/box";
-import Text from "@docspace/components/text";
+import {Box} from "@docspace/shared/components/box";
+import {Text} from "@docspace/shared/components/text";
 import StyledLdapPage from "../styled-components/StyledLdapPage";
 import { useNavigate } from "react-router-dom";
-import { isMobile } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/shared/utils/device";
 
 import GroupMembership from "./GroupMembership";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";

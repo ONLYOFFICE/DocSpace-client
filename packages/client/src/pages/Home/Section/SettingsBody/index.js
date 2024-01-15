@@ -6,10 +6,10 @@ import Error520 from "client/Error520";
 import { inject, observer } from "mobx-react";
 import { combineUrl } from "@docspace/common/utils";
 import config from "PACKAGE_FILE";
-import Submenu from "@docspace/components/submenu";
+import { Submenu } from "@docspace/shared/components/submenu";
 import PersonalSettings from "./CommonSettings";
 import GeneralSettings from "./AdminSettings";
-import { tablet } from "@docspace/components/utils/device";
+import { tablet } from "@docspace/shared/utils";
 
 const StyledContainer = styled.div`
   margin-top: -22px;

@@ -1,15 +1,17 @@
 import React, { useRef } from "react";
 import { withTranslation } from "react-i18next";
 
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
-import { Avatar, ContextMenuButton } from "@docspace/components";
-import Badge from "@docspace/components/badge";
+import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
+import { Avatar } from "@docspace/shared/components/avatar";
+import { Badge } from "@docspace/shared/components/badge";
 import Badges from "@docspace/client/src/pages/Home/Section/AccountsBody/Badges";
 import { StyledAccountsItemTitle } from "../../styles/accounts";
 import { StyledTitle } from "../../styles/common";
 
 import { SSO_LABEL } from "SRC_DIR/helpers/constants";
+import { decode } from "he";
 
 const AccountsItemTitle = ({
   t,
@@ -36,6 +38,9 @@ const AccountsItemTitle = ({
 
   const userAvatar = selection.hasAvatar ? selection.avatar : DefaultUserPhoto;
   const isSSO = selection.isSSO || false;
+  const displayName = selection.displayName
+    ? decode(selection.displayName).trim()
+    : "";
 
   return (
     <StyledAccountsItemTitle
@@ -54,20 +59,16 @@ const AccountsItemTitle = ({
           <Text
             className={"info-text__name"}
             noSelect
-            title={selection.displayName}
+            title={displayName}
             truncate
           >
-            {isPending
-              ? selection.email
-              : selection.displayName?.trim()
-              ? selection.displayName
-              : selection.email}
+            {isPending || !displayName ? selection.email : displayName}
           </Text>
           {isPending && (
             <Badges withoutPaid={true} statusType={selection.statusType} />
           )}
         </div>
-        {!isPending && (
+        {!isPending && !!displayName && (
           <Text className={"info-text__email"} title={selection.email}>
             {selection.email}
           </Text>

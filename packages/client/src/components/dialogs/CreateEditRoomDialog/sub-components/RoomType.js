@@ -3,10 +3,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
-import IconButton from "@docspace/components/icon-button";
-import Text from "@docspace/components/text";
-import RoomLogo from "@docspace/components/room-logo";
-import { Base } from "@docspace/components/themes";
+import { RoomLogo } from "@docspace/shared/components/room-logo";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { Text } from "@docspace/shared/components/text";
+import { Base } from "@docspace/shared/themes";
 import {
   getRoomTypeDescriptionTranslation,
   getRoomTypeTitleTranslation,
@@ -163,8 +163,8 @@ const RoomType = ({
     type === "dropdownButton"
       ? "choose_room-forward_btn dropdown-button"
       : type === "dropdownItem"
-      ? "choose_room-forward_btn dropdown-item"
-      : "choose_room-forward_btn";
+        ? "choose_room-forward_btn dropdown-item"
+        : "choose_room-forward_btn";
 
   const content = (
     <>

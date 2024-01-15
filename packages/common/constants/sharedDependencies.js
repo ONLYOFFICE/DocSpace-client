@@ -1,5 +1,5 @@
 const pkg = require("../package.json");
-const comPkg = require("@docspace/components/package.json");
+const comPkg = require("@docspace/shared/package.json");
 
 const deps = pkg.dependencies || {};
 const compDeps = comPkg.dependencies || {};

@@ -6,7 +6,7 @@ import {
   syncLdap,
   getCronLdap,
 } from "@docspace/common/api/settings";
-import { getNextSynchronization } from "@docspace/components/cron";
+import { getNextSynchronization } from "@docspace/shared/components/cron";
 import { makeAutoObservable } from "mobx";
 
 const constants = {

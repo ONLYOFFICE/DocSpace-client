@@ -6,7 +6,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { DeviceType } from "@docspace/common/constants";
 import { getCatalogIconUrlByType } from "@docspace/common/utils/catalogIcon.helper";
 
-import { isArrayEqual } from "@docspace/components/utils/array";
+import { isArrayEqual } from "@docspace/shared/utils";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 
@@ -18,7 +18,7 @@ import {
   getCurrentSettingsCategory,
 } from "../../../utils";
 
-import CatalogItem from "@docspace/components/catalog-item";
+import { ArticleItem } from "@docspace/shared/components/article-item";
 import LoaderArticleBody from "./loaderArticleBody";
 
 const ArticleBodyContent = (props) => {
@@ -244,7 +244,7 @@ const ArticleBodyContent = (props) => {
         isSettingsCatalog: true,
       });
       items.push(
-        <CatalogItem
+        <ArticleItem
           key={item.key}
           id={item.key}
           icon={icon}

@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
-import CodeInput from "@docspace/components/code-input";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { CodeInput } from "@docspace/shared/components/code-input";
 import { Trans } from "react-i18next";
 import { ReactSVG } from "react-svg";
 import { LoginFormWrapper } from "./StyledLogin";
 import BarLogo from "PUBLIC_DIR/images/danger.alert.react.svg";
-import { Dark, Base } from "@docspace/components/themes";
+import { Dark, Base } from "@docspace/shared/themes";
 import { getBgPattern, getLogoFromPath } from "@docspace/common/utils";
 import { useMounted } from "../helpers/useMounted";
 import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
-import LoginContainer from "@docspace/components/ColorTheme/styled/sub-components/LoginContainer";
+import LoginContainer from "@docspace/shared/components/color-theme/sub-components/LoginContainer";
 import { useThemeDetector } from "@docspace/common/utils/useThemeDetector";
 
 interface ILoginProps extends IInitialState {
@@ -81,8 +81,8 @@ const Form: React.FC<ILoginProps> = ({ theme, setTheme, logoUrls }) => {
   const logoUrl = !logo
     ? undefined
     : !theme?.isBase
-    ? getLogoFromPath(logo.path.dark)
-    : getLogoFromPath(logo.path.light);
+      ? getLogoFromPath(logo.path.dark)
+      : getLogoFromPath(logo.path.light);
 
   return (
     <LoginContainer id="code-page" theme={theme}>

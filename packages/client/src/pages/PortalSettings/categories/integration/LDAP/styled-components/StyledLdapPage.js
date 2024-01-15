@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
-import Box from "@docspace/components/box";
+import {Box} from "@docspace/shared/components/box";
 
 const StyledLdapPage = styled(Box)`
   max-width: ${(props) => (props.isSmallWindow ? "100%" : "700px")};

@@ -2,8 +2,8 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import Box from "@docspace/components/box";
-import ProgressBar from "@docspace/components/progress-bar";
+import {Box} from "@docspace/shared/components/box";
+import {ProgressBar} from "@docspace/shared/components/progress-bar";
 
 const ProgressContainer = ({
   inProgress,

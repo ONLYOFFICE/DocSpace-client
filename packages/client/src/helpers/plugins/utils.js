@@ -1,6 +1,6 @@
 import combineUrl from "@docspace/common/utils/combineUrl";
 
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 
 import config from "PACKAGE_FILE";
 
@@ -40,9 +40,7 @@ export const messageActions = (
 
       case PluginActions.updateContext:
         if (message.contextProps) {
-          message.contextProps.forEach((prop) => {
-            updatePropsContext && updatePropsContext(prop.name, prop.props);
-          });
+          updatePropsContext(contextProps);
         }
         break;
 

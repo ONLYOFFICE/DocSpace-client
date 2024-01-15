@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
-import { mobileMore } from "@docspace/components/utils/device";
+import { getCorrectFourValuesStyle, mobileMore } from "@docspace/shared/utils";
 
 const StyledBreakpointWarning = styled.div`
   padding: ${({ theme }) =>

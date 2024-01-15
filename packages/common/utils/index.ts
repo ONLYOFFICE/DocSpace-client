@@ -347,6 +347,8 @@ export const getLtrLanguageForEditor = (
   const isUserLngRtl = isLanguageRtl(userLng);
   const isPortalLngRtl = isLanguageRtl(portalLng);
 
+  if (userLng === undefined && portalLng) return portalLng;
+
   if ((!isEditor && !isEditorPath) || (userLng && !isUserLngRtl))
     return userLng;
 

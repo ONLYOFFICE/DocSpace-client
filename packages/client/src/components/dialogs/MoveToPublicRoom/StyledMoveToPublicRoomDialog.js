@@ -1,7 +1,6 @@
-import ModalDialog from "@docspace/components/modal-dialog";
-import { tablet } from "@docspace/components/utils/device";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { tablet, getCorrectFourValuesStyle } from "@docspace/shared/utils";
 import styled from "styled-components";
-import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
 
 const StyledMoveToPublicRoomDialog = styled(ModalDialog)`
   /* .scroll-body {

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 const StyledMembersLoader = styled.div`
   width: 100%;
@@ -52,8 +52,16 @@ const MembersLoader = () => {
   return (
     <StyledMembersLoader>
       <StyledSubtitleLoader>
-        <RectangleSkeleton width={"111px"} height={"16px"} borderRadius={"3px"} />
-        <RectangleSkeleton width={"16px"} height={"16px"} borderRadius={"3px"} />
+        <RectangleSkeleton
+          width={"111px"}
+          height={"16px"}
+          borderRadius={"3px"}
+        />
+        <RectangleSkeleton
+          width={"16px"}
+          height={"16px"}
+          borderRadius={"3px"}
+        />
       </StyledSubtitleLoader>
 
       {[...Array(4).keys()].map((i) => (
@@ -79,8 +87,16 @@ const MembersLoader = () => {
       ))}
 
       <StyledSubtitleLoader className="pending_users">
-        <RectangleSkeleton width={"111px"} height={"16px"} borderRadius={"3px"} />
-        <RectangleSkeleton width={"16px"} height={"16px"} borderRadius={"3px"} />
+        <RectangleSkeleton
+          width={"111px"}
+          height={"16px"}
+          borderRadius={"3px"}
+        />
+        <RectangleSkeleton
+          width={"16px"}
+          height={"16px"}
+          borderRadius={"3px"}
+        />
       </StyledSubtitleLoader>
 
       {[...Array(4).keys()].map((i) => (

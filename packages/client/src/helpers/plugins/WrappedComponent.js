@@ -1,17 +1,17 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-import Box from "@docspace/components/box";
-import Text from "@docspace/components/text";
-import Checkbox from "@docspace/components/checkbox";
-import TextArea from "@docspace/components/textarea";
-import TextInput from "@docspace/components/text-input";
-import Label from "@docspace/components/label";
-import Button from "@docspace/components/button";
-import ToggleButton from "@docspace/components/toggle-button";
-import ComboBox from "@docspace/components/combobox";
+import { Box } from "@docspace/shared/components/box";
+import { Text } from "@docspace/shared/components/text";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Textarea } from "@docspace/shared/components/textarea";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { Label } from "@docspace/shared/components/label";
+import { Button } from "@docspace/shared/components/button";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { ComboBox } from "@docspace/shared/components/combobox";
 
 import { PluginComponents } from "./constants";
 

@@ -4,7 +4,7 @@ import {
   UnavailableStyles,
 } from "../../../utils/commonSettingsStyles";
 
-import { tablet, mobile } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/shared/utils";
 
 const INPUT_LENGTH = "350px";
 const TEXT_LENGTH = "700px";

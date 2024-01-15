@@ -1,7 +1,7 @@
 import React from "react";
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
-import Avatar from "@docspace/components/avatar";
-import Text from "@docspace/components/text";
+import { Avatar } from "@docspace/shared/components/avatar";
+import { Text } from "@docspace/shared/components/text";
 import HistoryBlockMessage from "./HistoryBlockMessage";
 import HistoryBlockItemList from "./HistoryBlockItemList";
 import HistoryBlockUser from "./HistoryBlockUser";

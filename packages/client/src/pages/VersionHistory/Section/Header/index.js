@@ -2,8 +2,8 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import Headline from "@docspace/common/components/Headline";
-import IconButton from "@docspace/components/icon-button";
-import { desktop, tablet } from "@docspace/components/utils/device";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { desktop, tablet } from "@docspace/shared/utils";
 
 const StyledContainer = styled.div`
   display: grid;

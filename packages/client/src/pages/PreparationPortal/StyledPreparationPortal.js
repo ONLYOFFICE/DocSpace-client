@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { tablet } from "@docspace/components/utils/device";
+import { tablet } from "@docspace/shared/utils";
 
 const StyledPreparationPortal = styled.div`
   width: 100%;

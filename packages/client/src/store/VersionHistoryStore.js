@@ -1,6 +1,6 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import api from "@docspace/common/api";
-import { size } from "@docspace/components/utils/device";
+import { size } from "@docspace/shared/utils";
 import { FileStatus } from "@docspace/common/constants";
 
 class VersionHistoryStore {

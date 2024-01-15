@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import { mobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/shared/utils";
 
 const StyledFilter = styled.div`
   width: 100%;

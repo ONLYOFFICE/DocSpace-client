@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
-import { isMobile, mobile } from "@docspace/components/utils/device";
-import Backdrop from "@docspace/components/backdrop";
-import Aside from "@docspace/components/aside";
+import { isMobile, mobile } from "@docspace/shared/utils";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Aside } from "@docspace/shared/components/aside";
 
 import Header from "./sub-components/header";
 import HeaderNav from "./sub-components/header-nav";
@@ -18,7 +18,7 @@ import { LayoutContextConsumer } from "../Layout/context";
 import { inject, observer } from "mobx-react";
 import i18n from "./i18n";
 import PreparationPortalDialog from "../dialogs/PreparationPortalDialog";
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 import { DeviceType } from "@docspace/common/constants";
 
 const StyledContainer = styled.header`

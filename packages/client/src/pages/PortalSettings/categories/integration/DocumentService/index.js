@@ -2,11 +2,16 @@ import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./index.styled";
-import { Link, Button, InputBlock, Label, Text } from "@docspace/components";
-import toastr from "@docspace/components/toast/toastr";
+
+import { Link } from "@docspace/shared/components/link";
+import { Button } from "@docspace/shared/components/button";
+import { InputBlock } from "@docspace/shared/components/input-block";
+import { Label } from "@docspace/shared/components/label";
+import { Text } from "@docspace/shared/components/text";
+import { toastr } from "@docspace/shared/components/toast";
 import Loaders from "@docspace/common/components/Loaders";
 import { DeviceType } from "@docspace/common/constants";
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
 const URL_REGEX = /^https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{1,256}\/?$/;
 const DNS_PLACEHOLDER = `${window.location.protocol}//<docspace-dns-name>/`;

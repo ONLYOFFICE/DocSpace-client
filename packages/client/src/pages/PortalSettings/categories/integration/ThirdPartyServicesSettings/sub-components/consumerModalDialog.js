@@ -3,16 +3,16 @@ import PropTypes from "prop-types";
 import { Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { format } from "react-string-format";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Text from "@docspace/components/text";
-import Button from "@docspace/components/button";
-import TextInput from "@docspace/components/text-input";
-import Box from "@docspace/components/box";
-import Link from "@docspace/components/link";
-import toastr from "@docspace/components/toast/toastr";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { Box } from "@docspace/shared/components/box";
+import { Link } from "@docspace/shared/components/link";
+import { toastr } from "@docspace/shared/components/toast";
 import ModalDialogContainer from "./modalDialogContainer";
 import { showLoader, hideLoader } from "@docspace/common/utils";
-import { mobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/shared/utils";
 import styled from "styled-components";
 
 const StyledBox = styled(Box)`

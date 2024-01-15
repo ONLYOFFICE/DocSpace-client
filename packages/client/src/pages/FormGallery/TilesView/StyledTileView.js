@@ -1,16 +1,15 @@
 import styled, { css } from "styled-components";
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 import TileContent from "./sub-components/TileContent";
-import ContextMenu from "@docspace/components/context-menu";
+import { ContextMenu } from "@docspace/shared/components/context-menu";
 
 import {
   tablet,
   desktop,
   mobile,
   mobileMore,
-} from "@docspace/components/utils/device";
-
-import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
+  getCorrectFourValuesStyle,
+} from "@docspace/shared/utils";
 
 const FlexBoxStyles = css`
   display: flex;

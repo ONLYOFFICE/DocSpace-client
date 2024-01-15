@@ -1,11 +1,11 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 import { ReactSVG } from "react-svg";
-import { desktop, mobile, tablet } from "@docspace/components/utils/device";
+import { desktop, mobile, tablet } from "@docspace/shared/utils";
 
 import { useTranslation } from "react-i18next";
-import Base from "@docspace/components/themes/base";
+import Base from "@docspace/shared/themes/base";
 import ArticleHideMenuReactSvgUrl from "PUBLIC_DIR/images/article-hide-menu.react.svg?url";
 import ArticleShowMenuReactSvgUrl from "PUBLIC_DIR/images/article-show-menu.react.svg?url";
 

@@ -1,9 +1,9 @@
 import styled, { css } from "styled-components";
-import Scrollbar from "@docspace/components/scrollbar";
-import Link from "@docspace/components/link";
-import { desktop, mobile, tablet } from "@docspace/components/utils/device";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import { Link } from "@docspace/shared/components/link";
+import { desktop, mobile, tablet } from "@docspace/shared/utils";
 import { isMobile } from "react-device-detect";
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 
 const PanelStyles = css`
   .panel_combo-box {

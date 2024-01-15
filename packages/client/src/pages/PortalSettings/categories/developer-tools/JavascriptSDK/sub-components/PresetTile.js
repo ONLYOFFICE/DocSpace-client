@@ -1,10 +1,10 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 
-import Text from "@docspace/components/text";
-import Button from "@docspace/components/button";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow-left.react.svg";
 

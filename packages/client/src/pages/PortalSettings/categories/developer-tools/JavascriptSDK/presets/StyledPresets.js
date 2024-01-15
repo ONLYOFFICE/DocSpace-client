@@ -1,14 +1,13 @@
 import styled, { css } from "styled-components";
-import { mobile, tablet } from "@docspace/components/utils/device";
-import { isMobile } from "react-device-detect";
-import Box from "@docspace/components/box";
+import { isMobile, mobile, tablet } from "@docspace/shared/utils/device";
+import { Box } from "@docspace/shared/components/box";
 
 export const SDKContainer = styled(Box)`
   @media ${tablet} {
     width: 100%;
   }
 
-  ${isMobile &&
+  ${isMobile() &&
   css`
     width: 100%;
   `}
@@ -26,7 +25,7 @@ export const Controls = styled(Box)`
     min-width: 0;
   }
 
-  ${isMobile &&
+  ${isMobile() &&
   css`
     min-width: 0;
   `}
@@ -52,7 +51,7 @@ export const CategoryHeader = styled.div`
     margin-top: 24px;
   }
 
-  ${isMobile &&
+  ${isMobile() &&
   css`
     margin-top: 24px;
   `}
@@ -72,7 +71,7 @@ export const CategorySubHeader = styled.div`
     }
   }
 
-  ${isMobile &&
+  ${isMobile() &&
   css`
     &:not(&.copy-window-code) {
       margin-bottom: 0;
@@ -104,7 +103,7 @@ export const ControlsGroup = styled(Box)`
     gap: 4px;
   }
 
-  ${isMobile &&
+  ${isMobile() &&
   css`
     gap: 4px;
   `}
@@ -131,7 +130,7 @@ export const Frame = styled(Box)`
     margin-top: 4px;
   }
 
-  ${isMobile &&
+  ${isMobile() &&
   css`
     margin-top: 4px;
   `}
@@ -160,7 +159,7 @@ export const Container = styled(Box)`
     flex-direction: column;
   }
 
-  ${isMobile &&
+  ${isMobile() &&
   css`
     flex-direction: column;
   `}
@@ -195,7 +194,7 @@ export const Preview = styled(Box)`
     margin-top: 0;
     min-width: 0;
   }
-  ${isMobile &&
+  ${isMobile() &&
   css`
     margin-top: 0;
     min-width: 0;

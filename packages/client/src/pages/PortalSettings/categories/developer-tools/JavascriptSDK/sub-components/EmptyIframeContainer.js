@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { RectangleSkeleton } from "@docspace/shared/components/skeletons/rectangle";
 import { Base } from "@docspace/components/themes";
 
 const StyledContainer = styled.div`

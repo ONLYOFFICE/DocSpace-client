@@ -1,27 +1,27 @@
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import debounce from "lodash.debounce";
-import Box from "@docspace/components/box";
-import TextInput from "@docspace/components/text-input";
-import Textarea from "@docspace/components/textarea";
-import Label from "@docspace/components/label";
-import Text from "@docspace/components/text";
-import Checkbox from "@docspace/components/checkbox";
-import ComboBox from "@docspace/components/combobox";
-import RadioButtonGroup from "@docspace/components/radio-button-group";
-import TabContainer from "@docspace/components/tabs-container";
-import SelectedItem from "@docspace/components/selected-item";
+import { Box } from "@docspace/shared/components/box";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { Textarea } from "@docspace/shared/components/textarea";
+import { Label } from "@docspace/shared/components/label";
+import { Text } from "@docspace/shared/components/text";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { ComboBox } from "@docspace/shared/components/combobox";
+import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
+import { TabContainer } from "@docspace/shared/components/tabs-container";
+import { SelectedItem } from "@docspace/shared/components/selected-item";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { objectToGetParams, loadScript } from "@docspace/common/utils";
 import { inject, observer } from "mobx-react";
 
 import { isTablet, isMobile } from "@docspace/components/utils/device";
 
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
-import HelpButton from "@docspace/components/help-button";
+import { RectangleSkeleton } from "@docspace/shared/components/skeletons/rectangle";
+import { HelpButton } from "@docspace/shared/components/help-button";
 
 import GetCodeDialog from "../sub-components/GetCodeDialog";
-import Button from "@docspace/components/button";
+import { Button } from "@docspace/shared/components/button";
 
 import { FilterType, RoomsType } from "@docspace/common/constants";
 

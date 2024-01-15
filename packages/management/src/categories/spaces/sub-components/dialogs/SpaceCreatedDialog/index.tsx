@@ -1,10 +1,11 @@
 import React from "react";
 import ModalDialogContainer from "@docspace/client/src/components/dialogs/ModalDialogContainer";
-import Text from "@docspace/components/text";
-import Button from "@docspace/components/button";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Text } from "@docspace/shared/components/text";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
-import ModalDialog from "@docspace/components/modal-dialog";
 import { useStore } from "SRC_DIR/store";
 
 const SpaceCreatedDialog = () => {
@@ -41,14 +42,14 @@ const SpaceCreatedDialog = () => {
         <Button
           key="CreateButton"
           label={t("GoToSpace")}
-          size="normal"
+          size={ButtonSize.normal}
           primary
           onClick={onClick}
         />
         <Button
           key="CancelButton"
           label={t("StayInSettings")}
-          size="normal"
+          size={ButtonSize.normal}
           onClick={onClose}
         />
       </ModalDialog.Footer>

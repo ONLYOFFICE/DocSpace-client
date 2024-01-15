@@ -1,13 +1,13 @@
 import React from "react";
 import { observer } from "mobx-react";
-import Button from "@docspace/components/button";
-import TextInput from "@docspace/components/text-input";
-import Text from "@docspace/components/text";
+import { Button } from "@docspace/shared/components/button";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { Text } from "@docspace/shared/components/text";
 import { ConfigurationWrapper } from "../StyledSpaces";
 import { useStore } from "SRC_DIR/store";
 import { parseDomain, validatePortalName } from "SRC_DIR/utils";
 import { isMobile } from "react-device-detect";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 
 import { TranslationType } from "SRC_DIR/types/spaces";
 

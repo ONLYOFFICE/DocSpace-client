@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { inject, observer } from "mobx-react";
-import Loader from "@docspace/components/loader";
+import { Loader } from "@docspace/shared/components/loader";
 import Section from "@docspace/common/components/Section";
 import { combineUrl } from "@docspace/common/utils";
 import tryRedirectTo from "@docspace/common/utils/tryRedirectTo";

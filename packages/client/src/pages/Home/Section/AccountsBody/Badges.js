@@ -6,8 +6,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 import { PaymentsType, AccountLoginType } from "@docspace/common/constants";
 
-import Badge from "@docspace/components/badge";
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
+import { Badge } from "@docspace/shared/components/badge";
+import { commonIconsStyles } from "@docspace/shared/utils";
 
 import SendClockIcon from "PUBLIC_DIR/images/send.clock.react.svg";
 import CatalogSpamIcon from "PUBLIC_DIR/images/catalog.spam.react.svg";
@@ -23,7 +23,7 @@ const StyledBadgesContainer = styled.div`
 `;
 
 const StyledPaidBadge = styled(Badge)`
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           margin-left: 8px;

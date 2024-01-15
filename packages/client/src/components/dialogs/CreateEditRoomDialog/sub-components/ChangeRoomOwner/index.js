@@ -1,10 +1,9 @@
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
-import Avatar from "@docspace/components/avatar";
-
+import { Avatar } from "@docspace/shared/components/avatar";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
 import * as Styled from "./index.styled";
 
 const ChangeRoomOwner = ({

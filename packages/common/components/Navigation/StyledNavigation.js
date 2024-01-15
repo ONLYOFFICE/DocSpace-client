@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import { tablet, mobile } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/shared/utils";
 
 const StyledContainer = styled.div`
   ${(props) =>
@@ -15,6 +15,8 @@ const StyledContainer = styled.div`
 
   display: grid;
   align-items: center;
+
+  margin-right: ${(props) => (props.isTrashFolder ? "16px" : 0)};
 
   grid-template-columns: ${({ isRootFolder, withLogo }) =>
     isRootFolder

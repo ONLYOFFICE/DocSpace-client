@@ -6,9 +6,9 @@ import React, { useEffect, useRef, useCallback, useMemo } from "react";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import { Base } from "@docspace/components/themes";
-import TableContainer from "@docspace/components/table-container";
-import TableBody from "@docspace/components/table-container/TableBody";
+import { Base } from "@docspace/shared/themes";
+import { TableContainer } from "@docspace/shared/components/table";
+import { TableBody } from "@docspace/shared/components/table";
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";

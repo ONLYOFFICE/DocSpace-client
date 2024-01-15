@@ -1,8 +1,7 @@
 import styled, { css } from "styled-components";
-import Row from "@docspace/components/row";
-import { tablet } from "@docspace/components/utils/device";
-import { Base } from "@docspace/components/themes";
-import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
+import { Row } from "@docspace/shared/components/row";
+import { tablet, getCorrectFourValuesStyle } from "@docspace/shared/utils";
+import { Base } from "@docspace/shared/themes";
 
 const StyledBody = styled.div`
   height: 100%;

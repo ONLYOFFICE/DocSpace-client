@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { inject, observer } from "mobx-react";
 
 import StyledContainer from "./StyledArticleHeader";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 const ArticleHeaderLoader = ({ id, className, style, showText, ...rest }) => {
   const {

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Avatar from "@docspace/components/avatar";
-import Text from "@docspace/components/text";
+import { Avatar } from "@docspace/shared/components/avatar";
+import { Text } from "@docspace/shared/components/text";
 import StyledUserTooltip from "./StyledUserTooltip";
 
 const UserTooltip = ({ avatarUrl, label, email, position, theme }) => (

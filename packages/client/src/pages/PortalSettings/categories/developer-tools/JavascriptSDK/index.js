@@ -5,12 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { RoomsType } from "@docspace/common/constants";
 import { inject, observer } from "mobx-react";
 
-import { mobile, tablet } from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/shared/utils/device";
 import { isMobile } from "react-device-detect";
 
-import Box from "@docspace/components/box";
-import Link from "@docspace/components/link";
-import Text from "@docspace/components/text";
+import { Box } from "@docspace/shared/components/box";
+import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
 
 import CSP from "./sub-components/csp";
 import PresetTile from "./sub-components/PresetTile";

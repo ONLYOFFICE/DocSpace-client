@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import api from "@docspace/common/api";
 import { Selector } from "@docspace/shared/components/selector";
@@ -7,6 +8,8 @@ import { GroupsSelectorProps } from "./GroupsSelector.types";
 
 export const GroupsSelector = (props: GroupsSelectorProps) => {
   const { id, onBackClick, headerLabel, onAccept, ...rest } = props;
+
+  const { t } = useTranslation(["GroupsSelector", "Common"]);
 
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [searchValue, setSearchValue] = useState("");
@@ -63,13 +66,14 @@ export const GroupsSelector = (props: GroupsSelectorProps) => {
   return (
     <Selector
       id={id}
-      headerLabel={headerLabel || "Groups"} // TODO: Add translation
+      headerLabel={headerLabel || t("Groups")}
+      searchPlaceholder={t("Common:Search")}
       onBackClick={onBackClick}
       onSearch={onSearchAction}
       onClearSearch={onClearSearchAction}
       onSelect={onSelectAction}
       items={items || []}
-      acceptButtonLabel={"select"} // TODO: Add translation
+      acceptButtonLabel={t("Common:SelectAction")}
       onAccept={onAcceptAction}
       withHeader={true}
       onCancel={onCancelAction}

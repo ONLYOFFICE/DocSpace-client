@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 import Body from "./sub-components/Body";
 import Footer from "./sub-components/Footer";
-import api from "@docspace/common/api";
+import api from "@docspace/shared/api";
 const { Filter } = api;
 
 const StyledModalDialog = styled(ModalDialog)`

@@ -6,10 +6,10 @@ import { observer, inject } from "mobx-react";
 import { Trans, withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 import FilesSelector from "@docspace/client/src/components/FilesSelector";
-import { FilesSelectorFilterTypes } from "@docspace/common/constants";
+import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import * as Styled from "./index.styled";
 

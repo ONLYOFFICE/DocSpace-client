@@ -1,4 +1,4 @@
-import { ThirdPartyStorages } from "@docspace/common/constants";
+import { ThirdPartyStorages } from "@docspace/shared/enums";
 
 export const getOptions = (storageBackup, needDefaultParameter = false) => {
   if (!storageBackup) return;

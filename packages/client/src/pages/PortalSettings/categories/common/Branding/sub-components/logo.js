@@ -1,6 +1,6 @@
 import React from "react";
 
-import { getLogoFromPath } from "@docspace/common/utils";
+import { getLogoFromPath } from "@docspace/shared/utils";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";

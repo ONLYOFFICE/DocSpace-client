@@ -11,7 +11,7 @@ import { Checkbox } from "@docspace/shared/components/checkbox";
 import { FixedSizeList as List, areEqual } from "react-window";
 // import AutoSizer from "react-virtualized-auto-sizer";
 import { withTranslation } from "react-i18next";
-import { resendUserInvites } from "@docspace/common/api/people";
+import { resendUserInvites } from "@docspace/shared/api/people";
 
 import ModalDialogContainer from "../ModalDialogContainer";
 import { inject, observer } from "mobx-react";

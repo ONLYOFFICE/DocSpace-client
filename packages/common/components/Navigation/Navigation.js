@@ -16,7 +16,7 @@ import { ReactSVG } from "react-svg";
 import ToggleInfoPanelButton from "./sub-components/toggle-infopanel-btn";
 import TrashWarning from "./sub-components/trash-warning";
 import NavigationLogo from "./sub-components/logo-block";
-import { DeviceType } from "../../constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const Navigation = ({
   tReady,

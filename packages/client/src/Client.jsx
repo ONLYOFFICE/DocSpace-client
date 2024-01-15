@@ -8,8 +8,8 @@ import {
   updateTempContent,
   showLoader,
   hideLoader,
-} from "@docspace/common/utils";
-import { regDesktop } from "@docspace/common/desktop";
+} from "@docspace/shared/utils/common";
+import { regDesktop } from "@docspace/shared/utils/desktop";
 
 import { toastr } from "@docspace/shared/components/toast";
 

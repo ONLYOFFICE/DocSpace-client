@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import api from "@docspace/common/api";
+import api from "@docspace/shared/api";
 import { size } from "@docspace/shared/utils";
-import { FileStatus } from "@docspace/common/constants";
+import { FileStatus } from "@docspace/shared/enums";
 
 class VersionHistoryStore {
   isVisible = false;

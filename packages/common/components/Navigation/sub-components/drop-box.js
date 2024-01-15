@@ -16,7 +16,7 @@ import { tablet, mobile } from "@docspace/shared/utils";
 import { ReactSVG } from "react-svg";
 
 import { Base } from "@docspace/shared/themes";
-import { DeviceType } from "../../../constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const StyledBox = styled.div`
   position: absolute;

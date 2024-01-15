@@ -2,14 +2,14 @@ import {
   getPaymentSettings,
   setLicense,
   acceptLicense,
-} from "@docspace/common/api/settings";
+} from "@docspace/shared/api/settings";
 import { makeAutoObservable } from "mobx";
-import api from "@docspace/common/api";
+import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
 import authStore from "@docspace/common/store/AuthStore";
-import { getPaymentLink } from "@docspace/common/api/portal";
+import { getPaymentLink } from "@docspace/shared/api/portal";
 import axios from "axios";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 class PaymentStore {
   salesEmail = "";

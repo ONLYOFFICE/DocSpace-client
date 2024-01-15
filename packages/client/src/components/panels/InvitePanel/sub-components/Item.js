@@ -6,7 +6,7 @@ import { Text } from "@docspace/shared/components/text";
 
 import { parseAddresses } from "@docspace/shared/utils";
 import { getAccessOptions } from "../utils";
-import { getUserRole } from "@docspace/common/utils";
+import { getUserRole } from "@docspace/shared/utils/common";
 
 import {
   StyledEditInput,

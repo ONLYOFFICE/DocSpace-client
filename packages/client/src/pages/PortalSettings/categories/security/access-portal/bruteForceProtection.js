@@ -14,7 +14,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import BruteForceProtectionLoader from "../sub-components/loaders/brute-force-protection-loader";
 import { Link } from "@docspace/shared/components/link";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const BruteForceProtection = (props) => {
   const {

@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import { cloneDeep } from "lodash";
 
-import api from "@docspace/common/api";
+import api from "@docspace/shared/api";
 
 import { toastr } from "@docspace/shared/components/toast";
 

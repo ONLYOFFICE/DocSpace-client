@@ -1,12 +1,12 @@
 import { makeAutoObservable } from "mobx";
-import { getLogoFromPath } from "@docspace/common/utils";
+import { getLogoFromPath } from "@docspace/shared/utils";
 import {
   getDomainName,
   setDomainName,
   setPortalName,
   createNewPortal,
   checkDomain,
-} from "@docspace/common/api/management";
+} from "@docspace/shared/api/management";
 import { TNewPortalData } from "SRC_DIR/types/spaces";
 
 class SpacesStore {

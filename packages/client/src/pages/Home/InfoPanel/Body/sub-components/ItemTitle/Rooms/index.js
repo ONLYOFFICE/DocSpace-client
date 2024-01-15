@@ -8,7 +8,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { StyledTitle } from "../../../styles/common";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import RoomsContextBtn from "./context-btn";
-import { RoomsType, ShareAccessRights } from "@docspace/common/constants";
+import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 
 const RoomsItemHeader = ({
   t,

@@ -6,7 +6,7 @@ import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import ConsumerToggle from "./consumerToggle";
 import { Base } from "@docspace/shared/themes";
-import { thirdpartiesLogo } from "@docspace/common/utils/image-thirdparties";
+import { thirdpartiesLogo } from "@docspace/shared/utils/image-thirdparties";
 
 const StyledItem = styled.div`
   .consumer-description {

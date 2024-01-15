@@ -3,7 +3,7 @@ import { observer, inject } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import { Loader } from "@docspace/shared/components/loader";
 import axios from "axios";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import ConfirmWrapper from "./ConfirmWrapper";
 
 let loadTimeout = null;

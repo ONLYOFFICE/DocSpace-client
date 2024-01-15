@@ -4,7 +4,7 @@ import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { withTranslation } from "react-i18next";
-import api from "@docspace/common/api";
+import api from "@docspace/shared/api";
 
 import ModalDialogContainer from "../ModalDialogContainer";
 import { inject, observer } from "mobx-react";

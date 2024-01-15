@@ -5,7 +5,7 @@ import { inject, observer } from "mobx-react";
 import copy from "copy-to-clipboard";
 
 import { toastr } from "@docspace/shared/components/toast";
-import { objectToGetParams } from "@docspace/common/utils";
+import { objectToGetParams } from "@docspace/shared/utils/common";
 
 import { InputBlock } from "@docspace/shared/components/input-block";
 import { IconButton } from "@docspace/shared/components/icon-button";
@@ -22,7 +22,7 @@ import {
   StyledToggleButton,
   StyledDescription,
 } from "../StyledInvitePanel";
-import { RoomsType, ShareAccessRights } from "@docspace/common/constants";
+import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 
 const ExternalLinks = ({
   t,

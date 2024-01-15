@@ -36,10 +36,22 @@ import { getBannerAttribute, getLanguage } from "./banner";
 import { NoUserSelect } from "./commonStyles";
 import { commonInputStyles } from "./commonInputStyles";
 import { commonTextStyles } from "./commonTextStyles";
+import {
+  RoomsTypeValues,
+  getSystemTheme,
+  getEditorTheme,
+  getLogoFromPath,
+  isBetaLanguage,
+} from "./common";
 
 export type { TInterfaceDirection };
 
 export {
+  isBetaLanguage,
+  getLogoFromPath,
+  getSystemTheme,
+  getEditorTheme,
+  RoomsTypeValues,
   parseAddresses,
   NoUserSelect,
   commonInputStyles,

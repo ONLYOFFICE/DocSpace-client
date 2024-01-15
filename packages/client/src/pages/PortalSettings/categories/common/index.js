@@ -106,14 +106,18 @@ export default inject(({ auth, common }) => {
     isLoadedSubmenu,
     getWhiteLabelLogoUrls,
   } = common;
+
+  const currentDeviceType = auth.settingsStore.currentDeviceType;
+
+  const isMobileView = currentDeviceType === DeviceType.mobile;
   return {
     loadBaseInfo: async () => {
-      await initSettings();
+      await initSettings(!isMobileView ? "general" : "");
     },
     isLoaded,
     setIsLoadedSubmenu,
     isLoadedSubmenu,
     getWhiteLabelLogoUrls,
-    currentDeviceType: auth.settingsStore.currentDeviceType,
+    currentDeviceType,
   };
 })(withLoading(withTranslation("Settings")(observer(SubmenuCommon))));

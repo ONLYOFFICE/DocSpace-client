@@ -11,7 +11,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { TableGroupMenu } from "@docspace/shared/components/table";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import LoaderSectionHeader from "../loaderSectionHeader";
-import { tablet, desktop } from "@docspace/shared/utils";
+import { mobile, tablet, desktop } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Badge } from "@docspace/shared/components/badge";
 import {
@@ -104,6 +104,13 @@ const HeaderContainer = styled.div`
     h1 {
       font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
       line-height: 59px !important;
+    }
+  }
+
+  @media ${mobile} {
+    h1 {
+      line-height: 53px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
     }
   }
 
@@ -341,6 +348,7 @@ const SectionHeaderContent = (props) => {
           <div className="tariff-bar">
             <TariffBar />
           </div>
+
           {props.addUsers && (
             <div className="action-wrapper">
               <IconButton

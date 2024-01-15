@@ -7,7 +7,7 @@ import {
   isTablet as isTabletUtils,
   isMobile as isMobileUtils,
   tablet,
-} from "@docspace/components/utils/device";
+} from "@docspace/shared/utils";
 import {
   isIOS,
   isMobile,

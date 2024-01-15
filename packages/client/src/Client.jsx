@@ -11,7 +11,7 @@ import {
 } from "@docspace/common/utils";
 import { regDesktop } from "@docspace/common/desktop";
 
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 
 import FilesPanels from "./components/FilesPanels";
 import GlobalEvents from "./components/GlobalEvents";

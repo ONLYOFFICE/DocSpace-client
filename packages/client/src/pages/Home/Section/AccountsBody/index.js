@@ -8,6 +8,7 @@ import Groups from "./Groups";
 import InsideGroup from "./InsideGroup";
 
 import { withTranslation } from "react-i18next";
+import { Consumer } from "@docspace/shared/utils";
 import withLoader from "SRC_DIR/HOCs/withLoader";
 
 const SectionBodyContent = (props) => {

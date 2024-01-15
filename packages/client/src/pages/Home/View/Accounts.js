@@ -1,6 +1,4 @@
-import React from "react";
-import { Consumer } from "@docspace/components/utils/context";
-import Submenu from "@docspace/components/submenu";
+import { Consumer } from "@docspace/shared/utils";
 
 import { AccountsSectionBodyContent } from "../Section";
 

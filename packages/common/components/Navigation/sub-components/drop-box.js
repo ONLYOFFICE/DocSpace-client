@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled, { css, useTheme } from "styled-components";
 
 import { VariableSizeList } from "react-window";
-import CustomScrollbarsVirtualList from "@docspace/components/scrollbar/custom-scrollbars-virtual-list";
+import { CustomScrollbarsVirtualList } from "@docspace/shared/components/scrollbar";
 
 import ArrowButton from "./arrow-btn";
 import Text from "./text";
@@ -12,10 +12,10 @@ import Item from "./item";
 import StyledContainer from "../StyledNavigation";
 import NavigationLogo from "./logo-block";
 
-import { tablet, mobile } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/shared/utils";
 import { ReactSVG } from "react-svg";
 
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 import { DeviceType } from "../../../constants";
 
 const StyledBox = styled.div`

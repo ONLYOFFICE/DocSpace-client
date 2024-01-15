@@ -15,7 +15,7 @@ import {
 import { combineUrl } from "@docspace/common/utils";
 import { updateTempContent } from "@docspace/common/utils";
 
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 import config from "PACKAGE_FILE";
 import { thumbnailStatuses } from "@docspace/client/src/helpers/filesConstants";
 import { openDocEditor as openEditor } from "@docspace/client/src/helpers/filesUtils";
@@ -26,7 +26,7 @@ import {
   getCategoryUrl,
   getCategoryTypeByFolderType,
 } from "SRC_DIR/helpers/utils";
-import { isDesktop, isMobile } from "@docspace/components/utils/device";
+import { isDesktop, isMobile } from "@docspace/shared/utils";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/constants";
 
@@ -274,7 +274,9 @@ class FilesStore {
 
       const foundIndex = fileId && this.files.findIndex((x) => x.id === fileId);
 
-      this.treeFoldersStore.fetchTreeFolders();
+      if (!this.publicRoomStore.isPublicRoom) {
+        this.treeFoldersStore.fetchTreeFolders();
+      }
       if (foundIndex == -1) return;
 
       this.updateFileStatus(
@@ -1092,8 +1094,10 @@ class FilesStore {
         this.viewAs === "tile"
           ? item.getAttribute("value")
           : item.getElementsByClassName("files-item")
-          ? item.getElementsByClassName("files-item")[0]?.getAttribute("value")
-          : null;
+            ? item
+                .getElementsByClassName("files-item")[0]
+                ?.getAttribute("value")
+            : null;
 
       if (!value) return;
       const splitValue = value && value.split("_");
@@ -1127,8 +1131,10 @@ class FilesStore {
         this.viewAs === "tile"
           ? item.getAttribute("value")
           : item.getElementsByClassName("files-item")
-          ? item.getElementsByClassName("files-item")[0]?.getAttribute("value")
-          : null;
+            ? item
+                .getElementsByClassName("files-item")[0]
+                ?.getAttribute("value")
+            : null;
 
       const splitValue = value && value.split("_");
 
@@ -1522,6 +1528,7 @@ class FilesStore {
         this.selectedFolderStore.setSelectedFolder({
           folders: data.folders,
           ...data.current,
+          inRoom: !!data.current.inRoom,
           pathParts: data.pathParts,
           navigationPath,
           ...{ new: data.new },
@@ -2269,9 +2276,9 @@ class FilesStore {
         }
       }
 
-      if (fromInfoPanel) {
-        roomOptions = this.removeOptions(roomOptions, ["external-link"]);
-      }
+      // if (fromInfoPanel) {
+      //   roomOptions = this.removeOptions(roomOptions, ["external-link"]);
+      // }
 
       roomOptions = this.removeSeparator(roomOptions);
 
@@ -3075,10 +3082,10 @@ class FilesStore {
       const href = isRecycleBinFolder
         ? null
         : previewUrl
-        ? previewUrl
-        : !isFolder
-        ? docUrl
-        : folderUrl;
+          ? previewUrl
+          : !isFolder
+            ? docUrl
+            : folderUrl;
 
       const isRoom = !!roomType;
 
@@ -3337,8 +3344,8 @@ class FilesStore {
     let selection = this.selection.length
       ? this.selection
       : this.bufferSelection
-      ? [this.bufferSelection]
-      : [];
+        ? [this.bufferSelection]
+        : [];
 
     selection = JSON.parse(JSON.stringify(selection));
 
@@ -3407,8 +3414,8 @@ class FilesStore {
     const selection = this.selection.length
       ? this.selection
       : this.bufferSelection
-      ? [this.bufferSelection]
-      : [];
+        ? [this.bufferSelection]
+        : [];
 
     return selection.some((selected) => {
       if (
@@ -3982,7 +3989,7 @@ class FilesStore {
     const pathPartsRoomIndex = navigationPath.findIndex((f) => f.id === roomId);
     if (pathPartsRoomIndex === -1) return;
     navigationPath[pathPartsRoomIndex].shared = shared;
-    this.selectedFolderStore.setPathParts(navigationPath);
+    this.selectedFolderStore.setNavigationPath(navigationPath);
   };
 
   get isFiltered() {

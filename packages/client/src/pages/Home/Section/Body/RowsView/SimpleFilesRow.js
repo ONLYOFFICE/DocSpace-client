@@ -1,22 +1,27 @@
 import React, { useEffect } from "react";
 import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
-import DragAndDrop from "@docspace/components/drag-and-drop";
-import Row from "@docspace/components/row";
+import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
+import { Row } from "@docspace/shared/components/row";
 import FilesRowContent from "./FilesRowContent";
 import { isMobile, isMobileOnly } from "react-device-detect";
 
-import { isMobile as isMobileUtile } from "@docspace/components/utils/device";
+import {
+  isMobile as isMobileUtile,
+  mobile,
+  tablet,
+  classNames,
+} from "@docspace/shared/utils";
 
 import withFileActions from "../../../../../HOCs/withFileActions";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";
 import withBadges from "../../../../../HOCs/withBadges";
 import ItemIcon from "../../../../../components/ItemIcon";
 import marginStyles from "./CommonStyles";
-import { Base } from "@docspace/components/themes";
-import { mobile, tablet } from "@docspace/components/utils/device";
+import { Base } from "@docspace/shared/themes";
+
 import CursorPalmReactSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
-import { classNames } from "@docspace/components/utils/classNames";
+
 const checkedStyle = css`
   background: ${(props) => props.theme.filesSection.rowView.checkedBackground};
   ${marginStyles}
@@ -409,8 +414,8 @@ const SimpleFilesRow = (props) => {
         showHotkeyBorder
           ? "row-hotkey-border"
           : checkedProps || isActive
-          ? "row-selected"
-          : ""
+            ? "row-selected"
+            : ""
       }`}
     >
       <DragAndDrop

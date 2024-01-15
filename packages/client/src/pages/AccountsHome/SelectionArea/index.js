@@ -1,8 +1,8 @@
 import React from "react";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
-import SelectionAreaComponent from "@docspace/components/selection-area";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { SelectionArea as SelectionAreaComponent } from "@docspace/shared/components/selection-area";
 
 const SelectionArea = ({ viewAs, setSelections }) => {
   const location = useLocation();

@@ -4,11 +4,11 @@ import { I18nextProvider } from "react-i18next";
 import { isMobileOnly } from "react-device-detect";
 import { withTranslation, Trans } from "react-i18next";
 
-import Aside from "@docspace/components/aside";
-import Backdrop from "@docspace/components/backdrop";
-import toastr from "@docspace/components/toast/toastr";
-import ModalDialog from "@docspace/components/modal-dialog";
-import SaveCancelButton from "@docspace/components/save-cancel-buttons";
+import { Aside } from "@docspace/shared/components/aside";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { toastr } from "@docspace/shared/components/toast";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
 import Loaders from "@docspace/common/components/Loaders";
 import { ShareAccessRights } from "@docspace/common/constants";
@@ -616,7 +616,7 @@ class SharingPanelComponent extends React.Component {
                 {!showEmbeddingContent && (
                   <ModalDialog.Footer>
                     <StyledModalFooter>
-                      <SaveCancelButton
+                      <SaveCancelButtons
                         saveButtonLabel={t("Common:SaveButton")}
                         onSaveClick={this.onSaveClick}
                         cancelButtonLabel={t("Common:CancelButton")}
@@ -677,7 +677,7 @@ class SharingPanelComponent extends React.Component {
                 {!showEmbeddingContent && (
                   <ModalDialog.Footer>
                     <StyledModalFooter>
-                      <SaveCancelButton
+                      <SaveCancelButtons
                         saveButtonLabel={t("Common:SaveButton")}
                         onSaveClick={this.onSaveClick}
                         cancelButtonLabel={t("Common:CancelButton")}
@@ -839,8 +839,8 @@ const SharingPanel = inject(
       selection.length > 0 && selection[0].shared
         ? selection[0].shared
         : bufferSelection?.shared
-        ? bufferSelection.shared
-        : false;
+          ? bufferSelection.shared
+          : false;
 
     return {
       theme: auth.settingsStore.theme,
@@ -851,8 +851,8 @@ const SharingPanel = inject(
       selection: uploadPanelVisible
         ? selectedUploadFile
         : selection.length
-        ? selection
-        : [bufferSelection],
+          ? selection
+          : [bufferSelection],
       isPrivacy: isPrivacyFolder,
       isFolderActions,
       selectedUploadFile,
@@ -921,18 +921,18 @@ class Panel extends React.Component {
         shareDataItems[i].access === FullAccess
           ? t("Common:FullAccess")
           : shareDataItems[i].access === ReadOnly
-          ? t("ReadOnly")
-          : shareDataItems[i].access === DenyAccess
-          ? t("DenyAccess")
-          : shareDataItems[i].access === Review
-          ? t("Common:Review")
-          : shareDataItems[i].access === Comment
-          ? t("Comment")
-          : shareDataItems[i].access === FormFilling
-          ? t("FormFilling")
-          : shareDataItems[i].access === CustomFilter
-          ? t("CustomFilter")
-          : "";
+            ? t("ReadOnly")
+            : shareDataItems[i].access === DenyAccess
+              ? t("DenyAccess")
+              : shareDataItems[i].access === Review
+                ? t("Common:Review")
+                : shareDataItems[i].access === Comment
+                  ? t("Comment")
+                  : shareDataItems[i].access === FormFilling
+                    ? t("FormFilling")
+                    : shareDataItems[i].access === CustomFilter
+                      ? t("CustomFilter")
+                      : "";
 
       let obj = {
         user:

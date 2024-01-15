@@ -1,20 +1,20 @@
 ﻿import DarkGeneralPngUrl from "PUBLIC_DIR/images/dark_general.png";
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
-import Button from "@docspace/components/button";
-import Loader from "@docspace/components/loader";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { Button } from "@docspace/shared/components/button";
+import { Loader } from "@docspace/shared/components/loader";
 import Section from "@docspace/common/components/Section";
-import { mobile, tablet } from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/shared/utils";
 import { I18nextProvider, Trans, withTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 //import { setDocumentTitle } from "@docspace/client/src/helpers/filesUtils";
 import i18n from "./i18n";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 import { checkProtocol } from "../../helpers/files-helpers";
-import Base from "@docspace/components/themes/base";
+import Base from "@docspace/shared/themes/base";
 
 const StyledPrivacyPage = styled.div`
   margin-top: ${isMobile ? "80px" : "36px"};

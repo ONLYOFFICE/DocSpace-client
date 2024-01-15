@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { Base } from "@docspace/components/themes";
-import { tablet } from "@docspace/components/utils/device";
+import { Base } from "@docspace/shared/themes";
+import { tablet } from "@docspace/shared/utils";
 
 const getHeaderHeight = ({ withSubmenu, isTablet }) => {
   let res = isTablet ? 53 : 69;

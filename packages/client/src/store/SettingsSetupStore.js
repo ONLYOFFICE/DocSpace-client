@@ -11,7 +11,7 @@ import {
 } from "@docspace/common/api/settings";
 import { combineUrl } from "@docspace/common/utils";
 import config from "PACKAGE_FILE";
-import { isDesktop } from "@docspace/components/utils/device";
+import { isDesktop } from "@docspace/shared/utils";
 import { DeviceType } from "@docspace/common/constants";
 
 class SettingsSetupStore {

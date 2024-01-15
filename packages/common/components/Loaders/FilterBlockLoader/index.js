@@ -1,7 +1,7 @@
 import React from "react";
 import { RoomsType } from "../../../constants";
 
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 import { StyledBlock, StyledContainer } from "./StyledFilterBlockLoader";
 

@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Trans, withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import Text from "@docspace/components/text";
-import Button from "@docspace/components/button";
-import Link from "@docspace/components/link";
-import toastr from "@docspace/components/toast/toastr";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
+import { Link } from "@docspace/shared/components/link";
+import { toastr } from "@docspace/shared/components/toast";
 import { continuePortal } from "@docspace/common/api/portal";
 import {
   StyledPage,
@@ -16,7 +16,7 @@ import {
 
 import withLoader from "../withLoader";
 
-import FormWrapper from "@docspace/components/form-wrapper";
+import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import DocspaceLogo from "../../../DocspaceLogo";
 
 const ContinuePortal = (props) => {

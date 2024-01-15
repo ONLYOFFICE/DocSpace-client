@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { StyledHeader, StyledSpacer } from "./StyledHeaderLoader";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
-import CircleSkeleton from "@docspace/components/skeletons/rectangle";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { CircleSkeleton } from "@docspace/shared/skeletons";
 
 const HeaderLoader = ({ id, className, style, ...rest }) => {
   const {

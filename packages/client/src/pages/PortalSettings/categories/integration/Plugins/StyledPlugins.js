@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { isMobileOnly } from "react-device-detect";
 
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 
 const StyledEmptyContainer = styled.div`
   width: 100%;

@@ -8,7 +8,7 @@ import FavoriteReactSvgUrl from "PUBLIC_DIR/images/favorite.react.svg?url";
 import React from "react";
 import styled from "styled-components";
 
-import { isTablet, commonIconsStyles } from "@docspace/shared/utils";
+import { isTablet, isMobile, commonIconsStyles } from "@docspace/shared/utils";
 import {
   FileStatus,
   RoomsType,

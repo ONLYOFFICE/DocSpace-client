@@ -66,7 +66,10 @@ const TariffBar = ({
         };
       } else {
         if (isLicenseDateExpired)
-          return { label: t("Common:SubscriptionExpired"), color: "#F24724" };
+          return {
+            label: t("Common:SubscriptionExpiredTitle"),
+            color: "#F24724",
+          };
         return {
           label: t("Common:SubscriptionIsExpiring", { date: paymentDate }),
           color: "#ED7309",

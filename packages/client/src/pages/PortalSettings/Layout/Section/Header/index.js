@@ -21,7 +21,7 @@ import {
   checkPropertyByLink,
 } from "../../../utils";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import TariffBar from "@docspace/common/components/TariffBar";
+import TariffBar from "SRC_DIR/components/TariffBar";
 
 const HeaderContainer = styled.div`
   position: relative;

@@ -19,7 +19,8 @@ import { DeleteOwnerProfileDialog } from "SRC_DIR/components/dialogs";
 import { StyledHeader } from "./StyledHeader";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { RoomSearchArea } from "@docspace/shared/enums";
-import TariffBar from "@docspace/common/components/TariffBar";
+import TariffBar from "SRC_DIR/components/TariffBar";
+
 const Header = (props) => {
   const {
     t,

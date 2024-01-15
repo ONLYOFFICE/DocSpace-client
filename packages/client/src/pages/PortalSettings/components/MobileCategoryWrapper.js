@@ -6,11 +6,18 @@ import { StyledMobileCategoryWrapper, StyledArrowRightIcon } from "./styles";
 import { combineUrl } from "@docspace/common/utils";
 
 const MobileCategoryWrapper = (props) => {
-  const { title, url, subtitle, onClickLink, withPaidBadge, badgeLabel } =
-    props;
+  const {
+    title,
+    url,
+    subtitle,
+    onClickLink,
+    withPaidBadge,
+    badgeLabel,
+    disabled,
+  } = props;
 
   return (
-    <StyledMobileCategoryWrapper>
+    <StyledMobileCategoryWrapper disabled={disabled}>
       <div className="category-item-heading">
         <Link
           className="inherit-title-link header settings_unavailable"

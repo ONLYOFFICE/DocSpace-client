@@ -7,6 +7,7 @@ import { combineUrl } from "@docspace/common/utils";
 import config from "PACKAGE_FILE";
 
 import SSO from "./SingleSignOn";
+import LDAP from "./LDAP";
 import ThirdParty from "./ThirdPartyServicesSettings";
 
 import SMTPSettings from "./SMTPSettings";
@@ -37,6 +38,11 @@ const IntegrationWrapper = (props) => {
   }, []);
 
   const data = [
+    {
+      id: "ldap",
+      name: t("LDAP"),
+      content: <LDAP />,
+    },
     {
       id: "third-party-services",
       name: t("Translations:ThirdPartyTitle"),

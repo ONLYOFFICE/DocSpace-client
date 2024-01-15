@@ -179,6 +179,10 @@ const ArticleBodyContent = (props) => {
         return t("Common:PaymentsTitle");
       case "ManagementCategoryDataManagement":
         return t("ManagementCategoryDataManagement");
+      case "LdapSettings":
+        return t("Ldap:LdapSettings");
+      case "LdapSyncTitle":
+        return t("Ldap:LdapSyncTitle");
       case "RestoreBackup":
         return t("RestoreBackup");
       case "PortalDeletion":
@@ -312,6 +316,8 @@ export default inject(({ auth, common, clientLoadingStore }) => {
   };
 })(
   withLoading(
-    withTranslation(["Settings", "Common"])(observer(ArticleBodyContent))
+    withTranslation(["Settings", "Common", "Ldap"])(
+      observer(ArticleBodyContent)
+    )
   )
 );

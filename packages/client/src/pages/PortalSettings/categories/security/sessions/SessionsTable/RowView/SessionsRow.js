@@ -1,13 +1,13 @@
 import { useCallback } from "react";
 import { isMobile } from "react-device-detect";
-import { Base } from "@docspace/components/themes";
-import { tablet } from "@docspace/components/utils/device";
+import { Base } from "@docspace/shared/themes";
+import { tablet } from "@docspace/shared/utils";
+import { Row } from "@docspace/shared/components/row";
 import styled, { css } from "styled-components";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 import SessionsRowContent from "./SessionsRowContent";
 
-import Row from "@docspace/components/row";
 import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";
 import RemoveSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
@@ -142,11 +142,6 @@ const SessionsRow = (props) => {
       onClick: () => console.log("disable"),
     },
   ];
-
-  // const handleSessionToggle = (checked) => {
-  //   toggleSession(checked);
-  //   console.log("checked", checked);
-  // };
 
   return (
     <Wrapper

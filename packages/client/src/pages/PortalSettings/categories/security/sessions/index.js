@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { mobile, tablet } from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/shared/utils";
 import styled from "styled-components";
 
 import { MainContainer } from "../StyledSecurity";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
+
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import SessionsTable from "./SessionsTable";
 import mockData from "./mockData";
-
-import Text from "@docspace/components/text";
-import Button from "@docspace/components/button";
 
 const DownLoadWrapper = styled.div`
   display: flex;

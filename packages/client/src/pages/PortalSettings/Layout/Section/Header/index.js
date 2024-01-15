@@ -14,7 +14,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { TableGroupMenu } from "@docspace/shared/components/table";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import LoaderSectionHeader from "../loaderSectionHeader";
-import { tablet, desktop } from "@docspace/shared/utils";
+import { mobile, tablet, desktop } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Badge } from "@docspace/shared/components/badge";
 import {

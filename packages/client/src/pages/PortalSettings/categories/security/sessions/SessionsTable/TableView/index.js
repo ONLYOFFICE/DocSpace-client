@@ -1,13 +1,13 @@
 import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 import styled, { css } from "styled-components";
 
 import SessionsTableHeader from "./SessionsTableHeader";
 import SessionsTableRow from "./SessionsTableRow";
 
-import TableContainer from "@docspace/components/table-container/TableContainer";
-import TableBody from "@docspace/components/table-container/TableBody";
+import { TableContainer } from "@docspace/shared/components/table";
+import { TableBody } from "@docspace/shared/components/table";
 
 const TABLE_VERSION = "5";
 const COLUMNS_SIZE = `sessionsColumnsSize_ver-${TABLE_VERSION}`;

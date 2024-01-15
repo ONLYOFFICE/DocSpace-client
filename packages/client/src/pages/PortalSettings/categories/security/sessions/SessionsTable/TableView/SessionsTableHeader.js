@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import TableHeader from "@docspace/components/table-container/TableHeader";
+import { TableHeader } from "@docspace/shared/components/table";
 
 const TABLE_VERSION = "5";
 const TABLE_COLUMNS = `SessionsColumns_ver-${TABLE_VERSION}`;

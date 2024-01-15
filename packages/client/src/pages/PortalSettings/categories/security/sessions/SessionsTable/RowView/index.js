@@ -1,8 +1,9 @@
 import { inject, observer } from "mobx-react";
-import { tablet } from "@docspace/components/utils/device";
+import { tablet } from "@docspace/shared/utils";
 import styled, { css } from "styled-components";
 
-import RowContainer from "@docspace/components/row-container";
+import { RowContainer } from "@docspace/shared/components/row-container";
+
 import SessionsRow from "./SessionsRow";
 
 const marginStyles = css`

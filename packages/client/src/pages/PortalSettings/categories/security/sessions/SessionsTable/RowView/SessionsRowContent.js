@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components";
-import Text from "@docspace/components/text";
-import Box from "@docspace/components/box";
-import RowContent from "@docspace/components/row-content";
-import { tablet, mobile } from "@docspace/components/utils/device";
+import { Text } from "@docspace/shared/components/text";
+import { Box } from "@docspace/shared/components/box";
+import { RowContent } from "@docspace/shared/components/row-content";
+import { tablet, mobile } from "@docspace/shared/utils";
 
 const StyledRowContent = styled(RowContent)`
   .rowMainContainer {

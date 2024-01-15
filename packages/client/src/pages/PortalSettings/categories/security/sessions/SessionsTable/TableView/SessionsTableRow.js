@@ -1,12 +1,12 @@
 import { useCallback } from "react";
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 import styled, { css } from "styled-components";
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 
-import TableRow from "@docspace/components/table-container/TableRow";
-import TableCell from "@docspace/components/table-container/TableCell";
-import Text from "@docspace/components/text";
-import Checkbox from "@docspace/components/checkbox";
+import { TableRow } from "@docspace/shared/components/table";
+import { TableCell } from "@docspace/shared/components/table";
+import { Text } from "@docspace/shared/components/text";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 
 import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";
 import RemoveSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";

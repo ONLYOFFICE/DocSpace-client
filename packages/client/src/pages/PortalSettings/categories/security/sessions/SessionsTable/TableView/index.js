@@ -180,22 +180,10 @@ const TableView = ({ t, sectionWidth, userId, sessionsData }) => {
   );
 };
 
-export default inject(({ auth, setup }) => {
+export default inject(({ auth }) => {
   const { id: userId } = auth.userStore.user;
-  const {
-    allSessions,
-    checkedSessions,
-    toggleSession,
-    toggleAllSessions,
-    isSessionChecked,
-  } = setup;
 
   return {
     userId,
-    allSessions,
-    checkedSessions,
-    toggleSession,
-    toggleAllSessions,
-    isSessionChecked,
   };
 })(observer(TableView));

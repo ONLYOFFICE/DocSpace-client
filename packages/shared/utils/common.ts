@@ -662,7 +662,7 @@ export const toUrlParams = (
       }
     } else if (typeof item === "object") {
       str += `${key}=${encodeURIComponent(JSON.stringify(item))}`;
-    } else if (typeof item === "string") {
+    } else if (typeof item === "string" || typeof item === "number") {
       str += `${key}=${encodeURIComponent(item)}`;
     }
   });
@@ -698,6 +698,7 @@ export function getObjectByLocation(location: Location) {
 
 export const RoomsTypeValues = Object.values(RoomsType).reduce(
   (acc, current) => {
+    if (typeof current === "string") return { ...acc };
     return { ...acc, [current]: current };
   },
   {},

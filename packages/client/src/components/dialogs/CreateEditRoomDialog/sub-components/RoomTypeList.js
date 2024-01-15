@@ -6,7 +6,7 @@ import RoomType from "./RoomType";
 
 import withLoader from "@docspace/client/src/HOCs/withLoader";
 import Loaders from "@docspace/common/components/Loaders";
-import { RoomsType } from "@docspace/shared/enums";
+import { RoomsTypeValues } from "@docspace/shared/utils/common";
 
 const StyledRoomTypeList = styled.div`
   width: 100%;
@@ -19,7 +19,7 @@ const StyledRoomTypeList = styled.div`
 const RoomTypeList = ({ t, setRoomType }) => {
   return (
     <StyledRoomTypeList>
-      {Object.values(RoomsType).map((roomType) => (
+      {Object.values(RoomsTypeValues).map((roomType) => (
         <RoomType
           id={roomType}
           t={t}

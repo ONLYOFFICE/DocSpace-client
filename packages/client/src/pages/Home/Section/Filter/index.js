@@ -7,6 +7,7 @@ import find from "lodash/find";
 import result from "lodash/result";
 
 import { isTablet, isMobile } from "@docspace/shared/utils";
+import { RoomsTypeValues } from "@docspace/shared/utils/common";
 import FilterInput from "@docspace/common/components/FilterInput";
 import Loaders from "@docspace/common/components/Loaders";
 import { withLayoutSize } from "@docspace/shared/HOC/withLayoutSize";
@@ -1200,7 +1201,7 @@ const SectionFilterContent = ({
             isHeader: true,
             isLast: isLastTypeOptionsRooms,
           },
-          ...Object.values(RoomsType).map((roomType) => {
+          ...Object.values(RoomsTypeValues).map((roomType) => {
             switch (roomType) {
               case RoomsType.FillingFormsRoom:
                 return {

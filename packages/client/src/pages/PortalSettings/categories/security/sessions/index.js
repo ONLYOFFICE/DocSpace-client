@@ -25,6 +25,7 @@ const DownLoadWrapper = styled.div`
     position: fixed;
     padding-inline: 16px;
     inset-inline: 0;
+    margin-bottom: 8px;
   }
 
   .download-report_button {

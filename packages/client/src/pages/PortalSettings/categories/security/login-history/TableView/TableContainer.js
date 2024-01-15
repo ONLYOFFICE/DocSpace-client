@@ -24,8 +24,6 @@ const Table = ({
     currentDeviceType,
   });
 
-  console.log(historyUsers);
-
   return historyUsers && historyUsers.length > 0 ? (
     <TableContainer forwardedRef={ref} useReactWindow={false}>
       <TableHeader sectionWidth={sectionWidth} containerRef={ref} />

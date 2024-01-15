@@ -329,6 +329,10 @@ class SelectionStore {
     return users.map((u) => u.id);
   }
 
+  get isVisible() {
+    return this.selection.length > 1;
+  }
+
   get isHeaderVisible() {
     return this.selection.length > 0;
   }

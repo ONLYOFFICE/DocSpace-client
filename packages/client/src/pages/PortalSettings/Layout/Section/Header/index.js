@@ -302,6 +302,7 @@ const SectionHeaderContent = (props) => {
     isPeopleHeaderVisible,
     isPeopleHeaderChecked,
     selection,
+    isVisible,
   } = props;
   const { header, isCategoryOrHeader, isNeedPaidIcon } = state;
   const arrayOfParams = getArrayOfParams();
@@ -345,6 +346,7 @@ const SectionHeaderContent = (props) => {
           id: "sessions",
           key: "Sessions",
           label: t("Common:Sessions"),
+          disabled: isVisible,
           onClick: () => console.log("Sessions"),
           iconUrl: HistoryFinalizedReactSvgUrl,
         },
@@ -466,6 +468,7 @@ export default inject(({ auth, setup, common, peopleStore }) => {
     isHeaderChecked: isPeopleHeaderChecked,
     isHeaderVisible: isPeopleHeaderVisible,
     setSelected: peopleSetSelected,
+    isVisible,
   } = peopleStore.selectionStore;
 
   const { admins, selectorIsOpen } = setup.security.accessRight;
@@ -492,6 +495,7 @@ export default inject(({ auth, setup, common, peopleStore }) => {
     isPeopleHeaderIndeterminate,
     isPeopleHeaderChecked,
     isPeopleHeaderVisible,
+    isVisible,
   };
 })(
   withLoading(

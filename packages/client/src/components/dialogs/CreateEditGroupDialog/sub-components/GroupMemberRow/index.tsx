@@ -1,4 +1,4 @@
-import Avatar from "@docspace/components/avatar";
+import { Avatar } from "@docspace/shared/components/avatar";
 import * as Styled from "./index.styled";
 import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import { ReactSVG } from "react-svg";

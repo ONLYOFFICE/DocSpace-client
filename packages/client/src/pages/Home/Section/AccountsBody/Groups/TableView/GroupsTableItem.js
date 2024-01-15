@@ -2,15 +2,14 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import TableRow from "@docspace/components/table-container/TableRow";
-import TableCell from "@docspace/components/table-container/TableCell";
-import Link from "@docspace/components/link";
-import Checkbox from "@docspace/components/checkbox";
+import { TableRow, TableCell } from "@docspace/shared/components/table";
+import { Link } from "@docspace/shared/components/link";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 
 import Badges from "../../Badges";
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 import { Events } from "@docspace/common/constants";
 
 const StyledWrapper = styled.div`
@@ -353,5 +352,5 @@ const GroupsTableItem = (props) => {
 };
 
 export default withTranslation(["People", "Common", "Settings"])(
-  withContent(GroupsTableItem)
+  withContent(GroupsTableItem),
 );

@@ -1,4 +1,4 @@
-import IconButton from "@docspace/components/icon-button";
+import { IconButton } from "@docspace/shared/components/icon-button";
 import * as Styled from "./index.styled";
 import PlusSvgUrl from "PUBLIC_DIR/images/plus.svg?url";
 import { useState } from "react";
@@ -60,7 +60,7 @@ const MembersParam = ({
               groupMember={member}
               onClickRemove={() => onRemoveUserById(member.id)}
             />
-          )
+          ),
       )}
     </div>
   );

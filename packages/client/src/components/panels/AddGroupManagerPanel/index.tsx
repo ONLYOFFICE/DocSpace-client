@@ -3,10 +3,10 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import React, { useState, useEffect, useCallback } from "react";
 
-import Aside from "@docspace/components/aside";
-import Backdrop from "@docspace/components/backdrop";
-import Selector from "@docspace/components/selector";
-import toastr from "@docspace/components/toast/toastr";
+import { Aside } from "@docspace/shared/components/aside";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Selector } from "@docspace/shared/components/selector";
+import { toastr } from "@docspace/shared/components/toast";
 
 import { getUserRole } from "@docspace/common/utils";
 import Filter from "@docspace/common/api/people/filter";
@@ -46,17 +46,17 @@ const AddGroupManagerPanel = ({
 
   const [isLoading, setIsLoading] = useLoadingWithTimeout(
     LOADER_TIMEOUT,
-    false
+    false,
   );
   const [isLoadingSearch, setIsLoadingSearch] = useLoadingWithTimeout(
     LOADER_TIMEOUT,
-    false
+    false,
   );
   const [isLoadingNextPage, setIsLoadingNextPage] = useState<boolean>(false);
 
   const accessOptions = getAccessOptions(t);
   const selectedAccess = accessOptions.filter(
-    (access) => access.access === ShareAccessRights.FullAccess
+    (access) => access.access === ShareAccessRights.FullAccess,
   )[0];
 
   const onSearch = (value: string, callback) => {
@@ -72,7 +72,7 @@ const AddGroupManagerPanel = ({
   const onLoadNextPage = (
     startIndex: number,
     search = searchValue,
-    callback
+    callback,
   ) => {
     const pageCount = 100;
 
@@ -200,7 +200,7 @@ export default inject(({ auth }) => ({
 }))(
   observer(
     withTranslation(["SharingPanel", "PeopleTranslations", "Common"])(
-      withLoader(AddGroupManagerPanel)(<Loaders.DialogAsideLoader isPanel />)
-    )
-  )
+      withLoader(AddGroupManagerPanel)(<Loaders.DialogAsideLoader isPanel />),
+    ),
+  ),
 );

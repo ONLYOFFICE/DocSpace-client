@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import api from "@docspace/common/api";
-import Selector from "@docspace/components/selector";
+import { Selector } from "@docspace/shared/components/selector";
 
 import { GroupsSelectorProps } from "./GroupsSelector.types";
 
@@ -41,7 +41,7 @@ export const GroupsSelector = (props: GroupsSelectorProps) => {
     items: any,
     accessRights: any,
     fileName: string,
-    isChecked: boolean
+    isChecked: boolean,
   ) => {
     onAccept && onAccept(items);
   };

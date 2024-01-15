@@ -2,7 +2,7 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import PeopleRowContainer from "./RowView/PeopleRowContainer";
 import TableView from "./TableView/TableContainer";
-import { Consumer } from "@docspace/components/utils/context";
+import { Consumer } from "@docspace/shared/utils/context";
 import withLoader from "SRC_DIR/HOCs/withLoader";
 
 const People = ({ tReady, peopleList, accountsViewAs }) => {
@@ -32,6 +32,6 @@ export default inject(({ peopleStore }) => ({
   accountsViewAs: peopleStore.viewAs,
 }))(
   withTranslation(["People", "Common", "PeopleTranslations"])(
-    withLoader(observer(People))()
-  )
+    withLoader(observer(People))(),
+  ),
 );

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import FilesFilter from "@docspace/common/api/files/filter";
 import RoomsFilter from "@docspace/common/api/rooms/filter";
-import { getGroup } from "@docspace/common/api/groups";
+import { getGroupById } from "@docspace/common/api/groups";
 import { getUserById } from "@docspace/common/api/people";
 
 import { Events, RoomSearchArea } from "@docspace/common/constants";
@@ -201,12 +201,12 @@ const useFiles = ({
     const newFilter = filter
       ? filter.clone()
       : isRooms
-      ? RoomsFilter.getDefault()
-      : FilesFilter.getDefault();
+        ? RoomsFilter.getDefault()
+        : FilesFilter.getDefault();
     const requests = [Promise.resolve(newFilter)];
 
     if (type === "group") {
-      requests.push(getGroup(itemId));
+      requests.push(getGroupById(itemId));
     } else if (type === "user") {
       requests.push(getUserById(itemId));
     }
@@ -245,7 +245,7 @@ const useFiles = ({
               undefined,
               undefined,
               undefined,
-              true
+              true,
             );
           } else {
             const folderId = filter.folder;

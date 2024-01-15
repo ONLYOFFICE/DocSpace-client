@@ -2,8 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
 
-import { TableRow } from "@docspace/shared/components/table";
-import { TableCell } from "@docspace/shared/components/table";
+import { TableRow, TableCell } from "@docspace/shared/components/table";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
@@ -12,7 +11,7 @@ import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 
-import Badges from "../Badges";
+import Badges from "../../Badges";
 import { Base } from "@docspace/shared/themes";
 
 const StyledWrapper = styled.div`
@@ -297,7 +296,7 @@ const PeopleTableRow = (props) => {
         setIsLoading(false);
       }
     },
-    [item, changeUserType]
+    [item, changeUserType],
   );
 
   // const getRoomsOptions = React.useCallback(() => {
@@ -452,8 +451,8 @@ const PeopleTableRow = (props) => {
             {statusType === "pending"
               ? email
               : displayName?.trim()
-              ? displayName
-              : email}
+                ? displayName
+                : email}
           </Link>
           <Badges statusType={statusType} isPaid={isPaidUser} isSSO={isSSO} />
         </TableCell>
@@ -521,5 +520,5 @@ const PeopleTableRow = (props) => {
 };
 
 export default withTranslation(["People", "Common", "Settings"])(
-  withContent(PeopleTableRow)
+  withContent(PeopleTableRow),
 );

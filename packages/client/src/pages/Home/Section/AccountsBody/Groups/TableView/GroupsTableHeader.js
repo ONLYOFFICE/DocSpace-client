@@ -2,7 +2,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import TableHeader from "@docspace/components/table-container/TableHeader";
+import { TableHeader } from "@docspace/shared/components/table";
 
 const TABLE_VERSION = "5";
 const TABLE_COLUMNS = `groupsTableColumns_ver-${TABLE_VERSION}`;
@@ -31,7 +31,7 @@ class GroupsTableHeader extends React.Component {
   getColumns = (defaultColumns) => {
     const columns = [];
     const storageColumns = localStorage.getItem(
-      `${TABLE_COLUMNS}=${this.props.userId}`
+      `${TABLE_COLUMNS}=${this.props.userId}`,
     );
 
     if (storageColumns) {
@@ -138,6 +138,6 @@ export default inject(({ auth, peopleStore, clientLoadingStore }) => ({
   withPaging: auth.settingsStore,
 }))(
   withTranslation(["People", "Common", "PeopleTranslations"])(
-    observer(GroupsTableHeader)
-  )
+    observer(GroupsTableHeader),
+  ),
 );

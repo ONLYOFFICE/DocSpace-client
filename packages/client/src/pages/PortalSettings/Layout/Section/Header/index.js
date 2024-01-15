@@ -306,7 +306,28 @@ const SectionHeaderContent = (props) => {
   const { header, isCategoryOrHeader, isNeedPaidIcon } = state;
   const arrayOfParams = getArrayOfParams();
 
-  const menuItems = (
+  const menuItems = isSessionsPage ? (
+    <>
+      <DropDownItem
+        key="all"
+        label={t("Files:All")}
+        data-index={1}
+        onClick={onSelectAll}
+      />
+      <DropDownItem
+        key="online"
+        label={t("Common:Online")}
+        data-index={2}
+        onClick={() => console.log("online")}
+      />
+      <DropDownItem
+        key="offline"
+        label={t("Common:Offline")}
+        data-index={3}
+        onClick={() => console.log("offline")}
+      />
+    </>
+  ) : (
     <>
       <DropDownItem
         key="all"
@@ -314,6 +335,7 @@ const SectionHeaderContent = (props) => {
         data-index={1}
         onClick={onSelectAll}
       />
+      <></>
     </>
   );
 
@@ -473,7 +495,7 @@ export default inject(({ auth, setup, common, peopleStore }) => {
   };
 })(
   withLoading(
-    withTranslation(["Settings", "SingleSignOn", "Common"])(
+    withTranslation(["Settings", "SingleSignOn", "Common", "Files"])(
       observer(SectionHeaderContent)
     )
   )

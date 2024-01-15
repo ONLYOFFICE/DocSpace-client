@@ -42,6 +42,7 @@ import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
 
 import { getRoomInfo } from "@docspace/common/api/rooms";
+import { getGroupById } from "COMMON_DIR/api/groups";
 
 const getAccountLoginType = (filterValues) => {
   const accountLoginType = result(
@@ -176,7 +177,10 @@ const getPayments = (filterValues) => {
 const getGroup = (filterValues) => {
   const groupId = result(
     find(filterValues, (value) => {
-      return value.group === "filter-other";
+      return (
+        value.group === FilterGroups.filterGroup &&
+        value.key !== FilterKeys.withoutGroup
+      );
     }),
     "key"
   );
@@ -683,13 +687,14 @@ const SectionFilterContent = ({
       }
 
       if (accountsFilter.group) {
-        const group = groups.find((group) => group.id === accountsFilter.group);
+        const groupId = accountsFilter.group;
+        const group = await getGroupById(groupId);
 
         if (group) {
           filterValues.push({
-            key: accountsFilter.group,
+            key: groupId,
+            group: FilterGroups.filterGroup,
             label: group.name,
-            group: "filter-other",
           });
         }
       }
@@ -1015,9 +1020,15 @@ const SectionFilterContent = ({
         },
         {
           id: "filter_group-other",
-          key: "filter_group-other",
+          key: FilterKeys.other,
           group: FilterGroups.filterGroup,
           label: t("Common:OtherLabel"),
+        },
+        {
+          id: "filter_group-selected-group",
+          key: FilterKeys.selectedGroup,
+          group: FilterGroups.filterGroup,
+          displaySelectorType: "link",
         },
       ];
 
@@ -1948,6 +1959,7 @@ const SectionFilterContent = ({
 
         if (group === FilterGroups.filterGroup) {
           newFilter.withoutGroup = false;
+          newFilter.group = null;
         }
 
         const subRoute = location.pathname.includes("groups")

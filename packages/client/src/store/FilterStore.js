@@ -59,7 +59,8 @@ class FilterStore {
       this.filter.search ||
       this.filter.role ||
       this.filter.accountLoginType ||
-      this.filter.withoutGroup
+      this.filter.withoutGroup ||
+      this.filter.group
     );
   }
 }

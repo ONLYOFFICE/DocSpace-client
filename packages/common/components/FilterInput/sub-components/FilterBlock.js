@@ -382,9 +382,10 @@ const FilterBlock = ({
                 onBackClick={onArrowClick}
                 headerLabel={selectorLabel}
               />
-            ) : showSelector.type === "groupSelector" ? (
+            ) : showSelector.type === FilterSelectorTypes.groups ? (
               <GroupsSelector
                 className="group-selector"
+                onAccept={selectOption}
                 onBackClick={onArrowClick}
                 headerLabel={selectorLabel}
               />

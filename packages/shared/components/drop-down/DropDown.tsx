@@ -84,8 +84,6 @@ const DropDown = ({
 
     const dropDownRects = dropDownRef.current?.getBoundingClientRect();
 
-    console.log(directionX, directionY);
-
     if (
       directionY === "top" ||
       (directionY === "both" &&

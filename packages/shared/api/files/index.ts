@@ -1244,6 +1244,50 @@ export async function getFileLink(fileId: number) {
   return res;
 }
 
+export function getExternalLinks(fileId: number, startIndex = 0, count = 50) {
+  const linkParams = `?startIndex=${startIndex}&count=${count}`;
+
+  return request({
+    method: "get",
+    url: `files/file/${fileId}/links${linkParams}`,
+  });
+}
+
+export function getPrimaryLink(fileId: number) {
+  return request({
+    method: "get",
+    url: `files/file/${fileId}/link`,
+  });
+}
+
+export function editExternalLink(
+  fileId: number,
+  linkId: number,
+  access: number,
+  primary: boolean,
+  internal: boolean,
+  expirationDate: string,
+) {
+  return request({
+    method: "put",
+    url: `/files/file/${fileId}/links`,
+    data: { linkId, access, primary, internal, expirationDate },
+  });
+}
+
+export function addExternalLink(
+  fileId: number,
+  access: number,
+  primary: boolean,
+  internal: boolean,
+) {
+  return request({
+    method: "put",
+    url: `/files/file/${fileId}/links`,
+    data: { access, primary, internal },
+  });
+}
+
 // TODO: Need update res type
 export function checkIsFileExist(folderId: number, filesTitle: string[]) {
   return request({

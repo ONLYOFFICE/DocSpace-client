@@ -662,7 +662,7 @@ export const toUrlParams = (
       }
     } else if (typeof item === "object") {
       str += `${key}=${encodeURIComponent(JSON.stringify(item))}`;
-    } else if (typeof item === "string") {
+    } else if (typeof item === "string" || typeof item === "number") {
       str += `${key}=${encodeURIComponent(item)}`;
     }
   });

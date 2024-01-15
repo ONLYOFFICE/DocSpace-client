@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next";
 
 import { Submenu } from "@docspace/shared/components/submenu";
 import Loaders from "@docspace/common/components/Loaders";
-import FilesFilter from "@docspace/common/api/files/filter";
-import { getObjectByLocation } from "@docspace/common/utils";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { getObjectByLocation } from "@docspace/shared/utils/common";
 
 const SectionSubmenuContent = ({
   isPersonalRoom,

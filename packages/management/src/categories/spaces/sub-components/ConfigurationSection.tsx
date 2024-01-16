@@ -63,12 +63,15 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
 
     if (isValidDomain && isValidPortalName) {
       try {
+        setIsLoading(true);
         await setDomainName(domain);
         await setPortalName(name).then((result) => {
           setReferenceLink(result);
           setSpaceCreatedDialogVisible(true);
         });
-        await authStore.settingsStore.getAllPortals();
+        await authStore.settingsStore
+          .getAllPortals()
+          .finally(() => setIsLoading(false));
       } catch (err) {
         toastr.error(err);
       }

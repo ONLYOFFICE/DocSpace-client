@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { mobile, tablet } from "@docspace/shared/utils";
+import { toastr } from "@docspace/shared/components/toast";
 import styled from "styled-components";
 
 import { MainContainer } from "../StyledSecurity";
@@ -11,6 +12,12 @@ import { Button } from "@docspace/shared/components/button";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import SessionsTable from "./SessionsTable";
 import mockData from "./mockData";
+
+import {
+  LogoutSessionDialog,
+  LogoutAllSessionDialog,
+  DisableUserDialog,
+} from "SRC_DIR/components/dialogs";
 
 const DownLoadWrapper = styled.div`
   display: flex;
@@ -74,9 +81,17 @@ const Sessions = ({
   currentDeviceType,
   allSessions,
   setAllSessions,
-  isLoadingDownloadReport,
   clearSelection,
+  disableDialogVisible,
+  logoutDialogVisible,
+  logoutAllDialogVisible,
+  setDisableDialogVisible,
+  setLogoutDialogVisible,
+  setLogoutAllDialogVisible,
+  sessionModalData,
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     setAllSessions(mockData);
     return () => {
@@ -89,6 +104,42 @@ const Sessions = ({
     setView: setViewAs,
     currentDeviceType,
   });
+
+  const onClickRemoveAllSessions = () => {
+    try {
+      setIsLoading(true);
+      console.log("onClickRemoveAllSessions");
+    } catch (error) {
+      toastr.error(error);
+    } finally {
+      setIsLoading(false);
+      setLogoutAllDialogVisible(false);
+    }
+  };
+
+  const onClickRemoveAllExceptThis = () => {
+    try {
+      setIsLoading(true);
+      console.log("onClickRemoveAllExceptThis");
+    } catch (error) {
+      toastr.error(error);
+    } finally {
+      setIsLoading(false);
+      setLogoutAllDialogVisible(false);
+    }
+  };
+
+  const onClickRemoveSession = () => {
+    try {
+      setIsLoading(true);
+      console.log("onClickRemoveSession");
+    } catch (error) {
+      toastr.error(error);
+    } finally {
+      setIsLoading(false);
+      setLogoutDialogVisible(false);
+    }
+  };
 
   return (
     <MainContainer>
@@ -104,12 +155,42 @@ const Sessions = ({
           size="normal"
           minwidth="auto"
           onClick={() => console.log("get report")}
-          isLoading={isLoadingDownloadReport}
+          isLoading={false}
         />
         <span className="download-report_description">
           {t("DownloadReportDescription")}
         </span>
       </DownLoadWrapper>
+
+      {disableDialogVisible && (
+        <DisableUserDialog
+          t={t}
+          visible={disableDialogVisible}
+          onClose={() => setDisableDialogVisible(false)}
+        />
+      )}
+
+      {logoutDialogVisible && (
+        <LogoutSessionDialog
+          t={t}
+          visible={logoutDialogVisible}
+          data={sessionModalData}
+          isLoading={isLoading}
+          onClose={() => setLogoutDialogVisible(false)}
+          onRemoveSession={onClickRemoveSession}
+        />
+      )}
+
+      {logoutAllDialogVisible && (
+        <LogoutAllSessionDialog
+          t={t}
+          visible={logoutAllDialogVisible}
+          isLoading={isLoading}
+          onClose={() => setLogoutAllDialogVisible(false)}
+          onRemoveAllSessions={onClickRemoveAllSessions}
+          onRemoveAllExceptThis={onClickRemoveAllExceptThis}
+        />
+      )}
     </MainContainer>
   );
 };
@@ -117,20 +198,40 @@ const Sessions = ({
 export default inject(({ auth, setup, peopleStore }) => {
   const { culture, currentDeviceType } = auth.settingsStore;
   const { user } = auth.userStore;
-  const { viewAs, setViewAs, isLoadingDownloadReport } = setup;
   const locale = (user && user.cultureName) || culture || "en";
-
   const { clearSelection, allSessions, setAllSessions } =
     peopleStore.selectionStore;
+
+  const {
+    viewAs,
+    setViewAs,
+    disableDialogVisible,
+    logoutDialogVisible,
+    logoutAllDialogVisible,
+    setDisableDialogVisible,
+    setLogoutDialogVisible,
+    setLogoutAllDialogVisible,
+    sessionModalData,
+  } = setup;
 
   return {
     locale,
     currentDeviceType,
     viewAs,
     setViewAs,
-    isLoadingDownloadReport,
     allSessions,
     setAllSessions,
     clearSelection,
+    disableDialogVisible,
+    logoutDialogVisible,
+    logoutAllDialogVisible,
+    setDisableDialogVisible,
+    setLogoutDialogVisible,
+    setLogoutAllDialogVisible,
+    sessionModalData,
   };
-})(withTranslation(["Settings", "Common"])(observer(Sessions)));
+})(
+  withTranslation(["Settings", "Profile", "Common", "ChangeUserStatusDialog"])(
+    observer(Sessions)
+  )
+);

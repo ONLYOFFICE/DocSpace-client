@@ -1,3 +1,4 @@
+import { inject, observer } from "mobx-react";
 import { useCallback } from "react";
 import { Base } from "@docspace/shared/themes";
 import styled, { css } from "styled-components";
@@ -127,6 +128,7 @@ StyledTableRow.defaultProps = { theme: Base };
 const SessionsTableRow = (props) => {
   const {
     t,
+    id,
     item,
     element,
     checkedProps,
@@ -141,20 +143,42 @@ const SessionsTableRow = (props) => {
     country,
     city,
     ip,
+    setLogoutDialogVisible,
+    setLogoutAllDialogVisible,
+    setDisableDialogVisible,
+    setSessionModalData,
+    isVisible,
   } = props;
+
+  const onClickSessions = () => {
+    console.log("view sessions");
+  };
+
+  const onClickLogout = () => {
+    if (isVisible) {
+      setLogoutAllDialogVisible(true);
+    } else {
+      setLogoutDialogVisible(true);
+      setSessionModalData({ id, platform, browser });
+    }
+  };
+
+  const onClickDisable = () => {
+    setDisableDialogVisible(true);
+  };
 
   const contextOptions = [
     {
       key: "ViewSessions",
       label: t("Settings:ViewSessions"),
       icon: HistoryFinalizedReactSvgUrl,
-      onClick: () => console.log("view session"),
+      onClick: onClickSessions,
     },
     {
       key: "LogoutAllSessions",
       label: t("Settings:LogoutAllSessions"),
       icon: RemoveSvgUrl,
-      onClick: () => console.log("logout session"),
+      onClick: onClickLogout,
     },
     {
       key: "Separator",
@@ -164,7 +188,7 @@ const SessionsTableRow = (props) => {
       key: "Disable",
       label: t("Common:DisableUserButton"),
       icon: TrashReactSvgUrl,
-      onClick: () => console.log("disable"),
+      onClick: onClickDisable,
     },
   ];
 
@@ -265,4 +289,21 @@ const SessionsTableRow = (props) => {
   );
 };
 
-export default withContent(SessionsTableRow);
+export default inject(({ setup, peopleStore }) => {
+  const { isVisible } = peopleStore.selectionStore;
+
+  const {
+    setLogoutDialogVisible,
+    setLogoutAllDialogVisible,
+    setDisableDialogVisible,
+    setSessionModalData,
+  } = setup;
+
+  return {
+    setLogoutDialogVisible,
+    setLogoutAllDialogVisible,
+    setDisableDialogVisible,
+    setSessionModalData,
+    isVisible,
+  };
+})(withContent(observer(SessionsTableRow)));

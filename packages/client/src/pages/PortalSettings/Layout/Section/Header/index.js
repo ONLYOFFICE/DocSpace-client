@@ -301,7 +301,12 @@ const SectionHeaderContent = (props) => {
     isPeopleHeaderIndeterminate,
     isPeopleHeaderVisible,
     isPeopleHeaderChecked,
-    selection,
+    setupSelection,
+    peopleSelection,
+    setDisableDialogVisible,
+    setLogoutDialogVisible,
+    setLogoutAllDialogVisible,
+    setSessionModalData,
     isVisible,
   } = props;
   const { header, isCategoryOrHeader, isNeedPaidIcon } = state;
@@ -340,6 +345,27 @@ const SectionHeaderContent = (props) => {
     </>
   );
 
+  const onClickSessions = () => {
+    console.log("view sessions");
+  };
+
+  const onClickLogout = () => {
+    if (isVisible) {
+      setLogoutAllDialogVisible(true);
+    } else {
+      setLogoutDialogVisible(true);
+      setSessionModalData({
+        id: peopleSelection[0].userId,
+        platform: peopleSelection[0].platform,
+        browser: peopleSelection[0].browser,
+      });
+    }
+  };
+
+  const onClickDisable = () => {
+    setDisableDialogVisible(true);
+  };
+
   const headerMenu = isSessionsPage
     ? [
         {
@@ -347,28 +373,28 @@ const SectionHeaderContent = (props) => {
           key: "Sessions",
           label: t("Common:Sessions"),
           disabled: isVisible,
-          onClick: () => console.log("Sessions"),
+          onClick: onClickSessions,
           iconUrl: HistoryFinalizedReactSvgUrl,
         },
         {
           id: "logout",
           key: "Logout",
           label: t("Common:Logout"),
-          onClick: () => console.log("Logout"),
+          onClick: onClickLogout,
           iconUrl: RemoveSvgUrl,
         },
         {
           id: "Disable",
           key: "Disable",
           label: t("Common:DisableUserButton"),
-          onClick: () => console.log("Disable"),
+          onClick: onClickDisable,
           iconUrl: TrashReactSvgUrl,
         },
       ]
     : [
         {
           label: t("Common:Delete"),
-          disabled: !selection || !selection.length > 0,
+          disabled: !setupSelection || !setupSelection.length > 0,
           onClick: removeAdmins,
           iconUrl: DeleteReactSvgUrl,
         },
@@ -452,7 +478,13 @@ export default inject(({ auth, setup, common, peopleStore }) => {
     isRestoreAndAutoBackupAvailable,
   } = currentQuotaStore;
   const { addUsers, removeAdmins } = setup.headerAction;
-  const { toggleSelector } = setup;
+  const {
+    toggleSelector,
+    setDisableDialogVisible,
+    setLogoutDialogVisible,
+    setLogoutAllDialogVisible,
+    setSessionModalData,
+  } = setup;
   const {
     selected,
     setSelected: setupSetSelected,
@@ -461,7 +493,7 @@ export default inject(({ auth, setup, common, peopleStore }) => {
     isHeaderVisible: isSetupHeaderVisible,
     deselectUser,
     selectAll,
-    selection,
+    selection: setupSelection,
   } = setup.selectionStore;
   const {
     isHeaderIndeterminate: isPeopleHeaderIndeterminate,
@@ -469,6 +501,7 @@ export default inject(({ auth, setup, common, peopleStore }) => {
     isHeaderVisible: isPeopleHeaderVisible,
     setSelected: peopleSetSelected,
     isVisible,
+    selection: peopleSelection,
   } = peopleStore.selectionStore;
 
   const { admins, selectorIsOpen } = setup.security.accessRight;
@@ -486,16 +519,21 @@ export default inject(({ auth, setup, common, peopleStore }) => {
     selectAll,
     toggleSelector,
     selectorIsOpen,
-    selection,
+    setupSelection,
     isLoadedSectionHeader,
     setIsLoadedSectionHeader,
     isBrandingAndCustomizationAvailable,
     isRestoreAndAutoBackupAvailable,
     peopleSetSelected,
+    peopleSelection,
     isPeopleHeaderIndeterminate,
     isPeopleHeaderChecked,
     isPeopleHeaderVisible,
     isVisible,
+    setDisableDialogVisible,
+    setLogoutDialogVisible,
+    setLogoutAllDialogVisible,
+    setSessionModalData,
   };
 })(
   withLoading(

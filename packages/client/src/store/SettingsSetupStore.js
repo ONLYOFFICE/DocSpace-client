@@ -18,8 +18,9 @@ class SettingsSetupStore {
   selectionStore = null;
   authStore = null;
   isInit = false;
-  logoutVisible = false;
-  logoutAllVisible = false;
+  logoutDialogVisible = false;
+  logoutAllDialogVisible = false;
+  disableDialogVisible = false;
   viewAs = isDesktop() ? "table" : "row";
 
   isLoadingDownloadReport = false;
@@ -80,6 +81,7 @@ class SettingsSetupStore {
   sessionsIsInit = false;
   sessions = [];
   currentSession = [];
+  sessionModalData = {};
 
   constructor() {
     this.selectionStore = new SelectionStore(this);
@@ -509,9 +511,17 @@ class SettingsSetupStore {
     return api.settings.removeActiveSession(id);
   };
 
-  setLogoutVisible = (visible) => (this.logoutVisible = visible);
+  setLogoutDialogVisible = (visible) => {
+    this.logoutDialogVisible = visible;
+  };
 
-  setLogoutAllVisible = (visible) => (this.logoutAllVisible = visible);
+  setLogoutAllDialogVisible = (visible) => {
+    this.logoutAllDialogVisible = visible;
+  };
+
+  setDisableDialogVisible = (visible) => {
+    this.disableDialogVisible = visible;
+  };
 
   getSessions = () => {
     if (this.sessionsIsInit) return;
@@ -524,6 +534,14 @@ class SettingsSetupStore {
 
   setSessions = (sessions) => {
     this.sessions = sessions;
+  };
+
+  setSessionModalData = (data) => {
+    this.sessionModalData = {
+      id: data.id,
+      platform: data.platform,
+      browser: data.browser,
+    };
   };
 }
 

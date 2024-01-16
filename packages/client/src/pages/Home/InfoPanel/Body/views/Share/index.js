@@ -33,6 +33,7 @@ const Share = (props) => {
   const [primaryFileLink, setPrimaryFileLink] = useState([]);
   const [additionalFileLinks, setAdditionalFileLinks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [loadingLinks, setLoadingLinks] = useState([]);
 
   const hideSharePanel = isRooms || !selection?.canShare;
 
@@ -92,6 +93,8 @@ const Share = (props) => {
 
   const changeShareOption = async (item, link) => {
     try {
+      setLoadingLinks([...loadingLinks, link.sharedTo.id]);
+
       const res = await editFileLink(
         selection.id,
         link.sharedTo.id,
@@ -111,6 +114,8 @@ const Share = (props) => {
 
   const changeAccessOption = async (item, link) => {
     try {
+      setLoadingLinks([...loadingLinks, link.sharedTo.id]);
+
       const res = await editFileLink(
         selection.id,
         link.sharedTo.id,
@@ -142,6 +147,8 @@ const Share = (props) => {
 
   const changeExpirationOption = async (link, expirationDate) => {
     try {
+      setLoadingLinks([...loadingLinks, link.sharedTo.id]);
+
       const res = await editFileLink(
         selection.id,
         link.sharedTo.id,
@@ -171,6 +178,10 @@ const Share = (props) => {
       });
       setAdditionalFileLinks(newArr);
     }
+    const newLoadingLinks = loadingLinks.filter(
+      (item) => item !== link.sharedTo.id
+    );
+    setLoadingLinks(newLoadingLinks);
   };
 
   const deleteLink = (link, id) => {
@@ -208,6 +219,7 @@ const Share = (props) => {
               changeAccessOption={changeAccessOption}
               changeExpirationOption={changeExpirationOption}
               availableExternalRights={selection.availableExternalRights}
+              loadingLinks={loadingLinks}
             />
           </StyledLinks>
 
@@ -231,6 +243,7 @@ const Share = (props) => {
                 changeAccessOption={changeAccessOption}
                 changeExpirationOption={changeExpirationOption}
                 availableExternalRights={selection.availableExternalRights}
+                loadingLinks={loadingLinks}
               />
             </StyledLinks>
           )}

@@ -12,6 +12,7 @@ import { Link } from "@docspace/shared/components/link";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { toastr } from "@docspace/shared/components/toast";
+import { Loader } from "@docspace/shared/components/loader";
 
 import { StyledLinkRow } from "./StyledShare";
 import { getShareOptions, getAccessOptions } from "./optionsHelper";
@@ -25,6 +26,7 @@ const LinkRow = ({
   changeAccessOption,
   changeExpirationOption,
   availableExternalRights,
+  loadingLinks,
 }) => {
   const { t } = useTranslation([
     "SharingPanel",
@@ -70,9 +72,15 @@ const LinkRow = ({
 
           const isExpiredLink = link.sharedTo.isExpired;
 
+          const isLoaded = loadingLinks.includes(link.sharedTo.id);
+
           return (
             <StyledLinkRow key={`share-link-row-${index}`}>
-              <Avatar size="min" source={avatar} />
+              {isLoaded ? (
+                <Loader className="loader" size="20px" type="track" />
+              ) : (
+                <Avatar size="min" source={avatar} />
+              )}
               <div className="link-options">
                 <ComboBox
                   className="internal-combobox"
@@ -87,7 +95,7 @@ const LinkRow = ({
                   fillIcon={false}
                   withBlur={isMobileOnly}
                   modernView={true}
-                  isDisabled={isExpiredLink}
+                  isDisabled={isExpiredLink || isLoaded}
                 />
                 <ExpiredComboBox
                   link={link}
@@ -100,7 +108,7 @@ const LinkRow = ({
                   iconName={CopyIcon}
                   onClick={() => onCopyLink(link)}
                   title={t("CreateAndCopy")}
-                  isDisabled={isExpiredLink}
+                  isDisabled={isExpiredLink || isLoaded}
                 />
                 <ComboBox
                   directionY={"both"}
@@ -111,11 +119,11 @@ const LinkRow = ({
                   scaledOptions={false}
                   showDisabledItems={true}
                   size="content"
-                  fillIcon={isExpiredLink}
+                  fillIcon={true}
                   withBlur={isMobileOnly}
                   modernView={true}
                   type="onlyIcon"
-                  isDisabled={isExpiredLink}
+                  isDisabled={isExpiredLink || isLoaded}
                 />
               </div>
             </StyledLinkRow>

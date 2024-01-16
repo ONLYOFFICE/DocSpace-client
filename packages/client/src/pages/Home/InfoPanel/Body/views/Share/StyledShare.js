@@ -61,6 +61,16 @@ const StyledLinkRow = styled.div`
     align-items: center;
     margin-left: auto;
   }
+
+  .loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: ${(props) => props.theme.avatar.imageContainer.borderRadius};
+    background-color: ${(props) => props.theme.avatar.icon.background};
+    height: 32px;
+    width: 32px;
+  }
 `;
 
 export { StyledLinks, StyledLinkRow };

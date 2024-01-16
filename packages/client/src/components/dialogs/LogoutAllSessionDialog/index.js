@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useState } from "react";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Button } from "@docspace/shared/components/button";
@@ -8,18 +7,22 @@ import { Text } from "@docspace/shared/components/text";
 
 import ModalDialogContainer from "../ModalDialogContainer";
 
-const LogoutAllConnectionDialog = ({
+const LogoutAllSessionDialog = ({
+  t,
   visible,
+  isLoading,
   onClose,
   onRemoveAllSessions,
-  loading,
   onRemoveAllExceptThis,
 }) => {
-  const { t } = useTranslation(["Profile", "Common"]);
   const [isChecked, setIsChecked] = useState(false);
 
   const onChangeCheckbox = () => {
     setIsChecked((prev) => !prev);
+  };
+
+  const onClick = () => {
+    isChecked ? onRemoveAllSessions() : onRemoveAllExceptThis();
   };
 
   return (
@@ -32,8 +35,8 @@ const LogoutAllConnectionDialog = ({
         {t("Profile:LogoutAllActiveConnections")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <Text as="p">{t("Profile:LogoutDescription")}</Text>
-        <Text as="p" style={{ margin: "15px 0" }}>
+        <Text>{t("Profile:LogoutDescription")}</Text>
+        <Text style={{ margin: "15px 0" }}>
           {t("Profile:DescriptionForSecurity")}
         </Text>
         <Box displayProp="flex" alignItems="center">
@@ -53,10 +56,8 @@ const LogoutAllConnectionDialog = ({
           size="normal"
           scale
           primary={true}
-          onClick={() =>
-            isChecked ? onRemoveAllSessions() : onRemoveAllExceptThis()
-          }
-          isLoading={loading}
+          onClick={onClick}
+          isLoading={isLoading}
         />
         <Button
           className="cancel-button"
@@ -65,11 +66,11 @@ const LogoutAllConnectionDialog = ({
           size="normal"
           scale
           onClick={onClose}
-          isDisabled={loading}
+          isDisabled={isLoading}
         />
       </ModalDialog.Footer>
     </ModalDialogContainer>
   );
 };
 
-export default LogoutAllConnectionDialog;
+export default LogoutAllSessionDialog;

@@ -24,8 +24,8 @@ import ChangeNameDialog from "./ChangeNameDialog";
 import AvatarEditorDialog from "./AvatarEditorDialog";
 import DeletePortalDialog from "./DeletePortalDialog";
 import InviteUsersWarningDialog from "./InviteUsersWarningDialog";
-import LogoutConnectionDialog from "./LogoutConnectionDialog";
-import LogoutAllConnectionDialog from "./LogoutAllConnectionDialog";
+import LogoutSessionDialog from "./LogoutSessionDialog";
+import LogoutAllSessionDialog from "./LogoutAllSessionDialog";
 import CreateRoomConfirmDialog from "./CreateRoomConfirmDialog";
 import PortalRenamingDialog from "./PortalRenamingDialog";
 import DataReassignmentDialog from "./DataReassignmentDialog";
@@ -39,6 +39,7 @@ import SettingsPluginDialog from "./SettingsPluginDialog";
 import ReportDialog from "./ReportDialog";
 import PluginDialog from "./PluginDialog";
 import DeletePluginDialog from "./DeletePluginDialog";
+import DisableUserDialog from "./DisableUserDialog";
 
 export {
   EmptyTrashDialog,
@@ -67,9 +68,9 @@ export {
   ChangeNameDialog,
   AvatarEditorDialog,
   DeletePortalDialog,
-  LogoutConnectionDialog,
+  LogoutSessionDialog,
+  LogoutAllSessionDialog,
   InviteUsersWarningDialog,
-  LogoutAllConnectionDialog,
   PortalRenamingDialog,
   DataReassignmentDialog,
   SubmitToFormGallery,
@@ -82,4 +83,5 @@ export {
   ReportDialog,
   PluginDialog,
   DeletePluginDialog,
+  DisableUserDialog,
 };

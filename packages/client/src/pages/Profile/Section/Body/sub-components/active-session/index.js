@@ -14,8 +14,8 @@ import { useTheme } from "styled-components";
 import Loaders from "@docspace/common/components/Loaders";
 
 import {
-  LogoutConnectionDialog,
-  LogoutAllConnectionDialog,
+  LogoutSessionDialog,
+  LogoutAllSessionDialog,
 } from "SRC_DIR/components/dialogs";
 
 import {
@@ -43,10 +43,10 @@ const ActiveSessions = ({
   getAllSessions,
   removeAllSessions,
   removeSession,
-  logoutVisible,
-  setLogoutVisible,
-  logoutAllVisible,
-  setLogoutAllVisible,
+  logoutDialogVisible,
+  setLogoutDialogVisible,
+  logoutAllDialogVisible,
+  setLogoutAllDialogVisible,
   removeAllExecptThis,
   sessionsIsInit,
   getSessions,
@@ -59,7 +59,7 @@ const ActiveSessions = ({
   const isMobile = currentDeviceType === DeviceType.mobile;
 
   const [modalData, setModalData] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { interfaceDirection } = useTheme();
 
   useEffect(() => {
@@ -68,34 +68,34 @@ const ActiveSessions = ({
 
   const onClickRemoveAllSessions = async () => {
     try {
-      setLoading(true);
+      setIsLoading(true);
       await removeAllSessions().then((res) => window.location.replace(res));
     } catch (error) {
       toastr.error(error);
     } finally {
-      setLoading(false);
-      setLogoutAllVisible(false);
+      setIsLoading(false);
+      setLogoutAllDialogVisible(false);
     }
   };
 
   const onClickRemoveAllExceptThis = async () => {
     try {
-      setLoading(true);
+      setIsLoading(true);
       await removeAllExecptThis().then(() =>
         getAllSessions().then((res) => setSessions(res.items))
       );
     } catch (error) {
       toastr.error(error);
     } finally {
-      setLoading(false);
-      setLogoutAllVisible(false);
+      setIsLoading(false);
+      setLogoutAllDialogVisible(false);
     }
   };
 
   const onClickRemoveSession = async (id) => {
     const foundSession = sessions.find((s) => s.id === id);
     try {
-      setLoading(true);
+      setIsLoading(true);
       await removeSession(foundSession.id).then(() =>
         getAllSessions().then((res) => setSessions(res.items))
       );
@@ -108,8 +108,8 @@ const ActiveSessions = ({
     } catch (error) {
       toastr.error(error);
     } finally {
-      setLoading(false);
-      setLogoutVisible(false);
+      setIsLoading(false);
+      setLogoutDialogVisible(false);
     }
   };
 
@@ -151,7 +151,7 @@ const ActiveSessions = ({
           className="session-logout"
           type="action"
           isHovered
-          onClick={() => setLogoutAllVisible(true)}
+          onClick={() => setLogoutAllDialogVisible(true)}
         >
           {t("Profile:LogoutAllActiveSessions")}
         </Link>
@@ -187,7 +187,7 @@ const ActiveSessions = ({
                 <TableDataCell
                   style={{ borderTop: "0" }}
                   onClick={() => {
-                    setLogoutVisible(true);
+                    setLogoutDialogVisible(true);
                     setModalData({
                       id: session.id,
                       platform: session.platform,
@@ -221,7 +221,7 @@ const ActiveSessions = ({
                 <TableDataCell>{session.ip}</TableDataCell>
                 <TableDataCell
                   onClick={() => {
-                    setLogoutVisible(true);
+                    setLogoutDialogVisible(true);
                     setModalData({
                       id: session.id,
                       platform: session.platform,
@@ -237,21 +237,23 @@ const ActiveSessions = ({
         </Table>
       )}
 
-      {logoutVisible && (
-        <LogoutConnectionDialog
-          visible={logoutVisible}
+      {logoutDialogVisible && (
+        <LogoutSessionDialog
+          t={t}
+          visible={logoutDialogVisible}
           data={modalData}
-          loading={loading}
-          onClose={() => setLogoutVisible(false)}
+          isLoading={isLoading}
+          onClose={() => setLogoutDialogVisible(false)}
           onRemoveSession={onClickRemoveSession}
         />
       )}
 
-      {logoutAllVisible && (
-        <LogoutAllConnectionDialog
-          visible={logoutAllVisible}
-          loading={loading}
-          onClose={() => setLogoutAllVisible(false)}
+      {logoutAllDialogVisible && (
+        <LogoutAllSessionDialog
+          t={t}
+          visible={logoutAllDialogVisible}
+          isLoading={isLoading}
+          onClose={() => setLogoutAllDialogVisible(false)}
           onRemoveAllSessions={onClickRemoveAllSessions}
           onRemoveAllExceptThis={onClickRemoveAllExceptThis}
         />
@@ -269,10 +271,10 @@ export default inject(({ auth, setup }) => {
     getAllSessions,
     removeAllSessions,
     removeSession,
-    logoutVisible,
-    setLogoutVisible,
-    logoutAllVisible,
-    setLogoutAllVisible,
+    logoutDialogVisible,
+    setLogoutDialogVisible,
+    logoutAllDialogVisible,
+    setLogoutAllDialogVisible,
     removeAllExecptThis,
     sessionsIsInit,
     sessions,
@@ -285,10 +287,10 @@ export default inject(({ auth, setup }) => {
     getAllSessions,
     removeAllSessions,
     removeSession,
-    logoutVisible,
-    setLogoutVisible,
-    logoutAllVisible,
-    setLogoutAllVisible,
+    logoutDialogVisible,
+    setLogoutDialogVisible,
+    logoutAllDialogVisible,
+    setLogoutAllDialogVisible,
     removeAllExecptThis,
     sessionsIsInit,
     sessions,

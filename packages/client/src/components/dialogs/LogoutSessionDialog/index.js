@@ -1,18 +1,19 @@
-import React from "react";
-import { useTranslation } from "react-i18next";
 import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
 import ModalDialogContainer from "../ModalDialogContainer";
 
-const LogoutConnectionDialog = ({
+const LogoutSessionDialog = ({
+  t,
   visible,
+  data,
   onClose,
   onRemoveSession,
-  data,
-  loading,
+  isLoading,
 }) => {
-  const { t } = useTranslation(["Profile", "Common"]);
+  const onClick = () => {
+    onRemoveSession(data.id);
+  };
 
   return (
     <ModalDialogContainer
@@ -36,8 +37,8 @@ const LogoutConnectionDialog = ({
           size="normal"
           scale
           primary={true}
-          onClick={() => onRemoveSession(data.id)}
-          isLoading={loading}
+          onClick={onClick}
+          isLoading={isLoading}
         />
         <Button
           key="CloseBtn"
@@ -45,11 +46,11 @@ const LogoutConnectionDialog = ({
           size="normal"
           scale
           onClick={onClose}
-          isDisabled={loading}
+          isDisabled={isLoading}
         />
       </ModalDialog.Footer>
     </ModalDialogContainer>
   );
 };
 
-export default LogoutConnectionDialog;
+export default LogoutSessionDialog;

@@ -106,17 +106,6 @@ const Section = (props: SectionProps) => {
     infoPanelHeaderContent,
   ]: (React.JSX.Element | null)[] = parseChildren(children);
 
-  console.log(
-    sectionHeaderContent,
-    sectionFilterContent,
-    sectionBodyContent,
-    sectionFooterContent,
-    sectionPagingContent,
-    sectionWarningContent,
-    infoPanelBodyContent,
-    infoPanelHeaderContent,
-  );
-
   const isSectionHeaderAvailable = !!sectionHeaderContent;
   const isSectionFilterAvailable = !!sectionFilterContent;
   const isSectionPagingAvailable = !!sectionPagingContent;

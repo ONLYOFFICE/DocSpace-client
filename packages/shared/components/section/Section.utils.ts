@@ -70,7 +70,5 @@ export const parseChildren = (children: React.JSX.Element[]) => {
     infoPanelHeaderContent,
   ];
 
-  console.log(arr);
-
   return arr;
 };

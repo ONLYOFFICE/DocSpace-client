@@ -1,3 +1,5 @@
+import React from "react";
+
 import { StyledSectionHeader } from "../Section.styled";
 import { SectionHeaderProps } from "../Section.types";
 

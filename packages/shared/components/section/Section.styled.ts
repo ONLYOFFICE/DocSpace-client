@@ -619,7 +619,7 @@ const StyledSectionFooter = styled.div`
   }
 `;
 
-const StyledSectionHeader = styled.div<{ isFormGallery: boolean }>`
+const StyledSectionHeader = styled.div<{ isFormGallery?: boolean }>`
   position: relative;
   display: flex;
 

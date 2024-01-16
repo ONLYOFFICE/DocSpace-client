@@ -1,5 +1,5 @@
+import React, { useEffect, useRef, useCallback } from "react";
 import { isMobileOnly, isIOS } from "react-device-detect";
-import { useEffect, useRef, useCallback } from "react";
 
 import { DeviceType } from "../../../enums";
 import { Portal } from "../../portal";

@@ -1,3 +1,5 @@
+import React from "react";
+
 import { StyledSectionFooter } from "../Section.styled";
 import { SectionFooterProps } from "../Section.types";
 

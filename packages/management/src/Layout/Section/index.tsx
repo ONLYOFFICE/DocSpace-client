@@ -1,3 +1,4 @@
+import React from "react";
 import { inject, observer } from "mobx-react";
 
 import { DeviceType } from "@docspace/shared/enums";
@@ -69,6 +70,7 @@ const SectionWrapper = ({
 
 export default inject(
   ({ auth, dialogsStore }: { auth: any; dialogsStore: any }) => {
+    console.log(auth, dialogsStore);
     const { settingsStore } = auth;
     const {
       isDesktopClient: isDesktop,

@@ -27,9 +27,8 @@ class InfoPanelStore {
   isVisible = false;
   isMobileHidden = false;
 
-  selection = null;
+  infoPanelSelection = null;
   selectionHistory = null;
-  selectionParentRoom = null;
   selectionHistory = null;
 
   roomsView = infoMembers;
@@ -47,6 +46,8 @@ class InfoPanelStore {
   treeFoldersStore = null;
   membersList = null;
 
+  infoPanelSelection = null;
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -61,23 +62,23 @@ class InfoPanelStore {
 
   setIsMobileHidden = (bool) => (this.isMobileHidden = bool);
 
-  setSelection = (selection) => {
-    if (this.getIsAccounts() && (!selection.email || !selection.displayName)) {
-      this.selection = selection.length
-        ? selection
-        : { isSelectedFolder: true };
-      return;
-    }
-    this.selection = selection;
-    this.isScrollLocked = false;
-  };
+  // setInfoPanelSelection = (infoPanelSelection) => {
+  //   if (this.getIsAccounts() && (!infoPanelSelection.email || !infoPanelSelection.displayName)) {
+  //     this.infoPanelSelection = infoPanelSelection.length
+  //       ? infoPanelSelection
+  //       : { isSelectedFolder: true };
+  //     return;
+  //   }
+  //   this.infoPanelSelection = infoPanelSelection;
+  //   this.isScrollLocked = false;
+  // };
 
-  setSelectionParentRoom = (obj) => (this.selectionParentRoom = obj);
   setSelectionHistory = (obj) => (this.selectionHistory = obj);
 
   setSelectionHistory = (obj) => {
     this.selectionHistory = obj;
-    this.historyWithFileList = this.selection.isFolder || this.selection.isRoom;
+    this.historyWithFileList =
+      this.infoPanelSelection.isFolder || this.infoPanelSelection.isRoom;
   };
 
   resetView = () => {
@@ -113,6 +114,7 @@ class InfoPanelStore {
       selection: peopleStoreSelection,
       bufferSelection: peopleStoreBufferSelection,
     } = this.peopleStore.selectionStore;
+
     return this.getIsAccounts()
       ? peopleStoreSelection.length
         ? [...peopleStoreSelection]
@@ -136,54 +138,49 @@ class InfoPanelStore {
     };
   };
 
-  calculateSelection = (
-    props = { selectedItems: [], selectedFolder: null }
-  ) => {
-    const selectedItems = props.selectedItems.length
-      ? props.selectedItems
-      : this.getSelectedItems();
+  calculateSelection = () => {
+    const selectedItems = this.getSelectedItems();
+    const selectedFolder = this.getSelectedFolder();
 
-    const selectedFolder = props.selectedFolder
-      ? props.selectedFolder
-      : this.getSelectedFolder();
+    if (!selectedItems.length) {
+      return this.normalizeSelection({
+        ...selectedFolder,
+        isSelectedFolder: true,
+        isSelectedItem: false,
+      });
+    } else if (selectedItems.length === 1) {
+      if (this.roomsView === infoMembers && !selectedItems[0]?.isRoom) {
+        return this.infoPanelSelection;
+      }
 
-    return selectedItems.length === 0
-      ? this.normalizeSelection({
-          ...selectedFolder,
-          isSelectedFolder: true,
-          isSelectedItem: false,
-        })
-      : selectedItems.length === 1
-        ? this.normalizeSelection({
-            ...selectedItems[0],
-            isSelectedFolder: false,
-            isSelectedItem: true,
-          })
-        : [...Array(selectedItems.length).keys()];
+      return this.normalizeSelection({
+        ...selectedItems[0],
+        isSelectedFolder: false,
+        isSelectedItem: true,
+      });
+    } else {
+      return [...Array(selectedItems.length).keys()];
+    }
   };
 
-  normalizeSelection = (selection) => {
-    const isContextMenuSelection = selection.isContextMenuSelection;
+  normalizeSelection = (infoPanelSelection) => {
+    const isContextMenuSelection = infoPanelSelection.isContextMenuSelection;
     return {
-      ...selection,
-      isRoom: selection.isRoom || !!selection.roomType,
-      icon: this.getInfoPanelItemIcon(selection, 32),
+      ...infoPanelSelection,
+      isRoom: infoPanelSelection.isRoom || !!infoPanelSelection.roomType,
+      icon: this.getInfoPanelItemIcon(infoPanelSelection, 32),
       isContextMenuSelection: false,
       wasContextMenuSelection: !!isContextMenuSelection,
       canCopyPublicLink:
-        selection.access === ShareAccessRights.RoomManager ||
-        selection.access === ShareAccessRights.None,
+        infoPanelSelection.access === ShareAccessRights.RoomManager ||
+        infoPanelSelection.access === ShareAccessRights.None,
     };
   };
 
-  reloadSelection = () => {
-    this.setSelection(this.calculateSelection());
-  };
-
   updateRoomLogoCacheBreaker = () => {
-    const logo = this.selection.logo;
-    this.setSelection({
-      ...this.selection,
+    const logo = this.infoPanelSelection.logo;
+    this.setInfoPanelSelection({
+      ...this.infoPanelSelection,
       logo: {
         small: logo.small.split("?")[0] + "?" + new Date().getTime(),
         medium: logo.medium.split("?")[0] + "?" + new Date().getTime(),
@@ -193,20 +190,23 @@ class InfoPanelStore {
     });
   };
 
-  reloadSelectionParentRoom = async () => {
+  // reloadSelection
+  // updateInfoPanelSelection = () => {
+  //   this.setInfoPanelSelection(this.calculateSelection());
+  // };
+
+  // reloadSelectionParentRoom
+  updateInfoPanelSelection = async () => {
+    // this.setInfoPanelSelection(this.calculateSelection());
     if (!this.getIsRooms) return;
 
     const currentFolderRoomId =
       this.selectedFolderStore.pathParts &&
       this.selectedFolderStore.pathParts[1]?.id;
-    // const prevRoomId = this.selectionParentRoom?.id;
 
-    // if (!currentFolderRoomId || currentFolderRoomId === prevRoomId) return;
     if (!currentFolderRoomId) return;
 
     const newSelectionParentRoom = await getRoomInfo(currentFolderRoomId);
-
-    // if (prevRoomId === newSelectionParentRoom.id) return;
 
     const roomIndex = this.selectedFolderStore.navigationPath.findIndex(
       (f) => f.id === currentFolderRoomId
@@ -216,9 +216,7 @@ class InfoPanelStore {
         newSelectionParentRoom.title;
     }
 
-    this.setSelectionParentRoom(
-      this.normalizeSelection(newSelectionParentRoom)
-    );
+    this.setInfoPanelSelection(this.normalizeSelection(newSelectionParentRoom));
   };
 
   isItemChanged = (oldItem, newItem) => {
@@ -347,6 +345,10 @@ class InfoPanelStore {
 
   setMembersList = (membersList) => {
     this.membersList = membersList;
+  };
+
+  setInfoPanelSelection = (infoPanelSelection) => {
+    this.infoPanelSelection = infoPanelSelection;
   };
 }
 

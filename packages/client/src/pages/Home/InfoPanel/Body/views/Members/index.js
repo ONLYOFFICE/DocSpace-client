@@ -35,8 +35,8 @@ const Members = ({
   updateRoomMembers,
   setUpdateRoomMembers,
 
-  selectionParentRoom,
-  setSelectionParentRoom,
+  infoPanelSelection,
+  setInfoPanelSelection,
 
   setIsScrollLocked,
 
@@ -70,11 +70,11 @@ const Members = ({
   const [isLoading, setIsLoading] = useState(false);
   const membersHelper = new MembersHelper({ t });
 
-  const security = selectionParentRoom ? selectionParentRoom.security : {};
+  const security = infoPanelSelection ? infoPanelSelection.security : {};
 
   const fetchMembers = async (roomId, clearFilter = true) => {
     if (isLoading) return;
-    const isPublic = selection?.roomType ?? selectionParentRoom?.roomType;
+    const isPublic = selection?.roomType ?? infoPanelSelection?.roomType;
     const requests = [getRoomMembers(roomId, clearFilter)];
 
     if (isPublic && clearFilter && withPublicRoomBlock) {
@@ -169,7 +169,7 @@ const Members = ({
     const fetchedMembers = await fetchMembers(selection.id);
     setMembersList(fetchedMembers);
 
-    setSelectionParentRoom({
+    setInfoPanelSelection({
       ...selection,
       members: fetchedMembers,
     });
@@ -186,25 +186,25 @@ const Members = ({
 
     const fetchedMembers = await fetchMembers(selection.id);
 
-    setSelectionParentRoom({
-      ...selectionParentRoom,
+    setInfoPanelSelection({
+      ...infoPanelSelection,
       members: fetchedMembers,
     });
 
     setMembersList(fetchedMembers);
-  }, [selectionParentRoom, selection?.id, updateRoomMembers]);
+  }, [infoPanelSelection, selection?.id, updateRoomMembers]);
 
   useEffect(() => {
     updateMembersAction();
   }, [
-    selectionParentRoom,
+    infoPanelSelection,
     selection?.id,
     updateRoomMembers,
     updateMembersAction,
   ]);
 
   const onRepeatInvitation = async () => {
-    resendEmailInvitations(selectionParentRoom.id, true)
+    resendEmailInvitations(infoPanelSelection.id, true)
       .then(() =>
         toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios"))
       )
@@ -212,7 +212,7 @@ const Members = ({
   };
 
   const loadNextPage = async () => {
-    const roomId = selectionParentRoom.id;
+    const roomId = infoPanelSelection.id;
     const fetchedMembers = await fetchMembers(roomId, false);
     const { users, administrators, expected } = fetchedMembers;
 
@@ -224,8 +224,8 @@ const Members = ({
     };
 
     setMembersList(newMembers);
-    setSelectionParentRoom({
-      ...selectionParentRoom,
+    setInfoPanelSelection({
+      ...infoPanelSelection,
       members: newMembers,
     });
   };
@@ -245,7 +245,7 @@ const Members = ({
   const expectedTitleCount = expected.length ? 1 : 0;
 
   const headersCount = adminsTitleCount + usersTitleCount + expectedTitleCount;
-  const dataReadyMembersList = selection?.id === selectionParentRoom?.id;
+  const dataReadyMembersList = selection?.id === infoPanelSelection?.id;
 
   if (!dataReadyMembersList) return <></>;
 
@@ -256,7 +256,7 @@ const Members = ({
       setLinkParams({ isEdit: false });
       setEditLinkPanelIsVisible(true);
     } else {
-      getPrimaryLink(selectionParentRoom.id).then((link) => {
+      getPrimaryLink(infoPanelSelection.id).then((link) => {
         setExternalLink(link);
         copy(link.sharedTo.shareLink);
         toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
@@ -406,10 +406,10 @@ const Members = ({
               membersHelper={membersHelper}
               currentMember={currentMember}
               updateRoomMemberRole={updateRoomMemberRole}
-              roomId={selectionParentRoom.id}
-              roomType={selectionParentRoom.roomType}
-              selectionParentRoom={selectionParentRoom}
-              setSelectionParentRoom={setSelectionParentRoom}
+              roomId={infoPanelSelection.id}
+              roomType={infoPanelSelection.roomType}
+              infoPanelSelection={infoPanelSelection}
+              setInfoPanelSelection={setInfoPanelSelection}
               changeUserType={changeUserType}
               setIsScrollLocked={setIsScrollLocked}
               isTitle={user.isTitle}
@@ -442,8 +442,8 @@ export default inject(
     dialogsStore,
   }) => {
     const {
-      selectionParentRoom,
-      setSelectionParentRoom,
+      infoPanelSelection,
+      setInfoPanelSelection,
       setView,
       roomsView,
 
@@ -453,8 +453,6 @@ export default inject(
       setIsScrollLocked,
       membersList,
       setMembersList,
-      selection: selectionItem,
-      getIsRooms,
     } = auth.infoPanelStore;
     const {
       getRoomMembers,
@@ -480,15 +478,15 @@ export default inject(
     const { setLinkParams, setEditLinkPanelIsVisible } = dialogsStore;
 
     const roomType =
-      selectedFolderStore.roomType ?? selectionParentRoom?.roomType;
+      selectedFolderStore.roomType ?? infoPanelSelection?.roomType;
 
     const isPublicRoomType =
       roomType === RoomsType.PublicRoom || roomType === RoomsType.CustomRoom;
 
     const isPublicRoom = roomType === RoomsType.PublicRoom;
 
-    const room = selectionParentRoom
-      ? selectionParentRoom
+    const room = infoPanelSelection
+      ? infoPanelSelection
       : selection.length
         ? selection[0]
         : bufferSelection
@@ -499,25 +497,15 @@ export default inject(
       room?.access === ShareAccessRights.RoomManager ||
       room?.access === ShareAccessRights.None;
 
-    const isShowParentRoom =
-      getIsRooms() &&
-      roomsView === "info_members" &&
-      !selectionItem?.isRoom &&
-      !!selectionParentRoom;
-
     const infoSelection =
-      selectionItem?.length > 1
-        ? null
-        : isShowParentRoom
-        ? selectionParentRoom
-        : selectionItem;
+      infoPanelSelection?.length > 1 ? null : infoPanelSelection;
 
     return {
       setView,
       roomsView,
       selection: infoSelection,
-      selectionParentRoom,
-      setSelectionParentRoom,
+      infoPanelSelection,
+      setInfoPanelSelection,
 
       setIsScrollLocked,
 

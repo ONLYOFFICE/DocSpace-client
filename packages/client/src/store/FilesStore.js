@@ -219,7 +219,7 @@ class FilesStore {
           } else if (opt.cmd === "delete") {
             this.selectedFolderStore[opt.type + "sCount"]--;
           }
-          this.authStore.infoPanelStore.reloadSelection();
+          // this.authStore.infoPanelStore.updateInfoPanelSelection();
         });
       }
 

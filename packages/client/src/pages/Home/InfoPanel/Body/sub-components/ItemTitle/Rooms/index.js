@@ -13,7 +13,7 @@ import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 const RoomsItemHeader = ({
   t,
   selection,
-  selectionParentRoom,
+  infoPanelSelection,
   setIsMobileHidden,
   isGracePeriod,
   setInvitePanelOptions,
@@ -30,7 +30,7 @@ const RoomsItemHeader = ({
   const icon = selection.icon;
   const isLoadedRoomIcon = !!selection.logo?.medium;
   const showDefaultRoomIcon = !isLoadedRoomIcon && selection.isRoom;
-  const security = selectionParentRoom ? selectionParentRoom.security : {};
+  const security = infoPanelSelection ? infoPanelSelection.security : {};
   const canInviteUserInRoomAbility = security?.EditAccess;
   const showInviteUserIcon = selection?.isRoom && roomsView === "info_members";
 
@@ -41,7 +41,7 @@ const RoomsItemHeader = ({
 
   const onClickInviteUsers = () => {
     setIsMobileHidden(true);
-    const parentRoomId = selectionParentRoom.id;
+    const parentRoomId = infoPanelSelection.id;
 
     if (isGracePeriod) {
       setInviteUsersWarningDialogVisible(true);
@@ -103,30 +103,14 @@ const RoomsItemHeader = ({
 
 export default inject(
   ({ auth, dialogsStore, selectedFolderStore, filesStore }) => {
-    const {
-      selection: selectionItem,
-      selectionParentRoom,
-      getIsRooms,
-      roomsView,
-    } = auth.infoPanelStore;
+    const { infoPanelSelection, roomsView } = auth.infoPanelStore;
 
-    const isShowParentRoom =
-      getIsRooms() &&
-      roomsView === "info_members" &&
-      !selectionItem.isRoom &&
-      !!selectionParentRoom;
-
-    const selection =
-      selectionItem.length > 1
-        ? null
-        : isShowParentRoom
-          ? selectionParentRoom
-          : selectionItem;
+    const selection = infoPanelSelection.length > 1 ? null : infoPanelSelection;
 
     return {
       selection,
       roomsView,
-      selectionParentRoom: auth.infoPanelStore.selectionParentRoom,
+      infoPanelSelection: auth.infoPanelStore.infoPanelSelection,
       setIsMobileHidden: auth.infoPanelStore.setIsMobileHidden,
 
       isGracePeriod: auth.currentTariffStatusStore.isGracePeriod,
@@ -137,7 +121,7 @@ export default inject(
 
       isPublicRoomType:
         (selectedFolderStore.roomType ??
-          auth.infoPanelStore.selectionParentRoom?.roomType) ===
+          auth.infoPanelStore.infoPanelSelection?.roomType) ===
         RoomsType.PublicRoom,
 
       setSelected: filesStore.setSelected,

@@ -271,7 +271,7 @@ const EditLinkPanel = (props) => {
 };
 
 export default inject(({ auth, dialogsStore, publicRoomStore }) => {
-  const { selectionParentRoom } = auth.infoPanelStore;
+  const { infoPanelSelection } = auth.infoPanelStore;
   const {
     editLinkPanelIsVisible,
     setEditLinkPanelIsVisible,
@@ -286,7 +286,7 @@ export default inject(({ auth, dialogsStore, publicRoomStore }) => {
   const link = externalLinks.find((l) => l?.sharedTo?.id === linkId);
 
   const shareLink = link?.sharedTo?.shareLink;
-  const isPublic = selectionParentRoom?.roomType === RoomsType.PublicRoom;
+  const isPublic = infoPanelSelection?.roomType === RoomsType.PublicRoom;
 
   return {
     visible: editLinkPanelIsVisible,
@@ -294,7 +294,7 @@ export default inject(({ auth, dialogsStore, publicRoomStore }) => {
     isEdit,
     linkId: link?.sharedTo?.id,
     editExternalLink,
-    roomId: selectionParentRoom.id,
+    roomId: infoPanelSelection.id,
     setExternalLink,
     isLocked: !!link?.sharedTo?.password,
     password: link?.sharedTo?.password ?? "",

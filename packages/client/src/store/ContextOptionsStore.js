@@ -284,7 +284,7 @@ class ContextOptionsStore {
 
   lockFile = (item, t) => {
     const { id, locked } = item;
-    const { setSelection: setInfoPanelSelection } =
+    const { setInfoPanelSelection: setInfoPanelSelection } =
       this.authStore.infoPanelStore;
 
     this.filesActionsStore
@@ -614,10 +614,10 @@ class ContextOptionsStore {
   };
 
   onShowInfoPanel = (item, view) => {
-    const { setSelection, setIsVisible, setView } =
+    const { setInfoPanelSelection, setIsVisible, setView } =
       this.authStore.infoPanelStore;
 
-    setSelection(item);
+    setInfoPanelSelection(item);
     setIsVisible(true);
     view && setView(view);
   };

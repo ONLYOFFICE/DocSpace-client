@@ -18,7 +18,7 @@ const Accounts = ({
   isAdmin,
   changeUserType,
   canChangeUserType,
-  setSelection,
+  setInfoPanelSelection,
   getPeopleListItem,
 }) => {
   const [statusLabel, setStatusLabel] = React.useState("");
@@ -111,9 +111,9 @@ const Accounts = ({
       const items = [];
       users.map((u) => items.push(getPeopleListItem(u)));
       if (items.length === 1) {
-        setSelection(getPeopleListItem(items[0]));
+        setInfoPanelSelection(getPeopleListItem(items[0]));
       } else {
-        setSelection(items);
+        setInfoPanelSelection(items);
       }
     }
     setIsLoading(false);
@@ -230,7 +230,7 @@ export default inject(({ auth, peopleStore, accessRightsStore }) => {
   const { changeType: changeUserType, usersStore } = peopleStore;
   const { canChangeUserType } = accessRightsStore;
 
-  const { setSelection } = auth.infoPanelStore;
+  const { setInfoPanelSelection } = auth.infoPanelStore;
 
   return {
     isOwner,
@@ -240,7 +240,7 @@ export default inject(({ auth, peopleStore, accessRightsStore }) => {
     canChangeUserType,
     loading: usersStore.operationRunning,
     getPeopleListItem: usersStore.getPeopleListItem,
-    setSelection,
+    setInfoPanelSelection,
   };
 })(
   withTranslation([

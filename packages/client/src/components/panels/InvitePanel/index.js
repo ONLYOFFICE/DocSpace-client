@@ -54,7 +54,7 @@ const InvitePanel = ({
   defaultAccess,
   inviteUsers,
   setInfoPanelIsMobileHidden,
-  reloadSelectionParentRoom,
+  updateInfoPanelSelection,
   setUpdateRoomMembers,
   roomsView,
   setInviteLanguage,
@@ -295,7 +295,7 @@ const InvitePanel = ({
         toastr.warning(result?.warning);
       }
 
-      reloadSelectionParentRoom();
+      updateInfoPanelSelection();
     } catch (err) {
       toastr.error(err);
       setIsLoading(false);
@@ -471,7 +471,7 @@ export default inject(({ auth, peopleStore, filesStore, dialogsStore }) => {
   const { filter } = peopleStore.filterStore;
   const {
     setIsMobileHidden: setInfoPanelIsMobileHidden,
-    reloadSelectionParentRoom,
+    updateInfoPanelSelection,
     setUpdateRoomMembers,
     roomsView,
     filesView,
@@ -517,7 +517,7 @@ export default inject(({ auth, peopleStore, filesStore, dialogsStore }) => {
     collaboratorLink,
     inviteUsers,
     setInfoPanelIsMobileHidden,
-    reloadSelectionParentRoom,
+    updateInfoPanelSelection,
     setUpdateRoomMembers,
     roomsView,
     getUsersList,

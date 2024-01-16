@@ -8,13 +8,11 @@ import { StyledInfoPanelBody } from "./styles/common";
 import { getRoomInfo } from "@docspace/shared/api/rooms";
 
 const InfoPanelBodyContent = ({
-  selection,
-  setSelection,
+  infoPanelSelection,
+  setInfoPanelSelection,
   calculateSelection,
   normalizeSelection,
   isItemChanged,
-  selectionParentRoom,
-  setSelectionParentRoom,
   roomsView,
   fileView,
   getIsFiles,
@@ -37,12 +35,13 @@ const InfoPanelBodyContent = ({
 
   const isNoItemGallery = isGallery && !gallerySelected;
   const itemIsRoot =
-    selection?.isSelectedFolder && selection?.id === selection?.rootFolderId;
+    infoPanelSelection?.isSelectedFolder &&
+    infoPanelSelection?.id === infoPanelSelection?.rootFolderId;
   const isNoItem =
     !isSeveralItems && (isNoItemGallery || (itemIsRoot && !isGallery));
 
   const defaultProps = {
-    selection,
+    infoPanelSelection,
     isFiles,
     isRooms,
     isAccounts,
@@ -109,44 +108,41 @@ const InfoPanelBodyContent = ({
     if (selectedFolderChanged) setSelectedFolder(props.selectedFolder);
   }, [props.selectedFolder]);
 
-  // Updating selectionParentRoom after selectFolder change
+  // Updating infoPanelSelection after selectFolder change
   // if it is located in another room
 
-  const updateSelectionParentRoomAction = useCallback(async () => {
-    if (!isRooms) return;
-    if (selection?.isRoom && roomsView === "members") return;
+  // TODO: INFO PANEL
+  // const updateSelectionParentRoomAction = useCallback(async () => {
+  //   if (!isRooms) return;
+  //   if (infoPanelSelection?.isRoom && roomsView === "members") return;
 
-    const currentFolderRoomId =
-      selectedFolder?.pathParts &&
-      selectedFolder?.pathParts?.length > 1 &&
-      selectedFolder.pathParts[1].id;
+  //   const currentFolderRoomId =
+  //     selectedFolder?.pathParts &&
+  //     selectedFolder?.pathParts?.length > 1 &&
+  //     selectedFolder.pathParts[1].id;
 
-    const storeRoomId = selectionParentRoom?.id;
-    if (!currentFolderRoomId || currentFolderRoomId === storeRoomId) return;
+  //   const storeRoomId = infoPanelSelection?.id;
+  //   if (!currentFolderRoomId || currentFolderRoomId === storeRoomId) return;
 
-    const newSelectionParentRoom = await getRoomInfo(currentFolderRoomId);
+  //   const newSelectionParentRoom = await getRoomInfo(currentFolderRoomId);
 
-    if (storeRoomId === newSelectionParentRoom.id) return;
+  //   if (storeRoomId === newSelectionParentRoom.id) return;
 
-    setSelectionParentRoom(normalizeSelection(newSelectionParentRoom));
-  }, [selectedFolder]);
+  //   setInfoPanelSelection(normalizeSelection(newSelectionParentRoom));
+  // }, [selectedFolder]);
 
+  // useEffect(() => {
+  //   console.log("updateSelectionParentRoomAction1");
+  //   updateSelectionParentRoomAction();
+  // }, [selectedFolder, updateSelectionParentRoomAction]);
+
+  // Setting infoPanelSelection after selectedItems or selectedFolder update
   useEffect(() => {
-    updateSelectionParentRoomAction();
-  }, [selectedFolder, updateSelectionParentRoomAction]);
-
-  // Setting selection after selectedItems or selectedFolder update
-  useEffect(() => {
-    setSelection(calculateSelection());
+    // console.log("InfoPanel body calculate", calculateSelection());
+    setInfoPanelSelection(calculateSelection());
   }, [selectedItems, selectedFolder]);
 
-  // * DEV-ONLY - Logs selection change
-  // useEffect(() => {
-  //   console.log("\nfor-dev  Selected items: ", selectedItems);
-  //   console.log("\nfor-dev  Selected folder: ", selectedFolder);
-  // }, [selectedItems, selectedFolder]);
-
-  if (!selection && !isGallery) return null;
+  if (!infoPanelSelection && !isGallery) return null;
 
   return (
     <StyledInfoPanelBody>
@@ -164,13 +160,11 @@ const InfoPanelBodyContent = ({
 
 export default inject(({ auth, selectedFolderStore, oformsStore }) => {
   const {
-    selection,
-    setSelection,
+    infoPanelSelection,
+    setInfoPanelSelection,
     calculateSelection,
     normalizeSelection,
     isItemChanged,
-    selectionParentRoom,
-    setSelectionParentRoom,
     roomsView,
     fileView,
     getIsFiles,
@@ -188,14 +182,12 @@ export default inject(({ auth, selectedFolderStore, oformsStore }) => {
   const selectedFolder = auth.infoPanelStore.getSelectedFolder();
 
   return {
-    selection,
-    setSelection,
+    infoPanelSelection,
+    setInfoPanelSelection,
     calculateSelection,
     normalizeSelection,
     isItemChanged,
 
-    selectionParentRoom,
-    setSelectionParentRoom,
     roomsView,
     fileView,
     getIsFiles,

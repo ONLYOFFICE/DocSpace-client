@@ -22,8 +22,8 @@ const User = ({
   membersHelper,
   currentMember,
   updateRoomMemberRole,
-  selectionParentRoom,
-  setSelectionParentRoom,
+  infoPanelSelection,
+  setInfoPanelSelection,
   changeUserType,
   setIsScrollLocked,
   isTitle,
@@ -34,7 +34,7 @@ const User = ({
   fetchMembers,
   hasNextPage,
 }) => {
-  if (!selectionParentRoom) return null;
+  if (!infoPanelSelection) return null;
   if (!user.displayName && !user.email) return null;
 
   //const [userIsRemoved, setUserIsRemoved] = useState(false);
@@ -44,7 +44,7 @@ const User = ({
   const canChangeUserRole = user.canEditAccess;
 
   const fullRoomRoleOptions = membersHelper.getOptionsByRoomType(
-    selectionParentRoom.roomType,
+    infoPanelSelection.roomType,
     canChangeUserRole
   );
 
@@ -53,16 +53,16 @@ const User = ({
   const userRoleOptions = filterUserRoleOptions(fullRoomRoleOptions, user);
 
   const updateRole = (option) => {
-    return updateRoomMemberRole(selectionParentRoom.id, {
+    return updateRoomMemberRole(infoPanelSelection.id, {
       invitations: [{ id: user.id, access: option.access }],
       notify: false,
       sharingMessage: "",
     })
       .then(async () => {
         setIsLoading(false);
-        const users = selectionParentRoom.members.users;
-        const administrators = selectionParentRoom.members.administrators;
-        const expectedMembers = selectionParentRoom.members.expected;
+        const users = infoPanelSelection.members.users;
+        const administrators = infoPanelSelection.members.administrators;
+        const expectedMembers = infoPanelSelection.members.expected;
         if (option.key === "remove") {
           const newMembersFilter = JSON.parse(JSON.stringify(membersFilter));
 
@@ -72,7 +72,7 @@ const User = ({
             expected: expectedMembers?.filter((m) => m.id !== user.id),
           };
 
-          const roomId = selectionParentRoom.id;
+          const roomId = infoPanelSelection.id;
           const newUsers = newMembers.users.length > 1 ? newMembers?.users : [];
           const newAdministrators =
             newMembers.administrators.length > 1
@@ -90,8 +90,8 @@ const User = ({
 
           newMembersFilter.total -= 1;
 
-          setSelectionParentRoom({
-            ...selectionParentRoom,
+          setInfoPanelSelection({
+            ...infoPanelSelection,
             members: {
               users: newUsers,
               administrators: newAdministrators,
@@ -105,7 +105,7 @@ const User = ({
             newMembersFilter.pageCount = 1;
 
             const fetchedMembers = await fetchMembers(
-              selectionParentRoom.id,
+              infoPanelSelection.id,
               false,
               newMembersFilter
             );
@@ -120,12 +120,12 @@ const User = ({
             };
 
             setMembers({
-              roomId: selectionParentRoom.id,
+              roomId: infoPanelSelection.id,
               ...newMembers,
             });
 
-            setSelectionParentRoom({
-              ...selectionParentRoom,
+            setInfoPanelSelection({
+              ...infoPanelSelection,
               members: newMembers,
             });
           }
@@ -135,7 +135,7 @@ const User = ({
           //setUserIsRemoved(true);
         } else {
           setMembers({
-            roomId: selectionParentRoom.id,
+            roomId: infoPanelSelection.id,
             users: users?.map((m) =>
               m.id === user.id ? { ...m, access: option.access } : m
             ),
@@ -147,8 +147,8 @@ const User = ({
             ),
           });
 
-          setSelectionParentRoom({
-            ...selectionParentRoom,
+          setInfoPanelSelection({
+            ...infoPanelSelection,
             members: {
               users: users?.map((m) =>
                 m.id === user.id ? { ...m, access: option.access } : m

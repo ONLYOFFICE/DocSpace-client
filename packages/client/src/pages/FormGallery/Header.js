@@ -15,6 +15,7 @@ import {
 import config from "PACKAGE_FILE";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { getCategoryTypeByFolderType } from "SRC_DIR/helpers/utils";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
 const SectionHeaderContent = ({

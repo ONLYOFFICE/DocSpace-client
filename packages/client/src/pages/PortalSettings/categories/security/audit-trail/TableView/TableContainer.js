@@ -27,9 +27,9 @@ const Table = ({
   });
 
   return auditTrailUsers && auditTrailUsers.length > 0 ? (
-    <TableContainer forwardedRef={ref}>
+    <TableContainer forwardedRef={ref} useReactWindow={false}>
       <TableHeader sectionWidth={sectionWidth} containerRef={ref} />
-      <TableBody>
+      <TableBody useReactWindow={false}>
         {auditTrailUsers.map((item) => (
           <TableRow
             theme={theme}

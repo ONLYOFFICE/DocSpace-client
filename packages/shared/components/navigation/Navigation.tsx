@@ -83,7 +83,7 @@ const Navigation = ({
     // setMaxHeight(`calc(100vh - ${top}px)`);
 
     setFirstClick(true);
-  }, [isRootFolder, navigationItems.length]);
+  }, [isRootFolder, navigationItems?.length]);
 
   const onMissClick = React.useCallback(
     (e: MouseEvent) => {
@@ -148,7 +148,7 @@ const Navigation = ({
         isOpen={isOpen}
         isRootFolder={isRootFolder}
         onClick={toggleDropBox}
-        isRootFolderTitle={showRootFolderTitle}
+        isRootFolderTitle={false}
       />
     </div>
   );

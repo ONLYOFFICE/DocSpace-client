@@ -51,6 +51,12 @@ module.exports = {
     // "no-unneeded-ternary": "off",
     "react/require-default-props": "off",
     "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        endOfLine: "auto",
+      },
+    ],
   },
   ignorePatterns: ["./tsconfig.json", "coverage/**", "storybook-static/**"],
 };

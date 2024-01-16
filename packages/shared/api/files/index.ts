@@ -1298,3 +1298,13 @@ export function checkIsFileExist(folderId: number, filesTitle: string[]) {
     },
   });
 }
+
+export function deleteFilesFromRecent(fileIds: number[]) {
+  return request({
+    method: "delete",
+    url: `files/recent`,
+    data: {
+      fileIds,
+    },
+  });
+}

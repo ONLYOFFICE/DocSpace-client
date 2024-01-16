@@ -23,6 +23,7 @@ import {
   createFolder,
   moveToFolder,
   getFolder,
+  deleteFilesFromRecent,
 } from "@docspace/shared/api/files";
 import {
   ConflictResolveType,
@@ -2513,6 +2514,13 @@ class FilesActionStore {
       .finally(() => {
         setSelected("none");
       });
+  };
+
+  removeFilesFromRecent = async (fileIds) => {
+    const { refreshFiles } = this.filesStore;
+
+    await deleteFilesFromRecent(fileIds);
+    await refreshFiles();
   };
 }
 

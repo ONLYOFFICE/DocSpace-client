@@ -1920,6 +1920,7 @@ class FilesStore {
         "separator2",
         // "unsubscribe",
         "delete",
+        "remove-from-recent",
       ];
 
       if (!canDownload) {

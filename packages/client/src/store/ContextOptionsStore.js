@@ -37,6 +37,7 @@ import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import PluginActionsSvgUrl from "PUBLIC_DIR/images/plugin.actions.react.svg?url";
 import LeaveRoomSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/catalog.rooms.react.svg?url";
+import RemoveOutlineSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
 
 import { makeAutoObservable } from "mobx";
@@ -818,6 +819,10 @@ class ContextOptionsStore {
     this.filesActionsStore.setMuteAction(action, item, t);
   };
 
+  onClickRemoveFromRecent = (item) => {
+    this.filesActionsStore.removeFilesFromRecent([item.id]);
+  };
+
   setLoaderTimer = (isLoading, cb) => {
     if (isLoading) {
       loadingTime = new Date();
@@ -1501,6 +1506,14 @@ class ContextOptionsStore {
         onClick: () =>
           isEditing ? this.onShowEditingToast(t) : this.onClickDelete(item, t),
         disabled: false,
+      },
+      {
+        id: "option_remove-from-recent",
+        key: "remove-from-recent",
+        label: t("RemoveFromList"),
+        icon: RemoveOutlineSvgUrl,
+        onClick: () => this.onClickRemoveFromRecent(item),
+        disabled: !this.treeFoldersStore.isRecentTab,
       },
     ];
 

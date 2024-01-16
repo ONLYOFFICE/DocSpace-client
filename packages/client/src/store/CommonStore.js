@@ -1,9 +1,9 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import authStore from "@docspace/common/store/AuthStore";
-import api from "@docspace/common/api";
-import { setDNSSettings } from "@docspace/common/api/settings";
+import api from "@docspace/shared/api";
+import { setDNSSettings } from "@docspace/shared/api/settings";
 import { toastr } from "@docspace/shared/components/toast";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 class CommonStore {
   logoUrlsWhiteLabel = [];

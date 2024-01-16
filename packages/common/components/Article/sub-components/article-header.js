@@ -11,8 +11,8 @@ import {
   StyledHeading,
   StyledIconBox,
 } from "../styled-article";
-import { getLogoFromPath } from "../../../utils";
-import { DeviceType } from "../../../constants";
+import { getLogoFromPath } from "@docspace/shared/utils";
+import { DeviceType } from "@docspace/shared/enums";
 
 const ArticleHeader = ({
   showText,
@@ -73,8 +73,8 @@ const ArticleHeader = ({
       {withCustomArticleHeader && children
         ? children
         : isBurgerLoading
-        ? isLoadingComponent
-        : mainComponent}
+          ? isLoadingComponent
+          : mainComponent}
     </StyledArticleHeader>
   );
 };

@@ -9,7 +9,7 @@ import ToggleParam from "../Params/ToggleParam";
 import ThirdPartyComboBox from "./ThirdPartyComboBox";
 
 import FolderInput from "./FolderInput";
-import { getOAuthToken } from "@docspace/common/utils";
+import { getOAuthToken } from "@docspace/shared/utils/common";
 
 const StyledThirdPartyStorage = styled(StyledParam)`
   flex-direction: column;

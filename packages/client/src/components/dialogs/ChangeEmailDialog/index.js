@@ -9,9 +9,9 @@ import { toastr } from "@docspace/shared/components/toast";
 
 import { withTranslation } from "react-i18next";
 import ModalDialogContainer from "../ModalDialogContainer";
-import { sendInstructionsToChangeEmail } from "@docspace/common/api/people";
+import { sendInstructionsToChangeEmail } from "@docspace/shared/api/people";
 
-import { errorKeys } from "@docspace/shared/constants";
+import { ErrorKeys } from "@docspace/shared/enums";
 import { inject, observer } from "mobx-react";
 class ChangeEmailDialogComponent extends React.Component {
   constructor(props) {
@@ -99,27 +99,27 @@ class ChangeEmailDialogComponent extends React.Component {
     } else {
       const translatedErrors = emailErrors.map((errorKey) => {
         switch (errorKey) {
-          case errorKeys.LocalDomain:
+          case ErrorKeys.LocalDomain:
             return t("Common:LocalDomain");
-          case errorKeys.IncorrectDomain:
+          case ErrorKeys.IncorrectDomain:
             return t("Common:IncorrectDomain");
-          case errorKeys.DomainIpAddress:
+          case ErrorKeys.DomainIpAddress:
             return t("Common:DomainIpAddress");
-          case errorKeys.PunycodeDomain:
+          case ErrorKeys.PunycodeDomain:
             return t("Common:PunycodeDomain");
-          case errorKeys.PunycodeLocalPart:
+          case ErrorKeys.PunycodeLocalPart:
             return t("Common:PunycodeLocalPart");
-          case errorKeys.IncorrectLocalPart:
+          case ErrorKeys.IncorrectLocalPart:
             return t("Common:IncorrectLocalPart");
-          case errorKeys.SpacesInLocalPart:
+          case ErrorKeys.SpacesInLocalPart:
             return t("Common:SpacesInLocalPart");
-          case errorKeys.MaxLengthExceeded:
+          case ErrorKeys.MaxLengthExceeded:
             return t("Common:MaxLengthExceeded");
-          case errorKeys.IncorrectEmail:
+          case ErrorKeys.IncorrectEmail:
             return t("Common:IncorrectEmail");
-          case errorKeys.ManyEmails:
+          case ErrorKeys.ManyEmails:
             return t("Common:ManyEmails");
-          case errorKeys.EmptyEmail:
+          case ErrorKeys.EmptyEmail:
             return t("Common:EmptyEmail");
           default:
             throw new Error("Unknown translation key");

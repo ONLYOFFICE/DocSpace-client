@@ -4,9 +4,9 @@ import { Button } from "@docspace/shared/components/button";
 import styled from "styled-components";
 import { toastr } from "@docspace/shared/components/toast";
 import DowngradePlanButtonContainer from "./DowngradePlanButtonContainer";
-import api from "@docspace/common/api";
+import api from "@docspace/shared/api";
 import { Trans } from "react-i18next";
-import { updatePayment } from "@docspace/common/api/portal";
+import { updatePayment } from "@docspace/shared/api/portal";
 
 const StyledBody = styled.div`
   button {

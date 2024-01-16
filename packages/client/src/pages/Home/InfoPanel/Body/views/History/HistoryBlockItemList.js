@@ -9,7 +9,7 @@ import {
   StyledHistoryBlockFile,
   StyledHistoryBlockFilesList,
 } from "../../styles/history";
-import { RoomsType } from "@docspace/common/constants";
+import { RoomsType } from "@docspace/shared/enums";
 
 export const HistoryBlockItemList = ({
   t,

@@ -2,7 +2,7 @@ import {
   ShareAccessRights,
   EmployeeType,
   RoomsType,
-} from "@docspace/common/constants";
+} from "@docspace/shared/enums";
 
 class MembersHelper {
   constructor(props) {

@@ -1,7 +1,7 @@
 ﻿import SsoReactSvgUrl from "PUBLIC_DIR/images/sso.react.svg?url";
 import React, { useEffect, useState, useCallback } from "react";
 import { withTranslation, Trans } from "react-i18next";
-import { createUser, signupOAuth } from "@docspace/common/api/people";
+import { createUser, signupOAuth } from "@docspace/shared/api/people";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 import { useSearchParams } from "react-router-dom";
@@ -14,15 +14,15 @@ import { PasswordInput } from "@docspace/shared/components/password-input";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { toastr } from "@docspace/shared/components/toast";
 import { SocialButton } from "@docspace/shared/components/social-button";
-import { getUserFromConfirm } from "@docspace/common/api/people";
+import { getUserFromConfirm } from "@docspace/shared/api/people";
 import {
   createPasswordHash,
   getProviderTranslation,
   getOAuthToken,
   getLoginLink,
-} from "@docspace/common/utils";
-import { login } from "@docspace/common/utils/loginUtils";
-import { providersData } from "@docspace/common/constants";
+} from "@docspace/shared/utils/common";
+import { login } from "@docspace/shared/utils/loginUtils";
+import { PROVIDERS_DATA } from "@docspace/shared/constants";
 import withLoader from "../withLoader";
 import MoreLoginModal from "@docspace/common/components/MoreLoginModal";
 import { EmailInput } from "@docspace/shared/components/email-input";
@@ -37,7 +37,7 @@ import {
   GreetingContainer,
   RegisterContainer,
 } from "./StyledCreateUser";
-import combineUrl from "@docspace/common/utils/combineUrl";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 const CreateUserForm = (props) => {
   const {
@@ -340,11 +340,11 @@ const CreateUserForm = (props) => {
     const providerButtons =
       providers &&
       providers.map((item, index) => {
-        if (!providersData[item.provider]) return;
+        if (!PROVIDERS_DATA[item.provider]) return;
         if (index > 1) return;
 
         const { icon, label, iconOptions, className } =
-          providersData[item.provider];
+          PROVIDERS_DATA[item.provider];
 
         return (
           <div className="buttonWrapper" key={`${item.provider}ProviderItem`}>
@@ -386,7 +386,7 @@ const CreateUserForm = (props) => {
     let existProviders = 0;
     providers && providers.length > 0;
     providers.map((item) => {
-      if (!providersData[item.provider]) return;
+      if (!PROVIDERS_DATA[item.provider]) return;
       existProviders++;
     });
 

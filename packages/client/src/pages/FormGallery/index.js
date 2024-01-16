@@ -8,7 +8,7 @@ import SectionBodyContent from "./Body";
 import { InfoPanelBodyContent } from "../Home/InfoPanel";
 import InfoPanelHeaderContent from "../Home/InfoPanel/Header";
 import SectionFilterContent from "./Filter";
-import OformsFilter from "@docspace/common/api/oforms/filter";
+import OformsFilter from "@docspace/shared/api/oforms/filter";
 import Dialogs from "./Dialogs";
 import ErrorView from "./ErrorView";
 

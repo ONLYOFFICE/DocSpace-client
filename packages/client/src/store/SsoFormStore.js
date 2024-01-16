@@ -7,7 +7,7 @@ import {
   submitSsoForm,
   uploadXmlMetadata,
   validateCerts,
-} from "@docspace/common/api/settings";
+} from "@docspace/shared/api/settings";
 import { toastr } from "@docspace/shared/components/toast";
 import {
   BINDING_POST,

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { getObjectByLocation } from "@docspace/common/utils";
+import { getObjectByLocation } from "@docspace/shared/utils/common";
 import ErrorContainer from "@docspace/common/components/ErrorContainer";
 import Section from "@docspace/common/components/Section";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";

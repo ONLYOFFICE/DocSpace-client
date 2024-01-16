@@ -7,7 +7,7 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 
-import { getDaysRemaining } from "@docspace/common/utils";
+import { getDaysRemaining } from "@docspace/shared/utils/common";
 
 const InviteUsersWarningDialog = (props) => {
   const {

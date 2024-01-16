@@ -7,7 +7,7 @@ import AccessCommentReactSvgUrl from "PUBLIC_DIR/images/access.comment.react.svg
 import AccessFormReactSvgUrl from "PUBLIC_DIR/images/access.form.react.svg?url";
 import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/custom.filter.react.svg?url";
 import { EDITOR_PROTOCOL } from "./filesConstants";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { homepage } from "PACKAGE_FILE";
 
 export const presentInArray = (array, search, caseInsensitive = false) => {

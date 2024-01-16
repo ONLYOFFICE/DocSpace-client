@@ -6,7 +6,7 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { useTranslation } from "react-i18next";
 import ModalDialogContainer from "./modal-dialog-container";
-import { TenantTrustedDomainsType } from "@docspace/common/constants";
+import { TenantTrustedDomainsType } from "@docspace/shared/enums";
 
 interface IRegisterModalDialogProps {
   visible: boolean;

@@ -9,8 +9,8 @@ import { FieldContainer } from "@docspace/shared/components/field-container";
 
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { getOAuthToken } from "@docspace/common/utils";
-import { saveSettingsThirdParty } from "@docspace/common/api/files";
+import { getOAuthToken } from "@docspace/shared/utils/common";
+import { saveSettingsThirdParty } from "@docspace/shared/api/files";
 
 const PureConnectDialogContainer = (props) => {
   const {

@@ -13,16 +13,16 @@ import {
   deleteBackupHistory,
   getBackupHistory,
   startRestore,
-} from "@docspace/common/api/portal";
+} from "@docspace/shared/api/portal";
 import { toastr } from "@docspace/shared/components/toast";
 import Loaders from "@docspace/common/components/Loaders";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import config from "PACKAGE_FILE";
 import { StyledBackupList } from "../../../StyledBackup";
 import BackupListBody from "./BackupListBody";
-import { TenantStatus } from "@docspace/common/constants";
+import { TenantStatus } from "@docspace/shared/enums";
 import styled from "styled-components";
 
 const StyledModalDialog = styled(ModalDialog)`

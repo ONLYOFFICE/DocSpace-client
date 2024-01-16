@@ -8,8 +8,9 @@ import { Button } from "@docspace/shared/components/button";
 import { Link } from "@docspace/shared/components/link";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
-import { getLogoFromPath, getBgPattern } from "@docspace/common/utils";
-import { DeviceType } from "@docspace/common/constants";
+import { getBgPattern } from "@docspace/shared/utils/common";
+import { getLogoFromPath } from "@docspace/shared/utils";
+import { DeviceType } from "@docspace/shared/enums";
 import { getDeepLink } from "../../helpers/deepLinkHelper";
 
 import {

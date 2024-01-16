@@ -10,7 +10,7 @@ import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 import Loaders from "@docspace/common/components/Loaders";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
 const URL_REGEX = /^https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{1,256}\/?$/;

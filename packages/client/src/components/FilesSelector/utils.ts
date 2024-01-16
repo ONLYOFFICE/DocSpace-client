@@ -1,4 +1,4 @@
-import { FilesSelectorFilterTypes } from "@docspace/common/constants";
+import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { BreadCrumb, Security } from "./FilesSelector.types";
 
 export const PAGE_COUNT = 100;

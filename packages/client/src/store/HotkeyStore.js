@@ -1,8 +1,8 @@
 import { makeAutoObservable } from "mobx";
 
-import { combineUrl } from "@docspace/common/utils";
-import { RoomsType } from "@docspace/common/constants";
-import { checkDialogsOpen } from "@docspace/common/utils/checkDialogsOpen";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { RoomsType } from "@docspace/shared/enums";
+import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { isDesktop, isMobile } from "@docspace/shared/utils";

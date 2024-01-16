@@ -1,7 +1,10 @@
 import React from "react";
 
-import { Events } from "@docspace/common/constants";
-import { frameCallbackData, frameCallCommand } from "@docspace/common/utils";
+import { Events } from "@docspace/shared/enums";
+import {
+  frameCallbackData,
+  frameCallCommand,
+} from "@docspace/shared/utils/common";
 
 const useSDK = ({
   frameConfig,

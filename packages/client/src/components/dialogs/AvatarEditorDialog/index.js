@@ -12,8 +12,8 @@ import {
   AvatarPreview,
 } from "@docspace/shared/components/image-editor";
 
-import { loadAvatar, deleteAvatar } from "@docspace/common/api/people";
-import { dataUrlToFile } from "@docspace/common/utils/dataUrlToFile";
+import { loadAvatar, deleteAvatar } from "@docspace/shared/api/people";
+import { dataUrlToFile } from "@docspace/shared/utils/dataUrlToFile";
 
 import DefaultUserAvatarMax from "PUBLIC_DIR/images/default_user_photo_size_200-200.png";
 

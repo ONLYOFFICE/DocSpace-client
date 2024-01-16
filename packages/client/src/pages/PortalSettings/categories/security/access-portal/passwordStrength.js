@@ -16,7 +16,7 @@ import isEqual from "lodash/isEqual";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
 import PasswordLoader from "../sub-components/loaders/password-loader";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const MainContainer = styled.div`
   width: 100%;

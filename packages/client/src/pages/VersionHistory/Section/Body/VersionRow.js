@@ -16,9 +16,9 @@ import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.react.svg?url";
 import { commonIconsStyles, getCorrectDate } from "@docspace/shared/utils";
 import { inject, observer } from "mobx-react";
 import { toastr } from "@docspace/shared/components/toast";
-import { Encoder } from "@docspace/common/utils/encoder";
+import { Encoder } from "@docspace/shared/utils/encoder";
 import { Base } from "@docspace/shared/themes";
-import { MAX_FILE_COMMENT_LENGTH } from "@docspace/common/constants";
+import { MAX_FILE_COMMENT_LENGTH } from "@docspace/shared/constants";
 import moment from "moment-timezone";
 
 const StyledExternalLinkIcon = styled(ExternalLinkIcon)`

@@ -4,7 +4,7 @@ import { Submenu } from "@docspace/shared/components/submenu";
 
 import { Box } from "@docspace/shared/components/box";
 import { inject, observer } from "mobx-react";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 
 import { useNavigate } from "react-router-dom";
@@ -18,7 +18,7 @@ import { isMobile, isMobileOnly } from "react-device-detect";
 import AppLoader from "@docspace/common/components/AppLoader";
 import SSOLoader from "./sub-components/ssoLoader";
 import { WebhookConfigsLoader } from "./Webhooks/sub-components/Loaders";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 import PluginSDK from "./PluginSDK";
 import { Badge } from "@docspace/shared/components/badge";
 

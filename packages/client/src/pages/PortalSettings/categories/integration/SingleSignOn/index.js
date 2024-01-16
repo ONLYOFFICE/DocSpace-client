@@ -14,7 +14,7 @@ import SSOLoader from "./sub-components/ssoLoader";
 
 import MobileView from "./MobileView";
 import { useIsMobileView } from "../../../utils/useIsMobileView";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const SERVICE_PROVIDER_SETTINGS = "serviceProviderSettings";
 const SP_METADATA = "spMetadata";

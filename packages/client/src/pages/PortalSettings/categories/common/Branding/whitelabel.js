@@ -26,7 +26,7 @@ import {
 } from "../../../utils/whiteLabelHelper";
 
 import isEqual from "lodash/isEqual";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const WhiteLabel = (props) => {
   const {

@@ -6,7 +6,7 @@ import { Button } from "@docspace/shared/components/button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { inject, observer } from "mobx-react";
 import { StyledPage, StyledBody, StyledContent } from "./RoomStyles";
-// import { createPasswordHash } from "@docspace/common/utils";
+// import { createPasswordHash } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/shared/components/toast";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import DocspaceLogo from "../../../DocspaceLogo";

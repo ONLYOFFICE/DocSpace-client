@@ -7,7 +7,7 @@ import { ChangeUserTypeDialog } from "../dialogs";
 import { toastr } from "@docspace/shared/components/toast";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 const ChangeUserTypeEvent = ({
   setVisible,

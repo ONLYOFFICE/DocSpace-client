@@ -13,7 +13,7 @@ import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
 import TfaLoader from "../sub-components/loaders/tfa-loader";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const MainContainer = styled.div`
   width: 100%;

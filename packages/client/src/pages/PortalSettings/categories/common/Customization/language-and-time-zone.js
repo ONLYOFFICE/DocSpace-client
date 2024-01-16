@@ -7,9 +7,10 @@ import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-butto
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject, observer } from "mobx-react";
-import { COOKIE_EXPIRATION_YEAR, DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
+import { COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
 import { LANGUAGE } from "@docspace/shared/constants";
-import { setCookie } from "@docspace/common/utils";
+import { setCookie } from "@docspace/shared/utils/cookie";
 import { useNavigate } from "react-router-dom";
 import { isMobile } from "@docspace/shared/utils";
 import checkScrollSettingsBlock from "../utils";
@@ -19,7 +20,7 @@ import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import BetaBadge from "@docspace/common/components/BetaBadge";
-import { isBetaLanguage } from "@docspace/common/utils";
+import { isBetaLanguage } from "@docspace/shared/utils";
 import withCultureNames from "@docspace/common/hoc/withCultureNames";
 
 const mapTimezonesToArray = (timezones) => {

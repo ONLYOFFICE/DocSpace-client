@@ -45,17 +45,17 @@ import saveAs from "file-saver";
 import { isMobile, isIOS } from "react-device-detect";
 import config from "PACKAGE_FILE";
 import { toastr } from "@docspace/shared/components/toast";
-import { ShareAccessRights, RoomsType } from "@docspace/common/constants";
-import combineUrl from "@docspace/common/utils/combineUrl";
+import { ShareAccessRights, RoomsType } from "@docspace/shared/enums";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isDesktop } from "@docspace/shared/utils";
-import { Events } from "@docspace/common/constants";
+import { Events } from "@docspace/shared/enums";
 
 import { connectedCloudsTypeTitleTranslation } from "@docspace/client/src/helpers/filesUtils";
-import { getOAuthToken } from "@docspace/common/utils";
-import api from "@docspace/common/api";
-import { FolderType } from "@docspace/common/constants";
-import FilesFilter from "@docspace/common/api/files/filter";
-import { getFileLink } from "@docspace/common/api/files";
+import { getOAuthToken } from "@docspace/shared/utils/common";
+import api from "@docspace/shared/api";
+import { FolderType } from "@docspace/shared/enums";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { getFileLink } from "@docspace/shared/api/files";
 
 const LOADER_TIMER = 500;
 let loadingTime;

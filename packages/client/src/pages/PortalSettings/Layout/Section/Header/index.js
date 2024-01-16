@@ -23,7 +23,7 @@ import {
   getTKeyByKey,
   checkPropertyByLink,
 } from "../../../utils";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 const HeaderContainer = styled.div`
   position: relative;

@@ -15,7 +15,7 @@ import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-butto
 import isEqual from "lodash/isEqual";
 
 import SessionLifetimeLoader from "../sub-components/loaders/session-lifetime-loader";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const MainContainer = styled.div`
   width: 100%;

@@ -14,7 +14,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import Loaders from "@docspace/common/components/Loaders";
 import { inject, observer } from "mobx-react";
 import config from "PACKAGE_FILE";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isMobile } from "react-device-detect";
 import {
   isMobile as isMobileUtils,

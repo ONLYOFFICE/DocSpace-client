@@ -5,7 +5,7 @@ import { withTranslation } from "react-i18next";
 
 import { ADS_TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
 
-import { getConvertedSize } from "@docspace/common/utils";
+import { getConvertedSize } from "@docspace/shared/utils/common";
 
 import { getBannerAttribute } from "@docspace/shared/utils";
 import { SnackBar } from "@docspace/shared/components/snackbar";

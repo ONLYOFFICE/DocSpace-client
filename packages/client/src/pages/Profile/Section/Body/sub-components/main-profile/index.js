@@ -17,7 +17,7 @@ import { Badge } from "@docspace/shared/components/badge";
 import { isMobileOnly } from "react-device-detect";
 import { toastr } from "@docspace/shared/components/toast";
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
-import { getUserRole, convertLanguage } from "@docspace/common/utils";
+import { getUserRole, convertLanguage } from "@docspace/shared/utils/common";
 import BetaBadge from "@docspace/common/components/BetaBadge";
 
 import { Trans } from "react-i18next";

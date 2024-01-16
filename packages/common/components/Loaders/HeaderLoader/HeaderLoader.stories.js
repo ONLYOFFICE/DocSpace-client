@@ -10,7 +10,7 @@ import {
 import Section from "../../../../.storybook/decorators/sectionBlue";
 
 import Loaders from "..";
-import { LoaderStyle } from "@docspace/shared/constants";
+import { LOADER_STYLE } from "@docspace/shared/constants";
 import styled from "styled-components";
 import withReadme from "storybook-readme/with-readme";
 import Readme from "./README.md";
@@ -26,14 +26,14 @@ storiesOf("Components|Loaders", module)
     <Section>
       <StyledH1>Header Loader</StyledH1>
       <Loaders.Header
-        title={text("title", LoaderStyle.title)}
+        title={text("title", LOADER_STYLE.title)}
         borderRadius={text("borderRadius", "3")}
         backgroundColor={color("backgroundColor", "#fff")}
         foregroundColor={color("foregroundColor", "#fff")}
         backgroundOpacity={number("backgroundOpacity", 0.2)}
         foregroundOpacity={number("foregroundOpacity", 0.25)}
-        speed={number("speed", LoaderStyle.speed)}
-        animate={boolean("animate", LoaderStyle.animate)}
+        speed={number("speed", LOADER_STYLE.speed)}
+        animate={boolean("animate", LOADER_STYLE.animate)}
       />
     </Section>
   ));

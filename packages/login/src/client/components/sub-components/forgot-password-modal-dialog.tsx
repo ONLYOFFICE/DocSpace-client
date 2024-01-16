@@ -7,7 +7,7 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { toastr } from "@docspace/shared/components/toast";
 import ModalDialogContainer from "./modal-dialog-container";
-import { sendInstructionsToChangePassword } from "@docspace/common/api/people";
+import { sendInstructionsToChangePassword } from "@docspace/shared/api/people";
 import { useTranslation } from "react-i18next";
 
 interface IForgotPasswordDialogProps {

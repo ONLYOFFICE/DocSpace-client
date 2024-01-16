@@ -7,11 +7,11 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { withTranslation } from "react-i18next";
 
-import { EmployeeStatus } from "@docspace/common/constants";
+import { EmployeeStatus } from "@docspace/shared/enums";
 import ModalDialogContainer from "../ModalDialogContainer";
 import { inject, observer } from "mobx-react";
 

@@ -6,7 +6,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
-import { continuePortal } from "@docspace/common/api/portal";
+import { continuePortal } from "@docspace/shared/api/portal";
 import {
   StyledPage,
   StyledBody,

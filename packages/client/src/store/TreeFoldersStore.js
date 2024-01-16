@@ -5,6 +5,7 @@ import { FolderType } from "@docspace/shared/enums";
 class TreeFoldersStore {
   selectedFolderStore;
   authStore;
+  publicRoomStore;
 
   treeFolders = [];
   selectedTreeNode = [];
@@ -12,14 +13,17 @@ class TreeFoldersStore {
   rootFoldersTitles = {};
   isLoadingNodes = false;
 
-  constructor(selectedFolderStore, authStore) {
+  constructor(selectedFolderStore, authStore, publicRoomStore) {
     makeAutoObservable(this);
 
     this.selectedFolderStore = selectedFolderStore;
     this.authStore = authStore;
+    this.publicRoomStore = publicRoomStore;
   }
 
   fetchTreeFolders = async () => {
+    if (this.publicRoomStore.isPublicRoom) return;
+
     const treeFolders = await getFoldersTree();
     this.setRootFoldersTitles(treeFolders);
     this.setTreeFolders(treeFolders);
@@ -92,7 +96,11 @@ class TreeFoldersStore {
     });
   };
 
-  getFoldersTree = () => getFoldersTree();
+  getFoldersTree = () => {
+    if (this.publicRoomStore.isPublicRoom) return;
+
+    getFoldersTree();
+  };
 
   setTreeFolders = (treeFolders) => {
     this.treeFolders = treeFolders;

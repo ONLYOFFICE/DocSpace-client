@@ -2,12 +2,35 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import api from "@docspace/common/api";
+import EmptyScreenGroupsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
+import Loaders from "@docspace/common/components/Loaders";
 import { Selector } from "@docspace/shared/components/selector";
 
-import { GroupsSelectorProps } from "./GroupsSelector.types";
+import {
+  GroupsSelectorItem,
+  GroupsSelectorProps,
+} from "./GroupsSelector.types";
 
 export const GroupsSelector = (props: GroupsSelectorProps) => {
-  const { id, onBackClick, headerLabel, onAccept, ...rest } = props;
+  const {
+    id,
+
+    cancelButtonLabel,
+    emptyScreenDescription,
+    emptyScreenHeader,
+    emptyScreenImage,
+    headerLabel,
+    isMultiSelect,
+    onBackClick,
+    onAccept,
+    withCancelButton,
+    withHeader,
+    searchEmptyScreenDescription,
+    searchEmptyScreenHeader,
+    searchEmptyScreenImage,
+    searchPlaceholder,
+    ...rest
+  } = props;
 
   const { t } = useTranslation(["GroupsSelector", "Common"]);
 
@@ -15,14 +38,13 @@ export const GroupsSelector = (props: GroupsSelectorProps) => {
   const [searchValue, setSearchValue] = useState("");
   const [hasNextPage, setHasNextPage] = useState(false);
   const [isNextPageLoading, setIsNextPageLoading] = useState(false);
-
   const [total, setTotal] = useState(0);
+  const [itemsList, setItemsList] = useState<GroupsSelectorItem[]>([]);
 
-  const [items, setItems] = useState([]);
-
-  const onSearchAction = (value: string) => {
+  const onSearchAction = (value: string, isSearchCallback?: Function) => {
     setSearchValue(() => {
       setIsFirstLoad(true);
+      isSearchCallback?.(Boolean(value));
 
       return value;
     });
@@ -50,13 +72,35 @@ export const GroupsSelector = (props: GroupsSelectorProps) => {
   };
 
   const onLoadNextPage = async (startIndex: number) => {
-    const res = await api.groups.getGroups();
-    const convertedItems = res.map((group: any) => ({
+    setIsNextPageLoading(true);
+
+    const { items, total, count } = await api.groups.getGroupsByName(
+      searchValue,
+      startIndex,
+    );
+
+    const convertedItems = items.map((group: any) => ({
       id: group.id,
       label: group.name,
     }));
 
-    setItems(convertedItems);
+    const oldItems = startIndex ? itemsList : [];
+    const newItems = [...oldItems, ...convertedItems];
+
+    setHasNextPage(newItems.length < total);
+    console.log(newItems.length);
+
+    setItemsList(newItems);
+    if (isFirstLoad) {
+      setTotal(total);
+      setTimeout(() => {
+        setIsFirstLoad(false);
+      }, 500);
+    } else {
+      // setItems((value) => [...value, ...convertedItems]);
+    }
+
+    setIsNextPageLoading(false);
   };
 
   useEffect(() => {
@@ -67,20 +111,45 @@ export const GroupsSelector = (props: GroupsSelectorProps) => {
     <Selector
       id={id}
       headerLabel={headerLabel || t("Groups")}
-      searchPlaceholder={t("Common:Search")}
       onBackClick={onBackClick}
+      searchPlaceholder={searchPlaceholder || t("Common:Search")}
       onSearch={onSearchAction}
+      searchValue={searchValue}
       onClearSearch={onClearSearchAction}
       onSelect={onSelectAction}
-      items={items || []}
+      items={itemsList || []}
       acceptButtonLabel={t("Common:SelectAction")}
       onAccept={onAcceptAction}
-      withHeader={true}
+      withHeader={withHeader}
+      withCancelButton={withCancelButton}
+      cancelButtonLabel={cancelButtonLabel || t("Common:CancelButton")}
       onCancel={onCancelAction}
-      selectedItems={[]}
-      totalItems={total || 3} // TODO: Fix total
+      isMultiSelect={isMultiSelect}
+      emptyScreenImage={emptyScreenImage || EmptyScreenGroupsSvgUrl}
+      emptyScreenHeader={emptyScreenHeader || t("GroupsNotFoundHeader")} // Todo: Update empty screen texts when they are ready
+      emptyScreenDescription={
+        emptyScreenDescription || t("GroupsNotFoundDescription")
+      }
+      searchEmptyScreenImage={searchEmptyScreenImage || EmptyScreenGroupsSvgUrl}
+      searchEmptyScreenHeader={
+        searchEmptyScreenHeader || t("GroupsNotFoundHeader")
+      }
+      searchEmptyScreenDescription={
+        searchEmptyScreenDescription || t("GroupsNotFoundDescription")
+      }
+      totalItems={total}
+      hasNextPage={hasNextPage}
+      isNextPageLoading={isNextPageLoading}
       loadNextPage={onLoadNextPage}
-      isLoading={false}
+      isLoading={isFirstLoad}
+      searchLoader={<Loaders.SelectorSearchLoader />}
+      rowLoader={
+        <Loaders.SelectorRowLoader
+          isMultiSelect={isMultiSelect}
+          isContainer={isFirstLoad}
+          isUser={false}
+        />
+      }
     />
   );
 };

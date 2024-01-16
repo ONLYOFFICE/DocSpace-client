@@ -30,10 +30,10 @@ export const getGroupById = (groupId) => {
   });
 };
 
-export const getGroupsByName = (groupName) => {
+export const getGroupsByName = (groupName, startIndex = 0, pageCount = 100) => {
   return request({
     method: "get",
-    url: `/group/search`,
+    url: `/accounts?searchArea=1&filterValue=${groupName}&startIndex=${startIndex}&count=${pageCount}`,
     data: { groupName },
   });
 };

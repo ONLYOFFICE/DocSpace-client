@@ -275,9 +275,8 @@ class FilesStore {
 
       const foundIndex = fileId && this.files.findIndex((x) => x.id === fileId);
 
-      if (!this.publicRoomStore.isPublicRoom) {
-        this.treeFoldersStore.fetchTreeFolders();
-      }
+      this.treeFoldersStore.fetchTreeFolders();
+
       if (foundIndex == -1) return;
 
       this.updateFileStatus(
@@ -370,9 +369,7 @@ class FilesStore {
       this.setFiles(newFiles);
     });
 
-    if (!this.publicRoomStore.isPublicRoom) {
-      this.debouncefetchTreeFolders();
-    }
+    this.debouncefetchTreeFolders();
   };
 
   debouncefetchTreeFolders = debounce(() => {

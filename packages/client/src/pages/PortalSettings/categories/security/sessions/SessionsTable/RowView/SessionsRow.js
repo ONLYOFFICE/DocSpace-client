@@ -1,3 +1,4 @@
+import { inject, observer } from "mobx-react";
 import { useCallback } from "react";
 import { isMobile } from "react-device-detect";
 import { Base } from "@docspace/shared/themes";
@@ -106,6 +107,11 @@ const SessionsRow = (props) => {
     onContentRowClick,
     element,
     isActive,
+    setLogoutDialogVisible,
+    setLogoutAllDialogVisible,
+    setDisableDialogVisible,
+    setSessionModalData,
+    isVisible,
   } = props;
 
   const isChecked = checkedProps.checked;
@@ -118,18 +124,39 @@ const SessionsRow = (props) => {
     onContentRowClick && onContentRowClick(!isChecked, item, false);
   }, [isChecked, item, onContentRowClick]);
 
+  const onClickSessions = () => {
+    console.log("view sessions");
+  };
+
+  const onClickLogout = () => {
+    if (isVisible) {
+      setLogoutAllDialogVisible(true);
+    } else {
+      setLogoutDialogVisible(true);
+      setSessionModalData({
+        id: item.userId,
+        platform: item.platform,
+        browser: item.browser,
+      });
+    }
+  };
+
+  const onClickDisable = () => {
+    setDisableDialogVisible(true);
+  };
+
   const contextOptions = [
     {
       key: "ViewSessions",
       label: t("Settings:ViewSessions"),
       icon: HistoryFinalizedReactSvgUrl,
-      onClick: () => console.log("view session"),
+      onClick: () => onClickSessions,
     },
     {
       key: "LogoutAllSessions",
       label: t("Settings:LogoutAllSessions"),
       icon: RemoveSvgUrl,
-      onClick: () => console.log("logout session"),
+      onClick: onClickLogout,
     },
     {
       key: "Separator",
@@ -139,7 +166,7 @@ const SessionsRow = (props) => {
       key: "Disable",
       label: t("Common:DisableUserButton"),
       icon: TrashReactSvgUrl,
-      onClick: () => console.log("disable"),
+      onClick: onClickDisable,
     },
   ];
 
@@ -151,7 +178,7 @@ const SessionsRow = (props) => {
     >
       <div className="user-item">
         <StyledRow
-          key={item.id}
+          key={item.userId}
           data={item}
           element={element}
           onSelect={onContentRowSelect}
@@ -171,4 +198,21 @@ const SessionsRow = (props) => {
   );
 };
 
-export default withContent(SessionsRow);
+export default inject(({ setup, peopleStore }) => {
+  const { isVisible } = peopleStore.selectionStore;
+
+  const {
+    setLogoutDialogVisible,
+    setLogoutAllDialogVisible,
+    setDisableDialogVisible,
+    setSessionModalData,
+  } = setup;
+
+  return {
+    setLogoutDialogVisible,
+    setLogoutAllDialogVisible,
+    setDisableDialogVisible,
+    setSessionModalData,
+    isVisible,
+  };
+})(withContent(observer(SessionsRow)));

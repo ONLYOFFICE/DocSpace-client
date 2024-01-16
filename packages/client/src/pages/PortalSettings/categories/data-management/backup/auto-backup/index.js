@@ -8,29 +8,29 @@ import {
   deleteBackupSchedule,
   getBackupSchedule,
   createBackupSchedule,
-} from "@docspace/common/api/portal";
+} from "@docspace/shared/api/portal";
 import { toastr } from "@docspace/shared/components/toast";
 import {
   BackupStorageType,
   AutoBackupPeriod,
   FolderType,
-} from "@docspace/common/constants";
+} from "@docspace/shared/enums";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import {
   getBackupStorage,
   getStorageRegions,
-} from "@docspace/common/api/settings";
+} from "@docspace/shared/api/settings";
 import { StyledModules, StyledAutoBackup } from "../StyledBackup";
 import ThirdPartyModule from "./sub-components/ThirdPartyModule";
 import RoomsModule from "./sub-components/RoomsModule";
 import ThirdPartyStorageModule from "./sub-components/ThirdPartyStorageModule";
-//import { getThirdPartyCommonFolderTree } from "@docspace/common/api/files";
+//import { getThirdPartyCommonFolderTree } from "@docspace/shared/api/files";
 import ButtonContainer from "./sub-components/ButtonContainer";
 import AutoBackupLoader from "@docspace/common/components/Loaders/AutoBackupLoader";
 import { FloatingButton } from "@docspace/shared/components/floating-button";
 import { Badge } from "@docspace/shared/components/badge";
 import { Link } from "@docspace/shared/components/link";
-import { getSettingsThirdParty } from "@docspace/common/api/files";
+import { getSettingsThirdParty } from "@docspace/shared/api/files";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const { DocumentModuleType, ResourcesModuleType, StorageModuleType } =

@@ -8,7 +8,7 @@ import { Text } from "@docspace/shared/components/text";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
 import { inject, observer } from "mobx-react";
-import { getConvertedSize } from "@docspace/common/utils";
+import { getConvertedSize } from "@docspace/shared/utils/common";
 
 const ModalDialogContainer = styled(ModalDialog)`
   .cannot-downgrade-plan {

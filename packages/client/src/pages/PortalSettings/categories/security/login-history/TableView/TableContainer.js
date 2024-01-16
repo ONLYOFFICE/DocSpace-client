@@ -25,9 +25,9 @@ const Table = ({
   });
 
   return historyUsers && historyUsers.length > 0 ? (
-    <TableContainer forwardedRef={ref}>
+    <TableContainer forwardedRef={ref} useReactWindow={false}>
       <TableHeader sectionWidth={sectionWidth} containerRef={ref} />
-      <TableBody>
+      <TableBody useReactWindow={false}>
         {historyUsers.map((item) => (
           <TableRow theme={theme} key={item.id} item={item} />
         ))}

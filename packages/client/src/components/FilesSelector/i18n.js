@@ -1,9 +1,9 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import Backend from "@docspace/common/utils/i18next-http-backend";
+import Backend from "@docspace/shared/utils/i18next-http-backend";
 import { LANGUAGE } from "@docspace/shared/constants";
 import config from "PACKAGE_FILE";
-import { getLtrLanguageForEditor } from "@docspace/common/utils";
+import { getLtrLanguageForEditor } from "@docspace/shared/utils/common";
 import { getCookie } from "@docspace/shared/utils";
 import { loadLanguagePath } from "SRC_DIR/helpers/utils";
 const newInstance = i18n.createInstance();

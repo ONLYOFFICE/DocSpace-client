@@ -7,7 +7,7 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Textarea } from "@docspace/shared/components/textarea";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { mobile, tablet } from "@docspace/shared/utils";
-import { sendRecoverRequest } from "../../../api/settings";
+import { sendRecoverRequest } from "@docspace/shared/api/settings";
 import { toastr } from "@docspace/shared/components/toast";
 import { useTranslation } from "react-i18next";
 

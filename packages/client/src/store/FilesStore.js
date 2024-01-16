@@ -1,25 +1,26 @@
 import axios from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
-import api from "@docspace/common/api";
+import api from "@docspace/shared/api";
 import {
   FileType,
   FilterType,
   FolderType,
   FileStatus,
   RoomsType,
-  RoomsTypeValues,
   RoomsProviderType,
   ShareAccessRights,
-} from "@docspace/common/constants";
+} from "@docspace/shared/enums";
 
-import { combineUrl } from "@docspace/common/utils";
-import { updateTempContent } from "@docspace/common/utils";
+import { RoomsTypeValues } from "@docspace/shared/utils";
+
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { updateTempContent } from "@docspace/shared/utils/common";
 
 import { toastr } from "@docspace/shared/components/toast";
 import config from "PACKAGE_FILE";
 import { thumbnailStatuses } from "@docspace/client/src/helpers/filesConstants";
 import { openDocEditor as openEditor } from "@docspace/client/src/helpers/filesUtils";
-import { getDaysRemaining } from "@docspace/common/utils";
+import { getDaysRemaining } from "@docspace/shared/utils/common";
 
 import {
   getCategoryType,
@@ -274,9 +275,8 @@ class FilesStore {
 
       const foundIndex = fileId && this.files.findIndex((x) => x.id === fileId);
 
-      if (!this.publicRoomStore.isPublicRoom) {
-        this.treeFoldersStore.fetchTreeFolders();
-      }
+      this.treeFoldersStore.fetchTreeFolders();
+
       if (foundIndex == -1) return;
 
       this.updateFileStatus(
@@ -369,9 +369,7 @@ class FilesStore {
       this.setFiles(newFiles);
     });
 
-    if (!this.publicRoomStore.isPublicRoom) {
-      this.debouncefetchTreeFolders();
-    }
+    this.debouncefetchTreeFolders();
   };
 
   debouncefetchTreeFolders = debounce(() => {
@@ -3531,49 +3529,49 @@ class FilesStore {
   };
 
   getShareUsers(folderIds, fileIds) {
-    return api.files.getShareFiles(fileIds, folderIds);
+    // return api.files.getShareFiles(fileIds, folderIds);
   }
 
-  setShareFiles = (
-    folderIds,
-    fileIds,
-    share,
-    notify,
-    sharingMessage,
-    externalAccess,
-    ownerId
-  ) => {
-    let externalAccessRequest = [];
-    if (fileIds.length === 1 && externalAccess !== null) {
-      externalAccessRequest = fileIds.map((id) =>
-        api.files.setExternalAccess(id, externalAccess)
-      );
-    }
+  // setShareFiles = (
+  //   folderIds,
+  //   fileIds,
+  //   share,
+  //   notify,
+  //   sharingMessage,
+  //   externalAccess,
+  //   ownerId
+  // ) => {
+  //   let externalAccessRequest = [];
+  //   if (fileIds.length === 1 && externalAccess !== null) {
+  //     externalAccessRequest = fileIds.map((id) =>
+  //       api.files.setExternalAccess(id, externalAccess)
+  //     );
+  //   }
 
-    const ownerChangeRequest = ownerId
-      ? [this.setFilesOwner(folderIds, fileIds, ownerId)]
-      : [];
+  //   const ownerChangeRequest = ownerId
+  //     ? [this.setFilesOwner(folderIds, fileIds, ownerId)]
+  //     : [];
 
-    const shareRequest = !!share.length
-      ? [
-          api.files.setShareFiles(
-            fileIds,
-            folderIds,
-            share,
-            notify,
-            sharingMessage
-          ),
-        ]
-      : [];
+  //   const shareRequest = !!share.length
+  //     ? [
+  //         api.files.setShareFiles(
+  //           fileIds,
+  //           folderIds,
+  //           share,
+  //           notify,
+  //           sharingMessage
+  //         ),
+  //       ]
+  //     : [];
 
-    const requests = [
-      ...ownerChangeRequest,
-      ...shareRequest,
-      ...externalAccessRequest,
-    ];
+  //   const requests = [
+  //     ...ownerChangeRequest,
+  //     ...shareRequest,
+  //     ...externalAccessRequest,
+  //   ];
 
-    return Promise.all(requests);
-  };
+  //   return Promise.all(requests);
+  // };
 
   markItemAsFavorite = (id) => api.files.markAsFavorite(id);
 

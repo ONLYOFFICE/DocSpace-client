@@ -6,13 +6,13 @@ import { PasswordInput } from "@docspace/shared/components/password-input";
 import { Button } from "@docspace/shared/components/button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { inject, observer } from "mobx-react";
-import { EmployeeActivationStatus } from "@docspace/common/constants";
+import { EmployeeActivationStatus } from "@docspace/shared/enums";
 import {
   changePassword,
   updateActivationStatus,
   updateUser,
-} from "@docspace/common/api/people";
-import { createPasswordHash } from "@docspace/common/utils";
+} from "@docspace/shared/api/people";
+import { createPasswordHash } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/shared/components/toast";
 import {
   StyledPage,

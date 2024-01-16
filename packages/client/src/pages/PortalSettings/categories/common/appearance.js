@@ -23,7 +23,7 @@ import { ReactSVG } from "react-svg";
 import ModalDialogDelete from "./sub-components/modalDialogDelete";
 import hexToRgba from "hex-to-rgba";
 import { isMobile } from "@docspace/shared/utils";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const Appearance = (props) => {
   const {

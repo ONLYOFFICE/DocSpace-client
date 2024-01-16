@@ -14,8 +14,8 @@ import withLoader from "../withLoader";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { toastr } from "@docspace/shared/components/toast";
 import DocspaceLogo from "../../../DocspaceLogo";
-import { ownerChange } from "@docspace/common/api/settings";
-import { getUserFromConfirm } from "@docspace/common/api/people";
+import { ownerChange } from "@docspace/shared/api/settings";
+import { getUserFromConfirm } from "@docspace/shared/api/people";
 
 const ChangeOwnerForm = (props) => {
   const { t, greetingTitle, linkData, history } = props;

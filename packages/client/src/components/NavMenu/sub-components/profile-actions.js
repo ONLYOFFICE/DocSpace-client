@@ -6,7 +6,7 @@ import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { Link } from "@docspace/shared/components/link";
 import ProfileMenu from "./profile-menu";
-import api from "@docspace/common/api";
+import api from "@docspace/shared/api";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Button } from "@docspace/shared/components/button";

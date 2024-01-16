@@ -115,7 +115,7 @@ const ActiveSessions = ({
 
   const convertTime = (date) => {
     return moment(date)
-      .tz(window.timezone || "")
+      .tz(window.timezone)
       .locale(locale)
       .format("L, LTS");
   };

@@ -6,7 +6,7 @@ import { getCookie } from "@docspace/shared/utils";
 export const getRelativeDateDay = (t, date) => {
   moment.locale(getCookie(LANGUAGE));
 
-  const given = moment(date).tz(window.timezone || "");
+  const given = moment(date).tz(window.timezone);
 
   const now = moment();
   const weekAgo = moment().subtract(1, "week");

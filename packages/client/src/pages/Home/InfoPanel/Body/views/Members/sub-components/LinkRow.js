@@ -57,7 +57,7 @@ const LinkRow = (props) => {
   const isLocked = !!password;
   const expiryDate = !!expirationDate;
   const date = moment(expirationDate)
-    .tz(window.timezone || "")
+    .tz(window.timezone)
     .format("LLL");
 
   const tooltipContent = isExpired

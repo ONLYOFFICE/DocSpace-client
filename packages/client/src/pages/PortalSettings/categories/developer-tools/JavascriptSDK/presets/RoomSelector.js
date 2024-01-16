@@ -254,6 +254,7 @@ const RoomSelector = (props) => {
             name="elementDisplayInput"
             selected={selectedElementType}
             onClick={() => {}}
+            spacing="8px"
           />
           <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
           <ControlsGroup>

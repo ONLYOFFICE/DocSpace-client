@@ -345,6 +345,7 @@ const FileSelector = (props) => {
             name="elementDisplayInput"
             selected={selectedElementType}
             onClick={() => {}}
+            spacing="8px"
           />
           <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
           <ControlsGroup>
@@ -481,6 +482,7 @@ const FileSelector = (props) => {
               name="columnsDisplayOptions"
               selected={typeDisplay}
               onClick={changeColumnsOption}
+              spacing="8px"
             />
             {typeDisplay === "custom-types" && (
               <>

@@ -676,6 +676,7 @@ const Manager = (props) => {
               name="columnsDisplayOptions"
               selected={columnDisplay}
               onClick={changeColumnsOption}
+              spacing="8px"
             />
             {columnDisplay === "custom" && (
               <>

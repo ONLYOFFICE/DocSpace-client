@@ -10,7 +10,7 @@ import {
   getQuotaSettings,
 } from "@docspace/common/api/settings";
 
-const FILTER_COUNT = 5;
+const FILTER_COUNT = 6;
 
 class StorageManagement {
   isInit = false;

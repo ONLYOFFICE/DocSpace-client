@@ -12,8 +12,14 @@ import { SortByFieldName } from "SRC_DIR/helpers/constants";
 import { StyledStatistics, StyledSimpleFilesRow } from "../StyledComponent";
 
 const StatisticsComponent = (props) => {
-  const { peopleList, iconElement, textElement, quotaElement, buttonProps } =
-    props;
+  const {
+    peopleList,
+    iconElement,
+    textElement,
+    quotaElement,
+    buttonProps,
+    peopleListLength,
+  } = props;
   const { t } = useTranslation("Settings");
   const navigate = useNavigate();
 
@@ -25,8 +31,10 @@ const StatisticsComponent = (props) => {
     navigate(`/accounts/filter?${urlFilter}`);
   };
 
-  const usersList = peopleList.map((item) => {
+  const usersList = peopleList.map((item, index) => {
     const { fileExst, avatar, id, displayName, isRoom, defaultRoomIcon } = item;
+
+    if (index === 5) return;
 
     return (
       <StyledSimpleFilesRow key={id}>
@@ -54,7 +62,13 @@ const StatisticsComponent = (props) => {
         </Text>
         {usersList}
 
-        <Button {...buttonProps} label={t("ShowMore")} onClick={onClickUsers} />
+        {peopleListLength > 5 && (
+          <Button
+            {...buttonProps}
+            label={t("ShowMore")}
+            onClick={onClickUsers}
+          />
+        )}
       </div>
     </StyledStatistics>
   );
@@ -63,7 +77,11 @@ const StatisticsComponent = (props) => {
 export default inject(({ peopleStore }) => {
   const { usersStore } = peopleStore;
   const { peopleList } = usersStore;
+
+  const peopleListLength = peopleList.length;
+
   return {
     peopleList,
+    peopleListLength,
   };
 })(observer(StatisticsComponent));

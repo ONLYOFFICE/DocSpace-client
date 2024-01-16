@@ -12,8 +12,15 @@ import { SortByFieldName } from "SRC_DIR/helpers/constants";
 import { StyledStatistics, StyledSimpleFilesRow } from "../StyledComponent";
 
 const RoomsListComponent = (props) => {
-  const { filesList, iconElement, textElement, quotaElement, buttonProps, id } =
-    props;
+  const {
+    filesList,
+    iconElement,
+    textElement,
+    quotaElement,
+    buttonProps,
+    id,
+    filesListLength,
+  } = props;
   const { t } = useTranslation("Settings");
 
   const navigate = useNavigate();
@@ -28,9 +35,11 @@ const RoomsListComponent = (props) => {
     navigate(`/rooms/shared/filter?${urlFilter}`);
   };
 
-  const roomsList = filesList.map((item) => {
+  const roomsList = filesList.map((item, index) => {
     const { id, icon, fileExst, defaultRoomIcon, isRoom, title, logo } = item;
     const color = logo?.color;
+
+    if (index === 5) return;
 
     return (
       <StyledSimpleFilesRow key={item.id}>
@@ -52,6 +61,8 @@ const RoomsListComponent = (props) => {
     );
   });
 
+  if (filesListLength === 0) return <></>;
+
   return (
     <StyledStatistics>
       <div className="statistics-container">
@@ -60,7 +71,13 @@ const RoomsListComponent = (props) => {
         </Text>
         {roomsList}
 
-        <Button {...buttonProps} label={t("ShowMore")} onClick={onClickRooms} />
+        {filesListLength > 5 && (
+          <Button
+            {...buttonProps}
+            label={t("ShowMore")}
+            onClick={onClickRooms}
+          />
+        )}
       </div>
     </StyledStatistics>
   );
@@ -71,8 +88,11 @@ export default inject(({ auth, filesStore }) => {
   const { user } = userStore;
   const { filesList } = filesStore;
 
+  const filesListLength = filesList.length;
+
   return {
     filesList,
     id: user?.id,
+    filesListLength,
   };
 })(observer(RoomsListComponent));

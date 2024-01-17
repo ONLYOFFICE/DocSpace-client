@@ -25,9 +25,6 @@
     viewAs: "row", //TODO: ["row", "table", "tile"]
     viewTableColumns: "Name,Size,Type",
     checkCSP: true,
-    disableActionButton: false,
-    showSettings: false,
-    withSearch: true,
     opacity: 0,
     filter: {
       count: 100,

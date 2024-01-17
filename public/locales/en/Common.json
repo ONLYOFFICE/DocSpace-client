@@ -185,6 +185,7 @@
   "Location": "Location",
   "LoginButton": "Sign in",
   "LogoutButton": "Sign out",
+  "ManageStorageQuota": "Manage storage quota",
   "MainHeaderSelectAll": "Select all",
   "MakeForm": "Save as OFORM",
   "ManyEmails": "Too many email addresses parsed",

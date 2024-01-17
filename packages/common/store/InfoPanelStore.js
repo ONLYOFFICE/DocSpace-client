@@ -63,17 +63,6 @@ class InfoPanelStore {
 
   setIsMobileHidden = (bool) => (this.isMobileHidden = bool);
 
-  // setInfoPanelSelection = (infoPanelSelection) => {
-  //   if (this.getIsAccounts() && (!infoPanelSelection.email || !infoPanelSelection.displayName)) {
-  //     this.infoPanelSelection = infoPanelSelection.length
-  //       ? infoPanelSelection
-  //       : { isSelectedFolder: true };
-  //     return;
-  //   }
-  //   this.infoPanelSelection = infoPanelSelection;
-  //   this.isScrollLocked = false;
-  // };
-
   setSelectionHistory = (obj) => (this.selectionHistory = obj);
 
   setSelectionHistory = (obj) => {
@@ -96,7 +85,11 @@ class InfoPanelStore {
     const isRooms = this.getIsRooms();
 
     if (isRooms && view === infoMembers) {
-      this.setInfoPanelSelection(this.infoPanelRoom);
+      const selectedFolder =
+        view === infoMembers && this.infoPanelRoom
+          ? this.infoPanelRoom
+          : this.selectedFolderStore.getSelectedFolder();
+      this.setInfoPanelSelection(this.normalizeSelection(selectedFolder));
     } else {
       this.setInfoPanelSelection(this.calculateSelection());
     }
@@ -138,7 +131,7 @@ class InfoPanelStore {
   calculateSelection = () => {
     const selectedItems = this.infoPanelSelectedItems;
     const selectedFolder =
-      this.roomsView === infoMembers
+      this.roomsView === infoMembers && this.infoPanelRoom
         ? this.infoPanelRoom
         : this.selectedFolderStore.getSelectedFolder();
 
@@ -151,11 +144,15 @@ class InfoPanelStore {
     } else if (selectedItems.length === 1) {
       // TODO: INFO PANEL
 
-      if (this.roomsView === infoMembers && !selectedItems[0]?.isRoom) {
+      if (
+        this.getIsRooms() &&
+        this.roomsView === infoMembers &&
+        !selectedItems[0]?.isRoom
+      ) {
         if (this.infoPanelSelection?.id) {
           return this.infoPanelSelection;
         } else {
-          return this.infoPanelRoom;
+          return selectedFolder;
         }
       }
 
@@ -354,7 +351,18 @@ class InfoPanelStore {
   };
 
   setInfoPanelSelection = (infoPanelSelection) => {
+    if (
+      this.getIsAccounts() &&
+      (!infoPanelSelection.email || !infoPanelSelection.displayName)
+    ) {
+      this.infoPanelSelection = infoPanelSelection.length
+        ? infoPanelSelection
+        : { isSelectedFolder: true };
+      return;
+    }
+
     this.infoPanelSelection = infoPanelSelection;
+    this.isScrollLocked = false; // TODO: INFO PANEL
   };
 
   setInfoPanelRoom = (infoPanelRoom) => {

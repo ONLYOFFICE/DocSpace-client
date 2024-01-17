@@ -180,6 +180,9 @@ export default inject(({ auth, selectedFolderStore, oformsStore }) => {
 
   const { isRootFolder } = selectedFolderStore;
 
+  const selectedFolder =
+    infoPanelRoom ?? selectedFolderStore.getSelectedFolder();
+
   return {
     infoPanelSelection,
     setInfoPanelSelection,
@@ -195,7 +198,7 @@ export default inject(({ auth, selectedFolderStore, oformsStore }) => {
     getIsGallery,
 
     selectedItems: infoPanelSelectedItems,
-    selectedFolder: infoPanelRoom,
+    selectedFolder,
 
     isRootFolder,
     gallerySelected,

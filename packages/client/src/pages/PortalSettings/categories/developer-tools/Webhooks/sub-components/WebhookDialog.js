@@ -116,17 +116,20 @@ const WebhookDialog = (props) => {
     e.preventDefault();
     if (!validateForm()) return;
     setIsLoading(true);
-    await onSubmit(webhookInfo);
-    setIsLoading(false);
-    setWebhookInfo({
-      id: webhook ? webhook.id : 0,
-      name: "",
-      uri: "",
-      secretKey: "",
-      enabled: true,
-    });
-    setIsPasswordValid(false);
-    setPasswordInputKey((prevKey) => prevKey + 1);
+    try {
+      await onSubmit(webhookInfo);
+    } finally {
+      setIsLoading(false);
+      setWebhookInfo({
+        id: webhook ? webhook.id : 0,
+        name: "",
+        uri: "",
+        secretKey: "",
+        enabled: true,
+      });
+      setIsPasswordValid(false);
+      setPasswordInputKey((prevKey) => prevKey + 1);
+    }
   };
 
   const cleanUpEvent = () => window.removeEventListener("keyup", onKeyPress);

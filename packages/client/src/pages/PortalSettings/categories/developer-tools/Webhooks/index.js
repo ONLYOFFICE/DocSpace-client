@@ -81,7 +81,7 @@ const Webhooks = (props) => {
     if (!isWebhookExist(webhookInfo)) {
       try {
         await addWebhook(webhookInfo);
-        toastr.success(t("WebhookCreated"), <b>{t("Common:Done")}</b>);
+        toastr.success(t("WebhookCreated"));
       } catch (error) {
         toastr.error(error);
       } finally {
@@ -92,11 +92,11 @@ const Webhooks = (props) => {
 
   const handleWebhookUpdate = async (webhookInfo) => {
     await editWebhook(currentWebhook, webhookInfo);
-    toastr.success(t("WebhookEditedSuccessfully"), <b>{t("Common:Done")}</b>);
+    toastr.success(t("WebhookEditedSuccessfully"));
   };
   const handleWebhookDelete = async () => {
     await deleteWebhook(currentWebhook);
-    toastr.success(t("WebhookRemoved"), <b>{t("Common:Done")}</b>);
+    toastr.success(t("WebhookRemoved"));
   };
 
   useEffect(() => {

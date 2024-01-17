@@ -69,11 +69,12 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
           setReferenceLink(result);
           setSpaceCreatedDialogVisible(true);
         });
-        await authStore.settingsStore
-          .getAllPortals()
-          .finally(() => setIsLoading(false));
+
+        await authStore.settingsStore.getAllPortals();
       } catch (err) {
         toastr.error(err);
+      } finally {
+        setIsLoading(false);
       }
     }
   };

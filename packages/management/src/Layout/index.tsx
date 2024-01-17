@@ -3,8 +3,8 @@ import { observer } from "mobx-react";
 import Article from "@docspace/common/components/Article";
 import ArticleWrapper from "@docspace/common/components/Article/ArticleWrapper";
 import { ArticleHeaderContent, ArticleBodyContent } from "./Article";
-import { SectionHeaderContent } from "./Section";
-import Section from "@docspace/common/components/Section";
+
+import Section from "./Section";
 
 type TLayoutProps = {
   children: React.ReactNode;
@@ -33,13 +33,7 @@ const MainLayout = ({ children }: TLayoutProps) => {
   return (
     <>
       <ArticleSettings />
-      <Section withBodyScroll settingsStudio>
-        <Section.SectionHeader>
-          <SectionHeaderContent />
-        </Section.SectionHeader>
-
-        <Section.SectionBody>{children}</Section.SectionBody>
-      </Section>
+      <Section children={children} />
     </>
   );
 };

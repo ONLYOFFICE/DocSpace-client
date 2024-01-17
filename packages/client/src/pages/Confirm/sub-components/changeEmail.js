@@ -5,7 +5,7 @@ import { Loader } from "@docspace/shared/components/loader";
 import Section from "@docspace/common/components/Section";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import tryRedirectTo from "@docspace/shared/utils/tryRedirectTo";
-
+import SectionWrapper from "SRC_DIR/components/Section";
 class ChangeEmail extends React.PureComponent {
   componentDidMount() {
     const { changeEmail, isLoaded, linkData } = this.props;
@@ -74,11 +74,11 @@ ChangeEmail.propTypes = {
   changeEmail: PropTypes.func.isRequired,
 };
 const ChangeEmailForm = (props) => (
-  <Section>
+  <SectionWrapper>
     <Section.SectionBody>
       <ChangeEmail {...props} />
     </Section.SectionBody>
-  </Section>
+  </SectionWrapper>
 );
 
 export default inject(({ auth }) => {

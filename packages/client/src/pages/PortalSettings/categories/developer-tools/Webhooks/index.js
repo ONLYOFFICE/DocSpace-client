@@ -81,10 +81,12 @@ const Webhooks = (props) => {
     if (!isWebhookExist(webhookInfo)) {
       try {
         await addWebhook(webhookInfo);
+        toastr.success(t("WebhookCreated"), <b>{t("Common:Done")}</b>);
       } catch (error) {
         toastr.error(error);
+      } finally {
+        closeCreateModal();
       }
-      closeCreateModal();
     }
   };
 

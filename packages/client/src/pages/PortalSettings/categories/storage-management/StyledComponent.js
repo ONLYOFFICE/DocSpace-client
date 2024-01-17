@@ -34,6 +34,9 @@ const StyledDiscSpaceUsedComponent = styled.div`
   .disk-space_title {
     color: ${(props) => props.theme.text.grayBackgroundText};
   }
+  .disk-space_link {
+    text-decoration: underline;
+  }
   .button-container {
     display: flex;
     gap: 16px;

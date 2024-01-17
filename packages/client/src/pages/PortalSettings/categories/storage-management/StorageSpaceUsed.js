@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
+import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
 import Text from "@docspace/components/text";
 import { getConvertedSize } from "@docspace/common/utils";
 
@@ -10,31 +12,71 @@ import {
   StyledDiscSpaceUsedComponent,
   StyledMainTitle,
 } from "./StyledComponent";
+import { ChangeQuotaDialog } from "SRC_DIR/components/dialogs";
 
 const DiskSpaceUsedComponent = (props) => {
-  const { usedTotalStorageSizeCount, maxTotalSizeByQuota } = props;
+  const {
+    usedTotalStorageSizeCount,
+    maxTotalSizeByQuota,
+    standalone,
+    isSetQuota,
+  } = props;
 
   const { t } = useTranslation("Settings");
+  const [isVisibleDialog, setIsVisibleDialog] = useState();
+  const [size, setSize] = useState();
 
-  const totalSize = getConvertedSize(t, maxTotalSizeByQuota);
   const usedSize = getConvertedSize(t, usedTotalStorageSizeCount);
+  const totalSize = getConvertedSize(t, maxTotalSizeByQuota);
 
+  const onClick = () => {
+    setIsVisibleDialog(true);
+  };
+  const onSaveClick = () => {
+    setIsVisibleDialog(false);
+  };
+
+  const onCloseClick = () => {
+    setIsVisibleDialog(false);
+  };
+
+  const onSetQuotaBytesSize = (bytes) => {
+    setSize(bytes);
+  };
   return (
     <StyledDiscSpaceUsedComponent>
+      <ChangeQuotaDialog
+        visible={isVisibleDialog}
+        onSaveClick={onSaveClick}
+        onCloseClick={onCloseClick}
+        onSetQuotaBytesSize={onSetQuotaBytesSize}
+      />
+
       <StyledMainTitle fontSize="16px" fontWeight={700}>
         {t("DiskSpaceUsed")}
       </StyledMainTitle>
-
-      <Text fontWeight={700} className="disk-space_title">
-        {t("TotalStorage", {
-          size: totalSize,
-        })}
-      </Text>
+      {(!standalone || (standalone && isSetQuota)) && (
+        <Text fontWeight={700} className="disk-space_title">
+          {t("TotalStorage", {
+            size: totalSize,
+          })}
+        </Text>
+      )}
       <Text fontWeight={700} className="disk-space_title">
         {t("UsedStorage", {
           size: usedSize,
         })}
       </Text>
+      {standalone && !isSetQuota && (
+        <ColorTheme
+          themeId={ThemeType.Link}
+          fontWeight={700}
+          onClick={onClick}
+          className="disk-space_link"
+        >
+          {t("Common:ManageStorageQuota")}
+        </ColorTheme>
+      )}
 
       <Diagram />
       <RecalculateButton />
@@ -43,11 +85,17 @@ const DiskSpaceUsedComponent = (props) => {
 };
 
 export default inject(({ auth }) => {
-  const { currentQuotaStore } = auth;
+  const { currentQuotaStore, settingsStore } = auth;
   const { maxTotalSizeByQuota, usedTotalStorageSizeCount } = currentQuotaStore;
+
+  const { standalone } = settingsStore;
+
+  const isSetQuota = true;
 
   return {
     maxTotalSizeByQuota,
     usedTotalStorageSizeCount,
+    isSetQuota,
+    standalone,
   };
 })(observer(DiskSpaceUsedComponent));

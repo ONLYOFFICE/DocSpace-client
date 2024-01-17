@@ -14,9 +14,7 @@ import Loaders from "@docspace/common/components/Loaders";
 import { getMembersList } from "@docspace/common/api/people";
 import useLoadingWithTimeout from "SRC_DIR/Hooks/useLoadingWithTimeout";
 import { ShareAccessRights, LOADER_TIMEOUT } from "@docspace/common/constants";
-
 import withLoader from "../../../HOCs/withLoader";
-
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 
 import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
@@ -46,17 +44,17 @@ const AddGroupManagerPanel = ({
 
   const [isLoading, setIsLoading] = useLoadingWithTimeout(
     LOADER_TIMEOUT,
-    false,
+    false
   );
   const [isLoadingSearch, setIsLoadingSearch] = useLoadingWithTimeout(
     LOADER_TIMEOUT,
-    false,
+    false
   );
   const [isLoadingNextPage, setIsLoadingNextPage] = useState<boolean>(false);
 
   const accessOptions = getAccessOptions(t);
   const selectedAccess = accessOptions.filter(
-    (access) => access.access === ShareAccessRights.FullAccess,
+    (access) => access.access === ShareAccessRights.FullAccess
   )[0];
 
   const onSearch = (value: string, callback) => {
@@ -72,7 +70,7 @@ const AddGroupManagerPanel = ({
   const onLoadNextPage = (
     startIndex: number,
     search = searchValue,
-    callback,
+    callback
   ) => {
     const pageCount = 100;
 
@@ -200,7 +198,7 @@ export default inject(({ auth }) => ({
 }))(
   observer(
     withTranslation(["SharingPanel", "PeopleTranslations", "Common"])(
-      withLoader(AddGroupManagerPanel)(<Loaders.DialogAsideLoader isPanel />),
-    ),
-  ),
+      withLoader(AddGroupManagerPanel)(<Loaders.DialogAsideLoader isPanel />)
+    )
+  )
 );

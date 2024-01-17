@@ -6,8 +6,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { Base } from "@docspace/shared/themes";
-import { TableContainer } from "@docspace/shared/components/table";
-import { TableBody } from "@docspace/shared/components/table";
+import { TableContainer, TableBody } from "@docspace/shared/components/table";
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
@@ -239,5 +238,5 @@ export default inject(
       isFiltered,
       currentDeviceType,
     };
-  },
+  }
 )(observer(Table));

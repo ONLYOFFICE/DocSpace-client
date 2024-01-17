@@ -48,7 +48,7 @@ const MembersParam = ({
 
       <Styled.AddMembersButton onClick={onShowSelectMembersPanel}>
         <div className="add-button">
-          <IconButton className="plus-icon" size="12" iconName={PlusSvgUrl} />
+          <IconButton className="plus-icon" size={12} iconName={PlusSvgUrl} />
         </div>
         <div className="label">Add members</div>
       </Styled.AddMembersButton>

@@ -15,7 +15,6 @@ import { CategoryType } from "SRC_DIR/helpers/constants";
 
 const useFiles = ({
   t,
-
   dragging,
   setDragging,
   disableDrag,
@@ -245,7 +244,7 @@ const useFiles = ({
               undefined,
               undefined,
               undefined,
-              true,
+              true
             );
           } else {
             const folderId = filter.folder;

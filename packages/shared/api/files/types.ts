@@ -1,4 +1,4 @@
-import { TUser } from "types";
+import { TCreatedBy, TPathParts, TUser } from "../../types";
 import {
   EmployeeActivationStatus,
   EmployeeStatus,
@@ -8,14 +8,6 @@ import {
   RoomsType,
   ShareAccessRights,
 } from "../../enums";
-
-export type TCreatedBy = {
-  avatarSmall: string;
-  displayName: string;
-  hasAvatar: boolean;
-  id: string;
-  profileUrl: string;
-};
 
 export type TFileViewAccessibility = {
   CanConvert: boolean;
@@ -147,12 +139,6 @@ export type TFolder = {
 };
 
 export type TGetFolderPath = TFolder[];
-
-export type TPathParts = {
-  id: number;
-  title: string;
-  roomType?: RoomsType;
-};
 
 export type TGetFolder = {
   files: TFile[];

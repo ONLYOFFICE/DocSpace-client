@@ -1,4 +1,3 @@
-
 import Header from "./HeaderLoader";
 import SectionHeader from "./SectionHeaderLoader";
 import ArticleHeader from "./ArticleHeaderLoader";
@@ -38,8 +37,6 @@ import PaymentsLoader from "./PaymentsLoader";
 
 import SelectorBreadCrumbsLoader from "./SelectorBreadCrumbsLoader";
 import PaymentsStandaloneLoader from "./PaymentsStandaloneLoader";
-import SelectorSearchLoader from "./SelectorSearchLoader";
-import SelectorRowLoader from "./SelectorRowLoader";
 
 import InfoPanelViewLoader from "./InfoPanelBodyLoader/InfoPanelViewLoader";
 import InfoPanelHeaderLoader from "./InfoPanelHeaderLoader";
@@ -52,7 +49,6 @@ import SettingsDSConnect from "./SettingsLoader/SettingsDSConnectLoader";
 import EmptyContainerLoader from "./EmptyContainerLoader/EmptyContainerLoader";
 
 export default {
-
   Header,
   SectionHeader,
   ArticleHeader,
@@ -91,8 +87,6 @@ export default {
 
   SelectorBreadCrumbsLoader,
   PaymentsStandaloneLoader,
-  SelectorSearchLoader,
-  SelectorRowLoader,
 
   InfoPanelHeaderLoader,
   InfoPanelViewLoader,

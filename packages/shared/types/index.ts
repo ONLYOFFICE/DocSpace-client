@@ -1,3 +1,4 @@
+import { RoomsType } from "../enums";
 import { TTheme } from "../themes";
 
 export type TDirectionX = "left" | "right";
@@ -8,6 +9,20 @@ export type TViewAs = "tile" | "table" | "row" | "settings" | "profile";
 export type TTranslation = (key: string) => string;
 
 export type { TUser } from "./user";
+
+export type TPathParts = {
+  id: number;
+  title: string;
+  roomType?: RoomsType;
+};
+
+export type TCreatedBy = {
+  avatarSmall: string;
+  displayName: string;
+  hasAvatar: boolean;
+  id: string;
+  profileUrl: string;
+};
 
 export type TI18n = {
   language: string;

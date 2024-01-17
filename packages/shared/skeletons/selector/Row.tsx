@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { RectangleSkeleton, RectangleSkeletonProps } from "../rectangle";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -13,7 +13,7 @@ const StyledContainer = styled.div`
   flex-direction: column;
 `;
 
-const StyledItem = styled.div`
+const StyledItem = styled.div<{ isUser?: boolean }>`
   width: 100%;
   height: 48px;
   min-height: 48px;
@@ -52,7 +52,18 @@ const Divider = styled.div`
   border-bottom: ${(props) => props.theme.selector.border};
 `;
 
-const SelectorRowLoader = ({
+interface RowLoaderProps extends RectangleSkeletonProps {
+  id?: string;
+  className?: string;
+  style?: React.CSSProperties;
+  isMultiSelect?: boolean;
+  isContainer?: boolean;
+  isUser?: boolean;
+  withAllSelect?: boolean;
+  count?: number;
+}
+
+const RowLoader = ({
   id,
   className,
   style,
@@ -62,30 +73,21 @@ const SelectorRowLoader = ({
   withAllSelect,
   count = 5,
   ...rest
-}) => {
-  const getRowItem = (key) => {
+}: RowLoaderProps) => {
+  const getRowItem = (key: number) => {
     return (
       <StyledItem
         id={id}
         className={className}
         style={style}
-        isMultiSelect={isMultiSelect}
         isUser={isUser}
         key={key}
         {...rest}
       >
-        <RectangleSkeleton
-          className={"avatar"}
-          width={"32px"}
-          height={"32px"}
-        />
-        <RectangleSkeleton width={"212px"} height={"16px"} />
+        <RectangleSkeleton className="avatar" width="32px" height="32px" />
+        <RectangleSkeleton width="212px" height="16px" />
         {isMultiSelect && (
-          <RectangleSkeleton
-            className={"checkbox"}
-            width={"16px"}
-            height={"16px"}
-          />
+          <RectangleSkeleton className="checkbox" width="16px" height="16px" />
         )}
       </StyledItem>
     );
@@ -93,7 +95,7 @@ const SelectorRowLoader = ({
 
   const getRowItems = () => {
     const rows = [];
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i < count; i += 1) {
       rows.push(getRowItem(i));
     }
 
@@ -111,8 +113,8 @@ const SelectorRowLoader = ({
       {getRowItems()}
     </StyledContainer>
   ) : (
-    getRowItem()
+    getRowItem(0)
   );
 };
 
-export default SelectorRowLoader;
+export default RowLoader;

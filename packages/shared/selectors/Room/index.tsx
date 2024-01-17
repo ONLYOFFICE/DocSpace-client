@@ -1,61 +1,26 @@
-﻿import EmptyScreenCorporateSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate.svg?url";
-import React from "react";
-import { withTranslation } from "react-i18next";
+﻿import React from "react";
+import { useTranslation } from "react-i18next";
 
-import api from "@docspace/shared/api";
-import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import { RoomsType } from "@docspace/shared/enums";
-import { iconSize32 } from "@docspace/shared/utils/image-helpers";
+import EmptyScreenCorporateSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate.svg?url";
 
-import Loaders from "@docspace/common/components/Loaders";
+import { Selector } from "../../components/selector";
+import { RowLoader, SearchLoader } from "../../skeletons/selector";
+import api from "../../api";
+import RoomsFilter from "../../api/rooms/filter";
 
-import { Selector } from "@docspace/shared/components/selector";
+import { TTranslation } from "../../types";
 
-const pageCount = 100;
+import { RoomSelectorProps, TItem } from "./RoomSelector.types";
+import { convertToItems } from "./RoomSelector.utils";
 
-const getRoomLogo = (roomType) => {
-  let path = "";
-  switch (roomType) {
-    case RoomsType.CustomRoom:
-      path = "custom.svg";
-      break;
-    case RoomsType.FillingFormsRoom:
-      path = "filling.form.svg";
-      break;
-    case RoomsType.EditingRoom:
-      path = "editing.svg";
-      break;
-    case RoomsType.ReadOnlyRoom:
-      path = "view.only.svg";
-      break;
-    case RoomsType.ReviewRoom:
-      path = "review.svg";
-      break;
-  }
-
-  return iconSize32.get(path);
-};
-
-const convertToItems = (folders) => {
-  const items = folders.map((folder) => {
-    const { id, title, roomType, logo } = folder;
-
-    const icon = logo.medium ? logo.medium : getRoomLogo(roomType);
-    const color = logo.color;
-
-    return { id, label: title, icon, color, logo, roomType };
-  });
-
-  return items;
-};
+const PAGE_COUNT = 100;
 
 const RoomSelector = ({
-  t,
   id,
   className,
   style,
 
-  excludeItems,
+  excludeItems = [],
 
   headerLabel,
   onBackClick,
@@ -91,7 +56,9 @@ const RoomSelector = ({
   searchEmptyScreenImage,
   searchEmptyScreenHeader,
   searchEmptyScreenDescription,
-}) => {
+}: RoomSelectorProps) => {
+  const { t }: { t: TTranslation } = useTranslation(["RoomSelector", "Common"]);
+
   const [isFirstLoad, setIsFirstLoad] = React.useState(true);
   const [searchValue, setSearchValue] = React.useState("");
   const [hasNextPage, setHasNextPage] = React.useState(false);
@@ -99,22 +66,22 @@ const RoomSelector = ({
 
   const [total, setTotal] = React.useState(0);
 
-  const [items, setItems] = React.useState([]);
+  const [items, setItems] = React.useState<TItem[]>([]);
 
   const onSearchAction = React.useCallback(
-    (value) => {
-      onSearch && onSearch(value);
+    (value: string) => {
+      onSearch?.(value);
       setSearchValue(() => {
         setIsFirstLoad(true);
 
         return value;
       });
     },
-    [onSearch]
+    [onSearch],
   );
 
   const onClearSearchAction = React.useCallback(() => {
-    onClearSearch && onClearSearch();
+    onClearSearch?.();
     setSearchValue(() => {
       setIsFirstLoad(true);
 
@@ -123,50 +90,51 @@ const RoomSelector = ({
   }, [onClearSearch]);
 
   const onLoadNextPage = React.useCallback(
-    (startIndex) => {
+    async (startIndex: number) => {
       setIsNextPageLoading(true);
 
-      const page = startIndex / pageCount;
+      const page = startIndex / PAGE_COUNT;
 
       const filter = RoomsFilter.getDefault();
 
       filter.page = page;
-      filter.pageCount = pageCount;
+      filter.pageCount = PAGE_COUNT;
 
-      filter.filterValue = searchValue ? searchValue : null;
+      filter.filterValue = searchValue || null;
 
-      api.rooms
-        .getRooms(filter)
-        .then(({ folders, total, count }) => {
-          const rooms = convertToItems(folders);
+      const {
+        folders,
+        total: totalCount,
+        count,
+      } = await api.rooms.getRooms(filter);
 
-          const itemList = rooms.filter((x) => !excludeItems.includes(x.id));
+      const rooms = convertToItems(folders);
 
-          setHasNextPage(count === pageCount);
+      const itemList = rooms.filter((x) => !excludeItems.includes(x.id));
 
-          if (isFirstLoad) {
-            setTotal(total);
-            setItems(itemList);
-          } else {
-            setItems((value) => [...value, ...itemList]);
-          }
-        })
-        .finally(() => {
-          if (isFirstLoad) {
-            setTimeout(() => {
-              setIsFirstLoad(false);
-            }, 500);
-          }
+      setHasNextPage(count === PAGE_COUNT);
 
-          setIsNextPageLoading(false);
-        });
+      if (isFirstLoad) {
+        setTotal(totalCount);
+        setItems(itemList);
+      } else {
+        setItems((value) => [...value, ...itemList]);
+      }
+
+      if (isFirstLoad) {
+        setTimeout(() => {
+          setIsFirstLoad(false);
+        }, 500);
+      }
+
+      setIsNextPageLoading(false);
     },
-    [isFirstLoad, excludeItems, searchValue]
+    [isFirstLoad, excludeItems, searchValue],
   );
 
   React.useEffect(() => {
     onLoadNextPage(0);
-  }, [searchValue]);
+  }, [onLoadNextPage, searchValue]);
 
   return (
     <Selector
@@ -216,9 +184,9 @@ const RoomSelector = ({
       isNextPageLoading={isNextPageLoading}
       loadNextPage={onLoadNextPage}
       isLoading={isFirstLoad}
-      searchLoader={<Loaders.SelectorSearchLoader />}
+      searchLoader={<SearchLoader />}
       rowLoader={
-        <Loaders.SelectorRowLoader
+        <RowLoader
           isMultiSelect={isMultiSelect}
           isContainer={isFirstLoad}
           isUser={false}
@@ -228,6 +196,4 @@ const RoomSelector = ({
   );
 };
 
-RoomSelector.defaultProps = { excludeItems: [] };
-
-export default withTranslation(["RoomSelector", "Common"])(RoomSelector);
+export default RoomSelector;

@@ -1,3 +1,5 @@
+import { AxiosRequestConfig } from "axios";
+
 import { FolderType } from "../../enums";
 import { request } from "../client";
 import {
@@ -6,8 +8,9 @@ import {
   toUrlParams,
 } from "../../utils/common";
 import RoomsFilter from "./filter";
+import { TGetRooms } from "./types";
 
-export function getRooms(filter, signal) {
+export async function getRooms(filter: RoomsFilter, signal?: AbortSignal) {
   let params;
 
   if (filter) {
@@ -16,24 +19,24 @@ export function getRooms(filter, signal) {
     params = `?${filter.toApiUrlParams()}`;
   }
 
-  const options = {
+  const options: AxiosRequestConfig = {
     method: "get",
     url: `/files/rooms${params}`,
     signal,
   };
 
-  return request(options).then((res) => {
-    res.files = decodeDisplayName(res.files);
-    res.folders = decodeDisplayName(res.folders);
+  const res = (await request(options)) as TGetRooms;
 
-    if (res.current.rootFolderType === FolderType.Archive) {
-      res.folders.forEach((room) => {
-        room.isArchive = true;
-      });
-    }
+  res.files = decodeDisplayName(res.files);
+  res.folders = decodeDisplayName(res.folders);
 
-    return res;
-  });
+  if (res.current.rootFolderType === FolderType.Archive) {
+    res.folders.forEach((room) => {
+      room.isArchive = true;
+    });
+  }
+
+  return res;
 }
 
 export function getRoomInfo(id) {

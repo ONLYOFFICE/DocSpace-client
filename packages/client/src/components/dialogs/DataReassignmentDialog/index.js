@@ -177,23 +177,24 @@ const DataReassignmentDialog = ({
         visible={visible}
         onClose={onClosePeopleSelector}
         containerVisible={selectorVisible}
-        withFooterBorder={true}
-        withBodyScroll={true}
+        withFooterBorder
+        withBodyScroll
       >
         <Backdrop
           onClick={onClosePeopleSelector}
           visible={selectorVisible}
-          isAside={true}
+          isAside
         />
         <ModalDialog.Container>
           <PeopleSelector
             acceptButtonLabel={t("Common:SelectAction")}
             excludeItems={[user.id]}
+            currentUserId={user.id}
             onAccept={onAccept}
             onCancel={onClosePeopleSelector}
             onBackClick={onTogglePeopleSelector}
-            withCancelButton={true}
-            withAbilityCreateRoomUsers={true}
+            withCancelButton
+            withAbilityCreateRoomUsers
           />
         </ModalDialog.Container>
       </StyledModalDialog>
@@ -206,8 +207,8 @@ const DataReassignmentDialog = ({
       visible={visible}
       onClose={onClose}
       containerVisible={selectorVisible}
-      withFooterBorder={true}
-      withBodyScroll={true}
+      withFooterBorder
+      withBodyScroll
     >
       <ModalDialog.Header>
         {t("DataReassignmentDialog:DataReassignment")}

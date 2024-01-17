@@ -47,7 +47,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
     const isLogo = !!icon || defaultIcon;
 
     const onChangeAction = () => {
-      onSelect(item);
+      onSelect?.(item);
     };
 
     const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -58,7 +58,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       )
         return;
 
-      onSelect(item);
+      onSelect?.(item);
     };
 
     return (

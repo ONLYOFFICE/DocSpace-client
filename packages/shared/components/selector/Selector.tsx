@@ -139,7 +139,7 @@ const Selector = ({
   );
 
   const onSelectAction = (item: TItem) => {
-    onSelect({
+    onSelect?.({
       ...item,
       id: item.id,
       email: item.email || "",
@@ -342,7 +342,7 @@ const Selector = ({
         hasNextPage={hasNextPage}
         isNextPageLoading={isNextPageLoading}
         loadMoreItems={loadMoreItems}
-        totalItems={totalItems}
+        totalItems={totalItems || 0}
         isLoading={isLoading}
         searchLoader={searchLoader}
         rowLoader={rowLoader}
@@ -361,7 +361,7 @@ const Selector = ({
       {(footerVisible || alwaysShowFooter) && (
         <Footer
           isMultiSelect={isMultiSelect}
-          acceptButtonLabel={acceptButtonLabel}
+          acceptButtonLabel={acceptButtonLabel || ""}
           selectedItemsCount={newSelectedItems.length}
           withCancelButton={withCancelButton}
           cancelButtonLabel={cancelButtonLabel}

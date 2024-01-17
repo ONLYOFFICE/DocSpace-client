@@ -118,6 +118,7 @@ const ChangePortalOwnerDialog = ({
             onAccept={onAccept}
             onCancel={onBackClick}
             onBackClick={onBackClick}
+            currentUserId={id}
           />
         </ModalDialog.Container>
       )}

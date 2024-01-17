@@ -3,7 +3,7 @@ import { TLogo } from "../../api/rooms/types";
 import { RoomsType } from "../../enums";
 
 export interface RoomSelectorProps extends SelectorProps {
-  excludeItems: number[];
+  excludeItems?: number[];
 }
 
 export type TItem = {

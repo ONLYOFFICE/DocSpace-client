@@ -22,11 +22,11 @@ export interface SelectorProps {
   searchValue?: string;
   onSearch?: (value: string, callback?: Function) => void;
   onClearSearch?: (callback?: Function) => void;
-  items: TItem[];
-  onSelect: (item: TItem) => void;
+  items?: TItem[];
+  onSelect?: (item: TItem) => void;
   isMultiSelect?: boolean;
   selectedItems?: TItem[];
-  acceptButtonLabel: string;
+  acceptButtonLabel?: string;
   onAccept: (
     selectedItems: TItem[],
     access: AccessRight | null,
@@ -53,9 +53,13 @@ export interface SelectorProps {
   hasNextPage?: boolean;
   isNextPageLoading?: boolean;
   loadNextPage?:
-    | ((startIndex: number, ...rest: unknown[]) => Promise<void>)
+    | ((
+        startIndex: number,
+        search?: string,
+        ...rest: unknown[]
+      ) => Promise<void>)
     | null;
-  totalItems: number;
+  totalItems?: number;
   isLoading?: boolean;
   searchLoader?: React.ReactNode;
   rowLoader?: React.ReactNode;
@@ -99,7 +103,7 @@ export interface BodyProps {
   onSearch: (value: string) => void;
   onClearSearch: () => void;
   items: TItem[];
-  onSelect: (item: TItem) => void;
+  onSelect?: (item: TItem) => void;
   isMultiSelect?: boolean;
   withSelectAll?: boolean;
   selectAllLabel?: string;
@@ -182,7 +186,7 @@ export interface SearchProps {
 
 export type Data = {
   items: TItem[];
-  onSelect: (item: TItem) => void;
+  onSelect?: (item: TItem) => void;
   isMultiSelect: boolean;
   isItemLoaded: (index: number) => boolean;
   rowLoader: React.ReactNode;

@@ -12,7 +12,7 @@ import { getUserRole } from "@docspace/shared/utils/common";
 import Filter from "@docspace/shared/api/people/filter";
 import Loaders from "@docspace/common/components/Loaders";
 import { getMembersList } from "@docspace/shared/api/people";
-import useLoadingWithTimeout from "SRC_DIR/Hooks/useLoadingWithTimeout";
+import useLoadingWithTimeout from "@docspace/shared/hooks/useLoadingWithTimeout";
 import { ShareAccessRights } from "@docspace/shared/enums";
 import { LOADER_TIMEOUT } from "@docspace/shared/constants";
 
@@ -23,6 +23,7 @@ import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.pn
 import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
 import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/catalog.accounts.react.svg?url";
 import EmptyScreenPersonsSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
+import { RowLoader, SearchLoader } from "@docspace/shared/skeletons/selector";
 
 const AddUsersPanel = ({
   isEncrypted,
@@ -257,10 +258,10 @@ const AddUsersPanel = ({
           loadNextPage={loadNextPage}
           totalItems={total}
           isLoading={isLoading}
-          searchLoader={<Loaders.SelectorSearchLoader />}
+          searchLoader={<SearchLoader />}
           isSearchLoading={isLoading && !isLoadingSearch}
           rowLoader={
-            <Loaders.SelectorRowLoader
+            <RowLoader
               isUser
               count={15}
               isContainer={isLoading}

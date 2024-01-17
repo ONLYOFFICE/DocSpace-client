@@ -8,8 +8,6 @@ export type TViewAs = "tile" | "table" | "row" | "settings" | "profile";
 
 export type TTranslation = (key: string) => string;
 
-export type { TUser } from "./user";
-
 export type TPathParts = {
   id: number;
   title: string;

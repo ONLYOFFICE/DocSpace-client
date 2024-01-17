@@ -1,17 +1,17 @@
 import { useState, useEffect, Dispatch, useCallback, useRef } from "react";
 
 function useLoadingWithTimeout<S = undefined>(
-  timeout: number
+  timeout: number,
 ): [S | undefined, Dispatch<S | undefined>];
 
 function useLoadingWithTimeout<S extends boolean>(
   timeout: number,
-  initialState: S
+  initialState: S,
 ): [S, Dispatch<S>];
 
 function useLoadingWithTimeout<S extends boolean | undefined = undefined>(
   timeout: number,
-  initialState?: S
+  initialState?: S,
 ) {
   const [state, setState] = useState<S | undefined>(initialState);
   const timerRef = useRef<number>();
@@ -21,20 +21,23 @@ function useLoadingWithTimeout<S extends boolean | undefined = undefined>(
     timerRef.current = undefined;
   }, []);
 
-  const setStateWithTimeout: Dispatch<S | undefined> = useCallback((value) => {
-    cleanTimer();
-    if (value) {
-      timerRef.current = window.setTimeout(() => {
+  const setStateWithTimeout: Dispatch<S | undefined> = useCallback(
+    (value) => {
+      cleanTimer();
+      if (value) {
+        timerRef.current = window.setTimeout(() => {
+          setState(value);
+        }, timeout);
+      } else {
         setState(value);
-      }, timeout);
-    } else {
-      setState(value);
-    }
-  }, []);
+      }
+    },
+    [cleanTimer, timeout],
+  );
 
   useEffect(() => {
     return () => cleanTimer();
-  }, []);
+  }, [cleanTimer]);
 
   return [state, setStateWithTimeout];
 }

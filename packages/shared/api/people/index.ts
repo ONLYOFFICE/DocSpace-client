@@ -1,36 +1,36 @@
 import { request } from "../client";
 // import axios from "axios";
 import Filter from "./filter";
-import * as fakePeople from "./fake";
+
 import { Encoder } from "../../utils/encoder";
 import { checkFilterInstance } from "../../utils/common";
+import { TGetUserList } from "./types";
 
-export function getUserList(filter = Filter.getDefault(), fake = false) {
+export async function getUserList(filter = Filter.getDefault()) {
   let params = "";
-  if (fake) {
-    return fakePeople.getUserList(filter);
-  }
+  // if (fake) {
+  //   return fakePeople.getUserList(filter);
+  // }
 
   if (filter) {
     checkFilterInstance(filter, Filter);
 
-    params = `/filter?${filter.toApiUrlParams(
-      "id,status,isAdmin,isOwner,isRoomAdmin,isVisitor,activationStatus,userName,email,mobilePhone,displayName,avatar,listAdminModules,birthday,title,location,isLDAP,isSSO,groups",
-    )}`;
+    params = `/filter?${filter.toApiUrlParams()}`;
   }
 
-  return request({
+  const res = (await request({
     method: "get",
     url: `/people${params}`,
-  }).then((res) => {
-    res.items = res.items.map((user) => {
-      if (user && user.displayName) {
-        user.displayName = Encoder.htmlDecode(user.displayName);
-      }
-      return user;
-    });
-    return res;
+  })) as TGetUserList;
+
+  res.items = res.items.map((user) => {
+    if (user && user.displayName) {
+      user.displayName = Encoder.htmlDecode(user.displayName);
+    }
+    return user;
   });
+
+  return res;
 }
 
 export function getUser(userName = null, headers = null) {

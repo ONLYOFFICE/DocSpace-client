@@ -1,4 +1,5 @@
-import { TCreatedBy, TPathParts, TUser } from "../../types";
+import { TCreatedBy, TPathParts } from "../../types";
+import { TUser } from "../people/types";
 import {
   EmployeeActivationStatus,
   EmployeeStatus,

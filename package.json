@@ -44,6 +44,5 @@
     "shx": "^0.3.4",
     "terser": "^5.16.6"
   },
-  "packageManager": "yarn@3.2.4",
-  "prettier": "@docspace/shared/.prettierrc.json"
+  "packageManager": "yarn@3.2.4"
 }

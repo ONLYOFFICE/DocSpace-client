@@ -3,7 +3,7 @@ import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import ActionsHeaderTouchReactSvgUrl from "PUBLIC_DIR/images/actions.header.touch.react.svg?url";
 import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";
 import RemoveSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
-import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
+import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import React from "react";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
@@ -381,14 +381,14 @@ const SectionHeaderContent = (props) => {
           key: "Logout",
           label: t("Common:Logout"),
           onClick: onClickLogout,
-          iconUrl: RemoveSvgUrl,
+          iconUrl: LogoutReactSvgUrl,
         },
         {
           id: "Disable",
           key: "Disable",
           label: t("Common:DisableUserButton"),
           onClick: onClickDisable,
-          iconUrl: TrashReactSvgUrl,
+          iconUrl: RemoveSvgUrl,
         },
       ]
     : [

@@ -11,7 +11,7 @@ import { Checkbox } from "@docspace/shared/components/checkbox";
 
 import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";
 import RemoveSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
-import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
+import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 
 const Wrapper = styled.div`
   display: contents;
@@ -177,7 +177,7 @@ const SessionsTableRow = (props) => {
     {
       key: "LogoutAllSessions",
       label: t("Settings:LogoutAllSessions"),
-      icon: RemoveSvgUrl,
+      icon: LogoutReactSvgUrl,
       onClick: onClickLogout,
     },
     {
@@ -187,7 +187,7 @@ const SessionsTableRow = (props) => {
     {
       key: "Disable",
       label: t("Common:DisableUserButton"),
-      icon: TrashReactSvgUrl,
+      icon: RemoveSvgUrl,
       onClick: onClickDisable,
     },
   ];

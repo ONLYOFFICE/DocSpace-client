@@ -6,6 +6,8 @@ import { isMobile } from "@docspace/shared/utils/device";
 
 const StyledCalendar = styled(Calendar)`
   position: absolute;
+  right: 32px;
+
   ${(props) =>
     props.isMobile &&
     css`
@@ -17,6 +19,7 @@ const StyledCalendar = styled(Calendar)`
 
 const ShareCalendar = ({ onDateSet, closeCalendar, calendarRef, locale }) => {
   const selectedDate = moment();
+  const maxDate = moment().add(10, "years");
 
   return (
     <StyledCalendar
@@ -27,6 +30,7 @@ const ShareCalendar = ({ onDateSet, closeCalendar, calendarRef, locale }) => {
       forwardedRef={calendarRef}
       locale={locale}
       minDate={selectedDate}
+      maxDate={maxDate}
     />
   );
 };

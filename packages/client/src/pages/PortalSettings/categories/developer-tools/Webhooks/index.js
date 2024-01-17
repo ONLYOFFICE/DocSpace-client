@@ -77,26 +77,17 @@ const Webhooks = (props) => {
   const closeDeleteModal = () => setIsDeleteOpened(false);
   const openDeleteModal = () => setIsDeleteOpened(true);
 
-  const onCreateWebhook = async (webhookInfo) => {
-    if (!isWebhookExist(webhookInfo)) {
-      try {
-        await addWebhook(webhookInfo);
-        toastr.success(t("WebhookCreated"));
-      } catch (error) {
-        toastr.error(error);
-      } finally {
-        closeCreateModal();
-      }
-    }
-  };
-
   const handleWebhookUpdate = async (webhookInfo) => {
     await editWebhook(currentWebhook, webhookInfo);
-    toastr.success(t("WebhookEditedSuccessfully"));
   };
+
   const handleWebhookDelete = async () => {
-    await deleteWebhook(currentWebhook);
-    toastr.success(t("WebhookRemoved"));
+    try {
+      await deleteWebhook(currentWebhook);
+      toastr.success(t("WebhookRemoved"));
+    } catch (error) {
+      toastr.error(error);
+    }
   };
 
   useEffect(() => {
@@ -133,7 +124,7 @@ const Webhooks = (props) => {
           visible={isCreateOpened}
           onClose={closeCreateModal}
           header={t("CreateWebhook")}
-          onSubmit={onCreateWebhook}
+          onSubmit={addWebhook}
           additionalId="create-webhook"
           isSettingsModal={false}
         />

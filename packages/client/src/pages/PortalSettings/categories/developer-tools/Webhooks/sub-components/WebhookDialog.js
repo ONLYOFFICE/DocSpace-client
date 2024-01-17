@@ -7,6 +7,7 @@ import { Hint } from "../styled-components";
 import { SSLVerification } from "./SSLVerification";
 import SecretKeyInput from "./SecretKeyInput";
 import { useTranslation } from "react-i18next";
+import toastr from "@docspace/components/toast/toastr";
 
 const ModalDialogContainer = styled(ModalDialog)`
   .modal-body {
@@ -118,8 +119,9 @@ const WebhookDialog = (props) => {
     setIsLoading(true);
     try {
       await onSubmit(webhookInfo);
-    } finally {
-      setIsLoading(false);
+      isSettingsModal
+        ? toastr.success(t("WebhookEditedSuccessfully"))
+        : toastr.success(t("WebhookCreated"));
       setWebhookInfo({
         id: webhook ? webhook.id : 0,
         name: "",
@@ -129,6 +131,11 @@ const WebhookDialog = (props) => {
       });
       setIsPasswordValid(false);
       setPasswordInputKey((prevKey) => prevKey + 1);
+      onModalClose();
+    } catch (error) {
+      toastr.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -217,6 +224,7 @@ const WebhookDialog = (props) => {
             primary={true}
             onClick={handleSubmitClick}
             isDisabled={isLoading}
+            isLoading={isLoading}
           />
           <Button
             id="cancel-button"

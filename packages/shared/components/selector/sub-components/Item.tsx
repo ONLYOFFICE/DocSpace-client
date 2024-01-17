@@ -6,7 +6,7 @@ import { Checkbox } from "../../checkbox";
 import { RoomIcon } from "../../room-icon";
 
 import { StyledItem } from "../Selector.styled";
-import { ItemProps, Data, TItem } from "../Selector.types";
+import { ItemProps, Data, TSelectorItem } from "../Selector.types";
 
 const compareFunction = (prevProps: ItemProps, nextProps: ItemProps) => {
   const prevData = prevProps.data;
@@ -34,7 +34,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
   const isLoaded = isItemLoaded(index);
 
   const renderItem = () => {
-    const item: TItem = items[index];
+    const item: TSelectorItem = items[index];
 
     if (!item || (item && !item.id))
       return <div style={style}>{rowLoader}</div>;

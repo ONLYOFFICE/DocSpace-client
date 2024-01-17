@@ -8,7 +8,7 @@ import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/catalog.accounts.react
 import EmptyScreenPersonsSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
 
 import { Selector } from "../../components/selector";
-import { TItem } from "../../components/selector/Selector.types";
+import { TSelectorItem } from "../../components/selector/Selector.types";
 import { EmployeeStatus } from "../../enums";
 import { TTranslation } from "../../types";
 import { LOADER_TIMEOUT } from "../../constants";
@@ -81,7 +81,7 @@ const PeopleSelector = ({
   );
 
   const moveCurrentUserToTopOfList = useCallback(
-    (listUser: TItem[]) => {
+    (listUser: TSelectorItem[]) => {
       const currentUserIndex = listUser.findIndex(
         (user) => user.id === currentUserId,
       );
@@ -99,7 +99,7 @@ const PeopleSelector = ({
   );
 
   const removeCurrentUserFromList = useCallback(
-    (listUser: TItem[]) => {
+    (listUser: TSelectorItem[]) => {
       if (filterUserId) {
         return listUser.filter((user) => user.id !== filterUserId);
       }
@@ -161,7 +161,7 @@ const PeopleSelector = ({
 
       const response = await getUserList(currentFilter);
 
-      let newItems = startIndex ? itemsList : [];
+      let newItems = startIndex && itemsList ? itemsList : [];
       let totalDifferent = startIndex ? response.total - total : 0;
 
       const data = response.items

@@ -3,14 +3,14 @@ import { useTranslation } from "react-i18next";
 
 import EmptyScreenCorporateSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate.svg?url";
 
-import { Selector } from "../../components/selector";
+import { Selector, TSelectorItem } from "../../components/selector";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 import api from "../../api";
 import RoomsFilter from "../../api/rooms/filter";
 
 import { TTranslation } from "../../types";
 
-import { RoomSelectorProps, TItem } from "./RoomSelector.types";
+import { RoomSelectorProps } from "./RoomSelector.types";
 import { convertToItems } from "./RoomSelector.utils";
 
 const PAGE_COUNT = 100;
@@ -66,7 +66,7 @@ const RoomSelector = ({
 
   const [total, setTotal] = React.useState(0);
 
-  const [items, setItems] = React.useState<TItem[]>([]);
+  const [items, setItems] = React.useState<TSelectorItem[]>([]);
 
   const onSearchAction = React.useCallback(
     (value: string) => {

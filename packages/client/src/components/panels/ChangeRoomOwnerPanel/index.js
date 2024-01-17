@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
 import { Aside } from "@docspace/shared/components/aside";
 import { Backdrop } from "@docspace/shared/components/backdrop";
-import PeopleSelector from "@docspace/client/src/components/PeopleSelector";
+import PeopleSelector from "@docspace/shared/selectors/People";
 import { withTranslation } from "react-i18next";
 import Filter from "@docspace/shared/api/people/filter";
 import { EmployeeType, DeviceType } from "@docspace/shared/enums";

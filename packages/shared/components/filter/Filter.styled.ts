@@ -1,12 +1,132 @@
-import { Text } from "@docspace/shared/components/text";
 import styled, { css } from "styled-components";
 
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import { tablet, mobile } from "@docspace/shared/utils";
-import { Base } from "@docspace/shared/themes";
 import CrossIcon from "PUBLIC_DIR/images/cross.react.svg";
 
-const StyledFilterBlock = styled.div`
+import { tablet, mobile } from "../../utils";
+import { Base } from "../../themes";
+import { TViewAs } from "../../types";
+
+import { SearchInput } from "../search-input";
+import { ToggleButton } from "../toggle-button";
+import { Text } from "../text";
+
+const StyledFilterInput = styled.div`
+  width: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  margin: 0;
+  padding: 0;
+
+  .filter-input_filter-row {
+    width: 100%;
+    height: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: start;
+
+    margin-bottom: 8px;
+  }
+
+  .filter-input_selected-row {
+    width: 100%;
+    min-height: 32px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+
+    margin-bottom: 8px;
+
+    .clear-all-link {
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-right: 12px;
+            `
+          : css`
+              margin-left: 12px;
+            `}
+    }
+  }
+`;
+
+const StyledSearchInput = styled(SearchInput)`
+  width: 100%;
+`;
+
+const StyledButton = styled.div<{ isOpen: boolean }>`
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+
+  position: relative;
+
+  border: ${(props) => props.theme.filterInput.button.border};
+  border-radius: 3px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+  padding: 0;
+
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          margin-right: 8px;
+        `
+      : css`
+          margin-left: 8px;
+        `}
+
+  cursor: pointer;
+
+  &:hover {
+    border: ${(props) => props.theme.filterInput.button.hoverBorder};
+    svg {
+      path {
+        fill: ${(props) => props.theme.iconButton.hoverColor};
+      }
+    }
+  }
+
+  div {
+    cursor: pointer;
+  }
+
+  ${(props) =>
+    props.isOpen &&
+    css`
+      background: ${props.theme.filterInput.button.openBackground};
+      pointer-events: none;
+
+      svg {
+        path {
+          fill: ${props.theme.filterInput.button.openFill};
+        }
+      }
+
+      .dropdown-container {
+        margin-top: 5px;
+        min-width: 200px;
+        width: 200px;
+      }
+    `}
+
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+`;
+
+StyledButton.defaultProps = { theme: Base };
+
+const StyledFilterBlock = styled.div<{ showFooter?: boolean }>`
   position: fixed;
   top: 0;
 
@@ -72,7 +192,7 @@ const StyledFilterBlock = styled.div`
 
 StyledFilterBlock.defaultProps = { theme: Base };
 
-const StyledFilterBlockHeader = styled.div`
+const StyledFilterBlockHeader = styled.div<{ isSelector?: boolean }>`
   height: 53px;
   min-height: 53px;
 
@@ -110,7 +230,10 @@ const StyledFilterBlockHeader = styled.div`
 
 StyledFilterBlockHeader.defaultProps = { theme: Base };
 
-const StyledFilterBlockItem = styled.div`
+const StyledFilterBlockItem = styled.div<{
+  withoutHeader: boolean;
+  isFirst?: boolean;
+}>`
   margin: ${(props) =>
     props.withoutHeader ? "0" : props.isFirst ? "12px 0 0 0" : "16px 0 0 0"};
   ${(props) =>
@@ -145,18 +268,23 @@ const StyledFilterBlockItemHeader = styled.div`
   align-items: center;
 `;
 
-const StyledFilterBlockItemContent = styled.div`
+const StyledFilterBlockItemContent = styled.div<{
+  withoutSeparator?: boolean;
+  withMultiItems?: boolean;
+}>`
   margin: ${(props) =>
     props.withoutSeparator ? "12px -16px 0 0" : "12px -16px 16px 0"};
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
-          margin: ${(props) =>
-            props.withoutSeparator ? "12px 0 0 -16px" : "12px 0 16px -16px"};
+          margin: ${props.withoutSeparator
+            ? "12px 0 0 -16px"
+            : "12px 0 16px -16px"};
         `
       : css`
-          margin: ${(props) =>
-            props.withoutSeparator ? "12px -16px 0 0" : "12px -16px 16px 0"};
+          margin: ${props.withoutSeparator
+            ? "12px -16px 0 0"
+            : "12px -16px 16px 0"};
         `}
   height: fit-content;
 
@@ -195,19 +323,19 @@ const StyledFilterBlockItemSelectorText = styled(Text)`
 
 StyledFilterBlockItemSelectorText.defaultProps = { theme: Base };
 
-const selectedItemTag = css`
-  background: ${(props) =>
-    props.theme.filterInput.filter.selectedItem.background};
-  border-color: ${(props) =>
-    props.theme.filterInput.filter.selectedItem.border};
-`;
+// const selectedItemTag = css`
+//   background: ${(props) =>
+//     props.theme.filterInput.filter.selectedItem.background};
+//   border-color: ${(props) =>
+//     props.theme.filterInput.filter.selectedItem.border};
+// `;
 
 const selectedItemTagText = css`
   color: ${(props) => props.theme.filterInput.filter.selectedItem.color};
   font-weight: 600;
 `;
 
-const StyledFilterBlockItemTagText = styled(Text)`
+const StyledFilterBlockItemTagText = styled(Text)<{ isSelected?: boolean }>`
   height: 20px;
 
   font-weight: 400;
@@ -389,7 +517,164 @@ const StyledCrossIcon = styled(CrossIcon)`
 
 StyledCrossIcon.defaultProps = { theme: Base };
 
+const selectedViewIcon = css`
+  svg {
+    path {
+      fill: ${(props) => props.theme.filterInput.sort.selectedViewIcon};
+    }
+  }
+`;
+
+const notSelectedViewIcon = css`
+  svg {
+    path {
+      fill: ${(props) => props.theme.filterInput.sort.viewIcon};
+    }
+  }
+`;
+
+const StyledSortButton = styled.div<{ viewAs: TViewAs; isDesc: boolean }>`
+  .combo-button {
+    background: ${(props) =>
+      props.theme.filterInput.sort.background} !important;
+
+    .icon-button_svg {
+      cursor: pointer;
+    }
+  }
+
+  .sort-combo-box {
+    width: 32px;
+    height: 32px;
+
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: 8px;
+          `
+        : css`
+            margin-left: 8px;
+          `}
+
+    .dropdown-container {
+      top: 102%;
+      bottom: auto;
+      min-width: 200px;
+      margin-top: 3px;
+
+      .view-selector-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        cursor: auto;
+
+        .view-selector {
+          width: 44px;
+
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          cursor: auto;
+
+          .view-selector-icon {
+            border: none;
+            background: transparent;
+            padding: 0;
+
+            div {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+          }
+
+          .view-selector-icon:nth-child(1) {
+            ${(props) =>
+              props.viewAs === "row" ? selectedViewIcon : notSelectedViewIcon};
+          }
+
+          .view-selector-icon:nth-child(2) {
+            ${(props) =>
+              props.viewAs !== "row" ? selectedViewIcon : notSelectedViewIcon};
+          }
+        }
+      }
+
+      .option-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        min-width: 200px;
+
+        svg {
+          width: 16px;
+          height: 16px;
+        }
+
+        .option-item__icon {
+          display: flex;
+          visibility: hidden;
+          cursor: pointer;
+          ${(props) =>
+            props.isDesc &&
+            css`
+              transform: rotate(180deg);
+            `}
+
+          path {
+            fill: ${(props) => props.theme.filterInput.sort.sortFill};
+          }
+        }
+
+        :hover {
+          .option-item__icon {
+            visibility: visible;
+          }
+        }
+      }
+
+      .selected-option-item {
+        background: ${(props) => props.theme.filterInput.sort.hoverBackground};
+        cursor: auto;
+
+        .selected-option-item__icon {
+          visibility: visible;
+        }
+      }
+    }
+
+    .optionalBlock {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-left: 0;
+            `
+          : css`
+              margin-right: 0;
+            `}
+    }
+
+    .combo-buttons_arrow-icon {
+      display: none;
+    }
+
+    .backdrop-active {
+      display: none;
+    }
+  }
+`;
+
+StyledSortButton.defaultProps = { theme: Base };
+
 export {
+  StyledSortButton,
   StyledFilterBlock,
   StyledFilterBlockHeader,
   StyledFilterBlockItem,
@@ -408,3 +693,5 @@ export {
   StyledControlContainer,
   StyledCrossIcon,
 };
+
+export { StyledFilterInput, StyledSearchInput, StyledButton };

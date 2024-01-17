@@ -7,7 +7,7 @@ export const convertToItems = (folders: TRoom[]) => {
     const icon = logo.medium;
     const color = logo.color;
 
-    return { id, label: title, icon, color, logo, roomType };
+    return { id, label: title, icon, color, roomType };
   });
 
   return items;

@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import { Base } from "@docspace/shared/themes";
+import { Base } from "../../../themes";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -11,7 +11,7 @@ const StyledContainer = styled.div`
   box-sizing: border-box;
 `;
 
-const StyledBlock = styled.div`
+const StyledBlock = styled.div<{ isLast?: boolean }>`
   padding: 12px 0 16px;
 
   margin-bottom: 4px;
@@ -31,7 +31,7 @@ const StyledBlock = styled.div`
     css`
       border-bottom: 1px solid;
 
-      border-color: ${(props) => props.theme.filterInput.filter.separatorColor};
+      border-color: ${props.theme.filterInput.filter.separatorColor};
     `}
 
   .row-loader {

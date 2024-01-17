@@ -1,9 +1,14 @@
 import React from "react";
 
-import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
-import { Heading } from "@docspace/shared/components/heading";
-import { ComboBox } from "@docspace/shared/components/combobox";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import XIcon from "PUBLIC_DIR/images/x.react.svg";
+
+import { FilterGroups, FilterKeys, FilterSelectorTypes } from "../../../enums";
+
+import { SelectorAddButton } from "../../selector-add-button";
+import { Heading, HeadingSize } from "../../heading";
+import { ComboBox } from "../../combobox";
+import { Checkbox } from "../../checkbox";
+import { ColorTheme, ThemeId } from "../../color-theme";
 
 import {
   StyledFilterBlockItem,
@@ -18,16 +23,16 @@ import {
   StyledFilterBlockItemToggleButton,
   StyledFilterBlockItemCheckboxContainer,
   StyledFilterBlockItemSeparator,
-} from "./StyledFilterBlock";
-
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-
-import XIcon from "PUBLIC_DIR/images/x.react.svg";
+} from "../Filter.styled";
 import {
-  FilterGroups,
-  FilterKeys,
-  FilterSelectorTypes,
-} from "@docspace/shared/enums";
+  FilterBlockItemProps,
+  TCheckboxItem,
+  TGroupItem,
+  TSelectorItem,
+  TTagItem,
+  TToggleButtonItem,
+  TWithOptionItem,
+} from "../Filter.types";
 
 const FilterBlockItem = ({
   group,
@@ -40,42 +45,46 @@ const FilterBlockItem = ({
   showSelector,
   isFirst,
   withMultiItems,
-}) => {
+}: FilterBlockItemProps) => {
   const changeFilterValueAction = (
-    key,
-    isSelected,
-    isMultiSelect,
-    withOptions
+    key: string | string[],
+    isSelected?: boolean,
+    isMultiSelect?: boolean,
+    withOptions?: boolean,
   ) => {
-    changeFilterValue &&
-      changeFilterValue(
-        group,
-        key,
-        isSelected,
-        null,
-        isMultiSelect,
-        withOptions
-      );
+    changeFilterValue?.(
+      group,
+      key,
+      isSelected || false,
+      undefined,
+      isMultiSelect || false,
+      withOptions || false,
+    );
   };
 
-  const showSelectorAction = (event, selectorType, group, ref) => {
-    let target = event.target;
+  const showSelectorAction = (
+    event: React.MouseEvent,
+    selectorType: string,
+    g: FilterGroups,
+    ref: HTMLDivElement | [],
+  ) => {
+    let target = event.target as HTMLDivElement;
 
-    while (!!target.parentNode) {
-      target = target.parentNode;
+    while (target.parentNode) {
+      target = target.parentNode as HTMLDivElement;
 
       if (target === ref) {
-        changeFilterValue && changeFilterValue(group, [], true);
+        changeFilterValue?.(g, [], true);
         return;
       }
     }
 
-    showSelector && showSelector(selectorType, group);
+    showSelector?.(selectorType, g);
   };
 
-  const getSelectorItem = (item) => {
-    const clearSelectorRef = React.useRef(null);
+  const clearSelectorRef = React.useRef<HTMLDivElement | null>(null);
 
+  const getSelectorItem = (item: TSelectorItem) => {
     const isRoomsSelector = item.group === FilterGroups.filterRoom;
     const selectorType = isRoomsSelector
       ? FilterSelectorTypes.rooms
@@ -98,28 +107,27 @@ const FilterBlockItem = ({
         {item?.displaySelectorType === "button" && (
           <SelectorAddButton id="filter_add-author" />
         )}
-        <StyledFilterBlockItemSelectorText noSelect={true}>
+        <StyledFilterBlockItemSelectorText noSelect>
           {item.label}
         </StyledFilterBlockItemSelectorText>
       </StyledFilterBlockItemSelector>
     ) : (
       <ColorTheme
         key={item.key}
-        id={item.id}
         isSelected={item.isSelected}
-        onClick={(event) =>
+        onClick={(event: React.MouseEvent) =>
           showSelectorAction(
             event,
             selectorType,
             item.group,
-            clearSelectorRef.current
+            clearSelectorRef.current || [],
           )
         }
         themeId={ThemeId.FilterBlockItemTag}
       >
         <StyledFilterBlockItemTagText
           className="filter-text"
-          noSelect={true}
+          noSelect
           isSelected={item.isSelected}
           truncate
         >
@@ -134,50 +142,52 @@ const FilterBlockItem = ({
     );
   };
 
-  const getToggleItem = (item) => {
+  const getToggleItem = (item: TToggleButtonItem) => {
     return (
       <StyledFilterBlockItemToggle key={item.key}>
-        <StyledFilterBlockItemToggleText noSelect={true}>
+        <StyledFilterBlockItemToggleText noSelect>
           {item.label}
         </StyledFilterBlockItemToggleText>
         <StyledFilterBlockItemToggleButton
-          isChecked={item.isSelected}
-          onChange={() => changeFilterValueAction(item.key, item.isSelected)}
+          isChecked={item.isSelected || false}
+          onChange={() =>
+            changeFilterValueAction(item.key, item.isSelected || false)
+          }
         />
       </StyledFilterBlockItemToggle>
     );
   };
 
-  const getWithOptionsItem = (item) => {
+  const getWithOptionsItem = (item: TWithOptionItem) => {
     const selectedOption =
       item.options.find((option) => option.isSelected) || item.options[0];
 
     return (
       <ComboBox
         id={item.id}
-        className={"combo-item"}
+        className="combo-item"
         key={item.key}
         onSelect={(data) =>
           changeFilterValueAction(
-            data.key,
+            `${data.key}`,
             data.key === item.options[0].key,
             false,
-            item.withOptions
+            item.withOptions,
           )
         }
         options={item.options}
         selectedOption={selectedOption}
-        displaySelectedOption={true}
-        scaled={true}
-        scaledOptions={true}
+        displaySelectedOption
+        scaled
+        scaledOptions
         isDefaultMode={false}
-        directionY={"bottom"}
+        directionY="bottom"
         fixedDirection
       />
     );
   };
 
-  const getCheckboxItem = (item) => {
+  const getCheckboxItem = (item: TCheckboxItem) => {
     return (
       <StyledFilterBlockItemCheckboxContainer key={item.key}>
         <Checkbox
@@ -186,14 +196,14 @@ const FilterBlockItem = ({
           label={item.label}
           isDisabled={item.isDisabled}
           onChange={() =>
-            changeFilterValueAction(item.key, item.isSelected, false)
+            changeFilterValueAction(item.key, item.isSelected || false, false)
           }
         />
       </StyledFilterBlockItemCheckboxContainer>
     );
   };
 
-  const getTagItem = (item) => {
+  const getTagItem = (item: TTagItem) => {
     const isRoomsSelector = item.group === FilterGroups.filterRoom;
 
     const selectorType = isRoomsSelector
@@ -216,25 +226,26 @@ const FilterBlockItem = ({
 
     return (
       <ColorTheme
-        key={item.key}
+        key={Array.isArray(item.key) ? item.key[0] : item.key}
         isSelected={item.isSelected}
         name={`${item.label}-${item.key}`}
         id={item.id}
         onClick={
           item.key === FilterKeys.other
-            ? (event) => showSelectorAction(event, selectorType, item.group, [])
+            ? (event: React.MouseEvent) =>
+                showSelectorAction(event, selectorType, item.group, [])
             : () =>
                 changeFilterValueAction(
                   item.key,
                   item.isSelected,
-                  item.isMultiSelect
+                  item.isMultiSelect,
                 )
         }
         themeId={ThemeId.FilterBlockItemTag}
       >
         <StyledFilterBlockItemTagText
           className="filter-text"
-          noSelect={true}
+          noSelect
           isSelected={item.isSelected}
           truncate
         >
@@ -248,21 +259,23 @@ const FilterBlockItem = ({
     <StyledFilterBlockItem isFirst={isFirst} withoutHeader={withoutHeader}>
       {!withoutHeader && (
         <StyledFilterBlockItemHeader>
-          <Heading size="xsmall">{label}</Heading>
+          <Heading size={HeadingSize.xsmall}>{label}</Heading>
         </StyledFilterBlockItemHeader>
       )}
 
       <StyledFilterBlockItemContent
         withMultiItems={withMultiItems}
-        withoutHeader={withoutHeader}
         withoutSeparator={withoutSeparator}
       >
-        {groupItem.map((item) => {
-          if (item.displaySelectorType) return getSelectorItem(item);
-          if (item.isToggle === true) return getToggleItem(item);
-          if (item.withOptions === true) return getWithOptionsItem(item);
-          if (item.isCheckbox === true) return getCheckboxItem(item);
-          return getTagItem(item);
+        {groupItem.map((item: TGroupItem) => {
+          if ("displaySelectorType" in item && item.displaySelectorType)
+            return getSelectorItem(item);
+          if ("isToggle" in item && item.isToggle) return getToggleItem(item);
+          if ("withOptions" in item && item.withOptions)
+            return getWithOptionsItem(item);
+          if ("isCheckbox" in item && item.isCheckbox)
+            return getCheckboxItem(item);
+          return getTagItem(item as TTagItem);
         })}
       </StyledFilterBlockItemContent>
       {!isLast && !withoutSeparator && <StyledFilterBlockItemSeparator />}

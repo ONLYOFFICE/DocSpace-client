@@ -10,8 +10,7 @@ import NewTreeFolders from "./NewTreeFolderLoader";
 import TreeSettingsLoader from "./TreeSettingsLoader";
 
 import Text from "./TextLoader";
-import Filter from "./FilterLoader";
-import FilterBlock from "./FilterBlockLoader";
+
 import ProfileView from "./ProfileViewLoader";
 import ProfileFooter from "./ProfileFooterLoader";
 import Notifications from "./NotificationsLoader";
@@ -57,8 +56,7 @@ export default {
   TreeSettingsLoader,
 
   Text,
-  Filter,
-  FilterBlock,
+
   ProfileView,
   ProfileFooter,
 

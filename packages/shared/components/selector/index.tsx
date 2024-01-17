@@ -1,3 +1,3 @@
 export { Selector } from "./Selector";
 
-export type { SelectorProps } from "./Selector.types";
+export type { SelectorProps, TSelectorItem } from "./Selector.types";

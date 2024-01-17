@@ -1,18 +1,22 @@
 import React from "react";
+import { useTheme } from "styled-components";
+import { useTranslation } from "react-i18next";
 
-import { ViewSelector } from "@docspace/shared/components/view-selector";
-import { Link } from "@docspace/shared/components/link";
+import { DeviceType, FilterGroups } from "../../enums";
+
+import { TViewSelectorOption, ViewSelector } from "../view-selector";
+import { Link, LinkType } from "../link";
+import { SelectedItem } from "../selected-item";
+import { InputSize } from "../text-input";
 
 import FilterButton from "./sub-components/FilterButton";
 import SortButton from "./sub-components/SortButton";
-import { SelectedItem } from "@docspace/shared/components/selected-item";
-import { useTheme } from "styled-components";
-import { StyledFilterInput, StyledSearchInput } from "./StyledFilterInput";
-import { DeviceType } from "@docspace/shared/enums";
+
+import { StyledFilterInput, StyledSearchInput } from "./Filter.styled";
+import { FilterProps, TItem } from "./Filter.types";
 
 const FilterInput = React.memo(
   ({
-    t,
     onFilter,
     getFilterData,
     getSelectedFilterData,
@@ -35,7 +39,6 @@ const FilterInput = React.memo(
     isRecentFolder,
     removeSelectedItem,
 
-    isPersonalRoom,
     isRooms,
     isAccounts,
     filterTitle,
@@ -47,11 +50,18 @@ const FilterInput = React.memo(
     onSortButtonClick,
     onClearFilter,
     currentDeviceType,
-  }) => {
-    const [viewSettings, setViewSettings] = React.useState([]);
+    userId,
+  }: FilterProps) => {
+    const [viewSettings, setViewSettings] = React.useState<
+      TViewSelectorOption[]
+    >([]);
     const [inputValue, setInputValue] = React.useState("");
-    const [selectedFilterValue, setSelectedFilterValue] = React.useState(null);
-    const [selectedItems, setSelectedItems] = React.useState(null);
+    const [selectedFilterValue, setSelectedFilterValue] = React.useState<
+      TItem[]
+    >([]);
+    const [selectedItems, setSelectedItems] = React.useState<TItem[]>([]);
+
+    const { t } = useTranslation(["Common"]);
 
     const mountRef = React.useRef(true);
     const { interfaceDirection } = useTheme();
@@ -60,7 +70,7 @@ const FilterInput = React.memo(
         ? { marginRight: "8px" }
         : { marginLeft: "8px" };
     React.useEffect(() => {
-      const value = getViewSettingsData && getViewSettingsData();
+      const value = getViewSettingsData?.();
 
       if (value) setViewSettings(value);
     }, [getViewSettingsData]);
@@ -68,20 +78,16 @@ const FilterInput = React.memo(
     React.useEffect(() => {
       if (clearSearch) {
         setInputValue("");
-        onClearFilter && onClearFilter();
+        onClearFilter?.();
         setClearSearch(false);
       }
-    }, [clearSearch]);
+    }, [clearSearch, onClearFilter, setClearSearch]);
 
     React.useEffect(() => {
-      const value = getSelectedInputValue && getSelectedInputValue();
+      const value = getSelectedInputValue?.();
 
       setInputValue(value);
     }, [getSelectedInputValue]);
-
-    React.useEffect(() => {
-      getSelectedFilterDataAction();
-    }, [getSelectedFilterDataAction, getSelectedFilterData]);
 
     const getSelectedFilterDataAction = React.useCallback(async () => {
       const value = await getSelectedFilterData();
@@ -89,14 +95,20 @@ const FilterInput = React.memo(
       if (!mountRef.current) return;
       setSelectedFilterValue(value);
 
-      const newSelectedItems = [];
+      const newSelectedItems: TItem[] = [];
 
       value.forEach((item) => {
-        if (item.isMultiSelect) {
-          const newKeys = item.key.map((oldKey) => ({
-            key: oldKey.key ? oldKey.key : oldKey,
+        if (item.isMultiSelect && Array.isArray(item.key)) {
+          const newKeys = item.key.map((oldKey: string | {}) => ({
+            key:
+              typeof oldKey !== "string" && "key" in oldKey && oldKey.key
+                ? (oldKey.key as string)
+                : (oldKey as string),
             group: item.group,
-            label: oldKey.label ? oldKey.label : oldKey,
+            label:
+              typeof oldKey !== "string" && "label" in oldKey && oldKey.label
+                ? (oldKey.label as string)
+                : (oldKey as string),
           }));
 
           return newSelectedItems.push(...newKeys);
@@ -108,21 +120,31 @@ const FilterInput = React.memo(
       setSelectedItems(newSelectedItems);
     }, [getSelectedFilterData]);
 
+    React.useEffect(() => {
+      getSelectedFilterDataAction();
+    }, [getSelectedFilterDataAction, getSelectedFilterData]);
+
     const onClearSearch = React.useCallback(() => {
-      onSearch && onSearch();
+      onSearch?.("");
     }, [onSearch]);
 
     const removeSelectedItemAction = React.useCallback(
-      (key, label, group) => {
+      (
+        key: string,
+        label: string | React.ReactNode,
+        group?: string | FilterGroups,
+      ) => {
         const newItems = selectedItems
           .map((item) => ({ ...item }))
-          .filter((item) => item.key != key);
+          .filter((item) => item.key !== key);
 
         setSelectedItems(newItems);
 
-        removeSelectedItem({ key, group });
+        const newGroup = group as FilterGroups;
+
+        removeSelectedItem({ key, group: newGroup });
       },
-      [selectedItems, removeSelectedItem]
+      [selectedItems, removeSelectedItem],
     );
 
     React.useEffect(() => {
@@ -140,24 +162,22 @@ const FilterInput = React.memo(
             onChange={onSearch}
             onClearSearch={onClearSearch}
             id="filter_search-input"
+            size={InputSize.base}
           />
           <FilterButton
-            t={t}
             id="filter-button"
             onFilter={onFilter}
             getFilterData={getFilterData}
             selectedFilterValue={selectedFilterValue}
             filterHeader={filterHeader}
             selectorLabel={selectorLabel}
-            isPersonalRoom={isPersonalRoom}
             isRooms={isRooms}
             isAccounts={isAccounts}
             title={filterTitle}
-            currentDeviceType={currentDeviceType}
+            userId={userId}
           />
           {!isRecentFolder && (
             <SortButton
-              t={t}
               id="sort-by-button"
               onSort={onSort}
               getSortData={getSortData}
@@ -186,7 +206,7 @@ const FilterInput = React.memo(
               viewAs={viewAs === "table" ? "row" : viewAs}
               viewSettings={viewSettings}
               onChangeView={onChangeViewAs}
-              isFilter={true}
+              isFilter
             />
           )}
         </div>
@@ -195,7 +215,7 @@ const FilterInput = React.memo(
             {selectedItems.map((item) => (
               <SelectedItem
                 key={`${item.key}_${item.group}`}
-                propKey={item.key}
+                propKey={Array.isArray(item.key) ? item.key[0] : item.key}
                 label={item.selectedLabel ? item.selectedLabel : item.label}
                 group={item.group}
                 onClose={removeSelectedItemAction}
@@ -204,11 +224,11 @@ const FilterInput = React.memo(
             ))}
             {selectedItems.filter((item) => item.label).length > 1 && (
               <Link
-                className={"clear-all-link"}
+                className="clear-all-link"
                 isHovered
                 fontWeight={600}
                 isSemitransparent
-                type="action"
+                type={LinkType.action}
                 onClick={clearAll}
               >
                 {t("Common:ClearAll")}
@@ -218,11 +238,9 @@ const FilterInput = React.memo(
         )}
       </StyledFilterInput>
     );
-  }
+  },
 );
 
-FilterInput.defaultProps = {
-  viewSelectorVisible: false,
-};
+FilterInput.displayName = "FilterInput";
 
 export default FilterInput;

@@ -1,4 +1,4 @@
-export const enum AvatarRole {
+export enum AvatarRole {
   owner = "owner",
   admin = "admin",
   guest = "guest",

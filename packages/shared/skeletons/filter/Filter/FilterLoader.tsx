@@ -1,9 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types";
-import StyledFilter from "./StyledFilterLoader";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-const FilterLoader = ({ id, className, style, ...rest }) => {
+import StyledFilter from "./Filter.styled";
+import { RectangleSkeleton } from "../../rectangle";
+import { FilterLoaderProps } from "./Filter.types";
+
+const FilterLoader = ({ id, className, style, ...rest }: FilterLoaderProps) => {
   const {
     title,
     height,
@@ -42,18 +43,6 @@ const FilterLoader = ({ id, className, style, ...rest }) => {
       />
     </StyledFilter>
   );
-};
-
-FilterLoader.propTypes = {
-  id: PropTypes.string,
-  className: PropTypes.string,
-  style: PropTypes.object,
-};
-
-FilterLoader.defaultProps = {
-  id: undefined,
-  className: undefined,
-  style: undefined,
 };
 
 export default FilterLoader;

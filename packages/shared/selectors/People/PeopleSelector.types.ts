@@ -9,10 +9,10 @@ export interface UserTooltipProps {
 }
 
 export interface PeopleSelectorProps extends SelectorProps {
-  filter: PeopleFilter | Function;
-  excludeItems: string[];
+  filter?: PeopleFilter | Function;
+  excludeItems?: string[];
   currentUserId: string;
-  withOutCurrentAuthorizedUser: boolean;
-  withAbilityCreateRoomUsers: boolean;
-  filterUserId: string;
+  withOutCurrentAuthorizedUser?: boolean;
+  withAbilityCreateRoomUsers?: boolean;
+  filterUserId?: string;
 }

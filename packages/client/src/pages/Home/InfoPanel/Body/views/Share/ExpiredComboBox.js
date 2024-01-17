@@ -10,7 +10,7 @@ import { Link } from "@docspace/shared/components/link";
 import { getExpiredOptions } from "./optionsHelper";
 import ShareCalendar from "./ShareCalendar";
 
-const ExpiredComboBox = ({ link, changeExpirationOption }) => {
+const ExpiredComboBox = ({ link, changeExpirationOption, isDisabled }) => {
   const { t, i18n } = useTranslation(["SharingPanel", "Settings", "Common"]);
   const calendarRef = useRef();
   const bodyRef = useRef();
@@ -105,6 +105,7 @@ const ExpiredComboBox = ({ link, changeExpirationOption }) => {
             fontSize="12px"
             fontWeight={400}
             withoutHover
+            isDisabled={isDisabled}
           >
             {{ date }}
           </LinkWithDropdown>
@@ -123,6 +124,7 @@ const ExpiredComboBox = ({ link, changeExpirationOption }) => {
             fontSize="12px"
             fontWeight={400}
             withoutHover
+            isDisabled={isDisabled}
           >
             {{ date }}
           </LinkWithDropdown>

@@ -100,6 +100,7 @@ const LinkRow = ({
                 <ExpiredComboBox
                   link={link}
                   changeExpirationOption={changeExpirationOption}
+                  isDisabled={isLoaded}
                 />
               </div>
               <div className="link-actions">

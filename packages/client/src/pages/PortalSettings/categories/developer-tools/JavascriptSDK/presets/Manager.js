@@ -702,6 +702,7 @@ const Manager = (props) => {
                       key={column.key}
                       isDisabled={column.key === "Name"}
                       onClick={() => deleteSelectedColumn(column)}
+                      onClose={() => {}}
                       label={column.label}
                     />
                   ))}

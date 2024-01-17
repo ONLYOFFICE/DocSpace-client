@@ -126,12 +126,30 @@ const RoomSelector = (props) => {
     return () => destroyFrame();
   });
 
+  // useEffect(() => {
+  //   loadFrame();
+  // }, [config])
+
+  const toggleButtonMode = (e) => {
+    setSelectedElementType(e.target.value);
+    setConfig((config) => ({ ...config, isButtonMode: e.target.value === "button" }));
+  };
+
   const changeRoomType = (option) => {
     setRoomType(option);
     setConfig((config) => ({ ...config, roomType: option.roomType }));
   };
 
-  const onChangeTab = () => {
+  const onChangeTab = (tab) => {
+    // tab.key === "preview" &&
+    //   config?.isButtonMode &&
+    //   setConfig((config) => ({ ...config, isButtonMode: true }));
+    // tab.key === "selector-preview" &&
+    //   config?.isButtonMode &&
+    //   setConfig((config) => ({ ...config, isButtonMode: false }));
+    // tab.key === "code" &&
+    //   !!config?.isButtonMode !== (selectedElementType === "button") &&
+    //   setConfig((config) => ({ ...config, isButtonMode: true }));
     loadFrame();
   };
 
@@ -221,18 +239,44 @@ const RoomSelector = (props) => {
     </>
   );
 
-  const dataTabs = [
-    {
-      key: "preview",
-      title: t("Common:Preview"),
-      content: preview,
-    },
-    {
-      key: "code",
-      title: t("Code"),
-      content: code,
-    },
-  ];
+  const buttonPreview = (
+    <Frame width={"700px"} height={config.height} targetId={frameId}>
+      <Box id={frameId}></Box>
+      <RectangleSkeleton width={"700px"} height={config.height} borderRadius="6px" />
+    </Frame>
+  );
+
+  const dataTabs =
+    selectedElementType === "element"
+      ? [
+          {
+            key: "preview",
+            title: t("Common:Preview"),
+            content: preview,
+          },
+          {
+            key: "code",
+            title: t("Code"),
+            content: code,
+          },
+        ]
+      : [
+          {
+            key: "preview",
+            title: t("Common:Preview"),
+            content: buttonPreview,
+          },
+          {
+            key: "selector-preview",
+            title: "Selector preview",
+            content: preview,
+          },
+          {
+            key: "code",
+            title: t("Code"),
+            content: code,
+          },
+        ];
 
   return (
     <SDKContainer>
@@ -253,7 +297,7 @@ const RoomSelector = (props) => {
             options={elementDisplayOptions}
             name="elementDisplayInput"
             selected={selectedElementType}
-            onClick={() => {}}
+            onClick={toggleButtonMode}
             spacing="8px"
           />
           <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>

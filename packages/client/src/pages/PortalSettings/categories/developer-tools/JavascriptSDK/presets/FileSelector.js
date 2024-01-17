@@ -146,6 +146,11 @@ const FileSelector = (props) => {
     return () => destroyFrame();
   });
 
+  const toggleButtonMode = (e) => {
+    setSelectedElementType(e.target.value);
+    setConfig((config) => ({ ...config, isButtonMode: e.target.value === "button" }));
+  };
+
   const onChangeTab = () => {
     loadFrame();
   };
@@ -344,7 +349,7 @@ const FileSelector = (props) => {
             options={elementDisplayOptions}
             name="elementDisplayInput"
             selected={selectedElementType}
-            onClick={() => {}}
+            onClick={toggleButtonMode}
             spacing="8px"
           />
           <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>

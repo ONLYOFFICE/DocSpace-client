@@ -1496,6 +1496,9 @@ class FilesStore {
                 canCopyPublicLink =
                   room.access === ShareAccessRights.RoomManager ||
                   room.access === ShareAccessRights.None;
+
+                room.canCopyPublicLink = canCopyPublicLink;
+                this.authStore.infoPanelStore.setInfoPanelRoom(room);
               }
 
               const { mute } = room;
@@ -3600,6 +3603,7 @@ class FilesStore {
   };
 
   getFolderInfo = async (id) => {
+    console.log("11112");
     const folderInfo = await api.files.getFolderInfo(id);
     this.setFolder(folderInfo);
     return folderInfo;

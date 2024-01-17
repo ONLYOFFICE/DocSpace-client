@@ -138,8 +138,9 @@ const InfoPanelBodyContent = ({
 
   // Setting infoPanelSelection after selectedItems or selectedFolder update
   useEffect(() => {
-    // console.log("InfoPanel body calculate", calculateSelection());
-    setInfoPanelSelection(calculateSelection());
+    const infoSelection = calculateSelection();
+    // console.log("InfoPanel body calculate", infoSelection);
+    setInfoPanelSelection(infoSelection);
   }, [selectedItems, selectedFolder]);
 
   if (!infoPanelSelection && !isGallery) return null;
@@ -171,15 +172,13 @@ export default inject(({ auth, selectedFolderStore, oformsStore }) => {
     getIsRooms,
     getIsAccounts,
     getIsGallery,
+    infoPanelSelectedItems,
+    infoPanelRoom,
   } = auth.infoPanelStore;
 
   const { gallerySelected } = oformsStore;
 
   const { isRootFolder } = selectedFolderStore;
-
-  const selectedItems = auth.infoPanelStore.getSelectedItems();
-
-  const selectedFolder = auth.infoPanelStore.getSelectedFolder();
 
   return {
     infoPanelSelection,
@@ -195,8 +194,8 @@ export default inject(({ auth, selectedFolderStore, oformsStore }) => {
     getIsAccounts,
     getIsGallery,
 
-    selectedItems,
-    selectedFolder,
+    selectedItems: infoPanelSelectedItems,
+    selectedFolder: infoPanelRoom,
 
     isRootFolder,
     gallerySelected,

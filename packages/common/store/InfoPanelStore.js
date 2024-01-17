@@ -47,6 +47,7 @@ class InfoPanelStore {
   membersList = null;
 
   infoPanelSelection = null;
+  infoPanelRoom = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -91,6 +92,14 @@ class InfoPanelStore {
     this.fileView = view === infoMembers ? infoHistory : view;
     this.isScrollLocked = false;
     if (view !== infoMembers) this.setMembersList(null);
+
+    const isRooms = this.getIsRooms();
+
+    if (isRooms && view === infoMembers) {
+      this.setInfoPanelSelection(this.infoPanelRoom);
+    } else {
+      this.setInfoPanelSelection(this.calculateSelection());
+    }
   };
 
   setUpdateRoomMembers = (updateRoomMembers) => {
@@ -104,43 +113,34 @@ class InfoPanelStore {
 
   // Selection helpers //
 
-  getSelectedItems = () => {
-    const {
-      selection: filesStoreSelection,
-      bufferSelection: filesStoreBufferSelection,
-    } = this.filesStore;
+  get infoPanelSelectedItems() {
+    const { selection: filesSelection, bufferSelection: filesBufferSelection } =
+      this.filesStore;
 
     const {
-      selection: peopleStoreSelection,
-      bufferSelection: peopleStoreBufferSelection,
+      selection: peopleSelection,
+      bufferSelection: peopleBufferSelection,
     } = this.peopleStore.selectionStore;
 
     return this.getIsAccounts()
-      ? peopleStoreSelection.length
-        ? [...peopleStoreSelection]
-        : peopleStoreBufferSelection
-          ? [peopleStoreBufferSelection]
+      ? peopleSelection.length
+        ? [...peopleSelection]
+        : peopleBufferSelection
+          ? [peopleBufferSelection]
           : []
-      : filesStoreSelection?.length > 0
-        ? [...filesStoreSelection]
-        : filesStoreBufferSelection
-          ? [filesStoreBufferSelection]
+      : filesSelection?.length > 0
+        ? [...filesSelection]
+        : filesBufferSelection
+          ? [filesBufferSelection]
           : [];
-  };
-
-  getSelectedFolder = () => {
-    const selectedFolderStore = { ...this.selectedFolderStore };
-
-    return {
-      ...selectedFolderStore,
-      isFolder: true,
-      isRoom: !!this.selectedFolderStore.roomType,
-    };
-  };
+  }
 
   calculateSelection = () => {
-    const selectedItems = this.getSelectedItems();
-    const selectedFolder = this.getSelectedFolder();
+    const selectedItems = this.infoPanelSelectedItems;
+    const selectedFolder =
+      this.roomsView === infoMembers
+        ? this.infoPanelRoom
+        : this.selectedFolderStore.getSelectedFolder();
 
     if (!selectedItems.length) {
       return this.normalizeSelection({
@@ -149,8 +149,14 @@ class InfoPanelStore {
         isSelectedItem: false,
       });
     } else if (selectedItems.length === 1) {
+      // TODO: INFO PANEL
+
       if (this.roomsView === infoMembers && !selectedItems[0]?.isRoom) {
-        return this.infoPanelSelection;
+        if (this.infoPanelSelection?.id) {
+          return this.infoPanelSelection;
+        } else {
+          return this.infoPanelRoom;
+        }
       }
 
       return this.normalizeSelection({
@@ -206,17 +212,17 @@ class InfoPanelStore {
 
     if (!currentFolderRoomId) return;
 
-    const newSelectionParentRoom = await getRoomInfo(currentFolderRoomId);
+    const newInfoPanelSelection = await getRoomInfo(currentFolderRoomId);
 
     const roomIndex = this.selectedFolderStore.navigationPath.findIndex(
       (f) => f.id === currentFolderRoomId
     );
     if (roomIndex > -1) {
       this.selectedFolderStore.navigationPath[roomIndex].title =
-        newSelectionParentRoom.title;
+        newInfoPanelSelection.title;
     }
 
-    this.setInfoPanelSelection(this.normalizeSelection(newSelectionParentRoom));
+    this.setInfoPanelSelection(this.normalizeSelection(newInfoPanelSelection));
   };
 
   isItemChanged = (oldItem, newItem) => {
@@ -349,6 +355,10 @@ class InfoPanelStore {
 
   setInfoPanelSelection = (infoPanelSelection) => {
     this.infoPanelSelection = infoPanelSelection;
+  };
+
+  setInfoPanelRoom = (infoPanelRoom) => {
+    this.infoPanelRoom = this.normalizeSelection(infoPanelRoom);
   };
 }
 

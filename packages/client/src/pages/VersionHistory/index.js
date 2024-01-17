@@ -7,13 +7,13 @@ import { withTranslation } from "react-i18next";
 import { SectionHeaderContent, SectionBodyContent } from "./Section";
 //import { setDocumentTitle } from "@docspace/client/src/helpers/filesUtils";
 import { inject, observer } from "mobx-react";
-
+import SectionWrapper from "SRC_DIR/components/Section";
 class PureVersionHistory extends React.Component {
   render() {
     const { isLoading, versions, showProgressBar } = this.props;
 
     return (
-      <Section
+      <SectionWrapper
         withBodyAutoFocus={true}
         headerBorderBottom={true}
         showSecondaryProgressBar={showProgressBar}
@@ -35,7 +35,7 @@ class PureVersionHistory extends React.Component {
         <Section.SectionBody>
           <SectionBodyContent />
         </Section.SectionBody>
-      </Section>
+      </SectionWrapper>
     );
   }
 }

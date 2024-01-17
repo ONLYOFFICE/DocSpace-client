@@ -6,6 +6,8 @@ import { inject, observer } from "mobx-react";
 import Section from "@docspace/common/components/Section";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 
+import SectionWrapper from "SRC_DIR/components/Section";
+
 import { useParams } from "react-router-dom";
 import HistoryHeader from "../categories/developer-tools/Webhooks/WebhookHistory/sub-components/HistoryHeader";
 import DetailsNavigationHeader from "../categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/DetailsNavigationHeader";
@@ -55,7 +57,7 @@ const Layout = ({
     <>
       <ArticleSettings showArticleLoader={!isLoadedArticleBody} />
       {!isGeneralPage && (
-        <Section
+        <SectionWrapper
           viewAs={"settings"}
           withBodyScroll={true}
           settingsStudio={true}
@@ -76,7 +78,7 @@ const Layout = ({
               <SectionPagingContent />
             </Section.SectionPaging>
           )}
-        </Section>
+        </SectionWrapper>
       )}
     </>
   );

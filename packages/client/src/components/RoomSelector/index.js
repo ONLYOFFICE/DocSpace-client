@@ -1,5 +1,5 @@
 ﻿import EmptyScreenCorporateSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate.svg?url";
-import React from "react";
+import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
 
 import api from "@docspace/common/api";
@@ -76,6 +76,7 @@ const RoomSelector = ({
   selectAllIcon,
   onSelectAll,
 
+  setFinishLoad,
   withAccessRights,
   accessRights,
   selectedAccessRight,
@@ -100,6 +101,12 @@ const RoomSelector = ({
   const [total, setTotal] = React.useState(0);
 
   const [items, setItems] = React.useState([]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setFinishLoad(isFirstLoad);
+    }, 750);
+  }, [isFirstLoad]);
 
   const onSearchAction = React.useCallback(
     (value) => {
@@ -216,6 +223,7 @@ const RoomSelector = ({
       isNextPageLoading={isNextPageLoading}
       loadNextPage={onLoadNextPage}
       isLoading={isFirstLoad}
+      setFinishLoad={setFinishLoad}
       searchLoader={<Loaders.SelectorSearchLoader />}
       rowLoader={
         <Loaders.SelectorRowLoader

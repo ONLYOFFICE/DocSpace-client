@@ -1,8 +1,6 @@
-import React, { useEffect, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useParams } from "react-router-dom";
-import Button from "@docspace/components/button";
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
 import AppLoader from "@docspace/common/components/AppLoader";
 import RoomSelector from "../../components/RoomSelector";
 import FilesSelector from "../../components/FilesSelector";
@@ -29,6 +27,8 @@ const Sdk = ({
   getRoomsIcon,
   getPrimaryLink,
 }) => {
+  const [finishLoad, setFinishLoad] = useState(false);
+
   useEffect(() => {
     window.addEventListener("message", handleMessage, false);
     return () => {
@@ -42,14 +42,24 @@ const Sdk = ({
     [frameCallCommand]
   );
 
+  const callCommandLoad = useCallback(
+    () => frameCallCommand("setIsLoaded"),
+    [frameCallCommand]
+  );
+
   useEffect(() => {
     if (window.parent && !frameConfig && isLoaded) {
       callCommand("setConfig");
     }
   }, [callCommand, isLoaded]);
 
-  const { mode } = useParams();
+  useEffect(() => {
+    if (finishLoad) {
+      callCommandLoad("setIsLoaded");
+    }
+  }, [callCommandLoad, finishLoad]);
 
+  const { mode } = useParams();
   const selectorType = new URLSearchParams(window.location.search).get(
     "selectorType"
   );
@@ -107,6 +117,7 @@ const Sdk = ({
               res = await login(email, passwordHash);
             }
             break;
+
           case "logout":
             res = await logout();
             break;
@@ -158,7 +169,6 @@ const Sdk = ({
     : {};
 
   let component;
-
   switch (mode) {
     case "room-selector":
       component = (
@@ -177,6 +187,7 @@ const Sdk = ({
           embedded={true}
           withHeader={frameConfig?.showSelectorHeader}
           isSelect={true}
+          setFinishLoad={setFinishLoad}
           onSelectFile={onSelectFile}
           onClose={onClose}
           filterParam={"ALL"}
@@ -189,7 +200,6 @@ const Sdk = ({
     default:
       component = <AppLoader />;
   }
-
   return component;
 };
 

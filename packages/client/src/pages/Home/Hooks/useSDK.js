@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useCallback } from "react";
 
 import { Events } from "@docspace/common/constants";
 import { frameCallbackData, frameCallCommand } from "@docspace/common/utils";
@@ -27,6 +27,8 @@ const useSDK = ({
   loadCurrentUser,
   updateProfileCulture,
   getRooms,
+  setIsLoading,
+  isLoading,
 }) => {
   const handleMessage = async (e) => {
     const eventData = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
@@ -172,6 +174,19 @@ const useSDK = ({
   // if (window.parent && !frameConfig) {
   //   frameCallCommand("setConfig");
   // }
+
+  const callCommandLoad = useCallback(
+    () => frameCallCommand("setIsLoaded"),
+    [frameCallCommand]
+  );
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (isLoading) {
+        callCommandLoad("setIsLoaded");
+      }
+    }, 750);
+  }, [callCommandLoad, isLoading]);
 
   React.useEffect(() => {
     window.addEventListener("message", handleMessage, false);

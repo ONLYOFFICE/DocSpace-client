@@ -1,17 +1,15 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 
 import ViewHelper from "./helpers/ViewHelper";
 import ItemTitle from "./sub-components/ItemTitle";
 
 import { StyledInfoPanelBody } from "./styles/common";
-import { getRoomInfo } from "@docspace/shared/api/rooms";
 
 const InfoPanelBodyContent = ({
   infoPanelSelection,
   setInfoPanelSelection,
   calculateSelection,
-  normalizeSelection,
   isItemChanged,
   roomsView,
   fileView,
@@ -34,11 +32,11 @@ const InfoPanelBodyContent = ({
   const isSeveralItems = props.selectedItems?.length > 1;
 
   const isNoItemGallery = isGallery && !gallerySelected;
-  const itemIsRoot =
-    infoPanelSelection?.isSelectedFolder &&
+  const isRoot =
+    infoPanelSelection?.isFolder &&
     infoPanelSelection?.id === infoPanelSelection?.rootFolderId;
   const isNoItem =
-    !isSeveralItems && (isNoItemGallery || (itemIsRoot && !isGallery));
+    !isSeveralItems && (isNoItemGallery || (isRoot && !isGallery));
 
   const defaultProps = {
     infoPanelSelection,
@@ -111,31 +109,6 @@ const InfoPanelBodyContent = ({
   // Updating infoPanelSelection after selectFolder change
   // if it is located in another room
 
-  // TODO: INFO PANEL
-  // const updateSelectionParentRoomAction = useCallback(async () => {
-  //   if (!isRooms) return;
-  //   if (infoPanelSelection?.isRoom && roomsView === "members") return;
-
-  //   const currentFolderRoomId =
-  //     selectedFolder?.pathParts &&
-  //     selectedFolder?.pathParts?.length > 1 &&
-  //     selectedFolder.pathParts[1].id;
-
-  //   const storeRoomId = infoPanelSelection?.id;
-  //   if (!currentFolderRoomId || currentFolderRoomId === storeRoomId) return;
-
-  //   const newSelectionParentRoom = await getRoomInfo(currentFolderRoomId);
-
-  //   if (storeRoomId === newSelectionParentRoom.id) return;
-
-  //   setInfoPanelSelection(normalizeSelection(newSelectionParentRoom));
-  // }, [selectedFolder]);
-
-  // useEffect(() => {
-  //   console.log("updateSelectionParentRoomAction1");
-  //   updateSelectionParentRoomAction();
-  // }, [selectedFolder, updateSelectionParentRoomAction]);
-
   // Setting infoPanelSelection after selectedItems or selectedFolder update
   useEffect(() => {
     const infoSelection = calculateSelection();
@@ -164,7 +137,6 @@ export default inject(({ auth, selectedFolderStore, oformsStore }) => {
     infoPanelSelection,
     setInfoPanelSelection,
     calculateSelection,
-    normalizeSelection,
     isItemChanged,
     roomsView,
     fileView,
@@ -187,7 +159,6 @@ export default inject(({ auth, selectedFolderStore, oformsStore }) => {
     infoPanelSelection,
     setInfoPanelSelection,
     calculateSelection,
-    normalizeSelection,
     isItemChanged,
 
     roomsView,

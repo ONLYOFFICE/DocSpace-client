@@ -43,12 +43,12 @@ const InfoPanelHeaderContent = (props) => {
   const isAccounts = getIsAccounts();
   const isTrash = getIsTrash();
 
-  const isNoItem =
-    selection?.isSelectedFolder && selection?.id === selection?.rootFolderId;
+  const isRoot =
+    selection?.isFolder && selection?.id === selection?.rootFolderId;
   const isSeveralItems = selection && Array.isArray(selection);
 
   const withSubmenu =
-    !isNoItem && !isSeveralItems && !isGallery && !isAccounts && !isTrash;
+    !isRoot && !isSeveralItems && !isGallery && !isAccounts && !isTrash;
 
   useEffect(() => {
     checkWidth();

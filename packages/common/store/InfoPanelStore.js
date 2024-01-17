@@ -136,11 +136,7 @@ class InfoPanelStore {
         : this.selectedFolderStore.getSelectedFolder();
 
     if (!selectedItems.length) {
-      return this.normalizeSelection({
-        ...selectedFolder,
-        isSelectedFolder: true,
-        isSelectedItem: false,
-      });
+      return this.normalizeSelection(selectedFolder);
     } else if (selectedItems.length === 1) {
       // TODO: INFO PANEL
 
@@ -156,24 +152,17 @@ class InfoPanelStore {
         }
       }
 
-      return this.normalizeSelection({
-        ...selectedItems[0],
-        isSelectedFolder: false,
-        isSelectedItem: true,
-      });
+      return this.normalizeSelection(selectedItems[0]);
     } else {
       return [...Array(selectedItems.length).keys()];
     }
   };
 
   normalizeSelection = (infoPanelSelection) => {
-    const isContextMenuSelection = infoPanelSelection.isContextMenuSelection;
     return {
       ...infoPanelSelection,
       isRoom: infoPanelSelection.isRoom || !!infoPanelSelection.roomType,
       icon: this.getInfoPanelItemIcon(infoPanelSelection, 32),
-      isContextMenuSelection: false,
-      wasContextMenuSelection: !!isContextMenuSelection,
       canCopyPublicLink:
         infoPanelSelection.access === ShareAccessRights.RoomManager ||
         infoPanelSelection.access === ShareAccessRights.None,
@@ -193,12 +182,7 @@ class InfoPanelStore {
     });
   };
 
-  // reloadSelection
-  // updateInfoPanelSelection = () => {
-  //   this.setInfoPanelSelection(this.calculateSelection());
-  // };
-
-  // reloadSelectionParentRoom
+  // reloadSelectionParentRoom //reloadSelection
   updateInfoPanelSelection = async () => {
     // this.setInfoPanelSelection(this.calculateSelection());
     if (!this.getIsRooms) return;
@@ -357,12 +341,12 @@ class InfoPanelStore {
     ) {
       this.infoPanelSelection = infoPanelSelection.length
         ? infoPanelSelection
-        : { isSelectedFolder: true };
+        : {};
       return;
     }
 
     this.infoPanelSelection = infoPanelSelection;
-    this.isScrollLocked = false; // TODO: INFO PANEL
+    this.isScrollLocked = false;
   };
 
   setInfoPanelRoom = (infoPanelRoom) => {

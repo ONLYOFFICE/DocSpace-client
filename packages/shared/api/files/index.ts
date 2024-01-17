@@ -1244,23 +1244,31 @@ export async function getFileLink(fileId: number) {
   return res;
 }
 
-export function getExternalLinks(fileId: number, startIndex = 0, count = 50) {
+export async function getExternalLinks(
+  fileId: number,
+  startIndex = 0,
+  count = 50,
+) {
   const linkParams = `?startIndex=${startIndex}&count=${count}`;
 
-  return request({
+  const res = (await request({
     method: "get",
     url: `files/file/${fileId}/links${linkParams}`,
-  });
+  })) as TFileLink[];
+
+  return res;
 }
 
-export function getPrimaryLink(fileId: number) {
-  return request({
+export async function getPrimaryLink(fileId: number) {
+  const res = (await request({
     method: "get",
     url: `files/file/${fileId}/link`,
-  });
+  })) as TFileLink;
+
+  return res;
 }
 
-export function editExternalLink(
+export async function editExternalLink(
   fileId: number,
   linkId: number,
   access: number,
@@ -1268,24 +1276,28 @@ export function editExternalLink(
   internal: boolean,
   expirationDate: string,
 ) {
-  return request({
+  const res = (await request({
     method: "put",
     url: `/files/file/${fileId}/links`,
     data: { linkId, access, primary, internal, expirationDate },
-  });
+  })) as TFileLink;
+
+  return res;
 }
 
-export function addExternalLink(
+export async function addExternalLink(
   fileId: number,
   access: number,
   primary: boolean,
   internal: boolean,
 ) {
-  return request({
+  const res = (await request({
     method: "put",
     url: `/files/file/${fileId}/links`,
     data: { access, primary, internal },
-  });
+  })) as TFileLink;
+
+  return res;
 }
 
 // TODO: Need update res type

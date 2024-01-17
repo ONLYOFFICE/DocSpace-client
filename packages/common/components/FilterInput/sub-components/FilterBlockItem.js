@@ -77,12 +77,16 @@ const FilterBlockItem = ({
     const clearSelectorRef = React.useRef(null);
 
     const isRoomsSelector = item.group === FilterGroups.filterRoom;
+    const isGroupsSelector = item.group === FilterGroups.filterGroup;
     const selectorType = isRoomsSelector
       ? FilterSelectorTypes.rooms
+      : isGroupsSelector
+      ? FilterSelectorTypes.groups
       : FilterSelectorTypes.people;
 
     return !item.isSelected ||
       item.selectedKey === "me" ||
+      item.selectedKey === FilterKeys.withoutGroup ||
       item.selectedKey === "other" ? (
       <StyledFilterBlockItemSelector
         style={
@@ -200,19 +204,20 @@ const FilterBlockItem = ({
     const selectorType = isRoomsSelector
       ? FilterSelectorTypes.rooms
       : isGroupsSelector
-      ? "groupSelector"
+      ? FilterSelectorTypes.groups
       : FilterSelectorTypes.people;
 
     if (
       item.group === FilterGroups.filterAuthor ||
-      item.group === FilterGroups.roomFilterSubject
+      item.group === FilterGroups.roomFilterSubject ||
+      item.group === FilterGroups.filterGroup
     ) {
-      const [meItem, otherItem, userItem] = groupItem;
+      const [notSelectorItem, otherItem, selectorItem] = groupItem;
 
       if (
         item.key === otherItem.key &&
-        userItem?.isSelected &&
-        !meItem?.isSelected
+        selectorItem?.isSelected &&
+        !notSelectorItem?.isSelected
       )
         return;
     }

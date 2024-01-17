@@ -6,7 +6,7 @@ import { Selector } from "@docspace/shared/components/selector";
 import { GroupsSelectorProps } from "./GroupsSelector.types";
 
 export const GroupsSelector = (props: GroupsSelectorProps) => {
-  const { id, onBackClick, ...rest } = props;
+  const { id, onBackClick, headerLabel, onAccept, ...rest } = props;
 
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [searchValue, setSearchValue] = useState("");
@@ -37,6 +37,15 @@ export const GroupsSelector = (props: GroupsSelectorProps) => {
 
   const onCancelAction = () => {};
 
+  const onAcceptAction = (
+    items: any,
+    accessRights: any,
+    fileName: string,
+    isChecked: boolean,
+  ) => {
+    onAccept && onAccept(items);
+  };
+
   const onLoadNextPage = async (startIndex: number) => {
     const res = await api.groups.getGroups();
     const convertedItems = res.map((group: any) => ({
@@ -44,7 +53,6 @@ export const GroupsSelector = (props: GroupsSelectorProps) => {
       label: group.name,
     }));
 
-    console.log(res);
     setItems(convertedItems);
   };
 
@@ -55,18 +63,18 @@ export const GroupsSelector = (props: GroupsSelectorProps) => {
   return (
     <Selector
       id={id}
-      headerLabel={"Group list"}
+      headerLabel={headerLabel || "Groups"} // TODO: Add translation
       onBackClick={onBackClick}
       onSearch={onSearchAction}
       onClearSearch={onClearSearchAction}
       onSelect={onSelectAction}
       items={items || []}
-      acceptButtonLabel={"select"}
-      onAccept={() => {}}
+      acceptButtonLabel={"select"} // TODO: Add translation
+      onAccept={onAcceptAction}
       withHeader={true}
       onCancel={onCancelAction}
       selectedItems={[]}
-      totalItems={total || 3}
+      totalItems={total || 3} // TODO: Fix total
       loadNextPage={onLoadNextPage}
       isLoading={false}
     />

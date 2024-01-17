@@ -352,5 +352,5 @@ const GroupsTableItem = (props) => {
 };
 
 export default withTranslation(["People", "Common", "Settings"])(
-  withContent(GroupsTableItem)
+  withContent(GroupsTableItem),
 );

@@ -3,10 +3,10 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import React, { useState, useEffect, useCallback } from "react";
 
-import { Aside } from "@docspace/shared/aside";
-import { Backdrop } from "@docspace/shared/backdrop";
-import { Selector } from "@docspace/shared/selector";
-import { toastr } from "@docspace/shared/toast";
+import { Aside } from "@docspace/shared/components/aside";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Selector } from "@docspace/shared/components/selector";
+import { toastr } from "@docspace/shared/components/toast";
 
 import { getUserRole } from "@docspace/common/utils";
 import Filter from "@docspace/common/api/people/filter";

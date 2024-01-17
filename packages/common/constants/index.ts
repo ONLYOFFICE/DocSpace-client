@@ -485,6 +485,7 @@ export const FilterKeys = Object.freeze({
   other: "other",
   user: "user",
   withoutGroup: "withoutGroup",
+  selectedGroup: "selectedGroup",
 });
 
 export const IndexedDBStores = Object.freeze({
@@ -494,6 +495,7 @@ export const IndexedDBStores = Object.freeze({
 export const FilterSelectorTypes = Object.freeze({
   people: "people-selector",
   rooms: "rooms-selector",
+  groups: "groups-selector",
 });
 
 export const RtlLanguages = [

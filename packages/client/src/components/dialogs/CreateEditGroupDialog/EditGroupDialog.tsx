@@ -60,7 +60,7 @@ const EditGroupDialog = ({
       group.id,
       groupParams.groupName,
       groupManagerId,
-      groupMemebersIds
+      groupMemebersIds,
     )
       .then(() => {
         navigate("/accounts/groups/filter");

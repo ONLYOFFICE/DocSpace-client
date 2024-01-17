@@ -297,7 +297,7 @@ const PeopleTableRow = (props) => {
         setIsLoading(false);
       }
     },
-    [item, changeUserType]
+    [item, changeUserType],
   );
 
   // const getRoomsOptions = React.useCallback(() => {
@@ -521,5 +521,5 @@ const PeopleTableRow = (props) => {
 };
 
 export default withTranslation(["People", "Common", "Settings"])(
-  withContent(PeopleTableRow)
+  withContent(PeopleTableRow),
 );

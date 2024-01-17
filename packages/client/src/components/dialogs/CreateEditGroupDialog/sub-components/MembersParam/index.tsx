@@ -60,7 +60,7 @@ const MembersParam = ({
               groupMember={member}
               onClickRemove={() => onRemoveUserById(member.id)}
             />
-          )
+          ),
       )}
     </div>
   );

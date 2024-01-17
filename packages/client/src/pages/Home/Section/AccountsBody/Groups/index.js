@@ -25,6 +25,6 @@ export default inject(({ peopleStore }) => ({
   accountsViewAs: peopleStore.viewAs,
 }))(
   withTranslation(["People", "Common", "PeopleTranslations"])(
-    withLoader(observer(Groups))()
-  )
+    withLoader(observer(Groups))(),
+  ),
 );

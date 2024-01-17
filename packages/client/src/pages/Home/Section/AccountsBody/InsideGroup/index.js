@@ -51,6 +51,6 @@ export default inject(({ peopleStore }) => ({
   getGroupById: peopleStore.groupsStore.getGroupById,
 }))(
   withTranslation(["People", "Common", "PeopleTranslations"])(
-    withLoader(observer(InsideGroup))()
-  )
+    withLoader(observer(InsideGroup))(),
+  ),
 );

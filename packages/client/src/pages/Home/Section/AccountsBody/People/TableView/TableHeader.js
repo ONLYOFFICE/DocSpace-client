@@ -59,7 +59,7 @@ class PeopleTableHeader extends React.Component {
 
   getColumns = (defaultColumns) => {
     const storageColumns = localStorage.getItem(
-      `${TABLE_COLUMNS}=${this.props.userId}`
+      `${TABLE_COLUMNS}=${this.props.userId}`,
     );
     const columns = [];
 
@@ -190,6 +190,6 @@ export default inject(({ auth, peopleStore, clientLoadingStore }) => {
   };
 })(
   withTranslation(["People", "Common", "PeopleTranslations"])(
-    observer(PeopleTableHeader)
-  )
+    observer(PeopleTableHeader),
+  ),
 );

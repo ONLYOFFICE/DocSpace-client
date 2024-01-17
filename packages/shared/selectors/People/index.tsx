@@ -72,7 +72,7 @@ const PeopleSelector = ({
 
   const [itemsList, setItemsList] = useState(items);
   const [searchValue, setSearchValue] = useState("");
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState<number>(-1);
   const [hasNextPage, setHasNextPage] = useState(true);
   const [isNextPageLoading, setIsNextPageLoading] = useState(false);
   const [isLoading, setIsLoading] = useLoadingWithTimeout<boolean>(
@@ -222,7 +222,8 @@ const PeopleSelector = ({
 
   useEffect(() => {
     loadNextPage(0);
-  }, [loadNextPage]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const emptyScreenImage = theme.isBase
     ? EmptyScreenPersonsSvgUrl

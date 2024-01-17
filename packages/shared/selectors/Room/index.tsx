@@ -64,7 +64,7 @@ const RoomSelector = ({
   const [hasNextPage, setHasNextPage] = React.useState(false);
   const [isNextPageLoading, setIsNextPageLoading] = React.useState(false);
 
-  const [total, setTotal] = React.useState(0);
+  const [total, setTotal] = React.useState(-1);
 
   const [items, setItems] = React.useState<TSelectorItem[]>([]);
 
@@ -134,7 +134,7 @@ const RoomSelector = ({
 
   React.useEffect(() => {
     onLoadNextPage(0);
-  }, [onLoadNextPage, searchValue]);
+  }, []);
 
   return (
     <Selector

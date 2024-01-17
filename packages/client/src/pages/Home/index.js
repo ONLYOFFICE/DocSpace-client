@@ -6,7 +6,7 @@ import { withTranslation } from "react-i18next";
 
 import { showLoader, hideLoader } from "@docspace/shared/utils/common";
 
-import Section from "@docspace/common/components/Section";
+import Section from "@docspace/shared/components/section";
 import SectionWrapper from "SRC_DIR/components/Section";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
 

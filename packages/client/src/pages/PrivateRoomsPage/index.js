@@ -5,7 +5,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { Button } from "@docspace/shared/components/button";
 import { Loader } from "@docspace/shared/components/loader";
-import Section from "@docspace/common/components/Section";
+import Section from "@docspace/shared/components/section";
 import SectionWrapper from "SRC_DIR/components/Section";
 import { mobile, tablet } from "@docspace/shared/utils";
 import { I18nextProvider, Trans, withTranslation } from "react-i18next";

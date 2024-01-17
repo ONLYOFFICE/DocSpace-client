@@ -52,7 +52,6 @@ const Webhooks = (props) => {
   const {
     loadWebhooks,
     addWebhook,
-    isWebhookExist,
     isWebhooksEmpty,
     setDocumentTitle,
     currentWebhook,
@@ -154,7 +153,6 @@ export default inject(({ webhooksStore, auth }) => {
     state,
     loadWebhooks,
     addWebhook,
-    isWebhookExist,
     isWebhooksEmpty,
     currentWebhook,
     editWebhook,
@@ -166,7 +164,6 @@ export default inject(({ webhooksStore, auth }) => {
     state,
     loadWebhooks,
     addWebhook,
-    isWebhookExist,
     isWebhooksEmpty,
     setDocumentTitle,
     currentWebhook,

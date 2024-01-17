@@ -88,10 +88,10 @@ const FilterDialog = (props) => {
   const [filters, setFilters] = useState({
     deliveryDate: null,
     deliveryFrom: moment()
-      .tz(window.timezone || "")
+      .tz(window.timezone)
       .startOf("day"),
     deliveryTo: moment()
-      .tz(window.timezone || "")
+      .tz(window.timezone)
       .endOf("day"),
     status: [],
   });
@@ -118,10 +118,10 @@ const FilterDialog = (props) => {
         setFilters({
           deliveryDate: null,
           deliveryFrom: moment()
-            .tz(window.timezone || "")
+            .tz(window.timezone)
             .startOf("day"),
           deliveryTo: moment()
-            .tz(window.timezone || "")
+            .tz(window.timezone)
             .endOf("day"),
           status: [],
         });

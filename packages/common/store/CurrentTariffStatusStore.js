@@ -78,14 +78,14 @@ class CurrentTariffStatusStore {
     moment.locale(this.authStore.language);
     if (this.dueDate === null) return "";
     return moment(this.dueDate)
-      .tz(window.timezone || "")
+      .tz(window.timezone)
       .format("LL");
   }
 
   isValidDate = (date) => {
     return (
       moment(date)
-        .tz(window.timezone || "")
+        .tz(window.timezone)
         .year() !== 9999
     );
   };
@@ -97,13 +97,13 @@ class CurrentTariffStatusStore {
   get isLicenseDateExpired() {
     if (!this.isPaymentDateValid) return;
 
-    return moment() > moment(this.dueDate).tz(window.timezone || "");
+    return moment() > moment(this.dueDate).tz(window.timezone);
   }
   get gracePeriodEndDate() {
     moment.locale(this.authStore.language);
     if (this.delayDueDate === null) return "";
     return moment(this.delayDueDate)
-      .tz(window.timezone || "")
+      .tz(window.timezone)
       .format("LL");
   }
 

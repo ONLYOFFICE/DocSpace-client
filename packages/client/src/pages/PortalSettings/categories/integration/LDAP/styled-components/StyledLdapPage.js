@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
-import {Box} from "@docspace/shared/components/box";
+import { Box } from "@docspace/shared/components/box";
 
 const StyledLdapPage = styled(Box)`
   max-width: ${(props) => (props.isSmallWindow ? "100%" : "700px")};
@@ -46,11 +46,6 @@ const StyledLdapPage = styled(Box)`
   .ldap_connection-container {
     margin: 20px 0 28px 0;
     display: grid;
-    ${(props) =>
-      !props.isMobileView &&
-      css`
-        grid-template-columns: minmax(100px, 340px) 1fr;
-      `}
     grid-gap: 12px;
   }
 
@@ -61,11 +56,6 @@ const StyledLdapPage = styled(Box)`
       margin-bottom: 16px;
     }
     display: grid;
-    ${(props) =>
-      !props.isMobileView &&
-      css`
-        grid-template-columns: minmax(100px, 340px) 1fr;
-      `}
     grid-gap: 12px;
   }
 
@@ -81,12 +71,18 @@ const StyledLdapPage = styled(Box)`
     margin-top: 18px;
     margin-bottom: 12px;
     display: grid;
+    grid-gap: 12px;
+  }
+
+  .group_membership-container,
+  .ldap_attribute-mapping,
+  .ldap_connection-container,
+  .ldap_authentication {
     ${(props) =>
       !props.isMobileView &&
       css`
         grid-template-columns: minmax(100px, 340px) 1fr;
       `}
-    grid-gap: 12px;
   }
 
   .ldap_cron-title {
@@ -123,11 +119,6 @@ const StyledLdapPage = styled(Box)`
   .ldap_authentication {
     margin: 16px 0;
     display: grid;
-    ${(props) =>
-      !props.isMobileView &&
-      css`
-        grid-template-columns: minmax(100px, 340px) 1fr;
-      `}
     grid-gap: 12px;
   }
   .ldap_advanced-settings {

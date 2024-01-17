@@ -10,8 +10,8 @@ import AttributeMapping from "./AttributeMapping";
 import ButtonsContainer from "./ButtonsContainer";
 import AuthenticationContainer from "./AuthenticationContainer";
 import AdvancedSettings from "./AdvancedSettings";
-import {Box} from "@docspace/shared/components/box";
-import {Text} from "@docspace/shared/components/text";
+import { Box } from "@docspace/shared/components/box";
+import { Text } from "@docspace/shared/components/text";
 import StyledLdapPage from "../styled-components/StyledLdapPage";
 import { useNavigate } from "react-router-dom";
 import { isMobile } from "@docspace/shared/utils/device";
@@ -45,11 +45,13 @@ const SettingsContainer = ({
 
   const renderBody = () => (
     <>
-      <HideButton
-        text={t("Settings:LDAP")}
-        value={isSettingsShown}
-        isDisabled={!isLdapAvailable}
-      />
+      {!isMobileView && (
+        <HideButton
+          text={t("Settings:LDAP")}
+          value={isSettingsShown}
+          isDisabled={!isLdapAvailable}
+        />
+      )}
 
       {isSettingsShown && (
         <>

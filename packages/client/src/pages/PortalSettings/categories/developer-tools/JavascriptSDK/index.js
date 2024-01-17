@@ -17,7 +17,6 @@ import { RoomsType } from "@docspace/common/constants";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 import HelpButton from "@docspace/components/help-button";
 import Link from "@docspace/components/link";
 
@@ -496,7 +495,6 @@ const PortalIntegration = (props) => {
   const preview = (
     <Frame width={width} height={width} targetId={frameId}>
       <Box id={frameId}></Box>
-      <RectangleSkeleton width={width} height={height} borderRadius="6px" />
     </Frame>
   );
 
@@ -530,8 +528,7 @@ const PortalIntegration = (props) => {
           color={currentColorScheme?.main?.accent}
           fontSize="12px"
           fontWeight="400"
-          onClick={() => window.open(sdkLink, "_blank")}
-        >
+          onClick={() => window.open(sdkLink, "_blank")}>
           {t("APILink")}.
         </Link>
         <CSP t={t} />

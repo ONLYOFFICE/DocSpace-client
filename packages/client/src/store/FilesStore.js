@@ -1712,6 +1712,7 @@ class FilesStore {
             }
           }
 
+          this.authStore.infoPanelStore.setInfoPanelRoom(null);
           this.selectedFolderStore.setSelectedFolder({
             folders: data.folders,
             ...data.current,

@@ -2215,7 +2215,9 @@ class FilesActionStore {
   onClickBack = () => {
     const { roomType, ...rest } = this.selectedFolderStore;
     const { setSelectedNode } = this.treeFoldersStore;
-    const { clearFiles } = this.filesStore;
+    const { clearFiles, setBufferSelection } = this.filesStore;
+
+    setBufferSelection(null);
 
     const categoryType = getCategoryType(window.DocSpace.location);
 

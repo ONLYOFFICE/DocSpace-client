@@ -36,7 +36,8 @@ const InfoPanelBodyContent = ({
     infoPanelSelection?.isFolder &&
     infoPanelSelection?.id === infoPanelSelection?.rootFolderId;
   const isNoItem =
-    !isSeveralItems && (isNoItemGallery || (isRoot && !isGallery));
+    !infoPanelSelection ||
+    (!isSeveralItems && (isNoItemGallery || (isRoot && !isGallery)));
 
   const defaultProps = {
     infoPanelSelection,
@@ -116,8 +117,6 @@ const InfoPanelBodyContent = ({
     setInfoPanelSelection(infoSelection);
   }, [selectedItems, selectedFolder]);
 
-  if (!infoPanelSelection && !isGallery) return null;
-
   return (
     <StyledInfoPanelBody>
       {!isNoItem && (
@@ -153,7 +152,9 @@ export default inject(({ auth, selectedFolderStore, oformsStore }) => {
   const { isRootFolder } = selectedFolderStore;
 
   const selectedFolder =
-    infoPanelRoom ?? selectedFolderStore.getSelectedFolder();
+    roomsView === "info_members" && infoPanelRoom
+      ? infoPanelRoom
+      : selectedFolderStore.getSelectedFolder();
 
   return {
     infoPanelSelection,

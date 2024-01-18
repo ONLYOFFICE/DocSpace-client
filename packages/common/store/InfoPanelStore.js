@@ -341,7 +341,7 @@ class InfoPanelStore {
     ) {
       this.infoPanelSelection = infoPanelSelection.length
         ? infoPanelSelection
-        : {};
+        : null;
       return;
     }
 
@@ -350,7 +350,9 @@ class InfoPanelStore {
   };
 
   setInfoPanelRoom = (infoPanelRoom) => {
-    this.infoPanelRoom = this.normalizeSelection(infoPanelRoom);
+    this.infoPanelRoom = infoPanelRoom
+      ? this.normalizeSelection(infoPanelRoom)
+      : infoPanelRoom;
   };
 }
 

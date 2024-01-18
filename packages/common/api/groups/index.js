@@ -1,3 +1,4 @@
+import { AccountsSearchArea } from "../../constants";
 import { request } from "../client";
 
 // * Create
@@ -33,7 +34,7 @@ export const getGroupById = (groupId) => {
 export const getGroupsByName = (groupName, startIndex = 0, pageCount = 100) => {
   return request({
     method: "get",
-    url: `/accounts?searchArea=1&filterValue=${groupName}&startIndex=${startIndex}&count=${pageCount}`,
+    url: `/accounts?searchArea=${AccountsSearchArea.Groups}&filterValue=${groupName}&startIndex=${startIndex}&count=${pageCount}`,
     data: { groupName },
   });
 };

@@ -22,7 +22,12 @@ import {
 import { EditorWrapper } from "../components/StyledEditor";
 import { useTranslation } from "react-i18next";
 import withDialogs from "../helpers/withDialogs";
-import { assign, frameCallEvent, getEditorTheme } from "@docspace/common/utils";
+import {
+  assign,
+  frameCallEvent,
+  getEditorTheme,
+  frameCallCommand,
+} from "@docspace/common/utils";
 import toastr from "@docspace/components/toast/toastr";
 import { DocumentEditor } from "@onlyoffice/document-editor-react";
 import ErrorContainer from "@docspace/common/components/ErrorContainer";
@@ -552,6 +557,8 @@ function Editor({
     // if (isSharingAccess) {
     //   loadUsersRightsList(docEditor);
     // }
+
+    frameCallCommand("setIsLoaded");
 
     assign(window, ["ASC", "Files", "Editor", "docEditor"], docEditor); //Do not remove: it's for Back button on Mobile App
   };

@@ -222,7 +222,6 @@ const PureHome = (props) => {
     loadCurrentUser,
     updateProfileCulture,
     getRooms,
-    setIsLoading,
     isLoading,
   });
 

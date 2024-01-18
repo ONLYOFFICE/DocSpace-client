@@ -17,7 +17,6 @@ const useSDK = ({
   createRoom,
   refreshFiles,
   setViewAs,
-
   getSettings,
   logout,
   login,
@@ -27,7 +26,6 @@ const useSDK = ({
   loadCurrentUser,
   updateProfileCulture,
   getRooms,
-  setIsLoading,
   isLoading,
 }) => {
   const handleMessage = async (e) => {
@@ -171,24 +169,7 @@ const useSDK = ({
     }
   };
 
-  // if (window.parent && !frameConfig) {
-  //   frameCallCommand("setConfig");
-  // }
-
-  const callCommandLoad = useCallback(
-    () => frameCallCommand("setIsLoaded"),
-    [frameCallCommand]
-  );
-
   useEffect(() => {
-    setTimeout(() => {
-      if (isLoading) {
-        callCommandLoad("setIsLoaded");
-      }
-    }, 750);
-  }, [callCommandLoad, isLoading]);
-
-  React.useEffect(() => {
     window.addEventListener("message", handleMessage, false);
 
     return () => {
@@ -196,9 +177,13 @@ const useSDK = ({
     };
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     frameCallCommand("setConfig");
   }, [frameConfig?.frameId]);
+
+  useEffect(() => {
+    if (!isLoading) frameCallCommand("setIsLoaded");
+  }, [isLoading]);
 };
 
 export default useSDK;

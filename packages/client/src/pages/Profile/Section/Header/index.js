@@ -140,7 +140,7 @@ const Header = (props) => {
         className="arrow-button"
       />
 
-      <Headline className="header-headline" type="content" truncate={true}>
+      <Headline className="header-headline" type="content">
         {t("Profile:MyProfile")}
         {profile?.isLDAP && ` (${t("PeopleTranslations:LDAPLbl")})`}
       </Headline>
@@ -157,7 +157,9 @@ const Header = (props) => {
           />
         )}
 
-        <TariffBar />
+        <div className="tariff-bar">
+          <TariffBar />
+        </div>
       </div>
 
       {deleteSelfProfileDialog && (

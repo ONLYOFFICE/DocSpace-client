@@ -2,7 +2,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
 import uniqueid from "lodash/uniqueId";
 import sumBy from "lodash/sumBy";
-import { ConflictResolveType } from "@docspace/common/constants";
+import { ConflictResolveType } from "@docspace/shared/enums";
 import {
   getFileInfo,
   getFolderInfo,
@@ -16,14 +16,14 @@ import {
   fileCopyAs,
   getFolder,
   checkIsFileExist,
-} from "@docspace/common/api/files";
-import toastr from "@docspace/components/toast/toastr";
+} from "@docspace/shared/api/files";
+import { toastr } from "@docspace/shared/components/toast";
 
 import {
   isMobile as isMobileUtils,
   isTablet as isTabletUtils,
-} from "@docspace/components/utils/device";
-import { combineUrl } from "@docspace/common/utils";
+} from "@docspace/shared/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 import { getUnexpectedErrorText } from "SRC_DIR/helpers/filesUtils";
 import {
@@ -667,10 +667,12 @@ class UploadDataStore {
     this.uploadedFilesHistory = newUploadData.files;
     this.setUploadData(newUploadData);
     this.startUploadFiles(t, createNewIfExist);
-  }
+  };
 
   handleUploadConflicts = async (t, toFolderId, newUploadData) => {
-    const filesArray = newUploadData.files.map((fileInfo) => fileInfo.file.name);
+    const filesArray = newUploadData.files.map(
+      (fileInfo) => fileInfo.file.name
+    );
     let conflicts = await checkIsFileExist(toFolderId, filesArray);
     const folderInfo = await getFolderInfo(toFolderId);
 
@@ -689,7 +691,7 @@ class UploadDataStore {
 
   startUpload = (uploadFiles, folderId, t) => {
     const { canConvert } = this.settingsStore;
-    
+
     const toFolderId = folderId ? folderId : this.selectedFolderStore.id;
 
     if (this.uploaded) {
@@ -716,8 +718,8 @@ class UploadDataStore {
         const filePath = file.path
           ? file.path
           : file.webkitRelativePath
-          ? file.webkitRelativePath
-          : file.name;
+            ? file.webkitRelativePath
+            : file.name;
 
         return file.name !== filePath;
       }) > -1;
@@ -1128,8 +1130,8 @@ class UploadDataStore {
     const relativePath = file.path
       ? file.path.slice(1, -file.name.length)
       : file.webkitRelativePath
-      ? file.webkitRelativePath.slice(0, -file.name.length)
-      : "";
+        ? file.webkitRelativePath.slice(0, -file.name.length)
+        : "";
 
     return startUploadSession(
       toFolderId,

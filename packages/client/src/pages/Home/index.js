@@ -4,10 +4,10 @@ import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { showLoader, hideLoader } from "@docspace/common/utils";
+import { showLoader, hideLoader } from "@docspace/shared/utils/common";
 
 import Section from "@docspace/common/components/Section";
-
+import SectionWrapper from "SRC_DIR/components/Section";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
 
 import {
@@ -289,7 +289,7 @@ const PureHome = (props) => {
         </>
       )}
       <MediaViewer />
-      <Section {...sectionProps}>
+      <SectionWrapper {...sectionProps}>
         {(!isErrorRoomNotAvailable || isAccountsPage || isSettingsPage) && (
           <Section.SectionHeader>
             {isFrame ? (
@@ -334,7 +334,7 @@ const PureHome = (props) => {
             <SectionPagingContent tReady={tReady} />
           </Section.SectionPaging>
         )}
-      </Section>
+      </SectionWrapper>
     </>
   );
 };

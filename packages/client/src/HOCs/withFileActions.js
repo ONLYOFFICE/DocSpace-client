@@ -1,7 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 export default function withFileActions(WrappedFileItem) {
   class WithFileActions extends React.Component {
@@ -110,8 +110,8 @@ export default function withFileActions(WrappedFileItem) {
       const mouseButton = e.which
         ? e.which !== 1
         : e.button
-        ? e.button !== 0
-        : false;
+          ? e.button !== 0
+          : false;
       const label = e.currentTarget.getAttribute("label");
       if (mouseButton || e.currentTarget.tagName !== "DIV" || label) {
         return e;
@@ -260,8 +260,8 @@ export default function withFileActions(WrappedFileItem) {
       let value = item.isFolder
         ? `folder_${id}`
         : item.isDash
-        ? `dash_${id}`
-        : `file_${id}`;
+          ? `dash_${id}`
+          : `file_${id}`;
       value += draggable ? "_draggable" : "_false";
 
       value += `_index_${itemIndex}`;
@@ -273,8 +273,8 @@ export default function withFileActions(WrappedFileItem) {
       const displayShareButton = isMobileView
         ? "26px"
         : !isShareable
-        ? "38px"
-        : "96px";
+          ? "38px"
+          : "96px";
 
       const checkedProps = id <= 0 ? false : isSelected;
 

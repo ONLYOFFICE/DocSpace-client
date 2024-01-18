@@ -1,8 +1,8 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import ComboBox from "@docspace/components/combobox";
-import FieldContainer from "@docspace/components/field-container";
+import { ComboBox } from "@docspace/shared/components/combobox";
+import { FieldContainer } from "@docspace/shared/components/field-container";
 
 import StyledInputWrapper from "../styled-containers/StyledInputWrapper";
 

@@ -10,7 +10,7 @@ import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 //@ts-ignore
 import { Consumer } from "@docspace/components/utils/context";
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 
 //@ts-ignore
 import { OAuthStoreProps, ViewAsType } from "SRC_DIR/store/OAuthStore";

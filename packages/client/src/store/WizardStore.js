@@ -3,7 +3,7 @@ import {
   setPortalOwner,
   getIsLicenseRequired,
   setLicense,
-} from "@docspace/common/api/settings";
+} from "@docspace/shared/api/settings";
 import { makeAutoObservable } from "mobx";
 
 class WizardStore {

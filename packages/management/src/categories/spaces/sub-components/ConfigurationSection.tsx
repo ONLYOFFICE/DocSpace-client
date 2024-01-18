@@ -1,13 +1,13 @@
 import React from "react";
 import { observer } from "mobx-react";
-import Button from "@docspace/components/button";
-import TextInput from "@docspace/components/text-input";
-import Text from "@docspace/components/text";
+import { Button } from "@docspace/shared/components/button";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { Text } from "@docspace/shared/components/text";
 import { ConfigurationWrapper } from "../StyledSpaces";
 import { useStore } from "SRC_DIR/store";
 import { parseDomain, validatePortalName } from "SRC_DIR/utils";
 import { isMobile } from "react-device-detect";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 
 import { TranslationType } from "SRC_DIR/types/spaces";
 
@@ -30,13 +30,19 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
     React.useState<null | Array<object>>(null);
 
   const { spacesStore, authStore } = useStore();
-  const { checkDomain, setDomainName, setPortalName } = spacesStore;
+  const {
+    checkDomain,
+    setDomainName,
+    setPortalName,
+    setReferenceLink,
+    setSpaceCreatedDialogVisible,
+  } = spacesStore;
 
   const onConfigurationPortal = async () => {
     if (window?.DocSpaceConfig?.management?.checkDomain) {
       setIsLoading(true);
-      const checkDomainResult = await checkDomain(`${name}.${domain}`).finally(() =>
-        setIsLoading(false)
+      const checkDomainResult = await checkDomain(`${name}.${domain}`).finally(
+        () => setIsLoading(false)
       );
       const isValidDomain = checkDomainResult?.value;
 
@@ -48,21 +54,27 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
     const nameValidator = authStore.settingsStore.domainValidator;
 
     const isValidDomain = parseDomain(domain, setDomainNameError, t);
-    const isValidPortalName = validatePortalName(name, nameValidator, setPortalNameError, t)
+    const isValidPortalName = validatePortalName(
+      name,
+      nameValidator,
+      setPortalNameError,
+      t
+    );
 
     if (isValidDomain && isValidPortalName) {
-
       try {
+        setIsLoading(true);
         await setDomainName(domain);
         await setPortalName(name).then((result) => {
-          let url = new URL(result);
-          url.searchParams.append("referenceUrl", "/management");
-          return window.location.replace(url);
-        })
+          setReferenceLink(result);
+          setSpaceCreatedDialogVisible(true);
+        });
+
         await authStore.settingsStore.getAllPortals();
-        
       } catch (err) {
         toastr.error(err);
+      } finally {
+        setIsLoading(false);
       }
     }
   };
@@ -87,7 +99,9 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
             {t("ConfigurationHeader")}
           </Text>
         </div>
-        <Text fontSize="12px" lineHeight="16px" fontWeight={400}>{t("ConfigurationDescription")}</Text>
+        <Text fontSize="12px" lineHeight="16px" fontWeight={400}>
+          {t("ConfigurationDescription")}
+        </Text>
       </div>
       <div className="spaces-input-wrapper">
         <div className="spaces-input-block">
@@ -110,7 +124,7 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
             className="spaces-input"
             tabIndex={1}
           />
-          <div style={{"marginTop": "5px"}}>
+          <div style={{ marginTop: "5px" }}>
             {domainNameError &&
               domainNameError.map((err, index) => (
                 <Text
@@ -151,7 +165,7 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
         label={t("Common:Connect")}
         onClick={onConfigurationPortal}
         primary={true}
-        style={{"marginTop": "2px"}}
+        style={{ marginTop: "2px" }}
         tabIndex={3}
       />
     </ConfigurationWrapper>

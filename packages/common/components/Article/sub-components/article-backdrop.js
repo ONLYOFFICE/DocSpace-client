@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import Backdrop from "@docspace/components/backdrop";
+import { Backdrop } from "@docspace/shared/components/backdrop";
 
 import { StyledControlContainer, StyledCrossIcon } from "../styled-article";
 

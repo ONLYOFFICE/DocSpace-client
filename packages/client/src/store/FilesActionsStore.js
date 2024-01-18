@@ -23,7 +23,7 @@ import {
   createFolder,
   moveToFolder,
   getFolder,
-} from "@docspace/common/api/files";
+} from "@docspace/shared/api/files";
 import {
   ConflictResolveType,
   FileAction,
@@ -31,25 +31,25 @@ import {
   FolderType,
   RoomsType,
   ShareAccessRights,
-} from "@docspace/common/constants";
+} from "@docspace/shared/enums";
 import { makeAutoObservable } from "mobx";
 
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 import { TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
 import { checkProtocol } from "../helpers/files-helpers";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
-import { isDesktop } from "@docspace/components/utils/device";
+import { isDesktop } from "@docspace/shared/utils";
 import { getCategoryType } from "SRC_DIR/helpers/utils";
-import { muteRoomNotification } from "@docspace/common/api/settings";
+import { muteRoomNotification } from "@docspace/shared/api/settings";
 import { CategoryType } from "SRC_DIR/helpers/constants";
-import RoomsFilter from "@docspace/common/api/rooms/filter";
-import AccountsFilter from "@docspace/common/api/people/filter";
-import { RoomSearchArea } from "@docspace/common/constants";
-import { getObjectByLocation } from "@docspace/common/utils";
-import { Events } from "@docspace/common/constants";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import AccountsFilter from "@docspace/shared/api/people/filter";
+import { RoomSearchArea } from "@docspace/shared/enums";
+import { getObjectByLocation } from "@docspace/shared/utils/common";
+import { Events } from "@docspace/shared/enums";
 import uniqueid from "lodash/uniqueId";
-import FilesFilter from "@docspace/common/api/files/filter";
+import FilesFilter from "@docspace/shared/api/files/filter";
 import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
@@ -288,8 +288,8 @@ class FilesActionStore {
     const selection = newSelection
       ? newSelection
       : this.filesStore.selection.length
-      ? this.filesStore.selection
-      : [bufferSelection];
+        ? this.filesStore.selection
+        : [bufferSelection];
     const isThirdPartyFile = selection.some((f) => f.providerKey);
 
     const currentFolderId = this.selectedFolderStore.id;
@@ -609,18 +609,16 @@ class FilesActionStore {
     }
   };
 
-  downloadAction = (label, folderId) => {
+  downloadAction = (label, item, folderId) => {
     const { bufferSelection } = this.filesStore;
-    const { isVisible: infoPanelIsVisible, selection: infoPanelSelection } =
-      this.authStore.infoPanelStore;
 
-    const selection = this.filesStore.selection.length
-      ? this.filesStore.selection
-      : bufferSelection
-      ? [bufferSelection]
-      : infoPanelIsVisible && infoPanelSelection != null
-      ? [infoPanelSelection]
-      : null;
+    const selection = item
+      ? [item]
+      : this.filesStore.selection.length
+        ? this.filesStore.selection
+        : bufferSelection
+          ? [bufferSelection]
+          : null;
 
     if (!selection.length) return;
 
@@ -872,9 +870,9 @@ class FilesActionStore {
     const { setUnsubscribe } = this.dialogsStore;
     const { filter, fetchFiles } = this.filesStore;
 
-    return removeShareFiles(fileIds, folderIds)
-      .then(() => setUnsubscribe(false))
-      .then(() => fetchFiles(this.selectedFolderStore.id, filter, true, true));
+    // return removeShareFiles(fileIds, folderIds)
+    //   .then(() => setUnsubscribe(false))
+    //   .then(() => fetchFiles(this.selectedFolderStore.id, filter, true, true));
   };
 
   lockFileAction = async (id, locked) => {
@@ -1168,8 +1166,8 @@ class FilesActionStore {
               folders.length !== 1 && Array.isArray(folders)
                 ? t("ArchivedRoomsAction")
                 : Array.isArray(folders)
-                ? t("ArchivedRoomAction", { name: folders[0].title })
-                : t("ArchivedRoomAction", { name: folders.title });
+                  ? t("ArchivedRoomAction", { name: folders[0].title })
+                  : t("ArchivedRoomAction", { name: folders.title });
 
             toastr.success(successTranslation);
           })
@@ -1221,8 +1219,8 @@ class FilesActionStore {
               folders.length !== 1 && Array.isArray(folders)
                 ? t("UnarchivedRoomsAction")
                 : Array.isArray(folders)
-                ? t("UnarchivedRoomAction", { name: folders[0].title })
-                : t("UnarchivedRoomAction", { name: folders.title });
+                  ? t("UnarchivedRoomAction", { name: folders[0].title })
+                  : t("UnarchivedRoomAction", { name: folders.title });
 
             toastr.success(successTranslation);
           })
@@ -2099,8 +2097,10 @@ class FilesActionStore {
 
     const { roomType, title: currentTitle } = this.selectedFolderStore;
 
-    if (this.publicRoomStore.isPublicRoom && item.isFolder)
+    if (this.publicRoomStore.isPublicRoom && item.isFolder) {
+      setSelection([]);
       return this.moveToPublicRoom(item.id);
+    }
 
     const setIsLoading = (param) => {
       setIsSectionFilterLoading(param);
@@ -2281,8 +2281,8 @@ class FilesActionStore {
       categoryType === CategoryType.SharedRoom
         ? CategoryType.Shared
         : CategoryType.ArchivedRoom === categoryType
-        ? CategoryType.Archive
-        : categoryType;
+          ? CategoryType.Archive
+          : categoryType;
 
     const path = getCategoryUrl(correctCategoryType);
 
@@ -2434,8 +2434,8 @@ class FilesActionStore {
     const roomId = selection.length
       ? selection[0].id
       : bufferSelection
-      ? bufferSelection.id
-      : this.selectedFolderStore.id;
+        ? bufferSelection.id
+        : this.selectedFolderStore.id;
 
     const isAdmin = user.isOwner || user.isAdmin;
     const isRoot = this.selectedFolderStore.isRootFolder;
@@ -2453,10 +2453,16 @@ class FilesActionStore {
           removeFiles(null, [roomId]);
         }
       } else {
-        const newFolders = folders;
-        const folderIndex = newFolders.findIndex((r) => r.id === roomId);
-        newFolders[folderIndex].inRoom = false;
-        setFolders(newFolders);
+        if (!isRoot) {
+          this.selectedFolderStore.setInRoom(false);
+        } else {
+          const newFolders = folders;
+          const folderIndex = newFolders.findIndex((r) => r.id === roomId);
+          if (folderIndex > -1) {
+            newFolders[folderIndex].inRoom = false;
+            setFolders(newFolders);
+          }
+        }
       }
 
       isOwner
@@ -2468,13 +2474,14 @@ class FilesActionStore {
   changeRoomOwner = (t, userId, isLeaveChecked = false) => {
     const { setRoomOwner, setFolder, setSelected, selection, bufferSelection } =
       this.filesStore;
-    const { isRootFolder, setCreatedBy, id } = this.selectedFolderStore;
+    const { isRootFolder, setCreatedBy, id, setInRoom } =
+      this.selectedFolderStore;
 
     const roomId = selection.length
       ? selection[0].id
       : bufferSelection
-      ? bufferSelection.id
-      : id;
+        ? bufferSelection.id
+        : id;
 
     return setRoomOwner(userId, [roomId])
       .then(async (res) => {
@@ -2482,6 +2489,9 @@ class FilesActionStore {
           setFolder(res[0]);
         } else {
           setCreatedBy(res[0].createdBy);
+
+          const isMe = userId === this.authStore.userStore.user.id;
+          if (isMe) setInRoom(true);
         }
 
         if (isLeaveChecked) await this.onLeaveRoom(t);

@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import Heading from "@docspace/components/heading";
-import Base from "@docspace/components/themes/base";
-import NoUserSelect from "@docspace/components/utils/commonStyles";
-import { tablet } from "@docspace/components/utils/device";
+import { Heading } from "@docspace/shared/components/heading";
+import { Base } from "@docspace/shared/themes";
+import { NoUserSelect, tablet } from "@docspace/shared/utils";
+
 const size = {
   header: "28px",
   menu: "23px",

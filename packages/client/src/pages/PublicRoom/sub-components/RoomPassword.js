@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { withTranslation } from "react-i18next";
-import Text from "@docspace/components/text";
-import PasswordInput from "@docspace/components/password-input";
-import Button from "@docspace/components/button";
-import FieldContainer from "@docspace/components/field-container";
+import { Text } from "@docspace/shared/components/text";
+import { PasswordInput } from "@docspace/shared/components/password-input";
+import { Button } from "@docspace/shared/components/button";
+import { FieldContainer } from "@docspace/shared/components/field-container";
 import { inject, observer } from "mobx-react";
 import { StyledPage, StyledBody, StyledContent } from "./RoomStyles";
-// import { createPasswordHash } from "@docspace/common/utils";
-import toastr from "@docspace/components/toast/toastr";
-import FormWrapper from "@docspace/components/form-wrapper";
+// import { createPasswordHash } from "@docspace/shared/utils/common";
+import { toastr } from "@docspace/shared/components/toast";
+import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import DocspaceLogo from "../../../DocspaceLogo";
 import { ValidationStatus } from "../../../helpers/constants";
 
@@ -17,6 +17,8 @@ import PublicRoomIcon from "PUBLIC_DIR/images/icons/32/room/public.svg";
 const RoomPassword = (props) => {
   const { t, roomKey, validatePublicRoomPassword, setRoomData, roomTitle } =
     props;
+
+  console.log("render");
 
   const [password, setPassword] = useState("");
   const [passwordValid, setPasswordValid] = useState(true);

@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
-import { Base } from "@docspace/components/themes";
-import { mobile, tablet, desktop } from "@docspace/components/utils/device";
+import { Base } from "@docspace/shared/themes";
+import { mobile, tablet, desktop } from "@docspace/shared/utils";
 
 const StyledInfoPanelBody = styled.div`
   height: auto;

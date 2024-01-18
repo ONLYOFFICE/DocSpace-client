@@ -40,29 +40,30 @@ import copy from "copy-to-clipboard";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import Loaders from "@docspace/common/components/Loaders";
-import Navigation from "@docspace/common/components/Navigation";
-import FilesFilter from "@docspace/common/api/files/filter";
-import { resendInvitesAgain } from "@docspace/common/api/people";
+import Navigation from "@docspace/shared/components/Navigation";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { resendInvitesAgain } from "@docspace/shared/api/people";
 
-import DropDownItem from "@docspace/components/drop-down-item";
-import { tablet, mobile } from "@docspace/components/utils/device";
-import { Consumer } from "@docspace/components/utils/context";
-import toastr from "@docspace/components/toast/toastr";
-import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { tablet, mobile, Consumer } from "@docspace/shared/utils";
+
+import { toastr } from "@docspace/shared/components/toast";
+import { TableGroupMenu } from "@docspace/shared/components/table";
 import {
   Events,
   EmployeeType,
   RoomsType,
   DeviceType,
   FolderType,
-} from "@docspace/common/constants";
+  ShareAccessRights,
+} from "@docspace/shared/enums";
 
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
-import { getLogoFromPath } from "@docspace/common/utils";
+import { getLogoFromPath } from "@docspace/shared/utils";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -479,10 +480,9 @@ const SectionHeaderContent = (props) => {
   };
 
   const onDownloadAction = () => {
-    setBufferSelection(selectedFolder);
-    downloadAction(t("Translations:ArchivingData"), [currentFolderId]).catch(
-      (err) => toastr.error(err)
-    );
+    downloadAction(t("Translations:ArchivingData"), selectedFolder, [
+      currentFolderId,
+    ]).catch((err) => toastr.error(err));
   };
 
   const onClickArchiveAction = (e) => {
@@ -601,6 +601,7 @@ const SectionHeaderContent = (props) => {
       canDeleteAll,
 
       security,
+      haveLinksRight,
       isPublicRoomType,
       isPublicRoom,
     } = props;
@@ -674,8 +675,7 @@ const SectionHeaderContent = (props) => {
         disabled:
           isRecycleBinFolder ||
           isPersonalRoom ||
-          isPublicRoomType ||
-          isCustomRoomType,
+          ((isPublicRoomType || isCustomRoomType) && haveLinksRight),
         icon: InvitationLinkReactSvgUrl,
       },
       {
@@ -736,7 +736,7 @@ const SectionHeaderContent = (props) => {
             }
           }
         },
-        disabled: !isPublicRoomType && !isCustomRoomType,
+        disabled: (!isPublicRoomType && !isCustomRoomType) || !haveLinksRight,
       },
       {
         id: "header_option_invite-users-to-room",
@@ -1006,10 +1006,10 @@ const SectionHeaderContent = (props) => {
   const currentTitle = isSettingsPage
     ? t("Common:Settings")
     : isAccountsPage
-    ? t("Common:Accounts")
-    : isLoading && stateTitle
-    ? stateTitle
-    : title;
+      ? t("Common:Accounts")
+      : isLoading && stateTitle
+        ? stateTitle
+        : title;
 
   const currentCanCreate =
     isLoading && location?.state?.hasOwnProperty("canCreate")
@@ -1096,7 +1096,7 @@ const SectionHeaderContent = (props) => {
                 withMenu={!isRoomsFolder}
                 onPlusClick={onCreateRoom}
                 isEmptyPage={isEmptyPage}
-                isRoom={isCurrentRoom}
+                isRoom={isCurrentRoom || isAccountsPage}
                 hideInfoPanel={isSettingsPage || isPublicRoom}
                 withLogo={isPublicRoom && logo}
                 burgerLogo={isPublicRoom && burgerLogo}
@@ -1210,15 +1210,24 @@ export default inject(
       onClickBack,
       emptyTrashInProgress,
       moveToPublicRoom,
-      onClickCreateRoom
+      onClickCreateRoom,
     } = filesActionsStore;
 
     const { oformsFilter } = oformsStore;
 
     const { setIsVisible, isVisible } = auth.infoPanelStore;
 
-    const { title, id, roomType, pathParts, navigationPath, security, inRoom } =
-      selectedFolderStore;
+    const {
+      title,
+      id,
+      roomType,
+      pathParts,
+      navigationPath,
+      security,
+      inRoom,
+      access,
+      canCopyPublicLink,
+    } = selectedFolderStore;
 
     const selectedFolder = { ...selectedFolderStore };
 
@@ -1314,6 +1323,7 @@ export default inject(
 
       setSelected,
       security,
+      canCopyPublicLink,
 
       setSharingPanelVisible,
       setMoveToPanelVisible,

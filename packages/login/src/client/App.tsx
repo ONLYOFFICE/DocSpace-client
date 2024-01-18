@@ -6,8 +6,7 @@ import CodeLogin from "./components/CodeLogin";
 import initLoginStore from "../store";
 import { Provider as MobxProvider } from "mobx-react";
 import SimpleNav from "../client/components/sub-components/SimpleNav";
-import { wrongPortalNameUrl } from "@docspace/common/constants";
-import Consent from "./components/Consent";
+import { WRONG_PORTAL_NAME_URL } from "@docspace/shared/constants";
 
 interface ILoginProps extends IInitialState {
   isDesktopEditor?: boolean;
@@ -23,7 +22,7 @@ const App: React.FC<ILoginProps> = (props) => {
       const { status, standalone, message } = props.error;
 
       if (status === 404 && !standalone) {
-        const url = new URL(wrongPortalNameUrl);
+        const url = new URL(WRONG_PORTAL_NAME_URL);
         url.searchParams.append("url", window.location.hostname);
         window.location.replace(url);
       }

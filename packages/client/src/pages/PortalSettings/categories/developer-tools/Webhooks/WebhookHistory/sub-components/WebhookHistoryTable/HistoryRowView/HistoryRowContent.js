@@ -2,8 +2,8 @@ import React from "react";
 import moment from "moment-timezone";
 import styled from "styled-components";
 
-import Text from "@docspace/components/text";
-import RowContent from "@docspace/components/row-content";
+import { Text } from "@docspace/shared/components/text";
+import { RowContent } from "@docspace/shared/components/row-content";
 
 import StatusBadge from "../../../../sub-components/StatusBadge";
 import { useTranslation } from "react-i18next";
@@ -33,7 +33,7 @@ export const HistoryRowContent = ({ sectionWidth, historyItem }) => {
 
   const formattedDelivery =
     moment(historyItem.delivery)
-      .tz(window.timezone || "")
+      .tz(window.timezone)
       .locale(i18n.language)
       .format("MMM D, YYYY, h:mm:ss A") +
     " " +

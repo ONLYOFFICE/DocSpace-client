@@ -1,9 +1,10 @@
 import { StyledOwnerInfo } from "../../../ChangePortalOwnerDialog/StyledDialog";
 import styled from "styled-components";
-import Avatar from "@docspace/components/avatar";
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
+import { Avatar } from "@docspace/shared/components/avatar";
+
 import CatalogSpamIcon from "PUBLIC_DIR/images/catalog.spam.react.svg";
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
+import { commonIconsStyles } from "@docspace/shared/utils";
 
 const StyledCatalogSpamIcon = styled(CatalogSpamIcon)`
   ${commonIconsStyles}

@@ -1,9 +1,9 @@
-import api from "@docspace/common/api";
+import api from "@docspace/shared/api";
 import {
   setFavoritesSetting,
   setRecentSetting,
-} from "@docspace/common/api/files";
-import { RoomsType } from "@docspace/common/constants";
+} from "@docspace/shared/api/files";
+import { RoomsType } from "@docspace/shared/enums";
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
 import { presentInArray } from "../helpers/files-helpers";
@@ -12,7 +12,7 @@ import {
   iconSize32,
   iconSize64,
   iconSize96,
-} from "@docspace/common/utils/image-helpers";
+} from "@docspace/shared/utils/image-helpers";
 
 class SettingsStore {
   thirdPartyStore;

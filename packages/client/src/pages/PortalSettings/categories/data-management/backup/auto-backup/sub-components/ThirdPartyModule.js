@@ -1,7 +1,7 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { BackupStorageType } from "@docspace/common/constants";
+import { BackupStorageType } from "@docspace/shared/enums";
 import ScheduleComponent from "./ScheduleComponent";
 
 import DirectThirdPartyConnection from "../../common-container/DirectThirdPartyConnection";

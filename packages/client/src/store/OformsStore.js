@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
-import OformsFilter from "@docspace/common/api/oforms/filter";
-import { submitToGallery } from "@docspace/common/api/oforms";
+import OformsFilter from "@docspace/shared/api/oforms/filter";
+import { submitToGallery } from "@docspace/shared/api/oforms";
 
 import {
   getOformLocales,
@@ -9,12 +9,13 @@ import {
   getCategoryById,
   getCategoryTypes,
   getCategoriesOfCategoryType,
-} from "@docspace/common/api/oforms";
-import toastr from "@docspace/components/toast/toastr";
+} from "@docspace/shared/api/oforms";
+import { toastr } from "@docspace/shared/components/toast";
 
-import { combineUrl, convertToLanguage } from "@docspace/common/utils";
-import { LANGUAGE } from "@docspace/common/constants";
-import { getCookie } from "@docspace/components/utils/cookie";
+import { convertToLanguage } from "@docspace/shared/utils/common";
+import { LANGUAGE } from "@docspace/shared/constants";
+import { getCookie } from "@docspace/shared/utils/cookie";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 const myDocumentsFolderId = 2;
 

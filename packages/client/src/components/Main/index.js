@@ -3,10 +3,7 @@ import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
 import { isMobile, isIOS, isFirefox } from "react-device-detect";
 
-import {
-  mobile,
-  isMobile as isMobileUtils,
-} from "@docspace/components/utils/device";
+import { mobile, isMobile as isMobileUtils } from "@docspace/shared/utils";
 
 const StyledMain = styled.main`
   height: ${(props) => props.mainHeight && `${props.mainHeight}px`};

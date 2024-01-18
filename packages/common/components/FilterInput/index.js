@@ -1,14 +1,14 @@
 import React from "react";
 
-import ViewSelector from "@docspace/components/view-selector";
-import Link from "@docspace/components/link";
+import { ViewSelector } from "@docspace/shared/components/view-selector";
+import { Link } from "@docspace/shared/components/link";
 
 import FilterButton from "./sub-components/FilterButton";
 import SortButton from "./sub-components/SortButton";
-import SelectedItem from "@docspace/components/selected-item";
+import { SelectedItem } from "@docspace/shared/components/selected-item";
 import { useTheme } from "styled-components";
 import { StyledFilterInput, StyledSearchInput } from "./StyledFilterInput";
-import { DeviceType } from "../../constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const FilterInput = React.memo(
   ({

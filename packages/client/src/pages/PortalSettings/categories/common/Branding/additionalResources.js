@@ -2,16 +2,16 @@ import React, { useState, useEffect, useCallback } from "react";
 import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { inject, observer } from "mobx-react";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import styled, { css } from "styled-components";
-import Checkbox from "@docspace/components/checkbox";
-import toastr from "@docspace/components/toast/toastr";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { toastr } from "@docspace/shared/components/toast";
 import LoaderAdditionalResources from "../sub-components/loaderAdditionalResources";
 import isEqual from "lodash/isEqual";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
-import { mobile, size } from "@docspace/components/utils/device";
+import { mobile, size } from "@docspace/shared/utils";
 
 const StyledComponent = styled.div`
   margin-top: 40px;

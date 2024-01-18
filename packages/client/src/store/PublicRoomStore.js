@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
-import api from "@docspace/common/api";
-import FilesFilter from "@docspace/common/api/files/filter";
+import api from "@docspace/shared/api";
+import FilesFilter from "@docspace/shared/api/files/filter";
 import { LinkType, ValidationStatus } from "../helpers/constants";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";

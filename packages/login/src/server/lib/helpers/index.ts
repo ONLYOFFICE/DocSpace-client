@@ -9,12 +9,15 @@ import {
   getAppearanceTheme,
   getLogoUrls,
   getCurrentSsoSettings,
-} from "@docspace/common/api/settings";
-import { getUser } from "@docspace/common/api/people";
-import { checkIsAuthenticated } from "@docspace/common/api/user";
+} from "@docspace/shared/api/settings";
+
+import { getUser } from "@docspace/shared/api/people";
+import { checkIsAuthenticated } from "@docspace/shared/api/user";
 import { getClient, getScopeList } from "@docspace/common/api/oauth";
-import { TenantStatus } from "@docspace/common/constants";
-import { IScope } from "@docspace/common/utils/oauth/interfaces";
+
+import { IScope } from "@docspace/shared/utils/oauth/interfaces";
+
+import { TenantStatus } from "@docspace/shared/enums";
 
 export const getAssets = (): assetsType => {
   const manifest = fs.readFileSync(
@@ -70,9 +73,8 @@ export const getInitialState = async (
 
   if (!isAuth) settings.push(getCurrentSsoSettings());
 
-  [portalSettings, buildInfo, availableThemes, logoUrls] = await Promise.all(
-    baseSettings
-  );
+  [portalSettings, buildInfo, availableThemes, logoUrls] =
+    await Promise.all(baseSettings);
 
   if (portalSettings.tenantStatus !== TenantStatus.PortalRestore)
     [providers, capabilities, ssoSettings] = await Promise.all(settings);

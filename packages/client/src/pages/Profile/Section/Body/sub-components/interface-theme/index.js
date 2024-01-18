@@ -3,19 +3,15 @@ import styled, { css } from "styled-components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import Text from "@docspace/components/text";
-import Checkbox from "@docspace/components/checkbox";
-import RadioButtonGroup from "@docspace/components/radio-button-group";
-import toastr from "@docspace/components/toast/toastr";
+import { Text } from "@docspace/shared/components/text";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
+import { toastr } from "@docspace/shared/components/toast";
 
-import { ThemeKeys } from "@docspace/common/constants";
+import { ThemeKeys } from "@docspace/shared/enums";
 
-import { mobile } from "@docspace/components/utils/device";
-import {
-  showLoader,
-  getSystemTheme,
-  getEditorTheme,
-} from "@docspace/common/utils";
+import { mobile, getSystemTheme, getEditorTheme } from "@docspace/shared/utils";
+import { showLoader } from "@docspace/shared/utils/common";
 
 import ThemePreview from "./theme-preview";
 

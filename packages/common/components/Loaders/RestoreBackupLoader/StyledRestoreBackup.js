@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { mobile, tablet } from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/shared/utils";
 
 const StyledRestoreBackup = styled.div`
   width: 100%;

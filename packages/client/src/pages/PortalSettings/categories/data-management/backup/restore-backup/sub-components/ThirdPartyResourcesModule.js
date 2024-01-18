@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import DirectThirdPartyConnection from "../../common-container/DirectThirdPartyConnection";
-import { FilesSelectorFilterTypes } from "@docspace/common/constants";
+import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 
 const ThirdPartyResources = (props) => {
   const { setRestoreResource, buttonSize } = props;

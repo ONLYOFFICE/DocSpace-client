@@ -7,13 +7,13 @@ import { withTranslation } from "react-i18next";
 import {
   FolderType,
   ShareAccessRights,
-  FolderNames,
   DeviceType,
-} from "@docspace/common/constants";
-import { getCatalogIconUrlByType } from "@docspace/common/utils/catalogIcon.helper";
+} from "@docspace/shared/enums";
+import { FOLDER_NAMES } from "@docspace/shared/constants";
+import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 
-import CatalogItem from "@docspace/components/catalog-item";
-import DragAndDrop from "@docspace/components/drag-and-drop";
+import { ArticleItem } from "@docspace/shared/components/article-item";
+import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
 
 import BonusItem from "./BonusItem";
 import AccountsItem from "./AccountsItem";
@@ -127,7 +127,7 @@ const Item = ({
       onDragLeave={onDragLeave}
       className={"document-catalog"}
     >
-      <CatalogItem
+      <ArticleItem
         key={item.id}
         id={item.id}
         folderId={folderId}
@@ -286,8 +286,8 @@ const Items = ({
         const showBadge = emptyTrashInProgress
           ? false
           : item.newItems
-          ? item.newItems > 0 && true
-          : isTrash && !trashIsEmpty;
+            ? item.newItems > 0 && true
+            : isTrash && !trashIsEmpty;
         const labelBadge = showBadge ? item.newItems : null;
         const iconBadge = isTrash ? ClearTrashReactSvgUrl : null;
 
@@ -312,7 +312,7 @@ const Items = ({
             showBadge={showBadge}
             labelBadge={labelBadge}
             iconBadge={iconBadge}
-            folderId={`document_catalog-${FolderNames[item.rootFolderType]}`}
+            folderId={`document_catalog-${FOLDER_NAMES[item.rootFolderType]}`}
           />
         );
       });

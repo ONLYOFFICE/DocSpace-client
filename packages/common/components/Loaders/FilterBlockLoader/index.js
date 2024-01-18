@@ -1,7 +1,7 @@
 import React from "react";
-import { RoomsType } from "../../../constants";
-
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { RoomsType } from "@docspace/shared/enums";
+import { RoomsTypeValues } from "@docspace/shared/utils/common";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 import { StyledBlock, StyledContainer } from "./StyledFilterBlockLoader";
 
@@ -16,7 +16,7 @@ const FilterBlockLoader = ({
 }) => {
   const roomTypeLoader = isRooms ? (
     <>
-      {Object.values(RoomsType).map((roomType) => {
+      {Object.values(RoomsTypeValues).map((roomType) => {
         switch (roomType) {
           case RoomsType.FillingFormsRoom:
             return (

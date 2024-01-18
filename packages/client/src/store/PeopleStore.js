@@ -87,13 +87,7 @@ class PeopleStore {
   resetFilter = () => {
     const filter = Filter.getDefault();
 
-    const subRoute = window.location.pathname.includes("groups")
-      ? "groups"
-      : "people";
-
-    window.DocSpace.navigate(
-      `accounts/${subRoute}/filter?${filter.toUrlParams()}`
-    );
+    window.DocSpace.navigate(`accounts/people/filter?${filter.toUrlParams()}`);
   };
 
   onChangeType = (e) => {
@@ -116,7 +110,7 @@ class PeopleStore {
 
     if (users.length > 1) {
       fromType = fromType.filter(
-        (item, index) => fromType.indexOf(item) === index && item !== type
+        (item, index) => fromType.indexOf(item) === index && item !== type,
       );
 
       if (fromType.length === 0) fromType = [fromType[0]];

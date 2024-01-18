@@ -236,10 +236,13 @@ const Items = ({
         return true;
       }
 
-      if (
-        (item.rootFolderType === FolderType.TRASH && startDrag && !isArchive) ||
-        item.rootFolderType === FolderType.USER
-      ) {
+      if (item.rootFolderType === FolderType.TRASH && startDrag && !isArchive) {
+        return draggableItems.some(
+          (draggableItem) => draggableItem.security.Delete
+        );
+      }
+
+      if (item.rootFolderType === FolderType.USER) {
         return (
           folderAccess === ShareAccessRights.None ||
           folderAccess === ShareAccessRights.FullAccess ||

@@ -197,6 +197,7 @@ function Editor({
       fileInfo &&
       fileInfo.viewAccessibility.WebRestrictedEditing &&
       fileInfo.security.FillForms &&
+      fileInfo.rootFolderType === FolderType.Rooms &&
       !fileInfo.security.Edit &&
       !config?.document?.isLinkedForMe
     ) {

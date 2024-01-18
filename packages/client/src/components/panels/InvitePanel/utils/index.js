@@ -133,6 +133,16 @@ export const getAccessOptions = (
     case RoomsType.PublicRoom:
       options = [accesses.roomAdmin, accesses.collaborator];
       break;
+
+    case RoomsType.FormRoom:
+      options = [
+        accesses.roomAdmin,
+        accesses.collaborator,
+        { key: "s1", isSeparator: withSeparator },
+        accesses.viewer,
+        accesses.formFiller,
+      ];
+      break;
     case -1:
       if (isOwner) options.push(accesses.docSpaceAdmin);
 

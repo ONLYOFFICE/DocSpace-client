@@ -25,7 +25,6 @@
     viewAs: "row", //TODO: ["row", "table", "tile"]
     viewTableColumns: "Name,Size,Type",
     checkCSP: true,
-    opacity: 0,
     filter: {
       count: 100,
       page: 1,
@@ -107,6 +106,7 @@
     #iframe;
     #isConnected = false;
     #cspInstalled = true;
+    #frameOpacity = 0;
     #callbacks = [];
     #tasks = [];
     #classNames = "";
@@ -121,73 +121,30 @@
 
     #createIframe = (config) => {
       const iframe = document.createElement("iframe");
-      const newNode = document.createElement("div");
-      newNode.style.width = config.width;
-      newNode.style.height = config.height;
-      newNode.style.display = "flex";
-      newNode.style.justifyContent = "center";
-      newNode.style.alignItems = "center";
 
-      const svg = `
-      <svg viewBox="-10 -10 220 220" xmlns="http://www.w3.org/2000/svg" aria-label="Loading content, please wait." style="width: 64px;height: 64px;color: #5299E0;">
-        <style>
-          :root {
-            width: 64px;
-            height: 64px;
-            color: #5299E0;
-          }
-          @media (prefers-color-scheme: dark) {
-            :root {
-              color: #ffffff;
-            }
-          }
-        </style>
-        <defs>
-          <linearGradient id="spinner-color-prefix0-1" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="currentColor" stop-opacity="0"></stop>
-            <stop offset="100%" stop-color="currentColor" stop-opacity=".2"></stop>
-          </linearGradient>
-          <linearGradient id="spinner-color-prefix0-2" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="currentColor" stop-opacity=".2"></stop>
-            <stop offset="100%" stop-color="currentColor" stop-opacity=".4"></stop>
-          </linearGradient>
-          <linearGradient id="spinner-color-prefix0-3" gradientUnits="objectBoundingBox" x1="1" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="currentColor" stop-opacity=".4"></stop>
-            <stop offset="100%" stop-color="currentColor" stop-opacity=".6"></stop>
-          </linearGradient>
-          <linearGradient id="spinner-color-prefix0-4" gradientUnits="objectBoundingBox" x1="1" y1="1" x2="0" y2="0">
-            <stop offset="0%" stop-color="currentColor" stop-opacity=".6"></stop>
-            <stop offset="100%" stop-color="currentColor" stop-opacity=".8"></stop>
-          </linearGradient>
-          <linearGradient id="spinner-color-prefix0-5" gradientUnits="objectBoundingBox" x1="0" y1="1" x2="0" y2="0">
-            <stop offset="0%" stop-color="currentColor" stop-opacity=".8"></stop>
-            <stop offset="100%" stop-color="currentColor" stop-opacity="1"></stop>
-          </linearGradient><linearGradient id="spinner-color-prefix0-6" gradientUnits="objectBoundingBox" x1="0" y1="1" x2="1" y2="0">
-            <stop offset="0%" stop-color="currentColor" stop-opacity="1"></stop>
-            <stop offset="100%" stop-color="currentColor" stop-opacity="1"></stop>
-          </linearGradient>
-        </defs>
-        <g fill="none" transform="translate(100,100) scale(0.75)" stroke-width="30">
-          <path d="M 0,-100 A 100,100 0 0,1 86.6,-50" stroke="url(#spinner-color-prefix0-1)"></path>
-          <path d="M 86.6,-50 A 100,100 0 0,1 86.6,50" stroke="url(#spinner-color-prefix0-2)"></path>
-          <path d="M 86.6,50 A 100,100 0 0,1 0,100" stroke="url(#spinner-color-prefix0-3)"></path>
-          <path d="M 0,100 A 100,100 0 0,1 -86.6,50" stroke="url(#spinner-color-prefix0-4)"></path>
-          <path d="M -86.6,50 A 100,100 0 0,1 -86.6,-50" stroke="url(#spinner-color-prefix0-5)"></path>
-          <path d="M -86.6,-50 A 100,100 0 0,1 0,-100" stroke="url(#spinner-color-prefix0-6)"></path>
-        </g>
-        <animateTransform from="0 0 0" to="360 0 0" attributeName="transform" type="rotate" repeatCount="indefinite" dur="1300ms"></animateTransform>
-      </svg>
-      `;
-      const img = document.createElement("img");
-      img.setAttribute("src", `${config.src}/static/images/loader.svg`);
-      img.setAttribute("width", `64px`);
-      img.setAttribute("height", `64px`);
-      newNode.appendChild(img);
-      const node = document.getElementById(config.frameId);
-      const isExistLoader = document.getElementById(config.frameId + "loader");
-      if (!isExistLoader) node.insertAdjacentElement("afterend", newNode);
-      newNode.setAttribute("id", config.frameId + "loader");
-      iframe.style.opacity = config.opacity;
+      const container = document.createElement("div");
+      container.style.width = config.width;
+      container.style.height = config.height;
+      container.style.display = "flex";
+      container.style.justifyContent = "center";
+      container.style.alignItems = "center";
+
+      const loader = document.createElement("img");
+      loader.setAttribute("src", `${config.src}/static/images/loader.svg`);
+      loader.setAttribute("width", `64px`);
+      loader.setAttribute("height", `64px`);
+
+      container.appendChild(loader);
+
+      const targetNode = document.getElementById(config.frameId);
+      const isExistLoader = document.getElementById(config.frameId + "-loader");
+
+      if (!isExistLoader)
+        targetNode.insertAdjacentElement("afterend", container);
+
+      container.setAttribute("id", config.frameId + "-loader");
+
+      iframe.style.opacity = this.#frameOpacity;
 
       let path = "";
 
@@ -282,6 +239,7 @@
       iframe.allowFullscreen = true;
       iframe.setAttribute("allow", "storage-access");
       iframe.style.zIndex = 2;
+
       if (config.type == "mobile") {
         iframe.style.position = "fixed";
         iframe.style.overflow = "hidden";
@@ -423,8 +381,7 @@
     }
 
     setIsLoaded() {
-      const node = document.getElementById(config.frameId);
-      if (node) node.style.opacity = 1;
+      if (this.#iframe) this.#iframe.style.opacity = 1;
     }
 
     initEditor(config = {}) {

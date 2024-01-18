@@ -76,7 +76,7 @@ const RoomSelector = ({
   selectAllIcon,
   onSelectAll,
 
-  setFinishLoad,
+  setIsDataReady,
   withAccessRights,
   accessRights,
   selectedAccessRight,
@@ -103,9 +103,7 @@ const RoomSelector = ({
   const [items, setItems] = React.useState([]);
 
   useEffect(() => {
-    setTimeout(() => {
-      setFinishLoad(isFirstLoad);
-    }, 750);
+    setIsDataReady(!isFirstLoad);
   }, [isFirstLoad]);
 
   const onSearchAction = React.useCallback(
@@ -223,7 +221,6 @@ const RoomSelector = ({
       isNextPageLoading={isNextPageLoading}
       loadNextPage={onLoadNextPage}
       isLoading={isFirstLoad}
-      setFinishLoad={setFinishLoad}
       searchLoader={<Loaders.SelectorSearchLoader />}
       rowLoader={
         <Loaders.SelectorRowLoader

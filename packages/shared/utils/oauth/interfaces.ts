@@ -118,3 +118,36 @@ export interface ISubmitReqDTO {
   state: string;
   scopes: string[];
 }
+
+export type TConsentClient = {
+  authentication_methods: AuthenticationMethod[];
+  client_id: string;
+  created_by: string;
+  created_on: Date;
+  description: string;
+  enabled: boolean;
+  invalidated: boolean;
+  tenant: number;
+  tenant_url: string;
+  terms_url: string;
+  website_url: string;
+  modified_by: string;
+  modified_on: Date;
+  name: string;
+  policy_url: string;
+  logo: string;
+  links: string[];
+  logout_redirect_uris: string[];
+  redirect_uris: string[];
+  scopes: string[];
+  allowed_origins: string[];
+};
+
+export interface IGetConsentList {
+  client: TConsentClient;
+  invalidated: boolean;
+  modified_at: Date;
+  principal_name: string;
+  registered_client_id: string;
+  scopes: string;
+}

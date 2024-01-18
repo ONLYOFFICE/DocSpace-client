@@ -3,7 +3,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
-import { setCookie } from "./cookie";
 
 const { api: apiConf, proxy: proxyConf } = defaultConfig;
 const { origin: apiOrigin, prefix: apiPrefix, timeout: apiTimeout } = apiConf;
@@ -66,7 +65,7 @@ class AxiosClient {
         "Access-Control-Allow-Credentials": "true",
       };
     }
-    setCookie("x-docspace-address", origin, {}, true);
+
     const shareIndex = window.location.pathname.indexOf("share");
     const sharedIndex = window.location.pathname.indexOf("shared");
 
@@ -180,7 +179,11 @@ class AxiosClient {
 
       if (!response || !response.data || response.isAxiosError) return null;
 
-      if (response.data && "total" in response.data)
+      if (
+        response.data &&
+        typeof response.data !== "string" &&
+        "total" in response.data
+      )
         return {
           total: response.data.total ? +response.data.total : 0,
           items: response.data.response,

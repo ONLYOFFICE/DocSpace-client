@@ -12,7 +12,7 @@ import {
   getScopeList,
   getConsentList,
   revokeUserClient,
-} from "@docspace/common/api/oauth";
+} from "@docspace/shared/api/oauth";
 
 import {
   IClientListProps,
@@ -20,10 +20,9 @@ import {
   IClientReqDTO,
   INoAuthClientProps,
   IScope,
-} from "@docspace/common/utils/oauth/interfaces";
+} from "@docspace/shared/utils/oauth/interfaces";
 
-//@ts-ignore
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 
 import SettingsIcon from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
 import DeleteIcon from "PUBLIC_DIR/images/delete.react.svg?url";
@@ -33,8 +32,9 @@ import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
 import OauthRevokeSvgUrl from "PUBLIC_DIR/images/oauth.revoke.svg?url";
-import { transformToClientProps } from "@docspace/common/utils/oauth";
-import { AuthenticationMethod } from "@docspace/common/utils/oauth/enums";
+import { transformToClientProps } from "@docspace/shared/utils/oauth";
+import { AuthenticationMethod } from "@docspace/shared/enums";
+import { TData } from "@docspace/shared/components/toast/Toast.type";
 
 const PAGE_LIMIT = 100;
 
@@ -260,8 +260,9 @@ class OAuthStore implements OAuthStoreProps {
       const client = await getClient(clientId);
 
       return client;
-    } catch (e) {
-      toastr.error(e);
+    } catch (e: unknown) {
+      const err = e as TData;
+      toastr.error(err);
       console.log(e);
     }
   };
@@ -284,7 +285,8 @@ class OAuthStore implements OAuthStoreProps {
       });
       this.setClientsIsLoading(false);
     } catch (e) {
-      toastr.error(e);
+      const err = e as TData;
+      toastr.error(err);
       console.log(e);
     }
   };
@@ -297,7 +299,8 @@ class OAuthStore implements OAuthStoreProps {
         this.consents = [...consentList];
       });
     } catch (e) {
-      toastr.error(e);
+      const err = e as TData;
+      toastr.error(err);
       console.log(e);
     }
   };
@@ -343,7 +346,8 @@ class OAuthStore implements OAuthStoreProps {
         ];
       });
     } catch (e) {
-      toastr.error(e);
+      const err = e as TData;
+      toastr.error(err);
       console.log(e);
     }
   };
@@ -375,7 +379,8 @@ class OAuthStore implements OAuthStoreProps {
         });
       }
     } catch (e) {
-      toastr.error(e);
+      const err = e as TData;
+      toastr.error(err);
       console.log(e);
     }
   };
@@ -392,7 +397,8 @@ class OAuthStore implements OAuthStoreProps {
         });
       }
     } catch (e) {
-      toastr.error(e);
+      const err = e as TData;
+      toastr.error(err);
       console.log(e);
     }
   };
@@ -405,7 +411,8 @@ class OAuthStore implements OAuthStoreProps {
 
       return client_secret;
     } catch (e) {
-      toastr.error(e);
+      const err = e as TData;
+      toastr.error(err);
       console.log(e);
     }
   };
@@ -429,7 +436,8 @@ class OAuthStore implements OAuthStoreProps {
 
       this.setActiveClient("");
     } catch (e) {
-      toastr.error(e);
+      const err = e as TData;
+      toastr.error(err);
       console.log(e);
     }
   };
@@ -440,7 +448,8 @@ class OAuthStore implements OAuthStoreProps {
 
       return scope;
     } catch (e) {
-      toastr.error(e);
+      const err = e as TData;
+      toastr.error(err);
       console.log(e);
 
       return {} as IScope;
@@ -453,7 +462,8 @@ class OAuthStore implements OAuthStoreProps {
 
       this.scopes = scopes;
     } catch (e) {
-      toastr.error(e);
+      const err = e as TData;
+      toastr.error(err);
       console.log(e);
     }
   };
@@ -477,7 +487,8 @@ class OAuthStore implements OAuthStoreProps {
 
       this.setActiveClient("");
     } catch (e) {
-      toastr.error(e);
+      const err = e as TData;
+      toastr.error(err);
       console.log(e);
     }
   };
@@ -602,7 +613,8 @@ class OAuthStore implements OAuthStoreProps {
           this.setActiveClient("");
           this.setSelection("");
         } catch (e) {
-          toastr.error(e);
+          const err = e as TData;
+          toastr.error(err);
         }
       } else {
         this.setActiveClient(clientId);

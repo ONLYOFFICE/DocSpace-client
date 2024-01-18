@@ -10,6 +10,7 @@ import {
   IScope,
   INoAuthClientProps,
   IClientReqDTO,
+  IGetConsentList,
 } from "../../utils/oauth/interfaces";
 
 export const getClient = async (
@@ -123,12 +124,12 @@ export const getScopeList = async (): Promise<IScope[]> => {
   return scopeList;
 };
 
-export const onOAuthLogin = () => {
+export const onOAuthLogin = (clientId: string) => {
   const formData = new FormData();
 
   return request({
     method: "post",
-    url: `/oauth2/login`,
+    url: `/oauth2/login?client_id=${clientId}`,
     data: formData,
     withRedirect: true,
     headers: {
@@ -180,18 +181,23 @@ export const onOAuthCancel = (clientId: string, clientState: string) => {
 };
 
 export const getConsentList = async (): Promise<IClientProps[]> => {
-  const clients = await request({
+  const clients = (await request({
     method: "get",
     url: "/clients/consents",
-  });
+  })) as IGetConsentList[];
 
   const consents: IClientProps[] = [];
 
-  clients.forEach((item) => {
-    const client = transformToClientProps(item.client);
+  clients.forEach(({ client, invalidated, modified_at }: IGetConsentList) => {
+    const consentClient: IClientResDTO = {
+      ...client,
+      client_secret: "",
+      logout_redirect_uri: "",
+    };
 
-    if (!item.invalidated)
-      consents.push({ ...client, modifiedOn: item.modified_at });
+    const cl = transformToClientProps(consentClient);
+
+    if (!invalidated) consents.push({ ...cl, modifiedOn: modified_at });
   });
 
   return consents;

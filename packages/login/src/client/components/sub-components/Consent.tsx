@@ -90,9 +90,7 @@ const Consent = ({
     let clientState = "";
     const scope = oauth.client.scopes;
 
-    setCookie("client_id", clientId);
-
-    await api.oauth.onOAuthLogin();
+    await api.oauth.onOAuthLogin(clientId);
 
     const cookie = document.cookie.split(";");
 
@@ -101,7 +99,6 @@ const Consent = ({
         clientState = c.replace("client_state=", "").trim();
     });
 
-    deleteCookie("client_id");
     deleteCookie("client_state");
 
     await api.oauth.onOAuthSubmit(clientId, clientState, scope);
@@ -112,9 +109,7 @@ const Consent = ({
 
     let clientState = "";
 
-    setCookie("client_id", clientId);
-
-    await api.oauth.onOAuthLogin();
+    await api.oauth.onOAuthLogin(clientId);
 
     const cookie = document.cookie.split(";");
 
@@ -123,7 +118,6 @@ const Consent = ({
         clientState = c.replace("client_state=", "").trim();
     });
 
-    deleteCookie("client_id");
     deleteCookie("client_state");
 
     await api.oauth.onOAuthCancel(clientId, clientState);

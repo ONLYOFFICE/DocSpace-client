@@ -27,7 +27,7 @@ const Sdk = ({
   getRoomsIcon,
   getPrimaryLink,
 }) => {
-  const [finishLoad, setFinishLoad] = useState(false);
+  const [isDataReady, setIsDataReady] = useState(false);
 
   useEffect(() => {
     window.addEventListener("message", handleMessage, false);
@@ -54,10 +54,10 @@ const Sdk = ({
   }, [callCommand, isLoaded]);
 
   useEffect(() => {
-    if (finishLoad) {
+    if (isDataReady) {
       callCommandLoad("setIsLoaded");
     }
-  }, [callCommandLoad, finishLoad]);
+  }, [callCommandLoad, isDataReady]);
 
   const { mode } = useParams();
   const selectorType = new URLSearchParams(window.location.search).get(
@@ -177,6 +177,7 @@ const Sdk = ({
           withHeader={frameConfig?.showSelectorHeader}
           onAccept={onSelectRoom}
           onCancel={onClose}
+          setIsDataReady={setIsDataReady}
         />
       );
       break;
@@ -187,7 +188,7 @@ const Sdk = ({
           embedded={true}
           withHeader={frameConfig?.showSelectorHeader}
           isSelect={true}
-          setFinishLoad={setFinishLoad}
+          setIsDataReady={setIsDataReady}
           onSelectFile={onSelectFile}
           onClose={onClose}
           filterParam={"ALL"}

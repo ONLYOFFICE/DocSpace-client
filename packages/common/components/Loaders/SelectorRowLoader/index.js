@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -74,7 +74,11 @@ const SelectorRowLoader = ({
         key={key}
         {...rest}
       >
-        <RectangleSkeleton className={"avatar"} width={"32px"} height={"32px"} />
+        <RectangleSkeleton
+          className={"avatar"}
+          width={"32px"}
+          height={"32px"}
+        />
         <RectangleSkeleton width={"212px"} height={"16px"} />
         {isMultiSelect && (
           <RectangleSkeleton

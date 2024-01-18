@@ -3,20 +3,20 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useState, useCallback, useEffect, useRef } from "react";
 
-import Avatar from "@docspace/components/avatar";
-import Text from "@docspace/components/text";
-import TextInput from "@docspace/components/text-input";
-import DropDownItem from "@docspace/components/drop-down-item";
-import toastr from "@docspace/components/toast/toastr";
-import { parseAddresses } from "@docspace/components/utils/email";
-import ComboBox from "@docspace/components/combobox";
+import { Avatar } from "@docspace/shared/components/avatar";
+import { Text } from "@docspace/shared/components/text";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { toastr } from "@docspace/shared/components/toast";
+import { parseAddresses } from "@docspace/shared/utils";
+import { ComboBox } from "@docspace/shared/components/combobox";
 
-import Filter from "@docspace/common/api/people/filter";
+import Filter from "@docspace/shared/api/people/filter";
 import BetaBadge from "@docspace/common/components/BetaBadge";
-import { getMembersList } from "@docspace/common/api/people";
-import { ShareAccessRights } from "@docspace/common/constants";
+import { getMembersList } from "@docspace/shared/api/people";
+import { ShareAccessRights } from "@docspace/shared/enums";
 import withCultureNames from "@docspace/common/hoc/withCultureNames";
-import { isBetaLanguage } from "@docspace/common/utils";
+import { isBetaLanguage } from "@docspace/shared/utils";
 
 import AddUsersPanel from "../../AddUsersPanel";
 import { getAccessOptions } from "../utils";

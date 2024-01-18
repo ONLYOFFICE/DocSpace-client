@@ -1,6 +1,6 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
-import TextInput from "@docspace/components/text-input";
+import { TextInput } from "@docspace/shared/components/text-input";
 
 const public_container = "public_container";
 const private_container = "private_container";

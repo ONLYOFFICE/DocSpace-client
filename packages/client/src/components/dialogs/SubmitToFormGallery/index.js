@@ -1,14 +1,15 @@
-import { Link, ModalDialog } from "@docspace/components";
-import { Button } from "@docspace/components";
+import { Link } from "@docspace/shared/components/link";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Button } from "@docspace/shared/components/button";
 import { useState, useRef } from "react";
 import { observer, inject } from "mobx-react";
 import { Trans, withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 import FilesSelector from "@docspace/client/src/components/FilesSelector";
-import { FilesSelectorFilterTypes } from "@docspace/common/constants";
-import toastr from "@docspace/components/toast/toastr";
+import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
+import { toastr } from "@docspace/shared/components/toast";
 
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import * as Styled from "./index.styled";
 

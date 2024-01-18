@@ -1,8 +1,8 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import ComboBox from "@docspace/components/combobox";
-import { ThirdPartyStorages } from "@docspace/common/constants";
+import { ComboBox } from "@docspace/shared/components/combobox";
+import { ThirdPartyStorages } from "@docspace/shared/enums";
 import GoogleCloudStorage from "./storages/GoogleCloudStorage";
 import RackspaceStorage from "./storages/RackspaceStorage";
 import SelectelStorage from "./storages/SelectelStorage";
@@ -20,9 +20,8 @@ class ThirdPartyStorageModule extends React.PureComponent {
       availableStorage: {},
     };
 
-    const { comboBoxOptions, storagesInfo, selectedStorageId } = getOptions(
-      thirdPartyStorage
-    );
+    const { comboBoxOptions, storagesInfo, selectedStorageId } =
+      getOptions(thirdPartyStorage);
 
     !defaultStorageId && setStorageId(selectedStorageId);
 

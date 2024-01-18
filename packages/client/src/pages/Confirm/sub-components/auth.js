@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import Loader from "@docspace/components/loader";
+import { Loader } from "@docspace/shared/components/loader";
 import Section from "@docspace/common/components/Section";
-import { loginWithConfirmKey } from "@docspace/common/api/user";
+import { loginWithConfirmKey } from "@docspace/shared/api/user";
 import { useSearchParams } from "react-router-dom";
-import { combineUrl } from "@docspace/common/utils";
-import toastr from "@docspace/components/toast/toastr";
-import { frameCallEvent } from "@docspace/common/utils";
-
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { toastr } from "@docspace/shared/components/toast";
+import { frameCallEvent } from "@docspace/shared/utils/common";
+import SectionWrapper from "SRC_DIR/components/Section";
 const Auth = (props) => {
   //console.log("Auth render");
   const { linkData } = props;
@@ -28,7 +28,7 @@ const Auth = (props) => {
             combineUrl(window.location.origin, url)
           );
         }
-        
+
         if (typeof res === "string") window.location.replace(res);
         else window.location.replace("/");
       })
@@ -42,11 +42,11 @@ const Auth = (props) => {
 };
 
 const AuthPage = (props) => (
-  <Section>
+  <SectionWrapper>
     <Section.SectionBody>
       <Auth {...props} />
     </Section.SectionBody>
-  </Section>
+  </SectionWrapper>
 );
 
 export default AuthPage;

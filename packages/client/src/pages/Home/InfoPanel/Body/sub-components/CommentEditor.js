@@ -3,9 +3,12 @@ import React, { useState, useEffect } from "react";
 import { inject } from "mobx-react";
 import { ReactSVG } from "react-svg";
 
-import toastr from "@docspace/components/toast/toastr";
-import { Button, Text, Textarea } from "@docspace/components";
-import { MAX_FILE_COMMENT_LENGTH } from "@docspace/common/constants";
+import { toastr } from "@docspace/shared/components/toast";
+import { Textarea } from "@docspace/shared/components/textarea";
+import { Button } from "@docspace/shared/components/button";
+import { Text } from "@docspace/shared/components/text";
+
+import { MAX_FILE_COMMENT_LENGTH } from "@docspace/shared/constants";
 // import infoPanel from "@docspace/common/components/Section/sub-components/info-panel";
 
 const CommentEditor = ({

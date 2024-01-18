@@ -5,12 +5,13 @@ import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
-import Box from "@docspace/components/box";
-import HelpButton from "@docspace/components/help-button";
-import toastr from "@docspace/components/toast/toastr";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { Box } from "@docspace/shared/components/box";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { toastr } from "@docspace/shared/components/toast";
 import { useTheme } from "styled-components";
+import { convertTime } from "@docspace/shared/utils/convertTime";
 import Loaders from "@docspace/common/components/Loaders";
 
 import {
@@ -27,7 +28,7 @@ import {
   TableBody,
   TableDataCell,
 } from "./styled-active-sessions";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 import moment from "moment-timezone";
 
 const removeIcon = (
@@ -115,7 +116,7 @@ const ActiveSessions = ({
 
   const convertTime = (date) => {
     return moment(date)
-      .tz(window.timezone || "")
+      .tz(window.timezone)
       .locale(locale)
       .format("L, LTS");
   };

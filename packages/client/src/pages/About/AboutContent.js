@@ -1,14 +1,14 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
-import Text from "@docspace/components/text";
-import NoUserSelect from "@docspace/components/utils/commonStyles";
+import { Text } from "@docspace/shared/components/text";
+import { NoUserSelect, tablet } from "@docspace/shared/utils";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { ReactSVG } from "react-svg";
-import { tablet } from "@docspace/components/utils/device";
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import logoPersonalAboutUrl from "PUBLIC_DIR/images/logo_personal_about.svg?url";
-import { getLogoFromPath } from "@docspace/common/utils";
+import { getLogoFromPath } from "@docspace/shared/utils";
 
 const StyledAboutBody = styled.div`
   width: 100%;
@@ -139,7 +139,7 @@ const AboutContent = (props) => {
           <ColorTheme
             {...props}
             tag="a"
-            themeId={ThemeType.Link}
+            themeId={ThemeId.Link}
             className="row-el"
             fontSize="13px"
             fontWeight="600"
@@ -170,7 +170,7 @@ const AboutContent = (props) => {
           <ColorTheme
             {...props}
             tag="a"
-            themeId={ThemeType.Link}
+            themeId={ThemeId.Link}
             className="row-el"
             fontSize="13px"
             fontWeight="600"
@@ -227,7 +227,7 @@ const AboutContent = (props) => {
           <ColorTheme
             {...props}
             tag="a"
-            themeId={ThemeType.Link}
+            themeId={ThemeId.Link}
             className="row-el"
             fontSize="13px"
             fontWeight="600"
@@ -246,7 +246,7 @@ const AboutContent = (props) => {
           <ColorTheme
             {...props}
             tag="a"
-            themeId={ThemeType.Link}
+            themeId={ThemeId.Link}
             className="row-el"
             fontSize="13px"
             fontWeight="600"

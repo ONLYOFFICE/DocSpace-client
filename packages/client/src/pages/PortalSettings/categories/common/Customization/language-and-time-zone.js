@@ -1,28 +1,26 @@
 ﻿import React from "react";
 import { withTranslation, Trans } from "react-i18next";
-import FieldContainer from "@docspace/components/field-container";
-import ComboBox from "@docspace/components/combobox";
-import toastr from "@docspace/components/toast/toastr";
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { ComboBox } from "@docspace/shared/components/combobox";
+import { toastr } from "@docspace/shared/components/toast";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject, observer } from "mobx-react";
-import {
-  LANGUAGE,
-  COOKIE_EXPIRATION_YEAR,
-  DeviceType,
-} from "@docspace/common/constants";
-import { setCookie } from "@docspace/common/utils";
+import { DeviceType } from "@docspace/shared/enums";
+import { COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
+import { LANGUAGE } from "@docspace/shared/constants";
+import { setCookie } from "@docspace/shared/utils/cookie";
 import { useNavigate } from "react-router-dom";
-import { isMobile } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/shared/utils";
 import checkScrollSettingsBlock from "../utils";
 import { StyledSettingsComponent, StyledScrollbar } from "./StyledSettings";
 import LoaderCustomization from "../sub-components/loaderCustomization";
 import withLoading from "SRC_DIR/HOCs/withLoading";
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
 import BetaBadge from "@docspace/common/components/BetaBadge";
-import { isBetaLanguage } from "@docspace/common/utils";
+import { isBetaLanguage } from "@docspace/shared/utils";
 import withCultureNames from "@docspace/common/hoc/withCultureNames";
 
 const mapTimezonesToArray = (timezones) => {

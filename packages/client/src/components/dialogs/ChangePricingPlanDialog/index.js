@@ -2,11 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { useTranslation, Trans } from "react-i18next";
-import Button from "@docspace/components/button";
-import Text from "@docspace/components/text";
-import ModalDialog from "@docspace/components/modal-dialog";
+
+import { Button } from "@docspace/shared/components/button";
+import { Text } from "@docspace/shared/components/text";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+
 import { inject, observer } from "mobx-react";
-import { getConvertedSize } from "@docspace/common/utils";
+import { getConvertedSize } from "@docspace/shared/utils/common";
 
 const ModalDialogContainer = styled(ModalDialog)`
   .cannot-downgrade-plan {

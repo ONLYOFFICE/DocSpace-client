@@ -2,9 +2,9 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import Text from "@docspace/components/text";
-import Button from "@docspace/components/button";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 import GithubLight from "PUBLIC_DIR/images/github.light.react.svg";
 import GithubDark from "PUBLIC_DIR/images/github.dark.react.svg";

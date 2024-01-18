@@ -7,17 +7,18 @@ import {
   isTablet,
   mobile,
   tablet,
-} from "@docspace/components/utils/device";
+  desktop,
+} from "@docspace/shared/utils";
 
-import Link from "@docspace/components/link";
-import Text from "@docspace/components/text";
-import RowContent from "@docspace/components/row-content";
+import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { RowContent } from "@docspace/shared/components/row-content";
 
 import withContent from "../../../../../HOCs/withContent";
 
-import { Base } from "@docspace/components/themes";
-import { RoomsTypeTranslations } from "@docspace/common/constants";
-import { desktop } from "@docspace/components/utils/device";
+import { Base } from "@docspace/shared/themes";
+import { ROOMS_TYPE_TRANSLATIONS } from "@docspace/shared/constants";
+
 import { getFileTypeName } from "../../../../../helpers/filesUtils";
 import { SortByFieldName } from "../../../../../helpers/constants";
 
@@ -277,14 +278,14 @@ const FilesRowContent = ({
           truncate={true}
         >
           {isRooms
-            ? t(RoomsTypeTranslations[item.roomType])
+            ? t(ROOMS_TYPE_TRANSLATIONS[item.roomType])
             : !fileExst && !contentLength && !providerKey
-            ? `${foldersCount} ${t("Translations:Folders")} | ${filesCount} ${t(
-                "Translations:Files"
-              )}`
-            : fileExst
-            ? `${fileExst.toUpperCase().replace(/^\./, "")}`
-            : ""}
+              ? `${foldersCount} ${t(
+                  "Translations:Folders"
+                )} | ${filesCount} ${t("Translations:Files")}`
+              : fileExst
+                ? `${fileExst.toUpperCase().replace(/^\./, "")}`
+                : ""}
         </Text>
       </SimpleFilesRowContent>
     </>

@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Text from "@docspace/components/text";
-import ToggleButton from "@docspace/components/toggle-button";
+import { Text } from "@docspace/shared/components/text";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
 
 export const SystemFoldersTitle = styled(Text)`
   font-weight: 600;

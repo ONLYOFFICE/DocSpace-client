@@ -1,13 +1,13 @@
 import React from "react";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Text from "@docspace/components/text";
-import Button from "@docspace/components/button";
-import { providersData } from "../../constants";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
+import { PROVIDERS_DATA } from "@docspace/shared/constants";
 import styled, { css } from "styled-components";
 import { ReactSVG } from "react-svg";
-import { getProviderTranslation } from "../../utils";
+import { getProviderTranslation } from "@docspace/shared/utils/common";
 import SsoReactSvgUrl from "PUBLIC_DIR/images/sso.react.svg?url";
-import { mobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/shared/utils";
 
 const ProviderRow = styled.div`
   width: 100%;
@@ -129,9 +129,9 @@ const MoreLoginModal: React.FC<IMoreLoginNodalProps> = (props) => {
           </ProviderRow>
         )}
         {providers?.map((item, index) => {
-          if (!providersData[item.provider]) return;
+          if (!PROVIDERS_DATA[item.provider]) return;
 
-          const { icon, label } = providersData[item.provider];
+          const { icon, label } = PROVIDERS_DATA[item.provider];
 
           return (
             <ProviderRow key={`ProviderItem${index}`}>

@@ -1,19 +1,6 @@
 ﻿import styled from "styled-components";
 import React, { useState } from "react";
 
-import {
-  RoomsType,
-  ShareAccessRights,
-  FileStatus,
-} from "@docspace/common/constants";
-
-import Badge from "@docspace/components/badge";
-import { Base } from "@docspace/components/themes";
-import HelpButton from "@docspace/components/help-button";
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
-import { isTablet, isDesktop, size } from "@docspace/components/utils/device";
-import { classNames } from "@docspace/components/utils/classNames";
-
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
 import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
@@ -26,6 +13,18 @@ import Mute12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/mute.react.svg?url";
 import Mute16ReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
 
 import { isMobile as isMobileDevice } from "react-device-detect";
+
+import { Badge } from "@docspace/shared/components/badge";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+
+import {
+  RoomsType,
+  ShareAccessRights,
+} from "@docspace/shared/enums";
+import { Base } from "@docspace/shared/themes";
+
+import { isTablet, isDesktop, size, classNames } from "@docspace/shared/utils";
+
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -212,7 +211,7 @@ const Badges = ({
       )}
       {isEditing && !isVisitor && !isPdf && (
         <ColorTheme
-          themeId={ThemeType.IconButton}
+          themeId={ThemeId.IconButton}
           isEditing={isEditing}
           iconName={iconEdit}
           className="badge icons-group is-editing tablet-badge tablet-edit"
@@ -227,7 +226,7 @@ const Badges = ({
         !isTrashFolder &&
         !isArchiveFolderRoot && (
           <ColorTheme
-            themeId={ThemeType.IconButton}
+            themeId={ThemeId.IconButton}
             onClick={setConvertDialogVisible}
             iconName={iconRefresh}
             className="badge tablet-badge icons-group can-convert"
@@ -280,7 +279,7 @@ const Badges = ({
     >
       {showCopyLinkIcon && (
         <ColorTheme
-          themeId={ThemeType.IconButton}
+          themeId={ThemeId.IconButton}
           iconName={LinkReactSvgUrl}
           className="badge row-copy-link icons-group tablet-badge"
           size={sizeBadge}
@@ -291,7 +290,7 @@ const Badges = ({
 
       {showCopyLinkIcon && (
         <ColorTheme
-          themeId={ThemeType.IconButton}
+          themeId={ThemeId.IconButton}
           iconName={TabletLinkReactSvgUrl}
           className="badge tablet-row-copy-link icons-group  tablet-badge"
           size={sizeBadge}
@@ -302,7 +301,7 @@ const Badges = ({
 
       {isRoom && mute && (
         <ColorTheme
-          themeId={ThemeType.IconButtonMute}
+          themeId={ThemeId.IconButtonMute}
           onClick={onUnmuteClick}
           iconName={iconMute}
           size={sizeBadge}
@@ -312,7 +311,7 @@ const Badges = ({
       )}
       {isRoom && pinned && (
         <ColorTheme
-          themeId={ThemeType.IconButtonPin}
+          themeId={ThemeId.IconButtonPin}
           onClick={onUnpinClick}
           className="badge icons-group is-pinned tablet-badge tablet-pinned"
           iconName={iconPin}

@@ -2,7 +2,7 @@ import {
   ShareAccessRights,
   RoomsType,
   EmployeeType,
-} from "@docspace/common/constants";
+} from "@docspace/shared/enums";
 
 export const getAccessOptions = (
   t,

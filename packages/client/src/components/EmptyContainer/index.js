@@ -4,7 +4,7 @@ import { observer, inject } from "mobx-react";
 import RootFolderContainer from "./RootFolderContainer";
 import EmptyFilterContainer from "./EmptyFilterContainer";
 import EmptyFolderContainer from "./EmptyFolderContainer";
-import { Events } from "@docspace/common/constants";
+import { Events } from "@docspace/shared/enums";
 import RoomNoAccessContainer from "./RoomNoAccessContainer";
 
 const linkStyles = {

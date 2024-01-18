@@ -2,12 +2,12 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import Box from "@docspace/components/box";
-import Button from "@docspace/components/button";
-import Link from "@docspace/components/link";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Text from "@docspace/components/text";
-import TextArea from "@docspace/components/textarea";
+import { Box } from "@docspace/shared/components/box";
+import { Button } from "@docspace/shared/components/button";
+import { Link } from "@docspace/shared/components/link";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Text } from "@docspace/shared/components/text";
+import { Textarea } from "@docspace/shared/components/textarea";
 
 import ModalComboBox from "./ModalComboBox";
 import StyledModalDialog from "../styled-containers/StyledModalDialog";
@@ -50,7 +50,7 @@ const AddSpCertificateModal = (props) => {
           {t("OpenCertificate")}
         </Text>
 
-        <TextArea
+        <Textarea
           id="sp-certificate"
           className="text-area"
           name="spCertificate"
@@ -64,7 +64,7 @@ const AddSpCertificateModal = (props) => {
           {t("PrivateKey")}
         </Text>
 
-        <TextArea
+        <Textarea
           id="sp-privateKey"
           className="text-area"
           name="spPrivateKey"

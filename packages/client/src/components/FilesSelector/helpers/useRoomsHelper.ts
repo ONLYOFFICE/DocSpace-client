@@ -1,13 +1,13 @@
 import React from "react";
 
 // @ts-ignore
-import { getRooms } from "@docspace/common/api/rooms";
+import { getRooms } from "@docspace/shared/api/rooms";
 // @ts-ignore
-import RoomsFilter from "@docspace/common/api/rooms/filter";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
 // @ts-ignore
-import { RoomsType } from "@docspace/common/constants";
+import { RoomsType } from "@docspace/shared/enums";
 // @ts-ignore
-import { iconSize32 } from "@docspace/common/utils/image-helpers";
+import { iconSize32 } from "@docspace/shared/utils/image-helpers";
 
 import { PAGE_COUNT, defaultBreadCrumb } from "../utils";
 
@@ -95,8 +95,8 @@ const useRoomsHelper = ({
       const filterValue = search
         ? search
         : search === null
-        ? ""
-        : searchValue || "";
+          ? ""
+          : searchValue || "";
 
       const page = startIndex / PAGE_COUNT;
 

@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef } from "react";
 import styled, { css, useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 
 const StyledTooltip = styled.div`
   position: fixed;

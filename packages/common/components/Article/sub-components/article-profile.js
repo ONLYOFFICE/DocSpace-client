@@ -1,10 +1,10 @@
 import React, { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import Avatar from "@docspace/components/avatar";
-import Text from "@docspace/components/text";
-import IconButton from "@docspace/components/icon-button";
-import ContextMenu from "@docspace/components/context-menu";
+import { Avatar } from "@docspace/shared/components/avatar";
+import { Text } from "@docspace/shared/components/text";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { ContextMenu } from "@docspace/shared/components/context-menu";
 
 import {
   StyledArticleProfile,
@@ -14,7 +14,7 @@ import {
 import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/vertical-dots.react.svg?url";
 import DefaultUserPhotoPngUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import { useTheme } from "styled-components";
-import { DeviceType } from "../../../constants";
+import { DeviceType } from "@docspace/shared/enums";
 const ArticleProfile = (props) => {
   const {
     user,
@@ -57,12 +57,21 @@ const ArticleProfile = (props) => {
 
   const model = getActions(t);
 
-  const username = user.displayName
+  const firstName = user.firstName
     .split(" ")
-    .filter((name) => name.trim().length > 0);
+    .filter((name) => name.trim().length > 0)
+    .join(" ");
+  const lastName = user.lastName
+    .split(" ")
+    .filter((name) => name.trim().length > 0)
+    .join(" ");
 
-  const lastName = username.shift();
-  const firstName = username.join(" ");
+  const displayName = user.displayName;
+
+  const [firstTerm, secondTerm] =
+    displayName.indexOf(user.firstName) > displayName.indexOf(user.lastName)
+      ? [lastName, firstName]
+      : [firstName, lastName];
 
   const { interfaceDirection } = useTheme();
   const isRtl = interfaceDirection === "rtl";
@@ -98,16 +107,14 @@ const ArticleProfile = (props) => {
         </div>
         {(!isTabletView || showText) && (
           <>
-            <StyledUserName
-              length={user.displayName.length}
-              onClick={onProfileClick}
-            >
+            <StyledUserName onClick={onProfileClick}>
               <Text fontWeight={600} noSelect truncate dir="auto">
-                {lastName}
+                {firstTerm}
+                &nbsp;
               </Text>
-              &nbsp;
               <Text fontWeight={600} noSelect truncate dir="auto">
-                {firstName}
+                {secondTerm}
+                &nbsp;
               </Text>
             </StyledUserName>
             <div ref={iconRef} className="option-button">

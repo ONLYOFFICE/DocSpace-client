@@ -1,6 +1,6 @@
 import React from "react";
-import { LoaderStyle } from "@docspace/components/utils/constants";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { LOADER_STYLE } from "@docspace/shared/constants";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { StyledSMTPContent } from "./StyledComponent";
 const speed = 2;
 
@@ -11,10 +11,10 @@ const SettingsDSConnect = () => {
         <RectangleSkeleton
           height="22"
           width="56"
-          backgroundColor={LoaderStyle.backgroundColor}
-          foregroundColor={LoaderStyle.foregroundColor}
-          backgroundOpacity={LoaderStyle.backgroundOpacity}
-          foregroundOpacity={LoaderStyle.foregroundOpacity}
+          backgroundColor={LOADER_STYLE.backgroundColor}
+          foregroundColor={LOADER_STYLE.foregroundColor}
+          backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+          foregroundOpacity={LOADER_STYLE.foregroundOpacity}
           speed={speed}
           animate={true}
         />
@@ -24,10 +24,10 @@ const SettingsDSConnect = () => {
         className="rectangle-loader-2"
         height="46"
         width="348"
-        backgroundColor={LoaderStyle.backgroundColor}
-        foregroundColor={LoaderStyle.foregroundColor}
-        backgroundOpacity={LoaderStyle.backgroundOpacity}
-        foregroundOpacity={LoaderStyle.foregroundOpacity}
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
         animate={true}
       />
@@ -39,20 +39,20 @@ const SettingsDSConnect = () => {
       <RectangleSkeleton
         height="20"
         width="101"
-        backgroundColor={LoaderStyle.backgroundColor}
-        foregroundColor={LoaderStyle.foregroundColor}
-        backgroundOpacity={LoaderStyle.backgroundOpacity}
-        foregroundOpacity={LoaderStyle.foregroundOpacity}
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
         animate={true}
       />
       <RectangleSkeleton
         className="rectangle-loader-2"
         height="32"
-        backgroundColor={LoaderStyle.backgroundColor}
-        foregroundColor={LoaderStyle.foregroundColor}
-        backgroundOpacity={LoaderStyle.backgroundOpacity}
-        foregroundOpacity={LoaderStyle.foregroundOpacity}
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
         animate={true}
       />
@@ -63,20 +63,20 @@ const SettingsDSConnect = () => {
       <RectangleSkeleton
         height="20"
         width="138"
-        backgroundColor={LoaderStyle.backgroundColor}
-        foregroundColor={LoaderStyle.foregroundColor}
-        backgroundOpacity={LoaderStyle.backgroundOpacity}
-        foregroundOpacity={LoaderStyle.foregroundOpacity}
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
         animate={true}
       />
       <RectangleSkeleton
         className="rectangle-loader-2"
         height="32"
-        backgroundColor={LoaderStyle.backgroundColor}
-        foregroundColor={LoaderStyle.foregroundColor}
-        backgroundOpacity={LoaderStyle.backgroundOpacity}
-        foregroundOpacity={LoaderStyle.foregroundOpacity}
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
         animate={true}
       />
@@ -88,20 +88,20 @@ const SettingsDSConnect = () => {
       <RectangleSkeleton
         height="16"
         width="16"
-        backgroundColor={LoaderStyle.backgroundColor}
-        foregroundColor={LoaderStyle.foregroundColor}
-        backgroundOpacity={LoaderStyle.backgroundOpacity}
-        foregroundOpacity={LoaderStyle.foregroundOpacity}
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
         animate={true}
       />
       <RectangleSkeleton
         height="22"
         width="101"
-        backgroundColor={LoaderStyle.backgroundColor}
-        foregroundColor={LoaderStyle.foregroundColor}
-        backgroundOpacity={LoaderStyle.backgroundOpacity}
-        foregroundOpacity={LoaderStyle.foregroundOpacity}
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
         animate={true}
       />
@@ -112,20 +112,20 @@ const SettingsDSConnect = () => {
       <RectangleSkeleton
         height="16"
         width="16"
-        backgroundColor={LoaderStyle.backgroundColor}
-        foregroundColor={LoaderStyle.foregroundColor}
-        backgroundOpacity={LoaderStyle.backgroundOpacity}
-        foregroundOpacity={LoaderStyle.foregroundOpacity}
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
         animate={true}
       />
       <RectangleSkeleton
         height="20"
         width="70"
-        backgroundColor={LoaderStyle.backgroundColor}
-        foregroundColor={LoaderStyle.foregroundColor}
-        backgroundOpacity={LoaderStyle.backgroundOpacity}
-        foregroundOpacity={LoaderStyle.foregroundOpacity}
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
         animate={true}
       />
@@ -135,19 +135,19 @@ const SettingsDSConnect = () => {
     <div className="rectangle-loader_buttons">
       <RectangleSkeleton
         height="32"
-        backgroundColor={LoaderStyle.backgroundColor}
-        foregroundColor={LoaderStyle.foregroundColor}
-        backgroundOpacity={LoaderStyle.backgroundOpacity}
-        foregroundOpacity={LoaderStyle.foregroundOpacity}
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
         animate={true}
       />
       <RectangleSkeleton
         height="32"
-        backgroundColor={LoaderStyle.backgroundColor}
-        foregroundColor={LoaderStyle.foregroundColor}
-        backgroundOpacity={LoaderStyle.backgroundOpacity}
-        foregroundOpacity={LoaderStyle.foregroundOpacity}
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
         animate={true}
       />
@@ -159,10 +159,10 @@ const SettingsDSConnect = () => {
         className="rectangle-loader_title"
         height="22"
         width="128"
-        backgroundColor={LoaderStyle.backgroundColor}
-        foregroundColor={LoaderStyle.foregroundColor}
-        backgroundOpacity={LoaderStyle.backgroundOpacity}
-        foregroundOpacity={LoaderStyle.foregroundOpacity}
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
         animate={true}
       />
@@ -170,10 +170,10 @@ const SettingsDSConnect = () => {
       <RectangleSkeleton
         className="rectangle-loader_description"
         height="40"
-        backgroundColor={LoaderStyle.backgroundColor}
-        foregroundColor={LoaderStyle.foregroundColor}
-        backgroundOpacity={LoaderStyle.backgroundOpacity}
-        foregroundOpacity={LoaderStyle.foregroundOpacity}
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
         animate={true}
       />

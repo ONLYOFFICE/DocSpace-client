@@ -10,7 +10,7 @@ import {
   StyledBody,
   StyledItem,
 } from "./StyledSharingPanel";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 const SharingPanelLoader = ({ id, className, style, ...rest }) => {
   return (

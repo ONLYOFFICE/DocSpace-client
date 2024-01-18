@@ -6,14 +6,11 @@ import React, {
   useRef,
 } from "react";
 
-import {
-  isMobile as isMobileUtils,
-  isTablet,
-} from "@docspace/components/utils/device";
+import { isMobile as isMobileUtils, isTablet } from "@docspace/shared/utils";
 
-import { FileStatus } from "../../constants";
-import { getFileExtension } from "../../utils";
-import { checkDialogsOpen } from "../../utils/checkDialogsOpen";
+import { FileStatus } from "@docspace/shared/enums";
+import { getFileExtension } from "@docspace/shared/utils/common";
+import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 
 import {
   isNullOrUndefined,
@@ -252,8 +249,8 @@ function MediaViewer({
     return isMobile
       ? model
       : isImage && !isMobile
-      ? desktopModel.filter((el) => el.key !== "download")
-      : desktopModel;
+        ? desktopModel.filter((el) => el.key !== "download")
+        : desktopModel;
   };
 
   const canImageView = useCallback(
@@ -283,9 +280,8 @@ function MediaViewer({
   const onDelete = () => {
     const { playlist, onDelete } = props;
 
-    let currentFileId = playlist.find(
-      (file) => file.id === playlistPos
-    )?.fileId;
+    let currentFileId = playlist.find((file) => file.id === playlistPos)
+      ?.fileId;
 
     if (currentFileId === lastRemovedFileId) return;
 
@@ -304,9 +300,8 @@ function MediaViewer({
 
     if (!targetFile?.security.Download) return;
 
-    let currentFileId = playlist.find(
-      (file) => file.id === playlistPos
-    )?.fileId;
+    let currentFileId = playlist.find((file) => file.id === playlistPos)
+      ?.fileId;
 
     if (!isNullOrUndefined(currentFileId)) onDownload(currentFileId);
   };

@@ -4,8 +4,8 @@ import CategoryFilter from "./CategoryFilter";
 import LanguageFilter from "./LanguageFilter";
 import SearchFilter from "./SearchFilter";
 import SortFilter from "./SortFilter";
-import { mobile, tablet } from "@docspace/components/utils/device";
-import { Base } from "@docspace/components/themes";
+import { mobile, tablet } from "@docspace/shared/utils";
+import { Base } from "@docspace/shared/themes";
 
 export const StyledFilter = styled.div`
   display: flex;

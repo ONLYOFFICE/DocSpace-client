@@ -1,12 +1,12 @@
 ﻿import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 import React from "react";
 import styled, { css } from "styled-components";
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { HelpButton, Link } from "@docspace/components";
-import Avatar from "@docspace/components/avatar";
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { Avatar } from "@docspace/shared/components/avatar";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 const StyledContainer = styled.div`
   display: flex;
@@ -135,7 +135,7 @@ const PayerInformationContainer = ({
             fontWeight={600}
             href={accountLink}
             tag="a"
-            themeId={ThemeType.Link}
+            themeId={ThemeId.Link}
             target="_blank"
             className="payer-info_account-link"
           >
@@ -155,7 +155,7 @@ const PayerInformationContainer = ({
           href={accountLink}
           className="payer-info_account-link"
           tag="a"
-          themeId={ThemeType.Link}
+          themeId={ThemeId.Link}
           target="_blank"
         >
           {t("StripeCustomerPortal")}
@@ -165,7 +165,7 @@ const PayerInformationContainer = ({
           fontWeight={600}
           href={`mailto:${email}`}
           tag="a"
-          themeId={ThemeType.Link}
+          themeId={ThemeId.Link}
         >
           {email}
         </ColorTheme>

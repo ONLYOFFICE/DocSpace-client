@@ -2,14 +2,14 @@
 import React, { useState } from "react";
 import { Trans } from "react-i18next";
 
-import Text from "@docspace/components/text";
-import IconButton from "@docspace/components/icon-button";
+import { Text } from "@docspace/shared/components/text";
+import { IconButton } from "@docspace/shared/components/icon-button";
 import { ReactSVG } from "react-svg";
 import {
   StyledHistoryBlockFile,
   StyledHistoryBlockFilesList,
 } from "../../styles/history";
-import { RoomsType } from "@docspace/common/constants";
+import { RoomsType } from "@docspace/shared/enums";
 
 export const HistoryBlockItemList = ({
   t,

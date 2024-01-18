@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import Scrollbar from "@docspace/components/scrollbar";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { isMobileOnly } from "react-device-detect";
 import React from "react";
 import styled, { css } from "styled-components";

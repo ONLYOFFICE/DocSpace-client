@@ -1,4 +1,4 @@
-import { ShareAccessRights } from "@docspace/common/constants";
+import { ShareAccessRights } from "@docspace/shared/enums";
 import { makeAutoObservable } from "mobx";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
@@ -33,7 +33,7 @@ class SelectedFolderStore {
   settingsStore = null;
   security = null;
   type = null;
-  inRoom = true;
+  inRoom = false;
 
   constructor(settingsStore) {
     makeAutoObservable(this);
@@ -113,7 +113,7 @@ class SelectedFolderStore {
     this.rootFolderId = null;
     this.security = null;
     this.type = null;
-    this.inRoom = true;
+    this.inRoom = false;
   };
 
   setParentId = (parentId) => {
@@ -139,6 +139,10 @@ class SelectedFolderStore {
   updateEditedSelectedRoom = (title = this.title, tags = this.tags) => {
     this.title = title;
     this.tags = tags;
+  };
+
+  setInRoom = (inRoom) => {
+    this.inRoom = inRoom;
   };
 
   addDefaultLogoPaths = () => {

@@ -3,15 +3,15 @@ import { inject, observer } from "mobx-react";
 
 import styled, { css } from "styled-components";
 
-import Text from "@docspace/components/text";
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
+import { Text } from "@docspace/shared/components/text";
+import { commonIconsStyles } from "@docspace/shared/utils";
 
 import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg";
 
 import Loaders from "../Loaders";
 import { StyledAlertComponent } from "./StyledComponent";
-import Link from "@docspace/components/link";
+import { Link } from "@docspace/shared/components/link";
 
 const StyledArrowRightIcon = styled(ArrowRightIcon)`
   margin: auto 0;

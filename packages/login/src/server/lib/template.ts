@@ -1,6 +1,6 @@
 import { getScripts } from "./helpers";
 import pkg from "../../../package.json";
-import { getLogoFromPath } from "@docspace/common/utils";
+import { getLogoFromPath } from "@docspace/shared/utils";
 
 import fontsCssUrl from "PUBLIC_DIR/css/fonts.css?url";
 

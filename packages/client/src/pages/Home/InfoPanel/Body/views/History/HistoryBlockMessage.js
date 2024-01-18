@@ -1,7 +1,7 @@
 import React from "react";
 import { Trans } from "react-i18next";
 
-import { FeedActionTypes, FeedItemTypes } from "@docspace/common/constants";
+import { FeedActionTypes, FeedItemTypes } from "@docspace/shared/enums";
 
 import { StyledHistoryBlockMessage } from "../../styles/history";
 import getBlockMessageTranslation from "./HistroryBlockMessageTranslations";

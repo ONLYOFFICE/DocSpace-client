@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
-import { getAppearanceTheme } from "@docspace/common/api/settings";
-import { Base } from "@docspace/components/themes";
+import { getAppearanceTheme } from "@docspace/shared/api/settings";
+import { Base } from "@docspace/shared/themes";
 
 class LoginStore {
   currentColorScheme: ITheme | null = null;

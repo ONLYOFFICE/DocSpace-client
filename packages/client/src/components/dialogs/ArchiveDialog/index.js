@@ -2,9 +2,10 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 
 import ModalDialogContainer from "../ModalDialogContainer";
-import Text from "@docspace/components/text";
-import Button from "@docspace/components/button";
-import ModalDialog from "@docspace/components/modal-dialog";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -117,10 +118,10 @@ export default inject(
     const items = restoreAll
       ? roomsForRestore
       : selection.length > 0
-      ? selection
-      : bufferSelection
-      ? [bufferSelection]
-      : [{ id: selectedFolderStore.id }];
+        ? selection
+        : bufferSelection
+          ? [bufferSelection]
+          : [{ id: selectedFolderStore.id }];
 
     return {
       visible,

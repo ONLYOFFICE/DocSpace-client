@@ -1,4 +1,4 @@
-import { FolderType } from "@docspace/common/constants";
+import { FolderType } from "@docspace/shared/enums";
 
 import EmptyScreenPersonalUrl from "PUBLIC_DIR/images/empty_screen_personal.svg?url";
 import EmptyScreenPersonalDarkUrl from "PUBLIC_DIR/images/empty_screen_personal_dark.svg?url";

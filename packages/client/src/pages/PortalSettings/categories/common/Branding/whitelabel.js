@@ -3,16 +3,16 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import Text from "@docspace/components/text";
-import HelpButton from "@docspace/components/help-button";
-import FieldContainer from "@docspace/components/field-container";
-import TextInput from "@docspace/components/text-input";
-import Button from "@docspace/components/button";
-import Badge from "@docspace/components/badge";
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
-import toastr from "@docspace/components/toast/toastr";
+import { Text } from "@docspace/shared/components/text";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { Button } from "@docspace/shared/components/button";
+import { Badge } from "@docspace/shared/components/badge";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
+import { toastr } from "@docspace/shared/components/toast";
 
-import { size } from "@docspace/components/utils/device";
+import { size } from "@docspace/shared/utils";
 
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import WhiteLabelWrapper from "./StyledWhitelabel";
@@ -26,7 +26,7 @@ import {
 } from "../../../utils/whiteLabelHelper";
 
 import isEqual from "lodash/isEqual";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const WhiteLabel = (props) => {
   const {

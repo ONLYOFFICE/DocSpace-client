@@ -25,12 +25,12 @@ const parseUrl = (url) => {
   params.deliveryDate =
     params.deliveryDate === "null"
       ? null
-      : moment(params.deliveryDate, "YYYY-MM-DD").tz(window.timezone || "");
+      : moment(params.deliveryDate, "YYYY-MM-DD").tz(window.timezone);
   params.deliveryFrom = moment(params.deliveryFrom, "HH:mm").tz(
-    window.timezone || ""
+    window.timezone
   );
   params.deliveryTo = moment(params.deliveryTo, "HH:mm").tz(
-    window.timezone || ""
+    window.timezone
   );
   params.status = JSON.parse(params.status);
 

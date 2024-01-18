@@ -6,18 +6,18 @@ import { ReactSVG } from "react-svg";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import Avatar from "@docspace/components/avatar";
+import { Avatar } from "@docspace/shared/components/avatar";
 
-import Text from "@docspace/components/text";
-import Box from "@docspace/components/box";
-import Link from "@docspace/components/link";
-import ComboBox from "@docspace/components/combobox";
-import IconButton from "@docspace/components/icon-button";
-import Badge from "@docspace/components/badge";
+import { Text } from "@docspace/shared/components/text";
+import { Box } from "@docspace/shared/components/box";
+import { Link } from "@docspace/shared/components/link";
+import { ComboBox } from "@docspace/shared/components/combobox";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { Badge } from "@docspace/shared/components/badge";
 import { isMobileOnly } from "react-device-detect";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
-import { getUserRole, convertLanguage } from "@docspace/common/utils";
+import { getUserRole, convertLanguage } from "@docspace/shared/utils/common";
 import BetaBadge from "@docspace/common/components/BetaBadge";
 
 import { Trans } from "react-i18next";
@@ -31,9 +31,10 @@ import {
   StyledLabel,
   StyledAvatarWrapper,
 } from "./styled-main-profile";
-import { HelpButton, Tooltip } from "@docspace/components";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { Tooltip } from "@docspace/shared/components/tooltip";
 import withCultureNames from "@docspace/common/hoc/withCultureNames";
-import { isMobile } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/shared/utils";
 import { SSO_LABEL } from "SRC_DIR/helpers/constants";
 import { useTheme } from "styled-components";
 

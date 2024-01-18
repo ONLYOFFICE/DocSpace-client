@@ -169,6 +169,11 @@ const Frame = styled(Box)`
       min-width: ${props.width ? props.width : "100%"};
       min-height: ${props.height ? props.height : "400px"};
     }
+
+    #${props.targetId}-loader {
+      border-radius: 6px;
+      border: 1px solid #d0d5da;
+    }
   `}
 `;
 
@@ -528,7 +533,8 @@ const PortalIntegration = (props) => {
           color={currentColorScheme?.main?.accent}
           fontSize="12px"
           fontWeight="400"
-          onClick={() => window.open(sdkLink, "_blank")}>
+          onClick={() => window.open(sdkLink, "_blank")}
+        >
           {t("APILink")}.
         </Link>
         <CSP t={t} />

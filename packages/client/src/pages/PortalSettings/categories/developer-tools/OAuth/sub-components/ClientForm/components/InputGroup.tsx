@@ -1,11 +1,10 @@
 import React from "react";
 
-import InputBlock from "@docspace/components/input-block";
-import Button from "@docspace/components/button";
-//@ts-ignore
-import FieldContainer from "@docspace/components/field-container";
-//@ts-ignore
-import RectangleLoader from "@docspace/components/skeletons/rectangle";
+import { InputBlock } from "@docspace/shared/components/input-block";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { RectangleSkeleton } from "@docspace/shared/skeletons/rectangle";
+import { InputSize, InputType } from "@docspace/shared/components/text-input";
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 
@@ -28,7 +27,7 @@ interface InputGroupProps {
   onButtonClick?: () => void;
 
   withCopy?: boolean;
-  onCopyClick?: (name: string) => void;
+  onCopyClick?: (e: React.MouseEvent) => void;
   isPassword?: boolean;
 
   disabled?: boolean;
@@ -94,7 +93,7 @@ const InputGroup = ({
         ) : (
           <>
             {isRequestRunning ? (
-              <RectangleLoader
+              <RectangleSkeleton
                 className={"loader"}
                 width={"100%"}
                 height={"32px"}
@@ -110,18 +109,18 @@ const InputGroup = ({
                 maxLength={255}
                 isReadOnly={withCopy}
                 isDisabled={disabled}
-                iconName={withCopy ? CopyReactSvgUrl : null}
-                onIconClick={withCopy && onCopyClick}
-                type={isPassword ? "password" : "text"}
+                size={InputSize.base}
+                iconName={withCopy ? CopyReactSvgUrl : ""}
+                onIconClick={withCopy ? onCopyClick : undefined}
+                type={isPassword ? InputType.password : InputType.text}
                 onBlur={() => onBlur?.(name)}
                 hasError={isError}
               />
             )}
             {buttonLabel && (
               <Button
-                //@ts-ignore
                 label={buttonLabel}
-                size={"small"}
+                size={ButtonSize.small}
                 onClick={onButtonClickAction}
                 isDisabled={isRequestRunning}
               />

@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-//@ts-ignore
-import { Base } from "@docspace/components/themes";
+import { Base } from "../../themes";
+import { ScopeType } from "../../enums";
+import { TTranslation } from "../../types";
 
 import { IFilteredScopes, IScope } from "./interfaces";
 import { filterScopeByGroup } from ".";
-import { ScopeType } from "./enums";
 
 const StyledScopeList = styled.div`
   width: 100%;
@@ -46,43 +46,41 @@ interface IScopeListProps {
   selectedScopes: string[];
   scopes: IScope[];
 
-  t: any;
+  t: TTranslation;
 }
 
 const ScopeList = ({ selectedScopes, scopes, t }: IScopeListProps) => {
   const [renderedScopes, setRenderedScopes] = React.useState<string[]>([]);
 
   React.useEffect(() => {
-    const result = [];
+    const result: string[] = [];
 
     const filteredScopes: IFilteredScopes = filterScopeByGroup(
       selectedScopes,
-      scopes
+      scopes,
     );
 
-    for (let key in filteredScopes) {
+    Object.keys(filteredScopes).forEach((key) => {
       if (filteredScopes[key].isChecked) {
         if (
           filteredScopes[key].checkedType === ScopeType.read ||
           filteredScopes[key].checkedType === ScopeType.openid
         ) {
-          //@ts-ignore
           result.push(filteredScopes[key].read?.tKey || "");
         } else {
-          //@ts-ignore
           result.push(filteredScopes[key].write?.tKey || "");
         }
       }
-    }
+    });
 
     setRenderedScopes([...result]);
   }, [selectedScopes, scopes]);
 
   return (
     <StyledScopeList className="scope-list">
-      {renderedScopes.map((scope, index) => (
-        <StyledScopeItem key={`${scope}-${index}`}>
-          <div className="circle"></div>
+      {renderedScopes.map((scope) => (
+        <StyledScopeItem key={`${scope}`}>
+          <div className="circle" />
           {t(`Common:${scope}`)}
         </StyledScopeItem>
       ))}

@@ -1,8 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-//@ts-ignore
-import Row from "@docspace/components/row";
+import { Row } from "@docspace/shared/components/row";
 
 import { RowContent } from "./RowContent";
 import { RowProps } from "./RowView.types";
@@ -21,8 +20,7 @@ export const OAuthRow = (props: RowProps) => {
 
   const { t } = useTranslation(["OAuth", "Common", "Files"]);
 
-  const contextOptions =
-    getContextMenuItems && getContextMenuItems(t, item, false, false);
+  const contextOptions = getContextMenuItems?.(t, item, false, false) || [];
 
   const element = (
     <img style={{ borderRadius: "3px" }} src={item.logo} alt={"App logo"} />
@@ -31,15 +29,15 @@ export const OAuthRow = (props: RowProps) => {
   return (
     <>
       <Row
-        sectionWidth={sectionWidth}
         key={item.clientId}
-        data={item}
+        // data={item}
         contextOptions={contextOptions}
         element={element}
         mode={"modern"}
         checked={isChecked}
         inProgress={inProgress}
         onSelect={() => setSelection && setSelection(item.clientId)}
+        onRowClick={() => {}}
       >
         <RowContent
           sectionWidth={sectionWidth}

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-import Button from "@docspace/components/button";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 
 import { RegisterNewButtonProps } from "./RegisterNewButton.types";
 
@@ -16,11 +16,12 @@ const RegisterNewButton = ({
 
   return (
     <Button
-      //@ts-ignore
       className="add-button"
-      size={currentDeviceType !== "desktop" ? "normal" : "small"}
+      size={
+        currentDeviceType !== "desktop" ? ButtonSize.normal : ButtonSize.small
+      }
       label={t("RegisterNewApp")}
-      primary={true}
+      primary
       onClick={onClick}
     />
   );

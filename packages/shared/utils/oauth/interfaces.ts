@@ -1,4 +1,4 @@
-import { AuthenticationMethod, ScopeGroup, ScopeType } from "./enums";
+import { AuthenticationMethod, ScopeGroup, ScopeType } from "../../enums";
 
 export interface IScope {
   name: string;

@@ -2,8 +2,7 @@ import React from "react";
 import { Trans } from "react-i18next";
 import copy from "copy-to-clipboard";
 
-//@ts-ignore
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 
 import { StyledBlock, StyledInputBlock } from "../ClientForm.styled";
 

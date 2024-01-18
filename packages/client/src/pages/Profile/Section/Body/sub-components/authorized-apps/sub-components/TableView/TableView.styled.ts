@@ -1,10 +1,7 @@
 import styled, { css } from "styled-components";
 
-//@ts-ignore
-import TableContainer from "@docspace/components/table-container/TableContainer";
-//@ts-ignore
-import TableRow from "@docspace/components/table-container/TableRow";
-import { Base } from "@docspace/components/themes";
+import { TableRow, TableContainer } from "@docspace/shared/components/table";
+import { Base } from "@docspace/shared/themes";
 
 export const TableWrapper = styled(TableContainer)`
   margin-top: 0px;

@@ -6,10 +6,10 @@ import { PasswordInput } from "@docspace/shared/components/password-input";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
+import { Link, LinkType } from "@docspace/shared/components/link";
 import { useTranslation } from "react-i18next";
 import ForgotPasswordModalDialog from "./forgot-password-modal-dialog";
-import { Button } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { createPasswordHash } from "@docspace/shared/utils/common";
 import { checkIsSSR } from "@docspace/shared/utils";
 import { checkPwd } from "@docspace/shared/utils/desktop";
@@ -22,14 +22,12 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { OAuthLinksContainer, StyledCaptcha } from "../StyledLogin";
 import OAuthClientInfo from "./oauth-client-info";
 import SelectUser from "./SelectUser";
-import {
-  getClient,
-  getScopeList,
-  loginWithOAuth,
-} from "@docspace/common/api/oauth";
-import { getUser } from "@docspace/common/api/people";
-import { onOAuthLogin } from "@docspace/common/api/oauth";
-import { IClientProps, IScope } from "@docspace/common/utils/oauth/interfaces";
+import { getClient, getScopeList } from "@docspace/shared/api/oauth";
+import { getUser } from "@docspace/shared/api/people";
+import { onOAuthLogin } from "@docspace/shared/api/oauth";
+import { IClientProps, IScope } from "@docspace/shared/utils/oauth/interfaces";
+import { setCookie } from "@docspace/shared/utils/cookie";
+import { InputSize } from "@docspace/shared/components/text-input";
 
 interface ILoginFormProps {
   isLoading: boolean;
@@ -228,7 +226,7 @@ const LoginForm: React.FC<ILoginFormProps> = ({
         if (isOAuthPage) {
           const requests = [];
 
-          setCookie("client_id", oauth?.clientId);
+          setCookie("client_id", oauth?.clientId || "");
 
           requests.push(getClient(oauth?.clientId || ""));
           requests.push(getScopeList());
@@ -344,7 +342,7 @@ const LoginForm: React.FC<ILoginFormProps> = ({
       )}
       <>
         <FieldContainer
-          isVertical={true}
+          isVertical
           labelVisible={false}
           hasError={isEmailErrorShow}
           errorMessage={
@@ -358,9 +356,9 @@ const LoginForm: React.FC<ILoginFormProps> = ({
             hasError={isEmailErrorShow}
             value={identifier}
             placeholder={t("RegistrationEmailWatermark")}
-            size="large"
-            scale={true}
-            isAutoFocussed={true}
+            size={InputSize.large}
+            scale
+            isAutoFocussed
             tabIndex={1}
             isDisabled={isLoading}
             autoComplete="username"
@@ -373,14 +371,14 @@ const LoginForm: React.FC<ILoginFormProps> = ({
         {(!IS_ROOMS_MODE || !isWithoutPasswordLogin) && (
           <>
             <FieldContainer
-              isVertical={true}
+              isVertical
               labelVisible={false}
               hasError={!passwordValid}
               errorMessage={!password.trim() ? t("Common:RequiredField") : ""} //TODO: Add wrong password server error
             >
               <PasswordInput
                 className="password-input"
-                simpleView={true}
+                simpleView
                 passwordSettings={settings}
                 id="login_password"
                 inputName="password"
@@ -388,8 +386,8 @@ const LoginForm: React.FC<ILoginFormProps> = ({
                 type="password"
                 hasError={!passwordValid}
                 inputValue={password}
-                size="large"
-                scale={true}
+                size={InputSize.large}
+                scale
                 tabIndex={1}
                 isDisabled={isLoading}
                 autoComplete="current-password"
@@ -468,8 +466,8 @@ const LoginForm: React.FC<ILoginFormProps> = ({
           id="login_submit"
           className="login-button"
           primary
-          size="medium"
-          scale={true}
+          size={ButtonSize.medium}
+          scale
           label={
             isLoading ? t("Common:LoadingProcessing") : t("Common:LoginButton")
           }
@@ -485,8 +483,8 @@ const LoginForm: React.FC<ILoginFormProps> = ({
           {/*<Link
                   fontWeight="600"
                   fontSize="13px"
-                  type="action"
-                  isHovered={true}
+                  type={LinkType.action}
+                  isHovered
                   onClick={onLoginWithCodeClick}
                 >
                   {t("SignInWithCode")}
@@ -498,8 +496,8 @@ const LoginForm: React.FC<ILoginFormProps> = ({
                 id="login_recover-link"
                 fontWeight="600"
                 fontSize="13px"
-                type="action"
-                isHovered={true}
+                type={LinkType.action}
+                isHovered
                 className="login-link recover-link"
                 onClick={openRecoverDialog}
               >
@@ -514,8 +512,8 @@ const LoginForm: React.FC<ILoginFormProps> = ({
           <Link
             fontWeight="600"
             fontSize="13px"
-            type="action"
-            isHovered={true}
+            type={LinkType.action}
+            isHovered
             onClick={onLoginWithPasswordClick}
           >
             {t("SignInWithPassword")}

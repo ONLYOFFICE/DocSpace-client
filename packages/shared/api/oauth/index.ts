@@ -1,10 +1,6 @@
-//@ts-ignore
 import { request } from "../client";
 
-import {
-  transformToClientProps,
-  transformToClientReqDTO,
-} from "./../../utils/oauth/index";
+import { transformToClientProps } from "../../utils/oauth/index";
 
 import {
   IClientProps,
@@ -18,13 +14,13 @@ import {
 
 export const getClient = async (
   clientId: string,
-  isAuth: boolean = true
+  isAuth: boolean = true,
 ): Promise<IClientProps | INoAuthClientProps> => {
   if (!isAuth) {
-    const client: IClientResDTO = await request({
+    const client = (await request({
       method: "get",
       url: `/clients/${clientId}/info`,
-    });
+    })) as IClientResDTO;
 
     return {
       ...client,
@@ -32,22 +28,22 @@ export const getClient = async (
     };
   }
 
-  const client: IClientResDTO = await request({
+  const client = (await request({
     method: "get",
     url: `/clients/${clientId}`,
-  });
+  })) as IClientResDTO;
 
   return transformToClientProps(client);
 };
 
 export const getClientList = async (
   page: number,
-  limit: number
+  limit: number,
 ): Promise<IClientListProps> => {
-  const data: IClientListDTO = await request({
+  const data = (await request({
     method: "get",
     url: `/clients?page=${page}&limit=${limit}`,
-  });
+  })) as IClientListDTO;
 
   const clients: IClientListProps = { ...data, content: [] as IClientProps[] };
 
@@ -63,17 +59,17 @@ export const getClientList = async (
 export const addClient = async (data: IClientReqDTO): Promise<IClientProps> => {
   data.logout_redirect_uri = data.website_url;
 
-  const client: IClientResDTO = await request({
+  const client = (await request({
     method: "post",
     url: `/clients`,
     data,
-  });
+  })) as IClientResDTO;
 
   return transformToClientProps(client);
 };
 
 export const updateClient = async (clientId: string, data: IClientReqDTO) => {
-  const client: IClientResDTO = await request({
+  await request({
     method: "put",
     url: `/clients/${clientId}`,
     data,
@@ -82,7 +78,7 @@ export const updateClient = async (clientId: string, data: IClientReqDTO) => {
 
 export const changeClientStatus = async (
   clientId: string,
-  status: boolean
+  status: boolean,
 ): Promise<void> => {
   await request({
     method: "patch",
@@ -92,12 +88,12 @@ export const changeClientStatus = async (
 };
 
 export const regenerateSecret = async (
-  clientId: string
+  clientId: string,
 ): Promise<{ client_secret: string }> => {
-  const clientSecret: { client_secret: string } = await request({
+  const clientSecret = (await request({
     method: "patch",
     url: `/clients/${clientId}/regenerate`,
-  });
+  })) as { client_secret: string };
 
   return clientSecret;
 };
@@ -110,19 +106,19 @@ export const deleteClient = async (clientId: string): Promise<void> => {
 };
 
 export const getScope = async (name: string): Promise<IScope> => {
-  const scope: IScope = await request({
+  const scope = (await request({
     method: "get",
     url: `/scopes/${name}`,
-  });
+  })) as IScope;
 
   return scope;
 };
 
 export const getScopeList = async (): Promise<IScope[]> => {
-  const scopeList: IScope[] = await request({
+  const scopeList = (await request({
     method: "get",
     url: `/scopes`,
-  });
+  })) as IScope[];
 
   return scopeList;
 };
@@ -136,7 +132,7 @@ export const onOAuthLogin = () => {
     data: formData,
     withRedirect: true,
     headers: {
-      "X-Disable-Redirect": true,
+      "X-Disable-Redirect": "true",
     },
   });
 };
@@ -144,7 +140,7 @@ export const onOAuthLogin = () => {
 export const onOAuthSubmit = (
   clientId: string,
   clientState: string,
-  scope: string[]
+  scope: string[],
 ) => {
   const formData = new FormData();
 
@@ -161,7 +157,7 @@ export const onOAuthSubmit = (
     data: formData,
     withRedirect: true,
     headers: {
-      "X-Disable-Redirect": true,
+      "X-Disable-Redirect": "true",
     },
   });
 };
@@ -178,20 +174,20 @@ export const onOAuthCancel = (clientId: string, clientState: string) => {
     data: formData,
     withRedirect: true,
     headers: {
-      "X-Disable-Redirect": true,
+      "X-Disable-Redirect": "true",
     },
   });
 };
 
 export const getConsentList = async (): Promise<IClientProps[]> => {
-  const clients: any = await request({
+  const clients = await request({
     method: "get",
     url: "/clients/consents",
   });
 
   const consents: IClientProps[] = [];
 
-  clients.forEach((item: any) => {
+  clients.forEach((item) => {
     const client = transformToClientProps(item.client);
 
     if (!item.invalidated)

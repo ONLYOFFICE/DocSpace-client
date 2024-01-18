@@ -1,13 +1,8 @@
 import React from "react";
 
-import Text from "@docspace/components/text";
-import InputBlock from "@docspace/components/input-block";
-//@ts-ignore
-import HelpButton from "@docspace/components/help-button";
-//@ts-ignore
-import SelectorAddButton from "@docspace/components/selector-add-button";
-//@ts-ignore
-import SelectedItem from "@docspace/components/selected-item";
+import { InputBlock } from "@docspace/shared/components/input-block";
+import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
+import { SelectedItem } from "@docspace/shared/components/selected-item";
 
 import {
   StyledChipsContainer,
@@ -16,6 +11,7 @@ import {
 } from "../ClientForm.styled";
 import InputGroup from "./InputGroup";
 import { isValidUrl } from "..";
+import { InputSize, InputType } from "@docspace/shared/components/text-input";
 
 interface MultiInputGroupProps {
   t: any;
@@ -94,6 +90,8 @@ const MultiInputGroup = ({
             isDisabled={isDisabled}
             onBlur={onBlur}
             hasError={isError || hasError}
+            size={InputSize.base}
+            type={InputType.text}
           />
           <SelectorAddButton
             onClick={() => {
@@ -110,6 +108,7 @@ const MultiInputGroup = ({
         {currentValue.map((v, index) => (
           <SelectedItem
             key={`${v}-${index}`}
+            propKey={v}
             isInline
             label={v}
             isDisabled={isDisabled}

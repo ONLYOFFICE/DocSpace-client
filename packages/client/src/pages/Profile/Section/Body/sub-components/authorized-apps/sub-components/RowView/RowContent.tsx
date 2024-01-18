@@ -1,7 +1,7 @@
 import React from "react";
 
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 
 import {
   StyledRowContent,
@@ -15,7 +15,6 @@ export const RowContent = ({ sectionWidth, item }: RowContentProps) => {
     <StyledRowContent sectionWidth={sectionWidth}>
       <ContentWrapper>
         <FlexWrapper>
-          {/* @ts-ignore */}
           <Text
             fontWeight={600}
             fontSize="14px"
@@ -25,14 +24,12 @@ export const RowContent = ({ sectionWidth, item }: RowContentProps) => {
           </Text>
         </FlexWrapper>
 
-        {/* @ts-ignore */}
         <Text fontWeight={600} fontSize="12px" color="#A3A9AE">
-          {/* @ts-ignore */}
           <Link
             color="#A3A9AE"
             href={item.websiteUrl}
-            type={"action"}
-            target={"_blank"}
+            type={LinkType.page}
+            target={LinkTarget.blank}
             isHovered
           >
             {item.websiteUrl}

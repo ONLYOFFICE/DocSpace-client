@@ -1,5 +1,4 @@
-// @ts-ignore
-import EmptyScreenContainer from "@docspace/components/empty-screen-container";
+import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 
 import EmptyScreenOauthSvgUrl from "PUBLIC_DIR/images/empty_screen_oauth.svg?url";
 

@@ -4,7 +4,7 @@ import {
   IClientProps,
   IClientReqDTO,
   IScope,
-} from "@docspace/common/utils/oauth/interfaces";
+} from "@docspace/shared/utils/oauth/interfaces";
 //@ts-ignore
 import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
 

@@ -2,10 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
 
-//@ts-ignore
-import Text from "@docspace/components/text";
-//@ts-ignore
-import Link from "@docspace/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 
 const StyledOAuthContainer = styled.div`
   width: 100%;
@@ -73,15 +71,15 @@ const OAuthClientInfo = ({
           <Trans t={t} i18nKey={"ConsentSubHeader"} ns="Consent">
             <Link
               className={"login-link"}
-              type="page"
+              type={LinkType.page}
               isHovered={false}
               href={websiteUrl}
-              target={"_blank"}
+              target={LinkTarget.blank}
               noHover
               fontWeight={600}
               fontSize={"16px"}
             >
-              {{ name }}
+              {name}
             </Link>{" "}
             would like the ability to access the following data in{" "}
             <strong>your DocSpace account</strong>:
@@ -91,10 +89,10 @@ const OAuthClientInfo = ({
             {t("Consent:ToContinue")}{" "}
             <Link
               className={"login-link"}
-              type="page"
+              type={LinkType.page}
               isHovered={false}
               href={websiteUrl}
-              target={"_blank"}
+              target={LinkTarget.blank}
               noHover
               fontWeight={600}
               fontSize={"16px"}

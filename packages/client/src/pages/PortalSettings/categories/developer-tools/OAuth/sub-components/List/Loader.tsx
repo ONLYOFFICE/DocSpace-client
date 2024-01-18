@@ -1,13 +1,11 @@
 import React from "react";
 
 //@ts-ignore
-import RectangleLoader from "@docspace/components/skeletons/rectangle";
-//@ts-ignore
 import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
-//@ts-ignore
-import TableSkeleton from "@docspace/components/skeletons/table";
-//@ts-ignore
-import RowsSkeleton from "@docspace/components/skeletons/rows";
+
+import { RectangleSkeleton } from "@docspace/shared/skeletons/rectangle";
+import { TableSkeleton } from "@docspace/shared/skeletons/table";
+import { RowsSkeleton } from "@docspace/shared/skeletons/rows";
 
 //@ts-ignore
 import { ViewAsType } from "SRC_DIR/store/OAuthStore";
@@ -27,17 +25,21 @@ const OAuthLoader = ({
   return (
     <OAuthContainer>
       <StyledContainer>
-        <RectangleLoader
+        <RectangleSkeleton
           className="description"
           width={"100%"}
           height={"16px"}
         />
-        <RectangleLoader
+        <RectangleSkeleton
           className="add-button"
           width={"220px"}
           height={buttonHeight}
         />
-        {viewAs === "table" ? <TableSkeleton /> : <RowsSkeleton />}
+        {viewAs === "table" ? (
+          <TableSkeleton style={{}} />
+        ) : (
+          <RowsSkeleton style={{}} />
+        )}
       </StyledContainer>
     </OAuthContainer>
   );

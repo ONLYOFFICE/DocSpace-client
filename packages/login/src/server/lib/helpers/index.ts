@@ -12,8 +12,8 @@ import {
 } from "@docspace/shared/api/settings";
 
 import { getUser } from "@docspace/shared/api/people";
-import { checkIsAuthenticated } from "@docspace/shared/api/user";
-import { getClient, getScopeList } from "@docspace/common/api/oauth";
+
+import { getClient, getScopeList } from "@docspace/shared/api/oauth";
 
 import { IScope } from "@docspace/shared/utils/oauth/interfaces";
 

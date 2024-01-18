@@ -1,8 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-//@ts-ignore
-import Row from "@docspace/components/row";
+import { Row } from "@docspace/shared/components/row";
 
 import { RowContent } from "./RowContent";
 import { RowProps } from "./RowView.types";
@@ -30,19 +29,20 @@ export const OAuthRow = (props: RowProps) => {
     await changeClientStatus(item.clientId, !item.enabled);
   };
 
-  const handleRowClick = (e: any) => {
+  const handleRowClick = (e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
     if (
-      e.target.closest(".checkbox") ||
-      e.target.closest(".table-container_row-checkbox") ||
+      target.closest(".checkbox") ||
+      target.closest(".table-container_row-checkbox") ||
       e.detail === 0
     ) {
       return;
     }
 
     if (
-      e.target.closest(".table-container_row-context-menu-wrapper") ||
-      e.target.closest(".toggleButton") ||
-      e.target.closest(".row_context-menu-wrapper")
+      target.closest(".table-container_row-context-menu-wrapper") ||
+      target.closest(".toggleButton") ||
+      target.closest(".row_context-menu-wrapper")
     ) {
       return setSelection && setSelection("");
     }
@@ -59,11 +59,10 @@ export const OAuthRow = (props: RowProps) => {
   return (
     <>
       <Row
-        sectionWidth={sectionWidth}
         key={item.clientId}
-        data={item}
+        // data={item}
         contextOptions={contextOptions}
-        onClick={handleRowClick}
+        onRowClick={handleRowClick}
         element={element}
         mode={"modern"}
         checked={isChecked}

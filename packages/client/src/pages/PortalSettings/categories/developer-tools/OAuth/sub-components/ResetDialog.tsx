@@ -3,15 +3,16 @@ import { useParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import { useTranslation, Trans } from "react-i18next";
 
-// @ts-ignore
-import ModalDialog from "@docspace/components/modal-dialog";
-// @ts-ignore
-import Button from "@docspace/components/button";
-// @ts-ignore
-import toastr from "@docspace/components/toast/toastr";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { toastr } from "@docspace/shared/components/toast";
 
 // @ts-ignore
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
+import { TData } from "@docspace/shared/components/toast/Toast.type";
 
 interface ResetDialogProps {
   isVisible?: boolean;
@@ -34,8 +35,9 @@ const ResetDialog = (props: ResetDialogProps) => {
 
       setIsRequestRunning(true);
       onClose?.();
-    } catch (error) {
-      toastr.error(error);
+    } catch (error: unknown) {
+      const e = error as TData;
+      toastr.error(e);
       onClose?.();
     }
   };
@@ -45,7 +47,7 @@ const ResetDialog = (props: ResetDialogProps) => {
       isLoading={!ready}
       visible={isVisible}
       onClose={onClose}
-      displayType="modal"
+      displayType={ModalDialogType.modal}
     >
       <ModalDialog.Header>{t("ResetHeader")}</ModalDialog.Header>
       <ModalDialog.Body>
@@ -53,22 +55,20 @@ const ResetDialog = (props: ResetDialogProps) => {
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
-          // @ts-ignore
           className="delete-button"
           key="DeletePortalBtn"
           label={t("Common:OkButton")}
-          size="normal"
+          size={ButtonSize.normal}
           scale
           primary={true}
           isLoading={isRequestRunning}
           onClick={onResetClick}
         />
         <Button
-          // @ts-ignore
           className="cancel-button"
           key="CancelDeleteBtn"
           label={t("Common:CancelButton")}
-          size="normal"
+          size={ButtonSize.normal}
           scale
           isDisabled={isRequestRunning}
           onClick={onClose}

@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
 
-//@ts-ignore
-import TableHeader from "@docspace/components/table-container/TableHeader";
+import { TTableColumn, TableHeader } from "@docspace/shared/components/table";
 
 import { HeaderProps } from "./TableView.types";
 
@@ -9,13 +8,7 @@ const Header = (props: HeaderProps) => {
   const { sectionWidth, tableRef, columnStorageName, tagRef } = props;
   const { t } = useTranslation(["Oauth", "Files", "Webhooks", "Common"]);
 
-  const defaultColumns: {
-    [key: string]:
-      | string
-      | number
-      | boolean
-      | ((key: string, e: any) => void | undefined);
-  }[] = [
+  const defaultColumns: TTableColumn[] = [
     {
       key: "Name",
       title: t("Common:Name"),
@@ -58,12 +51,10 @@ const Header = (props: HeaderProps) => {
 
   return (
     <TableHeader
-      checkboxSize="48px"
-      containerRef={tableRef}
+      containerRef={{ current: tableRef }}
       columns={defaultColumns}
       columnStorageName={columnStorageName}
       sectionWidth={sectionWidth}
-      checkboxMargin="12px"
       showSettings={false}
       useReactWindow
       infoPanelVisible={false}

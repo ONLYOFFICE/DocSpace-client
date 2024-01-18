@@ -1,8 +1,7 @@
 import React from "react";
 
-import Text from "@docspace/components/text";
-//@ts-ignore
-import SelectorAddButton from "@docspace/components/selector-add-button";
+import { Text } from "@docspace/shared/components/text";
+import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
 
 import { StyledInputGroup } from "../ClientForm.styled";
 

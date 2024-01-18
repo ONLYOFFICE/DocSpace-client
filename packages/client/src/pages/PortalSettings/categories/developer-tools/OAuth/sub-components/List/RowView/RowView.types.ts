@@ -1,5 +1,6 @@
-import { IClientProps } from "@docspace/common/utils/oauth/interfaces";
-
+import { TTranslation } from "@docspace/shared/types";
+import { IClientProps } from "@docspace/shared/utils/oauth/interfaces";
+import { ContextMenuModel } from "@docspace/shared/components/context-menu";
 //@ts-ignore
 import { ViewAsType } from "SRC_DIR/store/OAuthStore";
 
@@ -11,11 +12,9 @@ export interface RowViewProps {
   selection?: string[];
   setSelection?: (clientId: string) => void;
   getContextMenuItems?: (
-    t: any,
+    t: TTranslation,
     item: IClientProps
-  ) => {
-    [key: string]: any | string | boolean | ((clientId: string) => void);
-  }[];
+  ) => ContextMenuModel[];
   activeClients?: string[];
   hasNextPage?: boolean;
   itemCount?: number;
@@ -29,11 +28,9 @@ export interface RowProps {
   inProgress: boolean;
   sectionWidth: number;
   getContextMenuItems?: (
-    t: any,
+    t: TTranslation,
     item: IClientProps
-  ) => {
-    [key: string]: any | string | boolean | ((clientId: string) => void);
-  }[];
+  ) => ContextMenuModel[];
   setSelection?: (clientId: string) => void;
   changeClientStatus?: (clientId: string, status: boolean) => Promise<void>;
 }

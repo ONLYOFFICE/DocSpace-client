@@ -3,22 +3,34 @@ import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 
-import { IClientProps, IScope } from "@docspace/common/utils/oauth/interfaces";
-import ScopeList from "@docspace/common/utils/oauth/ScopeList";
-//@ts-ignore
-import getCorrectDate from "@docspace/components/utils/getCorrectDate";
-//@ts-ignore
-import { getCookie } from "@docspace/components/utils/cookie";
-//@ts-ignore
-import ModalDialog from "@docspace/components/modal-dialog";
-import Text from "@docspace/components/text";
-import ContextMenuButton from "@docspace/components/context-menu-button";
+import { IClientProps, IScope } from "@docspace/shared/utils/oauth/interfaces";
+import ScopeList from "@docspace/shared/utils/oauth/ScopeList";
+
+import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
+
+import { getCookie } from "@docspace/shared/utils/cookie";
+
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
+import { Text } from "@docspace/shared/components/text";
+import {
+  ContextMenuButton,
+  ContextMenuButtonDisplayType,
+} from "@docspace/shared/components/context-menu-button";
 
 //@ts-ignore
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
-import Avatar from "@docspace/components/avatar";
-import Link from "@docspace/components/link";
-import { Base } from "@docspace/components/themes";
+import {
+  Avatar,
+  AvatarRole,
+  AvatarSize,
+} from "@docspace/shared/components/avatar";
+import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
+import { Base } from "@docspace/shared/themes";
+import { TTranslation } from "@docspace/shared/types";
+import { ContextMenuModel } from "@docspace/shared/components/context-menu";
 
 const StyledContainer = styled.div<{
   showDescription: boolean;
@@ -122,13 +134,11 @@ interface InfoDialogProps {
 
   setInfoDialogVisible?: (value: boolean) => void;
   getContextMenuItems?: (
-    t: any,
+    t: TTranslation,
     item: IClientProps,
     isInfo?: boolean,
     isSettings?: boolean
-  ) => {
-    [key: string]: any | string | boolean | ((clientId: string) => void);
-  }[];
+  ) => ContextMenuModel[];
 
   client?: IClientProps;
   isProfile?: boolean;
@@ -164,9 +174,9 @@ const InfoDialog = ({
 
   const getContextOptions = () => {
     const contextOptions =
-      client &&
-      getContextMenuItems &&
-      getContextMenuItems(t, client, true, !isProfile);
+      client && getContextMenuItems
+        ? getContextMenuItems(t, client, true, !isProfile)
+        : [];
 
     return contextOptions;
   };
@@ -177,10 +187,14 @@ const InfoDialog = ({
 
   const locale = getCookie("asc_language");
 
-  const modifiedDate = getCorrectDate(locale, client?.modifiedOn);
+  const modifiedDate = getCorrectDate(locale || "", client?.modifiedOn || "");
 
   return (
-    <ModalDialog visible={visible} displayType={"aside"} onClose={onClose}>
+    <ModalDialog
+      visible={visible}
+      displayType={ModalDialogType.aside}
+      onClose={onClose}
+    >
       <ModalDialog.Header>{t("Common:Info")}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledContainer
@@ -190,7 +204,7 @@ const InfoDialog = ({
           <div className="client-block">
             <div className="client-block__info">
               <img className="client-block__info-logo" src={client?.logo} />
-              {/* @ts-ignore */}
+
               <Text
                 fontSize={"16px"}
                 lineHeight={"22px"}
@@ -202,11 +216,13 @@ const InfoDialog = ({
               </Text>
             </div>
 
-            <ContextMenuButton getData={getContextOptions} />
+            <ContextMenuButton
+              displayType={ContextMenuButtonDisplayType.dropdown}
+              getData={getContextOptions}
+            />
           </div>
           {!isProfile && (
             <>
-              {/* @ts-ignore */}
               <Text
                 className={"block-header"}
                 fontSize={"14px"}
@@ -218,8 +234,12 @@ const InfoDialog = ({
                 {t("Creator")}
               </Text>
               <div className="creator-block">
-                <Avatar source={client?.creatorAvatar} size={"min"} />
-                {/* @ts-ignore */}
+                <Avatar
+                  source={client?.creatorAvatar || ""}
+                  size={AvatarSize.min}
+                  role={AvatarRole.user}
+                />
+
                 <Text
                   fontSize={"14px"}
                   lineHeight={"16px"}
@@ -234,7 +254,6 @@ const InfoDialog = ({
           )}
           {!isProfile && (
             <>
-              {/* @ts-ignore */}
               <Text
                 className={"block-header"}
                 fontSize={"14px"}
@@ -245,7 +264,7 @@ const InfoDialog = ({
               >
                 {t("Common:Description")}
               </Text>
-              {/* @ts-ignore */}
+
               <Text
                 id={"client-info-description-text"}
                 className={"description"}
@@ -258,7 +277,6 @@ const InfoDialog = ({
               </Text>
               {withShowText && (
                 <>
-                  {/* @ts-ignore */}
                   <Link
                     className={"desc-link"}
                     fontSize={"13px"}
@@ -266,7 +284,7 @@ const InfoDialog = ({
                     fontWeight={"600"}
                     isHovered
                     onClick={() => setShowDescription((val) => !val)}
-                    type={"action"}
+                    type={LinkType.action}
                   >
                     {showDescription ? "Hide" : "Show more"}
                   </Link>
@@ -274,7 +292,7 @@ const InfoDialog = ({
               )}
             </>
           )}
-          {/* @ts-ignore */}
+
           <Text
             className={"block-header"}
             fontSize={"14px"}
@@ -285,19 +303,19 @@ const InfoDialog = ({
           >
             {t("Common:Website")}
           </Text>
-          {/* @ts-ignore */}
+
           <Link
             fontSize={"13px"}
             lineHeight={"15px"}
             fontWeight={"600"}
             isHovered
             href={client?.websiteUrl}
-            type={"action"}
-            target={"_blank"}
+            type={LinkType.action}
+            target={LinkTarget.blank}
           >
             {client?.websiteUrl}
           </Link>
-          {/* @ts-ignore */}
+
           <Text
             className={"block-header"}
             fontSize={"14px"}
@@ -315,7 +333,6 @@ const InfoDialog = ({
           />
           {isProfile && (
             <>
-              {/* @ts-ignore */}
               <Text
                 className={"block-header"}
                 fontSize={"14px"}
@@ -326,7 +343,7 @@ const InfoDialog = ({
               >
                 {t("AccessGranted")}
               </Text>
-              {/* @ts-ignore */}
+
               <Text
                 fontSize={"13px"}
                 lineHeight={"20px"}
@@ -338,7 +355,7 @@ const InfoDialog = ({
               </Text>
             </>
           )}
-          {/* @ts-ignore */}
+
           <Text
             className={"block-header"}
             fontSize={"14px"}
@@ -349,7 +366,7 @@ const InfoDialog = ({
           >
             {t("SupportAndLegalInfo")}
           </Text>
-          {/* @ts-ignore */}
+
           <Text
             className={"privacy-block"}
             fontSize={"13px"}
@@ -358,35 +375,33 @@ const InfoDialog = ({
             noSelect
             truncate
           >
-            {/* @ts-ignore */}
             <Link
               fontSize={"13px"}
               lineHeight={"15px"}
               fontWeight={"600"}
               isHovered
               href={client?.policyUrl}
-              type={"action"}
-              target={"_blank"}
+              type={LinkType.action}
+              target={LinkTarget.blank}
             >
               {t("PrivacyPolicy")}
             </Link>
             <span className="separator"></span>
-            {/* @ts-ignore */}
+
             <Link
               fontSize={"13px"}
               lineHeight={"15px"}
               fontWeight={"600"}
               isHovered
               href={client?.termsUrl}
-              type={"action"}
-              target={"_blank"}
+              type={LinkType.action}
+              target={LinkTarget.blank}
             >
               {t("Terms of Service")}
             </Link>
           </Text>
           {!isProfile && (
             <>
-              {/* @ts-ignore */}
               <Text
                 className={"block-header"}
                 fontSize={"14px"}
@@ -397,7 +412,7 @@ const InfoDialog = ({
               >
                 {t("LastModified")}
               </Text>
-              {/* @ts-ignore */}
+
               <Text
                 fontSize={"13px"}
                 lineHeight={"20px"}

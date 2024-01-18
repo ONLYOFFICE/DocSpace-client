@@ -1,4 +1,6 @@
-import { IClientProps } from "@docspace/common/utils/oauth/interfaces";
+import { IClientProps } from "@docspace/shared/utils/oauth/interfaces";
+import { TTranslation } from "@docspace/shared/types";
+import { ContextMenuModel } from "@docspace/shared/components/context-menu";
 
 export interface TableViewProps {
   items: IClientProps[];
@@ -8,11 +10,9 @@ export interface TableViewProps {
   selection?: string[];
   setSelection?: (clientId: string) => void;
   getContextMenuItems?: (
-    t: any,
+    t: TTranslation,
     item: IClientProps
-  ) => {
-    [key: string]: any | string | boolean | ((clientId: string) => void);
-  }[];
+  ) => ContextMenuModel[];
   bufferSelection?: IClientProps | null;
   activeClients?: string[];
   hasNextPage?: boolean;
@@ -23,7 +23,7 @@ export interface TableViewProps {
 
 export interface HeaderProps {
   sectionWidth: number;
-  tableRef: HTMLDivElement;
+  tableRef: HTMLDivElement | null;
   columnStorageName: string;
   tagRef: (node: HTMLDivElement) => void;
 }
@@ -34,11 +34,9 @@ export interface RowProps {
   inProgress: boolean;
   tagCount: number;
   getContextMenuItems?: (
-    t: any,
+    t: TTranslation,
     item: IClientProps
-  ) => {
-    [key: string]: any | string | boolean | ((clientId: string) => void);
-  }[];
+  ) => ContextMenuModel[];
   setSelection?: (clientId: string) => void;
   changeClientStatus?: (clientId: string, status: boolean) => Promise<void>;
 }

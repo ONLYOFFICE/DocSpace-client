@@ -1,6 +1,6 @@
 //@ts-ignore
 import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
-import { IClientProps } from "@docspace/common/utils/oauth/interfaces";
+import { IClientProps } from "@docspace/shared/utils/oauth/interfaces";
 
 //@ts-ignore
 import { ViewAsType } from "SRC_DIR/store/OAuthStore";

@@ -1,12 +1,11 @@
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 
-//@ts-ignore
-import { ClientProps } from "@docspace/common/utils/oauth/interfaces";
+import { IClientProps } from "@docspace/shared/utils/oauth/interfaces";
+import { TTranslation } from "@docspace/shared/types";
+import { Text } from "@docspace/shared/components/text";
 
-import Text from "@docspace/components/text";
-//@ts-ignore
-import { Consumer } from "@docspace/components/utils/context";
+import { Consumer } from "@docspace/shared/utils/context";
 
 //@ts-ignore
 import { ViewAsType } from "SRC_DIR/store/OAuthStore";
@@ -37,8 +36,8 @@ export const StyledContainer = styled.div`
 `;
 
 interface ListProps {
-  t: any;
-  clients: ClientProps[];
+  t: TTranslation;
+  clients: IClientProps[];
   viewAs: ViewAsType;
   currentDeviceType: DeviceUnionType;
 }
@@ -63,17 +62,17 @@ const List = ({ clients, viewAs, currentDeviceType }: ListProps) => {
       </Text>
       <RegisterNewButton t={t} currentDeviceType={currentDeviceType} />
       <Consumer>
-        {(context: { sectionWidth: number; sectionHeight: number }) => (
+        {(context) => (
           <>
             {viewAs === "table" ? (
               <TableView
                 items={clients || []}
-                sectionWidth={context.sectionWidth}
+                sectionWidth={context.sectionWidth || 0}
               />
             ) : (
               <RowView
                 items={clients || []}
-                sectionWidth={context.sectionWidth}
+                sectionWidth={context.sectionWidth || 0}
               />
             )}
           </>

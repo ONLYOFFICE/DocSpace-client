@@ -1,9 +1,9 @@
-// @ts-ignore
-import EmptyScreenContainer from "@docspace/components/empty-screen-container";
+import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
+import { TTranslation } from "@docspace/shared/types";
 
 import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_userfields.svg?url";
 
-const EmptyScreen = ({ t }: { t: any }) => {
+const EmptyScreen = ({ t }: { t: TTranslation }) => {
   return (
     <EmptyScreenContainer
       imageSrc={EmptyScreenPersonsSvgUrl}

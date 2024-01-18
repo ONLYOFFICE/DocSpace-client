@@ -1,8 +1,7 @@
 import React from "react";
 
-import Text from "@docspace/components/text";
-//@ts-ignore
-import Textarea from "@docspace/components/textarea";
+import { Text } from "@docspace/shared/components/text";
+import { Textarea } from "@docspace/shared/components/textarea";
 
 import { StyledInputGroup } from "../ClientForm.styled";
 
@@ -13,7 +12,7 @@ interface TextAreaProps {
   value: string;
   placeholder: string;
   increaseHeight: boolean;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 const TextAreaGroup = ({
@@ -47,7 +46,6 @@ const TextAreaGroup = ({
         value={value}
         placeholder={placeholder}
         onChange={onChange}
-        scale
         tabIndex={0}
         heightTextArea={increaseHeight ? 81 : 60}
         maxLength={255}

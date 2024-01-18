@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components";
 import { isMobile, isMobileOnly } from "react-device-detect";
 
-import { Base } from "@docspace/components/themes";
-import { tablet } from "@docspace/components/utils/device";
+import { Base } from "@docspace/shared/themes";
+import { tablet } from "@docspace/shared/utils/device";
 
 const HeaderContainer = styled.div`
   position: sticky;

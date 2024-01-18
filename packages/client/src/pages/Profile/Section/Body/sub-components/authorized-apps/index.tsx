@@ -2,14 +2,14 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { IClientProps } from "@docspace/common/utils/oauth/interfaces";
+import { IClientProps } from "@docspace/shared/utils/oauth/interfaces";
 
 //@ts-ignore
 import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
 //@ts-ignore
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
-//@ts-ignore
-import { Consumer } from "@docspace/components/utils/context";
+
+import { Consumer } from "@docspace/shared/utils/context";
 import { Text } from "@docspace/shared/components/text";
 
 //@ts-ignore
@@ -80,23 +80,22 @@ const AuthorizedApps = ({
     <StyledContainer>
       {consents && consents?.length > 0 ? (
         <>
-          {/* @ts-ignore */}
           <Text fontSize={"12px"} fontWeight={"400"} lineHeight={"16px"}>
             {t("ProfileDescription")}
           </Text>
 
           <Consumer>
-            {(context: { sectionWidth: number; sectionHeight: number }) => (
+            {(context) => (
               <>
                 {viewAs === "table" ? (
                   <TableView
                     items={consents || []}
-                    sectionWidth={context.sectionWidth}
+                    sectionWidth={context.sectionWidth || 0}
                   />
                 ) : (
                   <RowView
                     items={consents || []}
-                    sectionWidth={context.sectionWidth}
+                    sectionWidth={context.sectionWidth || 0}
                   />
                 )}
               </>

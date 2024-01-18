@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import crypto from "crypto-js";
 import sha256 from "crypto-js/sha256";
 
-import { AuthenticationMethod, ScopeGroup, ScopeType } from "./enums";
+import { AuthenticationMethod, ScopeGroup, ScopeType } from "../../enums";
 import {
   IClientResDTO,
   IClientReqDTO,
@@ -11,7 +12,7 @@ import {
 } from "./interfaces";
 
 export const transformToClientProps = (
-  clientDto: IClientResDTO
+  clientDto: IClientResDTO,
 ): IClientProps => {
   const {
     client_id,
@@ -67,7 +68,7 @@ export const transformToClientProps = (
 };
 
 export const transformToClientReqDTO = (
-  clientProps: IClientProps
+  clientProps: IClientProps,
 ): IClientReqDTO => {
   const {
     name,
@@ -104,7 +105,7 @@ export const transformToClientReqDTO = (
 export const getScopeTKeyDescription = (group: ScopeGroup, type: ScopeType) => {
   const tKey = `OAuth${group.replace(
     /^./,
-    group[0].toUpperCase()
+    group[0].toUpperCase(),
   )}${type.replace(/^./, type[0].toUpperCase())}Description`;
 
   return tKey;
@@ -118,7 +119,7 @@ export const getScopeTKeyName = (group: ScopeGroup) => {
 
 export const filterScopeByGroup = (
   checkedScopes: string[],
-  scopes: IScope[]
+  scopes: IScope[],
 ) => {
   const filteredScopes: IFilteredScopes = {};
 
@@ -170,7 +171,7 @@ export const filterScopeByGroup = (
 
 export function generatePKCEPair() {
   const NUM_OF_BYTES = 36; // Total of 44 characters (1 Bytes = 2 char) (standard states that: 43 chars <= verifier <= 128 chars)
-  const HASH_ALG = "sha256";
+  // const HASH_ALG = "sha256";
 
   const randomVerifier = crypto.lib.WordArray.random(NUM_OF_BYTES).toString();
   const randomState = crypto.lib.WordArray.random(NUM_OF_BYTES).toString();

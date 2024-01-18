@@ -1,11 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-import Text from "@docspace/components/text";
-import Checkbox from "@docspace/components/checkbox";
-//@ts-ignore
-import TableCell from "@docspace/components/table-container/TableCell";
-import Loader from "@docspace/components/loader";
+import { Text } from "@docspace/shared/components/text";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { TableCell } from "@docspace/shared/components/table";
+import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
 
 const StyledContainer = styled.div`
   .table-container_row-checkbox {
@@ -50,15 +49,11 @@ const NameCell = ({
       {inProgress ? (
         <Loader
           className="table-container_row-loader"
-          type="oval"
+          type={LoaderTypes.oval}
           size="16px"
         />
       ) : (
-        <TableCell
-          className="table-container_element-wrapper"
-          hasAccess={true}
-          checked={isChecked}
-        >
+        <TableCell className="table-container_element-wrapper">
           <StyledContainer className="table-container_element-container">
             <div className="table-container_element">
               {icon && <StyledImage src={icon} alt={"App icon"} />}
@@ -73,14 +68,7 @@ const NameCell = ({
         </TableCell>
       )}
 
-      {/* @ts-ignore */}
-      <Text
-        type="page"
-        title={name}
-        fontWeight="600"
-        fontSize="13px"
-        isTextOverflow
-      >
+      <Text title={name} fontWeight="600" fontSize="13px">
         {name}
       </Text>
     </>

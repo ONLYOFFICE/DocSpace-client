@@ -1,9 +1,7 @@
 import styled from "styled-components";
 
-//@ts-ignore
-import RowContainer from "@docspace/components/row-container";
-//@ts-ignore
-import RowContent from "@docspace/components/row-content";
+import { RowContainer } from "@docspace/shared/components/row-container";
+import { RowContent } from "@docspace/shared/components/row-content";
 
 export const StyledRowContainer = styled(RowContainer)`
   margin-top: 0px;

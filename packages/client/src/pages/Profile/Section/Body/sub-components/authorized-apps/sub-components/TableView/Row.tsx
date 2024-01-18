@@ -1,15 +1,12 @@
 import { useTranslation } from "react-i18next";
 
-//@ts-ignore
-import TableCell from "@docspace/components/table-container/TableCell";
+import { TableCell } from "@docspace/shared/components/table";
+import { Text } from "@docspace/shared/components/text";
 
-import Text from "@docspace/components/text";
+import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
 
-//@ts-ignore
-import getCorrectDate from "@docspace/components/utils/getCorrectDate";
-//@ts-ignore
-import { getCookie } from "@docspace/components/utils/cookie";
-import Link from "@docspace/components/link";
+import { getCookie } from "@docspace/shared/utils/cookie";
+import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 
 import NameCell from "./columns/name";
 
@@ -28,17 +25,22 @@ const Row = (props: RowProps) => {
 
   const { t } = useTranslation(["OAuth", "Common", "Files"]);
 
-  const contextOptions =
-    getContextMenuItems && getContextMenuItems(t, item, false, false);
+  const contextOptions = getContextMenuItems?.(t, item, false, false);
 
   const locale = getCookie("asc_language");
 
-  const modifiedDate = getCorrectDate(locale, item.modifiedOn);
+  const modifiedDate = getCorrectDate(locale || "", item.modifiedOn || "");
+
+  const getContextMenuModel = () =>
+    getContextMenuItems ? getContextMenuItems(t, item, false, false) : [];
 
   return (
     <>
       <StyledRowWrapper className="handle">
-        <StyledTableRow contextOptions={contextOptions}>
+        <StyledTableRow
+          contextOptions={contextOptions}
+          getContextModel={getContextMenuModel}
+        >
           <TableCell className={"table-container_file-name-cell"}>
             <NameCell
               name={item.name}
@@ -50,19 +52,17 @@ const Row = (props: RowProps) => {
             />
           </TableCell>
 
-          <TableCell>
-            {/* @ts-ignore */}
+          <TableCell className="">
             <Text
               as="span"
               fontWeight={400}
               className="mr-8 textOverflow description-text"
             >
-              {/* @ts-ignore */}
               <Link
                 className="description-text"
                 href={item.websiteUrl}
-                type={"action"}
-                target={"_blank"}
+                type={LinkType.action}
+                target={LinkTarget.blank}
                 isHovered
               >
                 {item.websiteUrl}
@@ -70,8 +70,7 @@ const Row = (props: RowProps) => {
             </Text>
           </TableCell>
 
-          <TableCell>
-            {/* @ts-ignore */}
+          <TableCell className="">
             <Text
               as="span"
               fontWeight={400}

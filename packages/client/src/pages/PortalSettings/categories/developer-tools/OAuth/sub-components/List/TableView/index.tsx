@@ -3,8 +3,7 @@ import { inject, observer } from "mobx-react";
 //@ts-ignore
 import elementResizeDetectorMaker from "element-resize-detector";
 
-//@ts-ignore
-import TableBody from "@docspace/components/table-container/TableBody";
+import { TableBody } from "@docspace/shared/components/table";
 //@ts-ignore
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 
@@ -98,12 +97,18 @@ const TableView = ({
 
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
 
+  const fetchMoreFiles = React.useCallback(
+    async ({ startIndex }: { startIndex: number; stopIndex: number }) => {
+      await fetchNextClients?.(startIndex);
+    },
+    []
+  );
+
   return (
     <TableWrapper forwardedRef={tableRef} useReactWindow>
       <Header
         sectionWidth={sectionWidth}
-        //@ts-ignore
-        tableRef={tableRef}
+        tableRef={tableRef.current}
         columnStorageName={columnStorageName}
         tagRef={onSetTagRef}
       />
@@ -112,14 +117,9 @@ const TableView = ({
         useReactWindow
         columnStorageName={columnStorageName}
         filesLength={items.length}
-        fetchMoreFiles={({
-          startIndex,
-        }: {
-          startIndex: number;
-          stopIndex: number;
-        }) => fetchNextClients && fetchNextClients(startIndex)}
-        hasMoreFiles={hasNextPage}
-        itemCount={itemCount}
+        fetchMoreFiles={fetchMoreFiles}
+        hasMoreFiles={hasNextPage || false}
+        itemCount={itemCount || 0}
       >
         {items.map((item) => (
           <Row

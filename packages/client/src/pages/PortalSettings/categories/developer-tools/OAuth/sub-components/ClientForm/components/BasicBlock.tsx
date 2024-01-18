@@ -1,10 +1,11 @@
 import React from "react";
 import { Trans } from "react-i18next";
 
-// @ts-ignore
-import HelpButton from "@docspace/components/help-button";
-// @ts-ignore
-import FieldContainer from "@docspace/components/field-container";
+import { TTranslation } from "@docspace/shared/types";
+
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 
 import { StyledBlock, StyledInputBlock } from "../ClientForm.styled";
 
@@ -13,10 +14,8 @@ import InputGroup from "./InputGroup";
 import TextAreaGroup from "./TextAreaGroup";
 import SelectGroup from "./SelectGroup";
 
-import Checkbox from "@docspace/components/checkbox";
-
 interface BasicBlockProps {
-  t: any;
+  t: TTranslation;
 
   nameValue: string;
   websiteUrlValue: string;
@@ -47,14 +46,14 @@ function getImageDimensions(
 function compressImage(
   image: HTMLImageElement,
   scale: number,
-  initalWidth: number,
-  initalHeight: number
+  initialWidth: number,
+  initialHeight: number
 ): any {
   return new Promise((resolve, reject) => {
     const canvas = document.createElement("canvas");
 
-    canvas.width = scale * initalWidth;
-    canvas.height = scale * initalHeight;
+    canvas.width = scale * initialWidth;
+    canvas.height = scale * initialHeight;
 
     const ctx = canvas.getContext("2d");
     if (ctx) {
@@ -81,7 +80,9 @@ const BasicBlock = ({
   requiredErrorFields,
   onBlur,
 }: BasicBlockProps) => {
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const target = e.target;
 
     changeValue(target.name, target.value);

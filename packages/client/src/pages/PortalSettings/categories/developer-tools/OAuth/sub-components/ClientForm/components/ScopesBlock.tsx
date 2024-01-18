@@ -3,15 +3,15 @@ import React from "react";
 import {
   IFilteredScopes,
   IScope,
-} from "@docspace/common/utils/oauth/interfaces";
+} from "@docspace/shared/utils/oauth/interfaces";
 import {
   filterScopeByGroup,
   getScopeTKeyName,
-} from "@docspace/common/utils/oauth";
-import { ScopeGroup, ScopeType } from "@docspace/common/utils/oauth/enums";
+} from "@docspace/shared/utils/oauth";
+import { ScopeGroup, ScopeType } from "@docspace/shared/enums";
 
-import Text from "@docspace/components/text";
-import Checkbox from "@docspace/components/checkbox";
+import { Text } from "@docspace/shared/components/text";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 
 import BlockHeader from "./BlockHeader";
 
@@ -104,7 +104,6 @@ const ScopesBlock = ({
       const row = (
         <React.Fragment key={name}>
           <StyledScopesName>
-            {/* @ts-ignore */}
             <Text
               className="scope-name"
               fontSize={"14px"}
@@ -115,14 +114,12 @@ const ScopesBlock = ({
             </Text>
 
             {scope.read?.name && (
-              // @ts-ignore
               <Text
                 className={"scope-desc"}
                 fontSize={"12px"}
                 fontWeight={400}
                 lineHeight={"16px"}
               >
-                {/* @ts-ignore */}
                 <Text
                   className={"scope-desc"}
                   as={"span"}
@@ -137,14 +134,12 @@ const ScopesBlock = ({
             )}
             {scope.write?.name && (
               <>
-                {/* @ts-ignore */}
                 <Text
                   className={"scope-desc"}
                   fontSize={"12px"}
                   fontWeight={400}
                   lineHeight={"16px"}
                 >
-                  {/* @ts-ignore */}
                   <Text
                     className={"scope-desc"}
                     as={"span"}
@@ -205,7 +200,7 @@ const ScopesBlock = ({
         header={t("ScopesHeader")}
         helpButtonText={t("ScopesHelp")}
       />
-      {/* @ts-ignore */}
+
       <Text
         className="header"
         fontSize={"14px"}
@@ -214,7 +209,7 @@ const ScopesBlock = ({
       >
         {t("Read")}
       </Text>
-      {/* @ts-ignore */}
+
       <Text
         className="header header-last"
         fontSize={"14px"}

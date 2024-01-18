@@ -3,25 +3,25 @@ import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 
-import { IClientProps } from "@docspace/common/utils/oauth/interfaces";
+import { IClientProps } from "@docspace/shared/utils/oauth/interfaces";
 
-//@ts-ignore
-import ModalDialog from "@docspace/components/modal-dialog";
-//@ts-ignore
-import SocialButton from "@docspace/components/social-button";
-import Text from "@docspace/components/text";
-//@ts-ignore
-import Textarea from "@docspace/components/textarea";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
+import { SocialButton } from "@docspace/shared/components/social-button";
+import { Text } from "@docspace/shared/components/text";
+import { Textarea } from "@docspace/shared/components/textarea";
 
 import OnlyofficeLight from "PUBLIC_DIR/images/onlyoffice.light.react.svg";
 import OnlyofficeDark from "PUBLIC_DIR/images/onlyoffice.dark.react.svg";
 
 //@ts-ignore
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
-import Button from "@docspace/components/button";
-import { Base } from "@docspace/components/themes";
-import { generatePKCEPair } from "@docspace/common/utils/oauth";
-import { AuthenticationMethod } from "@docspace/common/utils/oauth/enums";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Base } from "@docspace/shared/themes";
+import { generatePKCEPair } from "@docspace/shared/utils/oauth";
+import { AuthenticationMethod } from "@docspace/shared/enums";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -196,11 +196,8 @@ const PreviewDialog = ({
   const getLink = () => {
     return `${
       window.location.origin
-    }/oauth2/authorize?response_type=code&client_id=${
-      client?.clientId
-    }&redirect_uri=${
-      client?.redirectUris[0]
-    }&scope=${encodingScopes}&state=${state}${
+    }/oauth2/authorize?response_type=code&client_id=${client?.clientId}&redirect_uri=${client
+      ?.redirectUris[0]}&scope=${encodingScopes}&state=${state}${
       isClientSecretPost
         ? ""
         : `&code_challenge_method=S256&code_challenge=${codeChallenge}`
@@ -226,7 +223,7 @@ const PreviewDialog = ({
   return (
     <ModalDialog
       visible={visible}
-      displayType={"aside"}
+      displayType={ModalDialogType.aside}
       onClose={onClose}
       withFooterBorder
     >
@@ -245,7 +242,6 @@ const PreviewDialog = ({
           </StyledPreviewContainer>
           <StyledBlocksContainer>
             <div className="block-container">
-              {/* @ts-ignore */}
               <Text
                 fontWeight={600}
                 lineHeight={"20px"}
@@ -263,7 +259,6 @@ const PreviewDialog = ({
               />
             </div>
             <div className="block-container">
-              {/* @ts-ignore */}
               <Text
                 fontWeight={600}
                 lineHeight={"20px"}
@@ -281,7 +276,6 @@ const PreviewDialog = ({
               />
             </div>
             <div className="block-container">
-              {/* @ts-ignore */}
               <Text
                 fontWeight={600}
                 lineHeight={"20px"}
@@ -299,7 +293,6 @@ const PreviewDialog = ({
               />
             </div>
             <div className="block-container">
-              {/* @ts-ignore */}
               <Text
                 fontWeight={600}
                 lineHeight={"20px"}
@@ -318,7 +311,6 @@ const PreviewDialog = ({
             </div>
 
             <div className="block-container">
-              {/* @ts-ignore */}
               <Text
                 fontWeight={600}
                 lineHeight={"20px"}
@@ -338,7 +330,6 @@ const PreviewDialog = ({
 
             {!isClientSecretPost && (
               <div className="block-container">
-                {/* @ts-ignore */}
                 <Text
                   fontWeight={600}
                   lineHeight={"20px"}
@@ -361,8 +352,7 @@ const PreviewDialog = ({
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
-          // @ts-ignore
-          size={"normal"}
+          size={ButtonSize.normal}
           scale
           label={t("Common:OkButton")}
           onClick={onClose}

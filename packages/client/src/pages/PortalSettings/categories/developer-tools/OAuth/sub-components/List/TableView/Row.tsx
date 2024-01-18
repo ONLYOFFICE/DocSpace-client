@@ -1,16 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-//@ts-ignore
-import TableCell from "@docspace/components/table-container/TableCell";
-//@ts-ignore
-import Tags from "@docspace/components/tags";
-import Text from "@docspace/components/text";
-import ToggleButton from "@docspace/components/toggle-button";
-//@ts-ignore
-import getCorrectDate from "@docspace/components/utils/getCorrectDate";
-//@ts-ignore
-import { getCookie } from "@docspace/components/utils/cookie";
+import { TableCell } from "@docspace/shared/components/table";
+import { Tags } from "@docspace/shared/components/tags";
+import { Text } from "@docspace/shared/components/text";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
+
+import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
+import { getCookie } from "@docspace/shared/utils/cookie";
 
 import NameCell from "./columns/name";
 import CreatorCell from "./columns/creator";
@@ -41,21 +38,23 @@ const Row = (props: RowProps) => {
     await changeClientStatus(item.clientId, !item.enabled);
   };
 
-  const handleRowClick = (e: any) => {
+  const handleRowClick = (e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+
     if (
-      e.target.closest(".checkbox") ||
-      e.target.closest(".table-container_row-checkbox") ||
-      e.target.closest(".advanced-tag") ||
-      e.target.closest(".tag") ||
+      target.closest(".checkbox") ||
+      target.closest(".table-container_row-checkbox") ||
+      target.closest(".advanced-tag") ||
+      target.closest(".tag") ||
       e.detail === 0
     ) {
       return;
     }
 
     if (
-      e.target.closest(".type-combobox") ||
-      e.target.closest(".table-container_row-context-menu-wrapper") ||
-      e.target.closest(".toggleButton")
+      target.closest(".type-combobox") ||
+      target.closest(".table-container_row-context-menu-wrapper") ||
+      target.closest(".toggleButton")
     ) {
       return setSelection && setSelection("");
     }
@@ -63,18 +62,22 @@ const Row = (props: RowProps) => {
     editClient();
   };
 
-  const contextOptions = getContextMenuItems && getContextMenuItems(t, item);
+  const contextOptions = getContextMenuItems?.(t, item);
+
+  const getContextMenuModel = () =>
+    getContextMenuItems ? getContextMenuItems(t, item) : [];
 
   const locale = getCookie("asc_language");
 
-  const modifiedDate = getCorrectDate(locale, item.modifiedOn);
+  const modifiedDate = getCorrectDate(locale || "", item.modifiedOn || "");
 
   return (
     <>
       <StyledRowWrapper className="handle">
         <StyledTableRow
-          contextOptions={contextOptions}
+          contextOptions={contextOptions || []}
           onClick={handleRowClick}
+          getContextModel={getContextMenuModel}
         >
           <TableCell className={"table-container_file-name-cell"}>
             <NameCell
@@ -86,14 +89,13 @@ const Row = (props: RowProps) => {
               setSelection={setSelection}
             />
           </TableCell>
-          <TableCell>
+          <TableCell className="">
             <CreatorCell
               avatar={item.creatorAvatar || ""}
               displayName={item.creatorDisplayName || ""}
             />
           </TableCell>
-          <TableCell>
-            {/* @ts-ignore */}
+          <TableCell className="">
             <Text
               as="span"
               fontWeight={400}
@@ -102,8 +104,7 @@ const Row = (props: RowProps) => {
               {modifiedDate}
             </Text>
           </TableCell>
-          <TableCell>
-            {/* @ts-ignore */}
+          <TableCell className="">
             <Text
               as="span"
               fontWeight={400}
@@ -117,7 +118,7 @@ const Row = (props: RowProps) => {
               />
             </Text>
           </TableCell>
-          <TableCell>
+          <TableCell className="">
             <ToggleButton
               className="toggle toggleButton"
               isChecked={item.enabled}

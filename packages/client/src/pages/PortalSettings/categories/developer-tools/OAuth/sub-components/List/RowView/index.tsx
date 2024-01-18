@@ -27,19 +27,22 @@ const RowView = (props: RowViewProps) => {
     fetchNextClients,
   } = props;
 
+  const fetchMoreFiles = React.useCallback(
+    async ({ startIndex }: { startIndex: number; stopIndex: number }) => {
+      await fetchNextClients?.(startIndex);
+    },
+    []
+  );
+
   return (
     <StyledRowContainer
       itemHeight={59}
       filesLength={items.length}
-      fetchMoreFiles={({
-        startIndex,
-      }: {
-        startIndex: number;
-        stopIndex: number;
-      }) => fetchNextClients && fetchNextClients(startIndex)}
-      hasMoreFiles={hasNextPage}
-      itemCount={itemCount}
-      useReactWindow={true}
+      fetchMoreFiles={fetchMoreFiles}
+      hasMoreFiles={hasNextPage || false}
+      itemCount={itemCount || 0}
+      useReactWindow
+      onScroll={() => {}}
     >
       {items.map((item) => (
         <OAuthRow

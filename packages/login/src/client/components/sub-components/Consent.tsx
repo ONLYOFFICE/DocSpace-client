@@ -3,26 +3,23 @@ import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { useTranslation, Trans } from "react-i18next";
 
-//@ts-ignore
-import api from "@docspace/common/api";
+import api from "@docspace/shared/api";
 
-import ScopeList from "@docspace/common/utils/oauth/ScopeList";
+import ScopeList from "@docspace/shared/utils/oauth/ScopeList";
 
-//@ts-ignore
-import FormWrapper from "@docspace/components/form-wrapper";
-//@ts-ignore
-import Button from "@docspace/components/button";
-//@ts-ignore
-import Text from "@docspace/components/text";
-//@ts-ignore
-import Link from "@docspace/components/link";
-//@ts-ignore
-import Avatar from "@docspace/components/avatar";
-//@ts-ignore
-import { Base } from "@docspace/components/themes";
+import { FormWrapper } from "@docspace/shared/components/form-wrapper";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Text } from "@docspace/shared/components/text";
+import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
+import {
+  Avatar,
+  AvatarRole,
+  AvatarSize,
+} from "@docspace/shared/components/avatar";
+import { Base } from "@docspace/shared/themes";
 
 import OAuthClientInfo from "./oauth-client-info";
-import { deleteCookie, setCookie } from "@docspace/common/utils";
+import { deleteCookie, setCookie } from "@docspace/shared/utils/cookie";
 
 const StyledFormWrapper = styled(FormWrapper)`
   width: 416px;
@@ -52,7 +49,8 @@ const StyledFormWrapper = styled(FormWrapper)`
 
     padding-top: 16px;
 
-    border-top: 1px solid ${(props) => props.theme.separatorColor};
+    border-top: 1px solid
+      ${(props) => props.theme.oauth.infoDialog.separatorColor};
 
     .block {
       height: 40px;
@@ -144,7 +142,7 @@ const Consent = ({
   };
 
   return (
-    <StyledFormWrapper id={"consent"} theme={theme}>
+    <StyledFormWrapper id={"consent"}>
       <OAuthClientInfo
         name={oauth.client.name}
         logo={oauth.client.logo}
@@ -163,11 +161,16 @@ const Consent = ({
         <Button
           onClick={onAllowClick}
           label={"Allow"}
-          size={"normal"}
+          size={ButtonSize.normal}
           scale
           primary
         />
-        <Button onClick={onDenyClick} label={"Deny"} size={"normal"} scale />
+        <Button
+          onClick={onDenyClick}
+          label={"Deny"}
+          size={ButtonSize.normal}
+          scale
+        />
       </div>
       <div className="description-container">
         <Text fontWeight={400} fontSize={"13px"} lineHeight={"20px"}>
@@ -176,10 +179,10 @@ const Consent = ({
             governed by {{ nameApp: oauth.client.name }}
             <Link
               className={"login-link"}
-              type="page"
+              type={LinkType.page}
               isHovered={false}
               href={oauth.client.policyUrl}
-              target={"_blank"}
+              target={LinkTarget.blank}
               noHover
             >
               privacy policy
@@ -187,10 +190,10 @@ const Consent = ({
             and
             <Link
               className={"login-link"}
-              type="page"
+              type={LinkType.page}
               isHovered={false}
               href={oauth.client.termsUrl}
-              target={"_blank"}
+              target={LinkTarget.blank}
               noHover
             >
               terms of service
@@ -202,14 +205,18 @@ const Consent = ({
       </div>
       <div className="user-container">
         <div className="block">
-          <Avatar size={"min"} source={oauth.self?.avatarSmall} />
+          <Avatar
+            size={AvatarSize.min}
+            role={AvatarRole.user}
+            source={oauth.self?.avatarSmall || ""}
+          />
           <div className="user-info">
             <Text lineHeight={"20px"}>
               {t("SignedInAs")} {oauth.self?.email}
             </Text>
             <Link
               className={"login-link"}
-              type="action"
+              type={LinkType.action}
               isHovered={false}
               noHover
               lineHeight={"20px"}

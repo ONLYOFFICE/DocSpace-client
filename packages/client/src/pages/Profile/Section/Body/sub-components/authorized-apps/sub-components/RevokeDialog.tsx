@@ -1,12 +1,16 @@
 import React from "react";
 import { useTranslation, Trans } from "react-i18next";
 
-//@ts-ignore
-import ModalDialog from "@docspace/components/modal-dialog";
-import Text from "@docspace/components/text";
-import Button from "@docspace/components/button";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
+import { Text } from "@docspace/shared/components/text";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+
+// @ts-ignore
 import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
-import { IClientProps } from "@docspace/common/utils/oauth/interfaces";
+import { IClientProps } from "@docspace/shared/utils/oauth/interfaces";
 
 interface RevokeDialogProps {
   visible: boolean;
@@ -77,30 +81,27 @@ const RevokeDialog = ({
       autoMaxHeight
       withFooterBorder={isMobile}
       onClose={onCloseAction}
-      displayType={"modal"}
+      displayType={ModalDialogType.modal}
     >
       <ModalDialog.Header>{t("RevokeConsent")}</ModalDialog.Header>
       <ModalDialog.Body>
-        {/* @ts-ignore */}
         <Text style={{ marginBottom: "16px" }}>{firstDesc}</Text>
-        {/* @ts-ignore */}
+
         <Text>{secondDesc}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
-          // @ts-ignore
           label={t("Revoke")}
           primary
           scale={isMobile}
-          size={"normal"}
+          size={ButtonSize.normal}
           isLoading={isRequestRunning}
           onClick={onRevokeAction}
         />
         <Button
-          // @ts-ignore
           label={t("Common:CancelButton")}
           scale={isMobile}
-          size={"normal"}
+          size={ButtonSize.normal}
           isDisabled={isRequestRunning}
           onClick={onCloseAction}
         />

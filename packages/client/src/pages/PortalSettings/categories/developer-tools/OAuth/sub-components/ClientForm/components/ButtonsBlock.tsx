@@ -1,8 +1,8 @@
 import React from "react";
 
-import Button from "@docspace/components/button";
+import { DeviceType } from "@docspace/shared/enums";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { StyledButtonContainer } from "../ClientForm.styled";
-import { DeviceType } from "@docspace/common/constants";
 
 interface ButtonsBlockProps {
   saveLabel: string;
@@ -31,7 +31,7 @@ const ButtonsBlock = ({
 }: ButtonsBlockProps) => {
   const isDesktop = currentDeviceType === DeviceType.desktop;
 
-  const buttonSize = isDesktop ? "small" : "normal";
+  const buttonSize = isDesktop ? ButtonSize.small : ButtonSize.normal;
   return (
     <StyledButtonContainer>
       <Button

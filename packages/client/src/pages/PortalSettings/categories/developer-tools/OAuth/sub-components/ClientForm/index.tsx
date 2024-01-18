@@ -6,8 +6,8 @@ import { useTranslation } from "react-i18next";
 import {
   IClientProps,
   IClientReqDTO,
-} from "@docspace/common/utils/oauth/interfaces";
-import { AuthenticationMethod } from "@docspace/common/utils/oauth/enums";
+} from "@docspace/shared/utils/oauth/interfaces";
+import { AuthenticationMethod } from "@docspace/shared/enums";
 
 import ResetDialog from "../ResetDialog";
 
@@ -213,13 +213,13 @@ const ClientForm = ({
           redirect_uris: fetchedClient?.redirectUris
             ? [...fetchedClient?.redirectUris]
             : client?.redirectUris
-            ? [...client?.redirectUris]
-            : [],
+              ? [...client?.redirectUris]
+              : [],
           allowed_origins: fetchedClient?.allowedOrigins
             ? [...fetchedClient.allowedOrigins]
             : client?.allowedOrigins
-            ? [...client.allowedOrigins]
-            : [],
+              ? [...client.allowedOrigins]
+              : [],
           logout_redirect_uri:
             fetchedClient?.logoutRedirectUri || client?.logoutRedirectUri || "",
 
@@ -236,8 +236,8 @@ const ClientForm = ({
           scopes: fetchedClient?.scopes
             ? [...fetchedClient.scopes]
             : client?.scopes
-            ? [...client.scopes]
-            : [],
+              ? [...client.scopes]
+              : [],
         });
 
         setClientId(fetchedClient?.clientId || client?.clientId || "");

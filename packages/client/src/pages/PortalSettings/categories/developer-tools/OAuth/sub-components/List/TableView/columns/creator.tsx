@@ -1,8 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-import Text from "@docspace/components/text";
-import Avatar from "@docspace/components/avatar";
+import { Text } from "@docspace/shared/components/text";
+import {
+  Avatar,
+  AvatarRole,
+  AvatarSize,
+} from "@docspace/shared/components/avatar";
 
 const StyledAvatar = styled(Avatar)`
   width: 16px;
@@ -21,16 +25,13 @@ interface CreatorCellProps {
 const CreatorCell = ({ avatar, displayName }: CreatorCellProps) => {
   return (
     <>
-      <StyledAvatar source={avatar} size={"min"} />
+      <StyledAvatar
+        source={avatar}
+        size={AvatarSize.min}
+        role={AvatarRole.user}
+      />
 
-      {/* @ts-ignore */}
-      <Text
-        className={"description-text"}
-        type="page"
-        fontWeight="600"
-        fontSize="13px"
-        isTextOverflow
-      >
+      <Text className={"description-text"} fontWeight="600" fontSize="13px">
         {displayName}
       </Text>
     </>

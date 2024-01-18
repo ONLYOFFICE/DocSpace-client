@@ -1,6 +1,5 @@
-import Text from "@docspace/components/text";
-//@ts-ignore
-import HelpButton from "@docspace/components/help-button";
+import { Text } from "@docspace/shared/components/text";
+import { HelpButton } from "@docspace/shared/components/help-button";
 
 import { StyledHeaderRow } from "../ClientForm.styled";
 

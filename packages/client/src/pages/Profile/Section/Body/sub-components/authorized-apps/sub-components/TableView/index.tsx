@@ -1,8 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-//@ts-ignore
-import TableBody from "@docspace/components/table-container/TableBody";
+import { TableBody } from "@docspace/shared/components/table";
 //@ts-ignore
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 
@@ -31,10 +30,11 @@ const TableView = ({
   const tableRef = React.useRef<HTMLDivElement>(null);
 
   const clickOutside = React.useCallback(
-    (e: any) => {
+    (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
       if (
-        e.target.closest(".checkbox") ||
-        e.target.closest(".table-container_row-checkbox") ||
+        target.closest(".checkbox") ||
+        target.closest(".table-container_row-checkbox") ||
         e.detail === 0
       ) {
         return;
@@ -55,12 +55,18 @@ const TableView = ({
 
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
 
+  const fetchMoreFiles = React.useCallback(
+    async ({ startIndex }: { startIndex: number; stopIndex: number }) => {
+      await fetchNextClients?.(startIndex);
+    },
+    []
+  );
+
   return (
     <TableWrapper forwardedRef={tableRef} useReactWindow>
       <Header
         sectionWidth={sectionWidth}
-        //@ts-ignore
-        tableRef={tableRef}
+        tableRef={tableRef.current}
         columnStorageName={columnStorageName}
       />
       <TableBody
@@ -68,14 +74,9 @@ const TableView = ({
         useReactWindow
         columnStorageName={columnStorageName}
         filesLength={items.length}
-        fetchMoreFiles={({
-          startIndex,
-        }: {
-          startIndex: number;
-          stopIndex: number;
-        }) => fetchNextClients && fetchNextClients(startIndex)}
-        hasMoreFiles={hasNextPage}
-        itemCount={itemCount}
+        fetchMoreFiles={fetchMoreFiles}
+        hasMoreFiles={hasNextPage || false}
+        itemCount={itemCount || 0}
       >
         {items.map((item) => (
           <Row

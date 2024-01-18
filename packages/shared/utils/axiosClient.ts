@@ -32,7 +32,7 @@ export type TRes = {
   request?: {
     responseType: string;
   };
-  headers: { [key: string]: string };
+  headers: { [key: string]: boolean | string };
 };
 
 export type TReqOption = {
@@ -172,7 +172,10 @@ class AxiosClient {
       if (error) throw new Error(error);
 
       if (response.headers["x-redirect-uri"] && options.withRedirect) {
-        return window.location.replace(response.headers["x-redirect-uri"]);
+        const redirectUri = response.headers["x-redirect-uri"];
+
+        if (typeof redirectUri === "string")
+          return window.location.replace(redirectUri);
       }
 
       if (!response || !response.data || response.isAxiosError) return null;

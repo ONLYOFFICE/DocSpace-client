@@ -13,6 +13,7 @@ const useAccounts = ({
 
   setSelectedNode,
   fetchPeople,
+  fetchPeopleWithGroups,
   setPortalTariff,
 }) => {
   React.useEffect(() => {
@@ -23,6 +24,14 @@ const useAccounts = ({
     const newFilter = AccountsFilter.getFilter(location);
 
     setDocumentTitle(t("Common:Accounts"));
+
+    if (newFilter?.checkIfFilteredOnlyBySearch()) {
+      fetchPeopleWithGroups(newFilter, true).finally(() => {
+        setIsLoading(false);
+      });
+
+      return;
+    }
 
     fetchPeople(newFilter, true)
       .catch((err) => {

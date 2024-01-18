@@ -30,7 +30,7 @@ class FilterStore {
     window.history.replaceState(
       "",
       "",
-      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, newPath)
+      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, newPath),
     );
   };
 
@@ -62,6 +62,10 @@ class FilterStore {
       this.filter.withoutGroup ||
       this.filter.group
     );
+  }
+
+  get isFilteredOnlyBySearch() {
+    return this.filter.checkIfFilteredOnlyBySearch();
   }
 }
 

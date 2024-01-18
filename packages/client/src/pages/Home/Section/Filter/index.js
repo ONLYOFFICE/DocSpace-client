@@ -470,7 +470,7 @@ const SectionFilterContent = ({
         newFilter.page = 0;
         newFilter.search = searchValue;
 
-        navigate(`accounts/filter?${newFilter.toUrlParams()}`);
+        navigate(`accounts/people/filter?${newFilter.toUrlParams()}`);
       } else if (isRooms) {
         const newFilter = roomsFilter.clone();
 

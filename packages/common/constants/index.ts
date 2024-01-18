@@ -146,7 +146,7 @@ export const RoomsType = Object.freeze({
 export const RoomsTypeValues = Object.freeze(
   Object.values(RoomsType).reduce((acc, current) => {
     return { ...acc, [current]: current };
-  }, {})
+  }, {}),
 );
 
 export const RoomsTypeTranslations = Object.freeze({
@@ -517,4 +517,10 @@ export const DeviceType = Object.freeze({
   mobile: "mobile",
   tablet: "tablet",
   desktop: "desktop",
+});
+
+export const AccountsSearchArea = Object.freeze({
+  People: "0",
+  Groups: "1",
+  Any: "2",
 });

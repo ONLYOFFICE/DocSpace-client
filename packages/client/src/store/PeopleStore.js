@@ -4,7 +4,7 @@ import DisableReactSvgUrl from "PUBLIC_DIR/images/disable.react.svg?url";
 import ChangeToEmployeeReactSvgUrl from "PUBLIC_DIR/images/change.to.employee.react.svg?url";
 import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
 import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import GroupsStore from "./GroupsStore";
 import UsersStore from "./UsersStore";
 import TargetUserStore from "./TargetUserStore";
@@ -21,6 +21,7 @@ import AccountsContextOptionsStore from "./AccountsContextOptionsStore";
 import { isMobile, isTablet, isDesktop } from "@docspace/shared/utils";
 
 import { toastr } from "@docspace/shared/components/toast";
+import api from "@docspace/common/api";
 import { EmployeeStatus, Events } from "@docspace/common/constants";
 import Filter from "@docspace/common/api/people/filter";
 
@@ -45,6 +46,8 @@ class PeopleStore {
   isInit = false;
   viewAs = isDesktop() ? "table" : "row";
   isLoadedProfileSectionBody = false;
+  peopleWithGroups = [];
+  peopleWithGroupsAreLoading = false;
 
   constructor(authStore, setupStore, accessRightsStore, dialogsStore) {
     this.authStore = authStore;
@@ -328,6 +331,56 @@ class PeopleStore {
 
   setIsLoadedProfileSectionBody = (isLoadedProfileSectionBody) => {
     this.isLoadedProfileSectionBody = isLoadedProfileSectionBody;
+  };
+
+  setPeopleWithGroups = (items) => {
+    this.peopleWithGroups = items;
+  };
+
+  getPeopleWithGroups = async (filter, updateFilter) => {
+    const newFilter = filter ? filter.clone() : Filter.getDefault();
+
+    if (!this.authStore.settingsStore.withPaging) {
+      newFilter.page = 0;
+      newFilter.pageCount = 100;
+    }
+
+    const res = await api.people.getPeopleWithGroups(newFilter);
+    newFilter.total = res.total;
+
+    if (updateFilter) {
+      this.filterStore.setFilterParams(newFilter);
+    }
+
+    this.setPeopleWithGroups(res.items);
+  };
+
+  get hasMorePeopleWithGroups() {
+    return this.peopleWithGroups.length < this.filterStore.filterTotal;
+  }
+
+  fetchMorePeopleWithGroups = async () => {
+    if (!this.hasMorePeopleWithGroups || this.peopleWithGroupsAreLoading)
+      return;
+
+    this.setPeopleWithGroupsAreLoading(true);
+
+    const { filter, setFilterParams } = this.filterStore;
+
+    const newFilter = filter.clone();
+    newFilter.page += 1;
+    setFilterParams(newFilter);
+
+    const res = await api.people.getPeopleWithGroups(newFilter);
+
+    runInAction(() => {
+      this.setPeopleWithGroups([...this.peopleWithGroups, ...res.items]);
+      this.setPeopleWithGroupsAreLoading(false);
+    });
+  };
+
+  setPeopleWithGroupsAreLoading = (peopleWithGroupsAreLoading) => {
+    this.peopleWithGroupsAreLoading = peopleWithGroupsAreLoading;
   };
 }
 

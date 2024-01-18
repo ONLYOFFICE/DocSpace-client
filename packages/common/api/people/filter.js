@@ -47,7 +47,7 @@ class Filter {
       DEFAULT_SEARCH,
       DEFAULT_GROUP,
       DEFAULT_PAYMENTS,
-      DEFAULT_ACCOUNT_LOGIN_TYPE
+      DEFAULT_ACCOUNT_LOGIN_TYPE,
     );
   }
   static getFilter(location) {
@@ -93,7 +93,7 @@ class Filter {
       group,
       payments,
       accountLoginType,
-      withoutGroup
+      withoutGroup,
     );
 
     return newFilter;
@@ -112,7 +112,7 @@ class Filter {
     group = DEFAULT_GROUP,
     payments = DEFAULT_PAYMENTS,
     accountLoginType = DEFAULT_ACCOUNT_LOGIN_TYPE,
-    withoutGroup = DEFAULT_WITHOUT_GROUP
+    withoutGroup = DEFAULT_WITHOUT_GROUP,
   ) {
     this.page = page;
     this.pageCount = pageCount;
@@ -249,7 +249,7 @@ class Filter {
           DEFAULT_PAGE_COUNT,
           DEFAULT_TOTAL,
           this.sortBy,
-          this.sortOrder
+          this.sortOrder,
         )
       : new Filter(
           this.page,
@@ -264,7 +264,7 @@ class Filter {
           this.group,
           this.payments,
           this.accountLoginType,
-          this.withoutGroup
+          this.withoutGroup,
         );
   }
 
@@ -283,7 +283,7 @@ class Filter {
         idGroup,
         null,
         null,
-        false
+        false,
       );
     } else {
       this.clone(true);
@@ -306,6 +306,21 @@ class Filter {
       this.withoutGroup === filter.withoutGroup;
 
     return equals;
+  }
+
+  checkIfFilteredOnlyBySearch() {
+    return Boolean(
+      this.search &&
+        !(
+          this.activationStatus ||
+          this.employeeStatus ||
+          this.payments ||
+          this.role ||
+          this.accountLoginType ||
+          this.withoutGroup ||
+          this.group
+        ),
+    );
   }
 }
 

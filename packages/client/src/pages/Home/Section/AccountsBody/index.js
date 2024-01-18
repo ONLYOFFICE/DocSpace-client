@@ -20,6 +20,8 @@ const SectionBodyContent = (props) => {
     setBufferSelection,
     setChangeOwnerDialogVisible,
     selectUser,
+    isFilteredOnlyBySearch,
+    peopleWithGroups,
   } = props;
 
   const location = useLocation();
@@ -66,6 +68,18 @@ const SectionBodyContent = (props) => {
     return () => window.removeEventListener("mousedown", onMouseDown);
   }, []);
 
+  if (isFilteredOnlyBySearch) {
+    return (
+      <div>
+        {peopleWithGroups.length === 0
+          ? "Items not found"
+          : peopleWithGroups.map((item) => (
+              <div key={item.id}>{item.name || item.firstName}</div>
+            ))}
+      </div>
+    );
+  }
+
   return (
     <>
       {!isFiltered && <Tabs />}
@@ -81,8 +95,8 @@ const SectionBodyContent = (props) => {
 };
 
 export default inject(({ peopleStore }) => {
-  const { viewAs: accountsViewAs, filterStore } = peopleStore;
-  const { isFiltered } = filterStore;
+  const { viewAs: accountsViewAs, filterStore, peopleWithGroups } = peopleStore;
+  const { isFiltered, isFilteredOnlyBySearch } = filterStore;
 
   const { setSelection, setBufferSelection, selectUser } =
     peopleStore.selectionStore;
@@ -91,13 +105,15 @@ export default inject(({ peopleStore }) => {
   return {
     accountsViewAs,
     isFiltered,
+    isFilteredOnlyBySearch,
     setSelection,
     setBufferSelection,
     setChangeOwnerDialogVisible,
     selectUser,
+    peopleWithGroups,
   };
 })(
   withTranslation(["People", "Common", "PeopleTranslations"])(
-    withLoader(observer(SectionBodyContent))()
-  )
+    withLoader(observer(SectionBodyContent))(),
+  ),
 );

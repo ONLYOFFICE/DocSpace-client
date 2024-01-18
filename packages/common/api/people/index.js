@@ -4,6 +4,7 @@ import Filter from "./filter";
 import * as fakePeople from "./fake";
 import { Encoder } from "../../utils/encoder";
 import { checkFilterInstance } from "../../utils";
+import { AccountsSearchArea } from "../../constants";
 
 export function getUserList(filter = Filter.getDefault(), fake = false) {
   let params = "";
@@ -15,7 +16,7 @@ export function getUserList(filter = Filter.getDefault(), fake = false) {
     checkFilterInstance(filter, Filter);
 
     params = `/filter?${filter.toApiUrlParams(
-      "id,status,isAdmin,isOwner,isRoomAdmin,isVisitor,activationStatus,userName,email,mobilePhone,displayName,avatar,listAdminModules,birthday,title,location,isLDAP,isSSO,groups"
+      "id,status,isAdmin,isOwner,isRoomAdmin,isVisitor,activationStatus,userName,email,mobilePhone,displayName,avatar,listAdminModules,birthday,title,location,isLDAP,isSSO,groups",
     )}`;
   }
 
@@ -162,7 +163,7 @@ export function sendInstructionsToChangePassword(email) {
 
 export function getListAdmins(filter = Filter.getDefault()) {
   const filterParams = filter.toApiUrlParams(
-    "fields=id,displayName,groups,name,avatar,avatarSmall,isOwner,isAdmin,profileUrl,listAdminModules"
+    "fields=id,displayName,groups,name,avatar,avatarSmall,isOwner,isAdmin,profileUrl,listAdminModules",
   );
 
   return request({
@@ -366,7 +367,7 @@ export function getMembersList(roomId, filter = Filter.getDefault()) {
     checkFilterInstance(filter, Filter);
 
     params = `?${filter.toApiUrlParams(
-      "id,email,avatar,icon,displayName,hasAvatar,isOwner,isAdmin,isVisitor,isCollaborator,"
+      "id,email,avatar,icon,displayName,hasAvatar,isOwner,isAdmin,isVisitor,isCollaborator,",
     )}`;
   }
 
@@ -389,5 +390,14 @@ export function getMembersList(roomId, filter = Filter.getDefault()) {
       return user;
     });
     return res;
+  });
+}
+
+export function getPeopleWithGroups(filter = Filter.getDefault()) {
+  const params = filter.toApiUrlParams();
+
+  return request({
+    method: "get",
+    url: `/accounts?filter/searchArea=${AccountsSearchArea.Any}&${params}`,
   });
 }

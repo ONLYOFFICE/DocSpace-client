@@ -52,7 +52,6 @@ const Webhooks = (props) => {
   const {
     loadWebhooks,
     addWebhook,
-    isWebhookExist,
     isWebhooksEmpty,
     setDocumentTitle,
     currentWebhook,
@@ -77,20 +76,17 @@ const Webhooks = (props) => {
   const closeDeleteModal = () => setIsDeleteOpened(false);
   const openDeleteModal = () => setIsDeleteOpened(true);
 
-  const onCreateWebhook = async (webhookInfo) => {
-    if (!isWebhookExist(webhookInfo)) {
-      await addWebhook(webhookInfo);
-      closeCreateModal();
-    }
-  };
-
   const handleWebhookUpdate = async (webhookInfo) => {
     await editWebhook(currentWebhook, webhookInfo);
-    toastr.success(t("WebhookEditedSuccessfully"), <b>{t("Common:Done")}</b>);
   };
+
   const handleWebhookDelete = async () => {
-    await deleteWebhook(currentWebhook);
-    toastr.success(t("WebhookRemoved"), <b>{t("Common:Done")}</b>);
+    try {
+      await deleteWebhook(currentWebhook);
+      toastr.success(t("WebhookRemoved"));
+    } catch (error) {
+      toastr.error(error);
+    }
   };
 
   useEffect(() => {
@@ -127,7 +123,7 @@ const Webhooks = (props) => {
           visible={isCreateOpened}
           onClose={closeCreateModal}
           header={t("CreateWebhook")}
-          onSubmit={onCreateWebhook}
+          onSubmit={addWebhook}
           additionalId="create-webhook"
           isSettingsModal={false}
         />
@@ -157,7 +153,6 @@ export default inject(({ webhooksStore, auth }) => {
     state,
     loadWebhooks,
     addWebhook,
-    isWebhookExist,
     isWebhooksEmpty,
     currentWebhook,
     editWebhook,
@@ -169,7 +164,6 @@ export default inject(({ webhooksStore, auth }) => {
     state,
     loadWebhooks,
     addWebhook,
-    isWebhookExist,
     isWebhooksEmpty,
     setDocumentTitle,
     currentWebhook,

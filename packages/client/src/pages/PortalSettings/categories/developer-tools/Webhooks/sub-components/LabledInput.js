@@ -27,6 +27,7 @@ export const LabledInput = ({
   className,
   required = false,
   id,
+  isDisabled,
 }) => {
   return (
     <StyledLabel text={label} className={className}>
@@ -39,6 +40,7 @@ export const LabledInput = ({
         onChange={onChange}
         required={required}
         hasError={hasError}
+        isDisabled={isDisabled}
         {...(mask ? { mask: mask } : {})}
       />
     </StyledLabel>

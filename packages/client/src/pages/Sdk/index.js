@@ -1,4 +1,5 @@
 import React, { useEffect, useCallback, useRef } from "react";
+import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useParams } from "react-router-dom";
 import { Button } from "@docspace/shared/components/button";
@@ -27,6 +28,7 @@ const FlexBox = styled.div`
 `;
 
 const Sdk = ({
+  t,
   frameConfig,
   match,
   setFrameConfig,
@@ -50,8 +52,6 @@ const Sdk = ({
       setFrameConfig(null);
     };
   }, [handleMessage]);
-
-  console.log("new window content ", newWindow.current);
 
   // useEffect(() => {
   //   frameConfig && newWindow.current && newWindow.current.postMessage(frameConfig, window.location.origin);
@@ -204,11 +204,11 @@ const Sdk = ({
           <Button
             scale={false}
             size="small"
-            label={`Select to DocSpace`}
+            label={frameConfig?.buttonText || t("SelectToDocSpace")}
             isHovered
             primary
             onClick={openRoomSelector}
-            icon={<Logo />}
+            icon={frameConfig?.buttonWithLogo ? <Logo /> : undefined}
           />
         </FlexBox>
       ) : (
@@ -232,11 +232,11 @@ const Sdk = ({
           <Button
             scale={false}
             size="small"
-            label={`Select to DocSpace`}
+            label={frameConfig?.buttonText || t("SelectToDocSpace")}
             isHovered
             primary
             onClick={openFileSelector}
-            icon={<Logo />}
+            icon={frameConfig?.buttonWithLogo ? <Logo /> : undefined}
           />
         </FlexBox>
       ) : (
@@ -291,4 +291,4 @@ export default inject(({ auth, settingsStore, peopleStore, filesStore }) => {
     user,
     getPrimaryLink,
   };
-})(observer(Sdk));
+})(withTranslation(["JavascriptSdk"])(observer(Sdk)));

@@ -99,6 +99,8 @@ const RoomSelector = (props) => {
     withSearch: true,
     acceptButtonLabel: t("Common:SelectAction"),
     cancelButtonLabel: t("Common:CancelButton"),
+    isButtonMode: false,
+    buttonWithLogo: true,
   });
 
   const params = objectToGetParams(config);
@@ -300,6 +302,42 @@ const RoomSelector = (props) => {
             onClick={toggleButtonMode}
             spacing="8px"
           />
+          {config.isButtonMode && (
+            <>
+              <CategorySubHeader>{t("ButtonCustomization")}</CategorySubHeader>
+              <ControlsGroup>
+                <Label className="label" text={t("ButtonColor")} />
+                <TextInput
+                  scale
+                  onChange={() => {}}
+                  placeholder={"#5299E0"}
+                  value={"#5299E0"}
+                  tabIndex={2}
+                />
+              </ControlsGroup>
+              <ControlsGroup>
+                <Label className="label" text={t("ButtonText")} />
+                <TextInput
+                  scale
+                  onChange={(e) => {
+                    setConfig((config) => ({ ...config, buttonText: e.target.value }));
+                  }}
+                  placeholder={t("SelectToDocSpace")}
+                  value={config.buttonText}
+                  tabIndex={3}
+                />
+                <Checkbox
+                  className="checkbox"
+                  label={"Logo"}
+                  onChange={() => {
+                    setConfig((config) => ({ ...config, buttonWithLogo: !config.buttonWithLogo }));
+                  }}
+                  isChecked={config.buttonWithLogo}
+                />
+              </ControlsGroup>
+            </>
+          )}
+
           <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
           <ControlsGroup>
             <Label className="label" text={t("EmbeddingPanel:Width")} />
@@ -308,7 +346,7 @@ const RoomSelector = (props) => {
                 onChange={onChangeWidth}
                 placeholder={t("EnterWidth")}
                 value={width}
-                tabIndex={2}
+                tabIndex={4}
               />
               <ComboBox
                 size="content"
@@ -329,7 +367,7 @@ const RoomSelector = (props) => {
                 onChange={onChangeHeight}
                 placeholder={t("EnterHeight")}
                 value={height}
-                tabIndex={3}
+                tabIndex={5}
               />
               <ComboBox
                 size="content"
@@ -350,7 +388,7 @@ const RoomSelector = (props) => {
               onChange={onChangeFrameId}
               placeholder={t("EnterId")}
               value={config.frameId}
-              tabIndex={4}
+              tabIndex={6}
             />
           </ControlsGroup>
           <InterfaceElements>
@@ -367,7 +405,7 @@ const RoomSelector = (props) => {
               onChange={onChangeAcceptLabel}
               placeholder={t("Common:SelectAction")}
               value={config.acceptButtonLabel}
-              tabIndex={4}
+              tabIndex={7}
             />
             <Label className="label" text={t("CancelButtonText")} />
             <TextInput
@@ -375,7 +413,7 @@ const RoomSelector = (props) => {
               onChange={onChangeCancelLabel}
               placeholder={t("Common:CancelButton")}
               value={config.cancelButtonLabel}
-              tabIndex={4}
+              tabIndex={8}
             />
           </InterfaceElements>
           <CategorySubHeader>{t("AdvancedDisplay")}</CategorySubHeader>

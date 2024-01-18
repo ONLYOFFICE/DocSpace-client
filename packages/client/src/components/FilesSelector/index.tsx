@@ -76,7 +76,7 @@ const FilesSelector = ({
   onSelectFolder,
   onSetBaseFolderPath,
   //onSetNewFolderPath,
-  setFinishLoad,
+  setIsDataReady,
   onSelectTreeNode,
   onSave,
   onSelectFile,
@@ -160,9 +160,7 @@ const FilesSelector = ({
   } = useLoadersHelper({ items });
 
   useEffect(() => {
-    setTimeout(() => {
-      setFinishLoad !== undefined && setFinishLoad(showLoader);
-    }, 750);
+    setIsDataReady && setIsDataReady(!showLoader);
   }, [showLoader]);
 
   const { isRoot, setIsRoot, getRootData } = useRootHelper({
@@ -609,7 +607,8 @@ const FilesSelector = ({
         visible={isPanelVisible}
         withoutBodyScroll
         zIndex={310}
-        onClose={onCloseAction}>
+        onClose={onCloseAction}
+      >
         {SelectorBody}
       </Aside>
     </>

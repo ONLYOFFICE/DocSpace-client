@@ -28,5 +28,7 @@ export interface AvatarProps {
   withTooltip?: boolean;
   /** Tooltip content */
   tooltipContent?: string;
+  /** Display initials for group when `source` is set to blank */
+  isGroup?: boolean;
   onClick?: () => void;
 }

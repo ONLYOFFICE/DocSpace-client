@@ -24,9 +24,8 @@ import SystemFolders from "./SystemFolders";
 import { RoomsType } from "@docspace/shared/enums";
 
 import ChangeRoomOwner from "./ChangeRoomOwner";
-import Link from "@docspace/components/link";
 import RoomQuota from "./RoomQuota";
-import NoUserSelect from "@docspace/components/utils/commonStyles";
+
 
 const StyledSetRoomParams = styled.div`
   display: flex;

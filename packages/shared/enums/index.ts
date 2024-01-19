@@ -164,6 +164,7 @@ export const enum PageType {
   portalDeletion = "portalDeletion",
   payments = "payments",
   bonus = "bonus",
+  storageManagement = "storageManagement",
 }
 
 /**

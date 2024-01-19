@@ -347,3 +347,10 @@ export type TFileLink = {
     title: string;
   };
 };
+
+export type TFilesUsedSpace = {
+  myDocumentsUsedSpace: number;
+  trashUsedSpace: number;
+  archiveUsedSpace: number;
+  roomsUsedSpace: number;
+};

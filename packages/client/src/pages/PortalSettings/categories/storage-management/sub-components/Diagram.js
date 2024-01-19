@@ -1,14 +1,14 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 
 import {
   StyledDiagramComponent,
   StyledFolderTagColor,
   StyledFolderTagSection,
 } from "../StyledComponent";
-import { getConvertedSize } from "@docspace/common/utils";
+import { getConvertedSize } from "@docspace/shared/utils/common";
 
 const calculateSize = (size, common) => ((100 * size) / common).toFixed(2);
 

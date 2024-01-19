@@ -18,6 +18,7 @@ import {
   TFile,
   TFileLink,
   TFilesSettings,
+  TFilesUsedSpace,
   TFolder,
   TGetFolder,
   TGetFolderPath,
@@ -1182,6 +1183,8 @@ export async function getProtectUsers(fileId: number) {
   return res;
 }
 
+
+
 export async function sendEditorNotify(
   fileId: number,
   actionLink: {},
@@ -1253,4 +1256,15 @@ export function checkIsFileExist(folderId: number, filesTitle: string[]) {
       filesTitle,
     },
   });
+}
+
+export async function getFilesUsedSpace() {
+  const options: AxiosRequestConfig = {
+    method: "get",
+    url: `/files/filesusedspace`,
+  };
+
+  const res = (await request(options)) as TFilesUsedSpace;
+
+  return res;
 }

@@ -2,9 +2,9 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { isMobile } from "@docspace/components/utils/device";
-import Text from "@docspace/components/text";
-import Badge from "@docspace/components/badge";
+import { isMobile } from "@docspace/shared/utils";
+import { Text } from "@docspace/shared/components/text";
+import { Badge } from "@docspace/shared/components/badge";
 
 import { StyledBaseQuotaComponent, StyledMainTitle } from "./StyledComponent";
 

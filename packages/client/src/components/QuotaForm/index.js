@@ -6,14 +6,14 @@ import {
   conversionToBytes,
   getPowerFromBytes,
   getSizeFromBytes,
-} from "@docspace/common/utils";
-import TextInput from "@docspace/components/text-input";
-import ComboBox from "@docspace/components/combobox";
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
-import Text from "@docspace/components/text";
+} from "@docspace/shared/utils/common";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { ComboBox } from "@docspace/shared/components/combobox";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
+import { Text } from "@docspace/shared/components/text";
 
 import StyledBody from "./StyledComponent";
-import Checkbox from "@docspace/components/checkbox";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 
 const isDefaultValue = (initPower, initSize, power, value, initialSize) => {
   if (initialSize === -1) return false;

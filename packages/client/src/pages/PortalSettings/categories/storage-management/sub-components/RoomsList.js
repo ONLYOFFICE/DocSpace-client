@@ -3,9 +3,9 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-import Text from "@docspace/components/text";
-import Button from "@docspace/components/button";
-import RoomsFilter from "@docspace/common/api/rooms/filter";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
 
 import { SortByFieldName } from "SRC_DIR/helpers/constants";
 

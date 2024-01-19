@@ -5,7 +5,7 @@ import { withTranslation } from "react-i18next";
 
 import { RowContent } from "@docspace/shared/components/row-content";
 import { Link } from "@docspace/shared/components/link";
-import { getSpaceQuotaAsText } from "@docspace/common/utils";
+import { getSpaceQuotaAsText } from "@docspace/shared/utils/common";
 
 import Badges from "../Badges";
 import { tablet, mobile } from "@docspace/shared/utils";

@@ -440,6 +440,15 @@ export const frameCallCommand = (commandName: string, commandData: unknown) => {
   );
 };
 
+export const getPowerFromBytes = (bytes, maxPower = 6) => {
+  const power = Math.floor(Math.log(bytes) / Math.log(1024));
+  return power <= maxPower ? power : maxPower;
+};
+
+export const getSizeFromBytes = (bytes, power) => {
+  return parseFloat((bytes / Math.pow(1024, power)).toFixed(2));
+};
+
 export const getConvertedSize = (t: (key: string) => string, bytes: number) => {
   let power = 0;
   let resultSize = bytes;
@@ -486,14 +495,7 @@ export const getSpaceQuotaAsText = (
 export const conversionToBytes = (size, power) =>
   Math.floor(size) * Math.pow(1024, power);
 
-export const getPowerFromBytes = (bytes, maxPower = 6) => {
-  let power = Math.floor(Math.log(bytes) / Math.log(1024));
-  return power <= maxPower ? power : maxPower;
-};
 
-export const getSizeFromBytes = (bytes, power) => {
-  return parseFloat((bytes / Math.pow(1024, power)).toFixed(2));
-};
 export const getBgPattern = (colorSchemeId: number | undefined) => {
   switch (colorSchemeId) {
     case 1:

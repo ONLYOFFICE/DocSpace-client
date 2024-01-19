@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
-import Text from "@docspace/components/text";
-import { getConvertedSize } from "@docspace/common/utils";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { Text } from "@docspace/shared/components/text";
+import { getConvertedSize } from "@docspace/shared/utils/common";
 
 import Diagram from "./sub-components/Diagram";
 import RecalculateButton from "./sub-components/RecalculateButton";
@@ -69,7 +69,7 @@ const DiskSpaceUsedComponent = (props) => {
       </Text>
       {standalone && !isSetQuota && (
         <ColorTheme
-          themeId={ThemeType.Link}
+          themeId={ThemeId.Link}
           fontWeight={700}
           onClick={onClick}
           className="disk-space_link"

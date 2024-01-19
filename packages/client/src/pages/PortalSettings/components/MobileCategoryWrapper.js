@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
-import { Base } from "@docspace/components/themes";
+import { Text } from "@docspace/shared/components/text";
+import { Link }  from "@docspace/shared/components/link";
+import { Base } from "@docspace/shared/themes";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
+import commonIconsStyles from "@docspace/shared/utils/common-icons-style";
 
 import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 

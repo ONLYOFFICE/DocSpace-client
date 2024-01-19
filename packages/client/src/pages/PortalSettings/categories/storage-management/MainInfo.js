@@ -2,7 +2,7 @@ import { inject, observer } from "mobx-react";
 import moment from "moment";
 import { useTranslation } from "react-i18next";
 
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 
 import { StyledMainInfo } from "./StyledComponent";
 

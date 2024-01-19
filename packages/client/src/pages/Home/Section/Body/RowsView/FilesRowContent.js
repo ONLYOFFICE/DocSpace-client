@@ -21,7 +21,7 @@ import { ROOMS_TYPE_TRANSLATIONS } from "@docspace/shared/constants";
 
 import { getFileTypeName } from "../../../../../helpers/filesUtils";
 import { SortByFieldName } from "../../../../../helpers/constants";
-import { getSpaceQuotaAsText } from "@docspace/common/utils";
+import { getSpaceQuotaAsText } from "@docspace/shared/utils/common";
 
 const SimpleFilesRowContent = styled(RowContent)`
   .row-main-container-wrapper {

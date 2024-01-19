@@ -3,11 +3,11 @@ import moment from "moment";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { recalculateQuota } from "@docspace/common/api/settings";
-import toastr from "@docspace/components/toast/toastr";
+import { recalculateQuota } from "@docspace/shared/api/settings";
+import { toastr } from "@docspace/shared/components/toast";
 
-import Text from "@docspace/components/text";
-import Button from "@docspace/components/button";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
 
 const RecalculateButton = (props) => {
   const { t } = useTranslation("Settings");

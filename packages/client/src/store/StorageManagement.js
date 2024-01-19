@@ -1,14 +1,14 @@
 import { makeAutoObservable } from "mobx";
 
-import Filter from "@docspace/common/api/people/filter";
-import RoomsFilter from "@docspace/common/api/rooms/filter";
-import { getPortal, getPortalUsersCount } from "@docspace/common/api/portal";
-import { getFilesUsedSpace } from "@docspace/common/api/files";
-import toastr from "@docspace/components/toast/toastr";
+import Filter from "@docspace/shared/api/people/filter";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import { getPortal, getPortalUsersCount } from "@docspace/shared/api/portal";
+import { getFilesUsedSpace } from "@docspace/shared/api/files";
+import { toastr } from "@docspace/shared/components/toast";
 import {
   checkRecalculateQuota,
   getQuotaSettings,
-} from "@docspace/common/api/settings";
+} from "@docspace/shared/api/settings";
 
 const FILTER_COUNT = 6;
 

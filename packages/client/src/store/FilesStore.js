@@ -1034,6 +1034,8 @@ class FilesStore {
         return roomType === RoomsType.ReviewRoom;
       case `room-${RoomsType.ReadOnlyRoom}`:
         return roomType === RoomsType.ReadOnlyRoom;
+      case `room-${RoomsType.FormRoom}`:
+        return roomType === RoomsType.FormRoom;
       case `room-${RoomsType.PublicRoom}`:
         return roomType === RoomsType.PublicRoom;
       default:
@@ -1530,6 +1532,7 @@ class FilesStore {
           pathParts: data.pathParts,
           navigationPath,
           ...{ new: data.new },
+          // type,
         });
 
         this.clientLoadingStore.setIsSectionHeaderLoading(false);
@@ -1891,7 +1894,7 @@ class FilesStore {
         "submit-to-gallery",
         "separator-SubmitToGallery",
         "link-for-room-members",
-        // "sharing-settings",
+        "sharing-settings",
         // "external-link",
         "owner-change",
         // "link-for-portal-users",
@@ -1920,6 +1923,7 @@ class FilesStore {
         "separator2",
         // "unsubscribe",
         "delete",
+        "remove-from-recent",
       ];
 
       if (!canDownload) {
@@ -2286,7 +2290,7 @@ class FilesStore {
         "select",
         "open",
         // "separator0",
-        // "sharing-settings",
+        "sharing-settings",
         "link-for-room-members",
         "owner-change",
         "show-info",
@@ -2561,8 +2565,8 @@ class FilesStore {
     return api.rooms.updateRoomMemberRole(id, data);
   }
 
-  getHistory(module, id, signal = null) {
-    return api.rooms.getHistory(module, id, signal);
+  getHistory(module, id, signal = null, requestToken) {
+    return api.rooms.getHistory(module, id, signal, requestToken);
   }
 
   getRoomHistory(id) {
@@ -2992,6 +2996,7 @@ class FilesStore {
 
     const newItem = items.map((item) => {
       const {
+        availableExternalRights,
         access,
         autoDelete,
         originTitle,
@@ -3019,6 +3024,8 @@ class FilesStore {
         rootFolderId,
         shared,
         title,
+        type,
+        hasDraft,
         updated,
         updatedBy,
         version,
@@ -3038,6 +3045,7 @@ class FilesStore {
         viewAccessibility,
         mute,
         inRoom,
+        requestToken,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3056,6 +3064,7 @@ class FilesStore {
       const previewUrl = canOpenPlayer
         ? this.getItemUrl(id, false, needConvert, canOpenPlayer)
         : null;
+
       const contextOptions = this.getFilesContextOptions(item);
       const isThirdPartyFolder = providerKey && id === rootFolderId;
 
@@ -3096,7 +3105,8 @@ class FilesStore {
               providerKey,
               contentLength,
               roomType,
-              isArchive
+              isArchive,
+              type
             );
 
       const defaultRoomIcon = isRoom
@@ -3106,7 +3116,8 @@ class FilesStore {
             providerKey,
             contentLength,
             roomType,
-            isArchive
+            isArchive,
+            type
           )
         : undefined;
 
@@ -3131,6 +3142,7 @@ class FilesStore {
         access === ShareAccessRights.None;
 
       return {
+        availableExternalRights,
         access,
         daysRemaining: autoDelete && getDaysRemaining(autoDelete),
         originTitle,
@@ -3195,8 +3207,11 @@ class FilesStore {
         viewAccessibility,
         ...pluginOptions,
         inRoom,
+        type,
+        hasDraft,
         isForm,
         canCopyPublicLink,
+        requestToken,
       };
     });
 
@@ -3241,6 +3256,7 @@ class FilesStore {
         elem !== `room-${RoomsType.CustomRoom}` &&
         elem !== `room-${RoomsType.EditingRoom}` &&
         elem !== `room-${RoomsType.ReviewRoom}` &&
+        elem !== `room-${RoomsType.FormRoom}` &&
         elem !== `room-${RoomsType.ReadOnlyRoom}` &&
         elem !== `room-${RoomsType.PublicRoom}`
     );
@@ -3280,6 +3296,8 @@ class FilesStore {
         return t("CollaborationRooms");
       case `room-${RoomsType.ReviewRoom}`:
         return t("Common:Review");
+      case `room-${RoomsType.FormRoom}`:
+        return t("FormRoom");
       case `room-${RoomsType.ReadOnlyRoom}`:
         return t("ViewOnlyRooms");
       case `room-${RoomsType.PublicRoom}`:
@@ -3610,7 +3628,8 @@ class FilesStore {
     providerKey = null,
     tab = null,
     url = null,
-    preview = false
+    preview = false,
+    shareKey = null
   ) => {
     const foundIndex = this.files.findIndex((x) => x.id === id);
     const file = foundIndex !== -1 ? this.files[foundIndex] : undefined;
@@ -3627,16 +3646,9 @@ class FilesStore {
     }
 
     const isPrivacy = this.treeFoldersStore.isPrivacyFolder;
+    const share = shareKey ? shareKey : this.publicRoomStore.publicRoomKey;
 
-    return openEditor(
-      id,
-      providerKey,
-      tab,
-      url,
-      isPrivacy,
-      preview,
-      this.publicRoomStore.publicRoomKey
-    );
+    return openEditor(id, providerKey, tab, url, isPrivacy, preview, share);
   };
 
   createThumbnails = async (files = null) => {

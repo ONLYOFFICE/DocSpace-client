@@ -298,6 +298,10 @@ class TreeFoldersStore {
     return FolderType.USER === this.selectedFolderStore.rootFolderType;
   }
 
+  get isRecentTab() {
+    return this.selectedFolderStore.rootFolderType === FolderType.Recent;
+  }
+
   get selectedKeys() {
     const selectedKeys =
       this.selectedTreeNode.length > 0 &&

@@ -27,6 +27,9 @@ const getRoomLogo = (roomType: number) => {
     case RoomsType.PublicRoom:
       path = "public.svg";
       break;
+    case RoomsType.FormRoom:
+      path = "form.svg";
+      break;
   }
 
   return iconSize32.get(path);

@@ -69,7 +69,12 @@ const useFiles = ({
   };
 
   const onDrop = (files, uploadToFolder) => {
-    if (folderSecurity && !folderSecurity.Create) return;
+    if (
+      folderSecurity &&
+      folderSecurity.hasOwnProperty("Create") &&
+      !folderSecurity.Create
+    )
+      return;
 
     dragging && setDragging(false);
 

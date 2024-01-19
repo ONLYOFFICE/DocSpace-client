@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Section from "@docspace/common/components/Section";
+import Section from "@docspace/shared/components/section";
 import SectionWrapper from "SRC_DIR/components/Section";
 import { SectionHeaderContent, SectionBodyContent } from "./Section";
 

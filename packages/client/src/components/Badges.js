@@ -84,6 +84,7 @@ const Badges = ({
   onCopyPrimaryLink,
   isArchiveFolder,
   isRecentTab,
+  canEditing,
 }) => {
   const {
     id,
@@ -205,7 +206,7 @@ const Badges = ({
           />
         </BadgeWrapper>
       )}
-      {isEditing && !isVisitor && !isPdf && !(isRecentTab && accessToEdit) && (
+      {isEditing && !isVisitor && !isPdf && !(isRecentTab && !canEditing) && (
         <ColorTheme
           themeId={ThemeId.IconButton}
           isEditing={isEditing}

@@ -129,6 +129,8 @@ export default function withBadges(WrappedComponent) {
         access === ShareAccessRights.FullAccess ||
         access === ShareAccessRights.None; // TODO: fix access type for owner (now - None)
 
+      const canEditing = access === ShareAccessRights.Editing;
+
       const badgesComponent = (
         <Badges
           t={t}
@@ -154,6 +156,7 @@ export default function withBadges(WrappedComponent) {
           onCopyPrimaryLink={this.onCopyPrimaryLink}
           isArchiveFolder={isArchiveFolder}
           isRecentTab={isRecentTab}
+          canEditing={canEditing}
         />
       );
 

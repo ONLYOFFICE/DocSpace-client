@@ -33,7 +33,7 @@ export const HistoryRowContent = ({ sectionWidth, historyItem }) => {
 
   const formattedDelivery =
     moment(historyItem.delivery)
-      .tz(window.timezone || "")
+      .tz(window.timezone)
       .locale(i18n.language)
       .format("MMM D, YYYY, h:mm:ss A") +
     " " +

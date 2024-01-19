@@ -3,7 +3,7 @@ import { TTheme } from "../themes";
 export type TDirectionX = "left" | "right";
 export type TDirectionY = "bottom" | "top" | "both";
 
-export type TViewAs = "tile" | "table" | "row";
+export type TViewAs = "tile" | "table" | "row" | "settings" | "profile";
 
 export type TTranslation = (key: string) => string;
 

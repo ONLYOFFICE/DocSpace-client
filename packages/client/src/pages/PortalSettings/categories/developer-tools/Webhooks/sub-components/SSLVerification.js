@@ -34,7 +34,7 @@ const Header = styled.h4`
   }
 `;
 
-export const SSLVerification = ({ onChange, value }) => {
+export const SSLVerification = ({ onChange, value, isDisabled }) => {
   const { t } = useTranslation(["Webhooks"]);
 
   const handleOnChange = (e) => {
@@ -75,6 +75,7 @@ export const SSLVerification = ({ onChange, value }) => {
         width="100%"
         orientation="vertical"
         spacing="8px"
+        isDisabled={isDisabled}
       />
     </div>
   );

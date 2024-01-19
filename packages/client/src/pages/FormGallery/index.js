@@ -11,7 +11,7 @@ import SectionFilterContent from "./Filter";
 import OformsFilter from "@docspace/shared/api/oforms/filter";
 import Dialogs from "./Dialogs";
 import ErrorView from "./ErrorView";
-
+import SectionWrapper from "SRC_DIR/components/Section";
 const FormGallery = ({
   oformsLoadError,
   currentCategory,
@@ -67,7 +67,7 @@ const FormGallery = ({
 
   return (
     <>
-      <Section
+      <SectionWrapper
         // withBodyScroll
         // withBodyAutoFocus={!isMobile}
         withPaging={false}
@@ -94,7 +94,7 @@ const FormGallery = ({
         <Section.InfoPanelBody>
           <InfoPanelBodyContent isGallery />
         </Section.InfoPanelBody>
-      </Section>
+      </SectionWrapper>
 
       <Dialogs />
     </>

@@ -231,8 +231,8 @@ class InfoPanelStore {
           : item.icon
             ? item.icon
             : this.settingsStore.getIcon(size, null, null, null, item.roomType)
-      : item.isFolder
-        ? this.settingsStore.getFolderIcon(item.providerKey, size)
+      : item.isFolder && item.folderType
+        ? this.settingsStore.getIconByFolderType(item.folderType, size)
         : this.settingsStore.getIcon(size, item.fileExst || ".file");
   };
 

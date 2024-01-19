@@ -1,60 +1,61 @@
-import EmptyScreenPersonalUrl from "PUBLIC_DIR/images/empty_screen_personal.svg?url";
-import EmptyScreenPersonalDarkUrl from "PUBLIC_DIR/images/empty_screen_personal_dark.svg?url";
-import EmptyScreenCorporateSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate.svg?url";
-import EmptyScreenCorporateDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate_dark.svg?url";
-
+import { useCallback, useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import EmptyContainer from "./EmptyContainer";
 import CommonButtons from "./sub-components/CommonButtons";
+import {
+  getDescriptionText,
+  getEmptyScreenType,
+  getHeaderText,
+  getThemeMode,
+  headerIconsUrl,
+} from "./EmptyContainer.helper";
 
 const EmptyFolderContainer = ({
   t,
   onCreate,
-
+  type, // folder type
   linkStyles,
-
   sectionWidth,
   canCreateFiles,
   theme,
   roomType,
-  //isLoading,
   isArchiveFolderRoot,
   isEmptyPage,
 }) => {
-  //const location = useLocation();
-
-  // const isRoom =
-  //   isLoading && location?.state?.isRoom ? location?.state?.isRoom : !!roomType;
   const isRoom = !!roomType;
   const displayRoomCondition = isRoom && !isArchiveFolderRoot;
 
   const buttons = <CommonButtons onCreate={onCreate} linkStyles={linkStyles} />;
 
-  const emptyScreenCorporateSvg = theme.isBase
-    ? EmptyScreenCorporateSvgUrl
-    : EmptyScreenCorporateDarkSvgUrl;
-  const emptyScreenAltSvg = theme.isBase
-    ? EmptyScreenPersonalUrl
-    : EmptyScreenPersonalDarkUrl;
+  const getIcon = useCallback(() => {
+    const themeMode = getThemeMode(theme);
+    const emptyScreenType = getEmptyScreenType(type, displayRoomCondition);
+    const icon = headerIconsUrl[themeMode][emptyScreenType];
+
+    return icon;
+  }, [theme.isBase, displayRoomCondition, type]);
+
+  const imageSrc = useMemo(getIcon, [getIcon]);
+  const headerText = useMemo(
+    () => getHeaderText(type, displayRoomCondition, t),
+    [t, displayRoomCondition, type]
+  );
+
+  const descriptionText = useMemo(
+    () => getDescriptionText(type, canCreateFiles, t),
+    [t, canCreateFiles, type]
+  );
 
   return (
     <EmptyContainer
-      headerText={
-        displayRoomCondition ? t("RoomCreated") : t("EmptyScreenFolder")
-      }
-      descriptionText={
-        canCreateFiles
-          ? t("EmptyFolderDecription")
-          : t("EmptyFolderDescriptionUser")
-      }
-      imageSrc={
-        displayRoomCondition ? emptyScreenCorporateSvg : emptyScreenAltSvg
-      }
+      headerText={headerText}
+      descriptionText={descriptionText}
       buttons={buttons}
-      sectionWidth={sectionWidth}
+      imageSrc={imageSrc}
       isEmptyPage={isEmptyPage}
+      sectionWidth={sectionWidth}
     />
   );
 };

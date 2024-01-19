@@ -32,6 +32,7 @@ class SelectedFolderStore {
   rootFolderId = null;
   settingsStore = null;
   security = null;
+  type = null;
   inRoom = false;
   isFolder = true;
 
@@ -113,6 +114,7 @@ class SelectedFolderStore {
     this.tags = null;
     this.rootFolderId = null;
     this.security = null;
+    this.type = null;
     this.inRoom = false;
   };
 
@@ -202,6 +204,8 @@ class SelectedFolderStore {
       if (!selectedFolderItems.includes("roomType")) this.roomType = null;
 
       setDocumentTitle(selectedFolder.title);
+
+      if (!selectedFolder.hasOwnProperty("type")) this.type = null;
 
       for (let key of selectedFolderItems) {
         if (key in this) {

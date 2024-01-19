@@ -87,8 +87,10 @@ const formatIcons = [
 ];
 const folderIcons = [
   "box",
+  "done",
   "dropbox",
   "google",
+  "inProgress",
   "kdrive",
   "nextcloud",
   "onedrive",
@@ -103,6 +105,7 @@ const roomIcons = [
   "custom",
   "editing",
   "filling.form",
+  "form",
   "public",
   "review",
   "view.only",

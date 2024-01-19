@@ -119,6 +119,8 @@ const FileSelector = (props) => {
     // withBreadCrumbs: true,
     withSubtitle: true,
     filterParam: FilesSelectorFilterTypes.ALL,
+    isButtonMode: false,
+    buttonWithLogo: true,
   });
 
   const params = objectToGetParams(config);
@@ -352,6 +354,41 @@ const FileSelector = (props) => {
             onClick={toggleButtonMode}
             spacing="8px"
           />
+          {config.isButtonMode && (
+            <>
+              <CategorySubHeader>{t("ButtonCustomization")}</CategorySubHeader>
+              <ControlsGroup>
+                <Label className="label" text={t("ButtonColor")} />
+                <TextInput
+                  scale
+                  onChange={() => {}}
+                  placeholder={"#5299E0"}
+                  value={"#5299E0"}
+                  tabIndex={2}
+                />
+              </ControlsGroup>
+              <ControlsGroup>
+                <Label className="label" text={t("ButtonText")} />
+                <TextInput
+                  scale
+                  onChange={(e) => {
+                    setConfig((config) => ({ ...config, buttonText: e.target.value }));
+                  }}
+                  placeholder={t("SelectToDocSpace")}
+                  value={config.buttonText}
+                  tabIndex={3}
+                />
+                <Checkbox
+                  className="checkbox"
+                  label={"Logo"}
+                  onChange={() => {
+                    setConfig((config) => ({ ...config, buttonWithLogo: !config.buttonWithLogo }));
+                  }}
+                  isChecked={config.buttonWithLogo}
+                />
+              </ControlsGroup>
+            </>
+          )}
           <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
           <ControlsGroup>
             <Label className="label" text={t("EmbeddingPanel:Width")} />

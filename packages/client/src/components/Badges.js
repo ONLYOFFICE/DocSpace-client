@@ -69,7 +69,6 @@ const Badges = ({
   t,
   theme,
   newItems,
-  sectionWidth,
   item,
   isTrashFolder,
   isPrivacyFolder,

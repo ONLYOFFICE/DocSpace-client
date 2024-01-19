@@ -102,13 +102,13 @@ const SpaceQuota = (props) => {
 
     if (action === "no-quota") {
       try {
-        const users = await updateQuota(-1, [item.id]);
+        const items = await updateQuota(-1, [item.id]);
 
         options.map((item) => {
           if (item.key === "no-quota") item.label = t("Common:Unlimited");
         });
 
-        successCallback(users);
+        successCallback(items);
         toastr.success(t("Common:StorageQuotaDisabled"));
       } catch (e) {
         abortCallback();
@@ -119,13 +119,13 @@ const SpaceQuota = (props) => {
     }
 
     try {
-      const users = await resetQuota([item.id]);
+      const items = await resetQuota([item.id]);
 
       options.map((item) => {
         if (item.key === "default-quota") item.label = defaultQuotaSize;
       });
 
-      successCallback(users);
+      successCallback(items);
       toastr.success(t("Common:StorageQuotaReset"));
     } catch (e) {
       abortCallback();

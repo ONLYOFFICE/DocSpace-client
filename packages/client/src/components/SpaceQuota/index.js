@@ -182,7 +182,11 @@ export default inject(
       getPeopleListItem,
     } = usersStore;
     const { changeRoomQuota } = filesActionsStore;
-    const { updateRoomQuota, setSelected: setRoomsSelected } = filesStore;
+    const {
+      updateRoomQuota,
+      setSelected: setRoomsSelected,
+      resetRoomQuota,
+    } = filesStore;
     const { currentQuotaStore, infoPanelStore } = auth;
     const {
       isDefaultUsersQuotaSet,
@@ -196,7 +200,7 @@ export default inject(
     const changeQuota = type === "user" ? changeUserQuota : changeRoomQuota;
     const updateQuota = type === "user" ? setCustomUserQuota : updateRoomQuota;
 
-    const resetQuota = type === "user" ? resetUserQuota : null;
+    const resetQuota = type === "user" ? resetUserQuota : resetRoomQuota;
 
     const withoutLimitQuota =
       type === "user" ? !isDefaultUsersQuotaSet : !isDefaultRoomsQuotaSet;

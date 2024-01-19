@@ -3604,7 +3604,6 @@ class FilesStore {
   };
 
   getFolderInfo = async (id) => {
-    console.log("11112");
     const folderInfo = await api.files.getFolderInfo(id);
     this.setFolder(folderInfo);
     return folderInfo;

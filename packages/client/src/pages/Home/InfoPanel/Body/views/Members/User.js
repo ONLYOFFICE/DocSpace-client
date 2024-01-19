@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { inject, observer } from "mobx-react";
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import { StyledUser } from "../../styles/members";
 import { Avatar } from "@docspace/shared/components/avatar";
@@ -17,31 +18,29 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 const User = ({
   t,
   user,
-  setMembers,
-  isExpect,
   membersHelper,
   currentMember,
   updateRoomMemberRole,
   infoPanelSelection,
-  setInfoPanelSelection,
   changeUserType,
   setIsScrollLocked,
-  isTitle,
-  onRepeatInvitation,
-  showInviteIcon,
   membersFilter,
   setMembersFilter,
   fetchMembers,
   hasNextPage,
+  infoPanelMembers,
+  setInfoPanelMembers,
 }) => {
   if (!infoPanelSelection) return null;
   if (!user.displayName && !user.email) return null;
 
-  //const [userIsRemoved, setUserIsRemoved] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  //if (userIsRemoved) return null;
-
+  const security = infoPanelSelection ? infoPanelSelection.security : {};
+  const isExpect = user.isExpect;
+  const canInviteUserInRoomAbility = security?.EditAccess;
+  const showInviteIcon = canInviteUserInRoomAbility && isExpect;
   const canChangeUserRole = user.canEditAccess;
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const fullRoomRoleOptions = membersHelper.getOptionsByRoomType(
     infoPanelSelection.roomType,
@@ -49,8 +48,15 @@ const User = ({
   );
 
   const userRole = membersHelper.getOptionByUserAccess(user.access, user);
-
   const userRoleOptions = filterUserRoleOptions(fullRoomRoleOptions, user);
+
+  const onRepeatInvitation = async () => {
+    resendEmailInvitations(infoPanelSelection.id, true)
+      .then(() =>
+        toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios"))
+      )
+      .catch((err) => toastr.error(err));
+  };
 
   const updateRole = (option) => {
     return updateRoomMemberRole(infoPanelSelection.id, {
@@ -60,16 +66,18 @@ const User = ({
     })
       .then(async () => {
         setIsLoading(false);
-        const users = infoPanelSelection.members.users;
-        const administrators = infoPanelSelection.members.administrators;
-        const expectedMembers = infoPanelSelection.members.expected;
+
         if (option.key === "remove") {
           const newMembersFilter = JSON.parse(JSON.stringify(membersFilter));
 
           const newMembers = {
-            users: users?.filter((m) => m.id !== user.id),
-            administrators: administrators?.filter((m) => m.id !== user.id),
-            expected: expectedMembers?.filter((m) => m.id !== user.id),
+            users: infoPanelMembers.users?.filter((m) => m.id !== user.id),
+            administrators: infoPanelMembers.administrators?.filter(
+              (m) => m.id !== user.id
+            ),
+            expected: infoPanelMembers.expected?.filter(
+              (m) => m.id !== user.id
+            ),
           };
 
           const roomId = infoPanelSelection.id;
@@ -81,7 +89,7 @@ const User = ({
           const newExpected =
             newMembers.expected.length > 1 ? newMembers?.expected : [];
 
-          setMembers({
+          setInfoPanelMembers({
             roomId,
             users: newUsers,
             administrators: newAdministrators,
@@ -89,15 +97,6 @@ const User = ({
           });
 
           newMembersFilter.total -= 1;
-
-          setInfoPanelSelection({
-            ...infoPanelSelection,
-            members: {
-              users: newUsers,
-              administrators: newAdministrators,
-              expected: newExpected,
-            },
-          });
 
           if (hasNextPage) {
             newMembersFilter.startIndex =
@@ -119,47 +118,25 @@ const User = ({
               expected: [...newExpected, ...fetchedMembers.expected],
             };
 
-            setMembers({
+            setInfoPanelMembers({
               roomId: infoPanelSelection.id,
               ...newMembers,
-            });
-
-            setInfoPanelSelection({
-              ...infoPanelSelection,
-              members: newMembers,
             });
           }
 
           setMembersFilter(newMembersFilter);
-
-          //setUserIsRemoved(true);
         } else {
-          setMembers({
+          setInfoPanelMembers({
             roomId: infoPanelSelection.id,
-            users: users?.map((m) =>
+            users: infoPanelMembers.users?.map((m) =>
               m.id === user.id ? { ...m, access: option.access } : m
             ),
-            administrators: administrators?.map((m) =>
+            administrators: infoPanelMembers.administrators?.map((m) =>
               m.id === user.id ? { ...m, access: option.access } : m
             ),
-            expected: expectedMembers?.map((m) =>
+            expected: infoPanelMembers.expected?.map((m) =>
               m.id === user.id ? { ...m, access: option.access } : m
             ),
-          });
-
-          setInfoPanelSelection({
-            ...infoPanelSelection,
-            members: {
-              users: users?.map((m) =>
-                m.id === user.id ? { ...m, access: option.access } : m
-              ),
-              administrators: administrators?.map((m) =>
-                m.id === user.id ? { ...m, access: option.access } : m
-              ),
-              expected: expectedMembers?.map((m) =>
-                m.id === user.id ? { ...m, access: option.access } : m
-              ),
-            },
           });
         }
       })
@@ -216,7 +193,7 @@ const User = ({
     user.isOwner ? t("Common:DocSpaceOwner") : t("Common:DocSpaceAdmin")
   }. ${t("Common:HasFullAccess")}`;
 
-  return isTitle ? (
+  return user.isTitle ? (
     <StyledUserTypeHeader isExpect={isExpect}>
       <Text className="title">{user.displayName}</Text>
 
@@ -282,4 +259,33 @@ const User = ({
   );
 };
 
-export default User;
+export default inject(
+  ({ auth, filesStore, peopleStore, selectedFolderStore }) => {
+    const {
+      infoPanelSelection,
+      setIsScrollLocked,
+      infoPanelMembers,
+      setInfoPanelMembers,
+    } = auth.infoPanelStore;
+    const {
+      updateRoomMemberRole,
+      resendEmailInvitations,
+      membersFilter,
+      setMembersFilter,
+    } = filesStore;
+
+    const { changeType: changeUserType } = peopleStore;
+
+    return {
+      infoPanelSelection,
+      setIsScrollLocked,
+      updateRoomMemberRole,
+      resendEmailInvitations,
+      changeUserType,
+      membersFilter,
+      setMembersFilter,
+      infoPanelMembers,
+      setInfoPanelMembers,
+    };
+  }
+)(observer(User));

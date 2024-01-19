@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
@@ -30,32 +30,21 @@ import LinkRow from "./sub-components/LinkRow";
 const Members = ({
   t,
   selfId,
-  selection,
 
   updateRoomMembers,
-  setUpdateRoomMembers,
 
   infoPanelSelection,
-  setInfoPanelSelection,
 
   setIsScrollLocked,
 
   getRoomMembers,
   getRoomLinks,
-  updateRoomMemberRole,
-  setView,
-  roomsView,
-  resendEmailInvitations,
-  changeUserType,
   isPublicRoomType,
 
   setExternalLinks,
   membersFilter,
-  setMembersFilter,
-  externalLinks,
-  members,
-  setMembersList,
-  roomType,
+  infoPanelMembers,
+  setInfoPanelMembers,
   primaryLink,
   isArchiveFolder,
   isPublicRoom,
@@ -70,11 +59,10 @@ const Members = ({
   const [isLoading, setIsLoading] = useState(false);
   const membersHelper = new MembersHelper({ t });
 
-  const security = infoPanelSelection ? infoPanelSelection.security : {};
-
   const fetchMembers = async (roomId, clearFilter = true) => {
     if (isLoading) return;
-    const isPublic = selection?.roomType ?? infoPanelSelection?.roomType;
+    const isPublic =
+      infoPanelSelection?.roomType ?? infoPanelSelection?.roomType;
     const requests = [getRoomMembers(roomId, clearFilter)];
 
     if (isPublic && clearFilter && withPublicRoomBlock) {
@@ -114,8 +102,8 @@ const Members = ({
     });
 
     let hasPrevAdminsTitle =
-      members?.roomId === roomId && !clearFilter
-        ? getHasPrevTitle(members?.administrators, "administration")
+      infoPanelMembers?.roomId === roomId && !clearFilter
+        ? getHasPrevTitle(infoPanelMembers?.administrators, "administration")
         : false;
 
     if (administrators.length && !hasPrevAdminsTitle) {
@@ -127,8 +115,8 @@ const Members = ({
     }
 
     let hasPrevUsersTitle =
-      members?.roomId === roomId && !clearFilter
-        ? getHasPrevTitle(members?.users, "user")
+      infoPanelMembers?.roomId === roomId && !clearFilter
+        ? getHasPrevTitle(infoPanelMembers?.users, "user")
         : false;
 
     if (users.length && !hasPrevUsersTitle) {
@@ -136,8 +124,8 @@ const Members = ({
     }
 
     let hasPrevExpectedTitle =
-      members?.roomId === roomId && !clearFilter
-        ? getHasPrevTitle(members?.expected, "expected")
+      infoPanelMembers?.roomId === roomId && !clearFilter
+        ? getHasPrevTitle(infoPanelMembers?.expected, "expected")
         : false;
 
     if (expectedMembers.length && !hasPrevExpectedTitle) {
@@ -148,8 +136,6 @@ const Members = ({
         isExpect: true,
       });
     }
-
-    setUpdateRoomMembers(false);
 
     return {
       users,
@@ -163,53 +149,17 @@ const Members = ({
     return array.findIndex((x) => x.id === type) > -1;
   };
 
-  const updateSelectionParentRoomActionSelection = useCallback(async () => {
-    if (!selection?.isRoom || selection.id === members?.roomId) return;
-
-    const fetchedMembers = await fetchMembers(selection.id);
-    setMembersList(fetchedMembers);
-
-    setInfoPanelSelection({
-      ...selection,
-      members: fetchedMembers,
-    });
-    if (roomsView === "info_members" && !selection?.security?.Read)
-      setView("info_details");
-  }, [selection]);
-
-  useEffect(() => {
-    updateSelectionParentRoomActionSelection();
-  }, [selection, updateSelectionParentRoomActionSelection]);
-
-  const updateMembersAction = useCallback(async () => {
-    if (!updateRoomMembers) return;
-
-    const fetchedMembers = await fetchMembers(selection.id);
-
-    setInfoPanelSelection({
-      ...infoPanelSelection,
-      members: fetchedMembers,
-    });
-
-    setMembersList(fetchedMembers);
-  }, [infoPanelSelection, selection?.id, updateRoomMembers]);
-
-  useEffect(() => {
-    updateMembersAction();
-  }, [
-    infoPanelSelection,
-    selection?.id,
-    updateRoomMembers,
-    updateMembersAction,
-  ]);
-
-  const onRepeatInvitation = async () => {
-    resendEmailInvitations(infoPanelSelection.id, true)
-      .then(() =>
-        toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios"))
-      )
-      .catch((err) => toastr.error(err));
+  const updateInfoPanelMembers = async () => {
+    if (!infoPanelSelection) return;
+    console.log("updateInfoPanelMembers");
+    const fetchedMembers = await fetchMembers(infoPanelSelection.id);
+    setInfoPanelMembers(fetchedMembers);
   };
+
+  useEffect(() => {
+    updateInfoPanelMembers();
+    // if (updateRoomMembers) setUpdateRoomMembers(false);
+  }, [infoPanelSelection, updateRoomMembers]);
 
   const loadNextPage = async () => {
     const roomId = infoPanelSelection.id;
@@ -218,26 +168,23 @@ const Members = ({
 
     const newMembers = {
       roomId: roomId,
-      administrators: [...members.administrators, ...administrators],
-      users: [...members.users, ...users],
-      expected: [...members.expected, ...expected],
+      administrators: [...infoPanelMembers.administrators, ...administrators],
+      users: [...infoPanelMembers.users, ...users],
+      expected: [...infoPanelMembers.expected, ...expected],
     };
 
-    setMembersList(newMembers);
-    setInfoPanelSelection({
-      ...infoPanelSelection,
-      members: newMembers,
-    });
+    setInfoPanelMembers(newMembers);
   };
 
   if (isLoading) return <Loaders.InfoPanelViewLoader view="members" />;
-  else if (!members) return <></>;
+  else if (!infoPanelMembers) return <></>;
 
-  const [currentMember] = members.administrators.filter(
+  const [currentMember] = infoPanelMembers.administrators.filter(
     (member) => member.id === selfId
   );
 
-  const { administrators, users, expected } = members;
+  const { administrators, users, expected } = infoPanelMembers;
+
   const membersList = [...administrators, ...users, ...expected];
 
   const adminsTitleCount = administrators.length ? 1 : 0;
@@ -245,11 +192,10 @@ const Members = ({
   const expectedTitleCount = expected.length ? 1 : 0;
 
   const headersCount = adminsTitleCount + usersTitleCount + expectedTitleCount;
-  const dataReadyMembersList = selection?.id === infoPanelSelection?.id;
+  const dataReadyMembersList =
+    infoPanelSelection?.id === infoPanelSelection?.id;
 
   if (!dataReadyMembersList) return <></>;
-
-  const canInviteUserInRoomAbility = security?.EditAccess;
 
   const onAddNewLink = async () => {
     if (isPublicRoom || primaryLink) {
@@ -402,23 +348,8 @@ const Members = ({
               user={user}
               key={user.id}
               index={index + publicRoomItemsLength}
-              security={security}
               membersHelper={membersHelper}
               currentMember={currentMember}
-              updateRoomMemberRole={updateRoomMemberRole}
-              roomId={infoPanelSelection.id}
-              roomType={infoPanelSelection.roomType}
-              infoPanelSelection={infoPanelSelection}
-              setInfoPanelSelection={setInfoPanelSelection}
-              changeUserType={changeUserType}
-              setIsScrollLocked={setIsScrollLocked}
-              isTitle={user.isTitle}
-              isExpect={user.isExpect}
-              showInviteIcon={canInviteUserInRoomAbility && user.isExpect}
-              onRepeatInvitation={onRepeatInvitation}
-              setMembers={setMembersList}
-              membersFilter={membersFilter}
-              setMembersFilter={setMembersFilter}
               fetchMembers={fetchMembers}
               hasNextPage={
                 membersList.length - headersCount < membersFilter.total
@@ -435,7 +366,6 @@ export default inject(
   ({
     auth,
     filesStore,
-    peopleStore,
     selectedFolderStore,
     publicRoomStore,
     treeFoldersStore,
@@ -443,37 +373,22 @@ export default inject(
   }) => {
     const {
       infoPanelSelection,
-      setInfoPanelSelection,
-      setView,
-      roomsView,
-
       updateRoomMembers,
-      setUpdateRoomMembers,
-
       setIsScrollLocked,
-      membersList,
-      setMembersList,
+      infoPanelMembers,
+      setInfoPanelMembers,
     } = auth.infoPanelStore;
     const {
       getRoomMembers,
       getRoomLinks,
-      updateRoomMemberRole,
-      resendEmailInvitations,
       membersFilter,
-      setMembersFilter,
       selection,
       bufferSelection,
     } = filesStore;
     const { id: selfId } = auth.userStore.user;
 
-    const { changeType: changeUserType } = peopleStore;
-    const {
-      roomLinks,
-      setExternalLinks,
-      primaryLink,
-      additionalLinks,
-      setExternalLink,
-    } = publicRoomStore;
+    const { setExternalLinks, primaryLink, additionalLinks, setExternalLink } =
+      publicRoomStore;
     const { isArchiveFolderRoot } = treeFoldersStore;
     const { setLinkParams, setEditLinkPanelIsVisible } = dialogsStore;
 
@@ -501,32 +416,22 @@ export default inject(
       infoPanelSelection?.length > 1 ? null : infoPanelSelection;
 
     return {
-      setView,
-      roomsView,
-      selection: infoSelection,
-      infoPanelSelection,
-      setInfoPanelSelection,
+      infoPanelSelection: infoSelection,
 
       setIsScrollLocked,
 
       getRoomMembers,
       getRoomLinks,
-      updateRoomMemberRole,
 
       updateRoomMembers,
-      setUpdateRoomMembers,
 
       selfId,
 
-      resendEmailInvitations,
-      changeUserType,
       isPublicRoomType,
       setExternalLinks,
       membersFilter,
-      setMembersFilter,
-      externalLinks: roomLinks,
-      members: membersList,
-      setMembersList,
+      infoPanelMembers,
+      setInfoPanelMembers,
       roomType,
       primaryLink,
       isArchiveFolder: isArchiveFolderRoot,

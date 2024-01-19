@@ -44,7 +44,7 @@ class InfoPanelStore {
   filesStore = null;
   selectedFolderStore = null;
   treeFoldersStore = null;
-  membersList = null;
+  infoPanelMembers = null;
 
   infoPanelSelection = null;
   infoPanelRoom = null;
@@ -80,7 +80,7 @@ class InfoPanelStore {
     this.roomsView = view;
     this.fileView = view === infoMembers ? infoHistory : view;
     this.isScrollLocked = false;
-    if (view !== infoMembers) this.setMembersList(null);
+    if (view !== infoMembers) this.setInfoPanelMembers(null);
 
     const isRooms = this.getIsRooms();
 
@@ -96,7 +96,6 @@ class InfoPanelStore {
   };
 
   setUpdateRoomMembers = (updateRoomMembers) => {
-    this.setMembersList(null);
     this.updateRoomMembers = updateRoomMembers;
   };
 
@@ -330,8 +329,8 @@ class InfoPanelStore {
     return pathname.indexOf("files/trash") !== -1;
   };
 
-  setMembersList = (membersList) => {
-    this.membersList = membersList;
+  setInfoPanelMembers = (infoPanelMembers) => {
+    this.infoPanelMembers = infoPanelMembers;
   };
 
   setInfoPanelSelection = (infoPanelSelection) => {
@@ -345,6 +344,7 @@ class InfoPanelStore {
       return;
     }
 
+    this.setInfoPanelMembers(null);
     this.infoPanelSelection = infoPanelSelection;
     this.isScrollLocked = false;
   };

@@ -7,7 +7,12 @@ import { frameCallEvent } from "@docspace/shared/utils/common";
 import { setCookie } from "@docspace/shared/utils/cookie";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import FirebaseHelper from "@docspace/shared/utils/firebase";
-import { ThemeKeys, TenantStatus, DeviceType } from "@docspace/shared/enums";
+import {
+  ThemeKeys,
+  TenantStatus,
+  DeviceType,
+  ArticleAlerts,
+} from "@docspace/shared/enums";
 
 import { LANGUAGE, COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
 import { version } from "../package.json";
@@ -20,7 +25,7 @@ import {
   getCookie,
 } from "@docspace/shared/utils";
 import { WRONG_PORTAL_NAME_URL } from "@docspace/shared/constants";
-import { ARTICLE_ALERTS } from "@docspace/client/src/helpers/constants";
+import { ArticleAlerts } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 //import { getFromLocalStorage } from "@docspace/client/src/pages/PortalSettings/utils";
 
@@ -36,7 +41,9 @@ const initArticleAlertsData = () => {
   const savedArticleAlertsData = localStorage.getItem("articleAlertsData");
   if (savedArticleAlertsData) return JSON.parse(savedArticleAlertsData);
 
-  const articleAlertsArray = Object.values(ARTICLE_ALERTS);
+  const articleAlertsArray = Object.values(ArticleAlerts).filter(
+    (item, index) => Object.values(ArticleAlerts).indexOf(item) === index
+  );
   const defaultArticleAlertsData = {
     current: articleAlertsArray[0],
     available: articleAlertsArray,

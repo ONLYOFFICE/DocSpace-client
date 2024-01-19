@@ -1,16 +1,19 @@
 import styled, { css } from "styled-components";
 
-import {
-  mobile,
-  tablet,
-  getCorrectFourValuesStyle,
-} from "@docspace/shared/utils";
-
-import { Base } from "@docspace/shared/themes";
 import MenuIcon from "PUBLIC_DIR/images/menu.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/icons/17/cross.react.svg";
 
-const StyledArticle = styled.article`
+import { mobile, tablet, getCorrectFourValuesStyle } from "../../utils";
+
+import { Base } from "../../themes";
+
+const StyledArticle = styled.article<{
+  showText?: boolean;
+  correctTabletHeight?: number;
+  articleOpen?: boolean;
+  isMobile?: boolean;
+  $withMainButton?: boolean;
+}>`
   position: relative;
   overflow: hidden;
   background: ${(props) => props.theme.catalog.background};
@@ -100,7 +103,7 @@ const StyledArticle = styled.article`
 
 StyledArticle.defaultProps = { theme: Base };
 
-const StyledArticleHeader = styled.div`
+const StyledArticleHeader = styled.div<{ showText?: boolean }>`
   height: 24px;
   padding: ${({ theme }) =>
     getCorrectFourValuesStyle("22px 21px 23px 20px", theme.interfaceDirection)};
@@ -130,7 +133,7 @@ const StyledArticleHeader = styled.div`
 
 StyledArticleHeader.defaultProps = { theme: Base };
 
-const StyledHeading = styled.div`
+const StyledHeading = styled.div<{ showText?: boolean }>`
   height: 24px;
 
   margin: 0;
@@ -166,7 +169,7 @@ const StyledHeading = styled.div`
   }
 `;
 
-const StyledIconBox = styled.div`
+const StyledIconBox = styled.div<{ showText?: boolean }>`
   cursor: pointer;
   display: none;
   align-items: center;
@@ -299,7 +302,10 @@ const StyledUserName = styled.div`
   cursor: pointer;
 `;
 
-const StyledProfileWrapper = styled.div`
+const StyledProfileWrapper = styled.div<{
+  showText?: boolean;
+  isVirtualKeyboardOpen?: boolean;
+}>`
   z-index: 209;
   position: ${(props) => (props.isVirtualKeyboardOpen ? "absolute" : "fixed")};
   bottom: 0;

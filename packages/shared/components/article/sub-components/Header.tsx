@@ -1,18 +1,16 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom";
-import Loaders from "../../Loaders";
+import { useNavigate, Link } from "react-router-dom";
 
-import { Link } from "react-router-dom";
+import { getLogoFromPath } from "../../../utils";
+import { DeviceType } from "../../../enums";
+import { ArticleHeaderLoader } from "../../../skeletons/article";
 
-import { inject, observer } from "mobx-react";
 import {
   StyledArticleHeader,
   StyledHeading,
   StyledIconBox,
-} from "../styled-article";
-import { getLogoFromPath } from "@docspace/shared/utils";
-import { DeviceType } from "@docspace/shared/enums";
+} from "../Article.styled";
+import { ArticleHeaderProps } from "../Article.types";
 
 const ArticleHeader = ({
   showText,
@@ -25,11 +23,11 @@ const ArticleHeader = ({
   withCustomArticleHeader,
   currentDeviceType,
   ...rest
-}) => {
+}: ArticleHeaderProps) => {
   const navigate = useNavigate();
 
   const onLogoClick = () => {
-    onLogoClickAction && onLogoClickAction();
+    onLogoClickAction?.();
     navigate("/");
   };
 
@@ -40,28 +38,37 @@ const ArticleHeader = ({
     ? getLogoFromPath(whiteLabelLogoUrls[0]?.path?.dark)
     : getLogoFromPath(whiteLabelLogoUrls[0]?.path?.light);
 
-  if (currentDeviceType === DeviceType.mobile) return <></>;
+  if (currentDeviceType === DeviceType.mobile) return null;
 
   const isLoadingComponent =
     currentDeviceType === DeviceType.tablet ? (
-      <Loaders.ArticleHeader height="28px" width={showText ? "100%" : "28px"} />
+      <ArticleHeaderLoader
+        height="28px"
+        width={showText ? "100%" : "28px"}
+        showText={showText}
+      />
     ) : (
-      <Loaders.ArticleHeader height="28px" width="211px" />
+      <ArticleHeaderLoader height="28px" width="211px" showText={showText} />
     );
 
   const mainComponent = (
     <>
       {currentDeviceType === DeviceType.tablet && (
-        <StyledIconBox name="article-burger" showText={showText}>
-          <img src={burgerLogo} onClick={onLogoClick} />
+        <StyledIconBox showText={showText}>
+          <img src={burgerLogo} alt="burger-logo" onClick={onLogoClick} />
         </StyledIconBox>
       )}
-      <StyledHeading showText={showText} size="large">
+      <StyledHeading showText={showText}>
         {currentDeviceType === DeviceType.tablet ? (
-          <img className="logo-icon_svg" src={logo} onClick={onLogoClick} />
+          <img
+            className="logo-icon_svg"
+            alt="burger-logo"
+            src={logo}
+            onClick={onLogoClick}
+          />
         ) : (
           <Link to="/">
-            <img className="logo-icon_svg" src={logo} />
+            <img className="logo-icon_svg" alt="burger-logo" src={logo} />
           </Link>
         )}
       </StyledHeading>
@@ -79,21 +86,17 @@ const ArticleHeader = ({
   );
 };
 
-ArticleHeader.propTypes = {
-  children: PropTypes.any,
-  showText: PropTypes.bool,
-  onClick: PropTypes.func,
-};
-
 ArticleHeader.displayName = "Header";
 
-export default inject(({ auth }) => {
-  const { settingsStore } = auth;
-  const { isBurgerLoading, whiteLabelLogoUrls, theme } = settingsStore;
+export default ArticleHeader;
 
-  return {
-    isBurgerLoading,
-    whiteLabelLogoUrls,
-    theme,
-  };
-})(observer(ArticleHeader));
+// export default inject(({ auth }) => {
+//   const { settingsStore } = auth;
+//   const { isBurgerLoading, whiteLabelLogoUrls, theme } = settingsStore;
+
+//   return {
+//     isBurgerLoading,
+//     whiteLabelLogoUrls,
+//     theme,
+//   };
+// })(observer(ArticleHeader));

@@ -9,7 +9,7 @@ import {
 } from "@storybook/addon-knobs/react";
 import Section from "../../../../.storybook/decorators/section";
 
-import Loaders from "..";
+import Loaders from "../../../../common/components/Loaders";
 import { LOADER_STYLE } from "@docspace/shared/constants";
 import withReadme from "storybook-readme/with-readme";
 import Readme from "./README.md";
@@ -29,11 +29,11 @@ storiesOf("Components|Loaders", module)
         foregroundColor={color("foregroundColor", LOADER_STYLE.foregroundColor)}
         backgroundOpacity={number(
           "backgroundOpacity",
-          LOADER_STYLE.backgroundOpacity
+          LOADER_STYLE.backgroundOpacity,
         )}
         foregroundOpacity={number(
           "foregroundOpacity",
-          LOADER_STYLE.foregroundOpacity
+          LOADER_STYLE.foregroundOpacity,
         )}
         speed={number("speed", LOADER_STYLE.speed)}
         animate={boolean("animate", LOADER_STYLE.animate)}

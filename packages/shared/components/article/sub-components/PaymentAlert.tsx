@@ -1,32 +1,33 @@
 import React from "react";
-import { inject, observer } from "mobx-react";
+import { useTheme } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useTranslation, Trans } from "react-i18next";
 
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { combineUrl } from "../../../utils/combineUrl";
+import { RectangleSkeleton } from "../../../skeletons";
 
-import AlertComponent from "../../AlertComponent";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import AlertComponent from "../../alert";
+import { ArticlePaymentAlertProps } from "../Article.types";
 
 const PROXY_BASE_URL = combineUrl(
   window.DocSpaceConfig?.proxy?.url,
-  "/portal-settings"
+  "/portal-settings",
 );
 
 const ArticlePaymentAlert = ({
   isFreeTariff,
-  theme,
   currentTariffPlanTitle,
   toggleArticleOpen,
-}) => {
+}: ArticlePaymentAlertProps) => {
   const { t, ready } = useTranslation("Common");
+  const theme = useTheme();
 
   const navigate = useNavigate();
 
   const onClick = () => {
     const paymentPageUrl = combineUrl(
       PROXY_BASE_URL,
-      "/payments/portal-payments"
+      "/payments/portal-payments",
     );
     navigate(paymentPageUrl);
     toggleArticleOpen();
@@ -71,14 +72,16 @@ const ArticlePaymentAlert = ({
   );
 };
 
-export default inject(({ auth }) => {
-  const { currentQuotaStore, settingsStore } = auth;
-  const { currentTariffPlanTitle } = currentQuotaStore;
-  const { theme, toggleArticleOpen } = settingsStore;
+// export default inject(({ auth }) => {
+//   const { currentQuotaStore, settingsStore } = auth;
+//   const { currentTariffPlanTitle } = currentQuotaStore;
+//   const { theme, toggleArticleOpen } = settingsStore;
 
-  return {
-    toggleArticleOpen,
-    theme,
-    currentTariffPlanTitle,
-  };
-})(observer(ArticlePaymentAlert));
+//   return {
+//     toggleArticleOpen,
+//     theme,
+//     currentTariffPlanTitle,
+//   };
+// })(observer(ArticlePaymentAlert));
+
+export default ArticlePaymentAlert;

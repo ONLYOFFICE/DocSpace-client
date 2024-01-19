@@ -3,20 +3,16 @@ import PropTypes from "prop-types";
 
 import { Backdrop } from "@docspace/shared/components/backdrop";
 
-import { StyledControlContainer, StyledCrossIcon } from "../styled-article";
+import { StyledControlContainer, StyledCrossIcon } from "../Article.styled";
+import { ArticleBackdropProps } from "../Article.types";
 
-const ArticleBackdrop = ({ onClick, ...rest }) => {
+const ArticleBackdrop = ({ onClick, ...rest }: ArticleBackdropProps) => {
   return (
     <>
       <StyledControlContainer onClick={onClick} {...rest}>
         <StyledCrossIcon />
       </StyledControlContainer>
-      <Backdrop
-        onClick={onClick}
-        visible={true}
-        zIndex={210}
-        withBackground={true}
-      />
+      <Backdrop onClick={onClick} visible zIndex={210} withBackground />
     </>
   );
 };

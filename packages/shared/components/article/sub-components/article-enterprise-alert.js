@@ -5,12 +5,12 @@ import { useTranslation } from "react-i18next";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
-import AlertComponent from "../../AlertComponent";
+import AlertComponent from "../../alert";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 const PROXY_BASE_URL = combineUrl(
   window.DocSpaceConfig?.proxy?.url,
-  "/portal-settings"
+  "/portal-settings",
 );
 
 const ArticleEnterpriseAlert = ({
@@ -27,7 +27,7 @@ const ArticleEnterpriseAlert = ({
   const navigate = useNavigate();
 
   const [isClose, setIsClose] = useState(
-    localStorage.getItem("enterpriseAlertClose")
+    localStorage.getItem("enterpriseAlertClose"),
   );
 
   const onCloseClick = () => {
@@ -38,7 +38,7 @@ const ArticleEnterpriseAlert = ({
   const onAlertClick = () => {
     const paymentPageUrl = combineUrl(
       PROXY_BASE_URL,
-      "/payments/portal-payments"
+      "/payments/portal-payments",
     );
     navigate(paymentPageUrl);
     toggleArticleOpen();

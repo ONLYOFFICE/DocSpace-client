@@ -1,11 +1,18 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { inject, observer } from "mobx-react";
 
-import StyledContainer from "./StyledArticleHeader";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-const ArticleHeaderLoader = ({ id, className, style, showText, ...rest }) => {
+import StyledContainer from "./HeaderLoader.styled";
+
+import { HeaderLoaderProps } from "./HeaderLoader.types";
+
+const ArticleHeaderLoader = ({
+  id,
+  className,
+  style,
+  showText,
+  ...rest
+}: HeaderLoaderProps) => {
   const {
     title,
     width,
@@ -41,20 +48,4 @@ const ArticleHeaderLoader = ({ id, className, style, showText, ...rest }) => {
   );
 };
 
-ArticleHeaderLoader.propTypes = {
-  id: PropTypes.string,
-  className: PropTypes.string,
-  style: PropTypes.object,
-};
-
-ArticleHeaderLoader.defaultProps = {
-  id: undefined,
-  className: undefined,
-  style: undefined,
-};
-
-export default inject(({ auth }) => {
-  return {
-    showText: auth.settingsStore.showText,
-  };
-})(observer(ArticleHeaderLoader));
+export default ArticleHeaderLoader;

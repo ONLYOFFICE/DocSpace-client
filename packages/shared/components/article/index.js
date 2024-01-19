@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import PropTypes from "prop-types";
 import { isMobile, isMobileOnly, isIOS } from "react-device-detect";
 
-import SubArticleBackdrop from "./sub-components/article-backdrop";
+import SubArticleBackdrop from "./sub-components/Backdrop";
 import SubArticleHeader from "./sub-components/article-header";
 import SubArticleMainButton from "./sub-components/article-main-button";
 import SubArticleBody from "./sub-components/article-body";
@@ -16,7 +16,7 @@ import { StyledArticle } from "./styled-article";
 import HideArticleMenuButton from "./sub-components/article-hide-menu-button";
 import { Portal } from "@docspace/shared/components/portal";
 import { DeviceType } from "@docspace/shared/enums";
-import ArticleProfileLoader from "../Loaders/ArticleProfileLoader/ArticleProfileLoader";
+import ArticleProfileLoader from "../../skeletons/article/ArticleProfileLoader/ArticleProfileLoader";
 
 const Article = ({
   showText,
@@ -156,7 +156,7 @@ const Article = ({
 
       setCorrectTabletHeight(correctTabletHeight);
     },
-    [mainBarVisible, isBannerVisible]
+    [mainBarVisible, isBannerVisible],
   );
 
   React.useEffect(() => {

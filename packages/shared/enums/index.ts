@@ -1,3 +1,8 @@
+export enum ArticleAlerts {
+  TeamTraining = "TeamTraining",
+  SubmitToFormGallery = "SubmitToFormGallery",
+}
+
 /**
  * Enum for employee activation status.
  * @readonly

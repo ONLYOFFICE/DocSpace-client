@@ -1,20 +1,23 @@
 import React, { useState, useRef } from "react";
-import { inject, observer } from "mobx-react";
+import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
-import { Avatar } from "@docspace/shared/components/avatar";
-import { Text } from "@docspace/shared/components/text";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { ContextMenu } from "@docspace/shared/components/context-menu";
+
+import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/vertical-dots.react.svg?url";
+import DefaultUserPhotoPngUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
+
+import { DeviceType } from "../../../enums";
+
+import { Avatar } from "../../avatar";
+import { Text } from "../../text";
+import { IconButton } from "../../icon-button";
+import { ContextMenu } from "../../context-menu";
 
 import {
   StyledArticleProfile,
   StyledUserName,
   StyledProfileWrapper,
-} from "../styled-article";
-import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/vertical-dots.react.svg?url";
-import DefaultUserPhotoPngUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
-import { useTheme } from "styled-components";
-import { DeviceType } from "@docspace/shared/enums";
+} from "../Article.styled";
+
 const ArticleProfile = (props) => {
   const {
     user,
@@ -142,13 +145,13 @@ const ArticleProfile = (props) => {
   );
 };
 
-export default inject(({ auth, profileActionsStore }) => {
-  const { getActions, getUserRole, onProfileClick } = profileActionsStore;
+// export default inject(({ auth, profileActionsStore }) => {
+//   const { getActions, getUserRole, onProfileClick } = profileActionsStore;
 
-  return {
-    onProfileClick,
-    user: auth.userStore.user,
-    getUserRole,
-    getActions,
-  };
-})(observer(ArticleProfile));
+//   return {
+//     onProfileClick,
+//     user: auth.userStore.user,
+//     getUserRole,
+//     getActions,
+//   };
+// })(observer(ArticleProfile));

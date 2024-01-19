@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { tablet } from "@docspace/shared/utils";
-const StyledContainer = styled.div`
+import { tablet } from "../../../utils";
+
+const StyledContainer = styled.div<{ showText: boolean }>`
   max-width: 211px;
 
   ${({ theme }) =>

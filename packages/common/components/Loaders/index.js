@@ -1,11 +1,10 @@
-
 import Header from "./HeaderLoader";
 import SectionHeader from "./SectionHeaderLoader";
-import ArticleHeader from "./ArticleHeaderLoader";
-import ArticleButton from "./ArticleButtonLoader";
-import ArticleProfileLoader from "./ArticleProfileLoader";
-import ArticleFolder from "./ArticleFolderLoader";
-import ArticleGroup from "./ArticleGroupsLoader";
+import ArticleHeader from "@docspace/shared/skeletons/article/ArticleHeaderLoader";
+import ArticleButton from "@docspace/shared/skeletons/article/ArticleButtonLoader";
+import ArticleProfileLoader from "@docspace/shared/skeletons/article/ArticleProfileLoader";
+import ArticleFolder from "@docspace/shared/skeletons/article/ArticleFolderLoader";
+import ArticleGroup from "@docspace/shared/skeletons/article/ArticleGroupsLoader";
 import TreeFolders from "./TreeFolderLoader";
 import NewTreeFolders from "./NewTreeFolderLoader";
 import TreeSettingsLoader from "./TreeSettingsLoader";
@@ -52,7 +51,6 @@ import SettingsDSConnect from "./SettingsLoader/SettingsDSConnectLoader";
 import EmptyContainerLoader from "./EmptyContainerLoader/EmptyContainerLoader";
 
 export default {
-
   Header,
   SectionHeader,
   ArticleHeader,

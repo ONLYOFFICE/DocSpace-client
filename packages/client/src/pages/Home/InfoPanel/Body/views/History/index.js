@@ -31,7 +31,7 @@ const History = ({
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const fetchHistory = async (itemId) => {
+  const fetchHistory = async (item) => {
     if (isLoading) {
       abortControllerRef.current?.abort();
       abortControllerRef.current = new AbortController();
@@ -41,7 +41,12 @@ const History = ({
     if (selection.isRoom) module = "rooms";
     else if (selection.isFolder) module = "folders";
 
-    getHistory(module, itemId, abortControllerRef.current?.signal)
+    getHistory(
+      module,
+      item.id,
+      abortControllerRef.current?.signal,
+      item?.requestToken
+    )
       .then((data) => {
         if (isMount.current)
           startTransition(() => {
@@ -59,7 +64,7 @@ const History = ({
 
   useEffect(() => {
     if (!isMount.current) return;
-    fetchHistory(selection.id);
+    fetchHistory(selection);
   }, [selection.id]);
 
   useEffect(() => {

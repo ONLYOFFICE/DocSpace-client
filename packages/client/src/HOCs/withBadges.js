@@ -115,7 +115,8 @@ export default function withBadges(WrappedComponent) {
         isMutedBadge,
         isArchiveFolderRoot,
         isArchiveFolder,
-        isPublicRoom
+        isPublicRoom,
+        isRecentTab,
       } = this.props;
       const { fileStatus, access, mute } = item;
 
@@ -127,6 +128,8 @@ export default function withBadges(WrappedComponent) {
       const accessToEdit =
         access === ShareAccessRights.FullAccess ||
         access === ShareAccessRights.None; // TODO: fix access type for owner (now - None)
+
+      const canEditing = access === ShareAccessRights.Editing;
 
       const badgesComponent = (
         <Badges
@@ -152,6 +155,8 @@ export default function withBadges(WrappedComponent) {
           isMutedBadge={isMutedBadge}
           onCopyPrimaryLink={this.onCopyPrimaryLink}
           isArchiveFolder={isArchiveFolder}
+          isRecentTab={isRecentTab}
+          canEditing={canEditing}
         />
       );
 
@@ -179,6 +184,7 @@ export default function withBadges(WrappedComponent) {
         isPrivacyFolder,
         isArchiveFolderRoot,
         isArchiveFolder,
+        isRecentTab,
       } = treeFoldersStore;
       const { markAsRead, setPinAction, setMuteAction } = filesActionsStore;
       const { isTabletView, isDesktopClient, theme } = auth.settingsStore;
@@ -217,7 +223,8 @@ export default function withBadges(WrappedComponent) {
         isMutedBadge,
         getPrimaryLink,
         isArchiveFolder,
-        isPublicRoom: publicRoomStore.isPublicRoom
+        isPublicRoom: publicRoomStore.isPublicRoom,
+        isRecentTab,
       };
     }
   )(observer(WithBadges));

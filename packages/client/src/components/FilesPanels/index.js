@@ -2,7 +2,6 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import {
-  SharingPanel,
   UploadPanel,
   VersionHistoryPanel,
   ChangeOwnerPanel,
@@ -33,6 +32,7 @@ import {
   SettingsPluginDialog,
   PluginDialog,
   DeletePluginDialog,
+  ShareFolderDialog,
 } from "../dialogs";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
@@ -46,7 +46,6 @@ import ChangeRoomOwnerPanel from "../panels/ChangeRoomOwnerPanel";
 const Panels = (props) => {
   const {
     uploadPanelVisible,
-    sharingPanelVisible,
     ownerPanelVisible,
     copyPanelVisible,
     moveToPanelVisible,
@@ -89,6 +88,7 @@ const Panels = (props) => {
     leaveRoomDialogVisible,
     changeRoomOwnerIsVisible,
     deletePluginDialogVisible,
+    shareFolderDialogVisible,
   } = props;
 
   const { t } = useTranslation(["Translations", "Common"]);
@@ -114,12 +114,6 @@ const Panels = (props) => {
       <PluginDialog isVisible={pluginDialogVisible} key={"plugin-dialog"} />
     ),
     uploadPanelVisible && <UploadPanel key="upload-panel" />,
-    sharingPanelVisible && (
-      <SharingPanel
-        key="sharing-panel"
-        uploadPanelVisible={uploadPanelVisible}
-      />
-    ),
     ownerPanelVisible && <ChangeOwnerPanel key="change-owner-panel" />,
     (moveToPanelVisible ||
       copyPanelVisible ||
@@ -199,6 +193,7 @@ const Panels = (props) => {
     changeRoomOwnerIsVisible && (
       <ChangeRoomOwnerPanel key="change-room-owner" />
     ),
+    shareFolderDialogVisible && <ShareFolderDialog key="share-folder-dialog" />,
   ];
 };
 
@@ -213,7 +208,6 @@ export default inject(
     pluginStore,
   }) => {
     const {
-      sharingPanelVisible,
       ownerPanelVisible,
       copyPanelVisible,
       moveToPanelVisible,
@@ -252,6 +246,7 @@ export default inject(
       backupToPublicRoomVisible,
       leaveRoomDialogVisible,
       changeRoomOwnerIsVisible,
+      shareFolderDialogVisible,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
@@ -269,7 +264,6 @@ export default inject(
 
     return {
       preparationPortalDialogVisible,
-      sharingPanelVisible,
       uploadPanelVisible,
       ownerPanelVisible,
       copyPanelVisible,
@@ -312,6 +306,7 @@ export default inject(
       leaveRoomDialogVisible,
       changeRoomOwnerIsVisible,
       deletePluginDialogVisible,
+      shareFolderDialogVisible,
     };
   }
 )(observer(Panels));

@@ -22,8 +22,16 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 
 import GetCodeDialog from "../sub-components/GetCodeDialog";
 import { Button } from "@docspace/shared/components/button";
+import { TooltipContent } from "../sub-components/TooltipContent";
 
 import { FilterType, RoomsType } from "@docspace/common/constants";
+
+import LeftMenuUrl from "PUBLIC_DIR/images/sdk-presets_left-menu.react.svg?url";
+import TitleUrl from "PUBLIC_DIR/images/sdk-presets_title.react.svg?url";
+import ColumnsUrl from "PUBLIC_DIR/images/sdk-presets_columns.react.svg?url";
+import ActionButtonUrl from "PUBLIC_DIR/images/sdk-presets_action-button.react.svg?url";
+import SearchUrl from "PUBLIC_DIR/images/sdk-presets_search.react.svg?url";
+import HeaderUrl from "PUBLIC_DIR/images/sdk-presets_header.react.svg?url";
 
 const showPreviewThreshold = 720;
 
@@ -500,37 +508,109 @@ const Manager = (props) => {
           </ControlsGroup>
           <InterfaceElements>
             <Label className="label">{t("InterfaceElements")}</Label>
-            <Checkbox
-              className="checkbox"
-              label={t("Menu")}
-              onChange={onChangeShowMenu}
-              isChecked={config.showMenu}
-            />
-            <Checkbox
-              className="checkbox"
-              label={t("Common:Title")}
-              onChange={onChangeShowTitle}
-              isChecked={config.showTitle}
-            />
-            <Checkbox
-              className="checkbox"
-              label={t("SettingUpColumns")}
-              onChange={toggleShowSettings}
-              isChecked={config.showSettings}
-            />
-            <Checkbox
-              className="checkbox"
-              label={t("ActionButton")}
-              onChange={toggleActionButton}
-              isChecked={!config.disableActionButton}
-            />
-            <Checkbox
-              className="checkbox"
-              label={t("Filter")}
-              onChange={onChangeShowFilter}
-              isChecked={config.showFilter}
-            />
-            <RowContainer>
+
+            <LabelGroup>
+              <Checkbox
+                className="checkbox"
+                label={t("Menu")}
+                onChange={onChangeShowMenu}
+                isChecked={config.showMenu}
+              />
+              <HelpButton
+                place="right"
+                offsetRight={4}
+                size={12}
+                tooltipContent={
+                  <TooltipContent
+                    title={t("Menu")}
+                    description={t("MenuDescription")}
+                    img={LeftMenuUrl}
+                  />
+                }
+              />
+            </LabelGroup>
+
+            <LabelGroup>
+              <Checkbox
+                className="checkbox"
+                label={t("Common:Title")}
+                onChange={onChangeShowTitle}
+                isChecked={config.showTitle}
+              />
+              <HelpButton
+                place="right"
+                offsetRight={4}
+                size={12}
+                tooltipContent={
+                  <TooltipContent
+                    title={t("Common:Title")}
+                    description={t("ManagerTitleDescription")}
+                    img={TitleUrl}
+                  />
+                }
+              />
+            </LabelGroup>
+            <LabelGroup>
+              <Checkbox
+                className="checkbox"
+                label={t("SettingUpColumns")}
+                onChange={toggleShowSettings}
+                isChecked={config.showSettings}
+              />
+              <HelpButton
+                place="right"
+                offsetRight={4}
+                size={12}
+                tooltipContent={
+                  <TooltipContent
+                    title={t("SettingUpColumns")}
+                    description={t("SettingUpColumnsDescription")}
+                    img={ColumnsUrl}
+                  />
+                }
+              />
+            </LabelGroup>
+            <LabelGroup>
+              <Checkbox
+                className="checkbox"
+                label={t("ActionButton")}
+                onChange={toggleActionButton}
+                isChecked={!config.disableActionButton}
+              />
+              <HelpButton
+                place="right"
+                offsetRight={4}
+                size={12}
+                tooltipContent={
+                  <TooltipContent
+                    title={t("ActionButton")}
+                    description={t("ActionButtonDescription")}
+                    img={ActionButtonUrl}
+                  />
+                }
+              />
+            </LabelGroup>
+            <LabelGroup>
+              <Checkbox
+                className="checkbox"
+                label={t("Filter")}
+                onChange={onChangeShowFilter}
+                isChecked={config.showFilter}
+              />
+              <HelpButton
+                place="right"
+                offsetRight={4}
+                size={12}
+                tooltipContent={
+                  <TooltipContent
+                    title={t("SearchBlock")}
+                    description={t("ManagerSearchBlockDescription")}
+                    img={SearchUrl}
+                  />
+                }
+              />
+            </LabelGroup>
+            <LabelGroup>
               <Checkbox
                 className="checkbox"
                 label={t("Header")}
@@ -538,7 +618,19 @@ const Manager = (props) => {
                 isChecked={config.showHeader}
               />
               <Text color="gray">{`(${t("MobileOnly")})`}</Text>
-            </RowContainer>
+              <HelpButton
+                place="right"
+                offsetRight={4}
+                size={12}
+                tooltipContent={
+                  <TooltipContent
+                    title={t("Header")}
+                    description={t("HeaderDescription")}
+                    img={HeaderUrl}
+                  />
+                }
+              />
+            </LabelGroup>
           </InterfaceElements>
           <CategorySubHeader>{t("DataDisplay")}</CategorySubHeader>
           <ControlsGroup>

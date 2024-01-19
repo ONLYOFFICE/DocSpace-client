@@ -24,6 +24,10 @@ import GetCodeDialog from "../sub-components/GetCodeDialog";
 import { Button } from "@docspace/shared/components/button";
 
 import { FilesSelectorFilterTypes } from "@docspace/common/constants";
+import { TooltipContent } from "../sub-components/TooltipContent";
+
+import SubtitleUrl from "PUBLIC_DIR/images/sdk-presets_subtitle.react.svg?url";
+import SearchUrl from "PUBLIC_DIR/images/sdk-presets_files-search.react.svg?url";
 
 const showPreviewThreshold = 720;
 
@@ -450,18 +454,47 @@ const FileSelector = (props) => {
               onChange={toggleBreadCrumbs}
               isChecked={config.withBreadCrumbs}
             /> */}
-            <Checkbox
-              className="checkbox"
-              label={t("Subtitle")}
-              onChange={toggleWithSubtitle}
-              isChecked={config.withSubtitle}
-            />
-            <Checkbox
-              className="checkbox"
-              label={t("Common:Search")}
-              onChange={toggleWithSearch}
-              isChecked={config.withSearch}
-            />
+
+            <LabelGroup>
+              <Checkbox
+                className="checkbox"
+                label={t("Subtitle")}
+                onChange={toggleWithSubtitle}
+                isChecked={config.withSubtitle}
+              />
+              <HelpButton
+                place="right"
+                offsetRight={4}
+                size={12}
+                tooltipContent={
+                  <TooltipContent
+                    title={t("Subtitle")}
+                    description={t("SubtitleDescription")}
+                    img={SubtitleUrl}
+                  />
+                }
+              />
+            </LabelGroup>
+            <LabelGroup>
+              <Checkbox
+                className="checkbox"
+                label={t("Common:Search")}
+                onChange={toggleWithSearch}
+                isChecked={config.withSearch}
+              />
+              <HelpButton
+                place="right"
+                offsetRight={4}
+                size={12}
+                tooltipContent={
+                  <TooltipContent
+                    title={t("Common:Search")}
+                    description={t("FilesSearchDescription")}
+                    img={SearchUrl}
+                  />
+                }
+              />
+            </LabelGroup>
             <Label className="label" text={t("SelectButtonText")} />
             <TextInput
               scale={true}

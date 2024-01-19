@@ -1,7 +1,7 @@
 import React, { ForwardedRef, useMemo } from "react";
 
-import Text from "@docspace/components/text";
-import ContextMenu from "@docspace/components/context-menu";
+import { Text } from "@docspace/shared/components/text";
+import { ContextMenu } from "@docspace/shared/components/context-menu";
 
 import { StyledMobileDetails } from "../../StyledComponents";
 

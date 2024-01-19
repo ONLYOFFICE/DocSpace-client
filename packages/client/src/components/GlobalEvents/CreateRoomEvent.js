@@ -48,8 +48,8 @@ const CreateRoomEvent = ({
   }, []);
 
   useEffect(() => {
-    fetchTagsAction;
-  }, []);
+    fetchTagsAction();
+  }, [fetchTagsAction]);
 
   useEffect(() => {
     setCreateRoomDialogVisible(true);

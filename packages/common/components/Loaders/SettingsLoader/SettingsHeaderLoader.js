@@ -1,6 +1,6 @@
 import React from "react";
-import { LoaderStyle } from "@docspace/components/utils/constants";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { LOADER_STYLE } from "@docspace/shared/constants";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 const speed = 2;
 
@@ -8,10 +8,10 @@ const SettingsHeaderLoader = () => (
   <RectangleSkeleton
     height="24"
     width="140"
-    backgroundColor={LoaderStyle.backgroundColor}
-    foregroundColor={LoaderStyle.foregroundColor}
-    backgroundOpacity={LoaderStyle.backgroundOpacity}
-    foregroundOpacity={LoaderStyle.foregroundOpacity}
+    backgroundColor={LOADER_STYLE.backgroundColor}
+    foregroundColor={LOADER_STYLE.foregroundColor}
+    backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+    foregroundOpacity={LOADER_STYLE.foregroundOpacity}
     speed={speed}
     animate={true}
   />

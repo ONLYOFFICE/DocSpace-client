@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject } from "mobx-react";
-import { Consumer } from "@docspace/components/utils/context";
+import { Consumer } from "@docspace/shared/utils";
 import { Table } from "./TableView/TableView";
 import AuditRowContainer from "./RowView/AuditRowContainer";
 import HistoryMainContent from "../sub-components/HistoryMainContent";

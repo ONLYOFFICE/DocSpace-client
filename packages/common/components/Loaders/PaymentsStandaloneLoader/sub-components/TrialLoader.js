@@ -1,5 +1,5 @@
 import React from "react";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { StyledTrialComponent } from "../StyledComponent";
 
 const TrialLoader = ({ id, className, style, isRectangle, ...rest }) => {

@@ -7,15 +7,15 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
-import { showLoader, hideLoader } from "@docspace/common/utils";
+import { showLoader, hideLoader } from "@docspace/shared/utils/common";
 
-import Box from "@docspace/components/box";
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
-import Badge from "@docspace/components/badge";
-import toastr from "@docspace/components/toast/toastr";
-import Button from "@docspace/components/button";
-import { mobile, isMobile } from "@docspace/components/utils/device";
+import { Box } from "@docspace/shared/components/box";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { Badge } from "@docspace/shared/components/badge";
+import { toastr } from "@docspace/shared/components/toast";
+import { Button } from "@docspace/shared/components/button";
+import { mobile, isMobile } from "@docspace/shared/utils";
 
 import ConsumerItem from "./sub-components/consumerItem";
 import ConsumerModalDialog from "./sub-components/consumerModalDialog";
@@ -216,7 +216,7 @@ class ThirdPartyServices extends React.Component {
               label={t("Submit")}
               primary
               size="normal"
-              minwidth="138px"
+              minWidth="138px"
               onClick={submitRequest}
               scale={isMobile()}
             />

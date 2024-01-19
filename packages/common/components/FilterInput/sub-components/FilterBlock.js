@@ -5,19 +5,23 @@ import ClearReactSvgUrl from "PUBLIC_DIR/images/clear.react.svg?url";
 
 import Loaders from "../../Loaders";
 
-import Backdrop from "@docspace/components/backdrop";
-import Button from "@docspace/components/button";
-import Heading from "@docspace/components/heading";
-import IconButton from "@docspace/components/icon-button";
-import Scrollbar from "@docspace/components/scrollbar";
-import Portal from "@docspace/components/portal";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Button } from "@docspace/shared/components/button";
+import { Heading } from "@docspace/shared/components/heading";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import { Portal } from "@docspace/shared/components/portal";
 
 import FilterBlockItem from "./FilterBlockItem";
 
 import PeopleSelector from "client/PeopleSelector";
 import RoomSelector from "@docspace/client/src/components/RoomSelector";
 
-import { DeviceType, FilterGroups } from "../../../constants";
+import {
+  DeviceType,
+  FilterGroups,
+  FilterSelectorTypes,
+} from "@docspace/shared/enums";
 
 import {
   StyledFilterBlock,
@@ -26,7 +30,6 @@ import {
   StyledControlContainer,
   StyledCrossIcon,
 } from "./StyledFilterBlock";
-import { FilterSelectorTypes } from "../../../constants";
 
 //TODO: fix translate
 const FilterBlock = ({

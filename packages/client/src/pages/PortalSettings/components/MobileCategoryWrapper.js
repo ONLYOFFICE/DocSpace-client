@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Text from "@docspace/components/text";
 import Link from "@docspace/components/link";
 import { Base } from "@docspace/components/themes";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import commonIconsStyles from "@docspace/components/utils/common-icons-style";
 
 import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg";

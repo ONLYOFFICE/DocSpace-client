@@ -1,7 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 export default function withFileActions(WrappedFileItem) {
   class WithFileActions extends React.Component {
@@ -53,10 +53,12 @@ export default function withFileActions(WrappedFileItem) {
     };
 
     onDrop = (items) => {
-      const { isTrashFolder, dragging, setDragging } = this.props;
+      const { isTrashFolder, dragging, setDragging, isDisabledDropItem } =
+        this.props;
       const { fileExst, id } = this.props.item;
 
-      if (isTrashFolder) return dragging && setDragging(false);
+      if (isTrashFolder || isDisabledDropItem)
+        return dragging && setDragging(false);
 
       if (!fileExst) {
         this.onDropZoneUpload(items, id);
@@ -81,6 +83,7 @@ export default function withFileActions(WrappedFileItem) {
         isSelected,
         setSelection,
         currentDeviceType,
+        isDisabledItemId,
       } = this.props;
 
       const { isThirdPartyFolder } = item;
@@ -110,8 +113,8 @@ export default function withFileActions(WrappedFileItem) {
       const mouseButton = e.which
         ? e.which !== 1
         : e.button
-        ? e.button !== 0
-        : false;
+          ? e.button !== 0
+          : false;
       const label = e.currentTarget.getAttribute("label");
       if (mouseButton || e.currentTarget.tagName !== "DIV" || label) {
         return e;
@@ -249,10 +252,16 @@ export default function withFileActions(WrappedFileItem) {
 
         itemIndex,
         currentDeviceType,
+        isDisabledDropItem,
       } = this.props;
       const { access, id } = item;
 
-      const isDragging = isFolder && access < 2 && !isTrashFolder && !isPrivacy;
+      const isDragging =
+        !isDisabledDropItem &&
+        isFolder &&
+        access < 2 &&
+        !isTrashFolder &&
+        !isPrivacy;
 
       let className = isDragging ? " droppable" : "";
       if (draggable) className += " draggable";
@@ -260,8 +269,8 @@ export default function withFileActions(WrappedFileItem) {
       let value = item.isFolder
         ? `folder_${id}`
         : item.isDash
-        ? `dash_${id}`
-        : `file_${id}`;
+          ? `dash_${id}`
+          : `file_${id}`;
       value += draggable ? "_draggable" : "_false";
 
       value += `_index_${itemIndex}`;
@@ -273,8 +282,8 @@ export default function withFileActions(WrappedFileItem) {
       const displayShareButton = isMobileView
         ? "26px"
         : !isShareable
-        ? "38px"
-        : "96px";
+          ? "38px"
+          : "96px";
 
       const checkedProps = id <= 0 ? false : isSelected;
 
@@ -364,7 +373,10 @@ export default function withFileActions(WrappedFileItem) {
         (x) => x.id === item.id && x.fileExst === item.fileExst
       );
 
-      const draggable = !isRecycleBinFolder && selectedItem;
+      const isDisabledDropItem = !item.security.Create;
+
+      const draggable =
+        !isRecycleBinFolder && selectedItem && !isDisabledDropItem;
 
       const isFolder = selectedItem ? false : !item.isFolder ? false : true;
 
@@ -448,6 +460,7 @@ export default function withFileActions(WrappedFileItem) {
 
         setSelection,
         currentDeviceType: auth.settingsStore.currentDeviceType,
+        isDisabledDropItem,
       };
     }
   )(observer(WithFileActions));

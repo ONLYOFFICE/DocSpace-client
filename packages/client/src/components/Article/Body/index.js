@@ -5,13 +5,13 @@ import { withTranslation } from "react-i18next";
 
 import { useNavigate, useLocation } from "react-router-dom";
 
-import { DeviceType, RoomSearchArea } from "@docspace/common/constants";
+import { DeviceType, RoomSearchArea } from "@docspace/shared/enums";
 import Items from "./Items";
-import { tablet } from "@docspace/components/utils/device";
+import { tablet } from "@docspace/shared/utils";
 
-import FilesFilter from "@docspace/common/api/files/filter";
-import RoomsFilter from "@docspace/common/api/rooms/filter";
-import AccountsFilter from "@docspace/common/api/people/filter";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import AccountsFilter from "@docspace/shared/api/people/filter";
 
 import Banner from "./Banner";
 

@@ -1,9 +1,9 @@
 import React from "react";
 
-import SelectorAddButton from "@docspace/components/selector-add-button";
-import Heading from "@docspace/components/heading";
-import ComboBox from "@docspace/components/combobox";
-import Checkbox from "@docspace/components/checkbox";
+import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
+import { Heading } from "@docspace/shared/components/heading";
+import { ComboBox } from "@docspace/shared/components/combobox";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 
 import {
   StyledFilterBlockItem,
@@ -20,14 +20,14 @@ import {
   StyledFilterBlockItemSeparator,
 } from "./StyledFilterBlock";
 
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 import XIcon from "PUBLIC_DIR/images/x.react.svg";
 import {
   FilterGroups,
   FilterKeys,
   FilterSelectorTypes,
-} from "../../../constants";
+} from "@docspace/shared/enums";
 
 const FilterBlockItem = ({
   group,
@@ -115,7 +115,7 @@ const FilterBlockItem = ({
             clearSelectorRef.current
           )
         }
-        themeId={ThemeType.FilterBlockItemTag}
+        themeId={ThemeId.FilterBlockItemTag}
       >
         <StyledFilterBlockItemTagText
           className="filter-text"
@@ -230,7 +230,7 @@ const FilterBlockItem = ({
                   item.isMultiSelect
                 )
         }
-        themeId={ThemeType.FilterBlockItemTag}
+        themeId={ThemeId.FilterBlockItemTag}
       >
         <StyledFilterBlockItemTagText
           className="filter-text"

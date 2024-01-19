@@ -1,6 +1,6 @@
 import React from "react";
 import ContentLoader from "react-content-loader";
-import { LoaderStyle } from "@docspace/components/utils/constants";
+import { LOADER_STYLE } from "@docspace/shared/constants";
 
 const TextLoader = (props) => (
   <ContentLoader
@@ -8,10 +8,10 @@ const TextLoader = (props) => (
     width={174}
     height={23}
     viewBox="0 0 174 23"
-    backgroundColor={LoaderStyle.backgroundColor}
-    foregroundColor={LoaderStyle.foregroundColor}
-    backgroundOpacity={LoaderStyle.backgroundOpacity}
-    foregroundOpacity={LoaderStyle.foregroundOpacity}
+    backgroundColor={LOADER_STYLE.backgroundColor}
+    foregroundColor={LOADER_STYLE.foregroundColor}
+    backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+    foregroundOpacity={LOADER_STYLE.foregroundOpacity}
     {...props}
   >
     <rect x="0" y="0" rx="0" ry="0" width="174" height="23" />

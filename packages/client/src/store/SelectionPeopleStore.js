@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import { EmployeeStatus } from "@docspace/common/constants";
+import { EmployeeStatus } from "@docspace/shared/enums";
 import { getUserStatus } from "../helpers/people-helpers";
 
 class SelectionStore {

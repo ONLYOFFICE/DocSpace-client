@@ -2,30 +2,30 @@ import React, { useState, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { ButtonsWrapper, LoginFormWrapper, LoginContent } from "./StyledLogin";
-import Text from "@docspace/components/text";
-import SocialButton from "@docspace/components/social-button";
+import { Text } from "@docspace/shared/components/text";
+import { SocialButton } from "@docspace/shared/components/social-button";
 import {
   getProviderTranslation,
   getOAuthToken,
   getLoginLink,
-  checkIsSSR,
-} from "@docspace/common/utils";
-import { providersData } from "@docspace/common/constants";
-import Link from "@docspace/components/link";
-import Toast from "@docspace/components/toast";
+} from "@docspace/shared/utils/common";
+import { checkIsSSR } from "@docspace/shared/utils";
+import { PROVIDERS_DATA } from "@docspace/shared/constants";
+import { Link } from "@docspace/shared/components/link";
+import { Toast } from "@docspace/shared/components/toast";
 import LoginForm from "./sub-components/LoginForm";
 import MoreLoginModal from "@docspace/common/components/MoreLoginModal";
 import RecoverAccessModalDialog from "@docspace/common/components/Dialogs/RecoverAccessModalDialog";
-import FormWrapper from "@docspace/components/form-wrapper";
+import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import Register from "./sub-components/register-container";
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import SSOIcon from "PUBLIC_DIR/images/sso.react.svg";
-import { Dark, Base } from "@docspace/components/themes";
+import { Dark, Base } from "@docspace/shared/themes";
 import { useMounted } from "../helpers/useMounted";
-import { getBgPattern } from "@docspace/common/utils";
+import { getBgPattern } from "@docspace/shared/utils/common";
 import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
-import { getLogoFromPath, getSystemTheme } from "@docspace/common/utils";
-import { TenantStatus } from "@docspace/common/constants";
+import { getLogoFromPath, getSystemTheme } from "@docspace/shared/utils";
+import { TenantStatus } from "@docspace/shared/enums";
 
 const themes = {
   Dark: Dark,
@@ -110,7 +110,7 @@ const Login: React.FC<ILoginProps> = ({
     let existProviders = 0;
     providers && providers.length > 0;
     providers?.map((item) => {
-      if (!providersData[item.provider]) return;
+      if (!PROVIDERS_DATA[item.provider]) return;
       existProviders++;
     });
 
@@ -168,11 +168,11 @@ const Login: React.FC<ILoginProps> = ({
     const providerButtons =
       providers &&
       providers.map((item, index) => {
-        if (!providersData[item.provider]) return;
+        if (!PROVIDERS_DATA[item.provider]) return;
         if (index > 1) return;
 
         const { icon, label, iconOptions, className } =
-          providersData[item.provider];
+          PROVIDERS_DATA[item.provider];
 
         return (
           <div className="buttonWrapper" key={`${item.provider}ProviderItem`}>
@@ -215,8 +215,8 @@ const Login: React.FC<ILoginProps> = ({
   const logoUrl = !logo
     ? undefined
     : !theme?.isBase
-    ? getLogoFromPath(logo.path.dark)
-    : getLogoFromPath(logo.path.light);
+      ? getLogoFromPath(logo.path.dark)
+      : getLogoFromPath(logo.path.light);
 
   if (!mounted) return <></>;
   if (isRestoringPortal) return <></>;
@@ -230,7 +230,7 @@ const Login: React.FC<ILoginProps> = ({
     >
       <div className="bg-cover"></div>
       <LoginContent enabledJoin={enabledJoin}>
-        <ColorTheme themeId={ThemeType.LinkForgotPassword}>
+        <ColorTheme themeId={ThemeId.LinkForgotPassword}>
           <img src={logoUrl} className="logo-wrapper" />
           <Text
             fontSize="23px"

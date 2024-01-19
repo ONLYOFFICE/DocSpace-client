@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
-import Aside from "@docspace/components/aside";
-import Backdrop from "@docspace/components/backdrop";
+import { Aside } from "@docspace/shared/components/aside";
+import { Backdrop } from "@docspace/shared/components/backdrop";
 import PeopleSelector from "@docspace/client/src/components/PeopleSelector";
 import { withTranslation } from "react-i18next";
-import Filter from "@docspace/common/api/people/filter";
-import { EmployeeType } from "@docspace/common/constants";
-import { DeviceType } from "@docspace/common/constants";
-import Portal from "@docspace/components/portal";
+import Filter from "@docspace/shared/api/people/filter";
+import { EmployeeType, DeviceType } from "@docspace/shared/enums";
+import { Portal } from "@docspace/shared/components/portal";
 
 const StyledChangeRoomOwner = styled.div`
   display: contents;
@@ -153,8 +152,8 @@ export default inject(
     const room = selection.length
       ? selection[0]
       : bufferSelection
-      ? bufferSelection
-      : selectedFolderStore;
+        ? bufferSelection
+        : selectedFolderStore;
 
     const { currentDeviceType } = settingsStore;
 

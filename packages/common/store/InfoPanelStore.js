@@ -1,11 +1,12 @@
 import { makeAutoObservable } from "mobx";
 
-import { getUserById } from "../api/people";
-import { combineUrl, getUserRole } from "../utils";
-import { FolderType } from "../constants";
+import { getUserById } from "@docspace/shared/api/people";
+import { getUserRole } from "@docspace/shared/utils/common";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { FolderType, ShareAccessRights } from "@docspace/shared/enums";
 import config from "PACKAGE_FILE";
-import Filter from "../api/people/filter";
-import { getRoomInfo } from "../api/rooms";
+import Filter from "@docspace/shared/api/people/filter";
+import { getRoomInfo } from "@docspace/shared/api/rooms";
 
 const observedKeys = [
   "id",
@@ -116,13 +117,13 @@ class InfoPanelStore {
       ? peopleStoreSelection.length
         ? [...peopleStoreSelection]
         : peopleStoreBufferSelection
-        ? [peopleStoreBufferSelection]
-        : []
+          ? [peopleStoreBufferSelection]
+          : []
       : filesStoreSelection?.length > 0
-      ? [...filesStoreSelection]
-      : filesStoreBufferSelection
-      ? [filesStoreBufferSelection]
-      : [];
+        ? [...filesStoreSelection]
+        : filesStoreBufferSelection
+          ? [filesStoreBufferSelection]
+          : [];
   };
 
   getSelectedFolder = () => {
@@ -153,12 +154,12 @@ class InfoPanelStore {
           isSelectedItem: false,
         })
       : selectedItems.length === 1
-      ? this.normalizeSelection({
-          ...selectedItems[0],
-          isSelectedFolder: false,
-          isSelectedItem: true,
-        })
-      : [...Array(selectedItems.length).keys()];
+        ? this.normalizeSelection({
+            ...selectedItems[0],
+            isSelectedFolder: false,
+            isSelectedItem: true,
+          })
+        : [...Array(selectedItems.length).keys()];
   };
 
   normalizeSelection = (selection) => {
@@ -169,6 +170,9 @@ class InfoPanelStore {
       icon: this.getInfoPanelItemIcon(selection, 32),
       isContextMenuSelection: false,
       wasContextMenuSelection: !!isContextMenuSelection,
+      canCopyPublicLink:
+        selection.access === ShareAccessRights.RoomManager ||
+        selection.access === ShareAccessRights.None,
     };
   };
 
@@ -195,13 +199,22 @@ class InfoPanelStore {
     const currentFolderRoomId =
       this.selectedFolderStore.pathParts &&
       this.selectedFolderStore.pathParts[1]?.id;
-    const prevRoomId = this.selectionParentRoom?.id;
+    // const prevRoomId = this.selectionParentRoom?.id;
 
-    if (!currentFolderRoomId || currentFolderRoomId === prevRoomId) return;
+    // if (!currentFolderRoomId || currentFolderRoomId === prevRoomId) return;
+    if (!currentFolderRoomId) return;
 
     const newSelectionParentRoom = await getRoomInfo(currentFolderRoomId);
 
-    if (prevRoomId === newSelectionParentRoom.id) return;
+    // if (prevRoomId === newSelectionParentRoom.id) return;
+
+    const roomIndex = this.selectedFolderStore.navigationPath.findIndex(
+      (f) => f.id === currentFolderRoomId
+    );
+    if (roomIndex > -1) {
+      this.selectedFolderStore.navigationPath[roomIndex].title =
+        newSelectionParentRoom.title;
+    }
 
     this.setSelectionParentRoom(
       this.normalizeSelection(newSelectionParentRoom)
@@ -223,20 +236,20 @@ class InfoPanelStore {
       ? item.rootFolderType === FolderType.Archive
         ? item.logo && item.logo.medium
         : this.settingsStore.getIcon(
-            size,
-            null,
-            null,
-            null,
-            item.roomType,
-            true
-          )
-        ? item.logo.medium
-        : item.icon
-        ? item.icon
-        : this.settingsStore.getIcon(size, null, null, null, item.roomType)
-      : item.isFolder
-      ? this.settingsStore.getFolderIcon(item.providerKey, size)
-      : this.settingsStore.getIcon(size, item.fileExst || ".file");
+              size,
+              null,
+              null,
+              null,
+              item.roomType,
+              true
+            )
+          ? item.logo?.medium
+          : item.icon
+            ? item.icon
+            : this.settingsStore.getIcon(size, null, null, null, item.roomType)
+      : item.isFolder && item.folderType
+        ? this.settingsStore.getIconByFolderType(item.folderType, size)
+        : this.settingsStore.getIcon(size, item.fileExst || ".file");
   };
 
   // User link actions //

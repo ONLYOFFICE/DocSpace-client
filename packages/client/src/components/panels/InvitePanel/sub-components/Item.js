@@ -1,12 +1,12 @@
 ﻿import InfoEditReactSvgUrl from "PUBLIC_DIR/images/info.edit.react.svg?url";
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import React, { useState, useEffect } from "react";
-import Avatar from "@docspace/components/avatar";
-import Text from "@docspace/components/text";
+import { Avatar } from "@docspace/shared/components/avatar";
+import { Text } from "@docspace/shared/components/text";
 
-import { parseAddresses } from "@docspace/components/utils/email";
+import { parseAddresses } from "@docspace/shared/utils";
 import { getAccessOptions } from "../utils";
-import { getUserRole } from "@docspace/common/utils";
+import { getUserRole } from "@docspace/shared/utils/common";
 
 import {
   StyledEditInput,

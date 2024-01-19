@@ -44,18 +44,18 @@ import copy from "copy-to-clipboard";
 import saveAs from "file-saver";
 import { isMobile, isIOS } from "react-device-detect";
 import config from "PACKAGE_FILE";
-import toastr from "@docspace/components/toast/toastr";
-import { ShareAccessRights, RoomsType } from "@docspace/common/constants";
-import combineUrl from "@docspace/common/utils/combineUrl";
-import { isDesktop } from "@docspace/components/utils/device";
-import { Events } from "@docspace/common/constants";
+import { toastr } from "@docspace/shared/components/toast";
+import { ShareAccessRights, RoomsType } from "@docspace/shared/enums";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { isDesktop } from "@docspace/shared/utils";
+import { Events } from "@docspace/shared/enums";
 
 import { connectedCloudsTypeTitleTranslation } from "@docspace/client/src/helpers/filesUtils";
-import { getOAuthToken } from "@docspace/common/utils";
-import api from "@docspace/common/api";
-import { FolderType } from "@docspace/common/constants";
-import FilesFilter from "@docspace/common/api/files/filter";
-import { getFileLink } from "@docspace/common/api/files";
+import { getOAuthToken } from "@docspace/shared/utils/common";
+import api from "@docspace/shared/api";
+import { FolderType } from "@docspace/shared/enums";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { getFileLink } from "@docspace/shared/api/files";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -437,7 +437,7 @@ class ContextOptionsStore {
     isFile
       ? window.open(viewUrl, "_self")
       : this.filesActionsStore
-          .downloadAction(t("Translations:ArchivingData"))
+          .downloadAction(t("Translations:ArchivingData"), item)
           .catch((err) => toastr.error(err));
   };
 
@@ -1128,10 +1128,17 @@ class ContextOptionsStore {
       t
     );
 
-    const withOpen = item.id !== this.selectedFolderStore.id;
+    let withOpen = item.id !== this.selectedFolderStore.id;
     const isPublicRoomType =
       item.roomType === RoomsType.PublicRoom ||
       item.roomType === RoomsType.CustomRoom;
+
+    if (item.isRoom && withOpen) {
+      withOpen =
+        this.selectedFolderStore.navigationPath.findIndex(
+          (f) => f.id === item.id
+        ) === -1;
+    }
 
     const optionsModel = [
       {

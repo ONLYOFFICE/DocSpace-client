@@ -1,13 +1,13 @@
-import Button from "@docspace/components/button";
+import { Button } from "@docspace/shared/components/button";
 import * as Styled from "./index.styled";
 import ErrorImageSvgUrl from "PUBLIC_DIR/images/form-gallery-error.svg?url";
-import { isMobile as isMobileUtils } from "@docspace/components/utils/device";
+import { isMobile as isMobileUtils } from "@docspace/shared/utils";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import config from "PACKAGE_FILE";
-import FilesFilter from "@docspace/common/api/files/filter";
-import { combineUrl } from "@docspace/common/utils";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
 const ErrorView = ({

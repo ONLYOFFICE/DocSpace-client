@@ -5,7 +5,7 @@ import {
   EmployeeStatus,
   FolderType,
   ShareAccessRights,
-} from "@docspace/common/constants";
+} from "@docspace/shared/enums";
 
 class AccessRightsStore {
   authStore = null;

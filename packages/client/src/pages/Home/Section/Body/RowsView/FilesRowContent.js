@@ -7,17 +7,18 @@ import {
   isTablet,
   mobile,
   tablet,
-} from "@docspace/components/utils/device";
+  desktop,
+} from "@docspace/shared/utils";
 
-import Link from "@docspace/components/link";
-import Text from "@docspace/components/text";
-import RowContent from "@docspace/components/row-content";
+import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { RowContent } from "@docspace/shared/components/row-content";
 
 import withContent from "../../../../../HOCs/withContent";
 
-import { Base } from "@docspace/components/themes";
-import { RoomsTypeTranslations } from "@docspace/common/constants";
-import { desktop } from "@docspace/components/utils/device";
+import { Base } from "@docspace/shared/themes";
+import { ROOMS_TYPE_TRANSLATIONS } from "@docspace/shared/constants";
+
 import { getFileTypeName } from "../../../../../helpers/filesUtils";
 import { SortByFieldName } from "../../../../../helpers/constants";
 import { getSpaceQuotaAsText } from "@docspace/common/utils";
@@ -61,6 +62,17 @@ const SimpleFilesRowContent = styled(RowContent)`
           `
         : css`
             margin: -2px 6px -2px -2px;
+          `}
+  }
+
+  .bagde_alert {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 8px;
+          `
+        : css`
+            margin-right: 8px;
           `}
   }
 
@@ -226,7 +238,7 @@ const FilesRowContent = ({
 
   const additionalComponent = () => {
     if (isRooms && isStatisticsAvailable) {
-      let value = t(RoomsTypeTranslations[item.roomType]);
+      let value = t(ROOMS_TYPE_TRANSLATIONS[item.roomType]);
       const spaceQuota = getSpaceQuotaAsText(
         t,
         usedSpace,

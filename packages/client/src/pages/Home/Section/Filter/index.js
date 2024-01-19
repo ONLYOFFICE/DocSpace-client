@@ -6,21 +6,21 @@ import { withTranslation } from "react-i18next";
 import find from "lodash/find";
 import result from "lodash/result";
 
-import { isTablet, isMobile } from "@docspace/components/utils/device";
+import { isTablet, isMobile } from "@docspace/shared/utils";
+import { RoomsTypeValues } from "@docspace/shared/utils/common";
 import FilterInput from "@docspace/common/components/FilterInput";
 import Loaders from "@docspace/common/components/Loaders";
-import { withLayoutSize } from "@docspace/common/utils";
-import { getUser } from "@docspace/common/api/people";
-import RoomsFilter from "@docspace/common/api/rooms/filter";
-import AccountsFilter from "@docspace/common/api/people/filter";
-import FilesFilter from "@docspace/common/api/files/filter";
+import { withLayoutSize } from "@docspace/shared/HOC/withLayoutSize";
+import { getUser } from "@docspace/shared/api/people";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import AccountsFilter from "@docspace/shared/api/people/filter";
+import FilesFilter from "@docspace/shared/api/files/filter";
 import {
   FilterGroups,
   FilterKeys,
   FilterType,
   RoomsType,
   RoomsProviderType,
-  RoomsProviderTypeName,
   FilterSubject,
   RoomSearchArea,
   EmployeeType,
@@ -28,7 +28,8 @@ import {
   PaymentsType,
   AccountLoginType,
   DeviceType,
-} from "@docspace/common/constants";
+} from "@docspace/shared/enums";
+import { ROOMS_PROVIDER_TYPE_NAME } from "@docspace/shared/constants";
 
 import { getDefaultRoomName } from "SRC_DIR/helpers/filesUtils";
 
@@ -41,7 +42,7 @@ import {
 import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
 
-import { getRoomInfo } from "@docspace/common/api/rooms";
+import { getRoomInfo } from "@docspace/shared/api/rooms";
 
 const getAccountLoginType = (filterValues) => {
   const accountLoginType = result(
@@ -525,8 +526,8 @@ const SectionFilterContent = ({
       const newFilter = isAccountsPage
         ? accountsFilter.clone()
         : isRooms
-        ? roomsFilter.clone()
-        : filter.clone();
+          ? roomsFilter.clone()
+          : filter.clone();
       newFilter.page = 0;
       newFilter.sortBy = sortBy;
       newFilter.sortOrder = sortOrder;
@@ -576,12 +577,12 @@ const SectionFilterContent = ({
         ? accountsFilter.search
         : ""
       : isRooms
-      ? roomsFilter.filterValue
         ? roomsFilter.filterValue
-        : ""
-      : filter.search
-      ? filter.search
-      : "";
+          ? roomsFilter.filterValue
+          : ""
+        : filter.search
+          ? filter.search
+          : "";
   }, [
     isRooms,
     isAccountsPage,
@@ -594,8 +595,8 @@ const SectionFilterContent = ({
     const currentFilter = isAccountsPage
       ? accountsFilter
       : isRooms
-      ? roomsFilter
-      : filter;
+        ? roomsFilter
+        : filter;
     return {
       sortDirection: currentFilter.sortOrder === "ascending" ? "asc" : "desc",
       sortId: currentFilter.sortBy,
@@ -699,9 +700,9 @@ const SectionFilterContent = ({
           AccountLoginType.SSO === accountsFilter.accountLoginType.toString()
             ? SSO_LABEL
             : AccountLoginType.LDAP ===
-              accountsFilter.accountLoginType.toString()
-            ? t("PeopleTranslations:LDAPLbl")
-            : t("PeopleTranslations:StandardLogin");
+                accountsFilter.accountLoginType.toString()
+              ? t("PeopleTranslations:LDAPLbl")
+              : t("PeopleTranslations:StandardLogin");
         filterValues.push({
           key: accountsFilter.accountLoginType.toString(),
           label: label,
@@ -851,7 +852,7 @@ const SectionFilterContent = ({
       if (roomsFilter.provider) {
         const provider = +roomsFilter.provider;
 
-        const label = RoomsProviderTypeName[provider];
+        const label = ROOMS_PROVIDER_TYPE_NAME[provider];
 
         filterValues.push({
           key: provider,
@@ -1278,7 +1279,7 @@ const SectionFilterContent = ({
             isHeader: true,
             isLast: isLastTypeOptionsRooms,
           },
-          ...Object.values(RoomsType).map((roomType) => {
+          ...Object.values(RoomsTypeValues).map((roomType) => {
             switch (roomType) {
               case RoomsType.FillingFormsRoom:
                 return {
@@ -1307,6 +1308,13 @@ const SectionFilterContent = ({
                   key: RoomsType.ReadOnlyRoom,
                   group: FilterGroups.roomFilterType,
                   label: t("ViewOnlyRooms"),
+                };
+              case RoomsType.FormRoom:
+                return {
+                  id: "filter_type-form",
+                  key: RoomsType.FormRoom,
+                  group: FilterGroups.roomFilterType,
+                  label: t("FormRoom"),
                 };
               case RoomsType.PublicRoom:
                 return {
@@ -1495,7 +1503,7 @@ const SectionFilterContent = ({
             (item) => item[0] === thirdParty
           )[1];
 
-          const label = RoomsProviderTypeName[key];
+          const label = ROOMS_PROVIDER_TYPE_NAME[key];
 
           return {
             key,

@@ -2,11 +2,11 @@ import React from "react";
 import { ReactSVG } from "react-svg";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
-import Box from "@docspace/components/box";
-import Text from "@docspace/components/text";
+import { Box } from "@docspace/shared/components/box";
+import { Text } from "@docspace/shared/components/text";
 import ConsumerToggle from "./consumerToggle";
-import { Base } from "@docspace/components/themes";
-import { thirdpartiesLogo } from "@docspace/common/utils/image-thirdparties";
+import { Base } from "@docspace/shared/themes";
+import { thirdpartiesLogo } from "@docspace/shared/utils/image-thirdparties";
 
 const StyledItem = styled.div`
   .consumer-description {

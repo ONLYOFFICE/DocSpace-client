@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Row from "@docspace/components/row";
+import { Row } from "@docspace/shared/components/row";
 import { RoomContent } from "./RoomContent";
 import { observer } from "mobx-react";
 import styled from "styled-components";

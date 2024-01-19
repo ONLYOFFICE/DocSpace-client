@@ -1,12 +1,12 @@
 ﻿import React, { useState, useEffect, useCallback } from "react";
 import { withTranslation, Trans } from "react-i18next";
-import toastr from "@docspace/components/toast/toastr";
-import FieldContainer from "@docspace/components/field-container";
-import TextInput from "@docspace/components/text-input";
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
+import { toastr } from "@docspace/shared/components/toast";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
-import { isMobile } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/shared/utils";
 import checkScrollSettingsBlock from "../utils";
 import { StyledSettingsComponent, StyledScrollbar } from "./StyledSettings";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
@@ -14,8 +14,8 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import LoaderCustomization from "../sub-components/loaderCustomization";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { PortalRenamingDialog } from "SRC_DIR/components/dialogs";
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
 
 const PortalRenaming = (props) => {
   const {

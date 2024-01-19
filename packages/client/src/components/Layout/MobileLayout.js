@@ -1,8 +1,12 @@
 import React, { Component, createRef } from "react";
-import { isDesktop, isTouchDevice } from "@docspace/components/utils/device";
-import Scrollbar from "@docspace/components/scrollbar";
+import {
+  isDesktop,
+  isTouchDevice,
+  getBannerAttribute,
+} from "@docspace/shared/utils";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { LayoutContextProvider } from "./context";
-import { getBannerAttribute } from "@docspace/components/utils/banner";
+
 import PropTypes from "prop-types";
 import {
   isTablet,

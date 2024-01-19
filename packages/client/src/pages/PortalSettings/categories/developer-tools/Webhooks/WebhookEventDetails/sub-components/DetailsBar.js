@@ -2,15 +2,15 @@ import React from "react";
 import moment from "moment-timezone";
 import styled from "styled-components";
 
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 import StatusBadge from "../../sub-components/StatusBadge";
 
 import { inject, observer } from "mobx-react";
 
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 import { useTranslation } from "react-i18next";
 
-import { tablet, mobile } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/shared/utils";
 
 const BarWrapper = styled.div`
   width: 100%;
@@ -69,7 +69,7 @@ const DetailsBar = ({ eventDetails }) => {
     return (
       moment(date)
         .locale(i18n.language)
-        .tz(window.timezone || "")
+        .tz(window.timezone)
         .format("MMM D, YYYY, h:mm:ss A") +
       " " +
       t("Common:UTC")

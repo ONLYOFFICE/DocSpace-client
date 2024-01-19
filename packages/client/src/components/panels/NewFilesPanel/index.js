@@ -1,14 +1,14 @@
 import { useState, useEffect, useMemo } from "react";
-import Backdrop from "@docspace/components/backdrop";
-import Loader from "@docspace/components/loader";
-import Text from "@docspace/components/text";
-import Heading from "@docspace/components/heading";
-import Aside from "@docspace/components/aside";
-import Row from "@docspace/components/row";
-import Button from "@docspace/components/button";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Loader } from "@docspace/shared/components/loader";
+import { Text } from "@docspace/shared/components/text";
+import { Heading } from "@docspace/shared/components/heading";
+import { Aside } from "@docspace/shared/components/aside";
+import { Row } from "@docspace/shared/components/row";
+import { Button } from "@docspace/shared/components/button";
 import { withTranslation } from "react-i18next";
-import toastr from "@docspace/components/toast/toastr";
-import Portal from "@docspace/components/portal";
+import { toastr } from "@docspace/shared/components/toast";
+import { Portal } from "@docspace/shared/components/portal";
 
 import { ReactSVG } from "react-svg";
 import {
@@ -21,7 +21,7 @@ import {
   StyledLink,
 } from "../StyledPanels";
 import { inject, observer } from "mobx-react";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 import Loaders from "@docspace/common/components/Loaders";
 import withLoader from "../../../HOCs/withLoader";
@@ -29,8 +29,8 @@ import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
-import FilesFilter from "@docspace/common/api/files/filter";
-import { DeviceType } from "@docspace/common/constants";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { DeviceType } from "@docspace/shared/enums";
 
 const SharingBodyStyle = { height: `calc(100vh - 156px)` };
 

@@ -2,19 +2,19 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Trans, withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import toastr from "@docspace/components/toast/toastr";
-import FieldContainer from "@docspace/components/field-container";
-import TextInput from "@docspace/components/text-input";
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
+import { toastr } from "@docspace/shared/components/toast";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { inject, observer } from "mobx-react";
 import isEqual from "lodash/isEqual";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import styled from "styled-components";
-import Link from "@docspace/components/link";
+import { Link } from "@docspace/shared/components/link";
 import LoaderCompanyInfoSettings from "../sub-components/loaderCompanyInfoSettings";
 import AboutDialog from "../../../../About/AboutDialog";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
-import { mobile, size } from "@docspace/components/utils/device";
+import { mobile, size } from "@docspace/shared/utils";
 
 const StyledComponent = styled.div`
   .link {

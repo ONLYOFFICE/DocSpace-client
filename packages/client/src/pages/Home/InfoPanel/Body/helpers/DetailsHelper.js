@@ -1,12 +1,12 @@
 import React from "react";
 
-import { LANGUAGE } from "@docspace/common/constants";
+import { LANGUAGE } from "@docspace/shared/constants";
 
-import getCorrectDate from "@docspace/components/utils/getCorrectDate";
+import { getCorrectDate, getCookie } from "@docspace/shared/utils";
 
-import Link from "@docspace/components/link";
-import Text from "@docspace/components/text";
-import Tag from "@docspace/components/tag";
+import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { Tag } from "@docspace/shared/components/tag";
 import { decode } from "he";
 
 import {
@@ -15,7 +15,7 @@ import {
   getFileTypeName,
 } from "@docspace/client/src/helpers/filesUtils";
 import CommentEditor from "../sub-components/CommentEditor";
-import { getCookie } from "@docspace/components/utils/cookie";
+
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 
 // Property Content Components

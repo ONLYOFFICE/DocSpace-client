@@ -3,18 +3,18 @@ import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import TableRow from "@docspace/components/table-container/TableRow";
-import TableCell from "@docspace/components/table-container/TableCell";
-import Link from "@docspace/components/link";
-import Text from "@docspace/components/text";
-import Checkbox from "@docspace/components/checkbox";
-import ComboBox from "@docspace/components/combobox";
-import DropDownItem from "@docspace/components/drop-down-item";
+import { TableRow } from "@docspace/shared/components/table";
+import { TableCell } from "@docspace/shared/components/table";
+import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { ComboBox } from "@docspace/shared/components/combobox";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 
 import Badges from "../Badges";
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 
 const StyledWrapper = styled.div`
   display: contents;

@@ -1,4 +1,4 @@
-import { ShareAccessRights } from "@docspace/common/constants";
+import { ShareAccessRights } from "@docspace/shared/enums";
 import { makeAutoObservable } from "mobx";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
@@ -32,7 +32,8 @@ class SelectedFolderStore {
   rootFolderId = null;
   settingsStore = null;
   security = null;
-  inRoom = true;
+  type = null;
+  inRoom = false;
 
   constructor(settingsStore) {
     makeAutoObservable(this);
@@ -111,7 +112,8 @@ class SelectedFolderStore {
     this.tags = null;
     this.rootFolderId = null;
     this.security = null;
-    this.inRoom = true;
+    this.type = null;
+    this.inRoom = false;
   };
 
   setParentId = (parentId) => {
@@ -200,6 +202,8 @@ class SelectedFolderStore {
       if (!selectedFolderItems.includes("roomType")) this.roomType = null;
 
       setDocumentTitle(selectedFolder.title);
+
+      if (!selectedFolder.hasOwnProperty("type")) this.type = null;
 
       for (let key of selectedFolderItems) {
         if (key in this) {

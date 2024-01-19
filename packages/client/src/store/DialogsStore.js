@@ -1,7 +1,7 @@
-import { getNewFiles } from "@docspace/common/api/files";
-import { ShareAccessRights } from "@docspace/common/constants";
+import { getNewFiles } from "@docspace/shared/api/files";
+import { ShareAccessRights } from "@docspace/shared/enums";
 import { makeAutoObservable, runInAction } from "mobx";
-import { Events } from "@docspace/common/constants";
+import { Events } from "@docspace/shared/enums";
 
 class DialogsStore {
   authStore;
@@ -237,8 +237,8 @@ class DialogsStore {
     const newIds = newId
       ? [newId]
       : pathParts
-      ? pathParts.map((p) => p.id)
-      : [];
+        ? pathParts.map((p) => p.id)
+        : [];
     item &&
       pathParts.push({
         id: item.id,

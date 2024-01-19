@@ -2,14 +2,14 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
 
-import api from "@docspace/common/api";
-import RoomsFilter from "@docspace/common/api/rooms/filter";
-import { RoomsType } from "@docspace/common/constants";
-import { iconSize32 } from "@docspace/common/utils/image-helpers";
+import api from "@docspace/shared/api";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import { RoomsType } from "@docspace/shared/enums";
+import { iconSize32 } from "@docspace/shared/utils/image-helpers";
 
 import Loaders from "@docspace/common/components/Loaders";
 
-import Selector from "@docspace/components/selector";
+import { Selector } from "@docspace/shared/components/selector";
 
 const pageCount = 100;
 

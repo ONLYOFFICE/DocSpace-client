@@ -2,10 +2,10 @@ import React, { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { EditRoomDialog } from "../dialogs";
-import { Encoder } from "@docspace/common/utils/encoder";
-import api from "@docspace/common/api";
-import { getRoomInfo } from "@docspace/common/api/rooms";
-import toastr from "@docspace/components/toast/toastr";
+import { Encoder } from "@docspace/shared/utils/encoder";
+import api from "@docspace/shared/api";
+import { getRoomInfo } from "@docspace/shared/api/rooms";
+import { toastr } from "@docspace/shared/components/toast";
 
 const EditRoomEvent = ({
   addActiveItems,
@@ -46,6 +46,7 @@ const EditRoomEvent = ({
 
   reloadInfoPanelSelection,
   changeRoomOwner,
+  reloadSelectionParentRoom,
 
   defaultRoomsQuota,
   isDefaultRoomsQuotaSet,
@@ -163,7 +164,7 @@ const EditRoomEvent = ({
           }
 
           !withPaging && updateRoom(item, room);
-
+          reloadSelectionParentRoom();
           reloadInfoPanelSelection();
           URL.revokeObjectURL(img.src);
           setActiveFolders([]);
@@ -189,6 +190,7 @@ const EditRoomEvent = ({
           updateLogoPathsCacheBreaker();
       }
 
+      reloadSelectionParentRoom();
       setIsLoading(false);
       onClose();
     }
@@ -280,7 +282,10 @@ export default inject(
     const { getThirdPartyIcon } = settingsStore.thirdPartyStore;
     const { setCreateRoomDialogVisible } = dialogsStore;
     const { withPaging } = auth.settingsStore;
-    const { reloadSelection: reloadInfoPanelSelection } = auth.infoPanelStore;
+    const {
+      reloadSelection: reloadInfoPanelSelection,
+      reloadSelectionParentRoom,
+    } = auth.infoPanelStore;
 
     const { currentQuotaStore } = auth;
     const { defaultRoomsQuota, isDefaultRoomsQuotaSet } = currentQuotaStore;
@@ -321,6 +326,7 @@ export default inject(
 
       reloadInfoPanelSelection,
       changeRoomOwner,
+      reloadSelectionParentRoom,
     };
   }
 )(observer(EditRoomEvent));

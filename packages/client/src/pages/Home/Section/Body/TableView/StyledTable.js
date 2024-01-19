@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
-import Base from "@docspace/components/themes/base";
-import TableRow from "@docspace/components/table-container/TableRow";
-import DragAndDrop from "@docspace/components/drag-and-drop";
+import Base from "@docspace/shared/themes/base";
+import { TableRow } from "@docspace/shared/components/table";
+import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
 import CursorPalmSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
 
 const hotkeyBorderStyle = css`
@@ -413,6 +413,17 @@ const StyledBadgesContainer = styled.div`
         font-weight: 800;
       }
     }
+  }
+
+  .bagde_alert {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin: 0 -2px -2px 5px;
+          `
+        : css`
+            margin: 0 5px -2px -2px;
+          `}
   }
 
   .badge-new-version {

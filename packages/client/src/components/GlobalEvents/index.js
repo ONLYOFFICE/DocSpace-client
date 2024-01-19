@@ -2,8 +2,8 @@ import { useState, useEffect, useCallback, useRef, memo } from "react";
 
 import { inject, observer } from "mobx-react";
 
-import { FileAction } from "@docspace/common/constants";
-import { Events } from "@docspace/common/constants";
+import { FileAction } from "@docspace/shared/enums";
+import { Events } from "@docspace/shared/enums";
 
 import CreateEvent from "./CreateEvent";
 import RenameEvent from "./RenameEvent";

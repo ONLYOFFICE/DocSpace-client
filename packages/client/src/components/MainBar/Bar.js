@@ -5,10 +5,10 @@ import { withTranslation } from "react-i18next";
 
 import { ADS_TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
 
-import { getConvertedSize } from "@docspace/common/utils";
+import { getConvertedSize } from "@docspace/shared/utils/common";
 
-import { getBannerAttribute } from "@docspace/components/utils/banner";
-import SnackBar from "@docspace/components/snackbar";
+import { getBannerAttribute } from "@docspace/shared/utils";
+import { SnackBar } from "@docspace/shared/components/snackbar";
 import { QuotaBarTypes } from "SRC_DIR/helpers/constants";
 
 import QuotasBar from "./QuotasBar";
@@ -63,7 +63,7 @@ const Bar = (props) => {
 
   const { loadLanguagePath } = getBannerAttribute();
 
-  const updateBanner = async () => {
+  const updateBanner = React.useCallback(async () => {
     const bar = (localStorage.getItem("bar") || "")
       .split(",")
       .filter((bar) => bar.length > 0);
@@ -125,7 +125,7 @@ const Bar = (props) => {
 
     localStorage.setItem("barIndex", index);
     return;
-  };
+  }, []);
 
   useEffect(() => {
     const updateTimeout = setTimeout(() => updateBanner(), 1000);

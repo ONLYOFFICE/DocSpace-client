@@ -1,12 +1,12 @@
 import { makeAutoObservable } from "mobx";
 
-import { combineUrl } from "@docspace/common/utils";
-import { RoomsType } from "@docspace/common/constants";
-import { checkDialogsOpen } from "@docspace/common/utils/checkDialogsOpen";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { RoomsType } from "@docspace/shared/enums";
+import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 
-import toastr from "@docspace/components/toast/toastr";
-import { isDesktop, isMobile } from "@docspace/components/utils/device";
-import getFilesFromEvent from "@docspace/components/drag-and-drop/get-files-from-event";
+import { toastr } from "@docspace/shared/components/toast";
+import { isDesktop, isMobile } from "@docspace/shared/utils";
+import { getFilesFromEvent } from "@docspace/shared/components/drag-and-drop";
 
 import config from "PACKAGE_FILE";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
@@ -154,8 +154,8 @@ class HotkeyStore {
       const offsetTop = offset
         ? offset
         : viewAs === "tile"
-        ? el.parentElement.parentElement.offsetTop
-        : el.offsetTop;
+          ? el.parentElement.parentElement.offsetTop
+          : el.offsetTop;
 
       return { offsetTop, item };
     }
@@ -702,10 +702,10 @@ class HotkeyStore {
     const item = hotkeyCaret
       ? hotkeyCaret
       : selection.length
-      ? selection.length === 1
-        ? selection[0]
-        : selection[selection.length - 1]
-      : null;
+        ? selection.length === 1
+          ? selection[0]
+          : selection[selection.length - 1]
+        : null;
 
     const caretIndex = filesList.findIndex(
       (f) => f.id === item?.id && f.isFolder === item?.isFolder

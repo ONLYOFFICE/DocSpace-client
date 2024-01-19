@@ -1,32 +1,33 @@
 import axios from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
-import api from "@docspace/common/api";
+import api from "@docspace/shared/api";
 import {
   FileType,
   FilterType,
   FolderType,
   FileStatus,
   RoomsType,
-  RoomsTypeValues,
   RoomsProviderType,
   ShareAccessRights,
-} from "@docspace/common/constants";
+} from "@docspace/shared/enums";
 
-import { combineUrl } from "@docspace/common/utils";
-import { updateTempContent } from "@docspace/common/utils";
+import { RoomsTypeValues } from "@docspace/shared/utils";
 
-import toastr from "@docspace/components/toast/toastr";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { updateTempContent } from "@docspace/shared/utils/common";
+
+import { toastr } from "@docspace/shared/components/toast";
 import config from "PACKAGE_FILE";
 import { thumbnailStatuses } from "@docspace/client/src/helpers/filesConstants";
 import { openDocEditor as openEditor } from "@docspace/client/src/helpers/filesUtils";
-import { getDaysRemaining } from "@docspace/common/utils";
+import { getDaysRemaining } from "@docspace/shared/utils/common";
 
 import {
   getCategoryType,
   getCategoryUrl,
   getCategoryTypeByFolderType,
 } from "SRC_DIR/helpers/utils";
-import { isDesktop, isMobile } from "@docspace/components/utils/device";
+import { isDesktop, isMobile } from "@docspace/shared/utils";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/constants";
 
@@ -275,6 +276,7 @@ class FilesStore {
       const foundIndex = fileId && this.files.findIndex((x) => x.id === fileId);
 
       this.treeFoldersStore.fetchTreeFolders();
+
       if (foundIndex == -1) return;
 
       this.updateFileStatus(
@@ -367,9 +369,7 @@ class FilesStore {
       this.setFiles(newFiles);
     });
 
-    if (!this.publicRoomStore.isPublicRoom) {
-      this.debouncefetchTreeFolders();
-    }
+    this.debouncefetchTreeFolders();
   };
 
   debouncefetchTreeFolders = debounce(() => {
@@ -1034,6 +1034,8 @@ class FilesStore {
         return roomType === RoomsType.ReviewRoom;
       case `room-${RoomsType.ReadOnlyRoom}`:
         return roomType === RoomsType.ReadOnlyRoom;
+      case `room-${RoomsType.FormRoom}`:
+        return roomType === RoomsType.FormRoom;
       case `room-${RoomsType.PublicRoom}`:
         return roomType === RoomsType.PublicRoom;
       default:
@@ -1092,8 +1094,10 @@ class FilesStore {
         this.viewAs === "tile"
           ? item.getAttribute("value")
           : item.getElementsByClassName("files-item")
-          ? item.getElementsByClassName("files-item")[0]?.getAttribute("value")
-          : null;
+            ? item
+                .getElementsByClassName("files-item")[0]
+                ?.getAttribute("value")
+            : null;
 
       if (!value) return;
       const splitValue = value && value.split("_");
@@ -1127,8 +1131,10 @@ class FilesStore {
         this.viewAs === "tile"
           ? item.getAttribute("value")
           : item.getElementsByClassName("files-item")
-          ? item.getElementsByClassName("files-item")[0]?.getAttribute("value")
-          : null;
+            ? item
+                .getElementsByClassName("files-item")[0]
+                ?.getAttribute("value")
+            : null;
 
       const splitValue = value && value.split("_");
 
@@ -1522,9 +1528,11 @@ class FilesStore {
         this.selectedFolderStore.setSelectedFolder({
           folders: data.folders,
           ...data.current,
+          inRoom: !!data.current.inRoom,
           pathParts: data.pathParts,
           navigationPath,
           ...{ new: data.new },
+          // type,
         });
 
         this.clientLoadingStore.setIsSectionHeaderLoading(false);
@@ -2292,9 +2300,9 @@ class FilesStore {
         }
       }
 
-      if (fromInfoPanel) {
-        roomOptions = this.removeOptions(roomOptions, ["external-link"]);
-      }
+      // if (fromInfoPanel) {
+      //   roomOptions = this.removeOptions(roomOptions, ["external-link"]);
+      // }
 
       roomOptions = this.removeSeparator(roomOptions);
 
@@ -3037,6 +3045,8 @@ class FilesStore {
         rootFolderId,
         shared,
         title,
+        type,
+        hasDraft,
         updated,
         updatedBy,
         version,
@@ -3077,6 +3087,7 @@ class FilesStore {
       const previewUrl = canOpenPlayer
         ? this.getItemUrl(id, false, needConvert, canOpenPlayer)
         : null;
+
       const contextOptions = this.getFilesContextOptions(item);
       const isThirdPartyFolder = providerKey && id === rootFolderId;
 
@@ -3101,10 +3112,10 @@ class FilesStore {
       const href = isRecycleBinFolder
         ? null
         : previewUrl
-        ? previewUrl
-        : !isFolder
-        ? docUrl
-        : folderUrl;
+          ? previewUrl
+          : !isFolder
+            ? docUrl
+            : folderUrl;
 
       const isRoom = !!roomType;
 
@@ -3117,7 +3128,8 @@ class FilesStore {
               providerKey,
               contentLength,
               roomType,
-              isArchive
+              isArchive,
+              type
             );
 
       const defaultRoomIcon = isRoom
@@ -3127,7 +3139,8 @@ class FilesStore {
             providerKey,
             contentLength,
             roomType,
-            isArchive
+            isArchive,
+            type
           )
         : undefined;
 
@@ -3216,6 +3229,8 @@ class FilesStore {
         viewAccessibility,
         ...pluginOptions,
         inRoom,
+        type,
+        hasDraft,
         isForm,
         canCopyPublicLink,
         quotaLimit,
@@ -3265,6 +3280,7 @@ class FilesStore {
         elem !== `room-${RoomsType.CustomRoom}` &&
         elem !== `room-${RoomsType.EditingRoom}` &&
         elem !== `room-${RoomsType.ReviewRoom}` &&
+        elem !== `room-${RoomsType.FormRoom}` &&
         elem !== `room-${RoomsType.ReadOnlyRoom}` &&
         elem !== `room-${RoomsType.PublicRoom}`
     );
@@ -3304,6 +3320,8 @@ class FilesStore {
         return t("CollaborationRooms");
       case `room-${RoomsType.ReviewRoom}`:
         return t("Common:Review");
+      case `room-${RoomsType.FormRoom}`:
+        return t("FormRoom");
       case `room-${RoomsType.ReadOnlyRoom}`:
         return t("ViewOnlyRooms");
       case `room-${RoomsType.PublicRoom}`:
@@ -3366,8 +3384,8 @@ class FilesStore {
     let selection = this.selection.length
       ? this.selection
       : this.bufferSelection
-      ? [this.bufferSelection]
-      : [];
+        ? [this.bufferSelection]
+        : [];
 
     selection = JSON.parse(JSON.stringify(selection));
 
@@ -3436,8 +3454,8 @@ class FilesStore {
     const selection = this.selection.length
       ? this.selection
       : this.bufferSelection
-      ? [this.bufferSelection]
-      : [];
+        ? [this.bufferSelection]
+        : [];
 
     return selection.some((selected) => {
       if (
@@ -3589,49 +3607,49 @@ class FilesStore {
   };
 
   getShareUsers(folderIds, fileIds) {
-    return api.files.getShareFiles(fileIds, folderIds);
+    // return api.files.getShareFiles(fileIds, folderIds);
   }
 
-  setShareFiles = (
-    folderIds,
-    fileIds,
-    share,
-    notify,
-    sharingMessage,
-    externalAccess,
-    ownerId
-  ) => {
-    let externalAccessRequest = [];
-    if (fileIds.length === 1 && externalAccess !== null) {
-      externalAccessRequest = fileIds.map((id) =>
-        api.files.setExternalAccess(id, externalAccess)
-      );
-    }
+  // setShareFiles = (
+  //   folderIds,
+  //   fileIds,
+  //   share,
+  //   notify,
+  //   sharingMessage,
+  //   externalAccess,
+  //   ownerId
+  // ) => {
+  //   let externalAccessRequest = [];
+  //   if (fileIds.length === 1 && externalAccess !== null) {
+  //     externalAccessRequest = fileIds.map((id) =>
+  //       api.files.setExternalAccess(id, externalAccess)
+  //     );
+  //   }
 
-    const ownerChangeRequest = ownerId
-      ? [this.setFilesOwner(folderIds, fileIds, ownerId)]
-      : [];
+  //   const ownerChangeRequest = ownerId
+  //     ? [this.setFilesOwner(folderIds, fileIds, ownerId)]
+  //     : [];
 
-    const shareRequest = !!share.length
-      ? [
-          api.files.setShareFiles(
-            fileIds,
-            folderIds,
-            share,
-            notify,
-            sharingMessage
-          ),
-        ]
-      : [];
+  //   const shareRequest = !!share.length
+  //     ? [
+  //         api.files.setShareFiles(
+  //           fileIds,
+  //           folderIds,
+  //           share,
+  //           notify,
+  //           sharingMessage
+  //         ),
+  //       ]
+  //     : [];
 
-    const requests = [
-      ...ownerChangeRequest,
-      ...shareRequest,
-      ...externalAccessRequest,
-    ];
+  //   const requests = [
+  //     ...ownerChangeRequest,
+  //     ...shareRequest,
+  //     ...externalAccessRequest,
+  //   ];
 
-    return Promise.all(requests);
-  };
+  //   return Promise.all(requests);
+  // };
 
   markItemAsFavorite = (id) => api.files.markAsFavorite(id);
 
@@ -4047,7 +4065,7 @@ class FilesStore {
     const pathPartsRoomIndex = navigationPath.findIndex((f) => f.id === roomId);
     if (pathPartsRoomIndex === -1) return;
     navigationPath[pathPartsRoomIndex].shared = shared;
-    this.selectedFolderStore.setPathParts(navigationPath);
+    this.selectedFolderStore.setNavigationPath(navigationPath);
   };
 
   get isFiltered() {

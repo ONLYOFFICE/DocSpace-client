@@ -115,7 +115,8 @@ export default function withBadges(WrappedComponent) {
         isMutedBadge,
         isArchiveFolderRoot,
         isArchiveFolder,
-        isPublicRoom
+        isPublicRoom,
+        isRecentTab,
       } = this.props;
       const { fileStatus, access, mute } = item;
 
@@ -152,6 +153,7 @@ export default function withBadges(WrappedComponent) {
           isMutedBadge={isMutedBadge}
           onCopyPrimaryLink={this.onCopyPrimaryLink}
           isArchiveFolder={isArchiveFolder}
+          isRecentTab={isRecentTab}
         />
       );
 
@@ -179,6 +181,7 @@ export default function withBadges(WrappedComponent) {
         isPrivacyFolder,
         isArchiveFolderRoot,
         isArchiveFolder,
+        isRecentTab,
       } = treeFoldersStore;
       const { markAsRead, setPinAction, setMuteAction } = filesActionsStore;
       const { isTabletView, isDesktopClient, theme } = auth.settingsStore;
@@ -217,7 +220,8 @@ export default function withBadges(WrappedComponent) {
         isMutedBadge,
         getPrimaryLink,
         isArchiveFolder,
-        isPublicRoom: publicRoomStore.isPublicRoom
+        isPublicRoom: publicRoomStore.isPublicRoom,
+        isRecentTab,
       };
     }
   )(observer(WithBadges));

@@ -139,7 +139,7 @@ const Selector = ({
   );
 
   const onSelectAction = (item: TItem) => {
-    onSelect({
+    onSelect?.({
       ...item,
       id: item.id,
       email: item.email || "",

@@ -12,15 +12,21 @@ import { mobile, tablet } from "@docspace/shared/utils";
 
 const marginStyles = css`
   margin-left: -24px;
-  margin-right: -24px;
   padding-left: 24px;
   padding-right: 24px;
 
   @media ${tablet} {
     margin-left: -16px;
-    margin-right: -16px;
     padding-left: 16px;
     padding-right: 16px;
+  }
+`;
+
+const marginStylesUserRowContainer = css`
+  margin-right: -48px !important;
+
+  @media ${tablet} {
+    margin-right: -32px !important;
   }
 `;
 
@@ -49,6 +55,15 @@ const StyledWrapper = styled.div`
     outline: none;
     background: none !important;
   }
+
+  .user-row-container {
+    ${(props) =>
+      (props.checked || props.isActive) && marginStylesUserRowContainer};
+
+    :hover {
+      ${marginStylesUserRowContainer}
+    }
+  }
 `;
 
 StyledWrapper.defaultProps = { theme: Base };
@@ -56,23 +71,29 @@ StyledWrapper.defaultProps = { theme: Base };
 const StyledSimpleUserRow = styled(Row)`
   ${(props) => (props.checked || props.isActive) && checkedStyle};
 
+  .row_content {
+    height: 58px;
+  }
+
+  height: 59px;
+
+  border-top: ${(props) =>
+    `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+  border-bottom: ${(props) =>
+    `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+
+  box-sizing: border-box;
+  margin-top: -1px;
+
   ${!isMobile &&
   css`
     :hover {
       cursor: pointer;
       ${checkedStyle}
-
-      margin-top: -3px;
-      padding-bottom: 1px;
-      border-top: ${(props) =>
-        `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
-      border-bottom: ${(props) =>
-        `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
     }
   `}
 
   position: unset;
-  margin-top: -2px;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
   .styled-element {
@@ -119,8 +140,10 @@ const SimpleUserRow = (props) => {
         isChecked || isActive ? "row-selected" : ""
       }`}
       value={value}
+      checked={isChecked}
+      isActive={isActive}
     >
-      <div className="user-item">
+      <div className="user-item user-row-container">
         <StyledSimpleUserRow
           key={item.id}
           data={item}
@@ -134,6 +157,7 @@ const SimpleUserRow = (props) => {
           className={"user-row"}
           onRowClick={onRowClick}
           onContextClick={onRowContextClick}
+          withoutBorder={true}
         >
           <UserContent {...props} />
         </StyledSimpleUserRow>

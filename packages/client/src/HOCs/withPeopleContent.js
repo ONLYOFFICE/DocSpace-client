@@ -28,9 +28,7 @@ export default function withContent(WrappedContent) {
     };
 
     const onContentRowClick = (checked, user, addToSelection = true) => {
-      checked
-        ? setBufferSelection(user, addToSelection)
-        : setBufferSelection(null);
+      checked && setBufferSelection(user, addToSelection);
     };
 
     const checkedProps = { checked };

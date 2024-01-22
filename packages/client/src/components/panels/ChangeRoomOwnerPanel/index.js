@@ -159,7 +159,7 @@ export default inject(
 
     const { currentDeviceType } = settingsStore;
 
-    const { id } = user;
+    const { id } = userStore.user;
 
     return {
       visible: changeRoomOwnerIsVisible,

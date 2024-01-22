@@ -99,7 +99,7 @@ const ComboButton = (props: ComboButtonProps) => {
           border={`2px solid ${selectedOption.border}`}
           compact={!!selectedOption.border}
         />
-      ) : (
+      ) : type !== "onlyIcon" ? (
         <Text
           title={selectedOption?.label}
           as="div"
@@ -109,6 +109,8 @@ const ComboButton = (props: ComboButtonProps) => {
         >
           {selectedOption?.label}
         </Text>
+      ) : (
+        <></>
       )}
       <StyledArrowIcon
         displayArrow={displayArrow}
@@ -149,3 +151,4 @@ ComboButton.defaultProps = {
 };
 
 export { ComboButton };
+

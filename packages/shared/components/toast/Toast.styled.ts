@@ -254,7 +254,7 @@ const StyledDiv = styled.div<{ type: ToastType }>`
   margin: 0 15px;
 
   .toast-title {
-    font-weight: ${(props) => props.theme.toastr.title.lineHeight};
+    font-weight: ${(props) => props.theme.toastr.title.fontWeight};
     margin: ${(props) => props.theme.toastr.title.margin};
     margin-bottom: ${(props) => props.theme.toastr.title.marginBottom};
     line-height: ${(props) => props.theme.toastr.title.lineHeight};
@@ -296,3 +296,4 @@ const StyledIconButton = styled(IconButton)`
 StyledIconButton.defaultProps = { theme: Base };
 
 export { StyledCloseWrapper, StyledDiv, IconWrapper, StyledIconButton };
+

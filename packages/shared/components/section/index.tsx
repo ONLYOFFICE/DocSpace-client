@@ -17,6 +17,7 @@ import SubInfoPanelBody from "./sub-components/InfoPanelBody";
 import SubInfoPanelHeader from "./sub-components/InfoPanelHeader";
 import SubSectionFooter from "./sub-components/SectionFooter";
 import SubSectionWarning from "./sub-components/SectionWarning";
+import SubSectionSubmenu from "./sub-components/SectionSubmenu";
 
 import { SectionProps } from "./Section.types";
 import {
@@ -28,6 +29,7 @@ import {
   SECTION_INFO_PANEL_HEADER_NAME,
   SECTION_PAGING_NAME,
   SECTION_WARNING_NAME,
+  SECTION_SUBMENU_NAME,
 } from "./Section.constants";
 import { parseChildren } from "./Section.utils";
 
@@ -56,6 +58,9 @@ InfoPanelHeader.displayName = SECTION_INFO_PANEL_HEADER_NAME;
 
 const SectionWarning = ({ children }: { children: React.ReactNode }) => null;
 SectionWarning.displayName = SECTION_WARNING_NAME;
+
+const SectionSubmenu = ({ children }: { children: React.ReactNode }) => null;
+SectionSubmenu.displayName = SECTION_SUBMENU_NAME;
 
 const Section = (props: SectionProps) => {
   const {
@@ -104,11 +109,13 @@ const Section = (props: SectionProps) => {
     sectionWarningContent,
     infoPanelBodyContent,
     infoPanelHeaderContent,
+    sectionSubmenuContent,
   ]: (React.JSX.Element | null)[] = parseChildren(children);
 
   const isSectionHeaderAvailable = !!sectionHeaderContent;
   const isSectionFilterAvailable = !!sectionFilterContent;
   const isSectionPagingAvailable = !!sectionPagingContent;
+  const isSectionSubmenuAvailable = !!sectionSubmenuContent;
   const isSectionBodyAvailable =
     !!sectionBodyContent ||
     isSectionFilterAvailable ||
@@ -177,6 +184,11 @@ const Section = (props: SectionProps) => {
                 {sectionHeaderContent}
               </SubSectionHeader>
             )}
+
+          {isSectionSubmenuAvailable &&
+            currentDeviceType === DeviceType.desktop && (
+              <SubSectionSubmenu>{sectionSubmenuContent}</SubSectionSubmenu>
+            )}
           {isSectionFilterAvailable &&
             currentDeviceType === DeviceType.desktop && (
               <SubSectionFilter
@@ -210,6 +222,10 @@ const Section = (props: SectionProps) => {
               {currentDeviceType !== DeviceType.desktop && (
                 <SubSectionWarning>{sectionWarningContent}</SubSectionWarning>
               )}
+              {isSectionSubmenuAvailable &&
+                currentDeviceType !== DeviceType.desktop && (
+                  <SubSectionSubmenu>{sectionSubmenuContent}</SubSectionSubmenu>
+                )}
               {isSectionFilterAvailable &&
                 currentDeviceType !== DeviceType.desktop && (
                   <SubSectionFilter
@@ -301,5 +317,6 @@ Section.SectionPaging = SectionPaging;
 Section.InfoPanelBody = InfoPanelBody;
 Section.InfoPanelHeader = InfoPanelHeader;
 Section.SectionWarning = SectionWarning;
+Section.SectionSubmenu = SectionSubmenu;
 
 export default Section;

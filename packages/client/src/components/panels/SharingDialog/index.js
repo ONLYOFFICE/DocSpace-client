@@ -1,77 +1,116 @@
-// import React, { useEffect } from "react";
-// import { Provider as MobxProvider, inject, observer } from "mobx-react";
-// // import { getShareFiles } from "@docspace/shared/api/files";
-// import SharingPanel from "../SharingPanel";
-// import store from "client/store";
+import React, { useEffect } from "react";
+import styled from "styled-components";
+import { Provider as MobxProvider, inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
-// const { auth: authStore } = store;
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Aside } from "@docspace/shared/components/aside";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
+import { NoUserSelect } from "@docspace/shared/utils/commonStyles";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
-// const SharingDialog = ({
-//   sharingObject,
-//   onSuccess,
-//   isVisible,
-//   setSharingPanelVisible,
-//   onCancel,
-//   setSelection,
-//   theme,
-//   sharingPanelVisible,
-//   settings,
-// }) => {
-//   useEffect(() => {
-//     setSharingPanelVisible(isVisible);
-//   }, [isVisible]);
+import Share from "SRC_DIR/pages/Home/InfoPanel/Body/views/Share";
+import store from "client/store";
 
-//   useEffect(() => {
-//     setSelection([sharingObject]);
-//   }, []);
+const { auth: authStore } = store;
 
-//   return (
-//     <>
-//       {sharingPanelVisible && (
-//         <SharingPanel
-//           key="sharing-panel"
-//           uploadPanelVisible={false}
-//           onSuccess={onSuccess}
-//           onCancel={onCancel}
-//           theme={theme}
-//           settings={settings}
-//         />
-//       )}
-//     </>
-//   );
-// };
+const StyledWrapper = styled.div`
+  ${NoUserSelect}
 
-// const SharingDialogWrapper = inject(({ dialogsStore, filesStore }) => {
-//   const { getShareUsers, setSelection } = filesStore;
-//   const { setSharingPanelVisible, sharingPanelVisible } = dialogsStore;
-//   return {
-//     setSharingPanelVisible,
-//     getShareUsers,
-//     setSelection,
-//     sharingPanelVisible,
-//   };
-// })(observer(SharingDialog));
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 
-// class SharingModal extends React.Component {
-//   static getSharingSettings = (fileId) =>
-//     getShareFiles([+fileId], []).then((users) =>
-//       this.convertSharingUsers(users)
-//     );
+  .share-file_header {
+    padding: 12px 16px;
+    border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
 
-//   static convertSharingUsers = (users) =>
-//     Promise.resolve(SharingPanel.convertSharingUsers(users));
+    .share-file_heading {
+      font-size: 21px;
+      font-weight: 700;
+      line-height: 28px;
+    }
+  }
 
-//   componentDidMount() {
-//     authStore.init(true);
-//   }
+  .share-file_body {
+    padding: 16px;
+  }
 
-//   render() {
-//     return (
-//       <MobxProvider {...store}>
-//         <SharingDialogWrapper {...this.props} />
-//       </MobxProvider>
-//     );
-//   }
-// }
+  .share-file_footer {
+    margin-top: auto;
+    padding: 16px;
+    border-top: ${(props) => props.theme.filesPanels.sharing.borderBottom};
+  }
+`;
 
-// export default SharingModal;
+const SharingDialog = ({
+  sharingObject,
+  onCancel,
+  setSelection,
+  isVisible,
+}) => {
+  const { t } = useTranslation(["Files", "SharingPanel", "Common"]);
+
+  useEffect(() => {
+    setSelection([sharingObject]);
+  }, []);
+
+  return (
+    <>
+      <Backdrop
+        onClick={onCancel}
+        visible={isVisible}
+        zIndex={310}
+        isAside={true}
+        withoutBackground={false}
+        withoutBlur={false}
+      />
+      <Aside visible={isVisible} onClose={onCancel} withoutBodyScroll>
+        <StyledWrapper>
+          <Scrollbar stype="mediumBlack">
+            <div className="share-file_header">
+              <Text className="share-file_heading">{t("Files:Share")}</Text>
+            </div>
+            <div className="share-file_body">
+              <Share selection={sharingObject} />
+            </div>
+          </Scrollbar>
+          <div className="share-file_footer">
+            <Button
+              size="normal"
+              scale
+              label={t("Common:CancelButton")}
+              onClick={onCancel}
+            />
+          </div>
+        </StyledWrapper>
+      </Aside>
+    </>
+  );
+};
+
+const SharingDialogWrapper = inject(({ filesStore }) => {
+  const { getShareUsers, setSelection } = filesStore;
+
+  return {
+    getShareUsers,
+    setSelection,
+  };
+})(observer(SharingDialog));
+
+class SharingModal extends React.Component {
+  componentDidMount() {
+    authStore.init(true);
+  }
+
+  render() {
+    return (
+      <MobxProvider {...store}>
+        <SharingDialogWrapper {...this.props} />
+      </MobxProvider>
+    );
+  }
+}
+
+export default SharingModal;

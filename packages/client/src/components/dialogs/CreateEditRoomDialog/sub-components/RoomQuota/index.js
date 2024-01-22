@@ -5,7 +5,8 @@ import { inject, observer } from "mobx-react";
 import QuotaForm from "SRC_DIR/components/QuotaForm";
 
 const RoomQuota = (props) => {
-  const { setRoomParams, roomParams, defaultRoomsQuota, isEdit } = props;
+  const { setRoomParams, roomParams, defaultRoomsQuota, isEdit, isDisabled } =
+    props;
   const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
 
   useEffect(() => {
@@ -22,6 +23,7 @@ const RoomQuota = (props) => {
       checkboxLabel={t("DisableRoomQuota")}
       onSetQuotaBytesSize={onSetQuotaBytesSize}
       initialSize={isEdit ? roomParams.quota : defaultRoomsQuota}
+      isDisabled={isDisabled}
     />
   );
 };

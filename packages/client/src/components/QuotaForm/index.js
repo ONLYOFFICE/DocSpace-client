@@ -42,8 +42,8 @@ const QuotaForm = ({
     initialSize > 0
       ? getSizeFromBytes(initialSize, initPower)
       : initialSize === 0
-      ? "0"
-      : "";
+        ? "0"
+        : "";
 
   useEffect(() => {
     setSize(initSize);
@@ -182,6 +182,7 @@ const QuotaForm = ({
           label={checkboxLabel}
           isChecked={isChecked}
           onChange={onChangeCheckbox}
+          isDisabled={isDisable}
         />
       )}
 

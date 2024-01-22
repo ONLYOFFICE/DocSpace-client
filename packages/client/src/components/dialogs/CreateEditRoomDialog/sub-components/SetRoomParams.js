@@ -176,6 +176,7 @@ const SetRoomParams = ({
           setRoomParams={setRoomParams}
           roomParams={roomParams}
           isEdit={isEdit}
+          isDisabled={isDisabled}
         />
       )}
 

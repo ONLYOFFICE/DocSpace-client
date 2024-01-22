@@ -374,6 +374,10 @@ class SettingsStore {
     return window.location.pathname === "/rooms/share";
   }
 
+  get isSessionsPage() {
+    return window.location.pathname === "/portal-settings/security/sessions";
+  }
+
   setMainBarVisible = (visible) => {
     this.mainBarVisible = visible;
   };
@@ -817,6 +821,12 @@ class SettingsStore {
       this.isPublicRoom && !this.publicRoomKey ? null : this.socketUrl;
 
     return new SocketIOHelper(socketUrl, this.publicRoomKey);
+  }
+
+  get onlineSessionsSocket() {
+    const socketUrl = this.isSessionsPage && this.socketUrl;
+
+    return new SocketIOHelper(socketUrl, null);
   }
 
   getBuildVersionInfo = async () => {

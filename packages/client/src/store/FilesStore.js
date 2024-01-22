@@ -1924,6 +1924,7 @@ class FilesStore {
         // "unsubscribe",
         "delete",
         "remove-from-recent",
+        "copy-general-link",
       ];
 
       if (!canDownload) {

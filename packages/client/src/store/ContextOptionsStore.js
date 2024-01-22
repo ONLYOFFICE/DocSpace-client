@@ -1271,6 +1271,26 @@ class ContextOptionsStore {
         action: item.id,
       },
       {
+        id: "option_copy-general-link",
+        key: "copy-general-link",
+        label: t("Files:CopyGeneralLink"),
+        icon: TabletLinkReactSvgUrl,
+        disabled: !isShareable,
+        onClick: async () => {
+          const { getPrimaryFileLink, setShareChanged } =
+            this.authStore.infoPanelStore;
+
+          const primaryLink = await getPrimaryFileLink(item.id);
+          if (primaryLink) {
+            copy(primaryLink.sharedTo.shareLink);
+            item.shared
+              ? toastr.success(t("Files:LinkSuccessfullyCopied"))
+              : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
+            setShareChanged(true);
+          }
+        },
+      },
+      {
         id: "option_sharing-settings",
         key: "sharing-settings",
         label: t("Files:Share"),

@@ -1,12 +1,10 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import Article from "@docspace/shared/components/Article";
+import Article from "@docspace/shared/components/article";
 
 import ArticleHeaderContent from "./Header";
 import ArticleBodyContent from "./Body";
-
-interface ArticleWrapperProps {}
 
 const ArticleWrapper = ({
   email,

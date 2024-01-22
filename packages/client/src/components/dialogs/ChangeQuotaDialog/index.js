@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
-import { Text}  from "@docspace/shared/components/text";
+import { Text } from "@docspace/shared/components/text";
 
 import QuotaForm from "../../../components/QuotaForm";
 import StyledModalDialog from "./StyledComponent";
@@ -24,13 +24,11 @@ const ChangeQuotaDialog = (props) => {
   return (
     <StyledModalDialog visible={visible} onClose={onCloseClick}>
       <ModalDialog.Header>
-        {headerTitle ? headerTitle : "Edit quota"}
+        {headerTitle ? headerTitle : t("Common:ChangeQuota")}
       </ModalDialog.Header>
       <ModalDialog.Body>
         <Text noSelect={true}>
-          {bodyDescription
-            ? bodyDescription
-            : "Set quota to define the storage limitation."}
+          {bodyDescription ? bodyDescription : t("Common:SetQuotaStorageLimit")}
         </Text>
         <QuotaForm
           onSetQuotaBytesSize={onSetQuotaBytesSize}

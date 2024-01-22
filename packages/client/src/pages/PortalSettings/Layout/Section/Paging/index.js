@@ -4,6 +4,7 @@ import { Paging } from "@docspace/shared/components/paging";
 import Loaders from "@docspace/common/components/Loaders";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
+import { FilterLoader } from "@docspace/shared/skeletons/filter";
 
 const SectionPagingContent = ({
   fetchPeople,
@@ -147,7 +148,7 @@ const SectionPagingContent = ({
       />
     )
   ) : (
-    <Loaders.Filter />
+    <FilterLoader />
   );
 };
 

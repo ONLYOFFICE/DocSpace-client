@@ -7,50 +7,56 @@ import DefaultUserPhotoPngUrl from "PUBLIC_DIR/images/default_user_photo_size_82
 
 import { DeviceType } from "../../../enums";
 
-import { Avatar } from "../../avatar";
+import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
 import { Text } from "../../text";
 import { IconButton } from "../../icon-button";
-import { ContextMenu } from "../../context-menu";
+import { ContextMenu, TContextMenuRef } from "../../context-menu";
 
 import {
   StyledArticleProfile,
   StyledUserName,
   StyledProfileWrapper,
 } from "../Article.styled";
+import { ArticleProfileProps } from "../Article.types";
 
-const ArticleProfile = (props) => {
+const ArticleProfile = (props: ArticleProfileProps) => {
   const {
     user,
     showText,
-    getUserRole,
+
     getActions,
     onProfileClick,
     currentDeviceType,
     isVirtualKeyboardOpen,
   } = props;
-  const { t } = useTranslation("Common");
+  const { t } = useTranslation(["Common"]);
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef(null);
   const iconRef = useRef(null);
-  const buttonMenuRef = useRef(null);
-  const menuRef = useRef(null);
+  const buttonMenuRef = useRef<TContextMenuRef | null>(null);
+  const menuRef = useRef<TContextMenuRef | null>(null);
 
   const isTabletView = currentDeviceType === DeviceType.tablet;
-  const avatarSize = isTabletView ? "min" : "base";
-  const userRole = getUserRole(user);
+  const avatarSize = isTabletView ? AvatarSize.min : AvatarSize.base;
 
-  const toggle = (e, isOpen, ref) => {
-    isOpen ? ref.current.show(e) : ref.current.hide(e);
-    setIsOpen(isOpen);
+  const toggle = (
+    e: React.MouseEvent,
+    open: boolean,
+    currentRef: React.MutableRefObject<TContextMenuRef | null>,
+  ) => {
+    if (!currentRef.current) return;
+    if (open) currentRef.current.show(e);
+    else currentRef.current.hide(e);
+    setIsOpen(open);
   };
 
-  const onClick = (e) => toggle(e, !isOpen, buttonMenuRef);
+  const onClick = (e: React.MouseEvent) => toggle(e, !isOpen, buttonMenuRef);
 
-  const onAvatarClick = (e) => {
+  const onAvatarClick = (e: React.MouseEvent) => {
     if (isTabletView && !showText) {
       toggle(e, !isOpen, menuRef);
     } else {
-      onProfileClick();
+      onProfileClick?.();
     }
   };
 
@@ -58,48 +64,49 @@ const ArticleProfile = (props) => {
     setIsOpen(false);
   };
 
-  const model = getActions(t);
+  const model = getActions?.(t);
 
-  const firstName = user.firstName
+  const firstName = user?.firstName
     .split(" ")
     .filter((name) => name.trim().length > 0)
     .join(" ");
-  const lastName = user.lastName
+  const lastName = user?.lastName
     .split(" ")
     .filter((name) => name.trim().length > 0)
     .join(" ");
 
-  const displayName = user.displayName;
+  const displayName = user?.displayName;
 
   const [firstTerm, secondTerm] =
+    displayName &&
     displayName.indexOf(user.firstName) > displayName.indexOf(user.lastName)
       ? [lastName, firstName]
       : [firstName, lastName];
 
   const { interfaceDirection } = useTheme();
   const isRtl = interfaceDirection === "rtl";
-  const userAvatar = user.hasAvatar ? user.avatar : DefaultUserPhotoPngUrl;
+  const userAvatar = user?.hasAvatar ? user.avatar : DefaultUserPhotoPngUrl;
 
-  if (currentDeviceType === DeviceType.mobile) return <></>;
+  if (currentDeviceType === DeviceType.mobile) return null;
 
   return (
     <StyledProfileWrapper
       showText={showText}
       isVirtualKeyboardOpen={isVirtualKeyboardOpen}
     >
-      <StyledArticleProfile showText={showText} tablet={isTabletView}>
+      <StyledArticleProfile>
         <div ref={ref}>
           <Avatar
-            className={"profile-avatar"}
+            className="profile-avatar"
             id="user-avatar"
             size={avatarSize}
-            role={"user"}
+            role={AvatarRole.user}
             source={userAvatar}
-            userName={user.displayName}
+            userName={user?.displayName || ""}
             onClick={onAvatarClick}
           />
           <ContextMenu
-            model={model}
+            model={model || []}
             containerRef={ref}
             ref={menuRef}
             onHide={onHide}
@@ -129,13 +136,13 @@ const ArticleProfile = (props) => {
                 isFill
               />
               <ContextMenu
-                model={model}
+                model={model || []}
                 containerRef={iconRef}
                 ref={buttonMenuRef}
                 onHide={onHide}
                 scaled={false}
                 leftOffset={10}
-                topOffset={15}
+                // topOffset={15}
               />
             </div>
           </>
@@ -144,6 +151,8 @@ const ArticleProfile = (props) => {
     </StyledProfileWrapper>
   );
 };
+
+export default ArticleProfile;
 
 // export default inject(({ auth, profileActionsStore }) => {
 //   const { getActions, getUserRole, onProfileClick } = profileActionsStore;

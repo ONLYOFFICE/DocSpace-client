@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { useTheme } from "styled-components";
 
 import { getLogoFromPath } from "../../../utils";
 import { DeviceType } from "../../../enums";
@@ -19,12 +20,13 @@ const ArticleHeader = ({
   onLogoClickAction,
   isBurgerLoading,
   whiteLabelLogoUrls,
-  theme,
+
   withCustomArticleHeader,
   currentDeviceType,
   ...rest
 }: ArticleHeaderProps) => {
   const navigate = useNavigate();
+  const theme = useTheme();
 
   const onLogoClick = () => {
     onLogoClickAction?.();

@@ -15,9 +15,9 @@ const ArticleSubmitToFormGalleryAlert = ({
   const { t, ready } = useTranslation(["Common", "FormGallery"]);
   const theme = useTheme();
 
-  const onSubmitToFormGallery = () => setSubmitToGalleryDialogVisible(true);
+  const onSubmitToFormGallery = () => setSubmitToGalleryDialogVisible?.(true);
   const onClose = () =>
-    removeAlertFromArticleAlertsData(ArticleAlerts.SubmitToFormGallery);
+    removeAlertFromArticleAlertsData?.(ArticleAlerts.SubmitToFormGallery);
 
   return !ready ? (
     <RectangleSkeleton width="210px" height="112px" />

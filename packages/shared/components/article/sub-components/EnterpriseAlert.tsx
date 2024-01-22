@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { inject, observer } from "mobx-react";
+import { useTheme } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { combineUrl } from "../../../utils/combineUrl";
+import { RectangleSkeleton } from "../../../skeletons";
 
 import AlertComponent from "../../alert";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+
+import { ArticleEnterpriseAlertProps } from "../Article.types";
 
 const PROXY_BASE_URL = combineUrl(
   window.DocSpaceConfig?.proxy?.url,
@@ -14,24 +16,25 @@ const PROXY_BASE_URL = combineUrl(
 );
 
 const ArticleEnterpriseAlert = ({
-  theme,
   toggleArticleOpen,
   isLicenseDateExpired,
   trialDaysLeft,
   isTrial,
   paymentDate,
   isEnterprise,
-}) => {
+}: ArticleEnterpriseAlertProps) => {
+  const theme = useTheme();
+
   const { t, ready } = useTranslation("Common");
 
   const navigate = useNavigate();
 
-  const [isClose, setIsClose] = useState(
+  const [isClose, setIsClose] = useState<string | boolean | null>(
     localStorage.getItem("enterpriseAlertClose"),
   );
 
   const onCloseClick = () => {
-    localStorage.setItem("enterpriseAlertClose", true);
+    localStorage.setItem("enterpriseAlertClose", "true");
     setIsClose(true);
   };
 
@@ -41,7 +44,7 @@ const ArticleEnterpriseAlert = ({
       "/payments/portal-payments",
     );
     navigate(paymentPageUrl);
-    toggleArticleOpen();
+    toggleArticleOpen?.();
   };
 
   const titleFunction = () => {
@@ -75,7 +78,7 @@ const ArticleEnterpriseAlert = ({
 
   const isShowLoader = !ready;
 
-  if (isEnterprise && isClose) return <></>;
+  if (isEnterprise && isClose) return null;
 
   return isShowLoader ? (
     <RectangleSkeleton width="210px" height="88px" />
@@ -96,24 +99,26 @@ const ArticleEnterpriseAlert = ({
   );
 };
 
-export default inject(({ auth }) => {
-  const {
-    currentQuotaStore,
-    settingsStore,
-    currentTariffStatusStore,
-    isEnterprise,
-  } = auth;
-  const { isTrial } = currentQuotaStore;
-  const { theme, toggleArticleOpen } = settingsStore;
-  const { isLicenseDateExpired, trialDaysLeft, paymentDate } =
-    currentTariffStatusStore;
-  return {
-    isEnterprise,
-    isTrial,
-    isLicenseDateExpired,
-    trialDaysLeft,
-    paymentDate,
-    theme,
-    toggleArticleOpen,
-  };
-})(observer(ArticleEnterpriseAlert));
+export default ArticleEnterpriseAlert;
+
+// export default inject(({ auth }) => {
+//   const {
+//     currentQuotaStore,
+//     settingsStore,
+//     currentTariffStatusStore,
+//     isEnterprise,
+//   } = auth;
+//   const { isTrial } = currentQuotaStore;
+//   const { theme, toggleArticleOpen } = settingsStore;
+//   const { isLicenseDateExpired, trialDaysLeft, paymentDate } =
+//     currentTariffStatusStore;
+//   return {
+//     isEnterprise,
+//     isTrial,
+//     isLicenseDateExpired,
+//     trialDaysLeft,
+//     paymentDate,
+//     theme,
+//     toggleArticleOpen,
+//   };
+// })(observer(ArticleEnterpriseAlert));

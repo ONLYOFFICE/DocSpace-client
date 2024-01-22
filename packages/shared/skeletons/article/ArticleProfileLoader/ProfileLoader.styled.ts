@@ -1,7 +1,10 @@
 import styled, { css } from "styled-components";
-import { tablet } from "@docspace/shared/utils";
+import { tablet } from "../../../utils";
 
-const StyledContainer = styled.div`
+const StyledContainer = styled.div<{
+  isVirtualKeyboardOpen?: boolean;
+  showText?: boolean;
+}>`
   z-index: 209;
   position: ${(props) => (props.isVirtualKeyboardOpen ? "absolute" : "fixed")};
   bottom: 0;

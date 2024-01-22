@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
-import Zendesk, { ZendeskAPI } from "../../../../common/components/Zendesk";
-import { LIVE_CHAT_LOCAL_STORAGE_KEY } from "@docspace/shared/constants";
-import { inject, observer } from "mobx-react";
+
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
+
+import { LIVE_CHAT_LOCAL_STORAGE_KEY } from "../../../constants";
+import Zendesk, { ZendeskAPI } from "../../zendesk";
+import { ArticleZendeskProps } from "../Article.types";
 
 const baseConfig = {
   webWidget: {
@@ -23,11 +25,11 @@ const ArticleLiveChat = ({
   isMobileArticle,
   zendeskKey,
   showProgress,
-}) => {
+}: ArticleZendeskProps) => {
   const { t, ready } = useTranslation("Common");
   const { interfaceDirection } = useTheme();
   useEffect(() => {
-    //console.log("Zendesk useEffect", { withMainButton, isMobileArticle });
+    // console.log("Zendesk useEffect", { withMainButton, isMobileArticle });
     ZendeskAPI("webWidget", "updateSettings", {
       offset:
         withMainButton && isMobileArticle
@@ -40,10 +42,10 @@ const ArticleLiveChat = ({
   }, [withMainButton, isMobileArticle, showProgress]);
 
   useEffect(() => {
-    //console.log("Zendesk useEffect", { languageBaseName });
+    // console.log("Zendesk useEffect", { languageBaseName });
     ZendeskAPI("webWidget", "setLocale", languageBaseName);
 
-    ready &&
+    if (ready)
       ZendeskAPI("webWidget", "updateSettings", {
         launcher: {
           label: {
@@ -54,10 +56,10 @@ const ArticleLiveChat = ({
           },
         },
       });
-  }, [languageBaseName, ready]);
+  }, [languageBaseName, ready, t]);
 
   useEffect(() => {
-    //console.log("Zendesk useEffect", { currentColorScheme });
+    // console.log("Zendesk useEffect", { currentColorScheme });
     ZendeskAPI("webWidget", "updateSettings", {
       color: {
         theme: currentColorScheme?.main?.accent,
@@ -66,15 +68,15 @@ const ArticleLiveChat = ({
   }, [currentColorScheme?.main?.accent]);
 
   useEffect(() => {
-    //console.log("Zendesk useEffect", { email, displayName });
+    // console.log("Zendesk useEffect", { email, displayName });
     ZendeskAPI("webWidget", "prefill", {
       email: {
         value: email,
-        //readOnly: true, // optional
+        // readOnly: true, // optional
       },
       name: {
         value: displayName ? displayName.trim() : "",
-        //readOnly: true, // optional
+        // readOnly: true, // optional
       },
     });
   }, [email, displayName]);
@@ -99,36 +101,36 @@ const ArticleLiveChat = ({
       onLoaded={onZendeskLoaded}
       config={baseConfig}
     />
-  ) : (
-    <></>
-  );
+  ) : null;
 };
 
 ArticleLiveChat.displayName = "LiveChat";
 
-export default inject(({ auth, uploadDataStore }) => {
-  const { settingsStore, languageBaseName, userStore } = auth;
-  const { theme, zendeskKey, isMobileArticle } = settingsStore;
+export default ArticleLiveChat;
 
-  const { user } = userStore;
-  const { email, displayName } = user;
-  const { primaryProgressDataStore, secondaryProgressDataStore } =
-    uploadDataStore;
+// export default inject(({ auth, uploadDataStore }) => {
+// const { settingsStore, languageBaseName, userStore } = auth;
+// const { theme, zendeskKey, isMobileArticle } = settingsStore;
 
-  const { visible: primaryProgressDataVisible } = primaryProgressDataStore;
-  const { visible: secondaryProgressDataStoreVisible } =
-    secondaryProgressDataStore;
+// const { user } = userStore;
+// const { email, displayName } = user;
+// const { primaryProgressDataStore, secondaryProgressDataStore } =
+//   uploadDataStore;
 
-  const showProgress =
-    primaryProgressDataVisible || secondaryProgressDataStoreVisible;
+// const { visible: primaryProgressDataVisible } = primaryProgressDataStore;
+// const { visible: secondaryProgressDataStoreVisible } =
+//   secondaryProgressDataStore;
 
-  return {
-    email,
-    displayName,
-    languageBaseName,
-    theme,
-    zendeskKey,
-    isMobileArticle,
-    showProgress,
-  };
-})(observer(ArticleLiveChat));
+// const showProgress =
+//   primaryProgressDataVisible || secondaryProgressDataStoreVisible;
+
+// return {
+//   email,
+//   displayName,
+//   languageBaseName,
+//   theme,
+//   zendeskKey,
+//   isMobileArticle,
+//   showProgress,
+// };
+// })(observer(ArticleLiveChat));

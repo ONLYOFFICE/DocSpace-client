@@ -30,7 +30,7 @@ const ArticlePaymentAlert = ({
       "/payments/portal-payments",
     );
     navigate(paymentPageUrl);
-    toggleArticleOpen();
+    toggleArticleOpen?.();
   };
 
   const title = isFreeTariff ? (

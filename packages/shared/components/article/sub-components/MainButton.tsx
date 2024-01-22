@@ -1,8 +1,8 @@
 import React from "react";
 
-import { StyledArticleMainButton } from "../styled-article";
+import { StyledArticleMainButton } from "../Article.styled";
 
-const ArticleMainButton = (props) => {
+const ArticleMainButton = (props: { children: React.ReactNode }) => {
   return <StyledArticleMainButton {...props} />;
 };
 

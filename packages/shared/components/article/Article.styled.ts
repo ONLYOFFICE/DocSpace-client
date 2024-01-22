@@ -3,9 +3,14 @@ import styled, { css } from "styled-components";
 import MenuIcon from "PUBLIC_DIR/images/menu.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/icons/17/cross.react.svg";
 
-import { mobile, tablet, getCorrectFourValuesStyle } from "../../utils";
+import {
+  mobile,
+  tablet,
+  getCorrectFourValuesStyle,
+  desktop,
+} from "../../utils";
 
-import { Base } from "../../themes";
+import { Base, TColorScheme } from "../../themes";
 
 const StyledArticle = styled.article<{
   showText?: boolean;
@@ -339,7 +344,196 @@ const StyledArticleAlertsComponent = styled.div`
   }
 `;
 
+const StyledArticleApps = styled.div<{
+  withDevTools: boolean;
+  showText: boolean;
+}>`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  margin-top: ${(props) => (props.withDevTools ? "0" : "auto")};
+  margin-bottom: 16px;
+
+  @media ${tablet} {
+    ${(props) =>
+      props.showText &&
+      css`
+        ${({ theme }) =>
+          theme.interfaceDirection === "rtl"
+            ? `margin-right: 8px;`
+            : `margin-left: 8px;`}
+      `}
+  }
+
+  @media ${mobile} {
+    position: relative;
+    bottom: 0px;
+    margin-top: ${(props) => (props.withDevTools ? "16px" : "32px")};
+  }
+
+  .download-app-text {
+    color: ${(props) => props.theme.filesArticleBody.downloadAppList.textColor};
+  }
+
+  .download-app-list {
+    display: flex;
+    gap: 8px;
+  }
+`;
+
+StyledArticleApps.defaultProps = { theme: Base };
+
+const StyledWrapper = styled.div`
+  cursor: pointer;
+  position: relative;
+  margin-top: auto;
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  border: ${(props) => props.theme.filesArticleBody.devTools.border};
+  border-radius: 6px;
+
+  @media ${mobile} {
+    bottom: 0px;
+    margin-top: 32px;
+  }
+
+  .icon {
+    height: 16px;
+  }
+
+  .arrow {
+    height: 16px;
+    margin-inline-start: auto;
+
+    svg {
+      ${({ theme }) =>
+        theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+    }
+  }
+
+  .label {
+    color: ${(props) => props.theme.filesArticleBody.devTools.color};
+  }
+
+  svg {
+    path {
+      fill: ${(props) => props.theme.filesArticleBody.devTools.color};
+    }
+  }
+`;
+
+const StyledHideArticleMenuButton = styled.div<{
+  currentColorScheme: TColorScheme;
+  isVirtualKeyboardOpen: boolean;
+  hideProfileBlock: boolean;
+  showText: boolean;
+}>`
+  display: flex;
+  align-items: center;
+  position: ${(props) => (props.isVirtualKeyboardOpen ? "absolute" : "fixed")};
+  height: 44px;
+  z-index: 209;
+  bottom: ${(props) => (props.hideProfileBlock ? "16px" : "89px")};
+
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          right: 0;
+        `
+      : css`
+          left: 0;
+        `}
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+  min-width: ${({ showText }) => (showText ? "243px" : "60px")};
+  max-width: ${({ showText }) => (showText ? "243px" : "60px")};
+
+  @media ${desktop} {
+    display: none;
+  }
+
+  @media ${mobile} {
+    display: none;
+  }
+
+  .article-hide-menu-container {
+    align-items: center;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: 16px;
+          `
+        : css`
+            margin-left: 16px;
+          `}
+    .article-hide-menu-text {
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-right: 8px;
+            `
+          : css`
+              margin-left: 8px;
+            `}
+      color: ${({ currentColorScheme }) => currentColorScheme?.main?.accent};
+    }
+
+    @media ${tablet} {
+      display: ${({ showText }) => (showText ? "flex" : "none")};
+    }
+  }
+
+  .article-show-menu-container {
+    justify-content: center;
+    width: 100%;
+
+    @media ${tablet} {
+      display: ${({ showText }) => (showText ? "none" : "flex")};
+    }
+  }
+
+  .article-hide-menu-icon_svg,
+  .article-show-menu-icon_svg {
+    height: 20px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl" &&
+      css`
+        transform: scaleX(-1);
+      `}
+  }
+
+  .article-hide-menu-icon_svg {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl" &&
+      css`
+        transform: scaleX(-1);
+      `}
+    svg {
+      path {
+        fill: ${({ currentColorScheme }) => currentColorScheme?.main?.accent};
+      }
+    }
+  }
+
+  .article-show-menu-icon_svg {
+    svg {
+      path {
+        fill: ${(props) => props.theme.article.catalogShowText};
+      }
+    }
+  }
+`;
+
+StyledHideArticleMenuButton.defaultProps = { theme: Base };
+
 export {
+  StyledHideArticleMenuButton,
+  StyledArticleApps,
   StyledArticle,
   StyledArticleHeader,
   StyledHeading,
@@ -352,4 +546,5 @@ export {
   StyledUserName,
   StyledProfileWrapper,
   StyledArticleAlertsComponent,
+  StyledWrapper,
 };

@@ -18,7 +18,7 @@ const ArticleTeamTrainingAlert = ({
   const isShowLoader = !ready;
 
   const onClose = () =>
-    removeAlertFromArticleAlertsData(ArticleAlerts.TeamTraining);
+    removeAlertFromArticleAlertsData?.(ArticleAlerts.TeamTraining);
 
   return isShowLoader ? (
     <RectangleSkeleton width="210px" height="88px" />

@@ -19,6 +19,7 @@
   "LogoutAllActiveSessionsDescription": "All active connections except this connection will be logged out, as it is currently in use.",
   "LogoutBtn": "Log out",
   "LogoutDescription": "Note. All active connections except this connection will be logged out, as it is currently in use.",
+  "LogoutCurrentUserDescription": "Note. All active connections of {{displayName}} will be logged out.",
   "LogoutFrom": "Log out from {{platform}} {{browser}} ?",
   "MyProfile": "My profile",
   "ProviderSuccessfullyConnected": "Provider successfully connected",

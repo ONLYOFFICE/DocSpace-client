@@ -19,6 +19,7 @@
   "LogoutAllActiveSessionsDescription": "Все активные подключения, кроме этого подключения, будут отключены, так как оно используется в данный момент.",
   "LogoutBtn": "Выйти",
   "LogoutDescription": "Внимание. Все активные подключения, кроме этого, будут отключены, так как оно используется в данный момент.",
+  "LogoutCurrentUserDescription": "Внимание. Все активные подключения {{displayName}} будут отключены.",
   "LogoutFrom": "Выйти из {{platform}} {{browser}} ?",
   "MyProfile": "Мой профиль",
   "ProviderSuccessfullyConnected": "Провайдер успешно подключен",

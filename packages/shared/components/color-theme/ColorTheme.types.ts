@@ -14,6 +14,9 @@ export interface DefaultColorThemeProps {
 
 export interface FilterBlockItemTagColorTheme extends DefaultColorThemeProps {
   themeId: ThemeId.FilterBlockItemTag;
+  onClick?: (e: React.MouseEvent) => void;
+  id?: string;
+  name?: string;
 }
 
 export interface IconButtonColorTheme

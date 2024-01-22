@@ -308,9 +308,6 @@ module.exports = (env, argv) => {
           "./src/components/FilesSelector/FilesSelectorWrapper",
         "./SelectFolderDialog":
           "./src/components/FilesSelector/FilesSelectorWrapper",
-        "./PeopleSelector": "./src/components/PeopleSelector",
-        "./PeopleSelector/UserTooltip":
-          "./src/components/PeopleSelector/sub-components/UserTooltip.js",
         "./BrandingPage":
           "./src/pages/PortalSettings/categories/common/branding.js",
         "./WhiteLabelPage":

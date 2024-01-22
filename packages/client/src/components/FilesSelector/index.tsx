@@ -13,6 +13,8 @@ import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Portal } from "@docspace/shared/components/portal";
 import { toastr } from "@docspace/shared/components/toast";
 
+import { RowLoader, SearchLoader } from "@docspace/shared/skeletons/selector";
+
 import EmptyScreenFilterAltSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt.svg?url";
 import EmptyScreenFilterAltDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt_dark.svg?url";
 import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/empty_screen_alt.svg?url";
@@ -552,13 +554,13 @@ const FilesSelector = ({
       isBreadCrumbsLoading={showBreadCrumbsLoader}
       withSearch={!isRoot && items ? items.length > 0 : !isRoot && isFirstLoad}
       rowLoader={
-        <Loaders.SelectorRowLoader
+        <RowLoader
           isMultiSelect={false}
           isUser={isRoot}
           isContainer={showLoader}
         />
       }
-      searchLoader={<Loaders.SelectorSearchLoader />}
+      searchLoader={<SearchLoader />}
       breadCrumbsLoader={<Loaders.SelectorBreadCrumbsLoader />}
       alwaysShowFooter={true}
       isNextPageLoading={isNextPageLoading}

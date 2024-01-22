@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
 import { Aside } from "@docspace/shared/components/aside";
 import { Backdrop } from "@docspace/shared/components/backdrop";
-import PeopleSelector from "@docspace/client/src/components/PeopleSelector";
+import PeopleSelector from "@docspace/shared/selectors/People";
 import { withTranslation } from "react-i18next";
 import Filter from "@docspace/shared/api/people/filter";
 import { EmployeeType, DeviceType } from "@docspace/shared/enums";
@@ -45,6 +45,7 @@ const ChangeRoomOwner = (props) => {
     currentDeviceType,
     roomOwnerId,
     changeRoomOwner,
+    userId,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -120,6 +121,7 @@ const ChangeRoomOwner = (props) => {
           setIsChecked={setIsChecked}
           withOutCurrentAuthorizedUser
           filterUserId={roomOwnerId}
+          currentUserId={userId}
         />
       </Aside>
     </StyledChangeRoomOwner>
@@ -145,7 +147,7 @@ export default inject(
       setChangeRoomOwnerIsVisible,
       changeRoomOwnerData,
     } = dialogsStore;
-    const { settingsStore } = auth;
+    const { settingsStore, userStore } = auth;
 
     const { selection, bufferSelection } = filesStore;
 
@@ -157,6 +159,8 @@ export default inject(
 
     const { currentDeviceType } = settingsStore;
 
+    const { id } = user;
+
     return {
       visible: changeRoomOwnerIsVisible,
       setIsVisible: setChangeRoomOwnerIsVisible,
@@ -165,6 +169,7 @@ export default inject(
       roomOwnerId: room?.createdBy?.id,
       currentDeviceType,
       changeRoomOwner: filesActionsStore.changeRoomOwner,
+      userId: id,
     };
   }
 )(observer(withTranslation(["Files"])(ChangeRoomOwner)));

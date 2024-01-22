@@ -15,10 +15,9 @@ import AccountsFilter from "@docspace/shared/api/people/filter";
 
 import Banner from "./Banner";
 
-import Loaders from "@docspace/common/components/Loaders";
-
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
+import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
 
 const StyledBlock = styled.div`
   padding: 0 20px;
@@ -239,7 +238,7 @@ const ArticleBodyContent = (props) => {
     setIsBurgerLoading(showArticleLoader);
   }, [showArticleLoader]);
 
-  if (showArticleLoader) return <Loaders.ArticleFolder />;
+  if (showArticleLoader) return <ArticleFolderLoader />;
 
   return (
     <>

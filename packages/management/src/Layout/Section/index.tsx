@@ -69,6 +69,7 @@ const SectionWrapper = ({
 };
 
 export default inject(
+<<<<<<< HEAD
   ({
     auth,
     dialogsStore,
@@ -79,6 +80,9 @@ export default inject(
     infoPanelStore: any;
   }) => {
     console.log(auth, dialogsStore);
+=======
+  ({ auth, dialogsStore }: { auth: any; dialogsStore: any }) => {
+>>>>>>> feature/shared-article
     const { settingsStore } = auth;
     const {
       isDesktopClient: isDesktop,

@@ -305,6 +305,8 @@ const SectionHeaderContent = (props) => {
     setDisableDialogVisible,
     setLogoutAllDialogVisible,
     isSeveralSelection,
+    peopleSelection,
+    setSessionModalData,
   } = props;
   const { header, isCategoryOrHeader, isNeedPaidIcon } = state;
   const arrayOfParams = getArrayOfParams();
@@ -348,6 +350,7 @@ const SectionHeaderContent = (props) => {
 
   const onClickLogout = () => {
     setLogoutAllDialogVisible(true);
+    setSessionModalData({ displayName: peopleSelection[0].displayName });
   };
 
   const onClickDisable = () => {

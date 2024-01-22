@@ -10,6 +10,7 @@ import InsideGroup from "./InsideGroup";
 import { withTranslation } from "react-i18next";
 import { Consumer } from "@docspace/shared/utils";
 import withLoader from "SRC_DIR/HOCs/withLoader";
+import PeopleWithGroups from "SRC_DIR/pages/Home/Section/AccountsBody/PeopleWithGroups";
 
 const SectionBodyContent = (props) => {
   const {
@@ -69,15 +70,7 @@ const SectionBodyContent = (props) => {
   }, []);
 
   if (isFilteredOnlyBySearch) {
-    return (
-      <div>
-        {peopleWithGroups.length === 0
-          ? "Items not found"
-          : peopleWithGroups.map((item) => (
-              <div key={item.id}>{item.name || item.firstName}</div>
-            ))}
-      </div>
-    );
+    return <PeopleWithGroups />;
   }
 
   return (

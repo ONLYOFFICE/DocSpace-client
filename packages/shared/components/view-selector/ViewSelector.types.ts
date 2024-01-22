@@ -7,7 +7,7 @@ export type TViewSelectorOption = {
 
 export interface ViewSelectorProps {
   /** Disables the button default functionality */
-  isDisabled: boolean;
+  isDisabled?: boolean;
   /** Sets a callback function that is triggered when the button is clicked */
   onChangeView: (view: string) => void;
   /** Array that contains the view settings  */
@@ -15,5 +15,8 @@ export interface ViewSelectorProps {
   /** Current application view */
   viewAs: string;
   /** Displays only available selector options  */
-  isFilter: boolean;
+  isFilter?: boolean;
+  className?: string;
+  id?: string;
+  style?: React.CSSProperties;
 }

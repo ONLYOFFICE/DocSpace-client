@@ -70,7 +70,6 @@ const SectionWrapper = ({
 
 export default inject(
   ({ auth, dialogsStore }: { auth: any; dialogsStore: any }) => {
-    console.log(auth, dialogsStore);
     const { settingsStore } = auth;
     const {
       isDesktopClient: isDesktop,

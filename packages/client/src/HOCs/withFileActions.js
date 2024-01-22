@@ -203,7 +203,7 @@ export default function withFileActions(WrappedFileItem) {
         item.foldersCount === 0
       ) {
         setParentId(item.parentId);
-        setRoomType(item.roomType);
+        // setRoomType(item.roomType);
       }
 
       openFileAction(item);

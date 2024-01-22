@@ -481,11 +481,11 @@ export default inject(
       roomsFilter,
       setRoomsFilter,
     } = filesStore;
-    const { isRecentFolder, isRoomsFolder, isArchiveFolder, isTrashFolder } =
+    const { isRecentTab, isRoomsFolder, isArchiveFolder, isTrashFolder } =
       treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
     const withContent = canShare;
-    const sortingVisible = !isRecentFolder;
+    const sortingVisible = !isRecentTab;
     const { withPaging, isFrame, frameConfig } = auth.settingsStore;
 
     const {

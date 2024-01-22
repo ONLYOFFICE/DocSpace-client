@@ -6,7 +6,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import tryRedirectTo from "@docspace/shared/utils/tryRedirectTo";
 import { inject, observer } from "mobx-react";
 import { EmployeeActivationStatus } from "@docspace/shared/enums";
-
+import SectionWrapper from "SRC_DIR/components/Section";
 class ActivateEmail extends React.PureComponent {
   componentDidMount() {
     const { logout, updateEmailActivationStatus, linkData } = this.props;
@@ -58,11 +58,11 @@ ActivateEmail.propTypes = {
   location: PropTypes.object.isRequired,
 };
 const ActivateEmailForm = (props) => (
-  <Section>
+  <SectionWrapper>
     <Section.SectionBody>
       <ActivateEmail {...props} />
     </Section.SectionBody>
-  </Section>
+  </SectionWrapper>
 );
 
 export default inject(({ auth }) => {

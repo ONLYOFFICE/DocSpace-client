@@ -44,15 +44,15 @@ const StatusBar = (props) => {
         label={
           moment(historyFilters.deliveryDate)
             .format("DD MMM YYYY")
-            .tz(window.timezone || "") +
+            .tz(window.timezone) +
           " " +
           moment(historyFilters.deliveryFrom)
             .format("HH:mm")
-            .tz(window.timezone || "") +
+            .tz(window.timezone) +
           " - " +
           moment(historyFilters.deliveryTo)
             .format("HH:mm")
-            .tz(window.timezone || "")
+            .tz(window.timezone)
         }
         onClose={clearDate}
         onClick={clearDate}

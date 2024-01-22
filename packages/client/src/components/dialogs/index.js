@@ -40,6 +40,7 @@ import ReportDialog from "./ReportDialog";
 import PluginDialog from "./PluginDialog";
 import DeletePluginDialog from "./DeletePluginDialog";
 import DisableUserDialog from "./DisableUserDialog";
+import ShareFolderDialog from "./ShareFolderDialog";
 
 export {
   EmptyTrashDialog,
@@ -84,4 +85,5 @@ export {
   PluginDialog,
   DeletePluginDialog,
   DisableUserDialog,
+  ShareFolderDialog,
 };

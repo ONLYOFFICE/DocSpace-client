@@ -1,7 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
 
-import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Backdrop } from "../../backdrop";
 
 import { StyledControlContainer, StyledCrossIcon } from "../Article.styled";
 import { ArticleBackdropProps } from "../Article.types";
@@ -15,11 +14,6 @@ const ArticleBackdrop = ({ onClick, ...rest }: ArticleBackdropProps) => {
       <Backdrop onClick={onClick} visible zIndex={210} withBackground />
     </>
   );
-};
-
-ArticleBackdrop.propTypes = {
-  showText: PropTypes.bool,
-  onClick: PropTypes.func,
 };
 
 export default React.memo(ArticleBackdrop);

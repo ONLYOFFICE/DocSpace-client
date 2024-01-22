@@ -100,25 +100,3 @@ const ArticleEnterpriseAlert = ({
 };
 
 export default ArticleEnterpriseAlert;
-
-// export default inject(({ auth }) => {
-//   const {
-//     currentQuotaStore,
-//     settingsStore,
-//     currentTariffStatusStore,
-//     isEnterprise,
-//   } = auth;
-//   const { isTrial } = currentQuotaStore;
-//   const { theme, toggleArticleOpen } = settingsStore;
-//   const { isLicenseDateExpired, trialDaysLeft, paymentDate } =
-//     currentTariffStatusStore;
-//   return {
-//     isEnterprise,
-//     isTrial,
-//     isLicenseDateExpired,
-//     trialDaysLeft,
-//     paymentDate,
-//     theme,
-//     toggleArticleOpen,
-//   };
-// })(observer(ArticleEnterpriseAlert));

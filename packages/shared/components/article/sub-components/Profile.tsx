@@ -153,14 +153,3 @@ const ArticleProfile = (props: ArticleProfileProps) => {
 };
 
 export default ArticleProfile;
-
-// export default inject(({ auth, profileActionsStore }) => {
-//   const { getActions, getUserRole, onProfileClick } = profileActionsStore;
-
-//   return {
-//     onProfileClick,
-//     user: auth.userStore.user,
-//     getUserRole,
-//     getActions,
-//   };
-// })(observer(ArticleProfile));

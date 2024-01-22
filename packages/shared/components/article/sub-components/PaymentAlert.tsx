@@ -72,16 +72,4 @@ const ArticlePaymentAlert = ({
   );
 };
 
-// export default inject(({ auth }) => {
-//   const { currentQuotaStore, settingsStore } = auth;
-//   const { currentTariffPlanTitle } = currentQuotaStore;
-//   const { theme, toggleArticleOpen } = settingsStore;
-
-//   return {
-//     toggleArticleOpen,
-//     theme,
-//     currentTariffPlanTitle,
-//   };
-// })(observer(ArticlePaymentAlert));
-
 export default ArticlePaymentAlert;

@@ -107,30 +107,3 @@ const ArticleLiveChat = ({
 ArticleLiveChat.displayName = "LiveChat";
 
 export default ArticleLiveChat;
-
-// export default inject(({ auth, uploadDataStore }) => {
-// const { settingsStore, languageBaseName, userStore } = auth;
-// const { theme, zendeskKey, isMobileArticle } = settingsStore;
-
-// const { user } = userStore;
-// const { email, displayName } = user;
-// const { primaryProgressDataStore, secondaryProgressDataStore } =
-//   uploadDataStore;
-
-// const { visible: primaryProgressDataVisible } = primaryProgressDataStore;
-// const { visible: secondaryProgressDataStoreVisible } =
-//   secondaryProgressDataStore;
-
-// const showProgress =
-//   primaryProgressDataVisible || secondaryProgressDataStoreVisible;
-
-// return {
-//   email,
-//   displayName,
-//   languageBaseName,
-//   theme,
-//   zendeskKey,
-//   isMobileArticle,
-//   showProgress,
-// };
-// })(observer(ArticleLiveChat));

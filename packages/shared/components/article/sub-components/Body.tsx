@@ -1,5 +1,5 @@
 import React from "react";
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import { Scrollbar } from "../../scrollbar";
 
 const ArticleBody = ({ children }: { children: React.ReactNode }) => {
   return (

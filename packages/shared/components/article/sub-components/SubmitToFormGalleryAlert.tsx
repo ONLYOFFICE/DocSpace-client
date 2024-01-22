@@ -37,14 +37,3 @@ const ArticleSubmitToFormGalleryAlert = ({
 };
 
 export default ArticleSubmitToFormGalleryAlert;
-
-// export default inject(({ auth, dialogsStore }) => {
-//   const { theme, removeAlertFromArticleAlertsData } = auth.settingsStore;
-//   const { setSubmitToGalleryDialogVisible } = dialogsStore;
-
-//   return {
-//     theme,
-//     removeAlertFromArticleAlertsData,
-//     setSubmitToGalleryDialogVisible,
-//   };
-// })(observer(ArticleSubmitToFormGalleryAlert));

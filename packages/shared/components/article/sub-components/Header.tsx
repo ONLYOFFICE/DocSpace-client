@@ -91,14 +91,3 @@ const ArticleHeader = ({
 ArticleHeader.displayName = "Header";
 
 export default ArticleHeader;
-
-// export default inject(({ auth }) => {
-//   const { settingsStore } = auth;
-//   const { isBurgerLoading, whiteLabelLogoUrls, theme } = settingsStore;
-
-//   return {
-//     isBurgerLoading,
-//     whiteLabelLogoUrls,
-//     theme,
-//   };
-// })(observer(ArticleHeader));

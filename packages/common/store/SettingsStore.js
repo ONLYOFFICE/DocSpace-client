@@ -25,7 +25,6 @@ import {
   getCookie,
 } from "@docspace/shared/utils";
 import { WRONG_PORTAL_NAME_URL } from "@docspace/shared/constants";
-import { ArticleAlerts } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 //import { getFromLocalStorage } from "@docspace/client/src/pages/PortalSettings/utils";
 

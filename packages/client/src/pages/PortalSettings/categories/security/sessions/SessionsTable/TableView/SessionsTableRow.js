@@ -128,7 +128,6 @@ StyledTableRow.defaultProps = { theme: Base };
 const SessionsTableRow = (props) => {
   const {
     t,
-    id,
     item,
     element,
     checkedProps,
@@ -143,11 +142,9 @@ const SessionsTableRow = (props) => {
     country,
     city,
     ip,
-    setLogoutDialogVisible,
     setLogoutAllDialogVisible,
     setDisableDialogVisible,
     setSessionModalData,
-    isVisible,
   } = props;
 
   const onClickSessions = () => {
@@ -155,12 +152,8 @@ const SessionsTableRow = (props) => {
   };
 
   const onClickLogout = () => {
-    if (isVisible) {
-      setLogoutAllDialogVisible(true);
-    } else {
-      setLogoutDialogVisible(true);
-      setSessionModalData({ id, platform, browser });
-    }
+    setLogoutAllDialogVisible(true);
+    setSessionModalData({ displayName });
   };
 
   const onClickDisable = () => {
@@ -289,21 +282,16 @@ const SessionsTableRow = (props) => {
   );
 };
 
-export default inject(({ setup, peopleStore }) => {
-  const { isVisible } = peopleStore.selectionStore;
-
+export default inject(({ setup }) => {
   const {
-    setLogoutDialogVisible,
     setLogoutAllDialogVisible,
     setDisableDialogVisible,
     setSessionModalData,
   } = setup;
 
   return {
-    setLogoutDialogVisible,
     setLogoutAllDialogVisible,
     setDisableDialogVisible,
     setSessionModalData,
-    isVisible,
   };
 })(withContent(observer(SessionsTableRow)));

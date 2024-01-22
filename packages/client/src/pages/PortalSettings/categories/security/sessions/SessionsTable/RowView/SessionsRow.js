@@ -107,11 +107,9 @@ const SessionsRow = (props) => {
     onContentRowClick,
     element,
     isActive,
-    setLogoutDialogVisible,
     setLogoutAllDialogVisible,
     setDisableDialogVisible,
     setSessionModalData,
-    isVisible,
   } = props;
 
   const isChecked = checkedProps.checked;
@@ -129,16 +127,8 @@ const SessionsRow = (props) => {
   };
 
   const onClickLogout = () => {
-    if (isVisible) {
-      setLogoutAllDialogVisible(true);
-    } else {
-      setLogoutDialogVisible(true);
-      setSessionModalData({
-        id: item.userId,
-        platform: item.platform,
-        browser: item.browser,
-      });
-    }
+    setLogoutAllDialogVisible(true);
+    setSessionModalData({ displayName: item.displayName });
   };
 
   const onClickDisable = () => {
@@ -198,21 +188,16 @@ const SessionsRow = (props) => {
   );
 };
 
-export default inject(({ setup, peopleStore }) => {
-  const { isVisible } = peopleStore.selectionStore;
-
+export default inject(({ setup }) => {
   const {
-    setLogoutDialogVisible,
     setLogoutAllDialogVisible,
     setDisableDialogVisible,
     setSessionModalData,
   } = setup;
 
   return {
-    setLogoutDialogVisible,
     setLogoutAllDialogVisible,
     setDisableDialogVisible,
     setSessionModalData,
-    isVisible,
   };
 })(withContent(observer(SessionsRow)));

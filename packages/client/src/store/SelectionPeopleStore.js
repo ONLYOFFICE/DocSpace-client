@@ -329,7 +329,7 @@ class SelectionStore {
     return users.map((u) => u.id);
   }
 
-  get isVisible() {
+  get isSeveralSelection() {
     return this.selection.length > 1;
   }
 

@@ -186,6 +186,7 @@ const Sessions = ({
           t={t}
           visible={logoutAllDialogVisible}
           isLoading={isLoading}
+          data={sessionModalData}
           onClose={() => setLogoutAllDialogVisible(false)}
           onRemoveAllSessions={onClickRemoveAllSessions}
           onRemoveAllExceptThis={onClickRemoveAllExceptThis}

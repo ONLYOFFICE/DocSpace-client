@@ -302,12 +302,9 @@ const SectionHeaderContent = (props) => {
     isPeopleHeaderVisible,
     isPeopleHeaderChecked,
     setupSelection,
-    peopleSelection,
     setDisableDialogVisible,
-    setLogoutDialogVisible,
     setLogoutAllDialogVisible,
-    setSessionModalData,
-    isVisible,
+    isSeveralSelection,
   } = props;
   const { header, isCategoryOrHeader, isNeedPaidIcon } = state;
   const arrayOfParams = getArrayOfParams();
@@ -350,16 +347,7 @@ const SectionHeaderContent = (props) => {
   };
 
   const onClickLogout = () => {
-    if (isVisible) {
-      setLogoutAllDialogVisible(true);
-    } else {
-      setLogoutDialogVisible(true);
-      setSessionModalData({
-        id: peopleSelection[0].userId,
-        platform: peopleSelection[0].platform,
-        browser: peopleSelection[0].browser,
-      });
-    }
+    setLogoutAllDialogVisible(true);
   };
 
   const onClickDisable = () => {
@@ -372,7 +360,7 @@ const SectionHeaderContent = (props) => {
           id: "sessions",
           key: "Sessions",
           label: t("Common:Sessions"),
-          disabled: isVisible,
+          disabled: isSeveralSelection,
           onClick: onClickSessions,
           iconUrl: HistoryFinalizedReactSvgUrl,
         },
@@ -500,7 +488,7 @@ export default inject(({ auth, setup, common, peopleStore }) => {
     isHeaderChecked: isPeopleHeaderChecked,
     isHeaderVisible: isPeopleHeaderVisible,
     setSelected: peopleSetSelected,
-    isVisible,
+    isSeveralSelection,
     selection: peopleSelection,
   } = peopleStore.selectionStore;
 
@@ -529,7 +517,7 @@ export default inject(({ auth, setup, common, peopleStore }) => {
     isPeopleHeaderIndeterminate,
     isPeopleHeaderChecked,
     isPeopleHeaderVisible,
-    isVisible,
+    isSeveralSelection,
     setDisableDialogVisible,
     setLogoutDialogVisible,
     setLogoutAllDialogVisible,

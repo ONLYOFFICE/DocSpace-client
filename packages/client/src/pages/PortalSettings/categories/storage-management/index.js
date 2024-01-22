@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 import moment from "moment";
 
+import Loaders from "@docspace/common/components/Loaders";
+
 import QuotasComponent from "./Quotas";
 import StatisticsComponent from "./Statistics";
 import DiskSpaceUsedComponent from "./StorageSpaceUsed";
@@ -15,7 +17,7 @@ const StorageManagement = ({ isInit, language, init }) => {
     init();
   }, []);
 
-  if (!isInit) return;
+  if (!isInit) return <Loaders.SettingsStorageManagement />;
 
   return (
     <StyledBody>

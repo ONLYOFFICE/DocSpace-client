@@ -1,4 +1,3 @@
-
 import Header from "./HeaderLoader";
 import SectionHeader from "./SectionHeaderLoader";
 import ArticleHeader from "./ArticleHeaderLoader";
@@ -49,10 +48,10 @@ import SettingsAdmin from "./SettingsLoader/SettingsAdminLoader";
 import SettingsCommon from "./SettingsLoader/SettingsCommonLoader";
 import SettingsSMTP from "./SettingsLoader/SettingsSMTPLoader";
 import SettingsDSConnect from "./SettingsLoader/SettingsDSConnectLoader";
+import SettingsStorageManagement from "./SettingsLoader/SettingsStorageManagement";
 import EmptyContainerLoader from "./EmptyContainerLoader/EmptyContainerLoader";
 
 export default {
-
   Header,
   SectionHeader,
   ArticleHeader,
@@ -102,6 +101,7 @@ export default {
   SettingsCommon,
   SettingsSMTP,
   SettingsDSConnect,
+  SettingsStorageManagement,
 
   EmptyContainerLoader,
   Notifications,

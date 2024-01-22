@@ -6,3 +6,4 @@ export const SECTION_PAGING_NAME = "SectionPaging";
 export const SECTION_INFO_PANEL_BODY_NAME = "InfoPanelBody";
 export const SECTION_INFO_PANEL_HEADER_NAME = "InfoPanelHeader";
 export const SECTION_WARNING_NAME = "SectionWarning";
+export const SECTION_SUBMENU_NAME = "SectionSubmenu";

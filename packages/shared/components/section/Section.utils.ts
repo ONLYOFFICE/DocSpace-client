@@ -8,6 +8,7 @@ import {
   SECTION_INFO_PANEL_BODY_NAME,
   SECTION_INFO_PANEL_HEADER_NAME,
   SECTION_WARNING_NAME,
+  SECTION_SUBMENU_NAME,
 } from "./Section.constants";
 
 export const parseChildren = (children: React.JSX.Element[]) => {
@@ -19,6 +20,7 @@ export const parseChildren = (children: React.JSX.Element[]) => {
   let infoPanelBodyContent: React.JSX.Element | null = null;
   let infoPanelHeaderContent: React.JSX.Element | null = null;
   let sectionWarningContent: React.JSX.Element | null = null;
+  let sectionSubmenuContent: React.JSX.Element | null = null;
 
   React.Children.forEach(children, (child: React.JSX.Element) => {
     if (!React.isValidElement(child)) return;
@@ -54,6 +56,9 @@ export const parseChildren = (children: React.JSX.Element[]) => {
       case SECTION_WARNING_NAME:
         sectionWarningContent = props.children;
         break;
+      case SECTION_SUBMENU_NAME:
+        sectionSubmenuContent = props.children;
+        break;
       default:
         break;
     }
@@ -68,6 +73,7 @@ export const parseChildren = (children: React.JSX.Element[]) => {
     sectionWarningContent,
     infoPanelBodyContent,
     infoPanelHeaderContent,
+    sectionSubmenuContent,
   ];
 
   return arr;

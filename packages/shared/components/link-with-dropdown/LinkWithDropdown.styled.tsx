@@ -214,7 +214,7 @@ const StyledSpan = styled.span<{ $isOpen?: boolean }>`
   }
 
   ${(props) =>
-    !props.$isOpen &&
+    !props.withoutHover &&
     css`
       :hover {
         color: ${props.theme.linkWithDropdown.color.hover};
@@ -227,26 +227,6 @@ const StyledSpan = styled.span<{ $isOpen?: boolean }>`
         }
       }
     `}
-
-  ${(props) =>
-    props.$isOpen
-      ? focusColor
-      : css`
-          :focus-within,
-          :focus {
-            ${focusColor}
-          }
-        `}
-
-  :active {
-    color: ${(props) => props.theme.linkWithDropdown.color.active};
-    background: ${(props) => props.theme.linkWithDropdown.background.active};
-    .expander {
-      path {
-        fill: ${(props) => props.theme.linkWithDropdown.color.active};
-      }
-    }
-  }
 `;
 StyledSpan.defaultProps = { theme: Base };
 
@@ -257,3 +237,4 @@ export {
   StyledLinkWithDropdown,
   Caret,
 };
+

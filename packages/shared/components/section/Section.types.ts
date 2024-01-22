@@ -73,6 +73,10 @@ export interface SectionPagingProps {
   children: React.ReactNode;
 }
 
+export interface SectionSubmenuProps {
+  children: React.ReactNode;
+}
+
 export interface SectionProps {
   children: React.JSX.Element[];
   withBodyScroll?: boolean;

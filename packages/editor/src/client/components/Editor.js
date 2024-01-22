@@ -97,14 +97,14 @@ function Editor({
   config,
   //personal,
   successAuth,
-  // isSharingAccess,
+  isSharingAccess,
   user,
   doc,
   error,
-  // sharingDialog,
-  // onSDKRequestSharingSettings,
-  // loadUsersRightsList,
-  // isVisible,
+  sharingDialog,
+  onSDKRequestSharingSettings,
+  loadUsersRightsList,
+  isVisible,
   selectFileDialog,
   onSDKRequestInsertImage,
   onSDKRequestSelectSpreadsheet,
@@ -197,6 +197,7 @@ function Editor({
       fileInfo &&
       fileInfo.viewAccessibility.WebRestrictedEditing &&
       fileInfo.security.FillForms &&
+      fileInfo.rootFolderType === FolderType.Rooms &&
       !fileInfo.security.Edit &&
       !config?.document?.isLinkedForMe
     ) {
@@ -478,7 +479,12 @@ function Editor({
 
   const onSDKRequestHistory = async () => {
     try {
-      const fileHistory = await getEditHistory(fileId, doc);
+      const search = window.location.search;
+      const shareIndex = search.indexOf("share=");
+      const requestToken =
+        shareIndex > -1 ? search.substring(shareIndex + 6) : null;
+
+      const fileHistory = await getEditHistory(fileId, doc, requestToken);
       const historyLength = fileHistory.length;
 
       docEditor.refreshHistory({
@@ -506,7 +512,17 @@ function Editor({
     const version = event.data;
 
     try {
-      const versionDifference = await getEditDiff(fileId, version, doc);
+      const search = window.location.search;
+      const shareIndex = search.indexOf("share=");
+      const requestToken =
+        shareIndex > -1 ? search.substring(shareIndex + 6) : null;
+
+      const versionDifference = await getEditDiff(
+        fileId,
+        version,
+        doc,
+        requestToken
+      );
       const changesUrl = versionDifference.changesUrl;
       const previous = versionDifference.previous;
       const token = versionDifference.token;
@@ -551,9 +567,9 @@ function Editor({
 
     config?.errorMessage && docEditor?.showMessage(config.errorMessage);
 
-    // if (isSharingAccess) {
-    //   loadUsersRightsList(docEditor);
-    // }
+    if (isSharingAccess) {
+      loadUsersRightsList(docEditor);
+    }
 
     assign(window, ["ASC", "Files", "Editor", "docEditor"], docEditor); //Do not remove: it's for Back button on Mobile App
   };
@@ -796,7 +812,7 @@ function Editor({
         };
       }
 
-      let //onRequestSharingSettings,
+      let onRequestSharingSettings,
         onRequestRename,
         onRequestSaveAs,
         onRequestInsertImage,
@@ -838,9 +854,9 @@ function Editor({
         }
       }
 
-      // if (isSharingAccess) {
-      //   onRequestSharingSettings = onSDKRequestSharingSettings;
-      // }
+      if (isSharingAccess) {
+        onRequestSharingSettings = onSDKRequestSharingSettings;
+      }
 
       if (userAccessRights.Rename) {
         onRequestRename = onSDKRequestRename;
@@ -893,7 +909,7 @@ function Editor({
           onInfo: onSDKInfo,
           onWarning: onSDKWarning,
           onError: onSDKError,
-          // onRequestSharingSettings,
+          onRequestSharingSettings,
           onRequestRename,
           onMakeActionLink: onMakeActionLink,
           onRequestInsertImage,
@@ -934,7 +950,7 @@ function Editor({
       />
     ) : (
       <>
-        {/* {sharingDialog} */}
+        {sharingDialog}
         {selectFileDialog}
         {selectFolderDialog}
       </>
@@ -953,9 +969,7 @@ function Editor({
     );
 
   return (
-    <EditorWrapper
-    // isVisibleSharingDialog={isVisible}
-    >
+    <EditorWrapper isVisibleSharingDialog={isVisible}>
       {newConfig && (
         <DocumentEditor
           id={EDITOR_ID}

@@ -32,7 +32,7 @@ const FilterInput = React.memo(
     selectorLabel,
     clearAll,
 
-    isRecentFolder,
+    isRecentTab,
     removeSelectedItem,
 
     isPersonalRoom,
@@ -155,7 +155,7 @@ const FilterInput = React.memo(
             title={filterTitle}
             currentDeviceType={currentDeviceType}
           />
-          {!isRecentFolder && (
+          {!isRecentTab && (
             <SortButton
               t={t}
               id="sort-by-button"
@@ -179,7 +179,7 @@ const FilterInput = React.memo(
           {((viewSettings &&
             currentDeviceType === DeviceType.desktop &&
             viewSelectorVisible) ||
-            isRecentFolder) && (
+            isRecentTab) && (
             <ViewSelector
               id={viewAs === "tile" ? "view-switch--row" : "view-switch--tile"}
               style={styleViewSelector}

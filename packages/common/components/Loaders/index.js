@@ -47,6 +47,8 @@ import SettingsSMTP from "./SettingsLoader/SettingsSMTPLoader";
 import SettingsDSConnect from "./SettingsLoader/SettingsDSConnectLoader";
 import EmptyContainerLoader from "./EmptyContainerLoader/EmptyContainerLoader";
 
+import SectionSubmenuLoader from "./SectionSubmenuLoader";
+
 export default {
   Header,
   SectionHeader,
@@ -97,4 +99,6 @@ export default {
 
   EmptyContainerLoader,
   Notifications,
+
+  SectionSubmenuLoader,
 };

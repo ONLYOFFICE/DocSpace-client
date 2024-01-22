@@ -14,6 +14,7 @@ import {
   iconSize96,
 } from "@docspace/shared/utils/image-helpers";
 
+import { getIconPathByFolderType } from "@docspace/shared/utils/common";
 class SettingsStore {
   thirdPartyStore;
   treeFoldersStore;
@@ -272,7 +273,8 @@ class SettingsStore {
     providerKey = null,
     contentLength = null,
     roomType = null,
-    isArchive = null
+    isArchive = null,
+    folderType = null
   ) => {
     if (fileExst || contentLength) {
       const isArchiveItem = this.isArchive(fileExst);
@@ -291,12 +293,19 @@ class SettingsStore {
       return icon;
     } else if (roomType) {
       return this.getRoomsIcon(roomType, isArchive, 32);
+    } else if (folderType) {
+      return this.getIconByFolderType(folderType, size);
     } else {
       return this.getFolderIcon(providerKey, size);
     }
   };
 
-  getIconBySize = (size, path) => {
+  getIconByFolderType = (folderType, size = 32) => {
+    const path = getIconPathByFolderType(folderType);
+    return this.getIconBySize(size, path);
+  };
+
+  getIconBySize = (size, path = 32) => {
     switch (+size) {
       case 24:
         return iconSize24.get(path);
@@ -334,6 +343,8 @@ class SettingsStore {
         case RoomsType.PublicRoom:
           path = "public.svg";
           break;
+        case RoomsType.FormRoom:
+          path = "form.svg";
       }
     }
 

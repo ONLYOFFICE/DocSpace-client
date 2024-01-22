@@ -172,23 +172,25 @@ class PeopleTableHeader extends React.Component {
   }
 }
 
-export default inject(({ auth, peopleStore, clientLoadingStore }) => {
-  const { filterStore } = peopleStore;
+export default inject(
+  ({ auth, peopleStore, infoPanelStore, clientLoadingStore }) => {
+    const { filterStore } = peopleStore;
 
-  const { filter } = filterStore;
+    const { filter } = filterStore;
 
-  const { isVisible: infoPanelVisible } = auth.infoPanelStore;
-  const { withPaging } = auth.settingsStore;
+    const { isVisible: infoPanelVisible } = infoPanelStore;
+    const { withPaging } = auth.settingsStore;
 
-  return {
-    filter,
+    return {
+      filter,
 
-    setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
-    userId: auth.userStore.user?.id,
-    infoPanelVisible,
-    withPaging,
-  };
-})(
+      setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
+      userId: auth.userStore.user?.id,
+      infoPanelVisible,
+      withPaging,
+    };
+  }
+)(
   withTranslation(["People", "Common", "PeopleTranslations"])(
     observer(PeopleTableHeader)
   )

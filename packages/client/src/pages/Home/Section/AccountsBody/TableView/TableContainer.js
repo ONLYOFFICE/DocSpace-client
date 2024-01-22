@@ -201,7 +201,7 @@ const Table = ({
 };
 
 export default inject(
-  ({ peopleStore, auth, accessRightsStore, filesStore }) => {
+  ({ peopleStore, auth, accessRightsStore, infoPanelStore, filesStore }) => {
     const {
       usersStore,
       filterStore,
@@ -213,7 +213,7 @@ export default inject(
     const { peopleList, hasMoreAccounts, fetchMoreAccounts } = usersStore;
     const { filterTotal, isFiltered } = filterStore;
 
-    const { isVisible: infoPanelVisible } = auth.infoPanelStore;
+    const { isVisible: infoPanelVisible } = infoPanelStore;
     const { isAdmin, isOwner, id: userId } = auth.userStore.user;
 
     const { canChangeUserType } = accessRightsStore;

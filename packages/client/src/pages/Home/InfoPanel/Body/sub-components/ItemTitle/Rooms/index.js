@@ -102,13 +102,13 @@ const RoomsItemHeader = ({
 };
 
 export default inject(
-  ({ auth, dialogsStore, selectedFolderStore, filesStore }) => {
+  ({ auth, dialogsStore, selectedFolderStore, filesStore, infoPanelStore }) => {
     const {
       selection: selectionItem,
       selectionParentRoom,
       getIsRooms,
       roomsView,
-    } = auth.infoPanelStore;
+    } = infoPanelStore;
 
     const isShowParentRoom =
       getIsRooms() &&
@@ -126,8 +126,8 @@ export default inject(
     return {
       selection,
       roomsView,
-      selectionParentRoom: auth.infoPanelStore.selectionParentRoom,
-      setIsMobileHidden: auth.infoPanelStore.setIsMobileHidden,
+      selectionParentRoom: infoPanelStore.selectionParentRoom,
+      setIsMobileHidden: infoPanelStore.setIsMobileHidden,
 
       isGracePeriod: auth.currentTariffStatusStore.isGracePeriod,
 
@@ -137,7 +137,7 @@ export default inject(
 
       isPublicRoomType:
         (selectedFolderStore.roomType ??
-          auth.infoPanelStore.selectionParentRoom?.roomType) ===
+          infoPanelStore.selectionParentRoom?.roomType) ===
         RoomsType.PublicRoom,
 
       setSelected: filesStore.setSelected,

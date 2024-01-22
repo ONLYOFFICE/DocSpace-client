@@ -33,13 +33,13 @@ const PROFILE_SELF_URL = "/profile";
 
 class AccountsContextOptionsStore {
   authStore = null;
-
+  infoPanelStore = null;
   peopleStore = null;
 
-  constructor(peopleStore) {
+  constructor(peopleStore, infoPanelStore) {
     makeAutoObservable(this);
     this.authStore = peopleStore.authStore;
-
+    this.infoPanelStore = infoPanelStore;
     this.peopleStore = peopleStore;
   }
 
@@ -192,7 +192,7 @@ class AccountsContextOptionsStore {
 
     const { isOwner } = this.authStore.userStore.user;
 
-    const { setIsVisible, isVisible } = this.authStore.infoPanelStore;
+    const { setIsVisible, isVisible } = this.infoPanelStore;
 
     const options = [];
 
@@ -391,7 +391,7 @@ class AccountsContextOptionsStore {
   };
 
   onDetailsClick = (item) => {
-    const { setIsVisible } = this.authStore.infoPanelStore;
+    const { setIsVisible } = this.infoPanelStore;
     const { setBufferSelection } = this.peopleStore.selectionStore;
     setBufferSelection(item);
     setIsVisible(true);

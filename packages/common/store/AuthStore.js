@@ -6,7 +6,6 @@ import SettingsStore from "./SettingsStore";
 import BannerStore from "./BannerStore";
 import UserStore from "./UserStore";
 import TfaStore from "./TfaStore";
-import InfoPanelStore from "./InfoPanelStore";
 import {
   logout as logoutDesktop,
   desktopConstants,
@@ -27,7 +26,6 @@ class AuthStore {
 
   settingsStore = null;
   tfaStore = null;
-  infoPanelStore = null;
 
   isLoading = false;
   version = null;
@@ -46,7 +44,7 @@ class AuthStore {
 
     this.settingsStore = new SettingsStore();
     this.tfaStore = new TfaStore();
-    this.infoPanelStore = new InfoPanelStore();
+
     this.currentQuotaStore = new CurrentQuotasStore();
     this.currentTariffStatusStore = new CurrentTariffStatusStore(this);
     this.paymentQuotasStore = new PaymentQuotasStore();

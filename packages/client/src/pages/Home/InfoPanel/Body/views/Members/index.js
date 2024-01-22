@@ -440,6 +440,7 @@ export default inject(
     publicRoomStore,
     treeFoldersStore,
     dialogsStore,
+    infoPanelStore,
   }) => {
     const {
       selectionParentRoom,
@@ -455,7 +456,7 @@ export default inject(
       setMembersList,
       selection: selectionItem,
       getIsRooms,
-    } = auth.infoPanelStore;
+    } = infoPanelStore;
     const {
       getRoomMembers,
       getRoomLinks,
@@ -509,8 +510,8 @@ export default inject(
       selectionItem?.length > 1
         ? null
         : isShowParentRoom
-        ? selectionParentRoom
-        : selectionItem;
+          ? selectionParentRoom
+          : selectionItem;
 
     return {
       setView,

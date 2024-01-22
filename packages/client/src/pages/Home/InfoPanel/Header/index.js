@@ -207,52 +207,54 @@ const InfoPanelHeaderContent = (props) => {
   );
 };
 
-export default inject(({ auth, treeFoldersStore, pluginStore }) => {
-  const { infoPanelItemsList } = pluginStore;
+export default inject(
+  ({ auth, treeFoldersStore, infoPanelStore, pluginStore }) => {
+    const { infoPanelItemsList } = pluginStore;
 
-  const {
-    selection,
-    setIsVisible,
-    roomsView,
-    fileView,
-    setView,
-    getIsFiles,
-    getIsRooms,
-    getIsGallery,
-    getIsAccounts,
-    getIsTrash,
-    resetView,
-    //selectionParentRoom,
-  } = auth.infoPanelStore;
+    const {
+      selection,
+      setIsVisible,
+      roomsView,
+      fileView,
+      setView,
+      getIsFiles,
+      getIsRooms,
+      getIsGallery,
+      getIsAccounts,
+      getIsTrash,
+      resetView,
+      //selectionParentRoom,
+    } = infoPanelStore;
 
-  const { myRoomsId, archiveRoomsId } = treeFoldersStore;
+    const { myRoomsId, archiveRoomsId } = treeFoldersStore;
 
-  const { enablePlugins } = auth.settingsStore;
+    const { enablePlugins } = auth.settingsStore;
 
-  return {
-    selection,
-    setIsVisible,
-    roomsView,
-    fileView,
-    setView,
-    getIsFiles,
-    getIsRooms,
-    getIsGallery,
-    getIsAccounts,
-    getIsTrash,
-    infoPanelItemsList,
-    resetView,
+    return {
+      selection,
+      setIsVisible,
+      roomsView,
+      fileView,
+      setView,
+      getIsFiles,
+      getIsRooms,
+      getIsGallery,
+      getIsAccounts,
+      getIsTrash,
+      infoPanelItemsList,
+      resetView,
 
-    myRoomsId,
-    archiveRoomsId,
+      myRoomsId,
+      archiveRoomsId,
 
-    enablePlugins,
+      enablePlugins,
 
-    //  rootFolderType,
+      //  rootFolderType,
 
-    //selectionParentRoom,
-  };
-})(
+      //selectionParentRoom,
+    };
+  }
+)(
   withTranslation(["Common", "InfoPanel"])(
     InfoPanelHeaderContent
     // withLoader(observer(InfoPanelHeaderContent))(

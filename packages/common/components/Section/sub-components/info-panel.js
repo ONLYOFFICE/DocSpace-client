@@ -230,9 +230,9 @@ StyledInfoPanelWrapper.defaultProps = { theme: Base };
 StyledInfoPanel.defaultProps = { theme: Base };
 InfoPanel.defaultProps = { theme: Base };
 
-export default inject(({ auth, dialogsStore }) => {
+export default inject(({ auth, dialogsStore, infoPanelStore }) => {
   const { isVisible, isMobileHidden, setIsVisible, getCanDisplay } =
-    auth.infoPanelStore;
+    infoPanelStore;
 
   const { currentDeviceType } = auth.settingsStore;
 

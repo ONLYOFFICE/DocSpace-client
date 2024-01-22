@@ -467,8 +467,9 @@ export default inject(
     tableStore,
     publicRoomStore,
     clientLoadingStore,
+    infoPanelStore,
   }) => {
-    const { isVisible: infoPanelVisible } = auth.infoPanelStore;
+    const { isVisible: infoPanelVisible } = infoPanelStore;
 
     const {
       isHeaderChecked,

@@ -259,47 +259,49 @@ const Table = ({
   );
 };
 
-export default inject(({ filesStore, treeFoldersStore, auth, tableStore }) => {
-  const { isVisible: infoPanelVisible } = auth.infoPanelStore;
+export default inject(
+  ({ filesStore, infoPanelStore, treeFoldersStore, auth, tableStore }) => {
+    const { isVisible: infoPanelVisible } = infoPanelStore;
 
-  const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
-  const isRooms = isRoomsFolder || isArchiveFolder;
+    const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
+    const isRooms = isRoomsFolder || isArchiveFolder;
 
-  const { columnStorageName, columnInfoPanelStorageName } = tableStore;
+    const { columnStorageName, columnInfoPanelStorageName } = tableStore;
 
-  const {
-    filesList,
-    viewAs,
-    setViewAs,
-    setFirsElemChecked,
-    setHeaderBorder,
-    fetchMoreFiles,
-    hasMoreFiles,
-    filterTotal,
-    roomsFilterTotal,
-    highlightFile,
-  } = filesStore;
+    const {
+      filesList,
+      viewAs,
+      setViewAs,
+      setFirsElemChecked,
+      setHeaderBorder,
+      fetchMoreFiles,
+      hasMoreFiles,
+      filterTotal,
+      roomsFilterTotal,
+      highlightFile,
+    } = filesStore;
 
-  const { withPaging, theme, currentDeviceType } = auth.settingsStore;
+    const { withPaging, theme, currentDeviceType } = auth.settingsStore;
 
-  return {
-    filesList,
-    viewAs,
-    setViewAs,
-    setFirsElemChecked,
-    setHeaderBorder,
-    theme,
-    userId: auth.userStore.user?.id,
-    infoPanelVisible,
-    fetchMoreFiles,
-    hasMoreFiles,
-    filterTotal: isRooms ? roomsFilterTotal : filterTotal,
-    isRooms,
-    isTrashFolder,
-    withPaging,
-    columnStorageName,
-    columnInfoPanelStorageName,
-    highlightFile,
-    currentDeviceType,
-  };
-})(observer(Table));
+    return {
+      filesList,
+      viewAs,
+      setViewAs,
+      setFirsElemChecked,
+      setHeaderBorder,
+      theme,
+      userId: auth.userStore.user?.id,
+      infoPanelVisible,
+      fetchMoreFiles,
+      hasMoreFiles,
+      filterTotal: isRooms ? roomsFilterTotal : filterTotal,
+      isRooms,
+      isTrashFolder,
+      withPaging,
+      columnStorageName,
+      columnInfoPanelStorageName,
+      highlightFile,
+      currentDeviceType,
+    };
+  }
+)(observer(Table));

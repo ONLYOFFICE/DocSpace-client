@@ -138,12 +138,12 @@ const ChangeUserTypeEvent = ({
   );
 };
 
-export default inject(({ auth, dialogsStore, peopleStore }) => {
+export default inject(({ auth, dialogsStore, peopleStore, infoPanelStore }) => {
   const {
     changeUserTypeDialogVisible: visible,
     setChangeUserTypeDialogVisible: setVisible,
   } = dialogsStore;
-  const { isRoomAdmin, infoPanelStore } = auth;
+  const { isRoomAdmin } = auth;
   const { setSelection } = infoPanelStore;
   const { dialogStore, filterStore, usersStore } = peopleStore;
 

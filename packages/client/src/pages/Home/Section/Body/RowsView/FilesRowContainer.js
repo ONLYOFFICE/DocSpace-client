@@ -136,35 +136,37 @@ const FilesRowContainer = ({
   );
 };
 
-export default inject(({ filesStore, auth, treeFoldersStore }) => {
-  const {
-    filesList,
-    viewAs,
-    setViewAs,
-    filterTotal,
-    fetchMoreFiles,
-    hasMoreFiles,
-    roomsFilterTotal,
-    highlightFile,
-  } = filesStore;
-  const { isVisible: infoPanelVisible } = auth.infoPanelStore;
-  const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
-  const { withPaging, currentDeviceType } = auth.settingsStore;
+export default inject(
+  ({ filesStore, auth, infoPanelStore, treeFoldersStore }) => {
+    const {
+      filesList,
+      viewAs,
+      setViewAs,
+      filterTotal,
+      fetchMoreFiles,
+      hasMoreFiles,
+      roomsFilterTotal,
+      highlightFile,
+    } = filesStore;
+    const { isVisible: infoPanelVisible } = infoPanelStore;
+    const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
+    const { withPaging, currentDeviceType } = auth.settingsStore;
 
-  const isRooms = isRoomsFolder || isArchiveFolder;
+    const isRooms = isRoomsFolder || isArchiveFolder;
 
-  return {
-    filesList,
-    viewAs,
-    setViewAs,
-    infoPanelVisible,
-    filterTotal: isRooms ? roomsFilterTotal : filterTotal,
-    fetchMoreFiles,
-    hasMoreFiles,
-    isRooms,
-    isTrashFolder,
-    withPaging,
-    highlightFile,
-    currentDeviceType,
-  };
-})(observer(FilesRowContainer));
+    return {
+      filesList,
+      viewAs,
+      setViewAs,
+      infoPanelVisible,
+      filterTotal: isRooms ? roomsFilterTotal : filterTotal,
+      fetchMoreFiles,
+      hasMoreFiles,
+      isRooms,
+      isTrashFolder,
+      withPaging,
+      highlightFile,
+      currentDeviceType,
+    };
+  }
+)(observer(FilesRowContainer));

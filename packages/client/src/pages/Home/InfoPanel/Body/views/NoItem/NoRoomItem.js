@@ -28,9 +28,9 @@ const NoRoomItem = ({ t, theme, setMembersList }) => {
   );
 };
 
-export default inject(({ auth }) => {
+export default inject(({ auth, infoPanelStore }) => {
   return {
     theme: auth.settingsStore.theme,
-    setMembersList: auth.infoPanelStore.setMembersList,
+    setMembersList: infoPanelStore.setMembersList,
   };
 })(observer(NoRoomItem));

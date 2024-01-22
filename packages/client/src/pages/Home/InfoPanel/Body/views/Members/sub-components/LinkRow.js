@@ -56,9 +56,7 @@ const LinkRow = (props) => {
 
   const isLocked = !!password;
   const expiryDate = !!expirationDate;
-  const date = moment(expirationDate)
-    .tz(window.timezone)
-    .format("LLL");
+  const date = moment(expirationDate).tz(window.timezone).format("LLL");
 
   const tooltipContent = isExpired
     ? t("Translations:LinkHasExpiredAndHasBeenDisabled")
@@ -258,8 +256,14 @@ const LinkRow = (props) => {
 };
 
 export default inject(
-  ({ auth, dialogsStore, publicRoomStore, treeFoldersStore }) => {
-    const { selectionParentRoom } = auth.infoPanelStore;
+  ({
+    auth,
+    dialogsStore,
+    publicRoomStore,
+    treeFoldersStore,
+    infoPanelStore,
+  }) => {
+    const { selectionParentRoom } = infoPanelStore;
     const { theme } = auth.settingsStore;
 
     const {

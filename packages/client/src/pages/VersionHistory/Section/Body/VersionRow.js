@@ -318,43 +318,45 @@ const VersionRow = (props) => {
   );
 };
 
-export default inject(({ auth, versionHistoryStore, pluginStore }) => {
-  const { user } = auth.userStore;
-  const { openUser, setIsVisible } = auth.infoPanelStore;
-  const { culture, isTabletView, enablePlugins, currentDeviceType } =
-    auth.settingsStore;
-  const language = (user && user.cultureName) || culture || "en";
+export default inject(
+  ({ auth, versionHistoryStore, pluginStore, infoPanelStore }) => {
+    const { user } = auth.userStore;
+    const { openUser, setIsVisible } = infoPanelStore;
+    const { culture, isTabletView, enablePlugins, currentDeviceType } =
+      auth.settingsStore;
+    const language = (user && user.cultureName) || culture || "en";
 
-  const { fileItemsList } = pluginStore;
+    const { fileItemsList } = pluginStore;
 
-  const {
-    // markAsVersion,
-    restoreVersion,
-    updateCommentVersion,
-    isEditing,
-    isEditingVersion,
-    fileSecurity,
-  } = versionHistoryStore;
+    const {
+      // markAsVersion,
+      restoreVersion,
+      updateCommentVersion,
+      isEditing,
+      isEditingVersion,
+      fileSecurity,
+    } = versionHistoryStore;
 
-  const isEdit = isEditingVersion || isEditing;
-  const canChangeVersionFileHistory = !isEdit && fileSecurity?.EditHistory;
+    const isEdit = isEditingVersion || isEditing;
+    const canChangeVersionFileHistory = !isEdit && fileSecurity?.EditHistory;
 
-  return {
-    currentDeviceType,
-    fileItemsList,
-    enablePlugins,
-    theme: auth.settingsStore.theme,
-    culture: language,
-    isTabletView,
-    // markAsVersion,
-    restoreVersion,
-    updateCommentVersion,
-    isEditing: isEdit,
-    canChangeVersionFileHistory,
-    openUser,
-    setIsVisible,
-  };
-})(
+    return {
+      currentDeviceType,
+      fileItemsList,
+      enablePlugins,
+      theme: auth.settingsStore.theme,
+      culture: language,
+      isTabletView,
+      // markAsVersion,
+      restoreVersion,
+      updateCommentVersion,
+      isEditing: isEdit,
+      canChangeVersionFileHistory,
+      openUser,
+      setIsVisible,
+    };
+  }
+)(
   withTranslation(["VersionHistory", "Common", "Translations"])(
     observer(VersionRow)
   )

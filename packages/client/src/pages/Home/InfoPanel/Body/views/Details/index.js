@@ -136,27 +136,29 @@ const Details = ({
   );
 };
 
-export default inject(({ auth, filesStore, filesActionsStore }) => {
-  const { userStore } = auth;
-  const { selection, getInfoPanelItemIcon, openUser } = auth.infoPanelStore;
-  const { createThumbnail } = filesStore;
-  const { personal, culture } = auth.settingsStore;
-  const { user } = userStore;
+export default inject(
+  ({ auth, filesStore, filesActionsStore, infoPanelStore }) => {
+    const { userStore } = auth;
+    const { selection, getInfoPanelItemIcon, openUser } = infoPanelStore;
+    const { createThumbnail } = filesStore;
+    const { personal, culture } = auth.settingsStore;
+    const { user } = userStore;
 
-  const { selectTag } = filesActionsStore;
+    const { selectTag } = filesActionsStore;
 
-  const isVisitor = user.isVisitor;
-  const isCollaborator = user.isCollaborator;
+    const isVisitor = user.isVisitor;
+    const isCollaborator = user.isCollaborator;
 
-  return {
-    personal,
-    culture,
-    selection,
-    createThumbnail,
-    getInfoPanelItemIcon,
-    openUser,
-    isVisitor,
-    isCollaborator,
-    selectTag,
-  };
-})(withTranslation(["InfoPanel", "Common", "Translations", "Files"])(Details));
+    return {
+      personal,
+      culture,
+      selection,
+      createThumbnail,
+      getInfoPanelItemIcon,
+      openUser,
+      isVisitor,
+      isCollaborator,
+      selectTag,
+    };
+  }
+)(withTranslation(["InfoPanel", "Common", "Translations", "Files"])(Details));

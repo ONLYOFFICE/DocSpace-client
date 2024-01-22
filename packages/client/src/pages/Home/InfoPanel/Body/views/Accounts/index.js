@@ -225,24 +225,26 @@ const Accounts = ({
   );
 };
 
-export default inject(({ auth, peopleStore, accessRightsStore }) => {
-  const { isOwner, isAdmin, id: selfId } = auth.userStore.user;
-  const { changeType: changeUserType, usersStore } = peopleStore;
-  const { canChangeUserType } = accessRightsStore;
+export default inject(
+  ({ auth, peopleStore, accessRightsStore, infoPanelStore }) => {
+    const { isOwner, isAdmin, id: selfId } = auth.userStore.user;
+    const { changeType: changeUserType, usersStore } = peopleStore;
+    const { canChangeUserType } = accessRightsStore;
 
-  const { setSelection } = auth.infoPanelStore;
+    const { setSelection } = infoPanelStore;
 
-  return {
-    isOwner,
-    isAdmin,
-    changeUserType,
-    selfId,
-    canChangeUserType,
-    loading: usersStore.operationRunning,
-    getPeopleListItem: usersStore.getPeopleListItem,
-    setSelection,
-  };
-})(
+    return {
+      isOwner,
+      isAdmin,
+      changeUserType,
+      selfId,
+      canChangeUserType,
+      loading: usersStore.operationRunning,
+      getPeopleListItem: usersStore.getPeopleListItem,
+      setSelection,
+    };
+  }
+)(
   withTranslation([
     "People",
     "InfoPanel",

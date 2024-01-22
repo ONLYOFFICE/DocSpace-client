@@ -425,7 +425,7 @@ Section.defaultProps = {
   settingsStudio: false,
 };
 
-export default inject(({ auth }) => {
+export default inject(({ auth, infoPanelStore }) => {
   const { settingsStore } = auth;
   const {
     isHeaderVisible,
@@ -436,7 +436,7 @@ export default inject(({ auth }) => {
     currentDeviceType,
   } = settingsStore;
 
-  const { isScrollLocked: isInfoPanelScrollLocked } = auth.infoPanelStore;
+  const { isScrollLocked: isInfoPanelScrollLocked } = infoPanelStore;
 
   return {
     isTabletView,

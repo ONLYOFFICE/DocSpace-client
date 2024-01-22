@@ -120,23 +120,25 @@ const DeleteLinkDialog = withTranslation(["Common", "Files"])(
   DeleteLinkDialogComponent
 );
 
-export default inject(({ auth, dialogsStore, publicRoomStore, filesStore }) => {
-  const { selectionParentRoom } = auth.infoPanelStore;
-  const {
-    deleteLinkDialogVisible: visible,
-    setDeleteLinkDialogVisible: setIsVisible,
-    linkParams,
-  } = dialogsStore;
-  const { editExternalLink, deleteExternalLink } = publicRoomStore;
+export default inject(
+  ({ auth, dialogsStore, publicRoomStore, filesStore, infoPanelStore }) => {
+    const { selectionParentRoom } = infoPanelStore;
+    const {
+      deleteLinkDialogVisible: visible,
+      setDeleteLinkDialogVisible: setIsVisible,
+      linkParams,
+    } = dialogsStore;
+    const { editExternalLink, deleteExternalLink } = publicRoomStore;
 
-  return {
-    visible,
-    setIsVisible,
-    roomId: selectionParentRoom.id,
-    link: linkParams.link,
-    editExternalLink,
-    deleteExternalLink,
-    isPublicRoomType: selectionParentRoom.roomType === RoomsType.PublicRoom,
-    setRoomShared: filesStore.setRoomShared,
-  };
-})(observer(DeleteLinkDialog));
+    return {
+      visible,
+      setIsVisible,
+      roomId: selectionParentRoom.id,
+      link: linkParams.link,
+      editExternalLink,
+      deleteExternalLink,
+      isPublicRoomType: selectionParentRoom.roomType === RoomsType.PublicRoom,
+      setRoomShared: filesStore.setRoomShared,
+    };
+  }
+)(observer(DeleteLinkDialog));

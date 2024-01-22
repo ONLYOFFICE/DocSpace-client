@@ -126,6 +126,7 @@ export default function withQuickButtons(WrappedComponent) {
       publicRoomStore,
       treeFoldersStore,
       filesStore,
+      infoPanelStore,
     }) => {
       const { lockFileAction, setFavoriteAction, onSelectItem } =
         filesActionsStore;
@@ -143,7 +144,7 @@ export default function withQuickButtons(WrappedComponent) {
         isTrashFolder || isArchiveFolderRoot || isPersonalFolderRoot;
 
       const { isPublicRoom } = publicRoomStore;
-      const { getPrimaryFileLink, setShareChanged } = auth.infoPanelStore;
+      const { getPrimaryFileLink, setShareChanged } = infoPanelStore;
 
       return {
         theme: auth.settingsStore.theme,

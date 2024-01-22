@@ -57,7 +57,7 @@ class FilesStore {
   filesSettingsStore;
   thirdPartyStore;
   clientLoadingStore;
-
+  infoPanelStore;
   accessRightsStore;
   publicRoomStore;
 
@@ -154,7 +154,8 @@ class FilesStore {
     accessRightsStore,
     clientLoadingStore,
     pluginStore,
-    publicRoomStore
+    publicRoomStore,
+    infoPanelStore
   ) {
     const pathname = window.location.pathname.toLowerCase();
     this.isEditor = pathname.indexOf("doceditor") !== -1;
@@ -170,6 +171,7 @@ class FilesStore {
     this.clientLoadingStore = clientLoadingStore;
     this.pluginStore = pluginStore;
     this.publicRoomStore = publicRoomStore;
+    this.infoPanelStore = infoPanelStore;
 
     this.roomsController = new AbortController();
     this.filesController = new AbortController();
@@ -219,7 +221,7 @@ class FilesStore {
           } else if (opt.cmd === "delete") {
             this.selectedFolderStore[opt.type + "sCount"]--;
           }
-          this.authStore.infoPanelStore.reloadSelection();
+          this.infoPanelStore.reloadSelection();
         });
       }
 

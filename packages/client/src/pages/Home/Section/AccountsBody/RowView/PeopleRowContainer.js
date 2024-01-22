@@ -119,7 +119,7 @@ const PeopleRowContainer = ({
   );
 };
 
-export default inject(({ peopleStore, auth, filesStore }) => {
+export default inject(({ peopleStore, auth, infoPanelStore, filesStore }) => {
   const {
     usersStore,
     filterStore,
@@ -130,7 +130,7 @@ export default inject(({ peopleStore, auth, filesStore }) => {
   const { peopleList, hasMoreAccounts, fetchMoreAccounts } = usersStore;
   const { filterTotal, isFiltered } = filterStore;
 
-  const { isVisible: infoPanelVisible } = auth.infoPanelStore;
+  const { isVisible: infoPanelVisible } = infoPanelStore;
 
   return {
     peopleList,

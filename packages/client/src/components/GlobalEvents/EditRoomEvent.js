@@ -244,6 +244,7 @@ export default inject(
     selectedFolderStore,
     dialogsStore,
     settingsStore,
+    infoPanelStore,
   }) => {
     const {
       editRoom,
@@ -275,7 +276,7 @@ export default inject(
     const {
       reloadSelection: reloadInfoPanelSelection,
       reloadSelectionParentRoom,
-    } = auth.infoPanelStore;
+    } = infoPanelStore;
     return {
       addActiveItems,
       setActiveFolders,

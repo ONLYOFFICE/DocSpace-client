@@ -42,14 +42,22 @@ class PeopleStore {
   setupStore = null;
   accessRightsStore = null;
   profileActionsStore = null;
+  infoPanelStore = null;
   isInit = false;
   viewAs = isDesktop() ? "table" : "row";
   isLoadedProfileSectionBody = false;
 
-  constructor(authStore, setupStore, accessRightsStore, dialogsStore) {
+  constructor(
+    authStore,
+    setupStore,
+    accessRightsStore,
+    dialogsStore,
+    infoPanelStore
+  ) {
     this.authStore = authStore;
+    this.infoPanelStore = infoPanelStore;
     this.groupsStore = new GroupsStore(this);
-    this.usersStore = new UsersStore(this, authStore);
+    this.usersStore = new UsersStore(this, authStore, infoPanelStore);
     this.targetUserStore = new TargetUserStore(this);
     this.selectedGroupStore = new SelectedGroupStore(this);
     this.editingFormStore = new EditingFormStore(this);
@@ -64,7 +72,10 @@ class PeopleStore {
     this.accessRightsStore = accessRightsStore;
     this.dialogsStore = dialogsStore;
 
-    this.contextOptionsStore = new AccountsContextOptionsStore(this);
+    this.contextOptionsStore = new AccountsContextOptionsStore(
+      this,
+      infoPanelStore
+    );
 
     makeAutoObservable(this);
   }
@@ -167,7 +178,7 @@ class PeopleStore {
   };
 
   onOpenInfoPanel = () => {
-    const { setIsVisible } = this.authStore.infoPanelStore;
+    const { setIsVisible } = this.infoPanelStore;
     setIsVisible(true);
   };
 
@@ -262,7 +273,7 @@ class PeopleStore {
     const { setSendInviteDialogVisible } = this.dialogStore;
     const { toggleDeleteProfileEverDialog } = this.contextOptionsStore;
 
-    const { isVisible } = this.authStore.infoPanelStore;
+    const { isVisible } = this.infoPanelStore;
 
     const headerMenu = [
       {

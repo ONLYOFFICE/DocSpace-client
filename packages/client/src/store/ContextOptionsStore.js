@@ -76,6 +76,7 @@ class ContextOptionsStore {
   publicRoomStore;
   oformsStore;
   pluginStore;
+  infoPanelStore;
 
   linksIsLoading = false;
 
@@ -92,7 +93,8 @@ class ContextOptionsStore {
     selectedFolderStore,
     publicRoomStore,
     oformsStore,
-    pluginStore
+    pluginStore,
+    infoPanelStore
   ) {
     makeAutoObservable(this);
     this.authStore = authStore;
@@ -108,6 +110,7 @@ class ContextOptionsStore {
     this.publicRoomStore = publicRoomStore;
     this.oformsStore = oformsStore;
     this.pluginStore = pluginStore;
+    this.infoPanelStore = infoPanelStore;
   }
 
   onOpenFolder = (item) => {
@@ -230,21 +233,21 @@ class ContextOptionsStore {
   };
 
   onMoveAction = () => {
-    const { setIsMobileHidden } = this.authStore.infoPanelStore;
+    const { setIsMobileHidden } = this.infoPanelStore;
     setIsMobileHidden(true);
 
     this.dialogsStore.setMoveToPanelVisible(true);
   };
 
   onRestoreAction = () => {
-    const { setIsMobileHidden } = this.authStore.infoPanelStore;
+    const { setIsMobileHidden } = this.infoPanelStore;
     setIsMobileHidden(true);
     console.log("Click");
     this.dialogsStore.setRestorePanelVisible(true);
   };
 
   onCopyAction = () => {
-    const { setIsMobileHidden } = this.authStore.infoPanelStore;
+    const { setIsMobileHidden } = this.infoPanelStore;
     setIsMobileHidden(true);
 
     this.dialogsStore.setCopyPanelVisible(true);
@@ -254,7 +257,7 @@ class ContextOptionsStore {
     const { fetchFileVersions, setIsVerHistoryPanel } =
       this.versionHistoryStore;
 
-    const { setIsMobileHidden } = this.authStore.infoPanelStore;
+    const { setIsMobileHidden } = this.infoPanelStore;
 
     if (this.treeFoldersStore.isRecycleBinFolder) return;
 
@@ -285,8 +288,7 @@ class ContextOptionsStore {
 
   lockFile = (item, t) => {
     const { id, locked } = item;
-    const { setSelection: setInfoPanelSelection } =
-      this.authStore.infoPanelStore;
+    const { setSelection: setInfoPanelSelection } = this.infoPanelStore;
 
     this.filesActionsStore
       .lockFileAction(id, !locked)
@@ -571,7 +573,7 @@ class ContextOptionsStore {
   };
 
   onClickShare = (item) => {
-    const { openShareTab } = this.authStore.infoPanelStore;
+    const { openShareTab } = this.infoPanelStore;
     const { setShareFolderDialogVisible } = this.dialogsStore;
 
     if (item.isFolder) {
@@ -620,8 +622,7 @@ class ContextOptionsStore {
   };
 
   onShowInfoPanel = (item, view) => {
-    const { setSelection, setIsVisible, setView } =
-      this.authStore.infoPanelStore;
+    const { setSelection, setIsVisible, setView } = this.infoPanelStore;
 
     setSelection(item);
     setIsVisible(true);
@@ -864,7 +865,7 @@ class ContextOptionsStore {
   };
 
   onCreateOform = (navigate) => {
-    this.authStore.infoPanelStore.setIsVisible(false);
+    this.infoPanelStore.setIsVisible(false);
     const filesFilter = FilesFilter.getDefault();
     filesFilter.folder = this.oformsStore.oformFromFolderId;
     const filterUrlParams = filesFilter.toUrlParams();
@@ -883,7 +884,7 @@ class ContextOptionsStore {
   };
 
   onShowOformTemplateInfo = (item) => {
-    this.authStore.infoPanelStore.setIsVisible(true);
+    this.infoPanelStore.setIsVisible(true);
     this.oformsStore.setGallerySelected(item);
   };
 

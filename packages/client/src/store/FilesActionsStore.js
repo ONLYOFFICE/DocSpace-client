@@ -68,6 +68,7 @@ class FilesActionStore {
   accessRightsStore;
   clientLoadingStore;
   publicRoomStore;
+  infoPanelStore;
 
   isBulkDownload = false;
   isLoadedSearchFiles = false;
@@ -87,7 +88,8 @@ class FilesActionStore {
     accessRightsStore,
     clientLoadingStore,
     publicRoomStore,
-    pluginStore
+    pluginStore,
+    infoPanelStore
   ) {
     makeAutoObservable(this);
     this.authStore = authStore;
@@ -102,6 +104,7 @@ class FilesActionStore {
     this.clientLoadingStore = clientLoadingStore;
     this.publicRoomStore = publicRoomStore;
     this.pluginStore = pluginStore;
+    this.infoPanelStore = infoPanelStore;
   }
 
   setIsBulkDownload = (isBulkDownload) => {
@@ -289,8 +292,8 @@ class FilesActionStore {
     let selection = newSelection
       ? newSelection
       : this.filesStore.selection.length
-      ? this.filesStore.selection
-      : [bufferSelection];
+        ? this.filesStore.selection
+        : [bufferSelection];
 
     selection = selection.filter((item) => item.security.Delete);
 
@@ -996,7 +999,7 @@ class FilesActionStore {
   setPinAction = (action, id, t) => {
     const { pinRoom, unpinRoom, updateRoomPin, setSelected } = this.filesStore;
 
-    const { selection, setSelection } = this.authStore.infoPanelStore;
+    const { selection, setSelection } = this.infoPanelStore;
 
     const items = Array.isArray(id) ? id : [id];
 
@@ -1393,7 +1396,7 @@ class FilesActionStore {
         url !== window.DocSpace.location.pathname
     );
 
-    if (!isDesktop()) this.authStore.infoPanelStore.setIsVisible(false);
+    if (!isDesktop()) this.infoPanelStore.setIsVisible(false);
 
     window.DocSpace.navigate(`${url}?${newFilter.toUrlParams()}`, { state });
   };
@@ -1731,7 +1734,7 @@ class FilesActionStore {
 
   onShowInfoPanel = () => {
     const { selection } = this.filesStore;
-    const { setSelection, setIsVisible } = this.authStore.infoPanelStore;
+    const { setSelection, setIsVisible } = this.infoPanelStore;
 
     setSelection([selection]);
     setIsVisible(true);

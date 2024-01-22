@@ -2077,6 +2077,7 @@ export default inject(
     tagsStore,
     peopleStore,
     publicRoomStore,
+    infoPanelStore,
   }) => {
     const {
       filter,
@@ -2113,7 +2114,7 @@ export default inject(
 
     const isRooms = isRoomsFolder || isArchiveFolder;
 
-    const { isVisible: infoPanelVisible } = auth.infoPanelStore;
+    const { isVisible: infoPanelVisible } = infoPanelStore;
 
     const {
       filterStore,

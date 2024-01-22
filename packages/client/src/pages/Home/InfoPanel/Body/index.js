@@ -164,51 +164,53 @@ const InfoPanelBodyContent = ({
   );
 };
 
-export default inject(({ auth, selectedFolderStore, oformsStore }) => {
-  const {
-    selection,
-    setSelection,
-    calculateSelection,
-    normalizeSelection,
-    isItemChanged,
-    selectionParentRoom,
-    setSelectionParentRoom,
-    roomsView,
-    fileView,
-    getIsFiles,
-    getIsRooms,
-    getIsAccounts,
-    getIsGallery,
-  } = auth.infoPanelStore;
+export default inject(
+  ({ auth, selectedFolderStore, oformsStore, infoPanelStore }) => {
+    const {
+      selection,
+      setSelection,
+      calculateSelection,
+      normalizeSelection,
+      isItemChanged,
+      selectionParentRoom,
+      setSelectionParentRoom,
+      roomsView,
+      fileView,
+      getIsFiles,
+      getIsRooms,
+      getIsAccounts,
+      getIsGallery,
+    } = infoPanelStore;
 
-  const { gallerySelected } = oformsStore;
+    const { gallerySelected } = oformsStore;
 
-  const { isRootFolder } = selectedFolderStore;
+    const { isRootFolder } = selectedFolderStore;
 
-  const selectedItems = auth.infoPanelStore.getSelectedItems();
+    const selectedItems = infoPanelStore.getSelectedItems();
 
-  const selectedFolder = auth.infoPanelStore.getSelectedFolder();
+    const selectedFolder = infoPanelStore.getSelectedFolder();
 
-  return {
-    selection,
-    setSelection,
-    calculateSelection,
-    normalizeSelection,
-    isItemChanged,
+    return {
+      selection,
+      setSelection,
+      calculateSelection,
+      normalizeSelection,
+      isItemChanged,
 
-    selectionParentRoom,
-    setSelectionParentRoom,
-    roomsView,
-    fileView,
-    getIsFiles,
-    getIsRooms,
-    getIsAccounts,
-    getIsGallery,
+      selectionParentRoom,
+      setSelectionParentRoom,
+      roomsView,
+      fileView,
+      getIsFiles,
+      getIsRooms,
+      getIsAccounts,
+      getIsGallery,
 
-    selectedItems,
-    selectedFolder,
+      selectedItems,
+      selectedFolder,
 
-    isRootFolder,
-    gallerySelected,
-  };
-})(observer(InfoPanelBodyContent));
+      isRootFolder,
+      gallerySelected,
+    };
+  }
+)(observer(InfoPanelBodyContent));

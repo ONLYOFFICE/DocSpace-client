@@ -1131,6 +1131,7 @@ export default inject(
     contextOptionsStore,
     oformsStore,
     pluginStore,
+    infoPanelStore,
   }) => {
     const isOwner = auth.userStore.user?.isOwner;
     const isAdmin = auth.userStore.user?.isAdmin;
@@ -1215,7 +1216,7 @@ export default inject(
 
     const { oformsFilter } = oformsStore;
 
-    const { setIsVisible, isVisible } = auth.infoPanelStore;
+    const { setIsVisible, isVisible } = infoPanelStore;
 
     const {
       title,

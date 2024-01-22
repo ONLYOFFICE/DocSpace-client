@@ -21,6 +21,7 @@ const myDocumentsFolderId = 2;
 
 class OformsStore {
   authStore;
+  infoPanelStore;
 
   oformFiles = null;
   gallerySelected = null;
@@ -44,8 +45,9 @@ class OformsStore {
     "submitToGalleryTileIsHidden"
   );
 
-  constructor(authStore) {
+  constructor(authStore, infoPanelStore) {
     this.authStore = authStore;
+    this.infoPanelStore = infoPanelStore;
     makeAutoObservable(this);
   }
 
@@ -75,7 +77,7 @@ class OformsStore {
 
   setGallerySelected = (gallerySelected) => {
     this.gallerySelected = gallerySelected;
-    this.authStore.infoPanelStore.setSelection(gallerySelected);
+    this.infoPanelStore.setSelection(gallerySelected);
   };
 
   setOformLocales = (oformLocales) => (this.oformLocales = oformLocales);

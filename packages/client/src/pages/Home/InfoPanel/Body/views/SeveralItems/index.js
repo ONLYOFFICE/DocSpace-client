@@ -39,8 +39,8 @@ const SeveralItems = ({ isAccounts, theme, selectedItems }) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const selectedItems = auth.infoPanelStore.getSelectedItems();
+export default inject(({ auth, infoPanelStore }) => {
+  const selectedItems = infoPanelStore.getSelectedItems();
 
   return {
     theme: auth.settingsStore.theme,

@@ -464,67 +464,70 @@ const InvitePanel = ({
     : invitePanelComponent;
 };
 
-export default inject(({ auth, peopleStore, filesStore, dialogsStore }) => {
-  const { theme, currentDeviceType } = auth.settingsStore;
+export default inject(
+  ({ auth, peopleStore, filesStore, dialogsStore, infoPanelStore }) => {
+    const { theme, currentDeviceType } = auth.settingsStore;
 
-  const { getUsersByQuery, inviteUsers, getUsersList } = peopleStore.usersStore;
-  const { filter } = peopleStore.filterStore;
-  const {
-    setIsMobileHidden: setInfoPanelIsMobileHidden,
-    reloadSelectionParentRoom,
-    setUpdateRoomMembers,
-    roomsView,
-    filesView,
-  } = auth.infoPanelStore;
+    const { getUsersByQuery, inviteUsers, getUsersList } =
+      peopleStore.usersStore;
+    const { filter } = peopleStore.filterStore;
+    const {
+      setIsMobileHidden: setInfoPanelIsMobileHidden,
+      reloadSelectionParentRoom,
+      setUpdateRoomMembers,
+      roomsView,
+      filesView,
+    } = infoPanelStore;
 
-  const {
-    getPortalInviteLinks,
-    userLink,
-    guestLink,
-    adminLink,
-    collaboratorLink,
-  } = peopleStore.inviteLinksStore;
+    const {
+      getPortalInviteLinks,
+      userLink,
+      guestLink,
+      adminLink,
+      collaboratorLink,
+    } = peopleStore.inviteLinksStore;
 
-  const {
-    inviteItems,
-    invitePanelOptions,
-    setInviteItems,
-    setInvitePanelOptions,
-    setInviteLanguage,
-  } = dialogsStore;
+    const {
+      inviteItems,
+      invitePanelOptions,
+      setInviteItems,
+      setInvitePanelOptions,
+      setInviteLanguage,
+    } = dialogsStore;
 
-  const { getFolderInfo, setRoomSecurity, getRoomSecurityInfo, folders } =
-    filesStore;
+    const { getFolderInfo, setRoomSecurity, getRoomSecurityInfo, folders } =
+      filesStore;
 
-  return {
-    folders,
-    setInviteLanguage,
-    getUsersByQuery,
-    getRoomSecurityInfo,
-    inviteItems,
-    roomId: invitePanelOptions.roomId,
-    setInviteItems,
-    setInvitePanelOptions,
-    setRoomSecurity,
-    theme,
-    visible: invitePanelOptions.visible,
-    defaultAccess: invitePanelOptions.defaultAccess,
-    getFolderInfo,
-    getPortalInviteLinks,
-    userLink,
-    guestLink,
-    adminLink,
-    collaboratorLink,
-    inviteUsers,
-    setInfoPanelIsMobileHidden,
-    reloadSelectionParentRoom,
-    setUpdateRoomMembers,
-    roomsView,
-    getUsersList,
-    filter,
-    currentDeviceType,
-  };
-})(
+    return {
+      folders,
+      setInviteLanguage,
+      getUsersByQuery,
+      getRoomSecurityInfo,
+      inviteItems,
+      roomId: invitePanelOptions.roomId,
+      setInviteItems,
+      setInvitePanelOptions,
+      setRoomSecurity,
+      theme,
+      visible: invitePanelOptions.visible,
+      defaultAccess: invitePanelOptions.defaultAccess,
+      getFolderInfo,
+      getPortalInviteLinks,
+      userLink,
+      guestLink,
+      adminLink,
+      collaboratorLink,
+      inviteUsers,
+      setInfoPanelIsMobileHidden,
+      reloadSelectionParentRoom,
+      setUpdateRoomMembers,
+      roomsView,
+      getUsersList,
+      filter,
+      currentDeviceType,
+    };
+  }
+)(
   withTranslation([
     "InviteDialog",
     "SharingPanel",

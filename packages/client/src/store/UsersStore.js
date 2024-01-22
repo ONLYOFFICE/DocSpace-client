@@ -13,15 +13,17 @@ const fullAccessId = "00000000-0000-0000-0000-000000000000";
 class UsersStore {
   peopleStore = null;
   authStore = null;
+  infoPanelStore = null;
 
   users = [];
   providers = [];
   accountsIsIsLoading = false;
   operationRunning = false;
 
-  constructor(peopleStore, authStore) {
+  constructor(peopleStore, authStore, infoPanelStore) {
     this.peopleStore = peopleStore;
     this.authStore = authStore;
+    this.infoPanelStore = infoPanelStore;
     makeAutoObservable(this);
   }
 
@@ -93,7 +95,7 @@ class UsersStore {
   };
 
   get needResetUserSelection() {
-    const { isVisible: infoPanelVisible } = this.authStore.infoPanelStore;
+    const { isVisible: infoPanelVisible } = this.infoPanelStore;
     const { isOneUserSelection } = this.peopleStore.selectionStore;
 
     return !infoPanelVisible || !isOneUserSelection;

@@ -129,13 +129,14 @@ const RoomsRowDataComponent = (props) => {
       ) : (
         <div />
       )}
-      {roomQuotaColumnIsEnable && showStorageInfo ? (
-        <TableCell className={"table-cell_Storage/Quota"}>
-          <SpaceQuota item={item} type="room" />
-        </TableCell>
-      ) : (
-        <div />
-      )}
+      {showStorageInfo &&
+        (roomQuotaColumnIsEnable ? (
+          <TableCell className={"table-cell_Storage/Quota"}>
+            <SpaceQuota item={item} type="room" />
+          </TableCell>
+        ) : (
+          <div />
+        ))}
 
       {roomColumnQuickButtonsIsEnabled ? (
         <TableCell

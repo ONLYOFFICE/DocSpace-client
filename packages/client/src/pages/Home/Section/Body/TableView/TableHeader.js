@@ -90,7 +90,7 @@ class FilesTableHeader extends React.Component {
       ];
 
       showStorageInfo &&
-        columns.push({
+        columns.splice(columns.length - 1, 0, {
           key: "Storage",
           title: isDefaultRoomsQuotaSet
             ? t("Common:StorageAndQuota")

@@ -3,7 +3,10 @@ import { toastr } from "@docspace/shared/components/toast";
 
 import api from "@docspace/shared/api";
 import { PortalFeaturesLimitations } from "@docspace/shared/enums";
-import { setDefaultUserQuota, setDefaultRoomQuota } from "@docspace/shared/api/settings";
+import {
+  setDefaultUserQuota,
+  setDefaultRoomQuota,
+} from "@docspace/shared/api/settings";
 
 const MANAGER = "manager";
 const TOTAL_SIZE = "total_size";

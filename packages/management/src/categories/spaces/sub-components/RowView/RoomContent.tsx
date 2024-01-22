@@ -32,10 +32,6 @@ export const RoomContent = ({ item, isCurrentPortal }: TRoomContent) => {
   const { t } = useTranslation(["Management", "Common", "Settings"]);
 
   const { roomAdminCount, usersCount, storageSize, roomsCount, usedSize } =
-    item?.quotaUsage;
- 
-
-  const { roomAdminCount, usersCount, storageSize, roomsCount, usedSize } =
     item?.quotaUsage || {
       roomAdminCount: null,
       usersCount: null,

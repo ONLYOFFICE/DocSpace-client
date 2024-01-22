@@ -1244,6 +1244,62 @@ export async function getFileLink(fileId: number) {
   return res;
 }
 
+export async function getExternalLinks(
+  fileId: number,
+  startIndex = 0,
+  count = 50,
+) {
+  const linkParams = `?startIndex=${startIndex}&count=${count}`;
+
+  const res = (await request({
+    method: "get",
+    url: `files/file/${fileId}/links${linkParams}`,
+  })) as TFileLink[];
+
+  return res;
+}
+
+export async function getPrimaryLink(fileId: number) {
+  const res = (await request({
+    method: "get",
+    url: `files/file/${fileId}/link`,
+  })) as TFileLink;
+
+  return res;
+}
+
+export async function editExternalLink(
+  fileId: number,
+  linkId: number,
+  access: number,
+  primary: boolean,
+  internal: boolean,
+  expirationDate: string,
+) {
+  const res = (await request({
+    method: "put",
+    url: `/files/file/${fileId}/links`,
+    data: { linkId, access, primary, internal, expirationDate },
+  })) as TFileLink;
+
+  return res;
+}
+
+export async function addExternalLink(
+  fileId: number,
+  access: number,
+  primary: boolean,
+  internal: boolean,
+) {
+  const res = (await request({
+    method: "put",
+    url: `/files/file/${fileId}/links`,
+    data: { access, primary, internal },
+  })) as TFileLink;
+
+  return res;
+}
+
 // TODO: Need update res type
 export function checkIsFileExist(folderId: number, filesTitle: string[]) {
   return request({
@@ -1251,6 +1307,16 @@ export function checkIsFileExist(folderId: number, filesTitle: string[]) {
     url: `files/${folderId}/upload/check`,
     data: {
       filesTitle,
+    },
+  });
+}
+
+export function deleteFilesFromRecent(fileIds: number[]) {
+  return request({
+    method: "delete",
+    url: `files/recent`,
+    data: {
+      fileIds,
     },
   });
 }

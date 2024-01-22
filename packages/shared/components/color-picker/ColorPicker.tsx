@@ -1,132 +1,32 @@
-import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import styled, { css } from "styled-components";
-import { Button } from "@docspace/shared/components/button";
+import { useEffect, useState } from "react";
 import { HexColorPicker, HexColorInput } from "react-colorful";
-import { isMobileOnly } from "react-device-detect";
 
-const StyledComponent = styled.div`
-  .save-button {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 10px;
-          `
-        : css`
-            margin-right: 10px;
-          `}
-  }
+import { Button } from "../button";
 
-  .hex-color-picker .react-colorful {
-    width: auto;
-    height: 250px;
-    padding-bottom: 26px;
-  }
+import Wrapper from "./ColorPicker.styled";
+import { ColorPickerProps } from "./ColorPicker.types";
+import { ButtonSize } from "../button/Button.enums";
 
-  .react-colorful__saturation {
-    margin: 16px 0 26px 0;
-    border-radius: 3px;
-  }
-
-  .hex-color-picker .react-colorful__interactive {
-    width: 183px;
-
-    ${isMobileOnly &&
-    css`
-      width: calc(100vw - 76px);
-    `}
-  }
-
-  .hex-color-picker .react-colorful__saturation-pointer {
-    width: 14px;
-    height: 14px;
-    transform: none !important;
-  }
-
-  .hex-color-picker .react-colorful__hue {
-    border-radius: 6px;
-    height: 12px;
-  }
-
-  .hex-color-picker .react-colorful__hue-pointer {
-    width: 30px;
-    height: 30px;
-    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.25);
-    border: 8px solid #fff;
-  }
-
-  .hex-value {
-    height: 32px;
-    outline: none;
-    padding: 6px 8px;
-    border: 1px solid ${(props) => (props.theme.isBase ? "#d0d5da" : "#474747")};
-    border-radius: 3px;
-    width: 100%;
-    box-sizing: border-box;
-    background: ${(props) => !props.theme.isBase && "#282828"};
-    color: ${(props) => !props.theme.isBase && "#5C5C5C"};
-  }
-
-  .hex-value-label {
-    line-height: 20px;
-  }
-
-  .hex-button {
-    display: flex;
-
-    .apply-button {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 8px;
-            `
-          : css`
-              margin-right: 8px;
-            `}
-    }
-  }
-
-  .hex-color-picker {
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 16px;
-    width: 195px;
-
-    ${isMobileOnly &&
-    css`
-      width: calc(100vw - 64px);
-    `}
-  }
-
-  .hex-value-container {
-    order: 2;
-    padding-bottom: 16px;
-  }
-
-  .hex-color-picker .react-colorful {
-    order: 1;
-  }
-
-  .hex-button {
-    order: 3;
-  }
-`;
-
-const HexColorPickerComponent = (props) => {
-  const { onCloseHexColorPicker, onAppliedColor, appliedColor } = props;
-
-  const [color, setColor] = useState(appliedColor);
-
-  const { t } = useTranslation("Common");
+const ColorPicker = ({
+  className,
+  id,
+  onClose,
+  onApply,
+  appliedColor,
+  applyButtonLabel,
+  cancelButtonLabel,
+}: ColorPickerProps) => {
+  const [color, setColor] = useState(appliedColor || "#4781D1");
 
   useEffect(() => {
-    if (color !== appliedColor) {
+    if (appliedColor && appliedColor !== color) {
       setColor(appliedColor);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [appliedColor]);
 
   return (
-    <StyledComponent>
+    <Wrapper className={className} id={id}>
       <div className="hex-color-picker">
         <div className="hex-value-container">
           <div className="hex-value-label">Hex code:</div>
@@ -143,24 +43,32 @@ const HexColorPickerComponent = (props) => {
 
         <div className="hex-button">
           <Button
-            label={t("Common:ApplyButton")}
-            size="small"
+            label={applyButtonLabel}
+            size={ButtonSize.small}
             className="apply-button"
-            primary={true}
-            scale={true}
-            onClick={() => onAppliedColor(color)}
+            primary
+            scale
+            onClick={() => onApply(color)}
           />
           <Button
-            label={t("Common:CancelButton")}
+            label={cancelButtonLabel}
             className="cancel-button button"
-            size="small"
-            scale={true}
-            onClick={onCloseHexColorPicker}
+            size={ButtonSize.small}
+            scale
+            onClick={onClose}
           />
         </div>
       </div>
-    </StyledComponent>
+    </Wrapper>
   );
 };
 
-export default HexColorPickerComponent;
+ColorPicker.defaultProps = {
+  onClose: () => {},
+  onApply: () => {},
+  appliedColor: "#4781D1",
+  applyButtonLabel: "Apply",
+  cancelButtonLabel: "Cancel",
+};
+
+export { ColorPicker };

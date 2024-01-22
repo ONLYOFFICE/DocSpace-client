@@ -127,7 +127,7 @@ const Article = ({
   }, [onMobileBack]);
 
   React.useEffect(() => {
-    const item = localStorage.getItem("showArticle") || "";
+    const item = localStorage.getItem("showArticle") || "{}";
 
     const showArticle = JSON.parse(item);
 

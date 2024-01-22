@@ -48,8 +48,7 @@ import SectionSubmenuLoader from "./SectionSubmenuLoader";
 export default {
   Header,
   SectionHeader,
-  ArticleHeader,
-  ArticleProfileLoader,
+
   TreeFolders,
   TreeSettingsLoader,
 
@@ -65,9 +64,7 @@ export default {
 
   DialogLoader,
   DialogAsideLoader,
-  ArticleButton,
-  ArticleFolder,
-  ArticleGroup,
+
   ListLoader,
   NewTreeFolders,
   SharingPanelLoader,

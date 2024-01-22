@@ -1,6 +1,6 @@
-import { tablet } from "@docspace/shared/utils";
-
 import styled from "styled-components";
+
+import { tablet } from "../../../utils";
 
 const StyledContainer = styled.div`
   width: 211px;

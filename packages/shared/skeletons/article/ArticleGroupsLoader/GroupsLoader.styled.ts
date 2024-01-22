@@ -1,9 +1,9 @@
-import styled, { css } from "styled-components";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import styled from "styled-components";
 
-import { tablet, mobile } from "@docspace/shared/utils";
+import { tablet, mobile } from "../../../utils";
+import { RectangleSkeleton } from "../../rectangle";
 
-const StyledContainer = styled.div`
+const StyledContainer = styled.div<{ showText?: boolean }>`
   margin: 0;
 
   max-width: 216px;

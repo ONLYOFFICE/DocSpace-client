@@ -1,13 +1,9 @@
 import styled from "styled-components";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { tablet, mobile, getCorrectFourValuesStyle } from "../../../utils";
 
-import {
-  tablet,
-  mobile,
-  getCorrectFourValuesStyle,
-} from "@docspace/shared/utils";
+import { RectangleSkeleton } from "../../rectangle";
 
-const StyledContainer = styled.div`
+const StyledContainer = styled.div<{ showText: boolean }>`
   margin: 0;
 
   max-width: 210px;
@@ -30,7 +26,7 @@ const StyledContainer = styled.div`
   }
 `;
 
-const StyledBlock = styled.div`
+const StyledBlock = styled.div<{ showText: boolean }>`
   margin: 0;
   width: 100%;
   height: auto;

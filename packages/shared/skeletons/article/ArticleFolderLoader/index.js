@@ -1,1 +1,3 @@
-export default from "./ArticleFolderLoader";
+import ArticleFolderLoader from "./FolderLoader";
+
+export { ArticleFolderLoader };

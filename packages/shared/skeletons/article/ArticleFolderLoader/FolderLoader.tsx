@@ -1,11 +1,11 @@
 import React from "react";
-import PropTypes from "prop-types";
+
 import {
   StyledContainer,
   StyledBlock,
   StyledRectangleLoader,
-} from "./StyledArticleFolderLoader";
-import { inject, observer } from "mobx-react";
+} from "./FolderLoader.styled";
+import { FolderLoaderProps } from "./FolderLoader.types";
 
 const ArticleFolderLoader = ({
   id,
@@ -14,7 +14,7 @@ const ArticleFolderLoader = ({
   showText,
   isVisitor,
   ...rest
-}) => {
+}: FolderLoaderProps) => {
   return (
     <StyledContainer
       id={id}
@@ -79,22 +79,4 @@ const ArticleFolderLoader = ({
   );
 };
 
-ArticleFolderLoader.propTypes = {
-  id: PropTypes.string,
-  className: PropTypes.string,
-  style: PropTypes.object,
-  showText: PropTypes.bool,
-};
-
-ArticleFolderLoader.defaultProps = {
-  id: undefined,
-  className: undefined,
-  style: undefined,
-};
-
-export default inject(({ auth }) => {
-  return {
-    showText: auth.settingsStore.showText,
-    isVisitor: auth.userStore.user.isVisitor,
-  };
-})(observer(ArticleFolderLoader));
+export default ArticleFolderLoader;

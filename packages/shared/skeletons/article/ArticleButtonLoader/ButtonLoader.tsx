@@ -1,9 +1,15 @@
 import React from "react";
-import PropTypes from "prop-types";
-import StyledContainer from "./StyledMainButton";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { RectangleSkeleton } from "../../rectangle";
 
-const ArticleButtonLoader = ({ id, className, style, ...rest }) => {
+import StyledContainer from "./MainButton.styled";
+import { ButtonLoaderProps } from "./ButtonLoader.types";
+
+const ArticleButtonLoader = ({
+  id,
+  className,
+  style,
+  ...rest
+}: ButtonLoaderProps) => {
   const {
     title,
     width,
@@ -32,18 +38,6 @@ const ArticleButtonLoader = ({ id, className, style, ...rest }) => {
       />
     </StyledContainer>
   );
-};
-
-ArticleButtonLoader.propTypes = {
-  id: PropTypes.string,
-  className: PropTypes.string,
-  style: PropTypes.object,
-};
-
-ArticleButtonLoader.defaultProps = {
-  id: undefined,
-  className: undefined,
-  style: undefined,
 };
 
 export default ArticleButtonLoader;

@@ -9,6 +9,7 @@ import EditingSvg32Url from "PUBLIC_DIR/images/icons/32/room/editing.svg?url";
 // import ReviewSvg32Url from "PUBLIC_DIR/images/icons/32/room/review.svg?url";
 // import ViewOnlySvg32Url from "PUBLIC_DIR/images/icons/32/room/view.only.svg?url";
 import PublicRoomSvg32Url from "PUBLIC_DIR/images/icons/32/room/public.svg?url";
+import FormRoomSvg32Url from "PUBLIC_DIR/images/icons/32/room/form.svg?url";
 
 import { RoomsType } from "../../enums";
 
@@ -47,6 +48,8 @@ const RoomLogoPure = ({
         return CustomSvg32Url;
       case RoomsType.PublicRoom:
         return PublicRoomSvg32Url;
+      case RoomsType.FormRoom:
+          return FormRoomSvg32Url;
       default:
         return "";
     }

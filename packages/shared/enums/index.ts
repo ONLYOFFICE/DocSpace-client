@@ -203,6 +203,11 @@ export const enum FolderType {
   Privacy = 13,
   Rooms = 14,
   Archive = 20,
+
+  Done = 25,
+  InProgress = 26,
+  SubFolderDone = 27,
+  SubFolderInProgress = 28,
 }
 
 export const enum ShareAccessRights {
@@ -436,6 +441,7 @@ export const enum ErrorKeys {
 }
 
 export enum RoomsType {
+  FormRoom = 1,
   // FillingFormsRoom= 1, //TODO: Restore when certs will be done
   EditingRoom = 2,
   // ReviewRoom: 3, //TODO: Restore when certs will be done

@@ -34,6 +34,8 @@ class SelectedFolderStore {
   security = null;
   type = null;
   inRoom = false;
+  usedSpace = null;
+  quotaLimit = null;
 
   constructor(settingsStore) {
     makeAutoObservable(this);
@@ -70,6 +72,8 @@ class SelectedFolderStore {
       rootFolderId: this.rootFolderId,
       security: this.security,
       inRoom: this.inRoom,
+      usedSpace: this.usedSpace,
+      quotaLimit: this.quotaLimit,
     };
   };
 
@@ -114,6 +118,8 @@ class SelectedFolderStore {
     this.security = null;
     this.type = null;
     this.inRoom = false;
+    this.usedSpace = null;
+    this.quotaLimit = null;
   };
 
   setParentId = (parentId) => {

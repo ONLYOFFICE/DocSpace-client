@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Loader } from "@docspace/shared/components/loader";
-import Section from "@docspace/common/components/Section";
+import Section from "@docspace/shared/components/section";
 import { loginWithConfirmKey } from "@docspace/shared/api/user";
 import { useSearchParams } from "react-router-dom";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";

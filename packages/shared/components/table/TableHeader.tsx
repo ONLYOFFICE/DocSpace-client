@@ -1297,7 +1297,7 @@ class TableHeader extends React.Component<
 
       if (hideColumns !== hideColumnsConst) {
         this.setState({ hideColumns: hideColumnsConst });
-        setHideColumns(hideColumns);
+        setHideColumns(hideColumnsConst);
       }
 
       if (hideColumns) {

@@ -5,7 +5,7 @@ Default section
 ### Usage
 
 ```js
-import Section from "@docspace/common/components/Section";
+import Section from "@docspace/shared/components/section";
 ```
 
 ```jsx

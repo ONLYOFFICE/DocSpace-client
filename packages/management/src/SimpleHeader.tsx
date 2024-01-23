@@ -10,6 +10,10 @@ const StyledHeader = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: 22px;
+
+  text-align: center;
+
+  width: calc(100% - 128px);
 `;
 
 const SimpleHeader = () => {

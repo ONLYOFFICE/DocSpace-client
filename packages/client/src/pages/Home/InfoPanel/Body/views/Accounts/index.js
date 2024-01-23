@@ -232,7 +232,7 @@ const Accounts = ({
                 className="type-combobox"
                 onSuccess={onSuccess}
                 onAbort={onAbort}
-              />{" "}
+              />
             </>
           )}
 

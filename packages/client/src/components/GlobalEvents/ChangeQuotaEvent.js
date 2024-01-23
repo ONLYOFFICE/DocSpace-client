@@ -100,7 +100,8 @@ export default inject(({ peopleStore, filesStore, auth }, { type }) => {
 
   const initialSize = type === "user" ? defaultUsersQuota : defaultRoomsQuota;
 
-  const inRoom = infoPanelSelection.inRoom;
+  const inRoom = infoPanelSelection?.inRoom;
+
   return {
     initialSize,
     setCustomUserQuota,

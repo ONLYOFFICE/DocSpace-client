@@ -23,7 +23,7 @@ const ChangeQuotaEvent = (props) => {
   const { t } = useTranslation("Common");
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const sizeRef = useRef("");
+  const sizeRef = useRef(initialSize ? initialSize : "");
 
   const onSetQuotaBytesSize = (size) => {
     sizeRef.current = size;

@@ -3,12 +3,14 @@ import { inject, observer } from "mobx-react";
 import AccountsItemTitle from "./AccountsItemTitle";
 import GalleryItemTitle from "./GalleryItemTitle";
 import RoomsItemHeader from "./Rooms";
+import GroupsItemTitle from "./GroupsItemTitle";
 
 const ItemTitle = ({
   selection,
   gallerySelected,
   isNoItem,
-  isAccounts,
+  isPeople,
+  isGroups,
   isGallery,
   isSeveralItems,
   selectionLength,
@@ -19,9 +21,19 @@ const ItemTitle = ({
   if (!selection) return null;
   if (isNoItem) return null;
 
-  if (isAccounts)
+  if (isPeople)
     return (
       <AccountsItemTitle
+        selection={selection}
+        isSeveralItems={isSeveralItems}
+        getUserContextOptions={getUserContextOptions}
+        selectionLength={selectionLength}
+      />
+    );
+
+  if (isGroups)
+    return (
+      <GroupsItemTitle
         selection={selection}
         isSeveralItems={isSeveralItems}
         getUserContextOptions={getUserContextOptions}

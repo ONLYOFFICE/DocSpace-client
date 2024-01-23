@@ -15,14 +15,13 @@ const InsideGroup = ({
   getGroupById,
 }) => {
   const { groupId } = useParams();
+  console.log(groupId);
 
   useEffect(() => {
     (async () => {
       if (!groupId) return;
       if (!currentGroup || groupId !== currentGroup.id) {
-        console.log(groupId);
         const newCurrentGroup = await getGroupById(groupId);
-        console.log(newCurrentGroup);
         setCurrentGroup(newCurrentGroup);
       }
     })();
@@ -51,6 +50,6 @@ export default inject(({ peopleStore }) => ({
   getGroupById: peopleStore.groupsStore.getGroupById,
 }))(
   withTranslation(["People", "Common", "PeopleTranslations"])(
-    withLoader(observer(InsideGroup))(),
-  ),
+    withLoader(observer(InsideGroup))()
+  )
 );

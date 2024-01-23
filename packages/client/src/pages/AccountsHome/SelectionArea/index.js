@@ -4,15 +4,19 @@ import { observer, inject } from "mobx-react";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { SelectionArea as SelectionAreaComponent } from "@docspace/shared/components/selection-area";
 
-const SelectionArea = ({ viewAs, setSelections }) => {
+const SelectionArea = ({
+  viewAs,
+  setSelectionsPeople,
+  setSelectionsGroups,
+}) => {
   const location = useLocation();
 
   const isPeople = location.pathname.includes("/accounts/people");
 
   const onMove = ({ added, removed, clear }) => {
     isPeople
-      ? setSelections(added, removed, clear)
-      : setSelections(added, removed, clear);
+      ? setSelectionsPeople(added, removed, clear)
+      : setSelectionsGroups(added, removed, clear);
   };
 
   const itemHeight = viewAs === "table" ? 49 : 59;
@@ -35,10 +39,13 @@ const SelectionArea = ({ viewAs, setSelections }) => {
 
 export default inject(({ peopleStore }) => {
   const { viewAs } = peopleStore;
-  const { setSelections } = peopleStore.selectionStore;
+
+  const { setSelections: setSelectionsPeople } = peopleStore.selectionStore;
+  const { setSelections: setSelectionsGroups } = peopleStore.groupsStore;
 
   return {
     viewAs,
-    setSelections,
+    setSelectionsPeople,
+    setSelectionsGroups,
   };
 })(observer(SelectionArea));

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { TableRow, TableCell } from "@docspace/shared/components/table";
 import { Link } from "@docspace/shared/components/link";
 import { Checkbox } from "@docspace/shared/components/checkbox";
+import { inject, observer } from "mobx-react";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 
@@ -182,34 +183,35 @@ const StyledPeopleRow = styled(TableRow)`
 
 StyledPeopleRow.defaultProps = { theme: Base };
 
-const GroupsTableItem = (props) => {
-  const {
-    t,
-    item,
-    checkedProps,
-    onContentRowSelect,
-    onContentRowClick,
+const GroupsTableItem = ({
+  t,
+  item,
+  // checkedProps,
+  // onContentRowSelect,
+  // onContentRowClick,
 
-    theme,
+  theme,
 
-    isActive,
-    hideColumns,
-    value,
-  } = props;
+  isActive,
+  hideColumns,
+  // value,
 
+  selection,
+  setSelection,
+  addGroupToSelection,
+}) => {
   const navigate = useNavigate();
 
-  const sideInfoColor = theme.peopleTableRow.sideInfoColor;
-
-  const isChecked = checkedProps.checked;
+  const isChecked = selection.includes(item);
 
   const onChange = (e) => {
-    onContentRowSelect && onContentRowSelect(e.target.checked, item);
+    if (!isChecked) setSelection([...selection, item]);
+    else setSelection(selection.filter((g) => g.id !== item.id));
   };
 
-  const onRowContextClick = React.useCallback(() => {
-    onContentRowClick && onContentRowClick(!isChecked, item, false);
-  }, [isChecked, item, onContentRowClick]);
+  const onRowContextClick = () => {
+    // onContentRowClick && onContentRowClick(!isChecked, item, false);
+  };
 
   const onRowClick = (e) => {
     if (
@@ -223,7 +225,12 @@ const GroupsTableItem = (props) => {
     )
       return;
 
-    onContentRowClick && onContentRowClick(!isChecked, item);
+    if (selection.length === 1 && selection[0].id === item.id) {
+      setSelection([]);
+      return;
+    }
+
+    setSelection([item]);
   };
 
   const onLinkClick = () => {
@@ -275,6 +282,8 @@ const GroupsTableItem = (props) => {
     ],
   };
 
+  const value = item.id;
+
   const titleWithoutSpaces = item.name.replace(/\s+/g, " ").trim();
   const indexAfterLastSpace = titleWithoutSpaces.lastIndexOf(" ");
   const secondCharacter =
@@ -294,7 +303,7 @@ const GroupsTableItem = (props) => {
       <StyledPeopleRow
         key={item.id}
         className="table-row"
-        sideInfoColor={sideInfoColor}
+        sideInfoColor={theme.peopleTableRow.sideInfoColor}
         checked={isChecked}
         isActive={isActive}
         onClick={onRowClick}
@@ -351,6 +360,12 @@ const GroupsTableItem = (props) => {
   );
 };
 
-export default withTranslation(["People", "Common", "Settings"])(
-  withContent(GroupsTableItem),
+export default inject(({ peopleStore }) => ({
+  selection: peopleStore.groupsStore.selection,
+  setSelection: peopleStore.groupsStore.setSelection,
+  addGroupToSelection: peopleStore.groupsStore.addGroupToSelection,
+}))(
+  withTranslation(["People", "Common", "PeopleTranslations"])(
+    observer(GroupsTableItem)
+  )
 );

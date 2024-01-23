@@ -16,7 +16,8 @@ const SectionBodyContent = (props) => {
     tReady,
     accountsViewAs,
     isFiltered,
-    setSelection,
+    setPeopleSelection,
+    setGroupsSelection,
     setBufferSelection,
     setChangeOwnerDialogVisible,
     selectUser,
@@ -47,6 +48,7 @@ const SectionBodyContent = (props) => {
     if (
       (e.target.closest(".scroll-body") &&
         !e.target.closest(".user-item") &&
+        !e.target.closest(".group-item") &&
         !e.target.closest(".not-selectable") &&
         !e.target.closest(".info-panel") &&
         !e.target.closest(".table-container_group-menu")) ||
@@ -54,7 +56,8 @@ const SectionBodyContent = (props) => {
       e.target.closest(".add-button") ||
       e.target.closest(".search-input-block")
     ) {
-      setSelection([]);
+      setPeopleSelection([]);
+      setGroupsSelection([]);
       setBufferSelection(null);
       window?.getSelection()?.removeAllRanges();
     }
@@ -98,15 +101,20 @@ export default inject(({ peopleStore }) => {
   const { viewAs: accountsViewAs, filterStore, peopleWithGroups } = peopleStore;
   const { isFiltered, isFilteredOnlyBySearch } = filterStore;
 
-  const { setSelection, setBufferSelection, selectUser } =
-    peopleStore.selectionStore;
+  const {
+    setSelection: setPeopleSelection,
+    setBufferSelection,
+    selectUser,
+  } = peopleStore.selectionStore;
+  const { setSelection: setGroupsSelection } = peopleStore.groupsStore;
   const { setChangeOwnerDialogVisible } = peopleStore.dialogStore;
 
   return {
     accountsViewAs,
     isFiltered,
     isFilteredOnlyBySearch,
-    setSelection,
+    setPeopleSelection,
+    setGroupsSelection,
     setBufferSelection,
     setChangeOwnerDialogVisible,
     selectUser,
@@ -114,6 +122,6 @@ export default inject(({ peopleStore }) => {
   };
 })(
   withTranslation(["People", "Common", "PeopleTranslations"])(
-    withLoader(observer(SectionBodyContent))(),
-  ),
+    withLoader(observer(SectionBodyContent))()
+  )
 );

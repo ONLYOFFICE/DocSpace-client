@@ -445,7 +445,7 @@ const DropDown = ({
       clickOutsideAction?.(evt, !open);
     };
 
-    if (!open) {
+    if (!open && Array.isArray(eventTypes)) {
       eventTypes?.forEach((type) => {
         window.removeEventListener(type, listener);
       });
@@ -453,9 +453,10 @@ const DropDown = ({
       return;
     }
 
-    eventTypes?.forEach((type) => {
-      window.addEventListener(type, listener);
-    });
+    if (Array.isArray(eventTypes))
+      eventTypes?.forEach((type) => {
+        window.addEventListener(type, listener);
+      });
 
     return () => {
       eventTypes?.forEach((type) => {

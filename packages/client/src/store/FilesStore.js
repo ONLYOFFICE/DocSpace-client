@@ -1898,7 +1898,7 @@ class FilesStore {
         "submit-to-gallery",
         "separator-SubmitToGallery",
         "link-for-room-members",
-        // "sharing-settings",
+        "sharing-settings",
         // "external-link",
         "owner-change",
         // "link-for-portal-users",
@@ -1927,6 +1927,7 @@ class FilesStore {
         "separator2",
         // "unsubscribe",
         "delete",
+        "remove-from-recent",
       ];
 
       if (!canDownload) {
@@ -2293,7 +2294,7 @@ class FilesStore {
         "select",
         "open",
         // "separator0",
-        // "sharing-settings",
+        "sharing-settings",
         "link-for-room-members",
         "owner-change",
         "show-info",
@@ -2568,8 +2569,8 @@ class FilesStore {
     return api.rooms.updateRoomMemberRole(id, data);
   }
 
-  getHistory(module, id, signal = null) {
-    return api.rooms.getHistory(module, id, signal);
+  getHistory(module, id, signal = null, requestToken) {
+    return api.rooms.getHistory(module, id, signal, requestToken);
   }
 
   getRoomHistory(id) {
@@ -2999,6 +3000,7 @@ class FilesStore {
 
     const newItem = items.map((item) => {
       const {
+        availableExternalRights,
         access,
         autoDelete,
         originTitle,
@@ -3047,6 +3049,7 @@ class FilesStore {
         viewAccessibility,
         mute,
         inRoom,
+        requestToken,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3143,6 +3146,7 @@ class FilesStore {
         access === ShareAccessRights.None;
 
       return {
+        availableExternalRights,
         access,
         daysRemaining: autoDelete && getDaysRemaining(autoDelete),
         originTitle,
@@ -3211,6 +3215,7 @@ class FilesStore {
         hasDraft,
         isForm,
         canCopyPublicLink,
+        requestToken,
       };
     });
 
@@ -3627,7 +3632,8 @@ class FilesStore {
     providerKey = null,
     tab = null,
     url = null,
-    preview = false
+    preview = false,
+    shareKey = null
   ) => {
     const foundIndex = this.files.findIndex((x) => x.id === id);
     const file = foundIndex !== -1 ? this.files[foundIndex] : undefined;
@@ -3644,16 +3650,9 @@ class FilesStore {
     }
 
     const isPrivacy = this.treeFoldersStore.isPrivacyFolder;
+    const share = shareKey ? shareKey : this.publicRoomStore.publicRoomKey;
 
-    return openEditor(
-      id,
-      providerKey,
-      tab,
-      url,
-      isPrivacy,
-      preview,
-      this.publicRoomStore.publicRoomKey
-    );
+    return openEditor(id, providerKey, tab, url, isPrivacy, preview, share);
   };
 
   createThumbnails = async (files = null) => {

@@ -23,6 +23,7 @@ import {
   createFolder,
   moveToFolder,
   getFolder,
+  deleteFilesFromRecent,
 } from "@docspace/shared/api/files";
 import {
   ConflictResolveType,
@@ -2096,7 +2097,7 @@ class FilesActionStore {
     const { enablePlugins } = this.authStore.settingsStore;
 
     const { isLoading, setIsSectionFilterLoading } = this.clientLoadingStore;
-    const { isRecycleBinFolder } = this.treeFoldersStore;
+    const { isRecycleBinFolder, isRecentTab } = this.treeFoldersStore;
     const { setMediaViewerData } = this.mediaViewerDataStore;
     const { setConvertDialogVisible, setConvertItem } = this.dialogsStore;
 
@@ -2118,7 +2119,15 @@ class FilesActionStore {
     const canWebEdit = item.viewAccessibility?.WebEdit;
     const canViewedDocs = item.viewAccessibility?.WebView;
 
-    const { id, viewUrl, providerKey, fileStatus, encrypted, isFolder } = item;
+    const {
+      id,
+      viewUrl,
+      providerKey,
+      fileStatus,
+      encrypted,
+      isFolder,
+      webUrl,
+    } = item;
     if (encrypted && isPrivacyFolder) return checkProtocol(item.id, true);
 
     if (isRecycleBinFolder || isLoading) return;
@@ -2177,7 +2186,12 @@ class FilesActionStore {
           ? !item.security.FillForms
           : !item.security.Edit;
 
-        return openDocEditor(id, providerKey, tab, null, isPreview);
+        const shareWebUrl = new URL(webUrl);
+        const shareKey = isRecentTab
+          ? getObjectByLocation(shareWebUrl)?.share
+          : "";
+
+        return openDocEditor(id, providerKey, tab, null, isPreview, shareKey);
       }
 
       if (isMediaOrImage) {
@@ -2507,6 +2521,13 @@ class FilesActionStore {
       .finally(() => {
         setSelected("none");
       });
+  };
+
+  removeFilesFromRecent = async (fileIds) => {
+    const { refreshFiles } = this.filesStore;
+
+    await deleteFilesFromRecent(fileIds);
+    await refreshFiles();
   };
 }
 

@@ -17,14 +17,10 @@ import { isMobile as isMobileDevice } from "react-device-detect";
 import { Badge } from "@docspace/shared/components/badge";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
-import {
-  RoomsType,
-  ShareAccessRights,
-} from "@docspace/shared/enums";
+import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 import { Base } from "@docspace/shared/themes";
 
 import { isTablet, isDesktop, size, classNames } from "@docspace/shared/utils";
-
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -87,6 +83,8 @@ const Badges = ({
   isVisitor,
   onCopyPrimaryLink,
   isArchiveFolder,
+  isRecentTab,
+  canEditing,
 }) => {
   const {
     id,
@@ -208,7 +206,7 @@ const Badges = ({
           />
         </BadgeWrapper>
       )}
-      {isEditing && !isVisitor && !isPdf && (
+      {isEditing && !isVisitor && !isPdf && !(isRecentTab && !canEditing) && (
         <ColorTheme
           themeId={ThemeId.IconButton}
           isEditing={isEditing}

@@ -2,7 +2,9 @@ import isEmpty from "lodash/isEmpty";
 import omit from "lodash/omit";
 
 import { toastr } from "../components/toast";
-import { TTranslation, TUser } from "../types";
+import { TTranslation } from "../types";
+import { TUser } from "../api/people/types";
+import { ThemeKeys } from "../enums";
 
 import { getEditorTheme } from "./common";
 import { checkIsSSR } from "./device";
@@ -31,7 +33,7 @@ export function regDesktop(
       domain: desktopConstants.domain,
       provider: desktopConstants.provider,
       userId: user.id,
-      uiTheme: getEditorTheme(user.theme),
+      uiTheme: getEditorTheme(user.theme || ThemeKeys.BaseStr),
     };
 
     let extendedData;

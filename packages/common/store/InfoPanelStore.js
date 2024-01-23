@@ -1,4 +1,5 @@
 import { makeAutoObservable } from "mobx";
+import moment from "moment";
 
 import { getUserById } from "@docspace/shared/api/people";
 import { getUserRole } from "@docspace/shared/utils/common";
@@ -11,6 +12,12 @@ import {
 import config from "PACKAGE_FILE";
 import Filter from "@docspace/shared/api/people/filter";
 import { getRoomInfo } from "@docspace/shared/api/rooms";
+import {
+  getPrimaryLink,
+  getExternalLinks,
+  editExternalLink,
+  addExternalLink,
+} from "@docspace/shared/api/files";
 
 const observedKeys = [
   "id",
@@ -53,6 +60,8 @@ class InfoPanelStore {
   infoPanelSelection = null;
   infoPanelRoom = null;
   membersIsLoading = false;
+
+  shareChanged = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -511,6 +520,59 @@ class InfoPanelStore {
       users: [...users, ...newMembers.users],
       expected: [...expected, ...newMembers.expectedMembers],
     });
+  };
+
+  openShareTab = () => {
+    this.setView("info_share");
+    this.isVisible = true;
+  };
+
+  getPrimaryFileLink = async (fileId) => {
+    const { getFileInfo } = this.filesStore;
+
+    const res = await getPrimaryLink(fileId);
+    await getFileInfo(fileId);
+    return res;
+  };
+
+  getFileLinks = async (fileId) => {
+    const res = await getExternalLinks(fileId);
+    return res;
+  };
+
+  editFileLink = async (
+    fileId,
+    linkId,
+    access,
+    primary,
+    internal,
+    expirationDate
+  ) => {
+    const { getFileInfo } = this.filesStore;
+
+    const expDate = moment(expirationDate);
+    const res = await editExternalLink(
+      fileId,
+      linkId,
+      access,
+      primary,
+      internal,
+      expDate
+    );
+    await getFileInfo(fileId);
+    return res;
+  };
+
+  addFileLink = async (fileId, access, primary, internal) => {
+    const { getFileInfo } = this.filesStore;
+
+    const res = await addExternalLink(fileId, access, primary, internal);
+    await getFileInfo(fileId);
+    return res;
+  };
+
+  setShareChanged = (shareChanged) => {
+    this.shareChanged = shareChanged;
   };
 }
 

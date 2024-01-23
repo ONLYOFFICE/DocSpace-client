@@ -43,7 +43,7 @@ const CreatePortalDialog = () => {
   const [registerError, setRegisterError] = React.useState<null | string>(null);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
-  const { spacesStore, authStore } = useStore();
+  const { spacesStore, authStore, userStore } = useStore();
   const { tenantAlias, baseDomain, domainValidator } = authStore.settingsStore;
 
   const {
@@ -62,7 +62,11 @@ const CreatePortalDialog = () => {
   };
 
   const onHandleClick = async () => {
-    const { firstName, lastName, email } = authStore.userStore.user;
+    const { user } = userStore;
+
+    const firstName = user?.firstName;
+    const lastName = user?.lastName;
+    const email = user?.email;
 
     const data = {
       firstName,

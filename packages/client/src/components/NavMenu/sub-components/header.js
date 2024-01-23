@@ -338,7 +338,6 @@ HeaderComponent.propTypes = {
 export default inject(({ auth }) => {
   const {
     settingsStore,
-    userStore,
 
     isLoaded,
     isAuthenticated,
@@ -354,9 +353,6 @@ export default inject(({ auth }) => {
     theme,
     toggleArticleOpen,
   } = settingsStore;
-
-  //TODO: restore when chat will complete -> const mainModules = availableModules.filter((m) => !m.isolateMode);
-  const { user } = userStore;
 
   return {
     theme,

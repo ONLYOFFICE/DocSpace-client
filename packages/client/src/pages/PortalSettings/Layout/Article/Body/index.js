@@ -271,11 +271,11 @@ const ArticleBodyContent = (props) => {
   );
 };
 
-export default inject(({ auth, common, clientLoadingStore }) => {
+export default inject(({ auth, common, clientLoadingStore, userStore }) => {
   const { isLoadedArticleBody, setIsLoadedArticleBody } = common;
   const {
     currentTariffStatusStore,
-    userStore,
+
     isEnterprise,
     settingsStore,
     isCommunity,

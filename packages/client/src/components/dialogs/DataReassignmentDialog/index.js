@@ -248,7 +248,7 @@ const DataReassignmentDialog = ({
   );
 };
 
-export default inject(({ auth, peopleStore, setup }) => {
+export default inject(({ auth, peopleStore, setup, userStore }) => {
   const {
     setDataReassignmentDialogVisible,
     dataReassignmentDeleteProfile,
@@ -264,7 +264,7 @@ export default inject(({ auth, peopleStore, setup }) => {
     dataReassignmentTerminate,
   } = setup;
 
-  const { user: currentUser } = peopleStore.authStore.userStore;
+  const { user: currentUser } = userStore;
 
   const { getUsersList, needResetUserSelection } = peopleStore.usersStore;
 

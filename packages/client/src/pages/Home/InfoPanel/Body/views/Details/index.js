@@ -137,8 +137,7 @@ const Details = ({
 };
 
 export default inject(
-  ({ auth, filesStore, filesActionsStore, infoPanelStore }) => {
-    const { userStore } = auth;
+  ({ auth, filesStore, filesActionsStore, infoPanelStore, userStore }) => {
     const { selection, getInfoPanelItemIcon, openUser } = infoPanelStore;
     const { createThumbnail } = filesStore;
     const { personal, culture } = auth.settingsStore;

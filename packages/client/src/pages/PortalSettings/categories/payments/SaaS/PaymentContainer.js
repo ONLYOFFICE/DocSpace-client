@@ -340,7 +340,7 @@ export default inject(({ auth, payments }) => {
     currentQuotaStore,
     paymentQuotasStore,
     currentTariffStatusStore,
-    userStore,
+
     settingsStore,
   } = auth;
   const { showText: expandArticle } = settingsStore;

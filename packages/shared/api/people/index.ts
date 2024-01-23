@@ -1,10 +1,15 @@
+import { AxiosRequestConfig } from "axios";
+
 import { request } from "../client";
 // import axios from "axios";
 import Filter from "./filter";
 
 import { Encoder } from "../../utils/encoder";
 import { checkFilterInstance } from "../../utils/common";
-import { TGetUserList } from "./types";
+import { TChangeTheme, TGetUserList, TUser } from "./types";
+
+import { TReqOption } from "../../utils/axiosClient";
+import { EmployeeActivationStatus, ThemeKeys } from "../../enums";
 
 export async function getUserList(filter = Filter.getDefault()) {
   let params = "";
@@ -33,8 +38,8 @@ export async function getUserList(filter = Filter.getDefault()) {
   return res;
 }
 
-export function getUser(userName = null, headers = null) {
-  const options = {
+export async function getUser(userName = null, headers = null) {
+  const options: AxiosRequestConfig & TReqOption = {
     method: "get",
     url: `/people/${userName || "@self"}`,
     skipUnauthorized: true,
@@ -42,12 +47,13 @@ export function getUser(userName = null, headers = null) {
 
   if (headers) options.headers = headers;
 
-  return request(options).then((user) => {
-    if (user && user.displayName) {
-      user.displayName = Encoder.htmlDecode(user.displayName);
-    }
-    return user;
-  });
+  const user = (await request(options)) as TUser;
+
+  if (user && user.displayName) {
+    user.displayName = Encoder.htmlDecode(user.displayName);
+  }
+
+  return user;
 }
 
 export function getUserByEmail(userEmail) {
@@ -112,23 +118,32 @@ export function changePassword(userId, passwordHash, key) {
   });
 }
 
-export function changeEmail(userId, email, key) {
+export async function changeEmail(userId: string, email: string, key: string) {
   const data = { email };
 
-  return request({
+  const res = (await request({
     method: "put",
     url: `/people/${userId}/password`,
     data,
     headers: { confirm: key },
-  });
+  })) as TUser;
+
+  return res;
 }
-export function updateActivationStatus(activationStatus, userId, key) {
-  return request({
+
+export async function updateActivationStatus(
+  activationStatus: EmployeeActivationStatus,
+  userId: string,
+  key: string,
+) {
+  const res = (await request({
     method: "put",
     url: `/people/activationstatus/${activationStatus}`,
     data: { userIds: [userId] },
     headers: { confirm: key },
-  });
+  })) as TUser;
+
+  return res;
 }
 
 export function updateUser(data) {
@@ -214,8 +229,8 @@ export const inviteUsers = async (data) => {
   return res;
 };
 
-export function resendUserInvites(userIds) {
-  return request({
+export async function resendUserInvites(userIds: string[]) {
+  await request({
     method: "put",
     url: "/people/invite",
     data: { userIds },
@@ -342,14 +357,16 @@ export function getSelectorUserList() {
   });
 }
 
-export function changeTheme(key) {
+export async function changeTheme(key: ThemeKeys) {
   const data = { Theme: key };
 
-  return request({
+  const res = (await request({
     method: "put",
     url: `/people/theme`,
     data,
-  });
+  })) as TChangeTheme;
+
+  return res;
 }
 
 export function getUsersByQuery(query) {

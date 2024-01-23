@@ -12,6 +12,8 @@ import axios from "axios";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 class PaymentStore {
+  userStore = null;
+
   salesEmail = "";
   helpUrl = "https://helpdesk.onlyoffice.com";
   buyUrl =
@@ -37,7 +39,9 @@ class PaymentStore {
   isInitPaymentPage = false;
   isLicenseCorrect = false;
 
-  constructor() {
+  constructor(userStore) {
+    this.userStore = userStore;
+
     makeAutoObservable(this);
   }
 
@@ -333,8 +337,8 @@ class PaymentStore {
   }
 
   get isPayer() {
-    const { userStore, currentTariffStatusStore } = authStore;
-    const { user } = userStore;
+    const { currentTariffStatusStore } = authStore;
+    const { user } = this.userStore;
 
     const { payerInfo } = currentTariffStatusStore;
 
@@ -344,8 +348,7 @@ class PaymentStore {
   }
 
   get isStripePortalAvailable() {
-    const { userStore } = authStore;
-    const { user } = userStore;
+    const { user } = this.userStore;
 
     if (!user) return false;
 
@@ -353,8 +356,8 @@ class PaymentStore {
   }
 
   get canUpdateTariff() {
-    const { currentQuotaStore, userStore } = authStore;
-    const { user } = userStore;
+    const { currentQuotaStore } = authStore;
+    const { user } = this.userStore;
     const { isFreeTariff } = currentQuotaStore;
 
     if (!user) return false;

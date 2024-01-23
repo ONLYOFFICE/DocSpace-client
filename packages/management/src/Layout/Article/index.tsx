@@ -1,6 +1,8 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
+import { IUserStore } from "@docspace/shared/store/UserStore";
+
 import Article from "@docspace/shared/components/article";
 
 import ArticleHeaderContent from "./Header";
@@ -75,10 +77,18 @@ const ArticleWrapper = ({
 };
 
 export default inject(
-  ({ auth, uploadDataStore }: { auth: any; uploadDataStore: any }) => {
+  ({
+    auth,
+    uploadDataStore,
+    userStore,
+  }: {
+    auth: any;
+    uploadDataStore: any;
+    userStore: IUserStore;
+  }) => {
     const {
       settingsStore,
-      userStore,
+
       languageBaseName,
       isLiveChatAvailable,
       bannerStore,
@@ -92,7 +102,9 @@ export default inject(
 
     const { zendeskKey, isMobileArticle } = settingsStore;
 
-    const { email, displayName } = user;
+    const email = user?.email;
+    const displayName = user?.displayName;
+
     const { primaryProgressDataStore, secondaryProgressDataStore } =
       uploadDataStore;
 

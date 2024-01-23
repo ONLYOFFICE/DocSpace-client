@@ -23,19 +23,17 @@ import MainLayout from "SRC_DIR/Layout";
 import Error403 from "client/Error403";
 import i18n from "./i18n";
 
-
 declare global {
   interface Window {
     timezone: string;
   }
 }
 
-
 const App = observer(() => {
   const { i18n } = useTranslation();
 
-  const { authStore } = useStore();
-  const { init, settingsStore, userStore } = authStore;
+  const { authStore, userStore } = useStore();
+  const { init, settingsStore } = authStore;
   const { theme, setTheme, currentColorScheme, limitedAccessSpace, timezone } =
     settingsStore;
 

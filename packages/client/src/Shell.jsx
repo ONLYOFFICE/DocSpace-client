@@ -407,72 +407,74 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   );
 };
 
-const ShellWrapper = inject(({ auth, backup, clientLoadingStore }) => {
-  const { i18n } = useTranslation();
+const ShellWrapper = inject(
+  ({ auth, backup, clientLoadingStore, userStore }) => {
+    const { i18n } = useTranslation();
 
-  const { init, isLoaded, settingsStore, setProductVersion, language } = auth;
+    const { init, isLoaded, settingsStore, setProductVersion, language } = auth;
 
-  const {
-    personal,
-    roomsMode,
-    isDesktopClient,
-    firebaseHelper,
-    setModuleInfo,
-    setCheckedMaintenance,
-    setMaintenanceExist,
-    setSnackbarExist,
-    socketHelper,
-    setTheme,
-    whiteLabelLogoUrls,
-    standalone,
-    currentDeviceType,
-  } = settingsStore;
+    const {
+      personal,
+      roomsMode,
+      isDesktopClient,
+      firebaseHelper,
+      setModuleInfo,
+      setCheckedMaintenance,
+      setMaintenanceExist,
+      setSnackbarExist,
+      socketHelper,
+      setTheme,
+      whiteLabelLogoUrls,
+      standalone,
+      currentDeviceType,
+    } = settingsStore;
 
-  const isBase = settingsStore.theme.isBase;
-  const { setPreparationPortalDialogVisible } = backup;
+    const isBase = settingsStore.theme.isBase;
+    const { setPreparationPortalDialogVisible } = backup;
 
-  const userTheme = isDesktopClient
-    ? auth?.userStore?.user?.theme
-      ? auth?.userStore?.user?.theme
-      : window.RendererProcessVariable?.theme?.type === "dark"
-        ? "Dark"
-        : "Base"
-    : auth?.userStore?.user?.theme;
+    const userTheme = isDesktopClient
+      ? userStore?.user?.theme
+        ? userStore?.user?.theme
+        : window.RendererProcessVariable?.theme?.type === "dark"
+          ? "Dark"
+          : "Base"
+      : userStore?.user?.theme;
 
-  return {
-    loadBaseInfo: async () => {
-      await init(false, i18n);
+    return {
+      loadBaseInfo: async () => {
+        await init(false, i18n);
 
-      setModuleInfo(config.homepage, "home");
-      setProductVersion(config.version);
+        setModuleInfo(config.homepage, "home");
+        setProductVersion(config.version);
 
-      if (isDesktopClient) {
-        document.body.classList.add("desktop");
-      }
-    },
-    language,
-    isLoaded,
+        if (isDesktopClient) {
+          document.body.classList.add("desktop");
+        }
+      },
+      language,
+      isLoaded,
 
-    isDesktop: isDesktopClient,
-    FirebaseHelper: firebaseHelper,
-    personal,
-    setCheckedMaintenance,
-    setMaintenanceExist,
-    socketHelper,
-    setPreparationPortalDialogVisible,
-    isBase,
-    setTheme,
-    roomsMode,
-    setSnackbarExist,
-    userTheme: userTheme,
-    userId: auth?.userStore?.user?.id,
-    whiteLabelLogoUrls,
-    standalone,
-    currentDeviceType,
+      isDesktop: isDesktopClient,
+      FirebaseHelper: firebaseHelper,
+      personal,
+      setCheckedMaintenance,
+      setMaintenanceExist,
+      socketHelper,
+      setPreparationPortalDialogVisible,
+      isBase,
+      setTheme,
+      roomsMode,
+      setSnackbarExist,
+      userTheme: userTheme,
+      userId: userStore?.user?.id,
+      whiteLabelLogoUrls,
+      standalone,
+      currentDeviceType,
 
-    showArticleLoader: clientLoadingStore.showArticleLoader,
-  };
-})(observer(Shell));
+      showArticleLoader: clientLoadingStore.showArticleLoader,
+    };
+  }
+)(observer(Shell));
 
 const ThemeProviderWrapper = inject(({ auth, loginStore }) => {
   const { settingsStore } = auth;

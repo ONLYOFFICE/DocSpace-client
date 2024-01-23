@@ -131,7 +131,7 @@ const BodyContent = withTranslation(["Article"])(
   withLoader(ArticleBodyContent)(<ArticleFolderLoader />)
 );
 
-export default inject(({ auth, peopleStore }) => {
+export default inject(({ auth, peopleStore, userStore }) => {
   const { settingsStore, setDocumentTitle, isAdmin } = auth;
   const { customNames, showText, toggleArticleOpen } = settingsStore;
   const { groupsStore, selectedGroupStore, filterStore } = peopleStore;
@@ -144,7 +144,7 @@ export default inject(({ auth, peopleStore }) => {
   return {
     setDocumentTitle,
 
-    isVisitor: auth.userStore.user.isVisitor,
+    isVisitor: userStore.user.isVisitor,
     isAdmin,
     groups,
     groupsCaption,

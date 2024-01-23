@@ -1132,9 +1132,10 @@ export default inject(
     oformsStore,
     pluginStore,
     infoPanelStore,
+    userStore,
   }) => {
-    const isOwner = auth.userStore.user?.isOwner;
-    const isAdmin = auth.userStore.user?.isAdmin;
+    const isOwner = userStore.user?.isOwner;
+    const isAdmin = userStore.user?.isAdmin;
 
     const {
       setSelected,

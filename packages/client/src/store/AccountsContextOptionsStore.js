@@ -35,12 +35,14 @@ class AccountsContextOptionsStore {
   authStore = null;
   infoPanelStore = null;
   peopleStore = null;
+  userStore = null;
 
-  constructor(peopleStore, infoPanelStore) {
+  constructor(peopleStore, infoPanelStore, userStore) {
     makeAutoObservable(this);
     this.authStore = peopleStore.authStore;
     this.infoPanelStore = infoPanelStore;
     this.peopleStore = peopleStore;
+    this.userStore = userStore;
   }
 
   getUserContextOptions = (t, options, item) => {
@@ -190,7 +192,7 @@ class AccountsContextOptionsStore {
     const { setSendInviteDialogVisible, setDeleteProfileDialogVisible } =
       this.peopleStore.dialogStore;
 
-    const { isOwner } = this.authStore.userStore.user;
+    const { isOwner } = this.userStore.user;
 
     const { setIsVisible, isVisible } = this.infoPanelStore;
 

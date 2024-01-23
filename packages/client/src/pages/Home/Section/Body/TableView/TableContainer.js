@@ -260,7 +260,14 @@ const Table = ({
 };
 
 export default inject(
-  ({ filesStore, infoPanelStore, treeFoldersStore, auth, tableStore }) => {
+  ({
+    filesStore,
+    infoPanelStore,
+    treeFoldersStore,
+    auth,
+    tableStore,
+    userStore,
+  }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
     const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
@@ -290,7 +297,7 @@ export default inject(
       setFirsElemChecked,
       setHeaderBorder,
       theme,
-      userId: auth.userStore.user?.id,
+      userId: userStore.user?.id,
       infoPanelVisible,
       fetchMoreFiles,
       hasMoreFiles,

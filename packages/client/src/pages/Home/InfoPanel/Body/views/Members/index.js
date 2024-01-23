@@ -433,7 +433,7 @@ const Members = ({
 
 export default inject(
   ({
-    auth,
+    userStore,
     filesStore,
     peopleStore,
     selectedFolderStore,
@@ -467,7 +467,7 @@ export default inject(
       selection,
       bufferSelection,
     } = filesStore;
-    const { id: selfId } = auth.userStore.user;
+    const { id: selfId } = userStore.user;
 
     const { changeType: changeUserType } = peopleStore;
     const {

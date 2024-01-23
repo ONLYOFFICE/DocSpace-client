@@ -99,9 +99,9 @@ const PeopleTableRow = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
+export default inject(({ auth, userStore }) => {
   const { culture } = auth.settingsStore;
-  const { user } = auth.userStore;
+  const { user } = userStore;
   const locale = (user && user.cultureName) || culture || "en";
 
   return {

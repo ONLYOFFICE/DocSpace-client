@@ -22,6 +22,7 @@ const myDocumentsFolderId = 2;
 class OformsStore {
   authStore;
   infoPanelStore;
+  userStore = null;
 
   oformFiles = null;
   gallerySelected = null;
@@ -45,15 +46,16 @@ class OformsStore {
     "submitToGalleryTileIsHidden"
   );
 
-  constructor(authStore, infoPanelStore) {
+  constructor(authStore, infoPanelStore, userStore) {
     this.authStore = authStore;
     this.infoPanelStore = infoPanelStore;
+    this.userStore = userStore;
     makeAutoObservable(this);
   }
 
   get defaultOformLocale() {
     const userLocale =
-      getCookie(LANGUAGE) || this.authStore.userStore.user?.cultureName || "en";
+      getCookie(LANGUAGE) || this.userStore.user?.cultureName || "en";
     const convertedLocale = convertToLanguage(userLocale);
 
     return this.oformLocales?.includes(convertedLocale)

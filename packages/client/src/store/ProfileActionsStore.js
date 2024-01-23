@@ -34,6 +34,7 @@ const PAYMENTS_URL = combineUrl(
 const SPACES_URL = combineUrl(PROXY_HOMEPAGE_URL, "/management");
 class ProfileActionsStore {
   authStore = null;
+  userStore = null;
   filesStore = null;
   peopleStore = null;
   treeFoldersStore = null;
@@ -50,7 +51,8 @@ class ProfileActionsStore {
     peopleStore,
     treeFoldersStore,
     selectedFolderStore,
-    pluginStore
+    pluginStore,
+    userStore
   ) {
     this.authStore = authStore;
     this.filesStore = filesStore;
@@ -58,6 +60,7 @@ class ProfileActionsStore {
     this.treeFoldersStore = treeFoldersStore;
     this.selectedFolderStore = selectedFolderStore;
     this.pluginStore = pluginStore;
+    this.userStore = userStore;
 
     this.isShowLiveChat = this.getStateLiveChat();
 
@@ -99,7 +102,7 @@ class ProfileActionsStore {
   };
 
   onProfileClick = () => {
-    const { isAdmin, isOwner } = this.authStore.userStore.user;
+    const { isAdmin, isOwner } = this.userStore.user;
     const { isRoomAdmin } = this.authStore;
 
     this.profileClicked = true;
@@ -207,7 +210,7 @@ class ProfileActionsStore {
     } = this.authStore.settingsStore;
     const isAdmin = this.authStore.isAdmin;
     const isCommunity = this.authStore.isCommunity;
-    const { isOwner } = this.authStore.userStore.user;
+    const { isOwner } = this.userStore.user;
 
     // const settingsModule = modules.find((module) => module.id === "settings");
     // const peopleAvailable = modules.some((m) => m.appName === "people");

@@ -8,10 +8,16 @@ const ArticleWrapper = (props: ArticleProps) => {
 };
 
 export default inject(
-  ({ auth, uploadDataStore, profileActionsStore, dialogsStore }: any) => {
+  ({
+    auth,
+    uploadDataStore,
+    profileActionsStore,
+    dialogsStore,
+    userStore,
+  }: any) => {
     const {
       settingsStore,
-      userStore,
+
       isLiveChatAvailable,
       bannerStore,
       currentQuotaStore,

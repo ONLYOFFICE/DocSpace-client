@@ -337,6 +337,7 @@ export default inject(
     treeFoldersStore,
     selectedFolderStore,
     clientLoadingStore,
+    userStore,
   }) => {
     const { isDesktopClient, isEncryptionSupport, organizationName, theme } =
       auth.settingsStore;
@@ -356,8 +357,8 @@ export default inject(
       theme,
       isPrivacyFolder,
       isDesktop: isDesktopClient,
-      isVisitor: auth?.userStore?.user?.isVisitor,
-      isCollaborator: auth?.userStore?.user?.isCollaborator,
+      isVisitor: userStore?.user?.isVisitor,
+      isCollaborator: userStore?.user?.isCollaborator,
       isEncryptionSupport,
       organizationName,
       privacyInstructions,

@@ -226,8 +226,8 @@ const Accounts = ({
 };
 
 export default inject(
-  ({ auth, peopleStore, accessRightsStore, infoPanelStore }) => {
-    const { isOwner, isAdmin, id: selfId } = auth.userStore.user;
+  ({ userStore, peopleStore, accessRightsStore, infoPanelStore }) => {
+    const { isOwner, isAdmin, id: selfId } = userStore.user;
     const { changeType: changeUserType, usersStore } = peopleStore;
     const { canChangeUserType } = accessRightsStore;
 

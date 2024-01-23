@@ -160,8 +160,8 @@ const ReportDialog = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { user, currentDeviceType } = auth.userStore;
+export default inject(({ auth, userStore }) => {
+  const { user } = userStore;
   const { firebaseHelper } = auth.settingsStore;
 
   return {

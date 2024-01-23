@@ -2079,6 +2079,7 @@ export default inject(
     peopleStore,
     publicRoomStore,
     infoPanelStore,
+    userStore,
   }) => {
     const {
       filter,
@@ -2102,7 +2103,7 @@ export default inject(
 
     const { fetchTags } = tagsStore;
     const { isRoomAdmin } = auth;
-    const { user } = auth.userStore;
+    const { user } = userStore;
     const { personal, standalone, currentDeviceType } = auth.settingsStore;
     const {
       isFavoritesFolder,

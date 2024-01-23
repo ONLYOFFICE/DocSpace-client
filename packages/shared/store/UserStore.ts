@@ -1,0 +1,188 @@
+/* eslint-disable no-console */
+/* eslint-disable no-underscore-dangle */
+import { makeAutoObservable, runInAction } from "mobx";
+
+import api from "../api";
+import { TUser } from "../api/people/types";
+import { EmployeeActivationStatus, ThemeKeys } from "../enums";
+import { TI18n } from "../types";
+
+export interface IUserStore {
+  user: TUser | null;
+  isLoading: boolean;
+  isLoaded: boolean;
+  userIsUpdate: boolean;
+  withSendAgain: boolean;
+
+  init: (i18: TI18n) => void;
+
+  loadCurrentUser: () => Promise<TUser | null>;
+
+  setIsLoading: (value: boolean) => void;
+  setIsLoaded: (value: boolean) => void;
+  setUserIsUpdate: (value: boolean) => void;
+  setWithSendAgain: (value: boolean) => void;
+  setUser: (user: TUser) => void;
+
+  changeEmail: (userId: string, email: string, key: string) => Promise<void>;
+  updateEmailActivationStatus: (
+    activationStatus: EmployeeActivationStatus,
+    userId: string,
+    key: string,
+  ) => Promise<void>;
+  changeTheme: (key: ThemeKeys) => Promise<ThemeKeys>;
+  sendActivationLink: () => Promise<string | null>;
+  updateAvatarInfo: (
+    avatar: string,
+    avatarSmall: string,
+    avatarMedium: string,
+    avatarMax: string,
+  ) => void;
+
+  withActivationBar: boolean | null;
+  isAuthenticated: boolean;
+}
+
+class UserStore implements IUserStore {
+  user: TUser | null = null;
+
+  isLoading = false;
+
+  isLoaded = false;
+
+  userIsUpdate = false;
+
+  withSendAgain = true;
+
+  constructor() {
+    makeAutoObservable(this);
+  }
+
+  loadCurrentUser = async () => {
+    let user = null;
+    if (window?.__ASC_INITIAL_EDITOR_STATE__?.user)
+      user = window.__ASC_INITIAL_EDITOR_STATE__.user;
+    else user = await api.people.getUser();
+
+    this.setUser(user);
+
+    return user;
+  };
+
+  init = async (i18n: TI18n) => {
+    if (this.isLoaded) return;
+
+    this.setIsLoading(true);
+
+    try {
+      const user = await this.loadCurrentUser();
+
+      if (i18n && user.cultureName !== i18n.language) {
+        // console.log({ i18n, user });
+        if (user.cultureName) i18n.changeLanguage(user.cultureName);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+
+    this.setIsLoading(false);
+    this.setIsLoaded(true);
+  };
+
+  setIsLoading = (isLoading: boolean) => {
+    this.isLoading = isLoading;
+  };
+
+  setIsLoaded = (isLoaded: boolean) => {
+    this.isLoaded = isLoaded;
+  };
+
+  setUser = (user: TUser) => {
+    this.user = user;
+  };
+
+  changeEmail = async (userId: string, email: string, key: string) => {
+    this.setIsLoading(true);
+
+    const user = await api.people.changeEmail(userId, email, key);
+
+    this.setUser(user);
+    this.setIsLoading(false);
+  };
+
+  updateEmailActivationStatus = async (
+    activationStatus: EmployeeActivationStatus,
+    userId: string,
+    key: string,
+  ) => {
+    this.setIsLoading(true);
+
+    const user = await api.people.updateActivationStatus(
+      activationStatus,
+      userId,
+      key,
+    );
+
+    this.setUser(user);
+    this.setIsLoading(false);
+  };
+
+  changeTheme = async (key: ThemeKeys) => {
+    this.setIsLoading(true);
+
+    const { theme } = await api.people.changeTheme(key);
+
+    runInAction(() => {
+      if (this.user) this.user.theme = theme;
+    });
+
+    this.setIsLoading(false);
+
+    return theme;
+  };
+
+  setUserIsUpdate = (isUpdate: boolean) => {
+    // console.log("setUserIsUpdate");
+    this.userIsUpdate = isUpdate;
+  };
+
+  setWithSendAgain = (withSendAgain: boolean) => {
+    this.withSendAgain = withSendAgain;
+  };
+
+  sendActivationLink = async () => {
+    if (!this.user) return null;
+    const { email, id } = this.user;
+    await api.people.resendUserInvites([id]);
+    return email;
+  };
+
+  updateAvatarInfo = (
+    avatar: string,
+    avatarSmall: string,
+    avatarMedium: string,
+    avatarMax: string,
+  ) => {
+    if (this.user) {
+      this.user.avatar = avatar;
+      this.user.avatarSmall = avatarSmall;
+      this.user.avatarMedium = avatarMedium;
+      this.user.avatarMax = avatarMax;
+    }
+  };
+
+  get withActivationBar() {
+    return (
+      this.user &&
+      (this.user.activationStatus === EmployeeActivationStatus.Pending ||
+        this.user.activationStatus === EmployeeActivationStatus.NotActivated) &&
+      this.withSendAgain
+    );
+  }
+
+  get isAuthenticated() {
+    return !!this.user;
+  }
+}
+
+export { UserStore };

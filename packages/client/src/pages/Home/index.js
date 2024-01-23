@@ -359,6 +359,7 @@ export default inject(
     tagsStore,
     selectedFolderStore,
     clientLoadingStore,
+    userStore,
   }) => {
     const { setSelectedFolder, security: folderSecurity } = selectedFolderStore;
     const {
@@ -500,7 +501,7 @@ export default inject(
       converted,
       isRecycleBinFolder,
       isPrivacyFolder,
-      isVisitor: auth.userStore.user.isVisitor,
+      isVisitor: userStore.user.isVisitor,
       folderSecurity,
       primaryProgressDataVisible,
       primaryProgressDataPercent,
@@ -555,7 +556,7 @@ export default inject(
       isFrame,
       showTitle: frameConfig?.showTitle,
       showFilter: frameConfig?.showFilter,
-      user: auth.userStore.user,
+      user: userStore.user,
       folders,
       files,
       selection,
@@ -585,7 +586,7 @@ export default inject(
       createTag,
       addTagsToRoom,
       removeTagsFromRoom,
-      loadCurrentUser: auth.userStore.loadCurrentUser,
+      loadCurrentUser: userStore.loadCurrentUser,
       updateProfileCulture,
       getRooms,
       setSelectedFolder,

@@ -176,6 +176,7 @@ export default function withBadges(WrappedComponent) {
         dialogsStore,
         filesStore,
         publicRoomStore,
+        userStore,
       },
       { item }
     ) => {
@@ -205,7 +206,7 @@ export default function withBadges(WrappedComponent) {
         isArchiveFolderRoot,
         theme,
         isAdmin: auth.isAdmin,
-        isVisitor: auth?.userStore?.user?.isVisitor || !auth?.userStore?.user,
+        isVisitor: userStore?.user?.isVisitor || !userStore?.user,
         isTrashFolder: isRecycleBinFolder,
         isPrivacyFolder,
         homepage: config.homepage,

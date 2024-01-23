@@ -229,8 +229,8 @@ const ChangePortalOwnerDialog = ({
   );
 };
 
-export default inject(({ auth, setup }) => {
-  const { displayName, avatar, id } = auth.userStore.user;
+export default inject(({ auth, setup, userStore }) => {
+  const { displayName, avatar, id } = userStore.user;
   const { currentColorScheme } = auth.settingsStore;
   const { sendOwnerChange } = setup;
 

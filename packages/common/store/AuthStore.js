@@ -4,7 +4,7 @@ import { setWithCredentialsStatus } from "@docspace/shared/api/client";
 
 import SettingsStore from "./SettingsStore";
 import BannerStore from "./BannerStore";
-import UserStore from "./UserStore";
+
 import TfaStore from "./TfaStore";
 import {
   logout as logoutDesktop,
@@ -20,6 +20,10 @@ import { TenantStatus } from "@docspace/shared/enums";
 import { COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getPortalTenantExtra } from "@docspace/shared/api/portal";
+
+import { UserStore } from "@docspace/shared/store/UserStore";
+
+export const userStore = new UserStore();
 
 class AuthStore {
   userStore = null;
@@ -39,8 +43,8 @@ class AuthStore {
 
   tenantExtra = {};
 
-  constructor() {
-    this.userStore = new UserStore();
+  constructor(userStore) {
+    this.userStore = userStore;
 
     this.settingsStore = new SettingsStore();
     this.tfaStore = new TfaStore();
@@ -461,4 +465,4 @@ class AuthStore {
   }
 }
 
-export default new AuthStore();
+export default new AuthStore(userStore);

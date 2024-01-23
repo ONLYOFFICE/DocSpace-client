@@ -184,7 +184,7 @@ const FileManagement = ({
   );
 };
 
-export default inject(({ auth, settingsStore, treeFoldersStore }) => {
+export default inject(({ userStore, settingsStore, treeFoldersStore }) => {
   const {
     storeOriginalFiles,
     confirmDelete,
@@ -217,7 +217,7 @@ export default inject(({ auth, settingsStore, treeFoldersStore }) => {
 
     myFolderId,
     commonFolderId,
-    isVisitor: auth.userStore.user.isVisitor,
+    isVisitor: userStore.user.isVisitor,
     favoritesSection,
     recentSection,
 

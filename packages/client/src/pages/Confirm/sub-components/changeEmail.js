@@ -81,8 +81,8 @@ const ChangeEmailForm = (props) => (
   </SectionWrapper>
 );
 
-export default inject(({ auth }) => {
-  const { userStore, settingsStore, isLoaded } = auth;
+export default inject(({ auth, userStore }) => {
+  const { settingsStore, isLoaded } = auth;
   return {
     isLoaded,
     changeEmail: userStore.changeEmail,

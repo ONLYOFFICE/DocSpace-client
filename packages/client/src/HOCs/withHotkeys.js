@@ -388,6 +388,7 @@ const withHotkeys = (Component) => {
       mediaViewerDataStore,
       treeFoldersStore,
       selectedFolderStore,
+      userStore,
     }) => {
       const {
         setSelected,
@@ -438,7 +439,7 @@ const withHotkeys = (Component) => {
       const { setHotkeyPanelVisible } = auth.settingsStore;
       const { isGracePeriod } = auth.currentTariffStatusStore;
 
-      const isVisitor = auth.userStore.user?.isVisitor;
+      const isVisitor = userStore.user?.isVisitor;
 
       const {
         isFavoritesFolder,

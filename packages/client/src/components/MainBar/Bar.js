@@ -294,8 +294,8 @@ const Bar = (props) => {
   ) : null;
 };
 
-export default inject(({ auth, profileActionsStore }) => {
-  const { user, withActivationBar, sendActivationLink } = auth.userStore;
+export default inject(({ auth, profileActionsStore, userStore }) => {
+  const { user, withActivationBar, sendActivationLink } = userStore;
 
   const { onPaymentsClick } = profileActionsStore;
 

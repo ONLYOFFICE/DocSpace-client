@@ -104,8 +104,7 @@ const History = ({
 };
 
 export default inject(
-  ({ auth, filesStore, filesActionsStore, infoPanelStore }) => {
-    const { userStore } = auth;
+  ({ auth, filesStore, filesActionsStore, infoPanelStore, userStore }) => {
     const {
       selection,
       selectionHistory,

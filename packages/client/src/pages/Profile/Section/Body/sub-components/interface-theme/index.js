@@ -183,8 +183,8 @@ const InterfaceTheme = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { userStore, settingsStore } = auth;
+export default inject(({ auth, userStore }) => {
+  const { settingsStore } = auth;
 
   const { changeTheme, user } = userStore;
   const { currentColorScheme, selectedThemeId, isDesktopClient } =

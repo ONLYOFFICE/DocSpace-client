@@ -141,13 +141,14 @@ export default inject(
     filesStore,
     selectedFolderStore,
     filesActionsStore,
+    userStore,
   }) => {
     const {
       changeRoomOwnerIsVisible,
       setChangeRoomOwnerIsVisible,
       changeRoomOwnerData,
     } = dialogsStore;
-    const { settingsStore, userStore } = auth;
+    const { settingsStore } = auth;
 
     const { selection, bufferSelection } = filesStore;
 

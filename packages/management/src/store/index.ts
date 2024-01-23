@@ -3,10 +3,13 @@ import { createContext, useContext } from "react";
 import SpacesStore from "./SpacesStore";
 
 import store from "client/store";
-const { auth: authStore } = store;
+import { IUserStore } from "@docspace/shared/store/UserStore";
+const { auth: authStore, userStore }: { userStore: IUserStore; auth: any } =
+  store;
 
 export class RootStore {
   authStore = authStore;
+  userStore = userStore;
   spacesStore = new SpacesStore(this.authStore);
 }
 

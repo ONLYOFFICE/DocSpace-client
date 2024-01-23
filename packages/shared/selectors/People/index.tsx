@@ -280,15 +280,4 @@ const PeopleSelector = ({
   );
 };
 
-// const ExtendedPeopleSelector = inject(({ auth }) => {
-//   return {
-//     theme: auth.settingsStore.theme,
-//     currentUserId: auth.userStore.user.id,
-//   };
-// })(observer(PeopleSelector));
-
-// export default (props) => (
-
-// );
-
 export default PeopleSelector;

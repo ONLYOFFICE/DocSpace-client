@@ -220,10 +220,10 @@ ChangeEmailDialog.propTypes = {
   user: PropTypes.object.isRequired,
 };
 
-export default inject(({ auth, peopleStore }) => {
+export default inject(({ auth, peopleStore, userStore }) => {
   const { updateProfile } = peopleStore.targetUserStore;
   const { updateProfileInUsers } = peopleStore.usersStore;
-  const { user: profile } = auth.userStore;
+  const { user: profile } = userStore;
 
   return {
     updateProfile,

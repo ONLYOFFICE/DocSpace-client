@@ -144,8 +144,8 @@ DebugInfoDialog.propTypes = {
   buildVersionInfo: PropTypes.object,
 };
 
-export default inject(({ auth }) => {
-  const { user } = auth.userStore;
+export default inject(({ userStore }) => {
+  const { user } = userStore;
 
   return {
     user,

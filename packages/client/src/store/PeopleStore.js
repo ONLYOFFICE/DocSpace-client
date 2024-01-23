@@ -43,6 +43,7 @@ class PeopleStore {
   accessRightsStore = null;
   profileActionsStore = null;
   infoPanelStore = null;
+  userStore = null;
   isInit = false;
   viewAs = isDesktop() ? "table" : "row";
   isLoadedProfileSectionBody = false;
@@ -52,13 +53,19 @@ class PeopleStore {
     setupStore,
     accessRightsStore,
     dialogsStore,
-    infoPanelStore
+    infoPanelStore,
+    userStore
   ) {
     this.authStore = authStore;
     this.infoPanelStore = infoPanelStore;
     this.groupsStore = new GroupsStore(this);
-    this.usersStore = new UsersStore(this, authStore, infoPanelStore);
-    this.targetUserStore = new TargetUserStore(this);
+    this.usersStore = new UsersStore(
+      this,
+      authStore,
+      infoPanelStore,
+      userStore
+    );
+    this.targetUserStore = new TargetUserStore(this, userStore);
     this.selectedGroupStore = new SelectedGroupStore(this);
     this.editingFormStore = new EditingFormStore(this);
     this.filterStore = new FilterStore();
@@ -67,6 +74,7 @@ class PeopleStore {
     this.avatarEditorStore = new AvatarEditorStore(this);
     this.inviteLinksStore = new InviteLinksStore(this);
     this.dialogStore = new DialogStore();
+    this.userStore = userStore;
 
     this.setupStore = setupStore;
     this.accessRightsStore = accessRightsStore;
@@ -74,7 +82,8 @@ class PeopleStore {
 
     this.contextOptionsStore = new AccountsContextOptionsStore(
       this,
-      infoPanelStore
+      infoPanelStore,
+      userStore
     );
 
     makeAutoObservable(this);
@@ -185,7 +194,7 @@ class PeopleStore {
   getUsersRightsSubmenu = (t) => {
     const { userSelectionRole, selectionUsersRights } = this.selectionStore;
 
-    const { isOwner } = this.authStore.userStore.user;
+    const { isOwner } = this.userStore.user;
 
     const options = [];
 

@@ -69,6 +69,7 @@ class FilesActionStore {
   clientLoadingStore;
   publicRoomStore;
   infoPanelStore;
+  userStore = null;
 
   isBulkDownload = false;
   isLoadedSearchFiles = false;
@@ -89,7 +90,8 @@ class FilesActionStore {
     clientLoadingStore,
     publicRoomStore,
     pluginStore,
-    infoPanelStore
+    infoPanelStore,
+    userStore
   ) {
     makeAutoObservable(this);
     this.authStore = authStore;
@@ -105,6 +107,7 @@ class FilesActionStore {
     this.publicRoomStore = publicRoomStore;
     this.pluginStore = pluginStore;
     this.infoPanelStore = infoPanelStore;
+    this.userStore = userStore;
   }
 
   setIsBulkDownload = (isBulkDownload) => {
@@ -2449,7 +2452,7 @@ class FilesActionStore {
       selection,
       bufferSelection,
     } = this.filesStore;
-    const { user } = this.authStore.userStore;
+    const { user } = this.userStore;
 
     const roomId = selection.length
       ? selection[0].id
@@ -2510,7 +2513,7 @@ class FilesActionStore {
         } else {
           setCreatedBy(res[0].createdBy);
 
-          const isMe = userId === this.authStore.userStore.user.id;
+          const isMe = userId === this.userStore.user.id;
           if (isMe) setInRoom(true);
         }
 

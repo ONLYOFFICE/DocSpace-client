@@ -75,8 +75,8 @@ HeaderNav.propTypes = {
   isAuthenticated: PropTypes.bool,
 };
 
-export default inject(({ auth, profileActionsStore }) => {
-  const { userStore, isAuthenticated } = auth;
+export default inject(({ auth, profileActionsStore, userStore }) => {
+  const { isAuthenticated } = auth;
   const { user, userIsUpdate, setUserIsUpdate } = userStore;
   const { getActions } = profileActionsStore;
 

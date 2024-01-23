@@ -27,6 +27,7 @@ const prefix = window.DocSpaceConfig?.api?.prefix || apiPrefix;
 class PluginStore {
   authStore = null;
   selectedFolderStore = null;
+  userStore = null;
 
   plugins = null;
 
@@ -53,9 +54,10 @@ class PluginStore {
   isLoading = true;
   isEmptyList = false;
 
-  constructor(authStore, selectedFolderStore) {
+  constructor(authStore, selectedFolderStore, userStore) {
     this.authStore = authStore;
     this.selectedFolderStore = selectedFolderStore;
+    this.userStore = userStore;
 
     this.plugins = [];
 
@@ -174,7 +176,7 @@ class PluginStore {
   };
 
   updatePlugins = async () => {
-    const { isAdmin, isOwner } = this.authStore.userStore.user;
+    const { isAdmin, isOwner } = this.userStore.user;
     this.setIsLoading(true);
 
     try {
@@ -394,7 +396,7 @@ class PluginStore {
   };
 
   getUserRole = () => {
-    const { user } = this.authStore.userStore;
+    const { user } = this.userStore;
 
     if (!user) return PluginUsersType.user;
 

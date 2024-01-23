@@ -112,7 +112,7 @@ Profile.propTypes = {
 };
 
 export default inject(
-  ({ auth, peopleStore, clientLoadingStore, treeFoldersStore }) => {
+  ({ auth, peopleStore, userStore, clientLoadingStore, treeFoldersStore }) => {
     const { setDocumentTitle, language, tfaStore } = auth;
 
     const {
@@ -153,7 +153,7 @@ export default inject(
 
       selectedTreeNode,
       setSelectedNode,
-      isVisitor: auth.userStore.user.isVisitor,
+      isVisitor: userStore.user.isVisitor,
       setIsProfileLoaded,
       setIsLoading,
       getTfaType,

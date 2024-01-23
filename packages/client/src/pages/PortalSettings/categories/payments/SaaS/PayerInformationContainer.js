@@ -232,8 +232,8 @@ const PayerInformationContainer = ({
   );
 };
 
-export default inject(({ auth, payments }) => {
-  const { userStore, settingsStore, currentTariffStatusStore } = auth;
+export default inject(({ auth, payments, userStore }) => {
+  const { settingsStore, currentTariffStatusStore } = auth;
   const { accountLink, isStripePortalAvailable } = payments;
   const { theme } = settingsStore;
   const { customerId, isGracePeriod, isNotPaidPeriod, payerInfo } =

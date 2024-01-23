@@ -193,28 +193,30 @@ const Sdk = ({
   return component;
 };
 
-export default inject(({ auth, settingsStore, peopleStore, filesStore }) => {
-  const { login, logout, userStore } = auth;
-  const { theme, setFrameConfig, frameConfig, getSettings, isLoaded } =
-    auth.settingsStore;
-  const { loadCurrentUser, user } = userStore;
-  const { updateProfileCulture } = peopleStore.targetUserStore;
-  const { getIcon, getRoomsIcon } = settingsStore;
-  const { getPrimaryLink } = filesStore;
+export default inject(
+  ({ auth, settingsStore, peopleStore, filesStore, userStore }) => {
+    const { login, logout } = auth;
+    const { theme, setFrameConfig, frameConfig, getSettings, isLoaded } =
+      auth.settingsStore;
+    const { loadCurrentUser, user } = userStore;
+    const { updateProfileCulture } = peopleStore.targetUserStore;
+    const { getIcon, getRoomsIcon } = settingsStore;
+    const { getPrimaryLink } = filesStore;
 
-  return {
-    theme,
-    setFrameConfig,
-    frameConfig,
-    login,
-    logout,
-    getSettings,
-    loadCurrentUser,
-    getIcon,
-    getRoomsIcon,
-    isLoaded,
-    updateProfileCulture,
-    user,
-    getPrimaryLink,
-  };
-})(observer(Sdk));
+    return {
+      theme,
+      setFrameConfig,
+      frameConfig,
+      login,
+      logout,
+      getSettings,
+      loadCurrentUser,
+      getIcon,
+      getRoomsIcon,
+      isLoaded,
+      updateProfileCulture,
+      user,
+      getPrimaryLink,
+    };
+  }
+)(observer(Sdk));

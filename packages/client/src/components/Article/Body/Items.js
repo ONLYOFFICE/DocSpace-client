@@ -392,6 +392,7 @@ export default inject(
     uploadDataStore,
     dialogsStore,
     clientLoadingStore,
+    userStore,
   }) => {
     const {
       settingsStore,
@@ -430,8 +431,8 @@ export default inject(
 
     return {
       isAdmin: auth.isAdmin,
-      isVisitor: auth.userStore.user.isVisitor,
-      isCollaborator: auth.userStore.user.isCollaborator,
+      isVisitor: userStore.user.isVisitor,
+      isCollaborator: userStore.user.isCollaborator,
       myId: myFolderId,
       commonId: commonFolderId,
       isPrivacy: isPrivacyFolder,

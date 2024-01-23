@@ -161,7 +161,14 @@ const ClientContent = (props) => {
 };
 
 const Client = inject(
-  ({ auth, clientLoadingStore, filesStore, peopleStore, pluginStore }) => {
+  ({
+    auth,
+    clientLoadingStore,
+    filesStore,
+    peopleStore,
+    pluginStore,
+    userStore,
+  }) => {
     const {
       frameConfig,
       isFrame,
@@ -174,9 +181,9 @@ const Client = inject(
       setIsDesktopClientInit,
     } = auth.settingsStore;
 
-    if (!auth.userStore.user) return;
+    if (!userStore.user) return;
 
-    const { isVisitor } = auth.userStore.user;
+    const { isVisitor } = userStore.user;
 
     const {
       isLoading,
@@ -195,7 +202,7 @@ const Client = inject(
       setIsDesktopClientInit,
       isFrame,
       showMenu: frameConfig?.showMenu,
-      user: auth.userStore.user,
+      user: userStore.user,
       isAuthenticated: auth.isAuthenticated,
       encryptionKeys: encryptionKeys,
       isEncryption: isEncryptionSupport,

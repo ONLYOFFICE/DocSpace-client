@@ -51,7 +51,7 @@ let timerId;
 
 class FilesStore {
   authStore;
-
+  userStore;
   selectedFolderStore;
   treeFoldersStore;
   filesSettingsStore;
@@ -155,14 +155,15 @@ class FilesStore {
     clientLoadingStore,
     pluginStore,
     publicRoomStore,
-    infoPanelStore
+    infoPanelStore,
+    userStore
   ) {
     const pathname = window.location.pathname.toLowerCase();
     this.isEditor = pathname.indexOf("doceditor") !== -1;
 
     makeAutoObservable(this);
     this.authStore = authStore;
-
+    this.userStore = userStore;
     this.selectedFolderStore = selectedFolderStore;
     this.treeFoldersStore = treeFoldersStore;
     this.filesSettingsStore = filesSettingsStore;
@@ -444,7 +445,7 @@ class FilesStore {
       if (
         this.selectedFolderStore.id !== folder.parentId ||
         (folder.roomType &&
-          folder.createdBy.id === this.authStore.userStore.user.id &&
+          folder.createdBy.id === this.userStore.user.id &&
           this.roomCreated)
       )
         return (this.roomCreated = false);
@@ -1179,7 +1180,7 @@ class FilesStore {
   //TODO: FILTER
   setFilesFilter = (filter) => {
     if (!this.publicRoomStore.isPublicRoom) {
-      const key = `UserFilter=${this.authStore.userStore.user?.id}`;
+      const key = `UserFilter=${this.userStore.user?.id}`;
       const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
       localStorage.setItem(key, value);
     }
@@ -1205,7 +1206,7 @@ class FilesStore {
   };
 
   setRoomsFilter = (filter) => {
-    const key = `UserRoomsFilter=${this.authStore.userStore.user.id}`;
+    const key = `UserRoomsFilter=${this.userStore.user.id}`;
     const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
     localStorage.setItem(key, value);
 
@@ -1319,7 +1320,7 @@ class FilesStore {
     const filterData = filter ? filter.clone() : FilesFilter.getDefault();
     filterData.folder = folderId;
 
-    if (folderId === "@my" && this.authStore.userStore.user.isVisitor) {
+    if (folderId === "@my" && this.userStore.user.isVisitor) {
       const url = getCategoryUrl(CategoryType.Shared);
       return window.DocSpace.navigate(
         `${url}?${RoomsFilter.getDefault().toUrlParams()}`
@@ -1330,8 +1331,8 @@ class FilesStore {
     this.setIsLoadedFetchFiles(false);
 
     const filterStorageItem =
-      this.authStore.userStore.user?.id &&
-      localStorage.getItem(`UserFilter=${this.authStore.userStore.user.id}`);
+      this.userStore.user?.id &&
+      localStorage.getItem(`UserFilter=${this.userStore.user.id}`);
 
     if (filterStorageItem && !filter) {
       const splitFilter = filterStorageItem.split(",");
@@ -1621,7 +1622,7 @@ class FilesStore {
     const filterData = !!filter ? filter.clone() : RoomsFilter.getDefault();
 
     const filterStorageItem = localStorage.getItem(
-      `UserRoomsFilter=${this.authStore.userStore.user?.id}`
+      `UserRoomsFilter=${this.userStore.user?.id}`
     );
 
     if (filterStorageItem && (!filter || withFilterLocalStorage)) {
@@ -2796,8 +2797,7 @@ class FilesStore {
   };
 
   canShareOwnerChange = (item) => {
-    const userId =
-      this.authStore.userStore.user && this.authStore.userStore.user.id;
+    const userId = this.userStore.user && this.userStore.user.id;
 
     if (item.providerKey || !this.hasCommonFolder) {
       return false;
@@ -2813,9 +2813,7 @@ class FilesStore {
   get canShare() {
     const folderType = this.selectedFolderStore.rootFolderType;
     const isVisitor =
-      (this.authStore.userStore.user &&
-        this.authStore.userStore.user.isVisitor) ||
-      false;
+      (this.userStore.user && this.userStore.user.isVisitor) || false;
 
     if (isVisitor) {
       return false;

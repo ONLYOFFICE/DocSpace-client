@@ -31,6 +31,8 @@ const infoHistory = "info_history";
 // const infoDetails = "info_details";
 
 class InfoPanelStore {
+  userStore = null;
+
   isVisible = false;
   isMobileHidden = false;
 
@@ -56,7 +58,9 @@ class InfoPanelStore {
 
   shareChanged = false;
 
-  constructor() {
+  constructor(userStore) {
+    this.userStore = userStore;
+
     makeAutoObservable(this);
   }
 
@@ -264,7 +268,7 @@ class InfoPanelStore {
   // User link actions //
 
   openUser = async (user, navigate) => {
-    if (user.id === this.authStore.userStore.user.id) {
+    if (user.id === this.userStore.user.id) {
       this.openSelfProfile();
       return;
     }

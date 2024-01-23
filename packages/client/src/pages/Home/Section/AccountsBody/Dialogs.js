@@ -122,7 +122,7 @@ const Dialogs = ({
   );
 };
 
-export default inject(({ auth, peopleStore }) => {
+export default inject(({ auth, peopleStore, userStore }) => {
   const {
     changeOwner,
     deleteSelfProfile,
@@ -140,7 +140,7 @@ export default inject(({ auth, peopleStore }) => {
     dataReassignmentDialogVisible,
   } = peopleStore.dialogStore;
 
-  const { user: profile } = auth.userStore;
+  const { user: profile } = userStore;
 
   const {
     changeNameVisible,

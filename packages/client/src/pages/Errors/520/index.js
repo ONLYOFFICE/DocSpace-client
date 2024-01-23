@@ -109,9 +109,9 @@ const Error520 = ({
   );
 };
 
-const Error520Wrapper = inject(({ auth }) => {
+const Error520Wrapper = inject(({ auth, userStore }) => {
   const { currentColorScheme, firebaseHelper } = auth.settingsStore;
-  const { user } = auth.userStore;
+  const { user } = userStore;
 
   return {
     currentColorScheme,

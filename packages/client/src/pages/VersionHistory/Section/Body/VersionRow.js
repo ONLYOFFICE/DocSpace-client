@@ -319,8 +319,8 @@ const VersionRow = (props) => {
 };
 
 export default inject(
-  ({ auth, versionHistoryStore, pluginStore, infoPanelStore }) => {
-    const { user } = auth.userStore;
+  ({ auth, versionHistoryStore, pluginStore, infoPanelStore, userStore }) => {
+    const { user } = userStore;
     const { openUser, setIsVisible } = infoPanelStore;
     const { culture, isTabletView, enablePlugins, currentDeviceType } =
       auth.settingsStore;

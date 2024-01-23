@@ -219,9 +219,8 @@ const PrivateRoute = ({ children, ...rest }) => {
   return component;
 };
 
-export default inject(({ auth }) => {
+export default inject(({ auth, userStore }) => {
   const {
-    userStore,
     isAuthenticated,
     isLoaded,
     isAdmin,

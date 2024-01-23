@@ -456,8 +456,8 @@ const InviteInput = ({
   );
 };
 
-export default inject(({ auth, dialogsStore }) => {
-  const { isOwner } = auth.userStore.user;
+export default inject(({ auth, dialogsStore, userStore }) => {
+  const { isOwner } = userStore.user;
   const {
     invitePanelOptions,
     setInviteItems,

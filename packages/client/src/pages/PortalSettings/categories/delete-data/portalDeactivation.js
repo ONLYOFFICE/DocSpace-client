@@ -86,9 +86,9 @@ const PortalDeactivation = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
+export default inject(({ auth, userStore }) => {
   const { getPortalOwner, owner, currentColorScheme } = auth.settingsStore;
-  const { sendActivationLink } = auth.userStore;
+  const { sendActivationLink } = userStore;
 
   return {
     getPortalOwner,

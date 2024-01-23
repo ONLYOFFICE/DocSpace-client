@@ -269,6 +269,7 @@ export default inject(
     dialogsStore,
     selectedFolderStore,
     clientLoadingStore,
+    userStore,
   }) => {
     const { clearFiles, setSelection } = filesStore;
     const {
@@ -307,7 +308,7 @@ export default inject(
       toggleArticleOpen,
       showText,
       showArticleLoader,
-      isVisitor: auth.userStore.user.isVisitor,
+      isVisitor: userStore.user.isVisitor,
 
       setNewFilesPanelVisible,
 

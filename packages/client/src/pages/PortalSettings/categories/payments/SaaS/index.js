@@ -68,13 +68,13 @@ const SaaSPage = ({
   );
 };
 
-export default inject(({ auth, payments }) => {
+export default inject(({ auth, payments, userStore }) => {
   const {
     language,
     currentQuotaStore,
     currentTariffStatusStore,
     isUpdatingTariff,
-    userStore,
+
     settingsStore,
   } = auth;
   const { user } = userStore;

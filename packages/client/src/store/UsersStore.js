@@ -14,16 +14,18 @@ class UsersStore {
   peopleStore = null;
   authStore = null;
   infoPanelStore = null;
+  userStore = null;
 
   users = [];
   providers = [];
   accountsIsIsLoading = false;
   operationRunning = false;
 
-  constructor(peopleStore, authStore, infoPanelStore) {
+  constructor(peopleStore, authStore, infoPanelStore, userStore) {
     this.peopleStore = peopleStore;
     this.authStore = authStore;
     this.infoPanelStore = infoPanelStore;
+    this.userStore = userStore;
     makeAutoObservable(this);
   }
 
@@ -204,8 +206,7 @@ class UsersStore {
   };
 
   getUserContextOptions = (isMySelf, statusType, userRole, status) => {
-    const { isOwner, isAdmin, isVisitor, isCollaborator } =
-      this.peopleStore.authStore.userStore.user;
+    const { isOwner, isAdmin, isVisitor, isCollaborator } = this.userStore.user;
 
     const options = [];
 
@@ -397,8 +398,7 @@ class UsersStore {
     const statusType = this.getStatusType(user);
     const role = this.getUserRole(user);
     const isMySelf =
-      this.peopleStore.authStore.userStore.user &&
-      user.userName === this.peopleStore.authStore.userStore.user.userName;
+      this.userStore.user && user.userName === this.userStore.user.userName;
     //const isViewerAdmin = this.peopleStore.authStore.isAdmin;
 
     const options = this.getUserContextOptions(

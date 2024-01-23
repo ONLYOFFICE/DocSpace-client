@@ -116,6 +116,7 @@ export default function withContent(WrappedContent) {
         dialogsStore,
         uploadDataStore,
         publicRoomStore,
+        userStore,
       },
       { item }
     ) => {
@@ -171,7 +172,7 @@ export default function withContent(WrappedContent) {
         setIsLoading,
         updateFile,
         viewAs,
-        viewer: auth.userStore.user,
+        viewer: userStore.user,
         setConvertPasswordDialogVisible,
         setConvertItem,
         setFormCreationInfo,

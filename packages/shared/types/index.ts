@@ -1,3 +1,4 @@
+import { TUser } from "../api/people/types";
 import { RoomsType } from "../enums";
 import { TTheme } from "../themes";
 
@@ -34,6 +35,7 @@ declare module "styled-components" {
 declare global {
   interface Window {
     firebaseHelper: { config: { authDomain: string } };
+    __ASC_INITIAL_EDITOR_STATE__?: { user: TUser };
     zESettings: {};
     zE: {};
     i18n: {

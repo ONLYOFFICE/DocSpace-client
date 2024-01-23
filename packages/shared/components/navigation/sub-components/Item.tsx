@@ -30,7 +30,7 @@ const Item = ({
       id={`${id}`}
       isRoot={isRoot}
       onClick={onClickAvailable}
-      withLogo={withLogo}
+      withLogo={!!withLogo}
       {...rest}
     >
       <ColorTheme isRoot={isRoot} themeId={ThemeId.IconWrapper}>

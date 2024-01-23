@@ -1,4 +1,3 @@
-
 /* eslint-disable no-console */
 /* eslint-disable no-multi-str */
 /* eslint-disable no-plusplus */
@@ -784,7 +783,7 @@ export const getLogoFromPath = (path: string) => {
 
 export type FolderTypeValueOf = (typeof FolderType)[keyof typeof FolderType];
 export const getIconPathByFolderType = (
-  folderType?: FolderTypeValueOf
+  folderType?: FolderTypeValueOf,
 ): string => {
   const defaultPath = "folder.svg";
 

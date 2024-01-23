@@ -1,7 +1,6 @@
 import React from "react";
-import { RoomsType } from "@docspace/shared/enums";
-import { RoomsTypeValues } from "@docspace/shared/utils/common";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { RoomsType } from "../../../enums";
+import { RectangleSkeleton } from "../../rectangle";
 
 import { StyledBlock, StyledContainer } from "./FilterBlock.styled";
 import { FilterBlockProps } from "./FilterBlock.types";

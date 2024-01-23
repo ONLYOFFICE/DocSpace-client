@@ -12,6 +12,7 @@ const {
   grayLight,
   grayLightMid,
   grayMid,
+  grayDarkMid,
   graySilver,
   gray,
   grayMain,
@@ -1023,10 +1024,12 @@ const Dark: TTheme = {
     defaultImage: `url("${AvatarDarkReactSvgUrl}")`,
     initialsContainer: {
       color: white,
+      groupColor: white,
       left: "50%",
       top: "50%",
       transform: "translate(-50%, -50%)",
       fontWeight: "600",
+      groupFontWeight: "700",
 
       fontSize: {
         min: "12px",
@@ -1034,6 +1037,7 @@ const Dark: TTheme = {
         base: "16px",
         medium: "20px",
         big: "34px",
+        groupBig: "23px",
         max: "72px",
       },
     },
@@ -1071,6 +1075,7 @@ const Dark: TTheme = {
     imageContainer: {
       backgroundImage: "#606060",
       background: "#606060",
+      groupBackground: grayDarkMid,
       borderRadius: "50%",
       height: "100%",
 

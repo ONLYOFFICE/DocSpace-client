@@ -345,14 +345,21 @@ class PeopleStore {
       newFilter.pageCount = 100;
     }
 
-    const res = await api.people.getPeopleWithGroups(newFilter);
-    newFilter.total = res.total;
+    const { items, total } = await api.people.getPeopleWithGroups(newFilter);
+    newFilter.total = total;
 
     if (updateFilter) {
       this.filterStore.setFilterParams(newFilter);
     }
 
-    this.setPeopleWithGroups(res.items);
+    const newItems = items.map((item) => {
+      if (item.manager) {
+        item.isGroup = true;
+      }
+      return item;
+    });
+
+    this.setPeopleWithGroups(newItems);
   };
 
   get hasMorePeopleWithGroups() {
@@ -371,10 +378,17 @@ class PeopleStore {
     newFilter.page += 1;
     setFilterParams(newFilter);
 
-    const res = await api.people.getPeopleWithGroups(newFilter);
+    const { items } = await api.people.getPeopleWithGroups(newFilter);
+
+    const newItems = items.map((item) => {
+      if (item.manager) {
+        item.isGroup = true;
+      }
+      return item;
+    });
 
     runInAction(() => {
-      this.setPeopleWithGroups([...this.peopleWithGroups, ...res.items]);
+      this.setPeopleWithGroups([...this.peopleWithGroups, ...newItems]);
       this.setPeopleWithGroupsAreLoading(false);
     });
   };

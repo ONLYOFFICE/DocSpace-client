@@ -21,7 +21,8 @@ export default function withContent(WrappedContent) {
       itemIndex,
     } = props;
 
-    const { mobilePhone, email, role, displayName, avatar } = item;
+    const { mobilePhone, email, role, displayName, avatar, isGroup, name } =
+      item;
 
     const onContentRowSelect = (checked, user) => {
       checked ? selectUser(user) : deselectUser(user);
@@ -36,7 +37,13 @@ export default function withContent(WrappedContent) {
     const checkedProps = { checked };
 
     const element = (
-      <Avatar size="min" role={role} userName={displayName} source={avatar} />
+      <Avatar
+        size="min"
+        role={role}
+        userName={isGroup ? name : displayName}
+        source={avatar}
+        isGroup={isGroup}
+      />
     );
 
     const getFormattedGroups = () => {
@@ -55,7 +62,7 @@ export default function withContent(WrappedContent) {
             key: group.id,
             label: group.name,
             onClick: () => selectGroup(group.id),
-          })
+          }),
         );
 
       if (temp.length <= 1) {
@@ -66,8 +73,8 @@ export default function withContent(WrappedContent) {
             containerWidth="15%"
             type="action"
             title={temp[0].label}
-            fontSize="12px"
-            fontWeight={400}
+            fontSize="13px"
+            fontWeight={600}
             color={linkColor}
             onClick={temp[0].onClick}
           >
@@ -83,9 +90,10 @@ export default function withContent(WrappedContent) {
             containerWidth="15%"
             directionY="both"
             title={temp[0].label}
-            fontSize="12px"
-            fontWeight={400}
+            fontSize="13x"
+            fontWeight={600}
             color={linkColor}
+            withExpander
             data={temp}
           >
             {temp[0].label}

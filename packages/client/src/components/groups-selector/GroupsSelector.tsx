@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 
 import api from "@docspace/common/api";
 import EmptyScreenGroupsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
+// @ts-ignore
 import Loaders from "@docspace/common/components/Loaders";
 import { Selector } from "@docspace/shared/components/selector";
 
@@ -82,6 +83,7 @@ export const GroupsSelector = (props: GroupsSelectorProps) => {
     const convertedItems = items.map((group: any) => ({
       id: group.id,
       label: group.name,
+      isGroup: true,
     }));
 
     const oldItems = startIndex ? itemsList : [];

@@ -171,6 +171,7 @@ export type TItem = {
   isDisabled?: boolean;
   color?: string;
   fileExst?: string;
+  isGroup?: boolean;
 };
 
 export interface SearchProps {

@@ -1057,10 +1057,12 @@ export const getBaseTheme = () => {
       defaultImage: `url("${AvatarBaseReactSvgUrl}")`,
       initialsContainer: {
         color: white,
+        groupColor: black,
         left: "50%",
         top: "50%",
         transform: "translate(-50%, -50%)",
         fontWeight: "600",
+        groupFontWeight: "700",
 
         fontSize: {
           min: "12px",
@@ -1068,6 +1070,7 @@ export const getBaseTheme = () => {
           base: "16px",
           medium: "20px",
           big: "34px",
+          groupBig: "23px",
           max: "72px",
         },
       },
@@ -1105,6 +1108,7 @@ export const getBaseTheme = () => {
       imageContainer: {
         backgroundImage: blueMain,
         background: grayMid,
+        groupBackground: grayLightMid,
         borderRadius: "50%",
         height: "100%",
 

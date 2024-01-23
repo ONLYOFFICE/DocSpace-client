@@ -39,7 +39,16 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
     if (!item || (item && !item.id))
       return <div style={style}>{rowLoader}</div>;
 
-    const { label, avatar, icon, role, isSelected, isDisabled, color } = item;
+    const {
+      label,
+      avatar,
+      icon,
+      role,
+      isSelected,
+      isDisabled,
+      color,
+      isGroup,
+    } = item;
 
     const currentRole = role || AvatarRole.user;
 
@@ -76,6 +85,8 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
             source={avatar || ""}
             role={currentRole}
             size={AvatarSize.min}
+            isGroup={isGroup}
+            userName={isGroup ? label : ""}
           />
         ) : defaultIcon ? (
           <RoomIcon color={color} title={label} />

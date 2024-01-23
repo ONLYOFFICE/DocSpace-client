@@ -19,6 +19,7 @@ import Loaders from "@docspace/common/components/Loaders";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
+import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
 const StyledBlock = styled.div`
   padding: 0 20px;
@@ -221,7 +222,7 @@ const ArticleBodyContent = (props) => {
       return setActiveItemId(rootFolderId || roomsFolderId);
     }
 
-    if (location.pathname.includes("/products/files/#preview")) {
+    if (location.pathname.includes(MEDIA_VIEW_URL)) {
       setActiveItemId(rootFolderId);
     }
   }, [

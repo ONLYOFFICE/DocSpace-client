@@ -6,6 +6,7 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { getGroup } from "@docspace/shared/api/groups";
 import { getUserById } from "@docspace/shared/api/people";
+import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
 import { Events, RoomSearchArea } from "@docspace/shared/enums";
 import { getObjectByLocation } from "@docspace/shared/utils/common";
@@ -98,7 +99,7 @@ const useFiles = ({
     if (location.pathname === "/") setIsLoading(true, true, true);
     else setIsLoading(true, false, false);
 
-    if (!window.location.href.includes("#preview")) {
+    if (!window.location.href.includes(MEDIA_VIEW_URL)) {
       // localStorage.removeItem("isFirstUrl");
       // Media viewer
       removeFirstUrl();
@@ -109,9 +110,14 @@ const useFiles = ({
     let filterObj = null;
     let isRooms = false;
 
-    if (window.location.href.indexOf("/#preview") > 1 && playlist.length < 1) {
+    if (
+      window.location.href.indexOf(MEDIA_VIEW_URL) > 1 &&
+      playlist.length < 1
+    ) {
       const pathname = window.location.href;
-      const fileId = pathname.slice(pathname.indexOf("#preview") + 9);
+      const fileId = pathname.slice(
+        pathname.indexOf(MEDIA_VIEW_URL) + MEDIA_VIEW_URL.length
+      );
 
       setTimeout(() => {
         getFileInfo(fileId)
@@ -132,7 +138,7 @@ const useFiles = ({
       return setIsLoading(false);
     }
 
-    if (window.location.href.indexOf("/#preview") > 1)
+    if (window.location.href.indexOf(MEDIA_VIEW_URL) > 1)
       return setIsLoading(false);
 
     const isRoomFolder = getObjectByLocation(window.location)?.folder;

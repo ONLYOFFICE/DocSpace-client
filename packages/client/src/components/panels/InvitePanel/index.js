@@ -55,8 +55,7 @@ const InvitePanel = ({
   inviteUsers,
   setInfoPanelIsMobileHidden,
   updateInfoPanelSelection,
-  setUpdateRoomMembers,
-  roomsView,
+  addInfoPanelMembers,
   setInviteLanguage,
   getUsersList,
   filter,
@@ -277,15 +276,15 @@ const InvitePanel = ({
 
     try {
       setIsLoading(true);
-      const result =
-        roomId === -1
-          ? await inviteUsers(data)
-          : await setRoomSecurity(roomId, data);
+      const isRooms = roomId !== -1;
+      const result = !isRooms
+        ? await inviteUsers(data)
+        : await setRoomSecurity(roomId, data);
 
       setIsLoading(false);
 
-      if (roomsView === "info_members") {
-        setUpdateRoomMembers(true);
+      if (isRooms) {
+        addInfoPanelMembers(t, result.members, true);
       }
 
       onClose();
@@ -472,9 +471,7 @@ export default inject(({ auth, peopleStore, filesStore, dialogsStore }) => {
   const {
     setIsMobileHidden: setInfoPanelIsMobileHidden,
     updateInfoPanelSelection,
-    setUpdateRoomMembers,
-    roomsView,
-    filesView,
+    addInfoPanelMembers,
   } = auth.infoPanelStore;
 
   const {
@@ -518,8 +515,7 @@ export default inject(({ auth, peopleStore, filesStore, dialogsStore }) => {
     inviteUsers,
     setInfoPanelIsMobileHidden,
     updateInfoPanelSelection,
-    setUpdateRoomMembers,
-    roomsView,
+    addInfoPanelMembers,
     getUsersList,
     filter,
     currentDeviceType,

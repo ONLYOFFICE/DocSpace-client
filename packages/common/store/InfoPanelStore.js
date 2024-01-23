@@ -3,7 +3,11 @@ import { makeAutoObservable } from "mobx";
 import { getUserById } from "@docspace/shared/api/people";
 import { getUserRole } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { FolderType, ShareAccessRights } from "@docspace/shared/enums";
+import {
+  EmployeeActivationStatus,
+  FolderType,
+  ShareAccessRights,
+} from "@docspace/shared/enums";
 import config from "PACKAGE_FILE";
 import Filter from "@docspace/shared/api/people/filter";
 import { getRoomInfo } from "@docspace/shared/api/rooms";
@@ -44,10 +48,12 @@ class InfoPanelStore {
   filesStore = null;
   selectedFolderStore = null;
   treeFoldersStore = null;
-  infoPanelMembers = null;
+  publicRoomStore = null;
 
+  infoPanelMembers = null;
   infoPanelSelection = null;
   infoPanelRoom = null;
+  membersIsLoading = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -95,10 +101,6 @@ class InfoPanelStore {
     }
   };
 
-  setUpdateRoomMembers = (updateRoomMembers) => {
-    this.updateRoomMembers = updateRoomMembers;
-  };
-
   setIsScrollLocked = (isScrollLocked) => {
     this.isScrollLocked = isScrollLocked;
   };
@@ -125,6 +127,26 @@ class InfoPanelStore {
         : filesBufferSelection
           ? [filesBufferSelection]
           : [];
+  }
+
+  get infoPanelCurrentSelection() {
+    const { selection, bufferSelection } = this.filesStore;
+
+    return this.infoPanelSelection
+      ? this.infoPanelSelection
+      : selection.length
+        ? selection[0]
+        : bufferSelection
+          ? bufferSelection
+          : null;
+  }
+
+  get withPublicRoomBlock() {
+    return (
+      this.infoPanelCurrentSelection?.access ===
+        ShareAccessRights.RoomManager ||
+      this.infoPanelCurrentSelection?.access === ShareAccessRights.None
+    );
   }
 
   calculateSelection = () => {
@@ -353,6 +375,131 @@ class InfoPanelStore {
     this.infoPanelRoom = infoPanelRoom
       ? this.normalizeSelection(infoPanelRoom)
       : infoPanelRoom;
+  };
+
+  setMembersIsLoading = (membersIsLoading) => {
+    this.membersIsLoading = membersIsLoading;
+  };
+
+  getHasPrevTitle = (array, type) => {
+    return this.infoPanelMembers?.roomId === this.infoPanelSelection.id
+      ? array.findIndex((x) => x.id === type) > -1
+      : false;
+  };
+
+  addMembersTitle = (t, administrators, users, expectedMembers) => {
+    let hasPrevAdminsTitle = this.getHasPrevTitle(
+      administrators,
+      "administration"
+    );
+
+    if (administrators.length && !hasPrevAdminsTitle) {
+      administrators.unshift({
+        id: "administration",
+        displayName: t("Administration"),
+        isTitle: true,
+      });
+    }
+
+    let hasPrevUsersTitle = this.getHasPrevTitle(users, "user");
+
+    if (users.length && !hasPrevUsersTitle) {
+      users.unshift({ id: "user", displayName: t("Users"), isTitle: true });
+    }
+
+    let hasPrevExpectedTitle = this.getHasPrevTitle(
+      expectedMembers,
+      "expected"
+    );
+
+    if (expectedMembers.length && !hasPrevExpectedTitle) {
+      expectedMembers.unshift({
+        id: "expected",
+        displayName: t("ExpectUsers"),
+        isTitle: true,
+        isExpect: true,
+      });
+    }
+  };
+
+  convertMembers = (t, members, clearFilter) => {
+    const users = [];
+    const administrators = [];
+    const expectedMembers = [];
+
+    members?.map((fetchedMember) => {
+      const member = {
+        access: fetchedMember.access,
+        canEditAccess: fetchedMember.canEditAccess,
+        ...fetchedMember.sharedTo,
+      };
+
+      if (member.activationStatus === EmployeeActivationStatus.Pending) {
+        member.isExpect = true;
+        expectedMembers.push(member);
+      } else if (
+        member.access === ShareAccessRights.FullAccess ||
+        member.access === ShareAccessRights.RoomManager
+      ) {
+        administrators.push(member);
+      } else {
+        users.push(member);
+      }
+    });
+
+    if (clearFilter) {
+      this.addMembersTitle(t, administrators, users, expectedMembers);
+    }
+
+    return { administrators, users, expectedMembers };
+  };
+
+  fetchMembers = async (t, clearFilter = true) => {
+    if (this.membersIsLoading) return;
+    const isPublic =
+      this.infoPanelSelection?.roomType ?? this.infoPanelSelection?.roomType;
+    const roomId = this.infoPanelSelection.id;
+
+    const requests = [this.filesStore.getRoomMembers(roomId, clearFilter)];
+
+    if (isPublic && clearFilter && this.withPublicRoomBlock) {
+      requests.push(this.filesStore.getRoomLinks(roomId));
+    }
+
+    let timerId;
+    if (clearFilter)
+      timerId = setTimeout(() => this.setMembersIsLoading(true), 300);
+
+    const [data, links] = await Promise.all(requests);
+    clearFilter && this.setMembersIsLoading(false);
+    clearTimeout(timerId);
+
+    links && this.publicRoomStore.setExternalLinks(links);
+
+    const { administrators, users, expectedMembers } = this.convertMembers(
+      t,
+      data,
+      clearFilter
+    );
+
+    return {
+      users,
+      administrators,
+      expected: expectedMembers,
+      roomId,
+    };
+  };
+
+  addInfoPanelMembers = (t, members, clearFilter) => {
+    const newMembers = this.convertMembers(t, members, clearFilter);
+    const { roomId, administrators, users, expected } = this.infoPanelMembers;
+
+    this.setInfoPanelMembers({
+      roomId: roomId,
+      administrators: [...administrators, ...newMembers.administrators],
+      users: [...users, ...newMembers.users],
+      expected: [...expected, ...newMembers.expectedMembers],
+    });
   };
 }
 

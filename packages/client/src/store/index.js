@@ -185,6 +185,7 @@ authStore.infoPanelStore.filesStore = filesStore;
 authStore.infoPanelStore.peopleStore = peopleStore;
 authStore.infoPanelStore.selectedFolderStore = selectedFolderStore;
 authStore.infoPanelStore.treeFoldersStore = treeFoldersStore;
+authStore.infoPanelStore.publicRoomStore = publicRoomStore;
 
 const createEditRoomStore = new CreateEditRoomStore(
   filesStore,

@@ -103,11 +103,7 @@ const User = ({
               (newMembersFilter.page + 1) * newMembersFilter.pageCount - 1;
             newMembersFilter.pageCount = 1;
 
-            const fetchedMembers = await fetchMembers(
-              infoPanelSelection.id,
-              false,
-              newMembersFilter
-            );
+            const fetchedMembers = await fetchMembers(t, false);
 
             const newMembers = {
               administrators: [
@@ -259,33 +255,33 @@ const User = ({
   );
 };
 
-export default inject(
-  ({ auth, filesStore, peopleStore, selectedFolderStore }) => {
-    const {
-      infoPanelSelection,
-      setIsScrollLocked,
-      infoPanelMembers,
-      setInfoPanelMembers,
-    } = auth.infoPanelStore;
-    const {
-      updateRoomMemberRole,
-      resendEmailInvitations,
-      membersFilter,
-      setMembersFilter,
-    } = filesStore;
+export default inject(({ auth, filesStore, peopleStore }) => {
+  const {
+    infoPanelSelection,
+    setIsScrollLocked,
+    infoPanelMembers,
+    setInfoPanelMembers,
+    fetchMembers,
+  } = auth.infoPanelStore;
+  const {
+    updateRoomMemberRole,
+    resendEmailInvitations,
+    membersFilter,
+    setMembersFilter,
+  } = filesStore;
 
-    const { changeType: changeUserType } = peopleStore;
+  const { changeType: changeUserType } = peopleStore;
 
-    return {
-      infoPanelSelection,
-      setIsScrollLocked,
-      updateRoomMemberRole,
-      resendEmailInvitations,
-      changeUserType,
-      membersFilter,
-      setMembersFilter,
-      infoPanelMembers,
-      setInfoPanelMembers,
-    };
-  }
-)(observer(User));
+  return {
+    infoPanelSelection,
+    setIsScrollLocked,
+    updateRoomMemberRole,
+    resendEmailInvitations,
+    changeUserType,
+    membersFilter,
+    setMembersFilter,
+    infoPanelMembers,
+    setInfoPanelMembers,
+    fetchMembers,
+  };
+})(observer(User));

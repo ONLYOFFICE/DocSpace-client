@@ -1,13 +1,9 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
 
-import {
-  EmployeeActivationStatus,
-  RoomsType,
-  ShareAccessRights,
-} from "@docspace/shared/enums";
+import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 import { LINKS_LIMIT_COUNT } from "@docspace/shared/constants";
 import Loaders from "@docspace/common/components/Loaders";
 import MembersHelper from "../../helpers/MembersHelper";
@@ -30,140 +26,40 @@ import LinkRow from "./sub-components/LinkRow";
 const Members = ({
   t,
   selfId,
-
   updateRoomMembers,
-
   infoPanelSelection,
-
   setIsScrollLocked,
-
-  getRoomMembers,
-  getRoomLinks,
   isPublicRoomType,
-
-  setExternalLinks,
   membersFilter,
   infoPanelMembers,
   setInfoPanelMembers,
   primaryLink,
   isArchiveFolder,
   isPublicRoom,
-
   additionalLinks,
   setLinkParams,
   setEditLinkPanelIsVisible,
   getPrimaryLink,
   setExternalLink,
   withPublicRoomBlock,
+  fetchMembers,
+  membersIsLoading,
 }) => {
-  const [isLoading, setIsLoading] = useState(false);
   const membersHelper = new MembersHelper({ t });
-
-  const fetchMembers = async (roomId, clearFilter = true) => {
-    if (isLoading) return;
-    const isPublic =
-      infoPanelSelection?.roomType ?? infoPanelSelection?.roomType;
-    const requests = [getRoomMembers(roomId, clearFilter)];
-
-    if (isPublic && clearFilter && withPublicRoomBlock) {
-      requests.push(getRoomLinks(roomId));
-    }
-
-    let timerId;
-    if (clearFilter) timerId = setTimeout(() => setIsLoading(true), 300);
-
-    const [data, links] = await Promise.all(requests);
-    clearFilter && setIsLoading(false);
-    clearTimeout(timerId);
-
-    links && setExternalLinks(links);
-
-    const users = [];
-    const administrators = [];
-    const expectedMembers = [];
-    data?.map((fetchedMember) => {
-      const member = {
-        access: fetchedMember.access,
-        canEditAccess: fetchedMember.canEditAccess,
-        ...fetchedMember.sharedTo,
-      };
-
-      if (member.activationStatus === EmployeeActivationStatus.Pending) {
-        member.isExpect = true;
-        expectedMembers.push(member);
-      } else if (
-        member.access === ShareAccessRights.FullAccess ||
-        member.access === ShareAccessRights.RoomManager
-      ) {
-        administrators.push(member);
-      } else {
-        users.push(member);
-      }
-    });
-
-    let hasPrevAdminsTitle =
-      infoPanelMembers?.roomId === roomId && !clearFilter
-        ? getHasPrevTitle(infoPanelMembers?.administrators, "administration")
-        : false;
-
-    if (administrators.length && !hasPrevAdminsTitle) {
-      administrators.unshift({
-        id: "administration",
-        displayName: t("Administration"),
-        isTitle: true,
-      });
-    }
-
-    let hasPrevUsersTitle =
-      infoPanelMembers?.roomId === roomId && !clearFilter
-        ? getHasPrevTitle(infoPanelMembers?.users, "user")
-        : false;
-
-    if (users.length && !hasPrevUsersTitle) {
-      users.unshift({ id: "user", displayName: t("Users"), isTitle: true });
-    }
-
-    let hasPrevExpectedTitle =
-      infoPanelMembers?.roomId === roomId && !clearFilter
-        ? getHasPrevTitle(infoPanelMembers?.expected, "expected")
-        : false;
-
-    if (expectedMembers.length && !hasPrevExpectedTitle) {
-      expectedMembers.unshift({
-        id: "expected",
-        displayName: t("ExpectUsers"),
-        isTitle: true,
-        isExpect: true,
-      });
-    }
-
-    return {
-      users,
-      administrators,
-      expected: expectedMembers,
-      roomId,
-    };
-  };
-
-  const getHasPrevTitle = (array, type) => {
-    return array.findIndex((x) => x.id === type) > -1;
-  };
 
   const updateInfoPanelMembers = async () => {
     if (!infoPanelSelection) return;
-    console.log("updateInfoPanelMembers");
-    const fetchedMembers = await fetchMembers(infoPanelSelection.id);
+    const fetchedMembers = await fetchMembers(t);
     setInfoPanelMembers(fetchedMembers);
   };
 
   useEffect(() => {
     updateInfoPanelMembers();
-    // if (updateRoomMembers) setUpdateRoomMembers(false);
   }, [infoPanelSelection, updateRoomMembers]);
 
   const loadNextPage = async () => {
     const roomId = infoPanelSelection.id;
-    const fetchedMembers = await fetchMembers(roomId, false);
+    const fetchedMembers = await fetchMembers(t, false);
     const { users, administrators, expected } = fetchedMembers;
 
     const newMembers = {
@@ -176,7 +72,7 @@ const Members = ({
     setInfoPanelMembers(newMembers);
   };
 
-  if (isLoading) return <Loaders.InfoPanelViewLoader view="members" />;
+  if (membersIsLoading) return <Loaders.InfoPanelViewLoader view="members" />;
   else if (!infoPanelMembers) return <></>;
 
   const [currentMember] = infoPanelMembers.administrators.filter(
@@ -192,10 +88,6 @@ const Members = ({
   const expectedTitleCount = expected.length ? 1 : 0;
 
   const headersCount = adminsTitleCount + usersTitleCount + expectedTitleCount;
-  const dataReadyMembersList =
-    infoPanelSelection?.id === infoPanelSelection?.id;
-
-  if (!dataReadyMembersList) return <></>;
 
   const onAddNewLink = async () => {
     if (isPublicRoom || primaryLink) {
@@ -350,7 +242,6 @@ const Members = ({
               index={index + publicRoomItemsLength}
               membersHelper={membersHelper}
               currentMember={currentMember}
-              fetchMembers={fetchMembers}
               hasNextPage={
                 membersList.length - headersCount < membersFilter.total
               }
@@ -377,18 +268,14 @@ export default inject(
       setIsScrollLocked,
       infoPanelMembers,
       setInfoPanelMembers,
+      fetchMembers,
+      membersIsLoading,
+      withPublicRoomBlock,
     } = auth.infoPanelStore;
-    const {
-      getRoomMembers,
-      getRoomLinks,
-      membersFilter,
-      selection,
-      bufferSelection,
-    } = filesStore;
+    const { membersFilter } = filesStore;
     const { id: selfId } = auth.userStore.user;
 
-    const { setExternalLinks, primaryLink, additionalLinks, setExternalLink } =
-      publicRoomStore;
+    const { primaryLink, additionalLinks, setExternalLink } = publicRoomStore;
     const { isArchiveFolderRoot } = treeFoldersStore;
     const { setLinkParams, setEditLinkPanelIsVisible } = dialogsStore;
 
@@ -400,35 +287,15 @@ export default inject(
 
     const isPublicRoom = roomType === RoomsType.PublicRoom;
 
-    const room = infoPanelSelection
-      ? infoPanelSelection
-      : selection.length
-        ? selection[0]
-        : bufferSelection
-          ? bufferSelection
-          : null;
-
-    const withPublicRoomBlock =
-      room?.access === ShareAccessRights.RoomManager ||
-      room?.access === ShareAccessRights.None;
-
     const infoSelection =
       infoPanelSelection?.length > 1 ? null : infoPanelSelection;
 
     return {
       infoPanelSelection: infoSelection,
-
       setIsScrollLocked,
-
-      getRoomMembers,
-      getRoomLinks,
-
       updateRoomMembers,
-
       selfId,
-
       isPublicRoomType,
-      setExternalLinks,
       membersFilter,
       infoPanelMembers,
       setInfoPanelMembers,
@@ -436,7 +303,6 @@ export default inject(
       primaryLink,
       isArchiveFolder: isArchiveFolderRoot,
       isPublicRoom,
-
       additionalLinks: additionalLinks,
       isArchiveFolder: isArchiveFolderRoot,
       setLinkParams,
@@ -445,6 +311,8 @@ export default inject(
       getPrimaryLink: filesStore.getPrimaryLink,
       setExternalLink,
       withPublicRoomBlock,
+      fetchMembers,
+      membersIsLoading,
     };
   }
 )(

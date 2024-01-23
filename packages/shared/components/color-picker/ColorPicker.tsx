@@ -15,11 +15,13 @@ const ColorPicker = ({
   appliedColor,
   applyButtonLabel,
   cancelButtonLabel,
+  isPickerOnly,
+  handleChange,
 }: ColorPickerProps) => {
   const [color, setColor] = useState(appliedColor || "#4781D1");
 
   useEffect(() => {
-    if (appliedColor && appliedColor !== color) {
+    if (!isPickerOnly && appliedColor && appliedColor !== color) {
       setColor(appliedColor);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -28,42 +30,52 @@ const ColorPicker = ({
   return (
     <Wrapper className={className} id={id}>
       <div className="hex-color-picker">
-        <div className="hex-value-container">
-          <div className="hex-value-label">Hex code:</div>
+        {!isPickerOnly && (
+          <div className="hex-value-container">
+            <div className="hex-value-label">Hex code:</div>
 
-          <HexColorInput
-            className="hex-value"
-            prefixed
-            color={color.toUpperCase()}
-            onChange={setColor}
-          />
-        </div>
+            <HexColorInput
+              className="hex-value"
+              prefixed
+              color={color.toUpperCase()}
+              onChange={setColor}
+            />
+          </div>
+        )}
 
-        <HexColorPicker color={color.toUpperCase()} onChange={setColor} />
+        <HexColorPicker
+          color={
+            isPickerOnly ? appliedColor.toUpperCase() : color.toUpperCase()
+          }
+          onChange={isPickerOnly ? handleChange : setColor}
+        />
 
-        <div className="hex-button">
-          <Button
-            label={applyButtonLabel}
-            size={ButtonSize.small}
-            className="apply-button"
-            primary
-            scale
-            onClick={() => onApply(color)}
-          />
-          <Button
-            label={cancelButtonLabel}
-            className="cancel-button button"
-            size={ButtonSize.small}
-            scale
-            onClick={onClose}
-          />
-        </div>
+        {!isPickerOnly && (
+          <div className="hex-button">
+            <Button
+              label={applyButtonLabel}
+              size={ButtonSize.small}
+              className="apply-button"
+              primary
+              scale
+              onClick={() => onApply(color)}
+            />
+            <Button
+              label={cancelButtonLabel}
+              className="cancel-button button"
+              size={ButtonSize.small}
+              scale
+              onClick={onClose}
+            />
+          </div>
+        )}
       </div>
     </Wrapper>
   );
 };
 
 ColorPicker.defaultProps = {
+  isPickerOnly: false,
   onClose: () => {},
   onApply: () => {},
   appliedColor: "#4781D1",

@@ -14,7 +14,7 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: "Time input",
+        component: "Color input",
       },
     },
   },
@@ -29,6 +29,7 @@ const Template = ({ ...args }: ColorPickerProps) => {
 export const Default: Story = {
   render: (args) => <Template {...args} />,
   args: {
+    isPickerOnly: false,
     appliedColor: "#4781D1",
     onClose: () => console.log("close"),
     applyButtonLabel: "Apply",

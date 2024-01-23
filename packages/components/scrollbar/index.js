@@ -2,97 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 
 import { classNames } from "../utils/classNames";
-import { isMobile } from "@docspace/components/utils/device";
 import StyledScrollbar from "./styled-scrollbar";
 import { useTheme } from "styled-components";
-
-const scrollbarTypes = {
-  smallWhite: {
-    thumbV: {
-      width: "2px",
-      marginLeft: "2px",
-      borderRadius: "inherit",
-    },
-    thumbH: {
-      height: "2px",
-      marginTop: "2px",
-      borderRadius: "inherit",
-    },
-    trackV: {
-      width: "2px",
-      background: "transparent",
-    },
-    trackH: {
-      height: "2px",
-      background: "transparent",
-    },
-    content: { outline: "none", WebkitOverflowScrolling: "auto" },
-  },
-  smallBlack: {
-    thumbV: {
-      width: "3px",
-      marginLeft: "2px",
-      borderRadius: "inherit",
-    },
-    thumbH: {
-      height: "3px",
-      marginTop: "2px",
-      borderRadius: "inherit",
-    },
-    trackV: {
-      width: "3px",
-      background: "transparent",
-    },
-    trackH: {
-      height: "3px",
-      background: "transparent",
-    },
-    content: { outline: "none", WebkitOverflowScrolling: "auto" },
-  },
-  mediumBlack: {
-    thumbV: {
-      width: "8px",
-      borderRadius: "inherit",
-    },
-    thumbH: {
-      height: "8px",
-      borderRadius: "inherit",
-    },
-    trackV: {
-      width: "8px",
-      background: "transparent",
-    },
-    trackH: {
-      height: "8px",
-      background: "transparent",
-    },
-    content: {
-      outline: "none",
-      WebkitOverflowScrolling: "auto",
-    },
-  },
-  preMediumBlack: {
-    thumbV: {
-      width: "5px",
-      borderRadius: "inherit",
-      cursor: "default",
-    },
-    thumbH: {
-      height: "5px",
-      borderRadius: "inherit",
-      cursor: "default",
-    },
-    trackV: {
-      width: "5px",
-      background: "transparent",
-    },
-    trackH: {
-      height: "5px",
-      background: "transparent",
-    },
-    content: { outline: "none", WebkitOverflowScrolling: "auto" },
-  },
-};
 
 const Scrollbar = React.forwardRef((props, ref) => {
   const {
@@ -101,18 +12,16 @@ const Scrollbar = React.forwardRef((props, ref) => {
     autoHide,
     hideTrackTimer,
     scrollclass,
-    stype,
+    fixedSize,
     ...rest
   } = props;
 
   const { interfaceDirection } = useTheme();
-  const [isScrolling, setIsScrolling] = useState();
-  const [isMouseOver, setIsMouseOver] = useState();
+  const [isScrolling, setIsScrolling] = useState(false);
+  const [isMouseOver, setIsMouseOver] = useState(false);
   const timerId = useRef();
 
   const isRtl = interfaceDirection === "rtl";
-
-  const scrollbarType = scrollbarTypes[stype] ?? {};
 
   const showTrack = () => {
     clearTimeout(timerId.current);
@@ -175,45 +84,24 @@ const Scrollbar = React.forwardRef((props, ref) => {
       {...rest}
       id={id}
       disableTracksWidthCompensation
+      $fixedSize={fixedSize}
       rtl={isRtl}
       ref={ref}
       {...scrollAutoHideHandlers}
       onScrollStart={onScrollStart}
       wrapperProps={{ className: "scroll-wrapper" }}
       scrollerProps={{ renderer: renderScroller }}
-      contentProps={{
-        tabIndex: -1,
-        className: "scroll-body",
-        style: {
-          ...scrollbarType.content,
-          paddingRight: !isRtl && (isMobile() ? "8px" : "17px"),
-          paddingLeft: isRtl && (isMobile() ? "8px" : "17px"),
-        },
-      }}
-      thumbYProps={{
-        className: "nav-thumb-vertical",
-        style: scrollbarType.thumbV,
-      }}
-      thumbXProps={{
-        className: "nav-thumb-horizontal",
-        style: scrollbarType.thumbH,
-      }}
-      // Add 1px margin to vertical track to avoid scrollbar lib crashing when event.clientX equals 0
+      contentProps={{ className: "scroll-body" }}
+      thumbYProps={{ className: "thumb thumb-vertical" }}
+      thumbXProps={{ className: "thumb thumb-horizontal" }}
       trackYProps={{
-        style: {
-          ...scrollbarType.trackV,
-          ...tracksAutoHideStyles,
-          marginLeft: isRtl ? "1px" : "0",
-          marginRight: isRtl ? "0" : "1px",
-        },
+        className: "track track-vertical",
+        style: { ...tracksAutoHideStyles },
         ...tracksAutoHideHandlers,
       }}
       trackXProps={{
-        style: {
-          ...scrollbarType.trackH,
-          ...tracksAutoHideStyles,
-          direction: "ltr",
-        },
+        className: "track track-horizontal",
+        style: { ...tracksAutoHideStyles },
         ...tracksAutoHideHandlers,
       }}
     />
@@ -221,8 +109,6 @@ const Scrollbar = React.forwardRef((props, ref) => {
 });
 
 Scrollbar.propTypes = {
-  /** Scrollbar style type */
-  stype: PropTypes.string,
   /** Accepts class */
   className: PropTypes.string,
   /** Accepts id  */
@@ -233,12 +119,18 @@ Scrollbar.propTypes = {
   autoHide: PropTypes.bool,
   /** Track auto hiding delay in ms.  */
   hideTrackTimer: PropTypes.number,
+  /** Fix scrollbar size. */
+  fixedSize: PropTypes.bool,
+  /** Disable vertical scrolling. */
+  noScrollY: PropTypes.bool,
+  /** Disable horizontal scrolling. */
+  noScrollX: PropTypes.bool,
 };
 
 Scrollbar.defaultProps = {
-  stype: "mediumBlack",
   autoHide: false,
   hideTrackTimer: 500,
+  fixedSize: false,
 };
 
 export default Scrollbar;

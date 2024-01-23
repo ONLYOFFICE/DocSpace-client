@@ -1,12 +1,12 @@
 import styled, { css } from "styled-components";
 import Base from "../themes/base";
-import { isMobileOnly } from "react-device-detect";
 
 const StyledDropdown = styled.div`
   font-family: ${(props) => props.theme.fontFamily};
   font-style: normal;
   font-weight: ${(props) => props.theme.dropDown.fontWeight};
-  font-size: ${(props) => props.theme.dropDown.fontSize};
+  font-size: ${(props) =>
+    props.theme.getCorrectFontSize(props.theme.dropDown.fontSize)};
   ${(props) =>
     props.maxHeight &&
     `
@@ -70,7 +70,7 @@ const StyledDropdown = styled.div`
   -moz-box-shadow: ${(props) => props.theme.dropDown.boxShadow};
   -webkit-box-shadow: ${(props) => props.theme.dropDown.boxShadow};
   ${(props) =>
-    (props.isMobileView || isMobileOnly) &&
+    props.isMobileView &&
     css`
       box-shadow: ${(props) => props.theme.dropDown.boxShadowMobile};
       -moz-box-shadow: ${(props) => props.theme.dropDown.boxShadowMobile};

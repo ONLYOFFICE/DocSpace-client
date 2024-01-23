@@ -5,8 +5,12 @@
   "ConnectSocialNetworks": "Sosyal ağlarınızı bağlayın",
   "DarkTheme": "Koyu Tema",
   "DescriptionForSecurity": "Daha fazla güvenlik için şifrenizi değiştirmeniz gerekmektedir.",
+  "DesktopTheme": "Masaüstü Düzenleyici ayarlarıyla senkronize et",
+  "DesktopThemeDescription": "Masaüstü düzenleyicilerin mevcut temasına bağlı olarak açık ve koyu temalar arasında otomatik olarak geçiş yap.",
   "EditPhoto": "Fotoğrafı düzenle",
   "EmailNotVerified": "E-posta doğrulanmadı",
+  "ErrorAccountAlreadyUse": "Bağlı hesap hâlihazırda başka bir kullanıcı tarafından kullanılıyor",
+  "FileManagement": "Dosya yönetimi",
   "InterfaceTheme": "Arayüz teması",
   "LightTheme": "Açık tema",
   "LogoutActiveConnection": "Aktif bağlantıdan çıkış yap",
@@ -24,6 +28,5 @@
   "SuccessLogout": "Etkin bağlantının oturumu kapatıldı: {{platform}}, {{browser}}",
   "SystemTheme": "Sistem temasını kullan",
   "SystemThemeDescription": "Sisteminiz geçiş yaptığında açık ve koyu temalar arasında otomatik olarak geçiş yapın.",
-  "TfaLoginSettings": "Giriş ayarları",
   "TwoFactorDescription": "Tüm kullanıcılar için kod üreten bir uygulama aracılığıyla iki faktörlü kimlik doğrulama yönetici tarafından etkinleştirildi."
 }

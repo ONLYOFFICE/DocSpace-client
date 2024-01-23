@@ -42,7 +42,7 @@ const StyledProgress = styled.div`
   }
 
   .progress-section-text {
-    font-size: 14px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
     font-weight: 600;
     line-height: 16px;
   }
@@ -65,7 +65,7 @@ const StyledProgress = styled.div`
   }
 
   .status {
-    font-size: 14px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
     line-height: 16px;
   }
 
@@ -139,13 +139,9 @@ const Progress = ({
 
   const you = `${`(` + t("Common:You") + `)`}`;
 
-  const reassigningDataStart = (
+  const reassigningDataStart = isReassignCurrentUser ? (
     <Trans
-      i18nKey={
-        isReassignCurrentUser
-          ? "ReassigningDataToItself"
-          : "ReassigningDataToAnother"
-      }
+      i18nKey="ReassigningDataToItself"
       ns="DataReassignmentDialog"
       t={t}
       fromUser={fromUser}
@@ -154,10 +150,21 @@ const Progress = ({
     >
       <div className="user"> {{ fromUser }}</div>
       <div className="user"> {{ toUser }}</div>
-      {isReassignCurrentUser ? <div className="user"> {{ you }}</div> : ""}
+      <div className="user"> {{ you }}</div>
+    </Trans>
+  ) : (
+    <Trans
+      i18nKey="ReassigningDataToAnother"
+      ns="DataReassignmentDialog"
+      t={t}
+      fromUser={fromUser}
+      toUser={toUser}
+      you={you}
+    >
+      <div className="user"> {{ fromUser }}</div>
+      <div className="user"> {{ toUser }}</div>
     </Trans>
   );
-
   return (
     <StyledProgress>
       <div className="data-start"> {reassigningDataStart}</div>

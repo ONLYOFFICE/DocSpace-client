@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -26,48 +26,63 @@ import {
 } from "../../../utils/whiteLabelHelper";
 
 import isEqual from "lodash/isEqual";
+import { DeviceType } from "@docspace/common/constants";
 
 const WhiteLabel = (props) => {
   const {
     t,
     isSettingPaid,
     logoText,
-    logoUrls,
     setLogoText,
     restoreWhiteLabelSettings,
-    getWhiteLabelLogoUrls,
-    setWhiteLabelSettings,
+    saveWhiteLabelSettings,
     defaultWhiteLabelLogoUrls,
     getWhiteLabelLogoText,
-    getWhiteLabelLogoUrlsAction,
     initSettings,
+    logoUrlsWhiteLabel,
+    setLogoUrlsWhiteLabel,
+    defaultLogoTextWhiteLabel,
+    enableRestoreButton,
+    isManagement,
+    currentDeviceType,
+    resetIsInit,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
 
   const [isLoadedData, setIsLoadedData] = useState(false);
   const [logoTextWhiteLabel, setLogoTextWhiteLabel] = useState("");
-  const [defaultLogoTextWhiteLabel, setDefaultLogoTextWhiteLabel] =
-    useState("");
-
-  const [logoUrlsWhiteLabel, setLogoUrlsWhiteLabel] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
 
+  const isMobileView = currentDeviceType === DeviceType.mobile;
+
   const init = async () => {
-    await initSettings();
+    const isWhiteLabelPage = location.pathname.includes("white-label");
+
+    if ((isMobileView && isWhiteLabelPage) || !isMobileView) {
+      const page = isMobileView ? "white-label" : "branding";
+      await initSettings(page);
+    }
   };
 
   useEffect(() => {
     init();
     checkWidth();
     window.addEventListener("resize", checkWidth);
-    return () => window.removeEventListener("resize", checkWidth);
+    return () => {
+      window.removeEventListener("resize", checkWidth);
+      resetIsInit();
+    };
   }, []);
 
   const checkWidth = () => {
-    window.innerWidth > size.smallTablet &&
+    const url = isManagement
+      ? "/branding"
+      : "/portal-settings/customization/branding";
+
+    window.innerWidth > size.mobile &&
       location.pathname.includes("white-label") &&
-      navigate("/portal-settings/customization/branding");
+      navigate(url);
   };
 
   useEffect(() => {
@@ -85,14 +100,7 @@ const WhiteLabel = (props) => {
   }, [logoText]);
 
   useEffect(() => {
-    if (logoUrls) {
-      setLogoUrlsWhiteLabel(logoUrls);
-    }
-  }, [logoUrls]);
-
-  useEffect(() => {
     if (logoTextWhiteLabel && logoUrlsWhiteLabel.length && !isLoadedData) {
-      setDefaultLogoTextWhiteLabel(logoText);
       setIsLoadedData(true);
     }
   }, [isLoadedData, logoTextWhiteLabel, logoUrlsWhiteLabel]);
@@ -104,8 +112,6 @@ const WhiteLabel = (props) => {
   };
 
   const onChangeCompanyName = (e) => {
-    console.log(defaultLogoTextWhiteLabel);
-
     const value = e.target.value;
     setLogoTextWhiteLabel(value);
     saveToSessionStorage("companyName", value);
@@ -143,8 +149,6 @@ const WhiteLabel = (props) => {
   const onRestoreDefault = async () => {
     try {
       await restoreWhiteLabelSettings(true);
-      await getWhiteLabelLogoUrls();
-      await getWhiteLabelLogoUrlsAction(); //TODO: delete duplicate request
       await onResetCompanyName();
       toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
     } catch (error) {
@@ -206,11 +210,8 @@ const WhiteLabel = (props) => {
 
     try {
       setIsSaving(true);
-      await setWhiteLabelSettings(data);
-      await getWhiteLabelLogoUrls();
-      await getWhiteLabelLogoUrlsAction();
+      await saveWhiteLabelSettings(data);
       setLogoText(data.logoText);
-      //TODO: delete duplicate request
       toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error);
@@ -221,11 +222,12 @@ const WhiteLabel = (props) => {
 
   const isEqualLogo = isEqual(logoUrlsWhiteLabel, defaultWhiteLabelLogoUrls);
   const isEqualText = defaultLogoTextWhiteLabel === logoTextWhiteLabel;
+  const showReminder = !isEqualLogo || !isEqualText;
 
   return !isLoadedData ? (
     <LoaderWhiteLabel />
   ) : (
-    <WhiteLabelWrapper>
+    <WhiteLabelWrapper showReminder={showReminder}>
       <Text className="subtitle">{t("BrandingSubtitle")}</Text>
 
       <div className="header-container">
@@ -235,6 +237,7 @@ const WhiteLabel = (props) => {
         {!isSettingPaid && (
           <Badge
             className="paid-badge"
+            fontWeight="700"
             backgroundColor="#EDC409"
             label={t("Common:Paid")}
             isPaidBadge={true}
@@ -482,16 +485,22 @@ const WhiteLabel = (props) => {
         </div>
       </div>
 
+      <div className="spacer"></div>
+
       <SaveCancelButtons
         tabIndex={3}
         className="save-cancel-buttons"
         onSaveClick={onSave}
         onCancelClick={onRestoreDefault}
         saveButtonLabel={t("Common:SaveButton")}
-        cancelButtonLabel={t("RestoreDefaultButton")}
+        cancelButtonLabel={t("Common:Restore")}
         displaySettings={true}
-        showReminder={isSettingPaid}
+        hasScroll={true}
+        hideBorder={true}
+        showReminder={showReminder}
+        reminderText={t("YouHaveUnsavedChanges")}
         saveButtonDisabled={isEqualLogo && isEqualText}
+        disableRestoreToDefault={!enableRestoreButton}
         isSaving={isSaving}
         additionalClassSaveButton="white-label-save"
         additionalClassCancelButton="white-label-cancel"
@@ -500,37 +509,42 @@ const WhiteLabel = (props) => {
   );
 };
 
-export default inject(({ setup, auth, common }) => {
-  const { setWhiteLabelSettings } = setup;
-
+export default inject(({ auth, common }) => {
   const {
     setLogoText,
     whiteLabelLogoText,
     getWhiteLabelLogoText,
-    whiteLabelLogoUrls,
     restoreWhiteLabelSettings,
-    getWhiteLabelLogoUrls: getWhiteLabelLogoUrlsAction,
     initSettings,
+    saveWhiteLabelSettings,
+    logoUrlsWhiteLabel,
+    setLogoUrlsWhiteLabel,
+    defaultLogoTextWhiteLabel,
+    enableRestoreButton,
+    resetIsInit,
   } = common;
 
-  const {
-    getWhiteLabelLogoUrls,
-    whiteLabelLogoUrls: defaultWhiteLabelLogoUrls,
-  } = auth.settingsStore;
+  const { whiteLabelLogoUrls: defaultWhiteLabelLogoUrls, currentDeviceType } =
+    auth.settingsStore;
   const { isBrandingAndCustomizationAvailable } = auth.currentQuotaStore;
+  const { isManagement } = auth;
 
   return {
     setLogoText,
     theme: auth.settingsStore.theme,
     logoText: whiteLabelLogoText,
-    logoUrls: whiteLabelLogoUrls,
     getWhiteLabelLogoText,
-    getWhiteLabelLogoUrls,
-    setWhiteLabelSettings,
+    saveWhiteLabelSettings,
     restoreWhiteLabelSettings,
     defaultWhiteLabelLogoUrls,
-    getWhiteLabelLogoUrlsAction,
     isSettingPaid: isBrandingAndCustomizationAvailable,
     initSettings,
+    logoUrlsWhiteLabel,
+    setLogoUrlsWhiteLabel,
+    defaultLogoTextWhiteLabel,
+    enableRestoreButton,
+    isManagement,
+    currentDeviceType,
+    resetIsInit,
   };
 })(withTranslation(["Settings", "Profile", "Common"])(observer(WhiteLabel)));

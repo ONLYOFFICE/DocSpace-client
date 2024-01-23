@@ -6,11 +6,12 @@ import { Base } from "@docspace/components/themes";
 
 const StyledTooltip = styled.div`
   position: fixed;
+  display: none;
   padding: 8px;
   z-index: 250;
   background: ${(props) => props.theme.filesDragTooltip.background};
   border-radius: 6px;
-  font-size: 15px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("15px")};
   font-weight: 600;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
@@ -62,6 +63,8 @@ const DragTooltip = (props) => {
   const setTooltipPosition = useCallback(() => {
     const tooltip = tooltipRef.current;
     if (tooltip) {
+      tooltip.style.display = "block";
+
       const margin = 8;
       tooltip.style.left =
         (isRtl ? tooltipPageX - tooltip.offsetWidth : tooltipPageX + margin) +

@@ -5,6 +5,7 @@
   "HotkeysChangeView": "Passa dalla visualizzazione griglia a quella elenco",
   "HotkeysClearAll": "Cancellare tutte le selezioni",
   "HotkeysClose": "Chiudere/Annullare azione",
+  "HotkeysCopySelected": "Copia gli elementi selezionati negli appunti",
   "HotkeysCreateDocument": "Crea documento",
   "HotkeysCreateFolder": "Crea cartella",
   "HotkeysCreateForm": "Crea modello di modulo vuoto",
@@ -12,6 +13,7 @@
   "HotkeysCreatePresentation": "Crea presentazione",
   "HotkeysCreateSpreadsheet": "Crea foglio elettronico",
   "HotkeysCreatingObjects": "Creazione elementi",
+  "HotkeysCutSelected": "Taglia gli elementi selezionati negli appunti",
   "HotkeysEnterKey": "Invio",
   "HotkeysExtendSelectionDown": "Estendere la selezione verso il basso",
   "HotkeysExtendSelectionLeft": "Estendere la selezione a sinistra",
@@ -25,6 +27,7 @@
   "HotkeysMoveUp": "Spostare in alto senza modificare la selezione",
   "HotkeysNavigation": "Navigazione",
   "HotkeysOpen": "Aprire elemento selezionato/Confermare azione",
+  "HotkeysPasteSelected": "Incolla gli elementi selezionati dagli appunti",
   "HotkeysPlayPause": "Riprodurre/Pausa",
   "HotkeysRedoLastUndoneAction": "Ripetere l'ultima azione annullata",
   "HotkeysRemove": "Rimuovere gli oggetti selezionati",
@@ -39,5 +42,7 @@
   "HotkeysSpaceKey": "Spazio",
   "HotkeysUndoLastAction": "Annullare l'ultima azione",
   "HotkeysUploadFile": "Carica file",
-  "HotkeysUploadingObjects": "Caricamento elementi"
+  "HotkeysUploadingObjects": "Caricamento elementi",
+  "HotkeysZoomIn": "Ingrandisci",
+  "HotkeysZoomOut": "Rimpicciolisci"
 }

@@ -2,6 +2,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import toastr from "@docspace/components/toast/toastr";
 import QuickButtons from "../components/QuickButtons";
+import copy from "copy-to-clipboard";
 
 export default function withQuickButtons(WrappedComponent) {
   class WithQuickButtons extends React.Component {
@@ -52,6 +53,15 @@ export default function withQuickButtons(WrappedComponent) {
         .catch((err) => toastr.error(err));
     };
 
+    onCopyPrimaryLink = async () => {
+      const { t, item, getPrimaryLink } = this.props;
+      const primaryLink = await getPrimaryLink(item.id);
+      if (primaryLink) {
+        copy(primaryLink.sharedTo.shareLink);
+        toastr.success(t("Files:LinkSuccessfullyCopied"));
+      }
+    };
+
     render() {
       const { isLoading } = this.state;
 
@@ -64,6 +74,7 @@ export default function withQuickButtons(WrappedComponent) {
         viewAs,
         folderCategory,
         isPublicRoom,
+        isArchiveFolder,
       } = this.props;
 
       const quickButtonsComponent = (
@@ -80,6 +91,8 @@ export default function withQuickButtons(WrappedComponent) {
           onClickDownload={this.onClickDownload}
           onClickFavorite={this.onClickFavorite}
           folderCategory={folderCategory}
+          onCopyPrimaryLink={this.onCopyPrimaryLink}
+          isArchiveFolder={isArchiveFolder}
         />
       );
 
@@ -99,11 +112,17 @@ export default function withQuickButtons(WrappedComponent) {
       dialogsStore,
       publicRoomStore,
       treeFoldersStore,
+      filesStore,
     }) => {
       const { lockFileAction, setFavoriteAction, onSelectItem } =
         filesActionsStore;
-      const { isPersonalFolderRoot, isArchiveFolderRoot, isTrashFolder } =
-        treeFoldersStore;
+      const {
+        isPersonalFolderRoot,
+        isArchiveFolderRoot,
+        isTrashFolder,
+        isArchiveFolder,
+      } = treeFoldersStore;
+
       const { setSharingPanelVisible } = dialogsStore;
 
       const folderCategory =
@@ -120,6 +139,8 @@ export default function withQuickButtons(WrappedComponent) {
         setSharingPanelVisible,
         folderCategory,
         isPublicRoom,
+        getPrimaryLink: filesStore.getPrimaryLink,
+        isArchiveFolder,
       };
     }
   )(observer(WithQuickButtons));

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import moment from "moment";
+import moment from "moment-timezone";
 
 import Text from "@docspace/components/text";
 import { useTranslation } from "react-i18next";
@@ -10,7 +10,7 @@ import TimePicker from "@docspace/components/time-picker";
 import SelectorAddButton from "@docspace/components/selector-add-button";
 import SelectedItem from "@docspace/components/selected-item";
 
-import { isMobileOnly } from "react-device-detect";
+import { isMobile } from "@docspace/components/utils/device";
 
 const Selectors = styled.div`
   position: relative;
@@ -71,8 +71,12 @@ const DeliveryDatePicker = ({
     setFilters((prevFilters) => ({
       ...prevFilters,
       deliveryDate: null,
-      deliveryFrom: moment().startOf("day"),
-      deliveryTo: moment().endOf("day"),
+      deliveryFrom: moment()
+        .tz(window.timezone || "")
+        .startOf("day"),
+      deliveryTo: moment()
+        .tz(window.timezone || "")
+        .endOf("day"),
     }));
     setIsTimeOpen(false);
     setIsCalendarOpen(false);
@@ -91,8 +95,12 @@ const DeliveryDatePicker = ({
     setFilters((prevFilters) => ({
       ...prevFilters,
       deliveryDate: date,
-      deliveryFrom: moment().startOf("day"),
-      deliveryTo: moment().endOf("day"),
+      deliveryFrom: moment()
+        .tz(window.timezone || "")
+        .startOf("day"),
+      deliveryTo: moment()
+        .tz(window.timezone || "")
+        .endOf("day"),
     }));
   };
 
@@ -112,7 +120,7 @@ const DeliveryDatePicker = ({
       selectedDate={filters.deliveryDate}
       setSelectedDate={onDateSet}
       onChange={closeCalendar}
-      isMobile={isMobileOnly}
+      isMobile={isMobile()}
       forwardedRef={calendarRef}
       locale={i18n.language}
     />
@@ -121,9 +129,9 @@ const DeliveryDatePicker = ({
   const SelectedDateTime = () => {
     const formattedTime = isTimeEqual
       ? ""
-      : ` ${filters.deliveryFrom.format("HH:mm")} - ${moment(
-          filters.deliveryTo
-        ).format("HH:mm")}`;
+      : ` ${filters.deliveryFrom.format("HH:mm")} - ${moment(filters.deliveryTo)
+          .tz(window.timezone || "")
+          .format("HH:mm")}`;
 
     return (
       <div>
@@ -176,6 +184,7 @@ const DeliveryDatePicker = ({
         ) : (
           <DatePicker
             outerDate={filters.deliveryDate}
+            isMobile={isMobile()}
             onChange={onDateSet}
             selectedDateText={t("SelectDate")}
             showCalendarIcon={false}

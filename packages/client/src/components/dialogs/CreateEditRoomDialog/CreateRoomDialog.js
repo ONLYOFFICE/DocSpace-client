@@ -35,6 +35,7 @@ const StyledModalDialog = styled(ModalDialog)`
 const CreateRoomDialog = ({
   t,
   visible,
+  title,
   onClose,
   onCreate,
 
@@ -48,7 +49,7 @@ const CreateRoomDialog = ({
 }) => {
   const [isScrollLocked, setIsScrollLocked] = useState(false);
   const [isOauthWindowOpen, setIsOauthWindowOpen] = useState(false);
-
+  const [isWrongTitle, setIsWrongTitle] = useState(false);
   const isMountRef = React.useRef(true);
 
   React.useEffect(() => {
@@ -59,7 +60,7 @@ const CreateRoomDialog = ({
 
   const startRoomParams = {
     type: undefined,
-    title: "",
+    title: title,
     tags: [],
     isPrivate: false,
     storageLocation: {
@@ -76,6 +77,7 @@ const CreateRoomDialog = ({
       y: 0.5,
       zoom: 1,
     },
+    indexing: false, // VDR Automatic indexing
   };
 
   const [roomParams, setRoomParams] = useState({ ...startRoomParams });
@@ -93,14 +95,15 @@ const CreateRoomDialog = ({
     }));
   };
 
-  const isRoomTitleChanged = roomParams.title.trim() !== "" ? false : true;
+  const isRoomTitleChanged = roomParams?.title?.trim() !== "" ? false : true;
 
   const onKeyUpHandler = (e) => {
+    if (isWrongTitle) return;
     if (e.keyCode === 13) onCreateRoom();
   };
 
   const onCreateRoom = async () => {
-    if (!roomParams.title.trim()) {
+    if (!roomParams?.title?.trim()) {
       setIsValidTitle(false);
       return;
     }
@@ -161,7 +164,9 @@ const CreateRoomDialog = ({
             setIsScrollLocked={setIsScrollLocked}
             isDisabled={isLoading}
             isValidTitle={isValidTitle}
+            isWrongTitle={isWrongTitle}
             setIsValidTitle={setIsValidTitle}
+            setIsWrongTitle={setIsWrongTitle}
             enableThirdParty={enableThirdParty}
             onKeyUp={onKeyUpHandler}
           />
@@ -178,7 +183,7 @@ const CreateRoomDialog = ({
             primary
             scale
             onClick={onCreateRoom}
-            isDisabled={isRoomTitleChanged}
+            isDisabled={isRoomTitleChanged || isWrongTitle}
             isLoading={isLoading}
           />
           <Button

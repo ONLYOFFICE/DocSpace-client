@@ -1,5 +1,6 @@
 {
   "AllAccounts": "Alle Konten",
   "EmptyDescription": "Hier wird die Liste der Benutzer angezeigt, die zuvor zu DocSpace oder separaten Räumen eingeladen wurden. Sie können diese Benutzer jederzeit zur Zusammenarbeit einladen.",
-  "EmptyHeader": "Noch keine anderen Konten hier"
+  "EmptyHeader": "Noch keine anderen Konten hier",
+  "ListAccounts": "Liste der Konten"
 }

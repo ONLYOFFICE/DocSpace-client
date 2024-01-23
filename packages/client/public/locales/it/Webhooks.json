@@ -45,7 +45,6 @@
   "UnselectAll": "Deseleziona tutto",
   "URL": "URL",
   "ViewRawPayload": "Visualizza il carico utile iniziale",
-  "Webhook": "Webhook",
   "WebhookCreationHint": "Questo webhook verrà assegnato a tutti gli eventi in DocSpace",
   "WebhookDetails": "Dettagli del webhook",
   "WebhookEditedSuccessfully": "La configurazione del webhook è stata modificata con successo",

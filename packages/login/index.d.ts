@@ -119,7 +119,6 @@ declare global {
     capabilities?: ICapabilities;
     match?: MatchType;
     currentColorScheme?: ITheme;
-    isAuth?: boolean;
     ssoSettings?: ISSOSettings;
     logoUrls: ILogoUrl[];
     error?: IError;
@@ -132,6 +131,8 @@ declare global {
   var PORT: number;
   var IS_PERSONAL: boolean;
   var IS_ROOMS_MODE: boolean;
+  var BROWSER_DETECTOR_URL: string;
+  var CONFIG_URL: string;
 
   type assetsType = { [key: string]: string } | undefined;
 

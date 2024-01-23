@@ -11,13 +11,13 @@ const StyledUserTypeHeader = styled.div`
 
   .title {
     font-weight: 600;
-    font-size: 14px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
     line-height: 20px;
     color: ${(props) => props.theme.infoPanel.members.subtitleColor};
   }
 
   .icon {
-    margin-right: 8px;
+    margin-inline-end: 8px;
   }
 `;
 
@@ -39,7 +39,7 @@ const StyledUser = styled.div`
 
   .name {
     font-weight: 600;
-    font-size: 14px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
     line-height: 16px;
     white-space: nowrap;
     overflow: hidden;
@@ -50,7 +50,7 @@ const StyledUser = styled.div`
 
   .me-label {
     font-weight: 600;
-    font-size: 14px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
     line-height: 16px;
     color: ${(props) => props.theme.infoPanel.members.meLabelColor};
     ${(props) =>
@@ -67,16 +67,18 @@ const StyledUser = styled.div`
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
+            margin-left: -12px;
             padding-right: 8px;
             margin-right: auto;
           `
         : css`
+            margin-right: -12px;
             padding-left: 8px;
             margin-left: auto;
           `}
 
     font-weight: 600;
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     line-height: 20px;
     white-space: nowrap;
 
@@ -84,7 +86,7 @@ const StyledUser = styled.div`
       color: ${(props) =>
         props.theme.infoPanel.members.disabledRoleSelectorColor};
 
-      margin-right: 16px;
+      margin-inline-end: 16px;
     }
   }
 

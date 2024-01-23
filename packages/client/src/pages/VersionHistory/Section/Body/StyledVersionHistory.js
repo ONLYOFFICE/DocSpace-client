@@ -13,6 +13,8 @@ const StyledBody = styled.div`
   }
 
   .loader-history-rows {
+    padding-top: 12px;
+
     ${({ theme }) =>
       theme.interfaceDirection === "rtl"
         ? `padding-left: 16px;`
@@ -141,13 +143,6 @@ const StyledVersionRow = styled(Row)`
             margin-left: 0;
           `}
 
-    .version_badge-text {
-      position: absolute;
-
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl" ? `right: 6px;` : `left: 6px;`}
-    }
-
     svg {
       ${({ theme }) =>
         theme.interfaceDirection === "rtl" && `transform: scaleX(-1);`}
@@ -252,6 +247,7 @@ const StyledVersionRow = styled(Row)`
     overflow: hidden;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
+    white-space: inherit;
   }
 
   .version-comment-wrapper {

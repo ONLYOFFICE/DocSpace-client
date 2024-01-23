@@ -11,9 +11,7 @@ export const messageActions = (
   message,
   setElementProps,
 
-  pluginId,
   pluginName,
-  pluginSystem,
 
   setSettingsPluginDialogVisible,
   setCurrentSettingsDialogPlugin,
@@ -27,7 +25,9 @@ export const messageActions = (
   updateMainButtonItems,
   updateProfileMenuItems,
   updateEventListenerItems,
-  updateFileItems
+  updateFileItems,
+
+  updatePlugin
 ) => {
   if (!message || !message.actions || message.actions.length === 0) return;
 
@@ -40,15 +40,12 @@ export const messageActions = (
 
       case PluginActions.updateContext:
         if (message.contextProps) {
-          message.contextProps.forEach((prop) => {
-            updatePropsContext && updatePropsContext(prop.name, prop.props);
-          });
+          updatePropsContext(contextProps);
         }
         break;
 
       case PluginActions.updateStatus:
-        updatePluginStatus &&
-          updatePluginStatus(pluginId, pluginName, pluginSystem);
+        updatePluginStatus && updatePluginStatus(pluginName);
 
         break;
 
@@ -75,35 +72,28 @@ export const messageActions = (
         break;
 
       case PluginActions.showSettingsModal:
-        if (pluginId || (pluginName && pluginSystem)) {
+        if (pluginName) {
           setSettingsPluginDialogVisible &&
             setSettingsPluginDialogVisible(true);
           setCurrentSettingsDialogPlugin &&
             setCurrentSettingsDialogPlugin({
-              pluginId,
               pluginName,
-              pluginSystem,
             });
         }
         break;
 
       case PluginActions.closeSettingsModal:
-        if (pluginId) {
-          setSettingsPluginDialogVisible &&
-            setSettingsPluginDialogVisible(false);
-          setCurrentSettingsDialogPlugin &&
-            setCurrentSettingsDialogPlugin(null);
-        }
+        setSettingsPluginDialogVisible && setSettingsPluginDialogVisible(false);
+        setCurrentSettingsDialogPlugin && setCurrentSettingsDialogPlugin(null);
+
         break;
 
       case PluginActions.showCreateDialogModal:
         if (message.createDialogProps) {
           const payload = {
             ...message.createDialogProps,
-            pluginId,
-            pluginId,
+
             pluginName,
-            pluginSystem,
           };
 
           const event = new Event(Events.CREATE_PLUGIN_FILE);
@@ -129,32 +119,27 @@ export const messageActions = (
         break;
 
       case PluginActions.updateContextMenuItems:
-        updateContextMenuItems &&
-          updateContextMenuItems(pluginId, pluginName, pluginSystem);
+        updateContextMenuItems && updateContextMenuItems(pluginName);
 
         break;
       case PluginActions.updateInfoPanelItems:
-        updateInfoPanelItems &&
-          updateInfoPanelItems(pluginId, pluginName, pluginSystem);
+        updateInfoPanelItems && updateInfoPanelItems(pluginName);
 
         break;
       case PluginActions.updateMainButtonItems:
-        updateMainButtonItems &&
-          updateMainButtonItems(pluginId, pluginName, pluginSystem);
+        updateMainButtonItems && updateMainButtonItems(pluginName);
 
         break;
       case PluginActions.updateProfileMenuItems:
-        updateProfileMenuItems &&
-          updateProfileMenuItems(pluginId, pluginName, pluginSystem);
+        updateProfileMenuItems && updateProfileMenuItems(pluginName);
 
         break;
       case PluginActions.updateEventListenerItems:
-        updateEventListenerItems &&
-          updateEventListenerItems(pluginId, pluginName, pluginSystem);
+        updateEventListenerItems && updateEventListenerItems(pluginName);
 
         break;
       case PluginActions.updateFileItems:
-        updateFileItems && updateFileItems(pluginId, pluginName, pluginSystem);
+        updateFileItems && updateFileItems(pluginName);
 
         break;
 
@@ -173,6 +158,11 @@ export const messageActions = (
         }
 
         break;
+
+      case PluginActions.saveSettings:
+        if (!message.settings) return;
+
+        updatePlugin(pluginName, null, message.settings);
     }
   });
 };

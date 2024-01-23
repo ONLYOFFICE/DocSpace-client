@@ -1,13 +1,16 @@
-import { combineUrl } from "@docspace/common/utils";
-import { isDesktop } from "@docspace/components/utils/device";
 import { makeAutoObservable } from "mobx";
+
+import { combineUrl } from "@docspace/common/utils";
+import { RoomsType } from "@docspace/common/constants";
+import { checkDialogsOpen } from "@docspace/common/utils/checkDialogsOpen";
+
+import toastr from "@docspace/components/toast/toastr";
+import { isDesktop, isMobile } from "@docspace/components/utils/device";
+import getFilesFromEvent from "@docspace/components/drag-and-drop/get-files-from-event";
+
 import config from "PACKAGE_FILE";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
-import toastr from "@docspace/components/toast/toastr";
-import { RoomsType } from "@docspace/common/constants";
-import { encryptionUploadDialog } from "../helpers/desktop";
-import getFilesFromEvent from "@docspace/components/drag-and-drop/get-files-from-event";
-import { checkDialogsOpen } from "@docspace/common/utils/checkDialogsOpen";
+import { encryptionUploadDialog } from "../helpers/encryptionUploadDialog";
 
 class HotkeyStore {
   filesStore;
@@ -42,7 +45,11 @@ class HotkeyStore {
 
   scrollToCaret = () => {
     const { offsetTop, item } = this.getItemOffset();
-    const scroll = document.getElementsByClassName("section-scroll")[0];
+
+    const scroll = isMobile()
+      ? document.querySelector("#customScrollBar > .scroll-wrapper > .scroller")
+      : document.getElementsByClassName("section-scroll")[0];
+
     const scrollRect = scroll?.getBoundingClientRect();
 
     if (item && item[0]) {
@@ -75,7 +82,9 @@ class HotkeyStore {
       infiniteLoaderComponent.tabIndex = -1;
     }
 
-    const someDialogIsOpen = checkDialogsOpen();
+    const { isViewerOpen } = this.filesActionsStore.mediaViewerDataStore;
+
+    const someDialogIsOpen = checkDialogsOpen() || isViewerOpen;
 
     if (
       someDialogIsOpen ||
@@ -127,9 +136,11 @@ class HotkeyStore {
   getItemOffset = () => {
     const { hotkeyCaret, viewAs } = this.filesStore;
 
-    let item = document.getElementsByClassName(
-      `${hotkeyCaret.id}_${hotkeyCaret.fileExst}`
-    );
+    const className = hotkeyCaret.fileExst
+      ? `${hotkeyCaret.id}_${hotkeyCaret.fileExst}`
+      : `${hotkeyCaret.id}`;
+
+    let item = document.getElementsByClassName(className);
 
     if (viewAs === "table") {
       item = item && item[0]?.getElementsByClassName("table-container_cell");
@@ -157,10 +168,13 @@ class HotkeyStore {
 
     if (filesList.length) {
       // scroll to first element
-      const scroll = document.querySelector(
-        "#sectionScroll > .scroll-wrapper > .scroller"
-      );
-      scroll.scrollTo(0, 0);
+      const scroll = isMobile()
+        ? document.querySelector(
+            "#customScrollBar > .scroll-wrapper > .scroller"
+          )
+        : document.getElementsByClassName("section-scroll")[0];
+
+      scroll?.scrollTo(0, 0);
 
       this.filesStore.setSelection([filesList[0]]);
       this.setCaret(filesList[0]);
@@ -175,12 +189,8 @@ class HotkeyStore {
   };
 
   selectFile = () => {
-    const {
-      selection,
-      setSelection,
-      hotkeyCaret,
-      setHotkeyCaretStart,
-    } = this.filesStore;
+    const { selection, setSelection, hotkeyCaret, setHotkeyCaretStart } =
+      this.filesStore;
 
     const index = selection.findIndex(
       (f) => f.id === hotkeyCaret?.id && f.isFolder === hotkeyCaret?.isFolder
@@ -221,13 +231,8 @@ class HotkeyStore {
   };
 
   selectLeft = () => {
-    const {
-      hotkeyCaret,
-      filesList,
-      setHotkeyCaretStart,
-      selection,
-      viewAs,
-    } = this.filesStore;
+    const { hotkeyCaret, filesList, setHotkeyCaretStart, selection, viewAs } =
+      this.filesStore;
     if (viewAs !== "tile") return;
 
     if (!hotkeyCaret && !selection.length) {
@@ -240,13 +245,8 @@ class HotkeyStore {
   };
 
   selectRight = () => {
-    const {
-      hotkeyCaret,
-      filesList,
-      setHotkeyCaretStart,
-      selection,
-      viewAs,
-    } = this.filesStore;
+    const { hotkeyCaret, filesList, setHotkeyCaretStart, selection, viewAs } =
+      this.filesStore;
     if (viewAs !== "tile") return;
 
     if (!hotkeyCaret && !selection.length) {
@@ -496,17 +496,17 @@ class HotkeyStore {
 
   openItem = () => {
     const { selection } = this.filesStore;
+
+    const someDialogIsOpen = checkDialogsOpen();
+
     selection.length === 1 &&
+      !someDialogIsOpen &&
       this.filesActionsStore.openFileAction(selection[0]);
   };
 
   selectAll = () => {
-    const {
-      filesList,
-      hotkeyCaret,
-      setHotkeyCaretStart,
-      setSelected,
-    } = this.filesStore;
+    const { filesList, hotkeyCaret, setHotkeyCaretStart, setSelected } =
+      this.filesStore;
 
     setSelected("all");
     if (!hotkeyCaret) {
@@ -538,11 +538,14 @@ class HotkeyStore {
       folderInput && folderInput.click();
     } else {
       if (this.treeFoldersStore.isPrivacyFolder) {
-        encryptionUploadDialog((encryptedFile, encrypted) => {
-          encryptedFile.encrypted = encrypted;
-          this.goToHomePage(navigate);
-          this.uploadDataStore.startUpload([encryptedFile], null, t);
-        });
+        encryptionUploadDialog(
+          this.settingsStore.extsWebEncrypt,
+          (encryptedFile, encrypted) => {
+            encryptedFile.encrypted = encrypted;
+            this.goToHomePage(navigate);
+            this.uploadDataStore.startUpload([encryptedFile], null, t);
+          }
+        );
       } else {
         const fileInput = document.getElementById("customFileInput");
         fileInput && fileInput.click();

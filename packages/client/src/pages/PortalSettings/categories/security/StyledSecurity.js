@@ -2,7 +2,7 @@ import styled from "styled-components";
 import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import commonIconsStyles from "@docspace/components/utils/common-icons-style";
 import { Base } from "@docspace/components/themes";
-import { mobile, smallTablet } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 
 export const StyledArrowRightIcon = styled(ArrowRightIcon)`
   ${commonIconsStyles}
@@ -40,13 +40,12 @@ export const MainContainer = styled.div`
     max-width: 700px;
 
     .link-learn-more {
-      display: block;
+      display: inline-block;
       margin: 4px 0 16px 0;
       font-weight: 600;
     }
 
-    p,
-    a {
+    p {
       color: ${(props) => props.theme.client.settings.common.descriptionColor};
     }
 
@@ -79,12 +78,11 @@ export const LearnMoreWrapper = styled.div`
     font-weight: 600;
   }
 
-  p,
-  a {
+  p {
     color: ${(props) => props.theme.client.settings.common.descriptionColor};
   }
 
-  @media (max-width: 600px) {
+  @media ${mobile} {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
@@ -110,10 +108,8 @@ export const StyledBruteForceProtection = styled.div`
     max-width: 350px;
   }
 
-  .error-text {
-    position: absolute;
-    font-size: 10px;
-    color: #f21c0e;
+  .error-label {
+    font-size: ${(props) => props.theme.getCorrectFontSize("10px")};
   }
 
   .save-cancel-buttons {
@@ -144,12 +140,11 @@ export const StyledBruteForceProtection = styled.div`
     .link {
       line-height: 15px;
       font-weight: 600;
-      color: ${(props) =>
-        props.theme.client.settings.security.descriptionColor};
+
       text-decoration: underline;
     }
 
-    @media (max-width: 600px) {
+    @media ${mobile} {
       padding-bottom: 20px;
     }
   }

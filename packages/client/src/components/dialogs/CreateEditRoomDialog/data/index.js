@@ -52,5 +52,7 @@ export const getRoomTypeDefaultTagTranslation = (roomType = 1, t) => {
       return t("Files:CustomRooms");
     case RoomsType.PublicRoom:
       return t("Files:PublicRoom");
+    case RoomsType.VirtualDataRoom:
+      return t("Files:VirtualDataRoom");
   }
 };

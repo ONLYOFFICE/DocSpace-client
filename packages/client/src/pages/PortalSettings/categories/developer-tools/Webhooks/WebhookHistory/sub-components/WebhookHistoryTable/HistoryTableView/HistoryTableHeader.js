@@ -44,7 +44,7 @@ const HistoryTableHeader = (props) => {
       enable: true,
       default: true,
       active: true,
-      minWidth: 150,
+      minWidth: 210,
       onChange: onColumnChange,
     },
     {
@@ -72,8 +72,8 @@ const HistoryTableHeader = (props) => {
 
     setColumns((prevColumns) =>
       prevColumns.map((item, index) =>
-        index === columnIndex ? { ...item, enable: !item.enable } : item,
-      ),
+        index === columnIndex ? { ...item, enable: !item.enable } : item
+      )
     );
 
     const tableColumns = columns.map((c) => c.enable && c.key);

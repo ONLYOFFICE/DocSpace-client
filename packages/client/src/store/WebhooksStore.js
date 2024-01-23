@@ -11,6 +11,8 @@ import {
 import { makeAutoObservable, runInAction } from "mobx";
 
 class WebhooksStore {
+  authStore;
+
   webhooks = [];
   checkedEventIds = [];
   historyFilters = null;
@@ -21,9 +23,23 @@ class WebhooksStore {
   eventDetails = {};
   FETCH_COUNT = 100;
   isRetryPending = false;
+  configName = "";
 
-  constructor() {
+  PASSWORD_SETTINGS = {
+    "minLength": 12,
+    "allowedCharactersRegexStr": "[\\x21-\\x7E]",
+    "upperCase": true,
+    "digits": true,
+    "digitsRegexStr": "(?=.*\\d)",
+    "upperCaseRegexStr": "(?=.*[A-Z])",
+    "specSymbols": false,
+    "specSymbolsRegexStr": "(?=.*[\\x21-\\x2F\\x3A-\\x40\\x5B-\\x60\\x7B-\\x7E])"
+}
+
+  constructor(authStore) {
     makeAutoObservable(this);
+
+    this.authStore = authStore;
   }
 
   setRetryPendingFalse = () => {
@@ -39,8 +55,14 @@ class WebhooksStore {
   };
 
   loadWebhooks = async () => {
+    const { passwordSettings, getPortalPasswordSettings } =
+      this.authStore.settingsStore;
+
     try {
       const webhooksData = await getAllWebhooks();
+      if (!passwordSettings) {
+        await getPortalPasswordSettings();
+      }
       runInAction(() => {
         this.webhooks = webhooksData.map((data) => ({
           id: data.configs.id,
@@ -112,6 +134,20 @@ class WebhooksStore {
 
   retryWebhookEvents = async (ids) => {
     return await retryWebhooks(ids);
+  };
+
+  fetchConfigName = async (params) => {
+    const historyData = await getWebhooksJournal({
+      ...params,
+      startIndex: 0,
+      count: 1,
+    });
+
+    this.configName = historyData.items[0].configName;
+  };
+
+  clearConfigName = () => {
+    this.configName = "";
   };
 
   fetchHistoryItems = async (params) => {

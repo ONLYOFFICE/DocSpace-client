@@ -24,7 +24,7 @@ const App: React.FC<ILoginProps> = (props) => {
       if (status === 404 && !standalone) {
         const url = new URL(wrongPortalNameUrl);
         url.searchParams.append("url", window.location.hostname);
-        // window.location.replace(url);
+        window.location.replace(url);
       }
 
       throw new Error(message);
@@ -36,7 +36,7 @@ const App: React.FC<ILoginProps> = (props) => {
       <SimpleNav {...props} />
       <Routes>
         <Route path="/login/error" element={<InvalidRoute {...props} />} />
-        <Route path="/login/code" element={<CodeLogin {...props} />} />
+        {/*<Route path="/login/code" element={<CodeLogin {...props} />} />*/}
         <Route path="/login" element={<Login {...props} />} />
       </Routes>
     </MobxProvider>

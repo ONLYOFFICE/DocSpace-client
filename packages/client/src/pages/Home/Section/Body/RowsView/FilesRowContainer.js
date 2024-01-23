@@ -1,19 +1,21 @@
-import React, { useEffect, useMemo } from "react";
+import styled from "styled-components";
+import { useMemo } from "react";
 import { inject, observer } from "mobx-react";
-import RowContainer from "@docspace/components/row-container";
-import SimpleFilesRow from "./SimpleFilesRow";
-import { isMobile } from "react-device-detect";
-import styled, { css } from "styled-components";
-import marginStyles from "./CommonStyles";
-import { isTablet } from "@docspace/components/utils/device";
+
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
+
 import { Base } from "@docspace/components/themes";
+import RowContainer from "@docspace/components/row-container";
+
+import marginStyles from "./CommonStyles";
+import SimpleFilesRow from "./SimpleFilesRow";
 
 const StyledRowContainer = styled(RowContainer)`
   .row-list-item:first-child {
     .row-selected {
       .files-row {
         border-top: ${(props) =>
-    `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
+          `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
         margin-top: -1px;
         padding-top: 0px;
         padding-bottom: 1px;
@@ -24,7 +26,7 @@ const StyledRowContainer = styled(RowContainer)`
   .row-selected + .row-wrapper:not(.row-selected) {
     .files-row {
       border-top: ${(props) =>
-    `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
+        `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
       margin-top: -3px;
       ${marginStyles}
     }
@@ -35,7 +37,7 @@ const StyledRowContainer = styled(RowContainer)`
     + .row-selected {
     .files-row {
       border-top: ${(props) =>
-    `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
+        `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
       margin-top: -3px;
       ${marginStyles}
     }
@@ -50,7 +52,7 @@ const StyledRowContainer = styled(RowContainer)`
   .row-selected:last-child {
     .files-row {
       border-bottom: ${(props) =>
-    `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
+        `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
       ${marginStyles}
     }
     .files-row::after {
@@ -60,7 +62,7 @@ const StyledRowContainer = styled(RowContainer)`
   .row-selected:first-child {
     .files-row {
       border-top: ${(props) =>
-    `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
+        `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
       margin-top: -2px;
       padding-top: 1px;
       padding-bottom: 1px;
@@ -84,24 +86,13 @@ const FilesRowContainer = ({
   isTrashFolder,
   withPaging,
   highlightFile,
+  currentDeviceType,
 }) => {
-  useEffect(() => {
-    const width = window.innerWidth;
-
-
-    if ((viewAs !== "table" && viewAs !== "row") || !sectionWidth) return;
-    // 400 - it is desktop info panel width
-    if (
-      (width < 1025 && !infoPanelVisible) ||
-      ((width < 625 || (viewAs === "row" && width < 1025)) &&
-        infoPanelVisible) ||
-      isMobile
-    ) {
-      viewAs !== "row" && setViewAs("row");
-    } else {
-      viewAs !== "table" && setViewAs("table");
-    }
-  }, [sectionWidth]);
+  useViewEffect({
+    view: viewAs,
+    setView: setViewAs,
+    currentDeviceType,
+  });
 
   const filesListNode = useMemo(() => {
     return filesList.map((item, index) => (
@@ -158,7 +149,7 @@ export default inject(({ filesStore, auth, treeFoldersStore }) => {
   } = filesStore;
   const { isVisible: infoPanelVisible } = auth.infoPanelStore;
   const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
-  const { withPaging } = auth.settingsStore;
+  const { withPaging, currentDeviceType } = auth.settingsStore;
 
   const isRooms = isRoomsFolder || isArchiveFolder;
 
@@ -174,5 +165,6 @@ export default inject(({ filesStore, auth, treeFoldersStore }) => {
     isTrashFolder,
     withPaging,
     highlightFile,
+    currentDeviceType,
   };
 })(observer(FilesRowContainer));

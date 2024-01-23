@@ -1,20 +1,21 @@
-import { isMobile, isMobileOnly } from "react-device-detect";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { animated } from "@react-spring/web";
+
+import { tablet, mobile } from "@docspace/components/utils/device";
 
 export const ContainerPlayer = styled.div<{ $isFullScreen: boolean }>`
   position: fixed;
   inset: 0;
   z-index: 305;
-  background-color: ${props =>
+  background-color: ${(props) =>
     props.$isFullScreen ? "#000" : "rgba(55, 55, 55, 0.6)"};
   touch-action: none;
 `;
 
 export const VideoWrapper = styled(animated.div)<{ $visible: boolean }>`
   inset: 0;
-  visibility: ${props => (props.$visible ? "visible" : "hidden")};
-  opacity: ${props => (props.$visible ? 1 : 0)};
+  visibility: ${(props) => (props.$visible ? "visible" : "hidden")};
+  opacity: ${(props) => (props.$visible ? 1 : 0)};
   height: 100%;
   width: 100%;
   touch-action: none;
@@ -30,11 +31,6 @@ export const VideoWrapper = styled(animated.div)<{ $visible: boolean }>`
   }
 `;
 
-const StyledMobilePlayerControls = css`
-  background-color: rgba(0, 0, 0, 0.8);
-  height: 80px;
-`;
-
 export const StyledPlayerControls = styled.div<{ $isShow: boolean }>`
   position: fixed;
   right: 0px;
@@ -46,8 +42,8 @@ export const StyledPlayerControls = styled.div<{ $isShow: boolean }>`
   width: 100%;
   height: 188px;
 
-  visibility: ${props => (props.$isShow ? "visible" : "hidden")};
-  opacity: ${props => (props.$isShow ? "1" : "0")};
+  visibility: ${(props) => (props.$isShow ? "visible" : "hidden")};
+  opacity: ${(props) => (props.$isShow ? "1" : "0")};
 
   background: linear-gradient(
     rgba(0, 0, 0, 0) 0%,
@@ -55,7 +51,10 @@ export const StyledPlayerControls = styled.div<{ $isShow: boolean }>`
     rgba(0, 0, 0, 0.89) 100%
   );
 
-  ${isMobile && StyledMobilePlayerControls}
+  @media ${tablet} {
+    background-color: rgba(0, 0, 0, 0.8);
+    height: 80px;
+  }
 `;
 
 export const ControlContainer = styled.div`
@@ -71,20 +70,12 @@ export const ControlContainer = styled.div`
     justify-content: space-between;
   }
 
-  ${isMobile &&
-  css`
+  @media ${tablet} {
     margin-top: 8px;
     .player_right-control {
-      ${props =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: -8px;
-            `
-          : css`
-              margin-right: -8px;
-            `}
+      margin-right: -8px;
     }
-  `}
+  }
 `;
 
 export const PlayerControlsWrapper = styled.div`
@@ -92,13 +83,11 @@ export const PlayerControlsWrapper = styled.div`
   width: 100%;
   margin-top: 80px;
 
-  ${isMobile &&
-  css`
+  @media ${tablet} {
     margin-top: 0px;
-  `}
+  }
 
-  ${isMobileOnly &&
-  css`
+  @media ${mobile} {
     padding: 0 15px;
-  `}
+  }
 `;

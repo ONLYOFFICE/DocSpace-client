@@ -3,7 +3,6 @@ import MobileActionsRemoveReactSvgUrl from "PUBLIC_DIR/images/mobile.actions.rem
 import React from "react";
 import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";
-import { isMobileOnly } from "react-device-detect";
 
 import { mobile } from "@docspace/components/utils/device";
 
@@ -11,10 +10,9 @@ import MainButtonMobile from "@docspace/components/main-button-mobile";
 
 const StyledMainButtonMobile = styled(MainButtonMobile)`
   position: fixed;
-
   z-index: 200;
 
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           left: 24px;
@@ -22,10 +20,12 @@ const StyledMainButtonMobile = styled(MainButtonMobile)`
       : css`
           right: 24px;
         `}
+
   bottom: 24px;
 
   @media ${mobile} {
-    ${props =>
+    position: absolute;
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             left: 16px;
@@ -33,21 +33,7 @@ const StyledMainButtonMobile = styled(MainButtonMobile)`
         : css`
             right: 16px;
           `}
-    bottom: 16px;
   }
-
-  ${isMobileOnly &&
-  css`
-    ${props =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            left: 16px;
-          `
-        : css`
-            right: 16px;
-          `}
-    bottom: 16px;
-  `}
 `;
 
 const MobileView = ({
@@ -67,6 +53,7 @@ const MobileView = ({
   clearPrimaryProgressData,
   secondaryProgressDataStoreVisible,
   secondaryProgressDataStorePercent,
+  secondaryProgressDataStoreIsDownload,
   secondaryProgressDataStoreCurrentFile,
   secondaryProgressDataStoreCurrentFilesCount,
   clearSecondaryProgressData,
@@ -82,7 +69,7 @@ const MobileView = ({
   const primaryCurrentFile = React.useRef(null);
 
   const openButtonToggler = React.useCallback(() => {
-    setIsOpenButton(prevState => !prevState);
+    setIsOpenButton((prevState) => !prevState);
   }, []);
 
   const showUploadPanel = React.useCallback(() => {
@@ -98,9 +85,9 @@ const MobileView = ({
     let currentPrimaryNumEl = primaryNumEl;
 
     const uploadedFileCount = files.filter(
-      item => item.percent === 100 && !item.cancel
+      (item) => item.percent === 100 && !item.cancel
     ).length;
-    const fileLength = files.filter(item => !item.cancel).length;
+    const fileLength = files.filter((item) => !item.cancel).length;
 
     if (primaryCurrentFile.current === null && primaryProgressDataLoadingFile) {
       primaryCurrentFile.current = primaryProgressDataLoadingFile.uniqueId;
@@ -120,6 +107,12 @@ const MobileView = ({
       (secondaryProgressDataStoreCurrentFilesCount *
         secondaryProgressDataStorePercent) /
       100;
+
+    const secondaryProgressStatus = secondaryProgressDataStoreIsDownload
+      ? `${Math.floor(secondaryProgressDataStorePercent)}%`
+      : `${Math.floor(
+          currentSecondaryProgressItem
+        )}/${secondaryProgressDataStoreCurrentFilesCount}`;
 
     const newProgressOptions = [
       {
@@ -141,9 +134,7 @@ const MobileView = ({
         label: t("Common:OtherOperations"),
         icon: MobileActionsRemoveReactSvgUrl,
         percent: secondaryProgressDataStorePercent,
-        status: `${Math.round(
-          currentSecondaryProgressItem
-        )}/${secondaryProgressDataStoreCurrentFilesCount}`,
+        status: secondaryProgressStatus,
         onCancel: clearSecondaryProgressData,
       },
     ];
@@ -176,6 +167,7 @@ const MobileView = ({
     primaryProgressDataErrors,
     secondaryProgressDataStoreVisible,
     secondaryProgressDataStorePercent,
+    secondaryProgressDataStoreIsDownload,
     secondaryProgressDataStoreCurrentFile,
     secondaryProgressDataStoreCurrentFilesCount,
   ]);
@@ -229,6 +221,7 @@ export default inject(({ uploadDataStore, treeFoldersStore }) => {
     currentFile: secondaryProgressDataStoreCurrentFile,
     filesCount: secondaryProgressDataStoreCurrentFilesCount,
     clearSecondaryProgressData,
+    isDownload: secondaryProgressDataStoreIsDownload,
   } = secondaryProgressDataStore;
 
   return {
@@ -243,6 +236,7 @@ export default inject(({ uploadDataStore, treeFoldersStore }) => {
     clearPrimaryProgressData,
     secondaryProgressDataStoreVisible,
     secondaryProgressDataStorePercent,
+    secondaryProgressDataStoreIsDownload,
     secondaryProgressDataStoreCurrentFile,
     secondaryProgressDataStoreCurrentFilesCount,
     clearSecondaryProgressData,

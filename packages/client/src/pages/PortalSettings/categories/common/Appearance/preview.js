@@ -1,8 +1,8 @@
 ﻿import PlusPreviewSvgUrl from "PUBLIC_DIR/images/plus.preview.svg?url";
-import React, { useState, useEffect } from "react";
-import Loaders from "@docspace/common/components/Loaders";
+import { useState, useEffect, useLayoutEffect } from "react";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 import ContextMenuButton from "@docspace/components/context-menu-button";
-import { isTablet } from "react-device-detect";
+
 import {
   StyledComponent,
   StyledFloatingButton,
@@ -12,7 +12,8 @@ import {
 
 import ButtonPlusIcon from "PUBLIC_DIR/images/actions.button.plus.react.svg";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
-import { isMobileOnly, isDesktop } from "react-device-detect";
+
+import { isMobile, isTablet } from "@docspace/components/utils/device";
 
 const Preview = (props) => {
   const {
@@ -30,11 +31,10 @@ const Preview = (props) => {
   const [isSmallWindow, setIsSmallWindow] = useState(false);
 
   const onCheckView = () => {
-    const tablet =
-      isTablet || (window.innerWidth > 600 && window.innerWidth <= 1024);
+    const tablet = isTablet();
     setIsViewTablet(tablet);
 
-    if (isDesktop && window.innerWidth < 600) {
+    if (isMobile()) {
       setIsSmallWindow(true);
     } else {
       setIsSmallWindow(false);
@@ -60,7 +60,7 @@ const Preview = (props) => {
     saveToSessionStorage("selectColorAccent", colorPreview);
   }, [colorPreview]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     onCheckView();
     window.addEventListener("resize", onCheckView);
 
@@ -69,25 +69,25 @@ const Preview = (props) => {
     };
   });
 
-  return isSmallWindow || isMobileOnly ? (
+  return isSmallWindow || isMobile() ? (
     <StyledMobilePreview
       selectThemeId={selectThemeId}
       themePreview={themePreview}
       colorPreview={colorPreview}
     >
       <div className="preview_mobile-header">
-        <Loaders.Rectangle
+        <RectangleSkeleton
           animate={false}
           width="20"
           height="20"
           className="loaders-theme"
         />
-        <Loaders.Rectangle
+        <RectangleSkeleton
           animate={false}
           height="24"
           className="loaders-theme"
         />
-        <Loaders.Rectangle
+        <RectangleSkeleton
           animate={false}
           width="32"
           height="32"
@@ -97,7 +97,7 @@ const Preview = (props) => {
       </div>
       <div className="preview_mobile-navigation">
         <div className="header">
-          <Loaders.Rectangle
+          <RectangleSkeleton
             animate={false}
             height="24"
             className="loaders-theme"
@@ -105,7 +105,7 @@ const Preview = (props) => {
         </div>
       </div>
       <div className="section-search background border-color">
-        <Loaders.Rectangle
+        <RectangleSkeleton
           animate={false}
           width="48"
           height="12"
@@ -117,7 +117,7 @@ const Preview = (props) => {
         <div className="tile-name">
           <div className="tile-container">
             <div className="tile-icon">
-              <Loaders.Rectangle
+              <RectangleSkeleton
                 animate={false}
                 width="32"
                 height="32"
@@ -125,7 +125,7 @@ const Preview = (props) => {
               />
             </div>
 
-            <Loaders.Rectangle
+            <RectangleSkeleton
               animate={false}
               width="48"
               height="10"
@@ -136,7 +136,7 @@ const Preview = (props) => {
 
           {withTileActions && (
             <div className="action-button">
-              <Loaders.Rectangle
+              <RectangleSkeleton
                 animate={false}
                 width="16"
                 height="16"
@@ -163,7 +163,7 @@ const Preview = (props) => {
           )}
         </div>
         <div className="tile-tag border-color">
-          <Loaders.Rectangle
+          <RectangleSkeleton
             animate={false}
             width="63"
             height="24"
@@ -203,7 +203,7 @@ const Preview = (props) => {
         {!isViewTablet ? (
           <>
             <div className="header">
-              <Loaders.Rectangle
+              <RectangleSkeleton
                 animate={false}
                 width="211"
                 height="24"
@@ -212,7 +212,7 @@ const Preview = (props) => {
             </div>
 
             <div className="main-button-container">
-              <Loaders.Rectangle
+              <RectangleSkeleton
                 animate={false}
                 height="32"
                 className="main-button-preview"
@@ -221,7 +221,7 @@ const Preview = (props) => {
 
             <div className="menu-section">
               <div className="title-section">
-                <Loaders.Rectangle
+                <RectangleSkeleton
                   animate={false}
                   width="37"
                   height="12"
@@ -231,7 +231,7 @@ const Preview = (props) => {
 
               <div className="flex">
                 <div className="padding-right">
-                  <Loaders.Rectangle
+                  <RectangleSkeleton
                     animate={false}
                     width="16"
                     height="16"
@@ -239,7 +239,7 @@ const Preview = (props) => {
                   />
                 </div>
 
-                <Loaders.Rectangle
+                <RectangleSkeleton
                   animate={false}
                   width="48"
                   height="8"
@@ -248,7 +248,7 @@ const Preview = (props) => {
               </div>
               <div className="flex select">
                 <div className="padding-right">
-                  <Loaders.Rectangle
+                  <RectangleSkeleton
                     animate={false}
                     width="16"
                     height="16"
@@ -256,13 +256,13 @@ const Preview = (props) => {
                   />
                 </div>
 
-                <Loaders.Rectangle
+                <RectangleSkeleton
                   animate={false}
                   width="48"
                   height="8"
                   className="color-loaders"
                 />
-                <Loaders.Rectangle
+                <RectangleSkeleton
                   animate={false}
                   width="22"
                   height="16"
@@ -272,14 +272,14 @@ const Preview = (props) => {
               </div>
               <div className="flex">
                 <div className="padding-right">
-                  <Loaders.Rectangle
+                  <RectangleSkeleton
                     animate={false}
                     width="16"
                     height="16"
                     className="loaders-theme"
                   />
                 </div>
-                <Loaders.Rectangle
+                <RectangleSkeleton
                   animate={false}
                   width="48"
                   height="8"
@@ -290,7 +290,7 @@ const Preview = (props) => {
 
             <div className="menu-section">
               <div className="title-section">
-                <Loaders.Rectangle
+                <RectangleSkeleton
                   animate={false}
                   width="37"
                   height="12"
@@ -300,7 +300,7 @@ const Preview = (props) => {
 
               <div className="flex">
                 <div className="padding-right">
-                  <Loaders.Rectangle
+                  <RectangleSkeleton
                     animate={false}
                     width="16"
                     height="16"
@@ -308,7 +308,7 @@ const Preview = (props) => {
                   />
                 </div>
 
-                <Loaders.Rectangle
+                <RectangleSkeleton
                   animate={false}
                   width="48"
                   height="8"
@@ -319,14 +319,14 @@ const Preview = (props) => {
           </>
         ) : (
           <>
-            <Loaders.Rectangle
+            <RectangleSkeleton
               animate={false}
               width="28"
               height="28"
               className="tablet-header"
             />
             <div className="line"></div>
-            <Loaders.Rectangle
+            <RectangleSkeleton
               animate={false}
               width="20"
               height="20"
@@ -343,20 +343,20 @@ const Preview = (props) => {
               <rect x="4" y="6" width="20" height="20" rx="2" fill="#11A3D4" />
               <circle cx="24" cy="6" r="5" fill="#11A3D4" stroke="#F8F9F9" />
             </svg>
-            <Loaders.Rectangle
+            <RectangleSkeleton
               animate={false}
               width="20"
               height="20"
               className="tablet-category bottom"
             />
             <div className="line"></div>
-            <Loaders.Rectangle
+            <RectangleSkeleton
               animate={false}
               width="20"
               height="20"
               className="tablet-category"
             />
-            <Loaders.Rectangle
+            <RectangleSkeleton
               animate={false}
               className="tablet-category tablet-half"
             />
@@ -367,7 +367,7 @@ const Preview = (props) => {
       <div className="section border-color">
         <div className="section-header">
           <div className="section-header-loader">
-            <Loaders.Rectangle
+            <RectangleSkeleton
               animate={false}
               width="60"
               height="16"
@@ -379,7 +379,7 @@ const Preview = (props) => {
         </div>
         <div className="section-search background border-color">
           <div className="section-search-loader">
-            <Loaders.Rectangle
+            <RectangleSkeleton
               animate={false}
               width="48"
               height="12"
@@ -393,7 +393,7 @@ const Preview = (props) => {
               <div className="tile-name">
                 <div className="tile-container">
                   <div className="tile-icon">
-                    <Loaders.Rectangle
+                    <RectangleSkeleton
                       animate={false}
                       width="32"
                       height="32"
@@ -402,7 +402,7 @@ const Preview = (props) => {
                   </div>
 
                   <div className="tile-title">
-                    <Loaders.Rectangle
+                    <RectangleSkeleton
                       animate={false}
                       width="48"
                       height="10"
@@ -413,7 +413,7 @@ const Preview = (props) => {
 
                 {withTileActions && (
                   <div className="action-button">
-                    <Loaders.Rectangle
+                    <RectangleSkeleton
                       animate={false}
                       width="16"
                       height="16"
@@ -440,7 +440,7 @@ const Preview = (props) => {
                 )}
               </div>
               <div className="tile-tag border-color">
-                <Loaders.Rectangle
+                <RectangleSkeleton
                   animate={false}
                   width="63"
                   height="24"
@@ -454,7 +454,7 @@ const Preview = (props) => {
                 <div className="tile-name">
                   <div className="tile-container">
                     <div className="tile-icon">
-                      <Loaders.Rectangle
+                      <RectangleSkeleton
                         animate={false}
                         width="32"
                         height="32"
@@ -463,7 +463,7 @@ const Preview = (props) => {
                     </div>
 
                     <div className="tile-title">
-                      <Loaders.Rectangle
+                      <RectangleSkeleton
                         animate={false}
                         width="48"
                         height="10"
@@ -473,7 +473,7 @@ const Preview = (props) => {
                   </div>
                 </div>
                 <div className="tile-tag border-color">
-                  <Loaders.Rectangle
+                  <RectangleSkeleton
                     animate={false}
                     width="63"
                     height="24"
@@ -488,7 +488,7 @@ const Preview = (props) => {
             <div className="tile-name only-tile-name background border-color">
               <div className="tile-container">
                 <div className="tile-icon">
-                  <Loaders.Rectangle
+                  <RectangleSkeleton
                     animate={false}
                     width="32"
                     height="32"
@@ -497,7 +497,7 @@ const Preview = (props) => {
                 </div>
 
                 <div className="tile-title">
-                  <Loaders.Rectangle
+                  <RectangleSkeleton
                     animate={false}
                     width="48"
                     height="10"
@@ -532,7 +532,7 @@ const Preview = (props) => {
               <div className="tile-name only-tile-name background border-color tablet-tile-name">
                 <div className="tile-container">
                   <div className="tile-icon">
-                    <Loaders.Rectangle
+                    <RectangleSkeleton
                       animate={false}
                       width="32"
                       height="32"
@@ -541,7 +541,7 @@ const Preview = (props) => {
                   </div>
 
                   <div className="tile-title">
-                    <Loaders.Rectangle
+                    <RectangleSkeleton
                       animate={false}
                       width="48"
                       height="10"

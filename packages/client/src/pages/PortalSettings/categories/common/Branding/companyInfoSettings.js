@@ -14,7 +14,7 @@ import Link from "@docspace/components/link";
 import LoaderCompanyInfoSettings from "../sub-components/loaderCompanyInfoSettings";
 import AboutDialog from "../../../../About/AboutDialog";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
-import { smallTablet, size } from "@docspace/components/utils/device";
+import { mobile, size } from "@docspace/components/utils/device";
 
 const StyledComponent = styled.div`
   .link {
@@ -29,18 +29,19 @@ const StyledComponent = styled.div`
   }
 
   .text-input {
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   }
 
   .save-cancel-buttons {
     margin-top: 24px;
+    bottom: 0;
   }
 
   .description {
     padding-bottom: 16px;
   }
 
-  @media ${smallTablet} {
+  @media ${mobile} {
     .header {
       display: none;
     }
@@ -61,6 +62,7 @@ const CompanyInfoSettings = (props) => {
     isLoadedCompanyInfoSettingsData,
     buildVersionInfo,
     personal,
+    isManagement,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -99,9 +101,12 @@ const CompanyInfoSettings = (props) => {
   }, []);
 
   const checkWidth = () => {
-    window.innerWidth > size.smallTablet &&
+    const url = isManagement
+      ? "/branding"
+      : "portal-settings/customization/branding";
+    window.innerWidth > size.mobile &&
       location.pathname.includes("company-info-settings") &&
-      navigate("/portal-settings/customization/branding");
+      navigate(url);
   };
 
   useEffect(() => {
@@ -114,22 +119,22 @@ const CompanyInfoSettings = (props) => {
     const companySettings = getFromSessionStorage("companySettings");
 
     const defaultData = {
-      address: companyInfoSettingsData.address,
-      companyName: companyInfoSettingsData.companyName,
-      email: companyInfoSettingsData.email,
-      phone: companyInfoSettingsData.phone,
-      site: companyInfoSettingsData.site,
+      address: companyInfoSettingsData?.address,
+      companyName: companyInfoSettingsData?.companyName,
+      email: companyInfoSettingsData?.email,
+      phone: companyInfoSettingsData?.phone,
+      site: companyInfoSettingsData?.site,
     };
 
     saveToSessionStorage("defaultCompanySettings", defaultData);
 
     if (companySettings) {
       setCompanySettings({
-        address: companySettings.address,
-        companyName: companySettings.companyName,
-        email: companySettings.email,
-        phone: companySettings.phone,
-        site: companySettings.site,
+        address: companySettings?.address,
+        companyName: companySettings?.companyName,
+        email: companySettings?.email,
+        phone: companySettings?.phone,
+        site: companySettings?.site,
       });
     } else {
       setCompanySettings(defaultData);
@@ -146,11 +151,11 @@ const CompanyInfoSettings = (props) => {
     );
 
     const newSettings = {
-      address: companySettings.address,
-      companyName: companySettings.companyName,
-      email: companySettings.email,
-      phone: companySettings.phone,
-      site: companySettings.site,
+      address: companySettings?.address,
+      companyName: companySettings?.companyName,
+      email: companySettings?.email,
+      phone: companySettings?.phone,
+      site: companySettings?.site,
     };
 
     saveToSessionStorage("companySettings", newSettings);
@@ -440,9 +445,11 @@ const CompanyInfoSettings = (props) => {
           onSaveClick={onSave}
           onCancelClick={onRestore}
           saveButtonLabel={t("Common:SaveButton")}
-          cancelButtonLabel={t("Settings:RestoreDefaultButton")}
-          reminderTest={t("YouHaveUnsavedChanges")}
+          cancelButtonLabel={t("Common:Restore")}
+          reminderText={t("YouHaveUnsavedChanges")}
           displaySettings={true}
+          hasScroll={true}
+          hideBorder={true}
           showReminder={(isSettingPaid && showReminder) || isLoading}
           disableRestoreToDefault={companyInfoSettingsIsDefault || isLoading}
           additionalClassSaveButton="company-info-save"
@@ -454,7 +461,7 @@ const CompanyInfoSettings = (props) => {
 };
 
 export default inject(({ auth, common }) => {
-  const { currentQuotaStore, settingsStore } = auth;
+  const { currentQuotaStore, settingsStore, isManagement } = auth;
 
   const {
     setIsLoadedCompanyInfoSettingsData,
@@ -484,6 +491,7 @@ export default inject(({ auth, common }) => {
     buildVersionInfo,
     personal,
     isSettingPaid: isBrandingAndCustomizationAvailable,
+    isManagement,
   };
 })(
   withLoading(

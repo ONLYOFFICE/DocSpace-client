@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Base } from "@docspace/components/themes";
-import { smallTablet } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 
 const WhiteLabelWrapper = styled.div`
   .subtitle {
@@ -58,10 +58,11 @@ const WhiteLabelWrapper = styled.div`
 
   .logos-wrapper {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
     gap: 20px;
 
-    @media ${smallTablet} {
+    @media ${mobile} {
       flex-direction: column;
     }
   }
@@ -75,10 +76,11 @@ const WhiteLabelWrapper = styled.div`
   .logos-editor-wrapper {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 8px;
     margin-bottom: 8px;
 
-    @media ${smallTablet} {
+    @media ${mobile} {
       flex-direction: column;
     }
   }
@@ -113,7 +115,7 @@ const WhiteLabelWrapper = styled.div`
     height: 42px;
     padding: 12px 20px;
 
-    @media ${smallTablet} {
+    @media ${mobile} {
       width: 310px;
       height: 35px;
     }
@@ -178,14 +180,18 @@ const WhiteLabelWrapper = styled.div`
     display: none;
   }
 
-  .save-cancel-buttons {
-    margin-top: 24px;
+  .spacer {
+    height: 24px;
   }
 
-  @media ${smallTablet} {
+  @media ${mobile} {
     .subtitle,
     .header-container {
       display: none;
+    }
+
+    .spacer {
+      height: ${(props) => (props.showReminder ? "64px" : "24px")};
     }
   }
 `;

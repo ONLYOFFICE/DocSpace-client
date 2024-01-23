@@ -2,19 +2,14 @@ import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./index.styled";
-import {
-  Link,
-  Button,
-  Heading,
-  HelpButton,
-  InputBlock,
-  Label,
-  Text,
-} from "@docspace/components";
+import { Link, Button, InputBlock, Label, Text } from "@docspace/components";
 import toastr from "@docspace/components/toast/toastr";
 import Loaders from "@docspace/common/components/Loaders";
+import { DeviceType } from "@docspace/common/constants";
+import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 
 const URL_REGEX = /^https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{1,256}\/?$/;
+const DNS_PLACEHOLDER = `${window.location.protocol}//<docspace-dns-name>/`;
 const EDITOR_URL_PLACEHOLDER = `${window.location.protocol}//<editors-dns-name>/`;
 
 const DocumentService = ({
@@ -22,6 +17,7 @@ const DocumentService = ({
   changeDocumentServiceLocation,
   currentColorScheme,
   integrationSettingsUrl,
+  currentDeviceType,
 }) => {
   const { t, ready } = useTranslation(["Settings", "Common"]);
 
@@ -133,33 +129,25 @@ const DocumentService = ({
 
   if (isLoading || !ready) return <Loaders.SettingsDSConnect />;
 
+  const buttonSize =
+    currentDeviceType === DeviceType.desktop ? "small" : "normal";
+
   return (
     <Styled.Location>
       <Styled.LocationHeader>
         <div className="main">
-          <Heading className={"heading"} isInline level={3}>
-            {t("Settings:DocumentServiceLocationHeader")}
-          </Heading>
-          <div className="help-button-wrapper">
-            <HelpButton
-              tooltipContent={t("Settings:DocumentServiceLocationHeaderHelp")}
-            />
-          </div>
+          {t("Settings:DocumentServiceLocationHeaderHelp")}
         </div>
-        <div className="secondary">
-          {t("Settings:DocumentServiceLocationHeaderInfo")}
-        </div>
-        <div>
-          <Link
-            className="third-party-link"
-            color={currentColorScheme.main.accent}
-            isHovered
-            target="_blank"
-            href={integrationSettingsUrl}
-          >
-            {t("Common:LearnMore")}
-          </Link>
-        </div>
+
+        <Link
+          className="third-party-link"
+          color={currentColorScheme.main.accent}
+          isHovered
+          target="_blank"
+          href={integrationSettingsUrl}
+        >
+          {t("Common:LearnMore")}
+        </Link>
       </Styled.LocationHeader>
 
       <Styled.LocationForm onSubmit={onSubmit}>
@@ -226,7 +214,7 @@ const DocumentService = ({
               iconButtonClassName={"icon-button"}
               value={portalUrl}
               onChange={onChangePortalUrl}
-              placeholder={"http://<docspace-dns-name>/"}
+              placeholder={DNS_PLACEHOLDER}
               hasError={!portalUrlIsValid}
               isDisabled={isSaveLoading || isResetLoading}
             />
@@ -237,38 +225,33 @@ const DocumentService = ({
             </Text>
           </div>
         </div>
-        <div className="form-buttons">
-          <Button
-            onClick={onSubmit}
-            className="button"
-            primary
-            size={"small"}
-            label={t("Common:SaveButton")}
-            isDisabled={
-              isFormEmpty ||
-              isValuesInit ||
-              !allInputsValid ||
-              isSaveLoading ||
-              isResetLoading
-            }
-            isLoading={isSaveLoading}
-          />
-          <Button
-            onClick={onReset}
-            className="button"
-            size={"small"}
-            label={t("Settings:RestoreDefaultButton")}
-            isDisabled={isDefaultSettings || isSaveLoading || isResetLoading}
-            isLoading={isResetLoading}
-          />
-        </div>
+
+        <SaveCancelButtons
+          onSaveClick={onSubmit}
+          onCancelClick={onReset}
+          saveButtonLabel={t("Common:SaveButton")}
+          cancelButtonLabel={t("Common:Restore")}
+          saveButtonDisabled={
+            isFormEmpty ||
+            isValuesInit ||
+            !allInputsValid ||
+            isSaveLoading ||
+            isResetLoading
+          }
+          cancelButtonDisabled={
+            isDefaultSettings || isSaveLoading || isResetLoading
+          }
+          displaySettings={true}
+          isSaving={isSaveLoading || isResetLoading}
+        />
       </Styled.LocationForm>
     </Styled.Location>
   );
 };
 
 export default inject(({ auth, settingsStore }) => {
-  const { currentColorScheme, integrationSettingsUrl } = auth.settingsStore;
+  const { currentColorScheme, integrationSettingsUrl, currentDeviceType } =
+    auth.settingsStore;
   const { getDocumentServiceLocation, changeDocumentServiceLocation } =
     settingsStore;
   return {
@@ -276,5 +259,6 @@ export default inject(({ auth, settingsStore }) => {
     changeDocumentServiceLocation,
     currentColorScheme,
     integrationSettingsUrl,
+    currentDeviceType,
   };
 })(observer(DocumentService));

@@ -1,4 +1,14 @@
 {
+  "ActionCannotBeUndone": "Utilizatorii dezactivați pe care i-ați selectat vor fi șterși din DocSpace. Această acțiune nu poate fi anulată.",
+  "CannotReassignFiles": "Dacă ștergeți mai mulți utilizatori deodată, nu puteți reafecta fișierele lor altor utilizatori.",
+  "DeleteGroupUsersSuccessMessage": "Utilizatorii au fost șterse cu succes.",
+  "DeleteMyDocumentsUser": "Toate fișierele și dosarele personale din secțiunea Documentele mele a utilizatorului vor fi șterse definitiv.",
+  "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Sălile create de acest utilizator și documentele stocate în aceste săli vor fi reatribuite automat administratorului care efectuează ștergerea: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Reatribuiți datele manual pentru a alege un alt destinatar datelor reatribuite.",
   "DeleteUser": "Șterge utilizatorul",
-  "SuccessfullyDeleteUserInfoMessage": "Utilizatorul a fost șters cu succes"
+  "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> va fi șters. Această acțiune nu poate fi anulată.",
+  "DeletingUsers": "Ștergere utilizatori",
+  "PleaseNote": "Vă rugăm să rețineți că:",
+  "ReassignDataToAnotherUser": "Reatribuiți datele unui alt utilizator",
+  "SuccessfullyDeleteUserInfoMessage": "Utilizatorul a fost șters cu succes",
+  "ToBeAbleToReassignData": "Pentru a putea reafectaa datele, ștergeți utilizatorii unul câte unul."
 }

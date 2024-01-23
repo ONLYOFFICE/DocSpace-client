@@ -1,14 +1,13 @@
 import React from "react";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
-
 import { withTranslation } from "react-i18next";
+import { useNavigate, useLocation } from "react-router-dom";
+
+import { DeviceType } from "@docspace/common/constants";
+import { getCatalogIconUrlByType } from "@docspace/common/utils/catalogIcon.helper";
 
 import { isArrayEqual } from "@docspace/components/utils/array";
 
-import { isMobileOnly } from "react-device-detect";
-
-import { isMobile } from "@docspace/components/utils/device";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 
 import {
@@ -21,86 +20,6 @@ import {
 
 import CatalogItem from "@docspace/components/catalog-item";
 import LoaderArticleBody from "./loaderArticleBody";
-
-const getTreeItems = (data, path, t) => {
-  const maptKeys = (tKey) => {
-    switch (tKey) {
-      case "AccessRights":
-        return t("AccessRights");
-      case "ManagementCategoryCommon":
-        return t("Customization");
-      case "SettingsGeneral":
-        return t("SettingsGeneral");
-      case "StudioTimeLanguageSettings":
-        return t("StudioTimeLanguageSettings");
-      case "CustomTitles":
-        return t("CustomTitles");
-      case "ManagementCategorySecurity":
-        return t("ManagementCategorySecurity");
-      case "PortalAccess":
-        return t("PortalAccess");
-      case "TwoFactorAuth":
-        return t("TwoFactorAuth");
-      case "ManagementCategoryIntegration":
-        return t("ManagementCategoryIntegration");
-      case "ThirdPartyAuthorization":
-        return t("ThirdPartyAuthorization");
-      case "Migration":
-        return t("Migration");
-      case "Backup":
-        return t("Backup");
-      case "PortalDeletion":
-        return t("PortalDeletion");
-      case "Common:PaymentsTitle":
-        return t("Common:PaymentsTitle");
-      case "DocumentService":
-        return t("DocumentService");
-      case "SingleSignOn":
-        return t("SingleSignOn");
-      case "SMTPSettings":
-        return t("SMTPSettings");
-      case "DeveloperTools":
-        return t("DeveloperTools");
-      case "Bonus":
-        return t("Common:Bonus");
-      case "FreeProFeatures":
-        return "Common:FreeProFeatures";
-      default:
-        throw new Error("Unexpected translation key");
-    }
-  };
-  return data.map((item) => {
-    if (item.children && item.children.length && !item.isCategory) {
-      return (
-        <TreeNode
-          title={
-            <Text className="inherit-title-link header">
-              {maptKeys(item.tKey)}
-            </Text>
-          }
-          key={item.key}
-          icon={item.icon && <ReactSVG className="tree_icon" src={item.icon} />}
-          disableSwitch={true}
-        >
-          {getTreeItems(item.children, path, t)}
-        </TreeNode>
-      );
-    }
-    const link = path + getSelectedLinkByKey(item.key, settingsTree);
-    return (
-      <TreeNode
-        key={item.key}
-        title={
-          <Link className="inherit-title-link" href={link}>
-            {maptKeys(item.tKey)}
-          </Link>
-        }
-        icon={item.icon && <ReactSVG src={item.icon} className="tree_icon" />}
-        disableSwitch={true}
-      />
-    );
-  });
-};
 
 const ArticleBodyContent = (props) => {
   const {
@@ -115,6 +34,9 @@ const ArticleBodyContent = (props) => {
     standalone,
     isEnterprise,
     isCommunity,
+    currentDeviceType,
+    isProfileLoading,
+    limitedAccessSpace
   } = props;
 
   const [selectedKeys, setSelectedKeys] = React.useState([]);
@@ -160,7 +82,7 @@ const ArticleBodyContent = (props) => {
   }, []);
 
   React.useEffect(() => {
-    if (tReady) setIsLoadedArticleBody(true);
+    if (tReady && !isProfileLoading) setIsLoadedArticleBody(true);
 
     if (prevLocation.current.pathname !== location.pathname) {
       if (location.pathname.includes("common")) {
@@ -198,7 +120,13 @@ const ArticleBodyContent = (props) => {
         this.setState({ selectedKeys: ["8-0"] });
       }
     }
-  }, [tReady, setIsLoadedArticleBody, location.pathname, selectedKeys]);
+  }, [
+    tReady,
+    isProfileLoading,
+    setIsLoadedArticleBody,
+    location.pathname,
+    selectedKeys,
+  ]);
 
   const onSelect = (value) => {
     if (isArrayEqual([value], selectedKeys)) {
@@ -207,7 +135,7 @@ const ArticleBodyContent = (props) => {
 
     setSelectedKeys([value + "-0"]);
 
-    if (isMobileOnly || isMobile()) {
+    if (currentDeviceType === DeviceType.mobile) {
       toggleArticleOpen();
     }
 
@@ -298,7 +226,7 @@ const ArticleBodyContent = (props) => {
       }
     }
 
-    if (!isOwner || standalone) {
+    if (!isOwner || limitedAccessSpace) {
       const index = resultTree.findIndex((n) => n.tKey === "PortalDeletion");
       if (index !== -1) {
         resultTree.splice(index, 1);
@@ -308,11 +236,14 @@ const ArticleBodyContent = (props) => {
     if (selectedKeys.length === 0) return <></>;
 
     resultTree.map((item) => {
+      const icon = getCatalogIconUrlByType(item.type, {
+        isSettingsCatalog: true,
+      });
       items.push(
         <CatalogItem
           key={item.key}
           id={item.key}
-          icon={item.icon}
+          icon={icon}
           showText={showText}
           text={mapKeys(item.tKey)}
           value={item.link}
@@ -333,10 +264,14 @@ const ArticleBodyContent = (props) => {
 
   const items = catalogItems();
 
-  return !isLoadedArticleBody ? <LoaderArticleBody /> : <>{items}</>;
+  return !isLoadedArticleBody || isProfileLoading ? (
+    <LoaderArticleBody />
+  ) : (
+    <>{items}</>
+  );
 };
 
-export default inject(({ auth, common }) => {
+export default inject(({ auth, common, clientLoadingStore }) => {
   const { isLoadedArticleBody, setIsLoadedArticleBody } = common;
   const {
     currentTariffStatusStore,
@@ -348,7 +283,13 @@ export default inject(({ auth, common }) => {
   const { isNotPaidPeriod } = currentTariffStatusStore;
   const { user } = userStore;
   const { isOwner } = user;
-  const { standalone, showText, toggleArticleOpen } = settingsStore;
+  const { standalone, showText, toggleArticleOpen, currentDeviceType, limitedAccessSpace } =
+    settingsStore;
+
+  const isProfileLoading =
+    window.location.pathname.includes("profile") &&
+    clientLoadingStore.showProfileLoader &&
+    !isLoadedArticleBody;
 
   return {
     standalone,
@@ -360,6 +301,9 @@ export default inject(({ auth, common }) => {
     isNotPaidPeriod,
     isOwner,
     isCommunity,
+    currentDeviceType,
+    isProfileLoading,
+    limitedAccessSpace,
   };
 })(
   withLoading(

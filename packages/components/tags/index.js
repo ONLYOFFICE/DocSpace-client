@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Tag from "@docspace/components/tag";
+import Tag from "../tag";
 
 import StyledTags from "./StyledTags";
 

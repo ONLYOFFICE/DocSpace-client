@@ -11,12 +11,12 @@ import toastr from "@docspace/components/toast/toastr";
 import LoaderAdditionalResources from "../sub-components/loaderAdditionalResources";
 import isEqual from "lodash/isEqual";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
-import { smallTablet, size } from "@docspace/components/utils/device";
+import { mobile, size } from "@docspace/components/utils/device";
 
 const StyledComponent = styled.div`
   margin-top: 40px;
 
-  @media ${smallTablet} {
+  @media ${mobile} {
     margin-top: 0px;
 
     .header {
@@ -44,8 +44,6 @@ const StyledComponent = styled.div`
   }
 
   .checkbox {
-    width: max-content;
-
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
@@ -69,6 +67,7 @@ const AdditionalResources = (props) => {
     additionalResourcesIsDefault,
     setIsLoadedAdditionalResources,
     isLoadedAdditionalResources,
+    isManagement,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -85,18 +84,19 @@ const AdditionalResources = (props) => {
 
     const defaultData = {
       feedbackAndSupportEnabled:
-        additionalResourcesData.feedbackAndSupportEnabled,
-      videoGuidesEnabled: additionalResourcesData.videoGuidesEnabled,
-      helpCenterEnabled: additionalResourcesData.helpCenterEnabled,
+        additionalResourcesData?.feedbackAndSupportEnabled,
+      videoGuidesEnabled: additionalResourcesData?.videoGuidesEnabled,
+      helpCenterEnabled: additionalResourcesData?.helpCenterEnabled,
     };
 
     saveToSessionStorage("defaultAdditionalSettings", defaultData);
 
     if (additionalSettings) {
       setAdditionalSettings({
-        feedbackAndSupportEnabled: additionalSettings.feedbackAndSupportEnabled,
-        videoGuidesEnabled: additionalSettings.videoGuidesEnabled,
-        helpCenterEnabled: additionalSettings.helpCenterEnabled,
+        feedbackAndSupportEnabled:
+          additionalSettings?.feedbackAndSupportEnabled,
+        videoGuidesEnabled: additionalSettings?.videoGuidesEnabled,
+        helpCenterEnabled: additionalSettings?.helpCenterEnabled,
       });
     } else {
       setAdditionalSettings(defaultData);
@@ -110,9 +110,12 @@ const AdditionalResources = (props) => {
   }, []);
 
   const checkWidth = () => {
-    window.innerWidth > size.smallTablet &&
+    const url = isManagement
+      ? "/branding"
+      : "portal-settings/customization/branding";
+    window.innerWidth > size.mobile &&
       location.pathname.includes("additional-resources") &&
-      navigate("/portal-settings/customization/branding");
+      navigate(url);
   };
 
   useEffect(() => {
@@ -250,14 +253,14 @@ const AdditionalResources = (props) => {
             onChange={onChangeFeedback}
           />
 
-          <Checkbox
+          {/*<Checkbox
             tabIndex={13}
             className="show-video-guides checkbox"
             isDisabled={!isSettingPaid}
             label={t("ShowVideoGuides")}
             isChecked={videoGuidesEnabled}
             onChange={onChangeVideoGuides}
-          />
+  />*/}
           <Checkbox
             tabIndex={14}
             className="show-help-center checkbox"
@@ -272,9 +275,9 @@ const AdditionalResources = (props) => {
           onSaveClick={onSave}
           onCancelClick={onRestore}
           saveButtonLabel={t("Common:SaveButton")}
-          cancelButtonLabel={t("Settings:RestoreDefaultButton")}
+          cancelButtonLabel={t("Common:Restore")}
           displaySettings={true}
-          reminderTest={t("YouHaveUnsavedChanges")}
+          reminderText={t("YouHaveUnsavedChanges")}
           showReminder={(isSettingPaid && hasChange) || isLoading}
           disableRestoreToDefault={additionalResourcesIsDefault || isLoading}
           additionalClassSaveButton="additional-resources-save"
@@ -286,7 +289,7 @@ const AdditionalResources = (props) => {
 };
 
 export default inject(({ auth, common }) => {
-  const { currentQuotaStore, settingsStore } = auth;
+  const { currentQuotaStore, settingsStore, isManagement } = auth;
 
   const { setIsLoadedAdditionalResources, isLoadedAdditionalResources } =
     common;
@@ -310,6 +313,7 @@ export default inject(({ auth, common }) => {
     setIsLoadedAdditionalResources,
     isLoadedAdditionalResources,
     isSettingPaid: isBrandingAndCustomizationAvailable,
+    isManagement,
   };
 })(
   withLoading(

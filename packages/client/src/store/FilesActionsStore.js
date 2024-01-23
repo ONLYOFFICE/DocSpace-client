@@ -29,15 +29,17 @@ import {
   FileAction,
   FileStatus,
   FolderType,
+  RoomsType,
+  ShareAccessRights,
 } from "@docspace/common/constants";
 import { makeAutoObservable } from "mobx";
-import { isMobile } from "react-device-detect";
+
 import toastr from "@docspace/components/toast/toastr";
 import { TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
 import { checkProtocol } from "../helpers/files-helpers";
 import { combineUrl } from "@docspace/common/utils";
 import config from "PACKAGE_FILE";
-import { isTablet } from "@docspace/components/utils/device";
+import { isDesktop } from "@docspace/components/utils/device";
 import { getCategoryType } from "SRC_DIR/helpers/utils";
 import { muteRoomNotification } from "@docspace/common/api/settings";
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -336,13 +338,6 @@ class FilesActionStore {
     addActiveItems(fileIds, null, destFolderId);
     addActiveItems(null, folderIds, destFolderId);
 
-    if (this.dialogsStore.isFolderActions && withoutDialog) {
-      folderIds = [];
-      fileIds = [];
-
-      folderIds.push(selection[0]);
-    }
-
     if (folderIds.length || fileIds.length) {
       this.isMediaOpen();
 
@@ -557,6 +552,7 @@ class FilesActionStore {
       label,
       alert: false,
       operationId,
+      isDownload: true,
     });
 
     const fileIds = fileConvertIds.map((f) => f.key || f);
@@ -615,10 +611,18 @@ class FilesActionStore {
 
   downloadAction = (label, folderId) => {
     const { bufferSelection } = this.filesStore;
+    const { isVisible: infoPanelIsVisible, selection: infoPanelSelection } =
+      this.authStore.infoPanelStore;
 
     const selection = this.filesStore.selection.length
       ? this.filesStore.selection
-      : [bufferSelection];
+      : bufferSelection
+      ? [bufferSelection]
+      : infoPanelIsVisible && infoPanelSelection != null
+      ? [infoPanelSelection]
+      : null;
+
+    if (!selection.length) return;
 
     let fileIds = [];
     let folderIds = [];
@@ -637,14 +641,6 @@ class FilesActionStore {
         folderIds.push(item.id);
         items.push({ id: item.id });
       }
-    }
-
-    if (this.dialogsStore.isFolderActions) {
-      fileIds = [];
-      folderIds = [];
-
-      folderIds.push(bufferSelection);
-      this.dialogsStore.setIsFolderActions(false);
     }
 
     this.setGroupMenuBlocked(true);
@@ -758,6 +754,8 @@ class FilesActionStore {
         operationId,
       });
 
+      const id = Array.isArray(itemId) ? itemId : [itemId];
+
       try {
         await this.deleteItemOperation(
           isFile,
@@ -766,12 +764,7 @@ class FilesActionStore {
           isRoom,
           operationId
         );
-
-        const id = Array.isArray(itemId) ? itemId : [itemId];
-
-        clearActiveOperations(isFile && id, !isFile && id);
       } catch (err) {
-        clearActiveOperations(isFile && [itemId], !isFile && [itemId]);
         setSecondaryProgressBarData({
           visible: true,
           alert: true,
@@ -779,6 +772,11 @@ class FilesActionStore {
         });
         setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
         return toastr.error(err.message ? err.message : err);
+      } finally {
+        setTimeout(
+          () => clearActiveOperations(isFile && id, !isFile && id),
+          TIMEOUT
+        );
       }
     }
   };
@@ -1018,7 +1016,14 @@ class FilesActionStore {
             }
           })
           .then(() => setSelected("close"))
-          .finally(() => toastr.success(t("RoomPinned")));
+          .then(() =>
+            toastr.success(
+              items.length > 1
+                ? t("RoomsPinned", { count: items.length })
+                : t("RoomPinned")
+            )
+          )
+          .catch((error) => console.log(error));
       case "unpin":
         items.forEach((item) => {
           updateRoomPin(item);
@@ -1032,7 +1037,14 @@ class FilesActionStore {
             }
           })
           .then(() => setSelected("close"))
-          .finally(() => toastr.success(t("RoomUnpinned")));
+          .then(() => {
+            toastr.success(
+              items.length > 1
+                ? t("RoomsUnpinned", { count: items.length })
+                : t("RoomUnpinned")
+            );
+          })
+          .catch((error) => console.log(error));
       default:
         return;
     }
@@ -1043,12 +1055,12 @@ class FilesActionStore {
     const { treeFolders } = this.treeFoldersStore;
     const { folders, updateRoomMute } = this.filesStore;
 
-    const muteStatus = action === "mute" ? true : false;
+    const muteStatus = action === "mute";
 
-    const folderIndex = id && folders.findIndex((x) => x.id === id);
+    const folderIndex = id && folders.findIndex((x) => x.id == id);
     if (folderIndex) updateRoomMute(folderIndex, muteStatus);
 
-    const treeIndex = treeFolders.findIndex((x) => x.id === rootFolderId);
+    const treeIndex = treeFolders.findIndex((x) => x.id == rootFolderId);
     const count = treeFolders[treeIndex].newItems;
     if (treeIndex) {
       if (muteStatus) {
@@ -1379,6 +1391,8 @@ class FilesActionStore {
         url !== window.DocSpace.location.pathname
     );
 
+    if (!isDesktop()) this.authStore.infoPanelStore.setIsVisible(false);
+
     window.DocSpace.navigate(`${url}?${newFilter.toUrlParams()}`, { state });
   };
 
@@ -1453,9 +1467,13 @@ class FilesActionStore {
     const { bufferSelection } = this.filesStore;
     const { isRootFolder } = this.selectedFolderStore;
 
-    const selection = bufferSelection
+    let selection = bufferSelection
       ? [bufferSelection]
       : this.filesStore.selection;
+
+    selection = selection.filter(
+      (el) => !el.isFolder || el.id !== destFolderId
+    );
 
     const isCopy = selection.findIndex((f) => f.security.Move) === -1;
 
@@ -1545,6 +1563,7 @@ class FilesActionStore {
       this.filesStore;
 
     const { rootFolderType } = this.selectedFolderStore;
+    const canDownload = selection.every((s) => s.security?.Download);
 
     switch (option) {
       case "copy":
@@ -1553,11 +1572,9 @@ class FilesActionStore {
         return hasSelection && canCopy;
       case "showInfo":
       case "download":
-        const canDownload = selection.every((s) => s.security?.Download);
-
         return hasSelection && canDownload;
       case "downloadAs":
-        return canConvertSelected && !this.publicRoomStore.isPublicRoom;
+        return canDownload && canConvertSelected;
       case "moveTo":
         const canMove = selection.every((s) => s.security?.Move);
 
@@ -1683,6 +1700,8 @@ class FilesActionStore {
       operationId,
     });
 
+    const id = Array.isArray(itemId) ? itemId : [itemId];
+
     try {
       this.setGroupMenuBlocked(true);
       await this.deleteItemOperation(
@@ -1692,13 +1711,9 @@ class FilesActionStore {
         true,
         operationId
       );
-
-      const id = Array.isArray(itemId) ? itemId : [itemId];
-
-      clearActiveOperations(null, id);
     } catch (err) {
       console.log(err);
-      clearActiveOperations(null, [itemId]);
+
       setSecondaryProgressBarData({
         visible: true,
         alert: true,
@@ -1708,6 +1723,7 @@ class FilesActionStore {
       return toastr.error(err.message ? err.message : err);
     } finally {
       this.setGroupMenuBlocked(false);
+      setTimeout(() => clearActiveOperations(null, id), TIMEOUT);
     }
   };
 
@@ -1740,7 +1756,7 @@ class FilesActionStore {
 
     switch (option) {
       case "show-info":
-        if (!isTablet() && !isMobile) return null;
+        if (isDesktop()) return null;
         else
           return {
             id: "menu-show-info",
@@ -2013,8 +2029,7 @@ class FilesActionStore {
   };
 
   getRecycleBinFolderOptions = (itemsCollection, t) => {
-    const { setEmptyTrashDialogVisible, setMoveToPanelVisible } =
-      this.dialogsStore;
+    const { setRestorePanelVisible } = this.dialogsStore;
 
     const download = this.getOption("download", t);
     const downloadAs = this.getOption("downloadAs", t);
@@ -2027,7 +2042,7 @@ class FilesActionStore {
       .set("restore", {
         id: "menu-restore",
         label: t("Common:Restore"),
-        onClick: () => setMoveToPanelVisible(true),
+        onClick: () => setRestorePanelVisible(true),
         iconUrl: MoveReactSvgUrl,
       })
       .set("delete", deleteOption)
@@ -2073,16 +2088,16 @@ class FilesActionStore {
 
   openFileAction = (item) => {
     const { openDocEditor, isPrivacyFolder, setSelection } = this.filesStore;
-
+    const { currentDeviceType } = this.authStore.settingsStore;
     const { fileItemsList } = this.pluginStore;
     const { enablePlugins } = this.authStore.settingsStore;
 
-    const { isLoading } = this.clientLoadingStore;
+    const { isLoading, setIsSectionFilterLoading } = this.clientLoadingStore;
     const { isRecycleBinFolder } = this.treeFoldersStore;
     const { setMediaViewerData } = this.mediaViewerDataStore;
     const { setConvertDialogVisible, setConvertItem } = this.dialogsStore;
 
-    const { setIsSectionFilterLoading } = this.clientLoadingStore;
+    const { roomType, title: currentTitle } = this.selectedFolderStore;
 
     if (this.publicRoomStore.isPublicRoom && item.isFolder)
       return this.moveToPublicRoom(item.id);
@@ -2092,11 +2107,11 @@ class FilesActionStore {
     };
 
     const isMediaOrImage =
-      item.viewAccessability?.ImageView || item.viewAccessability?.MediaView;
+      item.viewAccessibility?.ImageView || item.viewAccessibility?.MediaView;
     const canConvert =
-      item.viewAccessability?.Convert && item.security?.Convert;
-    const canWebEdit = item.viewAccessability?.WebEdit;
-    const canViewedDocs = item.viewAccessability?.WebView;
+      item.viewAccessibility?.MustConvert && item.security?.Convert;
+    const canWebEdit = item.viewAccessibility?.WebEdit;
+    const canViewedDocs = item.viewAccessibility?.WebView;
 
     const { id, viewUrl, providerKey, fileStatus, encrypted, isFolder } = item;
     if (encrypted && isPrivacyFolder) return checkProtocol(item.id, true);
@@ -2104,7 +2119,7 @@ class FilesActionStore {
     if (isRecycleBinFolder || isLoading) return;
 
     if (isFolder) {
-      const { isRoom, rootFolderType, title } = item;
+      const { isRoom, rootFolderType, title, roomType: itemRoomType } = item;
 
       setIsLoading(true);
 
@@ -2116,7 +2131,14 @@ class FilesActionStore {
       const filter = FilesFilter.getDefault();
       filter.folder = id;
 
-      const state = { title, isRoot: false, rootFolderType, isRoom };
+      const state = {
+        title,
+        isRoot: false,
+        rootFolderType,
+        isRoom,
+        rootRoomTitle: !!roomType ? currentTitle : "",
+        isPublicRoomType: itemRoomType === RoomsType.PublicRoom || false,
+      };
 
       setSelection([]);
 
@@ -2146,7 +2168,11 @@ class FilesActionStore {
               )
             : null;
 
-        return openDocEditor(id, providerKey, tab, null, !item.security.Edit);
+        const isPreview = item.isForm
+          ? !item.security.FillForms
+          : !item.security.Edit;
+
+        return openDocEditor(id, providerKey, tab, null, isPreview);
       }
 
       if (isMediaOrImage) {
@@ -2173,13 +2199,12 @@ class FilesActionStore {
         });
 
         if (currPluginItem) {
-          currPluginItem.onClick(item);
-
-          return;
+          const correctDevice = currPluginItem.devices
+            ? currPluginItem.devices.includes(currentDeviceType)
+            : true;
+          if (correctDevice) return currPluginItem.onClick(item);
         }
       }
-
-      return;
 
       return window.open(viewUrl, "_self");
     }
@@ -2269,6 +2294,7 @@ class FilesActionStore {
           ]?.title) ||
         "",
       isRoot: true,
+      isPublicRoomType: false,
       rootFolderType: this.selectedFolderStore.rootFolderType,
     };
 
@@ -2308,12 +2334,6 @@ class FilesActionStore {
   backToParentFolder = () => {
     if (this.publicRoomStore.isPublicRoom) return this.moveToPublicRoom();
 
-    const { setIsSectionFilterLoading } = this.clientLoadingStore;
-
-    const setIsLoading = (param) => {
-      setIsSectionFilterLoading(param);
-    };
-
     const id = this.selectedFolderStore.parentId;
 
     const { navigationPath, rootFolderType } = this.selectedFolderStore;
@@ -2325,10 +2345,17 @@ class FilesActionStore {
     const categoryType = getCategoryType(window.DocSpace.location);
     const path = getCategoryUrl(categoryType, id);
 
+    const isRoot = navigationPath.length === 1;
+
     const state = {
       title: (navigationPath && navigationPath[0]?.title) || "",
-      isRoot: navigationPath.length === 1,
+      isRoom: navigationPath[0]?.isRoom,
+      isRoot,
       rootFolderType: rootFolderType,
+      isPublicRoomType: navigationPath[0]?.isRoom
+        ? navigationPath[0]?.roomType === RoomsType.PublicRoom
+        : false,
+      rootRoomTitle: "",
     };
 
     window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`, {
@@ -2341,18 +2368,9 @@ class FilesActionStore {
     this.isGroupMenuBlocked = blocked;
   };
 
-  preparingDataForCopyingToRoom = async (destFolderId, t) => {
-    const { selection, bufferSelection } = this.filesStore;
-
+  preparingDataForCopyingToRoom = async (destFolderId, selections, t) => {
     let fileIds = [];
     let folderIds = [];
-
-    const selections =
-      selection.length > 0 && selection[0] != null
-        ? selection
-        : bufferSelection != null
-        ? [bufferSelection]
-        : [];
 
     if (!selections.length) return;
     const oneFolder = selections.length === 1 && selections[0].isFolder;
@@ -2364,18 +2382,14 @@ class FilesActionStore {
         const selectedFolder = await getFolder(selections[0].id);
         const { folders, files, total } = selectedFolder;
 
-        if (total > 1) this.setSelectedItems(false, total);
-
-        if (total === 1) {
-          const title = !!folders.length ? folders[0].title : files[0].title;
-          this.setSelectedItems(title, total);
-        }
-
         if (total === 0) {
           this.filesStore.setSelection([]);
           this.filesStore.setBufferSelection(null);
           return;
         }
+
+        const title = !!folders.length ? folders[0].title : files[0].title;
+        this.setSelectedItems(title, total);
       } catch (err) {
         toastr.error(err);
       }
@@ -2387,7 +2401,7 @@ class FilesActionStore {
         else folderIds.push(item.id);
       });
 
-    !oneFolder && this.setSelectedItems();
+    !oneFolder && this.setSelectedItems(selections[0].title, selections.length);
     this.filesStore.setSelection([]);
     this.filesStore.setBufferSelection(null);
 
@@ -2404,6 +2418,78 @@ class FilesActionStore {
     };
 
     this.uploadDataStore.itemOperationToFolder(operationData);
+  };
+
+  onLeaveRoom = (t, isOwner = false) => {
+    const {
+      updateRoomMemberRole,
+      removeFiles,
+      folders,
+      setFolders,
+      selection,
+      bufferSelection,
+    } = this.filesStore;
+    const { user } = this.authStore.userStore;
+
+    const roomId = selection.length
+      ? selection[0].id
+      : bufferSelection
+      ? bufferSelection.id
+      : this.selectedFolderStore.id;
+
+    const isAdmin = user.isOwner || user.isAdmin;
+    const isRoot = this.selectedFolderStore.isRootFolder;
+
+    return updateRoomMemberRole(roomId, {
+      invitations: [{ id: user?.id, access: ShareAccessRights.None }],
+    }).then(() => {
+      if (!isAdmin) {
+        if (!isRoot) {
+          const filter = RoomsFilter.getDefault();
+          window.DocSpace.navigate(
+            `rooms/shared/filter?${filter.toUrlParams()}`
+          );
+        } else {
+          removeFiles(null, [roomId]);
+        }
+      } else {
+        const newFolders = folders;
+        const folderIndex = newFolders.findIndex((r) => r.id === roomId);
+        newFolders[folderIndex].inRoom = false;
+        setFolders(newFolders);
+      }
+
+      isOwner
+        ? toastr.success(t("Files:LeftAndAppointNewOwner"))
+        : toastr.success(t("Files:YouLeftTheRoom"));
+    });
+  };
+
+  changeRoomOwner = (t, userId, isLeaveChecked = false) => {
+    const { setRoomOwner, setFolder, setSelected, selection, bufferSelection } =
+      this.filesStore;
+    const { isRootFolder, setCreatedBy, id } = this.selectedFolderStore;
+
+    const roomId = selection.length
+      ? selection[0].id
+      : bufferSelection
+      ? bufferSelection.id
+      : id;
+
+    return setRoomOwner(userId, [roomId])
+      .then(async (res) => {
+        if (isRootFolder) {
+          setFolder(res[0]);
+        } else {
+          setCreatedBy(res[0].createdBy);
+        }
+
+        if (isLeaveChecked) await this.onLeaveRoom(t);
+        else toastr.success(t("Files:AppointNewOwner"));
+      })
+      .finally(() => {
+        setSelected("none");
+      });
   };
 }
 

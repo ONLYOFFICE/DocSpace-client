@@ -3,6 +3,7 @@ import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import Text from "@docspace/components/text";
 import Button from "@docspace/components/button";
+import Link from "@docspace/components/link";
 import { startBackup } from "@docspace/common/api/portal";
 import RadioButton from "@docspace/components/radio-button";
 import toastr from "@docspace/components/toast/toastr";
@@ -135,13 +136,14 @@ class ManualBackup extends React.Component {
       setDownloadingProgress,
       t,
       clearLocalStorage,
+      isManagement,
     } = this.props;
     const { TemporaryModuleType } = BackupStorageType;
 
     clearLocalStorage();
     saveToLocalStorage("LocalCopyStorageType", "TemporaryStorage");
     try {
-      await startBackup(`${TemporaryModuleType}`, null);
+      await startBackup(`${TemporaryModuleType}`, null, false, isManagement);
       setDownloadingProgress(1);
       getIntervalProgress(t);
     } catch (e) {
@@ -181,6 +183,7 @@ class ManualBackup extends React.Component {
       setTemporaryLink,
       getStorageParams,
       saveToLocalStorage,
+      isManagement,
     } = this.props;
 
     clearLocalStorage();
@@ -203,7 +206,7 @@ class ManualBackup extends React.Component {
     );
 
     try {
-      await startBackup(moduleType, storageParams);
+      await startBackup(moduleType, storageParams, false, isManagement);
       setDownloadingProgress(1);
       setTemporaryLink("");
       getIntervalProgress(t);
@@ -220,11 +223,11 @@ class ManualBackup extends React.Component {
       downloadingProgress,
       //commonThirdPartyList,
       buttonSize,
-      organizationName,
-      renderTooltip,
       //isDocSpace,
       rootFoldersTitles,
       isNotPaidPeriod,
+      dataBackupUrl,
+      currentColorScheme,
     } = this.props;
     const {
       isInitialLoading,
@@ -263,14 +266,21 @@ class ManualBackup extends React.Component {
     ) : (
       <StyledManualBackup>
         <div className="backup_modules-header_wrapper">
-          <Text isBold fontSize="16px">
-            {t("DataBackup")}
+          <Text className="backup_modules-description">
+            {t("ManualBackupDescription")}
           </Text>
-          {renderTooltip(t("ManualBackupHelp"), "data-backup")}
+          <Link
+            className="link-learn-more"
+            href={dataBackupUrl}
+            target="_blank"
+            fontSize="13px"
+            color={currentColorScheme.main.accent}
+            isHovered
+          >
+            {t("Common:LearnMore")}
+          </Link>
         </div>
-        <Text className="backup_modules-description">
-          {t("ManualBackupDescription")}
-        </Text>
+
         <StyledModules>
           <RadioButton
             id="temporary-storage"
@@ -402,14 +412,13 @@ export default inject(({ auth, backup, treeFoldersStore }) => {
     saveToLocalStorage,
     setConnectedThirdPartyAccount,
   } = backup;
-  const { currentTariffStatusStore } = auth;
-  const { organizationName } = auth.settingsStore;
+  const { currentTariffStatusStore, isManagement } = auth;
+  const { currentColorScheme, dataBackupUrl } = auth.settingsStore;
   const { rootFoldersTitles, fetchTreeFolders } = treeFoldersStore;
   const { isNotPaidPeriod } = currentTariffStatusStore;
 
   return {
     isNotPaidPeriod,
-    organizationName,
     setThirdPartyStorage,
     clearProgressInterval,
     clearLocalStorage,
@@ -427,5 +436,9 @@ export default inject(({ auth, backup, treeFoldersStore }) => {
     fetchTreeFolders,
     saveToLocalStorage,
     setConnectedThirdPartyAccount,
+
+    isManagement,
+    dataBackupUrl,
+    currentColorScheme,
   };
 })(withTranslation(["Settings", "Common"])(observer(ManualBackup)));

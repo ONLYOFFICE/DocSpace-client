@@ -1,3 +1,4 @@
+import { EmployeeType } from "../../constants";
 import { request } from "../client";
 
 export function getShortenedLink(link) {
@@ -8,49 +9,21 @@ export function getShortenedLink(link) {
   });
 }
 
-const GUEST_INVITE_LINK = "guestInvitationLink";
-const USER_INVITE_LINK = "userInvitationLink";
-const INVITE_LINK_TTL = "localStorageLinkTtl";
-const LINKS_TTL = 6 * 3600 * 1000;
-
 export function getInvitationLink(type) {
-  const curLinksTtl = localStorage.getItem(INVITE_LINK_TTL);
-  const now = +new Date();
-
-  if (!curLinksTtl) {
-    localStorage.setItem(INVITE_LINK_TTL, now);
-  } else if (now - curLinksTtl > LINKS_TTL) {
-    localStorage.removeItem(GUEST_INVITE_LINK);
-    localStorage.removeItem(USER_INVITE_LINK);
-    localStorage.setItem(INVITE_LINK_TTL, now);
-  }
-
-  const link = localStorage.getItem(
-    type === 2 ? GUEST_INVITE_LINK : USER_INVITE_LINK
-  );
-
-  return link && type !== 3 && type !== 4
-    ? Promise.resolve(link)
-    : request({
-        method: "get",
-        url: `/portal/users/invite/${type}`,
-      }).then((link) => {
-        if (type !== 3 && type !== 4) {
-          localStorage.setItem(
-            type === 2 ? GUEST_INVITE_LINK : USER_INVITE_LINK,
-            link
-          );
-        }
-        return Promise.resolve(link);
-      });
+  return request({
+    method: "get",
+    url: `/portal/users/invite/${type}`,
+  }).then((link) => {
+    return Promise.resolve(link);
+  });
 }
 
 export function getInvitationLinks() {
   return Promise.all([
-    getInvitationLink(1),
-    getInvitationLink(2),
-    getInvitationLink(3),
-    getInvitationLink(4),
+    getInvitationLink(EmployeeType.User),
+    getInvitationLink(EmployeeType.Guest),
+    getInvitationLink(EmployeeType.Admin),
+    getInvitationLink(EmployeeType.Collaborator),
   ]).then(
     ([
       userInvitationLinkResp,
@@ -68,7 +41,12 @@ export function getInvitationLinks() {
   );
 }
 
-export function startBackup(storageType, storageParams, backupMail = false) {
+export function startBackup(
+  storageType,
+  storageParams,
+  backupMail = false,
+  dump = false
+) {
   const options = {
     method: "post",
     url: `/portal/startbackup`,
@@ -76,6 +54,7 @@ export function startBackup(storageType, storageParams, backupMail = false) {
       storageType,
       storageParams: storageParams,
       backupMail,
+      dump,
     },
   };
 
@@ -113,7 +92,8 @@ export function createBackupSchedule(
   Period,
   Hour,
   Day = null,
-  backupMail = false
+  backupMail = false,
+  dump = false
 ) {
   const cronParams = {
     Period: Period,
@@ -129,6 +109,7 @@ export function createBackupSchedule(
       backupsStored,
       cronParams: cronParams,
       backupMail,
+      dump,
     },
   };
   return request(options);

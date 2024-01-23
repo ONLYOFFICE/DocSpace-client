@@ -1,6 +1,7 @@
 import globalColors from "../utils/globalColors";
 
 import AvatarBaseReactSvgUrl from "PUBLIC_DIR/images/avatar.base.react.svg?url";
+import { CommonTheme } from "./commonTheme";
 
 const {
   black,
@@ -58,16 +59,18 @@ const {
 } = globalColors;
 
 const Base = {
+  ...CommonTheme,
+
   isBase: true,
   color: black,
   backgroundColor: white,
   fontFamily: "Open Sans, sans-serif, Arial",
   fontSize: "13px",
-  interfaceDirection: "ltr",
 
   text: {
     color: black,
     disableColor: gray,
+    emailColor: "#a3a9ae",
     fontWeight: "normal",
     fontWeightBold: "bold",
   },
@@ -83,6 +86,12 @@ const Base = {
 
     fontWeight: 600,
     color: black,
+  },
+
+  backgroundAndSubstrateColor: "#F8F9F9",
+
+  betaBadgeTooltip: {
+    boxShadowColor: "rgba(4, 15, 27, 0.12)",
   },
 
   button: {
@@ -315,9 +324,9 @@ const Base = {
       width: "100%",
       height: "16px",
       margin: "0 11px",
-      fontWeight: "600",
+      fontWeight: "500",
       fontSize: "14px",
-      lineHeight: "14px",
+      lineHeight: "16px",
       letterSpacing: "0.21875px",
       overflow: "hidden",
       textOverflow: "ellipsis",
@@ -542,7 +551,7 @@ const Base = {
     },
 
     optionButton: {
-      padding: "8px 9px 9px 7px",
+      padding: "8px 0px 9px 7px",
     },
   },
 
@@ -573,6 +582,10 @@ const Base = {
     },
   },
 
+  rowContainer: {
+    borderColor: globalColors.grayLightMid,
+  },
+
   badge: {
     border: "1px solid transparent",
     padding: "1px",
@@ -584,9 +597,9 @@ const Base = {
   },
 
   scrollbar: {
-    backgroundColorVertical: "rgba(0, 0, 0, 0.1)",
-    backgroundColorHorizontal: "rgba(0, 0, 0, 0.1)",
-    hoverBackgroundColorVertical: grayMid,
+    bgColor: "rgba(6, 22, 38, 0.16)",
+    hoverBgColor: "rgba(6, 22, 38, 0.32)",
+    pressBgColor: "rgba(6, 22, 38, 0.5)",
   },
 
   modalDialog: {
@@ -939,12 +952,12 @@ const Base = {
 
   tooltip: {
     borderRadius: "6px",
-    boxShadow: "0px 10px 15px rgba(4, 15, 27, 0.13)",
+    boxShadow: "0px 10px 15px rgba(4, 15, 27, 0.12)",
     opacity: "1",
     padding: "8px 12px",
     pointerEvents: "auto",
     maxWidth: "340px",
-    color: "#F8F7BF",
+    color: white,
     textColor: black,
 
     before: {
@@ -1715,6 +1728,7 @@ const Base = {
     disabledArrow: "#A3A9AE",
     weekdayColor: "#A3A9AE",
     accent: "#4781d1",
+    boxShadow: "0px 12px 40px rgba(4, 15, 27, 0.12)",
   },
 
   datePicker: {
@@ -1940,8 +1954,9 @@ const Base = {
   navigation: {
     expanderColor: black,
     background: white,
-    rootFolderTitleColor: "#A3A9AE",
+    rootFolderTitleColor: "#657077",
     publicIcon: black,
+    boxShadow: " 0px 12px 40px 0px #040F1B1F",
 
     icon: {
       fill: "#316DAA",
@@ -2019,6 +2034,7 @@ const Base = {
     links: {
       iconColor: "#3B72A7",
       iconErrorColor: "rgba(242, 28, 14, 0.5)", //"#F21C0E",
+      primaryColor: "#555F65",
     },
 
     members: {
@@ -2049,6 +2065,7 @@ const Base = {
 
     gallery: {
       borderColor: "#d0d5da",
+      descriptionColor: "#657077",
     },
   },
 
@@ -2059,15 +2076,21 @@ const Base = {
     fill: grayMain,
     expanderColor: "dimgray",
     downloadAppList: {
-      color: "#83888d",
+      textColor: "#A3A9AE",
+      color: "#CDCFD1",
       winHoverColor: "#3785D3",
       macHoverColor: "#000",
       linuxHoverColor: "#FFB800",
       androidHoverColor: "#9BD71C",
+      iosHoverColor: "#000",
     },
     thirdPartyList: {
       color: "#818b91",
       linkColor: cyanBlueDarkShade,
+    },
+    devTools: {
+      border: "1px solid #DFE2E3",
+      color: "#A3A9AE",
     },
   },
 
@@ -2166,6 +2189,8 @@ const Base = {
       hoverIconColor: grayMain,
 
       borderImageSource: `linear-gradient(to right,${white} 21px,${grayLightMid} 21px,${grayLightMid} calc(100% - 20px),${white} calc(100% - 20px))`,
+      borderHoverImageSource: `linear-gradient(to right,${white} 0px,${grayLightMid} 0px,${grayLightMid} 100% ,${white} 100%)`,
+
       lengthenBorderImageSource: `linear-gradient(to right, ${grayLightMid}, ${grayLightMid})`,
       hotkeyBorderBottom: `1px solid ${globalColors.blueMain}`,
 
@@ -2275,8 +2300,8 @@ const Base = {
     border: `1px solid ${grayLightMid}`,
 
     breadCrumbs: {
-      prevItemColor: "#A3A9AE",
-      arrowRightColor: "#A3A9AE",
+      prevItemColor: "#657077",
+      arrowRightColor: "#657077",
     },
 
     bodyDescriptionText: "#A3A9AE",
@@ -2354,6 +2379,7 @@ const Base = {
   createEditRoomDialog: {
     commonParam: {
       descriptionColor: "#a3a9ae",
+      textColor: "#657077",
     },
 
     roomType: {
@@ -2630,8 +2656,8 @@ const Base = {
       width: "16px",
       height: "16px",
       header: {
-        width: "24px",
-        height: "24px",
+        width: "auto",
+        height: "auto",
       },
     },
     separator: {
@@ -2948,6 +2974,7 @@ const Base = {
           toggleContentBackground: grayLight,
           iconButton: black,
           iconButtonDisabled: gray,
+          border: "1px solid #eceef1",
         },
 
         smtp: {
@@ -3139,15 +3166,26 @@ const Base = {
     },
   },
 
-  submitToGalleryTile: {
-    bodyText: "#555F65",
-    closeIconFill: "#657077",
+  oformGallery: {
+    errorView: {
+      subHeaderTextColor: "#555F65",
+    },
+    submitToGalleryTile: {
+      bodyText: "#555F65",
+      closeIconFill: "#657077",
+    },
   },
 
   infoBlock: {
     background: "#F8F9F9",
     headerColor: "#333",
     descriptionColor: "#555F65",
+  },
+
+  infoBar: {
+    background: "#f8f9f9",
+    title: black,
+    description: cyanBlueDarkShade,
   },
 
   roomIcon: {
@@ -3158,6 +3196,7 @@ const Base = {
   plugins: {
     borderColor: "#D0D5DA",
     pluginName: "#5C5C5C",
+    descriptionColor: "#657077",
   },
 };
 

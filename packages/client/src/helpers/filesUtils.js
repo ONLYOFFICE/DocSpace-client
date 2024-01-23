@@ -60,6 +60,9 @@ export const getDefaultRoomName = (room, t) => {
 
     case RoomsType.PublicRoom:
       return t("Files:PublicRoom");
+
+    case RoomsType.VirtualDataRoom:
+      return t("Files:VirtualDataRoom");
   }
 };
 

@@ -41,7 +41,7 @@ const TagsCell = ({
   return (
     <div style={styleTagsCell}>
       {tags.length === 0 ? (
-        <Text color={sideColor}>{"—"}</Text>
+        <Text color={sideColor}>{""}</Text>
       ) : (
         <Tags tags={tags} columnCount={tagCount} onSelectTag={onSelectTag} />
       )}

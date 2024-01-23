@@ -9,7 +9,7 @@ import IconButton from "@docspace/components/icon-button";
 import ContextMenuButton from "@docspace/components/context-menu-button";
 import { toastr } from "@docspace/components";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
-import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
+import UniverseReactSvgUrl from "PUBLIC_DIR/images/universe.react.svg?url";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
 import ShareReactSvgUrl from "PUBLIC_DIR/images/share.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
@@ -19,7 +19,8 @@ import LockedReactSvgUrl from "PUBLIC_DIR/images/locked.react.svg?url";
 import LoadedReactSvgUrl from "PUBLIC_DIR/images/loaded.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 import ClockReactSvg from "PUBLIC_DIR/images/clock.react.svg";
-import moment from "moment";
+import moment from "moment-timezone";
+import { RoomsType } from "@docspace/common/constants";
 
 import { StyledLinkRow } from "./StyledPublicRoom";
 
@@ -35,17 +36,29 @@ const LinkRow = (props) => {
     setDeleteLinkDialogVisible,
     setEmbeddingPanelIsVisible,
     isArchiveFolder,
+    theme,
+    setIsScrollLocked,
+    isPublicRoomType,
     ...rest
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const { title, shareLink, password, disabled, expirationDate, isExpired } =
-    link.sharedTo;
+  const {
+    title,
+    shareLink,
+    password,
+    disabled,
+    expirationDate,
+    isExpired,
+    primary,
+  } = link.sharedTo;
 
   const isLocked = !!password;
   const expiryDate = !!expirationDate;
-  const date = moment(expirationDate).format("LLL");
+  const date = moment(expirationDate)
+    .tz(window.timezone || "")
+    .format("LLL");
 
   const tooltipContent = isExpired
     ? t("Translations:LinkHasExpiredAndHasBeenDisabled")
@@ -54,6 +67,7 @@ const LinkRow = (props) => {
   const onEditLink = () => {
     setEditLinkPanelIsVisible(true);
     setLinkParams({ isEdit: true, link });
+    onCloseContextMenu();
   };
 
   const onDisableLink = () => {
@@ -88,16 +102,27 @@ const LinkRow = (props) => {
   const onEmbeddingClick = () => {
     setLinkParams({ link, roomId });
     setEmbeddingPanelIsVisible(true);
+    onCloseContextMenu();
   };
 
   const onDeleteLink = () => {
     setLinkParams({ link });
     setDeleteLinkDialogVisible(true);
+    onCloseContextMenu();
   };
 
   const onCopyExternalLink = () => {
     copy(shareLink);
     toastr.success(t("Files:LinkSuccessfullyCopied"));
+    onCloseContextMenu();
+  };
+
+  const onOpenContextMenu = () => {
+    setIsScrollLocked(true);
+  };
+
+  const onCloseContextMenu = () => {
+    setIsScrollLocked(false);
   };
 
   const getData = () => {
@@ -108,43 +133,43 @@ const LinkRow = (props) => {
         icon: SettingsReactSvgUrl,
         onClick: onEditLink,
       },
-      {
-        key: "edit-link-separator",
-        isSeparator: true,
-      },
+      // {
+      //   key: "edit-link-separator",
+      //   isSeparator: true,
+      // },
       // {
       //   key: "share-key",
       //   label: t("Files:Share"),
       //   icon: ShareReactSvgUrl,
       //   // onClick: () => args.onClickLabel("label2"),
       // },
-      !isExpired && {
-        key: "embedding-settings-key",
-        label: t("Files:EmbeddingSettings"),
-        icon: CodeReactSvgUrl,
-        onClick: onEmbeddingClick,
-      },
+      // !isExpired && {
+      //   key: "embedding-settings-key",
+      //   label: t("Files:EmbeddingSettings"),
+      //   icon: CodeReactSvgUrl,
+      //   onClick: onEmbeddingClick,
+      // },
 
       !disabled && {
         key: "copy-link-settings-key",
-        label: t("SharingPanel:CopyExternalLink"),
+        label: primary ? t("Files:CopyGeneralLink") : t("Files:CopyLink"),
         icon: CopyToReactSvgUrl,
         onClick: onCopyExternalLink,
       },
 
-      disabled
-        ? {
-            key: "enable-link-key",
-            label: t("Files:EnableLink"),
-            icon: LoadedReactSvgUrl,
-            onClick: onDisableLink,
-          }
-        : {
-            key: "disable-link-key",
-            label: t("Files:DisableLink"),
-            icon: OutlineReactSvgUrl,
-            onClick: onDisableLink,
-          },
+      // disabled
+      //   ? {
+      //       key: "enable-link-key",
+      //       label: t("Files:EnableLink"),
+      //       icon: LoadedReactSvgUrl,
+      //       onClick: onDisableLink,
+      //     }
+      //   : {
+      //       key: "disable-link-key",
+      //       label: t("Files:DisableLink"),
+      //       icon: OutlineReactSvgUrl,
+      //       onClick: onDisableLink,
+      //     },
 
       {
         key: "delete-link-separator",
@@ -152,18 +177,24 @@ const LinkRow = (props) => {
       },
       {
         key: "delete-link-key",
-        label: t("Common:Delete"),
-        icon: TrashReactSvgUrl,
+        label:
+          primary && isPublicRoomType
+            ? t("Files:RevokeLink")
+            : t("Common:Delete"),
+        icon:
+          primary && isPublicRoomType ? OutlineReactSvgUrl : TrashReactSvgUrl,
         onClick: onDeleteLink,
       },
     ];
   };
 
+  const textColor = disabled ? theme.text.disableColor : theme.text.color;
+
   return (
-    <StyledLinkRow {...rest} isExpired={isExpired}>
+    <StyledLinkRow {...rest} isExpired={isExpired} isPrimary={primary}>
       <Avatar
         size="min"
-        source={EyeReactSvgUrl}
+        source={UniverseReactSvgUrl}
         roleIcon={expiryDate ? <ClockReactSvg /> : null}
         withTooltip={expiryDate}
         tooltipContent={tooltipContent}
@@ -180,16 +211,14 @@ const LinkRow = (props) => {
           fontWeight={600}
           onClick={onEditLink}
           isDisabled={disabled}
-          color={disabled ? "#A3A9AE" : ""}
+          color={textColor}
           className="external-row-link"
         >
           {title}
         </Link>
       )}
 
-      {disabled && (
-        <Text color={disabled ? "#A3A9AE" : ""}>{t("Settings:Disabled")}</Text>
-      )}
+      {disabled && <Text color={textColor}>{t("Settings:Disabled")}</Text>}
 
       <div className="external-row-icons">
         {!disabled && !isArchiveFolder && (
@@ -208,7 +237,7 @@ const LinkRow = (props) => {
               size={16}
               iconName={CopyReactSvgUrl}
               onClick={onCopyExternalLink}
-              title={t("SharingPanel:CopyExternalLink")}
+              title={primary ? t("Files:CopyGeneralLink") : t("Files:CopyLink")}
             />
           </>
         )}
@@ -216,8 +245,11 @@ const LinkRow = (props) => {
         {!isArchiveFolder && (
           <ContextMenuButton
             getData={getData}
-            isDisabled={false}
+            isDisabled={isLoading}
             title={t("Files:ShowLinkActions")}
+            directionY="both"
+            onClick={onOpenContextMenu}
+            onClose={onCloseContextMenu}
           />
         )}
       </div>
@@ -228,6 +260,8 @@ const LinkRow = (props) => {
 export default inject(
   ({ auth, dialogsStore, publicRoomStore, treeFoldersStore }) => {
     const { selectionParentRoom } = auth.infoPanelStore;
+    const { theme } = auth.settingsStore;
+
     const {
       setEditLinkPanelIsVisible,
       setDeleteLinkDialogVisible,
@@ -235,7 +269,7 @@ export default inject(
       setLinkParams,
     } = dialogsStore;
     const { editExternalLink, setExternalLink } = publicRoomStore;
-    const { isArchiveFolder } = treeFoldersStore;
+    const { isArchiveFolderRoot } = treeFoldersStore;
 
     return {
       setLinkParams,
@@ -245,7 +279,9 @@ export default inject(
       setEditLinkPanelIsVisible,
       setDeleteLinkDialogVisible,
       setEmbeddingPanelIsVisible,
-      isArchiveFolder,
+      isArchiveFolder: isArchiveFolderRoot,
+      theme,
+      isPublicRoomType: selectionParentRoom.roomType === RoomsType.PublicRoom,
     };
   }
 )(

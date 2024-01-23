@@ -15,6 +15,7 @@ import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettings
 import { size } from "@docspace/components/utils/device";
 import { inject, observer } from "mobx-react";
 import Link from "@docspace/components/link";
+import { DeviceType } from "@docspace/common/constants";
 
 const AccessPortal = (props) => {
   const {
@@ -26,21 +27,12 @@ const AccessPortal = (props) => {
     administratorMessageSettingsUrl,
     lifetimeSettingsUrl,
     ipSettingsUrl,
+    isMobileView,
   } = props;
-  const [isMobileView, setIsMobileView] = useState(false);
 
   useEffect(() => {
     setDocumentTitle(t("PortalAccess"));
-    checkWidth();
-    window.addEventListener("resize", checkWidth);
-    return () => window.removeEventListener("resize", checkWidth);
   }, []);
-
-  const checkWidth = () => {
-    window.innerWidth <= size.smallTablet
-      ? setIsMobileView(true)
-      : setIsMobileView(false);
-  };
 
   if (isMobileView) return <MobileView />;
   return (
@@ -56,7 +48,7 @@ const AccessPortal = (props) => {
           {t("SettingPasswordDescription")}
         </Text>
         <Text fontSize="13px" fontWeight="400">
-          <Trans t={t} i18nKey="SettingPasswordDescriptionSave" />
+          <Trans t={t} i18nKey="SaveToApply" />
         </Text>
         <Link
           className="link-learn-more"
@@ -82,9 +74,6 @@ const AccessPortal = (props) => {
         <Text fontSize="13px" fontWeight="400">
           <Trans t={t} i18nKey="TwoFactorAuthSave" />
         </Text>
-        <Text fontSize="13px" fontWeight="400">
-          <Trans t={t} i18nKey="TwoFactorAuthNote" />
-        </Text>
         <Link
           className="link-learn-more"
           target="_blank"
@@ -107,7 +96,7 @@ const AccessPortal = (props) => {
           {t("TrustedMailSettingDescription")}
         </Text>
         <Text fontSize="13px" fontWeight="400">
-          <Trans t={t} i18nKey="TrustedMailSave" />
+          <Trans t={t} i18nKey="SaveToApply" />
         </Text>
         <Link
           className="link-learn-more"
@@ -161,7 +150,7 @@ const AccessPortal = (props) => {
           {t("AdminsMessageSettingDescription")}
         </Text>
         <Text fontSize="13px" fontWeight="400">
-          <Trans t={t} i18nKey="AdminsMessageSave" />
+          <Trans t={t} i18nKey="SaveToApply" />
         </Text>
 
         <Link
@@ -212,7 +201,11 @@ export default inject(({ auth }) => {
     administratorMessageSettingsUrl,
     lifetimeSettingsUrl,
     ipSettingsUrl,
+    currentDeviceType,
   } = auth.settingsStore;
+
+  const isMobileView = currentDeviceType === DeviceType.mobile;
+
   return {
     currentColorScheme,
     passwordStrengthSettingsUrl,
@@ -221,5 +214,6 @@ export default inject(({ auth }) => {
     administratorMessageSettingsUrl,
     lifetimeSettingsUrl,
     ipSettingsUrl,
+    isMobileView,
   };
 })(withTranslation(["Settings", "Profile"])(observer(AccessPortal)));

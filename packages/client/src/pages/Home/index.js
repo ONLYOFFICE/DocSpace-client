@@ -14,6 +14,7 @@ import {
   SectionFilterContent,
   SectionHeaderContent,
   SectionPagingContent,
+  SectionWarningContent,
 } from "./Section";
 import AccountsDialogs from "./Section/AccountsBody/Dialogs";
 
@@ -41,6 +42,7 @@ const PureHome = (props) => {
     setToPreviewFile,
     playlist,
 
+    folderSecurity,
     getFileInfo,
     gallerySelected,
     setIsUpdatingRowItem,
@@ -122,6 +124,7 @@ const PureHome = (props) => {
     loadCurrentUser,
     updateProfileCulture,
     getRooms,
+    setSelectedFolder,
   } = props;
 
   const location = useLocation();
@@ -157,6 +160,7 @@ const PureHome = (props) => {
     removeFirstUrl,
 
     gallerySelected,
+    folderSecurity,
   });
 
   const { showUploadPanel } = useOperations({
@@ -223,6 +227,7 @@ const PureHome = (props) => {
     window.addEventListener("popstate", onClickBack);
 
     return () => {
+      setSelectedFolder(null);
       window.removeEventListener("popstate", onClickBack);
     };
   }, []);
@@ -295,6 +300,12 @@ const PureHome = (props) => {
           </Section.SectionHeader>
         )}
 
+        {isRecycleBinFolder && !isEmptyPage && (
+          <Section.SectionWarning>
+            <SectionWarningContent />
+          </Section.SectionWarning>
+        )}
+
         {(((!isEmptyPage || showFilterLoader) && !isErrorRoomNotAvailable) ||
           isAccountsPage) &&
           !isSettingsPage && (
@@ -344,6 +355,7 @@ export default inject(
     selectedFolderStore,
     clientLoadingStore,
   }) => {
+    const { setSelectedFolder, security: folderSecurity } = selectedFolderStore;
     const {
       secondaryProgressDataStore,
       primaryProgressDataStore,
@@ -352,6 +364,7 @@ export default inject(
 
     const {
       firstLoad,
+      setIsSectionHeaderLoading,
       setIsSectionBodyLoading,
       setIsSectionFilterLoading,
       isLoading,
@@ -359,9 +372,10 @@ export default inject(
       showFilterLoader,
     } = clientLoadingStore;
 
-    const setIsLoading = (param) => {
-      setIsSectionFilterLoading(param);
-      setIsSectionBodyLoading(param);
+    const setIsLoading = (param, withoutTimer, withHeaderLoader) => {
+      if (withHeaderLoader) setIsSectionHeaderLoading(param, !withoutTimer);
+      setIsSectionFilterLoading(param, !withoutTimer);
+      setIsSectionBodyLoading(param, !withoutTimer);
     };
 
     const {
@@ -482,7 +496,7 @@ export default inject(
       isRecycleBinFolder,
       isPrivacyFolder,
       isVisitor: auth.userStore.user.isVisitor,
-
+      folderSecurity,
       primaryProgressDataVisible,
       primaryProgressDataPercent,
       primaryProgressDataIcon,
@@ -569,6 +583,7 @@ export default inject(
       loadCurrentUser: auth.userStore.loadCurrentUser,
       updateProfileCulture,
       getRooms,
+      setSelectedFolder,
     };
   }
 )(observer(Home));

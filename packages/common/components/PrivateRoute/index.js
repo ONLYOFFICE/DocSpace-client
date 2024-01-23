@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { Navigate, Route, useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { inject, observer } from "mobx-react";
+import Error403 from "client/Error403";
 
 import AppLoader from "../AppLoader";
 
@@ -27,12 +28,26 @@ const PrivateRoute = ({ children, ...rest }) => {
     standalone,
     isCommunity,
     isEnterprise,
+    isPortalDeactivate,
+    enablePortalRename,
+    limitedAccessSpace
   } = rest;
 
   const location = useLocation();
 
   const renderComponent = () => {
-    if (!user && isAuthenticated) return null;
+    if (!user && isAuthenticated) {
+      if (isPortalDeactivate) {
+        window.location.replace(
+          combineUrl(window.DocSpaceConfig?.proxy?.url, "/unavailable")
+        );
+
+        return null;
+      }
+
+      console.log("PrivateRoute returned null");
+      return null;
+    }
 
     const isPortalUrl = location.pathname === "/preparation-portal";
 
@@ -49,7 +64,18 @@ const PrivateRoute = ({ children, ...rest }) => {
 
     const isBonusPage = location.pathname === "/portal-settings/bonus";
 
+    const isPortalRenameUrl =
+      location.pathname ===
+      "/portal-settings/customization/general/portal-renaming";
+
     if (isLoaded && !isAuthenticated) {
+      if (isPortalDeactivate) {
+        window.location.replace(
+          combineUrl(window.DocSpaceConfig?.proxy?.url, "/unavailable")
+        );
+
+        return null;
+      }
       // console.log("PrivateRoute render Redirect to login", rest);x
       const redirectPath = wizardCompleted ? "/login" : "/wizard";
 
@@ -72,11 +98,14 @@ const PrivateRoute = ({ children, ...rest }) => {
       isLoaded &&
       ((!isNotPaidPeriod && isPortalUnavailableUrl) ||
         (!user.isOwner && isPortalDeletionUrl) ||
-        (standalone && isPortalDeletionUrl) ||
         (isCommunity && isPaymentsUrl) ||
         (isEnterprise && isBonusPage))
     ) {
       return <Navigate replace to={"/"} />;
+    }
+
+    if (isLoaded && limitedAccessSpace && isPortalDeletionUrl) {
+      return <Error403 />
     }
 
     if (
@@ -135,7 +164,8 @@ const PrivateRoute = ({ children, ...rest }) => {
 
     // if (!isLoaded) {
     //   return <AppLoader />;
-    if (tenantStatus === TenantStatus.PortalDeactivate) {
+
+    if (isPortalDeactivate && location.pathname !== "/unavailable") {
       return (
         <Navigate
           to={combineUrl(window.DocSpaceConfig?.proxy?.url, "/unavailable")}
@@ -163,6 +193,10 @@ const PrivateRoute = ({ children, ...rest }) => {
     //     </Section>
     //   );
     // }
+
+    if (isPortalRenameUrl && !enablePortalRename) {
+      return <Navigate replace to={"/error404"} />;
+    }
 
     if (
       !restricted ||
@@ -200,10 +234,19 @@ export default inject(({ auth }) => {
   const { isNotPaidPeriod } = currentTariffStatusStore;
   const { user } = userStore;
 
-  const { setModuleInfo, wizardCompleted, personal, tenantStatus, standalone } =
-    settingsStore;
+  const {
+    setModuleInfo,
+    wizardCompleted,
+    personal,
+    tenantStatus,
+    standalone,
+    isPortalDeactivate,
+    enablePortalRename,
+    limitedAccessSpace
+  } = settingsStore;
 
   return {
+    isPortalDeactivate,
     isCommunity,
     isNotPaidPeriod,
     user,
@@ -217,5 +260,7 @@ export default inject(({ auth }) => {
     isLogout,
     standalone,
     isEnterprise,
+    enablePortalRename,
+    limitedAccessSpace
   };
 })(observer(PrivateRoute));

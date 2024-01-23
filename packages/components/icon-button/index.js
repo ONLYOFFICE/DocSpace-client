@@ -193,6 +193,8 @@ IconButton.propTypes = {
   size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   /** Determines if icon fill is needed */
   isFill: PropTypes.bool,
+  /** Determines if icon stroke is needed */
+  isStroke: PropTypes.bool,
   /** Sets the button to present a disabled state */
   isDisabled: PropTypes.bool,
   /** Sets cursor value */
@@ -226,6 +228,7 @@ IconButton.propTypes = {
 IconButton.defaultProps = {
   size: 25,
   isFill: true,
+  isStroke: false,
   isDisabled: false,
   isClickable: false,
   dataTip: "",

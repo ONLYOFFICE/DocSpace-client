@@ -494,10 +494,10 @@ class SsoFormStore {
   setSloUrls = (o) => {
     switch (o.sloBinding) {
       case BINDING_POST:
-        this.sloUrlPost = o.ssoUrl;
+        this.sloUrlPost = o.sloUrl;
         break;
       case BINDING_REDIRECT:
-        this.sloUrlRedirect = o.ssoUrl;
+        this.sloUrlRedirect = o.sloUrl;
     }
   };
 
@@ -617,6 +617,7 @@ class SsoFormStore {
       }
 
       const newCertificates = await this.validateCertificate(data);
+      this.idpCertificates = [];
 
       newCertificates.data.map((cert) => {
         if (newCertificates.data.length > 1) {

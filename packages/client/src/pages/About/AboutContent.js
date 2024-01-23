@@ -5,7 +5,7 @@ import NoUserSelect from "@docspace/components/utils/commonStyles";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { ReactSVG } from "react-svg";
-import { isMobile } from "react-device-detect";
+import { tablet } from "@docspace/components/utils/device";
 import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
 import logoPersonalAboutUrl from "PUBLIC_DIR/images/logo_personal_about.svg?url";
 import { getLogoFromPath } from "@docspace/common/utils";
@@ -15,8 +15,12 @@ const StyledAboutBody = styled.div`
   user-select: text;
 
   .avatar {
-    margin-top: ${!isMobile ? "0px" : "32px"};
+    margin-top: 0px;
     margin-bottom: 16px;
+
+    @media ${tablet} {
+      margin-top: 32px;
+    }
   }
 
   .row-el {
@@ -41,7 +45,9 @@ const StyledAboutBody = styled.div`
     display: inline;
   }
   .select-el {
-    ${isMobile && `user-select: text`};
+    @media ${tablet} {
+      user-select: text;
+    }
   }
 
   .logo-theme {

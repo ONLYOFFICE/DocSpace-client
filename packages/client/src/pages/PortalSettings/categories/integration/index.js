@@ -11,10 +11,21 @@ import ThirdParty from "./ThirdPartyServicesSettings";
 
 import SMTPSettings from "./SMTPSettings";
 import DocumentService from "./DocumentService";
+import PluginPage from "./Plugins";
+import { DeviceType } from "@docspace/common/constants";
+import Badge from "@docspace/components/badge";
+import Box from "@docspace/components/box";
 
 const IntegrationWrapper = (props) => {
-  const { t, tReady, enablePlugins, toDefault, isSSOAvailable, standalone } =
-    props;
+  const {
+    t,
+    tReady,
+    currentDeviceType,
+    toDefault,
+    isSSOAvailable,
+    standalone,
+    enablePlugins,
+  } = props;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -53,6 +64,29 @@ const IntegrationWrapper = (props) => {
     data.push(documentServiceData);
   }
 
+  if (enablePlugins) {
+    const pluginLabel = (
+      <Box displayProp="flex" style={{ gap: "8px" }}>
+        {t("Common:Plugins")}
+
+        <Badge
+          label={t("Settings:BetaLabel")}
+          backgroundColor="#533ED1"
+          fontSize="9px"
+          borderRadius="50px"
+          noHover={true}
+          isHovered={false}
+        />
+      </Box>
+    );
+
+    data.splice(1, 0, {
+      id: "plugins",
+      name: pluginLabel,
+      content: <PluginPage />,
+    });
+  }
+
   const getCurrentTab = () => {
     const path = location.pathname;
     const currentTab = data.findIndex((item) => path.includes(item.id));
@@ -71,23 +105,37 @@ const IntegrationWrapper = (props) => {
     );
   };
 
-  return <Submenu data={data} startSelect={currentTab} onSelect={onSelect} />;
+  return (
+    <Submenu
+      data={data}
+      startSelect={currentTab}
+      onSelect={onSelect}
+      topProps={
+        currentDeviceType === DeviceType.desktop
+          ? 0
+          : currentDeviceType === DeviceType.mobile
+          ? "53px"
+          : "61px"
+      }
+    />
+  );
 };
 
 export default inject(({ auth, ssoStore }) => {
-  const { standalone } = auth.settingsStore;
+  const { standalone, enablePlugins } = auth.settingsStore;
   const { load: toDefault } = ssoStore;
-  const { enablePlugins } = auth.settingsStore;
+  const { currentDeviceType } = auth.settingsStore;
   const { isSSOAvailable } = auth.currentQuotaStore;
 
   return {
-    enablePlugins,
     toDefault,
     isSSOAvailable,
     standalone,
+    currentDeviceType,
+    enablePlugins,
   };
 })(
-  withTranslation(["Settings", "SingleSignOn", "Translations"])(
+  withTranslation(["Settings", "SingleSignOn", "Translations", "WebPlugins"])(
     observer(IntegrationWrapper)
   )
 );

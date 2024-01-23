@@ -1,26 +1,27 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { inject, observer } from "mobx-react";
 import PropTypes from "prop-types";
-import Backdrop from "@docspace/components/backdrop";
-import Heading from "@docspace/components/heading";
-import Aside from "@docspace/components/aside";
-import IconButton from "@docspace/components/icon-button";
-import { ShareAccessRights } from "@docspace/common/constants";
-import Selector from "@docspace/components/selector";
+import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import Loaders from "@docspace/common/components/Loaders";
-import withLoader from "../../../HOCs/withLoader";
+import React, { useState, useEffect, useCallback } from "react";
+
+import Aside from "@docspace/components/aside";
+import Backdrop from "@docspace/components/backdrop";
+import Selector from "@docspace/components/selector";
 import toastr from "@docspace/components/toast/toastr";
-import Filter from "@docspace/common/api/people/filter";
 
-import { getMembersList } from "@docspace/common/api/people";
 import { getUserRole } from "@docspace/common/utils";
-import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
-import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/catalog.accounts.react.svg?url";
-import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
-import EmptyScreenPersonsSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
+import Filter from "@docspace/common/api/people/filter";
+import Loaders from "@docspace/common/components/Loaders";
+import { getMembersList } from "@docspace/common/api/people";
+import useLoadingWithTimeout from "SRC_DIR/Hooks/useLoadingWithTimeout";
+import { ShareAccessRights, LOADER_TIMEOUT } from "@docspace/common/constants";
 
-let timer = null;
+import withLoader from "../../../HOCs/withLoader";
+
+import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
+
+import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
+import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/catalog.accounts.react.svg?url";
+import EmptyScreenPersonsSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
 
 const AddUsersPanel = ({
   isEncrypted,
@@ -103,41 +104,29 @@ const AddUsersPanel = ({
   const [hasNextPage, setHasNextPage] = useState(true);
   const [isNextPageLoading, setIsNextPageLoading] = useState(false);
   const [total, setTotal] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const cleanTimer = () => {
-    timer && clearTimeout(timer);
-    timer = null;
-  };
+  const [isLoading, setIsLoading] = useLoadingWithTimeout(
+    LOADER_TIMEOUT,
+    false
+  );
+  const [isLoadingSearch, setIsLoadingSearch] = useLoadingWithTimeout(
+    LOADER_TIMEOUT,
+    false
+  );
 
   useEffect(() => {
     loadNextPage(0);
   }, []);
 
-  useEffect(() => {
-    if (isLoading) {
-      cleanTimer();
-      timer = setTimeout(() => {
-        setIsLoading(true);
-      }, 100);
-    } else {
-      cleanTimer();
-      setIsLoading(false);
-    }
+  const onSearch = (value, callback) => {
+    if (value === searchValue) return;
 
-    return () => {
-      cleanTimer();
-    };
-  }, [isLoading]);
-
-  const onSearch = (value) => {
+    setIsLoadingSearch(true);
     setSearchValue(value);
-    loadNextPage(0, value);
+    loadNextPage(0, value, callback);
   };
 
-  const onClearSearch = () => {
-    setSearchValue("");
-    loadNextPage(0, "");
+  const onClearSearch = (callback) => {
+    onSearch("", callback);
   };
 
   const toListItem = (item) => {
@@ -172,7 +161,7 @@ const AddUsersPanel = ({
     };
   };
 
-  const loadNextPage = (startIndex, search = searchValue) => {
+  const loadNextPage = (startIndex, search = searchValue, callback) => {
     const pageCount = 100;
 
     setIsNextPageLoading(true);
@@ -207,9 +196,13 @@ const AddUsersPanel = ({
         setTotal(newTotal);
 
         setIsNextPageLoading(false);
-        setIsLoading(false);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error))
+      .finally(() => {
+        callback?.();
+        setIsLoading(false);
+        setIsLoadingSearch(false);
+      });
   };
 
   const emptyScreenImage = theme.isBase
@@ -257,18 +250,21 @@ const AddUsersPanel = ({
           emptyScreenDescription={t("PeopleSelector:EmptyDescription")}
           searchEmptyScreenImage={emptyScreenImage}
           searchEmptyScreenHeader={t("People:NotFoundUsers")}
-          searchEmptyScreenDescription={t("SearchEmptyDescription")}
+          searchEmptyScreenDescription={t("People:NotFoundUsersDescription")}
           hasNextPage={hasNextPage}
           isNextPageLoading={isNextPageLoading}
           loadNextPage={loadNextPage}
           totalItems={total}
           isLoading={isLoading}
           searchLoader={<Loaders.SelectorSearchLoader />}
+          isSearchLoading={isLoading && !isLoadingSearch}
           rowLoader={
             <Loaders.SelectorRowLoader
-              isMultiSelect={false}
+              isUser
+              count={15}
               isContainer={isLoading}
-              isUser={true}
+              isMultiSelect={isMultiSelect}
+              withAllSelect={!isLoadingSearch}
             />
           }
         />

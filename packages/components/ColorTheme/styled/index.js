@@ -16,13 +16,12 @@ export { default as SubmenuTextTheme } from "./submenuText";
 
 export { default as SubmenuItemLabelTheme } from "./submenuItemLabel";
 
-export { default as ToggleButtonTheme } from "./toggleButton";
-
 export { default as TabsContainerTheme } from "./tabsContainer";
 
 export { default as IconButtonTheme } from "./iconButton";
 
 export { default as IconButtonPinTheme } from "./iconButtonPin";
+export { default as IconButtonMuteTheme } from "./iconButtonMute";
 
 export { default as IndicatorFilterButtonTheme } from "./indicatorFilterButton";
 
@@ -43,8 +42,6 @@ export { default as ComboButtonTheme } from "./comboButton";
 export { default as LinkForgotPasswordTheme } from "./linkForgotPassword";
 
 export { default as LoadingButtonTheme } from "./loadingButton";
-
-export { default as FloatingButtonTheme } from "./floatingButton";
 
 export { default as InfoPanelToggleTheme } from "./infoPanelToggle";
 

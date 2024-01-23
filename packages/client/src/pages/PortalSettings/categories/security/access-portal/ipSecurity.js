@@ -13,8 +13,9 @@ import { size } from "@docspace/components/utils/device";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import isEqual from "lodash/isEqual";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
-import { isMobile } from "react-device-detect";
+
 import IpSecurityLoader from "../sub-components/loaders/ip-security-loader";
+import { DeviceType } from "@docspace/common/constants";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -55,6 +56,7 @@ const IpSecurity = (props) => {
     isInit,
     ipSettingsUrl,
     currentColorScheme,
+    currentDeviceType,
   } = props;
 
   const navigate = useNavigate();
@@ -89,7 +91,7 @@ const IpSecurity = (props) => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
 
-    if (!isInit) initSettings().then(() => setIsLoading(true));
+    if (!isInit) initSettings("ip").then(() => setIsLoading(true));
     else setIsLoading(true);
 
     return () => window.removeEventListener("resize", checkWidth);
@@ -118,7 +120,7 @@ const IpSecurity = (props) => {
   }, [enable, ips]);
 
   const checkWidth = () => {
-    window.innerWidth > size.smallTablet &&
+    window.innerWidth > size.mobile &&
       location.pathname.includes("ip") &&
       navigate("/portal-settings/security/access-portal");
   };
@@ -163,7 +165,7 @@ const IpSecurity = (props) => {
 
       saveToSessionStorage("defaultIPSettings", {
         enable: enable,
-        ips: ipsObjectArr,
+        ips: ips,
       });
       setShowReminder(false);
       toastr.success(t("SuccessfullySaveSettingsMessage"));
@@ -181,7 +183,7 @@ const IpSecurity = (props) => {
     setShowReminder(false);
   };
 
-  if (isMobile && !isInit && !isLoading) {
+  if (currentDeviceType !== DeviceType.desktop && !isInit && !isLoading) {
     return <IpSecurityLoader />;
   }
 
@@ -259,7 +261,7 @@ const IpSecurity = (props) => {
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
-        reminderTest={t("YouHaveUnsavedChanges")}
+        reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         displaySettings={true}
@@ -280,6 +282,7 @@ export default inject(({ auth, setup }) => {
     setIpRestrictions,
     ipSettingsUrl,
     currentColorScheme,
+    currentDeviceType,
   } = auth.settingsStore;
 
   const { initSettings, isInit } = setup;
@@ -293,5 +296,6 @@ export default inject(({ auth, setup }) => {
     isInit,
     ipSettingsUrl,
     currentColorScheme,
+    currentDeviceType,
   };
 })(withTranslation(["Settings", "Common"])(observer(IpSecurity)));

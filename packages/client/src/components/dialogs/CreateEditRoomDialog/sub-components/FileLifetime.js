@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Text from "@docspace/components/text";
 import TextInput from "@docspace/components/text-input";
 import ComboBox from "@docspace/components/combobox";
-import { hugeMobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 
 const StyledFileLifetime = styled.div`
   margin-top: 12px;
@@ -12,7 +12,7 @@ const StyledFileLifetime = styled.div`
     display: flex;
     align-items: center;
 
-    @media ${hugeMobile} {
+    @media ${mobile} {
       display: block;
     }
 
@@ -25,7 +25,7 @@ const StyledFileLifetime = styled.div`
       min-width: 150px;
       margin-right: 4px;
 
-      @media ${hugeMobile} {
+      @media ${mobile} {
         margin-right: 8px;
         width: 165px;
       }
@@ -36,7 +36,7 @@ const StyledFileLifetime = styled.div`
       width: 92px;
       min-width: 92px;
 
-      @media ${hugeMobile} {
+      @media ${mobile} {
         margin-right: 0px;
         width: 165px;
       }

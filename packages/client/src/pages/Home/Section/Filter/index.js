@@ -1,11 +1,12 @@
 ﻿import React, { useCallback, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { isMobile, isMobileOnly } from "react-device-detect";
+
 import { withTranslation } from "react-i18next";
 import find from "lodash/find";
 import result from "lodash/result";
 
+import { isTablet, isMobile } from "@docspace/components/utils/device";
 import FilterInput from "@docspace/common/components/FilterInput";
 import Loaders from "@docspace/common/components/Loaders";
 import { withLayoutSize } from "@docspace/common/utils";
@@ -26,6 +27,7 @@ import {
   EmployeeStatus,
   PaymentsType,
   AccountLoginType,
+  DeviceType,
 } from "@docspace/common/constants";
 
 import { getDefaultRoomName } from "SRC_DIR/helpers/filesUtils";
@@ -251,6 +253,8 @@ const SectionFilterContent = ({
   publicRoomKey,
   setRoomsFilter,
   standalone,
+  currentDeviceType,
+  isRoomAdmin,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -441,18 +445,28 @@ const SectionFilterContent = ({
 
   const onSearch = React.useCallback(
     (data = "") => {
+      const searchValue = data?.trim() ?? "";
+
+      if (
+        !filter.search &&
+        !roomsFilter.filterValue &&
+        !accountsFilter.search &&
+        searchValue.length === 0
+      )
+        return;
+
       setIsLoading(true);
       if (isAccountsPage) {
         const newFilter = accountsFilter.clone();
         newFilter.page = 0;
-        newFilter.search = data;
+        newFilter.search = searchValue;
 
         navigate(`accounts/filter?${newFilter.toUrlParams()}`);
       } else if (isRooms) {
         const newFilter = roomsFilter.clone();
 
         newFilter.page = 0;
-        newFilter.filterValue = data;
+        newFilter.filterValue = searchValue;
 
         const path =
           newFilter.searchArea === RoomSearchArea.Active
@@ -463,7 +477,7 @@ const SectionFilterContent = ({
       } else {
         const newFilter = filter.clone();
         newFilter.page = 0;
-        newFilter.search = data;
+        newFilter.search = searchValue;
 
         const path = location.pathname.split("/filter")[0];
 
@@ -520,9 +534,9 @@ const SectionFilterContent = ({
     (view) => {
       if (view === "row") {
         if (
-          (sectionWidth < 1025 && !infoPanelVisible) ||
-          (sectionWidth < 625 && infoPanelVisible) ||
-          isMobile
+          isMobile() ||
+          isTablet() ||
+          currentDeviceType !== DeviceType.desktop
         ) {
           setViewAs("row");
         } else {
@@ -532,7 +546,7 @@ const SectionFilterContent = ({
         setViewAs(view);
       }
     },
-    [sectionWidth, infoPanelVisible, setViewAs]
+    [sectionWidth, infoPanelVisible, setViewAs, currentDeviceType]
   );
 
   const getSelectedInputValue = React.useCallback(() => {
@@ -639,7 +653,7 @@ const SectionFilterContent = ({
           label:
             PaymentsType.Paid === accountsFilter.payments.toString()
               ? t("Common:Paid")
-              : t("SmartBanner:Price"),
+              : t("Common:Free"),
           group: "filter-account",
         });
       }
@@ -988,13 +1002,15 @@ const SectionFilterContent = ({
           group: "filter-status",
           label: t("PeopleTranslations:PendingTitle"),
         },
-        {
+      ];
+
+      if (!isRoomAdmin)
+        statusItems.push({
           id: "filter_status-disabled",
           key: 3,
           group: "filter-status",
           label: t("PeopleTranslations:DisabledEmployeeStatus"),
-        },
-      ];
+        });
 
       const typeItems = [
         {
@@ -1061,7 +1077,7 @@ const SectionFilterContent = ({
         {
           key: PaymentsType.Free,
           group: "filter-account",
-          label: t("SmartBanner:Price"),
+          label: t("Common:Free"),
         },
       ];
 
@@ -1213,6 +1229,20 @@ const SectionFilterContent = ({
                   key: RoomsType.ReadOnlyRoom,
                   group: FilterGroups.roomFilterType,
                   label: t("ViewOnlyRooms"),
+                };
+              case RoomsType.PublicRoom:
+                return {
+                  id: "filter_type-public",
+                  key: RoomsType.PublicRoom,
+                  group: FilterGroups.roomFilterType,
+                  label: t("PublicRoom"),
+                };
+              case RoomsType.VirtualDataRoom:
+                return {
+                  id: "filter_type-virtual-data",
+                  key: RoomsType.VirtualDataRoom,
+                  group: FilterGroups.roomFilterType,
+                  label: t("VirtualDataRoom"),
                 };
               case RoomsType.CustomRoom:
               default:
@@ -1967,7 +1997,7 @@ const SectionFilterContent = ({
   );
 
   const onSortButtonClick = (isOpen) => {
-    if (isMobileOnly) {
+    if (currentDeviceType === DeviceType.mobile) {
       setMainButtonMobileVisible(isOpen);
     }
   };
@@ -2032,6 +2062,7 @@ const SectionFilterContent = ({
       clearSearch={clearSearch}
       setClearSearch={setClearSearch}
       onSortButtonClick={onSortButtonClick}
+      currentDeviceType={currentDeviceType}
     />
   );
 };
@@ -2067,9 +2098,9 @@ export default inject(
     const { providers } = thirdPartyStore;
 
     const { fetchTags } = tagsStore;
-
+    const { isRoomAdmin } = auth;
     const { user } = auth.userStore;
-    const { personal, standalone } = auth.settingsStore;
+    const { personal, standalone, currentDeviceType } = auth.settingsStore;
     const {
       isFavoritesFolder,
       isRecentFolder,
@@ -2098,6 +2129,7 @@ export default inject(
     const { canSearchByContent } = filesSettingsStore;
 
     return {
+      isRoomAdmin,
       user,
       userId: user?.id,
 
@@ -2144,6 +2176,7 @@ export default inject(
       publicRoomKey,
       setRoomsFilter,
       standalone,
+      currentDeviceType,
     };
   }
 )(

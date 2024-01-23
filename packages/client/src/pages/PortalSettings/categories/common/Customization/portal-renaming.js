@@ -6,8 +6,7 @@ import TextInput from "@docspace/components/text-input";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
-import { isMobileOnly } from "react-device-detect";
-import { isSmallTablet } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/components/utils/device";
 import checkScrollSettingsBlock from "../utils";
 import { StyledSettingsComponent, StyledScrollbar } from "./StyledSettings";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
@@ -30,10 +29,10 @@ const PortalRenaming = (props) => {
     tenantAlias,
     initSettings,
     setIsLoaded,
-    getAllSettings,
     domain,
     currentColorScheme,
     renamingSettingsUrl,
+    domainValidator,
   } = props;
 
   const navigate = useNavigate();
@@ -75,19 +74,12 @@ const PortalRenaming = (props) => {
 
   const [isCustomizationView, setIsCustomizationView] = useState(false);
 
-  const [domainValidator, setDomainValidator] = useState(null);
-
   const [isShowModal, setIsShowModal] = useState(false);
 
   useEffect(() => {
-    getAllSettings().then((res) => {
-      setDomainValidator(res.domainValidator);
-    });
-  }, []);
-
-  useEffect(() => {
     setDocumentTitle(t("PortalRenaming"));
-    if (!isLoaded) initSettings().then(() => setIsLoaded(true));
+    const page = isMobileView ? "language-and-time-zone" : "general";
+    if (!isLoaded) initSettings(page).then(() => setIsLoaded(true));
 
     const checkScroll = checkScrollSettingsBlock();
     checkInnerWidth();
@@ -117,7 +109,7 @@ const PortalRenaming = (props) => {
     setIsLoadingPortalNameSave(true);
 
     setPortalRename(portalName)
-      .then((res) => {
+      .then((confirmUrl) => {
         onCloseModal();
         toastr.success(t("SuccessfullySavePortalNameMessage"));
 
@@ -125,7 +117,7 @@ const PortalRenaming = (props) => {
         setPortalNameDefault(portalName);
         sessionStorage.clear();
 
-        navigate(res);
+        window.location.replace(confirmUrl);
       })
       .catch((error) => {
         let errorMessage = "";
@@ -139,8 +131,13 @@ const PortalRenaming = (props) => {
           errorMessage = error;
         }
 
+        toastr.error(errorMessage);
+        setIsShowModal(false);
         setErrorValue(errorMessage);
         saveToSessionStorage("errorValue", errorMessage);
+      })
+      .finally(() => {
+        setIsLoadingPortalNameSave(false);
       });
 
     saveToSessionStorage("portalName", portalName);
@@ -240,7 +237,7 @@ const PortalRenaming = (props) => {
   };
 
   const checkInnerWidth = useCallback(() => {
-    if (!isSmallTablet()) {
+    if (!isMobile()) {
       setIsCustomizationView(true);
 
       const currentUrl = window.location.href.replace(
@@ -255,7 +252,7 @@ const PortalRenaming = (props) => {
     } else {
       setIsCustomizationView(false);
     }
-  }, [isSmallTablet, setIsCustomizationView]);
+  }, [isMobile, setIsCustomizationView]);
 
   const onOpenModal = () => {
     setIsShowModal(true);
@@ -329,9 +326,10 @@ const PortalRenaming = (props) => {
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         showReminder={showReminder}
-        reminderTest={t("YouHaveUnsavedChanges")}
+        reminderText={t("YouHaveUnsavedChanges")}
         displaySettings={true}
         hasScroll={hasScroll}
+        saveButtonDisabled={!!errorValue}
         additionalClassSaveButton="portal-renaming-save"
         additionalClassCancelButton="portal-renaming-cancel"
       />
@@ -352,8 +350,9 @@ export default inject(({ auth, setup, common }) => {
     baseDomain,
     currentColorScheme,
     renamingSettingsUrl,
+    domainValidator,
   } = auth.settingsStore;
-  const { setPortalRename, getAllSettings } = setup;
+  const { setPortalRename } = setup;
   const { isLoaded, setIsLoadedPortalRenaming, initSettings, setIsLoaded } =
     common;
 
@@ -365,10 +364,10 @@ export default inject(({ auth, setup, common }) => {
     tenantAlias,
     initSettings,
     setIsLoaded,
-    getAllSettings,
     domain: baseDomain,
     currentColorScheme,
     renamingSettingsUrl,
+    domainValidator,
   };
 })(
   withLoading(withTranslation(["Settings", "Common"])(observer(PortalRenaming)))

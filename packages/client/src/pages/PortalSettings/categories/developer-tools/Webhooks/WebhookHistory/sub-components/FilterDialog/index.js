@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import moment from "moment";
+import moment from "moment-timezone";
 
 import ModalDialog from "@docspace/components/modal-dialog";
 import styled, { css } from "styled-components";
@@ -15,6 +15,12 @@ import { useTranslation } from "react-i18next";
 
 import { Base } from "@docspace/components/themes";
 
+const ModalDialogContainer = styled(ModalDialog)`
+  .modal-body {
+    overflow-y: auto;
+  }
+`;
+
 const DialogBodyWrapper = styled.div`
   margin-top: -4px;
 `;
@@ -27,7 +33,7 @@ const Footer = styled.div`
     width: 100%;
   }
   button:first-of-type {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-left: 10px;
@@ -40,7 +46,7 @@ const Footer = styled.div`
 
 const Separator = styled.hr`
   border-top: 1px solid;
-  border-color: ${props => (props.theme.isBase ? "#eceef1" : "#474747")};
+  border-color: ${(props) => (props.theme.isBase ? "#eceef1" : "#474747")};
   margin-bottom: 14px;
 `;
 
@@ -66,7 +72,7 @@ function areArraysEqual(array1, array2) {
   );
 }
 
-const FilterDialog = props => {
+const FilterDialog = (props) => {
   const {
     visible,
     closeModal,
@@ -81,8 +87,12 @@ const FilterDialog = props => {
 
   const [filters, setFilters] = useState({
     deliveryDate: null,
-    deliveryFrom: moment().startOf("day"),
-    deliveryTo: moment().endOf("day"),
+    deliveryFrom: moment()
+      .tz(window.timezone || "")
+      .startOf("day"),
+    deliveryTo: moment()
+      .tz(window.timezone || "")
+      .endOf("day"),
     status: [],
   });
 
@@ -107,8 +117,12 @@ const FilterDialog = props => {
       if (filters.deliveryDate !== null || filters.status.length > 0) {
         setFilters({
           deliveryDate: null,
-          deliveryFrom: moment().startOf("day"),
-          deliveryTo: moment().endOf("day"),
+          deliveryFrom: moment()
+            .tz(window.timezone || "")
+            .startOf("day"),
+          deliveryTo: moment()
+            .tz(window.timezone || "")
+            .endOf("day"),
           status: [],
         });
       }
@@ -135,11 +149,12 @@ const FilterDialog = props => {
       : filters.deliveryDate === null && filters.status.length === 0;
 
   return (
-    <ModalDialog
+    <ModalDialogContainer
       withFooterBorder
       visible={visible}
       onClose={closeModal}
-      displayType="aside">
+      displayType="aside"
+    >
       <ModalDialog.Header>{t("Files:Filter")}</ModalDialog.Header>
       <ModalDialog.Body>
         <DialogBodyWrapper>
@@ -173,7 +188,7 @@ const FilterDialog = props => {
           </Footer>
         </ModalDialog.Footer>
       )}
-    </ModalDialog>
+    </ModalDialogContainer>
   );
 };
 

@@ -1,9 +1,10 @@
 import { makeAutoObservable } from "mobx";
 import toastr from "@docspace/components/toast/toastr";
-import { isMobile } from "react-device-detect";
+import { isDesktop } from "@docspace/components/utils/device";
 import FilesFilter from "@docspace/common/api/files/filter";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
+import { RoomsType } from "@docspace/common/constants";
 
 class CreateEditRoomStore {
   roomParams = null;
@@ -84,12 +85,15 @@ class CreateEditRoomStore {
       calculateRoomLogoParams,
       uploadRoomLogo,
       addLogoToRoom,
+      selection,
+      bufferSelection,
     } = this.filesStore;
     const { preparingDataForCopyingToRoom } = this.filesActionsStore;
 
     const createRoomData = {
       roomType: roomParams.type,
       title: roomParams.title || t("Files:NewRoom"),
+      indexing: roomParams.indexing,
     };
 
     const createTagsData = roomParams.tags
@@ -154,8 +158,16 @@ class CreateEditRoomStore {
         });
       } else !withPaging && this.onOpenNewRoom(room);
 
-      if (processCreatingRoomFromData)
-        preparingDataForCopyingToRoom(room.id, t);
+      if (processCreatingRoomFromData) {
+        const selections =
+          selection.length > 0 && selection[0] != null
+            ? selection
+            : bufferSelection != null
+            ? [bufferSelection]
+            : [];
+
+        preparingDataForCopyingToRoom(room.id, selections, t);
+      }
 
       this.roomIsCreated = true;
     } catch (err) {
@@ -173,6 +185,7 @@ class CreateEditRoomStore {
 
   onOpenNewRoom = async (room) => {
     const { setIsSectionFilterLoading } = this.clientLoadingStore;
+    const { setSelection } = this.filesStore;
     const { setView, setIsVisible } = this.infoPanelStore;
 
     const setIsLoading = (param) => {
@@ -184,7 +197,8 @@ class CreateEditRoomStore {
     const state = {
       isRoot: false,
       title: room.title,
-
+      isRoom: true,
+      isPublicRoomType: room.roomType === RoomsType.PublicRoom,
       rootFolderType: room.rootFolderType,
     };
 
@@ -194,9 +208,11 @@ class CreateEditRoomStore {
 
     const path = getCategoryUrl(CategoryType.SharedRoom, room.id);
 
+    setSelection && setSelection([]);
+
     window.DocSpace.navigate(`${path}?${newFilter.toUrlParams()}`, { state });
 
-    !isMobile && setIsVisible(true);
+    isDesktop() && setIsVisible(true);
 
     this.setIsLoading(false);
     this.setConfirmDialogIsLoading(false);

@@ -8,7 +8,9 @@ import Link from "@docspace/components/link";
 import TileContent from "./sub-components/TileContent";
 import withContent from "../../../../../HOCs/withContent";
 import withBadges from "../../../../../HOCs/withBadges";
-import { isMobile } from "react-device-detect";
+
+import { DeviceType } from "@docspace/common/constants";
+import { tablet } from "@docspace/components/utils/device";
 
 const SimpleFilesTileContent = styled(TileContent)`
   .row-main-container {
@@ -22,7 +24,7 @@ const SimpleFilesTileContent = styled(TileContent)`
   }
 
   .badge {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-left: 8px;
@@ -37,7 +39,7 @@ const SimpleFilesTileContent = styled(TileContent)`
 
   .new-items {
     position: absolute;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             left: 29px;
@@ -55,7 +57,7 @@ const SimpleFilesTileContent = styled(TileContent)`
 
   .share-icon {
     margin-top: -4px;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             padding-left: 8px;
@@ -89,11 +91,11 @@ const SimpleFilesTileContent = styled(TileContent)`
     isRooms &&
     css`
       .item-file-name {
-        font-size: 16px;
+        font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
       }
     `}
 
-  @media (max-width: 1024px) {
+  @media ${tablet} {
     display: inline-flex;
     height: auto;
 
@@ -109,28 +111,31 @@ const FilesTileContent = ({
   linkStyles,
   theme,
   isRooms,
+  currentDeviceType,
 }) => {
-  const { fileExst, title, viewAccessability } = item;
+  const { fileExst, title, viewAccessibility } = item;
 
-  const isMedia = viewAccessability?.ImageView || viewAccessability?.MediaView;
+  const isMedia = viewAccessibility?.ImageView || viewAccessibility?.MediaView;
 
   return (
     <>
       <SimpleFilesTileContent
         sideColor={theme.filesSection.tilesView.sideColor}
         isFile={fileExst}
-        isRooms={isRooms}>
+        isRooms={isRooms}
+      >
         <Link
           className="item-file-name"
           containerWidth="100%"
           type="page"
           title={title}
           fontWeight="600"
-          fontSize={!isMobile ? "13px" : "14px"}
+          fontSize={currentDeviceType === DeviceType.desktop ? "13px" : "14px"}
           target="_blank"
           {...linkStyles}
           color={theme.filesSection.tilesView.color}
-          isTextOverflow>
+          isTextOverflow
+        >
           {titleWithoutExt}
         </Link>
       </SimpleFilesTileContent>
@@ -143,7 +148,11 @@ export default inject(({ auth, treeFoldersStore }) => {
 
   const isRooms = isRoomsFolder || isArchiveFolder;
 
-  return { theme: auth.settingsStore.theme, isRooms };
+  return {
+    theme: auth.settingsStore.theme,
+    currentDeviceType: auth.settingsStore.currentDeviceType,
+    isRooms,
+  };
 })(
   observer(
     withTranslation(["Files", "Translations", "Notifications"])(

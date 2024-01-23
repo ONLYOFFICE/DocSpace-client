@@ -7,7 +7,7 @@ import styled from "styled-components";
 import Button from "@docspace/components/button";
 import toastr from "@docspace/components/toast/toastr";
 import { UnavailableStyles } from "../../../utils/commonSettingsStyles";
-import { hugeMobile, tablet } from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/components/utils/device";
 import Badge from "@docspace/components/badge";
 
 const StyledTextInput = styled(TextInput)`
@@ -15,7 +15,7 @@ const StyledTextInput = styled(TextInput)`
   margin-bottom: 24px;
   width: 350px;
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     width: 100%;
   }
 `;
@@ -29,6 +29,8 @@ const MainContainer = styled.div`
 
   .paid-badge {
     cursor: auto;
+    margin-bottom: 8px;
+    margin-left: -2px;
   }
 
   .login-history-description {
@@ -38,16 +40,25 @@ const MainContainer = styled.div`
   .save-cancel {
     padding: 0;
     position: static;
+
+    .buttons-flex {
+      padding: 0;
+    }
   }
 
   .login-subheader {
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     color: #657077;
   }
 
   .latest-text {
-    font-size: 13px;
-    padding: 20px 0;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+    padding: 20px 0 16px;
+  }
+
+  .download-text {
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+    padding: 24px 0;
   }
 
   .storage-label {
@@ -75,22 +86,34 @@ const DownLoadWrapper = styled.div`
   align-items: center;
   gap: 12px;
 
+  padding-block: 16px 30px;
+  position: sticky;
+  bottom: 0;
+  margin-top: 32px;
+  background-color: ${({ theme }) => theme.backgroundColor};
+
+  @media ${mobile} {
+    position: fixed;
+    padding-inline: 16px;
+    inset-inline: 0;
+  }
+
   .download-report_button {
     width: auto;
     height: auto;
-    font-size: 13px;
-    line-height: 20px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+    line-height: ${(props) => props.theme.getCorrectFontSize("20px")};
     padding-top: 5px;
     padding-bottom: 5px;
 
     @media ${tablet} {
-      font-size: 14px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
       line-height: 16px;
       padding-top: 11px;
       padding-bottom: 11px;
     }
 
-    @media ${hugeMobile} {
+    @media ${mobile} {
       width: 100%;
     }
   }
@@ -98,7 +121,7 @@ const DownLoadWrapper = styled.div`
   .download-report_description {
     font-style: normal;
     font-weight: 400;
-    font-size: 12px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
     line-height: 16px;
 
     height: 16px;
@@ -109,7 +132,7 @@ const DownLoadWrapper = styled.div`
         .downloadReportDescriptionColor};
   }
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     flex-direction: column-reverse;
   }
 `;
@@ -265,6 +288,7 @@ const HistoryMainContent = (props) => {
       {isSettingNotPaid && (
         <Badge
           className="paid-badge"
+          fontWeight="700"
           backgroundColor="#EDC409"
           label={t("Common:Paid")}
           isPaidBadge={true}
@@ -299,7 +323,7 @@ const HistoryMainContent = (props) => {
               saveButtonLabel={saveButtonLabel}
               cancelButtonLabel={cancelButtonLabel}
               showReminder={loginLifeTimeReminder}
-              reminderTest={t("YouHaveUnsavedChanges")}
+              reminderText={t("YouHaveUnsavedChanges")}
               displaySettings={true}
               hasScroll={false}
               isDisabled={isSettingNotPaid}
@@ -322,14 +346,16 @@ const HistoryMainContent = (props) => {
               saveButtonLabel={saveButtonLabel}
               cancelButtonLabel={cancelButtonLabel}
               showReminder={auditLifeTimeReminder}
-              reminderTest={t("YouHaveUnsavedChanges")}
+              reminderText={t("YouHaveUnsavedChanges")}
               displaySettings={true}
               hasScroll={false}
               isDisabled={isSettingNotPaid}
             />
           </>
         )}
-        <Text className="latest-text settings_unavailable">{downloadText}</Text>
+        <Text className="download-text settings_unavailable">
+          {downloadText}
+        </Text>
       </div>
       {content}
       <DownLoadWrapper>

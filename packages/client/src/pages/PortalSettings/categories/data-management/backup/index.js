@@ -1,71 +1,26 @@
-﻿import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
-import React, { useEffect } from "react";
-import { withTranslation, Trans } from "react-i18next";
+﻿import { inject, observer } from "mobx-react";
+import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import Submenu from "@docspace/components/submenu";
-import Link from "@docspace/components/link";
-import HelpButton from "@docspace/components/help-button";
 import { combineUrl } from "@docspace/common/utils";
-import { inject, observer } from "mobx-react";
-import AutoBackup from "./auto-backup";
+import { DeviceType } from "@docspace/common/constants";
 import ManualBackup from "./manual-backup";
+import AutoBackup from "./auto-backup";
+import Submenu from "@docspace/components/submenu";
 import config from "PACKAGE_FILE";
 
-const Backup = ({
-  automaticBackupUrl,
-  buttonSize,
-  t,
-
-  isNotPaidPeriod,
-}) => {
+const Backup = ({ t, buttonSize, isNotPaidPeriod }) => {
   const navigate = useNavigate();
-
-  const renderTooltip = (helpInfo) => {
-    return (
-      <>
-        <HelpButton
-          place="bottom"
-          iconName={HelpReactSvgUrl}
-          tooltipContent={
-            <>
-              <Trans t={t} i18nKey={`${helpInfo}`} ns="Settings">
-                {helpInfo}
-              </Trans>
-              <div>
-                <Link
-                  id="link-tooltip"
-                  as="a"
-                  href={automaticBackupUrl}
-                  target="_blank"
-                  fontSize="13px"
-                  color="#333333"
-                  isBold
-                  isHovered
-                >
-                  {t("Common:LearnMore")}
-                </Link>
-              </div>
-            </>
-          }
-        />
-      </>
-    );
-  };
 
   const data = [
     {
       id: "data-backup",
       name: t("DataBackup"),
-      content: (
-        <ManualBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />
-      ),
+      content: <ManualBackup buttonSize={buttonSize} />,
     },
     {
       id: "auto-backup",
       name: t("AutoBackup"),
-      content: (
-        <AutoBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />
-      ),
+      content: <AutoBackup buttonSize={buttonSize} />,
     },
   ];
 
@@ -80,7 +35,7 @@ const Backup = ({
   };
 
   return isNotPaidPeriod ? (
-    <ManualBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />
+    <ManualBackup buttonSize={buttonSize} />
   ) : (
     <Submenu data={data} startSelect={data[0]} onSelect={(e) => onSelect(e)} />
   );
@@ -89,14 +44,12 @@ const Backup = ({
 export default inject(({ auth }) => {
   const { settingsStore, currentTariffStatusStore } = auth;
   const { isNotPaidPeriod } = currentTariffStatusStore;
+  const { currentDeviceType, currentColorScheme } = settingsStore;
 
-  const { automaticBackupUrl, isTabletView, currentColorScheme } =
-    settingsStore;
-
-  const buttonSize = isTabletView ? "normal" : "small";
+  const buttonSize =
+    currentDeviceType === DeviceType.desktop ? "small" : "normal";
 
   return {
-    automaticBackupUrl,
     buttonSize,
     isNotPaidPeriod,
     currentColorScheme,

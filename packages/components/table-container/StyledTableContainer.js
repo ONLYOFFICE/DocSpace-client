@@ -1,10 +1,10 @@
 import styled, { css } from "styled-components";
 import Base from "../themes/base";
-import { mobile, tablet, hugeMobile } from "../utils/device";
+import { mobile, tablet } from "../utils/device";
 import IconButton from "../icon-button";
 import Scrollbar from "../scrollbar";
-import { isMobile, isMobileOnly } from "react-device-detect";
-import { ColorTheme } from "@docspace/components/ColorTheme";
+
+import { ColorTheme } from "../ColorTheme";
 import {
   getCorrectBorderRadius,
   getCorrectFourValuesStyle,
@@ -68,6 +68,18 @@ const StyledTableContainer = styled.div`
       theme.interfaceDirection === "rtl"
         ? `border-right: 0;`
         : `border-left: 0;`}
+  }
+
+  @media (hover: hover) {
+    &:has(#table-container_caption-header:not(.hotkeys-lengthen-header)):has(
+        .table-list-item:first-child .table-container_row:hover
+      ) {
+      .table-container_header,
+      .table-container_group-menu {
+        border-image-source: ${(props) =>
+          props.theme.tableContainer.header.borderHoverImageSource};
+      }
+    }
   }
 
   .lengthen-header {
@@ -146,14 +158,6 @@ const StyledTableGroupMenu = styled.div`
           ? `margin-right: 24px;`
           : `margin-left: 24px;`}
     }
-
-    ${isMobile &&
-    css`
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl"
-          ? `margin-right: 24px;`
-          : `margin-left: 24px;`}
-    `}
   }
 
   .table-container_group-menu-separator {
@@ -170,19 +174,9 @@ const StyledTableGroupMenu = styled.div`
       height: 36px;
     }
 
-    ${isMobile &&
-    css`
-      height: 36px;
-    `}
-
-    @media ${hugeMobile} {
+    @media ${mobile} {
       height: 20px;
     }
-
-    ${isMobileOnly &&
-    css`
-      height: 20px;
-    `}
   }
 
   .table-container_group-menu_button {
@@ -221,11 +215,29 @@ const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme)`
   align-self: center;
   justify-content: center;
   margin: ${({ theme }) =>
-    isMobile
-      ? getCorrectFourValuesStyle("0 16px 0 auto", theme.interfaceDirection)
-      : getCorrectFourValuesStyle("0 20px 0 auto", theme.interfaceDirection)};
+    getCorrectFourValuesStyle("0 20px 0 auto", theme.interfaceDirection)};
   height: 100%;
   width: auto;
+
+  .info-panel-toggle {
+    margin-inline-end: 8px;
+  }
+
+  ${(props) =>
+    props.isInfoPanelVisible &&
+    css`
+      .info-panel-toggle-bg {
+        height: 30px;
+        width: 30px;
+        background: ${props.theme.backgroundAndSubstrateColor};
+        border: 1px solid ${props.theme.backgroundAndSubstrateColor};
+        border-radius: 50%;
+        .info-panel-toggle {
+          margin: auto;
+          margin-top: 25%;
+        }
+      }
+    `}
 
   ${({ theme }) =>
     theme.interfaceDirection === "rtl"
@@ -373,6 +385,14 @@ const StyledTableBody = styled.div`
   display: contents;
 
   ${({ useReactWindow }) => useReactWindow && reactWindowBodyStyles}
+
+  .table-container_cell {
+    ${({ infoPanelVisible }) =>
+      infoPanelVisible &&
+      css`
+        padding: 0;
+      `}
+  }
 `;
 
 const StyledTableRow = styled.div`
@@ -382,6 +402,10 @@ const StyledTableRow = styled.div`
     svg {
       margin: 0;
     }
+  }
+
+  .table-container_header-settings {
+    justify-self: flex-end;
   }
 
   .droppable-hover {
@@ -448,7 +472,7 @@ StyledTableCell.defaultProps = {
 
 const StyledTableSettings = styled.div`
   margin: ${({ theme }) =>
-    getCorrectFourValuesStyle("14px 0 0px 2px", theme.interfaceDirection)};
+    getCorrectFourValuesStyle("14px 2px 0px 0px", theme.interfaceDirection)};
   display: inline-block;
   position: relative;
   cursor: pointer;
@@ -473,7 +497,9 @@ const StyledScrollbar = styled(Scrollbar)`
     display: none !important;
   }
   .nav-thumb-horizontal {
-    ${isMobile && "display: none !important"};
+    @media ${tablet} {
+      display: none !important;
+    }
   }
 `;
 

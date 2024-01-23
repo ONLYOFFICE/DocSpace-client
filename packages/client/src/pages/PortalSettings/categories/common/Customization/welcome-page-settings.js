@@ -4,17 +4,14 @@ import { withTranslation } from "react-i18next";
 import FieldContainer from "@docspace/components/field-container";
 import toastr from "@docspace/components/toast/toastr";
 import TextInput from "@docspace/components/text-input";
-import HelpButton from "@docspace/components/help-button";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject, observer } from "mobx-react";
-import config from "PACKAGE_FILE";
 import { useNavigate } from "react-router-dom";
-import { isMobileOnly } from "react-device-detect";
-import { isSmallTablet } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/components/utils/device";
 import checkScrollSettingsBlock from "../utils";
-import { StyledSettingsComponent, StyledScrollbar } from "./StyledSettings";
+import { StyledSettingsComponent } from "./StyledSettings";
 import LoaderCustomization from "../sub-components/loaderCustomization";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import Text from "@docspace/components/text";
@@ -38,8 +35,6 @@ const WelcomePageSettings = (props) => {
     isMobileView,
     isLoadedPage,
     greetingSettingsIsDefault,
-
-    getSettings,
     getGreetingSettingsIsDefault,
     currentColorScheme,
     welcomePageSettingsUrl,
@@ -75,6 +70,7 @@ const WelcomePageSettings = (props) => {
     greetingTitleDefaultFromSessionStorage = getFromSessionStorage(
       "greetingTitleDefault"
     );
+    getGreetingSettingsIsDefault();
 
     setDocumentTitle(t("CustomTitlesWelcome"));
 
@@ -90,7 +86,8 @@ const WelcomePageSettings = (props) => {
         ? greetingSettings
         : greetingTitleDefaultFromSessionStorage;
 
-    if (!isLoaded) initSettings().then(() => setIsLoaded(true));
+    const page = isMobileView ? "language-and-time-zone" : "general";
+    if (!isLoaded) initSettings(page).then(() => setIsLoaded(true));
 
     checkInnerWidth();
     window.addEventListener("resize", checkInnerWidth);
@@ -135,35 +132,31 @@ const WelcomePageSettings = (props) => {
       setState((val) => ({ ...val, hasScroll: scrollLngTZSettings }));
     }
 
-    if (greetingSettings !== prevProps.greetingSettings) {
-      setState((val) => ({ ...val, greetingTitle: greetingSettings }));
-    }
-
     if (state.greetingTitleDefault || state.greetingTitle) {
       checkChanges();
-    }
-
-    if (
-      (state.isLoadingGreetingSave !== prevState.isLoadingGreetingSave &&
-        state.isLoadingGreetingSave === false) ||
-      (state.isLoadingGreetingRestore !== prevState.isLoadingGreetingRestore &&
-        state.isLoadingGreetingRestore === false)
-    ) {
-      getSettings();
-      getGreetingSettingsIsDefault();
     }
   }, [
     isLoaded,
     setIsLoadedWelcomePageSettings,
     tReady,
-    greetingSettings,
-    getSettings,
-    getGreetingSettingsIsDefault,
     state.hasScroll,
     state.greetingTitle,
     state.isLoadingGreetingSave,
     state.isLoadingGreetingRestore,
   ]);
+
+  React.useEffect(() => {
+    greetingTitleFromSessionStorage = getFromSessionStorage("greetingTitle");
+    const emptyGreetingTitleFromSessionStorage =
+      greetingTitleFromSessionStorage === null ||
+      greetingTitleFromSessionStorage === "none";
+
+    if (!emptyGreetingTitleFromSessionStorage) return;
+
+    if (greetingSettings !== state.greetingTitle) {
+      setState((val) => ({ ...val, greetingTitle: greetingSettings }));
+    }
+  }, [greetingSettings]);
 
   React.useEffect(() => {
     prevProps.current = { isLoaded, tReady, greetingSettings };
@@ -178,6 +171,7 @@ const WelcomePageSettings = (props) => {
 
   const onChangeGreetingTitle = (e) => {
     setState((val) => ({ ...val, greetingTitle: e.target.value }));
+    getGreetingSettingsIsDefault();
 
     if (settingIsEqualInitialValue("greetingTitle", e.target.value)) {
       saveToSessionStorage("greetingTitle", "none");
@@ -201,9 +195,10 @@ const WelcomePageSettings = (props) => {
         toastr.success(t("SuccessfullySaveGreetingSettingsMessage"));
       })
       .catch((error) => toastr.error(error))
-      .finally(() =>
-        setState((val) => ({ ...val, isLoadingGreetingSave: false }))
-      );
+      .finally(() => {
+        getGreetingSettingsIsDefault();
+        setState((val) => ({ ...val, isLoadingGreetingSave: false }));
+      });
 
     setState((val) => ({ ...val, showReminder: false }));
 
@@ -214,11 +209,10 @@ const WelcomePageSettings = (props) => {
   const onRestoreGreetingSettings = () => {
     setState((val) => ({ ...val, isLoadingGreetingRestore: true }));
     restoreGreetingTitle()
-      .then(() => {
+      .then((defaultTitle) => {
         setState((val) => ({
           ...val,
-          greetingTitle: greetingSettings,
-          greetingTitleDefault: greetingSettings,
+          greetingTitle: defaultTitle,
           showReminder: false,
         }));
 
@@ -228,9 +222,10 @@ const WelcomePageSettings = (props) => {
         toastr.success(t("SuccessfullySaveGreetingSettingsMessage"));
       })
       .catch((error) => toastr.error(error))
-      .finally(() =>
-        setState((val) => ({ ...val, isLoadingGreetingRestore: false }))
-      );
+      .finally(() => {
+        getGreetingSettingsIsDefault();
+        setState((val) => ({ ...val, isLoadingGreetingRestore: false }));
+      });
   };
 
   const settingIsEqualInitialValue = (stateName, value) => {
@@ -262,7 +257,7 @@ const WelcomePageSettings = (props) => {
   };
 
   const checkInnerWidth = () => {
-    if (!isSmallTablet()) {
+    if (!isMobile()) {
       setState((val) => ({ ...val, isCustomizationView: true }));
 
       const currentUrl = window.location.href.replace(
@@ -342,7 +337,7 @@ const WelcomePageSettings = (props) => {
         onSaveClick={onSaveGreetingSettings}
         onCancelClick={onRestoreGreetingSettings}
         showReminder={state.showReminder}
-        reminderTest={t("YouHaveUnsavedChanges")}
+        reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:Restore")}
         displaySettings={true}
@@ -360,7 +355,6 @@ export default inject(({ auth, setup, common }) => {
     greetingSettings,
     organizationName,
     theme,
-    getSettings,
     currentColorScheme,
     welcomePageSettingsUrl,
   } = auth.settingsStore;
@@ -373,6 +367,7 @@ export default inject(({ auth, setup, common }) => {
     greetingSettingsIsDefault,
     getGreetingSettingsIsDefault,
   } = common;
+
   return {
     theme,
     greetingSettings,
@@ -383,7 +378,6 @@ export default inject(({ auth, setup, common }) => {
     setIsLoadedWelcomePageSettings,
     greetingSettingsIsDefault,
     getGreetingSettingsIsDefault,
-    getSettings,
     initSettings,
     setIsLoaded,
     currentColorScheme,

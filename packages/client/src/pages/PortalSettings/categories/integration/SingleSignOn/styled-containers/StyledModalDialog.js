@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 import ModalDialog from "@docspace/components/modal-dialog";
-import { smallTablet } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 
 const StyledModalDialog = styled(ModalDialog)`
   .heading {
-    font-size: 21px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("21px")};
   }
 
   .generate {
@@ -22,7 +22,7 @@ const StyledModalDialog = styled(ModalDialog)`
       margin-bottom: 5px;
     }
 
-    @media ${smallTablet} {
+    @media ${mobile} {
       width: 100% !important;
     }
   }

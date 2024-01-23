@@ -1,14 +1,13 @@
-import styled, { css } from "styled-components";
-import RectangleLoader from "../RectangleLoader";
+import styled from "styled-components";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
-import { isMobile, isMobileOnly } from "react-device-detect";
 import { tablet, mobile } from "@docspace/components/utils/device";
 import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
 
 const StyledContainer = styled.div`
   margin: 0;
 
-  max-width: 211px;
+  max-width: 210px;
   padding: ${({ theme }) =>
     getCorrectFourValuesStyle("0 20px 0 0", theme.interfaceDirection)};
 
@@ -21,29 +20,11 @@ const StyledContainer = styled.div`
     box-sizing: border-box;
   }
 
-  ${isMobile &&
-  css`
-    max-width: ${(props) => (props.showText ? "240px" : "52px")};
-    width: ${(props) => (props.showText ? "240px" : "52px")};
-    padding: ${(props) => {
-      const padding = props.showText ? "0 16px 0 16px" : "10px 16px 10px 12px";
-      return getCorrectFourValuesStyle(padding, props.theme.interfaceDirection);
-    }};
-    box-sizing: border-box;
-  `}
-
   @media ${mobile} {
     width: 100%;
     padding: 0 16px;
     box-sizing: border-box;
   }
-
-  ${isMobileOnly &&
-  css`
-    width: 100%;
-    padding: 0 16px;
-    box-sizing: border-box;
-  `}
 `;
 
 const StyledBlock = styled.div`
@@ -62,17 +43,12 @@ const StyledBlock = styled.div`
     @media ${tablet} {
       ${(props) => (props.showText ? "width: 200px" : "width: 20px")};
     }
-
-    ${isMobile &&
-    css`
-      ${(props) => (props.showText ? "width: 200px" : "width: 20px")};
-    `}
   }
 `;
 
-const StyledRectangleLoader = styled(RectangleLoader)`
+const StyledRectangleLoader = styled(RectangleSkeleton)`
   height: 20px;
-  width: 216px;
+  width: 210px;
   padding: 0 0 16px;
 
   @media ${tablet} {
@@ -80,22 +56,10 @@ const StyledRectangleLoader = styled(RectangleLoader)`
     padding: 0 0 24px;
   }
 
-  ${isMobile &&
-  css`
-    height: 20px;
-    padding: 0 0 24px;
-  `}
-
   @media ${mobile} {
     width: 100%;
     padding: 0 0 24px;
   }
-
-  ${isMobileOnly &&
-  css`
-    width: 100% !important;
-    padding: 0 0 24px !important;
-  `}
 `;
 
 export { StyledBlock, StyledContainer, StyledRectangleLoader };

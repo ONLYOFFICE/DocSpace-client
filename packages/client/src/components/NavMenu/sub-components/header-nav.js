@@ -5,7 +5,7 @@ import ProfileActions from "./profile-actions";
 import { useTranslation } from "react-i18next";
 import { mobile, tablet } from "@docspace/components/utils/device";
 import { inject, observer } from "mobx-react";
-import { isMobile, isMobileOnly } from "react-device-detect";
+
 import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
 
 const StyledNav = styled.nav`
@@ -23,37 +23,19 @@ const StyledNav = styled.nav`
   z-index: 180 !important;
 
   & > div {
-    margin: ${({ theme }) =>
-      getCorrectFourValuesStyle("0 0 0 16px", theme.interfaceDirection)};
+    margin: 0 16px;
     padding: 0;
     min-width: 24px;
   }
 
   @media ${tablet} {
-    padding: 0 16px;
+    padding: ${({ theme }) =>
+      getCorrectFourValuesStyle("0 0px 0 16px", theme.interfaceDirection)};
   }
   .icon-profile-menu {
     cursor: pointer;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
-
-  ${isMobile &&
-  css`
-    padding: 0 16px 0 16px !important;
-  `}
-
-  @media ${mobile} {
-    padding: 0 16px 0 16px;
-  }
-
-  ${isMobileOnly &&
-  css`
-    padding: ${({ theme }) =>
-      getCorrectFourValuesStyle(
-        "0 0 0 16px",
-        theme.interfaceDirection
-      )} !important;
-  `}
 `;
 const HeaderNav = ({
   user,
@@ -61,13 +43,14 @@ const HeaderNav = ({
   userIsUpdate,
   setUserIsUpdate,
   getActions,
+  hideProfileMenu,
 }) => {
   const { t } = useTranslation(["NavMenu", "Common", "About"]);
   const userActions = getActions(t);
 
   return (
     <StyledNav className="profileMenuIcon hidingHeader">
-      {isAuthenticated && user ? (
+      {isAuthenticated && user && !hideProfileMenu ? (
         <>
           <ProfileActions
             userActions={userActions}

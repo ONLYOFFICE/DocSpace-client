@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 import moment from "moment";
 import styled, { css } from "styled-components";
 
-import TextInput from "@docspace/components/text-input";
+import TextInput from "../text-input";
 import Base from "../themes/base";
 
 const TimeInput = styled.div`
   width: 57px;
   height: 32px;
   box-sizing: border-box;
-  padding: 6px 8px;
+  padding: 0px 8px;
   direction: ltr;
 
   border: 1px solid #d0d5da;
@@ -19,6 +19,7 @@ const TimeInput = styled.div`
   transition: "all 0.2s ease 0s";
 
   display: flex;
+  align-items: center;
 
   border-color: ${(props) => (props.hasError ? "#f21c0e" : "#d0d5da")};
 
@@ -40,6 +41,13 @@ const TimeInput = styled.div`
 
   input:last-of-type {
     text-align: end;
+  }
+
+  input[type="search"]::-webkit-search-decoration,
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-results-button,
+  input[type="search"]::-webkit-search-results-decoration {
+    -webkit-appearance: none;
   }
 `;
 
@@ -193,6 +201,8 @@ const TimePicker = ({
 
   const focusInput = () => setIsInputFocused(true);
 
+  const preventDefaultContext = (e) => e.preventDefault();
+
   return (
     <TimeInput
       onClick={focusHoursInput}
@@ -210,6 +220,10 @@ const TimePicker = ({
         onBlur={onHoursBlur}
         tabIndex={tabIndex}
         onFocus={focusInput}
+        type="search"
+        onContextMenu={preventDefaultContext}
+        autocomplete="off"
+        inputmode="numeric"
       />
       :
       <TextInput
@@ -221,6 +235,10 @@ const TimePicker = ({
         onClick={focusMinutesInput}
         onBlur={onMinutesBlur}
         onFocus={focusInput}
+        type="search"
+        onContextMenu={preventDefaultContext}
+        autocomplete="off"
+        inputmode="numeric"
       />
     </TimeInput>
   );

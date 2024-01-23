@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Base from "../themes/base";
 import NoUserSelect from "../utils/commonStyles";
+import { tablet } from "../utils/device";
 
 const BannerWrapper = styled.div`
   max-width: 185px;
@@ -9,7 +10,7 @@ const BannerWrapper = styled.div`
   padding: 15px;
   margin: 20px 0px 50px 0px;
 
-  @media screen and (max-width: 1024px) {
+  @media screen and ${tablet} {
     max-width: inherit;
   }
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation, Trans } from "react-i18next";
@@ -12,8 +12,9 @@ import { size } from "@docspace/components/utils/device";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import isEqual from "lodash/isEqual";
-import { isMobile } from "react-device-detect";
+
 import AdmMsgLoader from "../sub-components/loaders/admmsg-loader";
+import { DeviceType } from "@docspace/common/constants";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -37,6 +38,7 @@ const AdminMessage = (props) => {
     isInit,
     currentColorScheme,
     administratorMessageSettingsUrl,
+    currentDeviceType,
   } = props;
   const [type, setType] = useState("");
   const [showReminder, setShowReminder] = useState(false);
@@ -63,7 +65,7 @@ const AdminMessage = (props) => {
   useEffect(() => {
     checkWidth();
 
-    if (!isInit) initSettings().then(() => setIsLoading(true));
+    if (!isInit) initSettings("admin-message").then(() => setIsLoading(true));
     else setIsLoading(true);
 
     window.addEventListener("resize", checkWidth);
@@ -73,7 +75,7 @@ const AdminMessage = (props) => {
   useEffect(() => {
     if (!isInit) return;
     getSettings();
-  }, [isLoading]);
+  }, [isLoading, isInit]);
 
   useEffect(() => {
     if (!isLoading) return;
@@ -91,7 +93,7 @@ const AdminMessage = (props) => {
   }, [type]);
 
   const checkWidth = () => {
-    window.innerWidth > size.smallTablet &&
+    window.innerWidth > size.mobile &&
       location.pathname.includes("admin-message") &&
       navigate("/portal-settings/security/access-portal");
   };
@@ -118,7 +120,7 @@ const AdminMessage = (props) => {
     setShowReminder(false);
   };
 
-  if (isMobile && !isInit && !isLoading) {
+  if (currentDeviceType !== DeviceType.desktop && !isInit && !isLoading) {
     return <AdmMsgLoader />;
   }
 
@@ -127,7 +129,7 @@ const AdminMessage = (props) => {
       <LearnMoreWrapper>
         <Text>{t("AdminsMessageSettingDescription")}</Text>
         <Text fontSize="13px" fontWeight="400" className="learn-subtitle">
-          <Trans t={t} i18nKey="AdminsMessageSave" />
+          <Trans t={t} i18nKey="SaveToApply" />
         </Text>
 
         <Link
@@ -169,7 +171,7 @@ const AdminMessage = (props) => {
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
-        reminderTest={t("YouHaveUnsavedChanges")}
+        reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         displaySettings={true}
@@ -187,6 +189,7 @@ export default inject(({ auth, setup }) => {
     setMessageSettings,
     currentColorScheme,
     administratorMessageSettingsUrl,
+    currentDeviceType,
   } = auth.settingsStore;
   const { initSettings, isInit } = setup;
 
@@ -197,5 +200,6 @@ export default inject(({ auth, setup }) => {
     isInit,
     currentColorScheme,
     administratorMessageSettingsUrl,
+    currentDeviceType,
   };
 })(withTranslation(["Settings", "Common"])(observer(AdminMessage)));

@@ -5,8 +5,12 @@
   "ConnectSocialNetworks": "Conectați-vă reţelele sociale",
   "DarkTheme": "Tema întunecată",
   "DescriptionForSecurity": "Schimbaţi-vă parola pentru mai multă siguranţă.",
+  "DesktopTheme": "Sincronizarea cu parametrii editorului pentru desktop",
+  "DesktopThemeDescription": "Comutați automat între tema luminoasă şi întunecată în funcție de tema actuală a editorului pentru desktop.",
   "EditPhoto": "Editare foto",
   "EmailNotVerified": "Adresa de email nu a fost verificată",
+  "ErrorAccountAlreadyUse": "Contul asociat este deja utilizat de un alt utilizator",
+  "FileManagement": "Gestionarea fișierelor",
   "InterfaceTheme": "Tema interfeței",
   "LightTheme": "Tema luminoasă",
   "LogoutActiveConnection": "Deconectează conexiunea activă",
@@ -24,6 +28,5 @@
   "SuccessLogout": "Conexiunea activă a fost deconectată: {{platform}}, {{browser}}",
   "SystemTheme": "Utilizare temă de sistem",
   "SystemThemeDescription": "Comutați automat între tema luminoasă şi întunecată în funcţie de setări sistem.",
-  "TfaLoginSettings": "Setări de conexiune",
   "TwoFactorDescription": "Autentificarea cu doi factori prin aplicația de generare coduri a fost activată pentru toți utilizatorii de către administratorul."
 }

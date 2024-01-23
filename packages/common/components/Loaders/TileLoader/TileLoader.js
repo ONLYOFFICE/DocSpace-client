@@ -5,7 +5,7 @@ import {
   StyledBottom,
   StyledMainContent,
 } from "./StyledTileLoader";
-import RectangleLoader from "../RectangleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const TileLoader = ({
   isFolder,
@@ -22,7 +22,7 @@ const TileLoader = ({
   return isFolder ? (
     <StyledTile {...rest} isFolder>
       <StyledBottom className="bottom-content" isFolder>
-        <RectangleLoader
+        <RectangleSkeleton
           className="first-content"
           title={title}
           width="100%"
@@ -34,7 +34,7 @@ const TileLoader = ({
           speed={speed}
           animate={true}
         />
-        <RectangleLoader
+        <RectangleSkeleton
           className="second-content"
           title={title}
           height="22px"
@@ -46,7 +46,7 @@ const TileLoader = ({
           speed={speed}
           animate={true}
         />
-        <RectangleLoader
+        <RectangleSkeleton
           className="option-button"
           title={title}
           height="16px"
@@ -64,7 +64,7 @@ const TileLoader = ({
   ) : (
     <StyledTile {...rest}>
       <StyledMainContent>
-        <RectangleLoader
+        <RectangleSkeleton
           className="main-content"
           title={title}
           height="156px"
@@ -79,7 +79,7 @@ const TileLoader = ({
       </StyledMainContent>
 
       <StyledBottom className="bottom-content">
-        <RectangleLoader
+        <RectangleSkeleton
           className="first-content"
           title={title}
           width="100%"
@@ -91,7 +91,7 @@ const TileLoader = ({
           speed={speed}
           animate={true}
         />
-        <RectangleLoader
+        <RectangleSkeleton
           className="second-content"
           title={title}
           height="22px"
@@ -103,7 +103,7 @@ const TileLoader = ({
           speed={speed}
           animate={true}
         />
-        <RectangleLoader
+        <RectangleSkeleton
           className="option-button"
           title={title}
           height="16px"

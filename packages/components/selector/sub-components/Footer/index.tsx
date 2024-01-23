@@ -36,6 +36,7 @@ const Footer = React.memo(
     setNewFooterInputValue,
     isFooterCheckboxChecked,
     setIsFooterCheckboxChecked,
+    setIsChecked,
     acceptButtonId,
     cancelButtonId,
   }: FooterProps) => {
@@ -50,6 +51,7 @@ const Footer = React.memo(
     };
 
     const onChangeCheckbox = () => {
+      setIsChecked && setIsChecked((value: boolean) => !value);
       setIsFooterCheckboxChecked &&
         setIsFooterCheckboxChecked((value: boolean) => !value);
     };
@@ -85,7 +87,7 @@ const Footer = React.memo(
           </StyledNewNameContainer>
         )}
 
-        {withFooterCheckbox && (
+        {withFooterCheckbox && !withFooterInput && (
           <Checkbox
             label={footerCheckboxLabel}
             isChecked={isFooterCheckboxChecked}

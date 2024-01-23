@@ -32,11 +32,19 @@ export const ValidationResult = Object.freeze({
   Ok: 0,
   Invalid: 1,
   Expired: 2,
+  TariffLimit: 3,
+});
+/**
+ * Enum for result of validation public room keys.
+ * @readonly
+ */
+export const ValidationStatus = Object.freeze({
+  Ok: 0,
+  Invalid: 1,
+  Expired: 2,
   Password: 3,
   InvalidPassword: 4,
-  TariffLimit: 5,
 });
-
 export const GUID_EMPTY = "00000000-0000-0000-0000-000000000000";
 export const ID_NO_GROUP_MANAGER = "4a515a15-d4d6-4b8e-828e-e0586f18f3a3";
 export const ADS_TIMEOUT = 300000; // 5 min
@@ -64,7 +72,7 @@ export const CategoryType = Object.freeze({
  * @readonly
  */
 export const TableVersions = Object.freeze({
-  Rooms: "1",
+  Rooms: "2",
   Files: "2",
   Accounts: "3",
   Trash: "4",
@@ -145,4 +153,10 @@ export const SSO_LABEL = "SSO";
 export const ARTICLE_ALERTS = Object.freeze({
   TeamTraining: "TeamTraining",
   SubmitToFormGallery: "SubmitToFormGallery",
+});
+
+export const AuthenticatedAction = Object.freeze({
+  None: 0,
+  Logout: 1,
+  Redirect: 2,
 });

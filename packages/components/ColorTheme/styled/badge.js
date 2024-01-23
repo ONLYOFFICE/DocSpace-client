@@ -1,10 +1,6 @@
 import styled, { css } from "styled-components";
-import {
-  StyledBadge,
-  StyledInner,
-  StyledText,
-} from "@docspace/components/badge/styled-badge";
-import Base from "@docspace/components/themes/base";
+import { StyledBadge, StyledInner, StyledText } from "../../badge/styled-badge";
+import Base from "../../themes/base";
 
 const getDefaultStyles = ({
   $currentColorScheme,
@@ -14,6 +10,7 @@ const getDefaultStyles = ({
   theme,
   isPaidBadge,
   isMutedBadge,
+  noHover,
 }) =>
   $currentColorScheme &&
   !isVersionBadge &&
@@ -34,20 +31,26 @@ const getDefaultStyles = ({
         : $currentColorScheme.main.accent};
 
       &:hover {
-        background-color: ${isMutedBadge
-          ? theme.badge.disableBackgroundColor
-          : backgroundColor
-          ? backgroundColor
-          : $currentColorScheme.main.accent};
+        ${!noHover &&
+        css`
+          background-color: ${isMutedBadge
+            ? theme.badge.disableBackgroundColor
+            : backgroundColor
+            ? backgroundColor
+            : $currentColorScheme.main.accent};
+        `}
       }
     }
 
     &:hover {
-      border-color: ${isMutedBadge
-        ? theme.badge.disableBackgroundColor
-        : backgroundColor
-        ? backgroundColor
-        : $currentColorScheme.main.accent};
+      ${!noHover &&
+      css`
+        border-color: ${isMutedBadge
+          ? theme.badge.disableBackgroundColor
+          : backgroundColor
+          ? backgroundColor
+          : $currentColorScheme.main.accent};
+      `}
     }
   `;
 

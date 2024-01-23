@@ -13,8 +13,7 @@ class AxiosClient {
 
   initCSR = () => {
     this.isSSR = false;
-    const origin =
-      window.DocSpaceConfig?.api?.origin || apiOrigin || window.location.origin;
+    const origin = window.DocSpaceConfig?.api?.origin || apiOrigin || window.location.origin;
     const proxy = window.DocSpaceConfig?.proxy?.url || proxyURL;
     const prefix = window.DocSpaceConfig?.api?.prefix || apiPrefix;
 
@@ -26,20 +25,20 @@ class AxiosClient {
       };
     }
 
+    const shareIndex = location.pathname.indexOf("share");
+    const sharedIndex = location.pathname.indexOf("shared");
+
     const lastKeySymbol = location.search.indexOf("&");
-    const lastIndex =
-      lastKeySymbol === -1 ? location.search.length : lastKeySymbol;
-    const publicRoomKey = location.search.substring(5, lastIndex);
+    const lastIndex = lastKeySymbol === -1 ? location.search.length : lastKeySymbol;
+    const publicRoomKey =
+      shareIndex > -1 && sharedIndex === -1 ? location.search.substring(5, lastIndex) : null;
 
     if (publicRoomKey) {
       headers = { ...headers, "Request-Token": publicRoomKey };
     }
 
     const apiBaseURL = combineUrl(origin, proxy, prefix);
-    const paymentsURL = combineUrl(
-      proxy,
-      "/portal-settings/payments/portal-payments"
-    );
+    const paymentsURL = combineUrl(proxy, "/portal-settings/payments/portal-payments");
     this.paymentsURL = paymentsURL;
 
     const apxiosConfig = {
@@ -111,7 +110,7 @@ class AxiosClient {
     }
   };
 
-  request = (options) => {
+  request = (options, skipRedirect = false) => {
     const onSuccess = (response) => {
       const error = this.getResponseError(response);
       if (error) throw new Error(error);
@@ -122,6 +121,9 @@ class AxiosClient {
         return { total: +response.data.total, items: response.data.response };
 
       if (response.request.responseType === "text") return response.data;
+
+      if (options.baseURL === "/apisystem" && !response.data.response)
+        return response.data;
 
       return response.data.response;
     };
@@ -164,15 +166,18 @@ class AxiosClient {
             const pathname = window.location.pathname;
             const isArchived = pathname.indexOf("/rooms/archived") !== -1;
 
-            const isRooms =
-              pathname.indexOf("/rooms/shared") !== -1 || isArchived;
+            const isRooms = pathname.indexOf("/rooms/shared") !== -1 || isArchived;
 
-            if (isRooms) {
+            if (isRooms && !skipRedirect) {
               setTimeout(() => {
                 window.DocSpace.navigate(isArchived ? "/archived" : "/");
               }, 1000);
             }
 
+            break;
+
+          case 429:
+            error = { ...error, message: "Request limit exceeded" };
             break;
           default:
             break;

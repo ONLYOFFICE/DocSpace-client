@@ -5,7 +5,7 @@ import { CSSTransition } from "react-transition-group";
 import { ReactSVG } from "react-svg";
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import Scrollbar from "../../scrollbar";
-import Loaders from "@docspace/common/components/Loaders";
+import ContextMenuSkeleton from "../../skeletons/context-menu";
 
 const MobileSubMenu = (props) => {
   const { onLeafClick, root, resetMenu, onLoad } = props;
@@ -195,7 +195,7 @@ const MobileSubMenu = (props) => {
         height + 61 > viewport.height - 64 ? viewport.height - 125 : height + 5;
 
       return (
-        <Scrollbar style={{ height: listHeight }} stype="mediumBlack">
+        <Scrollbar style={{ height: listHeight }}>
           {model.map((item, index) => {
             if (item.disabled) return null;
             return renderItem(item, index);
@@ -219,7 +219,7 @@ const MobileSubMenu = (props) => {
       unmountOnExit={true}
     >
       <ul ref={subMenuRef} className={`${className} not-selectable`}>
-        {submenu ? renderMenu(submenu) : <Loaders.ContextMenuLoader />}
+        {submenu ? renderMenu(submenu) : <ContextMenuSkeleton />}
       </ul>
     </CSSTransition>
   );

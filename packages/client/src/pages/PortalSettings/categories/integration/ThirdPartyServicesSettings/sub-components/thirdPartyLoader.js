@@ -1,6 +1,5 @@
 import styled from "styled-components";
-
-import Loaders from "@docspace/common/components/Loaders";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 const StyledLoader = styled.div`
   max-width: 700px;
@@ -15,8 +14,12 @@ const ThirdPartyLoader = () => {
 
   return (
     <StyledLoader>
-      {rectangles.map((_) => (
-        <Loaders.Rectangle height="120px" borderRadius="6px" />
+      {rectangles.map((_, index) => (
+        <RectangleSkeleton
+          key={`third-party-loader-${index}`}
+          height="120px"
+          borderRadius="6px"
+        />
       ))}
     </StyledLoader>
   );

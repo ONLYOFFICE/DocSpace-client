@@ -1,7 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import RectangleLoader from "@docspace/common/components/Loaders/RectangleLoader";
+import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
 
 import Box from "@docspace/components/box";
 import Text from "@docspace/components/text";
@@ -21,9 +21,9 @@ const PropsContext = React.createContext({});
 
 const ComponentPure = ({
   component,
-  pluginId,
+
   pluginName,
-  pluginSystem,
+
   setSettingsPluginDialogVisible,
   setCurrentSettingsDialogPlugin,
   updatePluginStatus,
@@ -36,6 +36,7 @@ const ComponentPure = ({
   updateProfileMenuItems,
   updateEventListenerItems,
   updateFileItems,
+  updatePlugin,
 }) => {
   const [elementProps, setElementProps] = React.useState(component.props);
 
@@ -71,9 +72,7 @@ const ComponentPure = ({
             <PluginComponent
               key={`box-${index}-${item.component}`}
               component={item}
-              pluginId={pluginId}
               pluginName={pluginName}
-              pluginSystem={pluginSystem}
             />
           )
         );
@@ -97,9 +96,7 @@ const ComponentPure = ({
             message,
             setElementProps,
 
-            pluginId,
             pluginName,
-            pluginSystem,
 
             setSettingsPluginDialogVisible,
             setCurrentSettingsDialogPlugin,
@@ -128,9 +125,7 @@ const ComponentPure = ({
             message,
             setElementProps,
 
-            pluginId,
             pluginName,
-            pluginSystem,
 
             setSettingsPluginDialogVisible,
             setCurrentSettingsDialogPlugin,
@@ -159,9 +154,7 @@ const ComponentPure = ({
             message,
             setElementProps,
 
-            pluginId,
             pluginName,
-            pluginSystem,
 
             setSettingsPluginDialogVisible,
             setCurrentSettingsDialogPlugin,
@@ -190,9 +183,7 @@ const ComponentPure = ({
             message,
             setElementProps,
 
-            pluginId,
             pluginName,
-            pluginSystem,
 
             setSettingsPluginDialogVisible,
             setCurrentSettingsDialogPlugin,
@@ -240,9 +231,7 @@ const ComponentPure = ({
             message,
             setElementProps,
 
-            pluginId,
             pluginName,
-            pluginSystem,
 
             setSettingsPluginDialogVisible,
             setCurrentSettingsDialogPlugin,
@@ -256,11 +245,13 @@ const ComponentPure = ({
             updateMainButtonItems,
             updateProfileMenuItems,
             updateEventListenerItems,
-            updateFileItems
+            updateFileItems,
+
+            updatePlugin
           );
 
           setIsRequestRunning && setIsRequestRunning(false);
-
+          setModalRequestRunning && setModalRequestRunning(false);
           if (isSaveButton) {
             setSettingsModalRequestRunning &&
               setSettingsModalRequestRunning(false);
@@ -272,15 +263,15 @@ const ComponentPure = ({
           ? isSaveButton
             ? modalRequestRunning
             : isRequestRunning
-            ? isRequestRunning
-            : rest.isLoading
+              ? isRequestRunning
+              : rest.isLoading
           : rest.isLoading;
         const isDisabled = disableWhileRequestRunning
           ? isSaveButton
             ? modalRequestRunning
             : isRequestRunning
-            ? isRequestRunning
-            : rest.isDisabled
+              ? isRequestRunning
+              : rest.isDisabled
           : rest.isDisabled;
 
         return (
@@ -301,9 +292,7 @@ const ComponentPure = ({
             message,
             setElementProps,
 
-            pluginId,
             pluginName,
-            pluginSystem,
 
             setSettingsPluginDialogVisible,
             setCurrentSettingsDialogPlugin,
@@ -326,7 +315,10 @@ const ComponentPure = ({
 
       case PluginComponents.iFrame: {
         return (
-          <iframe {...elementProps} style={{ minHeight: "100%" }}></iframe>
+          <iframe
+            {...elementProps}
+            style={{ minHeight: "100%", border: "none", ...elementProps.style }}
+          ></iframe>
         );
       }
 
@@ -335,7 +327,7 @@ const ComponentPure = ({
       }
 
       case PluginComponents.skeleton: {
-        return <RectangleLoader {...elementProps} />;
+        return <RectangleSkeleton {...elementProps} />;
       }
     }
   };
@@ -377,9 +369,7 @@ export const PluginComponent = inject(({ pluginStore }) => {
 })(observer(ComponentPure));
 
 const WrappedComponent = ({
-  pluginId,
   pluginName,
-  pluginSystem,
 
   component,
 
@@ -392,15 +382,18 @@ const WrappedComponent = ({
 
   const [isRequestRunning, setIsRequestRunning] = React.useState(false);
 
-  const updatePropsContext = (name, props) => {
-    if (saveButton && name === saveButton.contextName) {
-      setSaveButtonProps && setSaveButtonProps((val) => ({ ...val, props }));
-    } else {
-      const newProps = { ...contextProps };
-      newProps[name] = props;
+  const updatePropsContext = (newContextProps) => {
+    const newProps = { ...contextProps };
 
-      setContextProps(newProps);
-    }
+    newContextProps.forEach(({ name, props }) => {
+      if (saveButton && name === saveButton.contextName) {
+        setSaveButtonProps && setSaveButtonProps((val) => ({ ...val, props }));
+      } else {
+        newProps[name] = props;
+      }
+    });
+
+    setContextProps(newProps);
   };
 
   return (
@@ -413,12 +406,7 @@ const WrappedComponent = ({
         setModalRequestRunning,
       }}
     >
-      <PluginComponent
-        component={component}
-        pluginId={pluginId}
-        pluginName={pluginName}
-        pluginSystem={pluginSystem}
-      />
+      <PluginComponent component={component} pluginName={pluginName} />
     </PropsContext.Provider>
   );
 };

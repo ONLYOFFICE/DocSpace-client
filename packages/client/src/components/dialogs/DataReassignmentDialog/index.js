@@ -48,6 +48,8 @@ const DataReassignmentDialog = ({
   setIsDeletingUserWithReassignment,
   setDataReassignmentDeleteProfile,
   dataReassignmentUrl,
+  needResetUserSelection,
+  setSelected
 }) => {
   const [selectorVisible, setSelectorVisible] = useState(false);
   const defaultSelectedUser = isDeletingUserWithReassignment
@@ -146,6 +148,9 @@ const DataReassignmentDialog = ({
       .then(() => checkProgress())
       .catch((error) => {
         toastr.error(error?.response?.data?.error?.message);
+      })
+      .finally(() => {
+        needResetUserSelection && setSelected("close");
       });
   };
 
@@ -250,6 +255,7 @@ export default inject(({ auth, peopleStore, setup }) => {
     setIsDeletingUserWithReassignment,
   } = peopleStore.dialogStore;
   const { currentColorScheme, dataReassignmentUrl } = auth.settingsStore;
+  const {setSelected} = peopleStore.selectionStore;
   const {
     dataReassignment,
     dataReassignmentProgress,
@@ -258,7 +264,7 @@ export default inject(({ auth, peopleStore, setup }) => {
 
   const { user: currentUser } = peopleStore.authStore.userStore;
 
-  const { getUsersList } = peopleStore.usersStore;
+  const { getUsersList, needResetUserSelection } = peopleStore.usersStore;
 
   return {
     setDataReassignmentDialogVisible,
@@ -274,6 +280,8 @@ export default inject(({ auth, peopleStore, setup }) => {
     isDeletingUserWithReassignment,
     setIsDeletingUserWithReassignment,
     dataReassignmentUrl,
+    needResetUserSelection,
+    setSelected
   };
 })(
   observer(

@@ -1,9 +1,9 @@
 import styled, { css } from "styled-components";
-import { hugeMobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 
 export const StyledFooter = styled.div`
   .session-logout {
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     font-weight: 600;
   }
   .icon-button {
@@ -25,7 +25,7 @@ export const Table = styled.table`
 `;
 
 export const TableHead = styled.thead`
-  font-size: 12px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
   line-height: 16px;
 `;
 
@@ -69,7 +69,7 @@ export const TableHeaderCell = styled.th`
 `;
 
 export const TableBody = styled.tbody`
-  font-size: 11px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("11px")};
 `;
 
 export const TableDataCell = styled.td`
@@ -103,7 +103,7 @@ export const TableDataCell = styled.td`
     }
   }
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     .session-browser {
       position: relative;
       top: 4px;
@@ -120,7 +120,7 @@ export const TableDataCell = styled.td`
   }
 
   :first-child {
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     color: ${(props) => props.theme.activeSessions.color};
     span {
       color: #a3a9ae;
@@ -137,17 +137,44 @@ export const TableDataCell = styled.td`
 
   .session-date {
     position: relative;
-    margin-left: 0 !important;
-    margin-right: 8px;
-    :after {
-      content: "";
-      position: absolute;
-      top: 4px;
-      right: -8px;
-      width: 1px;
-      height: 12px;
-      background: ${(props) => props.theme.activeSessions.sortHeaderColor};
-    }
+
+    ${(props) =>
+      props.theme.interfaceDirection === "ltr"
+        ? css`
+            margin-right: 8px;
+            margin-left: 0 !important;
+            :after {
+              content: "";
+              position: absolute;
+              top: 4px;
+              right: -8px;
+              width: 1px;
+              height: 12px;
+              background: ${(props) =>
+                props.theme.activeSessions.sortHeaderColor};
+            }
+          `
+        : css`
+            margin-left: 8px;
+            margin-right: 0 !important;
+          `}
+  }
+
+  .session-ip {
+    position: relative;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl" &&
+      css`
+        :after {
+          content: "";
+          position: absolute;
+          top: 4px;
+          right: -8px;
+          width: 1px;
+          height: 12px;
+          background: ${(props) => props.theme.activeSessions.sortHeaderColor};
+        }
+      `}
   }
 
   :last-child {

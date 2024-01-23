@@ -44,7 +44,7 @@ export const getPDFContextModel = (
       label: t("Common:EditButton"),
       icon: AccessEditReactSvgUrl,
       onClick: () => funcs.onClickLinkEdit(item),
-      disabled: !item.security.Edit,
+      disabled: !item.viewAccessibility.WebEdit,
     },
     {
       id: "option_preview",
@@ -62,7 +62,7 @@ export const getPDFContextModel = (
     {
       id: "option_link-for-room-members",
       key: "link-for-room-members",
-      label: t("LinkForRoomMembers"),
+      label: t("Files:CopyLink"),
       icon: InvitationLinkReactSvgUrl,
       onClick: () => funcs.onCopyLink(item, t),
       disabled: false,

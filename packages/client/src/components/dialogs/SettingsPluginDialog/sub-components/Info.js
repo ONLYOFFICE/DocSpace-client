@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-import { getCookie } from "@docspace/common/utils";
+import { getCookie } from "@docspace/components/utils/cookie";
 import { LANGUAGE } from "@docspace/common/constants";
 
 import Text from "@docspace/components/text";
@@ -45,7 +45,7 @@ const StyledInfo = styled.div`
   gap: 8px 24px;
 `;
 
-const Info = ({ t, plugin, withDelete }) => {
+const Info = ({ t, plugin, withDelete, withSeparator }) => {
   const locale = getCookie(LANGUAGE) || "en";
   const uploadDate = plugin.createOn && getCorrectDate(locale, plugin.createOn);
 
@@ -56,7 +56,7 @@ const Info = ({ t, plugin, withDelete }) => {
 
   return (
     <StyledContainer withDelete={withDelete}>
-      <StyledSeparator />
+      {withSeparator && <StyledSeparator />}
       <Text fontSize={"14px"} fontWeight={600} lineHeight={"16px"} noSelect>
         {t("Metadata")}
       </Text>

@@ -2,14 +2,19 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
-import { isMobile, isTablet, isMobileOnly } from "react-device-detect";
+import {
+  isMobile,
+  isTablet,
+  mobile,
+  tablet,
+} from "@docspace/components/utils/device";
 
 import Link from "@docspace/components/link";
 import Text from "@docspace/components/text";
 import RowContent from "@docspace/components/row-content";
 
 import withContent from "../../../../../HOCs/withContent";
-import withBadges from "../../../../../HOCs/withBadges";
+
 import { Base } from "@docspace/components/themes";
 import { RoomsTypeTranslations } from "@docspace/common/constants";
 import { desktop } from "@docspace/components/utils/device";
@@ -21,7 +26,7 @@ const SimpleFilesRowContent = styled(RowContent)`
     width: 100%;
     max-width: min-content;
     min-width: inherit;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-left: 0px;
@@ -48,7 +53,7 @@ const SimpleFilesRowContent = styled(RowContent)`
 
   .badge-version {
     width: max-content;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin: -2px -2px -2px 6px;
@@ -62,62 +67,8 @@ const SimpleFilesRowContent = styled(RowContent)`
     width: max-content;
   }
 
-  ${props =>
-    ((props.sectionWidth <= 1024 && props.sectionWidth > 500) || isTablet) &&
-    css`
-      .row-main-container-wrapper {
-        display: flex;
-        justify-content: space-between;
-        max-width: inherit;
-      }
-
-      .badges {
-        flex-direction: row-reverse;
-      }
-
-      .tablet-badge {
-        margin-top: 5px;
-      }
-
-      .tablet-edit,
-      .can-convert {
-        margin-top: 6px;
-        ${props =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin-left: 24px !important;
-              `
-            : css`
-                margin-right: 24px !important;
-              `}
-      }
-
-      .badge-version {
-        ${props =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin-left: 22px;
-              `
-            : css`
-                margin-right: 22px;
-              `}
-      }
-
-      .new-items {
-        min-width: 16px;
-        ${props =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin: 5px 0 0 24px;
-              `
-            : css`
-                margin: 5px 24px 0 0;
-              `}
-      }
-    `}
-
   .row-content-link {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             padding: 12px 0px 0px 12px;
@@ -125,7 +76,84 @@ const SimpleFilesRowContent = styled(RowContent)`
         : css`
             padding: 12px 12px 0px 0px;
           `}
-    margin-top: -12px;
+    margin-top: ${(props) =>
+      props.theme.interfaceDirection === "rtl" ? "-14px" : "-12px"}
+  }
+
+  @media ${tablet} {
+    .row-main-container-wrapper {
+      display: flex;
+      justify-content: space-between;
+      max-width: inherit;
+    }
+
+    .badges {
+      flex-direction: row-reverse;
+    }
+
+    .tablet-badge {
+      margin-top: 5px;
+    }
+
+    .tablet-edit,
+    .can-convert {
+      margin-top: 6px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-left: 24px;
+            `
+          : css`
+              margin-right: 24px;
+            `}
+    }
+
+    .badge-version {
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-left: 22px;
+            `
+          : css`
+              margin-right: 22px;
+            `}
+    }
+
+    .new-items {
+      min-width: 16px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin: 5px 0 0 24px;
+            `
+          : css`
+              margin: 5px 24px 0 0;
+            `}
+    }
+  }
+
+  @media ${mobile} {
+    .row-main-container-wrapper {
+      justify-content: flex-start;
+    }
+
+    .additional-badges {
+      margin-top: 0;
+    }
+
+    .tablet-edit,
+    .new-items,
+    .tablet-badge {
+      margin: 0;
+    }
+
+    .can-convert {
+      margin: 0 1px;
+    }
+
+    .row-content-link {
+      padding: 12px 0px 0px 0px;
+    }
   }
 `;
 
@@ -163,7 +191,7 @@ const FilesRowContent = ({
   const contentComponent = () => {
     switch (filterSortBy) {
       case SortByFieldName.Size:
-        if (!contentLength) return "—";
+        if (!contentLength) return "";
         return contentLength;
 
       case SortByFieldName.CreationDate:
@@ -176,8 +204,8 @@ const FilesRowContent = ({
         return getFileTypeName(fileType);
 
       case SortByFieldName.Tags:
-        if (tags?.length === 0) return "—";
-        return tags?.map(elem => {
+        if (tags?.length === 0) return "";
+        return tags?.map((elem) => {
           return elem;
         });
 
@@ -195,9 +223,10 @@ const FilesRowContent = ({
     <>
       <SimpleFilesRowContent
         sectionWidth={sectionWidth}
-        isMobile={isMobile}
+        isMobile={!isTablet()}
         isFile={fileExst || contentLength}
-        sideColor={theme.filesSection.rowView.sideColor}>
+        sideColor={theme.filesSection.rowView.sideColor}
+      >
         <Link
           className="row-content-link"
           containerWidth="55%"
@@ -207,7 +236,9 @@ const FilesRowContent = ({
           fontSize="15px"
           target="_blank"
           {...linkStyles}
-          isTextOverflow={true}>
+          isTextOverflow={true}
+          dir="auto"
+        >
           {titleWithoutExt}
         </Link>
         <div className="badges">
@@ -220,7 +251,8 @@ const FilesRowContent = ({
           containerWidth="15%"
           fontSize="12px"
           fontWeight={400}
-          className="row_update-text">
+          className="row_update-text"
+        >
           {contentComponent()}
         </Text>
 
@@ -231,10 +263,11 @@ const FilesRowContent = ({
           className="row-content-text"
           fontSize="12px"
           fontWeight={400}
-          truncate={true}>
+          truncate={true}
+        >
           {isRooms
             ? t(RoomsTypeTranslations[item.roomType])
-            : !fileExst && !contentLength && !providerKey && !isMobileOnly
+            : !fileExst && !contentLength && !providerKey
             ? `${foldersCount} ${t("Translations:Folders")} | ${filesCount} ${t(
                 "Translations:Files"
               )}`
@@ -263,7 +296,7 @@ export default inject(({ auth, treeFoldersStore, filesStore }) => {
 })(
   observer(
     withTranslation(["Files", "Translations", "Notifications"])(
-      withContent(withBadges(FilesRowContent))
+      withContent(FilesRowContent)
     )
   )
 );

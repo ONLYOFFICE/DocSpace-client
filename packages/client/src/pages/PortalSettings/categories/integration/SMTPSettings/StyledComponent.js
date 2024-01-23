@@ -1,35 +1,29 @@
 import styled, { css } from "styled-components";
 
-import { hugeMobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 
 const StyledComponent = styled.div`
+  max-width: 700px;
+
   .smtp-settings_description {
-    margin-bottom: 20px;
+    margin-bottom: 8px;
     max-width: 700px;
-    margin-top: 4px;
+    color: ${(props) => props.theme.client.settings.common.descriptionColor};
+    line-height: 20px;
   }
 
   .smtp-settings_main-title {
-    display: flex;
-    div {
-      margin: auto 0;
-    }
-    .smtp-settings_help-button {
-      ${props =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: 4px;
-            `
-          : css`
-              margin-left: 4px;
-            `}
+    .link-learn-more {
+      display: inline-block;
+      margin-bottom: 20px;
+      font-weight: 600;
     }
   }
   .smtp-settings_title {
     display: flex;
 
     span {
-      ${props =>
+      ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
               margin-right: 2px;
@@ -43,6 +37,10 @@ const StyledComponent = styled.div`
     margin-bottom: 16px;
     margin-top: 4px;
     max-width: 350px;
+
+    @media ${mobile} {
+      max-width: 100%;
+    }
 
     .field-label-icon {
       display: none;
@@ -58,16 +56,21 @@ const StyledComponent = styled.div`
       position: static;
     }
   }
+
+  .smtp_settings_checkbox {
+    width: fit-content;
+  }
 `;
 
 const ButtonStyledComponent = styled.div`
   margin-top: 20px;
-  max-width: 404px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+
+  display: flex;
   gap: 8px;
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
+    display: grid;
+    gap: 8px;
     grid-template-columns: 1fr;
   }
 `;

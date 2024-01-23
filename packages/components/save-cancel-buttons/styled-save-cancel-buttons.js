@@ -1,7 +1,6 @@
 import styled, { css } from "styled-components";
 import Base from "../themes/base";
-import { tablet } from "../utils/device";
-import { isMobileOnly, isTablet } from "react-device-detect";
+import { mobileMore, mobile } from "../utils/device";
 
 const displaySettings = css`
   position: absolute;
@@ -9,14 +8,9 @@ const displaySettings = css`
   flex-direction: column-reverse;
   align-items: flex-start;
   border-top: ${(props) =>
-    props.hasScroll && !props.showReminder ? "1px solid #ECEEF1" : "none"};
-
-  ${(props) =>
-    !props.hasScroll &&
-    !isMobileOnly &&
-    (props.theme.interfaceDirection === "rtl"
-      ? "padding-right: 24px;"
-      : "padding-left: 24px;")}
+    props.hasScroll && !props.showReminder && !props.hideBorder
+      ? "1px solid #ECEEF1"
+      : "none"};
 
   ${(props) =>
     props.hasScroll &&
@@ -27,22 +21,20 @@ const displaySettings = css`
   .buttons-flex {
     display: flex;
     width: 100%;
-  }
 
-  .save-button,
-  .cancel-button {
-    width: 100%;
-    height: auto;
-    line-height: 16px;
-    padding-top: 11px;
-    padding-bottom: 11px;
+    box-sizing: border-box;
+
+    @media ${mobile} {
+      padding: 16px;
+      bottom: 0;
+    }
   }
 
   .unsaved-changes {
     position: absolute;
     padding-top: 16px;
     padding-bottom: 16px;
-    font-size: 12px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
     font-weight: 600;
     width: calc(100% - 32px);
     bottom: 56px;
@@ -50,6 +42,17 @@ const displaySettings = css`
       props.hasScroll
         ? props.theme.mainButtonMobile.buttonWrapper.background
         : "none"};
+
+    @media ${mobile} {
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              padding-right: 16px;
+            `
+          : css`
+              padding-left: 16px;
+            `}
+    }
   }
 
   ${(props) =>
@@ -80,18 +83,11 @@ const tabletButtons = css`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  padding: 0;
+
   border-top: none;
 
   .buttons-flex {
     width: auto;
-  }
-
-  .save-button,
-  .cancel-button {
-    width: auto;
-    padding-left: 28px;
-    padding-right: 28px;
   }
 
   .unsaved-changes {
@@ -115,20 +111,22 @@ const StyledSaveCancelButtons = styled.div`
   align-items: center;
   bottom: ${(props) => props.theme.saveCancelButtons.bottom};
   width: ${(props) => props.theme.saveCancelButtons.width};
+  background-color: ${({ theme }) => theme.backgroundColor};
 
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? `right: ${props.theme.saveCancelButtons.left};`
       : `left: ${props.theme.saveCancelButtons.left};`}
 
-  padding: ${(props) =>
-    props.displaySettings ? "16px" : props.theme.saveCancelButtons.padding};
-
   .save-button {
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
-        ? `margin-left: ${props.theme.saveCancelButtons.marginRight};`
-        : `margin-right: ${props.theme.saveCancelButtons.marginRight};`}
+        ? css`
+            margin-left: ${props.theme.saveCancelButtons.marginRight};
+          `
+        : css`
+            margin-right: ${props.theme.saveCancelButtons.marginRight};
+          `}
   }
   .unsaved-changes {
     color: ${(props) => props.theme.saveCancelButtons.unsavedColor};
@@ -136,36 +134,29 @@ const StyledSaveCancelButtons = styled.div`
 
   ${(props) => props.displaySettings && displaySettings};
 
-  @media (min-width: 600px), isTablet {
+  @media ${mobileMore} {
     ${(props) => props.displaySettings && tabletButtons}
-  }
-
-  @media ${tablet} {
     ${(props) =>
       !props.displaySettings &&
-      `
+      css`
         justify-content: flex-end;
         position: fixed;
 
         .unsaved-changes {
           display: none;
         }
-  `}
+      `}
   }
 
-  @media (min-width: 1024px) {
-    ${(props) =>
-      props.displaySettings &&
-      !isTablet &&
-      `
-      .save-button, .cancel-button {
-        font-size: 13px;
-        line-height: 20px;
-        padding-top: 5px;
-        padding-bottom: 5px;
-      }
-
-    `}
+  @media ${mobile} {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    ${({ showReminder }) =>
+      showReminder &&
+      css`
+        padding-top: 30px;
+      `}
   }
 `;
 StyledSaveCancelButtons.defaultProps = { theme: Base };

@@ -67,7 +67,7 @@ const StyledLink = styled.div`
   display: inline;
   .nav-menu-header_link {
     color: ${(props) => props.theme.header.linkColor};
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   }
 
   a {
@@ -131,11 +131,14 @@ const HeaderComponent = ({
   toggleArticleOpen,
   logoUrl,
 
+  customHeader,
   ...props
 }) => {
   const { t } = useTranslation("Common");
 
   const location = useLocation();
+
+  const isFormGallery = location.pathname.includes("/form-gallery");
 
   //const isNavAvailable = mainModules.length > 0;
 
@@ -202,15 +205,6 @@ const HeaderComponent = ({
     return () => window.removeEventListener("resize", onResize);
   });
 
-  const [isFormGallery, setIsFormGallery] = useState(
-    location.pathname.includes("/form-gallery")
-  );
-  useEffect(() => {
-    return () => {
-      setIsFormGallery(location.pathname.includes("/form-gallery"));
-    };
-  }, [location]);
-
   const logo = getLogoFromPath(
     !theme.isBase ? logoUrl?.path?.dark : logoUrl?.path?.light
   );
@@ -230,20 +224,24 @@ const HeaderComponent = ({
         {((isPersonal && location.pathname.includes("files")) ||
           (!isPersonal && currentProductId !== "home")) &&
           !isFormGallery && <HeaderCatalogBurger onClick={toggleArticleOpen} />}
-        <LinkWithoutRedirect className="header-logo-wrapper" to={defaultPage}>
-          {!isPersonal ? (
-            <img alt="logo" src={logo} className="header-logo-icon" />
-          ) : (
-            <img
-              alt="logo"
-              className="header-logo-icon"
-              src={combineUrl(
-                window.DocSpaceConfig?.proxy?.url,
-                PersonalLogoReactSvgUrl
-              )}
-            />
-          )}
-        </LinkWithoutRedirect>
+        {customHeader ? (
+          <>{customHeader}</>
+        ) : (
+          <LinkWithoutRedirect className="header-logo-wrapper" to={defaultPage}>
+            {!isPersonal ? (
+              <img alt="logo" src={logo} className="header-logo-icon" />
+            ) : (
+              <img
+                alt="logo"
+                className="header-logo-icon"
+                src={combineUrl(
+                  window.DocSpaceConfig?.proxy?.url,
+                  PersonalLogoReactSvgUrl
+                )}
+              />
+            )}
+          </LinkWithoutRedirect>
+        )}
         {/* {isNavAvailable &&
           isDesktopView &&
           !isPersonal &&

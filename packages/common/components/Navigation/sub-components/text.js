@@ -7,8 +7,8 @@ import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg";
 import commonIconsStyles from "@docspace/components/utils/common-icons-style";
 import Heading from "@docspace/components/heading";
 
-import { tablet } from "@docspace/components/utils/device";
-import { isMobile, isTablet } from "react-device-detect";
+import { tablet, mobile } from "@docspace/components/utils/device";
+
 import { Base } from "@docspace/components/themes";
 
 const StyledTextContainer = styled.div`
@@ -39,7 +39,7 @@ const StyledTextContainer = styled.div`
 
 const StyledHeading = styled(Heading)`
   font-weight: 700;
-  font-size: 18px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
   line-height: 24px;
 
   margin: 0;
@@ -49,21 +49,14 @@ const StyledHeading = styled(Heading)`
     `color: ${props.theme.navigation.rootFolderTitleColor}`};
 
   @media ${tablet} {
-    font-size: 21px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("21px")};
     line-height: 28px;
   }
 
-  ${isMobile &&
-  css`
-    font-size: 18px !important;
-    line-height: 24px !important;
-  `}
-
-  ${isTablet &&
-  css`
-    font-size: 21px;
-    line-height: 28px;
-  `}
+  @media ${mobile} {
+    font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
+    line-height: 24px;
+  }
 `;
 
 const StyledExpanderDownIcon = styled(ExpanderDownIcon)`

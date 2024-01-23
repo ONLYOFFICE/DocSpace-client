@@ -9,7 +9,7 @@ import Button from "@docspace/components/button";
 import { withTranslation } from "react-i18next";
 import toastr from "@docspace/components/toast/toastr";
 import Portal from "@docspace/components/portal";
-import { isMobileOnly } from "react-device-detect";
+
 import { ReactSVG } from "react-svg";
 import {
   StyledAsidePanel,
@@ -30,6 +30,7 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import FilesFilter from "@docspace/common/api/files/filter";
+import { DeviceType } from "@docspace/common/constants";
 
 const SharingBodyStyle = { height: `calc(100vh - 156px)` };
 
@@ -48,6 +49,7 @@ const NewFilesPanel = (props) => {
     t,
     visible,
     isLoading,
+    currentDeviceType,
   } = props;
 
   const [listFiles, setListFiles] = useState(newFiles);
@@ -169,8 +171,8 @@ const NewFilesPanel = (props) => {
       const isMediaActive = playlist.findIndex((el) => el.fileId === id) !== -1;
 
       const isMedia =
-        item?.viewAccessability?.ImageView ||
-        item?.viewAccessability?.MediaView;
+        item?.viewAccessibility?.ImageView ||
+        item?.viewAccessibility?.MediaView;
 
       if (canEdit && providerKey) {
         return addFileToRecentlyViewed(id)
@@ -276,7 +278,7 @@ const NewFilesPanel = (props) => {
           </StyledHeaderContent>
           {!isLoading ? (
             <StyledBody className="files-operations-body">
-              <StyledSharingBody stype="mediumBlack" style={SharingBodyStyle}>
+              <StyledSharingBody style={SharingBodyStyle}>
                 {filesListNode}
               </StyledSharingBody>
             </StyledBody>
@@ -310,7 +312,11 @@ const NewFilesPanel = (props) => {
     </StyledAsidePanel>
   );
 
-  return isMobileOnly ? <Portal element={element} /> : element;
+  return currentDeviceType === DeviceType.mobile ? (
+    <Portal element={element} />
+  ) : (
+    element
+  );
 };
 
 export default inject(
@@ -336,7 +342,7 @@ export default inject(
       mediaViewerDataStore;
     const { getIcon, getFolderIcon } = settingsStore;
     const { markAsRead } = filesActionsStore;
-    const { pathParts, id: currentFolderId } = selectedFolderStore;
+    const { id: currentFolderId } = selectedFolderStore;
 
     const {
       setNewFilesPanelVisible,
@@ -346,7 +352,6 @@ export default inject(
     } = dialogsStore;
 
     return {
-      pathParts,
       visible,
       newFiles,
       newFilesIds,
@@ -364,6 +369,7 @@ export default inject(
       hasNew,
       refreshFiles,
       setIsLoading,
+      currentDeviceType: auth.settingsStore.currentDeviceType,
     };
   }
 )(

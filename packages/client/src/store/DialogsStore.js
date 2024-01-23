@@ -14,6 +14,7 @@ class DialogsStore {
   roomSharingPanelVisible = false;
   ownerPanelVisible = false;
   moveToPanelVisible = false;
+  restorePanelVisible = false;
   copyPanelVisible = false;
   deleteThirdPartyDialogVisible = false;
   connectDialogVisible = false;
@@ -30,9 +31,14 @@ class DialogsStore {
   unsavedChangesDialogVisible = false;
   moveToPublicRoomVisible = false;
   moveToPublicRoomData = null;
-
+  backupToPublicRoomVisible = false;
+  backupToPublicRoomData = null;
   isFolderActions = false;
   roomCreation = false;
+  culture = {
+    key: "",
+    label: "",
+  };
   invitePanelOptions = {
     visible: false,
     hideSelector: false,
@@ -88,7 +94,9 @@ class DialogsStore {
     this.authStore = authStore;
     this.versionHistoryStore = versionHistoryStore;
   }
-
+  setInviteLanguage = (culture) => {
+    this.culture = culture;
+  };
   setIsRoomDelete = (isRoomDelete) => {
     this.isRoomDelete = isRoomDelete;
   };
@@ -122,6 +130,18 @@ class DialogsStore {
   };
 
   setMoveToPanelVisible = (visible) => {
+    if (
+      visible &&
+      !this.filesStore.hasSelection &&
+      !this.filesStore.hasBufferSelection &&
+      !this.authStore.infoPanelStore.selection
+    )
+      return;
+
+    this.moveToPanelVisible = visible;
+  };
+
+  setRestorePanelVisible = (visible) => {
     !visible && this.deselectActiveFiles();
 
     if (
@@ -131,7 +151,7 @@ class DialogsStore {
     )
       return;
 
-    this.moveToPanelVisible = visible;
+    this.restorePanelVisible = visible;
   };
 
   setRestoreAllPanelVisible = (visible) => {
@@ -139,12 +159,11 @@ class DialogsStore {
   };
 
   setCopyPanelVisible = (visible) => {
-    !visible && this.deselectActiveFiles();
-
     if (
       visible &&
       !this.filesStore.hasSelection &&
-      !this.filesStore.hasBufferSelection
+      !this.filesStore.hasBufferSelection &&
+      !this.authStore.infoPanelStore.selection
     ) {
       console.log("No files selected");
       return;
@@ -176,7 +195,6 @@ class DialogsStore {
   };
 
   setDeleteDialogVisible = (deleteDialogVisible) => {
-    !deleteDialogVisible && this.deselectActiveFiles();
     this.deleteDialogVisible = deleteDialogVisible;
   };
 
@@ -185,7 +203,6 @@ class DialogsStore {
   };
 
   setDownloadDialogVisible = (downloadDialogVisible) => {
-    !downloadDialogVisible && this.deselectActiveFiles();
     this.downloadDialogVisible = downloadDialogVisible;
   };
 
@@ -213,8 +230,17 @@ class DialogsStore {
     const { pathParts } = this.selectedFolderStore;
 
     const id = visible && !newId ? item.id : newId;
-    const newIds = newId ? [newId] : pathParts;
-    item && pathParts.push(item.id);
+    const newIds = newId
+      ? [newId]
+      : pathParts
+      ? pathParts.map((p) => p.id)
+      : [];
+    item &&
+      pathParts.push({
+        id: item.id,
+        title: item.title,
+        roomType: item.roomType,
+      });
 
     let newFilesPanelVisible = visible;
 
@@ -402,7 +428,10 @@ class DialogsStore {
     this.moveToPublicRoomVisible = visible;
     this.moveToPublicRoomData = data;
   };
-
+  setBackupToPublicRoomVisible = (visible, data = null) => {
+    this.backupToPublicRoomVisible = visible;
+    this.backupToPublicRoomData = data;
+  };
   deselectActiveFiles = () => {
     this.filesStore.setSelected("none");
   };

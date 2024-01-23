@@ -11,7 +11,8 @@ const truncateCss = css`
 const commonCss = css`
   margin: ${(props) => props.theme.rowContent.margin};
   font-family: "Open Sans";
-  font-size: ${(props) => props.theme.rowContent.fontSize};
+  font-size: ${(props) =>
+    props.theme.getCorrectFontSize(props.theme.rowContent.fontSize)};
   font-style: ${(props) => props.theme.rowContent.fontStyle};
   font-weight: ${(props) => props.theme.rowContent.fontWeight};
 `;
@@ -54,7 +55,7 @@ const StyledRowContent = styled.div`
   ${(props) =>
     (!props.disableSideInfo &&
       props.widthProp &&
-      props.widthProp <= size.tablet) ||
+      props.widthProp <= size.desktop) ||
     props.isMobile
       ? `${containerTabletStyle}`
       : `
@@ -89,7 +90,7 @@ const MainContainerWrapper = styled.div`
   ${(props) =>
     (!props.disableSideInfo &&
       props.widthProp &&
-      props.widthProp <= size.tablet) ||
+      props.widthProp <= size.desktop) ||
     props.isMobile
       ? css`
           ${mainWrapperTabletStyle}
@@ -114,7 +115,7 @@ const MainContainer = styled.div`
       : `margin-right: 8px;`}
 
   ${(props) =>
-    (props.widthProp && props.widthProp <= size.tablet) || props.isMobile
+    (props.widthProp && props.widthProp <= size.desktop) || props.isMobile
       ? `${mainContainerTabletStyle}`
       : `
     @media ${tablet} {
@@ -135,7 +136,7 @@ const SideContainerWrapper = styled.div`
   ${commonCss};
 
   ${(props) =>
-    (props.widthProp && props.widthProp <= size.tablet) || props.isMobile
+    (props.widthProp && props.widthProp <= size.desktop) || props.isMobile
       ? `${truncateCss}`
       : `
     @media ${tablet} {
@@ -158,7 +159,7 @@ const SideContainerWrapper = styled.div`
   ${(props) =>
     (!props.disableSideInfo &&
       props.widthProp &&
-      props.widthProp <= size.tablet) ||
+      props.widthProp <= size.desktop) ||
     props.isMobile
       ? `display: none;`
       : `
@@ -173,7 +174,7 @@ const TabletSideInfo = styled.div`
   display: none;
   ${(props) => (props.color ? `color: ${props.color};` : null)}
   ${(props) =>
-    (props.widthProp && props.widthProp <= size.tablet) || props.isMobile
+    (props.widthProp && props.widthProp <= size.desktop) || props.isMobile
       ? `${sideInfoTabletStyle}`
       : `
     @media ${tablet} {

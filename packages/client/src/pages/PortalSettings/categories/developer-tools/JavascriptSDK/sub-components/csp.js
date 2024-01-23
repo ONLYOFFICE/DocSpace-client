@@ -12,7 +12,7 @@ import { tablet } from "@docspace/components/utils/device";
 const CategoryHeader = styled.div`
   margin-top: 24px;
   margin-bottom: 16px;
-  font-size: 16px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
   font-style: normal;
   font-weight: 700;
   line-height: 22px;
@@ -84,7 +84,7 @@ const CSP = ({ t, cspDomains, getCSPSettings, setCSPSettings }) => {
   const deleteDomain = (value) => {
     const domains = cspDomains.filter((item) => item !== value);
 
-    setCSPSettings({ domains });
+    setCSPSettings({ domains, setDefaultIfEmpty: true });
   };
 
   const addDomain = () => {

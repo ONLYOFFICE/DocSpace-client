@@ -103,7 +103,7 @@ const ButtonContainer = (props) => {
   const isLoadingButton = isLoading;
 
   return (
-    <>
+    <div className="restore-backup_button-container">
       <Button
         className="restore-backup_button"
         label={t("Common:Restore")}
@@ -123,7 +123,7 @@ const ButtonContainer = (props) => {
           percent={downloadingProgress}
         />
       )}
-    </>
+    </div>
   );
 };
 

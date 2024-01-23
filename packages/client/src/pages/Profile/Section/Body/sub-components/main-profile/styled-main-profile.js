@@ -1,10 +1,5 @@
 import styled, { css } from "styled-components";
-import {
-  hugeMobile,
-  mobile,
-  smallTablet,
-  tablet,
-} from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/components/utils/device";
 import Text from "@docspace/components/text";
 
 export const StyledWrapper = styled.div`
@@ -27,7 +22,7 @@ export const StyledWrapper = styled.div`
     max-width: 100%;
   }
 
-  @media ${smallTablet} {
+  @media ${mobile} {
     background: none;
     flex-direction: column;
     gap: 24px;
@@ -39,7 +34,7 @@ export const StyledWrapper = styled.div`
 export const StyledAvatarWrapper = styled.div`
   display: flex;
 
-  @media ${smallTablet} {
+  @media ${mobile} {
     width: 100%;
     justify-content: center;
   }
@@ -47,7 +42,7 @@ export const StyledAvatarWrapper = styled.div`
   .badges-wrapper {
     display: none;
 
-    @media ${smallTablet} {
+    @media ${mobile} {
       display: flex;
       position: fixed;
       right: 16px;
@@ -88,6 +83,7 @@ export const StyledInfo = styled.div`
     .profile-block {
       display: flex;
       flex-direction: column;
+      overflow: hidden;
 
       .profile-block-field {
         display: flex;
@@ -124,23 +120,15 @@ export const StyledInfo = styled.div`
         height: 28px;
         align-items: center;
         margin-top: 11px;
+        gap: 8px;
+
+        .language-combo-box .combo-button {
+          padding-inline-end: 0px;
+        }
 
         @media ${tablet} {
           height: 36px;
           margin-top: 7px;
-        }
-
-        .language-combo-box {
-          .combo-button {
-            ${(props) =>
-              props.theme.interfaceDirection === "rtl"
-                ? css`
-                    margin-right: -16px;
-                  `
-                : css`
-                    margin-left: -16px;
-                  `}
-          }
         }
       }
     }
@@ -247,7 +235,7 @@ export const StyledInfo = styled.div`
     display: flex;
   }
 
-  @media ${smallTablet} {
+  @media ${mobile} {
     .rows-container {
       display: none;
     }
@@ -280,7 +268,8 @@ export const StyledInfo = styled.div`
         .mobile-profile-label {
           min-width: 100%;
           max-width: 100%;
-          font-size: 12px !important;
+          font-size: ${(props) =>
+            props.theme.getCorrectFontSize("12px")} !important;
           line-height: 16px !important;
           white-space: nowrap;
           color: rgb(163, 169, 174);
@@ -289,7 +278,8 @@ export const StyledInfo = styled.div`
         .mobile-profile-label-field {
           padding-left: 0px;
           max-width: 100%;
-          font-size: 12px !important;
+          font-size: ${(props) =>
+            props.theme.getCorrectFontSize("12px")} !important;
           line-height: 16px;
         }
 
@@ -319,7 +309,8 @@ export const StyledInfo = styled.div`
 
         .mobile-profile-password {
           max-width: 100%;
-          font-size: 12px !important;
+          font-size: ${(props) =>
+            props.theme.getCorrectFontSize("12px")} !important;
           line-height: 16px !important;
         }
       }
@@ -334,6 +325,12 @@ export const StyledInfo = styled.div`
           margin-top: 8px;
         }
 
+        &__wrapper-combo-box {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
         .mobile-profile-label {
           display: flex;
           align-items: center;
@@ -344,7 +341,7 @@ export const StyledInfo = styled.div`
         }
       }
 
-      @media ${hugeMobile} {
+      @media ${mobile} {
         gap: 8px;
       }
     }

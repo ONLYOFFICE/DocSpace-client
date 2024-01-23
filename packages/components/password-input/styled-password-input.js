@@ -28,6 +28,9 @@ const StyledInput = styled(SimpleInput)`
     width: calc(100% - 40px);
     text-align: ${({ theme }) =>
       theme.interfaceDirection === "rtl" ? "right" : "left"};
+    &::-ms-reveal {
+      display: none;
+    }
   }
 
   .input-relative {
@@ -124,7 +127,7 @@ PasswordProgress.defaultProps = { theme: Base };
 const TooltipStyle = styled.div`
   width: 294px;
 
-  @media (max-width: 768px) {
+  @media ${mobile} {
     width: 320px;
   }
 
@@ -134,14 +137,10 @@ const TooltipStyle = styled.div`
 
 const StyledTooltipContainer = styled(Text)`
   // margin: 8px 16px 16px 16px;
-  color: ${(props) => props.theme.passwordInput.tooltipTextColor} !important;
+  color: ${(props) => props.theme.passwordInput.tooltipTextColor};
 
   .generate-btn-container {
     margin-top: 10px;
-  }
-
-  .generate-btn {
-    color: ${(props) => props.theme.passwordInput.tooltipTextColor};
   }
 `;
 
@@ -149,7 +148,7 @@ StyledTooltipContainer.defaultProps = { theme: Base };
 
 const StyledTooltipItem = styled(Text)`
   //height: 24px;
-  color: ${(props) => (props.valid ? "#44bb00" : "#B40404")};
+  color: ${(props) => (props.valid ? "#44bb00" : "#B40404")} !important;
 `;
 
 export {

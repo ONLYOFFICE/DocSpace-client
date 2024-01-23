@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import Text from "@docspace/components/text";
 import { ReactSVG } from "react-svg";
 import { desktop, mobile, tablet } from "@docspace/components/utils/device";
-import { isTablet, isMobileOnly } from "react-device-detect";
+
 import { useTranslation } from "react-i18next";
 import Base from "@docspace/components/themes/base";
 import ArticleHideMenuReactSvgUrl from "PUBLIC_DIR/images/article-hide-menu.react.svg?url";
@@ -12,11 +12,12 @@ import ArticleShowMenuReactSvgUrl from "PUBLIC_DIR/images/article-show-menu.reac
 const StyledHideArticleMenuButton = styled.div`
   display: flex;
   align-items: center;
-  position: fixed;
+  position: ${(props) => (props.isVirtualKeyboardOpen ? "absolute" : "fixed")};
   height: 44px;
   z-index: 209;
-  bottom: 89px;
-  ${props =>
+  bottom: ${(props) => (props.hideProfileBlock ? "16px" : "89px")};
+
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           right: 0;
@@ -31,24 +32,16 @@ const StyledHideArticleMenuButton = styled.div`
   max-width: ${({ showText }) => (showText ? "243px" : "60px")};
 
   @media ${desktop} {
-    ${!isTablet &&
-    css`
-      display: none;
-    `}
+    display: none;
   }
 
   @media ${mobile} {
     display: none;
   }
 
-  ${isMobileOnly &&
-  css`
-    display: none;
-  `}
-
   .article-hide-menu-container {
     align-items: center;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-right: 16px;
@@ -57,7 +50,7 @@ const StyledHideArticleMenuButton = styled.div`
             margin-left: 16px;
           `}
     .article-hide-menu-text {
-      ${props =>
+      ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
               margin-right: 8px;
@@ -65,17 +58,12 @@ const StyledHideArticleMenuButton = styled.div`
           : css`
               margin-left: 8px;
             `}
-      color: ${({ currentColorScheme }) => currentColorScheme.main.accent};
+      color: ${({ currentColorScheme }) => currentColorScheme?.main?.accent};
     }
 
     @media ${tablet} {
       display: ${({ showText }) => (showText ? "flex" : "none")};
     }
-
-    ${isTablet &&
-    css`
-      display: ${({ showText }) => (showText ? "flex" : "none")};
-    `}
   }
 
   .article-show-menu-container {
@@ -85,17 +73,12 @@ const StyledHideArticleMenuButton = styled.div`
     @media ${tablet} {
       display: ${({ showText }) => (showText ? "none" : "flex")};
     }
-
-    ${isTablet &&
-    css`
-      display: ${({ showText }) => (showText ? "none" : "flex")};
-    `}
   }
 
   .article-hide-menu-icon_svg,
   .article-show-menu-icon_svg {
-    height: 28px;
-    ${props =>
+    height: 20px;
+    ${(props) =>
       props.theme.interfaceDirection === "rtl" &&
       css`
         transform: scaleX(-1);
@@ -103,14 +86,14 @@ const StyledHideArticleMenuButton = styled.div`
   }
 
   .article-hide-menu-icon_svg {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl" &&
       css`
         transform: scaleX(-1);
       `}
     svg {
       path {
-        fill: ${({ currentColorScheme }) => currentColorScheme.main.accent};
+        fill: ${({ currentColorScheme }) => currentColorScheme?.main?.accent};
       }
     }
   }
@@ -118,7 +101,7 @@ const StyledHideArticleMenuButton = styled.div`
   .article-show-menu-icon_svg {
     svg {
       path {
-        fill: ${props => props.theme.article.catalogShowText};
+        fill: ${(props) => props.theme.article.catalogShowText};
       }
     }
   }
@@ -130,6 +113,8 @@ const HideArticleMenuButton = ({
   showText,
   toggleShowText,
   currentColorScheme,
+  isVirtualKeyboardOpen,
+  hideProfileBlock,
 }) => {
   const { t } = useTranslation("Common");
 
@@ -137,11 +122,15 @@ const HideArticleMenuButton = ({
     <StyledHideArticleMenuButton
       showText={showText}
       onClick={toggleShowText}
-      currentColorScheme={currentColorScheme}>
+      currentColorScheme={currentColorScheme}
+      isVirtualKeyboardOpen={isVirtualKeyboardOpen}
+      hideProfileBlock={hideProfileBlock}
+    >
       {showText ? (
         <div
           className="article-hide-menu-container"
-          id="document_catalog-hide-menu">
+          id="document_catalog-hide-menu"
+        >
           <ReactSVG
             className="article-hide-menu-icon_svg"
             src={ArticleHideMenuReactSvgUrl}
@@ -151,14 +140,16 @@ const HideArticleMenuButton = ({
             fontWeight={600}
             fontSize="12px"
             noSelect
-            truncate>
+            truncate
+          >
             {t("Common:HideArticleMenu")}
           </Text>
         </div>
       ) : (
         <div
           className="article-show-menu-container"
-          id="document_catalog-show-menu">
+          id="document_catalog-show-menu"
+        >
           <ReactSVG
             className="article-show-menu-icon_svg"
             src={ArticleShowMenuReactSvgUrl}

@@ -3,7 +3,6 @@ import MacOSReactSvgUrl from "PUBLIC_DIR/images/macOS.react.svg?url";
 import LinuxReactSvgUrl from "PUBLIC_DIR/images/linux.react.svg?url";
 import AndroidReactSvgUrl from "PUBLIC_DIR/images/android.react.svg?url";
 import IOSReactSvgUrl from "PUBLIC_DIR/images/iOS.react.svg?url";
-import IOSHoverReactSvgUrl from "PUBLIC_DIR/images/iOSHover.react.svg?url";
 
 import React from "react";
 import styled, { css } from "styled-components";
@@ -12,15 +11,14 @@ import Text from "@docspace/components/text";
 import IconButton from "@docspace/components/icon-button";
 
 import { Base } from "@docspace/components/themes";
-import { desktop, tablet, hugeMobile } from "@docspace/components/utils/device";
-import { isTablet } from "react-device-detect";
+import { tablet, mobile } from "@docspace/components/utils/device";
 
 const StyledArticleApps = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
   position: relative;
-  margin-top: auto;
+  margin-top: ${(props) => (props.withDevTools ? "0" : "auto")};
   margin-bottom: 16px;
 
   @media ${tablet} {
@@ -34,14 +32,14 @@ const StyledArticleApps = styled.div`
       `}
   }
 
-  @media ${hugeMobile} {
+  @media ${mobile} {
     position: relative;
     bottom: 0px;
-    margin-top: 32px;
+    margin-top: ${(props) => (props.withDevTools ? "16px" : "32px")};
   }
 
   .download-app-text {
-    color: ${(props) => props.theme.filesArticleBody.downloadAppList.color};
+    color: ${(props) => props.theme.filesArticleBody.downloadAppList.textColor};
   }
 
   .download-app-list {
@@ -52,7 +50,7 @@ const StyledArticleApps = styled.div`
 
 StyledArticleApps.defaultProps = { theme: Base };
 
-const ArticleApps = React.memo(({ theme, showText }) => {
+const ArticleApps = React.memo(({ theme, showText, withDevTools }) => {
   const { t } = useTranslation(["Translations"]);
 
   const desktopLink = "https://www.onlyoffice.com/desktop.aspx";
@@ -62,7 +60,7 @@ const ArticleApps = React.memo(({ theme, showText }) => {
   if (!showText) return <></>;
 
   return (
-    <StyledArticleApps showText={showText}>
+    <StyledArticleApps showText={showText} withDevTools={withDevTools}>
       <Text className="download-app-text" fontSize="14px" noSelect={true}>
         {t("Translations:DownloadApps")}
       </Text>
@@ -100,13 +98,12 @@ const ArticleApps = React.memo(({ theme, showText }) => {
           title={t("Translations:MobileAndroid")}
         />
         <IconButton
+          onClick={() => window.open(iosLink)}
           iconName={IOSReactSvgUrl}
-          iconHoverName={IOSHoverReactSvgUrl}
           size="32"
-          isFill={false}
+          isFill={true}
+          hoverColor={theme.filesArticleBody.downloadAppList.iosHoverColor}
           title={t("Translations:MobileIos")}
-          onMouseDown={() => window.open(iosLink)}
-          isClickable={true}
         />
       </div>
     </StyledArticleApps>

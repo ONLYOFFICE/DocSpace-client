@@ -4,7 +4,7 @@ import {
   StyledTileContent,
   MainContainerWrapper,
   MainContainer,
-} from "../StyledTileView";
+} from "./TileContent.styled";
 
 const TileContent = (props) => {
   const { children, id, className, style, onClick } = props;

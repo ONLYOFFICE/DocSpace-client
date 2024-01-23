@@ -16,7 +16,7 @@ import Button from "@docspace/components/button";
 const StyledFileRow = styled(Row)`
   width: calc(100% - 16px);
   box-sizing: border-box;
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           padding-right: 16px;
@@ -41,7 +41,7 @@ const StyledFileRow = styled(Row)`
 
   .styled-element,
   .row_content {
-    ${props =>
+    ${(props) =>
       props.showPasswordInput &&
       css`
         margin-top: ${isMobile ? "-44px" : "-48px"};
@@ -49,7 +49,7 @@ const StyledFileRow = styled(Row)`
   }
 
   .styled-element {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-left: 8px !important;
@@ -76,7 +76,7 @@ const StyledFileRow = styled(Row)`
   .password-input {
     position: absolute;
     top: 44px;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             right: 16px;
@@ -90,7 +90,7 @@ const StyledFileRow = styled(Row)`
   }
 
   #conversion-button {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-right: 8px;
@@ -109,7 +109,7 @@ const StyledFileRow = styled(Row)`
   }
 
   .upload_panel-icon {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-right: auto;
@@ -131,7 +131,7 @@ const StyledFileRow = styled(Row)`
     }
 
     .enter-password {
-      ${props =>
+      ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
               margin-left: 8px;
@@ -150,7 +150,7 @@ const StyledFileRow = styled(Row)`
   }
 
   .convert_icon {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             padding-left: 12px;
@@ -161,7 +161,7 @@ const StyledFileRow = styled(Row)`
   }
 
   .upload-panel_file-row-link {
-    ${props =>
+    ${(props) =>
       !props.isMediaActive &&
       css`
         cursor: default;
@@ -195,7 +195,7 @@ class FileRow extends Component {
     });
   };
 
-  onCancelCurrentUpload = e => {
+  onCancelCurrentUpload = (e) => {
     //console.log("cancel upload ", e);
     const { id, action, fileId } = e.currentTarget.dataset;
     const { t, cancelCurrentUpload, cancelCurrentFileConversion } = this.props;
@@ -205,7 +205,7 @@ class FileRow extends Component {
       : cancelCurrentUpload(id, t);
   };
 
-  onMediaClick = id => {
+  onMediaClick = (id) => {
     const {
       setMediaViewerData,
       setUploadPanelVisible,
@@ -271,7 +271,7 @@ class FileRow extends Component {
     });
   }
 
-  onKeyDown = e => {
+  onKeyDown = (e) => {
     if (e.key === "Enter") {
       this.onButtonClick();
     }
@@ -313,7 +313,8 @@ class FileRow extends Component {
           }
           isMediaActive={isMediaActive}
           showPasswordInput={showPasswordInput}
-          withoutBorder>
+          withoutBorder
+        >
           <>
             {item.fileId ? (
               isMedia ? (
@@ -322,7 +323,8 @@ class FileRow extends Component {
                   fontWeight="600"
                   color={item.error && "#A3A9AE"}
                   truncate
-                  onClick={onMediaClick}>
+                  onClick={onMediaClick}
+                >
                   {name}
                   {fileExtension}
                 </Link>
@@ -333,7 +335,8 @@ class FileRow extends Component {
                     color={item.error && "#A3A9AE"}
                     truncate
                     href={item.fileInfo ? item.fileInfo.webUrl : ""}
-                    target={downloadInCurrentTab ? "_self" : "_blank"}>
+                    target={downloadInCurrentTab ? "_self" : "_blank"}
+                  >
                     {name}
                     {fileExtension}
                   </Link>
@@ -365,7 +368,8 @@ class FileRow extends Component {
               <div
                 className="upload_panel-icon"
                 data-id={item.uniqueId}
-                onClick={this.onCancelCurrentUpload}>
+                onClick={this.onCancelCurrentUpload}
+              >
                 <LoadingButton item={item} />
               </div>
             )}
@@ -416,6 +420,7 @@ export default inject(
     } else {
       ext = item.fileInfo.fileExst;
       splitted = item.fileInfo.title.split(".");
+      if (!!ext) splitted.splice(-1);
     }
 
     name = splitted.join(".");
@@ -436,11 +441,11 @@ export default inject(
       mediaViewerDataStore;
 
     const isMedia =
-      item.fileInfo?.viewAccessability?.ImageView ||
-      item.fileInfo?.viewAccessability?.MediaView;
+      item.fileInfo?.viewAccessibility?.ImageView ||
+      item.fileInfo?.viewAccessibility?.MediaView;
 
     const isMediaActive =
-      playlist.findIndex(el => el.fileId === item.fileId) !== -1;
+      playlist.findIndex((el) => el.fileId === item.fileId) !== -1;
 
     const fileIcon = getIconSrc(ext, 32);
 

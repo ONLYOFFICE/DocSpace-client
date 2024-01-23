@@ -7,13 +7,16 @@
   "proxy": {
     "url": ""
   },
-  "wrongPortalNameUrl": "https://teamlab.info/wrongportalname.aspx?Site_Testing=4testing",
+  "wrongPortalNameUrl": "",
   "thumbnails1280x720": false,
-  "pdfViewer": true,
-  "pdfViewerUrl": "ds-vpath/sdkjs/pdf/src/engine/viewer.js",
+  "pdfViewer": false,
+  "pdfViewerUrl": "sdkjs/pdf/src/engine/viewer.js",
   "imageThumbnails": false,
   "editor": {
     "openOnNewPage": true,
     "requestClose": false
+  },
+  "management": {
+    "checkDomain": false
   }
 }

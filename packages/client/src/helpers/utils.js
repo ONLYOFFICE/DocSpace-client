@@ -104,7 +104,11 @@ export const getPasswordErrorMessage = (t, settings) => {
     settings ? settings?.minLength : 8
   } ${settings?.digits ? t("Common:PasswordLimitDigits") : ""} ${
     settings?.upperCase ? t("Common:PasswordLimitUpperCase") : ""
-  } ${settings?.specSymbols ? t("Common:PasswordLimitSpecialSymbols") : ""}`;
+  } ${
+    settings?.specSymbols
+      ? `${t("Common:PasswordLimitSpecialSymbols")} (!@#$%^&*)`
+      : ""
+  }`;
 };
 
 export const getCategoryType = (location) => {
@@ -134,6 +138,8 @@ export const getCategoryType = (location) => {
     categoryType = CategoryType.Settings;
   } else if (pathname.startsWith("/accounts/filter")) {
     categoryType = CategoryType.Accounts;
+  } else if (pathname.startsWith("/form-gallery")) {
+    categoryType = CategoryType.Personal;
   }
 
   return categoryType;

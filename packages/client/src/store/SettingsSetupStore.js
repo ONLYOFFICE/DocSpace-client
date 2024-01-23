@@ -11,7 +11,8 @@ import {
 } from "@docspace/common/api/settings";
 import { combineUrl } from "@docspace/common/utils";
 import config from "PACKAGE_FILE";
-import { isMobile } from "react-device-detect";
+import { isDesktop } from "@docspace/components/utils/device";
+import { DeviceType } from "@docspace/common/constants";
 
 class SettingsSetupStore {
   selectionStore = null;
@@ -19,7 +20,7 @@ class SettingsSetupStore {
   isInit = false;
   logoutVisible = false;
   logoutAllVisible = false;
-  viewAs = isMobile ? "row" : "table";
+  viewAs = isDesktop() ? "table" : "row";
 
   isLoadingDownloadReport = false;
 
@@ -86,16 +87,48 @@ class SettingsSetupStore {
     makeAutoObservable(this);
   }
 
-  initSettings = async () => {
-    if (this.isInit) return;
+  initSettings = async (page) => {
+    const isMobileView =
+      authStore.settingsStore.currentDeviceType === DeviceType.mobile;
+
+    if (this.isInit && isMobileView) return;
 
     if (authStore.isAuthenticated) {
-      await authStore.settingsStore.getPortalPasswordSettings();
-      await authStore.tfaStore.getTfaType();
-      await authStore.settingsStore.getIpRestrictionsEnable();
-      await authStore.settingsStore.getIpRestrictions();
-      await authStore.settingsStore.getSessionLifetime();
-      await authStore.settingsStore.getBruteForceProtection();
+      if (isMobileView) {
+        switch (page) {
+          case "password":
+            await authStore.settingsStore.getPortalPasswordSettings();
+            break;
+          case "tfa":
+            await authStore.tfaStore.getTfaType();
+            break;
+          case "trusted-mail":
+            break;
+          case "ip":
+            await authStore.settingsStore.getIpRestrictionsEnable();
+            await authStore.settingsStore.getIpRestrictions();
+            break;
+          case "brute-force-protection":
+            await authStore.settingsStore.getBruteForceProtection();
+            break;
+          case "admin-message":
+            break;
+          case "lifetime":
+            await authStore.settingsStore.getSessionLifetime();
+
+            break;
+
+          default:
+            break;
+        }
+      } else {
+        await authStore.settingsStore.getPortalPasswordSettings();
+        await authStore.tfaStore.getTfaType();
+        await authStore.settingsStore.getIpRestrictionsEnable();
+        await authStore.settingsStore.getIpRestrictions();
+        await authStore.settingsStore.getSessionLifetime();
+        await authStore.settingsStore.getBruteForceProtection();
+      }
     }
 
     this.isInit = true;
@@ -320,11 +353,6 @@ class SettingsSetupStore {
     this.setFilter(filterData);
   };
 
-  setWhiteLabelSettings = async (data) => {
-    const response = await api.settings.setWhiteLabelSettings(data);
-    return Promise.resolve(response);
-  };
-
   setLanguageAndTime = async (lng, timeZoneID) => {
     return api.settings.setLanguageAndTime(lng, timeZoneID);
   };
@@ -371,7 +399,7 @@ class SettingsSetupStore {
 
   getLoginHistoryReport = async () => {
     const res = await api.settings.getLoginHistoryReport();
-    window.open(res);
+    setTimeout(() => window.open(res), 100); //hack for ios
     return this.setAuditTrailReport(res);
   };
 
@@ -379,7 +407,7 @@ class SettingsSetupStore {
     try {
       this.setIsLoadingDownloadReport(true);
       const res = await api.settings.getAuditTrailReport();
-      window.open(res);
+      setTimeout(() => window.open(res), 100); //hack for ios
       return this.setAuditTrailReport(res);
     } catch (error) {
       console.error(error);
@@ -481,10 +509,6 @@ class SettingsSetupStore {
     return api.settings.removeActiveSession(id);
   };
 
-  getAllSettings = () => {
-    return api.settings.getSettings();
-  };
-
   setLogoutVisible = (visible) => (this.logoutVisible = visible);
 
   setLogoutAllVisible = (visible) => (this.logoutAllVisible = visible);
@@ -492,10 +516,14 @@ class SettingsSetupStore {
   getSessions = () => {
     if (this.sessionsIsInit) return;
     this.getAllSessions().then((res) => {
-      this.sessions = res.items;
+      this.setSessions(res.items);
       this.currentSession = res.loginEvent;
       this.sessionsIsInit = true;
     });
+  };
+
+  setSessions = (sessions) => {
+    this.sessions = sessions;
   };
 }
 

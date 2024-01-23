@@ -8,7 +8,9 @@ import { withTranslation } from "react-i18next";
 import ModalDialogContainer from "../ModalDialogContainer";
 import toastr from "@docspace/components/toast/toastr";
 import Link from "@docspace/components/link";
-import { isMobile } from "react-device-detect";
+
+import { DeviceType } from "@docspace/common/constants";
+import { isDesktop } from "@docspace/components/utils/device";
 
 const StyledModal = styled(ModalDialogContainer)`
   .backup-codes-counter {
@@ -116,7 +118,7 @@ class BackupCodesDialogComponent extends React.Component {
             size="normal"
             onClick={this.props.onClose}
           />
-          {!isMobile && (
+          {isDesktop() && (
             <div className="backup-codes-print-link-wrapper">
               <Link
                 type="action"

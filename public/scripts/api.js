@@ -2,6 +2,7 @@
   const defaultConfig = {
     src: new URL(document.currentScript.src).origin,
     rootPath: "/rooms/shared/",
+    requestToken: null,
     width: "100%",
     height: "100%",
     name: "frameDocSpace",
@@ -14,20 +15,23 @@
     editorType: "embedded", //TODO: ["desktop", "embedded"]
     editorGoBack: true,
     selectorType: "exceptPrivacyTrashArchiveFolders", //TODO: ["roomsOnly", "userFolderOnly", "exceptPrivacyTrashArchiveFolders", "exceptSortedByTagsFolders"]
+    showSelectorCancel: false,
+    showSelectorHeader: false,
     showHeader: false,
     showTitle: true,
     showMenu: false,
     showFilter: false,
     destroyText: "",
     viewAs: "row", //TODO: ["row", "table", "tile"]
+    viewTableColumns: "Name,Size,Type",
+    checkCSP: true,
     filter: {
       count: 100,
       page: 1,
       sortorder: "descending", //TODO: ["descending", "ascending"]
       sortby: "DateAndTime", //TODO: ["DateAndTime", "AZ", "Type", "Size", "DateAndTimeCreation", "Author"]
       search: "",
-      roomId: null,
-      withSubfolders: true,
+      withSubfolders: false,
     },
     keysForReload: [
       "src",
@@ -45,14 +49,35 @@
       onSelectCallback: null,
       onCloseCallback: null,
       onAppReady: null,
-      onAppError: null,
+      onAppError: (e) => console.log("onAppError", e),
       onEditorCloseCallback: null,
       onAuthSuccess: null,
     },
   };
 
+  const checkCSP = (targetSrc, onAppError) => {
+    const currentSrc = window.location.origin;
+
+    const cspSettings = async () => {
+      try {
+        const settings = await fetch(`${targetSrc}/api/2.0/security/csp`);
+        const res = await settings.json();
+        const { header } = res.response;
+
+        return (
+          (header && header.indexOf(window.location.origin) !== -1) ||
+          targetSrc === currentSrc
+        );
+      } catch (e) {
+        onAppError(e);
+      }
+    };
+
+    return cspSettings();
+  };
+
   const getConfigFromParams = () => {
-    const src = document.currentScript.src;
+    const src = decodeURIComponent(document.currentScript.src);
 
     if (!src || !src.length) return null;
 
@@ -81,6 +106,7 @@
   class DocSpace {
     #iframe;
     #isConnected = false;
+    #cspInstalled = true;
     #callbacks = [];
     #tasks = [];
     #classNames = "";
@@ -102,10 +128,18 @@
         case "manager": {
           if (config.filter) {
             if (config.id) config.filter.folder = config.id;
-            const filterString = new URLSearchParams(config.filter).toString();
+
+            const params = config.requestToken
+              ? { key: config.requestToken, ...config.filter }
+              : config.filter;
+
+            const urlParams = new URLSearchParams(params).toString();
+
             path = `${config.rootPath}${
-              config.id ? config.id + "/" : ""
-            }filter?${filterString}`;
+              config.requestToken
+                ? `?${urlParams}`
+                : `${config.id ? config.id + "/" : ""}filter?${urlParams}`
+            }`;
           }
           break;
         }
@@ -163,17 +197,23 @@
       iframe.name = config.name;
       iframe.id = config.frameId;
 
-      iframe.align = "top";
       iframe.frameBorder = 0;
       iframe.allowFullscreen = true;
-      iframe.setAttribute("allowfullscreen", "");
-      iframe.setAttribute("onmousewheel", "");
-      iframe.setAttribute("allow", "autoplay");
+      iframe.setAttribute("allow", "storage-access");
 
       if (config.type == "mobile") {
         iframe.style.position = "fixed";
         iframe.style.overflow = "hidden";
         document.body.style.overscrollBehaviorY = "contain";
+      }
+
+      if (!this.#cspInstalled) {
+        const errorMessage =
+          "Current domain not set in Content Security Policy (CSP) settings. Please add it on developer tools page.";
+        config.events.onAppError(errorMessage);
+
+        const html = `<body>${errorMessage}</body>`;
+        iframe.srcdoc = html;
       }
 
       return iframe;
@@ -241,7 +281,9 @@
     };
     #executeMethod = (methodName, params, callback) => {
       if (!this.#isConnected) {
-        console.log("Message bus is not connected with frame");
+        this.config.events.onAppError(
+          "Message bus is not connected with frame"
+        );
         return;
       }
 
@@ -267,6 +309,13 @@
 
       const target = document.getElementById(this.config.frameId);
 
+      if (this.config.checkCSP) {
+        this.#cspInstalled = checkCSP(
+          this.config.src,
+          this.config.events.onAppError
+        );
+      }
+
       if (target) {
         this.#iframe = this.#createIframe(this.config);
         this.#classNames = target.className;
@@ -275,6 +324,7 @@
           target.parentNode.replaceChild(this.#iframe, target);
 
         window.addEventListener("message", this.#onMessage, false);
+
         this.#isConnected = true;
       }
 

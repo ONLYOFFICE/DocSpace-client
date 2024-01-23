@@ -29,6 +29,7 @@ import {
   DeleteLinkDialog,
   RoomSharingDialog,
   MoveToPublicRoom,
+  BackupToPublicRoom,
   SettingsPluginDialog,
   PluginDialog,
   DeletePluginDialog,
@@ -49,6 +50,7 @@ const Panels = (props) => {
     ownerPanelVisible,
     copyPanelVisible,
     moveToPanelVisible,
+    restorePanelVisible,
     thirdPartyMoveDialogVisible,
     connectDialogVisible,
     deleteThirdPartyDialogVisible,
@@ -81,6 +83,7 @@ const Panels = (props) => {
     embeddingPanelIsVisible,
     roomSharingPanelVisible,
     moveToPublicRoomVisible,
+    backupToPublicRoomVisible,
     settingsPluginDialogVisible,
     pluginDialogVisible,
     leaveRoomDialogVisible,
@@ -118,11 +121,15 @@ const Panels = (props) => {
       />
     ),
     ownerPanelVisible && <ChangeOwnerPanel key="change-owner-panel" />,
-    (moveToPanelVisible || copyPanelVisible || restoreAllPanelVisible) && (
+    (moveToPanelVisible ||
+      copyPanelVisible ||
+      restorePanelVisible ||
+      restoreAllPanelVisible) && (
       <FilesSelector
         key="files-selector"
         isMove={moveToPanelVisible}
         isCopy={copyPanelVisible}
+        isRestore={restorePanelVisible}
         isRestoreAll={restoreAllPanelVisible}
       />
     ),
@@ -185,6 +192,9 @@ const Panels = (props) => {
     moveToPublicRoomVisible && (
       <MoveToPublicRoom key="move-to-public-room-panel" />
     ),
+    backupToPublicRoomVisible && (
+      <BackupToPublicRoom key="backup-to-public-room-panel" />
+    ),
     leaveRoomDialogVisible && <LeaveRoomDialog key="leave-room-dialog" />,
     changeRoomOwnerIsVisible && (
       <ChangeRoomOwnerPanel key="change-room-owner" />
@@ -207,6 +217,7 @@ export default inject(
       ownerPanelVisible,
       copyPanelVisible,
       moveToPanelVisible,
+      restorePanelVisible,
       thirdPartyMoveDialogVisible,
       connectDialogVisible,
       deleteThirdPartyDialogVisible,
@@ -238,6 +249,7 @@ export default inject(
       embeddingPanelIsVisible,
       roomSharingPanelVisible,
       moveToPublicRoomVisible,
+      backupToPublicRoomVisible,
       leaveRoomDialogVisible,
       changeRoomOwnerIsVisible,
     } = dialogsStore;
@@ -262,6 +274,7 @@ export default inject(
       ownerPanelVisible,
       copyPanelVisible,
       moveToPanelVisible,
+      restorePanelVisible,
       thirdPartyMoveDialogVisible,
       connectDialogVisible: connectDialogVisible || !!connectItem, //TODO:
       deleteThirdPartyDialogVisible,
@@ -293,6 +306,7 @@ export default inject(
       embeddingPanelIsVisible,
       roomSharingPanelVisible,
       moveToPublicRoomVisible,
+      backupToPublicRoomVisible,
       settingsPluginDialogVisible,
       pluginDialogVisible,
       leaveRoomDialogVisible,

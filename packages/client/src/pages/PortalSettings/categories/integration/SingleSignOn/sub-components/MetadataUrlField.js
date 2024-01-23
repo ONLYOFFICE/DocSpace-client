@@ -8,7 +8,7 @@ import copy from "copy-to-clipboard";
 import { Text, HelpButton, InputBlock } from "@docspace/components";
 import toastr from "@docspace/components/toast/toastr";
 
-import { smallTablet } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/components/utils/device";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -21,7 +21,7 @@ const StyledWrapper = styled.div`
     width: 100%;
   }
 
-  @media ${smallTablet} {
+  @media ${mobile} {
     max-width: 100%;
   }
 

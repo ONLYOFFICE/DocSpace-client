@@ -4,28 +4,27 @@ import Base from "../themes/base";
 const StyledTooltip = styled.div`
   .__react_component_tooltip {
     background-color: ${(props) =>
-      props.color ? props.color : props.theme.tooltip.color} !important;
+      props.color ? props.color : props.theme.tooltip.color};
     border-radius: ${(props) => props.theme.tooltip.borderRadius};
     -moz-border-radius: ${(props) => props.theme.tooltip.borderRadius};
     -webkit-border-radius: ${(props) => props.theme.tooltip.borderRadius};
     box-shadow: ${(props) => props.theme.tooltip.boxShadow};
     -moz-box-shadow: ${(props) => props.theme.tooltip.boxShadow};
     -webkit-box-shadow: ${(props) => props.theme.tooltip.boxShadow};
-    opacity: ${(props) => props.theme.tooltip.opacity};
     padding: ${(props) => props.theme.tooltip.padding};
-    pointer-events: ${(props) => props.theme.tooltip.pointerEvents};
     max-width: ${(props) =>
       `min(100vw, ${
         props.maxWidth ? props.maxWidth : props.theme.tooltip.maxWidth
       })`};
-    color: ${(props) => props.theme.tooltip.textColor} !important;
+    color: ${(props) => props.theme.tooltip.textColor};
     z-index: 999;
 
     box-sizing: border-box;
 
     p,
+    div,
     span {
-      color: ${(props) => props.theme.tooltip.textColor} !important;
+      color: ${(props) => props.theme.tooltip.textColor};
     }
 
     &:before {

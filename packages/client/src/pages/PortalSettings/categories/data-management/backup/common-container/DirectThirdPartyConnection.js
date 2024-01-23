@@ -48,6 +48,7 @@ const DirectThirdPartyConnection = (props) => {
     onSelectFile,
     filterParam,
     descriptionText,
+    isMobileScale,
   } = props;
 
   const { t } = useTranslation("Translations");
@@ -70,12 +71,6 @@ const DirectThirdPartyConnection = (props) => {
       toastr.error(e);
     }
   };
-
-  useEffect(() => {
-    selectedThirdPartyAccount === null &&
-      !isInitialLoading &&
-      updateAccountsInfo();
-  }, [selectedThirdPartyAccount === null]);
 
   const [state, setState] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
@@ -224,7 +219,7 @@ const DirectThirdPartyConnection = (props) => {
         provider_id
       );
 
-      setSelectedThirdPartyAccount(null);
+      updateAccountsInfo();
     } catch (e) {
       setState({ isLoading: false, isUpdatingInfo: false });
       toastr.error(e);
@@ -266,12 +261,12 @@ const DirectThirdPartyConnection = (props) => {
 
   const isDisabledSelector = isLoading || isDisabled;
 
-  console.log("folderList", folderList, selectedThirdPartyAccount);
   return (
     <StyledBackup
       isConnectedAccount={
         connectedThirdPartyAccount && isTheSameThirdPartyAccount
       }
+      isMobileScale={isMobileScale}
     >
       <div className="backup_connection">
         <ComboBox
@@ -314,6 +309,7 @@ const DirectThirdPartyConnection = (props) => {
         <>
           {folderList.id && (
             <FilesSelectorInput
+              className={"restore-backup_input"}
               descriptionText={descriptionText}
               filterParam={filterParam}
               rootThirdPartyId={selectedThirdPartyAccount.id}
@@ -322,12 +318,7 @@ const DirectThirdPartyConnection = (props) => {
               id={id ? id : folderList.id}
               withoutInitPath={withoutInitPath}
               isError={isError}
-              isDisabled={
-                isLoading ||
-                accounts.length === 0 ||
-                folderList.length === 0 ||
-                isDisabled
-              }
+              isDisabled={isDisabledSelector}
               isThirdParty
             />
           )}

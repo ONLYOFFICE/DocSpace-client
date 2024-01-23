@@ -9,22 +9,23 @@ const BundleAnalyzerPlugin =
 
 const ExternalTemplateRemotesPlugin = require("external-remotes-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-const combineUrl = require("@docspace/common/utils/combineUrl");
+//const combineUrl = require("@docspace/common/utils/combineUrl");
 const minifyJson = require("@docspace/common/utils/minifyJson");
-const beforeBuild = require("@docspace/common/utils/beforeBuild");
+//const beforeBuild = require("@docspace/common/utils/beforeBuild");
 const sharedDeps = require("@docspace/common/constants/sharedDependencies");
-const fs = require("fs");
-const { readdir } = require("fs").promises;
+//const fs = require("fs");
+//const { readdir } = require("fs").promises;
 
 const path = require("path");
 
 const pkg = require("./package.json");
+const runtime = require("../runtime.json");
 const deps = pkg.dependencies || {};
 const homepage = pkg.homepage; //combineUrl(window.DocSpaceConfig?.proxy?.url, pkg.homepage);
 const title = pkg.title;
 const version = pkg.version;
-
-const isAlreadyBuilding = false;
+const dateHash = runtime?.date || "";
+//const isAlreadyBuilding = false;
 
 const config = {
   entry: "./src/index",
@@ -86,6 +87,7 @@ const config = {
       ASSETS_DIR: path.resolve(__dirname, "./public"),
       SRC_DIR: path.resolve(__dirname, "./src"),
       PACKAGE_FILE: path.resolve(__dirname, "package.json"),
+      COMMON_DIR: path.resolve(__dirname, "../common"),
     },
   },
 
@@ -263,6 +265,8 @@ const config = {
 };
 
 module.exports = (env, argv) => {
+  config.devtool = "source-map";
+
   if (argv.mode === "production") {
     config.mode = "production";
     config.optimization = {
@@ -270,8 +274,6 @@ module.exports = (env, argv) => {
       minimize: !env.minimize,
       minimizer: [new TerserPlugin()],
     };
-  } else {
-    config.devtool = "cheap-module-source-map";
   }
 
   const remotes = {
@@ -297,6 +299,7 @@ module.exports = (env, argv) => {
         "./Layout": "./src/components/Layout",
         "./Layout/context": "./src/components/Layout/context.js",
         "./Main": "./src/components/Main",
+        "./NavMenu": "./src/components/NavMenu",
         "./PreparationPortalDialog":
           "./src/components/dialogs/PreparationPortalDialog/PreparationPortalDialogWrapper.js",
         "./SharingDialog": "./src/components/panels/SharingDialog",
@@ -308,6 +311,18 @@ module.exports = (env, argv) => {
         "./PeopleSelector": "./src/components/PeopleSelector",
         "./PeopleSelector/UserTooltip":
           "./src/components/PeopleSelector/sub-components/UserTooltip.js",
+        "./BrandingPage":
+          "./src/pages/PortalSettings/categories/common/branding.js",
+        "./WhiteLabelPage":
+          "./src/pages/PortalSettings/categories/common/Branding/whitelabel.js",
+        "./AdditionalResPage":
+          "./src/pages/PortalSettings/categories/common/Branding/additionalResources.js",
+        "./CompanyInfoPage":
+          "./src/pages/PortalSettings/categories/common/Branding/companyInfoSettings.js",
+        "./BackupPage": "./src/pages/PortalSettings/categories/data-management",
+        "./RestorePage":
+          "./src/pages/PortalSettings/categories/data-management/backup/restore-backup",
+        "./PaymentsPage": "./src/pages/PortalSettings/categories/payments",
       },
       shared: {
         ...deps,
@@ -348,6 +363,15 @@ module.exports = (env, argv) => {
         publicPath: homepage,
         title: title,
         base: `${homepage}/`,
+        browserDetectorUrl: `/static/scripts/browserDetector.js?hash=${
+          runtime.checksums["browserDetector.js"] || dateHash
+        }`,
+        configUrl: `/static/scripts/config.json?hash=${
+          runtime.checksums["config.json"] || dateHash
+        }`,
+        tiffUrl: `/static/scripts/tiff.min.js?hash=${
+          runtime.checksums["tiff.min.js"] || dateHash
+        }`,
       })
     );
   }

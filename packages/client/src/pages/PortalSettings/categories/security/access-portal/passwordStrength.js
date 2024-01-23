@@ -14,8 +14,9 @@ import { size } from "@docspace/components/utils/device";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import isEqual from "lodash/isEqual";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
-import { isMobile } from "react-device-detect";
+
 import PasswordLoader from "../sub-components/loaders/password-loader";
+import { DeviceType } from "@docspace/common/constants";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -23,7 +24,7 @@ const MainContainer = styled.div`
   .password-slider {
     width: 160px;
     height: 8px;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin: 24px 0px 24px 16px;
@@ -44,16 +45,16 @@ const MainContainer = styled.div`
   }
 `;
 
-const PasswordStrength = props => {
+const PasswordStrength = (props) => {
   const {
     t,
-
     setPortalPasswordSettings,
     passwordSettings,
     initSettings,
     isInit,
     currentColorScheme,
     passwordStrengthSettingsUrl,
+    currentDeviceType,
   } = props;
 
   const navigate = useNavigate();
@@ -96,16 +97,16 @@ const PasswordStrength = props => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
 
-    if (!isInit) initSettings().then(() => setIsLoading(true));
+    if (!isInit) initSettings("password").then(() => setIsLoading(true));
     else setIsLoading(true);
 
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
   useEffect(() => {
-    if (!isInit) return;
+    if (!isInit || !passwordSettings) return;
     getSettings();
-  }, [isLoading]);
+  }, [isLoading, passwordSettings]);
 
   useEffect(() => {
     if (!isLoading) return;
@@ -128,16 +129,16 @@ const PasswordStrength = props => {
   }, [passwordLen, useUpperCase, useDigits, useSpecialSymbols]);
 
   const checkWidth = () => {
-    window.innerWidth > size.smallTablet &&
+    window.innerWidth > size.mobile &&
       location.pathname.includes("password") &&
       navigate("/portal-settings/security/access-portal");
   };
 
-  const onSliderChange = e => {
+  const onSliderChange = (e) => {
     setPasswordLen(Number(e.target.value));
   };
 
-  const onClickCheckbox = e => {
+  const onClickCheckbox = (e) => {
     switch (e.target.value) {
       case "upperCase":
         setUseUpperCase(e.target.checked);
@@ -188,7 +189,7 @@ const PasswordStrength = props => {
     setShowReminder(false);
   };
 
-  if (isMobile && !isInit && !isLoading) {
+  if (currentDeviceType !== DeviceType.desktop && !isInit && !isLoading) {
     return <PasswordLoader />;
   }
 
@@ -199,14 +200,15 @@ const PasswordStrength = props => {
           {t("SettingPasswordDescription")}
         </Text>
         <Text fontSize="13px" fontWeight="400" className="learn-subtitle">
-          <Trans t={t} i18nKey="SettingPasswordDescriptionSave" />
+          <Trans t={t} i18nKey="SaveToApply" />
         </Text>
         <Link
           className="link-learn-more"
           color={currentColorScheme.main.accent}
           target="_blank"
           isHovered
-          href={passwordStrengthSettingsUrl}>
+          href={passwordStrengthSettingsUrl}
+        >
           {t("Common:LearnMore")}
         </Link>
       </LearnMoreWrapper>
@@ -257,7 +259,7 @@ const PasswordStrength = props => {
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
-        reminderTest={t("YouHaveUnsavedChanges")}
+        reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         displaySettings={true}
@@ -276,6 +278,7 @@ export default inject(({ auth, setup }) => {
     passwordSettings,
     currentColorScheme,
     passwordStrengthSettingsUrl,
+    currentDeviceType,
   } = auth.settingsStore;
   const { initSettings, isInit } = setup;
 
@@ -286,5 +289,6 @@ export default inject(({ auth, setup }) => {
     isInit,
     currentColorScheme,
     passwordStrengthSettingsUrl,
+    currentDeviceType,
   };
 })(withTranslation(["Settings", "Common"])(observer(PasswordStrength)));

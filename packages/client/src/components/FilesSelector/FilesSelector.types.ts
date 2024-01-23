@@ -28,6 +28,7 @@ export type Item = {
   isDisabled?: boolean;
   security: Security;
   roomType: number;
+  fileExst?: string;
 };
 
 export type BreadCrumb = {
@@ -50,12 +51,13 @@ export type setTotalCallback = (value: number) => number;
 
 export type useSocketHelperProps = {
   socketHelper: any;
-  socketSubscribersId: Set<string>;
+  socketSubscribers: Set<string>;
   setItems: (callback: setItemsCallback) => void;
   setBreadCrumbs: (callback: setBreadCrumbsCallback) => void;
   setTotal: (callback: setTotalCallback) => void;
   disabledItems: string[] | number[];
   filterParam?: string;
+  getIcon: (size: number, fileExst: string) => string;
 };
 
 export type useRootHelperProps = {
@@ -66,6 +68,10 @@ export type useRootHelperProps = {
   treeFolders?: Item[];
   setIsNextPageLoading: (value: boolean) => void;
   setHasNextPage: (value: boolean) => void;
+  onSetBaseFolderPath?: (
+    value: number | string | undefined | BreadCrumb[]
+  ) => void;
+  isUserOnly?: boolean;
 };
 
 export type useRoomsHelperProps = {
@@ -79,12 +85,16 @@ export type useRoomsHelperProps = {
   setIsRoot: (value: boolean) => void;
   searchValue?: string;
   isRoomsOnly: boolean;
-  onSetBaseFolderPath?: (value: number | string | undefined) => void;
+  onSetBaseFolderPath?: (
+    value: number | string | undefined | BreadCrumb[]
+  ) => void;
 };
 
 export type useFilesHelpersProps = {
+  roomsFolderId?: number;
   setBreadCrumbs: (items: BreadCrumb[]) => void;
   setIsBreadCrumbsLoading: (value: boolean) => void;
+  setIsSelectedParentFolder: (value: boolean) => void;
   setIsNextPageLoading: (value: boolean) => void;
   setHasNextPage: (value: boolean) => void;
   setTotal: (value: number) => void;
@@ -100,7 +110,9 @@ export type useFilesHelpersProps = {
   setSelectedTreeNode: (treeNode: any) => void;
   filterParam?: string;
   getRootData?: () => Promise<void>;
-  onSetBaseFolderPath?: (value: number | string | undefined) => void;
+  onSetBaseFolderPath?: (
+    value: number | string | undefined | BreadCrumb[]
+  ) => void;
   isRoomsOnly: boolean;
   rootThirdPartyId?: string;
   getRoomList?: (
@@ -109,6 +121,7 @@ export type useFilesHelpersProps = {
     search?: string | null,
     isErrorPath?: boolean
   ) => void;
+  getIcon: (size: number, fileExst: string) => string;
   t: any;
 };
 
@@ -118,14 +131,20 @@ export type FilesSelectorProps = {
   isThirdParty: boolean;
   rootThirdPartyId?: string;
   isRoomsOnly: boolean;
+  isUserOnly: boolean;
+  isRoomBackup: boolean;
   isEditorDialog: boolean;
   setMoveToPublicRoomVisible: (visible: boolean, operationData: object) => void;
+  setBackupToPublicRoomVisible: (visible: boolean, data: object) => void;
+  getIcon: (size: number, fileExst: string) => string;
 
   onClose?: () => void;
 
   isMove?: boolean;
   isCopy?: boolean;
+  isRestore: boolean;
   isRestoreAll?: boolean;
+  isSelect?: boolean;
 
   filterParam?: string;
 
@@ -140,12 +159,12 @@ export type FilesSelectorProps = {
 
   selection: any[];
   disabledItems: string[] | number[];
-  isFolderActions?: boolean;
   setMoveToPanelVisible: (value: boolean) => void;
+  setRestorePanelVisible: (value: boolean) => void;
   setCopyPanelVisible: (value: boolean) => void;
   setRestoreAllPanelVisible: (value: boolean) => void;
-  setIsFolderActions: (value: boolean) => void;
   setMovingInProgress: (value: boolean) => void;
+  setSelected: (selected: "close" | "none", clearBuffer?: boolean) => void;
   setConflictDialogData: (conflicts: any, operationData: any) => void;
   itemOperationToFolder: (operationData: any) => Promise<void>;
   clearActiveOperations: (
@@ -158,9 +177,14 @@ export type FilesSelectorProps = {
     fileIds: string[] | number[]
   ) => Promise<any>;
 
-  onSetBaseFolderPath?: (value: number | string | undefined) => void;
+  onSetBaseFolderPath?: (
+    value: number | string | undefined | BreadCrumb[]
+  ) => void;
   onSetNewFolderPath?: (value: number | string | undefined) => void;
-  onSelectFolder?: (value: number | string | undefined) => void;
+  onSelectFolder?: (
+    value: number | string | undefined,
+    breadCrumbs: BreadCrumb[]
+  ) => void;
   onSelectTreeNode?: (treeNode: any) => void;
   onSave?: (
     e: any,
@@ -168,11 +192,16 @@ export type FilesSelectorProps = {
     fileTitle: string,
     openNewTab: boolean
   ) => void;
-  onSelectFile?: (fileInfo: {
-    id: string | number;
-    title: string;
-    path?: string[];
-  }) => void;
+  onSelectFile?: (
+    fileInfo: {
+      id: string | number;
+      title: string;
+      path?: string[];
+    },
+    breadCrumbs: BreadCrumb[]
+  ) => void;
+
+  setInfoPanelIsMobileHidden: (arg: boolean) => void;
 
   withFooterInput?: boolean;
   withFooterCheckbox?: boolean;
@@ -186,5 +215,13 @@ export type FilesSelectorProps = {
   includeFolder?: boolean;
 
   socketHelper: any;
-  socketSubscribersId: Set<string>;
+  socketSubscribers: Set<string>;
+  currentDeviceType: "mobile" | "tablet" | "desktop";
+
+  embedded: boolean;
+  withHeader: boolean;
+  withCancelButton: boolean;
+  settings: any;
+
+  roomsFolderId?: number;
 };

@@ -5,8 +5,11 @@
   "ConnectSocialNetworks": "Connect your social networks",
   "DarkTheme": "Dark theme",
   "DescriptionForSecurity": "For more security, you need to change your password.",
+  "DesktopTheme": "Sync with Desktop Editor settings",
+  "DesktopThemeDescription": "Automatically switch between light and dark themes depending on the current theme of Desktop Editors.",
   "EditPhoto": "Edit photo",
   "EmailNotVerified": "Email is not verified",
+  "ErrorAccountAlreadyUse": "Linked account already in use by another user",
   "FileManagement": "File management",
   "InterfaceTheme": "Interface theme",
   "LightTheme": "Light theme",
@@ -25,6 +28,5 @@
   "SuccessLogout": "The active connection was logged out: {{platform}}, {{browser}}",
   "SystemTheme": "Use system theme",
   "SystemThemeDescription": "Automatically switch between light and dark themes when your system does.",
-  "TfaLoginSettings": "Login settings",
   "TwoFactorDescription": "Two-factor authentication via a code-generating app was enabled for all users by the admin."
 }

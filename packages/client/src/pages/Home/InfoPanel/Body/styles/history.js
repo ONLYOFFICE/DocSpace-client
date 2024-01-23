@@ -9,15 +9,15 @@ const StyledHistoryList = styled.div`
 
 const StyledHistorySubtitle = styled.div`
   position: sticky;
-  background: ${props => props.theme.infoPanel.backgroundColor};
+  background: ${(props) => props.theme.infoPanel.backgroundColor};
   top: 80px;
-  z-index: 100;
+  z-index: 99;
 
   padding: 8px 0 12px;
   font-weight: 600;
-  font-size: 13px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   line-height: 20px;
-  color: ${props => props.theme.infoPanel.history.subtitleColor};
+  color: ${(props) => props.theme.infoPanel.history.subtitleColor};
 `;
 
 const StyledUserNameLink = styled.span`
@@ -27,7 +27,7 @@ const StyledUserNameLink = styled.span`
   margin: 1px 0;
 
   .username {
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     font-weight: 600;
     display: inline-block;
   }
@@ -63,7 +63,7 @@ const StyledHistoryBlock = styled.div`
   .info {
     width: calc(100% - 40px);
     max-width: calc(100% - 40px);
-    display: ${props => `solid 1px ${props.theme.infoPanel.borderColor}`};
+    display: ${(props) => `solid 1px ${props.theme.infoPanel.borderColor}`};
     flex-direction: column;
     gap: 2px;
 
@@ -73,7 +73,7 @@ const StyledHistoryBlock = styled.div`
       gap: 4px;
       .name {
         font-weight: 600;
-        font-size: 14px;
+        font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
@@ -81,7 +81,7 @@ const StyledHistoryBlock = styled.div`
       .date {
         white-space: nowrap;
         display: inline-block;
-        ${props =>
+        ${(props) =>
           props.theme.interfaceDirection === "rtl"
             ? css`
                 margin-right: auto;
@@ -90,13 +90,13 @@ const StyledHistoryBlock = styled.div`
                 margin-left: auto;
               `}
         font-weight: 600;
-        font-size: 12px;
-        color: ${props => props.theme.infoPanel.history.dateColor};
+        font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
+        color: ${(props) => props.theme.infoPanel.history.dateColor};
       }
     }
   }
 
-  ${props =>
+  ${(props) =>
     props.isUserAction &&
     css`
       .info {
@@ -104,7 +104,7 @@ const StyledHistoryBlock = styled.div`
         flex-wrap: wrap;
         .message {
           display: inline-block;
-          ${props =>
+          ${(props) =>
             props.theme.interfaceDirection === "rtl"
               ? css`
                   margin-left: 4px;
@@ -119,27 +119,31 @@ const StyledHistoryBlock = styled.div`
 
 const StyledHistoryBlockMessage = styled.div`
   font-weight: 400;
-  font-size: 13px;
+  font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
   line-height: 20px;
 
   display: flex;
   gap: 4px;
 
+  .main-message {
+    width: max-content;
+    max-width: 100%;
+    min-width: max-content;
+  }
+
   strong {
+    max-width: 100%;
+    display: inline-block;
+    vertical-align: top;
     font-weight: 600;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
   }
 
-  .main-message {
-    width: max-content;
-    white-space: nowrap;
-  }
-
   .folder-label {
     max-width: 100%;
-    color: ${props => props.theme.infoPanel.history.locationIconColor};
+    color: ${(props) => props.theme.infoPanel.history.locationIconColor};
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -151,12 +155,12 @@ const StyledHistoryBlockFilesList = styled.div`
   display: flex;
   flex-direction: column;
   padding: 8px 0;
-  background: ${props => props.theme.infoPanel.history.fileBlockBg};
+  background: ${(props) => props.theme.infoPanel.history.fileBlockBg};
   border-radius: 3px;
 
   .show_more-link {
     cursor: pointer;
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin: 10px 20px 3px 0;
@@ -165,7 +169,7 @@ const StyledHistoryBlockFilesList = styled.div`
             margin: 10px 0 3px 20px;
           `}
     font-weight: 400;
-    font-size: 13px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     line-height: 15px;
 
     strong {
@@ -196,7 +200,7 @@ const StyledHistoryBlockFile = styled.div`
 
   .item-title {
     font-weight: 600;
-    font-size: 14px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
     display: flex;
     min-width: 0;
     gap: 0;
@@ -209,12 +213,12 @@ const StyledHistoryBlockFile = styled.div`
 
     .exst {
       flex-shrink: 0;
-      color: ${props => props.theme.infoPanel.history.fileExstColor};
+      color: ${(props) => props.theme.infoPanel.history.fileExstColor};
     }
   }
 
   .location-btn {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-right: auto;

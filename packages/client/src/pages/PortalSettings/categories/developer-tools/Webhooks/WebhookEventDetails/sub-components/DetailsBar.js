@@ -1,5 +1,5 @@
 import React from "react";
-import moment from "moment";
+import moment from "moment-timezone";
 import styled from "styled-components";
 
 import Text from "@docspace/components/text";
@@ -10,14 +10,15 @@ import { inject, observer } from "mobx-react";
 import { Base } from "@docspace/components/themes";
 import { useTranslation } from "react-i18next";
 
+import { tablet, mobile } from "@docspace/components/utils/device";
+
 const BarWrapper = styled.div`
   width: 100%;
   max-width: 1200px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
 
-  margin-top: 24px;
+  margin-top: 25px;
 
   background: ${(props) => (props.theme.isBase ? "#f8f9f9" : "#3D3D3D")};
   border-radius: 3px;
@@ -32,14 +33,14 @@ BarWrapper.defaultProps = { theme: Base };
 
 const BarItem = styled.div`
   box-sizing: border-box;
-  height: 76px;
+  min-height: 76px;
   padding: 16px;
   flex-basis: 25%;
 
-  @media (max-width: 1300px) {
+  @media ${tablet} {
     flex-basis: 50%;
   }
-  @media (max-width: 560px) {
+  @media ${mobile} {
     flex-basis: 100%;
   }
 `;
@@ -66,7 +67,10 @@ const DetailsBar = ({ eventDetails }) => {
 
   const formatDate = (date) => {
     return (
-      moment(date).locale(i18n.language).format("MMM D, YYYY, h:mm:ss A") +
+      moment(date)
+        .locale(i18n.language)
+        .tz(window.timezone || "")
+        .format("MMM D, YYYY, h:mm:ss A") +
       " " +
       t("Common:UTC")
     );

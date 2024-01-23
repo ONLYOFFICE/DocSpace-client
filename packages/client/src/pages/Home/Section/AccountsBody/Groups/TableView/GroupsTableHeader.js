@@ -15,7 +15,7 @@ class GroupsTableHeader extends React.Component {
       {
         key: "Name",
         title: props.t("Common:Name"),
-        resizable: true,
+        resizable: false,
         enable: true,
         default: true,
         sortBy: "AZ",
@@ -31,7 +31,7 @@ class GroupsTableHeader extends React.Component {
   getColumns = (defaultColumns) => {
     const columns = [];
     const storageColumns = localStorage.getItem(
-      `${TABLE_COLUMNS}=${this.props.userId}`,
+      `${TABLE_COLUMNS}=${this.props.userId}`
     );
 
     if (storageColumns) {
@@ -138,6 +138,6 @@ export default inject(({ auth, peopleStore, clientLoadingStore }) => ({
   withPaging: auth.settingsStore,
 }))(
   withTranslation(["People", "Common", "PeopleTranslations"])(
-    observer(GroupsTableHeader),
-  ),
+    observer(GroupsTableHeader)
+  )
 );

@@ -122,15 +122,13 @@ const StyledTableContainer = styled(TableContainer)`
 
 StyledTableContainer.defaultProps = { theme: Base };
 
-const GroupsTableContainer = ({
+const GroupsTableView = ({
   groups,
+  selection,
   sectionWidth,
   accountsViewAs,
   setViewAs,
   theme,
-  isAdmin,
-  isOwner,
-  changeType,
   userId,
   infoPanelVisible,
 
@@ -138,7 +136,6 @@ const GroupsTableContainer = ({
   hasMoreAccounts,
   filterTotal,
   withPaging,
-  canChangeUserType,
   isFiltered,
   currentDeviceType,
 }) => {
@@ -169,9 +166,9 @@ const GroupsTableContainer = ({
         location={location}
       />
       <TableBody
-        infoPanelVisible={infoPanelVisible}
-        columnInfoPanelStorageName={columnInfoPanelStorageName}
         columnStorageName={columnStorageName}
+        columnInfoPanelStorageName={columnInfoPanelStorageName}
+        infoPanelVisible={infoPanelVisible}
         fetchMoreFiles={fetchMoreAccounts}
         hasMoreFiles={hasMoreAccounts}
         itemCount={filterTotal}
@@ -184,11 +181,7 @@ const GroupsTableContainer = ({
             theme={theme}
             key={item.id}
             item={item}
-            isAdmin={isAdmin}
-            isOwner={isOwner}
-            changeUserType={changeType}
-            userId={userId}
-            canChangeUserType={canChangeUserType}
+            isChecked={selection.includes(item)}
             hideColumns={hideColumns}
             itemIndex={index}
           />
@@ -211,35 +204,28 @@ export default inject(
       changeType,
     } = peopleStore;
 
-    const { groups } = groupsStore;
+    const { groups, selection, setSelection } = groupsStore;
 
     const { theme, withPaging, currentDeviceType } = auth.settingsStore;
     const { peopleList, hasMoreAccounts, fetchMoreAccounts } = usersStore;
     const { filterTotal, isFiltered } = filterStore;
 
     const { isVisible: infoPanelVisible } = auth.infoPanelStore;
-    const { isAdmin, isOwner, id: userId } = auth.userStore.user;
-
-    const { canChangeUserType } = accessRightsStore;
 
     return {
       groups,
+      selection,
       accountsViewAs,
       setViewAs,
       theme,
-      isAdmin,
-      isOwner,
-      changeType,
-      userId,
       infoPanelVisible,
       withPaging,
 
       fetchMoreAccounts,
       hasMoreAccounts,
       filterTotal,
-      canChangeUserType,
       isFiltered,
       currentDeviceType,
     };
   }
-)(observer(GroupsTableContainer));
+)(observer(GroupsTableView));

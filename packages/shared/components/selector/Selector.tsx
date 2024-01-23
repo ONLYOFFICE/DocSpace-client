@@ -139,14 +139,15 @@ const Selector = ({
   );
 
   const onSelectAction = (item: TItem) => {
-    onSelect({
-      ...item,
-      id: item.id,
-      email: item.email || "",
-      avatar: item.avatar,
-      icon: item.icon,
-      label: item.label,
-    });
+    if (onSelect)
+      onSelect({
+        ...item,
+        id: item.id,
+        email: item.email || "",
+        avatar: item.avatar,
+        icon: item.icon,
+        label: item.label,
+      });
 
     if (isMultiSelect) {
       setRenderedItems((value) => {

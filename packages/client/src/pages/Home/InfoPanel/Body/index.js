@@ -6,6 +6,7 @@ import ItemTitle from "./sub-components/ItemTitle";
 
 import { StyledInfoPanelBody } from "./styles/common";
 import { getRoomInfo } from "@docspace/common/api/rooms";
+import { useParams } from "react-router-dom";
 
 const InfoPanelBodyContent = ({
   selection,
@@ -20,20 +21,28 @@ const InfoPanelBodyContent = ({
   getIsFiles,
   getIsRooms,
   getIsAccounts,
+  getIsPeople,
+  getIsGroups,
   getIsGallery,
   gallerySelected,
   isRootFolder,
   ...props
 }) => {
+  const { groupId } = useParams();
+
   const [selectedItems, setSelectedItems] = useState(props.selectedItems);
   const [selectedFolder, setSelectedFolder] = useState(props.selectedFolder);
 
   const isFiles = getIsFiles();
   const isRooms = getIsRooms();
-  const isAccounts = getIsAccounts();
   const isGallery = getIsGallery();
+  const isGroups = getIsGroups() || (groupId && !selectedItems.length);
+  const isPeople =
+    getIsPeople() || (getIsGroups() && groupId && selectedItems.length);
 
   const isSeveralItems = props.selectedItems?.length > 1;
+
+  console.log("selection", selection);
 
   const isNoItemGallery = isGallery && !gallerySelected;
   const itemIsRoot =
@@ -45,7 +54,8 @@ const InfoPanelBodyContent = ({
     selection,
     isFiles,
     isRooms,
-    isAccounts,
+    isPeople,
+    isGroups,
     isGallery,
     isRootFolder: selectedFolder.id === selectedFolder.rootFolderId,
     isSeveralItems,
@@ -57,6 +67,7 @@ const InfoPanelBodyContent = ({
     membersProps: {},
     historyProps: { selectedFolder },
     accountsProps: {},
+    groupsProps: {},
     galleryProps: {},
     pluginProps: { isRooms, roomsView, fileView },
   });
@@ -64,10 +75,14 @@ const InfoPanelBodyContent = ({
   const getView = () => {
     const currentView = isRooms ? roomsView : fileView;
 
+    console.log(isNoItem, isSeveralItems, isGallery, isPeople, isGroups);
+
     if (isNoItem) return viewHelper.NoItemView();
     if (isSeveralItems) return viewHelper.SeveralItemsView();
+
     if (isGallery) return viewHelper.GalleryView();
-    if (isAccounts) return viewHelper.AccountsView();
+    if (isPeople) return viewHelper.AccountsView();
+    if (isGroups) return viewHelper.GroupsView();
 
     switch (currentView) {
       case "info_members":
@@ -141,10 +156,10 @@ const InfoPanelBodyContent = ({
   }, [selectedItems, selectedFolder]);
 
   // * DEV-ONLY - Logs selection change
-  // useEffect(() => {
-  //   console.log("\nfor-dev  Selected items: ", selectedItems);
-  //   console.log("\nfor-dev  Selected folder: ", selectedFolder);
-  // }, [selectedItems, selectedFolder]);
+  useEffect(() => {
+    console.log("\nfor-dev  Selected items: ", selectedItems);
+    console.log("\nfor-dev  Selected folder: ", selectedFolder);
+  }, [selectedItems, selectedFolder]);
 
   if (!selection && !isGallery) return null;
 
@@ -176,6 +191,8 @@ export default inject(({ auth, selectedFolderStore, oformsStore }) => {
     getIsFiles,
     getIsRooms,
     getIsAccounts,
+    getIsPeople,
+    getIsGroups,
     getIsGallery,
   } = auth.infoPanelStore;
 
@@ -201,6 +218,8 @@ export default inject(({ auth, selectedFolderStore, oformsStore }) => {
     getIsFiles,
     getIsRooms,
     getIsAccounts,
+    getIsPeople,
+    getIsGroups,
     getIsGallery,
 
     selectedItems,

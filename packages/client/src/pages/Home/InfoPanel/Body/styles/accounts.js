@@ -11,7 +11,7 @@ const StyledAccountsItemTitle = styled.div`
   justify-content: start;
   gap: 16px;
   position: fixed;
-  margin-top: -80px;
+  margin-top: -128px;
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
@@ -109,10 +109,10 @@ const StyledAccountContent = styled.div`
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
-          margin: 80px 0 0 auto;
+          margin: 128px 0 0 auto;
         `
       : css`
-          margin: 80px auto 0 0;
+          margin: 128px auto 0 0;
         `}
 
   .data__header {

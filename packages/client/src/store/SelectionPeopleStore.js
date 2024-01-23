@@ -62,14 +62,14 @@ class SelectionStore {
     for (let item of added) {
       if (!item) return;
 
-      console.log(item);
       const value = item.getElementsByClassName("user-item")
         ? item.getElementsByClassName("user-item")[0]?.getAttribute("value")
         : null;
 
       if (!value) return;
+      console.log(value);
       const splitValue = value && value.split("_");
-      const id = splitValue.slice(1, -3).join("_");
+      const id = splitValue?.slice(1, -3).join("_");
 
       const isFound = this.selection?.findIndex((f) => f?.id == id) === -1;
 
@@ -91,7 +91,7 @@ class SelectionStore {
         : null;
 
       const splitValue = value && value.split("_");
-      const id = splitValue.slice(1, -3).join("_");
+      const id = splitValue?.slice(1, -3).join("_");
 
       const index = newSelections.findIndex((item) => item?.id == id);
 

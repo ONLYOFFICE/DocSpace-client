@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { TableRow, TableCell } from "@docspace/shared/components/table";
 import { Link } from "@docspace/shared/components/link";
 import { Checkbox } from "@docspace/shared/components/checkbox";
+import { inject, observer } from "mobx-react";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 
@@ -182,34 +183,35 @@ const StyledPeopleRow = styled(TableRow)`
 
 StyledPeopleRow.defaultProps = { theme: Base };
 
-const GroupsTableItem = (props) => {
-  const {
-    t,
-    item,
-    checkedProps,
-    onContentRowSelect,
-    onContentRowClick,
+const GroupsTableItem = ({
+  t,
+  item,
+  // checkedProps,
+  // onContentRowSelect,
+  // onContentRowClick,
 
-    theme,
+  theme,
 
-    isActive,
-    hideColumns,
-    value,
-  } = props;
+  isActive,
+  hideColumns,
+  // value,
 
+  selection,
+  setSelection,
+  addGroupToSelection,
+}) => {
   const navigate = useNavigate();
 
-  const sideInfoColor = theme.peopleTableRow.sideInfoColor;
-
-  const isChecked = checkedProps.checked;
+  const isChecked = selection.includes(item);
 
   const onChange = (e) => {
-    onContentRowSelect && onContentRowSelect(e.target.checked, item);
+    if (!isChecked) setSelection([...selection, item]);
+    else setSelection(selection.filter((g) => g.id !== item.id));
   };
 
-  const onRowContextClick = React.useCallback(() => {
-    onContentRowClick && onContentRowClick(!isChecked, item, false);
-  }, [isChecked, item, onContentRowClick]);
+  const onRowContextClick = () => {
+    // onContentRowClick && onContentRowClick(!isChecked, item, false);
+  };
 
   const onRowClick = (e) => {
     if (
@@ -223,7 +225,12 @@ const GroupsTableItem = (props) => {
     )
       return;
 
-    onContentRowClick && onContentRowClick(!isChecked, item);
+    if (selection.length === 1 && selection[0].id === item.id) {
+      setSelection([]);
+      return;
+    }
+
+    setSelection([item]);
   };
 
   const onLinkClick = () => {
@@ -235,7 +242,7 @@ const GroupsTableItem = (props) => {
       {
         id: "option_profile",
         key: "profile",
-        icon: "http://192.168.0.105/static/images/check-box.react.svg?hash=079b6e8fa11a027ed622",
+        icon: "http://192.168.0.104/static/images/check-box.react.svg",
         label: "Select",
       },
       {
@@ -245,7 +252,7 @@ const GroupsTableItem = (props) => {
       {
         id: "option_change-name",
         key: "change-name",
-        icon: "http://192.168.0.105/static/images/pencil.react.svg?hash=7b1050767036ee383c82",
+        icon: "http://192.168.0.104/static/images/pencil.react.svg",
         label: "Edit department",
         onClick: () => {
           const event = new Event(Events.GROUP_EDIT);
@@ -254,13 +261,11 @@ const GroupsTableItem = (props) => {
         },
       },
       {
-        icon: "http://192.168.0.105/static/images/info.outline.react.svg?hash=1341c2413ad79879439d",
+        icon: "http://192.168.0.104/static/images/info.outline.react.svg",
         id: "option_details",
         key: "details",
         label: "Info",
-        onClick: () => {
-          onSelect();
-        },
+        onClick: () => {},
       },
       {
         key: "separator-2",
@@ -269,11 +274,13 @@ const GroupsTableItem = (props) => {
       {
         id: "option_change-owner",
         key: "change-owner",
-        icon: "http://192.168.0.105/static/images/catalog.trash.react.svg?hash=eba7f2edad4e3c4f6f77",
+        icon: "http://192.168.0.104/static/images/catalog.trash.react.svg",
         label: "Delete",
       },
     ],
   };
+
+  const value = item.id;
 
   const titleWithoutSpaces = item.name.replace(/\s+/g, " ").trim();
   const indexAfterLastSpace = titleWithoutSpaces.lastIndexOf(" ");
@@ -294,7 +301,7 @@ const GroupsTableItem = (props) => {
       <StyledPeopleRow
         key={item.id}
         className="table-row"
-        sideInfoColor={sideInfoColor}
+        sideInfoColor={theme.peopleTableRow.sideInfoColor}
         checked={isChecked}
         isActive={isActive}
         onClick={onRowClick}
@@ -351,6 +358,12 @@ const GroupsTableItem = (props) => {
   );
 };
 
-export default withTranslation(["People", "Common", "Settings"])(
-  withContent(GroupsTableItem),
+export default inject(({ peopleStore }) => ({
+  selection: peopleStore.groupsStore.selection,
+  setSelection: peopleStore.groupsStore.setSelection,
+  addGroupToSelection: peopleStore.groupsStore.addGroupToSelection,
+}))(
+  withTranslation(["People", "Common", "PeopleTranslations"])(
+    observer(GroupsTableItem)
+  )
 );

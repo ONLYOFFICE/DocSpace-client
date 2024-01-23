@@ -61,7 +61,7 @@ class InfoPanelStore {
   setIsMobileHidden = (bool) => (this.isMobileHidden = bool);
 
   setSelection = (selection) => {
-    if (this.getIsAccounts() && (!selection.email || !selection.displayName)) {
+    if (this.getIsPeople() && (!selection.email || !selection.displayName)) {
       this.selection = selection.length
         ? selection
         : { isSelectedFolder: true };
@@ -112,21 +112,37 @@ class InfoPanelStore {
       selection: peopleStoreSelection,
       bufferSelection: peopleStoreBufferSelection,
     } = this.peopleStore.selectionStore;
-    return this.getIsAccounts()
-      ? peopleStoreSelection.length
-        ? [...peopleStoreSelection]
-        : peopleStoreBufferSelection
-        ? [peopleStoreBufferSelection]
-        : []
-      : filesStoreSelection?.length > 0
-      ? [...filesStoreSelection]
-      : filesStoreBufferSelection
-      ? [filesStoreBufferSelection]
-      : [];
+
+    const {
+      selection: groupsStoreSelection,
+      // bufferSelection: groupsStoreBufferSelection,
+    } = this.peopleStore.groupsStore;
+
+    if (this.getIsPeople() || this.getIsInsideGroup()) {
+      if (peopleStoreSelection.length) return [...peopleStoreSelection];
+      if (peopleStoreBufferSelection) return [peopleStoreBufferSelection];
+    }
+
+    if (this.getIsGroups()) {
+      if (groupsStoreSelection.length) return [...groupsStoreSelection];
+    }
+
+    if (filesStoreSelection?.length) return [...filesStoreSelection];
+    if (filesStoreBufferSelection) return [filesStoreBufferSelection];
+
+    return [];
   };
 
   getSelectedFolder = () => {
     const selectedFolderStore = { ...this.selectedFolderStore };
+    const { currentGroup } = this.peopleStore.groupsStore;
+
+    if (this.getIsGroups) {
+      return {
+        ...currentGroup,
+        isGroup: true,
+      };
+    }
 
     return {
       ...selectedFolderStore,
@@ -153,12 +169,12 @@ class InfoPanelStore {
           isSelectedItem: false,
         })
       : selectedItems.length === 1
-      ? this.normalizeSelection({
-          ...selectedItems[0],
-          isSelectedFolder: false,
-          isSelectedItem: true,
-        })
-      : [...Array(selectedItems.length).keys()];
+        ? this.normalizeSelection({
+            ...selectedItems[0],
+            isSelectedFolder: false,
+            isSelectedItem: true,
+          })
+        : [...Array(selectedItems.length).keys()];
   };
 
   normalizeSelection = (selection) => {
@@ -235,20 +251,20 @@ class InfoPanelStore {
       ? item.rootFolderType === FolderType.Archive
         ? item.logo && item.logo.medium
         : this.settingsStore.getIcon(
-            size,
-            null,
-            null,
-            null,
-            item.roomType,
-            true
-          )
-        ? item.logo?.medium
-        : item.icon
-        ? item.icon
-        : this.settingsStore.getIcon(size, null, null, null, item.roomType)
+              size,
+              null,
+              null,
+              null,
+              item.roomType,
+              true
+            )
+          ? item.logo?.medium
+          : item.icon
+            ? item.icon
+            : this.settingsStore.getIcon(size, null, null, null, item.roomType)
       : item.isFolder
-      ? this.settingsStore.getFolderIcon(item.providerKey, size)
-      : this.settingsStore.getIcon(size, item.fileExst || ".file");
+        ? this.settingsStore.getFolderIcon(item.providerKey, size)
+        : this.settingsStore.getIcon(size, item.fileExst || ".file");
   };
 
   // User link actions //
@@ -332,6 +348,21 @@ class InfoPanelStore {
     return (
       pathname.indexOf("accounts") !== -1 && !(pathname.indexOf("view") !== -1)
     );
+  };
+
+  getIsPeople = (givenPathName) => {
+    const pathname = givenPathName || window.location.pathname.toLowerCase();
+    return pathname.indexOf("accounts/people") !== -1;
+  };
+
+  getIsGroups = (givenPathName) => {
+    const pathname = givenPathName || window.location.pathname.toLowerCase();
+    return pathname.indexOf("accounts/groups") !== -1;
+  };
+
+  getIsInsideGroup = (givenPathName) => {
+    const pathname = givenPathName || window.location.pathname.toLowerCase();
+    return pathname.indexOf("groups/filter") !== -1;
   };
 
   getIsGallery = (givenPathName) => {

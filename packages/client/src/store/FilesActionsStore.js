@@ -1785,8 +1785,8 @@ class FilesActionStore {
   disableRoomQuota = async (items, t) => {
     const { updateRoomQuota } = this.filesStore;
 
-    const userIDs = items.map((user) => {
-      return user?.id ? user.id : user;
+    const userIDs = items.map((item) => {
+      return item?.id ? item.id : item;
     });
 
     try {
@@ -1800,8 +1800,8 @@ class FilesActionStore {
   resetRoomQuota = async (items, t) => {
     const { resetRoomQuota } = this.filesStore;
 
-    const userIDs = items.map((user) => {
-      return user?.id ? user.id : user;
+    const userIDs = items.map((item) => {
+      return item?.id ? item.id : item;
     });
 
     try {

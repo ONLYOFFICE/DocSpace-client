@@ -20,6 +20,8 @@ const QuotaPerItemComponent = (props) => {
     initialSize,
     isQuotaSet,
     type,
+
+    defaultQuota,
   } = props;
 
   const { t } = useTranslation("Settings");
@@ -36,6 +38,11 @@ const QuotaPerItemComponent = (props) => {
     if (checked) return;
 
     setIsLoading(true);
+
+    if (defaultQuota === -1) {
+      setIsLoading(false);
+      return;
+    }
 
     await disableQuota();
     await updateQuotaInfo(type);
@@ -91,12 +98,19 @@ const QuotaPerItemComponent = (props) => {
   );
 };
 
-export default inject(({ auth, storageManagement }) => {
+export default inject(({ auth, storageManagement }, { type }) => {
   const { currentQuotaStore } = auth;
-  const { setUserQuota } = currentQuotaStore;
+  const { setUserQuota, defaultUsersQuota, defaultRoomsQuota } =
+    currentQuotaStore;
   const { isStatisticsAvailable } = currentQuotaStore;
 
   const { updateQuotaInfo } = storageManagement;
 
-  return { setUserQuota, isDisabled: !isStatisticsAvailable, updateQuotaInfo };
+  const defaultQuota = type === "user" ? defaultUsersQuota : defaultRoomsQuota;
+  return {
+    setUserQuota,
+    defaultQuota,
+    isDisabled: !isStatisticsAvailable,
+    updateQuotaInfo,
+  };
 })(observer(QuotaPerItemComponent));

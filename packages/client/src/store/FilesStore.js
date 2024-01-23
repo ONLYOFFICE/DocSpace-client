@@ -11,7 +11,7 @@ import {
   ShareAccessRights,
 } from "@docspace/shared/enums";
 
-import { RoomsTypeValues } from "@docspace/shared/utils";
+import { RoomsTypes } from "@docspace/shared/utils";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { updateTempContent } from "@docspace/shared/utils/common";
@@ -3228,8 +3228,8 @@ class FilesStore {
 
     if (this.folders.length) {
       for (const item of this.folders) {
-        if (item.roomType && RoomsTypeValues[item.roomType]) {
-          cbMenu.push(`room-${RoomsTypeValues[item.roomType]}`);
+        if (item.roomType && RoomsTypes[item.roomType]) {
+          cbMenu.push(`room-${RoomsTypes[item.roomType]}`);
         } else {
           cbMenu.push(FilterType.FoldersOnly);
         }

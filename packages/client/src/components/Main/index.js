@@ -100,8 +100,8 @@ const Main = (props) => {
 
 Main.displayName = "Main";
 
-export default inject(({ auth }) => {
-  const { isBannerVisible } = auth.bannerStore;
+export default inject(({ auth, bannerStore }) => {
+  const { isBannerVisible } = bannerStore;
 
   const { mainBarVisible, isFrame } = auth.settingsStore;
   return {

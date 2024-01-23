@@ -2,6 +2,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 
 import { IUserStore } from "@docspace/shared/store/UserStore";
+import { IBannerStore } from "@docspace/shared/store/BannerStore";
 
 import Article from "@docspace/shared/components/article";
 
@@ -81,17 +82,18 @@ export default inject(
     auth,
     uploadDataStore,
     userStore,
+    bannerStore,
   }: {
     auth: any;
     uploadDataStore: any;
     userStore: IUserStore;
+    bannerStore: IBannerStore;
   }) => {
     const {
       settingsStore,
 
       languageBaseName,
       isLiveChatAvailable,
-      bannerStore,
     } = auth;
 
     const { withSendAgain, user } = userStore;

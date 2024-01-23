@@ -1,5 +1,9 @@
 import authStore from "@docspace/common/store/AuthStore";
-import { userStore, tfaStore } from "@docspace/common/store/AuthStore";
+import {
+  userStore,
+  tfaStore,
+  bannerStore,
+} from "@docspace/common/store/AuthStore";
 import PaymentStore from "./PaymentStore";
 import WizardStore from "./WizardStore";
 import SettingsSetupStore from "./SettingsSetupStore";
@@ -222,6 +226,7 @@ const store = {
   auth: authStore,
   userStore,
   tfaStore,
+  bannerStore,
 
   payments: paymentStore,
   wizard: wizardStore,

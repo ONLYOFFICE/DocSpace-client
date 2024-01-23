@@ -3,7 +3,6 @@ import api from "@docspace/shared/api";
 import { setWithCredentialsStatus } from "@docspace/shared/api/client";
 
 import SettingsStore from "./SettingsStore";
-import BannerStore from "./BannerStore";
 
 import {
   logout as logoutDesktop,
@@ -22,16 +21,18 @@ import { getPortalTenantExtra } from "@docspace/shared/api/portal";
 
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { TfaStore } from "@docspace/shared/store/TfaStore";
+import { BannerStore } from "@docspace/shared/store/BannerStore";
+
 import { loginWithTfaCode } from "@docspace/shared/api/settings";
 
 export const userStore = new UserStore();
 export const tfaStore = new TfaStore();
+export const bannerStore = new BannerStore();
 
 class AuthStore {
   userStore = null;
 
   settingsStore = null;
-  tfaStore = null;
 
   isLoading = false;
   version = null;
@@ -45,16 +46,14 @@ class AuthStore {
 
   tenantExtra = {};
 
-  constructor(userStore, tfaStore) {
+  constructor(userStore) {
     this.userStore = userStore;
 
     this.settingsStore = new SettingsStore();
-    this.tfaStore = tfaStore;
 
     this.currentQuotaStore = new CurrentQuotasStore();
     this.currentTariffStatusStore = new CurrentTariffStatusStore(this);
     this.paymentQuotasStore = new PaymentQuotasStore();
-    this.bannerStore = new BannerStore();
 
     makeAutoObservable(this);
 
@@ -467,4 +466,4 @@ class AuthStore {
   }
 }
 
-export default new AuthStore(userStore, tfaStore);
+export default new AuthStore(userStore);

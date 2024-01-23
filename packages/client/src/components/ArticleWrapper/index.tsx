@@ -14,12 +14,13 @@ export default inject(
     profileActionsStore,
     dialogsStore,
     userStore,
+    bannerStore,
   }: any) => {
     const {
       settingsStore,
 
       isLiveChatAvailable,
-      bannerStore,
+
       currentQuotaStore,
 
       isPaymentPageAvailable,

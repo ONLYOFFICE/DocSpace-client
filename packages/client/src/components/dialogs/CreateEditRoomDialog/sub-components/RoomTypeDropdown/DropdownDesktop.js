@@ -42,7 +42,7 @@ const DropdownDesktop = ({ t, open, chooseRoomType }) => {
   return (
     <StyledDropdownDesktop className="dropdown-content-wrapper" isOpen={open}>
       <div className="dropdown-content">
-        {Object.values(RoomsTypeValues).map((roomType) => (
+        {RoomsTypeValues.map((roomType) => (
           <RoomType
             id={roomType}
             t={t}

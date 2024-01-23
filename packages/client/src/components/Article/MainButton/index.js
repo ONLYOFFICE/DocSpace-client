@@ -28,11 +28,11 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 import MobileView from "./MobileView";
 
-import { Events, EmployeeType, DeviceType } from "@docspace/common/constants";
+import { Events, EmployeeType, DeviceType } from "@docspace/shared/enums";
 
 import styled, { css } from "styled-components";
 
-import { resendInvitesAgain } from "@docspace/common/api/people";
+import { resendInvitesAgain } from "@docspace/shared/api/people";
 import { getCorrectFourValuesStyle } from "@docspace/shared/utils";
 
 const StyledButton = styled(Button)`

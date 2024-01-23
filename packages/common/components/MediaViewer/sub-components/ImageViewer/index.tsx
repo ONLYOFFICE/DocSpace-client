@@ -3,8 +3,8 @@ import { isDesktop as isDesktopDeviceDetect } from "react-device-detect";
 import { useSpring, config } from "@react-spring/web";
 import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
 
-import indexedDBHelper from "../../../../utils/indexedDBHelper";
-import { IndexedDBStores } from "../../../../constants";
+import indexedDBHelper from "@docspace/shared/utils/indexedDBHelper";
+import { IndexedDBStores } from "@docspace/shared/enums";
 
 import ViewerLoader from "../ViewerLoader";
 import ImageViewerToolbar from "../ImageViewerToolbar";
@@ -22,7 +22,7 @@ import {
 } from "../ImageViewerToolbar/ImageViewerToolbar.props";
 import { ToolbarActionType, KeyboardEventKeys, compareTo } from "../../helpers";
 import PlayerMessageError from "../PlayerMessageError";
-import { checkDialogsOpen } from "../../../../utils/checkDialogsOpen";
+import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 
 const MaxScale = 5;
 const MinScale = 0.5;
@@ -1026,8 +1026,8 @@ function ImageViewer({
               !window.DocSpaceConfig.imageThumbnails
                 ? src
                 : thumbnailSrc
-                ? `${thumbnailSrc}&size=1280x720`
-                : ""
+                  ? `${thumbnailSrc}&size=1280x720`
+                  : ""
             }
             ref={imgRef}
             style={style}

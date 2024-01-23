@@ -534,7 +534,7 @@ const Dark: TTheme = {
 
   rowContent: {
     icons: {
-      height: "19px",
+      height: "16px",
     },
 
     margin: "0 6px",

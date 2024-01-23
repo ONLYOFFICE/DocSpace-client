@@ -69,7 +69,7 @@ const DetailsBar = ({ eventDetails }) => {
     return (
       moment(date)
         .locale(i18n.language)
-        .tz(window.timezone || "")
+        .tz(window.timezone)
         .format("MMM D, YYYY, h:mm:ss A") +
       " " +
       t("Common:UTC")

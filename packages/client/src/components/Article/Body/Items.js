@@ -7,10 +7,10 @@ import { withTranslation } from "react-i18next";
 import {
   FolderType,
   ShareAccessRights,
-  FolderNames,
   DeviceType,
-} from "@docspace/common/constants";
-import { getCatalogIconUrlByType } from "@docspace/common/utils/catalogIcon.helper";
+} from "@docspace/shared/enums";
+import { FOLDER_NAMES } from "@docspace/shared/constants";
+import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 
 import { ArticleItem } from "@docspace/shared/components/article-item";
 import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
@@ -236,10 +236,13 @@ const Items = ({
         return true;
       }
 
-      if (
-        (item.rootFolderType === FolderType.TRASH && startDrag && !isArchive) ||
-        item.rootFolderType === FolderType.USER
-      ) {
+      if (item.rootFolderType === FolderType.TRASH && startDrag && !isArchive) {
+        return draggableItems.some(
+          (draggableItem) => draggableItem.security.Delete
+        );
+      }
+
+      if (item.rootFolderType === FolderType.USER) {
         return (
           folderAccess === ShareAccessRights.None ||
           folderAccess === ShareAccessRights.FullAccess ||
@@ -312,7 +315,7 @@ const Items = ({
             showBadge={showBadge}
             labelBadge={labelBadge}
             iconBadge={iconBadge}
-            folderId={`document_catalog-${FolderNames[item.rootFolderType]}`}
+            folderId={`document_catalog-${FOLDER_NAMES[item.rootFolderType]}`}
           />
         );
       });

@@ -2,7 +2,7 @@ import {
   ShareAccessRights,
   EmployeeType,
   RoomsType,
-} from "@docspace/common/constants";
+} from "@docspace/shared/enums";
 
 class MembersHelper {
   constructor(props) {
@@ -112,6 +112,15 @@ class MembersHelper {
           options.reviewer,
           options.commentator,
           options.viewer,
+          ...deleteOption,
+        ];
+
+      case RoomsType.FormRoom:
+        return [
+          options.roomAdmin,
+          options.collaborator,
+          options.viewer,
+          options.formFiller,
           ...deleteOption,
         ];
       case RoomsType.PublicRoom:

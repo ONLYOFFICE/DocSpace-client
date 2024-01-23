@@ -10,10 +10,10 @@ import { Checkbox } from "@docspace/shared/components/checkbox";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { TabsContainer } from "@docspace/shared/components/tabs-container";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
-import { objectToGetParams, loadScript } from "@docspace/common/utils";
+import { objectToGetParams, loadScript } from "@docspace/shared/utils/common";
 import { inject, observer } from "mobx-react";
 import { ImageEditor } from "@docspace/shared/components/image-editor";
-import { FilesSelectorFilterTypes } from "@docspace/common/constants";
+import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 
 import { isTablet, isMobile } from "@docspace/shared/utils/device";
 

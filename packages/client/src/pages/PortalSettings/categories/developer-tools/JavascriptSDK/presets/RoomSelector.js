@@ -10,7 +10,7 @@ import { Checkbox } from "@docspace/shared/components/checkbox";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { TabsContainer } from "@docspace/shared/components/tabs-container";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
-import { objectToGetParams, loadScript } from "@docspace/common/utils";
+import { objectToGetParams, loadScript } from "@docspace/shared/utils/common";
 import { inject, observer } from "mobx-react";
 
 import { isTablet, isMobile } from "@docspace/shared/utils/device";
@@ -20,7 +20,7 @@ import { RectangleSkeleton } from "@docspace/shared/skeletons/rectangle";
 import GetCodeDialog from "../sub-components/GetCodeDialog";
 import { Button } from "@docspace/shared/components/button";
 
-import { RoomsType } from "@docspace/common/constants";
+import { RoomsType } from "@docspace/shared/enums";
 
 const showPreviewThreshold = 720;
 

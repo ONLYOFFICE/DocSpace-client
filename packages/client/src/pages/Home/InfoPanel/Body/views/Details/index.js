@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { FileType } from "@docspace/common/constants";
+import { FileType } from "@docspace/shared/enums";
 import { Text } from "@docspace/shared/components/text";
 
 import DetailsHelper from "../../helpers/DetailsHelper.js";

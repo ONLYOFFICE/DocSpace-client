@@ -72,10 +72,10 @@ const DeliveryDatePicker = ({
       ...prevFilters,
       deliveryDate: null,
       deliveryFrom: moment()
-        .tz(window.timezone || "")
+        .tz(window.timezone)
         .startOf("day"),
       deliveryTo: moment()
-        .tz(window.timezone || "")
+        .tz(window.timezone)
         .endOf("day"),
     }));
     setIsTimeOpen(false);
@@ -96,10 +96,10 @@ const DeliveryDatePicker = ({
       ...prevFilters,
       deliveryDate: date,
       deliveryFrom: moment()
-        .tz(window.timezone || "")
+        .tz(window.timezone)
         .startOf("day"),
       deliveryTo: moment()
-        .tz(window.timezone || "")
+        .tz(window.timezone)
         .endOf("day"),
     }));
   };
@@ -130,7 +130,7 @@ const DeliveryDatePicker = ({
     const formattedTime = isTimeEqual
       ? ""
       : ` ${filters.deliveryFrom.format("HH:mm")} - ${moment(filters.deliveryTo)
-          .tz(window.timezone || "")
+          .tz(window.timezone)
           .format("HH:mm")}`;
 
     return (

@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/shared/components/toast";
 
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import config from "PACKAGE_FILE";
 

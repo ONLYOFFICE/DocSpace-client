@@ -21,7 +21,7 @@ import {
   StyledLink,
 } from "../StyledPanels";
 import { inject, observer } from "mobx-react";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 import Loaders from "@docspace/common/components/Loaders";
 import withLoader from "../../../HOCs/withLoader";
@@ -29,8 +29,8 @@ import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
-import FilesFilter from "@docspace/common/api/files/filter";
-import { DeviceType } from "@docspace/common/constants";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { DeviceType } from "@docspace/shared/enums";
 
 const SharingBodyStyle = { height: `calc(100vh - 156px)` };
 

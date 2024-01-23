@@ -4,14 +4,16 @@ import { useTranslation } from "react-i18next";
 
 // @ts-ignore
 import Loaders from "@docspace/common/components/Loaders";
-import { FolderType, RoomsType } from "@docspace/common/constants";
-import { DeviceType } from "@docspace/common/constants";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { DeviceType } from "@docspace/shared/enums";
 
 import { Selector } from "@docspace/shared/components/selector";
 import { Aside } from "@docspace/shared/components/aside";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Portal } from "@docspace/shared/components/portal";
 import { toastr } from "@docspace/shared/components/toast";
+
+import { RowLoader, SearchLoader } from "@docspace/shared/skeletons/selector";
 
 import EmptyScreenFilterAltSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt.svg?url";
 import EmptyScreenFilterAltDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt_dark.svg?url";
@@ -565,13 +567,13 @@ const FilesSelector = ({
       isBreadCrumbsLoading={showBreadCrumbsLoader}
       withSearch={withSearch && !isRoot && items ? items.length > 0 : !isRoot && isFirstLoad}
       rowLoader={
-        <Loaders.SelectorRowLoader
+        <RowLoader
           isMultiSelect={false}
           isUser={isRoot}
           isContainer={showLoader}
         />
       }
-      searchLoader={<Loaders.SelectorSearchLoader />}
+      searchLoader={<SearchLoader />}
       breadCrumbsLoader={<Loaders.SelectorBreadCrumbsLoader />}
       alwaysShowFooter={true}
       isNextPageLoading={isNextPageLoading}

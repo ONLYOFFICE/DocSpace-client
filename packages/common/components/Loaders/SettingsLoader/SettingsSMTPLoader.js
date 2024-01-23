@@ -1,5 +1,5 @@
 import React from "react";
-import { LoaderStyle } from "@docspace/shared/constants";
+import { LOADER_STYLE } from "@docspace/shared/constants";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { StyledSMTPContent } from "./StyledComponent";
 const speed = 2;
@@ -11,10 +11,10 @@ const SettingsSMTP = () => {
         <RectangleSkeleton
           height="22"
           width="56"
-          backgroundColor={LoaderStyle.backgroundColor}
-          foregroundColor={LoaderStyle.foregroundColor}
-          backgroundOpacity={LoaderStyle.backgroundOpacity}
-          foregroundOpacity={LoaderStyle.foregroundOpacity}
+          backgroundColor={LOADER_STYLE.backgroundColor}
+          foregroundColor={LOADER_STYLE.foregroundColor}
+          backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+          foregroundOpacity={LOADER_STYLE.foregroundOpacity}
           speed={speed}
           animate={true}
         />
@@ -22,10 +22,10 @@ const SettingsSMTP = () => {
       <RectangleSkeleton
         className="rectangle-loader-2"
         height="32"
-        backgroundColor={LoaderStyle.backgroundColor}
-        foregroundColor={LoaderStyle.foregroundColor}
-        backgroundOpacity={LoaderStyle.backgroundOpacity}
-        foregroundOpacity={LoaderStyle.foregroundOpacity}
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
         animate={true}
       />
@@ -37,20 +37,20 @@ const SettingsSMTP = () => {
       <RectangleSkeleton
         height="20"
         width="101"
-        backgroundColor={LoaderStyle.backgroundColor}
-        foregroundColor={LoaderStyle.foregroundColor}
-        backgroundOpacity={LoaderStyle.backgroundOpacity}
-        foregroundOpacity={LoaderStyle.foregroundOpacity}
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
         animate={true}
       />
       <RectangleSkeleton
         className="rectangle-loader-2"
         height="32"
-        backgroundColor={LoaderStyle.backgroundColor}
-        foregroundColor={LoaderStyle.foregroundColor}
-        backgroundOpacity={LoaderStyle.backgroundOpacity}
-        foregroundOpacity={LoaderStyle.foregroundOpacity}
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
         animate={true}
       />
@@ -61,20 +61,20 @@ const SettingsSMTP = () => {
       <RectangleSkeleton
         height="20"
         width="138"
-        backgroundColor={LoaderStyle.backgroundColor}
-        foregroundColor={LoaderStyle.foregroundColor}
-        backgroundOpacity={LoaderStyle.backgroundOpacity}
-        foregroundOpacity={LoaderStyle.foregroundOpacity}
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
         animate={true}
       />
       <RectangleSkeleton
         className="rectangle-loader-2"
         height="32"
-        backgroundColor={LoaderStyle.backgroundColor}
-        foregroundColor={LoaderStyle.foregroundColor}
-        backgroundOpacity={LoaderStyle.backgroundOpacity}
-        foregroundOpacity={LoaderStyle.foregroundOpacity}
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
         animate={true}
       />
@@ -86,20 +86,20 @@ const SettingsSMTP = () => {
       <RectangleSkeleton
         height="16"
         width="16"
-        backgroundColor={LoaderStyle.backgroundColor}
-        foregroundColor={LoaderStyle.foregroundColor}
-        backgroundOpacity={LoaderStyle.backgroundOpacity}
-        foregroundOpacity={LoaderStyle.foregroundOpacity}
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
         animate={true}
       />
       <RectangleSkeleton
         height="22"
         width="101"
-        backgroundColor={LoaderStyle.backgroundColor}
-        foregroundColor={LoaderStyle.foregroundColor}
-        backgroundOpacity={LoaderStyle.backgroundOpacity}
-        foregroundOpacity={LoaderStyle.foregroundOpacity}
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
         animate={true}
       />
@@ -110,20 +110,20 @@ const SettingsSMTP = () => {
       <RectangleSkeleton
         height="16"
         width="16"
-        backgroundColor={LoaderStyle.backgroundColor}
-        foregroundColor={LoaderStyle.foregroundColor}
-        backgroundOpacity={LoaderStyle.backgroundOpacity}
-        foregroundOpacity={LoaderStyle.foregroundOpacity}
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
         animate={true}
       />
       <RectangleSkeleton
         height="20"
         width="70"
-        backgroundColor={LoaderStyle.backgroundColor}
-        foregroundColor={LoaderStyle.foregroundColor}
-        backgroundOpacity={LoaderStyle.backgroundOpacity}
-        foregroundOpacity={LoaderStyle.foregroundOpacity}
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
         animate={true}
       />
@@ -133,28 +133,28 @@ const SettingsSMTP = () => {
     <div className="rectangle-loader_buttons">
       <RectangleSkeleton
         height="32"
-        backgroundColor={LoaderStyle.backgroundColor}
-        foregroundColor={LoaderStyle.foregroundColor}
-        backgroundOpacity={LoaderStyle.backgroundOpacity}
-        foregroundOpacity={LoaderStyle.foregroundOpacity}
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
         animate={true}
       />
       <RectangleSkeleton
         height="32"
-        backgroundColor={LoaderStyle.backgroundColor}
-        foregroundColor={LoaderStyle.foregroundColor}
-        backgroundOpacity={LoaderStyle.backgroundOpacity}
-        foregroundOpacity={LoaderStyle.foregroundOpacity}
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
         animate={true}
       />
       <RectangleSkeleton
         height="32"
-        backgroundColor={LoaderStyle.backgroundColor}
-        foregroundColor={LoaderStyle.foregroundColor}
-        backgroundOpacity={LoaderStyle.backgroundOpacity}
-        foregroundOpacity={LoaderStyle.foregroundOpacity}
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
         animate={true}
       />
@@ -166,10 +166,10 @@ const SettingsSMTP = () => {
         className="rectangle-loader_title"
         height="22"
         width="128"
-        backgroundColor={LoaderStyle.backgroundColor}
-        foregroundColor={LoaderStyle.foregroundColor}
-        backgroundOpacity={LoaderStyle.backgroundOpacity}
-        foregroundOpacity={LoaderStyle.foregroundOpacity}
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
         animate={true}
       />
@@ -177,10 +177,10 @@ const SettingsSMTP = () => {
       <RectangleSkeleton
         className="rectangle-loader_description"
         height="60"
-        backgroundColor={LoaderStyle.backgroundColor}
-        foregroundColor={LoaderStyle.foregroundColor}
-        backgroundOpacity={LoaderStyle.backgroundOpacity}
-        foregroundOpacity={LoaderStyle.foregroundOpacity}
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
         animate={true}
       />
@@ -191,10 +191,10 @@ const SettingsSMTP = () => {
         className="rectangle-loader_title"
         height="20"
         width="128"
-        backgroundColor={LoaderStyle.backgroundColor}
-        foregroundColor={LoaderStyle.foregroundColor}
-        backgroundOpacity={LoaderStyle.backgroundOpacity}
-        foregroundOpacity={LoaderStyle.foregroundOpacity}
+        backgroundColor={LOADER_STYLE.backgroundColor}
+        foregroundColor={LOADER_STYLE.foregroundColor}
+        backgroundOpacity={LOADER_STYLE.backgroundOpacity}
+        foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
         animate={true}
       />

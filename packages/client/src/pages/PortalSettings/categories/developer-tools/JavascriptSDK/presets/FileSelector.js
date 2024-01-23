@@ -12,7 +12,7 @@ import { TabsContainer } from "@docspace/shared/components/tabs-container";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { SelectedItem } from "@docspace/shared/components/selected-item";
-import { objectToGetParams, loadScript } from "@docspace/common/utils";
+import { objectToGetParams, loadScript } from "@docspace/shared/utils/common";
 import { inject, observer } from "mobx-react";
 
 import { isTablet, isMobile } from "@docspace/shared/utils/device";
@@ -23,7 +23,7 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 import GetCodeDialog from "../sub-components/GetCodeDialog";
 import { Button } from "@docspace/shared/components/button";
 
-import { FilesSelectorFilterTypes } from "@docspace/common/constants";
+import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { TooltipContent } from "../sub-components/TooltipContent";
 
 import SubtitleUrl from "PUBLIC_DIR/images/sdk-presets_subtitle.react.svg?url";

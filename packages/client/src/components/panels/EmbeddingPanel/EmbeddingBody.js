@@ -9,7 +9,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { Button } from "@docspace/shared/components/button";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 import { StyledBody } from "./StyledEmbeddingPanel";
-import { objectToGetParams } from "@docspace/common/utils";
+import { objectToGetParams } from "@docspace/shared/utils/common";
 
 const EmbeddingBody = ({ t, link, requestToken, roomId }) => {
   const [size, setSize] = useState("auto");

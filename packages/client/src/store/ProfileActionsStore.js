@@ -11,12 +11,12 @@ import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url
 import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import SpacesReactSvgUrl from "PUBLIC_DIR/images/spaces.react.svg?url";
 import { makeAutoObservable } from "mobx";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { isMobile } from "react-device-detect";
 
 import { ZendeskAPI } from "@docspace/common/components/Zendesk";
-import { LIVE_CHAT_LOCAL_STORAGE_KEY } from "@docspace/common/constants";
+import { LIVE_CHAT_LOCAL_STORAGE_KEY } from "@docspace/shared/constants";
 import { toastr } from "@docspace/shared/components/toast";
 import { isDesktop, isTablet } from "@docspace/shared/utils";
 
@@ -124,7 +124,7 @@ class ProfileActionsStore {
   };
 
   onSpacesClick = () => {
-    this.selectedFolderStore.setSelectedFolder(null);
+    // this.selectedFolderStore.setSelectedFolder(null);
     window.open(SPACES_URL, "_blank");
   };
 

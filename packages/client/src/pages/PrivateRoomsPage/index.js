@@ -5,7 +5,8 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { Button } from "@docspace/shared/components/button";
 import { Loader } from "@docspace/shared/components/loader";
-import Section from "@docspace/common/components/Section";
+import Section from "@docspace/shared/components/section";
+import SectionWrapper from "SRC_DIR/components/Section";
 import { mobile, tablet } from "@docspace/shared/utils";
 import { I18nextProvider, Trans, withTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
@@ -224,11 +225,11 @@ const PrivacyPageWrapper = withTranslation(["PrivacyPage"])(
 const PrivacyPage = (props) => {
   return (
     <I18nextProvider i18n={i18n}>
-      <Section>
+      <SectionWrapper>
         <Section.SectionBody>
           <PrivacyPageWrapper {...props} />
         </Section.SectionBody>
-      </Section>
+      </SectionWrapper>
     </I18nextProvider>
   );
 };

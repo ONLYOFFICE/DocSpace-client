@@ -5,7 +5,7 @@ import { Button } from "@docspace/shared/components/button";
 import { useTranslation, Trans } from "react-i18next";
 import { observer } from "mobx-react";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import tryRedirectTo from "@docspace/common/utils/tryRedirectTo";
+import tryRedirectTo from "@docspace/shared/utils/tryRedirectTo";
 import { useStore } from "SRC_DIR/store";
 import { Link } from "@docspace/shared/components/link";
 

@@ -1,4 +1,4 @@
-import api from "@docspace/common/api";
+import api from "@docspace/shared/api";
 import { makeAutoObservable } from "mobx";
 const { Filter } = api;
 import SelectionStore from "./SelectionStore";
@@ -8,11 +8,11 @@ import {
   getSMTPSettings,
   resetSMTPSettings,
   setSMTPSettings,
-} from "@docspace/common/api/settings";
-import { combineUrl } from "@docspace/common/utils";
+} from "@docspace/shared/api/settings";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 import { isDesktop } from "@docspace/shared/utils";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 class SettingsSetupStore {
   selectionStore = null;

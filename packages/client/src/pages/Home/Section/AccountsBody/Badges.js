@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import { PaymentsType, AccountLoginType } from "@docspace/common/constants";
+import { PaymentsType, AccountLoginType } from "@docspace/shared/enums";
 
 import { Badge } from "@docspace/shared/components/badge";
 import { commonIconsStyles } from "@docspace/shared/utils";

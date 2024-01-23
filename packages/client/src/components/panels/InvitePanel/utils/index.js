@@ -2,7 +2,7 @@ import {
   ShareAccessRights,
   RoomsType,
   EmployeeType,
-} from "@docspace/common/constants";
+} from "@docspace/shared/enums";
 
 export const getAccessOptions = (
   t,
@@ -132,6 +132,16 @@ export const getAccessOptions = (
       break;
     case RoomsType.PublicRoom:
       options = [accesses.roomAdmin, accesses.collaborator];
+      break;
+
+    case RoomsType.FormRoom:
+      options = [
+        accesses.roomAdmin,
+        accesses.collaborator,
+        { key: "s1", isSeparator: withSeparator },
+        accesses.viewer,
+        accesses.formFiller,
+      ];
       break;
     case -1:
       if (isOwner) options.push(accesses.docSpaceAdmin);

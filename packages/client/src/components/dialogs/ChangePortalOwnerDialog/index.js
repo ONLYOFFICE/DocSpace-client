@@ -4,9 +4,9 @@ import { inject, observer } from "mobx-react";
 import { ReactSVG } from "react-svg";
 import { withTranslation } from "react-i18next";
 
-import PeopleSelector from "SRC_DIR/components/PeopleSelector";
+import PeopleSelector from "@docspace/shared/selectors/People";
 
-import Filter from "@docspace/common/api/people/filter";
+import Filter from "@docspace/shared/api/people/filter";
 
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Avatar } from "@docspace/shared/components/avatar";
@@ -118,6 +118,7 @@ const ChangePortalOwnerDialog = ({
             onAccept={onAccept}
             onCancel={onBackClick}
             onBackClick={onBackClick}
+            currentUserId={id}
           />
         </ModalDialog.Container>
       )}

@@ -273,6 +273,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
           isNoFixedHeightOptions={isNoFixedHeightOptions}
           forceCloseClickOutside={forceCloseClickOutside}
           withoutBackground={withoutBackground}
+          eventTypes={["click"]}
         >
           {dropDownBody}
         </DropDown>

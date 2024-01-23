@@ -21,8 +21,8 @@ import AccountsContextOptionsStore from "./AccountsContextOptionsStore";
 import { isMobile, isTablet, isDesktop } from "@docspace/shared/utils";
 
 import { toastr } from "@docspace/shared/components/toast";
-import { EmployeeStatus, Events } from "@docspace/common/constants";
-import Filter from "@docspace/common/api/people/filter";
+import { EmployeeStatus, Events } from "@docspace/shared/enums";
+import Filter from "@docspace/shared/api/people/filter";
 
 class PeopleStore {
   contextOptionsStore = null;

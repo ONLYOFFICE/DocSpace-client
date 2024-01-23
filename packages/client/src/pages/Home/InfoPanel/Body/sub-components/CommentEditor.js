@@ -8,8 +8,8 @@ import { Textarea } from "@docspace/shared/components/textarea";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 
-import { MAX_FILE_COMMENT_LENGTH } from "@docspace/common/constants";
-// import infoPanel from "@docspace/common/components/Section/sub-components/info-panel";
+import { MAX_FILE_COMMENT_LENGTH } from "@docspace/shared/constants";
+// import infoPanel from "@docspace/shared/components/section/sub-components/info-panel";
 
 const CommentEditor = ({
   t,

@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import { getAppearanceTheme } from "@docspace/common/api/settings";
+import { getAppearanceTheme } from "@docspace/shared/api/settings";
 import { Base } from "@docspace/shared/themes";
 
 class LoginStore {

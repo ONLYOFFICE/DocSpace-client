@@ -1,4 +1,3 @@
-
 /* eslint-disable no-console */
 /* eslint-disable no-multi-str */
 /* eslint-disable no-plusplus */
@@ -36,6 +35,7 @@ import TopLoaderService from "../components/top-loading-indicator";
 import { Encoder } from "./encoder";
 import { combineUrl } from "./combineUrl";
 import { getCookie } from "./cookie";
+import { isNumber } from "./typeGuards";
 
 let timer: null | ReturnType<typeof setTimeout> = null;
 
@@ -703,7 +703,9 @@ export function getObjectByLocation(location: Location) {
   }
 }
 
-export const RoomsTypeValues = Object.values(RoomsType).reduce(
+export const RoomsTypeValues = Object.values(RoomsType).filter(isNumber);
+
+export const RoomsTypes = RoomsTypeValues.reduce<Record<number, number>>(
   (acc, current) => {
     if (typeof current === "string") return { ...acc };
     return { ...acc, [current]: current };
@@ -784,7 +786,7 @@ export const getLogoFromPath = (path: string) => {
 
 export type FolderTypeValueOf = (typeof FolderType)[keyof typeof FolderType];
 export const getIconPathByFolderType = (
-  folderType?: FolderTypeValueOf
+  folderType?: FolderTypeValueOf,
 ): string => {
   const defaultPath = "folder.svg";
 

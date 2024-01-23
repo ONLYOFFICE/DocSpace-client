@@ -11,6 +11,7 @@ const SectionSubmenuContent = ({
   isRecentTab,
   setFilter,
   showBodyLoader,
+  isRoot,
 }) => {
   const { t } = useTranslation("Files");
 
@@ -40,7 +41,7 @@ const SectionSubmenuContent = ({
     window.DocSpace.navigate(`${url}?${filter.toUrlParams()}`);
   };
 
-  const showSubmenu = isPersonalRoom || isRecentTab;
+  const showSubmenu = (isPersonalRoom || isRecentTab) && isRoot;
   const startSelect =
     getObjectByLocation(window.DocSpace.location)?.folder === "recent" ? 1 : 0;
 
@@ -53,7 +54,7 @@ const SectionSubmenuContent = ({
 
 export default inject(
   ({ treeFoldersStore, filesStore, clientLoadingStore }) => {
-    const { isPersonalRoom, isRecentTab } = treeFoldersStore;
+    const { isPersonalRoom, isRecentTab, isRoot } = treeFoldersStore;
     const { setFilter } = filesStore;
     const { showBodyLoader } = clientLoadingStore;
 
@@ -62,6 +63,7 @@ export default inject(
       isRecentTab,
       setFilter,
       showBodyLoader,
+      isRoot,
     };
   }
 )(observer(SectionSubmenuContent));

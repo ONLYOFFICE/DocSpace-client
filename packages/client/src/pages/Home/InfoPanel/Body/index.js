@@ -35,9 +35,10 @@ const InfoPanelBodyContent = ({
 
   const isFiles = getIsFiles();
   const isRooms = getIsRooms();
-  const isPeople = getIsPeople();
   const isGallery = getIsGallery();
-  const isGroups = getIsGroups() && !groupId;
+  const isGroups = getIsGroups() || (groupId && !selectedItems.length);
+  const isPeople =
+    getIsPeople() || (getIsGroups() && groupId && selectedItems.length);
 
   const isSeveralItems = props.selectedItems?.length > 1;
 

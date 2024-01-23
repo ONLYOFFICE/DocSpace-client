@@ -23,7 +23,7 @@ const Groups = ({ t, selection, peopleList }) => {
 
   return (
     <Styled.GroupsContent>
-      {sortedArr.map((groupMember) => {
+      {sortedArr?.map((groupMember) => {
         const [user] = peopleList.filter(
           (person) => person.id === groupMember.id
         );

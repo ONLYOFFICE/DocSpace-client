@@ -242,7 +242,7 @@ const GroupsTableItem = ({
       {
         id: "option_profile",
         key: "profile",
-        icon: "http://192.168.0.105/static/images/check-box.react.svg?hash=079b6e8fa11a027ed622",
+        icon: "http://192.168.0.104/static/images/check-box.react.svg",
         label: "Select",
       },
       {
@@ -252,7 +252,7 @@ const GroupsTableItem = ({
       {
         id: "option_change-name",
         key: "change-name",
-        icon: "http://192.168.0.105/static/images/pencil.react.svg?hash=7b1050767036ee383c82",
+        icon: "http://192.168.0.104/static/images/pencil.react.svg",
         label: "Edit department",
         onClick: () => {
           const event = new Event(Events.GROUP_EDIT);
@@ -261,13 +261,11 @@ const GroupsTableItem = ({
         },
       },
       {
-        icon: "http://192.168.0.105/static/images/info.outline.react.svg?hash=1341c2413ad79879439d",
+        icon: "http://192.168.0.104/static/images/info.outline.react.svg",
         id: "option_details",
         key: "details",
         label: "Info",
-        onClick: () => {
-          onSelect();
-        },
+        onClick: () => {},
       },
       {
         key: "separator-2",
@@ -276,7 +274,7 @@ const GroupsTableItem = ({
       {
         id: "option_change-owner",
         key: "change-owner",
-        icon: "http://192.168.0.105/static/images/catalog.trash.react.svg?hash=eba7f2edad4e3c4f6f77",
+        icon: "http://192.168.0.104/static/images/catalog.trash.react.svg",
         label: "Delete",
       },
     ],

@@ -89,12 +89,17 @@ class InfoPanelStore {
 
     const isRooms = this.getIsRooms();
 
+    // TODO: INFO PANEL
     if (isRooms && view === infoMembers) {
-      const selectedFolder =
-        view === infoMembers && this.infoPanelRoom
+      const selectedItems = this.infoPanelSelectedItems;
+      const selectedFolder = selectedItems
+        ? selectedItems[0]
+        : view === infoMembers && this.infoPanelRoom
           ? this.infoPanelRoom
           : this.selectedFolderStore.getSelectedFolder();
-      this.setInfoPanelSelection(this.normalizeSelection(selectedFolder));
+      if (selectedFolder) {
+        this.setInfoPanelSelection(this.normalizeSelection(selectedFolder));
+      }
     } else {
       this.setInfoPanelSelection(this.calculateSelection());
     }

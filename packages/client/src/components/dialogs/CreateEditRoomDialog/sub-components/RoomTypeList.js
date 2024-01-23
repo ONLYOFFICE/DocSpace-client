@@ -19,7 +19,7 @@ const StyledRoomTypeList = styled.div`
 const RoomTypeList = ({ t, setRoomType }) => {
   return (
     <StyledRoomTypeList>
-      {Object.values(RoomsTypeValues).map((roomType) => (
+      {RoomsTypeValues.map((roomType) => (
         <RoomType
           id={roomType}
           t={t}

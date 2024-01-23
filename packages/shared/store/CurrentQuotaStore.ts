@@ -1,22 +1,70 @@
 import { makeAutoObservable } from "mobx";
-import { toastr } from "@docspace/shared/components/toast";
 
-import api from "@docspace/shared/api";
-import { PortalFeaturesLimitations } from "@docspace/shared/enums";
+import { toastr } from "../components/toast";
+import { TData } from "../components/toast/Toast.type";
+import { PortalFeaturesLimitations } from "../enums";
+import api from "../api";
+import { TFeature, TPortalQuota } from "../api/portal/types";
+import {
+  MANAGER,
+  TOTAL_SIZE,
+  FILE_SIZE,
+  USERS,
+  ROOM,
+  USERS_IN_ROOM,
+  COUNT_FOR_SHOWING_BAR,
+  PERCENTAGE_FOR_SHOWING_BAR,
+} from "../constants";
 
-const MANAGER = "manager";
-const TOTAL_SIZE = "total_size";
-const FILE_SIZE = "file_size";
-const ROOM = "room";
-const USERS = "users";
-const USERS_IN_ROOM = "usersInRoom";
+export interface IQuotasStore {
+  currentPortalQuota: TPortalQuota;
+  currentPortalQuotaFeatures: TFeature[];
+  isLoaded: boolean;
 
-const COUNT_FOR_SHOWING_BAR = 2;
-const PERCENTAGE_FOR_SHOWING_BAR = 90;
+  setIsLoaded: (isLoaded: boolean) => void;
+
+  isFreeTariff: boolean;
+  isTrial: boolean;
+  currentPlanCost:
+    | {
+        value: number;
+      }
+    | {
+        value: number;
+        currencySymbol: string;
+      };
+  maxCountManagersByQuota: number | undefined;
+  addedManagersCount: number | undefined;
+  maxTotalSizeByQuota: number;
+  usedTotalStorageSizeCount: number | undefined;
+  maxFileSizeByQuota: number | undefined;
+  maxCountUsersByQuota: number;
+  maxCountRoomsByQuota: number;
+  usedRoomsCount: number | undefined;
+  isBrandingAndCustomizationAvailable: number | undefined;
+  isOAuthAvailable: number | undefined;
+  isThirdPartyAvailable: number | undefined;
+  isSSOAvailable: number | undefined;
+  isRestoreAndAutoBackupAvailable: number | undefined;
+  isAuditAvailable: number | undefined;
+  currentTariffPlanTitle: string;
+  quotaCharacteristics: TFeature[];
+  maxUsersCountInRoom: number;
+  showRoomQuotaBar: boolean;
+  showStorageQuotaBar: boolean;
+  showUserQuotaBar: boolean;
+  isNonProfit: boolean;
+
+  setPortalQuotaValue: (res: TPortalQuota) => void;
+  updateQuotaUsedValue: (featureId: string, value: number) => void;
+  updateQuotaFeatureValue: (featureId: string, value: number) => void;
+  setPortalQuota: () => Promise<void>;
+}
 
 class QuotasStore {
-  currentPortalQuota = {};
-  currentPortalQuotaFeatures = [];
+  currentPortalQuota: TPortalQuota = {} as TPortalQuota;
+
+  currentPortalQuotaFeatures: TFeature[] = [];
 
   isLoaded = false;
 
@@ -24,7 +72,7 @@ class QuotasStore {
     makeAutoObservable(this);
   }
 
-  setIsLoaded = (isLoaded) => {
+  setIsLoaded = (isLoaded: boolean) => {
     this.isLoaded = isLoaded;
   };
 
@@ -38,28 +86,29 @@ class QuotasStore {
 
   get currentPlanCost() {
     if (this.currentPortalQuota.price) return this.currentPortalQuota.price;
-    else return { value: 0, currencySymbol: "" };
+
+    return { value: 0, currencySymbol: "" };
   }
 
   get maxCountManagersByQuota() {
     const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === MANAGER
+      (obj) => obj.id === MANAGER,
     );
 
-    return result?.value;
+    return result?.value || 0;
   }
 
   get addedManagersCount() {
     const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === MANAGER
+      (obj) => obj.id === MANAGER,
     );
 
-    return result?.used?.value;
+    return result?.used?.value || 0;
   }
 
   get maxTotalSizeByQuota() {
     const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === TOTAL_SIZE
+      (obj) => obj.id === TOTAL_SIZE,
     );
 
     if (!result?.value) return PortalFeaturesLimitations.Limitless;
@@ -69,14 +118,14 @@ class QuotasStore {
 
   get usedTotalStorageSizeCount() {
     const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === TOTAL_SIZE
+      (obj) => obj.id === TOTAL_SIZE,
     );
-    return result?.used?.value;
+    return result?.used?.value || 0;
   }
 
   get maxFileSizeByQuota() {
     const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === FILE_SIZE
+      (obj) => obj.id === FILE_SIZE,
     );
 
     return result?.value;
@@ -84,7 +133,7 @@ class QuotasStore {
 
   get maxCountUsersByQuota() {
     const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === USERS
+      (obj) => obj.id === USERS,
     );
     if (!result || !result?.value) return PortalFeaturesLimitations.Limitless;
     return result?.value;
@@ -92,7 +141,7 @@ class QuotasStore {
 
   get maxCountRoomsByQuota() {
     const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === ROOM
+      (obj) => obj.id === ROOM,
     );
     if (!result || !result?.value) return PortalFeaturesLimitations.Limitless;
     return result?.value;
@@ -100,15 +149,15 @@ class QuotasStore {
 
   get usedRoomsCount() {
     const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === ROOM
+      (obj) => obj.id === ROOM,
     );
 
-    return result?.used?.value;
+    return result?.used?.value || 0;
   }
 
   get isBrandingAndCustomizationAvailable() {
     const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === "whitelabel"
+      (obj) => obj.id === "whitelabel",
     );
 
     return result?.value;
@@ -116,7 +165,7 @@ class QuotasStore {
 
   get isOAuthAvailable() {
     const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === "oauth"
+      (obj) => obj.id === "oauth",
     );
 
     return result?.value;
@@ -124,7 +173,7 @@ class QuotasStore {
 
   get isThirdPartyAvailable() {
     const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === "thirdparty"
+      (obj) => obj.id === "thirdparty",
     );
 
     return result?.value;
@@ -132,7 +181,7 @@ class QuotasStore {
 
   get isSSOAvailable() {
     const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === "sso"
+      (obj) => obj.id === "sso",
     );
 
     return result?.value;
@@ -140,7 +189,7 @@ class QuotasStore {
 
   get isRestoreAndAutoBackupAvailable() {
     const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === "restore"
+      (obj) => obj.id === "restore",
     );
 
     return result?.value;
@@ -148,7 +197,7 @@ class QuotasStore {
 
   get isAuditAvailable() {
     const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === "audit"
+      (obj) => obj.id === "audit",
     );
 
     return result?.value;
@@ -159,12 +208,12 @@ class QuotasStore {
   }
 
   get quotaCharacteristics() {
-    const result = [];
+    const result: TFeature[] = [];
 
     this.currentPortalQuotaFeatures.forEach((elem) => {
-      elem.id === ROOM && result?.splice(0, 0, elem);
-      elem.id === MANAGER && result?.splice(1, 0, elem);
-      elem.id === TOTAL_SIZE && result?.splice(2, 0, elem);
+      if (elem.id === ROOM) result?.splice(0, 0, elem);
+      if (elem.id === MANAGER) result?.splice(1, 0, elem);
+      if (elem.id === TOTAL_SIZE) result?.splice(2, 0, elem);
     });
 
     return result;
@@ -172,7 +221,7 @@ class QuotasStore {
 
   get maxUsersCountInRoom() {
     const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === USERS_IN_ROOM
+      (obj) => obj.id === USERS_IN_ROOM,
     );
 
     if (!result || !result?.value) return PortalFeaturesLimitations.Limitless;
@@ -209,20 +258,20 @@ class QuotasStore {
     return this.currentPortalQuota?.nonProfit;
   }
 
-  setPortalQuotaValue = (res) => {
+  setPortalQuotaValue = (res: TPortalQuota) => {
     this.currentPortalQuota = res;
     this.currentPortalQuotaFeatures = res.features;
 
     this.setIsLoaded(true);
   };
 
-  updateQuotaUsedValue = (featureId, value) => {
+  updateQuotaUsedValue = (featureId: string, value: number) => {
     this.currentPortalQuotaFeatures.forEach((elem) => {
       if (elem.id === featureId && elem.used) elem.used.value = value;
     });
   };
 
-  updateQuotaFeatureValue = (featureId, value) => {
+  updateQuotaFeatureValue = (featureId: string, value: number) => {
     this.currentPortalQuotaFeatures.forEach((elem) => {
       if (elem.id === featureId) elem.value = value;
     });
@@ -238,7 +287,7 @@ class QuotasStore {
 
       this.setIsLoaded(true);
     } catch (e) {
-      toastr.error(e);
+      toastr.error(e as TData);
     }
   };
 }

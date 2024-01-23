@@ -1,6 +1,6 @@
 import { EmployeeType } from "@docspace/shared/enums";
 import { request } from "../client";
-import { TPortalTariff } from "./types";
+import { TPortalQuota, TPortalTariff } from "./types";
 
 export function getShortenedLink(link) {
   return request({
@@ -217,10 +217,16 @@ export function getPortalTenantExtra(refresh) {
   const params = refresh ? { refresh: true } : {};
   return request({ method: "get", url: "/portal/tenantextra", params });
 }
-export function getPortalQuota(refresh = false) {
+export async function getPortalQuota(refresh = false) {
   const params = refresh ? { refresh: true } : {};
   // console.log("getPortalQuota", { params });
-  return request({ method: "get", url: "/portal/payment/quota", params });
+  const res = (await request({
+    method: "get",
+    url: "/portal/payment/quota",
+    params,
+  })) as TPortalQuota;
+
+  return res;
 }
 
 export async function getPortalTariff(refresh = false) {

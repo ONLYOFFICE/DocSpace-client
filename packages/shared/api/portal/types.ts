@@ -12,3 +12,26 @@ export type TPortalTariff = {
   portalStatus?: number;
   quotas: TQuotas[];
 };
+
+export type TFeature = {
+  id: string;
+  value: number;
+  type: string;
+  used?: {
+    value: number;
+    title?: string;
+  };
+  priceTitle?: string;
+};
+
+export type TPortalQuota = {
+  id: number;
+  title: string;
+  price: {
+    value: number;
+  };
+  nonProfit: boolean;
+  free: boolean;
+  trial: boolean;
+  features: TFeature[];
+};

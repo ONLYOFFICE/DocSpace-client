@@ -10,7 +10,7 @@ import {
 } from "@docspace/shared/utils/desktop";
 import { isAdmin } from "@docspace/shared/utils/common";
 import { getCookie, setCookie } from "@docspace/shared/utils/cookie";
-import CurrentQuotasStore from "./CurrentQuotaStore";
+
 import PaymentQuotasStore from "./PaymentQuotasStore";
 
 import { TenantStatus } from "@docspace/shared/enums";

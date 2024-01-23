@@ -88,7 +88,7 @@ export interface INavigationItemProps {
   isRoot: boolean;
   isRootRoom: boolean;
   onClick: TOnNavigationItemClick;
-  withLogo: boolean;
+  withLogo: boolean | string;
   currentDeviceType: DeviceType;
   style?: React.CSSProperties;
 }

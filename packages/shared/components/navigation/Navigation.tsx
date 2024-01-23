@@ -228,6 +228,7 @@ const Navigation = ({
             {withLogo && (
               <NavigationLogo
                 className="navigation-logo"
+                logo={typeof withLogo === "string" ? withLogo : ""}
                 burgerLogo={burgerLogo}
               />
             )}

@@ -8,7 +8,7 @@ import result from "lodash/result";
 
 import { isTablet, isMobile } from "@docspace/shared/utils";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
-import FilterInput from "@docspace/common/components/FilterInput";
+import FilterInput from "@docspace/shared/components/filter";
 import Loaders from "@docspace/common/components/Loaders";
 import { withLayoutSize } from "@docspace/shared/HOC/withLayoutSize";
 import { getUser } from "@docspace/shared/api/people";
@@ -43,6 +43,7 @@ import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
 
 import { getRoomInfo } from "@docspace/shared/api/rooms";
+import { FilterLoader } from "@docspace/shared/skeletons/filter";
 
 const getAccountLoginType = (filterValues) => {
   const accountLoginType = result(
@@ -383,7 +384,7 @@ const SectionFilterContent = ({
 
         newFilter.withSubfolders =
           withSubfolders === FilterKeys.excludeSubfolders ? null : "true";
-        console.log(data);
+
         newFilter.searchInContent = withContent === "true" ? "true" : null;
 
         const path = location.pathname.split("/filter")[0];
@@ -1201,7 +1202,7 @@ const SectionFilterContent = ({
             isHeader: true,
             isLast: isLastTypeOptionsRooms,
           },
-          ...Object.values(RoomsTypeValues).map((roomType) => {
+          ...RoomsTypeValues.map((roomType) => {
             switch (roomType) {
               case RoomsType.FillingFormsRoom:
                 return {
@@ -2031,11 +2032,10 @@ const SectionFilterContent = ({
     }
   };
 
-  if (showFilterLoader) return <Loaders.Filter />;
+  if (showFilterLoader) return <FilterLoader />;
 
   return (
     <FilterInput
-      t={t}
       onFilter={onFilter}
       getFilterData={getFilterData}
       getSelectedFilterData={getSelectedFilterData}
@@ -2064,6 +2064,7 @@ const SectionFilterContent = ({
       setClearSearch={setClearSearch}
       onSortButtonClick={onSortButtonClick}
       currentDeviceType={currentDeviceType}
+      userId={userId}
     />
   );
 };

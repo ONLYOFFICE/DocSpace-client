@@ -38,7 +38,6 @@ class InfoPanelStore {
   roomsView = infoMembers;
   fileView = infoHistory;
 
-  updateRoomMembers = null;
   isScrollLocked = false;
   historyWithFileList = false;
 
@@ -356,6 +355,13 @@ class InfoPanelStore {
   };
 
   setInfoPanelSelection = (infoPanelSelection) => {
+    if (
+      this.infoPanelSelection?.id === infoPanelSelection?.id &&
+      this.infoPanelSelection?.isFolder === infoPanelSelection?.isFolder
+    ) {
+      return;
+    }
+
     if (
       this.getIsAccounts() &&
       (!infoPanelSelection.email || !infoPanelSelection.displayName)

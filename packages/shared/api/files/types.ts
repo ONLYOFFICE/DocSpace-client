@@ -180,6 +180,7 @@ export type TFilesSettings = {
   };
   canSearchByContent: boolean;
   chunkUploadSize: number;
+  chunkUploadCount: number;
   confirmDelete: boolean;
   convertNotify: boolean;
   defaultOrder: { is_asc: boolean; property: 1 };

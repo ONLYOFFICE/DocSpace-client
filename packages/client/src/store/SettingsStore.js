@@ -36,6 +36,7 @@ class SettingsStore {
   keepNewFileName = null;
   thumbnails1280x720 = window.DocSpaceConfig?.thumbnails1280x720 || false;
   chunkUploadSize = 1024 * 1023; // 1024 * 1023; //~0.999mb
+  chunkUploadCount = 5;
 
   settingsIsLoaded = false;
 

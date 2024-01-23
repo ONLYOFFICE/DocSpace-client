@@ -31,9 +31,6 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 
-const UPLOAD_LIMIT_AT_ONCE = 5;
-const ASYNC_UPLOAD_LIMIT_AT_ONCE = 5;
-
 class UploadDataStore {
   authStore;
   treeFoldersStore;
@@ -1129,6 +1126,7 @@ class UploadDataStore {
     operationId,
     toFolderId
   ) => {
+    const { chunkUploadCount: asyncChunkUploadCount } = this.settingsStore;
     const length = requestsDataArray.length;
 
     const isThirdPartyFolder = typeof toFolderId === "string";
@@ -1160,9 +1158,7 @@ class UploadDataStore {
 
       const promise = new Promise((resolve, reject) => {
         let i =
-          length <= ASYNC_UPLOAD_LIMIT_AT_ONCE
-            ? length
-            : ASYNC_UPLOAD_LIMIT_AT_ONCE;
+          length <= asyncChunkUploadCount ? length : asyncChunkUploadCount;
         while (i !== 0) {
           this.asyncUpload(
             t,
@@ -1226,13 +1222,15 @@ class UploadDataStore {
       // console.log("IS PARALLEL");
       const notUploadedFiles = this.files.filter((f) => !f.inAction);
 
+      const { chunkUploadCount } = this.settingsStore;
+
       const countFiles =
-        notUploadedFiles.length >= UPLOAD_LIMIT_AT_ONCE
-          ? UPLOAD_LIMIT_AT_ONCE
+        notUploadedFiles.length >= chunkUploadCount
+          ? chunkUploadCount
           : notUploadedFiles.length;
 
       for (let i = 0; i < countFiles; i++) {
-        if (this.currentUploadNumber <= UPLOAD_LIMIT_AT_ONCE) {
+        if (this.currentUploadNumber <= chunkUploadCount) {
           const fileIndex = this.files.findIndex(
             (f) => f.uniqueId === notUploadedFiles[i].uniqueId
           );

@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import Text from "@docspace/components/text";
-import Checkbox from "@docspace/components/checkbox";
-import Button from "@docspace/components/button";
-import Link from "@docspace/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Button } from "@docspace/shared/components/button";
+import { Link } from "@docspace/shared/components/link";
+import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
-import { getLogoFromPath } from "@docspace/common/utils";
+import { getBgPattern } from "@docspace/shared/utils/common";
+import { getLogoFromPath } from "@docspace/shared/utils";
+import { DeviceType } from "@docspace/shared/enums";
 import { getDeepLink } from "../../helpers/deepLinkHelper";
 
 import {
@@ -16,6 +19,9 @@ import {
   StyledBodyWrapper,
   StyledFileTile,
   StyledActionsWrapper,
+  BgBlock,
+  StyledWrapper,
+  LogoWrapper,
 } from "./StyledDeepLink";
 
 const DeepLink = ({
@@ -24,8 +30,9 @@ const DeepLink = ({
   userEmail,
   setIsShowDeepLink,
   currentColorScheme,
-  deepLinkUrl,
   theme,
+  currentDeviceType,
+  deepLinkConfig,
 }) => {
   const { t } = useTranslation(["DeepLink", "Common"]);
 
@@ -36,11 +43,11 @@ const DeepLink = ({
 
   const onOpenAppClick = () => {
     if (isRemember) localStorage.setItem("defaultOpenDocument", "app");
-    window.location = getDeepLink(
+    getDeepLink(
       window.location.origin,
       userEmail,
       fileInfo,
-      deepLinkUrl,
+      deepLinkConfig,
       window.location.href
     );
   };
@@ -64,61 +71,87 @@ const DeepLink = ({
   };
 
   const logoPath = theme.isBase
-    ? logoUrls[0]?.path?.light
-    : logoUrls[0]?.path?.dark;
+    ? logoUrls[1]?.path?.light
+    : logoUrls[1]?.path?.dark;
   const logo = getLogoFromPath(logoPath);
 
+  const renderLogo = () => {
+    if (currentDeviceType === DeviceType.mobile) {
+      const logoPath = theme.isBase
+        ? logoUrls[0]?.path?.light
+        : logoUrls[0]?.path?.dark;
+      const logo = getLogoFromPath(logoPath);
+      return (
+        <StyledSimpleNav>
+          <img src={logo} />
+        </StyledSimpleNav>
+      );
+    } else {
+      const logoPath = theme.isBase
+        ? logoUrls[1]?.path?.light
+        : logoUrls[1]?.path?.dark;
+      const logo = getLogoFromPath(logoPath);
+      return (
+        <LogoWrapper>
+          <img src={logo} />
+        </LogoWrapper>
+      );
+    }
+  };
+
+  const bgPattern = getBgPattern(currentColorScheme?.id);
+
   return (
-    <>
-      <StyledSimpleNav>
-        <img src={logo} />
-      </StyledSimpleNav>
-      <StyledDeepLink>
-        <StyledBodyWrapper>
-          <Text fontSize="23px" fontWeight="700">
-            {t("OpeningDocument")}
-          </Text>
-          <StyledFileTile>
-            <img src={getFileIcon()} />
-            <Text fontSize="14px" fontWeight="600" truncate>
-              {getFileTitle()}
-            </Text>
-          </StyledFileTile>
-          <Text>{t("DeepLinkText")}</Text>
-        </StyledBodyWrapper>
-        <StyledActionsWrapper>
-          <Checkbox
-            label={t("Common:Remember")}
-            isChecked={isRemember}
-            onChange={onChangeCheckbox}
-          />
-          <Button
-            size="medium"
-            primary
-            label={t("OpenInApp")}
-            onClick={onOpenAppClick}
-          />
-          <Link
-            className="stay-link"
-            type="action"
-            fontSize="13px"
-            fontWeight="600"
-            isHovered
-            color={currentColorScheme?.main?.accent}
-            onClick={onStayBrowserClick}
-          >
-            {t("StayInBrowser")}
-          </Link>
-        </StyledActionsWrapper>
-      </StyledDeepLink>
-    </>
+    <StyledWrapper>
+      {renderLogo()}
+      <FormWrapper>
+        <StyledDeepLink>
+          <StyledBodyWrapper>
+            <Text className="title">{t("OpeningDocument")}</Text>
+            <StyledFileTile>
+              <img src={getFileIcon()} />
+              <Text fontSize="14px" fontWeight="600" truncate>
+                {getFileTitle()}
+              </Text>
+            </StyledFileTile>
+            <Text>{t("DeepLinkText")}</Text>
+          </StyledBodyWrapper>
+          <StyledActionsWrapper>
+            <Checkbox
+              label={t("Common:Remember")}
+              isChecked={isRemember}
+              onChange={onChangeCheckbox}
+            />
+            <Button
+              size="medium"
+              primary
+              label={t("OpenInApp")}
+              onClick={onOpenAppClick}
+            />
+            <Link
+              className="stay-link"
+              type="action"
+              fontSize="13px"
+              fontWeight="600"
+              isHovered
+              color={currentColorScheme?.main?.accent}
+              onClick={onStayBrowserClick}
+            >
+              {t("StayInBrowser")}
+            </Link>
+          </StyledActionsWrapper>
+        </StyledDeepLink>
+      </FormWrapper>
+      <BgBlock bgPattern={bgPattern} />
+    </StyledWrapper>
   );
 };
 
 export default inject(({ auth }) => {
-  const { theme } = auth.settingsStore;
+  const { theme, currentDeviceType } = auth.settingsStore;
 
   return {
     theme,
+    currentDeviceType,
   };
 })(observer(DeepLink));

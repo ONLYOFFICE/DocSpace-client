@@ -9,10 +9,10 @@ import EmptyContainer from "../../../../components/EmptyContainer";
 import withLoader from "../../../../HOCs/withLoader";
 import TableView from "./TableView/TableContainer";
 import withHotkeys from "../../../../HOCs/withHotkeys";
-import { Consumer } from "@docspace/components/utils/context";
-import { isElementInViewport } from "@docspace/common/utils";
-import { isMobile, isTablet } from "@docspace/components/utils/device";
-import { DeviceType } from "@docspace/common/constants";
+import { Consumer, isMobile, isTablet } from "@docspace/shared/utils";
+import { isElementInViewport } from "@docspace/shared/utils/common";
+
+import { DeviceType } from "@docspace/shared/enums";
 
 let currentDroppable = null;
 let isDragActive = false;
@@ -113,8 +113,8 @@ const SectionBodyContent = (props) => {
           (isMobile() || currentDeviceType === DeviceType.mobile
             ? 57
             : viewAs === "table"
-            ? 40
-            : 48);
+              ? 40
+              : 48);
 
         bodyScroll.scrollTo(0, count);
       }
@@ -205,7 +205,13 @@ const SectionBodyContent = (props) => {
   };
 
   const onMouseUp = (e) => {
-    document.body.classList.remove("drag-cursor");
+    setStartDrag(false);
+
+    setTimeout(() => {
+      isDragActive = false;
+      setDragging(false);
+      document.body.classList.remove("drag-cursor");
+    }, 0);
 
     const treeElem = e.target.closest(".tree-drag");
     const treeDataValue = treeElem?.dataset?.value;
@@ -217,18 +223,11 @@ const SectionBodyContent = (props) => {
     const title = elem && elem.dataset.title;
     const value = elem && elem.getAttribute("value");
     if ((!value && !treeValue) || isRecycleBinFolder || !isDragActive) {
-      setStartDrag(false);
-      setTimeout(() => setDragging(false), 0);
-      isDragActive = false;
       return;
     }
 
     const folderId = value ? value.split("_")[1] : treeValue;
-
-    setStartDrag(false);
-    setTimeout(() => setDragging(false), 0);
     onMoveTo(folderId, title);
-    isDragActive = false;
     return;
   };
 

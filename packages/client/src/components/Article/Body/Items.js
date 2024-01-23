@@ -7,13 +7,13 @@ import { withTranslation } from "react-i18next";
 import {
   FolderType,
   ShareAccessRights,
-  FolderNames,
   DeviceType,
-} from "@docspace/common/constants";
-import { getCatalogIconUrlByType } from "@docspace/common/utils/catalogIcon.helper";
+} from "@docspace/shared/enums";
+import { FOLDER_NAMES } from "@docspace/shared/constants";
+import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 
-import CatalogItem from "@docspace/components/catalog-item";
-import DragAndDrop from "@docspace/components/drag-and-drop";
+import { ArticleItem } from "@docspace/shared/components/article-item";
+import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
 
 import BonusItem from "./BonusItem";
 import AccountsItem from "./AccountsItem";
@@ -104,7 +104,14 @@ const Item = ({
   const onClickAction = React.useCallback(
     (folderId) => {
       setBufferSelection(null);
-      onClick && onClick(folderId, item.title, item.rootFolderType);
+
+      onClick &&
+        onClick(
+          folderId,
+          item.title,
+          item.rootFolderType,
+          item.security.Create
+        );
     },
     [onClick, item.title, item.rootFolderType]
   );
@@ -120,7 +127,7 @@ const Item = ({
       onDragLeave={onDragLeave}
       className={"document-catalog"}
     >
-      <CatalogItem
+      <ArticleItem
         key={item.id}
         id={item.id}
         folderId={folderId}
@@ -139,7 +146,7 @@ const Item = ({
         labelBadge={labelBadge}
         onClickBadge={onBadgeClick}
         iconBadge={iconBadge}
-        badgeTitle={t("RecycleBinAction")}
+        badgeTitle={labelBadge ? "" : t("RecycleBinAction")}
       />
     </StyledDragAndDrop>
   );
@@ -184,6 +191,7 @@ const Items = ({
   isCommunity,
   isPaymentPageAvailable,
   currentDeviceType,
+  folderAccess,
 }) => {
   const getEndOfBlock = React.useCallback(
     (item) => {
@@ -228,24 +236,18 @@ const Items = ({
         return true;
       }
 
-      if (isAdmin) {
-        if (
-          (item.pathParts &&
-            (item.pathParts[0].id === myId ||
-              item.pathParts[0].id === commonId)) ||
-          item.rootFolderType === FolderType.USER ||
-          item.rootFolderType === FolderType.COMMON ||
-          (item.rootFolderType === FolderType.TRASH && startDrag && !isArchive)
-        ) {
-          return true;
-        }
-      } else {
-        if (
-          (item.pathParts && item.pathParts[0].id === myId) ||
-          item.rootFolderType === FolderType.USER
-        ) {
-          return true;
-        }
+      if (item.rootFolderType === FolderType.TRASH && startDrag && !isArchive) {
+        return draggableItems.some(
+          (draggableItem) => draggableItem.security.Delete
+        );
+      }
+
+      if (item.rootFolderType === FolderType.USER) {
+        return (
+          folderAccess === ShareAccessRights.None ||
+          folderAccess === ShareAccessRights.FullAccess ||
+          folderAccess === ShareAccessRights.RoomManager
+        );
       }
 
       return false;
@@ -287,8 +289,8 @@ const Items = ({
         const showBadge = emptyTrashInProgress
           ? false
           : item.newItems
-          ? item.newItems > 0 && true
-          : isTrash && !trashIsEmpty;
+            ? item.newItems > 0 && true
+            : isTrash && !trashIsEmpty;
         const labelBadge = showBadge ? item.newItems : null;
         const iconBadge = isTrash ? ClearTrashReactSvgUrl : null;
 
@@ -313,7 +315,7 @@ const Items = ({
             showBadge={showBadge}
             labelBadge={labelBadge}
             iconBadge={iconBadge}
-            folderId={`document_catalog-${FolderNames[item.rootFolderType]}`}
+            folderId={`document_catalog-${FOLDER_NAMES[item.rootFolderType]}`}
           />
         );
       });
@@ -417,7 +419,7 @@ export default inject(
     const { treeFolders, myFolderId, commonFolderId, isPrivacyFolder } =
       treeFoldersStore;
 
-    const { id } = selectedFolderStore;
+    const { id, access: folderAccess } = selectedFolderStore;
     const {
       moveDragItems,
       uploadEmptyFolders,
@@ -460,6 +462,7 @@ export default inject(
       isCommunity,
       isPaymentPageAvailable,
       currentDeviceType,
+      folderAccess,
     };
   }
 )(withTranslation(["Files", "Common", "Translations"])(observer(Items)));

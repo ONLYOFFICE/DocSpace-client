@@ -17,12 +17,16 @@
       "path": "packages/editor"
     },
     {
+      "name": "🗂 @docspace/management",
+      "path": "packages/management"
+    },
+    {
       "name": "📦 @docspace/common",
       "path": "packages/common"
     },
     {
-      "name": "📦 @docspace/components",
-      "path": "packages/components"
+      "name": "📦 @docspace/shared",
+      "path": "packages/shared"
     }
   ],
   "settings": {
@@ -37,7 +41,8 @@
       "🔑 @docspace/login",
       "🚀 @docspace/client",
       "📄 @docspace/editor",
-      "📦 @docspace/common"
+      "📦 @docspace/common",
+      "🗂 @docspace/management"
     ],
     "[javascript]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -131,6 +136,26 @@
             "label": "Start prod",
             "task": "Frontend | start-prod",
             "tooltip": "🛠️ Start the \"frontend start production\" task"
+          },
+          {
+            "label": "Start storybook",
+            "task": "Frontend | storybook",
+            "tooltip": "🛠️ Start the \"frontend start storybook\" task"
+          },
+          {
+            "label": "Start storybook prod",
+            "task": "Frontend | storybook prod",
+            "tooltip": "🛠️ Start the \"frontend start storybook\" task"
+          },
+          {
+            "label": "Lint",
+            "task": "Frontend | Eslint",
+            "tooltip": "🛠️ Start the \"frontend start storybook\" task"
+          },
+          {
+            "label": "Lint:fix",
+            "task": "Frontend | Eslint:fix",
+            "tooltip": "🛠️ Start the \"frontend start storybook\" task"
           }
         ],
         "tooltip": "🛠️ Client tasks"
@@ -152,6 +177,11 @@
             "label": "spellcheck-force-save",
             "task": "Test | frontend-translations-spellcheck-force-save",
             "tooltip": "🛠️ Start the \"frontend translation spellcheck tests\" task"
+          },
+          {
+            "label": "unit",
+            "task": "Test | Jest:unit",
+            "tooltip": "🛠️ Start the \"Test | Jest:unit\" task"
           }
         ],
         "tooltip": "🛠️ Client tests tasks"

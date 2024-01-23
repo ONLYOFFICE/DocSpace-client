@@ -1,11 +1,11 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useLocation, Outlet } from "react-router-dom";
-import Section from "@docspace/common/components/Section";
+import Section from "@docspace/shared/components/section";
 import SectionHeaderContent from "../Home/Section/Header";
 import SectionFilterContent from "../Home/Section/Filter";
 import FilesPanels from "../../components/FilesPanels";
-
+import SectionWrapper from "SRC_DIR/components/Section";
 import { RoomSharingDialog } from "../../components/dialogs";
 import SelectionArea from "../Home/SelectionArea/FilesSelectionArea";
 import MediaViewer from "../Home/MediaViewer";
@@ -44,7 +44,7 @@ const PublicRoomPage = (props) => {
 
   return (
     <>
-      <Section
+      <SectionWrapper
         withBodyScroll
         // withBodyAutoFocus={!isMobile}
         withPaging={withPaging}
@@ -63,7 +63,7 @@ const PublicRoomPage = (props) => {
         <Section.SectionBody>
           <Outlet />
         </Section.SectionBody>
-      </Section>
+      </SectionWrapper>
 
       <FilesPanels />
       <SelectionArea />

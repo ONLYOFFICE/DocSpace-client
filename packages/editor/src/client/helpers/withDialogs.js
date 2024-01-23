@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { getPresignedUri, getReferenceData } from "@docspace/common/api/files";
-import { getRestoreProgress } from "@docspace/common/api/portal";
-import {
-  EDITOR_ID,
-  FilesSelectorFilterTypes,
-  FilterType,
-} from "@docspace/common/constants";
+import { getPresignedUri, getReferenceData } from "@docspace/shared/api/files";
+import { getRestoreProgress } from "@docspace/shared/api/portal";
+import { FilesSelectorFilterTypes, FilterType } from "@docspace/shared/enums";
+import { EDITOR_ID } from "@docspace/shared/constants";
 import { useTranslation } from "react-i18next";
-//import SharingDialog from "../components/SharingDialog";
+import SharingDialog from "../components/SharingDialog";
 import SelectFileDialog from "../components/SelectFileDialog";
 import SelectFolderDialog from "../components/SelectFolderDialog";
 
@@ -18,7 +15,7 @@ const setReferenceSourceAction = "referenceSourceType";
 
 const withDialogs = (WrappedComponent) => {
   return (props) => {
-    //const [isVisible, setIsVisible] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
     const [filesType, setFilesType] = useState("");
     const [isFileDialogVisible, setIsFileDialogVisible] = useState(false);
     const [isFolderDialogVisible, setIsFolderDialogVisible] = useState(false);
@@ -30,13 +27,7 @@ const withDialogs = (WrappedComponent) => {
 
     const { t } = useTranslation(["Editor", "Common"]);
 
-    const {
-      config,
-      fileId,
-      mfReady,
-      //sharingSettings
-    } = props;
-
+    const { config, fileId, mfReady, sharingSettings } = props;
     const fileInfo = config?.file;
     const instanceId = config?.document?.referenceData.instanceId;
 
@@ -74,23 +65,23 @@ const withDialogs = (WrappedComponent) => {
       });
     };
 
-    // const onSDKRequestSharingSettings = () => {
-    //   setIsVisible(true);
-    // };
+    const onSDKRequestSharingSettings = () => {
+      setIsVisible(true);
+    };
 
-    // const onCancel = () => {
-    //   setIsVisible(false);
-    // };
+    const onCancel = () => {
+      setIsVisible(false);
+    };
 
-    // const loadUsersRightsList = (docEditor) => {
-    //   window.SharingDialog.convertSharingUsers(sharingSettings).then(
-    //     (sharingSettings) => {
-    //       docEditor.setSharingSettings({
-    //         sharingSettings,
-    //       });
-    //     }
-    //   );
-    // };
+    const loadUsersRightsList = (docEditor) => {
+      window.SharingDialog.convertSharingUsers(sharingSettings).then(
+        (sharingSettings) => {
+          docEditor.setSharingSettings({
+            sharingSettings,
+          });
+        }
+      );
+    };
 
     const onCloseFileDialog = () => {
       setIsFileDialogVisible(false);
@@ -286,16 +277,16 @@ const withDialogs = (WrappedComponent) => {
       }
     };
 
-    // const sharingDialog = (
-    //   <SharingDialog
-    //     mfReady={mfReady}
-    //     isVisible={isVisible}
-    //     fileInfo={fileInfo}
-    //     onCancel={onCancel}
-    //     loadUsersRightsList={loadUsersRightsList}
-    //     filesSettings={props.filesSettings}
-    //   />
-    // );
+    const sharingDialog = (
+      <SharingDialog
+        mfReady={mfReady}
+        isVisible={isVisible}
+        fileInfo={fileInfo}
+        onCancel={onCancel}
+        loadUsersRightsList={loadUsersRightsList}
+        filesSettings={props.filesSettings}
+      />
+    );
 
     const selectFileDialog = (
       <SelectFileDialog
@@ -326,10 +317,10 @@ const withDialogs = (WrappedComponent) => {
     return (
       <WrappedComponent
         {...props}
-        //sharingDialog={sharingDialog}
-        // onSDKRequestSharingSettings={onSDKRequestSharingSettings}
-        //  loadUsersRightsList={loadUsersRightsList}
-        //isVisible={isVisible}
+        sharingDialog={sharingDialog}
+        onSDKRequestSharingSettings={onSDKRequestSharingSettings}
+        loadUsersRightsList={loadUsersRightsList}
+        isVisible={isVisible}
         selectFileDialog={selectFileDialog}
         onSDKRequestInsertImage={onSDKRequestInsertImage}
         onSDKRequestSelectSpreadsheet={onSDKRequestSelectSpreadsheet}

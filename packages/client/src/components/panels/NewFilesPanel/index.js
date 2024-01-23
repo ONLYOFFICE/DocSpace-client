@@ -1,14 +1,14 @@
 import { useState, useEffect, useMemo } from "react";
-import Backdrop from "@docspace/components/backdrop";
-import Loader from "@docspace/components/loader";
-import Text from "@docspace/components/text";
-import Heading from "@docspace/components/heading";
-import Aside from "@docspace/components/aside";
-import Row from "@docspace/components/row";
-import Button from "@docspace/components/button";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Loader } from "@docspace/shared/components/loader";
+import { Text } from "@docspace/shared/components/text";
+import { Heading } from "@docspace/shared/components/heading";
+import { Aside } from "@docspace/shared/components/aside";
+import { Row } from "@docspace/shared/components/row";
+import { Button } from "@docspace/shared/components/button";
 import { withTranslation } from "react-i18next";
-import toastr from "@docspace/components/toast/toastr";
-import Portal from "@docspace/components/portal";
+import { toastr } from "@docspace/shared/components/toast";
+import { Portal } from "@docspace/shared/components/portal";
 
 import { ReactSVG } from "react-svg";
 import {
@@ -21,7 +21,7 @@ import {
   StyledLink,
 } from "../StyledPanels";
 import { inject, observer } from "mobx-react";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 import Loaders from "@docspace/common/components/Loaders";
 import withLoader from "../../../HOCs/withLoader";
@@ -29,8 +29,8 @@ import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
-import FilesFilter from "@docspace/common/api/files/filter";
-import { DeviceType } from "@docspace/common/constants";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { DeviceType } from "@docspace/shared/enums";
 
 const SharingBodyStyle = { height: `calc(100vh - 156px)` };
 
@@ -50,6 +50,8 @@ const NewFilesPanel = (props) => {
     visible,
     isLoading,
     currentDeviceType,
+    fileItemsList,
+    enablePlugins,
   } = props;
 
   const [listFiles, setListFiles] = useState(newFiles);
@@ -227,6 +229,21 @@ const NewFilesPanel = (props) => {
         return;
       }
 
+      if (fileItemsList && enablePlugins) {
+        let currPluginItem = null;
+
+        fileItemsList.forEach((i) => {
+          if (i.key === item.fileExst) currPluginItem = i.value;
+        });
+
+        if (currPluginItem) {
+          const correctDevice = currPluginItem.devices
+            ? currPluginItem.devices.includes(currentDeviceType)
+            : true;
+          if (correctDevice) return currPluginItem.onClick(item);
+        }
+      }
+
       return window.open(webUrl, "_blank");
     }
   };
@@ -278,7 +295,7 @@ const NewFilesPanel = (props) => {
           </StyledHeaderContent>
           {!isLoading ? (
             <StyledBody className="files-operations-body">
-              <StyledSharingBody stype="mediumBlack" style={SharingBodyStyle}>
+              <StyledSharingBody style={SharingBodyStyle}>
                 {filesListNode}
               </StyledSharingBody>
             </StyledBody>
@@ -329,6 +346,7 @@ export default inject(
     dialogsStore,
     settingsStore,
     clientLoadingStore,
+    pluginStore,
   }) => {
     const { addFileToRecentlyViewed, hasNew, refreshFiles } = filesStore;
 
@@ -351,7 +369,11 @@ export default inject(
       newFiles,
     } = dialogsStore;
 
+    const { fileItemsList } = pluginStore;
+
     return {
+      fileItemsList,
+      enablePlugins: auth.settingsStore.enablePlugins,
       visible,
       newFiles,
       newFilesIds,

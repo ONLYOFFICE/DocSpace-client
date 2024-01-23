@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import TableHeader from "@docspace/components/table-container/TableHeader";
+import { TableHeader } from "@docspace/shared/components/table";
 
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -45,7 +45,7 @@ const WebhookTableHeader = (props) => {
       enable: true,
       default: true,
       active: true,
-      minWidth: 150,
+      minWidth: 210,
       onChange: onColumnChange,
     },
     {
@@ -73,8 +73,8 @@ const WebhookTableHeader = (props) => {
 
     setColumns((prevColumns) =>
       prevColumns.map((item, index) =>
-        index === columnIndex ? { ...item, enable: !item.enable } : item,
-      ),
+        index === columnIndex ? { ...item, enable: !item.enable } : item
+      )
     );
 
     const tableColumns = columns.map((c) => c.enable && c.key);

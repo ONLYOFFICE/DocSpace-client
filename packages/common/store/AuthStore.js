@@ -1,21 +1,26 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import api from "../api";
-import { setWithCredentialsStatus } from "../api/client";
+import api from "@docspace/shared/api";
+import { setWithCredentialsStatus } from "@docspace/shared/api/client";
 
 import SettingsStore from "./SettingsStore";
 import BannerStore from "./BannerStore";
 import UserStore from "./UserStore";
 import TfaStore from "./TfaStore";
 import InfoPanelStore from "./InfoPanelStore";
-import { logout as logoutDesktop, desktopConstants } from "../desktop";
-import { isAdmin, setCookie } from "../utils";
-import { getCookie } from "@docspace/components/utils/cookie";
+import {
+  logout as logoutDesktop,
+  desktopConstants,
+} from "@docspace/shared/utils/desktop";
+import { isAdmin } from "@docspace/shared/utils/common";
+import { getCookie, setCookie } from "@docspace/shared/utils/cookie";
 import CurrentQuotasStore from "./CurrentQuotaStore";
 import CurrentTariffStatusStore from "./CurrentTariffStatusStore";
 import PaymentQuotasStore from "./PaymentQuotasStore";
 
-import { LANGUAGE, COOKIE_EXPIRATION_YEAR, TenantStatus } from "../constants";
-import { getPortalTenantExtra } from "../api/portal";
+import { TenantStatus } from "@docspace/shared/enums";
+import { COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
+import { LANGUAGE } from "@docspace/shared/constants";
+import { getPortalTenantExtra } from "@docspace/shared/api/portal";
 
 class AuthStore {
   userStore = null;
@@ -35,6 +40,7 @@ class AuthStore {
   isUpdatingTariff = false;
 
   tenantExtra = {};
+
   constructor() {
     this.userStore = new UserStore();
 
@@ -99,6 +105,8 @@ class AuthStore {
     const isPortalRestore =
       this.settingsStore.tenantStatus === TenantStatus.PortalRestore;
 
+    const { user } = this.userStore;
+
     if (
       this.settingsStore.isLoaded &&
       this.settingsStore.socketUrl &&
@@ -128,7 +136,18 @@ class AuthStore {
       }
     }
 
-    return Promise.all(requests);
+    return Promise.all(requests).then(() => {
+      const { user } = this.userStore;
+
+      if (
+        this.settingsStore.standalone &&
+        !this.settingsStore.wizardToken &&
+        this.isAuthenticated &&
+        user.isAdmin
+      ) {
+        requests.push(this.settingsStore.getPortals());
+      }
+    });
   };
 
   get isEnterprise() {
@@ -327,19 +346,20 @@ class AuthStore {
     this.settingsStore = new SettingsStore();
   };
 
-  logout = async () => {
+  logout = async (reset = true) => {
     const ssoLogoutUrl = await api.user.logout();
 
     this.isLogout = true;
 
-    setWithCredentialsStatus(false);
-
-    const { isDesktopClient: isDesktop, personal } = this.settingsStore;
+    const { isDesktopClient: isDesktop } = this.settingsStore;
 
     isDesktop && logoutDesktop();
 
     if (ssoLogoutUrl) return ssoLogoutUrl;
 
+    if (!reset) return;
+
+    setWithCredentialsStatus(false);
     this.reset(true);
     this.userStore.setUser(null);
     this.init();
@@ -437,6 +457,10 @@ class AuthStore {
     const capabilities = await api.settings.getCapabilities();
     if (capabilities) this.setCapabilities(capabilities);
   };
+
+  get isManagement() {
+    return window.location.pathname.includes("management");
+  }
 }
 
 export default new AuthStore();

@@ -1,11 +1,10 @@
-import combineUrl from "@docspace/common/utils/combineUrl";
-
-import toastr from "@docspace/components/toast/toastr";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { toastr } from "@docspace/shared/components/toast";
 
 import config from "PACKAGE_FILE";
 
 import { PluginActions, PluginToastType } from "./constants";
-import { Events } from "@docspace/common/constants";
+import { Events } from "@docspace/shared/enums";
 
 export const messageActions = (
   message,
@@ -40,9 +39,7 @@ export const messageActions = (
 
       case PluginActions.updateContext:
         if (message.contextProps) {
-          message.contextProps.forEach((prop) => {
-            updatePropsContext && updatePropsContext(prop.name, prop.props);
-          });
+          updatePropsContext(contextProps);
         }
         break;
 

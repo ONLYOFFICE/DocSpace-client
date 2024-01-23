@@ -2,19 +2,19 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Trans, withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import toastr from "@docspace/components/toast/toastr";
-import FieldContainer from "@docspace/components/field-container";
-import TextInput from "@docspace/components/text-input";
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
+import { toastr } from "@docspace/shared/components/toast";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { inject, observer } from "mobx-react";
 import isEqual from "lodash/isEqual";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import styled from "styled-components";
-import Link from "@docspace/components/link";
+import { Link } from "@docspace/shared/components/link";
 import LoaderCompanyInfoSettings from "../sub-components/loaderCompanyInfoSettings";
 import AboutDialog from "../../../../About/AboutDialog";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
-import { mobile, size } from "@docspace/components/utils/device";
+import { mobile, size } from "@docspace/shared/utils";
 
 const StyledComponent = styled.div`
   .link {
@@ -46,12 +46,6 @@ const StyledComponent = styled.div`
       display: none;
     }
   }
-
-  @media (max-height: 700px) {
-    .save-cancel-buttons {
-      bottom: auto;
-    }
-  }
 `;
 
 const CompanyInfoSettings = (props) => {
@@ -68,6 +62,7 @@ const CompanyInfoSettings = (props) => {
     isLoadedCompanyInfoSettingsData,
     buildVersionInfo,
     personal,
+    isManagement,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -106,9 +101,12 @@ const CompanyInfoSettings = (props) => {
   }, []);
 
   const checkWidth = () => {
+    const url = isManagement
+      ? "/branding"
+      : "portal-settings/customization/branding";
     window.innerWidth > size.mobile &&
       location.pathname.includes("company-info-settings") &&
-      navigate("/portal-settings/customization/branding");
+      navigate(url);
   };
 
   useEffect(() => {
@@ -121,22 +119,22 @@ const CompanyInfoSettings = (props) => {
     const companySettings = getFromSessionStorage("companySettings");
 
     const defaultData = {
-      address: companyInfoSettingsData.address,
-      companyName: companyInfoSettingsData.companyName,
-      email: companyInfoSettingsData.email,
-      phone: companyInfoSettingsData.phone,
-      site: companyInfoSettingsData.site,
+      address: companyInfoSettingsData?.address,
+      companyName: companyInfoSettingsData?.companyName,
+      email: companyInfoSettingsData?.email,
+      phone: companyInfoSettingsData?.phone,
+      site: companyInfoSettingsData?.site,
     };
 
     saveToSessionStorage("defaultCompanySettings", defaultData);
 
     if (companySettings) {
       setCompanySettings({
-        address: companySettings.address,
-        companyName: companySettings.companyName,
-        email: companySettings.email,
-        phone: companySettings.phone,
-        site: companySettings.site,
+        address: companySettings?.address,
+        companyName: companySettings?.companyName,
+        email: companySettings?.email,
+        phone: companySettings?.phone,
+        site: companySettings?.site,
       });
     } else {
       setCompanySettings(defaultData);
@@ -153,11 +151,11 @@ const CompanyInfoSettings = (props) => {
     );
 
     const newSettings = {
-      address: companySettings.address,
-      companyName: companySettings.companyName,
-      email: companySettings.email,
-      phone: companySettings.phone,
-      site: companySettings.site,
+      address: companySettings?.address,
+      companyName: companySettings?.companyName,
+      email: companySettings?.email,
+      phone: companySettings?.phone,
+      site: companySettings?.site,
     };
 
     saveToSessionStorage("companySettings", newSettings);
@@ -463,7 +461,7 @@ const CompanyInfoSettings = (props) => {
 };
 
 export default inject(({ auth, common }) => {
-  const { currentQuotaStore, settingsStore } = auth;
+  const { currentQuotaStore, settingsStore, isManagement } = auth;
 
   const {
     setIsLoadedCompanyInfoSettingsData,
@@ -493,6 +491,7 @@ export default inject(({ auth, common }) => {
     buildVersionInfo,
     personal,
     isSettingPaid: isBrandingAndCustomizationAvailable,
+    isManagement,
   };
 })(
   withLoading(

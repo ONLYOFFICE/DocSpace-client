@@ -1,5 +1,6 @@
 {
   "DocumentsFileType": "asiakirjat",
+  "ErrorConnectionLost": "Yhteys on katkennut",
   "FileLocation": "Siirry asiakirjoihin",
   "FileName": "Tiedostonimi",
   "ImageFileType": "kuvat",

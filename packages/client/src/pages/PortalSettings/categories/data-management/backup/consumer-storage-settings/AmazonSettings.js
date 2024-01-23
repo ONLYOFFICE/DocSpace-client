@@ -1,13 +1,13 @@
 ﻿import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 import React from "react";
 import { inject, observer } from "mobx-react";
-import TextInput from "@docspace/components/text-input";
-import Checkbox from "@docspace/components/checkbox";
-import ComboBox from "@docspace/components/combobox";
-import RadioButton from "@docspace/components/radio-button";
-import Text from "@docspace/components/text";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { ComboBox } from "@docspace/shared/components/combobox";
+import { RadioButton } from "@docspace/shared/components/radio-button";
+import { Text } from "@docspace/shared/components/text";
 import styled from "styled-components";
-import HelpButton from "@docspace/components/help-button";
+import { HelpButton } from "@docspace/shared/components/help-button";
 import { Trans } from "react-i18next";
 
 const bucket = "bucket";
@@ -277,8 +277,8 @@ class AmazonSettings extends React.Component {
       formSettings[sse] === sse_kms || formSettings[sse] === sse_s3
         ? this.availableEncryptions[1].label
         : formSettings.hasOwnProperty(sse)
-        ? this.availableEncryptions[2].label
-        : this.availableEncryptions[0].label;
+          ? this.availableEncryptions[2].label
+          : this.availableEncryptions[0].label;
 
     const managedKeys =
       formSettings[sse] === sse_kms

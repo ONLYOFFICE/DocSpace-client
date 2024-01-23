@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import ModalDialog from "@docspace/components/modal-dialog";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import ModalDialogContainer from "./ModalDialogContainer";
 import { I18nextProvider, useTranslation } from "react-i18next";
 import AboutContent from "./AboutContent";

@@ -1,10 +1,9 @@
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
-import Avatar from "@docspace/components/avatar";
-
+import { Avatar } from "@docspace/shared/components/avatar";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
 import * as Styled from "./index.styled";
 
 const ChangeRoomOwner = ({
@@ -14,6 +13,8 @@ const ChangeRoomOwner = ({
   onOwnerChange,
   currentColorScheme,
 }) => {
+  const userName = roomOwner.displayName ?? roomOwner.label;
+
   return (
     <Styled.ChangeRoomOwner>
       <Text className="change-owner-label" fontWeight={600} fontSize="13px">
@@ -26,12 +27,12 @@ const ChangeRoomOwner = ({
           size="base"
           role={""}
           isDefaultSource={roomOwner.hasAvatar}
-          source={roomOwner.avatarSmall}
-          userName={roomOwner.displayName}
+          source={roomOwner.avatarSmall ?? roomOwner.avatar}
+          userName={userName}
         />
         <div className="change-owner-display-name">
           <Text fontWeight={600} fontSize="13px">
-            {roomOwner.displayName}
+            {userName}
           </Text>
           {roomOwner.id === currentUserId && (
             <Text className="me-label">({t("Common:MeLabel")})</Text>

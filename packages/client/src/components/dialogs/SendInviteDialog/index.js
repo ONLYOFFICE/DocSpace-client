@@ -1,18 +1,18 @@
 import React, { memo } from "react";
 import PropTypes from "prop-types";
 
-import ModalDialog from "@docspace/components/modal-dialog";
-import Button from "@docspace/components/button";
-import Text from "@docspace/components/text";
-//import ToggleContent from "@docspace/components/toggle-content";
-import Checkbox from "@docspace/components/checkbox";
-import CustomScrollbarsVirtualList from "@docspace/components/scrollbar/custom-scrollbars-virtual-list";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Button } from "@docspace/shared/components/button";
+import { Text } from "@docspace/shared/components/text";
+import { toastr } from "@docspace/shared/components/toast";
+import { CustomScrollbarsVirtualList } from "@docspace/shared/components/scrollbar";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 
 import { FixedSizeList as List, areEqual } from "react-window";
 // import AutoSizer from "react-virtualized-auto-sizer";
 import { withTranslation } from "react-i18next";
-import { resendUserInvites } from "@docspace/common/api/people";
-import toastr from "@docspace/components/toast/toastr";
+import { resendUserInvites } from "@docspace/shared/api/people";
+
 import ModalDialogContainer from "../ModalDialogContainer";
 import { inject, observer } from "mobx-react";
 

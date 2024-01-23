@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import copy from "copy-to-clipboard";
-import Avatar from "@docspace/components/avatar";
-import Link from "@docspace/components/link";
-import Text from "@docspace/components/text";
-import IconButton from "@docspace/components/icon-button";
-import ContextMenuButton from "@docspace/components/context-menu-button";
-import { toastr } from "@docspace/components";
+import { Avatar } from "@docspace/shared/components/avatar";
+import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
+import { toastr } from "@docspace/shared/components/toast";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 import UniverseReactSvgUrl from "PUBLIC_DIR/images/universe.react.svg?url";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
@@ -19,8 +19,8 @@ import LockedReactSvgUrl from "PUBLIC_DIR/images/locked.react.svg?url";
 import LoadedReactSvgUrl from "PUBLIC_DIR/images/loaded.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 import ClockReactSvg from "PUBLIC_DIR/images/clock.react.svg";
-import moment from "moment";
-import { RoomsType } from "@docspace/common/constants";
+import moment from "moment-timezone";
+import { RoomsType } from "@docspace/shared/enums";
 
 import { StyledLinkRow } from "./StyledPublicRoom";
 
@@ -56,7 +56,9 @@ const LinkRow = (props) => {
 
   const isLocked = !!password;
   const expiryDate = !!expirationDate;
-  const date = moment(expirationDate).format("LLL");
+  const date = moment(expirationDate)
+    .tz(window.timezone)
+    .format("LLL");
 
   const tooltipContent = isExpired
     ? t("Translations:LinkHasExpiredAndHasBeenDisabled")
@@ -235,7 +237,7 @@ const LinkRow = (props) => {
               size={16}
               iconName={CopyReactSvgUrl}
               onClick={onCopyExternalLink}
-              title={t("Files:CopyGeneralLink")}
+              title={primary ? t("Files:CopyGeneralLink") : t("Files:CopyLink")}
             />
           </>
         )}

@@ -1,20 +1,19 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
-//import toastr from "@docspace/components/toast/toastr";
+//import {toastr} from "@docspace/shared/components";
 import {
   // FileAction,
   FileStatus,
   ShareAccessRights,
-} from "@docspace/common/constants";
-//import { combineUrl } from "@docspace/common/utils";
-import getCorrectDate from "@docspace/components/utils/getCorrectDate";
-import { LANGUAGE } from "@docspace/common/constants";
+} from "@docspace/shared/enums";
+//import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { getCorrectDate, getCookie } from "@docspace/shared/utils";
+import { LANGUAGE } from "@docspace/shared/constants";
 import config from "PACKAGE_FILE";
 //import EditingWrapperComponent from "../components/EditingWrapperComponent";
 import { getTitleWithoutExtension } from "SRC_DIR/helpers/filesUtils";
 //import { getDefaultFileName } from "@docspace/client/src/helpers/filesUtils";
 //import ItemIcon from "../components/ItemIcon";
-import { getCookie } from "@docspace/components/utils/cookie";
 
 export default function withContent(WrappedContent) {
   class WithContent extends React.Component {
@@ -35,7 +34,7 @@ export default function withContent(WrappedContent) {
     }
 
     getStatusByDate = (create) => {
-      const { culture, item, personal } = this.props;
+      const { culture, item } = this.props;
       const { created, updated } = item;
 
       const locale = getCookie(LANGUAGE) || culture;

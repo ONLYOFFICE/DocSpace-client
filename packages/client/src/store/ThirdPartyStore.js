@@ -19,7 +19,7 @@ import IconNextcloudReactSvgUrl from "PUBLIC_DIR/images/icon_nextcloud.react.svg
 import IconWebdavSmallReactSvgUrl from "PUBLIC_DIR/images/icon_webdav_small.react.svg?url";
 import IconWebdavReactSvgUrl from "PUBLIC_DIR/images/icon_webdav.react.svg?url";
 import { makeAutoObservable } from "mobx";
-import api from "@docspace/common/api";
+import api from "@docspace/shared/api";
 import i18n from "../helpers/i18n";
 
 class ThirdPartyStore {

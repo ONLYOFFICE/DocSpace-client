@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
-import NoUserSelect from "@docspace/components/utils/commonStyles";
-import { getLogoFromPath } from "@docspace/common/utils";
+import { NoUserSelect } from "@docspace/shared/utils";
+import { getLogoFromPath } from "@docspace/shared/utils";
 const LogoItem = styled.div`
   display: flex;
   min-width: 48px;

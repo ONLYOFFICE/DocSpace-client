@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import moment from "moment";
+import moment from "moment-timezone";
 
-import ModalDialog from "@docspace/components/modal-dialog";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import styled, { css } from "styled-components";
 
-import Button from "@docspace/components/button";
+import { Button } from "@docspace/shared/components/button";
 import DeliveryDatePicker from "./DeliveryDatePicker";
 import StatusPicker from "./StatusPicker";
 
@@ -13,7 +13,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
 
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 
 const ModalDialogContainer = styled(ModalDialog)`
   .modal-body {
@@ -54,7 +54,10 @@ Separator.defaultProps = { theme: Base };
 
 const constructUrl = (baseUrl, filters) => {
   const url = new URL(baseUrl, "http://127.0.0.1:8092/");
-  url.searchParams.append("deliveryDate", filters.deliveryDate?.format("YYYY-MM-DD") || null);
+  url.searchParams.append(
+    "deliveryDate",
+    filters.deliveryDate?.format("YYYY-MM-DD") || null
+  );
   url.searchParams.append("deliveryFrom", filters.deliveryFrom.format("HH:mm"));
   url.searchParams.append("deliveryTo", filters.deliveryTo.format("HH:mm"));
   url.searchParams.append("status", JSON.stringify(filters.status));
@@ -63,20 +66,33 @@ const constructUrl = (baseUrl, filters) => {
 };
 
 function areArraysEqual(array1, array2) {
-  return array1.length === array2.length && array1.every((val, index) => val === array2[index]);
+  return (
+    array1.length === array2.length &&
+    array1.every((val, index) => val === array2[index])
+  );
 }
 
 const FilterDialog = (props) => {
-  const { visible, closeModal, applyFilters, formatFilters, setHistoryFilters, historyFilters } =
-    props;
+  const {
+    visible,
+    closeModal,
+    applyFilters,
+    formatFilters,
+    setHistoryFilters,
+    historyFilters,
+  } = props;
   const { t } = useTranslation(["Webhooks", "Files", "Common"]);
   const { id } = useParams();
   const navigate = useNavigate();
 
   const [filters, setFilters] = useState({
     deliveryDate: null,
-    deliveryFrom: moment().startOf("day"),
-    deliveryTo: moment().endOf("day"),
+    deliveryFrom: moment()
+      .tz(window.timezone)
+      .startOf("day"),
+    deliveryTo: moment()
+      .tz(window.timezone)
+      .endOf("day"),
     status: [],
   });
 
@@ -101,8 +117,12 @@ const FilterDialog = (props) => {
       if (filters.deliveryDate !== null || filters.status.length > 0) {
         setFilters({
           deliveryDate: null,
-          deliveryFrom: moment().startOf("day"),
-          deliveryTo: moment().endOf("day"),
+          deliveryFrom: moment()
+            .tz(window.timezone)
+            .startOf("day"),
+          deliveryTo: moment()
+            .tz(window.timezone)
+            .endOf("day"),
           status: [],
         });
       }
@@ -110,7 +130,12 @@ const FilterDialog = (props) => {
     } else {
       setFilters(historyFilters);
       setIsApplied(true);
-      navigate(constructUrl(`/portal-settings/developer-tools/webhooks/${id}`, historyFilters));
+      navigate(
+        constructUrl(
+          `/portal-settings/developer-tools/webhooks/${id}`,
+          historyFilters
+        )
+      );
     }
     setIsLoaded(true);
   }, [historyFilters, visible]);
@@ -124,7 +149,12 @@ const FilterDialog = (props) => {
       : filters.deliveryDate === null && filters.status.length === 0;
 
   return (
-    <ModalDialogContainer withFooterBorder visible={visible} onClose={closeModal} displayType="aside">
+    <ModalDialogContainer
+      withFooterBorder
+      visible={visible}
+      onClose={closeModal}
+      displayType="aside"
+    >
       <ModalDialog.Header>{t("Files:Filter")}</ModalDialog.Header>
       <ModalDialog.Body>
         <DialogBodyWrapper>

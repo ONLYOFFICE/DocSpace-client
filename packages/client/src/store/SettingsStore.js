@@ -1,9 +1,9 @@
-import api from "@docspace/common/api";
+import api from "@docspace/shared/api";
 import {
   setFavoritesSetting,
   setRecentSetting,
-} from "@docspace/common/api/files";
-import { RoomsType } from "@docspace/common/constants";
+} from "@docspace/shared/api/files";
+import { RoomsType } from "@docspace/shared/enums";
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
 import { presentInArray } from "../helpers/files-helpers";
@@ -12,8 +12,9 @@ import {
   iconSize32,
   iconSize64,
   iconSize96,
-} from "@docspace/common/utils/image-helpers";
+} from "@docspace/shared/utils/image-helpers";
 
+import { getIconPathByFolderType } from "@docspace/shared/utils/common";
 class SettingsStore {
   thirdPartyStore;
   treeFoldersStore;
@@ -29,7 +30,6 @@ class SettingsStore {
   forcesave = null;
   storeForcesave = null;
   storeOriginalFiles = null;
-  updateIfExist = null;
   favoritesSection = null;
   recentSection = null;
   hideConfirmConvertSave = null;
@@ -93,8 +93,7 @@ class SettingsStore {
       this.enableThirdParty !== null &&
       this.forcesave !== null &&
       this.storeForcesave !== null &&
-      this.storeOriginalFiles !== null &&
-      this.updateIfExist !== null
+      this.storeOriginalFiles !== null
     );
   }
 
@@ -146,11 +145,6 @@ class SettingsStore {
   setFilesSetting = (setting, val) => {
     this[setting] = val;
   };
-
-  setUpdateIfExist = (data, setting) =>
-    api.files
-      .updateIfExist(data)
-      .then((res) => this.setFilesSetting(setting, res));
 
   setStoreOriginal = (data, setting) =>
     api.files
@@ -279,7 +273,8 @@ class SettingsStore {
     providerKey = null,
     contentLength = null,
     roomType = null,
-    isArchive = null
+    isArchive = null,
+    folderType = null
   ) => {
     if (fileExst || contentLength) {
       const isArchiveItem = this.isArchive(fileExst);
@@ -298,12 +293,19 @@ class SettingsStore {
       return icon;
     } else if (roomType) {
       return this.getRoomsIcon(roomType, isArchive, 32);
+    } else if (folderType) {
+      return this.getIconByFolderType(folderType, size);
     } else {
       return this.getFolderIcon(providerKey, size);
     }
   };
 
-  getIconBySize = (size, path) => {
+  getIconByFolderType = (folderType, size = 32) => {
+    const path = getIconPathByFolderType(folderType);
+    return this.getIconBySize(size, path);
+  };
+
+  getIconBySize = (size, path = 32) => {
     switch (+size) {
       case 24:
         return iconSize24.get(path);
@@ -341,6 +343,8 @@ class SettingsStore {
         case RoomsType.PublicRoom:
           path = "public.svg";
           break;
+        case RoomsType.FormRoom:
+          path = "form.svg";
       }
     }
 

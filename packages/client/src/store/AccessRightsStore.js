@@ -5,7 +5,7 @@ import {
   EmployeeStatus,
   FolderType,
   ShareAccessRights,
-} from "@docspace/common/constants";
+} from "@docspace/shared/enums";
 
 class AccessRightsStore {
   authStore = null;
@@ -90,6 +90,12 @@ class AccessRightsStore {
       !userIsOwner &&
       (userIsVisitor || userIsCollaborator)
     );
+  };
+  canMakePowerUser = (user) => {
+    const { isVisitor: userIsVisitor, isCollaborator: userIsCollaborator } =
+      user;
+
+    return userIsVisitor || userIsCollaborator;
   };
 
   canActivateUser = (user) => {

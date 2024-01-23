@@ -3,18 +3,20 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useState, useCallback, useEffect, useRef } from "react";
 
-import Avatar from "@docspace/components/avatar";
-import Text from "@docspace/components/text";
-import TextInput from "@docspace/components/text-input";
-import DropDownItem from "@docspace/components/drop-down-item";
-import toastr from "@docspace/components/toast/toastr";
-import { parseAddresses } from "@docspace/components/utils/email";
-import ComboBox from "@docspace/components/combobox";
+import { Avatar } from "@docspace/shared/components/avatar";
+import { Text } from "@docspace/shared/components/text";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { toastr } from "@docspace/shared/components/toast";
+import { parseAddresses } from "@docspace/shared/utils";
+import { ComboBox } from "@docspace/shared/components/combobox";
 
-import Filter from "@docspace/common/api/people/filter";
-import { getMembersList } from "@docspace/common/api/people";
-import { ShareAccessRights } from "@docspace/common/constants";
+import Filter from "@docspace/shared/api/people/filter";
+import BetaBadge from "@docspace/common/components/BetaBadge";
+import { getMembersList } from "@docspace/shared/api/people";
+import { ShareAccessRights } from "@docspace/shared/enums";
 import withCultureNames from "@docspace/common/hoc/withCultureNames";
+import { isBetaLanguage } from "@docspace/shared/utils";
 
 import AddUsersPanel from "../../AddUsersPanel";
 import { getAccessOptions } from "../utils";
@@ -66,9 +68,10 @@ const InviteInput = ({
   const searchRef = useRef();
 
   const selectedLanguage = cultureNames.find((item) => item.key === language) ||
-    cultureNames.find((item) => item.key === culture) || {
+    cultureNames.find((item) => item.key === culture.key) || {
       key: language,
       label: "",
+      isBeta: isBetaLanguage(language),
     };
 
   useEffect(() => {
@@ -76,6 +79,7 @@ const InviteInput = ({
       setInviteLanguage({
         key: language,
         label: selectedLanguage.label,
+        isBeta: isBetaLanguage(language),
       });
   }, []);
 
@@ -304,6 +308,7 @@ const InviteInput = ({
     setInviteLanguage({
       key: selectedLanguage.key,
       label: selectedLanguage.label,
+      isBeta: selectedLanguage.isBeta,
     });
     setIsChangeLangMail(false);
   };
@@ -311,6 +316,7 @@ const InviteInput = ({
   const cultureNamesNew = cultureNames.map((item) => ({
     label: item.label,
     key: item.key,
+    isBeta: isBetaLanguage(item.key),
   }));
 
   return (
@@ -345,7 +351,6 @@ const InviteInput = ({
             onSelect={onLanguageSelect}
             isDisabled={false}
             scaled={isMobileView}
-            textOverflow
             scaledOptions={false}
             size="content"
             manualWidth="280px"
@@ -356,6 +361,9 @@ const InviteInput = ({
             fillIcon={false}
             modernView
           />
+          {culture?.isBeta && (
+            <BetaBadge place="bottom-end" mobilePlace="bottom" />
+          )}
         </div>
         {isChangeLangMail && !isMobileView && (
           <StyledLink

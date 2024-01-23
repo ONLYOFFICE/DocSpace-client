@@ -1,12 +1,13 @@
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
+import { Loader } from "@docspace/shared/components/loader";
+import { ProgressBar } from "@docspace/shared/components/progress-bar";
 import styled from "styled-components";
-import Loader from "@docspace/components/loader";
+
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import InterruptIcon from "PUBLIC_DIR/images/interrupt.icon.react.svg";
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
-import { Base } from "@docspace/components/themes";
+import { commonIconsStyles } from "@docspace/shared/utils";
+import { Base } from "@docspace/shared/themes";
 import { withTranslation, Trans } from "react-i18next";
-import ProgressBar from "@docspace/components/progress-bar";
 
 const StyledCheckIcon = styled(CheckIcon)`
   ${commonIconsStyles}
@@ -188,10 +189,10 @@ const Progress = ({
           {isAbortTransfer && percent !== percentAllReassignment
             ? interruptedNode
             : percent < percentRoomReassignment
-            ? pendingNode
-            : percent < percentFilesInRoomsReassignment
-            ? inProgressNode
-            : allDataTransferredNode}
+              ? pendingNode
+              : percent < percentFilesInRoomsReassignment
+                ? inProgressNode
+                : allDataTransferredNode}
         </div>
       </div>
 

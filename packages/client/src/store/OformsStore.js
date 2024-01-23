@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
-import OformsFilter from "@docspace/common/api/oforms/filter";
-import { submitToGallery } from "@docspace/common/api/oforms";
+import OformsFilter from "@docspace/shared/api/oforms/filter";
+import { submitToGallery } from "@docspace/shared/api/oforms";
 
 import {
   getOformLocales,
@@ -9,12 +9,13 @@ import {
   getCategoryById,
   getCategoryTypes,
   getCategoriesOfCategoryType,
-} from "@docspace/common/api/oforms";
-import toastr from "@docspace/components/toast/toastr";
+} from "@docspace/shared/api/oforms";
+import { toastr } from "@docspace/shared/components/toast";
 
-import { combineUrl, convertToLanguage } from "@docspace/common/utils";
-import { LANGUAGE } from "@docspace/common/constants";
-import { getCookie } from "@docspace/components/utils/cookie";
+import { convertToLanguage } from "@docspace/shared/utils/common";
+import { LANGUAGE } from "@docspace/shared/constants";
+import { getCookie } from "@docspace/shared/utils/cookie";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 const myDocumentsFolderId = 2;
 
@@ -34,6 +35,10 @@ class OformsStore {
   categoryTitles = [];
 
   oformLocales = null;
+  filterOformsByLocaleIsLoading = false;
+  categoryFilterLoaded = false;
+  languageFilterLoaded = false;
+  oformFilesLoaded = false;
 
   submitToGalleryTileIsVisible = !localStorage.getItem(
     "submitToGalleryTileIsHidden"
@@ -45,8 +50,13 @@ class OformsStore {
   }
 
   get defaultOformLocale() {
-    const userLocale = convertToLanguage(getCookie(LANGUAGE)) || "en";
-    return this.oformLocales?.includes(userLocale) ? userLocale : "en";
+    const userLocale =
+      getCookie(LANGUAGE) || this.authStore.userStore.user?.cultureName || "en";
+    const convertedLocale = convertToLanguage(userLocale);
+
+    return this.oformLocales?.includes(convertedLocale)
+      ? convertedLocale
+      : "en";
   }
 
   setOformFiles = (oformFiles) => (this.oformFiles = oformFiles);
@@ -70,6 +80,22 @@ class OformsStore {
 
   setOformLocales = (oformLocales) => (this.oformLocales = oformLocales);
 
+  setFilterOformsByLocaleIsLoading = (filterOformsByLocaleIsLoading) => {
+    this.filterOformsByLocaleIsLoading = filterOformsByLocaleIsLoading;
+  };
+
+  setCategoryFilterLoaded = (categoryFilterLoaded) => {
+    this.categoryFilterLoaded = categoryFilterLoaded;
+  };
+
+  setLanguageFilterLoaded = (languageFilterLoaded) => {
+    this.languageFilterLoaded = languageFilterLoaded;
+  };
+
+  setOformFilesLoaded = (oformFilesLoaded) => {
+    this.oformFilesLoaded = oformFilesLoaded;
+  };
+
   fetchOformLocales = async () => {
     const { uploadDomain, uploadDashboard } =
       this.authStore.settingsStore.formGallery;
@@ -78,9 +104,7 @@ class OformsStore {
 
     try {
       const fetchedLocales = await getOformLocales(url);
-      const localeKeys = fetchedLocales.map((locale) =>
-        convertToLanguage(locale.code)
-      );
+      const localeKeys = fetchedLocales.map((locale) => locale.code);
       this.setOformLocales(localeKeys);
     } catch (err) {
       this.setOformLocales([]);
@@ -259,6 +283,9 @@ class OformsStore {
 
   filterOformsByLocale = async (locale) => {
     if (!locale) return;
+
+    if (locale !== this.oformsFilter.locale)
+      this.setFilterOformsByLocaleIsLoading(true);
 
     this.currentCategory = null;
 

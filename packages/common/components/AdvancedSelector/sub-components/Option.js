@@ -1,10 +1,10 @@
 import React from "react";
 
-import Avatar from "@docspace/components/avatar";
-import Text from "@docspace/components/text";
-import Checkbox from "@docspace/components/checkbox";
-import Loader from "@docspace/components/loader";
-import Loaders from "@docspace/common/components/Loaders";
+import { Avatar } from "@docspace/shared/components/avatar";
+import { Text } from "@docspace/shared/components/text";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import Loaders from "../../Loaders";
+
 const Option = ({
   style,
   isMultiSelect,

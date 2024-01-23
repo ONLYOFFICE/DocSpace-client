@@ -3,10 +3,10 @@ import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import AlertComponent from "../../AlertComponent";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 const PROXY_BASE_URL = combineUrl(
   window.DocSpaceConfig?.proxy?.url,

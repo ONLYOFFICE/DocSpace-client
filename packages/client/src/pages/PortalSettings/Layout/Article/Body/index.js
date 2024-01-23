@@ -3,10 +3,10 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import { DeviceType } from "@docspace/common/constants";
-import { getCatalogIconUrlByType } from "@docspace/common/utils/catalogIcon.helper";
+import { DeviceType } from "@docspace/shared/enums";
+import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 
-import { isArrayEqual } from "@docspace/components/utils/array";
+import { isArrayEqual } from "@docspace/shared/utils";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 
@@ -18,7 +18,7 @@ import {
   getCurrentSettingsCategory,
 } from "../../../utils";
 
-import CatalogItem from "@docspace/components/catalog-item";
+import { ArticleItem } from "@docspace/shared/components/article-item";
 import LoaderArticleBody from "./loaderArticleBody";
 
 const ArticleBodyContent = (props) => {
@@ -36,6 +36,7 @@ const ArticleBodyContent = (props) => {
     isCommunity,
     currentDeviceType,
     isProfileLoading,
+    limitedAccessSpace,
   } = props;
 
   const [selectedKeys, setSelectedKeys] = React.useState([]);
@@ -225,7 +226,7 @@ const ArticleBodyContent = (props) => {
       }
     }
 
-    if (!isOwner || standalone) {
+    if (!isOwner || limitedAccessSpace) {
       const index = resultTree.findIndex((n) => n.tKey === "PortalDeletion");
       if (index !== -1) {
         resultTree.splice(index, 1);
@@ -239,7 +240,7 @@ const ArticleBodyContent = (props) => {
         isSettingsCatalog: true,
       });
       items.push(
-        <CatalogItem
+        <ArticleItem
           key={item.key}
           id={item.key}
           icon={icon}
@@ -282,8 +283,13 @@ export default inject(({ auth, common, clientLoadingStore }) => {
   const { isNotPaidPeriod } = currentTariffStatusStore;
   const { user } = userStore;
   const { isOwner } = user;
-  const { standalone, showText, toggleArticleOpen, currentDeviceType } =
-    settingsStore;
+  const {
+    standalone,
+    showText,
+    toggleArticleOpen,
+    currentDeviceType,
+    limitedAccessSpace,
+  } = settingsStore;
 
   const isProfileLoading =
     window.location.pathname.includes("profile") &&
@@ -302,6 +308,7 @@ export default inject(({ auth, common, clientLoadingStore }) => {
     isCommunity,
     currentDeviceType,
     isProfileLoading,
+    limitedAccessSpace,
   };
 })(
   withLoading(

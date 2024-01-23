@@ -2,8 +2,8 @@ import { useRef } from "react";
 import { inject, observer } from "mobx-react";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import TableContainer from "@docspace/components/table-container";
-import TableBody from "@docspace/components/table-container/TableBody";
+import { TableContainer } from "@docspace/shared/components/table";
+import { TableBody } from "@docspace/shared/components/table";
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
@@ -25,9 +25,9 @@ const Table = ({
   });
 
   return historyUsers && historyUsers.length > 0 ? (
-    <TableContainer forwardedRef={ref}>
+    <TableContainer forwardedRef={ref} useReactWindow={false}>
       <TableHeader sectionWidth={sectionWidth} containerRef={ref} />
-      <TableBody>
+      <TableBody useReactWindow={false}>
         {historyUsers.map((item) => (
           <TableRow theme={theme} key={item.id} item={item} />
         ))}

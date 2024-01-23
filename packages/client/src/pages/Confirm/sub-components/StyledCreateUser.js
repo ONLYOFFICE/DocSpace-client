@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Box from "@docspace/components/box";
-import { mobile, tablet } from "@docspace/components/utils/device";
+import { Box } from "@docspace/shared/components/box";
+import { mobile, tablet } from "@docspace/shared/utils";
 
 export const ButtonsWrapper = styled.div`
   display: flex;
@@ -178,5 +178,11 @@ export const RegisterContainer = styled.div`
 
   .password-field-wrapper {
     width: 100%;
+  }
+
+  .signin-container {
+    width: 100%;
+    margin-top: 24px;
+    text-align: center;
   }
 }`;

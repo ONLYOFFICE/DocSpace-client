@@ -16,9 +16,13 @@ import withLoader from "@docspace/client/src/HOCs/withLoader";
 import Loaders from "@docspace/common/components/Loaders";
 import { getRoomTypeDefaultTagTranslation } from "../data";
 
-import ImageEditor from "@docspace/components/ImageEditor";
-import PreviewTile from "@docspace/components/ImageEditor/PreviewTile";
-import Text from "@docspace/components/text";
+import { ImageEditor } from "@docspace/shared/components/image-editor";
+import PreviewTile from "@docspace/shared/components/image-editor/PreviewTile";
+import { Text } from "@docspace/shared/components/text";
+
+import SystemFolders from "./SystemFolders";
+import { RoomsType } from "@docspace/shared/enums";
+
 import ChangeRoomOwner from "./ChangeRoomOwner";
 
 const StyledSetRoomParams = styled.div`
@@ -56,14 +60,11 @@ const SetRoomParams = ({
   onKeyUp,
   enableThirdParty,
   setChangeRoomOwnerIsVisible,
-  isAdmin,
-  userId,
   folderFormValidation,
 }) => {
   const [previewIcon, setPreviewIcon] = React.useState(null);
 
-  const isMe = userId === roomParams?.roomOwner?.id;
-  const canChangeRoomOwner = (isAdmin || isMe) && roomParams.roomOwner;
+  const isFormRoom = roomParams.type === RoomsType.FormRoom;
 
   const onChangeName = (e) => {
     setIsValidTitle(true);
@@ -145,8 +146,9 @@ const SetRoomParams = ({
           onChangeIsPrivate={onChangeIsPrivate}
         />
       )} */}
+      {isFormRoom && <SystemFolders t={t} />}
 
-      {isEdit && canChangeRoomOwner && (
+      {isEdit && (
         <ChangeRoomOwner
           roomOwner={roomParams.roomOwner}
           onOwnerChange={onOwnerChange}
@@ -196,14 +198,12 @@ const SetRoomParams = ({
 };
 
 export default inject(({ auth, dialogsStore }) => {
-  const { user } = auth.userStore;
   const { setChangeRoomOwnerIsVisible } = dialogsStore;
   const { folderFormValidation } = auth.settingsStore;
+
   return {
     folderFormValidation,
     setChangeRoomOwnerIsVisible,
-    isAdmin: user.isAdmin || user.isOwner,
-    userId: user.id,
   };
 })(
   observer(

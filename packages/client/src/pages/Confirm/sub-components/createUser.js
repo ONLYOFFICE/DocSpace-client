@@ -1,33 +1,33 @@
 ﻿import SsoReactSvgUrl from "PUBLIC_DIR/images/sso.react.svg?url";
 import React, { useEffect, useState, useCallback } from "react";
 import { withTranslation, Trans } from "react-i18next";
-import { createUser, signupOAuth } from "@docspace/common/api/people";
+import { createUser, signupOAuth } from "@docspace/shared/api/people";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 import { useSearchParams } from "react-router-dom";
-import Avatar from "@docspace/components/avatar";
-import Button from "@docspace/components/button";
-import TextInput from "@docspace/components/text-input";
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
-import PasswordInput from "@docspace/components/password-input";
-import FieldContainer from "@docspace/components/field-container";
-import toastr from "@docspace/components/toast/toastr";
-import SocialButton from "@docspace/components/social-button";
-import { getUserFromConfirm } from "@docspace/common/api/people";
+import { Avatar } from "@docspace/shared/components/avatar";
+import { Button } from "@docspace/shared/components/button";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { PasswordInput } from "@docspace/shared/components/password-input";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { toastr } from "@docspace/shared/components/toast";
+import { SocialButton } from "@docspace/shared/components/social-button";
+import { getUserFromConfirm } from "@docspace/shared/api/people";
 import {
   createPasswordHash,
   getProviderTranslation,
   getOAuthToken,
   getLoginLink,
-} from "@docspace/common/utils";
-import { login } from "@docspace/common/utils/loginUtils";
-import { providersData } from "@docspace/common/constants";
+} from "@docspace/shared/utils/common";
+import { login } from "@docspace/shared/utils/loginUtils";
+import { PROVIDERS_DATA } from "@docspace/shared/constants";
 import withLoader from "../withLoader";
 import MoreLoginModal from "@docspace/common/components/MoreLoginModal";
-import EmailInput from "@docspace/components/email-input";
+import { EmailInput } from "@docspace/shared/components/email-input";
 import { getPasswordErrorMessage } from "../../../helpers/utils";
-import FormWrapper from "@docspace/components/form-wrapper";
+import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import DocspaceLogo from "../../../DocspaceLogo";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import { StyledPage, StyledContent } from "./StyledConfirm";
@@ -37,6 +37,7 @@ import {
   GreetingContainer,
   RegisterContainer,
 } from "./StyledCreateUser";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 const CreateUserForm = (props) => {
   const {
@@ -107,12 +108,7 @@ const CreateUserForm = (props) => {
   }, []);*/
 
   useEffect(() => {
-    const { isAuthenticated, logout, linkData } = props;
-
-    if (isAuthenticated) {
-      const path = window.location;
-      logout().then(() => window.location.replace(path));
-    }
+    const { linkData } = props;
 
     const fetchData = async () => {
       if (linkData.type === "LinkInvite") {
@@ -128,7 +124,7 @@ const CreateUserForm = (props) => {
     };
 
     fetchData();
-  }, [props.isAuthenticated]);
+  }, []);
 
   const onSubmit = () => {
     const { linkData, hashSettings } = props;
@@ -344,11 +340,11 @@ const CreateUserForm = (props) => {
     const providerButtons =
       providers &&
       providers.map((item, index) => {
-        if (!providersData[item.provider]) return;
+        if (!PROVIDERS_DATA[item.provider]) return;
         if (index > 1) return;
 
         const { icon, label, iconOptions, className } =
-          providersData[item.provider];
+          PROVIDERS_DATA[item.provider];
 
         return (
           <div className="buttonWrapper" key={`${item.provider}ProviderItem`}>
@@ -390,7 +386,7 @@ const CreateUserForm = (props) => {
     let existProviders = 0;
     providers && providers.length > 0;
     providers.map((item) => {
-      if (!providersData[item.provider]) return;
+      if (!PROVIDERS_DATA[item.provider]) return;
       existProviders++;
     });
 
@@ -419,6 +415,12 @@ const CreateUserForm = (props) => {
     setIsPasswordErrorShow(true);
   };
 
+  const onSignIn = () => {
+    return window.location.replace(
+      combineUrl(window.DocSpaceConfig?.proxy?.url, "/login")
+    );
+  };
+
   const userAvatar = user && user.hasAvatar ? user.avatar : DefaultUserPhoto;
 
   return (
@@ -431,7 +433,8 @@ const CreateUserForm = (props) => {
               fontSize="23px"
               fontWeight={700}
               textAlign="left"
-              className="greeting-title">
+              className="greeting-title"
+            >
               {greetingTitle}
             </Text>
 
@@ -462,7 +465,8 @@ const CreateUserForm = (props) => {
                         t={t}
                         i18nKey="WelcomeToRoom"
                         ns="Confirm"
-                        key={roomName}>
+                        key={roomName}
+                      >
                         Welcome to the <strong>{{ roomName }}</strong> room!
                       </Trans>
                     ) : (
@@ -473,8 +477,8 @@ const CreateUserForm = (props) => {
                     {ssoExists() && !oauthDataExists()
                       ? t("WelcomeRegisterViaSSO")
                       : oauthDataExists()
-                      ? t("WelcomeRegisterViaSocial")
-                      : t("WelcomeRegister")}
+                        ? t("WelcomeRegisterViaSocial")
+                        : t("WelcomeRegister")}
                   </p>
                 </div>
               </>
@@ -500,7 +504,8 @@ const CreateUserForm = (props) => {
                           fontWeight="600"
                           color={currentColorScheme?.main?.accent}
                           className="more-label"
-                          onClick={moreAuthOpen}>
+                          onClick={moreAuthOpen}
+                        >
                           {t("Common:ShowMore")}
                         </Link>
                       )}
@@ -529,7 +534,8 @@ const CreateUserForm = (props) => {
                         emailErrorText
                           ? t(`Common:${emailErrorText}`)
                           : t("Common:RequiredField")
-                      }>
+                      }
+                    >
                       <EmailInput
                         id="login"
                         name="login"
@@ -560,9 +566,10 @@ const CreateUserForm = (props) => {
                         errorText
                           ? errorText
                           : fname.trim().length === 0
-                          ? t("Common:RequiredField")
-                          : t("Common:IncorrectFirstName")
-                      }>
+                            ? t("Common:RequiredField")
+                            : t("Common:IncorrectFirstName")
+                      }
+                    >
                       <TextInput
                         id="first-name"
                         name="first-name"
@@ -588,9 +595,10 @@ const CreateUserForm = (props) => {
                         errorText
                           ? errorText
                           : sname.trim().length === 0
-                          ? t("Common:RequiredField")
-                          : t("Common:IncorrectLastName")
-                      }>
+                            ? t("Common:RequiredField")
+                            : t("Common:IncorrectLastName")
+                      }
+                    >
                       <TextInput
                         id="last-name"
                         name="last-name"
@@ -614,7 +622,8 @@ const CreateUserForm = (props) => {
                       hasError={isPasswordErrorShow && !passwordValid}
                       errorMessage={`${t(
                         "Common:PasswordLimitMessage"
-                      )}: ${getPasswordErrorMessage(t, settings)}`}>
+                      )}: ${getPasswordErrorMessage(t, settings)}`}
+                    >
                       <PasswordInput
                         simpleView={false}
                         hideNewPasswordButton
@@ -670,6 +679,19 @@ const CreateUserForm = (props) => {
                       onClick={onSubmit}
                     />
                   </div>
+                  <div className="signin-container">
+                    <Link
+                      isHovered
+                      type="action"
+                      fontSize="13px"
+                      fontWeight="600"
+                      color={currentColorScheme?.main?.accent}
+                      className="signin-button"
+                      onClick={onSignIn}
+                    >
+                      {t("Common:LoginButton")}
+                    </Link>
+                  </div>
                 </form>
               )}
 
@@ -710,14 +732,7 @@ const CreateUserForm = (props) => {
 };
 
 export default inject(({ auth }) => {
-  const {
-    logout,
-    isAuthenticated,
-    settingsStore,
-    providers,
-    thirdPartyLogin,
-    capabilities,
-  } = auth;
+  const { settingsStore, providers, thirdPartyLogin, capabilities } = auth;
   const {
     passwordSettings,
     greetingSettings,
@@ -733,8 +748,7 @@ export default inject(({ auth }) => {
     greetingTitle: greetingSettings,
     hashSettings,
     defaultPage,
-    isAuthenticated,
-    logout,
+
     getSettings,
     getPortalPasswordSettings,
     thirdPartyLogin,

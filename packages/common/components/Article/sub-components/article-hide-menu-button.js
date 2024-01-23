@@ -1,11 +1,11 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 import { ReactSVG } from "react-svg";
-import { desktop, mobile, tablet } from "@docspace/components/utils/device";
+import { desktop, mobile, tablet } from "@docspace/shared/utils";
 
 import { useTranslation } from "react-i18next";
-import Base from "@docspace/components/themes/base";
+import Base from "@docspace/shared/themes/base";
 import ArticleHideMenuReactSvgUrl from "PUBLIC_DIR/images/article-hide-menu.react.svg?url";
 import ArticleShowMenuReactSvgUrl from "PUBLIC_DIR/images/article-show-menu.react.svg?url";
 
@@ -15,7 +15,8 @@ const StyledHideArticleMenuButton = styled.div`
   position: ${(props) => (props.isVirtualKeyboardOpen ? "absolute" : "fixed")};
   height: 44px;
   z-index: 209;
-  bottom: 89px;
+  bottom: ${(props) => (props.hideProfileBlock ? "16px" : "89px")};
+
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
@@ -57,7 +58,7 @@ const StyledHideArticleMenuButton = styled.div`
           : css`
               margin-left: 8px;
             `}
-      color: ${({ currentColorScheme }) => currentColorScheme.main.accent};
+      color: ${({ currentColorScheme }) => currentColorScheme?.main?.accent};
     }
 
     @media ${tablet} {
@@ -92,7 +93,7 @@ const StyledHideArticleMenuButton = styled.div`
       `}
     svg {
       path {
-        fill: ${({ currentColorScheme }) => currentColorScheme.main.accent};
+        fill: ${({ currentColorScheme }) => currentColorScheme?.main?.accent};
       }
     }
   }
@@ -113,6 +114,7 @@ const HideArticleMenuButton = ({
   toggleShowText,
   currentColorScheme,
   isVirtualKeyboardOpen,
+  hideProfileBlock,
 }) => {
   const { t } = useTranslation("Common");
 
@@ -122,6 +124,7 @@ const HideArticleMenuButton = ({
       onClick={toggleShowText}
       currentColorScheme={currentColorScheme}
       isVirtualKeyboardOpen={isVirtualKeyboardOpen}
+      hideProfileBlock={hideProfileBlock}
     >
       {showText ? (
         <div

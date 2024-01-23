@@ -1,4 +1,3 @@
-import { isMobile } from "react-device-detect";
 import React, {
   useState,
   useCallback,
@@ -7,25 +6,26 @@ import React, {
   useRef,
 } from "react";
 
-import ViewerWrapper from "./sub-components/ViewerWrapper";
+import { isMobile as isMobileUtils, isTablet } from "@docspace/shared/utils";
 
-import { MediaViewerProps } from "./MediaViewer.props";
-import { FileStatus } from "@docspace/common/constants";
+import { FileStatus } from "@docspace/shared/enums";
+import { getFileExtension } from "@docspace/shared/utils/common";
+import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
+
 import {
   isNullOrUndefined,
   KeyboardEventKeys,
   mapSupplied,
   mediaTypes,
 } from "./helpers";
-import { getFileExtension } from "@docspace/common/utils";
-
 import {
   getDesktopMediaContextModel,
   getMobileMediaContextModel,
   getPDFContextModel,
 } from "./helpers/contextModel";
+import ViewerWrapper from "./sub-components/ViewerWrapper";
 
-import { checkDialogsOpen } from "../../utils/checkDialogsOpen";
+import type { MediaViewerProps } from "./MediaViewer.props";
 
 function MediaViewer({
   playlistPos,
@@ -244,11 +244,13 @@ function MediaViewer({
       });
     }
 
+    const isMobile = isMobileUtils() || isTablet();
+
     return isMobile
       ? model
       : isImage && !isMobile
-      ? desktopModel.filter((el) => el.key !== "download")
-      : desktopModel;
+        ? desktopModel.filter((el) => el.key !== "download")
+        : desktopModel;
   };
 
   const canImageView = useCallback(
@@ -278,9 +280,8 @@ function MediaViewer({
   const onDelete = () => {
     const { playlist, onDelete } = props;
 
-    let currentFileId = playlist.find(
-      (file) => file.id === playlistPos
-    )?.fileId;
+    let currentFileId = playlist.find((file) => file.id === playlistPos)
+      ?.fileId;
 
     if (currentFileId === lastRemovedFileId) return;
 
@@ -299,9 +300,8 @@ function MediaViewer({
 
     if (!targetFile?.security.Download) return;
 
-    let currentFileId = playlist.find(
-      (file) => file.id === playlistPos
-    )?.fileId;
+    let currentFileId = playlist.find((file) => file.id === playlistPos)
+      ?.fileId;
 
     if (!isNullOrUndefined(currentFileId)) onDownload(currentFileId);
   };

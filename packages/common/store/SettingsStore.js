@@ -1,32 +1,27 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
-import api from "../api";
+import api from "@docspace/shared/api";
 
-import {
-  combineUrl,
-  setCookie,
-  frameCallEvent,
-  getSystemTheme,
-} from "../utils";
-import FirebaseHelper from "../utils/firebase";
-import {
-  ThemeKeys,
-  COOKIE_EXPIRATION_YEAR,
-  LANGUAGE,
-  TenantStatus,
-  DeviceType,
-} from "../constants";
+import { getSystemTheme } from "@docspace/shared/utils";
+import { frameCallEvent } from "@docspace/shared/utils/common";
+import { setCookie } from "@docspace/shared/utils/cookie";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import FirebaseHelper from "@docspace/shared/utils/firebase";
+import { ThemeKeys, TenantStatus, DeviceType } from "@docspace/shared/enums";
+
+import { LANGUAGE, COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
 import { version } from "../package.json";
-import SocketIOHelper from "../utils/socket";
-import { Dark, Base } from "@docspace/components/themes";
-import { getCookie } from "@docspace/components/utils/cookie";
+import SocketIOHelper from "@docspace/shared/utils/socket";
+import { Dark, Base } from "@docspace/shared/themes";
+
 import {
   size as deviceSize,
   isTablet,
-} from "@docspace/components/utils/device";
-import { wrongPortalNameUrl } from "@docspace/common/constants";
+  getCookie,
+} from "@docspace/shared/utils";
+import { WRONG_PORTAL_NAME_URL } from "@docspace/shared/constants";
 import { ARTICLE_ALERTS } from "@docspace/client/src/helpers/constants";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 //import { getFromLocalStorage } from "@docspace/client/src/pages/PortalSettings/utils";
 
 const themes = {
@@ -95,6 +90,7 @@ class SettingsStore {
   urlLicense = "https://gnu.org/licenses/gpl-3.0.html";
   urlSupport = "https://helpdesk.onlyoffice.com/";
 
+  forumLink = null;
   formGallery = {
     url: "",
     ext: ".oform",
@@ -130,6 +126,7 @@ class SettingsStore {
   nameSchemaId = null;
   owner = {};
   wizardToken = null;
+  limitedAccessSpace = null;
   passwordSettings = null;
   hasShortenService = false;
   withPaging = false;
@@ -166,7 +163,7 @@ class SettingsStore {
   currentColorScheme = null;
 
   enablePlugins = false;
-  pluginOptions = [];
+  pluginOptions = { upload: false, delete: false };
   domainValidator = null;
 
   additionalResourcesData = null;
@@ -181,7 +178,9 @@ class SettingsStore {
   zendeskKey = null;
   bookTrainingEmail = null;
   legalTerms = null;
-  baseDomain = "onlyoffice.io";
+  baseDomain = null;
+  portals = [];
+  domain = null;
   documentationEmail = null;
   articleAlertsData = initArticleAlertsData();
   cspDomains = [];
@@ -399,6 +398,13 @@ class SettingsStore {
     this.defaultPage = defaultPage;
   };
 
+  setPortalDomain = (domain) => {
+    this.baseDomain = domain;
+  };
+  setPortals = (portals) => {
+    this.portals = portals;
+  };
+
   setGreetingSettings = (greetingSettings) => {
     this.greetingSettings = greetingSettings;
   };
@@ -468,7 +474,7 @@ class SettingsStore {
     const origSettings = await this.getSettings().catch((err) => {
       if (err?.response?.status === 404) {
         // portal not found
-        const url = new URL(wrongPortalNameUrl);
+        const url = new URL(WRONG_PORTAL_NAME_URL);
         url.searchParams.append("url", window.location.hostname);
         url.searchParams.append("ref", window.location.href);
         return window.location.replace(url);
@@ -485,7 +491,11 @@ class SettingsStore {
 
     if (origSettings?.plugins?.enabled) {
       this.enablePlugins = origSettings.plugins.enabled;
-      this.pluginOptions = origSettings.plugins.allow;
+
+      this.pluginOptions = {
+        upload: origSettings.plugins.upload,
+        delete: origSettings.plugins.delete,
+      };
     }
 
     if (origSettings?.tenantAlias) {
@@ -629,6 +639,23 @@ class SettingsStore {
 
     this.setLogoUrls(Object.values(res));
     this.setLogoUrl(Object.values(res));
+  };
+
+  getDomainName = async () => {
+    const res = await api.management.getDomainName();
+    const { settings } = res;
+    this.setPortalDomain(settings);
+    return settings;
+  };
+
+  getAllPortals = async () => {
+    const res = await api.management.getAllPortals();
+    this.setPortals(res.tenants);
+    return res;
+  };
+
+  getPortals = async () => {
+    await this.getAllPortals();
   };
 
   restoreCompanyInfoSettings = async () => {
@@ -938,6 +965,7 @@ class SettingsStore {
   };
 
   get isFrame() {
+    console.log("get isFrame:", this.frameConfig?.name === window.name);
     return this.frameConfig?.name === window.name;
   }
 

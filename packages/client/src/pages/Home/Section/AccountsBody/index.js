@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
-import { Consumer } from "@docspace/components/utils/context";
+import { Consumer } from "@docspace/shared/utils";
 
 import withLoader from "SRC_DIR/HOCs/withLoader";
 
@@ -17,6 +17,7 @@ const SectionBodyContent = (props) => {
     setSelection,
     setBufferSelection,
     setChangeOwnerDialogVisible,
+    selectUser,
   } = props;
   const location = useLocation();
 
@@ -25,6 +26,10 @@ const SectionBodyContent = (props) => {
 
     if (location?.state?.openChangeOwnerDialog) {
       setChangeOwnerDialogVisible(true);
+    }
+
+    if (location?.state?.user) {
+      selectUser(location?.state?.user);
     }
 
     return () => {
@@ -72,7 +77,8 @@ const SectionBodyContent = (props) => {
 export default inject(({ peopleStore }) => {
   const { viewAs: accountsViewAs } = peopleStore;
 
-  const { setSelection, setBufferSelection } = peopleStore.selectionStore;
+  const { setSelection, setBufferSelection, selectUser } =
+    peopleStore.selectionStore;
   const { setChangeOwnerDialogVisible } = peopleStore.dialogStore;
 
   return {
@@ -80,6 +86,7 @@ export default inject(({ peopleStore }) => {
     setSelection,
     setBufferSelection,
     setChangeOwnerDialogVisible,
+    selectUser,
   };
 })(
   withTranslation(["People", "Common", "PeopleTranslations"])(

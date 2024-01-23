@@ -3,9 +3,10 @@ import Article from "@docspace/common/components/Article";
 import { ArticleHeaderContent, ArticleBodyContent } from "./Article";
 import { SectionHeaderContent, SectionPagingContent } from "./Section";
 import { inject, observer } from "mobx-react";
-import Section from "@docspace/common/components/Section";
+import Section from "@docspace/shared/components/section";
 import withLoading from "SRC_DIR/HOCs/withLoading";
-//import commonIconsStyles from "@docspace/components/utils/common-icons-style";
+
+import SectionWrapper from "SRC_DIR/components/Section";
 
 import { useParams } from "react-router-dom";
 import HistoryHeader from "../categories/developer-tools/Webhooks/WebhookHistory/sub-components/HistoryHeader";
@@ -56,7 +57,7 @@ const Layout = ({
     <>
       <ArticleSettings showArticleLoader={!isLoadedArticleBody} />
       {!isGeneralPage && (
-        <Section
+        <SectionWrapper
           viewAs={"settings"}
           withBodyScroll={true}
           settingsStudio={true}
@@ -77,7 +78,7 @@ const Layout = ({
               <SectionPagingContent />
             </Section.SectionPaging>
           )}
-        </Section>
+        </SectionWrapper>
       )}
     </>
   );

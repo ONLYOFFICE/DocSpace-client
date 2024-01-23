@@ -3,15 +3,15 @@ import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import IconButton from "@docspace/components/icon-button";
-import Text from "@docspace/components/text";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { Text } from "@docspace/shared/components/text";
 
-import Submenu from "@docspace/components/submenu";
+import { Submenu } from "@docspace/shared/components/submenu";
 import {
   isDesktop as isDesktopUtils,
   isMobile as isMobileUtils,
   isTablet as isTabletUtils,
-} from "@docspace/components/utils/device";
+} from "@docspace/shared/utils";
 
 import { StyledInfoPanelHeader } from "./styles/common";
 
@@ -70,6 +70,7 @@ const InfoPanelHeaderContent = (props) => {
   const setMembers = () => setView("info_members");
   const setHistory = () => setView("info_history");
   const setDetails = () => setView("info_details");
+  const setShare = () => setView("info_share");
 
   //const isArchiveRoot = rootFolderType === FolderType.Archive;
 
@@ -100,6 +101,15 @@ const InfoPanelHeaderContent = (props) => {
   const roomsSubmenu = [...submenuData];
 
   const personalSubmenu = [submenuData[1], submenuData[2]];
+
+  if (selection?.canShare) {
+    personalSubmenu.unshift({
+      id: "info_share",
+      name: t("Files:Share"),
+      onClick: setShare,
+      content: null,
+    });
+  }
 
   if (enablePlugins && infoPanelItemsList.length > 0) {
     const isRoom = !!selection?.roomType;

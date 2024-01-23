@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Trans, withTranslation } from "react-i18next";
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { MainContainer } from "../StyledSecurity";
 import TfaSection from "./tfa";
@@ -12,9 +12,10 @@ import SessionLifetimeSection from "./sessionLifetime";
 import BruteForceProtectionSection from "./bruteForceProtection";
 import MobileView from "./mobileView";
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
-import { size } from "@docspace/components/utils/device";
+import { size } from "@docspace/shared/utils";
 import { inject, observer } from "mobx-react";
-import Link from "@docspace/components/link";
+import { Link } from "@docspace/shared/components/link";
+import { DeviceType } from "@docspace/shared/enums";
 
 const AccessPortal = (props) => {
   const {
@@ -26,21 +27,12 @@ const AccessPortal = (props) => {
     administratorMessageSettingsUrl,
     lifetimeSettingsUrl,
     ipSettingsUrl,
+    isMobileView,
   } = props;
-  const [isMobileView, setIsMobileView] = useState(false);
 
   useEffect(() => {
     setDocumentTitle(t("PortalAccess"));
-    checkWidth();
-    window.addEventListener("resize", checkWidth);
-    return () => window.removeEventListener("resize", checkWidth);
   }, []);
-
-  const checkWidth = () => {
-    window.innerWidth <= size.mobile
-      ? setIsMobileView(true)
-      : setIsMobileView(false);
-  };
 
   if (isMobileView) return <MobileView />;
   return (
@@ -209,7 +201,11 @@ export default inject(({ auth }) => {
     administratorMessageSettingsUrl,
     lifetimeSettingsUrl,
     ipSettingsUrl,
+    currentDeviceType,
   } = auth.settingsStore;
+
+  const isMobileView = currentDeviceType === DeviceType.mobile;
+
   return {
     currentColorScheme,
     passwordStrengthSettingsUrl,
@@ -218,5 +214,6 @@ export default inject(({ auth }) => {
     administratorMessageSettingsUrl,
     lifetimeSettingsUrl,
     ipSettingsUrl,
+    isMobileView,
   };
 })(withTranslation(["Settings", "Profile"])(observer(AccessPortal)));

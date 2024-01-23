@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
-import { isMobile, mobile } from "@docspace/components/utils/device";
-import Backdrop from "@docspace/components/backdrop";
-import Aside from "@docspace/components/aside";
+import { isMobile, mobile } from "@docspace/shared/utils";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Aside } from "@docspace/shared/components/aside";
 
 import Header from "./sub-components/header";
 import HeaderNav from "./sub-components/header-nav";
@@ -18,10 +18,11 @@ import { LayoutContextConsumer } from "../Layout/context";
 import { inject, observer } from "mobx-react";
 import i18n from "./i18n";
 import PreparationPortalDialog from "../dialogs/PreparationPortalDialog";
-import { Base } from "@docspace/components/themes";
-import { DeviceType } from "@docspace/common/constants";
+import { Base } from "@docspace/shared/themes";
+import { DeviceType } from "@docspace/shared/enums";
 
 const StyledContainer = styled.header`
+  height: 48px;
   position: relative;
   align-items: center;
   background-color: ${(props) => props.theme.header.backgroundColor};
@@ -51,8 +52,6 @@ const StyledContainer = styled.header`
             }
 
             width: 100vw;
-
-            margin-bottom: 48px;
           }
         `}
 `;
@@ -128,6 +127,9 @@ const NavMenu = (props) => {
     isFrame,
     showHeader,
     currentDeviceType,
+
+    hideProfileMenu,
+    customHeader,
   } = props;
 
   const isAsideAvailable = !!asideContent;
@@ -151,8 +153,11 @@ const NavMenu = (props) => {
           {!hideHeader &&
             (isLoaded && isAuthenticated ? (
               <>
-                {!isPreparationPortal && <HeaderNav />}
+                {!isPreparationPortal && (
+                  <HeaderNav hideProfileMenu={hideProfileMenu} />
+                )}
                 <Header
+                  customHeader={customHeader}
                   isPreparationPortal={isPreparationPortal}
                   isNavOpened={isNavOpened}
                   onClick={showNav}
@@ -224,8 +229,8 @@ const NavMenuWrapper = inject(({ auth }) => {
   };
 })(observer(withTranslation(["NavMenu", "Common"])(NavMenu)));
 
-export default () => (
+export default ({ ...props }) => (
   <I18nextProvider i18n={i18n}>
-    <NavMenuWrapper />
+    <NavMenuWrapper {...props} />
   </I18nextProvider>
 );

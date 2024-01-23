@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Badge from "@docspace/components/badge";
+import { Badge } from "@docspace/shared/components/badge";
 
 import { useTranslation } from "react-i18next";
 
@@ -27,14 +27,14 @@ const StatusBadge = (props) => {
             color: "#3BA420",
           }
       : theme.isBase
-      ? {
-          backgroundColor: "rgba(242, 28, 14, 0.1)",
-          color: "#F21C0E",
-        }
-      : {
-          backgroundColor: "rgba(224, 100, 81, 0.1)",
-          color: "#E06451",
-        };
+        ? {
+            backgroundColor: "rgba(242, 28, 14, 0.1)",
+            color: "#F21C0E",
+          }
+        : {
+            backgroundColor: "rgba(224, 100, 81, 0.1)",
+            color: "#E06451",
+          };
   const { t } = useTranslation(["Webhooks"]);
 
   if (status === undefined) {

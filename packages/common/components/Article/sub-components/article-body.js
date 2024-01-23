@@ -1,12 +1,11 @@
 import React from "react";
-import Scrollbar from "@docspace/components/scrollbar";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 const ArticleBody = ({ children, className }) => {
   return (
     <Scrollbar
       className="article-body__scrollbar"
       scrollclass="article-scroller"
-      stype="mediumBlack"
     >
       {children}
     </Scrollbar>

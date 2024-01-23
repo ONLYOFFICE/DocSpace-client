@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import ErrorContainer from "@docspace/common/components/ErrorContainer";
 import { useTranslation } from "react-i18next";
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { ReactSVG } from "react-svg";
-import Button from "@docspace/components/button";
+import { Button } from "@docspace/shared/components/button";
 import RecoverAccessModalDialog from "@docspace/common/components/Dialogs/RecoverAccessModalDialog";
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
-import { mobile } from "@docspace/components/utils/device";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { mobile } from "@docspace/shared/utils";
 
 const StyledBodyContent = styled.div`
   max-width: 480px;
@@ -69,7 +69,7 @@ const PortalUnavailable = ({ theme, logoUrl, onLogoutClick }) => {
   const [isVisible, setIsVisible] = useState();
 
   const onClick = () => {
-    onLogoutClick();
+    onLogoutClick(t);
   };
   const onClickToContact = () => {
     setIsVisible(true);
@@ -111,7 +111,7 @@ const PortalUnavailable = ({ theme, logoUrl, onLogoutClick }) => {
 
           <ColorTheme
             textAlign="center"
-            themeId={ThemeType.Link}
+            themeId={ThemeId.Link}
             className="portal-unavailable_contact-text"
             onClick={onClickToContact}
           >

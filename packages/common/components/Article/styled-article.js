@@ -1,11 +1,14 @@
 import styled, { css } from "styled-components";
 
-import { mobile, tablet } from "@docspace/components/utils/device";
+import {
+  mobile,
+  tablet,
+  getCorrectFourValuesStyle,
+} from "@docspace/shared/utils";
 
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 import MenuIcon from "PUBLIC_DIR/images/menu.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/icons/17/cross.react.svg";
-import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
 
 const StyledArticle = styled.article`
   position: relative;
@@ -282,7 +285,7 @@ StyledArticleProfile.defaultProps = { theme: Base };
 
 const StyledUserName = styled.div`
   display: flex;
-  flex-direction: ${(props) => (props.length > 18 ? "column" : "row")};
+  flex-wrap: wrap;
   max-width: 131px;
   min-width: 131px;
   ${(props) =>

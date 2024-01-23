@@ -3,14 +3,18 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import ModalDialog from "@docspace/components/modal-dialog";
-import Text from "@docspace/components/text";
-import Button from "@docspace/components/button";
-import toastr from "@docspace/components/toast/toastr";
-import { loadAvatar, deleteAvatar } from "@docspace/common/api/people";
-import { dataUrlToFile } from "@docspace/common/utils/dataUrlToFile";
-import ImageEditor from "@docspace/components/ImageEditor";
-import AvatarPreview from "@docspace/components/ImageEditor/AvatarPreview";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
+import { toastr } from "@docspace/shared/components/toast";
+import {
+  ImageEditor,
+  AvatarPreview,
+} from "@docspace/shared/components/image-editor";
+
+import { loadAvatar, deleteAvatar } from "@docspace/shared/api/people";
+import { dataUrlToFile } from "@docspace/shared/utils/dataUrlToFile";
+
 import DefaultUserAvatarMax from "PUBLIC_DIR/images/default_user_photo_size_200-200.png";
 
 const StyledModalDialog = styled(ModalDialog)`

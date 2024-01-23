@@ -4,16 +4,17 @@ import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { showLoader, hideLoader } from "@docspace/common/utils";
+import { showLoader, hideLoader } from "@docspace/shared/utils/common";
 
-import Section from "@docspace/common/components/Section";
-
+import Section from "@docspace/shared/components/section";
+import SectionWrapper from "SRC_DIR/components/Section";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
 
 import {
   SectionFilterContent,
   SectionHeaderContent,
   SectionPagingContent,
+  SectionSubmenuContent,
   SectionWarningContent,
 } from "./Section";
 import AccountsDialogs from "./Section/AccountsBody/Dialogs";
@@ -42,6 +43,7 @@ const PureHome = (props) => {
     setToPreviewFile,
     playlist,
 
+    folderSecurity,
     getFileInfo,
     gallerySelected,
     setIsUpdatingRowItem,
@@ -159,6 +161,7 @@ const PureHome = (props) => {
     removeFirstUrl,
 
     gallerySelected,
+    folderSecurity,
   });
 
   const { showUploadPanel } = useOperations({
@@ -287,7 +290,7 @@ const PureHome = (props) => {
         </>
       )}
       <MediaViewer />
-      <Section {...sectionProps}>
+      <SectionWrapper {...sectionProps}>
         {(!isErrorRoomNotAvailable || isAccountsPage || isSettingsPage) && (
           <Section.SectionHeader>
             {isFrame ? (
@@ -297,6 +300,10 @@ const PureHome = (props) => {
             )}
           </Section.SectionHeader>
         )}
+
+        <Section.SectionSubmenu>
+          <SectionSubmenuContent />
+        </Section.SectionSubmenu>
 
         {isRecycleBinFolder && !isEmptyPage && (
           <Section.SectionWarning>
@@ -332,7 +339,7 @@ const PureHome = (props) => {
             <SectionPagingContent tReady={tReady} />
           </Section.SectionPaging>
         )}
-      </Section>
+      </SectionWrapper>
     </>
   );
 };
@@ -353,7 +360,7 @@ export default inject(
     selectedFolderStore,
     clientLoadingStore,
   }) => {
-    const { setSelectedFolder } = selectedFolderStore;
+    const { setSelectedFolder, security: folderSecurity } = selectedFolderStore;
     const {
       secondaryProgressDataStore,
       primaryProgressDataStore,
@@ -494,7 +501,7 @@ export default inject(
       isRecycleBinFolder,
       isPrivacyFolder,
       isVisitor: auth.userStore.user.isVisitor,
-
+      folderSecurity,
       primaryProgressDataVisible,
       primaryProgressDataPercent,
       primaryProgressDataIcon,

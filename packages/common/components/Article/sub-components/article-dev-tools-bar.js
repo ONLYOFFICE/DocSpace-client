@@ -1,15 +1,16 @@
 import DeveloperReactSvgUrl from "PUBLIC_DIR/images/catalog.developer.react.svg?url";
 import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow.right.react.svg?url";
+import React from "react";
 
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { ReactSVG } from "react-svg";
 
-import Text from "@docspace/components/text";
-import { mobile } from "@docspace/components/utils/device";
+import { Text } from "@docspace/shared/components/text";
+import { mobile } from "@docspace/shared/utils";
 
-import { DeviceType } from "../../../constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const StyledWrapper = styled.div`
   cursor: pointer;

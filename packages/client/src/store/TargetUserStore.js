@@ -1,16 +1,14 @@
-import api from "@docspace/common/api";
-import {
-  LANGUAGE,
-  COOKIE_EXPIRATION_YEAR,
-  NotificationsType,
-} from "@docspace/common/constants";
+import api from "@docspace/shared/api";
+import { NotificationsType } from "@docspace/shared/enums";
+
+import { LANGUAGE, COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
 import { makeAutoObservable } from "mobx";
-import { setCookie } from "@docspace/common/utils";
+import { setCookie } from "@docspace/shared/utils/cookie";
 import {
   changeNotificationSubscription,
   getNotificationSubscription,
-} from "@docspace/common/api/settings";
-import toastr from "@docspace/components/toast/toastr";
+} from "@docspace/shared/api/settings";
+import { toastr } from "@docspace/shared/components/toast";
 const { Badges, RoomsActivity, DailyFeed, UsefulTips } = NotificationsType;
 class TargetUserStore {
   peopleStore = null;

@@ -134,6 +134,7 @@
   "RemoveFromFavorites": "Eliminare din Preferințe",
   "RemoveFromList": "Șterge din lista",
   "RestoreAll": "Restaurare totală",
+  "RevokeLink": "Revocare link",
   "RoomAvailableViaExternalLink": "Sala este disponibilă pe link extern",
   "RoomCreated": "Sala s-a creat",
   "RoomEmptyContainerDescription": "Creați prima sală.",
@@ -172,6 +173,7 @@
   "ViewTiles": "Cadre",
   "WantLeaveRoom": "Doriți să părăsiți această sală? Veți putea să vă alăturați din nou prin intermediul unei noi invitații de la administratorul sălii.",
   "WantToRestoreTheRoom": "Toate link-urile externe din această sală vor deveni active și tot conținutul vor fi disponibil tuturor pe link-ul. Doriți să restaurați această sală?",
+  "WantToRestoreTheRooms": "Toate link-urile partajate către sălile restaurate vor deveni active, iar conținutul lor va fi disponibil pentru toți utilizatorii care au link-urile către sălile. Doriți să restaurați sălile?",
   "WithSubfolders": "Cu subfoldere",
   "YouLeftTheRoom": "Ați părăsit sala"
 }

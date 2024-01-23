@@ -14,8 +14,8 @@ import ArticleApps from "./sub-components/article-apps";
 import ArticleDevToolsBar from "./sub-components/article-dev-tools-bar";
 import { StyledArticle } from "./styled-article";
 import HideArticleMenuButton from "./sub-components/article-hide-menu-button";
-import Portal from "@docspace/components/portal";
-import { DeviceType } from "../../constants";
+import { Portal } from "@docspace/shared/components/portal";
+import { DeviceType } from "@docspace/shared/enums";
 import ArticleProfileLoader from "../Loaders/ArticleProfileLoader/ArticleProfileLoader";
 
 const Article = ({
@@ -30,6 +30,7 @@ const Article = ({
   withMainButton,
 
   hideProfileBlock,
+  hideAppsBlock,
 
   currentColorScheme,
   setArticleOpen,
@@ -45,6 +46,8 @@ const Article = ({
   currentDeviceType,
   showArticleLoader,
   isAdmin,
+  withCustomArticleHeader,
+  hideAlerts,
   ...rest
 }) => {
   const [articleHeaderContent, setArticleHeaderContent] = React.useState(null);
@@ -62,7 +65,7 @@ const Article = ({
   }, [onMobileBack]);
 
   React.useEffect(() => {
-    // const showArticle = JSON.parse(localStorage.getItem("showArticle"));
+    const showArticle = JSON.parse(localStorage.getItem("showArticle"));
 
     if (currentDeviceType === DeviceType.mobile) {
       setShowText(true);
@@ -74,7 +77,7 @@ const Article = ({
     if (currentDeviceType === DeviceType.tablet) {
       setIsMobileArticle(true);
 
-      // if (showArticle) return;
+      if (showArticle) return;
 
       setShowText(false);
 
@@ -170,7 +173,9 @@ const Article = ({
   }, [onResize]);
 
   const withDevTools =
-    !window.location.pathname.includes("portal-settings") && isAdmin;
+    !window.location.pathname.includes("portal-settings") &&
+    !window.location.pathname.includes("management") &&
+    isAdmin;
 
   const articleComponent = (
     <>
@@ -187,6 +192,7 @@ const Article = ({
           showText={showText}
           onLogoClickAction={onLogoClickAction}
           currentDeviceType={currentDeviceType}
+          withCustomArticleHeader={withCustomArticleHeader}
         >
           {articleHeaderContent ? articleHeaderContent.props.children : null}
         </SubArticleHeader>
@@ -203,7 +209,7 @@ const Article = ({
           {articleBodyContent ? articleBodyContent.props.children : null}
           {!showArticleLoader && (
             <>
-              <ArticleAlerts />
+              {!hideAlerts && <ArticleAlerts />}
               {withDevTools && (
                 <ArticleDevToolsBar
                   articleOpen={articleOpen}
@@ -213,11 +219,13 @@ const Article = ({
                   theme={theme}
                 />
               )}
-              <ArticleApps
-                withDevTools={withDevTools}
-                showText={showText}
-                theme={theme}
-              />
+              {!hideAppsBlock && (
+                <ArticleApps
+                  withDevTools={withDevTools}
+                  showText={showText}
+                  theme={theme}
+                />
+              )}
               {!isMobile && isLiveChatAvailable && (
                 <ArticleLiveChat
                   currentColorScheme={currentColorScheme}
@@ -232,6 +240,7 @@ const Article = ({
             showText={showText}
             toggleShowText={toggleShowText}
             currentColorScheme={currentColorScheme}
+            hideProfileBlock={hideProfileBlock}
             isVirtualKeyboardOpen={isVirtualKeyboardOpen}
           />
         )}

@@ -218,6 +218,8 @@ const PeopleTableRow = (props) => {
     hideColumns,
     value,
     standalone,
+    typeAccountsColumnIsEnabled,
+    emailAccountsColumnIsEnabled,
   } = props;
 
   const {
@@ -458,7 +460,11 @@ const PeopleTableRow = (props) => {
           <Badges statusType={statusType} isPaid={isPaidUser} isSSO={isSSO} />
         </TableCell>
 
-        <TableCell className={"table-cell_type"}>{typeCell}</TableCell>
+        {typeAccountsColumnIsEnabled ? (
+          <TableCell className={"table-cell_type"}>{typeCell}</TableCell>
+        ) : (
+          <div />
+        )}
 
         {/* <TableCell className="table-cell_room">
           {!rooms?.length ? (
@@ -501,20 +507,24 @@ const PeopleTableRow = (props) => {
           )}
         </TableCell> */}
 
-        <TableCell>
-          <Link
-            type="page"
-            title={email}
-            fontSize="13px"
-            fontWeight={600}
-            color={sideInfoColor}
-            onClick={onEmailClick}
-            isTextOverflow
-            enableUserSelect
-          >
-            {email}
-          </Link>
-        </TableCell>
+        {emailAccountsColumnIsEnabled ? (
+          <TableCell>
+            <Link
+              type="page"
+              title={email}
+              fontSize="13px"
+              fontWeight={600}
+              color={sideInfoColor}
+              onClick={onEmailClick}
+              isTextOverflow
+              enableUserSelect
+            >
+              {email}
+            </Link>
+          </TableCell>
+        ) : (
+          <div />
+        )}
       </StyledPeopleRow>
     </StyledWrapper>
   );

@@ -27,8 +27,10 @@ import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.patt
 
 import { FolderType, RoomsType, ThemeKeys } from "../enums";
 import { LANGUAGE, RTL_LANGUAGES } from "../constants";
-import { TUser, TI18n } from "../types";
+import { TI18n } from "../types";
+import { TUser } from "../api/people/types";
 import { TFolder, TFile, TGetFolder } from "../api/files/types";
+import { TRoom } from "../api/rooms/types";
 import TopLoaderService from "../components/top-loading-indicator";
 
 import { Encoder } from "./encoder";
@@ -595,7 +597,9 @@ export const getFolderClassNameByType = (folderType: FolderType) => {
   }
 };
 
-export const decodeDisplayName = <T extends TFile | TFolder>(items: T[]) => {
+export const decodeDisplayName = <T extends TFile | TFolder | TRoom>(
+  items: T[],
+) => {
   return items.map((item) => {
     if (!item) return item;
 

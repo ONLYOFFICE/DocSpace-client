@@ -130,9 +130,9 @@ const DataManagementWrapper = (props) => {
   );
 };
 
-export default inject(({ auth, setup, backup }) => {
+export default inject(({ auth, setup, backup, currentTariffStatusStore }) => {
   const { initSettings } = setup;
-  const { settingsStore, currentTariffStatusStore, isManagement } = auth;
+  const { settingsStore, isManagement } = auth;
   const { isNotPaidPeriod } = currentTariffStatusStore;
   const { toDefault } = backup;
   const {

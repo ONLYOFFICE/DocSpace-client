@@ -75,8 +75,8 @@ const TariffTitleContainer = ({
   );
 };
 
-export default inject(({ auth }) => {
-  const { currentTariffStatusStore, currentQuotaStore } = auth;
+export default inject(({ auth, currentTariffStatusStore }) => {
+  const { currentQuotaStore } = auth;
   const { trialDaysLeft, paymentDate, isLicenseDateExpired } =
     currentTariffStatusStore;
   const { isTrial } = currentQuotaStore;

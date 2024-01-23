@@ -15,6 +15,7 @@ export default inject(
     dialogsStore,
     userStore,
     bannerStore,
+    currentTariffStatusStore,
   }: any) => {
     const {
       settingsStore,
@@ -26,7 +27,7 @@ export default inject(
       isPaymentPageAvailable,
       isTeamTrainingAlertAvailable,
       isSubmitToGalleryAlertAvailable,
-      currentTariffStatusStore,
+
       isEnterprise,
     } = auth;
 

@@ -52,6 +52,7 @@ let timerId;
 class FilesStore {
   authStore;
   userStore;
+  currentTariffStatusStore;
   selectedFolderStore;
   treeFoldersStore;
   filesSettingsStore;
@@ -156,7 +157,8 @@ class FilesStore {
     pluginStore,
     publicRoomStore,
     infoPanelStore,
-    userStore
+    userStore,
+    currentTariffStatusStore
   ) {
     const pathname = window.location.pathname.toLowerCase();
     this.isEditor = pathname.indexOf("doceditor") !== -1;
@@ -173,6 +175,7 @@ class FilesStore {
     this.pluginStore = pluginStore;
     this.publicRoomStore = publicRoomStore;
     this.infoPanelStore = infoPanelStore;
+    this.currentTariffStatusStore = currentTariffStatusStore;
 
     this.roomsController = new AbortController();
     this.filesController = new AbortController();
@@ -1568,7 +1571,7 @@ class FilesStore {
       })
       .catch((err) => {
         if (err?.response?.status === 402)
-          this.authStore.currentTariffStatusStore.setPortalTariff();
+          this.currentTariffStatusStore.setPortalTariff();
 
         if (requestCounter > 0) return;
 
@@ -1749,7 +1752,7 @@ class FilesStore {
         })
         .catch((err) => {
           if (err?.response?.status === 402)
-            this.authStore.currentTariffStatusStore.setPortalTariff();
+            this.currentTariffStatusStore.setPortalTariff();
 
           if (axios.isCancel(err)) {
             console.log("Request canceled", err.message);

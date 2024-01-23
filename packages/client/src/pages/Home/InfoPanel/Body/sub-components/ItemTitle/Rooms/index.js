@@ -102,7 +102,13 @@ const RoomsItemHeader = ({
 };
 
 export default inject(
-  ({ auth, dialogsStore, selectedFolderStore, filesStore, infoPanelStore }) => {
+  ({
+    currentTariffStatusStore,
+    dialogsStore,
+    selectedFolderStore,
+    filesStore,
+    infoPanelStore,
+  }) => {
     const {
       selection: selectionItem,
       selectionParentRoom,
@@ -129,7 +135,7 @@ export default inject(
       selectionParentRoom: infoPanelStore.selectionParentRoom,
       setIsMobileHidden: infoPanelStore.setIsMobileHidden,
 
-      isGracePeriod: auth.currentTariffStatusStore.isGracePeriod,
+      isGracePeriod: currentTariffStatusStore.isGracePeriod,
 
       setInvitePanelOptions: dialogsStore.setInvitePanelOptions,
       setInviteUsersWarningDialogVisible:

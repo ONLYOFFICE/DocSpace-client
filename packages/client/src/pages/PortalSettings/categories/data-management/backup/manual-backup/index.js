@@ -394,51 +394,53 @@ class ManualBackup extends React.Component {
   }
 }
 
-export default inject(({ auth, backup, treeFoldersStore }) => {
-  const {
-    clearProgressInterval,
-    clearLocalStorage,
-    // commonThirdPartyList,
-    downloadingProgress,
-    getProgress,
-    getIntervalProgress,
-    setDownloadingProgress,
-    setTemporaryLink,
-    // setCommonThirdPartyList,
-    temporaryLink,
-    getStorageParams,
-    setThirdPartyStorage,
-    setStorageRegions,
-    saveToLocalStorage,
-    setConnectedThirdPartyAccount,
-  } = backup;
-  const { currentTariffStatusStore, isManagement } = auth;
-  const { currentColorScheme, dataBackupUrl } = auth.settingsStore;
-  const { rootFoldersTitles, fetchTreeFolders } = treeFoldersStore;
-  const { isNotPaidPeriod } = currentTariffStatusStore;
+export default inject(
+  ({ auth, backup, treeFoldersStore, currentTariffStatusStore }) => {
+    const {
+      clearProgressInterval,
+      clearLocalStorage,
+      // commonThirdPartyList,
+      downloadingProgress,
+      getProgress,
+      getIntervalProgress,
+      setDownloadingProgress,
+      setTemporaryLink,
+      // setCommonThirdPartyList,
+      temporaryLink,
+      getStorageParams,
+      setThirdPartyStorage,
+      setStorageRegions,
+      saveToLocalStorage,
+      setConnectedThirdPartyAccount,
+    } = backup;
+    const { isManagement } = auth;
+    const { currentColorScheme, dataBackupUrl } = auth.settingsStore;
+    const { rootFoldersTitles, fetchTreeFolders } = treeFoldersStore;
+    const { isNotPaidPeriod } = currentTariffStatusStore;
 
-  return {
-    isNotPaidPeriod,
-    setThirdPartyStorage,
-    clearProgressInterval,
-    clearLocalStorage,
-    // commonThirdPartyList,
-    downloadingProgress,
-    getProgress,
-    getIntervalProgress,
-    setDownloadingProgress,
-    setTemporaryLink,
-    setStorageRegions,
-    // setCommonThirdPartyList,
-    temporaryLink,
-    getStorageParams,
-    rootFoldersTitles,
-    fetchTreeFolders,
-    saveToLocalStorage,
-    setConnectedThirdPartyAccount,
+    return {
+      isNotPaidPeriod,
+      setThirdPartyStorage,
+      clearProgressInterval,
+      clearLocalStorage,
+      // commonThirdPartyList,
+      downloadingProgress,
+      getProgress,
+      getIntervalProgress,
+      setDownloadingProgress,
+      setTemporaryLink,
+      setStorageRegions,
+      // setCommonThirdPartyList,
+      temporaryLink,
+      getStorageParams,
+      rootFoldersTitles,
+      fetchTreeFolders,
+      saveToLocalStorage,
+      setConnectedThirdPartyAccount,
 
-    isManagement,
-    dataBackupUrl,
-    currentColorScheme,
-  };
-})(withTranslation(["Settings", "Common"])(observer(ManualBackup)));
+      isManagement,
+      dataBackupUrl,
+      currentColorScheme,
+    };
+  }
+)(withTranslation(["Settings", "Common"])(observer(ManualBackup)));

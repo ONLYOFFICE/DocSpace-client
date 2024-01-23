@@ -3,6 +3,7 @@ import {
   userStore,
   tfaStore,
   bannerStore,
+  currentTariffStatusStore,
 } from "@docspace/common/store/AuthStore";
 import PaymentStore from "./PaymentStore";
 import WizardStore from "./WizardStore";
@@ -50,7 +51,7 @@ const selectedFolderStore = new SelectedFolderStore(authStore.settingsStore);
 
 const pluginStore = new PluginStore(authStore, selectedFolderStore, userStore);
 
-const paymentStore = new PaymentStore(userStore);
+const paymentStore = new PaymentStore(userStore, currentTariffStatusStore);
 const wizardStore = new WizardStore();
 const setupStore = new SettingsSetupStore(tfaStore);
 const confirmStore = new ConfirmStore();
@@ -98,7 +99,8 @@ const filesStore = new FilesStore(
   pluginStore,
   publicRoomStore,
   infoPanelStore,
-  userStore
+  userStore,
+  currentTariffStatusStore
 );
 
 const mediaViewerDataStore = new MediaViewerDataStore(
@@ -157,7 +159,8 @@ const filesActionsStore = new FilesActionsStore(
   publicRoomStore,
   pluginStore,
   infoPanelStore,
-  userStore
+  userStore,
+  currentTariffStatusStore
 );
 
 const contextOptionsStore = new ContextOptionsStore(
@@ -174,7 +177,8 @@ const contextOptionsStore = new ContextOptionsStore(
   publicRoomStore,
   oformsStore,
   pluginStore,
-  infoPanelStore
+  infoPanelStore,
+  currentTariffStatusStore
 );
 
 const hotkeyStore = new HotkeyStore(
@@ -227,6 +231,7 @@ const store = {
   userStore,
   tfaStore,
   bannerStore,
+  currentTariffStatusStore,
 
   payments: paymentStore,
   wizard: wizardStore,

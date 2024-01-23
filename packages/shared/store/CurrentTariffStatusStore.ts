@@ -1,24 +1,58 @@
+/* eslint-disable no-console */
 import { makeAutoObservable, runInAction } from "mobx";
 import moment from "moment-timezone";
 
-import { getDaysLeft, getDaysRemaining } from "@docspace/shared/utils/common";
+import { TariffState } from "../enums";
+import api from "../api";
+import { getUserByEmail } from "../api/people";
+import { TPortalTariff } from "../api/portal/types";
+import { TUser } from "../api/people/types";
+import { isValidDate } from "../utils";
+import { getDaysLeft, getDaysRemaining } from "../utils/common";
 
-import api from "@docspace/shared/api";
-import { TariffState } from "@docspace/shared/enums";
-import { getUserByEmail } from "@docspace/shared/api/people";
+export interface ICurrentTariffStatusStore {
+  portalTariffStatus: TPortalTariff;
+  isLoaded: boolean;
+  payerInfo: TUser | null;
 
-class CurrentTariffStatusStore {
-  portalTariffStatus = {};
+  setIsLoaded: (isLoaded: boolean) => void;
+
+  isGracePeriod: boolean;
+  isPaidPeriod: boolean;
+  isNotPaidPeriod: boolean;
+  dueDate: Date;
+  delayDueDate: Date;
+  customerId: string;
+  portalStatus: number | undefined;
+  licenseDate: Date;
+  paymentDate: string;
+  isPaymentDateValid: boolean;
+  isLicenseDateExpired: boolean | undefined;
+  gracePeriodEndDate: string;
+  delayDaysCount: string;
+  isLicenseExpiring: boolean | undefined;
+  trialDaysLeft: number | undefined;
+
+  setPayerInfo: () => Promise<void>;
+  setPortalTariffValue: (res: TPortalTariff) => Promise<void>;
+  setPortalTariff: () => Promise<void>;
+}
+
+class CurrentTariffStatusStore implements ICurrentTariffStatusStore {
+  portalTariffStatus: TPortalTariff = {} as TPortalTariff;
+
   isLoaded = false;
-  payerInfo = null;
-  authStore;
 
-  constructor(authStore) {
+  payerInfo: TUser | null = null;
+
+  authStore: any = null;
+
+  constructor(authStore: any) {
     makeAutoObservable(this);
     this.authStore = authStore;
   }
 
-  setIsLoaded = (isLoaded) => {
+  setIsLoaded = (isLoaded: boolean) => {
     this.isLoaded = isLoaded;
   };
 
@@ -77,34 +111,25 @@ class CurrentTariffStatusStore {
   get paymentDate() {
     moment.locale(this.authStore.language);
     if (this.dueDate === null) return "";
-    return moment(this.dueDate)
-      .tz(window.timezone)
-      .format("LL");
+    return moment(this.dueDate).tz(window.timezone).format("LL");
   }
 
-  isValidDate = (date) => {
-    return (
-      moment(date)
-        .tz(window.timezone)
-        .year() !== 9999
-    );
-  };
   get isPaymentDateValid() {
     if (this.dueDate === null) return false;
 
-    return this.isValidDate(this.dueDate);
+    return isValidDate(this.dueDate);
   }
+
   get isLicenseDateExpired() {
     if (!this.isPaymentDateValid) return;
 
     return moment() > moment(this.dueDate).tz(window.timezone);
   }
+
   get gracePeriodEndDate() {
     moment.locale(this.authStore.language);
     if (this.delayDueDate === null) return "";
-    return moment(this.delayDueDate)
-      .tz(window.timezone)
-      .format("LL");
+    return moment(this.delayDueDate).tz(window.timezone).format("LL");
   }
 
   get delayDaysCount() {
@@ -122,13 +147,14 @@ class CurrentTariffStatusStore {
 
     return false;
   }
+
   get trialDaysLeft() {
     if (!this.dueDate) return;
 
     return getDaysLeft(this.dueDate);
   }
 
-  setPortalTariffValue = async (res) => {
+  setPortalTariffValue = async (res: TPortalTariff) => {
     this.portalTariffStatus = res;
 
     this.setIsLoaded(true);
@@ -145,4 +171,4 @@ class CurrentTariffStatusStore {
   };
 }
 
-export default CurrentTariffStatusStore;
+export { CurrentTariffStatusStore };

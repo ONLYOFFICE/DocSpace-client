@@ -360,6 +360,7 @@ export default inject(
     selectedFolderStore,
     clientLoadingStore,
     userStore,
+    currentTariffStatusStore,
   }) => {
     const { setSelectedFolder, security: folderSecurity } = selectedFolderStore;
     const {
@@ -462,7 +463,7 @@ export default inject(
 
     const { setToPreviewFile, playlist, removeFirstUrl } = mediaViewerDataStore;
 
-    const { settingsStore, currentTariffStatusStore } = auth;
+    const { settingsStore } = auth;
 
     const { setPortalTariff } = currentTariffStatusStore;
 

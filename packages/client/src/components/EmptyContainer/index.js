@@ -94,11 +94,12 @@ export default inject(
 
     selectedFolderStore,
     clientLoadingStore,
+    currentTariffStatusStore,
   }) => {
     const { isErrorRoomNotAvailable, isFiltered } = filesStore;
     const { isLoading } = clientLoadingStore;
 
-    const { isGracePeriod } = auth.currentTariffStatusStore;
+    const { isGracePeriod } = currentTariffStatusStore;
 
     const { setInviteUsersWarningDialogVisible } = dialogsStore;
 

@@ -14,10 +14,8 @@ import { mobile } from "@docspace/shared/utils";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import DocspaceLogo from "../../../DocspaceLogo";
 import { StyledPage, StyledContent } from "./StyledConfirm";
-import {
-  loginWithTfaCode,
-  validateTfaCode,
-} from "@docspace/shared/api/settings";
+import { validateTfaCode } from "@docspace/shared/api/settings";
+import { loginWithTfaCode } from "@docspace/shared/api/user";
 
 const StyledForm = styled(Box)`
   margin: 56px auto;

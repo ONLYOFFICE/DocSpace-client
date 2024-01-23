@@ -219,13 +219,13 @@ const PrivateRoute = ({ children, ...rest }) => {
   return component;
 };
 
-export default inject(({ auth, userStore }) => {
+export default inject(({ auth, userStore, currentTariffStatusStore }) => {
   const {
     isAuthenticated,
     isLoaded,
     isAdmin,
     settingsStore,
-    currentTariffStatusStore,
+
     isLogout,
     isCommunity,
     isEnterprise,

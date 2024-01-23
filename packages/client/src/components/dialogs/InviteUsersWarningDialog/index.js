@@ -125,10 +125,9 @@ const InviteUsersWarningDialog = (props) => {
   );
 };
 
-export default inject(({ auth, dialogsStore }) => {
+export default inject(({ auth, dialogsStore, currentTariffStatusStore }) => {
   const { isPaymentPageAvailable } = auth;
-  const { dueDate, delayDueDate, isGracePeriod } =
-    auth.currentTariffStatusStore;
+  const { dueDate, delayDueDate, isGracePeriod } = currentTariffStatusStore;
   const { currentTariffPlanTitle } = auth.currentQuotaStore;
 
   const {

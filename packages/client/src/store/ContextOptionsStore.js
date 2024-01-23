@@ -77,6 +77,7 @@ class ContextOptionsStore {
   oformsStore;
   pluginStore;
   infoPanelStore;
+  currentTariffStatusStore;
 
   linksIsLoading = false;
 
@@ -94,7 +95,8 @@ class ContextOptionsStore {
     publicRoomStore,
     oformsStore,
     pluginStore,
-    infoPanelStore
+    infoPanelStore,
+    currentTariffStatusStore
   ) {
     makeAutoObservable(this);
     this.authStore = authStore;
@@ -111,6 +113,7 @@ class ContextOptionsStore {
     this.oformsStore = oformsStore;
     this.pluginStore = pluginStore;
     this.infoPanelStore = infoPanelStore;
+    this.currentTariffStatusStore = currentTariffStatusStore;
   }
 
   onOpenFolder = (item) => {
@@ -752,7 +755,7 @@ class ContextOptionsStore {
 
     const { action } = data;
 
-    const { isGracePeriod } = this.authStore.currentTariffStatusStore;
+    const { isGracePeriod } = this.currentTariffStatusStore;
     const { isFreeTariff } = this.authStore.currentQuotaStore;
 
     if (isGracePeriod) {
@@ -780,7 +783,7 @@ class ContextOptionsStore {
   onClickArchive = (e) => {
     const data = (e.currentTarget && e.currentTarget.dataset) || e;
     const { action } = data;
-    const { isGracePeriod } = this.authStore.currentTariffStatusStore;
+    const { isGracePeriod } = this.currentTariffStatusStore;
     const {
       setArchiveDialogVisible,
       setRestoreRoomDialogVisible,

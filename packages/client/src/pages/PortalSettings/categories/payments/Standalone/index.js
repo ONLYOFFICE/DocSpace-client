@@ -50,8 +50,8 @@ const StandalonePage = (props) => {
   );
 };
 
-export default inject(({ auth, payments }) => {
-  const { currentQuotaStore, currentTariffStatusStore } = auth;
+export default inject(({ auth, payments, currentTariffStatusStore }) => {
+  const { currentQuotaStore } = auth;
 
   const { standaloneInit, isInitPaymentPage, isUpdatingBasicSettings } =
     payments;

@@ -598,6 +598,7 @@ export default inject(
     pluginStore,
     versionHistoryStore,
     userStore,
+    currentTariffStatusStore,
   }) => {
     const { showArticleLoader } = clientLoadingStore;
     const { mainButtonMobileVisible } = filesStore;
@@ -630,7 +631,7 @@ export default inject(
     const currentFolderId = selectedFolderStore.id;
 
     const { isAdmin, isOwner } = userStore.user;
-    const { isGracePeriod } = auth.currentTariffStatusStore;
+    const { isGracePeriod } = currentTariffStatusStore;
 
     const { setOformFromFolderId, oformsFilter } = oformsStore;
     const { mainButtonItemsList } = pluginStore;

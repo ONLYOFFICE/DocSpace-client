@@ -306,6 +306,7 @@ export default inject(
     oformsStore,
     settingsStore,
     clientLoadingStore,
+    currentTariffStatusStore,
   }) => {
     const { setIsSectionBodyLoading } = clientLoadingStore;
 
@@ -332,8 +333,7 @@ export default inject(
 
     const { id: parentId } = selectedFolderStore;
 
-    const { replaceFileStream, setEncryptionAccess, currentTariffStatusStore } =
-      auth;
+    const { replaceFileStream, setEncryptionAccess } = auth;
 
     const { isDesktopClient } = auth.settingsStore;
 

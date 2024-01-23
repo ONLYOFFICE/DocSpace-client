@@ -13,6 +13,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 class PaymentStore {
   userStore = null;
+  currentTariffStatusStore = null;
 
   salesEmail = "";
   helpUrl = "https://helpdesk.onlyoffice.com";
@@ -39,15 +40,16 @@ class PaymentStore {
   isInitPaymentPage = false;
   isLicenseCorrect = false;
 
-  constructor(userStore) {
+  constructor(userStore, currentTariffStatusStore) {
     this.userStore = userStore;
+    this.currentTariffStatusStore = currentTariffStatusStore;
 
     makeAutoObservable(this);
   }
 
   get isAlreadyPaid() {
-    const { currentQuotaStore, currentTariffStatusStore } = authStore;
-    const { customerId } = currentTariffStatusStore;
+    const { currentQuotaStore } = authStore;
+    const { customerId } = this.currentTariffStatusStore;
     const { isFreeTariff } = currentQuotaStore;
 
     return customerId?.length !== 0 || !isFreeTariff;
@@ -61,8 +63,8 @@ class PaymentStore {
     this.isUpdatingBasicSettings = isUpdatingBasicSettings;
   };
   basicSettings = async () => {
-    const { currentTariffStatusStore, currentQuotaStore } = authStore;
-    const { setPortalTariff, setPayerInfo } = currentTariffStatusStore;
+    const { currentQuotaStore } = authStore;
+    const { setPortalTariff, setPayerInfo } = this.currentTariffStatusStore;
     const { addedManagersCount } = currentQuotaStore;
 
     this.setIsUpdatingBasicSettings(true);
@@ -93,9 +95,8 @@ class PaymentStore {
       return;
     }
 
-    const { paymentQuotasStore, currentTariffStatusStore, currentQuotaStore } =
-      authStore;
-    const { setPayerInfo } = currentTariffStatusStore;
+    const { paymentQuotasStore, currentQuotaStore } = authStore;
+    const { setPayerInfo } = this.currentTariffStatusStore;
     const { addedManagersCount } = currentQuotaStore;
     const { setPortalPaymentQuotas } = paymentQuotasStore;
 
@@ -337,10 +338,9 @@ class PaymentStore {
   }
 
   get isPayer() {
-    const { currentTariffStatusStore } = authStore;
     const { user } = this.userStore;
 
-    const { payerInfo } = currentTariffStatusStore;
+    const { payerInfo } = this.currentTariffStatusStore;
 
     if (!user || !payerInfo) return false;
 

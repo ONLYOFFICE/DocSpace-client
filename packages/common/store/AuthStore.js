@@ -11,7 +11,6 @@ import {
 import { isAdmin } from "@docspace/shared/utils/common";
 import { getCookie, setCookie } from "@docspace/shared/utils/cookie";
 import CurrentQuotasStore from "./CurrentQuotaStore";
-import CurrentTariffStatusStore from "./CurrentTariffStatusStore";
 import PaymentQuotasStore from "./PaymentQuotasStore";
 
 import { TenantStatus } from "@docspace/shared/enums";
@@ -22,8 +21,9 @@ import { getPortalTenantExtra } from "@docspace/shared/api/portal";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { TfaStore } from "@docspace/shared/store/TfaStore";
 import { BannerStore } from "@docspace/shared/store/BannerStore";
+import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
 
-import { loginWithTfaCode } from "@docspace/shared/api/settings";
+import { loginWithTfaCode } from "@docspace/shared/api/user";
 
 export const userStore = new UserStore();
 export const tfaStore = new TfaStore();
@@ -46,13 +46,14 @@ class AuthStore {
 
   tenantExtra = {};
 
-  constructor(userStore) {
+  constructor(userStore, currentTariffStatusStore) {
     this.userStore = userStore;
+    this.currentTariffStatusStore = currentTariffStatusStore;
 
     this.settingsStore = new SettingsStore();
 
     this.currentQuotaStore = new CurrentQuotasStore();
-    this.currentTariffStatusStore = new CurrentTariffStatusStore(this);
+
     this.paymentQuotasStore = new PaymentQuotasStore();
 
     makeAutoObservable(this);
@@ -466,4 +467,10 @@ class AuthStore {
   }
 }
 
-export default new AuthStore(userStore);
+export const currentTariffStatusStore = new CurrentTariffStatusStore();
+
+const authStore = new AuthStore(userStore, currentTariffStatusStore);
+
+currentTariffStatusStore.authStore = authStore;
+
+export default authStore;

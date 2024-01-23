@@ -70,6 +70,7 @@ class FilesActionStore {
   publicRoomStore;
   infoPanelStore;
   userStore = null;
+  currentTariffStatusStore = null;
 
   isBulkDownload = false;
   isLoadedSearchFiles = false;
@@ -91,7 +92,8 @@ class FilesActionStore {
     publicRoomStore,
     pluginStore,
     infoPanelStore,
-    userStore
+    userStore,
+    currentTariffStatusStore
   ) {
     makeAutoObservable(this);
     this.authStore = authStore;
@@ -108,6 +110,7 @@ class FilesActionStore {
     this.pluginStore = pluginStore;
     this.infoPanelStore = infoPanelStore;
     this.userStore = userStore;
+    this.currentTariffStatusStore = currentTariffStatusStore;
   }
 
   setIsBulkDownload = (isBulkDownload) => {
@@ -1656,7 +1659,7 @@ class FilesActionStore {
       setInviteUsersWarningDialogVisible,
       setRestoreRoomDialogVisible,
     } = this.dialogsStore;
-    const { isGracePeriod } = this.authStore.currentTariffStatusStore;
+    const { isGracePeriod } = this.currentTariffStatusStore;
 
     if (action === "unarchive" && isGracePeriod) {
       setInviteUsersWarningDialogVisible(true);

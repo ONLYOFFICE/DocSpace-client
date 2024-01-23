@@ -335,11 +335,10 @@ const PaymentContainer = (props) => {
   );
 };
 
-export default inject(({ auth, payments }) => {
+export default inject(({ auth, payments, currentTariffStatusStore }) => {
   const {
     currentQuotaStore,
     paymentQuotasStore,
-    currentTariffStatusStore,
 
     settingsStore,
   } = auth;

@@ -186,8 +186,8 @@ const UpdatePlanButtonContainer = ({
   );
 };
 
-export default inject(({ auth, payments }) => {
-  const { currentTariffStatusStore, currentQuotaStore } = auth;
+export default inject(({ auth, payments, currentTariffStatusStore }) => {
+  const { currentQuotaStore } = auth;
   const {
     maxCountManagersByQuota,
     setPortalQuotaValue,

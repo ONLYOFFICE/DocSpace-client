@@ -1133,6 +1133,7 @@ export default inject(
     pluginStore,
     infoPanelStore,
     userStore,
+    currentTariffStatusStore,
   }) => {
     const isOwner = userStore.user?.isOwner;
     const isAdmin = userStore.user?.isAdmin;
@@ -1240,7 +1241,7 @@ export default inject(
       isFrame,
       currentDeviceType,
     } = auth.settingsStore;
-    const { isGracePeriod } = auth.currentTariffStatusStore;
+    const { isGracePeriod } = currentTariffStatusStore;
 
     const isRoom = !!roomType;
     const isPublicRoomType = roomType === RoomsType.PublicRoom;

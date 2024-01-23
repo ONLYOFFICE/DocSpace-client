@@ -56,16 +56,16 @@ export async function getUser(userName = null, headers = null) {
   return user;
 }
 
-export function getUserByEmail(userEmail) {
-  return request({
+export async function getUserByEmail(userEmail: string) {
+  const user = (await request({
     method: "get",
     url: `/people/email?email=${userEmail}`,
-  }).then((user) => {
-    if (user && user.displayName) {
-      user.displayName = Encoder.htmlDecode(user.displayName);
-    }
-    return user;
-  });
+  })) as TUser;
+
+  if (user && user.displayName) {
+    user.displayName = Encoder.htmlDecode(user.displayName);
+  }
+  return user;
 }
 export function getUserFromConfirm(userId, confirmKey = null) {
   const options = {

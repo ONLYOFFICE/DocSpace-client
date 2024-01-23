@@ -68,47 +68,49 @@ const SaaSPage = ({
   );
 };
 
-export default inject(({ auth, payments, userStore }) => {
-  const {
-    language,
-    currentQuotaStore,
-    currentTariffStatusStore,
-    isUpdatingTariff,
+export default inject(
+  ({ auth, payments, userStore, currentTariffStatusStore }) => {
+    const {
+      language,
+      currentQuotaStore,
 
-    settingsStore,
-  } = auth;
-  const { user } = userStore;
-  const { isLoaded: isLoadedCurrentQuota } = currentQuotaStore;
-  const { isLoaded: isLoadedTariffStatus } = currentTariffStatusStore;
-  const {
-    isInitPaymentPage,
-    init,
-    isUpdatingBasicSettings,
-    resetTariffContainerToBasic,
-  } = payments;
-  const {
-    isEncryptionSupport,
-    setEncryptionKeys,
-    encryptionKeys,
-    isDesktopClient,
-    isDesktopClientInit,
-    setIsDesktopClientInit,
-  } = settingsStore;
-  return {
-    isDesktopClientInit,
-    setIsDesktopClientInit,
-    isDesktop: isDesktopClient,
-    user,
-    encryptionKeys,
-    isEncryption: isEncryptionSupport,
-    setEncryptionKeys,
-    resetTariffContainerToBasic,
-    isUpdatingTariff,
-    init,
-    isInitPaymentPage,
-    language,
-    isLoadedTariffStatus,
-    isLoadedCurrentQuota,
-    isUpdatingBasicSettings,
-  };
-})(observer(SaaSPage));
+      isUpdatingTariff,
+
+      settingsStore,
+    } = auth;
+    const { user } = userStore;
+    const { isLoaded: isLoadedCurrentQuota } = currentQuotaStore;
+    const { isLoaded: isLoadedTariffStatus } = currentTariffStatusStore;
+    const {
+      isInitPaymentPage,
+      init,
+      isUpdatingBasicSettings,
+      resetTariffContainerToBasic,
+    } = payments;
+    const {
+      isEncryptionSupport,
+      setEncryptionKeys,
+      encryptionKeys,
+      isDesktopClient,
+      isDesktopClientInit,
+      setIsDesktopClientInit,
+    } = settingsStore;
+    return {
+      isDesktopClientInit,
+      setIsDesktopClientInit,
+      isDesktop: isDesktopClient,
+      user,
+      encryptionKeys,
+      isEncryption: isEncryptionSupport,
+      setEncryptionKeys,
+      resetTariffContainerToBasic,
+      isUpdatingTariff,
+      init,
+      isInitPaymentPage,
+      language,
+      isLoadedTariffStatus,
+      isLoadedCurrentQuota,
+      isUpdatingBasicSettings,
+    };
+  }
+)(observer(SaaSPage));

@@ -17,9 +17,9 @@ import DocspaceLogo from "../../../DocspaceLogo";
 import { StyledPage, StyledContent } from "./StyledConfirm";
 import {
   getTfaSecretKeyAndQR,
-  loginWithTfaCode,
   validateTfaCode,
 } from "@docspace/shared/api/settings";
+import { loginWithTfaCode } from "@docspace/shared/api/user";
 
 const StyledForm = styled(Box)`
   margin: 56px auto;

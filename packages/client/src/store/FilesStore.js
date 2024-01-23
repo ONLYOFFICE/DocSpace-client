@@ -4110,6 +4110,13 @@ class FilesStore {
 
     return isFiltered;
   }
+
+  get needResetFilesSelection() {
+    const { isVisible: infoPanelVisible } = this.authStore.infoPanelStore;
+
+   
+    return !infoPanelVisible || this.selection.length > 1;
+  }
 }
 
 export default FilesStore;

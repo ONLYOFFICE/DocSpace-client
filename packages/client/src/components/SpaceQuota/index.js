@@ -24,10 +24,7 @@ const SpaceQuota = (props) => {
     defaultSize,
 
     needResetSelection,
-    getPeopleListItem,
-    setSelection,
     setSelected,
-    type,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -73,15 +70,7 @@ const SpaceQuota = (props) => {
     onSuccess && onSuccess(users);
     setIsLoading(false);
 
-    if (type === "user" && !needResetSelection) {
-      const user = getPeopleListItem(users[0]);
-
-      setSelection(user);
-
-      return;
-    }
-
-    setSelected("close");
+    needResetSelection && setSelected("close");
   };
 
   const abortCallback = () => {
@@ -175,26 +164,23 @@ const SpaceQuota = (props) => {
 export default inject(
   ({ peopleStore, filesActionsStore, filesStore, auth }, { type }) => {
     const { changeUserQuota, usersStore, selectionStore } = peopleStore;
-    const {
-      setCustomUserQuota,
-      resetUserQuota,
-      needResetUserSelection,
-      getPeopleListItem,
-    } = usersStore;
+    const { setCustomUserQuota, resetUserQuota, needResetUserSelection } =
+      usersStore;
     const { changeRoomQuota } = filesActionsStore;
     const {
       updateRoomQuota,
       setSelected: setRoomsSelected,
       resetRoomQuota,
+      needResetFilesSelection,
     } = filesStore;
-    const { currentQuotaStore, infoPanelStore } = auth;
+    const { currentQuotaStore } = auth;
     const {
       isDefaultUsersQuotaSet,
       isDefaultRoomsQuotaSet,
       defaultUsersQuota,
       defaultRoomsQuota,
     } = currentQuotaStore;
-    const { setSelection } = infoPanelStore;
+
     const { setSelected: setUsersSelected } = selectionStore;
 
     const changeQuota = type === "user" ? changeUserQuota : changeRoomQuota;
@@ -207,7 +193,8 @@ export default inject(
 
     const defaultSize = type === "user" ? defaultUsersQuota : defaultRoomsQuota;
 
-    const needResetSelection = type === "user" ? needResetUserSelection : false;
+    const needResetSelection =
+      type === "user" ? needResetUserSelection : needResetFilesSelection;
 
     const setSelected = type === "user" ? setUsersSelected : setRoomsSelected;
 
@@ -218,10 +205,7 @@ export default inject(
       updateQuota,
       resetQuota,
       defaultSize,
-
       needResetSelection,
-      getPeopleListItem,
-      setSelection,
     };
   }
 )(observer(SpaceQuota));

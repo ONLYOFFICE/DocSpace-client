@@ -20,6 +20,10 @@ const ChangeQuotaEvent = (props) => {
     abortCallback,
     initialSize,
     inRoom,
+    calculateSelection,
+    needResetSelection,
+    getPeopleListItem,
+    setSelection,
   } = props;
   const { t } = useTranslation("Common");
   const [isLoading, setIsLoading] = useState(false);
@@ -51,6 +55,16 @@ const ChangeQuotaEvent = (props) => {
       toastr.success(t("Common:StorageQuotaSet"));
 
       successCallback && successCallback(items);
+
+      if (!needResetSelection) {
+        if (type === "user") {
+          const user = getPeopleListItem(items[0]);
+
+          setSelection(user);
+        } else {
+          setSelection(calculateSelection());
+        }
+      }
     } catch (e) {
       toastr.error(e);
 
@@ -92,20 +106,31 @@ const ChangeQuotaEvent = (props) => {
 
 export default inject(({ peopleStore, filesStore, auth }, { type }) => {
   const { usersStore } = peopleStore;
-  const { setCustomUserQuota } = usersStore;
-  const { updateRoomQuota } = filesStore;
+  const { setCustomUserQuota, getPeopleListItem, needResetUserSelection } =
+    usersStore;
+  const { updateRoomQuota, needResetFilesSelection } = filesStore;
   const { currentQuotaStore, infoPanelStore } = auth;
   const { defaultUsersQuota, defaultRoomsQuota } = currentQuotaStore;
-  const { selection: infoPanelSelection } = infoPanelStore;
+  const {
+    selection: infoPanelSelection,
+    calculateSelection,
+    setSelection,
+  } = infoPanelStore;
 
   const initialSize = type === "user" ? defaultUsersQuota : defaultRoomsQuota;
 
   const inRoom = infoPanelSelection?.inRoom;
+  const needResetSelection =
+    type === "user" ? needResetUserSelection : needResetFilesSelection;
 
   return {
     initialSize,
     setCustomUserQuota,
     updateRoomQuota,
     inRoom,
+    calculateSelection,
+    getPeopleListItem,
+    needResetSelection,
+    setSelection,
   };
 })(observer(ChangeQuotaEvent));

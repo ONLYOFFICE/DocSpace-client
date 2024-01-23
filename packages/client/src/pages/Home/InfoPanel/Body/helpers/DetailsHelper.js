@@ -79,6 +79,8 @@ class DetailsHelper {
     this.isCollaborator = props.isCollaborator;
     this.selectTag = props.selectTag;
     this.isDefaultRoomsQuotaSet = props.isDefaultRoomsQuotaSet;
+    this.setSelection = props.setSelection;
+    this.calculateSelection = props.calculateSelection;
   }
 
   getPropertyList = () => {
@@ -138,27 +140,27 @@ class DetailsHelper {
             "Storage",
           ]
         : this.item.isFolder
-        ? [
-            "Owner",
-            //"Location",
-            "Type",
-            "Content",
-            "Date modified",
-            "Last modified by",
-            "Creation date",
-          ]
-        : [
-            "Owner",
-            //"Location",
-            "Type",
-            "File extension",
-            "Size",
-            "Date modified",
-            "Last modified by",
-            "Creation date",
-            "Versions",
-            "Comments",
-          ]
+          ? [
+              "Owner",
+              //"Location",
+              "Type",
+              "Content",
+              "Date modified",
+              "Last modified by",
+              "Creation date",
+            ]
+          : [
+              "Owner",
+              //"Location",
+              "Type",
+              "File extension",
+              "Size",
+              "Date modified",
+              "Last modified by",
+              "Creation date",
+              "Versions",
+              "Comments",
+            ]
     ).filter((nP) => !!nP);
   };
 
@@ -324,11 +326,16 @@ class DetailsHelper {
   };
 
   getQuotaItem = () => {
+    const onSuccess = () => {
+      this.setSelection(this.calculateSelection());
+    };
+
     if (this.item.security.Create) {
       return (
         <SpaceQuota
           item={this.item}
           isReadOnly={!this.item?.security?.EditRoom}
+          onSuccess={onSuccess}
         />
       );
     }

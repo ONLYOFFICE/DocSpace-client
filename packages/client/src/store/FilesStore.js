@@ -716,7 +716,7 @@ class FilesStore {
         ? { ...item, destFolderId: destFolderId ?? item.destFolderId }
         : {
             id: item,
-      destFolderId,
+            destFolderId,
           }
     );
     return arrayFormation;
@@ -1765,10 +1765,10 @@ class FilesStore {
     return request();
   };
 
-  updateRoomQuota = async (quotaSize, itemsIDs, filter) => {
+  updateRoomQuota = async (quotaSize, itemsIDs, inRoom = false, filter) => {
     const rooms = await api.rooms.setCustomRoomQuota(itemsIDs, quotaSize);
 
-    await this.fetchRooms(null, filter, false, false, false);
+    if (!inRoom) await this.fetchRooms(null, filter, false, false, false);
 
     return rooms;
   };

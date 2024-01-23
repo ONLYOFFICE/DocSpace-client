@@ -19,6 +19,7 @@ const ChangeQuotaEvent = (props) => {
     successCallback,
     abortCallback,
     initialSize,
+    inRoom,
   } = props;
   const { t } = useTranslation("Common");
   const [isLoading, setIsLoading] = useState(false);
@@ -32,7 +33,7 @@ const ChangeQuotaEvent = (props) => {
   const updateFunction = (size) => {
     return type === "user"
       ? setCustomUserQuota(size, ids)
-      : updateRoomQuota(size, ids);
+      : updateRoomQuota(size, ids, inRoom);
   };
   const onSaveClick = async () => {
     const size = sizeRef.current;
@@ -43,13 +44,13 @@ const ChangeQuotaEvent = (props) => {
     }
 
     timerId = setTimeout(() => setIsLoading(true), 200);
-    let users;
+    let items;
 
     try {
-      users = await updateFunction(size);
+      items = await updateFunction(size);
       toastr.success(t("Common:StorageQuotaSet"));
 
-      successCallback && successCallback(users);
+      successCallback && successCallback(items);
     } catch (e) {
       toastr.error(e);
 
@@ -93,14 +94,17 @@ export default inject(({ peopleStore, filesStore, auth }, { type }) => {
   const { usersStore } = peopleStore;
   const { setCustomUserQuota } = usersStore;
   const { updateRoomQuota } = filesStore;
-  const { currentQuotaStore } = auth;
+  const { currentQuotaStore, infoPanelStore } = auth;
   const { defaultUsersQuota, defaultRoomsQuota } = currentQuotaStore;
+  const { selection: infoPanelSelection } = infoPanelStore;
 
   const initialSize = type === "user" ? defaultUsersQuota : defaultRoomsQuota;
 
+  const inRoom = infoPanelSelection.inRoom;
   return {
     initialSize,
     setCustomUserQuota,
     updateRoomQuota,
+    inRoom,
   };
 })(observer(ChangeQuotaEvent));

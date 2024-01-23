@@ -539,9 +539,16 @@ class SettingsSetupStore {
   setSessionModalData = (data) => {
     this.sessionModalData = {
       id: data.id,
+      avatar: data.avatar,
       displayName: data.displayName,
+      status: data.status,
       platform: data.platform,
       browser: data.browser,
+      country: data.country,
+      city: data.city,
+      date: data.date,
+      ip: data.ip,
+      userId: data.userId,
     };
   };
 }

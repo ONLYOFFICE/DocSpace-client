@@ -10,6 +10,7 @@ import {
   InvitePanel,
   EditLinkPanel,
   EmbeddingPanel,
+  UserSessionsPanel,
 } from "../panels";
 import {
   ConnectDialog,
@@ -89,6 +90,7 @@ const Panels = (props) => {
     changeRoomOwnerIsVisible,
     deletePluginDialogVisible,
     shareFolderDialogVisible,
+    userSessionsPanelVisible,
   } = props;
 
   const { t } = useTranslation(["Translations", "Common"]);
@@ -194,6 +196,8 @@ const Panels = (props) => {
       <ChangeRoomOwnerPanel key="change-room-owner" />
     ),
     shareFolderDialogVisible && <ShareFolderDialog key="share-folder-dialog" />,
+
+    userSessionsPanelVisible && <UserSessionsPanel key="user-sessions-panel" />,
   ];
 };
 
@@ -247,6 +251,7 @@ export default inject(
       leaveRoomDialogVisible,
       changeRoomOwnerIsVisible,
       shareFolderDialogVisible,
+      userSessionsPanelVisible,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
@@ -307,6 +312,7 @@ export default inject(
       changeRoomOwnerIsVisible,
       deletePluginDialogVisible,
       shareFolderDialogVisible,
+      userSessionsPanelVisible,
     };
   }
 )(observer(Panels));

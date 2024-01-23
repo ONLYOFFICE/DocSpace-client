@@ -77,8 +77,8 @@ class DialogsStore {
   leaveRoomDialogVisible = false;
   changeRoomOwnerIsVisible = false;
   changeRoomOwnerData = null;
-
   shareFolderDialogVisible = false;
+  userSessionsPanelVisible = false;
 
   constructor(
     authStore,
@@ -435,6 +435,10 @@ class DialogsStore {
 
   setShareFolderDialogVisible = (visible) => {
     this.shareFolderDialogVisible = visible;
+  };
+
+  setUserSessionPanelVisible = (visible) => {
+    this.userSessionsPanelVisible = visible;
   };
 }
 

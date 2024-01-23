@@ -307,6 +307,7 @@ const SectionHeaderContent = (props) => {
     isSeveralSelection,
     peopleSelection,
     setSessionModalData,
+    setUserSessionPanelVisible,
   } = props;
   const { header, isCategoryOrHeader, isNeedPaidIcon } = state;
   const arrayOfParams = getArrayOfParams();
@@ -345,7 +346,7 @@ const SectionHeaderContent = (props) => {
   );
 
   const onClickSessions = () => {
-    console.log("view sessions");
+    setUserSessionPanelVisible(true);
   };
 
   const onClickLogout = () => {
@@ -462,7 +463,7 @@ const SectionHeaderContent = (props) => {
   );
 };
 
-export default inject(({ auth, setup, common, peopleStore }) => {
+export default inject(({ auth, setup, common, peopleStore, dialogsStore }) => {
   const { currentQuotaStore } = auth;
   const {
     isBrandingAndCustomizationAvailable,
@@ -497,6 +498,7 @@ export default inject(({ auth, setup, common, peopleStore }) => {
 
   const { admins, selectorIsOpen } = setup.security.accessRight;
   const { isLoadedSectionHeader, setIsLoadedSectionHeader } = common;
+  const { setUserSessionPanelVisible } = dialogsStore;
   return {
     addUsers,
     removeAdmins,
@@ -525,6 +527,7 @@ export default inject(({ auth, setup, common, peopleStore }) => {
     setLogoutDialogVisible,
     setLogoutAllDialogVisible,
     setSessionModalData,
+    setUserSessionPanelVisible,
   };
 })(
   withLoading(

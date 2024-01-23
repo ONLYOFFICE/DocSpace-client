@@ -26,7 +26,6 @@ import LinkRow from "./sub-components/LinkRow";
 const Members = ({
   t,
   selfId,
-  updateRoomMembers,
   infoPanelSelection,
   setIsScrollLocked,
   isPublicRoomType,
@@ -55,7 +54,7 @@ const Members = ({
 
   useEffect(() => {
     updateInfoPanelMembers();
-  }, [infoPanelSelection, updateRoomMembers]);
+  }, [infoPanelSelection]);
 
   const loadNextPage = async () => {
     const roomId = infoPanelSelection.id;
@@ -264,7 +263,6 @@ export default inject(
   }) => {
     const {
       infoPanelSelection,
-      updateRoomMembers,
       setIsScrollLocked,
       infoPanelMembers,
       setInfoPanelMembers,
@@ -293,7 +291,6 @@ export default inject(
     return {
       infoPanelSelection: infoSelection,
       setIsScrollLocked,
-      updateRoomMembers,
       selfId,
       isPublicRoomType,
       membersFilter,

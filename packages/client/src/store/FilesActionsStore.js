@@ -291,8 +291,8 @@ class FilesActionStore {
     let selection = newSelection
       ? newSelection
       : this.filesStore.selection.length
-      ? this.filesStore.selection
-      : [bufferSelection];
+        ? this.filesStore.selection
+        : [bufferSelection];
 
     selection = selection.filter((item) => item.security.Delete);
 
@@ -621,10 +621,10 @@ class FilesActionStore {
     const selection = item
       ? [item]
       : this.filesStore.selection.length
-      ? this.filesStore.selection
-      : bufferSelection
-      ? [bufferSelection]
-      : null;
+        ? this.filesStore.selection
+        : bufferSelection
+          ? [bufferSelection]
+          : null;
 
     if (!selection.length) return;
 
@@ -1172,8 +1172,8 @@ class FilesActionStore {
               folders.length !== 1 && Array.isArray(folders)
                 ? t("ArchivedRoomsAction")
                 : Array.isArray(folders)
-                ? t("ArchivedRoomAction", { name: folders[0].title })
-                : t("ArchivedRoomAction", { name: folders.title });
+                  ? t("ArchivedRoomAction", { name: folders[0].title })
+                  : t("ArchivedRoomAction", { name: folders.title });
 
             toastr.success(successTranslation);
           })
@@ -1225,8 +1225,8 @@ class FilesActionStore {
               folders.length !== 1 && Array.isArray(folders)
                 ? t("UnarchivedRoomsAction")
                 : Array.isArray(folders)
-                ? t("UnarchivedRoomAction", { name: folders[0].title })
-                : t("UnarchivedRoomAction", { name: folders.title });
+                  ? t("UnarchivedRoomAction", { name: folders[0].title })
+                  : t("UnarchivedRoomAction", { name: folders.title });
 
             toastr.success(successTranslation);
           })
@@ -1782,10 +1782,10 @@ class FilesActionStore {
 
     window.dispatchEvent(event);
   };
-  disableRoomQuota = async (users, t) => {
+  disableRoomQuota = async (items, t) => {
     const { updateRoomQuota } = this.filesStore;
 
-    const userIDs = users.map((user) => {
+    const userIDs = items.map((user) => {
       return user?.id ? user.id : user;
     });
 
@@ -1797,10 +1797,10 @@ class FilesActionStore {
     }
   };
 
-  resetRoomQuota = async (users, t) => {
+  resetRoomQuota = async (items, t) => {
     const { resetRoomQuota } = this.filesStore;
 
-    const userIDs = users.map((user) => {
+    const userIDs = items.map((user) => {
       return user?.id ? user.id : user;
     });
 
@@ -2392,8 +2392,8 @@ class FilesActionStore {
       categoryType === CategoryType.SharedRoom
         ? CategoryType.Shared
         : CategoryType.ArchivedRoom === categoryType
-        ? CategoryType.Archive
-        : categoryType;
+          ? CategoryType.Archive
+          : categoryType;
 
     const path = getCategoryUrl(correctCategoryType);
 
@@ -2545,8 +2545,8 @@ class FilesActionStore {
     const roomId = selection.length
       ? selection[0].id
       : bufferSelection
-      ? bufferSelection.id
-      : this.selectedFolderStore.id;
+        ? bufferSelection.id
+        : this.selectedFolderStore.id;
 
     const isAdmin = user.isOwner || user.isAdmin;
     const isRoot = this.selectedFolderStore.isRootFolder;
@@ -2591,8 +2591,8 @@ class FilesActionStore {
     const roomId = selection.length
       ? selection[0].id
       : bufferSelection
-      ? bufferSelection.id
-      : id;
+        ? bufferSelection.id
+        : id;
 
     return setRoomOwner(userId, [roomId])
       .then(async (res) => {

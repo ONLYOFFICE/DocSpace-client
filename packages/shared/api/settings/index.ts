@@ -1,5 +1,6 @@
 import axios from "axios";
 import { request } from "../client";
+import { TTfa, TTfaType } from "./types";
 
 export function getSettings(withPassword = false, headers = null) {
   const options = {
@@ -553,19 +554,23 @@ export function updateConsumerProps(newProps) {
   return request(options);
 }
 
-export function getTfaSettings() {
-  return request({
+export async function getTfaSettings() {
+  const res = (await request({
     method: "get",
     url: `/settings/tfaapp`,
-  });
+  })) as TTfa[];
+
+  return res;
 }
 
-export function setTfaSettings(type) {
-  return request({
+export async function setTfaSettings(type: TTfaType) {
+  const res = (await request({
     method: "put",
     url: "/settings/tfaappwithlink",
     data: { type },
-  });
+  })) as TTfa;
+
+  return res;
 }
 
 export function getTfaBackupCodes() {

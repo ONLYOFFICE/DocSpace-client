@@ -36,13 +36,15 @@ class AccountsContextOptionsStore {
   infoPanelStore = null;
   peopleStore = null;
   userStore = null;
+  tfaStore = null;
 
-  constructor(peopleStore, infoPanelStore, userStore) {
+  constructor(peopleStore, infoPanelStore, userStore, tfaStore) {
     makeAutoObservable(this);
     this.authStore = peopleStore.authStore;
     this.infoPanelStore = infoPanelStore;
     this.peopleStore = peopleStore;
     this.userStore = userStore;
+    this.tfaStore = tfaStore;
   }
 
   getUserContextOptions = (t, options, item) => {
@@ -166,7 +168,7 @@ class AccountsContextOptionsStore {
             icon: RestoreAuthReactSvgUrl,
             label: t("PeopleTranslations:ResetAuth"),
             onClick: () => this.onResetAuth(item),
-            disabled: this.authStore.tfaStore.tfaSettings !== "app",
+            disabled: this.tfaStore.tfaSettings !== "app",
           };
         default:
           break;

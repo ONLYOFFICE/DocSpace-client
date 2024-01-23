@@ -17,6 +17,7 @@ import { DeviceType } from "@docspace/shared/enums";
 class SettingsSetupStore {
   selectionStore = null;
   authStore = null;
+  tfaStore = null;
   isInit = false;
   logoutVisible = false;
   logoutAllVisible = false;
@@ -81,9 +82,10 @@ class SettingsSetupStore {
   sessions = [];
   currentSession = [];
 
-  constructor() {
+  constructor(tfaStore) {
     this.selectionStore = new SelectionStore(this);
     this.authStore = authStore;
+    this.tfaStore = tfaStore;
     makeAutoObservable(this);
   }
 
@@ -100,7 +102,7 @@ class SettingsSetupStore {
             await authStore.settingsStore.getPortalPasswordSettings();
             break;
           case "tfa":
-            await authStore.tfaStore.getTfaType();
+            await this.tfaStore.getTfaType();
             break;
           case "trusted-mail":
             break;
@@ -123,7 +125,7 @@ class SettingsSetupStore {
         }
       } else {
         await authStore.settingsStore.getPortalPasswordSettings();
-        await authStore.tfaStore.getTfaType();
+        await this.tfaStore.getTfaType();
         await authStore.settingsStore.getIpRestrictionsEnable();
         await authStore.settingsStore.getIpRestrictions();
         await authStore.settingsStore.getSessionLifetime();

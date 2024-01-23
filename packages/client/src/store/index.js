@@ -1,5 +1,5 @@
 import authStore from "@docspace/common/store/AuthStore";
-import { userStore } from "@docspace/common/store/AuthStore";
+import { userStore, tfaStore } from "@docspace/common/store/AuthStore";
 import PaymentStore from "./PaymentStore";
 import WizardStore from "./WizardStore";
 import SettingsSetupStore from "./SettingsSetupStore";
@@ -48,7 +48,7 @@ const pluginStore = new PluginStore(authStore, selectedFolderStore, userStore);
 
 const paymentStore = new PaymentStore(userStore);
 const wizardStore = new WizardStore();
-const setupStore = new SettingsSetupStore();
+const setupStore = new SettingsSetupStore(tfaStore);
 const confirmStore = new ConfirmStore();
 const backupStore = new BackupStore();
 const commonStore = new CommonStore();
@@ -124,7 +124,8 @@ const peopleStore = new PeopleStore(
   accessRightsStore,
   dialogsStore,
   infoPanelStore,
-  userStore
+  userStore,
+  tfaStore
 );
 
 const uploadDataStore = new UploadDataStore(
@@ -220,6 +221,8 @@ const webhooksStore = new WebhooksStore(authStore);
 const store = {
   auth: authStore,
   userStore,
+  tfaStore,
+
   payments: paymentStore,
   wizard: wizardStore,
   setup: setupStore,

@@ -112,8 +112,15 @@ Profile.propTypes = {
 };
 
 export default inject(
-  ({ auth, peopleStore, userStore, clientLoadingStore, treeFoldersStore }) => {
-    const { setDocumentTitle, language, tfaStore } = auth;
+  ({
+    auth,
+    peopleStore,
+    userStore,
+    clientLoadingStore,
+    tfaStore,
+    treeFoldersStore,
+  }) => {
+    const { setDocumentTitle, language } = auth;
 
     const {
       setIsProfileLoaded,

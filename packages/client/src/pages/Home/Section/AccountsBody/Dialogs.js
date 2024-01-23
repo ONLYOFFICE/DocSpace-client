@@ -1,6 +1,8 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
+import { unlinkTfaApp } from "@docspace/shared/api/settings";
+
 import {
   ChangeEmailDialog,
   ChangePasswordDialog,
@@ -36,7 +38,7 @@ const Dialogs = ({
   setChangeNameVisible,
 
   profile,
-  resetTfaApp,
+
   dataReassignmentDialogVisible,
 }) => {
   return (
@@ -107,7 +109,7 @@ const Dialogs = ({
         <ResetApplicationDialog
           visible={resetAuthDialogVisible}
           onClose={closeDialogs}
-          resetTfaApp={resetTfaApp}
+          resetTfaApp={unlinkTfaApp}
           id={data}
         />
       )}
@@ -149,10 +151,6 @@ export default inject(({ auth, peopleStore, userStore }) => {
     setChangeNameVisible,
   } = peopleStore.targetUserStore;
 
-  const { tfaStore } = auth;
-
-  const { unlinkApp: resetTfaApp } = tfaStore;
-
   return {
     changeOwner,
     deleteSelfProfile,
@@ -177,7 +175,6 @@ export default inject(({ auth, peopleStore, userStore }) => {
 
     profile,
 
-    resetTfaApp,
     dataReassignmentDialogVisible,
   };
 })(observer(Dialogs));

@@ -5,7 +5,6 @@ import { setWithCredentialsStatus } from "@docspace/shared/api/client";
 import SettingsStore from "./SettingsStore";
 import BannerStore from "./BannerStore";
 
-import TfaStore from "./TfaStore";
 import {
   logout as logoutDesktop,
   desktopConstants,
@@ -22,8 +21,11 @@ import { LANGUAGE } from "@docspace/shared/constants";
 import { getPortalTenantExtra } from "@docspace/shared/api/portal";
 
 import { UserStore } from "@docspace/shared/store/UserStore";
+import { TfaStore } from "@docspace/shared/store/TfaStore";
+import { loginWithTfaCode } from "@docspace/shared/api/settings";
 
 export const userStore = new UserStore();
+export const tfaStore = new TfaStore();
 
 class AuthStore {
   userStore = null;
@@ -43,11 +45,11 @@ class AuthStore {
 
   tenantExtra = {};
 
-  constructor(userStore) {
+  constructor(userStore, tfaStore) {
     this.userStore = userStore;
 
     this.settingsStore = new SettingsStore();
-    this.tfaStore = new TfaStore();
+    this.tfaStore = tfaStore;
 
     this.currentQuotaStore = new CurrentQuotasStore();
     this.currentTariffStatusStore = new CurrentTariffStatusStore(this);
@@ -310,7 +312,7 @@ class AuthStore {
   };
 
   loginWithCode = async (userName, passwordHash, code) => {
-    await this.tfaStore.loginWithCode(userName, passwordHash, code);
+    await loginWithTfaCode(userName, passwordHash, code);
     setWithCredentialsStatus(true);
 
     this.reset();
@@ -465,4 +467,4 @@ class AuthStore {
   }
 }
 
-export default new AuthStore(userStore);
+export default new AuthStore(userStore, tfaStore);

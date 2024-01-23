@@ -97,7 +97,7 @@ const TwoFactorAuth = (props) => {
   };
 
   const onSaveClick = async () => {
-    const { t, setTfaSettings, getTfaConfirmLink } = props;
+    const { t, setTfaSettings } = props;
 
     setIsSaving(true);
 
@@ -194,14 +194,14 @@ const TwoFactorAuth = (props) => {
   );
 };
 
-export default inject(({ auth, setup }) => {
+export default inject(({ auth, setup, tfaStore }) => {
   const {
     setTfaSettings,
-    getTfaConfirmLink,
+
     tfaSettings,
     smsAvailable,
     appAvailable,
-  } = auth.tfaStore;
+  } = tfaStore;
 
   const { isInit, initSettings, setIsInit } = setup;
   const { currentColorScheme, tfaSettingsUrl, currentDeviceType } =
@@ -209,7 +209,7 @@ export default inject(({ auth, setup }) => {
 
   return {
     setTfaSettings,
-    getTfaConfirmLink,
+
     tfaSettings,
     smsAvailable,
     appAvailable,

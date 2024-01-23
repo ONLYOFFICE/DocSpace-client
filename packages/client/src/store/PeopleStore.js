@@ -44,6 +44,7 @@ class PeopleStore {
   profileActionsStore = null;
   infoPanelStore = null;
   userStore = null;
+
   isInit = false;
   viewAs = isDesktop() ? "table" : "row";
   isLoadedProfileSectionBody = false;
@@ -54,7 +55,8 @@ class PeopleStore {
     accessRightsStore,
     dialogsStore,
     infoPanelStore,
-    userStore
+    userStore,
+    tfaStore
   ) {
     this.authStore = authStore;
     this.infoPanelStore = infoPanelStore;
@@ -83,7 +85,8 @@ class PeopleStore {
     this.contextOptionsStore = new AccountsContextOptionsStore(
       this,
       infoPanelStore,
-      userStore
+      userStore,
+      tfaStore
     );
 
     makeAutoObservable(this);

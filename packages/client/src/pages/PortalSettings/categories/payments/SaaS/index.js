@@ -69,10 +69,15 @@ const SaaSPage = ({
 };
 
 export default inject(
-  ({ auth, payments, userStore, currentTariffStatusStore }) => {
+  ({
+    auth,
+    payments,
+    userStore,
+    currentQuotaStore,
+    currentTariffStatusStore,
+  }) => {
     const {
       language,
-      currentQuotaStore,
 
       isUpdatingTariff,
 

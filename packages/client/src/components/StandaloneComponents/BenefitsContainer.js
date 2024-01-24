@@ -82,11 +82,10 @@ const BenefitsContainer = ({ isTrial, isEnterprise }) => {
   );
 };
 
-export default inject(({ auth }) => {
+export default inject(({ auth, currentQuotaStore }) => {
   const {
     paymentQuotasStore,
 
-    currentQuotaStore,
     isEnterprise,
   } = auth;
 

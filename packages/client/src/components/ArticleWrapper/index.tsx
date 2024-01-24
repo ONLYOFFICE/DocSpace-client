@@ -16,13 +16,12 @@ export default inject(
     userStore,
     bannerStore,
     currentTariffStatusStore,
+    currentQuotaStore,
   }: any) => {
     const {
       settingsStore,
 
       isLiveChatAvailable,
-
-      currentQuotaStore,
 
       isPaymentPageAvailable,
       isTeamTrainingAlertAvailable,
@@ -146,4 +145,4 @@ export default inject(
       isAdmin,
     };
   }
-)(observer(Article));
+)(observer(ArticleWrapper));

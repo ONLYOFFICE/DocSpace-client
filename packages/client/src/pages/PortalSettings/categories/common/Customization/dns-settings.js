@@ -253,7 +253,7 @@ const DNSSettings = (props) => {
   );
 };
 
-export default inject(({ auth, common }) => {
+export default inject(({ auth, common, currentQuotaStore }) => {
   const {
     helpLink,
     currentColorScheme,
@@ -272,7 +272,7 @@ export default inject(({ auth, common }) => {
     saveDNSSettings,
     isDefaultDNS,
   } = common;
-  const { currentQuotaStore } = auth;
+
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
   const { customObj } = dnsSettings;
   const { dnsName, enable } = customObj;

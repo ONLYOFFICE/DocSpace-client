@@ -50,20 +50,20 @@ const StandalonePage = (props) => {
   );
 };
 
-export default inject(({ auth, payments, currentTariffStatusStore }) => {
-  const { currentQuotaStore } = auth;
+export default inject(
+  ({ currentQuotaStore, payments, currentTariffStatusStore }) => {
+    const { standaloneInit, isInitPaymentPage, isUpdatingBasicSettings } =
+      payments;
+    const { isLoaded: isLoadedCurrentQuota, isTrial } = currentQuotaStore;
+    const { isLoaded: isLoadedTariffStatus } = currentTariffStatusStore;
 
-  const { standaloneInit, isInitPaymentPage, isUpdatingBasicSettings } =
-    payments;
-  const { isLoaded: isLoadedCurrentQuota, isTrial } = currentQuotaStore;
-  const { isLoaded: isLoadedTariffStatus } = currentTariffStatusStore;
-
-  return {
-    isTrial,
-    standaloneInit,
-    isInitPaymentPage,
-    isLoadedTariffStatus,
-    isLoadedCurrentQuota,
-    isUpdatingBasicSettings,
-  };
-})(observer(StandalonePage));
+    return {
+      isTrial,
+      standaloneInit,
+      isInitPaymentPage,
+      isLoadedTariffStatus,
+      isLoadedCurrentQuota,
+      isUpdatingBasicSettings,
+    };
+  }
+)(observer(StandalonePage));

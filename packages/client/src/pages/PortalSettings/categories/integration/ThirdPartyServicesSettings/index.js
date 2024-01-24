@@ -299,8 +299,8 @@ ThirdPartyServices.propTypes = {
   setSelectedConsumer: PropTypes.func.isRequired,
 };
 
-export default inject(({ setup, auth }) => {
-  const { settingsStore, setDocumentTitle, currentQuotaStore } = auth;
+export default inject(({ setup, auth, currentQuotaStore }) => {
+  const { settingsStore, setDocumentTitle } = auth;
   const {
     integrationSettingsUrl,
     theme,

@@ -125,24 +125,26 @@ const InviteUsersWarningDialog = (props) => {
   );
 };
 
-export default inject(({ auth, dialogsStore, currentTariffStatusStore }) => {
-  const { isPaymentPageAvailable } = auth;
-  const { dueDate, delayDueDate, isGracePeriod } = currentTariffStatusStore;
-  const { currentTariffPlanTitle } = auth.currentQuotaStore;
+export default inject(
+  ({ auth, dialogsStore, currentTariffStatusStore, currentQuotaStore }) => {
+    const { isPaymentPageAvailable } = auth;
+    const { dueDate, delayDueDate, isGracePeriod } = currentTariffStatusStore;
+    const { currentTariffPlanTitle } = currentQuotaStore;
 
-  const {
-    inviteUsersWarningDialogVisible,
-    setInviteUsersWarningDialogVisible,
-  } = dialogsStore;
+    const {
+      inviteUsersWarningDialogVisible,
+      setInviteUsersWarningDialogVisible,
+    } = dialogsStore;
 
-  return {
-    isPaymentPageAvailable,
-    currentTariffPlanTitle,
-    language: auth.language,
-    visible: inviteUsersWarningDialogVisible,
-    setIsVisible: setInviteUsersWarningDialogVisible,
-    dueDate,
-    delayDueDate,
-    isGracePeriod,
-  };
-})(observer(withTranslation(["Payments", "Common"])(InviteUsersWarningDialog)));
+    return {
+      isPaymentPageAvailable,
+      currentTariffPlanTitle,
+      language: auth.language,
+      visible: inviteUsersWarningDialogVisible,
+      setIsVisible: setInviteUsersWarningDialogVisible,
+      dueDate,
+      delayDueDate,
+      isGracePeriod,
+    };
+  }
+)(observer(withTranslation(["Payments", "Common"])(InviteUsersWarningDialog)));

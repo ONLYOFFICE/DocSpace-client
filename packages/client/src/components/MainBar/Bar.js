@@ -294,50 +294,52 @@ const Bar = (props) => {
   ) : null;
 };
 
-export default inject(({ auth, profileActionsStore, userStore }) => {
-  const { user, withActivationBar, sendActivationLink } = userStore;
+export default inject(
+  ({ auth, profileActionsStore, userStore, currentQuotaStore }) => {
+    const { user, withActivationBar, sendActivationLink } = userStore;
 
-  const { onPaymentsClick } = profileActionsStore;
+    const { onPaymentsClick } = profileActionsStore;
 
-  const {
-    maxCountRoomsByQuota,
-    usedRoomsCount,
+    const {
+      maxCountRoomsByQuota,
+      usedRoomsCount,
 
-    maxTotalSizeByQuota,
-    usedTotalStorageSizeCount,
+      maxTotalSizeByQuota,
+      usedTotalStorageSizeCount,
 
-    maxCountManagersByQuota,
-    addedManagersCount,
+      maxCountManagersByQuota,
+      addedManagersCount,
 
-    showRoomQuotaBar,
-    showStorageQuotaBar,
-    showUserQuotaBar,
-  } = auth.currentQuotaStore;
+      showRoomQuotaBar,
+      showStorageQuotaBar,
+      showUserQuotaBar,
+    } = currentQuotaStore;
 
-  const { currentColorScheme, setMainBarVisible } = auth.settingsStore;
+    const { currentColorScheme, setMainBarVisible } = auth.settingsStore;
 
-  return {
-    isAdmin: user?.isAdmin,
-    userEmail: user?.email,
-    withActivationBar,
-    sendActivationLink,
+    return {
+      isAdmin: user?.isAdmin,
+      userEmail: user?.email,
+      withActivationBar,
+      sendActivationLink,
 
-    onPaymentsClick,
+      onPaymentsClick,
 
-    maxCountRoomsByQuota,
-    usedRoomsCount,
+      maxCountRoomsByQuota,
+      usedRoomsCount,
 
-    maxTotalSizeByQuota,
-    usedTotalStorageSizeCount,
+      maxTotalSizeByQuota,
+      usedTotalStorageSizeCount,
 
-    maxCountManagersByQuota,
-    addedManagersCount,
+      maxCountManagersByQuota,
+      addedManagersCount,
 
-    showRoomQuotaBar,
-    showStorageQuotaBar,
-    showUserQuotaBar,
+      showRoomQuotaBar,
+      showStorageQuotaBar,
+      showUserQuotaBar,
 
-    currentColorScheme,
-    setMainBarVisible,
-  };
-})(withTranslation(["Profile", "Common"])(observer(Bar)));
+      currentColorScheme,
+      setMainBarVisible,
+    };
+  }
+)(withTranslation(["Profile", "Common"])(observer(Bar)));

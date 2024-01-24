@@ -4,6 +4,7 @@ import {
   tfaStore,
   bannerStore,
   currentTariffStatusStore,
+  currentQuotaStore,
 } from "@docspace/common/store/AuthStore";
 import PaymentStore from "./PaymentStore";
 import WizardStore from "./WizardStore";
@@ -51,7 +52,11 @@ const selectedFolderStore = new SelectedFolderStore(authStore.settingsStore);
 
 const pluginStore = new PluginStore(authStore, selectedFolderStore, userStore);
 
-const paymentStore = new PaymentStore(userStore, currentTariffStatusStore);
+const paymentStore = new PaymentStore(
+  userStore,
+  currentTariffStatusStore,
+  currentQuotaStore
+);
 const wizardStore = new WizardStore();
 const setupStore = new SettingsSetupStore(tfaStore);
 const confirmStore = new ConfirmStore();
@@ -220,7 +225,7 @@ const createEditRoomStore = new CreateEditRoomStore(
   thirdPartyStore,
   authStore.settingsStore,
   infoPanelStore,
-  authStore.currentQuotaStore,
+  currentQuotaStore,
   clientLoadingStore
 );
 
@@ -232,6 +237,7 @@ const store = {
   tfaStore,
   bannerStore,
   currentTariffStatusStore,
+  currentQuotaStore,
 
   payments: paymentStore,
   wizard: wizardStore,

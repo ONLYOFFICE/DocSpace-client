@@ -288,8 +288,8 @@ const AdditionalResources = (props) => {
   );
 };
 
-export default inject(({ auth, common }) => {
-  const { currentQuotaStore, settingsStore, isManagement } = auth;
+export default inject(({ auth, common, currentQuotaStore }) => {
+  const { settingsStore, isManagement } = auth;
 
   const { setIsLoadedAdditionalResources, isLoadedAdditionalResources } =
     common;

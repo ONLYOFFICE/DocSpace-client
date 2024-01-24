@@ -121,11 +121,11 @@ const IntegrationWrapper = (props) => {
   );
 };
 
-export default inject(({ auth, ssoStore }) => {
+export default inject(({ auth, ssoStore, currentQuotaStore }) => {
   const { standalone, enablePlugins } = auth.settingsStore;
   const { load: toDefault } = ssoStore;
   const { currentDeviceType } = auth.settingsStore;
-  const { isSSOAvailable } = auth.currentQuotaStore;
+  const { isSSOAvailable } = currentQuotaStore;
 
   return {
     toDefault,

@@ -579,8 +579,14 @@ class AutomaticBackup extends React.PureComponent {
   }
 }
 export default inject(
-  ({ auth, backup, treeFoldersStore, filesSelectorInput }) => {
-    const { language, settingsStore, currentQuotaStore, isManagement } = auth;
+  ({
+    auth,
+    backup,
+    treeFoldersStore,
+    filesSelectorInput,
+    currentQuotaStore,
+  }) => {
+    const { language, settingsStore, isManagement } = auth;
     const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
     const { theme, currentColorScheme, automaticBackupUrl } = settingsStore;
 

@@ -127,8 +127,8 @@ const ButtonContainer = (props) => {
   );
 };
 
-export default inject(({ auth, backup }) => {
-  const { settingsStore, currentQuotaStore } = auth;
+export default inject(({ auth, backup, currentQuotaStore }) => {
+  const { settingsStore } = auth;
   const { socketHelper, setTenantStatus } = settingsStore;
   const {
     downloadingProgress,

@@ -78,8 +78,8 @@ const SingleSignOn = (props) => {
   );
 };
 
-export default inject(({ auth, ssoStore }) => {
-  const { currentQuotaStore, setDocumentTitle } = auth;
+export default inject(({ auth, ssoStore, currentQuotaStore }) => {
+  const { setDocumentTitle } = auth;
   const { isSSOAvailable } = currentQuotaStore;
   const { currentDeviceType } = auth.settingsStore;
 

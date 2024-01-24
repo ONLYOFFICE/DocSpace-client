@@ -14,6 +14,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 class PaymentStore {
   userStore = null;
   currentTariffStatusStore = null;
+  currentQuotaStore = null;
 
   salesEmail = "";
   helpUrl = "https://helpdesk.onlyoffice.com";
@@ -40,17 +41,17 @@ class PaymentStore {
   isInitPaymentPage = false;
   isLicenseCorrect = false;
 
-  constructor(userStore, currentTariffStatusStore) {
+  constructor(userStore, currentTariffStatusStore, currentQuotaStore) {
     this.userStore = userStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
+    this.currentQuotaStore = currentQuotaStore;
 
     makeAutoObservable(this);
   }
 
   get isAlreadyPaid() {
-    const { currentQuotaStore } = authStore;
     const { customerId } = this.currentTariffStatusStore;
-    const { isFreeTariff } = currentQuotaStore;
+    const { isFreeTariff } = this.currentQuotaStore;
 
     return customerId?.length !== 0 || !isFreeTariff;
   }
@@ -63,9 +64,8 @@ class PaymentStore {
     this.isUpdatingBasicSettings = isUpdatingBasicSettings;
   };
   basicSettings = async () => {
-    const { currentQuotaStore } = authStore;
     const { setPortalTariff, setPayerInfo } = this.currentTariffStatusStore;
-    const { addedManagersCount } = currentQuotaStore;
+    const { addedManagersCount } = this.currentQuotaStore;
 
     this.setIsUpdatingBasicSettings(true);
 
@@ -95,9 +95,9 @@ class PaymentStore {
       return;
     }
 
-    const { paymentQuotasStore, currentQuotaStore } = authStore;
+    const { paymentQuotasStore } = authStore;
     const { setPayerInfo } = this.currentTariffStatusStore;
-    const { addedManagersCount } = currentQuotaStore;
+    const { addedManagersCount } = this.currentQuotaStore;
     const { setPortalPaymentQuotas } = paymentQuotasStore;
 
     const requests = [this.getSettingsPayment(), setPortalPaymentQuotas()];
@@ -296,9 +296,8 @@ class PaymentStore {
     this.setBasicTariffContainer();
   };
   setBasicTariffContainer = () => {
-    const { currentQuotaStore } = authStore;
     const { currentPlanCost, maxCountManagersByQuota, addedManagersCount } =
-      currentQuotaStore;
+      this.currentQuotaStore;
     const currentTotalPrice = currentPlanCost.value;
 
     if (this.isAlreadyPaid) {
@@ -356,9 +355,8 @@ class PaymentStore {
   }
 
   get canUpdateTariff() {
-    const { currentQuotaStore } = authStore;
     const { user } = this.userStore;
-    const { isFreeTariff } = currentQuotaStore;
+    const { isFreeTariff } = this.currentQuotaStore;
 
     if (!user) return false;
 
@@ -368,8 +366,7 @@ class PaymentStore {
   }
 
   get canPayTariff() {
-    const { currentQuotaStore } = authStore;
-    const { addedManagersCount } = currentQuotaStore;
+    const { addedManagersCount } = this.currentQuotaStore;
 
     if (this.managersCount >= addedManagersCount) return true;
 
@@ -377,8 +374,8 @@ class PaymentStore {
   }
 
   get canDowngradeTariff() {
-    const { currentQuotaStore } = authStore;
-    const { addedManagersCount, usedTotalStorageSizeCount } = currentQuotaStore;
+    const { addedManagersCount, usedTotalStorageSizeCount } =
+      this.currentQuotaStore;
 
     if (addedManagersCount > this.managersCount) return false;
     if (usedTotalStorageSizeCount > this.allowedStorageSizeByQuota)

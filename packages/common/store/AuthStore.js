@@ -22,16 +22,18 @@ import { UserStore } from "@docspace/shared/store/UserStore";
 import { TfaStore } from "@docspace/shared/store/TfaStore";
 import { BannerStore } from "@docspace/shared/store/BannerStore";
 import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
+import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 
 import { loginWithTfaCode } from "@docspace/shared/api/user";
 
 export const userStore = new UserStore();
 export const tfaStore = new TfaStore();
 export const bannerStore = new BannerStore();
+export const currentQuotaStore = new CurrentQuotasStore();
 
 class AuthStore {
   userStore = null;
-
+  currentQuotaStore = null;
   settingsStore = null;
 
   isLoading = false;
@@ -46,13 +48,12 @@ class AuthStore {
 
   tenantExtra = {};
 
-  constructor(userStore, currentTariffStatusStore) {
+  constructor(userStore, currentTariffStatusStore, currentQuotaStore) {
     this.userStore = userStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
+    this.currentQuotaStore = currentQuotaStore;
 
     this.settingsStore = new SettingsStore();
-
-    this.currentQuotaStore = new CurrentQuotasStore();
 
     this.paymentQuotasStore = new PaymentQuotasStore();
 
@@ -469,7 +470,11 @@ class AuthStore {
 
 export const currentTariffStatusStore = new CurrentTariffStatusStore();
 
-const authStore = new AuthStore(userStore, currentTariffStatusStore);
+const authStore = new AuthStore(
+  userStore,
+  currentTariffStatusStore,
+  currentQuotaStore
+);
 
 currentTariffStatusStore.authStore = authStore;
 

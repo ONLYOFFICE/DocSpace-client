@@ -756,7 +756,6 @@ class ContextOptionsStore {
     const { action } = data;
 
     const { isGracePeriod } = this.currentTariffStatusStore;
-    const { isFreeTariff } = this.authStore.currentQuotaStore;
 
     if (isGracePeriod) {
       this.dialogsStore.setInviteUsersWarningDialogVisible(true);

@@ -335,59 +335,61 @@ const PaymentContainer = (props) => {
   );
 };
 
-export default inject(({ auth, payments, currentTariffStatusStore }) => {
-  const {
-    currentQuotaStore,
-    paymentQuotasStore,
+export default inject(
+  ({ auth, currentQuotaStore, payments, currentTariffStatusStore }) => {
+    const {
+      paymentQuotasStore,
 
-    settingsStore,
-  } = auth;
-  const { showText: expandArticle } = settingsStore;
+      settingsStore,
+    } = auth;
+    const { showText: expandArticle } = settingsStore;
 
-  const { isFreeTariff, currentTariffPlanTitle, isNonProfit } =
-    currentQuotaStore;
+    const { isFreeTariff, currentTariffPlanTitle, isNonProfit } =
+      currentQuotaStore;
 
-  const {
-    isNotPaidPeriod,
-    isPaidPeriod,
-    isGracePeriod,
-    customerId,
-    portalTariffStatus,
-    paymentDate,
-    gracePeriodEndDate,
-    delayDaysCount,
-    isPaymentDateValid,
-  } = currentTariffStatusStore;
+    const {
+      isNotPaidPeriod,
+      isPaidPeriod,
+      isGracePeriod,
+      customerId,
+      portalTariffStatus,
+      paymentDate,
+      gracePeriodEndDate,
+      delayDaysCount,
+      isPaymentDateValid,
+    } = currentTariffStatusStore;
 
-  const { planCost, tariffPlanTitle, portalPaymentQuotas } = paymentQuotasStore;
+    const { planCost, tariffPlanTitle, portalPaymentQuotas } =
+      paymentQuotasStore;
 
-  const { theme } = auth.settingsStore;
+    const { theme } = auth.settingsStore;
 
-  const { isAlreadyPaid } = payments;
+    const { isAlreadyPaid } = payments;
 
-  return {
-    paymentDate,
-    isAlreadyPaid,
+    return {
+      paymentDate,
+      isAlreadyPaid,
 
-    gracePeriodEndDate,
-    delayDaysCount,
+      gracePeriodEndDate,
+      delayDaysCount,
 
-    expandArticle,
-    isFreeTariff,
-    tariffPlanTitle,
+      expandArticle,
+      isFreeTariff,
+      tariffPlanTitle,
 
-    isGracePeriod,
-    theme,
-    currencySymbol: planCost.currencySymbol,
-    startValue: planCost.value,
-    isNotPaidPeriod,
-    payerEmail: customerId,
+      isGracePeriod,
+      theme,
+      currencySymbol: planCost.currencySymbol,
+      startValue: planCost.value,
+      isNotPaidPeriod,
+      payerEmail: customerId,
 
-    isPaidPeriod,
-    currentTariffPlanTitle,
-    portalTariffStatus,
-    portalPaymentQuotas,
-    isNonProfit,
-    isPaymentDateValid,
-  };
-})(observer(PaymentContainer));
+      isPaidPeriod,
+      currentTariffPlanTitle,
+      portalTariffStatus,
+      portalPaymentQuotas,
+      isNonProfit,
+      isPaymentDateValid,
+    };
+  }
+)(observer(PaymentContainer));

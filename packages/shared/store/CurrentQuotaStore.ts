@@ -16,7 +16,7 @@ import {
   PERCENTAGE_FOR_SHOWING_BAR,
 } from "../constants";
 
-export interface IQuotasStore {
+export interface ICurrentQuotasStore {
   currentPortalQuota: TPortalQuota;
   currentPortalQuotaFeatures: TFeature[];
   isLoaded: boolean;
@@ -61,7 +61,7 @@ export interface IQuotasStore {
   setPortalQuota: () => Promise<void>;
 }
 
-class QuotasStore {
+class CurrentQuotasStore {
   currentPortalQuota: TPortalQuota = {} as TPortalQuota;
 
   currentPortalQuotaFeatures: TFeature[] = [];
@@ -292,4 +292,4 @@ class QuotasStore {
   };
 }
 
-export default QuotasStore;
+export { CurrentQuotasStore };

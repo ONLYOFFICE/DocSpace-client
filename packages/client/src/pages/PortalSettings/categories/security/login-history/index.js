@@ -84,7 +84,7 @@ const LoginHistory = (props) => {
   );
 };
 
-export default inject(({ setup, auth }) => {
+export default inject(({ setup, auth, currentQuotaStore }) => {
   const {
     getLoginHistory,
     security,
@@ -96,7 +96,7 @@ export default inject(({ setup, auth }) => {
   } = setup;
   const { theme } = auth.settingsStore;
 
-  const { isAuditAvailable } = auth.currentQuotaStore;
+  const { isAuditAvailable } = currentQuotaStore;
 
   return {
     getLoginHistory,

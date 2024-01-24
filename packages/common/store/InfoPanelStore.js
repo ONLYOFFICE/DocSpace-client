@@ -96,7 +96,7 @@ class InfoPanelStore {
     this.isScrollLocked = false;
     if (view !== infoMembers) this.setInfoPanelMembers(null);
 
-    this.setInfoPanelSelection(this.calculateSelection());
+    this.setNewInfoPanelSelection();
   };
 
   setIsScrollLocked = (isScrollLocked) => {
@@ -153,31 +153,36 @@ class InfoPanelStore {
     );
   }
 
-  calculateSelection = () => {
-    const selectedItems = this.infoPanelSelectedItems;
-    const selectedFolder = this.infoPanelSelectedFolder;
+  getViewItem = () => {
+    const isRooms = this.getIsRooms();
+
+    if (
+      isRooms &&
+      this.roomsView === infoMembers &&
+      !this.infoPanelSelectedItems[0]?.isRoom
+    ) {
+      if (!this.infoPanelSelection?.id) {
+        return this.infoPanelSelectedFolder;
+      }
+    } else {
+      return this.normalizeSelection(this.infoPanelSelectedItems[0]);
+    }
+  };
+
+  setNewInfoPanelSelection = () => {
+    const selectedItems = this.infoPanelSelectedItems; //files list
+    const selectedFolder = this.infoPanelSelectedFolder; // root or current folder
+    let newInfoPanelSelection = this.infoPanelSelection;
 
     if (!selectedItems.length) {
-      return this.normalizeSelection(selectedFolder);
+      newInfoPanelSelection = this.normalizeSelection(selectedFolder);
     } else if (selectedItems.length === 1) {
-      // TODO: INFO PANEL
-
-      if (
-        this.getIsRooms() &&
-        this.roomsView === infoMembers &&
-        !selectedItems[0]?.isRoom
-      ) {
-        if (this.infoPanelSelection?.id) {
-          return this.infoPanelSelection;
-        } else {
-          return selectedFolder;
-        }
-      }
-
-      return this.normalizeSelection(selectedItems[0]);
+      newInfoPanelSelection = this.getViewItem() ?? newInfoPanelSelection;
     } else {
-      return [...Array(selectedItems.length).keys()];
+      newInfoPanelSelection = [...Array(selectedItems.length).keys()];
     }
+
+    this.setInfoPanelSelection(newInfoPanelSelection);
   };
 
   normalizeSelection = (infoPanelSelection) => {
@@ -206,7 +211,7 @@ class InfoPanelStore {
 
   // reloadSelectionParentRoom //reloadSelection
   updateInfoPanelSelection = async () => {
-    // this.setInfoPanelSelection(this.calculateSelection());
+    // this.setNewInfoPanelSelection();
     if (!this.getIsRooms) return;
 
     const currentFolderRoomId =

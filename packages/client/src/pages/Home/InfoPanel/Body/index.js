@@ -8,8 +8,7 @@ import { StyledInfoPanelBody } from "./styles/common";
 
 const InfoPanelBodyContent = ({
   infoPanelSelection,
-  setInfoPanelSelection,
-  calculateSelection,
+  setNewInfoPanelSelection,
   isItemChanged,
   roomsView,
   fileView,
@@ -114,9 +113,7 @@ const InfoPanelBodyContent = ({
 
   // Setting infoPanelSelection after selectedItems or selectedFolder update
   useEffect(() => {
-    const infoSelection = calculateSelection();
-    // console.log("InfoPanel body calculate", infoSelection);
-    setInfoPanelSelection(infoSelection);
+    setNewInfoPanelSelection();
   }, [selectedItems, selectedFolder]);
 
   return (
@@ -136,8 +133,7 @@ const InfoPanelBodyContent = ({
 export default inject(({ auth, selectedFolderStore, oformsStore }) => {
   const {
     infoPanelSelection,
-    setInfoPanelSelection,
-    calculateSelection,
+    setNewInfoPanelSelection,
     isItemChanged,
     roomsView,
     fileView,
@@ -155,8 +151,7 @@ export default inject(({ auth, selectedFolderStore, oformsStore }) => {
 
   return {
     infoPanelSelection,
-    setInfoPanelSelection,
-    calculateSelection,
+    setNewInfoPanelSelection,
     isItemChanged,
 
     roomsView,

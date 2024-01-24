@@ -23,6 +23,7 @@ import {
   MEDIA_VIEW_URL,
 } from "@docspace/shared/constants";
 import moment from "moment-timezone";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 const StyledExternalLinkIcon = styled(ExternalLinkIcon)`
   ${commonIconsStyles}
@@ -113,7 +114,7 @@ const VersionRow = (props) => {
 
     if (MediaView || ImageView) {
       return window.open(
-        MEDIA_VIEW_URL + info.id,
+        combineUrl(MEDIA_VIEW_URL, info.id),
         window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self"
       );
     }

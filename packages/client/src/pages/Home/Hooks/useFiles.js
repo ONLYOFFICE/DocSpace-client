@@ -116,10 +116,8 @@ const useFiles = ({
       window.location.href.indexOf(MEDIA_VIEW_URL) > 1 &&
       playlist.length < 1
     ) {
-      const fileId = id;
-
       setTimeout(() => {
-        getFileInfo(fileId)
+        getFileInfo(id)
           .then((data) => {
             const canOpenPlayer =
               data.viewAccessibility.ImageView ||

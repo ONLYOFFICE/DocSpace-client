@@ -827,7 +827,7 @@ const SectionFilterContent = ({
         });
       }
       if (roomsFilter.quotaFilter) {
-        const key = +roomsFilter.quotaFilter;
+        const key = roomsFilter.quotaFilter;
 
         const label =
           key === FilterKeys.customQuota

@@ -31,6 +31,7 @@ const History = ({
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchHistory = async (item) => {
+    if (!item?.id) return;
     if (isLoading) {
       abortControllerRef.current?.abort();
       abortControllerRef.current = new AbortController();

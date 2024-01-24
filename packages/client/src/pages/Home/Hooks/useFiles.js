@@ -10,6 +10,7 @@ import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
 import { Events, RoomSearchArea } from "@docspace/shared/enums";
 import { getObjectByLocation } from "@docspace/shared/utils/common";
+import { useParams } from "react-router-dom";
 
 import { getCategoryType, getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -45,6 +46,7 @@ const useFiles = ({
   folderSecurity,
 }) => {
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const fetchDefaultFiles = () => {
     const filter = FilesFilter.getDefault();
@@ -114,10 +116,7 @@ const useFiles = ({
       window.location.href.indexOf(MEDIA_VIEW_URL) > 1 &&
       playlist.length < 1
     ) {
-      const pathname = window.location.href;
-      const fileId = pathname.slice(
-        pathname.indexOf(MEDIA_VIEW_URL) + MEDIA_VIEW_URL.length
-      );
+      const fileId = id;
 
       setTimeout(() => {
         getFileInfo(fileId)

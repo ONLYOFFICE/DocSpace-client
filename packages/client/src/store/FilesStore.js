@@ -1455,9 +1455,12 @@ class FilesStore {
             // Clear all selections
             this.setSelected("close");
 
-            // Restore not processed
-            tempSelection.length && this.setSelection(tempSelection);
-            tempBuffer && this.setBufferSelection(tempBuffer);
+            // TODO: see bug 63479
+            if (this.selectedFolderStore?.id === folderId) {
+              // Restore not processed
+              tempSelection.length && this.setSelection(tempSelection);
+              tempBuffer && this.setBufferSelection(tempBuffer);
+            }
           }
         }
 

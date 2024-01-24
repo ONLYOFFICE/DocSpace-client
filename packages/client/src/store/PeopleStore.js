@@ -22,7 +22,11 @@ import { isMobile, isTablet, isDesktop } from "@docspace/shared/utils";
 
 import { toastr } from "@docspace/shared/components/toast";
 import api from "@docspace/common/api";
-import { EmployeeStatus, Events } from "@docspace/common/constants";
+import {
+  EmployeeActivationStatus,
+  EmployeeStatus,
+  Events,
+} from "@docspace/common/constants";
 import Filter from "@docspace/common/api/people/filter";
 
 class PeopleStore {
@@ -396,6 +400,49 @@ class PeopleStore {
   setPeopleWithGroupsAreLoading = (peopleWithGroupsAreLoading) => {
     this.peopleWithGroupsAreLoading = peopleWithGroupsAreLoading;
   };
+
+  getStatusType = (user) => {
+    if (
+      user.status === EmployeeStatus.Active &&
+      user.activationStatus === EmployeeActivationStatus.Activated
+    ) {
+      return "normal";
+    } else if (
+      user.status === EmployeeStatus.Active &&
+      user.activationStatus === EmployeeActivationStatus.Pending
+    ) {
+      return "pending";
+    } else if (user.status === EmployeeStatus.Disabled) {
+      return "disabled";
+    } else {
+      return "unknown";
+    }
+  };
+
+  getUserRole = (user) => {
+    if (user.isOwner) return "owner";
+    else if (user.isAdmin) return "admin";
+    else if (user.isCollaborator) return "collaborator";
+    else if (user.isVisitor) return "user";
+    else return "manager";
+  };
+
+  get accountsItems() {
+    const list = this.peopleWithGroups.map((item) => {
+      const isGroup = Boolean(item.manager);
+
+      if (isGroup) {
+        item.isGroup = true;
+      } else {
+        item.statusType = this.getStatusType(item);
+        item.role = this.getUserRole(item);
+      }
+
+      return item;
+    });
+
+    return list;
+  }
 }
 
 export default PeopleStore;

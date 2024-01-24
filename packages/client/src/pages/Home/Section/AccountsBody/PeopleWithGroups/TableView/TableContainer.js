@@ -135,12 +135,13 @@ const Table = ({
   userId,
   infoPanelVisible,
 
-  peopleWithGroups,
+  accountsItems,
   hasMorePeopleWithGroups,
   fetchMorePeopleWithGroups,
 
   filterTotal,
   withPaging,
+  canChangeUserType,
   isFiltered,
   currentDeviceType,
 }) => {
@@ -159,9 +160,9 @@ const Table = ({
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
-  if (!peopleWithGroups) return null;
+  if (!accountsItems) return null;
 
-  return peopleWithGroups.length !== 0 || !isFiltered ? (
+  return accountsItems.length !== 0 || !isFiltered ? (
     <StyledTableContainer useReactWindow={!withPaging} forwardedRef={ref}>
       <TableHeader
         columnStorageName={columnStorageName}
@@ -179,11 +180,11 @@ const Table = ({
         fetchMoreFiles={fetchMorePeopleWithGroups}
         hasMoreFiles={hasMorePeopleWithGroups}
         itemCount={filterTotal}
-        filesLength={peopleWithGroups.length}
+        filesLength={accountsItems.length}
         itemHeight={49}
         useReactWindow={!withPaging}
       >
-        {peopleWithGroups.map((item, index) => (
+        {accountsItems.map((item, index) => (
           <TableRow
             theme={theme}
             key={item.id}
@@ -191,6 +192,7 @@ const Table = ({
             isAdmin={isAdmin}
             isOwner={isOwner}
             userId={userId}
+            canChangeUserType={canChangeUserType}
             hideColumns={hideColumns}
             itemIndex={index}
           />
@@ -207,7 +209,7 @@ export default inject(
     const { filterStore, viewAs: accountsViewAs, setViewAs } = peopleStore;
     const { theme, withPaging, currentDeviceType } = auth.settingsStore;
     const {
-      peopleWithGroups,
+      accountsItems,
       hasMorePeopleWithGroups,
       fetchMorePeopleWithGroups,
     } = peopleStore;
@@ -215,6 +217,8 @@ export default inject(
 
     const { isVisible: infoPanelVisible } = auth.infoPanelStore;
     const { isAdmin, isOwner, id: userId } = auth.userStore.user;
+
+    const { canChangeUserType } = accessRightsStore;
 
     return {
       accountsViewAs,
@@ -230,9 +234,10 @@ export default inject(
       isFiltered,
       currentDeviceType,
 
-      peopleWithGroups,
+      accountsItems,
       hasMorePeopleWithGroups,
       fetchMorePeopleWithGroups,
+      canChangeUserType,
     };
   },
 )(observer(Table));

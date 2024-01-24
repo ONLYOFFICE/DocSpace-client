@@ -193,13 +193,16 @@ const PeopleWithGroupsTableRow = (props) => {
     checkedProps,
     onContentRowSelect,
     onContentRowClick,
+    onEmailClick,
 
     isOwner,
     theme,
+    changeUserType,
 
     setBufferSelection,
     isActive,
     isSeveralSelection,
+    canChangeUserType,
     hideColumns,
     value,
     standalone,
@@ -283,15 +286,15 @@ const PeopleWithGroupsTableRow = (props) => {
     setIsLoading(false);
   };
 
-  // const onTypeChange = React.useCallback(
-  //   ({ action }) => {
-  //     setIsLoading(true);
-  //     if (!changeUserType(action, [item], onSuccess, onAbort)) {
-  //       setIsLoading(false);
-  //     }
-  //   },
-  //   [item, changeUserType],
-  // );
+  const onTypeChange = React.useCallback(
+    ({ action }) => {
+      setIsLoading(true);
+      if (!changeUserType(action, [item], onSuccess, onAbort)) {
+        setIsLoading(false);
+      }
+    },
+    [item, changeUserType],
+  );
 
   const getUserTypeLabel = React.useCallback((role) => {
     switch (role) {
@@ -308,7 +311,7 @@ const PeopleWithGroupsTableRow = (props) => {
     }
   }, []);
 
-  const typeLabel = getUserTypeLabel(role);
+  const typeLabel = role ? getUserTypeLabel(role) : null;
 
   const isChecked = checkedProps.checked;
 
@@ -322,7 +325,7 @@ const PeopleWithGroupsTableRow = (props) => {
           typesOptions.find((option) => option.key === role) || {}
         }
         options={typesOptions}
-        // onSelect={onTypeChange}
+        onSelect={onTypeChange}
         scale
         directionY="both"
         size="content"
@@ -348,13 +351,12 @@ const PeopleWithGroupsTableRow = (props) => {
       </Text>
     );
 
-    // const canChange = canChangeUserType(item);
-    //
-    // return canChange ? combobox : text;
-    return text;
+    const canChange = canChangeUserType(item);
+
+    return canChange ? combobox : text;
   };
 
-  const typeCell = renderTypeCell();
+  const typeCell = role ? renderTypeCell() : null;
 
   const onChange = (e) => {
     //console.log("onChange");
@@ -435,50 +437,26 @@ const PeopleWithGroupsTableRow = (props) => {
           <Badges statusType={statusType} isPaid={isPaidUser} isSSO={isSSO} />
         </TableCell>
 
-        {/*<TableCell className={"table-cell_type"}>{typeCell}</TableCell>*/}
+        <TableCell className={"table-cell_type"}>
+          {role ? typeCell : ""}
+        </TableCell>
 
-        {/* <TableCell className="table-cell_room">
-          {!rooms?.length ? (
-            <Text
-              type="page"
-              title={position}
-              fontSize="13px"
-              fontWeight={400}
-              color={sideInfoColor}
-              truncate
-              noSelect
-              style={{ paddingLeft: "8px" }}
-            >
-              —
-            </Text>
-          ) : rooms?.length === 1 ? (
-            <Text
-              type="page"
-              title={position}
-              fontSize="13px"
-              fontWeight={400}
-              color={sideInfoColor}
-              truncate
-              style={{ paddingLeft: "8px" }}
-            >
-              {rooms[0].name} ({rooms[0].role})
-            </Text>
-          ) : (
-            <ComboBox
-              className="room-combobox"
-              selectedOption={{ key: "length", label: `${fakeRooms.length}` }}
-              options={[]}
-              onSelect={onTypeChange}
-              advancedOptions={getRoomsOptions()}
-              scaled={false}
-              size="content"
-              displaySelectedOption
-              modernView
-            />
-          )}
-        </TableCell> */}
+        <TableCell>
+          <Link
+            type="page"
+            title={email}
+            fontSize="13px"
+            fontWeight={600}
+            color={sideInfoColor}
+            onClick={onEmailClick}
+            isTextOverflow
+            enableUserSelect
+          >
+            {email}
+          </Link>
+        </TableCell>
 
-        {groups && <TableCell>{groups}</TableCell>}
+        {<TableCell>{groups || ""}</TableCell>}
       </StyledPeopleRow>
     </StyledWrapper>
   );

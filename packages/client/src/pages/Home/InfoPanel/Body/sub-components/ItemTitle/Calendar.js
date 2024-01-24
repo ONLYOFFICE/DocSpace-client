@@ -31,6 +31,7 @@ const CalendarComponent = ({ roomCreationDate, setCalendarDay }) => {
   const [selectedDate, setSelectedDate] = useState(null);
 
   const toggleCalendar = () => setIsOpen((open) => !open);
+
   const onDateSet = (date) => {
     const formattedDate = moment(date.format("YYYY-MM-DD"));
     setSelectedDate(date);

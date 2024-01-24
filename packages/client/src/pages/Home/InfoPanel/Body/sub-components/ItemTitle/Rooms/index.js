@@ -8,6 +8,7 @@ import IconButton from "@docspace/components/icon-button";
 import { StyledTitle } from "../../../styles/common";
 import RoomIcon from "@docspace/components/room-icon";
 import RoomsContextBtn from "./context-btn";
+import CalendarComponent from "../Calendar";
 import { RoomsType, ShareAccessRights } from "@docspace/common/constants";
 
 const RoomsItemHeader = ({
@@ -20,6 +21,8 @@ const RoomsItemHeader = ({
   setInviteUsersWarningDialogVisible,
   isPublicRoomType,
   roomsView,
+  setCalendarDay,
+  openHistory,
 }) => {
   const itemTitleRef = useRef();
 
@@ -83,7 +86,12 @@ const RoomsItemHeader = ({
             size={16}
           />
         )}
-
+        {openHistory && (
+          <CalendarComponent
+            setCalendarDay={setCalendarDay}
+            roomCreationDate={selection.created}
+          />
+        )}
         <RoomsContextBtn selection={selection} itemTitleRef={itemTitleRef} />
       </div>
     </StyledTitle>
@@ -96,6 +104,7 @@ export default inject(({ auth, dialogsStore, selectedFolderStore }) => {
     selectionParentRoom,
     getIsRooms,
     roomsView,
+    setCalendarDay,
   } = auth.infoPanelStore;
 
   const isShowParentRoom =
@@ -127,6 +136,8 @@ export default inject(({ auth, dialogsStore, selectedFolderStore }) => {
       (selectedFolderStore.roomType ??
         auth.infoPanelStore.selectionParentRoom?.roomType) ===
       RoomsType.PublicRoom,
+
+    setCalendarDay,
   };
 })(
   withTranslation([

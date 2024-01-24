@@ -46,6 +46,7 @@ class InfoPanelStore {
   selectedFolderStore = null;
   treeFoldersStore = null;
   membersList = null;
+  calendarDay = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -227,14 +228,14 @@ class InfoPanelStore {
     return item.isRoom || !!item.roomType
       ? item.rootFolderType === FolderType.Archive
         ? item.logo && item.logo.medium
-        :  this.settingsStore.getIcon(
-          size,
-          null,
-          null,
-          null,
-          item.roomType,
-          true
-        )
+        : this.settingsStore.getIcon(
+            size,
+            null,
+            null,
+            null,
+            item.roomType,
+            true
+          )
         ? item.logo.medium
         : item.icon
         ? item.icon
@@ -350,6 +351,10 @@ class InfoPanelStore {
 
   setMembersList = (membersList) => {
     this.membersList = membersList;
+  };
+
+  setCalendarDay = (calendarDay) => {
+    this.calendarDay = calendarDay;
   };
 }
 

@@ -38,12 +38,15 @@ const ItemTitle = ({
         currentColorScheme={currentColorScheme}
         gallerySelected={gallerySelected}
         getIcon={getIcon}
-        openHistory={openHistory}
-        setCalendarDay={setCalendarDay}
       />
     );
 
-  return <RoomsItemHeader />;
+  return (
+    <RoomsItemHeader
+      openHistory={openHistory}
+      setCalendarDay={setCalendarDay}
+    />
+  );
 };
 
 export default inject(({ auth, settingsStore, peopleStore, oformsStore }) => {

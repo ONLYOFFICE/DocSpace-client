@@ -71,6 +71,7 @@ const History = ({
     if (!historyListNode) return;
 
     const scroll = historyListNode.closest(".scroller");
+
     let datesCoincidingWithCalendarDay = [];
 
     selectionHistory.forEach((item) => {

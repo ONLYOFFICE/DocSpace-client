@@ -127,11 +127,13 @@ class InfoPanelStore {
           : [];
   }
 
-  get infoPanelSelectedFolder() {
-    return this.roomsView === infoMembers && this.infoPanelRoom
+  getInfoPanelSelectedFolder = () => {
+    const isRooms = this.getIsRooms();
+
+    return this.roomsView === infoMembers && this.infoPanelRoom && isRooms
       ? this.infoPanelRoom
       : this.selectedFolderStore.getSelectedFolder();
-  }
+  };
 
   get infoPanelCurrentSelection() {
     const { selection, bufferSelection } = this.filesStore;
@@ -162,7 +164,7 @@ class InfoPanelStore {
       !this.infoPanelSelectedItems[0]?.isRoom
     ) {
       if (!this.infoPanelSelection?.id) {
-        return this.infoPanelSelectedFolder;
+        return this.getInfoPanelSelectedFolder();
       }
     } else {
       return this.normalizeSelection(this.infoPanelSelectedItems[0]);
@@ -171,7 +173,7 @@ class InfoPanelStore {
 
   setNewInfoPanelSelection = () => {
     const selectedItems = this.infoPanelSelectedItems; //files list
-    const selectedFolder = this.infoPanelSelectedFolder; // root or current folder
+    const selectedFolder = this.getInfoPanelSelectedFolder(); // root or current folder
     let newInfoPanelSelection = this.infoPanelSelection;
 
     if (!selectedItems.length) {

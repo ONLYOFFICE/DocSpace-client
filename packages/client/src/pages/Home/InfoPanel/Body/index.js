@@ -142,11 +142,10 @@ export default inject(({ auth, selectedFolderStore, oformsStore }) => {
     getIsAccounts,
     getIsGallery,
     infoPanelSelectedItems,
-    infoPanelSelectedFolder,
+    getInfoPanelSelectedFolder,
   } = auth.infoPanelStore;
 
   const { gallerySelected } = oformsStore;
-
   const { isRootFolder } = selectedFolderStore;
 
   return {
@@ -162,7 +161,7 @@ export default inject(({ auth, selectedFolderStore, oformsStore }) => {
     getIsGallery,
 
     selectedItems: infoPanelSelectedItems,
-    selectedFolder: infoPanelSelectedFolder,
+    selectedFolder: getInfoPanelSelectedFolder(),
 
     isRootFolder,
     gallerySelected,

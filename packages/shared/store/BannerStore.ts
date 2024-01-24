@@ -1,12 +1,6 @@
 import { makeAutoObservable } from "mobx";
 
-export interface IBannerStore {
-  isBannerVisible: boolean;
-
-  setIsBannerVisible: (visible: boolean) => void;
-}
-
-class BannerStore implements IBannerStore {
+class BannerStore {
   isBannerVisible = false; // TODO: set to true by default if you need to enable SmartBanner
 
   constructor() {

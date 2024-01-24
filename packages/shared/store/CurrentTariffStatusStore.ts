@@ -10,35 +10,7 @@ import { TUser } from "../api/people/types";
 import { isValidDate } from "../utils";
 import { getDaysLeft, getDaysRemaining } from "../utils/common";
 
-export interface ICurrentTariffStatusStore {
-  portalTariffStatus: TPortalTariff;
-  isLoaded: boolean;
-  payerInfo: TUser | null;
-
-  setIsLoaded: (isLoaded: boolean) => void;
-
-  isGracePeriod: boolean;
-  isPaidPeriod: boolean;
-  isNotPaidPeriod: boolean;
-  dueDate: Date;
-  delayDueDate: Date;
-  customerId: string;
-  portalStatus: number | undefined;
-  licenseDate: Date;
-  paymentDate: string;
-  isPaymentDateValid: boolean;
-  isLicenseDateExpired: boolean | undefined;
-  gracePeriodEndDate: string;
-  delayDaysCount: string;
-  isLicenseExpiring: boolean | undefined;
-  trialDaysLeft: number | undefined;
-
-  setPayerInfo: () => Promise<void>;
-  setPortalTariffValue: (res: TPortalTariff) => Promise<void>;
-  setPortalTariff: () => Promise<void>;
-}
-
-class CurrentTariffStatusStore implements ICurrentTariffStatusStore {
+class CurrentTariffStatusStore {
   portalTariffStatus: TPortalTariff = {} as TPortalTariff;
 
   isLoaded = false;

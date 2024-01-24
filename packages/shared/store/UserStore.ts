@@ -7,43 +7,7 @@ import { TUser } from "../api/people/types";
 import { EmployeeActivationStatus, ThemeKeys } from "../enums";
 import { TI18n } from "../types";
 
-export interface IUserStore {
-  user: TUser | null;
-  isLoading: boolean;
-  isLoaded: boolean;
-  userIsUpdate: boolean;
-  withSendAgain: boolean;
-
-  init: (i18: TI18n) => void;
-
-  loadCurrentUser: () => Promise<TUser | null>;
-
-  setIsLoading: (value: boolean) => void;
-  setIsLoaded: (value: boolean) => void;
-  setUserIsUpdate: (value: boolean) => void;
-  setWithSendAgain: (value: boolean) => void;
-  setUser: (user: TUser) => void;
-
-  changeEmail: (userId: string, email: string, key: string) => Promise<void>;
-  updateEmailActivationStatus: (
-    activationStatus: EmployeeActivationStatus,
-    userId: string,
-    key: string,
-  ) => Promise<void>;
-  changeTheme: (key: ThemeKeys) => Promise<ThemeKeys>;
-  sendActivationLink: () => Promise<string | null>;
-  updateAvatarInfo: (
-    avatar: string,
-    avatarSmall: string,
-    avatarMedium: string,
-    avatarMax: string,
-  ) => void;
-
-  withActivationBar: boolean | null;
-  isAuthenticated: boolean;
-}
-
-class UserStore implements IUserStore {
+class UserStore {
   user: TUser | null = null;
 
   isLoading = false;

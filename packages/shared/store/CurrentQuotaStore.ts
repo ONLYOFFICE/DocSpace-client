@@ -16,51 +16,6 @@ import {
   PERCENTAGE_FOR_SHOWING_BAR,
 } from "../constants";
 
-export interface ICurrentQuotasStore {
-  currentPortalQuota: TPortalQuota;
-  currentPortalQuotaFeatures: TFeature[];
-  isLoaded: boolean;
-
-  setIsLoaded: (isLoaded: boolean) => void;
-
-  isFreeTariff: boolean;
-  isTrial: boolean;
-  currentPlanCost:
-    | {
-        value: number;
-      }
-    | {
-        value: number;
-        currencySymbol: string;
-      };
-  maxCountManagersByQuota: number | undefined;
-  addedManagersCount: number | undefined;
-  maxTotalSizeByQuota: number;
-  usedTotalStorageSizeCount: number | undefined;
-  maxFileSizeByQuota: number | undefined;
-  maxCountUsersByQuota: number;
-  maxCountRoomsByQuota: number;
-  usedRoomsCount: number | undefined;
-  isBrandingAndCustomizationAvailable: number | undefined;
-  isOAuthAvailable: number | undefined;
-  isThirdPartyAvailable: number | undefined;
-  isSSOAvailable: number | undefined;
-  isRestoreAndAutoBackupAvailable: number | undefined;
-  isAuditAvailable: number | undefined;
-  currentTariffPlanTitle: string;
-  quotaCharacteristics: TFeature[];
-  maxUsersCountInRoom: number;
-  showRoomQuotaBar: boolean;
-  showStorageQuotaBar: boolean;
-  showUserQuotaBar: boolean;
-  isNonProfit: boolean;
-
-  setPortalQuotaValue: (res: TPortalQuota) => void;
-  updateQuotaUsedValue: (featureId: string, value: number) => void;
-  updateQuotaFeatureValue: (featureId: string, value: number) => void;
-  setPortalQuota: () => Promise<void>;
-}
-
 class CurrentQuotasStore {
   currentPortalQuota: TPortalQuota = {} as TPortalQuota;
 

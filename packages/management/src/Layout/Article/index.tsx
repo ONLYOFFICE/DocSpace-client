@@ -1,8 +1,8 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { IUserStore } from "@docspace/shared/store/UserStore";
-import { IBannerStore } from "@docspace/shared/store/BannerStore";
+import { UserStore } from "@docspace/shared/store/UserStore";
+import { BannerStore } from "@docspace/shared/store/BannerStore";
 
 import Article from "@docspace/shared/components/article";
 
@@ -86,8 +86,8 @@ export default inject(
   }: {
     auth: any;
     uploadDataStore: any;
-    userStore: IUserStore;
-    bannerStore: IBannerStore;
+    userStore: UserStore;
+    bannerStore: BannerStore;
   }) => {
     const {
       settingsStore,

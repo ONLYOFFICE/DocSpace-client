@@ -1,23 +1,9 @@
 import { makeAutoObservable } from "mobx";
 
 import api from "../api";
-import { TTfa, TTfaType } from "../api/settings/types";
+import { TTfaType } from "../api/settings/types";
 
-export interface ITfaStore {
-  tfaSettings: TTfaType | null;
-  smsAvailable: boolean | null;
-  appAvailable: boolean | null;
-  backupCodes: string[];
-  tfaAndroidAppUrl: string;
-  tfaIosAppUrl: string;
-  tfaWinAppUrl: string;
-
-  setTfaSettings: (type: TTfaType) => Promise<TTfa>;
-  setBackupCodes: (codes: string[]) => void;
-  getTfaType: () => Promise<TTfaType>;
-}
-
-class TfaStore implements ITfaStore {
+class TfaStore {
   tfaSettings: TTfaType | null = null;
 
   smsAvailable: boolean | null = null;

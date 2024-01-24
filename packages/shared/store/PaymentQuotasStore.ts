@@ -3,31 +3,6 @@ import api from "../api";
 import { TPaymentFeature, TPaymentQuota } from "../api/portal/types";
 import { MANAGER, TOTAL_SIZE } from "../constants";
 
-export interface IPaymentQuotasStore {
-  portalPaymentQuotas: TPaymentQuota;
-  portalPaymentQuotasFeatures: TPaymentFeature[];
-  isLoaded: boolean;
-  setIsLoaded: (isLoaded: boolean) => void;
-
-  planCost:
-    | {
-        value: string;
-        currencySymbol: string;
-      }
-    | {
-        value: number;
-        currencySymbol: string;
-      };
-  stepAddingQuotaManagers: number | boolean | undefined;
-  stepAddingQuotaTotalSize: number | boolean | undefined;
-  tariffTitle: string;
-  usedTotalStorageSizeTitle: string | undefined;
-  addedManagersCountTitle: string | undefined;
-  tariffPlanTitle: string;
-
-  setPortalPaymentQuotas: () => Promise<void>;
-}
-
 class PaymentQuotasStore {
   portalPaymentQuotas: TPaymentQuota = {} as TPaymentQuota;
 

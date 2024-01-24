@@ -2952,7 +2952,7 @@ class FilesStore {
     const url = getCategoryUrl(this.categoryType, id);
 
     if (canOpenPlayer) {
-      return combineUrl(proxyURL, config.homepage, `${url}/#preview/${id}`);
+      return combineUrl(proxyURL, config.homepage, url, id);
     }
 
     if (isFolder) {

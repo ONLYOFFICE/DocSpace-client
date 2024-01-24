@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import { Aside } from "@docspace/shared/components/aside";
 import { Backdrop } from "@docspace/shared/components/backdrop";
@@ -13,7 +13,8 @@ import Filter from "@docspace/shared/api/people/filter";
 import Loaders from "@docspace/common/components/Loaders";
 
 import { getMembersList, getUserList } from "@docspace/shared/api/people";
-import { ShareAccessRights, LOADER_TIMEOUT } from "@docspace/shared/constants";
+import { LOADER_TIMEOUT } from "@docspace/shared/constants";
+import { ShareAccessRights } from "@docspace/shared/enums";
 import useLoadingWithTimeout from "@docspace/shared/hooks/useLoadingWithTimeout";
 
 import withLoader from "../../../HOCs/withLoader";

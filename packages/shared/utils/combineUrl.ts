@@ -3,8 +3,8 @@ const combineUrl = (host = "", ...params: string[] | number[]) => {
 
   params.forEach((part) => {
     if (!part) return;
-    const convertedPart = String(part);
-    const newPart = convertedPart.trim().replace(/^\/+/, "");
+    const newPart =
+      typeof part === "string" ? part.trim().replace(/^\/+/, "") : String(part);
     url += newPart
       ? url.length > 0 && url[url.length - 1] === "/"
         ? newPart

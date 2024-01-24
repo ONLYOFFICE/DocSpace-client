@@ -40,11 +40,13 @@ import { commonInputStyles } from "./commonInputStyles";
 import { commonTextStyles } from "./commonTextStyles";
 import {
   RoomsTypeValues,
+  RoomsTypes,
   getSystemTheme,
   getEditorTheme,
   getLogoFromPath,
   isBetaLanguage,
 } from "./common";
+import { isNumber } from "./typeGuards";
 
 export type { TInterfaceDirection };
 
@@ -54,6 +56,7 @@ export {
   getSystemTheme,
   getEditorTheme,
   RoomsTypeValues,
+  RoomsTypes,
   parseAddresses,
   NoUserSelect,
   commonInputStyles,
@@ -93,6 +96,7 @@ export {
   handleAnyClick,
   DomHelpers,
   ObjectUtils,
+  isNumber,
 };
 
 export const getModalType = () => {

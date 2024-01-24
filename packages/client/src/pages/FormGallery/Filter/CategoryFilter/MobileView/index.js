@@ -5,7 +5,7 @@ import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
-import { ComboButton } from "@docspace/shared/components/combobox";
+import { ComboButton } from "@docspace/shared/components/combobox/sub-components/ComboButton";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import { isMobile } from "@docspace/shared/utils";
 

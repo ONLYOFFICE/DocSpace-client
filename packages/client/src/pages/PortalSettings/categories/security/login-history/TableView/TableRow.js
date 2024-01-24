@@ -46,6 +46,7 @@ const PeopleTableRow = (props) => {
           fontSize="12px"
           fontWeight={600}
           truncate
+          className="settings_unavailable"
         >
           {item.user}
         </Text>
@@ -57,6 +58,7 @@ const PeopleTableRow = (props) => {
           fontSize="12px"
           fontWeight={600}
           truncate
+          className="settings_unavailable"
         >
           {dateStr}
         </Text>
@@ -70,6 +72,7 @@ const PeopleTableRow = (props) => {
           fontWeight={600}
           onClick={onEmailClick}
           isTextOverflow
+          className="settings_unavailable"
         >
           {item.action}
         </Text>

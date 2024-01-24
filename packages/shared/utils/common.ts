@@ -35,6 +35,7 @@ import TopLoaderService from "../components/top-loading-indicator";
 import { Encoder } from "./encoder";
 import { combineUrl } from "./combineUrl";
 import { getCookie } from "./cookie";
+import { isNumber } from "./typeGuards";
 
 let timer: null | ReturnType<typeof setTimeout> = null;
 
@@ -702,7 +703,9 @@ export function getObjectByLocation(location: Location) {
   }
 }
 
-export const RoomsTypeValues = Object.values(RoomsType).reduce(
+export const RoomsTypeValues = Object.values(RoomsType).filter(isNumber);
+
+export const RoomsTypes = RoomsTypeValues.reduce<Record<number, number>>(
   (acc, current) => {
     if (typeof current === "string") return { ...acc };
     return { ...acc, [current]: current };

@@ -14,7 +14,11 @@ import {
   ArticleAlerts,
 } from "@docspace/shared/enums";
 
-import { LANGUAGE, COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
+import {
+  LANGUAGE,
+  COOKIE_EXPIRATION_YEAR,
+  MEDIA_VIEW_URL,
+} from "@docspace/shared/constants";
 import { version } from "../package.json";
 import SocketIOHelper from "@docspace/shared/utils/socket";
 import { Dark, Base } from "@docspace/shared/themes";
@@ -434,10 +438,7 @@ class SettingsStore {
     else newSettings = await api.settings.getSettings(true);
 
     if (window["AscDesktopEditor"] !== undefined || this.personal) {
-      const dp = combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
-        "/products/files/"
-      );
+      const dp = combineUrl(window.DocSpaceConfig?.proxy?.url, MEDIA_VIEW_URL);
       this.setDefaultPage(dp);
     }
 

@@ -18,8 +18,12 @@ import { inject, observer } from "mobx-react";
 import { toastr } from "@docspace/shared/components/toast";
 import { Encoder } from "@docspace/shared/utils/encoder";
 import { Base } from "@docspace/shared/themes";
-import { MAX_FILE_COMMENT_LENGTH } from "@docspace/shared/constants";
+import {
+  MAX_FILE_COMMENT_LENGTH,
+  MEDIA_VIEW_URL,
+} from "@docspace/shared/constants";
 import moment from "moment-timezone";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 const StyledExternalLinkIcon = styled(ExternalLinkIcon)`
   ${commonIconsStyles}
@@ -110,7 +114,7 @@ const VersionRow = (props) => {
 
     if (MediaView || ImageView) {
       return window.open(
-        "/products/files/#preview/" + info.id,
+        combineUrl(MEDIA_VIEW_URL, info.id),
         window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self"
       );
     }

@@ -641,6 +641,7 @@ const StyledBox = styled.div<{
 StyledBox.defaultProps = { theme: Base };
 
 const StyledTariffWrapper = styled.div`
+  width: auto;
   display: flex;
   gap: 20px;
   align-items: center;
@@ -655,6 +656,10 @@ const StyledTariffWrapper = styled.div`
           justify-content: right;
           margin-left: auto;
         `}
+
+  @media ${tablet} {
+    width: 100%;
+  }
 `;
 
 export {

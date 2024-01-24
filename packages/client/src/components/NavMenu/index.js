@@ -19,7 +19,7 @@ import { inject, observer } from "mobx-react";
 import i18n from "./i18n";
 import PreparationPortalDialog from "../dialogs/PreparationPortalDialog";
 import { Base } from "@docspace/shared/themes";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const StyledContainer = styled.header`
   height: 48px;

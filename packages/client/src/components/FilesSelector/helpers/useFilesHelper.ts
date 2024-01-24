@@ -1,11 +1,11 @@
 import React from "react";
 
 // @ts-ignore
-import { getFolder, getFolderInfo } from "@docspace/common/api/files";
+import { getFolder, getFolderInfo } from "@docspace/shared/api/files";
 // @ts-ignore
-import FilesFilter from "@docspace/common/api/files/filter";
+import FilesFilter from "@docspace/shared/api/files/filter";
 // @ts-ignore
-import { iconSize32 } from "@docspace/common/utils/image-helpers";
+import { iconSize32 } from "@docspace/shared/utils/image-helpers";
 
 import { PAGE_COUNT, defaultBreadCrumb } from "../utils";
 
@@ -20,10 +20,27 @@ import {
   FilesSelectorFilterTypes,
   FilterType,
   FolderType,
-} from "@docspace/common/constants";
+} from "@docspace/shared/enums";
+
+import {
+  getIconPathByFolderType,
+  FolderTypeValueOf,
+} from "@docspace/shared/utils/common";
+
 //@ts-ignore
 import { toastr } from "@docspace/shared/components/toast";
 
+type Room = {
+  id: number;
+  title: string;
+  roomType: number;
+  filesCount: number;
+  foldersCount: number;
+  security: Security;
+  parentId: number;
+  rootFolderType: number;
+  type: FolderTypeValueOf;
+};
 const DEFAULT_FILE_EXTS = "file";
 
 export const convertFoldersToItems = (
@@ -31,7 +48,7 @@ export const convertFoldersToItems = (
   disabledItems: any[],
   filterParam?: string
 ) => {
-  const items = folders.map((room: any) => {
+  const items = folders.map((room: Room) => {
     const {
       id,
       title,
@@ -41,18 +58,11 @@ export const convertFoldersToItems = (
       security,
       parentId,
       rootFolderType,
-    }: {
-      id: number;
-      title: string;
-      roomType: number;
-      filesCount: number;
-      foldersCount: number;
-      security: Security;
-      parentId: number;
-      rootFolderType: number;
+      type,
     } = room;
 
-    const icon = iconSize32.get("folder.svg");
+    const folderIconPath = getIconPathByFolderType(type);
+    const icon = iconSize32.get(folderIconPath);
 
     return {
       id,

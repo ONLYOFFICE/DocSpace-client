@@ -19,7 +19,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const toggleStyle = {
   position: "static",

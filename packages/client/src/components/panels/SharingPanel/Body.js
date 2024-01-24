@@ -4,7 +4,7 @@ import { VariableSizeList as List } from "react-window";
 import { isMobileOnly } from "react-device-detect";
 
 import { CustomScrollbarsVirtualList } from "@docspace/shared/components/scrollbar";
-import { ShareAccessRights } from "@docspace/common/constants";
+import { ShareAccessRights } from "@docspace/shared/enums";
 
 import ExternalLink from "./ExternalLink";
 import InternalLink from "./InternalLink";

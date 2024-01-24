@@ -1,5 +1,5 @@
 import { action, computed, makeObservable, observable } from "mobx";
-import { getGroupById } from "@docspace/common/api/groups";
+import { getGroupById } from "@docspace/shared/api/groups";
 
 class SelectedGroupStore {
   selectedGroup = null;

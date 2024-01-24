@@ -7,7 +7,7 @@ import { withTranslation } from "react-i18next";
 
 import { inject, observer } from "mobx-react";
 import { useNavigate, useLocation } from "react-router-dom";
-import FilesFilter from "@docspace/common/api/files/filter";
+import FilesFilter from "@docspace/shared/api/files/filter";
 
 const DeleteThirdPartyDialog = (props) => {
   const {

@@ -13,9 +13,10 @@ import {
   StyledInfoPanelToggleWrapper,
 } from "./StyledGallery";
 import config from "PACKAGE_FILE";
-import FilesFilter from "@docspace/common/api/files/filter";
-import { combineUrl } from "@docspace/common/utils";
-import { getCategoryUrl, getCategoryTypeByFolderType } from "SRC_DIR/helpers/utils";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { getCategoryTypeByFolderType } from "SRC_DIR/helpers/utils";
+import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
 const SectionHeaderContent = ({
   t,
@@ -44,7 +45,10 @@ const SectionHeaderContent = ({
     const filter = FilesFilter.getDefault();
     filter.folder = oformFromFolderId;
     const folderInfo = await getFolderInfo(oformFromFolderId);
-    const categoryType = getCategoryTypeByFolderType(folderInfo.rootFolderType, folderInfo.parentId);
+    const categoryType = getCategoryTypeByFolderType(
+      folderInfo.rootFolderType,
+      folderInfo.parentId
+    );
     const url = getCategoryUrl(categoryType, oformFromFolderId);
     const filterParamsStr = filter.toUrlParams();
 

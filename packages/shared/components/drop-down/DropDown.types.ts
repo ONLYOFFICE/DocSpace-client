@@ -54,7 +54,7 @@ export interface DropDownProps {
   appendTo?: HTMLElement;
   isAside?: boolean;
   withBackground?: boolean;
-  eventTypes?: string[];
+  eventTypes?: string[] | string;
   forceCloseClickOutside?: boolean;
   withoutBackground?: boolean;
   zIndex?: number;

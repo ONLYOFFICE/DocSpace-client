@@ -1,11 +1,11 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import moment from "moment-timezone";
 
-import { getDaysLeft, getDaysRemaining } from "../utils";
+import { getDaysLeft, getDaysRemaining } from "@docspace/shared/utils/common";
 
-import api from "../api";
-import { TariffState } from "../constants";
-import { getUserByEmail } from "../api/people";
+import api from "@docspace/shared/api";
+import { TariffState } from "@docspace/shared/enums";
+import { getUserByEmail } from "@docspace/shared/api/people";
 
 class CurrentTariffStatusStore {
   portalTariffStatus = {};
@@ -78,14 +78,14 @@ class CurrentTariffStatusStore {
     moment.locale(this.authStore.language);
     if (this.dueDate === null) return "";
     return moment(this.dueDate)
-      .tz(window.timezone || "")
+      .tz(window.timezone)
       .format("LL");
   }
 
   isValidDate = (date) => {
     return (
       moment(date)
-        .tz(window.timezone || "")
+        .tz(window.timezone)
         .year() !== 9999
     );
   };
@@ -97,13 +97,13 @@ class CurrentTariffStatusStore {
   get isLicenseDateExpired() {
     if (!this.isPaymentDateValid) return;
 
-    return moment() > moment(this.dueDate).tz(window.timezone || "");
+    return moment() > moment(this.dueDate).tz(window.timezone);
   }
   get gracePeriodEndDate() {
     moment.locale(this.authStore.language);
     if (this.delayDueDate === null) return "";
     return moment(this.delayDueDate)
-      .tz(window.timezone || "")
+      .tz(window.timezone)
       .format("LL");
   }
 

@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import api from "@docspace/common/api";
+import api from "@docspace/shared/api";
 import { size } from "@docspace/shared/utils";
-import { FileStatus } from "@docspace/common/constants";
+import { FileStatus } from "@docspace/shared/enums";
 
 class VersionHistoryStore {
   isVisible = false;
@@ -99,13 +99,13 @@ class VersionHistoryStore {
     this.versions = versions;
   };
 
-  fetchFileVersions = (fileId, access) => {
+  fetchFileVersions = (fileId, access, requestToken) => {
     if (this.fileId !== fileId || !this.versions) {
       this.setVerHistoryFileId(fileId);
       this.setVerHistoryFileSecurity(access);
 
       return api.files
-        .getFileVersionInfo(fileId)
+        .getFileVersionInfo(fileId, requestToken)
         .then((versions) => this.setVerHistoryFileVersions(versions));
     } else {
       return Promise.resolve(this.versions);

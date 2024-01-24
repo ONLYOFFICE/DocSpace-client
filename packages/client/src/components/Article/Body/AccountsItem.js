@@ -2,8 +2,8 @@
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { PageType } from "@docspace/common/constants";
-import { getCatalogIconUrlByType } from "@docspace/common/utils/catalogIcon.helper";
+import { PageType } from "@docspace/shared/enums";
+import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 
 import { ArticleItem } from "@docspace/shared/components/article-item";
 

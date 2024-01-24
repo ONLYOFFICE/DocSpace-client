@@ -5,8 +5,8 @@ import ViewHelper from "./helpers/ViewHelper";
 import ItemTitle from "./sub-components/ItemTitle";
 
 import { StyledInfoPanelBody } from "./styles/common";
-import { getRoomInfo } from "@docspace/common/api/rooms";
 import { useParams } from "react-router-dom";
+import { getRoomInfo } from "@docspace/shared/api/rooms";
 
 const InfoPanelBodyContent = ({
   selection,
@@ -91,6 +91,8 @@ const InfoPanelBodyContent = ({
         return viewHelper.HistoryView();
       case "info_details":
         return viewHelper.DetailsView();
+      case "info_share":
+        return viewHelper.ShareView();
     }
 
     if (currentView.indexOf("info_plugin") > -1) return viewHelper.PluginView();

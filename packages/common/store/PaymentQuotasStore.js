@@ -1,5 +1,5 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import api from "../api";
+import api from "@docspace/shared/api";
 
 const MANAGER = "manager";
 const TOTAL_SIZE = "total_size";

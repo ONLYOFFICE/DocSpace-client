@@ -13,9 +13,9 @@ import { DropDownProps } from "./DropDown.types";
 import { DEFAULT_PARENT_HEIGHT } from "./DropDown.constants";
 
 const DropDown = ({
-  directionY,
-  directionX,
-  manualY,
+  directionY = "bottom",
+  directionX = "left",
+
   open,
   enableOnClickOutside,
   isDefaultMode = true,
@@ -37,6 +37,8 @@ const DropDown = ({
   zIndex,
   clickOutsideAction,
   manualWidth,
+  manualX,
+  manualY,
   className,
   style,
 }: DropDownProps) => {
@@ -229,13 +231,13 @@ const DropDown = ({
     }
   }, [
     fixedDirection,
+    theme?.interfaceDirection,
     forwardedRef,
     smallSectionWidth,
     state.directionX,
-    state.borderOffset,
     state.directionY,
     state.manualY,
-    theme?.interfaceDirection,
+    state.borderOffset,
   ]);
 
   // const handleClickOutside = (e: any) => {
@@ -393,6 +395,7 @@ const DropDown = ({
         zIndex={zIndex}
         manualWidth={manualWidth}
         className={className}
+        manualX={manualX}
       >
         <VirtualList
           Row={Row}
@@ -445,21 +448,26 @@ const DropDown = ({
       clickOutsideAction?.(evt, !open);
     };
 
-    if (!open && Array.isArray(eventTypes)) {
-      eventTypes?.forEach((type) => {
+    const types: string[] = !eventTypes
+      ? []
+      : Array.isArray(eventTypes)
+        ? eventTypes
+        : [eventTypes];
+
+    if (!open) {
+      types?.forEach((type) => {
         window.removeEventListener(type, listener);
       });
 
       return;
     }
 
-    if (Array.isArray(eventTypes))
-      eventTypes?.forEach((type) => {
-        window.addEventListener(type, listener);
-      });
+    types?.forEach((type) => {
+      window.addEventListener(type, listener);
+    });
 
     return () => {
-      eventTypes?.forEach((type) => {
+      types?.forEach((type) => {
         window.removeEventListener(type, listener);
       });
     };

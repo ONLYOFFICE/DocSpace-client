@@ -10,7 +10,7 @@ import { ReactSVG } from "react-svg";
 import { Text } from "@docspace/shared/components/text";
 import { mobile } from "@docspace/shared/utils";
 
-import { DeviceType } from "../../../constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const StyledWrapper = styled.div`
   cursor: pointer;

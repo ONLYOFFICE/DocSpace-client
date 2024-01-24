@@ -1,6 +1,6 @@
 import React from "react";
 import { hydrateRoot } from "react-dom/client";
-// import { registerSW } from "@docspace/common/sw/helper";
+// import { registerSW } from "@docspace/shared/sw/helper";
 import pkg from "../../package.json";
 import { initI18n } from "./helpers/utils";
 import ClientApp from "./components/ClientApp";

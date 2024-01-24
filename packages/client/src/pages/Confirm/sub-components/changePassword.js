@@ -9,8 +9,8 @@ import { FieldContainer } from "@docspace/shared/components/field-container";
 import { toastr } from "@docspace/shared/components/toast";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
-import { createPasswordHash } from "@docspace/common/utils";
-import { login } from "@docspace/common/utils/loginUtils";
+import { createPasswordHash } from "@docspace/shared/utils/common";
+import { login } from "@docspace/shared/utils/loginUtils";
 
 import DocspaceLogo from "../../../DocspaceLogo";
 import { getPasswordErrorMessage } from "../../../helpers/utils";

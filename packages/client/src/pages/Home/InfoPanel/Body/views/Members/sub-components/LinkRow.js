@@ -20,7 +20,7 @@ import LoadedReactSvgUrl from "PUBLIC_DIR/images/loaded.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 import ClockReactSvg from "PUBLIC_DIR/images/clock.react.svg";
 import moment from "moment-timezone";
-import { RoomsType } from "@docspace/common/constants";
+import { RoomsType } from "@docspace/shared/enums";
 
 import { StyledLinkRow } from "./StyledPublicRoom";
 
@@ -57,7 +57,7 @@ const LinkRow = (props) => {
   const isLocked = !!password;
   const expiryDate = !!expirationDate;
   const date = moment(expirationDate)
-    .tz(window.timezone || "")
+    .tz(window.timezone)
     .format("LLL");
 
   const tooltipContent = isExpired

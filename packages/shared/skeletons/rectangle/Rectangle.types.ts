@@ -12,4 +12,5 @@ export interface RectangleSkeletonProps {
   foregroundOpacity?: number;
   speed?: number;
   animate?: boolean;
+  style?: React.CSSProperties;
 }

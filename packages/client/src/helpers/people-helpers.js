@@ -5,7 +5,7 @@ import { find, cloneDeep } from "lodash";
 import {
   EmployeeActivationStatus,
   EmployeeStatus,
-} from "@docspace/common/constants";
+} from "@docspace/shared/enums";
 
 import PhoneIconUrl from "PUBLIC_DIR/images/phone.react.svg?url";
 import MobileIconUrl from "PUBLIC_DIR/images/mobile.react.svg?url";

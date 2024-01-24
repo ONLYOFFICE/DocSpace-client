@@ -23,7 +23,8 @@ import {
   createFolder,
   moveToFolder,
   getFolder,
-} from "@docspace/common/api/files";
+  deleteFilesFromRecent,
+} from "@docspace/shared/api/files";
 import {
   ConflictResolveType,
   FileAction,
@@ -31,25 +32,25 @@ import {
   FolderType,
   RoomsType,
   ShareAccessRights,
-} from "@docspace/common/constants";
+} from "@docspace/shared/enums";
 import { makeAutoObservable } from "mobx";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
 import { checkProtocol } from "../helpers/files-helpers";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 import { isDesktop } from "@docspace/shared/utils";
 import { getCategoryType } from "SRC_DIR/helpers/utils";
-import { muteRoomNotification } from "@docspace/common/api/settings";
+import { muteRoomNotification } from "@docspace/shared/api/settings";
 import { CategoryType } from "SRC_DIR/helpers/constants";
-import RoomsFilter from "@docspace/common/api/rooms/filter";
-import AccountsFilter from "@docspace/common/api/people/filter";
-import { RoomSearchArea } from "@docspace/common/constants";
-import { getObjectByLocation } from "@docspace/common/utils";
-import { Events } from "@docspace/common/constants";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import AccountsFilter from "@docspace/shared/api/people/filter";
+import { RoomSearchArea } from "@docspace/shared/enums";
+import { getObjectByLocation } from "@docspace/shared/utils/common";
+import { Events } from "@docspace/shared/enums";
 import uniqueid from "lodash/uniqueId";
-import FilesFilter from "@docspace/common/api/files/filter";
+import FilesFilter from "@docspace/shared/api/files/filter";
 import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
@@ -285,11 +286,14 @@ class FilesActionStore {
       secondaryProgressDataStore;
     const { withPaging } = this.authStore.settingsStore;
 
-    const selection = newSelection
+    let selection = newSelection
       ? newSelection
       : this.filesStore.selection.length
-        ? this.filesStore.selection
-        : [bufferSelection];
+      ? this.filesStore.selection
+      : [bufferSelection];
+
+    selection = selection.filter((item) => item.security.Delete);
+
     const isThirdPartyFile = selection.some((f) => f.providerKey);
 
     const currentFolderId = this.selectedFolderStore.id;
@@ -870,9 +874,9 @@ class FilesActionStore {
     const { setUnsubscribe } = this.dialogsStore;
     const { filter, fetchFiles } = this.filesStore;
 
-    return removeShareFiles(fileIds, folderIds)
-      .then(() => setUnsubscribe(false))
-      .then(() => fetchFiles(this.selectedFolderStore.id, filter, true, true));
+    // return removeShareFiles(fileIds, folderIds)
+    //   .then(() => setUnsubscribe(false))
+    //   .then(() => fetchFiles(this.selectedFolderStore.id, filter, true, true));
   };
 
   lockFileAction = async (id, locked) => {
@@ -2091,7 +2095,7 @@ class FilesActionStore {
     const { enablePlugins } = this.authStore.settingsStore;
 
     const { isLoading, setIsSectionFilterLoading } = this.clientLoadingStore;
-    const { isRecycleBinFolder } = this.treeFoldersStore;
+    const { isRecycleBinFolder, isRecentTab } = this.treeFoldersStore;
     const { setMediaViewerData } = this.mediaViewerDataStore;
     const { setConvertDialogVisible, setConvertItem } = this.dialogsStore;
 
@@ -2113,7 +2117,15 @@ class FilesActionStore {
     const canWebEdit = item.viewAccessibility?.WebEdit;
     const canViewedDocs = item.viewAccessibility?.WebView;
 
-    const { id, viewUrl, providerKey, fileStatus, encrypted, isFolder } = item;
+    const {
+      id,
+      viewUrl,
+      providerKey,
+      fileStatus,
+      encrypted,
+      isFolder,
+      webUrl,
+    } = item;
     if (encrypted && isPrivacyFolder) return checkProtocol(item.id, true);
 
     if (isRecycleBinFolder || isLoading) return;
@@ -2172,7 +2184,12 @@ class FilesActionStore {
           ? !item.security.FillForms
           : !item.security.Edit;
 
-        return openDocEditor(id, providerKey, tab, null, isPreview);
+        const shareWebUrl = new URL(webUrl);
+        const shareKey = isRecentTab
+          ? getObjectByLocation(shareWebUrl)?.share
+          : "";
+
+        return openDocEditor(id, providerKey, tab, null, isPreview, shareKey);
       }
 
       if (isMediaOrImage) {
@@ -2500,6 +2517,13 @@ class FilesActionStore {
       .finally(() => {
         setSelected("none");
       });
+  };
+
+  removeFilesFromRecent = async (fileIds) => {
+    const { refreshFiles } = this.filesStore;
+
+    await deleteFilesFromRecent(fileIds);
+    await refreshFiles();
   };
 }
 

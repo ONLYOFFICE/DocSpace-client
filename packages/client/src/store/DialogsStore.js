@@ -1,7 +1,7 @@
-import { getNewFiles } from "@docspace/common/api/files";
-import { ShareAccessRights } from "@docspace/common/constants";
+import { getNewFiles } from "@docspace/shared/api/files";
+import { ShareAccessRights } from "@docspace/shared/enums";
 import { makeAutoObservable, runInAction } from "mobx";
-import { Events } from "@docspace/common/constants";
+import { Events } from "@docspace/shared/enums";
 
 class DialogsStore {
   authStore;
@@ -10,7 +10,6 @@ class DialogsStore {
   selectedFolderStore;
   versionHistoryStore;
 
-  sharingPanelVisible = false;
   roomSharingPanelVisible = false;
   ownerPanelVisible = false;
   moveToPanelVisible = false;
@@ -79,6 +78,8 @@ class DialogsStore {
   changeRoomOwnerIsVisible = false;
   changeRoomOwnerData = null;
 
+  shareFolderDialogVisible = false;
+
   constructor(
     authStore,
     treeFoldersStore,
@@ -111,10 +112,6 @@ class DialogsStore {
 
   setRestoreRoomDialogVisible = (visible) => {
     this.restoreRoomDialogVisible = visible;
-  };
-
-  setSharingPanelVisible = (sharingPanelVisible) => {
-    this.sharingPanelVisible = sharingPanelVisible;
   };
 
   setRoomSharingPanelVisible = (roomSharingPanelVisible) => {
@@ -233,8 +230,8 @@ class DialogsStore {
     const newIds = newId
       ? [newId]
       : pathParts
-      ? pathParts.map((p) => p.id)
-      : [];
+        ? pathParts.map((p) => p.id)
+        : [];
     item &&
       pathParts.push({
         id: item.id,
@@ -434,6 +431,10 @@ class DialogsStore {
   };
   deselectActiveFiles = () => {
     this.filesStore.setSelected("none");
+  };
+
+  setShareFolderDialogVisible = (visible) => {
+    this.shareFolderDialogVisible = visible;
   };
 }
 

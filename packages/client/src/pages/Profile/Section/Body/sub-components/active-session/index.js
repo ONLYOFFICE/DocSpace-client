@@ -11,6 +11,7 @@ import { Box } from "@docspace/shared/components/box";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { toastr } from "@docspace/shared/components/toast";
 import { useTheme } from "styled-components";
+import { convertTime } from "@docspace/shared/utils/convertTime";
 import Loaders from "@docspace/common/components/Loaders";
 
 import {
@@ -27,7 +28,7 @@ import {
   TableBody,
   TableDataCell,
 } from "./styled-active-sessions";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 import moment from "moment-timezone";
 
 const removeIcon = (
@@ -115,7 +116,7 @@ const ActiveSessions = ({
 
   const convertTime = (date) => {
     return moment(date)
-      .tz(window.timezone || "")
+      .tz(window.timezone)
       .locale(locale)
       .format("L, LTS");
   };

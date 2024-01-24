@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { TableRow } from "@docspace/shared/components/table";
 import { TableCell } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
-import { convertTime } from "@docspace/common/utils/convertTime";
+import { convertTime } from "@docspace/shared/utils/convertTime";
 
 const StyledPeopleRow = styled(TableRow)`
   .table-container_cell {
@@ -46,6 +46,7 @@ const PeopleTableRow = (props) => {
           fontSize="12px"
           fontWeight={600}
           truncate
+          className="settings_unavailable"
         >
           {item.user}
         </Text>
@@ -57,6 +58,7 @@ const PeopleTableRow = (props) => {
           fontSize="12px"
           fontWeight={600}
           truncate
+          className="settings_unavailable"
         >
           {dateStr}
         </Text>
@@ -70,6 +72,7 @@ const PeopleTableRow = (props) => {
           fontWeight={600}
           onClick={onEmailClick}
           isTextOverflow
+          className="settings_unavailable"
         >
           {item.action}
         </Text>

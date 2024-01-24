@@ -3,8 +3,8 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
-import { NotificationsType } from "@docspace/common/constants";
-import { getNotificationSubscription } from "@docspace/common/api/settings";
+import { NotificationsType } from "@docspace/shared/enums";
+import { getNotificationSubscription } from "@docspace/shared/api/settings";
 import Loaders from "@docspace/common/components/Loaders";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { toastr } from "@docspace/shared/components/toast";

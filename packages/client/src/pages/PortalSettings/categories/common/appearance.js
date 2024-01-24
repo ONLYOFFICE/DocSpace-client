@@ -14,8 +14,6 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { DropDown } from "@docspace/shared/components/drop-down";
 
-import HexColorPickerComponent from "./sub-components/hexColorPicker";
-
 import Loader from "./sub-components/loaderAppearance";
 
 import { StyledComponent, StyledTheme } from "./Appearance/StyledApperance.js";
@@ -23,7 +21,9 @@ import { ReactSVG } from "react-svg";
 import ModalDialogDelete from "./sub-components/modalDialogDelete";
 import hexToRgba from "hex-to-rgba";
 import { isMobile } from "@docspace/shared/utils";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
+
+import { ColorPicker } from "@docspace/shared/components/color-picker";
 
 const Appearance = (props) => {
   const {
@@ -594,11 +594,13 @@ const Appearance = (props) => {
       clickOutsideAction={onCloseHexColorPickerButtons}
     >
       <DropDownItem className="drop-down-item-hex">
-        <HexColorPickerComponent
+        <ColorPicker
           id="buttons-hex"
-          onCloseHexColorPicker={onCloseHexColorPickerButtons}
-          onAppliedColor={onAppliedColorButtons}
+          onClose={onCloseHexColorPickerButtons}
+          onApply={onAppliedColorButtons}
           appliedColor={appliedColorButtons}
+          applyButtonLabel={t("Common:ApplyButton")}
+          cancelButtonLabel={t("Common:CancelButton")}
         />
       </DropDownItem>
     </DropDown>
@@ -614,11 +616,13 @@ const Appearance = (props) => {
       clickOutsideAction={onCloseHexColorPickerAccent}
     >
       <DropDownItem className="drop-down-item-hex">
-        <HexColorPickerComponent
+        <ColorPicker
           id="accent-hex"
-          onCloseHexColorPicker={onCloseHexColorPickerAccent}
-          onAppliedColor={onAppliedColorAccent}
+          onClose={onCloseHexColorPickerAccent}
+          onApply={onAppliedColorAccent}
           appliedColor={appliedColorAccent}
+          applyButtonLabel={t("Common:ApplyButton")}
+          cancelButtonLabel={t("Common:CancelButton")}
         />
       </DropDownItem>
     </DropDown>

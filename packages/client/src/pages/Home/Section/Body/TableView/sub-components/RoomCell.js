@@ -3,7 +3,7 @@ import { Tooltip } from "@docspace/shared/components/tooltip";
 import { Text } from "@docspace/shared/components/text";
 import React, { useState } from "react";
 import { StyledText } from "./CellStyles";
-import { getFolderPath } from "@docspace/common/api/files";
+import { getFolderPath } from "@docspace/shared/api/files";
 import { CategoryType } from "@docspace/client/src/helpers/constants";
 
 const RoomCell = ({ sideColor, item }) => {

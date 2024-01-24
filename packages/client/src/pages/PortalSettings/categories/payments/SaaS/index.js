@@ -4,7 +4,7 @@ import { inject, observer } from "mobx-react";
 import moment from "moment";
 import { useTranslation } from "react-i18next";
 
-import { regDesktop } from "@docspace/common/desktop";
+import { regDesktop } from "@docspace/shared/utils/desktop";
 import Loaders from "@docspace/common/components/Loaders";
 import { setDocumentTitle } from "@docspace/client/src/helpers/filesUtils";
 

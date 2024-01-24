@@ -1,5 +1,5 @@
 import React from "react";
-
+import { RoomsType } from "../../enums";
 import { AvatarRole } from "../avatar";
 
 export type AccessRight = {
@@ -22,13 +22,13 @@ export interface SelectorProps {
   searchValue?: string;
   onSearch?: (value: string, callback?: Function) => void;
   onClearSearch?: (callback?: Function) => void;
-  items: TItem[];
-  onSelect: (item: TItem) => void;
+  items?: TSelectorItem[];
+  onSelect?: (item: TSelectorItem) => void;
   isMultiSelect?: boolean;
-  selectedItems?: TItem[];
-  acceptButtonLabel: string;
+  selectedItems?: TSelectorItem[];
+  acceptButtonLabel?: string;
   onAccept: (
-    selectedItems: TItem[],
+    selectedItems: TSelectorItem[],
     access: AccessRight | null,
     fileName: string,
     isFooterCheckboxChecked: boolean,
@@ -53,9 +53,13 @@ export interface SelectorProps {
   hasNextPage?: boolean;
   isNextPageLoading?: boolean;
   loadNextPage?:
-    | ((startIndex: number, ...rest: unknown[]) => Promise<void>)
+    | ((
+        startIndex: number,
+        search?: string,
+        ...rest: unknown[]
+      ) => Promise<void>)
     | null;
-  totalItems: number;
+  totalItems?: number;
   isLoading?: boolean;
   searchLoader?: React.ReactNode;
   rowLoader?: React.ReactNode;
@@ -98,8 +102,8 @@ export interface BodyProps {
   withSearch?: boolean;
   onSearch: (value: string) => void;
   onClearSearch: () => void;
-  items: TItem[];
-  onSelect: (item: TItem) => void;
+  items: TSelectorItem[];
+  onSelect?: (item: TSelectorItem) => void;
   isMultiSelect?: boolean;
   withSelectAll?: boolean;
   selectAllLabel?: string;
@@ -159,9 +163,9 @@ export interface FooterProps {
   cancelButtonId?: string;
 }
 
-export type TItem = {
+export type TSelectorItem = {
   key?: string;
-  id?: number | string;
+  id?: string | number;
   label: string;
   avatar?: string;
   icon?: string;
@@ -172,6 +176,7 @@ export type TItem = {
   color?: string;
   fileExst?: string;
   isGroup?: boolean;
+  roomType?: RoomsType;
 };
 
 export interface SearchProps {
@@ -182,8 +187,8 @@ export interface SearchProps {
 }
 
 export type Data = {
-  items: TItem[];
-  onSelect: (item: TItem) => void;
+  items: TSelectorItem[];
+  onSelect?: (item: TSelectorItem) => void;
   isMultiSelect: boolean;
   isItemLoaded: (index: number) => boolean;
   rowLoader: React.ReactNode;

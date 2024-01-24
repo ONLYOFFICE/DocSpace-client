@@ -7,6 +7,7 @@ import Gallery from "../views/Gallery";
 import Accounts from "../views/Accounts";
 import NoItem from "../views/NoItem";
 import SeveralItems from "../views/SeveralItems";
+import Share from "../views/Share";
 import Plugin from "../views/Plugin";
 import Groups from "../views/Groups";
 
@@ -32,6 +33,10 @@ class ViewHelper {
 
   DetailsView = () => {
     return <Details {...this.defaultProps} {...this.detailsProps} />;
+  };
+
+  ShareView = () => {
+    return <Share {...this.defaultProps} />;
   };
 
   AccountsView = () => {

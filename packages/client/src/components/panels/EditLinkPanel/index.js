@@ -14,8 +14,8 @@ import LinkBlock from "./LinkBlock";
 import ToggleBlock from "./ToggleBlock";
 import PasswordAccessBlock from "./PasswordAccessBlock";
 import LimitTimeBlock from "./LimitTimeBlock";
-import { RoomsType } from "@docspace/common/constants";
-import { DeviceType } from "@docspace/common/constants";
+import { RoomsType } from "@docspace/shared/enums";
+import { DeviceType } from "@docspace/shared/enums";
 import moment from "moment";
 
 const EditLinkPanel = (props) => {

@@ -2,7 +2,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
 import uniqueid from "lodash/uniqueId";
 import sumBy from "lodash/sumBy";
-import { ConflictResolveType } from "@docspace/common/constants";
+import { ConflictResolveType } from "@docspace/shared/enums";
 import {
   getFileInfo,
   getFolderInfo,
@@ -16,14 +16,14 @@ import {
   fileCopyAs,
   getFolder,
   checkIsFileExist,
-} from "@docspace/common/api/files";
+} from "@docspace/shared/api/files";
 import { toastr } from "@docspace/shared/components/toast";
 
 import {
   isMobile as isMobileUtils,
   isTablet as isTabletUtils,
 } from "@docspace/shared/utils";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 import { getUnexpectedErrorText } from "SRC_DIR/helpers/filesUtils";
 import {

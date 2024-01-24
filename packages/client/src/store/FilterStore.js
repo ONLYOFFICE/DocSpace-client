@@ -1,7 +1,7 @@
 import { action, makeObservable, observable } from "mobx";
-import Filter from "@docspace/common/api/people/filter";
+import Filter from "@docspace/shared/api/people/filter";
 import config from "PACKAGE_FILE";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 class FilterStore {
   filter = Filter.getDefault();

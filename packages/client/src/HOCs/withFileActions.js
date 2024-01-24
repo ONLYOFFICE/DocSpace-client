@@ -1,7 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 export default function withFileActions(WrappedFileItem) {
   class WithFileActions extends React.Component {
@@ -53,10 +53,12 @@ export default function withFileActions(WrappedFileItem) {
     };
 
     onDrop = (items) => {
-      const { isTrashFolder, dragging, setDragging } = this.props;
+      const { isTrashFolder, dragging, setDragging, isDisabledDropItem } =
+        this.props;
       const { fileExst, id } = this.props.item;
 
-      if (isTrashFolder) return dragging && setDragging(false);
+      if (isTrashFolder || isDisabledDropItem)
+        return dragging && setDragging(false);
 
       if (!fileExst) {
         this.onDropZoneUpload(items, id);
@@ -81,6 +83,7 @@ export default function withFileActions(WrappedFileItem) {
         isSelected,
         setSelection,
         currentDeviceType,
+        isDisabledItemId,
       } = this.props;
 
       const { isThirdPartyFolder } = item;
@@ -200,7 +203,7 @@ export default function withFileActions(WrappedFileItem) {
         item.foldersCount === 0
       ) {
         setParentId(item.parentId);
-        setRoomType(item.roomType);
+        // setRoomType(item.roomType);
       }
 
       openFileAction(item);
@@ -249,10 +252,16 @@ export default function withFileActions(WrappedFileItem) {
 
         itemIndex,
         currentDeviceType,
+        isDisabledDropItem,
       } = this.props;
       const { access, id } = item;
 
-      const isDragging = isFolder && access < 2 && !isTrashFolder && !isPrivacy;
+      const isDragging =
+        !isDisabledDropItem &&
+        isFolder &&
+        access < 2 &&
+        !isTrashFolder &&
+        !isPrivacy;
 
       let className = isDragging ? " droppable" : "";
       if (draggable) className += " draggable";
@@ -364,7 +373,10 @@ export default function withFileActions(WrappedFileItem) {
         (x) => x.id === item.id && x.fileExst === item.fileExst
       );
 
-      const draggable = !isRecycleBinFolder && selectedItem;
+      const isDisabledDropItem = !item.security.Create;
+
+      const draggable =
+        !isRecycleBinFolder && selectedItem && !isDisabledDropItem;
 
       const isFolder = selectedItem ? false : !item.isFolder ? false : true;
 
@@ -448,6 +460,7 @@ export default function withFileActions(WrappedFileItem) {
 
         setSelection,
         currentDeviceType: auth.settingsStore.currentDeviceType,
+        isDisabledDropItem,
       };
     }
   )(observer(WithFileActions));

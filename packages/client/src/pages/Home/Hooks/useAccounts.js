@@ -1,6 +1,6 @@
 import React from "react";
 
-import AccountsFilter from "@docspace/common/api/people/filter";
+import AccountsFilter from "@docspace/shared/api/people/filter";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 

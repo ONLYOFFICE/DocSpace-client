@@ -4,15 +4,15 @@ import { useParams } from "react-router-dom";
 import { Button } from "@docspace/shared/components/button";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import AppLoader from "@docspace/common/components/AppLoader";
-import RoomSelector from "../../components/RoomSelector";
+import RoomSelector from "@docspace/shared/selectors/Room";
 import FilesSelector from "../../components/FilesSelector";
 import {
   frameCallEvent,
   frameCallbackData,
   createPasswordHash,
   frameCallCommand,
-} from "@docspace/common/utils";
-import { RoomsType } from "@docspace/common/constants";
+} from "@docspace/shared/utils/common";
+import { RoomsType } from "@docspace/shared/enums";
 
 const Sdk = ({
   frameConfig,

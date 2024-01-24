@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import { inject, observer } from "mobx-react";
-import { getConvertedSize } from "@docspace/common/utils";
+import { getConvertedSize } from "@docspace/shared/utils/common";
 const StyledBody = styled.div`
   .select-total-size_title {
     margin-bottom: 8px;

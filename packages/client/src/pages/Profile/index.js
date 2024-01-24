@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Section from "@docspace/common/components/Section";
-
+import Section from "@docspace/shared/components/section";
+import SectionWrapper from "SRC_DIR/components/Section";
 import { SectionHeaderContent, SectionBodyContent } from "./Section";
 
 import Dialogs from "../Home/Section/AccountsBody/Dialogs";
@@ -87,7 +87,7 @@ class Profile extends React.Component {
 
     return (
       <>
-        <Section withBodyAutoFocus viewAs="profile">
+        <SectionWrapper withBodyAutoFocus viewAs="profile">
           <Section.SectionHeader>
             <SectionHeaderContent
               profile={profile}
@@ -98,7 +98,7 @@ class Profile extends React.Component {
           <Section.SectionBody>
             <SectionBodyContent profile={profile} />
           </Section.SectionBody>
-        </Section>
+        </SectionWrapper>
         <Dialogs />
       </>
     );

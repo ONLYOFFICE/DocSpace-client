@@ -15,9 +15,10 @@ import SubInfoPanelBody from "./sub-components/info-panel-body";
 import SubInfoPanelHeader from "./sub-components/info-panel-header";
 import SubSectionFooter from "./sub-components/section-footer";
 import SectionWarning from "./sub-components/section-warning";
+import SubSectionSubmenu from "./sub-components/section-submenu";
 
 import { FloatingButton } from "@docspace/shared/components/floating-button";
-import { DeviceType } from "../../constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const Section = (props) => {
   const {
@@ -68,6 +69,7 @@ const Section = (props) => {
   let infoPanelBodyContent = null;
   let infoPanelHeaderContent = null;
   let sectionWarningContent = null;
+  let sectionSubmenuContent = null;
 
   React.Children.forEach(children, (child) => {
     const childType =
@@ -97,6 +99,10 @@ const Section = (props) => {
         break;
       case Section.SectionWarning.displayName:
         sectionWarningContent = child;
+        break;
+      case Section.SectionSubmenu.displayName:
+        sectionSubmenuContent = child;
+        break;
       default:
         break;
     }
@@ -105,6 +111,7 @@ const Section = (props) => {
   const isSectionHeaderAvailable = !!sectionHeaderContent,
     isSectionFilterAvailable = !!sectionFilterContent,
     isSectionPagingAvailable = !!sectionPagingContent,
+    isSectionSubmenuAvailable = !!sectionSubmenuContent,
     isSectionBodyAvailable =
       !!sectionBodyContent ||
       isSectionFilterAvailable ||
@@ -184,6 +191,16 @@ const Section = (props) => {
                     : null}
                 </SubSectionHeader>
               )}
+
+            {isSectionSubmenuAvailable &&
+              currentDeviceType === DeviceType.desktop && (
+                <SubSectionSubmenu>
+                  {sectionSubmenuContent
+                    ? sectionSubmenuContent.props.children
+                    : null}
+                </SubSectionSubmenu>
+              )}
+
             {isSectionFilterAvailable &&
               currentDeviceType === DeviceType.desktop && (
                 <>
@@ -236,6 +253,14 @@ const Section = (props) => {
                         : null}
                     </SectionWarning>
                   )}
+                  {isSectionSubmenuAvailable &&
+                    currentDeviceType !== DeviceType.desktop && (
+                      <SubSectionSubmenu>
+                        {sectionSubmenuContent
+                          ? sectionSubmenuContent.props.children
+                          : null}
+                      </SubSectionSubmenu>
+                    )}
                   {isSectionFilterAvailable &&
                     currentDeviceType !== DeviceType.desktop && (
                       <SubSectionFilter className="section-body_filter">
@@ -367,6 +392,11 @@ Section.SectionWarning = () => {
   return null;
 };
 Section.SectionWarning.displayName = "SectionWarning";
+
+Section.SectionSubmenu = () => {
+  return null;
+};
+Section.SectionSubmenu.displayName = "SectionSubmenu";
 
 Section.propTypes = {
   children: PropTypes.any,

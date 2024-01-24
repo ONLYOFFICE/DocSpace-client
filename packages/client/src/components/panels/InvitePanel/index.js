@@ -8,8 +8,8 @@ import React, {
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { DeviceType } from "@docspace/common/constants";
-import { LOADER_TIMEOUT } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
+import { LOADER_TIMEOUT } from "@docspace/shared/constants";
 
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Aside } from "@docspace/shared/components/aside";

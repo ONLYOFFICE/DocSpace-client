@@ -21,13 +21,14 @@ import AccountsContextOptionsStore from "./AccountsContextOptionsStore";
 import { isMobile, isTablet, isDesktop } from "@docspace/shared/utils";
 
 import { toastr } from "@docspace/shared/components/toast";
-import api from "@docspace/common/api";
+import api from "@docspace/shared/api";
 import {
   EmployeeActivationStatus,
   EmployeeStatus,
   Events,
 } from "@docspace/common/constants";
-import Filter from "@docspace/common/api/people/filter";
+import Filter from "@docspace/shared/api/people/filter";
+// import { EmployeeStatus, Events } from "@docspace/shared/enums";
 
 class PeopleStore {
   contextOptionsStore = null;
@@ -117,7 +118,7 @@ class PeopleStore {
 
     if (users.length > 1) {
       fromType = fromType.filter(
-        (item, index) => fromType.indexOf(item) === index && item !== type,
+        (item, index) => fromType.indexOf(item) === index && item !== type
       );
 
       if (fromType.length === 0) fromType = [fromType[0]];

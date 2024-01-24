@@ -7,7 +7,7 @@ import { Button } from "@docspace/shared/components/button";
 import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 
-import { deletePortal } from "@docspace/common/api/portal";
+import { deletePortal } from "@docspace/shared/api/portal";
 import {
   StyledPage,
   StyledBody,

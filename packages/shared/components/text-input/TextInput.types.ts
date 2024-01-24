@@ -61,5 +61,13 @@ export interface TextInputProps {
   /** Indicates that component contain border */
   withBorder?: boolean;
   dir?: string;
-  inputMode?: string;
+  inputMode?:
+    | "text"
+    | "email"
+    | "search"
+    | "tel"
+    | "url"
+    | "none"
+    | "numeric"
+    | "decimal";
 }

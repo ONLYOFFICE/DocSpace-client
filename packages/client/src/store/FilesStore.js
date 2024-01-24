@@ -1,25 +1,26 @@
 import axios from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
-import api from "@docspace/common/api";
+import api from "@docspace/shared/api";
 import {
   FileType,
   FilterType,
   FolderType,
   FileStatus,
   RoomsType,
-  RoomsTypeValues,
   RoomsProviderType,
   ShareAccessRights,
-} from "@docspace/common/constants";
+} from "@docspace/shared/enums";
 
-import { combineUrl } from "@docspace/common/utils";
-import { updateTempContent } from "@docspace/common/utils";
+import { RoomsTypes } from "@docspace/shared/utils";
+
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { updateTempContent } from "@docspace/shared/utils/common";
 
 import { toastr } from "@docspace/shared/components/toast";
 import config from "PACKAGE_FILE";
 import { thumbnailStatuses } from "@docspace/client/src/helpers/filesConstants";
 import { openDocEditor as openEditor } from "@docspace/client/src/helpers/filesUtils";
-import { getDaysRemaining } from "@docspace/common/utils";
+import { getDaysRemaining } from "@docspace/shared/utils/common";
 
 import {
   getCategoryType,
@@ -274,9 +275,8 @@ class FilesStore {
 
       const foundIndex = fileId && this.files.findIndex((x) => x.id === fileId);
 
-      if (!this.publicRoomStore.isPublicRoom) {
-        this.treeFoldersStore.fetchTreeFolders();
-      }
+      this.treeFoldersStore.fetchTreeFolders();
+
       if (foundIndex == -1) return;
 
       this.updateFileStatus(
@@ -369,9 +369,7 @@ class FilesStore {
       this.setFiles(newFiles);
     });
 
-    if (!this.publicRoomStore.isPublicRoom) {
-      this.debouncefetchTreeFolders();
-    }
+    this.debouncefetchTreeFolders();
   };
 
   debouncefetchTreeFolders = debounce(() => {
@@ -1036,6 +1034,8 @@ class FilesStore {
         return roomType === RoomsType.ReviewRoom;
       case `room-${RoomsType.ReadOnlyRoom}`:
         return roomType === RoomsType.ReadOnlyRoom;
+      case `room-${RoomsType.FormRoom}`:
+        return roomType === RoomsType.FormRoom;
       case `room-${RoomsType.PublicRoom}`:
         return roomType === RoomsType.PublicRoom;
       default:
@@ -1532,6 +1532,7 @@ class FilesStore {
           pathParts: data.pathParts,
           navigationPath,
           ...{ new: data.new },
+          // type,
         });
 
         this.clientLoadingStore.setIsSectionHeaderLoading(false);
@@ -1893,7 +1894,7 @@ class FilesStore {
         "submit-to-gallery",
         "separator-SubmitToGallery",
         "link-for-room-members",
-        // "sharing-settings",
+        "sharing-settings",
         // "external-link",
         "owner-change",
         // "link-for-portal-users",
@@ -1922,6 +1923,7 @@ class FilesStore {
         "separator2",
         // "unsubscribe",
         "delete",
+        "remove-from-recent",
       ];
 
       if (!canDownload) {
@@ -2288,7 +2290,7 @@ class FilesStore {
         "select",
         "open",
         // "separator0",
-        // "sharing-settings",
+        "sharing-settings",
         "link-for-room-members",
         "owner-change",
         "show-info",
@@ -2563,8 +2565,8 @@ class FilesStore {
     return api.rooms.updateRoomMemberRole(id, data);
   }
 
-  getHistory(module, id, signal = null) {
-    return api.rooms.getHistory(module, id, signal);
+  getHistory(module, id, signal = null, requestToken) {
+    return api.rooms.getHistory(module, id, signal, requestToken);
   }
 
   getRoomHistory(id) {
@@ -2994,6 +2996,7 @@ class FilesStore {
 
     const newItem = items.map((item) => {
       const {
+        availableExternalRights,
         access,
         autoDelete,
         originTitle,
@@ -3021,6 +3024,8 @@ class FilesStore {
         rootFolderId,
         shared,
         title,
+        type,
+        hasDraft,
         updated,
         updatedBy,
         version,
@@ -3040,6 +3045,7 @@ class FilesStore {
         viewAccessibility,
         mute,
         inRoom,
+        requestToken,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3058,6 +3064,7 @@ class FilesStore {
       const previewUrl = canOpenPlayer
         ? this.getItemUrl(id, false, needConvert, canOpenPlayer)
         : null;
+
       const contextOptions = this.getFilesContextOptions(item);
       const isThirdPartyFolder = providerKey && id === rootFolderId;
 
@@ -3098,7 +3105,8 @@ class FilesStore {
               providerKey,
               contentLength,
               roomType,
-              isArchive
+              isArchive,
+              type
             );
 
       const defaultRoomIcon = isRoom
@@ -3108,7 +3116,8 @@ class FilesStore {
             providerKey,
             contentLength,
             roomType,
-            isArchive
+            isArchive,
+            type
           )
         : undefined;
 
@@ -3133,6 +3142,7 @@ class FilesStore {
         access === ShareAccessRights.None;
 
       return {
+        availableExternalRights,
         access,
         daysRemaining: autoDelete && getDaysRemaining(autoDelete),
         originTitle,
@@ -3197,8 +3207,11 @@ class FilesStore {
         viewAccessibility,
         ...pluginOptions,
         inRoom,
+        type,
+        hasDraft,
         isForm,
         canCopyPublicLink,
+        requestToken,
       };
     });
 
@@ -3214,8 +3227,8 @@ class FilesStore {
 
     if (this.folders.length) {
       for (const item of this.folders) {
-        if (item.roomType && RoomsTypeValues[item.roomType]) {
-          cbMenu.push(`room-${RoomsTypeValues[item.roomType]}`);
+        if (item.roomType && RoomsTypes[item.roomType]) {
+          cbMenu.push(`room-${RoomsTypes[item.roomType]}`);
         } else {
           cbMenu.push(FilterType.FoldersOnly);
         }
@@ -3243,6 +3256,7 @@ class FilesStore {
         elem !== `room-${RoomsType.CustomRoom}` &&
         elem !== `room-${RoomsType.EditingRoom}` &&
         elem !== `room-${RoomsType.ReviewRoom}` &&
+        elem !== `room-${RoomsType.FormRoom}` &&
         elem !== `room-${RoomsType.ReadOnlyRoom}` &&
         elem !== `room-${RoomsType.PublicRoom}`
     );
@@ -3282,6 +3296,8 @@ class FilesStore {
         return t("CollaborationRooms");
       case `room-${RoomsType.ReviewRoom}`:
         return t("Common:Review");
+      case `room-${RoomsType.FormRoom}`:
+        return t("FormRoom");
       case `room-${RoomsType.ReadOnlyRoom}`:
         return t("ViewOnlyRooms");
       case `room-${RoomsType.PublicRoom}`:
@@ -3531,49 +3547,49 @@ class FilesStore {
   };
 
   getShareUsers(folderIds, fileIds) {
-    return api.files.getShareFiles(fileIds, folderIds);
+    // return api.files.getShareFiles(fileIds, folderIds);
   }
 
-  setShareFiles = (
-    folderIds,
-    fileIds,
-    share,
-    notify,
-    sharingMessage,
-    externalAccess,
-    ownerId
-  ) => {
-    let externalAccessRequest = [];
-    if (fileIds.length === 1 && externalAccess !== null) {
-      externalAccessRequest = fileIds.map((id) =>
-        api.files.setExternalAccess(id, externalAccess)
-      );
-    }
+  // setShareFiles = (
+  //   folderIds,
+  //   fileIds,
+  //   share,
+  //   notify,
+  //   sharingMessage,
+  //   externalAccess,
+  //   ownerId
+  // ) => {
+  //   let externalAccessRequest = [];
+  //   if (fileIds.length === 1 && externalAccess !== null) {
+  //     externalAccessRequest = fileIds.map((id) =>
+  //       api.files.setExternalAccess(id, externalAccess)
+  //     );
+  //   }
 
-    const ownerChangeRequest = ownerId
-      ? [this.setFilesOwner(folderIds, fileIds, ownerId)]
-      : [];
+  //   const ownerChangeRequest = ownerId
+  //     ? [this.setFilesOwner(folderIds, fileIds, ownerId)]
+  //     : [];
 
-    const shareRequest = !!share.length
-      ? [
-          api.files.setShareFiles(
-            fileIds,
-            folderIds,
-            share,
-            notify,
-            sharingMessage
-          ),
-        ]
-      : [];
+  //   const shareRequest = !!share.length
+  //     ? [
+  //         api.files.setShareFiles(
+  //           fileIds,
+  //           folderIds,
+  //           share,
+  //           notify,
+  //           sharingMessage
+  //         ),
+  //       ]
+  //     : [];
 
-    const requests = [
-      ...ownerChangeRequest,
-      ...shareRequest,
-      ...externalAccessRequest,
-    ];
+  //   const requests = [
+  //     ...ownerChangeRequest,
+  //     ...shareRequest,
+  //     ...externalAccessRequest,
+  //   ];
 
-    return Promise.all(requests);
-  };
+  //   return Promise.all(requests);
+  // };
 
   markItemAsFavorite = (id) => api.files.markAsFavorite(id);
 
@@ -3612,7 +3628,8 @@ class FilesStore {
     providerKey = null,
     tab = null,
     url = null,
-    preview = false
+    preview = false,
+    shareKey = null
   ) => {
     const foundIndex = this.files.findIndex((x) => x.id === id);
     const file = foundIndex !== -1 ? this.files[foundIndex] : undefined;
@@ -3629,16 +3646,9 @@ class FilesStore {
     }
 
     const isPrivacy = this.treeFoldersStore.isPrivacyFolder;
+    const share = shareKey ? shareKey : this.publicRoomStore.publicRoomKey;
 
-    return openEditor(
-      id,
-      providerKey,
-      tab,
-      url,
-      isPrivacy,
-      preview,
-      this.publicRoomStore.publicRoomKey
-    );
+    return openEditor(id, providerKey, tab, url, isPrivacy, preview, share);
   };
 
   createThumbnails = async (files = null) => {

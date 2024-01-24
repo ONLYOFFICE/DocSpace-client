@@ -14,7 +14,7 @@ import {
 import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/vertical-dots.react.svg?url";
 import DefaultUserPhotoPngUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import { useTheme } from "styled-components";
-import { DeviceType } from "../../../constants";
+import { DeviceType } from "@docspace/shared/enums";
 const ArticleProfile = (props) => {
   const {
     user,

@@ -12,7 +12,6 @@ import { TTranslation } from "../../types";
 
 import { RoomSelectorProps } from "./RoomSelector.types";
 import { convertToItems } from "./RoomSelector.utils";
-import { RoomsType } from "../../enums";
 
 const PAGE_COUNT = 100;
 

@@ -1,11 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
-import { Button } from "@docspace/shared/components/button";
-import { HexColorPicker, HexColorInput } from "react-colorful";
 import { isMobileOnly } from "react-device-detect";
 
-const StyledComponent = styled.div`
+const Wrapper = styled.div`
   .save-button {
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
@@ -112,55 +108,4 @@ const StyledComponent = styled.div`
   }
 `;
 
-const HexColorPickerComponent = (props) => {
-  const { onCloseHexColorPicker, onAppliedColor, appliedColor } = props;
-
-  const [color, setColor] = useState(appliedColor);
-
-  const { t } = useTranslation("Common");
-
-  useEffect(() => {
-    if (color !== appliedColor) {
-      setColor(appliedColor);
-    }
-  }, [appliedColor]);
-
-  return (
-    <StyledComponent>
-      <div className="hex-color-picker">
-        <div className="hex-value-container">
-          <div className="hex-value-label">Hex code:</div>
-
-          <HexColorInput
-            className="hex-value"
-            prefixed
-            color={color.toUpperCase()}
-            onChange={setColor}
-          />
-        </div>
-
-        <HexColorPicker color={color.toUpperCase()} onChange={setColor} />
-
-        <div className="hex-button">
-          <Button
-            label={t("Common:ApplyButton")}
-            size="small"
-            className="apply-button"
-            primary={true}
-            scale={true}
-            onClick={() => onAppliedColor(color)}
-          />
-          <Button
-            label={t("Common:CancelButton")}
-            className="cancel-button button"
-            size="small"
-            scale={true}
-            onClick={onCloseHexColorPicker}
-          />
-        </div>
-      </div>
-    </StyledComponent>
-  );
-};
-
-export default HexColorPickerComponent;
+export default Wrapper;

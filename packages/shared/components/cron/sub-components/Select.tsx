@@ -78,10 +78,10 @@ export const Select = ({
 
   return (
     <SelectWrapper>
-      <span>{prefix}</span>
+      {prefix && <span>{prefix}</span>}
       <ComboBox
+        scaled
         scaledOptions
-        scaled={false}
         noBorder={false}
         showDisabledItems
         options={options}

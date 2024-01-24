@@ -19,7 +19,7 @@ import {
 import { getCronStringFromValues, stringToArray } from "./Cron.part";
 import { defaultCronString, defaultPeriod } from "./Cron.constants";
 import { getPeriodFromCronParts, getUnits } from "./Cron.utils";
-import { CronWrapper, Suffix } from "./Cron.styled";
+import { CronWrapper, Suffix, Wrapper } from "./Cron.styled";
 
 import type { PeriodType, CronProps } from "./Cron.types";
 
@@ -140,26 +140,27 @@ const Cron = ({ value = defaultCronString, setValue, onError }: CronProps) => {
           t={t}
           unit={units[4]}
           isWeek={isWeek}
-          period={period}
           monthDays={monthDays}
           weekDays={weekDays}
           setWeekDays={setWeekDays}
         />
       )}
-      {!isHour && !isMinute && (
-        <Hours unit={units[1]} t={t} hours={hours} setHours={setHours} />
-      )}
+      <Wrapper>
+        {!isHour && !isMinute && (
+          <Hours unit={units[1]} t={t} hours={hours} setHours={setHours} />
+        )}
 
-      {!isMinute && (
-        <Minutes
-          t={t}
-          unit={units[0]}
-          period={period}
-          minutes={minutes}
-          setMinutes={setMinutes}
-        />
-      )}
-      <Suffix>{t("Common:UTC")}</Suffix>
+        {!isMinute && (
+          <Minutes
+            t={t}
+            unit={units[0]}
+            period={period}
+            minutes={minutes}
+            setMinutes={setMinutes}
+          />
+        )}
+        <Suffix>{t("Common:UTC")}</Suffix>
+      </Wrapper>
     </CronWrapper>
   );
 };

@@ -132,10 +132,7 @@ const DefaultTemplate = ({ defaultValue, locale }: Record<string, string>) => {
       {date && (
         <p>
           <strong>Next synchronization: </strong>{" "}
-          {date
-            .toUTC()
-            .setLocale(locale ?? "en")
-            .toFormat("DDDD tt")}
+          {date.setLocale(locale ?? "en").toFormat("DDDD tt")}
         </p>
       )}
     </div>

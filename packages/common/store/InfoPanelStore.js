@@ -363,8 +363,10 @@ class InfoPanelStore {
 
   setInfoPanelSelection = (infoPanelSelection) => {
     if (
-      this.infoPanelSelection?.id === infoPanelSelection?.id &&
-      this.infoPanelSelection?.isFolder === infoPanelSelection?.isFolder
+      this.infoPanelSelection &&
+      infoPanelSelection &&
+      this.infoPanelSelection.id === infoPanelSelection.id &&
+      this.infoPanelSelection.isFolder === infoPanelSelection.isFolder
     ) {
       return;
     }

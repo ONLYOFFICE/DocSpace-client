@@ -225,6 +225,7 @@ const FilesSelector = ({
           isRoom:
             item.parentId === 0 && item.rootFolderType === FolderType.Rooms,
           roomType: item.roomType,
+          shared: item.shared,
         },
       ]);
       setSelectedItemId(item.id);

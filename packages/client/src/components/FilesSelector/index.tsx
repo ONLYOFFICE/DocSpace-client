@@ -365,7 +365,7 @@ const FilesSelector = ({
     onCloseAction();
   };
 
-  const onSearchAction = (value: string) => {
+  const onSearchAction = (value: string, callback?: Function) => {
     setIsFirstLoad(true);
     setItems(null);
     if (selectedItemType === "rooms") {
@@ -375,9 +375,10 @@ const FilesSelector = ({
     }
 
     setSearchValue(value);
+    callback?.();
   };
 
-  const onClearSearchAction = () => {
+  const onClearSearchAction = (callback?: Function) => {
     setIsFirstLoad(true);
     setItems(null);
     if (selectedItemType === "rooms") {
@@ -387,6 +388,7 @@ const FilesSelector = ({
     }
 
     setSearchValue("");
+    callback?.();
   };
 
   const onAcceptAction = (

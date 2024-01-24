@@ -620,10 +620,8 @@ class ContextOptionsStore {
   };
 
   onShowInfoPanel = (item, view) => {
-    const { setInfoPanelSelection, setIsVisible, setView } =
-      this.authStore.infoPanelStore;
+    const { setIsVisible, setView } = this.authStore.infoPanelStore;
 
-    setInfoPanelSelection(item);
     setIsVisible(true);
     view && setView(view);
   };

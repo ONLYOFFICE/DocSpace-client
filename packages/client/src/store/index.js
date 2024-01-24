@@ -5,6 +5,7 @@ import {
   bannerStore,
   currentTariffStatusStore,
   currentQuotaStore,
+  paymentQuotasStore,
 } from "@docspace/common/store/AuthStore";
 import PaymentStore from "./PaymentStore";
 import WizardStore from "./WizardStore";
@@ -55,7 +56,8 @@ const pluginStore = new PluginStore(authStore, selectedFolderStore, userStore);
 const paymentStore = new PaymentStore(
   userStore,
   currentTariffStatusStore,
-  currentQuotaStore
+  currentQuotaStore,
+  paymentQuotasStore
 );
 const wizardStore = new WizardStore();
 const setupStore = new SettingsSetupStore(tfaStore);
@@ -238,6 +240,7 @@ const store = {
   bannerStore,
   currentTariffStatusStore,
   currentQuotaStore,
+  paymentQuotasStore,
 
   payments: paymentStore,
   wizard: wizardStore,

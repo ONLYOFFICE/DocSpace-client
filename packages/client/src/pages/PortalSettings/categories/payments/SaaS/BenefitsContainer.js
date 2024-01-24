@@ -62,8 +62,8 @@ const BenefitsContainer = ({ t, features, theme }) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { paymentQuotasStore, settingsStore } = auth;
+export default inject(({ auth, paymentQuotasStore }) => {
+  const { settingsStore } = auth;
   const { theme } = settingsStore;
   const { portalPaymentQuotasFeatures } = paymentQuotasStore;
 

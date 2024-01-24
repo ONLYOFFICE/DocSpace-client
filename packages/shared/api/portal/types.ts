@@ -35,3 +35,24 @@ export type TPortalQuota = {
   trial: boolean;
   features: TFeature[];
 };
+
+export type TPaymentFeature = {
+  id: string;
+  value: number | boolean;
+  type: string;
+  priceTitle?: string;
+  image?: string;
+};
+
+export type TPaymentQuota = {
+  id: number;
+  title: string;
+  price: {
+    value: string;
+    currencySymbol: string;
+  };
+  nonProfit: boolean;
+  free: boolean;
+  trial: boolean;
+  features: TPaymentFeature[];
+};

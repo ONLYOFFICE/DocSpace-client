@@ -11,8 +11,6 @@ import {
 import { isAdmin } from "@docspace/shared/utils/common";
 import { getCookie, setCookie } from "@docspace/shared/utils/cookie";
 
-import PaymentQuotasStore from "./PaymentQuotasStore";
-
 import { TenantStatus } from "@docspace/shared/enums";
 import { COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
 import { LANGUAGE } from "@docspace/shared/constants";
@@ -23,6 +21,7 @@ import { TfaStore } from "@docspace/shared/store/TfaStore";
 import { BannerStore } from "@docspace/shared/store/BannerStore";
 import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
+import { PaymentQuotasStore } from "@docspace/shared/store/PaymentQuotasStore";
 
 import { loginWithTfaCode } from "@docspace/shared/api/user";
 
@@ -30,6 +29,7 @@ export const userStore = new UserStore();
 export const tfaStore = new TfaStore();
 export const bannerStore = new BannerStore();
 export const currentQuotaStore = new CurrentQuotasStore();
+export const paymentQuotasStore = new PaymentQuotasStore();
 
 class AuthStore {
   userStore = null;
@@ -54,8 +54,6 @@ class AuthStore {
     this.currentQuotaStore = currentQuotaStore;
 
     this.settingsStore = new SettingsStore();
-
-    this.paymentQuotasStore = new PaymentQuotasStore();
 
     makeAutoObservable(this);
 

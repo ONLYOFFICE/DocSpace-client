@@ -123,8 +123,7 @@ const TotalTariffContainer = ({
   );
 };
 
-export default inject(({ auth, payments }) => {
-  const { paymentQuotasStore } = auth;
+export default inject(({ auth, payments, paymentQuotasStore }) => {
   const { theme } = auth.settingsStore;
   const { isLoading, totalPrice, isNeedRequest, maxAvailableManagersCount } =
     payments;

@@ -49,8 +49,8 @@ const CurrentUsersCountContainer = (props) => {
   );
 };
 
-export default inject(({ auth, currentQuotaStore }) => {
-  const { settingsStore, paymentQuotasStore } = auth;
+export default inject(({ auth, currentQuotaStore, paymentQuotasStore }) => {
+  const { settingsStore } = auth;
   const { maxCountManagersByQuota } = currentQuotaStore;
   const { addedManagersCountTitle } = paymentQuotasStore;
   const { theme } = settingsStore;

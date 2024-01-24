@@ -176,40 +176,41 @@ const PriceCalculation = ({
   );
 };
 
-export default inject(({ auth, payments, currentTariffStatusStore }) => {
-  const {
-    tariffsInfo,
-    setIsLoading,
-    setManagersCount,
-    maxAvailableManagersCount,
+export default inject(
+  ({ auth, payments, paymentQuotasStore, currentTariffStatusStore }) => {
+    const {
+      tariffsInfo,
+      setIsLoading,
+      setManagersCount,
+      maxAvailableManagersCount,
 
-    managersCount,
-    isAlreadyPaid,
-    getPaymentLink,
-    canUpdateTariff,
-  } = payments;
-  const { theme } = auth.settingsStore;
-  const { paymentQuotasStore } = auth;
+      managersCount,
+      isAlreadyPaid,
+      getPaymentLink,
+      canUpdateTariff,
+    } = payments;
+    const { theme } = auth.settingsStore;
 
-  const { planCost } = paymentQuotasStore;
-  const { isNotPaidPeriod, isGracePeriod } = currentTariffStatusStore;
+    const { planCost } = paymentQuotasStore;
+    const { isNotPaidPeriod, isGracePeriod } = currentTariffStatusStore;
 
-  return {
-    canUpdateTariff,
-    isAlreadyPaid,
-    managersCount,
+    return {
+      canUpdateTariff,
+      isAlreadyPaid,
+      managersCount,
 
-    setManagersCount,
-    tariffsInfo,
-    theme,
-    setIsLoading,
-    maxAvailableManagersCount,
+      setManagersCount,
+      tariffsInfo,
+      theme,
+      setIsLoading,
+      maxAvailableManagersCount,
 
-    isGracePeriod,
-    isNotPaidPeriod,
+      isGracePeriod,
+      isNotPaidPeriod,
 
-    priceManagerPerMonth: planCost.value,
-    currencySymbol: planCost.currencySymbol,
-    getPaymentLink,
-  };
-})(observer(PriceCalculation));
+      priceManagerPerMonth: planCost.value,
+      currencySymbol: planCost.currencySymbol,
+      getPaymentLink,
+    };
+  }
+)(observer(PriceCalculation));

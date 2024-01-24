@@ -82,12 +82,8 @@ const BenefitsContainer = ({ isTrial, isEnterprise }) => {
   );
 };
 
-export default inject(({ auth, currentQuotaStore }) => {
-  const {
-    paymentQuotasStore,
-
-    isEnterprise,
-  } = auth;
+export default inject(({ auth, currentQuotaStore, paymentQuotasStore }) => {
+  const { isEnterprise } = auth;
 
   const { portalPaymentQuotasFeatures } = paymentQuotasStore;
 

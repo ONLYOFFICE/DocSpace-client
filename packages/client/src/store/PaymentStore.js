@@ -15,6 +15,7 @@ class PaymentStore {
   userStore = null;
   currentTariffStatusStore = null;
   currentQuotaStore = null;
+  paymentQuotasStore = null;
 
   salesEmail = "";
   helpUrl = "https://helpdesk.onlyoffice.com";
@@ -41,10 +42,16 @@ class PaymentStore {
   isInitPaymentPage = false;
   isLicenseCorrect = false;
 
-  constructor(userStore, currentTariffStatusStore, currentQuotaStore) {
+  constructor(
+    userStore,
+    currentTariffStatusStore,
+    currentQuotaStore,
+    paymentQuotasStore
+  ) {
     this.userStore = userStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.currentQuotaStore = currentQuotaStore;
+    this.paymentQuotasStore = paymentQuotasStore;
 
     makeAutoObservable(this);
   }
@@ -95,10 +102,9 @@ class PaymentStore {
       return;
     }
 
-    const { paymentQuotasStore } = authStore;
     const { setPayerInfo } = this.currentTariffStatusStore;
     const { addedManagersCount } = this.currentQuotaStore;
-    const { setPortalPaymentQuotas } = paymentQuotasStore;
+    const { setPortalPaymentQuotas } = this.paymentQuotasStore;
 
     const requests = [this.getSettingsPayment(), setPortalPaymentQuotas()];
 
@@ -281,7 +287,7 @@ class PaymentStore {
   };
 
   getTotalCostByFormula = (value) => {
-    const costValuePerManager = authStore.paymentQuotasStore.planCost.value;
+    const costValuePerManager = this.paymentQuotasStore.planCost.value;
     return value * costValuePerManager;
   };
 
@@ -385,9 +391,8 @@ class PaymentStore {
   }
 
   setRangeStepByQuota = () => {
-    const { paymentQuotasStore } = authStore;
     const { stepAddingQuotaManagers, stepAddingQuotaTotalSize } =
-      paymentQuotasStore;
+      this.paymentQuotasStore;
 
     this.stepByQuotaForManager = stepAddingQuotaManagers;
     this.minAvailableManagersValue = this.stepByQuotaForManager;

@@ -38,12 +38,12 @@ const getRoomLogo = (roomType) => {
 
 const convertToItems = (folders) => {
   const items = folders.map((folder) => {
-    const { id, title, roomType, logo } = folder;
+    const { id, title, roomType, logo, shared } = folder;
 
     const icon = logo.medium ? logo.medium : getRoomLogo(roomType);
     const color = logo.color;
 
-    return { id, label: title, icon, color, logo, roomType };
+    return { id, label: title, icon, color, logo, roomType, shared };
   });
 
   return items;

@@ -1,4 +1,4 @@
-import { SelectorProps } from "@docspace/shared/components/selector/Selector.types";
+import { SelectorProps, TSelectorItem } from "../../components/selector";
 
 type PickedSelectorProps = Pick<
   SelectorProps,
@@ -6,6 +6,7 @@ type PickedSelectorProps = Pick<
   | "headerLabel"
   | "className"
   | "onBackClick"
+  | "onCancel"
   | "isMultiSelect"
   | "cancelButtonLabel"
   | "emptyScreenDescription"
@@ -20,11 +21,8 @@ type PickedSelectorProps = Pick<
 >;
 
 export interface GroupsSelectorProps extends PickedSelectorProps {
-  onAccept?: (items: GroupsSelectorItem) => void;
+  onAccept?: (items: GroupsSelectorItem[]) => void;
   onSelect?: (item: GroupsSelectorItem) => void;
 }
 
-export interface GroupsSelectorItem {
-  id: string;
-  label: string;
-}
+export type GroupsSelectorItem = Pick<TSelectorItem, "id" | "label">;

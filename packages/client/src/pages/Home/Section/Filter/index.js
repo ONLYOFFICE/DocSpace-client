@@ -51,7 +51,7 @@ const getAccountLoginType = (filterValues) => {
     find(filterValues, (value) => {
       return value.group === "filter-login-type";
     }),
-    "key"
+    "key",
   );
 
   return accountLoginType || null;
@@ -62,7 +62,7 @@ const getFilterType = (filterValues) => {
     find(filterValues, (value) => {
       return value.group === FilterGroups.filterType;
     }),
-    "key"
+    "key",
   );
 
   return filterType?.toString() ? +filterType : null;
@@ -73,7 +73,7 @@ const getSubjectFilter = (filterValues) => {
     find(filterValues, (value) => {
       return value.group === FilterGroups.roomFilterOwner;
     }),
-    "key"
+    "key",
   );
 
   return subjectFilter?.toString() ? subjectFilter?.toString() : null;
@@ -84,7 +84,7 @@ const getAuthorType = (filterValues) => {
     find(filterValues, (value) => {
       return value.group === FilterGroups.filterAuthor;
     }),
-    "key"
+    "key",
   );
 
   return authorType ? authorType : null;
@@ -95,7 +95,7 @@ const getRoomId = (filterValues) => {
     find(filterValues, (value) => {
       return value.group === FilterGroups.filterRoom;
     }),
-    "key"
+    "key",
   );
 
   return filterRoomId || null;
@@ -106,7 +106,7 @@ const getSearchParams = (filterValues) => {
     find(filterValues, (value) => {
       return value.group === FilterGroups.filterFolders;
     }),
-    "key"
+    "key",
   );
 
   return searchParams || FilterKeys.excludeSubfolders;
@@ -114,7 +114,7 @@ const getSearchParams = (filterValues) => {
 
 const getType = (filterValues) => {
   const filterType = filterValues.find(
-    (value) => value.group === FilterGroups.roomFilterType
+    (value) => value.group === FilterGroups.roomFilterType,
   )?.key;
 
   const type = filterType;
@@ -124,7 +124,7 @@ const getType = (filterValues) => {
 
 const getProviderType = (filterValues) => {
   const filterType = filterValues.find(
-    (value) => value.group === FilterGroups.roomFilterProviderType
+    (value) => value.group === FilterGroups.roomFilterProviderType,
   )?.key;
 
   const type = filterType;
@@ -137,7 +137,7 @@ const getSubjectId = (filterValues) => {
     find(filterValues, (value) => {
       return value.group === FilterGroups.roomFilterSubject;
     }),
-    "key"
+    "key",
   );
 
   return filterOwner ? filterOwner : null;
@@ -148,7 +148,7 @@ const getStatus = (filterValues) => {
     find(filterValues, (value) => {
       return value.group === "filter-status";
     }),
-    "key"
+    "key",
   );
 
   return employeeStatus ? +employeeStatus : null;
@@ -159,7 +159,7 @@ const getRole = (filterValues) => {
     find(filterValues, (value) => {
       return value.group === "filter-type";
     }),
-    "key"
+    "key",
   );
 
   return employeeStatus || null;
@@ -170,7 +170,7 @@ const getPayments = (filterValues) => {
     find(filterValues, (value) => {
       return value.group === "filter-account";
     }),
-    "key"
+    "key",
   );
 
   return employeeStatus || null;
@@ -184,7 +184,7 @@ const getGroup = (filterValues) => {
         value.key !== FilterKeys.withoutGroup
       );
     }),
-    "key"
+    "key",
   );
 
   return groupId || null;
@@ -199,7 +199,7 @@ const getFilterContent = (filterValues) => {
     find(filterValues, (value) => {
       return value.group === FilterGroups.filterContent;
     }),
-    "key"
+    "key",
   );
 
   return filterContent ? filterContent : null;
@@ -207,7 +207,7 @@ const getFilterContent = (filterValues) => {
 
 const getTags = (filterValues) => {
   const filterTags = filterValues.find(
-    (value) => value.group === FilterGroups.roomFilterTags
+    (value) => value.group === FilterGroups.roomFilterTags,
   )?.key;
 
   const tags = filterTags?.length > 0 ? filterTags : null;
@@ -415,7 +415,7 @@ const SectionFilterContent = ({
 
       isAccountsPage,
       location.pathname,
-    ]
+    ],
   );
 
   const onClearFilter = useCallback(() => {
@@ -504,7 +504,7 @@ const SectionFilterContent = ({
       roomsFilter,
       accountsFilter,
       location.pathname,
-    ]
+    ],
   );
 
   const onSort = React.useCallback(
@@ -524,7 +524,7 @@ const SectionFilterContent = ({
       setIsLoading(true);
 
       if (isAccountsPage) {
-        navigate(`accounts/filter?${newFilter.toUrlParams()}`);
+        navigate(`accounts/people/filter?${newFilter.toUrlParams()}`);
       } else if (isRooms) {
         const path =
           newFilter.searchArea === RoomSearchArea.Active
@@ -538,7 +538,14 @@ const SectionFilterContent = ({
         onNavigate(path, newFilter);
       }
     },
-    [isRooms, isAccountsPage, setIsLoading, filter, roomsFilter, accountsFilter]
+    [
+      isRooms,
+      isAccountsPage,
+      setIsLoading,
+      filter,
+      roomsFilter,
+      accountsFilter,
+    ],
   );
 
   const onChangeViewAs = React.useCallback(
@@ -557,7 +564,7 @@ const SectionFilterContent = ({
         setViewAs(view);
       }
     },
-    [sectionWidth, infoPanelVisible, setViewAs, currentDeviceType]
+    [sectionWidth, infoPanelVisible, setViewAs, currentDeviceType],
   );
 
   const getSelectedInputValue = React.useCallback(() => {
@@ -739,7 +746,7 @@ const SectionFilterContent = ({
         });
 
         const newItems = filterValues.filter(
-          (v) => !items.find((i) => i.group === v.group)
+          (v) => !items.find((i) => i.group === v.group),
         );
 
         items.push(...newItems);
@@ -960,7 +967,7 @@ const SectionFilterContent = ({
       });
 
       const newItems = filterValues.filter(
-        (v) => !items.find((i) => i.group === v.group)
+        (v) => !items.find((i) => i.group === v.group),
       );
 
       items.push(...newItems);
@@ -1470,7 +1477,7 @@ const SectionFilterContent = ({
       if (connectedThirdParty.length > 0) {
         const thirdPartyOptions = connectedThirdParty.map((thirdParty) => {
           const key = Object.entries(RoomsProviderType).find(
-            (item) => item[0] === thirdParty
+            (item) => item[0] === thirdParty,
           )[1];
 
           const label = ROOMS_PROVIDER_TYPE_NAME[key];
@@ -2047,7 +2054,14 @@ const SectionFilterContent = ({
         onNavigate(path, newFilter);
       }
     },
-    [isRooms, isAccountsPage, setIsLoading, roomsFilter, filter, accountsFilter]
+    [
+      isRooms,
+      isAccountsPage,
+      setIsLoading,
+      roomsFilter,
+      filter,
+      accountsFilter,
+    ],
   );
 
   const onSortButtonClick = (isOpen) => {
@@ -2232,7 +2246,7 @@ export default inject(
       standalone,
       currentDeviceType,
     };
-  }
+  },
 )(
   withLayoutSize(
     withTranslation([
@@ -2245,6 +2259,6 @@ export default inject(
       "PeopleTranslations",
       "ConnectDialog",
       "SmartBanner",
-    ])(observer(SectionFilterContent))
-  )
+    ])(observer(SectionFilterContent)),
+  ),
 );

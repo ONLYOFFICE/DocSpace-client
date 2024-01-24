@@ -1,10 +1,9 @@
 // import axios from "axios";
-import Filter from "./filter";
 import { Encoder } from "@docspace/shared/utils/encoder";
-import { AccountsSearchArea } from "@docspace/shared/constants";
-
+import { AccountsSearchArea } from "@docspace/shared/enums";
 import { checkFilterInstance } from "@docspace/shared/utils/common";
 
+import Filter from "./filter";
 import { request } from "../client";
 
 import { TGetUserList } from "./types";
@@ -402,6 +401,6 @@ export function getPeopleWithGroups(filter = Filter.getDefault()) {
 
   return request({
     method: "get",
-    url: `/accounts?filter/searchArea=${AccountsSearchArea.Any}&${params}`,
+    url: `/accounts/search?${params}`,
   });
 }

@@ -369,6 +369,7 @@ export const enum FilterGroups {
   roomFilterTags = "filter-tags",
   roomFilterFolders = "filter-withSubfolders",
   roomFilterContent = "filter-content",
+  filterGroup = "filter-group",
 }
 
 export const enum FilterKeys {
@@ -378,6 +379,8 @@ export const enum FilterKeys {
   me = "me",
   other = "other",
   user = "user",
+  withoutGroup = "withoutGroup",
+  selectedGroup = "selectedGroup",
 }
 
 export const enum IndexedDBStores {
@@ -387,6 +390,7 @@ export const enum IndexedDBStores {
 export const enum FilterSelectorTypes {
   people = "people-selector",
   rooms = "rooms-selector",
+  groups = "groups-selector",
 }
 
 export const enum DeviceType {
@@ -429,4 +433,10 @@ export enum RoomsType {
   // ReadOnlyRoom: 4, //TODO: Restore when certs will be done
   PublicRoom = 6,
   CustomRoom = 5,
+}
+
+export enum AccountsSearchArea {
+  People = "0",
+  Groups = "1",
+  Any = "2",
 }

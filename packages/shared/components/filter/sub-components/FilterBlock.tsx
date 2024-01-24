@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 
 import ClearReactSvgUrl from "PUBLIC_DIR/images/clear.react.svg?url";
 
+import GroupsSelector from "../../../selectors/Groups";
 import PeopleSelector from "../../../selectors/People";
 import RoomSelector from "../../../selectors/Room";
 import { FilterGroups, FilterSelectorTypes } from "../../../enums";
@@ -454,6 +455,13 @@ const FilterBlock = ({
               onBackClick={onArrowClick}
               headerLabel={selectorLabel}
               currentUserId={userId}
+            />
+          ) : showSelector.type === FilterSelectorTypes.groups ? (
+            <GroupsSelector
+              className="group-selector"
+              onAccept={selectOption}
+              onBackClick={onArrowClick}
+              headerLabel={selectorLabel}
             />
           ) : (
             <RoomSelector

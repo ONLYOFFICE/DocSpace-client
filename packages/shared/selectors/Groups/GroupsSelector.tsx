@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import api from "@docspace/shared/api";
 import EmptyScreenGroupsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
-// @ts-ignore
-import Loaders from "@docspace/common/components/Loaders";
-import { Selector } from "@docspace/shared/components/selector";
+
+import api from "../../api";
+import { RowLoader, SearchLoader } from "../../skeletons/selector";
+import { Selector, TSelectorItem } from "../../components/selector";
 
 import {
   GroupsSelectorItem,
   GroupsSelectorProps,
 } from "./GroupsSelector.types";
 
-export const GroupsSelector = (props: GroupsSelectorProps) => {
+const GroupsSelector = (props: GroupsSelectorProps) => {
   const {
     id,
 
@@ -24,13 +24,14 @@ export const GroupsSelector = (props: GroupsSelectorProps) => {
     isMultiSelect,
     onBackClick,
     onAccept,
+    onCancel,
+    onSelect,
     withCancelButton,
     withHeader,
     searchEmptyScreenDescription,
     searchEmptyScreenHeader,
     searchEmptyScreenImage,
     searchPlaceholder,
-    ...rest
   } = props;
 
   const { t } = useTranslation(["GroupsSelector", "Common"]);
@@ -59,25 +60,17 @@ export const GroupsSelector = (props: GroupsSelectorProps) => {
     });
   };
 
-  const onSelectAction = () => {};
-
-  const onCancelAction = () => {};
-
-  const onAcceptAction = (
-    items: any,
-    accessRights: any,
-    fileName: string,
-    isChecked: boolean
-  ) => {
-    onAccept && onAccept(items);
+  const onAcceptAction = (items: TSelectorItem[]) => {
+    onAccept?.(items);
   };
 
   const onLoadNextPage = async (startIndex: number) => {
     setIsNextPageLoading(true);
 
-    const { items, total, count } = await api.groups.getGroupsByName(
+    // Todo: fix types after TS API will be done
+    const { items, total } = await api.groups.getGroupsByName(
       searchValue,
-      startIndex
+      startIndex,
     );
 
     const convertedItems = items.map((group: any) => ({
@@ -90,7 +83,6 @@ export const GroupsSelector = (props: GroupsSelectorProps) => {
     const newItems = [...oldItems, ...convertedItems];
 
     setHasNextPage(newItems.length < total);
-    console.log(newItems.length);
 
     setItemsList(newItems);
     if (isFirstLoad) {
@@ -118,14 +110,14 @@ export const GroupsSelector = (props: GroupsSelectorProps) => {
       onSearch={onSearchAction}
       searchValue={searchValue}
       onClearSearch={onClearSearchAction}
-      onSelect={onSelectAction}
+      onSelect={onSelect}
       items={itemsList || []}
       acceptButtonLabel={t("Common:SelectAction")}
       onAccept={onAcceptAction}
       withHeader={withHeader}
       withCancelButton={withCancelButton}
       cancelButtonLabel={cancelButtonLabel || t("Common:CancelButton")}
-      onCancel={onCancelAction}
+      onCancel={onCancel}
       isMultiSelect={isMultiSelect}
       emptyScreenImage={emptyScreenImage || EmptyScreenGroupsSvgUrl}
       emptyScreenHeader={emptyScreenHeader || t("GroupsNotFoundHeader")} // Todo: Update empty screen texts when they are ready
@@ -144,9 +136,9 @@ export const GroupsSelector = (props: GroupsSelectorProps) => {
       isNextPageLoading={isNextPageLoading}
       loadNextPage={onLoadNextPage}
       isLoading={isFirstLoad}
-      searchLoader={<Loaders.SelectorSearchLoader />}
+      searchLoader={<SearchLoader />}
       rowLoader={
-        <Loaders.SelectorRowLoader
+        <RowLoader
           isMultiSelect={isMultiSelect}
           isContainer={isFirstLoad}
           isUser={false}
@@ -155,3 +147,5 @@ export const GroupsSelector = (props: GroupsSelectorProps) => {
     />
   );
 };
+
+export default GroupsSelector;

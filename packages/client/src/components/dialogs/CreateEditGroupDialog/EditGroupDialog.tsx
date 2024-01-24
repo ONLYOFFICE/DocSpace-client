@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { GroupParams } from "./types";
-import { createGroup, updateGroup } from "@docspace/common/api/groups";
+import { createGroup, updateGroup } from "@docspace/shared/api/groups";
 
 import GroupNameParam from "./sub-components/GroupNameParam";
 import HeadOfGroup from "./sub-components/HeadOfGroupParam";
@@ -60,7 +60,7 @@ const EditGroupDialog = ({
       group.id,
       groupParams.groupName,
       groupManagerId,
-      groupMemebersIds,
+      groupMemebersIds
     )
       .then(() => {
         navigate("/accounts/groups/filter");

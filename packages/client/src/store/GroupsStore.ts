@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import api from "@docspace/common/api";
+import * as groupsApi from "@docspace/shared/api/groups";
 
 class GroupsStore {
   peopleStore;
@@ -16,12 +16,12 @@ class GroupsStore {
   setCurrentGroup = (currentGroup) => (this.currentGroup = currentGroup);
 
   getGroups = async () => {
-    const res = await api.groups.getGroups();
+    const res = await groupsApi.getGroups();
     this.groups = res;
   };
 
   getGroupById = async (groupId) => {
-    const res = await api.groups.getGroupById(groupId);
+    const res = await groupsApi.getGroupById(groupId);
     return res;
   };
 

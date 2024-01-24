@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import * as Styled from "./index.styled";
 import { Link } from "@docspace/shared/components/link";
-import { Events } from "@docspace/common/constants";
+import { Events } from "@docspace/shared/constants";
 
 const GroupsRow = ({
   item,

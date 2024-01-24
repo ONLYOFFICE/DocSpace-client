@@ -10,7 +10,7 @@ import { observer, inject } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { GroupParams } from "./types";
-import { createGroup } from "@docspace/common/api/groups";
+import { createGroup } from "@docspace/shared/api/groups";
 import GroupNameParam from "./sub-components/GroupNameParam";
 import HeadOfGroup from "./sub-components/HeadOfGroupParam";
 import MembersParam from "./sub-components/MembersParam";

@@ -1,4 +1,4 @@
-import { ShareAccessRights } from "@docspace/common/constants";
+import { ShareAccessRights } from "@docspace/shared/constants";
 import AddUsersPanel from "../../../../panels/AddUsersPanel";
 import { getAccessOptions } from "../../../../panels/InvitePanel/utils";
 import { useTranslation } from "react-i18next";

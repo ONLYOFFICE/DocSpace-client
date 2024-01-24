@@ -11,7 +11,7 @@ import withContent from "SRC_DIR/HOCs/withPeopleContent";
 
 import Badges from "../../Badges";
 import { Base } from "@docspace/shared/themes";
-import { Events } from "@docspace/common/constants";
+import { Events } from "@docspace/shared/constants";
 
 const StyledWrapper = styled.div`
   display: contents;

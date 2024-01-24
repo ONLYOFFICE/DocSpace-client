@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import api from "@docspace/common/api";
+import api from "@docspace/shared/api";
 import EmptyScreenGroupsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
 // @ts-ignore
 import Loaders from "@docspace/common/components/Loaders";
@@ -67,7 +67,7 @@ export const GroupsSelector = (props: GroupsSelectorProps) => {
     items: any,
     accessRights: any,
     fileName: string,
-    isChecked: boolean,
+    isChecked: boolean
   ) => {
     onAccept && onAccept(items);
   };
@@ -77,7 +77,7 @@ export const GroupsSelector = (props: GroupsSelectorProps) => {
 
     const { items, total, count } = await api.groups.getGroupsByName(
       searchValue,
-      startIndex,
+      startIndex
     );
 
     const convertedItems = items.map((group: any) => ({

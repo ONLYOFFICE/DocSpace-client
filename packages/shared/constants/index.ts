@@ -123,3 +123,9 @@ export const RTL_LANGUAGES = Object.freeze([
   "ur",
   "yi",
 ]);
+
+export const AccountsSearchArea = Object.freeze({
+  People: "0",
+  Groups: "1",
+  Any: "2",
+});

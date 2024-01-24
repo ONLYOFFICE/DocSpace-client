@@ -26,7 +26,7 @@ import {
   EmployeeActivationStatus,
   EmployeeStatus,
   Events,
-} from "@docspace/common/constants";
+} from "@docspace/shared/constants";
 import Filter from "@docspace/shared/api/people/filter";
 // import { EmployeeStatus, Events } from "@docspace/shared/enums";
 

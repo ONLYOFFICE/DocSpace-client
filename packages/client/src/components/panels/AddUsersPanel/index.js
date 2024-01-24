@@ -13,7 +13,7 @@ import Filter from "@docspace/shared/api/people/filter";
 import Loaders from "@docspace/common/components/Loaders";
 
 import { getMembersList, getUserList } from "@docspace/shared/api/people";
-import { ShareAccessRights, LOADER_TIMEOUT } from "@docspace/common/constants";
+import { ShareAccessRights, LOADER_TIMEOUT } from "@docspace/shared/constants";
 import useLoadingWithTimeout from "@docspace/shared/hooks/useLoadingWithTimeout";
 
 import withLoader from "../../../HOCs/withLoader";

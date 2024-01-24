@@ -10,6 +10,7 @@ import { Checkbox } from "@docspace/shared/components/checkbox";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { TabsContainer } from "@docspace/shared/components/tabs-container";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
+import { ColorInput } from "@docspace/shared/components/color-input";
 import { objectToGetParams, loadScript } from "@docspace/shared/utils/common";
 import { inject, observer } from "mobx-react";
 
@@ -218,6 +219,10 @@ const RoomSelector = (props) => {
     if (isEnoughWidthForPreview !== showPreview) setShowPreview(isEnoughWidthForPreview);
   };
 
+  const setButtonColor = (color) => {
+    setConfig((config) => ({ ...config, buttonColor: color }));
+  };
+
   useEffect(() => {
     window.addEventListener("resize", onResize);
     return () => {
@@ -307,13 +312,7 @@ const RoomSelector = (props) => {
               <CategorySubHeader>{t("ButtonCustomization")}</CategorySubHeader>
               <ControlsGroup>
                 <Label className="label" text={t("ButtonColor")} />
-                <TextInput
-                  scale
-                  onChange={() => {}}
-                  placeholder={"#5299E0"}
-                  value={"#5299E0"}
-                  tabIndex={2}
-                />
+                <ColorInput scale handleChange={setButtonColor} defaultColor={"#5299E0"} />
               </ControlsGroup>
               <ControlsGroup>
                 <Label className="label" text={t("ButtonText")} />

@@ -19,12 +19,22 @@ import styled from "styled-components";
 
 import Logo from "PUBLIC_DIR/images/light_small_logo.react.svg";
 
-const FlexBox = styled.div`
+const ButtonWrapper = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  button {
+    background-color: ${(props) => props.buttonColor};
+    border-color: ${(props) => props.buttonColor};
+
+    :active {
+      background-color: ${(props) => props.buttonColor};
+      border-color: ${(props) => props.buttonColor};
+    }
+  }
 `;
 
 const Sdk = ({
@@ -200,7 +210,7 @@ const Sdk = ({
   switch (mode) {
     case "room-selector":
       component = frameConfig?.isButtonMode ? (
-        <FlexBox>
+        <ButtonWrapper buttonColor={frameConfig?.buttonColor}>
           <Button
             scale={false}
             size="small"
@@ -210,7 +220,7 @@ const Sdk = ({
             onClick={openRoomSelector}
             icon={frameConfig?.buttonWithLogo ? <Logo /> : undefined}
           />
-        </FlexBox>
+        </ButtonWrapper>
       ) : (
         <RoomSelector
           withCancelButton={frameConfig?.showSelectorCancel}
@@ -228,7 +238,7 @@ const Sdk = ({
       break;
     case "file-selector":
       component = frameConfig?.isButtonMode ? (
-        <FlexBox>
+        <ButtonWrapper buttonColor={frameConfig?.buttonColor}>
           <Button
             scale={false}
             size="small"
@@ -238,7 +248,7 @@ const Sdk = ({
             onClick={openFileSelector}
             icon={frameConfig?.buttonWithLogo ? <Logo /> : undefined}
           />
-        </FlexBox>
+        </ButtonWrapper>
       ) : (
         <FilesSelector
           isPanelVisible={true}

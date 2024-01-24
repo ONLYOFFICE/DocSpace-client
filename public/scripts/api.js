@@ -31,6 +31,7 @@
     withBreadCrumbs: true,
     withSubtitle: true,
     filterParam: "ALL",
+    buttonColor: "#5299E0",
     filter: {
       // filterType: 0,
       // type: 0,

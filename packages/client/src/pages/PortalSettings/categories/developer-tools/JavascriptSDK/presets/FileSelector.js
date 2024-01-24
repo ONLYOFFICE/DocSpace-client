@@ -12,6 +12,7 @@ import { TabsContainer } from "@docspace/shared/components/tabs-container";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { SelectedItem } from "@docspace/shared/components/selected-item";
+import { ColorInput } from "@docspace/shared/components/color-input";
 import { objectToGetParams, loadScript } from "@docspace/shared/utils/common";
 import { inject, observer } from "mobx-react";
 
@@ -300,6 +301,10 @@ const FileSelector = (props) => {
     if (isEnoughWidthForPreview !== showPreview) setShowPreview(isEnoughWidthForPreview);
   };
 
+  const setButtonColor = (color) => {
+    setConfig((config) => ({ ...config, buttonColor: color }));
+  };
+
   useEffect(() => {
     window.addEventListener("resize", onResize);
     return () => {
@@ -363,13 +368,7 @@ const FileSelector = (props) => {
               <CategorySubHeader>{t("ButtonCustomization")}</CategorySubHeader>
               <ControlsGroup>
                 <Label className="label" text={t("ButtonColor")} />
-                <TextInput
-                  scale
-                  onChange={() => {}}
-                  placeholder={"#5299E0"}
-                  value={"#5299E0"}
-                  tabIndex={2}
-                />
+                <ColorInput scale handleChange={setButtonColor} defaultColor={"#5299E0"} />
               </ControlsGroup>
               <ControlsGroup>
                 <Label className="label" text={t("ButtonText")} />

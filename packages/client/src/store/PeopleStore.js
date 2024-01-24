@@ -26,9 +26,8 @@ import {
   EmployeeActivationStatus,
   EmployeeStatus,
   Events,
-} from "@docspace/shared/constants";
+} from "@docspace/shared/enums";
 import Filter from "@docspace/shared/api/people/filter";
-// import { EmployeeStatus, Events } from "@docspace/shared/enums";
 
 class PeopleStore {
   contextOptionsStore = null;

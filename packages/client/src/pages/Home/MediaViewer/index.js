@@ -6,6 +6,7 @@ import queryString from "query-string";
 import MediaViewer from "@docspace/common/components/MediaViewer";
 import { PluginFileType } from "SRC_DIR/helpers/plugins/constants";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 const FilesMediaViewer = (props) => {
   const {
@@ -107,7 +108,8 @@ const FilesMediaViewer = (props) => {
   };
 
   const onChangeUrl = (id) => {
-    const url = MEDIA_VIEW_URL + id;
+    const url = combineUrl(MEDIA_VIEW_URL, id);
+
     setCurrentId(id);
     navigate(url);
   };

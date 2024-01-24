@@ -2201,7 +2201,7 @@ class FilesActionStore {
         );
         setMediaViewerData({ visible: true, id });
 
-        const url = MEDIA_VIEW_URL + id;
+        const url = combineUrl(MEDIA_VIEW_URL, id);
 
         if (this.publicRoomStore.isPublicRoom) return;
 

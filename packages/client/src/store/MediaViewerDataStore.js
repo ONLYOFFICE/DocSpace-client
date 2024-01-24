@@ -6,6 +6,7 @@ import {
 } from "@docspace/common/components/MediaViewer/helpers";
 import { thumbnailStatuses } from "SRC_DIR/helpers/filesConstants";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 const FirstUrlKey = "isFirstUrl";
 
@@ -77,7 +78,7 @@ class MediaViewerDataStore {
   changeUrl = (id) => {
     if (this.publicRoomStore.isPublicRoom) return;
 
-    const url = MEDIA_VIEW_URL + id;
+    const url = combineUrl(MEDIA_VIEW_URL, id);
     window.DocSpace.navigate(url);
   };
 

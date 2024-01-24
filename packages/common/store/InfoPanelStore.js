@@ -137,7 +137,7 @@ class InfoPanelStore {
     const selectedFolderStore = { ...this.selectedFolderStore };
     const { currentGroup } = this.peopleStore.groupsStore;
 
-    if (this.getIsGroups) {
+    if (this.getIsGroups()) {
       return {
         ...currentGroup,
         isGroup: true,

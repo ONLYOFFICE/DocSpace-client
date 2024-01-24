@@ -364,6 +364,7 @@ export const enum FilterGroups {
   filterFolders = "filter-folders",
   filterRoom = "filter-room",
   filterContent = "filter-withContent",
+  filterQuota = "filter-quota",
   roomFilterProviderType = "filter-provider-type",
   roomFilterType = "filter-type",
   roomFilterSubject = "filter-subject",
@@ -380,6 +381,8 @@ export const enum FilterKeys {
   me = "me",
   other = "other",
   user = "user",
+  customQuota = "2",
+  defaultQuota = "1",
 }
 
 export const enum IndexedDBStores {

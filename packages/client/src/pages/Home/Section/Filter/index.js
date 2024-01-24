@@ -1046,13 +1046,13 @@ const SectionFilterContent = ({
       },
       {
         id: "filter_custom-quota",
-        key: FilterKeys.customQuota.toString(),
+        key: FilterKeys.customQuota,
         group: FilterGroups.filterQuota,
         label: t("Common:CustomQuota"),
       },
       {
         id: "filter_default-quota",
-        key: FilterKeys.defaultQuota.toString(),
+        key: FilterKeys.defaultQuota,
         group: FilterGroups.filterQuota,
         label: t("Common:DefaultQuota"),
       },

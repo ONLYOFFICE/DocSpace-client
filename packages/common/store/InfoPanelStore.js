@@ -96,22 +96,7 @@ class InfoPanelStore {
     this.isScrollLocked = false;
     if (view !== infoMembers) this.setInfoPanelMembers(null);
 
-    const isRooms = this.getIsRooms();
-
-    // TODO: INFO PANEL
-    if (isRooms && view === infoMembers) {
-      const selectedItems = this.infoPanelSelectedItems;
-      const selectedFolder = selectedItems
-        ? selectedItems[0]
-        : view === infoMembers && this.infoPanelRoom
-          ? this.infoPanelRoom
-          : this.selectedFolderStore.getSelectedFolder();
-      if (selectedFolder) {
-        this.setInfoPanelSelection(this.normalizeSelection(selectedFolder));
-      }
-    } else {
-      this.setInfoPanelSelection(this.calculateSelection());
-    }
+    this.setInfoPanelSelection(this.calculateSelection());
   };
 
   setIsScrollLocked = (isScrollLocked) => {
@@ -142,6 +127,12 @@ class InfoPanelStore {
           : [];
   }
 
+  get infoPanelSelectedFolder() {
+    return this.roomsView === infoMembers && this.infoPanelRoom
+      ? this.infoPanelRoom
+      : this.selectedFolderStore.getSelectedFolder();
+  }
+
   get infoPanelCurrentSelection() {
     const { selection, bufferSelection } = this.filesStore;
 
@@ -164,10 +155,7 @@ class InfoPanelStore {
 
   calculateSelection = () => {
     const selectedItems = this.infoPanelSelectedItems;
-    const selectedFolder =
-      this.roomsView === infoMembers && this.infoPanelRoom
-        ? this.infoPanelRoom
-        : this.selectedFolderStore.getSelectedFolder();
+    const selectedFolder = this.infoPanelSelectedFolder;
 
     if (!selectedItems.length) {
       return this.normalizeSelection(selectedFolder);

@@ -24,7 +24,7 @@ import { CronWrapper, Suffix, Wrapper } from "./Cron.styled";
 import type { PeriodType, CronProps } from "./Cron.types";
 
 const Cron = ({ value = defaultCronString, setValue, onError }: CronProps) => {
-  const { t } = useTranslation("Common");
+  const { t, i18n } = useTranslation("Common");
 
   const didMountRef = useRef<boolean>(false);
   const cronRef = useRef<string>(value);
@@ -118,7 +118,7 @@ const Cron = ({ value = defaultCronString, setValue, onError }: CronProps) => {
     };
   }, [period]);
 
-  const units = useMemo(() => getUnits(t), [t]);
+  const units = useMemo(() => getUnits(i18n.language), [i18n.language]);
 
   return (
     <CronWrapper data-testid="cron">

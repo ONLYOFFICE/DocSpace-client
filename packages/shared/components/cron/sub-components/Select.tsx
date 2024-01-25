@@ -1,6 +1,6 @@
+import { Info } from "luxon";
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import moment from "moment";
 
 import { ComboBox, ComboBoxSize, TOption } from "../../combobox";
 
@@ -26,7 +26,7 @@ export const Select = ({
     const isWeek = unit.name === "weekday";
 
     if (isWeek) {
-      firstDayOfWeek = moment.localeData(i18n.language).firstDayOfWeek();
+      firstDayOfWeek = Info.getStartOfWeek({ locale: i18n.language });
     }
 
     if (altWithTranslation) {

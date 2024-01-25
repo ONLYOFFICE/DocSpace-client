@@ -68,7 +68,7 @@ export const getNextSynchronization = (
   try {
     const cron = stringToArray(cronString, true);
     assertValidArray(cron);
-    let date: DateTime = DateTime.now();
+    let date: DateTime = DateTime.utc();
 
     if (timezone) date = date.setZone(timezone);
 

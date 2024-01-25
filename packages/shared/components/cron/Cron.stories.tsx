@@ -6,41 +6,46 @@ import { useTranslation } from "react-i18next";
 import i18nextStoryDecorator from "../../.storybook/decorators/i18nextStoryDecorator";
 
 import { Cron, getNextSynchronization } from ".";
-import { ComboBox, ComboBoxSize, TOption } from "../combobox";
 import { InputSize, InputType, TextInput } from "../text-input";
 import { Button, ButtonSize } from "../button";
 import type { CronProps } from "./Cron.types";
+import { defaultCronString } from "./Cron.constants";
 
-type CronType = FC<{ locale: string } & CronProps>;
+type CronType = FC<{ locale: string; timezone: string } & CronProps>;
 
 type Story = StoryObj<CronType>;
 
 const locales = [
   "az",
-  "ar-SA",
-  "zh-cn",
+  "bg",
   "cs",
-  "nl",
-  "en",
+  "de",
+  "el-GR",
+  "en-GB",
+  "en-US",
+  "es",
   "fi",
   "fr",
-  "de",
-  "de-ch",
-  "el",
+  "hy-AM",
   "it",
-  "ja",
-  "ko",
   "lv",
+  "nl",
   "pl",
   "pt",
-  "pt-br",
+  "pt-BR",
+  "ro",
   "ru",
   "sk",
   "sl",
-  "es",
-  "tr",
-  "uk",
   "vi",
+  "tr",
+  "uk-UA",
+  "ar",
+  "ar-SA",
+  "lo-LA",
+  "ja-JP",
+  "zh-CN",
+  "ko-KR",
 ];
 
 const TzNames = [
@@ -82,10 +87,7 @@ const TzNames = [
   "+12:45",
   "+13:00",
   "+14:00",
-].map((tz) => ({
-  key: tz,
-  label: tz,
-}));
+];
 
 const meta: Meta<CronType> = {
   title: "Components/Cron",
@@ -102,21 +104,19 @@ const meta: Meta<CronType> = {
         "Triggered when the cron component detects an error with the value.",
     },
     locale: { control: "select", options: locales },
+    timezone: { control: "select", options: TzNames },
   },
   decorators: [i18nextStoryDecorator],
 };
 
-const DefaultTemplate = ({ defaultValue, locale }: Record<string, string>) => {
+const DefaultTemplate = ({
+  defaultValue,
+  locale,
+  timezone,
+}: Record<string, string>) => {
   const { i18n } = useTranslation();
 
   const [input, setInput] = useState(() => defaultValue);
-  const [timeZone, setTimeZone] = useState<TOption>(() => {
-    const key = moment.tz.guess();
-    return {
-      key: moment.tz(key).format("Z"),
-      label: moment.tz(key).format("Z"),
-    };
-  });
 
   const [cron, setCron] = useState(defaultValue);
   const [error, setError] = useState<Error>();
@@ -138,71 +138,46 @@ const DefaultTemplate = ({ defaultValue, locale }: Record<string, string>) => {
     setCron(input);
   };
 
-  const handlerSelectTimezone = (optin: TOption) => {
-    setTimeZone(optin);
-  };
-
   useEffect(() => {
     setValue(defaultValue);
   }, [defaultValue]);
 
   const date = useMemo(
-    () => cron && getNextSynchronization(cron, timeZone.key as string),
-    [cron, timeZone.key],
+    () => getNextSynchronization(cron, timezone),
+    [cron, timezone],
   );
-
-  const dateLocal = date && date.setLocale(locale ?? "en");
 
   return (
     <div>
       <div
         style={{
           display: "flex",
-          flexDirection: "column",
           gap: "6px",
           alignItems: "baseline",
           maxWidth: "340px",
-          marginBottom: "8px",
+          marginBottom: "12px",
         }}
       >
-        <div
+        <TextInput
+          scale
+          withBorder
+          value={input}
+          type={InputType.text}
+          size={InputSize.base}
+          hasError={Boolean(error)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setInput(e.target.value)
+          }
           style={{
-            display: "flex",
-            gap: "6px",
-            alignItems: "center",
-            width: "100%",
+            flexGrow: 1,
           }}
-        >
-          <TextInput
-            scale
-            withBorder
-            value={input}
-            type={InputType.text}
-            size={InputSize.base}
-            hasError={Boolean(error)}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setInput(e.target.value)
-            }
-            style={{
-              flexGrow: 1,
-            }}
-          />
+        />
 
-          <Button
-            size={ButtonSize.small}
-            primary
-            label="Set value"
-            onClick={onClick}
-          />
-        </div>
-        <ComboBox
-          scaledOptions
-          options={TzNames}
-          showDisabledItems
-          dropDownMaxHeight={300}
-          selectedOption={timeZone}
-          size={ComboBoxSize.content}
-          onSelect={handlerSelectTimezone}
+        <Button
+          size={ButtonSize.small}
+          primary
+          label="Set value"
+          onClick={onClick}
         />
       </div>
 
@@ -213,10 +188,10 @@ const DefaultTemplate = ({ defaultValue, locale }: Record<string, string>) => {
       <p>
         <strong>Error message: </strong> {error?.message ?? "undefined"}
       </p>
-      {dateLocal && (
+      {date && (
         <p>
           <strong>Next synchronization: </strong>{" "}
-          {`${dateLocal.toFormat("DDDD TTTT")}`}
+          {`${date?.setLocale(locale).toFormat("DDDD TTTT")}`}
         </p>
       )}
     </div>
@@ -227,10 +202,17 @@ export default meta;
 
 export const Default: Story = {
   args: {
-    locale: "en",
+    locale: "en-GB",
+    timezone: moment.tz(moment.tz.guess()).format("Z"),
   },
 
-  render: ({ value: defaultValue = "", locale }) => {
-    return <DefaultTemplate defaultValue={defaultValue} locale={locale} />;
+  render: ({ value: defaultValue = defaultCronString, locale, timezone }) => {
+    return (
+      <DefaultTemplate
+        locale={locale}
+        timezone={timezone}
+        defaultValue={defaultValue}
+      />
+    );
   },
 };

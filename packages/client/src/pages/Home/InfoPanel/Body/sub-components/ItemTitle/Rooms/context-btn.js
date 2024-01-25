@@ -21,7 +21,7 @@ const RoomsContextBtn = ({
 
   getItemContextOptionsKeys,
   getItemContextOptionsActions,
-
+  onCloseItem,
   onSelectItem,
 }) => {
   const contextMenuRef = useRef();
@@ -82,6 +82,7 @@ const RoomsContextBtn = ({
         }
         onClick={onContextMenu}
         getData={getData}
+        onClose={onCloseItem}
         directionX="right"
         displayType="toggle"
       />
@@ -90,6 +91,7 @@ const RoomsContextBtn = ({
         getContextModel={getData}
         withBackdrop={true}
         baseZIndex={310}
+        onHide={onCloseItem}
       />
     </StyledItemContextOptions>
   );

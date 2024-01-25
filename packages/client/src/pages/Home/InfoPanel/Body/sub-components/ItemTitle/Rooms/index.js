@@ -39,6 +39,10 @@ const RoomsItemHeader = ({
     setBufferSelection(selection);
   };
 
+  const onCloseItem = () => {
+    setSelected("none");
+  };
+
   const onClickInviteUsers = () => {
     setIsMobileHidden(true);
     const parentRoomId = infoPanelSelection.id;
@@ -95,6 +99,7 @@ const RoomsItemHeader = ({
           selection={selection}
           itemTitleRef={itemTitleRef}
           onSelectItem={onSelectItem}
+          onCloseItem={onCloseItem}
         />
       </div>
     </StyledTitle>

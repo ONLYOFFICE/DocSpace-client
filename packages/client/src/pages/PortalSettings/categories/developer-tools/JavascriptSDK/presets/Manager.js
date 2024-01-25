@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { withTranslation } from "react-i18next";
 import debounce from "lodash.debounce";
 import { Box } from "@docspace/shared/components/box";
@@ -34,6 +34,88 @@ import SearchUrl from "PUBLIC_DIR/images/sdk-presets_search.react.svg?url";
 import HeaderUrl from "PUBLIC_DIR/images/sdk-presets_header.react.svg?url";
 
 const showPreviewThreshold = 720;
+import styled, { css } from "styled-components";
+import { DropDown } from "@docspace/shared/components/drop-down";
+import Filter from "@docspace/shared/api/people/filter";
+import { getUserList, getMembersList } from "@docspace/shared/api/people";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { Avatar } from "@docspace/shared/components/avatar";
+import Base from "@docspace/shared/themes/base";
+
+const StyledInviteInputContainer = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+
+  .header_aside-panel {
+    max-width: 100% !important;
+  }
+`;
+
+const StyledInviteInput = styled.div`
+  width: 100%;
+  width: -moz-available;
+  width: -webkit-fill-available;
+  width: fill-available;
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          margin-right: 16px;
+          margin-left: ${(props) => (props.hideSelector ? "16px" : "8px")};
+        `
+      : css`
+          margin-left: 16px;
+          margin-right: ${(props) => (props.hideSelector ? "16px" : "8px")};
+        `}
+
+  .input-link {
+    height: 32px;
+
+    > input {
+      height: 30px;
+    }
+  }
+`;
+
+const StyledDropDown = styled(DropDown)`
+  ${(props) => props.width && `width: ${props.width}px`};
+
+  .list-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 48px;
+
+    .list-item_content {
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+`;
+
+const SearchItemText = styled(Text)`
+  line-height: 16px;
+
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: ${(props) =>
+    props.theme.getCorrectFontSize(
+      props.primary ? "14px" : props.info ? "11px" : "12px"
+    )};
+  font-weight: ${(props) => (props.primary || props.info ? "600" : "400")};
+
+  color: ${(props) =>
+    (props.primary && !props.disabled) || props.info
+      ? props.theme.text.color
+      : props.theme.text.emailColor};
+  ${(props) => props.info && `margin-left: auto`}
+`;
+
+SearchItemText.defaultProps = { theme: Base };
+
+const minSearchValue = 3;
 
 import {
   SDKContainer,
@@ -56,6 +138,11 @@ import {
 
 const Manager = (props) => {
   const { t, setDocumentTitle, fetchExternalLinks } = props;
+
+  const searchRef = useRef();
+  const [searchPanelVisible, setSearchPanelVisible] = useState(false);
+  const [usersList, setUsersList] = useState([]);
+  const dropDownMaxHeight = usersList.length > 5 ? { maxHeight: 240 } : {};
 
   setDocumentTitle(t("JavascriptSdk"));
 
@@ -348,10 +435,6 @@ const Manager = (props) => {
     setColumnDisplay(e.target.value);
   };
 
-  const onChangeAuthor = (e) => {
-    setAuthor(e.target.value);
-  };
-
   const openGetCodeModal = () => setIsGetCodeDialogOpened(true);
 
   const closeGetCodeModal = () => setIsGetCodeDialogOpened(false);
@@ -403,6 +486,93 @@ const Manager = (props) => {
     const isEnoughWidthForPreview = window.innerWidth > showPreviewThreshold;
     if (isEnoughWidthForPreview !== showPreview) setShowPreview(isEnoughWidthForPreview);
   };
+
+  const closeInviteInputPanel = (e) => {
+    if (e?.target?.tagName?.toUpperCase() === "INPUT") return;
+
+    setSearchPanelVisible(false);
+  };
+
+  const openInviteInputPanel = (e) => {
+    setSearchPanelVisible(true);
+  };
+
+  const onKeyDown = (event) => {
+    const keyCode = event.code;
+
+    const isAcceptableEvents =
+      keyCode === "ArrowUp" || keyCode === "ArrowDown" || keyCode === "Enter";
+
+    if (isAcceptableEvents && author.length > 2) return;
+
+    event.stopPropagation();
+  };
+
+  const searchByQuery = async (value) => {
+    const query = value.trim();
+
+    if (query.length >= minSearchValue) {
+      const filter = Filter.getFilterWithOutDisabledUser();
+      filter.search = query;
+
+      // const users = await getMembersList(roomId, filter);
+      const users = await getUserList(filter);
+
+      setUsersList(users.items);
+    }
+
+    if (!query) {
+      closeInviteInputPanel();
+      setInputValue("");
+      setUsersList([]);
+    }
+  };
+
+  const debouncedSearch = useCallback(
+    debounce((value) => searchByQuery(value), 300),
+    [],
+  );
+
+  const onChangeAuthor = (e) => {
+    const value = e.target.value;
+    const clearValue = value.trim();
+
+    setAuthor(value);
+
+    if (clearValue.length < minSearchValue) {
+      setUsersList([]);
+      return;
+    }
+
+    if ((!!usersList.length || clearValue.length >= minSearchValue) && !searchPanelVisible) {
+      openInviteInputPanel();
+    }
+
+    debouncedSearch(clearValue);
+  };
+  const getItemContent = (item) => {
+    const { avatar, displayName, email, id } = item;
+
+    const addUser = () => {
+      closeInviteInputPanel();
+      setAuthor("");
+      setUsersList([]);
+
+      console.log(item);
+    };
+
+    return (
+      <DropDownItem key={id} onClick={addUser} height={48} heightTablet={48} className="list-item">
+        <Avatar size="min" role="user" source={avatar} />
+        <div className="list-item_content">
+          <SearchItemText primary>{displayName}</SearchItemText>
+          <SearchItemText>{email}</SearchItemText>
+        </div>
+      </DropDownItem>
+    );
+  };
+
+  const foundUsers = usersList.map((user) => getItemContent(user));
 
   useEffect(() => {
     window.addEventListener("resize", onResize);
@@ -682,13 +852,34 @@ const Manager = (props) => {
             {filterBy.key === "filter-type-author" && (
               <>
                 <Label className="label" text={t("Files:ByAuthor")} />
-                <TextInput
-                  scale={true}
-                  onChange={onChangeAuthor}
-                  placeholder={t("Files:ByAuthor")}
-                  value={author}
-                  tabIndex={5}
-                />
+                <StyledInviteInputContainer>
+                  <StyledInviteInput ref={searchRef}>
+                    <TextInput
+                      scale
+                      onChange={onChangeAuthor}
+                      placeholder={t("Files:ByAuthor")}
+                      value={author}
+                      onFocus={openInviteInputPanel}
+                      isAutoFocussed
+                      onKeyDown={onKeyDown}
+                      tabIndex={5}
+                    />
+                  </StyledInviteInput>
+                  {author.length >= minSearchValue && (
+                    <StyledDropDown
+                      width={searchRef?.current?.offsetWidth}
+                      isDefaultMode={false}
+                      open={searchPanelVisible}
+                      manualX="16px"
+                      showDisabledItems
+                      clickOutsideAction={closeInviteInputPanel}
+                      eventTypes="click"
+                      {...dropDownMaxHeight}
+                    >
+                      {!!usersList.length ? foundUsers : ""}
+                    </StyledDropDown>
+                  )}
+                </StyledInviteInputContainer>
               </>
             )}
           </ControlsGroup>

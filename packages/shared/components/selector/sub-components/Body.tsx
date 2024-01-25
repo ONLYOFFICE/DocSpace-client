@@ -12,7 +12,7 @@ import { Item } from "./Item";
 import { EmptyScreen } from "./EmptyScreen";
 import { BreadCrumbs } from "./BreadCrumbs";
 
-import { StyledBody } from "../Selector.styled";
+import { StyledBody, StyledTabs } from "../Selector.styled";
 import { BodyProps } from "../Selector.types";
 
 const CONTAINER_PADDING = 16;
@@ -64,6 +64,10 @@ const Body = ({
   withFooterCheckbox,
   descriptionText,
   withHeader,
+
+  withTabs,
+  tabsData,
+  activeTabId,
 }: BodyProps) => {
   const [bodyHeight, setBodyHeight] = React.useState(0);
 
@@ -151,6 +155,7 @@ const Body = ({
       headerHeight={HEADER_HEIGHT}
       footerVisible={footerVisible}
       withHeader={withHeader}
+      withTabs={withTabs}
     >
       {withBreadCrumbs ? (
         isBreadCrumbsLoading ? (
@@ -174,6 +179,14 @@ const Body = ({
           onClearSearch={onClearSearch}
         />
       ) : null}
+
+      {withTabs && tabsData && (
+        <StyledTabs
+          startSelect={0}
+          data={tabsData}
+          forsedActiveItemId={activeTabId}
+        />
+      )}
 
       {isLoading ? (
         <Scrollbar style={{ height: listHeight }}>{rowLoader}</Scrollbar>

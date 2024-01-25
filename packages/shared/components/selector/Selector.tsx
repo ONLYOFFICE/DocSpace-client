@@ -82,6 +82,10 @@ const Selector = ({
   cancelButtonId,
   isChecked,
   setIsChecked,
+
+  withTabs,
+  tabsData,
+  activeTabId,
 }: SelectorProps) => {
   const [footerVisible, setFooterVisible] = React.useState<boolean>(false);
   const [isSearch, setIsSearch] = React.useState<boolean>(false);
@@ -358,6 +362,9 @@ const Selector = ({
         withFooterInput={withFooterInput}
         withFooterCheckbox={withFooterCheckbox}
         descriptionText={descriptionText}
+        withTabs={withTabs}
+        tabsData={tabsData}
+        activeTabId={activeTabId}
       />
 
       {(footerVisible || alwaysShowFooter) && (
@@ -407,6 +414,7 @@ Selector.defaultProps = {
   alwaysShowFooter: false,
   disableAcceptButton: false,
   withHeader: true,
+  withTabs: false,
 
   selectedItems: [],
 };

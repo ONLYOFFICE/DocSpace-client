@@ -6,6 +6,7 @@ import { Base } from "../../themes";
 
 import { ComboBox } from "../combobox";
 import { Text } from "../text";
+import { Submenu } from "../submenu";
 
 const StyledSelector = styled.div`
   width: 100%;
@@ -53,6 +54,7 @@ const StyledBody = styled.div<{
   withHeader?: boolean;
   footerHeight: number;
   headerHeight: number;
+  withTabs?: boolean;
 }>`
   width: 100%;
 
@@ -71,7 +73,7 @@ const StyledBody = styled.div<{
   .search-loader {
     padding: 0 16px;
 
-    margin-bottom: 12px;
+    margin-bottom: ${({ withTabs }) => (withTabs ? "28px" : "12px")};
   }
 
   .body-description-text {
@@ -360,6 +362,10 @@ const StyledComboBox = styled(ComboBox)`
   }
 `;
 
+const StyledTabs = styled(Submenu)`
+  padding: 0 16px;
+`;
+
 StyledSelector.defaultProps = { theme: Base };
 StyledHeader.defaultProps = { theme: Base };
 StyledBody.defaultProps = { theme: Base };
@@ -384,4 +390,5 @@ export {
   StyledNewNameHeader,
   StyledButtonContainer,
   StyledComboBox,
+  StyledTabs,
 };

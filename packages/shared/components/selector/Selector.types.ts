@@ -1,6 +1,7 @@
 import React from "react";
 import { RoomsType } from "../../enums";
 import { AvatarRole } from "../avatar";
+import { TSubmenuItem } from "../submenu";
 
 export type AccessRight = {
   key: string;
@@ -83,6 +84,10 @@ export interface SelectorProps {
   cancelButtonId?: string;
   isChecked?: boolean;
   setIsChecked?: React.Dispatch<React.SetStateAction<boolean>>;
+
+  withTabs?: boolean;
+  tabsData?: TSubmenuItem[];
+  activeTabId?: number;
 }
 
 export interface HeaderProps {
@@ -133,6 +138,10 @@ export interface BodyProps {
   withFooterCheckbox?: boolean;
 
   descriptionText?: string;
+
+  withTabs?: boolean;
+  tabsData?: TSubmenuItem[];
+  activeTabId?: number;
 }
 
 export interface FooterProps {

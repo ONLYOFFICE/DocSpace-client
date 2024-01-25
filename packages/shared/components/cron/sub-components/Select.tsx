@@ -1,4 +1,4 @@
-import { Info } from "luxon";
+import moment from "moment";
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -26,7 +26,7 @@ export const Select = ({
     const isWeek = unit.name === "weekday";
 
     if (isWeek) {
-      firstDayOfWeek = Info.getStartOfWeek({ locale: i18n.language });
+      firstDayOfWeek = moment.localeData(i18n.language).firstDayOfWeek();
     }
 
     if (altWithTranslation) {

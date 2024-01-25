@@ -40,7 +40,6 @@ const locales = [
   "vi",
   "tr",
   "uk-UA",
-  "ar",
   "ar-SA",
   "lo-LA",
   "ja-JP",

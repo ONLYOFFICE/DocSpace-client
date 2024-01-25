@@ -216,7 +216,7 @@ class InfoPanelStore {
 
   updateInfoPanelSelection = async (room) => {
     if (room) {
-      this.setInfoPanelSelection(this.normalizeSelection(room), true);
+      this.setInfoPanelSelection(this.normalizeSelection(room));
       if (this.infoPanelRoom?.id === room?.id) {
         this.setInfoPanelRoom(this.normalizeSelection(room));
       }
@@ -373,15 +373,8 @@ class InfoPanelStore {
     this.infoPanelMembers = infoPanelMembers;
   };
 
-  setInfoPanelSelection = (infoPanelSelection, forceUpdate = false) => {
-    if (
-      this.infoPanelSelection &&
-      infoPanelSelection &&
-      this.infoPanelSelection.id === infoPanelSelection.id &&
-      this.infoPanelSelection.isFolder === infoPanelSelection.isFolder &&
-      !forceUpdate &&
-      isEqual(infoPanelSelection, this.infoPanelSelection)
-    ) {
+  setInfoPanelSelection = (infoPanelSelection) => {
+    if (isEqual(infoPanelSelection, this.infoPanelSelection)) {
       return;
     }
 

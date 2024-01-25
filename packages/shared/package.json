@@ -1,6 +1,6 @@
 {
   "name": "@docspace/shared",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "private": true,
   "scripts": {
     "build": "echo 'skip it'",
@@ -169,3 +169,4 @@
     "react-dom": "^18.2.0"
   }
 }
+

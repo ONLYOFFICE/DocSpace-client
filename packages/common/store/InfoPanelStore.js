@@ -167,7 +167,7 @@ class InfoPanelStore {
       return this.getInfoPanelSelectedFolder();
       // }
     } else {
-      return this.normalizeSelection(this.infoPanelSelectedItems[0]);
+      return this.infoPanelSelectedItems[0];
     }
   };
 
@@ -179,7 +179,9 @@ class InfoPanelStore {
     if (!selectedItems.length) {
       newInfoPanelSelection = this.normalizeSelection(selectedFolder);
     } else if (selectedItems.length === 1) {
-      newInfoPanelSelection = this.getViewItem() ?? newInfoPanelSelection;
+      newInfoPanelSelection = this.normalizeSelection(
+        this.getViewItem() ?? newInfoPanelSelection
+      );
     } else {
       newInfoPanelSelection = [...Array(selectedItems.length).keys()];
     }
@@ -211,8 +213,16 @@ class InfoPanelStore {
     });
   };
 
-  updateInfoPanelSelection = async () => {
-    // this.setNewInfoPanelSelection();
+  updateInfoPanelSelection = async (room) => {
+    if (room) {
+      this.setInfoPanelSelection(this.normalizeSelection(room), true);
+      if (this.infoPanelRoom?.id === room?.id) {
+        this.setInfoPanelRoom(this.normalizeSelection(room));
+      }
+    } else {
+      this.setNewInfoPanelSelection();
+    }
+
     if (!this.getIsRooms) return;
 
     const currentFolderRoomId =
@@ -362,12 +372,13 @@ class InfoPanelStore {
     this.infoPanelMembers = infoPanelMembers;
   };
 
-  setInfoPanelSelection = (infoPanelSelection) => {
+  setInfoPanelSelection = (infoPanelSelection, forceUpdate = false) => {
     if (
       this.infoPanelSelection &&
       infoPanelSelection &&
       this.infoPanelSelection.id === infoPanelSelection.id &&
-      this.infoPanelSelection.isFolder === infoPanelSelection.isFolder
+      this.infoPanelSelection.isFolder === infoPanelSelection.isFolder &&
+      !forceUpdate
     ) {
       return;
     }

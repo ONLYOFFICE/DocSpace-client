@@ -107,6 +107,8 @@ const EditRoomEvent = ({
     const uploadLogoData = new FormData();
     uploadLogoData.append(0, roomParams.icon.uploadedFile);
 
+    let room = null;
+
     try {
       setIsLoading(true);
 
@@ -114,7 +116,7 @@ const EditRoomEvent = ({
         await changeRoomOwner(t, roomParams?.roomOwner?.id);
       }
 
-      let room = await editRoom(item.id, editRoomParams);
+      room = await editRoom(item.id, editRoomParams);
 
       room.isLogoLoading = true;
 
@@ -178,7 +180,7 @@ const EditRoomEvent = ({
           updateLogoPathsCacheBreaker();
       }
 
-      updateInfoPanelSelection();
+      updateInfoPanelSelection(room);
       setIsLoading(false);
       onClose();
     }

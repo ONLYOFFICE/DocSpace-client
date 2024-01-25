@@ -163,9 +163,9 @@ class InfoPanelStore {
       this.roomsView === infoMembers &&
       !this.infoPanelSelectedItems[0]?.isRoom
     ) {
-      if (!this.infoPanelSelection?.id) {
-        return this.getInfoPanelSelectedFolder();
-      }
+      // if (!this.infoPanelSelection?.id) {
+      return this.getInfoPanelSelectedFolder();
+      // }
     } else {
       return this.normalizeSelection(this.infoPanelSelectedItems[0]);
     }
@@ -211,7 +211,6 @@ class InfoPanelStore {
     });
   };
 
-  // reloadSelectionParentRoom //reloadSelection
   updateInfoPanelSelection = async () => {
     // this.setNewInfoPanelSelection();
     if (!this.getIsRooms) return;

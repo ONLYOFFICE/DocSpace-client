@@ -8,6 +8,14 @@ import { Text } from "@docspace/shared/components/text";
 
 const StyledWrapper = styled.div`
   cursor: pointer;
+
+  .tariff-bar-text:hover {
+    opacity: 0.85;
+  }
+
+  .tariff-bar-text:active {
+    filter: brightness(0.9);
+  }
 `;
 
 const PROXY_BASE_URL = combineUrl(
@@ -29,6 +37,8 @@ const TariffBar = ({
 }) => {
   const navigate = useNavigate();
   const { t } = useTranslation("Common");
+  const orange = "#F97A0B";
+  const red = "#F2665A";
 
   const onClick = () => {
     const paymentPageUrl = combineUrl(
@@ -45,9 +55,8 @@ const TariffBar = ({
       (isFreeTariff || isGracePeriod)
     ) {
       if (isFreeTariff)
-        return { label: t("Common:TryBusiness"), color: "#ED7309" };
-      if (isGracePeriod)
-        return { label: t("Common:LatePayment"), color: "#F24724" };
+        return { label: t("Common:TryBusiness"), color: orange };
+      if (isGracePeriod) return { label: t("Common:LatePayment"), color: red };
     }
   };
 
@@ -59,20 +68,20 @@ const TariffBar = ({
     ) {
       if (isTrial) {
         if (isLicenseDateExpired)
-          return { label: t("Common:TrialExpired"), color: "#ED7309" };
+          return { label: t("Common:TrialExpired"), color: orange };
         return {
           label: t("Common:TrialDaysLeft", { count: trialDaysLeft }),
-          color: "#ED7309",
+          color: orange,
         };
       } else {
         if (isLicenseDateExpired)
           return {
             label: t("Common:SubscriptionExpiredTitle"),
-            color: "#F24724",
+            color: red,
           };
         return {
           label: t("Common:SubscriptionIsExpiring", { date: paymentDate }),
-          color: "#ED7309",
+          color: orange,
         };
       }
     }
@@ -84,6 +93,7 @@ const TariffBar = ({
   return (
     <StyledWrapper>
       <Text
+        className="tariff-bar-text"
         as="div"
         fontSize="12px"
         fontWeight={600}

@@ -10,6 +10,7 @@ export type Item = {
   isDisabled?: boolean;
   color?: string;
   fileExst?: string;
+  shared: boolean;
 };
 
 export type Data = {

@@ -72,27 +72,71 @@ const History = ({
 
     const scroll = historyListNode.closest(".scroller");
 
-    let datesCoincidingWithCalendarDay = [];
+    let dateCoincidingWithCalendarDay = null;
 
-    selectionHistory.forEach((item) => {
-      item.feeds.forEach((feed) => {
-        if (feed.json.ModifiedDate.slice(0, 10) === calendarDay)
-          datesCoincidingWithCalendarDay.push(feed.json.ModifiedDate);
+    selectionHistory.every((item) => {
+      if (dateCoincidingWithCalendarDay) return false;
+
+      item.feeds.every((feed) => {
+        if (feed.json.ModifiedDate.slice(0, 10) === calendarDay) {
+          dateCoincidingWithCalendarDay = feed.json.ModifiedDate;
+        }
       });
+
+      return true;
     });
 
-    if (!datesCoincidingWithCalendarDay.length) return;
+    if (dateCoincidingWithCalendarDay) {
+      const dayNode = historyListNode.getElementsByClassName(
+        dateCoincidingWithCalendarDay
+      );
 
-    const dayNode = historyListNode.getElementsByClassName(
-      datesCoincidingWithCalendarDay[0]
-    );
+      if (!dayNode[0]) return;
 
-    if (!dayNode[0]) return;
+      //TODO:const 120
+      const y = dayNode[0].offsetTop - 120;
+      scroll.scrollTo(0, y);
 
-    //TODO:const 120
-    const y = dayNode[0].offsetTop - 120;
+      return;
+    }
 
-    scroll.scrollTo(0, y);
+    //If there are no entries in the history for the selected day
+    const calendarDayModified = new Date(calendarDay);
+    let nearestNewerDate = null;
+
+    selectionHistory.every((item, indexItem) => {
+      if (nearestNewerDate) return false;
+
+      item.feeds.every((feed) => {
+        const date = new Date(feed.json.ModifiedDate);
+
+        //Stop checking all entries for one day
+        if (date > calendarDayModified) return false;
+
+        //Looking for the nearest new date
+        if (date < calendarDayModified) {
+          //if there are no nearby new entries in the post history, then scroll to the last one
+          if (indexItem === 0) {
+            nearestNewerDate = feed.json.ModifiedDate;
+            return false;
+          }
+
+          nearestNewerDate =
+            selectionHistory[indexItem - 1].feeds[0].json.ModifiedDate;
+        }
+      });
+
+      return true;
+    });
+
+    if (nearestNewerDate) {
+      const dayNode = historyListNode.getElementsByClassName(nearestNewerDate);
+
+      if (!dayNode[0]) return;
+      //TODO:const 120
+      const y = dayNode[0].offsetTop - 120;
+      scroll.scrollTo(0, y);
+    }
   }, [calendarDay]);
 
   useEffect(() => {

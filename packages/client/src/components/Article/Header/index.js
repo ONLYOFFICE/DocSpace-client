@@ -1,8 +1,9 @@
 import React from "react";
-import Loaders from "@docspace/common/components/Loaders";
+
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import withLoader from "../../../HOCs/withLoader";
+import { ArticleHeaderLoader } from "@docspace/shared/skeletons/article";
 
 const ArticleHeaderContent = ({ currentModuleName }) => {
   return <>{currentModuleName}</>;
@@ -14,6 +15,6 @@ export default inject(({ auth }) => {
   };
 })(
   withTranslation([])(
-    withLoader(observer(ArticleHeaderContent))(<Loaders.ArticleHeader />)
+    withLoader(observer(ArticleHeaderContent))(<ArticleHeaderLoader />)
   )
 );

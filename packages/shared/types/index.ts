@@ -34,6 +34,8 @@ declare module "styled-components" {
 declare global {
   interface Window {
     firebaseHelper: { config: { authDomain: string } };
+    zESettings: {};
+    zE: {};
     i18n: {
       loaded: {
         [key: string]: { data: { [key: string]: string }; namespaces: string };

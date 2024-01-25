@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import { useLocation, Outlet } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 
-import Article from "@docspace/common/components/Article";
+import Article from "@docspace/shared/components/article";
 import {
   updateTempContent,
   showLoader,
@@ -20,6 +20,7 @@ import {
   ArticleHeaderContent,
   ArticleMainButtonContent,
 } from "./components/Article";
+import ArticleWrapper from "./components/ArticleWrapper";
 
 const ClientArticle = React.memo(
   ({
@@ -29,7 +30,7 @@ const ClientArticle = React.memo(
     showArticleLoader,
   }) => {
     return (
-      <Article
+      <ArticleWrapper
         withMainButton={withMainButton}
         onLogoClickAction={() => {
           setIsFilterLoading(true, false);
@@ -48,7 +49,7 @@ const ClientArticle = React.memo(
         <Article.Body>
           <ArticleBodyContent />
         </Article.Body>
-      </Article>
+      </ArticleWrapper>
     );
   }
 );

@@ -92,7 +92,9 @@ export default inject(
 
     const { zendeskKey, isMobileArticle } = settingsStore;
 
-    const { email, displayName } = user;
+    const email = user?.email;
+    const displayName = user?.displayName;
+
     const { primaryProgressDataStore, secondaryProgressDataStore } =
       uploadDataStore;
 

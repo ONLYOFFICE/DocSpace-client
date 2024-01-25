@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
-
+import api from "@docspace/shared/api";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { inject, observer } from "mobx-react";
 import withLoading from "SRC_DIR/HOCs/withLoading";
@@ -61,8 +61,7 @@ const AdditionalResources = (props) => {
     tReady,
     isSettingPaid,
     getAdditionalResources,
-    setAdditionalResources,
-    restoreAdditionalResources,
+
     additionalResourcesData,
     additionalResourcesIsDefault,
     setIsLoadedAdditionalResources,
@@ -149,11 +148,12 @@ const AdditionalResources = (props) => {
   const onSave = useCallback(async () => {
     setIsLoading(true);
 
-    await setAdditionalResources(
-      feedbackAndSupportEnabled,
-      videoGuidesEnabled,
-      helpCenterEnabled
-    )
+    await api.settings
+      .setAdditionalResources(
+        feedbackAndSupportEnabled,
+        videoGuidesEnabled,
+        helpCenterEnabled
+      )
       .then(() => {
         toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
       })
@@ -172,17 +172,13 @@ const AdditionalResources = (props) => {
     saveToSessionStorage("additionalSettings", data);
     saveToSessionStorage("defaultAdditionalSettings", data);
     setIsLoading(false);
-  }, [
-    setIsLoading,
-    setAdditionalResources,
-    getAdditionalResources,
-    additionalSettings,
-  ]);
+  }, [setIsLoading, getAdditionalResources, additionalSettings]);
 
   const onRestore = useCallback(async () => {
     setIsLoading(true);
 
-    await restoreAdditionalResources()
+    await api.settings
+      .restoreAdditionalResources()
       .then((res) => {
         setAdditionalSettings(res);
         saveToSessionStorage("additionalSettings", res);
@@ -195,7 +191,7 @@ const AdditionalResources = (props) => {
     await getAdditionalResources();
 
     setIsLoading(false);
-  }, [setIsLoading, restoreAdditionalResources, getAdditionalResources]);
+  }, [setIsLoading, getAdditionalResources]);
 
   const onChangeFeedback = () => {
     setAdditionalSettings({
@@ -296,8 +292,7 @@ export default inject(({ auth, common, currentQuotaStore }) => {
 
   const {
     getAdditionalResources,
-    setAdditionalResources,
-    restoreAdditionalResources,
+
     additionalResourcesData,
     additionalResourcesIsDefault,
   } = settingsStore;
@@ -306,8 +301,7 @@ export default inject(({ auth, common, currentQuotaStore }) => {
 
   return {
     getAdditionalResources,
-    setAdditionalResources,
-    restoreAdditionalResources,
+
     additionalResourcesData,
     additionalResourcesIsDefault,
     setIsLoadedAdditionalResources,

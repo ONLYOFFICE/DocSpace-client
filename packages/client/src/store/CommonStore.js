@@ -194,10 +194,7 @@ class CommonStore {
   };
 
   getMappedDomain = async () => {
-    const { settingsStore } = authStore;
-    const { getPortal } = settingsStore;
-
-    const res = await getPortal();
+    const res = await api.portal.getPortal();
     const { mappedDomain } = res;
 
     const tempObject = {};

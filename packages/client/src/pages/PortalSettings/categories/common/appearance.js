@@ -13,7 +13,7 @@ import ColorSchemeDialog from "./sub-components/colorSchemeDialog";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { DropDown } from "@docspace/shared/components/drop-down";
-
+import api from "@docspace/shared/api";
 import Loader from "./sub-components/loaderAppearance";
 
 import { StyledComponent, StyledTheme } from "./Appearance/StyledApperance.js";
@@ -29,10 +29,10 @@ const Appearance = (props) => {
   const {
     appearanceTheme,
     selectedThemeId,
-    sendAppearanceTheme,
+
     getAppearanceTheme,
     currentColorScheme,
-    deleteAppearanceTheme,
+
     tReady,
     t,
     currentDeviceType,
@@ -321,7 +321,7 @@ const Appearance = (props) => {
     if (!selectThemeId) return;
 
     try {
-      await sendAppearanceTheme({ selected: selectThemeId });
+      await api.settings.sendAppearanceTheme({ selected: selectThemeId });
       await getAppearanceTheme();
       toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
     } catch (error) {
@@ -331,12 +331,7 @@ const Appearance = (props) => {
     saveToSessionStorage("defaultColorId", selectThemeId);
     saveToSessionStorage("selectColorAccent", previewAccent);
     saveToSessionStorage("defaultColorAccent", previewAccent);
-  }, [
-    selectThemeId,
-    setIsDisabledSaveButton,
-    sendAppearanceTheme,
-    getAppearanceTheme,
-  ]);
+  }, [selectThemeId, setIsDisabledSaveButton, getAppearanceTheme]);
 
   // Open HexColorPicker
   const onClickColor = (e) => {
@@ -351,7 +346,7 @@ const Appearance = (props) => {
 
   const onClickDeleteModal = useCallback(async () => {
     try {
-      await deleteAppearanceTheme(selectThemeId);
+      await api.settings.deleteAppearanceTheme(selectThemeId);
       await getAppearanceTheme();
 
       if (selectedThemeId !== selectThemeId) {
@@ -373,13 +368,7 @@ const Appearance = (props) => {
     } catch (error) {
       toastr.error(error);
     }
-  }, [
-    selectThemeId,
-    selectedThemeId,
-    onCloseDialogDelete,
-    deleteAppearanceTheme,
-    getAppearanceTheme,
-  ]);
+  }, [selectThemeId, selectedThemeId, onCloseDialogDelete, getAppearanceTheme]);
 
   const onCloseColorSchemeDialog = () => {
     setShowColorSchemeDialog(false);
@@ -502,7 +491,7 @@ const Appearance = (props) => {
   const onSaveNewThemes = useCallback(
     async (theme) => {
       try {
-        await sendAppearanceTheme({ theme: theme });
+        await api.settings.sendAppearanceTheme({ theme: theme });
         await getAppearanceTheme();
 
         toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
@@ -510,13 +499,13 @@ const Appearance = (props) => {
         toastr.error(error);
       }
     },
-    [sendAppearanceTheme, getAppearanceTheme]
+    [getAppearanceTheme]
   );
 
   const onSaveChangedThemes = useCallback(
     async (editTheme) => {
       try {
-        await sendAppearanceTheme({ theme: editTheme });
+        await api.settings.sendAppearanceTheme({ theme: editTheme });
         await getAppearanceTheme();
         setPreviewAccent(editTheme.main.accent);
 
@@ -525,7 +514,7 @@ const Appearance = (props) => {
         toastr.error(error);
       }
     },
-    [sendAppearanceTheme, getAppearanceTheme]
+    [getAppearanceTheme]
   );
 
   const onSaveColorSchemeDialog = () => {
@@ -780,10 +769,10 @@ export default inject(({ auth, common }) => {
   const {
     appearanceTheme,
     selectedThemeId,
-    sendAppearanceTheme,
+
     getAppearanceTheme,
     currentColorScheme,
-    deleteAppearanceTheme,
+
     theme,
     currentDeviceType,
   } = settingsStore;
@@ -793,10 +782,10 @@ export default inject(({ auth, common }) => {
   return {
     appearanceTheme,
     selectedThemeId,
-    sendAppearanceTheme,
+
     getAppearanceTheme,
     currentColorScheme,
-    deleteAppearanceTheme,
+
     currentDeviceType,
     theme,
     resetIsInit,

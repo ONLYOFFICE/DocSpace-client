@@ -2,13 +2,11 @@ import { makeAutoObservable, runInAction } from "mobx";
 import api from "@docspace/shared/api";
 import { setWithCredentialsStatus } from "@docspace/shared/api/client";
 
-import SettingsStore from "./SettingsStore";
-
 import {
   logout as logoutDesktop,
   desktopConstants,
 } from "@docspace/shared/utils/desktop";
-import { isAdmin } from "@docspace/shared/utils/common";
+import { isAdmin, isPublicRoom } from "@docspace/shared/utils/common";
 import { getCookie, setCookie } from "@docspace/shared/utils/cookie";
 
 import { TenantStatus } from "@docspace/shared/enums";
@@ -22,6 +20,7 @@ import { BannerStore } from "@docspace/shared/store/BannerStore";
 import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { PaymentQuotasStore } from "@docspace/shared/store/PaymentQuotasStore";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import { loginWithTfaCode } from "@docspace/shared/api/user";
 
@@ -34,6 +33,7 @@ export const paymentQuotasStore = new PaymentQuotasStore();
 class AuthStore {
   userStore = null;
   currentQuotaStore = null;
+  currentTariffStatusStore = null;
   settingsStore = null;
 
   isLoading = false;
@@ -52,7 +52,6 @@ class AuthStore {
     this.userStore = userStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.currentQuotaStore = currentQuotaStore;
-
     this.settingsStore = new SettingsStore();
 
     makeAutoObservable(this);
@@ -113,7 +112,7 @@ class AuthStore {
     if (
       this.settingsStore.isLoaded &&
       this.settingsStore.socketUrl &&
-      !this.settingsStore.isPublicRoom &&
+      !isPublicRoom() &&
       !isPortalDeactivated
     ) {
       requests.push(

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Trans, withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
-
+import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { TextInput } from "@docspace/shared/components/text-input";
@@ -53,9 +53,9 @@ const CompanyInfoSettings = (props) => {
     t,
     isSettingPaid,
     getCompanyInfoSettings,
-    setCompanyInfoSettings,
+
     companyInfoSettingsIsDefault,
-    restoreCompanyInfoSettings,
+
     companyInfoSettingsData,
     tReady,
     setIsLoadedCompanyInfoSettingsData,
@@ -249,7 +249,8 @@ const CompanyInfoSettings = (props) => {
   const onSave = useCallback(async () => {
     setIsLoading(true);
 
-    await setCompanyInfoSettings(address, companyName, email, phone, site)
+    await api.settings
+      .setCompanyInfoSettings(address, companyName, email, phone, site)
       .then(() => {
         toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
       })
@@ -279,17 +280,13 @@ const CompanyInfoSettings = (props) => {
     });
 
     setIsLoading(false);
-  }, [
-    setIsLoading,
-    setCompanyInfoSettings,
-    getCompanyInfoSettings,
-    companySettings,
-  ]);
+  }, [setIsLoading, getCompanyInfoSettings, companySettings]);
 
   const onRestore = useCallback(async () => {
     setIsLoading(true);
 
-    await restoreCompanyInfoSettings()
+    await api.settings
+      .restoreCompanyInfoSettings()
       .then((res) => {
         toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
         setCompanySettings(res);
@@ -310,7 +307,7 @@ const CompanyInfoSettings = (props) => {
     });
 
     setIsLoading(false);
-  }, [setIsLoading, restoreCompanyInfoSettings, getCompanyInfoSettings]);
+  }, [setIsLoading, getCompanyInfoSettings]);
 
   const onShowExample = () => {
     if (!isSettingPaid) return;
@@ -470,9 +467,9 @@ export default inject(({ auth, common, currentQuotaStore }) => {
 
   const {
     getCompanyInfoSettings,
-    setCompanyInfoSettings,
+
     companyInfoSettingsIsDefault,
-    restoreCompanyInfoSettings,
+
     companyInfoSettingsData,
     buildVersionInfo,
     personal,
@@ -482,9 +479,9 @@ export default inject(({ auth, common, currentQuotaStore }) => {
 
   return {
     getCompanyInfoSettings,
-    setCompanyInfoSettings,
+
     companyInfoSettingsIsDefault,
-    restoreCompanyInfoSettings,
+
     companyInfoSettingsData,
     setIsLoadedCompanyInfoSettingsData,
     isLoadedCompanyInfoSettingsData,

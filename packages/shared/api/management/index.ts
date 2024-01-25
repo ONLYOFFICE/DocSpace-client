@@ -1,4 +1,6 @@
+import { AxiosRequestConfig } from "axios";
 import { request } from "../client";
+import { TGetAllPortals, TGetDomainName } from "./types";
 
 const baseURL = "/apisystem";
 
@@ -26,12 +28,12 @@ export const getPortalName = async () => {
 };
 
 export const getDomainName = async () => {
-  const options = {
+  const options: AxiosRequestConfig = {
     baseURL,
     method: "get",
     url: `/settings/get?tenantId=-1&key=baseDomain`,
   };
-  const res = await request(options);
+  const res = (await request(options)) as TGetDomainName;
 
   return res;
 };
@@ -94,15 +96,15 @@ export const createNewPortal = async (data) => {
 };
 
 export const getAllPortals = async () => {
-  const res = await request({
+  const res = (await request({
     baseURL,
     method: "get",
     url: `/portal/get?statistics=true`,
-  });
+  })) as TGetAllPortals;
   return res;
 };
 
-export const checkDomain = async (domain) => {
+export const checkDomain = async (domain: string) => {
   const data = {
     HostName: domain,
   };

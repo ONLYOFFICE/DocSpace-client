@@ -1,9 +1,25 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
+import { TWhiteLabel } from "../../utils/whiteLabelHelper";
 import { request } from "../client";
-import { TTfa, TTfaType } from "./types";
+import {
+  TCustomSchema,
+  TGetCSPSettings,
+  TSettings,
+  TTfa,
+  TTfaType,
+  TGetColorTheme,
+  TAdditionalResources,
+  TCompanyInfo,
+  TPasswordSettings,
+  TVersionBuild,
+  TMailDomainSettings,
+  TIpRestriction,
+  TCookieSettings,
+  TLoginSettings,
+} from "./types";
 
-export function getSettings(withPassword = false, headers = null) {
-  const options = {
+export async function getSettings(withPassword = false, headers = null) {
+  const options: AxiosRequestConfig = {
     method: "get",
     url: `/settings?withPassword=${withPassword}`,
   };
@@ -12,46 +28,56 @@ export function getSettings(withPassword = false, headers = null) {
 
   const skipRedirect = true;
 
-  return request(options, skipRedirect);
+  const res = (await request(options, skipRedirect)) as TSettings;
+
+  return res;
 }
 
-export function getPortalCultures() {
-  return request({
+export async function getPortalCultures() {
+  const res = (await request({
     method: "get",
     url: "/settings/cultures",
-  });
+  })) as string[];
+
+  return res;
 }
 
-export function getPortalPasswordSettings(confirmKey = null) {
-  const options = {
+export async function getPortalPasswordSettings(confirmKey = null) {
+  const options: AxiosRequestConfig = {
     method: "get",
     url: "/settings/security/password",
   };
 
   if (confirmKey) options.headers = { confirm: confirmKey };
 
-  return request(options);
+  const res = (await request(options)) as TPasswordSettings;
+
+  return res;
 }
 
-export function setPortalPasswordSettings(
-  minLength,
-  upperCase,
-  digits,
-  specSymbols,
+export async function setPortalPasswordSettings(
+  minLength: number,
+  upperCase: boolean,
+  digits: boolean,
+  specSymbols: boolean,
 ) {
-  return request({
+  const res = (await request({
     method: "put",
     url: "/settings/security/password",
     data: { minLength, upperCase, digits, specSymbols },
-  });
+  })) as TPasswordSettings;
+
+  return res;
 }
 
-export function setMailDomainSettings(data) {
-  return request({
+export async function setMailDomainSettings(data: TMailDomainSettings) {
+  const res = (await request({
     method: "post",
     url: "/settings/maildomainsettings",
     data,
-  });
+  })) as TMailDomainSettings;
+
+  return res;
 }
 
 // export function setDNSSettings(dnsName, enable) {
@@ -70,34 +96,42 @@ export function setDNSSettings(dnsName, enable) {
   });
 }
 
-export function getIpRestrictions() {
-  return request({
+export async function getIpRestrictions() {
+  const res = (await request({
     method: "get",
     url: "/settings/iprestrictions",
-  });
+  })) as TIpRestriction[];
+
+  return res;
 }
 
-export function setIpRestrictions(data) {
-  return request({
+export async function setIpRestrictions(data) {
+  const res = (await request({
     method: "put",
     url: "/settings/iprestrictions",
     data,
-  });
+  })) as TIpRestriction[];
+
+  return res;
 }
 
-export function getIpRestrictionsEnable() {
-  return request({
+export async function getIpRestrictionsEnable() {
+  const res = (await request({
     method: "get",
     url: "/settings/iprestrictions/settings",
-  });
+  })) as { enable: boolean };
+
+  return res;
 }
 
-export function setIpRestrictionsEnable(data) {
-  return request({
+export async function setIpRestrictionsEnable(data) {
+  const res = (await request({
     method: "put",
     url: "/settings/iprestrictions/settings",
     data,
-  });
+  })) as { enable: boolean };
+
+  return res;
 }
 
 export function setMessageSettings(turnOn) {
@@ -116,26 +150,32 @@ export function setCookieSettings(lifeTime, enabled) {
   });
 }
 
-export function getCookieSettings() {
-  return request({
+export async function getCookieSettings() {
+  const res = (await request({
     method: "get",
     url: "/settings/cookiesettings",
-  });
+  })) as TCookieSettings;
+
+  return res;
 }
 
-export function setLifetimeAuditSettings(data) {
-  return request({
+export async function setLifetimeAuditSettings(data: TCookieSettings) {
+  const res = (await request({
     method: "post",
     url: "/security/audit/settings/lifetime",
     data,
-  });
+  })) as TCookieSettings;
+
+  return res;
 }
 
-export function getBruteForceProtection() {
-  return request({
+export async function getBruteForceProtection() {
+  const res = (await request({
     method: "get",
     url: "/settings/security/loginSettings",
-  });
+  })) as TLoginSettings;
+
+  return res;
 }
 
 export function setBruteForceProtection(AttemptCount, BlockTime, CheckPeriod) {
@@ -160,15 +200,17 @@ export function getAuditTrailReport() {
   });
 }
 
-export function getPortalTimezones(confirmKey = null) {
-  const options = {
+export async function getPortalTimezones(confirmKey = null) {
+  const options: AxiosRequestConfig = {
     method: "get",
     url: "/settings/timezones",
   };
 
   if (confirmKey) options.headers = { confirm: confirmKey };
 
-  return request(options);
+  const res = (await request(options)) as TTimeZone[];
+
+  return res;
 }
 
 export function setLanguageAndTime(lng, timeZoneID) {
@@ -201,8 +243,8 @@ export function restoreGreetingSettings() {
   });
 }
 
-export function getAppearanceTheme(headers = null) {
-  const options = {
+export async function getAppearanceTheme(headers = null) {
+  const options: AxiosRequestConfig = {
     method: "get",
     url: "/settings/colortheme",
   };
@@ -211,7 +253,9 @@ export function getAppearanceTheme(headers = null) {
 
   const skipRedirect = true;
 
-  return request(options, skipRedirect);
+  const res = (await request(options, skipRedirect)) as TGetColorTheme;
+
+  return res;
 }
 
 export function sendAppearanceTheme(data) {
@@ -236,8 +280,8 @@ export function getLogoText() {
   });
 }
 
-export function getLogoUrls(headers = null) {
-  const options = {
+export async function getLogoUrls(headers = null) {
+  const options: AxiosRequestConfig = {
     method: "get",
     url: `/settings/whitelabel/logos`,
   };
@@ -246,7 +290,9 @@ export function getLogoUrls(headers = null) {
 
   const skipRedirect = true;
 
-  return request(options, skipRedirect);
+  const res = (await request(options, skipRedirect)) as TWhiteLabel[];
+
+  return res;
 }
 
 export function setWhiteLabelSettings(data, isManagement) {
@@ -296,11 +342,13 @@ export function setCompanyInfoSettings(
   });
 }
 
-export function getCompanyInfoSettings() {
-  return request({
+export async function getCompanyInfoSettings() {
+  const res = (await request({
     method: "get",
     url: `/settings/rebranding/company`,
-  });
+  })) as TCompanyInfo;
+
+  return res;
 }
 
 export function restoreCompanyInfoSettings() {
@@ -310,11 +358,13 @@ export function restoreCompanyInfoSettings() {
   });
 }
 
-export function getCustomSchemaList() {
-  return request({
+export async function getCustomSchemaList() {
+  const res = (await request({
     method: "get",
     url: `settings/customschemas`,
-  });
+  })) as TCustomSchema[];
+
+  return res;
 }
 
 export function setAdditionalResources(
@@ -337,11 +387,13 @@ export function setAdditionalResources(
   });
 }
 
-export function getAdditionalResources() {
-  return request({
+export async function getAdditionalResources() {
+  const res = (await request({
     method: "get",
     url: `/settings/rebranding/additional`,
-  });
+  })) as TAdditionalResources;
+
+  return res;
 }
 
 export function restoreAdditionalResources() {
@@ -641,14 +693,16 @@ export function getBackupStorage() {
   return request(options);
 }
 
-export function getBuildVersion(headers = null) {
-  const options = {
+export async function getBuildVersion(headers = null) {
+  const options: AxiosRequestConfig = {
     method: "get",
     url: "/settings/version/build",
   };
   if (headers) options.headers = headers;
 
-  return request(options);
+  const res = (await request(options)) as TVersionBuild;
+
+  return res;
 }
 
 export function getCapabilities() {
@@ -946,17 +1000,21 @@ export function getSendingTestMailStatus() {
   });
 }
 
-export function setCSPSettings(data) {
-  return request({
+export async function setCSPSettings(data: string[]) {
+  const res = (await request({
     method: "post",
     url: `/security/csp`,
     data,
-  });
+  })) as TGetCSPSettings;
+
+  return res;
 }
 
-export function getCSPSettings() {
-  return request({
+export async function getCSPSettings() {
+  const res = (await request({
     method: "get",
     url: `/security/csp`,
-  });
+  })) as TGetCSPSettings;
+
+  return res;
 }

@@ -977,12 +977,13 @@ export async function removeFromFavorite(ids: number[]) {
   return res;
 }
 
-// TODO: Need update res type
-export function getIsEncryptionSupport() {
-  return request({
+export async function getIsEncryptionSupport() {
+  const res = (await request({
     method: "get",
     url: "/files/@privacy/available",
-  });
+  })) as boolean;
+
+  return res;
 }
 
 // TODO: Need update res type
@@ -1000,12 +1001,13 @@ export function setEncryptionKeys(keys: { [key: string]: string | boolean }) {
   });
 }
 
-// TODO: Need update res type
-export function getEncryptionKeys() {
-  return request({
+export async function getEncryptionKeys() {
+  const res = (await request({
     method: "get",
     url: "privacyroom/keys",
-  });
+  })) as { [key: string]: string | boolean };
+
+  return res;
 }
 
 // TODO: Need update res type

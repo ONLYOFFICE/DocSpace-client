@@ -1,6 +1,12 @@
+import {
+  TGetColorTheme,
+  TSettings,
+  TVersionBuild,
+} from "../api/settings/types";
 import { TUser } from "../api/people/types";
 import { RoomsType } from "../enums";
 import { TTheme } from "../themes";
+import FirebaseHelper from "../utils/firebase";
 
 export type TDirectionX = "left" | "right";
 export type TDirectionY = "bottom" | "top" | "both";
@@ -34,8 +40,13 @@ declare module "styled-components" {
 }
 declare global {
   interface Window {
-    firebaseHelper: { config: { authDomain: string } };
-    __ASC_INITIAL_EDITOR_STATE__?: { user: TUser };
+    firebaseHelper: FirebaseHelper;
+    __ASC_INITIAL_EDITOR_STATE__?: {
+      user: TUser;
+      portalSettings: TSettings;
+      appearanceTheme: TGetColorTheme;
+      versionInfo: TVersionBuild;
+    };
     zESettings: {};
     zE: {};
     i18n: {
@@ -46,7 +57,7 @@ declare global {
     timezone: string;
     snackbar?: {};
     DocSpace: {
-      navigate: (path: string) => void;
+      navigate: (path: string, state: { [key: string]: unknown }) => void;
     };
     DocSpaceConfig: {
       wrongPortalNameUrl?: string;

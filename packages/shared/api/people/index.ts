@@ -210,11 +210,13 @@ export function changeProductAdmin(userId, productId, administrator) {
   });
 }
 
-export function getUserById(userId) {
-  return request({
+export async function getUserById(userId: string) {
+  const res = (await request({
     method: "get",
     url: `/people/${userId}`,
-  });
+  })) as TUser;
+
+  return res;
 }
 
 export const inviteUsers = async (data) => {

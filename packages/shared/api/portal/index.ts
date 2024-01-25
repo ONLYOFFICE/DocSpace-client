@@ -1,6 +1,7 @@
-import { EmployeeType } from "@docspace/shared/enums";
+import { AxiosRequestConfig } from "axios";
+import { EmployeeType } from "../../enums";
 import { request } from "../client";
-import { TPaymentQuota, TPortalQuota, TPortalTariff } from "./types";
+import { TPaymentQuota, TPortal, TPortalQuota, TPortalTariff } from "./types";
 
 export function getShortenedLink(link) {
   return request({
@@ -292,10 +293,12 @@ export function sendPaymentRequest(email, userName, message) {
   });
 }
 
-export function getPortal() {
-  const options = {
+export async function getPortal() {
+  const options: AxiosRequestConfig = {
     method: "get",
     url: "/portal",
   };
-  return request(options);
+  const res = (await request(options)) as TPortal;
+
+  return res;
 }

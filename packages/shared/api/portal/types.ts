@@ -56,3 +56,24 @@ export type TPaymentQuota = {
   trial: boolean;
   features: TPaymentFeature[];
 };
+
+export type TPortal = {
+  tenantAlias: string;
+  calls: boolean;
+  creationDateTime: Date;
+  tenantId: number;
+  industry: number;
+  language: string;
+  lastModified: Date;
+  name: string;
+  ownerId: string;
+  paymentId: string;
+  spam: boolean;
+  status: number;
+  statusChangeDate: Date;
+  timeZone: string;
+  trustedDomains: string[];
+  trustedDomainsType: number;
+  version: number;
+  versionChanged: Date;
+};

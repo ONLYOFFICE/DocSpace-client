@@ -242,8 +242,6 @@ class FilesTableHeader extends React.Component {
       !splitColumns ||
       isFrame;
 
-    const tableColumns = columns.map((c) => c.enable && c.key);
-
     if (isFrame && frameTableColumns) {
       const frameTableArray = frameTableColumns.split(",");
 
@@ -252,6 +250,8 @@ class FilesTableHeader extends React.Component {
         return col;
       });
     }
+
+    const tableColumns = columns.map((c) => c.enable && c.key);
 
     this.setTableColumns(tableColumns);
     if (fromUpdate) {

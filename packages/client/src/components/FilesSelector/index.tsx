@@ -226,6 +226,7 @@ const FilesSelector = ({
           isRoom:
             item.parentId === 0 && item.rootFolderType === FolderType.Rooms,
           roomType: item.roomType,
+          shared: item.shared,
         },
       ]);
       setSelectedItemId(item.id);
@@ -365,7 +366,7 @@ const FilesSelector = ({
     onCloseAction();
   };
 
-  const onSearchAction = (value: string) => {
+  const onSearchAction = (value: string, callback?: Function) => {
     setIsFirstLoad(true);
     setItems(null);
     if (selectedItemType === "rooms") {
@@ -375,9 +376,10 @@ const FilesSelector = ({
     }
 
     setSearchValue(value);
+    callback?.();
   };
 
-  const onClearSearchAction = () => {
+  const onClearSearchAction = (callback?: Function) => {
     setIsFirstLoad(true);
     setItems(null);
     if (selectedItemType === "rooms") {
@@ -387,6 +389,7 @@ const FilesSelector = ({
     }
 
     setSearchValue("");
+    callback?.();
   };
 
   const onAcceptAction = (

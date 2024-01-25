@@ -70,25 +70,30 @@ const RoomSelector = ({
   const [items, setItems] = React.useState<TSelectorItem[]>([]);
 
   const onSearchAction = React.useCallback(
-    (value: string) => {
+    (value: string, callback: () => void) => {
       onSearch?.(value);
       setSearchValue(() => {
         setIsFirstLoad(true);
 
         return value;
       });
+      callback?.();
     },
     [onSearch],
   );
 
-  const onClearSearchAction = React.useCallback(() => {
-    onClearSearch?.();
-    setSearchValue(() => {
-      setIsFirstLoad(true);
+  const onClearSearchAction = React.useCallback(
+    (callback: () => void) => {
+      onClearSearch?.();
+      setSearchValue(() => {
+        setIsFirstLoad(true);
 
-      return "";
-    });
-  }, [onClearSearch]);
+        return "";
+      });
+      callback?.();
+    },
+    [onClearSearch],
+  );
 
   const onLoadNextPage = React.useCallback(
     async (startIndex: number) => {
@@ -135,7 +140,7 @@ const RoomSelector = ({
 
   React.useEffect(() => {
     onLoadNextPage(0);
-  }, []);
+  }, [onLoadNextPage]);
 
   return (
     <Selector

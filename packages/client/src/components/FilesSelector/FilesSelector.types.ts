@@ -29,6 +29,7 @@ export type Item = {
   security: Security;
   roomType: number;
   fileExst?: string;
+  shared: boolean;
 };
 
 export type BreadCrumb = {

@@ -466,7 +466,7 @@ class SettingsStore {
   };
 
   setValue = <T>(key: keyof SettingsStore, value: T) => {
-    if (key in this && Object.getOwnPropertyDescriptor(this, key)?.writable)
+    if (key in this)
       // @ts-expect-error is always writable property
       this[key] = value;
   };

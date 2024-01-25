@@ -23,6 +23,7 @@ import {
 import MobileView from "./MobileView";
 
 import withLoader from "../../../HOCs/withLoader";
+import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 
 const ArticleMainButtonContent = (props) => {
   const [dialogVisible, setDialogVisible] = React.useState(false);
@@ -128,6 +129,6 @@ export default inject(({ auth }) => {
   };
 })(
   withTranslation(["Article", "Common", "PeopleTranslations"])(
-    withLoader(observer(ArticleMainButtonContent))(<Loaders.ArticleButton />)
+    withLoader(observer(ArticleMainButtonContent))(<ArticleButtonLoader />)
   )
 );

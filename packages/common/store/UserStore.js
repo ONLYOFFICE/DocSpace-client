@@ -116,6 +116,7 @@ class UserStore {
   };
 
   updateAvatarInfo = (avatar, avatarSmall, avatarMedium, avatarMax) => {
+    this.user.avatar = avatar;
     this.updateUser({ avatar, avatarSmall, avatarMedium, avatarMax });
   };
 

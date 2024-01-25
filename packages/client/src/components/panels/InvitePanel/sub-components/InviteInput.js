@@ -14,7 +14,7 @@ import { ComboBox } from "@docspace/shared/components/combobox";
 import Filter from "@docspace/shared/api/people/filter";
 import BetaBadge from "@docspace/common/components/BetaBadge";
 import { getMembersList } from "@docspace/shared/api/people";
-import { ShareAccessRights } from "@docspace/shared/enums";
+import { AccountsSearchArea, ShareAccessRights } from "@docspace/shared/enums";
 import withCultureNames from "@docspace/common/hoc/withCultureNames";
 import { isBetaLanguage } from "@docspace/shared/utils";
 
@@ -115,7 +115,11 @@ const InviteInput = ({
       const filter = Filter.getFilterWithOutDisabledUser();
       filter.search = query;
 
-      const users = await getMembersList(roomId, filter);
+      const users = await getMembersList(
+        AccountsSearchArea.People,
+        roomId,
+        filter,
+      );
 
       setUsersList(users.items);
       setIsAddEmailPanelBlocked(false);
@@ -130,7 +134,7 @@ const InviteInput = ({
 
   const debouncedSearch = useCallback(
     debounce((value) => searchByQuery(value), 300),
-    []
+    [],
   );
 
   const onChange = (e) => {

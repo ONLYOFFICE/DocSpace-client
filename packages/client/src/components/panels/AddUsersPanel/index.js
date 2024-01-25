@@ -14,7 +14,7 @@ import Loaders from "@docspace/common/components/Loaders";
 
 import { getMembersList, getUserList } from "@docspace/shared/api/people";
 import { LOADER_TIMEOUT } from "@docspace/shared/constants";
-import { ShareAccessRights } from "@docspace/shared/enums";
+import { AccountsSearchArea, ShareAccessRights } from "@docspace/shared/enums";
 import useLoadingWithTimeout from "@docspace/shared/hooks/useLoadingWithTimeout";
 
 import withLoader from "../../../HOCs/withLoader";
@@ -54,7 +54,7 @@ const AddUsersPanel = ({
   const onBackClick = () => onClose();
   const getFilterWithOutDisabledUser = useCallback(
     () => Filter.getFilterWithOutDisabledUser(),
-    []
+    [],
   );
 
   const onKeyPress = (e) => {
@@ -101,7 +101,7 @@ const AddUsersPanel = ({
   };
 
   const selectedAccess = accessOptions.filter(
-    (access) => access.access === accessRight
+    (access) => access.access === accessRight,
   )[0];
 
   const [itemsList, setItemsList] = useState(null);
@@ -111,11 +111,11 @@ const AddUsersPanel = ({
   const [total, setTotal] = useState(0);
   const [isLoading, setIsLoading] = useLoadingWithTimeout(
     LOADER_TIMEOUT,
-    false
+    false,
   );
   const [isLoadingSearch, setIsLoadingSearch] = useLoadingWithTimeout(
     LOADER_TIMEOUT,
-    false
+    false,
   );
 
   useEffect(() => {
@@ -187,7 +187,7 @@ const AddUsersPanel = ({
 
     (!roomId
       ? getUserList(currentFilter)
-      : getMembersList(roomId, currentFilter)
+      : getMembersList(AccountsSearchArea.People, roomId, currentFilter)
     )
       .then((response) => {
         let newItems = startIndex ? itemsList : [];
@@ -297,7 +297,7 @@ export default inject(({ auth }) => {
 })(
   observer(
     withTranslation(["SharingPanel", "PeopleTranslations", "Common"])(
-      withLoader(AddUsersPanel)(<Loaders.DialogAsideLoader isPanel />)
-    )
-  )
+      withLoader(AddUsersPanel)(<Loaders.DialogAsideLoader isPanel />),
+    ),
+  ),
 );

@@ -21,6 +21,7 @@ import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg
 import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/catalog.accounts.react.svg?url";
 import EmptyScreenPersonsSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
 import { getAccessOptions } from "../InvitePanel/utils";
+import { AccountsSearchArea } from "@docspace/shared/enums";
 
 interface AddGroupManagerPanelProps {
   t: any;
@@ -44,17 +45,17 @@ const AddGroupManagerPanel = ({
 
   const [isLoading, setIsLoading] = useLoadingWithTimeout(
     LOADER_TIMEOUT,
-    false
+    false,
   );
   const [isLoadingSearch, setIsLoadingSearch] = useLoadingWithTimeout(
     LOADER_TIMEOUT,
-    false
+    false,
   );
   const [isLoadingNextPage, setIsLoadingNextPage] = useState<boolean>(false);
 
   const accessOptions = getAccessOptions(t);
   const selectedAccess = accessOptions.filter(
-    (access) => access.access === ShareAccessRights.FullAccess
+    (access) => access.access === ShareAccessRights.FullAccess,
   )[0];
 
   const onSearch = (value: string, callback) => {
@@ -70,7 +71,7 @@ const AddGroupManagerPanel = ({
   const onLoadNextPage = (
     startIndex: number,
     search = searchValue,
-    callback
+    callback,
   ) => {
     const pageCount = 100;
 
@@ -90,7 +91,7 @@ const AddGroupManagerPanel = ({
       currentFilter.search = search;
     }
 
-    getMembersList(roomId, currentFilter)
+    getMembersList(AccountsSearchArea.People, roomId, currentFilter)
       .then((response) => {
         let newItems = startIndex ? itemsList : [];
         let totalDifferent = startIndex ? response.total - total : 0;
@@ -198,7 +199,7 @@ export default inject(({ auth }) => ({
 }))(
   observer(
     withTranslation(["SharingPanel", "PeopleTranslations", "Common"])(
-      withLoader(AddGroupManagerPanel)(<Loaders.DialogAsideLoader isPanel />)
-    )
-  )
+      withLoader(AddGroupManagerPanel)(<Loaders.DialogAsideLoader isPanel />),
+    ),
+  ),
 );

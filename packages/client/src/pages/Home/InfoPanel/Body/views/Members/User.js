@@ -176,7 +176,7 @@ const User = ({
   };
 
   const onToggle = (e, isOpen) => {
-    setIsScrollLocked(isOpen);
+    // setIsScrollLocked(isOpen);
   };
 
   const userAvatar = user.hasAvatar ? user.avatar : DefaultUserPhotoUrl;

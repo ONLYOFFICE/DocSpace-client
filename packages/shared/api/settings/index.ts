@@ -16,6 +16,8 @@ import {
   TIpRestriction,
   TCookieSettings,
   TLoginSettings,
+  TCapabilities,
+  TThirdPartyProvider,
 } from "./types";
 
 export async function getSettings(withPassword = false, headers = null) {
@@ -589,11 +591,13 @@ export function getConsumersList() {
   });
 }
 
-export function getAuthProviders() {
-  return request({
+export async function getAuthProviders() {
+  const res = (await request({
     method: "get",
     url: `/people/thirdparty/providers`,
-  });
+  })) as TThirdPartyProvider[];
+
+  return res;
 }
 
 export function updateConsumerProps(newProps) {
@@ -705,12 +709,15 @@ export async function getBuildVersion(headers = null) {
   return res;
 }
 
-export function getCapabilities() {
-  const options = {
+export async function getCapabilities() {
+  const options: AxiosRequestConfig = {
     method: "get",
     url: "/capabilities",
   };
-  return request(options);
+
+  const res = (await request(options)) as TCapabilities;
+
+  return res;
 }
 
 export function getTipsSubscription() {

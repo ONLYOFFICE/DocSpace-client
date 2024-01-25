@@ -1,9 +1,10 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import authStore from "@docspace/common/store/AuthStore";
+import { authStore } from "@docspace/shared/store";
 import api from "@docspace/shared/api";
 import { setDNSSettings } from "@docspace/shared/api/settings";
 import { toastr } from "@docspace/shared/components/toast";
 import { DeviceType } from "@docspace/shared/enums";
+import { isManagement } from "@docspace/shared/utils/common";
 
 class CommonStore {
   logoUrlsWhiteLabel = [];
@@ -119,10 +120,9 @@ class CommonStore {
   };
 
   setWhiteLabelSettings = async (data) => {
-    const { isManagement } = authStore;
     const response = await api.settings.setWhiteLabelSettings(
       data,
-      isManagement
+      isManagement()
     );
     return Promise.resolve(response);
   };
@@ -158,10 +158,10 @@ class CommonStore {
   };
 
   restoreWhiteLabelSettings = async (isDefault) => {
-    const { settingsStore, isManagement } = authStore;
+    const { settingsStore } = authStore;
     const { getWhiteLabelLogoUrls } = settingsStore;
 
-    await api.settings.restoreWhiteLabelSettings(isDefault, isManagement);
+    await api.settings.restoreWhiteLabelSettings(isDefault, isManagement());
     await getWhiteLabelLogoUrls();
     this.getWhiteLabelLogoUrls();
     this.getIsDefaultWhiteLabel();

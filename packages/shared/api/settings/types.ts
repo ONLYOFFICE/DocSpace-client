@@ -181,3 +181,17 @@ export type TLoginSettings = {
   blockTime: number;
   checkPeriod: number;
 };
+
+export type TCapabilities = {
+  ldapEnabled: boolean;
+  providers: string[];
+  ssoLabel: string;
+  oauthEnabled: boolean;
+  ssoUrl: string;
+};
+
+export type TThirdPartyProvider = {
+  provider: string;
+  url: string;
+  linked: boolean;
+};

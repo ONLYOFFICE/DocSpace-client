@@ -32,6 +32,7 @@ import { Badge } from "@docspace/shared/components/badge";
 import { Link } from "@docspace/shared/components/link";
 import { getSettingsThirdParty } from "@docspace/shared/api/files";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import { isManagement } from "@docspace/shared/utils/common";
 
 const { DocumentModuleType, ResourcesModuleType, StorageModuleType } =
   BackupStorageType;
@@ -330,8 +331,6 @@ class AutomaticBackup extends React.PureComponent {
       isCheckedThirdParty,
       isCheckedDocuments,
       updateBaseFolderPath,
-
-      isManagement,
     } = this.props;
 
     try {
@@ -345,7 +344,7 @@ class AutomaticBackup extends React.PureComponent {
         time,
         day,
         false,
-        isManagement
+        isManagement()
       );
       const [selectedSchedule, storageInfo] = await Promise.all([
         getBackupSchedule(),
@@ -586,7 +585,7 @@ export default inject(
     filesSelectorInput,
     currentQuotaStore,
   }) => {
-    const { language, settingsStore, isManagement } = auth;
+    const { language, settingsStore } = auth;
     const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
     const { theme, currentColorScheme, automaticBackupUrl } = settingsStore;
 
@@ -678,7 +677,6 @@ export default inject(
       setStorageRegions,
       updateBaseFolderPath,
 
-      isManagement,
       automaticBackupUrl,
       currentColorScheme,
     };

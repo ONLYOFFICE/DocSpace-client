@@ -22,7 +22,7 @@ import {
 import { FloatingButton } from "@docspace/shared/components/floating-button";
 import { getSettingsThirdParty } from "@docspace/shared/api/files";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-
+import { isManagement } from "@docspace/shared/utils/common";
 let selectedStorageType = "";
 
 class ManualBackup extends React.Component {
@@ -136,14 +136,13 @@ class ManualBackup extends React.Component {
       setDownloadingProgress,
       t,
       clearLocalStorage,
-      isManagement,
     } = this.props;
     const { TemporaryModuleType } = BackupStorageType;
 
     clearLocalStorage();
     saveToLocalStorage("LocalCopyStorageType", "TemporaryStorage");
     try {
-      await startBackup(`${TemporaryModuleType}`, null, false, isManagement);
+      await startBackup(`${TemporaryModuleType}`, null, false, isManagement());
       setDownloadingProgress(1);
       getIntervalProgress(t);
     } catch (e) {
@@ -183,7 +182,6 @@ class ManualBackup extends React.Component {
       setTemporaryLink,
       getStorageParams,
       saveToLocalStorage,
-      isManagement,
     } = this.props;
 
     clearLocalStorage();
@@ -206,7 +204,7 @@ class ManualBackup extends React.Component {
     );
 
     try {
-      await startBackup(moduleType, storageParams, false, isManagement);
+      await startBackup(moduleType, storageParams, false, isManagement());
       setDownloadingProgress(1);
       setTemporaryLink("");
       getIntervalProgress(t);
@@ -413,7 +411,7 @@ export default inject(
       saveToLocalStorage,
       setConnectedThirdPartyAccount,
     } = backup;
-    const { isManagement } = auth;
+
     const { currentColorScheme, dataBackupUrl } = auth.settingsStore;
     const { rootFoldersTitles, fetchTreeFolders } = treeFoldersStore;
     const { isNotPaidPeriod } = currentTariffStatusStore;
@@ -438,7 +436,6 @@ export default inject(
       saveToLocalStorage,
       setConnectedThirdPartyAccount,
 
-      isManagement,
       dataBackupUrl,
       currentColorScheme,
     };

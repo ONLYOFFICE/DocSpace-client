@@ -7,7 +7,7 @@ import CloudServicesYandexReactSvgUrl from "PUBLIC_DIR/images/cloud.services.yan
 import CloudServicesNextcloudReactSvgUrl from "PUBLIC_DIR/images/cloud.services.nextcloud.react.svg?url";
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
 import CloudServicesWebdavReactSvgUrl from "PUBLIC_DIR/images/cloud.services.webdav.react.svg?url";
-import authStore from "@docspace/common/store/AuthStore";
+import { authStore } from "@docspace/shared/store";
 import { FileType, RoomsType } from "@docspace/shared/enums";
 import config from "PACKAGE_FILE";
 import { toUrlParams } from "@docspace/shared/utils/common";

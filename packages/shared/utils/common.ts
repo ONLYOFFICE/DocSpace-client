@@ -26,6 +26,7 @@ import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.patt
 
 import { ArticleAlerts, FolderType, RoomsType, ThemeKeys } from "../enums";
 import { LANGUAGE, RTL_LANGUAGES } from "../constants";
+
 import { TI18n } from "../types";
 import { TUser } from "../api/people/types";
 import { TFolder, TFile, TGetFolder } from "../api/files/types";
@@ -36,6 +37,13 @@ import { Encoder } from "./encoder";
 import { combineUrl } from "./combineUrl";
 import { getCookie } from "./cookie";
 import { isNumber } from "./typeGuards";
+import { checkIsSSR } from "./device";
+
+export const desktopConstants = Object.freeze({
+  domain: !checkIsSSR() && window.location.origin,
+  provider: "onlyoffice",
+  cryptoEngineId: "{FFF0E1EB-13DB-4678-B67D-FF0A41DBBCEF}",
+});
 
 let timer: null | ReturnType<typeof setTimeout> = null;
 
@@ -86,6 +94,10 @@ export const getShowText = () => {
   }
 
   return false;
+};
+
+export const isManagement = () => {
+  return window.location.pathname.includes("management");
 };
 
 export const initArticleAlertsData = () => {

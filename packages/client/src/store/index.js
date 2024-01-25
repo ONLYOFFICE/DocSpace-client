@@ -1,12 +1,12 @@
-import authStore from "@docspace/common/store/AuthStore";
 import {
+  authStore,
   userStore,
   tfaStore,
   bannerStore,
   currentTariffStatusStore,
   currentQuotaStore,
   paymentQuotasStore,
-} from "@docspace/common/store/AuthStore";
+} from "@docspace/shared/store";
 import PaymentStore from "./PaymentStore";
 import WizardStore from "./WizardStore";
 import SettingsSetupStore from "./SettingsSetupStore";

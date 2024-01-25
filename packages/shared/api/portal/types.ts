@@ -13,35 +13,16 @@ export type TPortalTariff = {
   quotas: TQuotas[];
 };
 
-export type TFeature = {
+export type TPaymentFeature = {
   id: string;
   value: number;
   type: string;
+  priceTitle?: string;
+  image?: string;
   used?: {
     value: number;
     title?: string;
   };
-  priceTitle?: string;
-};
-
-export type TPortalQuota = {
-  id: number;
-  title: string;
-  price: {
-    value: number;
-  };
-  nonProfit: boolean;
-  free: boolean;
-  trial: boolean;
-  features: TFeature[];
-};
-
-export type TPaymentFeature = {
-  id: string;
-  value: number | boolean;
-  type: string;
-  priceTitle?: string;
-  image?: string;
 };
 
 export type TPaymentQuota = {
@@ -49,7 +30,7 @@ export type TPaymentQuota = {
   title: string;
   price: {
     value: string;
-    currencySymbol: string;
+    currencySymbol?: string;
   };
   nonProfit: boolean;
   free: boolean;
@@ -76,4 +57,34 @@ export type TPortal = {
   trustedDomainsType: number;
   version: number;
   versionChanged: Date;
+};
+
+export type TTariff = {
+  id: number;
+  state: number;
+  dueDate: Date;
+  delayDueDate: Date;
+  licenseDate: Date;
+  customerId: string;
+  quotas: TQuotas[];
+};
+
+export type TTenantExtraRes = {
+  customMode: boolean;
+  opensource: boolean;
+  enterprise: boolean;
+  notPaid: boolean;
+  licenseAccept: Date;
+  enableTariffPage: boolean;
+};
+
+export type TTenantExtra = {
+  customMode: boolean;
+  opensource: boolean;
+  enterprise: boolean;
+  tariff: TTariff;
+  quota: TPaymentQuota;
+  notPaid: boolean;
+  licenseAccept: Date;
+  enableTariffPage: boolean;
 };

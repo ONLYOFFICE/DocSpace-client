@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from "axios";
 import { EmployeeType } from "../../enums";
 import { request } from "../client";
-import { TPaymentQuota, TPortal, TPortalQuota, TPortalTariff } from "./types";
+import { TPaymentQuota, TPortal, TPortalTariff, TTenantExtra } from "./types";
 
 export function getShortenedLink(link) {
   return request({
@@ -219,9 +219,15 @@ export async function getPortalPaymentQuotas() {
   return res;
 }
 
-export function getPortalTenantExtra(refresh) {
+export async function getPortalTenantExtra(refresh: boolean) {
   const params = refresh ? { refresh: true } : {};
-  return request({ method: "get", url: "/portal/tenantextra", params });
+  const res = (await request({
+    method: "get",
+    url: "/portal/tenantextra",
+    params,
+  })) as TTenantExtra;
+
+  return res;
 }
 export async function getPortalQuota(refresh = false) {
   const params = refresh ? { refresh: true } : {};
@@ -230,7 +236,7 @@ export async function getPortalQuota(refresh = false) {
     method: "get",
     url: "/portal/payment/quota",
     params,
-  })) as TPortalQuota;
+  })) as TPaymentQuota;
 
   return res;
 }

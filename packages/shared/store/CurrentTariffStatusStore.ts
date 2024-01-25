@@ -17,12 +17,21 @@ class CurrentTariffStatusStore {
 
   payerInfo: TUser | null = null;
 
-  authStore: any = null;
+  language: string = "en";
 
-  constructor(authStore: any) {
+  isEnterprise: boolean = false;
+
+  constructor() {
     makeAutoObservable(this);
-    this.authStore = authStore;
   }
+
+  setLanguage = (language: string) => {
+    this.language = language;
+  };
+
+  setIsEnterprise = (isEnterprise: boolean) => {
+    this.isEnterprise = isEnterprise;
+  };
 
   setIsLoaded = (isLoaded: boolean) => {
     this.isLoaded = isLoaded;
@@ -81,7 +90,7 @@ class CurrentTariffStatusStore {
   };
 
   get paymentDate() {
-    moment.locale(this.authStore.language);
+    moment.locale(this.language);
     if (this.dueDate === null) return "";
     return moment(this.dueDate).tz(window.timezone).format("LL");
   }
@@ -99,19 +108,19 @@ class CurrentTariffStatusStore {
   }
 
   get gracePeriodEndDate() {
-    moment.locale(this.authStore.language);
+    moment.locale(this.language);
     if (this.delayDueDate === null) return "";
     return moment(this.delayDueDate).tz(window.timezone).format("LL");
   }
 
   get delayDaysCount() {
-    moment.locale(this.authStore.language);
+    moment.locale(this.language);
     if (this.delayDueDate === null) return "";
     return getDaysRemaining(this.delayDueDate);
   }
 
   get isLicenseExpiring() {
-    if (!this.dueDate || !this.authStore.isEnterprise) return;
+    if (!this.dueDate || !this.isEnterprise) return;
 
     const days = getDaysLeft(this.dueDate);
 

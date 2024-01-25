@@ -12,7 +12,7 @@ import LoaderAdditionalResources from "../sub-components/loaderAdditionalResourc
 import isEqual from "lodash/isEqual";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import { mobile, size } from "@docspace/shared/utils";
-
+import { isManagement } from "@docspace/shared/utils/common";
 const StyledComponent = styled.div`
   margin-top: 40px;
 
@@ -66,7 +66,6 @@ const AdditionalResources = (props) => {
     additionalResourcesIsDefault,
     setIsLoadedAdditionalResources,
     isLoadedAdditionalResources,
-    isManagement,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -109,7 +108,7 @@ const AdditionalResources = (props) => {
   }, []);
 
   const checkWidth = () => {
-    const url = isManagement
+    const url = isManagement()
       ? "/branding"
       : "portal-settings/customization/branding";
     window.innerWidth > size.mobile &&
@@ -285,7 +284,7 @@ const AdditionalResources = (props) => {
 };
 
 export default inject(({ auth, common, currentQuotaStore }) => {
-  const { settingsStore, isManagement } = auth;
+  const { settingsStore } = auth;
 
   const { setIsLoadedAdditionalResources, isLoadedAdditionalResources } =
     common;
@@ -307,7 +306,6 @@ export default inject(({ auth, common, currentQuotaStore }) => {
     setIsLoadedAdditionalResources,
     isLoadedAdditionalResources,
     isSettingPaid: isBrandingAndCustomizationAvailable,
-    isManagement,
   };
 })(
   withLoading(

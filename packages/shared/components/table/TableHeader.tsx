@@ -1044,8 +1044,9 @@ class TableHeader extends React.Component<
       (column) => !column.defaultSize,
     ).length;
 
-    const defaultSizeColumn = columns.find((column) => column.defaultSize)
-      ?.defaultSize;
+    const defaultSizeColumn = columns.find(
+      (column) => column.defaultSize,
+    )?.defaultSize;
 
     const widthColumns =
       containerWidth - settingsSize - (defaultSizeColumn || 0);

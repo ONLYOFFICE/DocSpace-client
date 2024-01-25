@@ -1,4 +1,4 @@
-import authStore from "@docspace/common/store/AuthStore";
+import { authStore } from "@docspace/shared/store";
 import { getLanguage } from "@docspace/shared/utils";
 import { toCommunityHostname } from "@docspace/shared/utils/common";
 

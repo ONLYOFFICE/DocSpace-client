@@ -33,7 +33,7 @@ class UserStore {
     return user;
   };
 
-  init = async (i18n: TI18n) => {
+  init = async (i18n?: TI18n) => {
     if (this.isLoaded) return;
 
     this.setIsLoading(true);

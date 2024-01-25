@@ -141,8 +141,6 @@ export default function withContent(WrappedContent) {
       const { isRecycleBinFolder, isPrivacyFolder, isArchiveFolder } =
         treeFoldersStore;
 
-      const { replaceFileStream, setEncryptionAccess } = auth;
-
       const { culture, personal, folderFormValidation, isDesktopClient } =
         auth.settingsStore;
 
@@ -167,8 +165,7 @@ export default function withContent(WrappedContent) {
         isArchiveFolder,
         openDocEditor,
         renameFolder,
-        replaceFileStream,
-        setEncryptionAccess,
+
         setIsLoading,
         updateFile,
         viewAs,

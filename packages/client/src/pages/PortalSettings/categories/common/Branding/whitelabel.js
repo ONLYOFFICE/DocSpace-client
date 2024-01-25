@@ -11,7 +11,7 @@ import { Button } from "@docspace/shared/components/button";
 import { Badge } from "@docspace/shared/components/badge";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { toastr } from "@docspace/shared/components/toast";
-
+import { isManagement } from "@docspace/shared/utils/common";
 import { size } from "@docspace/shared/utils";
 
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
@@ -43,7 +43,7 @@ const WhiteLabel = (props) => {
     setLogoUrlsWhiteLabel,
     defaultLogoTextWhiteLabel,
     enableRestoreButton,
-    isManagement,
+
     currentDeviceType,
     resetIsInit,
   } = props;
@@ -76,7 +76,7 @@ const WhiteLabel = (props) => {
   }, []);
 
   const checkWidth = () => {
-    const url = isManagement
+    const url = isManagement()
       ? "/branding"
       : "/portal-settings/customization/branding";
 
@@ -527,7 +527,6 @@ export default inject(({ auth, common, currentQuotaStore }) => {
   const { whiteLabelLogoUrls: defaultWhiteLabelLogoUrls, currentDeviceType } =
     auth.settingsStore;
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
-  const { isManagement } = auth;
 
   return {
     setLogoText,
@@ -543,7 +542,7 @@ export default inject(({ auth, common, currentQuotaStore }) => {
     setLogoUrlsWhiteLabel,
     defaultLogoTextWhiteLabel,
     enableRestoreButton,
-    isManagement,
+
     currentDeviceType,
     resetIsInit,
   };

@@ -15,7 +15,7 @@ import LoaderCompanyInfoSettings from "../sub-components/loaderCompanyInfoSettin
 import AboutDialog from "../../../../About/AboutDialog";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import { mobile, size } from "@docspace/shared/utils";
-
+import { isManagement } from "@docspace/shared/utils/common";
 const StyledComponent = styled.div`
   .link {
     font-weight: 600;
@@ -62,7 +62,6 @@ const CompanyInfoSettings = (props) => {
     isLoadedCompanyInfoSettingsData,
     buildVersionInfo,
     personal,
-    isManagement,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -101,7 +100,7 @@ const CompanyInfoSettings = (props) => {
   }, []);
 
   const checkWidth = () => {
-    const url = isManagement
+    const url = isManagement()
       ? "/branding"
       : "portal-settings/customization/branding";
     window.innerWidth > size.mobile &&
@@ -458,7 +457,7 @@ const CompanyInfoSettings = (props) => {
 };
 
 export default inject(({ auth, common, currentQuotaStore }) => {
-  const { settingsStore, isManagement } = auth;
+  const { settingsStore } = auth;
 
   const {
     setIsLoadedCompanyInfoSettingsData,
@@ -488,7 +487,6 @@ export default inject(({ auth, common, currentQuotaStore }) => {
     buildVersionInfo,
     personal,
     isSettingPaid: isBrandingAndCustomizationAvailable,
-    isManagement,
   };
 })(
   withLoading(

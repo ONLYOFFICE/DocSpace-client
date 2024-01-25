@@ -4,7 +4,7 @@ import { toastr } from "../components/toast";
 import { TData } from "../components/toast/Toast.type";
 import { PortalFeaturesLimitations } from "../enums";
 import api from "../api";
-import { TFeature, TPortalQuota } from "../api/portal/types";
+import { TPaymentFeature, TPaymentQuota } from "../api/portal/types";
 import {
   MANAGER,
   TOTAL_SIZE,
@@ -17,9 +17,9 @@ import {
 } from "../constants";
 
 class CurrentQuotasStore {
-  currentPortalQuota: TPortalQuota = {} as TPortalQuota;
+  currentPortalQuota: TPaymentQuota = {} as TPaymentQuota;
 
-  currentPortalQuotaFeatures: TFeature[] = [];
+  currentPortalQuotaFeatures: TPaymentFeature[] = [];
 
   isLoaded = false;
 
@@ -163,7 +163,7 @@ class CurrentQuotasStore {
   }
 
   get quotaCharacteristics() {
-    const result: TFeature[] = [];
+    const result: TPaymentFeature[] = [];
 
     this.currentPortalQuotaFeatures.forEach((elem) => {
       if (elem.id === ROOM) result?.splice(0, 0, elem);
@@ -213,7 +213,7 @@ class CurrentQuotasStore {
     return this.currentPortalQuota?.nonProfit;
   }
 
-  setPortalQuotaValue = (res: TPortalQuota) => {
+  setPortalQuotaValue = (res: TPaymentQuota) => {
     this.currentPortalQuota = res;
     this.currentPortalQuotaFeatures = res.features;
 

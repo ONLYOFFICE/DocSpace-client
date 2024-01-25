@@ -57,7 +57,7 @@ declare global {
     timezone: string;
     snackbar?: {};
     DocSpace: {
-      navigate: (path: string, state: { [key: string]: unknown }) => void;
+      navigate: (path: string, state?: { [key: string]: unknown }) => void;
     };
     DocSpaceConfig: {
       wrongPortalNameUrl?: string;
@@ -69,7 +69,14 @@ declare global {
         url?: string;
       };
     };
-    AscDesktopEditor: { execCommand: (key: string, value: string) => void };
+    AscDesktopEditor: {
+      execCommand: (key: string, value: string) => void;
+      cloudCryptoCommand: (
+        key: string,
+        value: unknown,
+        callback: unknown,
+      ) => void;
+    };
     cloudCryptoCommand: (
       type: string,
       params: string[],

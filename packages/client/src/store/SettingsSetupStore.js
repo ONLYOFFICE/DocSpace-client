@@ -3,7 +3,7 @@ import { makeAutoObservable } from "mobx";
 const { Filter } = api;
 import SelectionStore from "./SelectionStore";
 //import CommonStore from "./CommonStore";
-import authStore from "@docspace/common/store/AuthStore";
+import { authStore } from "@docspace/shared/store";
 import {
   getSMTPSettings,
   resetSMTPSettings,

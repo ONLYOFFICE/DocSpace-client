@@ -1,3 +1,7 @@
+import Filter from "./people/filter";
+import FilesFilter from "./files/filter";
+import RoomsFilter from "./rooms/filter";
+import OformsFilter from "./oforms/filter";
 import * as people from "./people";
 import * as user from "./user";
 import * as settings from "./settings";
@@ -11,6 +15,10 @@ import * as management from "./management";
 import * as oforms from "./oforms";
 
 export default {
+  Filter,
+  FilesFilter,
+  RoomsFilter,
+  OformsFilter,
   people,
   user,
   settings,

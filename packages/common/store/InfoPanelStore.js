@@ -18,6 +18,7 @@ import {
   editExternalLink,
   addExternalLink,
 } from "@docspace/shared/api/files";
+import isEqual from "lodash/isEqual";
 
 const observedKeys = [
   "id",
@@ -378,7 +379,8 @@ class InfoPanelStore {
       infoPanelSelection &&
       this.infoPanelSelection.id === infoPanelSelection.id &&
       this.infoPanelSelection.isFolder === infoPanelSelection.isFolder &&
-      !forceUpdate
+      !forceUpdate &&
+      isEqual(infoPanelSelection, this.infoPanelSelection)
     ) {
       return;
     }

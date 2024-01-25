@@ -8,7 +8,11 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { StyledTitle } from "../../../styles/common";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import RoomsContextBtn from "./context-btn";
-import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
+import {
+  FolderType,
+  RoomsType,
+  ShareAccessRights,
+} from "@docspace/shared/enums";
 
 const RoomsItemHeader = ({
   t,
@@ -22,6 +26,7 @@ const RoomsItemHeader = ({
   roomsView,
   setSelected,
   setBufferSelection,
+  isArchive,
 }) => {
   const itemTitleRef = useRef();
 
@@ -37,10 +42,6 @@ const RoomsItemHeader = ({
   const onSelectItem = () => {
     setSelected("none");
     setBufferSelection(selection);
-  };
-
-  const onCloseItem = () => {
-    setSelected("none");
   };
 
   const onClickInviteUsers = () => {
@@ -69,7 +70,7 @@ const RoomsItemHeader = ({
           <RoomIcon
             color={selection.logo.color}
             title={selection.title}
-            isArchive={selection.isArchive}
+            isArchive={isArchive}
           />
         ) : (
           <img
@@ -99,7 +100,6 @@ const RoomsItemHeader = ({
           selection={selection}
           itemTitleRef={itemTitleRef}
           onSelectItem={onSelectItem}
-          onCloseItem={onCloseItem}
         />
       </div>
     </StyledTitle>
@@ -111,6 +111,7 @@ export default inject(
     const { infoPanelSelection, roomsView } = auth.infoPanelStore;
 
     const selection = infoPanelSelection.length > 1 ? null : infoPanelSelection;
+    const isArchive = selection?.rootFolderType === FolderType.Archive;
 
     return {
       selection,
@@ -131,6 +132,7 @@ export default inject(
 
       setSelected: filesStore.setSelected,
       setBufferSelection: filesStore.setBufferSelection,
+      isArchive,
     };
   }
 )(

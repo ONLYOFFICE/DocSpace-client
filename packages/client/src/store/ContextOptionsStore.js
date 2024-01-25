@@ -1164,6 +1164,8 @@ class ContextOptionsStore {
         ) === -1;
     }
 
+    const isArchive = item.rootFolderType === FolderType.Archive;
+
     const optionsModel = [
       {
         id: "option_select",
@@ -1284,9 +1286,7 @@ class ContextOptionsStore {
         icon: InvitationLinkReactSvgUrl,
         onClick: () => this.onCopyLink(item, t),
         disabled:
-          (isPublicRoomType &&
-            item.canCopyPublicLink &&
-            !this.treeFoldersStore.isArchiveFolder) ||
+          (isPublicRoomType && item.canCopyPublicLink && !isArchive) ||
           this.publicRoomStore.isPublicRoom,
       },
       {
@@ -1296,7 +1296,7 @@ class ContextOptionsStore {
         icon: TabletLinkReactSvgUrl,
         disabled:
           this.publicRoomStore.isPublicRoom ||
-          this.treeFoldersStore.isArchiveFolder ||
+          isArchive ||
           !item.canCopyPublicLink ||
           !isPublicRoomType,
         onClick: async () => {
@@ -1480,9 +1480,7 @@ class ContextOptionsStore {
         icon: LeaveRoomSvgUrl,
         onClick: this.onLeaveRoom,
         disabled:
-          this.treeFoldersStore.isArchiveFolder ||
-          !item.inRoom ||
-          this.publicRoomStore.isPublicRoom,
+          isArchive || !item.inRoom || this.publicRoomStore.isPublicRoom,
       },
       {
         id: "option_unarchive-room",

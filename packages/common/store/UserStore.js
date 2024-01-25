@@ -111,11 +111,13 @@ class UserStore {
     return email;
   };
 
+  updateUser = (newUser) => {
+    this.user = { ...this.user, newUser };
+  };
+
   updateAvatarInfo = (avatar, avatarSmall, avatarMedium, avatarMax) => {
     this.user.avatar = avatar;
-    this.user.avatarSmall = avatarSmall;
-    this.user.avatarMedium = avatarMedium;
-    this.user.avatarMax = avatarMax;
+    this.updateUser({ avatar, avatarSmall, avatarMedium, avatarMax });
   };
 
   get withActivationBar() {

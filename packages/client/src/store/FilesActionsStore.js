@@ -55,6 +55,7 @@ import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
+import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
 class FilesActionStore {
   authStore;
@@ -289,8 +290,8 @@ class FilesActionStore {
     let selection = newSelection
       ? newSelection
       : this.filesStore.selection.length
-      ? this.filesStore.selection
-      : [bufferSelection];
+        ? this.filesStore.selection
+        : [bufferSelection];
 
     selection = selection.filter((item) => item.security.Delete);
 
@@ -2200,7 +2201,7 @@ class FilesActionStore {
         );
         setMediaViewerData({ visible: true, id });
 
-        const url = "/products/files/#preview/" + id;
+        const url = combineUrl(MEDIA_VIEW_URL, id);
 
         if (this.publicRoomStore.isPublicRoom) return;
 

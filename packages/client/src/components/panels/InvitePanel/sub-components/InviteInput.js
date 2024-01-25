@@ -116,7 +116,7 @@ const InviteInput = ({
       filter.search = query;
 
       const users = await getMembersList(
-        AccountsSearchArea.People,
+        AccountsSearchArea.Any,
         roomId,
         filter,
       );
@@ -167,7 +167,9 @@ const InviteInput = ({
 
   const removeExist = (items) => {
     const filtered = items.reduce((unique, o) => {
-      !unique.some((obj) => obj.email === o.email) && unique.push(o);
+      !unique.some((obj) => obj.email === o.email || obj.id === o.id) &&
+        unique.push(o);
+
       return unique;
     }, []);
 
@@ -178,7 +180,15 @@ const InviteInput = ({
   };
 
   const getItemContent = (item) => {
-    const { avatar, displayName, email, id, shared } = item;
+    const {
+      avatar,
+      displayName,
+      name: groupName,
+      email,
+      id,
+      shared,
+      isGroup = false,
+    } = item;
 
     item.access = selectedAccess;
 
@@ -203,10 +213,16 @@ const InviteInput = ({
         heightTablet={48}
         className="list-item"
       >
-        <Avatar size="min" role="user" source={avatar} />
+        <Avatar
+          size="min"
+          role="user"
+          source={avatar}
+          userName={groupName}
+          isGroup={isGroup}
+        />
         <div className="list-item_content">
           <SearchItemText primary disabled={shared}>
-            {displayName}
+            {displayName || groupName}
           </SearchItemText>
           <SearchItemText>{email}</SearchItemText>
         </div>

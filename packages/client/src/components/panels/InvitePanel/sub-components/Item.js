@@ -32,10 +32,25 @@ const Item = ({
   setIsOpenItemAccess,
   isMobileView,
 }) => {
-  const { avatar, displayName, email, id, errors, access } = item;
+  const {
+    avatar,
+    displayName,
+    email,
+    id,
+    errors,
+    access,
+    isGroup,
+    name: groupName,
+  } = item;
 
-  const name = !!avatar ? (displayName !== "" ? displayName : email) : email;
-  const source = !!avatar ? avatar : AtReactSvgUrl;
+  const name = isGroup
+    ? groupName
+    : !!avatar
+      ? displayName !== ""
+        ? displayName
+        : email
+      : email;
+  const source = !!avatar ? avatar : isGroup ? "" : AtReactSvgUrl;
   const role = getUserRole(item);
 
   const [edit, setEdit] = useState(false);
@@ -47,7 +62,7 @@ const Item = ({
   const filteredAccesses = filterUserRoleOptions(accesses, item, true);
 
   const defaultAccess = filteredAccesses.find(
-    (option) => option.access === +access
+    (option) => option.access === +access,
   );
 
   const errorsInList = () => {
@@ -170,7 +185,13 @@ const Item = ({
 
   return (
     <>
-      <Avatar size="min" role={role} source={source} />
+      <Avatar
+        size="min"
+        role={role}
+        source={source}
+        isGroup={isGroup}
+        userName={groupName}
+      />
       {edit ? editBody : displayBody}
     </>
   );

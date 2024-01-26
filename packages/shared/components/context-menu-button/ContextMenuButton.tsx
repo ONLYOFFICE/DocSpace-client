@@ -28,7 +28,7 @@ import { ContextMenuButtonDisplayType } from "./ContextMenuButton.enums";
 const ContextMenuButtonPure = ({
   opened,
   data,
-  displayType,
+  displayType = ContextMenuButtonDisplayType.dropdown,
   onClose,
   isDisabled,
   getData,

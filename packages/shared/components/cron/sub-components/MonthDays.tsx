@@ -17,7 +17,6 @@ export const MonthDays = memo(
         setValue={setMonthDays}
         placeholder={placeholder}
         unit={unit}
-        prefix={t("On")}
         dropDownMaxHeight={300}
       />
     );

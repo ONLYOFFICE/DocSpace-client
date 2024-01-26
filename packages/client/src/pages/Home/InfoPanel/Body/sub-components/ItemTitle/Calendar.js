@@ -1,9 +1,11 @@
+import IconCalendar from "PUBLIC_DIR/images/calendar.info.panel.react.svg?url";
 import { useState, useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
 import moment from "moment";
 import Calendar from "@docspace/components/calendar";
 import Portal from "@docspace/components/portal";
 import { isMobile } from "@docspace/components/utils/device";
+import { ReactSVG } from "react-svg";
 
 const StyledCalendarComponent = styled.div`
   position: relative;
@@ -71,13 +73,10 @@ const CalendarComponent = ({ roomCreationDate, setCalendarDay }) => {
 
   return (
     <StyledCalendarComponent>
-      <div
-        ref={calendarButtonRef}
-        className="calendar-button"
-        onClick={toggleCalendar}
-      >
-        Calendar
+      <div ref={calendarButtonRef}>
+        <ReactSVG src={IconCalendar} onClick={toggleCalendar} />
       </div>
+
       {isOpen && (
         <Portal
           element={

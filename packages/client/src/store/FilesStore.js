@@ -228,7 +228,6 @@ class FilesStore {
           } else if (opt.cmd === "delete") {
             this.selectedFolderStore[opt.type + "sCount"]--;
           }
-          this.infoPanelStore.reloadSelection();
         });
       }
 
@@ -1464,9 +1463,12 @@ class FilesStore {
             // Clear all selections
             this.setSelected("close");
 
-            // Restore not processed
-            tempSelection.length && this.setSelection(tempSelection);
-            tempBuffer && this.setBufferSelection(tempBuffer);
+            // TODO: see bug 63479
+            if (this.selectedFolderStore?.id === folderId) {
+              // Restore not processed
+              tempSelection.length && this.setSelection(tempSelection);
+              tempBuffer && this.setBufferSelection(tempBuffer);
+            }
           }
         }
 
@@ -1507,6 +1509,9 @@ class FilesStore {
                 canCopyPublicLink =
                   room.access === ShareAccessRights.RoomManager ||
                   room.access === ShareAccessRights.None;
+
+                room.canCopyPublicLink = canCopyPublicLink;
+                this.infoPanelStore.setInfoPanelRoom(room);
               }
 
               const { mute } = room;
@@ -1721,6 +1726,7 @@ class FilesStore {
             }
           }
 
+          this.infoPanelStore.setInfoPanelRoom(null);
           this.selectedFolderStore.setSelectedFolder({
             folders: data.folders,
             ...data.current,

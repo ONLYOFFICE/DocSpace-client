@@ -15,7 +15,7 @@ const CommentEditor = ({
   t,
   item,
   editing,
-  setSelection,
+  setInfoPanelSelection,
   fetchFileVersions,
   updateCommentVersion,
 
@@ -61,7 +61,7 @@ const CommentEditor = ({
       setIsLoading(false);
     });
 
-    setSelection({ ...item, comment: inputValue });
+    setInfoPanelSelection({ ...item, comment: inputValue });
     setIsEdit(false);
     setIsLoading(false);
   };
@@ -121,7 +121,7 @@ const CommentEditor = ({
 };
 
 export default inject(({ versionHistoryStore, infoPanelStore }) => {
-  const { setSelection } = infoPanelStore;
+  const { setInfoPanelSelection } = infoPanelStore;
 
   const {
     fetchFileVersions,
@@ -136,7 +136,7 @@ export default inject(({ versionHistoryStore, infoPanelStore }) => {
   const editing = isEditingVersion || isEditing;
 
   return {
-    setSelection,
+    setInfoPanelSelection,
     fetchFileVersions,
     updateCommentVersion,
 

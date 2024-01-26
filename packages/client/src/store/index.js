@@ -225,6 +225,7 @@ infoPanelStore.filesStore = filesStore;
 infoPanelStore.peopleStore = peopleStore;
 infoPanelStore.selectedFolderStore = selectedFolderStore;
 infoPanelStore.treeFoldersStore = treeFoldersStore;
+infoPanelStore.publicRoomStore = publicRoomStore;
 
 const createEditRoomStore = new CreateEditRoomStore(
   filesStore,

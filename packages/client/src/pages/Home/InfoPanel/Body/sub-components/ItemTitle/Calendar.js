@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import moment from "moment";
 import Calendar from "@docspace/components/calendar";
 import Portal from "@docspace/components/portal";
+import { isMobile } from "@docspace/components/utils/device";
 
 const StyledCalendarComponent = styled.div`
   position: relative;
@@ -24,6 +25,15 @@ const StyledCalendar = styled(Calendar)`
   position: absolute;
   top: 150px;
   right: 30px;
+
+  ${(props) =>
+    props.isMobile &&
+    css`
+      position: fixed;
+      bottom: 0;
+      top: auto;
+      right: auto;
+    `}
 `;
 
 const CalendarComponent = ({ roomCreationDate, setCalendarDay }) => {
@@ -77,6 +87,7 @@ const CalendarComponent = ({ roomCreationDate, setCalendarDay }) => {
               minDate={new Date(formattedRoomCreationDate)}
               maxDate={new Date()}
               forwardedRef={calendarRef}
+              isMobile={isMobile()}
             />
           }
         />

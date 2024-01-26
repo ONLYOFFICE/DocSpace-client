@@ -104,7 +104,7 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
   return (
     <Selector
       id={id}
-      headerLabel={headerLabel || t("Groups")}
+      headerLabel={headerLabel || t("Common:Groups")}
       onBackClick={onBackClick}
       searchPlaceholder={searchPlaceholder || t("Common:Search")}
       onSearch={onSearchAction}

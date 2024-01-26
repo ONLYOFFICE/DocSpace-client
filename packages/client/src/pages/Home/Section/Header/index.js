@@ -931,6 +931,7 @@ const SectionHeaderContent = (props) => {
           : "",
     };
 
+    setSelected("none");
     setIsLoading(true);
 
     window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`, { state });

@@ -43,12 +43,12 @@ const InfoPanelHeaderContent = (props) => {
   const isAccounts = getIsAccounts();
   const isTrash = getIsTrash();
 
-  const isNoItem =
-    selection?.isSelectedFolder && selection?.id === selection?.rootFolderId;
+  const isRoot =
+    selection?.isFolder && selection?.id === selection?.rootFolderId;
   const isSeveralItems = selection && Array.isArray(selection);
 
   const withSubmenu =
-    !isNoItem && !isSeveralItems && !isGallery && !isAccounts && !isTrash;
+    !isRoot && !isSeveralItems && !isGallery && !isAccounts && !isTrash;
 
   useEffect(() => {
     checkWidth();
@@ -94,9 +94,6 @@ const InfoPanelHeaderContent = (props) => {
       content: null,
     },
   ];
-  // const selectionRoomRights = selectionParentRoom
-  //   ? selectionParentRoom.security?.Read
-  //   : selection?.security?.Read;
 
   const roomsSubmenu = [...submenuData];
 
@@ -211,7 +208,7 @@ export default inject(({ auth, treeFoldersStore, pluginStore }) => {
   const { infoPanelItemsList } = pluginStore;
 
   const {
-    selection,
+    infoPanelSelection,
     setIsVisible,
     roomsView,
     fileView,
@@ -222,7 +219,6 @@ export default inject(({ auth, treeFoldersStore, pluginStore }) => {
     getIsAccounts,
     getIsTrash,
     resetView,
-    //selectionParentRoom,
   } = auth.infoPanelStore;
 
   const { myRoomsId, archiveRoomsId } = treeFoldersStore;
@@ -230,7 +226,7 @@ export default inject(({ auth, treeFoldersStore, pluginStore }) => {
   const { enablePlugins } = auth.settingsStore;
 
   return {
-    selection,
+    selection: infoPanelSelection,
     setIsVisible,
     roomsView,
     fileView,
@@ -247,10 +243,6 @@ export default inject(({ auth, treeFoldersStore, pluginStore }) => {
     archiveRoomsId,
 
     enablePlugins,
-
-    //  rootFolderType,
-
-    //selectionParentRoom,
   };
 })(
   withTranslation(["Common", "InfoPanel"])(

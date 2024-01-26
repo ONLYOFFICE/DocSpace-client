@@ -18,8 +18,8 @@ export const Period = memo(({ period = "Hour", setPeriod, t }: PeriodProps) => {
 
   return (
     <ComboBox
+      scaled
       scaledOptions
-      scaled={false}
       noBorder={false}
       options={options}
       showDisabledItems

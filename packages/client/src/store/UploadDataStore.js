@@ -1092,13 +1092,13 @@ class UploadDataStore {
           ].chunksArray.findIndex((x) => x.isFinalize);
 
           if (finalizeChunkIndex > -1) {
+            const finalizeIndex =
+              this.asyncUploadObj[operationId].chunksArray.length - 1;
+
             const finalizeRes =
               await this.asyncUploadObj[operationId].chunksArray[
                 finalizeChunkIndex
               ].onUpload();
-
-            const finalizeIndex =
-              this.asyncUploadObj[operationId].chunksArray.length - 1;
 
             this.checkChunkUpload(
               t,

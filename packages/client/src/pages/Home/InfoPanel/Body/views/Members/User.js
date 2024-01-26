@@ -255,14 +255,14 @@ const User = ({
   );
 };
 
-export default inject(({ auth, filesStore, peopleStore }) => {
+export default inject(({ infoPanelStore, filesStore, peopleStore }) => {
   const {
     infoPanelSelection,
     setIsScrollLocked,
     infoPanelMembers,
     setInfoPanelMembers,
     fetchMembers,
-  } = auth.infoPanelStore;
+  } = infoPanelStore;
   const {
     updateRoomMemberRole,
     resendEmailInvitations,

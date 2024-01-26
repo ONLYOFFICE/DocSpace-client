@@ -1511,7 +1511,7 @@ class FilesStore {
                   room.access === ShareAccessRights.None;
 
                 room.canCopyPublicLink = canCopyPublicLink;
-                this.authStore.infoPanelStore.setInfoPanelRoom(room);
+                this.infoPanelStore.setInfoPanelRoom(room);
               }
 
               const { mute } = room;
@@ -1726,7 +1726,7 @@ class FilesStore {
             }
           }
 
-          this.authStore.infoPanelStore.setInfoPanelRoom(null);
+          this.infoPanelStore.setInfoPanelRoom(null);
           this.selectedFolderStore.setSelectedFolder({
             folders: data.folders,
             ...data.current,

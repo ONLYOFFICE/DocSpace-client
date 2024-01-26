@@ -8,7 +8,7 @@ import UserStore from "./UserStore";
 import TfaStore from "./TfaStore";
 import InfoPanelStore from "./InfoPanelStore";
 import { logout as logoutDesktop, desktopConstants } from "../desktop";
-import { isAdmin, setCookie } from "../utils";
+import { isAdmin, setCookie, frameCallEvent } from "../utils";
 import { getCookie } from "@docspace/components/utils/cookie";
 import CurrentQuotasStore from "./CurrentQuotaStore";
 import CurrentTariffStatusStore from "./CurrentTariffStatusStore";
@@ -332,9 +332,11 @@ class AuthStore {
 
     this.isLogout = true;
 
-    const { isDesktopClient: isDesktop } = this.settingsStore;
+    const { isDesktopClient: isDesktop, isFrame } = this.settingsStore;
 
     isDesktop && logoutDesktop();
+
+    isFrame && frameCallEvent({ event: "onSignOut" });
 
     if (ssoLogoutUrl) return ssoLogoutUrl;
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import moment from "moment";
 import Calendar from "@docspace/components/calendar";
@@ -30,11 +30,22 @@ const CalendarComponent = ({ roomCreationDate, setCalendarDay }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
 
+  const calendarRef = useRef();
+  const calendarButtonRef = useRef();
+
   useEffect(() => {
+    document.addEventListener("click", handleClick, { capture: true });
     return () => {
+      document.removeEventListener("click", handleClick, { capture: true });
       setCalendarDay(null);
     };
   }, []);
+
+  const handleClick = (e) => {
+    !calendarButtonRef?.current?.contains(e.target) &&
+      !calendarRef?.current?.contains(e.target) &&
+      setIsOpen(false);
+  };
 
   const toggleCalendar = () => setIsOpen((open) => !open);
 
@@ -50,7 +61,11 @@ const CalendarComponent = ({ roomCreationDate, setCalendarDay }) => {
 
   return (
     <StyledCalendarComponent>
-      <div className="calendar-button" onClick={toggleCalendar}>
+      <div
+        ref={calendarButtonRef}
+        className="calendar-button"
+        onClick={toggleCalendar}
+      >
         Calendar
       </div>
       {isOpen && (
@@ -61,6 +76,7 @@ const CalendarComponent = ({ roomCreationDate, setCalendarDay }) => {
               selectedDate={selectedDate}
               minDate={new Date(formattedRoomCreationDate)}
               maxDate={new Date()}
+              forwardedRef={calendarRef}
             />
           }
         />

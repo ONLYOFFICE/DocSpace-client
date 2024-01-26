@@ -16,7 +16,7 @@ import { decode } from "he";
 const AccountsItemTitle = ({
   t,
   isSeveralItems,
-  selection,
+  infoPanelSelection,
   getUserContextOptions,
 }) => {
   if (isSeveralItems) {
@@ -26,20 +26,23 @@ const AccountsItemTitle = ({
   const itemTitleRef = useRef();
 
   const isPending =
-    selection.statusType === "pending" || selection.statusType === "disabled";
+    infoPanelSelection.statusType === "pending" ||
+    infoPanelSelection.statusType === "disabled";
 
   const getData = () => {
-    const newOptions = selection.options?.filter(
+    const newOptions = infoPanelSelection.options?.filter(
       (option) => option !== "details"
     );
-    return getUserContextOptions(t, newOptions || [], selection);
+    return getUserContextOptions(t, newOptions || [], infoPanelSelection);
   };
   const contextOptions = getData();
 
-  const userAvatar = selection.hasAvatar ? selection.avatar : DefaultUserPhoto;
-  const isSSO = selection.isSSO || false;
-  const displayName = selection.displayName
-    ? decode(selection.displayName).trim()
+  const userAvatar = infoPanelSelection.hasAvatar
+    ? infoPanelSelection.avatar
+    : DefaultUserPhoto;
+  const isSSO = infoPanelSelection.isSSO || false;
+  const displayName = infoPanelSelection.displayName
+    ? decode(infoPanelSelection.displayName).trim()
     : "";
 
   return (
@@ -50,7 +53,7 @@ const AccountsItemTitle = ({
     >
       <Avatar
         className="avatar"
-        role={selection.role ? selection.role : "user"}
+        role={infoPanelSelection.role ? infoPanelSelection.role : "user"}
         size={"big"}
         source={userAvatar}
       />
@@ -62,15 +65,18 @@ const AccountsItemTitle = ({
             title={displayName}
             truncate
           >
-            {isPending || !displayName ? selection.email : displayName}
+            {isPending || !displayName ? infoPanelSelection.email : displayName}
           </Text>
           {isPending && (
-            <Badges withoutPaid={true} statusType={selection.statusType} />
+            <Badges
+              withoutPaid={true}
+              statusType={infoPanelSelection.statusType}
+            />
           )}
         </div>
         {!isPending && !!displayName && (
-          <Text className={"info-text__email"} title={selection.email}>
-            {selection.email}
+          <Text className={"info-text__email"} title={infoPanelSelection.email}>
+            {infoPanelSelection.email}
           </Text>
         )}
         {isSSO && (

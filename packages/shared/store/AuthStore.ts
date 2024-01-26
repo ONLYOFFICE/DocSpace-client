@@ -54,11 +54,12 @@ class AuthStore {
     userStoreConst: UserStore,
     currentTariffStatusStoreConst: CurrentTariffStatusStore,
     currentQuotaStoreConst: CurrentQuotasStore,
+    settingsStore: SettingsStore,
   ) {
     this.userStore = userStoreConst;
     this.currentTariffStatusStore = currentTariffStatusStoreConst;
     this.currentQuotaStore = currentQuotaStoreConst;
-    this.settingsStore = new SettingsStore();
+    this.settingsStore = settingsStore;
 
     makeAutoObservable(this);
 
@@ -364,10 +365,10 @@ class AuthStore {
     this.isInit = false;
     this.skipModules = false;
     if (!skipUser) {
-      this.userStore = new UserStore();
+      // this.userStore = new UserStore();
     }
 
-    this.settingsStore = new SettingsStore();
+    // this.settingsStore = new SettingsStore();
   };
 
   logout = async (reset = true) => {

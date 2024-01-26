@@ -271,7 +271,13 @@ const EditLinkPanel = (props) => {
 };
 
 export default inject(
-  ({ auth, dialogsStore, publicRoomStore, infoPanelStore }) => {
+  ({
+    authStore,
+    settingsStore,
+    dialogsStore,
+    publicRoomStore,
+    infoPanelStore,
+  }) => {
     const { selectionParentRoom } = infoPanelStore;
     const {
       editLinkPanelIsVisible,
@@ -307,9 +313,9 @@ export default inject(
       unsavedChangesDialogVisible,
       setUnsavedChangesDialog,
       link,
-      language: auth.language,
+      language: authStore.language,
       isPublic,
-      currentDeviceType: auth.settingsStore.currentDeviceType,
+      currentDeviceType: settingsStore.currentDeviceType,
     };
   }
 )(

@@ -335,16 +335,14 @@ HeaderComponent.propTypes = {
   needNavMenu: PropTypes.bool,
 };
 
-export default inject(({ auth }) => {
+export default inject(({ settingsStore, authStore }) => {
   const {
-    settingsStore,
-
     isLoaded,
     isAuthenticated,
     isAdmin,
 
     version,
-  } = auth;
+  } = authStore;
   const {
     logoUrl,
     defaultPage,

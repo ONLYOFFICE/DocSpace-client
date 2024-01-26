@@ -764,8 +764,7 @@ const Appearance = (props) => {
   );
 };
 
-export default inject(({ auth, common }) => {
-  const { settingsStore } = auth;
+export default inject(({ settingsStore, common }) => {
   const {
     appearanceTheme,
     selectedThemeId,

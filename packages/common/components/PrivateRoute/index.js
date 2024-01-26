@@ -219,47 +219,48 @@ const PrivateRoute = ({ children, ...rest }) => {
   return component;
 };
 
-export default inject(({ auth, userStore, currentTariffStatusStore }) => {
-  const {
-    isAuthenticated,
-    isLoaded,
-    isAdmin,
-    settingsStore,
+export default inject(
+  ({ authStore, settingsStore, userStore, currentTariffStatusStore }) => {
+    const {
+      isAuthenticated,
+      isLoaded,
+      isAdmin,
 
-    isLogout,
-    isCommunity,
-    isEnterprise,
-  } = auth;
-  const { isNotPaidPeriod } = currentTariffStatusStore;
-  const { user } = userStore;
+      isLogout,
+      isCommunity,
+      isEnterprise,
+    } = authStore;
+    const { isNotPaidPeriod } = currentTariffStatusStore;
+    const { user } = userStore;
 
-  const {
-    setModuleInfo,
-    wizardCompleted,
-    personal,
-    tenantStatus,
-    standalone,
-    isPortalDeactivate,
-    enablePortalRename,
-    limitedAccessSpace,
-  } = settingsStore;
+    const {
+      setModuleInfo,
+      wizardCompleted,
+      personal,
+      tenantStatus,
+      standalone,
+      isPortalDeactivate,
+      enablePortalRename,
+      limitedAccessSpace,
+    } = settingsStore;
 
-  return {
-    isPortalDeactivate,
-    isCommunity,
-    isNotPaidPeriod,
-    user,
-    isAuthenticated,
-    isAdmin,
-    isLoaded,
+    return {
+      isPortalDeactivate,
+      isCommunity,
+      isNotPaidPeriod,
+      user,
+      isAuthenticated,
+      isAdmin,
+      isLoaded,
 
-    wizardCompleted,
-    tenantStatus,
+      wizardCompleted,
+      tenantStatus,
 
-    isLogout,
-    standalone,
-    isEnterprise,
-    enablePortalRename,
-    limitedAccessSpace,
-  };
-})(observer(PrivateRoute));
+      isLogout,
+      standalone,
+      isEnterprise,
+      enablePortalRename,
+      limitedAccessSpace,
+    };
+  }
+)(observer(PrivateRoute));

@@ -272,14 +272,14 @@ const PasswordStrength = (props) => {
   );
 };
 
-export default inject(({ auth, setup }) => {
+export default inject(({ settingsStore, setup }) => {
   const {
     setPortalPasswordSettings,
     passwordSettings,
     currentColorScheme,
     passwordStrengthSettingsUrl,
     currentDeviceType,
-  } = auth.settingsStore;
+  } = settingsStore;
   const { initSettings, isInit } = setup;
 
   return {

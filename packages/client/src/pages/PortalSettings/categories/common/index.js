@@ -98,7 +98,7 @@ const SubmenuCommon = (props) => {
   );
 };
 
-export default inject(({ auth, common }) => {
+export default inject(({ settingsStore, common }) => {
   const {
     isLoaded,
     setIsLoadedSubmenu,
@@ -107,7 +107,7 @@ export default inject(({ auth, common }) => {
     getWhiteLabelLogoUrls,
   } = common;
 
-  const currentDeviceType = auth.settingsStore.currentDeviceType;
+  const currentDeviceType = settingsStore.currentDeviceType;
 
   const isMobileView = currentDeviceType === DeviceType.mobile;
   return {

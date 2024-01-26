@@ -343,7 +343,7 @@ const PortalRenaming = (props) => {
   );
 };
 
-export default inject(({ auth, setup, common }) => {
+export default inject(({ settingsStore, setup, common }) => {
   const {
     theme,
     tenantAlias,
@@ -351,7 +351,7 @@ export default inject(({ auth, setup, common }) => {
     currentColorScheme,
     renamingSettingsUrl,
     domainValidator,
-  } = auth.settingsStore;
+  } = settingsStore;
   const { setPortalRename } = setup;
   const { isLoaded, setIsLoadedPortalRenaming, initSettings, setIsLoaded } =
     common;

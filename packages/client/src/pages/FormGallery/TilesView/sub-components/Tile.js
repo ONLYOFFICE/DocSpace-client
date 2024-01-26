@@ -147,8 +147,8 @@ export default inject(
   (
     {
       filesStore,
-      settingsStore,
-      auth,
+      filesSettingsStore,
+
       oformsStore,
       contextOptionsStore,
       infoPanelStore,
@@ -157,7 +157,7 @@ export default inject(
   ) => {
     const { categoryType } = filesStore;
     const { gallerySelected, setGallerySelected } = oformsStore;
-    const { getIcon } = settingsStore;
+    const { getIcon } = filesSettingsStore;
     const { isVisible, setIsVisible } = infoPanelStore;
 
     const isSelected = item.id === gallerySelected?.id;

@@ -43,8 +43,8 @@ const CreatePortalDialog = () => {
   const [registerError, setRegisterError] = React.useState<null | string>(null);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
-  const { spacesStore, authStore, userStore } = useStore();
-  const { tenantAlias, baseDomain, domainValidator } = authStore.settingsStore;
+  const { spacesStore, settingsStore, userStore } = useStore();
+  const { tenantAlias, baseDomain, domainValidator } = settingsStore;
 
   const {
     createPortalDialogVisible: visible,
@@ -97,7 +97,7 @@ const CreatePortalDialog = () => {
             return window.open(portalUrl, "_self");
           }
 
-          await authStore.settingsStore.getAllPortals();
+          await settingsStore.getAllPortals();
           onClose();
         })
         .catch((error) => {

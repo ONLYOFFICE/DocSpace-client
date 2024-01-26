@@ -55,7 +55,7 @@ const ChangeRoomOwner = ({
   );
 };
 
-export default inject(({ auth, userStore }) => ({
+export default inject(({ settingsStore, userStore }) => ({
   currentUserId: userStore.user.id,
-  currentColorScheme: auth.settingsStore.currentColorScheme,
+  currentColorScheme: settingsStore.currentColorScheme,
 }))(withTranslation(["Common"])(ChangeRoomOwner));

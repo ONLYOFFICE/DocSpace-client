@@ -264,7 +264,7 @@ const ArticleBodyContent = (props) => {
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     filesStore,
     treeFoldersStore,
     dialogsStore,
@@ -303,7 +303,7 @@ export default inject(
       theme,
       setIsBurgerLoading,
       currentDeviceType,
-    } = auth.settingsStore;
+    } = settingsStore;
 
     return {
       toggleArticleOpen,

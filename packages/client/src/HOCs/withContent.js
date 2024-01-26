@@ -112,7 +112,7 @@ export default function withContent(WrappedContent) {
       {
         filesStore,
         treeFoldersStore,
-        auth,
+        settingsStore,
         dialogsStore,
         uploadDataStore,
         publicRoomStore,
@@ -142,7 +142,7 @@ export default function withContent(WrappedContent) {
         treeFoldersStore;
 
       const { culture, personal, folderFormValidation, isDesktopClient } =
-        auth.settingsStore;
+        settingsStore;
 
       const {
         setConvertPasswordDialogVisible,

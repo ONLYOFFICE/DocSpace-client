@@ -283,9 +283,7 @@ const AdditionalResources = (props) => {
   );
 };
 
-export default inject(({ auth, common, currentQuotaStore }) => {
-  const { settingsStore } = auth;
-
+export default inject(({ filesSettingsStore, common, currentQuotaStore }) => {
   const { setIsLoadedAdditionalResources, isLoadedAdditionalResources } =
     common;
 
@@ -294,7 +292,7 @@ export default inject(({ auth, common, currentQuotaStore }) => {
 
     additionalResourcesData,
     additionalResourcesIsDefault,
-  } = settingsStore;
+  } = filesSettingsStore;
 
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
 

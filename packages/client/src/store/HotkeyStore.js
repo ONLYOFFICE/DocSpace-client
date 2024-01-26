@@ -15,7 +15,7 @@ import { encryptionUploadDialog } from "../helpers/encryptionUploadDialog";
 class HotkeyStore {
   filesStore;
   dialogsStore;
-  settingsStore;
+  filesSettingsStore;
   filesActionsStore;
   treeFoldersStore;
   uploadDataStore;
@@ -27,7 +27,7 @@ class HotkeyStore {
   constructor(
     filesStore,
     dialogsStore,
-    settingsStore,
+    filesSettingsStore,
     filesActionsStore,
     treeFoldersStore,
     uploadDataStore,
@@ -36,7 +36,7 @@ class HotkeyStore {
     makeAutoObservable(this);
     this.filesStore = filesStore;
     this.dialogsStore = dialogsStore;
-    this.settingsStore = settingsStore;
+    this.filesSettingsStore = filesSettingsStore;
     this.filesActionsStore = filesActionsStore;
     this.treeFoldersStore = treeFoldersStore;
     this.uploadDataStore = uploadDataStore;
@@ -539,7 +539,7 @@ class HotkeyStore {
     } else {
       if (this.treeFoldersStore.isPrivacyFolder) {
         encryptionUploadDialog(
-          this.settingsStore.extsWebEncrypt,
+          this.filesSettingsStore.extsWebEncrypt,
           (encryptedFile, encrypted) => {
             encryptedFile.encrypted = encrypted;
             this.goToHomePage(navigate);

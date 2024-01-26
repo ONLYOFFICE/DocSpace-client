@@ -61,6 +61,7 @@ class FilesStore {
   infoPanelStore;
   accessRightsStore;
   publicRoomStore;
+  settingsStore;
 
   pluginStore;
 
@@ -158,7 +159,8 @@ class FilesStore {
     publicRoomStore,
     infoPanelStore,
     userStore,
-    currentTariffStatusStore
+    currentTariffStatusStore,
+    settingsStore
   ) {
     const pathname = window.location.pathname.toLowerCase();
     this.isEditor = pathname.indexOf("doceditor") !== -1;
@@ -176,10 +178,11 @@ class FilesStore {
     this.publicRoomStore = publicRoomStore;
     this.infoPanelStore = infoPanelStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
+    this.settingsStore = settingsStore;
 
     this.roomsController = new AbortController();
     this.filesController = new AbortController();
-    const { socketHelper } = authStore.settingsStore;
+    const { socketHelper } = settingsStore;
 
     socketHelper.on("s:modify-folder", async (opt) => {
       const { socketSubscribers } = socketHelper;
@@ -246,7 +249,7 @@ class FilesStore {
 
       if (
         this.selectedFolderStore.id == id &&
-        this.authStore.settingsStore.withPaging //TODO: no longer deletes the folder in other tabs
+        this.settingsStore.withPaging //TODO: no longer deletes the folder in other tabs
       ) {
         console.log("[WS] refresh-folder", id);
         this.fetchFiles(id, this.filter);
@@ -362,7 +365,7 @@ class FilesStore {
 
     if (
       newFiles.length > this.filter.pageCount &&
-      this.authStore.settingsStore.withPaging
+      this.settingsStore.withPaging
     ) {
       newFiles.pop(); // Remove last
     }
@@ -403,7 +406,7 @@ class FilesStore {
       }
 
       //To update a file version
-      if (foundIndex > -1 && !this.authStore.settingsStore.withPaging) {
+      if (foundIndex > -1 && !this.settingsStore.withPaging) {
         if (
           this.files[foundIndex].version !== file.version ||
           this.files[foundIndex].versionGroup !== file.versionGroup
@@ -461,7 +464,7 @@ class FilesStore {
 
       if (
         newFolders.length > this.filter.pageCount &&
-        this.authStore.settingsStore.withPaging
+        this.settingsStore.withPaging
       ) {
         newFolders.pop(); // Remove last
       }
@@ -805,7 +808,7 @@ class FilesStore {
   initFiles = () => {
     if (this.isInit) return;
 
-    const { isAuthenticated, settingsStore } = this.authStore;
+    const { isAuthenticated } = this.authStore;
     const { getFilesSettings } = this.filesSettingsStore;
 
     const {
@@ -814,7 +817,7 @@ class FilesStore {
       getEncryptionKeys,
       //setModuleInfo,
       isDesktopClient,
-    } = settingsStore;
+    } = this.settingsStore;
 
     //setModuleInfo(config.homepage, config.id);
 
@@ -883,7 +886,7 @@ class FilesStore {
   };
 
   setFiles = (files) => {
-    const { socketHelper } = this.authStore.settingsStore;
+    const { socketHelper } = this.settingsStore;
 
     if (files.length === 0 && this.files.length === 0) return;
 
@@ -917,7 +920,7 @@ class FilesStore {
   };
 
   setFolders = (folders) => {
-    const { socketHelper } = this.authStore.settingsStore;
+    const { socketHelper } = this.settingsStore;
     if (folders.length === 0 && this.folders.length === 0) return;
 
     if (this.folders?.length > 0) {
@@ -1213,7 +1216,7 @@ class FilesStore {
     const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
     localStorage.setItem(key, value);
 
-    if (!this.authStore.settingsStore.withPaging) filter.pageCount = 100;
+    if (!this.settingsStore.withPaging) filter.pageCount = 100;
 
     // this.setFilterUrl(filter, true);
     this.roomsFilter = filter;
@@ -1232,7 +1235,7 @@ class FilesStore {
   };
 
   setFilter = (filter) => {
-    if (!this.authStore.settingsStore.withPaging) filter.pageCount = 100;
+    if (!this.settingsStore.withPaging) filter.pageCount = 100;
     this.filter = filter;
   };
 
@@ -1345,7 +1348,7 @@ class FilesStore {
       filterData.sortOrder = splitFilter[2];
     }
 
-    if (!this.authStore.settingsStore.withPaging) {
+    if (!this.settingsStore.withPaging) {
       filterData.page = 0;
       filterData.pageCount = 100;
     }
@@ -1636,7 +1639,7 @@ class FilesStore {
       filterData.sortOrder = splitFilter[2];
     }
 
-    if (!this.authStore.settingsStore.withPaging) {
+    if (!this.settingsStore.withPaging) {
       filterData.page = 0;
       filterData.pageCount = 100;
     }
@@ -1842,14 +1845,14 @@ class FilesStore {
     const { isRecycleBinFolder, isMy, isArchiveFolder } = this.treeFoldersStore;
     const { security } = this.selectedFolderStore;
 
-    const { enablePlugins } = this.authStore.settingsStore;
+    const { enablePlugins } = this.settingsStore;
 
     const isThirdPartyFolder =
       item.providerKey && item.id === item.rootFolderId;
 
     const isMyFolder = isMy(item.rootFolderType);
 
-    const { isDesktopClient } = this.authStore.settingsStore;
+    const { isDesktopClient } = this.settingsStore;
 
     const pluginAllKeys =
       enablePlugins &&
@@ -2613,7 +2616,7 @@ class FilesStore {
   };
 
   scrollToTop = () => {
-    if (this.authStore.settingsStore.withPaging) return;
+    if (this.settingsStore.withPaging) return;
 
     const scrollElm = isMobile()
       ? document.querySelector("#customScrollBar > .scroll-wrapper > .scroller")
@@ -2623,7 +2626,7 @@ class FilesStore {
   };
 
   addItem = (item, isFolder) => {
-    const { socketHelper } = this.authStore.settingsStore;
+    const { socketHelper } = this.settingsStore;
 
     if (isFolder) {
       const foundIndex = this.folders.findIndex((x) => x.id === item?.id);
@@ -2908,8 +2911,8 @@ class FilesStore {
         );
       case FolderType.Privacy:
         return (
-          this.authStore.settingsStore.isDesktopClient &&
-          this.authStore.settingsStore.isEncryptionSupport
+          this.settingsStore.isDesktopClient &&
+          this.settingsStore.isEncryptionSupport
         );
       case FolderType.COMMON:
         return this.authStore.isAdmin;
@@ -2980,7 +2983,7 @@ class FilesStore {
     //return [...this.folders, ...this.files];
 
     const { fileItemsList } = this.pluginStore;
-    const { enablePlugins } = this.authStore.settingsStore;
+    const { enablePlugins } = this.settingsStore;
 
     const newFolders = [...this.folders];
 
@@ -3720,7 +3723,7 @@ class FilesStore {
   setCreatedItem = (createdItem) => {
     this.createdItem = createdItem;
 
-    // const { socketHelper } = this.authStore.settingsStore;
+    // const { socketHelper } = this.settingsStore;
     // if (createdItem?.type == "file") {
     //   console.log(
     //     "[WS] subscribe to file's changes",

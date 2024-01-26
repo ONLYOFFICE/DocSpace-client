@@ -74,8 +74,8 @@ const SectionBodyContent = ({ isErrorSettings, user }) => {
   );
 };
 
-export default inject(({ userStore, settingsStore }) => {
-  const { settingsIsLoaded } = settingsStore;
+export default inject(({ userStore, filesSettingsStore }) => {
+  const { settingsIsLoaded } = filesSettingsStore;
 
   return {
     settingsIsLoaded,

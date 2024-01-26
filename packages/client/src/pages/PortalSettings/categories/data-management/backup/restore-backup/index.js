@@ -266,8 +266,7 @@ const RestoreBackup = (props) => {
   );
 };
 
-export default inject(({ auth, backup, currentQuotaStore }) => {
-  const { settingsStore } = auth;
+export default inject(({ settingsStore, backup, currentQuotaStore }) => {
   const { currentDeviceType, standalone } = settingsStore;
   const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
   const {

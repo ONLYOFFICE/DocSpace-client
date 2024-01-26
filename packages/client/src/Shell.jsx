@@ -408,10 +408,10 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 };
 
 const ShellWrapper = inject(
-  ({ auth, backup, clientLoadingStore, userStore }) => {
+  ({ authStore, settingsStore, backup, clientLoadingStore, userStore }) => {
     const { i18n } = useTranslation();
 
-    const { init, isLoaded, settingsStore, setProductVersion, language } = auth;
+    const { init, isLoaded, setProductVersion, language } = authStore;
 
     const {
       personal,
@@ -476,29 +476,30 @@ const ShellWrapper = inject(
   }
 )(observer(Shell));
 
-const ThemeProviderWrapper = inject(({ auth, loginStore }) => {
-  const { settingsStore } = auth;
-  let currentColorScheme = false;
-  const { theme } = settingsStore;
-  const { i18n } = useTranslation();
+const ThemeProviderWrapper = inject(
+  ({ authStore, settingsStore, loginStore }) => {
+    let currentColorScheme = false;
+    const { theme } = settingsStore;
+    const { i18n } = useTranslation();
 
-  if (loginStore) {
-    currentColorScheme = loginStore.currentColorScheme;
-  } else if (auth) {
-    currentColorScheme = settingsStore.currentColorScheme || false;
+    if (loginStore) {
+      currentColorScheme = loginStore.currentColorScheme;
+    } else if (authStore) {
+      currentColorScheme = settingsStore.currentColorScheme || false;
+    }
+
+    const { timezone } = settingsStore;
+
+    window.theme = theme;
+    window.timezone = timezone;
+
+    return {
+      theme: { ...theme, interfaceDirection: i18n.dir() },
+      currentColorScheme,
+      timezone,
+    };
   }
-
-  const { timezone } = settingsStore;
-
-  window.theme = theme;
-  window.timezone = timezone;
-
-  return {
-    theme: { ...theme, interfaceDirection: i18n.dir() },
-    currentColorScheme,
-    timezone,
-  };
-})(observer(ThemeProvider));
+)(observer(ThemeProvider));
 
 export default () => (
   <MobxProvider {...store}>

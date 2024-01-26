@@ -587,7 +587,7 @@ const ArticleMainButtonContent = (props) => {
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     filesStore,
     dialogsStore,
     uploadDataStore,
@@ -623,7 +623,7 @@ export default inject(
     } = dialogsStore;
 
     const { enablePlugins, currentColorScheme, currentDeviceType } =
-      auth.settingsStore;
+      settingsStore;
     const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
 
     const security = selectedFolderStore.security;
@@ -639,8 +639,8 @@ export default inject(
     return {
       isGracePeriod,
       setInviteUsersWarningDialogVisible,
-      showText: auth.settingsStore.showText,
-      isMobileArticle: auth.settingsStore.isMobileArticle,
+      showText: settingsStore.showText,
+      isMobileArticle: settingsStore.isMobileArticle,
 
       showArticleLoader,
       isPrivacy: isPrivacyFolder,

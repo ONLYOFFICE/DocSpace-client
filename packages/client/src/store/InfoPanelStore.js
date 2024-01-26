@@ -48,8 +48,7 @@ class InfoPanelStore {
   isScrollLocked = false;
   historyWithFileList = false;
 
-  authStore = null;
-  settingsStore = null;
+  filesSettingsStore = null;
   peopleStore = null;
   filesStore = null;
   selectedFolderStore = null;
@@ -248,7 +247,7 @@ class InfoPanelStore {
     return item.isRoom || !!item.roomType
       ? item.rootFolderType === FolderType.Archive
         ? item.logo && item.logo.medium
-        : this.settingsStore.getIcon(
+        : this.filesSettingsStore.getIcon(
               size,
               null,
               null,
@@ -259,10 +258,16 @@ class InfoPanelStore {
           ? item.logo?.medium
           : item.icon
             ? item.icon
-            : this.settingsStore.getIcon(size, null, null, null, item.roomType)
+            : this.filesSettingsStore.getIcon(
+                size,
+                null,
+                null,
+                null,
+                item.roomType
+              )
       : item.isFolder && item.folderType
-        ? this.settingsStore.getIconByFolderType(item.folderType, size)
-        : this.settingsStore.getIcon(size, item.fileExst || ".file");
+        ? this.filesSettingsStore.getIconByFolderType(item.folderType, size)
+        : this.filesSettingsStore.getIcon(size, item.fileExst || ".file");
   };
 
   // User link actions //

@@ -323,11 +323,17 @@ const VersionRow = (props) => {
 };
 
 export default inject(
-  ({ auth, versionHistoryStore, pluginStore, infoPanelStore, userStore }) => {
+  ({
+    settingsStore,
+    versionHistoryStore,
+    pluginStore,
+    infoPanelStore,
+    userStore,
+  }) => {
     const { user } = userStore;
     const { openUser, setIsVisible } = infoPanelStore;
     const { culture, isTabletView, enablePlugins, currentDeviceType } =
-      auth.settingsStore;
+      settingsStore;
     const language = (user && user.cultureName) || culture || "en";
 
     const { fileItemsList } = pluginStore;
@@ -348,7 +354,7 @@ export default inject(
       currentDeviceType,
       fileItemsList,
       enablePlugins,
-      theme: auth.settingsStore.theme,
+      theme: settingsStore.theme,
       culture: language,
       isTabletView,
       // markAsVersion,

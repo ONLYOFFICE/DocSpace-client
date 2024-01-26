@@ -79,22 +79,19 @@ const ArticleWrapper = ({
 
 export default inject(
   ({
-    auth,
+    authStore,
     uploadDataStore,
     userStore,
     bannerStore,
+    settingsStore,
   }: {
-    auth: any;
+    authStore: any;
     uploadDataStore: any;
     userStore: UserStore;
     bannerStore: BannerStore;
+    settingsStore: any;
   }) => {
-    const {
-      settingsStore,
-
-      languageBaseName,
-      isLiveChatAvailable,
-    } = auth;
+    const { languageBaseName, isLiveChatAvailable } = authStore;
 
     const { withSendAgain, user } = userStore;
 

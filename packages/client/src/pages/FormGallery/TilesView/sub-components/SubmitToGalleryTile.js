@@ -110,9 +110,9 @@ const SubmitToGalleryTile = ({
   );
 };
 
-export default inject(({ auth, oformsStore, dialogsStore }) => ({
+export default inject(({ settingsStore, oformsStore, dialogsStore }) => ({
   submitToGalleryTileIsVisible: oformsStore.submitToGalleryTileIsVisible,
   hideSubmitToGalleryTile: oformsStore.hideSubmitToGalleryTile,
   setSubmitToGalleryDialogVisible: dialogsStore.setSubmitToGalleryDialogVisible,
-  currentColorScheme: auth.settingsStore.currentColorScheme,
+  currentColorScheme: settingsStore.currentColorScheme,
 }))(withTranslation("Common", "FormGallery")(observer(SubmitToGalleryTile)));

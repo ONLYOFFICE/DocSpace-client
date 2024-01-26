@@ -177,7 +177,12 @@ const PriceCalculation = ({
 };
 
 export default inject(
-  ({ auth, payments, paymentQuotasStore, currentTariffStatusStore }) => {
+  ({
+    settingsStore,
+    payments,
+    paymentQuotasStore,
+    currentTariffStatusStore,
+  }) => {
     const {
       tariffsInfo,
       setIsLoading,
@@ -189,7 +194,7 @@ export default inject(
       getPaymentLink,
       canUpdateTariff,
     } = payments;
-    const { theme } = auth.settingsStore;
+    const { theme } = settingsStore;
 
     const { planCost } = paymentQuotasStore;
     const { isNotPaidPeriod, isGracePeriod } = currentTariffStatusStore;

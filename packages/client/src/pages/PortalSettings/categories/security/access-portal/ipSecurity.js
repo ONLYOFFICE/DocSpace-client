@@ -274,7 +274,7 @@ const IpSecurity = (props) => {
   );
 };
 
-export default inject(({ auth, setup }) => {
+export default inject(({ settingsStore, setup }) => {
   const {
     ipRestrictionEnable,
     setIpRestrictionsEnable,
@@ -283,7 +283,7 @@ export default inject(({ auth, setup }) => {
     ipSettingsUrl,
     currentColorScheme,
     currentDeviceType,
-  } = auth.settingsStore;
+  } = settingsStore;
 
   const { initSettings, isInit } = setup;
 

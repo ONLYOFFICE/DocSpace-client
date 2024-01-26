@@ -121,7 +121,7 @@ const DeleteLinkDialog = withTranslation(["Common", "Files"])(
 );
 
 export default inject(
-  ({ auth, dialogsStore, publicRoomStore, filesStore, infoPanelStore }) => {
+  ({ dialogsStore, publicRoomStore, filesStore, infoPanelStore }) => {
     const { selectionParentRoom } = infoPanelStore;
     const {
       deleteLinkDialogVisible: visible,

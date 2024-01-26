@@ -140,7 +140,7 @@ const HistoryTableView = (props) => {
   );
 };
 
-export default inject(({ setup, webhooksStore, auth, userStore }) => {
+export default inject(({ setup, webhooksStore, settingsStore, userStore }) => {
   const { viewAs, setViewAs } = setup;
   const {
     historyItems,
@@ -151,7 +151,7 @@ export default inject(({ setup, webhooksStore, auth, userStore }) => {
     historyFilters,
   } = webhooksStore;
   const { id: userId } = userStore.user;
-  const { currentDeviceType } = auth.settingsStore;
+  const { currentDeviceType } = settingsStore;
 
   return {
     viewAs,

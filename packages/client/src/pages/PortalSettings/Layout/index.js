@@ -85,8 +85,8 @@ const Layout = ({
   );
 };
 
-export default inject(({ auth, setup, pluginStore }) => {
-  const { language, settingsStore } = auth;
+export default inject(({ authStore, settingsStore, setup, pluginStore }) => {
+  const { language } = authStore;
   const { addUsers } = setup.headerAction;
 
   const {

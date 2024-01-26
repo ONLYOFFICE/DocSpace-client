@@ -56,14 +56,15 @@ class PeopleStore {
     dialogsStore,
     infoPanelStore,
     userStore,
-    tfaStore
+    tfaStore,
+    settingsStore
   ) {
     this.authStore = authStore;
     this.infoPanelStore = infoPanelStore;
     this.groupsStore = new GroupsStore(this);
     this.usersStore = new UsersStore(
       this,
-      authStore,
+      settingsStore,
       infoPanelStore,
       userStore
     );
@@ -86,7 +87,8 @@ class PeopleStore {
       this,
       infoPanelStore,
       userStore,
-      tfaStore
+      tfaStore,
+      settingsStore
     );
 
     makeAutoObservable(this);

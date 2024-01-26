@@ -264,9 +264,10 @@ export default inject(
     filesStore,
     infoPanelStore,
     treeFoldersStore,
-    auth,
+
     tableStore,
     userStore,
+    settingsStore,
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
@@ -288,7 +289,7 @@ export default inject(
       highlightFile,
     } = filesStore;
 
-    const { withPaging, theme, currentDeviceType } = auth.settingsStore;
+    const { withPaging, theme, currentDeviceType } = settingsStore;
 
     return {
       filesList,

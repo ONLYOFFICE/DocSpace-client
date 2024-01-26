@@ -169,8 +169,8 @@ ConfirmRoute.defaultProps = {
   doAuthenticated: AuthenticatedAction.None,
 };
 
-export default inject(({ auth }) => {
-  const { isAuthenticated, logout, isLoaded, settingsStore } = auth;
+export default inject(({ authStore, settingsStore }) => {
+  const { isAuthenticated, logout, isLoaded } = authStore;
   const { defaultPage } = settingsStore;
   return {
     isAuthenticated,

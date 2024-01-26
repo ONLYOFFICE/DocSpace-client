@@ -62,6 +62,6 @@ const ChangePhoneForm = (props) => {
   );
 };
 
-export default inject(({ auth }) => ({
-  greetingTitle: auth.settingsStore.greetingSettings,
+export default inject(({ settingsStore }) => ({
+  greetingTitle: settingsStore.greetingSettings,
 }))(withTranslation("Confirm")(withLoader(observer(ChangePhoneForm))));

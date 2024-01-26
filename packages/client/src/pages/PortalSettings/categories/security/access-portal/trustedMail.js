@@ -240,7 +240,7 @@ const TrustedMail = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
+export default inject(({ settingsStore }) => {
   const {
     trustedDomainsType,
     trustedDomains,
@@ -249,7 +249,7 @@ export default inject(({ auth }) => {
     currentColorScheme,
     trustedMailDomainSettingsUrl,
     currentDeviceType,
-  } = auth.settingsStore;
+  } = settingsStore;
 
   return {
     trustedDomainsType,

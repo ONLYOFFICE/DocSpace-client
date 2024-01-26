@@ -2071,7 +2071,7 @@ const SectionFilterContent = ({
 
 export default inject(
   ({
-    auth,
+    authStore,
     filesStore,
     treeFoldersStore,
     clientLoadingStore,
@@ -2080,6 +2080,7 @@ export default inject(
     publicRoomStore,
     infoPanelStore,
     userStore,
+    settingsStore,
   }) => {
     const {
       filter,
@@ -2102,9 +2103,9 @@ export default inject(
     const { providers } = thirdPartyStore;
 
     const { fetchTags } = tagsStore;
-    const { isRoomAdmin } = auth;
+    const { isRoomAdmin } = authStore;
     const { user } = userStore;
-    const { personal, standalone, currentDeviceType } = auth.settingsStore;
+    const { personal, standalone, currentDeviceType } = settingsStore;
     const {
       isFavoritesFolder,
       isRecentTab,

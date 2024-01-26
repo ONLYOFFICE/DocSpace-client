@@ -120,7 +120,8 @@ export default function withQuickButtons(WrappedComponent) {
 
   return inject(
     ({
-      auth,
+      authStore,
+      settingsStore,
       filesActionsStore,
       dialogsStore,
       publicRoomStore,
@@ -147,8 +148,8 @@ export default function withQuickButtons(WrappedComponent) {
       const { getPrimaryFileLink, setShareChanged } = infoPanelStore;
 
       return {
-        theme: auth.settingsStore.theme,
-        isAdmin: auth.isAdmin,
+        theme: settingsStore.theme,
+        isAdmin: authStore.isAdmin,
         lockFileAction,
         setFavoriteAction,
         onSelectItem,

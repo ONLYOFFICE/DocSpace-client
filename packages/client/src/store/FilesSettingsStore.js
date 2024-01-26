@@ -15,7 +15,7 @@ import {
 } from "@docspace/shared/utils/image-helpers";
 
 import { getIconPathByFolderType } from "@docspace/shared/utils/common";
-class SettingsStore {
+class FilesSettingsStore {
   thirdPartyStore;
   treeFoldersStore;
   publicRoomStore;
@@ -626,4 +626,4 @@ class SettingsStore {
   };
 }
 
-export default SettingsStore;
+export default FilesSettingsStore;

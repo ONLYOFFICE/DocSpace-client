@@ -460,7 +460,7 @@ class FilesTableHeader extends React.Component {
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     filesStore,
     selectedFolderStore,
     treeFoldersStore,
@@ -487,7 +487,7 @@ export default inject(
     const isRooms = isRoomsFolder || isArchiveFolder;
     const withContent = canShare;
     const sortingVisible = !isRecentFolder;
-    const { withPaging, isFrame, frameConfig } = auth.settingsStore;
+    const { withPaging, isFrame, frameConfig } = settingsStore;
 
     const {
       tableStorageName,

@@ -173,13 +173,19 @@ class PeopleTableHeader extends React.Component {
 }
 
 export default inject(
-  ({ auth, peopleStore, infoPanelStore, clientLoadingStore, userStore }) => {
+  ({
+    settingsStore,
+    peopleStore,
+    infoPanelStore,
+    clientLoadingStore,
+    userStore,
+  }) => {
     const { filterStore } = peopleStore;
 
     const { filter } = filterStore;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
-    const { withPaging } = auth.settingsStore;
+    const { withPaging } = settingsStore;
 
     return {
       filter,

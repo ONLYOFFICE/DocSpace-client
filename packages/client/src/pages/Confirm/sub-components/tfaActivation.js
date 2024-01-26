@@ -305,12 +305,12 @@ const TfaActivationWrapper = (props) => {
   );
 };
 
-export default inject(({ auth, confirm, tfaStore }) => ({
+export default inject(({ settingsStore, confirm, tfaStore }) => ({
   setIsLoaded: confirm.setIsLoaded,
   setIsLoading: confirm.setIsLoading,
   tfaAndroidAppUrl: tfaStore.tfaAndroidAppUrl,
   tfaIosAppUrl: tfaStore.tfaIosAppUrl,
   tfaWinAppUrl: tfaStore.tfaWinAppUrl,
-  currentColorScheme: auth.settingsStore.currentColorScheme,
-  defaultPage: auth.settingsStore.defaultPage,
+  currentColorScheme: settingsStore.currentColorScheme,
+  defaultPage: settingsStore.defaultPage,
 }))(withTranslation(["Confirm", "Common"])(observer(TfaActivationWrapper)));

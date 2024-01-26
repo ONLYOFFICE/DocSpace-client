@@ -176,13 +176,13 @@ const Header = (props) => {
 
 export default inject(
   ({
-    auth,
+    authStore,
     userStore,
     peopleStore,
     clientLoadingStore,
     profileActionsStore,
   }) => {
-    const { isAdmin } = auth;
+    const { isAdmin } = authStore;
 
     const { isVisitor, isCollaborator } = userStore.user;
 

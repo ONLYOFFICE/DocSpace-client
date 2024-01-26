@@ -465,8 +465,14 @@ const InvitePanel = ({
 };
 
 export default inject(
-  ({ auth, peopleStore, filesStore, dialogsStore, infoPanelStore }) => {
-    const { theme, currentDeviceType } = auth.settingsStore;
+  ({
+    settingsStore,
+    peopleStore,
+    filesStore,
+    dialogsStore,
+    infoPanelStore,
+  }) => {
+    const { theme, currentDeviceType } = settingsStore;
 
     const { getUsersByQuery, inviteUsers, getUsersList } =
       peopleStore.usersStore;

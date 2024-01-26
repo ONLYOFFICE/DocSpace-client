@@ -378,14 +378,20 @@ const ConnectDialog = withTranslation([
 ])(PureConnectDialogContainer);
 
 export default inject(
-  ({ auth, settingsStore, selectedFolderStore, dialogsStore, backup }) => {
+  ({
+    settingsStore,
+    filesSettingsStore,
+    selectedFolderStore,
+    dialogsStore,
+    backup,
+  }) => {
     const {
       providers,
       saveThirdParty,
       openConnectWindow,
       fetchThirdPartyProviders,
-    } = settingsStore.thirdPartyStore;
-    const { personal, folderFormValidation } = auth.settingsStore;
+    } = filesSettingsStore.thirdPartyStore;
+    const { personal, folderFormValidation } = settingsStore;
 
     const { id, folders } = selectedFolderStore;
     const {

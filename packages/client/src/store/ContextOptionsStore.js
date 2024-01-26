@@ -63,7 +63,7 @@ let loadingTime;
 let timer;
 
 class ContextOptionsStore {
-  authStore;
+  settingsStore;
   dialogsStore;
   filesActionsStore;
   filesStore;
@@ -71,7 +71,7 @@ class ContextOptionsStore {
   treeFoldersStore;
   uploadDataStore;
   versionHistoryStore;
-  settingsStore;
+  filesSettingsStore;
   selectedFolderStore;
   publicRoomStore;
   oformsStore;
@@ -82,7 +82,7 @@ class ContextOptionsStore {
   linksIsLoading = false;
 
   constructor(
-    authStore,
+    settingsStore,
     dialogsStore,
     filesActionsStore,
     filesStore,
@@ -90,7 +90,7 @@ class ContextOptionsStore {
     treeFoldersStore,
     uploadDataStore,
     versionHistoryStore,
-    settingsStore,
+    filesSettingsStore,
     selectedFolderStore,
     publicRoomStore,
     oformsStore,
@@ -99,7 +99,7 @@ class ContextOptionsStore {
     currentTariffStatusStore
   ) {
     makeAutoObservable(this);
-    this.authStore = authStore;
+    this.settingsStore = settingsStore;
     this.dialogsStore = dialogsStore;
     this.filesActionsStore = filesActionsStore;
     this.filesStore = filesStore;
@@ -107,7 +107,7 @@ class ContextOptionsStore {
     this.treeFoldersStore = treeFoldersStore;
     this.uploadDataStore = uploadDataStore;
     this.versionHistoryStore = versionHistoryStore;
-    this.settingsStore = settingsStore;
+    this.filesSettingsStore = filesSettingsStore;
     this.selectedFolderStore = selectedFolderStore;
     this.publicRoomStore = publicRoomStore;
     this.oformsStore = oformsStore;
@@ -125,7 +125,7 @@ class ContextOptionsStore {
   };
 
   onClickReconnectStorage = async (item, t) => {
-    const { thirdPartyStore } = this.settingsStore;
+    const { thirdPartyStore } = this.filesSettingsStore;
 
     const { openConnectWindow, connectItems } = thirdPartyStore;
 
@@ -186,7 +186,7 @@ class ContextOptionsStore {
 
     const newTitle =
       title.substring(0, title.length - fileExst.length) +
-      this.settingsStore.extsWebRestrictedEditing[0];
+      this.filesSettingsStore.extsWebRestrictedEditing[0];
 
     this.uploadDataStore.copyAsAction(id, newTitle, folderId).catch((err) => {
       let errorMessage = "";
@@ -209,7 +209,7 @@ class ContextOptionsStore {
       setFormCreationInfo({
         newTitle,
         fromExst: fileExst,
-        toExst: this.settingsStore.extsWebRestrictedEditing[0],
+        toExst: this.filesSettingsStore.extsWebRestrictedEditing[0],
         fileInfo: item,
       });
       setConvertPasswordDialogVisible(true);
@@ -344,7 +344,7 @@ class ContextOptionsStore {
       return toastr.success(t("Translations:LinkCopySuccess"));
     }
 
-    const { canConvert } = this.settingsStore;
+    const { canConvert } = this.filesSettingsStore;
 
     const { getItemUrl } = this.filesStore;
 
@@ -383,7 +383,7 @@ class ContextOptionsStore {
   };
 
   gotoDocEditor = (preview = false, item) => {
-    const { isDesktopClient } = this.authStore.settingsStore;
+    const { isDesktopClient } = this.settingsStore;
 
     const { id, providerKey, fileExst } = item;
 
@@ -491,7 +491,7 @@ class ContextOptionsStore {
   onClickDeleteSelectedFolder = (t, isRoom) => {
     const { setIsFolderActions, setDeleteDialogVisible, setIsRoomDelete } =
       this.dialogsStore;
-    const { confirmDelete } = this.settingsStore;
+    const { confirmDelete } = this.filesSettingsStore;
     const { deleteAction, deleteRoomsAction } = this.filesActionsStore;
     const { id: selectedFolderId, getSelectedFolder } =
       this.selectedFolderStore;
@@ -700,7 +700,7 @@ class ContextOptionsStore {
 
   onLoadPlugins = (item) => {
     const { contextOptions } = item;
-    const { enablePlugins } = this.authStore.settingsStore;
+    const { enablePlugins } = this.settingsStore;
 
     const pluginItems = [];
     this.setLoaderTimer(true);
@@ -1549,7 +1549,7 @@ class ContextOptionsStore {
   };
 
   getGroupContextOptions = (t) => {
-    const { personal } = this.authStore.settingsStore;
+    const { personal } = this.settingsStore;
     const { selection, allFilesIsEditing } = this.filesStore;
     const { setDeleteDialogVisible } = this.dialogsStore;
     const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
@@ -1775,7 +1775,7 @@ class ContextOptionsStore {
         onClick: allFilesIsEditing
           ? () => this.onShowEditingToast(t)
           : () => {
-              if (this.settingsStore.confirmDelete) {
+              if (this.filesSettingsStore.confirmDelete) {
                 setDeleteDialogVisible(true);
               } else {
                 const translations = {

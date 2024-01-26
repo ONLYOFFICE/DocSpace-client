@@ -528,7 +528,7 @@ const LanguageAndTimeZone = (props) => {
   );
 };
 
-export default inject(({ auth, setup, common, userStore }) => {
+export default inject(({ settingsStore, setup, common, userStore }) => {
   const {
     culture,
     timezone,
@@ -539,7 +539,7 @@ export default inject(({ auth, setup, common, userStore }) => {
     currentColorScheme,
     languageAndTimeZoneSettingsUrl,
     currentDeviceType,
-  } = auth.settingsStore;
+  } = settingsStore;
 
   const { user } = userStore;
 

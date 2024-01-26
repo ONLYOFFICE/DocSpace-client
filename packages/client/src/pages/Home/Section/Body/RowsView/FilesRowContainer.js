@@ -137,7 +137,7 @@ const FilesRowContainer = ({
 };
 
 export default inject(
-  ({ filesStore, auth, infoPanelStore, treeFoldersStore }) => {
+  ({ filesStore, settingsStore, infoPanelStore, treeFoldersStore }) => {
     const {
       filesList,
       viewAs,
@@ -150,7 +150,7 @@ export default inject(
     } = filesStore;
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
-    const { withPaging, currentDeviceType } = auth.settingsStore;
+    const { withPaging, currentDeviceType } = settingsStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder;
 

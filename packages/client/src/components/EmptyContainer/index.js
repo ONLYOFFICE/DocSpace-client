@@ -88,7 +88,7 @@ const EmptyContainer = ({
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     filesStore,
     dialogsStore,
 
@@ -109,7 +109,7 @@ export default inject(
       isErrorRoomNotAvailable;
 
     return {
-      theme: auth.settingsStore.theme,
+      theme: settingsStore.theme,
       isFiltered,
       isLoading,
 

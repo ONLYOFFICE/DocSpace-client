@@ -173,12 +173,12 @@ const ChangeNameDialog = (props) => {
   );
 };
 
-export default inject(({ peopleStore, auth }) => {
+export default inject(({ peopleStore, settingsStore }) => {
   const { updateProfile } = peopleStore.targetUserStore;
 
   const { updateProfileInUsers } = peopleStore.usersStore;
 
-  const { userNameRegex } = auth.settingsStore;
+  const { userNameRegex } = settingsStore;
 
   return { updateProfile, updateProfileInUsers, userNameRegex };
 })(observer(ChangeNameDialog));

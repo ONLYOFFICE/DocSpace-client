@@ -325,7 +325,7 @@ const BruteForceProtection = (props) => {
   );
 };
 
-export default inject(({ auth, setup }) => {
+export default inject(({ settingsStore, setup }) => {
   const {
     numberAttempt,
     blockingTime,
@@ -335,7 +335,7 @@ export default inject(({ auth, setup }) => {
     bruteForceProtectionUrl,
     currentDeviceType,
     currentColorScheme,
-  } = auth.settingsStore;
+  } = settingsStore;
 
   const { initSettings, isInit } = setup;
 

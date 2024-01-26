@@ -199,7 +199,7 @@ const Panels = (props) => {
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     dialogsStore,
     uploadDataStore,
     versionHistoryStore,
@@ -253,7 +253,7 @@ export default inject(
 
     const { uploadPanelVisible } = uploadDataStore;
     const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
-    const { hotkeyPanelVisible } = auth.settingsStore;
+    const { hotkeyPanelVisible } = settingsStore;
     const { confirmDialogIsLoading } = createEditRoomStore;
 
     const {

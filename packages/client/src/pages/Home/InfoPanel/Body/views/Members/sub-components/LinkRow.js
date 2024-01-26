@@ -257,14 +257,14 @@ const LinkRow = (props) => {
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     dialogsStore,
     publicRoomStore,
     treeFoldersStore,
     infoPanelStore,
   }) => {
     const { selectionParentRoom } = infoPanelStore;
-    const { theme } = auth.settingsStore;
+    const { theme } = settingsStore;
 
     const {
       setEditLinkPanelIsVisible,

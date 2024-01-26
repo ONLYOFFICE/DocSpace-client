@@ -295,7 +295,7 @@ const Bar = (props) => {
 };
 
 export default inject(
-  ({ auth, profileActionsStore, userStore, currentQuotaStore }) => {
+  ({ settingsStore, profileActionsStore, userStore, currentQuotaStore }) => {
     const { user, withActivationBar, sendActivationLink } = userStore;
 
     const { onPaymentsClick } = profileActionsStore;
@@ -315,7 +315,7 @@ export default inject(
       showUserQuotaBar,
     } = currentQuotaStore;
 
-    const { currentColorScheme, setMainBarVisible } = auth.settingsStore;
+    const { currentColorScheme, setMainBarVisible } = settingsStore;
 
     return {
       isAdmin: user?.isAdmin,

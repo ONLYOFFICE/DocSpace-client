@@ -190,13 +190,19 @@ const SubmitToFormGallery = ({
 };
 
 export default inject(
-  ({ auth, accessRightsStore, dialogsStore, settingsStore, oformsStore }) => ({
+  ({
+    accessRightsStore,
+    dialogsStore,
+    settingsStore,
+    filesSettingsStore,
+    oformsStore,
+  }) => ({
     visible: dialogsStore.submitToGalleryDialogVisible,
     setVisible: dialogsStore.setSubmitToGalleryDialogVisible,
     formItem: dialogsStore.formItem,
     setFormItem: dialogsStore.setFormItem,
-    getIcon: settingsStore.getIcon,
-    currentColorScheme: auth.settingsStore.currentColorScheme,
+    getIcon: filesSettingsStore.getIcon,
+    currentColorScheme: settingsStore.currentColorScheme,
     canSubmitToFormGallery: accessRightsStore.canSubmitToFormGallery,
     submitToFormGallery: oformsStore.submitToFormGallery,
   })

@@ -32,8 +32,8 @@ declare global {
 const App = observer(() => {
   const { i18n } = useTranslation();
 
-  const { authStore, userStore } = useStore();
-  const { init, settingsStore } = authStore;
+  const { authStore, userStore, settingsStore } = useStore();
+  const { init } = authStore;
   const { theme, setTheme, currentColorScheme, limitedAccessSpace, timezone } =
     settingsStore;
 

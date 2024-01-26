@@ -32,7 +32,7 @@ const ShareButton = (props) => {
 };
 
 export default inject(
-  ({ auth, dialogsStore, uploadDataStore }, { uniqueId }) => {
+  ({ settingsStore, dialogsStore, uploadDataStore }, { uniqueId }) => {
     const { setSharingPanelVisible } = dialogsStore;
     const { selectUploadedFile, getUploadedFile } = uploadDataStore;
 
@@ -41,7 +41,7 @@ export default inject(
     return {
       uploadedFile,
 
-      theme: auth.settingsStore.theme,
+      theme: settingsStore.theme,
 
       setSharingPanelVisible,
       selectUploadedFile,

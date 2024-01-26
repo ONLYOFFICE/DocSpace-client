@@ -81,30 +81,28 @@ const SelectionArea = (props) => {
   );
 };
 
-export default inject(
-  ({ auth, filesStore, treeFoldersStore, infoPanelStore }) => {
-    const {
-      dragging,
-      viewAs,
-      setSelections,
-      getCountTilesInRow,
-      folders,
-      files,
-    } = filesStore;
-    const { isRoomsFolder, isArchiveFolder } = treeFoldersStore;
-    const { isVisible: isInfoPanelVisible } = infoPanelStore;
+export default inject(({ filesStore, treeFoldersStore, infoPanelStore }) => {
+  const {
+    dragging,
+    viewAs,
+    setSelections,
+    getCountTilesInRow,
+    folders,
+    files,
+  } = filesStore;
+  const { isRoomsFolder, isArchiveFolder } = treeFoldersStore;
+  const { isVisible: isInfoPanelVisible } = infoPanelStore;
 
-    const isRooms = isRoomsFolder || isArchiveFolder;
+  const isRooms = isRoomsFolder || isArchiveFolder;
 
-    return {
-      dragging,
-      viewAs,
-      setSelections,
-      getCountTilesInRow,
-      isRooms,
-      foldersLength: folders.length,
-      filesLength: files.length,
-      isInfoPanelVisible,
-    };
-  }
-)(observer(SelectionArea));
+  return {
+    dragging,
+    viewAs,
+    setSelections,
+    getCountTilesInRow,
+    isRooms,
+    foldersLength: folders.length,
+    filesLength: files.length,
+    isInfoPanelVisible,
+  };
+})(observer(SelectionArea));

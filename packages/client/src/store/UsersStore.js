@@ -12,7 +12,7 @@ const fullAccessId = "00000000-0000-0000-0000-000000000000";
 
 class UsersStore {
   peopleStore = null;
-  authStore = null;
+  settingsStore = null;
   infoPanelStore = null;
   userStore = null;
 
@@ -21,9 +21,9 @@ class UsersStore {
   accountsIsIsLoading = false;
   operationRunning = false;
 
-  constructor(peopleStore, authStore, infoPanelStore, userStore) {
+  constructor(peopleStore, settingsStore, infoPanelStore, userStore) {
     this.peopleStore = peopleStore;
-    this.authStore = authStore;
+    this.settingsStore = settingsStore;
     this.infoPanelStore = infoPanelStore;
     this.userStore = userStore;
     makeAutoObservable(this);
@@ -32,7 +32,7 @@ class UsersStore {
   getUsersList = async (filter, updateFilter = false) => {
     const filterData = filter ? filter.clone() : Filter.getDefault();
 
-    if (!this.authStore.settingsStore.withPaging) {
+    if (!this.settingsStore.withPaging) {
       filterData.page = 0;
       filterData.pageCount = 100;
     }
@@ -399,7 +399,6 @@ class UsersStore {
     const role = this.getUserRole(user);
     const isMySelf =
       this.userStore.user && user.userName === this.userStore.user.userName;
-    //const isViewerAdmin = this.peopleStore.authStore.isAdmin;
 
     const options = this.getUserContextOptions(
       isMySelf,

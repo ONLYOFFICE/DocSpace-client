@@ -32,15 +32,15 @@ const PROXY_HOMEPAGE_URL = combineUrl(window.DocSpaceConfig?.proxy?.url, "/");
 const PROFILE_SELF_URL = "/profile";
 
 class AccountsContextOptionsStore {
-  authStore = null;
+  settingsStore = null;
   infoPanelStore = null;
   peopleStore = null;
   userStore = null;
   tfaStore = null;
 
-  constructor(peopleStore, infoPanelStore, userStore, tfaStore) {
+  constructor(peopleStore, infoPanelStore, userStore, tfaStore, settingsStore) {
     makeAutoObservable(this);
-    this.authStore = peopleStore.authStore;
+    this.settingsStore = settingsStore;
     this.infoPanelStore = infoPanelStore;
     this.peopleStore = peopleStore;
     this.userStore = userStore;
@@ -305,9 +305,7 @@ class AccountsContextOptionsStore {
 
     const filterParamsStr = filter.toUrlParams();
     const url = getCategoryUrl(CategoryType.Shared);
-    const type = this.authStore.settingsStore.isDesktopClient
-      ? "_self"
-      : "_blank";
+    const type = this.settingsStore.isDesktopClient ? "_self" : "_blank";
 
     window.open(
       combineUrl(PROXY_HOMEPAGE_URL, `${url}?${filterParamsStr}`),

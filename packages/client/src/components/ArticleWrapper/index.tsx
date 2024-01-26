@@ -9,7 +9,7 @@ const ArticleWrapper = (props: ArticleProps) => {
 
 export default inject(
   ({
-    auth,
+    authStore,
     uploadDataStore,
     profileActionsStore,
     dialogsStore,
@@ -17,10 +17,9 @@ export default inject(
     bannerStore,
     currentTariffStatusStore,
     currentQuotaStore,
+    settingsStore,
   }: any) => {
     const {
-      settingsStore,
-
       isLiveChatAvailable,
 
       isPaymentPageAvailable,
@@ -28,7 +27,7 @@ export default inject(
       isSubmitToGalleryAlertAvailable,
 
       isEnterprise,
-    } = auth;
+    } = authStore;
 
     const { getActions, getUserRole, onProfileClick } = profileActionsStore;
 

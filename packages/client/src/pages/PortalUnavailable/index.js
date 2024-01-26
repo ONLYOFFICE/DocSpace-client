@@ -123,8 +123,8 @@ const PortalUnavailable = ({ theme, logoUrl, onLogoutClick }) => {
   );
 };
 
-export default inject(({ auth, profileActionsStore }) => {
+export default inject(({ settingsStore, profileActionsStore }) => {
   const { onLogoutClick } = profileActionsStore;
-  const { theme, logoUrl } = auth.settingsStore;
+  const { theme, logoUrl } = settingsStore;
   return { logoUrl, theme, onLogoutClick };
 })(observer(PortalUnavailable));

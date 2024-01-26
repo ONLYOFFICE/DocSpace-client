@@ -39,11 +39,11 @@ const SeveralItems = ({ isAccounts, theme, selectedItems }) => {
   );
 };
 
-export default inject(({ auth, infoPanelStore }) => {
+export default inject(({ settingsStore, infoPanelStore }) => {
   const selectedItems = infoPanelStore.getSelectedItems();
 
   return {
-    theme: auth.settingsStore.theme,
+    theme: settingsStore.theme,
     selectedItems,
   };
 })(observer(SeveralItems));

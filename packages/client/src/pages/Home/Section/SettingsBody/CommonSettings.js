@@ -175,7 +175,7 @@ const PersonalSettings = ({
   );
 };
 
-export default inject(({ userStore, settingsStore, treeFoldersStore }) => {
+export default inject(({ userStore, filesSettingsStore, treeFoldersStore }) => {
   const {
     storeOriginalFiles,
     confirmDelete,
@@ -197,7 +197,7 @@ export default inject(({ userStore, settingsStore, treeFoldersStore }) => {
 
     setThumbnails1280x720,
     thumbnails1280x720,
-  } = settingsStore;
+  } = filesSettingsStore;
 
   const { myFolderId, commonFolderId } = treeFoldersStore;
 

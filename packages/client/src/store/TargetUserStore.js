@@ -37,7 +37,6 @@ class TargetUserStore {
   get getDisableProfileType() {
     const res =
       this.userStore.user.id === this.targetUser.id ||
-      !this.peopleStore.authStore.isAdmin ||
       this.peopleStore.isPeoplesAdmin
         ? false
         : true;
@@ -106,8 +105,8 @@ class TargetUserStore {
     this.userStore.setUser(res);
 
     this.setTargetUser(res);
-    //caches.delete("api-cache");
-    //await this.peopleStore.authStore.settingsStore.init();
+    // caches.delete("api-cache");
+
     setCookie(LANGUAGE, culture, {
       "max-age": COOKIE_EXPIRATION_YEAR,
     });

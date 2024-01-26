@@ -348,7 +348,7 @@ const Home = withTranslation(["Files", "People"])(PureHome);
 
 export default inject(
   ({
-    auth,
+    authStore,
     filesStore,
     uploadDataStore,
     treeFoldersStore,
@@ -361,6 +361,7 @@ export default inject(
     clientLoadingStore,
     userStore,
     currentTariffStatusStore,
+    settingsStore,
   }) => {
     const { setSelectedFolder, security: folderSecurity } = selectedFolderStore;
     const {
@@ -462,8 +463,6 @@ export default inject(
       : null;
 
     const { setToPreviewFile, playlist, removeFirstUrl } = mediaViewerDataStore;
-
-    const { settingsStore } = auth;
 
     const { setPortalTariff } = currentTariffStatusStore;
 
@@ -581,8 +580,8 @@ export default inject(
       showFilterLoader,
 
       getSettings,
-      logout: auth.logout,
-      login: auth.login,
+      logout: authStore.logout,
+      login: authStore.login,
 
       createTag,
       addTagsToRoom,

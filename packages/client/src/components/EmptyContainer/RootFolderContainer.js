@@ -332,7 +332,7 @@ const RootFolderContainer = (props) => {
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     filesStore,
     treeFoldersStore,
     selectedFolderStore,
@@ -340,7 +340,7 @@ export default inject(
     userStore,
   }) => {
     const { isDesktopClient, isEncryptionSupport, organizationName, theme } =
-      auth.settingsStore;
+      settingsStore;
 
     const { setIsSectionFilterLoading } = clientLoadingStore;
 

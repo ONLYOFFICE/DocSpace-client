@@ -25,7 +25,7 @@ const proxy = window.DocSpaceConfig?.proxy?.url || proxyURL;
 const prefix = window.DocSpaceConfig?.api?.prefix || apiPrefix;
 
 class PluginStore {
-  authStore = null;
+  settingsStore = null;
   selectedFolderStore = null;
   userStore = null;
 
@@ -54,8 +54,8 @@ class PluginStore {
   isLoading = true;
   isEmptyList = false;
 
-  constructor(authStore, selectedFolderStore, userStore) {
-    this.authStore = authStore;
+  constructor(settingsStore, selectedFolderStore, userStore) {
+    this.settingsStore = settingsStore;
     this.selectedFolderStore = selectedFolderStore;
     this.userStore = userStore;
 
@@ -416,7 +416,7 @@ class PluginStore {
   };
 
   getCurrentDevice = () => {
-    const { currentDeviceType } = this.authStore.settingsStore;
+    const { currentDeviceType } = this.settingsStore;
 
     return currentDeviceType;
   };

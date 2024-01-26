@@ -299,33 +299,35 @@ ThirdPartyServices.propTypes = {
   setSelectedConsumer: PropTypes.func.isRequired,
 };
 
-export default inject(({ setup, auth, currentQuotaStore }) => {
-  const { settingsStore, setDocumentTitle } = auth;
-  const {
-    integrationSettingsUrl,
-    theme,
-    currentColorScheme,
-    companyInfoSettingsData,
-  } = settingsStore;
-  const {
-    getConsumers,
-    integration,
-    updateConsumerProps,
-    setSelectedConsumer,
-  } = setup;
-  const { consumers } = integration;
-  const { isThirdPartyAvailable } = currentQuotaStore;
+export default inject(
+  ({ setup, authStore, settingsStore, currentQuotaStore }) => {
+    const { setDocumentTitle } = authStore;
+    const {
+      integrationSettingsUrl,
+      theme,
+      currentColorScheme,
+      companyInfoSettingsData,
+    } = settingsStore;
+    const {
+      getConsumers,
+      integration,
+      updateConsumerProps,
+      setSelectedConsumer,
+    } = setup;
+    const { consumers } = integration;
+    const { isThirdPartyAvailable } = currentQuotaStore;
 
-  return {
-    theme,
-    consumers,
-    integrationSettingsUrl,
-    getConsumers,
-    updateConsumerProps,
-    setSelectedConsumer,
-    setDocumentTitle,
-    currentColorScheme,
-    isThirdPartyAvailable,
-    supportEmail: companyInfoSettingsData?.email,
-  };
-})(withTranslation(["Settings", "Common"])(observer(ThirdPartyServices)));
+    return {
+      theme,
+      consumers,
+      integrationSettingsUrl,
+      getConsumers,
+      updateConsumerProps,
+      setSelectedConsumer,
+      setDocumentTitle,
+      currentColorScheme,
+      isThirdPartyAvailable,
+      supportEmail: companyInfoSettingsData?.email,
+    };
+  }
+)(withTranslation(["Settings", "Common"])(observer(ThirdPartyServices)));

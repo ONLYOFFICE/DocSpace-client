@@ -41,8 +41,7 @@ const Backup = ({ t, buttonSize, isNotPaidPeriod }) => {
   );
 };
 
-export default inject(({ auth, currentTariffStatusStore }) => {
-  const { settingsStore } = auth;
+export default inject(({ settingsStore, currentTariffStatusStore }) => {
   const { isNotPaidPeriod } = currentTariffStatusStore;
   const { currentDeviceType, currentColorScheme } = settingsStore;
 

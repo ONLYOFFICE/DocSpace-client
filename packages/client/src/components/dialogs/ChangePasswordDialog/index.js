@@ -118,8 +118,8 @@ class ChangePasswordDialogComponent extends React.Component {
   }
 }
 
-const ChangePasswordDialog = inject(({ auth }) => ({
-  currentColorScheme: auth.settingsStore.currentColorScheme,
+const ChangePasswordDialog = inject(({ settingsStore }) => ({
+  currentColorScheme: settingsStore.currentColorScheme,
 }))(
   observer(
     withTranslation(["ChangePasswordDialog", "Common"])(

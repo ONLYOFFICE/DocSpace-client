@@ -58,8 +58,12 @@ const MainBar = ({
 };
 
 export default inject(
-  ({ auth, clientLoadingStore, filesStore, currentTariffStatusStore }) => {
-    const { settingsStore } = auth;
+  ({
+    settingsStore,
+    clientLoadingStore,
+    filesStore,
+    currentTariffStatusStore,
+  }) => {
     const { checkedMaintenance, setMaintenanceExist, snackbarExist, isFrame } =
       settingsStore;
     const { isNotPaidPeriod } = currentTariffStatusStore;

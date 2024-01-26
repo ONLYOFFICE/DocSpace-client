@@ -292,7 +292,7 @@ const FilesRowContent = ({
   );
 };
 
-export default inject(({ auth, treeFoldersStore, filesStore }) => {
+export default inject(({ settingsStore, treeFoldersStore, filesStore }) => {
   const { filter, roomsFilter } = filesStore;
   const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
     treeFoldersStore;
@@ -302,7 +302,7 @@ export default inject(({ auth, treeFoldersStore, filesStore }) => {
 
   return {
     filterSortBy,
-    theme: auth.settingsStore.theme,
+    theme: settingsStore.theme,
     isTrashFolder: isRecycleBinFolder,
   };
 })(

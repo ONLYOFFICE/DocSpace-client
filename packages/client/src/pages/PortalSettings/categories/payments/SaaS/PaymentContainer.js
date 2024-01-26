@@ -337,14 +337,13 @@ const PaymentContainer = (props) => {
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     currentQuotaStore,
     payments,
     paymentQuotasStore,
     currentTariffStatusStore,
   }) => {
-    const { settingsStore } = auth;
-    const { showText: expandArticle } = settingsStore;
+    const { showText: expandArticle, theme } = settingsStore;
 
     const { isFreeTariff, currentTariffPlanTitle, isNonProfit } =
       currentQuotaStore;
@@ -363,8 +362,6 @@ export default inject(
 
     const { planCost, tariffPlanTitle, portalPaymentQuotas } =
       paymentQuotasStore;
-
-    const { theme } = auth.settingsStore;
 
     const { isAlreadyPaid } = payments;
 

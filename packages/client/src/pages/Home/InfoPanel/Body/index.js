@@ -165,7 +165,7 @@ const InfoPanelBodyContent = ({
 };
 
 export default inject(
-  ({ auth, selectedFolderStore, oformsStore, infoPanelStore }) => {
+  ({ selectedFolderStore, oformsStore, infoPanelStore }) => {
     const {
       selection,
       setSelection,

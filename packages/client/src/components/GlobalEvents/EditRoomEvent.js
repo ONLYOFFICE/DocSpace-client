@@ -237,13 +237,13 @@ const EditRoomEvent = ({
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     filesStore,
     tagsStore,
     filesActionsStore,
     selectedFolderStore,
     dialogsStore,
-    settingsStore,
+    filesSettingsStore,
     infoPanelStore,
   }) => {
     const {
@@ -270,9 +270,9 @@ export default inject(
       updateLogoPathsCacheBreaker,
     } = selectedFolderStore;
     const { updateCurrentFolder, changeRoomOwner } = filesActionsStore;
-    const { getThirdPartyIcon } = settingsStore.thirdPartyStore;
+    const { getThirdPartyIcon } = filesSettingsStore.thirdPartyStore;
     const { setCreateRoomDialogVisible } = dialogsStore;
-    const { withPaging } = auth.settingsStore;
+    const { withPaging } = settingsStore;
     const {
       reloadSelection: reloadInfoPanelSelection,
       reloadSelectionParentRoom,

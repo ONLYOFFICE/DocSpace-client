@@ -82,15 +82,17 @@ const BenefitsContainer = ({ isTrial, isEnterprise }) => {
   );
 };
 
-export default inject(({ auth, currentQuotaStore, paymentQuotasStore }) => {
-  const { isEnterprise } = auth;
+export default inject(
+  ({ authStore, currentQuotaStore, paymentQuotasStore }) => {
+    const { isEnterprise } = authStore;
 
-  const { portalPaymentQuotasFeatures } = paymentQuotasStore;
+    const { portalPaymentQuotasFeatures } = paymentQuotasStore;
 
-  const { isTrial } = currentQuotaStore;
-  return {
-    features: portalPaymentQuotasFeatures,
-    isTrial,
-    isEnterprise,
-  };
-})(observer(BenefitsContainer));
+    const { isTrial } = currentQuotaStore;
+    return {
+      features: portalPaymentQuotasFeatures,
+      isTrial,
+      isEnterprise,
+    };
+  }
+)(observer(BenefitsContainer));

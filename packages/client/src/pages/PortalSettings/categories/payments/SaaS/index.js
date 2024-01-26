@@ -70,7 +70,8 @@ const SaaSPage = ({
 
 export default inject(
   ({
-    auth,
+    authStore,
+    settingsStore,
     payments,
     userStore,
     currentQuotaStore,
@@ -80,9 +81,7 @@ export default inject(
       language,
 
       isUpdatingTariff,
-
-      settingsStore,
-    } = auth;
+    } = authStore;
     const { user } = userStore;
     const { isLoaded: isLoadedCurrentQuota } = currentQuotaStore;
     const { isLoaded: isLoadedTariffStatus } = currentTariffStatusStore;

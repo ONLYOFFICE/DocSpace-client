@@ -266,7 +266,7 @@ const SessionLifetime = (props) => {
   );
 };
 
-export default inject(({ auth, setup }) => {
+export default inject(({ settingsStore, setup }) => {
   const {
     sessionLifetime,
     enabledSessionLifetime,
@@ -274,7 +274,7 @@ export default inject(({ auth, setup }) => {
     lifetimeSettingsUrl,
     currentColorScheme,
     currentDeviceType,
-  } = auth.settingsStore;
+  } = settingsStore;
   const { initSettings, isInit } = setup;
 
   return {

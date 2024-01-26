@@ -58,12 +58,12 @@ import {
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
 class FilesActionStore {
-  authStore;
+  settingsStore;
   uploadDataStore;
   treeFoldersStore;
   filesStore;
   selectedFolderStore;
-  settingsStore;
+  filesSettingsStore;
   dialogsStore;
   mediaViewerDataStore;
   accessRightsStore;
@@ -80,12 +80,12 @@ class FilesActionStore {
   processCreatingRoomFromData = false;
 
   constructor(
-    authStore,
+    settingsStore,
     uploadDataStore,
     treeFoldersStore,
     filesStore,
     selectedFolderStore,
-    settingsStore,
+    filesSettingsStore,
     dialogsStore,
     mediaViewerDataStore,
     accessRightsStore,
@@ -97,12 +97,12 @@ class FilesActionStore {
     currentTariffStatusStore
   ) {
     makeAutoObservable(this);
-    this.authStore = authStore;
+    this.settingsStore = settingsStore;
     this.uploadDataStore = uploadDataStore;
     this.treeFoldersStore = treeFoldersStore;
     this.filesStore = filesStore;
     this.selectedFolderStore = selectedFolderStore;
-    this.settingsStore = settingsStore;
+    this.filesSettingsStore = filesSettingsStore;
     this.dialogsStore = dialogsStore;
     this.mediaViewerDataStore = mediaViewerDataStore;
     this.accessRightsStore = accessRightsStore;
@@ -294,7 +294,7 @@ class FilesActionStore {
       this.uploadDataStore;
     const { setSecondaryProgressBarData, clearSecondaryProgressData } =
       secondaryProgressDataStore;
-    const { withPaging } = this.authStore.settingsStore;
+    const { withPaging } = this.settingsStore;
 
     let selection = newSelection
       ? newSelection
@@ -400,7 +400,7 @@ class FilesActionStore {
             }
 
             if (currentFolderId) {
-              const { socketHelper } = this.authStore.settingsStore;
+              const { socketHelper } = this.settingsStore;
 
               socketHelper.emit({
                 command: "refresh-folder",
@@ -747,7 +747,7 @@ class FilesActionStore {
     const { setSecondaryProgressBarData, clearSecondaryProgressData } =
       secondaryProgressDataStore;
     if (
-      this.settingsStore.confirmDelete ||
+      this.filesSettingsStore.confirmDelete ||
       this.treeFoldersStore.isPrivacyFolder ||
       isThirdParty ||
       isRoom
@@ -795,7 +795,7 @@ class FilesActionStore {
 
   deleteItemOperation = (isFile, itemId, translations, isRoom, operationId) => {
     const { addActiveItems, getIsEmptyTrash } = this.filesStore;
-    const { withPaging } = this.authStore.settingsStore;
+    const { withPaging } = this.settingsStore;
     const { isRecycleBinFolder, recycleBinFolderId } = this.treeFoldersStore;
 
     const pbData = {
@@ -1410,7 +1410,7 @@ class FilesActionStore {
 
   setThirdpartyInfo = (providerKey) => {
     const { setConnectDialogVisible, setConnectItem } = this.dialogsStore;
-    const { providers, capabilities } = this.settingsStore.thirdPartyStore;
+    const { providers, capabilities } = this.filesSettingsStore.thirdPartyStore;
     const provider = providers.find((x) => x.provider_key === providerKey);
     const capabilityItem = capabilities.find((x) => x[0] === providerKey);
     const capability = {
@@ -1886,7 +1886,7 @@ class FilesActionStore {
             id: "menu-delete",
             label: t("Common:Delete"),
             onClick: () => {
-              if (this.settingsStore.confirmDelete) {
+              if (this.filesSettingsStore.confirmDelete) {
                 setDeleteDialogVisible(true);
               } else {
                 const translations = {
@@ -2100,9 +2100,9 @@ class FilesActionStore {
 
   openFileAction = (item) => {
     const { openDocEditor, isPrivacyFolder, setSelection } = this.filesStore;
-    const { currentDeviceType } = this.authStore.settingsStore;
+    const { currentDeviceType } = this.settingsStore;
     const { fileItemsList } = this.pluginStore;
-    const { enablePlugins } = this.authStore.settingsStore;
+    const { enablePlugins } = this.settingsStore;
 
     const { isLoading, setIsSectionFilterLoading } = this.clientLoadingStore;
     const { isRecycleBinFolder, isRecentTab } = this.treeFoldersStore;
@@ -2177,7 +2177,7 @@ class FilesActionStore {
 
       if (canWebEdit || canViewedDocs) {
         let tab =
-          !this.authStore.settingsStore.isDesktopClient &&
+          !this.settingsStore.isDesktopClient &&
           window.DocSpaceConfig?.editor?.openOnNewPage &&
           !isFolder
             ? window.open(

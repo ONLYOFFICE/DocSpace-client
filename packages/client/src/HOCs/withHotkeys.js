@@ -379,10 +379,10 @@ const withHotkeys = (Component) => {
 
   return inject(
     ({
-      auth,
+      settingsStore,
       filesStore,
       dialogsStore,
-      settingsStore,
+      filesSettingsStore,
       filesActionsStore,
       hotkeyStore,
       mediaViewerDataStore,
@@ -437,7 +437,7 @@ const withHotkeys = (Component) => {
       } = filesActionsStore;
 
       const { visible: mediaViewerIsVisible } = mediaViewerDataStore;
-      const { setHotkeyPanelVisible } = auth.settingsStore;
+      const { setHotkeyPanelVisible } = settingsStore;
       const { isGracePeriod } = currentTariffStatusStore;
 
       const isVisitor = userStore.user?.isVisitor;
@@ -460,7 +460,7 @@ const withHotkeys = (Component) => {
         setHotkeyPanelVisible,
         setDeleteDialogVisible,
         setSelectFileDialogVisible,
-        confirmDelete: settingsStore.confirmDelete,
+        confirmDelete: filesSettingsStore.confirmDelete,
         deleteAction,
         isAvailableOption,
 

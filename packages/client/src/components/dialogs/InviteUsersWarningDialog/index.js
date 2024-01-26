@@ -126,8 +126,13 @@ const InviteUsersWarningDialog = (props) => {
 };
 
 export default inject(
-  ({ auth, dialogsStore, currentTariffStatusStore, currentQuotaStore }) => {
-    const { isPaymentPageAvailable } = auth;
+  ({
+    authStore,
+    dialogsStore,
+    currentTariffStatusStore,
+    currentQuotaStore,
+  }) => {
+    const { isPaymentPageAvailable } = authStore;
     const { dueDate, delayDueDate, isGracePeriod } = currentTariffStatusStore;
     const { currentTariffPlanTitle } = currentQuotaStore;
 
@@ -139,7 +144,7 @@ export default inject(
     return {
       isPaymentPageAvailable,
       currentTariffPlanTitle,
-      language: auth.language,
+      language: authStore.language,
       visible: inviteUsersWarningDialogVisible,
       setIsVisible: setInviteUsersWarningDialogVisible,
       dueDate,

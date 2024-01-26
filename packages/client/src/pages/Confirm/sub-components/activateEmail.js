@@ -65,8 +65,8 @@ const ActivateEmailForm = (props) => (
   </SectionWrapper>
 );
 
-export default inject(({ auth, userStore }) => {
-  const { logout } = auth;
+export default inject(({ authStore, userStore }) => {
+  const { logout } = authStore;
   return {
     logout,
     updateEmailActivationStatus: userStore.updateEmailActivationStatus,

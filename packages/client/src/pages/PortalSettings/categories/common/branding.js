@@ -101,8 +101,7 @@ const Branding = ({
   );
 };
 
-export default inject(({ auth, currentQuotaStore, common }) => {
-  const { settingsStore } = auth;
+export default inject(({ settingsStore, currentQuotaStore, common }) => {
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
   const { isLoadedCompanyInfoSettingsData } = common;
   const { standalone } = settingsStore;

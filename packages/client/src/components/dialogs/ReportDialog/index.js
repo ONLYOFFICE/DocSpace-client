@@ -160,13 +160,13 @@ const ReportDialog = (props) => {
   );
 };
 
-export default inject(({ auth, userStore }) => {
+export default inject(({ authStore, settingsStore, userStore }) => {
   const { user } = userStore;
-  const { firebaseHelper } = auth.settingsStore;
+  const { firebaseHelper } = settingsStore;
 
   return {
     user,
-    version: auth.version,
+    version: authStore.version,
     FirebaseHelper: firebaseHelper,
   };
 })(observer(ReportDialog));

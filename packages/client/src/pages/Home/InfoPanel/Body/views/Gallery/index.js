@@ -106,10 +106,10 @@ const Gallery = ({
   );
 };
 
-export default inject(({ auth, settingsStore, oformsStore }) => {
-  const { personal, culture, currentColorScheme } = auth.settingsStore;
+export default inject(({ settingsStore, filesSettingsStore, oformsStore }) => {
+  const { personal, culture, currentColorScheme } = settingsStore;
   const { gallerySelected } = oformsStore;
-  const { getIcon } = settingsStore;
+  const { getIcon } = filesSettingsStore;
   return {
     getIcon,
     gallerySelected,

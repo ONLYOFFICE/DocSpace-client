@@ -116,7 +116,6 @@ const SectionHeaderContent = ({
 
 export default inject(
   ({
-    auth,
     filesStore,
     oformsStore,
     accessRightsStore,

@@ -49,14 +49,15 @@ const CurrentUsersCountContainer = (props) => {
   );
 };
 
-export default inject(({ auth, currentQuotaStore, paymentQuotasStore }) => {
-  const { settingsStore } = auth;
-  const { maxCountManagersByQuota } = currentQuotaStore;
-  const { addedManagersCountTitle } = paymentQuotasStore;
-  const { theme } = settingsStore;
-  return {
-    theme,
-    maxCountManagersByQuota,
-    addedManagersCountTitle,
-  };
-})(observer(CurrentUsersCountContainer));
+export default inject(
+  ({ settingsStore, currentQuotaStore, paymentQuotasStore }) => {
+    const { maxCountManagersByQuota } = currentQuotaStore;
+    const { addedManagersCountTitle } = paymentQuotasStore;
+    const { theme } = settingsStore;
+    return {
+      theme,
+      maxCountManagersByQuota,
+      addedManagersCountTitle,
+    };
+  }
+)(observer(CurrentUsersCountContainer));

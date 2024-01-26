@@ -350,14 +350,14 @@ const WelcomePageSettings = (props) => {
   );
 };
 
-export default inject(({ auth, setup, common }) => {
+export default inject(({ settingsStore, setup, common }) => {
   const {
     greetingSettings,
     organizationName,
     theme,
     currentColorScheme,
     welcomePageSettingsUrl,
-  } = auth.settingsStore;
+  } = settingsStore;
   const { setGreetingTitle, restoreGreetingTitle } = setup;
   const {
     isLoaded,

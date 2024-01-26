@@ -194,7 +194,7 @@ const TwoFactorAuth = (props) => {
   );
 };
 
-export default inject(({ auth, setup, tfaStore }) => {
+export default inject(({ settingsStore, setup, tfaStore }) => {
   const {
     setTfaSettings,
 
@@ -205,7 +205,7 @@ export default inject(({ auth, setup, tfaStore }) => {
 
   const { isInit, initSettings, setIsInit } = setup;
   const { currentColorScheme, tfaSettingsUrl, currentDeviceType } =
-    auth.settingsStore;
+    settingsStore;
 
   return {
     setTfaSettings,

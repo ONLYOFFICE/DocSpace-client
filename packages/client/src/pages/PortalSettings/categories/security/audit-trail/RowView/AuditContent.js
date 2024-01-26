@@ -60,8 +60,8 @@ const AuditContent = ({ sectionWidth, item, isSettingNotPaid, locale }) => {
   );
 };
 
-export default inject(({ auth, userStore }) => {
-  const { culture } = auth.settingsStore;
+export default inject(({ settingsStore, userStore }) => {
+  const { culture } = settingsStore;
   const { user } = userStore;
   const locale = (user && user.cultureName) || culture || "en";
 

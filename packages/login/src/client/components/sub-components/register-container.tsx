@@ -144,8 +144,8 @@ const Register: React.FC<IRegisterProps> = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { settingsStore, isAuthenticated, language } = auth;
+export default inject(({ authStore, settingsStore }) => {
+  const { isAuthenticated, language } = authStore;
   const { theme } = settingsStore;
   return {
     theme,

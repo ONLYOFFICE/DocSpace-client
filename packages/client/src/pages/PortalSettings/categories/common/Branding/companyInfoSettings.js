@@ -456,9 +456,7 @@ const CompanyInfoSettings = (props) => {
   );
 };
 
-export default inject(({ auth, common, currentQuotaStore }) => {
-  const { settingsStore } = auth;
-
+export default inject(({ settingsStore, common, currentQuotaStore }) => {
   const {
     setIsLoadedCompanyInfoSettingsData,
     isLoadedCompanyInfoSettingsData,

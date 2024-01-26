@@ -111,8 +111,13 @@ VersionHistoryPanel.propTypes = {
 };
 
 export default inject(
-  ({ auth, clientLoadingStore, versionHistoryStore, infoPanelStore }) => {
-    const { isTabletView, currentDeviceType } = auth.settingsStore;
+  ({
+    settingsStore,
+    clientLoadingStore,
+    versionHistoryStore,
+    infoPanelStore,
+  }) => {
+    const { isTabletView, currentDeviceType } = settingsStore;
     const { isLoading } = clientLoadingStore;
     const { setIsMobileHidden: setInfoPanelIsMobileHidden } = infoPanelStore;
     const {

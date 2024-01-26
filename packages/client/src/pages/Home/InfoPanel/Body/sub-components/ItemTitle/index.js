@@ -41,16 +41,18 @@ const ItemTitle = ({
   return <RoomsItemHeader />;
 };
 
-export default inject(({ auth, settingsStore, peopleStore, oformsStore }) => {
-  const { currentColorScheme } = auth.settingsStore;
-  const { getIcon } = settingsStore;
-  const { getUserContextOptions } = peopleStore.contextOptionsStore;
-  const { gallerySelected } = oformsStore;
+export default inject(
+  ({ settingsStore, filesSettingsStore, peopleStore, oformsStore }) => {
+    const { currentColorScheme } = settingsStore;
+    const { getIcon } = filesSettingsStore;
+    const { getUserContextOptions } = peopleStore.contextOptionsStore;
+    const { gallerySelected } = oformsStore;
 
-  return {
-    currentColorScheme,
-    gallerySelected,
-    getUserContextOptions,
-    getIcon,
-  };
-})(observer(ItemTitle));
+    return {
+      currentColorScheme,
+      gallerySelected,
+      getUserContextOptions,
+      getIcon,
+    };
+  }
+)(observer(ItemTitle));

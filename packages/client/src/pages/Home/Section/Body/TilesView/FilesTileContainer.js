@@ -148,10 +148,10 @@ const FilesTileContainer = ({
   );
 };
 
-export default inject(({ auth, filesStore, settingsStore }) => {
+export default inject(({ settingsStore, filesStore, filesSettingsStore }) => {
   const { filesList } = filesStore;
-  const { withPaging } = auth.settingsStore;
-  const { thumbnails1280x720 } = settingsStore;
+  const { withPaging } = settingsStore;
+  const { thumbnails1280x720 } = filesSettingsStore;
 
   return {
     filesList,

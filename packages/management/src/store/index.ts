@@ -5,17 +5,25 @@ import SpacesStore from "./SpacesStore";
 import store from "client/store";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { BannerStore } from "@docspace/shared/store/BannerStore";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 const {
-  auth: authStore,
+  authStore,
   userStore,
   bannerStore,
-}: { userStore: UserStore; bannerStore: BannerStore; auth: any } = store;
+  settingsStore,
+}: {
+  userStore: UserStore;
+  bannerStore: BannerStore;
+  authStore: any;
+  settingsStore: SettingsStore;
+} = store;
 
 export class RootStore {
   authStore = authStore;
   userStore = userStore;
   bannerStore = bannerStore;
-  spacesStore = new SpacesStore(this.authStore);
+  settingsStore = settingsStore;
+  spacesStore = new SpacesStore(this.settingsStore);
 }
 
 export const RootStoreContext = createContext<RootStore | null>(null);

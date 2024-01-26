@@ -124,7 +124,7 @@ const Dialogs = ({
   );
 };
 
-export default inject(({ auth, peopleStore, userStore }) => {
+export default inject(({ peopleStore, userStore }) => {
   const {
     changeOwner,
     deleteSelfProfile,

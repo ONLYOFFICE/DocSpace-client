@@ -12,15 +12,14 @@ const SectionWrapper = ({
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     dialogsStore,
     infoPanelStore,
   }: {
-    auth: any;
+    settingsStore: any;
     dialogsStore: any;
     infoPanelStore: any;
   }) => {
-    const { settingsStore } = auth;
     const {
       isDesktopClient: isDesktop,
       currentDeviceType,

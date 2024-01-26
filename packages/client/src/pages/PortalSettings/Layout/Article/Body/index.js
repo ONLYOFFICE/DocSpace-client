@@ -273,14 +273,15 @@ const ArticleBodyContent = (props) => {
 
 export default inject(
   ({
-    auth,
+    authStore,
+    settingsStore,
     common,
     clientLoadingStore,
     userStore,
     currentTariffStatusStore,
   }) => {
     const { isLoadedArticleBody, setIsLoadedArticleBody } = common;
-    const { isEnterprise, settingsStore, isCommunity } = auth;
+    const { isEnterprise, isCommunity } = authStore;
     const { isNotPaidPeriod } = currentTariffStatusStore;
     const { user } = userStore;
     const { isOwner } = user;

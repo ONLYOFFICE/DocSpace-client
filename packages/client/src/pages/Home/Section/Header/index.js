@@ -1118,14 +1118,13 @@ const SectionHeaderContent = (props) => {
 
 export default inject(
   ({
-    auth,
     filesStore,
     peopleStore,
     dialogsStore,
     selectedFolderStore,
     treeFoldersStore,
     filesActionsStore,
-    settingsStore,
+    filesSettingsStore,
     clientLoadingStore,
     publicRoomStore,
     contextOptionsStore,
@@ -1134,6 +1133,7 @@ export default inject(
     infoPanelStore,
     userStore,
     currentTariffStatusStore,
+    settingsStore,
   }) => {
     const isOwner = userStore.user?.isOwner;
     const isAdmin = userStore.user?.isAdmin;
@@ -1240,7 +1240,7 @@ export default inject(
       whiteLabelLogoUrls,
       isFrame,
       currentDeviceType,
-    } = auth.settingsStore;
+    } = settingsStore;
     const { isGracePeriod } = currentTariffStatusStore;
 
     const isRoom = !!roomType;
@@ -1298,8 +1298,8 @@ export default inject(
     return {
       isGracePeriod,
       setInviteUsersWarningDialogVisible,
-      showText: auth.settingsStore.showText,
-      isDesktop: auth.settingsStore.isDesktopClient,
+      showText: settingsStore.showText,
+      isDesktop: settingsStore.isDesktopClient,
       showHeaderLoader,
       isLoading,
       isRootFolder: isPublicRoom && !folderPath?.length ? true : isRoot,
@@ -1317,9 +1317,9 @@ export default inject(
       isHeaderIndeterminate,
       isHeaderChecked,
       isThirdPartySelection,
-      isTabletView: auth.settingsStore.isTabletView,
-      confirmDelete: settingsStore.confirmDelete,
-      personal: auth.settingsStore.personal,
+      isTabletView: settingsStore.isTabletView,
+      confirmDelete: filesSettingsStore.confirmDelete,
+      personal: settingsStore.personal,
       cbMenuItems,
       setSelectedNode: treeFoldersStore.setSelectedNode,
       getFolderInfo,

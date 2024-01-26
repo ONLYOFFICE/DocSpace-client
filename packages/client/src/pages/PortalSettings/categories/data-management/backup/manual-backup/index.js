@@ -393,7 +393,7 @@ class ManualBackup extends React.Component {
 }
 
 export default inject(
-  ({ auth, backup, treeFoldersStore, currentTariffStatusStore }) => {
+  ({ settingsStore, backup, treeFoldersStore, currentTariffStatusStore }) => {
     const {
       clearProgressInterval,
       clearLocalStorage,
@@ -412,7 +412,7 @@ export default inject(
       setConnectedThirdPartyAccount,
     } = backup;
 
-    const { currentColorScheme, dataBackupUrl } = auth.settingsStore;
+    const { currentColorScheme, dataBackupUrl } = settingsStore;
     const { rootFoldersTitles, fetchTreeFolders } = treeFoldersStore;
     const { isNotPaidPeriod } = currentTariffStatusStore;
 

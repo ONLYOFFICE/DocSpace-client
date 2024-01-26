@@ -113,8 +113,7 @@ const App = ({
   );
 };
 
-const AppWrapper = inject(({ auth }) => {
-  const { settingsStore } = auth;
+const AppWrapper = inject(({ settingsStore }) => {
   const { setTheme, getAppearanceTheme, currentColorScheme } = settingsStore;
   return {
     setTheme,
@@ -123,8 +122,7 @@ const AppWrapper = inject(({ auth }) => {
   };
 })(observer(App));
 
-const ThemeProviderWrapper = inject(({ auth }) => {
-  const { settingsStore } = auth;
+const ThemeProviderWrapper = inject(({ settingsStore }) => {
   let currentColorScheme = false;
   currentColorScheme = settingsStore.currentColorScheme || false;
 

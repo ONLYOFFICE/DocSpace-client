@@ -624,7 +624,7 @@ const FilesSelector = ({
 export default inject(
   (
     {
-      auth,
+      settingsStore,
       selectedFolderStore,
       filesActionsStore,
       uploadDataStore,
@@ -661,7 +661,7 @@ export default inject(
 
     const { setIsMobileHidden: setInfoPanelIsMobileHidden } = infoPanelStore;
 
-    const { theme, socketHelper, currentDeviceType } = auth.settingsStore;
+    const { theme, socketHelper, currentDeviceType } = settingsStore;
 
     const socketSubscribesId = socketHelper.socketSubscribers;
 

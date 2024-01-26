@@ -208,13 +208,20 @@ const Sdk = ({
 };
 
 export default inject(
-  ({ auth, settingsStore, peopleStore, publicRoomStore, userStore }) => {
-    const { login, logout } = auth;
+  ({
+    authStore,
+    settingsStore,
+    filesSettingsStore,
+    peopleStore,
+    publicRoomStore,
+    userStore,
+  }) => {
+    const { login, logout } = authStore;
     const { theme, setFrameConfig, frameConfig, getSettings, isLoaded } =
-      auth.settingsStore;
+      settingsStore;
     const { loadCurrentUser, user } = userStore;
     const { updateProfileCulture } = peopleStore.targetUserStore;
-    const { getIcon, getRoomsIcon } = settingsStore;
+    const { getIcon, getRoomsIcon } = filesSettingsStore;
     const { fetchExternalLinks } = publicRoomStore;
 
     return {

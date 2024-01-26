@@ -290,7 +290,7 @@ const CreateEvent = ({
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     filesStore,
     filesActionsStore,
     selectedFolderStore,
@@ -298,7 +298,7 @@ export default inject(
     uploadDataStore,
     dialogsStore,
     oformsStore,
-    settingsStore,
+    filesSettingsStore,
     clientLoadingStore,
     currentTariffStatusStore,
   }) => {
@@ -327,7 +327,7 @@ export default inject(
 
     const { id: parentId } = selectedFolderStore;
 
-    const { isDesktopClient } = auth.settingsStore;
+    const { isDesktopClient } = settingsStore;
 
     const { setPortalTariff } = currentTariffStatusStore;
 
@@ -338,7 +338,7 @@ export default inject(
       eventDialogVisible,
     } = dialogsStore;
 
-    const { keepNewFileName } = settingsStore;
+    const { keepNewFileName } = filesSettingsStore;
 
     return {
       setPortalTariff,

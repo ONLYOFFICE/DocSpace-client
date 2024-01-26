@@ -208,7 +208,7 @@ const InfoPanelHeaderContent = (props) => {
 };
 
 export default inject(
-  ({ auth, treeFoldersStore, infoPanelStore, pluginStore }) => {
+  ({ settingsStore, treeFoldersStore, infoPanelStore, pluginStore }) => {
     const { infoPanelItemsList } = pluginStore;
 
     const {
@@ -228,7 +228,7 @@ export default inject(
 
     const { myRoomsId, archiveRoomsId } = treeFoldersStore;
 
-    const { enablePlugins } = auth.settingsStore;
+    const { enablePlugins } = settingsStore;
 
     return {
       selection,

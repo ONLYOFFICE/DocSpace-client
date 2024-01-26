@@ -192,7 +192,7 @@ const AccessPortal = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
+export default inject(({ settingsStore }) => {
   const {
     currentColorScheme,
     passwordStrengthSettingsUrl,
@@ -202,7 +202,7 @@ export default inject(({ auth }) => {
     lifetimeSettingsUrl,
     ipSettingsUrl,
     currentDeviceType,
-  } = auth.settingsStore;
+  } = settingsStore;
 
   const isMobileView = currentDeviceType === DeviceType.mobile;
 

@@ -258,8 +258,8 @@ const ActiveSessions = ({
   );
 };
 
-export default inject(({ auth, userStore, setup }) => {
-  const { culture, currentDeviceType } = auth.settingsStore;
+export default inject(({ settingsStore, userStore, setup }) => {
+  const { culture, currentDeviceType } = settingsStore;
   const { user } = userStore;
   const locale = (user && user.cultureName) || culture || "en";
 

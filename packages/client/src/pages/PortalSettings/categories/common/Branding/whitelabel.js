@@ -509,7 +509,7 @@ const WhiteLabel = (props) => {
   );
 };
 
-export default inject(({ auth, common, currentQuotaStore }) => {
+export default inject(({ settingsStore, common, currentQuotaStore }) => {
   const {
     setLogoText,
     whiteLabelLogoText,
@@ -525,12 +525,12 @@ export default inject(({ auth, common, currentQuotaStore }) => {
   } = common;
 
   const { whiteLabelLogoUrls: defaultWhiteLabelLogoUrls, currentDeviceType } =
-    auth.settingsStore;
+    settingsStore;
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
 
   return {
     setLogoText,
-    theme: auth.settingsStore.theme,
+    theme: settingsStore.theme,
     logoText: whiteLabelLogoText,
     getWhiteLabelLogoText,
     saveWhiteLabelSettings,

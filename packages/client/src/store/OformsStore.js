@@ -20,7 +20,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 const myDocumentsFolderId = 2;
 
 class OformsStore {
-  authStore;
+  settingsStore;
   infoPanelStore;
   userStore = null;
 
@@ -46,8 +46,8 @@ class OformsStore {
     "submitToGalleryTileIsHidden"
   );
 
-  constructor(authStore, infoPanelStore, userStore) {
-    this.authStore = authStore;
+  constructor(settingsStore, infoPanelStore, userStore) {
+    this.settingsStore = settingsStore;
     this.infoPanelStore = infoPanelStore;
     this.userStore = userStore;
     makeAutoObservable(this);
@@ -101,8 +101,7 @@ class OformsStore {
   };
 
   fetchOformLocales = async () => {
-    const { uploadDomain, uploadDashboard } =
-      this.authStore.settingsStore.formGallery;
+    const { uploadDomain, uploadDashboard } = this.settingsStore.formGallery;
 
     const url = combineUrl(uploadDomain, uploadDashboard, "/i18n/locales");
 
@@ -118,7 +117,7 @@ class OformsStore {
   };
 
   getOforms = async (filter = OformsFilter.getDefault()) => {
-    const { domain, path } = this.authStore.settingsStore.formGallery;
+    const { domain, path } = this.settingsStore.formGallery;
 
     const formName = "&fields[0]=name_form";
     const updatedAt = "&fields[1]=updatedAt";
@@ -207,8 +206,7 @@ class OformsStore {
   };
 
   submitToFormGallery = async (file, formName, language, signal = null) => {
-    const { uploadDomain, uploadPath } =
-      this.authStore.settingsStore.formGallery;
+    const { uploadDomain, uploadPath } = this.settingsStore.formGallery;
 
     const res = await submitToGallery(
       combineUrl(uploadDomain, uploadPath),
@@ -221,8 +219,7 @@ class OformsStore {
   };
 
   fetchCurrentCategory = async () => {
-    const { uploadDomain, uploadDashboard } =
-      this.authStore.settingsStore.formGallery;
+    const { uploadDomain, uploadDashboard } = this.settingsStore.formGallery;
     const { categorizeBy, categoryId } = this.oformsFilter;
     const locale = this.defaultOformLocale;
 
@@ -242,8 +239,7 @@ class OformsStore {
   };
 
   fetchCategoryTypes = async () => {
-    const { uploadDomain, uploadDashboard } =
-      this.authStore.settingsStore.formGallery;
+    const { uploadDomain, uploadDashboard } = this.settingsStore.formGallery;
 
     const url = combineUrl(uploadDomain, uploadDashboard, "/menu-translations");
     const locale = this.defaultOformLocale;
@@ -262,8 +258,7 @@ class OformsStore {
   };
 
   fetchCategoriesOfCategoryType = async (categoryTypeId) => {
-    const { uploadDomain, uploadDashboard } =
-      this.authStore.settingsStore.formGallery;
+    const { uploadDomain, uploadDashboard } = this.settingsStore.formGallery;
 
     const url = combineUrl(uploadDomain, uploadDashboard, `/${categoryTypeId}`);
 

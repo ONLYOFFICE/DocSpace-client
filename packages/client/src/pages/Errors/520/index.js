@@ -109,15 +109,15 @@ const Error520 = ({
   );
 };
 
-const Error520Wrapper = inject(({ auth, userStore }) => {
-  const { currentColorScheme, firebaseHelper } = auth.settingsStore;
+const Error520Wrapper = inject(({ authStore, settingsStore, userStore }) => {
+  const { currentColorScheme, firebaseHelper } = settingsStore;
   const { user } = userStore;
 
   return {
     currentColorScheme,
     FirebaseHelper: firebaseHelper,
     user,
-    version: auth.version,
+    version: authStore.version,
   };
 })(observer(Error520));
 

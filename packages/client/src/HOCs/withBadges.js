@@ -169,7 +169,7 @@ export default function withBadges(WrappedComponent) {
   return inject(
     (
       {
-        auth,
+        authStore,
         treeFoldersStore,
         filesActionsStore,
         versionHistoryStore,
@@ -177,6 +177,7 @@ export default function withBadges(WrappedComponent) {
         filesStore,
         publicRoomStore,
         userStore,
+        settingsStore,
       },
       { item }
     ) => {
@@ -188,7 +189,7 @@ export default function withBadges(WrappedComponent) {
         isRecentTab,
       } = treeFoldersStore;
       const { markAsRead, setPinAction, setMuteAction } = filesActionsStore;
-      const { isTabletView, isDesktopClient, theme } = auth.settingsStore;
+      const { isTabletView, isDesktopClient, theme } = settingsStore;
       const { setIsVerHistoryPanel, fetchFileVersions } = versionHistoryStore;
       const {
         setNewFilesPanelVisible,
@@ -205,7 +206,7 @@ export default function withBadges(WrappedComponent) {
       return {
         isArchiveFolderRoot,
         theme,
-        isAdmin: auth.isAdmin,
+        isAdmin: authStore.isAdmin,
         isVisitor: userStore?.user?.isVisitor || !userStore?.user,
         isTrashFolder: isRecycleBinFolder,
         isPrivacyFolder,

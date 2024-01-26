@@ -201,7 +201,13 @@ const Table = ({
 };
 
 export default inject(
-  ({ peopleStore, auth, accessRightsStore, infoPanelStore, userStore }) => {
+  ({
+    peopleStore,
+    settingsStore,
+    accessRightsStore,
+    infoPanelStore,
+    userStore,
+  }) => {
     const {
       usersStore,
       filterStore,
@@ -209,7 +215,7 @@ export default inject(
       setViewAs,
       changeType,
     } = peopleStore;
-    const { theme, withPaging, currentDeviceType } = auth.settingsStore;
+    const { theme, withPaging, currentDeviceType } = settingsStore;
     const { peopleList, hasMoreAccounts, fetchMoreAccounts } = usersStore;
     const { filterTotal, isFiltered } = filterStore;
 

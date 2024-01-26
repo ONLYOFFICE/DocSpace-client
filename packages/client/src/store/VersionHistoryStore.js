@@ -14,14 +14,14 @@ class VersionHistoryStore {
   timerId = null;
   isEditing = false;
 
-  constructor(filesStore) {
+  constructor(filesStore, settingsStore) {
     makeAutoObservable(this);
     this.filesStore = filesStore;
 
     if (this.versions) {
       //TODO: Files store in not initialized on versionHistory page. Need socket.
 
-      const { socketHelper } = this.filesStore.settingsStore;
+      const { socketHelper } = settingsStore;
 
       socketHelper.on("s:start-edit-file", (id) => {
         //console.log(`VERSION STORE Call s:start-edit-file (id=${id})`);

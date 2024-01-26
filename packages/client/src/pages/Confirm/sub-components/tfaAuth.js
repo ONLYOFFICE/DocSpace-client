@@ -179,9 +179,9 @@ const TfaAuthFormWrapper = (props) => {
   return <TfaAuthForm {...props} />;
 };
 
-export default inject(({ auth, confirm }) => ({
+export default inject(({ settingsStore, confirm }) => ({
   setIsLoaded: confirm.setIsLoaded,
   setIsLoading: confirm.setIsLoading,
 
-  defaultPage: auth.settingsStore.defaultPage,
+  defaultPage: settingsStore.defaultPage,
 }))(withTranslation(["Confirm", "Common"])(observer(TfaAuthFormWrapper)));

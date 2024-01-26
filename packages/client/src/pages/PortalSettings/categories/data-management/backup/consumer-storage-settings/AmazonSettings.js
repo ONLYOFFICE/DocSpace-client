@@ -509,7 +509,7 @@ class AmazonSettings extends React.Component {
   }
 }
 
-export default inject(({ auth, backup }) => {
+export default inject(({ settingsStore, backup }) => {
   const {
     setRequiredFormSettings,
     formSettings,
@@ -523,7 +523,7 @@ export default inject(({ auth, backup }) => {
     defaultFormSettings,
   } = backup;
   const defaultRegion = defaultFormSettings.region;
-  const { theme } = auth.settingsStore;
+  const { theme } = settingsStore;
   return {
     setRequiredFormSettings,
     formSettings,

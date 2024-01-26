@@ -129,30 +129,32 @@ const DataManagementWrapper = (props) => {
   );
 };
 
-export default inject(({ auth, setup, backup, currentTariffStatusStore }) => {
-  const { initSettings } = setup;
-  const { settingsStore } = auth;
-  const { isNotPaidPeriod } = currentTariffStatusStore;
-  const { toDefault } = backup;
-  const {
-    dataBackupUrl,
-    automaticBackupUrl,
+export default inject(
+  ({ settingsStore, setup, backup, currentTariffStatusStore }) => {
+    const { initSettings } = setup;
 
-    currentColorScheme,
-    currentDeviceType,
-  } = settingsStore;
+    const { isNotPaidPeriod } = currentTariffStatusStore;
+    const { toDefault } = backup;
+    const {
+      dataBackupUrl,
+      automaticBackupUrl,
 
-  const buttonSize =
-    currentDeviceType !== DeviceType.desktop ? "normal" : "small";
-  return {
-    loadBaseInfo: async () => {
-      await initSettings();
-    },
-    dataBackupUrl,
-    automaticBackupUrl,
-    buttonSize,
-    isNotPaidPeriod,
-    currentColorScheme,
-    toDefault,
-  };
-})(withTranslation(["Settings", "Common"])(observer(DataManagementWrapper)));
+      currentColorScheme,
+      currentDeviceType,
+    } = settingsStore;
+
+    const buttonSize =
+      currentDeviceType !== DeviceType.desktop ? "normal" : "small";
+    return {
+      loadBaseInfo: async () => {
+        await initSettings();
+      },
+      dataBackupUrl,
+      automaticBackupUrl,
+      buttonSize,
+      isNotPaidPeriod,
+      currentColorScheme,
+      toDefault,
+    };
+  }
+)(withTranslation(["Settings", "Common"])(observer(DataManagementWrapper)));

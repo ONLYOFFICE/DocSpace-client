@@ -128,7 +128,7 @@ const InfiniteGrid = (props) => {
   );
 };
 
-export default inject(({ auth, filesStore, oformsStore, infoPanelStore }) => {
+export default inject(({ filesStore, oformsStore, infoPanelStore }) => {
   const { oformFiles, hasMoreForms, oformsFilterTotal, fetchMoreOforms } =
     oformsStore;
 

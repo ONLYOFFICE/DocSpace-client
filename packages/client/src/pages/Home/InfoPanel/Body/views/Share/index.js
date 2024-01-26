@@ -253,7 +253,7 @@ const Share = (props) => {
   );
 };
 
-export default inject(({ auth, infoPanelStore }) => {
+export default inject(({ infoPanelStore }) => {
   const {
     setView,
     getPrimaryFileLink,

@@ -253,14 +253,14 @@ const DNSSettings = (props) => {
   );
 };
 
-export default inject(({ auth, common, currentQuotaStore }) => {
+export default inject(({ settingsStore, common, currentQuotaStore }) => {
   const {
     helpLink,
     currentColorScheme,
     standalone,
     dnsSettingsUrl,
     currentDeviceType,
-  } = auth.settingsStore;
+  } = settingsStore;
   const {
     isLoaded,
     setIsLoadedDNSSettings,

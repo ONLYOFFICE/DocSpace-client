@@ -120,7 +120,7 @@ const CommentEditor = ({
   );
 };
 
-export default inject(({ auth, versionHistoryStore, infoPanelStore }) => {
+export default inject(({ versionHistoryStore, infoPanelStore }) => {
   const { setSelection } = infoPanelStore;
 
   const {

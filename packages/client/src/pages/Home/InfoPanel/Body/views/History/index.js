@@ -104,7 +104,13 @@ const History = ({
 };
 
 export default inject(
-  ({ auth, filesStore, filesActionsStore, infoPanelStore, userStore }) => {
+  ({
+    settingsStore,
+    filesStore,
+    filesActionsStore,
+    infoPanelStore,
+    userStore,
+  }) => {
     const {
       selection,
       selectionHistory,
@@ -114,7 +120,7 @@ export default inject(
       getInfoPanelItemIcon,
       openUser,
     } = infoPanelStore;
-    const { personal, culture } = auth.settingsStore;
+    const { personal, culture } = settingsStore;
 
     const { getHistory } = filesStore;
     const { checkAndOpenLocationAction } = filesActionsStore;

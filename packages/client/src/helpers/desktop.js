@@ -4,7 +4,10 @@ import { desktopConstants } from "@docspace/shared/utils/common";
 import { encryptionUploadDialog as encryptionUploadDialogHelper } from "./encryptionUploadDialog";
 
 export function encryptionUploadDialog(callback) {
-  encryptionUploadDialogHelper(store.settingsStore.extsWebEncrypt, callback);
+  encryptionUploadDialogHelper(
+    store.filesSettingsStore.extsWebEncrypt,
+    callback
+  );
 }
 
 export function setEncryptionAccess(file) {

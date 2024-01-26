@@ -219,8 +219,13 @@ const Selector = ({
 
   const onSelectAllAction = React.useCallback(() => {
     onSelectAll?.();
+
     if (!items) return;
-    if (newSelectedItems.length === 0) {
+
+    if (
+      newSelectedItems.length === 0 ||
+      newSelectedItems.length !== items.length
+    ) {
       const cloneItems = items.map((x) => ({ ...x }));
 
       const cloneRenderedItems = items.map((x) => ({ ...x, isSelected: true }));

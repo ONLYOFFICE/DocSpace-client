@@ -6,5 +6,10 @@ module.exports = {
     sourceType: "module",
   },
 
-  ignorePatterns: ["./tsconfig.json", "coverage/**", "storybook-static/**"],
+  ignorePatterns: [
+    "./tsconfig.json",
+    "coverage/**",
+    "storybook-static/**",
+    "*.js",
+  ],
 };

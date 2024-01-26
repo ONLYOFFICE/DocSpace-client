@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import moment from "moment";
 import Calendar from "@docspace/components/calendar";
@@ -29,6 +29,12 @@ const StyledCalendar = styled(Calendar)`
 const CalendarComponent = ({ roomCreationDate, setCalendarDay }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
+
+  useEffect(() => {
+    return () => {
+      setCalendarDay(null);
+    };
+  }, []);
 
   const toggleCalendar = () => setIsOpen((open) => !open);
 

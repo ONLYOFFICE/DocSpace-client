@@ -24,6 +24,7 @@ const History = ({
   isVisitor,
   isCollaborator,
   calendarDay,
+  setCalendarDay,
 }) => {
   const isMount = useRef(true);
   const abortControllerRef = useRef(new AbortController());
@@ -96,7 +97,7 @@ const History = ({
       //TODO:const 120
       const y = dayNode[0].offsetTop - 120;
       scroll.scrollTo(0, y);
-
+      setCalendarDay(null);
       return;
     }
 
@@ -136,6 +137,7 @@ const History = ({
       //TODO:const 120
       const y = dayNode[0].offsetTop - 120;
       scroll.scrollTo(0, y);
+      setCalendarDay(null);
     }
   }, [calendarDay]);
 
@@ -186,6 +188,7 @@ export default inject(({ auth, filesStore, filesActionsStore }) => {
     getInfoPanelItemIcon,
     openUser,
     calendarDay,
+    setCalendarDay,
   } = auth.infoPanelStore;
   const { personal, culture } = auth.settingsStore;
 
@@ -211,5 +214,6 @@ export default inject(({ auth, filesStore, filesActionsStore }) => {
     isVisitor,
     isCollaborator,
     calendarDay,
+    setCalendarDay,
   };
 })(withTranslation(["InfoPanel", "Common", "Translations"])(observer(History)));

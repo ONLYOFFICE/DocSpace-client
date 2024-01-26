@@ -114,7 +114,7 @@ export default inject(
     filesStore,
     infoPanelStore,
   }) => {
-    const { infoPanelSelection, roomsView } = infoPanelStore;
+    const { infoPanelSelection, roomsView, setIsMobileHidden } = infoPanelStore;
 
     const selection = infoPanelSelection.length > 1 ? null : infoPanelSelection;
     const isArchive = selection?.rootFolderType === FolderType.Archive;
@@ -122,8 +122,8 @@ export default inject(
     return {
       selection,
       roomsView,
-      infoPanelSelection: auth.infoPanelStore.infoPanelSelection,
-      setIsMobileHidden: auth.infoPanelStore.setIsMobileHidden,
+      infoPanelSelection,
+      setIsMobileHidden,
 
       isGracePeriod: currentTariffStatusStore.isGracePeriod,
 

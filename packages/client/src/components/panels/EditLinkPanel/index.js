@@ -278,7 +278,7 @@ export default inject(
     publicRoomStore,
     infoPanelStore,
   }) => {
-    const { selectionParentRoom } = infoPanelStore;
+    const { infoPanelSelection } = infoPanelStore;
     const {
       editLinkPanelIsVisible,
       setEditLinkPanelIsVisible,
@@ -294,7 +294,7 @@ export default inject(
     const link = externalLinks.find((l) => l?.sharedTo?.id === linkId);
 
     const shareLink = link?.sharedTo?.shareLink;
-    const isPublic = selectionParentRoom?.roomType === RoomsType.PublicRoom;
+    const isPublic = infoPanelSelection?.roomType === RoomsType.PublicRoom;
 
     return {
       visible: editLinkPanelIsVisible,
@@ -302,7 +302,7 @@ export default inject(
       isEdit,
       linkId: link?.sharedTo?.id,
       editExternalLink,
-      roomId: selectionParentRoom.id,
+      roomId: infoPanelSelection.id,
       setExternalLink,
       isLocked: !!link?.sharedTo?.password,
       password: link?.sharedTo?.password ?? "",

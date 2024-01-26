@@ -44,9 +44,8 @@ const EditRoomEvent = ({
   updateLogoPathsCacheBreaker,
   removeLogoPaths,
 
-  reloadInfoPanelSelection,
+  updateInfoPanelSelection,
   changeRoomOwner,
-  reloadSelectionParentRoom,
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
 
@@ -108,6 +107,8 @@ const EditRoomEvent = ({
     const uploadLogoData = new FormData();
     uploadLogoData.append(0, roomParams.icon.uploadedFile);
 
+    let room = null;
+
     try {
       setIsLoading(true);
 
@@ -115,7 +116,7 @@ const EditRoomEvent = ({
         await changeRoomOwner(t, roomParams?.roomOwner?.id);
       }
 
-      let room = await editRoom(item.id, editRoomParams);
+      room = await editRoom(item.id, editRoomParams);
 
       room.isLogoLoading = true;
 
@@ -154,15 +155,14 @@ const EditRoomEvent = ({
           }
 
           !withPaging && updateRoom(item, room);
-          reloadSelectionParentRoom();
-          reloadInfoPanelSelection();
+          // updateInfoPanelSelection();
           URL.revokeObjectURL(img.src);
           setActiveFolders([]);
         };
         img.src = url;
       } else {
         !withPaging && updateRoom(item, room);
-        reloadInfoPanelSelection();
+        // updateInfoPanelSelection();
       }
     } catch (err) {
       console.log(err);
@@ -173,14 +173,14 @@ const EditRoomEvent = ({
         updateEditedSelectedRoom(editRoomParams.title, tags);
         if (item.logo.original && !roomParams.icon.uploadedFile) {
           removeLogoPaths();
-          reloadInfoPanelSelection();
+          // updateInfoPanelSelection();
         } else if (!item.logo.original && roomParams.icon.uploadedFile)
           addDefaultLogoPaths();
         else if (item.logo.original && roomParams.icon.uploadedFile)
           updateLogoPathsCacheBreaker();
       }
 
-      reloadSelectionParentRoom();
+      updateInfoPanelSelection(room);
       setIsLoading(false);
       onClose();
     }
@@ -273,10 +273,7 @@ export default inject(
     const { getThirdPartyIcon } = filesSettingsStore.thirdPartyStore;
     const { setCreateRoomDialogVisible } = dialogsStore;
     const { withPaging } = settingsStore;
-    const {
-      reloadSelection: reloadInfoPanelSelection,
-      reloadSelectionParentRoom,
-    } = infoPanelStore;
+    const { updateInfoPanelSelection } = infoPanelStore;
     return {
       addActiveItems,
       setActiveFolders,
@@ -309,9 +306,8 @@ export default inject(
       updateLogoPathsCacheBreaker,
       removeLogoPaths,
 
-      reloadInfoPanelSelection,
+      updateInfoPanelSelection,
       changeRoomOwner,
-      reloadSelectionParentRoom,
     };
   }
 )(observer(EditRoomEvent));

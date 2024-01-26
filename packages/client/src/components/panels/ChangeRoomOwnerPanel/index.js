@@ -46,6 +46,7 @@ const ChangeRoomOwner = (props) => {
     roomOwnerId,
     changeRoomOwner,
     userId,
+    updateInfoPanelSelection,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -71,6 +72,7 @@ const ChangeRoomOwner = (props) => {
       setIsLoading(true);
 
       await changeRoomOwner(t, user[0]?.id, isChecked);
+      updateInfoPanelSelection();
       setIsLoading(false);
     }
     onClose();
@@ -142,22 +144,22 @@ export default inject(
     selectedFolderStore,
     filesActionsStore,
     userStore,
+    infoPanelStore,
   }) => {
     const {
       changeRoomOwnerIsVisible,
       setChangeRoomOwnerIsVisible,
       changeRoomOwnerData,
     } = dialogsStore;
-
     const { selection, bufferSelection } = filesStore;
+    const { currentDeviceType } = settingsStore;
+    const { updateInfoPanelSelection } = infoPanelStore;
 
     const room = selection.length
       ? selection[0]
       : bufferSelection
         ? bufferSelection
         : selectedFolderStore;
-
-    const { currentDeviceType } = settingsStore;
 
     const { id } = userStore.user;
 
@@ -170,6 +172,7 @@ export default inject(
       currentDeviceType,
       changeRoomOwner: filesActionsStore.changeRoomOwner,
       userId: id,
+      updateInfoPanelSelection,
     };
   }
 )(observer(withTranslation(["Files"])(ChangeRoomOwner)));

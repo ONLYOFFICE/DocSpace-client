@@ -263,7 +263,7 @@ export default inject(
     treeFoldersStore,
     infoPanelStore,
   }) => {
-    const { selectionParentRoom } = infoPanelStore;
+    const { infoPanelSelection } = infoPanelStore;
     const { theme } = settingsStore;
 
     const {
@@ -278,14 +278,14 @@ export default inject(
     return {
       setLinkParams,
       editExternalLink,
-      roomId: selectionParentRoom.id,
+      roomId: infoPanelSelection.id,
       setExternalLink,
       setEditLinkPanelIsVisible,
       setDeleteLinkDialogVisible,
       setEmbeddingPanelIsVisible,
       isArchiveFolder: isArchiveFolderRoot,
       theme,
-      isPublicRoomType: selectionParentRoom.roomType === RoomsType.PublicRoom,
+      isPublicRoomType: infoPanelSelection.roomType === RoomsType.PublicRoom,
     };
   }
 )(

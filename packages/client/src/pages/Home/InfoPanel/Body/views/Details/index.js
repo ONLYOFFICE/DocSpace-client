@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { FileType } from "@docspace/shared/enums";
+import { FileType, FolderType } from "@docspace/shared/enums";
 import { Text } from "@docspace/shared/components/text";
 
 import DetailsHelper from "../../helpers/DetailsHelper.js";
@@ -21,6 +21,7 @@ const Details = ({
   isVisitor,
   isCollaborator,
   selectTag,
+  isArchive,
 }) => {
   const [itemProperties, setItemProperties] = useState([]);
 
@@ -61,7 +62,7 @@ const Details = ({
   }, [selection, createThumbnailAction]);
 
   const currentIcon =
-    !selection.isArchive && selection?.logo?.large
+    !isArchive && selection?.logo?.large
       ? selection?.logo?.large
       : getInfoPanelItemIcon(selection, 96);
 
@@ -93,7 +94,7 @@ const Details = ({
             <RoomIcon
               color={selection.logo.color}
               title={selection.title}
-              isArchive={selection.isArchive}
+              isArchive={isArchive}
               size="96px"
               radius="16px"
             />
@@ -101,7 +102,7 @@ const Details = ({
             <img
               className={`no-thumbnail-img ${selection.isRoom && "is-room"} ${
                 selection.isRoom &&
-                !selection.isArchive &&
+                !isArchive &&
                 selection.logo?.large &&
                 "custom-logo"
               }`}
@@ -144,7 +145,8 @@ export default inject(
     infoPanelStore,
     userStore,
   }) => {
-    const { selection, getInfoPanelItemIcon, openUser } = infoPanelStore;
+    const { infoPanelSelection, getInfoPanelItemIcon, openUser } =
+      infoPanelStore;
     const { createThumbnail } = filesStore;
     const { personal, culture } = settingsStore;
     const { user } = userStore;
@@ -154,16 +156,19 @@ export default inject(
     const isVisitor = user.isVisitor;
     const isCollaborator = user.isCollaborator;
 
+    const isArchive = infoPanelSelection?.rootFolderType === FolderType.Archive;
+
     return {
       personal,
       culture,
-      selection,
+      selection: infoPanelSelection,
       createThumbnail,
       getInfoPanelItemIcon,
       openUser,
       isVisitor,
       isCollaborator,
       selectTag,
+      isArchive,
     };
   }
 )(withTranslation(["InfoPanel", "Common", "Translations", "Files"])(Details));

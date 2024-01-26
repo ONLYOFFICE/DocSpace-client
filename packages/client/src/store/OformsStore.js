@@ -79,7 +79,7 @@ class OformsStore {
 
   setGallerySelected = (gallerySelected) => {
     this.gallerySelected = gallerySelected;
-    this.infoPanelStore.setSelection(gallerySelected);
+    this.infoPanelStore.setInfoPanelSelection(gallerySelected);
   };
 
   setOformLocales = (oformLocales) => (this.oformLocales = oformLocales);

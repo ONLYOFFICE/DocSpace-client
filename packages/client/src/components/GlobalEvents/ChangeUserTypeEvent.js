@@ -19,7 +19,7 @@ const ChangeUserTypeEvent = ({
   onClose,
   setSelected,
   getPeopleListItem,
-  setSelection,
+  setInfoPanelSelection,
   needResetUserSelection,
   isRoomAdmin,
 }) => {
@@ -70,7 +70,7 @@ const ChangeUserTypeEvent = ({
         if (!needResetUserSelection) {
           const user = getPeopleListItem(users[0]);
 
-          setSelection(user);
+          setInfoPanelSelection(user);
         }
 
         successCallback && successCallback(users);
@@ -145,7 +145,7 @@ export default inject(
       setChangeUserTypeDialogVisible: setVisible,
     } = dialogsStore;
     const { isRoomAdmin } = authStore;
-    const { setSelection } = infoPanelStore;
+    const { setInfoPanelSelection } = infoPanelStore;
     const { dialogStore, filterStore, usersStore } = peopleStore;
 
     const { data: peopleDialogData } = dialogStore;
@@ -161,7 +161,7 @@ export default inject(
       isRoomAdmin,
       needResetUserSelection,
       getPeopleListItem,
-      setSelection,
+      setInfoPanelSelection,
       setSelected,
 
       visible,

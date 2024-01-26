@@ -127,6 +127,7 @@ const FilesSelector = ({
     title: string;
     path?: string[];
     fileExst?: string;
+    inPublic?: boolean;
   } | null>(null);
 
   const [total, setTotal] = React.useState<number>(0);
@@ -218,6 +219,9 @@ const FilesSelector = ({
   });
 
   const onSelectAction = (item: Item) => {
+    const inPublic =
+      breadCrumbs.findIndex((f: any) => f.roomType === RoomsType.PublicRoom) >
+      -1;
     if (item.isFolder) {
       setIsFirstLoad(true);
       setItems(null);
@@ -247,6 +251,7 @@ const FilesSelector = ({
         id: item.id,
         title: item.title,
         fileExst: item.fileExst,
+        inPublic: inPublic,
       });
     }
   };

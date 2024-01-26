@@ -36,6 +36,7 @@ export type BreadCrumb = {
   label: string;
   id: number | string;
   isRoom: boolean;
+  shared: boolean;
 };
 
 type setItems = (value: Item[] | null) => Item[];
@@ -199,6 +200,8 @@ export type FilesSelectorProps = {
       id: string | number;
       title: string;
       path?: string[];
+      fileExst?: string;
+      inPublic?: boolean;
     },
     breadCrumbs: BreadCrumb[]
   ) => void;

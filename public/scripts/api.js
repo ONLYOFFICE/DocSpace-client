@@ -52,6 +52,7 @@
       onAppError: (e) => console.log("onAppError", e),
       onEditorCloseCallback: null,
       onAuthSuccess: null,
+      onSignOut: null,
     },
   };
 

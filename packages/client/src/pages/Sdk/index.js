@@ -26,6 +26,7 @@ const Sdk = ({
   updateProfileCulture,
   getRoomsIcon,
   fetchExternalLinks,
+  getFilePrimaryLink,
 }) => {
   const [isDataReady, setIsDataReady] = useState(false);
 
@@ -146,10 +147,11 @@ const Sdk = ({
         const links = await fetchExternalLinks(data[0].id);
 
         const requestTokens = links.map((link) => {
-          const { id, title, requestToken } = link.sharedTo;
+          const { id, title, requestToken, primary } = link.sharedTo;
 
           return {
             id,
+            primary,
             title,
             requestToken,
           };
@@ -164,8 +166,16 @@ const Sdk = ({
   );
 
   const onSelectFile = useCallback(
-    (data) => {
+    async (data) => {
       data.icon = getIcon(64, data.fileExst);
+
+      if (data.inPublic) {
+        const link = await getFilePrimaryLink(data.id);
+
+        const { id, title, requestToken, primary } = link.sharedTo;
+
+        data.requestTokens = [{ id, primary, title, requestToken }];
+      }
 
       frameCallEvent({ event: "onSelectCallback", data });
     },
@@ -219,7 +229,7 @@ const Sdk = ({
 };
 
 export default inject(
-  ({ auth, settingsStore, peopleStore, publicRoomStore }) => {
+  ({ auth, settingsStore, peopleStore, publicRoomStore, filesStore }) => {
     const { login, logout, userStore } = auth;
     const { theme, setFrameConfig, frameConfig, getSettings, isLoaded } =
       auth.settingsStore;
@@ -227,6 +237,7 @@ export default inject(
     const { updateProfileCulture } = peopleStore.targetUserStore;
     const { getIcon, getRoomsIcon } = settingsStore;
     const { fetchExternalLinks } = publicRoomStore;
+    const { getFilePrimaryLink } = filesStore;
 
     return {
       theme,
@@ -242,6 +253,7 @@ export default inject(
       updateProfileCulture,
       user,
       fetchExternalLinks,
+      getFilePrimaryLink,
     };
   }
 )(observer(Sdk));

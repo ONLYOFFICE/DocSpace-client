@@ -129,6 +129,7 @@ const Selector = ({
         avatar: item.avatar,
         icon: item.icon,
         label: item.label,
+        shared: item.shared,
       });
 
     if (isMultiSelect) {

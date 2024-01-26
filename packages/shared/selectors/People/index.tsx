@@ -125,7 +125,7 @@ const PeopleSelector = ({
 
     const userAvatar = hasAvatar ? avatar : DefaultUserPhoto;
 
-    return {
+    const i = {
       id: userId,
       email,
       avatar: userAvatar,
@@ -136,7 +136,10 @@ const PeopleSelector = ({
       isVisitor,
       isCollaborator,
       hasAvatar,
-    };
+      shared: false,
+    } as TSelectorItem;
+
+    return i;
   };
 
   const loadNextPage = useCallback(

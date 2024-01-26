@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import queryString from "query-string";
-import MediaViewer from "@docspace/common/components/MediaViewer";
+
+import MediaViewer from "@docspace/shared/components/MediaViewer";
 import { PluginFileType } from "SRC_DIR/helpers/plugins/constants";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -107,12 +108,15 @@ const FilesMediaViewer = (props) => {
     setMediaViewerData({ visible: true, id });
   };
 
-  const onChangeUrl = (id) => {
-    const url = combineUrl(MEDIA_VIEW_URL, id);
+  const onChangeUrl = useCallback(
+    (id) => {
+      const url = combineUrl(MEDIA_VIEW_URL, id);
 
-    setCurrentId(id);
-    navigate(url);
-  };
+      setCurrentId(id);
+      navigate(url);
+    },
+    [setCurrentId, navigate]
+  );
 
   const resetSelection = () => {
     setSelection([]);
@@ -138,62 +142,84 @@ const FilesMediaViewer = (props) => {
     }
   };
 
-  const onDeleteMediaFile = (id) => {
-    const translations = {
-      deleteOperation: t("Translations:DeleteOperation"),
-      successRemoveFolder: t("Files:FolderRemoved"),
-      successRemoveFile: t("Files:FileRemoved"),
-    };
+  const onDeleteMediaFile = useCallback(
+    (id) => {
+      const translations = {
+        deleteOperation: t("Translations:DeleteOperation"),
+        successRemoveFolder: t("Files:FolderRemoved"),
+        successRemoveFile: t("Files:FileRemoved"),
+      };
 
-    if (files.length > 0) {
-      let file = files.find((file) => file.id === id);
-      if (file) {
-        // try to fix with one check later (see deleteAction)
-        const isActiveFile = activeFiles.find((elem) => elem.id === file.id);
-        const isActiveFolder = activeFolders.find(
-          (elem) => elem.id === file.id
-        );
+      if (files.length > 0) {
+        let file = files.find((file) => file.id === id);
+        if (file) {
+          // try to fix with one check later (see deleteAction)
+          const isActiveFile = activeFiles.find((elem) => elem.id === file.id);
+          const isActiveFolder = activeFolders.find(
+            (elem) => elem.id === file.id
+          );
 
-        if (isActiveFile || isActiveFolder) return;
+          if (isActiveFile || isActiveFolder) return;
 
-        setRemoveMediaItem(file);
-        deleteItemAction(file.id, translations, true, file.providerKey);
+          setRemoveMediaItem(file);
+          deleteItemAction(file.id, translations, true, file.providerKey);
+        }
       }
-    }
-  };
+    },
+    [files, t, activeFiles, activeFolders, setRemoveMediaItem, deleteItemAction]
+  );
 
-  const onDownloadMediaFile = (id) => {
-    if (playlist.length > 0) {
-      let viewUrlFile = playlist.find((file) => file.fileId === id).src;
-      return window.open(viewUrlFile, "_self");
-    }
-  };
-
-  const onMediaViewerClose = (e) => {
-    if (isPreview) {
-      setIsPreview(false);
-      resetUrl();
-      if (previewFile) {
-        setScrollToItem({ id: previewFile.id, type: "file" });
-        setBufferSelection(previewFile);
+  const onDownloadMediaFile = useCallback(
+    (id) => {
+      if (playlist.length > 0) {
+        let viewUrlFile = playlist.find((file) => file.fileId === id).src;
+        return window.open(viewUrlFile, "_self");
       }
-      setToPreviewFile(null);
-    }
+    },
+    [playlist]
+  );
 
-    setMediaViewerData({ visible: false, id: null });
+  const onMediaViewerClose = useCallback(
+    (e) => {
+      if (isPreview) {
+        setIsPreview(false);
+        resetUrl();
+        if (previewFile) {
+          setScrollToItem({ id: previewFile.id, type: "file" });
+          setBufferSelection(previewFile);
+        }
+        setToPreviewFile(null);
+      }
 
-    // const url = localStorage.getItem("isFirstUrl");
-    const url = getFirstUrl();
+      setMediaViewerData({ visible: false, id: null });
 
-    if (!url) {
-      return;
-    }
+      // const url = localStorage.getItem("isFirstUrl");
+      const url = getFirstUrl();
 
-    const targetFile = files.find((item) => item.id === currentMediaFileId);
-    if (targetFile) setBufferSelection(targetFile);
+      if (!url) {
+        return;
+      }
 
-    navigate(url, { replace: true });
-  };
+      const targetFile = files.find((item) => item.id === currentMediaFileId);
+      if (targetFile) setBufferSelection(targetFile);
+
+      navigate(url, { replace: true });
+    },
+    [
+      files,
+      isPreview,
+      previewFile,
+
+      resetUrl,
+      navigate,
+      getFirstUrl,
+      setIsPreview,
+      setScrollToItem,
+      setToPreviewFile,
+      setMediaViewerData,
+      setBufferSelection,
+    ]
+  );
 
   return (
     visible && (

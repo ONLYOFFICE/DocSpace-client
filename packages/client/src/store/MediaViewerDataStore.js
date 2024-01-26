@@ -3,7 +3,7 @@ import {
   isNullOrUndefined,
   findNearestIndex,
   isVideo,
-} from "@docspace/common/components/MediaViewer/helpers";
+} from "@docspace/shared/components/MediaViewer/helpers";
 import { thumbnailStatuses } from "SRC_DIR/helpers/filesConstants";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";

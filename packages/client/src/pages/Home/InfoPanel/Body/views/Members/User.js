@@ -206,6 +206,10 @@ const User = ({
     setIsScrollLocked(isOpen);
   };
 
+  const firstLetterToUppercase = (str) => {
+    return str[0].toUpperCase() + str.slice(1);
+  };
+
   const userAvatar = user.hasAvatar ? user.avatar : DefaultUserPhotoUrl;
 
   const role = getUserRole(user);
@@ -243,13 +247,30 @@ const User = ({
         tooltipContent={tooltipContent}
         hideRoleIcon={!withTooltip}
       />
+      <div className="user_body-wrapper">
+        <div className="name-wrapper">
+          <div className="name">
+            {isExpect ? user.email : decode(user.displayName) || user.email}
+          </div>
+          {currentMember?.id === user.id && (
+            <div className="me-label">&nbsp;{`(${t("Common:MeLabel")})`}</div>
+          )}
+        </div>
 
-      <div className="name">
-        {isExpect ? user.email : decode(user.displayName) || user.email}
+        <div className="role-email" style={{ display: "flex" }}>
+          <Text
+            className="label"
+            fontWeight={400}
+            fontSize="12px"
+            noSelect
+            truncate
+            color="#A3A9AE"
+            dir="auto"
+          >
+            {`${firstLetterToUppercase(role)} | ${user.email}`}
+          </Text>
+        </div>
       </div>
-      {currentMember?.id === user.id && (
-        <div className="me-label">&nbsp;{`(${t("Common:MeLabel")})`}</div>
-      )}
 
       {userRole && userRoleOptions && (
         <div className="role-wrapper">

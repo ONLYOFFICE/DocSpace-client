@@ -915,7 +915,8 @@ class UploadDataStore {
     length,
     resolve,
     reject,
-    isAsyncUpload = false
+    isAsyncUpload = false,
+    isFinalize = false
   ) => {
     if (!res.data.data && res.data.message) {
       return reject(res.data.message);
@@ -938,8 +939,9 @@ class UploadDataStore {
             ? fileSize
             : this.settingsStore.chunkUploadSize;
       } else {
-        uploadedSize =
-          fileSize <= this.settingsStore.chunkUploadSize
+        uploadedSize = isFinalize
+          ? 0
+          : fileSize <= this.settingsStore.chunkUploadSize
             ? fileSize
             : fileSize - index * this.settingsStore.chunkUploadSize;
       }
@@ -1108,7 +1110,8 @@ class UploadDataStore {
               length,
               resolve,
               reject,
-              true
+              true, // isAsyncUpload
+              true //isFinalize
             );
           }
         }

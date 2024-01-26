@@ -11,24 +11,25 @@ import StyledModalDialog from "./StyledComponent";
 const ChangeQuotaDialog = (props) => {
   const {
     visible,
-    headerTitle,
-    bodyDescription,
     onSaveClick,
     onCloseClick,
     onSetQuotaBytesSize,
     isError,
     isLoading,
     initialSize,
+    isDiskSpace,
   } = props;
   const { t } = useTranslation("Common");
   return (
     <StyledModalDialog visible={visible} onClose={onCloseClick}>
       <ModalDialog.Header>
-        {headerTitle ? headerTitle : t("Common:ChangeQuota")}
+        {isDiskSpace ? t("Common:ManageStorageQuota") : t("Common:ChangeQuota")}
       </ModalDialog.Header>
       <ModalDialog.Body>
         <Text noSelect={true}>
-          {bodyDescription ? bodyDescription : t("Common:SetQuotaStorageLimit")}
+          {isDiskSpace
+            ? t("Common:SetDiskSpaceQuota")
+            : t("Common:SetQuotaStorageLimit")}
         </Text>
         <QuotaForm
           onSetQuotaBytesSize={onSetQuotaBytesSize}

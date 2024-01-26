@@ -49,6 +49,29 @@ const StyledDiscSpaceUsedComponent = styled.div`
       }
     }
   }
+
+  .disk-space_content {
+    display: grid;
+    grid-template-columns: 1fr 16px;
+    background: ${(props) =>
+      props.theme.client.settings.payment.backgroundColor};
+    padding: 12px 16px;
+    border-radius: 6px;
+
+    .disk-space_size-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-right: 8px;
+      p {
+        margin-right: 16px;
+      }
+    }
+    .disk-space_icon {
+      display: flex;
+      align-items: center;
+    }
+  }
 `;
 
 const StyledDiagramComponent = styled.div`
@@ -165,7 +188,8 @@ const StyledMainInfo = styled.div`
 `;
 
 const StyledBody = styled.div`
-  max-width: 700px;
+  max-width: 660px;
+
   .title-container {
     display: flex;
     align-items: flex-start;

@@ -292,6 +292,7 @@
   "SettingsPersonal": "Personal",
   "SetToDefault": "Set to default",
   "SetQuotaStorageLimit": "Set quota to define storage limit.",
+  "SetDiskSpaceQuota": "Set storage quota to define the maximum disk space for this DocSpace.",
   "ShowMore": "Show more",
   "SignInWithApple": "Sign in with Apple",
   "Storage": "Storage",

@@ -7,9 +7,18 @@ import { frameCallEvent } from "@docspace/shared/utils/common";
 import { setCookie } from "@docspace/shared/utils/cookie";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import FirebaseHelper from "@docspace/shared/utils/firebase";
-import { ThemeKeys, TenantStatus, DeviceType } from "@docspace/shared/enums";
+import {
+  ThemeKeys,
+  TenantStatus,
+  DeviceType,
+  ArticleAlerts,
+} from "@docspace/shared/enums";
 
-import { LANGUAGE, COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
+import {
+  LANGUAGE,
+  COOKIE_EXPIRATION_YEAR,
+  MEDIA_VIEW_URL,
+} from "@docspace/shared/constants";
 import { version } from "../package.json";
 import SocketIOHelper from "@docspace/shared/utils/socket";
 import { Dark, Base } from "@docspace/shared/themes";
@@ -20,7 +29,6 @@ import {
   getCookie,
 } from "@docspace/shared/utils";
 import { WRONG_PORTAL_NAME_URL } from "@docspace/shared/constants";
-import { ARTICLE_ALERTS } from "@docspace/client/src/helpers/constants";
 import { toastr } from "@docspace/shared/components/toast";
 //import { getFromLocalStorage } from "@docspace/client/src/pages/PortalSettings/utils";
 
@@ -36,7 +44,9 @@ const initArticleAlertsData = () => {
   const savedArticleAlertsData = localStorage.getItem("articleAlertsData");
   if (savedArticleAlertsData) return JSON.parse(savedArticleAlertsData);
 
-  const articleAlertsArray = Object.values(ARTICLE_ALERTS);
+  const articleAlertsArray = Object.values(ArticleAlerts).filter(
+    (item, index) => Object.values(ArticleAlerts).indexOf(item) === index
+  );
   const defaultArticleAlertsData = {
     current: articleAlertsArray[0],
     available: articleAlertsArray,
@@ -428,10 +438,7 @@ class SettingsStore {
     else newSettings = await api.settings.getSettings(true);
 
     if (window["AscDesktopEditor"] !== undefined || this.personal) {
-      const dp = combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
-        "/products/files/"
-      );
+      const dp = combineUrl(window.DocSpaceConfig?.proxy?.url, MEDIA_VIEW_URL);
       this.setDefaultPage(dp);
     }
 

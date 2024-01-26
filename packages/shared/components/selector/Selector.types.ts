@@ -176,6 +176,7 @@ export type TSelectorItem = {
   color?: string;
   fileExst?: string;
   roomType?: RoomsType;
+  shared: boolean;
 };
 
 export interface SearchProps {
@@ -241,3 +242,4 @@ export interface BreadCrumbsProps {
   onSelectBreadCrumb?: (item: TBreadCrumb) => void;
   isLoading?: boolean;
 }
+

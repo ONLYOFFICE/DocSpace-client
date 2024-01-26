@@ -25,6 +25,10 @@ import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg
 import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/catalog.accounts.react.svg?url";
 import EmptyScreenPersonsSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
 import { RowLoader, SearchLoader } from "@docspace/shared/skeletons/selector";
+import { checkIfAccessPaid } from "SRC_DIR/helpers/utils";
+
+const PEOPLE_TAB_ID = 0;
+const GROUP_TAB_ID = 1;
 
 const AddUsersPanel = ({
   isEncrypted,
@@ -44,6 +48,7 @@ const AddUsersPanel = ({
   withBlur,
   roomId,
   userIdsToFilterOut,
+  withGroups,
 }) => {
   const accessRight = defaultAccess
     ? defaultAccess
@@ -76,20 +81,33 @@ const AddUsersPanel = ({
     const items = [];
 
     for (let item of users) {
-      const currentAccess =
+      let currentAccess =
         item.isOwner || item.isAdmin
           ? ShareAccessRights.RoomManager
           : access?.access;
 
       const newItem = {
-        access: currentAccess,
-        email: item.email,
         id: item.id,
-        displayName: item.label,
         avatar: item.avatar,
-        isOwner: item.isOwner,
-        isAdmin: item.isAdmin,
+        access: currentAccess,
       };
+
+      if (item.isGroup && checkIfAccessPaid(currentAccess)) {
+        newItem.access = ShareAccessRights.Editing;
+        newItem.warning = t("InviteDialog:GroupMaxAvailableRoleWarning");
+      }
+
+      if (item.isGroup) {
+        newItem.isGroup = item.isGroup;
+        newItem.name = item.label;
+      } else {
+        newItem.displayName = item.label;
+        newItem.isOwner = item.isOwner;
+        newItem.isAdmin = item.isAdmin;
+        newItem.email = item.email;
+        newItem.access = currentAccess;
+      }
+
       items.push(newItem);
     }
 
@@ -117,10 +135,11 @@ const AddUsersPanel = ({
     LOADER_TIMEOUT,
     false,
   );
+  const [activeTabId, setActiveTabId] = useState(PEOPLE_TAB_ID);
 
   useEffect(() => {
     loadNextPage(0);
-  }, []);
+  }, [activeTabId]);
 
   const onSearch = (value, callback) => {
     if (value === searchValue) return;
@@ -146,23 +165,26 @@ const AddUsersPanel = ({
       isAdmin,
       isVisitor,
       isCollaborator,
+      isGroup,
+      name: groupName,
     } = item;
 
     const role = getUserRole(item);
 
-    const userAvatar = hasAvatar ? avatar : DefaultUserPhoto;
+    const userAvatar = hasAvatar ? avatar : isGroup ? "" : DefaultUserPhoto;
 
     return {
       id,
       email,
       avatar: userAvatar,
       icon,
-      label: displayName || email,
+      label: groupName || displayName || email,
       role,
       isOwner,
       isAdmin,
       isVisitor,
       isCollaborator,
+      isGroup,
     };
   };
 
@@ -173,6 +195,16 @@ const AddUsersPanel = ({
 
     if (startIndex === 0) {
       setIsLoading(true);
+    }
+
+    let searchArea = AccountsSearchArea.People;
+
+    if (withGroups) {
+      searchArea = !!search.length
+        ? AccountsSearchArea.Any
+        : activeTabId === PEOPLE_TAB_ID
+          ? AccountsSearchArea.People
+          : AccountsSearchArea.Groups;
     }
 
     const currentFilter = getFilterWithOutDisabledUser();
@@ -187,7 +219,7 @@ const AddUsersPanel = ({
 
     (!roomId
       ? getUserList(currentFilter)
-      : getMembersList(AccountsSearchArea.People, roomId, currentFilter)
+      : getMembersList(searchArea, roomId, currentFilter)
     )
       .then((response) => {
         let newItems = startIndex ? itemsList : [];
@@ -247,7 +279,7 @@ const AddUsersPanel = ({
           isMultiSelect={isMultiSelect}
           acceptButtonLabel={t("Common:AddButton")}
           onAccept={onUsersSelect}
-          withSelectAll={isMultiSelect}
+          withSelectAll={isMultiSelect && !withGroups}
           selectAllLabel={t("PeopleSelector:AllAccounts")}
           selectAllIcon={CatalogAccountsReactSvgUrl}
           withAccessRights={withAccessRights && isMultiSelect}
@@ -278,6 +310,22 @@ const AddUsersPanel = ({
               withAllSelect={!isLoadingSearch}
             />
           }
+          withTabs={withGroups && !searchValue.length}
+          tabsData={[
+            {
+              id: PEOPLE_TAB_ID,
+              name: t("Common:People"),
+              onClick: () => setActiveTabId(PEOPLE_TAB_ID),
+              content: null,
+            },
+            {
+              id: GROUP_TAB_ID,
+              name: t("Common:Groups"),
+              onClick: () => setActiveTabId(GROUP_TAB_ID),
+              content: null,
+            },
+          ]}
+          activeTabId={activeTabId}
         />
       </Aside>
     </>
@@ -296,8 +344,11 @@ export default inject(({ auth }) => {
   };
 })(
   observer(
-    withTranslation(["SharingPanel", "PeopleTranslations", "Common"])(
-      withLoader(AddUsersPanel)(<Loaders.DialogAsideLoader isPanel />),
-    ),
+    withTranslation([
+      "SharingPanel",
+      "PeopleTranslations",
+      "Common",
+      "InviteDialog",
+    ])(withLoader(AddUsersPanel)(<Loaders.DialogAsideLoader isPanel />)),
   ),
 );

@@ -29,7 +29,7 @@ const Row = memo(({ data, index, style }) => {
   const item = inviteItems[index];
 
   return (
-    <StyledRow key={item.id} style={style}>
+    <StyledRow key={item.id} style={style} hasWarning={!!item.warning}>
       <Item
         t={t}
         item={item}
@@ -81,7 +81,7 @@ const ItemsList = ({
       ? Math.max(
           totalHeightItems,
           listAreaHeight,
-          isOpenItemAccess ? heightWitchOpenItemAccess : 0
+          isOpenItemAccess ? heightWitchOpenItemAccess : 0,
         )
       : heightList - FOOTER_HEIGHT;
 
@@ -96,7 +96,7 @@ const ItemsList = ({
 
     if (scrollAllPanelContent && totalHeightItems && listAreaHeight)
       setIsTotalListHeight(
-        totalHeightItems >= listAreaHeight && totalHeightItems >= scrollHeight
+        totalHeightItems >= listAreaHeight && totalHeightItems >= scrollHeight,
       );
   }, [
     height,

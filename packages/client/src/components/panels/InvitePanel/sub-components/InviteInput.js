@@ -33,6 +33,7 @@ import {
   StyledInviteLanguage,
   ResetLink,
 } from "../StyledInvitePanel";
+import { checkIfAccessPaid } from "SRC_DIR/helpers/utils";
 
 const minSearchValue = 2;
 
@@ -167,8 +168,9 @@ const InviteInput = ({
 
   const removeExist = (items) => {
     const filtered = items.reduce((unique, o) => {
-      !unique.some((obj) => obj.email === o.email || obj.id === o.id) &&
-        unique.push(o);
+      !unique.some((obj) =>
+        obj.isGroup ? obj.id === o.id : obj.email === o.email,
+      ) && unique.push(o);
 
       return unique;
     }, []);
@@ -195,6 +197,11 @@ const InviteInput = ({
     const addUser = () => {
       if (item.isOwner || item.isAdmin)
         item.access = ShareAccessRights.RoomManager;
+
+      if (item.isGroup && checkIfAccessPaid(item.access)) {
+        item.access = ShareAccessRights.Editing;
+        item.warning = t("GroupMaxAvailableRoleWarning");
+      }
 
       const items = removeExist([item, ...inviteItems]);
 
@@ -469,6 +476,8 @@ const InviteInput = ({
             withoutBackground={isMobileView}
             withBlur={!isMobileView}
             roomId={roomId}
+            withGroups
+            withAccessRights
           />
         )}
       </StyledInviteInputContainer>

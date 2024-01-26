@@ -1,5 +1,6 @@
 ﻿import InfoEditReactSvgUrl from "PUBLIC_DIR/images/info.edit.react.svg?url";
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
+import AlertSvgUrl from "PUBLIC_DIR/images/icons/12/alert.react.svg?url";
 import React, { useState, useEffect } from "react";
 import { Avatar } from "@docspace/shared/components/avatar";
 import { Text } from "@docspace/shared/components/text";
@@ -41,6 +42,7 @@ const Item = ({
     access,
     isGroup,
     name: groupName,
+    warning,
   } = item;
 
   const name = isGroup
@@ -154,20 +156,30 @@ const Item = ({
           />
         </>
       ) : (
-        <AccessSelector
-          className="user-access"
-          t={t}
-          roomType={roomType}
-          defaultAccess={defaultAccess?.access}
-          onSelectAccess={selectItemAccess}
-          containerRef={inputsRef}
-          isOwner={isOwner}
-          withRemove={true}
-          filteredAccesses={filteredAccesses}
-          setIsOpenItemAccess={setIsOpenItemAccess}
-          isMobileView={isMobileView}
-          noBorder
-        />
+        <>
+          {warning && (
+            <div className="warning">
+              <StyledHelpButton
+                tooltipContent={warning}
+                iconName={AlertSvgUrl}
+              />
+            </div>
+          )}
+          <AccessSelector
+            className="user-access"
+            t={t}
+            roomType={roomType}
+            defaultAccess={defaultAccess?.access}
+            onSelectAccess={selectItemAccess}
+            containerRef={inputsRef}
+            isOwner={isOwner}
+            withRemove={true}
+            filteredAccesses={filteredAccesses}
+            setIsOpenItemAccess={setIsOpenItemAccess}
+            isMobileView={isMobileView}
+            noBorder
+          />
+        </>
       )}
     </>
   );

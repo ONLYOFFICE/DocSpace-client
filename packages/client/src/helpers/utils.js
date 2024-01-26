@@ -211,21 +211,33 @@ export const getCategoryUrl = (categoryType, folderId = null) => {
 export const filterUserRoleOptions = (
   options,
   currentUser,
-  withRemove = false
+  withRemove = false,
 ) => {
   if (!options) return options;
   let newOptions = [...options];
+
+  if (currentUser?.isGroup) {
+    return newOptions.filter((o) => !checkIfAccessPaid(+o.access));
+  }
 
   if (currentUser?.isAdmin || currentUser?.isOwner) {
     newOptions = newOptions.filter(
       (o) =>
         +o.access === ShareAccessRights.RoomManager ||
         +o.access === ShareAccessRights.None ||
-        (withRemove && (o.key === "s2" || o.key === "remove"))
+        (withRemove && (o.key === "s2" || o.key === "remove")),
     );
 
     return newOptions;
   }
 
   return newOptions;
+};
+
+export const checkIfAccessPaid = (access) => {
+  return (
+    access === ShareAccessRights.FullAccess ||
+    access === ShareAccessRights.RoomManager ||
+    access === ShareAccessRights.Collaborator
+  );
 };

@@ -87,6 +87,7 @@ const Selector = ({
   tabsData,
   activeTabId,
 }: SelectorProps) => {
+  const [areItemsUpdated, setAreItemsUpdated] = React.useState(false);
   const [footerVisible, setFooterVisible] = React.useState<boolean>(false);
   const [isSearch, setIsSearch] = React.useState<boolean>(false);
 
@@ -301,6 +302,37 @@ const Selector = ({
       compareSelectedItems(cloneSelectedItems);
     }
   }, [items, selectedItems, isMultiSelect, compareSelectedItems]);
+
+  React.useEffect(() => {
+    if (!areItemsUpdated) return;
+    if (!newSelectedItems.length || !isMultiSelect || !items) {
+      setAreItemsUpdated(false);
+      return;
+    }
+
+    let hasConflict = false;
+
+    const cloneItems = items.map((x) => {
+      if (x.isSelected) return { ...x };
+
+      const isSelected = newSelectedItems.some(
+        (selectedItem) => selectedItem.id === x.id,
+      );
+
+      if (isSelected) hasConflict = true;
+
+      return { ...x, isSelected };
+    });
+
+    if (hasConflict) {
+      setRenderedItems(cloneItems);
+    }
+    setAreItemsUpdated(false);
+  }, [areItemsUpdated, isMultiSelect, items, newSelectedItems]);
+
+  React.useEffect(() => {
+    setAreItemsUpdated(true);
+  }, [items]);
   return (
     <StyledSelector
       id={id}

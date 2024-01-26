@@ -1,4 +1,6 @@
-import { DateTime } from "luxon";
+import { capitalize } from "lodash";
+import { DateTime, Info } from "luxon";
+
 import {
   Options,
   PeriodOptionType,
@@ -419,7 +421,7 @@ export const findDate = (arr: number[][], date: DateTime) => {
   return date.set({ second: 0, millisecond: 0 });
 };
 
-export const getUnits = (t?: TFunction) => {
+export const getUnits = (locale?: string) => {
   const units: ReadonlyArray<Unit> = Object.freeze([
     {
       name: "minute",
@@ -458,36 +460,9 @@ export const getUnits = (t?: TFunction) => {
         "NOV",
         "DEC",
       ],
-      altWithTranslation: t
-        ? [
-            t("JAN"),
-            t("FEB"),
-            t("MAR"),
-            t("APR"),
-            t("MAY"),
-            t("JUN"),
-            t("JUL"),
-            t("AUG"),
-            t("SEP"),
-            t("OCT"),
-            t("NOV"),
-            t("DEC"),
-          ]
+      altWithTranslation: locale
+        ? Info.months("long", { locale }).map(capitalize)
         : undefined,
-      fullLabel: [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-      ],
     },
     {
       name: "weekday",
@@ -495,16 +470,10 @@ export const getUnits = (t?: TFunction) => {
       max: 6,
       total: 7,
       alt: ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"],
-      altWithTranslation: t
-        ? [
-            t("Common:SUN"),
-            t("Common:MON"),
-            t("Common:TUE"),
-            t("Common:WED"),
-            t("Common:THU"),
-            t("Common:FRI"),
-            t("Common:SAT"),
-          ]
+      altWithTranslation: locale
+        ? Info.weekdays("long", { locale }).map((_, index, arr) =>
+            capitalize(arr[(index + arr.length - 1) % arr.length]),
+          )
         : undefined,
     },
   ]);

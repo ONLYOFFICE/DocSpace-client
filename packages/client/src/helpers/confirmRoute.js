@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation, Navigate } from "react-router-dom";
 import { AuthenticatedAction, ValidationResult } from "./../helpers/constants";
 import { Loader } from "@docspace/shared/components/loader";
-import Section from "@docspace/common/components/Section";
+import Section from "@docspace/shared/components/section";
 import { checkConfirmLink } from "@docspace/shared/api/user"; //TODO: Move AuthStore
 import { getObjectByLocation } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";

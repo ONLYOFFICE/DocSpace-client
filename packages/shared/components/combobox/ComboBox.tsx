@@ -38,9 +38,11 @@ const ComboBoxPure = (props: ComboboxProps) => {
 
     if (ref.current && ref.current.contains(target)) return;
 
+    if (onToggle) return;
+
+    // onToggle?.(e, !isOpen);
+    setIsOpenItemAccess?.(!isOpen);
     setIsOpen((v) => {
-      onToggle?.(e, !v);
-      setIsOpenItemAccess?.(!v);
       return !v;
     });
   };
@@ -68,9 +70,10 @@ const ComboBoxPure = (props: ComboboxProps) => {
     )
       return;
 
+    onToggle?.(e, !isOpen);
+    setIsOpenItemAccess?.(!isOpen);
+
     setIsOpen((v) => {
-      onToggle?.(e, !v);
-      setIsOpenItemAccess?.(!v);
       return !v;
     });
   };
@@ -273,6 +276,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
           isNoFixedHeightOptions={isNoFixedHeightOptions}
           forceCloseClickOutside={forceCloseClickOutside}
           withoutBackground={withoutBackground}
+          eventTypes={["click"]}
         >
           {dropDownBody}
         </DropDown>

@@ -8,7 +8,7 @@ import result from "lodash/result";
 
 import { isTablet, isMobile } from "@docspace/shared/utils";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
-import FilterInput from "@docspace/common/components/FilterInput";
+import FilterInput from "@docspace/shared/components/filter";
 import Loaders from "@docspace/common/components/Loaders";
 import { withLayoutSize } from "@docspace/shared/HOC/withLayoutSize";
 import { getUser } from "@docspace/shared/api/people";
@@ -43,6 +43,7 @@ import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
 
 import { getRoomInfo } from "@docspace/shared/api/rooms";
+import { FilterLoader } from "@docspace/shared/skeletons/filter";
 
 const getAccountLoginType = (filterValues) => {
   const accountLoginType = result(
@@ -234,7 +235,7 @@ const SectionFilterContent = ({
   filter,
   roomsFilter,
   personal,
-  isRecentFolder,
+  isRecentTab,
   isFavoritesFolder,
   sectionWidth,
   viewAs,
@@ -404,7 +405,7 @@ const SectionFilterContent = ({
 
         newFilter.withSubfolders =
           withSubfolders === FilterKeys.excludeSubfolders ? null : "true";
-        console.log(data);
+
         newFilter.searchInContent = withContent === "true" ? "true" : null;
 
         const path = location.pathname.split("/filter")[0];
@@ -1226,7 +1227,7 @@ const SectionFilterContent = ({
     const isLastTypeOptionsRooms = !connectedThirdParty.length && !tags?.length;
 
     const folders =
-      !isFavoritesFolder && !isRecentFolder
+      !isFavoritesFolder && !isRecentTab
         ? [
             {
               id: "filter_type-folders",
@@ -1237,7 +1238,7 @@ const SectionFilterContent = ({
           ]
         : "";
 
-    const images = !isRecentFolder
+    const images = !isRecentTab
       ? [
           {
             id: "filter_type-images",
@@ -1248,7 +1249,7 @@ const SectionFilterContent = ({
         ]
       : "";
 
-    const archives = !isRecentFolder
+    const archives = !isRecentTab
       ? [
           {
             id: "filter_type-archive",
@@ -1259,7 +1260,7 @@ const SectionFilterContent = ({
         ]
       : "";
 
-    const media = !isRecentFolder
+    const media = !isRecentTab
       ? [
           {
             id: "filter_type-media",
@@ -1279,7 +1280,7 @@ const SectionFilterContent = ({
             isHeader: true,
             isLast: isLastTypeOptionsRooms,
           },
-          ...Object.values(RoomsTypeValues).map((roomType) => {
+          ...RoomsTypeValues.map((roomType) => {
             switch (roomType) {
               case RoomsType.FillingFormsRoom:
                 return {
@@ -1527,7 +1528,7 @@ const SectionFilterContent = ({
         isDefaultRoomsQuotaSet &&
         filterOptions.push(...quotaFilter);
     } else {
-      if (!isRecentFolder && !isFavoritesFolder && !isTrash) {
+      if (!isRecentTab && !isFavoritesFolder && !isTrash) {
         const foldersOptions = [
           {
             key: FilterGroups.filterFolders,
@@ -1641,7 +1642,7 @@ const SectionFilterContent = ({
     isRooms,
     isAccountsPage,
     isFavoritesFolder,
-    isRecentFolder,
+    isRecentTab,
     isTrash,
     isPublicRoom,
   ]);
@@ -2136,11 +2137,10 @@ const SectionFilterContent = ({
     }
   };
 
-  if (showFilterLoader) return <Loaders.Filter />;
+  if (showFilterLoader) return <FilterLoader />;
 
   return (
     <FilterInput
-      t={t}
       onFilter={onFilter}
       getFilterData={getFilterData}
       getSelectedFilterData={getSelectedFilterData}
@@ -2158,7 +2158,7 @@ const SectionFilterContent = ({
       placeholder={t("Common:Search")}
       view={t("Common:View")}
       isFavoritesFolder={isFavoritesFolder}
-      isRecentFolder={isRecentFolder}
+      isRecentTab={isRecentTab}
       isPersonalRoom={isPersonalRoom}
       isRooms={isRooms}
       removeSelectedItem={removeSelectedItem}
@@ -2169,6 +2169,7 @@ const SectionFilterContent = ({
       setClearSearch={setClearSearch}
       onSortButtonClick={onSortButtonClick}
       currentDeviceType={currentDeviceType}
+      userId={userId}
     />
   );
 };
@@ -2211,7 +2212,7 @@ export default inject(
     const { personal, standalone, currentDeviceType } = auth.settingsStore;
     const {
       isFavoritesFolder,
-      isRecentFolder,
+      isRecentTab,
       isRoomsFolder,
       isArchiveFolder,
       isPersonalRoom,
@@ -2251,7 +2252,7 @@ export default inject(
       viewAs,
 
       isFavoritesFolder,
-      isRecentFolder,
+      isRecentTab,
       isRooms,
       isTrash,
       isArchiveFolder,

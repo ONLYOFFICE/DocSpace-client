@@ -2,7 +2,7 @@ import { TColorScheme } from "../../themes";
 import { TDirectionX, TDirectionY } from "../../types";
 import { ComboBoxDisplayType, ComboBoxSize } from "./Combobox.enums";
 
-export type TCombobox = null | "badge";
+export type TCombobox = null | "badge" | "onlyIcon";
 
 export type TOption = {
   key: string | number;
@@ -16,6 +16,7 @@ export type TOption = {
   description?: string;
   quota?: "free" | "paid";
   isSeparator?: boolean;
+  isSelected?: boolean;
 };
 
 export interface ComboboxProps {

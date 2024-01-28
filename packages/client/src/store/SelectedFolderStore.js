@@ -34,6 +34,7 @@ class SelectedFolderStore {
   security = null;
   type = null;
   inRoom = false;
+  isFolder = true;
   usedSpace = null;
   quotaLimit = null;
 
@@ -72,6 +73,7 @@ class SelectedFolderStore {
       rootFolderId: this.rootFolderId,
       security: this.security,
       inRoom: this.inRoom,
+      isFolder: this.isFolder,
       usedSpace: this.usedSpace,
       quotaLimit: this.quotaLimit,
     };

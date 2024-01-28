@@ -1,4 +1,3 @@
-
 /* eslint-disable no-console */
 /* eslint-disable no-multi-str */
 /* eslint-disable no-plusplus */
@@ -27,13 +26,16 @@ import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.patt
 
 import { FolderType, RoomsType, ThemeKeys } from "../enums";
 import { LANGUAGE, RTL_LANGUAGES } from "../constants";
-import { TUser, TI18n } from "../types";
+import { TI18n } from "../types";
+import { TUser } from "../api/people/types";
 import { TFolder, TFile, TGetFolder } from "../api/files/types";
+import { TRoom } from "../api/rooms/types";
 import TopLoaderService from "../components/top-loading-indicator";
 
 import { Encoder } from "./encoder";
 import { combineUrl } from "./combineUrl";
 import { getCookie } from "./cookie";
+import { isNumber } from "./typeGuards";
 
 let timer: null | ReturnType<typeof setTimeout> = null;
 
@@ -626,7 +628,9 @@ export const getFolderClassNameByType = (folderType: FolderType) => {
   }
 };
 
-export const decodeDisplayName = <T extends TFile | TFolder>(items: T[]) => {
+export const decodeDisplayName = <T extends TFile | TFolder | TRoom>(
+  items: T[],
+) => {
   return items.map((item) => {
     if (!item) return item;
 
@@ -730,7 +734,9 @@ export function getObjectByLocation(location: Location) {
   }
 }
 
-export const RoomsTypeValues = Object.values(RoomsType).reduce(
+export const RoomsTypeValues = Object.values(RoomsType).filter(isNumber);
+
+export const RoomsTypes = RoomsTypeValues.reduce<Record<number, number>>(
   (acc, current) => {
     if (typeof current === "string") return { ...acc };
     return { ...acc, [current]: current };
@@ -811,7 +817,7 @@ export const getLogoFromPath = (path: string) => {
 
 export type FolderTypeValueOf = (typeof FolderType)[keyof typeof FolderType];
 export const getIconPathByFolderType = (
-  folderType?: FolderTypeValueOf
+  folderType?: FolderTypeValueOf,
 ): string => {
   const defaultPath = "folder.svg";
 

@@ -11,14 +11,15 @@ import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 import { StyledAccountContent } from "../../styles/accounts";
 
-const Accounts = ({
+const Accounts = (props) => {
+  const {
   t,
-  selection,
+    infoPanelSelection,
   isOwner,
   isAdmin,
   changeUserType,
   canChangeUserType,
-  setSelection,
+    setInfoPanelSelection,
   getPeopleListItem,
 
   showStorageInfo,
@@ -26,14 +27,14 @@ const Accounts = ({
   const [statusLabel, setStatusLabel] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const { role, id, isVisitor, isCollaborator } = selection;
+  const { role, id, isVisitor, isCollaborator } = infoPanelSelection;
 
   React.useEffect(() => {
     getStatusLabel();
-  }, [selection, getStatusLabel]);
+  }, [infoPanelSelection, getStatusLabel]);
 
   const getStatusLabel = React.useCallback(() => {
-    const status = getUserStatus(selection);
+    const status = getUserStatus(infoPanelSelection);
     switch (status) {
       case "active":
         return setStatusLabel(t("Common:Active"));
@@ -44,7 +45,7 @@ const Accounts = ({
       default:
         return setStatusLabel(t("Common:Active"));
     }
-  }, [selection]);
+  }, [infoPanelSelection]);
 
   const getUserTypeLabel = React.useCallback((role) => {
     switch (role) {
@@ -113,9 +114,9 @@ const Accounts = ({
       const items = [];
       users.map((u) => items.push(getPeopleListItem(u)));
       if (items.length === 1) {
-        setSelection(getPeopleListItem(items[0]));
+        setInfoPanelSelection(getPeopleListItem(items[0]));
       } else {
-        setSelection(items);
+        setInfoPanelSelection(items);
       }
     }
     setIsLoading(false);
@@ -124,11 +125,11 @@ const Accounts = ({
   const onTypeChange = React.useCallback(
     ({ action }) => {
       setIsLoading(true);
-      if (!changeUserType(action, [selection], onSuccess, onAbort)) {
+      if (!changeUserType(action, [infoPanelSelection], onSuccess, onAbort)) {
         setIsLoading(false);
       }
     },
-    [selection, changeUserType, t]
+    [infoPanelSelection, changeUserType, t]
   );
 
   const typeLabel = getUserTypeLabel(role);
@@ -167,9 +168,12 @@ const Accounts = ({
       </Text>
     );
 
-    const status = getUserStatus(selection);
+    const status = getUserStatus(infoPanelSelection);
 
-    const canChange = canChangeUserType({ ...selection, statusType: status });
+    const canChange = canChangeUserType({
+      ...infoPanelSelection,
+      statusType: status,
+    });
 
     return canChange ? combobox : text;
   };
@@ -251,7 +255,7 @@ export default inject(({ auth, peopleStore, accessRightsStore }) => {
   const { changeType: changeUserType, usersStore } = peopleStore;
   const { canChangeUserType } = accessRightsStore;
 
-  const { setSelection } = auth.infoPanelStore;
+  const { setInfoPanelSelection } = auth.infoPanelStore;
   const { currentQuotaStore } = auth;
 
   const { showStorageInfo } = currentQuotaStore;
@@ -263,7 +267,7 @@ export default inject(({ auth, peopleStore, accessRightsStore }) => {
     canChangeUserType,
     loading: usersStore.operationRunning,
     getPeopleListItem: usersStore.getPeopleListItem,
-    setSelection,
+    setInfoPanelSelection,
     showStorageInfo,
   };
 })(

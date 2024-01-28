@@ -75,7 +75,7 @@ const RootFolderContainer = (props) => {
   const noFilesHeader = t("NoFilesHereYet");
   const trashDescription = t("TrashEmptyDescription");
   const favoritesDescription = t("FavoritesEmptyContainerDescription");
-  const recentDescription = t("RecentEmptyContainerDescription");
+  const recentDescription = t("RecentViaLinkEmptyContainerDescription");
 
   const roomsDescription =
     isVisitor || isCollaborator
@@ -294,7 +294,7 @@ const RootFolderContainer = (props) => {
   const goToPersonalButtons = (
     <div className="empty-folder_container-links">
       <img
-        className="empty-folder_container-image"
+        className="empty-folder_container-icon"
         src={PersonSvgUrl}
         alt="person_icon"
         onClick={onGoToPersonal}

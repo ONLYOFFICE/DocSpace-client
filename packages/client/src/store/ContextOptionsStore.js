@@ -37,6 +37,7 @@ import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import PluginActionsSvgUrl from "PUBLIC_DIR/images/plugin.actions.react.svg?url";
 import LeaveRoomSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/catalog.rooms.react.svg?url";
+import RemoveOutlineSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
 
 import { makeAutoObservable } from "mobx";
@@ -249,7 +250,7 @@ class ContextOptionsStore {
     this.dialogsStore.setCopyPanelVisible(true);
   };
 
-  showVersionHistory = (id, security) => {
+  showVersionHistory = (id, security, requestToken) => {
     const { fetchFileVersions, setIsVerHistoryPanel } =
       this.versionHistoryStore;
 
@@ -257,7 +258,7 @@ class ContextOptionsStore {
 
     if (this.treeFoldersStore.isRecycleBinFolder) return;
 
-    fetchFileVersions(id + "", security);
+    fetchFileVersions(id + "", security, requestToken);
     setIsVerHistoryPanel(true);
     setIsMobileHidden(true);
   };
@@ -284,7 +285,7 @@ class ContextOptionsStore {
 
   lockFile = (item, t) => {
     const { id, locked } = item;
-    const { setSelection: setInfoPanelSelection } =
+    const { setInfoPanelSelection: setInfoPanelSelection } =
       this.authStore.infoPanelStore;
 
     this.filesActionsStore
@@ -569,10 +570,15 @@ class ContextOptionsStore {
     );
   };
 
-  onClickShare = () => {
-    setTimeout(() => {
-      this.dialogsStore.setSharingPanelVisible(true);
-    }, 10); //TODO: remove delay after fix context menu callback
+  onClickShare = (item) => {
+    const { openShareTab } = this.authStore.infoPanelStore;
+    const { setShareFolderDialogVisible } = this.dialogsStore;
+
+    if (item.isFolder) {
+      setShareFolderDialogVisible(true);
+    } else {
+      openShareTab();
+    }
   };
 
   onClickMarkRead = (item) => {
@@ -614,10 +620,8 @@ class ContextOptionsStore {
   };
 
   onShowInfoPanel = (item, view) => {
-    const { setSelection, setIsVisible, setView } =
-      this.authStore.infoPanelStore;
+    const { setIsVisible, setView } = this.authStore.infoPanelStore;
 
-    setSelection(item);
     setIsVisible(true);
     view && setView(view);
   };
@@ -813,6 +817,10 @@ class ContextOptionsStore {
     this.filesActionsStore.setMuteAction(action, item, t);
   };
 
+  onClickRemoveFromRecent = (item) => {
+    this.filesActionsStore.removeFilesFromRecent([item.id]);
+  };
+
   setLoaderTimer = (isLoading, cb) => {
     if (isLoading) {
       loadingTime = new Date();
@@ -971,7 +979,9 @@ class ContextOptionsStore {
     const isRootThirdPartyFolder =
       item.providerKey && item.id === item.rootFolderId;
 
-    const isShareable = item.canShare;
+    const isShareable = this.treeFoldersStore.isPersonalRoom
+      ? item.canShare || item.isFolder
+      : false;
 
     const isMedia =
       item.viewAccessibility?.ImageView || item.viewAccessibility?.MediaView;
@@ -1001,7 +1011,12 @@ class ContextOptionsStore {
               key: "show-version-history",
               label: t("ShowVersionHistory"),
               icon: HistoryReactSvgUrl,
-              onClick: () => this.showVersionHistory(item.id, item.security),
+              onClick: () =>
+                this.showVersionHistory(
+                  item.id,
+                  item.security,
+                  item?.requestToken
+                ),
               disabled: false,
             },
           ]
@@ -1029,7 +1044,11 @@ class ContextOptionsStore {
                   label: t("ShowVersionHistory"),
                   icon: HistoryReactSvgUrl,
                   onClick: () =>
-                    this.showVersionHistory(item.id, item.security),
+                    this.showVersionHistory(
+                      item.id,
+                      item.security,
+                      item?.requestToken
+                    ),
                   disabled: false,
                 },
               ],
@@ -1052,7 +1071,12 @@ class ContextOptionsStore {
             key: "show-version-history",
             label: t("ShowVersionHistory"),
             icon: HistoryReactSvgUrl,
-            onClick: () => this.showVersionHistory(item.id, item.security),
+            onClick: () =>
+              this.showVersionHistory(
+                item.id,
+                item.security,
+                item?.requestToken
+              ),
             disabled: false,
           },
         ];
@@ -1139,6 +1163,8 @@ class ContextOptionsStore {
           (f) => f.id === item.id
         ) === -1;
     }
+
+    const isArchive = item.rootFolderType === FolderType.Archive;
 
     const optionsModel = [
       {
@@ -1244,6 +1270,14 @@ class ContextOptionsStore {
         disabled: false,
         action: item.id,
       },
+      {
+        id: "option_sharing-settings",
+        key: "sharing-settings",
+        label: t("Files:Share"),
+        icon: ShareReactSvgUrl,
+        onClick: () => this.onClickShare(item),
+        disabled: !isShareable,
+      },
       ...versionActions,
       {
         id: "option_link-for-room-members",
@@ -1252,9 +1286,7 @@ class ContextOptionsStore {
         icon: InvitationLinkReactSvgUrl,
         onClick: () => this.onCopyLink(item, t),
         disabled:
-          (isPublicRoomType &&
-            item.canCopyPublicLink &&
-            !this.treeFoldersStore.isArchiveFolder) ||
+          (isPublicRoomType && item.canCopyPublicLink && !isArchive) ||
           this.publicRoomStore.isPublicRoom,
       },
       {
@@ -1264,7 +1296,7 @@ class ContextOptionsStore {
         icon: TabletLinkReactSvgUrl,
         disabled:
           this.publicRoomStore.isPublicRoom ||
-          this.treeFoldersStore.isArchiveFolder ||
+          isArchive ||
           !item.canCopyPublicLink ||
           !isPublicRoomType,
         onClick: async () => {
@@ -1291,14 +1323,6 @@ class ContextOptionsStore {
       },
       ...pinOptions,
       ...muteOptions,
-      {
-        id: "option_sharing-settings",
-        key: "sharing-settings",
-        label: t("SharingPanel:SharingSettingsTitle"),
-        icon: ShareReactSvgUrl,
-        onClick: this.onClickShare,
-        disabled: !isShareable,
-      },
       {
         id: "option_owner-change",
         key: "owner-change",
@@ -1456,9 +1480,7 @@ class ContextOptionsStore {
         icon: LeaveRoomSvgUrl,
         onClick: this.onLeaveRoom,
         disabled:
-          this.treeFoldersStore.isArchiveFolder ||
-          !item.inRoom ||
-          this.publicRoomStore.isPublicRoom,
+          isArchive || !item.inRoom || this.publicRoomStore.isPublicRoom,
       },
       {
         id: "option_unarchive-room",
@@ -1480,6 +1502,14 @@ class ContextOptionsStore {
         onClick: () =>
           isEditing ? this.onShowEditingToast(t) : this.onClickDelete(item, t),
         disabled: false,
+      },
+      {
+        id: "option_remove-from-recent",
+        key: "remove-from-recent",
+        label: t("RemoveFromList"),
+        icon: RemoveOutlineSvgUrl,
+        onClick: () => this.onClickRemoveFromRecent(item),
+        disabled: !this.treeFoldersStore.isRecentTab,
       },
     ];
 

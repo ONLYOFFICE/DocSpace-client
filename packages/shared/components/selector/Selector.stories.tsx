@@ -7,7 +7,7 @@ import ArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import EmptyScreenFilter from "PUBLIC_DIR/images/empty_screen_filter.png";
 
 import { Selector } from "./Selector";
-import { SelectorProps, TItem } from "./Selector.types";
+import { SelectorProps, TSelectorItem } from "./Selector.types";
 
 const StyledRowLoader = styled.div`
   width: 100%;
@@ -61,7 +61,7 @@ function makeName() {
 }
 
 const getItems = (count: number) => {
-  const items: TItem[] = [];
+  const items: TSelectorItem[] = [];
 
   for (let i = 0; i < count / 2; i += 1) {
     const label = makeName();
@@ -70,6 +70,7 @@ const getItems = (count: number) => {
       id: `user_${i}`,
       label: `${label} ${i}`,
       icon: CustomSvgUrl,
+      shared: false,
     });
   }
 
@@ -80,6 +81,7 @@ const getItems = (count: number) => {
       id: `room_${i}`,
       label: `${label} ${i}`,
       icon: CustomSvgUrl,
+      shared: false,
     });
   }
 

@@ -11,7 +11,7 @@ import {
   ShareAccessRights,
 } from "@docspace/shared/enums";
 
-import { RoomsTypeValues } from "@docspace/shared/utils";
+import { RoomsTypes } from "@docspace/shared/utils";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { updateTempContent } from "@docspace/shared/utils/common";
@@ -219,7 +219,7 @@ class FilesStore {
           } else if (opt.cmd === "delete") {
             this.selectedFolderStore[opt.type + "sCount"]--;
           }
-          this.authStore.infoPanelStore.reloadSelection();
+          // this.authStore.infoPanelStore.updateInfoPanelSelection();
         });
       }
 
@@ -1455,10 +1455,13 @@ class FilesStore {
             // Clear all selections
             this.setSelected("close");
 
+            // TODO: see bug 63479
+            if (this.selectedFolderStore?.id === folderId) {
             // Restore not processed
             tempSelection.length && this.setSelection(tempSelection);
             tempBuffer && this.setBufferSelection(tempBuffer);
           }
+        }
         }
 
         const navigationPath = await Promise.all(
@@ -1498,6 +1501,9 @@ class FilesStore {
                 canCopyPublicLink =
                   room.access === ShareAccessRights.RoomManager ||
                   room.access === ShareAccessRights.None;
+
+                room.canCopyPublicLink = canCopyPublicLink;
+                this.authStore.infoPanelStore.setInfoPanelRoom(room);
               }
 
               const { mute } = room;
@@ -1719,6 +1725,7 @@ class FilesStore {
             }
           }
 
+          this.authStore.infoPanelStore.setInfoPanelRoom(null);
           this.selectedFolderStore.setSelectedFolder({
             folders: data.folders,
             ...data.current,
@@ -1917,7 +1924,7 @@ class FilesStore {
         "submit-to-gallery",
         "separator-SubmitToGallery",
         "link-for-room-members",
-        // "sharing-settings",
+        "sharing-settings",
         // "external-link",
         "owner-change",
         // "link-for-portal-users",
@@ -1946,6 +1953,7 @@ class FilesStore {
         "separator2",
         // "unsubscribe",
         "delete",
+        "remove-from-recent",
       ];
 
       if (!canDownload) {
@@ -2312,7 +2320,7 @@ class FilesStore {
         "select",
         "open",
         // "separator0",
-        // "sharing-settings",
+        "sharing-settings",
         "link-for-room-members",
         "owner-change",
         "show-info",
@@ -2587,8 +2595,8 @@ class FilesStore {
     return api.rooms.updateRoomMemberRole(id, data);
   }
 
-  getHistory(module, id, signal = null) {
-    return api.rooms.getHistory(module, id, signal);
+  getHistory(module, id, signal = null, requestToken) {
+    return api.rooms.getHistory(module, id, signal, requestToken);
   }
 
   getRoomHistory(id) {
@@ -2974,7 +2982,7 @@ class FilesStore {
     const url = getCategoryUrl(this.categoryType, id);
 
     if (canOpenPlayer) {
-      return combineUrl(proxyURL, config.homepage, `${url}/#preview/${id}`);
+      return combineUrl(proxyURL, config.homepage, url, id);
     }
 
     if (isFolder) {
@@ -3018,6 +3026,7 @@ class FilesStore {
 
     const newItem = items.map((item) => {
       const {
+        availableExternalRights,
         access,
         autoDelete,
         originTitle,
@@ -3066,6 +3075,7 @@ class FilesStore {
         viewAccessibility,
         mute,
         inRoom,
+        requestToken,
         quotaLimit,
         usedSpace,
         isCustomQuota,
@@ -3165,6 +3175,7 @@ class FilesStore {
         access === ShareAccessRights.None;
 
       return {
+        availableExternalRights,
         access,
         daysRemaining: autoDelete && getDaysRemaining(autoDelete),
         originTitle,
@@ -3233,6 +3244,7 @@ class FilesStore {
         hasDraft,
         isForm,
         canCopyPublicLink,
+        requestToken,
         quotaLimit,
         usedSpace,
         isCustomQuota,
@@ -3251,8 +3263,8 @@ class FilesStore {
 
     if (this.folders.length) {
       for (const item of this.folders) {
-        if (item.roomType && RoomsTypeValues[item.roomType]) {
-          cbMenu.push(`room-${RoomsTypeValues[item.roomType]}`);
+        if (item.roomType && RoomsTypes[item.roomType]) {
+          cbMenu.push(`room-${RoomsTypes[item.roomType]}`);
         } else {
           cbMenu.push(FilterType.FoldersOnly);
         }
@@ -3688,7 +3700,8 @@ class FilesStore {
     providerKey = null,
     tab = null,
     url = null,
-    preview = false
+    preview = false,
+    shareKey = null
   ) => {
     const foundIndex = this.files.findIndex((x) => x.id === id);
     const file = foundIndex !== -1 ? this.files[foundIndex] : undefined;
@@ -3705,16 +3718,9 @@ class FilesStore {
     }
 
     const isPrivacy = this.treeFoldersStore.isPrivacyFolder;
+    const share = shareKey ? shareKey : this.publicRoomStore.publicRoomKey;
 
-    return openEditor(
-      id,
-      providerKey,
-      tab,
-      url,
-      isPrivacy,
-      preview,
-      this.publicRoomStore.publicRoomKey
-    );
+    return openEditor(id, providerKey, tab, url, isPrivacy, preview, share);
   };
 
   createThumbnails = async (files = null) => {

@@ -228,7 +228,7 @@ const Modal = ({
             ) : container &&
               containerVisible &&
               currentDisplayType !== "modal" ? (
-              { containerComponent }
+              containerComponent
             ) : (
               <FormWrapper withForm={withForm || false}>
                 {header && (

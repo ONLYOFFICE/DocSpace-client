@@ -55,24 +55,22 @@
     },
   };
 
-  const checkCSP = (targetSrc, onAppError) => {
+  const cspErrorText =
+    "The current domain is not set in the Content Security Policy (CSP) settings.";
+
+  const validateCSP = async (targetSrc) => {
     const currentSrc = window.location.origin;
 
-    if (currentSrc.indexOf(targetSrc) !== -1) return true;
+    if (currentSrc.indexOf(targetSrc) !== -1) return; //TODO: try work with localhost
 
-    const cspSettings = async () => {
-      try {
-        const settings = await fetch(`${targetSrc}/api/2.0/security/csp`);
-        const res = await settings.json();
-        const { header } = res.response;
+    const response = await fetch(`${targetSrc}/api/2.0/security/csp`);
+    const res = await response.json();
+    const passed =
+      res.response.header && res.response.header.includes(currentSrc);
 
-        return header && header.indexOf(currentSrc) !== -1;
-      } catch (e) {
-        onAppError(e);
-      }
-    };
+    if (!passed) throw new Error(cspErrorText);
 
-    return cspSettings();
+    return;
   };
 
   const getConfigFromParams = () => {
@@ -105,7 +103,6 @@
   class DocSpace {
     #iframe;
     #isConnected = false;
-    #cspInstalled = true;
     #callbacks = [];
     #tasks = [];
     #classNames = "";
@@ -220,13 +217,30 @@
         document.body.style.overscrollBehaviorY = "contain";
       }
 
-      if (!this.#cspInstalled) {
-        const errorMessage =
-          "Current domain not set in Content Security Policy (CSP) settings. Please add it on developer tools page.";
-        config.events.onAppError(errorMessage);
-
-        const html = `<body>${errorMessage}</body>`;
-        iframe.srcdoc = html;
+      if (this.config.checkCSP) {
+        validateCSP(this.config.src).catch((e) => {
+          const html = `
+          <body style="background: #F3F4F4;">
+          <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300" rel="stylesheet" type="text/css">
+          <div style="display: flex; flex-direction: column; gap: 80px; align-items: center; justify-content: flex-start; margin-top: 60px; padding: 0 30px;">
+          <div style="flex-shrink: 0; width: 211px; height: 24px; position: relative">
+          <img src="${this.config.src}/static/images/logo/lightsmall.svg">
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 16px; align-items: center; justify-content: flex-start; flex-shrink: 0; position: relative;">
+          <div style="flex-shrink: 0; width: 120px; height: 100px; position: relative">
+          <img src="${this.config.src}/static/images/frame-error.svg">
+          </div>
+          <span style="color: #A3A9AE; text-align: center; font-family: Open Sans; font-size: 14px; font-style: normal; font-weight: 700; line-height: 16px;">
+          ${cspErrorText} Please add it via 
+          <a href="${this.config.src}/portal-settings/developer-tools/javascript-sdk" target="_blank" style="color: #4781D1; text-align: center; font-family: Open Sans; font-size: 14px; font-style: normal; font-weight: 700; line-height: 16px; text-decoration-line: underline;">
+          the Developer Tools section</a>.
+          </span>
+          </div>
+          </div>
+          </body>`;
+          iframe.srcdoc = html;
+          e.message && config.events.onAppError(e.message);
+        });
       }
 
       return iframe;
@@ -321,13 +335,6 @@
       this.config = { ...this.config, ...configFull };
 
       const target = document.getElementById(this.config.frameId);
-
-      if (this.config.checkCSP) {
-        this.#cspInstalled = checkCSP(
-          this.config.src,
-          this.config.events.onAppError
-        );
-      }
 
       if (target) {
         this.#iframe = this.#createIframe(this.config);

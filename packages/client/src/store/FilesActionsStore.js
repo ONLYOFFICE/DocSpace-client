@@ -26,6 +26,7 @@ import {
   createFolder,
   moveToFolder,
   getFolder,
+  deleteFilesFromRecent,
 } from "@docspace/shared/api/files";
 import {
   ConflictResolveType,
@@ -57,6 +58,7 @@ import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
+import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
 class FilesActionStore {
   authStore;
@@ -998,7 +1000,8 @@ class FilesActionStore {
   setPinAction = (action, id, t) => {
     const { pinRoom, unpinRoom, updateRoomPin, setSelected } = this.filesStore;
 
-    const { selection, setSelection } = this.authStore.infoPanelStore;
+    const { infoPanelSelection, setInfoPanelSelection } =
+      this.authStore.infoPanelStore;
 
     const items = Array.isArray(id) ? id : [id];
 
@@ -1015,8 +1018,8 @@ class FilesActionStore {
         return Promise.all(actions)
           .then(() => {
             this.updateCurrentFolder(null, items, null, operationId);
-            if (selection) {
-              setSelection({ ...selection, pinned: true });
+            if (infoPanelSelection) {
+              setInfoPanelSelection({ ...infoPanelSelection, pinned: true });
             }
           })
           .then(() => setSelected("close"))
@@ -1037,7 +1040,7 @@ class FilesActionStore {
           .then(() => {
             this.updateCurrentFolder(null, items, null, operationId);
             if (selection) {
-              setSelection({ ...selection, pinned: false });
+              setInfoPanelSelection({ ...selection, pinned: false });
             }
           })
           .then(() => setSelected("close"))
@@ -1747,9 +1750,10 @@ class FilesActionStore {
 
   onShowInfoPanel = () => {
     const { selection } = this.filesStore;
-    const { setSelection, setIsVisible } = this.authStore.infoPanelStore;
+    const { setInfoPanelSelection, setIsVisible } =
+      this.authStore.infoPanelStore;
 
-    setSelection([selection]);
+    setInfoPanelSelection([selection]);
     setIsVisible(true);
   };
 
@@ -2202,7 +2206,7 @@ class FilesActionStore {
     const { enablePlugins } = this.authStore.settingsStore;
 
     const { isLoading, setIsSectionFilterLoading } = this.clientLoadingStore;
-    const { isRecycleBinFolder } = this.treeFoldersStore;
+    const { isRecycleBinFolder, isRecentTab } = this.treeFoldersStore;
     const { setMediaViewerData } = this.mediaViewerDataStore;
     const { setConvertDialogVisible, setConvertItem } = this.dialogsStore;
 
@@ -2224,7 +2228,15 @@ class FilesActionStore {
     const canWebEdit = item.viewAccessibility?.WebEdit;
     const canViewedDocs = item.viewAccessibility?.WebView;
 
-    const { id, viewUrl, providerKey, fileStatus, encrypted, isFolder } = item;
+    const {
+      id,
+      viewUrl,
+      providerKey,
+      fileStatus,
+      encrypted,
+      isFolder,
+      webUrl,
+    } = item;
     if (encrypted && isPrivacyFolder) return checkProtocol(item.id, true);
 
     if (isRecycleBinFolder || isLoading) return;
@@ -2283,7 +2295,12 @@ class FilesActionStore {
           ? !item.security.FillForms
           : !item.security.Edit;
 
-        return openDocEditor(id, providerKey, tab, null, isPreview);
+        const shareWebUrl = new URL(webUrl);
+        const shareKey = isRecentTab
+          ? getObjectByLocation(shareWebUrl)?.share
+          : "";
+
+        return openDocEditor(id, providerKey, tab, null, isPreview, shareKey);
       }
 
       if (isMediaOrImage) {
@@ -2294,7 +2311,7 @@ class FilesActionStore {
         );
         setMediaViewerData({ visible: true, id });
 
-        const url = "/products/files/#preview/" + id;
+        const url = combineUrl(MEDIA_VIEW_URL, id);
 
         if (this.publicRoomStore.isPublicRoom) return;
 
@@ -2324,7 +2341,9 @@ class FilesActionStore {
   onClickBack = () => {
     const { roomType, ...rest } = this.selectedFolderStore;
     const { setSelectedNode } = this.treeFoldersStore;
-    const { clearFiles } = this.filesStore;
+    const { clearFiles, setBufferSelection } = this.filesStore;
+
+    setBufferSelection(null);
 
     const categoryType = getCategoryType(window.DocSpace.location);
 
@@ -2611,6 +2630,13 @@ class FilesActionStore {
       .finally(() => {
         setSelected("none");
       });
+  };
+
+  removeFilesFromRecent = async (fileIds) => {
+    const { refreshFiles } = this.filesStore;
+
+    await deleteFilesFromRecent(fileIds);
+    await refreshFiles();
   };
 }
 

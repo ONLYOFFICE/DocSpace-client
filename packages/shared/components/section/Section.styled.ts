@@ -723,6 +723,18 @@ const StyledSectionPaging = styled.div`
 
 StyledSectionPaging.defaultProps = { theme: Base };
 
+const StyledSectionSubmenu = styled.div`
+  width: calc(100% - 20px);
+
+  @media ${tablet} {
+    width: calc(100% - 16px);
+  }
+
+  @media ${mobile} {
+    width: 100%;
+  }
+`;
+
 export {
   StyledSectionPaging,
   StyledSectionHeader,
@@ -737,4 +749,5 @@ export {
   StyledSectionBody,
   StyledSpacer,
   StyledSectionContainer,
+  StyledSectionSubmenu,
 };

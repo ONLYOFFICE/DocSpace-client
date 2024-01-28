@@ -1,4 +1,5 @@
-import { TUser } from "types";
+import { TCreatedBy, TPathParts } from "../../types";
+import { TUser } from "../people/types";
 import {
   EmployeeActivationStatus,
   EmployeeStatus,
@@ -8,14 +9,6 @@ import {
   RoomsType,
   ShareAccessRights,
 } from "../../enums";
-
-export type TCreatedBy = {
-  avatarSmall: string;
-  displayName: string;
-  hasAvatar: boolean;
-  id: string;
-  profileUrl: string;
-};
 
 export type TFileViewAccessibility = {
   CanConvert: boolean;
@@ -148,12 +141,6 @@ export type TFolder = {
 
 export type TGetFolderPath = TFolder[];
 
-export type TPathParts = {
-  id: number;
-  title: string;
-  roomType?: RoomsType;
-};
-
 export type TGetFolder = {
   files: TFile[];
   folders: TFolder[];
@@ -193,6 +180,7 @@ export type TFilesSettings = {
   };
   canSearchByContent: boolean;
   chunkUploadSize: number;
+  chunkUploadCount: number;
   confirmDelete: boolean;
   convertNotify: boolean;
   defaultOrder: { is_asc: boolean; property: 1 };

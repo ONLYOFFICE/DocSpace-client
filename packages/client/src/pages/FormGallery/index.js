@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Section from "@docspace/common/components/Section";
+import Section from "@docspace/shared/components/section";
 import { observer, inject } from "mobx-react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 

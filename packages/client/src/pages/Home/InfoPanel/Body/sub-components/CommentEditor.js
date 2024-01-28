@@ -9,13 +9,13 @@ import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 
 import { MAX_FILE_COMMENT_LENGTH } from "@docspace/shared/constants";
-// import infoPanel from "@docspace/common/components/Section/sub-components/info-panel";
+// import infoPanel from "@docspace/shared/components/section/sub-components/info-panel";
 
 const CommentEditor = ({
   t,
   item,
   editing,
-  setSelection,
+  setInfoPanelSelection,
   fetchFileVersions,
   updateCommentVersion,
 
@@ -61,7 +61,7 @@ const CommentEditor = ({
       setIsLoading(false);
     });
 
-    setSelection({ ...item, comment: inputValue });
+    setInfoPanelSelection({ ...item, comment: inputValue });
     setIsEdit(false);
     setIsLoading(false);
   };
@@ -121,7 +121,7 @@ const CommentEditor = ({
 };
 
 export default inject(({ auth, versionHistoryStore }) => {
-  const { setSelection } = auth.infoPanelStore;
+  const { setInfoPanelSelection } = auth.infoPanelStore;
 
   const {
     fetchFileVersions,
@@ -136,7 +136,7 @@ export default inject(({ auth, versionHistoryStore }) => {
   const editing = isEditingVersion || isEditing;
 
   return {
-    setSelection,
+    setInfoPanelSelection,
     fetchFileVersions,
     updateCommentVersion,
 

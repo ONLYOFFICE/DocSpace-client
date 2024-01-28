@@ -23,7 +23,7 @@ const ChangeQuotaEvent = (props) => {
     calculateSelection,
     needResetSelection,
     getPeopleListItem,
-    setSelection,
+    setInfoPanelSelection,
   } = props;
   const { t } = useTranslation("Common");
   const [isLoading, setIsLoading] = useState(false);
@@ -60,9 +60,9 @@ const ChangeQuotaEvent = (props) => {
         if (type === "user") {
           const user = getPeopleListItem(items[0]);
 
-          setSelection(user);
+          setInfoPanelSelection(user);
         } else {
-          setSelection(calculateSelection());
+          setInfoPanelSelection(calculateSelection());
         }
       }
     } catch (e) {
@@ -114,7 +114,7 @@ export default inject(({ peopleStore, filesStore, auth }, { type }) => {
   const {
     selection: infoPanelSelection,
     calculateSelection,
-    setSelection,
+    setInfoPanelSelection,
   } = infoPanelStore;
 
   const initialSize = type === "user" ? defaultUsersQuota : defaultRoomsQuota;
@@ -131,6 +131,6 @@ export default inject(({ peopleStore, filesStore, auth }, { type }) => {
     calculateSelection,
     getPeopleListItem,
     needResetSelection,
-    setSelection,
+    setInfoPanelSelection,
   };
 })(observer(ChangeQuotaEvent));

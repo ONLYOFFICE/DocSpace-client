@@ -13,17 +13,18 @@ import { StyledAccountContent } from "../../styles/accounts";
 
 const Accounts = (props) => {
   const {
-  t,
+    t,
     infoPanelSelection,
-  isOwner,
-  isAdmin,
-  changeUserType,
-  canChangeUserType,
+    isOwner,
+    isAdmin,
+    changeUserType,
+    canChangeUserType,
     setInfoPanelSelection,
-  getPeopleListItem,
+    getPeopleListItem,
 
-  showStorageInfo,
-}) => {
+    showStorageInfo,
+  } = props;
+
   const [statusLabel, setStatusLabel] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
 
@@ -232,7 +233,7 @@ const Accounts = (props) => {
               </Text>
               <SpaceQuota
                 type="user"
-                item={selection}
+                item={infoPanelSelection}
                 className="type-combobox"
                 onSuccess={onSuccess}
                 onAbort={onAbort}

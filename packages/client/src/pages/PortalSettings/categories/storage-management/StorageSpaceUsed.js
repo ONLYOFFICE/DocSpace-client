@@ -78,7 +78,6 @@ const DiskSpaceUsedComponent = (props) => {
         onSaveClick={onSaveClick}
         onCloseClick={onCloseClick}
         onSetQuotaBytesSize={onSetQuotaBytesSize}
-        isError={isError}
         isDiskSpace
       />
       <StyledMainTitle fontSize="16px" fontWeight={700}>

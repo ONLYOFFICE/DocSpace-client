@@ -250,5 +250,5 @@ export default inject(
       isGracePeriod,
       isNotPaidPeriod,
     };
-  }
+  },
 )(observer(PayerInformationContainer));

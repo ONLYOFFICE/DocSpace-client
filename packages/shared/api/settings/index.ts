@@ -18,6 +18,7 @@ import {
   TLoginSettings,
   TCapabilities,
   TThirdPartyProvider,
+  TPaymentSettings,
 } from "./types";
 
 export async function getSettings(withPassword = false, headers = null) {
@@ -558,8 +559,8 @@ export function getIsLicenseRequired() {
   });
 }
 
-export function setLicense(confirmKey, data) {
-  const options = {
+export async function setLicense(confirmKey: string, data: FormData) {
+  const options: AxiosRequestConfig = {
     method: "post",
     url: `/settings/license`,
     data,
@@ -569,14 +570,18 @@ export function setLicense(confirmKey, data) {
     options.headers = { confirm: confirmKey };
   }
 
-  return request(options);
+  const res = (await request(options)) as string;
+
+  return res;
 }
 
-export function getPaymentSettings() {
-  return request({
+export async function getPaymentSettings() {
+  const res = (await request({
     method: "get",
     url: `/settings/payment`,
-  });
+  })) as TPaymentSettings;
+
+  return res;
 }
 export function acceptLicense() {
   return request({

@@ -8,7 +8,7 @@ import { getPortalTenantExtra } from "../api/portal";
 import { TUser } from "../api/people/types";
 import { TCapabilities, TThirdPartyProvider } from "../api/settings/types";
 import { logout as logoutDesktop } from "../utils/desktop";
-import { isAdmin, isPublicRoom } from "../utils/common";
+import { frameCallEvent, isAdmin, isPublicRoom } from "../utils/common";
 import { getCookie, setCookie } from "../utils/cookie";
 import { TTenantExtraRes } from "../api/portal/types";
 import { TenantStatus } from "../enums";
@@ -377,8 +377,10 @@ class AuthStore {
     this.isLogout = true;
 
     const isDesktop = this.settingsStore?.isDesktopClient;
+    const isFrame = this.settingsStore?.isFrame;
 
     if (isDesktop) logoutDesktop();
+    if (isFrame) frameCallEvent({ event: "onSignOut" });
 
     if (ssoLogoutUrl) return ssoLogoutUrl;
 

@@ -1,14 +1,9 @@
-<svg viewBox="-10 -10 220 220" xmlns="http://www.w3.org/2000/svg" aria-label="Loading content, please wait." class="styled-loader__StyledTrack-sc-f6u5mn-6 bsgKWl">
+<svg viewBox="-10 -10 220 220" xmlns="http://www.w3.org/2000/svg" aria-label="Loading content, please wait.">
   <style>
     :root {
       width: 64px;
       height: 64px;
-      color: #5299E0;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        color: #ffffff;
-      }
+      color: #2DA7DB;
     }
   </style>
   <defs>

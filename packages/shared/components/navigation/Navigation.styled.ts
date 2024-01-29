@@ -24,10 +24,8 @@ const StyledContainer = styled.div<{
     !props.isDropBoxComponent &&
     props.isDesktop &&
     css`
-      width: fit-content;
-      max-width: ${props.isInfoPanelVisible
-        ? `calc(100%)`
-        : `calc(100% - 72px)`};
+      width: 100%;
+      max-width: 100%;
     `}
 
   display: grid;
@@ -210,7 +208,7 @@ const StyledContainer = styled.div<{
     }
 
     grid-template-columns: ${(props) =>
-    props.isRootFolder ? "1fr auto" : "29px 1fr auto"};
+    props.isRootFolder ? "auto 1fr" : "29px auto 1fr"};
   }
 `;
 
@@ -223,11 +221,11 @@ const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme) <{
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
-          margin-right: auto;
+          margin-right: 20px;
           transform: scaleX(-1);
         `
       : css`
-          margin-left: auto;
+          margin-left: 20px;
         `}
 
   margin-bottom: 1px;
@@ -278,18 +276,14 @@ const StyledControlButtonContainer = styled.div<{ isFrame?: boolean }>`
         `}
   display: flex;
   align-items: center;
-
+  gap: 16px;
   height: 32px;
 
+  @media ${tablet} {
+    flex-direction: row-reverse;
+  }
+
   .add-button {
-    ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-            margin-left: 16px;
-          `
-      : css`
-            margin-right: 16px;
-          `}
     min-width: 15px;
 
     @media ${tablet} {
@@ -641,11 +635,9 @@ const StyledBox = styled.div<{
 StyledBox.defaultProps = { theme: Base };
 
 const StyledTariffWrapper = styled.div`
-  width: auto;
   display: flex;
-  gap: 20px;
   align-items: center;
-  flex-wrap: nowrap;
+
   ${({ theme }) =>
     theme.interfaceDirection === "rtl"
       ? css`
@@ -658,7 +650,7 @@ const StyledTariffWrapper = styled.div`
         `}
 
   @media ${tablet} {
-    width: 100%;
+    flex-direction: row-reverse;
   }
 `;
 

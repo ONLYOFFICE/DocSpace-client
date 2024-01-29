@@ -37,7 +37,7 @@ const showPreviewThreshold = 720;
 
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { DropDown } from "@docspace/shared/components/drop-down";
 import Filter from "@docspace/shared/api/people/filter";
 import { getUserList, getMembersList } from "@docspace/shared/api/people";
@@ -45,19 +45,18 @@ import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { Avatar } from "@docspace/shared/components/avatar";
 import Base from "@docspace/shared/themes/base";
 
-const StyledInviteInputContainer = styled.div`
+const UserInputContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
   width: 100%;
-  margin-bottom: 20px;
 
   .header_aside-panel {
     max-width: 100% !important;
   }
 `;
 
-const StyledInviteInput = styled.div`
+const UserInput = styled.div`
   width: 100%;
   width: -moz-available;
   width: -webkit-fill-available;
@@ -74,6 +73,7 @@ const StyledInviteInput = styled.div`
 
 const StyledDropDown = styled(DropDown)`
   ${(props) => props.width && `width: ${props.width}px`};
+  left: 0;
 
   .list-item {
     display: flex;
@@ -136,10 +136,26 @@ const Manager = (props) => {
   const dropDownMaxHeight = usersList.length > 5 ? { maxHeight: 240 } : {};
   const [isUserFilterSet, setIsUserFilterSet] = useState(false);
   const [isTypeFilterSet, setIsTypeFilterSet] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [selectedType, setSelectedType] = useState(null);
 
   setDocumentTitle(t("JavascriptSdk"));
 
   const scriptUrl = `${window.location.origin}/static/scripts/api.js`;
+
+  const roomTypeOptions = [
+    {
+      key: "room-type-collaboration",
+      label: t("CreateEditRoomDialog:CollaborationRoomTitle"),
+      roomType: RoomsType.EditingRoom,
+    },
+    { key: "room-type-public", label: t("Files:PublicRoom"), roomType: RoomsType.PublicRoom },
+    {
+      key: "room-type-custom",
+      label: t("CreateEditRoomDialog:CustomRoomTitle"),
+      roomType: RoomsType.CustomRoom,
+    },
+  ];
 
   const dataSortBy = [
     { key: "DateAndTime", label: t("Common:LastModifiedDate"), default: true },
@@ -240,6 +256,14 @@ const Manager = (props) => {
     disableActionButton: false,
     init: true,
     viewTableColumns: selectedColumns.map((column) => column.key).join(","),
+    filter: {
+      count: 100,
+      page: 1,
+      sortorder: "descending",
+      sortby: "DateAndTime",
+      search: "",
+      withSubfolders: false,
+    },
   });
 
   const params = objectToGetParams(config);
@@ -312,6 +336,10 @@ const Manager = (props) => {
     } else {
       setSharedLinks(null);
     }
+    setAuthor("");
+    setUsersList([]);
+    setIsUserFilterSet(false);
+    setIsTypeFilterSet(false);
 
     setConfig((config) => {
       return { ...config, ...newConfig };
@@ -463,13 +491,8 @@ const Manager = (props) => {
       setConfig((config) => ({
         ...config,
         filter: {
+          ...config.filter,
           filterType: option.typeKey,
-          count: 100,
-          page: 1,
-          sortorder: "descending",
-          sortby: "DateAndTime",
-          search: "",
-          withSubfolders: false,
         },
       }));
     }
@@ -486,7 +509,7 @@ const Manager = (props) => {
     setSearchPanelVisible(false);
   };
 
-  const openInviteInputPanel = (e) => {
+  const openInviteInputPanel = () => {
     setSearchPanelVisible(true);
   };
 
@@ -550,9 +573,13 @@ const Manager = (props) => {
       closeInviteInputPanel();
       setAuthor("");
       setUsersList([]);
+      setSelectedUser(displayName);
       setConfig((config) => ({
         ...config,
-        filter: { ...config.filter, subjectId: item.id, authorType: `user_${item.id}` },
+        filter:
+          "id" in config
+            ? { ...config.filter, authorType: `user_${item.id}` }
+            : { ...config.filter, subjectId: item.id },
       }));
     };
 
@@ -568,6 +595,15 @@ const Manager = (props) => {
   };
 
   const foundUsers = usersList.map((user) => getItemContent(user));
+
+  const toggleMembers = (e) => {
+    if (!e.target.checked) {
+      const filtered = { ...config.filter };
+      delete filtered.subjectId;
+      setConfig((config) => ({ ...config, filter: filtered }));
+    }
+    setIsUserFilterSet(e.target.checked);
+  };
 
   useEffect(() => {
     window.addEventListener("resize", onResize);
@@ -840,26 +876,38 @@ const Manager = (props) => {
                 <Label className="label" text={t("File Filter")} />
                 <ToggleButton
                   className="toggle"
-                  label="Member"
+                  label="Author"
                   onChange={(e) => {
                     setIsUserFilterSet(e.target.checked);
+                    setConfig((config) => ({
+                      ...config,
+                      filter: {
+                        filterType: option.typeKey,
+                        count: 100,
+                        page: 1,
+                        sortorder: "descending",
+                        sortby: "DateAndTime",
+                        search: "",
+                        withSubfolders: false,
+                      },
+                    }));
                   }}
                   isChecked={isUserFilterSet}
                 />
                 {isUserFilterSet && (
-                  <StyledInviteInputContainer>
-                    <StyledInviteInput ref={searchRef}>
+                  <UserInputContainer>
+                    <UserInput ref={searchRef}>
                       <TextInput
                         scale
                         onChange={onChangeAuthor}
-                        placeholder={t("Files:ByAuthor")}
+                        placeholder={"Search by name or email"}
                         value={author}
                         onFocus={openInviteInputPanel}
                         isAutoFocussed
                         onKeyDown={onKeyDown}
                         tabIndex={5}
                       />
-                    </StyledInviteInput>
+                    </UserInput>
                     {author.length >= minSearchValue && (
                       <StyledDropDown
                         width={searchRef?.current?.offsetWidth}
@@ -874,11 +922,11 @@ const Manager = (props) => {
                         {!!usersList.length ? foundUsers : ""}
                       </StyledDropDown>
                     )}
-                  </StyledInviteInputContainer>
+                  </UserInputContainer>
                 )}
                 <ToggleButton
                   className="toggle"
-                  label="label text"
+                  label="Type"
                   onChange={(e) => {
                     setIsTypeFilterSet(e.target.checked);
                   }}
@@ -901,53 +949,93 @@ const Manager = (props) => {
                 <ToggleButton
                   className="toggle"
                   label="Member"
-                  onChange={(e) => {
-                    setIsUserFilterSet(e.target.checked);
-                  }}
+                  onChange={toggleMembers}
                   isChecked={isUserFilterSet}
                 />
                 {isUserFilterSet && (
-                  <StyledInviteInputContainer>
-                    <StyledInviteInput ref={searchRef}>
-                      <TextInput
-                        scale
-                        onChange={onChangeAuthor}
-                        placeholder={t("Files:ByAuthor")}
-                        value={author}
-                        onFocus={openInviteInputPanel}
-                        isAutoFocussed
-                        onKeyDown={onKeyDown}
-                        tabIndex={5}
+                  <>
+                    {"subjectId" in config.filter ? (
+                      <SelectedItem
+                        onClick={() => {
+                          const filtered = { ...config.filter };
+                          delete filtered.subjectId;
+                          setConfig((config) => ({ ...config, filter: filtered }));
+                        }}
+                        onClose={() => {}}
+                        label={selectedUser}
                       />
-                    </StyledInviteInput>
-                    {author.length >= minSearchValue && (
-                      <StyledDropDown
-                        width={searchRef?.current?.offsetWidth}
-                        isDefaultMode={false}
-                        open={searchPanelVisible}
-                        manualX="16px"
-                        showDisabledItems
-                        clickOutsideAction={closeInviteInputPanel}
-                        eventTypes="click"
-                        {...dropDownMaxHeight}
-                      >
-                        {!!usersList.length ? foundUsers : ""}
-                      </StyledDropDown>
+                    ) : (
+                      <UserInputContainer>
+                        <UserInput ref={searchRef}>
+                          <TextInput
+                            scale
+                            onChange={onChangeAuthor}
+                            placeholder={"Search by name or email"}
+                            value={author}
+                            onFocus={openInviteInputPanel}
+                            isAutoFocussed
+                            onKeyDown={onKeyDown}
+                            tabIndex={5}
+                          />
+                        </UserInput>
+                        {author.length >= minSearchValue && (
+                          <StyledDropDown
+                            width={searchRef?.current?.offsetWidth}
+                            isDefaultMode={false}
+                            open={searchPanelVisible}
+                            manualX="16px"
+                            showDisabledItems
+                            clickOutsideAction={closeInviteInputPanel}
+                            eventTypes="click"
+                            {...dropDownMaxHeight}
+                          >
+                            {!!usersList.length ? foundUsers : ""}
+                          </StyledDropDown>
+                        )}
+                      </UserInputContainer>
                     )}
-                  </StyledInviteInputContainer>
+
+                    <Checkbox
+                      className="checkbox"
+                      label={"Search by Owners"}
+                      onChange={(e) => {
+                        setConfig((config) => ({
+                          ...config,
+                          filter: { ...config.filter, subjectFilter: e.target.checked ? 0 : 1 },
+                        }));
+                      }}
+                      isChecked={false}
+                    />
+                  </>
                 )}
                 <ToggleButton
                   className="toggle"
-                  label="label text"
+                  label="Type"
                   onChange={(e) => {
                     setIsTypeFilterSet(e.target.checked);
                   }}
                   isChecked={isTypeFilterSet}
                 />
-                {isTypeFilterSet && (
+                {isTypeFilterSet && "type" in config.filter ? (
+                  <SelectedItem
+                    onClick={() => {
+                      const filtered = { ...config.filter };
+                      delete filtered.type;
+                      setConfig((config) => ({ ...config, filter: filtered }));
+                    }}
+                    onClose={() => {}}
+                    label={selectedType}
+                  />
+                ) : (
                   <ComboBox
-                    onSelect={onFilterSelect}
-                    options={filterOptions}
+                    onSelect={(option) => {
+                      setConfig((config) => ({
+                        ...config,
+                        filter: { ...config.filter, type: option.roomType },
+                      }));
+                      setSelectedType(option.label);
+                    }}
+                    options={roomTypeOptions}
                     scaled={true}
                     selectedOption={filterBy}
                     displaySelectedOption
@@ -968,8 +1056,8 @@ const Manager = (props) => {
             {filterBy.key === "filter-type-author" && (
               <>
                 <Label className="label" text={t("Files:ByAuthor")} />
-                <StyledInviteInputContainer>
-                  <StyledInviteInput ref={searchRef}>
+                <UserInputContainer>
+                  <UserInput ref={searchRef}>
                     <TextInput
                       scale
                       onChange={onChangeAuthor}
@@ -980,7 +1068,7 @@ const Manager = (props) => {
                       onKeyDown={onKeyDown}
                       tabIndex={5}
                     />
-                  </StyledInviteInput>
+                  </UserInput>
                   {author.length >= minSearchValue && (
                     <StyledDropDown
                       width={searchRef?.current?.offsetWidth}
@@ -995,7 +1083,7 @@ const Manager = (props) => {
                       {!!usersList.length ? foundUsers : ""}
                     </StyledDropDown>
                   )}
-                </StyledInviteInputContainer>
+                </UserInputContainer>
               </>
             )} */}
           </ControlsGroup>

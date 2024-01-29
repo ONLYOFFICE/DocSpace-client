@@ -198,8 +198,8 @@ SalesDepartmentRequestDialog.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default inject(({ payments }) => {
-  const { sendPaymentRequest } = payments;
+export default inject(({ paymentStore }) => {
+  const { sendPaymentRequest } = paymentStore;
 
   return {
     sendPaymentRequest,

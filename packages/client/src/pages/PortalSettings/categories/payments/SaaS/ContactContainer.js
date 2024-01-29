@@ -41,8 +41,8 @@ const ContactContainer = ({ t, salesEmail }) => {
   );
 };
 
-export default inject(({ payments, settingsStore }) => {
-  const { salesEmail } = payments;
+export default inject(({ paymentStore, settingsStore }) => {
+  const { salesEmail } = paymentStore;
   return {
     salesEmail,
     theme: settingsStore.theme,

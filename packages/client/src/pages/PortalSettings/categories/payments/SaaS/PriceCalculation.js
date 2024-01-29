@@ -179,7 +179,7 @@ const PriceCalculation = ({
 export default inject(
   ({
     settingsStore,
-    payments,
+    paymentStore,
     paymentQuotasStore,
     currentTariffStatusStore,
   }) => {
@@ -193,7 +193,7 @@ export default inject(
       isAlreadyPaid,
       getPaymentLink,
       canUpdateTariff,
-    } = payments;
+    } = paymentStore;
     const { theme } = settingsStore;
 
     const { planCost } = paymentQuotasStore;
@@ -217,5 +217,5 @@ export default inject(
       currencySymbol: planCost.currencySymbol,
       getPaymentLink,
     };
-  }
+  },
 )(observer(PriceCalculation));

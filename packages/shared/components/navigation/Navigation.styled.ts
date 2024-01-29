@@ -178,17 +178,10 @@ const StyledContainer = styled.div<{
     gap: 8px;
 
     .title-icon {
-      min-width: 17px;
-      min-height: 17px;
-      width: 17px;
-      height: 17px;
-
-      svg {
-        path,
-        rect {
-          fill: ${({ theme }) => theme.navigation.publicIcon};
-        }
-      }
+      min-width: 16px;
+      min-height: 16px;
+      width: 16px;
+      height: 16px;
     }
   }
 
@@ -280,6 +273,10 @@ const StyledControlButtonContainer = styled.div<{ isFrame?: boolean }>`
   align-items: center;
 
   height: 32px;
+
+  @media ${tablet} {
+    flex-direction: row-reverse;
+  }
 
   .add-button {
     ${(props) =>

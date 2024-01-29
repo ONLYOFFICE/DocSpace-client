@@ -360,6 +360,19 @@ class ContextOptionsStore {
     toastr.success(t("Translations:LinkCopySuccess"));
   };
 
+  onCreateAndCopySharedLink = async (item, t) => {
+    const primaryLink = await this.filesStore.getPrimaryLink(item.id);
+
+    if (primaryLink) {
+      copy(primaryLink.sharedTo.shareLink);
+      item.shared
+        ? toastr.success(t("Files:LinkSuccessfullyCopied"))
+        : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
+
+      this.publicRoomStore.setExternalLink(primaryLink);
+    }
+  };
+
   onClickLinkEdit = (item) => {
     const { setConvertItem, setConvertDialogVisible } = this.dialogsStore;
     const canConvert =
@@ -1299,18 +1312,7 @@ class ContextOptionsStore {
           isArchive ||
           !item.canCopyPublicLink ||
           !isPublicRoomType,
-        onClick: async () => {
-          const primaryLink = await this.filesStore.getPrimaryLink(item.id);
-
-          if (primaryLink) {
-            copy(primaryLink.sharedTo.shareLink);
-            item.shared
-              ? toastr.success(t("Files:LinkSuccessfullyCopied"))
-              : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
-
-            this.publicRoomStore.setExternalLink(primaryLink);
-          }
-        },
+        onClick: () => onCreateAndCopySharedLink(item, t),
         // onLoad: () => this.onLoadLinks(t, item),
       },
       {

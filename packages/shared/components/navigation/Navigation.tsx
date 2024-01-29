@@ -52,7 +52,8 @@ const Navigation = ({
   titleIcon,
   currentDeviceType,
   rootRoomTitle,
-
+  navigationButtonLabel,
+  onNavigationButtonClick,
   ...rest
 }: INavigationProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -253,6 +254,8 @@ const Navigation = ({
               isFrame={isFrame}
               isPublicRoom={isPublicRoom}
               isTrashFolder={isTrashFolder}
+              navigationButtonLabel={navigationButtonLabel}
+              onNavigationButtonClick={onNavigationButtonClick}
             />
           </StyledContainer>
           {isDesktop && isTrashFolder && !isEmptyPage && (

@@ -6,6 +6,7 @@ import { IControlButtonProps } from "../Navigation.types";
 import ToggleInfoPanelButton from "./ToggleInfoPanelBtn";
 import PlusButton from "./PlusBtn";
 import ContextButton from "./ContextBtn";
+import { Button, ButtonSize } from "../../button";
 
 const ControlButtons = ({
   isRootFolder,
@@ -24,6 +25,8 @@ const ControlButtons = ({
   isPublicRoom,
   isTrashFolder,
   isMobile,
+  navigationButtonLabel,
+  onNavigationButtonClick,
 }: IControlButtonProps) => {
   const toggleInfoPanelAction = () => {
     toggleInfoPanel?.();
@@ -123,6 +126,15 @@ const ControlButtons = ({
             />
           )}
         </>
+      )}
+
+      {navigationButtonLabel && (
+        <Button
+          className="navigation_button"
+          label={navigationButtonLabel}
+          size={ButtonSize.extraSmall}
+          onClick={onNavigationButtonClick}
+        />
       )}
     </StyledControlButtonContainer>
   );

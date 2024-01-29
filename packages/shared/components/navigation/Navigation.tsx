@@ -72,7 +72,7 @@ const Navigation = ({
   );
 
   const toggleDropBox = useCallback(() => {
-    if (navigationItems.length === 0) return;
+    if (navigationItems?.length === 0) return;
     if (isRootFolder) return setIsOpen(false);
     setIsOpen((prev) => !prev);
 

@@ -17,7 +17,7 @@ const FieldContainer = ({
   style,
   errorMessageWidth = "293px",
   removeMargin = false,
-  labelVisible = true,
+  labelVisible = false,
   inlineHelpButton,
   isRequired,
   labelText,

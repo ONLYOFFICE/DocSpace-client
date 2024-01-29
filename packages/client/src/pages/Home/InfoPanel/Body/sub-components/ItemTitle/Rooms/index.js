@@ -86,6 +86,7 @@ const RoomsItemHeader = ({
             size={16}
           />
         )}
+        {/* TODO: Add a condition so that there is a vdr room when the correct room type is returned from the backend for Calendar */}
         {openHistory && (
           <CalendarComponent
             setCalendarDay={setCalendarDay}

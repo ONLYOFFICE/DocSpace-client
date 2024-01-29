@@ -10,23 +10,15 @@ import { ReactSVG } from "react-svg";
 const StyledCalendarComponent = styled.div`
   position: relative;
 
-  .calendar {
-    position: absolute;
-    right: 0;
-    /* ${(props) =>
-      props.isMobile &&
-      css`
-        position: fixed;
-        bottom: 0;
-        inset-inline-start: 0;
-      `} */
+  .icon-calendar {
+    padding-right: 2px;
   }
 `;
 
 const StyledCalendar = styled(Calendar)`
   position: absolute;
-  top: 150px;
-  right: 30px;
+  top: 134px;
+  right: 16px;
 
   ${(props) =>
     props.isMobile &&
@@ -74,7 +66,11 @@ const CalendarComponent = ({ roomCreationDate, setCalendarDay }) => {
   return (
     <StyledCalendarComponent>
       <div ref={calendarButtonRef}>
-        <ReactSVG src={IconCalendar} onClick={toggleCalendar} />
+        <ReactSVG
+          className="icon-calendar"
+          src={IconCalendar}
+          onClick={toggleCalendar}
+        />
       </div>
 
       {isOpen && (

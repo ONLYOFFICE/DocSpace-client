@@ -67,11 +67,14 @@ const History = ({
   useEffect(() => {
     if (!calendarDay) return;
 
-    const historyListNode = document.getElementById("history-list-info-panel");
+    const heightTitleRoom = 80;
+    const heightDayWeek = 40;
 
+    const historyListNode = document.getElementById("history-list-info-panel");
     if (!historyListNode) return;
 
     const scroll = historyListNode.closest(".scroller");
+    if (!scroll) return;
 
     let dateCoincidingWithCalendarDay = null;
 
@@ -91,13 +94,12 @@ const History = ({
       const dayNode = historyListNode.getElementsByClassName(
         dateCoincidingWithCalendarDay
       );
-
       if (!dayNode[0]) return;
 
-      //TODO:const 120
-      const y = dayNode[0].offsetTop - 120;
+      const y = dayNode[0].offsetTop - heightTitleRoom - heightDayWeek;
       scroll.scrollTo(0, y);
       setCalendarDay(null);
+
       return;
     }
 
@@ -116,7 +118,7 @@ const History = ({
 
         //Looking for the nearest new date
         if (date < calendarDayModified) {
-          //if there are no nearby new entries in the post history, then scroll to the last one
+          //If there are no nearby new entries in the post history, then scroll to the last one
           if (indexItem === 0) {
             nearestNewerDate = feed.json.ModifiedDate;
             return false;
@@ -130,15 +132,14 @@ const History = ({
       return true;
     });
 
-    if (nearestNewerDate) {
-      const dayNode = historyListNode.getElementsByClassName(nearestNewerDate);
+    if (!nearestNewerDate) return;
 
-      if (!dayNode[0]) return;
-      //TODO:const 120
-      const y = dayNode[0].offsetTop - 120;
-      scroll.scrollTo(0, y);
-      setCalendarDay(null);
-    }
+    const dayNode = historyListNode.getElementsByClassName(nearestNewerDate);
+    if (!dayNode[0]) return;
+
+    const y = dayNode[0].offsetTop - heightTitleRoom - heightDayWeek;
+    scroll.scrollTo(0, y);
+    setCalendarDay(null);
   }, [calendarDay]);
 
   useEffect(() => {

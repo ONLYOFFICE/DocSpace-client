@@ -216,8 +216,7 @@ const Wrapper = styled.div<{ enableCopy?: boolean; isJSONField?: boolean }>`
 const Numeration = styled.pre<{ fontSize: string }>`
   display: block;
   position: absolute;
-
-  font-size: ${(props) => props.theme.getCorrectFontSize(props.fontSize)};
+  font-size: ${(props) => props.theme.getCorrectFontSize(props.fontSize)}px;
   font-family: ${(props) => props.theme.fontFamily};
   line-height: 1.5;
   margin: 0;

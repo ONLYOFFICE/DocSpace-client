@@ -14,7 +14,12 @@ export enum SpeedIndex {
   Speed_X20 = 3,
 }
 
-export const speedIcons = [<Icon05x />, <Icon1x />, <Icon15x />, <Icon2x />];
+export const speedIcons = [
+  <Icon05x key="mediaviewer-speedIcon05x" />,
+  <Icon1x key="mediaviewer-speedIcon10x" />,
+  <Icon15x key="mediaviewer-speedIcon15x" />,
+  <Icon2x key="mediaviewer-speedIcon20x" />,
+];
 
 export const speeds: SpeedType = ["X0.5", "X1", "X1.5", "X2"];
 

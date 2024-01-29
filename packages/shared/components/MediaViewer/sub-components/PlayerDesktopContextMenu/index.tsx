@@ -1,12 +1,13 @@
 import React, { memo, useEffect, useMemo, useRef, useState } from "react";
+
+import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg";
+import MediaContextMenu from "PUBLIC_DIR/images/vertical-dots.react.svg";
+
 import {
   DownloadIconWrapper,
   PlayerDesktopContextMenuWrapper,
 } from "./PlayerDesktopContextMenu.styled";
 import PlayerDesktopContextMenuProps from "./PlayerDesktopContextMenu.props";
-
-import MediaContextMenu from "PUBLIC_DIR/images/vertical-dots.react.svg";
-import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg";
 
 const ContextRight = "9";
 const ContextBottom = "48";
@@ -24,7 +25,7 @@ function PlayerDesktopContextMenu({
 
   const context = useMemo(
     () => generateContextMenu(isOpenContext, ContextRight, ContextBottom),
-    [generateContextMenu, isOpenContext]
+    [generateContextMenu, isOpenContext],
   );
 
   const toggleContext = () => setIsOpenContext((pre) => !pre);
@@ -49,7 +50,7 @@ function PlayerDesktopContextMenu({
       </DownloadIconWrapper>
     );
   }
-  if (isPreviewFile) return <></>;
+  if (isPreviewFile) return;
 
   return (
     <PlayerDesktopContextMenuWrapper ref={ref} onClick={toggleContext}>

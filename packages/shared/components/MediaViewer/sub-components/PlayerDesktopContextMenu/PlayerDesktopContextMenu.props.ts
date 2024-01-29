@@ -2,7 +2,7 @@ interface PlayerDesktopContextMenuProps {
   generateContextMenu: (
     isOpen: boolean,
     right?: string,
-    bottom?: string
+    bottom?: string,
   ) => JSX.Element;
   canDownload: boolean;
   isPreviewFile: boolean;

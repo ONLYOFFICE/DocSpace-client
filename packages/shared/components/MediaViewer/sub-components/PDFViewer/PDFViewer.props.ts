@@ -1,6 +1,7 @@
 import type { Dispatch, SetStateAction } from "react";
-import { getPDFToolbar } from "./../../helpers/getCustomToolbar";
+import { getPDFToolbar } from "../../helpers/getCustomToolbar";
 import type { DevicesType } from "../../types";
+
 interface PDFViewerProps {
   src: string;
   title: string;
@@ -16,7 +17,7 @@ interface PDFViewerProps {
   generateContextMenu: (
     isOpen: boolean,
     right?: string,
-    bottom?: string
+    bottom?: string,
   ) => JSX.Element;
   setIsOpenContextMenu: Dispatch<SetStateAction<boolean>>;
   setIsPDFSidebarOpen: Dispatch<SetStateAction<boolean>>;

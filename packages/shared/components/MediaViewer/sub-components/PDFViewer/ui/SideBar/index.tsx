@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import ViewRowsIcon from "PUBLIC_DIR/images/view-rows.react.svg";
+import ViewTilesIcon from "PUBLIC_DIR/images/view-tiles.react.svg";
 import Bookmarks from "../Bookmarks";
 
 import SidebarProps from "./Sidebar.props";
@@ -8,9 +10,6 @@ import {
   SidebarHeader,
   Thumbnails,
 } from "./Sidebar.styled";
-
-import ViewTilesIcon from "PUBLIC_DIR/images/view-tiles.react.svg";
-import ViewRowsIcon from "PUBLIC_DIR/images/view-rows.react.svg";
 
 function Sidebar({
   bookmarks,

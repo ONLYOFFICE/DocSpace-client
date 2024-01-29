@@ -66,7 +66,7 @@ function PDFViewer({
     () => {
       const result = document.getElementById(pdfViewerId);
       return result !== null;
-    }
+    },
   );
   const [isError, setIsError] = useState<boolean>(false);
   const [isLoadingScript, setIsLoadingScript] = useState<boolean>(false);
@@ -156,7 +156,7 @@ function PDFViewer({
       "onStructure",
       function (structure: BookMark[]) {
         setBookmarks(structure);
-      }
+      },
     );
 
     pdfViewer.current.registerEvent("onZoom", function (currentZoom: number) {
@@ -167,14 +167,14 @@ function PDFViewer({
       "onCurrentPageChanged",
       function (pageNum: number) {
         pageCountRef.current?.setPageNumber(pageNum + 1);
-      }
+      },
     );
 
     pdfViewer.current.registerEvent(
       "onPagesCount",
       function (pagesCount: number) {
         pageCountRef.current?.setPagesCount(pagesCount);
-      }
+      },
     );
 
     pdfViewer.current.registerEvent("onFileOpened", function () {
@@ -204,12 +204,11 @@ function PDFViewer({
         setIsLoadingScript(false);
         setIsError(true);
         console.error(event);
-      }
+      },
     );
   }, []);
 
   const resize = useCallback(() => {
-    //@ts-ignore
     window?.AscViewer?.checkApplicationScale();
     pdfViewer.current?.resize();
     pdfThumbnail.current?.resize();
@@ -231,7 +230,7 @@ function PDFViewer({
     pdfViewer.current.setZoom(scale);
   };
 
-  function toolbarEvent(item: ToolbarItemType) {
+  const toolbarEvent = (item: ToolbarItemType) => {
     switch (item.actionType) {
       case ToolbarActionType.Panel:
         setIsPDFSidebarOpen((prev) => !prev);
@@ -257,11 +256,11 @@ function PDFViewer({
       default:
         break;
     }
-  }
+  };
 
-  function navigate(page: number) {
+  const navigate = (page: number) => {
     pdfViewer.current.navigate(page);
-  }
+  };
 
   if (isError) {
     return (

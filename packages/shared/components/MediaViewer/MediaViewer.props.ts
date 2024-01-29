@@ -6,6 +6,7 @@ import {
   PlaylistType,
   TranslationType,
 } from "./types";
+
 export interface MediaViewerProps {
   t: TranslationType;
 
@@ -25,7 +26,6 @@ export interface MediaViewerProps {
 
   playlist: PlaylistType[];
 
-  setBufferSelection: Function;
   archiveRoomsId: number;
 
   playlistPos: number;
@@ -42,8 +42,9 @@ export interface MediaViewerProps {
   }[];
 
   setActiveFiles: (files: number[], destId?: number) => void;
+  setBufferSelection: (file?: IFile | null) => void;
 
-  getIcon: (size: number, ext: string, ...arg: any) => string;
+  getIcon: (size: number, ext: string, ...arg: unknown[]) => string;
 
   onClose: VoidFunction;
   onError?: VoidFunction;

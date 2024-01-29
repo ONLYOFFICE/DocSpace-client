@@ -35,7 +35,7 @@ type Functions = {
 export const getPDFContextModel = (
   t: TranslationType,
   item: IFile,
-  funcs: Omit<Functions, "onShowInfoPanel">
+  funcs: Omit<Functions, "onShowInfoPanel">,
 ) => {
   const options: ContextMenuModel[] = [
     {
@@ -129,7 +129,7 @@ export const getMobileMediaContextModel = (
   funcs: Omit<
     Functions,
     "onClickDownloadAs" | "onCopyLink" | "onPreviewClick" | "onClickLinkEdit"
-  >
+  >,
 ) => {
   const {
     onShowInfoPanel,
@@ -211,7 +211,7 @@ export const getDesktopMediaContextModel = (
   t: TranslationType,
   targetFile: IFile,
   archiveRoom: boolean,
-  funcs: Pick<Functions, "onClickDownload" | "onClickRename" | "onClickDelete">
+  funcs: Pick<Functions, "onClickDownload" | "onClickRename" | "onClickDelete">,
 ) => {
   const { onClickDelete, onClickDownload, onClickRename } = funcs;
 

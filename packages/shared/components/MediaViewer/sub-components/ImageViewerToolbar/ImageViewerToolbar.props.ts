@@ -6,7 +6,7 @@ interface ImageViewerToolbarProps {
   generateContextMenu: (
     isOpen: boolean,
     right?: string,
-    bottom?: string
+    bottom?: string,
   ) => JSX.Element;
   percentValue: number;
   setIsOpenContextMenu: Dispatch<SetStateAction<boolean>>;

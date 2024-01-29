@@ -1,4 +1,5 @@
-import { ContextMenuModel } from "./../../types/index";
+import type { ContextMenuModel } from "../../types";
+
 interface PlayerMessageErrorProps {
   errorTitle: string;
   model: ContextMenuModel[];

@@ -32,7 +32,7 @@ interface ViewerPlayerProps {
   generateContextMenu: (
     isOpen: boolean,
     right?: string,
-    bottom?: string
+    bottom?: string,
   ) => JSX.Element;
 }
 

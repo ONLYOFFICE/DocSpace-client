@@ -15,6 +15,7 @@ import React, {
   useState,
 } from "react";
 
+import { compareTo } from "../../MediaViewer.utils";
 import ViewerPlayerProps from "./ViewerPlayer.props";
 import {
   ContainerPlayer,
@@ -33,7 +34,7 @@ import PlayerTimeline from "../PlayerTimeline";
 import PlayerSpeedControl from "../PlayerSpeedControl";
 import PlayerFullScreen from "../PlayerFullScreen";
 import PlayerDesktopContextMenu from "../PlayerDesktopContextMenu";
-import { compareTo, KeyboardEventKeys } from "../../helpers";
+import { KeyboardEventKeys } from "../../helpers";
 import PlayerMessageError from "../PlayerMessageError";
 
 const VolumeLocalStorageKey = "player-volume";
@@ -265,7 +266,7 @@ function ViewerPlayer({
         axis: "lock",
       },
       target: containerRef,
-    }
+    },
   );
 
   const onKeyDown = (event: KeyboardEvent) => {
@@ -300,8 +301,8 @@ function ViewerPlayer({
       elementWidth > maxWidth
         ? maxWidth
         : isFullScreen
-        ? Math.max(maxWidth, elementWidth)
-        : Math.min(maxWidth, elementWidth);
+          ? Math.max(maxWidth, elementWidth)
+          : Math.min(maxWidth, elementWidth);
 
     let height = (width / elementWidth) * elementHeight;
 
@@ -315,7 +316,7 @@ function ViewerPlayer({
 
   const getVideoPosition = (
     width: number,
-    height: number
+    height: number,
   ): [number, number] => {
     let left = (window.innerWidth - width) / 2;
     let top = (window.innerHeight - height) / 2;
@@ -345,7 +346,7 @@ function ViewerPlayer({
   };
 
   const handleLoadedMetaDataVideo = (
-    event: React.SyntheticEvent<HTMLVideoElement, Event>
+    event: React.SyntheticEvent<HTMLVideoElement, Event>,
   ) => {
     const target = event.target as HTMLVideoElement;
 
@@ -365,7 +366,7 @@ function ViewerPlayer({
   };
 
   const handleDurationChange = (
-    event: React.SyntheticEvent<HTMLVideoElement, Event>
+    event: React.SyntheticEvent<HTMLVideoElement, Event>,
   ) => {
     const target = event.target as HTMLVideoElement;
     if (!Number.isFinite(target.duration) || !isDurationInfinityRef.current)
@@ -463,7 +464,7 @@ function ViewerPlayer({
       videoRef.current.volume = newVolume / 100;
       setVolume(newVolume);
     },
-    [isMuted]
+    [isMuted],
   );
 
   const handleSpeedChange = useCallback((speed: number) => {
@@ -551,14 +552,14 @@ function ViewerPlayer({
       setIsError(true);
       setIsLoading(false);
     },
-    []
+    [],
   );
 
   const stopPropagation = useCallback(
     (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       event?.stopPropagation();
     },
-    []
+    [],
   );
 
   const onTouchMove = () => {
@@ -568,7 +569,7 @@ function ViewerPlayer({
   const model = useMemo(contextModel, [contextModel]);
   const hideContextMenu = useMemo(
     () => model.filter((item) => !item.disabled).length <= 1,
-    [model]
+    [model],
   );
 
   return (

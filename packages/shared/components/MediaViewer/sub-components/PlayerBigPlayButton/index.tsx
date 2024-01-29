@@ -4,7 +4,7 @@ import WrapperPlayerBigPlayButton from "./PlayerBigPlayButton.styled";
 import PlayerBigPlayButtonProps from "./PlayerBigPlayButton.props";
 
 function PlayerBigPlayButton({ visible, onClick }: PlayerBigPlayButtonProps) {
-  if (!visible) return <></>;
+  if (!visible) return;
 
   return (
     <WrapperPlayerBigPlayButton>

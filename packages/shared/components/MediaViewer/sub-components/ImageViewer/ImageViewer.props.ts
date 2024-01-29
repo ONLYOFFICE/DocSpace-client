@@ -6,8 +6,8 @@ interface ImageViewerProps {
   src?: string;
   thumbnailSrc?: string;
   isTiff?: boolean;
-  imageId?: number;
-  version?: number;
+  imageId: number;
+  version: number;
   errorTitle: string;
   isFistImage: boolean;
   isLastImage: boolean;
@@ -25,7 +25,7 @@ interface ImageViewerProps {
   generateContextMenu: (
     isOpen: boolean,
     right?: string,
-    bottom?: string
+    bottom?: string,
   ) => JSX.Element;
 }
 

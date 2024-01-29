@@ -1,4 +1,3 @@
-import ReactDOM from "react-dom";
 import { inject, observer } from "mobx-react";
 import React, {
   useRef,
@@ -9,7 +8,10 @@ import React, {
 } from "react";
 
 import { DeviceType } from "@docspace/shared/enums";
-import { StyledViewerContainer } from "../../StyledComponents";
+import { Portal } from "@docspace/shared/components/portal";
+import type { TContextMenuRef } from "@docspace/shared/components/context-menu";
+
+import { StyledViewerContainer } from "../../MediaViewer.styled";
 
 import NextButton from "../NextButton";
 import PrevButton from "../PrevButton";
@@ -17,14 +19,38 @@ import ImageViewer from "../ImageViewer";
 import MobileDetails from "../MobileDetails";
 import DesktopDetails from "../DesktopDetails";
 import ViewerPlayer from "../ViewerPlayer";
-
-import type ViewerProps from "./Viewer.props";
 import PDFViewer from "../PDFViewer";
 
-function Viewer(props: ViewerProps) {
-  const timerIDRef = useRef<NodeJS.Timeout>();
+import type ViewerProps from "./Viewer.props";
 
-  const containerRef = React.useRef(document.createElement("div"));
+function Viewer(props: ViewerProps) {
+  const {
+    title,
+    isPdf,
+    isAudio,
+    isImage,
+    isVideo,
+    visible,
+    fileUrl,
+    toolbar,
+    playlist,
+    audioIcon,
+    errorTitle,
+    targetFile,
+    headerIcon,
+    playlistPos,
+    isPreviewFile,
+    currentDeviceType,
+    onNextClick,
+    onPrevClick,
+    onMaskClick,
+    contextModel,
+    onDownloadClick,
+    onSetSelectionFile,
+    generateContextMenu,
+  } = props;
+
+  const timerIDRef = useRef<NodeJS.Timeout>();
 
   const [isPDFSidebarOpen, setIsPDFSidebarOpen] = useState<boolean>(false);
   const [panelVisible, setPanelVisible] = useState<boolean>(true);
@@ -32,58 +58,28 @@ function Viewer(props: ViewerProps) {
 
   const [isError, setIsError] = useState<boolean>(false);
 
-  const [imageTimer, setImageTimer] = useState<NodeJS.Timeout>();
+  // const [imageTimer, setImageTimer] = useState<NodeJS.Timeout>();
 
   const panelVisibleRef = useRef<boolean>(false);
   const panelToolbarRef = useRef<boolean>(false);
 
-  const contextMenuRef = useRef<{ show: (e: any) => void }>(null);
+  const contextMenuRef = useRef<TContextMenuRef>(null);
 
   const [isFullscreen, setIsFullScreen] = useState<boolean>(false);
 
   const devices = useMemo(
     () => ({
-      isMobileOnly: props.currentDeviceType === DeviceType.mobile,
+      isMobileOnly: currentDeviceType === DeviceType.mobile,
       isMobile:
-        props.currentDeviceType === DeviceType.tablet ||
-        props.currentDeviceType === DeviceType.mobile,
-      isDesktop: props.currentDeviceType === DeviceType.desktop,
+        currentDeviceType === DeviceType.tablet ||
+        currentDeviceType === DeviceType.mobile,
+      isDesktop: currentDeviceType === DeviceType.desktop,
     }),
-    [props.currentDeviceType]
+    [currentDeviceType],
   );
   const { isMobile } = devices;
 
-  useEffect(() => {
-    document.body.appendChild(containerRef.current);
-    containerRef.current.style.direction = "ltr";
-
-    return () => {
-      document.body.removeChild(containerRef.current);
-      timerIDRef.current && clearTimeout(timerIDRef.current);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (isOpenContextMenu) {
-      clearTimeout(timerIDRef.current);
-    }
-  }, [isOpenContextMenu]);
-
-  useEffect(() => {
-    if (isMobile) return;
-    resetToolbarVisibleTimer();
-    document.addEventListener("mousemove", resetToolbarVisibleTimer, {
-      passive: true,
-    });
-
-    return () => {
-      document.removeEventListener("mousemove", resetToolbarVisibleTimer);
-      clearTimeout(timerIDRef.current);
-      setPanelVisible(true);
-    };
-  }, [setImageTimer, setPanelVisible, isMobile]);
-
-  const resetToolbarVisibleTimer = () => {
+  const resetToolbarVisibleTimer = useCallback(() => {
     if (panelToolbarRef.current) return;
 
     if (panelVisibleRef.current && panelVisible) {
@@ -102,7 +98,7 @@ function Viewer(props: ViewerProps) {
         setPanelVisible(false);
       }, 2500);
     }
-  };
+  }, [panelVisible]);
 
   const removeToolbarVisibleTimer = () => {
     clearTimeout(timerIDRef.current);
@@ -123,22 +119,22 @@ function Viewer(props: ViewerProps) {
   };
 
   const nextClick = () => {
-    clearTimeout(imageTimer);
-    props.onNextClick();
+    // clearTimeout(imageTimer);
+    onNextClick();
   };
 
   const prevClick = () => {
-    clearTimeout(imageTimer);
-    props.onPrevClick();
+    // clearTimeout(imageTimer);
+    onPrevClick();
   };
 
   const onMobileContextMenu = useCallback(
-    (e: TouchEvent) => {
+    (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
       setIsOpenContextMenu((open) => !open);
-      props.onSetSelectionFile();
+      onSetSelectionFile();
       contextMenuRef.current?.show(e);
     },
-    [props.onSetSelectionFile, setIsOpenContextMenu]
+    [onSetSelectionFile, setIsOpenContextMenu],
   );
 
   const onHide = useCallback(() => {
@@ -167,131 +163,174 @@ function Viewer(props: ViewerProps) {
       }
     }
 
-    props.onMaskClick();
+    onMaskClick();
   };
+
+  useEffect(() => {
+    return () => {
+      if (timerIDRef.current) clearTimeout(timerIDRef.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isOpenContextMenu) {
+      clearTimeout(timerIDRef.current);
+    }
+  }, [isOpenContextMenu]);
+
+  useEffect(() => {
+    resetToolbarVisibleTimer();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return;
+
+    document.addEventListener("mousemove", resetToolbarVisibleTimer, {
+      passive: true,
+    });
+
+    return () => {
+      document.removeEventListener("mousemove", resetToolbarVisibleTimer);
+      clearTimeout(timerIDRef.current);
+
+      if (isMobile) setPanelVisible(true);
+    };
+  }, [resetToolbarVisibleTimer, isMobile]);
 
   const mobileDetails = (
     <MobileDetails
-      onHide={onHide}
+      title={title}
+      icon={headerIcon}
       isError={isError}
-      title={props.title}
       ref={contextMenuRef}
-      icon={props.headerIcon}
+      isPreviewFile={isPreviewFile}
+      onHide={onHide}
+      contextModel={contextModel}
       onMaskClick={handleMaskClick}
-      contextModel={props.contextModel}
       onContextMenu={onMobileContextMenu}
-      isPreviewFile={props.isPreviewFile}
     />
   );
 
-  const isNotFirstElement = props.playlistPos !== 0;
-  const isNotLastElement = props.playlistPos < props.playlist.length - 1;
+  const isNotFirstElement = playlistPos !== 0;
+  const isNotLastElement = playlistPos < playlist.length - 1;
 
-  const targetFile = props.playlist[props.playlistPos];
+  const playlistFile = playlist[playlistPos];
 
   const isTiff =
-    targetFile?.fileExst === ".tiff" || targetFile.fileExst === ".tif";
+    playlistFile.fileExst === ".tiff" || playlistFile.fileExst === ".tif";
 
   return (
-    <StyledViewerContainer visible={props.visible}>
-      {!isFullscreen && !isMobile && panelVisible && !props.isPdf && (
-        <DesktopDetails title={props.title} onMaskClick={handleMaskClick} />
+    <StyledViewerContainer visible={visible}>
+      {!isFullscreen && !isMobile && panelVisible && !isPdf && (
+        <DesktopDetails title={title} onMaskClick={handleMaskClick} />
       )}
 
-      {props.playlist.length > 1 && !isFullscreen && !isMobile && (
+      {playlist.length > 1 && !isFullscreen && !isMobile && (
         <>
           {isNotFirstElement && !isPDFSidebarOpen && (
             <PrevButton prevClick={prevClick} />
           )}
           {isNotLastElement && (
-            <NextButton isPdfFIle={props.isPdf} nextClick={nextClick} />
+            <NextButton isPdfFIle={isPdf} nextClick={nextClick} />
           )}
         </>
       )}
 
-      {props.isImage
-        ? ReactDOM.createPortal(
+      {isImage ? (
+        <Portal
+          visible
+          element={
             <ImageViewer
-              panelVisible={panelVisible}
-              toolbar={props.toolbar}
-              src={isTiff ? props.fileUrl : targetFile.src}
               isTiff={isTiff}
-              thumbnailSrc={targetFile.thumbnailUrl}
-              imageId={targetFile.fileId}
-              version={targetFile.version}
+              devices={devices}
+              toolbar={toolbar}
+              errorTitle={errorTitle}
+              panelVisible={panelVisible}
               mobileDetails={mobileDetails}
-              onMask={props.onMaskClick}
-              onPrev={props.onPrevClick}
-              onNext={props.onNextClick}
+              imageId={playlistFile.fileId}
+              version={playlistFile.version}
               isLastImage={!isNotLastElement}
               isFistImage={!isNotFirstElement}
-              generateContextMenu={props.generateContextMenu}
+              thumbnailSrc={playlistFile.thumbnailUrl}
+              src={fileUrl}
+              onMask={onMaskClick}
+              onPrev={onPrevClick}
+              onNext={onNextClick}
+              contextModel={contextModel}
+              generateContextMenu={generateContextMenu}
               setIsOpenContextMenu={setIsOpenContextMenu}
               resetToolbarVisibleTimer={resetToolbarVisibleTimer}
-              contextModel={props.contextModel}
-              errorTitle={props.errorTitle}
+            />
+          }
+        />
+      ) : isVideo || isAudio ? (
+        <Portal
+          visible
+          element={
+            <ViewerPlayer
+              isError={isError}
+              src={fileUrl}
               devices={devices}
-            />,
-            containerRef.current
-          )
-        : props.isVideo || props.isAudio
-          ? ReactDOM.createPortal(
-              <ViewerPlayer
-                isError={isError}
-                canDownload={!!props.targetFile?.security.Download}
-                src={props.fileUrl}
-                thumbnailSrc={targetFile.thumbnailUrl}
-                isAudio={props.isAudio}
-                isVideo={props.isVideo}
-                panelVisible={panelVisible}
-                audioIcon={props.audioIcon}
-                isFullScreen={isFullscreen}
-                errorTitle={props.errorTitle}
+              isAudio={isAudio}
+              isVideo={isVideo}
+              audioIcon={audioIcon}
+              errorTitle={errorTitle}
+              panelVisible={panelVisible}
+              isFullScreen={isFullscreen}
+              isPreviewFile={isPreviewFile}
+              mobileDetails={mobileDetails}
+              isLastImage={!isNotLastElement}
+              isFistImage={!isNotFirstElement}
+              isOpenContextMenu={isOpenContextMenu}
+              thumbnailSrc={playlistFile.thumbnailUrl}
+              canDownload={!!targetFile?.security.Download}
+              onPrev={onPrevClick}
+              onNext={onNextClick}
+              setIsError={setIsError}
+              onMask={handleMaskClick}
+              contextModel={contextModel}
+              setPanelVisible={setPanelVisible}
+              setIsFullScreen={setIsFullScreen}
+              onDownloadClick={onDownloadClick}
+              generateContextMenu={generateContextMenu}
+              removeToolbarVisibleTimer={removeToolbarVisibleTimer}
+              removePanelVisibleTimeout={removePanelVisibleTimeout}
+              restartToolbarVisibleTimer={restartToolbarVisibleTimer}
+            />
+          }
+        />
+      ) : (
+        isPdf && (
+          <Portal
+            visible
+            element={
+              <PDFViewer
+                title={title}
+                toolbar={toolbar}
+                devices={devices}
+                src={fileUrl ?? ""}
                 mobileDetails={mobileDetails}
                 isLastImage={!isNotLastElement}
                 isFistImage={!isNotFirstElement}
-                isPreviewFile={props.isPreviewFile}
-                isOpenContextMenu={isOpenContextMenu}
-                setIsError={setIsError}
-                onMask={handleMaskClick}
-                onPrev={props.onPrevClick}
-                onNext={props.onNextClick}
-                setPanelVisible={setPanelVisible}
-                setIsFullScreen={setIsFullScreen}
-                contextModel={props.contextModel}
-                onDownloadClick={props.onDownloadClick}
-                generateContextMenu={props.generateContextMenu}
-                removeToolbarVisibleTimer={removeToolbarVisibleTimer}
-                removePanelVisibleTimeout={removePanelVisibleTimeout}
-                restartToolbarVisibleTimer={restartToolbarVisibleTimer}
-                devices={devices}
-              />,
-              containerRef.current
-            )
-          : props.isPdf &&
-            ReactDOM.createPortal(
-              <PDFViewer
-                src={props.fileUrl ?? ""}
-                title={props.title}
-                toolbar={props.toolbar}
-                onMask={handleMaskClick}
                 isPDFSidebarOpen={isPDFSidebarOpen}
-                mobileDetails={mobileDetails}
-                generateContextMenu={props.generateContextMenu}
+                onNext={onNextClick}
+                onPrev={onPrevClick}
+                onMask={handleMaskClick}
+                generateContextMenu={generateContextMenu}
                 setIsOpenContextMenu={setIsOpenContextMenu}
                 setIsPDFSidebarOpen={setIsPDFSidebarOpen}
-                isLastImage={!isNotLastElement}
-                isFistImage={!isNotFirstElement}
-                onPrev={props.onPrevClick}
-                onNext={props.onNextClick}
-                devices={devices}
-              />,
-              containerRef.current
-            )}
+              />
+            }
+          />
+        )
+      )}
     </StyledViewerContainer>
   );
 }
 
+// TODO: add type
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default inject<any>(({ auth }) => {
   const { currentDeviceType } = auth.settingsStore;
 

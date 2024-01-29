@@ -9,7 +9,7 @@ interface MobileDetailsProps {
 
   onHide: VoidFunction;
   onMaskClick: VoidFunction;
-  onContextMenu: (e: TouchEvent) => void;
+  onContextMenu: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => void;
 }
 
 export default MobileDetailsProps;

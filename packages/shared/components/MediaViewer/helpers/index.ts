@@ -76,18 +76,20 @@ export const isNullOrUndefined = (arg: unknown): arg is NullOrUndefined => {
 
 export const findNearestIndex = (
   items: PlaylistType[],
-  index: number
+  index: number,
 ): number => {
   if (!Array.isArray(items) || items.length === 0 || index < 0) {
     return -1;
   }
 
   let found = items[0].id;
-  for (const item of items) {
+
+  items.forEach((item) => {
     if (Math.abs(item.id - index) < Math.abs(found - index)) {
       found = item.id;
     }
-  }
+  });
+
   return found;
 };
 
@@ -100,11 +102,12 @@ export const convertToTwoDigitString = (time: number): string => {
 };
 
 export const formatTime = (time: number): string => {
-  if (isNullOrUndefined(time) || isNaN(time) || time <= 0) return "00:00";
+  if (isNullOrUndefined(time) || Number.isNaN(time) || time <= 0)
+    return "00:00";
 
-  let seconds: number = Math.floor(time % 60);
-  let minutes: number = Math.floor(time / 60) % 60;
-  let hours: number = Math.floor(time / 3600);
+  const seconds: number = Math.floor(time % 60);
+  const minutes: number = Math.floor(time / 60) % 60;
+  const hours: number = Math.floor(time / 3600);
 
   const convertedHours = convertToTwoDigitString(hours);
   const convertedMinutes = convertToTwoDigitString(minutes);
@@ -114,8 +117,4 @@ export const formatTime = (time: number): string => {
     return `${convertedMinutes}:${convertedSeconds}`;
   }
   return `${convertedHours}:${convertedMinutes}:${convertedSeconds}`;
-};
-
-export const compareTo = (a: number, b: number) => {
-  return Math.trunc(a) > Math.trunc(b);
 };

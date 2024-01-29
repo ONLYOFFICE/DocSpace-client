@@ -1,10 +1,10 @@
 import React from "react";
 
+import MediaPrevIcon from "PUBLIC_DIR/images/viewer.prew.react.svg";
 import {
   StyledButtonScroll,
   StyledSwitchToolbar,
-} from "../../StyledComponents";
-import MediaPrevIcon from "PUBLIC_DIR/images/viewer.prew.react.svg";
+} from "../../MediaViewer.styled";
 
 type PrevButtonProps = {
   prevClick: VoidFunction;

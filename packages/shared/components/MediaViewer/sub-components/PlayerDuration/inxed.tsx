@@ -1,6 +1,8 @@
+import React from "react";
+import styled from "styled-components";
+
 import { mobile } from "@docspace/shared/utils";
-import React, { forwardRef, useState } from "react";
-import styled, { css } from "styled-components";
+
 import { formatTime } from "../../helpers";
 
 const PlayerDurationWrapper = styled.div`

@@ -22,13 +22,7 @@ function PlayerMessageError({
   return (
     <div>
       <StyledMediaError>
-        {/*@ts-ignore*/}
-        <Text
-          fontSize="15px"
-          color={"#fff"}
-          textAlign="center"
-          className="title"
-        >
+        <Text fontSize="15px" color="#fff" textAlign="center" className="title">
           {errorTitle}
         </Text>
       </StyledMediaError>

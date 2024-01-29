@@ -377,7 +377,7 @@ function MediaViewer(props: MediaViewerProps): JSX.Element | undefined {
 
     if (!src) return onEmptyPlaylistError();
 
-    if (extension !== ".tif" && extension !== ".tiff" && src !== fileUrl) {
+    if (extension !== ".tif" && extension !== ".tiff") {
       TiffXMLHttpRequestRef.current?.abort();
       setFileUrl(src);
     }
@@ -397,7 +397,6 @@ function MediaViewer(props: MediaViewerProps): JSX.Element | undefined {
     setTitle(currentTitle);
   }, [
     files,
-    fileUrl,
     playlist,
     playlistPos,
     setBufferSelection,

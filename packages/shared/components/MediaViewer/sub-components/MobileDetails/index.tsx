@@ -1,14 +1,17 @@
 import React, { ForwardedRef, useMemo } from "react";
 
 import { Text } from "@docspace/shared/components/text";
-import { ContextMenu } from "@docspace/shared/components/context-menu";
+import {
+  ContextMenu,
+  TContextMenuRef,
+} from "@docspace/shared/components/context-menu";
 
-import { StyledMobileDetails } from "../../StyledComponents";
+import MediaContextMenu from "PUBLIC_DIR/images/vertical-dots.react.svg";
+import BackArrow from "PUBLIC_DIR/images/viewer.media.back.react.svg";
+
+import { StyledMobileDetails } from "../../MediaViewer.styled";
 
 import type MobileDetailsProps from "./MobileDetails.props";
-
-import BackArrow from "PUBLIC_DIR/images/viewer.media.back.react.svg";
-import MediaContextMenu from "PUBLIC_DIR/images/vertical-dots.react.svg";
 
 function MobileDetails(
   {
@@ -21,14 +24,14 @@ function MobileDetails(
     onContextMenu,
     contextModel,
   }: MobileDetailsProps,
-  ref: ForwardedRef<ContextMenu>
+  ref: ForwardedRef<TContextMenuRef>,
 ) {
   const contextMenuHeader = useMemo(
     () => ({
-      icon: icon,
-      title: title,
+      icon,
+      title,
     }),
-    [icon, title]
+    [icon, title],
   );
 
   return (
@@ -45,7 +48,8 @@ function MobileDetails(
           />
           <ContextMenu
             ref={ref}
-            withBackdrop={true}
+            model={[]}
+            withBackdrop
             onHide={onHide}
             header={contextMenuHeader}
             getContextModel={contextModel}
@@ -57,5 +61,5 @@ function MobileDetails(
 }
 
 export default React.memo(
-  React.forwardRef<ContextMenu, MobileDetailsProps>(MobileDetails)
+  React.forwardRef<TContextMenuRef, MobileDetailsProps>(MobileDetails),
 );

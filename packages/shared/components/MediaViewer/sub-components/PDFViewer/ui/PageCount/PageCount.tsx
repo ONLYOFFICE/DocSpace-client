@@ -6,14 +6,14 @@ import React, {
   useState,
 } from "react";
 import { isMobile } from "react-device-detect";
+
+import PanelReactSvg from "PUBLIC_DIR/images/panel.react.svg";
 import PageCountProps, { PageCountRef } from "./PageCount.props";
 import { PageCountWrapper } from "./PageCount.styled";
 
-import PanelReactSvg from "PUBLIC_DIR/images/panel.react.svg";
-
 function PageCount(
   { isPanelOpen, visible, className, setIsOpenMobileDrawer }: PageCountProps,
-  ref: ForwardedRef<PageCountRef>
+  ref: ForwardedRef<PageCountRef>,
 ) {
   const [pagesCount, setPagesCount] = useState<number>(0);
   const [pageNumber, setPageNumber] = useState<number>(0);

@@ -12,14 +12,12 @@ interface ViewerProps {
   isPdf: boolean;
 
   playlist: PlaylistType[];
-  inactive: boolean;
 
   audioIcon: string;
   errorTitle: string;
   headerIcon: string;
   toolbar: ReturnType<typeof getCustomToolbar>;
   playlistPos: number;
-  archiveRoom: boolean;
   isPreviewFile: boolean;
   onMaskClick: VoidFunction;
   onNextClick: VoidFunction;
@@ -29,7 +27,7 @@ interface ViewerProps {
   generateContextMenu: (
     isOpen: boolean,
     right?: string,
-    bottom?: string
+    bottom?: string,
   ) => JSX.Element;
   onSetSelectionFile: VoidFunction;
 

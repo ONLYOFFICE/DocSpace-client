@@ -5,6 +5,7 @@ import React, {
   useState,
 } from "react";
 
+import MediaContextMenu from "PUBLIC_DIR/images/vertical-dots.react.svg";
 import ImageViewerToolbarProps, {
   ImperativeHandle,
   ToolbarItemType,
@@ -16,8 +17,6 @@ import {
   ToolbarItem,
 } from "./imageViewerToolbar.styled";
 
-import MediaContextMenu from "PUBLIC_DIR/images/vertical-dots.react.svg";
-
 function ImageViewerToolbar(
   {
     toolbar,
@@ -27,23 +26,23 @@ function ImageViewerToolbar(
     generateContextMenu,
     setIsOpenContextMenu,
   }: ImageViewerToolbarProps,
-  ref: ForwardedRef<ImperativeHandle>
+  ref: ForwardedRef<ImperativeHandle>,
 ) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [percent, setPercent] = useState<number>(() =>
-    Math.round(percentValue * 100)
+    Math.round(percentValue * 100),
   );
 
   useImperativeHandle(
     ref,
     () => {
       return {
-        setPercentValue(percent) {
-          setPercent(Math.round(percent * 100));
+        setPercentValue(percentArg: number) {
+          setPercent(Math.round(percentArg * 100));
         },
       };
     },
-    []
+    [],
   );
 
   function getContextMenu(item: ToolbarItemType) {
@@ -59,7 +58,7 @@ function ImageViewerToolbar(
         data-key={item.key}
       >
         <div className="context" style={{ height: "16px" }}>
-          <MediaContextMenu size="scale" />
+          <MediaContextMenu />
         </div>
         {contextMenu}
       </ToolbarItem>
@@ -113,5 +112,5 @@ function ImageViewerToolbar(
 }
 
 export default forwardRef<ImperativeHandle, ImageViewerToolbarProps>(
-  ImageViewerToolbar
+  ImageViewerToolbar,
 );

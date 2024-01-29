@@ -17,7 +17,7 @@ export const getCustomToolbar = (
   targetFile: IFile,
   isEmptyContextMenu: boolean,
   onDeleteClick: VoidFunction,
-  onDownloadClick: VoidFunction
+  onDownloadClick: VoidFunction,
 ) => {
   return [
     {
@@ -26,7 +26,7 @@ export const getCustomToolbar = (
       actionType: ToolbarActionType.ZoomOut,
       render: (
         <div className="iconContainer zoomOut">
-          <MediaZoomOutIcon size="scale" />
+          <MediaZoomOutIcon />
         </div>
       ),
     },
@@ -39,7 +39,7 @@ export const getCustomToolbar = (
       actionType: ToolbarActionType.ZoomIn,
       render: (
         <div className="iconContainer zoomIn">
-          <MediaZoomInIcon size="scale" />
+          <MediaZoomInIcon />
         </div>
       ),
     },
@@ -48,7 +48,7 @@ export const getCustomToolbar = (
       actionType: ToolbarActionType.RotateLeft,
       render: (
         <div className="iconContainer rotateLeft">
-          <MediaRotateLeftIcon size="scale" />
+          <MediaRotateLeftIcon />
         </div>
       ),
     },
@@ -57,7 +57,7 @@ export const getCustomToolbar = (
       actionType: ToolbarActionType.RotateRight,
       render: (
         <div className="iconContainer rotateRight">
-          <MediaRotateRightIcon size="scale" />
+          <MediaRotateRightIcon />
         </div>
       ),
     },
@@ -67,7 +67,7 @@ export const getCustomToolbar = (
       noHover: true,
       render: (
         <div className="separator" style={{ height: "16px" }}>
-          <ViewerSeparator size="scale" />
+          <ViewerSeparator />
         </div>
       ),
       disabled: !targetFile.security.Download,
@@ -77,7 +77,7 @@ export const getCustomToolbar = (
       actionType: ToolbarActionType.Download,
       render: (
         <div className="iconContainer download" style={{ height: "16px" }}>
-          <MediaDownloadIcon size="scale" />
+          <MediaDownloadIcon />
         </div>
       ),
       onClick: onDownloadClick,
@@ -89,7 +89,7 @@ export const getCustomToolbar = (
       noHover: true,
       render: (
         <div className="separator" style={{ height: "16px" }}>
-          <ViewerSeparator size="scale" />
+          <ViewerSeparator />
         </div>
       ),
       disabled: isEmptyContextMenu,
@@ -104,7 +104,7 @@ export const getCustomToolbar = (
       actionType: 103,
       render: (
         <div className="iconContainer viewer-delete">
-          <MediaDeleteIcon size="scale" />
+          <MediaDeleteIcon />
         </div>
       ),
       onClick: onDeleteClick,
@@ -120,7 +120,7 @@ export const getPDFToolbar = (): ReturnType<typeof getCustomToolbar> => {
       actionType: ToolbarActionType.Panel,
       render: (
         <div className="iconContainer zoomOut panelToggle">
-          <PanelReactSvg size="scale" transform="rotate(180)" />
+          <PanelReactSvg transform="rotate(180)" />
         </div>
       ),
     },
@@ -130,7 +130,7 @@ export const getPDFToolbar = (): ReturnType<typeof getCustomToolbar> => {
       noHover: true,
       render: (
         <div className="separator" style={{ height: "16px" }}>
-          <ViewerSeparator size="scale" />
+          <ViewerSeparator />
         </div>
       ),
       disabled: false,
@@ -141,7 +141,7 @@ export const getPDFToolbar = (): ReturnType<typeof getCustomToolbar> => {
       actionType: ToolbarActionType.ZoomOut,
       render: (
         <div className="iconContainer zoomOut">
-          <MediaZoomOutIcon size="scale" />
+          <MediaZoomOutIcon />
         </div>
       ),
     },
@@ -154,7 +154,7 @@ export const getPDFToolbar = (): ReturnType<typeof getCustomToolbar> => {
       actionType: ToolbarActionType.ZoomIn,
       render: (
         <div className="iconContainer zoomIn">
-          <MediaZoomInIcon size="scale" />
+          <MediaZoomInIcon />
         </div>
       ),
     },
@@ -164,7 +164,7 @@ export const getPDFToolbar = (): ReturnType<typeof getCustomToolbar> => {
     //   noHover: true,
     //   render: (
     //     <div className="separator" style={{ height: "16px" }}>
-    //       <ViewerSeparator size="scale" />
+    //       <ViewerSeparator  />
     //     </div>
     //   ),
     // },
@@ -173,7 +173,7 @@ export const getPDFToolbar = (): ReturnType<typeof getCustomToolbar> => {
     //   actionType: ToolbarActionType.RotateLeft,
     //   render: (
     //     <div className="iconContainer rotateLeft">
-    //       <MediaRotateLeftIcon size="scale" />
+    //       <MediaRotateLeftIcon  />
     //     </div>
     //   ),
     // },
@@ -182,7 +182,7 @@ export const getPDFToolbar = (): ReturnType<typeof getCustomToolbar> => {
     //   actionType: ToolbarActionType.RotateRight,
     //   render: (
     //     <div className="iconContainer rotateRight">
-    //       <MediaRotateRightIcon size="scale" />
+    //       <MediaRotateRightIcon  />
     //     </div>
     //   ),
     // },
@@ -192,7 +192,7 @@ export const getPDFToolbar = (): ReturnType<typeof getCustomToolbar> => {
       noHover: true,
       render: (
         <div className="separator" style={{ height: "16px" }}>
-          <ViewerSeparator size="scale" />
+          <ViewerSeparator />
         </div>
       ),
       disabled: false,
@@ -200,6 +200,7 @@ export const getPDFToolbar = (): ReturnType<typeof getCustomToolbar> => {
     {
       key: "context-menu",
       actionType: -1,
+      disabled: false,
     },
   ];
 };

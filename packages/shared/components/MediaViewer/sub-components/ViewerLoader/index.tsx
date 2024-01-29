@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-const StyledLoaderWrapper = styled.div<Pick<ViewerLoader, "withBackground">>`
+const StyledLoaderWrapper = styled.div<
+  Pick<ViewerLoaderProps, "withBackground">
+>`
   position: fixed;
   inset: 0;
 
@@ -34,7 +36,7 @@ const StyledLoader = styled.div`
   }
 `;
 
-type ViewerLoader = {
+type ViewerLoaderProps = {
   isLoading: boolean;
   isError?: boolean;
   withBackground?: boolean;
@@ -46,8 +48,8 @@ export default function ViewerLoader({
   isError,
   isLoading,
   withBackground,
-}: ViewerLoader) {
-  if (!isLoading || isError) return <></>;
+}: ViewerLoaderProps) {
+  if (!isLoading || isError) return;
 
   return (
     <StyledLoaderWrapper withBackground={withBackground} onClick={onClick}>

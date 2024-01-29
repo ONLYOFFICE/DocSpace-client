@@ -10,7 +10,7 @@ function Bookmarks({ bookmarks, navigate }: BookmarksProps) {
       <List>
         {bookmarks.map((item, index) => {
           return (
-            <Item key={index}>
+            <Item key={item.page}>
               <Text onClick={() => navigate(index)}>{item.description}</Text>
             </Item>
           );

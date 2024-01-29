@@ -26,7 +26,7 @@ function MainPanel(
     onPrev,
     setZoom,
   }: MainPanelProps,
-  ref: ForwardedRef<HTMLDivElement>
+  ref: ForwardedRef<HTMLDivElement>,
 ) {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -83,7 +83,7 @@ function MainPanel(
         pinchOnWheel: false,
       },
       target: wrapperRef,
-    }
+    },
   );
 
   return (

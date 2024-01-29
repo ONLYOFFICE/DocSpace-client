@@ -1,40 +1,49 @@
 import { useGesture } from "@use-gesture/react";
-import { isDesktop as isDesktopDeviceDetect } from "react-device-detect";
 import { useSpring, config } from "@react-spring/web";
-import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
+import { isDesktop as isDesktopDeviceDetect } from "react-device-detect";
+import React, {
+  SyntheticEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
-import indexedDBHelper from "@docspace/shared/utils/indexedDBHelper";
 import { IndexedDBStores } from "@docspace/shared/enums";
+import indexedDBHelper from "@docspace/shared/utils/indexedDBHelper";
+import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
+
+import {
+  calculateAdjustBoundsUtils,
+  calculateAdjustImageUtil,
+  getBounds,
+  getImagePositionAndSize,
+} from "../../MediaViewer.utils";
+import type { Point } from "../../types";
 
 import ViewerLoader from "../ViewerLoader";
 import ImageViewerToolbar from "../ImageViewerToolbar";
+import { ToolbarActionType, KeyboardEventKeys } from "../../helpers";
+
+import {
+  ImperativeHandle,
+  ToolbarItemType,
+} from "../ImageViewerToolbar/ImageViewerToolbar.props";
+import PlayerMessageError from "../PlayerMessageError";
 
 import {
   Image,
   ImageViewerContainer,
   ImageWrapper,
 } from "./ImageViewer.styled";
-
 import ImageViewerProps from "./ImageViewer.props";
+
 import {
-  ImperativeHandle,
-  ToolbarItemType,
-} from "../ImageViewerToolbar/ImageViewerToolbar.props";
-import { ToolbarActionType, KeyboardEventKeys, compareTo } from "../../helpers";
-import PlayerMessageError from "../PlayerMessageError";
-import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
-
-const MaxScale = 5;
-const MinScale = 0.5;
-const DefaultSpeedScale = 0.5;
-const RatioWheel = 400;
-
-type BoundsType = {
-  top: number;
-  bottom: number;
-  right: number;
-  left: number;
-};
+  MaxScale,
+  MinScale,
+  RatioWheel,
+  DefaultSpeedScale,
+} from "./ImageViewer.constants";
 
 function ImageViewer({
   src,
@@ -87,32 +96,101 @@ function ImageViewer({
 
   const { isMobile, isDesktop } = devices;
 
-  useEffect(() => {
-    unmountRef.current = false;
+  const changeSource = React.useCallback(
+    (imageUrl: Blob | MediaSource) => {
+      if (!window.DocSpaceConfig?.imageThumbnails) return;
+      changeSourceTimeoutRef.current = setTimeout(() => {
+        if (imgRef.current && !unmountRef.current) {
+          if (!src) return;
 
-    window.addEventListener("resize", resize);
+          if (!isTiff) {
+            imgRef.current.src = URL.createObjectURL(imageUrl);
+          } else {
+            imgRef.current.src = src;
+          }
 
-    return () => {
-      setTimeoutIDTapRef.current && clearTimeout(setTimeoutIDTapRef.current);
-      window.removeEventListener("resize", resize);
-      unmountRef.current = true;
-    };
-  }, []);
+          setIsLoading(() => false);
+        }
+      }, 500);
+    },
+    [src, isTiff],
+  );
 
-  useEffect(() => {
-    if (unmountRef.current || isTiff) return;
-    setIsLoading(true);
-  }, [src]);
+  const loadImage = React.useCallback(async () => {
+    if (!src || !window.DocSpaceConfig.imageThumbnails) return;
 
-  useEffect(() => {
-    document.addEventListener("keydown", onKeyDown);
+    try {
+      const res = await fetch(src);
+      const blob = await res.blob();
 
-    return () => {
-      document.removeEventListener("keydown", onKeyDown);
-    };
-  }, []);
+      if (isTiff) {
+        return changeSource(blob);
+      }
 
-  const restartScaleAndSize = () => {
+      indexedDBHelper.addItem(IndexedDBStores.images, {
+        id: imageId,
+        src: blob,
+        created: new Date(),
+        version,
+      });
+
+      changeSource(blob);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+    }
+  }, [src, imageId, version, isTiff, changeSource]);
+
+  const resize = useCallback(() => {
+    if (!imgRef.current || isLoading) return;
+
+    const naturalWidth = imgRef.current.naturalWidth;
+    const naturalHeight = imgRef.current.naturalHeight;
+
+    const imagePositionAndSize = getImagePositionAndSize(
+      naturalWidth,
+      naturalHeight,
+      containerRef.current,
+    );
+    if (imagePositionAndSize) {
+      api.set(imagePositionAndSize);
+    }
+  }, [api, isLoading]);
+
+  const calculateAdjustImage = (point: Point, diffScale: number = 1) => {
+    return calculateAdjustImageUtil(
+      imgRef.current,
+      containerRef.current,
+      point,
+      diffScale,
+    );
+  };
+
+  const imageLoaded = useCallback(
+    (event: SyntheticEvent<HTMLImageElement, Event>) => {
+      const naturalWidth = (event.target as HTMLImageElement).naturalWidth;
+      const naturalHeight = (event.target as HTMLImageElement).naturalHeight;
+
+      const positionAndSize = getImagePositionAndSize(
+        naturalWidth,
+        naturalHeight,
+        containerRef.current,
+      );
+
+      if (!positionAndSize) return;
+
+      api.set({
+        ...positionAndSize,
+        scale: 1,
+        rotate: 0,
+      });
+
+      setIsLoading(false);
+    },
+    [api],
+  );
+
+  const restartScaleAndSize = useCallback(() => {
     if (!imgRef.current || style.scale.isAnimating) return;
 
     const naturalWidth = imgRef.current.naturalWidth;
@@ -120,7 +198,8 @@ function ImageViewer({
 
     const imagePositionAndSize = getImagePositionAndSize(
       naturalWidth,
-      naturalHeight
+      naturalHeight,
+      containerRef.current,
     );
 
     if (!imagePositionAndSize) return;
@@ -139,336 +218,55 @@ function ImageViewer({
       height,
       scale: 1,
     });
-  };
+  }, [api, style.scale]);
 
-  const changeSource = React.useCallback(
-    (src: any) => {
-      if (!window.DocSpaceConfig.imageThumbnails) return;
-      changeSourceTimeoutRef.current = setTimeout(() => {
-        if (imgRef.current && !unmountRef.current) {
-          if (!src) return;
-
-          if (!isTiff) {
-            imgRef.current.src = URL.createObjectURL(src);
-          } else {
-            imgRef.current.src = src;
-          }
-
-          setIsLoading(() => false);
-        }
-      }, 500);
+  const calculateAdjustBounds = useCallback(
+    (x: number, y: number, diffScale: number = 1, angle: number = 0) => {
+      const bounds = getBounds(
+        imgRef.current,
+        containerRef.current,
+        diffScale,
+        angle,
+      );
+      return calculateAdjustBoundsUtils(x, y, bounds);
     },
-    [src, isTiff, imageId]
+    [],
   );
 
-  React.useEffect(() => {
-    if (!window.DocSpaceConfig.imageThumbnails) return;
-    if (!thumbnailSrc) setIsLoading(true);
-  }, []);
+  const rotateImage = useCallback(
+    (dir: number) => {
+      if (style.rotate.isAnimating) return;
 
-  const loadImage = React.useCallback(async () => {
-    if (!src || !window.DocSpaceConfig.imageThumbnails) return;
+      const rotate = style.rotate.get() + dir * 90;
 
-    if (isTiff) {
-      return changeSource(src);
-    }
+      const point = calculateAdjustImage(
+        calculateAdjustBounds(style.x.get(), style.y.get(), 1, rotate),
+      );
 
-    const res = await fetch(src);
-    const blob = await res.blob();
+      api.start({
+        ...point,
+        rotate,
+        config: {
+          // easing: easings.easeInBack,
+          duration: 200,
+        },
+        onResolve(result) {
+          api.start({
+            ...calculateAdjustImage({
+              x: result.value.x,
+              y: result.value.y,
+            }),
+            config: {
+              duration: 100,
+            },
+          });
+        },
+      });
+    },
+    [api, calculateAdjustBounds, style.rotate, style.x, style.y],
+  );
 
-    indexedDBHelper.addItem(IndexedDBStores.images, {
-      id: imageId,
-      src: blob,
-      created: new Date(),
-      version,
-    });
-
-    changeSource(blob);
-  }, [src, imageId, version, isTiff, changeSource]);
-
-  useEffect(() => {
-    changeSourceTimeoutRef.current &&
-      clearTimeout(changeSourceTimeoutRef.current);
-  }, [src, version]);
-
-  useEffect(() => {
-    if (!imageId || thumbnailSrc || !window.DocSpaceConfig.imageThumbnails)
-      return;
-
-    indexedDBHelper.getItem(IndexedDBStores.images, imageId).then((result) => {
-      if (result && result.version === version) {
-        changeSource(result.src);
-      } else {
-        loadImage();
-      }
-    });
-  }, [src, imageId, version, isTiff, loadImage, changeSource, thumbnailSrc]);
-
-  function resize() {
-    if (!imgRef.current || isLoading) return;
-
-    const naturalWidth = imgRef.current.naturalWidth;
-    const naturalHeight = imgRef.current.naturalHeight;
-
-    const imagePositionAndSize = getImagePositionAndSize(
-      naturalWidth,
-      naturalHeight
-    );
-    if (imagePositionAndSize) {
-      api.set(imagePositionAndSize);
-    }
-  }
-
-  function getImagePositionAndSize(
-    imageNaturalWidth: number,
-    imageNaturalHeight: number
-  ) {
-    if (!containerRef.current) return;
-
-    const { width: containerWidth, height: containerHeight } =
-      containerRef.current.getBoundingClientRect();
-
-    let width = Math.min(containerWidth, imageNaturalWidth);
-    let height = (width / imageNaturalWidth) * imageNaturalHeight;
-
-    if (height > containerHeight) {
-      height = containerHeight;
-      width = (height / imageNaturalHeight) * imageNaturalWidth;
-    }
-    const x = (containerWidth - width) / 2;
-    const y = (containerHeight - height) / 2;
-
-    return { width, height, x, y };
-  }
-
-  function imageLoaded(event: SyntheticEvent<HTMLImageElement, Event>) {
-    const naturalWidth = (event.target as HTMLImageElement).naturalWidth;
-    const naturalHeight = (event.target as HTMLImageElement).naturalHeight;
-
-    const positionAndSize = getImagePositionAndSize(
-      naturalWidth,
-      naturalHeight
-    );
-
-    if (!positionAndSize) return;
-
-    api.set({
-      ...positionAndSize,
-      scale: 1,
-      rotate: 0,
-    });
-
-    setIsLoading(false);
-  }
-
-  const getSizeByAngle = (
-    width: number,
-    height: number,
-    angle: number
-  ): [number, number] => {
-    const { abs, cos, sin, PI } = Math;
-
-    const angleByRadians = (PI / 180) * angle;
-
-    const c = cos(angleByRadians);
-    const s = sin(angleByRadians);
-    const halfw = 0.5 * width;
-    const halfh = 0.5 * height;
-    const newWidth = 2 * (abs(c * halfw) + abs(s * halfh));
-    const newHeight = 2 * (abs(s * halfw) + abs(c * halfh));
-
-    return [newWidth, newHeight];
-  };
-
-  const getBounds = (
-    diffScale: number = 1,
-    angle: number = 0
-  ): BoundsType | null => {
-    if (!imgRef.current || !containerRef.current) return null;
-
-    let imageBounds = imgRef.current.getBoundingClientRect();
-    const containerBounds = containerRef.current.getBoundingClientRect();
-
-    const [width, height] = getSizeByAngle(
-      imageBounds.width,
-      imageBounds.height,
-      angle
-    );
-
-    if (diffScale !== 1)
-      imageBounds = {
-        ...imageBounds,
-        width: width * diffScale,
-        height: height * diffScale,
-      };
-    else {
-      imageBounds = {
-        ...imageBounds,
-        width,
-        height,
-      };
-    }
-    const originalWidth = imgRef.current.clientWidth;
-    const widthOverhang = (imageBounds.width - originalWidth) / 2;
-
-    const originalHeight = imgRef.current.clientHeight;
-    const heightOverhang = (imageBounds.height - originalHeight) / 2;
-
-    const isWidthOutContainer = imageBounds.width >= containerBounds.width;
-
-    const isHeightOutContainer = imageBounds.height >= containerBounds.height;
-
-    const bounds = {
-      right: isWidthOutContainer
-        ? widthOverhang
-        : containerBounds.width - imageBounds.width + widthOverhang,
-      left: isWidthOutContainer
-        ? -(imageBounds.width - containerBounds.width) + widthOverhang
-        : widthOverhang,
-      bottom: isHeightOutContainer
-        ? heightOverhang
-        : containerBounds.height - imageBounds.height + heightOverhang,
-      top: isHeightOutContainer
-        ? -(imageBounds.height - containerBounds.height) + heightOverhang
-        : heightOverhang,
-    };
-
-    return bounds;
-  };
-
-  const calculateAdjustBounds = (
-    x: number,
-    y: number,
-    diffScale: number = 1,
-    angle: number = 0
-  ) => {
-    const bounds = getBounds(diffScale, angle);
-
-    if (!bounds) return { x, y };
-
-    const { left, right, top, bottom } = bounds;
-
-    if (x > right) {
-      x = right;
-    } else if (x < left) {
-      x = left;
-    }
-
-    if (y > bottom) {
-      y = bottom;
-    } else if (y < top) {
-      y = top;
-    }
-
-    return { x, y };
-  };
-
-  const calculateAdjustImage = (
-    point: { x: number; y: number },
-    diffScale: number = 1
-  ) => {
-    if (!imgRef.current || !containerRef.current) return point;
-
-    // debugger;
-
-    let imageBounds = imgRef.current.getBoundingClientRect();
-    const containerBounds = containerRef.current.getBoundingClientRect();
-
-    if (diffScale !== 1) {
-      const { x, y, width, height } = imageBounds;
-
-      const newWidth = imageBounds.width * diffScale;
-      const newHeight = imageBounds.height * diffScale;
-
-      const newX = x + width / 2 - newWidth / 2;
-      const newY = y + height / 2 - newHeight / 2;
-
-      imageBounds = {
-        ...imageBounds,
-        width: newWidth,
-        height: newHeight,
-        left: newX,
-        top: newY,
-        right: newX + newWidth,
-        bottom: newY + newHeight,
-        x: newX,
-        y: newY,
-      };
-    }
-
-    const originalWidth = imgRef.current.clientWidth;
-    const widthOverhang = (imageBounds.width - originalWidth) / 2;
-
-    const originalHeight = imgRef.current.clientHeight;
-    const heightOverhang = (imageBounds.height - originalHeight) / 2;
-
-    const isWidthOutContainer = imageBounds.width >= containerBounds.width;
-
-    const isHeightOutContainer = imageBounds.height >= containerBounds.height;
-
-    if (
-      compareTo(imageBounds.left, containerBounds.left) &&
-      isWidthOutContainer
-    ) {
-      point.x = widthOverhang;
-    } else if (
-      compareTo(containerBounds.right, imageBounds.right) &&
-      isWidthOutContainer
-    ) {
-      point.x = containerBounds.width - imageBounds.width + widthOverhang;
-    } else if (!isWidthOutContainer) {
-      point.x = (containerBounds.width - imageBounds.width) / 2 + widthOverhang;
-    }
-
-    if (
-      compareTo(imageBounds.top, containerBounds.top) &&
-      isHeightOutContainer
-    ) {
-      point.y = heightOverhang;
-    } else if (
-      compareTo(containerBounds.bottom, imageBounds.bottom) &&
-      isHeightOutContainer
-    ) {
-      point.y = containerBounds.height - imageBounds.height + heightOverhang;
-    } else if (!isHeightOutContainer) {
-      point.y =
-        (containerBounds.height - imageBounds.height) / 2 + heightOverhang;
-    }
-
-    return point;
-  };
-
-  const rotateImage = (dir: number) => {
-    if (style.rotate.isAnimating) return;
-
-    const rotate = style.rotate.get() + dir * 90;
-
-    const point = calculateAdjustImage(
-      calculateAdjustBounds(style.x.get(), style.y.get(), 1, rotate)
-    );
-
-    api.start({
-      ...point,
-      rotate,
-      config: {
-        // easing: easings.easeInBack,
-        duration: 200,
-      },
-      onResolve(result) {
-        api.start({
-          ...calculateAdjustImage({
-            x: result.value.x,
-            y: result.value.y,
-          }),
-          config: {
-            duration: 100,
-          },
-        });
-      },
-    });
-  };
-
-  const zoomOut = () => {
+  const zoomOut = useCallback(() => {
     if (
       style.scale.isAnimating ||
       style.scale.get() <= MinScale ||
@@ -481,21 +279,24 @@ function ImageViewer({
     const { width: containerWidth, height: containerHeight } =
       containerRef.current.getBoundingClientRect();
 
-    const scale = Math.max(style.scale.get() - DefaultSpeedScale, MinScale);
+    const scaleCurrent = Math.max(
+      style.scale.get() - DefaultSpeedScale,
+      MinScale,
+    );
 
     const tx = ((containerWidth - width) / 2 - x) / style.scale.get();
     const ty = ((containerHeight - height) / 2 - y) / style.scale.get();
 
-    let dx = style.x.get() + DefaultSpeedScale * tx;
-    let dy = style.y.get() + DefaultSpeedScale * ty;
+    const dx = style.x.get() + DefaultSpeedScale * tx;
+    const dy = style.y.get() + DefaultSpeedScale * ty;
 
-    const ratio = scale / style.scale.get();
+    const ratio = scaleCurrent / style.scale.get();
 
     const point = calculateAdjustImage(calculateAdjustBounds(dx, dy, ratio));
-    toolbarRef.current?.setPercentValue(scale);
+    toolbarRef.current?.setPercentValue(scaleCurrent);
 
     api.start({
-      scale,
+      scale: scaleCurrent,
       ...point,
       config: {
         duration: 300,
@@ -513,9 +314,9 @@ function ImageViewer({
         });
       },
     });
-  };
+  }, [api, calculateAdjustBounds, style.scale, style.x, style.y]);
 
-  const zoomIn = () => {
+  const zoomIn = useCallback(() => {
     if (
       style.scale.isAnimating ||
       style.scale.get() >= MaxScale ||
@@ -534,75 +335,66 @@ function ImageViewer({
     const dx = style.x.get() - DefaultSpeedScale * tx;
     const dy = style.y.get() - DefaultSpeedScale * ty;
 
-    const scale = Math.min(style.scale.get() + DefaultSpeedScale, MaxScale);
-    toolbarRef.current?.setPercentValue(scale);
+    const scaleCurrent = Math.min(
+      style.scale.get() + DefaultSpeedScale,
+      MaxScale,
+    );
+    toolbarRef.current?.setPercentValue(scaleCurrent);
     api.start({
       x: dx,
       y: dy,
-      scale,
+      scale: scaleCurrent,
       config: {
         duration: 300,
       },
     });
-  };
+  }, [api, style.scale, style.x, style.y]);
 
-  const onKeyDown = (event: KeyboardEvent) => {
-    const { code, ctrlKey } = event;
+  const onKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      const { code, ctrlKey } = event;
 
-    const someDialogIsOpen = checkDialogsOpen();
-    if (someDialogIsOpen) return;
+      const someDialogIsOpen = checkDialogsOpen();
+      if (someDialogIsOpen) return;
 
-    switch (code) {
-      case KeyboardEventKeys.ArrowLeft:
-      case KeyboardEventKeys.ArrowRight:
-        if (document.fullscreenElement) return;
-        if (ctrlKey) {
-          const dir = code === KeyboardEventKeys.ArrowRight ? 1 : -1;
-          rotateImage(dir);
-        }
-        break;
-      case KeyboardEventKeys.ArrowUp:
-      case KeyboardEventKeys.NumpadAdd:
-      case KeyboardEventKeys.Equal:
-        zoomIn();
-        break;
-      case KeyboardEventKeys.ArrowDown:
-      case KeyboardEventKeys.NumpadSubtract:
-      case KeyboardEventKeys.Minus:
-        zoomOut();
-        break;
-      case KeyboardEventKeys.Digit1:
-      case KeyboardEventKeys.Numpad1:
-        if (ctrlKey) {
-          restartScaleAndSize();
-        }
-        break;
-      default:
-        break;
-    }
-  };
-
-  const handleDoubleTapOrClick = (
-    event:
-      | TouchEvent
-      | MouseEvent
-      | React.MouseEvent<HTMLImageElement, MouseEvent>
-  ) => {
-    if (style.scale.isAnimating) return;
-
-    if (style.scale.get() !== 1) {
-      restartScaleAndSize();
-    } else {
-      zoomOnDoubleTap(event);
-    }
-  };
+      switch (code) {
+        case KeyboardEventKeys.ArrowLeft:
+        case KeyboardEventKeys.ArrowRight:
+          if (document.fullscreenElement) return;
+          if (ctrlKey) {
+            const dir = code === KeyboardEventKeys.ArrowRight ? 1 : -1;
+            rotateImage(dir);
+          }
+          break;
+        case KeyboardEventKeys.ArrowUp:
+        case KeyboardEventKeys.NumpadAdd:
+        case KeyboardEventKeys.Equal:
+          zoomIn();
+          break;
+        case KeyboardEventKeys.ArrowDown:
+        case KeyboardEventKeys.NumpadSubtract:
+        case KeyboardEventKeys.Minus:
+          zoomOut();
+          break;
+        case KeyboardEventKeys.Digit1:
+        case KeyboardEventKeys.Numpad1:
+          if (ctrlKey) {
+            restartScaleAndSize();
+          }
+          break;
+        default:
+          break;
+      }
+    },
+    [restartScaleAndSize, rotateImage, zoomIn, zoomOut],
+  );
 
   const zoomOnDoubleTap = (
     event:
       | TouchEvent
       | MouseEvent
       | React.MouseEvent<HTMLImageElement, MouseEvent>,
-    scale = 1
+    scaleArg = 1,
   ) => {
     if (
       !imgRef.current ||
@@ -620,15 +412,15 @@ function ImageViewer({
     const tx = (pageX - (x + width / 2)) / style.scale.get();
     const ty = (pageY - (y + height / 2)) / style.scale.get();
 
-    const dx = style.x.get() - scale * tx;
-    const dy = style.y.get() - scale * ty;
+    const dx = style.x.get() - scaleArg * tx;
+    const dy = style.y.get() - scaleArg * ty;
 
-    const newScale = Math.min(style.scale.get() + scale, MaxScale);
+    const newScale = Math.min(style.scale.get() + scaleArg, MaxScale);
     const ratio = newScale / style.scale.get();
 
     const point = calculateAdjustImage(
       calculateAdjustBounds(dx, dy, ratio),
-      ratio
+      ratio,
     );
 
     toolbarRef.current?.setPercentValue(newScale);
@@ -644,6 +436,21 @@ function ImageViewer({
         api.start(calculateAdjustImage(calculateAdjustBounds(dx, dy, 1)));
       },
     });
+  };
+
+  const handleDoubleTapOrClick = (
+    event:
+      | TouchEvent
+      | MouseEvent
+      | React.MouseEvent<HTMLImageElement, MouseEvent>,
+  ) => {
+    if (style.scale.isAnimating) return;
+
+    if (style.scale.get() !== 1) {
+      restartScaleAndSize();
+    } else {
+      zoomOnDoubleTap(event);
+    }
   };
 
   useGesture(
@@ -700,7 +507,8 @@ function ImageViewer({
         if (style.scale.get() === 1 && !isDesktop) {
           if (mdx < -imgRef.current.width / 4) {
             return onNext();
-          } else if (mdx > imgRef.current.width / 4) {
+          }
+          if (mdx > imgRef.current.width / 4) {
             return onPrev();
           }
           if (mdy > 150) {
@@ -779,7 +587,7 @@ function ImageViewer({
                   x: result.value.x,
                   y: result.value.y,
                 },
-                ratio
+                ratio,
               ),
               delay: 0,
               config: {
@@ -805,7 +613,7 @@ function ImageViewer({
                 startAngleRef.current +
                   90 *
                     Math.max(Math.trunc(Math.abs(mRotate) / 90), 1) *
-                    dirRotate
+                    dirRotate,
               )
             : startAngleRef.current;
 
@@ -863,7 +671,7 @@ function ImageViewer({
         const time = new Date().getTime();
 
         if (time - lastTapTimeRef.current < 300) {
-          //on Double Tap
+          // on Double Tap
           lastTapTimeRef.current = 0;
           isDoubleTapRef.current = true;
 
@@ -912,7 +720,7 @@ function ImageViewer({
 
         const point = calculateAdjustImage(
           calculateAdjustBounds(dx, dy, ratio),
-          ratio
+          ratio,
         );
         toolbarRef.current?.setPercentValue(dScale);
         api.start({
@@ -925,8 +733,8 @@ function ImageViewer({
           onResolve(result) {
             api.start(
               calculateAdjustImage(
-                calculateAdjustBounds(result.value.x, result.value.y)
-              )
+                calculateAdjustBounds(result.value.x, result.value.y),
+              ),
             );
           },
         });
@@ -942,7 +750,7 @@ function ImageViewer({
         bounds: () => {
           if (style.scale.get() === 1 && !isDesktop) return {};
 
-          return getBounds() ?? {};
+          return getBounds(imgRef.current, containerRef.current) ?? {};
         },
       },
       pinch: {
@@ -963,45 +771,113 @@ function ImageViewer({
       },
 
       target: containerRef,
-    }
+    },
   );
 
-  const handleAction = (action: ToolbarActionType) => {
-    resetToolbarVisibleTimer();
+  const handleToolbarAction = useCallback(
+    (action: ToolbarActionType) => {
+      resetToolbarVisibleTimer();
 
-    switch (action) {
-      case ToolbarActionType.ZoomOut:
-        zoomOut();
-        break;
-      case ToolbarActionType.ZoomIn:
-        zoomIn();
-        break;
+      switch (action) {
+        case ToolbarActionType.ZoomOut:
+          zoomOut();
+          break;
+        case ToolbarActionType.ZoomIn:
+          zoomIn();
+          break;
 
-      case ToolbarActionType.RotateLeft:
-      case ToolbarActionType.RotateRight:
-        const dir = action === ToolbarActionType.RotateRight ? 1 : -1;
-        rotateImage(dir);
-        break;
-      case ToolbarActionType.Reset:
-        restartScaleAndSize();
-        break;
-      default:
-        break;
-    }
-  };
+        case ToolbarActionType.RotateLeft:
+        case ToolbarActionType.RotateRight: {
+          const dir = action === ToolbarActionType.RotateRight ? 1 : -1;
+          rotateImage(dir);
+          break;
+        }
+        case ToolbarActionType.Reset:
+          restartScaleAndSize();
+          break;
+        default:
+          break;
+      }
+    },
+    [
+      resetToolbarVisibleTimer,
+      restartScaleAndSize,
+      rotateImage,
+      zoomIn,
+      zoomOut,
+    ],
+  );
 
-  function toolbarEvent(item: ToolbarItemType) {
+  const toolbarEvent = (item: ToolbarItemType) => {
     if (item.onClick) {
       item.onClick();
     } else {
-      handleAction(item.actionType);
+      handleToolbarAction(item.actionType);
     }
-  }
-  const onError = () => {
-    setIsError(true);
   };
 
+  const onError = useCallback(() => {
+    setIsError(true);
+  }, []);
+
   const model = React.useMemo(contextModel, [contextModel]);
+
+  useEffect(() => {
+    unmountRef.current = false;
+
+    return () => {
+      if (setTimeoutIDTapRef.current) clearTimeout(setTimeoutIDTapRef.current);
+      unmountRef.current = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("resize", resize);
+    return () => {
+      window.removeEventListener("resize", resize);
+    };
+  }, [resize]);
+
+  useEffect(() => {
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [onKeyDown]);
+
+  useEffect(() => {
+    if (unmountRef.current || (isTiff && src)) return;
+
+    setIsLoading(true);
+    setIsError(false);
+  }, [src, isTiff]);
+
+  useEffect(() => {
+    if (!window.DocSpaceConfig.imageThumbnails) return;
+
+    if (!thumbnailSrc) setIsLoading(true);
+  }, [thumbnailSrc]);
+
+  useEffect(() => {
+    if (changeSourceTimeoutRef.current)
+      clearTimeout(changeSourceTimeoutRef.current);
+  }, [src, version]);
+
+  useEffect(() => {
+    if (!imageId || thumbnailSrc || !window.DocSpaceConfig.imageThumbnails)
+      return;
+
+    indexedDBHelper
+      .getItem(IndexedDBStores.images, imageId)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .then((result: any) => {
+        if (result && result.version === version) {
+          changeSource(result.src);
+        } else {
+          loadImage();
+        }
+      });
+  }, [src, imageId, version, isTiff, loadImage, changeSource, thumbnailSrc]);
 
   return (
     <>
@@ -1013,6 +889,7 @@ function ImageViewer({
         {isError ? (
           <PlayerMessageError
             model={model}
+            isMobile={isMobile}
             onMaskClick={onMask}
             errorTitle={errorTitle}
           />

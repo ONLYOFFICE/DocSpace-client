@@ -1,14 +1,14 @@
 import React, { memo } from "react";
 
+import IconVolumeMax from "PUBLIC_DIR/images/media.volumemax.react.svg";
+import IconVolumeMuted from "PUBLIC_DIR/images/media.volumeoff.react.svg";
+import IconVolumeMin from "PUBLIC_DIR/images/media.volumemin.react.svg";
+
 import {
   IconWrapper,
   PlayerVolumeControlWrapper,
   VolumeWrapper,
 } from "./PlayerVolumeControl.styled";
-
-import IconVolumeMax from "PUBLIC_DIR/images/media.volumemax.react.svg";
-import IconVolumeMuted from "PUBLIC_DIR/images/media.volumeoff.react.svg";
-import IconVolumeMin from "PUBLIC_DIR/images/media.volumemin.react.svg";
 
 type PlayerVolumeControlProps = {
   volume: number;

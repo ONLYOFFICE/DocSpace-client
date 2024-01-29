@@ -1,10 +1,10 @@
 import React from "react";
 
+import MediaNextIcon from "PUBLIC_DIR/images/viewer.next.react.svg";
 import {
   StyledButtonScroll,
   StyledSwitchToolbar,
-} from "../../StyledComponents";
-import MediaNextIcon from "PUBLIC_DIR/images/viewer.next.react.svg";
+} from "../../MediaViewer.styled";
 
 type NextButtonProps = {
   nextClick: VoidFunction;

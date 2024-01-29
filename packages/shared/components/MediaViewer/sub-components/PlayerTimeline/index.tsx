@@ -49,8 +49,8 @@ function PlayerTimeline({
       offsetX < 20
         ? 20
         : offsetX > clientWidth - 20
-        ? clientWidth - 20
-        : offsetX;
+          ? clientWidth - 20
+          : offsetX;
 
     timelineTooltipRef.current.style.left = `${left}px`;
     timelineTooltipRef.current.innerText = formatTime(time);
@@ -61,7 +61,7 @@ function PlayerTimeline({
   };
 
   const handleMouseMove = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) => {
     if (
       !timelineTooltipRef.current ||
@@ -83,8 +83,8 @@ function PlayerTimeline({
       offsetX < 20
         ? 20
         : offsetX > clientWidth - 20
-        ? clientWidth - 20
-        : offsetX;
+          ? clientWidth - 20
+          : offsetX;
 
     timelineTooltipRef.current.style.left = `${left}px`;
     timelineTooltipRef.current.innerText = formatTime(percent);

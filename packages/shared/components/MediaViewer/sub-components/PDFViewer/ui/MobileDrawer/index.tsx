@@ -3,6 +3,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDrag } from "@use-gesture/react";
 import { useSpring, config } from "@react-spring/web";
 
+import ViewTilesIcon from "PUBLIC_DIR/images/view-tiles.react.svg";
+import ViewRowsIcon from "PUBLIC_DIR/images/view-rows.react.svg";
+import CrossIcon from "PUBLIC_DIR/images/cross.react.svg";
 import Bookmarks from "../Bookmarks";
 
 import {
@@ -13,10 +16,6 @@ import {
 import { Thumbnails } from "../SideBar/Sidebar.styled";
 
 import MobileDrawerProps from "./MobileDrawer.props";
-
-import ViewTilesIcon from "PUBLIC_DIR/images/view-tiles.react.svg";
-import ViewRowsIcon from "PUBLIC_DIR/images/view-rows.react.svg";
-import CrossIcon from "PUBLIC_DIR/images/cross.react.svg";
 
 function MobileDrawer({
   bookmarks,
@@ -112,7 +111,7 @@ function MobileDrawer({
       filterTaps: true,
       bounds: { top: 0 },
       rubberband: true,
-    }
+    },
   );
 
   const handleClickOutside = (event: TouchEvent) => {

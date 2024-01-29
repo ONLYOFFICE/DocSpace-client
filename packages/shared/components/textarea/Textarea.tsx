@@ -128,7 +128,6 @@ const Textarea = ({
           </Numeration>
         )}
         <StyledTextarea
-          heightTextAreaProp={textareaHeight}
           id={id}
           paddingLeftProp={paddingLeftProp}
           isJSONField={isJSONField}

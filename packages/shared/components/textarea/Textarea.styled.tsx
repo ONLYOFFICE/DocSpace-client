@@ -72,13 +72,11 @@ const ClearTextareaAutosize = React.forwardRef(
       paddingLeftProp,
       isJSONField,
       enableCopy,
-      heightTextAreaProp,
       heightTextArea,
       ...props
     }: TextareaProps & {
       disabled?: boolean;
       readOnly?: boolean;
-      heightTextAreaProp?: number;
     },
     ref: React.Ref<HTMLTextAreaElement>,
   ) => <TextareaAutosize {...props} ref={ref} />,

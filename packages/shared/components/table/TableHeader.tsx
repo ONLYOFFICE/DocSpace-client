@@ -1301,7 +1301,7 @@ class TableHeader extends React.Component<
         setHideColumns(hideColumnsConst);
       }
 
-      if (hideColumns) {
+      if (hideColumnsConst) {
         tableInfoPanelContainer.forEach((item, index) => {
           const column = document.getElementById(`column_${index}`);
 

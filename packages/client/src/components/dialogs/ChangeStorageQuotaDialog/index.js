@@ -1,6 +1,6 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
@@ -9,6 +9,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { setTenantQuotaSettings } from "@docspace/shared/api/settings";
 
 import QuotaForm from "../../../components/QuotaForm";
+import StyledModalDialog from "./StyledComponent";
 
 const ChangeStorageQuotaDialog = (props) => {
   const {
@@ -25,7 +26,26 @@ const ChangeStorageQuotaDialog = (props) => {
   const [isError, setIsError] = useState(false);
   const [size, setSize] = useState("");
 
+  useEffect(() => {
+    document.addEventListener("keyup", onKeyUpHandler, false);
+
+    return () => {
+      document.removeEventListener("keyup", onKeyUpHandler, false);
+    };
+  }, [size]);
+
+  const isSizeError = () => {
+    if (size.trim() === "") {
+      setIsError(true);
+      return true;
+    }
+
+    return false;
+  };
   const onSaveClick = async () => {
+    if (isSizeError()) return;
+
+    isError && setIsError(false);
     setIsLoading(true);
 
     try {
@@ -38,7 +58,7 @@ const ChangeStorageQuotaDialog = (props) => {
     } catch (e) {
       toastr.error(e);
     }
-
+    setSize("");
     onSave && onSave();
     setIsLoading(false);
   };
@@ -46,9 +66,25 @@ const ChangeStorageQuotaDialog = (props) => {
   const onSetQuotaBytesSize = (bytes) => {
     setSize(bytes);
   };
+  const onKeyUpHandler = (e) => {
+    if (e.keyCode === 13 || e.which === 13) {
+      if (isSizeError()) return;
+
+      onSaveClick();
+      setSize("");
+      setIsError(false);
+
+      return;
+    }
+  };
+  const onCloseClick = () => {
+    setSize("");
+    setIsError(false);
+    onClose && onClose();
+  };
 
   return (
-    <ModalDialog visible={isVisible} onClose={onClose}>
+    <StyledModalDialog visible={isVisible} onClose={onCloseClick}>
       <ModalDialog.Header>{t("Common:DisableStorageQuota")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text noSelect>
@@ -60,7 +96,7 @@ const ChangeStorageQuotaDialog = (props) => {
           <QuotaForm
             onSetQuotaBytesSize={onSetQuotaBytesSize}
             isLoading={isLoading}
-            // isError={isError}
+            isError={isError}
             initialSize={initialSize}
             isAutoFocussed
           />
@@ -78,12 +114,12 @@ const ChangeStorageQuotaDialog = (props) => {
         <Button
           label={t("Common:CancelButton")}
           size="normal"
-          onClick={onClose}
+          onClick={onCloseClick}
           isDisabled={isLoading}
           scale
         />
       </ModalDialog.Footer>
-    </ModalDialog>
+    </StyledModalDialog>
   );
 };
 

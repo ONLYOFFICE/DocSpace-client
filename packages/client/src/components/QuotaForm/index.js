@@ -81,7 +81,10 @@ const QuotaForm = ({
   const onSelectComboBox = (option) => {
     const { key } = option;
 
-    onSetQuotaBytesSize && onSetQuotaBytesSize(conversionToBytes(size, key));
+    size.trim() !== "" &&
+      onSetQuotaBytesSize &&
+      onSetQuotaBytesSize(conversionToBytes(size, key));
+
     setPower(key);
   };
 

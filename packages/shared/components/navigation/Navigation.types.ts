@@ -60,6 +60,8 @@ export interface IControlButtonProps {
   isPublicRoom?: boolean;
   isTrashFolder?: boolean;
   isMobile?: boolean;
+  tariffBar?: React.ReactNode;
+  title?: string;
 }
 
 export interface ITextProps {

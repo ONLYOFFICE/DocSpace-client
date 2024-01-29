@@ -1003,3 +1003,13 @@ export function checkRecalculateQuota() {
     url: `/settings/checkrecalculatequota`,
   });
 }
+
+export function setTenantQuotaSettings(data) {
+  const options = {
+    method: "put",
+    url: `/settings/tenantquotasettings`,
+    data,
+  };
+
+  return request(options);
+}

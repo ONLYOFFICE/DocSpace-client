@@ -7,6 +7,7 @@ import { Text } from "@docspace/shared/components/text";
 import { getConvertedSize } from "@docspace/shared/utils/common";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { ContextMenu } from "@docspace/shared/components/context-menu";
+import { toastr } from "@docspace/shared/components/toast";
 
 import Diagram from "./sub-components/Diagram";
 import RecalculateButton from "./sub-components/RecalculateButton";
@@ -18,26 +19,43 @@ import {
 import { ChangeQuotaDialog } from "SRC_DIR/components/dialogs";
 import ChangQuotaReactSvgUrl from "PUBLIC_DIR/images/change.quota.react.svg?url";
 import DisableQuotaReactSvgUrl from "PUBLIC_DIR/images/disable.quota.react.svg?url";
+import { setTenantQuotaSettings } from "@docspace/shared/api/settings";
 
 const DiskSpaceUsedComponent = (props) => {
   const {
     usedTotalStorageSizeCount,
     maxTotalSizeByQuota,
     standalone,
-    isSetQuota,
+    portalInfo,
   } = props;
 
   const { t } = useTranslation("Settings");
   const [isVisibleDialog, setIsVisibleChangeQuotaDialog] = useState();
   const [size, setSize] = useState();
+  const [isLoading, setIsLoading] = useState();
 
   const usedSize = getConvertedSize(t, usedTotalStorageSizeCount);
-  const totalSize = getConvertedSize(t, maxTotalSizeByQuota);
+  const totalSize =
+    maxTotalSizeByQuota > 0 ? getConvertedSize(t, maxTotalSizeByQuota) : null;
 
   const onClick = () => {
     setIsVisibleChangeQuotaDialog(true);
   };
-  const onSaveClick = () => {
+  const onSaveClick = async () => {
+    setIsLoading(true);
+
+    try {
+      await setTenantQuotaSettings({
+        TenantId: portalInfo.tenantId,
+        Quota: size,
+      });
+
+      toastr.success(t("Common:StorageQuotaSet"));
+    } catch (e) {
+      toastr.error(e);
+    }
+
+    setIsLoading(false);
     setIsVisibleChangeQuotaDialog(false);
   };
 
@@ -71,6 +89,8 @@ const DiskSpaceUsedComponent = (props) => {
     ref.current.show(e);
   };
 
+  const unlimitedStorageSize = maxTotalSizeByQuota === -1;
+
   return (
     <StyledDiscSpaceUsedComponent>
       <ChangeQuotaDialog
@@ -78,6 +98,7 @@ const DiskSpaceUsedComponent = (props) => {
         onSaveClick={onSaveClick}
         onCloseClick={onCloseClick}
         onSetQuotaBytesSize={onSetQuotaBytesSize}
+        isLoading={isLoading}
         isDiskSpace
       />
       <StyledMainTitle fontSize="16px" fontWeight={700}>
@@ -85,7 +106,7 @@ const DiskSpaceUsedComponent = (props) => {
       </StyledMainTitle>
       <div className="disk-space_content">
         <div className="disk-space_size-info">
-          {(!standalone || (standalone && isSetQuota)) && (
+          {(!standalone || (standalone && !unlimitedStorageSize)) && (
             <Text
               fontWeight={700}
               fontSize={"14px"}
@@ -101,7 +122,7 @@ const DiskSpaceUsedComponent = (props) => {
               size: usedSize,
             })}
           </Text>
-          {standalone && !isSetQuota && (
+          {standalone && unlimitedStorageSize && (
             <ColorTheme
               themeId={ThemeId.Link}
               fontWeight={700}
@@ -112,15 +133,17 @@ const DiskSpaceUsedComponent = (props) => {
             </ColorTheme>
           )}
         </div>
-        <div className="disk-space_icon">
-          <ContextMenu ref={ref} getContextModel={getContextModel} />
-          <ContextMenuButton
-            onClick={onClickContextMenu}
-            getData={getContextModel}
-            directionX="right"
-            displayType="toggle"
-          />
-        </div>
+        {!unlimitedStorageSize && (
+          <div className="disk-space_icon">
+            <ContextMenu ref={ref} getContextModel={getContextModel} />
+            <ContextMenuButton
+              onClick={onClickContextMenu}
+              getData={getContextModel}
+              directionX="right"
+              displayType="toggle"
+            />
+          </div>
+        )}
       </div>
       <Diagram />
       <RecalculateButton />
@@ -128,18 +151,16 @@ const DiskSpaceUsedComponent = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
+export default inject(({ auth, storageManagement }) => {
   const { currentQuotaStore, settingsStore } = auth;
   const { maxTotalSizeByQuota, usedTotalStorageSizeCount } = currentQuotaStore;
-
+  const { portalInfo } = storageManagement;
   const { standalone } = settingsStore;
-
-  const isSetQuota = true;
 
   return {
     maxTotalSizeByQuota,
     usedTotalStorageSizeCount,
-    isSetQuota,
+    portalInfo,
     standalone,
   };
 })(observer(DiskSpaceUsedComponent));

@@ -484,7 +484,7 @@ export const getSpaceQuotaAsText = (
   t,
   usedSpace,
   quotaLimit,
-  isDefaultQuotaSet
+  isDefaultQuotaSet,
 ) => {
   const usedValue = getConvertedQuota(t, usedSpace);
   const quotaValue = getConvertedQuota(t, quotaLimit);
@@ -494,9 +494,10 @@ export const getSpaceQuotaAsText = (
   return usedValue;
 };
 
-export const conversionToBytes = (size, power) =>
-  Math.floor(size) * Math.pow(1024, power);
-
+export const conversionToBytes = (size, power) => {
+  const value = Math.floor(size) * Math.pow(1024, power);
+  return value.toString();
+};
 
 export const getBgPattern = (colorSchemeId: number | undefined) => {
   switch (colorSchemeId) {
@@ -686,7 +687,7 @@ export const toUrlParams = (
 
     if (str !== "") {
       str += "&";
-  }
+    }
 
     const item = obj[key];
 
@@ -758,9 +759,9 @@ export const getSystemTheme = () => {
       ? ThemeKeys.DarkStr
       : ThemeKeys.BaseStr
     : window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? ThemeKeys.DarkStr
-    : ThemeKeys.BaseStr;
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? ThemeKeys.DarkStr
+      : ThemeKeys.BaseStr;
 };
 
 export const getEditorTheme = (theme: ThemeKeys) => {

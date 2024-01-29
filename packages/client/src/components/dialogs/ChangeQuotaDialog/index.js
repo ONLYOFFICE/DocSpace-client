@@ -17,13 +17,14 @@ const ChangeQuotaDialog = (props) => {
     isError,
     isLoading,
     initialSize,
+    size,
   } = props;
   const { t } = useTranslation("Common");
   return (
     <StyledModalDialog visible={visible} onClose={onCloseClick}>
       <ModalDialog.Header>{t("Common:ChangeQuota")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect={true}>{t("Common:SetQuotaStorageLimit")}</Text>
+        <Text noSelect>{t("Common:SetQuotaStorageLimit")}</Text>
         <QuotaForm
           onSetQuotaBytesSize={onSetQuotaBytesSize}
           isLoading={isLoading}
@@ -39,6 +40,7 @@ const ChangeQuotaDialog = (props) => {
           primary
           onClick={onSaveClick}
           isLoading={isLoading}
+          isDisabled={initialSize === size}
           scale
         />
         <Button

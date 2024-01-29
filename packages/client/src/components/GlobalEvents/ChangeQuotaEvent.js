@@ -25,13 +25,14 @@ const ChangeQuotaEvent = (props) => {
     getPeopleListItem,
     setInfoPanelSelection,
   } = props;
+
   const { t } = useTranslation("Common");
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const sizeRef = useRef(initialSize ? initialSize : "");
+  const [size, setSize] = useState(initialSize);
 
   const onSetQuotaBytesSize = (size) => {
-    sizeRef.current = size;
+    setSize(size);
   };
 
   const updateFunction = (size) => {
@@ -40,9 +41,7 @@ const ChangeQuotaEvent = (props) => {
       : updateRoomQuota(size, ids, inRoom);
   };
   const onSaveClick = async () => {
-    const size = sizeRef.current;
-
-    if (!size || (typeof size === "string" && size?.trim() === "")) {
+    if (!size || size.trim() === "") {
       setIsError(true);
       return;
     }
@@ -74,7 +73,6 @@ const ChangeQuotaEvent = (props) => {
     timerId && clearTimeout(timerId);
     timerId = null;
 
-    console.log("onSaveClick", props);
     setIsLoading(false);
     setIsError(false);
 
@@ -84,7 +82,7 @@ const ChangeQuotaEvent = (props) => {
   const onCloseClick = () => {
     timerId && clearTimeout(timerId);
     timerId = null;
-    console.log("onCloseClick", props);
+
     abortCallback && abortCallback();
     onClose && onClose();
   };
@@ -100,6 +98,7 @@ const ChangeQuotaEvent = (props) => {
       isError={isError}
       isLoading={isLoading}
       initialSize={initialSize}
+      size={size}
     />
   );
 };
@@ -117,7 +116,9 @@ export default inject(({ peopleStore, filesStore, auth }, { type }) => {
     setInfoPanelSelection,
   } = infoPanelStore;
 
-  const initialSize = type === "user" ? defaultUsersQuota : defaultRoomsQuota;
+  const size = type === "user" ? defaultUsersQuota : defaultRoomsQuota;
+
+  const initialSize = size.toString();
 
   const inRoom = infoPanelSelection?.inRoom;
   const needResetSelection =

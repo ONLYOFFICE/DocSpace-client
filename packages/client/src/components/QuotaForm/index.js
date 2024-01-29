@@ -40,7 +40,7 @@ const QuotaForm = ({
   const initPower = initialSize > 0 ? getPowerFromBytes(initialSize, 4) : 0;
   const initSize =
     initialSize > 0
-      ? getSizeFromBytes(initialSize, initPower)
+      ? getSizeFromBytes(initialSize, initPower).toString()
       : initialSize === 0
         ? "0"
         : "";
@@ -71,7 +71,7 @@ const QuotaForm = ({
     const { value, validity } = e.target;
 
     if (validity.valid) {
-      const transmittedSize = getConvertedSize(value);
+      const transmittedSize = getConvertedSize(value).toString();
 
       onSetQuotaBytesSize && onSetQuotaBytesSize(transmittedSize);
       setSize(value);

@@ -60,6 +60,7 @@ export interface SelectorProps {
       ) => Promise<void>)
     | null;
   totalItems?: number;
+  renderCustomItem?: (...args: unknown[]) => React.ReactNode | null;
   isLoading?: boolean;
   searchLoader?: React.ReactNode;
   rowLoader?: React.ReactNode;
@@ -103,6 +104,7 @@ export interface BodyProps {
   onSearch: (value: string) => void;
   onClearSearch: () => void;
   items: TSelectorItem[];
+  renderCustomItem?: (...args: unknown[]) => React.ReactNode | null;
   onSelect?: (item: TSelectorItem) => void;
   isMultiSelect?: boolean;
   withSelectAll?: boolean;
@@ -191,6 +193,7 @@ export type Data = {
   isMultiSelect: boolean;
   isItemLoaded: (index: number) => boolean;
   rowLoader: React.ReactNode;
+  renderCustomItem?: (...args: unknown[]) => React.ReactNode | null;
 };
 
 export interface SelectAllProps {

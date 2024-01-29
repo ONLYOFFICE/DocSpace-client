@@ -65,8 +65,6 @@ const QuotaForm = ({
   ];
 
   const getConvertedSize = (value) => {
-    if (typeof value === "number") return conversionToBytes(value, power);
-
     return value.trim() !== "" ? conversionToBytes(value, power) : "";
   };
   const onChangeTextInput = (e) => {
@@ -162,7 +160,7 @@ const QuotaForm = ({
           isDisabled={isDisable}
           onKeyDown={onKeyDownInput}
           hasError={isError || hasError}
-          // pattern="^[ 0-9]+$"
+          pattern="^[ 0-9]+$"
           scale
           withBorder
         />

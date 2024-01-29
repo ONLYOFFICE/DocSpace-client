@@ -106,6 +106,12 @@ class StorageManagement {
           this.clearIntervalCheckRecalculate();
 
           this.setIsRecalculating(false);
+
+          try {
+            this.quotaSettings = await getQuotaSettings();
+          } catch (e) {
+            toastr.error(e);
+          }
           return;
         }
 

@@ -41,6 +41,7 @@ import PluginDialog from "./PluginDialog";
 import ChangeQuotaDialog from "./ChangeQuotaDialog";
 import DeletePluginDialog from "./DeletePluginDialog";
 import ShareFolderDialog from "./ShareFolderDialog";
+import ChangeStorageQuotaDialog from "./ChangeStorageQuotaDialog";
 
 export {
   EmptyTrashDialog,
@@ -86,4 +87,5 @@ export {
   DeletePluginDialog,
   ShareFolderDialog,
   ChangeQuotaDialog,
+  ChangeStorageQuotaDialog,
 };

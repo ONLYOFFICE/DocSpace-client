@@ -17,20 +17,13 @@ const ChangeQuotaDialog = (props) => {
     isError,
     isLoading,
     initialSize,
-    isDiskSpace,
   } = props;
   const { t } = useTranslation("Common");
   return (
     <StyledModalDialog visible={visible} onClose={onCloseClick}>
-      <ModalDialog.Header>
-        {isDiskSpace ? t("Common:ManageStorageQuota") : t("Common:ChangeQuota")}
-      </ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:ChangeQuota")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect={true}>
-          {isDiskSpace
-            ? t("Common:SetDiskSpaceQuota")
-            : t("Common:SetQuotaStorageLimit")}
-        </Text>
+        <Text noSelect={true}>{t("Common:SetQuotaStorageLimit")}</Text>
         <QuotaForm
           onSetQuotaBytesSize={onSetQuotaBytesSize}
           isLoading={isLoading}

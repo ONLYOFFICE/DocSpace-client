@@ -1534,13 +1534,10 @@ class ContextOptionsStore {
       });
     }
 
-    const filteredOptions = this.removeSeparatorFirstInList(options);
-    return filteredOptions;
-  };
+    const { isCollaborator } = this.authStore.userStore.user;
 
-  removeSeparatorFirstInList = (options) => {
     const newOptions = options.filter(
-      (option, index) => !(index === 0 && option.key === "separator1")
+      (option, index) => !(index === 0 && option.key === "separator1") && !(isCollaborator && option.key === "create-room")
     );
 
     return newOptions;
@@ -1793,7 +1790,13 @@ class ContextOptionsStore {
       },
     ];
 
-    return options;
+    const { isCollaborator } = this.authStore.userStore.user;
+
+    const newOptions = options.filter(
+      (option, index) => !(index === 0 && option.key === "separator1") && !(isCollaborator && option.key === "create-room")
+    );
+
+    return newOptions;
   };
 
   getModel = (item, t) => {

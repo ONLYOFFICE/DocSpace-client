@@ -20,7 +20,7 @@ import { Base } from "@docspace/shared/themes";
 import { ROOMS_TYPE_TRANSLATIONS } from "@docspace/shared/constants";
 
 import { getFileTypeName } from "../../../../../helpers/filesUtils";
-import { SortByFieldName } from "../../../../../helpers/constants";
+import { SortByFieldName } from "SRC_DIR/helpers/enums";
 
 const SimpleFilesRowContent = styled(RowContent)`
   .row-main-container-wrapper {

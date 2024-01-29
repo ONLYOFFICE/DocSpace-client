@@ -1292,7 +1292,7 @@ class ContextOptionsStore {
       {
         id: "option_copy-external-link",
         key: "external-link",
-        label: t("Files:CopyGeneralLink"),
+        label: t("Files:CopySharedLink"),
         icon: TabletLinkReactSvgUrl,
         disabled:
           this.publicRoomStore.isPublicRoom ||

@@ -82,7 +82,7 @@ const DeleteLinkDialogComponent = (props) => {
         <div className="modal-dialog-content-body">
           <Text noSelect>
             {link.sharedTo.primary && isPublicRoomType
-              ? t("Files:DeleteGeneralLink")
+              ? t("Files:DeleteSharedLink")
               : t("Files:DeleteLinkNote")}
           </Text>
         </div>

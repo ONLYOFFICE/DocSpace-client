@@ -108,42 +108,7 @@ const Members = ({
       publicRoomItems.push(
         <LinksBlock key="general-link_header">
           <Text fontSize="14px" fontWeight={600}>
-            {t("Files:GeneralLink")}
-          </Text>
-        </LinksBlock>
-      );
-    }
-
-    if (primaryLink) {
-      publicRoomItems.push(
-        <LinkRow
-          key="general-link"
-          link={primaryLink}
-          setIsScrollLocked={setIsScrollLocked}
-        />
-      );
-    } else if (!isArchiveFolder) {
-      publicRoomItems.push(
-        <StyledLinkRow onClick={onAddNewLink} key="create-general-link">
-          <Avatar size="min" source={PlusReactSvgUrl} />
-          <Link
-            isHovered
-            type="action"
-            fontSize="14px"
-            fontWeight={600}
-            className="external-row-link"
-          >
-            {t("Files:CreateAndCopy")}
-          </Link>
-        </StyledLinkRow>
-      );
-    }
-
-    if ((primaryLink && !isArchiveFolder) || additionalLinks.length) {
-      publicRoomItems.push(
-        <LinksBlock key="additional-link_header">
-          <Text fontSize="14px" fontWeight={600}>
-            {t("Files:AdditionalLinks")}
+            {t("Files:SharedLinks")}
           </Text>
 
           {!isArchiveFolder && (
@@ -175,6 +140,31 @@ const Members = ({
             </div>
           )}
         </LinksBlock>
+      );
+    }
+
+    if (primaryLink) {
+      publicRoomItems.push(
+        <LinkRow
+          key="general-link"
+          link={primaryLink}
+          setIsScrollLocked={setIsScrollLocked}
+        />
+      );
+    } else if (!isArchiveFolder) {
+      publicRoomItems.push(
+        <StyledLinkRow onClick={onAddNewLink} key="create-general-link">
+          <Avatar size="min" source={PlusReactSvgUrl} />
+          <Link
+            isHovered
+            type="action"
+            fontSize="14px"
+            fontWeight={600}
+            className="external-row-link"
+          >
+            {t("Files:CreateAndCopy")}
+          </Link>
+        </StyledLinkRow>
       );
     }
 

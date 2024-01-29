@@ -56,9 +56,7 @@ const LinkRow = (props) => {
 
   const isLocked = !!password;
   const expiryDate = !!expirationDate;
-  const date = moment(expirationDate)
-    .tz(window.timezone)
-    .format("LLL");
+  const date = moment(expirationDate).tz(window.timezone).format("LLL");
 
   const tooltipContent = isExpired
     ? t("Translations:LinkHasExpiredAndHasBeenDisabled")
@@ -152,7 +150,7 @@ const LinkRow = (props) => {
 
       !disabled && {
         key: "copy-link-settings-key",
-        label: primary ? t("Files:CopyGeneralLink") : t("Files:CopyLink"),
+        label: primary ? t("Files:CopySharedLink") : t("Files:CopyLink"),
         icon: CopyToReactSvgUrl,
         onClick: onCopyExternalLink,
       },
@@ -237,7 +235,7 @@ const LinkRow = (props) => {
               size={16}
               iconName={CopyReactSvgUrl}
               onClick={onCopyExternalLink}
-              title={primary ? t("Files:CopyGeneralLink") : t("Files:CopyLink")}
+              title={primary ? t("Files:CopySharedLink") : t("Files:CopyLink")}
             />
           </>
         )}

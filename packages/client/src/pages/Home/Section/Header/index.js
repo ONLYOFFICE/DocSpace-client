@@ -721,7 +721,7 @@ const SectionHeaderContent = (props) => {
       {
         id: "header_option_copy-external-link",
         key: "copy-external-link",
-        label: t("Files:CopyGeneralLink"),
+        label: t("Files:CopySharedLink"),
         icon: CopyToReactSvgUrl,
         onClick: async () => {
           if (primaryLink) {

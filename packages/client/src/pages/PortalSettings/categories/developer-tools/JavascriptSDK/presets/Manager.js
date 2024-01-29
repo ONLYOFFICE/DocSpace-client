@@ -34,6 +34,9 @@ import SearchUrl from "PUBLIC_DIR/images/sdk-presets_search.react.svg?url";
 import HeaderUrl from "PUBLIC_DIR/images/sdk-presets_header.react.svg?url";
 
 const showPreviewThreshold = 720;
+
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
+
 import styled, { css } from "styled-components";
 import { DropDown } from "@docspace/shared/components/drop-down";
 import Filter from "@docspace/shared/api/people/filter";
@@ -59,16 +62,6 @@ const StyledInviteInput = styled.div`
   width: -moz-available;
   width: -webkit-fill-available;
   width: fill-available;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: 16px;
-          margin-left: ${(props) => (props.hideSelector ? "16px" : "8px")};
-        `
-      : css`
-          margin-left: 16px;
-          margin-right: ${(props) => (props.hideSelector ? "16px" : "8px")};
-        `}
 
   .input-link {
     height: 32px;
@@ -101,9 +94,7 @@ const SearchItemText = styled(Text)`
   text-overflow: ellipsis;
   overflow: hidden;
   font-size: ${(props) =>
-    props.theme.getCorrectFontSize(
-      props.primary ? "14px" : props.info ? "11px" : "12px"
-    )};
+    props.theme.getCorrectFontSize(props.primary ? "14px" : props.info ? "11px" : "12px")};
   font-weight: ${(props) => (props.primary || props.info ? "600" : "400")};
 
   color: ${(props) =>
@@ -143,6 +134,8 @@ const Manager = (props) => {
   const [searchPanelVisible, setSearchPanelVisible] = useState(false);
   const [usersList, setUsersList] = useState([]);
   const dropDownMaxHeight = usersList.length > 5 ? { maxHeight: 240 } : {};
+  const [isUserFilterSet, setIsUserFilterSet] = useState(false);
+  const [isTypeFilterSet, setIsTypeFilterSet] = useState(false);
 
   setDocumentTitle(t("JavascriptSdk"));
 
@@ -557,8 +550,10 @@ const Manager = (props) => {
       closeInviteInputPanel();
       setAuthor("");
       setUsersList([]);
-
-      console.log(item);
+      setConfig((config) => ({
+        ...config,
+        filter: { ...config.filter, subjectId: item.id, authorType: `user_${item.id}` },
+      }));
     };
 
     return (
@@ -840,8 +835,129 @@ const Manager = (props) => {
           )}
           <CategorySubHeader>{t("AdvancedDisplay")}</CategorySubHeader>
           <ControlsGroup>
-            <Label className="label" text={t("Common:Filter")} />
-            <ComboBox
+            {"id" in config ? (
+              <>
+                <Label className="label" text={t("File Filter")} />
+                <ToggleButton
+                  className="toggle"
+                  label="Member"
+                  onChange={(e) => {
+                    setIsUserFilterSet(e.target.checked);
+                  }}
+                  isChecked={isUserFilterSet}
+                />
+                {isUserFilterSet && (
+                  <StyledInviteInputContainer>
+                    <StyledInviteInput ref={searchRef}>
+                      <TextInput
+                        scale
+                        onChange={onChangeAuthor}
+                        placeholder={t("Files:ByAuthor")}
+                        value={author}
+                        onFocus={openInviteInputPanel}
+                        isAutoFocussed
+                        onKeyDown={onKeyDown}
+                        tabIndex={5}
+                      />
+                    </StyledInviteInput>
+                    {author.length >= minSearchValue && (
+                      <StyledDropDown
+                        width={searchRef?.current?.offsetWidth}
+                        isDefaultMode={false}
+                        open={searchPanelVisible}
+                        manualX="16px"
+                        showDisabledItems
+                        clickOutsideAction={closeInviteInputPanel}
+                        eventTypes="click"
+                        {...dropDownMaxHeight}
+                      >
+                        {!!usersList.length ? foundUsers : ""}
+                      </StyledDropDown>
+                    )}
+                  </StyledInviteInputContainer>
+                )}
+                <ToggleButton
+                  className="toggle"
+                  label="label text"
+                  onChange={(e) => {
+                    setIsTypeFilterSet(e.target.checked);
+                  }}
+                  isChecked={isTypeFilterSet}
+                />
+                {isTypeFilterSet && (
+                  <ComboBox
+                    onSelect={onFilterSelect}
+                    options={filterOptions}
+                    scaled={true}
+                    selectedOption={filterBy}
+                    displaySelectedOption
+                    directionY="top"
+                  />
+                )}
+              </>
+            ) : (
+              <>
+                <Label className="label" text={t("Room Filter")} />
+                <ToggleButton
+                  className="toggle"
+                  label="Member"
+                  onChange={(e) => {
+                    setIsUserFilterSet(e.target.checked);
+                  }}
+                  isChecked={isUserFilterSet}
+                />
+                {isUserFilterSet && (
+                  <StyledInviteInputContainer>
+                    <StyledInviteInput ref={searchRef}>
+                      <TextInput
+                        scale
+                        onChange={onChangeAuthor}
+                        placeholder={t("Files:ByAuthor")}
+                        value={author}
+                        onFocus={openInviteInputPanel}
+                        isAutoFocussed
+                        onKeyDown={onKeyDown}
+                        tabIndex={5}
+                      />
+                    </StyledInviteInput>
+                    {author.length >= minSearchValue && (
+                      <StyledDropDown
+                        width={searchRef?.current?.offsetWidth}
+                        isDefaultMode={false}
+                        open={searchPanelVisible}
+                        manualX="16px"
+                        showDisabledItems
+                        clickOutsideAction={closeInviteInputPanel}
+                        eventTypes="click"
+                        {...dropDownMaxHeight}
+                      >
+                        {!!usersList.length ? foundUsers : ""}
+                      </StyledDropDown>
+                    )}
+                  </StyledInviteInputContainer>
+                )}
+                <ToggleButton
+                  className="toggle"
+                  label="label text"
+                  onChange={(e) => {
+                    setIsTypeFilterSet(e.target.checked);
+                  }}
+                  isChecked={isTypeFilterSet}
+                />
+                {isTypeFilterSet && (
+                  <ComboBox
+                    onSelect={onFilterSelect}
+                    options={filterOptions}
+                    scaled={true}
+                    selectedOption={filterBy}
+                    displaySelectedOption
+                    directionY="top"
+                  />
+                )}
+              </>
+            )}
+
+            {/* <ComboBox
               onSelect={onFilterSelect}
               options={filterOptions}
               scaled={true}
@@ -881,7 +997,7 @@ const Manager = (props) => {
                   )}
                 </StyledInviteInputContainer>
               </>
-            )}
+            )} */}
           </ControlsGroup>
           <ControlsGroup>
             <Label className="label" text={t("SearchTerm")} />

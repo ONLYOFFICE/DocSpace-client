@@ -99,6 +99,10 @@ export const ControlsGroup = styled(Box)`
   flex-direction: column;
   gap: 8px;
 
+  .toggle{
+    position: relative;
+  }
+
   @media ${tablet} {
     gap: 4px;
   }

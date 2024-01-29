@@ -861,7 +861,7 @@ export async function changeKeepNewFileName(val: boolean) {
   return res;
 }
 
-export function thirdParty(val: boolean) {
+export function enableThirdParty(val: boolean) {
   const data = { set: val };
   return request({ method: "put", url: "files/thirdparty", data });
 }

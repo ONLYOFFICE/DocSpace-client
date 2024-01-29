@@ -171,7 +171,7 @@ class SettingsStore {
   };
 
   setEnableThirdParty = async (data, setting) => {
-    const res = await api.files.thirdParty(data);
+    const res = await api.files.enableThirdParty(data);
     this.setFilesSetting(setting, res);
 
     if (data) {

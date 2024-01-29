@@ -28,6 +28,7 @@ import {
   TSendEditorNotify,
   TSharedUsers,
   TThirdPartyCapabilities,
+  TTirdParties,
   TUploadOperation,
 } from "./types";
 
@@ -860,39 +861,44 @@ export async function changeKeepNewFileName(val: boolean) {
   return res;
 }
 
-// export function thirdParty(val) {
-//   const data = { set: val };
-//   return request({ method: "put", url: "files/thirdparty", data });
-// }
+export function thirdParty(val: boolean) {
+  const data = { set: val };
+  return request({ method: "put", url: "files/thirdparty", data });
+}
 
-// export function getThirdPartyList() {
-//   return request({ method: "get", url: "files/thirdparty" });
-// }
+export async function getThirdPartyList() {
+  const res = (await request({
+    method: "get",
+    url: "files/thirdparty",
+  })) as TTirdParties;
 
-// export function saveThirdParty(
-//   url,
-//   login,
-//   password,
-//   token,
-//   isCorporate,
-//   customerTitle,
-//   providerKey,
-//   providerId,
-//   isRoomsStorage,
-// ) {
-//   const data = {
-//     url,
-//     login,
-//     password,
-//     token,
-//     isCorporate,
-//     customerTitle,
-//     providerKey,
-//     providerId,
-//     isRoomsStorage,
-//   };
-//   return request({ method: "post", url: "files/thirdparty", data });
-// }
+  return res;
+}
+
+export function saveThirdParty(
+  url: string,
+  login: string,
+  password: string,
+  token: string,
+  isCorporate: boolean,
+  customerTitle: string,
+  providerKey: string,
+  providerId: string,
+  isRoomsStorage: boolean,
+) {
+  const data = {
+    url,
+    login,
+    password,
+    token,
+    isCorporate,
+    customerTitle,
+    providerKey,
+    providerId,
+    isRoomsStorage,
+  };
+  return request({ method: "post", url: "files/thirdparty", data });
+}
 
 // TODO: Need update res type
 export function saveSettingsThirdParty(
@@ -1320,3 +1326,4 @@ export function deleteFilesFromRecent(fileIds: number[]) {
     },
   });
 }
+

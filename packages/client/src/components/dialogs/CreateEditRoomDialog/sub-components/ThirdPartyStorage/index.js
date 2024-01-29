@@ -43,12 +43,9 @@ const ThirdPartyStorage = ({
 }) => {
   const onChangeIsThirdparty = () => {
     if (isDisabled) return;
-    if (connectItems.length) {
-      onChangeStorageLocation({
-        ...storageLocation,
-        isThirdparty: !storageLocation.isThirdparty,
-      });
-    } else {
+
+    if (!connectItems.length) {
+
       const data = isRoomAdmin ? (
         <Text as="p">{t("ThirdPartyStorageRoomAdminNoStorageAlert")}</Text>
       ) : (
@@ -66,7 +63,14 @@ const ThirdPartyStorage = ({
       );
 
       toastr.warning(data, null, 5000, true, false);
+
+      return;
     }
+
+    onChangeStorageLocation({
+      ...storageLocation,
+      isThirdparty: !storageLocation.isThirdparty,
+    });
   };
 
   const onChangeProvider = async (provider) => {

@@ -6,7 +6,10 @@ import { Text } from "@docspace/shared/components/text";
 
 import { parseAddresses } from "@docspace/shared/utils";
 import { getAccessOptions } from "../utils";
-import { getUserRole } from "@docspace/shared/utils/common";
+import {
+  firstLetterToUppercase,
+  getUserRole,
+} from "@docspace/shared/utils/common";
 
 import {
   StyledEditInput,
@@ -15,6 +18,7 @@ import {
   StyledCrossIcon,
   StyledHelpButton,
   StyledDeleteIcon,
+  StyledInviteUserBody,
 } from "../StyledInvitePanel";
 import { filterUserRoleOptions } from "SRC_DIR/helpers/utils";
 import AccessSelector from "./AccessSelector";
@@ -119,9 +123,22 @@ const Item = ({
 
   const displayBody = (
     <>
-      <Text {...textProps} truncate noSelect>
-        {inputValue}
-      </Text>
+      <StyledInviteUserBody>
+        <Text {...textProps} truncate noSelect>
+          {inputValue}
+        </Text>
+        <Text
+          className="label"
+          fontWeight={400}
+          fontSize="12px"
+          noSelect
+          color="#A3A9AE"
+          truncate
+        >
+          {`${firstLetterToUppercase(role)} | ${email}`}
+        </Text>
+      </StyledInviteUserBody>
+
       {hasError ? (
         <>
           <StyledHelpButton

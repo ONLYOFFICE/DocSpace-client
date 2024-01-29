@@ -37,6 +37,10 @@ const StyledUser = styled.div`
     min-height: 32px;
   }
 
+  .user_body-wrapper {
+    overflow: auto;
+  }
+
   .name-wrapper,
   .role-email {
     display: flex;

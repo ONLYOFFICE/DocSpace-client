@@ -3035,6 +3035,11 @@ export const getBaseTheme = () => {
           warningColor: "#F21C0E",
           color: "#F97A0B",
         },
+
+        storageManagement: {
+          grayBackgroundText: "#555F65",
+          descriptionColor: "#657077",
+        },
       },
 
       wizard: {

@@ -34,7 +34,6 @@ const {
   darkRed,
   darkMain,
   darkErrorStatus,
-  grayBackgroundTextDark,
 } = globalColors;
 
 const Dark: TTheme = {
@@ -52,7 +51,6 @@ const Dark: TTheme = {
     fontWeight: "normal",
     fontWeightBold: "bold",
     descriptionColor: darkMain,
-    grayBackgroundText: grayBackgroundTextDark,
   },
 
   heading: {
@@ -2809,7 +2807,7 @@ const Dark: TTheme = {
     captcha: {
       border: `1px solid ${darkErrorStatus}`,
       color: darkErrorStatus,
-  },
+    },
   },
 
   facebookButton: {
@@ -3012,6 +3010,11 @@ const Dark: TTheme = {
         },
         warningColor: "#E06451",
         color: "#E17415",
+      },
+
+      storageManagement: {
+        grayBackgroundText: "#5C5C5C",
+        descriptionColor: "#ADADAD",
       },
     },
 

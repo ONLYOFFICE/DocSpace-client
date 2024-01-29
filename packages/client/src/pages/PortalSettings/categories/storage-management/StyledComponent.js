@@ -23,7 +23,8 @@ const StyledBaseQuotaComponent = styled.div`
     }
   }
   .category-item-description {
-    color: ${(props) => props.theme.text.descriptionColor};
+    color: ${(props) =>
+      props.theme.client.settings.storageManagement.descriptionColor};
   }
 `;
 
@@ -34,7 +35,8 @@ const StyledDiscSpaceUsedComponent = styled.div`
   margin-top: 16px;
 
   .disk-space_title {
-    color: ${(props) => props.theme.text.grayBackgroundText};
+    color: ${(props) =>
+      props.theme.client.settings.storageManagement.grayBackgroundText};
   }
   .disk-space_link {
     text-decoration: underline;
@@ -189,7 +191,8 @@ const StyledMainInfo = styled.div`
   row-gap: 12px;
   padding: 12px;
   p {
-    color: ${(props) => props.theme.text.grayBackgroundText};
+    color: ${(props) =>
+      props.theme.client.settings.storageManagement.grayBackgroundText};
   }
 `;
 

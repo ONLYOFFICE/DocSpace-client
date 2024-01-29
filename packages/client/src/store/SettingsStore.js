@@ -131,7 +131,6 @@ class SettingsStore {
             api.files.getThirdPartyList(),
           ])
           .then(([capabilities, providers]) => {
-            debugger;
             for (let item of capabilities) {
               item.splice(1, 1);
             }

@@ -1,6 +1,8 @@
 import styled from "styled-components";
+
 import { Row } from "@docspace/shared/components/row";
 import { Text } from "@docspace/shared/components/text";
+import { mobile } from "@docspace/shared/utils";
 
 const StyledBaseQuotaComponent = styled.div`
   .quotas_description {
@@ -99,6 +101,10 @@ const StyledDiagramComponent = styled.div`
       .tag_text {
         margin-left: 4px;
       }
+    }
+
+    @media ${mobile} {
+      flex-direction: column;
     }
   }
 `;

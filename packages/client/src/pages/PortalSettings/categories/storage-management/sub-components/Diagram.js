@@ -26,28 +26,40 @@ const Diagram = (props) => {
 
   const elementsTags = [
     {
-      name: "My Document",
+      name: myDocumentsUsedSpace.title,
       color: "#13B7EC",
-      percentageSize: calculateSize(myDocumentsUsedSpace, maxTotalSizeByQuota),
-      size: getConvertedSize(t, myDocumentsUsedSpace),
+      percentageSize: calculateSize(
+        myDocumentsUsedSpace.usedSpace,
+        maxTotalSizeByQuota
+      ),
+      size: getConvertedSize(t, myDocumentsUsedSpace.usedSpace),
     },
     {
-      name: "Rooms",
+      name: roomsUsedSpace.title,
       color: "#22C386",
-      percentageSize: calculateSize(roomsUsedSpace, maxTotalSizeByQuota),
-      size: getConvertedSize(t, roomsUsedSpace),
+      percentageSize: calculateSize(
+        roomsUsedSpace.usedSpace,
+        maxTotalSizeByQuota
+      ),
+      size: getConvertedSize(t, roomsUsedSpace.usedSpace),
     },
     {
-      name: "Trash",
+      name: trashUsedSpace.title,
       color: "#FF9933",
-      percentageSize: calculateSize(trashUsedSpace, maxTotalSizeByQuota),
-      size: getConvertedSize(t, trashUsedSpace),
+      percentageSize: calculateSize(
+        trashUsedSpace.usedSpace,
+        maxTotalSizeByQuota
+      ),
+      size: getConvertedSize(t, trashUsedSpace.usedSpace),
     },
     {
-      name: "Archive",
+      name: archiveUsedSpace.title,
       color: "#FFD30F",
-      percentageSize: calculateSize(archiveUsedSpace, maxTotalSizeByQuota),
-      size: getConvertedSize(t, archiveUsedSpace),
+      percentageSize: calculateSize(
+        archiveUsedSpace.usedSpace,
+        maxTotalSizeByQuota
+      ),
+      size: getConvertedSize(t, archiveUsedSpace.usedSpace),
     },
   ];
 

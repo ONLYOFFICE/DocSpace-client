@@ -22,11 +22,11 @@ import { CurrentQuotasStore } from "./CurrentQuotaStore";
 import { SettingsStore } from "./SettingsStore";
 
 class AuthStore {
-  userStore: UserStore | null = null;
+  private userStore: UserStore | null = null;
 
-  currentQuotaStore: CurrentQuotasStore | null = null;
+  private currentQuotaStore: CurrentQuotasStore | null = null;
 
-  currentTariffStatusStore: CurrentTariffStatusStore | null = null;
+  private currentTariffStatusStore: CurrentTariffStatusStore | null = null;
 
   settingsStore: SettingsStore | null = null;
 

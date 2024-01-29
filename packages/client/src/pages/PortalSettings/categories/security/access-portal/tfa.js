@@ -136,7 +136,7 @@ const TwoFactorAuth = (props) => {
         </Text>
         <Link
           className="link-learn-more"
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
           target="_blank"
           isHovered
           href={tfaSettingsUrl}

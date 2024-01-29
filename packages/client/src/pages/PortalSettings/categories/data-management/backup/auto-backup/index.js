@@ -450,7 +450,7 @@ class AutomaticBackup extends React.PureComponent {
             href={automaticBackupUrl}
             target="_blank"
             fontSize="13px"
-            color={currentColorScheme.main.accent}
+            color={currentColorScheme.main?.accent}
             isHovered
           >
             {t("Common:LearnMore")}

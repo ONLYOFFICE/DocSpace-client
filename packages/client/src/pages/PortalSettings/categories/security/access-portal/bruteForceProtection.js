@@ -244,7 +244,7 @@ const BruteForceProtection = (props) => {
           target="_blank"
           isHovered
           href={bruteForceProtectionUrl}
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
         >
           {t("Common:LearnMore")}
         </Link>

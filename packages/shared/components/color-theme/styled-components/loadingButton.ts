@@ -11,11 +11,11 @@ const getDefaultStyles = ({
   $currentColorScheme &&
   css`
     .circle__mask .circle__fill {
-      background-color: ${$currentColorScheme.main.accent} !important;
+      background-color: ${$currentColorScheme.main?.accent} !important;
     }
 
     .loading-button {
-      color: ${$currentColorScheme.main.accent};
+      color: ${$currentColorScheme.main?.accent};
     }
   `;
 

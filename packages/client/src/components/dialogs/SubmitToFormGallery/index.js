@@ -124,7 +124,7 @@ const SubmitToFormGallery = ({
             Learn how to create perfect forms and increase your chance to get
             approval in our
             <Link
-              color={currentColorScheme.main.accent}
+              color={currentColorScheme.main?.accent}
               href="https://www.onlyoffice.com/blog/2022/07/when-design-matters-how-to-create-beautiful-forms-with-oforms"
               type={"page"}
               target={"_blank"}

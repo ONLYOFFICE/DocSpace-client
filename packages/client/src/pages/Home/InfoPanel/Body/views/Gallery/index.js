@@ -55,7 +55,7 @@ const Gallery = ({
           target="_blank"
           type="action"
           isHovered
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
         >
           {t("FormGallery:SuggestChanges")}
         </Link>

@@ -63,7 +63,7 @@ const SMTPSettings = (props) => {
         </Text>
         <Link
           className="link-learn-more"
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
           isHovered
           target="_blank"
           href={integrationSettingsUrl}

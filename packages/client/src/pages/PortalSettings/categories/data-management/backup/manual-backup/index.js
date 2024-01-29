@@ -272,7 +272,7 @@ class ManualBackup extends React.Component {
             href={dataBackupUrl}
             target="_blank"
             fontSize="13px"
-            color={currentColorScheme.main.accent}
+            color={currentColorScheme.main?.accent}
             isHovered
           >
             {t("Common:LearnMore")}

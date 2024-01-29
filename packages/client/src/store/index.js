@@ -252,7 +252,7 @@ const store = {
   settingsStore,
 
   paymentStore,
-  wizard: wizardStore,
+  wizardStore,
   setup: setupStore,
   confirm: confirmStore,
   backup: backupStore,

@@ -515,15 +515,17 @@ export function ownerChange(ownerId, confirmKey = null) {
   return request(options);
 }
 
-export function getMachineName(confirmKey = null) {
-  const options = {
+export async function getMachineName(confirmKey: string = "") {
+  const options: AxiosRequestConfig = {
     method: "get",
     url: "/settings/machine",
   };
 
   if (confirmKey) options.headers = { confirm: confirmKey };
 
-  return request(options);
+  const res = (await request(options)) as string;
+
+  return res;
 }
 
 export function setPortalOwner(
@@ -552,11 +554,13 @@ export function setPortalOwner(
   return request(options);
 }
 
-export function getIsLicenseRequired() {
-  return request({
+export async function getIsLicenseRequired() {
+  const res = (await request({
     method: "get",
     url: "/settings/license/required",
-  });
+  })) as boolean;
+
+  return res;
 }
 
 export async function setLicense(confirmKey: string, data: FormData) {

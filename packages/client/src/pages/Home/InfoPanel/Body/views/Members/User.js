@@ -8,7 +8,10 @@ import { toastr } from "@docspace/shared/components/toast";
 import { isMobileOnly, isMobile } from "react-device-detect";
 import { decode } from "he";
 import { filterUserRoleOptions } from "SRC_DIR/helpers/utils";
-import { getUserRole } from "@docspace/shared/utils/common";
+import {
+  firstLetterToUppercase,
+  getUserRole,
+} from "@docspace/shared/utils/common";
 import { Text } from "@docspace/shared/components/text";
 import EmailPlusReactSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
 import { StyledUserTypeHeader } from "../../styles/members";
@@ -206,10 +209,6 @@ const User = ({
     setIsScrollLocked(isOpen);
   };
 
-  const firstLetterToUppercase = (str) => {
-    return str[0].toUpperCase() + str.slice(1);
-  };
-
   const userAvatar = user.hasAvatar ? user.avatar : DefaultUserPhotoUrl;
 
   const role = getUserRole(user);
@@ -249,9 +248,7 @@ const User = ({
       />
       <div className="user_body-wrapper">
         <div className="name-wrapper">
-          <div className="name">
-            {isExpect ? user.email : decode(user.displayName) || user.email}
-          </div>
+          <div className="name">{decode(user.displayName)}</div>
           {currentMember?.id === user.id && (
             <div className="me-label">&nbsp;{`(${t("Common:MeLabel")})`}</div>
           )}

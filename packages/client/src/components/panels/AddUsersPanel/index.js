@@ -9,7 +9,10 @@ import { Selector } from "@docspace/shared/components/selector";
 import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
 
-import { getUserRole } from "@docspace/shared/utils/common";
+import {
+  firstLetterToUppercase,
+  getUserRole,
+} from "@docspace/shared/utils/common";
 import Filter from "@docspace/shared/api/people/filter";
 import Loaders from "@docspace/common/components/Loaders";
 import { getMembersList } from "@docspace/shared/api/people";
@@ -211,10 +214,6 @@ const AddUsersPanel = ({
   const emptyScreenImage = theme.isBase
     ? EmptyScreenPersonsSvgUrl
     : EmptyScreenPersonsSvgDarkUrl;
-
-  const firstLetterToUppercase = (str) => {
-    return str[0].toUpperCase() + str.slice(1);
-  };
 
   const renderCustomItem = (label, userType, email) => {
     return (

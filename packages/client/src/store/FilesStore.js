@@ -11,7 +11,7 @@ import {
   ShareAccessRights,
 } from "@docspace/shared/enums";
 
-import { RoomsTypeValues } from "@docspace/shared/utils";
+import { RoomsTypes } from "@docspace/shared/utils";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { updateTempContent } from "@docspace/shared/utils/common";
@@ -219,7 +219,7 @@ class FilesStore {
           } else if (opt.cmd === "delete") {
             this.selectedFolderStore[opt.type + "sCount"]--;
           }
-          this.authStore.infoPanelStore.reloadSelection();
+          // this.authStore.infoPanelStore.updateInfoPanelSelection();
         });
       }
 
@@ -1455,9 +1455,12 @@ class FilesStore {
             // Clear all selections
             this.setSelected("close");
 
-            // Restore not processed
-            tempSelection.length && this.setSelection(tempSelection);
-            tempBuffer && this.setBufferSelection(tempBuffer);
+            // TODO: see bug 63479
+            if (this.selectedFolderStore?.id === folderId) {
+              // Restore not processed
+              tempSelection.length && this.setSelection(tempSelection);
+              tempBuffer && this.setBufferSelection(tempBuffer);
+            }
           }
         }
 
@@ -1498,6 +1501,9 @@ class FilesStore {
                 canCopyPublicLink =
                   room.access === ShareAccessRights.RoomManager ||
                   room.access === ShareAccessRights.None;
+
+                room.canCopyPublicLink = canCopyPublicLink;
+                this.authStore.infoPanelStore.setInfoPanelRoom(room);
               }
 
               const { mute } = room;
@@ -1712,6 +1718,7 @@ class FilesStore {
             }
           }
 
+          this.authStore.infoPanelStore.setInfoPanelRoom(null);
           this.selectedFolderStore.setSelectedFolder({
             folders: data.folders,
             ...data.current,
@@ -2952,7 +2959,7 @@ class FilesStore {
     const url = getCategoryUrl(this.categoryType, id);
 
     if (canOpenPlayer) {
-      return combineUrl(proxyURL, config.homepage, `${url}/#preview/${id}`);
+      return combineUrl(proxyURL, config.homepage, url, id);
     }
 
     if (isFolder) {
@@ -3227,8 +3234,8 @@ class FilesStore {
 
     if (this.folders.length) {
       for (const item of this.folders) {
-        if (item.roomType && RoomsTypeValues[item.roomType]) {
-          cbMenu.push(`room-${RoomsTypeValues[item.roomType]}`);
+        if (item.roomType && RoomsTypes[item.roomType]) {
+          cbMenu.push(`room-${RoomsTypes[item.roomType]}`);
         } else {
           cbMenu.push(FilterType.FoldersOnly);
         }

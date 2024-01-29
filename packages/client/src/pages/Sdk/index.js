@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { Button } from "@docspace/shared/components/button";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import AppLoader from "@docspace/common/components/AppLoader";
-import RoomSelector from "../../components/RoomSelector";
+import RoomSelector from "@docspace/shared/selectors/Room";
 import FilesSelector from "../../components/FilesSelector";
 import {
   frameCallEvent,
@@ -27,7 +27,7 @@ const Sdk = ({
   user,
   updateProfileCulture,
   getRoomsIcon,
-  getPrimaryLink,
+  fetchExternalLinks,
 }) => {
   useEffect(() => {
     window.addEventListener("message", handleMessage, false);
@@ -128,9 +128,23 @@ const Sdk = ({
         data[0].icon = await getRoomsIcon(data[0].roomType, false, 32);
       }
 
-      if (data[0].roomType === RoomsType.PublicRoom) {
-        const { sharedTo } = await getPrimaryLink(data[0].id);
-        data[0].requestToken = sharedTo?.requestToken;
+      if (
+        data[0].roomType === RoomsType.PublicRoom ||
+        (data[0].roomType === RoomsType.CustomRoom && data[0].shared)
+      ) {
+        const links = await fetchExternalLinks(data[0].id);
+
+        const requestTokens = links.map((link) => {
+          const { id, title, requestToken } = link.sharedTo;
+
+          return {
+            id,
+            title,
+            requestToken,
+          };
+        });
+
+        data[0].requestTokens = requestTokens;
       }
 
       frameCallEvent({ event: "onSelectCallback", data });
@@ -193,28 +207,30 @@ const Sdk = ({
   return component;
 };
 
-export default inject(({ auth, settingsStore, peopleStore, filesStore }) => {
-  const { login, logout, userStore } = auth;
-  const { theme, setFrameConfig, frameConfig, getSettings, isLoaded } =
-    auth.settingsStore;
-  const { loadCurrentUser, user } = userStore;
-  const { updateProfileCulture } = peopleStore.targetUserStore;
-  const { getIcon, getRoomsIcon } = settingsStore;
-  const { getPrimaryLink } = filesStore;
+export default inject(
+  ({ auth, settingsStore, peopleStore, publicRoomStore }) => {
+    const { login, logout, userStore } = auth;
+    const { theme, setFrameConfig, frameConfig, getSettings, isLoaded } =
+      auth.settingsStore;
+    const { loadCurrentUser, user } = userStore;
+    const { updateProfileCulture } = peopleStore.targetUserStore;
+    const { getIcon, getRoomsIcon } = settingsStore;
+    const { fetchExternalLinks } = publicRoomStore;
 
-  return {
-    theme,
-    setFrameConfig,
-    frameConfig,
-    login,
-    logout,
-    getSettings,
-    loadCurrentUser,
-    getIcon,
-    getRoomsIcon,
-    isLoaded,
-    updateProfileCulture,
-    user,
-    getPrimaryLink,
-  };
-})(observer(Sdk));
+    return {
+      theme,
+      setFrameConfig,
+      frameConfig,
+      login,
+      logout,
+      getSettings,
+      loadCurrentUser,
+      getIcon,
+      getRoomsIcon,
+      isLoaded,
+      updateProfileCulture,
+      user,
+      fetchExternalLinks,
+    };
+  }
+)(observer(Sdk));

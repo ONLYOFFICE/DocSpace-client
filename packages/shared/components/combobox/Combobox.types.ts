@@ -16,6 +16,7 @@ export type TOption = {
   description?: string;
   quota?: "free" | "paid";
   isSeparator?: boolean;
+  isSelected?: boolean;
 };
 
 export interface ComboboxProps {

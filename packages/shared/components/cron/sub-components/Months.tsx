@@ -7,12 +7,11 @@ import type { MonthsProps } from "../Cron.types";
 export const Months = memo(({ months, unit, setMonths, t }: MonthsProps) => {
   return (
     <Select
+      unit={unit}
       value={months}
       setValue={setMonths}
-      placeholder={t("EveryMonth")}
-      unit={unit}
-      prefix={t("In")}
       dropDownMaxHeight={300}
+      placeholder={t("EveryMonth")}
     />
   );
 });

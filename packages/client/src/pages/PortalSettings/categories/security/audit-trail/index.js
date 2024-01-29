@@ -25,9 +25,7 @@ const AuditTrail = (props) => {
   useEffect(() => {
     setDocumentTitle(t("AuditTrailNav"));
 
-    if (isAuditAvailable) {
-      getAuditTrail();
-    }
+    getAuditTrail();
 
     getLifetimeAuditSettings();
   }, []);
@@ -73,7 +71,7 @@ const AuditTrail = (props) => {
           securityLifetime={securityLifetime}
           lifetime={securityLifetime.auditTrailLifeTime}
           setLifetimeAuditSettings={setLifetimeAuditSettings}
-          content={isAuditAvailable && getContent()}
+          content={getContent()}
           downloadReport={t("DownloadReportBtnText")}
           downloadReportDescription={t("DownloadReportDescription")}
           getReport={getAuditTrailReport}

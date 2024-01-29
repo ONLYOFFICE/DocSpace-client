@@ -13,6 +13,8 @@ import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Portal } from "@docspace/shared/components/portal";
 import { toastr } from "@docspace/shared/components/toast";
 
+import { RowLoader, SearchLoader } from "@docspace/shared/skeletons/selector";
+
 import EmptyScreenFilterAltSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt.svg?url";
 import EmptyScreenFilterAltDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt_dark.svg?url";
 import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/empty_screen_alt.svg?url";
@@ -224,6 +226,7 @@ const FilesSelector = ({
           isRoom:
             item.parentId === 0 && item.rootFolderType === FolderType.Rooms,
           roomType: item.roomType,
+          shared: item.shared,
         },
       ]);
       setSelectedItemId(item.id);
@@ -363,7 +366,7 @@ const FilesSelector = ({
     onCloseAction();
   };
 
-  const onSearchAction = (value: string) => {
+  const onSearchAction = (value: string, callback?: Function) => {
     setIsFirstLoad(true);
     setItems(null);
     if (selectedItemType === "rooms") {
@@ -373,9 +376,10 @@ const FilesSelector = ({
     }
 
     setSearchValue(value);
+    callback?.();
   };
 
-  const onClearSearchAction = () => {
+  const onClearSearchAction = (callback?: Function) => {
     setIsFirstLoad(true);
     setItems(null);
     if (selectedItemType === "rooms") {
@@ -385,6 +389,7 @@ const FilesSelector = ({
     }
 
     setSearchValue("");
+    callback?.();
   };
 
   const onAcceptAction = (
@@ -552,13 +557,13 @@ const FilesSelector = ({
       isBreadCrumbsLoading={showBreadCrumbsLoader}
       withSearch={!isRoot && items ? items.length > 0 : !isRoot && isFirstLoad}
       rowLoader={
-        <Loaders.SelectorRowLoader
+        <RowLoader
           isMultiSelect={false}
           isUser={isRoot}
           isContainer={showLoader}
         />
       }
-      searchLoader={<Loaders.SelectorSearchLoader />}
+      searchLoader={<SearchLoader />}
       breadCrumbsLoader={<Loaders.SelectorBreadCrumbsLoader />}
       alwaysShowFooter={true}
       isNextPageLoading={isNextPageLoading}

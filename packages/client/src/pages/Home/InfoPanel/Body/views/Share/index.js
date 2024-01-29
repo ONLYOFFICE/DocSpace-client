@@ -21,7 +21,7 @@ const Share = (props) => {
   const {
     isRooms,
     setView,
-    selection,
+    infoPanelSelection,
     getPrimaryFileLink,
     getFileLinks,
     editFileLink,
@@ -35,14 +35,14 @@ const Share = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [loadingLinks, setLoadingLinks] = useState([]);
 
-  const hideSharePanel = isRooms || !selection?.canShare;
+  const hideSharePanel = isRooms || !infoPanelSelection?.canShare;
 
   useEffect(() => {
     if (hideSharePanel) {
       setView("info_details");
     }
     fetchLinks();
-  }, [selection]);
+  }, [infoPanelSelection]);
 
   useEffect(() => {
     fetchLinks();
@@ -50,7 +50,7 @@ const Share = (props) => {
   }, [shareChanged]);
 
   const fetchLinks = async () => {
-    const res = await getFileLinks(selection.id);
+    const res = await getFileLinks(infoPanelSelection.id);
     const primaryLink = res.items.filter(
       (item) => item.sharedTo.primary === true
     );
@@ -65,7 +65,7 @@ const Share = (props) => {
 
   const addGeneralLink = async () => {
     addLoaderLink(true);
-    const link = await getPrimaryFileLink(selection.id);
+    const link = await getPrimaryFileLink(infoPanelSelection.id);
     setPrimaryFileLink([link]);
     copy(link.sharedTo.shareLink);
     toastr.success(t("SharingPanel:GeneralAccessLinkCopied"));
@@ -74,7 +74,7 @@ const Share = (props) => {
   const addAdditionalLinks = async () => {
     addLoaderLink(false);
     const newLink = await addFileLink(
-      selection.id,
+      infoPanelSelection.id,
       ShareAccessRights.ReadOnly,
       false,
       false
@@ -96,7 +96,7 @@ const Share = (props) => {
       setLoadingLinks([...loadingLinks, link.sharedTo.id]);
 
       const res = await editFileLink(
-        selection.id,
+        infoPanelSelection.id,
         link.sharedTo.id,
         link.access,
         link.sharedTo.primary,
@@ -117,7 +117,7 @@ const Share = (props) => {
       setLoadingLinks([...loadingLinks, link.sharedTo.id]);
 
       const res = await editFileLink(
-        selection.id,
+        infoPanelSelection.id,
         link.sharedTo.id,
         item.access,
         link.sharedTo.primary,
@@ -150,7 +150,7 @@ const Share = (props) => {
       setLoadingLinks([...loadingLinks, link.sharedTo.id]);
 
       const res = await editFileLink(
-        selection.id,
+        infoPanelSelection.id,
         link.sharedTo.id,
         link.access,
         link.sharedTo.primary,
@@ -218,7 +218,9 @@ const Share = (props) => {
               changeShareOption={changeShareOption}
               changeAccessOption={changeAccessOption}
               changeExpirationOption={changeExpirationOption}
-              availableExternalRights={selection.availableExternalRights}
+              availableExternalRights={
+                infoPanelSelection.availableExternalRights
+              }
               loadingLinks={loadingLinks}
             />
           </StyledLinks>
@@ -242,7 +244,9 @@ const Share = (props) => {
                 changeShareOption={changeShareOption}
                 changeAccessOption={changeAccessOption}
                 changeExpirationOption={changeExpirationOption}
-                availableExternalRights={selection.availableExternalRights}
+                availableExternalRights={
+                  infoPanelSelection.availableExternalRights
+                }
                 loadingLinks={loadingLinks}
               />
             </StyledLinks>

@@ -15,7 +15,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { isMobile } from "react-device-detect";
 
-import { ZendeskAPI } from "@docspace/common/components/Zendesk";
+import { ZendeskAPI } from "@docspace/shared/components/zendesk";
 import { LIVE_CHAT_LOCAL_STORAGE_KEY } from "@docspace/shared/constants";
 import { toastr } from "@docspace/shared/components/toast";
 import { isDesktop, isTablet } from "@docspace/shared/utils";
@@ -124,7 +124,7 @@ class ProfileActionsStore {
   };
 
   onSpacesClick = () => {
-    this.selectedFolderStore.setSelectedFolder(null);
+    // this.selectedFolderStore.setSelectedFolder(null);
     window.open(SPACES_URL, "_blank");
   };
 

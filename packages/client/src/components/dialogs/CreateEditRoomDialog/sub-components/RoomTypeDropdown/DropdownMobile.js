@@ -31,7 +31,7 @@ const DropdownMobile = ({ t, open, onClose, chooseRoomType }) => {
     <>
       <Backdrop visible={open} onClick={onClose} zIndex={450} />
       <StyledDropdownMobile className="dropdown-mobile" isOpen={open}>
-        {Object.values(RoomsTypeValues).map((roomType) => (
+        {RoomsTypeValues.map((roomType) => (
           <RoomType
             id={roomType}
             t={t}

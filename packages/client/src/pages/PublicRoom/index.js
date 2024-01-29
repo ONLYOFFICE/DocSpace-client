@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { observer, inject } from "mobx-react";
 import { useNavigate, useLocation } from "react-router-dom";
-import Section from "@docspace/common/components/Section";
+import Section from "@docspace/shared/components/section";
 import { Loader } from "@docspace/shared/components/loader";
 import { ValidationStatus } from "../../helpers/constants";
 import SectionWrapper from "SRC_DIR/components/Section";

@@ -1,6 +1,6 @@
 import React from "react";
 
-import Section from "@docspace/common/components/Section";
+import Section from "@docspace/shared/components/section";
 import Loaders from "@docspace/common/components/Loaders";
 import { withTranslation } from "react-i18next";
 

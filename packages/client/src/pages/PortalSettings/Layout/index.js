@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import Article from "@docspace/common/components/Article";
+import Article from "@docspace/shared/components/article";
 import { ArticleHeaderContent, ArticleBodyContent } from "./Article";
 import { SectionHeaderContent, SectionPagingContent } from "./Section";
 import { inject, observer } from "mobx-react";
-import Section from "@docspace/common/components/Section";
+import Section from "@docspace/shared/components/section";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 
 import SectionWrapper from "SRC_DIR/components/Section";
@@ -11,10 +11,11 @@ import SectionWrapper from "SRC_DIR/components/Section";
 import { useParams } from "react-router-dom";
 import HistoryHeader from "../categories/developer-tools/Webhooks/WebhookHistory/sub-components/HistoryHeader";
 import DetailsNavigationHeader from "../categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/DetailsNavigationHeader";
+import ArticleWrapper from "SRC_DIR/components/ArticleWrapper";
 
 const ArticleSettings = React.memo(({ showArticleLoader }) => {
   return (
-    <Article showArticleLoader={showArticleLoader}>
+    <ArticleWrapper showArticleLoader={showArticleLoader}>
       <Article.Header>
         <ArticleHeaderContent />
       </Article.Header>
@@ -22,7 +23,7 @@ const ArticleSettings = React.memo(({ showArticleLoader }) => {
       <Article.Body>
         <ArticleBodyContent />
       </Article.Body>
-    </Article>
+    </ArticleWrapper>
   );
 });
 

@@ -123,8 +123,8 @@ const EditRoomEvent = ({
         await createTag(newTags[i]);
       }
 
-      room = await addTagsToRoom(room.id, tags);
-      room = await removeTagsFromRoom(room.id, removedTags);
+      tags.length && (room = await addTagsToRoom(room.id, tags));
+      removedTags.length && (room = await removeTagsFromRoom(room.id, removedTags));
 
       if (!!item.logo.original && !roomParams.icon.uploadedFile) {
         room = await removeLogoFromRoom(room.id);

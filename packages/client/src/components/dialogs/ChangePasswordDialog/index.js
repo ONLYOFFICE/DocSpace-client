@@ -83,7 +83,7 @@ class ChangePasswordDialogComponent extends React.Component {
                 type="page"
                 href={`mailto:${email}`}
                 noHover
-                color={currentColorScheme.main.accent}
+                color={currentColorScheme.main?.accent}
                 title={email}
               >
                 {{ email }}

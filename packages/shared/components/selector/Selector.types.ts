@@ -242,4 +242,3 @@ export interface BreadCrumbsProps {
   onSelectBreadCrumb?: (item: TBreadCrumb) => void;
   isLoading?: boolean;
 }
-

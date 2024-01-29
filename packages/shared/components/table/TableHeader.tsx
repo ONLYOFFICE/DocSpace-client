@@ -1121,7 +1121,7 @@ class TableHeader extends React.Component<
 
   onMouseUp = () => {
     const {
-      infoPanelVisible,
+      infoPanelVisible = false,
       columnStorageName,
       columnInfoPanelStorageName,
       containerRef,
@@ -1161,7 +1161,7 @@ class TableHeader extends React.Component<
       columnInfoPanelStorageName,
       resetColumnsSize,
 
-      infoPanelVisible,
+      infoPanelVisible = false,
       columns,
       setHideColumns,
     } = this.props;
@@ -1636,7 +1636,7 @@ class TableHeader extends React.Component<
   };
 
   updateTableRows = (str: string) => {
-    const { useReactWindow } = this.props;
+    const { useReactWindow = false } = this.props;
     if (!useReactWindow) return;
 
     const rows = document.querySelectorAll(".table-row, .table-list-item");
@@ -1708,9 +1708,9 @@ class TableHeader extends React.Component<
       sortBy,
       sorted,
       isLengthenHeader,
-      sortingVisible,
-      infoPanelVisible,
-      showSettings,
+      sortingVisible = true,
+      infoPanelVisible = false,
+      showSettings = true,
       tagRef,
       settingsTitle,
       ...rest
@@ -1770,13 +1770,6 @@ class TableHeader extends React.Component<
     );
   }
 }
-
-// TableHeader.defaultProps = {
-//   sortingVisible: true,
-//   infoPanelVisible: false,
-//   useReactWindow: false,
-//   showSettings: true,
-// };
 
 // TableHeader.propTypes = {
 //   containerRef: PropTypes.shape({ current: PropTypes.any }).isRequired,

@@ -42,28 +42,30 @@ const StyledButton = styled(Button)`
   opacity: ${(props) => (props.isDisabled ? 0.6 : 1)};
 
   background-color: ${({ $currentColorScheme }) =>
-    $currentColorScheme.main.accent} !important;
-  background: ${({ $currentColorScheme }) => $currentColorScheme.main.accent};
-  border: ${({ $currentColorScheme }) => $currentColorScheme.main.accent};
+    $currentColorScheme.main?.accent} !important;
+  background: ${({ $currentColorScheme }) => $currentColorScheme.main?.accent};
+  border: ${({ $currentColorScheme }) => $currentColorScheme.main?.accent};
 
   ${(props) =>
     !props.isDisabled &&
     css`
       :hover {
         background-color: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main.accent};
+          $currentColorScheme.main?.accent};
         opacity: 0.85;
         background: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main.accent};
-        border: ${({ $currentColorScheme }) => $currentColorScheme.main.accent};
+          $currentColorScheme.main?.accent};
+        border: ${({ $currentColorScheme }) =>
+          $currentColorScheme.main?.accent};
       }
 
       :active {
         background-color: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main.accent};
+          $currentColorScheme.main?.accent};
         background: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main.accent};
-        border: ${({ $currentColorScheme }) => $currentColorScheme.main.accent};
+          $currentColorScheme.main?.accent};
+        border: ${({ $currentColorScheme }) =>
+          $currentColorScheme.main?.accent};
         opacity: 1;
         filter: brightness(90%);
         cursor: pointer;
@@ -71,7 +73,7 @@ const StyledButton = styled(Button)`
     `}
 
   .button-content {
-    color: ${({ $currentColorScheme }) => $currentColorScheme.text.accent};
+    color: ${({ $currentColorScheme }) => $currentColorScheme.text?.accent};
     position: relative;
     display: flex;
     justify-content: space-between;

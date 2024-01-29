@@ -197,7 +197,7 @@ class ThirdPartyServices extends React.Component {
           <Box marginProp="8px 0 20px 0">
             <Link
               className="third-party-link"
-              color={currentColorScheme.main.accent}
+              color={currentColorScheme.main?.accent}
               isHovered
               target="_blank"
               href={integrationSettingsUrl}

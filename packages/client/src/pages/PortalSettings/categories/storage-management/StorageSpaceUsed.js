@@ -133,7 +133,7 @@ const DiskSpaceUsedComponent = (props) => {
             </ColorTheme>
           )}
         </div>
-        {!unlimitedStorageSize && (
+        {standalone && !unlimitedStorageSize && (
           <div className="disk-space_icon">
             <ContextMenu ref={ref} getContextModel={getContextModel} />
             <ContextMenuButton

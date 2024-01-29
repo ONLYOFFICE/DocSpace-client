@@ -8,13 +8,39 @@ import {
   getCustomToolbar,
   getPDFToolbar,
 } from "../../helpers/getCustomToolbar";
-import { ContextMenuModel } from "../../types";
 
-import { StyledDropDown } from "../StyledDropDown";
-import { StyledDropDownItem } from "../StyledDropDownItem";
-import ViewerWrapperProps from "./ViewerWrapper.props";
+import { StyledDropDown, StyledDropDownItem } from "../../MediaViewer.styled";
+
+import type { ContextMenuModel } from "../../types";
+import type ViewerWrapperProps from "./ViewerWrapper.props";
 
 function ViewerWrapper(props: ViewerWrapperProps) {
+  const {
+    isPdf,
+    title,
+    isAudio,
+    isVideo,
+    visible,
+    fileUrl,
+    isImage,
+    playlist,
+    audioIcon,
+    targetFile,
+    userAccess,
+    errorTitle,
+    headerIcon,
+    playlistPos,
+    isPreviewFile,
+
+    onClose,
+    onNextClick,
+    onPrevClick,
+    contextModel,
+    onDeleteClick,
+    onDownloadClick,
+    onSetSelectionFile,
+  } = props;
+
   const { interfaceDirection } = useTheme();
   const isRtl = interfaceDirection === "rtl";
 
@@ -22,30 +48,29 @@ function ViewerWrapper(props: ViewerWrapperProps) {
     (item: ContextMenuModel) => {
       if (isSeparator(item)) return;
 
-      props.onSetSelectionFile();
+      onSetSelectionFile();
       item.onClick();
     },
-    [props.onSetSelectionFile]
+    [onSetSelectionFile],
   );
 
   const generateContextMenu = (
     isOpen: boolean,
     right?: string,
-    bottom?: string
+    bottom?: string,
   ) => {
-    const model = props.contextModel();
+    const model = contextModel();
 
     return (
       <StyledDropDown
-        dir={interfaceDirection}
         open={isOpen}
-        isDefaultMode={false}
+        fixedDirection
         directionY="top"
-        directionX={isRtl ? "left" : "right"}
-        fixedDirection={true}
         withBackdrop={false}
-        manualY={(bottom || "63") + "px"}
-        manualX={(right || "-31") + "px"}
+        isDefaultMode={false}
+        directionX={isRtl ? "left" : "right"}
+        manualY={`${bottom ?? 63}px`}
+        manualX={`${right ?? -31}px`}
       >
         {model.map((item) => {
           if (item.disabled) return;
@@ -66,78 +91,69 @@ function ViewerWrapper(props: ViewerWrapperProps) {
   };
 
   const toolbar = useMemo(() => {
-    const {
-      onDeleteClick,
-      onDownloadClick,
-      playlist,
-      playlistPos,
-      userAccess,
-    } = props;
-
-    const file = props.targetFile;
+    const file = targetFile;
     const isEmptyContextMenu =
-      props.contextModel().filter((item) => !item.disabled).length === 0;
+      contextModel().filter((item) => !item.disabled).length === 0;
 
-    const customToolbar = props.isPdf
+    const customToolbar = isPdf
       ? getPDFToolbar()
       : file
-      ? getCustomToolbar(
-          file,
-          isEmptyContextMenu,
-          onDeleteClick,
-          onDownloadClick
-        )
-      : [];
+        ? getCustomToolbar(
+            file,
+            isEmptyContextMenu,
+            onDeleteClick,
+            onDownloadClick,
+          )
+        : [];
 
     const canShare = playlist[playlistPos].canShare;
     const toolbars =
       !canShare && userAccess
         ? customToolbar.filter(
-            (x) => x.key !== "share" && x.key !== "share-separator"
+            (x) => x.key !== "share" && x.key !== "share-separator",
           )
         : customToolbar.filter((x) => x.key !== "delete");
 
     return toolbars;
   }, [
-    props.isPdf,
-    props.onDeleteClick,
-    props.onDownloadClick,
-    props.playlist,
-    props.playlistPos,
-    props.userAccess,
-    props.targetFile,
+    isPdf,
+    playlist,
+    userAccess,
+    targetFile,
+    playlistPos,
+    contextModel,
+    onDeleteClick,
+    onDownloadClick,
   ]);
 
   return (
     <Viewer
-      title={props.title}
-      fileUrl={props.fileUrl}
-      isAudio={props.isAudio}
-      isVideo={props.isVideo}
-      isPdf={props.isPdf}
-      visible={props.visible}
-      isImage={props.isImage}
-      playlist={props.playlist}
-      inactive={props.inactive}
-      audioIcon={props.audioIcon}
-      errorTitle={props.errorTitle}
-      headerIcon={props.headerIcon}
-      targetFile={props.targetFile}
+      title={title}
+      isPdf={isPdf}
+      fileUrl={fileUrl}
+      isAudio={isAudio}
+      isVideo={isVideo}
+      visible={visible}
+      isImage={isImage}
       toolbar={toolbar}
-      playlistPos={props.playlistPos}
-      archiveRoom={props.archiveRoom}
-      isPreviewFile={props.isPreviewFile}
-      onMaskClick={props.onClose}
-      onNextClick={props.onNextClick}
-      onPrevClick={props.onPrevClick}
-      contextModel={props.contextModel}
-      onDownloadClick={props.onDownloadClick}
+      playlist={playlist}
+      audioIcon={audioIcon}
+      errorTitle={errorTitle}
+      headerIcon={headerIcon}
+      targetFile={targetFile}
+      playlistPos={playlistPos}
+      isPreviewFile={isPreviewFile}
+      onMaskClick={onClose}
+      onNextClick={onNextClick}
+      onPrevClick={onPrevClick}
+      contextModel={contextModel}
+      onDownloadClick={onDownloadClick}
+      onSetSelectionFile={onSetSelectionFile}
       generateContextMenu={generateContextMenu}
-      onSetSelectionFile={props.onSetSelectionFile}
     />
   );
 }
 
 export default memo(ViewerWrapper, (prevProps, nextProps) =>
-  equal(prevProps, nextProps)
+  equal(prevProps, nextProps),
 );

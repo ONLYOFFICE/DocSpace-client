@@ -1,23 +1,19 @@
 import type { ContextMenuModel, IFile, PlaylistType } from "../../types";
 
 interface ViewerWrapperProps {
-  targetFile?: IFile;
-  userAccess: boolean;
-  visible: boolean;
   title: string;
+  visible: boolean;
   fileUrl?: string;
-  inactive: boolean;
-  playlist: PlaylistType[];
+  targetFile?: IFile;
   playlistPos: number;
+  userAccess: boolean;
+  playlist: PlaylistType[];
 
-  isFavorite: boolean;
+  isPdf: boolean;
   isImage: boolean;
   isAudio: boolean;
   isVideo: boolean;
-  isPdf: boolean;
   isPreviewFile: boolean;
-
-  archiveRoom: boolean;
 
   errorTitle: string;
   headerIcon: string;

@@ -31,7 +31,7 @@ export interface TextareaProps {
   /** Font-size value */
   fontSize?: number;
   /** Text-area height value */
-  heightTextArea?: number;
+  heightTextArea?: string;
   /** Specifies the text color */
   color?: string;
   /** Default input property */
@@ -48,13 +48,16 @@ export interface TextareaProps {
   hasNumeration?: boolean;
   /** Calculating height of content depending on number of lines */
   isFullHeight?: boolean;
+  /** Calculated height of content depending on number of lines in pixels */
+  fullHeight?: number;
+
   classNameCopyIcon?: string;
   paddingLeftProp?: string;
 }
 
 export interface TextareaThemeProps extends TextareaProps {
   ref: React.LegacyRef<HTMLTextAreaElement>;
-  heightTextAreaProp?: number;
+  heightTextAreaProp?: string;
   $currentColorScheme?: TColorScheme;
   interfaceDirection?: string;
 }

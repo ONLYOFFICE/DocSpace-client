@@ -32,6 +32,6 @@ import { Textarea } from "@docspace/shared/components/textarea";
 | `style`          | `obj`, `array` |    -     |   -    |                 -                  | Accepts css style                                        |
 | `value`          |    `string`    |    -     |   -    |                 -                  | Value for Textarea                                       |
 | `fontSize`       |    `number`    |    -     |   -    |                 13                 | Value for font-size                                      |
-| `heightTextArea` |    `number`    |    -     |   -    |                 -                  | Value for height text-area                               |
+| `heightTextArea` |    `string`    |    -     |   -    |                 -                  | Value for height text-area                               |
 | `isJSONField`    |     `bool`     |    -     |   -    |              `false`               | Indicates that the field is displaying JSON object       |
 | `copyInfoText`   |    `string`    |    -     |   -    | `Content was copied successfully!` | Indicates the text of toast/informational alarm          |

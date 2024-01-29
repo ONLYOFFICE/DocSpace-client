@@ -15,6 +15,8 @@ const ClearScrollbar = ({
   heightScale,
   hasError,
   heightTextAreaProp,
+  isFullHeight,
+  fullHeight,
   ...props
 }: {
   isDisabled?: boolean;
@@ -37,21 +39,27 @@ const StyledScrollbar = styled(ClearScrollbar)`
   }
 
   width: ${(props) => props.theme.textArea.scrollWidth} !important;
-  height: ${(props) => {
-    return props.heightScale
-      ? "67vh"
-      : props.heightTextAreaProp
-        ? `${props.heightTextAreaProp + 2}px`
-        : "91px";
-  }} !important;
+  height: calc(
+    ${(props) => {
+        return props.heightScale
+          ? "67vh"
+          : props.isFullHeight
+            ? `${props.fullHeight}px`
+            : props.heightTextAreaProp
+              ? props.heightTextAreaProp
+              : "91px";
+      }} + 2px
+  ) !important;
 
   textarea {
     height: ${(props) => {
       return props.heightScale
         ? "65vh"
-        : props.heightTextAreaProp
-          ? `${props.heightTextAreaProp}px`
-          : "89px";
+        : props.isFullHeight
+          ? `${props.fullHeight}px`
+          : props.heightTextAreaProp
+            ? props.heightTextAreaProp
+            : "89px";
     }};
   }
   background-color: ${(props) =>
@@ -204,6 +212,15 @@ const Wrapper = styled.div<{ enableCopy?: boolean; isJSONField?: boolean }>`
   position: relative;
 
   max-width: 1200px;
+  height: ${(props) => {
+    return props.heightScale
+      ? "65vh"
+      : props.isFullHeight
+        ? `${props.fullHeight}px`
+        : props.heightTextArea
+          ? props.heightTextArea
+          : "89px";
+  }};
 
   .scroll-wrapper {
     margin-right: ${(props) =>

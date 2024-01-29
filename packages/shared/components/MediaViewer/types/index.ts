@@ -1,15 +1,8 @@
-declare global {
-  interface Window {
-    Tiff: new (arg: object) => any;
-    DocSpaceConfig: any;
-  }
-}
-
 export type ContextMenuAction = (file: IFile, t: TranslationType) => void;
 
-export type OmitSecondArg<F> = F extends (x: infer P, arg: any) => infer R
+export type OmitSecondArg<F> = F extends (x: infer P, ...arg: never) => infer R
   ? (file: P) => R
-  : never;
+  : F;
 
 export type TranslationType = (key: string, opt?: object) => string;
 
@@ -122,3 +115,12 @@ export type SeparatorType = {
 };
 
 export type ContextMenuModel = ContextMenuType | SeparatorType;
+
+export type BoundsType = {
+  top: number;
+  bottom: number;
+  right: number;
+  left: number;
+};
+
+export type Point = { x: number; y: number };

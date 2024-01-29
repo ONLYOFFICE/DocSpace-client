@@ -55,6 +55,7 @@ declare global {
       proxy: {
         url?: string;
       };
+      imageThumbnails?: boolean;
     };
     AscDesktopEditor: { execCommand: (key: string, value: string) => void };
     cloudCryptoCommand: (
@@ -69,6 +70,9 @@ declare global {
     }) => void;
     RendererProcessVariable: {
       theme?: { id: string; system: string };
+    };
+    Tiff: new (arg: object) => {
+      toDataURL: () => string;
     };
   }
 }

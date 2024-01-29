@@ -9,8 +9,6 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import SectionWrapper from "SRC_DIR/components/Section";
 import { inject, observer } from "mobx-react";
 
-console.log(AuthenticatedAction);
-
 const ConfirmRoute = ({
   doAuthenticated,
   isAuthenticated,

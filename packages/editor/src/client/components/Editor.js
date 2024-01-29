@@ -875,6 +875,11 @@ function Editor({
         onRequestSelectSpreadsheet = onSDKRequestSelectSpreadsheet;
         onRequestSelectDocument = onSDKRequestSelectDocument;
         onRequestReferenceSource = onSDKRequestReferenceSource;
+
+        if (fileInfo?.rootFolderType !== FolderType.USER) { //TODO: remove condition for share in my
+          onRequestUsers = onSDKRequestUsers;
+          onRequestSendNotify = onSDKRequestSendNotify;
+        }
       }
 
       if (userAccessRights.EditHistory) {
@@ -887,11 +892,6 @@ function Editor({
         if (!isZoom) {
           onRequestOpen = onSDKRequestOpen;
         }
-      }
-
-      if (fileInfo?.rootFolderType !== FolderType.USER) {
-        onRequestUsers = onSDKRequestUsers;
-        onRequestSendNotify = onSDKRequestSendNotify;
       }
 
       if (window.DocSpaceConfig?.editor?.requestClose) {

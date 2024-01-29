@@ -49,8 +49,13 @@ const StyledDiscSpaceUsedComponent = styled.div`
       display: grid;
       min-height: 35px;
       .last-update {
-        color: ${(props) => props.theme.text.descriptionColor};
+        color: ${(props) =>
+          props.theme.client.settings.storageManagement.descriptionColor};
       }
+    }
+
+    @media ${mobile} {
+      flex-direction: column;
     }
   }
 

@@ -19,6 +19,7 @@ const isDesktopEditor = window["AscDesktopEditor"] !== undefined;
 import PresentationIcoUrl from "PUBLIC_DIR/images/presentation.ico";
 import SpreadSheetIcoUrl from "PUBLIC_DIR/images/spreadsheet.ico";
 import TextIcoUrl from "PUBLIC_DIR/images/text.ico";
+import PDFIcoUrl from "PUBLIC_DIR/images/pdf.ico";
 
 const App = ({
   initialLanguage,
@@ -38,7 +39,7 @@ const App = ({
 
     switch (rest?.config?.documentType) {
       case "word":
-        icon = TextIcoUrl;
+        icon = rest?.config?.document?.fileType === "pdf" ? PDFIcoUrl : TextIcoUrl;
         break;
       case "slide":
         icon = PresentationIcoUrl;

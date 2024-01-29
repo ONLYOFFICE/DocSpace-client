@@ -20,7 +20,12 @@ import DisableQuotaReactSvgUrl from "PUBLIC_DIR/images/disable.quota.react.svg?u
 import ChangeStorageQuotaDialog from "SRC_DIR/components/dialogs/ChangeStorageQuotaDialog";
 
 const DiskSpaceUsedComponent = (props) => {
-  const { usedTotalStorageSizeCount, maxTotalSizeByQuota, standalone } = props;
+  const {
+    usedTotalStorageSizeCount,
+    maxTotalSizeByQuota,
+    standalone,
+    isTenantCustomQuotaSet,
+  } = props;
 
   const { t } = useTranslation("Settings");
   const [isVisibleDialog, setIsVisibleChangeQuotaDialog] = useState();
@@ -32,25 +37,27 @@ const DiskSpaceUsedComponent = (props) => {
 
   const ref = useRef(null);
 
+  const onChangeDialogClick = () => {
+    setIsVisibleChangeQuotaDialog(true);
+    isDisableQuota && setIsDisableQuota(false);
+  };
+  const onDisableDialogClick = () => {
+    setIsVisibleChangeQuotaDialog(true);
+    setIsDisableQuota(true);
+  };
   const getContextModel = () => {
     return [
       {
         key: "create",
         label: t("Common:ChangeQuota"),
         icon: ChangQuotaReactSvgUrl,
-        onClick: () => {
-          setIsVisibleChangeQuotaDialog(true);
-          isDisableQuota && setIsDisableQuota(false);
-        },
+        onClick: onChangeDialogClick,
       },
       {
         key: "template-info",
         label: t("Common:DisableQuota"),
         icon: DisableQuotaReactSvgUrl,
-        onClick: () => {
-          setIsVisibleChangeQuotaDialog(true);
-          setIsDisableQuota(true);
-        },
+        onClick: onDisableDialogClick,
       },
     ];
   };
@@ -64,7 +71,6 @@ const DiskSpaceUsedComponent = (props) => {
   const onClose = () => {
     setIsVisibleChangeQuotaDialog(false);
   };
-  const unlimitedStorageSize = maxTotalSizeByQuota === -1;
 
   return (
     <StyledDiscSpaceUsedComponent>
@@ -81,7 +87,7 @@ const DiskSpaceUsedComponent = (props) => {
       </StyledMainTitle>
       <div className="disk-space_content">
         <div className="disk-space_size-info">
-          {(!standalone || (standalone && !unlimitedStorageSize)) && (
+          {(!standalone || (standalone && isTenantCustomQuotaSet)) && (
             <Text
               fontWeight={700}
               fontSize={"14px"}
@@ -97,18 +103,18 @@ const DiskSpaceUsedComponent = (props) => {
               size: usedSize,
             })}
           </Text>
-          {standalone && unlimitedStorageSize && (
+          {standalone && !isTenantCustomQuotaSet && (
             <ColorTheme
               themeId={ThemeId.Link}
               fontWeight={700}
-              onClick={onClick}
+              onClick={onChangeDialogClick}
               className="disk-space_link"
             >
               {t("Common:ManageStorageQuota")}
             </ColorTheme>
           )}
         </div>
-        {standalone && !unlimitedStorageSize && (
+        {standalone && isTenantCustomQuotaSet && (
           <div className="disk-space_icon">
             <ContextMenu ref={ref} getContextModel={getContextModel} />
             <ContextMenuButton
@@ -126,15 +132,23 @@ const DiskSpaceUsedComponent = (props) => {
   );
 };
 
-export default inject(({ auth, storageManagement }) => {
+export default inject(({ auth }) => {
   const { currentQuotaStore, settingsStore } = auth;
-  const { maxTotalSizeByQuota, usedTotalStorageSizeCount } = currentQuotaStore;
+  const {
+    isTenantCustomQuotaSet,
+    usedTotalStorageSizeCount,
+    maxTotalSizeByQuota: maxSizeByTariff,
+    tenantCustomQuota,
+  } = currentQuotaStore;
 
   const { standalone } = settingsStore;
 
+  const maxTotalSizeByQuota = standalone ? tenantCustomQuota : maxSizeByTariff;
+
   return {
-    maxTotalSizeByQuota,
+    isTenantCustomQuotaSet,
     usedTotalStorageSizeCount,
     standalone,
+    maxTotalSizeByQuota,
   };
 })(observer(DiskSpaceUsedComponent));

@@ -235,6 +235,9 @@ class QuotasStore {
   get isDefaultUsersQuotaSet() {
     return this.currentPortalQuota?.usersQuota?.enableQuota;
   }
+  get isTenantCustomQuotaSet() {
+    return this.currentPortalQuota?.tenantCustomQuota?.enableQuota;
+  }
 
   get defaultRoomsQuota() {
     return this.currentPortalQuota?.roomsQuota?.defaultQuota;
@@ -244,11 +247,20 @@ class QuotasStore {
     return this.currentPortalQuota?.usersQuota?.defaultQuota;
   }
 
+  get tenantCustomQuota() {
+    return this.currentPortalQuota?.tenantCustomQuota?.quota;
+  }
   get showStorageInfo() {
     const { user } = this.userStore;
 
     return this.isStatisticsAvailable && (user.isOwner || user.isAdmin);
   }
+
+  updateTenantCustomQuota = (obj) => {
+    for (let key in obj) {
+      this.currentPortalQuota.tenantCustomQuota[key] = obj[key];
+    }
+  };
 
   setPortalQuotaValue = (res) => {
     this.currentPortalQuota = res;

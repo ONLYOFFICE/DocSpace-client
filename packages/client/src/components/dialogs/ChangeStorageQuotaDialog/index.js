@@ -19,6 +19,7 @@ const ChangeStorageQuotaDialog = (props) => {
     onSave,
     onClose,
     isDisableQuota,
+    updateTenantCustomQuota,
   } = props;
   const { t } = useTranslation("Common");
 
@@ -35,6 +36,8 @@ const ChangeStorageQuotaDialog = (props) => {
   }, [size]);
 
   const isSizeError = () => {
+    if (isDisableQuota) return false;
+
     if (size.trim() === "") {
       setIsError(true);
       return true;
@@ -49,11 +52,12 @@ const ChangeStorageQuotaDialog = (props) => {
     setIsLoading(true);
 
     try {
-      await setTenantQuotaSettings({
+      const storageQuota = await setTenantQuotaSettings({
         TenantId: portalInfo.tenantId,
         Quota: isDisableQuota ? -1 : size,
       });
 
+      updateTenantCustomQuota(storageQuota);
       toastr.success(t("Common:StorageQuotaSet"));
     } catch (e) {
       toastr.error(e);
@@ -123,13 +127,17 @@ const ChangeStorageQuotaDialog = (props) => {
   );
 };
 
-export default inject(({ dialogsStore, storageManagement }) => {
+export default inject(({ auth, dialogsStore, storageManagement }) => {
   const { changeQuotaDialogVisible, setChangeQuotaDialogVisible } =
     dialogsStore;
   const { portalInfo } = storageManagement;
+  const { currentQuotaStore } = auth;
+  const { updateTenantCustomQuota } = currentQuotaStore;
+
   return {
     changeQuotaDialogVisible,
     setChangeQuotaDialogVisible,
     portalInfo,
+    updateTenantCustomQuota,
   };
 })(observer(ChangeStorageQuotaDialog));

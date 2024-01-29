@@ -14,7 +14,7 @@ import TrashWarning from "./sub-components/TrashWarning";
 import NavigationLogo from "./sub-components/LogoBlock";
 import DropBox from "./sub-components/DropBox";
 
-import { StyledContainer, StyledTariffWrapper } from "./Navigation.styled";
+import { StyledContainer } from "./Navigation.styled";
 import { INavigationProps } from "./Navigation.types";
 
 const Navigation = ({
@@ -254,23 +254,22 @@ const Navigation = ({
               isFrame={isFrame}
               isPublicRoom={isPublicRoom}
               isTrashFolder={isTrashFolder}
+              tariffBar={tariffBar}
+              title={title}
             />
           </StyledContainer>
           {isDesktop && isTrashFolder && !isEmptyPage && (
             <TrashWarning title={titles.trashWarning} />
           )}
-          <StyledTariffWrapper>
-            {tariffBar && tariffBar}
-            {infoPanelIsVisible && !hideInfoPanel && (
-              <ToggleInfoPanelButton
-                id="info-panel-toggle--open"
-                isRootFolder={isRootFolder}
-                toggleInfoPanel={toggleInfoPanel}
-                isInfoPanelVisible={isInfoPanelVisible}
-                titles={titles}
-              />
-            )}
-          </StyledTariffWrapper>
+          {infoPanelIsVisible && !hideInfoPanel && (
+            <ToggleInfoPanelButton
+              id="info-panel-toggle--open"
+              isRootFolder={isRootFolder}
+              toggleInfoPanel={toggleInfoPanel}
+              isInfoPanelVisible={isInfoPanelVisible}
+              titles={titles}
+            />
+          )}
         </>
       )}
     </Consumer>
@@ -278,4 +277,3 @@ const Navigation = ({
 };
 
 export default React.memo(Navigation);
-

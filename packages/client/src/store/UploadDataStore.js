@@ -915,7 +915,8 @@ class UploadDataStore {
     length,
     resolve,
     reject,
-    isAsyncUpload = false
+    isAsyncUpload = false,
+    isFinalize = false
   ) => {
     if (!res.data.data && res.data.message) {
       return reject(res.data.message);
@@ -938,7 +939,11 @@ class UploadDataStore {
             ? fileSize
             : this.settingsStore.chunkUploadSize;
       } else {
-        uploadedSize = fileSize - index * this.settingsStore.chunkUploadSize;
+        uploadedSize = isFinalize
+          ? 0
+          : fileSize <= this.settingsStore.chunkUploadSize
+            ? fileSize
+            : fileSize - index * this.settingsStore.chunkUploadSize;
       }
       newPercent = this.getFilesPercent(uploadedSize);
     }
@@ -1087,13 +1092,13 @@ class UploadDataStore {
           ].chunksArray.findIndex((x) => x.isFinalize);
 
           if (finalizeChunkIndex > -1) {
+            const finalizeIndex =
+              this.asyncUploadObj[operationId].chunksArray.length - 1;
+
             const finalizeRes =
               await this.asyncUploadObj[operationId].chunksArray[
                 finalizeChunkIndex
               ].onUpload();
-
-            const finalizeIndex =
-              this.asyncUploadObj[operationId].chunksArray.length - 1;
 
             this.checkChunkUpload(
               t,
@@ -1105,7 +1110,8 @@ class UploadDataStore {
               length,
               resolve,
               reject,
-              true
+              true, // isAsyncUpload
+              true //isFinalize
             );
           }
         }

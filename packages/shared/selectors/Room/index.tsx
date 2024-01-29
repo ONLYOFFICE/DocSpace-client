@@ -70,7 +70,7 @@ const RoomSelector = ({
   const [items, setItems] = React.useState<TSelectorItem[]>([]);
 
   const onSearchAction = React.useCallback(
-    (value: string, callback: () => void) => {
+    (value: string, callback?: Function) => {
       onSearch?.(value);
       setSearchValue(() => {
         setIsFirstLoad(true);
@@ -83,7 +83,7 @@ const RoomSelector = ({
   );
 
   const onClearSearchAction = React.useCallback(
-    (callback: () => void) => {
+    (callback?: Function) => {
       onClearSearch?.();
       setSearchValue(() => {
         setIsFirstLoad(true);

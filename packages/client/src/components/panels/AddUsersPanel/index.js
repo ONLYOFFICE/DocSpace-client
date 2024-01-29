@@ -3,17 +3,18 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import React, { useState, useEffect, useCallback } from "react";
 
-import Aside from "@docspace/components/aside";
-import Backdrop from "@docspace/components/backdrop";
-import Selector from "@docspace/components/selector";
-import toastr from "@docspace/components/toast/toastr";
+import { Aside } from "@docspace/shared/components/aside";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Selector } from "@docspace/shared/components/selector";
+import { toastr } from "@docspace/shared/components/toast";
 
-import { getUserRole } from "@docspace/common/utils";
-import Filter from "@docspace/common/api/people/filter";
+import { getUserRole } from "@docspace/shared/utils/common";
+import Filter from "@docspace/shared/api/people/filter";
 import Loaders from "@docspace/common/components/Loaders";
-import { getMembersList } from "@docspace/common/api/people";
-import useLoadingWithTimeout from "SRC_DIR/Hooks/useLoadingWithTimeout";
-import { ShareAccessRights, LOADER_TIMEOUT } from "@docspace/common/constants";
+import { getMembersList } from "@docspace/shared/api/people";
+import useLoadingWithTimeout from "@docspace/shared/hooks/useLoadingWithTimeout";
+import { ShareAccessRights } from "@docspace/shared/enums";
+import { LOADER_TIMEOUT } from "@docspace/shared/constants";
 
 import withLoader from "../../../HOCs/withLoader";
 
@@ -22,6 +23,7 @@ import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.pn
 import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
 import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/catalog.accounts.react.svg?url";
 import EmptyScreenPersonsSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
+import { RowLoader, SearchLoader } from "@docspace/shared/skeletons/selector";
 
 const AddUsersPanel = ({
   isEncrypted,
@@ -43,8 +45,8 @@ const AddUsersPanel = ({
   const accessRight = defaultAccess
     ? defaultAccess
     : isEncrypted
-    ? ShareAccessRights.FullAccess
-    : ShareAccessRights.ReadOnly;
+      ? ShareAccessRights.FullAccess
+      : ShareAccessRights.ReadOnly;
 
   const onBackClick = () => onClose();
   const getFilterWithOutDisabledUser = useCallback(
@@ -256,10 +258,10 @@ const AddUsersPanel = ({
           loadNextPage={loadNextPage}
           totalItems={total}
           isLoading={isLoading}
-          searchLoader={<Loaders.SelectorSearchLoader />}
+          searchLoader={<SearchLoader />}
           isSearchLoading={isLoading && !isLoadingSearch}
           rowLoader={
-            <Loaders.SelectorRowLoader
+            <RowLoader
               isUser
               count={15}
               isContainer={isLoading}

@@ -1,7 +1,7 @@
-import Tooltip from "@docspace/components/tooltip";
+import { Tooltip } from "@docspace/shared/components/tooltip";
 import LoadErrorIcon from "PUBLIC_DIR/images/load.error.react.svg";
 import styled from "styled-components";
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 import React from "react";
 import { useTheme } from "styled-components";
 

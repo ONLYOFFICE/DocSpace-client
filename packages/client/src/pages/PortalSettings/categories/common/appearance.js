@@ -1,20 +1,18 @@
 ﻿import CheckWhiteSvgUrl from "PUBLIC_DIR/images/check.white.svg?url";
-import React, { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { withTranslation } from "react-i18next";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 import { inject, observer } from "mobx-react";
-import Button from "@docspace/components/button";
-import Tooltip from "@docspace/components/tooltip";
-import Text from "@docspace/components/text";
-import TabContainer from "@docspace/components/tabs-container";
+import { Button } from "@docspace/shared/components/button";
+import { Tooltip } from "@docspace/shared/components/tooltip";
+import { Text } from "@docspace/shared/components/text";
+import { TabsContainer } from "@docspace/shared/components/tabs-container";
 import Preview from "./Appearance/preview";
 import { saveToSessionStorage, getFromSessionStorage } from "../../utils";
 import ColorSchemeDialog from "./sub-components/colorSchemeDialog";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import DropDownItem from "@docspace/components/drop-down-item";
-import DropDownContainer from "@docspace/components/drop-down";
-
-import HexColorPickerComponent from "./sub-components/hexColorPicker";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { DropDown } from "@docspace/shared/components/drop-down";
 
 import Loader from "./sub-components/loaderAppearance";
 
@@ -22,8 +20,10 @@ import { StyledComponent, StyledTheme } from "./Appearance/StyledApperance.js";
 import { ReactSVG } from "react-svg";
 import ModalDialogDelete from "./sub-components/modalDialogDelete";
 import hexToRgba from "hex-to-rgba";
-import { isMobile } from "@docspace/components/utils/device";
-import { DeviceType } from "@docspace/common/constants";
+import { isMobile } from "@docspace/shared/utils";
+import { DeviceType } from "@docspace/shared/enums";
+
+import { ColorPicker } from "@docspace/shared/components/color-picker";
 
 const Appearance = (props) => {
   const {
@@ -36,10 +36,13 @@ const Appearance = (props) => {
     tReady,
     t,
     currentDeviceType,
+    resetIsInit,
   } = props;
 
   const defaultAppliedColorAccent = currentColorScheme.main.accent;
   const defaultAppliedColorButtons = currentColorScheme.main.buttons;
+
+  const isMobileView = currentDeviceType === DeviceType.mobile;
 
   const headerAddTheme = t("Settings:NewColorScheme");
   const headerEditTheme = t("Settings:EditColorScheme");
@@ -165,6 +168,7 @@ const Appearance = (props) => {
 
     return () => {
       window.removeEventListener("resize", onCheckView);
+      !isMobileView && resetIsInit();
     };
   }, []);
 
@@ -581,7 +585,7 @@ const Appearance = (props) => {
   };
 
   const nodeHexColorPickerButtons = (
-    <DropDownContainer
+    <DropDown
       directionX="right"
       manualY="62px"
       withBackdrop={false}
@@ -590,18 +594,20 @@ const Appearance = (props) => {
       clickOutsideAction={onCloseHexColorPickerButtons}
     >
       <DropDownItem className="drop-down-item-hex">
-        <HexColorPickerComponent
+        <ColorPicker
           id="buttons-hex"
-          onCloseHexColorPicker={onCloseHexColorPickerButtons}
-          onAppliedColor={onAppliedColorButtons}
+          onClose={onCloseHexColorPickerButtons}
+          onApply={onAppliedColorButtons}
           appliedColor={appliedColorButtons}
+          applyButtonLabel={t("Common:ApplyButton")}
+          cancelButtonLabel={t("Common:CancelButton")}
         />
       </DropDownItem>
-    </DropDownContainer>
+    </DropDown>
   );
 
   const nodeHexColorPickerAccent = (
-    <DropDownContainer
+    <DropDown
       directionX="right"
       manualY="62px"
       withBackdrop={false}
@@ -610,14 +616,16 @@ const Appearance = (props) => {
       clickOutsideAction={onCloseHexColorPickerAccent}
     >
       <DropDownItem className="drop-down-item-hex">
-        <HexColorPickerComponent
+        <ColorPicker
           id="accent-hex"
-          onCloseHexColorPicker={onCloseHexColorPickerAccent}
-          onAppliedColor={onAppliedColorAccent}
+          onClose={onCloseHexColorPickerAccent}
+          onApply={onAppliedColorAccent}
           appliedColor={appliedColorAccent}
+          applyButtonLabel={t("Common:ApplyButton")}
+          cancelButtonLabel={t("Common:CancelButton")}
         />
       </DropDownItem>
-    </DropDownContainer>
+    </DropDown>
   );
 
   const textTooltip = () => {
@@ -733,7 +741,7 @@ const Appearance = (props) => {
           onSaveColorSchemeDialog={onSaveColorSchemeDialog}
         />
         <div className="header preview-header">{t("Common:Preview")}</div>
-        <TabContainer elements={array_items} />
+        <TabsContainer elements={array_items} />
 
         <div className="buttons-container">
           <Button
@@ -767,7 +775,7 @@ const Appearance = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
+export default inject(({ auth, common }) => {
   const { settingsStore } = auth;
   const {
     appearanceTheme,
@@ -780,6 +788,8 @@ export default inject(({ auth }) => {
     currentDeviceType,
   } = settingsStore;
 
+  const { resetIsInit } = common;
+
   return {
     appearanceTheme,
     selectedThemeId,
@@ -789,5 +799,6 @@ export default inject(({ auth }) => {
     deleteAppearanceTheme,
     currentDeviceType,
     theme,
+    resetIsInit,
   };
 })(withTranslation(["Profile", "Common", "Settings"])(observer(Appearance)));

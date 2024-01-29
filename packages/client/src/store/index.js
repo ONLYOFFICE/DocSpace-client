@@ -55,9 +55,13 @@ const ssoStore = new SsoFormStore();
 
 const tagsStore = new TagsStore();
 
-const treeFoldersStore = new TreeFoldersStore(selectedFolderStore, authStore);
-
 const publicRoomStore = new PublicRoomStore();
+
+const treeFoldersStore = new TreeFoldersStore(
+  selectedFolderStore,
+  authStore,
+  publicRoomStore
+);
 
 const clientLoadingStore = new ClientLoadingStore();
 
@@ -181,6 +185,7 @@ authStore.infoPanelStore.filesStore = filesStore;
 authStore.infoPanelStore.peopleStore = peopleStore;
 authStore.infoPanelStore.selectedFolderStore = selectedFolderStore;
 authStore.infoPanelStore.treeFoldersStore = treeFoldersStore;
+authStore.infoPanelStore.publicRoomStore = publicRoomStore;
 
 const createEditRoomStore = new CreateEditRoomStore(
   filesStore,

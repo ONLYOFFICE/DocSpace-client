@@ -4,10 +4,10 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 import { ChangeUserTypeDialog } from "../dialogs";
-import toastr from "@docspace/components/toast/toastr";
-import Link from "@docspace/components/link";
-import Text from "@docspace/components/text";
-import { combineUrl } from "@docspace/common/utils";
+import { toastr } from "@docspace/shared/components/toast";
+import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 const ChangeUserTypeEvent = ({
   setVisible,
@@ -19,7 +19,7 @@ const ChangeUserTypeEvent = ({
   onClose,
   setSelected,
   getPeopleListItem,
-  setSelection,
+  setInfoPanelSelection,
   needResetUserSelection,
   isRoomAdmin,
 }) => {
@@ -70,7 +70,7 @@ const ChangeUserTypeEvent = ({
         if (!needResetUserSelection) {
           const user = getPeopleListItem(users[0]);
 
-          setSelection(user);
+          setInfoPanelSelection(user);
         }
 
         successCallback && successCallback(users);
@@ -144,7 +144,7 @@ export default inject(({ auth, dialogsStore, peopleStore }) => {
     setChangeUserTypeDialogVisible: setVisible,
   } = dialogsStore;
   const { isRoomAdmin, infoPanelStore } = auth;
-  const { setSelection } = infoPanelStore;
+  const { setInfoPanelSelection } = infoPanelStore;
   const { dialogStore, filterStore, usersStore } = peopleStore;
 
   const { data: peopleDialogData } = dialogStore;
@@ -160,7 +160,7 @@ export default inject(({ auth, dialogsStore, peopleStore }) => {
     isRoomAdmin,
     needResetUserSelection,
     getPeopleListItem,
-    setSelection,
+    setInfoPanelSelection,
     setSelected,
 
     visible,

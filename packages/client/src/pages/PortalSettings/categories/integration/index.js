@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Submenu from "@docspace/components/submenu";
+import { Submenu } from "@docspace/shared/components/submenu";
 import { useNavigate } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 
 import SSO from "./SingleSignOn";
@@ -12,9 +12,9 @@ import ThirdParty from "./ThirdPartyServicesSettings";
 import SMTPSettings from "./SMTPSettings";
 import DocumentService from "./DocumentService";
 import PluginPage from "./Plugins";
-import { DeviceType } from "@docspace/common/constants";
-import Badge from "@docspace/components/badge";
-import Box from "@docspace/components/box";
+import { DeviceType } from "@docspace/shared/enums";
+import { Badge } from "@docspace/shared/components/badge";
+import { Box } from "@docspace/shared/components/box";
 
 const IntegrationWrapper = (props) => {
   const {
@@ -114,8 +114,8 @@ const IntegrationWrapper = (props) => {
         currentDeviceType === DeviceType.desktop
           ? 0
           : currentDeviceType === DeviceType.mobile
-          ? "53px"
-          : "61px"
+            ? "53px"
+            : "61px"
       }
     />
   );

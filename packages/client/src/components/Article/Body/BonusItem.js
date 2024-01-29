@@ -2,8 +2,8 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import CatalogItem from "@docspace/components/catalog-item";
-import { combineUrl } from "@docspace/common/utils";
+import { ArticleItem } from "@docspace/shared/components/article-item";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { useNavigate } from "react-router-dom";
 import GiftReactSvgUrl from "PUBLIC_DIR/images/gift.react.svg?url";
 
@@ -24,7 +24,7 @@ const BonusItem = ({ showText, toggleArticleOpen }) => {
   }, []);
 
   return (
-    <CatalogItem
+    <ArticleItem
       key="bonus"
       text={t("Common:Bonus")}
       icon={GiftReactSvgUrl}

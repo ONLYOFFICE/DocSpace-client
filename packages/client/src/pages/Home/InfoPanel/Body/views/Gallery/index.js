@@ -6,7 +6,7 @@ import { ReactSVG } from "react-svg";
 import withLoader from "@docspace/client/src/HOCs/withLoader";
 import Loaders from "@docspace/common/components/Loaders/index.js";
 
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 
 import { parseAndFormatDate } from "../../helpers/DetailsHelper.js";
 import {
@@ -19,7 +19,7 @@ import {
   StyledProperties,
   StyledSubtitle,
 } from "../../styles/common.js";
-import Link from "@docspace/components/link/index.js";
+import { Link } from "@docspace/shared/components/link";
 
 const Gallery = ({
   t,

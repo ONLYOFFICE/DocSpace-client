@@ -2,7 +2,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { SubmitToFormGallery } from "../../../components/dialogs";
 import FilesSelector from "@docspace/client/src/components/FilesSelector";
-import { FilesSelectorFilterTypes } from "@docspace/common/constants";
+import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 // import SelectFileDialog from "src/components/panels/SelectFileDialog";
 
 const Dialogs = ({

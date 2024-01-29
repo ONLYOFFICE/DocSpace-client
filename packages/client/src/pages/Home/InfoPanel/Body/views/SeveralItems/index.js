@@ -6,7 +6,7 @@ import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_alt_dark.sv
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 import { StyledSeveralItemsContainer } from "../../styles/severalItems";
 
 const SeveralItems = ({ isAccounts, theme, selectedItems }) => {
@@ -40,7 +40,7 @@ const SeveralItems = ({ isAccounts, theme, selectedItems }) => {
 };
 
 export default inject(({ auth }) => {
-  const selectedItems = auth.infoPanelStore.getSelectedItems();
+  const selectedItems = auth.infoPanelStore.infoPanelSelectedItems;
 
   return {
     theme: auth.settingsStore.theme,

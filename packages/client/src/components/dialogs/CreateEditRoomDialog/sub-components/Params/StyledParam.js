@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 
 const StyledParam = styled.div`
   box-sizing: border-box;

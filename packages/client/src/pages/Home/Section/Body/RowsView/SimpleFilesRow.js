@@ -1,22 +1,27 @@
 import React, { useEffect } from "react";
 import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
-import DragAndDrop from "@docspace/components/drag-and-drop";
-import Row from "@docspace/components/row";
+import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
+import { Row } from "@docspace/shared/components/row";
 import FilesRowContent from "./FilesRowContent";
 import { isMobile, isMobileOnly } from "react-device-detect";
 
-import { isMobile as isMobileUtile } from "@docspace/components/utils/device";
+import {
+  isMobile as isMobileUtile,
+  mobile,
+  tablet,
+  classNames,
+} from "@docspace/shared/utils";
 
 import withFileActions from "../../../../../HOCs/withFileActions";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";
 import withBadges from "../../../../../HOCs/withBadges";
 import ItemIcon from "../../../../../components/ItemIcon";
 import marginStyles from "./CommonStyles";
-import { Base } from "@docspace/components/themes";
-import { mobile, tablet } from "@docspace/components/utils/device";
+import { Base } from "@docspace/shared/themes";
+
 import CursorPalmReactSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
-import { classNames } from "@docspace/components/utils/classNames";
+
 const checkedStyle = css`
   background: ${(props) => props.theme.filesSection.rowView.checkedBackground};
   ${marginStyles}
@@ -258,33 +263,20 @@ const StyledSimpleFilesRow = styled(Row)`
       `}
   }
 
-  @media ${tablet} {
-    .badges {
-      flex-direction: row-reverse;
-      gap: 24px;
-    }
+  .badges {
+    flex-direction: row-reverse;
+    gap: 24px;
+  }
 
-    .file__badges,
-    .room__badges,
-    .folder__badges {
-      > div {
-        margin-left: 0;
-        margin-right: 0;
-      }
-    }
+  .file__badges,
+  .room__badges,
+  .folder__badges {
+    margin-top: 0px;
 
-    .file__badges,
-    .room__badges,
-    .folder__badges {
-      > div {
-        margin-top: 0px;
-      }
-    }
-
-    .file__badges,
-    .folder__badges,
-    .room__badges {
+    > div {
       margin-top: 0px;
+      margin-left: 0;
+      margin-right: 0;
     }
   }
 
@@ -420,8 +412,8 @@ const SimpleFilesRow = (props) => {
         showHotkeyBorder
           ? "row-hotkey-border"
           : checkedProps || isActive
-          ? "row-selected"
-          : ""
+            ? "row-selected"
+            : ""
       }`}
     >
       <DragAndDrop
@@ -443,7 +435,7 @@ const SimpleFilesRow = (props) => {
           mode={"modern"}
           sectionWidth={sectionWidth}
           contentElement={
-            isSmallContainer || isRooms ? null : quickButtonsComponent
+            isMobileDevice || isRooms ? null : quickButtonsComponent
           }
           badgesComponent={!isMobileDevice && badgesComponent}
           onSelect={onContentFileSelect}
@@ -476,7 +468,7 @@ const SimpleFilesRow = (props) => {
             sectionWidth={sectionWidth}
             onFilesClick={onFilesClick}
             quickButtons={
-              isSmallContainer || isRooms ? quickButtonsComponent : null
+              isMobileDevice || isRooms ? quickButtonsComponent : null
             }
             isRooms={isRooms}
             badgesComponent={isMobileDevice && badgesComponent}

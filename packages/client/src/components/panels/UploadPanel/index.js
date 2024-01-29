@@ -2,10 +2,10 @@
 import ClearActiveReactSvgUrl from "PUBLIC_DIR/images/clear.active.react.svg?url";
 import ButtonCancelReactSvgUrl from "PUBLIC_DIR/images/button.cancel.react.svg?url";
 import React from "react";
-import IconButton from "@docspace/components/icon-button";
-import Backdrop from "@docspace/components/backdrop";
-import Heading from "@docspace/components/heading";
-import Aside from "@docspace/components/aside";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Heading } from "@docspace/shared/components/heading";
+import { Aside } from "@docspace/shared/components/aside";
 import { withTranslation } from "react-i18next";
 import {
   StyledAsidePanel,
@@ -75,7 +75,7 @@ class UploadPanelComponent extends React.Component {
     const {
       t,
       uploadPanelVisible,
-      /* sharingPanelVisible, */ uploaded,
+      uploaded,
       converted,
       uploadDataFiles,
       cancelConversion,
@@ -90,8 +90,8 @@ class UploadPanelComponent extends React.Component {
     const title = isUploading
       ? t("Uploads")
       : isUploadingAndConversion
-      ? t("UploadAndConvert")
-      : t("Files:Convert");
+        ? t("UploadAndConvert")
+        : t("Files:Convert");
 
     return (
       <StyledAsidePanel visible={visible}>
@@ -143,7 +143,7 @@ class UploadPanelComponent extends React.Component {
                   </div>*/}
               </div>
             </StyledHeaderContent>
-            <StyledBody stype="mediumBlack" className="upload-panel_body">
+            <StyledBody className="upload-panel_body">
               <FileList />
             </StyledBody>
           </StyledContent>
@@ -157,9 +157,7 @@ const UploadPanel = withTranslation(["UploadPanel", "Files"])(
   withLoader(UploadPanelComponent)(<Loaders.DialogAsideLoader isPanel />)
 );
 
-export default inject(({ /* dialogsStore, */ auth, uploadDataStore }) => {
-  //const { sharingPanelVisible } = dialogsStore;
-
+export default inject(({ auth, uploadDataStore }) => {
   const {
     uploaded,
     converted,
@@ -178,7 +176,6 @@ export default inject(({ /* dialogsStore, */ auth, uploadDataStore }) => {
   const { clearPrimaryProgressData } = primaryProgressDataStore;
 
   return {
-    //sharingPanelVisible,
     uploadPanelVisible,
     uploaded,
     converted,

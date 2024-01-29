@@ -6,7 +6,7 @@ import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 
 import Loaders from "@docspace/common/components/Loaders";
-import Submenu from "@docspace/components/submenu";
+import { Submenu } from "@docspace/shared/components/submenu";
 
 import MainProfile from "./sub-components/main-profile";
 import LoginContent from "./sub-components/LoginContent";
@@ -14,8 +14,8 @@ import Notifications from "./sub-components/notifications";
 import FileManagement from "./sub-components/file-management";
 import InterfaceTheme from "./sub-components/interface-theme";
 
-import { tablet } from "@docspace/components/utils/device";
-import { DeviceType } from "@docspace/common/constants";
+import { tablet } from "@docspace/shared/utils";
+import { DeviceType } from "@docspace/shared/enums";
 
 const Wrapper = styled.div`
   display: flex;
@@ -84,8 +84,8 @@ const SectionBodyContent = (props) => {
           currentDeviceType === DeviceType.desktop
             ? 0
             : currentDeviceType === DeviceType.mobile
-            ? "53px"
-            : "61px"
+              ? "53px"
+              : "61px"
         }
       />
     </Wrapper>

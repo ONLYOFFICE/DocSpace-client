@@ -1,11 +1,11 @@
-import React from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import Box from "@docspace/components/box";
-import RadioButtonGroup from "@docspace/components/radio-button-group";
-import Text from "@docspace/components/text";
+import { Box } from "@docspace/shared/components/box";
+import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
+import { Text } from "@docspace/shared/components/text";
 
 import SsoComboBox from "./sub-components/SsoComboBox";
 import SsoFormField from "./sub-components/SsoFormField";
@@ -15,6 +15,8 @@ import {
   sloBindingOptions,
   nameIdOptions,
 } from "./sub-components/constants";
+import { useIsMobileView } from "../../../utils/useIsMobileView";
+import { DeviceType } from "@docspace/shared/enums";
 
 const PROVIDER_URL = "https://idpservice/idp";
 
@@ -44,7 +46,16 @@ const IdpSettings = (props) => {
     ssoUrlRedirectHasError,
     sloUrlPostHasError,
     sloUrlRedirectHasError,
+    isInit,
+    init,
+    currentDeviceType,
   } = props;
+
+  const isMobileView = currentDeviceType === DeviceType.mobile;
+
+  useEffect(() => {
+    if (!isInit || isMobileView) init();
+  }, [isInit]);
 
   return (
     <StyledWrapper>
@@ -169,7 +180,7 @@ const IdpSettings = (props) => {
   );
 };
 
-export default inject(({ ssoStore }) => {
+export default inject(({ auth, ssoStore }) => {
   const {
     ssoBinding,
     enableSso,
@@ -188,7 +199,10 @@ export default inject(({ ssoStore }) => {
     ssoUrlRedirectHasError,
     sloUrlPostHasError,
     sloUrlRedirectHasError,
+    init,
+    isInit,
   } = ssoStore;
+  const { currentDeviceType } = auth.settingsStore;
 
   return {
     ssoBinding,
@@ -208,5 +222,8 @@ export default inject(({ ssoStore }) => {
     ssoUrlRedirectHasError,
     sloUrlPostHasError,
     sloUrlRedirectHasError,
+    init,
+    isInit,
+    currentDeviceType,
   };
 })(observer(IdpSettings));

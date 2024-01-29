@@ -1,26 +1,26 @@
 import React from "react";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import Text from "@docspace/components/text";
-import Button from "@docspace/components/button";
-import Link from "@docspace/components/link";
-import { startBackup } from "@docspace/common/api/portal";
-import RadioButton from "@docspace/components/radio-button";
-import toastr from "@docspace/components/toast/toastr";
-import { BackupStorageType, FolderType } from "@docspace/common/constants";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
+import { Link } from "@docspace/shared/components/link";
+import { startBackup } from "@docspace/shared/api/portal";
+import { RadioButton } from "@docspace/shared/components/radio-button";
+import { toastr } from "@docspace/shared/components/toast";
+import { BackupStorageType, FolderType } from "@docspace/shared/enums";
 import ThirdPartyModule from "./sub-components/ThirdPartyModule";
 import RoomsModule from "./sub-components/RoomsModule";
 import ThirdPartyStorageModule from "./sub-components/ThirdPartyStorageModule";
 import { StyledModules, StyledManualBackup } from "./../StyledBackup";
 import { getFromLocalStorage, saveToLocalStorage } from "../../../../utils";
-//import { getThirdPartyCommonFolderTree } from "@docspace/common/api/files";
+//import { getThirdPartyCommonFolderTree } from "@docspace/shared/api/files";
 import DataBackupLoader from "@docspace/common/components/Loaders/DataBackupLoader";
 import {
   getBackupStorage,
   getStorageRegions,
-} from "@docspace/common/api/settings";
-import FloatingButton from "@docspace/components/floating-button";
-import { getSettingsThirdParty } from "@docspace/common/api/files";
+} from "@docspace/shared/api/settings";
+import { FloatingButton } from "@docspace/shared/components/floating-button";
+import { getSettingsThirdParty } from "@docspace/shared/api/files";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 let selectedStorageType = "";

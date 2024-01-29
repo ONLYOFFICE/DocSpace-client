@@ -13,7 +13,9 @@ const generalRoutes = [
     children: [
       {
         index: true,
-        element: <Navigate to="login" />,
+        Component: () => (
+          <Navigate to="login" state={window.DocSpace?.location?.state} />
+        ),
       },
       {
         path: "login",

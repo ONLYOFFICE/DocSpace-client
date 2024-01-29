@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import Editor from "./components/Editor.js";
 import { useSSR } from "react-i18next";
 import useMfScripts from "./helpers/useMfScripts";
-import { combineUrl, isRetina, setCookie } from "@docspace/common/utils";
-import { getCookie } from "@docspace/components/utils/cookie";
+import { isRetina } from "@docspace/shared/utils/common";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { getCookie, setCookie } from "@docspace/shared/utils/cookie";
 
 import initDesktop from "./helpers/initDesktop";
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -12,13 +13,14 @@ import i18n from "./i18n";
 import { I18nextProvider } from "react-i18next";
 import GlobalStyle from "./components/GlobalStyle.js";
 import { inject, observer, Provider as MobxProvider } from "mobx-react";
-import ThemeProvider from "@docspace/components/theme-provider";
+import { ThemeProvider } from "@docspace/shared/components/theme-provider";
 
 const isDesktopEditor = window["AscDesktopEditor"] !== undefined;
 
 import PresentationIcoUrl from "PUBLIC_DIR/images/presentation.ico";
 import SpreadSheetIcoUrl from "PUBLIC_DIR/images/spreadsheet.ico";
 import TextIcoUrl from "PUBLIC_DIR/images/text.ico";
+import PDFIcoUrl from "PUBLIC_DIR/images/pdf.ico";
 
 const App = ({
   initialLanguage,
@@ -38,7 +40,7 @@ const App = ({
 
     switch (rest?.config?.documentType) {
       case "word":
-        icon = TextIcoUrl;
+        icon = rest?.config?.document?.fileType === "pdf" ? PDFIcoUrl : TextIcoUrl;
         break;
       case "slide":
         icon = PresentationIcoUrl;

@@ -1,21 +1,21 @@
 ﻿import CombinedShapeSvgUrl from "PUBLIC_DIR/images/combined.shape.svg?url";
 import React from "react";
 import { withTranslation } from "react-i18next";
-import FieldContainer from "@docspace/components/field-container";
-import toastr from "@docspace/components/toast/toastr";
-import TextInput from "@docspace/components/text-input";
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { toastr } from "@docspace/shared/components/toast";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
-import { isMobile } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/shared/utils";
 import checkScrollSettingsBlock from "../utils";
 import { StyledSettingsComponent } from "./StyledSettings";
 import LoaderCustomization from "../sub-components/loaderCustomization";
 import withLoading from "SRC_DIR/HOCs/withLoading";
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
 
 let greetingTitleFromSessionStorage = "";
 let greetingTitleDefaultFromSessionStorage = "";
@@ -70,6 +70,7 @@ const WelcomePageSettings = (props) => {
     greetingTitleDefaultFromSessionStorage = getFromSessionStorage(
       "greetingTitleDefault"
     );
+    getGreetingSettingsIsDefault();
 
     setDocumentTitle(t("CustomTitlesWelcome"));
 
@@ -85,7 +86,8 @@ const WelcomePageSettings = (props) => {
         ? greetingSettings
         : greetingTitleDefaultFromSessionStorage;
 
-    if (!isLoaded) initSettings().then(() => setIsLoaded(true));
+    const page = isMobileView ? "language-and-time-zone" : "general";
+    if (!isLoaded) initSettings(page).then(() => setIsLoaded(true));
 
     checkInnerWidth();
     window.addEventListener("resize", checkInnerWidth);
@@ -193,9 +195,10 @@ const WelcomePageSettings = (props) => {
         toastr.success(t("SuccessfullySaveGreetingSettingsMessage"));
       })
       .catch((error) => toastr.error(error))
-      .finally(() =>
-        setState((val) => ({ ...val, isLoadingGreetingSave: false }))
-      );
+      .finally(() => {
+        getGreetingSettingsIsDefault();
+        setState((val) => ({ ...val, isLoadingGreetingSave: false }));
+      });
 
     setState((val) => ({ ...val, showReminder: false }));
 
@@ -206,9 +209,10 @@ const WelcomePageSettings = (props) => {
   const onRestoreGreetingSettings = () => {
     setState((val) => ({ ...val, isLoadingGreetingRestore: true }));
     restoreGreetingTitle()
-      .then(() => {
+      .then((defaultTitle) => {
         setState((val) => ({
           ...val,
+          greetingTitle: defaultTitle,
           showReminder: false,
         }));
 
@@ -218,9 +222,10 @@ const WelcomePageSettings = (props) => {
         toastr.success(t("SuccessfullySaveGreetingSettingsMessage"));
       })
       .catch((error) => toastr.error(error))
-      .finally(() =>
-        setState((val) => ({ ...val, isLoadingGreetingRestore: false }))
-      );
+      .finally(() => {
+        getGreetingSettingsIsDefault();
+        setState((val) => ({ ...val, isLoadingGreetingRestore: false }));
+      });
   };
 
   const settingIsEqualInitialValue = (stateName, value) => {

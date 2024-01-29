@@ -1,7 +1,14 @@
 import ReactDOM from "react-dom";
-import { isMobile } from "react-device-detect";
-import React, { useRef, useState, useEffect, useCallback } from "react";
+import { inject, observer } from "mobx-react";
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+} from "react";
 
+import { DeviceType } from "@docspace/shared/enums";
 import { StyledViewerContainer } from "../../StyledComponents";
 
 import NextButton from "../NextButton";
@@ -33,6 +40,19 @@ function Viewer(props: ViewerProps) {
   const contextMenuRef = useRef<{ show: (e: any) => void }>(null);
 
   const [isFullscreen, setIsFullScreen] = useState<boolean>(false);
+
+  const devices = useMemo(
+    () => ({
+      isMobileOnly: props.currentDeviceType === DeviceType.mobile,
+      isMobile:
+        props.currentDeviceType === DeviceType.tablet ||
+        props.currentDeviceType === DeviceType.mobile,
+      isDesktop: props.currentDeviceType === DeviceType.desktop,
+    }),
+    [props.currentDeviceType]
+  );
+  const { isMobile } = devices;
+
   useEffect(() => {
     document.body.appendChild(containerRef.current);
     containerRef.current.style.direction = "ltr";
@@ -61,7 +81,7 @@ function Viewer(props: ViewerProps) {
       clearTimeout(timerIDRef.current);
       setPanelVisible(true);
     };
-  }, [setImageTimer, setPanelVisible]);
+  }, [setImageTimer, setPanelVisible, isMobile]);
 
   const resetToolbarVisibleTimer = () => {
     if (panelToolbarRef.current) return;
@@ -210,63 +230,70 @@ function Viewer(props: ViewerProps) {
               resetToolbarVisibleTimer={resetToolbarVisibleTimer}
               contextModel={props.contextModel}
               errorTitle={props.errorTitle}
+              devices={devices}
             />,
             containerRef.current
           )
         : props.isVideo || props.isAudio
-        ? ReactDOM.createPortal(
-            <ViewerPlayer
-              isError={isError}
-              canDownload={!!props.targetFile?.security.Download}
-              src={props.fileUrl}
-              thumbnailSrc={targetFile.thumbnailUrl}
-              isAudio={props.isAudio}
-              isVideo={props.isVideo}
-              panelVisible={panelVisible}
-              audioIcon={props.audioIcon}
-              isFullScreen={isFullscreen}
-              errorTitle={props.errorTitle}
-              mobileDetails={mobileDetails}
-              isLastImage={!isNotLastElement}
-              isFistImage={!isNotFirstElement}
-              isPreviewFile={props.isPreviewFile}
-              isOpenContextMenu={isOpenContextMenu}
-              setIsError={setIsError}
-              onMask={handleMaskClick}
-              onPrev={props.onPrevClick}
-              onNext={props.onNextClick}
-              setPanelVisible={setPanelVisible}
-              setIsFullScreen={setIsFullScreen}
-              contextModel={props.contextModel}
-              onDownloadClick={props.onDownloadClick}
-              generateContextMenu={props.generateContextMenu}
-              removeToolbarVisibleTimer={removeToolbarVisibleTimer}
-              removePanelVisibleTimeout={removePanelVisibleTimeout}
-              restartToolbarVisibleTimer={restartToolbarVisibleTimer}
-            />,
-            containerRef.current
-          )
-        : props.isPdf &&
-          ReactDOM.createPortal(
-            <PDFViewer
-              src={props.fileUrl ?? ""}
-              title={props.title}
-              toolbar={props.toolbar}
-              onMask={handleMaskClick}
-              isPDFSidebarOpen={isPDFSidebarOpen}
-              mobileDetails={mobileDetails}
-              generateContextMenu={props.generateContextMenu}
-              setIsOpenContextMenu={setIsOpenContextMenu}
-              setIsPDFSidebarOpen={setIsPDFSidebarOpen}
-              isLastImage={!isNotLastElement}
-              isFistImage={!isNotFirstElement}
-              onPrev={props.onPrevClick}
-              onNext={props.onNextClick}
-            />,
-            containerRef.current
-          )}
+          ? ReactDOM.createPortal(
+              <ViewerPlayer
+                isError={isError}
+                canDownload={!!props.targetFile?.security.Download}
+                src={props.fileUrl}
+                thumbnailSrc={targetFile.thumbnailUrl}
+                isAudio={props.isAudio}
+                isVideo={props.isVideo}
+                panelVisible={panelVisible}
+                audioIcon={props.audioIcon}
+                isFullScreen={isFullscreen}
+                errorTitle={props.errorTitle}
+                mobileDetails={mobileDetails}
+                isLastImage={!isNotLastElement}
+                isFistImage={!isNotFirstElement}
+                isPreviewFile={props.isPreviewFile}
+                isOpenContextMenu={isOpenContextMenu}
+                setIsError={setIsError}
+                onMask={handleMaskClick}
+                onPrev={props.onPrevClick}
+                onNext={props.onNextClick}
+                setPanelVisible={setPanelVisible}
+                setIsFullScreen={setIsFullScreen}
+                contextModel={props.contextModel}
+                onDownloadClick={props.onDownloadClick}
+                generateContextMenu={props.generateContextMenu}
+                removeToolbarVisibleTimer={removeToolbarVisibleTimer}
+                removePanelVisibleTimeout={removePanelVisibleTimeout}
+                restartToolbarVisibleTimer={restartToolbarVisibleTimer}
+                devices={devices}
+              />,
+              containerRef.current
+            )
+          : props.isPdf &&
+            ReactDOM.createPortal(
+              <PDFViewer
+                src={props.fileUrl ?? ""}
+                title={props.title}
+                toolbar={props.toolbar}
+                onMask={handleMaskClick}
+                isPDFSidebarOpen={isPDFSidebarOpen}
+                mobileDetails={mobileDetails}
+                generateContextMenu={props.generateContextMenu}
+                setIsOpenContextMenu={setIsOpenContextMenu}
+                setIsPDFSidebarOpen={setIsPDFSidebarOpen}
+                isLastImage={!isNotLastElement}
+                isFistImage={!isNotFirstElement}
+                onPrev={props.onPrevClick}
+                onNext={props.onNextClick}
+                devices={devices}
+              />,
+              containerRef.current
+            )}
     </StyledViewerContainer>
   );
 }
 
-export default Viewer;
+export default inject<any>(({ auth }) => {
+  const { currentDeviceType } = auth.settingsStore;
+
+  return { currentDeviceType };
+})(observer(Viewer));

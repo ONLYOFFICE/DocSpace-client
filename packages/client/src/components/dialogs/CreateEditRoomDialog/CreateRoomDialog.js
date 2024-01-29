@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
 
-import ModalDialog from "@docspace/components/modal-dialog";
-import Button from "@docspace/components/button";
-
+import { Button } from "@docspace/shared/components/button";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import TagHandler from "./handlers/TagHandler";
 
 import SetRoomParams from "./sub-components/SetRoomParams";
@@ -35,6 +34,7 @@ const StyledModalDialog = styled(ModalDialog)`
 const CreateRoomDialog = ({
   t,
   visible,
+  title,
   onClose,
   onCreate,
 
@@ -59,7 +59,7 @@ const CreateRoomDialog = ({
 
   const startRoomParams = {
     type: undefined,
-    title: "",
+    title: title,
     tags: [],
     isPrivate: false,
     storageLocation: {
@@ -93,7 +93,7 @@ const CreateRoomDialog = ({
     }));
   };
 
-  const isRoomTitleChanged = roomParams.title.trim() !== "" ? false : true;
+  const isRoomTitleChanged = roomParams?.title?.trim() !== "" ? false : true;
 
   const onKeyUpHandler = (e) => {
     if (isWrongTitle) return;
@@ -101,7 +101,7 @@ const CreateRoomDialog = ({
   };
 
   const onCreateRoom = async () => {
-    if (!roomParams.title.trim()) {
+    if (!roomParams?.title?.trim()) {
       setIsValidTitle(false);
       return;
     }

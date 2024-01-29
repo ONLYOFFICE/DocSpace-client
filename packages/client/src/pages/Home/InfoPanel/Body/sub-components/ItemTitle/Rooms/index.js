@@ -1,25 +1,32 @@
 import { useRef } from "react";
 import { withTranslation } from "react-i18next";
 
-import { Text } from "@docspace/components";
+import { Text } from "@docspace/shared/components/text";
 import { inject, observer } from "mobx-react";
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
-import IconButton from "@docspace/components/icon-button";
+import { IconButton } from "@docspace/shared/components/icon-button";
 import { StyledTitle } from "../../../styles/common";
-import RoomIcon from "@docspace/components/room-icon";
+import { RoomIcon } from "@docspace/shared/components/room-icon";
 import RoomsContextBtn from "./context-btn";
-import { RoomsType, ShareAccessRights } from "@docspace/common/constants";
+import {
+  FolderType,
+  RoomsType,
+  ShareAccessRights,
+} from "@docspace/shared/enums";
 
 const RoomsItemHeader = ({
   t,
   selection,
-  selectionParentRoom,
+  infoPanelSelection,
   setIsMobileHidden,
   isGracePeriod,
   setInvitePanelOptions,
   setInviteUsersWarningDialogVisible,
   isPublicRoomType,
   roomsView,
+  setSelected,
+  setBufferSelection,
+  isArchive,
 }) => {
   const itemTitleRef = useRef();
 
@@ -28,13 +35,18 @@ const RoomsItemHeader = ({
   const icon = selection.icon;
   const isLoadedRoomIcon = !!selection.logo?.medium;
   const showDefaultRoomIcon = !isLoadedRoomIcon && selection.isRoom;
-  const security = selectionParentRoom ? selectionParentRoom.security : {};
+  const security = infoPanelSelection ? infoPanelSelection.security : {};
   const canInviteUserInRoomAbility = security?.EditAccess;
   const showInviteUserIcon = selection?.isRoom && roomsView === "info_members";
 
+  const onSelectItem = () => {
+    setSelected("none");
+    setBufferSelection(selection);
+  };
+
   const onClickInviteUsers = () => {
     setIsMobileHidden(true);
-    const parentRoomId = selectionParentRoom.id;
+    const parentRoomId = infoPanelSelection.id;
 
     if (isGracePeriod) {
       setInviteUsersWarningDialogVisible(true);
@@ -58,7 +70,7 @@ const RoomsItemHeader = ({
           <RoomIcon
             color={selection.logo.color}
             title={selection.title}
-            isArchive={selection.isArchive}
+            isArchive={isArchive}
           />
         ) : (
           <img
@@ -84,51 +96,46 @@ const RoomsItemHeader = ({
           />
         )}
 
-        <RoomsContextBtn selection={selection} itemTitleRef={itemTitleRef} />
+        <RoomsContextBtn
+          selection={selection}
+          itemTitleRef={itemTitleRef}
+          onSelectItem={onSelectItem}
+        />
       </div>
     </StyledTitle>
   );
 };
 
-export default inject(({ auth, dialogsStore, selectedFolderStore }) => {
-  const {
-    selection: selectionItem,
-    selectionParentRoom,
-    getIsRooms,
-    roomsView,
-  } = auth.infoPanelStore;
+export default inject(
+  ({ auth, dialogsStore, selectedFolderStore, filesStore }) => {
+    const { infoPanelSelection, roomsView } = auth.infoPanelStore;
 
-  const isShowParentRoom =
-    getIsRooms() &&
-    roomsView === "info_members" &&
-    !selectionItem.isRoom &&
-    !!selectionParentRoom;
+    const selection = infoPanelSelection.length > 1 ? null : infoPanelSelection;
+    const isArchive = selection?.rootFolderType === FolderType.Archive;
 
-  const selection =
-    selectionItem.length > 1
-      ? null
-      : isShowParentRoom
-      ? selectionParentRoom
-      : selectionItem;
+    return {
+      selection,
+      roomsView,
+      infoPanelSelection: auth.infoPanelStore.infoPanelSelection,
+      setIsMobileHidden: auth.infoPanelStore.setIsMobileHidden,
 
-  return {
-    selection,
-    roomsView,
-    selectionParentRoom: auth.infoPanelStore.selectionParentRoom,
-    setIsMobileHidden: auth.infoPanelStore.setIsMobileHidden,
+      isGracePeriod: auth.currentTariffStatusStore.isGracePeriod,
 
-    isGracePeriod: auth.currentTariffStatusStore.isGracePeriod,
+      setInvitePanelOptions: dialogsStore.setInvitePanelOptions,
+      setInviteUsersWarningDialogVisible:
+        dialogsStore.setInviteUsersWarningDialogVisible,
 
-    setInvitePanelOptions: dialogsStore.setInvitePanelOptions,
-    setInviteUsersWarningDialogVisible:
-      dialogsStore.setInviteUsersWarningDialogVisible,
+      isPublicRoomType:
+        (selectedFolderStore.roomType ??
+          auth.infoPanelStore.infoPanelSelection?.roomType) ===
+        RoomsType.PublicRoom,
 
-    isPublicRoomType:
-      (selectedFolderStore.roomType ??
-        auth.infoPanelStore.selectionParentRoom?.roomType) ===
-      RoomsType.PublicRoom,
-  };
-})(
+      setSelected: filesStore.setSelected,
+      setBufferSelection: filesStore.setBufferSelection,
+      isArchive,
+    };
+  }
+)(
   withTranslation([
     "Files",
     "Common",

@@ -1,8 +1,8 @@
 import {
   setEncryptionKeys,
   getEncryptionAccess,
-} from "@docspace/common/api/files";
-import { regDesktop } from "@docspace/common/desktop";
+} from "@docspace/shared/api/files";
+import { regDesktop } from "@docspace/shared/utils/desktop";
 
 const initDesktop = (cfg, user, fileId, t) => {
   const encryptionKeys = cfg?.editorConfig?.encryptionKeys;

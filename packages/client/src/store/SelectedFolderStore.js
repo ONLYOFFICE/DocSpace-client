@@ -1,3 +1,4 @@
+import { ShareAccessRights } from "@docspace/shared/enums";
 import { makeAutoObservable } from "mobx";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
@@ -31,7 +32,9 @@ class SelectedFolderStore {
   rootFolderId = null;
   settingsStore = null;
   security = null;
-  inRoom = true;
+  type = null;
+  inRoom = false;
+  isFolder = true;
 
   constructor(settingsStore) {
     makeAutoObservable(this);
@@ -68,11 +71,19 @@ class SelectedFolderStore {
       rootFolderId: this.rootFolderId,
       security: this.security,
       inRoom: this.inRoom,
+      isFolder: this.isFolder,
     };
   };
 
   get isRootFolder() {
     return this.pathParts && this.pathParts.length <= 1;
+  }
+
+  get canCopyPublicLink() {
+    return (
+      this.access === ShareAccessRights.RoomManager ||
+      this.access === ShareAccessRights.None
+    );
   }
 
   toDefault = () => {
@@ -103,7 +114,8 @@ class SelectedFolderStore {
     this.tags = null;
     this.rootFolderId = null;
     this.security = null;
-    this.inRoom = true;
+    this.type = null;
+    this.inRoom = false;
   };
 
   setParentId = (parentId) => {
@@ -118,9 +130,21 @@ class SelectedFolderStore {
     this.createdBy = createdBy;
   };
 
+  setNavigationPath = (navigationPath) => {
+    this.navigationPath = navigationPath;
+  };
+
+  setShared = (shared) => {
+    this.shared = shared;
+  };
+
   updateEditedSelectedRoom = (title = this.title, tags = this.tags) => {
     this.title = title;
     this.tags = tags;
+  };
+
+  setInRoom = (inRoom) => {
+    this.inRoom = inRoom;
   };
 
   addDefaultLogoPaths = () => {
@@ -180,6 +204,8 @@ class SelectedFolderStore {
       if (!selectedFolderItems.includes("roomType")) this.roomType = null;
 
       setDocumentTitle(selectedFolder.title);
+
+      if (!selectedFolder.hasOwnProperty("type")) this.type = null;
 
       for (let key of selectedFolderItems) {
         if (key in this) {

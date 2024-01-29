@@ -1,17 +1,18 @@
 import React, { useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useParams } from "react-router-dom";
-import Button from "@docspace/components/button";
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { Button } from "@docspace/shared/components/button";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import AppLoader from "@docspace/common/components/AppLoader";
-import RoomSelector from "../../components/RoomSelector";
+import RoomSelector from "@docspace/shared/selectors/Room";
 import FilesSelector from "../../components/FilesSelector";
 import {
   frameCallEvent,
   frameCallbackData,
   createPasswordHash,
   frameCallCommand,
-} from "@docspace/common/utils";
+} from "@docspace/shared/utils/common";
+import { RoomsType } from "@docspace/shared/enums";
 
 const Sdk = ({
   frameConfig,
@@ -25,6 +26,9 @@ const Sdk = ({
   getSettings,
   user,
   updateProfileCulture,
+  getRoomsIcon,
+  fetchExternalLinks,
+  getFilePrimaryLink,
 }) => {
   useEffect(() => {
     window.addEventListener("message", handleMessage, false);
@@ -118,16 +122,49 @@ const Sdk = ({
   };
 
   const onSelectRoom = useCallback(
-    (data) => {
-      data[0].icon = toRelativeUrl(data[0].icon);
+    async (data) => {
+      if (data[0].logo.large !== "") {
+        data[0].icon = toRelativeUrl(data[0].logo.large);
+      } else {
+        data[0].icon = await getRoomsIcon(data[0].roomType, false, 32);
+      }
+
+      if (
+        data[0].roomType === RoomsType.PublicRoom ||
+        (data[0].roomType === RoomsType.CustomRoom && data[0].shared)
+      ) {
+        const links = await fetchExternalLinks(data[0].id);
+
+        const requestTokens = links.map((link) => {
+          const { id, title, requestToken, primary } = link.sharedTo;
+
+          return {
+            id,
+            primary,
+            title,
+            requestToken,
+          };
+        });
+
+        data[0].requestTokens = requestTokens;
+      }
+
       frameCallEvent({ event: "onSelectCallback", data });
     },
     [frameCallEvent]
   );
 
   const onSelectFile = useCallback(
-    (data) => {
+    async (data) => {
       data.icon = getIcon(64, data.fileExst);
+
+      if (data.inPublic) {
+        const link = await getFilePrimaryLink(data.id);
+
+        const { id, title, requestToken, primary } = link.sharedTo;
+
+        data.requestTokens = [{ id, primary, title, requestToken }];
+      }
 
       frameCallEvent({ event: "onSelectCallback", data });
     },
@@ -150,8 +187,8 @@ const Sdk = ({
     case "room-selector":
       component = (
         <RoomSelector
-          withCancelButton={true}
-          withHeader={false}
+          withCancelButton={frameConfig?.showSelectorCancel}
+          withHeader={frameConfig?.showSelectorHeader}
           onAccept={onSelectRoom}
           onCancel={onClose}
         />
@@ -162,11 +199,14 @@ const Sdk = ({
         <FilesSelector
           isPanelVisible={true}
           embedded={true}
-          withHeader={false}
+          withHeader={frameConfig?.showSelectorHeader}
           isSelect={true}
           onSelectFile={onSelectFile}
           onClose={onClose}
           filterParam={"ALL"}
+          isUserOnly={selectorType === "userFolderOnly"}
+          isRoomsOnly={selectorType === "roomsOnly"}
+          withCancelButton={frameConfig?.showSelectorCancel}
         />
       );
       break;
@@ -177,25 +217,32 @@ const Sdk = ({
   return component;
 };
 
-export default inject(({ auth, settingsStore, peopleStore }) => {
-  const { login, logout, userStore } = auth;
-  const { theme, setFrameConfig, frameConfig, getSettings, isLoaded } =
-    auth.settingsStore;
-  const { loadCurrentUser, user } = userStore;
-  const { updateProfileCulture } = peopleStore.targetUserStore;
-  const { getIcon } = settingsStore;
+export default inject(
+  ({ auth, settingsStore, peopleStore, publicRoomStore, filesStore }) => {
+    const { login, logout, userStore } = auth;
+    const { theme, setFrameConfig, frameConfig, getSettings, isLoaded } =
+      auth.settingsStore;
+    const { loadCurrentUser, user } = userStore;
+    const { updateProfileCulture } = peopleStore.targetUserStore;
+    const { getIcon, getRoomsIcon } = settingsStore;
+    const { fetchExternalLinks } = publicRoomStore;
+    const { getFilePrimaryLink } = filesStore;
 
-  return {
-    theme,
-    setFrameConfig,
-    frameConfig,
-    login,
-    logout,
-    getSettings,
-    loadCurrentUser,
-    getIcon,
-    isLoaded,
-    updateProfileCulture,
-    user,
-  };
-})(observer(Sdk));
+    return {
+      theme,
+      setFrameConfig,
+      frameConfig,
+      login,
+      logout,
+      getSettings,
+      loadCurrentUser,
+      getIcon,
+      getRoomsIcon,
+      isLoaded,
+      updateProfileCulture,
+      user,
+      fetchExternalLinks,
+      getFilePrimaryLink,
+    };
+  }
+)(observer(Sdk));

@@ -1,21 +1,26 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import api from "../api";
-import { setWithCredentialsStatus } from "../api/client";
+import api from "@docspace/shared/api";
+import { setWithCredentialsStatus } from "@docspace/shared/api/client";
 
 import SettingsStore from "./SettingsStore";
 import BannerStore from "./BannerStore";
 import UserStore from "./UserStore";
 import TfaStore from "./TfaStore";
 import InfoPanelStore from "./InfoPanelStore";
-import { logout as logoutDesktop, desktopConstants } from "../desktop";
-import { isAdmin, setCookie } from "../utils";
-import { getCookie } from "@docspace/components/utils/cookie";
+import {
+  logout as logoutDesktop,
+  desktopConstants,
+} from "@docspace/shared/utils/desktop";
+import { isAdmin } from "@docspace/shared/utils/common";
+import { getCookie, setCookie } from "@docspace/shared/utils/cookie";
 import CurrentQuotasStore from "./CurrentQuotaStore";
 import CurrentTariffStatusStore from "./CurrentTariffStatusStore";
 import PaymentQuotasStore from "./PaymentQuotasStore";
 
-import { LANGUAGE, COOKIE_EXPIRATION_YEAR, TenantStatus } from "../constants";
-import { getPortalTenantExtra } from "../api/portal";
+import { TenantStatus } from "@docspace/shared/enums";
+import { COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
+import { LANGUAGE } from "@docspace/shared/constants";
+import { getPortalTenantExtra } from "@docspace/shared/api/portal";
 
 class AuthStore {
   userStore = null;
@@ -346,9 +351,11 @@ class AuthStore {
 
     this.isLogout = true;
 
-    const { isDesktopClient: isDesktop } = this.settingsStore;
+    const { isDesktopClient: isDesktop, isFrame } = this.settingsStore;
 
     isDesktop && logoutDesktop();
+
+    isFrame && frameCallEvent({ event: "onSignOut" });
 
     if (ssoLogoutUrl) return ssoLogoutUrl;
 

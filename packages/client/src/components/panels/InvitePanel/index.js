@@ -8,15 +8,15 @@ import React, {
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { DeviceType } from "@docspace/common/constants";
-import { LOADER_TIMEOUT } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
+import { LOADER_TIMEOUT } from "@docspace/shared/constants";
 
-import Backdrop from "@docspace/components/backdrop";
-import Aside from "@docspace/components/aside";
-import Button from "@docspace/components/button";
-import toastr from "@docspace/components/toast/toastr";
-import Portal from "@docspace/components/portal";
-import { isDesktop, isMobile, size } from "@docspace/components/utils/device";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Aside } from "@docspace/shared/components/aside";
+import { Button } from "@docspace/shared/components/button";
+import { toastr } from "@docspace/shared/components/toast";
+import { Portal } from "@docspace/shared/components/portal";
+import { isDesktop, isMobile, size } from "@docspace/shared/utils";
 
 import {
   StyledBlock,
@@ -30,7 +30,7 @@ import {
 import ItemsList from "./sub-components/ItemsList";
 import InviteInput from "./sub-components/InviteInput";
 import ExternalLinks from "./sub-components/ExternalLinks";
-import Scrollbar from "@docspace/components/scrollbar";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 import InfoBar from "./sub-components/InfoBar";
 import InvitePanelLoader from "./sub-components/InvitePanelLoader";
@@ -54,9 +54,8 @@ const InvitePanel = ({
   defaultAccess,
   inviteUsers,
   setInfoPanelIsMobileHidden,
-  reloadSelectionParentRoom,
-  setUpdateRoomMembers,
-  roomsView,
+  updateInfoPanelSelection,
+  addInfoPanelMembers,
   setInviteLanguage,
   getUsersList,
   filter,
@@ -277,15 +276,15 @@ const InvitePanel = ({
 
     try {
       setIsLoading(true);
-      const result =
-        roomId === -1
-          ? await inviteUsers(data)
-          : await setRoomSecurity(roomId, data);
+      const isRooms = roomId !== -1;
+      const result = !isRooms
+        ? await inviteUsers(data)
+        : await setRoomSecurity(roomId, data);
 
       setIsLoading(false);
 
-      if (roomsView === "info_members") {
-        setUpdateRoomMembers(true);
+      if (isRooms) {
+        addInfoPanelMembers(t, result.members, true);
       }
 
       onClose();
@@ -295,7 +294,7 @@ const InvitePanel = ({
         toastr.warning(result?.warning);
       }
 
-      reloadSelectionParentRoom();
+      updateInfoPanelSelection();
     } catch (err) {
       toastr.error(err);
       setIsLoading(false);
@@ -378,7 +377,7 @@ const InvitePanel = ({
         <>
           {scrollAllPanelContent ? (
             <div className="invite-panel-body" ref={invitePanelBodyRef}>
-              <Scrollbar stype="mediumBlack">{bodyInvitePanel}</Scrollbar>
+              <Scrollbar>{bodyInvitePanel}</Scrollbar>
             </div>
           ) : (
             bodyInvitePanel
@@ -471,10 +470,8 @@ export default inject(({ auth, peopleStore, filesStore, dialogsStore }) => {
   const { filter } = peopleStore.filterStore;
   const {
     setIsMobileHidden: setInfoPanelIsMobileHidden,
-    reloadSelectionParentRoom,
-    setUpdateRoomMembers,
-    roomsView,
-    filesView,
+    updateInfoPanelSelection,
+    addInfoPanelMembers,
   } = auth.infoPanelStore;
 
   const {
@@ -517,9 +514,8 @@ export default inject(({ auth, peopleStore, filesStore, dialogsStore }) => {
     collaboratorLink,
     inviteUsers,
     setInfoPanelIsMobileHidden,
-    reloadSelectionParentRoom,
-    setUpdateRoomMembers,
-    roomsView,
+    updateInfoPanelSelection,
+    addInfoPanelMembers,
     getUsersList,
     filter,
     currentDeviceType,

@@ -1,9 +1,9 @@
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
-import Badge from "@docspace/components/badge";
-import { Base } from "@docspace/components/themes";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { Badge } from "@docspace/shared/components/badge";
+import { Base } from "@docspace/shared/themes";
 import { StyledMobileCategoryWrapper, StyledArrowRightIcon } from "./styles";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 const MobileCategoryWrapper = (props) => {
   const { title, url, subtitle, onClickLink, withPaidBadge, badgeLabel } =

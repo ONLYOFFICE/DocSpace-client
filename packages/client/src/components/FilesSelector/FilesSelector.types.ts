@@ -29,12 +29,14 @@ export type Item = {
   security: Security;
   roomType: number;
   fileExst?: string;
+  shared: boolean;
 };
 
 export type BreadCrumb = {
   label: string;
   id: number | string;
   isRoom: boolean;
+  shared: boolean;
 };
 
 type setItems = (value: Item[] | null) => Item[];
@@ -71,6 +73,7 @@ export type useRootHelperProps = {
   onSetBaseFolderPath?: (
     value: number | string | undefined | BreadCrumb[]
   ) => void;
+  isUserOnly?: boolean;
 };
 
 export type useRoomsHelperProps = {
@@ -90,6 +93,7 @@ export type useRoomsHelperProps = {
 };
 
 export type useFilesHelpersProps = {
+  roomsFolderId?: number;
   setBreadCrumbs: (items: BreadCrumb[]) => void;
   setIsBreadCrumbsLoading: (value: boolean) => void;
   setIsSelectedParentFolder: (value: boolean) => void;
@@ -129,6 +133,7 @@ export type FilesSelectorProps = {
   isThirdParty: boolean;
   rootThirdPartyId?: string;
   isRoomsOnly: boolean;
+  isUserOnly: boolean;
   isRoomBackup: boolean;
   isEditorDialog: boolean;
   setMoveToPublicRoomVisible: (visible: boolean, operationData: object) => void;
@@ -194,6 +199,8 @@ export type FilesSelectorProps = {
       id: string | number;
       title: string;
       path?: string[];
+      fileExst?: string;
+      inPublic?: boolean;
     },
     breadCrumbs: BreadCrumb[]
   ) => void;
@@ -217,5 +224,8 @@ export type FilesSelectorProps = {
 
   embedded: boolean;
   withHeader: boolean;
+  withCancelButton: boolean;
   settings: any;
+
+  roomsFolderId?: number;
 };

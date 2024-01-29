@@ -6,18 +6,18 @@ import { useTheme } from "styled-components";
 
 import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 
-import Submenu from "@docspace/components/submenu";
-import Link from "@docspace/components/link";
-import Text from "@docspace/components/text";
-import Box from "@docspace/components/box";
-import HelpButton from "@docspace/components/help-button";
-import { combineUrl } from "@docspace/common/utils";
+import { Submenu } from "@docspace/shared/components/submenu";
+import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { Box } from "@docspace/shared/components/box";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import AppLoader from "@docspace/common/components/AppLoader";
 import { removeLocalStorage } from "../../utils";
 import config from "../../../../../package.json";
 import ManualBackup from "./backup/manual-backup";
 import AutoBackup from "./backup/auto-backup";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const DataManagementWrapper = (props) => {
   const {
@@ -66,7 +66,6 @@ const DataManagementWrapper = (props) => {
               <Box as={"span"} marginProp="10px 0 0">
                 <Link
                   id="link-tooltip"
-                  color="#333333"
                   fontSize="13px"
                   href={isAutoBackupPage ? automaticBackupUrl : dataBackupUrl}
                   target="_blank"

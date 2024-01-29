@@ -4,19 +4,19 @@ import { withTranslation } from "react-i18next";
 import copy from "copy-to-clipboard";
 import isEqual from "lodash/isEqual";
 
-import Button from "@docspace/components/button";
-import toastr from "@docspace/components/toast/toastr";
-import Portal from "@docspace/components/portal";
-import ModalDialog from "@docspace/components/modal-dialog";
+import { Button } from "@docspace/shared/components/button";
+import { toastr } from "@docspace/shared/components/toast";
+import { Portal } from "@docspace/shared/components/portal";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { StyledEditLinkPanel } from "./StyledEditLinkPanel";
 
 import LinkBlock from "./LinkBlock";
 import ToggleBlock from "./ToggleBlock";
 import PasswordAccessBlock from "./PasswordAccessBlock";
 import LimitTimeBlock from "./LimitTimeBlock";
-import { RoomsType } from "@docspace/common/constants";
-
-import { DeviceType } from "@docspace/common/constants";
+import { RoomsType } from "@docspace/shared/enums";
+import { DeviceType } from "@docspace/shared/enums";
+import moment from "moment";
 
 const EditLinkPanel = (props) => {
   const {
@@ -56,6 +56,7 @@ const EditLinkPanel = (props) => {
 
   const [linkValue, setLinkValue] = useState(shareLink);
   const [hasChanges, setHasChanges] = useState(false);
+  const [isSameDate, setIsSameDate] = useState(false);
 
   const [passwordAccessIsChecked, setPasswordAccessIsChecked] =
     useState(isLocked);
@@ -96,7 +97,7 @@ const EditLinkPanel = (props) => {
     newLink.sharedTo.title = linkNameValue;
     newLink.sharedTo.password = passwordAccessIsChecked ? passwordValue : null;
     newLink.sharedTo.denyDownload = denyDownload;
-    newLink.sharedTo.expirationDate = expirationDate;
+    if (!isSameDate) newLink.sharedTo.expirationDate = expirationDate;
 
     setIsLoading(true);
     editExternalLink(roomId, newLink)
@@ -121,7 +122,6 @@ const EditLinkPanel = (props) => {
 
   const initState = {
     passwordValue: password,
-    expirationDate: date,
     passwordAccessIsChecked: isLocked,
     denyDownload: isDenyDownload,
     linkNameValue: link?.sharedTo?.title || "",
@@ -130,13 +130,15 @@ const EditLinkPanel = (props) => {
   useEffect(() => {
     const data = {
       passwordValue,
-      expirationDate,
       passwordAccessIsChecked,
       denyDownload,
       linkNameValue,
     };
 
-    if (!isEqual(data, initState)) {
+    const isSameDate = moment(date).isSame(expirationDate);
+    setIsSameDate(isSameDate);
+
+    if (!isEqual(data, initState) || !isSameDate) {
       setHasChanges(true);
     } else setHasChanges(false);
   });
@@ -158,17 +160,20 @@ const EditLinkPanel = (props) => {
   const expiredLinkText = isExpired
     ? t("Translations:LinkHasExpiredAndHasBeenDisabled")
     : expirationDate
-    ? `${t("Files:LinkValidUntil")}:`
-    : t("Files:ChooseExpirationDate");
+      ? `${t("Files:LinkValidUntil")}:`
+      : t("Files:ChooseExpirationDate");
 
   const isPrimary = link?.sharedTo?.primary;
+
+  const isDisabledSaveButton =
+    !hasChanges || isLoading || !linkNameIsValid || isExpired;
 
   const editLinkPanelComponent = (
     <StyledEditLinkPanel
       isExpired={isExpired}
       displayType="aside"
       visible={visible}
-      onClose={onClose}
+      onClose={onClosePanel}
       isLarge
       zIndex={310}
       withBodyScroll={true}
@@ -179,8 +184,8 @@ const EditLinkPanel = (props) => {
           ? isPrimary
             ? t("Files:EditGeneralLink")
             : isPublic
-            ? t("Files:EditAdditionalLink")
-            : t("Files:EditLink")
+              ? t("Files:EditAdditionalLink")
+              : t("Files:EditLink")
           : t("Files:CreateNewLink")}
       </ModalDialog.Header>
       <ModalDialog.Body>
@@ -234,7 +239,7 @@ const EditLinkPanel = (props) => {
           primary
           size="normal"
           label={isEdit ? t("Common:SaveButton") : t("Common:Create")}
-          isDisabled={isLoading || !linkNameIsValid || isExpired}
+          isDisabled={isDisabledSaveButton}
           onClick={onSave}
         />
         <Button
@@ -266,7 +271,7 @@ const EditLinkPanel = (props) => {
 };
 
 export default inject(({ auth, dialogsStore, publicRoomStore }) => {
-  const { selectionParentRoom } = auth.infoPanelStore;
+  const { infoPanelSelection } = auth.infoPanelStore;
   const {
     editLinkPanelIsVisible,
     setEditLinkPanelIsVisible,
@@ -281,7 +286,7 @@ export default inject(({ auth, dialogsStore, publicRoomStore }) => {
   const link = externalLinks.find((l) => l?.sharedTo?.id === linkId);
 
   const shareLink = link?.sharedTo?.shareLink;
-  const isPublic = selectionParentRoom?.roomType === RoomsType.PublicRoom;
+  const isPublic = infoPanelSelection?.roomType === RoomsType.PublicRoom;
 
   return {
     visible: editLinkPanelIsVisible,
@@ -289,7 +294,7 @@ export default inject(({ auth, dialogsStore, publicRoomStore }) => {
     isEdit,
     linkId: link?.sharedTo?.id,
     editExternalLink,
-    roomId: selectionParentRoom.id,
+    roomId: infoPanelSelection.id,
     setExternalLink,
     isLocked: !!link?.sharedTo?.password,
     password: link?.sharedTo?.password ?? "",

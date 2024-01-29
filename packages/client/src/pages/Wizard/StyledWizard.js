@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { tablet, mobile } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/shared/utils";
 import { isIOS, isFirefox } from "react-device-detect";
 import BackgroundPatternReactSvgUrl from "PUBLIC_DIR/images/background.pattern.react.svg?url";
 
@@ -152,6 +152,12 @@ export const StyledInfo = styled.div`
       theme.interfaceDirection === "rtl"
         ? `padding-right: 8px;`
         : `padding-left: 8px;`}
+  }
+
+  .wrapper__language-selector {
+    display: flex;
+    align-items: center;
+    gap: 2px;
   }
 
   .combo-button-label {

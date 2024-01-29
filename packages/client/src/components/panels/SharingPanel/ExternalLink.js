@@ -1,13 +1,13 @@
 import React from "react";
 import copy from "copy-to-clipboard";
 
-import { objectToGetParams } from "@docspace/common/utils";
-import { ShareAccessRights } from "@docspace/common/constants";
+import { objectToGetParams } from "@docspace/shared/utils/common";
+import { ShareAccessRights } from "@docspace/shared/enums";
 
-import toastr from "@docspace/components/toast/toastr";
-import ToggleButton from "@docspace/components/toggle-button";
-import InputBlock from "@docspace/components/input-block";
-import Button from "@docspace/components/button";
+import { toastr } from "@docspace/shared/components/toast";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { InputBlock } from "@docspace/shared/components/input-block";
+import { Button } from "@docspace/shared/components/button";
 
 import AccessComboBox from "./AccessComboBox";
 
@@ -15,9 +15,9 @@ import ShareIcon from "PUBLIC_DIR/images/share.react.svg";
 import CodeIcon from "PUBLIC_DIR/images/code.react.svg";
 
 import { StyledExternalLink } from "./StyledSharingPanel";
-import Text from "@docspace/components/text";
-import DropDownContainer from "@docspace/components/drop-down";
-import DropDownItem from "@docspace/components/drop-down-item";
+import { Text } from "@docspace/shared/components/text";
+import { DropDown } from "@docspace/shared/components/drop-down";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 
 const ExternalLink = ({
   t,
@@ -149,7 +149,7 @@ const ExternalLink = ({
                   className="external-link__share-icon"
                   onClick={onToggleShareAction}
                 />
-                <DropDownContainer
+                <DropDown
                   className="external-link__share-dropdown"
                   open={shareActionOpen}
                   clickOutsideAction={closeShareAction}
@@ -163,7 +163,7 @@ const ExternalLink = ({
                       onClick={option.onClick}
                     />
                   ))}
-                </DropDownContainer>
+                </DropDown>
               </div>
             </InputBlock>
 

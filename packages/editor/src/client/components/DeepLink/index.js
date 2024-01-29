@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import Text from "@docspace/components/text";
-import Checkbox from "@docspace/components/checkbox";
-import Button from "@docspace/components/button";
-import Link from "@docspace/components/link";
-import FormWrapper from "@docspace/components/form-wrapper";
+import { Text } from "@docspace/shared/components/text";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Button } from "@docspace/shared/components/button";
+import { Link } from "@docspace/shared/components/link";
+import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
-import { getLogoFromPath, getBgPattern } from "@docspace/common/utils";
-import { DeviceType } from "@docspace/common/constants";
+import { getBgPattern } from "@docspace/shared/utils/common";
+import { getLogoFromPath } from "@docspace/shared/utils";
+import { DeviceType } from "@docspace/shared/enums";
 import { getDeepLink } from "../../helpers/deepLinkHelper";
 
 import {
@@ -29,11 +30,10 @@ const DeepLink = ({
   userEmail,
   setIsShowDeepLink,
   currentColorScheme,
-  deepLinkUrl,
   theme,
   currentDeviceType,
+  deepLinkConfig,
 }) => {
-  console.log("currentDeviceType", currentDeviceType);
   const { t } = useTranslation(["DeepLink", "Common"]);
 
   const [isRemember, setIsRemember] = useState(false);
@@ -43,11 +43,11 @@ const DeepLink = ({
 
   const onOpenAppClick = () => {
     if (isRemember) localStorage.setItem("defaultOpenDocument", "app");
-    window.location = getDeepLink(
+    getDeepLink(
       window.location.origin,
       userEmail,
       fileInfo,
-      deepLinkUrl,
+      deepLinkConfig,
       window.location.href
     );
   };

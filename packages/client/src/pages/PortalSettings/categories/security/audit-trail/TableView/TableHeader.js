@@ -1,5 +1,5 @@
 import React from "react";
-import TableHeader from "@docspace/components/table-container/TableHeader";
+import { TableHeader } from "@docspace/shared/components/table";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
@@ -21,7 +21,7 @@ class AuditTableHeader extends React.Component {
         enable: true,
         sortBy: "AZ",
         active: true,
-        minWidth: 180,
+        minWidth: 210,
       },
 
       {

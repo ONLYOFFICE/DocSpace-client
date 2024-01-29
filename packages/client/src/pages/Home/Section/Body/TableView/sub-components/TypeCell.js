@@ -1,6 +1,6 @@
 import React from "react";
 import { StyledTypeCell } from "./CellStyles";
-import { FileType } from "@docspace/common/constants";
+import { FileType } from "@docspace/shared/enums";
 import { getDefaultRoomName } from "../../../../../../helpers/filesUtils";
 
 const TypeCell = ({ t, item, sideColor }) => {

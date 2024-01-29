@@ -3,10 +3,7 @@ import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
 import { isMobile, isIOS, isFirefox } from "react-device-detect";
 
-import {
-  mobile,
-  isMobile as isMobileUtils,
-} from "@docspace/components/utils/device";
+import { mobile, isMobile as isMobileUtils } from "@docspace/shared/utils";
 
 const StyledMain = styled.main`
   height: ${(props) => props.mainHeight && `${props.mainHeight}px`};
@@ -33,7 +30,7 @@ const StyledMain = styled.main`
 `;
 
 const Main = (props) => {
-  const { mainBarVisible, isBannerVisible } = props;
+  const { mainBarVisible, isBannerVisible, isFrame } = props;
   //console.log("Main render");
   const [mainHeight, setMainHeight] = React.useState(window.innerHeight);
   const updateSizeRef = React.useRef(null);
@@ -51,7 +48,7 @@ const Main = (props) => {
 
   React.useEffect(() => {
     onResize();
-  }, [mainBarVisible, isBannerVisible]);
+  }, [mainBarVisible, isBannerVisible, isFrame]);
 
   const onResize = React.useCallback(
     (e) => {
@@ -89,13 +86,13 @@ const Main = (props) => {
       }
 
       // 48 - its nav menu with burger, logo and user avatar
-      if (isMobileUtils()) {
+      if (isMobileUtils() && !isFrame) {
         correctHeight -= 48;
       }
 
       setMainHeight(correctHeight);
     },
-    [mainBarVisible, isBannerVisible]
+    [mainBarVisible, isBannerVisible, isFrame]
   );
 
   return <StyledMain className="main" mainHeight={mainHeight} {...props} />;
@@ -106,9 +103,10 @@ Main.displayName = "Main";
 export default inject(({ auth }) => {
   const { isBannerVisible } = auth.bannerStore;
 
-  const { mainBarVisible } = auth.settingsStore;
+  const { mainBarVisible, isFrame } = auth.settingsStore;
   return {
     mainBarVisible,
     isBannerVisible,
+    isFrame,
   };
 })(observer(Main));

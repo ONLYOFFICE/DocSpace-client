@@ -8,9 +8,10 @@ import { ReactSVG } from "react-svg";
 import throttle from "lodash/throttle";
 import AvatarEditor from "react-avatar-editor";
 
-import Slider from "@docspace/components/slider";
-import IconButton from "@docspace/components/icon-button";
-import { Base } from "@docspace/components/themes";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { Slider } from "@docspace/shared/components/slider";
+
+import { Base } from "@docspace/shared/themes";
 
 const StyledIconCropper = styled.div`
   max-width: 216px;

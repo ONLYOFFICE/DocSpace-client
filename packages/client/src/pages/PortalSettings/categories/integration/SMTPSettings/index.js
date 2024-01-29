@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
 
 import CustomSettings from "./sub-components/CustomSettings";
 import { StyledComponent } from "./StyledComponent";
@@ -19,7 +19,12 @@ const SMTPSettings = (props) => {
     integrationSettingsUrl,
   } = props;
 
-  const { t, ready } = useTranslation(["SMTPSettings", "Settings", "Common"]);
+  const { t, ready } = useTranslation([
+    "SMTPSettings",
+    "Settings",
+    "Common",
+    "UploadPanel",
+  ]);
   const [isInit, setIsInit] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 

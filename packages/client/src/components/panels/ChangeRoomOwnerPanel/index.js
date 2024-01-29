@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
-import Aside from "@docspace/components/aside";
-import Backdrop from "@docspace/components/backdrop";
-import PeopleSelector from "@docspace/client/src/components/PeopleSelector";
+import { Aside } from "@docspace/shared/components/aside";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import PeopleSelector from "@docspace/shared/selectors/People";
 import { withTranslation } from "react-i18next";
-import Filter from "@docspace/common/api/people/filter";
-import { EmployeeType } from "@docspace/common/constants";
-import { DeviceType } from "@docspace/common/constants";
-import Portal from "@docspace/components/portal";
+import Filter from "@docspace/shared/api/people/filter";
+import { EmployeeType, DeviceType } from "@docspace/shared/enums";
+import { Portal } from "@docspace/shared/components/portal";
 
 const StyledChangeRoomOwner = styled.div`
   display: contents;
@@ -46,6 +45,8 @@ const ChangeRoomOwner = (props) => {
     currentDeviceType,
     roomOwnerId,
     changeRoomOwner,
+    userId,
+    updateInfoPanelSelection,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -71,6 +72,7 @@ const ChangeRoomOwner = (props) => {
       setIsLoading(true);
 
       await changeRoomOwner(t, user[0]?.id, isChecked);
+      updateInfoPanelSelection();
       setIsLoading(false);
     }
     onClose();
@@ -121,6 +123,7 @@ const ChangeRoomOwner = (props) => {
           setIsChecked={setIsChecked}
           withOutCurrentAuthorizedUser
           filterUserId={roomOwnerId}
+          currentUserId={userId}
         />
       </Aside>
     </StyledChangeRoomOwner>
@@ -146,17 +149,18 @@ export default inject(
       setChangeRoomOwnerIsVisible,
       changeRoomOwnerData,
     } = dialogsStore;
-    const { settingsStore } = auth;
-
+    const { settingsStore, userStore, infoPanelStore } = auth;
     const { selection, bufferSelection } = filesStore;
+    const { currentDeviceType } = settingsStore;
+    const { updateInfoPanelSelection } = infoPanelStore;
 
     const room = selection.length
       ? selection[0]
       : bufferSelection
-      ? bufferSelection
-      : selectedFolderStore;
+        ? bufferSelection
+        : selectedFolderStore;
 
-    const { currentDeviceType } = settingsStore;
+    const { id } = userStore.user;
 
     return {
       visible: changeRoomOwnerIsVisible,
@@ -166,6 +170,8 @@ export default inject(
       roomOwnerId: room?.createdBy?.id,
       currentDeviceType,
       changeRoomOwner: filesActionsStore.changeRoomOwner,
+      userId: id,
+      updateInfoPanelSelection,
     };
   }
 )(observer(withTranslation(["Files"])(ChangeRoomOwner)));

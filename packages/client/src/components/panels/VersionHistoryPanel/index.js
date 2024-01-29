@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Backdrop from "@docspace/components/backdrop";
-import Heading from "@docspace/components/heading";
-import Aside from "@docspace/components/aside";
-import Loaders from "@docspace/common/components/Loaders";
-import FloatingButton from "@docspace/components/floating-button";
-import Portal from "@docspace/components/portal";
-import { DeviceType } from "@docspace/common/constants";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Heading } from "@docspace/shared/components/heading";
+import { Aside } from "@docspace/shared/components/aside";
+
+import { FloatingButton } from "@docspace/shared/components/floating-button";
+import { Portal } from "@docspace/shared/components/portal";
+import { DeviceType } from "@docspace/shared/enums";
 import { withTranslation } from "react-i18next";
 import {
   StyledVersionHistoryPanel,
@@ -17,6 +17,7 @@ import {
 import { SectionBodyContent } from "../../../pages/VersionHistory/Section/";
 import { inject, observer } from "mobx-react";
 import config from "PACKAGE_FILE";
+import { ArticleHeaderLoader } from "@docspace/shared/skeletons/article";
 
 class PureVersionHistoryPanel extends React.Component {
   onClose = () => {
@@ -70,7 +71,7 @@ class PureVersionHistoryPanel extends React.Component {
                   {versions[0].title}
                 </Heading>
               ) : (
-                <Loaders.ArticleHeader
+                <ArticleHeaderLoader
                   className="loader-version-history"
                   height="28"
                   width="688"

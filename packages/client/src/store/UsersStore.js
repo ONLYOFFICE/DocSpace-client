@@ -1,11 +1,11 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
-import api from "@docspace/common/api";
+import api from "@docspace/shared/api";
 import {
   EmployeeStatus,
   EmployeeType,
   EmployeeActivationStatus,
-} from "@docspace/common/constants";
+} from "@docspace/shared/enums";
 const { Filter } = api;
 
 const fullAccessId = "00000000-0000-0000-0000-000000000000";
@@ -136,7 +136,8 @@ class UsersStore {
       throw new Error(e);
     }
 
-    await this.getUsersList(filter);
+    // await this.getUsersList(filter, true); // accounts loader
+    await this.getUsersList(filter); // rooms
 
     if (users && !this.needResetUserSelection) {
       this.peopleStore.selectionStore.updateSelection(this.peopleList);

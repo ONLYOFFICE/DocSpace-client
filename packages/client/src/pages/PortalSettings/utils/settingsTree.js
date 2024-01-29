@@ -1,4 +1,4 @@
-﻿import { PageType } from "@docspace/common/constants";
+﻿import { PageType } from "@docspace/shared/enums";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/settings.react.svg?url";
 /**
  * Array for generation current settings tree.

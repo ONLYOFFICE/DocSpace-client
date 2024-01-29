@@ -15,19 +15,23 @@
     editorType: "embedded", //TODO: ["desktop", "embedded"]
     editorGoBack: true,
     selectorType: "exceptPrivacyTrashArchiveFolders", //TODO: ["roomsOnly", "userFolderOnly", "exceptPrivacyTrashArchiveFolders", "exceptSortedByTagsFolders"]
+    showSelectorCancel: false,
+    showSelectorHeader: false,
     showHeader: false,
     showTitle: true,
     showMenu: false,
     showFilter: false,
     destroyText: "",
     viewAs: "row", //TODO: ["row", "table", "tile"]
+    viewTableColumns: "Name,Size,Type",
+    checkCSP: true,
     filter: {
       count: 100,
       page: 1,
       sortorder: "descending", //TODO: ["descending", "ascending"]
       sortby: "DateAndTime", //TODO: ["DateAndTime", "AZ", "Type", "Size", "DateAndTimeCreation", "Author"]
       search: "",
-      withSubfolders: true,
+      withSubfolders: false,
     },
     keysForReload: [
       "src",
@@ -45,10 +49,29 @@
       onSelectCallback: null,
       onCloseCallback: null,
       onAppReady: null,
-      onAppError: null,
+      onAppError: (e) => console.log("onAppError", e),
       onEditorCloseCallback: null,
       onAuthSuccess: null,
+      onSignOut: null,
     },
+  };
+
+  const cspErrorText =
+    "The current domain is not set in the Content Security Policy (CSP) settings.";
+
+  const validateCSP = async (targetSrc) => {
+    const currentSrc = window.location.origin;
+
+    if (currentSrc.indexOf(targetSrc) !== -1) return; //TODO: try work with localhost
+
+    const response = await fetch(`${targetSrc}/api/2.0/security/csp`);
+    const res = await response.json();
+    const passed =
+      res.response.header && res.response.header.includes(currentSrc);
+
+    if (!passed) throw new Error(cspErrorText);
+
+    return;
   };
 
   const getConfigFromParams = () => {
@@ -107,6 +130,10 @@
               ? { key: config.requestToken, ...config.filter }
               : config.filter;
 
+            if (!params.withSubfolders) {
+              delete params.withSubfolders;
+            }
+
             const urlParams = new URLSearchParams(params).toString();
 
             path = `${config.rootPath}${
@@ -144,6 +171,11 @@
           }
 
           path = `/doceditor/?fileId=${config.id}&type=${config.editorType}&editorGoBack=${goBack}`;
+
+          if (config.requestToken) {
+            path = `${path}&share=${config.requestToken}`;
+          }
+
           break;
         }
 
@@ -158,6 +190,11 @@
           }
 
           path = `/doceditor/?fileId=${config.id}&type=${config.editorType}&action=view&editorGoBack=${goBack}`;
+
+          if (config.requestToken) {
+            path = `${path}&share=${config.requestToken}`;
+          }
+
           break;
         }
 
@@ -171,16 +208,40 @@
       iframe.name = config.name;
       iframe.id = config.frameId;
 
-      iframe.align = "top";
       iframe.frameBorder = 0;
       iframe.allowFullscreen = true;
-      iframe.setAttribute("allowfullscreen", "");
-      iframe.setAttribute("allow", "autoplay");
+      iframe.setAttribute("allow", "storage-access");
 
       if (config.type == "mobile") {
         iframe.style.position = "fixed";
         iframe.style.overflow = "hidden";
         document.body.style.overscrollBehaviorY = "contain";
+      }
+
+      if (this.config.checkCSP) {
+        validateCSP(this.config.src).catch((e) => {
+          const html = `
+          <body style="background: #F3F4F4;">
+          <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300" rel="stylesheet" type="text/css">
+          <div style="display: flex; flex-direction: column; gap: 80px; align-items: center; justify-content: flex-start; margin-top: 60px; padding: 0 30px;">
+          <div style="flex-shrink: 0; width: 211px; height: 24px; position: relative">
+          <img src="${this.config.src}/static/images/logo/lightsmall.svg">
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 16px; align-items: center; justify-content: flex-start; flex-shrink: 0; position: relative;">
+          <div style="flex-shrink: 0; width: 120px; height: 100px; position: relative">
+          <img src="${this.config.src}/static/images/frame-error.svg">
+          </div>
+          <span style="color: #A3A9AE; text-align: center; font-family: Open Sans; font-size: 14px; font-style: normal; font-weight: 700; line-height: 16px;">
+          ${cspErrorText} Please add it via 
+          <a href="${this.config.src}/portal-settings/developer-tools/javascript-sdk" target="_blank" style="color: #4781D1; text-align: center; font-family: Open Sans; font-size: 14px; font-style: normal; font-weight: 700; line-height: 16px; text-decoration-line: underline;">
+          the Developer Tools section</a>.
+          </span>
+          </div>
+          </div>
+          </body>`;
+          iframe.srcdoc = html;
+          e.message && config.events.onAppError(e.message);
+        });
       }
 
       return iframe;
@@ -248,7 +309,9 @@
     };
     #executeMethod = (methodName, params, callback) => {
       if (!this.#isConnected) {
-        console.log("Message bus is not connected with frame");
+        this.config.events.onAppError(
+          "Message bus is not connected with frame"
+        );
         return;
       }
 
@@ -282,6 +345,7 @@
           target.parentNode.replaceChild(this.#iframe, target);
 
         window.addEventListener("message", this.#onMessage, false);
+
         this.#isConnected = true;
       }
 

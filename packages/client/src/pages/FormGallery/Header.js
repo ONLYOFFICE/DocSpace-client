@@ -2,7 +2,7 @@
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import IconButton from "@docspace/components/icon-button";
+import { IconButton } from "@docspace/shared/components/icon-button";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import {
@@ -13,8 +13,9 @@ import {
   StyledInfoPanelToggleWrapper,
 } from "./StyledGallery";
 import config from "PACKAGE_FILE";
-import FilesFilter from "@docspace/common/api/files/filter";
-import { combineUrl } from "@docspace/common/utils";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { getCategoryTypeByFolderType } from "SRC_DIR/helpers/utils";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
 const SectionHeaderContent = ({
@@ -24,7 +25,6 @@ const SectionHeaderContent = ({
   oformFromFolderId,
 
   setGallerySelected,
-  categoryType,
   setSubmitToGalleryDialogVisible,
 
   currentCategory,
@@ -34,14 +34,21 @@ const SectionHeaderContent = ({
 
   setIsLoading,
   oformsLoadError,
+
+  getFolderInfo,
 }) => {
   const navigate = useNavigate();
 
-  const onNavigateBack = () => {
+  const onNavigateBack = async () => {
     setGallerySelected(null);
 
     const filter = FilesFilter.getDefault();
     filter.folder = oformFromFolderId;
+    const folderInfo = await getFolderInfo(oformFromFolderId);
+    const categoryType = getCategoryTypeByFolderType(
+      folderInfo.rootFolderType,
+      folderInfo.parentId
+    );
     const url = getCategoryUrl(categoryType, oformFromFolderId);
     const filterParamsStr = filter.toUrlParams();
 
@@ -117,7 +124,6 @@ export default inject(
     clientLoadingStore,
   }) => {
     return {
-      categoryType: filesStore.categoryType,
       getCategoryTitle: oformsStore.getCategoryTitle,
 
       oformFromFolderId: oformsStore.oformFromFolderId,
@@ -141,6 +147,7 @@ export default inject(
       },
 
       oformsLoadError: oformsStore.oformsLoadError,
+      getFolderInfo: filesStore.getFolderInfo,
     };
   }
 )(withTranslation("Common")(observer(SectionHeaderContent)));

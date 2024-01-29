@@ -2,9 +2,9 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
-import Base from "@docspace/components/themes/base";
-import NoUserSelect from "@docspace/components/utils/commonStyles";
-import RoomIcon from "@docspace/components/room-icon";
+import { Base } from "@docspace/shared/themes";
+import { NoUserSelect } from "@docspace/shared/utils";
+import { RoomIcon } from "@docspace/shared/components/room-icon";
 
 const StyledIcon = styled.img`
   ${NoUserSelect}

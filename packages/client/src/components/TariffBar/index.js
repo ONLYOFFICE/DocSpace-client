@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { inject, observer } from "mobx-react";
@@ -5,16 +6,22 @@ import { useTranslation } from "react-i18next";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { Text } from "@docspace/shared/components/text";
+import { getSaasBar, getEnterpriseBar, checkBar } from "./helpers";
 
 const StyledWrapper = styled.div`
+  display: grid;
   cursor: pointer;
 
-  .tariff-bar-text:hover {
+  #tariff-bar-text:hover {
     opacity: 0.85;
   }
 
-  .tariff-bar-text:active {
+  #tariff-bar-text:active {
     filter: brightness(0.9);
+  }
+
+  .hidden {
+    visibility: hidden;
   }
 `;
 
@@ -34,11 +41,11 @@ const TariffBar = ({
   isTrial,
   standalone,
   paymentDate,
+  trialDaysLeft,
+  title,
 }) => {
   const navigate = useNavigate();
   const { t } = useTranslation("Common");
-  const orange = "#F97A0B";
-  const red = "#F2665A";
 
   const onClick = () => {
     const paymentPageUrl = combineUrl(
@@ -48,52 +55,38 @@ const TariffBar = ({
     navigate(paymentPageUrl);
   };
 
-  const getSaasBar = () => {
-    if (
-      isPaymentPageAvailable &&
-      !isNonProfit &&
-      (isFreeTariff || isGracePeriod)
-    ) {
-      if (isFreeTariff)
-        return { label: t("Common:TryBusiness"), color: orange };
-      if (isGracePeriod) return { label: t("Common:LatePayment"), color: red };
-    }
-  };
+  useEffect(() => {
+    checkBar();
+  }, []);
 
-  const getEnterpriseBar = () => {
-    if (
-      isPaymentPageAvailable &&
-      isEnterprise &&
-      (isTrial || isLicenseExpiring || isLicenseDateExpired)
-    ) {
-      if (isTrial) {
-        if (isLicenseDateExpired)
-          return { label: t("Common:TrialExpired"), color: orange };
-        return {
-          label: t("Common:TrialDaysLeft", { count: trialDaysLeft }),
-          color: orange,
-        };
-      } else {
-        if (isLicenseDateExpired)
-          return {
-            label: t("Common:SubscriptionExpiredTitle"),
-            color: red,
-          };
-        return {
-          label: t("Common:SubscriptionIsExpiring", { date: paymentDate }),
-          color: orange,
-        };
-      }
-    }
-  };
+  useEffect(() => {
+    checkBar();
+  }, [title]);
 
-  const tariffBar = !standalone ? getSaasBar() : getEnterpriseBar();
+  const tariffBar = !standalone
+    ? getSaasBar(
+        t,
+        isPaymentPageAvailable,
+        isNonProfit,
+        isFreeTariff,
+        isGracePeriod
+      )
+    : getEnterpriseBar(
+        t,
+        isPaymentPageAvailable,
+        isEnterprise,
+        isTrial,
+        isLicenseExpiring,
+        isLicenseDateExpired,
+        trialDaysLeft,
+        paymentDate
+      );
 
   if (!tariffBar) return <></>;
   return (
     <StyledWrapper>
       <Text
-        className="tariff-bar-text"
+        id="tariff-bar-text"
         as="div"
         fontSize="12px"
         fontWeight={600}
@@ -122,6 +115,7 @@ export default inject(({ auth }) => {
     isLicenseExpiring,
     isLicenseDateExpired,
     paymentDate,
+    trialDaysLeft,
   } = currentTariffStatusStore;
   const { standalone } = settingsStore;
 
@@ -136,5 +130,6 @@ export default inject(({ auth }) => {
     isTrial,
     standalone,
     paymentDate,
+    trialDaysLeft,
   };
 })(observer(TariffBar));

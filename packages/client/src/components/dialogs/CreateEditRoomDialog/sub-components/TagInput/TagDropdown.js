@@ -28,12 +28,12 @@ const TagDropdown = ({
     return () => inputRef?.current?.removeEventListener("keyup", onKeyPress);
   }, [onKeyPress]);
 
-  const chosenTags = tagHandler.tags.map((tag) => tag.name);
+  const chosenTags = tagHandler.tags.map((tag) => tag.name.toLowerCase());
 
   const tagsForDropdown = tagHandler.fetchedTags.filter(
     (tag) =>
       tag.toLowerCase().includes(tagInputValue.toLowerCase()) &&
-      !chosenTags.includes(tag)
+      !chosenTags.includes(tag.toLowerCase())
   );
 
   const preventDefault = (e) => {
@@ -74,7 +74,7 @@ const TagDropdown = ({
 
     if (
       tagInputValue &&
-      ![...tagsForDropdown, ...chosenTags].find((tag) => tagInputValue === tag)
+      ![...tagsForDropdown, ...chosenTags].find((tag) => tagInputValue.toLowerCase() === tag.toLowerCase())
     )
       res = [
         <DropDownItem

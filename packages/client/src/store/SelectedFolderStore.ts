@@ -96,7 +96,7 @@ class SelectedFolderStore {
 
   rootFolderId: number = 0;
 
-  settingsStore: SettingsStore = {} as SettingsStore;
+  private settingsStore: SettingsStore = {} as SettingsStore;
 
   security: TFolderSecurity | TRoomSecurity | null = null;
 

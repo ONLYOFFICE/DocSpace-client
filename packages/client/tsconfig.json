@@ -4,9 +4,8 @@
     "rootDir": "./",
     "baseUrl": "./",
     "paths": {
-      "PUBLIC_DIR": ["../../public"],
-      "COMMON_DIR": ["../common"],
-      "SRC_DIR": ["./src"],
+      "PUBLIC_DIR/*": ["../../public/*"],
+      "SRC_DIR/*": ["./src/*"],
     },
   },
 }

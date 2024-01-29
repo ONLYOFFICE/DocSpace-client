@@ -3,7 +3,7 @@ import { toastr } from "@docspace/shared/components/toast";
 
 import config from "PACKAGE_FILE";
 
-import { PluginActions, PluginToastType } from "./constants";
+import { PluginActions, PluginToastType } from "./enums";
 import { Events } from "@docspace/shared/enums";
 
 export const messageActions = (
@@ -26,7 +26,7 @@ export const messageActions = (
   updateEventListenerItems,
   updateFileItems,
 
-  updatePlugin
+  updatePlugin,
 ) => {
   if (!message || !message.actions || message.actions.length === 0) return;
 
@@ -152,7 +152,7 @@ export const messageActions = (
         if (frame) {
           frame.contentWindow.postMessage(
             JSON.stringify(postMessage.message),
-            "*"
+            "*",
           );
         }
 
@@ -177,6 +177,6 @@ export const getPluginUrl = (url, file) => {
     window.DocSpaceConfig?.proxy?.url,
     config.homepage,
     path,
-    file
+    file,
   );
 };

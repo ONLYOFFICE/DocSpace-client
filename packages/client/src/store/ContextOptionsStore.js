@@ -1499,7 +1499,7 @@ class ContextOptionsStore {
       });
     }
 
-    const { isCollaborator } = this.authStore.userStore.user;
+    const { isCollaborator } = this.authStore?.userStore?.user || { isCollaborator: false };
 
     const newOptions = options.filter(
       (option, index) => !(index === 0 && option.key === "separator1") && !(isCollaborator && option.key === "create-room")
@@ -1755,7 +1755,7 @@ class ContextOptionsStore {
       },
     ];
 
-    const { isCollaborator } = this.authStore.userStore.user;
+    const { isCollaborator } = this.authStore?.userStore?.user || { isCollaborator: false };
 
     const newOptions = options.filter(
       (option, index) => !(index === 0 && option.key === "separator1") && !(isCollaborator && option.key === "create-room")

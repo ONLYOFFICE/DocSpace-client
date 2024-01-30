@@ -3,14 +3,18 @@ import { useNavigate } from "react-router-dom";
 
 import * as Styled from "./index.styled";
 import { Link } from "@docspace/shared/components/link";
-import { Events } from "@docspace/shared/constants";
+import { withTranslation } from "react-i18next";
 
 const GroupsRow = ({
+  t,
   item,
   itemIndex,
   selection,
+  setSelection,
   bufferSelection,
   setBufferSelection,
+  setCurrentGroup,
+  getGroupContextOptions,
   sectionWidth,
   theme,
 }) => {
@@ -19,13 +23,32 @@ const GroupsRow = ({
   const isChecked = selection.some((el) => el.id === item.id);
   const isActive = bufferSelection?.id === item?.id;
 
-  const onRowClick = () =>
-    !isChecked ? setBufferSelection(item, true) : setBufferSelection(null);
+  const onRowClick = (e) => {
+    setBufferSelection(item);
 
-  const onRowContextClick = () =>
-    !isChecked ? setBufferSelection(item, false) : setBufferSelection(null);
+    if (selection.length === 1 && selection[0].id === item.id) {
+      setSelection([]);
+      return;
+    }
 
-  const onOpenGroup = () => navigate(`/accounts/groups/${item.id}/filter`);
+    setSelection([item]);
+  };
+
+  const onSelect = (e) => {
+    if (!isChecked) setSelection([...selection, item]);
+    else setSelection(selection.filter((g) => g.id !== item.id));
+  };
+
+  const onRowContextClick = () => {
+    setBufferSelection(item);
+  };
+
+  const onOpenGroup = () => {
+    setSelection([]);
+    setBufferSelection(null);
+    setCurrentGroup(item);
+    navigate(`/accounts/groups/${item.id}/filter`);
+  };
 
   const nameColor =
     item.statusType === "pending" || item.statusType === "disabled"
@@ -34,45 +57,7 @@ const GroupsRow = ({
   const sideInfoColor = theme.peopleTableRow.pendingSideInfoColor;
 
   const contextOptionsProps = {
-    contextOptions: [
-      {
-        id: "option_profile",
-        key: "profile",
-        icon: "http://192.168.0.104/static/images/check-box.react.svg",
-        label: "Select",
-      },
-      {
-        key: "separator-1",
-        isSeparator: true,
-      },
-      {
-        id: "option_change-name",
-        key: "change-name",
-        icon: "http://192.168.0.104/static/images/pencil.react.svg",
-        label: "Edit department",
-        onClick: () => {
-          const event = new Event(Events.GROUP_EDIT);
-          event.item = item;
-          window.dispatchEvent(event);
-        },
-      },
-      {
-        icon: "http://192.168.0.104/static/images/info.outline.react.svg",
-        id: "option_details",
-        key: "details",
-        onClick: () => {},
-      },
-      {
-        key: "separator-2",
-        isSeparator: true,
-      },
-      {
-        id: "option_change-owner",
-        key: "change-owner",
-        icon: "http://192.168.0.104/static/images/catalog.trash.react.svg",
-        label: "Delete",
-      },
-    ],
+    contextOptions: getGroupContextOptions(t, item),
   };
 
   const titleWithoutSpaces = item.name.replace(/\s+/g, " ").trim();
@@ -86,76 +71,65 @@ const GroupsRow = ({
 
   return (
     <Styled.GroupsRowWrapper
-      value={`folder_${item.id}_false_index_${itemIndex}`}
       isChecked={isChecked}
       isActive={isActive}
       className={`group-item row-wrapper ${
         isChecked || isActive ? "row-selected" : ""
       }`}
+      value={item.id}
     >
-      <Styled.GroupsRow
-        key={item.id}
-        data={item}
-        onRowClick={onRowClick}
-        onContextClick={onRowContextClick}
-        onSelect={onRowClick}
-        onDoubleClick={onOpenGroup}
-        onFilesClick={onOpenGroup}
-        element={
-          <div
-            style={{
-              display: "flex",
-              width: "32px",
-              height: "32px",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: "12px",
-              fontWeight: "700",
-              lineHeight: "16px",
-              background: "#ECEEF1",
-              color: "#333",
-              borderRadius: "50%",
-            }}
-          >
-            {groupName}
-          </div>
-        }
-        checked={isChecked}
-        isActive={isActive}
-        {...contextOptionsProps}
-        sectionWidth={sectionWidth}
-        mode={"modern"}
-        className={"user-row"}
-      >
-        <Styled.GroupsRowContent
-          sideColor={sideInfoColor}
+      <div className={"group-item"}>
+        <Styled.GroupsRow
+          key={item.id}
+          data={item}
+          onRowClick={onRowClick}
+          onContextClick={onRowContextClick}
+          onSelect={onSelect}
+          onDoubleClick={onOpenGroup}
+          onFilesClick={onOpenGroup}
+          element={<div className="group-row-element">{groupName}</div>}
+          checked={isChecked}
+          isActive={isActive}
+          contextOptions={getGroupContextOptions(t, item)}
           sectionWidth={sectionWidth}
-          nameColor={nameColor}
-          sideInfoColor={sideInfoColor}
+          mode={"modern"}
+          className={"group-row"}
         >
-          {[
-            <Link
-              containerWidth="28%"
-              target="_blank"
-              title={item.name}
-              fontWeight={600}
-              fontSize="15px"
-              color={nameColor}
-              isTextOverflow={true}
-              onClick={onOpenGroup}
-            >
-              {item.name}
-            </Link>,
-          ]}
-        </Styled.GroupsRowContent>
-      </Styled.GroupsRow>
+          <Styled.GroupsRowContent
+            sideColor={sideInfoColor}
+            sectionWidth={sectionWidth}
+            nameColor={nameColor}
+            sideInfoColor={sideInfoColor}
+          >
+            {[
+              <Link
+                containerWidth="28%"
+                target="_blank"
+                title={item.name}
+                fontWeight={600}
+                fontSize="15px"
+                color={nameColor}
+                isTextOverflow={true}
+                onClick={onOpenGroup}
+              >
+                {item.name}
+              </Link>,
+            ]}
+          </Styled.GroupsRowContent>
+        </Styled.GroupsRow>
+      </div>
     </Styled.GroupsRowWrapper>
   );
 };
 
 export default inject(({ peopleStore, auth }) => ({
-  selection: peopleStore.selectionStore.selection,
-  bufferSelection: peopleStore.selectionStore.bufferSelection,
-  setBufferSelection: peopleStore.selectionStore.setBufferSelection,
+  selection: peopleStore.groupsStore.selection,
+  setSelection: peopleStore.groupsStore.setSelection,
+  bufferSelection: peopleStore.groupsStore.bufferSelection,
+  setBufferSelection: peopleStore.groupsStore.setBufferSelection,
+  setCurrentGroup: peopleStore.groupsStore.setCurrentGroup,
+  getGroupContextOptions: peopleStore.groupsStore.getGroupContextOptions,
   theme: auth.settingsStore.theme,
-}))(observer(GroupsRow));
+}))(
+  withTranslation("People", "Common", "PeopleTranslations")(observer(GroupsRow))
+);

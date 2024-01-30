@@ -125,16 +125,17 @@ class InfoPanelStore {
 
     const {
       selection: groupsStoreSelection,
-      // bufferSelection: groupsStoreBufferSelection,
+      bufferSelection: groupsStoreBufferSelection,
     } = this.peopleStore.groupsStore;
 
-    if (this.getIsPeople() || this.getIsInsideGroup()) {
+    if (this.getIsPeople() || this.getIsGroups()) {
       if (peopleStoreSelection.length) return [...peopleStoreSelection];
       if (peopleStoreBufferSelection) return [peopleStoreBufferSelection];
     }
 
     if (this.getIsGroups()) {
       if (groupsStoreSelection.length) return [...groupsStoreSelection];
+      if (groupsStoreBufferSelection) return [groupsStoreBufferSelection];
     }
 
     if (filesStoreSelection?.length) return [...filesStoreSelection];
@@ -372,7 +373,11 @@ class InfoPanelStore {
 
   getIsInsideGroup = (givenPathName) => {
     const pathname = givenPathName || window.location.pathname.toLowerCase();
-    return pathname.indexOf("groups/filter") !== -1;
+    return (
+      pathname.indexOf("accounts") !== -1 &&
+      pathname.indexOf("groups/filter") === -1 &&
+      pathname.indexOf("people/filter") === -1
+    );
   };
 
   getIsGallery = (givenPathName) => {

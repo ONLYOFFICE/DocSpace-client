@@ -45,6 +45,8 @@ export interface DropDownProps {
   withBlur?: boolean;
   /** Specifies the offset */
   offsetLeft?: number;
+  /** Changes component styling for displaying info in table */
+  isTableInfo: boolean;
 
   right?: string;
   top?: string;

@@ -125,6 +125,7 @@ const StyledPeopleRow = styled(TableRow)`
   }
 
   .table-cell_type,
+  .table-cell_groups,
   .table-cell_room {
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
@@ -296,7 +297,7 @@ const PeopleTableRow = (props) => {
         setIsLoading(false);
       }
     },
-    [item, changeUserType],
+    [item, changeUserType]
   );
 
   // const getRoomsOptions = React.useCallback(() => {
@@ -520,5 +521,5 @@ const PeopleTableRow = (props) => {
 };
 
 export default withTranslation(["People", "Common", "Settings"])(
-  withContent(PeopleTableRow),
+  withContent(PeopleTableRow)
 );

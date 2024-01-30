@@ -76,9 +76,9 @@ const ComboBoxPure = (props: ComboboxProps) => {
   };
 
   const optionClick = (option: TOption) => {
-    const { onSelect } = props;
+    const { onSelect, isReadOnly } = props;
 
-    setSelectedOption({ ...option });
+    if (!isReadOnly) setSelectedOption({ ...option });
     // setIsOpen((v) => {
     //   setIsOpenItemAccess?.(!v);
     //   return !v;
@@ -101,7 +101,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
     noBorder,
     scaledOptions,
     displayType,
-
+    isSideInfo,
     textOverflow,
     showDisabledItems,
     comboIcon,
@@ -228,6 +228,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
       // {...rest}
     >
       <ComboButton
+        isSideInfo={isSideInfo}
         noBorder={noBorder}
         isDisabled={isDisabled}
         selectedOption={selectedOption}

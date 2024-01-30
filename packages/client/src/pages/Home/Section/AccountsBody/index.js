@@ -19,7 +19,8 @@ const SectionBodyContent = (props) => {
     isFiltered,
     setPeopleSelection,
     setGroupsSelection,
-    setBufferSelection,
+    setPeopleBufferSelection,
+    setGroupsBufferSelection,
     setChangeOwnerDialogVisible,
     selectUser,
     isFilteredOnlyBySearch,
@@ -59,7 +60,8 @@ const SectionBodyContent = (props) => {
     ) {
       setPeopleSelection([]);
       setGroupsSelection([]);
-      setBufferSelection(null);
+      setPeopleBufferSelection(null);
+      setGroupsBufferSelection(null);
       window?.getSelection()?.removeAllRanges();
     }
   };
@@ -96,10 +98,15 @@ export default inject(({ peopleStore }) => {
 
   const {
     setSelection: setPeopleSelection,
-    setBufferSelection,
+    setBufferSelection: setPeopleBufferSelection,
     selectUser,
   } = peopleStore.selectionStore;
-  const { setSelection: setGroupsSelection } = peopleStore.groupsStore;
+
+  const {
+    setSelection: setGroupsSelection,
+    setBufferSelection: setGroupsBufferSelection,
+  } = peopleStore.groupsStore;
+
   const { setChangeOwnerDialogVisible } = peopleStore.dialogStore;
 
   return {
@@ -108,7 +115,8 @@ export default inject(({ peopleStore }) => {
     isFilteredOnlyBySearch,
     setPeopleSelection,
     setGroupsSelection,
-    setBufferSelection,
+    setPeopleBufferSelection,
+    setGroupsBufferSelection,
     setChangeOwnerDialogVisible,
     selectUser,
     peopleWithGroups,

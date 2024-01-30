@@ -15,7 +15,7 @@ class GroupsTableHeader extends React.Component {
       {
         key: "Name",
         title: props.t("Common:Name"),
-        resizable: false,
+        resizable: true,
         enable: true,
         default: true,
         sortBy: "AZ",

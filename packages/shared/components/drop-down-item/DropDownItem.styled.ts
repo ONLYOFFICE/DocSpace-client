@@ -133,8 +133,9 @@ const StyledDropdownItem = styled.div<{
   }
 
   &:active {
-    ${({ isHeader, theme }) =>
+    ${({ isHeader, noHover, theme }) =>
       !isHeader &&
+      !noHover &&
       css`
         background-color: ${theme.dropDownItem.hoverBackgroundColor};
       `}

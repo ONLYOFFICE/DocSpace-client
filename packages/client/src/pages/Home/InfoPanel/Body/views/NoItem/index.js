@@ -8,9 +8,11 @@ import NoGalleryItem from "./NoGalleryItem";
 import NoRoomItem from "./NoRoomItem";
 import NoFileOrFolderItem from "./NoFileOrFolderItem";
 import NoAccountsItem from "./NoAccountsItem";
+import NoGroupsItem from "./NoGroupsItem";
 
-const NoItem = ({ t, isAccounts, isGallery, isRooms, isFiles }) => {
-  if (isAccounts) return <NoAccountsItem t={t} />;
+const NoItem = ({ t, isPeople, isGroups, isGallery, isRooms, isFiles }) => {
+  if (isPeople) return <NoAccountsItem t={t} />;
+  if (isGroups) return <NoGroupsItem t={t} />;
   if (isGallery) return <NoGalleryItem t={t} />;
   if (isFiles) return <NoFileOrFolderItem t={t} />;
   if (isRooms) return <NoRoomItem t={t} />;

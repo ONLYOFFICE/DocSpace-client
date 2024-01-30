@@ -6,6 +6,7 @@ import { Consumer } from "@docspace/shared/utils/context";
 import withLoader from "SRC_DIR/HOCs/withLoader";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const InsideGroup = ({
   tReady,
@@ -14,8 +15,8 @@ const InsideGroup = ({
   setCurrentGroup,
   getGroupById,
 }) => {
+  const navigate = useNavigate();
   const { groupId } = useParams();
-  console.log(groupId);
 
   useEffect(() => {
     (async () => {
@@ -25,6 +26,10 @@ const InsideGroup = ({
         setCurrentGroup(newCurrentGroup);
       }
     })();
+  }, [groupId]);
+
+  useEffect(() => {
+    navigate(`/accounts/groups/${groupId}/filter`);
   }, [groupId]);
 
   return (
@@ -44,7 +49,6 @@ const InsideGroup = ({
 };
 
 export default inject(({ peopleStore }) => ({
-  groups: peopleStore.groupsStore.groups,
   currentGroup: peopleStore.groupsStore.currentGroup,
   setCurrentGroup: peopleStore.groupsStore.setCurrentGroup,
   getGroupById: peopleStore.groupsStore.getGroupById,

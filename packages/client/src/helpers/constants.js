@@ -75,8 +75,8 @@ export const TableVersions = Object.freeze({
   Rooms: "2",
   Files: "2",
   People: "3",
-  Groups: "5",
   Trash: "4",
+  Groups: "5",
 });
 
 /**

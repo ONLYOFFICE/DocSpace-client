@@ -57,6 +57,7 @@ class SelectionStore {
   setSelections = (added, removed, clear = false) => {
     if (clear) this.selection = [];
 
+    console.log(added, removed);
     let newSelections = JSON.parse(JSON.stringify(this.selection));
 
     for (let item of added) {

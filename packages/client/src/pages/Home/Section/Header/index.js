@@ -1321,6 +1321,10 @@ export default inject(
       ? pathParts?.length === 1 || pathParts?.length === 2
       : pathParts?.length === 1;
 
+    const haveLinksRight =
+      access === ShareAccessRights.RoomManager ||
+      access === ShareAccessRights.None;
+
     const showNavigationButton = isLoading
       ? false
       : !isPublicRoom &&
@@ -1447,6 +1451,7 @@ export default inject(
       inRoom,
       onCreateAndCopySharedLink,
       showNavigationButton,
+      haveLinksRight,
     };
   }
 )(

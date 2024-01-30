@@ -35,7 +35,6 @@ const FilesSelectorWrapper = ({
   isRoomsOnly = false,
   isUserOnly = false,
   isEditorDialog = false,
-
   rootThirdPartyId,
   filterParam,
 
@@ -70,6 +69,7 @@ const FilesSelectorWrapper = ({
   onSelectFolder,
   onSetBaseFolderPath,
   // onSetNewFolderPath,
+  setIsDataReady,
   onSelectTreeNode,
   onSave,
   onSelectFile,
@@ -279,6 +279,7 @@ const FilesSelectorWrapper = ({
       disabledItems={disabledItems}
       filterParam={filterParam}
       getIcon={getIcon}
+      setIsDataReady={setIsDataReady}
       t={t}
       treeFolders={treeFolders}
       onSetBaseFolderPath={onSetBaseFolderPath}

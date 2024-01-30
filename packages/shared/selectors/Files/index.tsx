@@ -75,6 +75,7 @@ const FilesSelector = ({
   embedded,
   isPanelVisible,
   currentDeviceType,
+  setIsDataReady,
 }: FilesSelectorProps) => {
   const theme = useTheme();
 
@@ -336,6 +337,10 @@ const FilesSelector = ({
     setSearchValue("");
     callback?.();
   };
+
+  React.useEffect(() => {
+    if (setIsDataReady) setIsDataReady(!showLoader);
+  }, [setIsDataReady, showLoader]);
 
   const onAcceptAction = async (
     i: unknown,

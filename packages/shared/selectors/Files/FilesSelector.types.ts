@@ -138,7 +138,7 @@ export interface FilesSelectorProps {
       | undefined,
     selectedFileInfo: TSelectedFileInfo,
   ) => boolean;
-
+  setIsDataReady?: (value: boolean) => void;
   withHeader: boolean;
   headerLabel: string;
   searchPlaceholder: string;

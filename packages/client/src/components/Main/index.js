@@ -44,7 +44,7 @@ const Main = (props) => {
       window.visualViewport.removeEventListener("resize", onResize);
       clearTimeout(updateSizeRef.current);
     };
-  }, [onResize]);
+  }, [onResize, isFrame]);
 
   React.useEffect(() => {
     onResize();

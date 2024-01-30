@@ -92,7 +92,8 @@ const filesSettingsStore = new FilesSettingsStore(
   treeFoldersStore,
   publicRoomStore,
   pluginStore,
-  authStore
+  authStore,
+  settingsStore
 );
 
 const accessRightsStore = new AccessRightsStore(
@@ -192,7 +193,8 @@ const contextOptionsStore = new ContextOptionsStore(
   oformsStore,
   pluginStore,
   infoPanelStore,
-  currentTariffStatusStore
+  currentTariffStatusStore,
+  userStore
 );
 
 const hotkeyStore = new HotkeyStore(

@@ -1614,9 +1614,10 @@ class FilesActionStore {
 
         return !allFilesIsEditing && canDelete && hasSelection;
       case "create-room":
-        const { isCollaborator } = this.authStore.userStore.user;
+        const { isCollaborator } = this.userStore.user;
 
-        const canCreateRoom = !isCollaborator && rootFolderType === FolderType.USER;
+        const canCreateRoom =
+          !isCollaborator && rootFolderType === FolderType.USER;
 
         return canCreateRoom;
     }

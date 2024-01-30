@@ -92,7 +92,8 @@ const StyledDiagramComponent = styled.div`
     width: 100%;
     max-width: ${(props) => props.maxWidth}px;
     display: flex;
-    background: #f3f4f4;
+    background: ${(props) =>
+      props.theme.client.settings.payment.backgroundColor};
     border-radius: 29px;
   }
   .diagram_description {
@@ -118,7 +119,8 @@ const StyledDiagramComponent = styled.div`
 
 const StyledFolderTagSection = styled.div`
   height: 12px;
-  border-right: 1px solid #f3f4f4;
+  border-right: ${(props) =>
+    `1px solid ${props.theme.client.settings.payment.backgroundColor}`};
   background: ${(props) => props.color};
   width: ${(props) => props.width + "%"};
 

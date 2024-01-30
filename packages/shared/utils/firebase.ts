@@ -6,12 +6,6 @@ import "firebase/remote-config";
 import "firebase/storage";
 import "firebase/database";
 
-import CampaignsCloudPngUrl from "PUBLIC_DIR/images/campaigns.cloud.png";
-import CampaignsDesktopPngUrl from "PUBLIC_DIR/images/campaigns.desktop.png";
-import CampaignsEducationPngUrl from "PUBLIC_DIR/images/campaigns.education.png";
-import CampaignsEnterprisePngUrl from "PUBLIC_DIR/images/campaigns.enterprise.png";
-import CampaignsIntegrationPngUrl from "PUBLIC_DIR/images/campaigns.integration.png";
-
 export type TSettings = {
   apiKey: string;
   authDomain: string;
@@ -130,7 +124,7 @@ class FirebaseHelper {
     // const res = await this.remoteConfig?.fetchAndActivate();
     await this.remoteConfig?.fetchAndActivate();
 
-    const campaignsValue = this.remoteConfig?.getValue("campaigns");
+    const campaignsValue = this.remoteConfig?.getValue("docspace_campaigns");
     const campaignsString = campaignsValue && campaignsValue.asString();
 
     if (!campaignsValue || !campaignsString) {
@@ -149,29 +143,18 @@ class FirebaseHelper {
   }
 
   async getCampaignsImages(banner: string) {
-    // const domain = this.config["authDomain"];
-
-    switch (banner) {
-      case "cloud":
-        return CampaignsCloudPngUrl;
-      case "desktop":
-        return CampaignsDesktopPngUrl;
-      case "education":
-        return CampaignsEducationPngUrl;
-      case "enterprise":
-        return CampaignsEnterprisePngUrl;
-      case "integration":
-        return CampaignsIntegrationPngUrl;
-      default:
-        return "";
-    }
-
-    // return `https://${domain}/images/campaigns.${banner}.png`;
+    const domain = this.config?.authDomain;
+    return `https://${domain}/images/${banner}.svg`;
   }
 
   async getCampaignsTranslations(banner: string, lng: string) {
     const domain = this.config?.authDomain;
-    return `https://${domain}/locales/${lng}/CampaignPersonal${banner}.json`;
+    return `https://${domain}/locales/${lng}/${banner}.json`;
+  }
+
+  async getCampaignStyles(banner: string) {
+    const domain = this.config?.authDomain;
+    return `https://${domain}/styles/${banner}.json`;
   }
 
   async sendCrashReport(report: string) {

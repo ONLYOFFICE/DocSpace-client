@@ -271,7 +271,7 @@ const Editor = (props) => {
               tabIndex={4}
             />
           </ControlsGroup>
-          <InterfaceElements>
+          {/* <InterfaceElements>
             <Label className="label">{t("InterfaceElements")}</Label>
             <Checkbox
               className="checkbox"
@@ -293,7 +293,7 @@ const Editor = (props) => {
               <Checkbox label={t("FeedbackAndSupport")} onChange={() => {}} isChecked={true} />
               <Text color="gray">({t("InLeftPanel")})</Text>
             </RowContainer>
-          </InterfaceElements>
+          </InterfaceElements> */}
         </Controls>
       </Container>
 

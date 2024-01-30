@@ -182,8 +182,6 @@ const Manager = (props) => {
   ];
 
   const filterOptions = [
-    { key: "filter-type-none", label: t("Files:All"), typeKey: FilterType.None },
-    { key: "filter-type-author", label: t("Files:ByAuthor"), typeKey: FilterType.ByUser },
     { key: "filter-type-all", label: t("Files:AllFiles"), typeKey: FilterType.FilesOnly },
     {
       key: "filter-type-documents",
@@ -485,17 +483,13 @@ const Manager = (props) => {
 
   const onFilterSelect = (option) => {
     setFilterBy(option);
-    if (option.typeKey === FilterType.ByUser) {
-      //handle author filter
-    } else {
-      setConfig((config) => ({
-        ...config,
-        filter: {
-          ...config.filter,
-          filterType: option.typeKey,
-        },
-      }));
-    }
+    setConfig((config) => ({
+      ...config,
+      filter: {
+        ...config.filter,
+        filterType: option.typeKey,
+      },
+    }));
   };
 
   const onResize = () => {
@@ -600,6 +594,15 @@ const Manager = (props) => {
     if (!e.target.checked) {
       const filtered = { ...config.filter };
       delete filtered.subjectId;
+      setConfig((config) => ({ ...config, filter: filtered }));
+    }
+    setIsUserFilterSet(e.target.checked);
+  };
+
+  const toggleAuthor = (e) => {
+    if (!e.target.checked) {
+      const filtered = { ...config.filter };
+      delete filtered.authorType;
       setConfig((config) => ({ ...config, filter: filtered }));
     }
     setIsUserFilterSet(e.target.checked);
@@ -877,21 +880,7 @@ const Manager = (props) => {
                 <ToggleButton
                   className="toggle"
                   label="Author"
-                  onChange={(e) => {
-                    setIsUserFilterSet(e.target.checked);
-                    setConfig((config) => ({
-                      ...config,
-                      filter: {
-                        filterType: option.typeKey,
-                        count: 100,
-                        page: 1,
-                        sortorder: "descending",
-                        sortby: "DateAndTime",
-                        search: "",
-                        withSubfolders: false,
-                      },
-                    }));
-                  }}
+                  onChange={toggleAuthor}
                   isChecked={isUserFilterSet}
                 />
                 {isUserFilterSet && (
@@ -928,6 +917,11 @@ const Manager = (props) => {
                   className="toggle"
                   label="Type"
                   onChange={(e) => {
+                    if (!e.target.checked) {
+                      const filtered = { ...config.filter };
+                      delete filtered.filterType;
+                      setConfig((config) => ({ ...config, filter: filtered }));
+                    }
                     setIsTypeFilterSet(e.target.checked);
                   }}
                   isChecked={isTypeFilterSet}
@@ -936,7 +930,7 @@ const Manager = (props) => {
                   <ComboBox
                     onSelect={onFilterSelect}
                     options={filterOptions}
-                    scaled={true}
+                    scaled
                     selectedOption={filterBy}
                     displaySelectedOption
                     directionY="top"
@@ -1012,80 +1006,44 @@ const Manager = (props) => {
                   className="toggle"
                   label="Type"
                   onChange={(e) => {
+                    if (!e.target.checked) {
+                      const filtered = { ...config.filter };
+                      delete filtered.type;
+                      setConfig((config) => ({ ...config, filter: filtered }));
+                    }
                     setIsTypeFilterSet(e.target.checked);
                   }}
                   isChecked={isTypeFilterSet}
                 />
-                {isTypeFilterSet && "type" in config.filter ? (
-                  <SelectedItem
-                    onClick={() => {
-                      const filtered = { ...config.filter };
-                      delete filtered.type;
-                      setConfig((config) => ({ ...config, filter: filtered }));
-                    }}
-                    onClose={() => {}}
-                    label={selectedType}
-                  />
-                ) : (
-                  <ComboBox
-                    onSelect={(option) => {
-                      setConfig((config) => ({
-                        ...config,
-                        filter: { ...config.filter, type: option.roomType },
-                      }));
-                      setSelectedType(option.label);
-                    }}
-                    options={roomTypeOptions}
-                    scaled={true}
-                    selectedOption={filterBy}
-                    displaySelectedOption
-                    directionY="top"
-                  />
-                )}
+                {isTypeFilterSet &&
+                  ("type" in config.filter ? (
+                    <SelectedItem
+                      onClick={() => {
+                        const filtered = { ...config.filter };
+                        delete filtered.type;
+                        setConfig((config) => ({ ...config, filter: filtered }));
+                      }}
+                      onClose={() => {}}
+                      label={selectedType}
+                    />
+                  ) : (
+                    <ComboBox
+                      onSelect={(option) => {
+                        setConfig((config) => ({
+                          ...config,
+                          filter: { ...config.filter, type: option.roomType },
+                        }));
+                        setSelectedType(option.label);
+                      }}
+                      options={roomTypeOptions}
+                      scaled={true}
+                      selectedOption={filterBy}
+                      displaySelectedOption
+                      directionY="top"
+                    />
+                  ))}
               </>
             )}
-
-            {/* <ComboBox
-              onSelect={onFilterSelect}
-              options={filterOptions}
-              scaled={true}
-              selectedOption={filterBy}
-              displaySelectedOption
-              directionY="top"
-            />
-            {filterBy.key === "filter-type-author" && (
-              <>
-                <Label className="label" text={t("Files:ByAuthor")} />
-                <UserInputContainer>
-                  <UserInput ref={searchRef}>
-                    <TextInput
-                      scale
-                      onChange={onChangeAuthor}
-                      placeholder={t("Files:ByAuthor")}
-                      value={author}
-                      onFocus={openInviteInputPanel}
-                      isAutoFocussed
-                      onKeyDown={onKeyDown}
-                      tabIndex={5}
-                    />
-                  </UserInput>
-                  {author.length >= minSearchValue && (
-                    <StyledDropDown
-                      width={searchRef?.current?.offsetWidth}
-                      isDefaultMode={false}
-                      open={searchPanelVisible}
-                      manualX="16px"
-                      showDisabledItems
-                      clickOutsideAction={closeInviteInputPanel}
-                      eventTypes="click"
-                      {...dropDownMaxHeight}
-                    >
-                      {!!usersList.length ? foundUsers : ""}
-                    </StyledDropDown>
-                  )}
-                </UserInputContainer>
-              </>
-            )} */}
           </ControlsGroup>
           <ControlsGroup>
             <Label className="label" text={t("SearchTerm")} />

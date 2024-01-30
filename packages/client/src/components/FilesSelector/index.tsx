@@ -2,18 +2,19 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-// @ts-ignore
-import Loaders from "@docspace/common/components/Loaders";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
 import { DeviceType } from "@docspace/shared/enums";
 
-import { Selector } from "@docspace/shared/components/selector";
+import FilesSelector from "@docspace/shared/selectors/Files";
 import { Aside } from "@docspace/shared/components/aside";
 import { Backdrop } from "@docspace/shared/components/backdrop";
-import { Portal } from "@docspace/shared/components/portal";
 import { toastr } from "@docspace/shared/components/toast";
 
-import { RowLoader, SearchLoader } from "@docspace/shared/skeletons/selector";
+import {
+  RowLoader,
+  SearchLoader,
+  BreadCrumbsLoader,
+} from "@docspace/shared/skeletons/selector";
 
 import EmptyScreenFilterAltSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt.svg?url";
 import EmptyScreenFilterAltDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt_dark.svg?url";
@@ -34,7 +35,7 @@ import useFilesHelper from "./helpers/useFilesHelper";
 import { getAcceptButtonLabel, getHeaderLabel, getIsDisabled } from "./utils";
 import useSocketHelper from "./helpers/useSocketHelper";
 
-const FilesSelector = ({
+const FilesSelectorWrapper = ({
   isPanelVisible = false,
   // withoutImmediatelyClose = false,
   isThirdParty = false,
@@ -569,7 +570,7 @@ const FilesSelector = ({
         />
       }
       searchLoader={<SearchLoader />}
-      breadCrumbsLoader={<Loaders.SelectorBreadCrumbsLoader />}
+      breadCrumbsLoader={<BreadCrumbsLoader />}
       alwaysShowFooter={true}
       isNextPageLoading={isNextPageLoading}
       hasNextPage={hasNextPage}
@@ -597,33 +598,7 @@ const FilesSelector = ({
     />
   );
 
-  const selectorComponent = embedded ? (
-    SelectorBody
-  ) : (
-    <>
-      <Backdrop
-        visible={isPanelVisible}
-        isAside
-        withBackground
-        zIndex={309}
-        onClick={onCloseAction}
-      />
-      <Aside
-        visible={isPanelVisible}
-        withoutBodyScroll
-        zIndex={310}
-        onClose={onCloseAction}
-      >
-        {SelectorBody}
-      </Aside>
-    </>
-  );
-
-  return currentDeviceType === DeviceType.mobile && !embedded ? (
-    <Portal visible={isPanelVisible} element={<div>{selectorComponent}</div>} />
-  ) : (
-    selectorComponent
-  );
+  return <FilesSelector currentDeviceType={currentDeviceType} />;
 };
 
 export default inject(
@@ -765,4 +740,4 @@ export default inject(
       roomsFolderId,
     };
   }
-)(observer(FilesSelector));
+)(observer(FilesSelectorWrapper));

@@ -30,7 +30,6 @@ import AutoBackupLoader from "./AutoBackupLoader";
 import RestoreBackupLoader from "./RestoreBackupLoader";
 import PaymentsLoader from "./PaymentsLoader";
 
-import SelectorBreadCrumbsLoader from "./SelectorBreadCrumbsLoader";
 import PaymentsStandaloneLoader from "./PaymentsStandaloneLoader";
 
 import InfoPanelViewLoader from "./InfoPanelBodyLoader/InfoPanelViewLoader";
@@ -78,7 +77,6 @@ export default {
   RestoreBackupLoader,
   PaymentsLoader,
 
-  SelectorBreadCrumbsLoader,
   PaymentsStandaloneLoader,
 
   InfoPanelHeaderLoader,

@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
@@ -7,7 +6,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 import { DeviceType, RoomSearchArea } from "@docspace/shared/enums";
 import Items from "./Items";
-import { tablet } from "@docspace/shared/utils";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
@@ -19,14 +17,6 @@ import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
-
-const StyledBlock = styled.div`
-  padding: 0 20px;
-
-  @media ${tablet} {
-    padding: ${(props) => (props.showText ? "0 16px" : 0)};
-  }
-`;
 
 const ArticleBodyContent = (props) => {
   const {
@@ -251,13 +241,9 @@ const ArticleBodyContent = (props) => {
         activeItemId={activeItemId}
       />
 
-      {/* {!isDesktopClient && showText && (
-        <StyledBlock showText={showText}>
-          {(isDesktop || isTablet) && !firstLoad && campaigns.length > 0 && (
-            <Banner FirebaseHelper={FirebaseHelper} />
-          )}
-        </StyledBlock>
-      )} */}
+      {!isDesktopClient && showText && !firstLoad && campaigns.length > 0 && (
+        <Banner FirebaseHelper={FirebaseHelper} />
+      )}
     </>
   );
 };

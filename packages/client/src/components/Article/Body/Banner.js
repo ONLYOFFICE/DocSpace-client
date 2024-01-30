@@ -8,8 +8,9 @@ import { getCookie } from "@docspace/shared/utils";
 const Banner = () => {
   const [campaignImage, setCampaignImage] = useState();
   const [campaignTranslate, setCampaignTranslate] = useState();
+  const [campaignConfig, setCampaignConfig] = useState();
 
-  const campaigns = (localStorage.getItem("campaigns") || "")
+  const campaigns = (localStorage.getItem("docspace_campaigns") || "")
     .split(",")
     .filter((campaign) => campaign.length > 0);
 
@@ -41,6 +42,12 @@ const Banner = () => {
     return await res.json();
   };
 
+  const getConfig = async (campaign) => {
+    const configUrl = await window.firebaseHelper.getCampaignConfig(campaign);
+    const res = await fetch(configUrl);
+    return await res.json();
+  };
+
   const getBanner = async () => {
     let index = Number(localStorage.getItem("bannerIndex") || 0);
     const currentCampaign = campaigns[index];
@@ -54,9 +61,11 @@ const Banner = () => {
 
     const image = await getImage(currentCampaign);
     const translate = await getTranslation(currentCampaign, language);
+    const config = await getConfig(currentCampaign);
 
     setCampaignImage(image);
     setCampaignTranslate(translate);
+    setCampaignConfig(config);
   };
 
   useEffect(() => {
@@ -67,13 +76,11 @@ const Banner = () => {
 
   return (
     <>
-      {campaignImage && campaignTranslate && (
+      {campaignImage && campaignTranslate && campaignConfig && (
         <CampaignsBanner
-          headerLabel={campaignTranslate.Header}
-          subHeaderLabel={campaignTranslate.SubHeader}
-          img={campaignImage}
-          buttonLabel={campaignTranslate.ButtonLabel}
-          link={campaignTranslate.Link}
+          campaignImage={campaignImage}
+          campaignTranslate={campaignTranslate}
+          campaignConfig={campaignConfig}
         />
       )}
     </>

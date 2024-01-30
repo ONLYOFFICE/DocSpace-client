@@ -132,7 +132,11 @@ const RoomsRowDataComponent = (props) => {
       {showStorageInfo &&
         (roomQuotaColumnIsEnable ? (
           <TableCell className={"table-cell_Storage/Quota"}>
-            <SpaceQuota item={item} type="room" />
+            <SpaceQuota
+              item={item}
+              type="room"
+              isReadOnly={!item?.security?.EditRoom}
+            />
           </TableCell>
         ) : (
           <div />

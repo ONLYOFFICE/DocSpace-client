@@ -198,7 +198,7 @@ class DetailsHelper {
       case "Tags":
         return this.t("Common:Tags");
       case "Storage":
-        if (this.item.security.Create || this.item?.security?.EditRoom) {
+        if (this.item.quotaLimit !== undefined) {
           return this.isDefaultRoomsQuotaSet
             ? this.t("Common:StorageAndQuota")
             : this.t("Common:Storage");
@@ -330,7 +330,7 @@ class DetailsHelper {
       this.setSelection(this.calculateSelection());
     };
 
-    if (this.item.security.Create) {
+    if (this.item.quotaLimit !== undefined) {
       return (
         <SpaceQuota
           item={this.item}

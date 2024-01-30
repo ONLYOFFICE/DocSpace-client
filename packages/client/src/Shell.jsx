@@ -300,7 +300,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 
     FirebaseHelper.checkCampaigns()
       .then((campaigns) => {
-        localStorage.setItem("campaigns", campaigns);
+        localStorage.setItem("docspace_campaigns", campaigns);
       })
       .catch((err) => {
         console.error(err);

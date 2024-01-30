@@ -78,6 +78,7 @@ class ContextOptionsStore {
   pluginStore;
   infoPanelStore;
   currentTariffStatusStore;
+  userStore;
 
   linksIsLoading = false;
 
@@ -96,7 +97,8 @@ class ContextOptionsStore {
     oformsStore,
     pluginStore,
     infoPanelStore,
-    currentTariffStatusStore
+    currentTariffStatusStore,
+    userStore
   ) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -114,6 +116,7 @@ class ContextOptionsStore {
     this.pluginStore = pluginStore;
     this.infoPanelStore = infoPanelStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
+    this.userStore = userStore;
   }
 
   onOpenFolder = (item) => {
@@ -1534,10 +1537,12 @@ class ContextOptionsStore {
       });
     }
 
-    const { isCollaborator } = this.authStore.userStore.user;
+    const { isCollaborator } = this.userStore.user;
 
     const newOptions = options.filter(
-      (option, index) => !(index === 0 && option.key === "separator1") && !(isCollaborator && option.key === "create-room")
+      (option, index) =>
+        !(index === 0 && option.key === "separator1") &&
+        !(isCollaborator && option.key === "create-room")
     );
 
     return newOptions;
@@ -1790,10 +1795,12 @@ class ContextOptionsStore {
       },
     ];
 
-    const { isCollaborator } = this.authStore.userStore.user;
+    const { isCollaborator } = this.userStore.user;
 
     const newOptions = options.filter(
-      (option, index) => !(index === 0 && option.key === "separator1") && !(isCollaborator && option.key === "create-room")
+      (option, index) =>
+        !(index === 0 && option.key === "separator1") &&
+        !(isCollaborator && option.key === "create-room")
     );
 
     return newOptions;

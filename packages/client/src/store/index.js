@@ -93,6 +93,7 @@ const filesSettingsStore = new FilesSettingsStore(
   publicRoomStore,
   pluginStore,
   authStore,
+  settingsStore,
 );
 
 const accessRightsStore = new AccessRightsStore(
@@ -193,6 +194,7 @@ const contextOptionsStore = new ContextOptionsStore(
   pluginStore,
   infoPanelStore,
   currentTariffStatusStore,
+  userStore,
 );
 
 const hotkeyStore = new HotkeyStore(

@@ -21,6 +21,7 @@ class FilesSettingsStore {
   publicRoomStore;
   pluginStore;
   authStore;
+  settingsStore;
 
   isErrorSettings = null;
   expandedSetting = null;
@@ -73,7 +74,8 @@ class FilesSettingsStore {
     treeFoldersStore,
     publicRoomStore,
     pluginStore,
-    authStore
+    authStore,
+    settingsStore
   ) {
     makeAutoObservable(this);
 
@@ -82,6 +84,7 @@ class FilesSettingsStore {
     this.publicRoomStore = publicRoomStore;
     this.pluginStore = pluginStore;
     this.authStore = authStore;
+    this.settingsStore = settingsStore;
   }
 
   setIsLoaded = (isLoaded) => {
@@ -560,7 +563,7 @@ class FilesSettingsStore {
         path = "sxi.svg";
         break;
       default:
-        const { enablePlugins } = this.authStore.settingsStore;
+        const { enablePlugins } = this.settingsStore;
 
         if (enablePlugins) {
           const { fileItemsList } = this.pluginStore;

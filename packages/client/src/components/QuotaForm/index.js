@@ -16,18 +16,49 @@ import StyledBody from "./StyledComponent";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 
 const isDefaultValue = (initPower, initSize, power, value, initialSize) => {
+  if (!initialSize && initialSize !== 0) return false;
+
   if (initialSize === -1) return false;
 
   if (initPower == power && initSize == value) return true;
 
   return false;
 };
+
+const getInitialSize = (initialSize, initPower) => {
+  if (initialSize > 0)
+    return getSizeFromBytes(initialSize, initPower).toString();
+
+  if (initialSize < 0) return "";
+
+  return initialSize.toString();
+};
+
+const getInitialPower = (initialSize) => {
+  if (initialSize > 0) return getPowerFromBytes(initialSize, 4);
+
+  return 0;
+};
+
+const getOptions = (t) => [
+  { key: 0, label: t("Common:Bytes") },
+  { key: 1, label: t("Common:Kilobyte") },
+  { key: 2, label: t("Common:Megabyte") },
+  { key: 3, label: t("Common:Gigabyte") },
+  { key: 4, label: t("Common:Terabyte") },
+];
+
+const getConvertedSize = (value, power) => {
+  if (value.trim() === "") return "";
+
+  return conversionToBytes(value, power);
+};
 const QuotaForm = ({
   isLoading,
   isDisabled,
   maxInputWidth,
   onSetQuotaBytesSize,
-  initialSize,
+  initialSize = "",
   isError,
   isButtonsEnable = false,
   onSave,
@@ -37,13 +68,8 @@ const QuotaForm = ({
   description,
   isAutoFocussed = false,
 }) => {
-  const initPower = initialSize > 0 ? getPowerFromBytes(initialSize, 4) : 0;
-  const initSize =
-    initialSize > 0
-      ? getSizeFromBytes(initialSize, initPower).toString()
-      : initialSize === 0
-        ? "0"
-        : "";
+  const initPower = getInitialPower(initialSize);
+  const initSize = getInitialSize(initialSize, initPower);
 
   useEffect(() => {
     setSize(initSize);
@@ -56,22 +82,13 @@ const QuotaForm = ({
   const [isChecked, setIsChecked] = useState(initialSize === -1);
 
   const { t } = useTranslation(["Settings", "Common"]);
-  const options = [
-    { key: 0, label: t("Common:Bytes") },
-    { key: 1, label: t("Common:Kilobyte") },
-    { key: 2, label: t("Common:Megabyte") },
-    { key: 3, label: t("Common:Gigabyte") },
-    { key: 4, label: t("Common:Terabyte") },
-  ];
+  const options = getOptions(t);
 
-  const getConvertedSize = (value) => {
-    return value.trim() !== "" ? conversionToBytes(value, power) : "";
-  };
   const onChangeTextInput = (e) => {
     const { value, validity } = e.target;
 
     if (validity.valid) {
-      const transmittedSize = getConvertedSize(value).toString();
+      const transmittedSize = getConvertedSize(value, power);
 
       onSetQuotaBytesSize && onSetQuotaBytesSize(transmittedSize);
       setSize(value);
@@ -93,7 +110,7 @@ const QuotaForm = ({
 
     setIsChecked(changeСheckbox);
 
-    const sizeValue = changeСheckbox ? -1 : getConvertedSize(size);
+    const sizeValue = changeСheckbox ? -1 : getConvertedSize(size, power);
 
     onSetQuotaBytesSize && onSetQuotaBytesSize(sizeValue);
   };

@@ -116,9 +116,7 @@ export default inject(({ peopleStore, filesStore, auth }, { type }) => {
     setInfoPanelSelection,
   } = infoPanelStore;
 
-  const size = type === "user" ? defaultUsersQuota : defaultRoomsQuota;
-
-  const initialSize = size.toString();
+  const initialSize = type === "user" ? defaultUsersQuota : defaultRoomsQuota;
 
   const inRoom = infoPanelSelection?.inRoom;
   const needResetSelection =

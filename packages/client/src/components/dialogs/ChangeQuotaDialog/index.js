@@ -40,7 +40,7 @@ const ChangeQuotaDialog = (props) => {
           primary
           onClick={onSaveClick}
           isLoading={isLoading}
-          isDisabled={initialSize === size}
+          isDisabled={initialSize == size}
           scale
         />
         <Button

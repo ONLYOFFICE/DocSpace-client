@@ -74,16 +74,13 @@ const StyledRowContainer = styled(RowContainer)`
 `;
 
 const PeopleRowContainer = ({
+  currentGroup,
   peopleList,
   sectionWidth,
   accountsViewAs,
   setViewAs,
   theme,
   infoPanelVisible,
-  isFiltered,
-  fetchMoreAccounts,
-  hasMoreAccounts,
-  filterTotal,
   withPaging,
   currentDeviceType,
 }) => {
@@ -93,17 +90,17 @@ const PeopleRowContainer = ({
     currentDeviceType,
   });
 
-  return peopleList.length !== 0 || !isFiltered ? (
+  return !!currentGroup?.members.length ? (
     <StyledRowContainer
       className="people-row-container"
       useReactWindow={!withPaging}
-      fetchMoreFiles={fetchMoreAccounts}
-      hasMoreFiles={hasMoreAccounts}
-      itemCount={filterTotal}
-      filesLength={peopleList.length}
+      fetchMoreFiles={() => {}}
+      hasMoreFiles={false}
+      itemCount={currentGroup.members.length}
+      filesLength={currentGroup.members.length}
       itemHeight={58}
     >
-      {peopleList.map((item, index) => (
+      {currentGroup.members.map((item, index) => (
         <SimpleUserRow
           theme={theme}
           key={item.id}
@@ -119,30 +116,18 @@ const PeopleRowContainer = ({
 };
 
 export default inject(({ peopleStore, auth, filesStore }) => {
-  const {
-    usersStore,
-    filterStore,
-    viewAs: accountsViewAs,
-    setViewAs,
-  } = peopleStore;
+  const { viewAs: accountsViewAs, setViewAs } = peopleStore;
   const { theme, withPaging, currentDeviceType } = auth.settingsStore;
-  const { peopleList, hasMoreAccounts, fetchMoreAccounts } = usersStore;
-  const { filterTotal, isFiltered } = filterStore;
-
   const { isVisible: infoPanelVisible } = auth.infoPanelStore;
+  const { currentGroup } = peopleStore.groupsStore;
 
   return {
-    peopleList,
+    currentGroup,
     accountsViewAs,
     setViewAs,
     theme,
     infoPanelVisible,
     withPaging,
-
-    fetchMoreAccounts,
-    hasMoreAccounts,
-    filterTotal,
-    isFiltered,
     currentDeviceType,
   };
 })(observer(PeopleRowContainer));

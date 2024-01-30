@@ -34,6 +34,13 @@ class PeopleTableHeader extends React.Component {
         onChange: this.onColumnChange,
         onClick: this.onFilter,
       },
+      {
+        key: "Department",
+        title: t("Department"),
+        enable: true,
+        resizable: true,
+        onChange: this.onColumnChange,
+      },
       // {
       //   key: "Room",
       //   title: t("Common:Room"),
@@ -59,7 +66,7 @@ class PeopleTableHeader extends React.Component {
 
   getColumns = (defaultColumns) => {
     const storageColumns = localStorage.getItem(
-      `${TABLE_COLUMNS}=${this.props.userId}`,
+      `${TABLE_COLUMNS}=${this.props.userId}`
     );
     const columns = [];
 
@@ -190,6 +197,6 @@ export default inject(({ auth, peopleStore, clientLoadingStore }) => {
   };
 })(
   withTranslation(["People", "Common", "PeopleTranslations"])(
-    observer(PeopleTableHeader),
-  ),
+    observer(PeopleTableHeader)
+  )
 );

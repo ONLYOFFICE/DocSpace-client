@@ -2,11 +2,11 @@ import React, { useRef } from "react";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
-
+import * as Styled from "./index.styled";
+import { TableBody } from "@docspace/shared/components/table";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { Base } from "@docspace/shared/themes";
-import { TableContainer, TableBody } from "@docspace/shared/components/table";
 
 import GroupsTableItem from "./GroupsTableItem";
 import GroupsTableHeader from "./GroupsTableHeader";
@@ -15,112 +15,6 @@ import { TableVersions } from "SRC_DIR/helpers/constants";
 
 const COLUMNS_SIZE = `groupsColumnsSize_ver-${TableVersions.Groups}`;
 const INFO_PANEL_COLUMNS_SIZE = `infoPanelGroupsColumnsSize_ver-${TableVersions.Groups}`;
-
-const marginCss = css`
-  margin-top: -1px;
-  border-top: ${(props) =>
-    `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
-`;
-
-const userNameCss = css`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: -24px;
-          padding-right: 24px;
-        `
-      : css`
-          margin-left: -24px;
-          padding-left: 24px;
-        `}
-
-  ${marginCss}
-`;
-
-const contextCss = css`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-left: -20px;
-          padding-left: 20px;
-        `
-      : css`
-          margin-right: -20px;
-          padding-right: 20px;
-        `}
-
-  ${marginCss}
-`;
-
-const StyledTableContainer = styled(TableContainer)`
-  margin-top: 0px;
-  :has(
-      .table-container_body
-        .table-list-item:first-child:first-child
-        > .table-row-selected
-    ) {
-    .table-container_header {
-      border-image-slice: 1;
-      border-image-source: ${(props) =>
-        props.theme.tableContainer.header.lengthenBorderImageSource};
-    }
-  }
-
-  .table-row-selected {
-    .table-container_user-name-cell {
-      ${userNameCss}
-    }
-
-    .table-container_row-context-menu-wrapper {
-      ${contextCss}
-    }
-  }
-
-  .table-row-selected + .table-row-selected {
-    .table-row {
-      .table-container_user-name-cell,
-      .table-container_row-context-menu-wrapper {
-        margin-top: -1px;
-        border-image-slice: 1;
-        border-top: 1px solid;
-      }
-      .table-container_user-name-cell {
-        ${userNameCss}
-        border-left: 0; //for Safari macOS
-        border-right: 0; //for Safari macOS
-
-        border-image-source: ${(props) => `linear-gradient(to right, 
-          ${props.theme.filesSection.tableView.row.borderColorTransition} 17px, ${props.theme.filesSection.tableView.row.borderColor} 31px)`};
-      }
-      .table-container_row-context-menu-wrapper {
-        ${contextCss}
-
-        border-image-source: ${(props) => `linear-gradient(to left,
-          ${props.theme.filesSection.tableView.row.borderColorTransition} 17px, ${props.theme.filesSection.tableView.row.borderColor} 31px)`};
-      }
-    }
-  }
-
-  .user-item:not(.table-row-selected) + .table-row-selected {
-    .table-row {
-      .table-container_user-name-cell {
-        ${userNameCss}
-      }
-
-      .table-container_row-context-menu-wrapper {
-        ${contextCss}
-      }
-
-      .table-container_user-name-cell,
-      .table-container_row-context-menu-wrapper {
-        border-bottom: ${(props) =>
-          `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
-      }
-    }
-  }
-`;
-
-StyledTableContainer.defaultProps = { theme: Base };
 
 const GroupsTableView = ({
   groups,
@@ -155,7 +49,7 @@ const GroupsTableView = ({
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
   return groups.length !== 0 || !isFiltered ? (
-    <StyledTableContainer useReactWindow={!withPaging} forwardedRef={ref}>
+    <Styled.GroupsTableContainer useReactWindow={!withPaging} forwardedRef={ref}>
       <GroupsTableHeader
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
@@ -187,7 +81,7 @@ const GroupsTableView = ({
           />
         ))}
       </TableBody>
-    </StyledTableContainer>
+    </Styled.GroupsTableContainer>
   ) : (
     <EmptyScreen />
   );

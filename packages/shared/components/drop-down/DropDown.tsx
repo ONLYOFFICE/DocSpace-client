@@ -17,6 +17,7 @@ const DropDown = ({
   directionX = "left",
 
   open,
+  isTableInfo,
   enableOnClickOutside,
   isDefaultMode = true,
   fixedDirection = false,
@@ -396,6 +397,7 @@ const DropDown = ({
         manualWidth={manualWidth}
         className={className}
         manualX={manualX}
+        isTableInfo={isTableInfo}
       >
         <VirtualList
           Row={Row}

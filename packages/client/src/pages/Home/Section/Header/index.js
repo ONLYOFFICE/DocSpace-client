@@ -132,6 +132,8 @@ const StyledContainer = styled.div`
 const SectionHeaderContent = (props) => {
   const {
     currentFolderId,
+    currentGroup,
+    getGroupContextOptions,
     setSelectFileDialogVisible,
     t,
     isPrivacyFolder,
@@ -238,6 +240,8 @@ const SectionHeaderContent = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { groupId } = useParams();
+
+  const isInsideGroup = !!groupId;
 
   const isAccountsPage = location.pathname.includes("/accounts");
 
@@ -669,6 +673,10 @@ const SectionHeaderContent = (props) => {
       ];
     }
 
+    if (isInsideGroup) {
+      return getGroupContextOptions(t, currentGroup);
+    }
+
     return [
       {
         id: "header_option_sharing-settings",
@@ -1030,7 +1038,9 @@ const SectionHeaderContent = (props) => {
   const currentTitle = isSettingsPage
     ? t("Common:Settings")
     : isAccountsPage
-      ? t("Common:Accounts")
+      ? isInsideGroup && currentGroup
+        ? currentGroup.name
+        : t("Common:Accounts")
       : isLoading && stateTitle
         ? stateTitle
         : title;
@@ -1045,6 +1055,15 @@ const SectionHeaderContent = (props) => {
       ? stateRootRoomTitle
       : navigationPath?.length > 1 &&
         navigationPath[navigationPath?.length - 2].title;
+
+  const accountsNavigationPath = isInsideGroup && [
+    {
+      id: 0,
+      title: "Accounts",
+      isRoom: false,
+      isRootRoom: true,
+    },
+  ];
 
   const currentIsPublicRoomType =
     isLoading && typeof stateIsPublicRoomType === "boolean"
@@ -1067,16 +1086,6 @@ const SectionHeaderContent = (props) => {
   const burgerLogo = !theme.isBase
     ? getLogoFromPath(whiteLabelLogoUrls[5]?.path?.dark)
     : getLogoFromPath(whiteLabelLogoUrls[5]?.path?.light);
-
-  const isInsideGroup = groupId !== undefined;
-  const accountsNaviationPath = isInsideGroup && [
-    {
-      id: 0,
-      title: "Accounts",
-      isRoom: false,
-      isRootRoom: true,
-    },
-  ];
 
   return (
     <Consumer key="header">
@@ -1106,7 +1115,7 @@ const SectionHeaderContent = (props) => {
                 tReady={tReady}
                 menuItems={menuItems}
                 navigationItems={
-                  !isInsideGroup ? navigationPath : accountsNaviationPath
+                  !isInsideGroup ? navigationPath : accountsNavigationPath
                 }
                 getContextOptionsPlus={getContextOptionsPlus}
                 getContextOptionsFolder={getContextOptionsFolder}
@@ -1264,6 +1273,8 @@ export default inject(
       access,
       canCopyPublicLink,
     } = selectedFolderStore;
+
+    const { currentGroup, getGroupContextOptions } = peopleStore.groupsStore;
 
     const selectedFolder = { ...selectedFolderStore };
 
@@ -1445,6 +1456,8 @@ export default inject(
       currentDeviceType,
       setLeaveRoomDialogVisible,
       inRoom,
+      currentGroup,
+      getGroupContextOptions,
     };
   }
 )(

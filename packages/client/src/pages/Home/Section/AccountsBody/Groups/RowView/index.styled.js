@@ -10,7 +10,7 @@ export const GroupsRowContainer = styled(RowContainer)`
   .row-selected + .row-wrapper:not(.row-selected),
   .row-wrapper:not(.row-selected) + .row-selected,
   .row-selected:first-child {
-    .user-row {
+    .group-row {
       border-top: ${({ theme }) =>
         `1px ${theme.filesSection.tableView.row.borderColor} solid`};
       margin: -3px -24px 0 -24px;
@@ -23,7 +23,7 @@ export const GroupsRowContainer = styled(RowContainer)`
   }
 
   .row-selected:last-child {
-    .user-row {
+    .group-row {
       border-bottom: ${({ theme }) =>
         `1px ${theme.filesSection.tableView.row.borderColor} solid`};
       margin: 0 -24px;
@@ -40,14 +40,14 @@ export const GroupsRowContainer = styled(RowContainer)`
   }
 
   .row-hotkey-border + .row-selected {
-    .user-row {
+    .group-row {
       border-top: 1px solid #2da7db !important;
     }
   }
 `;
 
 export const GroupsRowWrapper = styled.div`
-  .user-item {
+  .group-item {
     border: 1px solid transparent;
     border-left: none;
     border-right: none;
@@ -60,7 +60,7 @@ export const GroupsRowWrapper = styled.div`
             margin-left: 0;
           `}
     height: 100%;
-    user-select: none;
+    group-select: none;
 
     position: relative;
     outline: none;
@@ -113,6 +113,20 @@ export const GroupsRow = styled(Row)`
         : css`
             margin-right: 12px;
           `}
+  }
+
+  .group-row-element {
+    display: flex;
+    width: 32px;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 16px;
+    background: #eceef1;
+    color: #333;
+    border-radius: 50%;
   }
 `;
 

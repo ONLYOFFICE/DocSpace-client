@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
-
+import ExpanderDownReactSvgUrl from "PUBLIC_DIR/images/expander-down.react.svg?url";
 import { TableRow } from "@docspace/shared/components/table";
 import { TableCell } from "@docspace/shared/components/table";
 import { Link } from "@docspace/shared/components/link";
@@ -9,11 +9,12 @@ import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-
+import { LinkWithDropdown } from "@docspace/shared/components/link-with-dropdown";
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
-
+import { ReactSVG } from "react-svg";
 import Badges from "../../Badges";
 import { Base } from "@docspace/shared/themes";
+import { DropDown } from "@docspace/shared/components/drop-down";
 
 const StyledWrapper = styled.div`
   display: contents;
@@ -53,6 +54,11 @@ const StyledPeopleRow = styled(TableRow)`
               margin-right: -20px;
               padding-right: 20px;
             `}
+    }
+
+    .trigger {
+      background-color: ${(props) =>
+        `${props.theme.filesSection.tableView.row.backgroundActive}`};
     }
   }
 
@@ -126,6 +132,7 @@ const StyledPeopleRow = styled(TableRow)`
   }
 
   .table-cell_type,
+  .table-cell_groups,
   .table-cell_room {
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
@@ -137,6 +144,7 @@ const StyledPeopleRow = styled(TableRow)`
           `}
   }
 
+  .groups-combobox,
   .type-combobox {
     visibility: ${(props) => (props.hideColumns ? "hidden" : "visible")};
     opacity: ${(props) => (props.hideColumns ? 0 : 1)};
@@ -147,6 +155,7 @@ const StyledPeopleRow = styled(TableRow)`
   }
 
   .type-combobox,
+  .groups-combobox,
   .room-combobox {
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
@@ -157,6 +166,10 @@ const StyledPeopleRow = styled(TableRow)`
             padding-left: 8px;
           `}
     overflow: hidden;
+  }
+
+  .type-combobox,
+  .room-combobox {
     .combo-button {
       ${(props) =>
         props.theme.interfaceDirection === "rtl"
@@ -176,6 +189,37 @@ const StyledPeopleRow = styled(TableRow)`
     }
   }
 
+  .groups-combobox {
+    .combo-button {
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              padding-right: 8px;
+              margin-right: -8px;
+            `
+          : css`
+              padding-left: 8px;
+              margin-left: -8px;
+            `}
+
+      &:hover {
+        background-color: #fff !important;
+      }
+
+      .combo-button-label {
+        font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+        color: ${(props) => props.theme.peopleTableRow.sideInfoColor};
+        font-weight: 600;
+      }
+
+      .combo-buttons_arrow-icon {
+        svg path {
+          fill: ${(props) => props.theme.peopleTableRow.sideInfoColor};
+        }
+      }
+    }
+  }
+
   .room-combobox {
     .combo-buttons_arrow-icon {
       display: none;
@@ -184,6 +228,65 @@ const StyledPeopleRow = styled(TableRow)`
 `;
 
 StyledPeopleRow.defaultProps = { theme: Base };
+
+const StyledGroupsDropDown = styled.div`
+  position: relative;
+  .trigger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 4px 8px;
+    background-color: ${({ isChecked, theme }) =>
+      !isChecked ? "#fff" : theme.filesSection.tableView.row.backgroundActive};
+    border-radius: 3px;
+
+    &:hover {
+      background-color: #fff;
+    }
+
+    .trigger-group_name {
+      color: ${(props) => props.theme.peopleTableRow.sideInfoColor};
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 20px;
+    }
+
+    .trigger-plus_badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 12px;
+      min-height: 12px;
+      background-color: ${(props) => props.theme.peopleTableRow.sideInfoColor};
+      padding: 0 3px;
+      color: #fff;
+      font-size: 9px;
+      font-weight: 800;
+      border-radius: 16px;
+    }
+
+    .trigger-expander {
+      height: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: ${({ isOpened }) =>
+        !isOpened ? "rotate(0def)" : "rotate(180deg)"};
+      svg {
+        path {
+          fill: ${(props) => props.theme.peopleTableRow.sideInfoColor};
+        }
+      }
+    }
+  }
+
+  .dropdown {
+    z-index: 105;
+  }
+`;
+
+StyledGroupsDropDown.defaultProps = { theme: Base };
 
 const fakeRooms = [
   {
@@ -235,6 +338,12 @@ const PeopleTableRow = (props) => {
   } = item;
 
   const isPending = statusType === "pending" || statusType === "disabled";
+
+  const groupsDropdownRef = React.useRef(null);
+
+  const [groupDropDownIsOpened, setGroupDropDownIsOpened] = useState(false);
+  const onOpenGroupDropdown = () => setGroupDropDownIsOpened(true);
+  const onCloseGroupDropdown = () => setGroupDropDownIsOpened(false);
 
   const [isLoading, setIsLoading] = React.useState(false);
 
@@ -297,7 +406,7 @@ const PeopleTableRow = (props) => {
         setIsLoading(false);
       }
     },
-    [item, changeUserType],
+    [item, changeUserType]
   );
 
   // const getRoomsOptions = React.useCallback(() => {
@@ -335,6 +444,78 @@ const PeopleTableRow = (props) => {
   const typeLabel = getUserTypeLabel(role);
 
   const isChecked = checkedProps.checked;
+
+  const renderGroupsCell = () => {
+    const groups = item.groups || [];
+    const groupItems = groups.map((group) => ({
+      key: group.id,
+      label: group.name,
+      onClick: undefined,
+    }));
+
+    if (groups.length > 1)
+      return (
+        <StyledGroupsDropDown
+          isChecked={isChecked}
+          isOpened={groupDropDownIsOpened}
+        >
+          <div
+            ref={groupsDropdownRef}
+            className="trigger"
+            onClick={() => {
+              onOpenGroupDropdown();
+              console.log("ASDASDlasdjkdhjklahsdljkhagsdJLHG");
+            }}
+          >
+            <div className="trigger-group_name">{groups[0].name}</div>
+            <div className="trigger-plus_badge">{`+${groups.length - 1}`}</div>{" "}
+            <ReactSVG
+              className="trigger-expander"
+              src={ExpanderDownReactSvgUrl}
+            />
+          </div>
+
+          <DropDown
+            forwardedRef={groupsDropdownRef}
+            className="dropdown"
+            open={groupDropDownIsOpened}
+            withBackdrop={true}
+            clickOutsideAction={onCloseGroupDropdown}
+            isDefaultMode={true}
+          >
+            {groupItems.map((option) => (
+              <DropDownItem
+                key={option.key}
+                label={option.label}
+                title={option.label}
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+                noHover
+              />
+            ))}
+          </DropDown>
+        </StyledGroupsDropDown>
+      );
+
+    if (groups.length === 1)
+      return (
+        <Text
+          type="page"
+          title={position}
+          fontSize="13px"
+          fontWeight={600}
+          color={sideInfoColor}
+          truncate
+          noSelect
+          style={{ paddingLeft: "8px" }}
+        >
+          {groups[0].name}
+        </Text>
+      );
+
+    return null;
+  };
 
   const renderTypeCell = () => {
     const typesOptions = getTypesOptions();
@@ -460,6 +641,10 @@ const PeopleTableRow = (props) => {
 
         <TableCell className={"table-cell_type"}>{typeCell}</TableCell>
 
+        <TableCell className={"table-cell_groups"}>
+          {renderGroupsCell()}
+        </TableCell>
+
         {/* <TableCell className="table-cell_room">
           {!rooms?.length ? (
             <Text
@@ -521,5 +706,5 @@ const PeopleTableRow = (props) => {
 };
 
 export default withTranslation(["People", "Common", "Settings"])(
-  withContent(PeopleTableRow),
+  withContent(PeopleTableRow)
 );

@@ -2,18 +2,22 @@ import React from "react";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { SelectionArea as SelectionAreaComponent } from "@docspace/shared/components/selection-area";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 const SelectionArea = ({
   viewAs,
   setSelectionsPeople,
   setSelectionsGroups,
 }) => {
+  const { groupId } = useParams();
+  console.log(groupId);
   const location = useLocation();
-  const isPeople = location.pathname.includes("/accounts/people");
+
+  const isPeopleSelections =
+    !!groupId || location.pathname.includes("/accounts/people");
 
   const onMove = ({ added, removed, clear }) => {
-    isPeople
+    isPeopleSelections
       ? setSelectionsPeople(added, removed, clear)
       : setSelectionsGroups(added, removed, clear);
   };
@@ -26,7 +30,7 @@ const SelectionArea = ({
       scrollClass="section-scroll"
       itemsContainerClass="ReactVirtualized__Grid__innerScrollContainer"
       selectableClass="window-item"
-      itemClass={isPeople ? "user-item" : "group-item"}
+      itemClass={isPeopleSelections ? "user-item" : "group-item"}
       onMove={onMove}
       viewAs={viewAs}
     />

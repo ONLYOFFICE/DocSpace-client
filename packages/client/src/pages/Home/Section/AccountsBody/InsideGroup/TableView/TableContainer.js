@@ -135,12 +135,8 @@ const Table = ({
   userId,
   infoPanelVisible,
 
-  fetchMoreAccounts,
-  hasMoreAccounts,
-  filterTotal,
   withPaging,
   canChangeUserType,
-  isFiltered,
   currentDeviceType,
 }) => {
   const ref = useRef(null);
@@ -157,10 +153,8 @@ const Table = ({
 
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
-  console.log(currentGroup);
 
-  if (!currentGroup?.members) return null;
-  return currentGroup.members.length !== 0 || !isFiltered ? (
+  return !!currentGroup?.members.length ? (
     <StyledTableContainer useReactWindow={!withPaging} forwardedRef={ref}>
       <TableHeader
         columnStorageName={columnStorageName}
@@ -175,9 +169,9 @@ const Table = ({
         infoPanelVisible={infoPanelVisible}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
         columnStorageName={columnStorageName}
-        fetchMoreFiles={fetchMoreAccounts}
-        hasMoreFiles={hasMoreAccounts}
-        itemCount={filterTotal}
+        fetchMoreFiles={() => {}}
+        hasMoreFiles={false}
+        itemCount={currentGroup.members.length}
         filesLength={currentGroup.members.length}
         itemHeight={49}
         useReactWindow={!withPaging}
@@ -213,8 +207,6 @@ export default inject(
       changeType,
     } = peopleStore;
     const { theme, withPaging, currentDeviceType } = auth.settingsStore;
-    const { hasMoreAccounts, fetchMoreAccounts } = usersStore;
-    const { filterTotal, isFiltered } = filterStore;
     const { currentGroup } = peopleStore.groupsStore;
 
     const { isVisible: infoPanelVisible } = auth.infoPanelStore;
@@ -234,11 +226,7 @@ export default inject(
       infoPanelVisible,
       withPaging,
 
-      fetchMoreAccounts,
-      hasMoreAccounts,
-      filterTotal,
       canChangeUserType,
-      isFiltered,
       currentDeviceType,
     };
   }

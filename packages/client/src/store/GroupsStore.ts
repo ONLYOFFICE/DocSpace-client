@@ -1,11 +1,19 @@
 import { makeAutoObservable } from "mobx";
 import * as groupsApi from "@docspace/shared/api/groups";
+import { Events } from "@docspace/shared/enums";
+import { toastr } from "@docspace/shared/components/toast";
+
+import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
+import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
+import InfoReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
 class GroupsStore {
   peopleStore;
 
   groups = [];
   selection = [];
+  bufferSelection = null;
+
   currentGroup = null;
 
   constructor(peopleStore: any) {
@@ -27,8 +35,8 @@ class GroupsStore {
 
   setSelection = (selection) => (this.selection = selection);
 
-  addGroupToSelection = (group) =>
-    (this.selection = [...this.selection, group]);
+  setBufferSelection = (bufferSelection) =>
+    (this.bufferSelection = bufferSelection);
 
   setSelections = (added, removed, clear = false) => {
     if (clear) this.selection = [];
@@ -66,8 +74,63 @@ class GroupsStore {
       }
     }
 
-    console.log(newSelections);
     this.setSelection(newSelections);
+  };
+
+  getGroupContextOptions = (t, item) => {
+    return [
+      {
+        id: "edit-group",
+        key: "edit-group",
+        className: "group-menu_drop-down",
+        label: t("Edit department"),
+        title: t("Edit department"),
+        icon: PencilReactSvgUrl,
+        onClick: () => {
+          const event = new Event(Events.GROUP_EDIT);
+          event.item = item;
+          window.dispatchEvent(event);
+        },
+      },
+      {
+        id: "info",
+        key: "group-info",
+        className: "group-menu_drop-down",
+        label: t("Info"),
+        title: t("Info"),
+        icon: InfoReactSvgUrl,
+        onClick: () => {
+          const { setIsVisible } = this.peopleStore.authStore.infoPanelStore;
+          this.selection = [item];
+          setIsVisible(true);
+        },
+      },
+      {
+        key: "separator",
+        isSeparator: true,
+      },
+      {
+        id: "delete-group",
+        key: "delete-group",
+        className: "group-menu_drop-down",
+        label: t("Delete"),
+        title: t("Delete"),
+        icon: TrashReactSvgUrl,
+        onClick: async () => {
+          const groupId = item.id;
+          groupsApi
+            .deleteGroup(groupId)
+            .then(() => {
+              toastr.success(t("Group was deleted successfully"));
+              this.getGroups();
+            })
+            .catch((err) => {
+              toastr.error(err.message);
+              console.error(err);
+            });
+        },
+      },
+    ];
   };
 }
 

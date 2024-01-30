@@ -15,6 +15,7 @@ const StyledDropdown = styled.div<{
   open?: boolean;
   isMobileView?: boolean;
   itemCount?: number;
+  isTableInfo?: boolean;
 }>`
   font-family: ${(props) => props.theme.fontFamily};
   font-style: normal;

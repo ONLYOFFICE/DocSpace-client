@@ -351,9 +351,11 @@ class AuthStore {
 
     this.isLogout = true;
 
-    const { isDesktopClient: isDesktop } = this.settingsStore;
+    const { isDesktopClient: isDesktop, isFrame } = this.settingsStore;
 
     isDesktop && logoutDesktop();
+
+    isFrame && frameCallEvent({ event: "onSignOut" });
 
     if (ssoLogoutUrl) return ssoLogoutUrl;
 

@@ -150,30 +150,27 @@ const Frame = styled(Box)`
   margin-top: 16px;
   position: relative;
 
+  border-radius: 6px;
+  border: 1px solid #d0d5da;
+
+  width: ${(props) => (props.width ? props.width : "100%")};
+  height: ${(props) => (props.height ? props.height : "400px")};
+
   @media ${tablet} {
     margin-top: 4px;
   }
-
-  ${isMobile &&
-  css`
-    margin-top: 4px;
-  `}
 
   ${(props) =>
     props.targetId &&
     `
     #${props.targetId} {
-      position: absolute;
       border-radius: 6px;
-      border: 1px solid #d0d5da;
-      min-width: ${props.width ? props.width : "100%"};
-      min-height: ${props.height ? props.height : "400px"};
     }
+  `}
 
-    #${props.targetId}-loader {
-      border-radius: 6px;
-      border: 1px solid #d0d5da;
-    }
+  ${isMobile &&
+  css`
+    margin-top: 4px;
   `}
 `;
 
@@ -498,7 +495,11 @@ const PortalIntegration = (props) => {
   const codeBlock = `<div id="${frameId}">Fallback text</div>\n<script src="${scriptUrl}${params}"></script>`;
 
   const preview = (
-    <Frame width={width} height={width} targetId={frameId}>
+    <Frame
+      width={width + widthDimension.label}
+      height={height + heightDimension.label}
+      targetId={frameId}
+    >
       <Box id={frameId}></Box>
     </Frame>
   );

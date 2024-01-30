@@ -219,7 +219,7 @@ class FilesStore {
           } else if (opt.cmd === "delete") {
             this.selectedFolderStore[opt.type + "sCount"]--;
           }
-          this.authStore.infoPanelStore.reloadSelection();
+          // this.authStore.infoPanelStore.updateInfoPanelSelection();
         });
       }
 
@@ -1455,9 +1455,12 @@ class FilesStore {
             // Clear all selections
             this.setSelected("close");
 
-            // Restore not processed
-            tempSelection.length && this.setSelection(tempSelection);
-            tempBuffer && this.setBufferSelection(tempBuffer);
+            // TODO: see bug 63479
+            if (this.selectedFolderStore?.id === folderId) {
+              // Restore not processed
+              tempSelection.length && this.setSelection(tempSelection);
+              tempBuffer && this.setBufferSelection(tempBuffer);
+            }
           }
         }
 
@@ -1498,6 +1501,9 @@ class FilesStore {
                 canCopyPublicLink =
                   room.access === ShareAccessRights.RoomManager ||
                   room.access === ShareAccessRights.None;
+
+                room.canCopyPublicLink = canCopyPublicLink;
+                this.authStore.infoPanelStore.setInfoPanelRoom(room);
               }
 
               const { mute } = room;
@@ -1712,6 +1718,7 @@ class FilesStore {
             }
           }
 
+          this.authStore.infoPanelStore.setInfoPanelRoom(null);
           this.selectedFolderStore.setSelectedFolder({
             folders: data.folders,
             ...data.current,
@@ -3980,6 +3987,10 @@ class FilesStore {
     }
 
     return link;
+  };
+
+  getFilePrimaryLink = async (fileId) => {
+    return await api.files.getFileLink(fileId);
   };
 
   setRoomShared = (roomId, shared) => {

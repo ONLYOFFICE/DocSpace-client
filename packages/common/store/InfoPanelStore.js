@@ -4,7 +4,11 @@ import moment from "moment";
 import { getUserById } from "@docspace/shared/api/people";
 import { getUserRole } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { FolderType, ShareAccessRights } from "@docspace/shared/enums";
+import {
+  EmployeeActivationStatus,
+  FolderType,
+  ShareAccessRights,
+} from "@docspace/shared/enums";
 import config from "PACKAGE_FILE";
 import Filter from "@docspace/shared/api/people/filter";
 import { getRoomInfo } from "@docspace/shared/api/rooms";
@@ -14,6 +18,7 @@ import {
   editExternalLink,
   addExternalLink,
 } from "@docspace/shared/api/files";
+import isEqual from "lodash/isEqual";
 
 const observedKeys = [
   "id",
@@ -34,15 +39,13 @@ class InfoPanelStore {
   isVisible = false;
   isMobileHidden = false;
 
-  selection = null;
+  infoPanelSelection = null;
   selectionHistory = null;
-  selectionParentRoom = null;
   selectionHistory = null;
 
   roomsView = infoMembers;
   fileView = infoHistory;
 
-  updateRoomMembers = null;
   isScrollLocked = false;
   historyWithFileList = false;
 
@@ -52,7 +55,12 @@ class InfoPanelStore {
   filesStore = null;
   selectedFolderStore = null;
   treeFoldersStore = null;
-  membersList = null;
+  publicRoomStore = null;
+
+  infoPanelMembers = null;
+  infoPanelSelection = null;
+  infoPanelRoom = null;
+  membersIsLoading = false;
 
   shareChanged = false;
 
@@ -70,23 +78,12 @@ class InfoPanelStore {
 
   setIsMobileHidden = (bool) => (this.isMobileHidden = bool);
 
-  setSelection = (selection) => {
-    if (this.getIsAccounts() && (!selection.email || !selection.displayName)) {
-      this.selection = selection.length
-        ? selection
-        : { isSelectedFolder: true };
-      return;
-    }
-    this.selection = selection;
-    this.isScrollLocked = false;
-  };
-
-  setSelectionParentRoom = (obj) => (this.selectionParentRoom = obj);
   setSelectionHistory = (obj) => (this.selectionHistory = obj);
 
   setSelectionHistory = (obj) => {
     this.selectionHistory = obj;
-    this.historyWithFileList = this.selection.isFolder || this.selection.isRoom;
+    this.historyWithFileList =
+      this.infoPanelSelection.isFolder || this.infoPanelSelection.isRoom;
   };
 
   resetView = () => {
@@ -98,12 +95,9 @@ class InfoPanelStore {
     this.roomsView = view;
     this.fileView = view === infoMembers ? infoHistory : view;
     this.isScrollLocked = false;
-    if (view !== infoMembers) this.setMembersList(null);
-  };
+    if (view !== infoMembers) this.setInfoPanelMembers(null);
 
-  setUpdateRoomMembers = (updateRoomMembers) => {
-    this.setMembersList(null);
-    this.updateRoomMembers = updateRoomMembers;
+    this.setNewInfoPanelSelection();
   };
 
   setIsScrollLocked = (isScrollLocked) => {
@@ -112,87 +106,105 @@ class InfoPanelStore {
 
   // Selection helpers //
 
-  getSelectedItems = () => {
-    const {
-      selection: filesStoreSelection,
-      bufferSelection: filesStoreBufferSelection,
-    } = this.filesStore;
+  get infoPanelSelectedItems() {
+    const { selection: filesSelection, bufferSelection: filesBufferSelection } =
+      this.filesStore;
 
     const {
-      selection: peopleStoreSelection,
-      bufferSelection: peopleStoreBufferSelection,
+      selection: peopleSelection,
+      bufferSelection: peopleBufferSelection,
     } = this.peopleStore.selectionStore;
+
     return this.getIsAccounts()
-      ? peopleStoreSelection.length
-        ? [...peopleStoreSelection]
-        : peopleStoreBufferSelection
-          ? [peopleStoreBufferSelection]
+      ? peopleSelection.length
+        ? [...peopleSelection]
+        : peopleBufferSelection
+          ? [peopleBufferSelection]
           : []
-      : filesStoreSelection?.length > 0
-        ? [...filesStoreSelection]
-        : filesStoreBufferSelection
-          ? [filesStoreBufferSelection]
+      : filesSelection?.length > 0
+        ? [...filesSelection]
+        : filesBufferSelection
+          ? [filesBufferSelection]
           : [];
+  }
+
+  getInfoPanelSelectedFolder = () => {
+    const isRooms = this.getIsRooms();
+
+    return this.roomsView === infoMembers && this.infoPanelRoom && isRooms
+      ? this.infoPanelRoom
+      : this.selectedFolderStore.getSelectedFolder();
   };
 
-  getSelectedFolder = () => {
-    const selectedFolderStore = { ...this.selectedFolderStore };
+  get infoPanelCurrentSelection() {
+    const { selection, bufferSelection } = this.filesStore;
 
+    return this.infoPanelSelection
+      ? this.infoPanelSelection
+      : selection.length
+        ? selection[0]
+        : bufferSelection
+          ? bufferSelection
+          : null;
+  }
+
+  get withPublicRoomBlock() {
+    return (
+      this.infoPanelCurrentSelection?.access ===
+        ShareAccessRights.RoomManager ||
+      this.infoPanelCurrentSelection?.access === ShareAccessRights.None
+    );
+  }
+
+  getViewItem = () => {
+    const isRooms = this.getIsRooms();
+
+    if (
+      isRooms &&
+      this.roomsView === infoMembers &&
+      !this.infoPanelSelectedItems[0]?.isRoom
+    ) {
+      // if (!this.infoPanelSelection?.id) {
+      return this.getInfoPanelSelectedFolder();
+      // }
+    } else {
+      return this.infoPanelSelectedItems[0];
+    }
+  };
+
+  setNewInfoPanelSelection = () => {
+    const selectedItems = this.infoPanelSelectedItems; //files list
+    const selectedFolder = this.getInfoPanelSelectedFolder(); // root or current folder
+    let newInfoPanelSelection = this.infoPanelSelection;
+
+    if (!selectedItems.length) {
+      newInfoPanelSelection = this.normalizeSelection(selectedFolder);
+    } else if (selectedItems.length === 1) {
+      newInfoPanelSelection = this.normalizeSelection(
+        this.getViewItem() ?? newInfoPanelSelection
+      );
+    } else {
+      newInfoPanelSelection = [...Array(selectedItems.length).keys()];
+    }
+
+    this.setInfoPanelSelection(newInfoPanelSelection);
+  };
+
+  normalizeSelection = (infoPanelSelection) => {
     return {
-      ...selectedFolderStore,
-      isFolder: true,
-      isRoom: !!this.selectedFolderStore.roomType,
-    };
-  };
-
-  calculateSelection = (
-    props = { selectedItems: [], selectedFolder: null }
-  ) => {
-    const selectedItems = props.selectedItems.length
-      ? props.selectedItems
-      : this.getSelectedItems();
-
-    const selectedFolder = props.selectedFolder
-      ? props.selectedFolder
-      : this.getSelectedFolder();
-
-    return selectedItems.length === 0
-      ? this.normalizeSelection({
-          ...selectedFolder,
-          isSelectedFolder: true,
-          isSelectedItem: false,
-        })
-      : selectedItems.length === 1
-        ? this.normalizeSelection({
-            ...selectedItems[0],
-            isSelectedFolder: false,
-            isSelectedItem: true,
-          })
-        : [...Array(selectedItems.length).keys()];
-  };
-
-  normalizeSelection = (selection) => {
-    const isContextMenuSelection = selection.isContextMenuSelection;
-    return {
-      ...selection,
-      isRoom: selection.isRoom || !!selection.roomType,
-      icon: this.getInfoPanelItemIcon(selection, 32),
-      isContextMenuSelection: false,
-      wasContextMenuSelection: !!isContextMenuSelection,
+      ...infoPanelSelection,
+      isRoom: infoPanelSelection.isRoom || !!infoPanelSelection.roomType,
+      icon: this.getInfoPanelItemIcon(infoPanelSelection, 32),
       canCopyPublicLink:
-        selection.access === ShareAccessRights.RoomManager ||
-        selection.access === ShareAccessRights.None,
+        infoPanelSelection.access === ShareAccessRights.RoomManager ||
+        infoPanelSelection.access === ShareAccessRights.None,
     };
-  };
-
-  reloadSelection = () => {
-    this.setSelection(this.calculateSelection());
   };
 
   updateRoomLogoCacheBreaker = () => {
-    const logo = this.selection.logo;
-    this.setSelection({
-      ...this.selection,
+    const logo = this.infoPanelSelection.logo;
+    this.setInfoPanelSelection({
+      ...this.infoPanelSelection,
       logo: {
         small: logo.small.split("?")[0] + "?" + new Date().getTime(),
         medium: logo.medium.split("?")[0] + "?" + new Date().getTime(),
@@ -202,32 +214,35 @@ class InfoPanelStore {
     });
   };
 
-  reloadSelectionParentRoom = async () => {
+  updateInfoPanelSelection = async (room) => {
+    if (room) {
+      this.setInfoPanelSelection(this.normalizeSelection(room));
+      if (this.infoPanelRoom?.id === room?.id) {
+        this.setInfoPanelRoom(this.normalizeSelection(room));
+      }
+    } else {
+      this.setNewInfoPanelSelection();
+    }
+
     if (!this.getIsRooms) return;
 
     const currentFolderRoomId =
       this.selectedFolderStore.pathParts &&
       this.selectedFolderStore.pathParts[1]?.id;
-    // const prevRoomId = this.selectionParentRoom?.id;
 
-    // if (!currentFolderRoomId || currentFolderRoomId === prevRoomId) return;
     if (!currentFolderRoomId) return;
 
-    const newSelectionParentRoom = await getRoomInfo(currentFolderRoomId);
-
-    // if (prevRoomId === newSelectionParentRoom.id) return;
+    const newInfoPanelSelection = await getRoomInfo(currentFolderRoomId);
 
     const roomIndex = this.selectedFolderStore.navigationPath.findIndex(
       (f) => f.id === currentFolderRoomId
     );
     if (roomIndex > -1) {
       this.selectedFolderStore.navigationPath[roomIndex].title =
-        newSelectionParentRoom.title;
+        newInfoPanelSelection.title;
     }
 
-    this.setSelectionParentRoom(
-      this.normalizeSelection(newSelectionParentRoom)
-    );
+    this.setInfoPanelSelection(this.normalizeSelection(newInfoPanelSelection));
   };
 
   isItemChanged = (oldItem, newItem) => {
@@ -354,8 +369,159 @@ class InfoPanelStore {
     return pathname.indexOf("files/trash") !== -1;
   };
 
-  setMembersList = (membersList) => {
-    this.membersList = membersList;
+  setInfoPanelMembers = (infoPanelMembers) => {
+    this.infoPanelMembers = infoPanelMembers;
+  };
+
+  setInfoPanelSelection = (infoPanelSelection) => {
+    if (isEqual(infoPanelSelection, this.infoPanelSelection)) {
+      return;
+    }
+
+    if (
+      this.getIsAccounts() &&
+      (!infoPanelSelection.email || !infoPanelSelection.displayName)
+    ) {
+      this.infoPanelSelection = infoPanelSelection.length
+        ? infoPanelSelection
+        : null;
+      return;
+    }
+
+    this.setInfoPanelMembers(null);
+    this.infoPanelSelection = infoPanelSelection;
+    this.isScrollLocked = false;
+  };
+
+  setInfoPanelRoom = (infoPanelRoom) => {
+    this.infoPanelRoom = infoPanelRoom
+      ? this.normalizeSelection(infoPanelRoom)
+      : infoPanelRoom;
+  };
+
+  setMembersIsLoading = (membersIsLoading) => {
+    this.membersIsLoading = membersIsLoading;
+  };
+
+  getHasPrevTitle = (array, type) => {
+    return this.infoPanelMembers?.roomId === this.infoPanelSelection.id
+      ? array.findIndex((x) => x.id === type) > -1
+      : false;
+  };
+
+  addMembersTitle = (t, administrators, users, expectedMembers) => {
+    let hasPrevAdminsTitle = this.getHasPrevTitle(
+      administrators,
+      "administration"
+    );
+
+    if (administrators.length && !hasPrevAdminsTitle) {
+      administrators.unshift({
+        id: "administration",
+        displayName: t("Administration"),
+        isTitle: true,
+      });
+    }
+
+    let hasPrevUsersTitle = this.getHasPrevTitle(users, "user");
+
+    if (users.length && !hasPrevUsersTitle) {
+      users.unshift({ id: "user", displayName: t("Users"), isTitle: true });
+    }
+
+    let hasPrevExpectedTitle = this.getHasPrevTitle(
+      expectedMembers,
+      "expected"
+    );
+
+    if (expectedMembers.length && !hasPrevExpectedTitle) {
+      expectedMembers.unshift({
+        id: "expected",
+        displayName: t("ExpectUsers"),
+        isTitle: true,
+        isExpect: true,
+      });
+    }
+  };
+
+  convertMembers = (t, members, clearFilter) => {
+    const users = [];
+    const administrators = [];
+    const expectedMembers = [];
+
+    members?.map((fetchedMember) => {
+      const member = {
+        access: fetchedMember.access,
+        canEditAccess: fetchedMember.canEditAccess,
+        ...fetchedMember.sharedTo,
+      };
+
+      if (member.activationStatus === EmployeeActivationStatus.Pending) {
+        member.isExpect = true;
+        expectedMembers.push(member);
+      } else if (
+        member.access === ShareAccessRights.FullAccess ||
+        member.access === ShareAccessRights.RoomManager
+      ) {
+        administrators.push(member);
+      } else {
+        users.push(member);
+      }
+    });
+
+    if (clearFilter) {
+      this.addMembersTitle(t, administrators, users, expectedMembers);
+    }
+
+    return { administrators, users, expectedMembers };
+  };
+
+  fetchMembers = async (t, clearFilter = true) => {
+    if (this.membersIsLoading) return;
+    const isPublic =
+      this.infoPanelSelection?.roomType ?? this.infoPanelSelection?.roomType;
+    const roomId = this.infoPanelSelection.id;
+
+    const requests = [this.filesStore.getRoomMembers(roomId, clearFilter)];
+
+    if (isPublic && clearFilter && this.withPublicRoomBlock) {
+      requests.push(this.filesStore.getRoomLinks(roomId));
+    }
+
+    let timerId;
+    if (clearFilter)
+      timerId = setTimeout(() => this.setMembersIsLoading(true), 300);
+
+    const [data, links] = await Promise.all(requests);
+    clearFilter && this.setMembersIsLoading(false);
+    clearTimeout(timerId);
+
+    links && this.publicRoomStore.setExternalLinks(links);
+
+    const { administrators, users, expectedMembers } = this.convertMembers(
+      t,
+      data,
+      clearFilter
+    );
+
+    return {
+      users,
+      administrators,
+      expected: expectedMembers,
+      roomId,
+    };
+  };
+
+  addInfoPanelMembers = (t, members, clearFilter) => {
+    const newMembers = this.convertMembers(t, members, clearFilter);
+    const { roomId, administrators, users, expected } = this.infoPanelMembers;
+
+    this.setInfoPanelMembers({
+      roomId: roomId,
+      administrators: [...administrators, ...newMembers.administrators],
+      users: [...users, ...newMembers.users],
+      expected: [...expected, ...newMembers.expectedMembers],
+    });
   };
 
   openShareTab = () => {

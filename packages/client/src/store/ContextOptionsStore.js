@@ -285,7 +285,7 @@ class ContextOptionsStore {
 
   lockFile = (item, t) => {
     const { id, locked } = item;
-    const { setSelection: setInfoPanelSelection } =
+    const { setInfoPanelSelection: setInfoPanelSelection } =
       this.authStore.infoPanelStore;
 
     this.filesActionsStore
@@ -620,10 +620,8 @@ class ContextOptionsStore {
   };
 
   onShowInfoPanel = (item, view) => {
-    const { setSelection, setIsVisible, setView } =
-      this.authStore.infoPanelStore;
+    const { setIsVisible, setView } = this.authStore.infoPanelStore;
 
-    setSelection(item);
     setIsVisible(true);
     view && setView(view);
   };
@@ -1166,6 +1164,8 @@ class ContextOptionsStore {
         ) === -1;
     }
 
+    const isArchive = item.rootFolderType === FolderType.Archive;
+
     const optionsModel = [
       {
         id: "option_select",
@@ -1286,9 +1286,7 @@ class ContextOptionsStore {
         icon: InvitationLinkReactSvgUrl,
         onClick: () => this.onCopyLink(item, t),
         disabled:
-          (isPublicRoomType &&
-            item.canCopyPublicLink &&
-            !this.treeFoldersStore.isArchiveFolder) ||
+          (isPublicRoomType && item.canCopyPublicLink && !isArchive) ||
           this.publicRoomStore.isPublicRoom,
       },
       {
@@ -1298,7 +1296,7 @@ class ContextOptionsStore {
         icon: TabletLinkReactSvgUrl,
         disabled:
           this.publicRoomStore.isPublicRoom ||
-          this.treeFoldersStore.isArchiveFolder ||
+          isArchive ||
           !item.canCopyPublicLink ||
           !isPublicRoomType,
         onClick: async () => {
@@ -1482,9 +1480,7 @@ class ContextOptionsStore {
         icon: LeaveRoomSvgUrl,
         onClick: this.onLeaveRoom,
         disabled:
-          this.treeFoldersStore.isArchiveFolder ||
-          !item.inRoom ||
-          this.publicRoomStore.isPublicRoom,
+          isArchive || !item.inRoom || this.publicRoomStore.isPublicRoom,
       },
       {
         id: "option_unarchive-room",
@@ -1533,13 +1529,10 @@ class ContextOptionsStore {
       });
     }
 
-    const filteredOptions = this.removeSeparatorFirstInList(options);
-    return filteredOptions;
-  };
+    const { isCollaborator } = this.authStore.userStore.user;
 
-  removeSeparatorFirstInList = (options) => {
     const newOptions = options.filter(
-      (option, index) => !(index === 0 && option.key === "separator1")
+      (option, index) => !(index === 0 && option.key === "separator1") && !(isCollaborator && option.key === "create-room")
     );
 
     return newOptions;
@@ -1792,7 +1785,13 @@ class ContextOptionsStore {
       },
     ];
 
-    return options;
+    const { isCollaborator } = this.authStore.userStore.user;
+
+    const newOptions = options.filter(
+      (option, index) => !(index === 0 && option.key === "separator1") && !(isCollaborator && option.key === "create-room")
+    );
+
+    return newOptions;
   };
 
   getModel = (item, t) => {

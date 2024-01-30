@@ -5,14 +5,35 @@ export interface CampaignsBannerProps {
   className?: string;
   /** Accepts css style */
   style?: React.CSSProperties;
-  /** Label */
-  headerLabel: string;
-  /** Label subheader */
-  subHeaderLabel: string;
-  /** Image source */
-  img: string;
-  /** Header button text */
-  buttonLabel: string;
-  /** The link that opens when the button is clicked */
-  link: string;
+  /** Background */
+  campaignImage: string;
+  /** Translations */
+  campaignTranslate: ITranslate;
+  /** Config */
+  campaignConfig: IConfig;
+}
+
+interface ITranslate {
+  Title?: string;
+  BodyText?: string;
+  ActionText?: string;
+}
+
+interface IStyle {
+  color?: string;
+  fontSize?: string;
+  fontWeight?: string;
+}
+
+interface IAction {
+  isButton?: boolean;
+  backgroundColor?: string;
+  url: string;
+}
+
+interface IConfig {
+  borderColor?: string;
+  title?: IStyle;
+  body?: IStyle;
+  action: IStyle & IAction;
 }

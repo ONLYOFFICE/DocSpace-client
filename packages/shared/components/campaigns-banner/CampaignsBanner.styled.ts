@@ -1,56 +1,46 @@
 import styled from "styled-components";
 import { Base } from "../../themes";
-import { tablet, NoUserSelect } from "../../utils";
+import { mobile } from "../../utils/device";
 
-const BannerWrapper = styled.div`
-  max-width: 185px;
-  border: ${(props) => props.theme.campaignsBanner.border};
-  border-radius: 5px;
-  padding: 15px;
-  margin: 20px 0px 50px 0px;
+const BannerWrapper = styled.div<{
+  background?: string;
+  borderColor?: string;
+}>`
+  min-height: 140px;
+  max-height: 140px;
+  border-radius: 6px;
+  border: 1px solid ${(props) => props.borderColor};
+  background-image: url(${(props) => props.background});
+  background-size: 100%;
 
-  @media screen and ${tablet} {
-    max-width: inherit;
-  }
-
-  a {
-    text-decoration: none;
-    color: ${(props) => props.theme.campaignsBanner.color};
-  }
-
-  .banner-img-wrapper {
-    height: 160px;
-    width: 100%;
-  }
-
-  img {
-    max-width: 100%;
-    height: auto;
-    margin-top: 5px;
-  }
-
-  .banner-sub-header {
-    line-height: 1.5;
-  }
-
-  .banner-img {
-    ${NoUserSelect}
-  }
-
-  .banner-btn {
-    width: 100%;
-    color: ${(props) => props.theme.campaignsBanner.btnColor};
-    margin-top: 15px;
-    border: none;
-    border-radius: 5px;
-  }
-
-  .banner-btn:active {
-    color: ${(props) => props.theme.campaignsBanner.btnColor};
-    border: none;
+  @media ${mobile} {
+    min-height: 110px;
   }
 `;
 
 BannerWrapper.defaultProps = { theme: Base };
 
-export default BannerWrapper;
+const BannerContent = styled.div`
+  padding: 18px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+const BannerButton = styled.button<{
+  buttonColor?: string;
+  buttonTextColor?: string;
+}>`
+  cursor: pointer;
+  width: fit-content;
+  padding: 4px 12px;
+  border-radius: 32px;
+  border: none;
+  background: ${(props) => props.buttonColor};
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  color: ${(props) => props.buttonTextColor};
+`;
+
+export { BannerWrapper, BannerContent, BannerButton };

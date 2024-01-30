@@ -272,6 +272,8 @@
           </body>`;
           iframe.srcdoc = html;
           e.message && config.events.onAppError(e.message);
+
+          this.setIsLoaded();
         });
       }
 

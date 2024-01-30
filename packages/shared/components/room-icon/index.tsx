@@ -2,6 +2,9 @@ import styled, { css } from "styled-components";
 import { Base } from "../../themes";
 import { Text } from "../text";
 
+// import SecuritySvgUrl from "PUBLIC_DIR/images/security.svg?url";
+// import { IconButton } from "../icon-button";
+
 const StyledIcon = styled.div<{
   size: string;
   radius: string;
@@ -54,6 +57,9 @@ interface RoomIconProps {
   color: string;
   size?: string;
   radius?: string;
+  showDefault: boolean;
+  imgClassName?: string;
+  imgSrc?: string;
 }
 
 const RoomIcon = ({
@@ -62,6 +68,9 @@ const RoomIcon = ({
   color,
   size = "32px",
   radius = "6px",
+  showDefault,
+  imgClassName,
+  imgSrc,
 }: RoomIconProps) => {
   const titleWithoutSpaces = title.replace(/\s+/g, " ").trim();
   const indexAfterLastSpace = titleWithoutSpaces.lastIndexOf(" ");
@@ -72,7 +81,7 @@ const RoomIcon = ({
 
   const roomTitle = (title[0] + secondCharacter).toUpperCase();
 
-  return (
+  return showDefault ? (
     <StyledIcon
       color={color}
       size={size}
@@ -82,7 +91,15 @@ const RoomIcon = ({
     >
       <div className="room-background" />
       <Text className="room-title">{roomTitle}</Text>
+      {/* <IconButton
+        onClick={() => {}}
+        iconName={SecuritySvgUrl}
+        size={32}
+        isFill
+      /> */}
     </StyledIcon>
+  ) : (
+    <img className={imgClassName} src={imgSrc} alt="room icon" />
   );
 };
 

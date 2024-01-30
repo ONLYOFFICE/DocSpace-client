@@ -90,26 +90,21 @@ const Details = ({
         </StyledThumbnail>
       ) : (
         <StyledNoThumbnail>
-          {showDefaultRoomIcon ? (
-            <RoomIcon
-              color={selection.logo.color}
-              title={selection.title}
-              isArchive={isArchive}
-              size="96px"
-              radius="16px"
-            />
-          ) : (
-            <img
-              className={`no-thumbnail-img ${selection.isRoom && "is-room"} ${
-                selection.isRoom &&
-                !isArchive &&
-                selection.logo?.large &&
-                "custom-logo"
-              }`}
-              src={currentIcon}
-              alt="thumbnail-icon-big"
-            />
-          )}
+          <RoomIcon
+            color={selection.logo.color}
+            title={selection.title}
+            isArchive={isArchive}
+            size="96px"
+            radius="16px"
+            showDefault={showDefaultRoomIcon}
+            imgClassName={`no-thumbnail-img ${selection.isRoom && "is-room"} ${
+              selection.isRoom &&
+              !isArchive &&
+              selection.logo?.large &&
+              "custom-logo"
+            }`}
+            imgSrc={currentIcon}
+          />
         </StyledNoThumbnail>
       )}
 

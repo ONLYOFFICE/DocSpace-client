@@ -1312,7 +1312,7 @@ class ContextOptionsStore {
           isArchive ||
           !item.canCopyPublicLink ||
           !isPublicRoomType,
-        onClick: () => onCreateAndCopySharedLink(item, t),
+        onClick: () => this.onCreateAndCopySharedLink(item, t),
         // onLoad: () => this.onLoadLinks(t, item),
       },
       {

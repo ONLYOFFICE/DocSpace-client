@@ -1256,6 +1256,7 @@ export default inject(
       inRoom,
       access,
       canCopyPublicLink,
+      rootFolderType,
     } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
@@ -1325,10 +1326,12 @@ export default inject(
       access === ShareAccessRights.RoomManager ||
       access === ShareAccessRights.None;
 
+    const isArchive = rootFolderType === FolderType.Archive;
+
     const showNavigationButton = isLoading
       ? false
       : !isPublicRoom &&
-        !isArchiveFolder &&
+        !isArchive &&
         canCopyPublicLink &&
         (isPublicRoomType || isCustomRoomType);
 

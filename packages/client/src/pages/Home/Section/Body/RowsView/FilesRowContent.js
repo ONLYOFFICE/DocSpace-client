@@ -189,6 +189,7 @@ const FilesRowContent = ({
   fileOwner,
   isDefaultRoomsQuotaSet,
   isStatisticsAvailable,
+  showStorageInfo,
 }) => {
   const {
     contentLength,
@@ -201,8 +202,8 @@ const FilesRowContent = ({
     daysRemaining,
     fileType,
     tags,
-    quotaLimit = -1,
-    usedSpace = 0,
+    quotaLimit,
+    usedSpace,
   } = item;
 
   const contentComponent = () => {
@@ -237,7 +238,12 @@ const FilesRowContent = ({
   };
 
   const additionalComponent = () => {
-    if (isRooms && isStatisticsAvailable) {
+    if (
+      isRooms &&
+      isStatisticsAvailable &&
+      showStorageInfo &&
+      usedSpace !== undefined
+    ) {
       let value = t(ROOMS_TYPE_TRANSLATIONS[item.roomType]);
       const spaceQuota = getSpaceQuotaAsText(
         t,
@@ -326,13 +332,15 @@ export default inject(({ auth, treeFoldersStore, filesStore }) => {
   const filterSortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
   const { currentQuotaStore } = auth;
 
-  const { isDefaultRoomsQuotaSet, isStatisticsAvailable } = currentQuotaStore;
+  const { isDefaultRoomsQuotaSet, isStatisticsAvailable, showStorageInfo } =
+    currentQuotaStore;
   return {
     filterSortBy,
     theme: auth.settingsStore.theme,
     isTrashFolder: isRecycleBinFolder,
     isDefaultRoomsQuotaSet,
     isStatisticsAvailable,
+    showStorageInfo,
   };
 })(
   observer(

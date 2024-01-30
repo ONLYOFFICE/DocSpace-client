@@ -131,7 +131,7 @@ const SpaceQuota = (props) => {
 
   const selectedOption = options.find((elem) => elem.action === action);
 
-  if (withoutLimitQuota) {
+  if (withoutLimitQuota || item?.quotaLimit === undefined) {
     return (
       <StyledText fontWeight={600} withoutLimitQuota>
         {usedQuota}

@@ -27,6 +27,7 @@ class FilesTableHeader extends React.Component {
       frameTableColumns,
       isDefaultRoomsQuotaSet,
       showStorageInfo,
+      isArchiveFolder,
     } = this.props;
 
     const defaultColumns = [];
@@ -92,9 +93,10 @@ class FilesTableHeader extends React.Component {
       showStorageInfo &&
         columns.splice(columns.length - 1, 0, {
           key: "Storage",
-          title: isDefaultRoomsQuotaSet
-            ? t("Common:StorageAndQuota")
-            : t("Common:Storage"),
+          title:
+            isDefaultRoomsQuotaSet && !isArchiveFolder
+              ? t("Common:StorageAndQuota")
+              : t("Common:Storage"),
           enable: this.props.roomQuotaColumnIsEnable,
           sortBy: SortByFieldName.UsedSpace,
           resizable: true,
@@ -327,9 +329,11 @@ class FilesTableHeader extends React.Component {
       isTrashFolder,
       columnStorageName,
       columnInfoPanelStorageName,
+      isArchiveFolder,
     } = this.props;
 
     if (
+      isArchiveFolder !== prevProps.isArchiveFolder ||
       isRooms !== prevProps.isRooms ||
       isTrashFolder !== prevProps.isTrashFolder ||
       columnStorageName !== prevProps.columnStorageName ||
@@ -596,6 +600,7 @@ export default inject(
       frameTableColumns: frameConfig?.viewTableColumns,
       isDefaultRoomsQuotaSet,
       showStorageInfo,
+      isArchiveFolder,
     };
   }
 )(

@@ -1309,6 +1309,7 @@ export default inject(
     } = headerMenuStore;
 
     const { setSelected: setAccountsSelected } = selectionStore;
+    const { isPublicRoom, primaryLink, setExternalLink } = publicRoomStore;
 
     let folderPath = navigationPath;
 
@@ -1320,13 +1321,12 @@ export default inject(
       ? pathParts?.length === 1 || pathParts?.length === 2
       : pathParts?.length === 1;
 
-    const { isPublicRoom, primaryLink, setExternalLink } = publicRoomStore;
-
-    const showNavigationButton =
-      !isPublicRoom &&
-      !isArchiveFolder &&
-      canCopyPublicLink &&
-      (isPublicRoomType || isCustomRoomType);
+    const showNavigationButton = isLoading
+      ? false
+      : !isPublicRoom &&
+        !isArchiveFolder &&
+        canCopyPublicLink &&
+        (isPublicRoomType || isCustomRoomType);
 
     return {
       isGracePeriod,

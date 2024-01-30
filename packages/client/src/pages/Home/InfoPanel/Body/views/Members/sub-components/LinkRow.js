@@ -9,7 +9,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { toastr } from "@docspace/shared/components/toast";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
-import UniverseReactSvgUrl from "PUBLIC_DIR/images/universe.react.svg?url";
+import LinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.reat.svg?url";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
 import ShareReactSvgUrl from "PUBLIC_DIR/images/share.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
@@ -127,7 +127,7 @@ const LinkRow = (props) => {
     return [
       {
         key: "edit-link-key",
-        label: t("Files:EditLink"),
+        label: t("Files:LinkSettings"),
         icon: SettingsReactSvgUrl,
         onClick: onEditLink,
       },
@@ -189,10 +189,10 @@ const LinkRow = (props) => {
   const textColor = disabled ? theme.text.disableColor : theme.text.color;
 
   return (
-    <StyledLinkRow {...rest} isExpired={isExpired} isPrimary={primary}>
+    <StyledLinkRow {...rest} isExpired={isExpired}>
       <Avatar
         size="min"
-        source={UniverseReactSvgUrl}
+        source={LinkReactSvgUrl}
         roleIcon={expiryDate ? <ClockReactSvg /> : null}
         withTooltip={expiryDate}
         tooltipContent={tooltipContent}

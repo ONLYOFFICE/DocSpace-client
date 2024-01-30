@@ -190,5 +190,6 @@
   "WantToRestoreTheRoom": "All shared links in this room will become active, and its contents will be available to everyone with the link. Do you want to restore the room?",
   "WantToRestoreTheRooms": "All shared links in restored rooms will become active, and their contents will be available to everyone with the room links. Do you want to restore the rooms?",
   "WithSubfolders": "With subfolders",
-  "YouLeftTheRoom": "You have left the room"
+  "YouLeftTheRoom": "You have left the room",
+  "LinkSettings": "Link settings"
 }

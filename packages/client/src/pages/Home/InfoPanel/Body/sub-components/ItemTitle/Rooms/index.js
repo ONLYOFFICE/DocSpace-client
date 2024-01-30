@@ -72,7 +72,7 @@ const RoomsItemHeader = ({
     <StyledTitle ref={itemTitleRef}>
       <div className="item-icon">
         <RoomIcon
-          color={selection.logo.color}
+          color={selection.logo?.color}
           title={selection.title}
           isArchive={isArchive}
           showDefault={showDefaultRoomIcon}

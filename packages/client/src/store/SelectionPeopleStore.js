@@ -343,7 +343,9 @@ class SelectionStore {
   get hasUsersToResetQuota() {
     const { caResetCustomQuota } = this.peopleStore.accessRightsStore;
 
-    return this.selection.every((x) => caResetCustomQuota(x));
+    const users = this.selection.filter((x) => caResetCustomQuota(x));
+
+    return users.length > 0;
   }
 }
 

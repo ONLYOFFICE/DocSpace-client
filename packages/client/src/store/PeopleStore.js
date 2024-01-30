@@ -160,28 +160,50 @@ class PeopleStore {
     window.dispatchEvent(event);
   };
   disableUserQuota = async (users, t) => {
-    const { setCustomUserQuota } = this.usersStore;
+    const { setCustomUserQuota, getPeopleListItem } = this.usersStore;
+    const { infoPanelStore } = this.authStore;
+    const { setInfoPanelSelection } = infoPanelStore;
 
     const userIDs = users.map((user) => {
       return user?.id ? user.id : user;
     });
 
     try {
-      await setCustomUserQuota(-1, userIDs);
+      const items = await setCustomUserQuota(-1, userIDs);
+      const users = [];
+      items.map((u) => users.push(getPeopleListItem(u)));
+
+      if (items.length === 1) {
+        setInfoPanelSelection(getPeopleListItem(items[0]));
+      } else {
+        setInfoPanelSelection(items);
+      }
+
       toastr.success(t("Common:StorageQuotaDisabled"));
     } catch (e) {
       toastr.error(e);
     }
   };
   resetUserQuota = async (users, t) => {
-    const { resetUserQuota } = this.usersStore;
-
+    const { resetUserQuota, getPeopleListItem } = this.usersStore;
+    const { infoPanelStore } = this.authStore;
+    const { setInfoPanelSelection } = infoPanelStore;
     const userIDs = users.map((user) => {
       return user?.id ? user.id : user;
     });
 
     try {
-      await resetUserQuota(userIDs);
+      const items = await resetUserQuota(userIDs);
+
+      const users = [];
+      items.map((u) => users.push(getPeopleListItem(u)));
+
+      if (items.length === 1) {
+        setInfoPanelSelection(getPeopleListItem(items[0]));
+      } else {
+        setInfoPanelSelection(items);
+      }
+
       toastr.success(t("Common:StorageQuotaReset"));
     } catch (e) {
       toastr.error(e);

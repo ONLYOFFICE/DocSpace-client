@@ -9,6 +9,41 @@ import { toastr } from "@docspace/shared/components/toast";
 
 import { StyledBody, StyledText } from "./StyledComponent";
 
+const getOptions = (t, item, spaceLimited) => {
+  const items = [
+    {
+      id: "info-account-quota_edit",
+      key: "change-quota",
+      label: t("Common:ChangeQuota"),
+      action: "change",
+    },
+    {
+      id: "info-account-quota_current-size",
+      key: "current-size",
+      label: spaceLimited,
+      action: "current-size",
+    },
+    {
+      id: "info-account-quota_no-quota",
+      key: "no-quota",
+      label:
+        item?.quotaLimit === -1
+          ? t("Common:Unlimited")
+          : t("Common:DisableQuota"),
+      action: "no-quota",
+    },
+  ];
+
+  if (item.isCustomQuota)
+    items?.splice(1, 0, {
+      id: "info-account-quota_no-quota",
+      key: "default-quota",
+      label: t("Common:SetToDefault"),
+      action: "default",
+    });
+
+  return items;
+};
 const SpaceQuota = (props) => {
   const {
     hideColumns,
@@ -34,37 +69,7 @@ const SpaceQuota = (props) => {
   const spaceLimited = getConvertedQuota(t, item?.quotaLimit);
   const defaultQuotaSize = getConvertedQuota(t, defaultSize);
 
-  const options = [
-    {
-      id: "info-account-quota_edit",
-      key: "change-quota",
-      label: t("Common:ChangeQuota"),
-      action: "change",
-    },
-    {
-      id: "info-account-quota_current-size",
-      key: "current-size",
-      label: spaceLimited,
-      action: "current-size",
-    },
-    {
-      id: "info-account-quota_no-quota",
-      key: "no-quota",
-      label:
-        item?.quotaLimit === -1
-          ? t("Common:Unlimited")
-          : t("Common:DisableQuota"),
-      action: "no-quota",
-    },
-  ];
-
-  if (item.isCustomQuota)
-    options?.splice(1, 0, {
-      id: "info-account-quota_no-quota",
-      key: "default-quota",
-      label: t("Common:SetToDefault"),
-      action: "default",
-    });
+  const options = getOptions(t, item, spaceLimited);
 
   const successCallback = (users) => {
     onSuccess && onSuccess(users);

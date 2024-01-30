@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -41,7 +41,6 @@ const FilesSelector = ({
   isRoomsOnly = false,
   isUserOnly = false,
   isEditorDialog = false,
-
   rootThirdPartyId,
   filterParam,
 
@@ -78,6 +77,7 @@ const FilesSelector = ({
   onSelectFolder,
   onSetBaseFolderPath,
   //onSetNewFolderPath,
+  setIsDataReady,
   onSelectTreeNode,
   onSave,
   onSelectFile,
@@ -160,6 +160,10 @@ const FilesSelector = ({
     showBreadCrumbsLoader,
     showLoader,
   } = useLoadersHelper({ items });
+
+  useEffect(() => {
+    setIsDataReady && setIsDataReady(!showLoader);
+  }, [showLoader]);
 
   const { isRoot, setIsRoot, getRootData } = useRootHelper({
     setIsBreadCrumbsLoading,
@@ -484,7 +488,7 @@ const FilesSelector = ({
         selectedItemId &&
         onSave(null, selectedItemId, fileName, isChecked);
       onSelectTreeNode && onSelectTreeNode(selectedTreeNode);
-      onSelectFile && onSelectFile(selectedFileInfo, breadCrumbs);
+      onSelectFile && onSelectFile(selectedFileInfo!, breadCrumbs);
       onCloseAndDeselectAction();
       //!withoutImmediatelyClose &&  onCloseAction();
     }

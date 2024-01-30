@@ -289,8 +289,10 @@ export default function withFileActions(WrappedFileItem) {
       const checkedProps = id <= 0 ? false : isSelected;
 
       const showPlanetIcon =
-        item.roomType === RoomsType.PublicRoom ||
-        item.roomType === RoomsType.CustomRoom;
+        (item.roomType === RoomsType.PublicRoom ||
+          item.roomType === RoomsType.CustomRoom) &&
+        item.shared;
+
       const badgeUrl = showPlanetIcon ? Planet12ReactSvgUrl : null;
 
       return (

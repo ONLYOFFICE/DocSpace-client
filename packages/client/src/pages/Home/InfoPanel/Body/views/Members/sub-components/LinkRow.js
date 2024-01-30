@@ -150,7 +150,7 @@ const LinkRow = (props) => {
 
       !disabled && {
         key: "copy-link-settings-key",
-        label: primary ? t("Files:CopySharedLink") : t("Files:CopyLink"),
+        label: t("Files:CopySharedLink"),
         icon: CopyToReactSvgUrl,
         onClick: onCopyExternalLink,
       },
@@ -235,7 +235,7 @@ const LinkRow = (props) => {
               size={16}
               iconName={CopyReactSvgUrl}
               onClick={onCopyExternalLink}
-              title={primary ? t("Files:CopySharedLink") : t("Files:CopyLink")}
+              title={t("Files:CopySharedLink")}
             />
           </>
         )}

@@ -1333,7 +1333,8 @@ export default inject(
       : !isPublicRoom &&
         !isArchive &&
         canCopyPublicLink &&
-        (isPublicRoomType || isCustomRoomType);
+        (isPublicRoomType || isCustomRoomType) &&
+        primaryLink;
 
     return {
       isGracePeriod,

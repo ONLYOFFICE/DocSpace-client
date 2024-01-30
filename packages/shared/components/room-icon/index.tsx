@@ -52,8 +52,10 @@ const StyledIcon = styled.div<{
     margin: 24px 0 0 24px;
 
     .room-icon-button {
-      width: 14px;
-      height: 14px;
+      width: 12px;
+      height: 12px;
+      border: ${(props) => `1px solid ${props.theme.backgroundColor}`};
+      border-radius: 50%;
 
       svg {
         path {
@@ -118,7 +120,7 @@ const RoomIcon = ({
           <IconButton
             onClick={onBadgeClick}
             iconName={badgeUrl}
-            size={32}
+            size={12}
             className="room-icon-button"
             isFill
           />

@@ -34,6 +34,8 @@ const PAYMENTS_URL = combineUrl(
 const SPACES_URL = combineUrl(PROXY_HOMEPAGE_URL, "/management");
 class ProfileActionsStore {
   authStore = null;
+  userStore = null;
+  settingsStore = null;
   filesStore = null;
   peopleStore = null;
   treeFoldersStore = null;
@@ -50,7 +52,9 @@ class ProfileActionsStore {
     peopleStore,
     treeFoldersStore,
     selectedFolderStore,
-    pluginStore
+    pluginStore,
+    userStore,
+    settingsStore
   ) {
     this.authStore = authStore;
     this.filesStore = filesStore;
@@ -58,6 +62,8 @@ class ProfileActionsStore {
     this.treeFoldersStore = treeFoldersStore;
     this.selectedFolderStore = selectedFolderStore;
     this.pluginStore = pluginStore;
+    this.userStore = userStore;
+    this.settingsStore = settingsStore;
 
     this.isShowLiveChat = this.getStateLiveChat();
 
@@ -99,7 +105,7 @@ class ProfileActionsStore {
   };
 
   onProfileClick = () => {
-    const { isAdmin, isOwner } = this.authStore.userStore.user;
+    const { isAdmin, isOwner } = this.userStore.user;
     const { isRoomAdmin } = this.authStore;
 
     this.profileClicked = true;
@@ -134,7 +140,7 @@ class ProfileActionsStore {
   };
 
   onHelpCenterClick = () => {
-    const helpUrl = this.authStore.settingsStore.helpLink;
+    const helpUrl = this.settingsStore.helpLink;
 
     window.open(helpUrl, "_blank");
   };
@@ -151,14 +157,13 @@ class ProfileActionsStore {
 
   onSupportClick = () => {
     const supportUrl =
-      this.authStore.settingsStore.additionalResourcesData
-        ?.feedbackAndSupportUrl;
+      this.settingsStore.additionalResourcesData?.feedbackAndSupportUrl;
 
     window.open(supportUrl, "_blank");
   };
 
   onBookTraining = () => {
-    const trainingEmail = this.authStore.settingsStore?.bookTrainingEmail;
+    const trainingEmail = this.settingsStore?.bookTrainingEmail;
 
     trainingEmail && window.open(`mailto:${trainingEmail}`, "_blank");
   };
@@ -168,7 +173,7 @@ class ProfileActionsStore {
   //};
 
   onHotkeysClick = () => {
-    this.authStore.settingsStore.setHotkeyPanelVisible(true);
+    this.settingsStore.setHotkeyPanelVisible(true);
   };
 
   onAboutClick = () => {
@@ -204,10 +209,10 @@ class ProfileActionsStore {
       baseDomain,
       tenantAlias,
       limitedAccessSpace,
-    } = this.authStore.settingsStore;
+    } = this.settingsStore;
     const isAdmin = this.authStore.isAdmin;
     const isCommunity = this.authStore.isCommunity;
-    const { isOwner } = this.authStore.userStore.user;
+    const { isOwner } = this.userStore.user;
 
     // const settingsModule = modules.find((module) => module.id === "settings");
     // const peopleAvailable = modules.some((m) => m.appName === "people");
@@ -218,7 +223,7 @@ class ProfileActionsStore {
       //isPersonal,
       //currentProductId,
       debugInfo,
-    } = this.authStore.settingsStore;
+    } = this.settingsStore;
 
     const settings = isAdmin
       ? {
@@ -287,7 +292,7 @@ class ProfileActionsStore {
 
     let liveChat = null;
 
-    if (!isMobile && this.authStore.isLiveChatAvailable) {
+    if (!isMobile && this.isLiveChatAvailable) {
       liveChat = {
         key: "user-menu-live-chat",
         icon: LiveChatReactSvgUrl,
@@ -300,7 +305,7 @@ class ProfileActionsStore {
 
     let bookTraining = null;
 
-    if (!isMobile && this.authStore.isTeamTrainingAlertAvailable) {
+    if (!isMobile && this.isTeamTrainingAlertAvailable) {
       bookTraining = {
         key: "user-menu-book-training",
         icon: BookTrainingReactSvgUrl,
@@ -310,12 +315,11 @@ class ProfileActionsStore {
     }
 
     const feedbackAndSupportEnabled =
-      this.authStore.settingsStore.additionalResourcesData
-        ?.feedbackAndSupportEnabled;
+      this.settingsStore.additionalResourcesData?.feedbackAndSupportEnabled;
     const videoGuidesEnabled =
-      this.authStore.settingsStore.additionalResourcesData?.videoGuidesEnabled;
+      this.settingsStore.additionalResourcesData?.videoGuidesEnabled;
     const helpCenterEnabled =
-      this.authStore.settingsStore.additionalResourcesData?.helpCenterEnabled;
+      this.settingsStore.additionalResourcesData?.helpCenterEnabled;
 
     const actions = [
       {

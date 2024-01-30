@@ -9,9 +9,9 @@ const ArticleHeaderContent = ({ currentModuleName }) => {
   return <>{currentModuleName}</>;
 };
 
-export default inject(({ auth }) => {
+export default inject(({ authStore }) => {
   return {
-    currentModuleName: (auth.product && auth.product.title) || "",
+    currentModuleName: (authStore.product && authStore.product.title) || "",
   };
 })(
   withTranslation([])(

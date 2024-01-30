@@ -43,11 +43,10 @@ const SelectTotalSizeContainer = ({
   );
 };
 
-export default inject(({ auth, payments }) => {
-  const { paymentQuotasStore } = auth;
+export default inject(({ settingsStore, paymentQuotasStore, paymentStore }) => {
   const { usedTotalStorageSizeTitle } = paymentQuotasStore;
-  const { theme } = auth.settingsStore;
-  const { allowedStorageSizeByQuota } = payments;
+  const { theme } = settingsStore;
+  const { allowedStorageSizeByQuota } = paymentStore;
 
   return {
     theme,

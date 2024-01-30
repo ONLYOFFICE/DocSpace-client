@@ -319,7 +319,7 @@ export default function withFileActions(WrappedFileItem) {
   return inject(
     (
       {
-        auth,
+        settingsStore,
         filesActionsStore,
         dialogsStore,
         treeFoldersStore,
@@ -459,7 +459,7 @@ export default function withFileActions(WrappedFileItem) {
         withShiftSelect,
 
         setSelection,
-        currentDeviceType: auth.settingsStore.currentDeviceType,
+        currentDeviceType: settingsStore.currentDeviceType,
         isDisabledDropItem,
       };
     }

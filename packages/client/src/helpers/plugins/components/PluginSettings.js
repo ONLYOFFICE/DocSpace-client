@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import WrappedComponent from "../WrappedComponent";
 
-import { PluginComponents } from "../constants";
+import { PluginComponents } from "../enums";
 
 const StyledPluginSettings = styled.div`
   .settings-header {

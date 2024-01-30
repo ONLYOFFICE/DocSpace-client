@@ -1,6 +1,7 @@
 import React from "react";
 import { useLocation, Navigate } from "react-router-dom";
-import { AuthenticatedAction, ValidationResult } from "./../helpers/constants";
+import { AuthenticatedAction } from "../helpers/enums";
+import { ValidationResult } from "../helpers/constants";
 import { Loader } from "@docspace/shared/components/loader";
 import Section from "@docspace/shared/components/section";
 import { checkConfirmLink } from "@docspace/shared/api/user"; //TODO: Move AuthStore
@@ -92,7 +93,7 @@ const ConfirmRoute = ({
             window.location.href = combineUrl(
               window.DocSpaceConfig?.proxy?.url,
               path,
-              "/error"
+              "/error",
             );
             break;
           case ValidationResult.Expired:
@@ -103,7 +104,7 @@ const ConfirmRoute = ({
             window.location.href = combineUrl(
               window.DocSpaceConfig?.proxy?.url,
               path,
-              "/error"
+              "/error",
             );
             break;
           case ValidationResult.TariffLimit:
@@ -114,7 +115,7 @@ const ConfirmRoute = ({
             window.location.href = combineUrl(
               window.DocSpaceConfig?.proxy?.url,
               path,
-              "/error?messageKey=20"
+              "/error?messageKey=20",
             );
             break;
           default:
@@ -125,7 +126,7 @@ const ConfirmRoute = ({
             window.location.href = combineUrl(
               window.DocSpaceConfig?.proxy?.url,
               path,
-              "/error"
+              "/error",
             );
             break;
         }
@@ -144,7 +145,7 @@ const ConfirmRoute = ({
         window.location.href = combineUrl(
           window.DocSpaceConfig?.proxy?.url,
           path,
-          "/error"
+          "/error",
         );
       });
   }, [getData, doAuthenticated, isAuthenticated, storeIsLoaded, logout]);
@@ -169,8 +170,8 @@ ConfirmRoute.defaultProps = {
   doAuthenticated: AuthenticatedAction.None,
 };
 
-export default inject(({ auth }) => {
-  const { isAuthenticated, logout, isLoaded, settingsStore } = auth;
+export default inject(({ authStore, settingsStore }) => {
+  const { isAuthenticated, logout, isLoaded } = authStore;
   const { defaultPage } = settingsStore;
   return {
     isAuthenticated,

@@ -74,11 +74,11 @@ Label.defaultProps = { theme: Base };
 
 const StyledLabelTheme = styled(Label)<{ $currentColorScheme?: TColorScheme }>`
   background-color: ${(props) =>
-    props.selected && props.$currentColorScheme?.main.accent} !important;
+    props.selected && props.$currentColorScheme?.main?.accent} !important;
 
   .title_style {
     color: ${(props) =>
-      props.selected && props.$currentColorScheme?.text.accent};
+      props.selected && props.$currentColorScheme?.text?.accent};
   }
 `;
 

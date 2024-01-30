@@ -266,7 +266,7 @@ const DeleteDialog = withTranslation([
 ])(DeleteDialogComponent);
 
 export default inject(
-  ({ filesStore, dialogsStore, filesActionsStore, treeFoldersStore, auth }) => {
+  ({ filesStore, dialogsStore, filesActionsStore, treeFoldersStore }) => {
     const {
       selection,
       isLoading,

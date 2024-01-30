@@ -294,7 +294,7 @@ const SectionBodyContent = (props) => {
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     filesStore,
     selectedFolderStore,
     treeFoldersStore,
@@ -345,7 +345,7 @@ export default inject(
       uploaded: uploadDataStore.uploaded,
       onClickBack: filesActionsStore.onClickBack,
       movingInProgress,
-      currentDeviceType: auth.settingsStore,
+      currentDeviceType: settingsStore.currentDeviceType,
     };
   }
 )(

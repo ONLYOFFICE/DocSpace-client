@@ -110,29 +110,36 @@ VersionHistoryPanel.propTypes = {
   fileId: PropTypes.string,
 };
 
-export default inject(({ auth, clientLoadingStore, versionHistoryStore }) => {
-  const { isTabletView, currentDeviceType } = auth.settingsStore;
-  const { isLoading } = clientLoadingStore;
-  const { setIsMobileHidden: setInfoPanelIsMobileHidden } = auth.infoPanelStore;
-  const {
-    fileId,
-    versions,
-    setIsVerHistoryPanel,
-    isVisible: visible,
-    showProgressBar,
-  } = versionHistoryStore;
+export default inject(
+  ({
+    settingsStore,
+    clientLoadingStore,
+    versionHistoryStore,
+    infoPanelStore,
+  }) => {
+    const { isTabletView, currentDeviceType } = settingsStore;
+    const { isLoading } = clientLoadingStore;
+    const { setIsMobileHidden: setInfoPanelIsMobileHidden } = infoPanelStore;
+    const {
+      fileId,
+      versions,
+      setIsVerHistoryPanel,
+      isVisible: visible,
+      showProgressBar,
+    } = versionHistoryStore;
 
-  return {
-    isTabletView,
-    homepage: config.homepage,
-    isLoading,
-    fileId,
-    versions,
-    visible,
-    showProgressBar,
+    return {
+      isTabletView,
+      homepage: config.homepage,
+      isLoading,
+      fileId,
+      versions,
+      visible,
+      showProgressBar,
 
-    setIsVerHistoryPanel,
-    setInfoPanelIsMobileHidden,
-    currentDeviceType,
-  };
-})(observer(VersionHistoryPanel));
+      setIsVerHistoryPanel,
+      setInfoPanelIsMobileHidden,
+      currentDeviceType,
+    };
+  }
+)(observer(VersionHistoryPanel));

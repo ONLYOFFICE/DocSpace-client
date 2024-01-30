@@ -7,9 +7,9 @@ class BannerStore {
     makeAutoObservable(this);
   }
 
-  setIsBannerVisible = (visible) => {
+  setIsBannerVisible = (visible: boolean) => {
     this.isBannerVisible = visible;
   };
 }
 
-export default BannerStore;
+export { BannerStore };

@@ -230,24 +230,26 @@ const Accounts = (props) => {
   );
 };
 
-export default inject(({ auth, peopleStore, accessRightsStore }) => {
-  const { isOwner, isAdmin, id: selfId } = auth.userStore.user;
-  const { changeType: changeUserType, usersStore } = peopleStore;
-  const { canChangeUserType } = accessRightsStore;
+export default inject(
+  ({ userStore, peopleStore, accessRightsStore, infoPanelStore }) => {
+    const { isOwner, isAdmin, id: selfId } = userStore.user;
+    const { changeType: changeUserType, usersStore } = peopleStore;
+    const { canChangeUserType } = accessRightsStore;
 
-  const { setInfoPanelSelection } = auth.infoPanelStore;
+    const { setInfoPanelSelection } = infoPanelStore;
 
-  return {
-    isOwner,
-    isAdmin,
-    changeUserType,
-    selfId,
-    canChangeUserType,
-    loading: usersStore.operationRunning,
-    getPeopleListItem: usersStore.getPeopleListItem,
-    setInfoPanelSelection,
-  };
-})(
+    return {
+      isOwner,
+      isAdmin,
+      changeUserType,
+      selfId,
+      canChangeUserType,
+      loading: usersStore.operationRunning,
+      getPeopleListItem: usersStore.getPeopleListItem,
+      setInfoPanelSelection,
+    };
+  }
+)(
   withTranslation([
     "People",
     "InfoPanel",

@@ -338,13 +338,13 @@ const NewFilesPanel = (props) => {
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     filesStore,
     mediaViewerDataStore,
     filesActionsStore,
     selectedFolderStore,
     dialogsStore,
-    settingsStore,
+    filesSettingsStore,
     clientLoadingStore,
     pluginStore,
   }) => {
@@ -358,7 +358,7 @@ export default inject(
 
     const { playlist, setMediaViewerData, setCurrentItem } =
       mediaViewerDataStore;
-    const { getIcon, getFolderIcon } = settingsStore;
+    const { getIcon, getFolderIcon } = filesSettingsStore;
     const { markAsRead } = filesActionsStore;
     const { id: currentFolderId } = selectedFolderStore;
 
@@ -373,7 +373,7 @@ export default inject(
 
     return {
       fileItemsList,
-      enablePlugins: auth.settingsStore.enablePlugins,
+      enablePlugins: settingsStore.enablePlugins,
       visible,
       newFiles,
       newFilesIds,
@@ -387,11 +387,11 @@ export default inject(
       getFolderIcon,
       markAsRead,
       setNewFilesPanelVisible,
-      theme: auth.settingsStore.theme,
+      theme: settingsStore.theme,
       hasNew,
       refreshFiles,
       setIsLoading,
-      currentDeviceType: auth.settingsStore.currentDeviceType,
+      currentDeviceType: settingsStore.currentDeviceType,
     };
   }
 )(

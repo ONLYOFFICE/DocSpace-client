@@ -264,12 +264,13 @@ const ArticleBodyContent = (props) => {
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     filesStore,
     treeFoldersStore,
     dialogsStore,
     selectedFolderStore,
     clientLoadingStore,
+    userStore,
   }) => {
     const { clearFiles, setSelection } = filesStore;
     const {
@@ -302,13 +303,13 @@ export default inject(
       theme,
       setIsBurgerLoading,
       currentDeviceType,
-    } = auth.settingsStore;
+    } = settingsStore;
 
     return {
       toggleArticleOpen,
       showText,
       showArticleLoader,
-      isVisitor: auth.userStore.user.isVisitor,
+      isVisitor: userStore.user.isVisitor,
 
       setNewFilesPanelVisible,
 

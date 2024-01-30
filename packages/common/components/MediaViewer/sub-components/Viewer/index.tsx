@@ -292,8 +292,8 @@ function Viewer(props: ViewerProps) {
   );
 }
 
-export default inject<any>(({ auth }) => {
-  const { currentDeviceType } = auth.settingsStore;
+export default inject<any>(({ settingsStore }) => {
+  const { currentDeviceType } = settingsStore;
 
   return { currentDeviceType };
 })(observer(Viewer));

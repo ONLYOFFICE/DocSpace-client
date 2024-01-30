@@ -248,44 +248,46 @@ const DataReassignmentDialog = ({
   );
 };
 
-export default inject(({ auth, peopleStore, setup }) => {
-  const {
-    setDataReassignmentDialogVisible,
-    dataReassignmentDeleteProfile,
-    setDataReassignmentDeleteProfile,
-    isDeletingUserWithReassignment,
-    setIsDeletingUserWithReassignment,
-  } = peopleStore.dialogStore;
-  const { currentColorScheme, dataReassignmentUrl } = auth.settingsStore;
-  const { setSelected } = peopleStore.selectionStore;
-  const {
-    dataReassignment,
-    dataReassignmentProgress,
-    dataReassignmentTerminate,
-  } = setup;
+export default inject(
+  ({ authStore, settingsStore, peopleStore, setup, userStore }) => {
+    const {
+      setDataReassignmentDialogVisible,
+      dataReassignmentDeleteProfile,
+      setDataReassignmentDeleteProfile,
+      isDeletingUserWithReassignment,
+      setIsDeletingUserWithReassignment,
+    } = peopleStore.dialogStore;
+    const { currentColorScheme, dataReassignmentUrl } = settingsStore;
+    const { setSelected } = peopleStore.selectionStore;
+    const {
+      dataReassignment,
+      dataReassignmentProgress,
+      dataReassignmentTerminate,
+    } = setup;
 
-  const { user: currentUser } = peopleStore.authStore.userStore;
+    const { user: currentUser } = userStore;
 
-  const { getUsersList, needResetUserSelection } = peopleStore.usersStore;
+    const { getUsersList, needResetUserSelection } = peopleStore.usersStore;
 
-  return {
-    setDataReassignmentDialogVisible,
-    theme: auth.settingsStore.theme,
-    currentColorScheme,
-    dataReassignment,
-    currentUser,
-    dataReassignmentProgress,
-    dataReassignmentTerminate,
-    deleteProfile: dataReassignmentDeleteProfile,
-    setDataReassignmentDeleteProfile,
-    getUsersList,
-    isDeletingUserWithReassignment,
-    setIsDeletingUserWithReassignment,
-    dataReassignmentUrl,
-    needResetUserSelection,
-    setSelected,
-  };
-})(
+    return {
+      setDataReassignmentDialogVisible,
+      theme: authStore.settingsStore.theme,
+      currentColorScheme,
+      dataReassignment,
+      currentUser,
+      dataReassignmentProgress,
+      dataReassignmentTerminate,
+      deleteProfile: dataReassignmentDeleteProfile,
+      setDataReassignmentDeleteProfile,
+      getUsersList,
+      isDeletingUserWithReassignment,
+      setIsDeletingUserWithReassignment,
+      dataReassignmentUrl,
+      needResetUserSelection,
+      setSelected,
+    };
+  }
+)(
   observer(
     withTranslation([
       "Common",

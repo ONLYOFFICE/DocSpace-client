@@ -138,18 +138,19 @@ const ChangeRoomOwner = (props) => {
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     dialogsStore,
     filesStore,
     selectedFolderStore,
     filesActionsStore,
+    userStore,
+    infoPanelStore,
   }) => {
     const {
       changeRoomOwnerIsVisible,
       setChangeRoomOwnerIsVisible,
       changeRoomOwnerData,
     } = dialogsStore;
-    const { settingsStore, userStore, infoPanelStore } = auth;
     const { selection, bufferSelection } = filesStore;
     const { currentDeviceType } = settingsStore;
     const { updateInfoPanelSelection } = infoPanelStore;

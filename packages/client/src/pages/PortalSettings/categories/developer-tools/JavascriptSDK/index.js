@@ -768,8 +768,8 @@ const PortalIntegration = (props) => {
   );
 };
 
-export default inject(({ setup, auth, publicRoomStore }) => {
-  const { settingsStore, setDocumentTitle } = auth;
+export default inject(({ settingsStore, authStore, publicRoomStore }) => {
+  const { setDocumentTitle } = authStore;
   const { theme, currentColorScheme, sdkLink } = settingsStore;
   const { fetchExternalLinks } = publicRoomStore;
 

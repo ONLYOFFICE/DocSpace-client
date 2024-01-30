@@ -138,36 +138,38 @@ const ChangeUserTypeEvent = ({
   );
 };
 
-export default inject(({ auth, dialogsStore, peopleStore }) => {
-  const {
-    changeUserTypeDialogVisible: visible,
-    setChangeUserTypeDialogVisible: setVisible,
-  } = dialogsStore;
-  const { isRoomAdmin, infoPanelStore } = auth;
-  const { setInfoPanelSelection } = infoPanelStore;
-  const { dialogStore, filterStore, usersStore } = peopleStore;
+export default inject(
+  ({ authStore, dialogsStore, peopleStore, infoPanelStore }) => {
+    const {
+      changeUserTypeDialogVisible: visible,
+      setChangeUserTypeDialogVisible: setVisible,
+    } = dialogsStore;
+    const { isRoomAdmin } = authStore;
+    const { setInfoPanelSelection } = infoPanelStore;
+    const { dialogStore, filterStore, usersStore } = peopleStore;
 
-  const { data: peopleDialogData } = dialogStore;
-  const { filter: peopleFilter } = filterStore;
-  const {
-    updateUserType,
-    getUsersList,
-    getPeopleListItem,
-    needResetUserSelection,
-  } = usersStore;
-  const { setSelected } = peopleStore.selectionStore;
-  return {
-    isRoomAdmin,
-    needResetUserSelection,
-    getPeopleListItem,
-    setInfoPanelSelection,
-    setSelected,
+    const { data: peopleDialogData } = dialogStore;
+    const { filter: peopleFilter } = filterStore;
+    const {
+      updateUserType,
+      getUsersList,
+      getPeopleListItem,
+      needResetUserSelection,
+    } = usersStore;
+    const { setSelected } = peopleStore.selectionStore;
+    return {
+      isRoomAdmin,
+      needResetUserSelection,
+      getPeopleListItem,
+      setInfoPanelSelection,
+      setSelected,
 
-    visible,
-    setVisible,
-    peopleDialogData,
-    peopleFilter,
-    updateUserType,
-    getUsersList,
-  };
-})(observer(ChangeUserTypeEvent));
+      visible,
+      setVisible,
+      peopleDialogData,
+      peopleFilter,
+      updateUserType,
+      getUsersList,
+    };
+  }
+)(observer(ChangeUserTypeEvent));

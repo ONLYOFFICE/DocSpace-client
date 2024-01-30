@@ -390,13 +390,13 @@ const StyledArticleItemTheme = styled(StyledArticleItemContainer)<{
     color: ${(props) =>
       props.isActive &&
       props.theme.isBase &&
-      props.$currentColorScheme?.main.accent};
+      props.$currentColorScheme?.main?.accent};
 
     &:hover {
       color: ${(props) =>
         props.isActive &&
         props.theme.isBase &&
-        props.$currentColorScheme?.main.accent};
+        props.$currentColorScheme?.main?.accent};
     }
   }
 
@@ -406,13 +406,13 @@ const StyledArticleItemTheme = styled(StyledArticleItemContainer)<{
         fill: ${(props) =>
           props.isActive &&
           props.theme.isBase &&
-          props.$currentColorScheme?.main.accent} !important;
+          props.$currentColorScheme?.main?.accent} !important;
       }
       circle {
         fill: ${(props) =>
           props.isActive &&
           props.theme.isBase &&
-          props.$currentColorScheme?.main.accent} !important;
+          props.$currentColorScheme?.main?.accent} !important;
       }
     }
 
@@ -422,7 +422,7 @@ const StyledArticleItemTheme = styled(StyledArticleItemContainer)<{
           fill: ${(props) =>
             props.isActive &&
             props.theme.isBase &&
-            props.$currentColorScheme?.main.accent} !important;
+            props.$currentColorScheme?.main?.accent} !important;
         }
       }
     }

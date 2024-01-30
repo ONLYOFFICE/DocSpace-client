@@ -83,7 +83,7 @@ class ChangePasswordDialogComponent extends React.Component {
                 type="page"
                 href={`mailto:${email}`}
                 noHover
-                color={currentColorScheme.main.accent}
+                color={currentColorScheme.main?.accent}
                 title={email}
               >
                 {{ email }}
@@ -118,8 +118,8 @@ class ChangePasswordDialogComponent extends React.Component {
   }
 }
 
-const ChangePasswordDialog = inject(({ auth }) => ({
-  currentColorScheme: auth.settingsStore.currentColorScheme,
+const ChangePasswordDialog = inject(({ settingsStore }) => ({
+  currentColorScheme: settingsStore.currentColorScheme,
 }))(
   observer(
     withTranslation(["ChangePasswordDialog", "Common"])(

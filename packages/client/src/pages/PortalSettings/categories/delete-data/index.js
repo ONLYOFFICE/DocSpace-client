@@ -59,8 +59,7 @@ const DeleteData = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { currentTariffStatusStore } = auth;
+export default inject(({ currentTariffStatusStore }) => {
   const { isNotPaidPeriod } = currentTariffStatusStore;
 
   return {

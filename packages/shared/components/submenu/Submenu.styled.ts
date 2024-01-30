@@ -147,10 +147,10 @@ export const StyledItemLabelTheme = styled(StyledSubmenuItemLabel)<{
   $currentColorScheme?: TColorScheme;
 }>`
   background-color: ${(props) =>
-    props.isActive ? props.$currentColorScheme?.main.accent : "none"};
+    props.isActive ? props.$currentColorScheme?.main?.accent : "none"};
 
   &:hover {
     background-color: ${(props) =>
-      props.isActive && props.$currentColorScheme?.main.accent};
+      props.isActive && props.$currentColorScheme?.main?.accent};
   }
 `;

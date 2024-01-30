@@ -81,7 +81,7 @@ const SelectionArea = (props) => {
   );
 };
 
-export default inject(({ auth, filesStore, treeFoldersStore }) => {
+export default inject(({ filesStore, treeFoldersStore, infoPanelStore }) => {
   const {
     dragging,
     viewAs,
@@ -91,7 +91,7 @@ export default inject(({ auth, filesStore, treeFoldersStore }) => {
     files,
   } = filesStore;
   const { isRoomsFolder, isArchiveFolder } = treeFoldersStore;
-  const { isVisible: isInfoPanelVisible } = auth.infoPanelStore;
+  const { isVisible: isInfoPanelVisible } = infoPanelStore;
 
   const isRooms = isRoomsFolder || isArchiveFolder;
 

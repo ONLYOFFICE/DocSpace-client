@@ -124,11 +124,11 @@ export default function withLoader(WrappedComponent) {
     );
   };
 
-  return inject(({ auth, confirm }) => {
+  return inject(({ authStore, settingsStore, confirm }) => {
     const { isLoaded, isLoading } = confirm;
     const { passwordSettings, getSettings, getPortalPasswordSettings } =
-      auth.settingsStore;
-    const { getAuthProviders, getCapabilities } = auth;
+      settingsStore;
+    const { getAuthProviders, getCapabilities } = authStore;
 
     return {
       isLoaded,

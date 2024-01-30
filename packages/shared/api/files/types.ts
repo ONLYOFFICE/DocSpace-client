@@ -173,6 +173,16 @@ export type TUploadOperation = {
 
 export type TThirdPartyCapabilities = string[][];
 
+export type TThierdParty = {
+  corporate: boolean;
+  roomsStorage: boolean;
+  customerTitle: string;
+  providerId: string;
+  providerKey: string;
+};
+
+export type TTirdParties = TThierdParty[];
+
 export type TFilesSettings = {
   automaticallyCleanUp: {
     gap: number;
@@ -335,3 +345,4 @@ export type TFileLink = {
     title: string;
   };
 };
+

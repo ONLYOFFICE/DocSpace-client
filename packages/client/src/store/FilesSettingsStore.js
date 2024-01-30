@@ -125,20 +125,18 @@ class FilesSettingsStore {
         if (!settings.enableThirdParty || this.publicRoomStore.isPublicRoom)
           return;
 
-        // TODO: enable after supporting third-party
-
-        // return axios
-        //   .all([
-        //     api.files.getThirdPartyCapabilities(),
-        //     api.files.getThirdPartyList(),
-        //   ])
-        //   .then(([capabilities, providers]) => {
-        //     for (let item of capabilities) {
-        //       item.splice(1, 1);
-        //     }
-        //     this.thirdPartyStore.setThirdPartyCapabilities(capabilities); //TODO: Out of bounds read: 1
-        //     this.thirdPartyStore.setThirdPartyProviders(providers);
-        //   });
+        return axios
+          .all([
+            api.files.getThirdPartyCapabilities(),
+            api.files.getThirdPartyList(),
+          ])
+          .then(([capabilities, providers]) => {
+            for (let item of capabilities) {
+              item.splice(1, 1);
+            }
+            this.thirdPartyStore.setThirdPartyCapabilities(capabilities); //TODO: Out of bounds read: 1
+            this.thirdPartyStore.setThirdPartyProviders(providers);
+          });
       })
       .catch(() => this.setIsErrorSettings(true));
   };
@@ -173,7 +171,7 @@ class FilesSettingsStore {
   };
 
   setEnableThirdParty = async (data, setting) => {
-    const res = await api.files.thirdParty(data);
+    const res = await api.files.enableThirdParty(data);
     this.setFilesSetting(setting, res);
 
     if (data) {

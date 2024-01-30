@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import { useDrag } from "@use-gesture/react";
 import { useSpring, config } from "@react-spring/web";
@@ -32,26 +32,36 @@ function MobileDrawer({
 
   const [toggle, setToggle] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (isOpenMobileDrawer) open();
-  }, [isOpenMobileDrawer]);
-
-  useEffect(() => {
-    document.addEventListener("touchstart", handleClickOutside);
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      // Unbind the event listener on clean up
-      document.removeEventListener("touchstart", handleClickOutside);
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [isOpenMobileDrawer]);
-
   const handleToggle = () => {
     setToggle((prev) => !prev);
   };
 
-  const handleResize = () => {
+  const open = useCallback(
+    (canceled = false, innerHeight?: number) => {
+      api.start({
+        y: (innerHeight ?? height) * 0.2,
+        opacity: 1,
+        immediate: false,
+        config: canceled ? config.wobbly : config.stiff,
+      });
+    },
+    [api, height],
+  );
+
+  const close = useCallback(
+    (velocity = 0, innerHeight?: number) => {
+      api.start({
+        y: innerHeight ?? height,
+        opacity: 0,
+        immediate: false,
+        config: { ...config.stiff, velocity },
+      });
+      setIsOpenMobileDrawer(false);
+    },
+    [api, height, setIsOpenMobileDrawer],
+  );
+
+  const handleResize = useCallback(() => {
     const innerHeight = window.innerHeight;
 
     setheight(innerHeight);
@@ -62,26 +72,7 @@ function MobileDrawer({
         resizePDFThumbnail();
       });
     } else close(0, innerHeight);
-  };
-
-  const open = (canceled = false, innerHeight?: number) => {
-    api.start({
-      y: (innerHeight ?? height) * 0.2,
-      opacity: 1,
-      immediate: false,
-      config: canceled ? config.wobbly : config.stiff,
-    });
-  };
-
-  const close = (velocity = 0, innerHeight?: number) => {
-    api.start({
-      y: innerHeight ?? height,
-      opacity: 0,
-      immediate: false,
-      config: { ...config.stiff, velocity },
-    });
-    setIsOpenMobileDrawer(false);
-  };
+  }, [close, isOpenMobileDrawer, open, resizePDFThumbnail]);
 
   const bind = useDrag(
     ({
@@ -97,7 +88,11 @@ function MobileDrawer({
       }
 
       if (last) {
-        my > height * 0.2 || (vy > 0.5 && dy > 0) ? close(vy) : open(canceled);
+        if (my > height * 0.2 || (vy > 0.5 && dy > 0)) {
+          close(vy);
+        } else {
+          open(canceled);
+        }
       } else {
         api.start({
           y: my + height * 0.2,
@@ -114,21 +109,46 @@ function MobileDrawer({
     },
   );
 
-  const handleClickOutside = (event: TouchEvent) => {
-    if (
-      isOpenMobileDrawer &&
-      containerRef.current &&
-      event.target instanceof Node &&
-      !containerRef.current.contains(event.target)
-    ) {
-      close();
-    }
-  };
+  const handleClickOutside = useCallback(
+    (event: TouchEvent) => {
+      if (
+        isOpenMobileDrawer &&
+        containerRef.current &&
+        event.target instanceof Node &&
+        !containerRef.current.contains(event.target)
+      ) {
+        close();
+      }
+    },
+    [close, isOpenMobileDrawer],
+  );
 
-  const handleClose = (event: TouchEvent) => {
+  const handleClose = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
     event.stopPropagation();
     close();
   };
+
+  useEffect(() => {
+    if (isOpenMobileDrawer) open();
+  }, [isOpenMobileDrawer, open]);
+
+  useEffect(() => {
+    document.addEventListener("touchstart", handleClickOutside);
+
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, [handleClickOutside]);
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      // Unbind the event listener on clean up
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [handleResize]);
 
   const visibility = isOpenMobileDrawer ? "visible" : "hidden";
 

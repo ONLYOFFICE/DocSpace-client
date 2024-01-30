@@ -54,8 +54,13 @@ function PDFViewer({
   setIsPDFSidebarOpen,
 }: PDFViewerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // TODO: Add types
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const pdfViewer = useRef<any>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const pdfThumbnail = useRef<any>(null);
+
   const toolbarRef = useRef<ImperativeHandle>(null);
   const pageCountRef = useRef<PageCountRef>(null);
 
@@ -74,77 +79,12 @@ function PDFViewer({
   const [isFileOpened, setIsFileOpened] = useState<boolean>(false);
   const [isOpenMobileDrawer, setIsOpenMobileDrawer] = useState<boolean>(false);
 
-  useEffect(() => {
-    window.addEventListener("resize", resize);
-
-    return () => {
-      window.removeEventListener("resize", resize);
-    };
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      resetState();
-      pdfViewer.current?.close();
-    };
-  }, [src]);
-
-  useLayoutEffect(() => {
-    if (isError || isLoadedViewerScript) return;
-    loadViewerScript();
-  }, [isError, isLoadedViewerScript]);
-
-  useEffect(() => {
-    if (isError) return;
-
-    setIsLoadingFile(true);
-    setFile(undefined);
-
-    fetch(src)
-      .then((value) => {
-        if (!value.ok) throw new Error(value.statusText);
-
-        return value.blob();
-      })
-      .then((value) => {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          setFile(e.target?.result);
-        };
-        reader.readAsArrayBuffer(value);
-      })
-      .catch((event) => {
-        setIsError(true);
-        console.error(event);
-      })
-      .finally(() => {
-        setIsLoadingFile(false);
-      });
-  }, [src, isError]);
-
-  useEffect(() => {
-    if (isLoadedViewerScript && !isLoadingFile && file) {
-      try {
-        initViewer();
-
-        pdfViewer.current?.open(file);
-      } catch (error) {
-        setIsError(true);
-        console.log(error);
-      }
-    }
-  }, [file, isLoadedViewerScript, isLoadingFile]);
-
-  useEffect(() => {
-    if (isLoadedViewerScript && containerRef.current?.hasChildNodes()) {
-      resize();
-    }
-  }, [isPDFSidebarOpen, isLoadedViewerScript, isOpenMobileDrawer]);
-
   const initViewer = () => {
+    // eslint-disable-next-line no-console
     console.log("init PDF Viewer");
 
-    //@ts-ignore
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     pdfViewer.current = new window.AscViewer.CViewer("mainPanel", {
       theme: { type: "dark" },
     });
@@ -152,32 +92,26 @@ function PDFViewer({
     pdfThumbnail.current =
       pdfViewer.current.createThumbnails("viewer-thumbnail");
 
-    pdfViewer.current.registerEvent(
-      "onStructure",
-      function (structure: BookMark[]) {
-        setBookmarks(structure);
-      },
-    );
+    pdfViewer.current.registerEvent("onStructure", (structure: BookMark[]) => {
+      setBookmarks(structure);
+    });
 
-    pdfViewer.current.registerEvent("onZoom", function (currentZoom: number) {
+    pdfViewer.current.registerEvent("onZoom", (currentZoom: number) => {
       toolbarRef.current?.setPercentValue(currentZoom);
     });
 
     pdfViewer.current.registerEvent(
       "onCurrentPageChanged",
-      function (pageNum: number) {
+      (pageNum: number) => {
         pageCountRef.current?.setPageNumber(pageNum + 1);
       },
     );
 
-    pdfViewer.current.registerEvent(
-      "onPagesCount",
-      function (pagesCount: number) {
-        pageCountRef.current?.setPagesCount(pagesCount);
-      },
-    );
+    pdfViewer.current.registerEvent("onPagesCount", (pagesCount: number) => {
+      pageCountRef.current?.setPagesCount(pagesCount);
+    });
 
-    pdfViewer.current.registerEvent("onFileOpened", function () {
+    pdfViewer.current.registerEvent("onFileOpened", () => {
       setIsFileOpened(true);
       pdfViewer.current.setTargetType("text");
     });
@@ -200,15 +134,18 @@ function PDFViewer({
         setIsLoadedViewerScript(true);
         setIsLoadingScript(false);
       },
-      (event: any) => {
+      (event: unknown) => {
         setIsLoadingScript(false);
         setIsError(true);
+        // eslint-disable-next-line no-console
         console.error(event);
       },
     );
   }, []);
 
   const resize = useCallback(() => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     window?.AscViewer?.checkApplicationScale();
     pdfViewer.current?.resize();
     pdfThumbnail.current?.resize();
@@ -218,13 +155,13 @@ function PDFViewer({
     pdfThumbnail.current?.resize();
   }, []);
 
-  const resetState = () => {
+  const resetState = useCallback(() => {
     setIsLoadingScript(false);
     setIsFileOpened(false);
     setIsLoadingFile(false);
     setIsPDFSidebarOpen(false);
     setIsError(false);
-  };
+  }, [setIsPDFSidebarOpen]);
 
   const setZoom = (scale: number) => {
     pdfViewer.current.setZoom(scale);
@@ -236,7 +173,7 @@ function PDFViewer({
         setIsPDFSidebarOpen((prev) => !prev);
         break;
       case ToolbarActionType.ZoomIn:
-      case ToolbarActionType.ZoomOut:
+      case ToolbarActionType.ZoomOut: {
         if (!pdfViewer.current) return;
 
         const currentZoom = pdfViewer.current.getZoom();
@@ -250,6 +187,7 @@ function PDFViewer({
 
         setZoom(newZoom);
         break;
+      }
       case ToolbarActionType.Reset:
         setZoom(100);
         break;
@@ -261,6 +199,75 @@ function PDFViewer({
   const navigate = (page: number) => {
     pdfViewer.current.navigate(page);
   };
+
+  useEffect(() => {
+    window.addEventListener("resize", resize);
+
+    return () => {
+      window.removeEventListener("resize", resize);
+    };
+  }, [resize]);
+
+  useEffect(() => {
+    return () => {
+      resetState();
+      pdfViewer.current?.close();
+    };
+  }, [resetState, src]);
+
+  useLayoutEffect(() => {
+    if (isError || isLoadedViewerScript) return;
+    loadViewerScript();
+  }, [isError, isLoadedViewerScript, loadViewerScript]);
+
+  useEffect(() => {
+    if (isError) return;
+
+    setIsLoadingFile(true);
+    setFile(undefined);
+
+    fetch(src)
+      .then((value) => {
+        if (!value.ok) throw new Error(value.statusText);
+
+        return value.blob();
+      })
+      .then((value) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          setFile(e.target?.result);
+        };
+        reader.readAsArrayBuffer(value);
+      })
+      .catch((event) => {
+        setIsError(true);
+        // eslint-disable-next-line no-console
+        console.error(event);
+      })
+      .finally(() => {
+        setIsLoadingFile(false);
+      });
+  }, [src, isError]);
+
+  useEffect(() => {
+    if (isLoadedViewerScript && !isLoadingFile && file) {
+      try {
+        initViewer();
+
+        pdfViewer.current?.open(file);
+      } catch (error) {
+        setIsError(true);
+        // eslint-disable-next-line no-console
+        console.log(error);
+      }
+    }
+  }, [file, isLoadedViewerScript, isLoadingFile]);
+
+  useEffect(() => {
+    if (isLoadedViewerScript && containerRef.current?.hasChildNodes()) {
+      resize();
+    }
+  }, [isPDFSidebarOpen, isLoadedViewerScript, isOpenMobileDrawer, resize]);
 
   if (isError) {
     return (

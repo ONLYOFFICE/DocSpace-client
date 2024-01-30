@@ -1,31 +1,19 @@
-import React, { ForwardedRef, forwardRef, useEffect, useRef } from "react";
-import { useSpring, animated } from "@react-spring/web";
+import React, {
+  ForwardedRef,
+  forwardRef,
+  useCallback,
+  useEffect,
+  useRef,
+} from "react";
+import { useSpring } from "@react-spring/web";
 import { useGesture } from "@use-gesture/react";
 import { isDesktop } from "react-device-detect";
-import styled from "styled-components";
+
 import MainPanelProps from "./MainPanel.props";
-
-const Wrapper = styled(animated.section)`
-  width: 100%;
-  height: ${`calc(100vh - ${isDesktop ? "85" : "66"}px)`};
-  margin-top: ${isDesktop ? "85px" : "66px"};
-  touch-action: none;
-`;
-
-const Content = styled.div<{ isLoading: boolean }>`
-  visibility: ${(props) => (props.isLoading ? "hidden" : "visible")};
-`;
+import { Content, Wrapper } from "./MainPanel.styled";
 
 function MainPanel(
-  {
-    isLoading,
-    isFistImage,
-    isLastImage,
-    src,
-    onNext,
-    onPrev,
-    setZoom,
-  }: MainPanelProps,
+  { isLoading, isFistImage, isLastImage, src, onNext, onPrev }: MainPanelProps,
   ref: ForwardedRef<HTMLDivElement>,
 ) {
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -35,13 +23,13 @@ function MainPanel(
     scale: 1,
   }));
 
+  const resetState = useCallback(() => {
+    api.set({ x: 0 });
+  }, [api]);
+
   useEffect(() => {
     resetState();
-  }, [src]);
-
-  const resetState = () => {
-    api.set({ x: 0 });
-  };
+  }, [resetState, src]);
 
   useGesture(
     {
@@ -63,7 +51,8 @@ function MainPanel(
 
         if (mdx < -width / 4) {
           return onNext();
-        } else if (mdx > width / 4) {
+        }
+        if (mdx > width / 4) {
           return onPrev();
         }
 

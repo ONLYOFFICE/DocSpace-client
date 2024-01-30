@@ -47,6 +47,7 @@ declare global {
       navigate: (path: string) => void;
     };
     DocSpaceConfig: {
+      pdfViewerUrl: string;
       wrongPortalNameUrl?: string;
       api: {
         origin?: string;

@@ -1,12 +1,15 @@
 import React from "react";
-import { CustomScrollbarsVirtualList } from "@docspace/shared/components/scrollbar";
+import {
+  CustomScrollbarsVirtualList,
+  ScrollbarType,
+} from "@docspace/shared/components/scrollbar";
 
 import BookmarksProps from "./Bookmarks.props";
 import { Item, List, Text } from "./Bookmarks.styled";
 
 function Bookmarks({ bookmarks, navigate }: BookmarksProps) {
   return (
-    <CustomScrollbarsVirtualList>
+    <CustomScrollbarsVirtualList stype={ScrollbarType.mediumBlack}>
       <List>
         {bookmarks.map((item, index) => {
           return (

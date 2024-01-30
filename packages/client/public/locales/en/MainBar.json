@@ -13,5 +13,6 @@
   "UserQuotaDescription": "<1>{{clickHere}}</1> to find a better pricing plan for your DocSpace.",
   "UserQuotaHeader": "The number of admins/power users is about to be exceeded: {{currentValue}} / {{maxValue}}.",
   "StorageQuotaExceeded": "Storage quota exceeded",
-  "PersonalUserQuotaDescription": "To upload and create new files and folders, please free up disk space or contact the administrator to increase the storage quota."
+  "PersonalUserQuotaDescription": "To upload and create new files and folders, please free up disk space or contact the administrator to increase the storage quota.",
+  "PersonalUserQuotaAdminsDescription": "To upload and create new files and folders, please free up disk space, or manage quota per user in the <1>Storage management settings.</1>"
 }

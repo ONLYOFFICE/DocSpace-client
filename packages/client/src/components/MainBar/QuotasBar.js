@@ -17,6 +17,7 @@ const QuotasBar = ({
   onClose,
   onLoad,
   currentColorScheme,
+  isAdmin,
 }) => {
   const onClickAction = () => {
     onClick && onClick(type);
@@ -137,9 +138,25 @@ const QuotasBar = ({
           ),
         };
       case QuotaBarTypes.PersonalUserQuota:
+        const description = !isAdmin ? (
+          t("PersonalUserQuotaDescription")
+        ) : (
+          <Trans i18nKey="PersonalUserQuotaAdminsDescription" t={t}>
+            To upload and create new files and folders, please free up disk
+            space, or manage quota per user in the
+            <Link
+              fontSize="12px"
+              fontWeight="400"
+              color={currentColorScheme?.main?.accent}
+              onClick={onClickAction}
+            >
+              Storage management settings.
+            </Link>
+          </Trans>
+        );
         return {
           header: t("StorageQuotaExceeded"),
-          description: t("PersonalUserQuotaDescription"),
+          description,
         };
 
       default:

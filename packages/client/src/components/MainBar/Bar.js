@@ -323,6 +323,7 @@ const Bar = (props) => {
       onClose={onCloseQuota}
       onClickTenantCustomQuota={onClickTenantCustomQuota}
       onLoad={onLoad}
+      isAdmin={isAdmin}
     />
   ) : withActivationBar && barVisible.confirmEmail && tReady ? (
     <ConfirmEmailBar

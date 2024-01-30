@@ -136,6 +136,7 @@ const AddUsersPanel = ({
     false,
   );
   const [activeTabId, setActiveTabId] = useState(PEOPLE_TAB_ID);
+  const [showTabs, setShowTabs] = useState(withGroups);
 
   useEffect(() => {
     loadNextPage(0);
@@ -245,6 +246,10 @@ const AddUsersPanel = ({
         callback?.();
         setIsLoading(false);
         setIsLoadingSearch(false);
+
+        if (withGroups) {
+          setShowTabs(!currentFilter.search);
+        }
       });
   };
 
@@ -310,7 +315,7 @@ const AddUsersPanel = ({
               withAllSelect={!isLoadingSearch}
             />
           }
-          withTabs={withGroups && !searchValue.length}
+          withTabs={showTabs}
           tabsData={[
             {
               id: PEOPLE_TAB_ID,

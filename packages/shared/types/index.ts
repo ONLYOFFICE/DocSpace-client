@@ -6,7 +6,10 @@ export type TDirectionY = "bottom" | "top" | "both";
 
 export type TViewAs = "tile" | "table" | "row" | "settings" | "profile";
 
-export type TTranslation = (key: string) => string;
+export type TTranslation = (
+  key: string,
+  params?: { [key: string]: string },
+) => string;
 
 export type TPathParts = {
   id: number;

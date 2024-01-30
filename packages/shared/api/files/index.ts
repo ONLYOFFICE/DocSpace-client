@@ -89,7 +89,10 @@ export async function getReferenceData(data: {
   return res;
 }
 
-export async function getFolderInfo(folderId: number, skipRedirect = false) {
+export async function getFolderInfo(
+  folderId: number | string,
+  skipRedirect = false,
+) {
   const options: AxiosRequestConfig = {
     method: "get",
     url: `/files/folder/${folderId}`,
@@ -114,7 +117,7 @@ export async function getFolderPath(folderId: number) {
 export async function getFolder(
   folderId: string | number,
   filter: FilesFilter,
-  signal: AbortSignal,
+  signal?: AbortSignal,
 ) {
   let params = folderId;
 
@@ -155,14 +158,23 @@ export async function getFoldersTree() {
 
   return folders.map((data, index) => {
     const { new: newItems, pathParts, current } = data;
-    const { foldersCount, filesCount } = current;
-    const { parentId, title, id, rootFolderType, security } = current;
+
+    const {
+      parentId,
+      title,
+      id,
+      rootFolderType,
+      security,
+      foldersCount,
+      filesCount,
+    } = current;
 
     const type = +rootFolderType;
 
     const name = getFolderClassNameByType(type);
 
     return {
+      ...current,
       id,
       key: `0-${index}`,
       parentId,
@@ -175,7 +187,8 @@ export async function getFoldersTree() {
       filesCount,
       newItems,
       security,
-    };
+      new: newItems,
+    } as TFolder;
   });
 }
 

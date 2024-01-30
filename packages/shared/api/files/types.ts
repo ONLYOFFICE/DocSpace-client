@@ -137,6 +137,8 @@ export type TFolder = {
   rootFolderType: FolderType;
   isArchive?: boolean;
   roomType?: RoomsType;
+  pathParts?: TPathParts[];
+  path?: TPathParts[];
 };
 
 export type TGetFolderPath = TFolder[];

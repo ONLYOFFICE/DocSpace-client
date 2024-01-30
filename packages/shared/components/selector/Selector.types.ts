@@ -1,6 +1,8 @@
 import React from "react";
-import { RoomsType } from "../../enums";
+import { FolderType, RoomsType } from "../../enums";
 import { AvatarRole } from "../avatar";
+import { TFileSecurity, TFolderSecurity } from "../../api/files/types";
+import { TRoomSecurity } from "../../api/rooms/types";
 
 export type AccessRight = {
   key: string;
@@ -53,11 +55,7 @@ export interface SelectorProps {
   hasNextPage?: boolean;
   isNextPageLoading?: boolean;
   loadNextPage?:
-    | ((
-        startIndex: number,
-        search?: string,
-        ...rest: unknown[]
-      ) => Promise<void>)
+    | ((startIndex: number, ...rest: never[]) => Promise<void>)
     | null;
   totalItems?: number;
   isLoading?: boolean;
@@ -167,6 +165,7 @@ export type TSelectorItem = {
   key?: string;
   id?: string | number;
   label: string;
+  title?: string;
   avatar?: string;
   icon?: string;
   role?: AvatarRole;
@@ -176,7 +175,13 @@ export type TSelectorItem = {
   color?: string;
   fileExst?: string;
   roomType?: RoomsType;
-  shared: boolean;
+  shared?: boolean;
+  parentId?: string | number;
+  rootFolderType?: FolderType;
+  filesCount?: number;
+  foldersCount?: number;
+  security?: TFileSecurity | TFolderSecurity | TRoomSecurity;
+  isFolder?: boolean;
 };
 
 export interface SearchProps {
@@ -225,6 +230,8 @@ export type TBreadCrumb = {
   label: string;
   isRoom?: boolean;
   minWidth?: string;
+  shared?: boolean;
+  roomType?: RoomsType;
   onClick?: (e: React.MouseEvent, open: boolean, item: TBreadCrumb) => void;
 };
 

@@ -10,12 +10,17 @@ import {
 } from "../StyledComponent";
 import { getConvertedSize } from "@docspace/shared/utils/common";
 
-const calculateSize = (size, common) => ((100 * size) / common).toFixed(2);
+const calculateSize = (size, common) => {
+  const percentage = (size * 100) / common;
+
+
+  return percentage;
+};
 
 const Diagram = (props) => {
   const {
     myDocumentsUsedSpace,
-    maxTotalSizeByQuota,
+    tenantCustomQuota,
     trashUsedSpace,
     archiveUsedSpace,
     roomsUsedSpace,
@@ -30,7 +35,7 @@ const Diagram = (props) => {
       color: "#13B7EC",
       percentageSize: calculateSize(
         myDocumentsUsedSpace.usedSpace,
-        maxTotalSizeByQuota
+        tenantCustomQuota
       ),
       size: getConvertedSize(t, myDocumentsUsedSpace.usedSpace),
     },
@@ -39,7 +44,7 @@ const Diagram = (props) => {
       color: "#22C386",
       percentageSize: calculateSize(
         roomsUsedSpace.usedSpace,
-        maxTotalSizeByQuota
+        tenantCustomQuota,
       ),
       size: getConvertedSize(t, roomsUsedSpace.usedSpace),
     },
@@ -48,7 +53,7 @@ const Diagram = (props) => {
       color: "#FF9933",
       percentageSize: calculateSize(
         trashUsedSpace.usedSpace,
-        maxTotalSizeByQuota
+        tenantCustomQuota,
       ),
       size: getConvertedSize(t, trashUsedSpace.usedSpace),
     },
@@ -57,7 +62,7 @@ const Diagram = (props) => {
       color: "#FFD30F",
       percentageSize: calculateSize(
         archiveUsedSpace.usedSpace,
-        maxTotalSizeByQuota
+        tenantCustomQuota,
       ),
       size: getConvertedSize(t, archiveUsedSpace.usedSpace),
     },
@@ -90,7 +95,7 @@ const Diagram = (props) => {
 export default inject(({ storageManagement, auth }) => {
   const { filesUsedSpace } = storageManagement;
   const { currentQuotaStore } = auth;
-  const { maxTotalSizeByQuota } = currentQuotaStore;
+  const { tenantCustomQuota } = currentQuotaStore;
 
   const {
     myDocumentsUsedSpace,
@@ -100,7 +105,7 @@ export default inject(({ storageManagement, auth }) => {
   } = filesUsedSpace;
 
   return {
-    maxTotalSizeByQuota,
+    tenantCustomQuota,
     myDocumentsUsedSpace,
     trashUsedSpace,
     archiveUsedSpace,

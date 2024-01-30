@@ -69,6 +69,7 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
     appendTo,
     withBackdrop,
     model: propsModel,
+    badgeUrl,
   } = props;
 
   const onMenuClick = () => {
@@ -413,6 +414,7 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
                         showDefault={defaultIcon}
                         imgClassName="drop-down-item_icon"
                         imgSrc={header.icon}
+                        badgeUrl={badgeUrl}
                       />
                     </div>
                   ))}

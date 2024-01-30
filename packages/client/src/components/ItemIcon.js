@@ -63,6 +63,7 @@ const ItemIcon = ({
   logo,
   color,
   isArchive,
+  badgeUrl,
 }) => {
   const isLoadedRoomIcon = !!logo?.medium;
   const showDefaultRoomIcon = !isLoadedRoomIcon && isRoom;
@@ -77,6 +78,7 @@ const ItemIcon = ({
           showDefault={showDefaultRoomIcon}
           imgClassName="react-svg-icon"
           imgSrc={isRoom ? logo?.medium : icon}
+          badgeUrl={badgeUrl ? badgeUrl : ""}
         />
       </IconWrapper>
       {isPrivacy && fileExst && <EncryptedFileIcon isEdit={false} />}

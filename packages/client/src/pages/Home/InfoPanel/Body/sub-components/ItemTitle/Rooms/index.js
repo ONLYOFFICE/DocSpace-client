@@ -4,6 +4,7 @@ import { withTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import { inject, observer } from "mobx-react";
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
+import Planet12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/planet.react.svg?url";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { StyledTitle } from "../../../styles/common";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
@@ -38,6 +39,10 @@ const RoomsItemHeader = ({
   const security = infoPanelSelection ? infoPanelSelection.security : {};
   const canInviteUserInRoomAbility = security?.EditAccess;
   const showInviteUserIcon = selection?.isRoom && roomsView === "info_members";
+  const showPlanetIcon =
+    selection.roomType === RoomsType.PublicRoom ||
+    selection.roomType === RoomsType.CustomRoom;
+  const badgeUrl = showPlanetIcon ? Planet12ReactSvgUrl : null;
 
   const onSelectItem = () => {
     setSelected("none");
@@ -73,6 +78,7 @@ const RoomsItemHeader = ({
           showDefault={showDefaultRoomIcon}
           imgClassName={`icon ${selection.isRoom && "is-room"}`}
           imgSrc={icon}
+          badgeUrl={badgeUrl}
         />
       </div>
 

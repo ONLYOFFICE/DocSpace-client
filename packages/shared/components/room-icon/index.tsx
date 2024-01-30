@@ -2,8 +2,7 @@ import styled, { css } from "styled-components";
 import { Base } from "../../themes";
 import { Text } from "../text";
 
-// import SecuritySvgUrl from "PUBLIC_DIR/images/security.svg?url";
-// import { IconButton } from "../icon-button";
+import { IconButton } from "../icon-button";
 
 const StyledIcon = styled.div<{
   size: string;
@@ -47,6 +46,25 @@ const StyledIcon = styled.div<{
         color: ${`#${props.color}`};
       `};
   }
+
+  .room-icon_badge {
+    position: absolute;
+    margin: 24px 0 0 24px;
+
+    .room-icon-button {
+      width: 14px;
+      height: 14px;
+
+      svg {
+        path {
+          fill: ${(props) => props.theme.backgroundColor};
+        }
+        rect {
+          stroke: ${(props) => props.theme.backgroundColor};
+        }
+      }
+    }
+  }
 `;
 
 StyledIcon.defaultProps = { theme: Base };
@@ -60,6 +78,8 @@ interface RoomIconProps {
   showDefault: boolean;
   imgClassName?: string;
   imgSrc?: string;
+  badgeUrl?: string;
+  onBadgeClick?: () => void;
 }
 
 const RoomIcon = ({
@@ -71,6 +91,8 @@ const RoomIcon = ({
   showDefault,
   imgClassName,
   imgSrc,
+  badgeUrl,
+  onBadgeClick,
 }: RoomIconProps) => {
   const titleWithoutSpaces = title.replace(/\s+/g, " ").trim();
   const indexAfterLastSpace = titleWithoutSpaces.lastIndexOf(" ");
@@ -91,12 +113,17 @@ const RoomIcon = ({
     >
       <div className="room-background" />
       <Text className="room-title">{roomTitle}</Text>
-      {/* <IconButton
-        onClick={() => {}}
-        iconName={SecuritySvgUrl}
-        size={32}
-        isFill
-      /> */}
+      {badgeUrl && (
+        <div className="room-icon_badge">
+          <IconButton
+            onClick={onBadgeClick}
+            iconName={badgeUrl}
+            size={32}
+            className="room-icon-button"
+            isFill
+          />
+        </div>
+      )}
     </StyledIcon>
   ) : (
     <img className={imgClassName} src={imgSrc} alt="room icon" />

@@ -84,10 +84,18 @@ export type UseFilesHelpersProps = {
   t: TTranslation;
 };
 
+export type TSelectedFileInfo = {
+  id: number | string;
+  title: string;
+  path?: string[] | undefined;
+  fileExst?: string | undefined;
+  inPublic?: boolean | undefined;
+} | null;
+
 export interface FilesSelectorProps {
   socketHelper: SocketIOHelper;
   socketSubscribers: Set<string>;
-  disabledItems: string[];
+  disabledItems: string[] | number[];
   filterParam?: string;
   getIcon: (size: number, fileExst: string) => string;
 
@@ -114,7 +122,8 @@ export interface FilesSelectorProps {
     fileName: string,
     isChecked: boolean,
     selectedTreeNode: TFolder,
-  ) => Promise<void>;
+    selectedFileInfo: TSelectedFileInfo,
+  ) => void;
 
   getIsDisabled: (
     isFirstLoad: boolean,
@@ -122,19 +131,12 @@ export interface FilesSelectorProps {
     selectedItemId: string | number | undefined,
     selectedItemType: "rooms" | "files" | undefined,
     isRoot: boolean,
-    isRequestRunning: boolean,
     selectedItemSecurity:
       | TFileSecurity
       | TFolderSecurity
       | TRoomSecurity
       | undefined,
-    selectedFileInfo: {
-      id: number | string;
-      title: string;
-      path?: string[] | undefined;
-      fileExst?: string | undefined;
-      inPublic?: boolean | undefined;
-    } | null,
+    selectedFileInfo: TSelectedFileInfo,
   ) => boolean;
 
   withHeader: boolean;

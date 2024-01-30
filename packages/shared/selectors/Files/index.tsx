@@ -105,9 +105,6 @@ const FilesSelector = ({
     React.useState<boolean>(false);
   const [searchValue, setSearchValue] = React.useState<string>("");
 
-  const [isRequestRunning, setIsRequestRunning] =
-    React.useState<boolean>(false);
-
   const { subscribe, unsubscribe } = useSocketHelper({
     socketHelper,
     socketSubscribers,
@@ -354,12 +351,11 @@ const FilesSelector = ({
     fileName: string,
     isChecked: boolean,
   ) => {
-    setIsRequestRunning(true);
     const isPublic =
       breadCrumbs.findIndex((f) => f.roomType === RoomsType.PublicRoom) > -1;
     const folderTitle = breadCrumbs[breadCrumbs.length - 1].label;
 
-    await onAccept(
+    onAccept(
       selectedItemId,
       folderTitle,
       isPublic,
@@ -367,9 +363,8 @@ const FilesSelector = ({
       fileName,
       isChecked,
       selectedTreeNode,
+      selectedFileInfo,
     );
-
-    setIsRequestRunning(false);
   };
 
   const isDisabled = getIsDisabled(
@@ -378,7 +373,6 @@ const FilesSelector = ({
     selectedItemId,
     selectedItemType,
     isRoot,
-    isRequestRunning,
     selectedItemSecurity,
     selectedFileInfo,
   );

@@ -104,7 +104,7 @@ class FilesTableHeader extends React.Component {
           onClick: this.onRoomsFilter,
           minWidth: 179,
         });
-      console.log("columns", columns);
+
       defaultColumns.push(...columns);
     } else if (isTrashFolder) {
       const columns = [

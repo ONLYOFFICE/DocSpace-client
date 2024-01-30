@@ -152,9 +152,9 @@ class FirebaseHelper {
     return `https://${domain}/locales/${lng}/${banner}.json`;
   }
 
-  async getCampaignStyles(banner: string) {
+  async getCampaignConfig(banner: string) {
     const domain = this.config?.authDomain;
-    return `https://${domain}/styles/${banner}.json`;
+    return `https://${domain}/configs/${banner}.json`;
   }
 
   async sendCrashReport(report: string) {

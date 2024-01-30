@@ -1,9 +1,8 @@
 import type {
   ContextMenuModel,
-  NullOrUndefined,
-  PlaylistType,
   SeparatorType,
-} from "../types";
+} from "@docspace/shared/components/context-menu";
+import type { NullOrUndefined, PlaylistType } from "../MediaViewer.types";
 
 export const mediaTypes = Object.freeze({
   audio: 1,

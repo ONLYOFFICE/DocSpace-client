@@ -1,6 +1,8 @@
 import type { Dispatch, SetStateAction } from "react";
+import type { ContextMenuModel } from "@docspace/shared/components/context-menu";
+
 import { getCustomToolbar } from "../../helpers/getCustomToolbar";
-import type { ContextMenuModel, DevicesType } from "../../types";
+import type { DevicesType } from "../../MediaViewer.types";
 
 interface ImageViewerProps {
   src?: string;

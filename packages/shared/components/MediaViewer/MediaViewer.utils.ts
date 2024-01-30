@@ -1,4 +1,4 @@
-import type { BoundsType, Point } from "./types";
+import type { BoundsType, Point } from "./MediaViewer.types";
 
 export const compareTo = (a: number, b: number) => {
   return Math.trunc(a) > Math.trunc(b);

@@ -23,7 +23,7 @@ import {
 } from "./helpers/contextModel";
 import ViewerWrapper from "./sub-components/ViewerWrapper";
 
-import type { MediaViewerProps } from "./MediaViewer.props";
+import type { MediaViewerProps } from "./MediaViewer.types";
 
 function MediaViewer(props: MediaViewerProps): JSX.Element | undefined {
   const {

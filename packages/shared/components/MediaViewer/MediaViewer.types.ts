@@ -1,11 +1,43 @@
-import {
-  ContextMenuAction,
-  IFile,
-  NumberOrString,
-  OmitSecondArg,
-  PlaylistType,
-  TranslationType,
-} from "./types";
+import type { TFile } from "@docspace/shared/api/files/types";
+
+export type ContextMenuAction = (file: TFile, t: TranslationType) => void;
+
+export type OmitSecondArg<F> = F extends (x: infer P, ...arg: never) => infer R
+  ? (file: P) => R
+  : F;
+
+export type TranslationType = (key: string, opt?: object) => string;
+
+export type NumberOrString = number | string;
+
+export type NullOrUndefined = null | undefined;
+
+export type DevicesType = {
+  isMobile: boolean;
+  isMobileOnly: boolean;
+  isDesktop: boolean;
+};
+
+export type PlaylistType = {
+  id: number;
+  canShare: boolean;
+  fileExst: string;
+  fileId: number;
+  fileStatus: number;
+  src: string;
+  title: string;
+  thumbnailUrl: string;
+  version: number;
+};
+
+export type BoundsType = {
+  top: number;
+  bottom: number;
+  right: number;
+  left: number;
+};
+
+export type Point = { x: number; y: number };
 
 export interface MediaViewerProps {
   t: TranslationType;
@@ -22,7 +54,7 @@ export interface MediaViewerProps {
   errorLabel: string;
   isPreviewFile: boolean;
 
-  files: IFile[];
+  files: TFile[];
 
   playlist: PlaylistType[];
 
@@ -42,7 +74,7 @@ export interface MediaViewerProps {
   }[];
 
   setActiveFiles: (files: number[], destId?: number) => void;
-  setBufferSelection: (file?: IFile | null) => void;
+  setBufferSelection: (file?: TFile | null) => void;
 
   getIcon: (size: number, ext: string, ...arg: unknown[]) => string;
 

@@ -1,10 +1,12 @@
-import type { ContextMenuModel, IFile, PlaylistType } from "../../types";
+import type { TFile } from "@docspace/shared/api/files/types";
+import type { ContextMenuModel } from "@docspace/shared/components/context-menu";
+import type { PlaylistType } from "../../MediaViewer.types";
 
 interface ViewerWrapperProps {
   title: string;
   visible: boolean;
   fileUrl?: string;
-  targetFile?: IFile;
+  targetFile?: TFile;
   playlistPos: number;
   userAccess: boolean;
   playlist: PlaylistType[];

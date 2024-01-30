@@ -10,13 +10,14 @@ import DuplicateReactSvgUrl from "PUBLIC_DIR/images/duplicate.react.svg?url";
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import MoveReactSvgUrl from "PUBLIC_DIR/images/move.react.svg?url";
 
+import type { TFile } from "@docspace/shared/api/files/types";
+import type { ContextMenuModel } from "@docspace/shared/components/context-menu";
+
 import type {
   ContextMenuAction,
-  ContextMenuModel,
-  IFile,
   OmitSecondArg,
   TranslationType,
-} from "../types";
+} from "../MediaViewer.types";
 
 type Functions = {
   onClickDownloadAs: VoidFunction;
@@ -34,7 +35,7 @@ type Functions = {
 
 export const getPDFContextModel = (
   t: TranslationType,
-  item: IFile,
+  item: TFile,
   funcs: Omit<Functions, "onShowInfoPanel">,
 ) => {
   const options: ContextMenuModel[] = [
@@ -125,7 +126,7 @@ export const getPDFContextModel = (
 
 export const getMobileMediaContextModel = (
   t: TranslationType,
-  targetFile: IFile,
+  targetFile: TFile,
   funcs: Omit<
     Functions,
     "onClickDownloadAs" | "onCopyLink" | "onPreviewClick" | "onClickLinkEdit"
@@ -209,7 +210,7 @@ export const getMobileMediaContextModel = (
 
 export const getDesktopMediaContextModel = (
   t: TranslationType,
-  targetFile: IFile,
+  targetFile: TFile,
   archiveRoom: boolean,
   funcs: Pick<Functions, "onClickDownload" | "onClickRename" | "onClickDelete">,
 ) => {

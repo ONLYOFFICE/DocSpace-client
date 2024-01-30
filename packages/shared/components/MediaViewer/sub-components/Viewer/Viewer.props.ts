@@ -1,8 +1,11 @@
+import type { TFile } from "@docspace/shared/api/files/types";
+import type { ContextMenuModel } from "@docspace/shared/components/context-menu";
+
 import { getCustomToolbar } from "../../helpers/getCustomToolbar";
-import type { ContextMenuModel, IFile, PlaylistType } from "../../types";
+import type { PlaylistType } from "../../MediaViewer.types";
 
 interface ViewerProps {
-  targetFile?: IFile;
+  targetFile?: TFile;
   title: string;
   fileUrl?: string;
   isAudio: boolean;

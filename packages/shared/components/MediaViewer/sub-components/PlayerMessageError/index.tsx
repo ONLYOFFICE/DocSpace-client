@@ -31,10 +31,15 @@ function PlayerMessageError({
           {items.map((item) => {
             if (item.disabled || isSeparator(item)) return;
 
-            const onClick = () => {
+            const onClick = (
+              event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+            ) => {
               onMaskClick();
-              item.onClick();
+              item.onClick?.(event);
             };
+
+            if (!item.icon) return;
+
             return (
               <div className="toolbar-item" key={item.key} onClick={onClick}>
                 <ReactSVG src={item.icon} />

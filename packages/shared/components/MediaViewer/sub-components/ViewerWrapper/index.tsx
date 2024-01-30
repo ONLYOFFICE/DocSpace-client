@@ -2,6 +2,8 @@ import equal from "fast-deep-equal/react";
 import { useTheme } from "styled-components";
 import React, { useMemo, memo, useCallback } from "react";
 
+import type { ContextMenuModel } from "@docspace/shared/components/context-menu";
+
 import Viewer from "../Viewer";
 import { isSeparator } from "../../helpers";
 import {
@@ -11,7 +13,6 @@ import {
 
 import { StyledDropDown, StyledDropDownItem } from "../../MediaViewer.styled";
 
-import type { ContextMenuModel } from "../../types";
 import type ViewerWrapperProps from "./ViewerWrapper.props";
 
 function ViewerWrapper(props: ViewerWrapperProps) {
@@ -45,11 +46,16 @@ function ViewerWrapper(props: ViewerWrapperProps) {
   const isRtl = interfaceDirection === "rtl";
 
   const onClickContextItem = useCallback(
-    (item: ContextMenuModel) => {
+    (
+      item: ContextMenuModel,
+      event:
+        | React.MouseEvent<Element, MouseEvent>
+        | React.ChangeEvent<HTMLInputElement>,
+    ) => {
       if (isSeparator(item)) return;
 
       onSetSelectionFile();
-      item.onClick();
+      item.onClick?.(event);
     },
     [onSetSelectionFile],
   );
@@ -82,7 +88,7 @@ function ViewerWrapper(props: ViewerWrapperProps) {
               key={item.key}
               label={isItemSeparator ? undefined : item.label}
               icon={!isItemSeparator && item.icon ? item.icon : ""}
-              onClick={() => onClickContextItem(item)}
+              onClick={(event) => onClickContextItem(item, event)}
             />
           );
         })}

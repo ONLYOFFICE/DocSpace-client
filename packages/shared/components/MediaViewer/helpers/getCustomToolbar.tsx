@@ -1,5 +1,7 @@
 import React from "react";
 
+import type { TFile } from "@docspace/shared/api/files/types";
+
 import MediaZoomInIcon from "PUBLIC_DIR/images/media.zoomin.react.svg";
 import MediaZoomOutIcon from "PUBLIC_DIR/images/media.zoomout.react.svg";
 import MediaRotateLeftIcon from "PUBLIC_DIR/images/media.rotateleft.react.svg";
@@ -11,10 +13,9 @@ import ViewerSeparator from "PUBLIC_DIR/images/viewer.separator.react.svg";
 import PanelReactSvg from "PUBLIC_DIR/images/panel.react.svg";
 
 import { ToolbarActionType } from ".";
-import type { IFile } from "../types";
 
 export const getCustomToolbar = (
-  targetFile: IFile,
+  targetFile: TFile,
   isEmptyContextMenu: boolean,
   onDeleteClick: VoidFunction,
   onDownloadClick: VoidFunction,

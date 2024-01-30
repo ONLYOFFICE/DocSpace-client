@@ -38,6 +38,7 @@ const PureHome = (props) => {
 
     //homepage,
     setIsLoading,
+    isLoading,
 
     setToPreviewFile,
     playlist,
@@ -221,6 +222,7 @@ const PureHome = (props) => {
     loadCurrentUser,
     updateProfileCulture,
     getRooms,
+    isLoading,
   });
 
   React.useEffect(() => {
@@ -529,6 +531,7 @@ export default inject(
 
       setDragging,
       setIsLoading,
+      isLoading,
       fetchFiles,
       fetchRooms,
 

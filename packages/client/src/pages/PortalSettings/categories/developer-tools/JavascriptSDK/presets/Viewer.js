@@ -273,7 +273,7 @@ const Viewer = (props) => {
               tabIndex={4}
             />
           </ControlsGroup>
-          <InterfaceElements>
+          {/* <InterfaceElements>
             <Label className="label">{t("InterfaceElements")}</Label>
             <Checkbox
               className="checkbox"
@@ -334,7 +334,7 @@ const Viewer = (props) => {
             image={{}}
             setPreview={() => {}}
             onChangeImage={() => {}}
-          />
+          /> */}
         </Controls>
       </Container>
 

@@ -256,17 +256,9 @@ const FilesSelector = ({
 
     setSelectedItemType("files");
     getFileList(0, null, currentFolderId, true);
-  }, [
-    currentFolderId,
-    getFileList,
-    getRoomList,
-    getRootData,
-    isRoomsOnly,
-    isThirdParty,
-    parentId,
-    roomsFolderId,
-    rootFolderType,
-  ]);
+    // TODO: refactoring
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onClickBreadCrumb = (item: TBreadCrumb) => {
     if (!isFirstLoad) {

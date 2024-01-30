@@ -15,7 +15,9 @@ import React, {
   useState,
 } from "react";
 
-import { compareTo } from "../../MediaViewer.utils";
+import { includesMethod } from "@docspace/shared/utils/typeGuards";
+
+import { calculateAdjustImageUtil } from "../../MediaViewer.utils";
 import ViewerPlayerProps from "./ViewerPlayer.props";
 import {
   ContainerPlayer,
@@ -36,6 +38,8 @@ import PlayerFullScreen from "../PlayerFullScreen";
 import PlayerDesktopContextMenu from "../PlayerDesktopContextMenu";
 import { KeyboardEventKeys } from "../../helpers";
 import PlayerMessageError from "../PlayerMessageError";
+
+import type { Point } from "../../MediaViewer.types";
 
 const VolumeLocalStorageKey = "player-volume";
 const defaultVolume = 100;
@@ -111,87 +115,14 @@ function ViewerPlayer({
     opacity: 1,
   }));
 
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, [isFullScreen, isLoading]);
-
-  useLayoutEffect(() => {
-    setIsLoading(true);
-    resetState();
-  }, [src]);
-
-  useEffect(() => {
-    if (!isOpenContextMenu && isPlaying) {
-      restartToolbarVisibleTimer();
-    }
-  }, [isOpenContextMenu]);
-  useEffect(() => {
-    window.addEventListener("fullscreenchange", onExitFullScreen, {
-      capture: true,
-    });
-    return () =>
-      window.removeEventListener("fullscreenchange", onExitFullScreen, {
-        capture: true,
-      });
-  }, []);
-
-  useEffect(() => {
-    document.addEventListener("keydown", onKeyDown);
-
-    return () => {
-      document.removeEventListener("keydown", onKeyDown);
-    };
-  }, [isPlaying]);
-
-  const calculateAdjustImage = (point: { x: number; y: number }) => {
+  const calculateAdjustImage = (point: Point) => {
     if (!playerWrapperRef.current || !containerRef.current) return point;
 
-    let playerBounds = playerWrapperRef.current.getBoundingClientRect();
-    const containerBounds = containerRef.current.getBoundingClientRect();
-
-    const originalWidth = playerWrapperRef.current.clientWidth;
-    const widthOverhang = (playerBounds.width - originalWidth) / 2;
-
-    const originalHeight = playerWrapperRef.current.clientHeight;
-    const heightOverhang = (playerBounds.height - originalHeight) / 2;
-
-    const isWidthOutContainer = playerBounds.width >= containerBounds.width;
-
-    const isHeightOutContainer = playerBounds.height >= containerBounds.height;
-
-    if (
-      compareTo(playerBounds.left, containerBounds.left) &&
-      isWidthOutContainer
-    ) {
-      point.x = widthOverhang;
-    } else if (
-      compareTo(containerBounds.right, playerBounds.right) &&
-      isWidthOutContainer
-    ) {
-      point.x = containerBounds.width - playerBounds.width + widthOverhang;
-    } else if (!isWidthOutContainer) {
-      point.x =
-        (containerBounds.width - playerBounds.width) / 2 + widthOverhang;
-    }
-
-    if (
-      compareTo(playerBounds.top, containerBounds.top) &&
-      isHeightOutContainer
-    ) {
-      point.y = heightOverhang;
-    } else if (
-      compareTo(containerBounds.bottom, playerBounds.bottom) &&
-      isHeightOutContainer
-    ) {
-      point.y = containerBounds.height - playerBounds.height + heightOverhang;
-    } else if (!isHeightOutContainer) {
-      point.y =
-        (containerBounds.height - playerBounds.height) / 2 + heightOverhang;
-    }
-
-    return point;
+    return calculateAdjustImageUtil(
+      playerWrapperRef.current,
+      containerRef.current,
+      point,
+    );
   };
 
   useGesture(
@@ -221,7 +152,8 @@ function ViewerPlayer({
         if (!isFullScreen) {
           if (mdx < -style.width.get() / 4) {
             return onNext();
-          } else if (mdx > style.width.get() / 4) {
+          }
+          if (mdx > style.width.get() / 4) {
             return onPrev();
           }
         }
@@ -255,7 +187,7 @@ function ViewerPlayer({
           removeToolbarVisibleTimer();
           setPanelVisible(false);
         } else {
-          isPlaying && restartToolbarVisibleTimer();
+          if (isPlaying) restartToolbarVisibleTimer();
           setPanelVisible(true);
         }
       },
@@ -269,81 +201,75 @@ function ViewerPlayer({
     },
   );
 
-  const onKeyDown = (event: KeyboardEvent) => {
-    if (event.code === KeyboardEventKeys.Space) {
-      togglePlay();
-    }
-  };
-  const onExitFullScreen = () => {
-    if (!document.fullscreenElement) {
-      setIsFullScreen(false);
-      handleResize();
-    }
-  };
-
-  const resetState = () => {
+  const resetState = useCallback(() => {
     setTimeline(0);
     setDuration(0);
     setCurrentTime(0);
     setIsPlaying(false);
     setIsError(false);
     removePanelVisibleTimeout();
-  };
+  }, [removePanelVisibleTimeout, setIsError]);
 
-  const getVideoWidthHeight = (video: HTMLVideoElement): [number, number] => {
-    const maxWidth = window.innerWidth;
-    const maxHeight = window.innerHeight;
+  const getVideoWidthHeight = useCallback(
+    (video: HTMLVideoElement): [number, number] => {
+      const maxWidth = window.innerWidth;
+      const maxHeight = window.innerHeight;
 
-    const elementWidth = isAudio ? audioWidth : video.videoWidth;
-    const elementHeight = isAudio ? audioHeight : video.videoHeight;
+      const elementWidth = isAudio ? audioWidth : video.videoWidth;
+      const elementHeight = isAudio ? audioHeight : video.videoHeight;
 
-    let width =
-      elementWidth > maxWidth
-        ? maxWidth
-        : isFullScreen
-          ? Math.max(maxWidth, elementWidth)
-          : Math.min(maxWidth, elementWidth);
+      let width =
+        elementWidth > maxWidth
+          ? maxWidth
+          : isFullScreen
+            ? Math.max(maxWidth, elementWidth)
+            : Math.min(maxWidth, elementWidth);
 
-    let height = (width / elementWidth) * elementHeight;
+      let height = (width / elementWidth) * elementHeight;
 
-    if (height > maxHeight) {
-      height = maxHeight;
-      width = (height / elementHeight) * elementWidth;
-    }
+      if (height > maxHeight) {
+        height = maxHeight;
+        width = (height / elementHeight) * elementWidth;
+      }
 
-    return [width, height];
-  };
+      return [width, height];
+    },
+    [isAudio, isFullScreen],
+  );
 
   const getVideoPosition = (
     width: number,
     height: number,
   ): [number, number] => {
-    let left = (window.innerWidth - width) / 2;
-    let top = (window.innerHeight - height) / 2;
+    const left = (window.innerWidth - width) / 2;
+    const top = (window.innerHeight - height) / 2;
 
     return [left, top];
   };
 
-  const setSizeAndPosition = (target: HTMLVideoElement) => {
-    const [width, height] = getVideoWidthHeight(target);
-    const [x, y] = getVideoPosition(width, height);
+  const setSizeAndPosition = useCallback(
+    (target: HTMLVideoElement) => {
+      const [width, height] = getVideoWidthHeight(target);
+      const [x, y] = getVideoPosition(width, height);
 
-    api.start({
-      x,
-      y,
-      width,
-      height,
-      immediate: true,
-    });
-  };
+      api.start({
+        x,
+        y,
+        width,
+        height,
+        immediate: true,
+      });
+    },
+    [api, getVideoWidthHeight],
+  );
 
-  const handleResize = () => {
+  const handleResize = useCallback(() => {
     const target = videoRef.current;
 
     if (!target || isLoading) return;
 
     setSizeAndPosition(target);
-  };
+  }, [isLoading, setSizeAndPosition]);
 
   const handleLoadedMetaDataVideo = (
     event: React.SyntheticEvent<HTMLVideoElement, Event>,
@@ -389,12 +315,19 @@ function ViewerPlayer({
       videoRef.current.pause();
       setIsPlaying(false);
       setPanelVisible(true);
-      isMobile && removeToolbarVisibleTimer();
+      if (isMobile) removeToolbarVisibleTimer();
     } else {
       videoRef.current.play();
       setIsPlaying(true);
     }
-  }, [isPlaying, isVideo, isMobile]);
+  }, [
+    isMobile,
+    isPlaying,
+    isVideo,
+    setPanelVisible,
+    restartToolbarVisibleTimer,
+    removeToolbarVisibleTimer,
+  ]);
 
   const handleBigPlayButtonClick = () => {
     togglePlay();
@@ -403,8 +336,8 @@ function ViewerPlayer({
   const handleTimeUpdate = () => {
     if (!videoRef.current || isLoading) return;
 
-    const { currentTime, duration } = videoRef.current;
-    const percent = (currentTime / duration) * 100;
+    const percent =
+      (videoRef.current.currentTime / videoRef.current.duration) * 100;
 
     setTimeline(percent);
 
@@ -476,16 +409,16 @@ function ViewerPlayer({
   const toggleVolumeMute = useCallback(() => {
     if (!videoRef.current) return;
 
-    const volume = videoRef.current.volume * 100 || defaultVolume;
+    const newVolume = videoRef.current.volume * 100 || defaultVolume;
 
     if (isMuted) {
       setIsMuted(false);
-      setVolume(volume);
+      setVolume(newVolume);
 
-      videoRef.current.volume = volume / 100;
+      videoRef.current.volume = newVolume / 100;
       videoRef.current.muted = false;
 
-      localStorage.setItem(VolumeLocalStorageKey, volume.toString());
+      localStorage.setItem(VolumeLocalStorageKey, newVolume.toString());
     } else {
       setIsMuted(true);
       setVolume(0);
@@ -509,27 +442,31 @@ function ViewerPlayer({
     if (isFullScreen) {
       if (document.exitFullscreen) {
         document.exitFullscreen();
-      } else if (document["webkitExitFullscreen"]) {
-        document["webkitExitFullscreen"]();
-      } else if (document["mozCancelFullScreen"]) {
-        document["mozCancelFullScreen"]();
-      } else if (document["msExitFullscreen"]) {
-        document["msExitFullscreen"]();
+      } else if (includesMethod(document, "webkitExitFullscreen")) {
+        document.webkitExitFullscreen();
+      } else if (includesMethod(document, "mozCancelFullScreen")) {
+        document.mozCancelFullScreen();
+      } else if (includesMethod(document, "msExitFullscreen")) {
+        document.msExitFullscreen();
       }
-    } else {
-      if (document.documentElement.requestFullscreen) {
-        document.documentElement.requestFullscreen();
-      } else if (document.documentElement["mozRequestFullScreen"]) {
-        document.documentElement["mozRequestFullScreen"]();
-      } else if (document.documentElement["webkitRequestFullScreen"]) {
-        document.documentElement["webkitRequestFullScreen"]();
-      } else if (document.documentElement["webkitEnterFullScreen"]) {
-        document.documentElement["webkitEnterFullScreen"]();
-      }
+    } else if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen();
+    } else if (
+      includesMethod(document.documentElement, "mozRequestFullScreen")
+    ) {
+      document.documentElement.mozRequestFullScreen();
+    } else if (
+      includesMethod(document.documentElement, "webkitRequestFullScreen")
+    ) {
+      document.documentElement.webkitRequestFullScreen();
+    } else if (
+      includesMethod(document.documentElement, "webkitEnterFullScreen")
+    ) {
+      document.documentElement.webkitEnterFullScreen();
     }
 
     setIsFullScreen((pre) => !pre);
-  }, [isFullScreen]);
+  }, [isFullScreen, setIsFullScreen]);
 
   const onMouseEnter = () => {
     if (isMobile) return;
@@ -548,11 +485,12 @@ function ViewerPlayer({
 
   const hadleError = useCallback(
     (error: React.SyntheticEvent<HTMLVideoElement, Event>) => {
+      // eslint-disable-next-line no-console
       console.error("video error", error);
       setIsError(true);
       setIsLoading(false);
     },
-    [],
+    [setIsError],
   );
 
   const stopPropagation = useCallback(
@@ -566,11 +504,61 @@ function ViewerPlayer({
     if (isPlaying && isVideo) restartToolbarVisibleTimer();
   };
 
+  const onKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.code === KeyboardEventKeys.Space) {
+        togglePlay();
+      }
+    },
+    [togglePlay],
+  );
+
+  const onExitFullScreen = useCallback(() => {
+    if (!document.fullscreenElement) {
+      setIsFullScreen(false);
+      handleResize();
+    }
+  }, [handleResize, setIsFullScreen]);
+
   const model = useMemo(contextModel, [contextModel]);
   const hideContextMenu = useMemo(
     () => model.filter((item) => !item.disabled).length <= 1,
     [model],
   );
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, [handleResize]);
+
+  useLayoutEffect(() => {
+    setIsLoading(true);
+    resetState();
+  }, [resetState]);
+
+  useEffect(() => {
+    if (!isOpenContextMenu && isPlaying) {
+      restartToolbarVisibleTimer();
+    }
+  }, [isOpenContextMenu, isPlaying, restartToolbarVisibleTimer]);
+  useEffect(() => {
+    window.addEventListener("fullscreenchange", onExitFullScreen, {
+      capture: true,
+    });
+    return () =>
+      window.removeEventListener("fullscreenchange", onExitFullScreen, {
+        capture: true,
+      });
+  }, [onExitFullScreen]);
+
+  useEffect(() => {
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [onKeyDown]);
 
   return (
     <>
@@ -604,7 +592,7 @@ function ViewerPlayer({
           />
           {isAudio && !isError && (
             <div className="audio-container">
-              <img src={audioIcon} />
+              <img src={audioIcon} alt="" />
             </div>
           )}
           <ViewerLoader

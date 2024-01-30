@@ -9,6 +9,7 @@ import React, {
 
 import { DeviceType } from "@docspace/shared/enums";
 import { Portal } from "@docspace/shared/components/portal";
+import { includesMethod } from "@docspace/shared/utils/typeGuards";
 import type { TContextMenuRef } from "@docspace/shared/components/context-menu";
 
 import { StyledViewerContainer } from "../../MediaViewer.styled";
@@ -100,33 +101,23 @@ function Viewer(props: ViewerProps) {
     }
   }, [panelVisible]);
 
-  const removeToolbarVisibleTimer = () => {
+  const removeToolbarVisibleTimer = useCallback(() => {
     clearTimeout(timerIDRef.current);
     panelVisibleRef.current = false;
     panelToolbarRef.current = true;
-  };
+  }, []);
 
-  const removePanelVisibleTimeout = () => {
+  const removePanelVisibleTimeout = useCallback(() => {
     clearTimeout(timerIDRef.current);
     panelVisibleRef.current = true;
     panelToolbarRef.current = false;
     setPanelVisible(true);
-  };
+  }, []);
 
-  const restartToolbarVisibleTimer = () => {
+  const restartToolbarVisibleTimer = useCallback(() => {
     panelToolbarRef.current = false;
     resetToolbarVisibleTimer();
-  };
-
-  const nextClick = () => {
-    // clearTimeout(imageTimer);
-    onNextClick();
-  };
-
-  const prevClick = () => {
-    // clearTimeout(imageTimer);
-    onPrevClick();
-  };
+  }, [resetToolbarVisibleTimer]);
 
   const onMobileContextMenu = useCallback(
     (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
@@ -145,20 +136,11 @@ function Viewer(props: ViewerProps) {
     if (isFullscreen) {
       if (document.exitFullscreen) {
         document.exitFullscreen();
-      } else if (
-        "webkitExitFullscreen" in document &&
-        typeof document.webkitExitFullscreen === "function"
-      ) {
+      } else if (includesMethod(document, "webkitExitFullscreen")) {
         document.webkitExitFullscreen();
-      } else if (
-        "mozCancelFullScreen" in document &&
-        typeof document.mozCancelFullScreen === "function"
-      ) {
+      } else if (includesMethod(document, "mozCancelFullScreen")) {
         document.mozCancelFullScreen();
-      } else if (
-        "msExitFullscreen" in document &&
-        typeof document.msExitFullscreen === "function"
-      ) {
+      } else if (includesMethod(document, "msExitFullscreen")) {
         document.msExitFullscreen();
       }
     }
@@ -229,10 +211,10 @@ function Viewer(props: ViewerProps) {
       {playlist.length > 1 && !isFullscreen && !isMobile && (
         <>
           {isNotFirstElement && !isPDFSidebarOpen && (
-            <PrevButton prevClick={prevClick} />
+            <PrevButton prevClick={onPrevClick} />
           )}
           {isNotLastElement && (
-            <NextButton isPdfFIle={isPdf} nextClick={nextClick} />
+            <NextButton isPdfFIle={isPdf} nextClick={onNextClick} />
           )}
         </>
       )}

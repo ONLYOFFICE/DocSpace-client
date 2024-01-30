@@ -105,16 +105,16 @@ export const getImagePositionAndSize = (
 };
 
 export const calculateAdjustImageUtil = (
-  image: HTMLImageElement | null,
-  container: HTMLDivElement | null,
+  element: HTMLElement | null,
+  container: HTMLElement | null,
   point: Point,
   diffScale: number = 1,
 ) => {
-  if (!image || !container) return point;
+  if (!element || !container) return point;
 
   // debugger;
 
-  let imageBounds = image.getBoundingClientRect();
+  let imageBounds = element.getBoundingClientRect();
   const containerBounds = container.getBoundingClientRect();
 
   if (diffScale !== 1) {
@@ -139,10 +139,10 @@ export const calculateAdjustImageUtil = (
     };
   }
 
-  const originalWidth = image.clientWidth;
+  const originalWidth = element.clientWidth;
   const widthOverhang = (imageBounds.width - originalWidth) / 2;
 
-  const originalHeight = image.clientHeight;
+  const originalHeight = element.clientHeight;
   const heightOverhang = (imageBounds.height - originalHeight) / 2;
 
   const isWidthOutContainer = imageBounds.width >= containerBounds.width;
@@ -182,7 +182,7 @@ export const calculateAdjustBoundsUtils = (
   x: number,
   y: number,
   bounds: BoundsType | null,
-) => {
+): Point => {
   if (!bounds) return { x, y };
 
   const { left, right, top, bottom } = bounds;

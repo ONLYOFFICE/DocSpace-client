@@ -206,7 +206,14 @@ class QuotasStore {
       PERCENTAGE_FOR_SHOWING_BAR
     );
   }
+  get showTenantCustomQuotaBar() {
+    if (!this.isTenantCustomQuotaSet) return false;
 
+    return (
+      (this.usedTotalStorageSizeCount / this.tenantCustomQuota) * 100 >=
+      PERCENTAGE_FOR_SHOWING_BAR
+    );
+  }
   get showUserQuotaBar() {
     return (
       this.addedManagersCount > 1 &&

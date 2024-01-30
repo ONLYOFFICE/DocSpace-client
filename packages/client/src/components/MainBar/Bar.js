@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 import difference from "lodash/difference";
 import { withTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 import { ADS_TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
 
 import { getConvertedSize } from "@docspace/shared/utils/common";
-
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { getBannerAttribute } from "@docspace/shared/utils";
 import { SnackBar } from "@docspace/shared/components/snackbar";
 import { QuotaBarTypes } from "SRC_DIR/helpers/constants";
@@ -46,11 +47,17 @@ const Bar = (props) => {
 
     setMainBarVisible,
     showUserPersonalQuotaBar,
+
+    tenantCustomQuota,
+    showTenantCustomQuotaBar,
   } = props;
+
+  const navigate = useNavigate();
 
   const [barVisible, setBarVisible] = useState({
     roomQuota: false,
     storageQuota: false,
+    tenantCustomQuota: false,
     userQuota: false,
     storageAndUserQuota: false,
     storageAndRoomQuota: false,
@@ -86,6 +93,7 @@ const Bar = (props) => {
           ...value,
           roomQuota: !closed.includes(QuotaBarTypes.RoomQuota),
           storageQuota: !closed.includes(QuotaBarTypes.StorageQuota),
+          tenantCustomQuota: !closed.includes(QuotaBarTypes.TenantCustomQuota),
           userQuota: !closed.includes(QuotaBarTypes.UserQuota),
           storageAndRoomQuota: !closed.includes(
             QuotaBarTypes.UserAndStorageQuota
@@ -106,6 +114,7 @@ const Bar = (props) => {
       setBarVisible({
         roomQuota: isAdmin,
         storageQuota: isAdmin,
+        tenantCustomQuota: isAdmin,
         userQuota: isAdmin,
         storageAndUserQuota: isAdmin,
         storageAndRoomQuota: isAdmin,
@@ -154,10 +163,22 @@ const Bar = (props) => {
     setMaintenanceExist(false);
   };
 
-  const onClickQuota = (isRoomQuota) => {
-    onPaymentsClick && onPaymentsClick();
+  const onClickQuota = (type) => {
+    type === QuotaBarTypes.StorageQuota && onPaymentsClick && onPaymentsClick();
+    type === QuotaBarTypes.TenantCustomQuota && onClickTenantCustomQuota();
 
-    onCloseQuota(isRoomQuota);
+    onCloseQuota(type);
+  };
+
+  const onClickTenantCustomQuota = (type) => {
+    const managementPageUrl = combineUrl(
+      "/portal-settings",
+      "/management/disk-space"
+    );
+
+    navigate(managementPageUrl);
+
+    onCloseQuota(type);
   };
 
   const onCloseQuota = (currentBar) => {
@@ -174,6 +195,9 @@ const Bar = (props) => {
         break;
       case QuotaBarTypes.StorageQuota:
         setBarVisible((value) => ({ ...value, storageQuota: false }));
+        break;
+      case QuotaBarTypes.TenantCustomQuota:
+        setBarVisible((value) => ({ ...value, tenantCustomQuota: false }));
         break;
       case QuotaBarTypes.UserQuota:
         setBarVisible((value) => ({ ...value, userQuota: false }));
@@ -243,6 +267,14 @@ const Bar = (props) => {
         currentValue: getConvertedSize(t, usedTotalStorageSizeCount),
       };
     }
+    if (showTenantCustomQuotaBar && barVisible.tenantCustomQuota) {
+      return {
+        type: QuotaBarTypes.TenantCustomQuota,
+        maxValue: getConvertedSize(t, tenantCustomQuota),
+        currentValue: getConvertedSize(t, usedTotalStorageSizeCount),
+      };
+    }
+
     if (showUserQuotaBar && barVisible.userQuota) {
       return {
         type: QuotaBarTypes.UserQuota,
@@ -254,8 +286,6 @@ const Bar = (props) => {
     if (showUserPersonalQuotaBar && barVisible.personalUserQuota) {
       return {
         type: QuotaBarTypes.PersonalUserQuota,
-        //maxValue: maxCountManagersByQuota,
-        //  currentValue: addedManagersCount,
       };
     }
     return null;
@@ -291,6 +321,7 @@ const Bar = (props) => {
       {...currentBar}
       onClick={onClickQuota}
       onClose={onCloseQuota}
+      onClickTenantCustomQuota={onClickTenantCustomQuota}
       onLoad={onLoad}
     />
   ) : withActivationBar && barVisible.confirmEmail && tReady ? (
@@ -330,6 +361,8 @@ export default inject(({ auth, profileActionsStore }) => {
     showStorageQuotaBar,
     showUserQuotaBar,
     showUserPersonalQuotaBar,
+    tenantCustomQuota,
+    showTenantCustomQuotaBar,
   } = auth.currentQuotaStore;
 
   const { currentColorScheme, setMainBarVisible } = auth.settingsStore;
@@ -359,5 +392,7 @@ export default inject(({ auth, profileActionsStore }) => {
     setMainBarVisible,
 
     showUserPersonalQuotaBar,
+    tenantCustomQuota,
+    showTenantCustomQuotaBar,
   };
 })(withTranslation(["Profile", "Common"])(observer(Bar)));

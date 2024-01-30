@@ -64,6 +64,23 @@ const QuotasBar = ({
             </Trans>
           ),
         };
+      case QuotaBarTypes.TenantCustomQuota:
+        return {
+          header: t("StorageQuotaHeader", { currentValue, maxValue }),
+          description: (
+            <Trans i18nKey="TenantCustomQuotaDescription" t={t}>
+              You can remove the unnecessary files or change quota in the
+              <Link
+                fontSize="12px"
+                fontWeight="400"
+                color={currentColorScheme?.main?.accent}
+                onClick={onClickAction}
+              >
+                Storage management settings.
+              </Link>
+            </Trans>
+          ),
+        };
       case QuotaBarTypes.UserQuota:
         return {
           header: t("UserQuotaHeader", { currentValue, maxValue }),
@@ -82,6 +99,7 @@ const QuotasBar = ({
             </Trans>
           ),
         };
+
       case QuotaBarTypes.UserAndStorageQuota:
         return {
           header: t("StorageAndUserHeader", { currentValue, maxValue }),
@@ -123,6 +141,7 @@ const QuotasBar = ({
           header: t("StorageQuotaExceeded"),
           description: t("PersonalUserQuotaDescription"),
         };
+
       default:
         return null;
     }

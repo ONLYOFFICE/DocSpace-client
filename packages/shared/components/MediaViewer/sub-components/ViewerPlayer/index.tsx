@@ -18,14 +18,7 @@ import React, {
 import { includesMethod } from "@docspace/shared/utils/typeGuards";
 
 import { calculateAdjustImageUtil } from "../../MediaViewer.utils";
-import ViewerPlayerProps from "./ViewerPlayer.props";
-import {
-  ContainerPlayer,
-  ControlContainer,
-  PlayerControlsWrapper,
-  StyledPlayerControls,
-  VideoWrapper,
-} from "./ViewerPlayer.styled";
+import type { Point } from "../../MediaViewer.types";
 
 import PlayerBigPlayButton from "../PlayerBigPlayButton";
 import ViewerLoader from "../ViewerLoader";
@@ -39,12 +32,20 @@ import PlayerDesktopContextMenu from "../PlayerDesktopContextMenu";
 import { KeyboardEventKeys } from "../../helpers";
 import PlayerMessageError from "../PlayerMessageError";
 
-import type { Point } from "../../MediaViewer.types";
-
-const VolumeLocalStorageKey = "player-volume";
-const defaultVolume = 100;
-const audioWidth = 190;
-const audioHeight = 190;
+import ViewerPlayerProps from "./ViewerPlayer.props";
+import {
+  ContainerPlayer,
+  ControlContainer,
+  PlayerControlsWrapper,
+  StyledPlayerControls,
+  VideoWrapper,
+} from "./ViewerPlayer.styled";
+import {
+  VolumeLocalStorageKey,
+  audioHeight,
+  audioWidth,
+  defaultVolume,
+} from "./ViewerPlayer.constants";
 
 function ViewerPlayer({
   src,
@@ -79,8 +80,9 @@ function ViewerPlayer({
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const playerWrapperRef = useRef<HTMLDivElement>(null);
-
   const isDurationInfinityRef = useRef<boolean>(false);
+  const isOpenContextMenuRef = useRef<boolean>(isOpenContextMenu);
+  const prevSrcRef = useRef(src);
 
   const { isDesktop, isMobile } = devices;
 
@@ -99,6 +101,7 @@ function ViewerPlayer({
   const [timeline, setTimeline] = useState<number>(0);
   const [duration, setDuration] = useState<number>(0);
   const [currentTime, setCurrentTime] = useState<number>(0);
+
   const [volume, setVolume] = useState<number>(() => {
     const valueStorage = localStorage.getItem(VolumeLocalStorageKey);
 
@@ -341,7 +344,7 @@ function ViewerPlayer({
 
     setTimeline(percent);
 
-    setCurrentTime(currentTime);
+    setCurrentTime(videoRef.current.currentTime);
   };
 
   const handleChangeTimeLine = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -533,15 +536,22 @@ function ViewerPlayer({
   }, [handleResize]);
 
   useLayoutEffect(() => {
+    if (prevSrcRef.current === src) return;
+    prevSrcRef.current = src;
+
     setIsLoading(true);
     resetState();
-  }, [resetState]);
+  }, [resetState, src]);
 
   useEffect(() => {
+    if (isOpenContextMenuRef.current === isOpenContextMenu) return;
+    isOpenContextMenuRef.current = isOpenContextMenu;
+
     if (!isOpenContextMenu && isPlaying) {
       restartToolbarVisibleTimer();
     }
   }, [isOpenContextMenu, isPlaying, restartToolbarVisibleTimer]);
+
   useEffect(() => {
     window.addEventListener("fullscreenchange", onExitFullScreen, {
       capture: true,

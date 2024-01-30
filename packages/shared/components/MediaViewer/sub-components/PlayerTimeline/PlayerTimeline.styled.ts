@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
+import { isMobile } from "react-device-detect";
 
-import { tablet } from "@docspace/shared/utils";
+import { tablet, desktop } from "@docspace/shared/utils";
 
 export const HoverProgress = styled.div`
   display: none;
@@ -176,6 +177,10 @@ export const PlayerTimelineWrapper = styled.div`
       border-radius: 50%;
       cursor: pointer;
     }
+  }
+
+  @media ${desktop} {
+    ${isMobile && mobileCss}
   }
 
   @media ${tablet} {

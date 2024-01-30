@@ -178,6 +178,7 @@ export default function withFileActions(WrappedFileItem) {
 
     onFilesClick = (e) => {
       const {
+        t,
         item,
         openFileAction,
         setParentId,
@@ -207,7 +208,7 @@ export default function withFileActions(WrappedFileItem) {
         // setRoomType(item.roomType);
       }
 
-      openFileAction(item);
+      openFileAction(item, t);
     };
 
     onSelectTag = (tag) => {

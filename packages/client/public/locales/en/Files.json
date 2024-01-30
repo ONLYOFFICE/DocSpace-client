@@ -191,5 +191,6 @@
   "WantToRestoreTheRooms": "All shared links in restored rooms will become active, and their contents will be available to everyone with the room links. Do you want to restore the rooms?",
   "WithSubfolders": "With subfolders",
   "YouLeftTheRoom": "You have left the room",
-  "LinkSettings": "Link settings"
+  "LinkSettings": "Link settings",
+  "FileDownloadingIsRestricted": "File downloading is restricted in this room."
 }

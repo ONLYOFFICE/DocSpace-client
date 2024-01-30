@@ -3013,7 +3013,7 @@ const Dark: TTheme = {
       },
 
       storageManagement: {
-        grayBackgroundText: "#5C5C5C",
+        grayBackgroundText: "#858585",
         descriptionColor: "#ADADAD",
       },
     },

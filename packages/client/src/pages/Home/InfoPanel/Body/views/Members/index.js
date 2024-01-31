@@ -30,6 +30,7 @@ import LinkRow from "./sub-components/LinkRow";
 const Members = ({
   t,
   selfId,
+  isAdmin,
   selection,
 
   updateRoomMembers,
@@ -401,6 +402,7 @@ const Members = ({
               t={t}
               user={user}
               key={user.id}
+              showTooltip={isAdmin}
               index={index + publicRoomItemsLength}
               security={security}
               membersHelper={membersHelper}
@@ -466,7 +468,7 @@ export default inject(
       selection,
       bufferSelection,
     } = filesStore;
-    const { id: selfId } = auth.userStore.user;
+    const { id: selfId, isAdmin } = auth.userStore.user;
 
     const { changeType: changeUserType } = peopleStore;
     const {
@@ -509,8 +511,8 @@ export default inject(
       selectionItem?.length > 1
         ? null
         : isShowParentRoom
-        ? selectionParentRoom
-        : selectionItem;
+          ? selectionParentRoom
+          : selectionItem;
 
     return {
       setView,
@@ -529,6 +531,7 @@ export default inject(
       setUpdateRoomMembers,
 
       selfId,
+      isAdmin,
 
       resendEmailInvitations,
       changeUserType,

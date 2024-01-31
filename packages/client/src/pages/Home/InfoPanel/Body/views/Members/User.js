@@ -16,6 +16,7 @@ import { Text } from "@docspace/shared/components/text";
 import EmailPlusReactSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
 import { StyledUserTypeHeader } from "../../styles/members";
 import { IconButton } from "@docspace/shared/components/icon-button";
+import { Tooltip } from "@docspace/shared/components/tooltip";
 
 const User = ({
   t,
@@ -36,6 +37,7 @@ const User = ({
   setMembersFilter,
   fetchMembers,
   hasNextPage,
+  showTooltip,
 }) => {
   if (!selectionParentRoom) return null;
   if (!user.displayName && !user.email) return null;
@@ -209,11 +211,32 @@ const User = ({
     setIsScrollLocked(isOpen);
   };
 
+  const getTooltipContent = () => (
+    <div>
+      <Text fontSize="14px" fontWeight={600} noSelect truncate>
+        {decode(user.displayName)}
+      </Text>
+      <Text
+        className="label"
+        fontWeight={400}
+        fontSize="12px"
+        noSelect
+        truncate
+        color="#A3A9AE !important"
+        dir="auto"
+      >
+        {`${firstLetterToUppercase(role)} | ${user.email}`}
+      </Text>
+    </div>
+  );
+
   const userAvatar = user.hasAvatar ? user.avatar : DefaultUserPhotoUrl;
 
   const role = getUserRole(user);
 
   const withTooltip = user.isOwner || user.isAdmin;
+
+  const uniqueTooltipId = `userTooltip_${Math.random()}`;
 
   const tooltipContent = `${
     user.isOwner ? t("Common:DocSpaceOwner") : t("Common:DocSpaceAdmin")
@@ -248,12 +271,21 @@ const User = ({
       />
       <div className="user_body-wrapper">
         <div className="name-wrapper">
-          <div className="name">{decode(user.displayName)}</div>
+          <Text className="name" data-tooltip-id={uniqueTooltipId}>
+            {decode(user.displayName)}
+          </Text>
+          {showTooltip && (
+            <Tooltip
+              float
+              id={uniqueTooltipId}
+              getContent={getTooltipContent}
+              place="bottom"
+            />
+          )}
           {currentMember?.id === user.id && (
             <div className="me-label">&nbsp;{`(${t("Common:MeLabel")})`}</div>
           )}
         </div>
-
         <div className="role-email" style={{ display: "flex" }}>
           <Text
             className="label"

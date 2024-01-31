@@ -169,6 +169,14 @@ const Body = ({
         )
       ) : null}
 
+      {withTabs && tabsData && (
+        <StyledTabs
+          startSelect={0}
+          data={tabsData}
+          forsedActiveItemId={activeTabId}
+        />
+      )}
+
       {isSearchLoading || isBreadCrumbsLoading ? (
         searchLoader
       ) : withSearch || isSearch || (itemsCount > 0 && withSearch) ? (
@@ -179,14 +187,6 @@ const Body = ({
           onClearSearch={onClearSearch}
         />
       ) : null}
-
-      {withTabs && tabsData && (
-        <StyledTabs
-          startSelect={0}
-          data={tabsData}
-          forsedActiveItemId={activeTabId}
-        />
-      )}
 
       {isLoading ? (
         <Scrollbar style={{ height: listHeight }}>{rowLoader}</Scrollbar>

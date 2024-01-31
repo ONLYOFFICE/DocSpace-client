@@ -67,13 +67,13 @@ const StyledBody = styled.div<{
         ? `calc(100% - 16px - ${props.headerHeight}px)`
         : `calc(100% - 16px)`};
 
-  padding: 16px 0 0 0;
+  padding: ${({ withTabs }) => (withTabs ? "8px 0 0 0" : "16px 0 0 0")};
 
   .search-input,
   .search-loader {
     padding: 0 16px;
 
-    margin-bottom: ${({ withTabs }) => (withTabs ? "28px" : "12px")};
+    margin-bottom: 12px;
   }
 
   .body-description-text {
@@ -364,6 +364,11 @@ const StyledComboBox = styled(ComboBox)`
 
 const StyledTabs = styled(Submenu)`
   padding: 0 16px;
+  margin-bottom: 16px;
+
+  .sticky-indent {
+    height: 0;
+  }
 `;
 
 StyledSelector.defaultProps = { theme: Base };

@@ -1,27 +1,30 @@
 import React, { useState, useEffect } from "react";
+import { observer, inject } from "mobx-react";
+import difference from "lodash/difference";
+
 import { CampaignsBanner } from "@docspace/shared/components/campaigns-banner";
 import { ADS_TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getLanguage } from "@docspace/shared/utils";
 import { getCookie } from "@docspace/shared/utils";
 
-const Banner = () => {
+const Banner = ({ campaignsLs, setSubmitToGalleryDialogVisible }) => {
   const [campaignImage, setCampaignImage] = useState();
   const [campaignTranslate, setCampaignTranslate] = useState();
   const [campaignConfig, setCampaignConfig] = useState();
-
-  const campaigns = (localStorage.getItem("docspace_campaigns") || "")
-    .split(",")
-    .filter((campaign) => campaign.length > 0);
+  const [currentCampaign, setCurrentCampaign] = useState();
 
   const lng = getCookie(LANGUAGE) || "en";
   const language = getLanguage(lng instanceof Array ? lng[0] : lng);
 
-  const getImage = async (campaign) => {
-    const imageUrl = await window.firebaseHelper.getCampaignsImages(
-      campaign.toLowerCase()
-    );
+  const getCampaigns = () => {
+    const closedCampaigns =
+      JSON.parse(localStorage.getItem("closed_campaigns")) || [];
+    return difference(campaignsLs, closedCampaigns);
+  };
 
+  const getImage = async (campaign) => {
+    const imageUrl = await window.firebaseHelper.getCampaignsImages(campaign);
     return imageUrl;
   };
 
@@ -50,7 +53,15 @@ const Banner = () => {
 
   const getBanner = async () => {
     let index = Number(localStorage.getItem("bannerIndex") || 0);
+    const campaigns = getCampaigns();
+
+    if (campaigns?.length === 0) {
+      return setCurrentCampaign(null);
+    }
+
     const currentCampaign = campaigns[index];
+    setCurrentCampaign(currentCampaign);
+
     if (campaigns.length < 1 || index + 1 >= campaigns.length) {
       index = 0;
     } else {
@@ -68,6 +79,22 @@ const Banner = () => {
     setCampaignConfig(config);
   };
 
+  const onClose = () => {
+    const closedCampaigns =
+      JSON.parse(localStorage.getItem("closed_campaigns")) || [];
+    closedCampaigns.push(currentCampaign);
+    localStorage.setItem("closed_campaigns", JSON.stringify(closedCampaigns));
+    getBanner();
+  };
+
+  const onAction = (type, url) => {
+    if (type === "select-form") {
+      setSubmitToGalleryDialogVisible(true);
+    } else {
+      window.open(url, "_blank");
+    }
+  };
+
   useEffect(() => {
     getBanner();
     const adsInterval = setInterval(getBanner, ADS_TIMEOUT);
@@ -76,15 +103,22 @@ const Banner = () => {
 
   return (
     <>
-      {campaignImage && campaignTranslate && campaignConfig && (
-        <CampaignsBanner
-          campaignImage={campaignImage}
-          campaignTranslate={campaignTranslate}
-          campaignConfig={campaignConfig}
-        />
-      )}
+      {campaignImage &&
+        campaignTranslate &&
+        campaignConfig &&
+        currentCampaign && (
+          <CampaignsBanner
+            campaignImage={campaignImage}
+            campaignTranslate={campaignTranslate}
+            campaignConfig={campaignConfig}
+            onAction={onAction}
+            onClose={onClose}
+          />
+        )}
     </>
   );
 };
 
-export default Banner;
+export default inject(({ dialogsStore }) => ({
+  setSubmitToGalleryDialogVisible: dialogsStore.setSubmitToGalleryDialogVisible,
+}))(observer(Banner));

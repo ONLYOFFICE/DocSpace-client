@@ -242,7 +242,7 @@ const ArticleBodyContent = (props) => {
       />
 
       {!isDesktopClient && showText && !firstLoad && campaigns.length > 0 && (
-        <Banner FirebaseHelper={FirebaseHelper} />
+        <Banner FirebaseHelper={FirebaseHelper} campaignsLs={campaigns} />
       )}
     </>
   );

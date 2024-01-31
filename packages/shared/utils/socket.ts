@@ -11,7 +11,7 @@ let client: Socket<DefaultEventsMap, DefaultEventsMap> | null = null;
 let callbacks: { eventName: string; callback: (value: TOnCallback) => void }[] =
   [];
 
-const subscribers = new Set();
+const subscribers = new Set<string>();
 
 export type TOptSocket = {
   featureId: string;

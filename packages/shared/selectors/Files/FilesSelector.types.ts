@@ -30,7 +30,7 @@ export type UseSocketHelperProps = {
   setTotal: React.Dispatch<React.SetStateAction<number>>;
   disabledItems: string[] | number[];
   filterParam?: string;
-  getIcon: (size: number, fileExst: string) => string;
+  getIcon: (fileExst: string) => string;
 };
 
 export type UseRoomsHelperProps = {
@@ -79,7 +79,7 @@ export type UseFilesHelpersProps = {
     isInit?: boolean,
     isErrorPath?: boolean,
   ) => Promise<void>;
-  getIcon: (size: number, fileExst: string) => string;
+  getIcon: (fileExst: string) => string;
   getFilesArchiveError: (name: string) => string;
 };
 
@@ -96,7 +96,7 @@ export interface FilesSelectorProps {
   socketSubscribers: Set<string>;
   disabledItems: string[] | number[];
   filterParam?: string;
-  getIcon: (size: number, fileExst: string) => string;
+  getIcon?: (size: number, fileExst: string) => string;
   treeFolders?: TFolder[];
   onSetBaseFolderPath?: (
     value: number | string | undefined | TBreadCrumb[],

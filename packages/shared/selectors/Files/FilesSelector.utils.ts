@@ -50,17 +50,17 @@ export const convertFoldersToItems: (
 
 export const convertFilesToItems: (
   files: TFile[],
-  getIcon: (size: number, fileExst: string) => string,
+  getIcon: (fileExst: string) => string,
   filterParam?: string,
 ) => TSelectorItem[] = (
   files: TFile[],
-  getIcon: (size: number, fileExst: string) => string,
+  getIcon: (fileExst: string) => string,
   filterParam?: string,
 ) => {
   const items = files.map((file) => {
     const { id, title, security, folderId, rootFolderType, fileExst } = file;
 
-    const icon = getIcon(32, fileExst || DEFAULT_FILE_EXTS);
+    const icon = getIcon(fileExst || DEFAULT_FILE_EXTS);
     const label = title.replace(fileExst, "") || fileExst;
 
     return {

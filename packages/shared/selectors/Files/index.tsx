@@ -28,13 +28,14 @@ import useRoomsHelper from "./hooks/useRoomsHelper";
 import useRootHelper from "./hooks/useRootHelper";
 import useSocketHelper from "./hooks/useSocketHelper";
 import { FilesSelectorProps } from "./FilesSelector.types";
+import useFilesSettings from "./hooks/useFilesSettings";
 
 const FilesSelector = ({
   socketHelper,
   socketSubscribers,
   disabledItems,
   filterParam,
-  getIcon,
+  getIcon: getIconProp,
 
   treeFolders,
   onSetBaseFolderPath,
@@ -105,6 +106,8 @@ const FilesSelector = ({
   const [isSelectedParentFolder, setIsSelectedParentFolder] =
     React.useState<boolean>(false);
   const [searchValue, setSearchValue] = React.useState<string>("");
+
+  const { getIcon } = useFilesSettings(getIconProp);
 
   const { subscribe, unsubscribe } = useSocketHelper({
     socketHelper,

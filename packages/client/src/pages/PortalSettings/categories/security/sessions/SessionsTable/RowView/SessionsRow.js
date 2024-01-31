@@ -110,6 +110,7 @@ const SessionsRow = (props) => {
     setLogoutAllDialogVisible,
     setDisableDialogVisible,
     setSessionModalData,
+    setUserSessionPanelVisible,
   } = props;
 
   const isChecked = checkedProps.checked;
@@ -124,6 +125,7 @@ const SessionsRow = (props) => {
 
   const onClickSessions = () => {
     setSessionModalData({ ...item });
+    setUserSessionPanelVisible(true);
   };
 
   const onClickLogout = () => {
@@ -140,7 +142,7 @@ const SessionsRow = (props) => {
       key: "ViewSessions",
       label: t("Settings:ViewSessions"),
       icon: HistoryFinalizedReactSvgUrl,
-      onClick: () => onClickSessions,
+      onClick: onClickSessions,
     },
     {
       key: "LogoutAllSessions",
@@ -188,7 +190,8 @@ const SessionsRow = (props) => {
   );
 };
 
-export default inject(({ setup }) => {
+export default inject(({ setup, dialogsStore }) => {
+  const { setUserSessionPanelVisible } = dialogsStore;
   const {
     setLogoutAllDialogVisible,
     setDisableDialogVisible,
@@ -199,5 +202,6 @@ export default inject(({ setup }) => {
     setLogoutAllDialogVisible,
     setDisableDialogVisible,
     setSessionModalData,
+    setUserSessionPanelVisible,
   };
 })(withContent(observer(SessionsRow)));

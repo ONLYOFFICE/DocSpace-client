@@ -64,6 +64,7 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import { getLogoFromPath } from "@docspace/shared/utils";
+import TariffBar from "SRC_DIR/components/TariffBar";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -1112,6 +1113,7 @@ const SectionHeaderContent = (props) => {
                 showRootFolderTitle={insideTheRoom}
                 currentDeviceType={currentDeviceType}
                 isFrame={isFrame}
+                tariffBar={<TariffBar />}
               />
             </div>
           )}

@@ -154,7 +154,7 @@ const Frame = styled(Box)`
   border: 1px solid #d0d5da;
 
   width: ${(props) => (props.width ? props.width : "100%")};
-  height: ${(props) => (props.height ? props.height : "400px")};
+  height: calc(${(props) => (props.height ? props.height : "400px")} + 2px);
 
   @media ${tablet} {
     margin-top: 4px;

@@ -32,6 +32,14 @@ const Sdk = ({
 }) => {
   const [isDataReady, setIsDataReady] = useState(false);
 
+  const formatsDescription = {
+    DOCX: t("Common:SelectDOCXFormat"),
+    DOCXF: t("Common:SelectDOCXFFormat"),
+    BackupOnly: t("Common:SelectBackupOnlyFormat"),
+    IMG: t("Common:SelectIMGFormat"),
+    XLSX: t("Common:SelectXLSXFormat"),
+  };
+
   useEffect(() => {
     window.addEventListener("message", handleMessage, false);
     return () => {
@@ -234,6 +242,7 @@ const Sdk = ({
           acceptButtonLabel={frameConfig?.acceptButtonLabel}
           cancelButtonLabel={frameConfig?.cancelButtonLabel}
           currentFolderId={frameConfig?.id}
+          descriptionText={formatsDescription[frameConfig?.filterParam || "DOCX"]}
         />
       );
       break;
@@ -271,4 +280,4 @@ export default inject(
       getFilePrimaryLink,
     };
   }
-)(withTranslation(["JavascriptSdk"])(observer(Sdk)));
+)(withTranslation(["JavascriptSdk", "Common"])(observer(Sdk)));

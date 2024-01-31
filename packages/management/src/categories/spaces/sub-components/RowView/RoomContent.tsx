@@ -36,13 +36,13 @@ export const RoomContent = ({ item, isCurrentPortal }: TRoomContent) => {
     usersCount: null,
     roomsCount: null,
   };
-  const { quota, usedSize } = item || {
-    quota: null,
-    usedSize: null,
-  };
+  const { quota, usedSize } = item;
 
-  const maxStorage = quota >= 0 ? getConvertedSize(t, quota) : null;
+  const maxStorage = quota && getConvertedSize(t, quota);
   const usedStorage = getConvertedSize(t, usedSize);
+
+  const storageSpace =
+    quota >= 0 ? `${usedStorage}/${maxStorage}` : `${usedStorage}`;
 
   return (
     <StyledRowContent
@@ -71,8 +71,7 @@ export const RoomContent = ({ item, isCurrentPortal }: TRoomContent) => {
         {`${t("PortalStats", {
           roomCount: roomsCount,
           userCount: roomAdminCount + usersCount,
-          usedStorage,
-          maxStorage,
+          storageSpace,
         })}`}
       </Text>
     </StyledRowContent>

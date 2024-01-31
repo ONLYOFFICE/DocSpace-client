@@ -233,9 +233,12 @@ const RoomSelector = (props) => {
   const codeBlock = `<div id="${frameId}">Fallback text</div>\n<script src="${scriptUrl}${params}"></script>`;
 
   const preview = (
-    <Frame width={width} height={width} targetId={frameId}>
+    <Frame
+      width={width + widthDimension.label}
+      height={height + heightDimension.label}
+      targetId={frameId}
+    >
       <Box id={frameId}></Box>
-      <RectangleSkeleton width={width} height={height} borderRadius="6px" />
     </Frame>
   );
 

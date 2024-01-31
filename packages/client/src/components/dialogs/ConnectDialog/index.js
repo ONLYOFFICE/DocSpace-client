@@ -287,6 +287,7 @@ const PureConnectDialogContainer = (props) => {
             )}
 
             <FieldContainer
+              labelVisible
               labelText={t("Login")}
               isRequired
               isVertical
@@ -305,6 +306,7 @@ const PureConnectDialogContainer = (props) => {
               />
             </FieldContainer>
             <FieldContainer
+              labelVisible
               labelText={t("Common:Password")}
               isRequired
               isVertical

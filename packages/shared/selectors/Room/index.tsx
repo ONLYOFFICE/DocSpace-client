@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import EmptyScreenCorporateSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate.svg?url";
@@ -43,6 +43,7 @@ const RoomSelector = ({
   selectAllIcon,
   onSelectAll,
 
+  setIsDataReady,
   withAccessRights,
   accessRights,
   selectedAccessRight,
@@ -72,26 +73,35 @@ const RoomSelector = ({
 
   const [items, setItems] = React.useState<TSelectorItem[]>([]);
 
+  useEffect(() => {
+    setIsDataReady(!isFirstLoad);
+  }, [isFirstLoad]);
+
   const onSearchAction = React.useCallback(
-    (value: string) => {
+    (value: string, callback?: Function) => {
       onSearch?.(value);
       setSearchValue(() => {
         setIsFirstLoad(true);
 
         return value;
       });
+      callback?.();
     },
     [onSearch],
   );
 
-  const onClearSearchAction = React.useCallback(() => {
-    onClearSearch?.();
-    setSearchValue(() => {
-      setIsFirstLoad(true);
+  const onClearSearchAction = React.useCallback(
+    (callback?: Function) => {
+      onClearSearch?.();
+      setSearchValue(() => {
+        setIsFirstLoad(true);
 
-      return "";
-    });
-  }, [onClearSearch]);
+        return "";
+      });
+      callback?.();
+    },
+    [onClearSearch],
+  );
 
   const onLoadNextPage = React.useCallback(
     async (startIndex: number) => {
@@ -207,3 +217,4 @@ const RoomSelector = ({
 };
 
 export default RoomSelector;
+

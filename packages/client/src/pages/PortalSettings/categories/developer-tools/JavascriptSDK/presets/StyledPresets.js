@@ -41,7 +41,7 @@ export const Controls = styled(Box)`
 
 export const CategoryHeader = styled.div`
   margin-top: 40px;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
   font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
   font-style: normal;
   font-weight: 700;
@@ -130,25 +130,27 @@ export const Frame = styled(Box)`
   margin-top: 16px;
   position: relative;
 
+  border-radius: 6px;
+  border: 1px solid #d0d5da;
+
+  width: ${(props) => (props.width ? props.width : "100%")};
+  height: ${(props) => (props.height ? props.height : "400px")};
+
   @media ${tablet} {
     margin-top: 4px;
   }
-
-  ${isMobile() &&
-  css`
-    margin-top: 4px;
-  `}
 
   ${(props) =>
     props.targetId &&
     `
     #${props.targetId} {
-      position: absolute;
       border-radius: 6px;
-      border: 1px solid #d0d5da;
-      min-width: ${props.width ? props.width : "100%"};
-      min-height: ${props.height ? props.height : "400px"};
     }
+  `}
+
+  ${isMobile() &&
+  css`
+    margin-top: 4px;
   `}
 `;
 

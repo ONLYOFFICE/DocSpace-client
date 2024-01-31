@@ -136,7 +136,8 @@ class UsersStore {
       throw new Error(e);
     }
 
-    await this.getUsersList(filter, true);
+    // await this.getUsersList(filter, true); // accounts loader
+    await this.getUsersList(filter); // rooms
 
     if (users && !this.needResetUserSelection) {
       this.peopleStore.selectionStore.updateSelection(this.peopleList);

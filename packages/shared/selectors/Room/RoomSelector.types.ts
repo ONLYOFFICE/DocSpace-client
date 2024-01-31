@@ -5,6 +5,7 @@ import { RoomsType } from "../../enums";
 export interface RoomSelectorProps extends SelectorProps {
   excludeItems?: number[];
   roomType: RoomsType | 0;
+  setIsDataReady: (value: boolean) => void;
 }
 
 export type TItem = {
@@ -15,3 +16,4 @@ export type TItem = {
   logo: TLogo;
   roomType: RoomsType;
 };
+

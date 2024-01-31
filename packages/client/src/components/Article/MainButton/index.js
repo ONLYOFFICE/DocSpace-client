@@ -22,7 +22,6 @@ import { toastr } from "@docspace/shared/components/toast";
 import { Button } from "@docspace/shared/components/button";
 
 import { withTranslation } from "react-i18next";
-import Loaders from "@docspace/common/components/Loaders";
 import { encryptionUploadDialog } from "../../../helpers/desktop";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -34,6 +33,7 @@ import styled, { css } from "styled-components";
 
 import { resendInvitesAgain } from "@docspace/shared/api/people";
 import { getCorrectFourValuesStyle } from "@docspace/shared/utils";
+import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 
 const StyledButton = styled(Button)`
   font-weight: 700;
@@ -517,7 +517,7 @@ const ArticleMainButtonContent = (props) => {
   }
 
   if (showArticleLoader)
-    return isMobileArticle ? null : <Loaders.ArticleButton height="32px" />;
+    return isMobileArticle ? null : <ArticleButtonLoader height="32px" />;
 
   return (
     <>

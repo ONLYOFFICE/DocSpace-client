@@ -93,6 +93,8 @@ const Members = ({
     const users = [];
     const administrators = [];
     const expectedMembers = [];
+    const groups = [];
+
     data?.map((fetchedMember) => {
       const member = {
         access: fetchedMember.access,
@@ -108,6 +110,8 @@ const Members = ({
         member.access === ShareAccessRights.RoomManager
       ) {
         administrators.push(member);
+      } else if (member.isGroup) {
+        groups.push(member);
       } else {
         users.push(member);
       }
@@ -122,6 +126,19 @@ const Members = ({
       administrators.unshift({
         id: "administration",
         displayName: t("Administration"),
+        isTitle: true,
+      });
+    }
+
+    let hasPrevGroupsTitle =
+      members?.roomId === roomId && !clearFilter
+        ? getHasPrevTitle(members?.groups, "groups")
+        : false;
+
+    if (groups.length && !hasPrevGroupsTitle) {
+      groups.unshift({
+        id: "groups",
+        displayName: t("Common:Groups"),
         isTitle: true,
       });
     }
@@ -153,6 +170,7 @@ const Members = ({
 
     return {
       users,
+      groups,
       administrators,
       expected: expectedMembers,
       roomId,
@@ -206,7 +224,7 @@ const Members = ({
   const onRepeatInvitation = async () => {
     resendEmailInvitations(selectionParentRoom.id, true)
       .then(() =>
-        toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios"))
+        toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios")),
       )
       .catch((err) => toastr.error(err));
   };
@@ -214,11 +232,12 @@ const Members = ({
   const loadNextPage = async () => {
     const roomId = selectionParentRoom.id;
     const fetchedMembers = await fetchMembers(roomId, false);
-    const { users, administrators, expected } = fetchedMembers;
+    const { users, administrators, expected, groups } = fetchedMembers;
 
     const newMembers = {
       roomId: roomId,
       administrators: [...members.administrators, ...administrators],
+      groups: [...members.groups, ...groups],
       users: [...members.users, ...users],
       expected: [...members.expected, ...expected],
     };
@@ -234,17 +253,19 @@ const Members = ({
   else if (!members) return <></>;
 
   const [currentMember] = members.administrators.filter(
-    (member) => member.id === selfId
+    (member) => member.id === selfId,
   );
 
-  const { administrators, users, expected } = members;
-  const membersList = [...administrators, ...users, ...expected];
+  const { administrators, groups, users, expected } = members;
+  const membersList = [...administrators, ...groups, ...users, ...expected];
 
   const adminsTitleCount = administrators.length ? 1 : 0;
   const usersTitleCount = users.length ? 1 : 0;
   const expectedTitleCount = expected.length ? 1 : 0;
+  const groupsTitleCount = groups.length ? 1 : 0;
 
-  const headersCount = adminsTitleCount + usersTitleCount + expectedTitleCount;
+  const headersCount =
+    adminsTitleCount + usersTitleCount + expectedTitleCount + groupsTitleCount;
   const dataReadyMembersList = selection?.id === selectionParentRoom?.id;
 
   if (!dataReadyMembersList) return <></>;
@@ -273,7 +294,7 @@ const Members = ({
           <Text fontSize="14px" fontWeight={600}>
             {t("Files:GeneralLink")}
           </Text>
-        </LinksBlock>
+        </LinksBlock>,
       );
     }
 
@@ -283,7 +304,7 @@ const Members = ({
           key="general-link"
           link={primaryLink}
           setIsScrollLocked={setIsScrollLocked}
-        />
+        />,
       );
     } else if (!isArchiveFolder) {
       publicRoomItems.push(
@@ -298,7 +319,7 @@ const Members = ({
           >
             {t("Files:CreateAndCopy")}
           </Link>
-        </StyledLinkRow>
+        </StyledLinkRow>,
       );
     }
 
@@ -313,7 +334,7 @@ const Members = ({
             <div
               data-tooltip-id="emailTooltip"
               data-tooltip-content={t(
-                "Files:MaximumNumberOfExternalLinksCreated"
+                "Files:MaximumNumberOfExternalLinksCreated",
               )}
             >
               <IconButton
@@ -337,7 +358,7 @@ const Members = ({
               )}
             </div>
           )}
-        </LinksBlock>
+        </LinksBlock>,
       );
     }
 
@@ -348,7 +369,7 @@ const Members = ({
             link={link}
             key={link?.sharedTo?.id}
             setIsScrollLocked={setIsScrollLocked}
-          />
+          />,
         );
       });
     } else if (!isArchiveFolder && primaryLink) {
@@ -369,7 +390,7 @@ const Members = ({
           >
             {t("Files:CreateNewLink")}
           </Link>
-        </StyledLinkRow>
+        </StyledLinkRow>,
       );
     }
   }
@@ -509,8 +530,8 @@ export default inject(
       selectionItem?.length > 1
         ? null
         : isShowParentRoom
-        ? selectionParentRoom
-        : selectionItem;
+          ? selectionParentRoom
+          : selectionItem;
 
     return {
       setView,
@@ -553,7 +574,7 @@ export default inject(
       setExternalLink,
       withPublicRoomBlock,
     };
-  }
+  },
 )(
   withTranslation([
     "InfoPanel",
@@ -563,5 +584,5 @@ export default inject(
     "PeopleTranslations",
     "Settings",
     "CreateEditRoomDialog",
-  ])(observer(Members))
+  ])(observer(Members)),
 );

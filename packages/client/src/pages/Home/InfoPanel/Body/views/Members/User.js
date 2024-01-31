@@ -13,6 +13,7 @@ import { Text } from "@docspace/shared/components/text";
 import EmailPlusReactSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
 import { StyledUserTypeHeader } from "../../styles/members";
 import { IconButton } from "@docspace/shared/components/icon-button";
+import { Link } from "@docspace/shared/components/link";
 
 const User = ({
   t,
@@ -35,7 +36,7 @@ const User = ({
   hasNextPage,
 }) => {
   if (!selectionParentRoom) return null;
-  if (!user.displayName && !user.email) return null;
+  if (!user.displayName && !user.name && !user.email) return null;
 
   //const [userIsRemoved, setUserIsRemoved] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -45,7 +46,7 @@ const User = ({
 
   const fullRoomRoleOptions = membersHelper.getOptionsByRoomType(
     selectionParentRoom.roomType,
-    canChangeUserRole
+    canChangeUserRole,
   );
 
   const userRole = membersHelper.getOptionByUserAccess(user.access, user);
@@ -63,6 +64,7 @@ const User = ({
         const users = selectionParentRoom.members.users;
         const administrators = selectionParentRoom.members.administrators;
         const expectedMembers = selectionParentRoom.members.expected;
+        const groups = selectionParentRoom.members.groups;
         if (option.key === "remove") {
           const newMembersFilter = JSON.parse(JSON.stringify(membersFilter));
 
@@ -70,6 +72,7 @@ const User = ({
             users: users?.filter((m) => m.id !== user.id),
             administrators: administrators?.filter((m) => m.id !== user.id),
             expected: expectedMembers?.filter((m) => m.id !== user.id),
+            groups: groups?.filter((m) => m.id !== user.id),
           };
 
           const roomId = selectionParentRoom.id;
@@ -80,12 +83,15 @@ const User = ({
               : [];
           const newExpected =
             newMembers.expected.length > 1 ? newMembers?.expected : [];
+          const newGroups =
+            newMembers.groups.length > 1 ? newMembers?.groups : [];
 
           setMembers({
             roomId,
             users: newUsers,
             administrators: newAdministrators,
             expected: newExpected,
+            groups: newGroups,
           });
 
           newMembersFilter.total -= 1;
@@ -96,6 +102,7 @@ const User = ({
               users: newUsers,
               administrators: newAdministrators,
               expected: newExpected,
+              groups: newGroups,
             },
           });
 
@@ -107,7 +114,7 @@ const User = ({
             const fetchedMembers = await fetchMembers(
               selectionParentRoom.id,
               false,
-              newMembersFilter
+              newMembersFilter,
             );
 
             const newMembers = {
@@ -117,6 +124,7 @@ const User = ({
               ],
               users: [...newUsers, ...fetchedMembers.users],
               expected: [...newExpected, ...fetchedMembers.expected],
+              groups: [...newGroups, ...fetchedMembers.groups],
             };
 
             setMembers({
@@ -137,13 +145,16 @@ const User = ({
           setMembers({
             roomId: selectionParentRoom.id,
             users: users?.map((m) =>
-              m.id === user.id ? { ...m, access: option.access } : m
+              m.id === user.id ? { ...m, access: option.access } : m,
             ),
             administrators: administrators?.map((m) =>
-              m.id === user.id ? { ...m, access: option.access } : m
+              m.id === user.id ? { ...m, access: option.access } : m,
             ),
             expected: expectedMembers?.map((m) =>
-              m.id === user.id ? { ...m, access: option.access } : m
+              m.id === user.id ? { ...m, access: option.access } : m,
+            ),
+            groups: groups?.map((m) =>
+              m.id === user.id ? { ...m, access: option.access } : m,
             ),
           });
 
@@ -151,13 +162,16 @@ const User = ({
             ...selectionParentRoom,
             members: {
               users: users?.map((m) =>
-                m.id === user.id ? { ...m, access: option.access } : m
+                m.id === user.id ? { ...m, access: option.access } : m,
               ),
               administrators: administrators?.map((m) =>
-                m.id === user.id ? { ...m, access: option.access } : m
+                m.id === user.id ? { ...m, access: option.access } : m,
               ),
               expected: expectedMembers?.map((m) =>
-                m.id === user.id ? { ...m, access: option.access } : m
+                m.id === user.id ? { ...m, access: option.access } : m,
+              ),
+              groups: groups?.map((m) =>
+                m.id === user.id ? { ...m, access: option.access } : m,
               ),
             },
           });
@@ -206,7 +220,15 @@ const User = ({
     setIsScrollLocked(isOpen);
   };
 
-  const userAvatar = user.hasAvatar ? user.avatar : DefaultUserPhotoUrl;
+  const onOpenGroup = () => {
+    console.log("Open group: ", user.name);
+  };
+
+  const userAvatar = user.hasAvatar
+    ? user.avatar
+    : user.isGroup
+      ? ""
+      : DefaultUserPhotoUrl;
 
   const role = getUserRole(user);
 
@@ -238,15 +260,22 @@ const User = ({
         className="avatar"
         size="min"
         source={isExpect ? AtReactSvgUrl : userAvatar || ""}
-        userName={isExpect ? "" : user.displayName}
+        userName={isExpect ? "" : user.displayName || user.name}
         withTooltip={withTooltip}
         tooltipContent={tooltipContent}
         hideRoleIcon={!withTooltip}
+        isGroup={user.isGroup}
       />
 
-      <div className="name">
-        {isExpect ? user.email : decode(user.displayName) || user.email}
-      </div>
+      {user.isGroup ? (
+        <Link className="name" type="action" onClick={onOpenGroup}>
+          {decode(user.name)}
+        </Link>
+      ) : (
+        <div className="name">
+          {isExpect ? user.email : decode(user.displayName) || user.email}
+        </div>
+      )}
       {currentMember?.id === user.id && (
         <div className="me-label">&nbsp;{`(${t("Common:MeLabel")})`}</div>
       )}

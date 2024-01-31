@@ -42,9 +42,9 @@ const useFilesHelper = ({
   rootThirdPartyId,
   getRoomList,
   getIcon,
-  t,
   setIsSelectedParentFolder,
   roomsFolderId,
+  getFilesArchiveError,
 }: UseFilesHelpersProps) => {
   const getFileList = React.useCallback(
     async (
@@ -114,18 +114,16 @@ const useFilesHelper = ({
           if (folder.rootFolderType === FolderType.TRASH || isArchive) {
             if (isRoomsOnly && getRoomList) {
               await getRoomList(0, null, true, true);
-              toastr.error(
-                t("Files:ArchivedRoomAction", { name: folder.title }),
-              );
+              const error = getFilesArchiveError(folder.title);
+              toastr.error(error);
               return;
             }
             await getRootData();
 
             if (onSetBaseFolderPath && isArchive) {
               onSetBaseFolderPath?.([]);
-              toastr.error(
-                t("Files:ArchivedRoomAction", { name: folder.title }),
-              );
+              const error = getFilesArchiveError(folder.title);
+              toastr.error(error);
             }
 
             return;
@@ -253,7 +251,7 @@ const useFilesHelper = ({
       isRoomsOnly,
       getRoomList,
       onSetBaseFolderPath,
-      t,
+      getFilesArchiveError,
       isThirdParty,
       setBreadCrumbs,
       setIsBreadCrumbsLoading,

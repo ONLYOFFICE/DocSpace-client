@@ -36,7 +36,6 @@ const FilesSelector = ({
   filterParam,
   getIcon,
 
-  t,
   treeFolders,
   onSetBaseFolderPath,
   isUserOnly,
@@ -75,6 +74,7 @@ const FilesSelector = ({
   embedded,
   isPanelVisible,
   currentDeviceType,
+  getFilesArchiveError,
   setIsDataReady,
 }: FilesSelectorProps) => {
   const theme = useTheme();
@@ -176,9 +176,10 @@ const FilesSelector = ({
     rootThirdPartyId,
     getRoomList,
     getIcon,
-    t,
+
     setIsSelectedParentFolder,
     roomsFolderId,
+    getFilesArchiveError,
   });
 
   const onSelectAction = (item: TSelectorItem) => {

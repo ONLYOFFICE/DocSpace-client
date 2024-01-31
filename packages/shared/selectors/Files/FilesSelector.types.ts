@@ -2,7 +2,6 @@ import { TSelectorItem } from "../../components/selector";
 import { TBreadCrumb } from "../../components/selector/Selector.types";
 import { TFileSecurity, TFolder, TFolderSecurity } from "../../api/files/types";
 import SocketIOHelper from "../../utils/socket";
-import { TTranslation } from "../../types";
 import { DeviceType, FolderType } from "../../enums";
 import { TRoomSecurity } from "../../api/rooms/types";
 
@@ -81,7 +80,7 @@ export type UseFilesHelpersProps = {
     isErrorPath?: boolean,
   ) => Promise<void>;
   getIcon: (size: number, fileExst: string) => string;
-  t: TTranslation;
+  getFilesArchiveError: (name: string) => string;
 };
 
 export type TSelectedFileInfo = {
@@ -98,8 +97,6 @@ export interface FilesSelectorProps {
   disabledItems: string[] | number[];
   filterParam?: string;
   getIcon: (size: number, fileExst: string) => string;
-
-  t: TTranslation;
   treeFolders?: TFolder[];
   onSetBaseFolderPath?: (
     value: number | string | undefined | TBreadCrumb[],
@@ -161,4 +158,5 @@ export interface FilesSelectorProps {
   embedded?: boolean;
   isPanelVisible: boolean;
   currentDeviceType: DeviceType;
+  getFilesArchiveError: (name: string) => string;
 }

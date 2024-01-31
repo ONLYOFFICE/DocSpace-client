@@ -16,6 +16,7 @@ import { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
 import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
+import { TTranslation } from "@docspace/shared/types";
 
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 import FilesActionStore from "SRC_DIR/store/FilesActionsStore";
@@ -100,7 +101,11 @@ const FilesSelectorWrapper = ({
 
   roomsFolderId,
 }: FilesSelectorProps) => {
-  const { t } = useTranslation(["Files", "Common", "Translations"]);
+  const { t }: { t: TTranslation } = useTranslation([
+    "Files",
+    "Common",
+    "Translations",
+  ]);
 
   const [isRequestRunning, setIsRequestRunning] =
     React.useState<boolean>(false);
@@ -128,6 +133,9 @@ const FilesSelectorWrapper = ({
     setSelected("none");
     onCloseAction();
   };
+
+  const getFilesArchiveError = (name: string) =>
+    t("Files:ArchivedRoomAction", { name });
 
   const onAccept = async (
     selectedItemId: string | number | undefined,
@@ -280,7 +288,6 @@ const FilesSelectorWrapper = ({
       filterParam={filterParam}
       getIcon={getIcon}
       setIsDataReady={setIsDataReady}
-      t={t}
       treeFolders={treeFolders}
       onSetBaseFolderPath={onSetBaseFolderPath}
       isUserOnly={isUserOnly}
@@ -324,6 +331,7 @@ const FilesSelectorWrapper = ({
       cancelButtonId={
         isMove || isCopy || isRestore ? "select-file-modal-cancel" : ""
       }
+      getFilesArchiveError={getFilesArchiveError}
     />
   );
 };

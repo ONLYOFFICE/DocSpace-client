@@ -20,7 +20,7 @@ const ChangeQuotaEvent = (props) => {
     abortCallback,
     initialSize,
     inRoom,
-    calculateSelection,
+    setNewInfoPanelSelection,
     needResetSelection,
     getPeopleListItem,
     setInfoPanelSelection,
@@ -61,7 +61,7 @@ const ChangeQuotaEvent = (props) => {
 
           setInfoPanelSelection(user);
         } else {
-          setInfoPanelSelection(calculateSelection());
+          setNewInfoPanelSelection();
         }
       }
     } catch (e) {
@@ -112,7 +112,7 @@ export default inject(({ peopleStore, filesStore, auth }, { type }) => {
   const { defaultUsersQuota, defaultRoomsQuota } = currentQuotaStore;
   const {
     selection: infoPanelSelection,
-    calculateSelection,
+    setNewInfoPanelSelection,
     setInfoPanelSelection,
   } = infoPanelStore;
 
@@ -127,7 +127,7 @@ export default inject(({ peopleStore, filesStore, auth }, { type }) => {
     setCustomUserQuota,
     updateRoomQuota,
     inRoom,
-    calculateSelection,
+    setNewInfoPanelSelection,
     getPeopleListItem,
     needResetSelection,
     setInfoPanelSelection,

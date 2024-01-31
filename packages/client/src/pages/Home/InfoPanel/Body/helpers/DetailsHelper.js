@@ -79,8 +79,7 @@ class DetailsHelper {
     this.isCollaborator = props.isCollaborator;
     this.selectTag = props.selectTag;
     this.isDefaultRoomsQuotaSet = props.isDefaultRoomsQuotaSet;
-    this.setSelection = props.setSelection;
-    this.calculateSelection = props.calculateSelection;
+    this.setNewInfoPanelSelection = props.setNewInfoPanelSelection;
   }
 
   getPropertyList = () => {
@@ -328,7 +327,7 @@ class DetailsHelper {
 
   getQuotaItem = () => {
     const onSuccess = () => {
-      this.setSelection(this.calculateSelection());
+      this.setNewInfoPanelSelection();
     };
 
     if (this.item.usedSpace !== undefined) {

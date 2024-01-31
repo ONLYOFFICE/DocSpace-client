@@ -442,12 +442,12 @@ export const frameCallCommand = (commandName: string, commandData: unknown) => {
   );
 };
 
-export const getPowerFromBytes = (bytes, maxPower = 6) => {
+export const getPowerFromBytes = (bytes: number, maxPower = 6) => {
   const power = Math.floor(Math.log(bytes) / Math.log(1024));
   return power <= maxPower ? power : maxPower;
 };
 
-export const getSizeFromBytes = (bytes, power) => {
+export const getSizeFromBytes = (bytes: number, power: number) => {
   return parseFloat((bytes / Math.pow(1024, power)).toFixed(2));
 };
 
@@ -475,16 +475,19 @@ export const getConvertedSize = (t: (key: string) => string, bytes: number) => {
   return `${resultSize} ${sizeNames[power]}`;
 };
 
-export const getConvertedQuota = (t, bytes) => {
+export const getConvertedQuota = (
+  t: (key: string) => string,
+  bytes: number,
+) => {
   if (bytes === -1) return t("Common:Unlimited");
   return getConvertedSize(t, bytes);
 };
 
 export const getSpaceQuotaAsText = (
-  t,
-  usedSpace,
-  quotaLimit,
-  isDefaultQuotaSet,
+  t: (key: string) => string,
+  usedSpace: number,
+  quotaLimit: number,
+  isDefaultQuotaSet: boolean,
 ) => {
   const usedValue = getConvertedQuota(t, usedSpace);
   const quotaValue = getConvertedQuota(t, quotaLimit);
@@ -494,7 +497,7 @@ export const getSpaceQuotaAsText = (
   return usedValue;
 };
 
-export const conversionToBytes = (size, power) => {
+export const conversionToBytes = (size: number, power: number) => {
   const value = Math.floor(size) * Math.pow(1024, power);
   return value.toString();
 };

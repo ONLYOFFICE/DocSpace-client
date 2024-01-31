@@ -30,9 +30,11 @@ export type TPortals = {
   portalName: string;
   status: string;
   tenantId: number;
-  owner: TOwner,
+  owner: TOwner;
   timeZoneName: string;
-  quotaUsage: TQuotaUsage
+  quotaUsage: TQuotaUsage;
+  quota: number;
+  usedSize: number;
 };
 
 export type TNewPortalData = {

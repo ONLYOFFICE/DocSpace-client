@@ -1,0 +1,11 @@
+{
+  "extends": "../shared/tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "./",
+    "baseUrl": "./",
+    "paths": {
+      "PUBLIC_DIR/*": ["../../public/*"],
+      "SRC_DIR/*": ["./src/*"],
+    },
+  },
+}

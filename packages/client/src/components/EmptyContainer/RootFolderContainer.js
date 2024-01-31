@@ -75,7 +75,7 @@ const RootFolderContainer = (props) => {
   const noFilesHeader = t("NoFilesHereYet");
   const trashDescription = t("TrashEmptyDescription");
   const favoritesDescription = t("FavoritesEmptyContainerDescription");
-  const recentDescription = t("RecentEmptyContainerDescription");
+  const recentDescription = t("RecentViaLinkEmptyContainerDescription");
 
   const roomsDescription =
     isVisitor || isCollaborator
@@ -294,7 +294,7 @@ const RootFolderContainer = (props) => {
   const goToPersonalButtons = (
     <div className="empty-folder_container-links">
       <img
-        className="empty-folder_container-image"
+        className="empty-folder_container-icon"
         src={PersonSvgUrl}
         alt="person_icon"
         onClick={onGoToPersonal}
@@ -332,14 +332,15 @@ const RootFolderContainer = (props) => {
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     filesStore,
     treeFoldersStore,
     selectedFolderStore,
     clientLoadingStore,
+    userStore,
   }) => {
     const { isDesktopClient, isEncryptionSupport, organizationName, theme } =
-      auth.settingsStore;
+      settingsStore;
 
     const { setIsSectionFilterLoading } = clientLoadingStore;
 
@@ -356,8 +357,8 @@ export default inject(
       theme,
       isPrivacyFolder,
       isDesktop: isDesktopClient,
-      isVisitor: auth?.userStore?.user?.isVisitor,
-      isCollaborator: auth?.userStore?.user?.isCollaborator,
+      isVisitor: userStore?.user?.isVisitor,
+      isCollaborator: userStore?.user?.isCollaborator,
       isEncryptionSupport,
       organizationName,
       privacyInstructions,

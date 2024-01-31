@@ -11,7 +11,7 @@ import {
 import { makeAutoObservable, runInAction } from "mobx";
 
 class WebhooksStore {
-  authStore;
+  settingsStore;
 
   webhooks = [];
   checkedEventIds = [];
@@ -36,10 +36,10 @@ class WebhooksStore {
     specSymbolsRegexStr: "(?=.*[\\x21-\\x2F\\x3A-\\x40\\x5B-\\x60\\x7B-\\x7E])",
   };
 
-  constructor(authStore) {
+  constructor(settingsStore) {
     makeAutoObservable(this);
 
-    this.authStore = authStore;
+    this.settingsStore = settingsStore;
   }
 
   setRetryPendingFalse = () => {
@@ -55,8 +55,7 @@ class WebhooksStore {
   };
 
   loadWebhooks = async () => {
-    const { passwordSettings, getPortalPasswordSettings } =
-      this.authStore.settingsStore;
+    const { passwordSettings, getPortalPasswordSettings } = this.settingsStore;
 
     try {
       const webhooksData = await getAllWebhooks();
@@ -98,10 +97,6 @@ class WebhooksStore {
         ssl: webhookData.ssl,
       },
     ];
-  };
-
-  isWebhookExist = (desiredWebhook) => {
-    return this.webhooks.some((webhook) => webhook.id === desiredWebhook.id);
   };
 
   toggleEnabled = async (desiredWebhook) => {

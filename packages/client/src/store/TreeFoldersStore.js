@@ -4,7 +4,7 @@ import { FolderType } from "@docspace/shared/enums";
 
 class TreeFoldersStore {
   selectedFolderStore;
-  authStore;
+  settingsStore;
   publicRoomStore;
 
   treeFolders = [];
@@ -13,11 +13,11 @@ class TreeFoldersStore {
   rootFoldersTitles = {};
   isLoadingNodes = false;
 
-  constructor(selectedFolderStore, authStore, publicRoomStore) {
+  constructor(selectedFolderStore, settingsStore, publicRoomStore) {
     makeAutoObservable(this);
 
     this.selectedFolderStore = selectedFolderStore;
-    this.authStore = authStore;
+    this.settingsStore = settingsStore;
     this.publicRoomStore = publicRoomStore;
   }
 
@@ -32,7 +32,7 @@ class TreeFoldersStore {
   };
 
   listenTreeFolders = (treeFolders) => {
-    const { socketHelper } = this.authStore.settingsStore;
+    const { socketHelper } = this.settingsStore;
 
     if (treeFolders.length > 0) {
       socketHelper.emit({
@@ -296,6 +296,10 @@ class TreeFoldersStore {
 
   get isPersonalFolderRoot() {
     return FolderType.USER === this.selectedFolderStore.rootFolderType;
+  }
+
+  get isRecentTab() {
+    return this.selectedFolderStore.rootFolderType === FolderType.Recent;
   }
 
   get selectedKeys() {

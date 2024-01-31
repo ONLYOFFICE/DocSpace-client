@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { Loader } from "@docspace/shared/components/loader";
-import Section from "@docspace/common/components/Section";
+import Section from "@docspace/shared/components/section";
 import { loginWithConfirmKey } from "@docspace/shared/api/user";
 import { useSearchParams } from "react-router-dom";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { toastr } from "@docspace/shared/components/toast";
 import { frameCallEvent } from "@docspace/shared/utils/common";
-
+import SectionWrapper from "SRC_DIR/components/Section";
 const Auth = (props) => {
   //console.log("Auth render");
   const { linkData } = props;
@@ -42,11 +42,11 @@ const Auth = (props) => {
 };
 
 const AuthPage = (props) => (
-  <Section>
+  <SectionWrapper>
     <Section.SectionBody>
       <Auth {...props} />
     </Section.SectionBody>
-  </Section>
+  </SectionWrapper>
 );
 
 export default AuthPage;

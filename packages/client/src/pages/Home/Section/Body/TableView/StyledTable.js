@@ -415,6 +415,17 @@ const StyledBadgesContainer = styled.div`
     }
   }
 
+  .bagde_alert {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin: 0 -2px -2px 5px;
+          `
+        : css`
+            margin: 0 5px -2px -2px;
+          `}
+  }
+
   .badge-new-version {
     width: max-content;
   }

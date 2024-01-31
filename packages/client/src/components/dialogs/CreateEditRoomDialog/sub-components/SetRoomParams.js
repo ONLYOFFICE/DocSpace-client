@@ -20,6 +20,9 @@ import { ImageEditor } from "@docspace/shared/components/image-editor";
 import PreviewTile from "@docspace/shared/components/image-editor/PreviewTile";
 import { Text } from "@docspace/shared/components/text";
 
+import SystemFolders from "./SystemFolders";
+import { RoomsType } from "@docspace/shared/enums";
+
 import ChangeRoomOwner from "./ChangeRoomOwner";
 
 const StyledSetRoomParams = styled.div`
@@ -60,6 +63,8 @@ const SetRoomParams = ({
   folderFormValidation,
 }) => {
   const [previewIcon, setPreviewIcon] = React.useState(null);
+
+  const isFormRoom = roomParams.type === RoomsType.FormRoom;
 
   const onChangeName = (e) => {
     setIsValidTitle(true);
@@ -141,6 +146,7 @@ const SetRoomParams = ({
           onChangeIsPrivate={onChangeIsPrivate}
         />
       )} */}
+      {isFormRoom && <SystemFolders t={t} />}
 
       {isEdit && (
         <ChangeRoomOwner
@@ -191,9 +197,9 @@ const SetRoomParams = ({
   );
 };
 
-export default inject(({ auth, dialogsStore }) => {
+export default inject(({ settingsStore, dialogsStore }) => {
   const { setChangeRoomOwnerIsVisible } = dialogsStore;
-  const { folderFormValidation } = auth.settingsStore;
+  const { folderFormValidation } = settingsStore;
 
   return {
     folderFormValidation,

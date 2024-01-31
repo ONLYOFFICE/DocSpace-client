@@ -26,8 +26,7 @@ const RoomsModule = (props) => {
   );
 };
 
-export default inject(({ auth, backup }) => {
-  const { currentQuotaStore } = auth;
+export default inject(({ currentQuotaStore, backup }) => {
   const { setRestoreResource } = backup;
   const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
 

@@ -24,7 +24,7 @@ import { EditorWrapper } from "../components/StyledEditor";
 import { useTranslation } from "react-i18next";
 import withDialogs from "../helpers/withDialogs";
 import { assign, frameCallEvent } from "@docspace/shared/utils/common";
-import { getEditorTheme } from "@docspace/shared/utils";
+import { getEditorTheme, frameCallCommand } from "@docspace/shared/utils";
 import { toastr } from "@docspace/shared/components/toast";
 import { DocumentEditor } from "@onlyoffice/document-editor-react";
 import ErrorContainer from "@docspace/common/components/ErrorContainer";
@@ -97,14 +97,14 @@ function Editor({
   config,
   //personal,
   successAuth,
-  // isSharingAccess,
+  isSharingAccess,
   user,
   doc,
   error,
-  // sharingDialog,
-  // onSDKRequestSharingSettings,
-  // loadUsersRightsList,
-  // isVisible,
+  sharingDialog,
+  onSDKRequestSharingSettings,
+  loadUsersRightsList,
+  isVisible,
   selectFileDialog,
   onSDKRequestInsertImage,
   onSDKRequestSelectSpreadsheet,
@@ -197,6 +197,7 @@ function Editor({
       fileInfo &&
       fileInfo.viewAccessibility.WebRestrictedEditing &&
       fileInfo.security.FillForms &&
+      fileInfo.rootFolderType === FolderType.Rooms &&
       !fileInfo.security.Edit &&
       !config?.document?.isLinkedForMe
     ) {
@@ -271,10 +272,10 @@ function Editor({
       documentType === "word"
         ? "docx"
         : documentType === "slide"
-          ? "pptx"
-          : documentType === "cell"
-            ? "xlsx"
-            : "docxf";
+        ? "pptx"
+        : documentType === "cell"
+        ? "xlsx"
+        : "docxf";
 
     let fileName = t("Common:NewDocument");
 
@@ -478,7 +479,12 @@ function Editor({
 
   const onSDKRequestHistory = async () => {
     try {
-      const fileHistory = await getEditHistory(fileId, doc);
+      const search = window.location.search;
+      const shareIndex = search.indexOf("share=");
+      const requestToken =
+        shareIndex > -1 ? search.substring(shareIndex + 6) : null;
+
+      const fileHistory = await getEditHistory(fileId, doc, requestToken);
       const historyLength = fileHistory.length;
 
       docEditor.refreshHistory({
@@ -506,7 +512,17 @@ function Editor({
     const version = event.data;
 
     try {
-      const versionDifference = await getEditDiff(fileId, version, doc);
+      const search = window.location.search;
+      const shareIndex = search.indexOf("share=");
+      const requestToken =
+        shareIndex > -1 ? search.substring(shareIndex + 6) : null;
+
+      const versionDifference = await getEditDiff(
+        fileId,
+        version,
+        doc,
+        requestToken
+      );
       const changesUrl = versionDifference.changesUrl;
       const previous = versionDifference.previous;
       const token = versionDifference.token;
@@ -551,9 +567,11 @@ function Editor({
 
     config?.errorMessage && docEditor?.showMessage(config.errorMessage);
 
-    // if (isSharingAccess) {
-    //   loadUsersRightsList(docEditor);
-    // }
+    if (isSharingAccess) {
+      loadUsersRightsList(docEditor);
+    }
+
+    frameCallCommand("setIsLoaded");
 
     assign(window, ["ASC", "Files", "Editor", "docEditor"], docEditor); //Do not remove: it's for Back button on Mobile App
   };
@@ -796,7 +814,7 @@ function Editor({
         };
       }
 
-      let //onRequestSharingSettings,
+      let onRequestSharingSettings,
         onRequestRename,
         onRequestSaveAs,
         onRequestInsertImage,
@@ -838,9 +856,9 @@ function Editor({
         }
       }
 
-      // if (isSharingAccess) {
-      //   onRequestSharingSettings = onSDKRequestSharingSettings;
-      // }
+      if (isSharingAccess) {
+        onRequestSharingSettings = onSDKRequestSharingSettings;
+      }
 
       if (userAccessRights.Rename) {
         onRequestRename = onSDKRequestRename;
@@ -859,6 +877,12 @@ function Editor({
         onRequestSelectSpreadsheet = onSDKRequestSelectSpreadsheet;
         onRequestSelectDocument = onSDKRequestSelectDocument;
         onRequestReferenceSource = onSDKRequestReferenceSource;
+
+        if (fileInfo?.rootFolderType !== FolderType.USER) {
+          //TODO: remove condition for share in my
+          onRequestUsers = onSDKRequestUsers;
+          onRequestSendNotify = onSDKRequestSendNotify;
+        }
       }
 
       if (userAccessRights.EditHistory) {
@@ -871,11 +895,6 @@ function Editor({
         if (!isZoom) {
           onRequestOpen = onSDKRequestOpen;
         }
-      }
-
-      if (fileInfo?.rootFolderType !== FolderType.USER) {
-        onRequestUsers = onSDKRequestUsers;
-        onRequestSendNotify = onSDKRequestSendNotify;
       }
 
       if (window.DocSpaceConfig?.editor?.requestClose) {
@@ -893,7 +912,7 @@ function Editor({
           onInfo: onSDKInfo,
           onWarning: onSDKWarning,
           onError: onSDKError,
-          // onRequestSharingSettings,
+          onRequestSharingSettings,
           onRequestRename,
           onMakeActionLink: onMakeActionLink,
           onRequestInsertImage,
@@ -934,7 +953,7 @@ function Editor({
       />
     ) : (
       <>
-        {/* {sharingDialog} */}
+        {sharingDialog}
         {selectFileDialog}
         {selectFolderDialog}
       </>
@@ -953,9 +972,7 @@ function Editor({
     );
 
   return (
-    <EditorWrapper
-    // isVisibleSharingDialog={isVisible}
-    >
+    <EditorWrapper isVisibleSharingDialog={isVisible}>
       {newConfig && (
         <DocumentEditor
           id={EDITOR_ID}

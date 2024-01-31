@@ -1,3 +1,5 @@
+import moment from "moment-timezone";
+
 import { isArrayEqual } from "./array";
 import * as email from "./email";
 import { EmailSettings, parseAddress, parseAddresses } from "./email";
@@ -38,11 +40,13 @@ import { commonInputStyles } from "./commonInputStyles";
 import { commonTextStyles } from "./commonTextStyles";
 import {
   RoomsTypeValues,
+  RoomsTypes,
   getSystemTheme,
   getEditorTheme,
   getLogoFromPath,
   isBetaLanguage,
 } from "./common";
+import { isNumber } from "./typeGuards";
 
 export type { TInterfaceDirection };
 
@@ -52,6 +56,7 @@ export {
   getSystemTheme,
   getEditorTheme,
   RoomsTypeValues,
+  RoomsTypes,
   parseAddresses,
   NoUserSelect,
   commonInputStyles,
@@ -91,8 +96,13 @@ export {
   handleAnyClick,
   DomHelpers,
   ObjectUtils,
+  isNumber,
 };
 
 export const getModalType = () => {
   return window.innerWidth < size.desktop ? "aside" : "modal";
+};
+
+export const isValidDate = (date: Date) => {
+  return moment(date).tz(window.timezone).year() !== 9999;
 };

@@ -124,7 +124,7 @@ const SubmitToFormGallery = ({
             Learn how to create perfect forms and increase your chance to get
             approval in our
             <Link
-              color={currentColorScheme.main.accent}
+              color={currentColorScheme.main?.accent}
               href="https://www.onlyoffice.com/blog/2022/07/when-design-matters-how-to-create-beautiful-forms-with-oforms"
               type={"page"}
               target={"_blank"}
@@ -190,13 +190,19 @@ const SubmitToFormGallery = ({
 };
 
 export default inject(
-  ({ auth, accessRightsStore, dialogsStore, settingsStore, oformsStore }) => ({
+  ({
+    accessRightsStore,
+    dialogsStore,
+    settingsStore,
+    filesSettingsStore,
+    oformsStore,
+  }) => ({
     visible: dialogsStore.submitToGalleryDialogVisible,
     setVisible: dialogsStore.setSubmitToGalleryDialogVisible,
     formItem: dialogsStore.formItem,
     setFormItem: dialogsStore.setFormItem,
-    getIcon: settingsStore.getIcon,
-    currentColorScheme: auth.settingsStore.currentColorScheme,
+    getIcon: filesSettingsStore.getIcon,
+    currentColorScheme: settingsStore.currentColorScheme,
     canSubmitToFormGallery: accessRightsStore.canSubmitToFormGallery,
     submitToFormGallery: oformsStore.submitToFormGallery,
   })

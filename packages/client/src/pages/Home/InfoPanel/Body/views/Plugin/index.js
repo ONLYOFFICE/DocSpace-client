@@ -2,7 +2,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 
 import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
-import { PluginComponents } from "SRC_DIR/helpers/plugins/constants";
+import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
 
 const Plugin = ({ boxProps, pluginName }) => {
   return (

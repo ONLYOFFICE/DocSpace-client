@@ -23,6 +23,7 @@ import {
   createFolder,
   moveToFolder,
   getFolder,
+  deleteFilesFromRecent,
 } from "@docspace/shared/api/files";
 import {
   ConflictResolveType,
@@ -54,19 +55,23 @@ import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
+import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
 class FilesActionStore {
-  authStore;
+  settingsStore;
   uploadDataStore;
   treeFoldersStore;
   filesStore;
   selectedFolderStore;
-  settingsStore;
+  filesSettingsStore;
   dialogsStore;
   mediaViewerDataStore;
   accessRightsStore;
   clientLoadingStore;
   publicRoomStore;
+  infoPanelStore;
+  userStore = null;
+  currentTariffStatusStore = null;
 
   isBulkDownload = false;
   isLoadedSearchFiles = false;
@@ -75,32 +80,38 @@ class FilesActionStore {
   processCreatingRoomFromData = false;
 
   constructor(
-    authStore,
+    settingsStore,
     uploadDataStore,
     treeFoldersStore,
     filesStore,
     selectedFolderStore,
-    settingsStore,
+    filesSettingsStore,
     dialogsStore,
     mediaViewerDataStore,
     accessRightsStore,
     clientLoadingStore,
     publicRoomStore,
-    pluginStore
+    pluginStore,
+    infoPanelStore,
+    userStore,
+    currentTariffStatusStore
   ) {
     makeAutoObservable(this);
-    this.authStore = authStore;
+    this.settingsStore = settingsStore;
     this.uploadDataStore = uploadDataStore;
     this.treeFoldersStore = treeFoldersStore;
     this.filesStore = filesStore;
     this.selectedFolderStore = selectedFolderStore;
-    this.settingsStore = settingsStore;
+    this.filesSettingsStore = filesSettingsStore;
     this.dialogsStore = dialogsStore;
     this.mediaViewerDataStore = mediaViewerDataStore;
     this.accessRightsStore = accessRightsStore;
     this.clientLoadingStore = clientLoadingStore;
     this.publicRoomStore = publicRoomStore;
     this.pluginStore = pluginStore;
+    this.infoPanelStore = infoPanelStore;
+    this.userStore = userStore;
+    this.currentTariffStatusStore = currentTariffStatusStore;
   }
 
   setIsBulkDownload = (isBulkDownload) => {
@@ -283,13 +294,16 @@ class FilesActionStore {
       this.uploadDataStore;
     const { setSecondaryProgressBarData, clearSecondaryProgressData } =
       secondaryProgressDataStore;
-    const { withPaging } = this.authStore.settingsStore;
+    const { withPaging } = this.settingsStore;
 
-    const selection = newSelection
+    let selection = newSelection
       ? newSelection
       : this.filesStore.selection.length
         ? this.filesStore.selection
         : [bufferSelection];
+
+    selection = selection.filter((item) => item.security.Delete);
+
     const isThirdPartyFile = selection.some((f) => f.providerKey);
 
     const currentFolderId = this.selectedFolderStore.id;
@@ -386,7 +400,7 @@ class FilesActionStore {
             }
 
             if (currentFolderId) {
-              const { socketHelper } = this.authStore.settingsStore;
+              const { socketHelper } = this.settingsStore;
 
               socketHelper.emit({
                 command: "refresh-folder",
@@ -733,7 +747,7 @@ class FilesActionStore {
     const { setSecondaryProgressBarData, clearSecondaryProgressData } =
       secondaryProgressDataStore;
     if (
-      this.settingsStore.confirmDelete ||
+      this.filesSettingsStore.confirmDelete ||
       this.treeFoldersStore.isPrivacyFolder ||
       isThirdParty ||
       isRoom
@@ -781,7 +795,7 @@ class FilesActionStore {
 
   deleteItemOperation = (isFile, itemId, translations, isRoom, operationId) => {
     const { addActiveItems, getIsEmptyTrash } = this.filesStore;
-    const { withPaging } = this.authStore.settingsStore;
+    const { withPaging } = this.settingsStore;
     const { isRecycleBinFolder, recycleBinFolderId } = this.treeFoldersStore;
 
     const pbData = {
@@ -992,7 +1006,7 @@ class FilesActionStore {
   setPinAction = (action, id, t) => {
     const { pinRoom, unpinRoom, updateRoomPin, setSelected } = this.filesStore;
 
-    const { selection, setSelection } = this.authStore.infoPanelStore;
+    const { infoPanelSelection, setInfoPanelSelection } = this.infoPanelStore;
 
     const items = Array.isArray(id) ? id : [id];
 
@@ -1009,8 +1023,8 @@ class FilesActionStore {
         return Promise.all(actions)
           .then(() => {
             this.updateCurrentFolder(null, items, null, operationId);
-            if (selection) {
-              setSelection({ ...selection, pinned: true });
+            if (infoPanelSelection) {
+              setInfoPanelSelection({ ...infoPanelSelection, pinned: true });
             }
           })
           .then(() => setSelected("close"))
@@ -1031,7 +1045,7 @@ class FilesActionStore {
           .then(() => {
             this.updateCurrentFolder(null, items, null, operationId);
             if (selection) {
-              setSelection({ ...selection, pinned: false });
+              setInfoPanelSelection({ ...selection, pinned: false });
             }
           })
           .then(() => setSelected("close"))
@@ -1389,14 +1403,14 @@ class FilesActionStore {
         url !== window.DocSpace.location.pathname
     );
 
-    if (!isDesktop()) this.authStore.infoPanelStore.setIsVisible(false);
+    if (!isDesktop()) this.infoPanelStore.setIsVisible(false);
 
     window.DocSpace.navigate(`${url}?${newFilter.toUrlParams()}`, { state });
   };
 
   setThirdpartyInfo = (providerKey) => {
     const { setConnectDialogVisible, setConnectItem } = this.dialogsStore;
-    const { providers, capabilities } = this.settingsStore.thirdPartyStore;
+    const { providers, capabilities } = this.filesSettingsStore.thirdPartyStore;
     const provider = providers.find((x) => x.provider_key === providerKey);
     const capabilityItem = capabilities.find((x) => x[0] === providerKey);
     const capability = {
@@ -1600,7 +1614,12 @@ class FilesActionStore {
 
         return !allFilesIsEditing && canDelete && hasSelection;
       case "create-room":
-        const canCreateRoom = rootFolderType === FolderType.USER;
+        const { isCollaborator } = this.userStore?.user || {
+          isCollaborator: false,
+        };
+
+        const canCreateRoom =
+          !isCollaborator && rootFolderType === FolderType.USER;
 
         return canCreateRoom;
     }
@@ -1646,7 +1665,7 @@ class FilesActionStore {
       setInviteUsersWarningDialogVisible,
       setRestoreRoomDialogVisible,
     } = this.dialogsStore;
-    const { isGracePeriod } = this.authStore.currentTariffStatusStore;
+    const { isGracePeriod } = this.currentTariffStatusStore;
 
     if (action === "unarchive" && isGracePeriod) {
       setInviteUsersWarningDialogVisible(true);
@@ -1727,9 +1746,9 @@ class FilesActionStore {
 
   onShowInfoPanel = () => {
     const { selection } = this.filesStore;
-    const { setSelection, setIsVisible } = this.authStore.infoPanelStore;
+    const { setInfoPanelSelection, setIsVisible } = this.infoPanelStore;
 
-    setSelection([selection]);
+    setInfoPanelSelection([selection]);
     setIsVisible(true);
   };
 
@@ -1872,7 +1891,7 @@ class FilesActionStore {
             id: "menu-delete",
             label: t("Common:Delete"),
             onClick: () => {
-              if (this.settingsStore.confirmDelete) {
+              if (this.filesSettingsStore.confirmDelete) {
                 setDeleteDialogVisible(true);
               } else {
                 const translations = {
@@ -2086,12 +2105,12 @@ class FilesActionStore {
 
   openFileAction = (item) => {
     const { openDocEditor, isPrivacyFolder, setSelection } = this.filesStore;
-    const { currentDeviceType } = this.authStore.settingsStore;
+    const { currentDeviceType } = this.settingsStore;
     const { fileItemsList } = this.pluginStore;
-    const { enablePlugins } = this.authStore.settingsStore;
+    const { enablePlugins } = this.settingsStore;
 
     const { isLoading, setIsSectionFilterLoading } = this.clientLoadingStore;
-    const { isRecycleBinFolder } = this.treeFoldersStore;
+    const { isRecycleBinFolder, isRecentTab } = this.treeFoldersStore;
     const { setMediaViewerData } = this.mediaViewerDataStore;
     const { setConvertDialogVisible, setConvertItem } = this.dialogsStore;
 
@@ -2113,7 +2132,15 @@ class FilesActionStore {
     const canWebEdit = item.viewAccessibility?.WebEdit;
     const canViewedDocs = item.viewAccessibility?.WebView;
 
-    const { id, viewUrl, providerKey, fileStatus, encrypted, isFolder } = item;
+    const {
+      id,
+      viewUrl,
+      providerKey,
+      fileStatus,
+      encrypted,
+      isFolder,
+      webUrl,
+    } = item;
     if (encrypted && isPrivacyFolder) return checkProtocol(item.id, true);
 
     if (isRecycleBinFolder || isLoading) return;
@@ -2155,7 +2182,7 @@ class FilesActionStore {
 
       if (canWebEdit || canViewedDocs) {
         let tab =
-          !this.authStore.settingsStore.isDesktopClient &&
+          !this.settingsStore.isDesktopClient &&
           window.DocSpaceConfig?.editor?.openOnNewPage &&
           !isFolder
             ? window.open(
@@ -2172,7 +2199,12 @@ class FilesActionStore {
           ? !item.security.FillForms
           : !item.security.Edit;
 
-        return openDocEditor(id, providerKey, tab, null, isPreview);
+        const shareWebUrl = new URL(webUrl);
+        const shareKey = isRecentTab
+          ? getObjectByLocation(shareWebUrl)?.share
+          : "";
+
+        return openDocEditor(id, providerKey, tab, null, isPreview, shareKey);
       }
 
       if (isMediaOrImage) {
@@ -2183,7 +2215,7 @@ class FilesActionStore {
         );
         setMediaViewerData({ visible: true, id });
 
-        const url = "/products/files/#preview/" + id;
+        const url = combineUrl(MEDIA_VIEW_URL, id);
 
         if (this.publicRoomStore.isPublicRoom) return;
 
@@ -2213,7 +2245,9 @@ class FilesActionStore {
   onClickBack = () => {
     const { roomType, ...rest } = this.selectedFolderStore;
     const { setSelectedNode } = this.treeFoldersStore;
-    const { clearFiles } = this.filesStore;
+    const { clearFiles, setBufferSelection } = this.filesStore;
+
+    setBufferSelection(null);
 
     const categoryType = getCategoryType(window.DocSpace.location);
 
@@ -2429,7 +2463,7 @@ class FilesActionStore {
       selection,
       bufferSelection,
     } = this.filesStore;
-    const { user } = this.authStore.userStore;
+    const { user } = this.userStore;
 
     const roomId = selection.length
       ? selection[0].id
@@ -2490,7 +2524,7 @@ class FilesActionStore {
         } else {
           setCreatedBy(res[0].createdBy);
 
-          const isMe = userId === this.authStore.userStore.user.id;
+          const isMe = userId === this.userStore.user.id;
           if (isMe) setInRoom(true);
         }
 
@@ -2500,6 +2534,13 @@ class FilesActionStore {
       .finally(() => {
         setSelected("none");
       });
+  };
+
+  removeFilesFromRecent = async (fileIds) => {
+    const { refreshFiles } = this.filesStore;
+
+    await deleteFilesFromRecent(fileIds);
+    await refreshFiles();
   };
 }
 

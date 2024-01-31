@@ -12,16 +12,16 @@ const getDefaultStyles = ({
   $currentColorScheme &&
   isSelected &&
   css`
-    background: ${$currentColorScheme.main.accent};
-    border-color: ${$currentColorScheme.main.accent};
+    background: ${$currentColorScheme.main?.accent};
+    border-color: ${$currentColorScheme.main?.accent};
 
     .filter-text {
-      color: ${$currentColorScheme.text.accent};
+      color: ${$currentColorScheme.text?.accent};
     }
 
     &:hover {
-      background: ${$currentColorScheme.main.accent};
-      border-color: ${$currentColorScheme.main.accent};
+      background: ${$currentColorScheme.main?.accent};
+      border-color: ${$currentColorScheme.main?.accent};
     }
   `;
 

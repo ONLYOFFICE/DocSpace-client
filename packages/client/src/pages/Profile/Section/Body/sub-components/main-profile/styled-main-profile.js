@@ -201,9 +201,9 @@ export const StyledInfo = styled.div`
               margin-left: 5px;
             `}
       line-height: 15px;
-      color: ${(props) => props.currentColorScheme.main.accent};
+      color: ${(props) => props.currentColorScheme.main?.accent};
       border-bottom: 1px solid
-        ${(props) => props.currentColorScheme.main.accent};
+        ${(props) => props.currentColorScheme.main?.accent};
       margin-top: 2px;
     }
 
@@ -225,7 +225,7 @@ export const StyledInfo = styled.div`
         height: 12px;
 
         path {
-          fill: ${(props) => props.currentColorScheme.main.accent};
+          fill: ${(props) => props.currentColorScheme.main?.accent};
         }
       }
     }

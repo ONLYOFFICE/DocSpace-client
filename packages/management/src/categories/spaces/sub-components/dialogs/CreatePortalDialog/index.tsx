@@ -41,9 +41,10 @@ const CreatePortalDialog = () => {
   const [visit, setVisit] = React.useState<boolean>(false);
   const [restrictAccess, setRestrictAccess] = React.useState<boolean>(false);
   const [registerError, setRegisterError] = React.useState<null | string>(null);
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
-  const { spacesStore, authStore } = useStore();
-  const { tenantAlias, baseDomain, domainValidator } = authStore.settingsStore;
+  const { spacesStore, settingsStore, userStore } = useStore();
+  const { tenantAlias, baseDomain, domainValidator } = settingsStore;
 
   const {
     createPortalDialogVisible: visible,
@@ -61,7 +62,11 @@ const CreatePortalDialog = () => {
   };
 
   const onHandleClick = async () => {
-    const { firstName, lastName, email } = authStore.userStore.user;
+    const { user } = userStore;
+
+    const firstName = user?.firstName;
+    const lastName = user?.lastName;
+    const email = user?.email;
 
     const data = {
       firstName,
@@ -82,6 +87,7 @@ const CreatePortalDialog = () => {
     );
 
     if (isValidPortalName) {
+      setIsLoading(true);
       await createNewPortal(data)
         .then(async (data) => {
           const { tenant } = data;
@@ -91,12 +97,13 @@ const CreatePortalDialog = () => {
             return window.open(portalUrl, "_self");
           }
 
-          await authStore.settingsStore.getAllPortals();
+          await settingsStore.getAllPortals();
           onClose();
         })
         .catch((error) => {
           setRegisterError(error?.response?.data?.message);
-        });
+        })
+        .finally(() => setIsLoading(false));
     }
   };
 
@@ -159,6 +166,7 @@ const CreatePortalDialog = () => {
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
+          isLoading={isLoading}
           key="CreateButton"
           label={t("Common:Create")}
           size="normal"

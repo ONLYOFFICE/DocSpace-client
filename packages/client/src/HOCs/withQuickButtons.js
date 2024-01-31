@@ -53,6 +53,16 @@ export default function withQuickButtons(WrappedComponent) {
         .catch((err) => toastr.error(err));
     };
 
+    onClickShare = async () => {
+      const { t, item, getPrimaryFileLink, setShareChanged } = this.props;
+      const primaryLink = await getPrimaryFileLink(item.id);
+      if (primaryLink) {
+        copy(primaryLink.sharedTo.shareLink);
+        toastr.success(t("Files:LinkSuccessfullyCopied"));
+        setShareChanged(true);
+      }
+    };
+
     onCopyPrimaryLink = async () => {
       const { t, item, getPrimaryLink } = this.props;
       const primaryLink = await getPrimaryLink(item.id);
@@ -74,6 +84,7 @@ export default function withQuickButtons(WrappedComponent) {
         viewAs,
         folderCategory,
         isPublicRoom,
+        isPersonalRoom,
         isArchiveFolder,
       } = this.props;
 
@@ -87,9 +98,11 @@ export default function withQuickButtons(WrappedComponent) {
           viewAs={viewAs}
           isDisabled={isLoading}
           isPublicRoom={isPublicRoom}
+          isPersonalRoom={isPersonalRoom}
           onClickLock={this.onClickLock}
           onClickDownload={this.onClickDownload}
           onClickFavorite={this.onClickFavorite}
+          onClickShare={this.onClickShare}
           folderCategory={folderCategory}
           onCopyPrimaryLink={this.onCopyPrimaryLink}
           isArchiveFolder={isArchiveFolder}
@@ -107,12 +120,14 @@ export default function withQuickButtons(WrappedComponent) {
 
   return inject(
     ({
-      auth,
+      authStore,
+      settingsStore,
       filesActionsStore,
       dialogsStore,
       publicRoomStore,
       treeFoldersStore,
       filesStore,
+      infoPanelStore,
     }) => {
       const { lockFileAction, setFavoriteAction, onSelectItem } =
         filesActionsStore;
@@ -120,6 +135,7 @@ export default function withQuickButtons(WrappedComponent) {
         isPersonalFolderRoot,
         isArchiveFolderRoot,
         isTrashFolder,
+        isPersonalRoom,
         isArchiveFolder,
       } = treeFoldersStore;
 
@@ -129,18 +145,22 @@ export default function withQuickButtons(WrappedComponent) {
         isTrashFolder || isArchiveFolderRoot || isPersonalFolderRoot;
 
       const { isPublicRoom } = publicRoomStore;
+      const { getPrimaryFileLink, setShareChanged } = infoPanelStore;
 
       return {
-        theme: auth.settingsStore.theme,
-        isAdmin: auth.isAdmin,
+        theme: settingsStore.theme,
+        isAdmin: authStore.isAdmin,
         lockFileAction,
         setFavoriteAction,
         onSelectItem,
         setSharingPanelVisible,
         folderCategory,
         isPublicRoom,
+        isPersonalRoom,
         getPrimaryLink: filesStore.getPrimaryLink,
         isArchiveFolder,
+        getPrimaryFileLink,
+        setShareChanged,
       };
     }
   )(observer(WithQuickButtons));

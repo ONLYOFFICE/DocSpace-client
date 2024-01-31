@@ -37,6 +37,7 @@ import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import PluginActionsSvgUrl from "PUBLIC_DIR/images/plugin.actions.react.svg?url";
 import LeaveRoomSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/catalog.rooms.react.svg?url";
+import RemoveOutlineSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
 
 import { makeAutoObservable } from "mobx";
@@ -62,7 +63,7 @@ let loadingTime;
 let timer;
 
 class ContextOptionsStore {
-  authStore;
+  settingsStore;
   dialogsStore;
   filesActionsStore;
   filesStore;
@@ -70,16 +71,19 @@ class ContextOptionsStore {
   treeFoldersStore;
   uploadDataStore;
   versionHistoryStore;
-  settingsStore;
+  filesSettingsStore;
   selectedFolderStore;
   publicRoomStore;
   oformsStore;
   pluginStore;
+  infoPanelStore;
+  currentTariffStatusStore;
+  userStore;
 
   linksIsLoading = false;
 
   constructor(
-    authStore,
+    settingsStore,
     dialogsStore,
     filesActionsStore,
     filesStore,
@@ -87,14 +91,17 @@ class ContextOptionsStore {
     treeFoldersStore,
     uploadDataStore,
     versionHistoryStore,
-    settingsStore,
+    filesSettingsStore,
     selectedFolderStore,
     publicRoomStore,
     oformsStore,
-    pluginStore
+    pluginStore,
+    infoPanelStore,
+    currentTariffStatusStore,
+    userStore
   ) {
     makeAutoObservable(this);
-    this.authStore = authStore;
+    this.settingsStore = settingsStore;
     this.dialogsStore = dialogsStore;
     this.filesActionsStore = filesActionsStore;
     this.filesStore = filesStore;
@@ -102,11 +109,14 @@ class ContextOptionsStore {
     this.treeFoldersStore = treeFoldersStore;
     this.uploadDataStore = uploadDataStore;
     this.versionHistoryStore = versionHistoryStore;
-    this.settingsStore = settingsStore;
+    this.filesSettingsStore = filesSettingsStore;
     this.selectedFolderStore = selectedFolderStore;
     this.publicRoomStore = publicRoomStore;
     this.oformsStore = oformsStore;
     this.pluginStore = pluginStore;
+    this.infoPanelStore = infoPanelStore;
+    this.currentTariffStatusStore = currentTariffStatusStore;
+    this.userStore = userStore;
   }
 
   onOpenFolder = (item) => {
@@ -118,7 +128,7 @@ class ContextOptionsStore {
   };
 
   onClickReconnectStorage = async (item, t) => {
-    const { thirdPartyStore } = this.settingsStore;
+    const { thirdPartyStore } = this.filesSettingsStore;
 
     const { openConnectWindow, connectItems } = thirdPartyStore;
 
@@ -179,7 +189,7 @@ class ContextOptionsStore {
 
     const newTitle =
       title.substring(0, title.length - fileExst.length) +
-      this.settingsStore.extsWebRestrictedEditing[0];
+      this.filesSettingsStore.extsWebRestrictedEditing[0];
 
     this.uploadDataStore.copyAsAction(id, newTitle, folderId).catch((err) => {
       let errorMessage = "";
@@ -202,7 +212,7 @@ class ContextOptionsStore {
       setFormCreationInfo({
         newTitle,
         fromExst: fileExst,
-        toExst: this.settingsStore.extsWebRestrictedEditing[0],
+        toExst: this.filesSettingsStore.extsWebRestrictedEditing[0],
         fileInfo: item,
       });
       setConvertPasswordDialogVisible(true);
@@ -229,35 +239,35 @@ class ContextOptionsStore {
   };
 
   onMoveAction = () => {
-    const { setIsMobileHidden } = this.authStore.infoPanelStore;
+    const { setIsMobileHidden } = this.infoPanelStore;
     setIsMobileHidden(true);
 
     this.dialogsStore.setMoveToPanelVisible(true);
   };
 
   onRestoreAction = () => {
-    const { setIsMobileHidden } = this.authStore.infoPanelStore;
+    const { setIsMobileHidden } = this.infoPanelStore;
     setIsMobileHidden(true);
     console.log("Click");
     this.dialogsStore.setRestorePanelVisible(true);
   };
 
   onCopyAction = () => {
-    const { setIsMobileHidden } = this.authStore.infoPanelStore;
+    const { setIsMobileHidden } = this.infoPanelStore;
     setIsMobileHidden(true);
 
     this.dialogsStore.setCopyPanelVisible(true);
   };
 
-  showVersionHistory = (id, security) => {
+  showVersionHistory = (id, security, requestToken) => {
     const { fetchFileVersions, setIsVerHistoryPanel } =
       this.versionHistoryStore;
 
-    const { setIsMobileHidden } = this.authStore.infoPanelStore;
+    const { setIsMobileHidden } = this.infoPanelStore;
 
     if (this.treeFoldersStore.isRecycleBinFolder) return;
 
-    fetchFileVersions(id + "", security);
+    fetchFileVersions(id + "", security, requestToken);
     setIsVerHistoryPanel(true);
     setIsMobileHidden(true);
   };
@@ -284,8 +294,8 @@ class ContextOptionsStore {
 
   lockFile = (item, t) => {
     const { id, locked } = item;
-    const { setSelection: setInfoPanelSelection } =
-      this.authStore.infoPanelStore;
+    const { setInfoPanelSelection: setInfoPanelSelection } =
+      this.infoPanelStore;
 
     this.filesActionsStore
       .lockFileAction(id, !locked)
@@ -338,7 +348,7 @@ class ContextOptionsStore {
       return toastr.success(t("Translations:LinkCopySuccess"));
     }
 
-    const { canConvert } = this.settingsStore;
+    const { canConvert } = this.filesSettingsStore;
 
     const { getItemUrl } = this.filesStore;
 
@@ -377,7 +387,7 @@ class ContextOptionsStore {
   };
 
   gotoDocEditor = (preview = false, item) => {
-    const { isDesktopClient } = this.authStore.settingsStore;
+    const { isDesktopClient } = this.settingsStore;
 
     const { id, providerKey, fileExst } = item;
 
@@ -485,7 +495,7 @@ class ContextOptionsStore {
   onClickDeleteSelectedFolder = (t, isRoom) => {
     const { setIsFolderActions, setDeleteDialogVisible, setIsRoomDelete } =
       this.dialogsStore;
-    const { confirmDelete } = this.settingsStore;
+    const { confirmDelete } = this.filesSettingsStore;
     const { deleteAction, deleteRoomsAction } = this.filesActionsStore;
     const { id: selectedFolderId, getSelectedFolder } =
       this.selectedFolderStore;
@@ -569,10 +579,15 @@ class ContextOptionsStore {
     );
   };
 
-  onClickShare = () => {
-    setTimeout(() => {
-      this.dialogsStore.setSharingPanelVisible(true);
-    }, 10); //TODO: remove delay after fix context menu callback
+  onClickShare = (item) => {
+    const { openShareTab } = this.infoPanelStore;
+    const { setShareFolderDialogVisible } = this.dialogsStore;
+
+    if (item.isFolder) {
+      setShareFolderDialogVisible(true);
+    } else {
+      openShareTab();
+    }
   };
 
   onClickMarkRead = (item) => {
@@ -614,10 +629,8 @@ class ContextOptionsStore {
   };
 
   onShowInfoPanel = (item, view) => {
-    const { setSelection, setIsVisible, setView } =
-      this.authStore.infoPanelStore;
+    const { setIsVisible, setView } = this.infoPanelStore;
 
-    setSelection(item);
     setIsVisible(true);
     view && setView(view);
   };
@@ -690,7 +703,7 @@ class ContextOptionsStore {
 
   onLoadPlugins = (item) => {
     const { contextOptions } = item;
-    const { enablePlugins } = this.authStore.settingsStore;
+    const { enablePlugins } = this.settingsStore;
 
     const pluginItems = [];
     this.setLoaderTimer(true);
@@ -745,8 +758,7 @@ class ContextOptionsStore {
 
     const { action } = data;
 
-    const { isGracePeriod } = this.authStore.currentTariffStatusStore;
-    const { isFreeTariff } = this.authStore.currentQuotaStore;
+    const { isGracePeriod } = this.currentTariffStatusStore;
 
     if (isGracePeriod) {
       this.dialogsStore.setInviteUsersWarningDialogVisible(true);
@@ -773,7 +785,7 @@ class ContextOptionsStore {
   onClickArchive = (e) => {
     const data = (e.currentTarget && e.currentTarget.dataset) || e;
     const { action } = data;
-    const { isGracePeriod } = this.authStore.currentTariffStatusStore;
+    const { isGracePeriod } = this.currentTariffStatusStore;
     const {
       setArchiveDialogVisible,
       setRestoreRoomDialogVisible,
@@ -811,6 +823,10 @@ class ContextOptionsStore {
     const { action } = data;
 
     this.filesActionsStore.setMuteAction(action, item, t);
+  };
+
+  onClickRemoveFromRecent = (item) => {
+    this.filesActionsStore.removeFilesFromRecent([item.id]);
   };
 
   setLoaderTimer = (isLoading, cb) => {
@@ -854,7 +870,7 @@ class ContextOptionsStore {
   };
 
   onCreateOform = (navigate) => {
-    this.authStore.infoPanelStore.setIsVisible(false);
+    this.infoPanelStore.setIsVisible(false);
     const filesFilter = FilesFilter.getDefault();
     filesFilter.folder = this.oformsStore.oformFromFolderId;
     const filterUrlParams = filesFilter.toUrlParams();
@@ -873,7 +889,7 @@ class ContextOptionsStore {
   };
 
   onShowOformTemplateInfo = (item) => {
-    this.authStore.infoPanelStore.setIsVisible(true);
+    this.infoPanelStore.setIsVisible(true);
     this.oformsStore.setGallerySelected(item);
   };
 
@@ -971,7 +987,9 @@ class ContextOptionsStore {
     const isRootThirdPartyFolder =
       item.providerKey && item.id === item.rootFolderId;
 
-    const isShareable = item.canShare;
+    const isShareable = this.treeFoldersStore.isPersonalRoom
+      ? item.canShare || item.isFolder
+      : false;
 
     const isMedia =
       item.viewAccessibility?.ImageView || item.viewAccessibility?.MediaView;
@@ -1001,7 +1019,12 @@ class ContextOptionsStore {
               key: "show-version-history",
               label: t("ShowVersionHistory"),
               icon: HistoryReactSvgUrl,
-              onClick: () => this.showVersionHistory(item.id, item.security),
+              onClick: () =>
+                this.showVersionHistory(
+                  item.id,
+                  item.security,
+                  item?.requestToken
+                ),
               disabled: false,
             },
           ]
@@ -1029,7 +1052,11 @@ class ContextOptionsStore {
                   label: t("ShowVersionHistory"),
                   icon: HistoryReactSvgUrl,
                   onClick: () =>
-                    this.showVersionHistory(item.id, item.security),
+                    this.showVersionHistory(
+                      item.id,
+                      item.security,
+                      item?.requestToken
+                    ),
                   disabled: false,
                 },
               ],
@@ -1052,7 +1079,12 @@ class ContextOptionsStore {
             key: "show-version-history",
             label: t("ShowVersionHistory"),
             icon: HistoryReactSvgUrl,
-            onClick: () => this.showVersionHistory(item.id, item.security),
+            onClick: () =>
+              this.showVersionHistory(
+                item.id,
+                item.security,
+                item?.requestToken
+              ),
             disabled: false,
           },
         ];
@@ -1139,6 +1171,8 @@ class ContextOptionsStore {
           (f) => f.id === item.id
         ) === -1;
     }
+
+    const isArchive = item.rootFolderType === FolderType.Archive;
 
     const optionsModel = [
       {
@@ -1244,6 +1278,14 @@ class ContextOptionsStore {
         disabled: false,
         action: item.id,
       },
+      {
+        id: "option_sharing-settings",
+        key: "sharing-settings",
+        label: t("Files:Share"),
+        icon: ShareReactSvgUrl,
+        onClick: () => this.onClickShare(item),
+        disabled: !isShareable,
+      },
       ...versionActions,
       {
         id: "option_link-for-room-members",
@@ -1252,9 +1294,7 @@ class ContextOptionsStore {
         icon: InvitationLinkReactSvgUrl,
         onClick: () => this.onCopyLink(item, t),
         disabled:
-          (isPublicRoomType &&
-            item.canCopyPublicLink &&
-            !this.treeFoldersStore.isArchiveFolder) ||
+          (isPublicRoomType && item.canCopyPublicLink && !isArchive) ||
           this.publicRoomStore.isPublicRoom,
       },
       {
@@ -1264,7 +1304,7 @@ class ContextOptionsStore {
         icon: TabletLinkReactSvgUrl,
         disabled:
           this.publicRoomStore.isPublicRoom ||
-          this.treeFoldersStore.isArchiveFolder ||
+          isArchive ||
           !item.canCopyPublicLink ||
           !isPublicRoomType,
         onClick: async () => {
@@ -1291,14 +1331,6 @@ class ContextOptionsStore {
       },
       ...pinOptions,
       ...muteOptions,
-      {
-        id: "option_sharing-settings",
-        key: "sharing-settings",
-        label: t("SharingPanel:SharingSettingsTitle"),
-        icon: ShareReactSvgUrl,
-        onClick: this.onClickShare,
-        disabled: !isShareable,
-      },
       {
         id: "option_owner-change",
         key: "owner-change",
@@ -1456,9 +1488,7 @@ class ContextOptionsStore {
         icon: LeaveRoomSvgUrl,
         onClick: this.onLeaveRoom,
         disabled:
-          this.treeFoldersStore.isArchiveFolder ||
-          !item.inRoom ||
-          this.publicRoomStore.isPublicRoom,
+          isArchive || !item.inRoom || this.publicRoomStore.isPublicRoom,
       },
       {
         id: "option_unarchive-room",
@@ -1481,6 +1511,14 @@ class ContextOptionsStore {
           isEditing ? this.onShowEditingToast(t) : this.onClickDelete(item, t),
         disabled: false,
       },
+      {
+        id: "option_remove-from-recent",
+        key: "remove-from-recent",
+        label: t("RemoveFromList"),
+        icon: RemoveOutlineSvgUrl,
+        onClick: () => this.onClickRemoveFromRecent(item),
+        disabled: !this.treeFoldersStore.isRecentTab,
+      },
     ];
 
     const options = this.filterModel(optionsModel, contextOptions);
@@ -1499,20 +1537,21 @@ class ContextOptionsStore {
       });
     }
 
-    const filteredOptions = this.removeSeparatorFirstInList(options);
-    return filteredOptions;
-  };
+    const { isCollaborator } = this.userStore?.user || {
+      isCollaborator: false,
+    };
 
-  removeSeparatorFirstInList = (options) => {
     const newOptions = options.filter(
-      (option, index) => !(index === 0 && option.key === "separator1")
+      (option, index) =>
+        !(index === 0 && option.key === "separator1") &&
+        !(isCollaborator && option.key === "create-room")
     );
 
     return newOptions;
   };
 
   getGroupContextOptions = (t) => {
-    const { personal } = this.authStore.settingsStore;
+    const { personal } = this.settingsStore;
     const { selection, allFilesIsEditing } = this.filesStore;
     const { setDeleteDialogVisible } = this.dialogsStore;
     const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
@@ -1738,7 +1777,7 @@ class ContextOptionsStore {
         onClick: allFilesIsEditing
           ? () => this.onShowEditingToast(t)
           : () => {
-              if (this.settingsStore.confirmDelete) {
+              if (this.filesSettingsStore.confirmDelete) {
                 setDeleteDialogVisible(true);
               } else {
                 const translations = {
@@ -1758,7 +1797,17 @@ class ContextOptionsStore {
       },
     ];
 
-    return options;
+    const { isCollaborator } = this.userStore?.user || {
+      isCollaborator: false,
+    };
+
+    const newOptions = options.filter(
+      (option, index) =>
+        !(index === 0 && option.key === "separator1") &&
+        !(isCollaborator && option.key === "create-room")
+    );
+
+    return newOptions;
   };
 
   getModel = (item, t) => {

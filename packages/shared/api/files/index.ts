@@ -28,6 +28,7 @@ import {
   TSendEditorNotify,
   TSharedUsers,
   TThirdPartyCapabilities,
+  TTirdParties,
   TUploadOperation,
 } from "./types";
 
@@ -88,7 +89,10 @@ export async function getReferenceData(data: {
   return res;
 }
 
-export async function getFolderInfo(folderId: number, skipRedirect = false) {
+export async function getFolderInfo(
+  folderId: number | string,
+  skipRedirect = false,
+) {
   const options: AxiosRequestConfig = {
     method: "get",
     url: `/files/folder/${folderId}`,
@@ -113,7 +117,7 @@ export async function getFolderPath(folderId: number) {
 export async function getFolder(
   folderId: string | number,
   filter: FilesFilter,
-  signal: AbortSignal,
+  signal?: AbortSignal,
 ) {
   let params = folderId;
 
@@ -154,14 +158,23 @@ export async function getFoldersTree() {
 
   return folders.map((data, index) => {
     const { new: newItems, pathParts, current } = data;
-    const { foldersCount, filesCount } = current;
-    const { parentId, title, id, rootFolderType, security } = current;
+
+    const {
+      parentId,
+      title,
+      id,
+      rootFolderType,
+      security,
+      foldersCount,
+      filesCount,
+    } = current;
 
     const type = +rootFolderType;
 
     const name = getFolderClassNameByType(type);
 
     return {
+      ...current,
       id,
       key: `0-${index}`,
       parentId,
@@ -174,7 +187,8 @@ export async function getFoldersTree() {
       filesCount,
       newItems,
       security,
-    };
+      new: newItems,
+    } as TFolder;
   });
 }
 
@@ -860,39 +874,44 @@ export async function changeKeepNewFileName(val: boolean) {
   return res;
 }
 
-// export function thirdParty(val) {
-//   const data = { set: val };
-//   return request({ method: "put", url: "files/thirdparty", data });
-// }
+export function enableThirdParty(val: boolean) {
+  const data = { set: val };
+  return request({ method: "put", url: "files/thirdparty", data });
+}
 
-// export function getThirdPartyList() {
-//   return request({ method: "get", url: "files/thirdparty" });
-// }
+export async function getThirdPartyList() {
+  const res = (await request({
+    method: "get",
+    url: "files/thirdparty",
+  })) as TTirdParties;
 
-// export function saveThirdParty(
-//   url,
-//   login,
-//   password,
-//   token,
-//   isCorporate,
-//   customerTitle,
-//   providerKey,
-//   providerId,
-//   isRoomsStorage,
-// ) {
-//   const data = {
-//     url,
-//     login,
-//     password,
-//     token,
-//     isCorporate,
-//     customerTitle,
-//     providerKey,
-//     providerId,
-//     isRoomsStorage,
-//   };
-//   return request({ method: "post", url: "files/thirdparty", data });
-// }
+  return res;
+}
+
+export function saveThirdParty(
+  url: string,
+  login: string,
+  password: string,
+  token: string,
+  isCorporate: boolean,
+  customerTitle: string,
+  providerKey: string,
+  providerId: string,
+  isRoomsStorage: boolean,
+) {
+  const data = {
+    url,
+    login,
+    password,
+    token,
+    isCorporate,
+    customerTitle,
+    providerKey,
+    providerId,
+    isRoomsStorage,
+  };
+  return request({ method: "post", url: "files/thirdparty", data });
+}
 
 // TODO: Need update res type
 export function saveSettingsThirdParty(
@@ -977,12 +996,13 @@ export async function removeFromFavorite(ids: number[]) {
   return res;
 }
 
-// TODO: Need update res type
-export function getIsEncryptionSupport() {
-  return request({
+export async function getIsEncryptionSupport() {
+  const res = (await request({
     method: "get",
     url: "/files/@privacy/available",
-  });
+  })) as boolean;
+
+  return res;
 }
 
 // TODO: Need update res type
@@ -1000,12 +1020,13 @@ export function setEncryptionKeys(keys: { [key: string]: string | boolean }) {
   });
 }
 
-// TODO: Need update res type
-export function getEncryptionKeys() {
-  return request({
+export async function getEncryptionKeys() {
+  const res = (await request({
     method: "get",
     url: "privacyroom/keys",
-  });
+  })) as { [key: string]: string | boolean };
+
+  return res;
 }
 
 // TODO: Need update res type
@@ -1244,6 +1265,62 @@ export async function getFileLink(fileId: number) {
   return res;
 }
 
+export async function getExternalLinks(
+  fileId: number,
+  startIndex = 0,
+  count = 50,
+) {
+  const linkParams = `?startIndex=${startIndex}&count=${count}`;
+
+  const res = (await request({
+    method: "get",
+    url: `files/file/${fileId}/links${linkParams}`,
+  })) as TFileLink[];
+
+  return res;
+}
+
+export async function getPrimaryLink(fileId: number) {
+  const res = (await request({
+    method: "get",
+    url: `files/file/${fileId}/link`,
+  })) as TFileLink;
+
+  return res;
+}
+
+export async function editExternalLink(
+  fileId: number,
+  linkId: number,
+  access: number,
+  primary: boolean,
+  internal: boolean,
+  expirationDate: string,
+) {
+  const res = (await request({
+    method: "put",
+    url: `/files/file/${fileId}/links`,
+    data: { linkId, access, primary, internal, expirationDate },
+  })) as TFileLink;
+
+  return res;
+}
+
+export async function addExternalLink(
+  fileId: number,
+  access: number,
+  primary: boolean,
+  internal: boolean,
+) {
+  const res = (await request({
+    method: "put",
+    url: `/files/file/${fileId}/links`,
+    data: { access, primary, internal },
+  })) as TFileLink;
+
+  return res;
+}
+
 // TODO: Need update res type
 export function checkIsFileExist(folderId: number, filesTitle: string[]) {
   return request({
@@ -1251,6 +1328,16 @@ export function checkIsFileExist(folderId: number, filesTitle: string[]) {
     url: `files/${folderId}/upload/check`,
     data: {
       filesTitle,
+    },
+  });
+}
+
+export function deleteFilesFromRecent(fileIds: number[]) {
+  return request({
+    method: "delete",
+    url: `files/recent`,
+    data: {
+      fileIds,
     },
   });
 }

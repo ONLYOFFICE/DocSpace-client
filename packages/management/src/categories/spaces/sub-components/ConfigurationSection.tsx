@@ -29,7 +29,7 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
   const [domainNameError, setDomainNameError] =
     React.useState<null | Array<object>>(null);
 
-  const { spacesStore, authStore } = useStore();
+  const { spacesStore, settingsStore } = useStore();
   const {
     checkDomain,
     setDomainName,
@@ -51,7 +51,7 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
       }
     }
 
-    const nameValidator = authStore.settingsStore.domainValidator;
+    const nameValidator = settingsStore.domainValidator;
 
     const isValidDomain = parseDomain(domain, setDomainNameError, t);
     const isValidPortalName = validatePortalName(
@@ -63,14 +63,18 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
 
     if (isValidDomain && isValidPortalName) {
       try {
+        setIsLoading(true);
         await setDomainName(domain);
         await setPortalName(name).then((result) => {
           setReferenceLink(result);
           setSpaceCreatedDialogVisible(true);
         });
-        await authStore.settingsStore.getAllPortals();
+
+        await settingsStore.getAllPortals();
       } catch (err) {
         toastr.error(err);
+      } finally {
+        setIsLoading(false);
       }
     }
   };

@@ -181,17 +181,17 @@ const StyledText = styled(SimpleText)<{ isTextOverflow?: boolean }>`
 `;
 StyledText.defaultProps = { theme: Base };
 
-const focusColor = css`
-  color: ${(props) => props.theme.linkWithDropdown.color.focus};
-  background: ${(props) => props.theme.linkWithDropdown.background.focus};
-  .expander {
-    path {
-      fill: ${(props) => props.theme.linkWithDropdown.color.focus};
-    }
-  }
-`;
+// const focusColor = css`
+//   color: ${(props) => props.theme.linkWithDropdown.color.focus};
+//   background: ${(props) => props.theme.linkWithDropdown.background.focus};
+//   .expander {
+//     path {
+//       fill: ${(props) => props.theme.linkWithDropdown.color.focus};
+//     }
+//   }
+// `;
 
-const StyledSpan = styled.span<{ $isOpen?: boolean }>`
+const StyledSpan = styled.span<{ $isOpen?: boolean; withoutHover?: boolean }>`
   display: inline-block;
   padding: 4px 8px;
   border-radius: 3px;
@@ -214,7 +214,7 @@ const StyledSpan = styled.span<{ $isOpen?: boolean }>`
   }
 
   ${(props) =>
-    !props.$isOpen &&
+    !props.withoutHover &&
     css`
       :hover {
         color: ${props.theme.linkWithDropdown.color.hover};
@@ -227,26 +227,6 @@ const StyledSpan = styled.span<{ $isOpen?: boolean }>`
         }
       }
     `}
-
-  ${(props) =>
-    props.$isOpen
-      ? focusColor
-      : css`
-          :focus-within,
-          :focus {
-            ${focusColor}
-          }
-        `}
-
-  :active {
-    color: ${(props) => props.theme.linkWithDropdown.color.active};
-    background: ${(props) => props.theme.linkWithDropdown.background.active};
-    .expander {
-      path {
-        fill: ${(props) => props.theme.linkWithDropdown.color.active};
-      }
-    }
-  }
 `;
 StyledSpan.defaultProps = { theme: Base };
 

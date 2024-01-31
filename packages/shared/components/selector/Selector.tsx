@@ -5,7 +5,7 @@ import { Body } from "./sub-components/Body";
 import { Footer } from "./sub-components/Footer";
 
 import { StyledSelector } from "./Selector.styled";
-import { AccessRight, SelectorProps, TItem } from "./Selector.types";
+import { AccessRight, SelectorProps, TSelectorItem } from "./Selector.types";
 
 const Selector = ({
   id,
@@ -86,8 +86,10 @@ const Selector = ({
   const [footerVisible, setFooterVisible] = React.useState<boolean>(false);
   const [isSearch, setIsSearch] = React.useState<boolean>(false);
 
-  const [renderedItems, setRenderedItems] = React.useState<TItem[]>([]);
-  const [newSelectedItems, setNewSelectedItems] = React.useState<TItem[]>([]);
+  const [renderedItems, setRenderedItems] = React.useState<TSelectorItem[]>([]);
+  const [newSelectedItems, setNewSelectedItems] = React.useState<
+    TSelectorItem[]
+  >([]);
 
   const [newFooterInputValue, setNewFooterInputValue] = React.useState<string>(
     currentFooterInputValue || "",
@@ -118,7 +120,7 @@ const Selector = ({
   );
 
   const compareSelectedItems = React.useCallback(
-    (newList: TItem[]) => {
+    (newList: TSelectorItem[]) => {
       let isEqual = true;
 
       if (selectedItems?.length !== newList.length) {
@@ -138,21 +140,22 @@ const Selector = ({
     [selectedItems],
   );
 
-  const onSelectAction = (item: TItem) => {
-    onSelect({
+  const onSelectAction = (item: TSelectorItem) => {
+    onSelect?.({
       ...item,
       id: item.id,
       email: item.email || "",
       avatar: item.avatar,
       icon: item.icon,
       label: item.label,
+      shared: item.shared,
     });
 
     if (isMultiSelect) {
       setRenderedItems((value) => {
         const idx = value.findIndex((x) => item.id === x.id);
 
-        const newValue = value.map((i: TItem) => ({ ...i }));
+        const newValue = value.map((i: TSelectorItem) => ({ ...i }));
 
         if (idx === -1) return newValue;
 
@@ -186,7 +189,7 @@ const Selector = ({
       setRenderedItems((value) => {
         const idx = value.findIndex((x) => item.id === x.id);
 
-        const newValue = value.map((i: TItem) => ({
+        const newValue = value.map((i: TSelectorItem) => ({
           ...i,
           isSelected: false,
         }));
@@ -217,8 +220,13 @@ const Selector = ({
 
   const onSelectAllAction = React.useCallback(() => {
     onSelectAll?.();
+
     if (!items) return;
-    if (newSelectedItems.length === 0) {
+
+    if (
+      newSelectedItems.length === 0 ||
+      newSelectedItems.length !== items.length
+    ) {
       const cloneItems = items.map((x) => ({ ...x }));
 
       const cloneRenderedItems = items.map((x) => ({ ...x, isSelected: true }));
@@ -342,7 +350,7 @@ const Selector = ({
         hasNextPage={hasNextPage}
         isNextPageLoading={isNextPageLoading}
         loadMoreItems={loadMoreItems}
-        totalItems={totalItems}
+        totalItems={totalItems || 0}
         isLoading={isLoading}
         searchLoader={searchLoader}
         rowLoader={rowLoader}
@@ -361,7 +369,7 @@ const Selector = ({
       {(footerVisible || alwaysShowFooter) && (
         <Footer
           isMultiSelect={isMultiSelect}
-          acceptButtonLabel={acceptButtonLabel}
+          acceptButtonLabel={acceptButtonLabel || ""}
           selectedItemsCount={newSelectedItems.length}
           withCancelButton={withCancelButton}
           cancelButtonLabel={cancelButtonLabel}

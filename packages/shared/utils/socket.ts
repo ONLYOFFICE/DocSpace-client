@@ -3,14 +3,28 @@
 import { DefaultEventsMap } from "@socket.io/component-emitter";
 import io, { Socket } from "socket.io-client";
 
+export type TOnCallback = {
+  featureId: string;
+  value: number;
+};
 let client: Socket<DefaultEventsMap, DefaultEventsMap> | null = null;
-let callbacks: { eventName: string; callback: () => void }[] = [];
+let callbacks: { eventName: string; callback: (value: TOnCallback) => void }[] =
+  [];
 
 const subscribers = new Set();
 
+export type TOptSocket = {
+  featureId: string;
+  value: number;
+  data?: string;
+  type?: "folder" | "file";
+  id?: string;
+  cmd?: "create" | "update" | "delete";
+};
+
 export type TEmit = {
   command: string;
-  data: { roomParts: string | [] };
+  data: { roomParts: string | []; individual?: boolean };
   room?: null | boolean;
 };
 
@@ -121,7 +135,7 @@ class SocketIOHelper {
     }
   };
 
-  on = (eventName: string, callback: () => void) => {
+  on = (eventName: string, callback: (opt: TOptSocket) => void) => {
     if (!this.isEnabled) {
       callbacks.push({ eventName, callback });
       return;

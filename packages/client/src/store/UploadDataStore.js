@@ -31,17 +31,15 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 
-const UPLOAD_LIMIT_AT_ONCE = 5;
-
 class UploadDataStore {
-  authStore;
+  settingsStore;
   treeFoldersStore;
   selectedFolderStore;
   filesStore;
   secondaryProgressDataStore;
   primaryProgressDataStore;
   dialogsStore;
-  settingsStore;
+  filesSettingsStore;
 
   files = [];
   uploadedFilesHistory = [];
@@ -69,26 +67,27 @@ class UploadDataStore {
   uploadedFilesSize = 0;
 
   isParallel = true;
+  asyncUploadObj = {};
 
   constructor(
-    authStore,
+    settingsStore,
     treeFoldersStore,
     selectedFolderStore,
     filesStore,
     secondaryProgressDataStore,
     primaryProgressDataStore,
     dialogsStore,
-    settingsStore
+    filesSettingsStore
   ) {
     makeAutoObservable(this);
-    this.authStore = authStore;
+    this.settingsStore = settingsStore;
     this.treeFoldersStore = treeFoldersStore;
     this.selectedFolderStore = selectedFolderStore;
     this.filesStore = filesStore;
     this.secondaryProgressDataStore = secondaryProgressDataStore;
     this.primaryProgressDataStore = primaryProgressDataStore;
     this.dialogsStore = dialogsStore;
-    this.settingsStore = settingsStore;
+    this.filesSettingsStore = filesSettingsStore;
   }
 
   removeFiles = (fileIds) => {
@@ -147,6 +146,7 @@ class UploadDataStore {
 
     this.isUploadingAndConversion = false;
     this.isUploading = false;
+    this.asyncUploadObj = {};
   };
 
   removeFileFromList = (id) => {
@@ -402,7 +402,7 @@ class UploadDataStore {
 
     if (!this.converted) return;
 
-    const { storeOriginalFiles } = this.settingsStore;
+    const { storeOriginalFiles } = this.filesSettingsStore;
 
     const isSortedFolder = isRecentFolder || isFavoritesFolder || isShareFolder;
     const needToRefreshFilesList = !isSortedFolder || !storeOriginalFiles;
@@ -518,7 +518,7 @@ class UploadDataStore {
 
           if (!error && isOpen && data && data[0]) {
             let tab =
-              !this.authStore.settingsStore.isDesktopClient &&
+              !this.settingsStore.isDesktopClient &&
               window.DocSpaceConfig?.editor?.openOnNewPage &&
               fileInfo.fileExst
                 ? window.open(
@@ -690,7 +690,7 @@ class UploadDataStore {
   };
 
   startUpload = (uploadFiles, folderId, t) => {
-    const { canConvert } = this.settingsStore;
+    const { canConvert } = this.filesSettingsStore;
 
     const toFolderId = folderId ? folderId : this.selectedFolderStore.id;
 
@@ -704,6 +704,7 @@ class UploadDataStore {
       this.files = [];
       this.filesToConversion = [];
       this.uploadedFilesSize = 0;
+      this.asyncUploadObj = {};
     }
 
     let newFiles = this.files;
@@ -776,7 +777,7 @@ class UploadDataStore {
     //console.log("this.tempConversionFiles", this.tempConversionFiles);
 
     if (countConversionFiles)
-      this.settingsStore.hideConfirmConvertSave
+      this.filesSettingsStore.hideConfirmConvertSave
         ? this.convertUploadedFiles(t)
         : this.dialogsStore.setConvertDialogVisible(true);
 
@@ -814,7 +815,7 @@ class UploadDataStore {
     const { files, setFiles, folders, setFolders, filter, setFilter } =
       this.filesStore;
 
-    const { withPaging } = this.authStore.settingsStore;
+    const { withPaging } = this.settingsStore;
 
     if (window.location.pathname.indexOf("/history") === -1) {
       const newFiles = files;
@@ -863,7 +864,7 @@ class UploadDataStore {
               const newFilter = filter;
               newFilter.total += 1;
               setFilter(newFilter);
-            } else if (!this.settingsStore.storeOriginalFiles) {
+            } else if (!this.filesSettingsStore.storeOriginalFiles) {
               newFiles[fileIndex] = currentFile.fileInfo;
               setFiles(newFiles);
             }
@@ -904,100 +905,95 @@ class UploadDataStore {
     }
   };
 
-  uploadFileChunks = async (
-    location,
-    requestsDataArray,
+  checkChunkUpload = (
+    t,
+    res,
     fileSize,
+    index,
     indexOfFile,
-    file,
     path,
-    t
+    length,
+    resolve,
+    reject,
+    isAsyncUpload = false,
+    isFinalize = false
   ) => {
-    const length = requestsDataArray.length;
-    for (let index = 0; index < length; index++) {
-      if (
-        this.uploaded ||
-        !this.files.some((f) => f.file === file) ||
-        this.files[indexOfFile].cancel
-      ) {
-        return Promise.resolve();
-      }
+    if (!res.data.data && res.data.message) {
+      return reject(res.data.message);
+    }
 
-      const res = await uploadFile(location, requestsDataArray[index]);
+    const { uploaded, id: fileId, file: fileInfo } = res.data.data;
 
-      //console.log(`Uploaded chunk ${index}/${length}`, res);
+    let uploadedSize, newPercent;
 
-      //let isLatestFile = indexOfFile === newFilesLength - 1;
+    if (!this.isParallel) {
+      uploadedSize = uploaded
+        ? fileSize
+        : index * this.settingsStore.chunkUploadSize;
 
-      if (!res.data.data && res.data.message) {
-        return Promise.reject(res.data.message);
-      }
-
-      const { uploaded, id: fileId, file: fileInfo } = res.data.data;
-
-      let uploadedSize, newPercent;
-
-      if (!this.isParallel) {
-        uploadedSize = uploaded
-          ? fileSize
-          : index * this.settingsStore.chunkUploadSize;
-
-        newPercent = this.getNewPercent(uploadedSize, indexOfFile);
+      newPercent = this.getNewPercent(uploadedSize, indexOfFile);
+    } else {
+      if (!uploaded) {
+        uploadedSize =
+          fileSize <= this.settingsStore.chunkUploadSize
+            ? fileSize
+            : this.settingsStore.chunkUploadSize;
       } else {
-        if (!uploaded) {
-          uploadedSize =
-            fileSize <= this.settingsStore.chunkUploadSize
-              ? fileSize
-              : this.settingsStore.chunkUploadSize;
-        } else {
-          uploadedSize = fileSize - index * this.settingsStore.chunkUploadSize;
-        }
-        newPercent = this.getFilesPercent(uploadedSize);
+        uploadedSize = isFinalize
+          ? 0
+          : fileSize <= this.settingsStore.chunkUploadSize
+            ? fileSize
+            : fileSize - index * this.settingsStore.chunkUploadSize;
       }
+      newPercent = this.getFilesPercent(uploadedSize);
+    }
 
-      const percentCurrentFile = ((index + 1) / length) * 100;
+    if (isAsyncUpload && !uploaded && newPercent >= 100) {
+      newPercent = 99;
+    }
 
-      const fileIndex = this.uploadedFilesHistory.findIndex(
-        (f) => f.uniqueId === this.files[indexOfFile].uniqueId
-      );
-      if (fileIndex > -1)
-        this.uploadedFilesHistory[fileIndex].percent = percentCurrentFile;
+    const percentCurrentFile = ((index + 1) / length) * 100;
 
-      this.primaryProgressDataStore.setPrimaryProgressBarData({
-        icon: "upload",
-        percent: newPercent,
-        visible: true,
-        loadingFile: {
-          uniqueId: this.files[indexOfFile].uniqueId,
-          percent: percentCurrentFile,
-        },
+    const fileIndex = this.uploadedFilesHistory.findIndex(
+      (f) => f.uniqueId === this.files[indexOfFile].uniqueId
+    );
+    if (fileIndex > -1)
+      this.uploadedFilesHistory[fileIndex].percent = percentCurrentFile;
+
+    this.primaryProgressDataStore.setPrimaryProgressBarData({
+      icon: "upload",
+      percent: newPercent,
+      visible: true,
+      loadingFile: {
+        uniqueId: this.files[indexOfFile].uniqueId,
+        percent: percentCurrentFile,
+      },
+    });
+
+    if (uploaded) {
+      runInAction(() => {
+        this.files[indexOfFile].action = "uploaded";
+        this.files[indexOfFile].fileId = fileId;
+        this.files[indexOfFile].fileInfo = fileInfo;
+
+        if (!this.isParallel) this.percent = newPercent;
+
+        if (this.isParallel) {
+          this.currentUploadNumber -= 1;
+
+          const nextFileIndex = this.files.findIndex((f) => !f.inAction);
+
+          if (nextFileIndex !== -1) {
+            this.startSessionFunc(nextFileIndex, t);
+          }
+        }
       });
 
-      if (uploaded) {
-        runInAction(() => {
-          this.files[indexOfFile].action = "uploaded";
-          this.files[indexOfFile].fileId = fileId;
-          this.files[indexOfFile].fileInfo = fileInfo;
-
-          if (!this.isParallel) this.percent = newPercent;
-
-          if (this.isParallel) {
-            this.currentUploadNumber -= 1;
-
-            const nextFileIndex = this.files.findIndex((f) => !f.inAction);
-
-            if (nextFileIndex !== -1) {
-              this.startSessionFunc(nextFileIndex, t);
-            }
-          }
+      if (fileInfo.version > 2) {
+        this.filesStore.setHighlightFile({
+          highlightFileId: fileInfo.id,
+          isFileHasExst: !fileInfo.fileExst,
         });
-
-        if (fileInfo.version > 2) {
-          this.filesStore.setHighlightFile({
-            highlightFileId: fileInfo.id,
-            isFileHasExst: !fileInfo.fileExst,
-          });
-        }
       }
     }
 
@@ -1005,7 +1001,7 @@ class UploadDataStore {
 
     const currentFile = this.files[indexOfFile];
     currentFile.path = path;
-    if (!currentFile) return Promise.resolve();
+    if (!currentFile) return resolve();
     const { needConvert } = currentFile;
 
     if (needConvert) {
@@ -1019,12 +1015,196 @@ class UploadDataStore {
       } else {
         this.filesToConversion.push(currentFile);
       }
-      return Promise.resolve();
+      return resolve();
     } else {
       if (currentFile.action === "uploaded") {
         this.refreshFiles(currentFile);
       }
-      return Promise.resolve();
+      if (!isAsyncUpload || res.status === 201) {
+        return resolve();
+      }
+    }
+  };
+
+  asyncUpload = async (t, chunkData, resolve, reject) => {
+    const { operationId, file, fileSize, indexOfFile, path, length } =
+      chunkData;
+
+    if (
+      this.uploaded ||
+      !this.files.some((f) => f.file === file) ||
+      this.files[indexOfFile].cancel
+    ) {
+      return resolve();
+    }
+
+    if (!this.asyncUploadObj[operationId]) {
+      return reject();
+    }
+    const chunkObjIndex = this.asyncUploadObj[
+      operationId
+    ].chunksArray.findIndex((x) => !x.isActive && !x.isFinalize);
+
+    if (chunkObjIndex !== -1) {
+      this.asyncUploadObj[operationId].chunksArray[chunkObjIndex].isActive =
+        true;
+
+      try {
+        const res =
+          await this.asyncUploadObj[operationId].chunksArray[
+            chunkObjIndex
+          ].onUpload();
+
+        this.asyncUploadObj[operationId].chunksArray[chunkObjIndex].isFinished =
+          true;
+
+        if (!res.data.data && res.data.message) {
+          delete this.asyncUploadObj[operationId];
+          return reject(res.data.message);
+        } else this.asyncUpload(t, chunkData, resolve, reject);
+
+        const activeLength = this.asyncUploadObj[operationId]
+          ? this.asyncUploadObj[operationId].chunksArray.filter(
+              (x) => x.isActive
+            ).length - 1
+          : 0;
+
+        this.checkChunkUpload(
+          t,
+          res,
+          fileSize,
+          activeLength,
+          indexOfFile,
+          path,
+          length,
+          resolve,
+          reject,
+          true
+        );
+
+        const finalizeChunk = this.asyncUploadObj[
+          operationId
+        ].chunksArray.findIndex((x) => !x.isFinished && !x.isFinalize);
+
+        if (finalizeChunk === -1) {
+          const finalizeChunkIndex = this.asyncUploadObj[
+            operationId
+          ].chunksArray.findIndex((x) => x.isFinalize);
+
+          if (finalizeChunkIndex > -1) {
+            const finalizeIndex =
+              this.asyncUploadObj[operationId].chunksArray.length - 1;
+
+            const finalizeRes =
+              await this.asyncUploadObj[operationId].chunksArray[
+                finalizeChunkIndex
+              ].onUpload();
+
+            this.checkChunkUpload(
+              t,
+              finalizeRes,
+              fileSize,
+              finalizeIndex,
+              indexOfFile,
+              path,
+              length,
+              resolve,
+              reject,
+              true, // isAsyncUpload
+              true //isFinalize
+            );
+          }
+        }
+      } catch (error) {
+        return reject(error);
+      }
+    }
+  };
+
+  uploadFileChunks = async (
+    location,
+    requestsDataArray,
+    fileSize,
+    indexOfFile,
+    file,
+    path,
+    t,
+    operationId,
+    toFolderId
+  ) => {
+    const { chunkUploadCount: asyncChunkUploadCount } = this.settingsStore;
+    const length = requestsDataArray.length;
+
+    const isThirdPartyFolder = typeof toFolderId === "string";
+    if (!isThirdPartyFolder) {
+      const chunksArray = [];
+      for (let index = 0; index < length; index++) {
+        chunksArray.push({
+          isActive: false,
+          isFinished: false,
+          isFinalize: false,
+          onUpload: () =>
+            uploadFile(
+              location + `&chunkNumber=${index + 1}&upload=true`,
+              requestsDataArray[index]
+            ),
+        });
+      }
+      chunksArray.push({
+        isActive: false,
+        isFinished: false,
+        isFinalize: true,
+        onUpload: () => uploadFile(location + "&finalize=true"),
+      });
+
+      if (!this.asyncUploadObj[operationId]) {
+        this.asyncUploadObj[operationId] = { chunksArray: [] };
+        this.asyncUploadObj[operationId].chunksArray = chunksArray;
+      }
+
+      const promise = new Promise((resolve, reject) => {
+        let i =
+          length <= asyncChunkUploadCount ? length : asyncChunkUploadCount;
+        while (i !== 0) {
+          this.asyncUpload(
+            t,
+            { operationId, file, fileSize, indexOfFile, path, length },
+            resolve,
+            reject
+          );
+          i--;
+        }
+      });
+
+      await promise;
+    } else {
+      for (let index = 0; index < length; index++) {
+        if (
+          this.uploaded ||
+          !this.files.some((f) => f.file === file) ||
+          this.files[indexOfFile].cancel
+        ) {
+          return Promise.resolve();
+        }
+
+        const res = await uploadFile(location, requestsDataArray[index]);
+        const resolve = (res) => Promise.resolve(res);
+        const reject = (err) => Promise.reject(err);
+
+        this.checkChunkUpload(
+          t,
+          res,
+          fileSize,
+          index,
+          indexOfFile,
+          path,
+          length,
+          resolve,
+          reject
+        );
+
+        //console.log(`Uploaded chunk ${index}/${length}`, res);
+      }
     }
   };
 
@@ -1048,13 +1228,15 @@ class UploadDataStore {
       // console.log("IS PARALLEL");
       const notUploadedFiles = this.files.filter((f) => !f.inAction);
 
+      const { chunkUploadCount } = this.settingsStore;
+
       const countFiles =
-        notUploadedFiles.length >= UPLOAD_LIMIT_AT_ONCE
-          ? UPLOAD_LIMIT_AT_ONCE
+        notUploadedFiles.length >= chunkUploadCount
+          ? chunkUploadCount
           : notUploadedFiles.length;
 
       for (let i = 0; i < countFiles; i++) {
-        if (this.currentUploadNumber <= UPLOAD_LIMIT_AT_ONCE) {
+        if (this.currentUploadNumber <= chunkUploadCount) {
           const fileIndex = this.files.findIndex(
             (f) => f.uniqueId === notUploadedFiles[i].uniqueId
           );
@@ -1082,6 +1264,7 @@ class UploadDataStore {
         runInAction(() => {
           this.uploaded = true;
           this.isParallel = true;
+          this.asyncUploadObj = {};
         });
         const uploadedFiles = this.files.filter((x) => x.action === "uploaded");
         const totalErrorsCount = sumBy(uploadedFiles, (f) => (f.error ? 1 : 0));
@@ -1103,6 +1286,7 @@ class UploadDataStore {
     if (!this.uploaded && this.files.length === 0) {
       this.uploaded = true;
       this.isParallel = true;
+      this.asyncUploadObj = {};
       //setUploadData(uploadData);
       return;
     }
@@ -1121,7 +1305,7 @@ class UploadDataStore {
       return Promise.resolve();
     }
 
-    const { chunkUploadSize } = this.settingsStore;
+    const { chunkUploadSize } = this.filesSettingsStore;
 
     const { file, toFolderId /*, action*/ } = item;
     const chunks = Math.ceil(file.size / chunkUploadSize, chunkUploadSize);
@@ -1145,6 +1329,7 @@ class UploadDataStore {
       .then((res) => {
         const location = res.data.location;
         const path = res.data.path;
+        const operationId = res.data.id;
 
         const requestsDataArray = [];
 
@@ -1158,37 +1343,56 @@ class UploadDataStore {
           chunk++;
         }
 
-        return { location, requestsDataArray, fileSize, path };
-      })
-      .then(({ location, requestsDataArray, fileSize, path }) => {
-        const fileIndex = this.uploadedFilesHistory.findIndex(
-          (f) => f.uniqueId === this.files[indexOfFile].uniqueId
-        );
-        if (fileIndex > -1)
-          this.uploadedFilesHistory[fileIndex].percent = chunks < 2 ? 50 : 0;
-
-        if (!this.isParallel) {
-          this.primaryProgressDataStore.setPrimaryProgressBarData({
-            icon: "upload",
-            visible: true,
-            percent: this.percent,
-            loadingFile: {
-              uniqueId: this.files[indexOfFile].uniqueId,
-              percent: chunks < 2 ? 50 : 0,
-            },
-          });
-        }
-
-        return this.uploadFileChunks(
+        return {
           location,
           requestsDataArray,
           fileSize,
-          indexOfFile,
-          file,
           path,
-          t
-        );
+          operationId,
+          toFolderId,
+        };
       })
+      .then(
+        ({
+          location,
+          requestsDataArray,
+          fileSize,
+          path,
+          t,
+          operationId,
+          toFolderId,
+        }) => {
+          const fileIndex = this.uploadedFilesHistory.findIndex(
+            (f) => f.uniqueId === this.files[indexOfFile].uniqueId
+          );
+          if (fileIndex > -1)
+            this.uploadedFilesHistory[fileIndex].percent = chunks < 2 ? 50 : 0;
+
+          if (!this.isParallel) {
+            this.primaryProgressDataStore.setPrimaryProgressBarData({
+              icon: "upload",
+              visible: true,
+              percent: this.percent,
+              loadingFile: {
+                uniqueId: this.files[indexOfFile].uniqueId,
+                percent: chunks < 2 ? 50 : 0,
+              },
+            });
+          }
+
+          return this.uploadFileChunks(
+            location,
+            requestsDataArray,
+            fileSize,
+            indexOfFile,
+            file,
+            path,
+            t,
+            operationId,
+            toFolderId
+          );
+        }
+      )
       .catch((error) => {
         if (this.files[indexOfFile] === undefined) {
           this.primaryProgressDataStore.setPrimaryProgressBarData({
@@ -1254,6 +1458,7 @@ class UploadDataStore {
             runInAction(() => {
               this.uploaded = true;
               this.isParallel = true;
+              this.asyncUploadObj = {};
             });
             const uploadedFiles = this.files.filter(
               (x) => x.action === "uploaded"
@@ -1280,13 +1485,14 @@ class UploadDataStore {
 
   finishUploadFiles = () => {
     const { fetchFiles, filter } = this.filesStore;
-    const { withPaging } = this.authStore.settingsStore;
+    const { withPaging } = this.settingsStore;
 
     if (this.tempFiles.length) {
       this.uploaded = true;
       this.isParallel = true;
       this.converted = true;
       this.uploadedFilesSize = 0;
+      this.asyncUploadObj = {};
 
       for (let item of this.tempFiles) {
         const { uploadFiles, folderId, t } = item;
@@ -1314,6 +1520,7 @@ class UploadDataStore {
     this.isParallel = true;
     this.converted = true;
     this.uploadedFilesSize = 0;
+    this.asyncUploadObj = {};
 
     const uploadData = {
       filesSize: 0,
@@ -1327,7 +1534,7 @@ class UploadDataStore {
       withPaging && fetchFiles(toFolderId, filter);
 
       if (toFolderId) {
-        const { socketHelper } = this.authStore.settingsStore;
+        const { socketHelper } = this.settingsStore;
 
         socketHelper.emit({
           command: "refresh-folder",
@@ -1595,7 +1802,7 @@ class UploadDataStore {
 
     const { clearSecondaryProgressData, setSecondaryProgressBarData, label } =
       this.secondaryProgressDataStore;
-    const { withPaging } = this.authStore.settingsStore;
+    const { withPaging } = this.settingsStore;
     const isMovingCurrentFolder = !isCopy && this.dialogsStore.isFolderActions;
 
     let receivedFolder = destFolderId;

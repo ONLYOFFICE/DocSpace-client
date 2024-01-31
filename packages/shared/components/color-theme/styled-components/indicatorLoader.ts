@@ -13,12 +13,12 @@ const getDefaultStyles = ({
   css`
     #ipl-progress-indicator {
       background-color: ${theme.isBase
-        ? $currentColorScheme.main.accent
+        ? $currentColorScheme.main?.accent
         : "#FFFFFF"};
 
       &:hover {
         background-color: ${theme.isBase
-          ? $currentColorScheme.main.accent
+          ? $currentColorScheme.main?.accent
           : "#FFFFFF"};
       }
     }

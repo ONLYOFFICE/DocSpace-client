@@ -56,9 +56,7 @@ const LinkRow = (props) => {
 
   const isLocked = !!password;
   const expiryDate = !!expirationDate;
-  const date = moment(expirationDate)
-    .tz(window.timezone || "")
-    .format("LLL");
+  const date = moment(expirationDate).tz(window.timezone).format("LLL");
 
   const tooltipContent = isExpired
     ? t("Translations:LinkHasExpiredAndHasBeenDisabled")
@@ -258,9 +256,15 @@ const LinkRow = (props) => {
 };
 
 export default inject(
-  ({ auth, dialogsStore, publicRoomStore, treeFoldersStore }) => {
-    const { selectionParentRoom } = auth.infoPanelStore;
-    const { theme } = auth.settingsStore;
+  ({
+    settingsStore,
+    dialogsStore,
+    publicRoomStore,
+    treeFoldersStore,
+    infoPanelStore,
+  }) => {
+    const { infoPanelSelection } = infoPanelStore;
+    const { theme } = settingsStore;
 
     const {
       setEditLinkPanelIsVisible,
@@ -274,14 +278,14 @@ export default inject(
     return {
       setLinkParams,
       editExternalLink,
-      roomId: selectionParentRoom.id,
+      roomId: infoPanelSelection.id,
       setExternalLink,
       setEditLinkPanelIsVisible,
       setDeleteLinkDialogVisible,
       setEmbeddingPanelIsVisible,
       isArchiveFolder: isArchiveFolderRoot,
       theme,
-      isPublicRoomType: selectionParentRoom.roomType === RoomsType.PublicRoom,
+      isPublicRoomType: infoPanelSelection.roomType === RoomsType.PublicRoom,
     };
   }
 )(

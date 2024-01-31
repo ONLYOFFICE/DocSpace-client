@@ -18,8 +18,12 @@ import { inject, observer } from "mobx-react";
 import { toastr } from "@docspace/shared/components/toast";
 import { Encoder } from "@docspace/shared/utils/encoder";
 import { Base } from "@docspace/shared/themes";
-import { MAX_FILE_COMMENT_LENGTH } from "@docspace/shared/constants";
+import {
+  MAX_FILE_COMMENT_LENGTH,
+  MEDIA_VIEW_URL,
+} from "@docspace/shared/constants";
 import moment from "moment-timezone";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 const StyledExternalLinkIcon = styled(ExternalLinkIcon)`
   ${commonIconsStyles}
@@ -110,7 +114,7 @@ const VersionRow = (props) => {
 
     if (MediaView || ImageView) {
       return window.open(
-        "/products/files/#preview/" + info.id,
+        combineUrl(MEDIA_VIEW_URL, info.id),
         window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self"
       );
     }
@@ -318,43 +322,51 @@ const VersionRow = (props) => {
   );
 };
 
-export default inject(({ auth, versionHistoryStore, pluginStore }) => {
-  const { user } = auth.userStore;
-  const { openUser, setIsVisible } = auth.infoPanelStore;
-  const { culture, isTabletView, enablePlugins, currentDeviceType } =
-    auth.settingsStore;
-  const language = (user && user.cultureName) || culture || "en";
+export default inject(
+  ({
+    settingsStore,
+    versionHistoryStore,
+    pluginStore,
+    infoPanelStore,
+    userStore,
+  }) => {
+    const { user } = userStore;
+    const { openUser, setIsVisible } = infoPanelStore;
+    const { culture, isTabletView, enablePlugins, currentDeviceType } =
+      settingsStore;
+    const language = (user && user.cultureName) || culture || "en";
 
-  const { fileItemsList } = pluginStore;
+    const { fileItemsList } = pluginStore;
 
-  const {
-    // markAsVersion,
-    restoreVersion,
-    updateCommentVersion,
-    isEditing,
-    isEditingVersion,
-    fileSecurity,
-  } = versionHistoryStore;
+    const {
+      // markAsVersion,
+      restoreVersion,
+      updateCommentVersion,
+      isEditing,
+      isEditingVersion,
+      fileSecurity,
+    } = versionHistoryStore;
 
-  const isEdit = isEditingVersion || isEditing;
-  const canChangeVersionFileHistory = !isEdit && fileSecurity?.EditHistory;
+    const isEdit = isEditingVersion || isEditing;
+    const canChangeVersionFileHistory = !isEdit && fileSecurity?.EditHistory;
 
-  return {
-    currentDeviceType,
-    fileItemsList,
-    enablePlugins,
-    theme: auth.settingsStore.theme,
-    culture: language,
-    isTabletView,
-    // markAsVersion,
-    restoreVersion,
-    updateCommentVersion,
-    isEditing: isEdit,
-    canChangeVersionFileHistory,
-    openUser,
-    setIsVisible,
-  };
-})(
+    return {
+      currentDeviceType,
+      fileItemsList,
+      enablePlugins,
+      theme: settingsStore.theme,
+      culture: language,
+      isTabletView,
+      // markAsVersion,
+      restoreVersion,
+      updateCommentVersion,
+      isEditing: isEdit,
+      canChangeVersionFileHistory,
+      openUser,
+      setIsVisible,
+    };
+  }
+)(
   withTranslation(["VersionHistory", "Common", "Translations"])(
     observer(VersionRow)
   )

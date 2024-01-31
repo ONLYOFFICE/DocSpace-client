@@ -4,6 +4,7 @@ import { Paging } from "@docspace/shared/components/paging";
 import Loaders from "@docspace/common/components/Loaders";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
+import { FilterLoader } from "@docspace/shared/skeletons/filter";
 
 const SectionPagingContent = ({
   fetchPeople,
@@ -147,12 +148,12 @@ const SectionPagingContent = ({
       />
     )
   ) : (
-    <Loaders.Filter />
+    <FilterLoader />
   );
 };
 
-export default inject(({ auth, setup }) => ({
-  isLoaded: auth.isLoaded,
+export default inject(({ authStore, setup }) => ({
+  isLoaded: authStore.isLoaded,
   fetchPeople: setup.updateListAdmins,
   filter: setup.security.accessRight.filter,
   setIsLoading: setup.setIsLoading,

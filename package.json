@@ -1,6 +1,6 @@
 {
   "name": "docspace",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "private": true,
   "workspaces": {
     "packages": [
@@ -8,8 +8,8 @@
     ]
   },
   "engines": {
-    "node": ">=18",
-    "yarn": ">=3"
+    "node": ">=20",
+    "yarn": ">=4"
   },
   "scripts": {
     "build": "node ./common/scripts/before-build.js && yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login,@docspace/editor,@docspace/management}' run build",
@@ -44,5 +44,5 @@
     "shx": "^0.3.4",
     "terser": "^5.16.6"
   },
-  "packageManager": "yarn@3.2.4"
+  "packageManager": "yarn@4.0.2"
 }

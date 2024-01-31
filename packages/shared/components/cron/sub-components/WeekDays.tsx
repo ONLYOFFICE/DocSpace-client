@@ -5,17 +5,7 @@ import { Select } from "./Select";
 import type { WeekDaysProps } from "../Cron.types";
 
 export const WeekDays = memo(
-  ({
-    setWeekDays,
-    unit,
-    isWeek,
-    weekDays,
-    monthDays,
-    period,
-    t,
-  }: WeekDaysProps) => {
-    const prefix = period === "Week" ? t("On") : t("And");
-
+  ({ setWeekDays, unit, isWeek, weekDays, monthDays, t }: WeekDaysProps) => {
     const placeholder = useMemo(() => {
       const isEmpty = monthDays.length === 0;
 
@@ -24,12 +14,11 @@ export const WeekDays = memo(
 
     return (
       <Select
+        unit={unit}
         value={weekDays}
         setValue={setWeekDays}
-        placeholder={placeholder}
-        unit={unit}
-        prefix={prefix}
         dropDownMaxHeight={300}
+        placeholder={placeholder}
       />
     );
   },

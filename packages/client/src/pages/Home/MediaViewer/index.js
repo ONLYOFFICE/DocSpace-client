@@ -4,7 +4,9 @@ import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import queryString from "query-string";
 import MediaViewer from "@docspace/common/components/MediaViewer";
-import { PluginFileType } from "SRC_DIR/helpers/plugins/constants";
+import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
+import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 const FilesMediaViewer = (props) => {
   const {
@@ -106,7 +108,8 @@ const FilesMediaViewer = (props) => {
   };
 
   const onChangeUrl = (id) => {
-    const url = "/products/files/#preview/" + id;
+    const url = combineUrl(MEDIA_VIEW_URL, id);
+
     setCurrentId(id);
     navigate(url);
   };
@@ -148,7 +151,7 @@ const FilesMediaViewer = (props) => {
         // try to fix with one check later (see deleteAction)
         const isActiveFile = activeFiles.find((elem) => elem.id === file.id);
         const isActiveFolder = activeFolders.find(
-          (elem) => elem.id === file.id
+          (elem) => elem.id === file.id,
         );
 
         if (isActiveFile || isActiveFolder) return;
@@ -239,7 +242,7 @@ export default inject(
     filesStore,
     mediaViewerDataStore,
     filesActionsStore,
-    settingsStore,
+    filesSettingsStore,
     dialogsStore,
     treeFoldersStore,
     contextOptionsStore,
@@ -287,7 +290,8 @@ export default inject(
       prevMedia,
     } = mediaViewerDataStore;
     const { deleteItemAction } = filesActionsStore;
-    const { getIcon, extsImagePreviewed, extsMediaPreviewed } = settingsStore;
+    const { getIcon, extsImagePreviewed, extsMediaPreviewed } =
+      filesSettingsStore;
     const { isFavoritesFolder, archiveRoomsId } = treeFoldersStore;
 
     const {
@@ -376,5 +380,5 @@ export default inject(
       setActiveFiles,
       pluginContextMenuItems,
     };
-  }
+  },
 )(withTranslation(["Files", "Translations"])(observer(FilesMediaViewer)));

@@ -247,14 +247,14 @@ const ActivateUserForm = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
+export default inject(({ authStore, settingsStore }) => {
   const {
     greetingSettings,
     hashSettings,
     defaultPage,
     passwordSettings,
     theme,
-  } = auth.settingsStore;
+  } = settingsStore;
 
   return {
     theme,
@@ -262,7 +262,7 @@ export default inject(({ auth }) => {
     greetingTitle: greetingSettings,
     hashSettings,
     defaultPage,
-    login: auth.login,
+    login: authStore.login,
   };
 })(
   withTranslation(["Confirm", "Common", "Wizard"])(

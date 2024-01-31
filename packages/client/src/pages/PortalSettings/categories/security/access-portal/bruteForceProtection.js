@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import api from "@docspace/shared/api";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { StyledBruteForceProtection } from "../StyledSecurity";
@@ -22,7 +22,7 @@ const BruteForceProtection = (props) => {
     numberAttempt,
     blockingTime,
     checkPeriod,
-    setBruteForceProtection,
+
     getBruteForceProtection,
     initSettings,
     isInit,
@@ -195,11 +195,12 @@ const BruteForceProtection = (props) => {
     const numberCurrentBlockingTime = parseInt(currentBlockingTime);
     const numberCurrentCheckPeriod = parseInt(currentCheckPeriod);
 
-    setBruteForceProtection(
-      numberCurrentNumberAttempt,
-      numberCurrentBlockingTime,
-      numberCurrentCheckPeriod
-    )
+    api.settings
+      .setBruteForceProtection(
+        numberCurrentNumberAttempt,
+        numberCurrentBlockingTime,
+        numberCurrentCheckPeriod
+      )
       .then(() => {
         saveToSessionStorage("defaultBruteForceProtection", {
           numberAttempt: currentNumberAttempt.replace(/^0+/, ""),
@@ -243,7 +244,7 @@ const BruteForceProtection = (props) => {
           target="_blank"
           isHovered
           href={bruteForceProtectionUrl}
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
         >
           {t("Common:LearnMore")}
         </Link>
@@ -324,17 +325,17 @@ const BruteForceProtection = (props) => {
   );
 };
 
-export default inject(({ auth, setup }) => {
+export default inject(({ settingsStore, setup }) => {
   const {
     numberAttempt,
     blockingTime,
     checkPeriod,
-    setBruteForceProtection,
+
     getBruteForceProtection,
     bruteForceProtectionUrl,
     currentDeviceType,
     currentColorScheme,
-  } = auth.settingsStore;
+  } = settingsStore;
 
   const { initSettings, isInit } = setup;
 
@@ -342,7 +343,7 @@ export default inject(({ auth, setup }) => {
     numberAttempt,
     blockingTime,
     checkPeriod,
-    setBruteForceProtection,
+
     getBruteForceProtection,
     initSettings,
     isInit,

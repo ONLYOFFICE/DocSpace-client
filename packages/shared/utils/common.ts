@@ -24,15 +24,26 @@ import BackgroundPatternPurpleReactSvgUrl from "PUBLIC_DIR/images/background.pat
 import BackgroundPatternLightBlueReactSvgUrl from "PUBLIC_DIR/images/background.pattern.lightBlue.react.svg?url";
 import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.pattern.black.react.svg?url";
 
-import { FolderType, RoomsType, ThemeKeys } from "../enums";
+import { ArticleAlerts, FolderType, RoomsType, ThemeKeys } from "../enums";
 import { LANGUAGE, RTL_LANGUAGES } from "../constants";
-import { TUser, TI18n } from "../types";
+
+import { TI18n } from "../types";
+import { TUser } from "../api/people/types";
 import { TFolder, TFile, TGetFolder } from "../api/files/types";
+import { TRoom } from "../api/rooms/types";
 import TopLoaderService from "../components/top-loading-indicator";
 
 import { Encoder } from "./encoder";
 import { combineUrl } from "./combineUrl";
 import { getCookie } from "./cookie";
+import { isNumber } from "./typeGuards";
+import { checkIsSSR } from "./device";
+
+export const desktopConstants = Object.freeze({
+  domain: !checkIsSSR() && window.location.origin,
+  provider: "onlyoffice",
+  cryptoEngineId: "{FFF0E1EB-13DB-4678-B67D-FF0A41DBBCEF}",
+});
 
 let timer: null | ReturnType<typeof setTimeout> = null;
 
@@ -70,6 +81,48 @@ export function createPasswordHash(
 
   return hash;
 }
+
+export const isPublicRoom = () => {
+  return window.location.pathname === "/rooms/share";
+};
+
+export const getShowText = () => {
+  const showArticle = localStorage.getItem("showArticle");
+
+  if (showArticle) {
+    return JSON.parse(showArticle) === "true";
+  }
+
+  return false;
+};
+
+export const isManagement = () => {
+  return window.location.pathname.includes("management");
+};
+
+export const initArticleAlertsData = () => {
+  const savedArticleAlertsData = localStorage.getItem("articleAlertsData");
+  if (savedArticleAlertsData)
+    return JSON.parse(savedArticleAlertsData) as {
+      current: ArticleAlerts;
+      available: ArticleAlerts[];
+    };
+
+  const articleAlertsArray = Object.values(ArticleAlerts).filter(
+    (item, index) => Object.values(ArticleAlerts).indexOf(item) === index,
+  );
+  const defaultArticleAlertsData = {
+    current: articleAlertsArray[0],
+    available: articleAlertsArray,
+  };
+
+  localStorage.setItem(
+    "articleAlertsData",
+    JSON.stringify(defaultArticleAlertsData),
+  );
+
+  return defaultArticleAlertsData;
+};
 
 export function updateTempContent(isAuth = false) {
   if (isAuth) {
@@ -594,7 +647,9 @@ export const getFolderClassNameByType = (folderType: FolderType) => {
   }
 };
 
-export const decodeDisplayName = <T extends TFile | TFolder>(items: T[]) => {
+export const decodeDisplayName = <T extends TFile | TFolder | TRoom>(
+  items: T[],
+) => {
   return items.map((item) => {
     if (!item) return item;
 
@@ -698,7 +753,9 @@ export function getObjectByLocation(location: Location) {
   }
 }
 
-export const RoomsTypeValues = Object.values(RoomsType).reduce(
+export const RoomsTypeValues = Object.values(RoomsType).filter(isNumber);
+
+export const RoomsTypes = RoomsTypeValues.reduce<Record<number, number>>(
   (acc, current) => {
     if (typeof current === "string") return { ...acc };
     return { ...acc, [current]: current };
@@ -775,4 +832,19 @@ export const getLogoFromPath = (path: string) => {
   }
 
   return path;
+};
+
+export type FolderTypeValueOf = (typeof FolderType)[keyof typeof FolderType];
+export const getIconPathByFolderType = (
+  folderType?: FolderTypeValueOf,
+): string => {
+  const defaultPath = "folder.svg";
+
+  const folderIconPath: Partial<Record<FolderTypeValueOf, string>> = {
+    [FolderType.Done]: "done.svg",
+    [FolderType.InProgress]: "inProgress.svg",
+    [FolderType.DEFAULT]: defaultPath,
+  };
+
+  return folderIconPath[folderType ?? FolderType.DEFAULT] ?? defaultPath;
 };

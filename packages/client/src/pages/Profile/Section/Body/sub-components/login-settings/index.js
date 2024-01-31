@@ -5,7 +5,7 @@ import { inject, observer } from "mobx-react";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { Link } from "@docspace/shared/components/link";
-
+import { unlinkTfaApp } from "@docspace/shared/api/settings";
 import {
   ResetApplicationDialog,
   BackupCodesDialog,
@@ -18,8 +18,7 @@ const LoginSettings = (props) => {
 
   const {
     profile,
-    resetTfaApp,
-    getNewBackupCodes,
+
     backupCodes,
     backupCodesCount,
     setBackupCodes,
@@ -57,7 +56,7 @@ const LoginSettings = (props) => {
         <ResetApplicationDialog
           visible={resetAppDialogVisible}
           onClose={() => setResetAppDialogVisible(false)}
-          resetTfaApp={resetTfaApp}
+          resetTfaApp={unlinkTfaApp}
           id={profile.id}
         />
       )}
@@ -65,7 +64,6 @@ const LoginSettings = (props) => {
         <BackupCodesDialog
           visible={backupCodesDialogVisible}
           onClose={() => setBackupCodesDialogVisible(false)}
-          getNewBackupCodes={getNewBackupCodes}
           backupCodes={backupCodes}
           backupCodesCount={backupCodesCount}
           setBackupCodes={setBackupCodes}
@@ -75,23 +73,16 @@ const LoginSettings = (props) => {
   );
 };
 
-export default inject(({ auth, peopleStore }) => {
-  const { tfaStore } = auth;
+export default inject(({ tfaStore, peopleStore }) => {
   const { targetUserStore } = peopleStore;
 
   const { targetUser: profile } = targetUserStore;
 
-  const {
-    getNewBackupCodes,
-    unlinkApp: resetTfaApp,
-    backupCodes,
-    setBackupCodes,
-  } = tfaStore;
+  const { backupCodes, setBackupCodes } = tfaStore;
 
   return {
     profile,
-    resetTfaApp,
-    getNewBackupCodes,
+
     backupCodes,
     setBackupCodes,
   };

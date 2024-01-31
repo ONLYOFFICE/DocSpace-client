@@ -64,8 +64,9 @@ const LinkWithDropdown = ({
   const onCheckManualWidth = () => {
     const padding = 32;
     if (ref.current) {
-      const width = ref.current.querySelector(".text")?.getBoundingClientRect()
-        .width;
+      const width = ref.current
+        .querySelector(".text")
+        ?.getBoundingClientRect().width;
       if (width) return `${width + padding}px`;
     }
   };

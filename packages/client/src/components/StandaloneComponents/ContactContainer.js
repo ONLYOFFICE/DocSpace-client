@@ -123,9 +123,9 @@ const ContactContainer = (props) => {
   );
 };
 
-export default inject(({ auth, payments }) => {
-  const { settingsStore, isCommunity } = auth;
-  const { helpUrl, salesEmail } = payments;
+export default inject(({ authStore, settingsStore, paymentStore }) => {
+  const { isCommunity } = authStore;
+  const { helpUrl, salesEmail } = paymentStore;
   const { theme } = settingsStore;
   return { helpUrl, salesEmail, theme, isCommunity };
 })(observer(ContactContainer));

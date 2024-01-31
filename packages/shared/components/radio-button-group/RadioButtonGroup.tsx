@@ -29,8 +29,11 @@ const RadioButtonGroup = ({
   const handleOptionChange = (
     changeEvent: React.ChangeEvent<HTMLInputElement>,
   ) => {
+    console.log("call");
     setSelectedOption(changeEvent.target.value);
   };
+
+  console.log(selectedOption);
 
   React.useEffect(() => {
     setSelectedOption(selected);
@@ -59,7 +62,7 @@ const RadioButtonGroup = ({
             key={option.value}
             name={name || ""}
             value={option.value}
-            isChecked={selectedOption === option.value}
+            isChecked={`${selectedOption}` === `${option.value}`}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               handleOptionChange(e);
               onClick(e);

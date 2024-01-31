@@ -343,8 +343,7 @@ const SectionHeaderContent = (props) => {
   );
 };
 
-export default inject(({ auth, setup, common }) => {
-  const { currentQuotaStore } = auth;
+export default inject(({ currentQuotaStore, setup, common }) => {
   const {
     isBrandingAndCustomizationAvailable,
     isRestoreAndAutoBackupAvailable,

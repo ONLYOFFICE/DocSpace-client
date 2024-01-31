@@ -40,7 +40,7 @@ import copy from "copy-to-clipboard";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import Loaders from "@docspace/common/components/Loaders";
-import Navigation from "@docspace/shared/components/Navigation";
+import Navigation from "@docspace/shared/components/navigation";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { resendInvitesAgain } from "@docspace/shared/api/people";
 
@@ -930,6 +930,7 @@ const SectionHeaderContent = (props) => {
           : "",
     };
 
+    setSelected("none");
     setIsLoading(true);
 
     window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`, { state });
@@ -1118,22 +1119,25 @@ const SectionHeaderContent = (props) => {
 
 export default inject(
   ({
-    auth,
     filesStore,
     peopleStore,
     dialogsStore,
     selectedFolderStore,
     treeFoldersStore,
     filesActionsStore,
-    settingsStore,
+    filesSettingsStore,
     clientLoadingStore,
     publicRoomStore,
     contextOptionsStore,
     oformsStore,
     pluginStore,
+    infoPanelStore,
+    userStore,
+    currentTariffStatusStore,
+    settingsStore,
   }) => {
-    const isOwner = auth.userStore.user?.isOwner;
-    const isAdmin = auth.userStore.user?.isAdmin;
+    const isOwner = userStore.user?.isOwner;
+    const isAdmin = userStore.user?.isAdmin;
 
     const {
       setSelected,
@@ -1215,7 +1219,7 @@ export default inject(
 
     const { oformsFilter } = oformsStore;
 
-    const { setIsVisible, isVisible } = auth.infoPanelStore;
+    const { setIsVisible, isVisible } = infoPanelStore;
 
     const {
       title,
@@ -1237,8 +1241,8 @@ export default inject(
       whiteLabelLogoUrls,
       isFrame,
       currentDeviceType,
-    } = auth.settingsStore;
-    const { isGracePeriod } = auth.currentTariffStatusStore;
+    } = settingsStore;
+    const { isGracePeriod } = currentTariffStatusStore;
 
     const isRoom = !!roomType;
     const isPublicRoomType = roomType === RoomsType.PublicRoom;
@@ -1295,8 +1299,8 @@ export default inject(
     return {
       isGracePeriod,
       setInviteUsersWarningDialogVisible,
-      showText: auth.settingsStore.showText,
-      isDesktop: auth.settingsStore.isDesktopClient,
+      showText: settingsStore.showText,
+      isDesktop: settingsStore.isDesktopClient,
       showHeaderLoader,
       isLoading,
       isRootFolder: isPublicRoom && !folderPath?.length ? true : isRoot,
@@ -1314,9 +1318,9 @@ export default inject(
       isHeaderIndeterminate,
       isHeaderChecked,
       isThirdPartySelection,
-      isTabletView: auth.settingsStore.isTabletView,
-      confirmDelete: settingsStore.confirmDelete,
-      personal: auth.settingsStore.personal,
+      isTabletView: settingsStore.isTabletView,
+      confirmDelete: filesSettingsStore.confirmDelete,
+      personal: settingsStore.personal,
       cbMenuItems,
       setSelectedNode: treeFoldersStore.setSelectedNode,
       getFolderInfo,

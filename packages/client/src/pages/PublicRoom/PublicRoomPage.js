@@ -1,11 +1,11 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useLocation, Outlet } from "react-router-dom";
-import Section from "@docspace/common/components/Section";
+import Section from "@docspace/shared/components/section";
 import SectionHeaderContent from "../Home/Section/Header";
 import SectionFilterContent from "../Home/Section/Filter";
 import FilesPanels from "../../components/FilesPanels";
-
+import SectionWrapper from "SRC_DIR/components/Section";
 import { RoomSharingDialog } from "../../components/dialogs";
 import SelectionArea from "../Home/SelectionArea/FilesSelectionArea";
 import MediaViewer from "../Home/MediaViewer";
@@ -44,7 +44,7 @@ const PublicRoomPage = (props) => {
 
   return (
     <>
-      <Section
+      <SectionWrapper
         withBodyScroll
         // withBodyAutoFocus={!isMobile}
         withPaging={withPaging}
@@ -63,7 +63,7 @@ const PublicRoomPage = (props) => {
         <Section.SectionBody>
           <Outlet />
         </Section.SectionBody>
-      </Section>
+      </SectionWrapper>
 
       <FilesPanels />
       <SelectionArea />
@@ -74,18 +74,19 @@ const PublicRoomPage = (props) => {
 
 export default inject(
   ({
-    auth,
+    authStore,
+    settingsStore,
     filesStore,
     publicRoomStore,
     uploadDataStore,
-    settingsStore,
+    filesSettingsStore,
     clientLoadingStore,
   }) => {
-    const { withPaging } = auth.settingsStore;
+    const { withPaging } = settingsStore;
     const { isLoaded, isLoading, roomStatus, roomId } = publicRoomStore;
 
     const { fetchFiles, isEmptyPage } = filesStore;
-    const { getFilesSettings } = settingsStore;
+    const { getFilesSettings } = filesSettingsStore;
 
     const {
       visible: showSecondaryProgressBar,
@@ -117,7 +118,7 @@ export default inject(
       secondaryProgressBarIcon,
       showSecondaryButtonAlert,
 
-      isAuthenticated: auth.isAuthenticated,
+      isAuthenticated: authStore.isAuthenticated,
       isEmptyPage,
       setIsLoading,
     };

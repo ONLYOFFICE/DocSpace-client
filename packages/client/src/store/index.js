@@ -1,4 +1,14 @@
-import authStore from "@docspace/common/store/AuthStore";
+import {
+  authStore,
+  userStore,
+  tfaStore,
+  bannerStore,
+  currentTariffStatusStore,
+  currentQuotaStore,
+  paymentQuotasStore,
+  settingsStore,
+} from "@docspace/shared/store";
+
 import PaymentStore from "./PaymentStore";
 import WizardStore from "./WizardStore";
 import SettingsSetupStore from "./SettingsSetupStore";
@@ -13,7 +23,7 @@ import FilesStore from "./FilesStore";
 import SelectedFolderStore from "./SelectedFolderStore";
 import TreeFoldersStore from "./TreeFoldersStore";
 import thirdPartyStore from "./ThirdPartyStore";
-import SettingsStore from "./SettingsStore";
+import FilesSettingsStore from "./FilesSettingsStore";
 import FilesActionsStore from "./FilesActionsStore";
 import MediaViewerDataStore from "./MediaViewerDataStore";
 import UploadDataStore from "./UploadDataStore";
@@ -39,17 +49,27 @@ import WebhooksStore from "./WebhooksStore";
 import ClientLoadingStore from "./ClientLoadingStore";
 
 import PluginStore from "./PluginStore";
+import InfoPanelStore from "./InfoPanelStore";
 
-const selectedFolderStore = new SelectedFolderStore(authStore.settingsStore);
+const selectedFolderStore = new SelectedFolderStore(settingsStore);
 
-const pluginStore = new PluginStore(authStore, selectedFolderStore);
+const pluginStore = new PluginStore(
+  settingsStore,
+  selectedFolderStore,
+  userStore,
+);
 
-const paymentStore = new PaymentStore();
+const paymentStore = new PaymentStore(
+  userStore,
+  currentTariffStatusStore,
+  currentQuotaStore,
+  paymentQuotasStore,
+);
 const wizardStore = new WizardStore();
-const setupStore = new SettingsSetupStore();
+const setupStore = new SettingsSetupStore(tfaStore, authStore, settingsStore);
 const confirmStore = new ConfirmStore();
 const backupStore = new BackupStore();
-const commonStore = new CommonStore();
+const commonStore = new CommonStore(settingsStore);
 
 const ssoStore = new SsoFormStore();
 
@@ -57,91 +77,109 @@ const tagsStore = new TagsStore();
 
 const publicRoomStore = new PublicRoomStore();
 
+const infoPanelStore = new InfoPanelStore(userStore);
+
 const treeFoldersStore = new TreeFoldersStore(
   selectedFolderStore,
-  authStore,
-  publicRoomStore
+  settingsStore,
+  publicRoomStore,
 );
 
 const clientLoadingStore = new ClientLoadingStore();
 
-const settingsStore = new SettingsStore(
+const filesSettingsStore = new FilesSettingsStore(
   thirdPartyStore,
   treeFoldersStore,
   publicRoomStore,
   pluginStore,
-  authStore
+  authStore,
+  settingsStore,
 );
 
-const accessRightsStore = new AccessRightsStore(authStore, selectedFolderStore);
+const accessRightsStore = new AccessRightsStore(
+  authStore,
+  selectedFolderStore,
+  userStore,
+);
 
 const filesStore = new FilesStore(
   authStore,
   selectedFolderStore,
   treeFoldersStore,
-  settingsStore,
+  filesSettingsStore,
   thirdPartyStore,
   accessRightsStore,
   clientLoadingStore,
   pluginStore,
-  publicRoomStore
+  publicRoomStore,
+  infoPanelStore,
+  userStore,
+  currentTariffStatusStore,
+  settingsStore,
 );
 
 const mediaViewerDataStore = new MediaViewerDataStore(
   filesStore,
-  settingsStore,
-  publicRoomStore
+  publicRoomStore,
 );
 
-const oformsStore = new OformsStore(authStore);
+const oformsStore = new OformsStore(settingsStore, infoPanelStore, userStore);
 
 const secondaryProgressDataStore = new SecondaryProgressDataStore();
 const primaryProgressDataStore = new PrimaryProgressDataStore();
-const versionHistoryStore = new VersionHistoryStore(filesStore);
+const versionHistoryStore = new VersionHistoryStore(filesStore, settingsStore);
 
 const dialogsStore = new DialogsStore(
   authStore,
   treeFoldersStore,
   filesStore,
   selectedFolderStore,
-  versionHistoryStore
+  versionHistoryStore,
+  infoPanelStore,
 );
 
 const peopleStore = new PeopleStore(
   authStore,
   setupStore,
   accessRightsStore,
-  dialogsStore
+  dialogsStore,
+  infoPanelStore,
+  userStore,
+  tfaStore,
+  settingsStore,
 );
 
 const uploadDataStore = new UploadDataStore(
-  authStore,
+  settingsStore,
   treeFoldersStore,
   selectedFolderStore,
   filesStore,
   secondaryProgressDataStore,
   primaryProgressDataStore,
   dialogsStore,
-  settingsStore
+  filesSettingsStore,
 );
 
 const filesActionsStore = new FilesActionsStore(
-  authStore,
+  settingsStore,
   uploadDataStore,
   treeFoldersStore,
   filesStore,
   selectedFolderStore,
-  settingsStore,
+  filesSettingsStore,
   dialogsStore,
   mediaViewerDataStore,
   accessRightsStore,
   clientLoadingStore,
   publicRoomStore,
-  pluginStore
+  pluginStore,
+  infoPanelStore,
+  userStore,
+  currentTariffStatusStore,
 );
 
 const contextOptionsStore = new ContextOptionsStore(
-  authStore,
+  settingsStore,
   dialogsStore,
   filesActionsStore,
   filesStore,
@@ -149,21 +187,24 @@ const contextOptionsStore = new ContextOptionsStore(
   treeFoldersStore,
   uploadDataStore,
   versionHistoryStore,
-  settingsStore,
+  filesSettingsStore,
   selectedFolderStore,
   publicRoomStore,
   oformsStore,
-  pluginStore
+  pluginStore,
+  infoPanelStore,
+  currentTariffStatusStore,
+  userStore,
 );
 
 const hotkeyStore = new HotkeyStore(
   filesStore,
   dialogsStore,
-  settingsStore,
+  filesSettingsStore,
   filesActionsStore,
   treeFoldersStore,
   uploadDataStore,
-  selectedFolderStore
+  selectedFolderStore,
 );
 
 const profileActionsStore = new ProfileActionsStore(
@@ -172,19 +213,21 @@ const profileActionsStore = new ProfileActionsStore(
   peopleStore,
   treeFoldersStore,
   selectedFolderStore,
-  pluginStore
+  pluginStore,
+  userStore,
+  settingsStore,
 );
 
 peopleStore.profileActionsStore = profileActionsStore;
 
-const tableStore = new TableStore(authStore, treeFoldersStore);
+const tableStore = new TableStore(authStore, treeFoldersStore, userStore);
 
-authStore.infoPanelStore.authStore = authStore;
-authStore.infoPanelStore.settingsStore = settingsStore;
-authStore.infoPanelStore.filesStore = filesStore;
-authStore.infoPanelStore.peopleStore = peopleStore;
-authStore.infoPanelStore.selectedFolderStore = selectedFolderStore;
-authStore.infoPanelStore.treeFoldersStore = treeFoldersStore;
+infoPanelStore.filesSettingsStore = filesSettingsStore;
+infoPanelStore.filesStore = filesStore;
+infoPanelStore.peopleStore = peopleStore;
+infoPanelStore.selectedFolderStore = selectedFolderStore;
+infoPanelStore.treeFoldersStore = treeFoldersStore;
+infoPanelStore.publicRoomStore = publicRoomStore;
 
 const createEditRoomStore = new CreateEditRoomStore(
   filesStore,
@@ -192,29 +235,37 @@ const createEditRoomStore = new CreateEditRoomStore(
   selectedFolderStore,
   tagsStore,
   thirdPartyStore,
-  authStore.settingsStore,
-  authStore.infoPanelStore,
-  authStore.currentQuotaStore,
-  clientLoadingStore
+  settingsStore,
+  infoPanelStore,
+  currentQuotaStore,
+  clientLoadingStore,
 );
 
-const webhooksStore = new WebhooksStore(authStore);
+const webhooksStore = new WebhooksStore(settingsStore);
 
 const store = {
-  auth: authStore,
-  payments: paymentStore,
-  wizard: wizardStore,
+  authStore,
+  userStore,
+  tfaStore,
+  bannerStore,
+  currentTariffStatusStore,
+  currentQuotaStore,
+  paymentQuotasStore,
+  settingsStore,
+
+  paymentStore,
+  wizardStore,
   setup: setupStore,
   confirm: confirmStore,
   backup: backupStore,
   common: commonStore,
-
+  infoPanelStore,
   ssoStore,
   profileActionsStore,
 
   filesStore,
 
-  settingsStore,
+  filesSettingsStore,
   mediaViewerDataStore,
   versionHistoryStore,
   uploadDataStore,

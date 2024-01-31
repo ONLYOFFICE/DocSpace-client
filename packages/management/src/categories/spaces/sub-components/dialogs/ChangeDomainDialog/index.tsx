@@ -9,6 +9,7 @@ import { observer } from "mobx-react";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { useStore } from "SRC_DIR/store";
 import { parseDomain } from "SRC_DIR/utils";
+import { toastr } from "@docspace/shared/components/toast";
 
 const StyledModal = styled(ModalDialogContainer)`
   .create-docspace-input-block {
@@ -21,10 +22,10 @@ const StyledModal = styled(ModalDialogContainer)`
 
 const ChangeDomainDialogComponent = () => {
   const { t } = useTranslation(["Management", "Common"]);
-  const { spacesStore, authStore } = useStore();
+  const { spacesStore, settingsStore } = useStore();
   const [domainNameError, setDomainNameError] =
     React.useState<null | Array<object>>(null);
-
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const {
     setDomainName,
     getPortalDomain,
@@ -48,10 +49,19 @@ const ChangeDomainDialogComponent = () => {
 
     if (!isValidDomain) return;
 
-    await setDomainName(domain);
-    await authStore.settingsStore.getAllPortals();
-    await getPortalDomain();
-    onClose();
+    try {
+      setIsLoading(true);
+
+      await setDomainName(domain);
+      await settingsStore.getAllPortals();
+      await getPortalDomain();
+
+      onClose();
+    } catch (err) {
+      toastr.error(err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -98,6 +108,7 @@ const ChangeDomainDialogComponent = () => {
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
+          isLoading={isLoading}
           key="CreateButton"
           label={t("Common:ChangeButton")}
           onClick={onClickDomainChange}

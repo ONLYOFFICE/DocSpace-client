@@ -6,14 +6,15 @@ import { withTranslation } from "react-i18next";
 
 import { showLoader, hideLoader } from "@docspace/shared/utils/common";
 
-import Section from "@docspace/common/components/Section";
-
+import Section from "@docspace/shared/components/section";
+import SectionWrapper from "SRC_DIR/components/Section";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
 
 import {
   SectionFilterContent,
   SectionHeaderContent,
   SectionPagingContent,
+  SectionSubmenuContent,
   SectionWarningContent,
 } from "./Section";
 import AccountsDialogs from "./Section/AccountsBody/Dialogs";
@@ -38,6 +39,7 @@ const PureHome = (props) => {
 
     //homepage,
     setIsLoading,
+    isLoading,
 
     setToPreviewFile,
     playlist,
@@ -221,6 +223,7 @@ const PureHome = (props) => {
     loadCurrentUser,
     updateProfileCulture,
     getRooms,
+    isLoading,
   });
 
   React.useEffect(() => {
@@ -289,7 +292,7 @@ const PureHome = (props) => {
         </>
       )}
       <MediaViewer />
-      <Section {...sectionProps}>
+      <SectionWrapper {...sectionProps}>
         {(!isErrorRoomNotAvailable || isAccountsPage || isSettingsPage) && (
           <Section.SectionHeader>
             {isFrame ? (
@@ -299,6 +302,10 @@ const PureHome = (props) => {
             )}
           </Section.SectionHeader>
         )}
+
+        <Section.SectionSubmenu>
+          <SectionSubmenuContent />
+        </Section.SectionSubmenu>
 
         {isRecycleBinFolder && !isEmptyPage && (
           <Section.SectionWarning>
@@ -334,7 +341,7 @@ const PureHome = (props) => {
             <SectionPagingContent tReady={tReady} />
           </Section.SectionPaging>
         )}
-      </Section>
+      </SectionWrapper>
     </>
   );
 };
@@ -343,7 +350,7 @@ const Home = withTranslation(["Files", "People"])(PureHome);
 
 export default inject(
   ({
-    auth,
+    authStore,
     filesStore,
     uploadDataStore,
     treeFoldersStore,
@@ -354,6 +361,9 @@ export default inject(
     tagsStore,
     selectedFolderStore,
     clientLoadingStore,
+    userStore,
+    currentTariffStatusStore,
+    settingsStore,
   }) => {
     const { setSelectedFolder, security: folderSecurity } = selectedFolderStore;
     const {
@@ -456,8 +466,6 @@ export default inject(
 
     const { setToPreviewFile, playlist, removeFirstUrl } = mediaViewerDataStore;
 
-    const { settingsStore, currentTariffStatusStore } = auth;
-
     const { setPortalTariff } = currentTariffStatusStore;
 
     const {
@@ -495,7 +503,7 @@ export default inject(
       converted,
       isRecycleBinFolder,
       isPrivacyFolder,
-      isVisitor: auth.userStore.user.isVisitor,
+      isVisitor: userStore.user.isVisitor,
       folderSecurity,
       primaryProgressDataVisible,
       primaryProgressDataPercent,
@@ -529,6 +537,7 @@ export default inject(
 
       setDragging,
       setIsLoading,
+      isLoading,
       fetchFiles,
       fetchRooms,
 
@@ -550,7 +559,7 @@ export default inject(
       isFrame,
       showTitle: frameConfig?.showTitle,
       showFilter: frameConfig?.showFilter,
-      user: auth.userStore.user,
+      user: userStore.user,
       folders,
       files,
       selection,
@@ -574,13 +583,13 @@ export default inject(
       showFilterLoader,
 
       getSettings,
-      logout: auth.logout,
-      login: auth.login,
+      logout: authStore.logout,
+      login: authStore.login,
 
       createTag,
       addTagsToRoom,
       removeTagsFromRoom,
-      loadCurrentUser: auth.userStore.loadCurrentUser,
+      loadCurrentUser: userStore.loadCurrentUser,
       updateProfileCulture,
       getRooms,
       setSelectedFolder,

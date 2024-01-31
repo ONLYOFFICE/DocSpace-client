@@ -76,6 +76,17 @@ class AuthStore {
         this.currentQuotaStore.updateQuotaFeatureValue(featureId, value);
       });
     });
+
+    socketHelper.on(
+      "s:change-user-quota-used-value",
+      ({ userId, usedSpace, quotaLimit }) => {
+        console.log(
+          `[WS] change-user-quota-used-value ${userId}, :${usedSpace}, ${quotaLimit}`
+        );
+
+        runInAction(() => {});
+      }
+    );
   }
 
   setIsUpdatingTariff = (isUpdatingTariff) => {

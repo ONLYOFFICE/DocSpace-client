@@ -13,28 +13,6 @@ import {
 } from "@docspace/shared/utils/common";
 import { RoomsType } from "@docspace/shared/enums";
 
-import styled from "styled-components";
-
-import Logo from "PUBLIC_DIR/images/light_small_logo.react.svg";
-
-const ButtonWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  button {
-    background-color: ${(props) => props.buttonColor};
-    border-color: ${(props) => props.buttonColor};
-
-    :active {
-      background-color: ${(props) => props.buttonColor};
-      border-color: ${(props) => props.buttonColor};
-    }
-  }
-`;
-
 const Sdk = ({
   t,
   frameConfig,
@@ -52,7 +30,6 @@ const Sdk = ({
   fetchExternalLinks,
   getFilePrimaryLink,
 }) => {
-  const newWindow = useRef(null);
   const [isDataReady, setIsDataReady] = useState(false);
 
   useEffect(() => {
@@ -62,13 +39,6 @@ const Sdk = ({
       setFrameConfig(null);
     };
   }, [handleMessage]);
-
-  // useEffect(() => {
-  //   frameConfig && newWindow.current && newWindow.current.postMessage(frameConfig, window.location.origin);
-  //   return () => {
-  //     newWindow.current = null;
-  //   };
-  // }, [frameConfig]);
 
   const callCommand = useCallback(
     () => frameCallCommand("setConfig"),
@@ -226,36 +196,9 @@ const Sdk = ({
 
   let component;
 
-  const openRoomSelector = () => {
-    newWindow.current = window.open(
-      `/sdk/room-selector`,
-      "_blank",
-      `width=${frameConfig?.width ?? 600},height=${frameConfig?.height ?? 400}`,
-    );
-  };
-  const openFileSelector = () => {
-    newWindow.current = window.open(
-      `/sdk/file-selector`,
-      "_blank",
-      `width=${frameConfig?.width ?? 600},height=${frameConfig?.height ?? 400}`,
-    );
-  };
-
   switch (mode) {
     case "room-selector":
-      component = frameConfig?.isButtonMode ? (
-        <ButtonWrapper buttonColor={frameConfig?.buttonColor}>
-          <Button
-            scale={false}
-            size="small"
-            label={frameConfig?.buttonText || t("SelectToDocSpace")}
-            isHovered
-            primary
-            onClick={openRoomSelector}
-            icon={frameConfig?.buttonWithLogo ? <Logo /> : undefined}
-          />
-        </ButtonWrapper>
-      ) : (
+      component = (
         <RoomSelector
           withCancelButton={frameConfig?.showSelectorCancel}
           withHeader={frameConfig?.showSelectorHeader}
@@ -272,19 +215,7 @@ const Sdk = ({
       );
       break;
     case "file-selector":
-      component = frameConfig?.isButtonMode ? (
-        <ButtonWrapper buttonColor={frameConfig?.buttonColor}>
-          <Button
-            scale={false}
-            size="small"
-            label={frameConfig?.buttonText || t("SelectToDocSpace")}
-            isHovered
-            primary
-            onClick={openFileSelector}
-            icon={frameConfig?.buttonWithLogo ? <Logo /> : undefined}
-          />
-        </ButtonWrapper>
-      ) : (
+      component = (
         <FilesSelector
           isPanelVisible={true}
           embedded={true}

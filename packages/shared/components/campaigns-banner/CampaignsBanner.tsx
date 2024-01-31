@@ -1,5 +1,8 @@
+import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg?url";
+
 import { Text } from "../text";
 import { Link } from "../link";
+import { IconButton } from "../icon-button";
 
 import {
   BannerWrapper,
@@ -8,12 +11,14 @@ import {
 } from "./CampaignsBanner.styled";
 import { CampaignsBannerProps } from "./CampaignsBanner.types";
 
-const onAction = (url: string) => {
-  window.open(url, "_blank");
-};
-
 const CampaignsBanner = (props: CampaignsBannerProps) => {
-  const { campaignImage, campaignTranslate, campaignConfig } = props;
+  const {
+    campaignImage,
+    campaignTranslate,
+    campaignConfig,
+    onAction,
+    onClose,
+  } = props;
   const { Title, BodyText, ActionText } = campaignTranslate;
   const { borderColor, title, body, action } = campaignConfig;
 
@@ -50,7 +55,7 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
           <BannerButton
             buttonTextColor={action?.color}
             buttonColor={action?.backgroundColor}
-            onClick={() => onAction(action.url)}
+            onClick={() => onAction(action?.type, action?.url)}
           >
             {ActionText}
           </BannerButton>
@@ -59,12 +64,18 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
             color={action?.color}
             fontSize={action?.fontSize}
             fontWeight={action?.fontWeight}
-            onClick={() => onAction(action.url)}
+            onClick={() => onAction(action?.type, action?.url)}
           >
             {ActionText}
           </Link>
         )}
       </BannerContent>
+      <IconButton
+        className="close-icon"
+        size={12}
+        iconName={CrossReactSvg}
+        onClick={onClose}
+      />
     </BannerWrapper>
   );
 };

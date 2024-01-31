@@ -11,6 +11,10 @@ export interface CampaignsBannerProps {
   campaignTranslate: ITranslate;
   /** Config */
   campaignConfig: IConfig;
+  /** Button/Link action */
+  onAction(type?: string, url?: string): void;
+  /** Close action */
+  onClose(): void;
 }
 
 interface ITranslate {
@@ -29,6 +33,7 @@ interface IAction {
   isButton?: boolean;
   backgroundColor?: string;
   url: string;
+  type?: string;
 }
 
 interface IConfig {

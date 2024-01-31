@@ -6,12 +6,23 @@ const BannerWrapper = styled.div<{
   background?: string;
   borderColor?: string;
 }>`
+  position: relative;
   min-height: 140px;
   max-height: 140px;
   border-radius: 6px;
   border: 1px solid ${(props) => props.borderColor};
   background-image: url(${(props) => props.background});
   background-size: 100%;
+
+  .close-icon {
+    position: absolute;
+    right: 14px;
+    top: 18px;
+
+    path {
+      fill: "#A3A9AE";
+    }
+  }
 
   @media ${mobile} {
     min-height: 110px;

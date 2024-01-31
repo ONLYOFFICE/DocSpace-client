@@ -274,7 +274,7 @@ const VersionRow = (props) => {
                   className="version_edit-comment"
                   onChange={onChange}
                   fontSize={12}
-                  heightTextArea={54}
+                  heightTextArea="54px"
                   value={commentValue}
                   isDisabled={isSavingComment}
                   autoFocus={true}

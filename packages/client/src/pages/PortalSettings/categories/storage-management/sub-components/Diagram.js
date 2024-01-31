@@ -11,6 +11,8 @@ import {
 import { getConvertedSize } from "@docspace/shared/utils/common";
 
 const calculateSize = (size, common) => {
+  if (common === -1) return 0;
+
   return (size * 100) / common;
 };
 
@@ -20,14 +22,15 @@ const getTags = (obj, tenantCustomQuota, usedPortalSpace, t) => {
 
   let i = 0;
   const commonSize =
-    tenantCustomQuota < usedPortalSpace ? usedPortalSpace : tenantCustomQuota;
+    tenantCustomQuota < usedPortalSpace && tenantCustomQuota !== -1
+      ? usedPortalSpace
+      : tenantCustomQuota;
 
   for (let key in obj) {
     const item = obj[key];
     const { usedSpace, title } = item;
 
-    const percentageSize =
-      tenantCustomQuota === -1 ? 0 : calculateSize(usedSpace, commonSize);
+    const percentageSize = calculateSize(usedSpace, commonSize);
     const size = getConvertedSize(t, usedSpace);
 
     array.push({

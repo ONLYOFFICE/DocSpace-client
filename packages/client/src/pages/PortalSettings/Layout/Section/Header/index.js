@@ -346,12 +346,13 @@ const SectionHeaderContent = (props) => {
   );
 
   const onClickSessions = () => {
+    setSessionModalData({ ...peopleSelection[0] });
     setUserSessionPanelVisible(true);
   };
 
   const onClickLogout = () => {
-    setLogoutAllDialogVisible(true);
     setSessionModalData({ displayName: peopleSelection[0].displayName });
+    setLogoutAllDialogVisible(true);
   };
 
   const onClickDisable = () => {

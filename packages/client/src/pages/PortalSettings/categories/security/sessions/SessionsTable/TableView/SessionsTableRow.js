@@ -152,6 +152,7 @@ const SessionsTableRow = (props) => {
   } = props;
 
   const onClickSessions = () => {
+    setSessionModalData({ ...item });
     setUserSessionPanelVisible(true);
   };
 

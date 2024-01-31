@@ -123,7 +123,7 @@ const SessionsRow = (props) => {
   }, [isChecked, item, onContentRowClick]);
 
   const onClickSessions = () => {
-    console.log("view sessions");
+    setSessionModalData({ ...item });
   };
 
   const onClickLogout = () => {

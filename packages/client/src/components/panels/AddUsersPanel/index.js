@@ -288,11 +288,28 @@ const AddUsersPanel = ({
           cancelButtonLabel={t("Common:CancelButton")}
           onCancel={onClosePanels}
           emptyScreenImage={emptyScreenImage}
-          emptyScreenHeader={t("PeopleSelector:EmptyHeader")}
-          emptyScreenDescription={t("PeopleSelector:EmptyDescription")}
+          emptyScreenHeader={
+            // Todo: Update groups empty screen texts when they are ready
+            activeTabId === PEOPLE_TAB_ID
+              ? t("PeopleSelector:EmptyHeader")
+              : t("GroupsSelector:GroupsNotFoundHeader")
+          }
+          emptyScreenDescription={
+            activeTabId === PEOPLE_TAB_ID
+              ? t("PeopleSelector:EmptyDescription")
+              : t("GroupsSelector:GroupsNotFoundDescription")
+          }
           searchEmptyScreenImage={emptyScreenImage}
-          searchEmptyScreenHeader={t("People:NotFoundUsers")}
-          searchEmptyScreenDescription={t("People:NotFoundUsersDescription")}
+          searchEmptyScreenHeader={
+            activeTabId === PEOPLE_TAB_ID
+              ? t("People:NotFoundUsers")
+              : t("GroupsSelector:GroupsNotFoundHeader")
+          }
+          searchEmptyScreenDescription={
+            activeTabId === PEOPLE_TAB_ID
+              ? t("People:NotFoundUsersDescription")
+              : t("GroupsSelector:GroupsNotFoundDescription")
+          }
           hasNextPage={hasNextPage}
           isNextPageLoading={isNextPageLoading}
           loadNextPage={loadNextPage}
@@ -348,6 +365,7 @@ export default inject(({ auth }) => {
       "PeopleTranslations",
       "Common",
       "InviteDialog",
+      "GroupsSelector",
     ])(withLoader(AddUsersPanel)(<Loaders.DialogAsideLoader isPanel />)),
   ),
 );

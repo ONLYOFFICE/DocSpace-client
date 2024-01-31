@@ -54,6 +54,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     //user,
     whiteLabelLogoUrls,
     standalone,
+    isPortalUnlimited,
     userId,
     currentDeviceType,
     timezone,
@@ -124,13 +125,6 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       command: "subscribe",
       data: { roomParts: "backup-restore" },
     });
-
-    // unlimited quota (standalone)
-    socketHelper.emit({
-      command: "subscribe",
-      data: { roomParts: "quota" },
-    });
-
     socketHelper.on("restore-backup", () => {
       getRestoreProgress()
         .then((response) => {
@@ -147,6 +141,21 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
         });
     });
   }, [socketHelper]);
+
+  useEffect(() => {
+    (!standalone || !isPortalUnlimited) &&
+      socketHelper.emit({
+        command: "subscribe",
+        data: { roomParts: "quota" },
+      });
+
+    if (standalone && isPortalUnlimited) {
+      socketHelper.emit({
+        command: "unsubscribe",
+        data: { roomParts: "quota" },
+      });
+    }
+  }, [socketHelper, isPortalUnlimited]);
 
   const { t, ready } = useTranslation(["Common"]); //TODO: if enable banner ["Common", "SmartBanner"]
 
@@ -410,8 +419,15 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 const ShellWrapper = inject(({ auth, backup, clientLoadingStore }) => {
   const { i18n } = useTranslation();
 
-  const { init, isLoaded, settingsStore, setProductVersion, language } = auth;
-
+  const {
+    init,
+    isLoaded,
+    settingsStore,
+    setProductVersion,
+    language,
+    currentQuotaStore,
+  } = auth;
+  const { isPortalUnlimited } = currentQuotaStore;
   const {
     personal,
     roomsMode,
@@ -469,7 +485,7 @@ const ShellWrapper = inject(({ auth, backup, clientLoadingStore }) => {
     whiteLabelLogoUrls,
     standalone,
     currentDeviceType,
-
+    isPortalUnlimited,
     showArticleLoader: clientLoadingStore.showArticleLoader,
   };
 })(observer(Shell));

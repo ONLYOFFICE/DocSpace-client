@@ -263,6 +263,13 @@ class QuotasStore {
     return this.isStatisticsAvailable && (user.isOwner || user.isAdmin);
   }
 
+  get isPortalUnlimited() {
+    return (
+      !this.currentPortalQuota?.tenantCustomQuota?.enableQuota &&
+      !this.currentPortalQuota?.usersQuota?.enableQuota &&
+      !this.currentPortalQuota?.roomsQuota?.enableQuota
+    );
+  }
   updateTenantCustomQuota = (obj) => {
     for (let key in obj) {
       this.currentPortalQuota.tenantCustomQuota[key] = obj[key];

@@ -210,6 +210,7 @@ const SectionHeaderContent = (props) => {
     getAccountsCheckboxItemLabel,
     setAccountsSelected,
     isOwner,
+    isCollaborator,
     setInvitePanelOptions,
     isEmptyPage,
 
@@ -777,8 +778,11 @@ const SectionHeaderContent = (props) => {
         label: t("Files:CreateRoom"),
         key: "create-room",
         icon: CatalogRoomsReactSvgUrl,
-        onClick: onClickCreateRoom,
-        disabled: selectedFolder.rootFolderType !== FolderType.USER,
+        onClick: () => {
+          onClickCreateRoom({ title: selectedFolder.title, isFolder: true });
+        },
+        disabled:
+          isCollaborator || selectedFolder.rootFolderType !== FolderType.USER,
       },
       {
         id: "option_leave-room",
@@ -1137,6 +1141,7 @@ export default inject(
   }) => {
     const isOwner = auth.userStore.user?.isOwner;
     const isAdmin = auth.userStore.user?.isAdmin;
+    const isCollaborator = auth?.userStore?.user?.isCollaborator;
 
     const {
       setSelected,
@@ -1399,6 +1404,7 @@ export default inject(
       setAccountsSelected,
       isOwner,
       isAdmin,
+      isCollaborator,
       setInvitePanelOptions,
       isEmptyPage,
 

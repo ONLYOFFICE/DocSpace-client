@@ -252,7 +252,6 @@ const RoomSelector = (props) => {
   const buttonPreview = (
     <Frame width={"700px"} height={config.height} targetId={frameId}>
       <Box id={frameId}></Box>
-      <RectangleSkeleton width={"700px"} height={config.height} borderRadius="6px" />
     </Frame>
   );
 

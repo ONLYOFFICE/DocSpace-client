@@ -25,6 +25,8 @@ const DiskSpaceUsedComponent = (props) => {
     maxTotalSizeByQuota,
     standalone,
     isTenantCustomQuotaSet,
+    portalInfo,
+    updateTenantCustomQuota,
   } = props;
 
   const { t } = useTranslation("Settings");
@@ -48,13 +50,13 @@ const DiskSpaceUsedComponent = (props) => {
   const getContextModel = () => {
     return [
       {
-        key: "create",
+        key: "change-quota",
         label: t("Common:ChangeQuota"),
         icon: ChangQuotaReactSvgUrl,
         onClick: onChangeDialogClick,
       },
       {
-        key: "template-info",
+        key: "disable-quota",
         label: t("Common:DisableQuota"),
         icon: DisableQuotaReactSvgUrl,
         onClick: onDisableDialogClick,
@@ -65,9 +67,10 @@ const DiskSpaceUsedComponent = (props) => {
   const onClickContextMenu = (e) => {
     ref.current.show(e);
   };
-  const onSave = () => {
-    setIsVisibleChangeQuotaDialog(false);
+  const updateFunction = (storage) => {
+    updateTenantCustomQuota(storage);
   };
+
   const onClose = () => {
     setIsVisibleChangeQuotaDialog(false);
   };
@@ -78,8 +81,9 @@ const DiskSpaceUsedComponent = (props) => {
         <ChangeStorageQuotaDialog
           isDisableQuota={isDisableQuota}
           isVisible={isVisibleDialog}
-          onSave={onSave}
+          updateFunction={updateFunction}
           onClose={onClose}
+          portalInfo={portalInfo}
         />
       )}
       <StyledMainTitle fontSize="16px" fontWeight={700}>
@@ -132,15 +136,16 @@ const DiskSpaceUsedComponent = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
+export default inject(({ auth, storageManagement }) => {
   const { currentQuotaStore, settingsStore } = auth;
   const {
     isTenantCustomQuotaSet,
     usedTotalStorageSizeCount,
     maxTotalSizeByQuota: maxSizeByTariff,
     tenantCustomQuota,
+    updateTenantCustomQuota,
   } = currentQuotaStore;
-
+  const { portalInfo } = storageManagement;
   const { standalone } = settingsStore;
 
   const maxTotalSizeByQuota = standalone ? tenantCustomQuota : maxSizeByTariff;
@@ -150,5 +155,7 @@ export default inject(({ auth }) => {
     usedTotalStorageSizeCount,
     standalone,
     maxTotalSizeByQuota,
+    portalInfo,
+    updateTenantCustomQuota,
   };
 })(observer(DiskSpaceUsedComponent));

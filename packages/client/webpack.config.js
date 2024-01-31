@@ -320,7 +320,8 @@ module.exports = (env, argv) => {
         "./RestorePage":
           "./src/pages/PortalSettings/categories/data-management/backup/restore-backup",
         "./PaymentsPage": "./src/pages/PortalSettings/categories/payments",
-        "./ChangeQuotaDialog": "./src/components/dialogs/ChangeQuotaDialog",
+        "./ChangeStorageQuotaDialog":
+          "./src/components/dialogs/ChangeStorageQuotaDialog",
       },
       shared: {
         ...deps,

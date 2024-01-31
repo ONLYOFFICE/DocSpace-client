@@ -31,16 +31,17 @@ type TRoomContent = {
 export const RoomContent = ({ item, isCurrentPortal }: TRoomContent) => {
   const { t } = useTranslation(["Management", "Common", "Settings"]);
 
-  const { roomAdminCount, usersCount, storageSize, roomsCount, usedSize } =
-    item?.quotaUsage || {
-      roomAdminCount: null,
-      usersCount: null,
-      storageSize: null,
-      roomsCount: null,
-      usedSize: null,
-    };
+  const { roomAdminCount, usersCount, roomsCount } = item?.quotaUsage || {
+    roomAdminCount: null,
+    usersCount: null,
+    roomsCount: null,
+  };
+  const { quota, usedSize } = item || {
+    quota: null,
+    usedSize: null,
+  };
 
-  const maxStorage = getConvertedSize(t, storageSize);
+  const maxStorage = quota >= 0 ? getConvertedSize(t, quota) : null;
   const usedStorage = getConvertedSize(t, usedSize);
 
   return (

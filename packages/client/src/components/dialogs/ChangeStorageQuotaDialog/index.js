@@ -1,4 +1,3 @@
-import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";
 
@@ -16,11 +15,11 @@ const ChangeStorageQuotaDialog = (props) => {
     initialSize,
     portalInfo,
     isVisible,
-    onSave,
+    updateFunction,
     onClose,
     isDisableQuota,
-    updateTenantCustomQuota,
   } = props;
+
   const { t } = useTranslation("Common");
 
   const [isLoading, setIsLoading] = useState(false);
@@ -57,13 +56,15 @@ const ChangeStorageQuotaDialog = (props) => {
         Quota: isDisableQuota ? -1 : size,
       });
 
-      updateTenantCustomQuota(storageQuota);
+      await updateFunction(storageQuota);
+
       toastr.success(t("Common:StorageQuotaSet"));
     } catch (e) {
       toastr.error(e);
     }
+
     setSize("");
-    onSave && onSave();
+    onClose && onClose();
     setIsLoading(false);
   };
 
@@ -127,17 +128,4 @@ const ChangeStorageQuotaDialog = (props) => {
   );
 };
 
-export default inject(({ auth, dialogsStore, storageManagement }) => {
-  const { changeQuotaDialogVisible, setChangeQuotaDialogVisible } =
-    dialogsStore;
-  const { portalInfo } = storageManagement;
-  const { currentQuotaStore } = auth;
-  const { updateTenantCustomQuota } = currentQuotaStore;
-
-  return {
-    changeQuotaDialogVisible,
-    setChangeQuotaDialogVisible,
-    portalInfo,
-    updateTenantCustomQuota,
-  };
-})(observer(ChangeStorageQuotaDialog));
+export default ChangeStorageQuotaDialog;

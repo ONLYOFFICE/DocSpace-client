@@ -11,62 +11,48 @@ import {
 import { getConvertedSize } from "@docspace/shared/utils/common";
 
 const calculateSize = (size, common) => {
-  const percentage = (size * 100) / common;
-
-
-  return percentage;
+  return (size * 100) / common;
 };
 
+const getTags = (obj, tenantCustomQuota, usedPortalSpace, t) => {
+  const array = [];
+  const colors = ["#13B7EC", "#22C386", "#FF9933", "#FFD30F"];
+
+  let i = 0;
+  const commonSize =
+    tenantCustomQuota < usedPortalSpace ? usedPortalSpace : tenantCustomQuota;
+
+  for (let key in obj) {
+    const item = obj[key];
+    const { usedSpace, title } = item;
+
+    const percentageSize =
+      tenantCustomQuota === -1 ? 0 : calculateSize(usedSpace, commonSize);
+    const size = getConvertedSize(t, usedSpace);
+
+    array.push({
+      name: title,
+      color: colors[i],
+      percentageSize,
+      size,
+    });
+
+    i++;
+  }
+
+  return array;
+};
 const Diagram = (props) => {
   const {
-    myDocumentsUsedSpace,
     tenantCustomQuota,
-    trashUsedSpace,
-    archiveUsedSpace,
-    roomsUsedSpace,
     maxWidth = 660,
+    filesUsedSpace,
+    usedSpace,
   } = props;
 
   const { t } = useTranslation("Common");
 
-  const elementsTags = [
-    {
-      name: myDocumentsUsedSpace.title,
-      color: "#13B7EC",
-      percentageSize: calculateSize(
-        myDocumentsUsedSpace.usedSpace,
-        tenantCustomQuota
-      ),
-      size: getConvertedSize(t, myDocumentsUsedSpace.usedSpace),
-    },
-    {
-      name: roomsUsedSpace.title,
-      color: "#22C386",
-      percentageSize: calculateSize(
-        roomsUsedSpace.usedSpace,
-        tenantCustomQuota,
-      ),
-      size: getConvertedSize(t, roomsUsedSpace.usedSpace),
-    },
-    {
-      name: trashUsedSpace.title,
-      color: "#FF9933",
-      percentageSize: calculateSize(
-        trashUsedSpace.usedSpace,
-        tenantCustomQuota,
-      ),
-      size: getConvertedSize(t, trashUsedSpace.usedSpace),
-    },
-    {
-      name: archiveUsedSpace.title,
-      color: "#FFD30F",
-      percentageSize: calculateSize(
-        archiveUsedSpace.usedSpace,
-        tenantCustomQuota,
-      ),
-      size: getConvertedSize(t, archiveUsedSpace.usedSpace),
-    },
-  ];
+  const elementsTags = getTags(filesUsedSpace, tenantCustomQuota, usedSpace, t);
 
   return (
     <StyledDiagramComponent maxWidth={maxWidth}>
@@ -95,20 +81,11 @@ const Diagram = (props) => {
 export default inject(({ storageManagement, auth }) => {
   const { filesUsedSpace } = storageManagement;
   const { currentQuotaStore } = auth;
-  const { tenantCustomQuota } = currentQuotaStore;
-
-  const {
-    myDocumentsUsedSpace,
-    trashUsedSpace,
-    archiveUsedSpace,
-    roomsUsedSpace,
-  } = filesUsedSpace;
+  const { tenantCustomQuota, usedTotalStorageSizeCount } = currentQuotaStore;
 
   return {
     tenantCustomQuota,
-    myDocumentsUsedSpace,
-    trashUsedSpace,
-    archiveUsedSpace,
-    roomsUsedSpace,
+    filesUsedSpace,
+    usedSpace: usedTotalStorageSizeCount,
   };
 })(observer(Diagram));

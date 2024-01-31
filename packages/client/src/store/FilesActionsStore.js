@@ -997,7 +997,8 @@ class FilesActionStore {
   setPinAction = (action, id, t) => {
     const { pinRoom, unpinRoom, updateRoomPin, setSelected } = this.filesStore;
 
-    const { selection, setSelection } = this.authStore.infoPanelStore;
+    const { infoPanelSelection, setInfoPanelSelection } =
+      this.authStore.infoPanelStore;
 
     const items = Array.isArray(id) ? id : [id];
 
@@ -1014,8 +1015,8 @@ class FilesActionStore {
         return Promise.all(actions)
           .then(() => {
             this.updateCurrentFolder(null, items, null, operationId);
-            if (selection) {
-              setSelection({ ...selection, pinned: true });
+            if (infoPanelSelection) {
+              setInfoPanelSelection({ ...infoPanelSelection, pinned: true });
             }
           })
           .then(() => setSelected("close"))
@@ -1036,7 +1037,7 @@ class FilesActionStore {
           .then(() => {
             this.updateCurrentFolder(null, items, null, operationId);
             if (selection) {
-              setSelection({ ...selection, pinned: false });
+              setInfoPanelSelection({ ...selection, pinned: false });
             }
           })
           .then(() => setSelected("close"))
@@ -1605,7 +1606,9 @@ class FilesActionStore {
 
         return !allFilesIsEditing && canDelete && hasSelection;
       case "create-room":
-        const canCreateRoom = rootFolderType === FolderType.USER;
+        const { isCollaborator } = this.authStore?.userStore?.user || { isCollaborator: false };
+
+        const canCreateRoom = !isCollaborator && rootFolderType === FolderType.USER;
 
         return canCreateRoom;
     }
@@ -1732,9 +1735,10 @@ class FilesActionStore {
 
   onShowInfoPanel = () => {
     const { selection } = this.filesStore;
-    const { setSelection, setIsVisible } = this.authStore.infoPanelStore;
+    const { setInfoPanelSelection, setIsVisible } =
+      this.authStore.infoPanelStore;
 
-    setSelection([selection]);
+    setInfoPanelSelection([selection]);
     setIsVisible(true);
   };
 
@@ -2231,7 +2235,9 @@ class FilesActionStore {
   onClickBack = () => {
     const { roomType, ...rest } = this.selectedFolderStore;
     const { setSelectedNode } = this.treeFoldersStore;
-    const { clearFiles } = this.filesStore;
+    const { clearFiles, setBufferSelection } = this.filesStore;
+
+    setBufferSelection(null);
 
     const categoryType = getCategoryType(window.DocSpace.location);
 

@@ -40,7 +40,7 @@ const SeveralItems = ({ isAccounts, theme, selectedItems }) => {
 };
 
 export default inject(({ auth }) => {
-  const selectedItems = auth.infoPanelStore.getSelectedItems();
+  const selectedItems = auth.infoPanelStore.infoPanelSelectedItems;
 
   return {
     theme: auth.settingsStore.theme,

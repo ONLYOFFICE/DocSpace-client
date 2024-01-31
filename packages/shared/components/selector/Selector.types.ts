@@ -178,6 +178,7 @@ export type TSelectorItem = {
   color?: string;
   fileExst?: string;
   roomType?: RoomsType;
+  shared: boolean;
 };
 
 export interface SearchProps {

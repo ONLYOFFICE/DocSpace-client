@@ -13,11 +13,10 @@ import { decode } from "he";
 
 const HistoryBlock = ({
   t,
-  selection,
   selectionIsFile,
   feed,
   selectedFolder,
-  selectionParentRoom,
+  infoPanelSelection,
   getInfoPanelItemIcon,
   checkAndOpenLocationAction,
   openUser,
@@ -72,9 +71,8 @@ const HistoryBlock = ({
           className="message"
           action={json}
           groupedActions={groupedFeeds}
-          selection={selection}
           selectedFolder={selectedFolder}
-          selectionParentRoom={selectionParentRoom}
+          infoPanelSelection={infoPanelSelection}
         />
 
         {isItemAction && withFileList && (

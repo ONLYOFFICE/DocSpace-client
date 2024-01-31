@@ -52,6 +52,7 @@
       onAppError: (e) => console.log("onAppError", e),
       onEditorCloseCallback: null,
       onAuthSuccess: null,
+      onSignOut: null,
     },
   };
 
@@ -103,6 +104,7 @@
   class DocSpace {
     #iframe;
     #isConnected = false;
+    #frameOpacity = 0;
     #callbacks = [];
     #tasks = [];
     #classNames = "";
@@ -113,6 +115,36 @@
 
     #oneOfExistInObject = (array, object) => {
       return Object.keys(object).some((k) => array.includes(k));
+    };
+
+    #createLoader = (config) => {
+      const container = document.createElement("div");
+      container.style.width = config.width;
+      container.style.height = config.height;
+      container.style.display = "flex";
+      container.style.justifyContent = "center";
+      container.style.alignItems = "center";
+
+      const loader = document.createElement("img");
+      loader.setAttribute("src", `${config.src}/static/images/loader.svg`);
+      loader.setAttribute("width", `64px`);
+      loader.setAttribute("height", `64px`);
+
+      if (
+        config.theme === "Dark" ||
+        (config.theme === "System" &&
+          window.matchMedia("(prefers-color-scheme: dark)"))
+      ) {
+        container.style.backgroundColor = "#333333";
+        loader.style.filter =
+          "invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%)";
+      }
+
+      container.appendChild(loader);
+
+      container.setAttribute("id", config.frameId + "-loader");
+
+      return container;
     };
 
     #createIframe = (config) => {
@@ -209,7 +241,7 @@
 
       iframe.frameBorder = 0;
       iframe.allowFullscreen = true;
-      iframe.setAttribute("allow", "storage-access");
+      iframe.setAttribute("allow", "storage-access *");
 
       if (config.type == "mobile") {
         iframe.style.position = "fixed";
@@ -240,6 +272,8 @@
           </body>`;
           iframe.srcdoc = html;
           e.message && config.events.onAppError(e.message);
+
+          this.setIsLoaded();
         });
       }
 
@@ -253,8 +287,10 @@
         data: message,
       };
 
-      if (!!this.#iframe.contentWindow) {
-        this.#iframe.contentWindow.postMessage(
+      const targetFrame = document.getElementById(this.config.frameId);
+
+      if (!!targetFrame.contentWindow) {
+        targetFrame.contentWindow.postMessage(
           JSON.stringify(mes, (key, value) =>
             typeof value === "function" ? value.toString() : value
           ),
@@ -336,12 +372,37 @@
 
       const target = document.getElementById(this.config.frameId);
 
+      let iframe = null;
+
       if (target) {
-        this.#iframe = this.#createIframe(this.config);
+        iframe = this.#createIframe(this.config);
+
+        iframe.style.opacity = this.#frameOpacity;
+        iframe.style.zIndex = 2;
+        iframe.style.position = "absolute";
+        iframe.width = "95%";
+        iframe.height = "95%";
+
+        const frameLoader = this.#createLoader(this.config);
+
         this.#classNames = target.className;
 
-        target.parentNode &&
-          target.parentNode.replaceChild(this.#iframe, target);
+        const renderContainer = document.createElement("div");
+        renderContainer.id = this.config.frameId + "-container";
+        renderContainer.style.display = "relative";
+        renderContainer.style.width = this.config.width;
+        renderContainer.style.height = this.config.height || "100%";
+
+        renderContainer.appendChild(iframe);
+        renderContainer.appendChild(frameLoader);
+
+        const isSelfReplace = target.parentNode.isEqualNode(
+          document.getElementById(this.config.frameId + "-container")
+        );
+
+        target && isSelfReplace
+          ? target.parentNode.replaceWith(renderContainer)
+          : target.replaceWith(renderContainer);
 
         window.addEventListener("message", this.#onMessage, false);
 
@@ -352,13 +413,28 @@
 
       window.DocSpace.SDK.frames[this.config.frameId] = this;
 
-      return this.#iframe;
+      return iframe;
     }
 
     initManager(config = {}) {
       config.mode = "manager";
 
       return this.initFrame(config);
+    }
+
+    setIsLoaded() {
+      const targetFrame = document.getElementById(this.config.frameId);
+      const loader = document.getElementById(this.config.frameId + "-loader");
+
+      if (targetFrame) {
+        targetFrame.style.opacity = 1;
+        targetFrame.style.position = "relative";
+        targetFrame.width = this.config.width;
+        targetFrame.height = this.config.height;
+        targetFrame.parentNode.style.height = "inherit";
+
+        if (loader) loader.remove();
+      }
     }
 
     initEditor(config = {}) {
@@ -398,14 +474,16 @@
       target.innerHTML = this.config.destroyText;
       target.className = this.#classNames;
 
-      if (this.#iframe) {
+      const targetFrame = document.getElementById(this.config.frameId);
+
+      if (targetFrame) {
         window.removeEventListener("message", this.#onMessage, false);
         this.#isConnected = false;
 
         delete window.DocSpace.SDK.frames[this.config.frameId];
 
-        this.#iframe.parentNode &&
-          this.#iframe.parentNode.replaceChild(target, this.#iframe);
+        targetFrame.parentNode &&
+          targetFrame.parentNode.replaceChild(target, targetFrame);
       }
 
       this.config = {};

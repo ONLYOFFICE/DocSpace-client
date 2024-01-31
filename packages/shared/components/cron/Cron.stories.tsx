@@ -1,3 +1,4 @@
+import moment from "moment";
 import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { useTranslation } from "react-i18next";
@@ -8,37 +9,83 @@ import { Cron, getNextSynchronization } from ".";
 import { InputSize, InputType, TextInput } from "../text-input";
 import { Button, ButtonSize } from "../button";
 import type { CronProps } from "./Cron.types";
+import { defaultCronString } from "./Cron.constants";
 
-type CronType = FC<{ locale: string } & CronProps>;
+type CronType = FC<{ locale: string; timezone: string } & CronProps>;
 
 type Story = StoryObj<CronType>;
 
 const locales = [
   "az",
-  "ar-SA",
-  "zh-cn",
+  "bg",
   "cs",
-  "nl",
-  "en",
+  "de",
+  "el-GR",
+  "en-GB",
+  "en-US",
+  "es",
   "fi",
   "fr",
-  "de",
-  "de-ch",
-  "el",
+  "hy-AM",
   "it",
-  "ja",
-  "ko",
   "lv",
+  "nl",
   "pl",
   "pt",
-  "pt-br",
+  "pt-BR",
+  "ro",
   "ru",
   "sk",
   "sl",
-  "es",
-  "tr",
-  "uk",
   "vi",
+  "tr",
+  "uk-UA",
+  "ar-SA",
+  "lo-LA",
+  "ja-JP",
+  "zh-CN",
+  "ko-KR",
+];
+
+const TzNames = [
+  "-12:00",
+  "-11:00",
+  "-10:00",
+  "-09:30",
+  "-09:00",
+  "-08:00",
+  "-07:00",
+  "-06:00",
+  "-05:00",
+  "-04:00",
+  "-03:30",
+  "-03:00",
+  "-02:00",
+  "-01:00",
+  "00:00",
+  "+01:00",
+  "+02:00",
+  "+03:00",
+  "+03:30",
+  "+04:00",
+  "+04:30",
+  "+05:00",
+  "+05:30",
+  "+05:45",
+  "+06:00",
+  "+06:30",
+  "+07:00",
+  "+08:00",
+  "+08:45",
+  "+09:00",
+  "+09:30",
+  "+10:00",
+  "+10:30",
+  "+11:00",
+  "+12:00",
+  "+12:45",
+  "+13:00",
+  "+14:00",
 ];
 
 const meta: Meta<CronType> = {
@@ -56,11 +103,16 @@ const meta: Meta<CronType> = {
         "Triggered when the cron component detects an error with the value.",
     },
     locale: { control: "select", options: locales },
+    timezone: { control: "select", options: TzNames },
   },
   decorators: [i18nextStoryDecorator],
 };
 
-const DefaultTemplate = ({ defaultValue, locale }: Record<string, string>) => {
+const DefaultTemplate = ({
+  defaultValue,
+  locale,
+  timezone,
+}: Record<string, string>) => {
   const { i18n } = useTranslation();
 
   const [input, setInput] = useState(() => defaultValue);
@@ -89,7 +141,10 @@ const DefaultTemplate = ({ defaultValue, locale }: Record<string, string>) => {
     setValue(defaultValue);
   }, [defaultValue]);
 
-  const date = useMemo(() => cron && getNextSynchronization(cron), [cron]);
+  const date = useMemo(
+    () => getNextSynchronization(cron, timezone),
+    [cron, timezone],
+  );
 
   return (
     <div>
@@ -98,13 +153,13 @@ const DefaultTemplate = ({ defaultValue, locale }: Record<string, string>) => {
           display: "flex",
           gap: "6px",
           alignItems: "baseline",
-          maxWidth: "max-content",
-          marginBottom: "8px",
+          maxWidth: "340px",
+          marginBottom: "12px",
         }}
       >
         <TextInput
+          scale
           withBorder
-          scale={false}
           value={input}
           type={InputType.text}
           size={InputSize.base}
@@ -112,6 +167,9 @@ const DefaultTemplate = ({ defaultValue, locale }: Record<string, string>) => {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setInput(e.target.value)
           }
+          style={{
+            flexGrow: 1,
+          }}
         />
 
         <Button
@@ -132,10 +190,7 @@ const DefaultTemplate = ({ defaultValue, locale }: Record<string, string>) => {
       {date && (
         <p>
           <strong>Next synchronization: </strong>{" "}
-          {date
-            .toUTC()
-            .setLocale(locale ?? "en")
-            .toFormat("DDDD tt")}
+          {`${date?.setLocale(locale).toFormat("DDDD TTTT")}`}
         </p>
       )}
     </div>
@@ -146,10 +201,17 @@ export default meta;
 
 export const Default: Story = {
   args: {
-    locale: "en",
+    locale: "en-GB",
+    timezone: moment.tz(moment.tz.guess()).format("Z"),
   },
 
-  render: ({ value: defaultValue = "", locale }) => {
-    return <DefaultTemplate defaultValue={defaultValue} locale={locale} />;
+  render: ({ value: defaultValue = defaultCronString, locale, timezone }) => {
+    return (
+      <DefaultTemplate
+        locale={locale}
+        timezone={timezone}
+        defaultValue={defaultValue}
+      />
+    );
   },
 };

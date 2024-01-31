@@ -259,7 +259,7 @@ const LinkRow = (props) => {
 
 export default inject(
   ({ auth, dialogsStore, publicRoomStore, treeFoldersStore }) => {
-    const { selectionParentRoom } = auth.infoPanelStore;
+    const { infoPanelSelection } = auth.infoPanelStore;
     const { theme } = auth.settingsStore;
 
     const {
@@ -274,14 +274,14 @@ export default inject(
     return {
       setLinkParams,
       editExternalLink,
-      roomId: selectionParentRoom.id,
+      roomId: infoPanelSelection.id,
       setExternalLink,
       setEditLinkPanelIsVisible,
       setDeleteLinkDialogVisible,
       setEmbeddingPanelIsVisible,
       isArchiveFolder: isArchiveFolderRoot,
       theme,
-      isPublicRoomType: selectionParentRoom.roomType === RoomsType.PublicRoom,
+      isPublicRoomType: infoPanelSelection.roomType === RoomsType.PublicRoom,
     };
   }
 )(

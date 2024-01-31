@@ -70,6 +70,7 @@ const getItems = (count: number) => {
       id: `user_${i}`,
       label: `${label} ${i}`,
       icon: CustomSvgUrl,
+      shared: false,
     });
   }
 
@@ -80,6 +81,7 @@ const getItems = (count: number) => {
       id: `room_${i}`,
       label: `${label} ${i}`,
       icon: CustomSvgUrl,
+      shared: false,
     });
   }
 

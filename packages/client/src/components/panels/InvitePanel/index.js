@@ -54,9 +54,8 @@ const InvitePanel = ({
   defaultAccess,
   inviteUsers,
   setInfoPanelIsMobileHidden,
-  reloadSelectionParentRoom,
-  setUpdateRoomMembers,
-  roomsView,
+  updateInfoPanelSelection,
+  addInfoPanelMembers,
   setInviteLanguage,
   getUsersList,
   filter,
@@ -277,15 +276,15 @@ const InvitePanel = ({
 
     try {
       setIsLoading(true);
-      const result =
-        roomId === -1
-          ? await inviteUsers(data)
-          : await setRoomSecurity(roomId, data);
+      const isRooms = roomId !== -1;
+      const result = !isRooms
+        ? await inviteUsers(data)
+        : await setRoomSecurity(roomId, data);
 
       setIsLoading(false);
 
-      if (roomsView === "info_members") {
-        setUpdateRoomMembers(true);
+      if (isRooms) {
+        addInfoPanelMembers(t, result.members, true);
       }
 
       onClose();
@@ -295,7 +294,7 @@ const InvitePanel = ({
         toastr.warning(result?.warning);
       }
 
-      reloadSelectionParentRoom();
+      updateInfoPanelSelection();
     } catch (err) {
       toastr.error(err);
       setIsLoading(false);
@@ -471,10 +470,8 @@ export default inject(({ auth, peopleStore, filesStore, dialogsStore }) => {
   const { filter } = peopleStore.filterStore;
   const {
     setIsMobileHidden: setInfoPanelIsMobileHidden,
-    reloadSelectionParentRoom,
-    setUpdateRoomMembers,
-    roomsView,
-    filesView,
+    updateInfoPanelSelection,
+    addInfoPanelMembers,
   } = auth.infoPanelStore;
 
   const {
@@ -517,9 +514,8 @@ export default inject(({ auth, peopleStore, filesStore, dialogsStore }) => {
     collaboratorLink,
     inviteUsers,
     setInfoPanelIsMobileHidden,
-    reloadSelectionParentRoom,
-    setUpdateRoomMembers,
-    roomsView,
+    updateInfoPanelSelection,
+    addInfoPanelMembers,
     getUsersList,
     filter,
     currentDeviceType,

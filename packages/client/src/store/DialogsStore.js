@@ -131,7 +131,7 @@ class DialogsStore {
       visible &&
       !this.filesStore.hasSelection &&
       !this.filesStore.hasBufferSelection &&
-      !this.authStore.infoPanelStore.selection
+      !this.authStore.infoPanelStore.infoPanelSelection
     )
       return;
 
@@ -160,7 +160,7 @@ class DialogsStore {
       visible &&
       !this.filesStore.hasSelection &&
       !this.filesStore.hasBufferSelection &&
-      !this.authStore.infoPanelStore.selection
+      !this.authStore.infoPanelStore.infoPanelSelection
     ) {
       console.log("No files selected");
       return;

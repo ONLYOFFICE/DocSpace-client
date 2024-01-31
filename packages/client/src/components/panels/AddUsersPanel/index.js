@@ -50,6 +50,21 @@ const AddUsersPanel = ({
   userIdsToFilterOut,
   withGroups,
 }) => {
+  const [itemsList, setItemsList] = useState(null);
+  const [searchValue, setSearchValue] = useState("");
+  const [hasNextPage, setHasNextPage] = useState(true);
+  const [isNextPageLoading, setIsNextPageLoading] = useState(false);
+  const [total, setTotal] = useState(0);
+  const [isLoading, setIsLoading] = useLoadingWithTimeout(
+    LOADER_TIMEOUT,
+    false,
+  );
+  const [isLoadingSearch, setIsLoadingSearch] = useLoadingWithTimeout(
+    LOADER_TIMEOUT,
+    false,
+  );
+  const [activeTabId, setActiveTabId] = useState(PEOPLE_TAB_ID);
+
   const accessRight = defaultAccess
     ? defaultAccess
     : isEncrypted
@@ -65,12 +80,6 @@ const AddUsersPanel = ({
   const onKeyPress = (e) => {
     if (e.key === "Esc" || e.key === "Escape") onClose();
   };
-
-  useEffect(() => {
-    window.addEventListener("keyup", onKeyPress);
-
-    return () => window.removeEventListener("keyup", onKeyPress);
-  });
 
   const onClosePanels = () => {
     onClose();
@@ -121,26 +130,6 @@ const AddUsersPanel = ({
   const selectedAccess = accessOptions.filter(
     (access) => access.access === accessRight,
   )[0];
-
-  const [itemsList, setItemsList] = useState(null);
-  const [searchValue, setSearchValue] = useState("");
-  const [hasNextPage, setHasNextPage] = useState(true);
-  const [isNextPageLoading, setIsNextPageLoading] = useState(false);
-  const [total, setTotal] = useState(0);
-  const [isLoading, setIsLoading] = useLoadingWithTimeout(
-    LOADER_TIMEOUT,
-    false,
-  );
-  const [isLoadingSearch, setIsLoadingSearch] = useLoadingWithTimeout(
-    LOADER_TIMEOUT,
-    false,
-  );
-  const [activeTabId, setActiveTabId] = useState(PEOPLE_TAB_ID);
-  const [showTabs, setShowTabs] = useState(withGroups);
-
-  useEffect(() => {
-    loadNextPage(0);
-  }, [activeTabId]);
 
   const onSearch = (value, callback) => {
     if (value === searchValue) return;
@@ -201,9 +190,8 @@ const AddUsersPanel = ({
     let searchArea = AccountsSearchArea.People;
 
     if (withGroups) {
-      searchArea = !!search.length
-        ? AccountsSearchArea.Any
-        : activeTabId === PEOPLE_TAB_ID
+      searchArea =
+        activeTabId === PEOPLE_TAB_ID
           ? AccountsSearchArea.People
           : AccountsSearchArea.Groups;
     }
@@ -246,16 +234,22 @@ const AddUsersPanel = ({
         callback?.();
         setIsLoading(false);
         setIsLoadingSearch(false);
-
-        if (withGroups) {
-          setShowTabs(!currentFilter.search);
-        }
       });
   };
 
   const emptyScreenImage = theme.isBase
     ? EmptyScreenPersonsSvgUrl
     : EmptyScreenPersonsSvgDarkUrl;
+
+  useEffect(() => {
+    window.addEventListener("keyup", onKeyPress);
+
+    return () => window.removeEventListener("keyup", onKeyPress);
+  });
+
+  useEffect(() => {
+    loadNextPage(0);
+  }, [activeTabId]);
 
   return (
     <>
@@ -315,7 +309,7 @@ const AddUsersPanel = ({
               withAllSelect={!isLoadingSearch}
             />
           }
-          withTabs={showTabs}
+          withTabs={withGroups}
           tabsData={[
             {
               id: PEOPLE_TAB_ID,

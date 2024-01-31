@@ -31,7 +31,7 @@ export interface TextareaProps {
   /** Font-size value */
   fontSize?: number;
   /** Text-area height value */
-  heightTextArea?: string;
+  heightTextArea?: string | number;
   /** Specifies the text color */
   color?: string;
   /** Default input property */

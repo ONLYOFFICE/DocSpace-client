@@ -22,7 +22,7 @@ const ClearScrollbar = ({
   isDisabled?: boolean;
   heightScale?: boolean;
   hasError?: boolean;
-  heightTextAreaProp?: number;
+  heightTextAreaProp?: string;
   ref?: React.Ref<HTMLDivElement>;
 } & ScrollbarProps) => <Scrollbar {...props} />;
 
@@ -208,7 +208,14 @@ const CopyIconWrapper = styled.div<{
 
 CopyIconWrapper.defaultProps = { theme: Base };
 
-const Wrapper = styled.div<{ enableCopy?: boolean; isJSONField?: boolean }>`
+const Wrapper = styled.div<{
+  heightScale?: boolean;
+  isFullHeight?: boolean;
+  fullHeight?: number;
+  heightTextArea?: string;
+  enableCopy?: boolean;
+  isJSONField?: boolean;
+}>`
   position: relative;
 
   max-width: 1200px;

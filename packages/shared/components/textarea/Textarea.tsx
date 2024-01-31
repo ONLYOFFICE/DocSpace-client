@@ -54,6 +54,8 @@ const Textarea = ({
   const padding = 7;
   const numberOfLines = modifiedValue.split("\n").length;
   const fullHeight = numberOfLines * fontSize * lineHeight + padding + 4;
+  const stringifiedHeight =
+    typeof heightTextArea === "number" ? `${heightTextArea}px` : heightTextArea;
 
   const defaultPaddingLeft = 42;
   const numberOfDigits =
@@ -75,8 +77,8 @@ const Textarea = ({
   };
 
   useEffect(() => {
-    if (hasError !== isError) setIsError(hasError);
-  }, [hasError, isError]);
+    setIsError(hasError);
+  }, [hasError]);
 
   useEffect(() => {
     setIsError(isJSONField && (!value || !isJSON(value)));
@@ -96,7 +98,7 @@ const Textarea = ({
       onClick={onTextareaClick}
       data-testid="textarea"
       heightScale={heightScale}
-      heightTextArea={heightTextArea}
+      heightTextArea={stringifiedHeight}
       isFullHeight={isFullHeight}
       fullHeight={fullHeight}
     >
@@ -120,7 +122,7 @@ const Textarea = ({
         isDisabled={isDisabled}
         hasError={isError}
         heightScale={heightScale}
-        heightTextAreaProp={heightTextArea}
+        heightTextAreaProp={stringifiedHeight}
         isFullHeight={isFullHeight}
         fullHeight={fullHeight}
       >

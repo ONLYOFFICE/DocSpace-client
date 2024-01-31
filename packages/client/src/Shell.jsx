@@ -125,11 +125,11 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       data: { roomParts: "backup-restore" },
     });
 
-    !standalone && // unlimited quota (standalone)
-      socketHelper.emit({
-        command: "subscribe",
-        data: { roomParts: "quota" },
-      });
+    // unlimited quota (standalone)
+    socketHelper.emit({
+      command: "subscribe",
+      data: { roomParts: "quota" },
+    });
 
     socketHelper.on("restore-backup", () => {
       getRestoreProgress()

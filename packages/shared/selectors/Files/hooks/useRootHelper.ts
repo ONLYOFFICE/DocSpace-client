@@ -20,8 +20,12 @@ const useRootHelper = ({
   isUserOnly,
 }: UseRootHelperProps) => {
   const [isRoot, setIsRoot] = React.useState<boolean>(false);
+  const requestRunning = React.useRef(false);
 
   const getRootData = React.useCallback(async () => {
+    if (requestRunning.current) return;
+
+    requestRunning.current = true;
     setBreadCrumbs([DEFAULT_BREAD_CRUMB]);
     setIsRoot(true);
     setIsBreadCrumbsLoading(false);
@@ -64,6 +68,7 @@ const useRootHelper = ({
     setTotal(newItems.length);
     setHasNextPage(false);
     setIsNextPageLoading(false);
+    requestRunning.current = false;
   }, [
     isUserOnly,
     setBreadCrumbs,

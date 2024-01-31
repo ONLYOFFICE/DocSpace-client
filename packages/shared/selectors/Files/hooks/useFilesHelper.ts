@@ -46,6 +46,8 @@ const useFilesHelper = ({
   roomsFolderId,
   getFilesArchiveError,
 }: UseFilesHelpersProps) => {
+  const requestRunning = React.useRef(false);
+
   const getFileList = React.useCallback(
     async (
       startIndex: number,
@@ -53,6 +55,9 @@ const useFilesHelper = ({
       itemId: number | string | undefined,
       isInit?: boolean,
     ) => {
+      if (requestRunning.current) return;
+
+      requestRunning.current = true;
       setIsNextPageLoading(true);
 
       const currentSearch =
@@ -116,6 +121,8 @@ const useFilesHelper = ({
               await getRoomList(0, null, true, true);
               const error = getFilesArchiveError(folder.title);
               toastr.error(error);
+
+              requestRunning.current = false;
               return;
             }
             await getRootData();
@@ -125,7 +132,7 @@ const useFilesHelper = ({
               const error = getFilesArchiveError(folder.title);
               toastr.error(error);
             }
-
+            requestRunning.current = false;
             return;
           }
         }
@@ -177,7 +184,7 @@ const useFilesHelper = ({
                 foundParentId = true;
                 setIsSelectedParentFolder(true);
               }
-
+              requestRunning.current = false;
               return {
                 label: title,
                 id: breadCrumbId,
@@ -217,6 +224,7 @@ const useFilesHelper = ({
           await setSettings(rootThirdPartyId, true);
 
           toastr.error(e as TData);
+          requestRunning.current = false;
           return;
         }
 
@@ -224,9 +232,11 @@ const useFilesHelper = ({
           await getRoomList(0, null, true, true);
 
           toastr.error(e as TData);
+          requestRunning.current = false;
           return;
         }
 
+        requestRunning.current = false;
         getRootData?.();
 
         if (onSetBaseFolderPath) {

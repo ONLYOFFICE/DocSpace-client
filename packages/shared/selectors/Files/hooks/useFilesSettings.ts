@@ -10,16 +10,23 @@ const useFilesSettings = (
 ) => {
   const [settings, setSettings] = React.useState({} as TFilesSettings);
 
+  const requestRunning = React.useRef(false);
+
   const initSettings = React.useCallback(async () => {
+    if (requestRunning.current) return;
+
+    requestRunning.current = true;
     if (getIconProp) return;
     const res = await getSettingsFiles();
 
     setSettings(res);
+    requestRunning.current = false;
   }, [getIconProp]);
 
   React.useEffect(() => {
+    if (settings.extsArchive) return;
     initSettings();
-  }, [initSettings]);
+  }, [initSettings, settings.extsArchive]);
 
   const isArchive = React.useCallback(
     (extension: string) => presentInArray(settings.extsArchive, extension),

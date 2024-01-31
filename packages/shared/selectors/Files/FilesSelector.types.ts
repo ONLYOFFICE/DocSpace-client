@@ -107,7 +107,7 @@ export interface FilesSelectorProps {
   rootThirdPartyId?: string;
   roomsFolderId?: number;
   currentFolderId: number | string;
-  parentId: number | string;
+  parentId?: number | string;
   rootFolderType: FolderType;
 
   onClose: () => void;

@@ -368,16 +368,6 @@ const FilesSelector = ({
     );
   };
 
-  const isDisabled = getIsDisabled(
-    isFirstLoad,
-    isSelectedParentFolder,
-    selectedItemId,
-    selectedItemType,
-    isRoot,
-    selectedItemSecurity,
-    selectedFileInfo,
-  );
-
   const SelectorBody = (
     <Selector
       withHeader={withHeader}
@@ -395,12 +385,12 @@ const FilesSelector = ({
       cancelButtonLabel={cancelButtonLabel}
       onCancel={onClose}
       emptyScreenImage={
-        theme.isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl
+        theme?.isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl
       }
       emptyScreenHeader={emptyScreenHeader}
       emptyScreenDescription={emptyScreenDescription}
       searchEmptyScreenImage={
-        theme.isBase
+        theme?.isBase
           ? EmptyScreenFilterAltSvgUrl
           : EmptyScreenFilterAltDarkSvgUrl
       }
@@ -428,7 +418,15 @@ const FilesSelector = ({
       loadNextPage={
         isRoot ? null : selectedItemType === "rooms" ? getRoomList : getFileList
       }
-      disableAcceptButton={isDisabled}
+      disableAcceptButton={getIsDisabled(
+        isFirstLoad,
+        isSelectedParentFolder,
+        selectedItemId,
+        selectedItemType,
+        isRoot,
+        selectedItemSecurity,
+        selectedFileInfo,
+      )}
       withFooterInput={withFooterInput}
       withFooterCheckbox={withFooterCheckbox}
       footerInputHeader={footerInputHeader}

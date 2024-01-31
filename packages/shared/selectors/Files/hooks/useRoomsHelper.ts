@@ -22,6 +22,7 @@ const useRoomsHelper = ({
   isRoomsOnly,
   onSetBaseFolderPath,
 }: UseRoomsHelperProps) => {
+  const requestRunning = React.useRef(false);
   const getRoomList = React.useCallback(
     async (
       startIndex: number,
@@ -29,6 +30,9 @@ const useRoomsHelper = ({
       isInit?: boolean,
       isErrorPath?: boolean,
     ) => {
+      if (requestRunning.current) return;
+
+      requestRunning.current = true;
       setIsNextPageLoading(true);
 
       const filterValue = search || (search === null ? "" : searchValue || "");
@@ -74,6 +78,7 @@ const useRoomsHelper = ({
         });
       }
 
+      requestRunning.current = false;
       setIsNextPageLoading(false);
       setIsRoot(false);
     },

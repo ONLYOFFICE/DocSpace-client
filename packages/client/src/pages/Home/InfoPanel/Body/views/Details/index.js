@@ -91,7 +91,7 @@ const Details = ({
       ) : (
         <StyledNoThumbnail>
           <RoomIcon
-            color={selection.logo.color}
+            color={selection.logo?.color}
             title={selection.title}
             isArchive={isArchive}
             size="96px"

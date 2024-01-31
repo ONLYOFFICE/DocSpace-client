@@ -13,11 +13,9 @@ import { TabsContainer } from "@docspace/shared/components/tabs-container";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { mobile, tablet } from "@docspace/shared/utils";
 import { objectToGetParams, loadScript } from "@docspace/shared/utils/common";
-import { RoomsType } from "@docspace/shared/enums";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Link } from "@docspace/shared/components/link";
 
@@ -151,25 +149,27 @@ const Frame = styled(Box)`
   margin-top: 16px;
   position: relative;
 
+  border-radius: 6px;
+  border: 1px solid #d0d5da;
+
+  width: ${(props) => (props.width ? props.width : "100%")};
+  height: calc(${(props) => (props.height ? props.height : "400px")} + 2px);
+
   @media ${tablet} {
     margin-top: 4px;
   }
-
-  ${isMobile &&
-  css`
-    margin-top: 4px;
-  `}
 
   ${(props) =>
     props.targetId &&
     `
     #${props.targetId} {
-      position: absolute;
       border-radius: 6px;
-      border: 1px solid #d0d5da;
-      min-width: ${props.width ? props.width : "100%"};
-      min-height: ${props.height ? props.height : "400px"};
     }
+  `}
+
+  ${isMobile &&
+  css`
+    margin-top: 4px;
   `}
 `;
 
@@ -494,9 +494,12 @@ const PortalIntegration = (props) => {
   const codeBlock = `<div id="${frameId}">Fallback text</div>\n<script src="${scriptUrl}${params}"></script>`;
 
   const preview = (
-    <Frame width={width} height={width} targetId={frameId}>
+    <Frame
+      width={width + widthDimension.label}
+      height={height + heightDimension.label}
+      targetId={frameId}
+    >
       <Box id={frameId}></Box>
-      <RectangleSkeleton width={width} height={height} borderRadius="6px" />
     </Frame>
   );
 

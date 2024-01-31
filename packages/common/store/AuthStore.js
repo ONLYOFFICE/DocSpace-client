@@ -81,10 +81,12 @@ class AuthStore {
       "s:change-user-quota-used-value",
       ({ userId, usedSpace, quotaLimit }) => {
         console.log(
-          `[WS] change-user-quota-used-value ${userId}, :${usedSpace}, ${quotaLimit}`
+          `[WS] change-user-quota-used-value ${userId}: usedSpace:${usedSpace}, quotaLimit: ${quotaLimit}`
         );
 
-        runInAction(() => {});
+        runInAction(() => {
+          this.userStore.updateUserQuota(usedSpace, quotaLimit);
+        });
       }
     );
   }

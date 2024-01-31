@@ -115,6 +115,11 @@ class UserStore {
     this.user = { ...this.user, newUser };
   };
 
+  updateUserQuota = (usedSpace, quotaLimit) => {
+    this.user.usedSpace = usedSpace;
+    this.user.quotaLimit = quotaLimit;
+  };
+
   updateAvatarInfo = (avatar, avatarSmall, avatarMedium, avatarMax) => {
     this.user.avatar = avatar;
     this.updateUser({ avatar, avatarSmall, avatarMedium, avatarMax });

@@ -62,6 +62,7 @@ const FilesMediaViewer = (props) => {
     onClickDownloadAs,
     setActiveFiles,
     pluginContextMenuItems,
+    isOpenMediaViewer,
     someDialogIsOpen,
   } = props;
 
@@ -220,6 +221,9 @@ const FilesMediaViewer = (props) => {
       setBufferSelection,
     ]
   );
+  useEffect(() => {
+    if (playlist.length === 0 && isOpenMediaViewer) onMediaViewerClose();
+  }, [isOpenMediaViewer, onMediaViewerClose, playlist.length]);
 
   return (
     visible && (
@@ -362,6 +366,7 @@ export default inject(
       nextMedia,
       prevMedia,
       userAccess,
+      isOpenMediaViewer: visible,
       visible: playlist.length > 0 && visible,
       currentMediaFileId,
       deleteItemAction,

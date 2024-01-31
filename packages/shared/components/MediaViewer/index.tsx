@@ -339,12 +339,6 @@ function MediaViewer(props: MediaViewerProps): JSX.Element | undefined {
   }, [playlistPos, onChangeUrl, playlist, currentFileId]);
 
   useEffect(() => {
-    return () => {
-      if (isWillUnmountRef.current) onClose();
-    };
-  }, [onClose]);
-
-  useEffect(() => {
     const currentFile = playlist[playlistPos];
 
     const tempCurrentFileId =

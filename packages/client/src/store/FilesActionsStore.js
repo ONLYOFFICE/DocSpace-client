@@ -1608,7 +1608,8 @@ class FilesActionStore {
       case "create-room":
         const { isCollaborator } = this.authStore.userStore.user;
 
-        const canCreateRoom = !isCollaborator && rootFolderType === FolderType.USER;
+        const canCreateRoom =
+          !isCollaborator && rootFolderType === FolderType.USER;
 
         return canCreateRoom;
     }
@@ -2198,11 +2199,6 @@ class FilesActionStore {
       }
 
       if (isMediaOrImage) {
-        // localStorage.setItem("isFirstUrl", window.location.href);
-
-        this.mediaViewerDataStore.saveFirstUrl(
-          `${window.DocSpace.location.pathname}${window.DocSpace.location.search}`
-        );
         setMediaViewerData({ visible: true, id });
 
         const url = combineUrl(MEDIA_VIEW_URL, id);

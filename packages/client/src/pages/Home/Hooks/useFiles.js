@@ -42,7 +42,6 @@ const useFiles = ({
   setIsUpdatingRowItem,
 
   gallerySelected,
-  removeFirstUrl,
   folderSecurity,
 }) => {
   const navigate = useNavigate();
@@ -100,12 +99,6 @@ const useFiles = ({
 
     if (location.pathname === "/") setIsLoading(true, true, true);
     else setIsLoading(true, false, false);
-
-    if (!window.location.href.includes(MEDIA_VIEW_URL)) {
-      // localStorage.removeItem("isFirstUrl");
-      // Media viewer
-      removeFirstUrl();
-    }
 
     const categoryType = getCategoryType(location);
 

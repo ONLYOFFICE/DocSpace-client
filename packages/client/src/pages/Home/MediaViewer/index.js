@@ -193,8 +193,6 @@ const FilesMediaViewer = (props) => {
       }
 
       setMediaViewerData({ visible: false, id: null });
-
-      // const url = localStorage.getItem("isFirstUrl");
       const url = getFirstUrl();
 
       if (!url) {
@@ -202,9 +200,12 @@ const FilesMediaViewer = (props) => {
       }
 
       const targetFile = files.find((item) => item.id === currentMediaFileId);
-      if (targetFile) setBufferSelection(targetFile);
+      if (targetFile) {
+        setBufferSelection(targetFile);
+        setScrollToItem({ id: targetFile.id, type: "file" });
+      }
 
-      navigate(url, { replace: true });
+      window.history.replaceState(null, "", url);
     },
     [
       files,

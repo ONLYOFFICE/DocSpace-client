@@ -7,6 +7,7 @@ import {
 import { thumbnailStatuses } from "SRC_DIR/helpers/filesConstants";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
 const FirstUrlKey = "isFirstUrl";
 
@@ -63,16 +64,16 @@ class MediaViewerDataStore {
     this.id = id;
   };
 
-  saveFirstUrl = (url) => {
-    localStorage.setItem(FirstUrlKey, url);
-  };
-
   getFirstUrl = () => {
-    return localStorage.getItem(FirstUrlKey);
-  };
+    const filter = this.filesStore.filter;
 
-  removeFirstUrl = () => {
-    localStorage.removeItem(FirstUrlKey);
+    const queryParams = filter.toUrlParams();
+
+    const url = getCategoryUrl(this.filesStore.categoryType, filter.folder);
+
+    const pathname = `${url}?${queryParams}`;
+
+    return pathname;
   };
 
   changeUrl = (id) => {

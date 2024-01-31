@@ -296,8 +296,6 @@ function MediaViewer(props: MediaViewerProps): JSX.Element | undefined {
   );
 
   const fetchAndSetTiffDataURL = useCallback((src: string) => {
-    if (!window.Tiff) return;
-
     TiffAbortSignalRef.current?.abort();
     TiffAbortSignalRef.current = new AbortController();
 

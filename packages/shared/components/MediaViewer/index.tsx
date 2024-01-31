@@ -9,6 +9,7 @@ import React, {
 import { isMobile as isMobileUtils, isTablet } from "@docspace/shared/utils";
 import { getFileExtension } from "@docspace/shared/utils/common";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
+import { encoderTiff } from "@docspace/shared/utils/encoderTiff";
 
 import {
   isNullOrUndefined,
@@ -53,7 +54,7 @@ function MediaViewer(props: MediaViewerProps): JSX.Element | undefined {
     ...other
   } = props;
 
-  const TiffXMLHttpRequestRef = useRef<XMLHttpRequest>();
+  const TiffAbortSignalRef = useRef<AbortController>();
   const isWillUnmountRef = useRef(false);
   const lastRemovedFileIdRefRef = useRef<number>();
 
@@ -297,26 +298,23 @@ function MediaViewer(props: MediaViewerProps): JSX.Element | undefined {
   const fetchAndSetTiffDataURL = useCallback((src: string) => {
     if (!window.Tiff) return;
 
-    TiffXMLHttpRequestRef.current?.abort();
+    TiffAbortSignalRef.current?.abort();
+    TiffAbortSignalRef.current = new AbortController();
 
-    const xhr = new XMLHttpRequest();
-    TiffXMLHttpRequestRef.current = xhr;
-    xhr.responseType = "arraybuffer";
+    fetch(src, { signal: TiffAbortSignalRef.current.signal })
+      .then((response) => response.arrayBuffer())
+      .then((response) => {
+        const url = encoderTiff(response);
 
-    xhr.open("GET", src);
-    xhr.onload = () => {
-      try {
-        const tiff = new window.Tiff({ buffer: xhr.response });
-
-        const dataUrl = tiff.toDataURL();
-
-        setFileUrl(dataUrl);
-      } catch (e) {
+        setFileUrl(url);
+      })
+      .catch((error: Error) => {
+        if (error.name === "AbortError") {
+          return;
+        }
         // eslint-disable-next-line no-console
-        console.log(e);
-      }
-    };
-    xhr.send();
+        console.log(error);
+      });
   }, []);
 
   const onSetSelectionFile = useCallback(() => {
@@ -339,31 +337,10 @@ function MediaViewer(props: MediaViewerProps): JSX.Element | undefined {
   }, [playlistPos, onChangeUrl, playlist, currentFileId]);
 
   useEffect(() => {
-    const currentFile = playlist[playlistPos];
-
-    const tempCurrentFileId =
-      playlist.length > 0
-        ? playlist.find((file) => file.id === playlistPos)?.fileId
-        : 0;
-
-    const tempTargetFile = files.find((item) => item.id === tempCurrentFileId);
-
-    if (tempTargetFile) setBufferSelection(tempTargetFile);
-
-    const { src, title: CurrentFileTitle } = currentFile;
-
-    const extension = getFileExtension(CurrentFileTitle);
-
-    if (extension === ".tiff" || extension === ".tif") {
-      fetchAndSetTiffDataURL(src);
-    }
-  }, [
-    files,
-    playlist,
-    playlistPos,
-    setBufferSelection,
-    fetchAndSetTiffDataURL,
-  ]);
+    return () => {
+      TiffAbortSignalRef.current?.abort();
+    };
+  }, []);
 
   useEffect(() => {
     const { src, title: currentTitle, fileId } = playlist[playlistPos];
@@ -372,7 +349,7 @@ function MediaViewer(props: MediaViewerProps): JSX.Element | undefined {
     if (!src) return onEmptyPlaylistError();
 
     if (extension !== ".tif" && extension !== ".tiff") {
-      TiffXMLHttpRequestRef.current?.abort();
+      TiffAbortSignalRef.current?.abort();
       setFileUrl(src);
     }
 
@@ -403,7 +380,6 @@ function MediaViewer(props: MediaViewerProps): JSX.Element | undefined {
 
     return () => {
       document.removeEventListener("keydown", onKeydown);
-      TiffXMLHttpRequestRef.current?.abort();
     };
   }, [onKeydown]);
 

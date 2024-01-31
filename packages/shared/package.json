@@ -74,6 +74,7 @@
     "sjcl": "^1.0.8",
     "socket.io-client": "^4.6.1",
     "styled-components": "^5.3.9",
+    "utif": "^3.1.0",
     "workbox-window": "^6.5.4"
   },
   "devDependencies": {
@@ -120,6 +121,7 @@
     "@types/react-window": "^1.8.8",
     "@types/react-window-infinite-loader": "^1.0.9",
     "@types/sjcl": "^1.0.34",
+    "@types/utif": "^3.0.5",
     "@typescript-eslint/eslint-plugin": "^6.12.0",
     "@typescript-eslint/parser": "^6.12.0",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.4.1",
@@ -169,4 +171,3 @@
     "react-dom": "^18.2.0"
   }
 }
-

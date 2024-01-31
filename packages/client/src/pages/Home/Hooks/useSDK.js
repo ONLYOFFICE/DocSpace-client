@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useCallback } from "react";
 
 import { Events } from "@docspace/shared/enums";
 import {
@@ -20,7 +20,6 @@ const useSDK = ({
   createRoom,
   refreshFiles,
   setViewAs,
-
   getSettings,
   logout,
   login,
@@ -30,6 +29,7 @@ const useSDK = ({
   loadCurrentUser,
   updateProfileCulture,
   getRooms,
+  isLoading,
 }) => {
   const handleMessage = async (e) => {
     const eventData = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
@@ -172,11 +172,7 @@ const useSDK = ({
     }
   };
 
-  // if (window.parent && !frameConfig) {
-  //   frameCallCommand("setConfig");
-  // }
-
-  React.useEffect(() => {
+  useEffect(() => {
     window.addEventListener("message", handleMessage, false);
 
     return () => {
@@ -184,9 +180,13 @@ const useSDK = ({
     };
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     frameCallCommand("setConfig");
   }, [frameConfig?.frameId]);
+
+  useEffect(() => {
+    if (!isLoading) frameCallCommand("setIsLoaded");
+  }, [isLoading]);
 };
 
 export default useSDK;

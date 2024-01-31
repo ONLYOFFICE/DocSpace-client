@@ -962,7 +962,6 @@ class SettingsStore {
     });
 
     if (!!frameConfig) {
-      this.setTheme(frameConfig?.theme);
       frameCallEvent({
         event: "onAppReady",
         data: { frameId: frameConfig.frameId },

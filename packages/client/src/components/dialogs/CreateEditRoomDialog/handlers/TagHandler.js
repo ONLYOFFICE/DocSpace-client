@@ -22,6 +22,11 @@ class TagHandler {
 
   addTag(name) {
     let newTags = [...this.tags];
+
+    if (this.isAlreadyAdded(name)) {
+      return; //already added
+    }
+
     newTags.push({
       id: this.createRandomTagId(),
       name,
@@ -29,11 +34,26 @@ class TagHandler {
     this.setTags(newTags);
   }
 
+  isAlreadyAdded(name) {
+    return !!this.tags.find((t) => t.name.toLowerCase() === name.toLowerCase());
+  }
+
+  isNew(name) {
+    return !this.fetchedTags.find(
+      (t) => t.toLowerCase() === name.toLowerCase()
+    );
+  }
+
   addNewTag(name) {
     let newTags = [...this.tags];
+
+    if (this.isAlreadyAdded(name)) {
+      return; //already added
+    }
+
     newTags.push({
       id: this.createRandomTagId(),
-      isNew: true,
+      isNew: this.isNew(name),
       name,
     });
     this.setTags(newTags);

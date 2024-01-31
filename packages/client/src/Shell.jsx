@@ -426,6 +426,8 @@ const ShellWrapper = inject(({ auth, backup, clientLoadingStore }) => {
     whiteLabelLogoUrls,
     standalone,
     currentDeviceType,
+    isFrame,
+    frameConfig,
   } = settingsStore;
 
   const isBase = settingsStore.theme.isBase;
@@ -464,7 +466,7 @@ const ShellWrapper = inject(({ auth, backup, clientLoadingStore }) => {
     setTheme,
     roomsMode,
     setSnackbarExist,
-    userTheme: userTheme,
+    userTheme: isFrame ? frameConfig?.theme : userTheme,
     userId: auth?.userStore?.user?.id,
     whiteLabelLogoUrls,
     standalone,

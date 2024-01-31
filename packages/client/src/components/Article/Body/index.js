@@ -51,7 +51,7 @@ const ArticleBodyContent = (props) => {
   const [disableBadgeClick, setDisableBadgeClick] = React.useState(false);
   const [activeItemId, setActiveItemId] = React.useState(null);
 
-  const campaigns = (localStorage.getItem("campaigns") || "")
+  const campaigns = (localStorage.getItem("docspace_campaigns") || "")
     .split(",")
     .filter((campaign) => campaign.length > 0);
 

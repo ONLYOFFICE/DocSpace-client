@@ -24,7 +24,11 @@ import { Dark, Base } from "@docspace/components/themes";
 import { useMounted } from "../helpers/useMounted";
 import { getBgPattern } from "@docspace/common/utils";
 import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
-import { getLogoFromPath, getSystemTheme } from "@docspace/common/utils";
+import {
+  getLogoFromPath,
+  getSystemTheme,
+  frameCallCommand,
+} from "@docspace/common/utils";
 import { TenantStatus } from "@docspace/common/constants";
 
 const themes = {
@@ -82,6 +86,7 @@ const Login: React.FC<ILoginProps> = ({
     const systemTheme = getSystemTheme();
     const theme = themes[systemTheme];
     setTheme(theme);
+    frameCallCommand("setIsLoaded");
   }, []);
 
   const ssoExists = () => {

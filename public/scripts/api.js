@@ -321,7 +321,7 @@
             break;
           }
           case "onEventReturn": {
-            if (_.isEmpty(this.config)) return;
+            if (Object.keys(this.config).length === 0) return;
             if (
               data?.eventReturnData?.event in this.config.events &&
               typeof this.config.events[data?.eventReturnData.event] ===
@@ -380,8 +380,10 @@
         iframe.style.opacity = this.#frameOpacity;
         iframe.style.zIndex = 2;
         iframe.style.position = "absolute";
-        iframe.style.width = "95%";
-        iframe.style.height = "95%";
+        iframe.style.width = "100%";
+        iframe.style.height = "100%";
+        iframe.style.top = 0;
+        iframe.style.left = 0;
 
         const frameLoader = this.#createLoader(this.config);
 
@@ -389,7 +391,7 @@
 
         const renderContainer = document.createElement("div");
         renderContainer.id = this.config.frameId + "-container";
-        renderContainer.style.display = "relative";
+        renderContainer.style.position = "relative";
         renderContainer.style.width = this.config.width;
         renderContainer.style.height = this.config.height || "100%";
 

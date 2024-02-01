@@ -82,7 +82,6 @@ function ViewerPlayer({
   const playerWrapperRef = useRef<HTMLDivElement>(null);
   const isDurationInfinityRef = useRef<boolean>(false);
   const isOpenContextMenuRef = useRef<boolean>(isOpenContextMenu);
-  const prevSrcRef = useRef(src);
 
   const { isDesktop, isMobile } = devices;
 
@@ -537,12 +536,10 @@ function ViewerPlayer({
   }, [handleResize]);
 
   useLayoutEffect(() => {
-    if (prevSrcRef.current === src) return;
-    prevSrcRef.current = src;
-
     setIsLoading(true);
     resetState();
-  }, [resetState, src]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [src]);
 
   useEffect(() => {
     if (isOpenContextMenuRef.current === isOpenContextMenu) return;

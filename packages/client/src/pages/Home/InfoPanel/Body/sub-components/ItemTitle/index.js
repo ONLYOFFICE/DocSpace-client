@@ -17,6 +17,7 @@ const ItemTitle = ({
   currentColorScheme,
   getIcon,
   getUserContextOptions,
+  onSearchClick,
 }) => {
   if (!selection) return null;
   if (isNoItem) return null;
@@ -50,7 +51,7 @@ const ItemTitle = ({
       />
     );
 
-  return <RoomsItemHeader />;
+  return <RoomsItemHeader onSearchClick={onSearchClick} />;
 };
 
 export default inject(({ auth, settingsStore, peopleStore, oformsStore }) => {

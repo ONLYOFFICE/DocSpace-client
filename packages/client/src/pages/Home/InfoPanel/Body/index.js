@@ -3,6 +3,7 @@ import { inject, observer } from "mobx-react";
 
 import ViewHelper from "./helpers/ViewHelper";
 import ItemTitle from "./sub-components/ItemTitle";
+import Search from "./sub-components/Search";
 
 import { StyledInfoPanelBody } from "./styles/common";
 import { useParams } from "react-router-dom";
@@ -32,6 +33,8 @@ const InfoPanelBodyContent = ({
 
   const [selectedItems, setSelectedItems] = useState(props.selectedItems);
   const [selectedFolder, setSelectedFolder] = useState(props.selectedFolder);
+  const [showSearchBlock, setShowSearchBlock] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
 
   const isFiles = getIsFiles();
   const isRooms = getIsRooms();
@@ -83,6 +86,13 @@ const InfoPanelBodyContent = ({
     pluginProps: { isRooms, roomsView, fileView },
   });
 
+  const openSearchBlock = () => setShowSearchBlock(true);
+  const closeSearchBlock = () => {
+    setSearchValue("");
+    setShowSearchBlock(false);
+  };
+  const onSearchChange = (value) => setSearchValue(value);
+
   const getView = () => {
     const currentView = isRooms ? roomsView : fileView;
 
@@ -132,7 +142,7 @@ const InfoPanelBodyContent = ({
   useEffect(() => {
     const selectedFolderChanged = isItemChanged(
       selectedFolder,
-      props.selectedFolder
+      props.selectedFolder,
     );
     if (selectedFolderChanged) setSelectedFolder(props.selectedFolder);
   }, [props.selectedFolder]);
@@ -178,11 +188,20 @@ const InfoPanelBodyContent = ({
 
   return (
     <StyledInfoPanelBody>
+      {showSearchBlock && (
+        <Search
+          value={searchValue}
+          onChange={onSearchChange}
+          onClose={closeSearchBlock}
+        />
+      )}
+
       {!isNoItem && (
         <ItemTitle
           {...defaultProps}
           selectionLength={selectedItems.length}
           isNoItem={isNoItem}
+          onSearchClick={openSearchBlock}
         />
       )}
       {getView()}

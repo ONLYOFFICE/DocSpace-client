@@ -17,6 +17,10 @@ export interface ScrollbarProps {
   noScrollY?: boolean;
   /** Disable horizontal scrolling. */
   noScrollX?: boolean;
+  /** Calculating height of content depending on number of lines */
+  isFullHeight?: boolean;
+  /** Calculated height of content depending on number of lines in pixels */
+  fullHeight?: number;
 
   onScroll?: React.UIEventHandler<HTMLDivElement>;
   scrollclass?: string;

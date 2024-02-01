@@ -280,30 +280,17 @@ const Article = ({
                   incrementIndexOfArticleAlertsData={
                     incrementIndexOfArticleAlertsData
                   }
-                  isNonProfit={isNonProfit}
-                  isEnterprise={isEnterprise}
-                  isFreeTariff={isFreeTariff}
-                  isGracePeriod={isGracePeriod}
-                  isLicenseDateExpired={isLicenseDateExpired}
-                  isLicenseExpiring={isLicenseExpiring}
-                  isPaymentPageAvailable={isPaymentPageAvailable}
                   isSubmitToGalleryAlertAvailable={
                     isSubmitToGalleryAlertAvailable
                   }
                   isTeamTrainingAlertAvailable={isTeamTrainingAlertAvailable}
-                  isTrial={isTrial}
-                  standalone={standalone}
                   bookTrainingEmail={bookTrainingEmail}
                   removeAlertFromArticleAlertsData={
                     removeAlertFromArticleAlertsData
                   }
-                  currentTariffPlanTitle={currentTariffPlanTitle}
-                  toggleArticleOpen={toggleArticleOpen}
                   setSubmitToGalleryDialogVisible={
                     setSubmitToGalleryDialogVisible
                   }
-                  trialDaysLeft={trialDaysLeft}
-                  paymentDate={paymentDate}
                 />
               )}
               {withDevTools && (

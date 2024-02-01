@@ -1525,7 +1525,9 @@ class ContextOptionsStore {
       });
     }
 
-    const { isCollaborator } = this.authStore.userStore.user;
+    const { isCollaborator } = this.authStore?.userStore?.user || {
+      isCollaborator: false,
+    };
 
     const newOptions = options.filter(
       (option, index) =>
@@ -1783,7 +1785,9 @@ class ContextOptionsStore {
       },
     ];
 
-    const { isCollaborator } = this.authStore.userStore.user;
+    const { isCollaborator } = this.authStore?.userStore?.user || {
+      isCollaborator: false,
+    };
 
     const newOptions = options.filter(
       (option, index) =>

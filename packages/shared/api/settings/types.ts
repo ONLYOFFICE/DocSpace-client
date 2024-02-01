@@ -1,3 +1,4 @@
+import { TenantStatus } from "../../enums";
 import { TColorScheme } from "../../themes";
 
 export type TTfaType = "sms" | "app" | "none";
@@ -69,7 +70,7 @@ export type TSettings = {
   version: string;
   debugInfo: boolean;
   socketUrl: string;
-  tenantStatus: boolean;
+  tenantStatus: TenantStatus;
   tenantAlias: string;
   helpLink: string;
   forumLink: string;

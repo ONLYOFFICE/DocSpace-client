@@ -89,7 +89,7 @@ const PortalIntegration = (props) => {
 
   const navigate = useNavigate();
 
-  const navigateToSimpleRoom = () => navigate("simple-room");
+  const navigateToSimpleRoom = () => navigate("room");
   const navigateToManager = () => navigate("manager");
   const navigateToRoomSelector = () => navigate("room-selector");
   const navigateToFileSelector = () => navigate("file-selector");

@@ -61,7 +61,6 @@ const ArticleWrapper = ({
       hideProfileBlock
       hideAppsBlock
       withCustomArticleHeader
-      hideAlerts
     >
       <Article.Header>
         <ArticleHeaderContent />

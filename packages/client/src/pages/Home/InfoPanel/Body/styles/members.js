@@ -37,6 +37,15 @@ const StyledUser = styled.div`
     min-height: 32px;
   }
 
+  .user_body-wrapper {
+    overflow: auto;
+  }
+
+  .name-wrapper,
+  .role-email {
+    display: flex;
+  }
+
   .name {
     font-weight: 600;
     font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
@@ -49,6 +58,7 @@ const StyledUser = styled.div`
   }
 
   .me-label {
+    padding-left: 8px;
     font-weight: 600;
     font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
     line-height: 16px;

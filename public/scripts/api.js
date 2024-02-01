@@ -233,8 +233,8 @@
       }
 
       iframe.src = config.src + path;
-      iframe.width = config.width;
-      iframe.height = config.height;
+      iframe.style.width = config.width;
+      iframe.style.height = config.height;
       iframe.name = config.name;
       iframe.id = config.frameId;
 
@@ -380,8 +380,8 @@
         iframe.style.opacity = this.#frameOpacity;
         iframe.style.zIndex = 2;
         iframe.style.position = "absolute";
-        iframe.width = "95%";
-        iframe.height = "95%";
+        iframe.style.width = "95%";
+        iframe.style.height = "95%";
 
         const frameLoader = this.#createLoader(this.config);
 
@@ -429,8 +429,8 @@
       if (targetFrame) {
         targetFrame.style.opacity = 1;
         targetFrame.style.position = "relative";
-        targetFrame.width = this.config.width;
-        targetFrame.height = this.config.height;
+        targetFrame.style.width = this.config.width;
+        targetFrame.style.height = this.config.height;
         targetFrame.parentNode.style.height = "inherit";
 
         if (loader) loader.remove();

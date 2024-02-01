@@ -206,7 +206,6 @@ const FilesMediaViewer = (props) => {
       }
 
       navigate(url, {
-        replace: true,
         state: {
           ...location.state,
           fromMediaViewer: true,

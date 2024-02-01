@@ -1,12 +1,16 @@
 import React from "react";
 
-import { StyledControlButtonContainer } from "../Navigation.styled";
+import {
+  StyledControlButtonContainer,
+  StyledTariffWrapper,
+} from "../Navigation.styled";
 import { IControlButtonProps } from "../Navigation.types";
 
 import ToggleInfoPanelButton from "./ToggleInfoPanelBtn";
 import PlusButton from "./PlusBtn";
 import ContextButton from "./ContextBtn";
 import { Button, ButtonSize } from "../../button";
+import { isTablet } from "../../../utils";
 
 const ControlButtons = ({
   isRootFolder,
@@ -27,11 +31,24 @@ const ControlButtons = ({
   isMobile,
   navigationButtonLabel,
   onNavigationButtonClick,
+  tariffBar,
+  title,
 }: IControlButtonProps) => {
   const toggleInfoPanelAction = () => {
     toggleInfoPanel?.();
     toggleDropBox?.();
   };
+
+  const navigationButtonBlock = navigationButtonLabel ? (
+    <Button
+      className="navigation_button"
+      label={navigationButtonLabel}
+      size={ButtonSize.extraSmall}
+      onClick={onNavigationButtonClick}
+    />
+  ) : null;
+  const children = tariffBar ? React.cloneElement(tariffBar, { title }) : null;
+  const isTabletView = isTablet();
 
   return (
     <StyledControlButtonContainer isFrame={isFrame}>
@@ -128,16 +145,11 @@ const ControlButtons = ({
         </>
       )}
 
-      {navigationButtonLabel && (
-        <Button
-          className="navigation_button"
-          label={navigationButtonLabel}
-          size={ButtonSize.extraSmall}
-          onClick={onNavigationButtonClick}
-        />
-      )}
+      {navigationButtonLabel && !isTabletView && navigationButtonBlock}
+      <StyledTariffWrapper>{children && children}</StyledTariffWrapper>
+      {navigationButtonLabel && isTabletView && navigationButtonBlock}
     </StyledControlButtonContainer>
   );
 };
 
-export default React.memo(ControlButtons);
+export default ControlButtons;

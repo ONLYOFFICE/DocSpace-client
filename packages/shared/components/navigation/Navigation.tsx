@@ -54,6 +54,8 @@ const Navigation = ({
   rootRoomTitle,
   navigationButtonLabel,
   onNavigationButtonClick,
+  tariffBar,
+
   ...rest
 }: INavigationProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -256,6 +258,8 @@ const Navigation = ({
               isTrashFolder={isTrashFolder}
               navigationButtonLabel={navigationButtonLabel}
               onNavigationButtonClick={onNavigationButtonClick}
+              tariffBar={tariffBar}
+              title={title}
             />
           </StyledContainer>
           {isDesktop && isTrashFolder && !isEmptyPage && (

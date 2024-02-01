@@ -3989,6 +3989,10 @@ class FilesStore {
     return link;
   };
 
+  getFilePrimaryLink = async (fileId) => {
+    return await api.files.getFileLink(fileId);
+  };
+
   setRoomShared = (roomId, shared) => {
     const roomIndex = this.folders.findIndex((r) => r.id === roomId);
 

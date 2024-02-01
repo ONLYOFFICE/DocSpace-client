@@ -29,11 +29,8 @@ const RadioButtonGroup = ({
   const handleOptionChange = (
     changeEvent: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    console.log("call");
     setSelectedOption(changeEvent.target.value);
   };
-
-  console.log(selectedOption);
 
   React.useEffect(() => {
     setSelectedOption(selected);

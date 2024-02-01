@@ -350,7 +350,9 @@ class InfoPanelStore {
   getIsFiles = (givenPathName) => {
     const pathname = givenPathName || window.location.pathname.toLowerCase();
     return (
-      pathname.indexOf("files") !== -1 || pathname.indexOf("personal") !== -1
+      pathname.indexOf("files") !== -1 ||
+      pathname.indexOf("personal") !== -1 ||
+      pathname.indexOf("media") !== -1
     );
   };
 

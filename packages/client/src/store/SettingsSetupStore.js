@@ -82,6 +82,7 @@ class SettingsSetupStore {
   sessions = [];
   currentSession = [];
   sessionModalData = {};
+  platformModalData = {};
 
   constructor() {
     this.selectionStore = new SelectionStore(this);
@@ -539,6 +540,14 @@ class SettingsSetupStore {
   setSessionModalData = (data) => {
     this.sessionModalData = {
       ...data,
+    };
+  };
+
+  setPlatformModalData = (data) => {
+    this.platformModalData = {
+      id: data.id,
+      platform: data.platform,
+      browser: data.browser,
     };
   };
 }

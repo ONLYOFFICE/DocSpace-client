@@ -89,6 +89,7 @@ const Sessions = ({
   setLogoutDialogVisible,
   setLogoutAllDialogVisible,
   sessionModalData,
+  platformModalData,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -174,7 +175,7 @@ const Sessions = ({
         <LogoutSessionDialog
           t={t}
           visible={logoutDialogVisible}
-          data={sessionModalData}
+          data={platformModalData}
           isLoading={isLoading}
           onClose={() => setLogoutDialogVisible(false)}
           onRemoveSession={onClickRemoveSession}
@@ -213,6 +214,7 @@ export default inject(({ auth, setup, peopleStore }) => {
     setLogoutDialogVisible,
     setLogoutAllDialogVisible,
     sessionModalData,
+    platformModalData,
   } = setup;
 
   return {
@@ -230,6 +232,7 @@ export default inject(({ auth, setup, peopleStore }) => {
     setLogoutDialogVisible,
     setLogoutAllDialogVisible,
     sessionModalData,
+    platformModalData,
   };
 })(
   withTranslation(["Settings", "Profile", "Common", "ChangeUserStatusDialog"])(

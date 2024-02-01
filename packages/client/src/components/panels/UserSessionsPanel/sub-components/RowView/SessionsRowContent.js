@@ -1,3 +1,4 @@
+import { observer, inject } from "mobx-react";
 import { Text } from "@docspace/shared/components/text";
 import { Box } from "@docspace/shared/components/box";
 import { convertTime } from "@docspace/shared/utils/convertTime";
@@ -73,22 +74,22 @@ const StyledRowContent = styled(RowContent)`
 const SessionsRowContent = ({
   item,
   sectionWidth,
-  setSessionModalData,
+  setPlatformModalData,
   setLogoutDialogVisible,
 }) => {
-  const { date, platform, browser, country, city, userId } = item;
+  const { id, platform, browser, country, city, date } = item;
 
   const onClickDisable = () => {
     setLogoutDialogVisible(true);
-    setSessionModalData({
-      ...item,
+    setPlatformModalData({
+      id: item.id,
       platform: item.platform,
-      broser: item.browser,
+      browser: item.browser,
     });
   };
 
   const contentData = [
-    <Box key={userId} className="session-info-wrapper">
+    <Box key={id} className="session-info-wrapper">
       <Box className="session-content-wrapper">
         <Box className="main-row-content">
           <Text className="platform">{platform},</Text>
@@ -115,4 +116,10 @@ const SessionsRowContent = ({
   );
 };
 
-export default SessionsRowContent;
+export default inject(({ setup }) => {
+  const { setPlatformModalData } = setup;
+
+  return {
+    setPlatformModalData,
+  };
+})(observer(SessionsRowContent));

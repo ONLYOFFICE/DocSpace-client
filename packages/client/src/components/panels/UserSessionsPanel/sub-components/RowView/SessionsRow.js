@@ -13,7 +13,7 @@ const SessionsRow = (props) => {
 
   return (
     <StyledRow
-      key={item.userId}
+      key={item.id}
       data={item}
       sectionWidth={sectionWidth}
       contextButtonSpacerWidth="0"

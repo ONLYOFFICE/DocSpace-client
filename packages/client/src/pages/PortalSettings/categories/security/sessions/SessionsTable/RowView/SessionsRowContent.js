@@ -29,27 +29,27 @@ const StyledRowContent = styled(RowContent)`
     min-width: 250px;
     .session-info {
       font-weight: 600;
-      color: #a3a9ae;
+      color: ${(props) => props.theme.activeSessions.textDescriptionColor};
       font-size: 12px;
     }
 
     .online {
       font-weight: 600;
-      color: #35ad17;
+      color: ${(props) => props.theme.activeSessions.textOnlineColor};
       margin-left: 4px;
       font-size: 14px;
     }
 
     .offline {
       font-weight: 600;
-      color: #a3a9ae;
+      color: ${(props) => props.theme.activeSessions.textDescriptionColor};
       font-size: 14px;
       margin-left: 4px;
     }
 
     .username {
       font-weight: 600;
-      color: #333333;
+      color: ${(props) => props.theme.activeSessions.color};
       font-size: 14px;
     }
 

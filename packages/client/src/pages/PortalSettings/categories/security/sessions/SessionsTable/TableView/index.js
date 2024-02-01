@@ -58,7 +58,7 @@ const StyledTableContainer = styled(TableContainer)`
   }
 
   .header-container-text {
-    color: #a3a9ae;
+    color: ${(props) => props.theme.tableContainer.header.textColor};
     font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
   }
 

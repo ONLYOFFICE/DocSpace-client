@@ -130,9 +130,9 @@ const StyledContainer = styled.div`
     .table-container_group-menu {
       border-image-slice: 0;
       border-image-source: none;
-      border-bottom: ${(props) =>
-        props.theme.filesSection.tableView.row.borderColor};
-      box-shadow: rgba(4, 15, 27, 0.07) 0px 15px 20px;
+      border-bottom: 1px solid
+        ${(props) => props.theme.filesSection.tableView.row.borderColor};
+      box-shadow: ${(props) => props.theme.activeSessions.boxShadowColor};
       padding: 0px;
     }
 

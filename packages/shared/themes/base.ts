@@ -3115,6 +3115,9 @@ export const getBaseTheme = () => {
       tickIconColor: "#35AD17",
       removeIconColor: "#A3A9AE",
       sortHeaderColor: "#d0d5da",
+      textDescriptionColor: "#a3a9ae;",
+      textOnlineColor: "#35ad17",
+      boxShadowColor: "rgba(4, 15, 27, 0.07) 0px 5px 20px",
     },
 
     formWrapper: {

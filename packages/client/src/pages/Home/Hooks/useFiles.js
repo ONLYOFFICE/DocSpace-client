@@ -95,7 +95,8 @@ const useFiles = ({
   };
 
   React.useEffect(() => {
-    if (isAccountsPage || isSettingsPage) return;
+    if (isAccountsPage || isSettingsPage || location.state?.fromMediaViewer)
+      return;
 
     if (location.pathname === "/") setIsLoading(true, true, true);
     else setIsLoading(true, false, false);

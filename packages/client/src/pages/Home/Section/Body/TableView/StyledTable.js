@@ -50,6 +50,8 @@ const StyledTableRow = styled(TableRow)`
     border-top: ${(props) =>
       `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
     margin-top: -1px;
+    border-left: 0; //for Safari
+    border-right: 0; //for Safari
   }
 
   .table-container_cell:not(.table-container_element-wrapper) {

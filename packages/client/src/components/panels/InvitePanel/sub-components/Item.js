@@ -3,13 +3,11 @@ import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import React, { useState, useEffect } from "react";
 import { Avatar } from "@docspace/shared/components/avatar";
 import { Text } from "@docspace/shared/components/text";
+import { capitalize } from "lodash";
 
 import { parseAddresses } from "@docspace/shared/utils";
 import { getAccessOptions } from "../utils";
-import {
-  firstLetterToUppercase,
-  getUserRole,
-} from "@docspace/shared/utils/common";
+import { getUserRole } from "@docspace/shared/utils/common";
 
 import {
   StyledEditInput,
@@ -135,7 +133,7 @@ const Item = ({
           color="#A3A9AE"
           truncate
         >
-          {`${firstLetterToUppercase(role)} | ${email}`}
+          {`${capitalize(role)} | ${email}`}
         </Text>
       </StyledInviteUserBody>
 

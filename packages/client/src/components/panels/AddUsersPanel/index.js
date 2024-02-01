@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import React, { useState, useEffect, useCallback } from "react";
+import { capitalize } from "lodash";
 
 import { Aside } from "@docspace/shared/components/aside";
 import { Backdrop } from "@docspace/shared/components/backdrop";
@@ -9,10 +10,7 @@ import { Selector } from "@docspace/shared/components/selector";
 import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
 
-import {
-  firstLetterToUppercase,
-  getUserRole,
-} from "@docspace/shared/utils/common";
+import { getUserRole } from "@docspace/shared/utils/common";
 import Filter from "@docspace/shared/api/people/filter";
 import Loaders from "@docspace/common/components/Loaders";
 import { getMembersList } from "@docspace/shared/api/people";
@@ -238,7 +236,7 @@ const AddUsersPanel = ({
             color="#A3A9AE"
             dir="auto"
           >
-            {`${firstLetterToUppercase(userType)} | ${email}`}
+            {`${capitalize(userType)} | ${email}`}
           </Text>
         </div>
       </div>

@@ -9,10 +9,9 @@ import { toastr } from "@docspace/shared/components/toast";
 import { isMobileOnly, isMobile } from "react-device-detect";
 import { decode } from "he";
 import { filterUserRoleOptions } from "SRC_DIR/helpers/utils";
-import {
-  firstLetterToUppercase,
-  getUserRole,
-} from "@docspace/shared/utils/common";
+import { capitalize } from "lodash";
+
+import { getUserRole } from "@docspace/shared/utils/common";
 import { Text } from "@docspace/shared/components/text";
 import EmailPlusReactSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
 import { StyledUserTypeHeader } from "../../styles/members";
@@ -198,7 +197,7 @@ const User = ({
         color="#A3A9AE !important"
         dir="auto"
       >
-        {`${firstLetterToUppercase(role)} | ${user.email}`}
+        {`${capitalize(role)} | ${user.email}`}
       </Text>
     </div>
   );
@@ -270,7 +269,7 @@ const User = ({
             color="#A3A9AE"
             dir="auto"
           >
-            {`${firstLetterToUppercase(role)} | ${user.email}`}
+            {`${capitalize(role)} | ${user.email}`}
           </Text>
         </div>
       </div>

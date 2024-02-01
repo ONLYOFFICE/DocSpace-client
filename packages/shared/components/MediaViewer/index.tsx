@@ -37,6 +37,7 @@ function MediaViewer(props: MediaViewerProps): JSX.Element | undefined {
     extsImagePreviewed,
     deleteDialogVisible,
     pluginContextMenuItems,
+    currentDeviceType,
 
     t,
     getIcon,
@@ -420,6 +421,7 @@ function MediaViewer(props: MediaViewerProps): JSX.Element | undefined {
       userAccess={userAccess}
       playlistPos={playlistPos}
       isPreviewFile={isPreviewFile}
+      currentDeviceType={currentDeviceType}
       onClose={onClose}
       onPrevClick={prevMedia}
       onNextClick={nextMedia}

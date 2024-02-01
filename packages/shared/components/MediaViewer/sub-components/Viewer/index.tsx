@@ -1,4 +1,3 @@
-import { inject, observer } from "mobx-react";
 import React, {
   useRef,
   useState,
@@ -311,10 +310,4 @@ function Viewer(props: ViewerProps) {
   );
 }
 
-// TODO: add type
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default inject<any>(({ auth }) => {
-  const { currentDeviceType } = auth.settingsStore;
-
-  return { currentDeviceType };
-})(observer(Viewer));
+export default Viewer;

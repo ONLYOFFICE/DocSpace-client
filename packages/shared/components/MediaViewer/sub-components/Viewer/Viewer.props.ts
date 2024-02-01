@@ -1,6 +1,6 @@
 import type { TFile } from "@docspace/shared/api/files/types";
 import type { ContextMenuModel } from "@docspace/shared/components/context-menu";
-
+import type { DeviceType } from "@docspace/shared/enums";
 import { getCustomToolbar } from "../../helpers/getCustomToolbar";
 import type { PlaylistType } from "../../MediaViewer.types";
 
@@ -22,6 +22,9 @@ interface ViewerProps {
   toolbar: ReturnType<typeof getCustomToolbar>;
   playlistPos: number;
   isPreviewFile: boolean;
+
+  currentDeviceType?: DeviceType;
+
   onMaskClick?: VoidFunction;
   onNextClick?: VoidFunction;
   onPrevClick?: VoidFunction;
@@ -33,8 +36,6 @@ interface ViewerProps {
     bottom?: string,
   ) => JSX.Element;
   onSetSelectionFile: VoidFunction;
-
-  currentDeviceType?: string;
 }
 
 export default ViewerProps;

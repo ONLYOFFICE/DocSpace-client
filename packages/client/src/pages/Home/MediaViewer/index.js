@@ -64,6 +64,7 @@ const FilesMediaViewer = (props) => {
     pluginContextMenuItems,
     isOpenMediaViewer,
     someDialogIsOpen,
+    currentDeviceType,
   } = props;
 
   const navigate = useNavigate();
@@ -235,38 +236,39 @@ const FilesMediaViewer = (props) => {
     visible && (
       <MediaViewer
         t={t}
-        userAccess={userAccess}
-        currentFileId={currentMediaFileId}
+        files={files}
+        getIcon={getIcon}
         visible={visible}
         playlist={playlist}
-        playlistPos={currentPostionIndex}
-        onDelete={onDeleteMediaFile}
-        onDownload={onDownloadMediaFile}
-        setBufferSelection={setBufferSelection}
-        archiveRoomsId={archiveRoomsId}
-        files={files}
-        onClickDownload={onClickDownload}
-        onShowInfoPanel={onShowInfoPanel}
-        onClickDelete={onClickDelete}
-        onClickRename={onClickRename}
+        prevMedia={prevMedia}
+        nextMedia={nextMedia}
+        onCopyLink={onCopyLink}
+        userAccess={userAccess}
+        onChangeUrl={onChangeUrl}
+        isPreviewFile={firstLoad}
+        onDuplicate={onDuplicate}
         onMoveAction={onMoveAction}
         onCopyAction={onCopyAction}
-        onDuplicate={onDuplicate}
-        onClickLinkEdit={onClickLinkEdit}
-        onPreviewClick={onPreviewClick}
-        onCopyLink={onCopyLink}
-        onClickDownloadAs={onClickDownloadAs}
         onClose={onMediaViewerClose}
-        getIcon={getIcon}
+        onDelete={onDeleteMediaFile}
+        onClickRename={onClickRename}
+        onClickDelete={onClickDelete}
+        setActiveFiles={setActiveFiles}
+        archiveRoomsId={archiveRoomsId}
+        onPreviewClick={onPreviewClick}
+        onDownload={onDownloadMediaFile}
+        onClickLinkEdit={onClickLinkEdit}
+        onClickDownload={onClickDownload}
+        onShowInfoPanel={onShowInfoPanel}
+        playlistPos={currentPostionIndex}
+        currentFileId={currentMediaFileId}
+        onClickDownloadAs={onClickDownloadAs}
+        currentDeviceType={currentDeviceType}
+        extsImagePreviewed={extsImagePreviewed}
+        setBufferSelection={setBufferSelection}
         onEmptyPlaylistError={onMediaViewerClose}
         deleteDialogVisible={deleteDialogVisible}
-        extsImagePreviewed={extsImagePreviewed}
-        isPreviewFile={firstLoad}
-        onChangeUrl={onChangeUrl}
-        nextMedia={nextMedia}
-        prevMedia={prevMedia}
         pluginContextMenuItems={pluginContextMenuItems}
-        setActiveFiles={setActiveFiles}
       />
     )
   );
@@ -283,7 +285,9 @@ export default inject(
     contextOptionsStore,
     clientLoadingStore,
     pluginStore,
+    auth,
   }) => {
+    const { currentDeviceType } = auth.settingsStore;
     const {
       firstLoad,
 
@@ -414,6 +418,7 @@ export default inject(
       activeFolders,
       setActiveFiles,
       pluginContextMenuItems,
+      currentDeviceType,
     };
   }
 )(withTranslation(["Files", "Translations"])(observer(FilesMediaViewer)));

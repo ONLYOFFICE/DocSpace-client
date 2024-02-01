@@ -32,6 +32,7 @@ function ViewerWrapper(props: ViewerWrapperProps) {
     headerIcon,
     playlistPos,
     isPreviewFile,
+    currentDeviceType,
 
     onClose,
     onNextClick,
@@ -149,6 +150,7 @@ function ViewerWrapper(props: ViewerWrapperProps) {
       targetFile={targetFile}
       playlistPos={playlistPos}
       isPreviewFile={isPreviewFile}
+      currentDeviceType={currentDeviceType}
       onMaskClick={onClose}
       onNextClick={onNextClick}
       onPrevClick={onPrevClick}

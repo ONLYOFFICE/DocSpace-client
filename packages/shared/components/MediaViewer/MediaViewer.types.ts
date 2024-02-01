@@ -1,4 +1,5 @@
 import type { TFile } from "@docspace/shared/api/files/types";
+import type { DeviceType } from "@docspace/shared/enums";
 
 export type ContextMenuAction = (file: TFile, t: TranslationType) => void;
 
@@ -67,6 +68,7 @@ export interface MediaViewerProps {
   playlist: PlaylistType[];
   playlistPos: number;
 
+  currentDeviceType?: DeviceType;
   deleteDialogVisible?: boolean;
   isPreviewFile: boolean;
   archiveRoomsId?: number;

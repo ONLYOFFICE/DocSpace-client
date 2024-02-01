@@ -1,4 +1,5 @@
 import type { TFile } from "@docspace/shared/api/files/types";
+import type { DeviceType } from "@docspace/shared/enums";
 import type { ContextMenuModel } from "@docspace/shared/components/context-menu";
 import type { PlaylistType } from "../../MediaViewer.types";
 
@@ -10,6 +11,7 @@ interface ViewerWrapperProps {
   playlistPos: number;
   userAccess: boolean;
   playlist: PlaylistType[];
+  currentDeviceType?: DeviceType;
 
   isPdf: boolean;
   isImage: boolean;

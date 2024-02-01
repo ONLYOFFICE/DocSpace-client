@@ -102,7 +102,6 @@
   };
 
   class DocSpace {
-    #iframe;
     #isConnected = false;
     #frameOpacity = 0;
     #callbacks = [];
@@ -289,7 +288,7 @@
 
       const targetFrame = document.getElementById(this.config.frameId);
 
-      if (!!targetFrame.contentWindow) {
+      if (targetFrame && !!targetFrame.contentWindow) {
         targetFrame.contentWindow.postMessage(
           JSON.stringify(mes, (key, value) =>
             typeof value === "function" ? value.toString() : value
@@ -322,6 +321,7 @@
             break;
           }
           case "onEventReturn": {
+            if (_.isEmpty(this.config)) return;
             if (
               data?.eventReturnData?.event in this.config.events &&
               typeof this.config.events[data?.eventReturnData.event] ===

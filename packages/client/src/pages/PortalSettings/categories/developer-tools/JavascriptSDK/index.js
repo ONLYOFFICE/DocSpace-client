@@ -58,7 +58,7 @@ const CategoryHeader = styled.div`
 `;
 
 const CategoryDescription = styled(Box)`
-  margin-top: 5px;
+  margin-top: 2px;
   max-width: 700px;
   .sdk-description {
     display: inline;

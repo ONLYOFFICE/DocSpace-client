@@ -25,12 +25,12 @@ import {
   ErrorMessageWrapper,
 } from "./PDFViewer.styled";
 
-import { ToolbarActionType } from "../../helpers";
+import { ToolbarActionType } from "../../MediaViewer.enums";
 import {
   ImperativeHandle,
   ToolbarItemType,
 } from "../ImageViewerToolbar/ImageViewerToolbar.props";
-import PageCount, { PageCountRef } from "./ui/PageCount";
+import { PageCount, PageCountRef } from "./ui/PageCount";
 import MobileDrawer from "./ui/MobileDrawer";
 
 // import { isDesktop } from "react-device-detect";?

@@ -2,8 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { mobile } from "@docspace/shared/utils";
-
-import { formatTime } from "../../helpers";
+import { formatTime } from "../../MediaViewer.utils";
 
 const PlayerDurationWrapper = styled.div`
   width: 102px;

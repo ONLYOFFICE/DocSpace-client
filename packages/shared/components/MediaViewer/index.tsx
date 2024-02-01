@@ -10,21 +10,19 @@ import { isMobile as isMobileUtils, isTablet } from "@docspace/shared/utils";
 import { getFileExtension } from "@docspace/shared/utils/common";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { encoderTiff } from "@docspace/shared/utils/encoderTiff";
+import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
 
-import {
-  isNullOrUndefined,
-  KeyboardEventKeys,
-  mapSupplied,
-  mediaTypes,
-} from "./helpers";
+import { mapSupplied, mediaTypes } from "./MediaViewer.constants";
+import type { MediaViewerProps } from "./MediaViewer.types";
+import { KeyboardEventKeys } from "./MediaViewer.enums";
+
 import {
   getDesktopMediaContextModel,
   getMobileMediaContextModel,
   getPDFContextModel,
 } from "./helpers/contextModel";
-import ViewerWrapper from "./sub-components/ViewerWrapper";
 
-import type { MediaViewerProps } from "./MediaViewer.types";
+import ViewerWrapper from "./sub-components/ViewerWrapper";
 
 function MediaViewer(props: MediaViewerProps): JSX.Element | undefined {
   const {

@@ -19,11 +19,12 @@ import {
   getBounds,
   getImagePositionAndSize,
 } from "../../MediaViewer.utils";
-import { ToolbarActionType, KeyboardEventKeys } from "../../helpers";
 
 import ViewerLoader from "../ViewerLoader";
 import ImageViewerToolbar from "../ImageViewerToolbar";
+import { KeyboardEventKeys, ToolbarActionType } from "../../MediaViewer.enums";
 import type { Point } from "../../MediaViewer.types";
+
 import {
   ImperativeHandle,
   ToolbarItemType,

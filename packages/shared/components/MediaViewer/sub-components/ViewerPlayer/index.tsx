@@ -29,7 +29,7 @@ import PlayerTimeline from "../PlayerTimeline";
 import PlayerSpeedControl from "../PlayerSpeedControl";
 import PlayerFullScreen from "../PlayerFullScreen";
 import PlayerDesktopContextMenu from "../PlayerDesktopContextMenu";
-import { KeyboardEventKeys } from "../../helpers";
+import { KeyboardEventKeys } from "../../MediaViewer.enums";
 import PlayerMessageError from "../PlayerMessageError";
 
 import ViewerPlayerProps from "./ViewerPlayer.props";

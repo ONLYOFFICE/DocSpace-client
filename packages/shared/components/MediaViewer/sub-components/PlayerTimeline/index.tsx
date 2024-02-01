@@ -1,6 +1,8 @@
 import React, { useRef } from "react";
-import { formatTime } from "../../helpers";
-import PlayerTimelineProps from "./PlayerTimeline.props";
+
+import { formatTime } from "../../MediaViewer.utils";
+
+import type PlayerTimelineProps from "./PlayerTimeline.props";
 import { HoverProgress, PlayerTimelineWrapper } from "./PlayerTimeline.styled";
 
 function PlayerTimeline({

@@ -1,5 +1,4 @@
 import React, {
-  ForwardedRef,
   forwardRef,
   useCallback,
   useImperativeHandle,
@@ -11,36 +10,35 @@ import PanelReactSvg from "PUBLIC_DIR/images/panel.react.svg";
 import PageCountProps, { PageCountRef } from "./PageCount.props";
 import { PageCountWrapper } from "./PageCount.styled";
 
-function PageCount(
-  { isPanelOpen, visible, className, setIsOpenMobileDrawer }: PageCountProps,
-  ref: ForwardedRef<PageCountRef>,
-) {
-  const [pagesCount, setPagesCount] = useState<number>(0);
-  const [pageNumber, setPageNumber] = useState<number>(0);
+export const PageCount = forwardRef<PageCountRef, PageCountProps>(
+  ({ isPanelOpen, visible, className, setIsOpenMobileDrawer }, ref) => {
+    const [pagesCount, setPagesCount] = useState<number>(0);
+    const [pageNumber, setPageNumber] = useState<number>(0);
 
-  useImperativeHandle(ref, () => ({
-    setPagesCount(pagesCount: number) {
-      setPagesCount(pagesCount);
-    },
-    setPageNumber: (pageNumber: number) => {
-      setPageNumber(pageNumber);
-    },
-  }));
+    useImperativeHandle(ref, () => ({
+      setPagesCount(pagesCountArg: number) {
+        setPagesCount(pagesCountArg);
+      },
+      setPageNumber: (pageNumberArg: number) => {
+        setPageNumber(pageNumberArg);
+      },
+    }));
 
-  const openMobileDrawer = useCallback(() => {
-    setIsOpenMobileDrawer(true);
-  }, []);
+    const openMobileDrawer = useCallback(() => {
+      setIsOpenMobileDrawer(true);
+    }, [setIsOpenMobileDrawer]);
 
-  if (!visible) return <></>;
+    if (!visible) return;
 
-  return (
-    <PageCountWrapper isPanelOpen={isPanelOpen} className={className}>
-      {isMobile && <PanelReactSvg onClick={openMobileDrawer} />}
-      <div>
-        <span>{pageNumber}</span> / <span>{pagesCount}</span>
-      </div>
-    </PageCountWrapper>
-  );
-}
+    return (
+      <PageCountWrapper isPanelOpen={isPanelOpen} className={className}>
+        {isMobile && <PanelReactSvg onClick={openMobileDrawer} />}
+        <div>
+          <span>{pageNumber}</span> / <span>{pagesCount}</span>
+        </div>
+      </PageCountWrapper>
+    );
+  },
+);
 
-export default forwardRef<PageCountRef, PageCountProps>(PageCount);
+PageCount.displayName = "PageCount";

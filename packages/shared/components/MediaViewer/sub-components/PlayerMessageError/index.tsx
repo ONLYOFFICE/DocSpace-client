@@ -2,12 +2,13 @@ import React from "react";
 import { ReactSVG } from "react-svg";
 
 import { Text } from "@docspace/shared/components/text";
-import PlayerMessageErrorProps from "./PlayerMessageError.props";
+import { isSeparator } from "@docspace/shared/utils/typeGuards";
+
 import {
   StyledErrorToolbar,
   StyledMediaError,
 } from "./PlayerMessageError.styled";
-import { isSeparator } from "../../helpers";
+import type PlayerMessageErrorProps from "./PlayerMessageError.props";
 
 function PlayerMessageError({
   model,

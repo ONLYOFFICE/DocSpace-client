@@ -1,4 +1,7 @@
-import type { BoundsType, Point } from "./MediaViewer.types";
+import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
+
+import { mapSupplied, mediaTypes } from "./MediaViewer.constants";
+import type { BoundsType, PlaylistType, Point } from "./MediaViewer.types";
 
 export const compareTo = (a: number, b: number) => {
   return Math.trunc(a) > Math.trunc(b);
@@ -200,4 +203,49 @@ export const calculateAdjustBoundsUtils = (
   }
 
   return { x, y };
+};
+
+export function isVideo(fileExst: string): boolean {
+  return mapSupplied[fileExst]?.type === mediaTypes.video;
+}
+
+export const findNearestIndex = (
+  items: PlaylistType[],
+  index: number,
+): number => {
+  if (!Array.isArray(items) || items.length === 0 || index < 0) {
+    return -1;
+  }
+
+  let found = items[0].id;
+
+  items.forEach((item) => {
+    if (Math.abs(item.id - index) < Math.abs(found - index)) {
+      found = item.id;
+    }
+  });
+
+  return found;
+};
+
+export const convertToTwoDigitString = (time: number): string => {
+  return time < 10 ? `0${time}` : time.toString();
+};
+
+export const formatTime = (time: number): string => {
+  if (isNullOrUndefined(time) || Number.isNaN(time) || time <= 0)
+    return "00:00";
+
+  const seconds: number = Math.floor(time % 60);
+  const minutes: number = Math.floor(time / 60) % 60;
+  const hours: number = Math.floor(time / 3600);
+
+  const convertedHours = convertToTwoDigitString(hours);
+  const convertedMinutes = convertToTwoDigitString(minutes);
+  const convertedSeconds = convertToTwoDigitString(seconds);
+
+  if (hours === 0) {
+    return `${convertedMinutes}:${convertedSeconds}`;
+  }
+  return `${convertedHours}:${convertedMinutes}:${convertedSeconds}`;
 };

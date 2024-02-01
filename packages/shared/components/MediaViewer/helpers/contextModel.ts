@@ -12,31 +12,12 @@ import MoveReactSvgUrl from "PUBLIC_DIR/images/move.react.svg?url";
 
 import type { TFile } from "@docspace/shared/api/files/types";
 import type { ContextMenuModel } from "@docspace/shared/components/context-menu";
-
-import type {
-  ContextMenuAction,
-  OmitSecondArg,
-  TranslationType,
-} from "../MediaViewer.types";
-
-type Functions = {
-  onClickDownloadAs: VoidFunction;
-  onMoveAction: VoidFunction;
-  onCopyAction: VoidFunction;
-  onClickRename: OmitSecondArg<ContextMenuAction>;
-  onDuplicate: ContextMenuAction;
-  onClickDelete: ContextMenuAction;
-  onClickDownload: ContextMenuAction;
-  onClickLinkEdit: OmitSecondArg<ContextMenuAction>;
-  onPreviewClick: OmitSecondArg<ContextMenuAction>;
-  onCopyLink: ContextMenuAction;
-  onShowInfoPanel: OmitSecondArg<ContextMenuAction>;
-};
+import type { ContextFunctions, TranslationType } from "../MediaViewer.types";
 
 export const getPDFContextModel = (
   t: TranslationType,
   item: TFile,
-  funcs: Omit<Functions, "onShowInfoPanel">,
+  funcs: Omit<ContextFunctions, "onShowInfoPanel">,
 ) => {
   const options: ContextMenuModel[] = [
     {
@@ -128,7 +109,7 @@ export const getMobileMediaContextModel = (
   t: TranslationType,
   targetFile: TFile,
   funcs: Omit<
-    Functions,
+    ContextFunctions,
     "onClickDownloadAs" | "onCopyLink" | "onPreviewClick" | "onClickLinkEdit"
   >,
 ) => {
@@ -212,7 +193,10 @@ export const getDesktopMediaContextModel = (
   t: TranslationType,
   targetFile: TFile,
   archiveRoom: boolean,
-  funcs: Pick<Functions, "onClickDownload" | "onClickRename" | "onClickDelete">,
+  funcs: Pick<
+    ContextFunctions,
+    "onClickDownload" | "onClickRename" | "onClickDelete"
+  >,
 ) => {
   const { onClickDelete, onClickDownload, onClickRename } = funcs;
 

@@ -2,10 +2,10 @@ import equal from "fast-deep-equal/react";
 import { useTheme } from "styled-components";
 import React, { useMemo, memo, useCallback } from "react";
 
+import { isSeparator } from "@docspace/shared/utils/typeGuards";
 import type { ContextMenuModel } from "@docspace/shared/components/context-menu";
 
 import Viewer from "../Viewer";
-import { isSeparator } from "../../helpers";
 import {
   getCustomToolbar,
   getPDFToolbar,

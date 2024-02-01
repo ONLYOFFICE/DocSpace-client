@@ -1,15 +1,16 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import {
-  isNullOrUndefined,
-  findNearestIndex,
-  isVideo,
-} from "@docspace/shared/components/MediaViewer/helpers";
-import { thumbnailStatuses } from "SRC_DIR/helpers/filesConstants";
+
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { thumbnailStatuses } from "SRC_DIR/helpers/filesConstants";
+import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
+
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
-const FirstUrlKey = "isFirstUrl";
+import {
+  findNearestIndex,
+  isVideo,
+} from "@docspace/shared/components/MediaViewer/MediaViewer.utils";
 
 class MediaViewerDataStore {
   filesStore;

@@ -12,7 +12,7 @@ import MediaDownloadIcon from "PUBLIC_DIR/images/download.react.svg";
 import ViewerSeparator from "PUBLIC_DIR/images/viewer.separator.react.svg";
 import PanelReactSvg from "PUBLIC_DIR/images/panel.react.svg";
 
-import { ToolbarActionType } from ".";
+import { ToolbarActionType } from "../MediaViewer.enums";
 
 export const getCustomToolbar = (
   targetFile: TFile,

@@ -18,6 +18,20 @@ export type DevicesType = {
   isDesktop: boolean;
 };
 
+export type ContextFunctions = {
+  onClickDownloadAs: VoidFunction;
+  onMoveAction: VoidFunction;
+  onCopyAction: VoidFunction;
+  onClickRename: OmitSecondArg<ContextMenuAction>;
+  onDuplicate: ContextMenuAction;
+  onClickDelete: ContextMenuAction;
+  onClickDownload: ContextMenuAction;
+  onClickLinkEdit: OmitSecondArg<ContextMenuAction>;
+  onPreviewClick: OmitSecondArg<ContextMenuAction>;
+  onCopyLink: ContextMenuAction;
+  onShowInfoPanel: OmitSecondArg<ContextMenuAction>;
+};
+
 export type PlaylistType = {
   id: number;
   canShare: boolean;

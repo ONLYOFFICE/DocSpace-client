@@ -9,7 +9,7 @@ export interface RoomSelectorProps extends SelectorProps {
   style?: React.CSSProperties;
 
   excludeItems?: number[];
-  setIsDataReady: (value: boolean) => void;
+  setIsDataReady?: (value: boolean) => void;
   withHeader?: boolean;
   headerLabel: string;
   onBackClick?: () => void;

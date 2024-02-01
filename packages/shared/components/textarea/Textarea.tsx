@@ -53,9 +53,9 @@ const Textarea = ({
   const lineHeight = 1.5;
   const padding = 7;
   const numberOfLines = modifiedValue.split("\n").length;
-  const textareaHeight = isFullHeight
-    ? numberOfLines * fontSize * lineHeight + padding + 4
-    : heightTextArea;
+  const fullHeight = numberOfLines * fontSize * lineHeight + padding + 4;
+  const stringifiedHeight =
+    typeof heightTextArea === "number" ? `${heightTextArea}px` : heightTextArea;
 
   const defaultPaddingLeft = 42;
   const numberOfDigits =
@@ -77,8 +77,8 @@ const Textarea = ({
   };
 
   useEffect(() => {
-    if (hasError !== isError) setIsError(hasError);
-  }, [hasError, isError]);
+    setIsError(hasError);
+  }, [hasError]);
 
   useEffect(() => {
     setIsError(isJSONField && (!value || !isJSON(value)));
@@ -97,6 +97,10 @@ const Textarea = ({
       enableCopy={enableCopy}
       onClick={onTextareaClick}
       data-testid="textarea"
+      heightScale={heightScale}
+      heightTextArea={stringifiedHeight}
+      isFullHeight={isFullHeight}
+      fullHeight={fullHeight}
     >
       {enableCopy && (
         <CopyIconWrapper
@@ -118,7 +122,9 @@ const Textarea = ({
         isDisabled={isDisabled}
         hasError={isError}
         heightScale={heightScale}
-        heightTextAreaProp={textareaHeight}
+        heightTextAreaProp={stringifiedHeight}
+        isFullHeight={isFullHeight}
+        fullHeight={fullHeight}
       >
         <Toast />
 
@@ -128,7 +134,6 @@ const Textarea = ({
           </Numeration>
         )}
         <StyledTextarea
-          heightTextAreaProp={textareaHeight}
           id={id}
           paddingLeftProp={paddingLeftProp}
           isJSONField={isJSONField}

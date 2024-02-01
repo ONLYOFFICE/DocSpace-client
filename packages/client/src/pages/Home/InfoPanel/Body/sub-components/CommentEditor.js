@@ -97,7 +97,7 @@ const CommentEditor = ({
             onChange={onChangeInputValue}
             autoFocus
             areaSelect
-            heightTextArea={54}
+            heightTextArea="54px"
             fontSize={13}
           />
           <div className="property-comment_editor-editor-buttons">

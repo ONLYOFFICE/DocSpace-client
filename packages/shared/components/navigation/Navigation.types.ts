@@ -60,6 +60,8 @@ export interface IControlButtonProps {
   isPublicRoom?: boolean;
   isTrashFolder?: boolean;
   isMobile?: boolean;
+  tariffBar?: React.ReactNode;
+  title?: string;
 }
 
 export interface ITextProps {
@@ -160,4 +162,5 @@ export interface INavigationProps {
   titleIcon: string;
   currentDeviceType: DeviceType;
   rootRoomTitle: string;
+  tariffBar: React.ReactNode;
 }

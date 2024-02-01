@@ -26,6 +26,7 @@ import LinkRow from "./sub-components/LinkRow";
 const Members = ({
   t,
   selfId,
+  isAdmin,
   infoPanelSelection,
   setIsScrollLocked,
   isPublicRoomType,
@@ -238,6 +239,7 @@ const Members = ({
               t={t}
               user={user}
               key={user.id}
+              showTooltip={isAdmin}
               index={index + publicRoomItemsLength}
               membersHelper={membersHelper}
               currentMember={currentMember}
@@ -272,7 +274,7 @@ export default inject(
       withPublicRoomBlock,
     } = infoPanelStore;
     const { membersFilter } = filesStore;
-    const { id: selfId } = userStore.user;
+    const { id: selfId, isAdmin } = userStore.user;
 
     const { primaryLink, additionalLinks, setExternalLink } = publicRoomStore;
     const { isArchiveFolderRoot } = treeFoldersStore;
@@ -293,6 +295,7 @@ export default inject(
       infoPanelSelection: infoSelection,
       setIsScrollLocked,
       selfId,
+      isAdmin,
       isPublicRoomType,
       membersFilter,
       infoPanelMembers,

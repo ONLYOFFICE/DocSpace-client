@@ -27,7 +27,7 @@ const StyledWrapper = styled.div`
 
 const PROXY_BASE_URL = combineUrl(
   window.DocSpaceConfig?.proxy?.url,
-  "/portal-settings"
+  "/portal-settings",
 );
 
 const TariffBar = ({
@@ -50,7 +50,7 @@ const TariffBar = ({
   const onClick = () => {
     const paymentPageUrl = combineUrl(
       PROXY_BASE_URL,
-      "/payments/portal-payments"
+      "/payments/portal-payments",
     );
     navigate(paymentPageUrl);
   };
@@ -69,7 +69,7 @@ const TariffBar = ({
         isPaymentPageAvailable,
         isNonProfit,
         isFreeTariff,
-        isGracePeriod
+        isGracePeriod,
       )
     : getEnterpriseBar(
         t,
@@ -79,7 +79,7 @@ const TariffBar = ({
         isLicenseExpiring,
         isLicenseDateExpired,
         trialDaysLeft,
-        paymentDate
+        paymentDate,
       );
 
   if (!tariffBar) return <></>;
@@ -101,35 +101,40 @@ const TariffBar = ({
   );
 };
 
-export default inject(({ auth }) => {
-  const {
+export default inject(
+  ({
+    authStore,
     settingsStore,
-    currentQuotaStore,
-    isPaymentPageAvailable,
     currentTariffStatusStore,
-    isEnterprise,
-  } = auth;
-  const { isFreeTariff, isNonProfit, isTrial } = currentQuotaStore;
-  const {
-    isGracePeriod,
-    isLicenseExpiring,
-    isLicenseDateExpired,
-    paymentDate,
-    trialDaysLeft,
-  } = currentTariffStatusStore;
-  const { standalone } = settingsStore;
+    currentQuotaStore,
+  }) => {
+    const {
+      isPaymentPageAvailable,
 
-  return {
-    isEnterprise,
-    isNonProfit,
-    isGracePeriod,
-    isFreeTariff,
-    isPaymentPageAvailable,
-    isLicenseExpiring,
-    isLicenseDateExpired,
-    isTrial,
-    standalone,
-    paymentDate,
-    trialDaysLeft,
-  };
-})(observer(TariffBar));
+      isEnterprise,
+    } = authStore;
+    const { isFreeTariff, isNonProfit, isTrial } = currentQuotaStore;
+    const {
+      isGracePeriod,
+      isLicenseExpiring,
+      isLicenseDateExpired,
+      paymentDate,
+      trialDaysLeft,
+    } = currentTariffStatusStore;
+    const { standalone } = settingsStore;
+
+    return {
+      isEnterprise,
+      isNonProfit,
+      isGracePeriod,
+      isFreeTariff,
+      isPaymentPageAvailable,
+      isLicenseExpiring,
+      isLicenseDateExpired,
+      isTrial,
+      standalone,
+      paymentDate,
+      trialDaysLeft,
+    };
+  },
+)(observer(TariffBar));

@@ -135,6 +135,9 @@ const RestoreBackup = loadable(() =>
 );
 const Bonus = loadable(() => import("../pages/Bonus"));
 
+const SimpleRoom = loadable(() =>
+  import("../pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom")
+);
 const Manager = loadable(() =>
   import("../pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager")
 );
@@ -305,6 +308,10 @@ const PortalSettingsRoutes = {
     {
       path: "developer-tools/javascript-sdk",
       element: <DeveloperTools />,
+    },
+    {
+      path: "developer-tools/javascript-sdk/simple-room",
+      element: <SimpleRoom />,
     },
     {
       path: "developer-tools/javascript-sdk/manager",

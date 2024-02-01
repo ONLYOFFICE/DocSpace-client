@@ -68,7 +68,7 @@ const PresetTile = (props) => {
       </div>
       <Button
         className="navigationButton"
-        label={t("StartSettingUp")}
+        label={t("SetUp")}
         icon={<ArrowIcon />}
         scale
         isClicked

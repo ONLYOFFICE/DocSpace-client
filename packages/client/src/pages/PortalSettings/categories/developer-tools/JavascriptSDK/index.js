@@ -15,10 +15,11 @@ import { Text } from "@docspace/shared/components/text";
 import CSP from "./sub-components/csp";
 import PresetTile from "./sub-components/PresetTile";
 
-import EditorImg from "PUBLIC_DIR/images/sdk-presets_editor.react.svg?url";
-import FileSelectorImg from "PUBLIC_DIR/images/sdk-presets_file-selector.react.svg?url";
+import SimpleRoomImg from "PUBLIC_DIR/images/sdk-presets_simple-room.react.svg?url";
 import ManagerImg from "PUBLIC_DIR/images/sdk-presets_manager.react.svg?url";
 import RoomSelectorImg from "PUBLIC_DIR/images/sdk-presets_room-selector.react.svg?url";
+import FileSelectorImg from "PUBLIC_DIR/images/sdk-presets_file-selector.react.svg?url";
+import EditorImg from "PUBLIC_DIR/images/sdk-presets_editor.react.svg?url";
 import ViewerImg from "PUBLIC_DIR/images/sdk-presets_viewer.react.svg?url";
 
 const SDKContainer = styled(Box)`
@@ -54,6 +55,7 @@ const CategoryDescription = styled(Box)`
   margin-top: 5px;
   max-width: 700px;
   .sdk-description {
+    display: inline;
     line-height: 20px;
     color: ${(props) => props.theme.client.settings.common.descriptionColor};
   }
@@ -80,6 +82,7 @@ const PortalIntegration = (props) => {
 
   const navigate = useNavigate();
 
+  const navigateToSimpleRoom = () => navigate("simple-room");
   const navigateToManager = () => navigate("manager");
   const navigateToRoomSelector = () => navigate("room-selector");
   const navigateToFileSelector = () => navigate("file-selector");
@@ -88,22 +91,16 @@ const PortalIntegration = (props) => {
 
   const presetsData = [
     {
+      title: t("SimpleRoom"),
+      description: t("SimpleRoomDescription"),
+      image: SimpleRoomImg,
+      handleOnClick: navigateToSimpleRoom,
+    },
+    {
       title: t("Manager"),
       description: t("ManagerDescription"),
       image: ManagerImg,
       handleOnClick: navigateToManager,
-    },
-    {
-      title: t("RoomSelector"),
-      description: t("RoomSelectorDescription"),
-      image: RoomSelectorImg,
-      handleOnClick: navigateToRoomSelector,
-    },
-    {
-      title: t("FileSelector"),
-      description: t("FileSelectorDescription"),
-      image: FileSelectorImg,
-      handleOnClick: navigateToFileSelector,
     },
     {
       title: t("Editor"),
@@ -117,6 +114,18 @@ const PortalIntegration = (props) => {
       image: ViewerImg,
       handleOnClick: navigateToViewer,
     },
+    {
+      title: t("RoomSelector"),
+      description: t("RoomSelectorDescription"),
+      image: RoomSelectorImg,
+      handleOnClick: navigateToRoomSelector,
+    },
+    {
+      title: t("FileSelector"),
+      description: t("FileSelectorDescription"),
+      image: FileSelectorImg,
+      handleOnClick: navigateToFileSelector,
+    },
   ];
 
   return (
@@ -125,9 +134,10 @@ const PortalIntegration = (props) => {
         <Text className="sdk-description">{t("SDKDescription")}</Text>
         <Link
           color={currentColorScheme?.main?.accent}
-          fontSize="12px"
+          fontSize="13px"
           fontWeight="400"
-          onClick={() => window.open(sdkLink, "_blank")}>
+          onClick={() => window.open(sdkLink, "_blank")}
+        >
           {t("APILink")}.
         </Link>
         <CSP t={t} />

@@ -230,6 +230,7 @@ const SectionHeaderContent = (props) => {
     currentDeviceType,
     isFrame,
     showTitle,
+    hideInfoPanel,
     onClickArchive,
     setLeaveRoomDialogVisible,
     inRoom,
@@ -1099,7 +1100,7 @@ const SectionHeaderContent = (props) => {
                 onPlusClick={onCreateRoom}
                 isEmptyPage={isEmptyPage}
                 isRoom={isCurrentRoom || isAccountsPage}
-                hideInfoPanel={isSettingsPage || isPublicRoom}
+                hideInfoPanel={hideInfoPanel || isSettingsPage || isPublicRoom}
                 withLogo={isPublicRoom && logo}
                 burgerLogo={isPublicRoom && burgerLogo}
                 isPublicRoom={isPublicRoom}
@@ -1410,6 +1411,7 @@ export default inject(
       setRoomSharingPanelVisible,
       isFrame,
       showTitle: frameConfig?.showTitle,
+      hideInfoPanel: isFrame && !frameConfig?.infoPanelVisible,
       currentDeviceType,
       setLeaveRoomDialogVisible,
       inRoom,

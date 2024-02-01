@@ -1,17 +1,18 @@
-import Editor from "@/components/Editor";
-// import {
-//   openEdit,
-//   // getSettingsFiles,
-//   // getShareFiles,
-// } from "@docspace/common/api/editor";
-
-import { getData } from "./actions";
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+
+import Editor from "@/components/Editor";
+import { getData } from "@/utils/actions";
+
+export const metadata: Metadata = {
+  title: "Onlyoffice DocEditor page",
+  description: "",
+};
 
 export default async function Page({
   searchParams,
 }: {
-  searchParams?: { [key: string]: string | undefined };
+  searchParams?: { [key: string]: string };
 }) {
   const {
     fileId,
@@ -29,7 +30,7 @@ export default async function Page({
 
   if (!fileId) return redirect("/error");
 
-  const config = await getData(fileId, version, doc, action === "view", share);
+  const data = await getData(fileId, version, doc, action === "view", share);
 
-  return <Editor config={config} />;
+  return <Editor data={data} />;
 }

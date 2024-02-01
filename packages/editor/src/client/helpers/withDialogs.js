@@ -79,7 +79,7 @@ const withDialogs = (WrappedComponent) => {
           docEditor.setSharingSettings({
             sharingSettings,
           });
-        }
+        },
       );
     };
 
@@ -224,57 +224,6 @@ const withDialogs = (WrappedComponent) => {
         filesType === setReferenceSourceAction
         ? type
         : t("SelectFilesType", { fileType: type });
-    };
-
-    const onSDKRequestSaveAs = (event) => {
-      setTitleSelectorFolder(event.data.title);
-      setUrlSelectorFolder(event.data.url);
-      setExtension(event.data.title.split(".").pop());
-
-      setIsFolderDialogVisible(true);
-    };
-
-    const onCloseFolderDialog = () => {
-      setIsFolderDialogVisible(false);
-    };
-
-    const getSavingInfo = async (title, folderId, openNewTab) => {
-      const savingInfo = await window.filesUtils.SaveAs(
-        title,
-        urlSelectorFolder,
-        folderId,
-        openNewTab
-      );
-
-      if (savingInfo) {
-        const docEditor =
-          typeof window !== "undefined" &&
-          window.DocEditor?.instances[EDITOR_ID];
-
-        const convertedInfo = savingInfo.split(": ").pop();
-
-        docEditor?.showMessage(convertedInfo);
-      }
-    };
-
-    const onClickSaveSelectFolder = (e, folderId, fileTitle, openNewTab) => {
-      const currentExst = fileTitle.split(".").pop();
-
-      const title =
-        currentExst !== extension
-          ? fileTitle.concat(`.${extension}`)
-          : fileTitle;
-
-      if (openNewTab) {
-        window.filesUtils.SaveAs(
-          title,
-          urlSelectorFolder,
-          folderId,
-          openNewTab
-        );
-      } else {
-        getSavingInfo(title, folderId, openNewTab);
-      }
     };
 
     const sharingDialog = (

@@ -22,7 +22,7 @@ import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import SSOIcon from "PUBLIC_DIR/images/sso.react.svg";
 import { Dark, Base } from "@docspace/shared/themes";
 import { useMounted } from "../helpers/useMounted";
-import { getBgPattern } from "@docspace/shared/utils/common";
+import { getBgPattern, frameCallCommand } from "@docspace/shared/utils/common";
 import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 import { getLogoFromPath, getSystemTheme } from "@docspace/shared/utils";
 import { TenantStatus } from "@docspace/shared/enums";
@@ -82,6 +82,7 @@ const Login: React.FC<ILoginProps> = ({
     const systemTheme = getSystemTheme();
     const theme = themes[systemTheme];
     setTheme(theme);
+    frameCallCommand("setIsLoaded");
   }, []);
 
   const ssoExists = () => {
@@ -215,8 +216,8 @@ const Login: React.FC<ILoginProps> = ({
   const logoUrl = !logo
     ? undefined
     : !theme?.isBase
-      ? getLogoFromPath(logo.path.dark)
-      : getLogoFromPath(logo.path.light);
+    ? getLogoFromPath(logo.path.dark)
+    : getLogoFromPath(logo.path.light);
 
   if (!mounted) return <></>;
   if (isRestoringPortal) return <></>;

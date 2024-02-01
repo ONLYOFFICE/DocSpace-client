@@ -11,7 +11,6 @@ import SubArticleHeader from "./sub-components/Header";
 import SubArticleMainButton from "./sub-components/MainButton";
 import SubArticleBody from "./sub-components/Body";
 import ArticleProfile from "./sub-components/Profile";
-import ArticleAlerts from "./sub-components/Alerts";
 import ArticleLiveChat from "./sub-components/LiveChat";
 import ArticleApps from "./sub-components/Apps";
 import ArticleDevToolsBar from "./sub-components/DevToolsBar";
@@ -60,14 +59,11 @@ const Article = ({
   showArticleLoader,
   isAdmin,
   withCustomArticleHeader,
-  hideAlerts,
 
   onArticleHeaderClick,
   isBurgerLoading,
   whiteLabelLogoUrls,
 
-  articleAlertsData,
-  incrementIndexOfArticleAlertsData,
   isNonProfit,
   isEnterprise,
   isFreeTariff,
@@ -75,14 +71,9 @@ const Article = ({
   isLicenseDateExpired,
   isLicenseExpiring,
   isPaymentPageAvailable,
-  isSubmitToGalleryAlertAvailable,
-  isTeamTrainingAlertAvailable,
   isTrial,
   standalone,
-  bookTrainingEmail,
-  removeAlertFromArticleAlertsData,
   currentTariffPlanTitle,
-  setSubmitToGalleryDialogVisible,
   trialDaysLeft,
   paymentDate,
 
@@ -273,26 +264,6 @@ const Article = ({
           {articleBodyContent ? articleBodyContent.props.children : null}
           {!showArticleLoader && (
             <>
-              {!hideAlerts && (
-                <ArticleAlerts
-                  articleAlertsData={articleAlertsData}
-                  showText={showText}
-                  incrementIndexOfArticleAlertsData={
-                    incrementIndexOfArticleAlertsData
-                  }
-                  isSubmitToGalleryAlertAvailable={
-                    isSubmitToGalleryAlertAvailable
-                  }
-                  isTeamTrainingAlertAvailable={isTeamTrainingAlertAvailable}
-                  bookTrainingEmail={bookTrainingEmail}
-                  removeAlertFromArticleAlertsData={
-                    removeAlertFromArticleAlertsData
-                  }
-                  setSubmitToGalleryDialogVisible={
-                    setSubmitToGalleryDialogVisible
-                  }
-                />
-              )}
               {withDevTools && (
                 <ArticleDevToolsBar
                   articleOpen={articleOpen}

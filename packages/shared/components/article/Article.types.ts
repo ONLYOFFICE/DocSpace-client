@@ -23,16 +23,6 @@ export interface ArticleHeaderProps {
 
 export type TRemoveAlert = (alertName: ArticleAlerts) => void;
 
-export interface ArticleTeamTrainingAlertProps {
-  bookTrainingEmail?: string;
-  removeAlertFromArticleAlertsData?: TRemoveAlert;
-}
-
-export interface ArticleSubmitToFormGalleryAlertProps {
-  setSubmitToGalleryDialogVisible?: (value: boolean) => void;
-  removeAlertFromArticleAlertsData?: TRemoveAlert;
-}
-
 export type TToggleArticleOpen = () => void;
 
 export interface ArticlePaymentAlertProps {
@@ -68,17 +58,6 @@ export interface ArticleZendeskProps {
   isMobileArticle: boolean;
   zendeskKey: string;
   showProgress: boolean;
-}
-
-export interface ArticleAlertsProps {
-  articleAlertsData?: { current: string; available: string[] };
-  incrementIndexOfArticleAlertsData?: () => void;
-  showText?: boolean;
-  isTeamTrainingAlertAvailable?: boolean;
-  isSubmitToGalleryAlertAvailable?: boolean;
-  bookTrainingEmail?: string;
-  removeAlertFromArticleAlertsData?: TRemoveAlert;
-  setSubmitToGalleryDialogVisible?: (value: boolean) => void;
 }
 
 export interface ArticleAppsProps {
@@ -145,24 +124,16 @@ export interface ArticleProps {
   getActions?: (t: TTranslation) => ContextMenuModel[];
   onProfileClick?: () => void;
 
-  hideAlerts: boolean;
-  articleAlertsData?: { current: string; available: string[] };
-  incrementIndexOfArticleAlertsData?: () => void;
   isNonProfit?: boolean;
   isGracePeriod?: boolean;
   isFreeTariff?: boolean;
   isPaymentPageAvailable?: boolean;
-  isTeamTrainingAlertAvailable?: boolean;
-  isSubmitToGalleryAlertAvailable?: boolean;
   isLicenseExpiring?: boolean;
   isLicenseDateExpired?: boolean;
   isEnterprise?: boolean;
   isTrial?: boolean;
   standalone?: boolean;
   currentTariffPlanTitle?: string;
-  bookTrainingEmail?: string;
-  removeAlertFromArticleAlertsData?: TRemoveAlert;
-  setSubmitToGalleryDialogVisible?: (value: boolean) => void;
   trialDaysLeft?: number;
   paymentDate?: Date;
 }

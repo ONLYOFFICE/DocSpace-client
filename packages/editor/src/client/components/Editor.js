@@ -23,8 +23,8 @@ import {
 import { EditorWrapper } from "../components/StyledEditor";
 import { useTranslation } from "react-i18next";
 import withDialogs from "../helpers/withDialogs";
-import { assign, frameCallEvent } from "@docspace/shared/utils/common";
-import { getEditorTheme, frameCallCommand } from "@docspace/shared/utils";
+import { assign, frameCallEvent, frameCallCommand } from "@docspace/shared/utils/common";
+import { getEditorTheme } from "@docspace/shared/utils";
 import { toastr } from "@docspace/shared/components/toast";
 import { DocumentEditor } from "@onlyoffice/document-editor-react";
 import ErrorContainer from "@docspace/common/components/ErrorContainer";

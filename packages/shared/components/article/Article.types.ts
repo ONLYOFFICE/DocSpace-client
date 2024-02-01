@@ -74,24 +74,11 @@ export interface ArticleAlertsProps {
   articleAlertsData?: { current: string; available: string[] };
   incrementIndexOfArticleAlertsData?: () => void;
   showText?: boolean;
-  isNonProfit?: boolean;
-  isGracePeriod?: boolean;
-  isFreeTariff?: boolean;
-  isPaymentPageAvailable?: boolean;
   isTeamTrainingAlertAvailable?: boolean;
   isSubmitToGalleryAlertAvailable?: boolean;
-  isLicenseExpiring?: boolean;
-  isLicenseDateExpired?: boolean;
-  isEnterprise?: boolean;
-  isTrial?: boolean;
-  standalone?: boolean;
-  currentTariffPlanTitle?: string;
-  toggleArticleOpen?: TToggleArticleOpen;
   bookTrainingEmail?: string;
   removeAlertFromArticleAlertsData?: TRemoveAlert;
   setSubmitToGalleryDialogVisible?: (value: boolean) => void;
-  trialDaysLeft?: number;
-  paymentDate?: Date;
 }
 
 export interface ArticleAppsProps {

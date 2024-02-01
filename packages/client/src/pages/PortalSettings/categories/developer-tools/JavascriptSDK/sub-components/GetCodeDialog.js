@@ -27,7 +27,7 @@ const GetCodeDialog = (props) => {
     <ModalDialog visible={visible} isLarge onClose={onClose}>
       <ModalDialog.Header>{t("CopyWindowCode")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledTextarea isReadOnly heightTextArea={180} value={codeBlock} />
+        <StyledTextarea isReadOnly heightTextArea="180px" value={codeBlock} />
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

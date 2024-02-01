@@ -47,4 +47,6 @@ export interface DropDownItemProps {
   checked?: boolean;
   onClickSelectedItem?: () => void;
   isBeta?: boolean;
+  additionalElement?: React.ReactNode;
 }
+

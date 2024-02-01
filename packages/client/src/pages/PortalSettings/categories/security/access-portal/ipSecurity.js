@@ -195,7 +195,7 @@ const IpSecurity = (props) => {
         </Text>
         <Link
           className="link-learn-more"
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
           target="_blank"
           isHovered
           href={ipSettingsUrl}
@@ -274,7 +274,7 @@ const IpSecurity = (props) => {
   );
 };
 
-export default inject(({ auth, setup }) => {
+export default inject(({ settingsStore, setup }) => {
   const {
     ipRestrictionEnable,
     setIpRestrictionsEnable,
@@ -283,7 +283,7 @@ export default inject(({ auth, setup }) => {
     ipSettingsUrl,
     currentColorScheme,
     currentDeviceType,
-  } = auth.settingsStore;
+  } = settingsStore;
 
   const { initSettings, isInit } = setup;
 

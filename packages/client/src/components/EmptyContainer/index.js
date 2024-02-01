@@ -88,17 +88,18 @@ const EmptyContainer = ({
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     filesStore,
     dialogsStore,
 
     selectedFolderStore,
     clientLoadingStore,
+    currentTariffStatusStore,
   }) => {
     const { isErrorRoomNotAvailable, isFiltered } = filesStore;
     const { isLoading } = clientLoadingStore;
 
-    const { isGracePeriod } = auth.currentTariffStatusStore;
+    const { isGracePeriod } = currentTariffStatusStore;
 
     const { setInviteUsersWarningDialogVisible } = dialogsStore;
 
@@ -108,7 +109,7 @@ export default inject(
       isErrorRoomNotAvailable;
 
     return {
-      theme: auth.settingsStore.theme,
+      theme: settingsStore.theme,
       isFiltered,
       isLoading,
 

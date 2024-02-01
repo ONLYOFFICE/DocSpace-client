@@ -168,12 +168,12 @@ const StyledSliderTheme = styled(StyledSlider)<SliderThemeProps>`
   background-image: ${(props) =>
     props.withPouring &&
     ((props.theme.isBase &&
-      `linear-gradient( ${props.$currentColorScheme?.main.accent}, ${props.$currentColorScheme?.main.accent})`) ||
+      `linear-gradient( ${props.$currentColorScheme?.main?.accent}, ${props.$currentColorScheme?.main?.accent})`) ||
       (!props.theme.isBase && `linear-gradient(#FFFFFF, #FFFFFF)`))};
 
   &::-webkit-slider-thumb {
     background: ${(props) =>
-      (props.theme.isBase && props.$currentColorScheme?.main.accent) ||
+      (props.theme.isBase && props.$currentColorScheme?.main?.accent) ||
       (!props.theme.isBase && "#FFFFFF")};
     box-shadow: ${(props) =>
       !props.theme.isBase && "0px 3px 12px rgba(0, 0, 0, 0.25); !important"};
@@ -183,7 +183,7 @@ const StyledSliderTheme = styled(StyledSlider)<SliderThemeProps>`
     background-image: ${(props) =>
       props.withPouring &&
       ((props.theme.isBase &&
-        `linear-gradient( ${props.$currentColorScheme?.main.accent}, ${props.$currentColorScheme?.main.accent})`) ||
+        `linear-gradient( ${props.$currentColorScheme?.main?.accent}, ${props.$currentColorScheme?.main?.accent})`) ||
         (!props.theme.isBase && `linear-gradient(#FFFFFF, #FFFFFF)`))};
   }
 

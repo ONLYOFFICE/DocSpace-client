@@ -41,10 +41,10 @@ const ContactContainer = ({ t, salesEmail }) => {
   );
 };
 
-export default inject(({ payments, auth }) => {
+export default inject(({ payments, settingsStore }) => {
   const { salesEmail } = payments;
   return {
     salesEmail,
-    theme: auth.settingsStore.theme,
+    theme: settingsStore.theme,
   };
 })(observer(ContactContainer));

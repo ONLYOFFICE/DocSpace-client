@@ -36,6 +36,8 @@ const infoHistory = "info_history";
 // const infoDetails = "info_details";
 
 class InfoPanelStore {
+  userStore = null;
+
   isVisible = false;
   isMobileHidden = false;
 
@@ -49,8 +51,7 @@ class InfoPanelStore {
   isScrollLocked = false;
   historyWithFileList = false;
 
-  authStore = null;
-  settingsStore = null;
+  filesSettingsStore = null;
   peopleStore = null;
   filesStore = null;
   selectedFolderStore = null;
@@ -64,7 +65,9 @@ class InfoPanelStore {
 
   shareChanged = false;
 
-  constructor() {
+  constructor(userStore) {
+    this.userStore = userStore;
+
     makeAutoObservable(this);
   }
 
@@ -259,7 +262,7 @@ class InfoPanelStore {
     return item.isRoom || !!item.roomType
       ? item.rootFolderType === FolderType.Archive
         ? item.logo && item.logo.medium
-        : this.settingsStore.getIcon(
+        : this.filesSettingsStore.getIcon(
               size,
               null,
               null,
@@ -270,16 +273,22 @@ class InfoPanelStore {
           ? item.logo?.medium
           : item.icon
             ? item.icon
-            : this.settingsStore.getIcon(size, null, null, null, item.roomType)
+            : this.filesSettingsStore.getIcon(
+                size,
+                null,
+                null,
+                null,
+                item.roomType
+              )
       : item.isFolder && item.folderType
-        ? this.settingsStore.getIconByFolderType(item.folderType, size)
-        : this.settingsStore.getIcon(size, item.fileExst || ".file");
+        ? this.filesSettingsStore.getIconByFolderType(item.folderType, size)
+        : this.filesSettingsStore.getIcon(size, item.fileExst || ".file");
   };
 
   // User link actions //
 
   openUser = async (user, navigate) => {
-    if (user.id === this.authStore.userStore.user.id) {
+    if (user.id === this.userStore.user.id) {
       this.openSelfProfile();
       return;
     }

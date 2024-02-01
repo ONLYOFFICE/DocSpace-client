@@ -112,13 +112,14 @@ const RoomsItemHeader = ({
 
 export default inject(
   ({
-    auth,
+    currentTariffStatusStore,
     dialogsStore,
     selectedFolderStore,
     filesStore,
+    infoPanelStore,
     publicRoomStore,
   }) => {
-    const { infoPanelSelection, roomsView } = auth.infoPanelStore;
+    const { infoPanelSelection, roomsView, setIsMobileHidden } = infoPanelStore;
     const { externalLinks } = publicRoomStore;
 
     const selection = infoPanelSelection.length > 1 ? null : infoPanelSelection;
@@ -127,10 +128,10 @@ export default inject(
     return {
       selection,
       roomsView,
-      infoPanelSelection: auth.infoPanelStore.infoPanelSelection,
-      setIsMobileHidden: auth.infoPanelStore.setIsMobileHidden,
+      infoPanelSelection,
+      setIsMobileHidden,
 
-      isGracePeriod: auth.currentTariffStatusStore.isGracePeriod,
+      isGracePeriod: currentTariffStatusStore.isGracePeriod,
 
       setInvitePanelOptions: dialogsStore.setInvitePanelOptions,
       setInviteUsersWarningDialogVisible:
@@ -138,8 +139,7 @@ export default inject(
 
       isPublicRoomType:
         (selectedFolderStore.roomType ??
-          auth.infoPanelStore.infoPanelSelection?.roomType) ===
-        RoomsType.PublicRoom,
+          infoPanelStore.infoPanelSelection?.roomType) === RoomsType.PublicRoom,
 
       setSelected: filesStore.setSelected,
       setBufferSelection: filesStore.setBufferSelection,

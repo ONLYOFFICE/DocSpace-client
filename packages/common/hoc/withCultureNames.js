@@ -37,8 +37,7 @@ export default function withCultureNames(WrappedComponent) {
     );
   };
 
-  return inject(({ auth }) => {
-    const { settingsStore } = auth;
+  return inject(({ settingsStore }) => {
     const { cultures, getPortalCultures } = settingsStore;
     return {
       cultures,

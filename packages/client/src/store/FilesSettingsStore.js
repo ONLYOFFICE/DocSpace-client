@@ -15,12 +15,13 @@ import {
 } from "@docspace/shared/utils/image-helpers";
 
 import { getIconPathByFolderType } from "@docspace/shared/utils/common";
-class SettingsStore {
+class FilesSettingsStore {
   thirdPartyStore;
   treeFoldersStore;
   publicRoomStore;
   pluginStore;
   authStore;
+  settingsStore;
 
   isErrorSettings = null;
   expandedSetting = null;
@@ -73,7 +74,8 @@ class SettingsStore {
     treeFoldersStore,
     publicRoomStore,
     pluginStore,
-    authStore
+    authStore,
+    settingsStore
   ) {
     makeAutoObservable(this);
 
@@ -82,6 +84,7 @@ class SettingsStore {
     this.publicRoomStore = publicRoomStore;
     this.pluginStore = pluginStore;
     this.authStore = authStore;
+    this.settingsStore = settingsStore;
   }
 
   setIsLoaded = (isLoaded) => {
@@ -560,7 +563,7 @@ class SettingsStore {
         path = "sxi.svg";
         break;
       default:
-        const { enablePlugins } = this.authStore.settingsStore;
+        const { enablePlugins } = this.settingsStore;
 
         if (enablePlugins) {
           const { fileItemsList } = this.pluginStore;
@@ -625,4 +628,4 @@ class SettingsStore {
   };
 }
 
-export default SettingsStore;
+export default FilesSettingsStore;

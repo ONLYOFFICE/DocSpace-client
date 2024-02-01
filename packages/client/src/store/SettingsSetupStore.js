@@ -3,7 +3,7 @@ import { makeAutoObservable } from "mobx";
 const { Filter } = api;
 import SelectionStore from "./SelectionStore";
 //import CommonStore from "./CommonStore";
-import authStore from "@docspace/common/store/AuthStore";
+
 import {
   getSMTPSettings,
   resetSMTPSettings,
@@ -17,6 +17,8 @@ import { DeviceType } from "@docspace/shared/enums";
 class SettingsSetupStore {
   selectionStore = null;
   authStore = null;
+  settingsStore = null;
+  tfaStore = null;
   isInit = false;
   logoutVisible = false;
   logoutAllVisible = false;
@@ -81,40 +83,42 @@ class SettingsSetupStore {
   sessions = [];
   currentSession = [];
 
-  constructor() {
+  constructor(tfaStore, authStore, settingsStore) {
     this.selectionStore = new SelectionStore(this);
     this.authStore = authStore;
+    this.tfaStore = tfaStore;
+    this.settingsStore = settingsStore;
     makeAutoObservable(this);
   }
 
   initSettings = async (page) => {
     const isMobileView =
-      authStore.settingsStore.currentDeviceType === DeviceType.mobile;
+      this.settingsStore.currentDeviceType === DeviceType.mobile;
 
     if (this.isInit && isMobileView) return;
 
-    if (authStore.isAuthenticated) {
+    if (this.authStore.isAuthenticated) {
       if (isMobileView) {
         switch (page) {
           case "password":
-            await authStore.settingsStore.getPortalPasswordSettings();
+            await this.settingsStore.getPortalPasswordSettings();
             break;
           case "tfa":
-            await authStore.tfaStore.getTfaType();
+            await this.tfaStore.getTfaType();
             break;
           case "trusted-mail":
             break;
           case "ip":
-            await authStore.settingsStore.getIpRestrictionsEnable();
-            await authStore.settingsStore.getIpRestrictions();
+            await this.settingsStore.getIpRestrictionsEnable();
+            await this.settingsStore.getIpRestrictions();
             break;
           case "brute-force-protection":
-            await authStore.settingsStore.getBruteForceProtection();
+            await this.settingsStore.getBruteForceProtection();
             break;
           case "admin-message":
             break;
           case "lifetime":
-            await authStore.settingsStore.getSessionLifetime();
+            await this.settingsStore.getSessionLifetime();
 
             break;
 
@@ -122,12 +126,12 @@ class SettingsSetupStore {
             break;
         }
       } else {
-        await authStore.settingsStore.getPortalPasswordSettings();
-        await authStore.tfaStore.getTfaType();
-        await authStore.settingsStore.getIpRestrictionsEnable();
-        await authStore.settingsStore.getIpRestrictions();
-        await authStore.settingsStore.getSessionLifetime();
-        await authStore.settingsStore.getBruteForceProtection();
+        await this.settingsStore.getPortalPasswordSettings();
+        await this.tfaStore.getTfaType();
+        await this.settingsStore.getIpRestrictionsEnable();
+        await this.settingsStore.getIpRestrictions();
+        await this.settingsStore.getSessionLifetime();
+        await this.settingsStore.getBruteForceProtection();
       }
     }
 

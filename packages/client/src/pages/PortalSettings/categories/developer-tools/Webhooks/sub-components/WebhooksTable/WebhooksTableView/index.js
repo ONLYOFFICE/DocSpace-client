@@ -111,12 +111,12 @@ const WebhooksTableView = (props) => {
   );
 };
 
-export default inject(({ webhooksStore, setup, auth }) => {
+export default inject(({ webhooksStore, setup, settingsStore, userStore }) => {
   const { webhooks, loadWebhooks } = webhooksStore;
 
   const { viewAs, setViewAs } = setup;
-  const { id: userId } = auth.userStore.user;
-  const { currentDeviceType } = auth.settingsStore;
+  const { id: userId } = userStore.user;
+  const { currentDeviceType } = settingsStore;
 
   return {
     webhooks,

@@ -237,7 +237,7 @@ const PreparationPortal = (props) => {
   );
 };
 
-const PreparationPortalWrapper = inject(({ auth, backup }) => {
+const PreparationPortalWrapper = inject(({ backup }) => {
   const { backupSize, clearLocalStorage } = backup;
 
   const multiplicationFactor = backupSize

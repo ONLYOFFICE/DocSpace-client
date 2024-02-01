@@ -69,7 +69,7 @@ export const getBannerAttribute = () => {
     const currentBar = banner[index];
 
     let htmlUrl =
-      currentBar && window.firebaseHelper.config.authDomain
+      currentBar && window.firebaseHelper?.config?.authDomain
         ? `https://${window.firebaseHelper.config.authDomain}/${language}/${currentBar}/index.html`
         : null;
 

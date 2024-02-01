@@ -170,14 +170,13 @@ ChangeUserStatusDialog.propTypes = {
   userIDs: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-export default inject(({ peopleStore, auth }) => {
+export default inject(({ peopleStore, infoPanelStore }) => {
   const setSelected = peopleStore.selectionStore.setSelected;
 
   const { getPeopleListItem, updateUserStatus, needResetUserSelection } =
     peopleStore.usersStore;
 
-  const { setInfoPanelSelection, isVisible: infoPanelVisible } =
-    auth.infoPanelStore;
+  const { setInfoPanelSelection, isVisible: infoPanelVisible } = infoPanelStore;
 
   return {
     needResetUserSelection,

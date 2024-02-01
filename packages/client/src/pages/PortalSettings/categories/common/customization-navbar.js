@@ -75,8 +75,8 @@ const CustomizationNavbar = ({
   );
 };
 
-export default inject(({ common, auth }) => {
-  const { enablePortalRename } = auth.settingsStore;
+export default inject(({ common, settingsStore }) => {
+  const { enablePortalRename } = settingsStore;
   const { isLoaded, setIsLoadedCustomizationNavbar } = common;
   return {
     isLoaded,

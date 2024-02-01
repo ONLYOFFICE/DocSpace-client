@@ -115,7 +115,7 @@ const Register: React.FC<IRegisterProps> = (props) => {
   return enabledJoin && !isAuthenticated ? (
     <>
       <StyledRegister id={id} onClick={onRegisterClick}>
-        <Text as="span" color={currentColorScheme?.main.accent}>
+        <Text as="span" color={currentColorScheme?.main?.accent}>
           {t("Register")}
         </Text>
       </StyledRegister>
@@ -144,8 +144,8 @@ const Register: React.FC<IRegisterProps> = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { settingsStore, isAuthenticated, language } = auth;
+export default inject(({ authStore, settingsStore }) => {
+  const { isAuthenticated, language } = authStore;
   const { theme } = settingsStore;
   return {
     theme,

@@ -1,148 +1,201 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable prefer-regex-literals */
 import { makeAutoObservable, runInAction } from "mobx";
 
-import api from "@docspace/shared/api";
-
-import { getSystemTheme } from "@docspace/shared/utils";
-import { frameCallEvent } from "@docspace/shared/utils/common";
-import { setCookie } from "@docspace/shared/utils/cookie";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import FirebaseHelper from "@docspace/shared/utils/firebase";
+import { TFrameConfig } from "../types/Frame";
+import api from "../api";
+import { TFolder } from "../api/files/types";
 import {
-  ThemeKeys,
-  TenantStatus,
-  DeviceType,
-  ArticleAlerts,
-} from "@docspace/shared/enums";
-
+  TAdditionalResources,
+  TCompanyInfo,
+  TCustomSchema,
+  TDomainValidator,
+  TFirebaseSettings,
+  TFormGallery,
+  TGetColorTheme,
+  TLoginSettings,
+  TMailDomainSettings,
+  TPasswordHash,
+  TPasswordSettings,
+  TSettings,
+  TTimeZone,
+  TVersionBuild,
+} from "../api/settings/types";
+import { TUser } from "../api/people/types";
+import { size as deviceSize, isTablet, getSystemTheme } from "../utils";
+import {
+  frameCallEvent,
+  getShowText,
+  initArticleAlertsData,
+} from "../utils/common";
+import { setCookie, getCookie } from "../utils/cookie";
+import { combineUrl } from "../utils/combineUrl";
+import FirebaseHelper from "../utils/firebase";
+import SocketIOHelper from "../utils/socket";
+import { TWhiteLabel } from "../utils/whiteLabelHelper";
+import { ThemeKeys, TenantStatus, DeviceType, ArticleAlerts } from "../enums";
 import {
   LANGUAGE,
   COOKIE_EXPIRATION_YEAR,
   MEDIA_VIEW_URL,
-} from "@docspace/shared/constants";
+  WRONG_PORTAL_NAME_URL,
+} from "../constants";
+import { Dark, Base, TColorScheme } from "../themes";
+import { toastr } from "../components/toast";
+import { TData } from "../components/toast/Toast.type";
 import { version } from "../package.json";
-import SocketIOHelper from "@docspace/shared/utils/socket";
-import { Dark, Base } from "@docspace/shared/themes";
 
-import {
-  size as deviceSize,
-  isTablet,
-  getCookie,
-} from "@docspace/shared/utils";
-import { WRONG_PORTAL_NAME_URL } from "@docspace/shared/constants";
-import { toastr } from "@docspace/shared/components/toast";
-//import { getFromLocalStorage } from "@docspace/client/src/pages/PortalSettings/utils";
+// import { getFromLocalStorage } from "@docspace/client/src/pages/PortalSettings/utils";
 
 const themes = {
-  Dark: Dark,
-  Base: Base,
+  Dark,
+  Base,
 };
 
-const isDesktopEditors = window["AscDesktopEditor"] !== undefined;
+const isDesktopEditors = window.AscDesktopEditor !== undefined;
 const systemTheme = getSystemTheme();
-
-const initArticleAlertsData = () => {
-  const savedArticleAlertsData = localStorage.getItem("articleAlertsData");
-  if (savedArticleAlertsData) return JSON.parse(savedArticleAlertsData);
-
-  const articleAlertsArray = Object.values(ArticleAlerts).filter(
-    (item, index) => Object.values(ArticleAlerts).indexOf(item) === index
-  );
-  const defaultArticleAlertsData = {
-    current: articleAlertsArray[0],
-    available: articleAlertsArray,
-  };
-
-  localStorage.setItem(
-    "articleAlertsData",
-    JSON.stringify(defaultArticleAlertsData)
-  );
-
-  return defaultArticleAlertsData;
-};
 
 class SettingsStore {
   isLoading = false;
+
+  interfaceDirection = "";
+
   isLoaded = false;
+
   isBurgerLoading = true;
 
   checkedMaintenance = false;
+
   maintenanceExist = false;
+
   snackbarExist = false;
+
   currentProductId = "";
+
   culture = "en";
-  cultures = [];
+
+  cultures: string[] = [];
+
   theme = themes[systemTheme];
-  trustedDomains = [];
+
+  trustedDomains: string[] = [];
+
   trustedDomainsType = 0;
+
   ipRestrictionEnable = false;
-  ipRestrictions = [];
-  sessionLifetime = "1440";
+
+  ipRestrictions: string[] = [];
+
+  sessionLifetime = 1440;
+
   enabledSessionLifetime = false;
+
   timezone = "UTC";
-  timezones = [];
+
+  timezones: TTimeZone[] = [];
+
   tenantAlias = "";
+
   utcOffset = "00:00:00";
+
   utcHoursOffset = 0;
+
   defaultPage = "/";
+
   homepage = "";
+
   datePattern = "M/d/yyyy";
+
   datePatternJQ = "00/00/0000";
+
   dateTimePattern = "dddd, MMMM d, yyyy h:mm:ss tt";
+
   datepicker = {
     datePattern: "mm/dd/yy",
     dateTimePattern: "DD, mm dd, yy h:mm:ss tt",
     timePattern: "h:mm tt",
   };
+
   organizationName = "ONLYOFFICE";
+
   greetingSettings = "Web Office Applications";
+
   enableAdmMess = false;
+
   enabledJoin = false;
+
   urlLicense = "https://gnu.org/licenses/gpl-3.0.html";
+
   urlSupport = "https://helpdesk.onlyoffice.com/";
 
   forumLink = null;
-  formGallery = {
+
+  formGallery: TFormGallery = {
     url: "",
     ext: ".oform",
     uploadUrl: "",
     uploadExt: ".docxf",
+    path: "",
+    domain: "",
+    uploadPath: "",
+    uploadDomain: "",
+    uploadDashboard: "",
   };
 
-  logoUrl = "";
+  logoUrl: TWhiteLabel = {} as TWhiteLabel;
 
   isDesktopClient = isDesktopEditors;
+
   isDesktopClientInit = false;
-  //isDesktopEncryption: desktopEncryption;
+
+  // isDesktopEncryption: desktopEncryption;
   isEncryptionSupport = false;
-  encryptionKeys = null;
+
+  encryptionKeys: { [key: string]: string | boolean } = {};
 
   personal = false;
+
   docSpace = true;
 
   roomsMode = false;
 
   isHeaderVisible = false;
+
   isTabletView = false;
 
-  showText = JSON.parse(localStorage.getItem("showArticle")) ?? false;
+  showText = getShowText();
+
   articleOpen = false;
+
   isMobileArticle = false;
 
-  folderPath = [];
+  folderPath: TFolder[] = [];
 
-  hashSettings = null;
+  hashSettings: TPasswordHash = {} as TPasswordHash;
+
   title = "";
-  ownerId = null;
+
+  ownerId = "";
+
   nameSchemaId = null;
-  owner = {};
+
+  owner: TUser = {} as TUser;
+
   wizardToken = null;
+
   limitedAccessSpace = null;
-  passwordSettings = null;
+
+  passwordSettings: TPasswordSettings = {} as TPasswordSettings;
+
   hasShortenService = false;
+
+  isPublicRoom = false;
+
   withPaging = false;
 
-  customSchemaList = [];
-  firebase = {
+  customSchemaList: TCustomSchema[] = [];
+
+  firebase: TFirebaseSettings = {
     apiKey: "",
     authDomain: "",
     projectId: "",
@@ -150,55 +203,83 @@ class SettingsStore {
     messagingSenderId: "",
     appId: "",
     measurementId: "",
+    databaseURL: "",
   };
+
   version = "";
+
   buildVersionInfo = {
     docspace: version,
     documentServer: "6.4.1",
   };
+
   debugInfo = false;
+
   socketUrl = "";
 
   folderFormValidation = new RegExp('[*+:"<>?|\\\\/]', "gim");
 
-  tenantStatus = null;
-  helpLink = null;
-  apiDocsLink = null;
-  bookTrainingEmail = null;
-  hotkeyPanelVisible = false;
-  frameConfig = null;
+  tenantStatus: TenantStatus | null = null;
 
-  appearanceTheme = [];
-  selectedThemeId = null;
-  currentColorScheme = null;
+  helpLink = null;
+
+  apiDocsLink = null;
+
+  bookTrainingEmail = null;
+
+  hotkeyPanelVisible = false;
+
+  frameConfig: TFrameConfig | null = null;
+
+  appearanceTheme: TColorScheme[] = [];
+
+  selectedThemeId: number | null = null;
+
+  currentColorScheme: TColorScheme = {} as TColorScheme;
 
   enablePlugins = false;
-  pluginOptions = { upload: false, delete: false };
-  domainValidator = null;
 
-  additionalResourcesData = null;
+  pluginOptions = { upload: false, delete: false };
+
+  domainValidator: TDomainValidator | null = null;
+
+  additionalResourcesData: TAdditionalResources = {} as TAdditionalResources;
+
   additionalResourcesIsDefault = true;
-  companyInfoSettingsData = null;
+
+  companyInfoSettingsData: TCompanyInfo = {} as TCompanyInfo;
+
   companyInfoSettingsIsDefault = true;
 
-  whiteLabelLogoUrls = [];
+  whiteLabelLogoUrls: TWhiteLabel[] = [];
+
   standalone = false;
 
   mainBarVisible = false;
+
   zendeskKey = null;
-  bookTrainingEmail = null;
+
   legalTerms = null;
-  baseDomain = null;
-  portals = [];
+
+  baseDomain: string | null = null;
+
+  portals: string[] = [];
+
   domain = null;
+
   documentationEmail = null;
+
   articleAlertsData = initArticleAlertsData();
-  cspDomains = [];
+
+  cspDomains: string[] = [];
+
   publicRoomKey = "";
 
-  numberAttempt = null;
-  blockingTime = null;
-  checkPeriod = null;
+  numberAttempt: number | null = null;
+
+  blockingTime: number | null = null;
+
+  checkPeriod: number | null = null;
 
   userNameRegex = "";
 
@@ -208,7 +289,7 @@ class SettingsStore {
     makeAutoObservable(this);
   }
 
-  setTenantStatus = (tenantStatus) => {
+  setTenantStatus = (tenantStatus: TenantStatus) => {
     this.tenantStatus = tenantStatus;
   };
 
@@ -376,84 +457,75 @@ class SettingsStore {
     return this.isLoaded && !this.wizardToken;
   }
 
-  setIsDesktopClientInit = (isDesktopClientInit) => {
+  setIsDesktopClientInit = (isDesktopClientInit: boolean) => {
     this.isDesktopClientInit = isDesktopClientInit;
   };
 
-  get isPublicRoom() {
-    return window.location.pathname === "/rooms/share";
-  }
-
-  setMainBarVisible = (visible) => {
+  setMainBarVisible = (visible: boolean) => {
     this.mainBarVisible = visible;
   };
 
-  setValue = (key, value) => {
-    this[key] = value;
+  setValue = <T>(key: keyof SettingsStore, value: T) => {
+    if (key in this)
+      // @ts-expect-error is always writable property
+      this[key] = value;
   };
 
-  setCheckedMaintenance = (checkedMaintenance) => {
+  setCheckedMaintenance = (checkedMaintenance: boolean) => {
     this.checkedMaintenance = checkedMaintenance;
   };
 
-  setMaintenanceExist = (maintenanceExist) => {
+  setMaintenanceExist = (maintenanceExist: boolean) => {
     this.maintenanceExist = maintenanceExist;
   };
 
-  setSnackbarExist = (snackbar) => {
+  setSnackbarExist = (snackbar: boolean) => {
     this.snackbarExist = snackbar;
   };
 
-  setDefaultPage = (defaultPage) => {
+  setDefaultPage = (defaultPage: string) => {
     this.defaultPage = defaultPage;
   };
 
-  setPortalDomain = (domain) => {
+  setPortalDomain = (domain: string) => {
     this.baseDomain = domain;
   };
-  setPortals = (portals) => {
+
+  setPortals = (portals: string[]) => {
     this.portals = portals;
   };
 
-  setGreetingSettings = (greetingSettings) => {
+  setGreetingSettings = (greetingSettings: string) => {
     this.greetingSettings = greetingSettings;
   };
 
-  getPortal = async () => {
-    try {
-      const res = await api.portal.getPortal();
-
-      if (!res) return;
-
-      return res;
-    } catch (e) {
-      toastr.error(e);
-    }
-  };
   getSettings = async () => {
-    let newSettings = null;
+    let newSettings: TSettings = {} as TSettings;
 
     if (window?.__ASC_INITIAL_EDITOR_STATE__?.portalSettings)
       newSettings = window.__ASC_INITIAL_EDITOR_STATE__.portalSettings;
     else newSettings = await api.settings.getSettings(true);
 
-    if (window["AscDesktopEditor"] !== undefined || this.personal) {
+    if (window.AscDesktopEditor !== undefined || this.personal) {
       const dp = combineUrl(window.DocSpaceConfig?.proxy?.url, MEDIA_VIEW_URL);
       this.setDefaultPage(dp);
     }
 
-    Object.keys(newSettings).map((key) => {
+    if (!newSettings) return;
+
+    Object.keys(newSettings).forEach((forEachKey) => {
+      const key = forEachKey as keyof TSettings;
       if (key in this) {
         this.setValue(
-          key,
+          key as keyof SettingsStore,
           key === "defaultPage"
             ? combineUrl(window.DocSpaceConfig?.proxy?.url, newSettings[key])
-            : newSettings[key]
+            : newSettings[key],
         );
         if (key === "culture") {
-          if (newSettings.wizardToken) return;
+          if (newSettings?.wizardToken) return;
           const language = getCookie(LANGUAGE);
-          if (!language || language == "undefined") {
+          if (!language || language === "undefined") {
             setCookie(LANGUAGE, newSettings[key], {
               "max-age": COOKIE_EXPIRATION_YEAR,
             });
@@ -469,7 +541,7 @@ class SettingsStore {
     return newSettings;
   };
 
-  getFolderPath = async (id) => {
+  getFolderPath = async (id: number) => {
     this.folderPath = await api.files.getFolderPath(id);
   };
 
@@ -488,7 +560,7 @@ class SettingsStore {
       }
 
       if (err?.response?.status === 403) {
-        //access to the portal is restricted
+        // access to the portal is restricted
         window.DocSpace.navigate("/access-restricted", {
           state: { isRestrictionError: true },
           replace: true,
@@ -525,7 +597,7 @@ class SettingsStore {
     requests.push(
       this.getPortalSettings(),
       this.getAppearanceTheme(),
-      this.getWhiteLabelLogoUrls()
+      this.getWhiteLabelLogoUrls(),
     );
 
     await Promise.all(requests);
@@ -538,40 +610,28 @@ class SettingsStore {
     this.setIsLoaded(true);
   };
 
-  setRoomsMode = (mode) => {
+  setRoomsMode = (mode: boolean) => {
     this.roomsMode = mode;
   };
 
-  setIsLoading = (isLoading) => {
+  setIsLoading = (isLoading: boolean) => {
     this.isLoading = isLoading;
   };
 
-  setIsLoaded = (isLoaded) => {
+  setIsLoaded = (isLoaded: boolean) => {
     this.isLoaded = isLoaded;
   };
 
-  setCultures = (cultures) => {
+  setCultures = (cultures: string[]) => {
     this.cultures = cultures;
   };
 
-  setAdditionalResourcesData = (data) => {
+  setAdditionalResourcesData = (data: TAdditionalResources) => {
     this.additionalResourcesData = data;
   };
 
-  setAdditionalResourcesIsDefault = (additionalResourcesIsDefault) => {
+  setAdditionalResourcesIsDefault = (additionalResourcesIsDefault: boolean) => {
     this.additionalResourcesIsDefault = additionalResourcesIsDefault;
-  };
-
-  setAdditionalResources = async (
-    feedbackAndSupportEnabled,
-    videoGuidesEnabled,
-    helpCenterEnabled
-  ) => {
-    return await api.settings.setAdditionalResources(
-      feedbackAndSupportEnabled,
-      videoGuidesEnabled,
-      helpCenterEnabled
-    );
   };
 
   getAdditionalResources = async () => {
@@ -581,16 +641,12 @@ class SettingsStore {
     this.setAdditionalResourcesIsDefault(res.isDefault);
   };
 
-  restoreAdditionalResources = async () => {
-    return await api.settings.restoreAdditionalResources();
-  };
-
   getPortalCultures = async () => {
     const cultures = await api.settings.getPortalCultures();
     this.setCultures(cultures);
   };
 
-  setIsEncryptionSupport = (isEncryptionSupport) => {
+  setIsEncryptionSupport = (isEncryptionSupport: boolean) => {
     this.isEncryptionSupport = isEncryptionSupport;
   };
 
@@ -599,38 +655,30 @@ class SettingsStore {
     this.setIsEncryptionSupport(isEncryptionSupport);
   };
 
-  updateEncryptionKeys = (encryptionKeys) => {
+  updateEncryptionKeys = (encryptionKeys: {
+    [key: string]: string | boolean;
+  }) => {
     this.encryptionKeys = encryptionKeys ?? {};
   };
 
-  setEncryptionKeys = async (keys) => {
+  setEncryptionKeys = async (keys: { [key: string]: string | boolean }) => {
     await api.files.setEncryptionKeys(keys);
     this.updateEncryptionKeys(keys);
   };
 
-  setCompanyInfoSettingsData = (data) => {
+  setCompanyInfoSettingsData = (data: TCompanyInfo) => {
     this.companyInfoSettingsData = data;
   };
 
-  setCompanyInfoSettingsIsDefault = (companyInfoSettingsIsDefault) => {
+  setCompanyInfoSettingsIsDefault = (companyInfoSettingsIsDefault: boolean) => {
     this.companyInfoSettingsIsDefault = companyInfoSettingsIsDefault;
   };
 
-  setCompanyInfoSettings = async (address, companyName, email, phone, site) => {
-    return api.settings.setCompanyInfoSettings(
-      address,
-      companyName,
-      email,
-      phone,
-      site
-    );
-  };
-
-  setLogoUrl = (url) => {
+  setLogoUrl = (url: TWhiteLabel[]) => {
     this.logoUrl = url[0];
   };
 
-  setLogoUrls = (urls) => {
+  setLogoUrls = (urls: TWhiteLabel[]) => {
     this.whiteLabelLogoUrls = urls;
   };
 
@@ -665,51 +713,16 @@ class SettingsStore {
     await this.getAllPortals();
   };
 
-  restoreCompanyInfoSettings = async () => {
-    return await api.settings.restoreCompanyInfoSettings();
-  };
-
   getEncryptionKeys = async () => {
     const encryptionKeys = await api.files.getEncryptionKeys();
     this.updateEncryptionKeys(encryptionKeys);
   };
 
-  getOAuthToken = (tokenGetterWin) => {
-    return new Promise((resolve, reject) => {
-      localStorage.removeItem("code");
-      let interval = null;
-      interval = setInterval(() => {
-        try {
-          const code = localStorage.getItem("code");
-
-          if (code) {
-            localStorage.removeItem("code");
-            clearInterval(interval);
-            resolve(code);
-          } else if (tokenGetterWin && tokenGetterWin.closed) {
-            clearInterval(interval);
-            reject();
-          }
-        } catch (e) {
-          clearInterval(interval);
-          reject(e);
-        }
-      }, 500);
-    });
-  };
-
-  getLoginLink = (token, code) => {
-    return combineUrl(
-      window.DocSpaceConfig?.proxy?.url,
-      `/login.ashx?p=${token}&code=${code}`
-    );
-  };
-
-  setModuleInfo = (homepage, productId) => {
+  setModuleInfo = (homepage: string, productId: string) => {
     if (this.homepage === homepage || this.currentProductId === productId)
       return;
 
-    console.log(`setModuleInfo('${homepage}', '${productId}')`);
+    // console.log(`setModuleInfo('${homepage}', '${productId}')`);
 
     this.homepage = homepage;
     this.setCurrentProductId(productId);
@@ -726,11 +739,11 @@ class SettingsStore {
     }
   };
 
-  setCurrentProductId = (currentProductId) => {
+  setCurrentProductId = (currentProductId: string) => {
     this.currentProductId = currentProductId;
   };
 
-  setPortalOwner = (owner) => {
+  setPortalOwner = (owner: TUser) => {
     this.owner = owner;
   };
 
@@ -744,7 +757,7 @@ class SettingsStore {
     this.wizardToken = null;
   };
 
-  setPasswordSettings = (passwordSettings) => {
+  setPasswordSettings = (passwordSettings: TPasswordSettings) => {
     this.passwordSettings = passwordSettings;
   };
 
@@ -754,21 +767,21 @@ class SettingsStore {
   };
 
   setPortalPasswordSettings = async (
-    minLength,
-    upperCase,
-    digits,
-    specSymbols
+    minLength: number,
+    upperCase: boolean,
+    digits: boolean,
+    specSymbols: boolean,
   ) => {
     const settings = await api.settings.setPortalPasswordSettings(
       minLength,
       upperCase,
       digits,
-      specSymbols
+      specSymbols,
     );
     this.setPasswordSettings(settings);
   };
 
-  setTimezones = (timezones) => {
+  setTimezones = (timezones: TTimeZone[]) => {
     this.timezones = timezones;
   };
 
@@ -778,27 +791,27 @@ class SettingsStore {
     return timezones;
   };
 
-  setHeaderVisible = (isHeaderVisible) => {
+  setHeaderVisible = (isHeaderVisible: boolean) => {
     this.isHeaderVisible = isHeaderVisible;
   };
 
-  setIsTabletView = (isTabletView) => {
+  setIsTabletView = (isTabletView: boolean) => {
     this.isTabletView = isTabletView;
   };
 
-  setShowText = (showText) => {
+  setShowText = (showText: boolean) => {
     this.showText = showText;
   };
 
   toggleShowText = () => {
     const reverseValue = !this.showText;
 
-    localStorage.setItem("showArticle", reverseValue);
+    localStorage.setItem("showArticle", `${reverseValue}`);
 
     this.showText = reverseValue;
   };
 
-  setArticleOpen = (articleOpen) => {
+  setArticleOpen = (articleOpen: boolean) => {
     this.articleOpen = articleOpen;
   };
 
@@ -806,7 +819,7 @@ class SettingsStore {
     this.articleOpen = !this.articleOpen;
   };
 
-  setIsMobileArticle = (isMobileArticle) => {
+  setIsMobileArticle = (isMobileArticle: boolean) => {
     this.isMobileArticle = isMobileArticle;
   };
 
@@ -815,13 +828,13 @@ class SettingsStore {
     return window.firebaseHelper;
   }
 
-  setPublicRoomKey = (key) => {
+  setPublicRoomKey = (key: string) => {
     this.publicRoomKey = key;
   };
 
   get socketHelper() {
     const socketUrl =
-      this.isPublicRoom && !this.publicRoomKey ? null : this.socketUrl;
+      this.isPublicRoom && !this.publicRoomKey ? "" : this.socketUrl;
 
     return new SocketIOHelper(socketUrl, this.publicRoomKey);
   }
@@ -834,7 +847,7 @@ class SettingsStore {
     this.setBuildVersionInfo(versionInfo);
   };
 
-  setBuildVersionInfo = (versionInfo) => {
+  setBuildVersionInfo = (versionInfo: TVersionBuild) => {
     this.buildVersionInfo = {
       ...this.buildVersionInfo,
       docspace: version,
@@ -845,8 +858,8 @@ class SettingsStore {
       this.buildVersionInfo.documentServer = "6.4.1";
   };
 
-  setTheme = (key) => {
-    let theme = null;
+  setTheme = (key: ThemeKeys) => {
+    let theme: null | ThemeKeys.BaseStr | ThemeKeys.DarkStr = null;
     switch (key) {
       case ThemeKeys.Base:
       case ThemeKeys.BaseStr:
@@ -870,14 +883,14 @@ class SettingsStore {
     this.theme = themes[theme];
   };
 
-  setMailDomainSettings = async (data) => {
+  setMailDomainSettings = async (data: TMailDomainSettings) => {
     const res = await api.settings.setMailDomainSettings(data);
     this.trustedDomainsType = data.type;
     this.trustedDomains = data.domains;
     return res;
   };
 
-  setTenantAlias = (tenantAlias) => {
+  setTenantAlias = (tenantAlias: string) => {
     this.tenantAlias = tenantAlias;
   };
 
@@ -886,12 +899,12 @@ class SettingsStore {
     this.ipRestrictions = res?.map((el) => el.ip);
   };
 
-  setIpRestrictions = async (ips) => {
+  setIpRestrictions = async (ips: string[]) => {
     const data = {
       IpRestrictions: ips,
     };
     const res = await api.settings.setIpRestrictions(data);
-    this.ipRestrictions = res;
+    this.ipRestrictions = res?.map((el) => el.ip);
   };
 
   getIpRestrictionsEnable = async () => {
@@ -899,15 +912,15 @@ class SettingsStore {
     this.ipRestrictionEnable = res.enable;
   };
 
-  setIpRestrictionsEnable = async (enable) => {
+  setIpRestrictionsEnable = async (enable: boolean) => {
     const data = {
-      enable: enable,
+      enable,
     };
     const res = await api.settings.setIpRestrictionsEnable(data);
     this.ipRestrictionEnable = res.enable;
   };
 
-  setMessageSettings = async (turnOn) => {
+  setMessageSettings = async (turnOn: boolean) => {
     await api.settings.setMessageSettings(turnOn);
     this.enableAdmMess = turnOn;
   };
@@ -919,7 +932,7 @@ class SettingsStore {
     this.sessionLifetime = res.lifeTime;
   };
 
-  setSessionLifetimeSettings = async (lifeTime, enabled) => {
+  setSessionLifetimeSettings = async (lifeTime: number, enabled: boolean) => {
     const res = await api.settings.setCookieSettings(lifeTime, enabled);
 
     this.enabledSessionLifetime = enabled;
@@ -928,7 +941,7 @@ class SettingsStore {
     return res;
   };
 
-  setBruteForceProtectionSettings = (settings) => {
+  setBruteForceProtectionSettings = (settings: TLoginSettings) => {
     this.numberAttempt = settings.attemptCount;
     this.blockingTime = settings.blockTime;
     this.checkPeriod = settings.checkPeriod;
@@ -940,23 +953,15 @@ class SettingsStore {
     this.setBruteForceProtectionSettings(res);
   };
 
-  setBruteForceProtection = async (AttemptCount, BlockTime, CheckPeriod) => {
-    return api.settings.setBruteForceProtection(
-      AttemptCount,
-      BlockTime,
-      CheckPeriod
-    );
-  };
-
-  setIsBurgerLoading = (isBurgerLoading) => {
+  setIsBurgerLoading = (isBurgerLoading: boolean) => {
     this.isBurgerLoading = isBurgerLoading;
   };
 
-  setHotkeyPanelVisible = (hotkeyPanelVisible) => {
+  setHotkeyPanelVisible = (hotkeyPanelVisible: boolean) => {
     this.hotkeyPanelVisible = hotkeyPanelVisible;
   };
 
-  setFrameConfig = async (frameConfig) => {
+  setFrameConfig = async (frameConfig: TFrameConfig) => {
     runInAction(() => {
       this.frameConfig = frameConfig;
     });
@@ -971,24 +976,24 @@ class SettingsStore {
   };
 
   get isFrame() {
-    console.log("get isFrame:", this.frameConfig?.name === window.name);
+    // console.log("get isFrame:", this.frameConfig?.name === window.name);
     return this.frameConfig?.name === window.name;
   }
 
-  setAppearanceTheme = (theme) => {
+  setAppearanceTheme = (theme: TColorScheme[]) => {
     this.appearanceTheme = theme;
   };
 
-  setSelectThemeId = (selected) => {
+  setSelectThemeId = (selected: number) => {
     this.selectedThemeId = selected;
   };
 
-  setCurrentColorScheme = (currentColorScheme) => {
+  setCurrentColorScheme = (currentColorScheme: TColorScheme) => {
     this.currentColorScheme = currentColorScheme;
   };
 
   getAppearanceTheme = async () => {
-    let res = null;
+    let res: TGetColorTheme = {} as TGetColorTheme;
     if (window?.__ASC_INITIAL_EDITOR_STATE__?.appearanceTheme)
       res = window.__ASC_INITIAL_EDITOR_STATE__.appearanceTheme;
     else res = await api.settings.getAppearanceTheme();
@@ -999,25 +1004,23 @@ class SettingsStore {
 
     this.setAppearanceTheme(res.themes);
     this.setSelectThemeId(res.selected);
-    this.setCurrentColorScheme(currentColorScheme);
+    if (currentColorScheme) this.setCurrentColorScheme(currentColorScheme);
   };
 
-  sendAppearanceTheme = async (data) => {
-    return api.settings.sendAppearanceTheme(data);
-  };
-
-  deleteAppearanceTheme = async (id) => {
-    return api.settings.deleteAppearanceTheme(id);
-  };
-
-  updateArticleAlertsData = ({ current, available }) => {
+  updateArticleAlertsData = ({
+    current,
+    available,
+  }: {
+    current: ArticleAlerts;
+    available: ArticleAlerts[];
+  }) => {
     this.articleAlertsData = {
       current: current || this.articleAlertsData.current,
       available: available || this.articleAlertsData.available,
     };
     localStorage.setItem(
       "articleAlertsData",
-      JSON.stringify(this.articleAlertsData)
+      JSON.stringify(this.articleAlertsData),
     );
   };
 
@@ -1025,27 +1028,28 @@ class SettingsStore {
     const { current, available } = this.articleAlertsData;
     if (!available.length) return;
 
-    let next = 0;
+    let next = null;
     const indexOfCurrent = available.indexOf(current);
     if (indexOfCurrent + 1 === available.length) next = available[0];
     else next = available[indexOfCurrent + 1];
 
-    this.updateArticleAlertsData({ current: next });
+    if (next) this.updateArticleAlertsData({ current: next, available });
   };
 
-  removeAlertFromArticleAlertsData = (alertToRemove) => {
-    const { available } = this.articleAlertsData;
+  removeAlertFromArticleAlertsData = (alertToRemove: ArticleAlerts) => {
+    const { current, available } = this.articleAlertsData;
     const filteredAvailable = available.filter(
-      (alert) => alert !== alertToRemove
+      (alert) => alert !== alertToRemove,
     );
-    this.updateArticleAlertsData({ available: filteredAvailable });
+    this.updateArticleAlertsData({ current, available: filteredAvailable });
   };
 
-  setInterfaceDirection = (direction) => {
+  setInterfaceDirection = (direction: string) => {
     this.interfaceDirection = direction;
     localStorage.setItem("interfaceDirection", direction);
   };
-  setCSPDomains = (domains) => {
+
+  setCSPDomains = (domains: string[]) => {
     this.cspDomains = domains;
   };
 
@@ -1057,7 +1061,7 @@ class SettingsStore {
     return domains;
   };
 
-  setCSPSettings = async (data) => {
+  setCSPSettings = async (data: string[]) => {
     try {
       const { domains } = await api.settings.setCSPSettings(data);
 
@@ -1065,11 +1069,11 @@ class SettingsStore {
 
       return domains;
     } catch (e) {
-      toastr.error(e);
+      toastr.error(e as TData);
     }
   };
 
-  setWindowWidth = (width) => {
+  setWindowWidth = (width: number) => {
     if (width <= deviceSize.mobile && this.windowWidth <= deviceSize.mobile)
       return;
 
@@ -1096,4 +1100,4 @@ class SettingsStore {
   }
 }
 
-export default SettingsStore;
+export { SettingsStore };

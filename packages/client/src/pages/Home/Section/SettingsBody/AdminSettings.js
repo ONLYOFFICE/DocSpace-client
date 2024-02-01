@@ -49,13 +49,13 @@ const GeneralSettings = ({
   );
 };
 
-export default inject(({ settingsStore }) => {
+export default inject(({ filesSettingsStore }) => {
   const {
     enableThirdParty,
     setEnableThirdParty,
     storeForcesave,
     setStoreForceSave,
-  } = settingsStore;
+  } = filesSettingsStore;
 
   return {
     storeForceSave: storeForcesave,

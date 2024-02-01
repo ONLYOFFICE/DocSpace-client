@@ -19,9 +19,9 @@ interface IClientApp extends IInitialState {
   setTheme: (theme: IUserTheme) => void;
 }
 
-const ThemeProviderWrapper = inject(({ auth }, props) => {
+const ThemeProviderWrapper = inject(({ settingsStore }, props) => {
   const { currentColorScheme } = props;
-  const { settingsStore } = auth;
+
   const { i18n } = useTranslation();
 
   return {

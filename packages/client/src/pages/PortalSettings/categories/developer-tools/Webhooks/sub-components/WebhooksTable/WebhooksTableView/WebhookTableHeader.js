@@ -98,8 +98,8 @@ const WebhookTableHeader = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
+export default inject(({ userStore }) => {
   return {
-    userId: auth.userStore.user.id,
+    userId: userStore.user.id,
   };
 })(observer(WebhookTableHeader));

@@ -36,9 +36,9 @@ const AuditRowContainer = ({
   );
 };
 
-export default inject(({ setup, auth }) => {
+export default inject(({ setup, settingsStore }) => {
   const { viewAs, setViewAs, security } = setup;
-  const { theme, currentDeviceType } = auth.settingsStore;
+  const { theme, currentDeviceType } = settingsStore;
 
   return {
     viewAs,

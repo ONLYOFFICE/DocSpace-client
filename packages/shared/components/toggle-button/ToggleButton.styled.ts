@@ -109,12 +109,12 @@ const ContainerToggleButtonTheme = styled(
       ${ToggleButtonContainer} {
         svg {
           rect {
-            fill: ${isChecked && $currentColorScheme.main.accent} !important;
+            fill: ${isChecked && $currentColorScheme.main?.accent} !important;
           }
 
           circle {
             fill: ${(isChecked && isDisabled && theme.isBase && "#FFFFFF") ||
-            (isChecked && $currentColorScheme.text.accent)};
+            (isChecked && $currentColorScheme.text?.accent)};
           }
         }
       }

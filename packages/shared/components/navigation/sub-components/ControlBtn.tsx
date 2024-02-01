@@ -1,6 +1,9 @@
 import React from "react";
 
-import { StyledControlButtonContainer } from "../Navigation.styled";
+import {
+  StyledControlButtonContainer,
+  StyledTariffWrapper,
+} from "../Navigation.styled";
 import { IControlButtonProps } from "../Navigation.types";
 
 import ToggleInfoPanelButton from "./ToggleInfoPanelBtn";
@@ -25,11 +28,14 @@ const ControlButtons = ({
   isTrashFolder,
   isMobile,
   showTitle,
+  tariffBar,
+  title,
 }: IControlButtonProps) => {
   const toggleInfoPanelAction = () => {
     toggleInfoPanel?.();
     toggleDropBox?.();
   };
+  const children = tariffBar ? React.cloneElement(tariffBar, { title }) : null;
 
   return (
     <StyledControlButtonContainer isFrame={isFrame} showTitle={showTitle}>
@@ -125,8 +131,9 @@ const ControlButtons = ({
           )}
         </>
       )}
+      <StyledTariffWrapper>{children && children}</StyledTariffWrapper>
     </StyledControlButtonContainer>
   );
 };
 
-export default React.memo(ControlButtons);
+export default ControlButtons;

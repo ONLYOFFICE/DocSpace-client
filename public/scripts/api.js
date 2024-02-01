@@ -483,7 +483,9 @@
       target.innerHTML = this.config.destroyText;
       target.className = this.#classNames;
 
-      const targetFrame = document.getElementById(this.config.frameId);
+      const targetFrame = document.getElementById(
+        this.config.frameId + "-container"
+      );
 
       if (targetFrame) {
         window.removeEventListener("message", this.#onMessage, false);

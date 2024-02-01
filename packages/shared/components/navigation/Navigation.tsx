@@ -53,6 +53,7 @@ const Navigation = ({
   currentDeviceType,
   rootRoomTitle,
   showTitle,
+  tariffBar,
 
   ...rest
 }: INavigationProps) => {
@@ -256,6 +257,8 @@ const Navigation = ({
               isPublicRoom={isPublicRoom}
               isTrashFolder={isTrashFolder}
               showTitle={showTitle}
+              tariffBar={tariffBar}
+              title={title}
             />
           </StyledContainer>
           {isDesktop && isTrashFolder && !isEmptyPage && (

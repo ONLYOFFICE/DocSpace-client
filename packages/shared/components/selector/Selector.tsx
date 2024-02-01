@@ -36,6 +36,7 @@ const Selector = ({
   onSelectAll,
 
   items,
+  renderCustomItem,
   isMultiSelect,
   selectedItems,
   acceptButtonLabel,
@@ -350,6 +351,7 @@ const Selector = ({
         hasNextPage={hasNextPage}
         isNextPageLoading={isNextPageLoading}
         loadMoreItems={loadMoreItems}
+        renderCustomItem={renderCustomItem}
         totalItems={totalItems || 0}
         isLoading={isLoading}
         searchLoader={searchLoader}

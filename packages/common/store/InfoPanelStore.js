@@ -406,7 +406,7 @@ class InfoPanelStore {
   };
 
   getHasPrevTitle = (array, type) => {
-    return this.infoPanelMembers?.roomId === this.infoPanelSelection.id
+    return this.infoPanelMembers?.roomId === this.infoPanelSelection?.id
       ? array.findIndex((x) => x.id === type) > -1
       : false;
   };
@@ -516,14 +516,17 @@ class InfoPanelStore {
 
   addInfoPanelMembers = (t, members, clearFilter) => {
     const newMembers = this.convertMembers(t, members, clearFilter);
-    const { roomId, administrators, users, expected } = this.infoPanelMembers;
 
-    this.setInfoPanelMembers({
-      roomId: roomId,
-      administrators: [...administrators, ...newMembers.administrators],
-      users: [...users, ...newMembers.users],
-      expected: [...expected, ...newMembers.expectedMembers],
-    });
+    if (this.infoPanelMembers) {
+      const { roomId, administrators, users, expected } = this.infoPanelMembers;
+
+      this.setInfoPanelMembers({
+        roomId: roomId,
+        administrators: [...administrators, ...newMembers.administrators],
+        users: [...users, ...newMembers.users],
+        expected: [...expected, ...newMembers.expectedMembers],
+      });
+    }
   };
 
   openShareTab = () => {

@@ -111,10 +111,10 @@ function ViewerPlayer({
   });
 
   const [style, api] = useSpring(() => ({
-    width: 0,
-    height: 0,
-    x: 0,
-    y: 0,
+    width: isAudio ? window.innerWidth : 0,
+    height: isAudio ? window.innerHeight : 0,
+    x: isAudio ? (window.innerWidth - audioWidth) / 2 : 0,
+    y: isAudio ? (window.innerHeight - audioHeight) / 2 : 0,
     opacity: 1,
   }));
 
@@ -488,10 +488,11 @@ function ViewerPlayer({
 
   const hadleError = useCallback(
     (error: React.SyntheticEvent<HTMLVideoElement, Event>) => {
-      // eslint-disable-next-line no-console
-      console.error("video error", error);
       setIsError(true);
       setIsLoading(false);
+
+      // eslint-disable-next-line no-console
+      console.error("video error", error);
     },
     [setIsError],
   );

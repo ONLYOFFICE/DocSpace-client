@@ -161,7 +161,15 @@ const ClientContent = (props) => {
 };
 
 const Client = inject(
-  ({ auth, clientLoadingStore, filesStore, peopleStore, pluginStore }) => {
+  ({
+    authStore,
+    clientLoadingStore,
+    filesStore,
+    peopleStore,
+    pluginStore,
+    userStore,
+    settingsStore,
+  }) => {
     const {
       frameConfig,
       isFrame,
@@ -172,11 +180,11 @@ const Client = inject(
       enablePlugins,
       isDesktopClientInit,
       setIsDesktopClientInit,
-    } = auth.settingsStore;
+    } = settingsStore;
 
-    if (!auth.userStore.user) return;
+    if (!userStore.user) return;
 
-    const { isVisitor } = auth.userStore.user;
+    const { isVisitor } = userStore.user;
 
     const {
       isLoading,
@@ -195,11 +203,11 @@ const Client = inject(
       setIsDesktopClientInit,
       isFrame,
       showMenu: frameConfig?.showMenu,
-      user: auth.userStore.user,
-      isAuthenticated: auth.isAuthenticated,
+      user: userStore.user,
+      isAuthenticated: authStore.isAuthenticated,
       encryptionKeys: encryptionKeys,
       isEncryption: isEncryptionSupport,
-      isLoaded: auth.isLoaded && clientLoadingStore.isLoaded,
+      isLoaded: authStore.isLoaded && clientLoadingStore.isLoaded,
       setIsLoaded: clientLoadingStore.setIsLoaded,
       withMainButton,
       setIsFilterLoading: setIsSectionFilterLoading,

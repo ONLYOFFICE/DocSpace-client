@@ -276,46 +276,49 @@ const ArticleBodyContent = (props) => {
   );
 };
 
-export default inject(({ auth, common, clientLoadingStore }) => {
-  const { isLoadedArticleBody, setIsLoadedArticleBody } = common;
-  const {
-    currentTariffStatusStore,
-    userStore,
-    isEnterprise,
+export default inject(
+  ({
+    authStore,
     settingsStore,
-    isCommunity,
-  } = auth;
-  const { isNotPaidPeriod } = currentTariffStatusStore;
-  const { user } = userStore;
-  const { isOwner } = user;
-  const {
-    standalone,
-    showText,
-    toggleArticleOpen,
-    currentDeviceType,
-    limitedAccessSpace,
-  } = settingsStore;
+    common,
+    clientLoadingStore,
+    userStore,
+    currentTariffStatusStore,
+  }) => {
+    const { isLoadedArticleBody, setIsLoadedArticleBody } = common;
+    const { isEnterprise, isCommunity } = authStore;
+    const { isNotPaidPeriod } = currentTariffStatusStore;
+    const { user } = userStore;
+    const { isOwner } = user;
+    const {
+      standalone,
+      showText,
+      toggleArticleOpen,
+      currentDeviceType,
+      limitedAccessSpace,
+    } = settingsStore;
 
-  const isProfileLoading =
-    window.location.pathname.includes("profile") &&
-    clientLoadingStore.showProfileLoader &&
-    !isLoadedArticleBody;
+    const isProfileLoading =
+      window.location.pathname.includes("profile") &&
+      clientLoadingStore.showProfileLoader &&
+      !isLoadedArticleBody;
 
-  return {
-    standalone,
-    isEnterprise,
-    showText,
-    toggleArticleOpen,
-    isLoadedArticleBody,
-    setIsLoadedArticleBody,
-    isNotPaidPeriod,
-    isOwner,
-    isCommunity,
-    currentDeviceType,
-    isProfileLoading,
-    limitedAccessSpace,
-  };
-})(
+    return {
+      standalone,
+      isEnterprise,
+      showText,
+      toggleArticleOpen,
+      isLoadedArticleBody,
+      setIsLoadedArticleBody,
+      isNotPaidPeriod,
+      isOwner,
+      isCommunity,
+      currentDeviceType,
+      isProfileLoading,
+      limitedAccessSpace,
+    };
+  }
+)(
   withLoading(
     withTranslation(["Settings", "Common"])(observer(ArticleBodyContent))
   )

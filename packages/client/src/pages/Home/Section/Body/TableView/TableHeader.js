@@ -3,7 +3,7 @@ import { TableHeader } from "@docspace/shared/components/table";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { Events } from "@docspace/shared/enums";
-import { SortByFieldName } from "../../../../../helpers/constants";
+import { SortByFieldName } from "SRC_DIR/helpers/enums";
 
 class FilesTableHeader extends React.Component {
   constructor(props) {
@@ -460,15 +460,16 @@ class FilesTableHeader extends React.Component {
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     filesStore,
     selectedFolderStore,
     treeFoldersStore,
     tableStore,
     publicRoomStore,
     clientLoadingStore,
+    infoPanelStore,
   }) => {
-    const { isVisible: infoPanelVisible } = auth.infoPanelStore;
+    const { isVisible: infoPanelVisible } = infoPanelStore;
 
     const {
       isHeaderChecked,
@@ -486,7 +487,7 @@ export default inject(
     const isRooms = isRoomsFolder || isArchiveFolder;
     const withContent = canShare;
     const sortingVisible = !isRecentFolder;
-    const { withPaging, isFrame, frameConfig } = auth.settingsStore;
+    const { withPaging, isFrame, frameConfig } = settingsStore;
 
     const {
       tableStorageName,

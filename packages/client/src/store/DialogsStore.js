@@ -9,6 +9,7 @@ class DialogsStore {
   filesStore;
   selectedFolderStore;
   versionHistoryStore;
+  infoPanelStore;
 
   roomSharingPanelVisible = false;
   ownerPanelVisible = false;
@@ -85,7 +86,8 @@ class DialogsStore {
     treeFoldersStore,
     filesStore,
     selectedFolderStore,
-    versionHistoryStore
+    versionHistoryStore,
+    infoPanelStore
   ) {
     makeAutoObservable(this);
 
@@ -94,6 +96,7 @@ class DialogsStore {
     this.selectedFolderStore = selectedFolderStore;
     this.authStore = authStore;
     this.versionHistoryStore = versionHistoryStore;
+    this.infoPanelStore = infoPanelStore;
   }
   setInviteLanguage = (culture) => {
     this.culture = culture;
@@ -131,7 +134,7 @@ class DialogsStore {
       visible &&
       !this.filesStore.hasSelection &&
       !this.filesStore.hasBufferSelection &&
-      !this.authStore.infoPanelStore.infoPanelSelection
+      !this.infoPanelStore.infoPanelSelection
     )
       return;
 
@@ -160,7 +163,7 @@ class DialogsStore {
       visible &&
       !this.filesStore.hasSelection &&
       !this.filesStore.hasBufferSelection &&
-      !this.authStore.infoPanelStore.infoPanelSelection
+      !this.infoPanelStore.infoPanelSelection
     ) {
       console.log("No files selected");
       return;

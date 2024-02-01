@@ -1,13 +1,17 @@
 import store from "../store";
-import { desktopConstants } from "@docspace/shared/utils/desktop";
+import api from "@docspace/shared/api";
+import { desktopConstants } from "@docspace/shared/utils/common";
 import { encryptionUploadDialog as encryptionUploadDialogHelper } from "./encryptionUploadDialog";
 
 export function encryptionUploadDialog(callback) {
-  encryptionUploadDialogHelper(store.settingsStore.extsWebEncrypt, callback);
+  encryptionUploadDialogHelper(
+    store.filesSettingsStore.extsWebEncrypt,
+    callback
+  );
 }
 
 export function setEncryptionAccess(file) {
-  return store.auth.getEncryptionAccess(file.id).then((keys) => {
+  return api.files.getEncryptionAccess(file.id).then((keys) => {
     let promise = new Promise((resolve, reject) => {
       try {
         window.AscDesktopEditor.cloudCryptoCommand(

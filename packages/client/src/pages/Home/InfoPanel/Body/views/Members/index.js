@@ -231,12 +231,13 @@ const Members = ({
 
 export default inject(
   ({
-    auth,
+    userStore,
     filesStore,
     selectedFolderStore,
     publicRoomStore,
     treeFoldersStore,
     dialogsStore,
+    infoPanelStore,
   }) => {
     const {
       infoPanelSelection,
@@ -246,9 +247,9 @@ export default inject(
       fetchMembers,
       membersIsLoading,
       withPublicRoomBlock,
-    } = auth.infoPanelStore;
+    } = infoPanelStore;
     const { membersFilter } = filesStore;
-    const { id: selfId, isAdmin } = auth.userStore.user;
+    const { id: selfId, isAdmin } = userStore.user;
 
     const { primaryLink, additionalLinks, setExternalLink } = publicRoomStore;
     const { isArchiveFolderRoot } = treeFoldersStore;

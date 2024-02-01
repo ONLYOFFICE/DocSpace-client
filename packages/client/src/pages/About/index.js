@@ -23,8 +23,8 @@ const Body = ({ t, personal, buildVersionInfo, theme }) => {
   );
 };
 
-const BodyWrapper = inject(({ auth }) => {
-  const { personal, buildVersionInfo, theme } = auth.settingsStore;
+const BodyWrapper = inject(({ settingsStore }) => {
+  const { personal, buildVersionInfo, theme } = settingsStore;
   return {
     personal,
     buildVersionInfo,

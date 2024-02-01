@@ -4,6 +4,7 @@ import isEqual from "lodash/isEqual";
 
 export type TWhiteLabel = {
   path: { light: string; dark: string };
+  size: { width: number; height: number; isEmpty: boolean };
   name: string;
 };
 

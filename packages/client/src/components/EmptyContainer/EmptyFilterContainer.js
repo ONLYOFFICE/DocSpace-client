@@ -91,7 +91,7 @@ const EmptyFilterContainer = ({
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     filesStore,
     selectedFolderStore,
     treeFoldersStore,
@@ -110,7 +110,7 @@ export default inject(
       isArchiveFolder,
       isRoomsFolder,
       setClearSearch: filesStore.setClearSearch,
-      theme: auth.settingsStore.theme,
+      theme: settingsStore.theme,
 
       isPublicRoom,
       publicRoomKey,

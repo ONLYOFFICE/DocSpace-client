@@ -229,13 +229,21 @@ const Sdk = ({
 };
 
 export default inject(
-  ({ auth, settingsStore, peopleStore, publicRoomStore, filesStore }) => {
-    const { login, logout, userStore } = auth;
+  ({
+    authStore,
+    settingsStore,
+    filesSettingsStore,
+    peopleStore,
+    publicRoomStore,
+    userStore,
+    filesStore,
+  }) => {
+    const { login, logout } = authStore;
     const { theme, setFrameConfig, frameConfig, getSettings, isLoaded } =
-      auth.settingsStore;
+      settingsStore;
     const { loadCurrentUser, user } = userStore;
     const { updateProfileCulture } = peopleStore.targetUserStore;
-    const { getIcon, getRoomsIcon } = settingsStore;
+    const { getIcon, getRoomsIcon } = filesSettingsStore;
     const { fetchExternalLinks } = publicRoomStore;
     const { getFilePrimaryLink } = filesStore;
 

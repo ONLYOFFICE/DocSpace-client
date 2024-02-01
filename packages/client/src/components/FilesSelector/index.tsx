@@ -633,13 +633,14 @@ const FilesSelector = ({
 export default inject(
   (
     {
-      auth,
+      settingsStore,
       selectedFolderStore,
       filesActionsStore,
       uploadDataStore,
       treeFoldersStore,
       dialogsStore,
       filesStore,
+      infoPanelStore,
     }: any,
     { isCopy, isRestoreAll, isMove, isRestore, isPanelVisible, id }: any
   ) => {
@@ -667,10 +668,9 @@ export default inject(
       setBackupToPublicRoomVisible,
     } = dialogsStore;
 
-    const { setIsMobileHidden: setInfoPanelIsMobileHidden } =
-      auth.infoPanelStore;
+    const { setIsMobileHidden: setInfoPanelIsMobileHidden } = infoPanelStore;
 
-    const { theme, socketHelper, currentDeviceType } = auth.settingsStore;
+    const { theme, socketHelper, currentDeviceType } = settingsStore;
 
     const socketSubscribesId = socketHelper.socketSubscribers;
 
@@ -684,7 +684,7 @@ export default inject(
     } = filesStore;
     const { getIcon } = filesSettingsStore;
     const { isVisible: infoPanelIsVisible, selection: infoPanelSelection } =
-      auth.infoPanelStore;
+      infoPanelStore;
 
     const selections =
       isMove || isCopy || isRestoreAll || isRestore

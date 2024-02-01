@@ -15,7 +15,7 @@ import { SpacesLoader } from "./sub-components/SpacesLoader";
 const Spaces = () => {
   const { t } = useTranslation(["Management", "Common", "Settings"]);
 
-  const { spacesStore, authStore } = useStore();
+  const { spacesStore, authStore, settingsStore } = useStore();
 
   const {
     isConnected,
@@ -25,7 +25,7 @@ const Spaces = () => {
     spaceCreatedDialogVisible,
   } = spacesStore;
   const { setDocumentTitle } = authStore;
-  const { portals } = authStore.settingsStore;
+  const { portals } = settingsStore;
 
   React.useEffect(() => {
     setDocumentTitle(t("Common:Spaces"));

@@ -13,14 +13,14 @@ const StyledIconTheme = styled(StyledIcon)<
     path {
       fill: ${(props) =>
         (props.shared || props.locked || props.isFavorite || props.isEditing) &&
-        props.$currentColorScheme?.main.accent};
+        props.$currentColorScheme?.main?.accent};
     }
   }
 
   &:hover {
     svg {
       path {
-        fill: ${(props) => props.$currentColorScheme?.main.accent};
+        fill: ${(props) => props.$currentColorScheme?.main?.accent};
       }
     }
   }

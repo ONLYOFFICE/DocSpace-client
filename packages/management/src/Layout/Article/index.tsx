@@ -1,6 +1,9 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
+import { UserStore } from "@docspace/shared/store/UserStore";
+import { BannerStore } from "@docspace/shared/store/BannerStore";
+
 import Article from "@docspace/shared/components/article";
 
 import ArticleHeaderContent from "./Header";
@@ -74,14 +77,20 @@ const ArticleWrapper = ({
 };
 
 export default inject(
-  ({ auth, uploadDataStore }: { auth: any; uploadDataStore: any }) => {
-    const {
-      settingsStore,
-      userStore,
-      languageBaseName,
-      isLiveChatAvailable,
-      bannerStore,
-    } = auth;
+  ({
+    authStore,
+    uploadDataStore,
+    userStore,
+    bannerStore,
+    settingsStore,
+  }: {
+    authStore: any;
+    uploadDataStore: any;
+    userStore: UserStore;
+    bannerStore: BannerStore;
+    settingsStore: any;
+  }) => {
+    const { languageBaseName, isLiveChatAvailable } = authStore;
 
     const { withSendAgain, user } = userStore;
 

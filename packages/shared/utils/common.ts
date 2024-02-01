@@ -24,8 +24,9 @@ import BackgroundPatternPurpleReactSvgUrl from "PUBLIC_DIR/images/background.pat
 import BackgroundPatternLightBlueReactSvgUrl from "PUBLIC_DIR/images/background.pattern.lightBlue.react.svg?url";
 import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.pattern.black.react.svg?url";
 
-import { FolderType, RoomsType, ThemeKeys } from "../enums";
+import { ArticleAlerts, FolderType, RoomsType, ThemeKeys } from "../enums";
 import { LANGUAGE, RTL_LANGUAGES } from "../constants";
+
 import { TI18n } from "../types";
 import { TUser } from "../api/people/types";
 import { TFolder, TFile, TGetFolder } from "../api/files/types";
@@ -36,6 +37,13 @@ import { Encoder } from "./encoder";
 import { combineUrl } from "./combineUrl";
 import { getCookie } from "./cookie";
 import { isNumber } from "./typeGuards";
+import { checkIsSSR } from "./device";
+
+export const desktopConstants = Object.freeze({
+  domain: !checkIsSSR() && window.location.origin,
+  provider: "onlyoffice",
+  cryptoEngineId: "{FFF0E1EB-13DB-4678-B67D-FF0A41DBBCEF}",
+});
 
 let timer: null | ReturnType<typeof setTimeout> = null;
 
@@ -73,6 +81,24 @@ export function createPasswordHash(
 
   return hash;
 }
+
+export const isPublicRoom = () => {
+  return window.location.pathname === "/rooms/share";
+};
+
+export const getShowText = () => {
+  const showArticle = localStorage.getItem("showArticle");
+
+  if (showArticle) {
+    return JSON.parse(showArticle) === "true";
+  }
+
+  return false;
+};
+
+export const isManagement = () => {
+  return window.location.pathname.includes("management");
+};
 
 export function updateTempContent(isAuth = false) {
   if (isAuth) {
@@ -357,7 +383,7 @@ export function isElementInViewport(el: HTMLElement) {
     rect.top >= 0 &&
     rect.left >= 0 &&
     rect.bottom <=
-      (window.innerHeight || document.documentElement.clientHeight) &&
+    (window.innerHeight || document.documentElement.clientHeight) &&
     rect.right <= (window.innerWidth || document.documentElement.clientWidth)
   );
 }
@@ -727,7 +753,7 @@ export const getSystemTheme = () => {
       ? ThemeKeys.DarkStr
       : ThemeKeys.BaseStr
     : window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches
+      window.matchMedia("(prefers-color-scheme: dark)").matches
       ? ThemeKeys.DarkStr
       : ThemeKeys.BaseStr;
 };

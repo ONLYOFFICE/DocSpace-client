@@ -74,18 +74,19 @@ const PublicRoomPage = (props) => {
 
 export default inject(
   ({
-    auth,
+    authStore,
+    settingsStore,
     filesStore,
     publicRoomStore,
     uploadDataStore,
-    settingsStore,
+    filesSettingsStore,
     clientLoadingStore,
   }) => {
-    const { withPaging } = auth.settingsStore;
+    const { withPaging } = settingsStore;
     const { isLoaded, isLoading, roomStatus, roomId } = publicRoomStore;
 
     const { fetchFiles, isEmptyPage } = filesStore;
-    const { getFilesSettings } = settingsStore;
+    const { getFilesSettings } = filesSettingsStore;
 
     const {
       visible: showSecondaryProgressBar,
@@ -117,7 +118,7 @@ export default inject(
       secondaryProgressBarIcon,
       showSecondaryButtonAlert,
 
-      isAuthenticated: auth.isAuthenticated,
+      isAuthenticated: authStore.isAuthenticated,
       isEmptyPage,
       setIsLoading,
     };

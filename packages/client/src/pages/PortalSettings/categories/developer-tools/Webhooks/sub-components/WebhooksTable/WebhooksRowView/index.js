@@ -43,9 +43,9 @@ const WebhooksRowView = (props) => {
   );
 };
 
-export default inject(({ webhooksStore, setup, auth }) => {
+export default inject(({ webhooksStore, setup, settingsStore }) => {
   const { webhooks } = webhooksStore;
-  const { currentDeviceType } = auth.settingsStore;
+  const { currentDeviceType } = settingsStore;
   const { viewAs, setViewAs } = setup;
 
   return {

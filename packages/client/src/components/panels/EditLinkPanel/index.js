@@ -270,45 +270,54 @@ const EditLinkPanel = (props) => {
     : editLinkPanelComponent;
 };
 
-export default inject(({ auth, dialogsStore, publicRoomStore }) => {
-  const { infoPanelSelection } = auth.infoPanelStore;
-  const {
-    editLinkPanelIsVisible,
-    setEditLinkPanelIsVisible,
-    unsavedChangesDialogVisible,
-    setUnsavedChangesDialog,
-    linkParams,
-  } = dialogsStore;
-  const { externalLinks, editExternalLink, setExternalLink } = publicRoomStore;
-  const { isEdit } = linkParams;
+export default inject(
+  ({
+    authStore,
+    settingsStore,
+    dialogsStore,
+    publicRoomStore,
+    infoPanelStore,
+  }) => {
+    const { infoPanelSelection } = infoPanelStore;
+    const {
+      editLinkPanelIsVisible,
+      setEditLinkPanelIsVisible,
+      unsavedChangesDialogVisible,
+      setUnsavedChangesDialog,
+      linkParams,
+    } = dialogsStore;
+    const { externalLinks, editExternalLink, setExternalLink } =
+      publicRoomStore;
+    const { isEdit } = linkParams;
 
-  const linkId = linkParams?.link?.sharedTo?.id;
-  const link = externalLinks.find((l) => l?.sharedTo?.id === linkId);
+    const linkId = linkParams?.link?.sharedTo?.id;
+    const link = externalLinks.find((l) => l?.sharedTo?.id === linkId);
 
-  const shareLink = link?.sharedTo?.shareLink;
-  const isPublic = infoPanelSelection?.roomType === RoomsType.PublicRoom;
+    const shareLink = link?.sharedTo?.shareLink;
+    const isPublic = infoPanelSelection?.roomType === RoomsType.PublicRoom;
 
-  return {
-    visible: editLinkPanelIsVisible,
-    setIsVisible: setEditLinkPanelIsVisible,
-    isEdit,
-    linkId: link?.sharedTo?.id,
-    editExternalLink,
-    roomId: infoPanelSelection.id,
-    setExternalLink,
-    isLocked: !!link?.sharedTo?.password,
-    password: link?.sharedTo?.password ?? "",
-    date: link?.sharedTo?.expirationDate,
-    isDenyDownload: link?.sharedTo?.denyDownload ?? false,
-    shareLink,
-    externalLinks,
-    unsavedChangesDialogVisible,
-    setUnsavedChangesDialog,
-    link,
-    language: auth.language,
-    isPublic,
-    currentDeviceType: auth.settingsStore.currentDeviceType,
-  };
-})(
+    return {
+      visible: editLinkPanelIsVisible,
+      setIsVisible: setEditLinkPanelIsVisible,
+      isEdit,
+      linkId: link?.sharedTo?.id,
+      editExternalLink,
+      roomId: infoPanelSelection.id,
+      setExternalLink,
+      isLocked: !!link?.sharedTo?.password,
+      password: link?.sharedTo?.password ?? "",
+      date: link?.sharedTo?.expirationDate,
+      isDenyDownload: link?.sharedTo?.denyDownload ?? false,
+      shareLink,
+      externalLinks,
+      unsavedChangesDialogVisible,
+      setUnsavedChangesDialog,
+      link,
+      language: authStore.language,
+      isPublic,
+      currentDeviceType: settingsStore.currentDeviceType,
+    };
+  }
+)(
   withTranslation(["SharingPanel", "Common", "Files"])(observer(EditLinkPanel))
 );

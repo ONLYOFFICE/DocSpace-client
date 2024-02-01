@@ -5,48 +5,48 @@ import ConfirmRoute from "../helpers/confirmRoute";
 import ErrorBoundary from "@docspace/common/components/ErrorBoundary";
 
 import Error404 from "SRC_DIR/pages/Errors/404";
-import { AuthenticatedAction } from "../helpers/constants";
+import { AuthenticatedAction } from "../helpers/enums";
 
 const Confirm = loadable(() => import("../pages/Confirm"));
 
-const ActivateUserForm = loadable(() =>
-  import("../pages/Confirm/sub-components/activateUser")
+const ActivateUserForm = loadable(
+  () => import("../pages/Confirm/sub-components/activateUser")
 );
-const CreateUserForm = loadable(() =>
-  import("../pages/Confirm/sub-components/createUser")
+const CreateUserForm = loadable(
+  () => import("../pages/Confirm/sub-components/createUser")
 );
-const ChangePasswordForm = loadable(() =>
-  import("../pages/Confirm/sub-components/changePassword")
+const ChangePasswordForm = loadable(
+  () => import("../pages/Confirm/sub-components/changePassword")
 );
-const ActivateEmailForm = loadable(() =>
-  import("../pages/Confirm/sub-components/activateEmail")
+const ActivateEmailForm = loadable(
+  () => import("../pages/Confirm/sub-components/activateEmail")
 );
-const ChangeEmailForm = loadable(() =>
-  import("../pages/Confirm/sub-components/changeEmail")
+const ChangeEmailForm = loadable(
+  () => import("../pages/Confirm/sub-components/changeEmail")
 );
-const ChangePhoneForm = loadable(() =>
-  import("../pages/Confirm/sub-components/changePhone")
+const ChangePhoneForm = loadable(
+  () => import("../pages/Confirm/sub-components/changePhone")
 );
-const ProfileRemoveForm = loadable(() =>
-  import("../pages/Confirm/sub-components/profileRemove")
+const ProfileRemoveForm = loadable(
+  () => import("../pages/Confirm/sub-components/profileRemove")
 );
-const ChangeOwnerForm = loadable(() =>
-  import("../pages/Confirm/sub-components/changeOwner")
+const ChangeOwnerForm = loadable(
+  () => import("../pages/Confirm/sub-components/changeOwner")
 );
-const TfaAuthForm = loadable(() =>
-  import("../pages/Confirm/sub-components/tfaAuth")
+const TfaAuthForm = loadable(
+  () => import("../pages/Confirm/sub-components/tfaAuth")
 );
-const TfaActivationForm = loadable(() =>
-  import("../pages/Confirm/sub-components/tfaActivation")
+const TfaActivationForm = loadable(
+  () => import("../pages/Confirm/sub-components/tfaActivation")
 );
-const RemovePortal = loadable(() =>
-  import("../pages/Confirm/sub-components/removePortal")
+const RemovePortal = loadable(
+  () => import("../pages/Confirm/sub-components/removePortal")
 );
-const DeactivatePortal = loadable(() =>
-  import("../pages/Confirm/sub-components/deactivatePortal")
+const DeactivatePortal = loadable(
+  () => import("../pages/Confirm/sub-components/deactivatePortal")
 );
-const ContinuePortal = loadable(() =>
-  import("../pages/Confirm/sub-components/continuePortal")
+const ContinuePortal = loadable(
+  () => import("../pages/Confirm/sub-components/continuePortal")
 );
 const Auth = loadable(() => import("../pages/Confirm/sub-components/auth"));
 

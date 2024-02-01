@@ -6,11 +6,11 @@ import store from "client/store";
 import FilesSelector from "./";
 import i18n from "./i18n";
 import { FilesSelectorProps } from "./FilesSelector.types";
-const { auth: authStore, settingsStore } = store;
+const { authStore, filesSettingsStore } = store;
 
 const FilesSelectorWrapper = (props: FilesSelectorProps) => {
   React.useEffect(() => {
-    const { setFilesSettings } = settingsStore;
+    const { setFilesSettings } = filesSettingsStore;
     const { settings } = props;
     authStore.init(true);
     settings && setFilesSettings(settings);

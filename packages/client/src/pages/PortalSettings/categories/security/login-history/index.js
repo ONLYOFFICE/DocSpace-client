@@ -82,7 +82,7 @@ const LoginHistory = (props) => {
   );
 };
 
-export default inject(({ setup, auth }) => {
+export default inject(({ setup, settingsStore, currentQuotaStore }) => {
   const {
     getLoginHistory,
     security,
@@ -92,9 +92,9 @@ export default inject(({ setup, auth }) => {
     setLifetimeAuditSettings,
     securityLifetime,
   } = setup;
-  const { theme } = auth.settingsStore;
+  const { theme } = settingsStore;
 
-  const { isAuditAvailable } = auth.currentQuotaStore;
+  const { isAuditAvailable } = currentQuotaStore;
 
   return {
     getLoginHistory,

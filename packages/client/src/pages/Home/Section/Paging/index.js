@@ -310,13 +310,7 @@ const SectionPagingContent = ({
 };
 
 export default inject(
-  ({
-    auth,
-    peopleStore,
-    filesStore,
-    selectedFolderStore,
-    treeFoldersStore,
-  }) => {
+  ({ peopleStore, filesStore, selectedFolderStore, treeFoldersStore }) => {
     const {
       files,
       folders,

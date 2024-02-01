@@ -62,7 +62,7 @@ const EmptyFolderContainer = ({
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     accessRightsStore,
     selectedFolderStore,
     clientLoadingStore,
@@ -84,7 +84,7 @@ export default inject(
       roomType,
       canCreateFiles,
       isArchiveFolderRoot,
-      theme: auth.settingsStore.theme,
+      theme: settingsStore.theme,
       isEmptyPage,
     };
   }

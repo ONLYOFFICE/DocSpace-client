@@ -64,6 +64,7 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import { getLogoFromPath } from "@docspace/shared/utils";
+import TariffBar from "SRC_DIR/components/TariffBar";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -209,6 +210,7 @@ const SectionHeaderContent = (props) => {
     getAccountsCheckboxItemLabel,
     setAccountsSelected,
     isOwner,
+    isCollaborator,
     setInvitePanelOptions,
     isEmptyPage,
 
@@ -776,8 +778,11 @@ const SectionHeaderContent = (props) => {
         label: t("Files:CreateRoom"),
         key: "create-room",
         icon: CatalogRoomsReactSvgUrl,
-        onClick: onClickCreateRoom,
-        disabled: selectedFolder.rootFolderType !== FolderType.USER,
+        onClick: () => {
+          onClickCreateRoom({ title: selectedFolder.title, isFolder: true });
+        },
+        disabled:
+          isCollaborator || selectedFolder.rootFolderType !== FolderType.USER,
       },
       {
         id: "option_leave-room",
@@ -1108,6 +1113,7 @@ const SectionHeaderContent = (props) => {
                 showRootFolderTitle={insideTheRoom}
                 currentDeviceType={currentDeviceType}
                 isFrame={isFrame}
+                tariffBar={<TariffBar />}
               />
             </div>
           )}
@@ -1138,6 +1144,7 @@ export default inject(
   }) => {
     const isOwner = userStore.user?.isOwner;
     const isAdmin = userStore.user?.isAdmin;
+    const isCollaborator = userStore.user?.isCollaborator;
 
     const {
       setSelected,
@@ -1400,6 +1407,7 @@ export default inject(
       setAccountsSelected,
       isOwner,
       isAdmin,
+      isCollaborator,
       setInvitePanelOptions,
       isEmptyPage,
 

@@ -119,7 +119,7 @@ const ReportDialog = (props) => {
           onChange={onChangeTextareaValue}
           autoFocus
           areaSelect
-          heightTextArea={72}
+          heightTextArea="72px"
           fontSize={13}
         />
         <div className="report-wrapper">

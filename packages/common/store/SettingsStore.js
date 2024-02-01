@@ -40,26 +40,6 @@ const themes = {
 const isDesktopEditors = window["AscDesktopEditor"] !== undefined;
 const systemTheme = getSystemTheme();
 
-const initArticleAlertsData = () => {
-  const savedArticleAlertsData = localStorage.getItem("articleAlertsData");
-  if (savedArticleAlertsData) return JSON.parse(savedArticleAlertsData);
-
-  const articleAlertsArray = Object.values(ArticleAlerts).filter(
-    (item, index) => Object.values(ArticleAlerts).indexOf(item) === index
-  );
-  const defaultArticleAlertsData = {
-    current: articleAlertsArray[0],
-    available: articleAlertsArray,
-  };
-
-  localStorage.setItem(
-    "articleAlertsData",
-    JSON.stringify(defaultArticleAlertsData)
-  );
-
-  return defaultArticleAlertsData;
-};
-
 class SettingsStore {
   isLoading = false;
   isLoaded = false;
@@ -192,7 +172,6 @@ class SettingsStore {
   portals = [];
   domain = null;
   documentationEmail = null;
-  articleAlertsData = initArticleAlertsData();
   cspDomains = [];
   publicRoomKey = "";
 
@@ -1008,37 +987,6 @@ class SettingsStore {
 
   deleteAppearanceTheme = async (id) => {
     return api.settings.deleteAppearanceTheme(id);
-  };
-
-  updateArticleAlertsData = ({ current, available }) => {
-    this.articleAlertsData = {
-      current: current || this.articleAlertsData.current,
-      available: available || this.articleAlertsData.available,
-    };
-    localStorage.setItem(
-      "articleAlertsData",
-      JSON.stringify(this.articleAlertsData)
-    );
-  };
-
-  incrementIndexOfArticleAlertsData = () => {
-    const { current, available } = this.articleAlertsData;
-    if (!available.length) return;
-
-    let next = 0;
-    const indexOfCurrent = available.indexOf(current);
-    if (indexOfCurrent + 1 === available.length) next = available[0];
-    else next = available[indexOfCurrent + 1];
-
-    this.updateArticleAlertsData({ current: next });
-  };
-
-  removeAlertFromArticleAlertsData = (alertToRemove) => {
-    const { available } = this.articleAlertsData;
-    const filteredAvailable = available.filter(
-      (alert) => alert !== alertToRemove
-    );
-    this.updateArticleAlertsData({ available: filteredAvailable });
   };
 
   setInterfaceDirection = (direction) => {

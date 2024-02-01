@@ -59,6 +59,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     currentDeviceType,
     timezone,
     showArticleLoader,
+    user,
   } = rest;
 
   const theme = useTheme();
@@ -149,13 +150,20 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
         data: { roomParts: "quota" },
       });
 
+    console.log("user", user?.id);
+    user &&
+      socketHelper.emit({
+        command: "subscribe",
+        data: { roomParts: `QUOTA-${user.id}`, individual: true },
+      });
+
     if (standalone && isPortalUnlimited) {
       socketHelper.emit({
         command: "unsubscribe",
         data: { roomParts: "quota" },
       });
     }
-  }, [socketHelper, isPortalUnlimited]);
+  }, [socketHelper, isPortalUnlimited, user]);
 
   const { t, ready } = useTranslation(["Common"]); //TODO: if enable banner ["Common", "SmartBanner"]
 
@@ -426,6 +434,7 @@ const ShellWrapper = inject(({ auth, backup, clientLoadingStore }) => {
     setProductVersion,
     language,
     currentQuotaStore,
+    userStore,
   } = auth;
   const { isPortalUnlimited } = currentQuotaStore;
   const {
@@ -487,6 +496,7 @@ const ShellWrapper = inject(({ auth, backup, clientLoadingStore }) => {
     currentDeviceType,
     isPortalUnlimited,
     showArticleLoader: clientLoadingStore.showArticleLoader,
+    user: auth?.userStore?.user,
   };
 })(observer(Shell));
 

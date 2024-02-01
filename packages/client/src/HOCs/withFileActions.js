@@ -1,7 +1,8 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { DeviceType } from "@docspace/shared/enums";
+import { DeviceType, RoomsType } from "@docspace/shared/enums";
+import Planet12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/planet.react.svg?url";
 
 export default function withFileActions(WrappedFileItem) {
   class WithFileActions extends React.Component {
@@ -177,6 +178,7 @@ export default function withFileActions(WrappedFileItem) {
 
     onFilesClick = (e) => {
       const {
+        t,
         item,
         openFileAction,
         setParentId,
@@ -206,7 +208,7 @@ export default function withFileActions(WrappedFileItem) {
         // setRoomType(item.roomType);
       }
 
-      openFileAction(item);
+      openFileAction(item, t);
     };
 
     onSelectTag = (tag) => {
@@ -287,6 +289,13 @@ export default function withFileActions(WrappedFileItem) {
 
       const checkedProps = id <= 0 ? false : isSelected;
 
+      const showPlanetIcon =
+        (item.roomType === RoomsType.PublicRoom ||
+          item.roomType === RoomsType.CustomRoom) &&
+        item.shared;
+
+      const badgeUrl = showPlanetIcon ? Planet12ReactSvgUrl : null;
+
       return (
         <WrappedFileItem
           onContentFileSelect={this.onContentFileSelect}
@@ -310,6 +319,7 @@ export default function withFileActions(WrappedFileItem) {
           getContextModel={this.getContextModel}
           onDragOver={this.onDragOver}
           onDragLeave={this.onDragLeave}
+          badgeUrl={badgeUrl}
           {...this.props}
         />
       );

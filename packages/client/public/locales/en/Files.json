@@ -1,6 +1,5 @@
 {
   "AddedToClipboard": "Items added to clipboard",
-  "AdditionalLinks": "Additional links",
   "AddMembersDescription": "You can add new team members manually or invite them via link.",
   "AddNewLink": "Add new link",
   "All": "All",
@@ -28,7 +27,7 @@
   "CollaborationRooms": "Collaboration",
   "ContainsSpecCharacter": "The title can't contain any of the following characters: *+:\"<>?|/",
   "Convert": "Convert",
-  "CopyGeneralLink": "Copy general link",
+  "CopySharedLink": "Copy shared link",
   "CopyItem": "<strong>{{title}}</strong> copied",
   "CopyItems": "<strong>{{qty}}</strong> elements copied",
   "CopyLink": "Copy link",
@@ -39,7 +38,7 @@
   "CreateRoom": "Create room",
   "CustomRooms": "Custom",
   "DaysRemaining": "Days remaining: {{daysRemaining}}",
-  "DeleteGeneralLink": "The previous link will become unavailable. A new general link will be created.",
+  "DeleteSharedLink": "The previous link will become unavailable. A new shared link will be created.",
   "DeleteLink": "Delete link",
   "DeleteLinkNote": "The link will be deleted permanently. You will not be able to undo this action.",
   "DisableDownload": "Restrict file content copy, file download and printing",
@@ -49,7 +48,7 @@
   "DocumentEdited": "Cannot perform the action because the document is being edited.",
   "DownloadAll": "Download all",
   "EditAdditionalLink": "Edit additional link",
-  "EditGeneralLink": "Edit general link",
+  "EditSharedLink": "Edit shared link",
   "EditLink": "Edit link",
   "EditRoom": "Edit room",
   "EmbeddingSettings": "Embedding settings",
@@ -85,7 +84,7 @@
   "FormRoom": "Form room",
   "Forms": "Forms",
   "FormsTemplates": "Forms templates",
-  "GeneralLink": "General link",
+  "SharedLinks": "Shared links",
   "GeneralLinkDeletedSuccessfully": "New general link created successfully",
   "GoToMyRooms": "Go to rooms",
   "GoToPersonal": "Go to My Documents",
@@ -191,5 +190,7 @@
   "WantToRestoreTheRoom": "All shared links in this room will become active, and its contents will be available to everyone with the link. Do you want to restore the room?",
   "WantToRestoreTheRooms": "All shared links in restored rooms will become active, and their contents will be available to everyone with the room links. Do you want to restore the rooms?",
   "WithSubfolders": "With subfolders",
-  "YouLeftTheRoom": "You have left the room"
+  "YouLeftTheRoom": "You have left the room",
+  "LinkSettings": "Link settings",
+  "FileDownloadingIsRestricted": "File downloading is restricted in this room."
 }

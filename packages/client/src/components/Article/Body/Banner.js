@@ -88,10 +88,14 @@ const Banner = ({ campaignsLs, setSubmitToGalleryDialogVisible }) => {
   };
 
   const onAction = (type, url) => {
-    if (type === "select-form") {
-      setSubmitToGalleryDialogVisible(true);
-    } else {
-      window.open(url, "_blank");
+    switch (type) {
+      case "select-form":
+        setSubmitToGalleryDialogVisible(true);
+        break;
+      case "open-url":
+      default:
+        window.open(url, "_blank");
+        break;
     }
   };
 

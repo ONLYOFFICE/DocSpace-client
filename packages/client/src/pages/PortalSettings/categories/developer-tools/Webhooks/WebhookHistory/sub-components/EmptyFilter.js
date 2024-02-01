@@ -96,9 +96,9 @@ const EmptyFilter = (props) => {
   );
 };
 
-export default inject(({ webhooksStore, auth }) => {
+export default inject(({ webhooksStore, settingsStore }) => {
   const { formatFilters, clearHistoryFilters } = webhooksStore;
-  const { theme } = auth.settingsStore;
+  const { theme } = settingsStore;
 
   return { formatFilters, clearHistoryFilters, theme };
 })(observer(EmptyFilter));

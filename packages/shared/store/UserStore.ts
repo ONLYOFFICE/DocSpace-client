@@ -1,14 +1,19 @@
-import React from "react";
-
+/* eslint-disable no-console */
+/* eslint-disable no-underscore-dangle */
 import { makeAutoObservable, runInAction } from "mobx";
-import { Trans } from "react-i18next";
-import api from "@docspace/shared/api";
-import { EmployeeActivationStatus } from "@docspace/shared/enums";
+
+import api from "../api";
+import { TUser } from "../api/people/types";
+import { EmployeeActivationStatus, ThemeKeys } from "../enums";
+import { TI18n } from "../types";
 
 class UserStore {
-  user = null;
+  user: TUser | null = null;
+
   isLoading = false;
+
   isLoaded = false;
+
   userIsUpdate = false;
 
   withSendAgain = true;
@@ -28,7 +33,7 @@ class UserStore {
     return user;
   };
 
-  init = async (i18n) => {
+  init = async (i18n?: TI18n) => {
     if (this.isLoaded) return;
 
     this.setIsLoading(true);
@@ -37,8 +42,8 @@ class UserStore {
       const user = await this.loadCurrentUser();
 
       if (i18n && user.cultureName !== i18n.language) {
-        //console.log({ i18n, user });
-        i18n.changeLanguage(user.cultureName);
+        // console.log({ i18n, user });
+        if (user.cultureName) i18n.changeLanguage(user.cultureName);
       }
     } catch (e) {
       console.error(e);
@@ -48,19 +53,19 @@ class UserStore {
     this.setIsLoaded(true);
   };
 
-  setIsLoading = (isLoading) => {
+  setIsLoading = (isLoading: boolean) => {
     this.isLoading = isLoading;
   };
 
-  setIsLoaded = (isLoaded) => {
+  setIsLoaded = (isLoaded: boolean) => {
     this.isLoaded = isLoaded;
   };
 
-  setUser = (user) => {
+  setUser = (user: TUser) => {
     this.user = user;
   };
 
-  changeEmail = async (userId, email, key) => {
+  changeEmail = async (userId: string, email: string, key: string) => {
     this.setIsLoading(true);
 
     const user = await api.people.changeEmail(userId, email, key);
@@ -69,26 +74,30 @@ class UserStore {
     this.setIsLoading(false);
   };
 
-  updateEmailActivationStatus = async (activationStatus, userId, key) => {
+  updateEmailActivationStatus = async (
+    activationStatus: EmployeeActivationStatus,
+    userId: string,
+    key: string,
+  ) => {
     this.setIsLoading(true);
 
     const user = await api.people.updateActivationStatus(
       activationStatus,
       userId,
-      key
+      key,
     );
 
     this.setUser(user);
     this.setIsLoading(false);
   };
 
-  changeTheme = async (key) => {
+  changeTheme = async (key: ThemeKeys) => {
     this.setIsLoading(true);
 
     const { theme } = await api.people.changeTheme(key);
 
     runInAction(() => {
-      this.user.theme = theme;
+      if (this.user) this.user.theme = theme;
     });
 
     this.setIsLoading(false);
@@ -96,28 +105,37 @@ class UserStore {
     return theme;
   };
 
-  setUserIsUpdate = (isUpdate) => {
-    //console.log("setUserIsUpdate");
+  setUserIsUpdate = (isUpdate: boolean) => {
+    // console.log("setUserIsUpdate");
     this.userIsUpdate = isUpdate;
   };
 
-  setWithSendAgain = (withSendAgain) => {
+  setWithSendAgain = (withSendAgain: boolean) => {
     this.withSendAgain = withSendAgain;
   };
 
   sendActivationLink = async () => {
+    if (!this.user) return null;
     const { email, id } = this.user;
     await api.people.resendUserInvites([id]);
     return email;
   };
 
-  updateUser = (newUser) => {
-    this.user = { ...this.user, newUser };
-  };
-
-  updateAvatarInfo = (avatar, avatarSmall, avatarMedium, avatarMax) => {
-    this.user.avatar = avatar;
-    this.updateUser({ avatar, avatarSmall, avatarMedium, avatarMax });
+  updateAvatarInfo = (
+    avatar: string,
+    avatarSmall: string,
+    avatarMedium: string,
+    avatarMax: string,
+  ) => {
+    if (this.user) {
+      this.user = {
+        ...this.user,
+        avatar,
+        avatarSmall,
+        avatarMedium,
+        avatarMax,
+      };
+    }
   };
 
   get withActivationBar() {
@@ -134,4 +152,4 @@ class UserStore {
   }
 }
 
-export default UserStore;
+export { UserStore };

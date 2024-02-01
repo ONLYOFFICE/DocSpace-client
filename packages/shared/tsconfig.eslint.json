@@ -15,6 +15,7 @@
     "api",
     "sw",
     "selectors",
+    "store",
     // add all files in which you see
     // the "parserOptions.project" error
     ".eslintrc.cjs",

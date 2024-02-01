@@ -1153,23 +1153,26 @@ const SectionHeaderContent = (props) => {
 
 export default inject(
   ({
-    auth,
     filesStore,
     peopleStore,
     dialogsStore,
     selectedFolderStore,
     treeFoldersStore,
     filesActionsStore,
-    settingsStore,
+    filesSettingsStore,
     clientLoadingStore,
     publicRoomStore,
     contextOptionsStore,
     oformsStore,
     pluginStore,
+    infoPanelStore,
+    userStore,
+    currentTariffStatusStore,
+    settingsStore,
   }) => {
-    const isOwner = auth.userStore.user?.isOwner;
-    const isAdmin = auth.userStore.user?.isAdmin;
-    const isCollaborator = auth?.userStore?.user?.isCollaborator;
+    const isOwner = userStore.user?.isOwner;
+    const isAdmin = userStore.user?.isAdmin;
+    const isCollaborator = userStore.user?.isCollaborator;
 
     const {
       setSelected,
@@ -1251,7 +1254,7 @@ export default inject(
 
     const { oformsFilter } = oformsStore;
 
-    const { setIsVisible, isVisible } = auth.infoPanelStore;
+    const { setIsVisible, isVisible } = infoPanelStore;
 
     const {
       title,
@@ -1274,8 +1277,8 @@ export default inject(
       whiteLabelLogoUrls,
       isFrame,
       currentDeviceType,
-    } = auth.settingsStore;
-    const { isGracePeriod } = auth.currentTariffStatusStore;
+    } = settingsStore;
+    const { isGracePeriod } = currentTariffStatusStore;
 
     const isRoom = !!roomType;
     const isPublicRoomType = roomType === RoomsType.PublicRoom;
@@ -1346,8 +1349,8 @@ export default inject(
     return {
       isGracePeriod,
       setInviteUsersWarningDialogVisible,
-      showText: auth.settingsStore.showText,
-      isDesktop: auth.settingsStore.isDesktopClient,
+      showText: settingsStore.showText,
+      isDesktop: settingsStore.isDesktopClient,
       showHeaderLoader,
       isLoading,
       isRootFolder: isPublicRoom && !folderPath?.length ? true : isRoot,
@@ -1365,9 +1368,9 @@ export default inject(
       isHeaderIndeterminate,
       isHeaderChecked,
       isThirdPartySelection,
-      isTabletView: auth.settingsStore.isTabletView,
-      confirmDelete: settingsStore.confirmDelete,
-      personal: auth.settingsStore.personal,
+      isTabletView: settingsStore.isTabletView,
+      confirmDelete: filesSettingsStore.confirmDelete,
+      personal: settingsStore.personal,
       cbMenuItems,
       setSelectedNode: treeFoldersStore.setSelectedNode,
       getFolderInfo,

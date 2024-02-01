@@ -186,9 +186,9 @@ const Dialog = ({
   );
 };
 
-export default inject(({ auth, settingsStore }) => {
-  const { folderFormValidation } = auth.settingsStore;
-  const { keepNewFileName, setKeepNewFileName } = settingsStore;
+export default inject(({ settingsStore, filesSettingsStore }) => {
+  const { folderFormValidation } = settingsStore;
+  const { keepNewFileName, setKeepNewFileName } = filesSettingsStore;
 
   return { folderFormValidation, keepNewFileName, setKeepNewFileName };
 })(observer(Dialog));

@@ -218,8 +218,7 @@ const CustomSettings = (props) => {
   );
 };
 
-export default inject(({ auth, setup }) => {
-  const { settingsStore } = auth;
+export default inject(({ settingsStore, setup }) => {
   const { theme } = settingsStore;
   const { integration, setSMTPSettings, setSMTPErrors } = setup;
   const { smtpSettings } = integration;

@@ -63,7 +63,7 @@ let loadingTime;
 let timer;
 
 class ContextOptionsStore {
-  authStore;
+  settingsStore;
   dialogsStore;
   filesActionsStore;
   filesStore;
@@ -71,16 +71,19 @@ class ContextOptionsStore {
   treeFoldersStore;
   uploadDataStore;
   versionHistoryStore;
-  settingsStore;
+  filesSettingsStore;
   selectedFolderStore;
   publicRoomStore;
   oformsStore;
   pluginStore;
+  infoPanelStore;
+  currentTariffStatusStore;
+  userStore;
 
   linksIsLoading = false;
 
   constructor(
-    authStore,
+    settingsStore,
     dialogsStore,
     filesActionsStore,
     filesStore,
@@ -88,14 +91,17 @@ class ContextOptionsStore {
     treeFoldersStore,
     uploadDataStore,
     versionHistoryStore,
-    settingsStore,
+    filesSettingsStore,
     selectedFolderStore,
     publicRoomStore,
     oformsStore,
-    pluginStore
+    pluginStore,
+    infoPanelStore,
+    currentTariffStatusStore,
+    userStore
   ) {
     makeAutoObservable(this);
-    this.authStore = authStore;
+    this.settingsStore = settingsStore;
     this.dialogsStore = dialogsStore;
     this.filesActionsStore = filesActionsStore;
     this.filesStore = filesStore;
@@ -103,11 +109,14 @@ class ContextOptionsStore {
     this.treeFoldersStore = treeFoldersStore;
     this.uploadDataStore = uploadDataStore;
     this.versionHistoryStore = versionHistoryStore;
-    this.settingsStore = settingsStore;
+    this.filesSettingsStore = filesSettingsStore;
     this.selectedFolderStore = selectedFolderStore;
     this.publicRoomStore = publicRoomStore;
     this.oformsStore = oformsStore;
     this.pluginStore = pluginStore;
+    this.infoPanelStore = infoPanelStore;
+    this.currentTariffStatusStore = currentTariffStatusStore;
+    this.userStore = userStore;
   }
 
   onOpenFolder = (item) => {
@@ -119,7 +128,7 @@ class ContextOptionsStore {
   };
 
   onClickReconnectStorage = async (item, t) => {
-    const { thirdPartyStore } = this.settingsStore;
+    const { thirdPartyStore } = this.filesSettingsStore;
 
     const { openConnectWindow, connectItems } = thirdPartyStore;
 
@@ -180,7 +189,7 @@ class ContextOptionsStore {
 
     const newTitle =
       title.substring(0, title.length - fileExst.length) +
-      this.settingsStore.extsWebRestrictedEditing[0];
+      this.filesSettingsStore.extsWebRestrictedEditing[0];
 
     this.uploadDataStore.copyAsAction(id, newTitle, folderId).catch((err) => {
       let errorMessage = "";
@@ -203,7 +212,7 @@ class ContextOptionsStore {
       setFormCreationInfo({
         newTitle,
         fromExst: fileExst,
-        toExst: this.settingsStore.extsWebRestrictedEditing[0],
+        toExst: this.filesSettingsStore.extsWebRestrictedEditing[0],
         fileInfo: item,
       });
       setConvertPasswordDialogVisible(true);
@@ -230,21 +239,21 @@ class ContextOptionsStore {
   };
 
   onMoveAction = () => {
-    const { setIsMobileHidden } = this.authStore.infoPanelStore;
+    const { setIsMobileHidden } = this.infoPanelStore;
     setIsMobileHidden(true);
 
     this.dialogsStore.setMoveToPanelVisible(true);
   };
 
   onRestoreAction = () => {
-    const { setIsMobileHidden } = this.authStore.infoPanelStore;
+    const { setIsMobileHidden } = this.infoPanelStore;
     setIsMobileHidden(true);
     console.log("Click");
     this.dialogsStore.setRestorePanelVisible(true);
   };
 
   onCopyAction = () => {
-    const { setIsMobileHidden } = this.authStore.infoPanelStore;
+    const { setIsMobileHidden } = this.infoPanelStore;
     setIsMobileHidden(true);
 
     this.dialogsStore.setCopyPanelVisible(true);
@@ -254,7 +263,7 @@ class ContextOptionsStore {
     const { fetchFileVersions, setIsVerHistoryPanel } =
       this.versionHistoryStore;
 
-    const { setIsMobileHidden } = this.authStore.infoPanelStore;
+    const { setIsMobileHidden } = this.infoPanelStore;
 
     if (this.treeFoldersStore.isRecycleBinFolder) return;
 
@@ -286,7 +295,7 @@ class ContextOptionsStore {
   lockFile = (item, t) => {
     const { id, locked } = item;
     const { setInfoPanelSelection: setInfoPanelSelection } =
-      this.authStore.infoPanelStore;
+      this.infoPanelStore;
 
     this.filesActionsStore
       .lockFileAction(id, !locked)
@@ -339,7 +348,7 @@ class ContextOptionsStore {
       return toastr.success(t("Translations:LinkCopySuccess"));
     }
 
-    const { canConvert } = this.settingsStore;
+    const { canConvert } = this.filesSettingsStore;
 
     const { getItemUrl } = this.filesStore;
 
@@ -391,7 +400,7 @@ class ContextOptionsStore {
   };
 
   gotoDocEditor = (preview = false, item) => {
-    const { isDesktopClient } = this.authStore.settingsStore;
+    const { isDesktopClient } = this.settingsStore;
 
     const { id, providerKey, fileExst } = item;
 
@@ -499,7 +508,7 @@ class ContextOptionsStore {
   onClickDeleteSelectedFolder = (t, isRoom) => {
     const { setIsFolderActions, setDeleteDialogVisible, setIsRoomDelete } =
       this.dialogsStore;
-    const { confirmDelete } = this.settingsStore;
+    const { confirmDelete } = this.filesSettingsStore;
     const { deleteAction, deleteRoomsAction } = this.filesActionsStore;
     const { id: selectedFolderId, getSelectedFolder } =
       this.selectedFolderStore;
@@ -584,7 +593,7 @@ class ContextOptionsStore {
   };
 
   onClickShare = (item) => {
-    const { openShareTab } = this.authStore.infoPanelStore;
+    const { openShareTab } = this.infoPanelStore;
     const { setShareFolderDialogVisible } = this.dialogsStore;
 
     if (item.isFolder) {
@@ -633,7 +642,7 @@ class ContextOptionsStore {
   };
 
   onShowInfoPanel = (item, view) => {
-    const { setIsVisible, setView } = this.authStore.infoPanelStore;
+    const { setIsVisible, setView } = this.infoPanelStore;
 
     setIsVisible(true);
     view && setView(view);
@@ -707,7 +716,7 @@ class ContextOptionsStore {
 
   onLoadPlugins = (item) => {
     const { contextOptions } = item;
-    const { enablePlugins } = this.authStore.settingsStore;
+    const { enablePlugins } = this.settingsStore;
 
     const pluginItems = [];
     this.setLoaderTimer(true);
@@ -762,8 +771,7 @@ class ContextOptionsStore {
 
     const { action } = data;
 
-    const { isGracePeriod } = this.authStore.currentTariffStatusStore;
-    const { isFreeTariff } = this.authStore.currentQuotaStore;
+    const { isGracePeriod } = this.currentTariffStatusStore;
 
     if (isGracePeriod) {
       this.dialogsStore.setInviteUsersWarningDialogVisible(true);
@@ -790,7 +798,7 @@ class ContextOptionsStore {
   onClickArchive = (e) => {
     const data = (e.currentTarget && e.currentTarget.dataset) || e;
     const { action } = data;
-    const { isGracePeriod } = this.authStore.currentTariffStatusStore;
+    const { isGracePeriod } = this.currentTariffStatusStore;
     const {
       setArchiveDialogVisible,
       setRestoreRoomDialogVisible,
@@ -875,7 +883,7 @@ class ContextOptionsStore {
   };
 
   onCreateOform = (navigate) => {
-    this.authStore.infoPanelStore.setIsVisible(false);
+    this.infoPanelStore.setIsVisible(false);
     const filesFilter = FilesFilter.getDefault();
     filesFilter.folder = this.oformsStore.oformFromFolderId;
     const filterUrlParams = filesFilter.toUrlParams();
@@ -894,7 +902,7 @@ class ContextOptionsStore {
   };
 
   onShowOformTemplateInfo = (item) => {
-    this.authStore.infoPanelStore.setIsVisible(true);
+    this.infoPanelStore.setIsVisible(true);
     this.oformsStore.setGallerySelected(item);
   };
 
@@ -1531,7 +1539,7 @@ class ContextOptionsStore {
       });
     }
 
-    const { isCollaborator } = this.authStore?.userStore?.user || {
+    const { isCollaborator } = this.userStore?.user || {
       isCollaborator: false,
     };
 
@@ -1545,7 +1553,7 @@ class ContextOptionsStore {
   };
 
   getGroupContextOptions = (t) => {
-    const { personal } = this.authStore.settingsStore;
+    const { personal } = this.settingsStore;
     const { selection, allFilesIsEditing } = this.filesStore;
     const { setDeleteDialogVisible } = this.dialogsStore;
     const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
@@ -1771,7 +1779,7 @@ class ContextOptionsStore {
         onClick: allFilesIsEditing
           ? () => this.onShowEditingToast(t)
           : () => {
-              if (this.settingsStore.confirmDelete) {
+              if (this.filesSettingsStore.confirmDelete) {
                 setDeleteDialogVisible(true);
               } else {
                 const translations = {
@@ -1791,7 +1799,7 @@ class ContextOptionsStore {
       },
     ];
 
-    const { isCollaborator } = this.authStore?.userStore?.user || {
+    const { isCollaborator } = this.userStore?.user || {
       isCollaborator: false,
     };
 

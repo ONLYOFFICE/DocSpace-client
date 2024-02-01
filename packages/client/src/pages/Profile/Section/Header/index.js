@@ -181,10 +181,16 @@ const Header = (props) => {
 };
 
 export default inject(
-  ({ auth, peopleStore, clientLoadingStore, profileActionsStore }) => {
-    const { isAdmin } = auth;
+  ({
+    authStore,
+    userStore,
+    peopleStore,
+    clientLoadingStore,
+    profileActionsStore,
+  }) => {
+    const { isAdmin } = authStore;
 
-    const { isVisitor, isCollaborator } = auth.userStore.user;
+    const { isVisitor, isCollaborator } = userStore.user;
 
     const { targetUserStore, filterStore, dialogStore } = peopleStore;
 

@@ -151,7 +151,7 @@ const Webhooks = (props) => {
   );
 };
 
-export default inject(({ webhooksStore, auth }) => {
+export default inject(({ webhooksStore, authStore }) => {
   const {
     state,
     loadWebhooks,
@@ -161,7 +161,7 @@ export default inject(({ webhooksStore, auth }) => {
     editWebhook,
     deleteWebhook,
   } = webhooksStore;
-  const { setDocumentTitle } = auth;
+  const { setDocumentTitle } = authStore;
 
   return {
     state,

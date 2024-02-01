@@ -9,12 +9,14 @@ import {
 
 class AccessRightsStore {
   authStore = null;
+  userStore = null;
   selectedFolderStore = null;
   treeFoldersStore = null;
 
-  constructor(authStore, selectedFolderStore) {
+  constructor(authStore, selectedFolderStore, userStore) {
     this.authStore = authStore;
     this.selectedFolderStore = selectedFolderStore;
+    this.userStore = userStore;
 
     makeAutoObservable(this);
   }
@@ -34,13 +36,13 @@ class AccessRightsStore {
   };
 
   canSubmitToFormGallery = () => {
-    const { isVisitor } = this.authStore.userStore.user;
+    const { isVisitor } = this.userStore.user;
 
     return !isVisitor;
   };
 
   canChangeUserType = (user) => {
-    const { id, isOwner, isAdmin } = this.authStore.userStore.user;
+    const { id, isOwner, isAdmin } = this.userStore.user;
 
     const { id: userId, statusType, role } = user;
 
@@ -68,7 +70,7 @@ class AccessRightsStore {
   };
 
   canMakeEmployeeUser = (user) => {
-    const { id, isOwner } = this.authStore.userStore.user;
+    const { id, isOwner } = this.userStore.user;
 
     const {
       status,
@@ -99,7 +101,7 @@ class AccessRightsStore {
   };
 
   canActivateUser = (user) => {
-    const { id, isOwner, isAdmin } = this.authStore.userStore.user;
+    const { id, isOwner, isAdmin } = this.userStore.user;
 
     const {
       status,
@@ -118,7 +120,7 @@ class AccessRightsStore {
   };
 
   canDisableUser = (user) => {
-    const { id, isOwner, isAdmin } = this.authStore.userStore.user;
+    const { id, isOwner, isAdmin } = this.userStore.user;
 
     const {
       status,
@@ -137,7 +139,7 @@ class AccessRightsStore {
   };
 
   canInviteUser = (user) => {
-    const { id, isOwner } = this.authStore.userStore.user;
+    const { id, isOwner } = this.userStore.user;
 
     const {
       activationStatus,
@@ -158,7 +160,7 @@ class AccessRightsStore {
   };
 
   canRemoveUser = (user) => {
-    const { id, isOwner, isAdmin } = this.authStore.userStore.user;
+    const { id, isOwner, isAdmin } = this.userStore.user;
 
     const {
       status,

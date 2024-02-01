@@ -28,8 +28,7 @@ const TrialContainer = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { currentTariffStatusStore } = auth;
+export default inject(({ currentTariffStatusStore }) => {
   const { isLicenseDateExpired } = currentTariffStatusStore;
 
   return { isLicenseDateExpired };

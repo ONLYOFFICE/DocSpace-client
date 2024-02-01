@@ -128,14 +128,14 @@ const InfiniteGrid = (props) => {
   );
 };
 
-export default inject(({ auth, filesStore, oformsStore }) => {
+export default inject(({ filesStore, oformsStore, infoPanelStore }) => {
   const { oformFiles, hasMoreForms, oformsFilterTotal, fetchMoreOforms } =
     oformsStore;
 
   const { getCountTilesInRow } = filesStore;
 
   const filesLength = oformFiles.length;
-  const { isVisible } = auth.infoPanelStore;
+  const { isVisible } = infoPanelStore;
 
   return {
     filesList: oformFiles,

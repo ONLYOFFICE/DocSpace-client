@@ -1,39 +1,40 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import api from "@docspace/shared/api";
-
-const MANAGER = "manager";
-const TOTAL_SIZE = "total_size";
+import api from "../api";
+import { TPaymentFeature, TPaymentQuota } from "../api/portal/types";
+import { MANAGER, TOTAL_SIZE } from "../constants";
 
 class PaymentQuotasStore {
-  portalPaymentQuotas = {};
-  portalPaymentQuotasFeatures = [];
+  portalPaymentQuotas: TPaymentQuota = {} as TPaymentQuota;
+
+  portalPaymentQuotasFeatures: TPaymentFeature[] = [];
+
   isLoaded = false;
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  setIsLoaded = (isLoaded) => {
+  setIsLoaded = (isLoaded: boolean) => {
     this.isLoaded = isLoaded;
   };
 
   get planCost() {
     if (this.portalPaymentQuotas.price) return this.portalPaymentQuotas.price;
-    else return { value: 0, currencySymbol: "" };
+    return { value: 0, currencySymbol: "" };
   }
 
   get stepAddingQuotaManagers() {
     const result = this.portalPaymentQuotasFeatures.find(
-      (obj) => obj.id === MANAGER
+      (obj) => obj.id === MANAGER,
     );
-    return result.value;
+    return result?.value;
   }
 
   get stepAddingQuotaTotalSize() {
     const result = this.portalPaymentQuotasFeatures.find(
-      (obj) => obj.id === TOTAL_SIZE
+      (obj) => obj.id === TOTAL_SIZE,
     );
-    return result.value;
+    return result?.value;
   }
 
   get tariffTitle() {
@@ -42,21 +43,23 @@ class PaymentQuotasStore {
 
   get usedTotalStorageSizeTitle() {
     const result = this.portalPaymentQuotasFeatures.find(
-      (obj) => obj.id === TOTAL_SIZE
+      (obj) => obj.id === TOTAL_SIZE,
     );
-    return result.priceTitle;
+    return result?.priceTitle;
   }
+
   get addedManagersCountTitle() {
     const result = this.portalPaymentQuotasFeatures.find(
-      (obj) => obj.id === MANAGER
+      (obj) => obj.id === MANAGER,
     );
-    return result.priceTitle;
+    return result?.priceTitle;
   }
 
   get tariffPlanTitle() {
     return this.portalPaymentQuotas.title;
   }
-  setPortalPaymentQuotas = async (t) => {
+
+  setPortalPaymentQuotas = async () => {
     if (this.isLoaded) return;
 
     const res = await api.portal.getPortalPaymentQuotas();
@@ -73,4 +76,4 @@ class PaymentQuotasStore {
   };
 }
 
-export default PaymentQuotasStore;
+export { PaymentQuotasStore };

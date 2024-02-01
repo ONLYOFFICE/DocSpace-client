@@ -38,16 +38,3 @@ const ArticleTeamTrainingAlert = ({
 };
 
 export default ArticleTeamTrainingAlert;
-
-// export default inject(({ auth }) => {
-//   const { settingsStore } = auth;
-
-//   const { theme, bookTrainingEmail, removeAlertFromArticleAlertsData } =
-//     settingsStore;
-
-//   return {
-//     theme,
-//     bookTrainingEmail,
-//     removeAlertFromArticleAlertsData,
-//   };
-// })(observer(ArticleTeamTrainingAlert));

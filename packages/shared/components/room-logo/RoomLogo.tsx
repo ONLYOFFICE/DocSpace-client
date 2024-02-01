@@ -49,7 +49,7 @@ const RoomLogoPure = ({
       case RoomsType.PublicRoom:
         return PublicRoomSvg32Url;
       case RoomsType.FormRoom:
-          return FormRoomSvg32Url;
+        return FormRoomSvg32Url;
       default:
         return "";
     }

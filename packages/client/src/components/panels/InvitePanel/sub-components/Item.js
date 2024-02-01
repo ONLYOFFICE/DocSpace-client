@@ -18,7 +18,7 @@ import {
   StyledDeleteIcon,
   StyledInviteUserBody,
 } from "../StyledInvitePanel";
-import { filterUserRoleOptions } from "SRC_DIR/helpers/utils";
+import { filterUserRoleOptions } from "SRC_DIR/helpers";
 import AccessSelector from "./AccessSelector";
 
 const Item = ({

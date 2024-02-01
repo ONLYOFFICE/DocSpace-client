@@ -162,8 +162,8 @@ const FileTile = (props) => {
 };
 
 export default inject(
-  ({ settingsStore, filesStore, treeFoldersStore }, { item }) => {
-    const { getIcon, thumbnails1280x720 } = settingsStore;
+  ({ filesSettingsStore, filesStore, treeFoldersStore }, { item }) => {
+    const { getIcon, thumbnails1280x720 } = filesSettingsStore;
     const { setSelection, withCtrlSelect, withShiftSelect, highlightFile } =
       filesStore;
 

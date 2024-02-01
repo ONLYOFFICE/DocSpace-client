@@ -256,9 +256,15 @@ const LinkRow = (props) => {
 };
 
 export default inject(
-  ({ auth, dialogsStore, publicRoomStore, treeFoldersStore }) => {
-    const { infoPanelSelection } = auth.infoPanelStore;
-    const { theme } = auth.settingsStore;
+  ({
+    settingsStore,
+    dialogsStore,
+    publicRoomStore,
+    treeFoldersStore,
+    infoPanelStore,
+  }) => {
+    const { infoPanelSelection } = infoPanelStore;
+    const { theme } = settingsStore;
 
     const {
       setEditLinkPanelIsVisible,

@@ -36,8 +36,7 @@ const DocspaceLogo = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { settingsStore } = auth;
+export default inject(({ settingsStore }) => {
   const { whiteLabelLogoUrls, theme } = settingsStore;
 
   return {

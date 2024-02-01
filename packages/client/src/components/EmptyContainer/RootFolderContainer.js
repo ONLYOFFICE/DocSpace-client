@@ -332,14 +332,15 @@ const RootFolderContainer = (props) => {
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     filesStore,
     treeFoldersStore,
     selectedFolderStore,
     clientLoadingStore,
+    userStore,
   }) => {
     const { isDesktopClient, isEncryptionSupport, organizationName, theme } =
-      auth.settingsStore;
+      settingsStore;
 
     const { setIsSectionFilterLoading } = clientLoadingStore;
 
@@ -356,8 +357,8 @@ export default inject(
       theme,
       isPrivacyFolder,
       isDesktop: isDesktopClient,
-      isVisitor: auth?.userStore?.user?.isVisitor,
-      isCollaborator: auth?.userStore?.user?.isCollaborator,
+      isVisitor: userStore?.user?.isVisitor,
+      isCollaborator: userStore?.user?.isCollaborator,
       isEncryptionSupport,
       organizationName,
       privacyInstructions,

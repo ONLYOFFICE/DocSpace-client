@@ -207,25 +207,3 @@ export const getCategoryUrl = (categoryType, folderId = null) => {
       throw new Error("Unknown category type");
   }
 };
-
-export const filterUserRoleOptions = (
-  options,
-  currentUser,
-  withRemove = false
-) => {
-  if (!options) return options;
-  let newOptions = [...options];
-
-  if (currentUser?.isAdmin || currentUser?.isOwner) {
-    newOptions = newOptions.filter(
-      (o) =>
-        +o.access === ShareAccessRights.RoomManager ||
-        +o.access === ShareAccessRights.None ||
-        (withRemove && (o.key === "s2" || o.key === "remove"))
-    );
-
-    return newOptions;
-  }
-
-  return newOptions;
-};

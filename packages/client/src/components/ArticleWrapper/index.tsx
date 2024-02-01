@@ -17,8 +17,6 @@ export default inject(
       currentQuotaStore,
 
       isPaymentPageAvailable,
-      isTeamTrainingAlertAvailable,
-      isSubmitToGalleryAlertAvailable,
       currentTariffStatusStore,
       isEnterprise,
     } = auth;
@@ -58,15 +56,9 @@ export default inject(
 
       currentDeviceType,
       standalone,
-      articleAlertsData,
-      incrementIndexOfArticleAlertsData,
       isBurgerLoading,
       whiteLabelLogoUrls,
-      removeAlertFromArticleAlertsData,
-      bookTrainingEmail,
     } = settingsStore;
-
-    const { setSubmitToGalleryDialogVisible } = dialogsStore;
 
     const { isFreeTariff, isNonProfit, isTrial, currentTariffPlanTitle } =
       currentQuotaStore;
@@ -79,7 +71,6 @@ export default inject(
     } = currentTariffStatusStore;
 
     return {
-      bookTrainingEmail,
       onProfileClick,
       user,
       getUserRole,
@@ -103,16 +94,11 @@ export default inject(
 
       toggleArticleOpen,
 
-      articleAlertsData,
-      incrementIndexOfArticleAlertsData,
-
       showText,
       isNonProfit,
       isGracePeriod,
       isFreeTariff,
       isPaymentPageAvailable,
-      isTeamTrainingAlertAvailable,
-      isSubmitToGalleryAlertAvailable,
       isLicenseExpiring,
 
       standalone,
@@ -121,9 +107,6 @@ export default inject(
       articleOpen,
       setIsMobileArticle,
       toggleShowText,
-
-      removeAlertFromArticleAlertsData,
-      setSubmitToGalleryDialogVisible,
 
       currentColorScheme,
       setArticleOpen,

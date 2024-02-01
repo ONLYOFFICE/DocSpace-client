@@ -23,16 +23,13 @@ import {
 } from "../api/settings/types";
 import { TUser } from "../api/people/types";
 import { size as deviceSize, isTablet, getSystemTheme } from "../utils";
-import {
-  frameCallEvent,
-  getShowText,
-} from "../utils/common";
+import { frameCallEvent, getShowText } from "../utils/common";
 import { setCookie, getCookie } from "../utils/cookie";
 import { combineUrl } from "../utils/combineUrl";
 import FirebaseHelper from "../utils/firebase";
 import SocketIOHelper from "../utils/socket";
 import { TWhiteLabel } from "../utils/whiteLabelHelper";
-import { ThemeKeys, TenantStatus, DeviceType, ArticleAlerts } from "../enums";
+import { ThemeKeys, TenantStatus, DeviceType } from "../enums";
 import {
   LANGUAGE,
   COOKIE_EXPIRATION_YEAR,

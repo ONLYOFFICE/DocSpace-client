@@ -1,5 +1,5 @@
 import { TColorScheme } from "../../themes";
-import { ArticleAlerts, DeviceType } from "../../enums";
+import { DeviceType } from "../../enums";
 import { TWhiteLabel } from "../../utils/whiteLabelHelper";
 import { TUser } from "../../api/people/types";
 import { TTranslation } from "../../types";
@@ -21,15 +21,7 @@ export interface ArticleHeaderProps {
   currentDeviceType: DeviceType;
 }
 
-export type TRemoveAlert = (alertName: ArticleAlerts) => void;
-
 export type TToggleArticleOpen = () => void;
-
-export interface ArticlePaymentAlertProps {
-  isFreeTariff?: boolean;
-  currentTariffPlanTitle?: string;
-  toggleArticleOpen?: TToggleArticleOpen;
-}
 
 export interface ArticleProfileProps {
   user?: TUser;
@@ -38,15 +30,6 @@ export interface ArticleProfileProps {
   onProfileClick?: () => void;
   currentDeviceType: DeviceType;
   isVirtualKeyboardOpen: boolean;
-}
-
-export interface ArticleEnterpriseAlertProps {
-  toggleArticleOpen?: TToggleArticleOpen;
-  isLicenseDateExpired?: boolean;
-  trialDaysLeft?: number;
-  isTrial?: boolean;
-  paymentDate?: Date;
-  isEnterprise?: boolean;
 }
 
 export interface ArticleZendeskProps {

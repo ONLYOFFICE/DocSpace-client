@@ -24,7 +24,7 @@ import BackgroundPatternPurpleReactSvgUrl from "PUBLIC_DIR/images/background.pat
 import BackgroundPatternLightBlueReactSvgUrl from "PUBLIC_DIR/images/background.pattern.lightBlue.react.svg?url";
 import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.pattern.black.react.svg?url";
 
-import { ArticleAlerts, FolderType, RoomsType, ThemeKeys } from "../enums";
+import { FolderType, RoomsType, ThemeKeys } from "../enums";
 import { LANGUAGE, RTL_LANGUAGES } from "../constants";
 
 import { TI18n } from "../types";

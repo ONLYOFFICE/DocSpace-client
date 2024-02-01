@@ -247,14 +247,15 @@ const User = ({
           <Text className="name" data-tooltip-id={uniqueTooltipId}>
             {decode(user.displayName)}
           </Text>
-          {showTooltip && (
+          {/* TODO: uncomment when information about online statuses appears */}
+          {/* {showTooltip && (
             <Tooltip
               float
               id={uniqueTooltipId}
               getContent={getTooltipContent}
               place="bottom"
             />
-          )}
+          )} */}
           {currentMember?.id === user.id && (
             <div className="me-label">&nbsp;{`(${t("Common:MeLabel")})`}</div>
           )}

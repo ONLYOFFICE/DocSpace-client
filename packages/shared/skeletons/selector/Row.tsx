@@ -81,7 +81,7 @@ const RowLoader = ({
         className={className}
         style={style}
         isUser={isUser}
-        key={key}
+        key={`selector-row-${key}`}
         {...rest}
       >
         <RectangleSkeleton className="avatar" width="32px" height="32px" />

@@ -42,7 +42,7 @@ const StyledRowContent = styled(RowContent)`
     .platform,
     .browser {
       font-size: 14px;
-      color: #333;
+      color: ${(props) => props.theme.activeSessions.color};
       font-weight: 600;
       margin-right: 5px;
     }
@@ -50,7 +50,7 @@ const StyledRowContent = styled(RowContent)`
     .date {
       font-size: 14px;
       font-weight: 600;
-      color: #a3a9ae;
+      color: ${(props) => props.theme.activeSessions.tableCellColor};
     }
   }
 
@@ -62,7 +62,7 @@ const StyledRowContent = styled(RowContent)`
     .city {
       font-size: 12px;
       font-weight: 600;
-      color: #a3a9ae;
+      color: ${(props) => props.theme.activeSessions.tableCellColor};
     }
 
     .city {

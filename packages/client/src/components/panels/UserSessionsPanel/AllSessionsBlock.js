@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   }
 
   .desciption {
-    color: #657077;
+    color: ${(props) => props.theme.activeSessions.subtitleColor};
     margin-bottom: 20px;
   }
 `;

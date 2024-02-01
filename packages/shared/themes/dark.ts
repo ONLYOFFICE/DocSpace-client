@@ -3093,6 +3093,9 @@ const Dark: TTheme = {
     textDescriptionColor: "#858585",
     textOnlineColor: "#3BA420",
     boxShadowColor: "rgba(0, 0, 0, 0.12) 0px 40px 60px",
+    tableCellColor: "#858585",
+    iconColor: "#858585",
+    subtitleColor: "#858585",
   },
 
   formWrapper: {

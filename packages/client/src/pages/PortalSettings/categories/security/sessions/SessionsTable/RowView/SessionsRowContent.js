@@ -29,7 +29,7 @@ const StyledRowContent = styled(RowContent)`
     min-width: 250px;
     .session-info {
       font-weight: 600;
-      color: ${(props) => props.theme.activeSessions.textDescriptionColor};
+      color: ${(props) => props.theme.activeSessions.tableCellColor};
       font-size: 12px;
     }
 
@@ -42,7 +42,7 @@ const StyledRowContent = styled(RowContent)`
 
     .offline {
       font-weight: 600;
-      color: ${(props) => props.theme.activeSessions.textDescriptionColor};
+      color: ${(props) => props.theme.activeSessions.tableCellColor};
       font-size: 14px;
       margin-left: 4px;
     }

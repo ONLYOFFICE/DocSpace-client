@@ -2,6 +2,7 @@ import { Avatar } from "@docspace/shared/components/avatar";
 import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
+import { Base } from "@docspace/shared/themes";
 import styled from "styled-components";
 
 import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
@@ -18,9 +19,17 @@ const StyledUserInfoBlock = styled.div`
     font-weight: 700;
   }
 
+  .icon-button_svg {
+    svg {
+      path {
+        fill: ${(props) => props.theme.activeSessions.iconColor};
+      }
+    }
+  }
+
   span {
     font-size: 13px;
-    color: #a3a9ae;
+    color: ${(props) => props.theme.activeSessions.tableCellColor};
     font-weight: 600;
   }
 
@@ -38,6 +47,7 @@ const UserInfoBlock = (props) => {
     setSessionModalData,
   } = props;
 
+  const { isBase } = Base;
   const { avatar, role, displayName, userType } = data;
 
   const onClickLogout = () => {

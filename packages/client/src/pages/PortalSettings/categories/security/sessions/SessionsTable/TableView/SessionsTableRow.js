@@ -115,12 +115,12 @@ const StyledTableRow = styled(TableRow)`
 
   .session-info {
     font-weight: 600;
-    color: #a3a9ae;
+    color: ${(props) => props.theme.activeSessions.tableCellColor};
   }
 
-  .session-online {
+  .online {
     font-weight: 600;
-    color: #35ad17;
+    color: ${(props) => props.theme.activeSessions.textOnlineColor};
   }
 `;
 
@@ -258,10 +258,7 @@ const SessionsTableRow = (props) => {
         </TableCell>
 
         <TableCell>
-          <Text
-            className={isOnline ? "session-online" : "session-info"}
-            truncate
-          >
+          <Text className={isOnline ? "online" : "session-info"} truncate>
             {status}
           </Text>
         </TableCell>

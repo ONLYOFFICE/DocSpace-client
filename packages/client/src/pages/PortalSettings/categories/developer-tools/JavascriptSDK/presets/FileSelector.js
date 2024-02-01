@@ -158,8 +158,14 @@ const FileSelector = (props) => {
     setConfig((config) => ({ ...config, isButtonMode: e.target.value === "button" }));
   };
 
-  const onChangeTab = () => {
-    loadFrame();
+  const onChangeTab = (tab) => {
+    if (tab.key === "preview" && selectedElementType === "button") {
+      setConfig((config) => ({ ...config, isButtonMode: true }));
+    } else if (tab.key === "selector-preview") {
+      setConfig((config) => ({ ...config, isButtonMode: false }));
+    } else if (tab.key === "code") {
+      setConfig((config) => ({ ...config, isButtonMode: selectedElementType === "button" }));
+    }
   };
 
   const onChangeWidth = (e) => {
@@ -331,18 +337,37 @@ const FileSelector = (props) => {
     </>
   );
 
-  const dataTabs = [
-    {
-      key: "preview",
-      title: t("Common:Preview"),
-      content: preview,
-    },
-    {
-      key: "code",
-      title: t("Code"),
-      content: code,
-    },
-  ];
+  const dataTabs =
+    selectedElementType === "element"
+      ? [
+          {
+            key: "preview",
+            title: t("Common:Preview"),
+            content: preview,
+          },
+          {
+            key: "code",
+            title: t("Code"),
+            content: code,
+          },
+        ]
+      : [
+          {
+            key: "preview",
+            title: t("Common:Preview"),
+            content: preview,
+          },
+          {
+            key: "selector-preview",
+            title: t("SelectorPreview"),
+            content: preview,
+          },
+          {
+            key: "code",
+            title: t("Code"),
+            content: code,
+          },
+        ];
 
   return (
     <SDKContainer>

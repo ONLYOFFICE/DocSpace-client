@@ -126,12 +126,8 @@ const RoomSelector = (props) => {
 
   useEffect(() => {
     loadFrame();
-    return () => destroyFrame();
+    return destroyFrame;
   });
-
-  // useEffect(() => {
-  //   loadFrame();
-  // }, [config])
 
   const toggleButtonMode = (e) => {
     setSelectedElementType(e.target.value);
@@ -144,16 +140,13 @@ const RoomSelector = (props) => {
   };
 
   const onChangeTab = (tab) => {
-    // tab.key === "preview" &&
-    //   config?.isButtonMode &&
-    //   setConfig((config) => ({ ...config, isButtonMode: true }));
-    // tab.key === "selector-preview" &&
-    //   config?.isButtonMode &&
-    //   setConfig((config) => ({ ...config, isButtonMode: false }));
-    // tab.key === "code" &&
-    //   !!config?.isButtonMode !== (selectedElementType === "button") &&
-    //   setConfig((config) => ({ ...config, isButtonMode: true }));
-    loadFrame();
+    if (tab.key === "preview" && selectedElementType === "button") {
+      setConfig((config) => ({ ...config, isButtonMode: true }));
+    } else if (tab.key === "selector-preview") {
+      setConfig((config) => ({ ...config, isButtonMode: false }));
+    } else if (tab.key === "code") {
+      setConfig((config) => ({ ...config, isButtonMode: selectedElementType === "button" }));
+    }
   };
 
   const onChangeWidth = (e) => {
@@ -249,12 +242,6 @@ const RoomSelector = (props) => {
     </>
   );
 
-  const buttonPreview = (
-    <Frame width={"700px"} height={config.height} targetId={frameId}>
-      <Box id={frameId}></Box>
-    </Frame>
-  );
-
   const dataTabs =
     selectedElementType === "element"
       ? [
@@ -273,11 +260,11 @@ const RoomSelector = (props) => {
           {
             key: "preview",
             title: t("Common:Preview"),
-            content: buttonPreview,
+            content: preview,
           },
           {
             key: "selector-preview",
-            title: "Selector preview",
+            title: t("SelectorPreview"),
             content: preview,
           },
           {

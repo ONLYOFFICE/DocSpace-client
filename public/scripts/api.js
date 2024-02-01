@@ -32,6 +32,7 @@
     withSubtitle: true,
     filterParam: "ALL",
     buttonColor: "#5299E0",
+    infoPanelVisible: true,
     filter: {
       // filterType: 0,
       // type: 0,
@@ -154,6 +155,57 @@
       container.setAttribute("id", config.frameId + "-loader");
 
       return container;
+    };
+
+    #createButtonView = (config) => {
+      const button = document.createElement("button");
+      button.style.backgroundColor = config?.buttonColor || "#5299E0";
+      button.style.color = "#fff";
+      button.style.padding = "0 28px";
+      button.style.borderRadius = "3px";
+      button.style.border = `1px solid #5299E0`;
+      button.style.height = "32px";
+      button.style.fontWeight = "600";
+      button.style.fontFamily = "Open Sans";
+      button.style.cursor = "pointer";
+      button.style.display = "flex";
+      button.style.alignItems = "center";
+      button.style.gap = "10px";
+      button.style.userSelect = "none";
+      button.style.borderColor = config?.buttonColor || "#5299E0";
+
+      const logoSrc = `${config.src}/static/images/light_small_logo.react.svg`;
+
+      button.innerHTML = `${config?.buttonWithLogo ? `<img width="16px" heigth="16px" src="${logoSrc}" />` : ""}${config?.buttonText || "Select to DocSpace"}`;
+
+      const scriptUrl = `${window.location.origin}/static/scripts/api.js`;
+
+      button.addEventListener("click", () => {
+        const winHtml = `<!DOCTYPE html>
+          <html>
+              <head>
+                  <title>Window with Blob</title>
+              </head>
+              <body>
+                  <div id=${config.frameId}></div>
+                  <script type="text/javascript" id="integration" async src="${scriptUrl}" onload='window.DocSpace.SDK.initFrame(${JSON.stringify(this.config)})'></script>
+              </body>
+          </html>`;
+
+        const winUrl = URL.createObjectURL(new Blob([winHtml], { type: "text/html" }));
+
+        const selectorWindow = window.open(
+          winUrl,
+          "_blank",
+          `width=${config.width},height=${config.height}`,
+        );
+
+        // selectorWindow.document.write("");
+      });
+
+      button.setAttribute("id", config.frameId + "-button");
+
+      return button;
     };
 
     #createIframe = (config) => {
@@ -374,6 +426,47 @@
 
       this.#sendMessage(message);
     };
+
+    initButton(config) {
+      const configFull = { ...defaultConfig, ...config };
+      this.config = { ...this.config, ...configFull };
+
+      const target = document.getElementById(this.config.frameId);
+
+      let button = null;
+
+      if (target) {
+        button = this.#createButtonView(this.config);
+
+        this.#classNames = target.className;
+
+        const renderContainer = document.createElement("div");
+        renderContainer.id = this.config.frameId + "-container";
+        renderContainer.style.display = "relative";
+        renderContainer.style.width = this.config.width;
+        renderContainer.style.height = this.config.height || "100%";
+
+        renderContainer.appendChild(button);
+
+        const isSelfReplace = target.parentNode.isEqualNode(
+          document.getElementById(this.config.frameId + "-container"),
+        );
+
+        target && isSelfReplace
+          ? target.parentNode.replaceWith(renderContainer)
+          : target.replaceWith(renderContainer);
+
+        window.addEventListener("message", this.#onMessage, false);
+
+        this.#isConnected = true;
+      }
+
+      window.DocSpace.SDK.frames = window.DocSpace.SDK.frames || [];
+
+      window.DocSpace.SDK.frames[this.config.frameId] = this;
+
+      return button;
+    }
 
     initFrame(config) {
       const configFull = { ...defaultConfig, ...config };
@@ -619,6 +712,8 @@
   window.DocSpace.SDK = new DocSpace(config);
 
   if (config.init) {
-    window.DocSpace.SDK.initFrame(config);
+    config?.isButtonMode
+      ? window.DocSpace.SDK.initButton(config)
+      : window.DocSpace.SDK.initFrame(config);
   }
 })();

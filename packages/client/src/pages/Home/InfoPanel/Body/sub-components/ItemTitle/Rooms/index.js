@@ -39,9 +39,10 @@ const RoomsItemHeader = ({
   const security = infoPanelSelection ? infoPanelSelection.security : {};
   const canInviteUserInRoomAbility = security?.EditAccess;
   const showInviteUserIcon = selection?.isRoom && roomsView === "info_members";
-  const showPlanetIcon =
-    selection.roomType === RoomsType.PublicRoom ||
-    selection.roomType === RoomsType.CustomRoom;
+  const showPlanetIcon = (selection.roomType === RoomsType.PublicRoom ||
+    selection.roomType === RoomsType.CustomRoom) &&
+    selection.shared;
+
   const badgeUrl = showPlanetIcon ? Planet12ReactSvgUrl : null;
 
   const onSelectItem = () => {
@@ -78,7 +79,7 @@ const RoomsItemHeader = ({
           showDefault={showDefaultRoomIcon}
           imgClassName={`icon ${selection.isRoom && "is-room"}`}
           imgSrc={icon}
-          badgeUrl={badgeUrl}
+          badgeUrl={badgeUrl ? badgeUrl : ""}
         />
       </div>
 

@@ -151,21 +151,6 @@ const Members = ({
           setIsScrollLocked={setIsScrollLocked}
         />
       );
-    } else if (!isArchiveFolder) {
-      publicRoomItems.push(
-        <StyledLinkRow onClick={onAddNewLink} key="create-general-link">
-          <Avatar size="min" source={PlusReactSvgUrl} />
-          <Link
-            isHovered
-            type="action"
-            fontSize="14px"
-            fontWeight={600}
-            className="external-row-link"
-          >
-            {t("Files:CreateAndCopy")}
-          </Link>
-        </StyledLinkRow>
-      );
     }
 
     if (additionalLinks.length) {
@@ -178,7 +163,7 @@ const Members = ({
           />
         );
       });
-    } else if (!isArchiveFolder && primaryLink) {
+    } else if (!isArchiveFolder && !primaryLink) {
       publicRoomItems.push(
         <StyledLinkRow
           key="create-additional-link"

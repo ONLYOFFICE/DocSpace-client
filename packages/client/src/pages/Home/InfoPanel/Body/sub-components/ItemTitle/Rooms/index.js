@@ -28,6 +28,7 @@ const RoomsItemHeader = ({
   setSelected,
   setBufferSelection,
   isArchive,
+  hasLinks,
 }) => {
   const itemTitleRef = useRef();
 
@@ -39,9 +40,10 @@ const RoomsItemHeader = ({
   const security = infoPanelSelection ? infoPanelSelection.security : {};
   const canInviteUserInRoomAbility = security?.EditAccess;
   const showInviteUserIcon = selection?.isRoom && roomsView === "info_members";
-  const showPlanetIcon = (selection.roomType === RoomsType.PublicRoom ||
-    selection.roomType === RoomsType.CustomRoom) &&
-    selection.shared;
+  const showPlanetIcon =
+    (selection.roomType === RoomsType.PublicRoom ||
+      selection.roomType === RoomsType.CustomRoom) &&
+    hasLinks;
 
   const badgeUrl = showPlanetIcon ? Planet12ReactSvgUrl : null;
 
@@ -109,8 +111,15 @@ const RoomsItemHeader = ({
 };
 
 export default inject(
-  ({ auth, dialogsStore, selectedFolderStore, filesStore }) => {
+  ({
+    auth,
+    dialogsStore,
+    selectedFolderStore,
+    filesStore,
+    publicRoomStore,
+  }) => {
     const { infoPanelSelection, roomsView } = auth.infoPanelStore;
+    const { externalLinks } = publicRoomStore;
 
     const selection = infoPanelSelection.length > 1 ? null : infoPanelSelection;
     const isArchive = selection?.rootFolderType === FolderType.Archive;
@@ -135,6 +144,7 @@ export default inject(
       setSelected: filesStore.setSelected,
       setBufferSelection: filesStore.setBufferSelection,
       isArchive,
+      hasLinks: externalLinks.length,
     };
   }
 )(

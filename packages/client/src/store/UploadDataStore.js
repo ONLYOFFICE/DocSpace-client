@@ -929,21 +929,21 @@ class UploadDataStore {
     if (!this.isParallel) {
       uploadedSize = uploaded
         ? fileSize
-        : index * this.settingsStore.chunkUploadSize;
+        : index * this.filesSettingsStore.chunkUploadSize;
 
       newPercent = this.getNewPercent(uploadedSize, indexOfFile);
     } else {
       if (!uploaded) {
         uploadedSize =
-          fileSize <= this.settingsStore.chunkUploadSize
+          fileSize <= this.filesSettingsStore.chunkUploadSize
             ? fileSize
-            : this.settingsStore.chunkUploadSize;
+            : this.filesSettingsStore.chunkUploadSize;
       } else {
         uploadedSize = isFinalize
           ? 0
-          : fileSize <= this.settingsStore.chunkUploadSize
+          : fileSize <= this.filesSettingsStore.chunkUploadSize
             ? fileSize
-            : fileSize - index * this.settingsStore.chunkUploadSize;
+            : fileSize - index * this.filesSettingsStore.chunkUploadSize;
       }
       newPercent = this.getFilesPercent(uploadedSize);
     }
@@ -1138,7 +1138,7 @@ class UploadDataStore {
     operationId,
     toFolderId
   ) => {
-    const { chunkUploadCount: asyncChunkUploadCount } = this.settingsStore;
+    const { chunkUploadCount: asyncChunkUploadCount } = this.filesSettingsStore;
     const length = requestsDataArray.length;
 
     const isThirdPartyFolder = typeof toFolderId === "string";
@@ -1234,7 +1234,7 @@ class UploadDataStore {
       // console.log("IS PARALLEL");
       const notUploadedFiles = this.files.filter((f) => !f.inAction);
 
-      const { chunkUploadCount } = this.settingsStore;
+      const { chunkUploadCount } = this.filesSettingsStore;
 
       const countFiles =
         notUploadedFiles.length >= chunkUploadCount

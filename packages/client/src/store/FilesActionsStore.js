@@ -2099,7 +2099,7 @@ class FilesActionStore {
 
   onMarkAsRead = (item) => this.markAsRead([], [`${item.id}`], item);
 
-  openFileAction = (item) => {
+  openFileAction = (item, t) => {
     const { openDocEditor, isPrivacyFolder, setSelection } = this.filesStore;
     const { currentDeviceType } = this.authStore.settingsStore;
     const { fileItemsList } = this.pluginStore;
@@ -2232,6 +2232,11 @@ class FilesActionStore {
             : true;
           if (correctDevice) return currPluginItem.onClick(item);
         }
+      }
+
+      if (!item.security.Download) {
+        toastr.error(t("Files:FileDownloadingIsRestricted"));
+        return;
       }
 
       return window.open(viewUrl, "_self");

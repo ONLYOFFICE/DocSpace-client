@@ -102,28 +102,25 @@ const StyledLinkRow = styled.div`
   }
 
   .avatar-wrapper {
-    ${({ isPrimary, theme }) =>
-      isPrimary &&
-      css`
-        svg {
-          path {
-            fill: ${theme.infoPanel.links.primaryColor} !important;
-          }
+    ${({ theme }) => css`
+      svg {
+        path {
+          fill: ${theme.infoPanel.links.primaryColor} !important;
         }
-      `}
+      }
+    `}
   }
 
   .avatar_role-wrapper {
-    ${({ isExpired, theme }) =>
-      css`
-        svg {
-          path {
-            fill: ${isExpired
-              ? theme.infoPanel.links.iconErrorColor
-              : theme.infoPanel.links.iconColor};
-          }
+    ${({ isExpired, theme }) => css`
+      svg {
+        path {
+          fill: ${isExpired
+            ? theme.infoPanel.links.iconErrorColor
+            : theme.infoPanel.links.iconColor};
         }
-      `}
+      }
+    `}
   }
 `;
 

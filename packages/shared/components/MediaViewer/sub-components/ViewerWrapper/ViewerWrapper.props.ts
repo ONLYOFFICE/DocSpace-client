@@ -21,11 +21,12 @@ interface ViewerWrapperProps {
   headerIcon: string;
   audioIcon: string;
 
-  onClose: VoidFunction;
-  onPrevClick: VoidFunction;
-  onNextClick: VoidFunction;
-  onDeleteClick: VoidFunction;
-  onDownloadClick: VoidFunction;
+  onClose?: VoidFunction;
+  onPrevClick?: VoidFunction;
+  onNextClick?: VoidFunction;
+  onDeleteClick?: VoidFunction;
+  onDownloadClick?: VoidFunction;
+
   onSetSelectionFile: VoidFunction;
   contextModel: () => ContextMenuModel[];
 }

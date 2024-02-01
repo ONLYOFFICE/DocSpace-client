@@ -7,13 +7,13 @@ import {
 } from "../../MediaViewer.styled";
 
 type NextButtonProps = {
-  nextClick: VoidFunction;
-  isPdfFIle: boolean;
+  nextClick?: VoidFunction;
+  isPDFFile: boolean;
 };
 
-function NextButton({ nextClick, isPdfFIle }: NextButtonProps) {
+function NextButton({ nextClick, isPDFFile }: NextButtonProps) {
   return (
-    <StyledSwitchToolbar onClick={nextClick} isPdfFIle={isPdfFIle}>
+    <StyledSwitchToolbar onClick={nextClick} isPDFFile={isPDFFile}>
       <StyledButtonScroll orientation="right">
         <MediaNextIcon />
       </StyledButtonScroll>

@@ -143,13 +143,13 @@ function MediaViewer(props: MediaViewerProps): JSX.Element | undefined {
 
       pluginContextMenuItems.forEach((item) => {
         const onClick = async (): Promise<void> => {
-          onClose();
+          onClose?.();
 
-          if (item.value.withActiveItem) setActiveFiles([targetFile.id]);
+          if (item.value.withActiveItem) setActiveFiles?.([targetFile.id]);
 
           await item.value.onClick(targetFile.id);
 
-          if (item.value.withActiveItem) setActiveFiles([]);
+          if (item.value.withActiveItem) setActiveFiles?.([]);
         };
 
         if (
@@ -177,7 +177,9 @@ function MediaViewer(props: MediaViewerProps): JSX.Element | undefined {
           key: item.key,
           disabled: false,
           ...item.value,
-          onClick,
+          onClick: () => {
+            onClick();
+          },
         });
       });
     }
@@ -220,7 +222,7 @@ function MediaViewer(props: MediaViewerProps): JSX.Element | undefined {
     if (!canDelete) return;
 
     if (!isNullOrUndefined(tempCurrentFileId)) {
-      onDelete(tempCurrentFileId);
+      onDelete?.(tempCurrentFileId);
       lastRemovedFileIdRefRef.current = tempCurrentFileId;
     }
   }, [onDelete, playlist, playlistPos, targetFile?.security?.Delete]);
@@ -232,7 +234,7 @@ function MediaViewer(props: MediaViewerProps): JSX.Element | undefined {
       (file) => file.id === playlistPos,
     )?.fileId;
 
-    if (!isNullOrUndefined(tempCurrentFileId)) onDownload(tempCurrentFileId);
+    if (!isNullOrUndefined(tempCurrentFileId)) onDownload?.(tempCurrentFileId);
   }, [onDownload, playlist, playlistPos, targetFile?.security.Download]);
 
   const onKeydown = useCallback(
@@ -257,18 +259,18 @@ function MediaViewer(props: MediaViewerProps): JSX.Element | undefined {
         case KeyboardEventKeys.ArrowLeft:
           if (document.fullscreenElement) return;
 
-          if (!ctrlKey) prevMedia();
+          if (!ctrlKey) prevMedia?.();
           break;
 
         case KeyboardEventKeys.ArrowRight:
           if (document.fullscreenElement) return;
 
-          if (!ctrlKey) nextMedia();
+          if (!ctrlKey) nextMedia?.();
 
           break;
 
         case KeyboardEventKeys.Escape:
-          if (!deleteDialogVisible) onClose();
+          if (!deleteDialogVisible) onClose?.();
           break;
 
         case KeyboardEventKeys.KeyS:
@@ -314,7 +316,7 @@ function MediaViewer(props: MediaViewerProps): JSX.Element | undefined {
   }, []);
 
   const onSetSelectionFile = useCallback(() => {
-    setBufferSelection(targetFile);
+    setBufferSelection?.(targetFile);
   }, [setBufferSelection, targetFile]);
 
   useEffect(() => {
@@ -328,7 +330,7 @@ function MediaViewer(props: MediaViewerProps): JSX.Element | undefined {
     const fileId = playlist[playlistPos]?.fileId;
 
     if (!isNullOrUndefined(fileId) && currentFileId !== fileId) {
-      onChangeUrl(fileId);
+      onChangeUrl?.(fileId);
     }
   }, [playlistPos, onChangeUrl, playlist, currentFileId]);
 
@@ -342,7 +344,7 @@ function MediaViewer(props: MediaViewerProps): JSX.Element | undefined {
     const { src, title: currentTitle, fileId } = playlist[playlistPos];
     const extension = getFileExtension(currentTitle);
 
-    if (!src) return onEmptyPlaylistError();
+    if (!src) return onEmptyPlaylistError?.();
 
     if (extension !== ".tif" && extension !== ".tiff") {
       TiffAbortSignalRef.current?.abort();
@@ -358,7 +360,7 @@ function MediaViewer(props: MediaViewerProps): JSX.Element | undefined {
 
     if (!isNullOrUndefined(foundFile)) {
       setTargetFile(foundFile);
-      setBufferSelection(foundFile);
+      setBufferSelection?.(foundFile);
     }
 
     setTitle(currentTitle);

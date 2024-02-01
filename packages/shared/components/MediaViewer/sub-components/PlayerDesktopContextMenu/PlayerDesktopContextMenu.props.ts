@@ -7,7 +7,7 @@ interface PlayerDesktopContextMenuProps {
   canDownload: boolean;
   isPreviewFile: boolean;
   hideContextMenu: boolean;
-  onDownloadClick: VoidFunction;
+  onDownloadClick?: VoidFunction;
 }
 
 export default PlayerDesktopContextMenuProps;

@@ -18,9 +18,9 @@ interface ImageViewerProps {
   toolbar: ReturnType<typeof getCustomToolbar>;
   devices: DevicesType;
 
-  onPrev: VoidFunction;
-  onNext: VoidFunction;
-  onMask: VoidFunction;
+  onPrev?: VoidFunction;
+  onNext?: VoidFunction;
+  onMask?: VoidFunction;
   contextModel: () => ContextMenuModel[];
   resetToolbarVisibleTimer: VoidFunction;
   setIsOpenContextMenu: Dispatch<SetStateAction<boolean>>;

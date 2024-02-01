@@ -18,10 +18,10 @@ interface ViewerPlayerProps {
   mobileDetails: JSX.Element;
   thumbnailSrc?: string;
   devices: DevicesType;
-  onMask: VoidFunction;
-  onPrev: VoidFunction;
-  onNext: VoidFunction;
-  onDownloadClick: VoidFunction;
+  onMask?: VoidFunction;
+  onPrev?: VoidFunction;
+  onNext?: VoidFunction;
+  onDownloadClick?: VoidFunction;
   contextModel: () => ContextMenuModel[];
   removeToolbarVisibleTimer: VoidFunction;
   removePanelVisibleTimeout: VoidFunction;

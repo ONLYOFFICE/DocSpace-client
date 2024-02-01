@@ -35,7 +35,7 @@ function PlayerMessageError({
             const onClick = (
               event: React.MouseEvent<HTMLDivElement, MouseEvent>,
             ) => {
-              onMaskClick();
+              onMaskClick?.();
               item.onClick?.(event);
             };
 

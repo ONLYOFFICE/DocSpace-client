@@ -17,8 +17,8 @@ import { ToolbarActionType } from "../MediaViewer.enums";
 export const getCustomToolbar = (
   targetFile: TFile,
   isEmptyContextMenu: boolean,
-  onDeleteClick: VoidFunction,
-  onDownloadClick: VoidFunction,
+  onDeleteClick?: VoidFunction,
+  onDownloadClick?: VoidFunction,
 ) => {
   return [
     {

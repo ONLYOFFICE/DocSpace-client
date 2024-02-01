@@ -18,7 +18,7 @@ export type DevicesType = {
   isDesktop: boolean;
 };
 
-export type ContextFunctions = {
+export type ContextFunctions = Partial<{
   onClickDownloadAs: VoidFunction;
   onMoveAction: VoidFunction;
   onCopyAction: VoidFunction;
@@ -30,7 +30,7 @@ export type ContextFunctions = {
   onPreviewClick: OmitSecondArg<ContextMenuAction>;
   onCopyLink: ContextMenuAction;
   onShowInfoPanel: OmitSecondArg<ContextMenuAction>;
-};
+}>;
 
 export type PlaylistType = {
   id: number;
@@ -61,20 +61,15 @@ export interface MediaViewerProps {
 
   visible: boolean;
 
-  extsMediaPreviewed: string[];
   extsImagePreviewed: string[];
 
-  deleteDialogVisible: boolean;
-  errorLabel: string;
-  isPreviewFile: boolean;
-
   files: TFile[];
-
   playlist: PlaylistType[];
-
-  archiveRoomsId: number;
-
   playlistPos: number;
+
+  deleteDialogVisible?: boolean;
+  isPreviewFile: boolean;
+  archiveRoomsId?: number;
 
   pluginContextMenuItems?: {
     key: string;
@@ -87,30 +82,28 @@ export interface MediaViewerProps {
     };
   }[];
 
-  setActiveFiles: (files: number[], destId?: number) => void;
-  setBufferSelection: (file?: TFile | null) => void;
-
   getIcon: (size: number, ext: string, ...arg: unknown[]) => string;
 
-  onClose: VoidFunction;
+  onClose?: VoidFunction;
   onError?: VoidFunction;
-  onEmptyPlaylistError: VoidFunction;
-  onChangeUrl: (id: NumberOrString) => void;
-  onShowInfoPanel: OmitSecondArg<ContextMenuAction>;
-  onDelete: (id: NumberOrString) => void;
-  onDownload: (id: NumberOrString) => void;
+  nextMedia?: VoidFunction;
+  prevMedia?: VoidFunction;
+  onMoveAction?: VoidFunction;
+  onCopyAction?: VoidFunction;
+  onCopyLink?: ContextMenuAction;
+  onDuplicate?: ContextMenuAction;
+  onClickDownloadAs?: VoidFunction;
+  onClickDelete?: ContextMenuAction;
+  onClickDownload?: ContextMenuAction;
+  onEmptyPlaylistError?: VoidFunction;
+  onDelete?: (id: NumberOrString) => void;
+  onDownload?: (id: NumberOrString) => void;
+  onChangeUrl?: (id: NumberOrString) => void;
+  onClickRename?: OmitSecondArg<ContextMenuAction>;
+  onPreviewClick?: OmitSecondArg<ContextMenuAction>;
+  onClickLinkEdit?: OmitSecondArg<ContextMenuAction>;
+  onShowInfoPanel?: OmitSecondArg<ContextMenuAction>;
 
-  onClickDownloadAs: VoidFunction;
-  onMoveAction: VoidFunction;
-  onCopyAction: VoidFunction;
-  onClickRename: OmitSecondArg<ContextMenuAction>;
-  onDuplicate: ContextMenuAction;
-  onClickDelete: ContextMenuAction;
-  onClickDownload: ContextMenuAction;
-  onClickLinkEdit: OmitSecondArg<ContextMenuAction>;
-  onPreviewClick: OmitSecondArg<ContextMenuAction>;
-  onCopyLink: ContextMenuAction;
-
-  nextMedia: VoidFunction;
-  prevMedia: VoidFunction;
+  setBufferSelection?: (file?: TFile | null) => void;
+  setActiveFiles?: (files: number[], destId?: number) => void;
 }

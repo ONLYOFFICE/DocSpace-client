@@ -10,7 +10,7 @@ type StyledButtonScrollProps = {
 
 type StyledSwitchToolbarProps = {
   left?: boolean;
-  isPdfFIle?: boolean;
+  isPDFFile?: boolean;
 };
 
 type StyledViewerContainerProps = {
@@ -116,7 +116,7 @@ export const StyledSwitchToolbar = styled.div<StyledSwitchToolbarProps>`
   transition: all 0.3s;
 
   ${(props) =>
-    props.left ? "left: 0" : props.isPdfFIle ? "right: 20px" : "right: 0"};
+    props.left ? "left: 0" : props.isPDFFile ? "right: 20px" : "right: 0"};
 
   &:hover {
     cursor: pointer;

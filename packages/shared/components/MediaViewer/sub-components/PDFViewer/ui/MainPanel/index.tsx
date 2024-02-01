@@ -50,10 +50,10 @@ function MainPanel(
         const width = window.innerWidth;
 
         if (mdx < -width / 4) {
-          return onNext();
+          return onNext?.();
         }
         if (mdx > width / 4) {
-          return onPrev();
+          return onPrev?.();
         }
 
         api.start({ x: 0 });

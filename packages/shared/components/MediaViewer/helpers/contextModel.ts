@@ -25,7 +25,7 @@ export const getPDFContextModel = (
       key: "edit",
       label: t("Common:EditButton"),
       icon: AccessEditReactSvgUrl,
-      onClick: () => funcs.onClickLinkEdit(item),
+      onClick: () => funcs.onClickLinkEdit?.(item),
       disabled: !item.viewAccessibility.WebEdit,
     },
     {
@@ -33,7 +33,7 @@ export const getPDFContextModel = (
       key: "preview",
       label: t("Common:Preview"),
       icon: EyeReactSvgUrl,
-      onClick: () => funcs.onPreviewClick(item),
+      onClick: () => funcs.onPreviewClick?.(item),
       disabled: !item.security.Read,
     },
     {
@@ -46,7 +46,7 @@ export const getPDFContextModel = (
       key: "link-for-room-members",
       label: t("Files:CopyLink"),
       icon: InvitationLinkReactSvgUrl,
-      onClick: () => funcs.onCopyLink(item, t),
+      onClick: () => funcs.onCopyLink?.(item, t),
       disabled: false,
     },
     {
@@ -62,14 +62,14 @@ export const getPDFContextModel = (
       key: "copy",
       label: t("Common:Duplicate"),
       icon: DuplicateReactSvgUrl,
-      onClick: () => funcs.onDuplicate(item, t),
+      onClick: () => funcs.onDuplicate?.(item, t),
       disabled: !item.security.Duplicate,
     },
     {
       key: "download",
       label: t("Common:Download"),
       icon: DownloadReactSvgUrl,
-      onClick: () => funcs.onClickDownload(item, t),
+      onClick: () => funcs.onClickDownload?.(item, t),
       disabled: !item.security.Download,
     },
     {
@@ -85,7 +85,7 @@ export const getPDFContextModel = (
       key: "rename",
       label: t("Common:Rename"),
       icon: RenameReactSvgUrl,
-      onClick: () => funcs.onClickRename(item),
+      onClick: () => funcs.onClickRename?.(item),
       disabled: !item.security.Rename,
     },
     {
@@ -97,7 +97,7 @@ export const getPDFContextModel = (
       key: "delete",
       label: t("Common:Delete"),
       icon: TrashReactSvgUrl,
-      onClick: () => funcs.onClickDelete(item, t),
+      onClick: () => funcs.onClickDelete?.(item, t),
       disabled: !item.security.Delete,
     },
   ];
@@ -130,7 +130,7 @@ export const getMobileMediaContextModel = (
       label: t("Common:Info"),
       icon: InfoOutlineReactSvgUrl,
       onClick: () => {
-        return onShowInfoPanel(targetFile);
+        return onShowInfoPanel?.(targetFile);
       },
       disabled: false,
     },
@@ -138,7 +138,7 @@ export const getMobileMediaContextModel = (
       key: "download",
       label: t("Common:Download"),
       icon: DownloadReactSvgUrl,
-      onClick: () => onClickDownload(targetFile, t),
+      onClick: () => onClickDownload?.(targetFile, t),
       disabled: false,
     },
     {
@@ -161,14 +161,14 @@ export const getMobileMediaContextModel = (
       key: "copy",
       label: t("Common:Duplicate"),
       icon: DuplicateReactSvgUrl,
-      onClick: () => onDuplicate(targetFile, t),
+      onClick: () => onDuplicate?.(targetFile, t),
       disabled: !targetFile.security.Duplicate,
     },
     {
       key: "rename",
       label: t("Common:Rename"),
       icon: RenameReactSvgUrl,
-      onClick: () => onClickRename(targetFile),
+      onClick: () => onClickRename?.(targetFile),
       disabled: !targetFile.security.Rename,
     },
 
@@ -181,7 +181,7 @@ export const getMobileMediaContextModel = (
       key: "delete",
       label: t("Common:Delete"),
       icon: TrashReactSvgUrl,
-      onClick: () => onClickDelete(targetFile, t),
+      onClick: () => onClickDelete?.(targetFile, t),
       disabled: !targetFile.security.Delete,
     },
   ];
@@ -205,21 +205,21 @@ export const getDesktopMediaContextModel = (
       key: "download",
       label: t("Common:Download"),
       icon: DownloadReactSvgUrl,
-      onClick: () => onClickDownload(targetFile, t),
+      onClick: () => onClickDownload?.(targetFile, t),
       disabled: false,
     },
     {
       key: "rename",
       label: t("Common:Rename"),
       icon: RenameReactSvgUrl,
-      onClick: () => onClickRename(targetFile),
+      onClick: () => onClickRename?.(targetFile),
       disabled: archiveRoom,
     },
     {
       key: "delete",
       label: t("Common:Delete"),
       icon: TrashReactSvgUrl,
-      onClick: () => onClickDelete(targetFile, t),
+      onClick: () => onClickDelete?.(targetFile, t),
       disabled: archiveRoom,
     },
   ];

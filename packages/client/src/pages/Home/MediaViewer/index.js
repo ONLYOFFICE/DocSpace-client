@@ -261,7 +261,6 @@ const FilesMediaViewer = (props) => {
         getIcon={getIcon}
         onEmptyPlaylistError={onMediaViewerClose}
         deleteDialogVisible={deleteDialogVisible}
-        extsMediaPreviewed={extsMediaPreviewed}
         extsImagePreviewed={extsImagePreviewed}
         isPreviewFile={firstLoad}
         onChangeUrl={onChangeUrl}

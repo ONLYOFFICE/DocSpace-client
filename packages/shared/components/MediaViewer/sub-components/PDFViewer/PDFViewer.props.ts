@@ -22,8 +22,8 @@ interface PDFViewerProps {
   setIsOpenContextMenu: Dispatch<SetStateAction<boolean>>;
   setIsPDFSidebarOpen: Dispatch<SetStateAction<boolean>>;
 
-  onPrev: VoidFunction;
-  onNext: VoidFunction;
+  onPrev?: VoidFunction;
+  onNext?: VoidFunction;
 }
 
 export type BookMark = {

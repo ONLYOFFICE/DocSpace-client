@@ -7,7 +7,7 @@ import {
 } from "../../MediaViewer.styled";
 
 type PrevButtonProps = {
-  prevClick: VoidFunction;
+  prevClick?: VoidFunction;
 };
 
 function PrevButton({ prevClick }: PrevButtonProps) {

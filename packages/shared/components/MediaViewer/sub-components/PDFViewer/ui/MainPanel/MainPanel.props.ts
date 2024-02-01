@@ -6,8 +6,8 @@ interface MainPanelProps {
   isFistImage: boolean;
 
   setZoom: (scale: number) => void;
-  onPrev: VoidFunction;
-  onNext: VoidFunction;
+  onPrev?: VoidFunction;
+  onNext?: VoidFunction;
 }
 
 export default MainPanelProps;

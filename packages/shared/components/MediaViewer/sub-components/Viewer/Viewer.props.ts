@@ -22,11 +22,11 @@ interface ViewerProps {
   toolbar: ReturnType<typeof getCustomToolbar>;
   playlistPos: number;
   isPreviewFile: boolean;
-  onMaskClick: VoidFunction;
-  onNextClick: VoidFunction;
-  onPrevClick: VoidFunction;
+  onMaskClick?: VoidFunction;
+  onNextClick?: VoidFunction;
+  onPrevClick?: VoidFunction;
   contextModel: () => ContextMenuModel[];
-  onDownloadClick: VoidFunction;
+  onDownloadClick?: VoidFunction;
   generateContextMenu: (
     isOpen: boolean,
     right?: string,

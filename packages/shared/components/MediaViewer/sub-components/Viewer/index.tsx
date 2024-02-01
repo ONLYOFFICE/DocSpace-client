@@ -145,7 +145,7 @@ function Viewer(props: ViewerProps) {
       }
     }
 
-    onMaskClick();
+    onMaskClick?.();
   };
 
   useEffect(() => {
@@ -214,7 +214,7 @@ function Viewer(props: ViewerProps) {
             <PrevButton prevClick={onPrevClick} />
           )}
           {isNotLastElement && (
-            <NextButton isPdfFIle={isPdf} nextClick={onNextClick} />
+            <NextButton isPDFFile={isPdf} nextClick={onNextClick} />
           )}
         </>
       )}

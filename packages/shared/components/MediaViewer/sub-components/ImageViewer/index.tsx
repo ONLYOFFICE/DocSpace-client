@@ -506,13 +506,13 @@ function ImageViewer({
 
         if (style.scale.get() === 1 && !isDesktop) {
           if (mdx < -imgRef.current.width / 4) {
-            return onNext();
+            return onNext?.();
           }
           if (mdx > imgRef.current.width / 4) {
-            return onPrev();
+            return onPrev?.();
           }
           if (mdy > 150) {
-            return onMask();
+            return onMask?.();
           }
         }
 
@@ -658,7 +658,7 @@ function ImageViewer({
 
       onClick: ({ pinching, event }) => {
         if (isDesktopDeviceDetect && event.target === imgWrapperRef.current)
-          return onMask();
+          return onMask?.();
 
         if (
           !imgRef.current ||

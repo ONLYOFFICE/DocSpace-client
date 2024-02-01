@@ -153,14 +153,14 @@ function ViewerPlayer({
 
         if (!isFullScreen) {
           if (mdx < -style.width.get() / 4) {
-            return onNext();
+            return onNext?.();
           }
           if (mdx > style.width.get() / 4) {
-            return onPrev();
+            return onPrev?.();
           }
         }
         if (mdy > 120) {
-          return onMask();
+          return onMask?.();
         }
 
         const newPoint = calculateAdjustImage({
@@ -175,7 +175,7 @@ function ViewerPlayer({
       },
       onClick: ({ dragging, event }) => {
         if (isDesktopDeviceDetect && event.target === containerRef.current)
-          return onMask();
+          return onMask?.();
 
         if (
           dragging ||

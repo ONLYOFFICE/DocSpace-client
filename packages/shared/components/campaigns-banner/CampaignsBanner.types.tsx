@@ -32,7 +32,7 @@ interface IStyle {
 interface IAction {
   isButton?: boolean;
   backgroundColor?: string;
-  url: string;
+  url?: string;
   type?: string;
 }
 
@@ -40,5 +40,5 @@ interface IConfig {
   borderColor?: string;
   title?: IStyle;
   body?: IStyle;
-  action: IStyle & IAction;
+  action?: IStyle & IAction;
 }

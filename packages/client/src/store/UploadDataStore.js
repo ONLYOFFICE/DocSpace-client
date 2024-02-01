@@ -93,7 +93,7 @@ class UploadDataStore {
   removeFiles = (fileIds) => {
     fileIds.forEach((id) => {
       this.files = this.files?.filter(
-        (file) => !(file.action === "converted" && file.fileInfo.id === id)
+        (file) => !(file.action === "converted" && file.fileInfo?.id === id)
       );
     });
   };
@@ -464,7 +464,7 @@ class UploadDataStore {
         while (progress < 100) {
           const res = await this.getConversationProgress(fileId);
           progress = res && res[0] && res[0].progress;
-          fileInfo = res && res[0].result;
+          fileInfo = res && res[0] && res[0].result;
 
           runInAction(() => {
             const file = this.files.find((file) => file.fileId === fileId);
@@ -1055,8 +1055,11 @@ class UploadDataStore {
             chunkObjIndex
           ].onUpload();
 
-        this.asyncUploadObj[operationId].chunksArray[chunkObjIndex].isFinished =
-          true;
+        if (this.asyncUploadObj[operationId]) {
+          this.asyncUploadObj[operationId].chunksArray[
+            chunkObjIndex
+          ].isFinished = true;
+        }
 
         if (!res.data.data && res.data.message) {
           delete this.asyncUploadObj[operationId];
@@ -1082,9 +1085,12 @@ class UploadDataStore {
           true
         );
 
-        const finalizeChunk = this.asyncUploadObj[
-          operationId
-        ].chunksArray.findIndex((x) => !x.isFinished && !x.isFinalize);
+        let finalizeChunk = -1;
+        if (this.asyncUploadObj[operationId]) {
+          finalizeChunk = this.asyncUploadObj[
+            operationId
+          ].chunksArray.findIndex((x) => !x.isFinished && !x.isFinalize);
+        }
 
         if (finalizeChunk === -1) {
           const finalizeChunkIndex = this.asyncUploadObj[

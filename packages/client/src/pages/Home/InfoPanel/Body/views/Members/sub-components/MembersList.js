@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect, useRef, memo } from "react";
 import styled, { useTheme } from "styled-components";
 import { FixedSizeList as List, areEqual } from "react-window";
 import InfiniteLoader from "react-window-infinite-loader";
-import Loaders from "@docspace/common/components/Loaders";
+import { RowLoader } from "@docspace/shared/skeletons/selector";
 import { CustomScrollbarsVirtualList } from "@docspace/shared/components/scrollbar";
 import { isMobile } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
@@ -31,11 +31,7 @@ const Item = memo(({ data, index, style }) => {
   if (!item) {
     return (
       <div style={{ ...style, width: "calc(100% - 20px)", margin: "0 -16px" }}>
-        <Loaders.SelectorRowLoader
-          isMultiSelect={false}
-          isContainer={true}
-          isUser={true}
-        />
+        <RowLoader isMultiSelect={false} isContainer={true} isUser={true} />
       </div>
     );
   }
@@ -119,7 +115,7 @@ const MembersList = (props) => {
     (index) => {
       return !hasNextPage || index < itemsCount;
     },
-    [hasNextPage, itemsCount]
+    [hasNextPage, itemsCount],
   );
 
   const loadMoreItems = useCallback(
@@ -130,7 +126,7 @@ const MembersList = (props) => {
       }
       setIsNextPageLoading(false);
     },
-    [isNextPageLoading, loadNextPage]
+    [isNextPageLoading, loadNextPage],
   );
 
   const onScroll = (e) => {

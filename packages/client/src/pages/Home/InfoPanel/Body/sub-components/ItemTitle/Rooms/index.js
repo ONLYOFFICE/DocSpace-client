@@ -119,7 +119,7 @@ export default inject(
     infoPanelStore,
     publicRoomStore,
   }) => {
-    const { infoPanelSelection, roomsView } = infoPanelStore;
+    const { infoPanelSelection, roomsView, setIsMobileHidden } = infoPanelStore;
     const { externalLinks } = publicRoomStore;
 
     const selection = infoPanelSelection.length > 1 ? null : infoPanelSelection;

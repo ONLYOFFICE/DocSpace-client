@@ -3212,6 +3212,7 @@ export const getBaseTheme = () => {
 
     sdkPresets: {
       borderColor: "#d0d5da",
+      secondaryColor: "#657077",
     },
   };
 };

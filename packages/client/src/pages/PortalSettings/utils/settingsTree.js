@@ -339,8 +339,8 @@ export const settingsTree = [
             id: "portal-settings_catalog-javascript-sdk_simple-room",
             key: "5-1-0",
             icon: "",
-            link: "simple-room",
-            tKey: "JavascriptSdk:SimpleRoom",
+            link: "room",
+            tKey: "Common:Room",
           },
           {
             id: "portal-settings_catalog-javascript-sdk_manager",

@@ -21,6 +21,12 @@ import RoomSelectorImg from "PUBLIC_DIR/images/sdk-presets_room-selector.react.s
 import FileSelectorImg from "PUBLIC_DIR/images/sdk-presets_file-selector.react.svg?url";
 import EditorImg from "PUBLIC_DIR/images/sdk-presets_editor.react.svg?url";
 import ViewerImg from "PUBLIC_DIR/images/sdk-presets_viewer.react.svg?url";
+import SimpleRoomImgDark from "PUBLIC_DIR/images/sdk-presets_simple-room_dark.react.svg?url";
+import ManagerImgDark from "PUBLIC_DIR/images/sdk-presets_manager_dark.react.svg?url";
+import RoomSelectorImgDark from "PUBLIC_DIR/images/sdk-presets_room-selector_dark.react.svg?url";
+import FileSelectorImgDark from "PUBLIC_DIR/images/sdk-presets_file-selector_dark.react.svg?url";
+import EditorImgDark from "PUBLIC_DIR/images/sdk-presets_editor_dark.react.svg?url";
+import ViewerImgDark from "PUBLIC_DIR/images/sdk-presets_viewer_dark.react.svg?url";
 
 const SDKContainer = styled(Box)`
   @media ${tablet} {
@@ -76,7 +82,7 @@ const PresetsContainer = styled.div`
 `;
 
 const PortalIntegration = (props) => {
-  const { t, setDocumentTitle, currentColorScheme, sdkLink } = props;
+  const { t, setDocumentTitle, currentColorScheme, sdkLink, theme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
@@ -91,39 +97,39 @@ const PortalIntegration = (props) => {
 
   const presetsData = [
     {
-      title: t("SimpleRoom"),
+      title: t("Common:Room"),
       description: t("SimpleRoomDescription"),
-      image: SimpleRoomImg,
+      image: theme.isBase ? SimpleRoomImg : SimpleRoomImgDark,
       handleOnClick: navigateToSimpleRoom,
     },
     {
       title: t("Manager"),
       description: t("ManagerDescription"),
-      image: ManagerImg,
+      image: theme.isBase ? ManagerImg : ManagerImgDark,
       handleOnClick: navigateToManager,
     },
     {
       title: t("Editor"),
       description: t("EditorDescription"),
-      image: EditorImg,
+      image: theme.isBase ? EditorImg : EditorImgDark,
       handleOnClick: navigateToEditor,
     },
     {
       title: t("Viewer"),
       description: t("ViewerDescription"),
-      image: ViewerImg,
+      image: theme.isBase ? ViewerImg : ViewerImgDark,
       handleOnClick: navigateToViewer,
     },
     {
       title: t("RoomSelector"),
       description: t("RoomSelectorDescription"),
-      image: RoomSelectorImg,
+      image: theme.isBase ? RoomSelectorImg : RoomSelectorImgDark,
       handleOnClick: navigateToRoomSelector,
     },
     {
       title: t("FileSelector"),
       description: t("FileSelectorDescription"),
-      image: FileSelectorImg,
+      image: theme.isBase ? FileSelectorImg : FileSelectorImgDark,
       handleOnClick: navigateToFileSelector,
     },
   ];
@@ -143,7 +149,9 @@ const PortalIntegration = (props) => {
         <CSP t={t} />
       </CategoryDescription>
       <CategoryHeader>{t("CreateSampleHeader")}</CategoryHeader>
-      <Text lineHeight="20px">{t("InitializeSDK")}</Text>
+      <Text lineHeight="20px" color={theme.sdkPresets.secondaryColor}>
+        {t("InitializeSDK")}
+      </Text>
       <PresetsContainer>
         {presetsData.map((data) => (
           <PresetTile

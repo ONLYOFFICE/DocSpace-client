@@ -3184,9 +3184,10 @@ const Dark: TTheme = {
     pluginName: "#A3A9AE",
     descriptionColor: "#ADADAD",
   },
-  
+
   sdkPresets: {
-    borderColor: "#d0d5da",
+    borderColor: "#474747",
+    secondaryColor: "#ADADAD",
   },
 };
 

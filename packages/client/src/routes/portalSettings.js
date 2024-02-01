@@ -310,7 +310,7 @@ const PortalSettingsRoutes = {
       element: <DeveloperTools />,
     },
     {
-      path: "developer-tools/javascript-sdk/simple-room",
+      path: "developer-tools/javascript-sdk/room",
       element: <SimpleRoom />,
     },
     {

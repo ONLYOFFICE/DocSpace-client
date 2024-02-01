@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import { isMobile, mobile, tablet } from "@docspace/shared/utils/device";
 import { Box } from "@docspace/shared/components/box";
+import Base from "@docspace/shared/themes/base";
 
 export const SDKContainer = styled(Box)`
   @media ${tablet} {
@@ -99,7 +100,7 @@ export const ControlsGroup = styled(Box)`
   flex-direction: column;
   gap: 8px;
 
-  .toggle{
+  .toggle {
     position: relative;
   }
 
@@ -131,7 +132,7 @@ export const Frame = styled(Box)`
   position: relative;
 
   border-radius: 6px;
-  border: 1px solid #d0d5da;
+  border: 1px solid ${(props) => props.theme.sdkPresets.borderColor};
 
   width: ${(props) => (props.width ? props.width : "100%")};
   height: calc(${(props) => (props.height ? props.height : "400px")} + 2px);
@@ -153,6 +154,8 @@ export const Frame = styled(Box)`
     margin-top: 4px;
   `}
 `;
+
+Frame.defaultProps = { theme: Base };
 
 export const Container = styled(Box)`
   width: 100%;

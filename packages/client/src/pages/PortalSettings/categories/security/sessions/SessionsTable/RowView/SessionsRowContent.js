@@ -1,71 +1,20 @@
 import styled, { css } from "styled-components";
 import { Text } from "@docspace/shared/components/text";
-import { Box } from "@docspace/shared/components/box";
 import { RowContent } from "@docspace/shared/components/row-content";
-import { tablet, mobile } from "@docspace/shared/utils";
 
 const StyledRowContent = styled(RowContent)`
-  .rowMainContainer {
-    height: 100%;
-    width: 100%;
+  .online {
+    font-weight: 600;
+    color: ${(props) => props.theme.activeSessions.textOnlineColor};
+    margin-left: 4px;
+    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
   }
 
-  @media ${tablet} {
-    .row-main-container-wrapper {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      max-width: inherit;
-    }
-  }
-
-  @media ${mobile} {
-    .row-main-container-wrapper {
-      justify-content: flex-start;
-    }
-  }
-
-  .session-info-wrapper {
-    min-width: 250px;
-    .session-info {
-      font-weight: 600;
-      color: ${(props) => props.theme.activeSessions.tableCellColor};
-      font-size: 12px;
-    }
-
-    .online {
-      font-weight: 600;
-      color: ${(props) => props.theme.activeSessions.textOnlineColor};
-      margin-left: 4px;
-      font-size: 14px;
-    }
-
-    .offline {
-      font-weight: 600;
-      color: ${(props) => props.theme.activeSessions.tableCellColor};
-      font-size: 14px;
-      margin-left: 4px;
-    }
-
-    .username {
-      font-weight: 600;
-      color: ${(props) => props.theme.activeSessions.color};
-      font-size: 14px;
-    }
-
-    .additional-row-content {
-      display: flex;
-      align-items: center;
-    }
-
-    .browser,
-    .city {
-      margin-left: 4px;
-    }
-
-    .vr {
-      margin: 0px 4px;
-    }
+  .offline {
+    font-weight: 600;
+    color: ${(props) => props.theme.activeSessions.tableCellColor};
+    font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
+    margin-left: 4px;
   }
 `;
 
@@ -83,41 +32,30 @@ const SessionsRowContent = ({ sectionWidth, item }) => {
   } = item;
 
   const isOnline = status === "Online";
-
-  const contentData = [
-    <Box key={userId} displayProp="flex" alignItems="center">
-      <Box className="session-info-wrapper">
-        <Box className="main-row-content">
-          <div className="session-info username">
-            {displayName}
-            <span className={isOnline ? "online" : "offline"}>{status}</span>
-          </div>
-        </Box>
-
-        <div className="additional-row-content">
-          <Text className="session-info">
-            {platform},
-            <span className="browser">
-              {browser}
-              <span className="vr">{"|"}</span>
-            </span>
-          </Text>
-          <Text className="session-info" truncate>
-            {country},
-            <span className="city">
-              {city}
-              <span className="vr">{"|"}</span>
-            </span>
-            <span>{ip}</span>
-          </Text>
-        </div>
-      </Box>
-    </Box>,
-  ];
+  const className = isOnline ? "online" : "offline";
 
   return (
-    <StyledRowContent sectionWidth={sectionWidth}>
-      {contentData}
+    <StyledRowContent
+      key={userId}
+      sectionWidth={sectionWidth}
+      sideColor={theme.activeSessions.tableCellColor}
+    >
+      <Text fontSize="14px" fontWeight="600">
+        {displayName}
+        <span className={className}>{status}</span>
+      </Text>
+      <></>
+      <Text fontSize="12px" fontWeight="600">
+        {platform}
+        {browser}
+      </Text>
+      <Text fontSize="12px" fontWeight="600">
+        {country}
+        {city}
+      </Text>
+      <Text fontSize="12px" fontWeight="600" containerWidth="160px">
+        {ip}
+      </Text>
     </StyledRowContent>
   );
 };

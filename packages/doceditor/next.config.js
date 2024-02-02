@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   basePath: "/doceditor",
-  reactStrictMode: false,
   logging: {
     fetches: {
       fullUrl: true,
@@ -19,8 +18,11 @@ module.exports = {
     config.module.rules.push(
       // Reapply the existing rule, but only for svg imports ending in ?url
       {
-        ...fileLoaderRule,
-        test: /\.svg$/i,
+        type: "asset/resource",
+        generator: {
+          emit: false,
+        },
+        test: /\.(svg|png|jpe?g|gif|ico|woff2)$/i,
         resourceQuery: /url/, // *.svg?url
       },
       // Convert all other *.svg imports to React components

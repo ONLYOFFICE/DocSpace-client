@@ -1,5 +1,6 @@
 import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg?url";
 
+import React from "react";
 import { Text } from "../text";
 import { Link } from "../link";
 import { IconButton } from "../icon-button";

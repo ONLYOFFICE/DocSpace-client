@@ -496,6 +496,7 @@ const FilesSelector = ({
 
   const headerLabel = getHeaderLabel(
     t,
+    isEditorDialog,
     isCopy,
     isRestoreAll,
     isMove,
@@ -506,6 +507,7 @@ const FilesSelector = ({
 
   const acceptButtonLabel = getAcceptButtonLabel(
     t,
+    isEditorDialog,
     isCopy,
     isRestoreAll,
     isMove,

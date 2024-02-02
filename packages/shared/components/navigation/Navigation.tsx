@@ -10,7 +10,6 @@ import ArrowButton from "./sub-components/ArrowBtn";
 import Text from "./sub-components/Text";
 import ControlButtons from "./sub-components/ControlBtn";
 import ToggleInfoPanelButton from "./sub-components/ToggleInfoPanelBtn";
-import TrashWarning from "./sub-components/TrashWarning";
 import NavigationLogo from "./sub-components/LogoBlock";
 import DropBox from "./sub-components/DropBox";
 
@@ -261,11 +260,9 @@ const Navigation = ({
               onNavigationButtonClick={onNavigationButtonClick}
               tariffBar={tariffBar}
               title={title}
+              isEmptyPage={isEmptyPage}
             />
           </StyledContainer>
-          {isDesktop && isTrashFolder && !isEmptyPage && (
-            <TrashWarning title={titles.trashWarning} />
-          )}
           {infoPanelIsVisible && !hideInfoPanel && (
             <ToggleInfoPanelButton
               id="info-panel-toggle--open"

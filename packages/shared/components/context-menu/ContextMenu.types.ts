@@ -107,6 +107,7 @@ export interface ContextMenuProps {
   isRoom?: boolean;
   isArchive?: boolean;
   ref?: React.RefObject<HTMLDivElement>;
+  badgeUrl?: string;
 }
 
 export type TContextMenuRef = {

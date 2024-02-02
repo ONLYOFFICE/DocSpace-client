@@ -105,8 +105,8 @@ export default inject(
   ({
     authStore,
     settingsStore,
-    currentTariffStatusStore,
     currentQuotaStore,
+    currentTariffStatusStore,
   }) => {
     const {
       isPaymentPageAvailable,

@@ -119,7 +119,7 @@ const ReportDialog = (props) => {
           onChange={onChangeTextareaValue}
           autoFocus
           areaSelect
-          heightTextArea={72}
+          heightTextArea="72px"
           fontSize={13}
         />
         <div className="report-wrapper">
@@ -160,13 +160,13 @@ const ReportDialog = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { user, currentDeviceType } = auth.userStore;
-  const { firebaseHelper } = auth.settingsStore;
+export default inject(({ authStore, settingsStore, userStore }) => {
+  const { user } = userStore;
+  const { firebaseHelper } = settingsStore;
 
   return {
     user,
-    version: auth.version,
+    version: authStore.version,
     FirebaseHelper: firebaseHelper,
   };
 })(observer(ReportDialog));

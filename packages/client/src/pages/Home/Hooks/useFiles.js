@@ -6,9 +6,11 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { getGroupById } from "@docspace/shared/api/groups";
 import { getUserById } from "@docspace/shared/api/people";
+import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
 import { Events, RoomSearchArea } from "@docspace/shared/enums";
 import { getObjectByLocation } from "@docspace/shared/utils/common";
+import { useParams } from "react-router-dom";
 
 import { getCategoryType, getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -43,6 +45,7 @@ const useFiles = ({
   folderSecurity,
 }) => {
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const fetchDefaultFiles = () => {
     const filter = FilesFilter.getDefault();
@@ -97,7 +100,7 @@ const useFiles = ({
     if (location.pathname === "/") setIsLoading(true, true, true);
     else setIsLoading(true, false, false);
 
-    if (!window.location.href.includes("#preview")) {
+    if (!window.location.href.includes(MEDIA_VIEW_URL)) {
       // localStorage.removeItem("isFirstUrl");
       // Media viewer
       removeFirstUrl();
@@ -108,12 +111,12 @@ const useFiles = ({
     let filterObj = null;
     let isRooms = false;
 
-    if (window.location.href.indexOf("/#preview") > 1 && playlist.length < 1) {
-      const pathname = window.location.href;
-      const fileId = pathname.slice(pathname.indexOf("#preview") + 9);
-
+    if (
+      window.location.href.indexOf(MEDIA_VIEW_URL) > 1 &&
+      playlist.length < 1
+    ) {
       setTimeout(() => {
-        getFileInfo(fileId)
+        getFileInfo(id)
           .then((data) => {
             const canOpenPlayer =
               data.viewAccessibility.ImageView ||
@@ -131,7 +134,7 @@ const useFiles = ({
       return setIsLoading(false);
     }
 
-    if (window.location.href.indexOf("/#preview") > 1)
+    if (window.location.href.indexOf(MEDIA_VIEW_URL) > 1)
       return setIsLoading(false);
 
     const isRoomFolder = getObjectByLocation(window.location)?.folder;

@@ -20,6 +20,16 @@ export const LOADER_STYLE = Object.freeze({
   animate: true,
 });
 
+export const MANAGER = "manager";
+export const TOTAL_SIZE = "total_size";
+export const FILE_SIZE = "file_size";
+export const ROOM = "room";
+export const USERS = "users";
+export const USERS_IN_ROOM = "usersInRoom";
+
+export const COUNT_FOR_SHOWING_BAR = 2;
+export const PERCENTAGE_FOR_SHOWING_BAR = 90;
+
 export const LANGUAGE = "asc_language";
 
 export const MOBILE_FOOTER_HEIGHT = "64px";
@@ -108,6 +118,8 @@ export const WRONG_PORTAL_NAME_URL =
   (typeof window !== "undefined" &&
     window.DocSpaceConfig?.wrongPortalNameUrl) ||
   `https://www.onlyoffice.com/wrongportalname.aspx`;
+
+export const MEDIA_VIEW_URL = "/media/view/";
 
 export const RTL_LANGUAGES = Object.freeze([
   "ar",

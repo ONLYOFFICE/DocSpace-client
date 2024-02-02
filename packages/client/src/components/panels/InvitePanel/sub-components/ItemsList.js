@@ -155,9 +155,9 @@ const ItemsList = ({
   );
 };
 
-export default inject(({ auth, dialogsStore }) => {
+export default inject(({ userStore, dialogsStore }) => {
   const { setInviteItems, inviteItems, changeInviteItem } = dialogsStore;
-  const { isOwner } = auth.userStore.user;
+  const { isOwner } = userStore.user;
 
   return {
     setInviteItems,

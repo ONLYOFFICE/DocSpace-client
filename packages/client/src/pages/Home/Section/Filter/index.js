@@ -33,11 +33,8 @@ import { ROOMS_PROVIDER_TYPE_NAME } from "@docspace/shared/constants";
 
 import { getDefaultRoomName } from "SRC_DIR/helpers/filesUtils";
 
-import {
-  TableVersions,
-  SortByFieldName,
-  SSO_LABEL,
-} from "SRC_DIR/helpers/constants";
+import { TableVersions, SSO_LABEL } from "SRC_DIR/helpers/constants";
+import { SortByFieldName } from "SRC_DIR/helpers/enums";
 
 import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
@@ -2137,13 +2134,16 @@ const SectionFilterContent = ({
 
 export default inject(
   ({
-    auth,
+    authStore,
     filesStore,
     treeFoldersStore,
     clientLoadingStore,
     tagsStore,
     peopleStore,
     publicRoomStore,
+    infoPanelStore,
+    userStore,
+    settingsStore,
   }) => {
     const {
       filter,
@@ -2166,9 +2166,9 @@ export default inject(
     const { providers } = thirdPartyStore;
 
     const { fetchTags } = tagsStore;
-    const { isRoomAdmin } = auth;
-    const { user } = auth.userStore;
-    const { personal, standalone, currentDeviceType } = auth.settingsStore;
+    const { isRoomAdmin } = authStore;
+    const { user } = userStore;
+    const { personal, standalone, currentDeviceType } = settingsStore;
     const {
       isFavoritesFolder,
       isRecentTab,
@@ -2180,7 +2180,7 @@ export default inject(
 
     const isRooms = isRoomsFolder || isArchiveFolder;
 
-    const { isVisible: infoPanelVisible } = auth.infoPanelStore;
+    const { isVisible: infoPanelVisible } = infoPanelStore;
 
     const {
       filterStore,

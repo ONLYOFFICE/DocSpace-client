@@ -90,8 +90,7 @@ const OfficialDocumentation = ({ dataBackupUrl }) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { settingsStore } = auth;
+export default inject(({ settingsStore }) => {
   const { dataBackupUrl } = settingsStore;
 
   return { dataBackupUrl };

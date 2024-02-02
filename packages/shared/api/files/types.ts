@@ -173,6 +173,16 @@ export type TUploadOperation = {
 
 export type TThirdPartyCapabilities = string[][];
 
+export type TThierdParty = {
+  corporate: boolean;
+  roomsStorage: boolean;
+  customerTitle: string;
+  providerId: string;
+  providerKey: string;
+};
+
+export type TTirdParties = TThierdParty[];
+
 export type TFilesSettings = {
   automaticallyCleanUp: {
     gap: number;
@@ -180,6 +190,7 @@ export type TFilesSettings = {
   };
   canSearchByContent: boolean;
   chunkUploadSize: number;
+  chunkUploadCount: number;
   confirmDelete: boolean;
   convertNotify: boolean;
   defaultOrder: { is_asc: boolean; property: 1 };
@@ -334,3 +345,4 @@ export type TFileLink = {
     title: string;
   };
 };
+

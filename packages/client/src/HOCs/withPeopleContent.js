@@ -144,8 +144,7 @@ export default function withContent(WrappedContent) {
     );
   };
 
-  return inject(({ auth, peopleStore }, { item }) => {
-    const { userStore, settingsStore } = auth;
+  return inject(({ settingsStore, peopleStore, userStore }, { item }) => {
     const { theme, standalone } = settingsStore;
 
     const { selectGroup } = peopleStore.selectedGroupStore;

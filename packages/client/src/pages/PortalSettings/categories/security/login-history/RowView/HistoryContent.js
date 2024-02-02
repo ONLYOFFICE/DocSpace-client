@@ -57,9 +57,9 @@ const HistoryContent = ({ sectionWidth, item, locale }) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { culture } = auth.settingsStore;
-  const { user } = auth.userStore;
+export default inject(({ settingsStore, userStore }) => {
+  const { culture } = settingsStore;
+  const { user } = userStore;
   const locale = (user && user.cultureName) || culture || "en";
 
   return {

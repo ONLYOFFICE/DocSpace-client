@@ -54,7 +54,7 @@ const AccessPortal = (props) => {
           className="link-learn-more"
           target="_blank"
           isHovered
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
           href={passwordStrengthSettingsUrl}
         >
           {t("Common:LearnMore")}
@@ -78,7 +78,7 @@ const AccessPortal = (props) => {
           className="link-learn-more"
           target="_blank"
           isHovered
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
           href={tfaSettingsUrl}
         >
           {t("Common:LearnMore")}
@@ -102,7 +102,7 @@ const AccessPortal = (props) => {
           className="link-learn-more"
           target="_blank"
           isHovered
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
           href={trustedMailDomainSettingsUrl}
         >
           {t("Common:LearnMore")}
@@ -123,7 +123,7 @@ const AccessPortal = (props) => {
           className="link-learn-more"
           target="_blank"
           isHovered
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
           href={ipSettingsUrl}
         >
           {t("Common:LearnMore")}
@@ -157,7 +157,7 @@ const AccessPortal = (props) => {
           className="link-learn-more"
           target="_blank"
           isHovered
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
           href={administratorMessageSettingsUrl}
         >
           {t("Common:LearnMore")}
@@ -180,7 +180,7 @@ const AccessPortal = (props) => {
           className="link-learn-more"
           target="_blank"
           isHovered
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
           href={lifetimeSettingsUrl}
         >
           {t("Common:LearnMore")}
@@ -192,7 +192,7 @@ const AccessPortal = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
+export default inject(({ settingsStore }) => {
   const {
     currentColorScheme,
     passwordStrengthSettingsUrl,
@@ -202,7 +202,7 @@ export default inject(({ auth }) => {
     lifetimeSettingsUrl,
     ipSettingsUrl,
     currentDeviceType,
-  } = auth.settingsStore;
+  } = settingsStore;
 
   const isMobileView = currentDeviceType === DeviceType.mobile;
 

@@ -15,7 +15,7 @@ const CommentEditor = ({
   t,
   item,
   editing,
-  setSelection,
+  setInfoPanelSelection,
   fetchFileVersions,
   updateCommentVersion,
 
@@ -61,7 +61,7 @@ const CommentEditor = ({
       setIsLoading(false);
     });
 
-    setSelection({ ...item, comment: inputValue });
+    setInfoPanelSelection({ ...item, comment: inputValue });
     setIsEdit(false);
     setIsLoading(false);
   };
@@ -97,7 +97,7 @@ const CommentEditor = ({
             onChange={onChangeInputValue}
             autoFocus
             areaSelect
-            heightTextArea={54}
+            heightTextArea="54px"
             fontSize={13}
           />
           <div className="property-comment_editor-editor-buttons">
@@ -120,8 +120,8 @@ const CommentEditor = ({
   );
 };
 
-export default inject(({ auth, versionHistoryStore }) => {
-  const { setSelection } = auth.infoPanelStore;
+export default inject(({ versionHistoryStore, infoPanelStore }) => {
+  const { setInfoPanelSelection } = infoPanelStore;
 
   const {
     fetchFileVersions,
@@ -136,7 +136,7 @@ export default inject(({ auth, versionHistoryStore }) => {
   const editing = isEditingVersion || isEditing;
 
   return {
-    setSelection,
+    setInfoPanelSelection,
     fetchFileVersions,
     updateCommentVersion,
 

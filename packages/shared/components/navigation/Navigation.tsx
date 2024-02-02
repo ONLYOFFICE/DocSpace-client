@@ -52,6 +52,9 @@ const Navigation = ({
   titleIcon,
   currentDeviceType,
   rootRoomTitle,
+  navigationButtonLabel,
+  onNavigationButtonClick,
+  tariffBar,
 
   ...rest
 }: INavigationProps) => {
@@ -71,7 +74,7 @@ const Navigation = ({
   );
 
   const toggleDropBox = useCallback(() => {
-    if (navigationItems.length === 0) return;
+    if (navigationItems?.length === 0) return;
     if (isRootFolder) return setIsOpen(false);
     setIsOpen((prev) => !prev);
 
@@ -253,6 +256,10 @@ const Navigation = ({
               isFrame={isFrame}
               isPublicRoom={isPublicRoom}
               isTrashFolder={isTrashFolder}
+              navigationButtonLabel={navigationButtonLabel}
+              onNavigationButtonClick={onNavigationButtonClick}
+              tariffBar={tariffBar}
+              title={title}
             />
           </StyledContainer>
           {isDesktop && isTrashFolder && !isEmptyPage && (

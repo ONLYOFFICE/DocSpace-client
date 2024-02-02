@@ -113,10 +113,11 @@ export default function withContent(WrappedContent) {
       {
         filesStore,
         treeFoldersStore,
-        auth,
+        settingsStore,
         dialogsStore,
         uploadDataStore,
         publicRoomStore,
+        userStore,
       },
       { item }
     ) => {
@@ -141,10 +142,8 @@ export default function withContent(WrappedContent) {
       const { isRecycleBinFolder, isPrivacyFolder, isArchiveFolder } =
         treeFoldersStore;
 
-      const { replaceFileStream, setEncryptionAccess } = auth;
-
       const { culture, personal, folderFormValidation, isDesktopClient } =
-        auth.settingsStore;
+        settingsStore;
 
       const {
         setConvertPasswordDialogVisible,
@@ -167,12 +166,11 @@ export default function withContent(WrappedContent) {
         isArchiveFolder,
         openDocEditor,
         renameFolder,
-        replaceFileStream,
-        setEncryptionAccess,
+
         setIsLoading,
         updateFile,
         viewAs,
-        viewer: auth.userStore.user,
+        viewer: userStore.user,
         setConvertPasswordDialogVisible,
         setConvertItem,
         setFormCreationInfo,

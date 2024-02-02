@@ -5,12 +5,14 @@ import {
   isVideo,
 } from "@docspace/common/components/MediaViewer/helpers";
 import { thumbnailStatuses } from "SRC_DIR/helpers/filesConstants";
+import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 const FirstUrlKey = "isFirstUrl";
 
 class MediaViewerDataStore {
   filesStore;
-  settingsStore;
+
   publicRoomStore;
 
   id = null;
@@ -19,10 +21,10 @@ class MediaViewerDataStore {
   currentItem = null;
   prevPostionIndex = 0;
 
-  constructor(filesStore, settingsStore, publicRoomStore) {
+  constructor(filesStore, publicRoomStore) {
     makeAutoObservable(this);
     this.filesStore = filesStore;
-    this.settingsStore = settingsStore;
+
     this.publicRoomStore = publicRoomStore;
   }
 
@@ -76,7 +78,7 @@ class MediaViewerDataStore {
   changeUrl = (id) => {
     if (this.publicRoomStore.isPublicRoom) return;
 
-    const url = "/products/files/#preview/" + id;
+    const url = combineUrl(MEDIA_VIEW_URL, id);
     window.DocSpace.navigate(url);
   };
 

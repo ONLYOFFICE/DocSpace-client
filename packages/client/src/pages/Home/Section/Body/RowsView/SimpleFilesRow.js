@@ -354,6 +354,7 @@ const SimpleFilesRow = (props) => {
     badgesComponent,
     onDragOver,
     onDragLeave,
+    badgeUrl,
   } = props;
 
   const isMobileDevice = isMobileUtile();
@@ -373,6 +374,7 @@ const SimpleFilesRow = (props) => {
       logo={item.logo}
       color={item.logo?.color}
       isArchive={item.isArchive}
+      badgeUrl={badgeUrl}
     />
   );
 
@@ -464,6 +466,7 @@ const SimpleFilesRow = (props) => {
           isRooms={isRooms}
           folderCategory={folderCategory}
           isHighlight={isHighlight}
+          badgeUrl={badgeUrl}
         >
           <FilesRowContent
             item={item}

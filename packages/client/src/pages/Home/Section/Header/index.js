@@ -64,6 +64,7 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import { getLogoFromPath } from "@docspace/shared/utils";
+import TariffBar from "SRC_DIR/components/TariffBar";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -113,6 +114,7 @@ const StyledContainer = styled.div`
 
   .header-container {
     min-height: 33px;
+    align-items: center;
 
     ${(props) =>
       props.hideContextMenuInsideArchiveRoom &&
@@ -125,6 +127,21 @@ const StyledContainer = styled.div`
 
     @media ${mobile} {
       height: 53px;
+    }
+
+    .navigation_button {
+      display: block;
+      margin: 0 16px;
+      overflow: visible;
+
+      @media ${tablet} {
+        display: ${({ isInfoPanelVisible }) =>
+          isInfoPanelVisible ? "none" : "block"};
+      }
+
+      @media ${mobile} {
+        display: none;
+      }
     }
   }
 `;
@@ -211,6 +228,7 @@ const SectionHeaderContent = (props) => {
     getAccountsCheckboxItemLabel,
     setAccountsSelected,
     isOwner,
+    isCollaborator,
     setInvitePanelOptions,
     isEmptyPage,
 
@@ -235,6 +253,8 @@ const SectionHeaderContent = (props) => {
     setLeaveRoomDialogVisible,
     inRoom,
     onClickCreateRoom,
+    onCreateAndCopySharedLink,
+    showNavigationButton,
   } = props;
 
   const navigate = useNavigate();
@@ -748,7 +768,7 @@ const SectionHeaderContent = (props) => {
       {
         id: "header_option_copy-external-link",
         key: "copy-external-link",
-        label: t("Files:CopyGeneralLink"),
+        label: t("Files:CopySharedLink"),
         icon: CopyToReactSvgUrl,
         onClick: async () => {
           if (primaryLink) {
@@ -803,8 +823,11 @@ const SectionHeaderContent = (props) => {
         label: t("Files:CreateRoom"),
         key: "create-room",
         icon: CatalogRoomsReactSvgUrl,
-        onClick: onClickCreateRoom,
-        disabled: selectedFolder.rootFolderType !== FolderType.USER,
+        onClick: () => {
+          onClickCreateRoom({ title: selectedFolder.title, isFolder: true });
+        },
+        disabled:
+          isCollaborator || selectedFolder.rootFolderType !== FolderType.USER,
       },
       {
         id: "option_leave-room",
@@ -957,6 +980,7 @@ const SectionHeaderContent = (props) => {
           : "",
     };
 
+    setSelected("none");
     setIsLoading(true);
 
     window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`, { state });
@@ -985,6 +1009,10 @@ const SectionHeaderContent = (props) => {
       )
       .catch((err) => toastr.error(err));
   }, [resendInvitesAgain]);
+
+  const onNavigationButtonClick = () => {
+    onCreateAndCopySharedLink(selectedFolder, t);
+  };
 
   const onCreateGroup = React.useCallback(() => {
     const event = new Event(Events.GROUP_CREATE);
@@ -1087,6 +1115,10 @@ const SectionHeaderContent = (props) => {
     ? getLogoFromPath(whiteLabelLogoUrls[5]?.path?.dark)
     : getLogoFromPath(whiteLabelLogoUrls[5]?.path?.light);
 
+  const navigationButtonLabel = showNavigationButton
+    ? t("Files:ShareRoom")
+    : null;
+
   return (
     <Consumer key="header">
       {(context) => (
@@ -1152,6 +1184,9 @@ const SectionHeaderContent = (props) => {
                 showRootFolderTitle={insideTheRoom || isInsideGroup}
                 currentDeviceType={currentDeviceType}
                 isFrame={isFrame}
+                navigationButtonLabel={navigationButtonLabel}
+                onNavigationButtonClick={onNavigationButtonClick}
+                tariffBar={<TariffBar />}
               />
             </div>
           )}
@@ -1163,22 +1198,26 @@ const SectionHeaderContent = (props) => {
 
 export default inject(
   ({
-    auth,
     filesStore,
     peopleStore,
     dialogsStore,
     selectedFolderStore,
     treeFoldersStore,
     filesActionsStore,
-    settingsStore,
+    filesSettingsStore,
     clientLoadingStore,
     publicRoomStore,
     contextOptionsStore,
     oformsStore,
     pluginStore,
+    infoPanelStore,
+    userStore,
+    currentTariffStatusStore,
+    settingsStore,
   }) => {
-    const isOwner = auth.userStore.user?.isOwner;
-    const isAdmin = auth.userStore.user?.isAdmin;
+    const isOwner = userStore.user?.isOwner;
+    const isAdmin = userStore.user?.isAdmin;
+    const isCollaborator = userStore.user?.isCollaborator;
 
     const {
       setSelected,
@@ -1260,7 +1299,7 @@ export default inject(
 
     const { oformsFilter } = oformsStore;
 
-    const { setIsVisible, isVisible } = auth.infoPanelStore;
+    const { setIsVisible, isVisible } = infoPanelStore;
 
     const {
       title,
@@ -1272,11 +1311,11 @@ export default inject(
       inRoom,
       access,
       canCopyPublicLink,
+      rootFolderType,
     } = selectedFolderStore;
 
+    const selectedFolder = selectedFolderStore.getSelectedFolder();
     const { currentGroup, getGroupContextOptions } = peopleStore.groupsStore;
-
-    const selectedFolder = { ...selectedFolderStore };
 
     const {
       enablePlugins,
@@ -1284,8 +1323,8 @@ export default inject(
       whiteLabelLogoUrls,
       isFrame,
       currentDeviceType,
-    } = auth.settingsStore;
-    const { isGracePeriod } = auth.currentTariffStatusStore;
+    } = settingsStore;
+    const { isGracePeriod } = currentTariffStatusStore;
 
     const isRoom = !!roomType;
     const isPublicRoomType = roomType === RoomsType.PublicRoom;
@@ -1298,6 +1337,7 @@ export default inject(
       onClickArchive,
       onClickReconnectStorage,
       onCopyLink,
+      onCreateAndCopySharedLink,
     } = contextOptionsStore;
 
     const canRestoreAll = isArchiveFolder && roomsForRestore.length > 0;
@@ -1326,6 +1366,7 @@ export default inject(
     } = headerMenuStore;
 
     const { setSelected: setAccountsSelected } = selectionStore;
+    const { isPublicRoom, primaryLink, setExternalLink } = publicRoomStore;
 
     let folderPath = navigationPath;
 
@@ -1337,13 +1378,25 @@ export default inject(
       ? pathParts?.length === 1 || pathParts?.length === 2
       : pathParts?.length === 1;
 
-    const { isPublicRoom, primaryLink, setExternalLink } = publicRoomStore;
+    const haveLinksRight =
+      access === ShareAccessRights.RoomManager ||
+      access === ShareAccessRights.None;
+
+    const isArchive = rootFolderType === FolderType.Archive;
+
+    const showNavigationButton = isLoading
+      ? false
+      : !isPublicRoom &&
+        !isArchive &&
+        canCopyPublicLink &&
+        (isPublicRoomType || isCustomRoomType) &&
+        primaryLink;
 
     return {
       isGracePeriod,
       setInviteUsersWarningDialogVisible,
-      showText: auth.settingsStore.showText,
-      isDesktop: auth.settingsStore.isDesktopClient,
+      showText: settingsStore.showText,
+      isDesktop: settingsStore.isDesktopClient,
       showHeaderLoader,
       isLoading,
       isRootFolder: isPublicRoom && !folderPath?.length ? true : isRoot,
@@ -1361,9 +1414,9 @@ export default inject(
       isHeaderIndeterminate,
       isHeaderChecked,
       isThirdPartySelection,
-      isTabletView: auth.settingsStore.isTabletView,
-      confirmDelete: settingsStore.confirmDelete,
-      personal: auth.settingsStore.personal,
+      isTabletView: settingsStore.isTabletView,
+      confirmDelete: filesSettingsStore.confirmDelete,
+      personal: settingsStore.personal,
       cbMenuItems,
       setSelectedNode: treeFoldersStore.setSelectedNode,
       getFolderInfo,
@@ -1443,6 +1496,7 @@ export default inject(
       setAccountsSelected,
       isOwner,
       isAdmin,
+      isCollaborator,
       setInvitePanelOptions,
       isEmptyPage,
 
@@ -1458,6 +1512,9 @@ export default inject(
       inRoom,
       currentGroup,
       getGroupContextOptions,
+      onCreateAndCopySharedLink,
+      showNavigationButton,
+      haveLinksRight,
     };
   }
 )(

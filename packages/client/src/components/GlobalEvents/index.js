@@ -288,8 +288,8 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
   ];
 };
 
-export default inject(({ auth, pluginStore }) => {
-  const { enablePlugins } = auth.settingsStore;
+export default inject(({ settingsStore, pluginStore }) => {
+  const { enablePlugins } = settingsStore;
 
   const { eventListenerItemsList } = pluginStore;
 

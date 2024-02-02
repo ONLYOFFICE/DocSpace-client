@@ -51,23 +51,24 @@ const withLoader = (WrappedComponent) => (Loader) => {
 
   return inject(
     ({
-      auth,
+      authStore,
       filesStore,
       peopleStore,
       clientLoadingStore,
       publicRoomStore,
+      settingsStore,
     }) => {
       const { viewAs, isLoadingFilesFind, isInit } = filesStore;
       const { viewAs: accountsViewAs } = peopleStore;
 
       const { firstLoad, isLoading, showBodyLoader } = clientLoadingStore;
-      const { settingsStore } = auth;
+
       const { setIsBurgerLoading } = settingsStore;
       const { isPublicRoom } = publicRoomStore;
 
       return {
         firstLoad: isPublicRoom ? false : firstLoad,
-        isLoaded: isPublicRoom ? true : auth.isLoaded,
+        isLoaded: isPublicRoom ? true : authStore.isLoaded,
         isLoading,
         viewAs,
         setIsBurgerLoading,

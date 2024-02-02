@@ -120,8 +120,8 @@ const SectionBodyContent = ({
   );
 };
 
-export default inject(({ auth, accessRightsStore, oformsStore }) => ({
-  theme: auth.settingsStore.theme,
+export default inject(({ settingsStore, accessRightsStore, oformsStore }) => ({
+  theme: settingsStore.theme,
   oformFiles: oformsStore.oformFiles,
   hasGalleryFiles: oformsStore.hasGalleryFiles,
   setGallerySelected: oformsStore.setGallerySelected,

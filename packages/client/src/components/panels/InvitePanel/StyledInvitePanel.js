@@ -105,6 +105,12 @@ const StyledBlock = styled.div`
 
 StyledBlock.defaultProps = { theme: Base };
 
+const StyledInviteUserBody = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+`;
+
 const StyledHeading = styled(Heading)`
   font-weight: 700;
   font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
@@ -503,4 +509,5 @@ export {
   StyledInviteLanguage,
   StyledControlContainer,
   StyledCrossIconMobile,
+  StyledInviteUserBody,
 };

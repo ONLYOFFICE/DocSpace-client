@@ -82,7 +82,7 @@ const LeaveRoomDialog = (props) => {
 
 export default inject(
   ({
-    auth,
+    userStore,
     dialogsStore,
     filesStore,
     selectedFolderStore,
@@ -93,7 +93,7 @@ export default inject(
       setLeaveRoomDialogVisible: setIsVisible,
       setChangeRoomOwnerIsVisible,
     } = dialogsStore;
-    const { user } = auth.userStore;
+    const { user } = userStore;
     const { selection, bufferSelection } = filesStore;
 
     const selections = selection.length ? selection : [bufferSelection];

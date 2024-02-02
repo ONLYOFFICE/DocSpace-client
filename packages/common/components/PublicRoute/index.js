@@ -111,8 +111,8 @@ export const PublicRoute = ({ children, ...rest }) => {
   return component;
 };
 
-export default inject(({ auth }) => {
-  const { settingsStore, isAuthenticated, isLoaded } = auth;
+export default inject(({ authStore, settingsStore }) => {
+  const { isAuthenticated, isLoaded } = authStore;
   const { wizardCompleted, tenantStatus, isPortalDeactivate } = settingsStore;
 
   return {

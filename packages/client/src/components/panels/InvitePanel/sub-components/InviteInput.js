@@ -485,8 +485,8 @@ const InviteInput = ({
   );
 };
 
-export default inject(({ auth, dialogsStore }) => {
-  const { isOwner } = auth.userStore.user;
+export default inject(({ settingsStore, dialogsStore, userStore }) => {
+  const { isOwner } = userStore.user;
   const {
     invitePanelOptions,
     setInviteItems,
@@ -494,7 +494,6 @@ export default inject(({ auth, dialogsStore }) => {
     setInviteLanguage,
     culture,
   } = dialogsStore;
-  const { settingsStore } = auth;
 
   return {
     language: settingsStore.culture,

@@ -1,12 +1,14 @@
 import PropTypes from "prop-types";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import { capitalize } from "lodash";
 
 import { Aside } from "@docspace/shared/components/aside";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Selector } from "@docspace/shared/components/selector";
 import { toastr } from "@docspace/shared/components/toast";
+import { Text } from "@docspace/shared/components/text";
 
 import { getUserRole } from "@docspace/shared/utils/common";
 import Filter from "@docspace/shared/api/people/filter";
@@ -241,6 +243,36 @@ const AddUsersPanel = ({
     ? EmptyScreenPersonsSvgUrl
     : EmptyScreenPersonsSvgDarkUrl;
 
+  const renderCustomItem = (label, userType, email) => {
+    return (
+      <div style={{ width: "100%" }}>
+        <Text
+          className="label"
+          fontWeight={600}
+          fontSize="14px"
+          noSelect
+          truncate
+          dir="auto"
+        >
+          {label}
+        </Text>
+        <div style={{ display: "flex" }}>
+          <Text
+            className="label"
+            fontWeight={400}
+            fontSize="12px"
+            noSelect
+            truncate
+            color="#A3A9AE"
+            dir="auto"
+          >
+            {`${capitalize(userType)} | ${email}`}
+          </Text>
+        </div>
+      </div>
+    );
+  };
+
   useEffect(() => {
     window.addEventListener("keyup", onKeyPress);
 
@@ -270,6 +302,7 @@ const AddUsersPanel = ({
         <Selector
           headerLabel={t("PeopleSelector:ListAccounts")}
           onBackClick={onBackClick}
+          renderCustomItem={renderCustomItem}
           searchPlaceholder={t("Common:Search")}
           searchValue={searchValue}
           onSearch={onSearch}
@@ -354,9 +387,9 @@ AddUsersPanel.propTypes = {
   onClose: PropTypes.func,
 };
 
-export default inject(({ auth }) => {
+export default inject(({ settingsStore }) => {
   return {
-    theme: auth.settingsStore.theme,
+    theme: settingsStore.theme,
   };
 })(
   observer(

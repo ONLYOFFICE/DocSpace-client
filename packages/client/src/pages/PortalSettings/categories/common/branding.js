@@ -9,7 +9,7 @@ import Whitelabel from "./Branding/whitelabel";
 import CompanyInfoSettings from "./Branding/companyInfoSettings";
 import styled from "styled-components";
 import AdditionalResources from "./Branding/additionalResources";
-
+import { isManagement } from "@docspace/shared/utils/common";
 import LoaderBrandingDescription from "./sub-components/loaderBrandingDescription";
 
 import MobileView from "./Branding/MobileView";
@@ -60,7 +60,6 @@ const Branding = ({
   isLoadedCompanyInfoSettingsData,
   isSettingPaid,
   standalone,
-  isManagement,
 }) => {
   const isMobileView = useIsMobileView();
 
@@ -78,7 +77,7 @@ const Branding = ({
 
   if (isMobileView)
     return (
-      <MobileView isSettingPaid={isSettingPaid} isManagement={isManagement} />
+      <MobileView isSettingPaid={isSettingPaid} isManagement={isManagement()} />
     );
 
   return (
@@ -102,8 +101,7 @@ const Branding = ({
   );
 };
 
-export default inject(({ auth, setup, common }) => {
-  const { currentQuotaStore, settingsStore, isManagement } = auth;
+export default inject(({ settingsStore, currentQuotaStore, common }) => {
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
   const { isLoadedCompanyInfoSettingsData } = common;
   const { standalone } = settingsStore;
@@ -112,6 +110,5 @@ export default inject(({ auth, setup, common }) => {
     isLoadedCompanyInfoSettingsData,
     isSettingPaid: isBrandingAndCustomizationAvailable,
     standalone,
-    isManagement,
   };
 })(withLoading(withTranslation(["Settings", "Common"])(observer(Branding))));

@@ -460,10 +460,10 @@ const getDefaultStyles = ({
   $currentColorScheme &&
   theme.isBase &&
   css`
-    border-color: ${isOpen && $currentColorScheme?.main.accent};
+    border-color: ${isOpen && $currentColorScheme?.main?.accent};
 
     :focus {
-      border-color: ${isOpen && $currentColorScheme?.main.accent};
+      border-color: ${isOpen && $currentColorScheme?.main?.accent};
     }
   `;
 

@@ -106,9 +106,9 @@ ChangePricingPlanDialog.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default inject(({ auth, payments }) => {
+export default inject(({ payments, currentQuotaStore }) => {
   const { managersCount, allowedStorageSizeByQuota } = payments;
-  const { currentQuotaStore } = auth;
+
   const { addedManagersCount, usedTotalStorageSizeCount } = currentQuotaStore;
   return {
     managersCount,

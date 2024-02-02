@@ -17,7 +17,6 @@ import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { isTablet, isMobile } from "@docspace/shared/utils/device";
 
 import EmptyIframeContainer from "../sub-components/EmptyIframeContainer";
-import { RectangleSkeleton } from "@docspace/shared/skeletons/rectangle";
 
 import GetCodeDialog from "../sub-components/GetCodeDialog";
 import { Button } from "@docspace/shared/components/button";
@@ -32,7 +31,7 @@ import {
   CategoryDescription,
   ControlsGroup,
   LabelGroup,
-  InterfaceElements,
+  ControlsSection,
   Frame,
   Container,
   RowContainer,
@@ -208,72 +207,78 @@ const Editor = (props) => {
           </Preview>
         )}
         <Controls>
-          <CategorySubHeader>{t("FileId")}</CategorySubHeader>
-          <ControlsGroup>
-            <LabelGroup>
-              <Label className="label" text={t("Common:SelectFile")} />
-            </LabelGroup>
-            <FilesSelectorInputWrapper>
-              <FilesSelectorInput
-                onSelectFile={onChangeFileId}
-                filterParam={FilesSelectorFilterTypes.ALL}
-                isSelect
-              />
-            </FilesSelectorInputWrapper>
-          </ControlsGroup>
-          <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
-          <ControlsGroup>
-            <Label className="label" text={t("EmbeddingPanel:Width")} />
-            <RowContainer combo>
+          <ControlsSection>
+            <CategorySubHeader>{t("FileId")}</CategorySubHeader>
+            <ControlsGroup>
+              <LabelGroup>
+                <Label className="label" text={t("Common:SelectFile")} />
+              </LabelGroup>
+              <FilesSelectorInputWrapper>
+                <FilesSelectorInput
+                  onSelectFile={onChangeFileId}
+                  filterParam={FilesSelectorFilterTypes.ALL}
+                  isSelect
+                />
+              </FilesSelectorInputWrapper>
+            </ControlsGroup>
+          </ControlsSection>
+
+          <ControlsSection>
+            <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
+            <ControlsGroup>
+              <Label className="label" text={t("EmbeddingPanel:Width")} />
+              <RowContainer combo>
+                <TextInput
+                  onChange={onChangeWidth}
+                  placeholder={t("EnterWidth")}
+                  value={width}
+                  tabIndex={2}
+                />
+                <ComboBox
+                  size="content"
+                  scaled={false}
+                  scaledOptions={true}
+                  onSelect={onChangeWidthDimension}
+                  options={dataDimensions}
+                  selectedOption={widthDimension}
+                  displaySelectedOption
+                  directionY="bottom"
+                />
+              </RowContainer>
+            </ControlsGroup>
+            <ControlsGroup>
+              <Label className="label" text={t("EmbeddingPanel:Height")} />
+              <RowContainer combo>
+                <TextInput
+                  onChange={onChangeHeight}
+                  placeholder={t("EnterHeight")}
+                  value={height}
+                  tabIndex={3}
+                />
+                <ComboBox
+                  size="content"
+                  scaled={false}
+                  scaledOptions={true}
+                  onSelect={onChangeHeightDimension}
+                  options={dataDimensions}
+                  selectedOption={heightDimension}
+                  displaySelectedOption
+                  directionY="bottom"
+                />
+              </RowContainer>
+            </ControlsGroup>
+            <ControlsGroup>
+              <Label className="label" text={t("FrameId")} />
               <TextInput
-                onChange={onChangeWidth}
-                placeholder={t("EnterWidth")}
-                value={width}
-                tabIndex={2}
+                scale={true}
+                onChange={onChangeFrameId}
+                placeholder={t("EnterId")}
+                value={config.frameId}
+                tabIndex={4}
               />
-              <ComboBox
-                size="content"
-                scaled={false}
-                scaledOptions={true}
-                onSelect={onChangeWidthDimension}
-                options={dataDimensions}
-                selectedOption={widthDimension}
-                displaySelectedOption
-                directionY="bottom"
-              />
-            </RowContainer>
-          </ControlsGroup>
-          <ControlsGroup>
-            <Label className="label" text={t("EmbeddingPanel:Height")} />
-            <RowContainer combo>
-              <TextInput
-                onChange={onChangeHeight}
-                placeholder={t("EnterHeight")}
-                value={height}
-                tabIndex={3}
-              />
-              <ComboBox
-                size="content"
-                scaled={false}
-                scaledOptions={true}
-                onSelect={onChangeHeightDimension}
-                options={dataDimensions}
-                selectedOption={heightDimension}
-                displaySelectedOption
-                directionY="bottom"
-              />
-            </RowContainer>
-          </ControlsGroup>
-          <ControlsGroup>
-            <Label className="label" text={t("FrameId")} />
-            <TextInput
-              scale={true}
-              onChange={onChangeFrameId}
-              placeholder={t("EnterId")}
-              value={config.frameId}
-              tabIndex={4}
-            />
-          </ControlsGroup>
+            </ControlsGroup>
+          </ControlsSection>
+
           {/* <InterfaceElements>
             <Label className="label">{t("InterfaceElements")}</Label>
             <Checkbox

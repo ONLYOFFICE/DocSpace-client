@@ -16,8 +16,6 @@ import { inject, observer } from "mobx-react";
 
 import { isTablet, isMobile } from "@docspace/shared/utils/device";
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons/rectangle";
-
 import GetCodeDialog from "../sub-components/GetCodeDialog";
 import { Button } from "@docspace/shared/components/button";
 
@@ -32,7 +30,7 @@ import {
   CategorySubHeader,
   CategoryDescription,
   ControlsGroup,
-  InterfaceElements,
+  ControlsSection,
   Frame,
   Container,
   RowContainer,
@@ -287,99 +285,107 @@ const RoomSelector = (props) => {
           </Preview>
         )}
         <Controls>
-          <CategorySubHeader>{t("MainElementParameter")}</CategorySubHeader>
-          <RadioButtonGroup
-            orientation="vertical"
-            options={elementDisplayOptions}
-            name="elementDisplayInput"
-            selected={selectedElementType}
-            onClick={toggleButtonMode}
-            spacing="8px"
-          />
-          {config.isButtonMode && (
-            <>
-              <CategorySubHeader>{t("ButtonCustomization")}</CategorySubHeader>
-              <ControlsGroup>
-                <Label className="label" text={t("ButtonColor")} />
-                <ColorInput scale handleChange={setButtonColor} defaultColor={"#5299E0"} />
-              </ControlsGroup>
-              <ControlsGroup>
-                <Label className="label" text={t("ButtonText")} />
-                <TextInput
-                  scale
-                  onChange={(e) => {
-                    setConfig((config) => ({ ...config, buttonText: e.target.value }));
-                  }}
-                  placeholder={t("SelectToDocSpace")}
-                  value={config.buttonText}
-                  tabIndex={3}
-                />
-                <Checkbox
-                  className="checkbox"
-                  label={"Logo"}
-                  onChange={() => {
-                    setConfig((config) => ({ ...config, buttonWithLogo: !config.buttonWithLogo }));
-                  }}
-                  isChecked={config.buttonWithLogo}
-                />
-              </ControlsGroup>
-            </>
-          )}
-
-          <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
-          <ControlsGroup>
-            <Label className="label" text={t("EmbeddingPanel:Width")} />
-            <RowContainer combo>
-              <TextInput
-                onChange={onChangeWidth}
-                placeholder={t("EnterWidth")}
-                value={width}
-                tabIndex={4}
-              />
-              <ComboBox
-                size="content"
-                scaled={false}
-                scaledOptions={true}
-                onSelect={onChangeWidthDimension}
-                options={dataDimensions}
-                selectedOption={widthDimension}
-                displaySelectedOption
-                directionY="bottom"
-              />
-            </RowContainer>
-          </ControlsGroup>
-          <ControlsGroup>
-            <Label className="label" text={t("EmbeddingPanel:Height")} />
-            <RowContainer combo>
-              <TextInput
-                onChange={onChangeHeight}
-                placeholder={t("EnterHeight")}
-                value={height}
-                tabIndex={5}
-              />
-              <ComboBox
-                size="content"
-                scaled={false}
-                scaledOptions={true}
-                onSelect={onChangeHeightDimension}
-                options={dataDimensions}
-                selectedOption={heightDimension}
-                displaySelectedOption
-                directionY="bottom"
-              />
-            </RowContainer>
-          </ControlsGroup>
-          <ControlsGroup>
-            <Label className="label" text={t("FrameId")} />
-            <TextInput
-              scale={true}
-              onChange={onChangeFrameId}
-              placeholder={t("EnterId")}
-              value={config.frameId}
-              tabIndex={6}
+          <ControlsSection>
+            <CategorySubHeader>{t("MainElementParameter")}</CategorySubHeader>
+            <RadioButtonGroup
+              orientation="vertical"
+              options={elementDisplayOptions}
+              name="elementDisplayInput"
+              selected={selectedElementType}
+              onClick={toggleButtonMode}
+              spacing="8px"
             />
-          </ControlsGroup>
-          <InterfaceElements>
+            {config.isButtonMode && (
+              <>
+                <CategorySubHeader>{t("ButtonCustomization")}</CategorySubHeader>
+                <ControlsGroup>
+                  <Label className="label" text={t("ButtonColor")} />
+                  <ColorInput scale handleChange={setButtonColor} defaultColor={"#5299E0"} />
+                </ControlsGroup>
+                <ControlsGroup>
+                  <Label className="label" text={t("ButtonText")} />
+                  <TextInput
+                    scale
+                    onChange={(e) => {
+                      setConfig((config) => ({ ...config, buttonText: e.target.value }));
+                    }}
+                    placeholder={t("SelectToDocSpace")}
+                    value={config.buttonText}
+                    tabIndex={3}
+                  />
+                  <Checkbox
+                    className="checkbox"
+                    label={"Logo"}
+                    onChange={() => {
+                      setConfig((config) => ({
+                        ...config,
+                        buttonWithLogo: !config.buttonWithLogo,
+                      }));
+                    }}
+                    isChecked={config.buttonWithLogo}
+                  />
+                </ControlsGroup>
+              </>
+            )}
+          </ControlsSection>
+
+          <ControlsSection>
+            <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
+            <ControlsGroup>
+              <Label className="label" text={t("EmbeddingPanel:Width")} />
+              <RowContainer combo>
+                <TextInput
+                  onChange={onChangeWidth}
+                  placeholder={t("EnterWidth")}
+                  value={width}
+                  tabIndex={4}
+                />
+                <ComboBox
+                  size="content"
+                  scaled={false}
+                  scaledOptions={true}
+                  onSelect={onChangeWidthDimension}
+                  options={dataDimensions}
+                  selectedOption={widthDimension}
+                  displaySelectedOption
+                  directionY="bottom"
+                />
+              </RowContainer>
+            </ControlsGroup>
+            <ControlsGroup>
+              <Label className="label" text={t("EmbeddingPanel:Height")} />
+              <RowContainer combo>
+                <TextInput
+                  onChange={onChangeHeight}
+                  placeholder={t("EnterHeight")}
+                  value={height}
+                  tabIndex={5}
+                />
+                <ComboBox
+                  size="content"
+                  scaled={false}
+                  scaledOptions={true}
+                  onSelect={onChangeHeightDimension}
+                  options={dataDimensions}
+                  selectedOption={heightDimension}
+                  displaySelectedOption
+                  directionY="bottom"
+                />
+              </RowContainer>
+            </ControlsGroup>
+            <ControlsGroup>
+              <Label className="label" text={t("FrameId")} />
+              <TextInput
+                scale={true}
+                onChange={onChangeFrameId}
+                placeholder={t("EnterId")}
+                value={config.frameId}
+                tabIndex={6}
+              />
+            </ControlsGroup>
+          </ControlsSection>
+
+          <ControlsSection>
             <Label className="label">{t("InterfaceElements")}</Label>
             <Checkbox
               className="checkbox"
@@ -403,18 +409,21 @@ const RoomSelector = (props) => {
               value={config.cancelButtonLabel}
               tabIndex={8}
             />
-          </InterfaceElements>
-          <CategorySubHeader>{t("AdvancedDisplay")}</CategorySubHeader>
+          </ControlsSection>
 
-          <Label className="label" text={t("RoomTypeDisplay")} />
-          <ComboBox
-            onSelect={changeRoomType}
-            options={roomTypeOptions}
-            scaled={true}
-            selectedOption={roomType}
-            displaySelectedOption
-            directionY="top"
-          />
+          <ControlsSection>
+            <CategorySubHeader>{t("AdvancedDisplay")}</CategorySubHeader>
+
+            <Label className="label" text={t("RoomTypeDisplay")} />
+            <ComboBox
+              onSelect={changeRoomType}
+              options={roomTypeOptions}
+              scaled={true}
+              selectedOption={roomType}
+              displaySelectedOption
+              directionY="top"
+            />
+          </ControlsSection>
         </Controls>
       </Container>
 

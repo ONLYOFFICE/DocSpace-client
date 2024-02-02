@@ -17,7 +17,6 @@ import { inject, observer } from "mobx-react";
 
 import { isTablet, isMobile } from "@docspace/shared/utils/device";
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons/rectangle";
 import { HelpButton } from "@docspace/shared/components/help-button";
 
 import GetCodeDialog from "../sub-components/GetCodeDialog";
@@ -122,7 +121,7 @@ import {
   CategoryDescription,
   ControlsGroup,
   LabelGroup,
-  InterfaceElements,
+  ControlsSection,
   Frame,
   Container,
   RowContainer,
@@ -131,6 +130,7 @@ import {
   GetCodeButtonWrapper,
   FilesSelectorInputWrapper,
   SelectedItemsContainer,
+  CheckboxGroup,
 } from "./StyledPresets";
 
 const Manager = (props) => {
@@ -666,223 +666,231 @@ const Manager = (props) => {
           </Preview>
         )}
         <Controls>
-          <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
-          <ControlsGroup>
-            <Label className="label" text={t("EmbeddingPanel:Width")} />
-            <RowContainer combo>
-              <TextInput
-                onChange={onChangeWidth}
-                placeholder={t("EnterWidth")}
-                value={width}
-                tabIndex={2}
-              />
-              <ComboBox
-                size="content"
-                scaled={false}
-                scaledOptions={true}
-                onSelect={onChangeWidthDimension}
-                options={dataDimensions}
-                selectedOption={widthDimension}
-                displaySelectedOption
-                directionY="bottom"
-              />
-            </RowContainer>
-          </ControlsGroup>
-          <ControlsGroup>
-            <Label className="label" text={t("EmbeddingPanel:Height")} />
-            <RowContainer combo>
-              <TextInput
-                onChange={onChangeHeight}
-                placeholder={t("EnterHeight")}
-                value={height}
-                tabIndex={3}
-              />
-              <ComboBox
-                size="content"
-                scaled={false}
-                scaledOptions={true}
-                onSelect={onChangeHeightDimension}
-                options={dataDimensions}
-                selectedOption={heightDimension}
-                displaySelectedOption
-                directionY="bottom"
-              />
-            </RowContainer>
-          </ControlsGroup>
-          <ControlsGroup>
-            <Label className="label" text={t("FrameId")} />
-            <TextInput
-              scale={true}
-              onChange={onChangeFrameId}
-              placeholder={t("EnterId")}
-              value={config.frameId}
-              tabIndex={4}
-            />
-          </ControlsGroup>
-          <InterfaceElements>
-            <Label className="label">{t("InterfaceElements")}</Label>
-
-            <LabelGroup>
-              <Checkbox
-                className="checkbox"
-                label={t("Menu")}
-                onChange={onChangeShowMenu}
-                isChecked={config.showMenu}
-              />
-              <HelpButton
-                place="right"
-                offsetRight={4}
-                size={12}
-                tooltipContent={
-                  <TooltipContent
-                    title={t("Menu")}
-                    description={t("MenuDescription")}
-                    img={theme.isBase ? LeftMenuUrl : LeftMenuDarkUrl}
-                  />
-                }
-              />
-            </LabelGroup>
-
-            <LabelGroup>
-              <Checkbox
-                className="checkbox"
-                label={t("Common:Title")}
-                onChange={onChangeShowTitle}
-                isChecked={config.showTitle}
-              />
-              <HelpButton
-                place="right"
-                offsetRight={4}
-                size={12}
-                tooltipContent={
-                  <TooltipContent
-                    title={t("Common:Title")}
-                    description={t("ManagerTitleDescription")}
-                    img={theme.isBase ? TitleUrl : TitleDarkUrl}
-                  />
-                }
-              />
-            </LabelGroup>
-            <LabelGroup>
-              <Checkbox
-                className="checkbox"
-                label={t("SettingUpColumns")}
-                onChange={toggleShowSettings}
-                isChecked={config.showSettings}
-              />
-              <HelpButton
-                place="right"
-                offsetRight={4}
-                size={12}
-                tooltipContent={
-                  <TooltipContent
-                    title={t("SettingUpColumns")}
-                    description={t("SettingUpColumnsDescription")}
-                    img={theme.isBase ? ColumnsUrl : ColumnsDarkUrl}
-                  />
-                }
-              />
-            </LabelGroup>
-            <LabelGroup>
-              <Checkbox
-                className="checkbox"
-                label={t("ActionButton")}
-                onChange={toggleActionButton}
-                isChecked={!config.disableActionButton}
-              />
-              <HelpButton
-                place="right"
-                offsetRight={4}
-                size={12}
-                tooltipContent={
-                  <TooltipContent
-                    title={t("ActionButton")}
-                    description={t("ActionButtonDescription")}
-                    img={theme.isBase ? ActionButtonUrl : ActionButtonDarkUrl}
-                  />
-                }
-              />
-            </LabelGroup>
-            <LabelGroup>
-              <Checkbox
-                className="checkbox"
-                label={t("Filter")}
-                onChange={onChangeShowFilter}
-                isChecked={config.showFilter}
-              />
-              <HelpButton
-                place="right"
-                offsetRight={4}
-                size={12}
-                tooltipContent={
-                  <TooltipContent
-                    title={t("SearchBlock")}
-                    description={t("ManagerSearchBlockDescription")}
-                    img={theme.isBase ? SearchUrl : SearchDarkUrl}
-                  />
-                }
-              />
-            </LabelGroup>
-            <LabelGroup>
-              <Checkbox
-                className="checkbox"
-                label={t("Header")}
-                onChange={onChangeShowHeader}
-                isChecked={config.showHeader}
-              />
-              <Text color="gray">{`(${t("MobileOnly")})`}</Text>
-              <HelpButton
-                place="right"
-                offsetRight={4}
-                size={12}
-                tooltipContent={
-                  <TooltipContent
-                    title={t("Header")}
-                    description={t("HeaderDescription")}
-                    img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
-                  />
-                }
-              />
-            </LabelGroup>
-          </InterfaceElements>
-          <CategorySubHeader>{t("DataDisplay")}</CategorySubHeader>
-          <ControlsGroup>
-            <LabelGroup>
-              <Label className="label" text={t("RoomOrFolder")} />
-              <HelpButton
-                offsetRight={0}
-                size={12}
-                tooltipContent={<Text fontSize="12px">{t("RoomOrFolderDescription")}</Text>}
-              />
-            </LabelGroup>
-            <FilesSelectorInputWrapper>
-              <FilesSelectorInput onSelectFolder={onChangeFolderId} isSelect />
-            </FilesSelectorInputWrapper>
-          </ControlsGroup>
-          {sharedLinks && (
+          <ControlsSection>
+            <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
             <ControlsGroup>
+              <Label className="label" text={t("EmbeddingPanel:Width")} />
+              <RowContainer combo>
+                <TextInput
+                  onChange={onChangeWidth}
+                  placeholder={t("EnterWidth")}
+                  value={width}
+                  tabIndex={2}
+                />
+                <ComboBox
+                  size="content"
+                  scaled={false}
+                  scaledOptions={true}
+                  onSelect={onChangeWidthDimension}
+                  options={dataDimensions}
+                  selectedOption={widthDimension}
+                  displaySelectedOption
+                  directionY="bottom"
+                />
+              </RowContainer>
+            </ControlsGroup>
+            <ControlsGroup>
+              <Label className="label" text={t("EmbeddingPanel:Height")} />
+              <RowContainer combo>
+                <TextInput
+                  onChange={onChangeHeight}
+                  placeholder={t("EnterHeight")}
+                  value={height}
+                  tabIndex={3}
+                />
+                <ComboBox
+                  size="content"
+                  scaled={false}
+                  scaledOptions={true}
+                  onSelect={onChangeHeightDimension}
+                  options={dataDimensions}
+                  selectedOption={heightDimension}
+                  displaySelectedOption
+                  directionY="bottom"
+                />
+              </RowContainer>
+            </ControlsGroup>
+            <ControlsGroup>
+              <Label className="label" text={t("FrameId")} />
+              <TextInput
+                scale={true}
+                onChange={onChangeFrameId}
+                placeholder={t("EnterId")}
+                value={config.frameId}
+                tabIndex={4}
+              />
+            </ControlsGroup>
+          </ControlsSection>
+
+          <ControlsSection>
+            <CategorySubHeader>{t("InterfaceElements")}</CategorySubHeader>
+
+            <CheckboxGroup>
               <LabelGroup>
-                <Label className="label" text={t("SharingPanel:ExternalLink")} />
+                <Checkbox
+                  className="checkbox"
+                  label={t("Menu")}
+                  onChange={onChangeShowMenu}
+                  isChecked={config.showMenu}
+                />
                 <HelpButton
-                  offsetRight={0}
+                  place="right"
+                  offsetRight={4}
                   size={12}
                   tooltipContent={
-                    <Text fontSize="12px">{t("CreateEditRoomDialog:PublicRoomDescription")}</Text>
+                    <TooltipContent
+                      title={t("Menu")}
+                      description={t("MenuDescription")}
+                      img={theme.isBase ? LeftMenuUrl : LeftMenuDarkUrl}
+                    />
                   }
                 />
               </LabelGroup>
-              <ComboBox
-                scaled={true}
-                onSelect={onChangeSharedLink}
-                options={sharedLinks}
-                selectedOption={sharedLinks[0]}
-                displaySelectedOption
-                directionY="bottom"
-              />
+
+              <LabelGroup>
+                <Checkbox
+                  className="checkbox"
+                  label={t("Common:Title")}
+                  onChange={onChangeShowTitle}
+                  isChecked={config.showTitle}
+                />
+                <HelpButton
+                  place="right"
+                  offsetRight={4}
+                  size={12}
+                  tooltipContent={
+                    <TooltipContent
+                      title={t("Common:Title")}
+                      description={t("ManagerTitleDescription")}
+                      img={theme.isBase ? TitleUrl : TitleDarkUrl}
+                    />
+                  }
+                />
+              </LabelGroup>
+              <LabelGroup>
+                <Checkbox
+                  className="checkbox"
+                  label={t("SettingUpColumns")}
+                  onChange={toggleShowSettings}
+                  isChecked={config.showSettings}
+                />
+                <HelpButton
+                  place="right"
+                  offsetRight={4}
+                  size={12}
+                  tooltipContent={
+                    <TooltipContent
+                      title={t("SettingUpColumns")}
+                      description={t("SettingUpColumnsDescription")}
+                      img={theme.isBase ? ColumnsUrl : ColumnsDarkUrl}
+                    />
+                  }
+                />
+              </LabelGroup>
+              <LabelGroup>
+                <Checkbox
+                  className="checkbox"
+                  label={t("ActionButton")}
+                  onChange={toggleActionButton}
+                  isChecked={!config.disableActionButton}
+                />
+                <HelpButton
+                  place="right"
+                  offsetRight={4}
+                  size={12}
+                  tooltipContent={
+                    <TooltipContent
+                      title={t("ActionButton")}
+                      description={t("ActionButtonDescription")}
+                      img={theme.isBase ? ActionButtonUrl : ActionButtonDarkUrl}
+                    />
+                  }
+                />
+              </LabelGroup>
+              <LabelGroup>
+                <Checkbox
+                  className="checkbox"
+                  label={t("Filter")}
+                  onChange={onChangeShowFilter}
+                  isChecked={config.showFilter}
+                />
+                <HelpButton
+                  place="right"
+                  offsetRight={4}
+                  size={12}
+                  tooltipContent={
+                    <TooltipContent
+                      title={t("SearchBlock")}
+                      description={t("ManagerSearchBlockDescription")}
+                      img={theme.isBase ? SearchUrl : SearchDarkUrl}
+                    />
+                  }
+                />
+              </LabelGroup>
+              <LabelGroup>
+                <Checkbox
+                  className="checkbox"
+                  label={t("Header")}
+                  onChange={onChangeShowHeader}
+                  isChecked={config.showHeader}
+                />
+                <Text color="gray">{`(${t("MobileOnly")})`}</Text>
+                <HelpButton
+                  place="right"
+                  offsetRight={4}
+                  size={12}
+                  tooltipContent={
+                    <TooltipContent
+                      title={t("Header")}
+                      description={t("HeaderDescription")}
+                      img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
+                    />
+                  }
+                />
+              </LabelGroup>
+            </CheckboxGroup>
+          </ControlsSection>
+          <ControlsSection>
+            <CategorySubHeader>{t("DataDisplay")}</CategorySubHeader>
+            <ControlsGroup>
+              <LabelGroup>
+                <Label className="label" text={t("RoomOrFolder")} />
+                <HelpButton
+                  offsetRight={0}
+                  size={12}
+                  tooltipContent={<Text fontSize="12px">{t("RoomOrFolderDescription")}</Text>}
+                />
+              </LabelGroup>
+              <FilesSelectorInputWrapper>
+                <FilesSelectorInput onSelectFolder={onChangeFolderId} isSelect />
+              </FilesSelectorInputWrapper>
             </ControlsGroup>
-          )}
-          <CategorySubHeader>{t("AdvancedDisplay")}</CategorySubHeader>
-          {/* <ControlsGroup>
+            {sharedLinks && (
+              <ControlsGroup>
+                <LabelGroup>
+                  <Label className="label" text={t("SharingPanel:ExternalLink")} />
+                  <HelpButton
+                    offsetRight={0}
+                    size={12}
+                    tooltipContent={
+                      <Text fontSize="12px">{t("CreateEditRoomDialog:PublicRoomDescription")}</Text>
+                    }
+                  />
+                </LabelGroup>
+                <ComboBox
+                  scaled={true}
+                  onSelect={onChangeSharedLink}
+                  options={sharedLinks}
+                  selectedOption={sharedLinks[0]}
+                  displaySelectedOption
+                  directionY="bottom"
+                />
+              </ControlsGroup>
+            )}
+          </ControlsSection>
+          <ControlsSection>
+            <CategorySubHeader>{t("AdvancedDisplay")}</CategorySubHeader>
+            {/* <ControlsGroup>
             {"id" in config ? (
               <>
                 <Label className="label" text={t("File Filter")} />
@@ -1054,75 +1062,74 @@ const Manager = (props) => {
               </>
             )}
           </ControlsGroup> */}
-          <ControlsGroup>
-            <Label className="label" text={t("SearchTerm")} />
-            <ColumnContainer>
+            <ControlsGroup>
+              <Label className="label" text={t("SearchTerm")} />
+              <ColumnContainer>
+                <TextInput
+                  scale={true}
+                  onChange={onChangeSearch}
+                  placeholder={t("Common:Search")}
+                  value={config.search}
+                  tabIndex={5}
+                />
+                <Checkbox
+                  className="checkbox"
+                  label={t("Files:WithSubfolders")}
+                  onChange={onChangeWithSubfolders}
+                  isChecked={withSubfolders}
+                />
+              </ColumnContainer>
+            </ControlsGroup>
+            <ControlsGroup>
+              <Label className="label" text={t("Common:SortBy")} />
+              <ComboBox
+                onSelect={onChangeSortBy}
+                options={dataSortBy}
+                scaled={true}
+                selectedOption={sortBy}
+                displaySelectedOption
+                directionY="top"
+              />
+            </ControlsGroup>
+            <ControlsGroup>
+              <Label className="label" text={t("SortOrder")} />
+              <ComboBox
+                onSelect={onChangeSortOrder}
+                options={dataSortOrder}
+                scaled={true}
+                selectedOption={sortOrder}
+                displaySelectedOption
+                directionY="top"
+              />
+            </ControlsGroup>
+            <ControlsGroup>
+              <LabelGroup>
+                <Label className="label" text={t("ItemsCount")} />
+                <HelpButton
+                  offsetRight={0}
+                  size={12}
+                  tooltipContent={<Text fontSize="12px">{t("ItemsCountDescription")}</Text>}
+                />
+              </LabelGroup>
               <TextInput
                 scale={true}
-                onChange={onChangeSearch}
-                placeholder={t("Common:Search")}
-                value={config.search}
-                tabIndex={5}
+                onChange={onChangeCount}
+                placeholder={t("EnterCount")}
+                value={config.count}
+                tabIndex={6}
               />
-              <Checkbox
-                className="checkbox"
-                label={t("Files:WithSubfolders")}
-                onChange={onChangeWithSubfolders}
-                isChecked={withSubfolders}
+            </ControlsGroup>
+            <ControlsGroup>
+              <Label className="label" text={t("Page")} />
+              <TextInput
+                scale={true}
+                onChange={onChangePage}
+                placeholder={t("EnterPage")}
+                value={config.page}
+                isDisabled={!config.count}
+                tabIndex={7}
               />
-            </ColumnContainer>
-          </ControlsGroup>
-          <ControlsGroup>
-            <Label className="label" text={t("Common:SortBy")} />
-            <ComboBox
-              onSelect={onChangeSortBy}
-              options={dataSortBy}
-              scaled={true}
-              selectedOption={sortBy}
-              displaySelectedOption
-              directionY="top"
-            />
-          </ControlsGroup>
-          <ControlsGroup>
-            <Label className="label" text={t("SortOrder")} />
-            <ComboBox
-              onSelect={onChangeSortOrder}
-              options={dataSortOrder}
-              scaled={true}
-              selectedOption={sortOrder}
-              displaySelectedOption
-              directionY="top"
-            />
-          </ControlsGroup>
-          <ControlsGroup>
-            <LabelGroup>
-              <Label className="label" text={t("ItemsCount")} />
-              <HelpButton
-                offsetRight={0}
-                size={12}
-                tooltipContent={<Text fontSize="12px">{t("ItemsCountDescription")}</Text>}
-              />
-            </LabelGroup>
-            <TextInput
-              scale={true}
-              onChange={onChangeCount}
-              placeholder={t("EnterCount")}
-              value={config.count}
-              tabIndex={6}
-            />
-          </ControlsGroup>
-          <ControlsGroup>
-            <Label className="label" text={t("Page")} />
-            <TextInput
-              scale={true}
-              onChange={onChangePage}
-              placeholder={t("EnterPage")}
-              value={config.page}
-              isDisabled={!config.count}
-              tabIndex={7}
-            />
-          </ControlsGroup>
-          <ControlsGroup>
+            </ControlsGroup>
             <Label className="label" text={t("DisplayColumns")} />
             <RadioButtonGroup
               orientation="vertical"
@@ -1133,7 +1140,7 @@ const Manager = (props) => {
               spacing="8px"
             />
             {columnDisplay === "custom" && (
-              <>
+              <ControlsGroup>
                 <ComboBox
                   onSelect={onColumnSelect}
                   options={
@@ -1161,9 +1168,9 @@ const Manager = (props) => {
                     />
                   ))}
                 </SelectedItemsContainer>
-              </>
+              </ControlsGroup>
             )}
-          </ControlsGroup>
+          </ControlsSection>
         </Controls>
       </Container>
 

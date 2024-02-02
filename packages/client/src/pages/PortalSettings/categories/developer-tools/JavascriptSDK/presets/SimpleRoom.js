@@ -37,6 +37,7 @@ import {
   Preview,
   GetCodeButtonWrapper,
   FilesSelectorInputWrapper,
+  ControlsSection,
 } from "./StyledPresets";
 
 const SimpleRoom = (props) => {
@@ -252,95 +253,100 @@ const SimpleRoom = (props) => {
           </Preview>
         )}
         <Controls>
-          <CategorySubHeader>{t("DataDisplay")}</CategorySubHeader>
-          <ControlsGroup>
-            <LabelGroup>
-              <Label className="label" text={t("Common:Room")} />
-              <HelpButton
-                offsetRight={0}
-                size={12}
-                tooltipContent={<Text fontSize="12px">{t("RoomOrFolderDescription")}</Text>}
-              />
-            </LabelGroup>
-            <FilesSelectorInputWrapper>
-              <FilesSelectorInput onSelectFolder={onChangeFolderId} isSelect isRoomsOnly />
-            </FilesSelectorInputWrapper>
-          </ControlsGroup>
-          {sharedLinks && (
+          <ControlsSection>
+            <CategorySubHeader>{t("DataDisplay")}</CategorySubHeader>
             <ControlsGroup>
               <LabelGroup>
-                <Label className="label" text={t("SharingPanel:ExternalLink")} />
+                <Label className="label" text={t("Common:Room")} />
                 <HelpButton
                   offsetRight={0}
                   size={12}
-                  tooltipContent={
-                    <Text fontSize="12px">{t("CreateEditRoomDialog:PublicRoomDescription")}</Text>
-                  }
+                  tooltipContent={<Text fontSize="12px">{t("RoomOrFolderDescription")}</Text>}
                 />
               </LabelGroup>
-              <ComboBox
-                scaled={true}
-                onSelect={onChangeSharedLink}
-                options={sharedLinks}
-                selectedOption={sharedLinks[0]}
-                displaySelectedOption
-                directionY="bottom"
+              <FilesSelectorInputWrapper>
+                <FilesSelectorInput onSelectFolder={onChangeFolderId} isSelect isRoomsOnly />
+              </FilesSelectorInputWrapper>
+            </ControlsGroup>
+            {sharedLinks && (
+              <ControlsGroup>
+                <LabelGroup>
+                  <Label className="label" text={t("SharingPanel:ExternalLink")} />
+                  <HelpButton
+                    offsetRight={0}
+                    size={12}
+                    tooltipContent={
+                      <Text fontSize="12px">{t("CreateEditRoomDialog:PublicRoomDescription")}</Text>
+                    }
+                  />
+                </LabelGroup>
+                <ComboBox
+                  scaled={true}
+                  onSelect={onChangeSharedLink}
+                  options={sharedLinks}
+                  selectedOption={sharedLinks[0]}
+                  displaySelectedOption
+                  directionY="bottom"
+                />
+              </ControlsGroup>
+            )}
+          </ControlsSection>
+
+          <ControlsSection>
+            <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
+            <ControlsGroup>
+              <Label className="label" text={t("EmbeddingPanel:Width")} />
+              <RowContainer combo>
+                <TextInput
+                  onChange={onChangeWidth}
+                  placeholder={t("EnterWidth")}
+                  value={width}
+                  tabIndex={2}
+                />
+                <ComboBox
+                  size="content"
+                  scaled={false}
+                  scaledOptions={true}
+                  onSelect={onChangeWidthDimension}
+                  options={dataDimensions}
+                  selectedOption={widthDimension}
+                  displaySelectedOption
+                  directionY="bottom"
+                />
+              </RowContainer>
+            </ControlsGroup>
+            <ControlsGroup>
+              <Label className="label" text={t("EmbeddingPanel:Height")} />
+              <RowContainer combo>
+                <TextInput
+                  onChange={onChangeHeight}
+                  placeholder={t("EnterHeight")}
+                  value={height}
+                  tabIndex={3}
+                />
+                <ComboBox
+                  size="content"
+                  scaled={false}
+                  scaledOptions={true}
+                  onSelect={onChangeHeightDimension}
+                  options={dataDimensions}
+                  selectedOption={heightDimension}
+                  displaySelectedOption
+                  directionY="bottom"
+                />
+              </RowContainer>
+            </ControlsGroup>
+            <ControlsGroup>
+              <Label className="label" text={t("FrameId")} />
+              <TextInput
+                scale={true}
+                onChange={onChangeFrameId}
+                placeholder={t("EnterId")}
+                value={config.frameId}
+                tabIndex={4}
               />
             </ControlsGroup>
-          )}
-          <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
-          <ControlsGroup>
-            <Label className="label" text={t("EmbeddingPanel:Width")} />
-            <RowContainer combo>
-              <TextInput
-                onChange={onChangeWidth}
-                placeholder={t("EnterWidth")}
-                value={width}
-                tabIndex={2}
-              />
-              <ComboBox
-                size="content"
-                scaled={false}
-                scaledOptions={true}
-                onSelect={onChangeWidthDimension}
-                options={dataDimensions}
-                selectedOption={widthDimension}
-                displaySelectedOption
-                directionY="bottom"
-              />
-            </RowContainer>
-          </ControlsGroup>
-          <ControlsGroup>
-            <Label className="label" text={t("EmbeddingPanel:Height")} />
-            <RowContainer combo>
-              <TextInput
-                onChange={onChangeHeight}
-                placeholder={t("EnterHeight")}
-                value={height}
-                tabIndex={3}
-              />
-              <ComboBox
-                size="content"
-                scaled={false}
-                scaledOptions={true}
-                onSelect={onChangeHeightDimension}
-                options={dataDimensions}
-                selectedOption={heightDimension}
-                displaySelectedOption
-                directionY="bottom"
-              />
-            </RowContainer>
-          </ControlsGroup>
-          <ControlsGroup>
-            <Label className="label" text={t("FrameId")} />
-            <TextInput
-              scale={true}
-              onChange={onChangeFrameId}
-              placeholder={t("EnterId")}
-              value={config.frameId}
-              tabIndex={4}
-            />
-          </ControlsGroup>
+          </ControlsSection>
         </Controls>
       </Container>
 

@@ -20,7 +20,8 @@ export const Controls = styled(Box)`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 32px;
+  margin-top: 16px;
 
   @media ${tablet} {
     min-width: 0;
@@ -41,7 +42,7 @@ export const Controls = styled(Box)`
 `;
 
 export const CategoryHeader = styled.div`
-  margin-top: 40px;
+  margin-top: 24px;
   margin-bottom: 24px;
   font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
   font-style: normal;
@@ -59,8 +60,6 @@ export const CategoryHeader = styled.div`
 `;
 
 export const CategorySubHeader = styled.div`
-  margin-top: 8px;
-  margin-bottom: 8px;
   font-size: ${(props) => props.theme.getCorrectFontSize("15px")};
   font-style: normal;
   font-weight: 600;
@@ -87,7 +86,6 @@ export const CategorySubHeader = styled.div`
 `;
 
 export const CategoryDescription = styled(Box)`
-  margin-top: 5px;
   max-width: 700px;
   .sdk-description {
     line-height: 20px;
@@ -98,7 +96,7 @@ export const CategoryDescription = styled(Box)`
 export const ControlsGroup = styled(Box)`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
 
   .toggle {
     position: relative;
@@ -114,17 +112,22 @@ export const ControlsGroup = styled(Box)`
   `}
 `;
 
+export const CheckboxGroup = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
 export const LabelGroup = styled(Box)`
   display: inline-flex;
   align-items: center;
   gap: 4px;
 `;
 
-export const InterfaceElements = styled(Box)`
+export const ControlsSection = styled(Box)`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-top: 24px;
 `;
 
 export const Frame = styled(Box)`
@@ -165,7 +168,7 @@ export const Container = styled(Box)`
   display: flex;
   flex-direction: row-reverse;
   justify-content: flex-end;
-  gap: 16px;
+  gap: 48px;
 
   @media ${tablet} {
     flex-direction: column;
@@ -198,7 +201,6 @@ export const ColumnContainer = styled(Box)`
 
 export const Preview = styled(Box)`
   width: 100%;
-  margin-top: 24px;
   min-width: 660px;
   flex-direction: row;
 

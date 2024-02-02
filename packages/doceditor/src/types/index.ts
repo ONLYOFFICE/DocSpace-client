@@ -134,9 +134,7 @@ export interface IResponse {
   error?: unknown;
 }
 
-export interface EditorProps {
-  data: IResponse;
-}
+export interface EditorProps extends IResponse {}
 
 export type TSaveAsEventData = {
   title: string;

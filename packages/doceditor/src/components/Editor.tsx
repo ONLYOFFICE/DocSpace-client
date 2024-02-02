@@ -1,16 +1,32 @@
 "use client";
 import React from "react";
+import { ThemeProvider } from "styled-components";
 
 import { DocumentEditor } from "@onlyoffice/document-editor-react";
 import IConfig from "@onlyoffice/document-editor-react/dist/esm/model/config";
 
+import { Base, Dark, TColorScheme } from "@docspace/shared/themes";
+import { getSystemTheme } from "@docspace/shared/utils";
+import { ThemeKeys } from "@docspace/shared/enums";
+import { getAppearanceTheme } from "@docspace/shared/api/settings";
+
 import { EditorProps } from "@/types";
 import useSocketHelper from "@/hooks/useSocketHelper";
 import useSelectFolderDialog from "@/hooks/useSelectFolderDialog";
+
 import SelectFolderDialog from "./SelectFolderDialog";
 
-const Editor = ({ data }: EditorProps) => {
-  const { config, editorUrl, settings, successAuth, user } = data;
+const SYSTEM_THEME = getSystemTheme();
+
+const Editor = ({
+  config,
+  editorUrl,
+  settings,
+  successAuth,
+  user,
+}: EditorProps) => {
+  const [currentColorTheme, setCurrentColorTheme] =
+    React.useState<TColorScheme | null>(null);
 
   const { socketHelper } = useSocketHelper({ socketUrl: settings.socketUrl });
 
@@ -25,6 +41,36 @@ const Editor = ({ data }: EditorProps) => {
   const onDocumentReady = (): void => {
     throw new Error("Function not implemented.");
   };
+
+  const getUserTheme = () => {
+    let theme = user.theme;
+    if (user.theme === ThemeKeys.SystemStr) theme = SYSTEM_THEME;
+
+    if (theme === ThemeKeys.BaseStr)
+      return { ...Base, currentColorTheme, interfaceDirection: "ltr" };
+
+    return { ...Base, currentColorTheme, interfaceDirection: "ltr" };
+  };
+
+  const getCurrentColorTheme = React.useCallback(async () => {
+    const colorThemes = await getAppearanceTheme();
+
+    const colorTheme = colorThemes.themes.find(
+      (t) => t.id === colorThemes.selected,
+    );
+
+    if (colorTheme) setCurrentColorTheme(colorTheme);
+  }, []);
+
+  React.useEffect(() => {
+    getCurrentColorTheme();
+  }, [getCurrentColorTheme]);
+
+  React.useEffect(() => {
+    window.timezone = settings.timezone;
+  }, [settings.timezone]);
+
+  const theme = getUserTheme();
 
   const fileInfo = config?.file;
   const documentserverUrl = editorUrl.docServiceUrl;
@@ -43,7 +89,7 @@ const Editor = ({ data }: EditorProps) => {
   }
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <DocumentEditor
         id={"docspace_editor"}
         documentServerUrl={documentserverUrl}
@@ -63,7 +109,7 @@ const Editor = ({ data }: EditorProps) => {
           fileInfo={fileInfo}
         />
       )}
-    </>
+    </ThemeProvider>
   );
 };
 

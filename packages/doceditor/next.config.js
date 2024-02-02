@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   basePath: "/doceditor",
+  compiler: {
+    styledComponents: true,
+  },
   logging: {
     fetches: {
       fullUrl: true,

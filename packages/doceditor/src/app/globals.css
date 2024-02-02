@@ -1,9 +1,3 @@
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
 html,
 body {
   height: 100%;
@@ -11,6 +5,9 @@ body {
   font-family: "Open Sans", sans-serif, Arial;
   font-size: 13px;
   overscroll-behavior: none;
+
+  padding: 0;
+  margin: 0;
 }
 
 #root {

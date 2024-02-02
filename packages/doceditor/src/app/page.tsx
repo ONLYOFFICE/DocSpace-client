@@ -32,5 +32,5 @@ export default async function Page({
 
   const data = await getData(fileId, version, doc, action === "view", share);
 
-  return <Editor data={data} />;
+  return <Editor {...data} />;
 }

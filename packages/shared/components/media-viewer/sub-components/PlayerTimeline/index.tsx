@@ -5,13 +5,13 @@ import { formatTime } from "../../MediaViewer.utils";
 import type PlayerTimelineProps from "./PlayerTimeline.props";
 import { HoverProgress, PlayerTimelineWrapper } from "./PlayerTimeline.styled";
 
-function PlayerTimeline({
+export const PlayerTimeline = ({
   value,
   duration,
   onChange,
   onMouseEnter,
   onMouseLeave,
-}: PlayerTimelineProps) {
+}: PlayerTimelineProps) => {
   const timelineTooltipRef = useRef<HTMLTimeElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
   const hoverProgressRef = useRef<HTMLDivElement>(null);
@@ -114,6 +114,4 @@ function PlayerTimeline({
       />
     </PlayerTimelineWrapper>
   );
-}
-
-export default PlayerTimeline;
+};

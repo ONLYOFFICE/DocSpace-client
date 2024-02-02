@@ -22,9 +22,9 @@ import {
   getPDFContextModel,
 } from "./helpers/contextModel";
 
-import ViewerWrapper from "./sub-components/ViewerWrapper";
+import { ViewerWrapper } from "./sub-components/ViewerWrapper";
 
-function MediaViewer(props: MediaViewerProps): JSX.Element | undefined {
+const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
   const {
     files,
     visible,
@@ -432,6 +432,6 @@ function MediaViewer(props: MediaViewerProps): JSX.Element | undefined {
       errorTitle={t("Common:MediaError")}
     />
   ) : undefined;
-}
+};
 
-export default MediaViewer;
+export { MediaViewer };

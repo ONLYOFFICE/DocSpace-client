@@ -20,17 +20,17 @@ import { includesMethod } from "@docspace/shared/utils/typeGuards";
 import { calculateAdjustImageUtil } from "../../MediaViewer.utils";
 import type { Point } from "../../MediaViewer.types";
 
-import PlayerBigPlayButton from "../PlayerBigPlayButton";
-import ViewerLoader from "../ViewerLoader";
-import PlayerPlayButton from "../PlayerPlayButton";
-import PlayerDuration from "../PlayerDuration/inxed";
-import PlayerVolumeControl from "../PlayerVolumeControl";
-import PlayerTimeline from "../PlayerTimeline";
-import PlayerSpeedControl from "../PlayerSpeedControl";
-import PlayerFullScreen from "../PlayerFullScreen";
-import PlayerDesktopContextMenu from "../PlayerDesktopContextMenu";
+import { PlayerBigPlayButton } from "../PlayerBigPlayButton";
+import { ViewerLoader } from "../ViewerLoader";
+import { PlayerPlayButton } from "../PlayerPlayButton";
+import { PlayerDuration } from "../PlayerDuration/inxed";
+import { PlayerVolumeControl } from "../PlayerVolumeControl";
+import { PlayerTimeline } from "../PlayerTimeline";
+import { PlayerSpeedControl } from "../PlayerSpeedControl";
+import { PlayerFullScreen } from "../PlayerFullScreen";
+import { PlayerDesktopContextMenu } from "../PlayerDesktopContextMenu";
 import { KeyboardEventKeys } from "../../MediaViewer.enums";
-import PlayerMessageError from "../PlayerMessageError";
+import { MessageError } from "../MessageError";
 
 import ViewerPlayerProps from "./ViewerPlayer.props";
 import {
@@ -47,7 +47,7 @@ import {
   defaultVolume,
 } from "./ViewerPlayer.constants";
 
-function ViewerPlayer({
+export const ViewerPlayer = ({
   src,
   isAudio,
   isVideo,
@@ -76,7 +76,7 @@ function ViewerPlayer({
   removeToolbarVisibleTimer,
   removePanelVisibleTimeout,
   restartToolbarVisibleTimer,
-}: ViewerPlayerProps) {
+}: ViewerPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const playerWrapperRef = useRef<HTMLDivElement>(null);
@@ -613,7 +613,7 @@ function ViewerPlayer({
         <ViewerLoader isError={isError} isLoading={isLoading} />
       </ContainerPlayer>
       {isError ? (
-        <PlayerMessageError
+        <MessageError
           model={model}
           onMaskClick={onMask}
           errorTitle={errorTitle}
@@ -682,6 +682,4 @@ function ViewerPlayer({
       )}
     </>
   );
-}
-
-export default ViewerPlayer;
+};

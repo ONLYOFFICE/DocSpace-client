@@ -13,17 +13,17 @@ import type { TContextMenuRef } from "@docspace/shared/components/context-menu";
 
 import { StyledViewerContainer } from "../../MediaViewer.styled";
 
-import NextButton from "../NextButton";
-import PrevButton from "../PrevButton";
-import ImageViewer from "../ImageViewer";
-import MobileDetails from "../MobileDetails";
-import DesktopDetails from "../DesktopDetails";
-import ViewerPlayer from "../ViewerPlayer";
-import PDFViewer from "../PDFViewer";
+import { NextButton } from "../NextButton";
+import { PrevButton } from "../PrevButton";
+import { ImageViewer } from "../ImageViewer";
+import { MobileDetails } from "../MobileDetails";
+import { DesktopDetails } from "../DesktopDetails";
+import { ViewerPlayer } from "../ViewerPlayer";
+import { PDFViewer } from "../PDFViewer";
 
 import type ViewerProps from "./Viewer.props";
 
-function Viewer(props: ViewerProps) {
+export const Viewer = (props: ViewerProps) => {
   const {
     title,
     isPdf,
@@ -308,6 +308,4 @@ function Viewer(props: ViewerProps) {
       )}
     </StyledViewerContainer>
   );
-}
-
-export default Viewer;
+};

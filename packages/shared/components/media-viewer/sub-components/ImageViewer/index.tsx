@@ -20,16 +20,16 @@ import {
   getImagePositionAndSize,
 } from "../../MediaViewer.utils";
 
-import ViewerLoader from "../ViewerLoader";
-import ImageViewerToolbar from "../ImageViewerToolbar";
+import { ViewerLoader } from "../ViewerLoader";
+import { ViewerToolbar } from "../ViewerToolbar";
 import { KeyboardEventKeys, ToolbarActionType } from "../../MediaViewer.enums";
 import type { Point } from "../../MediaViewer.types";
 
 import {
   ImperativeHandle,
   ToolbarItemType,
-} from "../ImageViewerToolbar/ImageViewerToolbar.props";
-import PlayerMessageError from "../PlayerMessageError";
+} from "../ViewerToolbar/ViewerToolbar.props";
+import { MessageError } from "../MessageError";
 
 import {
   Image,
@@ -45,7 +45,7 @@ import {
   DefaultSpeedScale,
 } from "./ImageViewer.constants";
 
-function ImageViewer({
+export const ImageViewer = ({
   src,
   onPrev,
   onNext,
@@ -65,7 +65,7 @@ function ImageViewer({
   contextModel,
   errorTitle,
   devices,
-}: ImageViewerProps) {
+}: ImageViewerProps) => {
   const imgRef = useRef<HTMLImageElement>(null);
   const imgWrapperRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -117,7 +117,7 @@ function ImageViewer({
   );
 
   const loadImage = React.useCallback(async () => {
-    if (!src || !window.DocSpaceConfig.imageThumbnails) return;
+    if (!src || !window.DocSpaceConfig?.imageThumbnails) return;
 
     try {
       const res = await fetch(src);
@@ -853,7 +853,7 @@ function ImageViewer({
   }, [src, isTiff]);
 
   useEffect(() => {
-    if (!window.DocSpaceConfig.imageThumbnails) return;
+    if (!window.DocSpaceConfig?.imageThumbnails) return;
 
     if (!thumbnailSrc) setIsLoading(true);
   }, [thumbnailSrc]);
@@ -864,7 +864,7 @@ function ImageViewer({
   }, [src, version]);
 
   useEffect(() => {
-    if (!imageId || thumbnailSrc || !window.DocSpaceConfig.imageThumbnails)
+    if (!imageId || thumbnailSrc || !window.DocSpaceConfig?.imageThumbnails)
       return;
 
     indexedDBHelper
@@ -887,7 +887,7 @@ function ImageViewer({
         $backgroundBlack={backgroundBlack}
       >
         {isError ? (
-          <PlayerMessageError
+          <MessageError
             model={model}
             isMobile={isMobile}
             onMaskClick={onMask}
@@ -899,8 +899,9 @@ function ImageViewer({
 
         <ImageWrapper ref={imgWrapperRef} $isLoading={isLoading}>
           <Image
+            draggable="false"
             src={
-              !window.DocSpaceConfig.imageThumbnails
+              !window.DocSpaceConfig?.imageThumbnails
                 ? src
                 : thumbnailSrc
                   ? `${thumbnailSrc}&size=1280x720`
@@ -916,7 +917,7 @@ function ImageViewer({
       </ImageViewerContainer>
 
       {isDesktop && !isMobile && panelVisible && !isError && (
-        <ImageViewerToolbar
+        <ViewerToolbar
           ref={toolbarRef}
           toolbar={toolbar}
           percentValue={style.scale.get()}
@@ -927,6 +928,4 @@ function ImageViewer({
       )}
     </>
   );
-}
-
-export default ImageViewer;
+};

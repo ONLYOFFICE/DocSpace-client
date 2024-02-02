@@ -11,7 +11,7 @@ type NextButtonProps = {
   isPDFFile: boolean;
 };
 
-function NextButton({ nextClick, isPDFFile }: NextButtonProps) {
+export const NextButton = ({ nextClick, isPDFFile }: NextButtonProps) => {
   return (
     <StyledSwitchToolbar onClick={nextClick} isPDFFile={isPDFFile}>
       <StyledButtonScroll orientation="right">
@@ -19,6 +19,4 @@ function NextButton({ nextClick, isPDFFile }: NextButtonProps) {
       </StyledButtonScroll>
     </StyledSwitchToolbar>
   );
-}
-
-export default NextButton;
+};

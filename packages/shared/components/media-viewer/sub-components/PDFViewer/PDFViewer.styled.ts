@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
-import DesktopDetails from "../DesktopDetails";
-import ImageViewerToolbar from "../ImageViewerToolbar";
+import { DesktopDetails } from "../DesktopDetails";
+import { ViewerToolbar } from "../ViewerToolbar";
 
 type Panel = { isPanelOpen?: boolean };
 
@@ -105,7 +105,7 @@ export const DesktopTopBar = styled(DesktopDetails)<Panel>`
   }
 `;
 
-export const PDFToolbar = styled(ImageViewerToolbar)<Panel>`
+export const PDFToolbar = styled(ViewerToolbar)<Panel>`
   left: ${({ theme, isPanelOpen }) => {
     const value = isPanelOpen ? 306 / 2 : 0;
     const operator = theme.interfaceDirection === "rtl" ? "-" : "+";

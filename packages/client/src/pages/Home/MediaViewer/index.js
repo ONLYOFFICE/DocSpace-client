@@ -4,7 +4,7 @@ import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import queryString from "query-string";
 
-import MediaViewer from "@docspace/shared/components/media-viewer";
+import { MediaViewer } from "@docspace/shared/components/media-viewer";
 import { PluginFileType } from "SRC_DIR/helpers/plugins/constants";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";

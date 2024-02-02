@@ -10,11 +10,11 @@ import { ControlBtn } from "../../MediaViewer.styled";
 import type { DesktopDetailsProps } from "./DesktopDetails.type";
 import { DesktopDetailsContainer } from "./DesktopDetails.styled";
 
-function DesktopDetails({
+export const DesktopDetails = ({
   onMaskClick,
   title,
   className,
-}: DesktopDetailsProps) {
+}: DesktopDetailsProps) => {
   return (
     <DesktopDetailsContainer className={className}>
       <Text dir="auto" isBold fontSize="14px" className="title">
@@ -30,6 +30,4 @@ function DesktopDetails({
       </ControlBtn>
     </DesktopDetailsContainer>
   );
-}
-
-export default DesktopDetails;
+};

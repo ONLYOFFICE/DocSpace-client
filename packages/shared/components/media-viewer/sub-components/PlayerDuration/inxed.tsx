@@ -23,13 +23,14 @@ type PlayerDurationProps = {
   duration: number;
 };
 
-function PlayerDuration({ currentTime, duration }: PlayerDurationProps) {
+export const PlayerDuration = ({
+  currentTime,
+  duration,
+}: PlayerDurationProps) => {
   return (
     <PlayerDurationWrapper>
       <time>{formatTime(currentTime)}</time> /{" "}
       <time>{formatTime(duration)}</time>
     </PlayerDurationWrapper>
   );
-}
-
-export default PlayerDuration;
+};

@@ -4,18 +4,15 @@ import { ReactSVG } from "react-svg";
 import { Text } from "@docspace/shared/components/text";
 import { isSeparator } from "@docspace/shared/utils/typeGuards";
 
-import {
-  StyledErrorToolbar,
-  StyledMediaError,
-} from "./PlayerMessageError.styled";
-import type PlayerMessageErrorProps from "./PlayerMessageError.props";
+import { StyledErrorToolbar, StyledMediaError } from "./MessageError.styled";
+import type PlayerMessageErrorProps from "./MessageError.props";
 
-function PlayerMessageError({
+export const MessageError = ({
   model,
   isMobile,
   errorTitle,
   onMaskClick,
-}: PlayerMessageErrorProps) {
+}: PlayerMessageErrorProps) => {
   const items = !isMobile
     ? model.filter((el) => el.key !== "rename")
     : model.filter((el) => el.key === "delete" || el.key === "download");
@@ -51,6 +48,4 @@ function PlayerMessageError({
       )}
     </div>
   );
-}
-
-export default PlayerMessageError;
+};

@@ -10,7 +10,7 @@ type PrevButtonProps = {
   prevClick?: VoidFunction;
 };
 
-function PrevButton({ prevClick }: PrevButtonProps) {
+export const PrevButton = ({ prevClick }: PrevButtonProps) => {
   return (
     <StyledSwitchToolbar left onClick={prevClick}>
       <StyledButtonScroll orientation="left">
@@ -18,6 +18,4 @@ function PrevButton({ prevClick }: PrevButtonProps) {
       </StyledButtonScroll>
     </StyledSwitchToolbar>
   );
-}
-
-export default PrevButton;
+};

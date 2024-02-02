@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction } from "react";
-import { BookMark } from "../../PDFViewer.props";
+import { BookMarkType } from "../../PDFViewer.props";
 
 interface MobileDrawerProps {
-  bookmarks: BookMark[];
+  bookmarks: BookMarkType[];
   isOpenMobileDrawer: boolean;
   navigate: (page: number) => void;
   setIsOpenMobileDrawer: Dispatch<SetStateAction<boolean>>;

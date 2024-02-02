@@ -5,18 +5,16 @@ import PlayerFullSceenProps from "./PlayerFullScreen.props";
 
 import { PlayerFullSceenWrapper } from "./PlayerFullScreen.styled";
 
-function PlayerFullScreen({
-  isAudio,
-  onClick,
-  isFullScreen,
-}: PlayerFullSceenProps) {
-  if (isAudio) return;
+export const PlayerFullScreen = memo(
+  ({ isAudio, onClick, isFullScreen }: PlayerFullSceenProps) => {
+    if (isAudio) return;
 
-  return (
-    <PlayerFullSceenWrapper onClick={onClick}>
-      {isFullScreen ? <IconExitFullScreen /> : <IconFullScreen />}
-    </PlayerFullSceenWrapper>
-  );
-}
+    return (
+      <PlayerFullSceenWrapper onClick={onClick}>
+        {isFullScreen ? <IconExitFullScreen /> : <IconFullScreen />}
+      </PlayerFullSceenWrapper>
+    );
+  },
+);
 
-export default memo(PlayerFullScreen);
+PlayerFullScreen.displayName = "PlayerFullScreen";

@@ -57,20 +57,18 @@ export type Point = { x: number; y: number };
 export interface MediaViewerProps {
   t: TranslationType;
 
-  userAccess: boolean;
-  currentFileId: NumberOrString;
-
-  visible: boolean;
-
-  extsImagePreviewed: string[];
-
   files: TFile[];
-  playlist: PlaylistType[];
+  visible: boolean;
   playlistPos: number;
+  isPreviewFile: boolean;
+  playlist: PlaylistType[];
+  extsImagePreviewed: string[];
+  currentFileId: NumberOrString;
+  getIcon: (size: number, ext: string, ...arg: unknown[]) => string;
 
   currentDeviceType?: DeviceType;
   deleteDialogVisible?: boolean;
-  isPreviewFile: boolean;
+  userAccess?: boolean;
   archiveRoomsId?: number;
 
   pluginContextMenuItems?: {
@@ -83,8 +81,6 @@ export interface MediaViewerProps {
       withActiveItem?: boolean;
     };
   }[];
-
-  getIcon: (size: number, ext: string, ...arg: unknown[]) => string;
 
   onClose?: VoidFunction;
   onError?: VoidFunction;

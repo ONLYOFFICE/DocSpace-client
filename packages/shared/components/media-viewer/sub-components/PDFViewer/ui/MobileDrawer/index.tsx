@@ -6,7 +6,7 @@ import { useSpring, config } from "@react-spring/web";
 import ViewTilesIcon from "PUBLIC_DIR/images/view-tiles.react.svg";
 import ViewRowsIcon from "PUBLIC_DIR/images/view-rows.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/cross.react.svg";
-import Bookmarks from "../Bookmarks";
+import { Bookmarks } from "../Bookmarks";
 
 import {
   MobileDrawerContainer,
@@ -17,13 +17,13 @@ import { Thumbnails } from "../SideBar/Sidebar.styled";
 
 import MobileDrawerProps from "./MobileDrawer.props";
 
-function MobileDrawer({
+export const MobileDrawer = ({
   bookmarks,
   isOpenMobileDrawer,
   navigate,
   resizePDFThumbnail,
   setIsOpenMobileDrawer,
-}: MobileDrawerProps) {
+}: MobileDrawerProps) => {
   const [height, setheight] = useState(window.innerHeight);
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -178,6 +178,4 @@ function MobileDrawer({
       </MobileDrawerWrapper>
     </MobileDrawerContainer>
   );
-}
-
-export default MobileDrawer;
+};

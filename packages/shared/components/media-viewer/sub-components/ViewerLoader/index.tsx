@@ -3,12 +3,12 @@ import React from "react";
 import { StyledLoader, StyledLoaderWrapper } from "./ViewerLoader.styled";
 import type { ViewerLoaderProps } from "./ViewerLoader.types";
 
-export default function ViewerLoader({
+export const ViewerLoader = ({
   onClick,
   isError,
   isLoading,
   withBackground,
-}: ViewerLoaderProps) {
+}: ViewerLoaderProps) => {
   if (!isLoading || isError) return;
 
   return (
@@ -16,4 +16,4 @@ export default function ViewerLoader({
       <StyledLoader />
     </StyledLoaderWrapper>
   );
-}
+};

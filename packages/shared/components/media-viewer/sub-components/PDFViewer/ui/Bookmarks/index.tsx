@@ -7,7 +7,7 @@ import {
 import BookmarksProps from "./Bookmarks.props";
 import { Item, List, Text } from "./Bookmarks.styled";
 
-function Bookmarks({ bookmarks, navigate }: BookmarksProps) {
+export const Bookmarks = ({ bookmarks, navigate }: BookmarksProps) => {
   return (
     <CustomScrollbarsVirtualList stype={ScrollbarType.mediumBlack}>
       <List>
@@ -21,6 +21,4 @@ function Bookmarks({ bookmarks, navigate }: BookmarksProps) {
       </List>
     </CustomScrollbarsVirtualList>
   );
-}
-
-export default Bookmarks;
+};

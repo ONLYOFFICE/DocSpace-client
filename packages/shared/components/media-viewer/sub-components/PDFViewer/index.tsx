@@ -11,10 +11,17 @@ import { loadScript } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { getDocumentServiceLocation } from "@docspace/shared/api/files";
 
-import PDFViewerProps, { BookMark } from "./PDFViewer.props";
-import ViewerLoader from "../ViewerLoader";
-import MainPanel from "./ui/MainPanel";
-import Sidebar from "./ui/SideBar";
+import type {
+  ImperativeHandle,
+  ToolbarItemType,
+} from "../ViewerToolbar/ViewerToolbar.props";
+import { ViewerLoader } from "../ViewerLoader";
+
+import PDFViewerProps, { BookMarkType } from "./PDFViewer.props";
+
+import { Sidebar } from "./ui/SideBar";
+import { MainPanel } from "./ui/MainPanel";
+import { MobileDrawer } from "./ui/MobileDrawer";
 
 import {
   ErrorMessage,
@@ -26,19 +33,15 @@ import {
 } from "./PDFViewer.styled";
 
 import { ToolbarActionType } from "../../MediaViewer.enums";
-import {
-  ImperativeHandle,
-  ToolbarItemType,
-} from "../ImageViewerToolbar/ImageViewerToolbar.props";
+
 import { PageCount, PageCountRef } from "./ui/PageCount";
-import MobileDrawer from "./ui/MobileDrawer";
 
 // import { isDesktop } from "react-device-detect";?
 const pdfViewerId = "pdf-viewer";
 const MaxScale = 5;
 const MinScale = 0.5;
 
-function PDFViewer({
+export const PDFViewer = ({
   src,
   title,
   toolbar,
@@ -52,7 +55,7 @@ function PDFViewer({
   generateContextMenu,
   setIsOpenContextMenu,
   setIsPDFSidebarOpen,
-}: PDFViewerProps) {
+}: PDFViewerProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   // TODO: Add types
@@ -65,7 +68,7 @@ function PDFViewer({
   const pageCountRef = useRef<PageCountRef>(null);
 
   const [file, setFile] = useState<ArrayBuffer | string | null>();
-  const [bookmarks, setBookmarks] = useState<BookMark[]>([]);
+  const [bookmarks, setBookmarks] = useState<BookMarkType[]>([]);
 
   const [isLoadedViewerScript, setIsLoadedViewerScript] = useState<boolean>(
     () => {
@@ -92,9 +95,12 @@ function PDFViewer({
     pdfThumbnail.current =
       pdfViewer.current.createThumbnails("viewer-thumbnail");
 
-    pdfViewer.current.registerEvent("onStructure", (structure: BookMark[]) => {
-      setBookmarks(structure);
-    });
+    pdfViewer.current.registerEvent(
+      "onStructure",
+      (structure: BookMarkType[]) => {
+        setBookmarks(structure);
+      },
+    );
 
     pdfViewer.current.registerEvent("onZoom", (currentZoom: number) => {
       toolbarRef.current?.setPercentValue(currentZoom);
@@ -122,7 +128,7 @@ function PDFViewer({
   };
 
   const loadViewerScript = useCallback(async () => {
-    const path = window.DocSpaceConfig.pdfViewerUrl;
+    const path = window.DocSpaceConfig?.pdfViewerUrl;
     const { docServiceUrl } = await getDocumentServiceLocation();
 
     setIsLoadingScript(true);
@@ -347,6 +353,4 @@ function PDFViewer({
       </PDFViewerToolbarWrapper>
     </>
   );
-}
-
-export default PDFViewer;
+};

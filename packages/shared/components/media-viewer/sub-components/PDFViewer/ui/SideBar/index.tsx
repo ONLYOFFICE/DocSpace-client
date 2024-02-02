@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ViewRowsIcon from "PUBLIC_DIR/images/view-rows.react.svg";
 import ViewTilesIcon from "PUBLIC_DIR/images/view-tiles.react.svg";
-import Bookmarks from "../Bookmarks";
+import { Bookmarks } from "../Bookmarks";
 
 import SidebarProps from "./Sidebar.props";
 import {
@@ -11,12 +11,12 @@ import {
   Thumbnails,
 } from "./Sidebar.styled";
 
-function Sidebar({
+export const Sidebar = ({
   bookmarks,
   isPanelOpen,
   setIsPDFSidebarOpen,
   navigate,
-}: SidebarProps) {
+}: SidebarProps) => {
   const [toggle, setToggle] = useState<boolean>(false);
 
   const handleToggle = () => {
@@ -38,6 +38,4 @@ function Sidebar({
       <Thumbnails id="viewer-thumbnail" visible={!toggle} />
     </SidebarContainer>
   );
-}
-
-export default Sidebar;
+};

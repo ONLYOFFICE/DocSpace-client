@@ -3,7 +3,10 @@ import BigIconPlay from "PUBLIC_DIR/images/media.bgplay.react.svg";
 import WrapperPlayerBigPlayButton from "./PlayerBigPlayButton.styled";
 import PlayerBigPlayButtonProps from "./PlayerBigPlayButton.props";
 
-function PlayerBigPlayButton({ visible, onClick }: PlayerBigPlayButtonProps) {
+export const PlayerBigPlayButton = ({
+  visible,
+  onClick,
+}: PlayerBigPlayButtonProps) => {
   if (!visible) return;
 
   return (
@@ -11,6 +14,4 @@ function PlayerBigPlayButton({ visible, onClick }: PlayerBigPlayButtonProps) {
       <BigIconPlay onClick={onClick} />
     </WrapperPlayerBigPlayButton>
   );
-}
-
-export default PlayerBigPlayButton;
+};

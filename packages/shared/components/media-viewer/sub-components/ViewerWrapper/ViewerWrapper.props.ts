@@ -9,7 +9,7 @@ interface ViewerWrapperProps {
   fileUrl?: string;
   targetFile?: TFile;
   playlistPos: number;
-  userAccess: boolean;
+  userAccess?: boolean;
   playlist: PlaylistType[];
   currentDeviceType?: DeviceType;
 

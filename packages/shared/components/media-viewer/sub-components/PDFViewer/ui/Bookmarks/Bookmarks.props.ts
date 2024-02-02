@@ -1,7 +1,7 @@
-import { BookMark } from "../../PDFViewer.props";
+import { BookMarkType } from "../../PDFViewer.props";
 
 interface BookmarksProps {
-  bookmarks: BookMark[];
+  bookmarks: BookMarkType[];
   navigate: (page: number) => void;
 }
 

@@ -26,7 +26,7 @@ interface PDFViewerProps {
   onNext?: VoidFunction;
 }
 
-export type BookMark = {
+export type BookMarkType = {
   description: string;
   level: number;
   page: number;

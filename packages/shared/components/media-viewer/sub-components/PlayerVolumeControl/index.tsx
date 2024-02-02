@@ -17,37 +17,39 @@ type PlayerVolumeControlProps = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-function PlayerVolumeControl({
-  volume,
-  isMuted,
-  onChange,
-  toggleVolumeMute,
-}: PlayerVolumeControlProps) {
-  return (
-    <PlayerVolumeControlWrapper>
-      <IconWrapper onClick={toggleVolumeMute}>
-        {isMuted ? (
-          <IconVolumeMuted />
-        ) : volume >= 50 ? (
-          <IconVolumeMax />
-        ) : (
-          <IconVolumeMin />
-        )}
-      </IconWrapper>
-      <VolumeWrapper>
-        <input
-          style={{
-            backgroundSize: `${volume}% 100%`,
-          }}
-          type="range"
-          min="0"
-          max="100"
-          value={volume}
-          onChange={onChange}
-        />
-      </VolumeWrapper>
-    </PlayerVolumeControlWrapper>
-  );
-}
+export const PlayerVolumeControl = memo(
+  ({
+    volume,
+    isMuted,
+    onChange,
+    toggleVolumeMute,
+  }: PlayerVolumeControlProps) => {
+    return (
+      <PlayerVolumeControlWrapper>
+        <IconWrapper onClick={toggleVolumeMute}>
+          {isMuted ? (
+            <IconVolumeMuted />
+          ) : volume >= 50 ? (
+            <IconVolumeMax />
+          ) : (
+            <IconVolumeMin />
+          )}
+        </IconWrapper>
+        <VolumeWrapper>
+          <input
+            style={{
+              backgroundSize: `${volume}% 100%`,
+            }}
+            type="range"
+            min="0"
+            max="100"
+            value={volume}
+            onChange={onChange}
+          />
+        </VolumeWrapper>
+      </PlayerVolumeControlWrapper>
+    );
+  },
+);
 
-export default memo(PlayerVolumeControl);
+PlayerVolumeControl.displayName = "PlayerVolumeControl";

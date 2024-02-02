@@ -6,15 +6,17 @@ import IconStop from "PUBLIC_DIR/images/videoplayer.stop.react.svg";
 import { WrapperPlayerPlayButton } from "./PlayerPlayButton.styled";
 import type { PlayerPlayButtonProps } from "./PlayerPlayButton.types";
 
-function PlayerPlayButton({ isPlaying, onClick }: PlayerPlayButtonProps) {
-  const onTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
-    event.stopPropagation();
-  };
-  return (
-    <WrapperPlayerPlayButton onClick={onClick} onTouchStart={onTouchStart}>
-      {isPlaying ? <IconStop /> : <IconPlay />}
-    </WrapperPlayerPlayButton>
-  );
-}
+export const PlayerPlayButton = memo(
+  ({ isPlaying, onClick }: PlayerPlayButtonProps) => {
+    const onTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+      event.stopPropagation();
+    };
+    return (
+      <WrapperPlayerPlayButton onClick={onClick} onTouchStart={onTouchStart}>
+        {isPlaying ? <IconStop /> : <IconPlay />}
+      </WrapperPlayerPlayButton>
+    );
+  },
+);
 
-export default memo(PlayerPlayButton);
+PlayerPlayButton.displayName = "PlayerPlayButton";

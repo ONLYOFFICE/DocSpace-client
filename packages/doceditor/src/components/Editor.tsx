@@ -53,7 +53,7 @@ const Editor = ({ data }: EditorProps) => {
         events_onDocumentReady={onDocumentReady}
       />
 
-      {isVisibleSelectFolderDialog && socketHelper && (
+      {isVisibleSelectFolderDialog && !!socketHelper && (
         <SelectFolderDialog
           socketHelper={socketHelper}
           isVisible={isVisibleSelectFolderDialog}

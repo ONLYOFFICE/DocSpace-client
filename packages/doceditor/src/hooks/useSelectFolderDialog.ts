@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 import { EDITOR_ID } from "@docspace/shared/constants";
 import { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
@@ -16,7 +16,7 @@ const useSelectFolderDialog = ({}: UseSelectFolderDialogProps) => {
   const [url, setUrl] = useState("");
   const [extension, setExtension] = useState("");
 
-  const onSDKRequestSaveAs = (event: object) => {
+  const onSDKRequestSaveAs = useCallback((event: object) => {
     if ("data" in event) {
       const data = event.data as TSaveAsEventData;
       setTitle(data.title);
@@ -25,7 +25,7 @@ const useSelectFolderDialog = ({}: UseSelectFolderDialogProps) => {
 
       setIsVisible(true);
     }
-  };
+  }, []);
 
   const onClose = () => setIsVisible(false);
 

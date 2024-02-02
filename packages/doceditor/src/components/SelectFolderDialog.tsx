@@ -3,9 +3,9 @@
 import React from "react";
 
 import FilesSelector from "@docspace/shared/selectors/Files";
+import { DeviceType } from "@docspace/shared/enums";
 
 import { SelectFolderDialogProps } from "@/types";
-import { DeviceType } from "@docspace/shared/enums";
 
 const SelectFolderDialog = ({
   socketHelper,

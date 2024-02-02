@@ -23,7 +23,7 @@ import {
 } from "../api/settings/types";
 import { TUser } from "../api/people/types";
 import { size as deviceSize, isTablet, getSystemTheme } from "../utils";
-import { frameCallEvent, getShowText } from "../utils/common";
+import { frameCallEvent, getShowText, isPublicRoom } from "../utils/common";
 import { setCookie, getCookie } from "../utils/cookie";
 import { combineUrl } from "../utils/combineUrl";
 import FirebaseHelper from "../utils/firebase";
@@ -184,8 +184,6 @@ class SettingsStore {
   passwordSettings: TPasswordSettings = {} as TPasswordSettings;
 
   hasShortenService = false;
-
-  isPublicRoom = false;
 
   withPaging = false;
 
@@ -828,7 +826,7 @@ class SettingsStore {
 
   get socketHelper() {
     const socketUrl =
-      this.isPublicRoom && !this.publicRoomKey ? "" : this.socketUrl;
+      isPublicRoom() && !this.publicRoomKey ? "" : this.socketUrl;
 
     return new SocketIOHelper(socketUrl, this.publicRoomKey);
   }

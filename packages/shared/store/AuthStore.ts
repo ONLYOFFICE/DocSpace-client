@@ -390,7 +390,7 @@ class AuthStore {
     return (
       this.settingsStore?.isLoaded &&
       !!this.settingsStore?.socketUrl &&
-      !this.settingsStore?.isPublicRoom
+      !isPublicRoom()
       // || //this.userStore.isAuthenticated
     );
   }

@@ -64,13 +64,13 @@ function BetaBadge({
   );
 }
 
-export default inject<any>(({ auth }) => {
+export default inject<any>(({ settingsStore }) => {
   const {
     forumLink,
     currentColorScheme,
     documentationEmail,
     currentDeviceType,
-  } = auth.settingsStore;
+  } = settingsStore;
 
   return {
     documentationEmail,

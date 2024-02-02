@@ -13,7 +13,7 @@ const IconButtonPinTheme = styled(StyledPinIcon)<
   svg {
     path {
       fill: ${(props) =>
-        props.theme.isBase && props.$currentColorScheme?.main.accent};
+        props.theme.isBase && props.$currentColorScheme?.main?.accent};
     }
   }
 
@@ -21,7 +21,7 @@ const IconButtonPinTheme = styled(StyledPinIcon)<
     svg {
       path {
         fill: ${(props) =>
-          props.theme.isBase && props.$currentColorScheme?.main.accent};
+          props.theme.isBase && props.$currentColorScheme?.main?.accent};
       }
     }
   }

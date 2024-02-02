@@ -2,6 +2,8 @@ import styled, { css } from "styled-components";
 import { Base } from "../../themes";
 import { Text } from "../text";
 
+import { IconButton } from "../icon-button";
+
 const StyledIcon = styled.div<{
   size: string;
   radius: string;
@@ -44,6 +46,27 @@ const StyledIcon = styled.div<{
         color: ${`#${props.color}`};
       `};
   }
+
+  .room-icon_badge {
+    position: absolute;
+    margin: 24px 0 0 24px;
+
+    .room-icon-button {
+      width: 12px;
+      height: 12px;
+      border: ${(props) => `1px solid ${props.theme.backgroundColor}`};
+      border-radius: 50%;
+
+      svg {
+        path {
+          fill: ${(props) => props.theme.backgroundColor};
+        }
+        rect {
+          stroke: ${(props) => props.theme.backgroundColor};
+        }
+      }
+    }
+  }
 `;
 
 StyledIcon.defaultProps = { theme: Base };
@@ -54,6 +77,11 @@ interface RoomIconProps {
   color: string;
   size?: string;
   radius?: string;
+  showDefault: boolean;
+  imgClassName?: string;
+  imgSrc?: string;
+  badgeUrl?: string;
+  onBadgeClick?: () => void;
 }
 
 const RoomIcon = ({
@@ -62,6 +90,11 @@ const RoomIcon = ({
   color,
   size = "32px",
   radius = "6px",
+  showDefault,
+  imgClassName,
+  imgSrc,
+  badgeUrl,
+  onBadgeClick,
 }: RoomIconProps) => {
   const titleWithoutSpaces = title.replace(/\s+/g, " ").trim();
   const indexAfterLastSpace = titleWithoutSpaces.lastIndexOf(" ");
@@ -72,7 +105,7 @@ const RoomIcon = ({
 
   const roomTitle = (title[0] + secondCharacter).toUpperCase();
 
-  return (
+  return showDefault ? (
     <StyledIcon
       color={color}
       size={size}
@@ -82,7 +115,20 @@ const RoomIcon = ({
     >
       <div className="room-background" />
       <Text className="room-title">{roomTitle}</Text>
+      {badgeUrl && (
+        <div className="room-icon_badge">
+          <IconButton
+            onClick={onBadgeClick}
+            iconName={badgeUrl}
+            size={12}
+            className="room-icon-button"
+            isFill
+          />
+        </div>
+      )}
     </StyledIcon>
+  ) : (
+    <img className={imgClassName} src={imgSrc} alt="room icon" />
   );
 };
 

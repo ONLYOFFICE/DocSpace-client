@@ -57,20 +57,26 @@ const MainBar = ({
   );
 };
 
-export default inject(({ auth, clientLoadingStore, filesStore }) => {
-  const { currentTariffStatusStore, settingsStore } = auth;
-  const { checkedMaintenance, setMaintenanceExist, snackbarExist, isFrame } =
-    settingsStore;
-  const { isNotPaidPeriod } = currentTariffStatusStore;
-  const { firstLoad } = clientLoadingStore;
-  const { isInit } = filesStore;
+export default inject(
+  ({
+    settingsStore,
+    clientLoadingStore,
+    filesStore,
+    currentTariffStatusStore,
+  }) => {
+    const { checkedMaintenance, setMaintenanceExist, snackbarExist, isFrame } =
+      settingsStore;
+    const { isNotPaidPeriod } = currentTariffStatusStore;
+    const { firstLoad } = clientLoadingStore;
+    const { isInit } = filesStore;
 
-  return {
-    firstLoad: firstLoad && isInit,
-    checkedMaintenance,
-    snackbarExist,
-    setMaintenanceExist,
-    isNotPaidPeriod,
-    isFrame,
-  };
-})(observer(MainBar));
+    return {
+      firstLoad: firstLoad && isInit,
+      checkedMaintenance,
+      snackbarExist,
+      setMaintenanceExist,
+      isNotPaidPeriod,
+      isFrame,
+    };
+  }
+)(observer(MainBar));

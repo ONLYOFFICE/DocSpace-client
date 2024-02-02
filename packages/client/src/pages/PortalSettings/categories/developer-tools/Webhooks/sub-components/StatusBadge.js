@@ -55,9 +55,7 @@ const StatusBadge = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { settingsStore } = auth;
-
+export default inject(({ settingsStore }) => {
   const { theme } = settingsStore;
 
   return {

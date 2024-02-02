@@ -146,7 +146,7 @@ const DocumentService = ({
 
         <Link
           className="third-party-link"
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
           isHovered
           target="_blank"
           href={integrationSettingsUrl}
@@ -254,11 +254,11 @@ const DocumentService = ({
   );
 };
 
-export default inject(({ auth, settingsStore }) => {
+export default inject(({ settingsStore, filesSettingsStore }) => {
   const { currentColorScheme, integrationSettingsUrl, currentDeviceType } =
-    auth.settingsStore;
-  const { getDocumentServiceLocation, changeDocumentServiceLocation } =
     settingsStore;
+  const { getDocumentServiceLocation, changeDocumentServiceLocation } =
+    filesSettingsStore;
   return {
     getDocumentServiceLocation,
     changeDocumentServiceLocation,

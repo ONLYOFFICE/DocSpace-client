@@ -279,15 +279,15 @@ export default inject(
     filesStore,
     mediaViewerDataStore,
     filesActionsStore,
-    settingsStore,
+    filesSettingsStore,
     dialogsStore,
     treeFoldersStore,
     contextOptionsStore,
     clientLoadingStore,
     pluginStore,
-    auth,
+    settingsStore,
   }) => {
-    const { currentDeviceType } = auth.settingsStore;
+    const { currentDeviceType } = settingsStore;
     const {
       firstLoad,
 
@@ -329,7 +329,8 @@ export default inject(
       prevMedia,
     } = mediaViewerDataStore;
     const { deleteItemAction } = filesActionsStore;
-    const { getIcon, extsImagePreviewed, extsMediaPreviewed } = settingsStore;
+    const { getIcon, extsImagePreviewed, extsMediaPreviewed } =
+      filesSettingsStore;
     const { isFavoritesFolder, archiveRoomsId } = treeFoldersStore;
 
     const {

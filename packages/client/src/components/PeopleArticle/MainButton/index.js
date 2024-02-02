@@ -113,19 +113,18 @@ const ArticleMainButtonContent = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { userCaption, guestCaption, groupCaption } =
-    auth.settingsStore.customNames;
+export default inject(({ authStore, settingsStore }) => {
+  const { userCaption, guestCaption, groupCaption } = settingsStore.customNames;
 
   return {
-    isAdmin: auth.isAdmin,
+    isAdmin: authStore.isAdmin,
     homepage: config.homepage,
     userCaption,
     guestCaption,
     groupCaption,
-    toggleShowText: auth.settingsStore.toggleShowText,
-    isMobileArticle: auth.settingsStore.isMobileArticle,
-    showText: auth.settingsStore.showText,
+    toggleShowText: settingsStore.toggleShowText,
+    isMobileArticle: settingsStore.isMobileArticle,
+    showText: settingsStore.showText,
   };
 })(
   withTranslation(["Article", "Common", "PeopleTranslations"])(

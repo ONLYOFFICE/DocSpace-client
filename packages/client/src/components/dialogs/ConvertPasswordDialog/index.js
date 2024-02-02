@@ -258,7 +258,13 @@ const ConvertPasswordDialog = withTranslation([
 ])(ConvertPasswordDialogComponent);
 
 export default inject(
-  ({ filesStore, filesActionsStore, auth, dialogsStore, uploadDataStore }) => {
+  ({
+    filesStore,
+    filesActionsStore,
+    settingsStore,
+    dialogsStore,
+    uploadDataStore,
+  }) => {
     const {
       convertPasswordDialogVisible: visible,
       setConvertPasswordDialogVisible,
@@ -268,7 +274,7 @@ export default inject(
     const { copyAsAction, fileCopyAs } = uploadDataStore;
     const { setPasswordEntryProcess } = filesStore;
     const { completeAction } = filesActionsStore;
-    const { settingsStore } = auth;
+
     const { isTabletView, isDesktopClient } = settingsStore;
 
     return {

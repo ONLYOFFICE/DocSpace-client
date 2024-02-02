@@ -152,8 +152,8 @@ const SectionPagingContent = ({
   );
 };
 
-export default inject(({ auth, setup }) => ({
-  isLoaded: auth.isLoaded,
+export default inject(({ authStore, setup }) => ({
+  isLoaded: authStore.isLoaded,
   fetchPeople: setup.updateListAdmins,
   filter: setup.security.accessRight.filter,
   setIsLoading: setup.setIsLoading,

@@ -41,3 +41,7 @@ export type TGetUserList = {
   items: TUser[];
   total: number;
 };
+
+export type TChangeTheme = {
+  theme: ThemeKeys;
+};

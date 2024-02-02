@@ -14,7 +14,7 @@ import {
 
 class MediaViewerDataStore {
   filesStore;
-  settingsStore;
+
   publicRoomStore;
 
   id = null;
@@ -23,10 +23,10 @@ class MediaViewerDataStore {
   currentItem = null;
   prevPostionIndex = 0;
 
-  constructor(filesStore, settingsStore, publicRoomStore) {
+  constructor(filesStore, publicRoomStore) {
     makeAutoObservable(this);
     this.filesStore = filesStore;
-    this.settingsStore = settingsStore;
+
     this.publicRoomStore = publicRoomStore;
   }
 

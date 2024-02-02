@@ -36,6 +36,8 @@ const infoHistory = "info_history";
 // const infoDetails = "info_details";
 
 class InfoPanelStore {
+  userStore = null;
+
   isVisible = false;
   isMobileHidden = false;
 
@@ -49,8 +51,7 @@ class InfoPanelStore {
   isScrollLocked = false;
   historyWithFileList = false;
 
-  authStore = null;
-  settingsStore = null;
+  filesSettingsStore = null;
   peopleStore = null;
   filesStore = null;
   selectedFolderStore = null;
@@ -64,7 +65,9 @@ class InfoPanelStore {
 
   shareChanged = false;
 
-  constructor() {
+  constructor(userStore) {
+    this.userStore = userStore;
+
     makeAutoObservable(this);
   }
 
@@ -259,7 +262,7 @@ class InfoPanelStore {
     return item.isRoom || !!item.roomType
       ? item.rootFolderType === FolderType.Archive
         ? item.logo && item.logo.medium
-        : this.settingsStore.getIcon(
+        : this.filesSettingsStore.getIcon(
               size,
               null,
               null,
@@ -270,16 +273,22 @@ class InfoPanelStore {
           ? item.logo?.medium
           : item.icon
             ? item.icon
-            : this.settingsStore.getIcon(size, null, null, null, item.roomType)
+            : this.filesSettingsStore.getIcon(
+                size,
+                null,
+                null,
+                null,
+                item.roomType
+              )
       : item.isFolder && item.folderType
-        ? this.settingsStore.getIconByFolderType(item.folderType, size)
-        : this.settingsStore.getIcon(size, item.fileExst || ".file");
+        ? this.filesSettingsStore.getIconByFolderType(item.folderType, size)
+        : this.filesSettingsStore.getIcon(size, item.fileExst || ".file");
   };
 
   // User link actions //
 
   openUser = async (user, navigate) => {
-    if (user.id === this.authStore.userStore.user.id) {
+    if (user.id === this.userStore.user.id) {
       this.openSelfProfile();
       return;
     }
@@ -341,7 +350,9 @@ class InfoPanelStore {
   getIsFiles = (givenPathName) => {
     const pathname = givenPathName || window.location.pathname.toLowerCase();
     return (
-      pathname.indexOf("files") !== -1 || pathname.indexOf("personal") !== -1
+      pathname.indexOf("files") !== -1 ||
+      pathname.indexOf("personal") !== -1 ||
+      pathname.indexOf("media") !== -1
     );
   };
 
@@ -404,7 +415,7 @@ class InfoPanelStore {
   };
 
   getHasPrevTitle = (array, type) => {
-    return this.infoPanelMembers?.roomId === this.infoPanelSelection.id
+    return this.infoPanelMembers?.roomId === this.infoPanelSelection?.id
       ? array.findIndex((x) => x.id === type) > -1
       : false;
   };
@@ -514,14 +525,17 @@ class InfoPanelStore {
 
   addInfoPanelMembers = (t, members, clearFilter) => {
     const newMembers = this.convertMembers(t, members, clearFilter);
-    const { roomId, administrators, users, expected } = this.infoPanelMembers;
 
-    this.setInfoPanelMembers({
-      roomId: roomId,
-      administrators: [...administrators, ...newMembers.administrators],
-      users: [...users, ...newMembers.users],
-      expected: [...expected, ...newMembers.expectedMembers],
-    });
+    if (this.infoPanelMembers) {
+      const { roomId, administrators, users, expected } = this.infoPanelMembers;
+
+      this.setInfoPanelMembers({
+        roomId: roomId,
+        administrators: [...administrators, ...newMembers.administrators],
+        users: [...users, ...newMembers.users],
+        expected: [...expected, ...newMembers.expectedMembers],
+      });
+    }
   };
 
   openShareTab = () => {

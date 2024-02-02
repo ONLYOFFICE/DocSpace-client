@@ -62,9 +62,9 @@ const Api = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { settingsStore, setDocumentTitle, currentDeviceType } = auth;
-  const { theme, apiBasicLink } = settingsStore;
+export default inject(({ authStore, settingsStore }) => {
+  const { setDocumentTitle } = authStore;
+  const { theme, apiBasicLink, currentDeviceType } = settingsStore;
 
   return {
     theme,

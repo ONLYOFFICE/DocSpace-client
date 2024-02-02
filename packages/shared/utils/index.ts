@@ -1,3 +1,5 @@
+import moment from "moment-timezone";
+
 import { isArrayEqual } from "./array";
 import * as email from "./email";
 import { EmailSettings, parseAddress, parseAddresses } from "./email";
@@ -97,4 +99,8 @@ export {
 
 export const getModalType = () => {
   return window.innerWidth < size.desktop ? "aside" : "modal";
+};
+
+export const isValidDate = (date: Date) => {
+  return moment(date).tz(window.timezone).year() !== 9999;
 };

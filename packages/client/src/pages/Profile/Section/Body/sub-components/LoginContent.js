@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
+import { getTfaBackupCodes } from "@docspace/shared/api/settings";
 
 import LoginSettings from "./login-settings";
 import SocialNetworks from "./social-networks";
@@ -14,13 +15,13 @@ const StyledWrapper = styled.div`
 `;
 
 const LoginContent = (props) => {
-  const { setBackupCodes, tfaSettings, getBackupCodes } = props;
+  const { setBackupCodes, tfaSettings } = props;
   const [backupCodesCount, setBackupCodesCount] = useState(0);
   const tfaOn = tfaSettings && tfaSettings !== "none";
 
   const fetchData = async () => {
     if (tfaOn) {
-      const codes = await getBackupCodes();
+      const codes = await getTfaBackupCodes();
       setBackupCodes(codes);
 
       let backupCodesCount = 0;
@@ -48,11 +49,9 @@ const LoginContent = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { tfaStore } = auth;
-  const { getBackupCodes, tfaSettings, setBackupCodes } = tfaStore;
+export default inject(({ tfaStore }) => {
+  const { tfaSettings, setBackupCodes } = tfaStore;
   return {
-    getBackupCodes,
     tfaSettings,
     setBackupCodes,
   };

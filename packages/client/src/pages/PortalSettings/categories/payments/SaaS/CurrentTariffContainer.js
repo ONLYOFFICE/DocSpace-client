@@ -98,8 +98,7 @@ const CurrentTariffContainer = ({ style, quotaCharacteristics }) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { currentQuotaStore } = auth;
+export default inject(({ currentQuotaStore }) => {
   const { quotaCharacteristics } = currentQuotaStore;
 
   return {

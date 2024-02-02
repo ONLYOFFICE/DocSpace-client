@@ -8,20 +8,26 @@ const ArticleWrapper = (props: ArticleProps) => {
 };
 
 export default inject(
-  ({ auth, uploadDataStore, profileActionsStore, dialogsStore }: any) => {
+  ({
+    authStore,
+    uploadDataStore,
+    profileActionsStore,
+    dialogsStore,
+    userStore,
+    bannerStore,
+    currentTariffStatusStore,
+    currentQuotaStore,
+    settingsStore,
+  }: any) => {
     const {
-      settingsStore,
-      userStore,
       isLiveChatAvailable,
-      bannerStore,
-      currentQuotaStore,
 
       isPaymentPageAvailable,
       isTeamTrainingAlertAvailable,
       isSubmitToGalleryAlertAvailable,
-      currentTariffStatusStore,
+
       isEnterprise,
-    } = auth;
+    } = authStore;
 
     const { getActions, getUserRole, onProfileClick } = profileActionsStore;
 
@@ -138,4 +144,4 @@ export default inject(
       isAdmin,
     };
   }
-)(observer(Article));
+)(observer(ArticleWrapper));

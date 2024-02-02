@@ -136,7 +136,7 @@ const QuickButtons = (props) => {
           color={colorLock}
           isDisabled={isDisabled}
           hoverColor={theme.filesQuickButtons.sharedColor}
-          title={t("Files:CopyGeneralLink")}
+          title={t("Files:CopySharedLink")}
         />
       )}
       {isAvailableShareFile && (
@@ -149,7 +149,7 @@ const QuickButtons = (props) => {
           color={colorShare}
           isDisabled={isDisabled}
           hoverColor={theme.filesQuickButtons.sharedColor}
-          title={t("Files:CopyGeneralLink")}
+          title={t("Files:CopySharedLink")}
         />
       )}
       {/* {fileExst && !isTrashFolder && displayBadges && (

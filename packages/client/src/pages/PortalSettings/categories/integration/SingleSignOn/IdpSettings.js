@@ -180,7 +180,7 @@ const IdpSettings = (props) => {
   );
 };
 
-export default inject(({ auth, ssoStore }) => {
+export default inject(({ settingsStore, ssoStore }) => {
   const {
     ssoBinding,
     enableSso,
@@ -202,7 +202,7 @@ export default inject(({ auth, ssoStore }) => {
     init,
     isInit,
   } = ssoStore;
-  const { currentDeviceType } = auth.settingsStore;
+  const { currentDeviceType } = settingsStore;
 
   return {
     ssoBinding,

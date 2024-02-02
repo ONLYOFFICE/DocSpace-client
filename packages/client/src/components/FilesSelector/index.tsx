@@ -489,7 +489,7 @@ const FilesSelector = ({
         onSave(null, selectedItemId, fileName, isChecked);
       onSelectTreeNode && onSelectTreeNode(selectedTreeNode);
       onSelectFile && onSelectFile(selectedFileInfo!, breadCrumbs);
-      onCloseAndDeselectAction();
+      !embedded && onCloseAndDeselectAction();
       //!withoutImmediatelyClose &&  onCloseAction();
     }
   };

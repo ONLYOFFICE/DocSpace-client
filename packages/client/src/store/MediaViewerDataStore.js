@@ -10,7 +10,7 @@ import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import {
   findNearestIndex,
   isVideo,
-} from "@docspace/shared/components/MediaViewer/MediaViewer.utils";
+} from "@docspace/shared/components/media-viewer/MediaViewer.utils";
 
 class MediaViewerDataStore {
   filesStore;

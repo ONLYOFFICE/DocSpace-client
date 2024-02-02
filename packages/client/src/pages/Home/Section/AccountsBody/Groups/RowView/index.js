@@ -48,7 +48,7 @@ const RowView = ({
   );
 };
 
-export default inject(({ peopleStore, auth }) => ({
+export default inject(({ peopleStore, settingsStore }) => ({
   groups: peopleStore.groupsStore.groups,
   accountsViewAs: peopleStore.viewAs,
   setViewAs: peopleStore.setViewAs,
@@ -60,6 +60,6 @@ export default inject(({ peopleStore, auth }) => ({
   filterTotal: peopleStore.filterStore.filterTotal,
   isFiltered: peopleStore.filterStore.isFiltered,
 
-  withPaging: auth.settingsStore.withPaging,
-  currentDeviceType: auth.settingsStore.currentDeviceType,
+  withPaging: settingsStore.withPaging,
+  currentDeviceType: settingsStore.currentDeviceType,
 }))(observer(RowView));

@@ -49,7 +49,10 @@ const GroupsTableView = ({
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
   return groups.length !== 0 || !isFiltered ? (
-    <Styled.GroupsTableContainer useReactWindow={!withPaging} forwardedRef={ref}>
+    <Styled.GroupsTableContainer
+      useReactWindow={!withPaging}
+      forwardedRef={ref}
+    >
       <GroupsTableHeader
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
@@ -88,7 +91,13 @@ const GroupsTableView = ({
 };
 
 export default inject(
-  ({ peopleStore, auth, accessRightsStore, filesStore }) => {
+  ({
+    peopleStore,
+    accessRightsStore,
+    filesStore,
+    settingsStore,
+    infoPanelStore,
+  }) => {
     const {
       usersStore,
       groupsStore,
@@ -100,11 +109,11 @@ export default inject(
 
     const { groups, selection, setSelection } = groupsStore;
 
-    const { theme, withPaging, currentDeviceType } = auth.settingsStore;
+    const { theme, withPaging, currentDeviceType } = settingsStore;
     const { peopleList, hasMoreAccounts, fetchMoreAccounts } = usersStore;
     const { filterTotal, isFiltered } = filterStore;
 
-    const { isVisible: infoPanelVisible } = auth.infoPanelStore;
+    const { isVisible: infoPanelVisible } = infoPanelStore;
 
     return {
       groups,
@@ -121,5 +130,5 @@ export default inject(
       isFiltered,
       currentDeviceType,
     };
-  }
+  },
 )(observer(GroupsTableView));

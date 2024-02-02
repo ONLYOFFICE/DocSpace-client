@@ -76,7 +76,7 @@ const Members = ({
   else if (!infoPanelMembers) return <></>;
 
   const [currentMember] = infoPanelMembers.administrators.filter(
-    (member) => member.id === selfId
+    (member) => member.id === selfId,
   );
 
   const { administrators, users, expected } = infoPanelMembers;
@@ -86,7 +86,7 @@ const Members = ({
   const adminsTitleCount = administrators.length ? 1 : 0;
   const usersTitleCount = users.length ? 1 : 0;
   const expectedTitleCount = expected.length ? 1 : 0;
-  const groupsTitleCount = groups.length ? 1 : 0;
+  // const groupsTitleCount = groups.length ? 1 : 0;
 
   const headersCount = adminsTitleCount + usersTitleCount + expectedTitleCount;
 
@@ -151,7 +151,7 @@ const Members = ({
           key="general-link"
           link={primaryLink}
           setIsScrollLocked={setIsScrollLocked}
-        />
+        />,
       );
     }
 

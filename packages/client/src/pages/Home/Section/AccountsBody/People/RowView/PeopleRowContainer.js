@@ -119,31 +119,33 @@ const PeopleRowContainer = ({
   );
 };
 
-export default inject(({ peopleStore, auth, filesStore }) => {
-  const {
-    usersStore,
-    filterStore,
-    viewAs: accountsViewAs,
-    setViewAs,
-  } = peopleStore;
-  const { theme, withPaging, currentDeviceType } = auth.settingsStore;
-  const { peopleList, hasMoreAccounts, fetchMoreAccounts } = usersStore;
-  const { filterTotal, isFiltered } = filterStore;
+export default inject(
+  ({ peopleStore, filesStore, settingsStore, infoPanelStore }) => {
+    const {
+      usersStore,
+      filterStore,
+      viewAs: accountsViewAs,
+      setViewAs,
+    } = peopleStore;
+    const { theme, withPaging, currentDeviceType } = settingsStore;
+    const { peopleList, hasMoreAccounts, fetchMoreAccounts } = usersStore;
+    const { filterTotal, isFiltered } = filterStore;
 
-  const { isVisible: infoPanelVisible } = auth.infoPanelStore;
+    const { isVisible: infoPanelVisible } = infoPanelStore;
 
-  return {
-    peopleList,
-    accountsViewAs,
-    setViewAs,
-    theme,
-    infoPanelVisible,
-    withPaging,
+    return {
+      peopleList,
+      accountsViewAs,
+      setViewAs,
+      theme,
+      infoPanelVisible,
+      withPaging,
 
-    fetchMoreAccounts,
-    hasMoreAccounts,
-    filterTotal,
-    isFiltered,
-    currentDeviceType,
-  };
-})(observer(PeopleRowContainer));
+      fetchMoreAccounts,
+      hasMoreAccounts,
+      filterTotal,
+      isFiltered,
+      currentDeviceType,
+    };
+  },
+)(observer(PeopleRowContainer));

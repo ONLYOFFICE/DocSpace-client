@@ -46,7 +46,7 @@ const InfoPanelBodyContent = ({
 
   const isSeveralItems = props.selectedItems?.length > 1;
 
-  console.log("selection", selection);
+  console.log("selection", infoPanelSelection);
 
   const isNoItemGallery = isGallery && !gallerySelected;
   const isNoItemPeople = isPeople && !isInsideGroup && !selectedItems.length;
@@ -222,5 +222,5 @@ export default inject(
       isRootFolder,
       gallerySelected,
     };
-  }
+  },
 )(observer(InfoPanelBodyContent));

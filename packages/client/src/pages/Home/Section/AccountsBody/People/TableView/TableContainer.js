@@ -201,7 +201,14 @@ const Table = ({
 };
 
 export default inject(
-  ({ peopleStore, auth, accessRightsStore, filesStore }) => {
+  ({
+    peopleStore,
+    accessRightsStore,
+    filesStore,
+    settingsStore,
+    infoPanelStore,
+    userStore,
+  }) => {
     const {
       usersStore,
       filterStore,
@@ -209,13 +216,13 @@ export default inject(
       setViewAs,
       changeType,
     } = peopleStore;
-    const { theme, withPaging, currentDeviceType } = auth.settingsStore;
+    const { theme, withPaging, currentDeviceType } = settingsStore;
     const { peopleList, hasMoreAccounts, fetchMoreAccounts } = usersStore;
     console.log(peopleList);
     const { filterTotal, isFiltered } = filterStore;
 
-    const { isVisible: infoPanelVisible } = auth.infoPanelStore;
-    const { isAdmin, isOwner, id: userId } = auth.userStore.user;
+    const { isVisible: infoPanelVisible } = infoPanelStore;
+    const { isAdmin, isOwner, id: userId } = userStore.user;
 
     const { canChangeUserType } = accessRightsStore;
 
@@ -238,5 +245,5 @@ export default inject(
       isFiltered,
       currentDeviceType,
     };
-  }
+  },
 )(observer(Table));

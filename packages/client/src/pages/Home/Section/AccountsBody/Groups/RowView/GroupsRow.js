@@ -122,14 +122,18 @@ const GroupsRow = ({
   );
 };
 
-export default inject(({ peopleStore, auth }) => ({
+export default inject(({ peopleStore, settingsStore }) => ({
   selection: peopleStore.groupsStore.selection,
   setSelection: peopleStore.groupsStore.setSelection,
   bufferSelection: peopleStore.groupsStore.bufferSelection,
   setBufferSelection: peopleStore.groupsStore.setBufferSelection,
   setCurrentGroup: peopleStore.groupsStore.setCurrentGroup,
   getGroupContextOptions: peopleStore.groupsStore.getGroupContextOptions,
-  theme: auth.settingsStore.theme,
+  theme: settingsStore.theme,
 }))(
-  withTranslation("People", "Common", "PeopleTranslations")(observer(GroupsRow))
+  withTranslation(
+    "People",
+    "Common",
+    "PeopleTranslations",
+  )(observer(GroupsRow)),
 );

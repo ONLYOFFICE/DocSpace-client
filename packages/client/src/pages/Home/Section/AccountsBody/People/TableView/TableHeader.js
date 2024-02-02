@@ -66,7 +66,7 @@ class PeopleTableHeader extends React.Component {
 
   getColumns = (defaultColumns) => {
     const storageColumns = localStorage.getItem(
-      `${TABLE_COLUMNS}=${this.props.userId}`
+      `${TABLE_COLUMNS}=${this.props.userId}`,
     );
     const columns = [];
 
@@ -179,24 +179,32 @@ class PeopleTableHeader extends React.Component {
   }
 }
 
-export default inject(({ auth, peopleStore, clientLoadingStore }) => {
-  const { filterStore } = peopleStore;
+export default inject(
+  ({
+    peopleStore,
+    clientLoadingStore,
+    infoPanelStore,
+    settingsStore,
+    userStore,
+  }) => {
+    const { filterStore } = peopleStore;
 
-  const { filter } = filterStore;
+    const { filter } = filterStore;
 
-  const { isVisible: infoPanelVisible } = auth.infoPanelStore;
-  const { withPaging } = auth.settingsStore;
+    const { isVisible: infoPanelVisible } = infoPanelStore;
+    const { withPaging } = settingsStore;
 
-  return {
-    filter,
+    return {
+      filter,
 
-    setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
-    userId: auth.userStore.user?.id,
-    infoPanelVisible,
-    withPaging,
-  };
-})(
+      setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
+      userId: userStore.user?.id,
+      infoPanelVisible,
+      withPaging,
+    };
+  },
+)(
   withTranslation(["People", "Common", "PeopleTranslations"])(
-    observer(PeopleTableHeader)
-  )
+    observer(PeopleTableHeader),
+  ),
 );

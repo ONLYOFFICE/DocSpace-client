@@ -184,26 +184,22 @@
         const winHtml = `<!DOCTYPE html>
           <html>
               <head>
-                  <title>Window with Blob</title>
+                  <title>DocSpace</title>
               </head>
-              <body>
+              <body style="margin:0;">
                   <div id=${config.frameId}></div>
-                  <script type="text/javascript" id="integration" async src="${scriptUrl}" onload='window.DocSpace.SDK.initFrame(${JSON.stringify(this.config)})'></script>
+                  <script type="text/javascript" id="integration" async src="${scriptUrl}" onload='window.DocSpace.SDK.initFrame(${JSON.stringify(config)})'></script>
               </body>
           </html>`;
 
         const winUrl = URL.createObjectURL(new Blob([winHtml], { type: "text/html" }));
 
-        const selectorWindow = window.open(
-          winUrl,
-          "_blank",
-          `width=${config.width},height=${config.height}`,
-        );
+        const selectorWindow = window.open(winUrl, "_blank", `width=610,height=778`);
 
         // selectorWindow.document.write("");
       });
 
-      button.setAttribute("id", config.frameId + "-button");
+      button.setAttribute("id", config.frameId + "-container");
 
       return button;
     };
@@ -440,21 +436,13 @@
 
         this.#classNames = target.className;
 
-        const renderContainer = document.createElement("div");
-        renderContainer.id = this.config.frameId + "-container";
-        renderContainer.style.display = "relative";
-        renderContainer.style.width = this.config.width;
-        renderContainer.style.height = this.config.height || "100%";
-
-        renderContainer.appendChild(button);
-
         const isSelfReplace = target.parentNode.isEqualNode(
           document.getElementById(this.config.frameId + "-container"),
         );
 
         target && isSelfReplace
-          ? target.parentNode.replaceWith(renderContainer)
-          : target.replaceWith(renderContainer);
+          ? target.parentNode.replaceWith(button)
+          : target.replaceWith(button);
 
         window.addEventListener("message", this.#onMessage, false);
 

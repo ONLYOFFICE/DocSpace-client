@@ -70,7 +70,7 @@ const SimpleRoom = (props) => {
     showFilter: true,
     disableActionButton: false,
     infoPanelVisible: false,
-    init: true,
+    init: false,
     filter: {
       count: 100,
       page: 1,

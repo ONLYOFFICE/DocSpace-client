@@ -134,8 +134,11 @@ export const Frame = styled(Box)`
   border-radius: 6px;
   border: 1px solid ${(props) => props.theme.sdkPresets.borderColor};
 
-  width: ${(props) => (props.width ? props.width : "100%")};
+  width: calc(${(props) => (props.width ? props.width : "100%")} + 2px);
   height: calc(${(props) => (props.height ? props.height : "400px")} + 2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   @media ${tablet} {
     margin-top: 4px;

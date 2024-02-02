@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 
@@ -20,11 +20,25 @@ const StyledLastSessionBlock = styled.div`
     align-items: center;
 
     .session-info-left-container {
-      margin-right: 24px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-left: 24px;
+            `
+          : css`
+              margin-right: 24px;
+            `}
       p {
-        padding-left: 0px;
         padding: 8px;
         font-size: 13px;
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                padding-right: 0px;
+              `
+            : css`
+                padding-left: 0px;
+              `}
       }
     }
 

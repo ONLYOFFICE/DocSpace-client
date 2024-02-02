@@ -3,7 +3,7 @@ import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { Base } from "@docspace/shared/themes";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import RemoveSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
@@ -34,7 +34,14 @@ const StyledUserInfoBlock = styled.div`
   }
 
   .avatar {
-    margin-right: 16px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 16px;
+          `
+        : css`
+            margin-right: 16px;
+          `}
   }
 `;
 

@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { withTranslation } from "react-i18next";
 import { observer, inject } from "mobx-react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Aside } from "@docspace/shared/components/aside";
@@ -15,7 +15,14 @@ import UserInfoBlock from "./UserInfoBlock";
 const StyledSessionsPanel = styled.div`
   .user-sessions-panel {
     .scroll-body {
-      padding-right: 0px !important;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              padding-left: 0px !important;
+            `
+          : css`
+              padding-right: 0px !important;
+            `}
     }
   }
 `;

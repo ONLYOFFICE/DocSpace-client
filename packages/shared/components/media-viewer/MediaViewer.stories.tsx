@@ -10,18 +10,18 @@ import i18nextStoryDecorator from "../../.storybook/decorators/i18nextStoryDecor
 import { Portal } from "../portal";
 import { Button } from "../button";
 
-import { MediaViewer as Media } from "./MediaViewer";
+import { MediaViewer } from "./MediaViewer";
 import type { MediaViewerProps, PlaylistType } from "./MediaViewer.types";
 
-type MediaViewerType = typeof Media;
+type MediaViewerType = typeof MediaViewer;
 type Story = StoryObj<MediaViewerType>;
 
-const meta: Meta<MediaViewerType> = {
+const meta = {
   title: "Components/MediaViewer",
-  component: Media,
+  component: MediaViewer,
   parameters: {},
   decorators: [i18nextStoryDecorator],
-};
+} satisfies Meta<MediaViewerType>;
 
 export default meta;
 
@@ -95,7 +95,7 @@ const DefaultTemplate = (props: MediaViewerProps) => {
         <Portal
           visible
           element={
-            <Media
+            <MediaViewer
               {...props}
               t={t}
               visible={visible}
@@ -411,7 +411,7 @@ const files: TFile[] = [
   },
 ];
 
-export const Default: Story = {
+export const Default = {
   args: {
     files,
     extsImagePreviewed: [
@@ -432,4 +432,4 @@ export const Default: Story = {
   render: (props) => {
     return <DefaultTemplate {...props} />;
   },
-};
+} satisfies Story;

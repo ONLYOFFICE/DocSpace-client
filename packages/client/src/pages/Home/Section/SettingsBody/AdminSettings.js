@@ -33,7 +33,7 @@ const GeneralSettings = ({
           isChecked={storeForceSave}
         />
       </Box>
-      {/* //TODO: Uncomment when third-party storages will be  stable
+
       <Box className="settings-section">
         <Heading className="heading" level={2} size="xsmall">
           {t("ThirdPartyAccounts")}
@@ -44,18 +44,18 @@ const GeneralSettings = ({
           onChange={onChangeThirdParty}
           isChecked={enableThirdParty}
         />
-      </Box> */}
+      </Box>
     </StyledSettings>
   );
 };
 
-export default inject(({ settingsStore }) => {
+export default inject(({ filesSettingsStore }) => {
   const {
     enableThirdParty,
     setEnableThirdParty,
     storeForcesave,
     setStoreForceSave,
-  } = settingsStore;
+  } = filesSettingsStore;
 
   return {
     storeForceSave: storeForcesave,

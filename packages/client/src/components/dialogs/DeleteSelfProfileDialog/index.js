@@ -89,8 +89,8 @@ class DeleteSelfProfileDialogComponent extends React.Component {
   }
 }
 
-const DeleteSelfProfileDialog = inject(({ auth }) => ({
-  theme: auth.settingsStore.theme,
+const DeleteSelfProfileDialog = inject(({ settingsStore }) => ({
+  theme: settingsStore.theme,
 }))(
   observer(
     withTranslation(["DeleteSelfProfileDialog", "Common"])(

@@ -232,22 +232,23 @@ const PayerInformationContainer = ({
   );
 };
 
-export default inject(({ auth, payments }) => {
-  const { userStore, settingsStore, currentTariffStatusStore } = auth;
-  const { accountLink, isStripePortalAvailable } = payments;
-  const { theme } = settingsStore;
-  const { customerId, isGracePeriod, isNotPaidPeriod, payerInfo } =
-    currentTariffStatusStore;
-  const { user } = userStore;
+export default inject(
+  ({ settingsStore, payments, userStore, currentTariffStatusStore }) => {
+    const { accountLink, isStripePortalAvailable } = payments;
+    const { theme } = settingsStore;
+    const { customerId, isGracePeriod, isNotPaidPeriod, payerInfo } =
+      currentTariffStatusStore;
+    const { user } = userStore;
 
-  return {
-    isStripePortalAvailable,
-    theme,
-    user,
-    accountLink,
-    payerInfo,
-    email: customerId,
-    isGracePeriod,
-    isNotPaidPeriod,
-  };
-})(observer(PayerInformationContainer));
+    return {
+      isStripePortalAvailable,
+      theme,
+      user,
+      accountLink,
+      payerInfo,
+      email: customerId,
+      isGracePeriod,
+      isNotPaidPeriod,
+    };
+  }
+)(observer(PayerInformationContainer));

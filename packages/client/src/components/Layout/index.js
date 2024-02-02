@@ -227,9 +227,9 @@ Layout.propTypes = {
   setIsTabletView: PropTypes.func,
 };
 
-export default inject(({ auth, bannerStore }) => {
+export default inject(({ settingsStore }) => {
   const { isTabletView, setIsTabletView, setWindowWidth, isFrame } =
-    auth.settingsStore;
+    settingsStore;
   return {
     isTabletView,
     setIsTabletView,

@@ -116,12 +116,12 @@ const SectionHeaderContent = ({
 
 export default inject(
   ({
-    auth,
     filesStore,
     oformsStore,
     accessRightsStore,
     dialogsStore,
     clientLoadingStore,
+    infoPanelStore,
   }) => {
     return {
       getCategoryTitle: oformsStore.getCategoryTitle,
@@ -137,8 +137,8 @@ export default inject(
       setSubmitToGalleryDialogVisible:
         dialogsStore.setSubmitToGalleryDialogVisible,
 
-      isInfoPanelVisible: auth.infoPanelStore.isVisible,
-      setIsInfoPanelVisible: auth.infoPanelStore.setIsVisible,
+      isInfoPanelVisible: infoPanelStore.isVisible,
+      setIsInfoPanelVisible: infoPanelStore.setIsVisible,
 
       setIsLoading: () => {
         clientLoadingStore.setIsSectionHeaderLoading(true, false);

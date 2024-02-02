@@ -103,8 +103,8 @@ const DownloadRow = (props) => {
   );
 };
 
-export default inject(({ settingsStore }) => {
-  const { getIcon, getFolderIcon } = settingsStore;
+export default inject(({ filesSettingsStore }) => {
+  const { getIcon, getFolderIcon } = filesSettingsStore;
 
   return {
     getIcon,

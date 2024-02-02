@@ -321,7 +321,7 @@ const WelcomePageSettings = (props) => {
         </Text>
         <Link
           className="link-learn-more"
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
           target="_blank"
           isHovered
           href={welcomePageSettingsUrl}
@@ -350,14 +350,14 @@ const WelcomePageSettings = (props) => {
   );
 };
 
-export default inject(({ auth, setup, common }) => {
+export default inject(({ settingsStore, setup, common }) => {
   const {
     greetingSettings,
     organizationName,
     theme,
     currentColorScheme,
     welcomePageSettingsUrl,
-  } = auth.settingsStore;
+  } = settingsStore;
   const { setGreetingTitle, restoreGreetingTitle } = setup;
   const {
     isLoaded,

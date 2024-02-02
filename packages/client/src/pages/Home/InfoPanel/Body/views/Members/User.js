@@ -8,12 +8,15 @@ import DefaultUserPhotoUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82
 import { toastr } from "@docspace/shared/components/toast";
 import { isMobileOnly, isMobile } from "react-device-detect";
 import { decode } from "he";
-import { filterUserRoleOptions } from "SRC_DIR/helpers/utils";
+import { filterUserRoleOptions } from "SRC_DIR/helpers";
+import { capitalize } from "lodash";
+
 import { getUserRole } from "@docspace/shared/utils/common";
 import { Text } from "@docspace/shared/components/text";
 import EmailPlusReactSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
 import { StyledUserTypeHeader } from "../../styles/members";
 import { IconButton } from "@docspace/shared/components/icon-button";
+import { Tooltip } from "@docspace/shared/components/tooltip";
 
 const User = ({
   t,
@@ -28,6 +31,7 @@ const User = ({
   setMembersFilter,
   fetchMembers,
   hasNextPage,
+  showTooltip,
   infoPanelMembers,
   setInfoPanelMembers,
 }) => {
@@ -179,11 +183,32 @@ const User = ({
     // setIsScrollLocked(isOpen);
   };
 
+  const getTooltipContent = () => (
+    <div>
+      <Text fontSize="14px" fontWeight={600} noSelect truncate>
+        {decode(user.displayName)}
+      </Text>
+      <Text
+        className="label"
+        fontWeight={400}
+        fontSize="12px"
+        noSelect
+        truncate
+        color="#A3A9AE !important"
+        dir="auto"
+      >
+        {`${capitalize(role)} | ${user.email}`}
+      </Text>
+    </div>
+  );
+
   const userAvatar = user.hasAvatar ? user.avatar : DefaultUserPhotoUrl;
 
   const role = getUserRole(user);
 
   const withTooltip = user.isOwner || user.isAdmin;
+
+  const uniqueTooltipId = `userTooltip_${Math.random()}`;
 
   const tooltipContent = `${
     user.isOwner ? t("Common:DocSpaceOwner") : t("Common:DocSpaceAdmin")
@@ -216,13 +241,38 @@ const User = ({
         tooltipContent={tooltipContent}
         hideRoleIcon={!withTooltip}
       />
-
-      <div className="name">
-        {isExpect ? user.email : decode(user.displayName) || user.email}
+      <div className="user_body-wrapper">
+        <div className="name-wrapper">
+          <Text className="name" data-tooltip-id={uniqueTooltipId}>
+            {decode(user.displayName)}
+          </Text>
+          {/* TODO: uncomment when information about online statuses appears */}
+          {/* {showTooltip && (
+            <Tooltip
+              float
+              id={uniqueTooltipId}
+              getContent={getTooltipContent}
+              place="bottom"
+            />
+          )} */}
+          {currentMember?.id === user.id && (
+            <div className="me-label">&nbsp;{`(${t("Common:MeLabel")})`}</div>
+          )}
+        </div>
+        <div className="role-email" style={{ display: "flex" }}>
+          <Text
+            className="label"
+            fontWeight={400}
+            fontSize="12px"
+            noSelect
+            truncate
+            color="#A3A9AE"
+            dir="auto"
+          >
+            {`${capitalize(role)} | ${user.email}`}
+          </Text>
+        </div>
       </div>
-      {currentMember?.id === user.id && (
-        <div className="me-label">&nbsp;{`(${t("Common:MeLabel")})`}</div>
-      )}
 
       {userRole && userRoleOptions && (
         <div className="role-wrapper">
@@ -255,14 +305,14 @@ const User = ({
   );
 };
 
-export default inject(({ auth, filesStore, peopleStore }) => {
+export default inject(({ infoPanelStore, filesStore, peopleStore }) => {
   const {
     infoPanelSelection,
     setIsScrollLocked,
     infoPanelMembers,
     setInfoPanelMembers,
     fetchMembers,
-  } = auth.infoPanelStore;
+  } = infoPanelStore;
   const {
     updateRoomMemberRole,
     resendEmailInvitations,

@@ -146,23 +146,23 @@ const DateItem = styled.button<{
   ${(props) =>
     props.isCurrent &&
     css`
-      background: ${props.theme.calendar.accent};
+      background: ${props.theme.calendar?.accent};
       :hover {
-        background-color: ${props.theme.calendar.accent};
+        background-color: ${props.theme.calendar?.accent};
       }
 
       :focus {
-        background-color: ${props.theme.calendar.accent};
+        background-color: ${props.theme.calendar?.accent};
       }
     `}
   color: ${(props) =>
     props.disabled
       ? props.theme.calendar.disabledColor
       : props.focused
-        ? props.theme.calendar.accent
+        ? props.theme.calendar?.accent
         : props.theme.calendar.color};
   border-color: ${(props) =>
-    props.focused ? props.theme.calendar.accent : "transparent"};
+    props.focused ? props.theme.calendar?.accent : "transparent"};
 
   ${(props) =>
     props.isCurrent &&
@@ -200,7 +200,7 @@ const HeaderActionIcon = styled(ArrowIcon)`
   transform: rotate(225deg);
   top: ${(props) => (props.isMobile ? "11px" : "8.5px")};
   left: 104%;
-  border-color: ${(props) => props.theme.calendar.accent};
+  border-color: ${(props) => props.theme.calendar?.accent};
 `;
 
 HeaderActionIcon.defaultProps = { theme: Base };
@@ -242,12 +242,12 @@ const RoundButton = styled.button<{ isMobile?: boolean }>`
     outline: ${(props) =>
       props.disabled
         ? `1px solid ${props.theme.calendar?.outlineColor}`
-        : `2px solid ${props.theme.calendar.accent}`};
+        : `2px solid ${props.theme.calendar?.accent}`};
     span {
       border-color: ${(props) =>
         props.disabled
           ? props.theme.calendar.disabledArrow
-          : props.theme.calendar.accent};
+          : props.theme.calendar?.accent};
     }
   }
 `;
@@ -296,7 +296,7 @@ const StyledContainerTheme = styled(Container)<{
   isMobile?: boolean;
 }>`
   ${HeaderActionIcon} {
-    border-color: ${(props) => props.$currentColorScheme?.main.accent};
+    border-color: ${(props) => props.$currentColorScheme?.main?.accent};
   }
 `;
 
@@ -308,23 +308,23 @@ const StyledDateItemTheme = styled(DateItem)<{
   ${(props) =>
     props.isCurrent &&
     css`
-      background: ${props.$currentColorScheme?.main.accent};
+      background: ${props.$currentColorScheme?.main?.accent};
       :hover {
-        background-color: ${props.$currentColorScheme?.main.accent};
+        background-color: ${props.$currentColorScheme?.main?.accent};
       }
 
       :focus {
-        background-color: ${props.$currentColorScheme?.main.accent};
+        background-color: ${props.$currentColorScheme?.main?.accent};
       }
     `}
   color: ${(props) =>
     props.disabled
       ? props.theme.calendar.disabledColor
       : props.focused
-        ? props.$currentColorScheme?.main.accent
+        ? props.$currentColorScheme?.main?.accent
         : props.theme.calendar.color};
   border-color: ${(props) =>
-    props.focused ? props.$currentColorScheme?.main.accent : "transparent"};
+    props.focused ? props.$currentColorScheme?.main?.accent : "transparent"};
 `;
 
 const StyledRoundButtonTheme = styled(RoundButton)<{
@@ -334,12 +334,12 @@ const StyledRoundButtonTheme = styled(RoundButton)<{
     outline: ${(props) =>
       props.disabled
         ? `1px solid ${props.theme.calendar?.outlineColor}`
-        : `2px solid ${props.$currentColorScheme?.main.accent}`};
+        : `2px solid ${props.$currentColorScheme?.main?.accent}`};
     span {
       border-color: ${(props) =>
         props.disabled
           ? props.theme.calendar.disabledArrow
-          : props.$currentColorScheme?.main.accent};
+          : props.$currentColorScheme?.main?.accent};
     }
   }
 `;

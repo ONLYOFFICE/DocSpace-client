@@ -32,14 +32,14 @@ import {
 } from "SRC_DIR/helpers/utils";
 
 class UploadDataStore {
-  authStore;
+  settingsStore;
   treeFoldersStore;
   selectedFolderStore;
   filesStore;
   secondaryProgressDataStore;
   primaryProgressDataStore;
   dialogsStore;
-  settingsStore;
+  filesSettingsStore;
 
   files = [];
   uploadedFilesHistory = [];
@@ -70,24 +70,24 @@ class UploadDataStore {
   asyncUploadObj = {};
 
   constructor(
-    authStore,
+    settingsStore,
     treeFoldersStore,
     selectedFolderStore,
     filesStore,
     secondaryProgressDataStore,
     primaryProgressDataStore,
     dialogsStore,
-    settingsStore
+    filesSettingsStore
   ) {
     makeAutoObservable(this);
-    this.authStore = authStore;
+    this.settingsStore = settingsStore;
     this.treeFoldersStore = treeFoldersStore;
     this.selectedFolderStore = selectedFolderStore;
     this.filesStore = filesStore;
     this.secondaryProgressDataStore = secondaryProgressDataStore;
     this.primaryProgressDataStore = primaryProgressDataStore;
     this.dialogsStore = dialogsStore;
-    this.settingsStore = settingsStore;
+    this.filesSettingsStore = filesSettingsStore;
   }
 
   removeFiles = (fileIds) => {
@@ -402,7 +402,7 @@ class UploadDataStore {
 
     if (!this.converted) return;
 
-    const { storeOriginalFiles } = this.settingsStore;
+    const { storeOriginalFiles } = this.filesSettingsStore;
 
     const isSortedFolder = isRecentFolder || isFavoritesFolder || isShareFolder;
     const needToRefreshFilesList = !isSortedFolder || !storeOriginalFiles;
@@ -518,7 +518,7 @@ class UploadDataStore {
 
           if (!error && isOpen && data && data[0]) {
             let tab =
-              !this.authStore.settingsStore.isDesktopClient &&
+              !this.settingsStore.isDesktopClient &&
               window.DocSpaceConfig?.editor?.openOnNewPage &&
               fileInfo.fileExst
                 ? window.open(
@@ -690,7 +690,7 @@ class UploadDataStore {
   };
 
   startUpload = (uploadFiles, folderId, t) => {
-    const { canConvert } = this.settingsStore;
+    const { canConvert } = this.filesSettingsStore;
 
     const toFolderId = folderId ? folderId : this.selectedFolderStore.id;
 
@@ -777,7 +777,7 @@ class UploadDataStore {
     //console.log("this.tempConversionFiles", this.tempConversionFiles);
 
     if (countConversionFiles)
-      this.settingsStore.hideConfirmConvertSave
+      this.filesSettingsStore.hideConfirmConvertSave
         ? this.convertUploadedFiles(t)
         : this.dialogsStore.setConvertDialogVisible(true);
 
@@ -815,7 +815,7 @@ class UploadDataStore {
     const { files, setFiles, folders, setFolders, filter, setFilter } =
       this.filesStore;
 
-    const { withPaging } = this.authStore.settingsStore;
+    const { withPaging } = this.settingsStore;
 
     if (window.location.pathname.indexOf("/history") === -1) {
       const newFiles = files;
@@ -864,7 +864,7 @@ class UploadDataStore {
               const newFilter = filter;
               newFilter.total += 1;
               setFilter(newFilter);
-            } else if (!this.settingsStore.storeOriginalFiles) {
+            } else if (!this.filesSettingsStore.storeOriginalFiles) {
               newFiles[fileIndex] = currentFile.fileInfo;
               setFiles(newFiles);
             }
@@ -915,7 +915,8 @@ class UploadDataStore {
     length,
     resolve,
     reject,
-    isAsyncUpload = false
+    isAsyncUpload = false,
+    isFinalize = false
   ) => {
     if (!res.data.data && res.data.message) {
       return reject(res.data.message);
@@ -928,17 +929,21 @@ class UploadDataStore {
     if (!this.isParallel) {
       uploadedSize = uploaded
         ? fileSize
-        : index * this.settingsStore.chunkUploadSize;
+        : index * this.filesSettingsStore.chunkUploadSize;
 
       newPercent = this.getNewPercent(uploadedSize, indexOfFile);
     } else {
       if (!uploaded) {
         uploadedSize =
-          fileSize <= this.settingsStore.chunkUploadSize
+          fileSize <= this.filesSettingsStore.chunkUploadSize
             ? fileSize
-            : this.settingsStore.chunkUploadSize;
+            : this.filesSettingsStore.chunkUploadSize;
       } else {
-        uploadedSize = fileSize - index * this.settingsStore.chunkUploadSize;
+        uploadedSize = isFinalize
+          ? 0
+          : fileSize <= this.filesSettingsStore.chunkUploadSize
+            ? fileSize
+            : fileSize - index * this.filesSettingsStore.chunkUploadSize;
       }
       newPercent = this.getFilesPercent(uploadedSize);
     }
@@ -1041,18 +1046,17 @@ class UploadDataStore {
     ].chunksArray.findIndex((x) => !x.isActive && !x.isFinalize);
 
     if (chunkObjIndex !== -1) {
-      this.asyncUploadObj[operationId].chunksArray[
-        chunkObjIndex
-      ].isActive = true;
+      this.asyncUploadObj[operationId].chunksArray[chunkObjIndex].isActive =
+        true;
 
       try {
-        const res = await this.asyncUploadObj[operationId].chunksArray[
-          chunkObjIndex
-        ].onUpload();
+        const res =
+          await this.asyncUploadObj[operationId].chunksArray[
+            chunkObjIndex
+          ].onUpload();
 
-        this.asyncUploadObj[operationId].chunksArray[
-          chunkObjIndex
-        ].isFinished = true;
+        this.asyncUploadObj[operationId].chunksArray[chunkObjIndex].isFinished =
+          true;
 
         if (!res.data.data && res.data.message) {
           delete this.asyncUploadObj[operationId];
@@ -1088,12 +1092,13 @@ class UploadDataStore {
           ].chunksArray.findIndex((x) => x.isFinalize);
 
           if (finalizeChunkIndex > -1) {
-            const finalizeRes = await this.asyncUploadObj[
-              operationId
-            ].chunksArray[finalizeChunkIndex].onUpload();
-
             const finalizeIndex =
               this.asyncUploadObj[operationId].chunksArray.length - 1;
+
+            const finalizeRes =
+              await this.asyncUploadObj[operationId].chunksArray[
+                finalizeChunkIndex
+              ].onUpload();
 
             this.checkChunkUpload(
               t,
@@ -1105,7 +1110,8 @@ class UploadDataStore {
               length,
               resolve,
               reject,
-              true
+              true, // isAsyncUpload
+              true //isFinalize
             );
           }
         }
@@ -1126,7 +1132,7 @@ class UploadDataStore {
     operationId,
     toFolderId
   ) => {
-    const { chunkUploadCount: asyncChunkUploadCount } = this.settingsStore;
+    const { chunkUploadCount: asyncChunkUploadCount } = this.filesSettingsStore;
     const length = requestsDataArray.length;
 
     const isThirdPartyFolder = typeof toFolderId === "string";
@@ -1222,7 +1228,7 @@ class UploadDataStore {
       // console.log("IS PARALLEL");
       const notUploadedFiles = this.files.filter((f) => !f.inAction);
 
-      const { chunkUploadCount } = this.settingsStore;
+      const { chunkUploadCount } = this.filesSettingsStore;
 
       const countFiles =
         notUploadedFiles.length >= chunkUploadCount
@@ -1299,7 +1305,7 @@ class UploadDataStore {
       return Promise.resolve();
     }
 
-    const { chunkUploadSize } = this.settingsStore;
+    const { chunkUploadSize } = this.filesSettingsStore;
 
     const { file, toFolderId /*, action*/ } = item;
     const chunks = Math.ceil(file.size / chunkUploadSize, chunkUploadSize);
@@ -1479,7 +1485,7 @@ class UploadDataStore {
 
   finishUploadFiles = () => {
     const { fetchFiles, filter } = this.filesStore;
-    const { withPaging } = this.authStore.settingsStore;
+    const { withPaging } = this.settingsStore;
 
     if (this.tempFiles.length) {
       this.uploaded = true;
@@ -1528,7 +1534,7 @@ class UploadDataStore {
       withPaging && fetchFiles(toFolderId, filter);
 
       if (toFolderId) {
-        const { socketHelper } = this.authStore.settingsStore;
+        const { socketHelper } = this.settingsStore;
 
         socketHelper.emit({
           command: "refresh-folder",
@@ -1796,7 +1802,7 @@ class UploadDataStore {
 
     const { clearSecondaryProgressData, setSecondaryProgressBarData, label } =
       this.secondaryProgressDataStore;
-    const { withPaging } = this.authStore.settingsStore;
+    const { withPaging } = this.settingsStore;
     const isMovingCurrentFolder = !isCopy && this.dialogsStore.isFolderActions;
 
     let receivedFolder = destFolderId;

@@ -6,12 +6,17 @@ import {
 import { makeAutoObservable } from "mobx";
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
-import authStore from "@docspace/common/store/AuthStore";
+import { authStore } from "@docspace/shared/store";
 import { getPaymentLink } from "@docspace/shared/api/portal";
 import axios from "axios";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 class PaymentStore {
+  userStore = null;
+  currentTariffStatusStore = null;
+  currentQuotaStore = null;
+  paymentQuotasStore = null;
+
   salesEmail = "";
   helpUrl = "https://helpdesk.onlyoffice.com";
   buyUrl =
@@ -37,14 +42,23 @@ class PaymentStore {
   isInitPaymentPage = false;
   isLicenseCorrect = false;
 
-  constructor() {
+  constructor(
+    userStore,
+    currentTariffStatusStore,
+    currentQuotaStore,
+    paymentQuotasStore
+  ) {
+    this.userStore = userStore;
+    this.currentTariffStatusStore = currentTariffStatusStore;
+    this.currentQuotaStore = currentQuotaStore;
+    this.paymentQuotasStore = paymentQuotasStore;
+
     makeAutoObservable(this);
   }
 
   get isAlreadyPaid() {
-    const { currentQuotaStore, currentTariffStatusStore } = authStore;
-    const { customerId } = currentTariffStatusStore;
-    const { isFreeTariff } = currentQuotaStore;
+    const { customerId } = this.currentTariffStatusStore;
+    const { isFreeTariff } = this.currentQuotaStore;
 
     return customerId?.length !== 0 || !isFreeTariff;
   }
@@ -57,9 +71,8 @@ class PaymentStore {
     this.isUpdatingBasicSettings = isUpdatingBasicSettings;
   };
   basicSettings = async () => {
-    const { currentTariffStatusStore, currentQuotaStore } = authStore;
-    const { setPortalTariff, setPayerInfo } = currentTariffStatusStore;
-    const { addedManagersCount } = currentQuotaStore;
+    const { setPortalTariff, setPayerInfo } = this.currentTariffStatusStore;
+    const { addedManagersCount } = this.currentQuotaStore;
 
     this.setIsUpdatingBasicSettings(true);
 
@@ -89,11 +102,9 @@ class PaymentStore {
       return;
     }
 
-    const { paymentQuotasStore, currentTariffStatusStore, currentQuotaStore } =
-      authStore;
-    const { setPayerInfo } = currentTariffStatusStore;
-    const { addedManagersCount } = currentQuotaStore;
-    const { setPortalPaymentQuotas } = paymentQuotasStore;
+    const { setPayerInfo } = this.currentTariffStatusStore;
+    const { addedManagersCount } = this.currentQuotaStore;
+    const { setPortalPaymentQuotas } = this.paymentQuotasStore;
 
     const requests = [this.getSettingsPayment(), setPortalPaymentQuotas()];
 
@@ -276,7 +287,7 @@ class PaymentStore {
   };
 
   getTotalCostByFormula = (value) => {
-    const costValuePerManager = authStore.paymentQuotasStore.planCost.value;
+    const costValuePerManager = this.paymentQuotasStore.planCost.value;
     return value * costValuePerManager;
   };
 
@@ -291,9 +302,8 @@ class PaymentStore {
     this.setBasicTariffContainer();
   };
   setBasicTariffContainer = () => {
-    const { currentQuotaStore } = authStore;
     const { currentPlanCost, maxCountManagersByQuota, addedManagersCount } =
-      currentQuotaStore;
+      this.currentQuotaStore;
     const currentTotalPrice = currentPlanCost.value;
 
     if (this.isAlreadyPaid) {
@@ -333,10 +343,9 @@ class PaymentStore {
   }
 
   get isPayer() {
-    const { userStore, currentTariffStatusStore } = authStore;
-    const { user } = userStore;
+    const { user } = this.userStore;
 
-    const { payerInfo } = currentTariffStatusStore;
+    const { payerInfo } = this.currentTariffStatusStore;
 
     if (!user || !payerInfo) return false;
 
@@ -344,8 +353,7 @@ class PaymentStore {
   }
 
   get isStripePortalAvailable() {
-    const { userStore } = authStore;
-    const { user } = userStore;
+    const { user } = this.userStore;
 
     if (!user) return false;
 
@@ -353,9 +361,8 @@ class PaymentStore {
   }
 
   get canUpdateTariff() {
-    const { currentQuotaStore, userStore } = authStore;
-    const { user } = userStore;
-    const { isFreeTariff } = currentQuotaStore;
+    const { user } = this.userStore;
+    const { isFreeTariff } = this.currentQuotaStore;
 
     if (!user) return false;
 
@@ -365,8 +372,7 @@ class PaymentStore {
   }
 
   get canPayTariff() {
-    const { currentQuotaStore } = authStore;
-    const { addedManagersCount } = currentQuotaStore;
+    const { addedManagersCount } = this.currentQuotaStore;
 
     if (this.managersCount >= addedManagersCount) return true;
 
@@ -374,8 +380,8 @@ class PaymentStore {
   }
 
   get canDowngradeTariff() {
-    const { currentQuotaStore } = authStore;
-    const { addedManagersCount, usedTotalStorageSizeCount } = currentQuotaStore;
+    const { addedManagersCount, usedTotalStorageSizeCount } =
+      this.currentQuotaStore;
 
     if (addedManagersCount > this.managersCount) return false;
     if (usedTotalStorageSizeCount > this.allowedStorageSizeByQuota)
@@ -385,9 +391,8 @@ class PaymentStore {
   }
 
   setRangeStepByQuota = () => {
-    const { paymentQuotasStore } = authStore;
     const { stepAddingQuotaManagers, stepAddingQuotaTotalSize } =
-      paymentQuotasStore;
+      this.paymentQuotasStore;
 
     this.stepByQuotaForManager = stepAddingQuotaManagers;
     this.minAvailableManagersValue = this.stepByQuotaForManager;

@@ -38,7 +38,7 @@ export const TooltipContent = ({ title, description, img }) => {
         <Text fontSize="16px" fontWeight={700} lineHeight="22px">
           {title}
         </Text>
-        <XImg />
+        {/* <XImg /> */}
       </HeaderContainer>
       <Text>{description}</Text>
       <ImgWrapper>

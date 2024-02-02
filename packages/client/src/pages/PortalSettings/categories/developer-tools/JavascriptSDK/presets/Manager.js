@@ -30,6 +30,12 @@ import ColumnsUrl from "PUBLIC_DIR/images/sdk-presets_columns.react.svg?url";
 import ActionButtonUrl from "PUBLIC_DIR/images/sdk-presets_action-button.react.svg?url";
 import SearchUrl from "PUBLIC_DIR/images/sdk-presets_search.react.svg?url";
 import HeaderUrl from "PUBLIC_DIR/images/sdk-presets_header.react.svg?url";
+import LeftMenuDarkUrl from "PUBLIC_DIR/images/sdk-presets_left-menu_dark.react.svg?url";
+import TitleDarkUrl from "PUBLIC_DIR/images/sdk-presets_title_dark.react.svg?url";
+import ColumnsDarkUrl from "PUBLIC_DIR/images/sdk-presets_columns_dark.react.svg?url";
+import ActionButtonDarkUrl from "PUBLIC_DIR/images/sdk-presets_action-button_dark.react.svg?url";
+import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.react.svg?url";
+import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.react.svg?url";
 
 const showPreviewThreshold = 720;
 
@@ -128,7 +134,7 @@ import {
 } from "./StyledPresets";
 
 const Manager = (props) => {
-  const { t, setDocumentTitle, fetchExternalLinks } = props;
+  const { t, setDocumentTitle, fetchExternalLinks, theme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
@@ -731,7 +737,7 @@ const Manager = (props) => {
                   <TooltipContent
                     title={t("Menu")}
                     description={t("MenuDescription")}
-                    img={LeftMenuUrl}
+                    img={theme.isBase ? LeftMenuUrl : LeftMenuDarkUrl}
                   />
                 }
               />
@@ -752,7 +758,7 @@ const Manager = (props) => {
                   <TooltipContent
                     title={t("Common:Title")}
                     description={t("ManagerTitleDescription")}
-                    img={TitleUrl}
+                    img={theme.isBase ? TitleUrl : TitleDarkUrl}
                   />
                 }
               />
@@ -772,7 +778,7 @@ const Manager = (props) => {
                   <TooltipContent
                     title={t("SettingUpColumns")}
                     description={t("SettingUpColumnsDescription")}
-                    img={ColumnsUrl}
+                    img={theme.isBase ? ColumnsUrl : ColumnsDarkUrl}
                   />
                 }
               />
@@ -792,7 +798,7 @@ const Manager = (props) => {
                   <TooltipContent
                     title={t("ActionButton")}
                     description={t("ActionButtonDescription")}
-                    img={ActionButtonUrl}
+                    img={theme.isBase ? ActionButtonUrl : ActionButtonDarkUrl}
                   />
                 }
               />
@@ -812,7 +818,7 @@ const Manager = (props) => {
                   <TooltipContent
                     title={t("SearchBlock")}
                     description={t("ManagerSearchBlockDescription")}
-                    img={SearchUrl}
+                    img={theme.isBase ? SearchUrl : SearchDarkUrl}
                   />
                 }
               />
@@ -833,7 +839,7 @@ const Manager = (props) => {
                   <TooltipContent
                     title={t("Header")}
                     description={t("HeaderDescription")}
-                    img={HeaderUrl}
+                    img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
                   />
                 }
               />

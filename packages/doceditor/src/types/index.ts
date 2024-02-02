@@ -1,3 +1,5 @@
+import { i18n } from "i18next";
+
 import {
   TDocServiceLocation,
   TFile,
@@ -130,8 +132,8 @@ export interface IResponse {
   settings: TSettings;
   successAuth: boolean;
   isSharingAccess: boolean;
-
   error?: unknown;
+
 }
 
 export interface EditorProps extends IResponse {}
@@ -165,3 +167,5 @@ export interface SelectFolderDialogProps {
 export interface UseSocketHelperProps {
   socketUrl: string;
 }
+
+export interface UseTranslationProps {}

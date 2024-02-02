@@ -15,6 +15,8 @@ import useSocketHelper from "@/hooks/useSocketHelper";
 import useSelectFolderDialog from "@/hooks/useSelectFolderDialog";
 
 import SelectFolderDialog from "./SelectFolderDialog";
+import { getI18NInstance } from "@/utils/i18n";
+import { I18nextProvider } from "react-i18next";
 
 const SYSTEM_THEME = getSystemTheme();
 
@@ -25,6 +27,8 @@ const Editor = ({
   successAuth,
   user,
 }: EditorProps) => {
+  const i18n = getI18NInstance(user.cultureName || "en", settings.culture);
+
   const [currentColorTheme, setCurrentColorTheme] =
     React.useState<TColorScheme | null>(null);
 
@@ -49,7 +53,7 @@ const Editor = ({
     if (theme === ThemeKeys.BaseStr)
       return { ...Base, currentColorTheme, interfaceDirection: "ltr" };
 
-    return { ...Base, currentColorTheme, interfaceDirection: "ltr" };
+    return { ...Dark, currentColorTheme, interfaceDirection: "ltr" };
   };
 
   const getCurrentColorTheme = React.useCallback(async () => {
@@ -89,27 +93,29 @@ const Editor = ({
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <DocumentEditor
-        id={"docspace_editor"}
-        documentServerUrl={documentserverUrl}
-        config={newConfig}
-        height="100%"
-        width="100%"
-        events_onDocumentReady={onDocumentReady}
-      />
-
-      {isVisibleSelectFolderDialog && !!socketHelper && (
-        <SelectFolderDialog
-          socketHelper={socketHelper}
-          isVisible={isVisibleSelectFolderDialog}
-          onSubmit={onSubmitSelectFolderDialog}
-          onClose={onCloseSelectFolderDialog}
-          titleSelectorFolder={titleSelectorFolderDialog}
-          fileInfo={fileInfo}
+    <I18nextProvider i18n={i18n}>
+      <ThemeProvider theme={theme}>
+        <DocumentEditor
+          id={"docspace_editor"}
+          documentServerUrl={documentserverUrl}
+          config={newConfig}
+          height="100%"
+          width="100%"
+          events_onDocumentReady={onDocumentReady}
         />
-      )}
-    </ThemeProvider>
+
+        {isVisibleSelectFolderDialog && !!socketHelper && (
+          <SelectFolderDialog
+            socketHelper={socketHelper}
+            isVisible={isVisibleSelectFolderDialog}
+            onSubmit={onSubmitSelectFolderDialog}
+            onClose={onCloseSelectFolderDialog}
+            titleSelectorFolder={titleSelectorFolderDialog}
+            fileInfo={fileInfo}
+          />
+        )}
+      </ThemeProvider>
+    </I18nextProvider>
   );
 };
 

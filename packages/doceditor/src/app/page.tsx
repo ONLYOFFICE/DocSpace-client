@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+import type { Metadata } from "next";
 
 import Editor from "@/components/Editor";
 import { getData } from "@/utils/actions";
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description: "",
 };
 
-export default async function Page({
+async function Page({
   searchParams,
 }: {
   searchParams?: { [key: string]: string };
@@ -34,3 +34,5 @@ export default async function Page({
 
   return <Editor {...data} />;
 }
+
+export default Page;

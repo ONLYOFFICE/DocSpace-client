@@ -1,11 +1,13 @@
 "use server";
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
+import { i18n } from "i18next";
 
 import { getLtrLanguageForEditor } from "@docspace/shared/utils/common";
 import { TenantStatus } from "@docspace/shared/enums";
 
 import { IResponse } from "@/types";
-import { redirect } from "next/navigation";
+import { getI18NInstance } from "./i18n";
 
 const API_PREFIX = "api/2.0";
 

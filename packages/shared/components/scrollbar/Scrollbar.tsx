@@ -10,10 +10,10 @@ const Scrollbar = React.forwardRef((props: ScrollbarProps, ref) => {
   const {
     id,
     onScroll,
-    autoHide,
-    hideTrackTimer,
+    autoHide = false,
+    hideTrackTimer = 500,
     scrollclass,
-    fixedSize,
+    fixedSize = false,
     ...rest
   } = props;
 
@@ -69,19 +69,25 @@ const Scrollbar = React.forwardRef((props: ScrollbarProps, ref) => {
     : {};
 
   // onScroll handler placed here on Scroller element to get native event instead of parameters that library put
-  const renderScroller = (libProps: {
-    elementRef: React.RefObject<HTMLDivElement>;
-  }) => {
-    const { elementRef, ...restLibProps } = libProps;
-    return (
-      <div
-        {...restLibProps}
-        className={classNames("scroller", scrollclass || "") || "scroller"}
-        ref={elementRef}
-        onScroll={onScroll}
-      />
-    );
-  };
+  const renderScroller = React.useCallback(
+    (libProps: { elementRef: React.RefObject<HTMLDivElement> }) => {
+      const { elementRef, ...restLibProps } = libProps;
+      console.log(elementRef);
+      return (
+        <div
+          {...restLibProps}
+          key="scroll-renderer-div"
+          className={classNames("scroller", scrollclass || "") || "scroller"}
+          ref={(ref) => {
+            console.log(ref);
+            return elementRef(ref);
+          }}
+          onScroll={onScroll}
+        />
+      );
+    },
+    [onScroll, scrollclass],
+  );
 
   useEffect(() => {
     return () => {
@@ -115,16 +121,11 @@ const Scrollbar = React.forwardRef((props: ScrollbarProps, ref) => {
         style: { ...tracksAutoHideStyles },
         ...tracksAutoHideHandlers,
       }}
+      universal="true"
     />
   );
 });
 
 Scrollbar.displayName = "Scrollbar";
-
-Scrollbar.defaultProps = {
-  autoHide: false,
-  hideTrackTimer: 500,
-  fixedSize: false,
-};
 
 export { Scrollbar };

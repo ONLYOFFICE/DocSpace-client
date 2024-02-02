@@ -138,6 +138,8 @@ const Body = ({
 
   if (descriptionText) listHeight -= BODY_DESCRIPTION_TEXT_HEIGHT;
 
+  console.log(itemsCount, items, isLoading);
+
   return (
     <StyledBody
       ref={bodyRef}
@@ -177,8 +179,9 @@ const Body = ({
       ) : null}
 
       {isLoading ? (
-        <Scrollbar style={{ height: listHeight }}>{rowLoader}</Scrollbar>
-      ) : itemsCount === 0 ? (
+        rowLoader
+      ) : // <Scrollbar style={{ height: listHeight }}>{rowLoader}</Scrollbar>
+      itemsCount === 0 ? (
         <EmptyScreen
           withSearch={isSearch && !!value}
           image={emptyScreenImage}
@@ -205,7 +208,7 @@ const Body = ({
             />
           )}
 
-          {bodyHeight && (
+          {/* {bodyHeight && (
             <InfiniteLoader
               ref={listOptionsRef}
               isItemLoaded={isItemLoaded}
@@ -235,7 +238,7 @@ const Body = ({
                 </List>
               )}
             </InfiniteLoader>
-          )}
+          )} */}
         </>
       )}
     </StyledBody>

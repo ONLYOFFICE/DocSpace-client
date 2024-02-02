@@ -14,11 +14,11 @@ const AsidePure = (props: AsideProps) => {
   const {
     visible,
     children,
-    scale,
-    zIndex,
+    scale = false,
+    zIndex = 400,
     className,
     contentPaddingBottom,
-    withoutBodyScroll,
+    withoutBodyScroll = false,
     onClose,
   } = props;
   const [windowHeight] = React.useState(window.innerHeight);
@@ -94,12 +94,6 @@ const AsidePure = (props: AsideProps) => {
       )}
     </StyledAside>
   );
-};
-
-AsidePure.defaultProps = {
-  scale: false,
-  zIndex: 400,
-  withoutBodyScroll: false,
 };
 
 const Aside = React.memo(AsidePure);

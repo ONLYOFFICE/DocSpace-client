@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { useTheme } from "styled-components";
 
@@ -30,6 +32,7 @@ import useSocketHelper from "./hooks/useSocketHelper";
 import { FilesSelectorProps } from "./FilesSelector.types";
 import useFilesSettings from "./hooks/useFilesSettings";
 
+console.log(EmptyScreenAltSvgDarkUrl);
 const FilesSelector = ({
   socketHelper,
   socketSubscribers,
@@ -438,6 +441,14 @@ const FilesSelector = ({
     />
   );
 
+  React.useEffect(() => {
+    console.log("mount fs");
+
+    return () => {
+      console.log("unm fs");
+    };
+  }, []);
+
   const selectorComponent = embedded ? (
     SelectorBody
   ) : (
@@ -459,6 +470,8 @@ const FilesSelector = ({
       </Aside>
     </>
   );
+
+  console.log(currentDeviceType);
 
   return currentDeviceType === DeviceType.mobile && !embedded ? (
     <Portal visible={isPanelVisible} element={<div>{selectorComponent}</div>} />

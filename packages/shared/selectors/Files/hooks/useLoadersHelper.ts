@@ -25,6 +25,7 @@ const useLoadersHelper = ({ items }: UseLoadersHelperProps) => {
   const isMount = React.useRef<boolean>(true);
 
   React.useEffect(() => {
+    isMount.current = true;
     return () => {
       isMount.current = false;
     };

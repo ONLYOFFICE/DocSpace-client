@@ -24,7 +24,7 @@ export interface TextInputProps {
   /** Allows to add or delete characters without changing the positions of the existing characters. */
   keepCharPositions?: boolean;
   /** When guide is true, Text Mask always shows both placeholder characters and non-placeholder mask characters. */
-  guide?: boolean;
+  guide?: boolean | string;
   /** Supported size of the input fields. */
   size: InputSize;
   /** Indicates the input field has scale */

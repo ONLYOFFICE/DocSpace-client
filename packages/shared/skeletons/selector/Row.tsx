@@ -103,7 +103,13 @@ const RowLoader = ({
   };
 
   return isContainer ? (
-    <StyledContainer id={id} className={className} style={style} {...rest}>
+    <StyledContainer
+      id={id}
+      className={className}
+      key="test"
+      style={style}
+      {...rest}
+    >
       {withAllSelect && (
         <>
           {getRowItem(-1)}

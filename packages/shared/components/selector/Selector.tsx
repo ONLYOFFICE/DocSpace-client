@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 
 import { Header } from "./sub-components/Header";
@@ -13,16 +15,14 @@ const Selector = ({
   style,
 
   headerLabel,
-  withoutBackButton,
+
   onBackClick,
 
-  isBreadCrumbsLoading,
   breadCrumbsLoader,
   withBreadCrumbs,
   breadCrumbs,
   onSelectBreadCrumb,
 
-  withSearch,
   searchLoader,
   isSearchLoading,
   searchPlaceholder,
@@ -30,26 +30,22 @@ const Selector = ({
   onSearch,
   onClearSearch,
 
-  withSelectAll,
   selectAllLabel,
   selectAllIcon,
   onSelectAll,
 
   items,
   renderCustomItem,
-  isMultiSelect,
-  selectedItems,
+
   acceptButtonLabel,
   onSelect,
   onAccept,
   rowLoader,
 
-  withAccessRights,
   accessRights,
   selectedAccessRight,
   onAccessRightsChange,
 
-  withCancelButton,
   cancelButtonLabel,
   onCancel,
 
@@ -67,22 +63,30 @@ const Selector = ({
   totalItems,
   isLoading,
 
-  withHeader,
-
-  withFooterInput,
   withFooterCheckbox,
   footerInputHeader,
   footerCheckboxLabel,
   currentFooterInputValue,
-
-  alwaysShowFooter,
-  disableAcceptButton,
 
   descriptionText,
   acceptButtonId,
   cancelButtonId,
   isChecked,
   setIsChecked,
+
+  isMultiSelect = false,
+  withSelectAll = false,
+  withAccessRights = false,
+  withCancelButton = false,
+  withoutBackButton = false,
+  isBreadCrumbsLoading = false,
+  withSearch = true,
+  withFooterInput = false,
+  alwaysShowFooter = false,
+  disableAcceptButton = false,
+  withHeader = true,
+
+  selectedItems,
 }: SelectorProps) => {
   const [footerVisible, setFooterVisible] = React.useState<boolean>(false);
   const [isSearch, setIsSearch] = React.useState<boolean>(false);
@@ -124,21 +128,21 @@ const Selector = ({
     (newList: TSelectorItem[]) => {
       let isEqual = true;
 
-      if (selectedItems?.length !== newList.length) {
+      if (newSelectedItems?.length !== newList.length) {
         return setFooterVisible(true);
       }
 
-      if (newList.length === 0 && selectedItems?.length === 0) {
+      if (newList.length === 0 && newSelectedItems?.length === 0) {
         return setFooterVisible(false);
       }
 
       newList.forEach((item) => {
-        isEqual = selectedItems.some((x) => x.id === item.id);
+        isEqual = newSelectedItems.some((x) => x.id === item.id);
       });
 
       return setFooterVisible(!isEqual);
     },
-    [selectedItems],
+    [newSelectedItems],
   );
 
   const onSelectAction = (item: TSelectorItem) => {
@@ -281,8 +285,12 @@ const Selector = ({
   }, [selectedAccessRight]);
 
   React.useLayoutEffect(() => {
-    if (items && selectedItems) {
-      if (selectedItems.length === 0 || !isMultiSelect) {
+    if (items) {
+      if (
+        !selectedItems ||
+        (selectedItems && selectedItems.length === 0) ||
+        !isMultiSelect
+      ) {
         const cloneItems = items.map((x) => ({ ...x, isSelected: false }));
         return setRenderedItems(cloneItems);
       }
@@ -303,7 +311,8 @@ const Selector = ({
       setNewSelectedItems(cloneSelectedItems);
       compareSelectedItems(cloneSelectedItems);
     }
-  }, [items, selectedItems, isMultiSelect, compareSelectedItems]);
+  }, [compareSelectedItems, isMultiSelect, items, selectedItems]);
+
   return (
     <StyledSelector
       id={id}
@@ -401,22 +410,6 @@ const Selector = ({
       )}
     </StyledSelector>
   );
-};
-
-Selector.defaultProps = {
-  isMultiSelect: false,
-  withSelectAll: false,
-  withAccessRights: false,
-  withCancelButton: false,
-  withoutBackButton: false,
-  isBreadCrumbsLoading: false,
-  withSearch: true,
-  withFooterInput: false,
-  alwaysShowFooter: false,
-  disableAcceptButton: false,
-  withHeader: true,
-
-  selectedItems: [],
 };
 
 export { Selector };

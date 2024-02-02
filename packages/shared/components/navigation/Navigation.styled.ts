@@ -19,10 +19,12 @@ const StyledContainer = styled.div<{
   withLogo: boolean;
   isDesktopClient?: boolean;
   width?: number;
+  isPublicRoom?: boolean;
 }>`
   ${(props) =>
     !props.isDropBoxComponent &&
     props.isDesktop &&
+    !props.isPublicRoom &&
     css`
       width: 100%;
       max-width: 100%;

@@ -225,6 +225,7 @@ const Navigation = ({
             isDesktopClient={isDesktopClient}
             isInfoPanelVisible={isInfoPanelVisible}
             withLogo={!!withLogo}
+            isPublicRoom={isPublicRoom}
             className="navigation-container"
           >
             {withLogo && (

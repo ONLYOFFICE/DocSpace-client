@@ -64,6 +64,7 @@ const RootFolderContainer = (props) => {
 
     myFolder,
     roomsFolder,
+    isPublicRoom,
   } = props;
   const personalDescription = t("EmptyFolderDecription");
 
@@ -77,10 +78,16 @@ const RootFolderContainer = (props) => {
   const favoritesDescription = t("FavoritesEmptyContainerDescription");
   const recentDescription = t("RecentViaLinkEmptyContainerDescription");
 
-  const roomsDescription =
-    isVisitor || isCollaborator
-      ? t("RoomEmptyContainerDescriptionUser")
-      : t("RoomEmptyContainerDescription");
+  const roomsDescription = isPublicRoom ? (
+    <>
+      <div>{t("RoomEmptyAtTheMoment")}</div>
+      <div>{t("FilesWillAppearHere")}</div>
+    </>
+  ) : isVisitor || isCollaborator ? (
+    t("RoomEmptyContainerDescriptionUser")
+  ) : (
+    t("RoomEmptyContainerDescription")
+  );
   const archiveRoomsDescription =
     isVisitor || isCollaborator
       ? t("ArchiveEmptyScreenUser")
@@ -338,6 +345,7 @@ export default inject(
     selectedFolderStore,
     clientLoadingStore,
     userStore,
+    publicRoomStore,
   }) => {
     const { isDesktopClient, isEncryptionSupport, organizationName, theme } =
       settingsStore;
@@ -352,6 +360,8 @@ export default inject(
     const { title, rootFolderType, security } = selectedFolderStore;
     const { isPrivacyFolder, myFolderId, myFolder, roomsFolder } =
       treeFoldersStore;
+
+    const { isPublicRoom } = publicRoomStore;
 
     return {
       theme,
@@ -375,6 +385,7 @@ export default inject(
 
       myFolder,
       roomsFolder,
+      isPublicRoom,
     };
   }
 )(withTranslation(["Files"])(observer(RootFolderContainer)));

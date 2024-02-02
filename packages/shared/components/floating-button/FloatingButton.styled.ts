@@ -203,16 +203,16 @@ const getDefaultStyles = ({
 }: DefaultStylesProps) =>
   $currentColorScheme &&
   css`
-    background: ${color || $currentColorScheme.main.accent} !important;
+    background: ${color || $currentColorScheme.main?.accent} !important;
 
     .circle__background {
-      background: ${color || $currentColorScheme.main.accent} !important;
+      background: ${color || $currentColorScheme.main?.accent} !important;
     }
 
     .icon-box {
       svg {
         path {
-          fill: ${$currentColorScheme.text.accent};
+          fill: ${$currentColorScheme.text?.accent};
         }
       }
     }
@@ -220,7 +220,7 @@ const getDefaultStyles = ({
     .circle__mask .circle__fill {
       background-color: ${!displayProgress
         ? "transparent !important"
-        : $currentColorScheme.text.accent};
+        : $currentColorScheme.text?.accent};
     }
   `;
 

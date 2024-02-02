@@ -53,6 +53,8 @@ const Navigation = ({
   currentDeviceType,
   rootRoomTitle,
   showTitle,
+  navigationButtonLabel,
+  onNavigationButtonClick,
   tariffBar,
 
   ...rest
@@ -257,6 +259,8 @@ const Navigation = ({
               isPublicRoom={isPublicRoom}
               isTrashFolder={isTrashFolder}
               showTitle={showTitle}
+              navigationButtonLabel={navigationButtonLabel}
+              onNavigationButtonClick={onNavigationButtonClick}
               tariffBar={tariffBar}
               title={title}
             />

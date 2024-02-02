@@ -141,7 +141,7 @@ const InterfaceTheme = (props) => {
           className="light-theme"
           label={t("LightTheme")}
           theme="Light"
-          accentColor={currentColorScheme.main.accent}
+          accentColor={currentColorScheme.main?.accent}
           themeId={selectedThemeId}
           value={ThemeKeys.BaseStr}
           isChecked={
@@ -154,7 +154,7 @@ const InterfaceTheme = (props) => {
           className="dark-theme"
           label={t("DarkTheme")}
           theme="Dark"
-          accentColor={currentColorScheme.main.accent}
+          accentColor={currentColorScheme.main?.accent}
           themeId={selectedThemeId}
           value={ThemeKeys.DarkStr}
           isChecked={
@@ -183,9 +183,7 @@ const InterfaceTheme = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { userStore, settingsStore } = auth;
-
+export default inject(({ settingsStore, userStore }) => {
   const { changeTheme, user } = userStore;
   const { currentColorScheme, selectedThemeId, isDesktopClient } =
     settingsStore;

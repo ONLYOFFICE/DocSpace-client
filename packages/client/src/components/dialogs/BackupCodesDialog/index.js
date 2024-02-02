@@ -6,6 +6,7 @@ import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
+import { getTfaNewBackupCodes } from "@docspace/shared/api/settings";
 
 import { withTranslation } from "react-i18next";
 import ModalDialogContainer from "../ModalDialogContainer";
@@ -35,9 +36,9 @@ class BackupCodesDialogComponent extends React.Component {
   }
 
   getNewBackupCodes = async () => {
-    const { getNewBackupCodes, setBackupCodes } = this.props;
+    const { setBackupCodes } = this.props;
     try {
-      const newCodes = await getNewBackupCodes();
+      const newCodes = await getTfaNewBackupCodes();
       setBackupCodes(newCodes);
     } catch (e) {
       toastr.error(e);
@@ -146,7 +147,6 @@ const BackupCodesDialog = withTranslation(
 BackupCodesDialog.propTypes = {
   visible: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  getNewBackupCodes: PropTypes.func.isRequired,
   backupCodes: PropTypes.array.isRequired,
   backupCodesCount: PropTypes.number.isRequired,
   setBackupCodes: PropTypes.func.isRequired,

@@ -84,10 +84,10 @@ const EmbeddingPanelComponent = (props) => {
     : embeddingPanelComponent;
 };
 
-export default inject(({ dialogsStore, auth }) => {
+export default inject(({ dialogsStore, settingsStore }) => {
   const { embeddingPanelIsVisible, setEmbeddingPanelIsVisible, linkParams } =
     dialogsStore;
-  const { currentDeviceType } = auth.settingsStore;
+  const { currentDeviceType } = settingsStore;
 
   return {
     visible: embeddingPanelIsVisible,

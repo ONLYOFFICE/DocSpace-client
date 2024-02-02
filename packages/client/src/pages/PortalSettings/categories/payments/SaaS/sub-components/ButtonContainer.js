@@ -49,8 +49,7 @@ const ButtonContainer = ({
   );
 };
 
-export default inject(({ auth, payments }) => {
-  const { currentTariffStatusStore } = auth;
+export default inject(({ currentTariffStatusStore, payments }) => {
   const { isNeedRequest, isLoading, accountLink } = payments;
   const { isNotPaidPeriod, isGracePeriod } = currentTariffStatusStore;
 

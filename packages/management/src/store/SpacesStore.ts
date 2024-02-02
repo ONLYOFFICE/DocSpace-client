@@ -10,7 +10,7 @@ import {
 import { TNewPortalData } from "SRC_DIR/types/spaces";
 
 class SpacesStore {
-  authStore = null;
+  settingsStore = null;
 
   createPortalDialogVisible = false;
   deletePortalDialogVisible = false;
@@ -21,8 +21,8 @@ class SpacesStore {
 
   currentPortal = false;
 
-  constructor(authStore) {
-    this.authStore = authStore;
+  constructor(settingsStore) {
+    this.settingsStore = settingsStore;
     makeAutoObservable(this);
   }
 
@@ -30,20 +30,20 @@ class SpacesStore {
     const res = await getDomainName();
     const { settings } = res;
 
-    this.authStore.settingsStore.setPortalDomain(settings);
+    this.settingsStore.setPortalDomain(settings);
   };
 
   get isConnected() {
     return (
-      this.authStore.settingsStore.baseDomain &&
-      this.authStore.settingsStore.baseDomain !== "localhost" &&
-      this.authStore.settingsStore.tenantAlias &&
-      this.authStore.settingsStore.tenantAlias !== "localhost"
+      this.settingsStore.baseDomain &&
+      this.settingsStore.baseDomain !== "localhost" &&
+      this.settingsStore.tenantAlias &&
+      this.settingsStore.tenantAlias !== "localhost"
     );
   }
 
   get faviconLogo() {
-    const logos = this.authStore.settingsStore.whiteLabelLogoUrls;
+    const logos = this.settingsStore.whiteLabelLogoUrls;
     if (!logos) return;
 
     return getLogoFromPath(logos[2]?.path?.light);
@@ -52,7 +52,7 @@ class SpacesStore {
   setPortalName = async (portalName: string) => {
     try {
       const res = await setPortalName(portalName);
-      this.authStore.settingsStore.setTenantAlias(portalName);
+      this.settingsStore.setTenantAlias(portalName);
       return res;
     } catch (error) {
       console.log(error);
@@ -63,7 +63,7 @@ class SpacesStore {
     try {
       const res = await setDomainName(domain);
       const { settings } = res;
-      this.authStore.settingsStore.setPortalDomain(settings);
+      this.settingsStore.setPortalDomain(settings);
     } catch (error) {
       console.log(error);
     }

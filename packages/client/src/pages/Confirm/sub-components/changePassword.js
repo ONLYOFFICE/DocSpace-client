@@ -181,7 +181,7 @@ const ChangePasswordForm = (props) => {
   );
 };
 
-export default inject(({ auth, setup }) => {
+export default inject(({ authStore, settingsStore, setup }) => {
   const {
     greetingSettings,
     hashSettings,
@@ -189,7 +189,7 @@ export default inject(({ auth, setup }) => {
     passwordSettings,
     theme,
     getSettings,
-  } = auth.settingsStore;
+  } = settingsStore;
   const { changePassword } = setup;
 
   return {
@@ -199,7 +199,7 @@ export default inject(({ auth, setup }) => {
     hashSettings,
     defaultPage,
     changePassword,
-    isAuthenticated: auth.isAuthenticated,
+    isAuthenticated: authStore.isAuthenticated,
     getSettings,
   };
 })(

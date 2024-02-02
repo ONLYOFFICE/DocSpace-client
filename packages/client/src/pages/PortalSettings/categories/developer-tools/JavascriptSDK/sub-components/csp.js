@@ -136,8 +136,7 @@ const CSP = ({ t, cspDomains, getCSPSettings, setCSPSettings }) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { settingsStore } = auth;
+export default inject(({ settingsStore }) => {
   const { cspDomains, getCSPSettings, setCSPSettings } = settingsStore;
   return { cspDomains, getCSPSettings, setCSPSettings };
 })(observer(CSP));

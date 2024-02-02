@@ -42,28 +42,30 @@ const StyledButton = styled(Button)`
   opacity: ${(props) => (props.isDisabled ? 0.6 : 1)};
 
   background-color: ${({ $currentColorScheme }) =>
-    $currentColorScheme.main.accent} !important;
-  background: ${({ $currentColorScheme }) => $currentColorScheme.main.accent};
-  border: ${({ $currentColorScheme }) => $currentColorScheme.main.accent};
+    $currentColorScheme.main?.accent} !important;
+  background: ${({ $currentColorScheme }) => $currentColorScheme.main?.accent};
+  border: ${({ $currentColorScheme }) => $currentColorScheme.main?.accent};
 
   ${(props) =>
     !props.isDisabled &&
     css`
       :hover {
         background-color: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main.accent};
+          $currentColorScheme.main?.accent};
         opacity: 0.85;
         background: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main.accent};
-        border: ${({ $currentColorScheme }) => $currentColorScheme.main.accent};
+          $currentColorScheme.main?.accent};
+        border: ${({ $currentColorScheme }) =>
+          $currentColorScheme.main?.accent};
       }
 
       :active {
         background-color: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main.accent};
+          $currentColorScheme.main?.accent};
         background: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main.accent};
-        border: ${({ $currentColorScheme }) => $currentColorScheme.main.accent};
+          $currentColorScheme.main?.accent};
+        border: ${({ $currentColorScheme }) =>
+          $currentColorScheme.main?.accent};
         opacity: 1;
         filter: brightness(90%);
         cursor: pointer;
@@ -71,7 +73,7 @@ const StyledButton = styled(Button)`
     `}
 
   .button-content {
-    color: ${({ $currentColorScheme }) => $currentColorScheme.text.accent};
+    color: ${({ $currentColorScheme }) => $currentColorScheme.text?.accent};
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -592,7 +594,7 @@ const ArticleMainButtonContent = (props) => {
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     filesStore,
     dialogsStore,
     uploadDataStore,
@@ -602,6 +604,8 @@ export default inject(
     oformsStore,
     pluginStore,
     versionHistoryStore,
+    userStore,
+    currentTariffStatusStore,
   }) => {
     const { showArticleLoader } = clientLoadingStore;
     const { mainButtonMobileVisible } = filesStore;
@@ -626,26 +630,26 @@ export default inject(
     } = dialogsStore;
 
     const { enablePlugins, currentColorScheme, currentDeviceType } =
-      auth.settingsStore;
+      settingsStore;
     const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
 
     const security = selectedFolderStore.security;
 
     const currentFolderId = selectedFolderStore.id;
 
-    const { isAdmin, isOwner } = auth.userStore.user;
-    const { isGracePeriod } = auth.currentTariffStatusStore;
+    const { isAdmin, isOwner } = userStore.user;
+    const { isGracePeriod } = currentTariffStatusStore;
 
     const { setOformFromFolderId, oformsFilter } = oformsStore;
     const { mainButtonItemsList } = pluginStore;
 
-    const { frameConfig, isFrame } = auth.settingsStore
+    const { frameConfig, isFrame } = settingsStore
 
     return {
       isGracePeriod,
       setInviteUsersWarningDialogVisible,
-      showText: auth.settingsStore.showText,
-      isMobileArticle: auth.settingsStore.isMobileArticle,
+      showText: settingsStore.showText,
+      isMobileArticle: settingsStore.isMobileArticle,
 
       showArticleLoader,
       isPrivacy: isPrivacyFolder,

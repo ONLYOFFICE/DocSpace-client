@@ -143,14 +143,14 @@ const FilesTileContent = ({
   );
 };
 
-export default inject(({ auth, treeFoldersStore }) => {
+export default inject(({ settingsStore, treeFoldersStore }) => {
   const { isRoomsFolder, isArchiveFolder } = treeFoldersStore;
 
   const isRooms = isRoomsFolder || isArchiveFolder;
 
   return {
-    theme: auth.settingsStore.theme,
-    currentDeviceType: auth.settingsStore.currentDeviceType,
+    theme: settingsStore.theme,
+    currentDeviceType: settingsStore.currentDeviceType,
     isRooms,
   };
 })(

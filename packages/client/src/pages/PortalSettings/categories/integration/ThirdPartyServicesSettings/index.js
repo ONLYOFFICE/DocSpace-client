@@ -197,7 +197,7 @@ class ThirdPartyServices extends React.Component {
           <Box marginProp="8px 0 20px 0">
             <Link
               className="third-party-link"
-              color={currentColorScheme.main.accent}
+              color={currentColorScheme.main?.accent}
               isHovered
               target="_blank"
               href={integrationSettingsUrl}
@@ -299,33 +299,35 @@ ThirdPartyServices.propTypes = {
   setSelectedConsumer: PropTypes.func.isRequired,
 };
 
-export default inject(({ setup, auth }) => {
-  const { settingsStore, setDocumentTitle, currentQuotaStore } = auth;
-  const {
-    integrationSettingsUrl,
-    theme,
-    currentColorScheme,
-    companyInfoSettingsData,
-  } = settingsStore;
-  const {
-    getConsumers,
-    integration,
-    updateConsumerProps,
-    setSelectedConsumer,
-  } = setup;
-  const { consumers } = integration;
-  const { isThirdPartyAvailable } = currentQuotaStore;
+export default inject(
+  ({ setup, authStore, settingsStore, currentQuotaStore }) => {
+    const { setDocumentTitle } = authStore;
+    const {
+      integrationSettingsUrl,
+      theme,
+      currentColorScheme,
+      companyInfoSettingsData,
+    } = settingsStore;
+    const {
+      getConsumers,
+      integration,
+      updateConsumerProps,
+      setSelectedConsumer,
+    } = setup;
+    const { consumers } = integration;
+    const { isThirdPartyAvailable } = currentQuotaStore;
 
-  return {
-    theme,
-    consumers,
-    integrationSettingsUrl,
-    getConsumers,
-    updateConsumerProps,
-    setSelectedConsumer,
-    setDocumentTitle,
-    currentColorScheme,
-    isThirdPartyAvailable,
-    supportEmail: companyInfoSettingsData?.email,
-  };
-})(withTranslation(["Settings", "Common"])(observer(ThirdPartyServices)));
+    return {
+      theme,
+      consumers,
+      integrationSettingsUrl,
+      getConsumers,
+      updateConsumerProps,
+      setSelectedConsumer,
+      setDocumentTitle,
+      currentColorScheme,
+      isThirdPartyAvailable,
+      supportEmail: companyInfoSettingsData?.email,
+    };
+  }
+)(withTranslation(["Settings", "Common"])(observer(ThirdPartyServices)));

@@ -28,8 +28,8 @@ const SettingsItem = withTranslation(["FilesSettings", "Common"])(
   PureSettingsItem
 );
 
-export default inject(({ auth }) => {
+export default inject(({ settingsStore }) => {
   return {
-    showText: auth.settingsStore.showText,
+    showText: settingsStore.showText,
   };
 })(observer(SettingsItem));

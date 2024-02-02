@@ -83,8 +83,8 @@ const ToggleSSO = (props) => {
   );
 };
 
-export default inject(({ auth, ssoStore }) => {
-  const { theme } = auth.settingsStore;
+export default inject(({ settingsStore, ssoStore }) => {
+  const { theme } = settingsStore;
   const {
     enableSso,
     isSsoEnabled,

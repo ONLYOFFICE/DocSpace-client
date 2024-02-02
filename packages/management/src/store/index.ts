@@ -3,11 +3,27 @@ import { createContext, useContext } from "react";
 import SpacesStore from "./SpacesStore";
 
 import store from "client/store";
-const { auth: authStore } = store;
+import { UserStore } from "@docspace/shared/store/UserStore";
+import { BannerStore } from "@docspace/shared/store/BannerStore";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+const {
+  authStore,
+  userStore,
+  bannerStore,
+  settingsStore,
+}: {
+  userStore: UserStore;
+  bannerStore: BannerStore;
+  authStore: any;
+  settingsStore: SettingsStore;
+} = store;
 
 export class RootStore {
   authStore = authStore;
-  spacesStore = new SpacesStore(this.authStore);
+  userStore = userStore;
+  bannerStore = bannerStore;
+  settingsStore = settingsStore;
+  spacesStore = new SpacesStore(this.settingsStore);
 }
 
 export const RootStoreContext = createContext<RootStore | null>(null);
@@ -19,5 +35,6 @@ export const useStore = () => {
       "You have forgotten to wrap your root component with RootStoreProvider"
     );
   }
+
   return context;
 };

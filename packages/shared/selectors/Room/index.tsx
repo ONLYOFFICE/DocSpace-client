@@ -75,7 +75,7 @@ const RoomSelector = ({
 
   useEffect(() => {
     setIsDataReady(!isFirstLoad);
-  }, [isFirstLoad]);
+  }, [isFirstLoad, setIsDataReady]);
 
   const onSearchAction = React.useCallback(
     (value: string, callback?: Function) => {
@@ -217,4 +217,3 @@ const RoomSelector = ({
 };
 
 export default RoomSelector;
-

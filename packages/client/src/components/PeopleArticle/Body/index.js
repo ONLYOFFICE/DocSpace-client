@@ -131,29 +131,31 @@ const BodyContent = withTranslation(["Article"])(
   withLoader(ArticleBodyContent)(<ArticleFolderLoader />)
 );
 
-export default inject(({ auth, peopleStore }) => {
-  const { settingsStore, setDocumentTitle, isAdmin } = auth;
-  const { customNames, showText, toggleArticleOpen } = settingsStore;
-  const { groupsStore, selectedGroupStore, filterStore } = peopleStore;
-  const { filter } = filterStore;
-  const { groups } = groupsStore;
-  const { groupsCaption } = customNames;
-  const { selectedGroup, selectGroup } = selectedGroupStore;
-  const selectedKey = selectedGroup ? selectedGroup : "root";
+export default inject(
+  ({ authStore, settingsStore, peopleStore, userStore }) => {
+    const { setDocumentTitle, isAdmin } = authStore;
+    const { customNames, showText, toggleArticleOpen } = settingsStore;
+    const { groupsStore, selectedGroupStore, filterStore } = peopleStore;
+    const { filter } = filterStore;
+    const { groups } = groupsStore;
+    const { groupsCaption } = customNames;
+    const { selectedGroup, selectGroup } = selectedGroupStore;
+    const selectedKey = selectedGroup ? selectedGroup : "root";
 
-  return {
-    setDocumentTitle,
+    return {
+      setDocumentTitle,
 
-    isVisitor: auth.userStore.user.isVisitor,
-    isAdmin,
-    groups,
-    groupsCaption,
-    selectedKey,
-    selectGroup,
+      isVisitor: userStore.user.isVisitor,
+      isAdmin,
+      groups,
+      groupsCaption,
+      selectedKey,
+      selectGroup,
 
-    filter,
+      filter,
 
-    showText,
-    toggleArticleOpen,
-  };
-})(observer(BodyContent));
+      showText,
+      toggleArticleOpen,
+    };
+  }
+)(observer(BodyContent));

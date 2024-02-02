@@ -19,8 +19,8 @@ const ArticleBodyContent = () => {
 
   const { t } = useTranslation(["Settings", "Common"]);
 
-  const { authStore } = useStore();
-  const { settingsStore } = authStore;
+  const { settingsStore } = useStore();
+
   const { toggleArticleOpen, setIsBurgerLoading } = settingsStore;
 
   const [selectedKey, setSelectedKey] = useState("0");

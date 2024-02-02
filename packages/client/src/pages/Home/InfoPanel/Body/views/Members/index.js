@@ -109,42 +109,7 @@ const Members = ({
       publicRoomItems.push(
         <LinksBlock key="general-link_header">
           <Text fontSize="14px" fontWeight={600}>
-            {t("Files:GeneralLink")}
-          </Text>
-        </LinksBlock>
-      );
-    }
-
-    if (primaryLink) {
-      publicRoomItems.push(
-        <LinkRow
-          key="general-link"
-          link={primaryLink}
-          setIsScrollLocked={setIsScrollLocked}
-        />
-      );
-    } else if (!isArchiveFolder) {
-      publicRoomItems.push(
-        <StyledLinkRow onClick={onAddNewLink} key="create-general-link">
-          <Avatar size="min" source={PlusReactSvgUrl} />
-          <Link
-            isHovered
-            type="action"
-            fontSize="14px"
-            fontWeight={600}
-            className="external-row-link"
-          >
-            {t("Files:CreateAndCopy")}
-          </Link>
-        </StyledLinkRow>
-      );
-    }
-
-    if ((primaryLink && !isArchiveFolder) || additionalLinks.length) {
-      publicRoomItems.push(
-        <LinksBlock key="additional-link_header">
-          <Text fontSize="14px" fontWeight={600}>
-            {t("Files:AdditionalLinks")}
+            {t("Files:SharedLinks")}
           </Text>
 
           {!isArchiveFolder && (
@@ -179,6 +144,16 @@ const Members = ({
       );
     }
 
+    if (primaryLink) {
+      publicRoomItems.push(
+        <LinkRow
+          key="general-link"
+          link={primaryLink}
+          setIsScrollLocked={setIsScrollLocked}
+        />
+      );
+    }
+
     if (additionalLinks.length) {
       additionalLinks.map((link) => {
         publicRoomItems.push(
@@ -189,7 +164,7 @@ const Members = ({
           />
         );
       });
-    } else if (!isArchiveFolder && primaryLink) {
+    } else if (!isArchiveFolder && !primaryLink) {
       publicRoomItems.push(
         <StyledLinkRow
           key="create-additional-link"
@@ -256,12 +231,13 @@ const Members = ({
 
 export default inject(
   ({
-    auth,
+    userStore,
     filesStore,
     selectedFolderStore,
     publicRoomStore,
     treeFoldersStore,
     dialogsStore,
+    infoPanelStore,
   }) => {
     const {
       infoPanelSelection,
@@ -271,9 +247,9 @@ export default inject(
       fetchMembers,
       membersIsLoading,
       withPublicRoomBlock,
-    } = auth.infoPanelStore;
+    } = infoPanelStore;
     const { membersFilter } = filesStore;
-    const { id: selfId, isAdmin } = auth.userStore.user;
+    const { id: selfId, isAdmin } = userStore.user;
 
     const { primaryLink, additionalLinks, setExternalLink } = publicRoomStore;
     const { isArchiveFolderRoot } = treeFoldersStore;

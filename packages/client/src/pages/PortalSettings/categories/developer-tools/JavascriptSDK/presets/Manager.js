@@ -1186,8 +1186,8 @@ const Manager = (props) => {
   );
 };
 
-export default inject(({ auth, publicRoomStore }) => {
-  const { settingsStore, setDocumentTitle } = auth;
+export default inject(({ authStore, settingsStore, publicRoomStore }) => {
+  const { setDocumentTitle } = authStore;
   const { theme } = settingsStore;
   const { fetchExternalLinks } = publicRoomStore;
 

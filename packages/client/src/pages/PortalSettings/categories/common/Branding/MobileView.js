@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-
+import { isManagement } from "@docspace/shared/utils/common";
 import MobileCategoryWrapper from "../../../components/MobileCategoryWrapper";
 
 const StyledWrapper = styled.div`
@@ -9,10 +9,10 @@ const StyledWrapper = styled.div`
   flex-direction: column;
 `;
 
-const MobileView = ({ isSettingPaid, isManagement }) => {
+const MobileView = ({ isSettingPaid }) => {
   const { t } = useTranslation(["Settings"]);
   const navigate = useNavigate();
-  const baseUrl = isManagement ? "/" : "/portal-settings/customization";
+  const baseUrl = isManagement() ? "/" : "/portal-settings/customization";
 
   const onClickLink = (e) => {
     e.preventDefault();

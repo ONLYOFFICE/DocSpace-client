@@ -61,6 +61,8 @@ export interface IControlButtonProps {
   isTrashFolder?: boolean;
   isMobile?: boolean;
   showTitle?: boolean;
+  navigationButtonLabel?: string;
+  onNavigationButtonClick?: () => void;
   tariffBar?: React.ReactNode;
   title?: string;
 }
@@ -164,5 +166,7 @@ export interface INavigationProps {
   currentDeviceType: DeviceType;
   rootRoomTitle: string;
   showTitle: boolean;
+  navigationButtonLabel?: string;
+  onNavigationButtonClick?: () => void;
   tariffBar: React.ReactNode;
 }

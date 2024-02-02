@@ -443,8 +443,8 @@ const RoomSelector = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { settingsStore, setDocumentTitle } = auth;
+export default inject(({ authStore, settingsStore }) => {
+  const { setDocumentTitle } = authStore;
   const { theme } = settingsStore;
 
   return {

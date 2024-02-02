@@ -6,16 +6,10 @@ import { TTranslation } from "../types";
 import { TUser } from "../api/people/types";
 import { ThemeKeys } from "../enums";
 
-import { getEditorTheme } from "./common";
+import { desktopConstants, getEditorTheme } from "./common";
 import { checkIsSSR } from "./device";
 
 const isSSR = checkIsSSR();
-
-export const desktopConstants = Object.freeze({
-  domain: !isSSR && window.location.origin,
-  provider: "onlyoffice",
-  cryptoEngineId: "{FFF0E1EB-13DB-4678-B67D-FF0A41DBBCEF}",
-});
 
 export function regDesktop(
   user: TUser,

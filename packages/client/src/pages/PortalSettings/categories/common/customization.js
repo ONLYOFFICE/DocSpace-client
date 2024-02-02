@@ -128,8 +128,7 @@ const Customization = (props) => {
   );
 };
 
-export default inject(({ auth, common }) => {
-  const { currentQuotaStore, settingsStore } = auth;
+export default inject(({ settingsStore, common, currentQuotaStore }) => {
   const { enablePortalRename } = settingsStore;
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
   const { isLoaded, setIsLoadedCustomization, resetIsInit } = common;

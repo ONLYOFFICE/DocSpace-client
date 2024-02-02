@@ -218,7 +218,7 @@ const withHotkeys = (Component) => {
     useHotkeys("ctrl+RIGHT, command+RIGHT", moveCaretRight, hotkeysFilter);
 
     //Open item
-    useHotkeys("Enter", openItem, hotkeysFilter);
+    useHotkeys("Enter", () => openItem(t), hotkeysFilter);
 
     //Back to parent folder
     useHotkeys("Backspace", backToParentFolder, hotkeysFilter);

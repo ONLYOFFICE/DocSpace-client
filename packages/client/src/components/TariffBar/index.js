@@ -101,35 +101,40 @@ const TariffBar = ({
   );
 };
 
-export default inject(({ auth }) => {
-  const {
+export default inject(
+  ({
+    authStore,
     settingsStore,
     currentQuotaStore,
-    isPaymentPageAvailable,
     currentTariffStatusStore,
-    isEnterprise,
-  } = auth;
-  const { isFreeTariff, isNonProfit, isTrial } = currentQuotaStore;
-  const {
-    isGracePeriod,
-    isLicenseExpiring,
-    isLicenseDateExpired,
-    paymentDate,
-    trialDaysLeft,
-  } = currentTariffStatusStore;
-  const { standalone } = settingsStore;
+  }) => {
+    const {
+      isPaymentPageAvailable,
 
-  return {
-    isEnterprise,
-    isNonProfit,
-    isGracePeriod,
-    isFreeTariff,
-    isPaymentPageAvailable,
-    isLicenseExpiring,
-    isLicenseDateExpired,
-    isTrial,
-    standalone,
-    paymentDate,
-    trialDaysLeft,
-  };
-})(observer(TariffBar));
+      isEnterprise,
+    } = authStore;
+    const { isFreeTariff, isNonProfit, isTrial } = currentQuotaStore;
+    const {
+      isGracePeriod,
+      isLicenseExpiring,
+      isLicenseDateExpired,
+      paymentDate,
+      trialDaysLeft,
+    } = currentTariffStatusStore;
+    const { standalone } = settingsStore;
+
+    return {
+      isEnterprise,
+      isNonProfit,
+      isGracePeriod,
+      isFreeTariff,
+      isPaymentPageAvailable,
+      isLicenseExpiring,
+      isLicenseDateExpired,
+      isTrial,
+      standalone,
+      paymentDate,
+      trialDaysLeft,
+    };
+  }
+)(observer(TariffBar));

@@ -114,6 +114,7 @@ const StyledContainer = styled.div`
 
   .header-container {
     min-height: 33px;
+    align-items: center;
 
     ${(props) =>
       props.hideContextMenuInsideArchiveRoom &&
@@ -126,6 +127,21 @@ const StyledContainer = styled.div`
 
     @media ${mobile} {
       height: 53px;
+    }
+
+    .navigation_button {
+      display: block;
+      margin: 0 16px;
+      overflow: visible;
+
+      @media ${tablet} {
+        display: ${({ isInfoPanelVisible }) =>
+          isInfoPanelVisible ? "none" : "block"};
+      }
+
+      @media ${mobile} {
+        display: none;
+      }
     }
   }
 `;
@@ -235,6 +251,8 @@ const SectionHeaderContent = (props) => {
     setLeaveRoomDialogVisible,
     inRoom,
     onClickCreateRoom,
+    onCreateAndCopySharedLink,
+    showNavigationButton,
   } = props;
 
   const navigate = useNavigate();
@@ -723,7 +741,7 @@ const SectionHeaderContent = (props) => {
       {
         id: "header_option_copy-external-link",
         key: "copy-external-link",
-        label: t("Files:CopyGeneralLink"),
+        label: t("Files:CopySharedLink"),
         icon: CopyToReactSvgUrl,
         onClick: async () => {
           if (primaryLink) {
@@ -965,6 +983,10 @@ const SectionHeaderContent = (props) => {
       .catch((err) => toastr.error(err));
   }, [resendInvitesAgain]);
 
+  const onNavigationButtonClick = () => {
+    onCreateAndCopySharedLink(selectedFolder, t);
+  };
+
   const headerMenu = isAccountsPage
     ? getAccountsHeaderMenu(t)
     : getHeaderMenu(t);
@@ -1050,6 +1072,10 @@ const SectionHeaderContent = (props) => {
     ? getLogoFromPath(whiteLabelLogoUrls[5]?.path?.dark)
     : getLogoFromPath(whiteLabelLogoUrls[5]?.path?.light);
 
+  const navigationButtonLabel = showNavigationButton
+    ? t("Files:ShareRoom")
+    : null;
+
   return (
     <Consumer key="header">
       {(context) => (
@@ -1113,6 +1139,8 @@ const SectionHeaderContent = (props) => {
                 showRootFolderTitle={insideTheRoom}
                 currentDeviceType={currentDeviceType}
                 isFrame={isFrame}
+                navigationButtonLabel={navigationButtonLabel}
+                onNavigationButtonClick={onNavigationButtonClick}
                 tariffBar={<TariffBar />}
               />
             </div>
@@ -1238,9 +1266,10 @@ export default inject(
       inRoom,
       access,
       canCopyPublicLink,
+      rootFolderType,
     } = selectedFolderStore;
 
-    const selectedFolder = { ...selectedFolderStore };
+    const selectedFolder = selectedFolderStore.getSelectedFolder();
 
     const {
       enablePlugins,
@@ -1262,6 +1291,7 @@ export default inject(
       onClickArchive,
       onClickReconnectStorage,
       onCopyLink,
+      onCreateAndCopySharedLink,
     } = contextOptionsStore;
 
     const canRestoreAll = isArchiveFolder && roomsForRestore.length > 0;
@@ -1290,6 +1320,7 @@ export default inject(
     } = headerMenuStore;
 
     const { setSelected: setAccountsSelected } = selectionStore;
+    const { isPublicRoom, primaryLink, setExternalLink } = publicRoomStore;
 
     let folderPath = navigationPath;
 
@@ -1301,7 +1332,19 @@ export default inject(
       ? pathParts?.length === 1 || pathParts?.length === 2
       : pathParts?.length === 1;
 
-    const { isPublicRoom, primaryLink, setExternalLink } = publicRoomStore;
+    const haveLinksRight =
+      access === ShareAccessRights.RoomManager ||
+      access === ShareAccessRights.None;
+
+    const isArchive = rootFolderType === FolderType.Archive;
+
+    const showNavigationButton = isLoading
+      ? false
+      : !isPublicRoom &&
+        !isArchive &&
+        canCopyPublicLink &&
+        (isPublicRoomType || isCustomRoomType) &&
+        primaryLink;
 
     return {
       isGracePeriod,
@@ -1421,6 +1464,9 @@ export default inject(
       currentDeviceType,
       setLeaveRoomDialogVisible,
       inRoom,
+      onCreateAndCopySharedLink,
+      showNavigationButton,
+      haveLinksRight,
     };
   }
 )(

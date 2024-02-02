@@ -8,7 +8,7 @@ import DefaultUserPhotoUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82
 import { toastr } from "@docspace/shared/components/toast";
 import { isMobileOnly, isMobile } from "react-device-detect";
 import { decode } from "he";
-import { filterUserRoleOptions } from "SRC_DIR/helpers/utils";
+import { filterUserRoleOptions } from "SRC_DIR/helpers";
 import { capitalize } from "lodash";
 
 import { getUserRole } from "@docspace/shared/utils/common";

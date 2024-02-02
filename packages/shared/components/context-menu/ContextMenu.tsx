@@ -69,6 +69,7 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
     appendTo,
     withBackdrop,
     model: propsModel,
+    badgeUrl,
   } = props;
 
   const onMenuClick = () => {
@@ -406,19 +407,15 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
                     />
                   ) : (
                     <div className="icon-wrapper">
-                      {defaultIcon ? (
-                        <RoomIcon
-                          color={header.color || ""}
-                          title={header.title}
-                          isArchive={isArchive}
-                        />
-                      ) : (
-                        <img
-                          src={header.icon}
-                          className="drop-down-item_icon"
-                          alt="drop-down_icon"
-                        />
-                      )}
+                      <RoomIcon
+                        color={header.color || ""}
+                        title={header.title}
+                        isArchive={isArchive}
+                        showDefault={defaultIcon}
+                        imgClassName="drop-down-item_icon"
+                        imgSrc={header.icon}
+                        badgeUrl={badgeUrl}
+                      />
                     </div>
                   ))}
                 {isAvatarExist && (

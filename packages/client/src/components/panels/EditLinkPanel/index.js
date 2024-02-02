@@ -182,7 +182,7 @@ const EditLinkPanel = (props) => {
       <ModalDialog.Header>
         {isEdit
           ? isPrimary
-            ? t("Files:EditGeneralLink")
+            ? t("Files:EditSharedLink")
             : isPublic
               ? t("Files:EditAdditionalLink")
               : t("Files:EditLink")

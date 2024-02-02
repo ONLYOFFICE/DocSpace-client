@@ -84,10 +84,14 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
             role={currentRole}
             size={AvatarSize.min}
           />
-        ) : defaultIcon ? (
-          <RoomIcon color={color} title={label} />
         ) : (
-          <img className="room-logo" src={icon} alt="room logo" />
+          <RoomIcon
+            color={color}
+            title={label}
+            showDefault={defaultIcon}
+            imgClassName="room-logo"
+            imgSrc={icon}
+          />
         )}
         {renderCustomItem ? (
           renderCustomItem(label, role, email)

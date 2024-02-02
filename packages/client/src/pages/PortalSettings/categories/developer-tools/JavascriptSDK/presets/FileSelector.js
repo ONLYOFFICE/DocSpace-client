@@ -371,7 +371,7 @@ const FileSelector = (props) => {
   return (
     <SDKContainer>
       <CategoryDescription>
-        <Text className="sdk-description">{t("FileSelectorDescription")}</Text>
+        <Text className="sdk-description">{t("FileSelectorPresetDescription")}</Text>
       </CategoryDescription>
       <CategoryHeader>{t("CreateSampleHeader")}</CategoryHeader>
       <Container>

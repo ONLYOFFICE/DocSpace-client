@@ -12,7 +12,7 @@
   "CancelButtonText": "Cancel button text",
   "Code": "Code to insert",
   "CopyWindowCode": "Copy window embed code",
-  "CreateSampleHeader": "Create sample embed",
+  "CreateSampleHeader": "Create sample DocSpace embed",
   "Chat": "Chat",
   "CSPDescription": "To safely embed DocSpace as an iframe in a website, add its URL to your allow list.",
   "CSPHeader": "Embed DocSpace as iframe",
@@ -26,6 +26,7 @@
   "EmbedCodeSuccessfullyCopied": "Embed code successfully copied to clipboard",
   "Editor": "Editor",
   "EditorDescription": "Allows you to open the SDK as a document editor for editing by specifying the id parameter for a file.",
+  "EditorPresetDescription": "This mode allows you to open the SDK as a document editor for editing by specifying the id parameter for a file.",
   "EnterCount": "Enter count",
   "EnterHeight": "Enter height",
   "EnterId": "Enter id",
@@ -37,6 +38,7 @@
   "Filter": "Search, Filter and Sort",
   "FileSelector": "File selector",
   "FileSelectorDescription": "Opens the file selector and allows you to select a file from a list of available files.",
+  "FileSelectorPresetDescription": "Use this mode to display the file selector. It allows selecting a file from the list of the available ones.",
   "FileTypeDisplay": "File type display",
   "FrameId": "Frame id",
   "FileId": "File ID",
@@ -51,6 +53,7 @@
   "JavascriptSdk": "Javascript SDK",
   "Manager": "Manager",
   "ManagerDescription": "Displays a list of entities depending on the specified rootPath. It allows you to create rooms, folders, and files and work with them.",
+  "ManagerPresetDescription": "Use this mode to display a list of entities depending on the specified rootPath. It allows creating and working with rooms, folders and files.",
   "MainElementParameter": "Main element parameter",
   "Menu": "Left menu",
   "MenuDescription": "You can disable the left menu if users don't need to navigate to other sections.",
@@ -61,6 +64,7 @@
   "RoomOrFolderDescription": "You can select the section, room or folder you want to display",
   "RoomSelector": "Room selector",
   "RoomSelectorDescription": "Opens the room selector and allows you to select a room from a list of the available rooms.",
+  "RoomSelectorPresetDescription": "Use this mode to display the room selector. It allows selecting a room from the list of the available ones.",
   "RoomTypeDisplay": "Room type display",
   "Rotate": "Rotate",
   "RightPanelCollapsed": "Right panel collapsed",
@@ -91,5 +95,6 @@
   "Title": "Navigate and Title",
   "ManagerTitleDescription": "You can disable the title of the current section/room/folder.",
   "Viewer": "Viewer",
-  "ViewerDescription": "Allows you to open the SDK as a document editor for viewing by specifying the id parameter for a file."
+  "ViewerDescription": "Allows you to open the SDK as a document editor for viewing by specifying the id parameter for a file.",
+  "ViewerPresetDescription": "Allows you to open the SDK as a document editor for viewing by specifying the id parameter for a file."
 }

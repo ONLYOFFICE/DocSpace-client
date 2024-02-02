@@ -27,7 +27,7 @@ import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg
 import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/catalog.accounts.react.svg?url";
 import EmptyScreenPersonsSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
 import { RowLoader, SearchLoader } from "@docspace/shared/skeletons/selector";
-import { checkIfAccessPaid } from "SRC_DIR/helpers/utils";
+import { checkIfAccessPaid } from "SRC_DIR/helpers";
 
 const PEOPLE_TAB_ID = 0;
 const GROUP_TAB_ID = 1;
@@ -243,7 +243,7 @@ const AddUsersPanel = ({
     ? EmptyScreenPersonsSvgUrl
     : EmptyScreenPersonsSvgDarkUrl;
 
-  const renderCustomItem = (label, userType, email) => {
+  const renderCustomItem = (label, userType, email, isGroup) => {
     return (
       <div style={{ width: "100%" }}>
         <Text
@@ -256,19 +256,22 @@ const AddUsersPanel = ({
         >
           {label}
         </Text>
-        <div style={{ display: "flex" }}>
-          <Text
-            className="label"
-            fontWeight={400}
-            fontSize="12px"
-            noSelect
-            truncate
-            color="#A3A9AE"
-            dir="auto"
-          >
-            {`${capitalize(userType)} | ${email}`}
-          </Text>
-        </div>
+
+        {!isGroup && (
+          <div style={{ display: "flex" }}>
+            <Text
+              className="label"
+              fontWeight={400}
+              fontSize="12px"
+              noSelect
+              truncate
+              color="#A3A9AE"
+              dir="auto"
+            >
+              {`${capitalize(userType)} | ${email}`}
+            </Text>
+          </div>
+        )}
       </div>
     );
   };

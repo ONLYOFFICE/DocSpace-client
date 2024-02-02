@@ -19,7 +19,7 @@ import {
   StyledDeleteIcon,
   StyledInviteUserBody,
 } from "../StyledInvitePanel";
-import { filterUserRoleOptions } from "SRC_DIR/helpers";
+import { filterGroupRoleOptions, filterUserRoleOptions } from "SRC_DIR/helpers";
 import AccessSelector from "./AccessSelector";
 
 const Item = ({
@@ -63,7 +63,9 @@ const Item = ({
 
   const accesses = getAccessOptions(t, roomType, true, true, isOwner);
 
-  const filteredAccesses = filterUserRoleOptions(accesses, item, true);
+  const filteredAccesses = item.isGroup
+    ? filterGroupRoleOptions(accesses)
+    : filterUserRoleOptions(accesses, item, true);
 
   const defaultAccess = filteredAccesses.find(
     (option) => option.access === +access,
@@ -142,16 +144,19 @@ const Item = ({
         <Text {...textProps} truncate noSelect>
           {inputValue}
         </Text>
-        <Text
-          className="label"
-          fontWeight={400}
-          fontSize="12px"
-          noSelect
-          color="#A3A9AE"
-          truncate
-        >
-          {`${capitalize(role)} | ${email}`}
-        </Text>
+
+        {!isGroup && (
+          <Text
+            className="label"
+            fontWeight={400}
+            fontSize="12px"
+            noSelect
+            color="#A3A9AE"
+            truncate
+          >
+            {`${capitalize(role)} | ${email}`}
+          </Text>
+        )}
       </StyledInviteUserBody>
 
       {hasError ? (

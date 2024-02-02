@@ -8,7 +8,7 @@ import DefaultUserPhotoUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82
 import { toastr } from "@docspace/shared/components/toast";
 import { isMobileOnly, isMobile } from "react-device-detect";
 import { decode } from "he";
-import { filterUserRoleOptions } from "SRC_DIR/helpers";
+import { filterGroupRoleOptions, filterUserRoleOptions } from "SRC_DIR/helpers";
 import { capitalize } from "lodash";
 
 import { getUserRole } from "@docspace/shared/utils/common";
@@ -53,12 +53,14 @@ const User = ({
   );
 
   const userRole = membersHelper.getOptionByUserAccess(user.access, user);
-  const userRoleOptions = filterUserRoleOptions(fullRoomRoleOptions, user);
+  const userRoleOptions = user.isGroup
+    ? filterGroupRoleOptions(fullRoomRoleOptions)
+    : filterUserRoleOptions(fullRoomRoleOptions, user);
 
   const onRepeatInvitation = async () => {
     resendEmailInvitations(infoPanelSelection.id, true)
       .then(() =>
-        toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios"))
+        toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios")),
       )
       .catch((err) => toastr.error(err));
   };
@@ -78,10 +80,10 @@ const User = ({
           const newMembers = {
             users: infoPanelMembers.users?.filter((m) => m.id !== user.id),
             administrators: infoPanelMembers.administrators?.filter(
-              (m) => m.id !== user.id
+              (m) => m.id !== user.id,
             ),
             expected: infoPanelMembers.expected?.filter(
-              (m) => m.id !== user.id
+              (m) => m.id !== user.id,
             ),
             groups: infoPanelMembers.groups?.filter((m) => m.id !== user.id),
           };
@@ -135,13 +137,13 @@ const User = ({
           setInfoPanelMembers({
             roomId: infoPanelSelection.id,
             users: infoPanelMembers.users?.map((m) =>
-              m.id === user.id ? { ...m, access: option.access } : m
+              m.id === user.id ? { ...m, access: option.access } : m,
             ),
             administrators: infoPanelMembers.administrators?.map((m) =>
-              m.id === user.id ? { ...m, access: option.access } : m
+              m.id === user.id ? { ...m, access: option.access } : m,
             ),
             expected: infoPanelMembers.expected?.map((m) =>
-              m.id === user.id ? { ...m, access: option.access } : m
+              m.id === user.id ? { ...m, access: option.access } : m,
             ),
             groups: infoPanelMembers.groups?.map((m) =>
               m.id === user.id ? { ...m, access: option.access } : m,
@@ -283,19 +285,22 @@ const User = ({
             <div className="me-label">&nbsp;{`(${t("Common:MeLabel")})`}</div>
           )}
         </div>
-        <div className="role-email" style={{ display: "flex" }}>
-          <Text
-            className="label"
-            fontWeight={400}
-            fontSize="12px"
-            noSelect
-            truncate
-            color="#A3A9AE"
-            dir="auto"
-          >
-            {`${capitalize(role)} | ${user.email}`}
-          </Text>
-        </div>
+
+        {!user.isGroup && (
+          <div className="role-email" style={{ display: "flex" }}>
+            <Text
+              className="label"
+              fontWeight={400}
+              fontSize="12px"
+              noSelect
+              truncate
+              color="#A3A9AE"
+              dir="auto"
+            >
+              {`${capitalize(role)} | ${user.email}`}
+            </Text>
+          </div>
+        )}
       </div>
 
       {userRole && userRoleOptions && (

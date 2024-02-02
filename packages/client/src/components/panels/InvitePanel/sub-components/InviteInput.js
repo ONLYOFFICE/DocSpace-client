@@ -17,6 +17,7 @@ import { getMembersList } from "@docspace/shared/api/people";
 import { AccountsSearchArea, ShareAccessRights } from "@docspace/shared/enums";
 import withCultureNames from "@docspace/common/hoc/withCultureNames";
 import { isBetaLanguage } from "@docspace/shared/utils";
+import { checkIfAccessPaid } from "SRC_DIR/helpers";
 
 import AddUsersPanel from "../../AddUsersPanel";
 import { getAccessOptions } from "../utils";
@@ -33,7 +34,6 @@ import {
   StyledInviteLanguage,
   ResetLink,
 } from "../StyledInvitePanel";
-import { checkIfAccessPaid } from "SRC_DIR/helpers/utils";
 
 const minSearchValue = 2;
 

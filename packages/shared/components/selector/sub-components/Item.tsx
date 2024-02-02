@@ -45,8 +45,17 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
     if (!item || (item && !item.id))
       return <div style={style}>{rowLoader}</div>;
 
-    const { label, avatar, icon, role, isSelected, isDisabled, color, email, isGroup, } =
-      item;
+    const {
+      label,
+      avatar,
+      icon,
+      role,
+      isSelected,
+      isDisabled,
+      color,
+      email,
+      isGroup,
+    } = item;
 
     const currentRole = role || AvatarRole.user;
 
@@ -96,7 +105,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
           />
         )}
         {renderCustomItem ? (
-          renderCustomItem(label, role, email)
+          renderCustomItem(label, role, email, isGroup)
         ) : (
           <Text
             className="label"

@@ -455,7 +455,7 @@ class InfoPanelStore {
       : false;
   };
 
-  addMembersTitle = (t, administrators, users, expectedMembers) => {
+  addMembersTitle = (t, administrators, users, expectedMembers, groups) => {
     let hasPrevAdminsTitle = this.getHasPrevTitle(
       administrators,
       "administration",
@@ -465,6 +465,16 @@ class InfoPanelStore {
       administrators.unshift({
         id: "administration",
         displayName: t("Administration"),
+        isTitle: true,
+      });
+    }
+
+    let hasPrevGroupsTitle = this.getHasPrevTitle(groups, "groups");
+
+    if (groups.length && !hasPrevGroupsTitle) {
+      groups.unshift({
+        id: "groups",
+        displayName: t("Common:Groups"),
         isTitle: true,
       });
     }
@@ -494,6 +504,7 @@ class InfoPanelStore {
     const users = [];
     const administrators = [];
     const expectedMembers = [];
+    const groups = [];
 
     members?.map((fetchedMember) => {
       const member = {
@@ -510,16 +521,18 @@ class InfoPanelStore {
         member.access === ShareAccessRights.RoomManager
       ) {
         administrators.push(member);
+      } else if (member.isGroup) {
+        groups.push(member);
       } else {
         users.push(member);
       }
     });
 
     if (clearFilter) {
-      this.addMembersTitle(t, administrators, users, expectedMembers);
+      this.addMembersTitle(t, administrators, users, expectedMembers, groups);
     }
 
-    return { administrators, users, expectedMembers };
+    return { administrators, users, expectedMembers, groups };
   };
 
   fetchMembers = async (t, clearFilter = true) => {
@@ -544,16 +557,14 @@ class InfoPanelStore {
 
     links && this.publicRoomStore.setExternalLinks(links);
 
-    const { administrators, users, expectedMembers } = this.convertMembers(
-      t,
-      data,
-      clearFilter,
-    );
+    const { administrators, users, expectedMembers, groups } =
+      this.convertMembers(t, data, clearFilter);
 
     return {
       users,
       administrators,
       expected: expectedMembers,
+      groups,
       roomId,
     };
   };

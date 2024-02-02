@@ -60,13 +60,14 @@ const Members = ({
   const loadNextPage = async () => {
     const roomId = infoPanelSelection.id;
     const fetchedMembers = await fetchMembers(t, false);
-    const { users, administrators, expected } = fetchedMembers;
+    const { users, administrators, expected, groups } = fetchedMembers;
 
     const newMembers = {
       roomId: roomId,
       administrators: [...infoPanelMembers.administrators, ...administrators],
       users: [...infoPanelMembers.users, ...users],
       expected: [...infoPanelMembers.expected, ...expected],
+      groups: [...infoPanelMembers.groups, ...groups],
     };
 
     setInfoPanelMembers(newMembers);
@@ -79,16 +80,17 @@ const Members = ({
     (member) => member.id === selfId,
   );
 
-  const { administrators, users, expected } = infoPanelMembers;
+  const { administrators, users, expected, groups } = infoPanelMembers;
 
-  const membersList = [...administrators, ...users, ...expected];
+  const membersList = [...administrators, ...groups, ...users, ...expected];
 
   const adminsTitleCount = administrators.length ? 1 : 0;
   const usersTitleCount = users.length ? 1 : 0;
   const expectedTitleCount = expected.length ? 1 : 0;
-  // const groupsTitleCount = groups.length ? 1 : 0;
+  const groupsTitleCount = groups.length ? 1 : 0;
 
-  const headersCount = adminsTitleCount + usersTitleCount + expectedTitleCount;
+  const headersCount =
+    adminsTitleCount + usersTitleCount + expectedTitleCount + groupsTitleCount;
 
   const onAddNewLink = async () => {
     if (isPublicRoom || primaryLink) {
@@ -281,10 +283,8 @@ export default inject(
       isArchiveFolder: isArchiveFolderRoot,
       isPublicRoom,
       additionalLinks: additionalLinks,
-      isArchiveFolder: isArchiveFolderRoot,
       setLinkParams,
       setEditLinkPanelIsVisible,
-      primaryLink,
       getPrimaryLink: filesStore.getPrimaryLink,
       setExternalLink,
       withPublicRoomBlock,

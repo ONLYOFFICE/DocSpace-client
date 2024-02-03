@@ -17,7 +17,6 @@ const ItemTitle = ({
   currentColorScheme,
   getIcon,
   getUserContextOptions,
-  onSearchClick,
 }) => {
   if (!infoPanelSelection) return null;
   if (isNoItem) return null;
@@ -51,7 +50,7 @@ const ItemTitle = ({
       />
     );
 
-  return <RoomsItemHeader onSearchClick={onSearchClick} />;
+  return <RoomsItemHeader />;
 };
 
 export default inject(
@@ -67,5 +66,5 @@ export default inject(
       getUserContextOptions,
       getIcon,
     };
-  }
+  },
 )(observer(ItemTitle));

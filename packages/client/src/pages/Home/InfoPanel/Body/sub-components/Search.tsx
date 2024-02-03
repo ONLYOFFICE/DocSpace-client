@@ -1,4 +1,6 @@
-import { ChangeEvent, useEffect, useRef } from "react";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import debounce from "lodash.debounce";
+import { inject } from "mobx-react";
 
 import XIconReactSvgUrl from "PUBLIC_DIR/images/x.react.svg?url";
 import {
@@ -11,31 +13,41 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { StyledSearchContainer } from "../styles/common";
 
 interface SearchProps {
-  value: string;
-  onChange: (value: string) => void;
-  onClose: () => void;
+  setSearchValue: (value: string) => void;
+  resetSearch: () => void;
 }
 
-const Search = ({ value, onChange, onClose }: SearchProps) => {
-  const inputRef = useRef<HTMLInputElement>(null);
+const Search = ({ setSearchValue, resetSearch }: SearchProps) => {
+  const [value, setValue] = useState("");
+
+  const onClose = () => {
+    resetSearch();
+  };
 
   const onEscapeUp = (e: KeyboardEvent) => {
-    if (e.key === "Esc" || e.key === "Escape") onClose();
+    if (e.key === "Esc" || e.key === "Escape") {
+      e.stopPropagation();
+      onClose();
+    }
   };
 
-  const onChangeAction = (e: ChangeEvent<HTMLInputElement>) => {
-    onChange(e.currentTarget.value);
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.currentTarget.value;
+    setValue(newValue);
+
+    debouncedSearch(newValue.trim());
   };
 
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
+  const debouncedSearch = useCallback(
+    debounce((value: string) => setSearchValue(value), 300),
+    [],
+  );
 
   useEffect(() => {
     window.addEventListener("keyup", onEscapeUp);
 
     return () => window.removeEventListener("keyup", onEscapeUp);
-  });
+  }, []);
 
   return (
     <StyledSearchContainer>
@@ -44,9 +56,9 @@ const Search = ({ value, onChange, onClose }: SearchProps) => {
         type={InputType.text}
         size={InputSize.base}
         scale={true}
-        onChange={onChangeAction}
+        onChange={onChange}
         value={value}
-        forwardedRef={inputRef}
+        isAutoFocussed
       />
       <IconButton
         id="search_close"
@@ -59,4 +71,7 @@ const Search = ({ value, onChange, onClose }: SearchProps) => {
   );
 };
 
-export default Search;
+export default inject(({ infoPanelStore }) => ({
+  resetSearch: infoPanelStore.resetSearch,
+  setSearchValue: infoPanelStore.setSearchValue,
+}))(Search);

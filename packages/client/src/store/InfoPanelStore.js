@@ -65,6 +65,9 @@ class InfoPanelStore {
 
   shareChanged = false;
 
+  showSearchBlock = false;
+  searchValue = "";
+
   constructor(userStore) {
     this.userStore = userStore;
 
@@ -80,6 +83,15 @@ class InfoPanelStore {
   };
 
   setIsMobileHidden = (bool) => (this.isMobileHidden = bool);
+
+  setShowSearchBlock = (bool) => (this.showSearchBlock = bool);
+
+  setSearchValue = (value) => (this.searchValue = value);
+
+  resetSearch = () => {
+    this.showSearchBlock = false;
+    this.searchValue = "";
+  };
 
   setSelectionHistory = (obj) => (this.selectionHistory = obj);
 
@@ -207,6 +219,7 @@ class InfoPanelStore {
     }
 
     this.setInfoPanelSelection(newInfoPanelSelection);
+    this.resetSearch();
   };
 
   normalizeSelection = (infoPanelSelection) => {
@@ -500,7 +513,7 @@ class InfoPanelStore {
     }
   };
 
-  convertMembers = (t, members, clearFilter) => {
+  convertMembers = (t, members, clearFilter, withoutTitles) => {
     const users = [];
     const administrators = [];
     const expectedMembers = [];
@@ -528,22 +541,32 @@ class InfoPanelStore {
       }
     });
 
-    if (clearFilter) {
+    if (clearFilter && !withoutTitles) {
       this.addMembersTitle(t, administrators, users, expectedMembers, groups);
     }
 
     return { administrators, users, expectedMembers, groups };
   };
 
-  fetchMembers = async (t, clearFilter = true) => {
+  fetchMembers = async (
+    t,
+    clearFilter = true,
+    withoutTitlesAndLinks = false,
+  ) => {
     if (this.membersIsLoading) return;
+    const roomId = this.infoPanelSelection.id;
+
     const isPublic =
       this.infoPanelSelection?.roomType ?? this.infoPanelSelection?.roomType;
-    const roomId = this.infoPanelSelection.id;
 
     const requests = [this.filesStore.getRoomMembers(roomId, clearFilter)];
 
-    if (isPublic && clearFilter && this.withPublicRoomBlock) {
+    if (
+      isPublic &&
+      clearFilter &&
+      this.withPublicRoomBlock &&
+      !withoutTitlesAndLinks
+    ) {
       requests.push(this.filesStore.getRoomLinks(roomId));
     }
 
@@ -558,7 +581,7 @@ class InfoPanelStore {
     links && this.publicRoomStore.setExternalLinks(links);
 
     const { administrators, users, expectedMembers, groups } =
-      this.convertMembers(t, data, clearFilter);
+      this.convertMembers(t, data, clearFilter, withoutTitlesAndLinks);
 
     return {
       users,
@@ -573,13 +596,15 @@ class InfoPanelStore {
     const newMembers = this.convertMembers(t, members, clearFilter);
 
     if (this.infoPanelMembers) {
-      const { roomId, administrators, users, expected } = this.infoPanelMembers;
+      const { roomId, administrators, users, expected, groups } =
+        this.infoPanelMembers;
 
       this.setInfoPanelMembers({
         roomId: roomId,
         administrators: [...administrators, ...newMembers.administrators],
         users: [...users, ...newMembers.users],
         expected: [...expected, ...newMembers.expectedMembers],
+        groups: [...groups, ...newMembers.groups],
       });
     }
   };

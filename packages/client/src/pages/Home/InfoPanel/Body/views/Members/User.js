@@ -35,6 +35,7 @@ const User = ({
   showTooltip,
   infoPanelMembers,
   setInfoPanelMembers,
+  searchValue,
 }) => {
   if (!infoPanelSelection) return null;
   if (!user.displayName && !user.name && !user.email) return null;
@@ -44,6 +45,7 @@ const User = ({
   const canInviteUserInRoomAbility = security?.EditAccess;
   const showInviteIcon = canInviteUserInRoomAbility && isExpect;
   const canChangeUserRole = user.canEditAccess;
+  const withoutTitles = !!searchValue;
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -89,15 +91,19 @@ const User = ({
           };
 
           const roomId = infoPanelSelection.id;
-          const newUsers = newMembers.users.length > 1 ? newMembers?.users : [];
+          const minItemsCount = withoutTitles ? 0 : 1;
+          const newUsers =
+            newMembers.users.length > minItemsCount ? newMembers?.users : [];
           const newAdministrators =
-            newMembers.administrators.length > 1
+            newMembers.administrators.length > minItemsCount
               ? newMembers?.administrators
               : [];
           const newExpected =
-            newMembers.expected.length > 1 ? newMembers?.expected : [];
+            newMembers.expected.length > minItemsCount
+              ? newMembers?.expected
+              : [];
           const newGroups =
-            newMembers.groups.length > 1 ? newMembers?.groups : [];
+            newMembers.groups.length > minItemsCount ? newMembers?.groups : [];
 
           setInfoPanelMembers({
             roomId,
@@ -341,6 +347,7 @@ export default inject(({ infoPanelStore, filesStore, peopleStore }) => {
     infoPanelMembers,
     setInfoPanelMembers,
     fetchMembers,
+    searchValue,
   } = infoPanelStore;
   const {
     updateRoomMemberRole,
@@ -362,5 +369,6 @@ export default inject(({ infoPanelStore, filesStore, peopleStore }) => {
     infoPanelMembers,
     setInfoPanelMembers,
     fetchMembers,
+    searchValue,
   };
 })(observer(User));

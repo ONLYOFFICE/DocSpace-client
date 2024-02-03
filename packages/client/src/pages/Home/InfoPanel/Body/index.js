@@ -22,14 +22,14 @@ const InfoPanelBodyContent = ({
   getIsGallery,
   gallerySelected,
   isRootFolder,
+  showSearchBlock,
+  setShowSearchBlock,
   ...props
 }) => {
   const { groupId } = useParams();
 
   const [selectedItems, setSelectedItems] = useState(props.selectedItems);
   const [selectedFolder, setSelectedFolder] = useState(props.selectedFolder);
-  const [showSearchBlock, setShowSearchBlock] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
 
   const isFiles = getIsFiles();
   const isRooms = getIsRooms();
@@ -82,13 +82,6 @@ const InfoPanelBodyContent = ({
     galleryProps: {},
     pluginProps: { isRooms, roomsView, fileView },
   });
-
-  const openSearchBlock = () => setShowSearchBlock(true);
-  const closeSearchBlock = () => {
-    setSearchValue("");
-    setShowSearchBlock(false);
-  };
-  const onSearchChange = (value) => setSearchValue(value);
 
   const getView = () => {
     const currentView = isRooms ? roomsView : fileView;
@@ -160,20 +153,13 @@ const InfoPanelBodyContent = ({
 
   return (
     <StyledInfoPanelBody>
-      {showSearchBlock && (
-        <Search
-          value={searchValue}
-          onChange={onSearchChange}
-          onClose={closeSearchBlock}
-        />
-      )}
+      {showSearchBlock && <Search />}
 
       {!isNoItem && (
         <ItemTitle
           {...defaultProps}
           selectionLength={selectedItems.length}
           isNoItem={isNoItem}
-          onSearchClick={openSearchBlock}
         />
       )}
       {getView()}
@@ -197,6 +183,8 @@ export default inject(
       getInfoPanelSelectedFolder,
       getIsPeople,
       getIsGroups,
+      showSearchBlock,
+      setShowSearchBlock,
     } = infoPanelStore;
 
     const { gallerySelected } = oformsStore;
@@ -221,6 +209,9 @@ export default inject(
 
       isRootFolder,
       gallerySelected,
+
+      showSearchBlock,
+      setShowSearchBlock,
     };
   },
 )(observer(InfoPanelBodyContent));

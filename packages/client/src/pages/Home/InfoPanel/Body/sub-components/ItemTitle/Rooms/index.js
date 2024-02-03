@@ -30,7 +30,7 @@ const RoomsItemHeader = ({
   setBufferSelection,
   isArchive,
   hasLinks,
-  onSearchClick,
+  setShowSearchBlock,
 }) => {
   const itemTitleRef = useRef();
 
@@ -73,6 +73,8 @@ const RoomsItemHeader = ({
         : ShareAccessRights.ReadOnly,
     });
   };
+
+  const onSearchClick = () => setShowSearchBlock(true);
 
   return (
     <StyledTitle ref={itemTitleRef}>
@@ -133,7 +135,12 @@ export default inject(
     infoPanelStore,
     publicRoomStore,
   }) => {
-    const { infoPanelSelection, roomsView, setIsMobileHidden } = infoPanelStore;
+    const {
+      infoPanelSelection,
+      roomsView,
+      setIsMobileHidden,
+      setShowSearchBlock,
+    } = infoPanelStore;
     const { externalLinks } = publicRoomStore;
 
     const selection = infoPanelSelection.length > 1 ? null : infoPanelSelection;
@@ -144,6 +151,7 @@ export default inject(
       roomsView,
       infoPanelSelection,
       setIsMobileHidden,
+      setShowSearchBlock,
 
       isGracePeriod: currentTariffStatusStore.isGracePeriod,
 

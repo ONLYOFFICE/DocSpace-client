@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useCallback } from "react";
 import { Base } from "@docspace/shared/themes";
@@ -129,7 +128,6 @@ StyledTableRow.defaultProps = { theme: Base };
 const SessionsTableRow = (props) => {
   const {
     t,
-    id,
     item,
     element,
     checkedProps,
@@ -147,7 +145,6 @@ const SessionsTableRow = (props) => {
     setLogoutAllDialogVisible,
     setDisableDialogVisible,
     setSessionModalData,
-    onlineSessionsSocket,
     setUserSessionPanelVisible,
   } = props;
 
@@ -164,13 +161,6 @@ const SessionsTableRow = (props) => {
   const onClickDisable = () => {
     setDisableDialogVisible(true);
   };
-
-  useEffect(() => {
-    onlineSessionsSocket.emit("getStatusesInPortal", { id });
-    onlineSessionsSocket.on("statuses-in-room", (data) => {
-      console.log(data);
-    });
-  }, []);
 
   const contextOptions = [
     {
@@ -291,8 +281,7 @@ const SessionsTableRow = (props) => {
   );
 };
 
-export default inject(({ auth, setup, dialogsStore }) => {
-  const { onlineSessionsSocket } = auth.settingsStore;
+export default inject(({ setup, dialogsStore }) => {
   const { setUserSessionPanelVisible } = dialogsStore;
   const {
     setLogoutAllDialogVisible,
@@ -304,7 +293,6 @@ export default inject(({ auth, setup, dialogsStore }) => {
     setLogoutAllDialogVisible,
     setDisableDialogVisible,
     setSessionModalData,
-    onlineSessionsSocket,
     setUserSessionPanelVisible,
   };
 })(withContent(observer(SessionsTableRow)));

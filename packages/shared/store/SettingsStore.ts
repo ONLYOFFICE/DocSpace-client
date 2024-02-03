@@ -965,6 +965,7 @@ class SettingsStore {
       this.frameConfig = frameConfig;
     });
 
+    // eslint-disable-next-line no-extra-boolean-cast
     if (!!frameConfig) {
       frameCallEvent({
         event: "onAppReady",

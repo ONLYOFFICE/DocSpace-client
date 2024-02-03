@@ -180,8 +180,8 @@ const TableView = ({ t, sectionWidth, userId, sessionsData }) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { id: userId } = auth.userStore.user;
+export default inject(({ userStore }) => {
+  const { id: userId } = userStore.user;
 
   return {
     userId,

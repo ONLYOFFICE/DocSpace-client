@@ -197,9 +197,9 @@ const Sessions = ({
   );
 };
 
-export default inject(({ auth, setup, peopleStore }) => {
-  const { culture, currentDeviceType } = auth.settingsStore;
-  const { user } = auth.userStore;
+export default inject(({ userStore, settingsStore, setup, peopleStore }) => {
+  const { culture, currentDeviceType } = settingsStore;
+  const { user } = userStore;
   const locale = (user && user.cultureName) || culture || "en";
   const { clearSelection, allSessions, setAllSessions } =
     peopleStore.selectionStore;

@@ -487,72 +487,74 @@ const SectionHeaderContent = (props) => {
   );
 };
 
-export default inject(({ currentQuotaStore, setup, common }) => {
-  const {
-    isBrandingAndCustomizationAvailable,
-    isRestoreAndAutoBackupAvailable,
-  } = currentQuotaStore;
-  const { addUsers, removeAdmins } = setup.headerAction;
-  const {
-    toggleSelector,
-    setDisableDialogVisible,
-    setLogoutDialogVisible,
-    setLogoutAllDialogVisible,
-    setSessionModalData,
-  } = setup;
-  const {
-    selected,
-    setSelected: setupSetSelected,
-    isHeaderIndeterminate: isSetupHeaderIndeterminate,
-    isHeaderChecked: isSetupHeaderChecked,
-    isHeaderVisible: isSetupHeaderVisible,
-    deselectUser,
-    selectAll,
-    selection: setupSelection,
-  } = setup.selectionStore;
-  const {
-    isHeaderIndeterminate: isPeopleHeaderIndeterminate,
-    isHeaderChecked: isPeopleHeaderChecked,
-    isHeaderVisible: isPeopleHeaderVisible,
-    setSelected: peopleSetSelected,
-    isSeveralSelection,
-    selection: peopleSelection,
-  } = peopleStore.selectionStore;
+export default inject(
+  ({ currentQuotaStore, setup, common, peopleStore, dialogsStore }) => {
+    const {
+      isBrandingAndCustomizationAvailable,
+      isRestoreAndAutoBackupAvailable,
+    } = currentQuotaStore;
+    const { addUsers, removeAdmins } = setup.headerAction;
+    const {
+      toggleSelector,
+      setDisableDialogVisible,
+      setLogoutDialogVisible,
+      setLogoutAllDialogVisible,
+      setSessionModalData,
+    } = setup;
+    const {
+      selected,
+      setSelected: setupSetSelected,
+      isHeaderIndeterminate: isSetupHeaderIndeterminate,
+      isHeaderChecked: isSetupHeaderChecked,
+      isHeaderVisible: isSetupHeaderVisible,
+      deselectUser,
+      selectAll,
+      selection: setupSelection,
+    } = setup.selectionStore;
+    const {
+      isHeaderIndeterminate: isPeopleHeaderIndeterminate,
+      isHeaderChecked: isPeopleHeaderChecked,
+      isHeaderVisible: isPeopleHeaderVisible,
+      setSelected: peopleSetSelected,
+      isSeveralSelection,
+      selection: peopleSelection,
+    } = peopleStore.selectionStore;
 
-  const { admins, selectorIsOpen } = setup.security.accessRight;
-  const { isLoadedSectionHeader, setIsLoadedSectionHeader } = common;
-  const { setUserSessionPanelVisible } = dialogsStore;
-  return {
-    addUsers,
-    removeAdmins,
-    selected,
-    admins,
-    setupSetSelected,
-    isSetupHeaderIndeterminate,
-    isSetupHeaderChecked,
-    isSetupHeaderVisible,
-    deselectUser,
-    selectAll,
-    toggleSelector,
-    selectorIsOpen,
-    setupSelection,
-    isLoadedSectionHeader,
-    setIsLoadedSectionHeader,
-    isBrandingAndCustomizationAvailable,
-    isRestoreAndAutoBackupAvailable,
-    peopleSetSelected,
-    peopleSelection,
-    isPeopleHeaderIndeterminate,
-    isPeopleHeaderChecked,
-    isPeopleHeaderVisible,
-    isSeveralSelection,
-    setDisableDialogVisible,
-    setLogoutDialogVisible,
-    setLogoutAllDialogVisible,
-    setSessionModalData,
-    setUserSessionPanelVisible,
-  };
-})(
+    const { admins, selectorIsOpen } = setup.security.accessRight;
+    const { isLoadedSectionHeader, setIsLoadedSectionHeader } = common;
+    const { setUserSessionPanelVisible } = dialogsStore;
+    return {
+      addUsers,
+      removeAdmins,
+      selected,
+      admins,
+      setupSetSelected,
+      isSetupHeaderIndeterminate,
+      isSetupHeaderChecked,
+      isSetupHeaderVisible,
+      deselectUser,
+      selectAll,
+      toggleSelector,
+      selectorIsOpen,
+      setupSelection,
+      isLoadedSectionHeader,
+      setIsLoadedSectionHeader,
+      isBrandingAndCustomizationAvailable,
+      isRestoreAndAutoBackupAvailable,
+      peopleSetSelected,
+      peopleSelection,
+      isPeopleHeaderIndeterminate,
+      isPeopleHeaderChecked,
+      isPeopleHeaderVisible,
+      isSeveralSelection,
+      setDisableDialogVisible,
+      setLogoutDialogVisible,
+      setLogoutAllDialogVisible,
+      setSessionModalData,
+      setUserSessionPanelVisible,
+    };
+  }
+)(
   withLoading(
     withTranslation(["Settings", "SingleSignOn", "Common", "Files"])(
       observer(SectionHeaderContent)

@@ -52,9 +52,9 @@ const SharedButton = ({
   );
 };
 
-export default inject(({ auth, filesActionsStore, dialogsStore }) => {
+export default inject(({ settingsStore, filesActionsStore, dialogsStore }) => {
   return {
-    theme: auth.settingsStore.theme,
+    theme: settingsStore.theme,
     onSelectItem: filesActionsStore.onSelectItem,
     setSharingPanelVisible: dialogsStore.setSharingPanelVisible,
   };

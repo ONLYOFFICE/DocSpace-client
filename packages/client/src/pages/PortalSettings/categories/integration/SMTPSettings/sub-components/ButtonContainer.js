@@ -215,7 +215,7 @@ const ButtonContainer = (props) => {
   );
 };
 
-export default inject(({ auth, setup }) => {
+export default inject(({ settingsStore, setup }) => {
   const {
     integration,
     setSMTPSettingsLoading,
@@ -227,7 +227,7 @@ export default inject(({ auth, setup }) => {
   const { smtpSettings } = integration;
   const { settings, isLoading, isDefaultSettings } = smtpSettings;
 
-  const { currentDeviceType } = auth.settingsStore;
+  const { currentDeviceType } = settingsStore;
 
   return {
     isSMTPInitialSettings,

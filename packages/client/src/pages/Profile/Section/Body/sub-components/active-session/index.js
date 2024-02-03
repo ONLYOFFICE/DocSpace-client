@@ -115,10 +115,7 @@ const ActiveSessions = ({
   };
 
   const convertTime = (date) => {
-    return moment(date)
-      .tz(window.timezone)
-      .locale(locale)
-      .format("L, LTS");
+    return moment(date).tz(window.timezone).locale(locale).format("L, LTS");
   };
   const tableCell = (platform, browser) =>
     interfaceDirection === "rtl" && !isMobile ? (
@@ -263,9 +260,9 @@ const ActiveSessions = ({
   );
 };
 
-export default inject(({ auth, setup }) => {
-  const { culture, currentDeviceType } = auth.settingsStore;
-  const { user } = auth.userStore;
+export default inject(({ settingsStore, userStore, setup }) => {
+  const { culture, currentDeviceType } = settingsStore;
+  const { user } = userStore;
   const locale = (user && user.cultureName) || culture || "en";
 
   const {

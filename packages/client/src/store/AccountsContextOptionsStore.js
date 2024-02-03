@@ -32,15 +32,19 @@ const PROXY_HOMEPAGE_URL = combineUrl(window.DocSpaceConfig?.proxy?.url, "/");
 const PROFILE_SELF_URL = "/profile";
 
 class AccountsContextOptionsStore {
-  authStore = null;
-
+  settingsStore = null;
+  infoPanelStore = null;
   peopleStore = null;
+  userStore = null;
+  tfaStore = null;
 
-  constructor(peopleStore) {
+  constructor(peopleStore, infoPanelStore, userStore, tfaStore, settingsStore) {
     makeAutoObservable(this);
-    this.authStore = peopleStore.authStore;
-
+    this.settingsStore = settingsStore;
+    this.infoPanelStore = infoPanelStore;
     this.peopleStore = peopleStore;
+    this.userStore = userStore;
+    this.tfaStore = tfaStore;
   }
 
   getUserContextOptions = (t, options, item) => {
@@ -164,7 +168,7 @@ class AccountsContextOptionsStore {
             icon: RestoreAuthReactSvgUrl,
             label: t("PeopleTranslations:ResetAuth"),
             onClick: () => this.onResetAuth(item),
-            disabled: this.authStore.tfaStore.tfaSettings !== "app",
+            disabled: this.tfaStore.tfaSettings !== "app",
           };
         default:
           break;
@@ -190,9 +194,9 @@ class AccountsContextOptionsStore {
     const { setSendInviteDialogVisible, setDeleteProfileDialogVisible } =
       this.peopleStore.dialogStore;
 
-    const { isOwner } = this.authStore.userStore.user;
+    const { isOwner } = this.userStore.user;
 
-    const { setIsVisible, isVisible } = this.authStore.infoPanelStore;
+    const { setIsVisible, isVisible } = this.infoPanelStore;
 
     const options = [];
 
@@ -301,9 +305,7 @@ class AccountsContextOptionsStore {
 
     const filterParamsStr = filter.toUrlParams();
     const url = getCategoryUrl(CategoryType.Shared);
-    const type = this.authStore.settingsStore.isDesktopClient
-      ? "_self"
-      : "_blank";
+    const type = this.settingsStore.isDesktopClient ? "_self" : "_blank";
 
     window.open(
       combineUrl(PROXY_HOMEPAGE_URL, `${url}?${filterParamsStr}`),
@@ -391,7 +393,7 @@ class AccountsContextOptionsStore {
   };
 
   onDetailsClick = (item) => {
-    const { setIsVisible } = this.authStore.infoPanelStore;
+    const { setIsVisible } = this.infoPanelStore;
     const { setBufferSelection } = this.peopleStore.selectionStore;
     setBufferSelection(item);
     setIsVisible(true);

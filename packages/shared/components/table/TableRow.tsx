@@ -22,6 +22,7 @@ const TableRow = (props: TableRowProps) => {
     selectionProp,
     title,
     getContextModel,
+    badgeUrl,
     ...rest
   } = props;
 
@@ -75,6 +76,7 @@ const TableRow = (props: TableRowProps) => {
             model={contextOptions}
             getContextModel={getContextModel}
             withBackdrop
+            badgeUrl={badgeUrl}
           />
           {renderContext ? (
             <ContextMenuButton

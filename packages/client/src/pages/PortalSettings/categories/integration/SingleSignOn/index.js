@@ -78,20 +78,22 @@ const SingleSignOn = (props) => {
   );
 };
 
-export default inject(({ auth, ssoStore }) => {
-  const { currentQuotaStore, setDocumentTitle } = auth;
-  const { isSSOAvailable } = currentQuotaStore;
-  const { currentDeviceType } = auth.settingsStore;
+export default inject(
+  ({ authStore, settingsStore, ssoStore, currentQuotaStore }) => {
+    const { setDocumentTitle } = authStore;
+    const { isSSOAvailable } = currentQuotaStore;
+    const { currentDeviceType } = settingsStore;
 
-  const { init, serviceProviderSettings, spMetadata, isInit } = ssoStore;
+    const { init, serviceProviderSettings, spMetadata, isInit } = ssoStore;
 
-  return {
-    init,
-    serviceProviderSettings,
-    spMetadata,
-    isSSOAvailable,
-    setDocumentTitle,
-    isInit,
-    currentDeviceType,
-  };
-})(observer(SingleSignOn));
+    return {
+      init,
+      serviceProviderSettings,
+      spMetadata,
+      isSSOAvailable,
+      setDocumentTitle,
+      isInit,
+      currentDeviceType,
+    };
+  }
+)(observer(SingleSignOn));

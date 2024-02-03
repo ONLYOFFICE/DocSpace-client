@@ -36,6 +36,7 @@ const Selector = ({
   onSelectAll,
 
   items,
+  renderCustomItem,
   isMultiSelect,
   selectedItems,
   acceptButtonLabel,
@@ -148,6 +149,7 @@ const Selector = ({
       avatar: item.avatar,
       icon: item.icon,
       label: item.label,
+      shared: item.shared,
     });
 
     if (isMultiSelect) {
@@ -349,6 +351,7 @@ const Selector = ({
         hasNextPage={hasNextPage}
         isNextPageLoading={isNextPageLoading}
         loadMoreItems={loadMoreItems}
+        renderCustomItem={renderCustomItem}
         totalItems={totalItems || 0}
         isLoading={isLoading}
         searchLoader={searchLoader}

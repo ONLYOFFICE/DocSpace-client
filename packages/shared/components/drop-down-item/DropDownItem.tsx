@@ -13,6 +13,7 @@ import {
   IconWrapper,
   WrapperToggle,
   WrapperBadge,
+  ElementWrapper,
 } from "./DropDownItem.styled";
 import { DropDownItemProps } from "./DropDownItem.types";
 
@@ -37,6 +38,7 @@ const DropDownItem = (props: DropDownItemProps) => {
     isSelected,
     isActiveDescendant,
     isBeta,
+    additionalElement,
   } = props;
 
   const { t } = useTranslation(["Settings"]);
@@ -143,6 +145,10 @@ const DropDownItem = (props: DropDownItemProps) => {
           />
         </WrapperBadge>
       )}
+
+      {additionalElement && (
+        <ElementWrapper>{additionalElement}</ElementWrapper>
+      )}
     </StyledDropdownItem>
   );
 };
@@ -164,3 +170,4 @@ DropDownItem.defaultProps = {
 };
 
 export { DropDownItem };
+

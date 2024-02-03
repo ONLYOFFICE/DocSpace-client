@@ -48,4 +48,5 @@ export interface RowProps {
   badgesComponent?: React.ReactNode;
   isArchive?: boolean;
   rowContextClose?: () => void;
+  badgeUrl?: string;
 }

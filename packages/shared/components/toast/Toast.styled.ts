@@ -296,4 +296,3 @@ const StyledIconButton = styled(IconButton)`
 StyledIconButton.defaultProps = { theme: Base };
 
 export { StyledCloseWrapper, StyledDiv, IconWrapper, StyledIconButton };
-

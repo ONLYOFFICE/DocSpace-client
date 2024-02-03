@@ -242,7 +242,7 @@ export default inject(
     filesStore,
     mediaViewerDataStore,
     filesActionsStore,
-    settingsStore,
+    filesSettingsStore,
     dialogsStore,
     treeFoldersStore,
     contextOptionsStore,
@@ -290,7 +290,8 @@ export default inject(
       prevMedia,
     } = mediaViewerDataStore;
     const { deleteItemAction } = filesActionsStore;
-    const { getIcon, extsImagePreviewed, extsMediaPreviewed } = settingsStore;
+    const { getIcon, extsImagePreviewed, extsMediaPreviewed } =
+      filesSettingsStore;
     const { isFavoritesFolder, archiveRoomsId } = treeFoldersStore;
 
     const {

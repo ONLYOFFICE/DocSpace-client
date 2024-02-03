@@ -97,7 +97,7 @@ const CommentEditor = ({
             onChange={onChangeInputValue}
             autoFocus
             areaSelect
-            heightTextArea={54}
+            heightTextArea="54px"
             fontSize={13}
           />
           <div className="property-comment_editor-editor-buttons">
@@ -120,8 +120,8 @@ const CommentEditor = ({
   );
 };
 
-export default inject(({ auth, versionHistoryStore }) => {
-  const { setInfoPanelSelection } = auth.infoPanelStore;
+export default inject(({ versionHistoryStore, infoPanelStore }) => {
+  const { setInfoPanelSelection } = infoPanelStore;
 
   const {
     fetchFileVersions,

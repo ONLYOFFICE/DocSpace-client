@@ -197,9 +197,9 @@ const SetRoomParams = ({
   );
 };
 
-export default inject(({ auth, dialogsStore }) => {
+export default inject(({ settingsStore, dialogsStore }) => {
   const { setChangeRoomOwnerIsVisible } = dialogsStore;
-  const { folderFormValidation } = auth.settingsStore;
+  const { folderFormValidation } = settingsStore;
 
   return {
     folderFormValidation,

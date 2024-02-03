@@ -123,8 +123,8 @@ const ContactContainer = (props) => {
   );
 };
 
-export default inject(({ auth, payments }) => {
-  const { settingsStore, isCommunity } = auth;
+export default inject(({ authStore, settingsStore, payments }) => {
+  const { isCommunity } = authStore;
   const { helpUrl, salesEmail } = payments;
   const { theme } = settingsStore;
   return { helpUrl, salesEmail, theme, isCommunity };

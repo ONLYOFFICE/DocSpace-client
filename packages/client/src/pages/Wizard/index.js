@@ -500,7 +500,7 @@ const Wizard = (props) => {
   );
 };
 
-export default inject(({ auth, wizard }) => {
+export default inject(({ authStore, settingsStore, wizard }) => {
   const {
     passwordSettings,
     wizardToken,
@@ -511,9 +511,9 @@ export default inject(({ auth, wizard }) => {
     getPortalTimezones,
     getPortalPasswordSettings,
     theme,
-  } = auth.settingsStore;
+  } = settingsStore;
 
-  const { language } = auth;
+  const { language } = authStore;
   const {
     isWizardLoaded,
     machineName,
@@ -529,7 +529,7 @@ export default inject(({ auth, wizard }) => {
 
   return {
     theme,
-    isLoaded: auth.isLoaded,
+    isLoaded: authStore.isLoaded,
     culture: language,
     wizardToken,
     passwordSettings,

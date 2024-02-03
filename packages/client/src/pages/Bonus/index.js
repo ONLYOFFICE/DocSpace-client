@@ -32,7 +32,7 @@ const Bonus = ({ standaloneInit, isInitPaymentPage }) => {
   );
 };
 
-export default inject(({ auth, payments }) => {
+export default inject(({ payments }) => {
   const { standaloneInit, isInitPaymentPage } = payments;
 
   return {

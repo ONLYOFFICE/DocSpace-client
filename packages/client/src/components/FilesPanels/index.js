@@ -27,7 +27,6 @@ import {
   SubmitToFormGallery,
   UnsavedChangesDialog,
   DeleteLinkDialog,
-  RoomSharingDialog,
   MoveToPublicRoom,
   BackupToPublicRoom,
   SettingsPluginDialog,
@@ -81,7 +80,6 @@ const Panels = (props) => {
     unsavedChangesDialogVisible,
     deleteLinkDialogVisible,
     embeddingPanelIsVisible,
-    roomSharingPanelVisible,
     moveToPublicRoomVisible,
     backupToPublicRoomVisible,
     settingsPluginDialogVisible,
@@ -184,7 +182,6 @@ const Panels = (props) => {
     ),
     deleteLinkDialogVisible && <DeleteLinkDialog key="delete-link-dialog" />,
     embeddingPanelIsVisible && <EmbeddingPanel key="embedding-panel" />,
-    roomSharingPanelVisible && <RoomSharingDialog key="room-sharing-dialog" />,
     moveToPublicRoomVisible && (
       <MoveToPublicRoom key="move-to-public-room-panel" />
     ),
@@ -203,7 +200,7 @@ const Panels = (props) => {
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     dialogsStore,
     uploadDataStore,
     versionHistoryStore,
@@ -245,7 +242,6 @@ export default inject(
       editLinkPanelIsVisible,
       deleteLinkDialogVisible,
       embeddingPanelIsVisible,
-      roomSharingPanelVisible,
       moveToPublicRoomVisible,
       backupToPublicRoomVisible,
       leaveRoomDialogVisible,
@@ -258,7 +254,7 @@ export default inject(
 
     const { uploadPanelVisible } = uploadDataStore;
     const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
-    const { hotkeyPanelVisible } = auth.settingsStore;
+    const { hotkeyPanelVisible } = settingsStore;
     const { confirmDialogIsLoading } = createEditRoomStore;
 
     const {
@@ -303,7 +299,6 @@ export default inject(
       unsavedChangesDialogVisible,
       deleteLinkDialogVisible,
       embeddingPanelIsVisible,
-      roomSharingPanelVisible,
       moveToPublicRoomVisible,
       backupToPublicRoomVisible,
       settingsPluginDialogVisible,

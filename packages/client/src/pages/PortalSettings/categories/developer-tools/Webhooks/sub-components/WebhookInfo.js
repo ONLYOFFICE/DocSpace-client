@@ -53,8 +53,8 @@ const WebhookInfo = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { webhooksGuideUrl } = auth.settingsStore;
+export default inject(({ settingsStore }) => {
+  const { webhooksGuideUrl } = settingsStore;
 
   return {
     webhooksGuideUrl,

@@ -186,8 +186,12 @@ export const ImageViewer = ({
       });
 
       setIsLoading(false);
+
+      if (isTiff && src) {
+        URL.revokeObjectURL(src);
+      }
     },
-    [api],
+    [api, isTiff, src],
   );
 
   const restartScaleAndSize = useCallback(() => {

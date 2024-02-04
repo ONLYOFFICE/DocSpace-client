@@ -62,6 +62,7 @@ class InfoPanelStore {
   infoPanelSelection = null;
   infoPanelRoom = null;
   membersIsLoading = false;
+  searchResultIsLoading = false;
 
   shareChanged = false;
 
@@ -86,7 +87,14 @@ class InfoPanelStore {
 
   setShowSearchBlock = (bool) => (this.showSearchBlock = bool);
 
-  setSearchValue = (value) => (this.searchValue = value);
+  setSearchResultIsLoading = (isLoading) => {
+    this.searchResultIsLoading = isLoading;
+  };
+
+  setSearchValue = (value) => {
+    this.setSearchResultIsLoading(true);
+    this.searchValue = value;
+  };
 
   resetSearch = () => {
     this.showSearchBlock = false;
@@ -577,6 +585,7 @@ class InfoPanelStore {
     const [data, links] = await Promise.all(requests);
     clearFilter && this.setMembersIsLoading(false);
     clearTimeout(timerId);
+    this.setSearchResultIsLoading(false);
 
     links && this.publicRoomStore.setExternalLinks(links);
 

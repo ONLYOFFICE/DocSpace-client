@@ -46,6 +46,7 @@ const Members = ({
   fetchMembers,
   membersIsLoading,
   searchValue,
+  searchResultIsLoading,
 }) => {
   const withoutTitlesAndLinks = !!searchValue;
   const membersHelper = new MembersHelper({ t });
@@ -218,7 +219,10 @@ const Members = ({
 
       <MembersList
         loadNextPage={loadNextPage}
-        hasNextPage={membersList.length - headersCount < membersFilter.total}
+        hasNextPage={
+          membersList.length - headersCount < membersFilter.total &&
+          !searchResultIsLoading
+        }
         itemCount={membersFilter.total + headersCount + publicRoomItemsLength}
         showPublicRoomBar={showPublicRoomBar}
         linksBlockLength={publicRoomItemsLength}
@@ -264,6 +268,7 @@ export default inject(
       membersIsLoading,
       withPublicRoomBlock,
       searchValue,
+      searchResultIsLoading,
     } = infoPanelStore;
     const { membersFilter } = filesStore;
     const { id: selfId, isAdmin } = userStore.user;
@@ -305,6 +310,7 @@ export default inject(
       fetchMembers,
       membersIsLoading,
       searchValue,
+      searchResultIsLoading,
     };
   },
 )(

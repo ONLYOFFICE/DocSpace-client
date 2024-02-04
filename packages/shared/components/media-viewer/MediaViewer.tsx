@@ -9,7 +9,7 @@ import React, {
 import { isMobile as isMobileUtils, isTablet } from "@docspace/shared/utils";
 import { getFileExtension } from "@docspace/shared/utils/common";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
-import { encoderTiff } from "@docspace/shared/utils/encoderTiff";
+import { decodeTiff } from "@docspace/shared/utils/decodeTiff";
 import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
 
 import { mapSupplied, mediaTypes } from "./MediaViewer.constants";
@@ -302,10 +302,12 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
 
     fetch(src, { signal: TiffAbortSignalRef.current.signal })
       .then((response) => response.arrayBuffer())
-      .then((response) => {
-        const url = encoderTiff(response);
+      .then(async (response) => {
+        const blob = await decodeTiff(response);
 
-        setFileUrl(url);
+        if (blob) {
+          setFileUrl(URL.createObjectURL(blob));
+        }
       })
       .catch((error: Error) => {
         if (error.name === "AbortError") {

@@ -1,6 +1,6 @@
 import UTIF from "utif";
 
-export const encoderTiff = (arrayBuffer: ArrayBuffer): string => {
+export const decodeTiff = (arrayBuffer: ArrayBuffer): Promise<Blob | null> => {
   const ifds = UTIF.decode(arrayBuffer);
   UTIF.decodeImage(arrayBuffer, ifds[0]);
 
@@ -13,9 +13,9 @@ export const encoderTiff = (arrayBuffer: ArrayBuffer): string => {
   canvas.width = image.width;
   canvas.height = image.height;
   const ctx = canvas.getContext("2d");
-  ctx?.putImageData(image, 0, 0);
 
-  const url = canvas.toDataURL();
-
-  return url;
+  return new Promise((resolve) => {
+    ctx?.putImageData(image, 0, 0);
+    canvas.toBlob(resolve);
+  });
 };

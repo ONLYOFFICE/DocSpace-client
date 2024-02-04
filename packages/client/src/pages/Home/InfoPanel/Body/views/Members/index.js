@@ -11,6 +11,7 @@ import MembersList from "./sub-components/MembersList";
 import User from "./User";
 import PublicRoomBar from "./sub-components/PublicRoomBar";
 import { LinksBlock, StyledLinkRow } from "./sub-components/StyledPublicRoom";
+import EmptyContainer from "./sub-components/EmptyContainer";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
@@ -201,6 +202,10 @@ const Members = ({
     withPublicRoomBlock &&
     !withoutTitlesAndLinks;
   const publicRoomItemsLength = publicRoomItems.length;
+
+  if (!membersList.length) {
+    return <EmptyContainer />;
+  }
 
   return (
     <>

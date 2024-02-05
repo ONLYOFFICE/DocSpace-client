@@ -8,6 +8,7 @@ import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 
 export const getHeaderLabel = (
   t: TTranslation,
+  isEditorDialog: boolean,
   isCopy?: boolean,
   isRestoreAll?: boolean,
   isMove?: boolean,
@@ -17,7 +18,7 @@ export const getHeaderLabel = (
 ) => {
   if (isRestore) return t("Common:RestoreTo");
   if (isMove) return t("Common:MoveTo");
-  if (isCopy) return t("Common:Copy");
+  if (isCopy && !isEditorDialog) return t("Common:Copy");
   if (isRestoreAll) return t("Common:Restore");
   if (isSelect) {
     return filterParam ? t("Common:SelectFile") : t("Common:SelectAction");
@@ -32,6 +33,7 @@ export const getHeaderLabel = (
 
 export const getAcceptButtonLabel = (
   t: TTranslation,
+  isEditorDialog: boolean,
   isCopy?: boolean,
   isRestoreAll?: boolean,
   isMove?: boolean,
@@ -41,7 +43,7 @@ export const getAcceptButtonLabel = (
 ) => {
   if (isRestore) return t("Common:RestoreHere");
   if (isMove) return t("Translations:MoveHere");
-  if (isCopy) return t("Translations:CopyHere");
+  if (isCopy && !isEditorDialog) return t("Translations:CopyHere");
   if (isRestoreAll) return t("Common:RestoreHere");
   if (isSelect) return t("Common:SelectAction");
 

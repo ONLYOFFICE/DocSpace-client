@@ -225,12 +225,13 @@ const FilesSelectorWrapper = ({
       if (onSelectTreeNode) onSelectTreeNode(selectedTreeNode);
       if (onSelectFile && selectedFileInfo)
         onSelectFile(selectedFileInfo, breadCrumbs);
-      onCloseAndDeselectAction();
+      if (!embedded) onCloseAndDeselectAction();
     }
   };
 
   const headerLabel = getHeaderLabel(
     t,
+    isEditorDialog,
     isCopy,
     isRestoreAll,
     isMove,
@@ -241,6 +242,7 @@ const FilesSelectorWrapper = ({
 
   const acceptButtonLabel = getAcceptButtonLabel(
     t,
+    isEditorDialog,
     isCopy,
     isRestoreAll,
     isMove,

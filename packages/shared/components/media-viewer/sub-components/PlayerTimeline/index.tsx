@@ -1,21 +1,26 @@
-import React, { useRef } from "react";
+import React, { useRef, useImperativeHandle, forwardRef } from "react";
 
 import { formatTime } from "../../MediaViewer.utils";
 
-import type PlayerTimelineProps from "./PlayerTimeline.props";
-import { HoverProgress, PlayerTimelineWrapper } from "./PlayerTimeline.styled";
+import type {
+  PlayerTimelineProps,
+  PlayerTimelineRef,
+} from "./PlayerTimeline.props";
+import {
+  HoverProgress,
+  PlayerTimelineWrapper,
+  Progress,
+} from "./PlayerTimeline.styled";
 
-export const PlayerTimeline = ({
-  value,
-  duration,
-  onChange,
-  onMouseEnter,
-  onMouseLeave,
-}: PlayerTimelineProps) => {
+export const PlayerTimeline = forwardRef<
+  PlayerTimelineRef,
+  PlayerTimelineProps
+>(({ value, duration, onChange, onMouseEnter, onMouseLeave }, ref) => {
   const timelineTooltipRef = useRef<HTMLTimeElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
   const hoverProgressRef = useRef<HTMLDivElement>(null);
   const setTimeoutTimelineTooltipRef = useRef<NodeJS.Timeout>();
+  const pregressRef = useRef<HTMLDivElement>(null);
 
   const showTimelineTooltip = () => {
     if (!timelineTooltipRef.current) return;
@@ -92,6 +97,20 @@ export const PlayerTimeline = ({
     timelineTooltipRef.current.innerText = formatTime(percent);
   };
 
+  useImperativeHandle(
+    ref,
+    () => {
+      return {
+        setProgress: (progress: number) => {
+          if (!pregressRef.current) return;
+
+          pregressRef.current.style.width = `${progress * 100}%`;
+        },
+      };
+    },
+    [],
+  );
+
   return (
     <PlayerTimelineWrapper
       ref={timelineRef}
@@ -100,6 +119,7 @@ export const PlayerTimeline = ({
       onMouseLeave={onMouseLeave}
     >
       <time ref={timelineTooltipRef}>00:00</time>
+      <Progress ref={pregressRef} />
       <HoverProgress ref={hoverProgressRef} />
       <input
         min="0"
@@ -114,4 +134,6 @@ export const PlayerTimeline = ({
       />
     </PlayerTimelineWrapper>
   );
-};
+});
+
+PlayerTimeline.displayName = "PlayerTimeline";

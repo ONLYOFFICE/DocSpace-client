@@ -6,12 +6,22 @@ import { tablet, desktop } from "@docspace/shared/utils";
 export const HoverProgress = styled.div`
   display: none;
   position: absolute;
-  left: 2px;
+  left: 0px;
 
   height: 6px;
 
   border-radius: 5px;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.5);
+`;
+
+export const Progress = styled.div`
+  position: absolute;
+  left: 0px;
+  width: 0;
+  height: 4px;
+
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.4);
 `;
 
 const mobileCss = css`
@@ -103,6 +113,8 @@ export const PlayerTimelineWrapper = styled.div`
     width: 100%;
     height: 4px;
 
+    margin: 0px;
+
     outline: none;
 
     appearance: none;
@@ -120,6 +132,8 @@ export const PlayerTimelineWrapper = styled.div`
     &:hover {
       cursor: pointer;
     }
+
+    transition: height 0.3s ease 0s;
   }
 
   input[type="range"]::-webkit-slider-thumb {
@@ -129,6 +143,10 @@ export const PlayerTimelineWrapper = styled.div`
     visibility: hidden;
     opacity: 0;
     background: #fff;
+
+    transition:
+      opacity 0.3s ease 0s,
+      visibility 0.3s ease 0s;
   }
 
   input[type="range"]::-moz-range-thumb {
@@ -138,6 +156,9 @@ export const PlayerTimelineWrapper = styled.div`
     visibility: hidden;
     opacity: 0;
     background: #fff;
+    transition:
+      opacity 0.3s ease 0s,
+      visibility 0.3s ease 0s;
   }
 
   input[type="range"]::-ms-fill-upper {
@@ -147,6 +168,9 @@ export const PlayerTimelineWrapper = styled.div`
     visibility: hidden;
     opacity: 0;
     background: #fff;
+    transition:
+      opacity 0.3s ease 0s,
+      visibility 0.3s ease 0s;
   }
 
   &:hover {

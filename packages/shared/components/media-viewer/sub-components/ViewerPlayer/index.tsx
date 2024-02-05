@@ -17,8 +17,9 @@ import React, {
 
 import { includesMethod } from "@docspace/shared/utils/typeGuards";
 
-import { calculateAdjustImageUtil } from "../../MediaViewer.utils";
 import type { Point } from "../../MediaViewer.types";
+import { KeyboardEventKeys } from "../../MediaViewer.enums";
+import { calculateAdjustImageUtil } from "../../MediaViewer.utils";
 
 import { PlayerBigPlayButton } from "../PlayerBigPlayButton";
 import { ViewerLoader } from "../ViewerLoader";
@@ -29,10 +30,11 @@ import { PlayerTimeline } from "../PlayerTimeline";
 import { PlayerSpeedControl } from "../PlayerSpeedControl";
 import { PlayerFullScreen } from "../PlayerFullScreen";
 import { PlayerDesktopContextMenu } from "../PlayerDesktopContextMenu";
-import { KeyboardEventKeys } from "../../MediaViewer.enums";
 import { MessageError } from "../MessageError";
 
-import ViewerPlayerProps from "./ViewerPlayer.props";
+import type { PlayerTimelineRef } from "../PlayerTimeline/PlayerTimeline.props";
+
+import type ViewerPlayerProps from "./ViewerPlayer.props";
 import {
   ContainerPlayer,
   ControlContainer,
@@ -82,13 +84,13 @@ export const ViewerPlayer = ({
   const playerWrapperRef = useRef<HTMLDivElement>(null);
   const isDurationInfinityRef = useRef<boolean>(false);
   const isOpenContextMenuRef = useRef<boolean>(isOpenContextMenu);
+  const timelineRef = useRef<PlayerTimelineRef>(null);
 
   const { isDesktop, isMobile } = devices;
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [isWaiting, setIsWaiting] = useState<boolean>(false);
-
   const [isMuted, setIsMuted] = useState<boolean>(() => {
     const valueStorage = localStorage.getItem(VolumeLocalStorageKey);
 
@@ -210,6 +212,7 @@ export const ViewerPlayer = ({
     setIsPlaying(false);
     setIsError(false);
     removePanelVisibleTimeout();
+    timelineRef.current?.setProgress(0);
   }, [removePanelVisibleTimeout, setIsError]);
 
   const getVideoWidthHeight = useCallback(
@@ -335,6 +338,30 @@ export const ViewerPlayer = ({
     togglePlay();
   };
 
+  const handleProgress = () => {
+    if (!videoRef.current) return;
+
+    let range = 0;
+    const bf = videoRef.current.buffered;
+    const time = videoRef.current.currentTime;
+
+    while (
+      bf.length > range &&
+      !(bf.start(range) <= time && time <= bf.end(range))
+    ) {
+      range += 1;
+    }
+
+    if (bf.length <= range)
+      return timelineRef.current?.setProgress(
+        videoRef.current.currentTime / videoRef.current.duration,
+      );
+
+    const loadEndPercentage = bf.end(range) / videoRef.current.duration;
+
+    timelineRef.current?.setProgress(loadEndPercentage);
+  };
+
   const handleTimeUpdate = () => {
     if (!videoRef.current || isLoading) return;
 
@@ -352,6 +379,7 @@ export const ViewerPlayer = ({
     const percent = Number(event.target.value);
     const newCurrentTime = (percent / 100) * videoRef.current.duration;
 
+    handleProgress();
     setTimeline(percent);
     setCurrentTime(newCurrentTime);
     videoRef.current.currentTime = newCurrentTime;
@@ -578,20 +606,22 @@ export const ViewerPlayer = ({
           ref={playerWrapperRef}
         >
           <animated.video
-            style={lodash.omit(style, ["x", "y"])}
-            src={thumbnailSrc ? src : `${src}#t=0.001`}
             playsInline
+            controls
             ref={videoRef}
             hidden={isAudio}
             preload="metadata"
+            style={lodash.omit(style, ["x", "y"])}
+            src={thumbnailSrc ? src : `${src}#t=0.001`}
             poster={thumbnailSrc && `${thumbnailSrc}&size=1280x720`}
+            onError={hadleError}
             onClick={handleClickVideo}
             onEnded={handleVideoEnded}
-            onDurationChange={handleDurationChange}
+            onProgress={handleProgress}
             onTimeUpdate={handleTimeUpdate}
-            onPlaying={() => setIsWaiting(false)}
             onWaiting={() => setIsWaiting(true)}
-            onError={hadleError}
+            onPlaying={() => setIsWaiting(false)}
+            onDurationChange={handleDurationChange}
             onLoadedMetadata={handleLoadedMetaDataVideo}
           />
           <PlayerBigPlayButton
@@ -629,6 +659,7 @@ export const ViewerPlayer = ({
           <PlayerControlsWrapper onClick={stopPropagation}>
             <PlayerTimeline
               value={timeline}
+              ref={timelineRef}
               duration={duration}
               onChange={handleChangeTimeLine}
               onMouseEnter={onMouseEnter}

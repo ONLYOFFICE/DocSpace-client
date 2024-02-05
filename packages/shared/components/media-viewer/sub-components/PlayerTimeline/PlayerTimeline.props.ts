@@ -1,4 +1,4 @@
-interface PlayerTimelineProps {
+export interface PlayerTimelineProps {
   value: number;
   duration: number;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -6,4 +6,6 @@ interface PlayerTimelineProps {
   onMouseLeave: VoidFunction;
 }
 
-export default PlayerTimelineProps;
+export interface PlayerTimelineRef {
+  setProgress: (value: number) => void;
+}

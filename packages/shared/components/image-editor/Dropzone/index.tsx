@@ -74,7 +74,7 @@ const Dropzone = ({
       // eslint-disable-next-line no-promise-executor-return
       return resolve(file);
     }).then(() =>
-      resizeRecursiveAsync(img, canvas, compressionRatio - 0.1, depth + 1),
+      resizeRecursiveAsync(img, canvas, compressionRatio + 1, depth + 1),
     );
   }
 

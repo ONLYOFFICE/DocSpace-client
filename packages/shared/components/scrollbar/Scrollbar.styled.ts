@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { isIOS, isIOS13, isIPad13 } from "react-device-detect";
 
-import { Scrollbar } from "../../utils/custom-scrollbar";
+import { Scrollbar } from "./custom-scrollbar";
 
 import { Base } from "../../themes";
 import { mobile, desktop, tablet } from "../../utils";
 
-const StyledScrollbar = styled(Scrollbar)`
+const StyledScrollbar = styled(Scrollbar)<{ $fixedSize?: boolean }>`
   .scroller::-webkit-scrollbar {
     ${(isIOS || isIOS13 || isIPad13) && `display: none;`}
   }

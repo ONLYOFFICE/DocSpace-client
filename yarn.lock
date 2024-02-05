@@ -3380,6 +3380,7 @@ __metadata:
     babel-plugin-transform-react-remove-prop-types: "npm:^0.4.24"
     babel-plugin-transform-rename-import: "npm:^2.3.0"
     babel-preset-react-app: "npm:^9.1.2"
+    cnbuilder: "npm:^3.1.0"
     copy-webpack-plugin: "npm:6.4.1"
     cross-env: "npm:^6.0.3"
     cross-fetch: "npm:3.1.5"
@@ -3423,10 +3424,10 @@ __metadata:
     react-autosize-textarea: "npm:^7.1.0"
     react-content-loader: "npm:^5.1.4"
     react-countdown: "npm:2.3.5"
-    react-custom-scrollbars: "npm:^4.2.1"
     react-device-detect: "npm:^1.17.0"
     react-docgen-typescript-plugin: "npm:^1.0.5"
     react-dom: "npm:^18.2.0"
+    react-draggable: "npm:^4.4.6"
     react-dropzone: "npm:^11.7.1"
     react-hammerjs: "npm:^1.0.1"
     react-i18next: "npm:^13.2.1"
@@ -3463,6 +3464,7 @@ __metadata:
     ts-migrate: "npm:^0.1.35"
     ts-node: "npm:^10.9.1"
     workbox-window: "npm:^6.5.4"
+    zoom-level: "npm:^2.5.0"
   peerDependencies:
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -10154,13 +10156,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"add-px-to-style@npm:1.0.0":
-  version: 1.0.0
-  resolution: "add-px-to-style@npm:1.0.0"
-  checksum: 2e8c3c2adce84253c4240b83e69574b1799c2bc4fb97998985b6f04520a0c2be3e1ea7fd498c29f38286ca9fbd24f7974faa6ad3a91ef4a2b7abd0404957ded2
-  languageName: node
-  linkType: hard
-
 "address@npm:^1.0.1":
   version: 1.2.2
   resolution: "address@npm:1.2.2"
@@ -14040,17 +14035,6 @@ __metadata:
   dependencies:
     utila: "npm:~0.4"
   checksum: 71b22f56bce6255a963694a72860a99f08763cf500f02ff38ce4c7489f95b07e7a0069f10b04c7d200e21375474abe01232833ca1600f104bdee7173e493a5b9
-  languageName: node
-  linkType: hard
-
-"dom-css@npm:^2.0.0":
-  version: 2.1.0
-  resolution: "dom-css@npm:2.1.0"
-  dependencies:
-    add-px-to-style: "npm:1.0.0"
-    prefix-style: "npm:2.0.1"
-    to-camel-case: "npm:1.0.0"
-  checksum: 6180c872f17a4c026a690e399dd55e41a90f4e98c5af33ca0f16934309b67e762c929d07e38accc4e05ac4d22e8527af0252bf478a2d780b9e593a415b18905a
   languageName: node
   linkType: hard
 
@@ -23732,13 +23716,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prefix-style@npm:2.0.1":
-  version: 2.0.1
-  resolution: "prefix-style@npm:2.0.1"
-  checksum: 26503ee6629e8a5d6b1de75e4a6529bdcd17767d35afb4763c4985034d15a625def95831c94cb063bf4bfa7f6be430c9b41f7af8e0625017365a52510a6e25fc
-  languageName: node
-  linkType: hard
-
 "prelude-ls@npm:^1.2.1":
   version: 1.2.1
   resolution: "prelude-ls@npm:1.2.1"
@@ -24192,7 +24169,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"raf@npm:^3.1.0, raf@npm:^3.4.1":
+"raf@npm:^3.4.1":
   version: 3.4.1
   resolution: "raf@npm:3.4.1"
   dependencies:
@@ -24480,20 +24457,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-custom-scrollbars@npm:^4.2.1":
-  version: 4.2.1
-  resolution: "react-custom-scrollbars@npm:4.2.1"
-  dependencies:
-    dom-css: "npm:^2.0.0"
-    prop-types: "npm:^15.5.10"
-    raf: "npm:^3.1.0"
-  peerDependencies:
-    react: ^0.14.0 || ^15.0.0 || ^16.0.0
-    react-dom: ^0.14.0 || ^15.0.0 || ^16.0.0
-  checksum: 58c62e04f6a23558f9f4c3df1e96f30efa344d0ce63eb7894f58ca497f8c383e25b86d8055496c7e7910d61eb77496dbe4b451097c98f0347a31aaa7880879f6
-  languageName: node
-  linkType: hard
-
 "react-device-detect@npm:^1.17.0":
   version: 1.17.0
   resolution: "react-device-detect@npm:1.17.0"
@@ -24577,7 +24540,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-draggable@npm:^4.4.5":
+"react-draggable@npm:^4.4.5, react-draggable@npm:^4.4.6":
   version: 4.4.6
   resolution: "react-draggable@npm:4.4.6"
   dependencies:
@@ -28066,26 +28029,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"to-camel-case@npm:1.0.0":
-  version: 1.0.0
-  resolution: "to-camel-case@npm:1.0.0"
-  dependencies:
-    to-space-case: "npm:^1.0.0"
-  checksum: 2f74cfcffa58e8ddede7e01a03eda2cc3f0ab50efdad1d0f1092d55b4e499be43846d1f9087c458fa9efde4958e407738197d65858272c56c915b649b9ca1e62
-  languageName: node
-  linkType: hard
-
 "to-fast-properties@npm:^2.0.0":
   version: 2.0.0
   resolution: "to-fast-properties@npm:2.0.0"
   checksum: be2de62fe58ead94e3e592680052683b1ec986c72d589e7b21e5697f8744cdbf48c266fa72f6c15932894c10187b5f54573a3bcf7da0bfd964d5caf23d436168
-  languageName: node
-  linkType: hard
-
-"to-no-case@npm:^1.0.0":
-  version: 1.0.2
-  resolution: "to-no-case@npm:1.0.2"
-  checksum: 80671e9cb9695ceea2fff23f4678caa6d7a579a2077ecb8f9a0745d90a6435b505bd299688041328f702836289b6ac6a32abba76c5c3922639c0d0224df3dffa
   languageName: node
   linkType: hard
 
@@ -28126,15 +28073,6 @@ __metadata:
     regex-not: "npm:^1.0.2"
     safe-regex: "npm:^1.1.0"
   checksum: ab87c22f0719f7def00145b53e2c90d2fdcc75efa0fec1227b383aaf88ed409db2542b2b16bcbfbf95fe0727f879045803bb635b777c0306762241ca3e5562c6
-  languageName: node
-  linkType: hard
-
-"to-space-case@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "to-space-case@npm:1.0.0"
-  dependencies:
-    to-no-case: "npm:^1.0.0"
-  checksum: 157cebe3e98e7cb465fe1978cf26450cc8ea8e637a01039854fac7ed60ad074e5e18b32333cc5f30df81b81ca374d63df768cd4c1fa0fe672605f965376227f4
   languageName: node
   linkType: hard
 

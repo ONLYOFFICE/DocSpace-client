@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 import FilesSelector from "@docspace/shared/selectors/Files";
 import { DeviceType } from "@docspace/shared/enums";
@@ -15,16 +16,16 @@ const SelectFolderDialog = ({
   titleSelectorFolder,
   fileInfo,
 }: SelectFolderDialogProps) => {
+  const { t } = useTranslation(["Common", "Editor"]);
+
   return (
     <FilesSelector
       socketHelper={socketHelper}
       socketSubscribers={socketHelper.socketSubscribers}
       disabledItems={[]}
-      // footerInputHeader={t("FileName")}
-      footerInputHeader="FileName"
+      footerInputHeader={t("Editor:FileName")}
       currentFooterInputValue={titleSelectorFolder}
-      // footerCheckboxLabel={t("OpenSavedDocument")}
-      footerCheckboxLabel="OpenSavedDocument"
+      footerCheckboxLabel={t("Editor:OpenSavedDocument")}
       isPanelVisible={isVisible}
       onClose={onClose}
       onCloseAction={onClose}
@@ -34,23 +35,25 @@ const SelectFolderDialog = ({
       currentFolderId={fileInfo.folderId}
       rootFolderType={fileInfo.rootFolderType}
       withHeader
-      headerLabel="HeaderLabel"
-      searchPlaceholder=""
+      headerLabel={t("Common:SaveButton")}
+      searchPlaceholder={t("Common:Search")}
       emptyScreenDescription=""
       emptyScreenHeader=""
       embedded={false}
-      acceptButtonLabel=""
-      cancelButtonLabel=""
+      acceptButtonLabel={t("Common:SaveHereButton")}
+      cancelButtonLabel={t("Common:CancelButton")}
       searchEmptyScreenDescription=""
-      searchEmptyScreenHeader=""
+      searchEmptyScreenHeader={t("Common:NotFoundTitle")}
       withFooterInput
       withCancelButton
-      withFooterCheckbox
-      descriptionText=""
+      withFooterCheckbox={fileInfo.fileExst !== "fb2"}
+      descriptionText={t("Common:SelectDOCXFormat")}
       currentDeviceType={DeviceType.desktop}
       getFilesArchiveError={() => ""}
       parentId={0}
       getIsDisabled={() => false}
+      acceptButtonId="select-file-modal-submit"
+      cancelButtonId="select-file-modal-cancel"
     />
   );
 };

@@ -24,6 +24,7 @@
     "@use-gesture/react": "^10.2.24",
     "attr-accept": "^2.2.2",
     "axios": "^0.22.0",
+    "cnbuilder": "^3.1.0",
     "cross-fetch": "3.1.5",
     "csvjson-json_beautifier": "^5.0.4",
     "email-addresses": "^3.1.0",
@@ -47,9 +48,9 @@
     "react-autosize-textarea": "^7.1.0",
     "react-content-loader": "^5.1.4",
     "react-countdown": "2.3.5",
-    "react-custom-scrollbars": "^4.2.1",
     "react-device-detect": "^1.17.0",
     "react-dom": "^18.2.0",
+    "react-draggable": "^4.4.6",
     "react-dropzone": "^11.7.1",
     "react-hammerjs": "^1.0.1",
     "react-i18next": "^13.2.1",
@@ -75,7 +76,8 @@
     "socket.io-client": "^4.6.1",
     "styled-components": "^5.3.9",
     "utif": "^3.1.0",
-    "workbox-window": "^6.5.4"
+    "workbox-window": "^6.5.4",
+    "zoom-level": "^2.5.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.21.0",
@@ -171,3 +173,4 @@
     "react-dom": "^18.2.0"
   }
 }
+

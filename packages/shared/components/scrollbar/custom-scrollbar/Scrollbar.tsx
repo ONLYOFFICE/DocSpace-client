@@ -125,10 +125,7 @@ export const ScrollbarContext: React.Context<ScrollbarContextValue> =
     parentScrollbar: null,
   } as ScrollbarContextValue);
 
-export default class Scrollbar extends React.Component<
-  ScrollbarProps,
-  ScrollbarState
-> {
+class Scrollbar extends React.Component<ScrollbarProps, ScrollbarState> {
   // eslint-disable-next-line react/static-property-placement
   static contextType = ScrollbarContext;
 
@@ -1522,3 +1519,4 @@ export default class Scrollbar extends React.Component<
   };
 }
 
+export default Scrollbar;

@@ -1,5 +1,5 @@
 import { cnb } from "cnbuilder";
-import * as React from "react";
+import React from "react";
 import { AxisDirection, ElementPropsWithElementRefAndRenderer } from "./types";
 import { isFun, isUndef, renderDivWithRenderer } from "./util";
 
@@ -16,10 +16,7 @@ export type ScrollbarTrackProps = ElementPropsWithElementRefAndRenderer & {
   ref?: (ref: ScrollbarTrack | null) => void;
 };
 
-export default class ScrollbarTrack extends React.Component<
-  ScrollbarTrackProps,
-  unknown
-> {
+class ScrollbarTrack extends React.Component<ScrollbarTrackProps, unknown> {
   public element: HTMLDivElement | null = null;
 
   public componentDidMount(): void {
@@ -108,3 +105,5 @@ export default class ScrollbarTrack extends React.Component<
     return renderDivWithRenderer(props, this.elementRef);
   }
 }
+
+export default ScrollbarTrack;

@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-useless-constructor */
 import { cnb } from "cnbuilder";
-import * as React from "react";
+import React from "react";
 import { DraggableCore, DraggableData, DraggableEvent } from "react-draggable";
 import { AxisDirection, ElementPropsWithElementRefAndRenderer } from "./types";
 import { isBrowser, isFun, isUndef, renderDivWithRenderer } from "./util";
@@ -19,10 +20,7 @@ export type ScrollbarThumbProps = ElementPropsWithElementRefAndRenderer & {
   ref?: (ref: ScrollbarThumb | null) => void;
 };
 
-export default class ScrollbarThumb extends React.Component<
-  ScrollbarThumbProps,
-  unknown
-> {
+class ScrollbarThumb extends React.Component<ScrollbarThumbProps, unknown> {
   private static selectStartReplacer = () => false;
 
   public element: HTMLDivElement | null = null;
@@ -167,7 +165,7 @@ export default class ScrollbarThumb extends React.Component<
       /* istanbul ignore next */
       this.initialOffsetY = ev.offsetY;
     } else {
-      const rect: ClientRect = this.element.getBoundingClientRect();
+      const rect: DOMRect = this.element.getBoundingClientRect();
       this.initialOffsetX =
         (ev.clientX || (ev as unknown as TouchEvent).touches[0].clientX) -
         rect.left;
@@ -232,3 +230,5 @@ export default class ScrollbarThumb extends React.Component<
     );
   }
 }
+
+export default ScrollbarThumb;

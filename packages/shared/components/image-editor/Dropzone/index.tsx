@@ -70,9 +70,12 @@ const Dropzone = ({
       throw new Error("recursion depth exceeded");
     }
 
-    return new Promise(() => {
-      resizeRecursiveAsync(img, canvas, compressionRatio + 1, depth + 1);
-    });
+    return new Promise((resolve) => {
+      // eslint-disable-next-line no-promise-executor-return
+      return resolve(file);
+    }).then(() =>
+      resizeRecursiveAsync(img, canvas, compressionRatio - 0.1, depth + 1),
+    );
   }
 
   const onDrop = async ([file]: [File]) => {

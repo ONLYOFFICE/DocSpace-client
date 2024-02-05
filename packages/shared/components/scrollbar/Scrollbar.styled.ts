@@ -1,6 +1,7 @@
-import Scrollbar from "react-scrollbars-custom";
 import styled from "styled-components";
 import { isIOS, isIOS13, isIPad13 } from "react-device-detect";
+
+import { Scrollbar } from "../../utils/custom-scrollbar";
 
 import { Base } from "../../themes";
 import { mobile, desktop, tablet } from "../../utils";

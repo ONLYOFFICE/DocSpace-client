@@ -184,19 +184,31 @@
         const winHtml = `<!DOCTYPE html>
           <html>
               <head>
+                  <script src="${scriptUrl}"></script>
                   <title>DocSpace</title>
               </head>
               <body style="margin:0;">
                   <div id=${config.frameId}></div>
-                  <script type="text/javascript" id="integration" async src="${scriptUrl}" onload='window.DocSpace.SDK.initFrame(${JSON.stringify(config)})'></script>
+                  <script id="integration">
+                    const config = {...${JSON.stringify(config, function (key, val) {
+                      return typeof val === "function" ? "" + val : val;
+                    })}, events: {
+                      onSelectCallback: eval(${config.events.onSelectCallback + ""}),
+                      onCloseCallback: eval(${config.events.onCloseCallback + ""}),
+                      onAppReady: eval(${config.events.onAppReady + ""}),
+                      onAppError: eval(${config.events.onAppError + ""}),
+                      onEditorCloseCallback: eval(${config.events.onEditorCloseCallback + ""}),
+                      onAuthSuccess: eval(${config.events.onAuthSuccess + ""}),
+                      onSignOut: eval(${config.events.onSignOut + ""}),
+                    }}
+                    window.DocSpace.SDK.initFrame(config)
+                  </script>
               </body>
           </html>`;
 
         const winUrl = URL.createObjectURL(new Blob([winHtml], { type: "text/html" }));
 
-        const selectorWindow = window.open(winUrl, "_blank", `width=610,height=778`);
-
-        // selectorWindow.document.write("");
+        window.open(winUrl, "_blank", `width=610,height=778`);
       });
 
       button.setAttribute("id", config.frameId + "-container");

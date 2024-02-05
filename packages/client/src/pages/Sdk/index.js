@@ -144,8 +144,8 @@ const Sdk = ({
 
   const onSelectRoom = useCallback(
     async (data) => {
-      if (data[0].logo.large !== "") {
-        data[0].icon = toRelativeUrl(data[0].logo.large);
+      if (data[0].logo?.large !== "") {
+        data[0].icon = toRelativeUrl(data[0].logo?.large);
       } else {
         data[0].icon = await getRoomsIcon(data[0].roomType, false, 32);
       }

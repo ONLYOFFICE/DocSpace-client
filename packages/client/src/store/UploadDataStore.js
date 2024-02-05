@@ -918,7 +918,7 @@ class UploadDataStore {
       reject, // reject cb
       isAsyncUpload = false, // async upload checker
       isFinalize = false, // is finalize chunk
-      isUploaded, // needed for progress, files is uploaded, awaiting finalized chunk
+      allChunkUploaded, // needed for progress, files is uploaded, awaiting finalized chunk
     } = chunkUploadObj;
 
     if (!res.data.data && res.data.message) {
@@ -936,7 +936,7 @@ class UploadDataStore {
 
       newPercent = this.getNewPercent(uploadedSize, indexOfFile);
     } else {
-      if (!uploaded && !isUploaded) {
+      if (!uploaded && !allChunkUploaded) {
         uploadedSize =
           fileSize <= this.filesSettingsStore.chunkUploadSize
             ? fileSize
@@ -1095,7 +1095,7 @@ class UploadDataStore {
           reject,
           isAsyncUpload: true,
           isFinalize: false,
-          isUploaded: allIsUploaded === 0,
+          allChunkUploaded: allIsUploaded === 0,
         });
 
         let finalizeChunk = -1;

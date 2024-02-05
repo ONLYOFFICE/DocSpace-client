@@ -125,6 +125,7 @@ const useFilesHelper = ({
               requestRunning.current = false;
               return;
             }
+
             await getRootData();
 
             if (onSetBaseFolderPath && isArchive) {
@@ -167,16 +168,19 @@ const useFilesHelper = ({
           let currentFolderIndex = -1;
 
           const breadCrumbs: TBreadCrumb[] = pathParts.map(
-            ({
-              id: breadCrumbId,
-              title,
-              roomType,
-            }: {
-              id: number | string;
-              title: string;
-              roomType?: number;
-            }) => {
-              if (!foundParentId) {
+            (
+              {
+                id: breadCrumbId,
+                title,
+                roomType,
+              }: {
+                id: number | string;
+                title: string;
+                roomType?: number;
+              },
+              index,
+            ) => {
+              if (!foundParentId && disabledItems) {
                 currentFolderIndex = disabledItems.findIndex((x) => x === id);
               }
 
@@ -184,15 +188,19 @@ const useFilesHelper = ({
                 foundParentId = true;
                 setIsSelectedParentFolder(true);
               }
-              requestRunning.current = false;
+
               return {
                 label: title,
                 id: breadCrumbId,
-                isRoom: roomsFolderId === id,
+                isRoom: roomsFolderId === id || index === 0,
                 roomType,
               };
             },
           );
+
+          breadCrumbs.forEach((item, idx) => {
+            if (item.roomType) breadCrumbs[idx].isRoom = true;
+          });
 
           if (!isThirdParty && !isRoomsOnly)
             breadCrumbs.unshift({ ...DEFAULT_BREAD_CRUMB });
@@ -218,6 +226,8 @@ const useFilesHelper = ({
 
       try {
         await setSettings(id);
+
+        requestRunning.current = false;
       } catch (e) {
         sessionStorage.removeItem("filesSelectorPath");
         if (isThirdParty && rootThirdPartyId) {
@@ -237,6 +247,7 @@ const useFilesHelper = ({
         }
 
         requestRunning.current = false;
+
         getRootData?.();
 
         if (onSetBaseFolderPath) {

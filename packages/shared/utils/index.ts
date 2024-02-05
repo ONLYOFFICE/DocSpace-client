@@ -113,6 +113,6 @@ export const presentInArray = (
   caseInsensitive = false,
 ) => {
   const pattern = caseInsensitive ? search.toLowerCase() : search;
-  const result = array.findIndex((item) => item === pattern);
+  const result = array?.findIndex((item) => item === pattern);
   return result !== -1;
 };

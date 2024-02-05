@@ -306,6 +306,7 @@ const FilesSelector = ({
         newBreadCrumbs.splice(idx + 1, newBreadCrumbs.length - idx - 1);
 
         setBreadCrumbs(newBreadCrumbs);
+
         setSelectedItemId(item.id);
         if (item.isRoom) {
           setSelectedItemType("rooms");

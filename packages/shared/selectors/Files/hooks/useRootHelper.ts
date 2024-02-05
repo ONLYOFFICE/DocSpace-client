@@ -28,6 +28,7 @@ const useRootHelper = ({
     requestRunning.current = true;
     setBreadCrumbs([DEFAULT_BREAD_CRUMB]);
     setIsRoot(true);
+    setIsNextPageLoading(true);
     setIsBreadCrumbsLoading(false);
     const newItems: TSelectorItem[] = [];
 

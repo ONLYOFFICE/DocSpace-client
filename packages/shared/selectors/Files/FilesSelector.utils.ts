@@ -41,7 +41,7 @@ export const convertFoldersToItems: (
       rootFolderType,
       isFolder: true,
       roomType,
-      isDisabled: filterParam ? false : disabledItems.includes(id),
+      isDisabled: filterParam ? false : disabledItems?.includes(id),
     };
   });
 

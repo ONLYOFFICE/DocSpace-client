@@ -72,16 +72,13 @@ const Scrollbar = React.forwardRef((props: ScrollbarProps, ref) => {
   const renderScroller = React.useCallback(
     (libProps: { elementRef: React.RefObject<HTMLDivElement> }) => {
       const { elementRef, ...restLibProps } = libProps;
-      console.log(elementRef);
+
       return (
         <div
           {...restLibProps}
           key="scroll-renderer-div"
           className={classNames("scroller", scrollclass || "") || "scroller"}
-          ref={(ref) => {
-            console.log(ref);
-            return elementRef(ref);
-          }}
+          ref={elementRef}
           onScroll={onScroll}
         />
       );

@@ -22,9 +22,9 @@ class ScrollbarTrack extends React.Component<ScrollbarTrackProps, unknown> {
   public componentDidMount(): void {
     if (!this.element) {
       this.setState(() => {
-        throw new Error(
-          "Element was not created. Possibly you haven't provided HTMLDivElement to renderer's `elementRef` function.",
-        );
+        // throw new Error(
+        //   "Element was not created. Possibly you haven't provided HTMLDivElement to renderer's `elementRef` function.",
+        // );
       });
       return;
     }

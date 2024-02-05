@@ -63,7 +63,6 @@ const PeopleSelector = ({
 }: PeopleSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "PeopleSelector",
-    "PeopleTranslations",
     "People",
     "Common",
   ]);

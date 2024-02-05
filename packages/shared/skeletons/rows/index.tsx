@@ -13,7 +13,7 @@ const RowsSkeleton = ({
   for (let i = 0; i < count; i += 1) {
     items.push(<RowSkeleton key={`row_loader_${i}`} {...props} />);
   }
-  return <div>{items}</div>;
+  return <div key="row-skeleton-container">{items}</div>;
 };
 
 export { RowsSkeleton };

@@ -70,7 +70,7 @@ const RoomSelector = ({
   const [items, setItems] = React.useState<TSelectorItem[]>([]);
 
   useEffect(() => {
-    setIsDataReady(!isFirstLoad);
+    setIsDataReady?.(!isFirstLoad);
   }, [isFirstLoad, setIsDataReady]);
 
   const onSearchAction = React.useCallback(

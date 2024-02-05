@@ -607,7 +607,6 @@ export const ViewerPlayer = ({
         >
           <animated.video
             playsInline
-            controls
             ref={videoRef}
             hidden={isAudio}
             preload="metadata"

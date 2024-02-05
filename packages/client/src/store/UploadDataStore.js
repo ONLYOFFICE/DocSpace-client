@@ -905,19 +905,22 @@ class UploadDataStore {
     }
   };
 
-  checkChunkUpload = (
-    t,
-    res,
-    fileSize,
-    index,
-    indexOfFile,
-    path,
-    length,
-    resolve,
-    reject,
-    isAsyncUpload = false,
-    isFinalize = false
-  ) => {
+  checkChunkUpload = (chunkUploadObj) => {
+    const {
+      t,
+      res, // file response data
+      fileSize, // file size
+      index, // chunk index
+      indexOfFile, // file index in the list
+      path, // file path
+      chunksLength, // length of file chunks
+      resolve, // resolve cb
+      reject, // reject cb
+      isAsyncUpload = false, // async upload checker
+      isFinalize = false, // is finalize chunk
+      isUploaded, // needed for progress, files is uploaded, awaiting finalized chunk
+    } = chunkUploadObj;
+
     if (!res.data.data && res.data.message) {
       return reject(res.data.message);
     }
@@ -933,7 +936,7 @@ class UploadDataStore {
 
       newPercent = this.getNewPercent(uploadedSize, indexOfFile);
     } else {
-      if (!uploaded) {
+      if (!uploaded && !isUploaded) {
         uploadedSize =
           fileSize <= this.filesSettingsStore.chunkUploadSize
             ? fileSize
@@ -948,11 +951,7 @@ class UploadDataStore {
       newPercent = this.getFilesPercent(uploadedSize);
     }
 
-    if (isAsyncUpload && !uploaded && newPercent >= 100) {
-      newPercent = 99;
-    }
-
-    const percentCurrentFile = ((index + 1) / length) * 100;
+    const percentCurrentFile = ((index + 1) / chunksLength) * 100;
 
     const fileIndex = this.uploadedFilesHistory.findIndex(
       (f) => f.uniqueId === this.files[indexOfFile].uniqueId
@@ -1072,18 +1071,32 @@ class UploadDataStore {
             ).length - 1
           : 0;
 
-        this.checkChunkUpload(
+        let allIsUploaded;
+        if (this.asyncUploadObj[operationId]) {
+          const finished = this.asyncUploadObj[operationId].chunksArray.filter(
+            (x) => x.isFinished
+          );
+
+          allIsUploaded =
+            this.asyncUploadObj[operationId].chunksArray.length -
+            finished.length -
+            1; // 1 last
+        }
+
+        this.checkChunkUpload({
           t,
           res,
           fileSize,
-          activeLength,
+          index: activeLength,
           indexOfFile,
           path,
-          length,
+          chunksLength: length,
           resolve,
           reject,
-          true
-        );
+          isAsyncUpload: true,
+          isFinalize: false,
+          isUploaded: allIsUploaded === 0,
+        });
 
         let finalizeChunk = -1;
         if (this.asyncUploadObj[operationId]) {
@@ -1106,19 +1119,19 @@ class UploadDataStore {
                 finalizeChunkIndex
               ].onUpload();
 
-            this.checkChunkUpload(
+            this.checkChunkUpload({
               t,
-              finalizeRes,
+              res: finalizeRes,
               fileSize,
-              finalizeIndex,
+              index: finalizeIndex,
               indexOfFile,
               path,
-              length,
+              chunksLength: length,
               resolve,
               reject,
-              true, // isAsyncUpload
-              true //isFinalize
-            );
+              isAsyncUpload: true,
+              isFinalize: true,
+            });
           }
         }
       } catch (error) {
@@ -1197,17 +1210,17 @@ class UploadDataStore {
         const resolve = (res) => Promise.resolve(res);
         const reject = (err) => Promise.reject(err);
 
-        this.checkChunkUpload(
+        this.checkChunkUpload({
           t,
           res,
           fileSize,
           index,
           indexOfFile,
           path,
-          length,
+          chunksLength: length,
           resolve,
-          reject
-        );
+          reject,
+        });
 
         //console.log(`Uploaded chunk ${index}/${length}`, res);
       }

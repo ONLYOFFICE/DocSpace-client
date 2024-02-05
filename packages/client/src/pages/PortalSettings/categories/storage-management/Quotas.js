@@ -15,6 +15,17 @@ import MobileQuotasComponent from "./sub-components/MobileQuotas";
 const helpLink =
   "https://helpcenter.onlyoffice.com/administration/docspace-settings.aspx#StorageManagement_block";
 
+const QuotaPerItemsComponent = ({ isStatisticsAvailable }) => {
+  if (isMobile())
+    return <MobileQuotasComponent isDisabled={!isStatisticsAvailable} />;
+
+  return (
+    <>
+      <QuotaPerRoomComponent isDisabled={!isStatisticsAvailable} />
+      <QuotaPerUserComponent />
+    </>
+  );
+};
 const QuotasComponent = (props) => {
   const { t } = useTranslation("Settings");
 
@@ -50,14 +61,8 @@ const QuotasComponent = (props) => {
           </ColorTheme>
         </Trans>
       </Text>
-      {isMobile() ? (
-        <MobileQuotasComponent isDisabled={!isStatisticsAvailable} />
-      ) : (
-        <>
-          <QuotaPerRoomComponent isDisabled={!isStatisticsAvailable} />
-          <QuotaPerUserComponent />
-        </>
-      )}
+
+      <QuotaPerItemsComponent isStatisticsAvailable={isStatisticsAvailable} />
     </StyledBaseQuotaComponent>
   );
 };

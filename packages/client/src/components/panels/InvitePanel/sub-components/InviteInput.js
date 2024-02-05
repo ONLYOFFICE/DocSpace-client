@@ -24,7 +24,7 @@ import { isBetaLanguage } from "@docspace/shared/utils";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
 
 import AddUsersPanel from "../../AddUsersPanel";
-import { getAccessOptions } from "../utils";
+import { getAccessOptions, getTopFreeRole } from "../utils";
 import AccessSelector from "./AccessSelector";
 
 import {
@@ -203,9 +203,12 @@ const InviteInput = ({
       if (item.isOwner || item.isAdmin)
         item.access = ShareAccessRights.RoomManager;
 
-      if (item.isGroup && checkIfAccessPaid(item.access)) {
-        item.access = ShareAccessRights.Editing;
-        item.warning = t("GroupMaxAvailableRoleWarning");
+      if (isGroup && checkIfAccessPaid(item.access)) {
+        const topFreeRole = getTopFreeRole(t, roomType);
+        item.access = topFreeRole.access;
+        item.warning = t("GroupMaxAvailableRoleWarning", {
+          role: topFreeRole.label,
+        });
       }
 
       const items = removeExist([item, ...inviteItems]);
@@ -258,6 +261,16 @@ const InviteInput = ({
   };
 
   const addItems = (users) => {
+    const topFreeRole = getTopFreeRole(t, roomType);
+    users.forEach((u) => {
+      if (u.isGroup && checkIfAccessPaid(u.access)) {
+        u.access = topFreeRole.access;
+        u.warning = t("GroupMaxAvailableRoleWarning", {
+          role: topFreeRole.label,
+        });
+      }
+    });
+
     const items = [...users, ...inviteItems];
 
     const filtered = removeExist(items);

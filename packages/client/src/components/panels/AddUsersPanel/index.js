@@ -92,7 +92,7 @@ const AddUsersPanel = ({
     const items = [];
 
     for (let item of users) {
-      let currentAccess =
+      const currentAccess =
         item.isOwner || item.isAdmin
           ? ShareAccessRights.RoomManager
           : access?.access;
@@ -103,11 +103,6 @@ const AddUsersPanel = ({
         access: currentAccess,
       };
 
-      if (item.isGroup && checkIfAccessPaid(currentAccess)) {
-        newItem.access = ShareAccessRights.Editing;
-        newItem.warning = t("InviteDialog:GroupMaxAvailableRoleWarning");
-      }
-
       if (item.isGroup) {
         newItem.isGroup = item.isGroup;
         newItem.name = item.label;
@@ -116,7 +111,6 @@ const AddUsersPanel = ({
         newItem.isOwner = item.isOwner;
         newItem.isAdmin = item.isAdmin;
         newItem.email = item.email;
-        newItem.access = currentAccess;
       }
 
       items.push(newItem);

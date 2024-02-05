@@ -74,11 +74,11 @@ const SectionBodyContent = ({ isErrorSettings, user }) => {
   );
 };
 
-export default inject(({ auth, settingsStore }) => {
-  const { settingsIsLoaded } = settingsStore;
+export default inject(({ userStore, filesSettingsStore }) => {
+  const { settingsIsLoaded } = filesSettingsStore;
 
   return {
     settingsIsLoaded,
-    user: auth.userStore.user,
+    user: userStore.user,
   };
 })(observer(SectionBodyContent));

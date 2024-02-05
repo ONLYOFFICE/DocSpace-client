@@ -1,11 +1,17 @@
 import React from "react";
 
-import { StyledControlButtonContainer } from "../Navigation.styled";
+import {
+  StyledControlButtonContainer,
+  StyledTariffWrapper,
+} from "../Navigation.styled";
 import { IControlButtonProps } from "../Navigation.types";
 
 import ToggleInfoPanelButton from "./ToggleInfoPanelBtn";
 import PlusButton from "./PlusBtn";
 import ContextButton from "./ContextBtn";
+import TrashWarning from "./TrashWarning";
+import { Button, ButtonSize } from "../../button";
+import { isTablet } from "../../../utils";
 
 const ControlButtons = ({
   isRootFolder,
@@ -24,11 +30,27 @@ const ControlButtons = ({
   isPublicRoom,
   isTrashFolder,
   isMobile,
+  navigationButtonLabel,
+  onNavigationButtonClick,
+  tariffBar,
+  title,
+  isEmptyPage,
 }: IControlButtonProps) => {
   const toggleInfoPanelAction = () => {
     toggleInfoPanel?.();
     toggleDropBox?.();
   };
+
+  const navigationButtonBlock = navigationButtonLabel ? (
+    <Button
+      className="navigation_button"
+      label={navigationButtonLabel}
+      size={ButtonSize.extraSmall}
+      onClick={onNavigationButtonClick}
+    />
+  ) : null;
+  const children = tariffBar ? React.cloneElement(tariffBar, { title }) : null;
+  const isTabletView = isTablet();
 
   return (
     <StyledControlButtonContainer isFrame={isFrame}>
@@ -124,8 +146,14 @@ const ControlButtons = ({
           )}
         </>
       )}
+      {isDesktop && isTrashFolder && !isEmptyPage && (
+        <TrashWarning title={titles?.trashWarning} />
+      )}
+      {navigationButtonLabel && !isTabletView && navigationButtonBlock}
+      <StyledTariffWrapper>{children && children}</StyledTariffWrapper>
+      {navigationButtonLabel && isTabletView && navigationButtonBlock}
     </StyledControlButtonContainer>
   );
 };
 
-export default React.memo(ControlButtons);
+export default ControlButtons;

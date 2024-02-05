@@ -64,7 +64,7 @@ const EmptyScreen = ({ resetFilter, setIsLoading, theme }) => {
   );
 };
 
-export default inject(({ auth, peopleStore, clientLoadingStore }) => {
+export default inject(({ peopleStore, clientLoadingStore, settingsStore }) => {
   const { resetFilter } = peopleStore;
 
   const { setIsSectionBodyLoading } = clientLoadingStore;
@@ -76,6 +76,6 @@ export default inject(({ auth, peopleStore, clientLoadingStore }) => {
     resetFilter,
 
     setIsLoading,
-    theme: auth.settingsStore.theme,
+    theme: settingsStore.theme,
   };
 })(observer(EmptyScreen));

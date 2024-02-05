@@ -335,7 +335,7 @@ const DirectThirdPartyConnection = (props) => {
   );
 };
 
-export default inject(({ backup, dialogsStore, settingsStore }) => {
+export default inject(({ backup, dialogsStore, filesSettingsStore }) => {
   const {
     clearLocalStorage,
     setSelectedThirdPartyAccount,
@@ -344,7 +344,7 @@ export default inject(({ backup, dialogsStore, settingsStore }) => {
     setConnectedThirdPartyAccount,
     isTheSameThirdPartyAccount,
   } = backup;
-  const { openConnectWindow } = settingsStore.thirdPartyStore;
+  const { openConnectWindow } = filesSettingsStore.thirdPartyStore;
 
   const {
     connectDialogVisible,

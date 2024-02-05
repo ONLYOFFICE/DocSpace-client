@@ -1,4 +1,4 @@
-const combineUrl = (host = "", ...params: string[] | number[]) => {
+const combineUrl = (host = "", ...params: (string | number | undefined)[]) => {
   let url = host.replace(/\/+$/, "");
 
   params.forEach((part) => {

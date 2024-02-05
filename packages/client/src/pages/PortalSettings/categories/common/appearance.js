@@ -13,7 +13,7 @@ import ColorSchemeDialog from "./sub-components/colorSchemeDialog";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { DropDown } from "@docspace/shared/components/drop-down";
-
+import api from "@docspace/shared/api";
 import Loader from "./sub-components/loaderAppearance";
 
 import { StyledComponent, StyledTheme } from "./Appearance/StyledApperance.js";
@@ -29,17 +29,17 @@ const Appearance = (props) => {
   const {
     appearanceTheme,
     selectedThemeId,
-    sendAppearanceTheme,
+
     getAppearanceTheme,
     currentColorScheme,
-    deleteAppearanceTheme,
+
     tReady,
     t,
     currentDeviceType,
     resetIsInit,
   } = props;
 
-  const defaultAppliedColorAccent = currentColorScheme.main.accent;
+  const defaultAppliedColorAccent = currentColorScheme.main?.accent;
   const defaultAppliedColorButtons = currentColorScheme.main.buttons;
 
   const isMobileView = currentDeviceType === DeviceType.mobile;
@@ -84,14 +84,14 @@ const Appearance = (props) => {
   const [isAddThemeDialog, setIsAddThemeDialog] = useState(false);
 
   const [previewAccent, setPreviewAccent] = useState(
-    currentColorScheme.main.accent
+    currentColorScheme.main?.accent
   );
 
   const [colorCheckImg, setColorCheckImg] = useState(
-    currentColorScheme.text.accent
+    currentColorScheme.text?.accent
   );
   const [colorCheckImgHover, setColorCheckImgHover] = useState(
-    currentColorScheme.text.accent
+    currentColorScheme.text?.accent
   );
 
   const [selectThemeId, setSelectThemeId] = useState(selectedThemeId);
@@ -191,7 +191,7 @@ const Appearance = (props) => {
     if (appearanceTheme.length > theme.length) {
       const newTheme = appearanceTheme[appearanceTheme.length - 1];
       const idNewTheme = newTheme.id;
-      const accentNewTheme = newTheme.main.accent;
+      const accentNewTheme = newTheme.main?.accent;
 
       setSelectThemeId(idNewTheme);
       setPreviewAccent(accentNewTheme);
@@ -272,7 +272,7 @@ const Appearance = (props) => {
   const onColorCheck = useCallback(
     (themes) => {
       const colorCheckImg = themes.find((theme) => theme.id == selectThemeId)
-        ?.text.accent;
+        ?.text?.accent;
 
       setColorCheckImg(colorCheckImg);
     },
@@ -285,7 +285,7 @@ const Appearance = (props) => {
       if (!id) return;
 
       const colorCheckImg = appearanceTheme.find((theme) => theme.id == id).text
-        .accent;
+        ?.accent;
 
       setColorCheckImgHover(colorCheckImg);
     },
@@ -305,7 +305,7 @@ const Appearance = (props) => {
       const theme = e.currentTarget;
       const id = +theme.id;
       const accent = appearanceTheme.find((theme) => theme.id == id).main
-        .accent;
+        ?.accent;
 
       setPreviewAccent(accent);
       setSelectThemeId(id);
@@ -321,7 +321,7 @@ const Appearance = (props) => {
     if (!selectThemeId) return;
 
     try {
-      await sendAppearanceTheme({ selected: selectThemeId });
+      await api.settings.sendAppearanceTheme({ selected: selectThemeId });
       await getAppearanceTheme();
       toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
     } catch (error) {
@@ -331,12 +331,7 @@ const Appearance = (props) => {
     saveToSessionStorage("defaultColorId", selectThemeId);
     saveToSessionStorage("selectColorAccent", previewAccent);
     saveToSessionStorage("defaultColorAccent", previewAccent);
-  }, [
-    selectThemeId,
-    setIsDisabledSaveButton,
-    sendAppearanceTheme,
-    getAppearanceTheme,
-  ]);
+  }, [selectThemeId, setIsDisabledSaveButton, getAppearanceTheme]);
 
   // Open HexColorPicker
   const onClickColor = (e) => {
@@ -351,21 +346,24 @@ const Appearance = (props) => {
 
   const onClickDeleteModal = useCallback(async () => {
     try {
-      await deleteAppearanceTheme(selectThemeId);
+      await api.settings.deleteAppearanceTheme(selectThemeId);
       await getAppearanceTheme();
 
       if (selectedThemeId !== selectThemeId) {
         setSelectThemeId(selectedThemeId);
-        setPreviewAccent(currentColorScheme.main.accent);
+        setPreviewAccent(currentColorScheme.main?.accent);
       }
 
       if (selectedThemeId === selectThemeId) {
         setSelectThemeId(appearanceTheme[0].id);
-        setPreviewAccent(appearanceTheme[0].main.accent);
+        setPreviewAccent(appearanceTheme[0].main?.accent);
       }
 
       saveToSessionStorage("selectColorId", appearanceTheme[0].id);
-      saveToSessionStorage("selectColorAccent", appearanceTheme[0].main.accent);
+      saveToSessionStorage(
+        "selectColorAccent",
+        appearanceTheme[0].main?.accent
+      );
 
       onCloseDialogDelete();
 
@@ -373,13 +371,7 @@ const Appearance = (props) => {
     } catch (error) {
       toastr.error(error);
     }
-  }, [
-    selectThemeId,
-    selectedThemeId,
-    onCloseDialogDelete,
-    deleteAppearanceTheme,
-    getAppearanceTheme,
-  ]);
+  }, [selectThemeId, selectedThemeId, onCloseDialogDelete, getAppearanceTheme]);
 
   const onCloseColorSchemeDialog = () => {
     setShowColorSchemeDialog(false);
@@ -414,10 +406,10 @@ const Appearance = (props) => {
   const onClickEdit = () => {
     appearanceTheme.map((item) => {
       if (item.id === selectThemeId) {
-        setCurrentColorAccent(item.main.accent.toUpperCase());
+        setCurrentColorAccent(item.main?.accent.toUpperCase());
         setCurrentColorButtons(item.main.buttons.toUpperCase());
 
-        setAppliedColorAccent(item.main.accent.toUpperCase());
+        setAppliedColorAccent(item.main?.accent.toUpperCase());
         setAppliedColorButtons(item.main.buttons.toUpperCase());
       }
     });
@@ -502,7 +494,7 @@ const Appearance = (props) => {
   const onSaveNewThemes = useCallback(
     async (theme) => {
       try {
-        await sendAppearanceTheme({ theme: theme });
+        await api.settings.sendAppearanceTheme({ theme: theme });
         await getAppearanceTheme();
 
         toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
@@ -510,22 +502,22 @@ const Appearance = (props) => {
         toastr.error(error);
       }
     },
-    [sendAppearanceTheme, getAppearanceTheme]
+    [getAppearanceTheme]
   );
 
   const onSaveChangedThemes = useCallback(
     async (editTheme) => {
       try {
-        await sendAppearanceTheme({ theme: editTheme });
+        await api.settings.sendAppearanceTheme({ theme: editTheme });
         await getAppearanceTheme();
-        setPreviewAccent(editTheme.main.accent);
+        setPreviewAccent(editTheme.main?.accent);
 
         toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
       } catch (error) {
         toastr.error(error);
       }
     },
-    [sendAppearanceTheme, getAppearanceTheme]
+    [getAppearanceTheme]
   );
 
   const onSaveColorSchemeDialog = () => {
@@ -666,7 +658,7 @@ const Appearance = (props) => {
                   key={index}
                   id={item.id}
                   colorCheckImgHover={colorCheckImgHover}
-                  style={{ background: item.main.accent }}
+                  style={{ background: item.main?.accent }}
                   onClick={onColorSelection}
                   onMouseOver={onColorCheckImgHover}
                 >
@@ -692,7 +684,7 @@ const Appearance = (props) => {
                   <StyledTheme
                     key={index}
                     id={item.id}
-                    style={{ background: item.main.accent }}
+                    style={{ background: item.main?.accent }}
                     colorCheckImgHover={colorCheckImgHover}
                     onClick={onColorSelection}
                     onMouseOver={onColorCheckImgHover}
@@ -775,15 +767,14 @@ const Appearance = (props) => {
   );
 };
 
-export default inject(({ auth, common }) => {
-  const { settingsStore } = auth;
+export default inject(({ settingsStore, common }) => {
   const {
     appearanceTheme,
     selectedThemeId,
-    sendAppearanceTheme,
+
     getAppearanceTheme,
     currentColorScheme,
-    deleteAppearanceTheme,
+
     theme,
     currentDeviceType,
   } = settingsStore;
@@ -793,10 +784,10 @@ export default inject(({ auth, common }) => {
   return {
     appearanceTheme,
     selectedThemeId,
-    sendAppearanceTheme,
+
     getAppearanceTheme,
     currentColorScheme,
-    deleteAppearanceTheme,
+
     currentDeviceType,
     theme,
     resetIsInit,

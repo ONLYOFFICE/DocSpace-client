@@ -8,12 +8,12 @@ import { Text } from "../../text";
 
 import { Search } from "./Search";
 import { SelectAll } from "./SelectAll";
-import { Item } from "./Item";
 import { EmptyScreen } from "./EmptyScreen";
 import { BreadCrumbs } from "./BreadCrumbs";
 
 import { StyledBody } from "../Selector.styled";
 import { BodyProps } from "../Selector.types";
+import { Item } from "./Item";
 
 const CONTAINER_PADDING = 16;
 const HEADER_HEIGHT = 54;
@@ -50,6 +50,7 @@ const Body = ({
   loadMoreItems,
   hasNextPage,
   totalItems,
+  renderCustomItem,
   isLoading,
   searchLoader,
   rowLoader,
@@ -223,6 +224,7 @@ const Body = ({
                     isMultiSelect: isMultiSelect || false,
                     rowLoader,
                     isItemLoaded,
+                    renderCustomItem,
                   }}
                   itemSize={48}
                   onItemsRendered={onItemsRendered}

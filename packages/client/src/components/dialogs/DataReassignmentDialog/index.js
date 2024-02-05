@@ -248,7 +248,7 @@ const DataReassignmentDialog = ({
   );
 };
 
-export default inject(({ auth, peopleStore, setup }) => {
+export default inject(({ settingsStore, peopleStore, setup, userStore }) => {
   const {
     setDataReassignmentDialogVisible,
     dataReassignmentDeleteProfile,
@@ -256,7 +256,7 @@ export default inject(({ auth, peopleStore, setup }) => {
     isDeletingUserWithReassignment,
     setIsDeletingUserWithReassignment,
   } = peopleStore.dialogStore;
-  const { currentColorScheme, dataReassignmentUrl } = auth.settingsStore;
+  const { currentColorScheme, dataReassignmentUrl } = settingsStore;
   const { setSelected } = peopleStore.selectionStore;
   const {
     dataReassignment,
@@ -264,13 +264,13 @@ export default inject(({ auth, peopleStore, setup }) => {
     dataReassignmentTerminate,
   } = setup;
 
-  const { user: currentUser } = peopleStore.authStore.userStore;
+  const { user: currentUser } = userStore;
 
   const { getUsersList, needResetUserSelection } = peopleStore.usersStore;
 
   return {
     setDataReassignmentDialogVisible,
-    theme: auth.settingsStore.theme,
+    theme: settingsStore.theme,
     currentColorScheme,
     dataReassignment,
     currentUser,

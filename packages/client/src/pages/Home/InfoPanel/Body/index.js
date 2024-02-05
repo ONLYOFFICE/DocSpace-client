@@ -130,40 +130,42 @@ const InfoPanelBodyContent = ({
   );
 };
 
-export default inject(({ auth, selectedFolderStore, oformsStore }) => {
-  const {
-    infoPanelSelection,
-    setNewInfoPanelSelection,
-    isItemChanged,
-    roomsView,
-    fileView,
-    getIsFiles,
-    getIsRooms,
-    getIsAccounts,
-    getIsGallery,
-    infoPanelSelectedItems,
-    getInfoPanelSelectedFolder,
-  } = auth.infoPanelStore;
+export default inject(
+  ({ selectedFolderStore, oformsStore, infoPanelStore }) => {
+    const {
+      infoPanelSelection,
+      setNewInfoPanelSelection,
+      isItemChanged,
+      roomsView,
+      fileView,
+      getIsFiles,
+      getIsRooms,
+      getIsAccounts,
+      getIsGallery,
+      infoPanelSelectedItems,
+      getInfoPanelSelectedFolder,
+    } = infoPanelStore;
 
-  const { gallerySelected } = oformsStore;
-  const { isRootFolder } = selectedFolderStore;
+    const { gallerySelected } = oformsStore;
+    const { isRootFolder } = selectedFolderStore;
 
-  return {
-    infoPanelSelection,
-    setNewInfoPanelSelection,
-    isItemChanged,
+    return {
+      infoPanelSelection,
+      setNewInfoPanelSelection,
+      isItemChanged,
 
-    roomsView,
-    fileView,
-    getIsFiles,
-    getIsRooms,
-    getIsAccounts,
-    getIsGallery,
+      roomsView,
+      fileView,
+      getIsFiles,
+      getIsRooms,
+      getIsAccounts,
+      getIsGallery,
 
-    selectedItems: infoPanelSelectedItems,
-    selectedFolder: getInfoPanelSelectedFolder(),
+      selectedItems: infoPanelSelectedItems,
+      selectedFolder: getInfoPanelSelectedFolder(),
 
-    isRootFolder,
-    gallerySelected,
-  };
-})(observer(InfoPanelBodyContent));
+      isRootFolder,
+      gallerySelected,
+    };
+  }
+)(observer(InfoPanelBodyContent));

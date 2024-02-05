@@ -208,8 +208,8 @@ NavMenu.defaultProps = {
   isDesktop: false,
 };
 
-const NavMenuWrapper = inject(({ auth }) => {
-  const { settingsStore, isAuthenticated, isLoaded, language } = auth;
+const NavMenuWrapper = inject(({ authStore, settingsStore }) => {
+  const { isAuthenticated, isLoaded, language } = authStore;
   const {
     isDesktopClient: isDesktop,
     frameConfig,

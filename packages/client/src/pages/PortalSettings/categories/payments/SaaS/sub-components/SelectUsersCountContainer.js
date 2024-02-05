@@ -313,9 +313,7 @@ const SelectUsersCountContainer = ({
   );
 };
 
-export default inject(({ auth, payments }) => {
-  const { paymentQuotasStore } = auth;
-
+export default inject(({ paymentQuotasStore, payments }) => {
   const {
     isLoading,
     minAvailableManagersValue,

@@ -102,37 +102,44 @@ const History = ({
   );
 };
 
-export default inject(({ auth, filesStore, filesActionsStore }) => {
-  const { userStore } = auth;
-  const {
-    infoPanelSelection,
-    selectionHistory,
-    setSelectionHistory,
-    historyWithFileList,
-    getInfoPanelItemIcon,
-    openUser,
-  } = auth.infoPanelStore;
-  const { personal, culture } = auth.settingsStore;
+export default inject(
+  ({
+    settingsStore,
+    filesStore,
+    filesActionsStore,
+    infoPanelStore,
+    userStore,
+  }) => {
+    const {
+      infoPanelSelection,
+      selectionHistory,
+      setSelectionHistory,
+      historyWithFileList,
+      getInfoPanelItemIcon,
+      openUser,
+    } = infoPanelStore;
+    const { personal, culture } = settingsStore;
 
-  const { getHistory } = filesStore;
-  const { checkAndOpenLocationAction } = filesActionsStore;
+    const { getHistory } = filesStore;
+    const { checkAndOpenLocationAction } = filesActionsStore;
 
-  const { user } = userStore;
-  const isVisitor = user.isVisitor;
-  const isCollaborator = user.isCollaborator;
+    const { user } = userStore;
+    const isVisitor = user.isVisitor;
+    const isCollaborator = user.isCollaborator;
 
-  return {
-    personal,
-    culture,
-    selectionHistory,
-    setSelectionHistory,
-    historyWithFileList,
-    infoPanelSelection,
-    getInfoPanelItemIcon,
-    getHistory,
-    checkAndOpenLocationAction,
-    openUser,
-    isVisitor,
-    isCollaborator,
-  };
-})(withTranslation(["InfoPanel", "Common", "Translations"])(observer(History)));
+    return {
+      personal,
+      culture,
+      selectionHistory,
+      setSelectionHistory,
+      historyWithFileList,
+      infoPanelSelection,
+      getInfoPanelItemIcon,
+      getHistory,
+      checkAndOpenLocationAction,
+      openUser,
+      isVisitor,
+      isCollaborator,
+    };
+  }
+)(withTranslation(["InfoPanel", "Common", "Translations"])(observer(History)));

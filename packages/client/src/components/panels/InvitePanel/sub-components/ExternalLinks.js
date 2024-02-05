@@ -230,8 +230,8 @@ const ExternalLinks = ({
   );
 };
 
-export default inject(({ auth, dialogsStore, filesStore }) => {
-  const { isOwner } = auth.userStore.user;
+export default inject(({ userStore, dialogsStore, filesStore }) => {
+  const { isOwner } = userStore.user;
   const { invitePanelOptions } = dialogsStore;
   const { setInvitationLinks } = filesStore;
   const { roomId, hideSelector, defaultAccess } = invitePanelOptions;

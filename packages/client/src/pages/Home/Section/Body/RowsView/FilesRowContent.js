@@ -20,7 +20,7 @@ import { Base } from "@docspace/shared/themes";
 import { ROOMS_TYPE_TRANSLATIONS } from "@docspace/shared/constants";
 
 import { getFileTypeName } from "../../../../../helpers/filesUtils";
-import { SortByFieldName } from "../../../../../helpers/constants";
+import { SortByFieldName } from "SRC_DIR/helpers/enums";
 
 const SimpleFilesRowContent = styled(RowContent)`
   .row-main-container-wrapper {
@@ -292,7 +292,7 @@ const FilesRowContent = ({
   );
 };
 
-export default inject(({ auth, treeFoldersStore, filesStore }) => {
+export default inject(({ settingsStore, treeFoldersStore, filesStore }) => {
   const { filter, roomsFilter } = filesStore;
   const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
     treeFoldersStore;
@@ -302,7 +302,7 @@ export default inject(({ auth, treeFoldersStore, filesStore }) => {
 
   return {
     filterSortBy,
-    theme: auth.settingsStore.theme,
+    theme: settingsStore.theme,
     isTrashFolder: isRecycleBinFolder,
   };
 })(

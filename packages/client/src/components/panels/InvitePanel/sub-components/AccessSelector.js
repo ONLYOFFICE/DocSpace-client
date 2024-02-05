@@ -106,8 +106,8 @@ const AccessSelector = ({
   );
 };
 
-export default inject(({ auth }) => {
-  const { standalone } = auth.settingsStore;
+export default inject(({ settingsStore }) => {
+  const { standalone } = settingsStore;
 
   return {
     standalone,

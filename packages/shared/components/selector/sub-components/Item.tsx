@@ -28,8 +28,14 @@ const compareFunction = (prevProps: ItemProps, nextProps: ItemProps) => {
 };
 
 const Item = React.memo(({ index, style, data }: ItemProps) => {
-  const { items, onSelect, isMultiSelect, isItemLoaded, rowLoader }: Data =
-    data;
+  const {
+    items,
+    onSelect,
+    isMultiSelect,
+    isItemLoaded,
+    rowLoader,
+    renderCustomItem,
+  }: Data = data;
 
   const isLoaded = isItemLoaded(index);
 
@@ -39,7 +45,8 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
     if (!item || (item && !item.id))
       return <div style={style}>{rowLoader}</div>;
 
-    const { label, avatar, icon, role, isSelected, isDisabled, color } = item;
+    const { label, avatar, icon, role, isSelected, isDisabled, color, email } =
+      item;
 
     const currentRole = role || AvatarRole.user;
 
@@ -77,22 +84,29 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
             role={currentRole}
             size={AvatarSize.min}
           />
-        ) : defaultIcon ? (
-          <RoomIcon color={color} title={label} />
         ) : (
-          <img className="room-logo" src={icon} alt="room logo" />
+          <RoomIcon
+            color={color}
+            title={label}
+            showDefault={defaultIcon}
+            imgClassName="room-logo"
+            imgSrc={icon}
+          />
         )}
-
-        <Text
-          className="label"
-          fontWeight={600}
-          fontSize="14px"
-          noSelect
-          truncate
-          dir="auto"
-        >
-          {label}
-        </Text>
+        {renderCustomItem ? (
+          renderCustomItem(label, role, email)
+        ) : (
+          <Text
+            className="label"
+            fontWeight={600}
+            fontSize="14px"
+            noSelect
+            truncate
+            dir="auto"
+          >
+            {label}
+          </Text>
+        )}
 
         {isMultiSelect && (
           <Checkbox
@@ -109,5 +123,4 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
 }, compareFunction);
 
 Item.displayName = "Item";
-
 export { Item };

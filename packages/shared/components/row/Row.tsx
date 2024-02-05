@@ -43,6 +43,7 @@ const Row = (props: RowProps) => {
     inProgress,
     rowContextClose,
     className,
+    badgeUrl,
   } = props;
 
   const cm = useRef<null | {
@@ -205,6 +206,7 @@ const Row = (props: RowProps) => {
           onHide={rowContextClose}
           isRoom={isRoom}
           isArchive={isArchive}
+          badgeUrl={badgeUrl}
         />
       </StyledOptionButton>
     </StyledRow>

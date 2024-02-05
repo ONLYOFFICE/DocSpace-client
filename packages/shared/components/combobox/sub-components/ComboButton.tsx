@@ -109,9 +109,7 @@ const ComboButton = (props: ComboButtonProps) => {
         >
           {selectedOption?.label}
         </Text>
-      ) : (
-        <></>
-      )}
+      ) : null}
       <StyledArrowIcon
         displayArrow={displayArrow}
         isOpen={isOpen}
@@ -151,4 +149,3 @@ ComboButton.defaultProps = {
 };
 
 export { ComboButton };
-

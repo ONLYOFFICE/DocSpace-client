@@ -147,8 +147,8 @@ const DeepLink = ({
   );
 };
 
-export default inject(({ auth }) => {
-  const { theme, currentDeviceType } = auth.settingsStore;
+export default inject(({ settingsStore }) => {
+  const { theme, currentDeviceType } = settingsStore;
 
   return {
     theme,

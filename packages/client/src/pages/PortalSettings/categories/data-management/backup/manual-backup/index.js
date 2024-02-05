@@ -22,7 +22,7 @@ import {
 import { FloatingButton } from "@docspace/shared/components/floating-button";
 import { getSettingsThirdParty } from "@docspace/shared/api/files";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-
+import { isManagement } from "@docspace/shared/utils/common";
 let selectedStorageType = "";
 
 class ManualBackup extends React.Component {
@@ -136,14 +136,13 @@ class ManualBackup extends React.Component {
       setDownloadingProgress,
       t,
       clearLocalStorage,
-      isManagement,
     } = this.props;
     const { TemporaryModuleType } = BackupStorageType;
 
     clearLocalStorage();
     saveToLocalStorage("LocalCopyStorageType", "TemporaryStorage");
     try {
-      await startBackup(`${TemporaryModuleType}`, null, false, isManagement);
+      await startBackup(`${TemporaryModuleType}`, null, false, isManagement());
       setDownloadingProgress(1);
       getIntervalProgress(t);
     } catch (e) {
@@ -183,7 +182,6 @@ class ManualBackup extends React.Component {
       setTemporaryLink,
       getStorageParams,
       saveToLocalStorage,
-      isManagement,
     } = this.props;
 
     clearLocalStorage();
@@ -206,7 +204,7 @@ class ManualBackup extends React.Component {
     );
 
     try {
-      await startBackup(moduleType, storageParams, false, isManagement);
+      await startBackup(moduleType, storageParams, false, isManagement());
       setDownloadingProgress(1);
       setTemporaryLink("");
       getIntervalProgress(t);
@@ -274,7 +272,7 @@ class ManualBackup extends React.Component {
             href={dataBackupUrl}
             target="_blank"
             fontSize="13px"
-            color={currentColorScheme.main.accent}
+            color={currentColorScheme.main?.accent}
             isHovered
           >
             {t("Common:LearnMore")}
@@ -394,51 +392,52 @@ class ManualBackup extends React.Component {
   }
 }
 
-export default inject(({ auth, backup, treeFoldersStore }) => {
-  const {
-    clearProgressInterval,
-    clearLocalStorage,
-    // commonThirdPartyList,
-    downloadingProgress,
-    getProgress,
-    getIntervalProgress,
-    setDownloadingProgress,
-    setTemporaryLink,
-    // setCommonThirdPartyList,
-    temporaryLink,
-    getStorageParams,
-    setThirdPartyStorage,
-    setStorageRegions,
-    saveToLocalStorage,
-    setConnectedThirdPartyAccount,
-  } = backup;
-  const { currentTariffStatusStore, isManagement } = auth;
-  const { currentColorScheme, dataBackupUrl } = auth.settingsStore;
-  const { rootFoldersTitles, fetchTreeFolders } = treeFoldersStore;
-  const { isNotPaidPeriod } = currentTariffStatusStore;
+export default inject(
+  ({ settingsStore, backup, treeFoldersStore, currentTariffStatusStore }) => {
+    const {
+      clearProgressInterval,
+      clearLocalStorage,
+      // commonThirdPartyList,
+      downloadingProgress,
+      getProgress,
+      getIntervalProgress,
+      setDownloadingProgress,
+      setTemporaryLink,
+      // setCommonThirdPartyList,
+      temporaryLink,
+      getStorageParams,
+      setThirdPartyStorage,
+      setStorageRegions,
+      saveToLocalStorage,
+      setConnectedThirdPartyAccount,
+    } = backup;
 
-  return {
-    isNotPaidPeriod,
-    setThirdPartyStorage,
-    clearProgressInterval,
-    clearLocalStorage,
-    // commonThirdPartyList,
-    downloadingProgress,
-    getProgress,
-    getIntervalProgress,
-    setDownloadingProgress,
-    setTemporaryLink,
-    setStorageRegions,
-    // setCommonThirdPartyList,
-    temporaryLink,
-    getStorageParams,
-    rootFoldersTitles,
-    fetchTreeFolders,
-    saveToLocalStorage,
-    setConnectedThirdPartyAccount,
+    const { currentColorScheme, dataBackupUrl } = settingsStore;
+    const { rootFoldersTitles, fetchTreeFolders } = treeFoldersStore;
+    const { isNotPaidPeriod } = currentTariffStatusStore;
 
-    isManagement,
-    dataBackupUrl,
-    currentColorScheme,
-  };
-})(withTranslation(["Settings", "Common"])(observer(ManualBackup)));
+    return {
+      isNotPaidPeriod,
+      setThirdPartyStorage,
+      clearProgressInterval,
+      clearLocalStorage,
+      // commonThirdPartyList,
+      downloadingProgress,
+      getProgress,
+      getIntervalProgress,
+      setDownloadingProgress,
+      setTemporaryLink,
+      setStorageRegions,
+      // setCommonThirdPartyList,
+      temporaryLink,
+      getStorageParams,
+      rootFoldersTitles,
+      fetchTreeFolders,
+      saveToLocalStorage,
+      setConnectedThirdPartyAccount,
+
+      dataBackupUrl,
+      currentColorScheme,
+    };
+  }
+)(withTranslation(["Settings", "Common"])(observer(ManualBackup)));

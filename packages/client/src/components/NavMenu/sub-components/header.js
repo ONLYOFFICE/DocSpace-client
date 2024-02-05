@@ -335,17 +335,14 @@ HeaderComponent.propTypes = {
   needNavMenu: PropTypes.bool,
 };
 
-export default inject(({ auth }) => {
+export default inject(({ settingsStore, authStore }) => {
   const {
-    settingsStore,
-    userStore,
-
     isLoaded,
     isAuthenticated,
     isAdmin,
 
     version,
-  } = auth;
+  } = authStore;
   const {
     logoUrl,
     defaultPage,
@@ -354,9 +351,6 @@ export default inject(({ auth }) => {
     theme,
     toggleArticleOpen,
   } = settingsStore;
-
-  //TODO: restore when chat will complete -> const mainModules = availableModules.filter((m) => !m.isolateMode);
-  const { user } = userStore;
 
   return {
     theme,

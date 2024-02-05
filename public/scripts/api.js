@@ -102,7 +102,6 @@
   };
 
   class DocSpace {
-    #iframe;
     #isConnected = false;
     #frameOpacity = 0;
     #callbacks = [];
@@ -234,8 +233,8 @@
       }
 
       iframe.src = config.src + path;
-      iframe.width = config.width;
-      iframe.height = config.height;
+      iframe.style.width = config.width;
+      iframe.style.height = config.height;
       iframe.name = config.name;
       iframe.id = config.frameId;
 
@@ -289,7 +288,7 @@
 
       const targetFrame = document.getElementById(this.config.frameId);
 
-      if (!!targetFrame.contentWindow) {
+      if (targetFrame && !!targetFrame.contentWindow) {
         targetFrame.contentWindow.postMessage(
           JSON.stringify(mes, (key, value) =>
             typeof value === "function" ? value.toString() : value
@@ -322,6 +321,7 @@
             break;
           }
           case "onEventReturn": {
+            if (Object.keys(this.config).length === 0) return;
             if (
               data?.eventReturnData?.event in this.config.events &&
               typeof this.config.events[data?.eventReturnData.event] ===
@@ -380,8 +380,10 @@
         iframe.style.opacity = this.#frameOpacity;
         iframe.style.zIndex = 2;
         iframe.style.position = "absolute";
-        iframe.width = "95%";
-        iframe.height = "95%";
+        iframe.style.width = "100%";
+        iframe.style.height = "100%";
+        iframe.style.top = 0;
+        iframe.style.left = 0;
 
         const frameLoader = this.#createLoader(this.config);
 
@@ -389,7 +391,7 @@
 
         const renderContainer = document.createElement("div");
         renderContainer.id = this.config.frameId + "-container";
-        renderContainer.style.display = "relative";
+        renderContainer.style.position = "relative";
         renderContainer.style.width = this.config.width;
         renderContainer.style.height = this.config.height || "100%";
 
@@ -429,8 +431,8 @@
       if (targetFrame) {
         targetFrame.style.opacity = 1;
         targetFrame.style.position = "relative";
-        targetFrame.width = this.config.width;
-        targetFrame.height = this.config.height;
+        targetFrame.style.width = this.config.width;
+        targetFrame.style.height = this.config.height;
         targetFrame.parentNode.style.height = "inherit";
 
         if (loader) loader.remove();
@@ -474,7 +476,9 @@
       target.innerHTML = this.config.destroyText;
       target.className = this.#classNames;
 
-      const targetFrame = document.getElementById(this.config.frameId);
+      const targetFrame = document.getElementById(
+        this.config.frameId + "-container"
+      );
 
       if (targetFrame) {
         window.removeEventListener("message", this.#onMessage, false);

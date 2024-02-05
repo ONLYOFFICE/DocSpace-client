@@ -1,6 +1,7 @@
 html,
 body {
   height: 100%;
+  width: 100%;
 
   font-family: "Open Sans", sans-serif, Arial;
   font-size: 13px;
@@ -18,9 +19,6 @@ body {
     left: calc(50% - 20px);
     top: 35%;
   }
-}
-body {
-  margin: 0;
 }
 
 body.loading * {

@@ -58,5 +58,10 @@ module.exports = {
       },
     ],
   },
-  ignorePatterns: ["./tsconfig.json", "coverage/**", "storybook-static/**"],
+  ignorePatterns: [
+    "./tsconfig.json",
+    "coverage/**",
+    "storybook-static/**",
+    "./utils/custom-scrollbar/**",
+  ],
 };

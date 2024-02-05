@@ -767,7 +767,6 @@ const SectionFilterContent = ({
         return items.filter((i) => i);
       });
 
-      console.log("currentFilterValues", currentFilterValues);
       return currentFilterValues;
     }
 
@@ -1704,7 +1703,6 @@ const SectionFilterContent = ({
           default: true,
         });
 
-      console.log("accountsOptions", accountsOptions);
       return accountsOptions;
     }
 

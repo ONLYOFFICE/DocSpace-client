@@ -77,24 +77,21 @@ class AuthStore {
       });
     });
 
-    socketHelper.on(
-      "s:change-user-quota-used-value",
-      ({ customQuotaFeature, usedSpace, quotaLimit }) => {
-        console.log(
-          `[WS] change-user-quota-used-value: quota type ${customQuotaFeature} usedSpace:${usedSpace}, quotaLimit: ${quotaLimit}`
-        );
+    socketHelper.on("s:change-user-quota-used-value", (options) => {
+      console.log(`[WS] change-user-quota-used-value:`, options);
 
-        runInAction(() => {
-          if (customQuotaFeature === "user_custom_quota") {
-            this.userStore.updateUserQuota(usedSpace, quotaLimit);
+      runInAction(() => {
+        if (options.customQuotaFeature === "user_custom_quota") {
+          this.userStore.updateUserQuota(options.usedSpace, options.quotaLimit);
 
-            return;
-          }
+          return;
+        }
 
-          // this.currentQuotaStore.updateTenantCustomQuota({ quota: quotaLimit });
-        });
-      }
-    );
+        const { customQuotaFeature, ...updatableObject } = options;
+
+        this.currentQuotaStore.updateTenantCustomQuota(updatableObject);
+      });
+    });
   }
 
   setIsUpdatingTariff = (isUpdatingTariff) => {

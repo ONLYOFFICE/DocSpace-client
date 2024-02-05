@@ -14,7 +14,11 @@ import { ComboBox } from "@docspace/shared/components/combobox";
 import Filter from "@docspace/shared/api/people/filter";
 import BetaBadge from "@docspace/common/components/BetaBadge";
 import { getMembersList } from "@docspace/shared/api/people";
-import { AccountsSearchArea, ShareAccessRights } from "@docspace/shared/enums";
+import {
+  AccountsSearchArea,
+  RoomsType,
+  ShareAccessRights,
+} from "@docspace/shared/enums";
 import withCultureNames from "@docspace/common/hoc/withCultureNames";
 import { isBetaLanguage } from "@docspace/shared/utils";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
@@ -58,6 +62,8 @@ const InviteInput = ({
   i18n,
   setCultureKey,
 }) => {
+  const isPublicRoomType = roomType === RoomsType.PublicRoom;
+
   const [inputValue, setInputValue] = useState("");
   const [usersList, setUsersList] = useState([]);
   const [isChangeLangMail, setIsChangeLangMail] = useState(false);
@@ -113,14 +119,13 @@ const InviteInput = ({
     const query = value.trim();
 
     if (query.length >= minSearchValue) {
+      const searchArea = isPublicRoomType
+        ? AccountsSearchArea.People
+        : AccountsSearchArea.Any;
       const filter = Filter.getFilterWithOutDisabledUser();
       filter.search = query;
 
-      const users = await getMembersList(
-        AccountsSearchArea.Any,
-        roomId,
-        filter,
-      );
+      const users = await getMembersList(searchArea, roomId, filter);
 
       setUsersList(users.items);
       setIsAddEmailPanelBlocked(false);
@@ -476,7 +481,7 @@ const InviteInput = ({
             withoutBackground={isMobileView}
             withBlur={!isMobileView}
             roomId={roomId}
-            withGroups
+            withGroups={!isPublicRoomType}
             withAccessRights
           />
         )}

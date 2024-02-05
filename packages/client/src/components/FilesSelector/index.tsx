@@ -489,13 +489,14 @@ const FilesSelector = ({
         onSave(null, selectedItemId, fileName, isChecked);
       onSelectTreeNode && onSelectTreeNode(selectedTreeNode);
       onSelectFile && onSelectFile(selectedFileInfo!, breadCrumbs);
-      onCloseAndDeselectAction();
+      !embedded && onCloseAndDeselectAction();
       //!withoutImmediatelyClose &&  onCloseAction();
     }
   };
 
   const headerLabel = getHeaderLabel(
     t,
+    isEditorDialog,
     isCopy,
     isRestoreAll,
     isMove,
@@ -506,6 +507,7 @@ const FilesSelector = ({
 
   const acceptButtonLabel = getAcceptButtonLabel(
     t,
+    isEditorDialog,
     isCopy,
     isRestoreAll,
     isMove,

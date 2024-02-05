@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 
+const path = require("path");
+
 const nextConfig = {
   basePath: "/doceditor",
   compiler: {
@@ -19,12 +21,20 @@ module.exports = {
       rule.test?.test?.(".svg"),
     );
 
+    const imageRule = config.module.rules.find(
+      (rule) => rule.loader === "next-image-loader",
+    );
+    imageRule.resourceQuery = {
+      not: [...fileLoaderRule.resourceQuery.not, /url/],
+    };
+
     config.module.rules.push(
       // Reapply the existing rule, but only for svg imports ending in ?url
       {
         type: "asset/resource",
         generator: {
           emit: false,
+          filename: "static/chunks/[path][name][ext]?[hash]",
         },
         test: /\.(svg|png|jpe?g|gif|ico|woff2)$/i,
         resourceQuery: /url/, // *.svg?url

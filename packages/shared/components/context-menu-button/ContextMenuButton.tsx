@@ -163,7 +163,7 @@ const ContextMenuButtonPure = ({
   };
 
   const clickOutsideAction = (e: Event) => {
-    const path = e?.composedPath && e?.composedPath();
+    const path = e.composedPath?.();
     const dropDownItem = path
       ? path.find((x: EventTarget) => x === ref.current)
       : null;

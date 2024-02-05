@@ -1,16 +1,19 @@
-import React from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import { Trans } from "react-i18next";
 
 import { isMobile } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
 import { Badge } from "@docspace/shared/components/badge";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 import { StyledBaseQuotaComponent, StyledMainTitle } from "./StyledComponent";
-
 import QuotaPerRoomComponent from "./sub-components/QuotaPerRoom";
 import QuotaPerUserComponent from "./sub-components/QuotaPerUser";
 import MobileQuotasComponent from "./sub-components/MobileQuotas";
+
+const helpLink =
+  "https://helpcenter.onlyoffice.com/administration/docspace-settings.aspx#StorageManagement_block";
 
 const QuotasComponent = (props) => {
   const { t } = useTranslation("Settings");
@@ -33,8 +36,20 @@ const QuotasComponent = (props) => {
           />
         )}
       </div>
-      <Text className="quotas_description">{t("QuotasDescription")}</Text>
-
+      <Text className="quotas_description">
+        <Trans t={t} i18nKey="QuotasDescription" ns="Settings">
+          Here, you can set storage quota for users and rooms.
+          <ColorTheme
+            themeId={ThemeId.Link}
+            tag="a"
+            isHovered={false}
+            target="_blank"
+            href={helpLink}
+          >
+            Help Center
+          </ColorTheme>
+        </Trans>
+      </Text>
       {isMobile() ? (
         <MobileQuotasComponent isDisabled={!isStatisticsAvailable} />
       ) : (

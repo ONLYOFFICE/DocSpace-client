@@ -139,7 +139,7 @@
   "NewColorScheme": "New color scheme",
   "NumberOfAttempts": "Number of attempts",
   "Quotas": "Quotas",
-  "QuotasDescription": "Here, you can set storage quota for users and rooms. Help Center",
+  "QuotasDescription": "Here, you can set storage quota for users and rooms. <1>Help Center.</1>",
   "QuotaPerRoom": "Quota per room",
   "QuotaPerUser": "Quota per user",
   "PasswordMinLenght": "Minimal password length",

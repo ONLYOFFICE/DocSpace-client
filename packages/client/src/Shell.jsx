@@ -53,13 +53,10 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     userTheme,
     //user,
     whiteLabelLogoUrls,
-    standalone,
-    isPortalUnlimited,
     userId,
     currentDeviceType,
     timezone,
     showArticleLoader,
-    user,
   } = rest;
 
   const theme = useTheme();
@@ -141,29 +138,17 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
           console.error("getRestoreProgress", e);
         });
     });
+
+    socketHelper.emit({
+      command: "subscribe",
+      data: { roomParts: "quota" },
+    });
+
+    socketHelper.emit({
+      command: "subscribe",
+      data: { roomParts: "QUOTA", individual: true },
+    });
   }, [socketHelper]);
-
-  useEffect(() => {
-    (!standalone || !isPortalUnlimited) &&
-      socketHelper.emit({
-        command: "subscribe",
-        data: { roomParts: "quota" },
-      });
-
-    console.log("user", user?.id);
-    user &&
-      socketHelper.emit({
-        command: "subscribe",
-        data: { roomParts: `QUOTA-${user.id}`, individual: true },
-      });
-
-    if (standalone && isPortalUnlimited) {
-      socketHelper.emit({
-        command: "unsubscribe",
-        data: { roomParts: "quota" },
-      });
-    }
-  }, [socketHelper, isPortalUnlimited, user]);
 
   const { t, ready } = useTranslation(["Common"]); //TODO: if enable banner ["Common", "SmartBanner"]
 
@@ -427,16 +412,8 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 const ShellWrapper = inject(({ auth, backup, clientLoadingStore }) => {
   const { i18n } = useTranslation();
 
-  const {
-    init,
-    isLoaded,
-    settingsStore,
-    setProductVersion,
-    language,
-    currentQuotaStore,
-    userStore,
-  } = auth;
-  const { isPortalUnlimited } = currentQuotaStore;
+  const { init, isLoaded, settingsStore, setProductVersion, language } = auth;
+
   const {
     personal,
     roomsMode,
@@ -449,7 +426,6 @@ const ShellWrapper = inject(({ auth, backup, clientLoadingStore }) => {
     socketHelper,
     setTheme,
     whiteLabelLogoUrls,
-    standalone,
     currentDeviceType,
   } = settingsStore;
 
@@ -492,11 +468,8 @@ const ShellWrapper = inject(({ auth, backup, clientLoadingStore }) => {
     userTheme: userTheme,
     userId: auth?.userStore?.user?.id,
     whiteLabelLogoUrls,
-    standalone,
     currentDeviceType,
-    isPortalUnlimited,
     showArticleLoader: clientLoadingStore.showArticleLoader,
-    user: auth?.userStore?.user,
   };
 })(observer(Shell));
 

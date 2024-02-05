@@ -79,13 +79,19 @@ class AuthStore {
 
     socketHelper.on(
       "s:change-user-quota-used-value",
-      ({ userId, usedSpace, quotaLimit }) => {
+      ({ customQuotaFeature, usedSpace, quotaLimit }) => {
         console.log(
-          `[WS] change-user-quota-used-value ${userId}: usedSpace:${usedSpace}, quotaLimit: ${quotaLimit}`
+          `[WS] change-user-quota-used-value: quota type ${customQuotaFeature} usedSpace:${usedSpace}, quotaLimit: ${quotaLimit}`
         );
 
         runInAction(() => {
-          this.userStore.updateUserQuota(usedSpace, quotaLimit);
+          if (customQuotaFeature === "user_custom_quota") {
+            this.userStore.updateUserQuota(usedSpace, quotaLimit);
+
+            return;
+          }
+
+          // this.currentQuotaStore.updateTenantCustomQuota({ quota: quotaLimit });
         });
       }
     );

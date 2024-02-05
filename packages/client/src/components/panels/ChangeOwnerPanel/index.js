@@ -131,7 +131,7 @@ const ChangeOwnerPanel = withTranslation(["ChangeOwnerPanel", "Common"])(
 );
 
 export default inject(
-  ({ auth, filesStore, dialogsStore, clientLoadingStore }) => {
+  ({ settingsStore, filesStore, dialogsStore, clientLoadingStore }) => {
     const {
       selection,
       bufferSelection,
@@ -144,7 +144,7 @@ export default inject(
     const { ownerPanelVisible, setChangeOwnerPanelVisible } = dialogsStore;
 
     return {
-      theme: auth.settingsStore.theme,
+      theme: settingsStore.theme,
       selection: selection.length ? selection : [bufferSelection],
       isLoading: clientLoadingStore.isLoading,
       visible: ownerPanelVisible,

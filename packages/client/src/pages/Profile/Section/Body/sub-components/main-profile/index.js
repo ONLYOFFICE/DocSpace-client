@@ -463,10 +463,10 @@ const MainProfile = (props) => {
   );
 };
 
-export default inject(({ auth, peopleStore }) => {
-  const { withActivationBar, sendActivationLink } = auth.userStore;
+export default inject(({ settingsStore, peopleStore, userStore }) => {
+  const { withActivationBar, sendActivationLink } = userStore;
   const { theme, helpLink, culture, currentColorScheme, documentationEmail } =
-    auth.settingsStore;
+    settingsStore;
 
   const {
     targetUser: profile,

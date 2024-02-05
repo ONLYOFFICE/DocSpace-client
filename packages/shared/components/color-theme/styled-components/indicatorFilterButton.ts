@@ -9,10 +9,10 @@ const getDefaultStyles = ({
 }) =>
   $currentColorScheme &&
   css`
-    background: ${$currentColorScheme.main.accent};
+    background: ${$currentColorScheme.main?.accent};
 
     &:hover {
-      background: ${$currentColorScheme.main.accent};
+      background: ${$currentColorScheme.main?.accent};
     }
   `;
 

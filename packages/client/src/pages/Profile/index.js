@@ -112,8 +112,16 @@ Profile.propTypes = {
 };
 
 export default inject(
-  ({ auth, peopleStore, clientLoadingStore, treeFoldersStore }) => {
-    const { setDocumentTitle, language, tfaStore } = auth;
+  ({
+    authStore,
+    settingsStore,
+    peopleStore,
+    userStore,
+    clientLoadingStore,
+    tfaStore,
+    treeFoldersStore,
+  }) => {
+    const { setDocumentTitle, language } = authStore;
 
     const {
       setIsProfileLoaded,
@@ -149,11 +157,11 @@ export default inject(
       isEditTargetUser,
       setIsEditTargetUser,
 
-      showCatalog: auth.settingsStore.showCatalog,
+      showCatalog: settingsStore.showCatalog,
 
       selectedTreeNode,
       setSelectedNode,
-      isVisitor: auth.userStore.user.isVisitor,
+      isVisitor: userStore.user.isVisitor,
       setIsProfileLoaded,
       setIsLoading,
       getTfaType,

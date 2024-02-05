@@ -83,7 +83,7 @@ const AuditTrail = (props) => {
   );
 };
 
-export default inject(({ setup, auth }) => {
+export default inject(({ setup, settingsStore, currentQuotaStore }) => {
   const {
     getAuditTrail,
     security,
@@ -94,7 +94,7 @@ export default inject(({ setup, auth }) => {
     securityLifetime,
     isLoadingDownloadReport,
   } = setup;
-  const { settingsStore, currentQuotaStore } = auth;
+
   const { theme } = settingsStore;
   const { isAuditAvailable } = currentQuotaStore;
   return {

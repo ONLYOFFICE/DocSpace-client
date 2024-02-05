@@ -38,9 +38,9 @@ const withDialogs = (WrappedComponent) => {
     }, [mfReady]);
 
     const initSocketHelper = async () => {
-      await window.authStore.auth.init(true);
+      await window.authStore.authStore.init(true);
 
-      const { socketHelper } = window.authStore.auth.settingsStore;
+      const { socketHelper } = window.authStore.settingsStore;
       socketHelper.emit({
         command: "subscribe",
         data: { roomParts: "backup-restore" },

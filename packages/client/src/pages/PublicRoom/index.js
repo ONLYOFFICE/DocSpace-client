@@ -97,12 +97,17 @@ const PublicRoom = (props) => {
 };
 
 export default inject(
-  ({ auth, publicRoomStore, settingsStore, clientLoadingStore }) => {
+  ({
+    settingsStore,
+    publicRoomStore,
+    filesSettingsStore,
+    clientLoadingStore,
+  }) => {
     const { validatePublicRoomKey, isLoaded, isLoading, roomStatus, roomId } =
       publicRoomStore;
 
-    const { getFilesSettings } = settingsStore;
-    const { setPublicRoomKey } = auth.settingsStore;
+    const { getFilesSettings } = filesSettingsStore;
+    const { setPublicRoomKey } = settingsStore;
     const { setIsArticleLoading } = clientLoadingStore;
 
     return {

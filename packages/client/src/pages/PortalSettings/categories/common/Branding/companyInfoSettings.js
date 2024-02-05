@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Trans, withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
-
+import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { TextInput } from "@docspace/shared/components/text-input";
@@ -15,7 +15,7 @@ import LoaderCompanyInfoSettings from "../sub-components/loaderCompanyInfoSettin
 import AboutDialog from "../../../../About/AboutDialog";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import { mobile, size } from "@docspace/shared/utils";
-
+import { isManagement } from "@docspace/shared/utils/common";
 const StyledComponent = styled.div`
   .link {
     font-weight: 600;
@@ -53,16 +53,15 @@ const CompanyInfoSettings = (props) => {
     t,
     isSettingPaid,
     getCompanyInfoSettings,
-    setCompanyInfoSettings,
+
     companyInfoSettingsIsDefault,
-    restoreCompanyInfoSettings,
+
     companyInfoSettingsData,
     tReady,
     setIsLoadedCompanyInfoSettingsData,
     isLoadedCompanyInfoSettingsData,
     buildVersionInfo,
     personal,
-    isManagement,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -101,7 +100,7 @@ const CompanyInfoSettings = (props) => {
   }, []);
 
   const checkWidth = () => {
-    const url = isManagement
+    const url = isManagement()
       ? "/branding"
       : "portal-settings/customization/branding";
     window.innerWidth > size.mobile &&
@@ -249,7 +248,8 @@ const CompanyInfoSettings = (props) => {
   const onSave = useCallback(async () => {
     setIsLoading(true);
 
-    await setCompanyInfoSettings(address, companyName, email, phone, site)
+    await api.settings
+      .setCompanyInfoSettings(address, companyName, email, phone, site)
       .then(() => {
         toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
       })
@@ -279,17 +279,13 @@ const CompanyInfoSettings = (props) => {
     });
 
     setIsLoading(false);
-  }, [
-    setIsLoading,
-    setCompanyInfoSettings,
-    getCompanyInfoSettings,
-    companySettings,
-  ]);
+  }, [setIsLoading, getCompanyInfoSettings, companySettings]);
 
   const onRestore = useCallback(async () => {
     setIsLoading(true);
 
-    await restoreCompanyInfoSettings()
+    await api.settings
+      .restoreCompanyInfoSettings()
       .then((res) => {
         toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
         setCompanySettings(res);
@@ -310,7 +306,7 @@ const CompanyInfoSettings = (props) => {
     });
 
     setIsLoading(false);
-  }, [setIsLoading, restoreCompanyInfoSettings, getCompanyInfoSettings]);
+  }, [setIsLoading, getCompanyInfoSettings]);
 
   const onShowExample = () => {
     if (!isSettingPaid) return;
@@ -460,9 +456,7 @@ const CompanyInfoSettings = (props) => {
   );
 };
 
-export default inject(({ auth, common }) => {
-  const { currentQuotaStore, settingsStore, isManagement } = auth;
-
+export default inject(({ settingsStore, common, currentQuotaStore }) => {
   const {
     setIsLoadedCompanyInfoSettingsData,
     isLoadedCompanyInfoSettingsData,
@@ -470,9 +464,9 @@ export default inject(({ auth, common }) => {
 
   const {
     getCompanyInfoSettings,
-    setCompanyInfoSettings,
+
     companyInfoSettingsIsDefault,
-    restoreCompanyInfoSettings,
+
     companyInfoSettingsData,
     buildVersionInfo,
     personal,
@@ -482,16 +476,15 @@ export default inject(({ auth, common }) => {
 
   return {
     getCompanyInfoSettings,
-    setCompanyInfoSettings,
+
     companyInfoSettingsIsDefault,
-    restoreCompanyInfoSettings,
+
     companyInfoSettingsData,
     setIsLoadedCompanyInfoSettingsData,
     isLoadedCompanyInfoSettingsData,
     buildVersionInfo,
     personal,
     isSettingPaid: isBrandingAndCustomizationAvailable,
-    isManagement,
   };
 })(
   withLoading(

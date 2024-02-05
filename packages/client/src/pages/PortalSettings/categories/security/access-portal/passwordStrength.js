@@ -204,7 +204,7 @@ const PasswordStrength = (props) => {
         </Text>
         <Link
           className="link-learn-more"
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
           target="_blank"
           isHovered
           href={passwordStrengthSettingsUrl}
@@ -272,14 +272,14 @@ const PasswordStrength = (props) => {
   );
 };
 
-export default inject(({ auth, setup }) => {
+export default inject(({ settingsStore, setup }) => {
   const {
     setPortalPasswordSettings,
     passwordSettings,
     currentColorScheme,
     passwordStrengthSettingsUrl,
     currentDeviceType,
-  } = auth.settingsStore;
+  } = settingsStore;
   const { initSettings, isInit } = setup;
 
   return {

@@ -134,7 +134,7 @@ const AdminMessage = (props) => {
 
         <Link
           className="link-learn-more"
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
           target="_blank"
           isHovered
           href={administratorMessageSettingsUrl}
@@ -183,14 +183,14 @@ const AdminMessage = (props) => {
   );
 };
 
-export default inject(({ auth, setup }) => {
+export default inject(({ settingsStore, setup }) => {
   const {
     enableAdmMess,
     setMessageSettings,
     currentColorScheme,
     administratorMessageSettingsUrl,
     currentDeviceType,
-  } = auth.settingsStore;
+  } = settingsStore;
   const { initSettings, isInit } = setup;
 
   return {

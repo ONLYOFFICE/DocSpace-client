@@ -35,7 +35,7 @@ const TableGroupMenu = (props: TableGroupMenuProps) => {
     ...rest
   } = props;
   const onCheckboxChange = () => {
-    onChange?.(isChecked);
+    onChange?.(!isChecked);
   };
   const { t } = useTranslation("Common");
   return (

@@ -61,8 +61,7 @@ const ConfirmWrapper = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { settingsStore } = auth;
+export default inject(({ settingsStore }) => {
   const { currentColorScheme } = settingsStore;
 
   return {

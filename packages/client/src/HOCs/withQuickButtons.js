@@ -122,12 +122,14 @@ export default function withQuickButtons(WrappedComponent) {
 
   return inject(
     ({
-      auth,
+      authStore,
+      settingsStore,
       filesActionsStore,
       dialogsStore,
       publicRoomStore,
       treeFoldersStore,
       filesStore,
+      infoPanelStore,
     }) => {
       const { lockFileAction, setFavoriteAction, onSelectItem } =
         filesActionsStore;
@@ -145,11 +147,11 @@ export default function withQuickButtons(WrappedComponent) {
         isTrashFolder || isArchiveFolderRoot || isPersonalFolderRoot;
 
       const { isPublicRoom } = publicRoomStore;
-      const { getPrimaryFileLink, setShareChanged } = auth.infoPanelStore;
+      const { getPrimaryFileLink, setShareChanged } = infoPanelStore;
 
       return {
-        theme: auth.settingsStore.theme,
-        isAdmin: auth.isAdmin,
+        theme: settingsStore.theme,
+        isAdmin: authStore.isAdmin,
         lockFileAction,
         setFavoriteAction,
         onSelectItem,

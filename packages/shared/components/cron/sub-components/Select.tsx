@@ -1,6 +1,6 @@
+import moment from "moment";
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import moment from "moment";
 
 import { ComboBox, ComboBoxSize, TOption } from "../../combobox";
 
@@ -78,10 +78,10 @@ export const Select = ({
 
   return (
     <SelectWrapper>
-      <span>{prefix}</span>
+      {prefix && <span>{prefix}</span>}
       <ComboBox
+        scaled
         scaledOptions
-        scaled={false}
         noBorder={false}
         showDisabledItems
         options={options}

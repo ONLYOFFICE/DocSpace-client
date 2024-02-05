@@ -407,96 +407,101 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   );
 };
 
-const ShellWrapper = inject(({ auth, backup, clientLoadingStore }) => {
-  const { i18n } = useTranslation();
+const ShellWrapper = inject(
+  ({ authStore, settingsStore, backup, clientLoadingStore, userStore }) => {
+    const { i18n } = useTranslation();
 
-  const { init, isLoaded, settingsStore, setProductVersion, language } = auth;
+    const { init, isLoaded, setProductVersion, language } = authStore;
 
-  const {
-    personal,
-    roomsMode,
-    isDesktopClient,
-    firebaseHelper,
-    setModuleInfo,
-    setCheckedMaintenance,
-    setMaintenanceExist,
-    setSnackbarExist,
-    socketHelper,
-    setTheme,
-    whiteLabelLogoUrls,
-    standalone,
-    currentDeviceType,
-  } = settingsStore;
+    const {
+      personal,
+      roomsMode,
+      isDesktopClient,
+      firebaseHelper,
+      setModuleInfo,
+      setCheckedMaintenance,
+      setMaintenanceExist,
+      setSnackbarExist,
+      socketHelper,
+      setTheme,
+      whiteLabelLogoUrls,
+      standalone,
+      currentDeviceType,
+      isFrame,
+      frameConfig,
+    } = settingsStore;
 
-  const isBase = settingsStore.theme.isBase;
-  const { setPreparationPortalDialogVisible } = backup;
+    const isBase = settingsStore.theme.isBase;
+    const { setPreparationPortalDialogVisible } = backup;
 
-  const userTheme = isDesktopClient
-    ? auth?.userStore?.user?.theme
-      ? auth?.userStore?.user?.theme
-      : window.RendererProcessVariable?.theme?.type === "dark"
-        ? "Dark"
-        : "Base"
-    : auth?.userStore?.user?.theme;
+    const userTheme = isDesktopClient
+      ? userStore?.user?.theme
+        ? userStore?.user?.theme
+        : window.RendererProcessVariable?.theme?.type === "dark"
+          ? "Dark"
+          : "Base"
+      : userStore?.user?.theme;
 
-  return {
-    loadBaseInfo: async () => {
-      await init(false, i18n);
+    return {
+      loadBaseInfo: async () => {
+        await init(false, i18n);
 
-      setModuleInfo(config.homepage, "home");
-      setProductVersion(config.version);
+        setModuleInfo(config.homepage, "home");
+        setProductVersion(config.version);
 
-      if (isDesktopClient) {
-        document.body.classList.add("desktop");
-      }
-    },
-    language,
-    isLoaded,
+        if (isDesktopClient) {
+          document.body.classList.add("desktop");
+        }
+      },
+      language,
+      isLoaded,
 
-    isDesktop: isDesktopClient,
-    FirebaseHelper: firebaseHelper,
-    personal,
-    setCheckedMaintenance,
-    setMaintenanceExist,
-    socketHelper,
-    setPreparationPortalDialogVisible,
-    isBase,
-    setTheme,
-    roomsMode,
-    setSnackbarExist,
-    userTheme: userTheme,
-    userId: auth?.userStore?.user?.id,
-    whiteLabelLogoUrls,
-    standalone,
-    currentDeviceType,
+      isDesktop: isDesktopClient,
+      FirebaseHelper: firebaseHelper,
+      personal,
+      setCheckedMaintenance,
+      setMaintenanceExist,
+      socketHelper,
+      setPreparationPortalDialogVisible,
+      isBase,
+      setTheme,
+      roomsMode,
+      setSnackbarExist,
+      userTheme: isFrame ? frameConfig?.theme : userTheme,
+      userId: userStore?.user?.id,
+      whiteLabelLogoUrls,
+      standalone,
+      currentDeviceType,
 
-    showArticleLoader: clientLoadingStore.showArticleLoader,
-  };
-})(observer(Shell));
-
-const ThemeProviderWrapper = inject(({ auth, loginStore }) => {
-  const { settingsStore } = auth;
-  let currentColorScheme = false;
-  const { theme } = settingsStore;
-  const { i18n } = useTranslation();
-
-  if (loginStore) {
-    currentColorScheme = loginStore.currentColorScheme;
-  } else if (auth) {
-    currentColorScheme = settingsStore.currentColorScheme || false;
+      showArticleLoader: clientLoadingStore.showArticleLoader,
+    };
   }
+)(observer(Shell));
 
-  const { timezone } = settingsStore;
+const ThemeProviderWrapper = inject(
+  ({ authStore, settingsStore, loginStore }) => {
+    let currentColorScheme = false;
+    const { theme } = settingsStore;
+    const { i18n } = useTranslation();
 
-  window.theme = theme;
-  window.timezone = timezone;
+    if (loginStore) {
+      currentColorScheme = loginStore.currentColorScheme;
+    } else if (authStore) {
+      currentColorScheme = settingsStore.currentColorScheme || false;
+    }
 
-  return {
-    theme: { ...theme, interfaceDirection: i18n.dir() },
-    currentColorScheme,
-    timezone,
-  };
-})(observer(ThemeProvider));
+    const { timezone } = settingsStore;
+
+    window.theme = theme;
+    window.timezone = timezone;
+
+    return {
+      theme: { ...theme, interfaceDirection: i18n.dir() },
+      currentColorScheme,
+      timezone,
+    };
+  }
+)(observer(ThemeProvider));
 
 export default () => (
   <MobxProvider {...store}>

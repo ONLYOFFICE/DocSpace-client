@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { FileType } from "@docspace/shared/enums";
+import { FileType, FolderType } from "@docspace/shared/enums";
 import { Text } from "@docspace/shared/components/text";
 
 import DetailsHelper from "../../helpers/DetailsHelper.js";
@@ -21,6 +21,7 @@ const Details = ({
   isVisitor,
   isCollaborator,
   selectTag,
+  isArchive,
 }) => {
   const [itemProperties, setItemProperties] = useState([]);
 
@@ -61,7 +62,7 @@ const Details = ({
   }, [selection, createThumbnailAction]);
 
   const currentIcon =
-    !selection.isArchive && selection?.logo?.large
+    !isArchive && selection?.logo?.large
       ? selection?.logo?.large
       : getInfoPanelItemIcon(selection, 96);
 
@@ -89,26 +90,21 @@ const Details = ({
         </StyledThumbnail>
       ) : (
         <StyledNoThumbnail>
-          {showDefaultRoomIcon ? (
-            <RoomIcon
-              color={selection.logo.color}
-              title={selection.title}
-              isArchive={selection.isArchive}
-              size="96px"
-              radius="16px"
-            />
-          ) : (
-            <img
-              className={`no-thumbnail-img ${selection.isRoom && "is-room"} ${
-                selection.isRoom &&
-                !selection.isArchive &&
-                selection.logo?.large &&
-                "custom-logo"
-              }`}
-              src={currentIcon}
-              alt="thumbnail-icon-big"
-            />
-          )}
+          <RoomIcon
+            color={selection.logo?.color}
+            title={selection.title}
+            isArchive={isArchive}
+            size="96px"
+            radius="16px"
+            showDefault={showDefaultRoomIcon}
+            imgClassName={`no-thumbnail-img ${selection.isRoom && "is-room"} ${
+              selection.isRoom &&
+              !isArchive &&
+              selection.logo?.large &&
+              "custom-logo"
+            }`}
+            imgSrc={currentIcon}
+          />
         </StyledNoThumbnail>
       )}
 
@@ -136,27 +132,38 @@ const Details = ({
   );
 };
 
-export default inject(({ auth, filesStore, filesActionsStore }) => {
-  const { userStore } = auth;
-  const { selection, getInfoPanelItemIcon, openUser } = auth.infoPanelStore;
-  const { createThumbnail } = filesStore;
-  const { personal, culture } = auth.settingsStore;
-  const { user } = userStore;
+export default inject(
+  ({
+    settingsStore,
+    filesStore,
+    filesActionsStore,
+    infoPanelStore,
+    userStore,
+  }) => {
+    const { infoPanelSelection, getInfoPanelItemIcon, openUser } =
+      infoPanelStore;
+    const { createThumbnail } = filesStore;
+    const { personal, culture } = settingsStore;
+    const { user } = userStore;
 
-  const { selectTag } = filesActionsStore;
+    const { selectTag } = filesActionsStore;
 
-  const isVisitor = user.isVisitor;
-  const isCollaborator = user.isCollaborator;
+    const isVisitor = user.isVisitor;
+    const isCollaborator = user.isCollaborator;
 
-  return {
-    personal,
-    culture,
-    selection,
-    createThumbnail,
-    getInfoPanelItemIcon,
-    openUser,
-    isVisitor,
-    isCollaborator,
-    selectTag,
-  };
-})(withTranslation(["InfoPanel", "Common", "Translations", "Files"])(Details));
+    const isArchive = infoPanelSelection?.rootFolderType === FolderType.Archive;
+
+    return {
+      personal,
+      culture,
+      selection: infoPanelSelection,
+      createThumbnail,
+      getInfoPanelItemIcon,
+      openUser,
+      isVisitor,
+      isCollaborator,
+      selectTag,
+      isArchive,
+    };
+  }
+)(withTranslation(["InfoPanel", "Common", "Translations", "Files"])(Details));

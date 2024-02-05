@@ -145,7 +145,7 @@ const EmbeddingBody = ({ t, link, requestToken, roomId }) => {
             iconName={CopyReactSvgUrl}
             onClick={onCopyLink}
           />
-          <Textarea isReadOnly value={codeBlock} heightTextArea={150} />
+          <Textarea isReadOnly value={codeBlock} heightTextArea="150px" />
         </div>
       </div>
     </StyledBody>

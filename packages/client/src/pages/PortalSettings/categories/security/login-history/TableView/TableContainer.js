@@ -38,9 +38,9 @@ const Table = ({
   );
 };
 
-export default inject(({ auth, setup }) => {
+export default inject(({ settingsStore, setup }) => {
   const { security, viewAs, setViewAs } = setup;
-  const { theme, currentDeviceType } = auth.settingsStore;
+  const { theme, currentDeviceType } = settingsStore;
 
   return {
     historyUsers: security.loginHistory.users,

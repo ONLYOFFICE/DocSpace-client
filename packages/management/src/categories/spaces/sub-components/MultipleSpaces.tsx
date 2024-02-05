@@ -14,12 +14,12 @@ type TMultipleSpaces = {
 };
 
 const MultipleSpaces = ({ t }: TMultipleSpaces) => {
-  const { spacesStore, authStore } = useStore();
+  const { spacesStore, settingsStore } = useStore();
 
   const { setChangeDomainDialogVisible, setCreatePortalDialogVisible } =
     spacesStore;
 
-  const { portals, baseDomain } = authStore.settingsStore;
+  const { portals, baseDomain } = settingsStore;
 
   const buttonSize = isMobile ? "normal" : "small";
 

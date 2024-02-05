@@ -5,6 +5,7 @@ import { Avatar } from "@docspace/shared/components/avatar";
 
 import CatalogSpamIcon from "PUBLIC_DIR/images/catalog.spam.react.svg";
 import { commonIconsStyles } from "@docspace/shared/utils";
+import { capitalize } from "lodash";
 
 const StyledCatalogSpamIcon = styled(CatalogSpamIcon)`
   ${commonIconsStyles}
@@ -15,13 +16,9 @@ const StyledCatalogSpamIcon = styled(CatalogSpamIcon)`
 `;
 
 const AccountInfo = ({ user }) => {
-  const firstLetterToUppercase = (str) => {
-    return str[0].toUpperCase() + str.slice(1);
-  };
-
   const StatusNode = (
     <Text className="status" noSelect>
-      {firstLetterToUppercase(user.statusType)}
+      {capitalize(user.statusType)}
     </Text>
   );
 

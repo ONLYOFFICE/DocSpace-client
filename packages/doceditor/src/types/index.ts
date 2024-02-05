@@ -133,7 +133,6 @@ export interface IResponse {
   successAuth: boolean;
   isSharingAccess: boolean;
   error?: unknown;
-
 }
 
 export interface EditorProps extends IResponse {}
@@ -168,4 +167,11 @@ export interface UseSocketHelperProps {
   socketUrl: string;
 }
 
-export interface UseTranslationProps {}
+export interface UseI18NProps {
+  settings: TSettings;
+  user: TUser;
+}
+
+export interface UseThemeProps {
+  user: TUser;
+}

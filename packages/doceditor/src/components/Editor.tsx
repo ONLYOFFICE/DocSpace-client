@@ -1,24 +1,20 @@
 "use client";
+
 import React from "react";
 import { ThemeProvider } from "styled-components";
+import { I18nextProvider } from "react-i18next";
+import { i18n } from "i18next";
 
 import { DocumentEditor } from "@onlyoffice/document-editor-react";
 import IConfig from "@onlyoffice/document-editor-react/dist/esm/model/config";
 
-import { Base, Dark, TColorScheme } from "@docspace/shared/themes";
-import { getSystemTheme } from "@docspace/shared/utils";
-import { ThemeKeys } from "@docspace/shared/enums";
-import { getAppearanceTheme } from "@docspace/shared/api/settings";
-
 import { EditorProps } from "@/types";
 import useSocketHelper from "@/hooks/useSocketHelper";
 import useSelectFolderDialog from "@/hooks/useSelectFolderDialog";
+import useTheme from "@/hooks/useTheme";
+import useI18N from "@/hooks/useI18N";
 
 import SelectFolderDialog from "./SelectFolderDialog";
-import { getI18NInstance } from "@/utils/i18n";
-import { I18nextProvider } from "react-i18next";
-
-const SYSTEM_THEME = getSystemTheme();
 
 const Editor = ({
   config,
@@ -27,12 +23,10 @@ const Editor = ({
   successAuth,
   user,
 }: EditorProps) => {
-  const i18n = getI18NInstance(user.cultureName || "en", settings.culture);
-
-  const [currentColorTheme, setCurrentColorTheme] =
-    React.useState<TColorScheme | null>(null);
-
+  const { i18n } = useI18N({ settings, user });
   const { socketHelper } = useSocketHelper({ socketUrl: settings.socketUrl });
+
+  const { theme } = useTheme({ user });
 
   const {
     onSDKRequestSaveAs,
@@ -45,36 +39,6 @@ const Editor = ({
   const onDocumentReady = (): void => {
     throw new Error("Function not implemented.");
   };
-
-  const getUserTheme = () => {
-    let theme = user.theme;
-    if (user.theme === ThemeKeys.SystemStr) theme = SYSTEM_THEME;
-
-    if (theme === ThemeKeys.BaseStr)
-      return { ...Base, currentColorTheme, interfaceDirection: "ltr" };
-
-    return { ...Dark, currentColorTheme, interfaceDirection: "ltr" };
-  };
-
-  const getCurrentColorTheme = React.useCallback(async () => {
-    const colorThemes = await getAppearanceTheme();
-
-    const colorTheme = colorThemes.themes.find(
-      (t) => t.id === colorThemes.selected,
-    );
-
-    if (colorTheme) setCurrentColorTheme(colorTheme);
-  }, []);
-
-  React.useEffect(() => {
-    getCurrentColorTheme();
-  }, [getCurrentColorTheme]);
-
-  React.useEffect(() => {
-    window.timezone = settings.timezone;
-  }, [settings.timezone]);
-
-  const theme = getUserTheme();
 
   const fileInfo = config?.file;
   const documentserverUrl = editorUrl.docServiceUrl;
@@ -93,7 +57,7 @@ const Editor = ({
   }
 
   return (
-    <I18nextProvider i18n={i18n}>
+    <I18nextProvider i18n={i18n || ({} as i18n)}>
       <ThemeProvider theme={theme}>
         <DocumentEditor
           id={"docspace_editor"}

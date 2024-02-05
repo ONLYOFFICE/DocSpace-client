@@ -24,12 +24,12 @@ export default class ScrollbarTrack extends React.Component<
 
   public componentDidMount(): void {
     if (!this.element) {
-      // this.setState(() => {
-      //   throw new Error(
-      //     "Element was not created. Possibly you haven't provided HTMLDivElement to renderer's `elementRef` function.",
-      //   );
-      // });
-      // return;
+      this.setState(() => {
+        throw new Error(
+          "Element was not created. Possibly you haven't provided HTMLDivElement to renderer's `elementRef` function.",
+        );
+      });
+      return;
     }
 
     this.element?.addEventListener("click", this.handleClick);

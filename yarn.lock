@@ -3308,12 +3308,14 @@ __metadata:
     "@types/luxon": "npm:^3.3.1"
     "@types/node": "npm:^20.9.4"
     "@types/punycode": "npm:^2.1.3"
+    "@types/react": "npm:^18.2.53"
     "@types/react-avatar-editor": "npm:^13.0.2"
     "@types/react-transition-group": "npm:^4.4.9"
     "@types/react-virtualized": "npm:^9.21.29"
     "@types/react-window": "npm:^1.8.8"
     "@types/react-window-infinite-loader": "npm:^1.0.9"
     "@types/sjcl": "npm:^1.0.34"
+    "@types/utif": "npm:^3.0.5"
     "@typescript-eslint/eslint-plugin": "npm:^6.12.0"
     "@typescript-eslint/parser": "npm:^6.12.0"
     "@use-gesture/react": "npm:^10.2.24"
@@ -3411,6 +3413,7 @@ __metadata:
     svg-inline-loader: "npm:^0.8.2"
     ts-migrate: "npm:^0.1.35"
     ts-node: "npm:^10.9.1"
+    utif: "npm:^3.1.0"
     workbox-window: "npm:^6.5.4"
     zoom-level: "npm:^2.5.0"
   peerDependencies:
@@ -8758,7 +8761,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:>=16, @types/react@npm:^18.0.15, @types/react@npm:^18.0.28":
+"@types/react@npm:*, @types/react@npm:>=16, @types/react@npm:^18.0.15, @types/react@npm:^18.0.28, @types/react@npm:^18.2.53":
   version: 18.2.53
   resolution: "@types/react@npm:18.2.53"
   dependencies:
@@ -8893,6 +8896,15 @@ __metadata:
   version: 2.0.10
   resolution: "@types/unist@npm:2.0.10"
   checksum: e2924e18dedf45f68a5c6ccd6015cd62f1643b1b43baac1854efa21ae9e70505db94290434a23da1137d9e31eb58e54ca175982005698ac37300a1c889f6c4aa
+  languageName: node
+  linkType: hard
+
+"@types/utif@npm:^3.0.5":
+  version: 3.0.5
+  resolution: "@types/utif@npm:3.0.5"
+  dependencies:
+    "@types/node": "npm:*"
+  checksum: dcf759815e1de0cd60849d76f77dc18be172d740fc56af6f57b350874c6b74cdd8ddef09e2af0b3825a0d07c7da8e461af99f20caffe381778fd1d1f2c821105
   languageName: node
   linkType: hard
 
@@ -22439,6 +22451,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"pako@npm:^1.0.5":
+  version: 1.0.11
+  resolution: "pako@npm:1.0.11"
+  checksum: 1ad07210e894472685564c4d39a08717e84c2a68a70d3c1d9e657d32394ef1670e22972a433cbfe48976cb98b154ba06855dcd3fcfba77f60f1777634bec48c0
+  languageName: node
+  linkType: hard
+
 "pako@npm:~0.2.0":
   version: 0.2.9
   resolution: "pako@npm:0.2.9"
@@ -28286,6 +28305,15 @@ __metadata:
     node-gyp: "npm:latest"
     node-gyp-build: "npm:^4.3.0"
   checksum: b89cbc13b4badad04828349ebb7aa2ab1edcb02b46ab12ce0ba5b2d6886d684ad4e93347819e3c8d36224c8742422d2dca69f5cc16c72ae4d7eeecc0c5cb544b
+  languageName: node
+  linkType: hard
+
+"utif@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "utif@npm:3.1.0"
+  dependencies:
+    pako: "npm:^1.0.5"
+  checksum: 617b5e5aadca436e56266960b63fa3c2074dd072f03f2919d0dea60f9300eb3b0e4f459f68bb8c210dee36a1f03307730dee84b83a19d5669c8d916c583ca9ed
   languageName: node
   linkType: hard
 

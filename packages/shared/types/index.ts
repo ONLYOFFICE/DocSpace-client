@@ -60,6 +60,7 @@ declare global {
       navigate: (path: string, state?: { [key: string]: unknown }) => void;
     };
     DocSpaceConfig: {
+      pdfViewerUrl: string;
       wrongPortalNameUrl?: string;
       api: {
         origin?: string;
@@ -68,6 +69,7 @@ declare global {
       proxy: {
         url?: string;
       };
+      imageThumbnails?: boolean;
     };
     AscDesktopEditor: {
       execCommand: (key: string, value: string) => void;
@@ -90,5 +92,14 @@ declare global {
     RendererProcessVariable: {
       theme?: { id: string; system: string };
     };
+    Tiff: new (arg: object) => {
+      toDataURL: () => string;
+    };
   }
+
+  export type ContextMenuModel =
+    import("../components/context-menu/ContextMenu.types").ContextMenuModel;
+
+  export type SeparatorType =
+    import("../components/context-menu/ContextMenu.types").SeparatorType;
 }

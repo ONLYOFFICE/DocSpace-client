@@ -7,6 +7,7 @@ import {
   currentQuotaStore,
   paymentQuotasStore,
   settingsStore,
+  campaignsStore,
 } from "@docspace/shared/store";
 
 import PaymentStore from "./PaymentStore";
@@ -297,6 +298,7 @@ const store = {
   publicRoomStore,
 
   pluginStore,
+  campaignsStore,
 };
 
 export default store;

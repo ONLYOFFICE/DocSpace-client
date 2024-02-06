@@ -97,8 +97,8 @@ class InfoPanelStore {
   };
 
   resetSearch = () => {
-    this.showSearchBlock = false;
-    this.searchValue = "";
+    this.setShowSearchBlock(false);
+    this.setSearchValue("");
   };
 
   setSelectionHistory = (obj) => (this.selectionHistory = obj);

@@ -21,12 +21,6 @@ import { CurrentQuotasStore } from "./CurrentQuotaStore";
 
 import { SettingsStore } from "./SettingsStore";
 
-export type TSocketQuota = {
-  customQuotaFeature: string;
-  usedSpace?: number;
-  quotaLimit?: number;
-};
-
 class AuthStore {
   userStore: UserStore | null = null;
 

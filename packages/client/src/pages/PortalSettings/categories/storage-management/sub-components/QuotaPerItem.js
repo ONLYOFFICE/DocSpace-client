@@ -98,8 +98,7 @@ const QuotaPerItemComponent = (props) => {
   );
 };
 
-export default inject(({ auth, storageManagement }, { type }) => {
-  const { currentQuotaStore } = auth;
+export default inject(({ currentQuotaStore, storageManagement }, { type }) => {
   const { setUserQuota, defaultUsersQuota, defaultRoomsQuota } =
     currentQuotaStore;
   const { isStatisticsAvailable } = currentQuotaStore;

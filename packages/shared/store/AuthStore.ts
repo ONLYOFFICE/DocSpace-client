@@ -21,6 +21,12 @@ import { CurrentQuotasStore } from "./CurrentQuotaStore";
 
 import { SettingsStore } from "./SettingsStore";
 
+export type TSocketQuota = {
+  customQuotaFeature: string;
+  usedSpace?: number;
+  quotaLimit?: number;
+};
+
 class AuthStore {
   userStore: UserStore | null = null;
 
@@ -83,6 +89,24 @@ class AuthStore {
         }
 
         this.currentQuotaStore?.updateQuotaFeatureValue(featureId, value);
+      });
+    });
+    socketHelper.on("s:change-user-quota-used-value", (options) => {
+      console.log(`[WS] change-user-quota-used-value`, options);
+
+      runInAction(() => {
+        if (options.customQuotaFeature === "user_custom_quota") {
+          this.userStore?.updateUserQuota(
+            options.usedSpace,
+            options.quotaLimit,
+          );
+
+          return;
+        }
+
+        const { customQuotaFeature, ...updatableObject } = options;
+
+        this.currentQuotaStore?.updateTenantCustomQuota(updatableObject);
       });
     });
   }

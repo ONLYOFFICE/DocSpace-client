@@ -95,12 +95,12 @@ const UserContent = ({
     role === "owner"
       ? t("Common:Owner")
       : role === "admin"
-      ? t("Common:DocSpaceAdmin")
-      : isCollaborator
-      ? t("Common:PowerUser")
-      : isVisitor
-      ? t("Common:User")
-      : t("Common:RoomAdmin");
+        ? t("Common:DocSpaceAdmin")
+        : isCollaborator
+          ? t("Common:PowerUser")
+          : isVisitor
+            ? t("Common:User")
+            : t("Common:RoomAdmin");
 
   const isPaidUser = !standalone && !isVisitor;
   const spaceQuota = getSpaceQuotaAsText(
@@ -130,8 +130,8 @@ const UserContent = ({
         {statusType === "pending"
           ? email
           : displayName?.trim()
-          ? displayName
-          : email}
+            ? displayName
+            : email}
       </Link>
 
       <Badges statusType={statusType} isPaid={isPaidUser} isSSO={isSSO} />
@@ -178,8 +178,7 @@ const UserContent = ({
   );
 };
 
-export default inject(({ auth }) => {
-  const { currentQuotaStore } = auth;
+export default inject(({ currentQuotaStore }) => {
   const { isDefaultUsersQuotaSet, showStorageInfo } = currentQuotaStore;
   return {
     isDefaultUsersQuotaSet,

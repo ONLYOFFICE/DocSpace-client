@@ -81,8 +81,7 @@ const RoomsListComponent = (props) => {
   );
 };
 
-export default inject(({ auth, filesStore }) => {
-  const { userStore } = auth;
+export default inject(({ userStore, filesStore }) => {
   const { user } = userStore;
   const { filesList } = filesStore;
 

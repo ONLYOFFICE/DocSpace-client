@@ -138,6 +138,13 @@ class UserStore {
     }
   };
 
+  updateUserQuota = (usedSpace: number, quotaLimit: number) => {
+    if (!this.user) return;
+
+    this.user.usedSpace = usedSpace;
+    this.user.quotaLimit = quotaLimit;
+  };
+
   get withActivationBar() {
     return (
       this.user &&
@@ -149,6 +156,15 @@ class UserStore {
 
   get isAuthenticated() {
     return !!this.user;
+  }
+
+  get personalQuotaLimitReached() {
+    if (!this.user || !this.user.quotaLimit || !this.user.usedSpace)
+      return false;
+
+    if (this.user.quotaLimit === -1) return false;
+
+    return this.user.quotaLimit <= this.user.usedSpace;
   }
 }
 

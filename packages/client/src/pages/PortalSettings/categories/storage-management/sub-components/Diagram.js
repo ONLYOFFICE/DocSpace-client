@@ -81,9 +81,8 @@ const Diagram = (props) => {
   );
 };
 
-export default inject(({ storageManagement, auth }) => {
+export default inject(({ storageManagement, currentQuotaStore }) => {
   const { filesUsedSpace } = storageManagement;
-  const { currentQuotaStore } = auth;
   const { tenantCustomQuota, usedTotalStorageSizeCount } = currentQuotaStore;
 
   return {

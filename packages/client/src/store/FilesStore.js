@@ -1466,11 +1466,11 @@ class FilesStore {
 
             // TODO: see bug 63479
             if (this.selectedFolderStore?.id === folderId) {
-            // Restore not processed
-            tempSelection.length && this.setSelection(tempSelection);
-            tempBuffer && this.setBufferSelection(tempBuffer);
+              // Restore not processed
+              tempSelection.length && this.setSelection(tempSelection);
+              tempBuffer && this.setBufferSelection(tempBuffer);
+            }
           }
-        }
         }
 
         const navigationPath = await Promise.all(
@@ -4128,9 +4128,8 @@ class FilesStore {
   }
 
   get needResetFilesSelection() {
-    const { isVisible: infoPanelVisible } = this.authStore.infoPanelStore;
+    const { isVisible: infoPanelVisible } = this.infoPanelStore;
 
-   
     return !infoPanelVisible || this.selection.length > 1;
   }
 }

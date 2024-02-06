@@ -136,26 +136,29 @@ const DiskSpaceUsedComponent = (props) => {
   );
 };
 
-export default inject(({ auth, storageManagement }) => {
-  const { currentQuotaStore, settingsStore } = auth;
-  const {
-    isTenantCustomQuotaSet,
-    usedTotalStorageSizeCount,
-    maxTotalSizeByQuota: maxSizeByTariff,
-    tenantCustomQuota,
-    updateTenantCustomQuota,
-  } = currentQuotaStore;
-  const { portalInfo } = storageManagement;
-  const { standalone } = settingsStore;
+export default inject(
+  ({ settingsStore, currentQuotaStore, storageManagement }) => {
+    const {
+      isTenantCustomQuotaSet,
+      usedTotalStorageSizeCount,
+      maxTotalSizeByQuota: maxSizeByTariff,
+      tenantCustomQuota,
+      updateTenantCustomQuota,
+    } = currentQuotaStore;
+    const { portalInfo } = storageManagement;
+    const { standalone } = settingsStore;
 
-  const maxTotalSizeByQuota = standalone ? tenantCustomQuota : maxSizeByTariff;
+    const maxTotalSizeByQuota = standalone
+      ? tenantCustomQuota
+      : maxSizeByTariff;
 
-  return {
-    isTenantCustomQuotaSet,
-    usedTotalStorageSizeCount,
-    standalone,
-    maxTotalSizeByQuota,
-    portalInfo,
-    updateTenantCustomQuota,
-  };
-})(observer(DiskSpaceUsedComponent));
+    return {
+      isTenantCustomQuotaSet,
+      usedTotalStorageSizeCount,
+      standalone,
+      maxTotalSizeByQuota,
+      portalInfo,
+      updateTenantCustomQuota,
+    };
+  }
+)(observer(DiskSpaceUsedComponent));

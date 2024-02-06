@@ -166,7 +166,7 @@ const RoomsRowDataComponent = (props) => {
   );
 };
 
-export default inject(({ auth, tableStore }) => {
+export default inject(({ currentQuotaStore, tableStore }) => {
   const {
     roomColumnTypeIsEnabled,
     roomColumnOwnerIsEnabled,
@@ -175,8 +175,6 @@ export default inject(({ auth, tableStore }) => {
     roomColumnActivityIsEnabled,
     roomQuotaColumnIsEnable,
   } = tableStore;
-
-  const { currentQuotaStore } = auth;
 
   const { showStorageInfo } = currentQuotaStore;
   return {

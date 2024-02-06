@@ -94,21 +94,21 @@ const Details = ({
         </StyledThumbnail>
       ) : (
         <StyledNoThumbnail>
-            <RoomIcon
+          <RoomIcon
             color={selection.logo?.color}
-              title={selection.title}
-              isArchive={isArchive}
-              size="96px"
-              radius="16px"
+            title={selection.title}
+            isArchive={isArchive}
+            size="96px"
+            radius="16px"
             showDefault={showDefaultRoomIcon}
             imgClassName={`no-thumbnail-img ${selection.isRoom && "is-room"} ${
-                selection.isRoom &&
-                !isArchive &&
-                selection.logo?.large &&
-                "custom-logo"
-              }`}
+              selection.isRoom &&
+              !isArchive &&
+              selection.logo?.large &&
+              "custom-logo"
+            }`}
             imgSrc={currentIcon}
-            />
+          />
         </StyledNoThumbnail>
       )}
 
@@ -143,35 +143,39 @@ export default inject(
     filesActionsStore,
     infoPanelStore,
     userStore,
-	currentQuotaStore,
+    currentQuotaStore,
   }) => {
-    const { infoPanelSelection, getInfoPanelItemIcon, openUser } =
-      infoPanelStore;
-  const { createThumbnail } = filesStore;
+    const {
+      infoPanelSelection,
+      getInfoPanelItemIcon,
+      openUser,
+      setNewInfoPanelSelection,
+    } = infoPanelStore;
+    const { createThumbnail } = filesStore;
     const { personal, culture } = settingsStore;
-  const { user } = userStore;
+    const { user } = userStore;
 
-  const { selectTag } = filesActionsStore;
+    const { selectTag } = filesActionsStore;
 
-  const isVisitor = user.isVisitor;
-  const isCollaborator = user.isCollaborator;
+    const isVisitor = user.isVisitor;
+    const isCollaborator = user.isCollaborator;
 
-  const isArchive = infoPanelSelection?.rootFolderType === FolderType.Archive;
-  const { isDefaultRoomsQuotaSet } = currentQuotaStore;
+    const isArchive = infoPanelSelection?.rootFolderType === FolderType.Archive;
+    const { isDefaultRoomsQuotaSet } = currentQuotaStore;
 
-  return {
-    personal,
-    culture,
-    selection: infoPanelSelection,
-    createThumbnail,
-    getInfoPanelItemIcon,
-    openUser,
-    isVisitor,
-    isCollaborator,
-    selectTag,
-    isArchive,
-    isDefaultRoomsQuotaSet,
-    setNewInfoPanelSelection,
-  };
+    return {
+      personal,
+      culture,
+      selection: infoPanelSelection,
+      createThumbnail,
+      getInfoPanelItemIcon,
+      openUser,
+      isVisitor,
+      isCollaborator,
+      selectTag,
+      isArchive,
+      isDefaultRoomsQuotaSet,
+      setNewInfoPanelSelection,
+    };
   }
 )(withTranslation(["InfoPanel", "Common", "Translations", "Files"])(Details));

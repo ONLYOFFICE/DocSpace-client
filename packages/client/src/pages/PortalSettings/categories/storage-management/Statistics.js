@@ -90,8 +90,7 @@ const StatisticsComponent = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { currentQuotaStore } = auth;
+export default inject(({ currentQuotaStore }) => {
   const { isStatisticsAvailable } = currentQuotaStore;
 
   return {

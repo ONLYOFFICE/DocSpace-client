@@ -15,21 +15,24 @@ import {
   COUNT_FOR_SHOWING_BAR,
   PERCENTAGE_FOR_SHOWING_BAR,
 } from "../constants";
+import { UserStore } from "./UserStore";
 import {
   setDefaultUserQuota,
   setDefaultRoomQuota,
 } from "@docspace/shared/api/settings";
 
 class CurrentQuotasStore {
+  userStore: UserStore | null = null;
+
   currentPortalQuota: TPaymentQuota = {} as TPaymentQuota;
 
   currentPortalQuotaFeatures: TPaymentFeature[] = [];
 
   isLoaded = false;
 
-  constructor(userStore) {
+  constructor(userStoreConst: UserStore) {
     makeAutoObservable(this);
-    this.userStore = userStore;
+    this.userStore = userStoreConst;
   }
 
   setIsLoaded = (isLoaded: boolean) => {
@@ -148,7 +151,7 @@ class CurrentQuotasStore {
   }
   get isStatisticsAvailable() {
     const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === "statistic"
+      (obj) => obj.id === "statistic",
     );
 
     return result?.value;
@@ -228,7 +231,7 @@ class CurrentQuotasStore {
   }
 
   get showUserPersonalQuotaBar() {
-    const { personalQuotaLimitReached } = this.userStore;
+    const personalQuotaLimitReached = this.userStore?.personalQuotaLimitReached;
 
     if (!this.isDefaultUsersQuotaSet) return false;
 
@@ -239,7 +242,7 @@ class CurrentQuotasStore {
     return this.currentPortalQuota?.nonProfit;
   }
 
- get isDefaultRoomsQuotaSet() {
+  get isDefaultRoomsQuotaSet() {
     return this.currentPortalQuota?.roomsQuota?.enableQuota;
   }
 
@@ -262,13 +265,18 @@ class CurrentQuotasStore {
     return this.currentPortalQuota?.tenantCustomQuota?.quota;
   }
   get showStorageInfo() {
-    const { user } = this.userStore;
+    const user = this.userStore?.user;
+
+    if (!user) return false;
 
     return this.isStatisticsAvailable && (user.isOwner || user.isAdmin);
   }
 
-  updateTenantCustomQuota = (obj) => {
+  updateTenantCustomQuota = (obj: {
+    [key: string]: string | number | boolean;
+  }) => {
     for (let key in obj) {
+      // @ts-expect-error is always writable property
       this.currentPortalQuota.tenantCustomQuota[key] = obj[key];
     }
   };
@@ -306,7 +314,7 @@ class CurrentQuotasStore {
     }
   };
 
-  setUserQuota = async (quota, t) => {
+  setUserQuota = async (quota: string | number, t: (key: string) => string) => {
     const isEnable = quota !== -1;
 
     try {
@@ -316,12 +324,12 @@ class CurrentQuotasStore {
         : t("MemoryQuotaDisabled");
 
       toastr.success(toastrText);
-    } catch (e) {
+    } catch (e: any) {
       toastr.error(e);
     }
   };
 
- setRoomQuota = async (quota, t) => {
+  setRoomQuota = async (quota: string | number, t: (key: string) => string) => {
     const isEnable = quota !== -1;
 
     try {
@@ -331,9 +339,10 @@ class CurrentQuotasStore {
         : t("MemoryQuotaDisabled");
 
       toastr.success(toastrText);
-    } catch (e) {
+    } catch (e: any) {
       toastr.error(e);
     }
   };
+}
 
 export { CurrentQuotasStore };

@@ -28,8 +28,7 @@ const RoomQuota = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { currentQuotaStore } = auth;
+export default inject(({ currentQuotaStore }) => {
   const { defaultRoomsQuota } = currentQuotaStore;
 
   return { defaultRoomsQuota };

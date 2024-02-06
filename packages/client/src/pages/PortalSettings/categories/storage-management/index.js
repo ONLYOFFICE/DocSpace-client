@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import moment from "moment";
 
@@ -32,8 +32,8 @@ const StorageManagement = ({ isInit, language, init }) => {
   );
 };
 
-export default inject(({ auth, storageManagement }) => {
-  const { language } = auth;
+export default inject(({ authStore, storageManagement }) => {
+  const { language } = authStore;
   const { init, isInit } = storageManagement;
   return {
     isInit,

@@ -489,9 +489,10 @@ export default inject(
     publicRoomStore,
     clientLoadingStore,
     infoPanelStore,
+    currentQuotaStore,
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
-    const { currentQuotaStore } = auth;
+
     const { isDefaultRoomsQuotaSet, showStorageInfo } = currentQuotaStore;
 
     const {

@@ -43,7 +43,8 @@ const StatisticsComponent = (props) => {
           fileExst,
           isRoom,
           defaultRoomIcon,
-          "user-icon"
+          "user-icon",
+          displayName
         )}
         {textElement(displayName)}
         {quotaElement(item, "user")}

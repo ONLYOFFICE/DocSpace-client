@@ -466,8 +466,8 @@ const PeopleTableRow = (props) => {
             {statusType === "pending"
               ? email
               : displayName?.trim()
-              ? displayName
-              : email}
+                ? displayName
+                : email}
           </Link>
           <Badges statusType={statusType} isPaid={isPaidUser} isSSO={isSSO} />
         </TableCell>
@@ -540,9 +540,7 @@ const PeopleTableRow = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { currentQuotaStore } = auth;
-
+export default inject(({ currentQuotaStore }) => {
   const { showStorageInfo } = currentQuotaStore;
 
   return {

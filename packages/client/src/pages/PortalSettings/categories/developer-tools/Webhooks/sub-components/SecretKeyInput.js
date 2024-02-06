@@ -64,6 +64,7 @@ const SecretKeyInput = (props) => {
     webhooksGuideUrl,
     passwordInputKey,
     additionalId,
+    isDisabled,
   } = props;
 
   const { t } = useTranslation(["Webhooks"]);
@@ -113,7 +114,7 @@ const SecretKeyInput = (props) => {
                 href={webhooksGuideUrl}
                 target="_blank"
                 className="link"
-                color="#333333">
+              >
                 {t("ReadMore")}
               </Link>
             </Text>
@@ -131,7 +132,8 @@ const SecretKeyInput = (props) => {
             isHovered={true}
             onClick={hideReset}
             className="link"
-            color="#333333">
+            color="#333333"
+          >
             {t("ResetKey")}
           </Link>
         </Hint>
@@ -151,14 +153,16 @@ const SecretKeyInput = (props) => {
           isFullWidth={true}
           passwordSettings={PASSWORD_SETTINGS}
           key={passwordInputKey}
+          isDisabled={isDisabled}
         />
         <Link
           id="generate-link"
           type="action"
           fontWeight={600}
           isHovered={true}
-          onClick={generatePassword}
-          className="link dotted">
+          onClick={isDisabled ? () => {} : generatePassword}
+          className="link dotted"
+        >
           {t("Generate")}
         </Link>
       </div>

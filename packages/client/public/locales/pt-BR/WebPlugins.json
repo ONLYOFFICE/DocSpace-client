@@ -8,6 +8,7 @@
   "Metadata": "Metadata",
   "NeedSettings": "Precisa inserir configurações",
   "NoPlugins": "Nenhum plug-in adicionado",
+  "NotNeedSettings": "Não é necessário inserir configurações",
   "PluginSamples": "Amostras de plug-ins",
   "PluginSDK": "SDK de plug-in",
   "PluginSDKDescription": "Usando o Plugin SDK você pode estender a funcionalidade do DocSpace, conectar serviços de terceiros ou aprimorar a experiência do usuário existente. Aqui você pode encontrar os exemplos de plugins com código-fonte disponíveis no GitHub.",

@@ -54,5 +54,5 @@
   "WebhookRemoved": "Webhook silindi",
   "Webhooks": "Webhook-lar",
   "WebhooksGuide": "Webhook-ların Bələdçisi",
-  "WebhooksInfo": "ONLYOFFICE DocSpace-də müxtəlif hadisələr əsasında istifadə etdiyiniz hər hansı proqram və ya veb-saytla yanaşı fərdi hərəkətləri yerinə yetirmək üçün webhook-lardan istifadə edin."
+  "WebhooksInfo": "ONLYOFFICE DocSpace-də müxtəlif hadisələr əsasında istifadə etdiyiniz hər hansı proqram və ya veb-saytla yanaşı fərdi hərəkətləri yerinə yetirmək üçün webhook-lardan istifadə edin.\nBurada siz bütün webhook-larınızı yarada, idarə və konfiqurasiya edə, performansını yoxlamaq üçün hər bir webhook-un tarixçəsinə baxa bilərsiniz."
 }

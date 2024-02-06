@@ -30,6 +30,7 @@ import {
   FileStatus,
   FolderType,
   RoomsType,
+  ShareAccessRights,
 } from "@docspace/common/constants";
 import { makeAutoObservable } from "mobx";
 
@@ -608,17 +609,15 @@ class FilesActionStore {
     }
   };
 
-  downloadAction = (label, folderId) => {
+  downloadAction = (label, item, folderId) => {
     const { bufferSelection } = this.filesStore;
-    const { isVisible: infoPanelIsVisible, selection: infoPanelSelection } =
-      this.authStore.infoPanelStore;
 
-    const selection = this.filesStore.selection.length
+    const selection = item
+      ? [item]
+      : this.filesStore.selection.length
       ? this.filesStore.selection
       : bufferSelection
       ? [bufferSelection]
-      : infoPanelIsVisible && infoPanelSelection != null
-      ? [infoPanelSelection]
       : null;
 
     if (!selection.length) return;
@@ -753,6 +752,8 @@ class FilesActionStore {
         operationId,
       });
 
+      const id = Array.isArray(itemId) ? itemId : [itemId];
+
       try {
         await this.deleteItemOperation(
           isFile,
@@ -761,12 +762,7 @@ class FilesActionStore {
           isRoom,
           operationId
         );
-
-        const id = Array.isArray(itemId) ? itemId : [itemId];
-
-        clearActiveOperations(isFile && id, !isFile && id);
       } catch (err) {
-        clearActiveOperations(isFile && [itemId], !isFile && [itemId]);
         setSecondaryProgressBarData({
           visible: true,
           alert: true,
@@ -774,6 +770,11 @@ class FilesActionStore {
         });
         setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
         return toastr.error(err.message ? err.message : err);
+      } finally {
+        setTimeout(
+          () => clearActiveOperations(isFile && id, !isFile && id),
+          TIMEOUT
+        );
       }
     }
   };
@@ -1697,6 +1698,8 @@ class FilesActionStore {
       operationId,
     });
 
+    const id = Array.isArray(itemId) ? itemId : [itemId];
+
     try {
       this.setGroupMenuBlocked(true);
       await this.deleteItemOperation(
@@ -1706,13 +1709,9 @@ class FilesActionStore {
         true,
         operationId
       );
-
-      const id = Array.isArray(itemId) ? itemId : [itemId];
-
-      clearActiveOperations(null, id);
     } catch (err) {
       console.log(err);
-      clearActiveOperations(null, [itemId]);
+
       setSecondaryProgressBarData({
         visible: true,
         alert: true,
@@ -1722,6 +1721,7 @@ class FilesActionStore {
       return toastr.error(err.message ? err.message : err);
     } finally {
       this.setGroupMenuBlocked(false);
+      setTimeout(() => clearActiveOperations(null, id), TIMEOUT);
     }
   };
 
@@ -2097,8 +2097,10 @@ class FilesActionStore {
 
     const { roomType, title: currentTitle } = this.selectedFolderStore;
 
-    if (this.publicRoomStore.isPublicRoom && item.isFolder)
+    if (this.publicRoomStore.isPublicRoom && item.isFolder) {
+      setSelection([]);
       return this.moveToPublicRoom(item.id);
+    }
 
     const setIsLoading = (param) => {
       setIsSectionFilterLoading(param);
@@ -2416,6 +2418,88 @@ class FilesActionStore {
     };
 
     this.uploadDataStore.itemOperationToFolder(operationData);
+  };
+
+  onLeaveRoom = (t, isOwner = false) => {
+    const {
+      updateRoomMemberRole,
+      removeFiles,
+      folders,
+      setFolders,
+      selection,
+      bufferSelection,
+    } = this.filesStore;
+    const { user } = this.authStore.userStore;
+
+    const roomId = selection.length
+      ? selection[0].id
+      : bufferSelection
+      ? bufferSelection.id
+      : this.selectedFolderStore.id;
+
+    const isAdmin = user.isOwner || user.isAdmin;
+    const isRoot = this.selectedFolderStore.isRootFolder;
+
+    return updateRoomMemberRole(roomId, {
+      invitations: [{ id: user?.id, access: ShareAccessRights.None }],
+    }).then(() => {
+      if (!isAdmin) {
+        if (!isRoot) {
+          const filter = RoomsFilter.getDefault();
+          window.DocSpace.navigate(
+            `rooms/shared/filter?${filter.toUrlParams()}`
+          );
+        } else {
+          removeFiles(null, [roomId]);
+        }
+      } else {
+        if (!isRoot) {
+          this.selectedFolderStore.setInRoom(false);
+        } else {
+          const newFolders = folders;
+          const folderIndex = newFolders.findIndex((r) => r.id === roomId);
+          if (folderIndex > -1) {
+            newFolders[folderIndex].inRoom = false;
+            setFolders(newFolders);
+          }
+        }
+      }
+
+      isOwner
+        ? toastr.success(t("Files:LeftAndAppointNewOwner"))
+        : toastr.success(t("Files:YouLeftTheRoom"));
+    });
+  };
+
+  changeRoomOwner = (t, userId, isLeaveChecked = false) => {
+    const { setRoomOwner, setFolder, setSelected, selection, bufferSelection } =
+      this.filesStore;
+    const { isRootFolder, setCreatedBy, id, setInRoom } =
+      this.selectedFolderStore;
+
+    const roomId = selection.length
+      ? selection[0].id
+      : bufferSelection
+      ? bufferSelection.id
+      : id;
+
+    return setRoomOwner(userId, [roomId])
+      .then(async (res) => {
+        if (isRootFolder) {
+          setFolder(res[0]);
+        } else {
+          setCreatedBy(res[0].createdBy);
+
+          const isMe = userId === this.authStore.userStore.user.id;
+          if (isMe) setInRoom(true);
+        }
+
+        if (isLeaveChecked) await this.onLeaveRoom(t);
+        else toastr.success(t("Files:AppointNewOwner"));
+      })
+      .finally(() => {
+        setSelected("none");
+      });
   };
 }
 

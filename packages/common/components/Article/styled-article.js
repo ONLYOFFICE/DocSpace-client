@@ -282,7 +282,7 @@ StyledArticleProfile.defaultProps = { theme: Base };
 
 const StyledUserName = styled.div`
   display: flex;
-  flex-direction: ${(props) => (props.length > 18 ? "column" : "row")};
+  flex-wrap: wrap;
   max-width: 131px;
   min-width: 131px;
   ${(props) =>

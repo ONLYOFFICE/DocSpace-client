@@ -16,6 +16,8 @@ const StyledContainer = styled.div`
   display: grid;
   align-items: center;
 
+  margin-right: ${(props) => (props.isTrashFolder ? "16px" : 0)};
+
   grid-template-columns: ${({ isRootFolder, withLogo }) =>
     isRootFolder
       ? withLogo

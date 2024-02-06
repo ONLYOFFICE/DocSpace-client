@@ -100,10 +100,6 @@ class WebhooksStore {
     ];
   };
 
-  isWebhookExist = (desiredWebhook) => {
-    return this.webhooks.some((webhook) => webhook.id === desiredWebhook.id);
-  };
-
   toggleEnabled = async (desiredWebhook) => {
     await toggleEnabledWebhook(desiredWebhook);
     const index = this.webhooks.findIndex((webhook) => webhook.id === desiredWebhook.id);

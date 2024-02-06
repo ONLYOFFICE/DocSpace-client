@@ -107,7 +107,6 @@ class ProfileActionsStore {
 
     if ((isAdmin || isOwner || isRoomAdmin) && !prefix) {
       this.selectedFolderStore.setSelectedFolder(null);
-      this.treeFoldersStore.setSelectedNode(["accounts"]);
     }
 
     const state = {
@@ -173,19 +172,17 @@ class ProfileActionsStore {
     }
   };
 
-  onLogoutClick = () => {
-    this.authStore.logout().then((ssoLogoutUrl) => {
-      this.filesStore.reset();
-      this.peopleStore.reset();
-      setTimeout(() => {
-        window.location.replace(
-          combineUrl(
-            window.DocSpaceConfig?.proxy?.url,
-            ssoLogoutUrl || "/login"
-          )
-        );
-      }, 300);
-    });
+  onLogoutClick = async (t) => {
+    try {
+      const ssoLogoutUrl = await this.authStore.logout(false);
+
+      window.location.replace(
+        combineUrl(window.DocSpaceConfig?.proxy?.url, ssoLogoutUrl || "/login")
+      );
+    } catch (e) {
+      console.error(e);
+      toastr.error(t("Common:UnexpectedError"));
+    }
   };
 
   onDebugClick = () => {
@@ -327,7 +324,7 @@ class ProfileActionsStore {
         key: "user-menu-logout",
         icon: LogoutReactSvgUrl,
         label: t("Common:LogoutButton"),
-        onClick: this.onLogoutClick,
+        onClick: () => this.onLogoutClick(t),
         isButton: true,
       });
     }

@@ -8,7 +8,7 @@ import Text from "@docspace/components/text";
 
 const StyledInfoBar = styled.div`
   display: flex;
-  background-color: #f8f9f9;
+  background-color: ${(props) => props.theme.infoBar.background};
   color: #333;
   font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
   padding: 12px 16px;
@@ -33,9 +33,13 @@ const StyledInfoBar = styled.div`
         }
       }
     }
+
+    &__title {
+      color: ${(props) => props.theme.infoBar.title};
+    }
   }
   .body-container {
-    color: #555f65;
+    color: ${(props) => props.theme.infoBar.description};
     font-weight: 400;
   }
   .close-icon {
@@ -44,8 +48,8 @@ const StyledInfoBar = styled.div`
       fill: ${({ theme }) => theme.iconButton.color};
     }
     svg {
-      weight: 10px;
-      height: 10px;
+      width: 12px;
+      height: 12px;
     }
   }
 `;
@@ -60,7 +64,7 @@ const InfoBar = (props) => {
           <div className="header-icon">
             <ReactSVG src={InfoIcon} />
           </div>
-          <Text fontSize="12px" fontWeight={600}>
+          <Text className="header-body__title" fontSize="12px" fontWeight={600}>
             {t("Common:Info")}
           </Text>
         </div>

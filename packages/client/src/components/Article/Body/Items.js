@@ -104,7 +104,14 @@ const Item = ({
   const onClickAction = React.useCallback(
     (folderId) => {
       setBufferSelection(null);
-      onClick && onClick(folderId, item.title, item.rootFolderType);
+
+      onClick &&
+        onClick(
+          folderId,
+          item.title,
+          item.rootFolderType,
+          item.security.Create
+        );
     },
     [onClick, item.title, item.rootFolderType]
   );
@@ -139,7 +146,7 @@ const Item = ({
         labelBadge={labelBadge}
         onClickBadge={onBadgeClick}
         iconBadge={iconBadge}
-        badgeTitle={t("RecycleBinAction")}
+        badgeTitle={labelBadge ? "" : t("RecycleBinAction")}
       />
     </StyledDragAndDrop>
   );
@@ -184,6 +191,7 @@ const Items = ({
   isCommunity,
   isPaymentPageAvailable,
   currentDeviceType,
+  folderAccess,
 }) => {
   const getEndOfBlock = React.useCallback(
     (item) => {
@@ -228,24 +236,15 @@ const Items = ({
         return true;
       }
 
-      if (isAdmin) {
-        if (
-          (item.pathParts &&
-            (item.pathParts[0].id === myId ||
-              item.pathParts[0].id === commonId)) ||
-          item.rootFolderType === FolderType.USER ||
-          item.rootFolderType === FolderType.COMMON ||
-          (item.rootFolderType === FolderType.TRASH && startDrag && !isArchive)
-        ) {
-          return true;
-        }
-      } else {
-        if (
-          (item.pathParts && item.pathParts[0].id === myId) ||
-          item.rootFolderType === FolderType.USER
-        ) {
-          return true;
-        }
+      if (
+        (item.rootFolderType === FolderType.TRASH && startDrag && !isArchive) ||
+        item.rootFolderType === FolderType.USER
+      ) {
+        return (
+          folderAccess === ShareAccessRights.None ||
+          folderAccess === ShareAccessRights.FullAccess ||
+          folderAccess === ShareAccessRights.RoomManager
+        );
       }
 
       return false;
@@ -417,7 +416,7 @@ export default inject(
     const { treeFolders, myFolderId, commonFolderId, isPrivacyFolder } =
       treeFoldersStore;
 
-    const { id } = selectedFolderStore;
+    const { id, access: folderAccess } = selectedFolderStore;
     const {
       moveDragItems,
       uploadEmptyFolders,
@@ -460,6 +459,7 @@ export default inject(
       isCommunity,
       isPaymentPageAvailable,
       currentDeviceType,
+      folderAccess,
     };
   }
 )(withTranslation(["Files", "Common", "Translations"])(observer(Items)));

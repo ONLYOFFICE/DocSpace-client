@@ -90,6 +90,10 @@ const Base = {
 
   backgroundAndSubstrateColor: "#F8F9F9",
 
+  betaBadgeTooltip: {
+    boxShadowColor: "rgba(4, 15, 27, 0.12)",
+  },
+
   button: {
     fontWeight: "600",
     margin: "0",
@@ -944,12 +948,12 @@ const Base = {
 
   tooltip: {
     borderRadius: "6px",
-    boxShadow: "0px 10px 15px rgba(4, 15, 27, 0.13)",
+    boxShadow: "0px 10px 15px rgba(4, 15, 27, 0.12)",
     opacity: "1",
     padding: "8px 12px",
     pointerEvents: "auto",
     maxWidth: "340px",
-    color: "#F8F7BF",
+    color: white,
     textColor: black,
 
     before: {
@@ -1946,8 +1950,9 @@ const Base = {
   navigation: {
     expanderColor: black,
     background: white,
-    rootFolderTitleColor: "#A3A9AE",
+    rootFolderTitleColor: "#657077",
     publicIcon: black,
+    boxShadow: " 0px 12px 40px 0px #040F1B1F",
 
     icon: {
       fill: "#316DAA",
@@ -2067,11 +2072,13 @@ const Base = {
     fill: grayMain,
     expanderColor: "dimgray",
     downloadAppList: {
-      color: "#83888d",
+      textColor: "#A3A9AE",
+      color: "#CDCFD1",
       winHoverColor: "#3785D3",
       macHoverColor: "#000",
       linuxHoverColor: "#FFB800",
       androidHoverColor: "#9BD71C",
+      iosHoverColor: "#000",
     },
     thirdPartyList: {
       color: "#818b91",
@@ -2289,8 +2296,8 @@ const Base = {
     border: `1px solid ${grayLightMid}`,
 
     breadCrumbs: {
-      prevItemColor: "#A3A9AE",
-      arrowRightColor: "#A3A9AE",
+      prevItemColor: "#657077",
+      arrowRightColor: "#657077",
     },
 
     bodyDescriptionText: "#A3A9AE",
@@ -3169,6 +3176,12 @@ const Base = {
     background: "#F8F9F9",
     headerColor: "#333",
     descriptionColor: "#555F65",
+  },
+
+  infoBar: {
+    background: "#f8f9f9",
+    title: black,
+    description: cyanBlueDarkShade,
   },
 
   roomIcon: {

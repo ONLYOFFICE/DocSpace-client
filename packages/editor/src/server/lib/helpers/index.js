@@ -156,10 +156,9 @@ export const initDocEditor = async (req) => {
         config.editorConfig.customization.logo.url +
         getLogoFromPath(config.editorConfig.customization.customer.logo);
     }
-
     // needed to reset rtl language in Editor
     config.editorConfig.lang = getLtrLanguageForEditor(
-      user?.cultureName || "en",
+      user?.cultureName,
       settings.culture,
       true
     );

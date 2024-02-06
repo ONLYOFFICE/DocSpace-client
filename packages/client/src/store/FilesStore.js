@@ -9,6 +9,7 @@ import {
   RoomsType,
   RoomsTypeValues,
   RoomsProviderType,
+  ShareAccessRights,
 } from "@docspace/common/constants";
 
 import { combineUrl } from "@docspace/common/utils";
@@ -274,6 +275,7 @@ class FilesStore {
       const foundIndex = fileId && this.files.findIndex((x) => x.id === fileId);
 
       this.treeFoldersStore.fetchTreeFolders();
+
       if (foundIndex == -1) return;
 
       this.updateFileStatus(
@@ -366,9 +368,7 @@ class FilesStore {
       this.setFiles(newFiles);
     });
 
-    if (!this.publicRoomStore.isPublicRoom) {
-      this.debouncefetchTreeFolders();
-    }
+    this.debouncefetchTreeFolders();
   };
 
   debouncefetchTreeFolders = debounce(() => {
@@ -709,20 +709,26 @@ class FilesStore {
     this.selectedFolderStore.setSelectedFolder(null);
   };
 
+  mappingActiveItems = (items, destFolderId) => {
+    const arrayFormation = items.map((item) =>
+      typeof item === "object"
+        ? { ...item, destFolderId: destFolderId ?? item.destFolderId }
+        : {
+            id: item,
+            destFolderId,
+          }
+    );
+    return arrayFormation;
+  };
+
   setActiveFiles = (activeFiles, destFolderId) => {
-    const arrayFormation = activeFiles.map((id) => ({
-      id,
-      destFolderId,
-    }));
+    const arrayFormation = this.mappingActiveItems(activeFiles, destFolderId);
 
     this.activeFiles = arrayFormation;
   };
 
   setActiveFolders = (activeFolders, destFolderId) => {
-    const arrayFormation = activeFolders.map((id) => ({
-      id,
-      destFolderId,
-    }));
+    const arrayFormation = this.mappingActiveItems(activeFolders, destFolderId);
 
     this.activeFolders = arrayFormation;
   };
@@ -1475,11 +1481,16 @@ class FilesStore {
               (data.current.rootFolderType === Rooms ||
                 data.current.rootFolderType === Archive);
 
+            let shared, canCopyPublicLink;
             if (idx === 1) {
               let room = data.current;
 
               if (!isCurrentFolder) {
                 room = await api.files.getFolderInfo(folderId);
+                shared = room.shared;
+                canCopyPublicLink =
+                  room.access === ShareAccessRights.RoomManager ||
+                  room.access === ShareAccessRights.None;
               }
 
               const { mute } = room;
@@ -1495,6 +1506,8 @@ class FilesStore {
               isRoom: !!roomType,
               roomType,
               isRootRoom,
+              shared,
+              canCopyPublicLink,
             };
           })
         ).then((res) => {
@@ -1508,6 +1521,7 @@ class FilesStore {
         this.selectedFolderStore.setSelectedFolder({
           folders: data.folders,
           ...data.current,
+          inRoom: !!data.current.inRoom,
           pathParts: data.pathParts,
           navigationPath,
           ...{ new: data.new },
@@ -2255,9 +2269,9 @@ class FilesStore {
         }
       }
 
-      if (fromInfoPanel) {
-        roomOptions = this.removeOptions(roomOptions, ["external-link"]);
-      }
+      // if (fromInfoPanel) {
+      //   roomOptions = this.removeOptions(roomOptions, ["external-link"]);
+      // }
 
       roomOptions = this.removeSeparator(roomOptions);
 
@@ -2665,6 +2679,7 @@ class FilesStore {
           );
 
       newFilter.total -= deleteCount;
+      this.setIsEmptyPage(newFilter.total <= 0);
 
       runInAction(() => {
         isRooms ? this.setRoomsFilter(newFilter) : this.setFilter(newFilter);
@@ -3017,7 +3032,7 @@ class FilesStore {
         security,
         viewAccessibility,
         mute,
-        inRoom = true,
+        inRoom,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3106,6 +3121,10 @@ class FilesStore {
 
       const isForm = fileExst === ".oform";
 
+      const canCopyPublicLink =
+        access === ShareAccessRights.RoomManager ||
+        access === ShareAccessRights.None;
+
       return {
         access,
         daysRemaining: autoDelete && getDaysRemaining(autoDelete),
@@ -3172,6 +3191,7 @@ class FilesStore {
         ...pluginOptions,
         inRoom,
         isForm,
+        canCopyPublicLink,
       };
     });
 
@@ -3951,6 +3971,18 @@ class FilesStore {
     if (roomIndex !== -1) {
       this.folders[roomIndex].shared = shared;
     }
+
+    const navigationPath = [...this.selectedFolderStore.navigationPath];
+
+    if (this.selectedFolderStore.id === roomId) {
+      this.selectedFolderStore.setShared(shared);
+      return;
+    }
+
+    const pathPartsRoomIndex = navigationPath.findIndex((f) => f.id === roomId);
+    if (pathPartsRoomIndex === -1) return;
+    navigationPath[pathPartsRoomIndex].shared = shared;
+    this.selectedFolderStore.setNavigationPath(navigationPath);
   };
 
   get isFiltered() {

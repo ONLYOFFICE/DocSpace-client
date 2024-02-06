@@ -83,6 +83,10 @@ const Dark = {
 
   backgroundAndSubstrateColor: "#282828",
 
+  betaBadgeTooltip: {
+    boxShadowColor: "rgba(0, 0, 0, 0.40)",
+  },
+
   button: {
     fontWeight: "600",
     margin: "0",
@@ -934,13 +938,13 @@ const Dark = {
 
   tooltip: {
     borderRadius: "6px",
-    boxShadow: "0px 10px 15px rgba(4, 15, 27, 0.13)",
+    boxShadow: "0px 10px 15px rgba(0, 0, 0, 0.40)",
     opacity: "1",
     padding: "8px 12px",
     pointerEvents: "auto",
     maxWidth: "340px",
-    color: "#F5E9BA",
-    textColor: black,
+    color: "#242424",
+    textColor: white,
 
     before: {
       border: "none",
@@ -1941,8 +1945,9 @@ const Dark = {
   navigation: {
     expanderColor: "#eeeeee",
     background: black,
-    rootFolderTitleColor: "#858585",
+    rootFolderTitleColor: "#ADADAD",
     publicIcon: "#858585",
+    boxShadow: "0px 12px 40px 0px #00000066",
 
     icon: {
       fill: "#E06A1B",
@@ -2063,11 +2068,13 @@ const Dark = {
     expanderColor: "#C4C4C4",
 
     downloadAppList: {
-      color: "#C4C4C4",
+      textColor: "#858585",
+      color: "#5C5C5C",
       winHoverColor: "#3785D3",
-      macHoverColor: "#000",
+      macHoverColor: "#fff",
       linuxHoverColor: "#FFB800",
       androidHoverColor: "#9BD71C",
+      iosHoverColor: "#fff",
     },
 
     thirdPartyList: {
@@ -2291,8 +2298,8 @@ const Dark = {
     border: `1px solid #474747`,
 
     breadCrumbs: {
-      prevItemColor: "#858585",
-      arrowRightColor: "#858585",
+      prevItemColor: "#ADADAD",
+      arrowRightColor: "#ADADAD",
     },
 
     bodyDescriptionText: "#858585",
@@ -3170,6 +3177,12 @@ const Dark = {
     background: "#282828",
     headerColor: "#FFF",
     descriptionColor: "#ADADAD",
+  },
+
+  infoBar: {
+    background: "#282828",
+    title: white,
+    description: "#ADADAD",
   },
 
   roomIcon: {

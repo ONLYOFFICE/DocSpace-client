@@ -1,5 +1,6 @@
 {
   "DocumentsFileType": "dokumenti",
+  "ErrorConnectionLost": "Povezava je prekinjena",
   "FileLocation": "Pojdi v dokumente",
   "FileName": "Ime datoteke",
   "ImageFileType": "slike",

@@ -7,6 +7,7 @@ import { Hint } from "../styled-components";
 import { SSLVerification } from "./SSLVerification";
 import SecretKeyInput from "./SecretKeyInput";
 import { useTranslation } from "react-i18next";
+import toastr from "@docspace/components/toast/toastr";
 
 const ModalDialogContainer = styled(ModalDialog)`
   .modal-body {
@@ -55,6 +56,7 @@ const WebhookDialog = (props) => {
 
   const [isResetVisible, setIsResetVisible] = useState(isSettingsModal);
 
+  const [isLoading, setIsLoading] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [isValid, setIsValid] = useState({
     name: true,
@@ -111,20 +113,30 @@ const WebhookDialog = (props) => {
     validateForm() && submitButtonRef.current.click();
   };
 
-  const onFormSubmit = (e) => {
+  const onFormSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-    onSubmit(webhookInfo);
-    setWebhookInfo({
-      id: webhook ? webhook.id : 0,
-      name: "",
-      uri: "",
-      secretKey: "",
-      enabled: true,
-    });
-    setIsPasswordValid(false);
-    setPasswordInputKey((prevKey) => prevKey + 1);
-    onModalClose();
+    setIsLoading(true);
+    try {
+      await onSubmit(webhookInfo);
+      isSettingsModal
+        ? toastr.success(t("WebhookEditedSuccessfully"))
+        : toastr.success(t("WebhookCreated"));
+      setWebhookInfo({
+        id: webhook ? webhook.id : 0,
+        name: "",
+        uri: "",
+        secretKey: "",
+        enabled: true,
+      });
+      setIsPasswordValid(false);
+      setPasswordInputKey((prevKey) => prevKey + 1);
+      onModalClose();
+    } catch (error) {
+      toastr.error(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const cleanUpEvent = () => window.removeEventListener("keyup", onKeyPress);
@@ -152,7 +164,8 @@ const WebhookDialog = (props) => {
       withFooterBorder
       visible={visible}
       onClose={onModalClose}
-      displayType="aside">
+      displayType="aside"
+    >
       <ModalDialog.Header>{header}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledWebhookForm onSubmit={onFormSubmit}>
@@ -166,6 +179,7 @@ const WebhookDialog = (props) => {
             onChange={onInputChange}
             hasError={!isValid.name}
             className={isSettingsModal ? "margin-0" : ""}
+            isDisabled={isLoading}
             required
           />
           <LabledInput
@@ -176,6 +190,7 @@ const WebhookDialog = (props) => {
             value={webhookInfo.uri}
             onChange={onInputChange}
             hasError={!isValid.uri}
+            isDisabled={isLoading}
             required
           />
           <SecretKeyInput
@@ -188,8 +203,13 @@ const WebhookDialog = (props) => {
             setIsResetVisible={setIsResetVisible}
             passwordInputKey={passwordInputKey}
             additionalId={additionalId}
+            isDisabled={isLoading}
           />
-          <SSLVerification value={webhookInfo.ssl} onChange={onInputChange} />
+          <SSLVerification
+            value={webhookInfo.ssl}
+            onChange={onInputChange}
+            isDisabled={isLoading}
+          />
 
           <button type="submit" ref={submitButtonRef} hidden></button>
         </StyledWebhookForm>
@@ -203,6 +223,8 @@ const WebhookDialog = (props) => {
             size="normal"
             primary={true}
             onClick={handleSubmitClick}
+            isDisabled={isLoading}
+            isLoading={isLoading}
           />
           <Button
             id="cancel-button"

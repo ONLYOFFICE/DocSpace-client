@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import { cloneDeep } from "lodash";
 
 import api from "@docspace/common/api";
@@ -216,7 +216,11 @@ class PluginStore {
       this.deactivatePlugin(name);
 
       if (pluginIdx !== -1) {
-        this.plugins.splice(pluginIdx, 1);
+        runInAction(() => {
+          this.plugins.splice(pluginIdx, 1);
+
+          if (this.plugins.length === 0) this.setIsEmptyList(true);
+        });
       }
     } catch (e) {
       console.log(e);
@@ -265,7 +269,11 @@ class PluginStore {
       const idx = this.plugins.findIndex((p) => p.name === plugin.name);
 
       if (idx === -1) {
-        this.plugins.unshift(plugin);
+        runInAction(() => {
+          this.plugins = [{ ...plugin }, ...this.plugins];
+        });
+
+        this.setIsEmptyList(false);
       } else {
         this.plugins[idx] = plugin;
       }

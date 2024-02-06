@@ -24,7 +24,7 @@ import {
   size as deviceSize,
   isTablet,
 } from "@docspace/components/utils/device";
-import { wrongPortalNameUrl } from "@docspace/common/constants";
+import { wrongPortalNameUrl } from "../constants";
 import { ARTICLE_ALERTS } from "@docspace/client/src/helpers/constants";
 import toastr from "@docspace/components/toast/toastr";
 //import { getFromLocalStorage } from "@docspace/client/src/pages/PortalSettings/utils";
@@ -95,6 +95,7 @@ class SettingsStore {
   urlLicense = "https://gnu.org/licenses/gpl-3.0.html";
   urlSupport = "https://helpdesk.onlyoffice.com/";
 
+  forumLink = null;
   formGallery = {
     url: "",
     ext: ".oform",
@@ -166,7 +167,7 @@ class SettingsStore {
   currentColorScheme = null;
 
   enablePlugins = false;
-  pluginOptions = [];
+  pluginOptions = { upload: false, delete: false };
   domainValidator = null;
 
   additionalResourcesData = null;
@@ -485,7 +486,11 @@ class SettingsStore {
 
     if (origSettings?.plugins?.enabled) {
       this.enablePlugins = origSettings.plugins.enabled;
-      this.pluginOptions = origSettings.plugins.allow;
+
+      this.pluginOptions = {
+        upload: origSettings.plugins.upload,
+        delete: origSettings.plugins.delete,
+      };
     }
 
     if (origSettings?.tenantAlias) {
@@ -938,6 +943,7 @@ class SettingsStore {
   };
 
   get isFrame() {
+    console.log("get isFrame:", this.frameConfig?.name === window.name);
     return this.frameConfig?.name === window.name;
   }
 

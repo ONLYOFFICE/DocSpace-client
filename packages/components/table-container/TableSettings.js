@@ -9,13 +9,13 @@ import {
 import Checkbox from "../checkbox";
 import SettingsDeskReactSvgUrl from "PUBLIC_DIR/images/settings.desc.react.svg?url";
 
-const TableSettings = ({ columns, infoPanelVisible }) => {
+const TableSettings = ({ columns, disableSettings }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const ref = useRef();
 
   const onClick = () => {
-    !infoPanelVisible && setIsOpen(!isOpen);
+    !disableSettings && setIsOpen(!isOpen);
   };
 
   const clickOutsideAction = (e) => {
@@ -36,7 +36,7 @@ const TableSettings = ({ columns, infoPanelVisible }) => {
         isFill
         iconName={SettingsDeskReactSvgUrl}
         onClick={onClick}
-        isDisabled={infoPanelVisible}
+        isDisabled={disableSettings}
       />
       <DropDown
         className="table-container_settings"

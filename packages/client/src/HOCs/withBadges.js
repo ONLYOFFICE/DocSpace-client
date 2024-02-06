@@ -111,18 +111,18 @@ export default function withBadges(WrappedComponent) {
         isAdmin,
         isVisitor,
         isDesktopClient,
-        sectionWidth,
         viewAs,
         isMutedBadge,
         isArchiveFolderRoot,
         isArchiveFolder,
+        isPublicRoom
       } = this.props;
       const { fileStatus, access, mute } = item;
 
       const newItems =
         item.new ||
         (!mute && (fileStatus & FileStatus.IsNew) === FileStatus.IsNew);
-      const showNew = !!newItems;
+      const showNew = !!newItems && !isPublicRoom;
 
       const accessToEdit =
         access === ShareAccessRights.FullAccess ||
@@ -137,7 +137,6 @@ export default function withBadges(WrappedComponent) {
           isVisitor={isVisitor}
           showNew={showNew}
           newItems={newItems}
-          sectionWidth={sectionWidth}
           isTrashFolder={isTrashFolder}
           isPrivacyFolder={isPrivacyFolder}
           isArchiveFolderRoot={isArchiveFolderRoot}
@@ -200,7 +199,7 @@ export default function withBadges(WrappedComponent) {
         isArchiveFolderRoot,
         theme,
         isAdmin: auth.isAdmin,
-        isVisitor: auth?.userStore?.user?.isVisitor,
+        isVisitor: auth?.userStore?.user?.isVisitor || !auth?.userStore?.user,
         isTrashFolder: isRecycleBinFolder,
         isPrivacyFolder,
         homepage: config.homepage,
@@ -218,6 +217,7 @@ export default function withBadges(WrappedComponent) {
         isMutedBadge,
         getPrimaryLink,
         isArchiveFolder,
+        isPublicRoom: publicRoomStore.isPublicRoom
       };
     }
   )(observer(WithBadges));

@@ -13,8 +13,7 @@ import FormWrapper from "@docspace/components/form-wrapper";
 import DocspaceLogo from "../../../DocspaceLogo";
 
 const ProfileRemoveForm = (props) => {
-  const { t, greetingTitle, linkData, logout, legalTerms, currentColorScheme } =
-    props;
+  const { t, greetingTitle, linkData, legalTerms, currentColorScheme } = props;
   const [isProfileDeleted, setIsProfileDeleted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -27,7 +26,6 @@ const ProfileRemoveForm = (props) => {
       .then((res) => {
         setIsLoading(false);
         setIsProfileDeleted(true);
-        return logout();
       })
       .catch((e) => {
         setIsLoading(false);
@@ -128,7 +126,6 @@ const ProfileRemoveForm = (props) => {
 export default inject(({ auth }) => ({
   greetingTitle: auth.settingsStore.greetingSettings,
   theme: auth.settingsStore.theme,
-  logout: auth.logout,
   legalTerms: auth.settingsStore.legalTerms,
   currentColorScheme: auth.settingsStore.currentColorScheme,
 }))(withTranslation("Confirm")(withLoader(observer(ProfileRemoveForm))));

@@ -35,7 +35,7 @@ const ErrorFileUpload = ({
           )}
           place={placeTooltip}
           maxWidth="320"
-          color={theme.isBase ? "#f8f7bf" : "#282828"}
+          color={theme.tooltip.backgroundColor}
         />
         {item.needPassword && (
           <Text

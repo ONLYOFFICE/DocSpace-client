@@ -185,13 +185,31 @@
               <head>
                   <script src="${scriptUrl}"></script>
                   <title>DocSpace</title>
+
+                  <style>
+                    #${config.frameId}-container {
+                      height: 98vh !important;
+                      width: 98vw !important;
+                    }
+
+                    html, body {
+                        height: 100%;
+                        width: 100%;
+                    }
+
+                    body {
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    }
+                </style>
               </head>
               <body style="margin:0;">
                   <div id=${config.frameId}></div>
                   <script id="integration">
                     const config = {...${JSON.stringify(config, function (key, val) {
                       return typeof val === "function" ? "" + val : val;
-                    })}, events: {
+                    })}, width: "100%", height: "100%", events: {
                       onSelectCallback: eval(${config.events.onSelectCallback + ""}),
                       onCloseCallback: eval(${config.events.onCloseCallback + ""}),
                       onAppReady: eval(${config.events.onAppReady + ""}),

@@ -109,7 +109,7 @@ const FilesSelector = ({
     React.useState<boolean>(false);
   const [searchValue, setSearchValue] = React.useState<string>("");
 
-  const { getIcon } = useFilesSettings(getIconProp);
+  const { getIcon, settingsIsLoaded } = useFilesSettings(getIconProp);
 
   const { subscribe, unsubscribe } = useSocketHelper({
     socketHelper,
@@ -231,6 +231,8 @@ const FilesSelector = ({
   }, [selectedItemId, isRoot, unsubscribe, subscribe]);
 
   React.useEffect(() => {
+    if (!settingsIsLoaded && !getIconProp) return;
+
     const getRoomSettings = () => {
       setSelectedItemType("rooms");
       getRoomList(0, null, true);
@@ -265,7 +267,7 @@ const FilesSelector = ({
     getFileList(0, null, currentFolderId, true);
     // TODO: refactoring
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [settingsIsLoaded, getIconProp]);
 
   const onClickBreadCrumb = (item: TBreadCrumb) => {
     if (!isFirstLoad) {

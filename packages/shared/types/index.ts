@@ -96,4 +96,10 @@ declare global {
       toDataURL: () => string;
     };
   }
+
+  export type ContextMenuModel =
+    import("../components/context-menu/ContextMenu.types").ContextMenuModel;
+
+  export type SeparatorType =
+    import("../components/context-menu/ContextMenu.types").SeparatorType;
 }

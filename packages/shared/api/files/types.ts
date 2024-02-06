@@ -337,8 +337,20 @@ export type TFileLink = {
 };
 
 export type TFilesUsedSpace = {
-  myDocumentsUsedSpace: number;
-  trashUsedSpace: number;
-  archiveUsedSpace: number;
-  roomsUsedSpace: number;
+  myDocumentsUsedSpace: {
+    title: string;
+    usedSpace: number;
+  };
+  trashUsedSpace: {
+    title: string;
+    usedSpace: number;
+  };
+  archiveUsedSpace: {
+    title: string;
+    usedSpace: number;
+  };
+  roomsUsedSpace: {
+    title: string;
+    usedSpace: number;
+  };
 };

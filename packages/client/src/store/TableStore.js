@@ -4,19 +4,23 @@ import { TableVersions } from "SRC_DIR/helpers/constants";
 const TABLE_COLUMNS = `filesTableColumns_ver-${TableVersions.Files}`;
 const TABLE_ROOMS_COLUMNS = `roomsTableColumns_ver-${TableVersions.Rooms}`;
 const TABLE_TRASH_COLUMNS = `trashTableColumns_ver-${TableVersions.Trash}`;
+const TABLE_SDK_COLUMNS = `filesSDKTableColumns_ver-${TableVersions.Files}`;
 
 const COLUMNS_SIZE = `filesColumnsSize_ver-${TableVersions.Files}`;
 const COLUMNS_ROOMS_SIZE = `roomsColumnsSize_ver-${TableVersions.Rooms}`;
 const COLUMNS_TRASH_SIZE = `trashColumnsSize_ver-${TableVersions.Trash}`;
+const COLUMNS_SDK_SIZE = `filesSDKColumnsSize_ver-${TableVersions.Files}`;
 
 const COLUMNS_SIZE_INFO_PANEL = `filesColumnsSizeInfoPanel_ver-${TableVersions.Files}`;
 const COLUMNS_ROOMS_SIZE_INFO_PANEL = `roomsColumnsSizeInfoPanel_ver-${TableVersions.Rooms}`;
 const COLUMNS_TRASH_SIZE_INFO_PANEL = `trashColumnsSizeInfoPanel_ver-${TableVersions.Trash}`;
+const COLUMNS_SDK_SIZE_INFO_PANEL = `filesSDKColumnsSizeInfoPanel_ver-${TableVersions.Files}`;
 
 class TableStore {
   authStore;
   treeFoldersStore;
   userStore;
+  settingsStore;
 
   roomColumnNameIsEnabled = true; // always true
   roomColumnTypeIsEnabled = false;
@@ -40,12 +44,13 @@ class TableStore {
   sizeTrashColumnIsEnabled = false;
   typeTrashColumnIsEnabled = false;
 
-  constructor(authStore, treeFoldersStore, userStore) {
+  constructor(authStore, treeFoldersStore, userStore, settingsStore) {
     makeAutoObservable(this);
 
     this.authStore = authStore;
     this.treeFoldersStore = treeFoldersStore;
     this.userStore = userStore;
+    this.settingsStore = settingsStore;
   }
 
   setRoomColumnType = (enable) => {
@@ -234,6 +239,9 @@ class TableStore {
       this.treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
     const userId = this.userStore.user?.id;
+    const isFrame = this.settingsStore.isFrame;
+
+    if (isFrame) return `${TABLE_SDK_COLUMNS}=${userId}`;
 
     return isRooms
       ? `${TABLE_ROOMS_COLUMNS}=${userId}`
@@ -247,6 +255,9 @@ class TableStore {
       this.treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
     const userId = this.userStore.user?.id;
+    const isFrame = this.settingsStore.isFrame;
+
+    if (isFrame) return `${COLUMNS_SDK_SIZE}=${userId}`;
 
     return isRooms
       ? `${COLUMNS_ROOMS_SIZE}=${userId}`
@@ -260,6 +271,9 @@ class TableStore {
       this.treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
     const userId = this.userStore.user?.id;
+    const isFrame = this.settingsStore.isFrame;
+
+    if (isFrame) return `${COLUMNS_SDK_SIZE_INFO_PANEL}=${userId}`;
 
     return isRooms
       ? `${COLUMNS_ROOMS_SIZE_INFO_PANEL}=${userId}`

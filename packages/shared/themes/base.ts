@@ -968,6 +968,7 @@ export const getBaseTheme = () => {
       maxWidth: "340px",
       color: white,
       textColor: black,
+      backgroundColor: "#f8f7bf",
 
       before: {
         border: "none",

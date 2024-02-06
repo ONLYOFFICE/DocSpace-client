@@ -934,6 +934,7 @@ const Dark: TTheme = {
     maxWidth: "340px",
     color: "#242424",
     textColor: white,
+    backgroundColor: "#282828",
 
     before: {
       border: "none",

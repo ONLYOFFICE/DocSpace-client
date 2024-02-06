@@ -21,6 +21,7 @@ import config from "PACKAGE_FILE";
 import { thumbnailStatuses } from "@docspace/client/src/helpers/filesConstants";
 import { openDocEditor as openEditor } from "@docspace/client/src/helpers/filesUtils";
 import { getDaysRemaining } from "@docspace/shared/utils/common";
+import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
 import {
   getCategoryType,
@@ -2964,7 +2965,7 @@ class FilesStore {
     const url = getCategoryUrl(this.categoryType, id);
 
     if (canOpenPlayer) {
-      return combineUrl(proxyURL, config.homepage, url, id);
+      return combineUrl(proxyURL, config.homepage, MEDIA_VIEW_URL, id);
     }
 
     if (isFolder) {

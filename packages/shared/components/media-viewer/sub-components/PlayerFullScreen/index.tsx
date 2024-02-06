@@ -5,7 +5,7 @@ import PlayerFullSceenProps from "./PlayerFullScreen.props";
 
 import { PlayerFullSceenWrapper } from "./PlayerFullScreen.styled";
 
-export const PlayerFullScreen = memo(
+const PlayerFullScreen = memo(
   ({ isAudio, onClick, isFullScreen }: PlayerFullSceenProps) => {
     if (isAudio) return;
 
@@ -18,3 +18,4 @@ export const PlayerFullScreen = memo(
 );
 
 PlayerFullScreen.displayName = "PlayerFullScreen";
+export { PlayerFullScreen };

@@ -17,7 +17,7 @@ type PlayerVolumeControlProps = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const PlayerVolumeControl = memo(
+const PlayerVolumeControl = memo(
   ({
     volume,
     isMuted,
@@ -53,3 +53,5 @@ export const PlayerVolumeControl = memo(
 );
 
 PlayerVolumeControl.displayName = "PlayerVolumeControl";
+
+export { PlayerVolumeControl };

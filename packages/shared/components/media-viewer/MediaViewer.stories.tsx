@@ -10,7 +10,7 @@ import i18nextStoryDecorator from "../../.storybook/decorators/i18nextStoryDecor
 import { Portal } from "../portal";
 import { Button } from "../button";
 
-import { MediaViewer } from "./MediaViewer";
+import MediaViewer from "./MediaViewer";
 import type { MediaViewerProps, PlaylistType } from "./MediaViewer.types";
 
 type MediaViewerType = typeof MediaViewer;

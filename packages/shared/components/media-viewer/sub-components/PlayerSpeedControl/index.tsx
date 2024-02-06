@@ -19,7 +19,7 @@ import {
   speeds,
 } from "./PlayerSpeedControl.helper";
 
-export const PlayerSpeedControl = memo(
+const PlayerSpeedControl = memo(
   ({ handleSpeedChange, onMouseLeave, src }: PlayerSpeedControlProps) => {
     const ref = useRef<HTMLDivElement>(null);
 
@@ -102,3 +102,5 @@ export const PlayerSpeedControl = memo(
 );
 
 PlayerSpeedControl.displayName = "PlayerSpeedControl";
+
+export { PlayerSpeedControl };

@@ -3,19 +3,15 @@ import { useTheme } from "styled-components";
 import React, { useMemo, memo, useCallback } from "react";
 
 import { isSeparator } from "@docspace/shared/utils/typeGuards";
-import type { ContextMenuModel } from "@docspace/shared/components/context-menu";
 
 import { Viewer } from "../Viewer";
-import {
-  getCustomToolbar,
-  getPDFToolbar,
-} from "../../helpers/getCustomToolbar";
+import { getCustomToolbar, getPDFToolbar } from "../../MediaViewer.helpers";
 
 import { StyledDropDown, StyledDropDownItem } from "../../MediaViewer.styled";
 
 import type ViewerWrapperProps from "./ViewerWrapper.props";
 
-export const ViewerWrapper = memo(
+const ViewerWrapper = memo(
   (props: ViewerWrapperProps) => {
     const {
       isPdf,
@@ -166,3 +162,5 @@ export const ViewerWrapper = memo(
 );
 
 ViewerWrapper.displayName = "ViewerWrapper";
+
+export { ViewerWrapper };

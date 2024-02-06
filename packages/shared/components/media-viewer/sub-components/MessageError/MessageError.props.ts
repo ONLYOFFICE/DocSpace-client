@@ -1,5 +1,3 @@
-import type { ContextMenuModel } from "@docspace/shared/components/context-menu";
-
 interface PlayerMessageErrorProps {
   errorTitle: string;
   model: ContextMenuModel[];

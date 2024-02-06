@@ -12,10 +12,7 @@ import {
   ToolbarItem,
 } from "./ViewerToolbar.styled";
 
-export const ViewerToolbar = forwardRef<
-  ImperativeHandle,
-  ImageViewerToolbarProps
->(
+const ViewerToolbar = forwardRef<ImperativeHandle, ImageViewerToolbarProps>(
   (
     {
       toolbar,
@@ -112,3 +109,5 @@ export const ViewerToolbar = forwardRef<
 );
 
 ViewerToolbar.displayName = "ImageViewerToolba";
+
+export { ViewerToolbar };

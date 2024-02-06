@@ -10,7 +10,7 @@ import PanelReactSvg from "PUBLIC_DIR/images/panel.react.svg";
 import PageCountProps, { PageCountRef } from "./PageCount.props";
 import { PageCountWrapper } from "./PageCount.styled";
 
-export const PageCount = forwardRef<PageCountRef, PageCountProps>(
+const PageCount = forwardRef<PageCountRef, PageCountProps>(
   ({ isPanelOpen, visible, className, setIsOpenMobileDrawer }, ref) => {
     const [pagesCount, setPagesCount] = useState<number>(0);
     const [pageNumber, setPageNumber] = useState<number>(0);
@@ -42,3 +42,5 @@ export const PageCount = forwardRef<PageCountRef, PageCountProps>(
 );
 
 PageCount.displayName = "PageCount";
+
+export { PageCount };

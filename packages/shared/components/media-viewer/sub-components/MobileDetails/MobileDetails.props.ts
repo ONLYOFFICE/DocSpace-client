@@ -1,5 +1,3 @@
-import type { ContextMenuModel } from "@docspace/shared/components/context-menu";
-
 interface MobileDetailsProps {
   icon: string;
   title: string;

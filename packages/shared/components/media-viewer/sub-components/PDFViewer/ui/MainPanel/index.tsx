@@ -6,7 +6,7 @@ import { isDesktop } from "react-device-detect";
 import MainPanelProps from "./MainPanel.props";
 import { Content, Wrapper } from "./MainPanel.styled";
 
-export const MainPanel = forwardRef<HTMLDivElement, MainPanelProps>(
+const MainPanel = forwardRef<HTMLDivElement, MainPanelProps>(
   ({ isLoading, isFistImage, isLastImage, src, onNext, onPrev }, ref) => {
     const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -76,3 +76,5 @@ export const MainPanel = forwardRef<HTMLDivElement, MainPanelProps>(
 );
 
 MainPanel.displayName = "MainPanel";
+
+export { MainPanel };

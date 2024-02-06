@@ -1,7 +1,6 @@
 import type { TFile } from "@docspace/shared/api/files/types";
-import type { ContextMenuModel } from "@docspace/shared/components/context-menu";
 import type { DeviceType } from "@docspace/shared/enums";
-import { getCustomToolbar } from "../../helpers/getCustomToolbar";
+import type { getCustomToolbar } from "../../MediaViewer.helpers";
 import type { PlaylistType } from "../../MediaViewer.types";
 
 interface ViewerProps {

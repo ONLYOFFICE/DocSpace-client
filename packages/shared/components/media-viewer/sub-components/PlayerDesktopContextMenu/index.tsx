@@ -12,7 +12,7 @@ import PlayerDesktopContextMenuProps from "./PlayerDesktopContextMenu.props";
 const ContextRight = "9";
 const ContextBottom = "48";
 
-export const PlayerDesktopContextMenu = memo(
+const PlayerDesktopContextMenu = memo(
   ({
     canDownload,
     isPreviewFile,
@@ -63,3 +63,5 @@ export const PlayerDesktopContextMenu = memo(
 );
 
 PlayerDesktopContextMenu.displayName = "PlayerDesktopContextMenu";
+
+export { PlayerDesktopContextMenu };

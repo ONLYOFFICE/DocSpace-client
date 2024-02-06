@@ -1,4 +1,3 @@
-import type { ContextMenuModel } from "@docspace/shared/components/context-menu";
 import { DevicesType } from "../../MediaViewer.types";
 
 interface ViewerPlayerProps {

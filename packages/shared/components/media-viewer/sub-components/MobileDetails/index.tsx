@@ -14,7 +14,7 @@ import { StyledMobileDetails } from "../../MediaViewer.styled";
 
 import type MobileDetailsProps from "./MobileDetails.props";
 
-export const MobileDetails = memo(
+const MobileDetails = memo(
   forwardRef(
     (
       {
@@ -66,3 +66,5 @@ export const MobileDetails = memo(
 );
 
 MobileDetails.displayName = "MobileDetails";
+
+export { MobileDetails };

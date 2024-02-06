@@ -1,6 +1,6 @@
 import type { Dispatch, SetStateAction } from "react";
 import type { DevicesType } from "../../MediaViewer.types";
-import { getPDFToolbar } from "../../helpers/getCustomToolbar";
+import type { getPDFToolbar } from "../../MediaViewer.helpers";
 
 interface PDFViewerProps {
   src: string;

@@ -12,128 +12,129 @@ import {
   Progress,
 } from "./PlayerTimeline.styled";
 
-export const PlayerTimeline = forwardRef<
-  PlayerTimelineRef,
-  PlayerTimelineProps
->(({ value, duration, onChange, onMouseEnter, onMouseLeave }, ref) => {
-  const timelineTooltipRef = useRef<HTMLTimeElement>(null);
-  const timelineRef = useRef<HTMLDivElement>(null);
-  const hoverProgressRef = useRef<HTMLDivElement>(null);
-  const setTimeoutTimelineTooltipRef = useRef<NodeJS.Timeout>();
-  const pregressRef = useRef<HTMLDivElement>(null);
+const PlayerTimeline = forwardRef<PlayerTimelineRef, PlayerTimelineProps>(
+  ({ value, duration, onChange, onMouseEnter, onMouseLeave }, ref) => {
+    const timelineTooltipRef = useRef<HTMLTimeElement>(null);
+    const timelineRef = useRef<HTMLDivElement>(null);
+    const hoverProgressRef = useRef<HTMLDivElement>(null);
+    const setTimeoutTimelineTooltipRef = useRef<NodeJS.Timeout>();
+    const pregressRef = useRef<HTMLDivElement>(null);
 
-  const showTimelineTooltip = () => {
-    if (!timelineTooltipRef.current) return;
+    const showTimelineTooltip = () => {
+      if (!timelineTooltipRef.current) return;
 
-    const callback = () => {
-      if (timelineTooltipRef.current) {
-        timelineTooltipRef.current.style.removeProperty("display");
-        setTimeoutTimelineTooltipRef.current = undefined;
+      const callback = () => {
+        if (timelineTooltipRef.current) {
+          timelineTooltipRef.current.style.removeProperty("display");
+          setTimeoutTimelineTooltipRef.current = undefined;
+        }
+      };
+
+      if (setTimeoutTimelineTooltipRef.current) {
+        clearTimeout(setTimeoutTimelineTooltipRef.current);
+        setTimeoutTimelineTooltipRef.current = setTimeout(callback, 500);
+      } else {
+        timelineTooltipRef.current.style.display = "block";
+        setTimeoutTimelineTooltipRef.current = setTimeout(callback, 500);
       }
     };
 
-    if (setTimeoutTimelineTooltipRef.current) {
-      clearTimeout(setTimeoutTimelineTooltipRef.current);
-      setTimeoutTimelineTooltipRef.current = setTimeout(callback, 500);
-    } else {
-      timelineTooltipRef.current.style.display = "block";
-      setTimeoutTimelineTooltipRef.current = setTimeout(callback, 500);
-    }
-  };
+    const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (!timelineTooltipRef.current || !timelineRef.current) return;
 
-  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!timelineTooltipRef.current || !timelineRef.current) return;
+      const { clientWidth } = timelineRef.current;
 
-    const { clientWidth } = timelineRef.current;
+      const percent = Number(event.target.value) / 100;
 
-    const percent = Number(event.target.value) / 100;
+      const offsetX = clientWidth * percent;
 
-    const offsetX = clientWidth * percent;
+      const time = Math.floor(percent * duration);
 
-    const time = Math.floor(percent * duration);
+      const left =
+        offsetX < 20
+          ? 20
+          : offsetX > clientWidth - 20
+            ? clientWidth - 20
+            : offsetX;
 
-    const left =
-      offsetX < 20
-        ? 20
-        : offsetX > clientWidth - 20
-          ? clientWidth - 20
-          : offsetX;
+      timelineTooltipRef.current.style.left = `${left}px`;
+      timelineTooltipRef.current.innerText = formatTime(time);
 
-    timelineTooltipRef.current.style.left = `${left}px`;
-    timelineTooltipRef.current.innerText = formatTime(time);
+      showTimelineTooltip();
 
-    showTimelineTooltip();
+      onChange(event);
+    };
 
-    onChange(event);
-  };
+    const handleMouseMove = (
+      event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    ) => {
+      if (
+        !timelineTooltipRef.current ||
+        !timelineRef.current ||
+        !hoverProgressRef.current
+      )
+        return;
 
-  const handleMouseMove = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-  ) => {
-    if (
-      !timelineTooltipRef.current ||
-      !timelineRef.current ||
-      !hoverProgressRef.current
-    )
-      return;
+      const { clientWidth } = timelineRef.current;
+      const { max, min } = Math;
 
-    const { clientWidth } = timelineRef.current;
-    const { max, min } = Math;
+      const offsetX = min(max(event.nativeEvent.offsetX, 0), clientWidth);
 
-    const offsetX = min(max(event.nativeEvent.offsetX, 0), clientWidth);
+      const percent = Math.floor((offsetX / clientWidth) * duration);
 
-    const percent = Math.floor((offsetX / clientWidth) * duration);
+      hoverProgressRef.current.style.width = `${offsetX}px`;
 
-    hoverProgressRef.current.style.width = `${offsetX}px`;
+      const left =
+        offsetX < 20
+          ? 20
+          : offsetX > clientWidth - 20
+            ? clientWidth - 20
+            : offsetX;
 
-    const left =
-      offsetX < 20
-        ? 20
-        : offsetX > clientWidth - 20
-          ? clientWidth - 20
-          : offsetX;
+      timelineTooltipRef.current.style.left = `${left}px`;
+      timelineTooltipRef.current.innerText = formatTime(percent);
+    };
 
-    timelineTooltipRef.current.style.left = `${left}px`;
-    timelineTooltipRef.current.innerText = formatTime(percent);
-  };
+    useImperativeHandle(
+      ref,
+      () => {
+        return {
+          setProgress: (progress: number) => {
+            if (!pregressRef.current) return;
 
-  useImperativeHandle(
-    ref,
-    () => {
-      return {
-        setProgress: (progress: number) => {
-          if (!pregressRef.current) return;
+            pregressRef.current.style.width = `${progress * 100}%`;
+          },
+        };
+      },
+      [],
+    );
 
-          pregressRef.current.style.width = `${progress * 100}%`;
-        },
-      };
-    },
-    [],
-  );
-
-  return (
-    <PlayerTimelineWrapper
-      ref={timelineRef}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-    >
-      <time ref={timelineTooltipRef}>00:00</time>
-      <Progress ref={pregressRef} />
-      <HoverProgress ref={hoverProgressRef} />
-      <input
-        min="0"
-        max="100"
-        step="any"
-        type="range"
-        value={value}
-        onChange={handleOnChange}
-        style={{
-          backgroundSize: `${value}% 100%`,
-        }}
-      />
-    </PlayerTimelineWrapper>
-  );
-});
+    return (
+      <PlayerTimelineWrapper
+        ref={timelineRef}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+      >
+        <time ref={timelineTooltipRef}>00:00</time>
+        <Progress ref={pregressRef} />
+        <HoverProgress ref={hoverProgressRef} />
+        <input
+          min="0"
+          max="100"
+          step="any"
+          type="range"
+          value={value}
+          onChange={handleOnChange}
+          style={{
+            backgroundSize: `${value}% 100%`,
+          }}
+        />
+      </PlayerTimelineWrapper>
+    );
+  },
+);
 
 PlayerTimeline.displayName = "PlayerTimeline";
+
+export { PlayerTimeline };

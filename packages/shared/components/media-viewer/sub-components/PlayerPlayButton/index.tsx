@@ -6,7 +6,7 @@ import IconStop from "PUBLIC_DIR/images/videoplayer.stop.react.svg";
 import { WrapperPlayerPlayButton } from "./PlayerPlayButton.styled";
 import type { PlayerPlayButtonProps } from "./PlayerPlayButton.types";
 
-export const PlayerPlayButton = memo(
+const PlayerPlayButton = memo(
   ({ isPlaying, onClick }: PlayerPlayButtonProps) => {
     const onTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
       event.stopPropagation();
@@ -20,3 +20,4 @@ export const PlayerPlayButton = memo(
 );
 
 PlayerPlayButton.displayName = "PlayerPlayButton";
+export { PlayerPlayButton };

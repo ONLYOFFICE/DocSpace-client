@@ -12,6 +12,8 @@ import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { decodeTiff } from "@docspace/shared/utils/decodeTiff";
 import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
 
+import { ViewerWrapper } from "./sub-components/ViewerWrapper";
+
 import { mapSupplied, mediaTypes } from "./MediaViewer.constants";
 import type { MediaViewerProps } from "./MediaViewer.types";
 import { KeyboardEventKeys } from "./MediaViewer.enums";
@@ -20,9 +22,7 @@ import {
   getDesktopMediaContextModel,
   getMobileMediaContextModel,
   getPDFContextModel,
-} from "./helpers/contextModel";
-
-import { ViewerWrapper } from "./sub-components/ViewerWrapper";
+} from "./MediaViewer.helpers";
 
 const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
   const {
@@ -436,4 +436,4 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
   ) : undefined;
 };
 
-export { MediaViewer };
+export default MediaViewer;

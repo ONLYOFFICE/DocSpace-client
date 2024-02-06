@@ -43,20 +43,18 @@ const RoomsListComponent = (props) => {
 
     return (
       <StyledSimpleFilesRow key={item.id}>
-        <>
-          {iconElement(
-            id,
-            icon,
-            fileExst,
-            isRoom,
-            defaultRoomIcon,
-            null,
-            title,
-            color
-          )}
-          {textElement(title)}
-          {quotaElement(item)}
-        </>
+        {iconElement(
+          id,
+          icon,
+          fileExst,
+          isRoom,
+          defaultRoomIcon,
+          null,
+          title,
+          color
+        )}
+        {textElement(title)}
+        {quotaElement(item)}
       </StyledSimpleFilesRow>
     );
   });

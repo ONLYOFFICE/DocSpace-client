@@ -51,15 +51,18 @@ let timerId;
 
 class FilesStore {
   authStore;
-
+  userStore;
+  currentTariffStatusStore;
   selectedFolderStore;
   treeFoldersStore;
   filesSettingsStore;
   thirdPartyStore;
   clientLoadingStore;
-
+  infoPanelStore;
   accessRightsStore;
   publicRoomStore;
+  settingsStore;
+  currentQuotaStore;
 
   pluginStore;
 
@@ -154,14 +157,18 @@ class FilesStore {
     accessRightsStore,
     clientLoadingStore,
     pluginStore,
-    publicRoomStore
+    publicRoomStore,
+    infoPanelStore,
+    userStore,
+    currentTariffStatusStore,
+    settingsStore
   ) {
     const pathname = window.location.pathname.toLowerCase();
     this.isEditor = pathname.indexOf("doceditor") !== -1;
 
     makeAutoObservable(this);
     this.authStore = authStore;
-
+    this.userStore = userStore;
     this.selectedFolderStore = selectedFolderStore;
     this.treeFoldersStore = treeFoldersStore;
     this.filesSettingsStore = filesSettingsStore;
@@ -170,10 +177,13 @@ class FilesStore {
     this.clientLoadingStore = clientLoadingStore;
     this.pluginStore = pluginStore;
     this.publicRoomStore = publicRoomStore;
+    this.infoPanelStore = infoPanelStore;
+    this.currentTariffStatusStore = currentTariffStatusStore;
+    this.settingsStore = settingsStore;
 
     this.roomsController = new AbortController();
     this.filesController = new AbortController();
-    const { socketHelper } = authStore.settingsStore;
+    const { socketHelper } = settingsStore;
 
     socketHelper.on("s:modify-folder", async (opt) => {
       const { socketSubscribers } = socketHelper;
@@ -219,7 +229,6 @@ class FilesStore {
           } else if (opt.cmd === "delete") {
             this.selectedFolderStore[opt.type + "sCount"]--;
           }
-          // this.authStore.infoPanelStore.updateInfoPanelSelection();
         });
       }
 
@@ -240,7 +249,7 @@ class FilesStore {
 
       if (
         this.selectedFolderStore.id == id &&
-        this.authStore.settingsStore.withPaging //TODO: no longer deletes the folder in other tabs
+        this.settingsStore.withPaging //TODO: no longer deletes the folder in other tabs
       ) {
         console.log("[WS] refresh-folder", id);
         this.fetchFiles(id, this.filter);
@@ -356,7 +365,7 @@ class FilesStore {
 
     if (
       newFiles.length > this.filter.pageCount &&
-      this.authStore.settingsStore.withPaging
+      this.settingsStore.withPaging
     ) {
       newFiles.pop(); // Remove last
     }
@@ -397,7 +406,7 @@ class FilesStore {
       }
 
       //To update a file version
-      if (foundIndex > -1 && !this.authStore.settingsStore.withPaging) {
+      if (foundIndex > -1 && !this.settingsStore.withPaging) {
         if (
           this.files[foundIndex].version !== file.version ||
           this.files[foundIndex].versionGroup !== file.versionGroup
@@ -442,7 +451,7 @@ class FilesStore {
       if (
         this.selectedFolderStore.id !== folder.parentId ||
         (folder.roomType &&
-          folder.createdBy.id === this.authStore.userStore.user.id &&
+          folder.createdBy.id === this.userStore.user.id &&
           this.roomCreated)
       )
         return (this.roomCreated = false);
@@ -455,7 +464,7 @@ class FilesStore {
 
       if (
         newFolders.length > this.filter.pageCount &&
-        this.authStore.settingsStore.withPaging
+        this.settingsStore.withPaging
       ) {
         newFolders.pop(); // Remove last
       }
@@ -799,7 +808,7 @@ class FilesStore {
   initFiles = () => {
     if (this.isInit) return;
 
-    const { isAuthenticated, settingsStore } = this.authStore;
+    const { isAuthenticated } = this.authStore;
     const { getFilesSettings } = this.filesSettingsStore;
 
     const {
@@ -808,7 +817,7 @@ class FilesStore {
       getEncryptionKeys,
       //setModuleInfo,
       isDesktopClient,
-    } = settingsStore;
+    } = this.settingsStore;
 
     //setModuleInfo(config.homepage, config.id);
 
@@ -877,7 +886,7 @@ class FilesStore {
   };
 
   setFiles = (files) => {
-    const { socketHelper } = this.authStore.settingsStore;
+    const { socketHelper } = this.settingsStore;
 
     if (files.length === 0 && this.files.length === 0) return;
 
@@ -911,7 +920,7 @@ class FilesStore {
   };
 
   setFolders = (folders) => {
-    const { socketHelper } = this.authStore.settingsStore;
+    const { socketHelper } = this.settingsStore;
     if (folders.length === 0 && this.folders.length === 0) return;
 
     if (this.folders?.length > 0) {
@@ -1177,7 +1186,7 @@ class FilesStore {
   //TODO: FILTER
   setFilesFilter = (filter) => {
     if (!this.publicRoomStore.isPublicRoom) {
-      const key = `UserFilter=${this.authStore.userStore.user?.id}`;
+      const key = `UserFilter=${this.userStore.user?.id}`;
       const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
       localStorage.setItem(key, value);
     }
@@ -1203,11 +1212,11 @@ class FilesStore {
   };
 
   setRoomsFilter = (filter) => {
-    const key = `UserRoomsFilter=${this.authStore.userStore.user.id}`;
+    const key = `UserRoomsFilter=${this.userStore.user.id}`;
     const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
     localStorage.setItem(key, value);
 
-    if (!this.authStore.settingsStore.withPaging) filter.pageCount = 100;
+    if (!this.settingsStore.withPaging) filter.pageCount = 100;
 
     // this.setFilterUrl(filter, true);
     this.roomsFilter = filter;
@@ -1226,7 +1235,7 @@ class FilesStore {
   };
 
   setFilter = (filter) => {
-    if (!this.authStore.settingsStore.withPaging) filter.pageCount = 100;
+    if (!this.settingsStore.withPaging) filter.pageCount = 100;
     this.filter = filter;
   };
 
@@ -1317,7 +1326,7 @@ class FilesStore {
     const filterData = filter ? filter.clone() : FilesFilter.getDefault();
     filterData.folder = folderId;
 
-    if (folderId === "@my" && this.authStore.userStore.user.isVisitor) {
+    if (folderId === "@my" && this.userStore.user.isVisitor) {
       const url = getCategoryUrl(CategoryType.Shared);
       return window.DocSpace.navigate(
         `${url}?${RoomsFilter.getDefault().toUrlParams()}`
@@ -1328,8 +1337,8 @@ class FilesStore {
     this.setIsLoadedFetchFiles(false);
 
     const filterStorageItem =
-      this.authStore.userStore.user?.id &&
-      localStorage.getItem(`UserFilter=${this.authStore.userStore.user.id}`);
+      this.userStore.user?.id &&
+      localStorage.getItem(`UserFilter=${this.userStore.user.id}`);
 
     if (filterStorageItem && !filter) {
       const splitFilter = filterStorageItem.split(",");
@@ -1339,7 +1348,7 @@ class FilesStore {
       filterData.sortOrder = splitFilter[2];
     }
 
-    if (!this.authStore.settingsStore.withPaging) {
+    if (!this.settingsStore.withPaging) {
       filterData.page = 0;
       filterData.pageCount = 100;
     }
@@ -1503,7 +1512,7 @@ class FilesStore {
                   room.access === ShareAccessRights.None;
 
                 room.canCopyPublicLink = canCopyPublicLink;
-                this.authStore.infoPanelStore.setInfoPanelRoom(room);
+                this.infoPanelStore.setInfoPanelRoom(room);
               }
 
               const { mute } = room;
@@ -1571,7 +1580,7 @@ class FilesStore {
       })
       .catch((err) => {
         if (err?.response?.status === 402)
-          this.authStore.currentTariffStatusStore.setPortalTariff();
+          this.currentTariffStatusStore.setPortalTariff();
 
         if (requestCounter > 0) return;
 
@@ -1625,7 +1634,7 @@ class FilesStore {
     const filterData = !!filter ? filter.clone() : RoomsFilter.getDefault();
 
     const filterStorageItem = localStorage.getItem(
-      `UserRoomsFilter=${this.authStore.userStore.user?.id}`
+      `UserRoomsFilter=${this.userStore.user?.id}`
     );
 
     if (filterStorageItem && (!filter || withFilterLocalStorage)) {
@@ -1636,7 +1645,7 @@ class FilesStore {
       filterData.sortOrder = splitFilter[2];
     }
 
-    if (!this.authStore.settingsStore.withPaging) {
+    if (!this.settingsStore.withPaging) {
       const isCustomCountPage =
         filter && filter.pageCount !== 100 && filter.pageCount !== 25;
 
@@ -1725,7 +1734,7 @@ class FilesStore {
             }
           }
 
-          this.authStore.infoPanelStore.setInfoPanelRoom(null);
+          this.infoPanelStore.setInfoPanelRoom(null);
           this.selectedFolderStore.setSelectedFolder({
             folders: data.folders,
             ...data.current,
@@ -1760,7 +1769,7 @@ class FilesStore {
         })
         .catch((err) => {
           if (err?.response?.status === 402)
-            this.authStore.currentTariffStatusStore.setPortalTariff();
+            this.currentTariffStatusStore.setPortalTariff();
 
           if (axios.isCancel(err)) {
             console.log("Request canceled", err.message);
@@ -1866,14 +1875,14 @@ class FilesStore {
     const { isRecycleBinFolder, isMy, isArchiveFolder } = this.treeFoldersStore;
     const { security } = this.selectedFolderStore;
 
-    const { enablePlugins } = this.authStore.settingsStore;
+    const { enablePlugins } = this.settingsStore;
 
     const isThirdPartyFolder =
       item.providerKey && item.id === item.rootFolderId;
 
     const isMyFolder = isMy(item.rootFolderType);
 
-    const { isDesktopClient } = this.authStore.settingsStore;
+    const { isDesktopClient } = this.settingsStore;
 
     const pluginAllKeys =
       enablePlugins &&
@@ -2637,7 +2646,7 @@ class FilesStore {
   };
 
   scrollToTop = () => {
-    if (this.authStore.settingsStore.withPaging) return;
+    if (this.settingsStore.withPaging) return;
 
     const scrollElm = isMobile()
       ? document.querySelector("#customScrollBar > .scroll-wrapper > .scroller")
@@ -2647,7 +2656,7 @@ class FilesStore {
   };
 
   addItem = (item, isFolder) => {
-    const { socketHelper } = this.authStore.settingsStore;
+    const { socketHelper } = this.settingsStore;
 
     if (isFolder) {
       const foundIndex = this.folders.findIndex((x) => x.id === item?.id);
@@ -2824,8 +2833,7 @@ class FilesStore {
   };
 
   canShareOwnerChange = (item) => {
-    const userId =
-      this.authStore.userStore.user && this.authStore.userStore.user.id;
+    const userId = this.userStore.user && this.userStore.user.id;
 
     if (item.providerKey || !this.hasCommonFolder) {
       return false;
@@ -2841,9 +2849,7 @@ class FilesStore {
   get canShare() {
     const folderType = this.selectedFolderStore.rootFolderType;
     const isVisitor =
-      (this.authStore.userStore.user &&
-        this.authStore.userStore.user.isVisitor) ||
-      false;
+      (this.userStore.user && this.userStore.user.isVisitor) || false;
 
     if (isVisitor) {
       return false;
@@ -2935,8 +2941,8 @@ class FilesStore {
         );
       case FolderType.Privacy:
         return (
-          this.authStore.settingsStore.isDesktopClient &&
-          this.authStore.settingsStore.isEncryptionSupport
+          this.settingsStore.isDesktopClient &&
+          this.settingsStore.isEncryptionSupport
         );
       case FolderType.COMMON:
         return this.authStore.isAdmin;
@@ -3007,7 +3013,7 @@ class FilesStore {
     //return [...this.folders, ...this.files];
 
     const { fileItemsList } = this.pluginStore;
-    const { enablePlugins } = this.authStore.settingsStore;
+    const { enablePlugins } = this.settingsStore;
 
     const newFolders = [...this.folders];
 
@@ -3789,7 +3795,7 @@ class FilesStore {
   setCreatedItem = (createdItem) => {
     this.createdItem = createdItem;
 
-    // const { socketHelper } = this.authStore.settingsStore;
+    // const { socketHelper } = this.settingsStore;
     // if (createdItem?.type == "file") {
     //   console.log(
     //     "[WS] subscribe to file's changes",
@@ -4052,6 +4058,10 @@ class FilesStore {
     }
 
     return link;
+  };
+
+  getFilePrimaryLink = async (fileId) => {
+    return await api.files.getFileLink(fileId);
   };
 
   setRoomShared = (roomId, shared) => {

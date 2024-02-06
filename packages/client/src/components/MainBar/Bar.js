@@ -343,8 +343,9 @@ const Bar = (props) => {
   ) : null;
 };
 
-export default inject(({ auth, profileActionsStore }) => {
-  const { user, withActivationBar, sendActivationLink } = auth.userStore;
+export default inject(
+  ({ settingsStore, profileActionsStore, userStore, currentQuotaStore }) => {
+    const { user, withActivationBar, sendActivationLink } = userStore;
 
   const { onPaymentsClick } = profileActionsStore;
 
@@ -361,12 +362,12 @@ export default inject(({ auth, profileActionsStore }) => {
     showRoomQuotaBar,
     showStorageQuotaBar,
     showUserQuotaBar,
-    showUserPersonalQuotaBar,
+	showUserPersonalQuotaBar,
     tenantCustomQuota,
     showTenantCustomQuotaBar,
-  } = auth.currentQuotaStore;
+    } = currentQuotaStore;
 
-  const { currentColorScheme, setMainBarVisible } = auth.settingsStore;
+    const { currentColorScheme, setMainBarVisible } = settingsStore;
 
   return {
     isAdmin: user?.isAdmin,
@@ -396,4 +397,5 @@ export default inject(({ auth, profileActionsStore }) => {
     tenantCustomQuota,
     showTenantCustomQuotaBar,
   };
-})(withTranslation(["Profile", "Common"])(observer(Bar)));
+  }
+)(withTranslation(["Profile", "Common"])(observer(Bar)));

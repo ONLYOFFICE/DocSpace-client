@@ -88,6 +88,7 @@ export interface TableRowProps {
   style: React.CSSProperties;
   title: string;
   getContextModel: () => ContextMenuModel[];
+  badgeUrl: string;
 }
 
 export interface TableCellProps {

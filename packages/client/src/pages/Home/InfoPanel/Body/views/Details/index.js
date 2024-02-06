@@ -94,26 +94,21 @@ const Details = ({
         </StyledThumbnail>
       ) : (
         <StyledNoThumbnail>
-          {showDefaultRoomIcon ? (
             <RoomIcon
-              color={selection.logo.color}
+            color={selection.logo?.color}
               title={selection.title}
               isArchive={isArchive}
               size="96px"
               radius="16px"
-            />
-          ) : (
-            <img
-              className={`no-thumbnail-img ${selection.isRoom && "is-room"} ${
+            showDefault={showDefaultRoomIcon}
+            imgClassName={`no-thumbnail-img ${selection.isRoom && "is-room"} ${
                 selection.isRoom &&
                 !isArchive &&
                 selection.logo?.large &&
                 "custom-logo"
               }`}
-              src={currentIcon}
-              alt="thumbnail-icon-big"
+            imgSrc={currentIcon}
             />
-          )}
         </StyledNoThumbnail>
       )}
 
@@ -141,16 +136,19 @@ const Details = ({
   );
 };
 
-export default inject(({ auth, filesStore, filesActionsStore }) => {
-  const { userStore, currentQuotaStore } = auth;
-  const {
-    getInfoPanelItemIcon,
-    openUser,
-    setNewInfoPanelSelection,
-    infoPanelSelection,
-  } = auth.infoPanelStore;
+export default inject(
+  ({
+    settingsStore,
+    filesStore,
+    filesActionsStore,
+    infoPanelStore,
+    userStore,
+	currentQuotaStore,
+  }) => {
+    const { infoPanelSelection, getInfoPanelItemIcon, openUser } =
+      infoPanelStore;
   const { createThumbnail } = filesStore;
-  const { personal, culture } = auth.settingsStore;
+    const { personal, culture } = settingsStore;
   const { user } = userStore;
 
   const { selectTag } = filesActionsStore;
@@ -175,4 +173,5 @@ export default inject(({ auth, filesStore, filesActionsStore }) => {
     isDefaultRoomsQuotaSet,
     setNewInfoPanelSelection,
   };
-})(withTranslation(["InfoPanel", "Common", "Translations", "Files"])(Details));
+  }
+)(withTranslation(["InfoPanel", "Common", "Translations", "Files"])(Details));

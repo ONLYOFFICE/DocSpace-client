@@ -19,6 +19,7 @@ import { DeleteOwnerProfileDialog } from "SRC_DIR/components/dialogs";
 import { StyledHeader } from "./StyledHeader";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { RoomSearchArea } from "@docspace/shared/enums";
+import TariffBar from "SRC_DIR/components/TariffBar";
 
 const Header = (props) => {
   const {
@@ -139,22 +140,27 @@ const Header = (props) => {
         className="arrow-button"
       />
 
-      <Headline className="header-headline" type="content" truncate={true}>
+      <Headline className="header-headline" type="content">
         {t("Profile:MyProfile")}
         {profile?.isLDAP && ` (${t("PeopleTranslations:LDAPLbl")})`}
       </Headline>
-      {((isAdmin && !profile?.isOwner) || isMe) && (
-        <ContextMenuButton
-          className="action-button"
-          directionX="right"
-          title={t("Common:Actions")}
-          iconName={VerticalDotsReactSvgUrl}
-          size={17}
-          getData={getUserContextOptions}
-          isDisabled={false}
-          usePortal={false}
-        />
-      )}
+      <div className="action-button">
+        {((isAdmin && !profile?.isOwner) || isMe) && (
+          <ContextMenuButton
+            directionX="right"
+            title={t("Common:Actions")}
+            iconName={VerticalDotsReactSvgUrl}
+            size={17}
+            getData={getUserContextOptions}
+            isDisabled={false}
+            usePortal={false}
+          />
+        )}
+
+        <div className="tariff-bar">
+          <TariffBar />
+        </div>
+      </div>
 
       {deleteSelfProfileDialog && (
         <DeleteSelfProfileDialog
@@ -175,10 +181,16 @@ const Header = (props) => {
 };
 
 export default inject(
-  ({ auth, peopleStore, clientLoadingStore, profileActionsStore }) => {
-    const { isAdmin } = auth;
+  ({
+    authStore,
+    userStore,
+    peopleStore,
+    clientLoadingStore,
+    profileActionsStore,
+  }) => {
+    const { isAdmin } = authStore;
 
-    const { isVisitor, isCollaborator } = auth.userStore.user;
+    const { isVisitor, isCollaborator } = userStore.user;
 
     const { targetUserStore, filterStore, dialogStore } = peopleStore;
 

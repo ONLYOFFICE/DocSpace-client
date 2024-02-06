@@ -15,12 +15,13 @@ import {
 } from "@docspace/shared/utils/image-helpers";
 
 import { getIconPathByFolderType } from "@docspace/shared/utils/common";
-class SettingsStore {
+class FilesSettingsStore {
   thirdPartyStore;
   treeFoldersStore;
   publicRoomStore;
   pluginStore;
   authStore;
+  settingsStore;
 
   isErrorSettings = null;
   expandedSetting = null;
@@ -73,7 +74,8 @@ class SettingsStore {
     treeFoldersStore,
     publicRoomStore,
     pluginStore,
-    authStore
+    authStore,
+    settingsStore
   ) {
     makeAutoObservable(this);
 
@@ -82,6 +84,7 @@ class SettingsStore {
     this.publicRoomStore = publicRoomStore;
     this.pluginStore = pluginStore;
     this.authStore = authStore;
+    this.settingsStore = settingsStore;
   }
 
   setIsLoaded = (isLoaded) => {
@@ -125,20 +128,18 @@ class SettingsStore {
         if (!settings.enableThirdParty || this.publicRoomStore.isPublicRoom)
           return;
 
-        // TODO: enable after supporting third-party
-
-        // return axios
-        //   .all([
-        //     api.files.getThirdPartyCapabilities(),
-        //     api.files.getThirdPartyList(),
-        //   ])
-        //   .then(([capabilities, providers]) => {
-        //     for (let item of capabilities) {
-        //       item.splice(1, 1);
-        //     }
-        //     this.thirdPartyStore.setThirdPartyCapabilities(capabilities); //TODO: Out of bounds read: 1
-        //     this.thirdPartyStore.setThirdPartyProviders(providers);
-        //   });
+        return axios
+          .all([
+            api.files.getThirdPartyCapabilities(),
+            api.files.getThirdPartyList(),
+          ])
+          .then(([capabilities, providers]) => {
+            for (let item of capabilities) {
+              item.splice(1, 1);
+            }
+            this.thirdPartyStore.setThirdPartyCapabilities(capabilities); //TODO: Out of bounds read: 1
+            this.thirdPartyStore.setThirdPartyProviders(providers);
+          });
       })
       .catch(() => this.setIsErrorSettings(true));
   };
@@ -173,7 +174,7 @@ class SettingsStore {
   };
 
   setEnableThirdParty = async (data, setting) => {
-    const res = await api.files.thirdParty(data);
+    const res = await api.files.enableThirdParty(data);
     this.setFilesSetting(setting, res);
 
     if (data) {
@@ -562,7 +563,7 @@ class SettingsStore {
         path = "sxi.svg";
         break;
       default:
-        const { enablePlugins } = this.authStore.settingsStore;
+        const { enablePlugins } = this.settingsStore;
 
         if (enablePlugins) {
           const { fileItemsList } = this.pluginStore;
@@ -627,4 +628,4 @@ class SettingsStore {
   };
 }
 
-export default SettingsStore;
+export default FilesSettingsStore;

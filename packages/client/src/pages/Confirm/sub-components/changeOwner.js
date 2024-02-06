@@ -95,9 +95,9 @@ const ChangeOwnerForm = (props) => {
   );
 };
 
-export default inject(({ auth }) => ({
-  greetingTitle: auth.settingsStore.greetingSettings,
-  defaultPage: auth.settingsStore.defaultPage,
+export default inject(({ settingsStore }) => ({
+  greetingTitle: settingsStore.greetingSettings,
+  defaultPage: settingsStore.defaultPage,
 }))(
   withTranslation(["Confirm", "Common"])(withLoader(observer(ChangeOwnerForm)))
 );

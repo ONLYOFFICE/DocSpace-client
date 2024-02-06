@@ -251,13 +251,13 @@ const Accounts = (props) => {
   );
 };
 
-export default inject(({ auth, peopleStore, accessRightsStore }) => {
-  const { isOwner, isAdmin, id: selfId } = auth.userStore.user;
+export default inject(
+  ({ userStore, peopleStore, accessRightsStore, infoPanelStore, currentQuotaStore }) => {
+    const { isOwner, isAdmin, id: selfId } = userStore.user;
   const { changeType: changeUserType, usersStore } = peopleStore;
   const { canChangeUserType } = accessRightsStore;
 
-  const { setInfoPanelSelection } = auth.infoPanelStore;
-  const { currentQuotaStore } = auth;
+    const { setInfoPanelSelection } = infoPanelStore;
 
   const { showStorageInfo } = currentQuotaStore;
   return {
@@ -271,7 +271,8 @@ export default inject(({ auth, peopleStore, accessRightsStore }) => {
     setInfoPanelSelection,
     showStorageInfo,
   };
-})(
+  }
+)(
   withTranslation([
     "People",
     "InfoPanel",

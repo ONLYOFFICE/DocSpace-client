@@ -95,7 +95,7 @@ const SecurityWrapper = (props) => {
   );
 };
 
-export default inject(({ auth, setup }) => {
+export default inject(({ settingsStore, setup }) => {
   const { initSettings, resetIsInit } = setup;
 
   return {
@@ -103,6 +103,6 @@ export default inject(({ auth, setup }) => {
       await initSettings();
     },
     resetIsInit,
-    currentDeviceType: auth.settingsStore.currentDeviceType,
+    currentDeviceType: settingsStore.currentDeviceType,
   };
 })(withTranslation(["Settings", "Common"])(observer(SecurityWrapper)));

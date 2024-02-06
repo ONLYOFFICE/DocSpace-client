@@ -199,7 +199,7 @@ const SessionLifetime = (props) => {
         </Text>
         <Link
           className="link-learn-more"
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
           target="_blank"
           isHovered
           href={lifetimeSettingsUrl}
@@ -266,7 +266,7 @@ const SessionLifetime = (props) => {
   );
 };
 
-export default inject(({ auth, setup }) => {
+export default inject(({ settingsStore, setup }) => {
   const {
     sessionLifetime,
     enabledSessionLifetime,
@@ -274,7 +274,7 @@ export default inject(({ auth, setup }) => {
     lifetimeSettingsUrl,
     currentColorScheme,
     currentDeviceType,
-  } = auth.settingsStore;
+  } = settingsStore;
   const { initSettings, isInit } = setup;
 
   return {

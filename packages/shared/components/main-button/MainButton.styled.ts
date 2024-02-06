@@ -118,27 +118,27 @@ const getDefaultStyles = ({
 }) =>
   $currentColorScheme &&
   css`
-    background-color: ${$currentColorScheme.main.accent};
+    background-color: ${$currentColorScheme.main?.accent};
 
     &:hover {
-      background-color: ${$currentColorScheme.main.accent};
+      background-color: ${$currentColorScheme.main?.accent};
       opacity: 0.85;
       cursor: pointer;
     }
 
     &:active {
-      background-color: ${$currentColorScheme.main.accent};
+      background-color: ${$currentColorScheme.main?.accent};
       opacity: 1;
       filter: ${theme.isBase ? "brightness(90%)" : "brightness(82%)"};
       cursor: pointer;
     }
 
     .main-button_text {
-      color: ${$currentColorScheme.text.accent};
+      color: ${$currentColorScheme.text?.accent};
     }
 
     .main-button_img svg path {
-      fill: ${$currentColorScheme.text.accent};
+      fill: ${$currentColorScheme.text?.accent};
     }
 
     ${isDisabled &&

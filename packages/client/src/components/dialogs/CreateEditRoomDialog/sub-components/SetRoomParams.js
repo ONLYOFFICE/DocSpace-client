@@ -210,12 +210,11 @@ const SetRoomParams = ({
   );
 };
 
-export default inject(({ auth, dialogsStore }) => {
-  const { currentQuotaStore } = auth;
+export default inject(({ settingsStore, dialogsStore, currentQuotaStore }) => {
   const { isDefaultRoomsQuotaSet } = currentQuotaStore;
 
   const { setChangeRoomOwnerIsVisible } = dialogsStore;
-  const { folderFormValidation } = auth.settingsStore;
+  const { folderFormValidation } = settingsStore;
 
   return {
     isDefaultRoomsQuotaSet,

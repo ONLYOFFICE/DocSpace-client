@@ -21,7 +21,7 @@ const StyledRowContent = styled(RowContent)`
 
     .badges {
       flex-direction: row-reverse;
-      margin-top: 9px;
+      margin-top: 10px;
       ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`

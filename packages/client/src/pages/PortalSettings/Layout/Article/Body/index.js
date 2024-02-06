@@ -46,9 +46,9 @@ const ArticleBodyContent = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  React.useEffect(() => {
-    prevLocation.current = location;
-  }, [location]);
+  // React.useEffect(() => {
+  //   // prevLocation.current = location;
+  // }, [location]);
 
   React.useEffect(() => {
     const locationPathname = location.pathname;
@@ -84,8 +84,13 @@ const ArticleBodyContent = (props) => {
   React.useEffect(() => {
     if (tReady && !isProfileLoading) setIsLoadedArticleBody(true);
 
-    if (prevLocation.current.pathname !== location.pathname) {
-      if (location.pathname.includes("common")) {
+    if (
+      !prevLocation.current ||
+      prevLocation.current.pathname !== location.pathname
+    ) {
+      prevLocation.current = location;
+
+      if (location.pathname.includes("customization")) {
         setSelectedKeys(["0-0"]);
       }
 
@@ -116,8 +121,8 @@ const ArticleBodyContent = (props) => {
       if (location.pathname.includes("payments")) {
         setSelectedKeys(["7-0"]);
       }
-      if (this.props.location.pathname.includes("bonus")) {
-        this.setState({ selectedKeys: ["8-0"] });
+      if (location.pathname.includes("bonus")) {
+        setSelectedKeys(["8-0"]);
       }
     }
   }, [
@@ -133,7 +138,7 @@ const ArticleBodyContent = (props) => {
       return;
     }
 
-    setSelectedKeys([value + "-0"]);
+    // setSelectedKeys([value + "-0"]);
 
     if (currentDeviceType === DeviceType.mobile) {
       toggleArticleOpen();
@@ -273,46 +278,49 @@ const ArticleBodyContent = (props) => {
   );
 };
 
-export default inject(({ auth, common, clientLoadingStore }) => {
-  const { isLoadedArticleBody, setIsLoadedArticleBody } = common;
-  const {
-    currentTariffStatusStore,
-    userStore,
-    isEnterprise,
+export default inject(
+  ({
+    authStore,
     settingsStore,
-    isCommunity,
-  } = auth;
-  const { isNotPaidPeriod } = currentTariffStatusStore;
-  const { user } = userStore;
-  const { isOwner } = user;
-  const {
-    standalone,
-    showText,
-    toggleArticleOpen,
-    currentDeviceType,
-    limitedAccessSpace,
-  } = settingsStore;
+    common,
+    clientLoadingStore,
+    userStore,
+    currentTariffStatusStore,
+  }) => {
+    const { isLoadedArticleBody, setIsLoadedArticleBody } = common;
+    const { isEnterprise, isCommunity } = authStore;
+    const { isNotPaidPeriod } = currentTariffStatusStore;
+    const { user } = userStore;
+    const { isOwner } = user;
+    const {
+      standalone,
+      showText,
+      toggleArticleOpen,
+      currentDeviceType,
+      limitedAccessSpace,
+    } = settingsStore;
 
-  const isProfileLoading =
-    window.location.pathname.includes("profile") &&
-    clientLoadingStore.showProfileLoader &&
-    !isLoadedArticleBody;
+    const isProfileLoading =
+      window.location.pathname.includes("profile") &&
+      clientLoadingStore.showProfileLoader &&
+      !isLoadedArticleBody;
 
-  return {
-    standalone,
-    isEnterprise,
-    showText,
-    toggleArticleOpen,
-    isLoadedArticleBody,
-    setIsLoadedArticleBody,
-    isNotPaidPeriod,
-    isOwner,
-    isCommunity,
-    currentDeviceType,
-    isProfileLoading,
-    limitedAccessSpace,
-  };
-})(
+    return {
+      standalone,
+      isEnterprise,
+      showText,
+      toggleArticleOpen,
+      isLoadedArticleBody,
+      setIsLoadedArticleBody,
+      isNotPaidPeriod,
+      isOwner,
+      isCommunity,
+      currentDeviceType,
+      isProfileLoading,
+      limitedAccessSpace,
+    };
+  }
+)(
   withLoading(
     withTranslation(["Settings", "Common"])(observer(ArticleBodyContent))
   )

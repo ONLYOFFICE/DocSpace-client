@@ -20,7 +20,7 @@ import { Base } from "@docspace/shared/themes";
 import { ROOMS_TYPE_TRANSLATIONS } from "@docspace/shared/constants";
 
 import { getFileTypeName } from "../../../../../helpers/filesUtils";
-import { SortByFieldName } from "../../../../../helpers/constants";
+import { SortByFieldName } from "SRC_DIR/helpers/enums";
 import { getSpaceQuotaAsText } from "@docspace/shared/utils/common";
 
 const SimpleFilesRowContent = styled(RowContent)`
@@ -323,20 +323,19 @@ const FilesRowContent = ({
   );
 };
 
-export default inject(({ auth, treeFoldersStore, filesStore }) => {
+export default inject(({ currentQuotaStore, settingsStore, treeFoldersStore, filesStore }) => {
   const { filter, roomsFilter } = filesStore;
   const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
     treeFoldersStore;
 
   const isRooms = isRoomsFolder || isArchiveFolder;
   const filterSortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
-  const { currentQuotaStore } = auth;
 
   const { isDefaultRoomsQuotaSet, isStatisticsAvailable, showStorageInfo } =
     currentQuotaStore;
   return {
     filterSortBy,
-    theme: auth.settingsStore.theme,
+    theme: settingsStore.theme,
     isTrashFolder: isRecycleBinFolder,
     isDefaultRoomsQuotaSet,
     isStatisticsAvailable,

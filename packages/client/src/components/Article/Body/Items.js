@@ -384,7 +384,7 @@ Items.propTypes = {
 
 export default inject(
   ({
-    auth,
+    authStore,
     treeFoldersStore,
     selectedFolderStore,
     filesStore,
@@ -392,13 +392,11 @@ export default inject(
     uploadDataStore,
     dialogsStore,
     clientLoadingStore,
+    userStore,
+    settingsStore,
   }) => {
-    const {
-      settingsStore,
-      isCommunity,
-      isPaymentPageAvailable,
-      currentDeviceType,
-    } = auth;
+    const { isCommunity, isPaymentPageAvailable, currentDeviceType } =
+      authStore;
     const { showText, docSpace } = settingsStore;
 
     const {
@@ -429,9 +427,9 @@ export default inject(
     const { setEmptyTrashDialogVisible } = dialogsStore;
 
     return {
-      isAdmin: auth.isAdmin,
-      isVisitor: auth.userStore.user.isVisitor,
-      isCollaborator: auth.userStore.user.isCollaborator,
+      isAdmin: authStore.isAdmin,
+      isVisitor: userStore.user.isVisitor,
+      isCollaborator: userStore.user.isCollaborator,
       myId: myFolderId,
       commonId: commonFolderId,
       isPrivacy: isPrivacyFolder,

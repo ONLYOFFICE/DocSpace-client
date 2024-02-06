@@ -41,7 +41,7 @@ const StyledComponent = styled(ModalDialog)`
     position: relative;
   }
 
-  .accent-box {
+  ?.accent-box {
     background: ${(props) =>
       props.currentColorAccent
         ? props.currentColorAccent

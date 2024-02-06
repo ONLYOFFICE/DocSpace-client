@@ -1936,7 +1936,6 @@ const Dark: TTheme = {
     expanderColor: "#eeeeee",
     background: black,
     rootFolderTitleColor: "#ADADAD",
-    publicIcon: "#858585",
     boxShadow: "0px 12px 40px 0px #00000066",
 
     icon: {

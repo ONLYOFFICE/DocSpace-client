@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -41,7 +41,6 @@ const FilesSelector = ({
   isRoomsOnly = false,
   isUserOnly = false,
   isEditorDialog = false,
-
   rootThirdPartyId,
   filterParam,
 
@@ -78,6 +77,7 @@ const FilesSelector = ({
   onSelectFolder,
   onSetBaseFolderPath,
   //onSetNewFolderPath,
+  setIsDataReady,
   onSelectTreeNode,
   onSave,
   onSelectFile,
@@ -128,6 +128,7 @@ const FilesSelector = ({
     title: string;
     path?: string[];
     fileExst?: string;
+    inPublic?: boolean;
   } | null>(null);
 
   const [total, setTotal] = React.useState<number>(0);
@@ -159,6 +160,10 @@ const FilesSelector = ({
     showBreadCrumbsLoader,
     showLoader,
   } = useLoadersHelper({ items });
+
+  useEffect(() => {
+    setIsDataReady && setIsDataReady(!showLoader);
+  }, [showLoader]);
 
   const { isRoot, setIsRoot, getRootData } = useRootHelper({
     setIsBreadCrumbsLoading,
@@ -215,6 +220,9 @@ const FilesSelector = ({
   });
 
   const onSelectAction = (item: Item) => {
+    const inPublic =
+      breadCrumbs.findIndex((f: any) => f.roomType === RoomsType.PublicRoom) >
+      -1;
     if (item.isFolder) {
       setIsFirstLoad(true);
       setItems(null);
@@ -244,6 +252,7 @@ const FilesSelector = ({
         id: item.id,
         title: item.title,
         fileExst: item.fileExst,
+        inPublic: inPublic,
       });
     }
   };
@@ -479,14 +488,15 @@ const FilesSelector = ({
         selectedItemId &&
         onSave(null, selectedItemId, fileName, isChecked);
       onSelectTreeNode && onSelectTreeNode(selectedTreeNode);
-      onSelectFile && onSelectFile(selectedFileInfo, breadCrumbs);
-      onCloseAndDeselectAction();
+      onSelectFile && onSelectFile(selectedFileInfo!, breadCrumbs);
+      !embedded && onCloseAndDeselectAction();
       //!withoutImmediatelyClose &&  onCloseAction();
     }
   };
 
   const headerLabel = getHeaderLabel(
     t,
+    isEditorDialog,
     isCopy,
     isRestoreAll,
     isMove,
@@ -497,6 +507,7 @@ const FilesSelector = ({
 
   const acceptButtonLabel = getAcceptButtonLabel(
     t,
+    isEditorDialog,
     isCopy,
     isRestoreAll,
     isMove,
@@ -624,13 +635,14 @@ const FilesSelector = ({
 export default inject(
   (
     {
-      auth,
+      settingsStore,
       selectedFolderStore,
       filesActionsStore,
       uploadDataStore,
       treeFoldersStore,
       dialogsStore,
       filesStore,
+      infoPanelStore,
     }: any,
     { isCopy, isRestoreAll, isMove, isRestore, isPanelVisible, id }: any
   ) => {
@@ -658,10 +670,9 @@ export default inject(
       setBackupToPublicRoomVisible,
     } = dialogsStore;
 
-    const { setIsMobileHidden: setInfoPanelIsMobileHidden } =
-      auth.infoPanelStore;
+    const { setIsMobileHidden: setInfoPanelIsMobileHidden } = infoPanelStore;
 
-    const { theme, socketHelper, currentDeviceType } = auth.settingsStore;
+    const { theme, socketHelper, currentDeviceType } = settingsStore;
 
     const socketSubscribesId = socketHelper.socketSubscribers;
 
@@ -675,7 +686,7 @@ export default inject(
     } = filesStore;
     const { getIcon } = filesSettingsStore;
     const { isVisible: infoPanelIsVisible, selection: infoPanelSelection } =
-      auth.infoPanelStore;
+      infoPanelStore;
 
     const selections =
       isMove || isCopy || isRestoreAll || isRestore

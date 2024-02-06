@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import EmptyScreenCorporateSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate.svg?url";
@@ -41,6 +41,7 @@ const RoomSelector = ({
   selectAllIcon,
   onSelectAll,
 
+  setIsDataReady,
   withAccessRights,
   accessRights,
   selectedAccessRight,
@@ -67,6 +68,10 @@ const RoomSelector = ({
   const [total, setTotal] = React.useState(-1);
 
   const [items, setItems] = React.useState<TSelectorItem[]>([]);
+
+  useEffect(() => {
+    setIsDataReady(!isFirstLoad);
+  }, [isFirstLoad, setIsDataReady]);
 
   const onSearchAction = React.useCallback(
     (value: string, callback?: Function) => {

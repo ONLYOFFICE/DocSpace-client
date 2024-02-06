@@ -35,8 +35,8 @@ const EditRoomDialog = ({
     return (
       prevParams.title === currentParams.title &&
       prevParams.roomOwner.id === currentParams.roomOwner.id &&
-      prevParams.tags.sort().toString() ===
-        currentParams.tags.sort().toString() &&
+      prevParams.tags.map((t) => t.name).sort().join("|").toLowerCase() ===
+        currentParams.tags.map((t) => t.name).sort().join("|").toLowerCase() &&
       ((prevParams.icon.uploadedFile === "" &&
         currentParams.icon.uploadedFile === null) ||
         prevParams.icon.uploadedFile === currentParams.icon.uploadedFile) &&

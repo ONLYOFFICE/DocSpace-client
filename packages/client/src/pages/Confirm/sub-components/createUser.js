@@ -731,8 +731,8 @@ const CreateUserForm = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { settingsStore, providers, thirdPartyLogin, capabilities } = auth;
+export default inject(({ settingsStore, authStore }) => {
+  const { providers, thirdPartyLogin, capabilities } = authStore;
   const {
     passwordSettings,
     greetingSettings,

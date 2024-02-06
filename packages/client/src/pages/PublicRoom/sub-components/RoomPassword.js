@@ -7,6 +7,7 @@ import { FieldContainer } from "@docspace/shared/components/field-container";
 import { inject, observer } from "mobx-react";
 import { StyledPage, StyledBody, StyledContent } from "./RoomStyles";
 // import { createPasswordHash } from "@docspace/shared/utils/common";
+import { frameCallCommand } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/shared/components/toast";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import DocspaceLogo from "../../../DocspaceLogo";
@@ -26,6 +27,8 @@ const RoomPassword = (props) => {
   const [errorMessage, setErrorMessage] = useState(null);
 
   const inputRef = useRef(null);
+
+  useEffect(() => frameCallCommand("setIsLoaded"), []);
 
   useEffect(() => {
     if (inputRef && inputRef.current) {

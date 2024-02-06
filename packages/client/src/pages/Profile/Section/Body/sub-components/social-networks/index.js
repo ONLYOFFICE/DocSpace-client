@@ -137,10 +137,10 @@ const SocialNetworks = (props) => {
   );
 };
 
-export default inject(({ auth, peopleStore }) => {
+export default inject(({ currentQuotaStore, peopleStore }) => {
   const { usersStore } = peopleStore;
   const { providers, setProviders } = usersStore;
-  const { currentQuotaStore } = auth;
+
   const { isOAuthAvailable, setPortalQuota } = currentQuotaStore;
 
   return {

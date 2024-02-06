@@ -134,8 +134,8 @@ const EditRoomEvent = ({
         await createTag(newTags[i]);
       }
 
-      room = await addTagsToRoom(room.id, tags);
-      room = await removeTagsFromRoom(room.id, removedTags);
+      tags.length && (room = await addTagsToRoom(room.id, tags));
+      removedTags.length && (room = await removeTagsFromRoom(room.id, removedTags));
 
       if (!!item.logo.original && !roomParams.icon.uploadedFile) {
         room = await removeLogoFromRoom(room.id);
@@ -248,12 +248,14 @@ const EditRoomEvent = ({
 export default inject(
   ({
     auth,
+    settingsStore,
     filesStore,
     tagsStore,
     filesActionsStore,
     selectedFolderStore,
     dialogsStore,
-    settingsStore,
+    filesSettingsStore,
+    infoPanelStore,
   }) => {
     const {
       editRoom,
@@ -279,10 +281,10 @@ export default inject(
       updateLogoPathsCacheBreaker,
     } = selectedFolderStore;
     const { updateCurrentFolder, changeRoomOwner } = filesActionsStore;
-    const { getThirdPartyIcon } = settingsStore.thirdPartyStore;
+    const { getThirdPartyIcon } = filesSettingsStore.thirdPartyStore;
     const { setCreateRoomDialogVisible } = dialogsStore;
-    const { withPaging } = auth.settingsStore;
-    const { updateInfoPanelSelection } = auth.infoPanelStore;
+    const { withPaging } = settingsStore;
+    const { updateInfoPanelSelection } = infoPanelStore;
 
     const { currentQuotaStore } = auth;
     const { defaultRoomsQuota, isDefaultRoomsQuotaSet } = currentQuotaStore;

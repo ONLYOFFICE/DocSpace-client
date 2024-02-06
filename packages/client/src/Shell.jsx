@@ -409,10 +409,11 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   );
 };
 
-const ShellWrapper = inject(({ auth, backup, clientLoadingStore }) => {
+const ShellWrapper = inject(
+  ({ authStore, settingsStore, backup, clientLoadingStore, userStore }) => {
   const { i18n } = useTranslation();
 
-  const { init, isLoaded, settingsStore, setProductVersion, language } = auth;
+    const { init, isLoaded, setProductVersion, language } = authStore;
 
   const {
     personal,
@@ -427,18 +428,20 @@ const ShellWrapper = inject(({ auth, backup, clientLoadingStore }) => {
     setTheme,
     whiteLabelLogoUrls,
     currentDeviceType,
+      isFrame,
+      frameConfig,
   } = settingsStore;
 
   const isBase = settingsStore.theme.isBase;
   const { setPreparationPortalDialogVisible } = backup;
 
   const userTheme = isDesktopClient
-    ? auth?.userStore?.user?.theme
-      ? auth?.userStore?.user?.theme
+      ? userStore?.user?.theme
+        ? userStore?.user?.theme
       : window.RendererProcessVariable?.theme?.type === "dark"
         ? "Dark"
         : "Base"
-    : auth?.userStore?.user?.theme;
+      : userStore?.user?.theme;
 
   return {
     loadBaseInfo: async () => {
@@ -465,23 +468,24 @@ const ShellWrapper = inject(({ auth, backup, clientLoadingStore }) => {
     setTheme,
     roomsMode,
     setSnackbarExist,
-    userTheme: userTheme,
-    userId: auth?.userStore?.user?.id,
+      userTheme: isFrame ? frameConfig?.theme : userTheme,
+      userId: userStore?.user?.id,
     whiteLabelLogoUrls,
     currentDeviceType,
     showArticleLoader: clientLoadingStore.showArticleLoader,
   };
-})(observer(Shell));
+  }
+)(observer(Shell));
 
-const ThemeProviderWrapper = inject(({ auth, loginStore }) => {
-  const { settingsStore } = auth;
+const ThemeProviderWrapper = inject(
+  ({ authStore, settingsStore, loginStore }) => {
   let currentColorScheme = false;
   const { theme } = settingsStore;
   const { i18n } = useTranslation();
 
   if (loginStore) {
     currentColorScheme = loginStore.currentColorScheme;
-  } else if (auth) {
+    } else if (authStore) {
     currentColorScheme = settingsStore.currentColorScheme || false;
   }
 
@@ -495,7 +499,8 @@ const ThemeProviderWrapper = inject(({ auth, loginStore }) => {
     currentColorScheme,
     timezone,
   };
-})(observer(ThemeProvider));
+  }
+)(observer(ThemeProvider));
 
 export default () => (
   <MobxProvider {...store}>

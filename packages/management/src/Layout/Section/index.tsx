@@ -69,8 +69,15 @@ const SectionWrapper = ({
 };
 
 export default inject(
-  ({ auth, dialogsStore }: { auth: any; dialogsStore: any }) => {
-    const { settingsStore } = auth;
+  ({
+    settingsStore,
+    dialogsStore,
+    infoPanelStore,
+  }: {
+    settingsStore: any;
+    dialogsStore: any;
+    infoPanelStore: any;
+  }) => {
     const {
       isDesktopClient: isDesktop,
       currentDeviceType,
@@ -82,7 +89,7 @@ export default inject(
     } = settingsStore;
 
     const { isVisible, isMobileHidden, setIsVisible, getCanDisplay } =
-      auth.infoPanelStore;
+      infoPanelStore;
 
     const { createRoomDialogVisible, invitePanelOptions } = dialogsStore;
 
@@ -91,7 +98,7 @@ export default inject(
     const anotherDialogOpen =
       createRoomDialogVisible || invitePanelOptions.visible;
 
-    const { isScrollLocked: isInfoPanelScrollLocked } = auth.infoPanelStore;
+    const { isScrollLocked: isInfoPanelScrollLocked } = infoPanelStore;
 
     return {
       isDesktop,

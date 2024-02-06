@@ -88,9 +88,9 @@ const ContinuePortal = (props) => {
   );
 };
 
-export default inject(({ auth }) => ({
-  greetingTitle: auth.settingsStore.greetingSettings,
-  theme: auth.settingsStore.theme,
+export default inject(({ settingsStore }) => ({
+  greetingTitle: settingsStore.greetingSettings,
+  theme: settingsStore.theme,
 }))(
   withTranslation(["Confirm", "Common"])(withLoader(observer(ContinuePortal)))
 );

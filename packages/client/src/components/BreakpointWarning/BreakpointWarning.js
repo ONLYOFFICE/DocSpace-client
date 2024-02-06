@@ -43,8 +43,8 @@ const BreakpointWarning = ({
   );
 };
 
-export default inject(({ auth }) => {
+export default inject(({ settingsStore }) => {
   return {
-    theme: auth.settingsStore.theme,
+    theme: settingsStore.theme,
   };
 })(observer(withTranslation(["Settings"])(BreakpointWarning)));

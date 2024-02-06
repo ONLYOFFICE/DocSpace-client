@@ -1,24 +1,39 @@
+/* eslint-disable no-console */
 import { makeAutoObservable, runInAction } from "mobx";
 import moment from "moment-timezone";
 
-import { getDaysLeft, getDaysRemaining } from "@docspace/shared/utils/common";
-
-import api from "@docspace/shared/api";
-import { TariffState } from "@docspace/shared/enums";
-import { getUserByEmail } from "@docspace/shared/api/people";
+import { TariffState } from "../enums";
+import api from "../api";
+import { getUserByEmail } from "../api/people";
+import { TPortalTariff } from "../api/portal/types";
+import { TUser } from "../api/people/types";
+import { isValidDate } from "../utils";
+import { getDaysLeft, getDaysRemaining } from "../utils/common";
 
 class CurrentTariffStatusStore {
-  portalTariffStatus = {};
-  isLoaded = false;
-  payerInfo = null;
-  authStore;
+  portalTariffStatus: TPortalTariff = {} as TPortalTariff;
 
-  constructor(authStore) {
+  isLoaded = false;
+
+  payerInfo: TUser | null = null;
+
+  language: string = "en";
+
+  isEnterprise: boolean = false;
+
+  constructor() {
     makeAutoObservable(this);
-    this.authStore = authStore;
   }
 
-  setIsLoaded = (isLoaded) => {
+  setLanguage = (language: string) => {
+    this.language = language;
+  };
+
+  setIsEnterprise = (isEnterprise: boolean) => {
+    this.isEnterprise = isEnterprise;
+  };
+
+  setIsLoaded = (isLoaded: boolean) => {
     this.isLoaded = isLoaded;
   };
 
@@ -75,46 +90,37 @@ class CurrentTariffStatusStore {
   };
 
   get paymentDate() {
-    moment.locale(this.authStore.language);
+    moment.locale(this.language);
     if (this.dueDate === null) return "";
-    return moment(this.dueDate)
-      .tz(window.timezone)
-      .format("LL");
+    return moment(this.dueDate).tz(window.timezone).format("LL");
   }
 
-  isValidDate = (date) => {
-    return (
-      moment(date)
-        .tz(window.timezone)
-        .year() !== 9999
-    );
-  };
   get isPaymentDateValid() {
     if (this.dueDate === null) return false;
 
-    return this.isValidDate(this.dueDate);
+    return isValidDate(this.dueDate);
   }
+
   get isLicenseDateExpired() {
     if (!this.isPaymentDateValid) return;
 
     return moment() > moment(this.dueDate).tz(window.timezone);
   }
+
   get gracePeriodEndDate() {
-    moment.locale(this.authStore.language);
+    moment.locale(this.language);
     if (this.delayDueDate === null) return "";
-    return moment(this.delayDueDate)
-      .tz(window.timezone)
-      .format("LL");
+    return moment(this.delayDueDate).tz(window.timezone).format("LL");
   }
 
   get delayDaysCount() {
-    moment.locale(this.authStore.language);
+    moment.locale(this.language);
     if (this.delayDueDate === null) return "";
     return getDaysRemaining(this.delayDueDate);
   }
 
   get isLicenseExpiring() {
-    if (!this.dueDate || !this.authStore.isEnterprise) return;
+    if (!this.dueDate || !this.isEnterprise) return;
 
     const days = getDaysLeft(this.dueDate);
 
@@ -122,13 +128,14 @@ class CurrentTariffStatusStore {
 
     return false;
   }
+
   get trialDaysLeft() {
     if (!this.dueDate) return;
 
     return getDaysLeft(this.dueDate);
   }
 
-  setPortalTariffValue = async (res) => {
+  setPortalTariffValue = async (res: TPortalTariff) => {
     this.portalTariffStatus = res;
 
     this.setIsLoaded(true);
@@ -145,4 +152,4 @@ class CurrentTariffStatusStore {
   };
 }
 
-export default CurrentTariffStatusStore;
+export { CurrentTariffStatusStore };

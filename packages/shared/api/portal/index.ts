@@ -1,5 +1,7 @@
-import { EmployeeType } from "@docspace/shared/enums";
+import { AxiosRequestConfig } from "axios";
+import { EmployeeType } from "../../enums";
 import { request } from "../client";
+import { TPaymentQuota, TPortal, TPortalTariff, TTenantExtra } from "./types";
 
 export function getShortenedLink(link) {
   return request({
@@ -208,23 +210,47 @@ export function deletePortal(confirmKey = null) {
   return request(options);
 }
 
-export function getPortalPaymentQuotas() {
-  return request({ method: "get", url: "/portal/payment/quotas" });
+export async function getPortalPaymentQuotas() {
+  const res = (await request({
+    method: "get",
+    url: "/portal/payment/quotas",
+  })) as TPaymentQuota[];
+
+  return res;
 }
 
-export function getPortalTenantExtra(refresh) {
+export async function getPortalTenantExtra(refresh: boolean) {
   const params = refresh ? { refresh: true } : {};
-  return request({ method: "get", url: "/portal/tenantextra", params });
+  const res = (await request({
+    method: "get",
+    url: "/portal/tenantextra",
+    params,
+  })) as TTenantExtra;
+
+  return res;
 }
-export function getPortalQuota(refresh = false) {
+export async function getPortalQuota(refresh = false) {
   const params = refresh ? { refresh: true } : {};
   // console.log("getPortalQuota", { params });
-  return request({ method: "get", url: "/portal/payment/quota", params });
+  const res = (await request({
+    method: "get",
+    url: "/portal/payment/quota",
+    params,
+  })) as TPaymentQuota;
+
+  return res;
 }
 
-export function getPortalTariff(refresh = false) {
+export async function getPortalTariff(refresh = false) {
   const params = refresh ? { refresh: true } : {};
-  return request({ method: "get", url: "/portal/tariff", params });
+
+  const res = (await request({
+    method: "get",
+    url: "/portal/tariff",
+    params,
+  })) as TPortalTariff;
+
+  return res;
 }
 
 export function getPaymentAccount() {
@@ -273,12 +299,14 @@ export function sendPaymentRequest(email, userName, message) {
   });
 }
 
-export function getPortal() {
-  const options = {
+export async function getPortal() {
+  const options: AxiosRequestConfig = {
     method: "get",
     url: "/portal",
   };
-  return request(options);
+  const res = (await request(options)) as TPortal;
+
+  return res;
 }
 
 export function getPortalUsersCount() {

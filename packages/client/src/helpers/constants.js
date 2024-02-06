@@ -152,9 +152,3 @@ export const LinkType = Object.freeze({
 });
 
 export const SSO_LABEL = "SSO";
-
-export const AuthenticatedAction = Object.freeze({
-  None: 0,
-  Logout: 1,
-  Redirect: 2,
-});

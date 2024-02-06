@@ -79,12 +79,18 @@ const CreateRoomEvent = ({
 };
 
 export default inject(
-  ({ createEditRoomStore, auth, tagsStore, dialogsStore, settingsStore }) => {
+  ({
+    createEditRoomStore,
+
+    tagsStore,
+    dialogsStore,
+    filesSettingsStore,
+  }) => {
     const { fetchTags } = tagsStore;
 
     const { deleteThirdParty, fetchThirdPartyProviders } =
-      settingsStore.thirdPartyStore;
-    const { enableThirdParty } = settingsStore;
+      filesSettingsStore.thirdPartyStore;
+    const { enableThirdParty } = filesSettingsStore;
 
     const {
       createRoomConfirmDialogVisible,

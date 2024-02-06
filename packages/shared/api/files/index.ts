@@ -29,6 +29,7 @@ import {
   TSendEditorNotify,
   TSharedUsers,
   TThirdPartyCapabilities,
+  TTirdParties,
   TUploadOperation,
 } from "./types";
 
@@ -861,39 +862,44 @@ export async function changeKeepNewFileName(val: boolean) {
   return res;
 }
 
-// export function thirdParty(val) {
-//   const data = { set: val };
-//   return request({ method: "put", url: "files/thirdparty", data });
-// }
+export function enableThirdParty(val: boolean) {
+  const data = { set: val };
+  return request({ method: "put", url: "files/thirdparty", data });
+}
 
-// export function getThirdPartyList() {
-//   return request({ method: "get", url: "files/thirdparty" });
-// }
+export async function getThirdPartyList() {
+  const res = (await request({
+    method: "get",
+    url: "files/thirdparty",
+  })) as TTirdParties;
 
-// export function saveThirdParty(
-//   url,
-//   login,
-//   password,
-//   token,
-//   isCorporate,
-//   customerTitle,
-//   providerKey,
-//   providerId,
-//   isRoomsStorage,
-// ) {
-//   const data = {
-//     url,
-//     login,
-//     password,
-//     token,
-//     isCorporate,
-//     customerTitle,
-//     providerKey,
-//     providerId,
-//     isRoomsStorage,
-//   };
-//   return request({ method: "post", url: "files/thirdparty", data });
-// }
+  return res;
+}
+
+export function saveThirdParty(
+  url: string,
+  login: string,
+  password: string,
+  token: string,
+  isCorporate: boolean,
+  customerTitle: string,
+  providerKey: string,
+  providerId: string,
+  isRoomsStorage: boolean,
+) {
+  const data = {
+    url,
+    login,
+    password,
+    token,
+    isCorporate,
+    customerTitle,
+    providerKey,
+    providerId,
+    isRoomsStorage,
+  };
+  return request({ method: "post", url: "files/thirdparty", data });
+}
 
 // TODO: Need update res type
 export function saveSettingsThirdParty(
@@ -978,12 +984,13 @@ export async function removeFromFavorite(ids: number[]) {
   return res;
 }
 
-// TODO: Need update res type
-export function getIsEncryptionSupport() {
-  return request({
+export async function getIsEncryptionSupport() {
+  const res = (await request({
     method: "get",
     url: "/files/@privacy/available",
-  });
+  })) as boolean;
+
+  return res;
 }
 
 // TODO: Need update res type
@@ -1001,12 +1008,13 @@ export function setEncryptionKeys(keys: { [key: string]: string | boolean }) {
   });
 }
 
-// TODO: Need update res type
-export function getEncryptionKeys() {
-  return request({
+export async function getEncryptionKeys() {
+  const res = (await request({
     method: "get",
     url: "privacyroom/keys",
-  });
+  })) as { [key: string]: string | boolean };
+
+  return res;
 }
 
 // TODO: Need update res type

@@ -176,44 +176,46 @@ const PriceCalculation = ({
   );
 };
 
-export default inject(({ auth, payments }) => {
-  const {
-    tariffsInfo,
-    setIsLoading,
-    setManagersCount,
-    maxAvailableManagersCount,
-
-    managersCount,
-    isAlreadyPaid,
-    getPaymentLink,
-    canUpdateTariff,
-  } = payments;
-  const { theme } = auth.settingsStore;
-  const {
-    currentTariffStatusStore,
-
+export default inject(
+  ({
+    settingsStore,
+    payments,
     paymentQuotasStore,
-  } = auth;
+    currentTariffStatusStore,
+  }) => {
+    const {
+      tariffsInfo,
+      setIsLoading,
+      setManagersCount,
+      maxAvailableManagersCount,
 
-  const { planCost } = paymentQuotasStore;
-  const { isNotPaidPeriod, isGracePeriod } = currentTariffStatusStore;
+      managersCount,
+      isAlreadyPaid,
+      getPaymentLink,
+      canUpdateTariff,
+    } = payments;
+    const { theme } = settingsStore;
 
-  return {
-    canUpdateTariff,
-    isAlreadyPaid,
-    managersCount,
+    const { planCost } = paymentQuotasStore;
+    const { isNotPaidPeriod, isGracePeriod } = currentTariffStatusStore;
 
-    setManagersCount,
-    tariffsInfo,
-    theme,
-    setIsLoading,
-    maxAvailableManagersCount,
+    return {
+      canUpdateTariff,
+      isAlreadyPaid,
+      managersCount,
 
-    isGracePeriod,
-    isNotPaidPeriod,
+      setManagersCount,
+      tariffsInfo,
+      theme,
+      setIsLoading,
+      maxAvailableManagersCount,
 
-    priceManagerPerMonth: planCost.value,
-    currencySymbol: planCost.currencySymbol,
-    getPaymentLink,
-  };
-})(observer(PriceCalculation));
+      isGracePeriod,
+      isNotPaidPeriod,
+
+      priceManagerPerMonth: planCost.value,
+      currencySymbol: planCost.currencySymbol,
+      getPaymentLink,
+    };
+  }
+)(observer(PriceCalculation));

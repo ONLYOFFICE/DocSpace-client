@@ -40,9 +40,9 @@ type TRow = {
   item: TPortals;
 };
 const SpacesRoomRow = ({ item }: TRow) => {
-  const { spacesStore, authStore } = useStore();
+  const { spacesStore, settingsStore } = useStore();
   const { setDeletePortalDialogVisible, setCurrentPortal } = spacesStore;
-  const { tenantAlias, getAllPortals } = authStore.settingsStore;
+  const { tenantAlias, getAllPortals } = settingsStore;
 
   const [isVisibleDialog, setIsVisibleDialog] = useState(false);
   const [isDisableQuota, setIsDisableQuota] = useState(false);

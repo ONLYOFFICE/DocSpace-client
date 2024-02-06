@@ -12,23 +12,27 @@ const fullAccessId = "00000000-0000-0000-0000-000000000000";
 
 class UsersStore {
   peopleStore = null;
-  authStore = null;
+  settingsStore = null;
+  infoPanelStore = null;
+  userStore = null;
 
   users = [];
   providers = [];
   accountsIsIsLoading = false;
   operationRunning = false;
 
-  constructor(peopleStore, authStore) {
+  constructor(peopleStore, settingsStore, infoPanelStore, userStore) {
     this.peopleStore = peopleStore;
-    this.authStore = authStore;
+    this.settingsStore = settingsStore;
+    this.infoPanelStore = infoPanelStore;
+    this.userStore = userStore;
     makeAutoObservable(this);
   }
 
   getUsersList = async (filter, updateFilter = false) => {
     const filterData = filter ? filter.clone() : Filter.getDefault();
 
-    if (!this.authStore.settingsStore.withPaging) {
+    if (!this.settingsStore.withPaging) {
       const isCustomCountPage =
         filter && filter.pageCount !== 100 && filter.pageCount !== 25;
 
@@ -98,7 +102,7 @@ class UsersStore {
   };
 
   get needResetUserSelection() {
-    const { isVisible: infoPanelVisible } = this.authStore.infoPanelStore;
+    const { isVisible: infoPanelVisible } = this.infoPanelStore;
     const { isOneUserSelection } = this.peopleStore.selectionStore;
 
     return !infoPanelVisible || !isOneUserSelection;
@@ -226,8 +230,7 @@ class UsersStore {
   };
 
   getUserContextOptions = (isMySelf, statusType, userRole, status) => {
-    const { isOwner, isAdmin, isVisitor, isCollaborator } =
-      this.peopleStore.authStore.userStore.user;
+    const { isOwner, isAdmin, isVisitor, isCollaborator } = this.userStore.user;
 
     const options = [];
 
@@ -422,9 +425,7 @@ class UsersStore {
     const statusType = this.getStatusType(user);
     const role = this.getUserRole(user);
     const isMySelf =
-      this.peopleStore.authStore.userStore.user &&
-      user.userName === this.peopleStore.authStore.userStore.user.userName;
-    //const isViewerAdmin = this.peopleStore.authStore.isAdmin;
+      this.userStore.user && user.userName === this.userStore.user.userName;
 
     const options = this.getUserContextOptions(
       isMySelf,

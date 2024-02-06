@@ -14,13 +14,17 @@ import { ComboBox } from "@docspace/shared/components/combobox";
 import Filter from "@docspace/shared/api/people/filter";
 import BetaBadge from "@docspace/common/components/BetaBadge";
 import { getMembersList } from "@docspace/shared/api/people";
-import { AccountsSearchArea, ShareAccessRights } from "@docspace/shared/enums";
+import {
+  AccountsSearchArea,
+  RoomsType,
+  ShareAccessRights,
+} from "@docspace/shared/enums";
 import withCultureNames from "@docspace/common/hoc/withCultureNames";
 import { isBetaLanguage } from "@docspace/shared/utils";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
 
 import AddUsersPanel from "../../AddUsersPanel";
-import { getAccessOptions } from "../utils";
+import { getAccessOptions, getTopFreeRole } from "../utils";
 import AccessSelector from "./AccessSelector";
 
 import {
@@ -58,6 +62,8 @@ const InviteInput = ({
   i18n,
   setCultureKey,
 }) => {
+  const isPublicRoomType = roomType === RoomsType.PublicRoom;
+
   const [inputValue, setInputValue] = useState("");
   const [usersList, setUsersList] = useState([]);
   const [isChangeLangMail, setIsChangeLangMail] = useState(false);
@@ -113,14 +119,13 @@ const InviteInput = ({
     const query = value.trim();
 
     if (query.length >= minSearchValue) {
+      const searchArea = isPublicRoomType
+        ? AccountsSearchArea.People
+        : AccountsSearchArea.Any;
       const filter = Filter.getFilterWithOutDisabledUser();
       filter.search = query;
 
-      const users = await getMembersList(
-        AccountsSearchArea.Any,
-        roomId,
-        filter,
-      );
+      const users = await getMembersList(searchArea, roomId, filter);
 
       setUsersList(users.items);
       setIsAddEmailPanelBlocked(false);
@@ -198,9 +203,12 @@ const InviteInput = ({
       if (item.isOwner || item.isAdmin)
         item.access = ShareAccessRights.RoomManager;
 
-      if (item.isGroup && checkIfAccessPaid(item.access)) {
-        item.access = ShareAccessRights.Editing;
-        item.warning = t("GroupMaxAvailableRoleWarning");
+      if (isGroup && checkIfAccessPaid(item.access)) {
+        const topFreeRole = getTopFreeRole(t, roomType);
+        item.access = topFreeRole.access;
+        item.warning = t("GroupMaxAvailableRoleWarning", {
+          role: topFreeRole.label,
+        });
       }
 
       const items = removeExist([item, ...inviteItems]);
@@ -253,6 +261,16 @@ const InviteInput = ({
   };
 
   const addItems = (users) => {
+    const topFreeRole = getTopFreeRole(t, roomType);
+    users.forEach((u) => {
+      if (u.isGroup && checkIfAccessPaid(u.access)) {
+        u.access = topFreeRole.access;
+        u.warning = t("GroupMaxAvailableRoleWarning", {
+          role: topFreeRole.label,
+        });
+      }
+    });
+
     const items = [...users, ...inviteItems];
 
     const filtered = removeExist(items);
@@ -476,7 +494,7 @@ const InviteInput = ({
             withoutBackground={isMobileView}
             withBlur={!isMobileView}
             roomId={roomId}
-            withGroups
+            withGroups={!isPublicRoomType}
             withAccessRights
           />
         )}

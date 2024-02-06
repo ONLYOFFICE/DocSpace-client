@@ -1,5 +1,3 @@
-import { i18n } from "i18next";
-
 import {
   TDocServiceLocation,
   TFile,
@@ -10,6 +8,7 @@ import { TSettings } from "@docspace/shared/api/settings/types";
 import { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
 import SocketIOHelper from "@docspace/shared/utils/socket";
+import { ConflictResolveType } from "@docspace/shared/enums";
 
 export type TDocumentInfoSharingSettings = {
   user: string;

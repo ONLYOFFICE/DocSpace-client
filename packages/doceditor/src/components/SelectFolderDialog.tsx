@@ -18,6 +18,8 @@ const SelectFolderDialog = ({
 }: SelectFolderDialogProps) => {
   const { t } = useTranslation(["Common", "Editor"]);
 
+  const sessionPath = sessionStorage.getItem("filesSelectorPath");
+
   return (
     <FilesSelector
       socketHelper={socketHelper}
@@ -32,7 +34,7 @@ const SelectFolderDialog = ({
       onAccept={onSubmit}
       isRoomsOnly={false}
       isThirdParty={false}
-      currentFolderId={fileInfo.folderId}
+      currentFolderId={sessionPath || fileInfo.folderId}
       rootFolderType={fileInfo.rootFolderType}
       withHeader
       headerLabel={t("Common:SaveButton")}

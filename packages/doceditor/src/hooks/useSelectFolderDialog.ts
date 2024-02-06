@@ -4,8 +4,6 @@ import { useState, useCallback } from "react";
 
 import { EDITOR_ID } from "@docspace/shared/constants";
 import { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
-import { TFolder } from "@docspace/shared/api/files/types";
-import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
 
 import { TSaveAsEventData, UseSelectFolderDialogProps } from "@/types";
 import { saveAs } from "@/utils";
@@ -36,10 +34,9 @@ const useSelectFolderDialog = ({}: UseSelectFolderDialogProps) => {
     breadCrumbs: TBreadCrumb[],
     fileName: string,
     isChecked: boolean,
-    selectedTreeNode: TFolder,
-    selectedFileInfo: TSelectedFileInfo,
   ) => {
     if (!selectedItemId) return;
+
     const currentExst = fileName.split(".").pop();
 
     const title =
@@ -60,6 +57,8 @@ const useSelectFolderDialog = ({}: UseSelectFolderDialogProps) => {
         docEditor?.showMessage(convertedInfo);
       }
     }
+
+    onClose();
   };
 
   return {

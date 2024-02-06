@@ -23,6 +23,9 @@ const Editor = ({
   successAuth,
   user,
 }: EditorProps) => {
+  const fileInfo = config?.file;
+  const documentserverUrl = editorUrl.docServiceUrl;
+
   const { i18n } = useI18N({ settings, user });
   const { socketHelper } = useSocketHelper({ socketUrl: settings.socketUrl });
 
@@ -39,9 +42,6 @@ const Editor = ({
   const onDocumentReady = (): void => {
     throw new Error("Function not implemented.");
   };
-
-  const fileInfo = config?.file;
-  const documentserverUrl = editorUrl.docServiceUrl;
 
   const newConfig: IConfig = {
     document: config.document,

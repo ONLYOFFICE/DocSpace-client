@@ -4,7 +4,7 @@ import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 import { StyledStorageManagementLoader } from "./StyledComponent";
 
-const SettingsStorageManagement = ({
+const SettingsStorageManagementLoader = ({
   id,
   className,
   style,
@@ -145,4 +145,4 @@ const SettingsStorageManagement = ({
   );
 };
 
-export default SettingsStorageManagement;
+export default SettingsStorageManagementLoader;

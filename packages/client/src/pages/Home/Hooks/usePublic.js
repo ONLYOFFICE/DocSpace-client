@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import FilesFilter from "@docspace/common/api/files/filter";
+import { frameCallCommand } from "@docspace/common/utils";
 
 const usePublic = ({ roomId, location, fetchFiles, setIsLoading }) => {
   useEffect(() => {
@@ -60,6 +61,7 @@ const usePublic = ({ roomId, location, fetchFiles, setIsLoading }) => {
       })
       .finally(() => {
         setIsLoading(false);
+        frameCallCommand("setIsLoaded");
       });
   }, [location.pathname, location.search]);
 };

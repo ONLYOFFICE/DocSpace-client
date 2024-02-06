@@ -22,7 +22,12 @@ import {
 import { EditorWrapper } from "../components/StyledEditor";
 import { useTranslation } from "react-i18next";
 import withDialogs from "../helpers/withDialogs";
-import { assign, frameCallEvent, getEditorTheme } from "@docspace/common/utils";
+import {
+  assign,
+  frameCallEvent,
+  getEditorTheme,
+  frameCallCommand,
+} from "@docspace/common/utils";
 import toastr from "@docspace/components/toast/toastr";
 import { DocumentEditor } from "@onlyoffice/document-editor-react";
 import ErrorContainer from "@docspace/common/components/ErrorContainer";
@@ -269,10 +274,10 @@ function Editor({
       documentType === "word"
         ? "docx"
         : documentType === "slide"
-        ? "pptx"
-        : documentType === "cell"
-        ? "xlsx"
-        : "docxf";
+          ? "pptx"
+          : documentType === "cell"
+            ? "xlsx"
+            : "docxf";
 
     let fileName = t("Common:NewDocument");
 
@@ -552,6 +557,8 @@ function Editor({
     // if (isSharingAccess) {
     //   loadUsersRightsList(docEditor);
     // }
+
+    frameCallCommand("setIsLoaded");
 
     assign(window, ["ASC", "Files", "Editor", "docEditor"], docEditor); //Do not remove: it's for Back button on Mobile App
   };
@@ -857,6 +864,11 @@ function Editor({
         onRequestSelectSpreadsheet = onSDKRequestSelectSpreadsheet;
         onRequestSelectDocument = onSDKRequestSelectDocument;
         onRequestReferenceSource = onSDKRequestReferenceSource;
+
+        if (fileInfo?.rootFolderType !== FolderType.USER) { //TODO: remove condition for share in my
+          onRequestUsers = onSDKRequestUsers;
+          onRequestSendNotify = onSDKRequestSendNotify;
+        }
       }
 
       if (userAccessRights.EditHistory) {
@@ -869,11 +881,6 @@ function Editor({
         if (!isZoom) {
           onRequestOpen = onSDKRequestOpen;
         }
-      }
-
-      if (fileInfo?.rootFolderType !== FolderType.USER) {
-        onRequestUsers = onSDKRequestUsers;
-        onRequestSendNotify = onSDKRequestSendNotify;
       }
 
       if (window.DocSpaceConfig?.editor?.requestClose) {

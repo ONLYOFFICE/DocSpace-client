@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -40,7 +40,6 @@ const FilesSelector = ({
   isRoomsOnly = false,
   isUserOnly = false,
   isEditorDialog = false,
-
   rootThirdPartyId,
   filterParam,
 
@@ -77,6 +76,7 @@ const FilesSelector = ({
   onSelectFolder,
   onSetBaseFolderPath,
   //onSetNewFolderPath,
+  setIsDataReady,
   onSelectTreeNode,
   onSave,
   onSelectFile,
@@ -127,6 +127,7 @@ const FilesSelector = ({
     title: string;
     path?: string[];
     fileExst?: string;
+    inPublic?: boolean;
   } | null>(null);
 
   const [total, setTotal] = React.useState<number>(0);
@@ -158,6 +159,10 @@ const FilesSelector = ({
     showBreadCrumbsLoader,
     showLoader,
   } = useLoadersHelper({ items });
+
+  useEffect(() => {
+    setIsDataReady && setIsDataReady(!showLoader);
+  }, [showLoader]);
 
   const { isRoot, setIsRoot, getRootData } = useRootHelper({
     setIsBreadCrumbsLoading,
@@ -214,6 +219,9 @@ const FilesSelector = ({
   });
 
   const onSelectAction = (item: Item) => {
+    const inPublic =
+      breadCrumbs.findIndex((f: any) => f.roomType === RoomsType.PublicRoom) >
+      -1;
     if (item.isFolder) {
       setIsFirstLoad(true);
       setItems(null);
@@ -225,6 +233,7 @@ const FilesSelector = ({
           isRoom:
             item.parentId === 0 && item.rootFolderType === FolderType.Rooms,
           roomType: item.roomType,
+          shared: item.shared,
         },
       ]);
       setSelectedItemId(item.id);
@@ -242,6 +251,7 @@ const FilesSelector = ({
         id: item.id,
         title: item.title,
         fileExst: item.fileExst,
+        inPublic: inPublic,
       });
     }
   };
@@ -364,7 +374,7 @@ const FilesSelector = ({
     onCloseAction();
   };
 
-  const onSearchAction = (value: string) => {
+  const onSearchAction = (value: string, callback?: Function) => {
     setIsFirstLoad(true);
     setItems(null);
     if (selectedItemType === "rooms") {
@@ -374,9 +384,10 @@ const FilesSelector = ({
     }
 
     setSearchValue(value);
+    callback?.();
   };
 
-  const onClearSearchAction = () => {
+  const onClearSearchAction = (callback?: Function) => {
     setIsFirstLoad(true);
     setItems(null);
     if (selectedItemType === "rooms") {
@@ -386,6 +397,7 @@ const FilesSelector = ({
     }
 
     setSearchValue("");
+    callback?.();
   };
 
   const onAcceptAction = (
@@ -475,8 +487,8 @@ const FilesSelector = ({
         selectedItemId &&
         onSave(null, selectedItemId, fileName, isChecked);
       onSelectTreeNode && onSelectTreeNode(selectedTreeNode);
-      onSelectFile && onSelectFile(selectedFileInfo, breadCrumbs);
-      onCloseAndDeselectAction();
+      onSelectFile && onSelectFile(selectedFileInfo!, breadCrumbs);
+      !embedded && onCloseAndDeselectAction();
       //!withoutImmediatelyClose &&  onCloseAction();
     }
   };

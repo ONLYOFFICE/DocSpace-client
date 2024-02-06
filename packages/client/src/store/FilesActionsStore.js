@@ -1600,7 +1600,12 @@ class FilesActionStore {
 
         return !allFilesIsEditing && canDelete && hasSelection;
       case "create-room":
-        const canCreateRoom = rootFolderType === FolderType.USER;
+        const { isCollaborator } = this.authStore?.userStore?.user || {
+          isCollaborator: false,
+        };
+
+        const canCreateRoom =
+          !isCollaborator && rootFolderType === FolderType.USER;
 
         return canCreateRoom;
     }
@@ -1737,9 +1742,12 @@ class FilesActionStore {
     this.processCreatingRoomFromData = processCreatingRoomFromData;
   };
 
-  onClickCreateRoom = () => {
+  onClickCreateRoom = (item) => {
     this.setProcessCreatingRoomFromData(true);
     const event = new Event(Events.ROOM_CREATE);
+    if (item && item.isFolder) {
+      event.title = item.title;
+    }
     window.dispatchEvent(event);
   };
 

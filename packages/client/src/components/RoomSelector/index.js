@@ -1,5 +1,5 @@
 ﻿import EmptyScreenCorporateSvgUrl from "PUBLIC_DIR/images/empty_screen_corporate.svg?url";
-import React from "react";
+import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
 
 import api from "@docspace/common/api";
@@ -38,12 +38,12 @@ const getRoomLogo = (roomType) => {
 
 const convertToItems = (folders) => {
   const items = folders.map((folder) => {
-    const { id, title, roomType, logo } = folder;
+    const { id, title, roomType, logo, shared } = folder;
 
     const icon = logo.medium ? logo.medium : getRoomLogo(roomType);
     const color = logo.color;
 
-    return { id, label: title, icon, color, logo, roomType };
+    return { id, label: title, icon, color, logo, roomType, shared };
   });
 
   return items;
@@ -76,6 +76,7 @@ const RoomSelector = ({
   selectAllIcon,
   onSelectAll,
 
+  setIsDataReady,
   withAccessRights,
   accessRights,
   selectedAccessRight,
@@ -101,26 +102,35 @@ const RoomSelector = ({
 
   const [items, setItems] = React.useState([]);
 
+  useEffect(() => {
+    setIsDataReady(!isFirstLoad);
+  }, [isFirstLoad]);
+
   const onSearchAction = React.useCallback(
-    (value) => {
+    (value, callback) => {
       onSearch && onSearch(value);
       setSearchValue(() => {
         setIsFirstLoad(true);
 
         return value;
       });
+      callback?.();
     },
     [onSearch]
   );
 
-  const onClearSearchAction = React.useCallback(() => {
-    onClearSearch && onClearSearch();
-    setSearchValue(() => {
-      setIsFirstLoad(true);
+  const onClearSearchAction = React.useCallback(
+    (callback) => {
+      onClearSearch && onClearSearch();
+      setSearchValue(() => {
+        setIsFirstLoad(true);
 
-      return "";
-    });
-  }, [onClearSearch]);
+        return "";
+      });
+      callback?.();
+    },
+    [onClearSearch]
+  );
 
   const onLoadNextPage = React.useCallback(
     (startIndex) => {

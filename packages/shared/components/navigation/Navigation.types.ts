@@ -65,6 +65,7 @@ export interface IControlButtonProps {
   onNavigationButtonClick?: () => void;
   tariffBar?: React.ReactNode;
   title?: string;
+  isEmptyPage?: boolean;
 }
 
 export interface ITextProps {

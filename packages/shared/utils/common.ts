@@ -348,10 +348,8 @@ export function convertLanguage(key: string) {
     case "fr-FR":
       return "fr";
     default:
-      return "en-GB";
+      return key;
   }
-
-  return key;
 }
 
 export function convertToCulture(key: string) {
@@ -377,9 +375,8 @@ export function convertToCulture(key: string) {
     case "zh":
       return "zh-CN";
     default:
-      return "en-US";
+      return key;
   }
-  return key;
 }
 
 export function convertToLanguage(key: string) {

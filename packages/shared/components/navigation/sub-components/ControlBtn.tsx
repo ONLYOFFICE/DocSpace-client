@@ -9,6 +9,7 @@ import { IControlButtonProps } from "../Navigation.types";
 import ToggleInfoPanelButton from "./ToggleInfoPanelBtn";
 import PlusButton from "./PlusBtn";
 import ContextButton from "./ContextBtn";
+import TrashWarning from "./TrashWarning";
 import { Button, ButtonSize } from "../../button";
 import { isTablet } from "../../../utils";
 
@@ -34,6 +35,7 @@ const ControlButtons = ({
   onNavigationButtonClick,
   tariffBar,
   title,
+  isEmptyPage,
 }: IControlButtonProps) => {
   const toggleInfoPanelAction = () => {
     toggleInfoPanel?.();
@@ -145,7 +147,9 @@ const ControlButtons = ({
           )}
         </>
       )}
-
+      {isDesktop && isTrashFolder && !isEmptyPage && (
+        <TrashWarning title={titles?.trashWarning} />
+      )}
       {navigationButtonLabel && !isTabletView && navigationButtonBlock}
       <StyledTariffWrapper>{children && children}</StyledTariffWrapper>
       {navigationButtonLabel && isTabletView && navigationButtonBlock}

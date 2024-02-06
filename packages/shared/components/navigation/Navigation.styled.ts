@@ -19,10 +19,12 @@ const StyledContainer = styled.div<{
   withLogo: boolean;
   isDesktopClient?: boolean;
   width?: number;
+  isPublicRoom?: boolean;
 }>`
   ${(props) =>
     !props.isDropBoxComponent &&
     props.isDesktop &&
+    !props.isPublicRoom &&
     css`
       width: 100%;
       max-width: 100%;
@@ -30,8 +32,6 @@ const StyledContainer = styled.div<{
 
   display: grid;
   align-items: center;
-
-  margin-right: ${(props) => (props.isTrashFolder ? "16px" : 0)};
 
   grid-template-columns: ${({ isRootFolder, withLogo }) =>
     isRootFolder
@@ -46,11 +46,11 @@ const StyledContainer = styled.div<{
     display: flex;
     height: 24px;
     ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
+    props.theme.interfaceDirection === "rtl"
+      ? css`
             margin-left: 16px;
           `
-        : css`
+      : css`
             margin-right: 16px;
           `}
 
@@ -63,12 +63,12 @@ const StyledContainer = styled.div<{
     .header_separator {
       display: ${({ isRootFolder }) => (isRootFolder ? "block" : "none")};
       ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
+    props.theme.interfaceDirection === "rtl"
+      ? css`
               border-right: 1px solid #dfe2e3;
               margin: 0 15px 0 0;
             `
-          : css`
+      : css`
               border-left: 1px solid #dfe2e3;
               margin: 0 0 0 15px;
             `}
@@ -123,7 +123,7 @@ const StyledContainer = styled.div<{
 
     svg {
       ${({ theme }) =>
-        theme.interfaceDirection === "rtl" && `transform: scaleX(-1);`}
+    theme.interfaceDirection === "rtl" && `transform: scaleX(-1);`}
     }
   }
 
@@ -142,12 +142,12 @@ const StyledContainer = styled.div<{
   .navigation-header-separator {
     display: block;
     ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
+    props.theme.interfaceDirection === "rtl"
+      ? css`
             padding-right: 16px;
             border-left: ${`1px solid ${props.theme.navigation.icon.stroke}`};
           `
-        : css`
+      : css`
             padding-left: 16px;
             border-right: ${`1px solid ${props.theme.navigation.icon.stroke}`};
           `}
@@ -186,13 +186,13 @@ const StyledContainer = styled.div<{
   @media ${tablet} {
     width: 100%;
     grid-template-columns: ${({ isRootFolder, withLogo }) =>
-      isRootFolder
-        ? withLogo
-          ? "59px 1fr auto"
-          : "1fr auto"
-        : withLogo
-          ? "43px 49px 1fr auto"
-          : "49px 1fr auto"};
+    isRootFolder
+      ? withLogo
+        ? "59px 1fr auto"
+        : "1fr auto"
+      : withLogo
+        ? "43px 49px 1fr auto"
+        : "49px 1fr auto"};
   }
 
   @media ${mobile} {
@@ -201,11 +201,11 @@ const StyledContainer = styled.div<{
     }
 
     grid-template-columns: ${(props) =>
-      props.isRootFolder ? "auto 1fr" : "29px auto 1fr"};
+    props.isRootFolder ? "auto 1fr" : "29px auto 1fr"};
   }
 `;
 
-const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme)<{
+const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme) <{
   isInfoPanelVisible?: boolean;
   isRootFolder?: boolean;
 }>`
@@ -247,11 +247,11 @@ const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme)<{
   @media ${tablet} {
     display: none;
     ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
+    props.theme.interfaceDirection === "rtl"
+      ? css`
             margin-right: ${props.isRootFolder ? "auto" : "0"};
           `
-        : css`
+      : css`
             margin-left: ${props.isRootFolder ? "auto" : "0"};
           `}
   }
@@ -296,21 +296,21 @@ const StyledControlButtonContainer = styled.div<{
     min-width: 17px;
 
     /* ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
+    props.theme.interfaceDirection === "rtl"
+      ? css`
             margin-left: 16px;
           `
-        : css`
+      : css`
             margin-right: 16px;
           `} */
 
     /* @media ${tablet} {
       ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
+    props.theme.interfaceDirection === "rtl"
+      ? css`
             margin-left: 9px;
           `
-        : css`
+      : css`
             margin-right: 9px;
           `}
     } */
@@ -318,11 +318,11 @@ const StyledControlButtonContainer = styled.div<{
 
   .trash-button {
     ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
+    props.theme.interfaceDirection === "rtl"
+      ? css`
             margin-left: 16px;
           `
-        : css`
+      : css`
             margin-right: 16px;
           `}
     min-width: 15px;
@@ -348,11 +348,11 @@ const StyledInfoPanelToggleWrapper = styled.div<{
 
   @media ${tablet} {
     ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
+    props.theme.interfaceDirection === "rtl"
+      ? css`
             margin-right: ${props.isRootFolder ? "auto" : "0"};
           `
-        : css`
+      : css`
             margin-left: ${props.isRootFolder ? "auto" : "0"};
           `}
   }
@@ -365,15 +365,15 @@ const StyledInfoPanelToggleWrapper = styled.div<{
     justify-content: center;
     border-radius: 50%;
     background-color: ${(props) =>
-      props.isInfoPanelVisible
-        ? props.theme.infoPanel.sectionHeaderToggleBgActive
-        : props.theme.infoPanel.sectionHeaderToggleBg};
+    props.isInfoPanelVisible
+      ? props.theme.infoPanel.sectionHeaderToggleBgActive
+      : props.theme.infoPanel.sectionHeaderToggleBg};
 
     path {
       fill: ${(props) =>
-        props.isInfoPanelVisible
-          ? props.theme.infoPanel.sectionHeaderToggleIconActive
-          : props.theme.infoPanel.sectionHeaderToggleIcon};
+    props.isInfoPanelVisible
+      ? props.theme.infoPanel.sectionHeaderToggleIconActive
+      : props.theme.infoPanel.sectionHeaderToggleIcon};
     }
   }
 `;
@@ -434,7 +434,7 @@ const StyledTextContainer = styled.div<{
     `};
 `;
 
-const StyledHeading = styled(Heading)<{ isRootFolderTitle: boolean }>`
+const StyledHeading = styled(Heading) <{ isRootFolderTitle: boolean }>`
   font-weight: 700;
   font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
   line-height: 24px;
@@ -530,14 +530,14 @@ const StyledItem = styled.div<{ isRoot: boolean; withLogo: boolean }>`
 
   @media ${tablet} {
     ${({ withLogo }) =>
-      withLogo &&
-      css`
+    withLogo &&
+    css`
         ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
+        props.theme.interfaceDirection === "rtl"
+          ? css`
                 margin-right: 44px;
               `
-            : css`
+          : css`
                 margin-left: 44px;
               `}
       `};
@@ -545,17 +545,17 @@ const StyledItem = styled.div<{ isRoot: boolean; withLogo: boolean }>`
 
   @media ${mobile} {
     ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
+    props.theme.interfaceDirection === "rtl"
+      ? css`
             margin-right: 0;
           `
-        : css`
+      : css`
             margin-left: 0;
           `}
   }
 `;
 
-const StyledText = styled(Text)<{ isRoot: boolean }>`
+const StyledText = styled(Text) <{ isRoot: boolean }>`
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
@@ -612,11 +612,11 @@ const StyledBox = styled.div<{
   @media ${tablet} {
     width: ${({ dropBoxWidth }) => `${dropBoxWidth}px`};
     ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
+    props.theme.interfaceDirection === "rtl"
+      ? css`
             right: -16px;
           `
-        : css`
+      : css`
             left: -16px;
           `}
     padding: 0 16px;

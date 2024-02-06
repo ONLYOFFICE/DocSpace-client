@@ -7,7 +7,7 @@ import InfoReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import FolderReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
 
 interface GroupMemberProps {
-  isManager: boolean;
+  isManager?: boolean;
   groupMember: {
     id: string;
     displayName: string;
@@ -21,6 +21,8 @@ const GroupMember = ({ groupMember, isManager }: GroupMemberProps) => {
   const buttonMenuRef = useRef(null);
 
   const [isOpen, setIsOpen] = useState(false);
+
+  console.log(groupMember);
 
   const onClick = (e) => {
     if (!isOpen) buttonMenuRef?.current?.show(e);

@@ -21,7 +21,7 @@ const InsideGroup = ({
   useEffect(() => {
     (async () => {
       if (!groupId) return;
-      if (!currentGroup || groupId !== currentGroup.id) {
+      if (!currentGroup) {
         const newCurrentGroup = await getGroupById(groupId);
         setCurrentGroup(newCurrentGroup);
       }
@@ -31,6 +31,8 @@ const InsideGroup = ({
   useEffect(() => {
     navigate(`/accounts/groups/${groupId}/filter`);
   }, [groupId]);
+
+  if (!currentGroup) return null;
 
   return (
     <Consumer>

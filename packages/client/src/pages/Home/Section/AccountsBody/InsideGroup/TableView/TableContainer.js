@@ -14,8 +14,8 @@ import TableHeader from "./TableHeader";
 import EmptyScreen from "../../EmptyScreen";
 import { TableVersions } from "SRC_DIR/helpers/constants";
 
-const COLUMNS_SIZE = `peopleColumnsSize_ver-${TableVersions.People}`;
-const INFO_PANEL_COLUMNS_SIZE = `infoPanelPeopleColumnsSize_ver-${TableVersions.People}`;
+const COLUMNS_SIZE = `insideGroupColumnsSize_ver-${TableVersions.InsideGroup}`;
+const INFO_PANEL_COLUMNS_SIZE = `infoPanelInsideGroupPeopleColumnsSize_ver-${TableVersions.InsideGroup}`;
 
 const marginCss = css`
   margin-top: -1px;

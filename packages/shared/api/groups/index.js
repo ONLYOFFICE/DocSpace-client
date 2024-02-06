@@ -23,10 +23,11 @@ export const getGroups = (withMembers = true) => {
   });
 };
 
-export const getGroupById = (groupId) => {
+export const getGroupById = (groupId, signal) => {
   return request({
     method: "get",
     url: `/group/${groupId}`,
+    signal,
   });
 };
 

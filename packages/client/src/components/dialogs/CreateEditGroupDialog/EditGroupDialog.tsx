@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from "react";
+import { useEffect, useState, ChangeEvent } from "react";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
@@ -6,8 +6,12 @@ import { observer, inject } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import { GroupParams } from "./types";
-import { createGroup, updateGroup } from "@docspace/shared/api/groups";
+import { EditGroupParams } from "./types";
+import {
+  createGroup,
+  getGroupById,
+  updateGroup,
+} from "@docspace/shared/api/groups";
 
 import GroupNameParam from "./sub-components/GroupNameParam";
 import HeadOfGroup from "./sub-components/HeadOfGroupParam";
@@ -32,13 +36,16 @@ const EditGroupDialog = ({
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
   const navigate = useNavigate();
 
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isCreateGroupLoading, setCreateGroupIsLoading] =
+    useState<boolean>(false);
 
-  console.log(group);
-  const [groupParams, setGroupParams] = useState<GroupParams>({
+  const [isFetchMembersLoading, setFetchMembersIsLoading] =
+    useState<boolean>(false);
+
+  const [groupParams, setGroupParams] = useState<EditGroupParams>({
     groupName: group.name,
     groupManager: group.manager,
-    groupMembers: group.members,
+    groupMembers: null,
   });
 
   const onChangeGroupName = (e: ChangeEvent<HTMLInputElement>) =>
@@ -51,27 +58,37 @@ const EditGroupDialog = ({
     setGroupParams({ ...groupParams, groupMembers });
 
   const onEditGroup = async () => {
-    setIsLoading(true);
+    setCreateGroupIsLoading(true);
 
-    const groupManagerId = groupParams.groupManager.id;
-    const groupMemebersIds = groupParams.groupMembers.map((gm) => gm.id);
+    const groupManagerId = groupParams.groupManager?.id;
+    const groupMembersIds = groupParams.groupMembers?.map((gm) => gm.id) || [];
 
     updateGroup(
       group.id,
       groupParams.groupName,
       groupManagerId,
-      groupMemebersIds
-    )
+      groupMembersIds
+    )!
       .then(() => {
         navigate("/accounts/groups/filter");
         getGroups();
       })
       .catch((err) => toastr.error(err.message))
       .finally(() => {
-        setIsLoading(false);
+        setCreateGroupIsLoading(false);
         onClose();
       });
   };
+
+  useEffect(() => {
+    if (groupParams.groupMembers) return;
+    setFetchMembersIsLoading(true);
+
+    getGroupById(group.id)!
+      .then((data: any) => setGroupMembers(data.members))
+      .catch((err) => console.error(err))
+      .finally(() => setFetchMembersIsLoading(false));
+  }, [group.id]);
 
   return (
     <ModalDialog
@@ -95,12 +112,16 @@ const EditGroupDialog = ({
           setGroupManager={setGroupManager}
           onClose={onClose}
         />
-        <MembersParam
-          groupManager={groupParams.groupManager}
-          groupMembers={groupParams.groupMembers}
-          setGroupMembers={setGroupMembers}
-          onClose={onClose}
-        />
+        {isFetchMembersLoading ? (
+          <div>LOADING</div>
+        ) : (
+          <MembersParam
+            groupManager={groupParams.groupManager}
+            groupMembers={groupParams.groupMembers}
+            setGroupMembers={setGroupMembers}
+            onClose={onClose}
+          />
+        )}
       </ModalDialog.Body>
 
       <ModalDialog.Footer>
@@ -113,7 +134,7 @@ const EditGroupDialog = ({
           scale
           onClick={onEditGroup}
           isDisabled={!groupParams.groupManager || !groupParams.groupName}
-          isLoading={isLoading}
+          isLoading={isCreateGroupLoading}
         />
         <Button
           id="edit-group-modal_cancel"
@@ -121,7 +142,7 @@ const EditGroupDialog = ({
           label={t("Common:CancelButton")}
           size="normal"
           scale
-          isDisabled={isLoading}
+          isDisabled={isCreateGroupLoading}
           onClick={onClose}
         />
       </ModalDialog.Footer>

@@ -23,6 +23,13 @@ class GroupsTableHeader extends React.Component {
         onClick: this.onFilter,
         onIconClick: this.onIconClick,
       },
+      {
+        key: "Head of Group",
+        title: props.t("Head of Group"),
+        resizable: true,
+        enable: true,
+        onChange: this.onColumnChange,
+      },
     ]);
 
     this.state = { columns };
@@ -31,7 +38,7 @@ class GroupsTableHeader extends React.Component {
   getColumns = (defaultColumns) => {
     const columns = [];
     const storageColumns = localStorage.getItem(
-      `${TABLE_COLUMNS}=${this.props.userId}`,
+      `${TABLE_COLUMNS}=${this.props.userId}`
     );
 
     if (storageColumns) {
@@ -143,9 +150,9 @@ export default inject(
     userId: userStore.user?.id,
     infoPanelVisible: infoPanelStore.isVisible,
     withPaging: settingsStore,
-  }),
+  })
 )(
   withTranslation(["People", "Common", "PeopleTranslations"])(
-    observer(GroupsTableHeader),
-  ),
+    observer(GroupsTableHeader)
+  )
 );

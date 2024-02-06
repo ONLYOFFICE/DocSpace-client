@@ -128,7 +128,7 @@ const StyledAccountContent = styled.div`
 
   .data__body {
     display: grid;
-    grid-template-rows: 28px 28px 28px 28px;
+    grid-template-rows: 28px 28px 28px 1fr;
     grid-template-columns: 80px 1fr;
     grid-gap: 0 24px;
     align-items: center;
@@ -159,6 +159,23 @@ const StyledAccountContent = styled.div`
         width: 100%;
         z-index: 1000;
       }
+    }
+
+    .info_field {
+      line-height: 20px;
+      height: 20px;
+      padding: 4px 0;
+    }
+
+    .info_field_groups {
+      height: 100%;
+    }
+
+    .info_groups {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      justify-content: center;
     }
   }
 `;

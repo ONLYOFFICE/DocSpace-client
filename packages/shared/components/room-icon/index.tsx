@@ -96,14 +96,16 @@ const RoomIcon = ({
   badgeUrl,
   onBadgeClick,
 }: RoomIconProps) => {
-  const titleWithoutSpaces = title.replace(/\s+/g, " ").trim();
-  const indexAfterLastSpace = titleWithoutSpaces.lastIndexOf(" ");
+  const titleWithoutSpaces = title?.replace(/\s+/g, " ").trim();
+  const indexAfterLastSpace = titleWithoutSpaces
+    ? titleWithoutSpaces?.lastIndexOf(" ")
+    : -1;
   const secondCharacter =
     indexAfterLastSpace === -1
       ? ""
       : titleWithoutSpaces[indexAfterLastSpace + 1];
 
-  const roomTitle = (title[0] + secondCharacter).toUpperCase();
+  const roomTitle = title && (title[0] + secondCharacter).toUpperCase();
 
   return showDefault ? (
     <StyledIcon

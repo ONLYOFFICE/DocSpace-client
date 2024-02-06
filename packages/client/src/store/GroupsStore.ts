@@ -8,6 +8,7 @@ import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
 class GroupsStore {
+  authStore;
   peopleStore;
 
   groups = [];
@@ -16,7 +17,8 @@ class GroupsStore {
 
   currentGroup = null;
 
-  constructor(peopleStore: any) {
+  constructor(peopleStore: any, authStore: any) {
+    this.authStore = authStore;
     this.peopleStore = peopleStore;
     makeAutoObservable(this);
   }
@@ -101,7 +103,7 @@ class GroupsStore {
         title: t("Info"),
         icon: InfoReactSvgUrl,
         onClick: () => {
-          const { setIsVisible } = this.peopleStore.authStore.infoPanelStore;
+          const { setIsVisible } = this.authStore.infoPanelStore;
           this.selection = [item];
           setIsVisible(true);
         },
@@ -120,7 +122,7 @@ class GroupsStore {
         onClick: async () => {
           const groupId = item.id;
           groupsApi
-            .deleteGroup(groupId)
+            .deleteGroup(groupId)!
             .then(() => {
               toastr.success(t("Group was deleted successfully"));
               this.getGroups();

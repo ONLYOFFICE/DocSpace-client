@@ -4,8 +4,8 @@ import { withTranslation } from "react-i18next";
 
 import { TableHeader } from "@docspace/shared/components/table";
 
-const TABLE_VERSION = "3";
-const TABLE_COLUMNS = `peopleTableColumns_ver-${TABLE_VERSION}`;
+const TABLE_VERSION = "6";
+const TABLE_COLUMNS = `insideGroupTableColumns_ver-${TABLE_VERSION}`;
 
 class PeopleTableHeader extends React.Component {
   constructor(props) {

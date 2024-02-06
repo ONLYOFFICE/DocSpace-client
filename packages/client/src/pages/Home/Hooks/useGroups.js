@@ -14,7 +14,7 @@ const useGroups = ({
   useEffect(() => {
     if (!isAccountsPage) return;
     setIsLoading(true);
-    setSelectedNode(["accounts", "filter"]);
+    setSelectedNode(["accounts", "groups", "filter"]);
 
     setDocumentTitle(t("Common:Accounts"));
 

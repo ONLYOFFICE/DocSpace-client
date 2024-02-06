@@ -19,7 +19,7 @@ const useAccounts = ({
   React.useEffect(() => {
     if (!isAccountsPage) return;
     setIsLoading(true);
-    setSelectedNode(["accounts", "filter"]);
+    setSelectedNode(["accounts", "people", "filter"]);
 
     const newFilter = AccountsFilter.getFilter(location);
 

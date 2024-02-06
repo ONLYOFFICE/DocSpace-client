@@ -12,7 +12,7 @@ import { decode } from "he";
 const GroupsItemTitle = ({
   t,
   isSeveralItems,
-  selection,
+  infoPanelSelection,
   getUserContextOptions,
 }) => {
   if (isSeveralItems) return null;
@@ -20,19 +20,25 @@ const GroupsItemTitle = ({
   const itemTitleRef = useRef();
 
   const getData = () => {
-    const newOptions = selection.options?.filter((o) => o !== "details");
-    return getUserContextOptions(t, newOptions || [], selection);
+    const newOptions = infoPanelSelection.options?.filter(
+      (o) => o !== "details"
+    );
+    return getUserContextOptions(t, newOptions || [], infoPanelSelection);
   };
   const contextOptions = getData();
 
-  const userAvatar = selection.hasAvatar ? selection.avatar : DefaultUserPhoto;
-  const groupName = selection.name ? decode(selection.name).trim() : "";
+  const userAvatar = infoPanelSelection.hasAvatar
+    ? infoPanelSelection.avatar
+    : DefaultUserPhoto;
+  const groupName = infoPanelSelection.name
+    ? decode(infoPanelSelection.name).trim()
+    : "";
 
   return (
     <StyledAccountsItemTitle ref={itemTitleRef}>
       <Avatar
         className="avatar"
-        role={selection.role ? selection.role : "user"}
+        role={infoPanelSelection.role ? infoPanelSelection.role : "user"}
         size={"big"}
         source={userAvatar}
       />
@@ -49,9 +55,9 @@ const GroupsItemTitle = ({
           </Text>
         </div>
         {!!groupName && (
-          <Text className={"info-text__email"} title={selection.email}>
-            {`${selection.members?.length} ${
-              selection.members?.length === 1 ? "person" : "people"
+          <Text className={"info-text__email"} title={infoPanelSelection.email}>
+            {`${infoPanelSelection.members?.length} ${
+              infoPanelSelection.members?.length === 1 ? "person" : "people"
             }`}
           </Text>
         )}

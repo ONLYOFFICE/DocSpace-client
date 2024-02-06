@@ -2308,7 +2308,7 @@ class FilesActionStore {
 
       clearFiles();
 
-      setSelectedNode(["accounts", "filter"]);
+      setSelectedNode(["accounts", "people", "filter"]);
 
       return window.DocSpace.navigate(`${path}?${params}`, { replace: true });
     }

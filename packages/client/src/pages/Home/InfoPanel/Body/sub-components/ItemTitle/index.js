@@ -34,7 +34,7 @@ const ItemTitle = ({
   if (isGroups)
     return (
       <GroupsItemTitle
-        selection={selection}
+        infoPanelSelection={infoPanelSelection}
         isSeveralItems={isSeveralItems}
         getUserContextOptions={getUserContextOptions}
         selectionLength={selectionLength}
@@ -66,5 +66,5 @@ export default inject(
       getUserContextOptions,
       getIcon,
     };
-  },
+  }
 )(observer(ItemTitle));

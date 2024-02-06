@@ -11,6 +11,7 @@ import * as Styled from "./index.styled";
 import Badges from "../../Badges";
 import { Base } from "@docspace/shared/themes";
 import { Events } from "@docspace/shared/enums";
+import { Text } from "@docspace/shared/components/text";
 
 const GroupsTableItem = ({
   t,
@@ -21,7 +22,6 @@ const GroupsTableItem = ({
   setSelection,
   bufferSelection,
   setBufferSelection,
-  setCurrentGroup,
   getGroupContextOptions,
 }) => {
   const navigate = useNavigate();
@@ -49,7 +49,6 @@ const GroupsTableItem = ({
   const onOpenGroup = () => {
     setSelection([]);
     setBufferSelection(null);
-    setCurrentGroup(item);
     navigate(`/accounts/groups/${item.id}/filter`);
   };
 
@@ -110,12 +109,25 @@ const GroupsTableItem = ({
             onClick={onOpenGroup}
             title={item.name}
             fontWeight="600"
-            fontSize="13px"
+            fontSize="12px"
             isTextOverflow
-            className="table-cell_group-title"
+            className="table-cell_group-manager"
           >
             {item.name}
           </Link>
+        </TableCell>
+
+        <TableCell className={"table-container_group-title-cell"}>
+          <Text
+            title={item.manager.displayName}
+            fontWeight="600"
+            fontSize="13px"
+            isTextOverflow
+            className="table-cell_group-title"
+            color={"#A3A9AE"}
+          >
+            {item.manager.displayName}
+          </Text>
         </TableCell>
       </Styled.GroupsRow>
     </Styled.GroupsRowWrapper>
@@ -127,7 +139,6 @@ export default inject(({ peopleStore }) => ({
   setSelection: peopleStore.groupsStore.setSelection,
   bufferSelection: peopleStore.groupsStore.bufferSelection,
   setBufferSelection: peopleStore.groupsStore.setBufferSelection,
-  setCurrentGroup: peopleStore.groupsStore.setCurrentGroup,
   getGroupContextOptions: peopleStore.groupsStore.getGroupContextOptions,
 }))(
   withTranslation(

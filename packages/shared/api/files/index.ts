@@ -640,7 +640,7 @@ export async function getProgress() {
 }
 
 export async function checkFileConflicts(
-  destFolderId: number,
+  destFolderId: number | string,
   folderIds: number[],
   fileIds: number[],
 ) {

@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import { TableHeader } from "@docspace/shared/components/table";
-import { SortByFieldName } from "SRC_DIR/helpers/constants";
+import { SortByFieldName } from "SRC_DIR/helpers/enums";
 
 const TABLE_VERSION = "3";
 const TABLE_COLUMNS = `peopleTableColumns_ver-${TABLE_VERSION}`;
@@ -194,27 +194,27 @@ export default inject(
     infoPanelStore,
     clientLoadingStore,
     userStore,
-	currentQuotaStore,
+    currentQuotaStore,
   }) => {
-  const { filterStore } = peopleStore;
+    const { filterStore } = peopleStore;
 
-  const { filter } = filterStore;
+    const { filter } = filterStore;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { withPaging } = settingsStore;
 
-  const { isDefaultUsersQuotaSet, showStorageInfo } = currentQuotaStore;
+    const { isDefaultUsersQuotaSet, showStorageInfo } = currentQuotaStore;
 
-  return {
-    filter,
+    return {
+      filter,
 
-    setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
+      setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
       userId: userStore.user?.id,
-    infoPanelVisible,
-    withPaging,
-    isDefaultUsersQuotaSet,
-    showStorageInfo,
-  };
+      infoPanelVisible,
+      withPaging,
+      isDefaultUsersQuotaSet,
+      showStorageInfo,
+    };
   }
 )(
   withTranslation(["People", "Common", "PeopleTranslations"])(

@@ -6,7 +6,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import Filter from "@docspace/shared/api/people/filter";
 
-import { SortByFieldName } from "SRC_DIR/helpers/constants";
+import { SortByFieldName } from "SRC_DIR/helpers/enums";
 
 import { StyledStatistics, StyledSimpleFilesRow } from "../StyledComponent";
 

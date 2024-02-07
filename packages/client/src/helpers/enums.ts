@@ -18,4 +18,5 @@ export const enum SortByFieldName {
   Room = "Room",
   Tags = "Tags",
   RoomType = "roomType",
+  UsedSpace = "usedspace",
 }

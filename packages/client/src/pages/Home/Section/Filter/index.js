@@ -1772,17 +1772,17 @@ const SectionFilterContent = ({
       default: true,
     };
 
+    const sortByStorage = {
+      id: "sort-by_storage",
+      key: SortByFieldName.UsedSpace,
+      label: t("Common:Storage"),
+      default: true,
+    };
+
     commonOptions.push(name);
 
     if (viewAs === "table") {
       if (isRooms) {
-        const sortByStorage = {
-          id: "sort-by_storage",
-          key: SortByFieldName.UsedSpace,
-          label: t("Common:Storage"),
-          default: true,
-        };
-
         const availableSort = localStorage
           ?.getItem(`${TABLE_ROOMS_COLUMNS}=${userId}`)
           ?.split(",");
@@ -1953,6 +1953,7 @@ const SectionFilterContent = ({
         commonOptions.push(tags);
         commonOptions.push(owner);
         commonOptions.push(modifiedDate);
+        commonOptions.push(sortByStorage);
       } else if (isTrash) {
         // commonOptions.push(authorOption);
         // commonOptions.push(creationDate);
@@ -2181,7 +2182,7 @@ export default inject(
     infoPanelStore,
     userStore,
     settingsStore,
-	currentQuotaStore
+    currentQuotaStore,
   }) => {
     const {
       filter,
@@ -2200,7 +2201,6 @@ export default inject(
       filesSettingsStore,
       setRoomsFilter,
     } = filesStore;
-
 
     const { providers } = thirdPartyStore;
 

@@ -496,6 +496,7 @@ const SectionFilterContent = ({
         !filter.search &&
         !roomsFilter.filterValue &&
         !accountsFilter.search &&
+        !groupsFilter.search &&
         searchValue.length === 0
       )
         return;

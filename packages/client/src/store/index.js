@@ -220,7 +220,12 @@ const profileActionsStore = new ProfileActionsStore(
 
 peopleStore.profileActionsStore = profileActionsStore;
 
-const tableStore = new TableStore(authStore, treeFoldersStore, userStore);
+const tableStore = new TableStore(
+  authStore,
+  treeFoldersStore,
+  userStore,
+  settingsStore
+);
 
 infoPanelStore.filesSettingsStore = filesSettingsStore;
 infoPanelStore.filesStore = filesStore;

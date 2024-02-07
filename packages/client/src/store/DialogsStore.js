@@ -11,7 +11,6 @@ class DialogsStore {
   versionHistoryStore;
   infoPanelStore;
 
-  roomSharingPanelVisible = false;
   ownerPanelVisible = false;
   moveToPanelVisible = false;
   restorePanelVisible = false;
@@ -115,10 +114,6 @@ class DialogsStore {
 
   setRestoreRoomDialogVisible = (visible) => {
     this.restoreRoomDialogVisible = visible;
-  };
-
-  setRoomSharingPanelVisible = (roomSharingPanelVisible) => {
-    this.roomSharingPanelVisible = roomSharingPanelVisible;
   };
 
   setIsFolderActions = (isFolderActions) => {

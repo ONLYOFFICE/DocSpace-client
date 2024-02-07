@@ -32,7 +32,6 @@ import DataReassignmentDialog from "./DataReassignmentDialog";
 import SubmitToFormGallery from "./SubmitToFormGallery";
 import UnsavedChangesDialog from "./UnsavedChangesDialog";
 import DeleteLinkDialog from "./DeleteLinkDialog";
-import RoomSharingDialog from "./RoomSharingDialog";
 import MoveToPublicRoom from "./MoveToPublicRoom";
 import BackupToPublicRoom from "./BackupToPublicRoom";
 import SettingsPluginDialog from "./SettingsPluginDialog";
@@ -76,7 +75,6 @@ export {
   SubmitToFormGallery,
   UnsavedChangesDialog,
   DeleteLinkDialog,
-  RoomSharingDialog,
   MoveToPublicRoom,
   BackupToPublicRoom,
   SettingsPluginDialog,

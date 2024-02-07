@@ -30,6 +30,7 @@ import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
 import LeaveRoomSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/catalog.rooms.react.svg?url";
+import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.reat.svg?url";
 
 import React from "react";
 import { inject, observer } from "mobx-react";
@@ -237,7 +238,6 @@ const SectionHeaderContent = (props) => {
     isPublicRoom,
     theme,
     whiteLabelLogoUrls,
-    setRoomSharingPanelVisible,
     downloadAction,
     isPublicRoomType,
     isCustomRoomType,
@@ -599,7 +599,8 @@ const SectionHeaderContent = (props) => {
   };
 
   const onShareRoom = () => {
-    setRoomSharingPanelVisible(true);
+    copy(window.location.href);
+    toastr.success(t("Translations:LinkCopySuccess"));
   };
 
   const getContextOptionsFolder = () => {
@@ -628,21 +629,17 @@ const SectionHeaderContent = (props) => {
 
     if (isPublicRoom) {
       return [
-        security?.Download && {
-          key: "public-room_edit",
-          label: t("Files:DownloadAll"),
-          icon: DownloadReactSvgUrl,
-          onClick: onDownloadAll,
-        },
-        security?.Download && {
-          key: "public-room_separator",
-          isSeparator: true,
-        },
         {
           key: "public-room_share",
-          label: t("Files:ShareRoom"),
-          icon: ShareReactSvgUrl,
+          label: t("Files:CopyLink"),
+          icon: TabletLinkReactSvgUrl,
           onClick: onShareRoom,
+        },
+        security?.Download && {
+          key: "public-room_edit",
+          label: t("Common:Download"),
+          icon: DownloadReactSvgUrl,
+          onClick: onDownloadAll,
         },
       ];
     }
@@ -1227,7 +1224,6 @@ export default inject(
       setRestoreAllArchive,
       setInvitePanelOptions,
       setInviteUsersWarningDialogVisible,
-      setRoomSharingPanelVisible,
       setLeaveRoomDialogVisible,
     } = dialogsStore;
 
@@ -1459,7 +1455,6 @@ export default inject(
       categoryType,
       theme,
       whiteLabelLogoUrls,
-      setRoomSharingPanelVisible,
       isFrame,
       currentDeviceType,
       setLeaveRoomDialogVisible,

@@ -51,7 +51,7 @@ const ContextButton = ({
       />
       <ContextMenu
         model={model}
-        containerRef={ref}
+        // containerRef={ref}
         ref={menuRef}
         onHide={onHide}
         scaled={false}

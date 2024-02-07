@@ -36,7 +36,6 @@ import TopLoaderService from "../components/top-loading-indicator";
 import { Encoder } from "./encoder";
 import { combineUrl } from "./combineUrl";
 import { getCookie } from "./cookie";
-import { isNumber } from "./typeGuards";
 import { checkIsSSR } from "./device";
 
 export const desktopConstants = Object.freeze({
@@ -348,10 +347,8 @@ export function convertLanguage(key: string) {
     case "fr-FR":
       return "fr";
     default:
-      return "en-GB";
+      return key;
   }
-
-  return key;
 }
 
 export function convertToCulture(key: string) {
@@ -377,9 +374,8 @@ export function convertToCulture(key: string) {
     case "zh":
       return "zh-CN";
     default:
-      return "en-US";
+      return key;
   }
-  return key;
 }
 
 export function convertToLanguage(key: string) {
@@ -753,7 +749,9 @@ export function getObjectByLocation(location: Location) {
   }
 }
 
-export const RoomsTypeValues = Object.values(RoomsType).filter(isNumber);
+export const RoomsTypeValues = Object.values(RoomsType).filter(
+  (item): item is number => typeof item === "number",
+);
 
 export const RoomsTypes = RoomsTypeValues.reduce<Record<number, number>>(
   (acc, current) => {

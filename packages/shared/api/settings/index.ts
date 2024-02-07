@@ -316,13 +316,12 @@ export function getIsDefaultWhiteLabel() {
   });
 }
 
-export function restoreWhiteLabelSettings(isDefault, isManagement) {
+export function restoreWhiteLabelSettings(isManagement) {
   const url = "/settings/whitelabel/restore";
 
   return request({
     method: "put",
     url: isManagement ? `${url}?isDefault=true` : url,
-    data: { isDefault },
   });
 }
 

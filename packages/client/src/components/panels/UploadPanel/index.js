@@ -157,7 +157,7 @@ const UploadPanel = withTranslation(["UploadPanel", "Files"])(
   withLoader(UploadPanelComponent)(<Loaders.DialogAsideLoader isPanel />)
 );
 
-export default inject(({ auth, uploadDataStore }) => {
+export default inject(({ settingsStore, uploadDataStore }) => {
   const {
     uploaded,
     converted,
@@ -190,6 +190,6 @@ export default inject(({ auth, uploadDataStore }) => {
     isUploading,
     isUploadingAndConversion,
 
-    theme: auth.settingsStore.theme,
+    theme: settingsStore.theme,
   };
 })(observer(UploadPanel));

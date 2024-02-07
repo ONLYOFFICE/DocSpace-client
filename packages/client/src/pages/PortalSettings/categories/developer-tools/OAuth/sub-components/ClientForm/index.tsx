@@ -448,7 +448,7 @@ const ClientForm = ({
 };
 
 export default inject(
-  ({ oauthStore, auth }: ClientStore, { id }: ClientFormProps) => {
+  ({ oauthStore, settingsStore }: ClientStore, { id }: ClientFormProps) => {
     const {
       clientList,
       scopeList,
@@ -466,7 +466,7 @@ export default inject(
       clientSecret,
     } = oauthStore;
 
-    const { currentDeviceType } = auth.settingsStore;
+    const { currentDeviceType } = settingsStore;
 
     const props: ClientFormProps = {
       scopeList,

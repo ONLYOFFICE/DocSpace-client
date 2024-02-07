@@ -152,7 +152,7 @@ class FilesFilter {
       excludeSubject,
       applyFilterOption,
       extension,
-      searchArea
+      searchArea,
     );
 
     return newFilter;
@@ -176,7 +176,7 @@ class FilesFilter {
     excludeSubject = DEFAULT_EXCLUDE_SUBJECT,
     applyFilterOption = DEFAULT_APPLY_FILTER_OPTION,
     extension = DEFAULT_EXTENSION,
-    searchArea = DEFAULT_SEARCH_AREA
+    searchArea = DEFAULT_SEARCH_AREA,
   ) {
     this.page = page;
     this.pageCount = pageCount;
@@ -231,9 +231,9 @@ class FilesFilter {
 
     const isFilterSet =
       filterType ||
-        (search ?? "").trim() ||
-        authorType ||
-        applyFilterOption !== ApplyFilterOption.All
+      (search ?? "").trim() ||
+      authorType ||
+      applyFilterOption !== ApplyFilterOption.All
         ? withSubfolders
         : false;
 

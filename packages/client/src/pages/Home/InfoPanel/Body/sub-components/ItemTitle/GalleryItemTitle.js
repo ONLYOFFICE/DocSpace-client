@@ -47,7 +47,7 @@ const GalleryItemTitle = ({
       <ReactSVG className="icon" src={getIcon(32, ".docxf")} />
       <Text className="text">{gallerySelected?.attributes?.name_form}</Text>
 
-      <Text color={currentColorScheme.main.accent} className="free-label">
+      <Text color={currentColorScheme.main?.accent} className="free-label">
         {t("Common:Free")}
       </Text>
       {gallerySelected && (

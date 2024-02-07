@@ -1,8 +1,9 @@
 import React from "react";
 import { useLocation, Navigate } from "react-router-dom";
-import { AuthenticatedAction, ValidationResult } from "./../helpers/constants";
+import { AuthenticatedAction } from "../helpers/enums";
+import { ValidationResult } from "../helpers/constants";
 import { Loader } from "@docspace/shared/components/loader";
-import Section from "@docspace/common/components/Section";
+import Section from "@docspace/shared/components/section";
 import { checkConfirmLink } from "@docspace/shared/api/user"; //TODO: Move AuthStore
 import { getObjectByLocation } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -169,8 +170,8 @@ ConfirmRoute.defaultProps = {
   doAuthenticated: AuthenticatedAction.None,
 };
 
-export default inject(({ auth }) => {
-  const { isAuthenticated, logout, isLoaded, settingsStore } = auth;
+export default inject(({ authStore, settingsStore }) => {
+  const { isAuthenticated, logout, isLoaded } = authStore;
   const { defaultPage } = settingsStore;
   return {
     isAuthenticated,

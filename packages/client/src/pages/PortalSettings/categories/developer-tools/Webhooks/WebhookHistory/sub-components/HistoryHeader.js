@@ -262,7 +262,7 @@ const HistoryHeader = (props) => {
   );
 };
 
-export default inject(({ webhooksStore, auth }) => {
+export default inject(({ webhooksStore, settingsStore }) => {
   const {
     isGroupMenuVisible,
     checkAllIds,
@@ -278,8 +278,6 @@ export default inject(({ webhooksStore, auth }) => {
     setRetryPendingFalse,
     setRetryPendingTrue,
   } = webhooksStore;
-
-  const { settingsStore } = auth;
 
   const { theme } = settingsStore;
 

@@ -145,13 +145,20 @@ Tile.defaultProps = {
 
 export default inject(
   (
-    { filesStore, settingsStore, auth, oformsStore, contextOptionsStore },
+    {
+      filesStore,
+      filesSettingsStore,
+
+      oformsStore,
+      contextOptionsStore,
+      infoPanelStore,
+    },
     { item }
   ) => {
     const { categoryType } = filesStore;
     const { gallerySelected, setGallerySelected } = oformsStore;
-    const { getIcon } = settingsStore;
-    const { isVisible, setIsVisible } = auth.infoPanelStore;
+    const { getIcon } = filesSettingsStore;
+    const { isVisible, setIsVisible } = infoPanelStore;
 
     const isSelected = item.id === gallerySelected?.id;
 

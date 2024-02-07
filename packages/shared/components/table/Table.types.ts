@@ -93,6 +93,7 @@ export interface TableRowProps {
   title?: string;
   getContextModel: () => ContextMenuModel[];
   onClick?: (e: React.MouseEvent) => void;
+  badgeUrl?: string;
 }
 
 export interface TableCellProps {

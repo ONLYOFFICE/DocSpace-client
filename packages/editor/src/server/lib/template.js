@@ -17,19 +17,19 @@ export default function template(
 
   let clientScripts =
     assets && assets.hasOwnProperty("client.js")
-      ? `<script defer="defer" src='${assets["client.js"]}'></script>`
+      ? `<script defer="defer" src="${assets["client.js"]}"></script>`
       : "";
 
   const editorApiScript =
     error || !editorUrl
       ? ""
-      : `<script type='text/javascript' id='onlyoffice-api-script' src="${editorUrl}" async></script>`;
+      : `<script type="text/javascript" id="onlyoffice-api-script" src="${editorUrl}" async></script>`;
 
   if (!IS_DEVELOPMENT) {
     const productionBundleKeys = getScripts(assets);
     productionBundleKeys.map((key) => {
       clientScripts =
-        clientScripts + `<script defer="defer" src='${assets[key]}'></script>`;
+        clientScripts + `<script defer="defer" src="${assets[key]}"></script>`;
     });
   }
 
@@ -48,7 +48,7 @@ export default function template(
     </script>
     <script id="__ASC_INITIAL_EDITOR_I18N__">
       window.initialI18nStoreASC = ${JSON.stringify(initialI18nStoreASC)}
-      window.initialLanguage = '${initialLanguage}'
+      window.initialLanguage = "${initialLanguage}"
     </script>
     ${clientScripts}
     <script>
@@ -82,8 +82,8 @@ export default function template(
     ${editorApiScript} 
 
 `;
-  // <script defer="defer" src='${assets["runtime.js"]}'></script>
-  // <script defer="defer" src='${assets["vendor.js"]}'></script>
+  // <script defer="defer" src="${assets["runtime.js"]}"></script>
+  // <script defer="defer" src="${assets["vendor.js"]}"></script>
   const page = `
     <!DOCTYPE html>
       <html lang="en">
@@ -96,14 +96,14 @@ export default function template(
             content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
           />
           <meta name="theme-color" content="#000000" />
-          <link rel="stylesheet" type="text/css" href=${fontsCssUrl} />
+          <link rel="stylesheet" type="text/css" href="${fontsCssUrl}" />
           
-          <link id="favicon" rel="shortcut icon" href=${faviconHref} type="image/x-icon"/>
+          <link id="favicon" rel="shortcut icon" href="${faviconHref}" type="image/x-icon"/>
           <link rel="manifest" href="/manifest.json" />
           <meta name="mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
-          <link rel="apple-touch-icon" href=${faviconHref} />
-          <link rel="android-touch-icon" href=${faviconHref} />
+          <link rel="apple-touch-icon" href="${faviconHref}" />
+          <link rel="android-touch-icon" href="${faviconHref}" />
           ${styleTags}   
           <style type="text/css">
             .loadmask {
@@ -415,7 +415,7 @@ export default function template(
           </div>
           <div id="root">${appComponent}</div>
           <noscript> You need to enable JavaScript to run this app. </noscript>
-          <script src=${BROWSER_DETECTOR_URL}></script>
+          <script src="${BROWSER_DETECTOR_URL}"></script>
           ${scripts}
         </body>
       </html>

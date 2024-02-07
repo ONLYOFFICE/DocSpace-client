@@ -1,8 +1,10 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-console */
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
+
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
+
+import { combineUrl } from "./combineUrl";
 
 const { api: apiConf, proxy: proxyConf } = defaultConfig;
 const { origin: apiOrigin, prefix: apiPrefix, timeout: apiTimeout } = apiConf;

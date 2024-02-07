@@ -1,6 +1,6 @@
 import React from "react";
 
-import Section from "@docspace/common/components/Section";
+import Section from "@docspace/shared/components/section";
 import Loaders from "@docspace/common/components/Loaders";
 import { withTranslation } from "react-i18next";
 
@@ -45,14 +45,14 @@ const VersionHistory = withTranslation("VersionHistory")(PureVersionHistory);
 VersionHistory.propTypes = {};
 
 export default inject(
-  ({ auth, filesStore, clientLoadingStore, versionHistoryStore }) => {
+  ({ settingsStore, filesStore, clientLoadingStore, versionHistoryStore }) => {
     const { filter } = filesStore;
     const { isLoading } = clientLoadingStore;
     const { setIsVerHistoryPanel, versions, showProgressBar } =
       versionHistoryStore;
 
     return {
-      isTabletView: auth.settingsStore.isTabletView,
+      isTabletView: settingsStore.isTabletView,
       isLoading,
       filter,
       versions,

@@ -1,3 +1,5 @@
+import { FilterGroups } from "../../enums";
+
 type TLabel = string | React.ReactNode;
 
 export interface SelectedItemProps {
@@ -9,14 +11,14 @@ export interface SelectedItemProps {
   onClose: (
     propKey: string,
     label: TLabel,
-    group?: string,
+    group?: string | FilterGroups,
     e?: React.MouseEvent,
   ) => void;
   /** Sets a callback function that is triggered when the selected item is clicked */
   onClick?: (
     propKey: string,
     label: TLabel,
-    group?: string,
+    group?: string | FilterGroups,
     e?: React.MouseEvent<HTMLDivElement>,
   ) => void;
   /** Sets the button to present a disabled state */

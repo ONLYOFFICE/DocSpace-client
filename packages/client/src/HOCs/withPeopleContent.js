@@ -29,8 +29,8 @@ export default function withContent(WrappedContent) {
 
     const onContentRowClick = (checked, user, addToSelection = true) => {
       checked
-        ? setBufferSelection(user, addToSelection)
-        : setBufferSelection(null);
+      ? setBufferSelection(user, addToSelection)
+      : setBufferSelection(null);
     };
 
     const checkedProps = { checked };
@@ -135,8 +135,7 @@ export default function withContent(WrappedContent) {
     );
   };
 
-  return inject(({ auth, peopleStore }, { item }) => {
-    const { userStore, settingsStore } = auth;
+  return inject(({ settingsStore, peopleStore, userStore }, { item }) => {
     const { theme, standalone } = settingsStore;
 
     const { selectGroup } = peopleStore.selectedGroupStore;

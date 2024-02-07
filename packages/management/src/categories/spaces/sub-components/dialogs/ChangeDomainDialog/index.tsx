@@ -22,7 +22,7 @@ const StyledModal = styled(ModalDialogContainer)`
 
 const ChangeDomainDialogComponent = () => {
   const { t } = useTranslation(["Management", "Common"]);
-  const { spacesStore, authStore } = useStore();
+  const { spacesStore, settingsStore } = useStore();
   const [domainNameError, setDomainNameError] =
     React.useState<null | Array<object>>(null);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -53,7 +53,7 @@ const ChangeDomainDialogComponent = () => {
       setIsLoading(true);
 
       await setDomainName(domain);
-      await authStore.settingsStore.getAllPortals();
+      await settingsStore.getAllPortals();
       await getPortalDomain();
 
       onClose();

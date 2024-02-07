@@ -229,12 +229,12 @@ const CommonButtons = (props) => {
 
 export default inject(
   ({
-    auth,
     accessRightsStore,
     treeFoldersStore,
     selectedFolderStore,
     contextOptionsStore,
     clientLoadingStore,
+    settingsStore,
   }) => {
     const {
       navigationPath,
@@ -277,7 +277,7 @@ export default inject(
       onClickInviteUsers,
       folderId,
 
-      theme: auth.settingsStore.theme,
+      theme: settingsStore.theme,
       isArchiveFolderRoot,
     };
   }

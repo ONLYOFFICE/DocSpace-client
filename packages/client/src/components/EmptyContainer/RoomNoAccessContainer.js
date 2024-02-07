@@ -83,19 +83,19 @@ const RoomNoAccessContainer = (props) => {
   );
 };
 
-export default inject(({ auth, filesStore, clientLoadingStore }) => {
+export default inject(({ settingsStore, filesStore, clientLoadingStore }) => {
   const { setIsSectionFilterLoading } = clientLoadingStore;
 
   const setIsLoading = (param) => {
     setIsSectionFilterLoading(param);
   };
   const { isEmptyPage } = filesStore;
-  const { isFrame } = auth.settingsStore;
+  const { isFrame, theme } = settingsStore;
   return {
     setIsLoading,
 
     isEmptyPage,
-    theme: auth.settingsStore.theme,
+    theme,
     isFrame,
   };
 })(withTranslation(["Files"])(observer(RoomNoAccessContainer)));

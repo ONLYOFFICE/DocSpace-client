@@ -14,6 +14,8 @@ import { mobile } from "@docspace/shared/utils";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import DocspaceLogo from "../../../DocspaceLogo";
 import { StyledPage, StyledContent } from "./StyledConfirm";
+import { validateTfaCode } from "@docspace/shared/api/settings";
+import { loginWithTfaCode } from "@docspace/shared/api/user";
 
 const StyledForm = styled(Box)`
   margin: 56px auto;
@@ -48,7 +50,7 @@ const StyledForm = styled(Box)`
 `;
 
 const TfaAuthForm = withLoader((props) => {
-  const { t, loginWithCode, loginWithCodeAndCookie } = props;
+  const { t } = props;
 
   const [code, setCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -64,9 +66,9 @@ const TfaAuthForm = withLoader((props) => {
       setIsLoading(true);
 
       if (user && hash) {
-        await loginWithCode(user, hash, code);
+        await loginWithTfaCode(user, hash, code);
       } else {
-        await loginWithCodeAndCookie(code, linkData.confirmHeader);
+        await validateTfaCode(code, linkData.confirmHeader);
       }
 
       const referenceUrl = sessionStorage.getItem("referenceUrl");
@@ -177,10 +179,9 @@ const TfaAuthFormWrapper = (props) => {
   return <TfaAuthForm {...props} />;
 };
 
-export default inject(({ auth, confirm }) => ({
+export default inject(({ settingsStore, confirm }) => ({
   setIsLoaded: confirm.setIsLoaded,
   setIsLoading: confirm.setIsLoading,
-  loginWithCode: auth.loginWithCode,
-  loginWithCodeAndCookie: auth.tfaStore.loginWithCodeAndCookie,
-  defaultPage: auth.settingsStore.defaultPage,
+
+  defaultPage: settingsStore.defaultPage,
 }))(withTranslation(["Confirm", "Common"])(observer(TfaAuthFormWrapper)));

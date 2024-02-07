@@ -8,7 +8,9 @@ const getDefaultStyles = ({ $currentColorScheme, theme }: ProgressColorTheme) =>
   $currentColorScheme &&
   css`
     .preparation-portal_progress-line {
-      background: ${theme.isBase ? $currentColorScheme.main.accent : "#FFFFFF"};
+      background: ${theme.isBase
+        ? $currentColorScheme.main?.accent
+        : "#FFFFFF"};
     }
   `;
 

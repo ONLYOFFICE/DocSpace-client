@@ -22,6 +22,7 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Base } from "@docspace/shared/themes";
 import { generatePKCEPair } from "@docspace/shared/utils/oauth";
 import { AuthenticationMethod } from "@docspace/shared/enums";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -196,8 +197,9 @@ const PreviewDialog = ({
   const getLink = () => {
     return `${
       window.location.origin
-    }/oauth2/authorize?response_type=code&client_id=${client?.clientId}&redirect_uri=${client
-      ?.redirectUris[0]}&scope=${encodingScopes}&state=${state}${
+    }/oauth2/authorize?response_type=code&client_id=${client?.clientId}&redirect_uri=${
+      client?.redirectUris[0]
+    }&scope=${encodingScopes}&state=${state}${
       isClientSecretPost
         ? ""
         : `&code_challenge_method=S256&code_challenge=${codeChallenge}`
@@ -363,10 +365,16 @@ const PreviewDialog = ({
 };
 
 export default inject(
-  ({ oauthStore, auth }: { auth: any; oauthStore: OAuthStoreProps }) => {
+  ({
+    oauthStore,
+    settingsStore,
+  }: {
+    settingsStore: SettingsStore;
+    oauthStore: OAuthStoreProps;
+  }) => {
     const { setPreviewDialogVisible, bufferSelection } = oauthStore;
 
-    const { theme } = auth.settingsStore;
+    const { theme } = settingsStore;
 
     return {
       setPreviewDialogVisible,

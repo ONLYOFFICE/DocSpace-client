@@ -43,12 +43,12 @@ const InfoPanelHeaderContent = (props) => {
   const isAccounts = getIsAccounts();
   const isTrash = getIsTrash();
 
-  const isNoItem =
-    selection?.isSelectedFolder && selection?.id === selection?.rootFolderId;
+  const isRoot =
+    selection?.isFolder && selection?.id === selection?.rootFolderId;
   const isSeveralItems = selection && Array.isArray(selection);
 
   const withSubmenu =
-    !isNoItem && !isSeveralItems && !isGallery && !isAccounts && !isTrash;
+    !isRoot && !isSeveralItems && !isGallery && !isAccounts && !isTrash;
 
   useEffect(() => {
     checkWidth();
@@ -94,9 +94,6 @@ const InfoPanelHeaderContent = (props) => {
       content: null,
     },
   ];
-  // const selectionRoomRights = selectionParentRoom
-  //   ? selectionParentRoom.security?.Read
-  //   : selection?.security?.Read;
 
   const roomsSubmenu = [...submenuData];
 
@@ -207,52 +204,49 @@ const InfoPanelHeaderContent = (props) => {
   );
 };
 
-export default inject(({ auth, treeFoldersStore, pluginStore }) => {
-  const { infoPanelItemsList } = pluginStore;
+export default inject(
+  ({ settingsStore, treeFoldersStore, infoPanelStore, pluginStore }) => {
+    const { infoPanelItemsList } = pluginStore;
 
-  const {
-    selection,
-    setIsVisible,
-    roomsView,
-    fileView,
-    setView,
-    getIsFiles,
-    getIsRooms,
-    getIsGallery,
-    getIsAccounts,
-    getIsTrash,
-    resetView,
-    //selectionParentRoom,
-  } = auth.infoPanelStore;
+    const {
+      infoPanelSelection,
+      setIsVisible,
+      roomsView,
+      fileView,
+      setView,
+      getIsFiles,
+      getIsRooms,
+      getIsGallery,
+      getIsAccounts,
+      getIsTrash,
+      resetView,
+    } = infoPanelStore;
 
-  const { myRoomsId, archiveRoomsId } = treeFoldersStore;
+    const { myRoomsId, archiveRoomsId } = treeFoldersStore;
 
-  const { enablePlugins } = auth.settingsStore;
+    const { enablePlugins } = settingsStore;
 
-  return {
-    selection,
-    setIsVisible,
-    roomsView,
-    fileView,
-    setView,
-    getIsFiles,
-    getIsRooms,
-    getIsGallery,
-    getIsAccounts,
-    getIsTrash,
-    infoPanelItemsList,
-    resetView,
+    return {
+      selection: infoPanelSelection,
+      setIsVisible,
+      roomsView,
+      fileView,
+      setView,
+      getIsFiles,
+      getIsRooms,
+      getIsGallery,
+      getIsAccounts,
+      getIsTrash,
+      infoPanelItemsList,
+      resetView,
 
-    myRoomsId,
-    archiveRoomsId,
+      myRoomsId,
+      archiveRoomsId,
 
-    enablePlugins,
-
-    //  rootFolderType,
-
-    //selectionParentRoom,
-  };
-})(
+      enablePlugins,
+    };
+  }
+)(
   withTranslation(["Common", "InfoPanel"])(
     InfoPanelHeaderContent
     // withLoader(observer(InfoPanelHeaderContent))(

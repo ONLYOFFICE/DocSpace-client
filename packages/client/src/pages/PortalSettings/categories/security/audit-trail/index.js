@@ -25,9 +25,7 @@ const AuditTrail = (props) => {
   useEffect(() => {
     setDocumentTitle(t("AuditTrailNav"));
 
-    if (isAuditAvailable) {
-      getAuditTrail();
-    }
+    getAuditTrail();
 
     getLifetimeAuditSettings();
   }, []);
@@ -73,7 +71,7 @@ const AuditTrail = (props) => {
           securityLifetime={securityLifetime}
           lifetime={securityLifetime.auditTrailLifeTime}
           setLifetimeAuditSettings={setLifetimeAuditSettings}
-          content={isAuditAvailable && getContent()}
+          content={getContent()}
           downloadReport={t("DownloadReportBtnText")}
           downloadReportDescription={t("DownloadReportDescription")}
           getReport={getAuditTrailReport}
@@ -85,7 +83,7 @@ const AuditTrail = (props) => {
   );
 };
 
-export default inject(({ setup, auth }) => {
+export default inject(({ setup, settingsStore, currentQuotaStore }) => {
   const {
     getAuditTrail,
     security,
@@ -96,7 +94,7 @@ export default inject(({ setup, auth }) => {
     securityLifetime,
     isLoadingDownloadReport,
   } = setup;
-  const { settingsStore, currentQuotaStore } = auth;
+
   const { theme } = settingsStore;
   const { isAuditAvailable } = currentQuotaStore;
   return {

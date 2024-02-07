@@ -71,12 +71,12 @@ describe("<Textarea />", () => {
   //       onChange={jest.fn()}
   //       value="value"
   //       className="test"
-  //       heightTextArea={54}
+  //       heightTextArea="54px"
   //     />
   //   );
 
   //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("heightTextArea")).toEqual(54);
+  //   expect(wrapper.prop("heightTextArea")).toEqual("54px");
   // });
 
   // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message

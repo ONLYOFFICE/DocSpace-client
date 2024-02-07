@@ -117,7 +117,7 @@ const SettingsPluginDialog = ({
   );
 };
 
-export default inject(({ auth, pluginStore }) => {
+export default inject(({ settingsStore, pluginStore }) => {
   const {
     pluginList,
     settingsPluginDialogVisible,
@@ -129,7 +129,7 @@ export default inject(({ auth, pluginStore }) => {
     updatePlugin,
   } = pluginStore;
 
-  const { pluginOptions } = auth.settingsStore;
+  const { pluginOptions } = settingsStore;
 
   const { pluginName } = currentSettingsDialogPlugin;
 

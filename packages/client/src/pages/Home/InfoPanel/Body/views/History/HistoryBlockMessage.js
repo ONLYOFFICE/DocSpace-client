@@ -10,9 +10,8 @@ const HistoryBlockMessage = ({
   t,
   action,
   groupedActions,
-  selection,
   selectedFolder,
-  selectionParentRoom,
+  infoPanelSelection,
 }) => {
   const message = getBlockMessageTranslation(
     t,
@@ -31,7 +30,7 @@ const HistoryBlockMessage = ({
 
     const itemLocationId = +action.ExtraLocation;
     if (selectedFolder?.id === itemLocationId) return "";
-    if (selection?.isRoom && selectionParentRoom?.id === itemLocationId)
+    if (infoPanelSelection?.isRoom && infoPanelSelection?.id === itemLocationId)
       return "";
 
     const folderTitle = action.ExtraLocationTitle;

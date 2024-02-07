@@ -7,6 +7,7 @@ import {
 } from "@docspace/shared/utils/oauth/interfaces";
 //@ts-ignore
 import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 export interface InputProps {
   value: string;
@@ -62,6 +63,6 @@ export interface ClientFormProps {
 }
 
 export interface ClientStore {
-  auth: { settingsStore: { currentDeviceType: DeviceUnionType } };
+  settingsStore: SettingsStore;
   oauthStore: OAuthStoreProps;
 }

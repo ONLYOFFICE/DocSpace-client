@@ -73,7 +73,10 @@ class IndexedDBHelper {
     this.db?.deleteObjectStore(storeName);
   };
 
-  addItem = (storeName: string, item: { id: string }) => {
+  addItem = (
+    storeName: string,
+    item: { id: IDBValidKey; src?: Blob; version?: number; created?: Date },
+  ) => {
     return new Promise<void>((resolve, reject) => {
       try {
         const transaction = this.db?.transaction(storeName, "readwrite");
@@ -91,7 +94,7 @@ class IndexedDBHelper {
     });
   };
 
-  getItem = (storeName: string, id: string) => {
+  getItem = (storeName: string, id: string | number) => {
     return new Promise((resolve, reject) => {
       try {
         const transaction = this.db?.transaction(storeName, "readonly");

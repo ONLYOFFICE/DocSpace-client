@@ -143,10 +143,8 @@ const DeveloperToolsWrapper = (props) => {
   );
 };
 
-export default inject(({ setup, auth }) => {
+export default inject(({ setup, settingsStore }) => {
   const { initSettings } = setup;
-
-  const { settingsStore } = auth;
 
   return {
     currentDeviceType: settingsStore.currentDeviceType,

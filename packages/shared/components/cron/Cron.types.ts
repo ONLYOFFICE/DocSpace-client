@@ -6,7 +6,6 @@ export type Unit = {
   min: number;
   max: number;
   alt?: ReadonlyArray<string>;
-  fullLabel?: ReadonlyArray<string>;
   total: number;
   altWithTranslation?: ReadonlyArray<string>;
 };
@@ -22,7 +21,15 @@ export type Option<K = unknown, L = unknown> = {
   label: L;
 };
 
-export type TFunction = Function;
+export type TFunction = (str: string, options?: unknown) => string;
+
+export type Setter<K extends string, T = number[]> = {
+  [P in K as `set${Capitalize<P>}`]: Dispatch<SetStateAction<T>>;
+};
+
+export type Property<K extends string, T = number[]> = Setter<K, T> & {
+  [P in K]: T;
+};
 
 export interface FieldProps {
   t: TFunction;
@@ -38,49 +45,32 @@ export interface CronProps {
   onError?: (error?: Error) => void;
 }
 
-export interface HoursProps extends FieldProps {
-  hours: number[];
-  setHours: Dispatch<SetStateAction<number[]>>;
-}
+export interface HoursProps extends FieldProps, Property<"hours"> {}
 
-export interface MinutesProps extends FieldProps {
-  minutes: number[];
-  setMinutes: Dispatch<SetStateAction<number[]>>;
+export interface MinutesProps extends FieldProps, Property<"minutes"> {
   period: PeriodType;
 }
 
-export interface MonthDaysProps extends FieldProps {
-  monthDays: number[];
+export interface MonthDaysProps extends FieldProps, Property<"monthDays"> {
   weekDays: number[];
-  setMonthDays: Dispatch<SetStateAction<number[]>>;
 }
 
-export interface MonthsProps extends FieldProps {
-  months: number[];
-  setMonths: Dispatch<SetStateAction<number[]>>;
-}
+export interface MonthsProps extends FieldProps, Property<"months"> {}
 
-export interface WeekDaysProps extends FieldProps {
+export interface WeekDaysProps extends FieldProps, Property<"weekDays"> {
   isWeek: boolean;
-  period: PeriodType;
-  weekDays: number[];
   monthDays: number[];
-  setWeekDays: Dispatch<SetStateAction<number[]>>;
 }
 
-export interface SelectProps {
+export interface SelectProps extends Property<"value"> {
   unit: Unit;
-  value: number[];
   placeholder: string;
-  setValue: Dispatch<SetStateAction<number[]>>;
-  prefix: string;
+  prefix?: string;
   dropDownMaxHeight?: number;
 }
 
-export interface PeriodProps {
+export interface PeriodProps extends Property<"period", PeriodType> {
   t: TFunction;
-  period?: PeriodType;
-  setPeriod: Dispatch<SetStateAction<PeriodType>>;
 }
 
 export type PeriodOptionType = {

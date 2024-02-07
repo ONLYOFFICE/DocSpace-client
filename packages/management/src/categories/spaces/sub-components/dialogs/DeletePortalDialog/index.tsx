@@ -10,8 +10,8 @@ import { useStore } from "SRC_DIR/store";
 import { Link } from "@docspace/shared/components/link";
 
 const DeletePortalDialog = () => {
-  const { spacesStore, authStore } = useStore();
-  const { currentColorScheme } = authStore.settingsStore;
+  const { spacesStore, settingsStore } = useStore();
+  const { currentColorScheme } = settingsStore;
 
   const {
     currentPortal,

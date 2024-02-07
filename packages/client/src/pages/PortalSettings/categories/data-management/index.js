@@ -18,6 +18,7 @@ import config from "../../../../../package.json";
 import ManualBackup from "./backup/manual-backup";
 import AutoBackup from "./backup/auto-backup";
 import { DeviceType } from "@docspace/shared/enums";
+import { isManagement } from "@docspace/shared/utils/common";
 
 const DataManagementWrapper = (props) => {
   const {
@@ -28,8 +29,6 @@ const DataManagementWrapper = (props) => {
 
     isNotPaidPeriod,
     toDefault,
-
-    isManagement,
   } = props;
 
   const navigate = useNavigate();
@@ -109,7 +108,7 @@ const DataManagementWrapper = (props) => {
   }, []);
 
   const onSelect = (e) => {
-    const url = isManagement
+    const url = isManagement()
       ? `/backup/${e.id}`
       : `/portal-settings/backup/${e.id}`;
     navigate(
@@ -130,32 +129,32 @@ const DataManagementWrapper = (props) => {
   );
 };
 
-export default inject(({ auth, setup, backup }) => {
-  const { initSettings } = setup;
-  const { settingsStore, currentTariffStatusStore, isManagement } = auth;
-  const { isNotPaidPeriod } = currentTariffStatusStore;
-  const { toDefault } = backup;
-  const {
-    dataBackupUrl,
-    automaticBackupUrl,
+export default inject(
+  ({ settingsStore, setup, backup, currentTariffStatusStore }) => {
+    const { initSettings } = setup;
 
-    currentColorScheme,
-    currentDeviceType,
-  } = settingsStore;
+    const { isNotPaidPeriod } = currentTariffStatusStore;
+    const { toDefault } = backup;
+    const {
+      dataBackupUrl,
+      automaticBackupUrl,
 
-  const buttonSize =
-    currentDeviceType !== DeviceType.desktop ? "normal" : "small";
-  return {
-    loadBaseInfo: async () => {
-      await initSettings();
-    },
-    dataBackupUrl,
-    automaticBackupUrl,
-    buttonSize,
-    isNotPaidPeriod,
-    currentColorScheme,
-    toDefault,
+      currentColorScheme,
+      currentDeviceType,
+    } = settingsStore;
 
-    isManagement,
-  };
-})(withTranslation(["Settings", "Common"])(observer(DataManagementWrapper)));
+    const buttonSize =
+      currentDeviceType !== DeviceType.desktop ? "normal" : "small";
+    return {
+      loadBaseInfo: async () => {
+        await initSettings();
+      },
+      dataBackupUrl,
+      automaticBackupUrl,
+      buttonSize,
+      isNotPaidPeriod,
+      currentColorScheme,
+      toDefault,
+    };
+  }
+)(withTranslation(["Settings", "Common"])(observer(DataManagementWrapper)));

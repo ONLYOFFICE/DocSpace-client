@@ -36,8 +36,7 @@ const BonusItem = ({ showText, toggleArticleOpen }) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { settingsStore } = auth;
+export default inject(({ settingsStore }) => {
   const { showText, toggleArticleOpen } = settingsStore;
   return {
     showText,

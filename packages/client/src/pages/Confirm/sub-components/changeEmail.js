@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { inject, observer } from "mobx-react";
 import { Loader } from "@docspace/shared/components/loader";
-import Section from "@docspace/common/components/Section";
+import Section from "@docspace/shared/components/section";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import tryRedirectTo from "@docspace/shared/utils/tryRedirectTo";
 import SectionWrapper from "SRC_DIR/components/Section";
@@ -81,8 +81,8 @@ const ChangeEmailForm = (props) => (
   </SectionWrapper>
 );
 
-export default inject(({ auth }) => {
-  const { userStore, settingsStore, isLoaded } = auth;
+export default inject(({ authStore, settingsStore, userStore }) => {
+  const { isLoaded } = authStore;
   return {
     isLoaded,
     changeEmail: userStore.changeEmail,

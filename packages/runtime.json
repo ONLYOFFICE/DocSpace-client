@@ -1,10 +1,9 @@
 {
-  "date": "2024118_14311",
+  "date": "202427_10120",
   "checksums": {
-    "api.js": "cc6df9a4cf6c0ce8bed75e8cd3890b9a",
+    "api.js": "cdccad9c117fa172ed7ea7f392a6c702",
     "api.poly.js": "586ce6831fa68f6bc33486e2cebc856e",
     "browserDetector.js": "9e853f32d806dd83652ccc2d67510a84",
-    "config.json": "3f54595a6ea8207c37f1197069a2db86",
-    "tiff.min.js": "90496a3b99551fee464b40e26523e84d"
+    "config.json": "3f54595a6ea8207c37f1197069a2db86"
   }
 }

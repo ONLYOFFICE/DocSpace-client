@@ -89,8 +89,8 @@ const BodyComponent = (props) => {
   );
 };
 
-export default inject(({ peopleStore }) => {
+export default inject(({ userStore }) => {
   return {
-    userPerformedDeletion: peopleStore.authStore.userStore.user,
+    userPerformedDeletion: userStore.user,
   };
 })(observer(BodyComponent));

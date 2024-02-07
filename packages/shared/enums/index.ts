@@ -17,6 +17,11 @@ export const enum AuthenticationMethod {
   "client_secret_post" = "client_secret_post",
 }
 
+export enum ArticleAlerts {
+  TeamTraining = "TeamTraining",
+  SubmitToFormGallery = "SubmitToFormGallery",
+}
+
 /**
  * Enum for employee activation status.
  * @readonly

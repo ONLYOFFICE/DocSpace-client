@@ -3,6 +3,7 @@ import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import React, { useState, useEffect } from "react";
 import { Avatar } from "@docspace/shared/components/avatar";
 import { Text } from "@docspace/shared/components/text";
+import { capitalize } from "lodash";
 
 import { parseAddresses } from "@docspace/shared/utils";
 import { getAccessOptions } from "../utils";
@@ -15,8 +16,9 @@ import {
   StyledCrossIcon,
   StyledHelpButton,
   StyledDeleteIcon,
+  StyledInviteUserBody,
 } from "../StyledInvitePanel";
-import { filterUserRoleOptions } from "SRC_DIR/helpers/utils";
+import { filterUserRoleOptions } from "SRC_DIR/helpers";
 import AccessSelector from "./AccessSelector";
 
 const Item = ({
@@ -119,9 +121,22 @@ const Item = ({
 
   const displayBody = (
     <>
-      <Text {...textProps} truncate noSelect>
-        {inputValue}
-      </Text>
+      <StyledInviteUserBody>
+        <Text {...textProps} truncate noSelect>
+          {inputValue}
+        </Text>
+        <Text
+          className="label"
+          fontWeight={400}
+          fontSize="12px"
+          noSelect
+          color="#A3A9AE"
+          truncate
+        >
+          {`${capitalize(role)} | ${email}`}
+        </Text>
+      </StyledInviteUserBody>
+
       {hasError ? (
         <>
           <StyledHelpButton

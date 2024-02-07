@@ -15,12 +15,14 @@ const ClearScrollbar = ({
   heightScale,
   hasError,
   heightTextAreaProp,
+  isFullHeight,
+  fullHeight,
   ...props
 }: {
   isDisabled?: boolean;
   heightScale?: boolean;
   hasError?: boolean;
-  heightTextAreaProp?: number;
+  heightTextAreaProp?: string;
   ref?: React.Ref<HTMLDivElement>;
 } & ScrollbarProps) => <Scrollbar {...props} />;
 
@@ -37,21 +39,27 @@ const StyledScrollbar = styled(ClearScrollbar)`
   }
 
   width: ${(props) => props.theme.textArea.scrollWidth} !important;
-  height: ${(props) => {
-    return props.heightScale
-      ? "67vh"
-      : props.heightTextAreaProp
-        ? `${props.heightTextAreaProp + 2}px`
-        : "91px";
-  }} !important;
+  height: calc(
+    ${(props) => {
+        return props.heightScale
+          ? "67vh"
+          : props.isFullHeight
+            ? `${props.fullHeight}px`
+            : props.heightTextAreaProp
+              ? props.heightTextAreaProp
+              : "91px";
+      }} + 2px
+  ) !important;
 
   textarea {
     height: ${(props) => {
       return props.heightScale
         ? "65vh"
-        : props.heightTextAreaProp
-          ? `${props.heightTextAreaProp}px`
-          : "89px";
+        : props.isFullHeight
+          ? `${props.fullHeight}px`
+          : props.heightTextAreaProp
+            ? props.heightTextAreaProp
+            : "89px";
     }};
   }
   background-color: ${(props) =>
@@ -72,13 +80,11 @@ const ClearTextareaAutosize = React.forwardRef(
       paddingLeftProp,
       isJSONField,
       enableCopy,
-      heightTextAreaProp,
       heightTextArea,
       ...props
     }: TextareaProps & {
       disabled?: boolean;
       readOnly?: boolean;
-      heightTextAreaProp?: number;
     },
     ref: React.Ref<HTMLTextAreaElement>,
   ) => <TextareaAutosize {...props} ref={ref} />,
@@ -202,10 +208,26 @@ const CopyIconWrapper = styled.div<{
 
 CopyIconWrapper.defaultProps = { theme: Base };
 
-const Wrapper = styled.div<{ enableCopy?: boolean; isJSONField?: boolean }>`
+const Wrapper = styled.div<{
+  heightScale?: boolean;
+  isFullHeight?: boolean;
+  fullHeight?: number;
+  heightTextArea?: string;
+  enableCopy?: boolean;
+  isJSONField?: boolean;
+}>`
   position: relative;
 
   max-width: 1200px;
+  height: ${(props) => {
+    return props.heightScale
+      ? "65vh"
+      : props.isFullHeight
+        ? `${props.fullHeight}px`
+        : props.heightTextArea
+          ? props.heightTextArea
+          : "89px";
+  }};
 
   .scroll-wrapper {
     margin-right: ${(props) =>
@@ -216,8 +238,7 @@ const Wrapper = styled.div<{ enableCopy?: boolean; isJSONField?: boolean }>`
 const Numeration = styled.pre<{ fontSize: string }>`
   display: block;
   position: absolute;
-
-  font-size: ${(props) => props.theme.getCorrectFontSize(props.fontSize)};
+  font-size: ${(props) => props.theme.getCorrectFontSize(props.fontSize)}px;
   font-family: ${(props) => props.theme.fontFamily};
   line-height: 1.5;
   margin: 0;

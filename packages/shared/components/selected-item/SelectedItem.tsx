@@ -10,9 +10,9 @@ export const SelectedItemPure = (props: SelectedItemProps) => {
   const {
     label,
     onClose,
-    isDisabled,
+    isDisabled = false,
     onClick,
-    isInline,
+    isInline = true,
     className,
     id,
     propKey,
@@ -63,11 +63,6 @@ export const SelectedItemPure = (props: SelectedItemProps) => {
       )}
     </StyledSelectedItem>
   );
-};
-
-SelectedItemPure.defaultProps = {
-  isInline: true,
-  isDisabled: false,
 };
 
 const SelectedItem = React.memo(SelectedItemPure);

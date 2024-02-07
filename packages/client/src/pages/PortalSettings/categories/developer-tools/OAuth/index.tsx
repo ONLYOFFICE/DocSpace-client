@@ -19,6 +19,7 @@ import PreviewDialog from "./sub-components/PreviewDialog";
 import OAuthLoader from "./sub-components/List/Loader";
 import DisableDialog from "./sub-components/DisableDialog";
 import DeleteDialog from "./sub-components/DeleteDialog";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 const MIN_LOADER_TIME = 500;
 
@@ -109,8 +110,14 @@ const OAuth = ({
 };
 
 export default inject(
-  ({ oauthStore, auth }: { oauthStore: OAuthStoreProps; auth: any }) => {
-    const { currentDeviceType } = auth.settingsStore;
+  ({
+    oauthStore,
+    settingsStore,
+  }: {
+    oauthStore: OAuthStoreProps;
+    settingsStore: SettingsStore;
+  }) => {
+    const { currentDeviceType } = settingsStore;
     const {
       viewAs,
       setViewAs,

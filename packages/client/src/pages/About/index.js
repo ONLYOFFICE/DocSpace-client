@@ -1,5 +1,5 @@
 ﻿import React, { useEffect } from "react";
-import Section from "@docspace/common/components/Section";
+import Section from "@docspace/shared/components/section";
 import { I18nextProvider, withTranslation } from "react-i18next";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import i18n from "./i18n";
@@ -23,8 +23,8 @@ const Body = ({ t, personal, buildVersionInfo, theme }) => {
   );
 };
 
-const BodyWrapper = inject(({ auth }) => {
-  const { personal, buildVersionInfo, theme } = auth.settingsStore;
+const BodyWrapper = inject(({ settingsStore }) => {
+  const { personal, buildVersionInfo, theme } = settingsStore;
   return {
     personal,
     buildVersionInfo,

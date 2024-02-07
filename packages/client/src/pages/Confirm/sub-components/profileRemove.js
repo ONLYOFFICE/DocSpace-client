@@ -123,9 +123,9 @@ const ProfileRemoveForm = (props) => {
   );
 };
 
-export default inject(({ auth }) => ({
-  greetingTitle: auth.settingsStore.greetingSettings,
-  theme: auth.settingsStore.theme,
-  legalTerms: auth.settingsStore.legalTerms,
-  currentColorScheme: auth.settingsStore.currentColorScheme,
+export default inject(({ settingsStore }) => ({
+  greetingTitle: settingsStore.greetingSettings,
+  theme: settingsStore.theme,
+  legalTerms: settingsStore.legalTerms,
+  currentColorScheme: settingsStore.currentColorScheme,
 }))(withTranslation("Confirm")(withLoader(observer(ProfileRemoveForm))));

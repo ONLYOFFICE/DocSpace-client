@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Heading } from "@docspace/shared/components/heading";
 import { Aside } from "@docspace/shared/components/aside";
-import Loaders from "@docspace/common/components/Loaders";
+
 import { FloatingButton } from "@docspace/shared/components/floating-button";
 import { Portal } from "@docspace/shared/components/portal";
 import { DeviceType } from "@docspace/shared/enums";
@@ -17,6 +17,7 @@ import {
 import { SectionBodyContent } from "../../../pages/VersionHistory/Section/";
 import { inject, observer } from "mobx-react";
 import config from "PACKAGE_FILE";
+import { ArticleHeaderLoader } from "@docspace/shared/skeletons/article";
 
 class PureVersionHistoryPanel extends React.Component {
   onClose = () => {
@@ -70,7 +71,7 @@ class PureVersionHistoryPanel extends React.Component {
                   {versions[0].title}
                 </Heading>
               ) : (
-                <Loaders.ArticleHeader
+                <ArticleHeaderLoader
                   className="loader-version-history"
                   height="28"
                   width="688"
@@ -109,29 +110,36 @@ VersionHistoryPanel.propTypes = {
   fileId: PropTypes.string,
 };
 
-export default inject(({ auth, clientLoadingStore, versionHistoryStore }) => {
-  const { isTabletView, currentDeviceType } = auth.settingsStore;
-  const { isLoading } = clientLoadingStore;
-  const { setIsMobileHidden: setInfoPanelIsMobileHidden } = auth.infoPanelStore;
-  const {
-    fileId,
-    versions,
-    setIsVerHistoryPanel,
-    isVisible: visible,
-    showProgressBar,
-  } = versionHistoryStore;
+export default inject(
+  ({
+    settingsStore,
+    clientLoadingStore,
+    versionHistoryStore,
+    infoPanelStore,
+  }) => {
+    const { isTabletView, currentDeviceType } = settingsStore;
+    const { isLoading } = clientLoadingStore;
+    const { setIsMobileHidden: setInfoPanelIsMobileHidden } = infoPanelStore;
+    const {
+      fileId,
+      versions,
+      setIsVerHistoryPanel,
+      isVisible: visible,
+      showProgressBar,
+    } = versionHistoryStore;
 
-  return {
-    isTabletView,
-    homepage: config.homepage,
-    isLoading,
-    fileId,
-    versions,
-    visible,
-    showProgressBar,
+    return {
+      isTabletView,
+      homepage: config.homepage,
+      isLoading,
+      fileId,
+      versions,
+      visible,
+      showProgressBar,
 
-    setIsVerHistoryPanel,
-    setInfoPanelIsMobileHidden,
-    currentDeviceType,
-  };
-})(observer(VersionHistoryPanel));
+      setIsVerHistoryPanel,
+      setInfoPanelIsMobileHidden,
+      currentDeviceType,
+    };
+  }
+)(observer(VersionHistoryPanel));

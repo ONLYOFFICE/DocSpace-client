@@ -164,7 +164,7 @@ const DNSSettings = (props) => {
           <TextInput
             {...textInputProps}
             isDisabled={isLoading || !enable}
-            value={dnsName}
+            value={dnsName?.trim()}
             onChange={onChangeTextInput}
             hasError={isError}
           />
@@ -183,7 +183,7 @@ const DNSSettings = (props) => {
             <TextInput
               {...textInputProps}
               isDisabled={true}
-              value={location.hostname}
+              value={location.hostname?.trim()}
             />
           </FieldContainer>
         </>
@@ -239,7 +239,7 @@ const DNSSettings = (props) => {
         </Text>
         <Link
           className="link-learn-more"
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
           target="_blank"
           isHovered
           href={dnsSettingsUrl}
@@ -253,14 +253,14 @@ const DNSSettings = (props) => {
   );
 };
 
-export default inject(({ auth, common }) => {
+export default inject(({ settingsStore, common, currentQuotaStore }) => {
   const {
     helpLink,
     currentColorScheme,
     standalone,
     dnsSettingsUrl,
     currentDeviceType,
-  } = auth.settingsStore;
+  } = settingsStore;
   const {
     isLoaded,
     setIsLoadedDNSSettings,
@@ -272,7 +272,7 @@ export default inject(({ auth, common }) => {
     saveDNSSettings,
     isDefaultDNS,
   } = common;
-  const { currentQuotaStore } = auth;
+
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
   const { customObj } = dnsSettings;
   const { dnsName, enable } = customObj;

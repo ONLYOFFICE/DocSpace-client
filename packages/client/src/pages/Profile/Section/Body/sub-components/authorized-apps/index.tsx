@@ -11,9 +11,11 @@ import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { Consumer } from "@docspace/shared/utils/context";
 import { Text } from "@docspace/shared/components/text";
-
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 //@ts-ignore
-import { OAuthStoreProps, ViewAsType } from "SRC_DIR/store/OAuthStore";
+import OAuthStore from "SRC_DIR/store/OAuthStore";
+//@ts-ignore
+import { ViewAsType } from "SRC_DIR/store/OAuthStore";
 //@ts-ignore
 import InfoDialog from "SRC_DIR/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/InfoDialog";
 
@@ -123,7 +125,13 @@ const AuthorizedApps = ({
 };
 
 export default inject(
-  ({ oauthStore, auth }: { oauthStore: OAuthStoreProps; auth: any }) => {
+  ({
+    oauthStore,
+    settingsStore,
+  }: {
+    oauthStore: OAuthStore;
+    settingsStore: SettingsStore;
+  }) => {
     const {
       consents,
       fetchConsents,
@@ -139,7 +147,7 @@ export default inject(
       revokeClient,
     } = oauthStore;
 
-    const { currentDeviceType } = auth.settingsStore;
+    const { currentDeviceType } = settingsStore;
 
     return {
       consents,

@@ -1,5 +1,3 @@
-import type { ContextMenuModel } from "../components/context-menu";
-
 export function trimSeparator(array: ContextMenuModel[]) {
   if (!array || !Array.isArray(array) || array.length === 0) return array;
 

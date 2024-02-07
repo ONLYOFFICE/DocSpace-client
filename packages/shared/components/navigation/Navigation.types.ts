@@ -60,6 +60,11 @@ export interface IControlButtonProps {
   isPublicRoom?: boolean;
   isTrashFolder?: boolean;
   isMobile?: boolean;
+  navigationButtonLabel?: string;
+  onNavigationButtonClick?: () => void;
+  tariffBar?: React.ReactNode;
+  title?: string;
+  isEmptyPage?: boolean;
 }
 
 export interface ITextProps {
@@ -88,7 +93,7 @@ export interface INavigationItemProps {
   isRoot: boolean;
   isRootRoom: boolean;
   onClick: TOnNavigationItemClick;
-  withLogo: boolean;
+  withLogo: boolean | string;
   currentDeviceType: DeviceType;
   style?: React.CSSProperties;
 }
@@ -160,4 +165,7 @@ export interface INavigationProps {
   titleIcon: string;
   currentDeviceType: DeviceType;
   rootRoomTitle: string;
+  navigationButtonLabel?: string;
+  onNavigationButtonClick?: () => void;
+  tariffBar: React.ReactNode;
 }

@@ -26,7 +26,7 @@ export const isMobile = () => {
   return window.innerWidth <= size.mobile;
 };
 
-export const isTablet = (width = undefined) => {
+export const isTablet = (width?: number) => {
   const checkWidth = width || window.innerWidth;
   return checkWidth > size.mobile && checkWidth < size.desktop;
 };

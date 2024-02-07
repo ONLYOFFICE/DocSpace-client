@@ -120,8 +120,8 @@ const PluginSDK = ({
   );
 };
 
-export default inject(({ pluginStore, auth }) => {
-  const { currentDeviceType, theme } = auth.settingsStore;
+export default inject(({ pluginStore, settingsStore }) => {
+  const { currentDeviceType, theme } = settingsStore;
   const { systemPluginList, isLoading, isEmptyList } = pluginStore;
 
   return { currentDeviceType, systemPluginList, theme, isLoading, isEmptyList };

@@ -317,51 +317,53 @@ const ConflictResolveDialog = (props) => {
   );
 };
 
-export default inject(({ auth, dialogsStore, uploadDataStore, filesStore }) => {
-  const {
-    conflictResolveDialogVisible: visible,
-    setConflictResolveDialogVisible,
-    conflictResolveDialogData,
-    conflictResolveDialogItems: items,
-    setMoveToPanelVisible,
-    setRestorePanelVisible,
-    setRestoreAllPanelVisible,
-    setCopyPanelVisible,
-    setMoveToPublicRoomVisible,
-  } = dialogsStore;
+export default inject(
+  ({ settingsStore, dialogsStore, uploadDataStore, filesStore }) => {
+    const {
+      conflictResolveDialogVisible: visible,
+      setConflictResolveDialogVisible,
+      conflictResolveDialogData,
+      conflictResolveDialogItems: items,
+      setMoveToPanelVisible,
+      setRestorePanelVisible,
+      setRestoreAllPanelVisible,
+      setCopyPanelVisible,
+      setMoveToPublicRoomVisible,
+    } = dialogsStore;
 
-  const { itemOperationToFolder, handleFilesUpload } = uploadDataStore;
-  const {
-    activeFiles,
-    activeFolders,
-    setActiveFiles,
-    setActiveFolders,
-    updateActiveFiles,
-    setSelected,
-  } = filesStore;
-  const { settingsStore } = auth;
-  const { theme } = settingsStore;
-  return {
-    theme,
-    items,
-    visible,
-    conflictResolveDialogData,
-    setConflictResolveDialogVisible,
-    itemOperationToFolder,
-    activeFiles,
-    activeFolders,
-    setActiveFiles,
-    setActiveFolders,
-    updateActiveFiles,
-    setSelected,
-    setMoveToPanelVisible,
-    setRestorePanelVisible,
-    setRestoreAllPanelVisible,
-    setCopyPanelVisible,
-    setMoveToPublicRoomVisible,
-    handleFilesUpload,
-  };
-})(
+    const { itemOperationToFolder, handleFilesUpload } = uploadDataStore;
+    const {
+      activeFiles,
+      activeFolders,
+      setActiveFiles,
+      setActiveFolders,
+      updateActiveFiles,
+      setSelected,
+    } = filesStore;
+
+    const { theme } = settingsStore;
+    return {
+      theme,
+      items,
+      visible,
+      conflictResolveDialogData,
+      setConflictResolveDialogVisible,
+      itemOperationToFolder,
+      activeFiles,
+      activeFolders,
+      setActiveFiles,
+      setActiveFolders,
+      updateActiveFiles,
+      setSelected,
+      setMoveToPanelVisible,
+      setRestorePanelVisible,
+      setRestoreAllPanelVisible,
+      setCopyPanelVisible,
+      setMoveToPublicRoomVisible,
+      handleFilesUpload,
+    };
+  }
+)(
   withTranslation(["ConflictResolveDialog", "Common"])(
     observer(ConflictResolveDialog)
   )

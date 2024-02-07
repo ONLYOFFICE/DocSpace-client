@@ -35,6 +35,8 @@ import OauthRevokeSvgUrl from "PUBLIC_DIR/images/oauth.revoke.svg?url";
 import { transformToClientProps } from "@docspace/shared/utils/oauth";
 import { AuthenticationMethod } from "@docspace/shared/enums";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
+import { UserStore } from "@docspace/shared/store/UserStore";
+import { TTranslation } from "@docspace/shared/types";
 
 const PAGE_LIMIT = 100;
 
@@ -95,7 +97,7 @@ export interface OAuthStoreProps {
 
   revokeClient: (clientId: string[]) => Promise<void>;
 
-  authStore: any;
+  userStore: UserStore | null;
 
   currentPage: number;
   nextPage: number | null;
@@ -115,7 +117,7 @@ export interface OAuthStoreProps {
   fetchScopes: () => Promise<void>;
 
   getContextMenuItems: (
-    t: any,
+    t: TTranslation,
     item: IClientProps,
     isInfo?: boolean,
     isSettings?: boolean
@@ -130,7 +132,7 @@ export interface OAuthStoreProps {
 }
 
 class OAuthStore implements OAuthStoreProps {
-  authStore: any = null;
+  userStore: UserStore | null = null;
 
   viewAs: ViewAsType = "table";
 
@@ -164,8 +166,8 @@ class OAuthStore implements OAuthStoreProps {
 
   revokeDialogVisible: boolean = false;
 
-  constructor(authStore: any) {
-    this.authStore = authStore;
+  constructor(userStore: UserStore) {
+    this.userStore = userStore;
     makeAutoObservable(this);
   }
 
@@ -336,8 +338,8 @@ class OAuthStore implements OAuthStoreProps {
     try {
       const newClient = await addClient(client);
 
-      const creatorDisplayName = this.authStore.userStore.user.displayName;
-      const creatorAvatar = this.authStore.userStore.user.avatarSmall;
+      const creatorDisplayName = this.userStore?.user?.displayName;
+      const creatorAvatar = this.userStore?.user?.avatarSmall;
 
       runInAction(() => {
         this.clients = [

@@ -15,6 +15,7 @@ const SelectFolderDialog = ({
   isVisible,
   titleSelectorFolder,
   fileInfo,
+  getIsDisabled,
 }: SelectFolderDialogProps) => {
   const { t } = useTranslation(["Common", "Editor"]);
 
@@ -49,11 +50,11 @@ const SelectFolderDialog = ({
       withFooterInput
       withCancelButton
       withFooterCheckbox={fileInfo.fileExst !== "fb2"}
-      descriptionText={t("Common:SelectDOCXFormat")}
+      descriptionText=""
       currentDeviceType={DeviceType.desktop}
       getFilesArchiveError={() => ""}
       parentId={0}
-      getIsDisabled={() => false}
+      getIsDisabled={getIsDisabled}
       acceptButtonId="select-file-modal-submit"
       cancelButtonId="select-file-modal-cancel"
     />

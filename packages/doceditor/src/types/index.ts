@@ -1,14 +1,20 @@
 import {
   TDocServiceLocation,
   TFile,
+  TFileSecurity,
   TFolder,
+  TFolderSecurity,
 } from "@docspace/shared/api/files/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import { TSettings } from "@docspace/shared/api/settings/types";
 import { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
 import SocketIOHelper from "@docspace/shared/utils/socket";
-import { ConflictResolveType } from "@docspace/shared/enums";
+import {
+  ConflictResolveType,
+  FilesSelectorFilterTypes,
+} from "@docspace/shared/enums";
+import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 
 export type TDocumentInfoSharingSettings = {
   user: string;
@@ -136,17 +142,72 @@ export interface IResponse {
 
 export interface EditorProps extends IResponse {}
 
-export type TSaveAsEventData = {
+export type TEventData = {
   title: string;
   url: string;
   fileType: string;
 };
 
+export type TEvent = {
+  data: TEventData;
+};
+
 export interface UseSelectFolderDialogProps {}
+
+export interface UseSelectFileDialogProps {
+  instanceId: string;
+}
 
 export interface SelectFolderDialogProps {
   socketHelper: SocketIOHelper;
   titleSelectorFolder: string;
+  isVisible: boolean;
+  getIsDisabled: (
+    isFirstLoad: boolean,
+    isSelectedParentFolder: boolean,
+    selectedItemId: string | number | undefined,
+    selectedItemType: "rooms" | "files" | undefined,
+    isRoot: boolean,
+    selectedItemSecurity:
+      | TFileSecurity
+      | TFolderSecurity
+      | TRoomSecurity
+      | undefined,
+    selectedFileInfo: TSelectedFileInfo,
+  ) => boolean;
+  onClose: () => void;
+  onSubmit: (
+    selectedItemId: string | number | undefined,
+    folderTitle: string,
+    isPublic: boolean,
+    breadCrumbs: TBreadCrumb[],
+    fileName: string,
+    isChecked: boolean,
+    selectedTreeNode: TFolder,
+    selectedFileInfo: TSelectedFileInfo,
+  ) => Promise<void>;
+  fileInfo: TFile;
+}
+
+export interface SelectFileDialogProps {
+  socketHelper: SocketIOHelper;
+  fileTypeDetection: {
+    isSelect: boolean;
+    filterParam: FilesSelectorFilterTypes;
+  };
+  getIsDisabled: (
+    isFirstLoad: boolean,
+    isSelectedParentFolder: boolean,
+    selectedItemId: string | number | undefined,
+    selectedItemType: "rooms" | "files" | undefined,
+    isRoot: boolean,
+    selectedItemSecurity:
+      | TFileSecurity
+      | TFolderSecurity
+      | TRoomSecurity
+      | undefined,
+    selectedFileInfo: TSelectedFileInfo,
+  ) => boolean;
   isVisible: boolean;
   onClose: () => void;
   onSubmit: (

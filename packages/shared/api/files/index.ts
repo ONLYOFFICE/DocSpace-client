@@ -73,10 +73,10 @@ export async function openEdit(
 }
 
 export async function getReferenceData(data: {
-  fileKey: number;
+  fileKey: number | string;
   instanceId: string;
-  sourceFileId: number;
-  path: string;
+  sourceFileId?: number;
+  path?: string;
 }) {
   const options: AxiosRequestConfig = {
     method: "post",
@@ -1102,7 +1102,7 @@ export async function createThumbnails(fileIds: number[]) {
   return res;
 }
 
-export async function getPresignedUri(fileId: number) {
+export async function getPresignedUri(fileId: number | string) {
   const res = (await request({
     method: "get",
     url: `files/file/${fileId}/presigned`,

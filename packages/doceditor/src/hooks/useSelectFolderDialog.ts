@@ -1,11 +1,17 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 
 import { EDITOR_ID } from "@docspace/shared/constants";
 import { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
+import {
+  TFileSecurity,
+  TFolderSecurity,
+} from "@docspace/shared/api/files/types";
+import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
+import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
 
-import { TSaveAsEventData, UseSelectFolderDialogProps } from "@/types";
+import { TEventData, UseSelectFolderDialogProps } from "@/types";
 import { saveAs } from "@/utils";
 
 const useSelectFolderDialog = ({}: UseSelectFolderDialogProps) => {
@@ -14,9 +20,11 @@ const useSelectFolderDialog = ({}: UseSelectFolderDialogProps) => {
   const [url, setUrl] = useState("");
   const [extension, setExtension] = useState("");
 
+  const requestRunning = React.useRef(false);
+
   const onSDKRequestSaveAs = useCallback((event: object) => {
     if ("data" in event) {
-      const data = event.data as TSaveAsEventData;
+      const data = event.data as TEventData;
       setTitle(data.title);
       setUrl(data.url);
       setExtension(data.fileType);
@@ -35,7 +43,8 @@ const useSelectFolderDialog = ({}: UseSelectFolderDialogProps) => {
     fileName: string,
     isChecked: boolean,
   ) => {
-    if (!selectedItemId) return;
+    if (!selectedItemId || requestRunning.current) return;
+    requestRunning.current = true;
 
     const currentExst = fileName.split(".").pop();
 
@@ -57,14 +66,39 @@ const useSelectFolderDialog = ({}: UseSelectFolderDialogProps) => {
         docEditor?.showMessage(convertedInfo);
       }
     }
-
+    requestRunning.current = false;
     onClose();
+  };
+
+  const getIsDisabled = (
+    isFirstLoad: boolean,
+    isSelectedParentFolder: boolean,
+    selectedItemId: string | number | undefined,
+    selectedItemType: "rooms" | "files" | undefined,
+    isRoot: boolean,
+    selectedItemSecurity:
+      | TFileSecurity
+      | TFolderSecurity
+      | TRoomSecurity
+      | undefined,
+    selectedFileInfo: TSelectedFileInfo,
+  ) => {
+    if (isFirstLoad) return true;
+    if (requestRunning.current) return true;
+    if (!!selectedFileInfo) return true;
+
+    if (!selectedItemSecurity) return false;
+
+    return "CopyTo" in selectedItemSecurity
+      ? !selectedItemSecurity?.CopyTo
+      : !selectedItemSecurity.Copy;
   };
 
   return {
     onSDKRequestSaveAs,
     onSubmitSelectFolderDialog: onSubmit,
     onCloseSelectFolderDialog: onClose,
+    getIsDisabledSelectFolderDialog: getIsDisabled,
     isVisibleSelectFolderDialog: isVisible,
     titleSelectorFolderDialog: title,
   };

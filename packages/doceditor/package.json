@@ -3,7 +3,7 @@
   "version": "2.0.1",
   "private": true,
   "scripts": {
-    "build": "next build",
+    "build": "node ./scripts/buildTranslations.js && next build",
     "start": "node ./scripts/buildTranslations.js && next dev -p 5013",
     "start-prod": "next start -p 5013",
     "lint": "next lint"

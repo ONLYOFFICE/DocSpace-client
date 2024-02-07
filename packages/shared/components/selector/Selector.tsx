@@ -292,6 +292,7 @@ const Selector = ({
         !isMultiSelect
       ) {
         const cloneItems = items.map((x) => ({ ...x, isSelected: false }));
+
         return setRenderedItems(cloneItems);
       }
 
@@ -311,7 +312,9 @@ const Selector = ({
       setNewSelectedItems(cloneSelectedItems);
       compareSelectedItems(cloneSelectedItems);
     }
-  }, [compareSelectedItems, isMultiSelect, items, selectedItems]);
+    // TODO: need fix deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isMultiSelect, items, selectedItems]);
 
   return (
     <StyledSelector

@@ -170,9 +170,11 @@ const PeopleSelector = ({
       const data = response.items
         .filter((item) => {
           const excludeUser =
-            withAbilityCreateRoomUsers &&
-            ((!item.isAdmin && !item.isOwner && !item.isRoomAdmin) ||
-              item.status === EmployeeStatus.Disabled);
+            (!!withAbilityCreateRoomUsers &&
+              !item.isAdmin &&
+              !item.isOwner &&
+              !item.isRoomAdmin) ||
+            item.status === EmployeeStatus.Disabled;
 
           if (excludeItems.includes(item.id) || excludeUser) {
             totalDifferent += 1;

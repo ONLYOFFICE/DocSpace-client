@@ -15,7 +15,7 @@ const subscribers = new Set();
 
 export type TEmit = {
   command: string;
-  data: { roomParts: string | [] };
+  data: { roomParts: string | []; individual?: boolean };
   room?: null | boolean;
 };
 

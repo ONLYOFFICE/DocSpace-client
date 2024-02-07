@@ -254,10 +254,12 @@ const InviteInput = ({
       onClick={addEmail}
       height={48}
     >
-      <Avatar size="min" role="user" source={AtReactSvgUrl} />
-      <Text fontSize="14px" fontWeight={600}>
-        {inputValue}
-      </Text>
+      <div className="email-list_avatar">
+        <Avatar size="min" role="user" source={AtReactSvgUrl} />
+        <Text truncate fontSize="14px" fontWeight={600}>
+          {inputValue}
+        </Text>
+      </div>
       <div className="email-list_add-button">
         <Text fontSize="13px" fontWeight={600}>
           {t("Common:AddButton")}

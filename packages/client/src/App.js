@@ -2,7 +2,7 @@
 import React from "react";
 import { RouterProvider } from "react-router-dom";
 
-import ErrorBoundary from "@docspace/common/components/ErrorBoundary";
+import ErrorBoundary from "@docspace/shared/components/error-boundary/ErrorBoundary";
 import "@docspace/common/custom.scss";
 
 import router from "./router";

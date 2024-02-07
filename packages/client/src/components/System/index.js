@@ -1,6 +1,6 @@
 import React from "react";
 import AppLoader from "@docspace/common/components/AppLoader";
-import ErrorBoundary from "@docspace/common/components/ErrorBoundary";
+import ErrorBoundary from "@docspace/shared/components/error-boundary/ErrorBoundary";
 import Error520 from "client/Error520";
 import Error404 from "client/Error404";
 

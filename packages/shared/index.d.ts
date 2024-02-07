@@ -28,6 +28,9 @@ declare module "react-values" {
   export { StringValue, BooleanValue };
 }
 
+/** module federation */
+declare module "client/*";
+
 declare module "resize-image" {
   type ImageFormat = "png" | "gif" | "bmp" | "jpeg" | "webp";
 

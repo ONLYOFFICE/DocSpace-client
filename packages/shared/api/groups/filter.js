@@ -3,7 +3,7 @@ import { getObjectByLocation, toUrlParams } from "../../utils/common";
 const DEFAULT_PAGE = 0;
 const DEFAULT_PAGE_COUNT = 100;
 const DEFAULT_TOTAL = 0;
-const DEFAULT_SORT_BY = "name";
+const DEFAULT_SORT_BY = "title";
 const DEFAULT_SORT_ORDER = "ascending";
 const DEFAULT_SEARCH = "";
 const DEFAULT_USER_ID = null;

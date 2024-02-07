@@ -3,6 +3,7 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import { TableHeader } from "@docspace/shared/components/table";
+import { Events } from "@docspace/shared/enums";
 
 const TABLE_VERSION = "3";
 const TABLE_COLUMNS = `peopleTableColumns_ver-${TABLE_VERSION}`;
@@ -38,8 +39,10 @@ class PeopleTableHeader extends React.Component {
         key: "Department",
         title: t("Department"),
         enable: true,
+        sortBy: "department",
         resizable: true,
         onChange: this.onColumnChange,
+        onClick: this.onFilter,
       },
       // {
       //   key: "Room",
@@ -96,6 +99,10 @@ class PeopleTableHeader extends React.Component {
 
     const tableColumns = columns.map((c) => c.enable && c.key);
     localStorage.setItem(`${TABLE_COLUMNS}=${this.props.userId}`, tableColumns);
+
+    const event = new Event(Events.CHANGE_COLUMN);
+
+    window.dispatchEvent(event);
   };
 
   onFilter = (sortBy) => {

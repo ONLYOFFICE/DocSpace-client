@@ -242,6 +242,14 @@ const TABLE_TRASH_COLUMNS = `trashTableColumns_ver-${TableVersions.Trash}`;
 
 const COLUMNS_TRASH_SIZE_INFO_PANEL = `trashColumnsSizeInfoPanel_ver-${TableVersions.Trash}`;
 
+const TABLE_PEOPLE_COLUMNS = `peopleTableColumns_ver-${TableVersions.People}`;
+
+const COLUMNS_PEOPLE_SIZE_INFO_PANEL = `infoPanelPeopleColumnsSize_ver-${TableVersions.People}`;
+
+const TABLE_GROUPS_COLUMNS = `groupsTableColumns_ver-${TableVersions.Groups}`;
+
+const COLUMNS_GROUPS_SIZE_INFO_PANEL = `infoPanelGroupsColumnsSize_ver-${TableVersions.Groups}`;
+
 const SectionFilterContent = ({
   t,
   filter,
@@ -1797,49 +1805,118 @@ const SectionFilterContent = ({
 
   const getSortData = React.useCallback(() => {
     if (isPeopleAccounts) {
-      return [
-        {
-          id: "sory-by_first-name",
-          key: "firstname",
-          label: t("Common:ByFirstNameSorting"),
-          default: true,
-        },
-        {
-          id: "sory-by_last-name",
-          key: "lastname",
-          label: t("Common:ByLastNameSorting"),
-          default: true,
-        },
-        {
-          id: "sory-by_type",
-          key: "type",
-          label: t("Common:Type"),
-          default: true,
-        },
-        {
-          id: "sory-by_email",
-          key: "email",
-          label: t("Common:Email"),
-          default: true,
-        },
-      ];
+      const peopleOptions = [];
+
+      const firstName = {
+        id: "sort-by_first-name",
+        key: "firstname",
+        label: t("Common:ByFirstNameSorting"),
+        default: true,
+      };
+
+      const lastName = {
+        id: "sort-by_last-name",
+        key: "lastname",
+        label: t("Common:ByLastNameSorting"),
+        default: true,
+      };
+
+      const type = {
+        id: "sort-by_type",
+        key: "type",
+        label: t("Common:Type"),
+        default: true,
+      };
+
+      const department = {
+        id: "sort-by_department",
+        key: "department",
+        label: t("People:Department"),
+        default: true,
+      };
+
+      const email = {
+        id: "sort-by_email",
+        key: "email",
+        label: t("Common:Email"),
+        default: true,
+      };
+
+      const peopleHideableColumns = {
+        Type: type,
+        Department: department,
+        Mail: email,
+      };
+
+      peopleOptions.push(firstName, lastName);
+
+      if ((viewAs = "table")) {
+        const availableSort = localStorage
+          ?.getItem(`${TABLE_PEOPLE_COLUMNS}=${userId}`)
+          ?.split(",");
+
+        const infoPanelColumnsSize = localStorage
+          ?.getItem(`${COLUMNS_PEOPLE_SIZE_INFO_PANEL}=${userId}`)
+          ?.split(" ");
+
+        availableSort.forEach((columnTitle) => {
+          if (!peopleHideableColumns[columnTitle]) return;
+
+          if (availableSort?.includes(columnTitle)) {
+            const idx = availableSort.findIndex((x) => x === columnTitle);
+            const hide =
+              infoPanelVisible &&
+              infoPanelColumnsSize &&
+              infoPanelColumnsSize[idx] === "0px";
+
+            !hide && peopleOptions.push(peopleHideableColumns[columnTitle]);
+          }
+        });
+      }
+
+      return peopleOptions;
     }
 
     if (isGroupsAccounts) {
-      return [
-        {
-          id: "sort-by_title",
-          key: "title",
-          label: t("Common:Title"),
-          default: true,
-        },
-        {
-          id: "sort-by_manager",
-          key: "Head of Group",
-          label: t("Common:HeadOfGroup"),
-          default: true,
-        },
-      ];
+      const groupsOptions = [];
+
+      const title = {
+        id: "sort-by_title",
+        key: "title",
+        label: t("Common:Title"),
+        default: true,
+      };
+
+      const manager = {
+        id: "sort-by_manager",
+        key: "manager",
+        label: t("Common:HeadOfGroup"),
+        default: true,
+      };
+
+      groupsOptions.push(title);
+
+      if ((viewAs = "table")) {
+        const availableSort = localStorage
+          ?.getItem(`${TABLE_GROUPS_COLUMNS}=${userId}`)
+          ?.split(",");
+
+        const infoPanelColumnsSize = localStorage
+          ?.getItem(`${COLUMNS_GROUPS_SIZE_INFO_PANEL}=${userId}`)
+          ?.split(" ");
+
+        if (availableSort?.includes("Head of Group")) {
+          const idx = availableSort.findIndex((x) => x === "Head of Group");
+          const hide =
+            infoPanelVisible &&
+            infoPanelColumnsSize &&
+            infoPanelColumnsSize[idx] === "0px";
+
+          !hide && groupsOptions.push(manager);
+        }
+      }
+
+      return groupsOptions;
     }
 
     const commonOptions = [];

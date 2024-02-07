@@ -3,6 +3,7 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import { TableHeader } from "@docspace/shared/components/table";
+import { Events } from "@docspace/shared/enums";
 
 const TABLE_VERSION = "5";
 const TABLE_COLUMNS = `groupsTableColumns_ver-${TABLE_VERSION}`;
@@ -30,6 +31,7 @@ class GroupsTableHeader extends React.Component {
         sortBy: "manager",
         enable: true,
         onChange: this.onColumnChange,
+        onClick: this.onFilter,
       },
     ]);
 
@@ -66,6 +68,10 @@ class GroupsTableHeader extends React.Component {
 
     const tableColumns = columns.map((c) => c.enable && c.key);
     localStorage.setItem(`${TABLE_COLUMNS}=${this.props.userId}`, tableColumns);
+
+    const event = new Event(Events.CHANGE_COLUMN);
+
+    window.dispatchEvent(event);
   };
 
   onFilter = (sortBy) => {
@@ -146,7 +152,7 @@ export default inject(
     infoPanelStore,
     settingsStore,
   }) => ({
-    filter: peopleStore.filterStore,
+    filter: peopleStore.groupsStore.filter,
     setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
     userId: userStore.user?.id,
     infoPanelVisible: infoPanelStore.isVisible,

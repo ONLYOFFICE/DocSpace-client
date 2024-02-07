@@ -4,9 +4,13 @@ import config from "PACKAGE_FILE";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 class FilterStore {
+  userStore = null;
+
   filter = Filter.getDefault();
 
-  constructor() {
+  constructor(userStore) {
+    this.userStore = userStore;
+
     makeObservable(this, {
       filter: observable,
       setFilterParams: action,
@@ -44,6 +48,10 @@ class FilterStore {
   };
 
   setFilter = (filter) => {
+    const key = `PeopleFilter=${this.userStore.user.id}`;
+    const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
+    localStorage.setItem(key, value);
+
     this.filter = filter;
   };
 

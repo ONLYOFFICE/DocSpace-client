@@ -29,6 +29,10 @@ class GroupsStore {
   }
 
   setFilter = (filter) => {
+    const key = `GroupsFilter=${this.peopleStore.userStore.user.id}`;
+    const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
+    localStorage.setItem(key, value);
+
     this.filter = filter;
   };
 
@@ -54,8 +58,24 @@ class GroupsStore {
 
   setCurrentGroup = (currentGroup) => (this.currentGroup = currentGroup);
 
-  getGroups = async (filter, updateFilter = false) => {
+  getGroups = async (
+    filter,
+    updateFilter = false,
+    withFilterLocalStorage = false,
+  ) => {
     const filterData = filter ? filter.clone() : Filter.getDefault();
+
+    const filterStorageItem = localStorage.getItem(
+      `GroupsFilter=${this.peopleStore.userStore.user?.id}`,
+    );
+
+    if (filterStorageItem && withFilterLocalStorage) {
+      const splitFilter = filterStorageItem.split(",");
+
+      filterData.sortBy = splitFilter[0];
+      filterData.pageCount = +splitFilter[1];
+      filterData.sortOrder = splitFilter[2];
+    }
 
     const res = await groupsApi.getGroups(filterData);
     filterData.total = res.total;

@@ -25,7 +25,7 @@ const useAccounts = ({
 
     setDocumentTitle(t("Common:Accounts"));
 
-    fetchPeople(newFilter, true)
+    fetchPeople(newFilter, true, true)
       .catch((err) => {
         if (err?.response?.status === 402) setPortalTariff();
       })

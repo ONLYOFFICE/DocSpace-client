@@ -280,8 +280,10 @@ const SectionFilterContent = ({
   accountsViewAs,
   groups,
   groupsFilter,
+  setGroupsFilter,
 
   accountsFilter,
+  setAccountsFilter,
   showFilterLoader,
   isPublicRoom,
   publicRoomKey,
@@ -576,8 +578,10 @@ const SectionFilterContent = ({
       setIsLoading(true);
 
       if (isPeopleAccounts) {
+        setAccountsFilter(newFilter);
         navigate(`accounts/people/filter?${newFilter.toUrlParams()}`);
       } else if (isGroupsAccounts) {
+        setGroupsFilter(newFilter);
         navigate(`accounts/groups/filter?${newFilter.toUrlParams()}`);
       } else if (isRooms) {
         const path =
@@ -2464,9 +2468,14 @@ export default inject(
       viewAs: accountsViewAs,
     } = peopleStore;
 
-    const { groups, filter: groupsFilter } = groupsStore;
+    const {
+      groups,
+      filter: groupsFilter,
+      setFilter: setGroupsFilter,
+    } = groupsStore;
 
-    const { filter: accountsFilter } = filterStore;
+    const { filter: accountsFilter, setFilter: setAccountsFilter } =
+      filterStore;
     const { isPublicRoom, publicRoomKey } = publicRoomStore;
 
     const { canSearchByContent } = filesSettingsStore;
@@ -2512,8 +2521,10 @@ export default inject(
       accountsViewAs,
       groups,
       groupsFilter,
+      setGroupsFilter,
 
       accountsFilter,
+      setAccountsFilter,
       isPublicRoom,
       publicRoomKey,
       setRoomsFilter,

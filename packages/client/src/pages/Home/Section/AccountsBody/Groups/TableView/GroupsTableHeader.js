@@ -75,7 +75,7 @@ class GroupsTableHeader extends React.Component {
   };
 
   onFilter = (sortBy) => {
-    const { filter, setIsLoading, navigate, location } = this.props;
+    const { filter, setFilter, setIsLoading, navigate, location } = this.props;
     console.log(filter);
 
     const newFilter = filter.clone();
@@ -90,7 +90,7 @@ class GroupsTableHeader extends React.Component {
     }
 
     setIsLoading(true);
-
+    setFilter(newFilter);
     navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
   };
 
@@ -153,6 +153,7 @@ export default inject(
     settingsStore,
   }) => ({
     filter: peopleStore.groupsStore.filter,
+    setFilter: peopleStore.groupsStore.setFilter,
     setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
     userId: userStore.user?.id,
     infoPanelVisible: infoPanelStore.isVisible,

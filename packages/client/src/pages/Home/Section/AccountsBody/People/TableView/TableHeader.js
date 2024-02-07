@@ -106,7 +106,7 @@ class PeopleTableHeader extends React.Component {
   };
 
   onFilter = (sortBy) => {
-    const { filter, setIsLoading, navigate, location } = this.props;
+    const { filter, setFilter, setIsLoading, navigate, location } = this.props;
     const newFilter = filter.clone();
 
     if (newFilter.sortBy === sortBy && sortBy !== "AZ") {
@@ -132,7 +132,7 @@ class PeopleTableHeader extends React.Component {
     }
 
     setIsLoading(true);
-
+    setFilter(newFilter);
     navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
   };
 
@@ -196,13 +196,14 @@ export default inject(
   }) => {
     const { filterStore } = peopleStore;
 
-    const { filter } = filterStore;
+    const { filter, setFilter } = filterStore;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { withPaging } = settingsStore;
 
     return {
       filter,
+      setFilter,
 
       setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
       userId: userStore.user?.id,

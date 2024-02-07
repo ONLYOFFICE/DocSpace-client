@@ -76,7 +76,7 @@ class PeopleStore {
     this.targetUserStore = new TargetUserStore(this, userStore);
     this.selectedGroupStore = new SelectedGroupStore(this);
     this.editingFormStore = new EditingFormStore(this);
-    this.filterStore = new FilterStore();
+    this.filterStore = new FilterStore(userStore);
     this.selectionStore = new SelectionStore(this);
     this.headerMenuStore = new HeaderMenuStore(this);
     this.avatarEditorStore = new AvatarEditorStore(this);

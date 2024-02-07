@@ -23,7 +23,7 @@ const useGroups = ({
 
     setDocumentTitle(t("Common:Accounts"));
 
-    fetchGroups(newFilter, true)
+    fetchGroups(newFilter, true, true)
       .catch((err) => {
         console.err(err);
       })

@@ -63,10 +63,6 @@ class FilterStore {
       this.filter.group
     );
   }
-
-  get isFilteredOnlyBySearch() {
-    return this.filter.checkIfFilteredOnlyBySearch();
-  }
 }
 
 export default FilterStore;

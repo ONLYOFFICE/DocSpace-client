@@ -308,21 +308,6 @@ class Filter {
 
     return equals;
   }
-
-  checkIfFilteredOnlyBySearch() {
-    return Boolean(
-      this.search &&
-        !(
-          this.activationStatus ||
-          this.employeeStatus ||
-          this.payments ||
-          this.role ||
-          this.accountLoginType ||
-          this.withoutGroup ||
-          this.group
-        ),
-    );
-  }
 }
 
 export default Filter;

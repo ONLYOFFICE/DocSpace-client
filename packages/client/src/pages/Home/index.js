@@ -112,7 +112,6 @@ const PureHome = (props) => {
 
     accountsViewAs,
     fetchPeople,
-    fetchPeopleWithGroups,
     fetchGroups,
     setSelectedNode,
     onClickBack,
@@ -196,7 +195,6 @@ const PureHome = (props) => {
 
     setSelectedNode,
     fetchPeople,
-    fetchPeopleWithGroups,
     setPortalTariff,
   });
 
@@ -500,12 +498,7 @@ export default inject(
       getSettings,
     } = settingsStore;
 
-    const {
-      usersStore,
-      groupsStore,
-      viewAs: accountsViewAs,
-      getPeopleWithGroups: fetchPeopleWithGroups,
-    } = peopleStore;
+    const { usersStore, groupsStore, viewAs: accountsViewAs } = peopleStore;
 
     const { getUsersList: fetchPeople } = usersStore;
     const { getGroups: fetchGroups } = groupsStore;
@@ -601,7 +594,6 @@ export default inject(
 
       accountsViewAs,
       fetchPeople,
-      fetchPeopleWithGroups,
       fetchGroups,
       setSelectedNode,
       onClickBack,

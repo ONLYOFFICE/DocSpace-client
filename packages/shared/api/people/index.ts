@@ -436,12 +436,3 @@ export function getMembersList(
     return res;
   });
 }
-
-export function getPeopleWithGroups(filter = Filter.getDefault()) {
-  const params = filter.toApiUrlParams();
-
-  return request({
-    method: "get",
-    url: `/accounts/search?${params}`,
-  });
-}

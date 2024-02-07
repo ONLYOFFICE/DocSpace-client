@@ -53,8 +53,6 @@ class PeopleStore {
   isInit = false;
   viewAs = isDesktop() ? "table" : "row";
   isLoadedProfileSectionBody = false;
-  peopleWithGroups = [];
-  peopleWithGroupsAreLoading = false;
 
   constructor(
     authStore,
@@ -64,7 +62,7 @@ class PeopleStore {
     infoPanelStore,
     userStore,
     tfaStore,
-    settingsStore
+    settingsStore,
   ) {
     this.authStore = authStore;
     this.infoPanelStore = infoPanelStore;
@@ -73,7 +71,7 @@ class PeopleStore {
       this,
       settingsStore,
       infoPanelStore,
-      userStore
+      userStore,
     );
     this.targetUserStore = new TargetUserStore(this, userStore);
     this.selectedGroupStore = new SelectedGroupStore(this);
@@ -95,7 +93,7 @@ class PeopleStore {
       infoPanelStore,
       userStore,
       tfaStore,
-      settingsStore
+      settingsStore,
     );
 
     makeAutoObservable(this);
@@ -142,7 +140,7 @@ class PeopleStore {
 
     if (users.length > 1) {
       fromType = fromType.filter(
-        (item, index) => fromType.indexOf(item) === index && item !== type
+        (item, index) => fromType.indexOf(item) === index && item !== type,
       );
 
       if (fromType.length === 0) fromType = [fromType[0]];
@@ -362,70 +360,6 @@ class PeopleStore {
     this.isLoadedProfileSectionBody = isLoadedProfileSectionBody;
   };
 
-  setPeopleWithGroups = (items) => {
-    this.peopleWithGroups = items;
-  };
-
-  getPeopleWithGroups = async (filter, updateFilter) => {
-    const newFilter = filter ? filter.clone() : Filter.getDefault();
-
-    if (!this.authStore.settingsStore.withPaging) {
-      newFilter.page = 0;
-      newFilter.pageCount = 100;
-    }
-
-    const { items, total } = await api.people.getPeopleWithGroups(newFilter);
-    newFilter.total = total;
-
-    if (updateFilter) {
-      this.filterStore.setFilterParams(newFilter);
-    }
-
-    const newItems = items.map((item) => {
-      if (item.manager) {
-        item.isGroup = true;
-      }
-      return item;
-    });
-
-    this.setPeopleWithGroups(newItems);
-  };
-
-  get hasMorePeopleWithGroups() {
-    return this.peopleWithGroups.length < this.filterStore.filterTotal;
-  }
-
-  fetchMorePeopleWithGroups = async () => {
-    if (!this.hasMorePeopleWithGroups || this.peopleWithGroupsAreLoading)
-      return;
-
-    this.setPeopleWithGroupsAreLoading(true);
-
-    const { filter, setFilterParams } = this.filterStore;
-
-    const newFilter = filter.clone();
-    newFilter.page += 1;
-    setFilterParams(newFilter);
-
-    const { items } = await api.people.getPeopleWithGroups(newFilter);
-
-    const newItems = items.map((item) => {
-      if (item.manager) {
-        item.isGroup = true;
-      }
-      return item;
-    });
-
-    runInAction(() => {
-      this.setPeopleWithGroups([...this.peopleWithGroups, ...newItems]);
-      this.setPeopleWithGroupsAreLoading(false);
-    });
-  };
-
-  setPeopleWithGroupsAreLoading = (peopleWithGroupsAreLoading) => {
-    this.peopleWithGroupsAreLoading = peopleWithGroupsAreLoading;
-  };
-
   getStatusType = (user) => {
     if (
       user.status === EmployeeStatus.Active &&
@@ -451,23 +385,6 @@ class PeopleStore {
     else if (user.isVisitor) return "user";
     else return "manager";
   };
-
-  get accountsItems() {
-    const list = this.peopleWithGroups.map((item) => {
-      const isGroup = Boolean(item.manager);
-
-      if (isGroup) {
-        item.isGroup = true;
-      } else {
-        item.statusType = this.getStatusType(item);
-        item.role = this.getUserRole(item);
-      }
-
-      return item;
-    });
-
-    return list;
-  }
 }
 
 export default PeopleStore;

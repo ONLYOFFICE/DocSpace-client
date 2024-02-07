@@ -10,7 +10,6 @@ import InsideGroup from "./InsideGroup";
 import { withTranslation } from "react-i18next";
 import { Consumer } from "@docspace/shared/utils";
 import withLoader from "SRC_DIR/HOCs/withLoader";
-import PeopleWithGroups from "SRC_DIR/pages/Home/Section/AccountsBody/PeopleWithGroups";
 
 const SectionBodyContent = (props) => {
   const {
@@ -23,8 +22,6 @@ const SectionBodyContent = (props) => {
     setGroupsBufferSelection,
     setChangeOwnerDialogVisible,
     selectUser,
-    isFilteredOnlyBySearch,
-    peopleWithGroups,
   } = props;
 
   const location = useLocation();
@@ -74,13 +71,9 @@ const SectionBodyContent = (props) => {
     return () => window.removeEventListener("mousedown", onMouseDown);
   }, []);
 
-  if (isFilteredOnlyBySearch) {
-    return <PeopleWithGroups />;
-  }
-
   return (
     <>
-      {!isFiltered && <Tabs />}
+      <Tabs />
       {location.pathname.includes("/accounts/people") ? (
         <People />
       ) : !groupId ? (
@@ -93,8 +86,8 @@ const SectionBodyContent = (props) => {
 };
 
 export default inject(({ peopleStore }) => {
-  const { viewAs: accountsViewAs, filterStore, peopleWithGroups } = peopleStore;
-  const { isFiltered, isFilteredOnlyBySearch } = filterStore;
+  const { viewAs: accountsViewAs, filterStore } = peopleStore;
+  const { isFiltered } = filterStore;
 
   const {
     setSelection: setPeopleSelection,
@@ -112,14 +105,12 @@ export default inject(({ peopleStore }) => {
   return {
     accountsViewAs,
     isFiltered,
-    isFilteredOnlyBySearch,
     setPeopleSelection,
     setGroupsSelection,
     setPeopleBufferSelection,
     setGroupsBufferSelection,
     setChangeOwnerDialogVisible,
     selectUser,
-    peopleWithGroups,
   };
 })(
   withTranslation(["People", "Common", "PeopleTranslations"])(

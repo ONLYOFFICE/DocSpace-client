@@ -76,7 +76,7 @@ const FilesSelector = ({
 
   onSelectFolder,
   onSetBaseFolderPath,
-  //onSetNewFolderPath,
+  // onSetNewFolderPath,
   setIsDataReady,
   onSelectTreeNode,
   onSave,
@@ -162,8 +162,8 @@ const FilesSelector = ({
   } = useLoadersHelper({ items });
 
   useEffect(() => {
-    setIsDataReady && setIsDataReady(!showLoader);
-  }, [showLoader]);
+    setIsDataReady?.(!showLoader);
+  }, [showLoader, setIsDataReady]);
 
   const { isRoot, setIsRoot, getRootData } = useRootHelper({
     setIsBreadCrumbsLoading,
@@ -312,7 +312,7 @@ const FilesSelector = ({
         setItems(null);
 
         const idx = breadCrumbs.findIndex(
-          (value) => value.id.toString() === item.id.toString()
+          (value) => value.id.toString() === item.id.toString(),
         );
 
         const maxLength = breadCrumbs.length - 1;
@@ -321,7 +321,7 @@ const FilesSelector = ({
         const newBreadCrumbs = breadCrumbs.map((item, index) => {
           if (!foundParentId) {
             currentFolderIndex = disabledItems.findIndex(
-              (id) => id === item?.id
+              (id) => id === item?.id,
             );
           }
 
@@ -405,7 +405,7 @@ const FilesSelector = ({
     items: any,
     accessRights: any,
     fileName: string,
-    isChecked: boolean
+    isChecked: boolean,
   ) => {
     const isPublic =
       breadCrumbs.findIndex((f: any) => f.roomType === RoomsType.PublicRoom) >
@@ -502,7 +502,7 @@ const FilesSelector = ({
     isMove,
     isSelect,
     filterParam,
-    isRestore
+    isRestore,
   );
 
   const acceptButtonLabel = getAcceptButtonLabel(
@@ -513,7 +513,7 @@ const FilesSelector = ({
     isMove,
     isSelect,
     filterParam,
-    isRestore
+    isRestore,
   );
 
   const isDisabled = getIsDisabled(
@@ -530,7 +530,7 @@ const FilesSelector = ({
     filterParam,
     !!selectedFileInfo,
     includeFolder,
-    isRestore
+    isRestore,
   );
 
   const SelectorBody = (
@@ -644,7 +644,7 @@ export default inject(
       filesStore,
       infoPanelStore,
     }: any,
-    { isCopy, isRestoreAll, isMove, isRestore, isPanelVisible, id }: any
+    { isCopy, isRestoreAll, isMove, isRestore, isPanelVisible, id }: any,
   ) => {
     const { id: selectedId, parentId, rootFolderType } = selectedFolderStore;
 
@@ -770,5 +770,5 @@ export default inject(
 
       roomsFolderId,
     };
-  }
+  },
 )(observer(FilesSelector));

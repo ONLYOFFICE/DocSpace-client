@@ -70,7 +70,7 @@ const RoomSelector = ({
   const [items, setItems] = React.useState<TSelectorItem[]>([]);
 
   useEffect(() => {
-    setIsDataReady(!isFirstLoad);
+    setIsDataReady?.(!isFirstLoad);
   }, [isFirstLoad, setIsDataReady]);
 
   const onSearchAction = React.useCallback(
@@ -120,22 +120,19 @@ const RoomSelector = ({
 
       const rooms = convertToItems(folders);
 
-      const itemList = rooms.filter((x) => !excludeItems.includes(x.id));
-
       setHasNextPage(count === PAGE_COUNT);
 
-      if (isFirstLoad) {
-        setTotal(totalCount);
-        setItems(itemList);
-      } else {
-        setItems((value) => [...value, ...itemList]);
-      }
+      setItems((prevItems) => {
+        const newItems = rooms.filter((x) => !excludeItems.includes(x.id));
 
-      if (isFirstLoad) {
-        setTimeout(() => {
+        if (isFirstLoad) {
+          setTotal(totalCount);
           setIsFirstLoad(false);
-        }, 500);
-      }
+          return newItems;
+        }
+
+        return [...prevItems, ...newItems];
+      });
 
       setIsNextPageLoading(false);
     },
@@ -144,7 +141,7 @@ const RoomSelector = ({
 
   React.useEffect(() => {
     onLoadNextPage(0);
-  }, [onLoadNextPage]);
+  }, []);
 
   return (
     <Selector
@@ -207,3 +204,4 @@ const RoomSelector = ({
 };
 
 export default RoomSelector;
+

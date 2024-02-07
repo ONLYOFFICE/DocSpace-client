@@ -2,10 +2,13 @@ import { makeAutoObservable } from "mobx";
 import * as groupsApi from "@docspace/shared/api/groups";
 import { Events } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
+import Filter from "@docspace/shared/api/groups/filter";
 
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
+import config from "PACKAGE_FILE";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 class GroupsStore {
   authStore;
@@ -17,16 +20,49 @@ class GroupsStore {
 
   currentGroup = null;
 
+  filter = Filter.getDefault();
+
   constructor(peopleStore: any, authStore: any) {
     this.authStore = authStore;
     this.peopleStore = peopleStore;
     makeAutoObservable(this);
   }
 
+  setFilter = (filter) => {
+    this.filter = filter;
+  };
+
+  setFilterUrl = (filter) => {
+    const urlFilter = filter.toUrlParams();
+
+    const newPath = combineUrl(`/accounts/groups/filter?${urlFilter}`);
+    const currentPath = window.location.pathname + window.location.search;
+
+    if (currentPath === newPath) return;
+
+    window.history.replaceState(
+      "",
+      "",
+      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, newPath),
+    );
+  };
+
+  setFilterParams = (filter) => {
+    this.setFilterUrl(filter);
+    this.setFilter(filter);
+  };
+
   setCurrentGroup = (currentGroup) => (this.currentGroup = currentGroup);
 
-  getGroups = async () => {
-    const res = await groupsApi.getGroups();
+  getGroups = async (filter, updateFilter = false) => {
+    const filterData = filter ? filter.clone() : Filter.getDefault();
+
+    const res = await groupsApi.getGroups(filterData);
+    filterData.total = res.total;
+
+    if (updateFilter) {
+      this.setFilterParams(filterData);
+    }
     console.log(res);
     this.groups = res.items;
   };

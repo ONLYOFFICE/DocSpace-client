@@ -1,4 +1,4 @@
-﻿import React, { useCallback, useEffect } from "react";
+﻿import React, { useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -6,34 +6,33 @@ import { withTranslation } from "react-i18next";
 import find from "lodash/find";
 import result from "lodash/result";
 
-import { isTablet, isMobile } from "@docspace/shared/utils";
+import { isMobile, isTablet } from "@docspace/shared/utils";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
 import FilterInput from "@docspace/shared/components/filter";
-import Loaders from "@docspace/common/components/Loaders";
 import { withLayoutSize } from "@docspace/shared/HOC/withLayoutSize";
-import { getUser } from "@docspace/shared/api/people";
+import { getUser, getUserById } from "@docspace/shared/api/people";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import AccountsFilter from "@docspace/shared/api/people/filter";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import {
-  FilterGroups,
-  FilterKeys,
-  FilterType,
-  RoomsType,
-  RoomsProviderType,
-  FilterSubject,
-  RoomSearchArea,
-  EmployeeType,
-  EmployeeStatus,
-  PaymentsType,
   AccountLoginType,
   DeviceType,
+  EmployeeStatus,
+  EmployeeType,
+  FilterGroups,
+  FilterKeys,
+  FilterSubject,
+  FilterType,
+  PaymentsType,
+  RoomSearchArea,
+  RoomsProviderType,
+  RoomsType,
 } from "@docspace/shared/enums";
 import { ROOMS_PROVIDER_TYPE_NAME } from "@docspace/shared/constants";
 
 import { getDefaultRoomName } from "SRC_DIR/helpers/filesUtils";
 
-import { TableVersions, SSO_LABEL } from "SRC_DIR/helpers/constants";
+import { SSO_LABEL, TableVersions } from "SRC_DIR/helpers/constants";
 import { SortByFieldName } from "SRC_DIR/helpers/enums";
 
 import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
@@ -138,6 +137,25 @@ const getSubjectId = (filterValues) => {
   );
 
   return filterOwner ? filterOwner : null;
+};
+
+const getGroupMemberId = (filterValues, userId) => {
+  const filterMember = result(
+    find(filterValues, (value) => {
+      return value.group === FilterGroups.groupsFilterMember;
+    }),
+    "key",
+  );
+
+  if (!filterMember) {
+    return null;
+  }
+
+  return filterMember === FilterKeys.me ? userId : filterMember;
+};
+
+const getSearchByManager = (filterValues) => {
+  return filterValues.some((v) => v.group === FilterGroups.groupsFilterManager);
 };
 
 const getStatus = (filterValues) => {
@@ -253,6 +271,7 @@ const SectionFilterContent = ({
   canSearchByContent,
   accountsViewAs,
   groups,
+  groupsFilter,
 
   accountsFilter,
   showFilterLoader,
@@ -267,6 +286,8 @@ const SectionFilterContent = ({
   const navigate = useNavigate();
 
   const isAccountsPage = location.pathname.includes("accounts");
+  const isPeopleAccounts = location.pathname.includes("accounts/people");
+  const isGroupsAccounts = location.pathname.includes("accounts/groups");
 
   const [selectedFilterValues, setSelectedFilterValues] = React.useState(null);
 
@@ -281,7 +302,7 @@ const SectionFilterContent = ({
   const onFilter = React.useCallback(
     (data) => {
       setIsLoading(true);
-      if (isAccountsPage) {
+      if (isPeopleAccounts) {
         const status = getStatus(data);
 
         const role = getRole(data);
@@ -316,6 +337,20 @@ const SectionFilterContent = ({
         newFilter.accountLoginType = accountLoginType;
 
         navigate(`accounts/people/filter?${newFilter.toUrlParams()}`);
+      } else if (isGroupsAccounts) {
+        const newFilter = groupsFilter.clone();
+
+        const memberId = getGroupMemberId(data, userId);
+        const searchByManager = getSearchByManager(data);
+
+        newFilter.page = 0;
+        newFilter.userId = memberId;
+
+        if (memberId) {
+          newFilter.searchByManager = searchByManager;
+        }
+
+        navigate(`accounts/groups/filter?${newFilter.toUrlParams()}`);
       } else if (isRooms) {
         const type = getType(data) || null;
 
@@ -408,9 +443,11 @@ const SectionFilterContent = ({
       setIsLoading,
       roomsFilter,
       accountsFilter,
+      groupsFilter,
       filter,
 
-      isAccountsPage,
+      isPeopleAccounts,
+      isGroupsAccounts,
       location.pathname,
     ],
   );
@@ -465,11 +502,15 @@ const SectionFilterContent = ({
 
       setIsLoading(true);
       if (isAccountsPage) {
-        const newFilter = accountsFilter.clone();
+        const newFilter = isGroupsAccounts
+          ? groupsFilter.clone()
+          : accountsFilter.clone();
+        const subModule = isGroupsAccounts ? "groups" : "people";
+
         newFilter.page = 0;
         newFilter.search = searchValue;
 
-        navigate(`accounts/people/filter?${newFilter.toUrlParams()}`);
+        navigate(`accounts/${subModule}/filter?${newFilter.toUrlParams()}`);
       } else if (isRooms) {
         const newFilter = roomsFilter.clone();
 
@@ -495,11 +536,14 @@ const SectionFilterContent = ({
     [
       isRooms,
       isAccountsPage,
+      isPeopleAccounts,
+      isGroupsAccounts,
       setIsLoading,
 
       filter,
       roomsFilter,
       accountsFilter,
+      groupsFilter,
       location.pathname,
     ],
   );
@@ -509,19 +553,23 @@ const SectionFilterContent = ({
       const sortBy = sortId;
       const sortOrder = sortDirection === "desc" ? "descending" : "ascending";
 
-      const newFilter = isAccountsPage
+      const newFilter = isPeopleAccounts
         ? accountsFilter.clone()
-        : isRooms
-          ? roomsFilter.clone()
-          : filter.clone();
+        : isGroupsAccounts
+          ? groupsFilter.clone()
+          : isRooms
+            ? roomsFilter.clone()
+            : filter.clone();
       newFilter.page = 0;
       newFilter.sortBy = sortBy;
       newFilter.sortOrder = sortOrder;
 
       setIsLoading(true);
 
-      if (isAccountsPage) {
+      if (isPeopleAccounts) {
         navigate(`accounts/people/filter?${newFilter.toUrlParams()}`);
+      } else if (isGroupsAccounts) {
+        navigate(`accounts/groups/filter?${newFilter.toUrlParams()}`);
       } else if (isRooms) {
         const path =
           newFilter.searchArea === RoomSearchArea.Active
@@ -538,10 +586,13 @@ const SectionFilterContent = ({
     [
       isRooms,
       isAccountsPage,
+      isPeopleAccounts,
+      isGroupsAccounts,
       setIsLoading,
       filter,
       roomsFilter,
       accountsFilter,
+      groupsFilter,
     ],
   );
 
@@ -569,27 +620,36 @@ const SectionFilterContent = ({
       ? accountsFilter.search
         ? accountsFilter.search
         : ""
-      : isRooms
-        ? roomsFilter.filterValue
-          ? roomsFilter.filterValue
+      : isGroupsAccounts
+        ? groupsFilter.search
+          ? groupsFilter.search
           : ""
-        : filter.search
-          ? filter.search
-          : "";
+        : isRooms
+          ? roomsFilter.filterValue
+            ? roomsFilter.filterValue
+            : ""
+          : filter.search
+            ? filter.search
+            : "";
   }, [
     isRooms,
     isAccountsPage,
+    isPeopleAccounts,
+    isGroupsAccounts,
     roomsFilter.filterValue,
     filter.search,
     accountsFilter.search,
+    groupsFilter.search,
   ]);
 
   const getSelectedSortData = React.useCallback(() => {
-    const currentFilter = isAccountsPage
+    const currentFilter = isPeopleAccounts
       ? accountsFilter
-      : isRooms
-        ? roomsFilter
-        : filter;
+      : isGroupsAccounts
+        ? groupsFilter
+        : isRooms
+          ? roomsFilter
+          : filter;
     return {
       sortDirection: currentFilter.sortOrder === "ascending" ? "asc" : "desc",
       sortId: currentFilter.sortBy,
@@ -597,116 +657,151 @@ const SectionFilterContent = ({
   }, [
     isRooms,
     isAccountsPage,
+    isPeopleAccounts,
+    isGroupsAccounts,
     filter.sortOrder,
     filter.sortBy,
     roomsFilter.sortOrder,
     roomsFilter.sortBy,
     accountsFilter.sortOrder,
     accountsFilter.sortBy,
+    groupsFilter.sortOrder,
+    groupsFilter.sortBy,
   ]);
 
   const getSelectedFilterData = React.useCallback(async () => {
     const filterValues = [];
 
     if (isAccountsPage) {
-      if (accountsFilter.employeeStatus || accountsFilter.activationStatus) {
-        const key =
-          accountsFilter.employeeStatus === 2
-            ? 3
-            : accountsFilter.activationStatus;
-        let label = "";
+      if (isPeopleAccounts) {
+        if (accountsFilter.employeeStatus || accountsFilter.activationStatus) {
+          const key =
+            accountsFilter.employeeStatus === 2
+              ? 3
+              : accountsFilter.activationStatus;
+          let label = "";
 
-        switch (key) {
-          case 1:
-            label = t("Common:Active");
-            break;
-          case 2:
-            label = t("PeopleTranslations:PendingTitle");
-            break;
-          case 3:
-            label = t("PeopleTranslations:DisabledEmployeeStatus");
-            break;
-        }
+          switch (key) {
+            case 1:
+              label = t("Common:Active");
+              break;
+            case 2:
+              label = t("PeopleTranslations:PendingTitle");
+              break;
+            case 3:
+              label = t("PeopleTranslations:DisabledEmployeeStatus");
+              break;
+          }
 
-        filterValues.push({
-          key,
-          label,
-          group: "filter-status",
-        });
-      }
-
-      if (accountsFilter.role) {
-        let label = null;
-
-        switch (+accountsFilter.role) {
-          case EmployeeType.Admin:
-            label = t("Common:DocSpaceAdmin");
-            break;
-          case EmployeeType.User:
-            label = t("Common:RoomAdmin");
-            break;
-          case EmployeeType.Collaborator:
-            label = t("Common:PowerUser");
-            break;
-          case EmployeeType.Guest:
-            label = t("Common:User");
-            break;
-          default:
-            label = "";
-        }
-
-        filterValues.push({
-          key: +accountsFilter.role,
-          label: label,
-          group: "filter-type",
-        });
-      }
-
-      if (accountsFilter?.payments?.toString()) {
-        filterValues.push({
-          key: accountsFilter.payments.toString(),
-          label:
-            PaymentsType.Paid === accountsFilter.payments.toString()
-              ? t("Common:Paid")
-              : t("Common:Free"),
-          group: "filter-account",
-        });
-      }
-
-      if (accountsFilter?.accountLoginType?.toString()) {
-        const label =
-          AccountLoginType.SSO === accountsFilter.accountLoginType.toString()
-            ? SSO_LABEL
-            : AccountLoginType.LDAP ===
-                accountsFilter.accountLoginType.toString()
-              ? t("PeopleTranslations:LDAPLbl")
-              : t("PeopleTranslations:StandardLogin");
-        filterValues.push({
-          key: accountsFilter.accountLoginType.toString(),
-          label: label,
-          group: "filter-login-type",
-        });
-      }
-
-      if (accountsFilter.group) {
-        const groupId = accountsFilter.group;
-        const group = await getGroupById(groupId);
-
-        if (group) {
           filterValues.push({
-            key: groupId,
+            key,
+            label,
+            group: "filter-status",
+          });
+        }
+
+        if (accountsFilter.role) {
+          let label = null;
+
+          switch (+accountsFilter.role) {
+            case EmployeeType.Admin:
+              label = t("Common:DocSpaceAdmin");
+              break;
+            case EmployeeType.User:
+              label = t("Common:RoomAdmin");
+              break;
+            case EmployeeType.Collaborator:
+              label = t("Common:PowerUser");
+              break;
+            case EmployeeType.Guest:
+              label = t("Common:User");
+              break;
+            default:
+              label = "";
+          }
+
+          filterValues.push({
+            key: +accountsFilter.role,
+            label: label,
+            group: "filter-type",
+          });
+        }
+
+        if (accountsFilter?.payments?.toString()) {
+          filterValues.push({
+            key: accountsFilter.payments.toString(),
+            label:
+              PaymentsType.Paid === accountsFilter.payments.toString()
+                ? t("Common:Paid")
+                : t("Common:Free"),
+            group: "filter-account",
+          });
+        }
+
+        if (accountsFilter?.accountLoginType?.toString()) {
+          const label =
+            AccountLoginType.SSO === accountsFilter.accountLoginType.toString()
+              ? SSO_LABEL
+              : AccountLoginType.LDAP ===
+                  accountsFilter.accountLoginType.toString()
+                ? t("PeopleTranslations:LDAPLbl")
+                : t("PeopleTranslations:StandardLogin");
+          filterValues.push({
+            key: accountsFilter.accountLoginType.toString(),
+            label: label,
+            group: "filter-login-type",
+          });
+        }
+
+        if (accountsFilter.group) {
+          const groupId = accountsFilter.group;
+          const group = await getGroupById(groupId);
+
+          if (group) {
+            filterValues.push({
+              key: groupId,
+              group: FilterGroups.filterGroup,
+              label: group.name,
+            });
+          }
+        }
+
+        if (accountsFilter.withoutGroup) {
+          filterValues.push({
+            key: FilterKeys.withoutGroup,
+            label: t("PeopleTranslations:WithoutGroup"),
             group: FilterGroups.filterGroup,
-            label: group.name,
           });
         }
       }
 
-      if (accountsFilter.withoutGroup) {
-        filterValues.push({
-          key: FilterKeys.withoutGroup,
-          label: t("PeopleTranslations:WithoutGroup"),
-          group: FilterGroups.filterGroup,
-        });
+      if (isGroupsAccounts) {
+        if (groupsFilter.userId) {
+          const memberId = groupsFilter.userId;
+          const member = await getUserById(memberId);
+          const isMe = userId === groupsFilter.userId;
+
+          const label = isMe ? t("Common:MeLabel") : member.displayName;
+
+          const memberFilterValue = {
+            key: isMe ? FilterKeys.me : groupsFilter.userId,
+            group: FilterGroups.groupsFilterMember,
+            label,
+          };
+
+          if (groupsFilter.searchByManager) {
+            memberFilterValue.selectedLabel = `${t("Common:HeadOfGroup")}: ${label}`;
+          }
+
+          filterValues.push(memberFilterValue);
+        }
+
+        if (groupsFilter.searchByManager) {
+          filterValues.push({
+            key: FilterKeys.byManager,
+            group: FilterGroups.groupsFilterManager,
+          });
+        }
       }
 
       const currentFilterValues = [];
@@ -995,6 +1090,8 @@ const SectionFilterContent = ({
     userId,
     isRooms,
     isAccountsPage,
+
+    isPeopleAccounts,
     accountsFilter.employeeStatus,
     accountsFilter.activationStatus,
     accountsFilter.role,
@@ -1002,11 +1099,15 @@ const SectionFilterContent = ({
     accountsFilter.group,
     accountsFilter.accountLoginType,
     accountsFilter.withoutGroup,
+
+    isGroupsAccounts,
+    groupsFilter.userId,
+    groupsFilter.searchByManager,
     t,
   ]);
 
   const getFilterData = React.useCallback(async () => {
-    if (isAccountsPage) {
+    if (isPeopleAccounts) {
       const groupItems = [
         {
           key: FilterGroups.filterGroup,
@@ -1184,6 +1285,61 @@ const SectionFilterContent = ({
       if (!standalone) filterOptions.push(...accountItems);
       // filterOptions.push(...roomItems);
       filterOptions.push(...accountLoginTypeItems);
+
+      return filterOptions;
+    }
+
+    if (isGroupsAccounts) {
+      const memberOptions = [
+        {
+          key: FilterGroups.groupsFilterMember,
+          group: FilterGroups.groupsFilterMember,
+          label: t("Common:Member"),
+          isHeader: true,
+          withoutSeparator: true,
+        },
+        {
+          id: "filter_group-member-me",
+          key: FilterKeys.me,
+          group: FilterGroups.groupsFilterMember,
+          label: t("Common:MeLabel"),
+        },
+        {
+          id: "filter_group-member-other",
+          key: FilterKeys.other,
+          group: FilterGroups.groupsFilterMember,
+          label: t("Common:OtherLabel"),
+        },
+        {
+          id: "filter_group-member-user",
+          key: FilterKeys.user,
+          group: FilterGroups.groupsFilterMember,
+          displaySelectorType: "link",
+        },
+      ];
+
+      const managerOptions = [
+        {
+          key: FilterGroups.groupsFilterManager,
+          group: FilterGroups.groupsFilterManager,
+          isHeader: true,
+          withoutHeader: true,
+          withoutSeparator: true,
+        },
+        {
+          id: "filter_group-manager",
+          key: FilterKeys.byManager,
+          group: FilterGroups.groupsFilterManager,
+          label: t("Translations:SearchByHeadOfGroup"),
+          isDisabled: true,
+          isCheckbox: true,
+        },
+      ];
+
+      const filterOptions = [];
+
+      filterOptions.push(...memberOptions);
+      filterOptions.push(...managerOptions);
 
       return filterOptions;
     }
@@ -1610,6 +1766,8 @@ const SectionFilterContent = ({
     isPersonalRoom,
     isRooms,
     isAccountsPage,
+    isPeopleAccounts,
+    isGroupsAccounts,
     isFavoritesFolder,
     isRecentTab,
     isTrash,
@@ -1637,7 +1795,7 @@ const SectionFilterContent = ({
   }, [createThumbnails]);
 
   const getSortData = React.useCallback(() => {
-    if (isAccountsPage) {
+    if (isPeopleAccounts) {
       return [
         {
           id: "sory-by_first-name",
@@ -1661,6 +1819,23 @@ const SectionFilterContent = ({
           id: "sory-by_email",
           key: "email",
           label: t("Common:Email"),
+          default: true,
+        },
+      ];
+    }
+
+    if (isGroupsAccounts) {
+      return [
+        {
+          id: "sort-by_title",
+          key: "title",
+          label: t("Common:Title"),
+          default: true,
+        },
+        {
+          id: "sort-by_manager",
+          key: "Head of Group",
+          label: t("Common:HeadOfGroup"),
           default: true,
         },
       ];
@@ -1930,6 +2105,8 @@ const SectionFilterContent = ({
     personal,
     isRooms,
     isAccountsPage,
+    isPeopleAccounts,
+    isGroupsAccounts,
     t,
     userId,
     infoPanelVisible,
@@ -1941,7 +2118,7 @@ const SectionFilterContent = ({
   const removeSelectedItem = React.useCallback(
     ({ key, group }) => {
       setIsLoading(true);
-      if (isAccountsPage) {
+      if (isPeopleAccounts) {
         const newFilter = accountsFilter.clone();
         newFilter.page = 0;
 
@@ -1972,6 +2149,20 @@ const SectionFilterContent = ({
         }
 
         navigate(`accounts/people/filter?${newFilter.toUrlParams()}`);
+      } else if (isGroupsAccounts) {
+        const newFilter = groupsFilter.clone();
+        newFilter.page = 0;
+
+        if (group === FilterGroups.groupsFilterManager) {
+          newFilter.searchByManager = false;
+        }
+
+        if (group === FilterGroups.groupsFilterMember) {
+          newFilter.userId = null;
+          newFilter.searchByManager = false;
+        }
+
+        navigate(`accounts/groups/filter?${newFilter.toUrlParams()}`);
       } else if (isRooms) {
         const newFilter = roomsFilter.clone();
 
@@ -2054,10 +2245,13 @@ const SectionFilterContent = ({
     [
       isRooms,
       isAccountsPage,
+      isPeopleAccounts,
+      isGroupsAccounts,
       setIsLoading,
       roomsFilter,
       filter,
       accountsFilter,
+      groupsFilter,
     ],
   );
 
@@ -2070,9 +2264,12 @@ const SectionFilterContent = ({
   const clearAll = () => {
     setIsLoading(true);
     if (isAccountsPage) {
-      const newFilter = AccountsFilter.getDefault();
+      const newFilter = isGroupsAccounts
+        ? groupsFilter.getDefault()
+        : AccountsFilter.getDefault();
+      const subModule = isGroupsAccounts ? "groups" : "people";
 
-      navigate(`accounts/people/filter?${newFilter.toUrlParams()}`);
+      navigate(`accounts/${subModule}/filter?${newFilter.toUrlParams()}`);
     } else if (isRooms) {
       const newFilter = RoomsFilter.getDefault();
 
@@ -2189,7 +2386,7 @@ export default inject(
       viewAs: accountsViewAs,
     } = peopleStore;
 
-    const { groups } = groupsStore;
+    const { groups, filter: groupsFilter } = groupsStore;
 
     const { filter: accountsFilter } = filterStore;
     const { isPublicRoom, publicRoomKey } = publicRoomStore;
@@ -2234,10 +2431,9 @@ export default inject(
 
       canSearchByContent,
 
-      user,
-
       accountsViewAs,
       groups,
+      groupsFilter,
 
       accountsFilter,
       isPublicRoom,

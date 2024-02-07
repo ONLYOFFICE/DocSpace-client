@@ -138,6 +138,8 @@ const PureHome = (props) => {
     location.pathname.includes("settings") &&
     !location.pathname.includes("settings/plugins");
   const isAccountsPage = location.pathname.includes("/accounts");
+  const isPeopleAccounts = location.pathname.includes("accounts/people");
+  const isGroupsAccounts = location.pathname.includes("accounts/groups");
 
   const { onDrop } = useFiles({
     t,
@@ -187,6 +189,7 @@ const PureHome = (props) => {
   useAccounts({
     t,
     isAccountsPage,
+    isPeopleAccounts,
     location,
 
     setIsLoading,
@@ -200,6 +203,7 @@ const PureHome = (props) => {
   useGroups({
     t,
     isAccountsPage,
+    isGroupsAccounts,
     location,
 
     setIsLoading,
@@ -616,5 +620,5 @@ export default inject(
       getRooms,
       setSelectedFolder,
     };
-  }
+  },
 )(observer(Home));

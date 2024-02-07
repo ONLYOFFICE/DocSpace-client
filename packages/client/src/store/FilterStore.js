@@ -19,9 +19,9 @@ class FilterStore {
   setFilterUrl = (filter) => {
     const urlFilter = filter.toUrlParams();
 
-    const isPeople = window.location.pathname.includes("/accounts/people");
-    const module = isPeople ? "people" : "groups";
-    const newPath = combineUrl(`/accounts/${module}/filter?${urlFilter}`);
+    // const isPeople = window.location.pathname.includes("/accounts/people");
+    // const module = isPeople ? "people" : "groups";
+    const newPath = combineUrl(`/accounts/people/filter?${urlFilter}`);
 
     console.log(window.location.pathname + window.location.search === newPath);
 

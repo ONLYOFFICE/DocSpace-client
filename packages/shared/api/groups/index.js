@@ -1,4 +1,7 @@
+import Filter from "./filter";
+
 import { request } from "../client";
+import { checkFilterInstance } from "../../utils/common";
 
 // * Create
 
@@ -16,10 +19,18 @@ export const createGroup = (groupName, groupManager, members) => {
 
 // * Read
 
-export const getGroups = (withMembers = true) => {
+export const getGroups = (filter = Filter.getDefault()) => {
+  let params = "";
+
+  if (filter) {
+    checkFilterInstance(filter, Filter);
+
+    params = `?${filter.toApiUrlParams()}`;
+  }
+
   return request({
     method: "get",
-    url: `/group?withMembers=${withMembers}`,
+    url: `/group${params}`,
   });
 };
 

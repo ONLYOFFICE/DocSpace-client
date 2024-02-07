@@ -63,6 +63,7 @@ export type TSelectorItem = {
 };
 
 export type TToggleButtonItem = {
+  group: FilterGroups;
   key: string;
   label?: string;
   isSelected?: boolean;
@@ -70,6 +71,7 @@ export type TToggleButtonItem = {
 };
 
 export type TWithOptionItem = {
+  group: FilterGroups;
   options: TOption[];
   withOptions?: boolean;
   id?: string;
@@ -78,6 +80,7 @@ export type TWithOptionItem = {
 };
 
 export type TCheckboxItem = {
+  group: FilterGroups;
   key: string;
   id: string;
   label?: string;

@@ -7,6 +7,7 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 const useAccounts = ({
   t,
   isAccountsPage,
+  isPeopleAccounts,
   location,
 
   setIsLoading,
@@ -17,7 +18,7 @@ const useAccounts = ({
   setPortalTariff,
 }) => {
   React.useEffect(() => {
-    if (!isAccountsPage) return;
+    if (!isAccountsPage || !isPeopleAccounts) return;
     setIsLoading(true);
     setSelectedNode(["accounts", "people", "filter"]);
 
@@ -40,7 +41,7 @@ const useAccounts = ({
       .finally(() => {
         setIsLoading(false);
       });
-  }, [isAccountsPage, location.pathname, location.search]);
+  }, [isAccountsPage, isPeopleAccounts, location.pathname, location.search]);
 };
 
 export default useAccounts;

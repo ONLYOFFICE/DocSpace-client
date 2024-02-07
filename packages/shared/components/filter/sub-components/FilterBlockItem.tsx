@@ -220,7 +220,8 @@ const FilterBlockItem = ({
     if (
       item.group === FilterGroups.filterAuthor ||
       item.group === FilterGroups.roomFilterSubject ||
-      item.group === FilterGroups.filterGroup
+      item.group === FilterGroups.filterGroup ||
+      item.group === FilterGroups.groupsFilterMember
     ) {
       const [notSelectorItem, otherItem, selectorItem] = groupItem;
 

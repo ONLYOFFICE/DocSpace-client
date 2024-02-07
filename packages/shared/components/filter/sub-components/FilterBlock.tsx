@@ -18,14 +18,18 @@ import { Portal } from "../../portal";
 import { TSelectorItem } from "../../selector";
 
 import {
-  StyledFilterBlock,
-  StyledFilterBlockHeader,
-  StyledFilterBlockFooter,
   StyledControlContainer,
   StyledCrossIcon,
+  StyledFilterBlock,
+  StyledFilterBlockFooter,
+  StyledFilterBlockHeader,
 } from "../Filter.styled";
 
 import { FilterBlockProps, TGroupItem, TItem } from "../Filter.types";
+import {
+  removeGroupManagerFilterValueIfNeeded,
+  syncGroupManagerCheckBox,
+} from "../Filter.utils";
 
 import FilterBlockItem from "./FilterBlockItem";
 
@@ -76,6 +80,8 @@ const FilterBlock = ({
       )
         filterOwner.groupItem[0].isDisabled = !isSelected;
     }
+
+    syncGroupManagerCheckBox(data);
 
     setFilterData(data);
   };
@@ -216,6 +222,8 @@ const FilterBlock = ({
             (item) => "group" in item && item.group !== group,
           );
         }
+
+        value = removeGroupManagerFilterValueIfNeeded(value);
 
         setFilterValues(value);
         changeSelectedItems(value);

@@ -123,6 +123,6 @@ export default inject(({ peopleStore }) => {
   };
 })(
   withTranslation(["People", "Common", "PeopleTranslations"])(
-    withLoader(observer(SectionBodyContent))()
-  )
+    withLoader(observer(SectionBodyContent))(),
+  ),
 );

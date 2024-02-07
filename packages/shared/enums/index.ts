@@ -377,6 +377,8 @@ export const enum FilterGroups {
   roomFilterFolders = "filter-withSubfolders",
   roomFilterContent = "filter-content",
   filterGroup = "filter-group",
+  groupsFilterMember = "filter-group-member",
+  groupsFilterManager = "filter-group-manager",
 }
 
 export const enum FilterKeys {
@@ -388,6 +390,7 @@ export const enum FilterKeys {
   user = "user",
   withoutGroup = "withoutGroup",
   selectedGroup = "selectedGroup",
+  byManager = "byManager",
 }
 
 export const enum IndexedDBStores {

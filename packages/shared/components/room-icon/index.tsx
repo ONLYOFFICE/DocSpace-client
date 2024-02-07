@@ -1,3 +1,5 @@
+import React from "react";
+
 import styled, { css } from "styled-components";
 import { Base } from "../../themes";
 import { Text } from "../text";
@@ -96,6 +98,8 @@ const RoomIcon = ({
   badgeUrl,
   onBadgeClick,
 }: RoomIconProps) => {
+  const [correctImage, setCorrectImage] = React.useState(true);
+
   const titleWithoutSpaces = title.replace(/\s+/g, " ").trim();
   const indexAfterLastSpace = titleWithoutSpaces.lastIndexOf(" ");
   const secondCharacter =
@@ -105,7 +109,24 @@ const RoomIcon = ({
 
   const roomTitle = (title[0] + secondCharacter).toUpperCase();
 
-  return showDefault ? (
+  const prefetchImage = React.useCallback(() => {
+    if (!imgSrc) return;
+    const img = new Image();
+
+    img.src = imgSrc;
+
+    img.onerror = () => {
+      setCorrectImage(false);
+    };
+  }, [imgSrc]);
+
+  console.log(color);
+
+  React.useEffect(() => {
+    prefetchImage();
+  }, [prefetchImage]);
+
+  return showDefault || !correctImage ? (
     <StyledIcon
       color={color}
       size={size}

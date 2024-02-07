@@ -8,7 +8,7 @@ import { Text } from "@docspace/shared/components/text";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { toastr } from "@docspace/shared/components/toast";
-import { parseAddresses } from "@docspace/shared/utils";
+import { parseAddresses, getParts } from "@docspace/shared/utils";
 import { ComboBox } from "@docspace/shared/components/combobox";
 
 import Filter from "@docspace/shared/api/people/filter";
@@ -149,12 +149,15 @@ const InviteInput = ({
     const regex =
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{0,}))$/g;
 
-    if (regex.test(clearValue)) {
-      setIsAddEmailPanelBlocked(false);
-      if (roomId !== -1) {
-        debouncedSearch(clearValue);
+    const parts = getParts(value);
+    for (let i = 0; i < parts.length; i += 1) {
+      if (regex.test(parts[i])) {
+        setIsAddEmailPanelBlocked(false);
+        if (roomId !== -1) {
+          debouncedSearch(clearValue);
 
-        return;
+          return;
+        }
       }
     }
   };

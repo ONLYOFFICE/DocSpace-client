@@ -66,6 +66,7 @@ const InviteInput = ({
   const [isAddEmailPanelBlocked, setIsAddEmailPanelBlocked] = useState(true);
 
   const [selectedAccess, setSelectedAccess] = useState(defaultAccess);
+  const [dropDownWidth, setDropDownWidth] = useState(0);
 
   const searchRef = useRef();
 
@@ -75,6 +76,13 @@ const InviteInput = ({
       label: "",
       isBeta: isBetaLanguage(language),
     };
+
+  useEffect(() => {
+    setTimeout(() => {
+      const width = searchRef?.current?.offsetWidth ?? 0;
+      if (width !== dropDownWidth) setDropDownWidth(width);
+    }, 0);
+  });
 
   useEffect(() => {
     !culture.key &&
@@ -410,13 +418,14 @@ const InviteInput = ({
           <></>
         ) : (
           <StyledDropDown
-            width={searchRef?.current?.offsetWidth}
+            width={dropDownWidth}
             isDefaultMode={false}
             open
             manualX="16px"
             showDisabledItems
             eventTypes="click"
             withBackdrop={false}
+            zIndex={399}
             {...dropDownMaxHeight}
           >
             {!!usersList.length ? foundUsers : addEmailPanel}

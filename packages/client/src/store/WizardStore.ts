@@ -1,34 +1,37 @@
+import { makeAutoObservable } from "mobx";
+
 import {
   getMachineName,
-  setPortalOwner,
   getIsLicenseRequired,
   setLicense,
 } from "@docspace/shared/api/settings";
-import { makeAutoObservable } from "mobx";
 
 class WizardStore {
   isWizardLoaded = false;
+
   isLicenseRequired = false;
+
   machineName = "unknown";
-  licenseUpload = null;
+
+  licenseUpload: null | string = null;
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  setIsWizardLoaded = (isWizardLoaded) => {
+  setIsWizardLoaded = (isWizardLoaded: boolean) => {
     this.isWizardLoaded = isWizardLoaded;
   };
 
-  setMachineName = (machineName) => {
+  setMachineName = (machineName: string) => {
     this.machineName = machineName;
   };
 
-  setIsRequiredLicense = (isRequired) => {
+  setIsRequiredLicense = (isRequired: boolean) => {
     this.isLicenseRequired = isRequired;
   };
 
-  setLicenseUpload = (message) => {
+  setLicenseUpload = (message: null | string) => {
     this.licenseUpload = message;
   };
 
@@ -36,31 +39,9 @@ class WizardStore {
     this.setLicenseUpload(null);
   };
 
-  getMachineName = async (token) => {
+  getMachineName = async (token: string) => {
     const machineName = await getMachineName(token);
     this.machineName = machineName;
-  };
-
-  setPortalOwner = async (
-    email,
-    hash,
-    lng,
-    timeZone,
-    confirmKey,
-    analytics
-  ) => {
-    const response = await setPortalOwner(
-      email,
-      hash,
-      lng,
-      timeZone,
-      confirmKey,
-      analytics
-    );
-
-    console.log("setPortalOwner", response);
-
-    return Promise.resolve(response);
   };
 
   getIsRequiredLicense = async () => {
@@ -69,7 +50,7 @@ class WizardStore {
     this.setIsRequiredLicense(isRequired);
   };
 
-  setLicense = async (confirmKey, data) => {
+  setLicense = async (confirmKey: string, data: FormData) => {
     const message = await setLicense(confirmKey, data);
 
     this.setLicenseUpload(message);

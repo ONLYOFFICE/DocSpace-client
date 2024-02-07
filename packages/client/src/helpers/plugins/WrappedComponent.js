@@ -13,7 +13,7 @@ import { Button } from "@docspace/shared/components/button";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { ComboBox } from "@docspace/shared/components/combobox";
 
-import { PluginComponents } from "./constants";
+import { PluginComponents } from "./enums";
 
 import { messageActions } from "./utils";
 
@@ -74,7 +74,7 @@ const ComponentPure = ({
               component={item}
               pluginName={pluginName}
             />
-          )
+          ),
         );
 
         return <Box {...elementProps}>{childrenComponents}</Box>;
@@ -110,7 +110,7 @@ const ComponentPure = ({
             updateMainButtonItems,
             updateProfileMenuItems,
             updateEventListenerItems,
-            updateFileItems
+            updateFileItems,
           );
         };
 
@@ -139,7 +139,7 @@ const ComponentPure = ({
             updateMainButtonItems,
             updateProfileMenuItems,
             updateEventListenerItems,
-            updateFileItems
+            updateFileItems,
           );
         };
 
@@ -168,11 +168,11 @@ const ComponentPure = ({
             updateMainButtonItems,
             updateProfileMenuItems,
             updateEventListenerItems,
-            updateFileItems
+            updateFileItems,
           );
         };
 
-        return <TextArea {...elementProps} onChange={onChangeAction} />;
+        return <Textarea {...elementProps} onChange={onChangeAction} />;
       }
 
       case PluginComponents.input: {
@@ -197,7 +197,7 @@ const ComponentPure = ({
             updateMainButtonItems,
             updateProfileMenuItems,
             updateEventListenerItems,
-            updateFileItems
+            updateFileItems,
           );
         };
 
@@ -247,7 +247,7 @@ const ComponentPure = ({
             updateEventListenerItems,
             updateFileItems,
 
-            updatePlugin
+            updatePlugin,
           );
 
           setIsRequestRunning && setIsRequestRunning(false);
@@ -306,7 +306,7 @@ const ComponentPure = ({
             updateMainButtonItems,
             updateProfileMenuItems,
             updateEventListenerItems,
-            updateFileItems
+            updateFileItems,
           );
         };
 

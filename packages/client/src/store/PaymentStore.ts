@@ -1,52 +1,79 @@
+/* eslint-disable class-methods-use-this */
+/* eslint-disable no-console */
+import axios from "axios";
+import { makeAutoObservable } from "mobx";
+
 import {
   getPaymentSettings,
   setLicense,
   acceptLicense,
 } from "@docspace/shared/api/settings";
-import { makeAutoObservable } from "mobx";
+import { getPaymentLink } from "@docspace/shared/api/portal";
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
 import { authStore } from "@docspace/shared/store";
-import { getPaymentLink } from "@docspace/shared/api/portal";
-import axios from "axios";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { UserStore } from "@docspace/shared/store/UserStore";
+import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
+import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
+import { PaymentQuotasStore } from "@docspace/shared/store/PaymentQuotasStore";
+import { TTranslation } from "@docspace/shared/types";
+import { TData } from "@docspace/shared/components/toast/Toast.type";
 
 class PaymentStore {
-  userStore = null;
-  currentTariffStatusStore = null;
-  currentQuotaStore = null;
-  paymentQuotasStore = null;
+  userStore: UserStore | null = null;
+
+  currentTariffStatusStore: CurrentTariffStatusStore | null = null;
+
+  currentQuotaStore: CurrentQuotasStore | null = null;
+
+  paymentQuotasStore: PaymentQuotasStore | null = null;
 
   salesEmail = "";
+
   helpUrl = "https://helpdesk.onlyoffice.com";
+
   buyUrl =
     "https://www.onlyoffice.com/enterprise-edition.aspx?type=buyenterprise";
+
   standaloneMode = true;
+
   currentLicense = {
     expiresDate: new Date(),
     trialMode: true,
   };
 
-  paymentLink = null;
-  accountLink = null;
+  paymentLink = "";
+
+  accountLink = "";
+
   isLoading = false;
+
   isUpdatingBasicSettings = false;
+
   totalPrice = 30;
+
   managersCount = 1;
+
   maxAvailableManagersCount = 999;
+
   stepByQuotaForManager = 1;
+
   minAvailableManagersValue = 1;
+
   stepByQuotaForTotalSize = 107374182400;
+
   minAvailableTotalSizeValue = 107374182400;
 
   isInitPaymentPage = false;
+
   isLicenseCorrect = false;
 
   constructor(
-    userStore,
-    currentTariffStatusStore,
-    currentQuotaStore,
-    paymentQuotasStore
+    userStore: UserStore,
+    currentTariffStatusStore: CurrentTariffStatusStore,
+    currentQuotaStore: CurrentQuotasStore,
+    paymentQuotasStore: PaymentQuotasStore,
   ) {
     this.userStore = userStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
@@ -57,20 +84,23 @@ class PaymentStore {
   }
 
   get isAlreadyPaid() {
-    const { customerId } = this.currentTariffStatusStore;
-    const { isFreeTariff } = this.currentQuotaStore;
+    const customerId = this.currentTariffStatusStore?.customerId;
+    const isFreeTariff = this.currentQuotaStore?.isFreeTariff;
 
     return customerId?.length !== 0 || !isFreeTariff;
   }
 
-  setIsInitPaymentPage = (value) => {
+  setIsInitPaymentPage = (value: boolean) => {
     this.isInitPaymentPage = value;
   };
 
-  setIsUpdatingBasicSettings = (isUpdatingBasicSettings) => {
+  setIsUpdatingBasicSettings = (isUpdatingBasicSettings: boolean) => {
     this.isUpdatingBasicSettings = isUpdatingBasicSettings;
   };
+
   basicSettings = async () => {
+    if (!this.currentTariffStatusStore || !this.currentQuotaStore) return;
+
     const { setPortalTariff, setPayerInfo } = this.currentTariffStatusStore;
     const { addedManagersCount } = this.currentQuotaStore;
 
@@ -78,15 +108,14 @@ class PaymentStore {
 
     const requests = [setPortalTariff()];
 
-    this.isAlreadyPaid
-      ? requests.push(this.setPaymentAccount())
-      : requests.push(this.getBasicPaymentLink(addedManagersCount));
+    if (this.isAlreadyPaid) requests.push(this.setPaymentAccount());
+    else requests.push(this.getBasicPaymentLink(addedManagersCount));
 
     try {
       await Promise.all(requests);
       this.setBasicTariffContainer();
     } catch (error) {
-      toastr.error(t("Common:UnexpectedError"));
+      // toastr.error(t("Common:UnexpectedError"));
       console.error(error);
     }
 
@@ -95,12 +124,19 @@ class PaymentStore {
     this.setIsUpdatingBasicSettings(false);
   };
 
-  init = async (t) => {
+  init = async (t: TTranslation) => {
     if (this.isInitPaymentPage) {
       this.basicSettings();
 
       return;
     }
+
+    if (
+      !this.currentTariffStatusStore ||
+      !this.currentQuotaStore ||
+      !this.paymentQuotasStore
+    )
+      return;
 
     const { setPayerInfo } = this.currentTariffStatusStore;
     const { addedManagersCount } = this.currentQuotaStore;
@@ -108,9 +144,8 @@ class PaymentStore {
 
     const requests = [this.getSettingsPayment(), setPortalPaymentQuotas()];
 
-    this.isAlreadyPaid
-      ? requests.push(this.setPaymentAccount())
-      : requests.push(this.getBasicPaymentLink(addedManagersCount));
+    if (this.isAlreadyPaid) requests.push(this.setPaymentAccount());
+    else requests.push(this.getBasicPaymentLink(addedManagersCount));
 
     try {
       await Promise.all(requests);
@@ -129,10 +164,10 @@ class PaymentStore {
     this.setIsInitPaymentPage(true);
   };
 
-  getBasicPaymentLink = async (managersCount) => {
+  getBasicPaymentLink = async (managersCount: number) => {
     const backUrl = combineUrl(
       window.location.origin,
-      "/portal-settings/payments/portal-payments?complete=true"
+      "/portal-settings/payments/portal-payments?complete=true",
     );
 
     try {
@@ -144,14 +179,15 @@ class PaymentStore {
       console.error(err);
     }
   };
+
   getPaymentLink = async (token = undefined) => {
     const backUrl = combineUrl(
       window.location.origin,
-      "/portal-settings/payments/portal-payments?complete=true"
+      "/portal-settings/payments/portal-payments?complete=true",
     );
 
     await getPaymentLink(this.managersCount, backUrl, token)
-      .then((link) => {
+      ?.then((link) => {
         if (!link) return;
         this.setPaymentLink(link);
       })
@@ -163,12 +199,12 @@ class PaymentStore {
           if (err?.response?.status === 402) {
             return;
           }
-          this.isInitPaymentPage && toastr.error(err);
+          if (this.isInitPaymentPage) toastr.error(err);
         }
       });
   };
 
-  standaloneBasicSettings = async (t) => {
+  standaloneBasicSettings = async (t: TTranslation) => {
     const { getTenantExtra } = authStore;
 
     this.setIsUpdatingBasicSettings(true);
@@ -184,7 +220,7 @@ class PaymentStore {
     this.setIsUpdatingBasicSettings(false);
   };
 
-  standaloneInit = async (t) => {
+  standaloneInit = async (t: TTranslation) => {
     const { getTenantExtra } = authStore;
 
     if (this.isInitPaymentPage) {
@@ -203,6 +239,7 @@ class PaymentStore {
 
     this.isInitPaymentPage = true;
   };
+
   getSettingsPayment = async () => {
     try {
       const newSettings = await getPaymentSettings();
@@ -236,22 +273,23 @@ class PaymentStore {
     }
   };
 
-  setIsLicenseCorrect = (isLicenseCorrect) => {
+  setIsLicenseCorrect = (isLicenseCorrect: boolean) => {
     this.isLicenseCorrect = isLicenseCorrect;
   };
-  setPaymentsLicense = async (confirmKey, data) => {
+
+  setPaymentsLicense = async (confirmKey: string, data: FormData) => {
     try {
       const message = await setLicense(confirmKey, data);
       this.setIsLicenseCorrect(true);
 
       toastr.success(message);
     } catch (e) {
-      toastr.error(e);
+      toastr.error(e as TData);
       this.setIsLicenseCorrect(false);
     }
   };
 
-  acceptPaymentsLicense = async (t) => {
+  acceptPaymentsLicense = async (t: TTranslation) => {
     try {
       const { getTenantExtra } = authStore;
 
@@ -262,7 +300,7 @@ class PaymentStore {
 
       await getTenantExtra();
     } catch (e) {
-      toastr.error(e);
+      toastr.error(e as TData);
     }
   };
 
@@ -278,17 +316,17 @@ class PaymentStore {
     }
   };
 
-  setPaymentLink = async (link) => {
+  setPaymentLink = async (link: string) => {
     this.paymentLink = link;
   };
 
-  setIsLoading = (isLoading) => {
+  setIsLoading = (isLoading: boolean) => {
     this.isLoading = isLoading;
   };
 
-  getTotalCostByFormula = (value) => {
-    const costValuePerManager = this.paymentQuotasStore.planCost.value;
-    return value * costValuePerManager;
+  getTotalCostByFormula = (value: number) => {
+    const costValuePerManager = this.paymentQuotasStore?.planCost.value;
+    if (costValuePerManager) return value * +costValuePerManager;
   };
 
   get allowedStorageSizeByQuota() {
@@ -301,7 +339,10 @@ class PaymentStore {
   resetTariffContainerToBasic = () => {
     this.setBasicTariffContainer();
   };
+
   setBasicTariffContainer = () => {
+    if (!this.currentQuotaStore) return;
+
     const { currentPlanCost, maxCountManagersByQuota, addedManagersCount } =
       this.currentQuotaStore;
     const currentTotalPrice = currentPlanCost.value;
@@ -314,21 +355,23 @@ class PaymentStore {
         ? this.maxAvailableManagersCount + 1
         : maxCountManagersByQuota;
 
-      this.totalPrice = currentTotalPrice;
+      this.totalPrice = +currentTotalPrice;
 
       return;
     }
 
     this.managersCount = addedManagersCount;
-    this.totalPrice = this.getTotalCostByFormula(addedManagersCount);
+    const totalPrice = this.getTotalCostByFormula(addedManagersCount);
+
+    if (totalPrice) this.totalPrice = totalPrice;
   };
 
-  setTotalPrice = (value) => {
+  setTotalPrice = (value: number) => {
     const price = this.getTotalCostByFormula(value);
-    if (price !== this.totalPrice) this.totalPrice = price;
+    if (price !== this.totalPrice && price) this.totalPrice = price;
   };
 
-  setManagersCount = (managers) => {
+  setManagersCount = (managers: number) => {
     if (managers > this.maxAvailableManagersCount)
       this.managersCount = this.maxAvailableManagersCount + 1;
     else this.managersCount = managers;
@@ -343,6 +386,7 @@ class PaymentStore {
   }
 
   get isPayer() {
+    if (!this.userStore || !this.currentTariffStatusStore) return;
     const { user } = this.userStore;
 
     const { payerInfo } = this.currentTariffStatusStore;
@@ -353,6 +397,7 @@ class PaymentStore {
   }
 
   get isStripePortalAvailable() {
+    if (!this.userStore) return;
     const { user } = this.userStore;
 
     if (!user) return false;
@@ -361,6 +406,7 @@ class PaymentStore {
   }
 
   get canUpdateTariff() {
+    if (!this.userStore || !this.currentQuotaStore) return;
     const { user } = this.userStore;
     const { isFreeTariff } = this.currentQuotaStore;
 
@@ -372,6 +418,7 @@ class PaymentStore {
   }
 
   get canPayTariff() {
+    if (!this.currentQuotaStore) return;
     const { addedManagersCount } = this.currentQuotaStore;
 
     if (this.managersCount >= addedManagersCount) return true;
@@ -380,6 +427,7 @@ class PaymentStore {
   }
 
   get canDowngradeTariff() {
+    if (!this.currentQuotaStore) return;
     const { addedManagersCount, usedTotalStorageSizeCount } =
       this.currentQuotaStore;
 
@@ -391,22 +439,30 @@ class PaymentStore {
   }
 
   setRangeStepByQuota = () => {
+    if (!this.paymentQuotasStore) return;
+
     const { stepAddingQuotaManagers, stepAddingQuotaTotalSize } =
       this.paymentQuotasStore;
 
-    this.stepByQuotaForManager = stepAddingQuotaManagers;
+    if (stepAddingQuotaManagers)
+      this.stepByQuotaForManager = stepAddingQuotaManagers;
     this.minAvailableManagersValue = this.stepByQuotaForManager;
 
-    this.stepByQuotaForTotalSize = stepAddingQuotaTotalSize;
+    if (stepAddingQuotaTotalSize)
+      this.stepByQuotaForTotalSize = stepAddingQuotaTotalSize;
     this.minAvailableTotalSizeValue = this.stepByQuotaForManager;
   };
 
-  sendPaymentRequest = async (email, userName, message) => {
+  sendPaymentRequest = async (
+    email: string,
+    userName: string,
+    message: string,
+  ) => {
     try {
       await api.portal.sendPaymentRequest(email, userName, message);
-      toastr.success(t("SuccessfullySentMessage"));
+      // toastr.success(t("SuccessfullySentMessage"));
     } catch (e) {
-      toastr.error(e);
+      toastr.error(e as TData);
     }
   };
 }

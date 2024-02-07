@@ -51,8 +51,8 @@ const EnterpriseContainer = (props) => {
   );
 };
 
-export default inject(({ payments, currentTariffStatusStore }) => {
-  const { buyUrl, salesEmail } = payments;
+export default inject(({ paymentStore, currentTariffStatusStore }) => {
+  const { buyUrl, salesEmail } = paymentStore;
 
   const { isLicenseDateExpired } = currentTariffStatusStore;
   return { buyUrl, salesEmail, isLicenseDateExpired };

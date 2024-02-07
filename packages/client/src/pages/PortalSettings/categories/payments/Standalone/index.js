@@ -51,9 +51,10 @@ const StandalonePage = (props) => {
 };
 
 export default inject(
-  ({ currentQuotaStore, payments, currentTariffStatusStore }) => {
+  ({ currentQuotaStore, paymentStore, currentTariffStatusStore }) => {
+
     const { standaloneInit, isInitPaymentPage, isUpdatingBasicSettings } =
-      payments;
+      paymentStore;
     const { isLoaded: isLoadedCurrentQuota, isTrial } = currentQuotaStore;
     const { isLoaded: isLoadedTariffStatus } = currentTariffStatusStore;
 
@@ -65,5 +66,5 @@ export default inject(
       isLoadedCurrentQuota,
       isUpdatingBasicSettings,
     };
-  }
+  },
 )(observer(StandalonePage));

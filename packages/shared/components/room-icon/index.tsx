@@ -11,6 +11,7 @@ const StyledIcon = styled.div<{
   radius: string;
   isArchive?: boolean;
   color: string;
+  wrongImage: boolean;
 }>`
   display: flex;
   justify-content: center;
@@ -39,7 +40,8 @@ const StyledIcon = styled.div<{
     font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
     font-weight: 700;
     line-height: 16px;
-    color: #ffffff;
+    color: ${(props) =>
+      props.wrongImage && props.theme.isBase ? "#333333" : "#ffffff"};
     position: relative;
     ${(props) =>
       !props.theme.isBase &&
@@ -120,8 +122,6 @@ const RoomIcon = ({
     };
   }, [imgSrc]);
 
-  console.log(color);
-
   React.useEffect(() => {
     prefetchImage();
   }, [prefetchImage]);
@@ -132,6 +132,7 @@ const RoomIcon = ({
       size={size}
       radius={radius}
       isArchive={isArchive}
+      wrongImage={!correctImage}
       data-testid="room-icon"
     >
       <div className="room-background" />

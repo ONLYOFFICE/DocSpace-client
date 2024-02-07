@@ -237,6 +237,7 @@ const InviteInput = ({
   const openUsersPanel = () => {
     setInputValue("");
     setAddUsersPanelVisible(true);
+    setIsAddEmailPanelBlocked(true);
   };
 
   const closeUsersPanel = () => {
@@ -410,6 +411,7 @@ const InviteInput = ({
             manualX="16px"
             showDisabledItems
             eventTypes="click"
+            withBackdrop={false}
             {...dropDownMaxHeight}
           >
             {!!usersList.length ? foundUsers : addEmailPanel}

@@ -1,6 +1,9 @@
 import styled, { css } from "styled-components";
+
 import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg";
-import { commonIconsStyles, tablet, desktop } from "@docspace/shared/utils";
+
+import { commonIconsStyles } from "../../utils";
+import { Base } from "../../themes";
 
 const StyledPublicRoomBar = styled.div`
   display: flex;
@@ -47,6 +50,8 @@ const StyledPublicRoomBar = styled.div`
   }
 `;
 
+StyledPublicRoomBar.defaultProps = { theme: Base };
+
 const StyledCrossIcon = styled(CrossReactSvg)`
   ${commonIconsStyles}
 
@@ -80,7 +85,9 @@ const LinksBlock = styled.div`
   }
 `;
 
-const StyledLinkRow = styled.div`
+LinksBlock.defaultProps = { theme: Base };
+
+const StyledLinkRow = styled.div<{ isExpired?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -123,5 +130,7 @@ const StyledLinkRow = styled.div`
     `}
   }
 `;
+
+StyledLinkRow.defaultProps = { theme: Base };
 
 export { StyledPublicRoomBar, StyledCrossIcon, LinksBlock, StyledLinkRow };

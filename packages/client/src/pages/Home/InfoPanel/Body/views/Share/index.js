@@ -11,7 +11,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { toastr } from "@docspace/shared/components/toast";
 import { ShareAccessRights } from "@docspace/shared/enums";
 
-import PublicRoomBar from "../Members/sub-components/PublicRoomBar";
+import PublicRoomBar from "@docspace/shared/components/public-room-bar";
 import LinkRow from "./LinkRow";
 import ShareLoader from "./ShareLoader";
 
@@ -52,10 +52,10 @@ const Share = (props) => {
   const fetchLinks = async () => {
     const res = await getFileLinks(infoPanelSelection.id);
     const primaryLink = res.items.filter(
-      (item) => item.sharedTo.primary === true
+      (item) => item.sharedTo.primary === true,
     );
     const additionalLinks = res.items.filter(
-      (item) => item.sharedTo.primary !== true
+      (item) => item.sharedTo.primary !== true,
     );
 
     setPrimaryFileLink(primaryLink);
@@ -77,7 +77,7 @@ const Share = (props) => {
       infoPanelSelection.id,
       ShareAccessRights.ReadOnly,
       false,
-      false
+      false,
     );
     setAdditionalFileLinks([...additionalFileLinks, ...[newLink]]);
   };
@@ -101,7 +101,7 @@ const Share = (props) => {
         link.access,
         link.sharedTo.primary,
         item.internal,
-        link.sharedTo.expirationDate
+        link.sharedTo.expirationDate,
       );
       updateLink(link, res);
 
@@ -122,7 +122,7 @@ const Share = (props) => {
         item.access,
         link.sharedTo.primary,
         link.sharedTo.internal,
-        link.sharedTo.expirationDate
+        link.sharedTo.expirationDate,
       );
       if (item.access === ShareAccessRights.None) {
         deleteLink(link, link.sharedTo.id);
@@ -155,7 +155,7 @@ const Share = (props) => {
         link.access,
         link.sharedTo.primary,
         link.sharedTo.internal,
-        expirationDate
+        expirationDate,
       );
       updateLink(link, res);
 
@@ -179,7 +179,7 @@ const Share = (props) => {
       setAdditionalFileLinks(newArr);
     }
     const newLoadingLinks = loadingLinks.filter(
-      (item) => item !== link.sharedTo.id
+      (item) => item !== link.sharedTo.id,
     );
     setLoadingLinks(newLoadingLinks);
   };
@@ -189,7 +189,7 @@ const Share = (props) => {
       setPrimaryFileLink(null);
     } else {
       const newArr = additionalFileLinks.filter(
-        (item) => item.sharedTo.id !== id
+        (item) => item.sharedTo.id !== id,
       );
       setAdditionalFileLinks(newArr);
     }

@@ -1,12 +1,13 @@
 import React from "react";
 import { ReactSVG } from "react-svg";
 import PeopleIcon from "PUBLIC_DIR/images/people.react.svg?url";
-import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg?url";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { StyledPublicRoomBar } from "./StyledPublicRoom";
-import { Text } from "@docspace/shared/components/text";
 
-const PublicRoomBar = (props) => {
+import { Text } from "../text";
+
+import { StyledPublicRoomBar } from "./PublicRoomBar.styled";
+import { PublicRoomBarProps } from "./PublicRoomBar.types";
+
+const PublicRoomBar = (props: PublicRoomBarProps) => {
   const { headerText, bodyText, iconName, onClose, ...rest } = props;
 
   return (
@@ -14,7 +15,7 @@ const PublicRoomBar = (props) => {
       <div className="text-container">
         <div className="header-body">
           <div className="header-icon">
-            <ReactSVG src={iconName ? iconName : PeopleIcon} />
+            <ReactSVG src={iconName || PeopleIcon} />
           </div>
           <Text className="text-container_header" fontWeight={600}>
             {headerText}

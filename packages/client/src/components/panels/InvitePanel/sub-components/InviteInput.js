@@ -34,7 +34,10 @@ import {
   ResetLink,
 } from "../StyledInvitePanel";
 
-const minSearchValue = 2;
+import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
+import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
+
+const minSearchValue = 1;
 
 const InviteInput = ({
   defaultAccess,
@@ -60,7 +63,6 @@ const InviteInput = ({
   const [inputValue, setInputValue] = useState("");
   const [usersList, setUsersList] = useState([]);
   const [isChangeLangMail, setIsChangeLangMail] = useState(false);
-  const [searchPanelVisible, setSearchPanelVisible] = useState(false);
   const [isAddEmailPanelBlocked, setIsAddEmailPanelBlocked] = useState(true);
 
   const [selectedAccess, setSelectedAccess] = useState(defaultAccess);
@@ -122,7 +124,6 @@ const InviteInput = ({
     }
 
     if (!query) {
-      closeInviteInputPanel();
       setInputValue("");
       setUsersList([]);
     }
@@ -145,20 +146,17 @@ const InviteInput = ({
       return;
     }
 
-    if (
-      (!!usersList.length || clearValue.length >= minSearchValue) &&
-      !searchPanelVisible
-    ) {
-      openInviteInputPanel();
+    const regex =
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{0,}))$/g;
+
+    if (regex.test(clearValue)) {
+      setIsAddEmailPanelBlocked(false);
+      if (roomId !== -1) {
+        debouncedSearch(clearValue);
+
+        return;
+      }
     }
-
-    if (roomId !== -1) {
-      debouncedSearch(clearValue);
-
-      return;
-    }
-
-    setIsAddEmailPanelBlocked(false);
   };
 
   const removeExist = (items) => {
@@ -185,7 +183,6 @@ const InviteInput = ({
       const items = removeExist([item, ...inviteItems]);
 
       setInviteItems(items);
-      closeInviteInputPanel();
       setInputValue("");
       setUsersList([]);
     };
@@ -220,8 +217,8 @@ const InviteInput = ({
     const filtered = removeExist(newItems);
 
     setInviteItems(filtered);
-    closeInviteInputPanel();
     setInputValue("");
+    setIsAddEmailPanelBlocked(true);
     setUsersList([]);
   };
 
@@ -231,7 +228,6 @@ const InviteInput = ({
     const filtered = removeExist(items);
 
     setInviteItems(filtered);
-    closeInviteInputPanel();
     setInputValue("");
     setUsersList([]);
   };
@@ -247,27 +243,26 @@ const InviteInput = ({
     setAddUsersPanelVisible(false);
   };
 
-  const openInviteInputPanel = (e) => {
-    setSearchPanelVisible(true);
-  };
-
-  const closeInviteInputPanel = (e) => {
-    if (e?.target?.tagName?.toUpperCase() === "INPUT") return;
-
-    setSearchPanelVisible(false);
-  };
-
   const foundUsers = usersList.map((user) => getItemContent(user));
 
   const addEmailPanel = (
     <DropDownItem
-      className="add-item"
+      className="list-item"
       style={{ width: "inherit" }}
       textOverflow
       onClick={addEmail}
       height={48}
     >
-      {t("Common:AddButton")} «{inputValue}»
+      <Avatar size="min" role="user" source={AtReactSvgUrl} />
+      <Text fontSize="14px" fontWeight={600}>
+        {inputValue}
+      </Text>
+      <div className="email-list_add-button">
+        <Text fontSize="13px" fontWeight={600}>
+          {t("Common:AddButton")}
+        </Text>
+        <ArrowIcon />
+      </div>
     </DropDownItem>
   );
 
@@ -401,28 +396,25 @@ const InviteInput = ({
                 : t("InviteRoomSearchPlaceholder")
             }
             value={inputValue}
-            onFocus={openInviteInputPanel}
             isAutoFocussed={true}
             onKeyDown={onKeyDown}
           />
         </StyledInviteInput>
-        {inputValue.length >= minSearchValue &&
-          (isAddEmailPanelBlocked ? (
-            <></>
-          ) : (
-            <StyledDropDown
-              width={searchRef?.current?.offsetWidth}
-              isDefaultMode={false}
-              open={searchPanelVisible}
-              manualX="16px"
-              showDisabledItems
-              clickOutsideAction={closeInviteInputPanel}
-              eventTypes="click"
-              {...dropDownMaxHeight}
-            >
-              {!!usersList.length ? foundUsers : addEmailPanel}
-            </StyledDropDown>
-          ))}
+        {isAddEmailPanelBlocked ? (
+          <></>
+        ) : (
+          <StyledDropDown
+            width={searchRef?.current?.offsetWidth}
+            isDefaultMode={false}
+            open
+            manualX="16px"
+            showDisabledItems
+            eventTypes="click"
+            {...dropDownMaxHeight}
+          >
+            {!!usersList.length ? foundUsers : addEmailPanel}
+          </StyledDropDown>
+        )}
 
         <AccessSelector
           className="add-manually-access"

@@ -5,16 +5,26 @@ import { Body } from "./sub-components/Body";
 import { Footer } from "./sub-components/Footer";
 
 import { StyledSelector } from "./Selector.styled";
-import { AccessRight, SelectorProps, TSelectorItem } from "./Selector.types";
+import {
+  TAccessRight,
+  SelectorProps,
+  TSelectorBodySearch,
+  TSelectorBreadCrumbs,
+  TSelectorCancelButton,
+  TSelectorItem,
+  TSelectorSelectAll,
+  TSelectorAccessRights,
+  TSelectorFooterInput,
+  TSelectorFooterCheckbox,
+} from "./Selector.types";
 
 const Selector = ({
   id,
   className,
   style,
 
-  headerLabel,
-  withoutBackButton,
-  onBackClick,
+  withHeader,
+  headerProps,
 
   isBreadCrumbsLoading,
   breadCrumbsLoader,
@@ -35,31 +45,44 @@ const Selector = ({
   selectAllIcon,
   onSelectAll,
 
-  items,
-  renderCustomItem,
-  isMultiSelect,
-  selectedItems,
-  acceptButtonLabel,
-  onSelect,
-  onAccept,
-  rowLoader,
+  emptyScreenImage,
+  emptyScreenHeader,
+  emptyScreenDescription,
+  searchEmptyScreenImage,
+  searchEmptyScreenHeader,
+  searchEmptyScreenDescription,
+
+  submitButtonLabel,
+  submitButtonId,
+  disableSubmitButton,
+  onSubmit,
+
+  withCancelButton,
+  cancelButtonLabel,
+  onCancel,
 
   withAccessRights,
   accessRights,
   selectedAccessRight,
   onAccessRightsChange,
 
-  withCancelButton,
-  cancelButtonLabel,
-  onCancel,
+  withFooterInput,
+  footerInputHeader,
+  currentFooterInputValue,
 
-  emptyScreenImage,
-  emptyScreenHeader,
-  emptyScreenDescription,
+  withFooterCheckbox,
+  footerCheckboxLabel,
+  isChecked,
+  setIsChecked,
 
-  searchEmptyScreenImage,
-  searchEmptyScreenHeader,
-  searchEmptyScreenDescription,
+  items,
+  renderCustomItem,
+  isMultiSelect,
+  selectedItems,
+
+  onSelect,
+
+  rowLoader,
 
   hasNextPage,
   isNextPageLoading,
@@ -67,22 +90,11 @@ const Selector = ({
   totalItems,
   isLoading,
 
-  withHeader,
-
-  withFooterInput,
-  withFooterCheckbox,
-  footerInputHeader,
-  footerCheckboxLabel,
-  currentFooterInputValue,
-
   alwaysShowFooter,
-  disableAcceptButton,
 
   descriptionText,
-  acceptButtonId,
+
   cancelButtonId,
-  isChecked,
-  setIsChecked,
 }: SelectorProps) => {
   const [footerVisible, setFooterVisible] = React.useState<boolean>(false);
   const [isSearch, setIsSearch] = React.useState<boolean>(false);
@@ -99,26 +111,7 @@ const Selector = ({
     React.useState<boolean>(isChecked || false);
 
   const [selectedAccess, setSelectedAccess] =
-    React.useState<AccessRight | null>(null);
-
-  const onBackClickAction = React.useCallback(() => {
-    onBackClick?.();
-  }, [onBackClick]);
-
-  const onClearSearchAction = React.useCallback(() => {
-    onClearSearch?.(() => setIsSearch(false));
-  }, [onClearSearch]);
-
-  const onSearchAction = React.useCallback(
-    (value: string) => {
-      const v = value.trim();
-
-      if (v === "") return onClearSearchAction();
-
-      onSearch?.(v, () => setIsSearch(true));
-    },
-    [onSearch, onClearSearchAction],
-  );
+    React.useState<TAccessRight | null>(null);
 
   const compareSelectedItems = React.useCallback(
     (newList: TSelectorItem[]) => {
@@ -144,12 +137,6 @@ const Selector = ({
   const onSelectAction = (item: TSelectorItem) => {
     onSelect?.({
       ...item,
-      id: item.id,
-      email: item.email || "",
-      avatar: item.avatar,
-      icon: item.icon,
-      label: item.label,
-      shared: item.shared,
     });
 
     if (isMultiSelect) {
@@ -176,8 +163,6 @@ const Selector = ({
       } else {
         setNewSelectedItems((value) => {
           value.push({
-            id: item.id,
-            email: item.email,
             ...item,
           });
 
@@ -203,9 +188,6 @@ const Selector = ({
       });
 
       const newItem = {
-        id: item.id,
-        email: item.email,
-
         ...item,
       };
 
@@ -247,8 +229,8 @@ const Selector = ({
     }
   }, [compareSelectedItems, items, newSelectedItems.length, onSelectAll]);
 
-  const onAcceptAction = () => {
-    onAccept?.(
+  const onSubmitAction = () => {
+    onSubmit(
       newSelectedItems,
       selectedAccess,
       newFooterInputValue,
@@ -256,12 +238,8 @@ const Selector = ({
     );
   };
 
-  const onCancelAction = React.useCallback(() => {
-    onCancel?.();
-  }, [onCancel]);
-
   const onChangeAccessRightsAction = React.useCallback(
-    (access: AccessRight) => {
+    (access: TAccessRight) => {
       setSelectedAccess({ ...access });
       onAccessRightsChange?.(access);
     },
@@ -304,6 +282,94 @@ const Selector = ({
       compareSelectedItems(cloneSelectedItems);
     }
   }, [items, selectedItems, isMultiSelect, compareSelectedItems]);
+
+  const breadCrumbsProps: TSelectorBreadCrumbs = withBreadCrumbs
+    ? {
+        withBreadCrumbs,
+        breadCrumbs,
+        onSelectBreadCrumb,
+        breadCrumbsLoader,
+        isBreadCrumbsLoading,
+      }
+    : ({} as TSelectorBreadCrumbs);
+
+  const onSelectAllProps: TSelectorSelectAll = withSelectAll
+    ? {
+        withSelectAll,
+        selectAllLabel,
+        selectAllIcon,
+        onSelectAll: onSelectAllAction,
+      }
+    : ({} as TSelectorSelectAll);
+
+  const searchProps: TSelectorBodySearch = withSearch
+    ? {
+        withSearch,
+        searchPlaceholder,
+        searchLoader,
+        isSearchLoading,
+        searchValue,
+        setIsSearch,
+        onClearSearch,
+        isSearch,
+        onSearch,
+        isAllIndeterminate:
+          newSelectedItems.length !== renderedItems.length &&
+          newSelectedItems.length !== 0,
+        isAllChecked:
+          newSelectedItems.length === renderedItems.length &&
+          renderedItems.length !== 0,
+      }
+    : ({
+        isSearch,
+        setIsSearch,
+        isAllIndeterminate:
+          newSelectedItems.length !== renderedItems.length &&
+          newSelectedItems.length !== 0,
+        isAllChecked:
+          newSelectedItems.length === renderedItems.length &&
+          renderedItems.length !== 0,
+      } as TSelectorBodySearch);
+
+  const cancelButtonProps = withCancelButton
+    ? { withCancelButton, onCancel, cancelButtonLabel, cancelButtonId }
+    : ({} as TSelectorCancelButton);
+
+  const accessRightsProps = withAccessRights
+    ? {
+        withAccessRights,
+        accessRights,
+        selectedAccessRight: selectedAccess,
+        onAccessRightsChange: onChangeAccessRightsAction,
+      }
+    : ({} as TSelectorAccessRights);
+
+  const inputProps = withFooterInput
+    ? {
+        withFooterInput,
+        footerInputHeader,
+        currentFooterInputValue: newFooterInputValue,
+        setNewFooterInputValue,
+      }
+    : ({
+        currentFooterInputValue: newFooterInputValue,
+        setNewFooterInputValue,
+      } as TSelectorFooterInput);
+
+  const checkboxProps: TSelectorFooterCheckbox = withFooterCheckbox
+    ? {
+        withFooterCheckbox,
+        footerCheckboxLabel,
+        isChecked: isFooterCheckboxChecked,
+        setIsFooterCheckboxChecked,
+        setIsChecked,
+      }
+    : ({
+        isChecked: isFooterCheckboxChecked,
+        setIsFooterCheckboxChecked,
+        setIsChecked,
+      } as TSelectorFooterCheckbox);
+
   return (
     <StyledSelector
       id={id}
@@ -311,37 +377,15 @@ const Selector = ({
       style={style}
       data-testid="selector"
     >
-      {withHeader && (
-        <Header
-          onBackClickAction={onBackClickAction}
-          headerLabel={headerLabel}
-          withoutBackButton={withoutBackButton}
-        />
-      )}
+      {withHeader && <Header {...headerProps} />}
 
       <Body
         withHeader={withHeader}
         footerVisible={footerVisible || !!alwaysShowFooter}
-        isSearch={isSearch}
-        isAllIndeterminate={
-          newSelectedItems.length !== renderedItems.length &&
-          newSelectedItems.length !== 0
-        }
-        isAllChecked={
-          newSelectedItems.length === renderedItems.length &&
-          renderedItems.length !== 0
-        }
-        placeholder={searchPlaceholder}
-        value={searchValue}
-        onSearch={onSearchAction}
-        onClearSearch={onClearSearchAction}
         items={renderedItems}
         isMultiSelect={isMultiSelect}
         onSelect={onSelectAction}
-        withSelectAll={withSelectAll}
-        selectAllLabel={selectAllLabel}
-        selectAllIcon={selectAllIcon}
-        onSelectAll={onSelectAllAction}
+        // empty screen
         emptyScreenImage={emptyScreenImage}
         emptyScreenHeader={emptyScreenHeader}
         emptyScreenDescription={emptyScreenDescription}
@@ -354,49 +398,34 @@ const Selector = ({
         renderCustomItem={renderCustomItem}
         totalItems={totalItems || 0}
         isLoading={isLoading}
-        searchLoader={searchLoader}
         rowLoader={rowLoader}
-        withBreadCrumbs={withBreadCrumbs}
-        breadCrumbs={breadCrumbs}
-        onSelectBreadCrumb={onSelectBreadCrumb}
-        breadCrumbsLoader={breadCrumbsLoader}
-        isBreadCrumbsLoading={isBreadCrumbsLoading}
-        isSearchLoading={isSearchLoading}
-        withSearch={withSearch}
         withFooterInput={withFooterInput}
         withFooterCheckbox={withFooterCheckbox}
         descriptionText={descriptionText}
+        // bread crumbs
+        {...breadCrumbsProps}
+        // select all
+        {...onSelectAllProps}
+        // search
+        {...searchProps}
       />
 
       {(footerVisible || alwaysShowFooter) && (
         <Footer
           isMultiSelect={isMultiSelect}
-          acceptButtonLabel={acceptButtonLabel || ""}
           selectedItemsCount={newSelectedItems.length}
-          withCancelButton={withCancelButton}
-          cancelButtonLabel={cancelButtonLabel}
-          withAccessRights={withAccessRights}
-          accessRights={accessRights}
-          selectedAccessRight={selectedAccess}
-          onAccept={onAcceptAction}
-          onCancel={onCancelAction}
-          onChangeAccessRights={onChangeAccessRightsAction}
-          withFooterInput={withFooterInput}
-          withFooterCheckbox={withFooterCheckbox}
-          footerInputHeader={footerInputHeader}
-          footerCheckboxLabel={footerCheckboxLabel}
-          currentFooterInputValue={newFooterInputValue}
-          setNewFooterInputValue={setNewFooterInputValue}
-          isFooterCheckboxChecked={isFooterCheckboxChecked}
-          setIsFooterCheckboxChecked={setIsFooterCheckboxChecked}
-          setIsChecked={setIsChecked}
-          disableAcceptButton={
-            withFooterInput
-              ? disableAcceptButton
-              : disableAcceptButton && !newFooterInputValue.trim()
-          }
-          acceptButtonId={acceptButtonId}
-          cancelButtonId={cancelButtonId}
+          onSubmit={onSubmitAction}
+          submitButtonLabel={submitButtonLabel}
+          disableSubmitButton={disableSubmitButton}
+          submitButtonId={submitButtonId}
+          // cancel button
+          {...cancelButtonProps}
+          // access rights
+          {...accessRightsProps}
+          // input
+          {...inputProps}
+          // checkbox
+          {...checkboxProps}
         />
       )}
     </StyledSelector>

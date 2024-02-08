@@ -9,7 +9,7 @@ import { StyledHeader } from "../Selector.styled";
 import { HeaderProps } from "../Selector.types";
 
 const Header = React.memo(
-  ({ onBackClickAction, withoutBackButton, headerLabel }: HeaderProps) => {
+  ({ onBackClick, withoutBackButton, headerLabel }: HeaderProps) => {
     return (
       <StyledHeader>
         {!withoutBackButton && (
@@ -17,7 +17,7 @@ const Header = React.memo(
             className="arrow-button"
             iconName={ArrowPathReactSvgUrl}
             size={17}
-            onClick={onBackClickAction}
+            onClick={onBackClick}
           />
         )}
 

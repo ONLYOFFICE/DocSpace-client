@@ -6,14 +6,35 @@ import { InputSize } from "../../text-input";
 import { SearchProps } from "../Selector.types";
 
 const Search = React.memo(
-  ({ placeholder, value, onSearch, onClearSearch }: SearchProps) => {
+  ({
+    placeholder,
+    value,
+    onSearch,
+    onClearSearch,
+    setIsSearch,
+  }: SearchProps) => {
+    const onClearSearchAction = React.useCallback(() => {
+      onClearSearch?.(() => setIsSearch(false));
+    }, [onClearSearch, setIsSearch]);
+
+    const onSearchAction = React.useCallback(
+      (data: string) => {
+        const v = data.trim();
+
+        if (v === "") return onClearSearchAction();
+
+        onSearch?.(v, () => setIsSearch(true));
+      },
+      [onClearSearchAction, onSearch, setIsSearch],
+    );
+
     return (
       <SearchInput
         className="search-input"
         placeholder={placeholder}
         value={value}
-        onChange={onSearch}
-        onClearSearch={onClearSearch}
+        onChange={onSearchAction}
+        onClearSearch={onClearSearchAction}
         size={InputSize.base}
       />
     );

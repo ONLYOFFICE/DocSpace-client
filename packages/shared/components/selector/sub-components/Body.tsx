@@ -30,8 +30,9 @@ const Body = ({
   isSearch,
   isAllIndeterminate,
   isAllChecked,
-  placeholder,
-  value,
+  searchPlaceholder,
+  setIsSearch,
+  searchValue,
   onSearch,
   onClearSearch,
   items,
@@ -165,14 +166,15 @@ const Body = ({
         )
       ) : null}
 
-      {isSearchLoading || isBreadCrumbsLoading ? (
+      {(withSearch && isSearchLoading) || isBreadCrumbsLoading ? (
         searchLoader
-      ) : withSearch || isSearch || (itemsCount > 0 && withSearch) ? (
+      ) : withSearch || (itemsCount > 0 && withSearch) ? (
         <Search
-          placeholder={placeholder}
-          value={value}
+          placeholder={searchPlaceholder}
+          value={searchValue}
           onSearch={onSearch}
           onClearSearch={onClearSearch}
+          setIsSearch={setIsSearch}
         />
       ) : null}
 
@@ -180,7 +182,7 @@ const Body = ({
         <Scrollbar style={{ height: listHeight }}>{rowLoader}</Scrollbar>
       ) : itemsCount === 0 ? (
         <EmptyScreen
-          withSearch={isSearch && !!value}
+          withSearch={isSearch && !!searchValue}
           image={emptyScreenImage}
           header={emptyScreenHeader}
           description={emptyScreenDescription}

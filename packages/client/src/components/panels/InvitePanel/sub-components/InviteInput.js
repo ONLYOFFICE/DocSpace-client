@@ -118,17 +118,19 @@ const InviteInput = ({
     };
   };
 
-  const searchByQuery = async (value) => {
+  const searchByQuery = async (value, isValid) => {
     const query = value.trim();
 
-    if (query.length >= minSearchValue && !isAddEmailPanelBlocked) {
+    if (query.length >= minSearchValue) {
       const filter = Filter.getFilterWithOutDisabledUser();
       filter.search = query;
 
       const users = await getMembersList(roomId, filter);
 
       setUsersList(users.items);
-      setIsAddEmailPanelBlocked(false);
+
+      if (users.total || isValid) setIsAddEmailPanelBlocked(false);
+      else setIsAddEmailPanelBlocked(true);
     }
 
     if (!query) {
@@ -138,8 +140,8 @@ const InviteInput = ({
   };
 
   const debouncedSearch = useCallback(
-    debounce((value) => searchByQuery(value), 300),
-    []
+    debounce((value, isValid) => searchByQuery(value, isValid), 300),
+    [],
   );
 
   const onChange = (e) => {
@@ -158,15 +160,17 @@ const InviteInput = ({
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{0,}))$/g;
 
     const parts = getParts(value);
+    let isValid = false;
     for (let i = 0; i < parts.length; i += 1) {
       if (regex.test(parts[i])) {
-        setIsAddEmailPanelBlocked(false);
-        if (roomId !== -1) {
-          debouncedSearch(clearValue);
-
-          return;
-        }
+        isValid = true;
       }
+    }
+
+    if (roomId !== -1) {
+      debouncedSearch(clearValue, isValid);
+
+      return;
     }
   };
 

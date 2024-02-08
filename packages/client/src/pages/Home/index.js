@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, useNavigate, Outlet } from "react-router-dom";
+import { useLocation, useNavigate, Outlet, useParams } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -132,13 +132,15 @@ const PureHome = (props) => {
   } = props;
 
   const location = useLocation();
+  const { groupId: isInsideGroup } = useParams();
 
   const isSettingsPage =
     location.pathname.includes("settings") &&
     !location.pathname.includes("settings/plugins");
   const isAccountsPage = location.pathname.includes("/accounts");
   const isPeopleAccounts = location.pathname.includes("accounts/people");
-  const isGroupsAccounts = location.pathname.includes("accounts/groups");
+  const isGroupsAccounts =
+    location.pathname.includes("accounts/groups") && !isInsideGroup;
 
   const { onDrop } = useFiles({
     t,

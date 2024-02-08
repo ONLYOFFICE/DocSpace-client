@@ -3,6 +3,7 @@ import * as groupsApi from "@docspace/shared/api/groups";
 import { Events } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import Filter from "@docspace/shared/api/groups/filter";
+import InsideGroupFilter from "@docspace/shared/api/people/filter";
 
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
@@ -21,6 +22,7 @@ class GroupsStore {
   currentGroup = null;
 
   filter = Filter.getDefault();
+  insideGroupFilter = InsideGroupFilter.getDefault();
 
   constructor(peopleStore: any, authStore: any) {
     this.authStore = authStore;
@@ -56,7 +58,42 @@ class GroupsStore {
     this.setFilter(filter);
   };
 
-  setCurrentGroup = (currentGroup) => (this.currentGroup = currentGroup);
+  setInsideGroupFilter = (filter) => {
+    this.insideGroupFilter = filter;
+  };
+
+  setInsideGroupFilterUrl = (filter) => {
+    if (!this.currentGroup) return;
+    const urlFilter = filter.toUrlParams();
+
+    const newPath = combineUrl(
+      `/accounts/groups/${this.currentGroup.id}/filter?${urlFilter}`,
+    );
+    const currentPath = window.location.pathname + window.location.search;
+
+    if (currentPath === newPath) return;
+
+    window.history.replaceState(
+      "",
+      "",
+      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, newPath),
+    );
+  };
+
+  setInsideGroupFilterParams = (filter) => {
+    this.setInsideGroupFilter(filter);
+    this.setInsideGroupFilterUrl(filter);
+  };
+
+  setCurrentGroup = (currentGroup, filter, updateFilter = false) => {
+    const filterData = filter ? filter.clone() : Filter.getDefault();
+
+    this.currentGroup = currentGroup;
+
+    if (updateFilter) {
+      this.setInsideGroupFilterParams(filterData);
+    }
+  };
 
   getGroups = async (
     filter,

@@ -5,8 +5,9 @@ import TableView from "./TableView/TableContainer";
 import { Consumer } from "@docspace/shared/utils/context";
 import withLoader from "SRC_DIR/HOCs/withLoader";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import AccountsFilter from "@docspace/shared/api/people/filter";
 
 const InsideGroup = ({
   tReady,
@@ -14,16 +15,19 @@ const InsideGroup = ({
   currentGroup,
   setCurrentGroup,
   getGroupById,
+  filter,
 }) => {
   const navigate = useNavigate();
   const { groupId } = useParams();
+  const location = useLocation();
 
   useEffect(() => {
     (async () => {
       if (!groupId) return;
-      if (!currentGroup) {
+      if (!currentGroup || currentGroup.id !== groupId) {
         const newCurrentGroup = await getGroupById(groupId);
-        setCurrentGroup(newCurrentGroup);
+        const newFilter = AccountsFilter.getFilter(location);
+        setCurrentGroup(newCurrentGroup, newFilter, true);
       }
     })();
   }, [groupId]);
@@ -51,11 +55,12 @@ const InsideGroup = ({
 };
 
 export default inject(({ peopleStore }) => ({
+  filter: peopleStore.groupsStore.filter,
   currentGroup: peopleStore.groupsStore.currentGroup,
   setCurrentGroup: peopleStore.groupsStore.setCurrentGroup,
   getGroupById: peopleStore.groupsStore.getGroupById,
 }))(
   withTranslation(["People", "Common", "PeopleTranslations"])(
-    withLoader(observer(InsideGroup))()
-  )
+    withLoader(observer(InsideGroup))(),
+  ),
 );

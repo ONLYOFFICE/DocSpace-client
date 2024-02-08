@@ -61,6 +61,10 @@ class GroupsStore {
   };
 
   setInsideGroupFilter = (filter) => {
+    const key = `InsideGroupFilter=${this.peopleStore.userStore.user.id}`;
+    const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
+    localStorage.setItem(key, value);
+
     this.insideGroupFilter = filter;
   };
 
@@ -137,6 +141,18 @@ class GroupsStore {
     if (!this.authStore.settingsStore.withPaging) {
       filterData.page = 0;
       filterData.pageCount = 100;
+    }
+
+    const filterStorageItem = localStorage.getItem(
+      `InsideGroupFilter=${this.peopleStore.userStore.user?.id}`,
+    );
+
+    if (filterStorageItem && withFilterLocalStorage) {
+      const splitFilter = filterStorageItem.split(",");
+
+      filterData.sortBy = splitFilter[0];
+      filterData.pageCount = +splitFilter[1];
+      filterData.sortOrder = splitFilter[2];
     }
 
     const requests = [];

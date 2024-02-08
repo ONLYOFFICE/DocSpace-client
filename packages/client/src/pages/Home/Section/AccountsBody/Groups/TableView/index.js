@@ -26,8 +26,8 @@ const GroupsTableView = ({
   userId,
   infoPanelVisible,
 
-  fetchMoreAccounts,
-  hasMoreAccounts,
+  hasMoreGroups,
+  fetchMoreGroups,
   filterTotal,
   withPaging,
   isFiltered,
@@ -66,8 +66,8 @@ const GroupsTableView = ({
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
         infoPanelVisible={infoPanelVisible}
-        fetchMoreFiles={fetchMoreAccounts}
-        hasMoreFiles={hasMoreAccounts}
+        fetchMoreFiles={fetchMoreGroups}
+        hasMoreFiles={hasMoreGroups}
         itemCount={filterTotal}
         filesLength={groups.length}
         itemHeight={49}
@@ -101,17 +101,22 @@ export default inject(
     const {
       usersStore,
       groupsStore,
-      filterStore,
       viewAs: accountsViewAs,
       setViewAs,
       changeType,
     } = peopleStore;
 
-    const { groups, selection, setSelection } = groupsStore;
+    const {
+      groups,
+      selection,
+      setSelection,
+      hasMoreGroups,
+      fetchMoreGroups,
+      filterTotal,
+      isFiltered,
+    } = groupsStore;
 
     const { theme, withPaging, currentDeviceType } = settingsStore;
-    const { peopleList, hasMoreAccounts, fetchMoreAccounts } = usersStore;
-    const { filterTotal, isFiltered } = filterStore;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
@@ -124,8 +129,8 @@ export default inject(
       infoPanelVisible,
       withPaging,
 
-      fetchMoreAccounts,
-      hasMoreAccounts,
+      hasMoreGroups,
+      fetchMoreGroups,
       filterTotal,
       isFiltered,
       currentDeviceType,

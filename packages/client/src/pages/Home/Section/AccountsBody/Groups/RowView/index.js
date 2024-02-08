@@ -12,8 +12,8 @@ const RowView = ({
   accountsViewAs,
   setViewAs,
   isFiltered,
-  fetchMoreAccounts,
-  hasMoreAccounts,
+  fetchMoreGroups,
+  hasMoreGroups,
   filterTotal,
   withPaging,
   currentDeviceType,
@@ -30,8 +30,8 @@ const RowView = ({
     <Styled.GroupsRowContainer
       className="people-row-container"
       useReactWindow={!withPaging}
-      fetchMoreFiles={fetchMoreAccounts}
-      hasMoreFiles={hasMoreAccounts}
+      fetchMoreFiles={fetchMoreGroups}
+      hasMoreFiles={hasMoreGroups}
       itemCount={filterTotal}
       filesLength={groups.length}
       itemHeight={58}
@@ -53,12 +53,11 @@ export default inject(({ peopleStore, settingsStore }) => ({
   accountsViewAs: peopleStore.viewAs,
   setViewAs: peopleStore.setViewAs,
 
-  peopleList: peopleStore.usersStore.peopleList,
-  hasMoreAccounts: peopleStore.usersStore.hasMoreAccounts,
-  fetchMoreAccounts: peopleStore.usersStore.fetchMoreAccounts,
+  hasMoreGroups: peopleStore.groupsStore.hasMoreGroups,
+  fetchMoreGroups: peopleStore.groupsStore.fetchMoreGroups,
 
-  filterTotal: peopleStore.filterStore.filterTotal,
-  isFiltered: peopleStore.filterStore.isFiltered,
+  filterTotal: peopleStore.groupsStore.filterTotal,
+  isFiltered: peopleStore.groupsStore.isFiltered,
 
   withPaging: settingsStore.withPaging,
   currentDeviceType: settingsStore.currentDeviceType,

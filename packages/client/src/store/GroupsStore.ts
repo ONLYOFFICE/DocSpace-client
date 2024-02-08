@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import * as groupsApi from "@docspace/shared/api/groups";
 import { Events } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
@@ -18,6 +18,7 @@ class GroupsStore {
   peopleStore;
 
   groups = [];
+  groupsAreLoading = false;
   selection = [];
   bufferSelection = null;
 
@@ -25,6 +26,7 @@ class GroupsStore {
 
   filter = Filter.getDefault();
   insideGroupFilter = InsideGroupFilter.getDefault();
+  insideGroupBackUrl = null;
 
   constructor(peopleStore: any, authStore: any) {
     this.authStore = authStore;
@@ -91,8 +93,16 @@ class GroupsStore {
     this.setInsideGroupFilterUrl(filter);
   };
 
+  setInsideGroupBackUrl = (url: string) => {
+    this.insideGroupBackUrl = url;
+  };
+
   setCurrentGroup = (currentGroup) => {
     this.currentGroup = currentGroup;
+  };
+
+  setGroupsAreLoading = (value: boolean) => {
+    this.groupsAreLoading = value;
   };
 
   getGroups = async (
@@ -122,6 +132,27 @@ class GroupsStore {
     }
     console.log(res);
     this.groups = res.items;
+  };
+
+  get hasMoreGroups() {
+    return this.groups.length < this.filter.total;
+  }
+
+  fetchMoreGroups = async () => {
+    if (!this.hasMoreGroups || this.groupsAreLoading) return;
+
+    this.setGroupsAreLoading(true);
+
+    const newFilter = this.filter.clone();
+    newFilter.page += 1;
+    this.setFilterParams(newFilter);
+
+    const res = await groupsApi.getGroups(newFilter);
+
+    runInAction(() => {
+      this.groups = [...this.groups, ...res.items];
+      this.setGroupsAreLoading(false);
+    });
   };
 
   getGroupById = async (groupId) => {
@@ -275,6 +306,22 @@ class GroupsStore {
       },
     ];
   };
+
+  clearInsideGroup = () => {
+    this.currentGroup = null;
+    this.insideGroupBackUrl = null;
+    this.peopleStore.usersStore.setUsers([]);
+  };
+
+  get filterTotal() {
+    return this.filter.total;
+  }
+
+  get isFiltered() {
+    return (
+      this.filter.search || this.filter.searchByManager || this.filter.userId
+    );
+  }
 }
 
 export default GroupsStore;

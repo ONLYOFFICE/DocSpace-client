@@ -22,7 +22,7 @@ import ClockReactSvg from "PUBLIC_DIR/images/clock.react.svg";
 import moment from "moment-timezone";
 import { RoomsType } from "@docspace/shared/enums";
 
-import { StyledLinkRow } from "./StyledPublicRoom";
+import { StyledLinkRow } from "./Styled";
 
 const LinkRow = (props) => {
   const {
@@ -287,9 +287,9 @@ export default inject(
       theme,
       isPublicRoomType: infoPanelSelection.roomType === RoomsType.PublicRoom,
     };
-  }
+  },
 )(
   withTranslation(["SharingPanel", "Files", "Settings", "Translations"])(
-    observer(LinkRow)
-  )
+    observer(LinkRow),
+  ),
 );

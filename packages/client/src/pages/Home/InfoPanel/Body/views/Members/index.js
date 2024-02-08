@@ -10,7 +10,7 @@ import MembersHelper from "../../helpers/MembersHelper";
 import MembersList from "./sub-components/MembersList";
 import User from "./User";
 import PublicRoomBar from "@docspace/shared/components/public-room-bar";
-import { LinksBlock, StyledLinkRow } from "./sub-components/StyledPublicRoom";
+import { LinksBlock, StyledLinkRow } from "./sub-components/Styled";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";

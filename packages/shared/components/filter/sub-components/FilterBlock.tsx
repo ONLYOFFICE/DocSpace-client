@@ -449,10 +449,15 @@ const FilterBlock = ({
             <PeopleSelector
               withOutCurrentAuthorizedUser
               className="people-selector"
-              isMultiSelect={false}
-              onAccept={selectOption}
-              onBackClick={onArrowClick}
-              headerLabel={selectorLabel}
+              onSubmit={selectOption}
+              submitButtonLabel=""
+              disableSubmitButton={false}
+              withHeader
+              headerProps={{
+                onBackClick: onArrowClick,
+                headerLabel: selectorLabel,
+                withoutBackButton: false,
+              }}
               currentUserId={userId}
             />
           ) : (

@@ -42,7 +42,9 @@ const RoomSelector = ({
   const [searchValue, setSearchValue] = React.useState("");
   const [hasNextPage, setHasNextPage] = React.useState(false);
   const [isNextPageLoading, setIsNextPageLoading] = React.useState(false);
-
+  const [selectedItem, setSelectedItem] = React.useState<TSelectorItem | null>(
+    null,
+  );
   const [total, setTotal] = React.useState(-1);
 
   const [items, setItems] = React.useState<TSelectorItem[]>([]);
@@ -150,6 +152,7 @@ const RoomSelector = ({
       {...headerSelectorProps}
       {...cancelButtonSelectorProps}
       {...searchSelectorProps}
+      onSelect={(item) => setSelectedItem(item)}
       items={items}
       submitButtonLabel={t("Common:SelectAction")}
       onSubmit={onSubmit}
@@ -165,7 +168,7 @@ const RoomSelector = ({
       isNextPageLoading={isNextPageLoading}
       loadNextPage={onLoadNextPage}
       isLoading={isFirstLoad.current}
-      disableSubmitButton={false}
+      disableSubmitButton={!selectedItem}
       rowLoader={
         <RowLoader
           isMultiSelect={isMultiSelect}

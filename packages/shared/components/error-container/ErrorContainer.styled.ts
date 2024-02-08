@@ -55,7 +55,7 @@ const StyledErrorContainer = styled.div`
     color: ${(props) => props.theme.errorContainer.bodyText};
   }
 
-  @media screen and ${desktop} {
+  @media ${desktop} {
     body {
       padding: 24px 24px 0 24px;
     }
@@ -65,7 +65,7 @@ const StyledErrorContainer = styled.div`
     }
   }
 
-  @media screen and ${mobile} {
+  @media ${mobile} {
     body {
       padding: 18px 18px 0 18px;
     }
@@ -424,15 +424,20 @@ const StyledErrorContainer = styled.div`
     width: 8.4%;
     height: 7.39%;
     z-index: 4;
-    -webkit-animation: fadein_white-cloud-behind 1s ease-in,
+    -webkit-animation:
+      fadein_white-cloud-behind 1s ease-in,
       move_white-cloud-behind 1s linear 1s infinite alternate;
-    -moz-animation: fadein_white-cloud-behind 1s ease-in,
+    -moz-animation:
+      fadein_white-cloud-behind 1s ease-in,
       move_white-cloud-behind 1s linear 1s infinite alternate;
-    -ms-animation: fadein_white-cloud-behind 1s ease-in,
+    -ms-animation:
+      fadein_white-cloud-behind 1s ease-in,
       move_white-cloud-behind 1s linear 1s infinite alternate;
-    -o-animation: fadein_white-cloud-behind 1s ease-in,
+    -o-animation:
+      fadein_white-cloud-behind 1s ease-in,
       move_white-cloud-behind 1s linear 1s infinite alternate;
-    animation: fadein_white-cloud-behind 1s ease-in,
+    animation:
+      fadein_white-cloud-behind 1s ease-in,
       move_white-cloud-behind 1s linear 1s infinite alternate;
   }
 
@@ -539,15 +544,20 @@ const StyledErrorContainer = styled.div`
     width: 9.86%;
     height: 9.04%;
     z-index: 6;
-    -webkit-animation: fadein_white-cloud-center 1s ease-in,
+    -webkit-animation:
+      fadein_white-cloud-center 1s ease-in,
       move_white-cloud-center 1s linear 1s infinite alternate;
-    -moz-animation: fadein_white-cloud-center 1s ease-in,
+    -moz-animation:
+      fadein_white-cloud-center 1s ease-in,
       move_white-cloud-center 1s linear 1s infinite alternate;
-    -ms-animation: fadein_white-cloud-center 1s ease-in,
+    -ms-animation:
+      fadein_white-cloud-center 1s ease-in,
       move_white-cloud-center 1s linear 1s infinite alternate;
-    -o-animation: fadein_white-cloud-center 1s ease-in,
+    -o-animation:
+      fadein_white-cloud-center 1s ease-in,
       move_white-cloud-center 1s linear 1s infinite alternate;
-    animation: fadein_white-cloud-center 1s ease-in,
+    animation:
+      fadein_white-cloud-center 1s ease-in,
       move_white-cloud-center 1s linear 1s infinite alternate;
   }
 
@@ -934,13 +944,21 @@ const StyledErrorContainer = styled.div`
     width: 12.26%;
     height: 38.08%;
     z-index: 11;
-    -webkit-animation: fadein_baloon 1s,
+    -webkit-animation:
+      fadein_baloon 1s,
       move_baloon 1s linear 1s infinite alternate;
-    -moz-animation: fadein_baloon 1s,
+    -moz-animation:
+      fadein_baloon 1s,
       move_baloon 1s linear 1s infinite alternate;
-    -ms-animation: fadein_baloon 1s, move_baloon 1s linear 1s infinite alternate;
-    -o-animation: fadein_baloon 1s, move_baloon 1s linear 1s infinite alternate;
-    animation: fadein_baloon 1s, move_baloon 1s linear 1s infinite alternate;
+    -ms-animation:
+      fadein_baloon 1s,
+      move_baloon 1s linear 1s infinite alternate;
+    -o-animation:
+      fadein_baloon 1s,
+      move_baloon 1s linear 1s infinite alternate;
+    animation:
+      fadein_baloon 1s,
+      move_baloon 1s linear 1s infinite alternate;
   }
 
   @keyframes fadein_baloon {

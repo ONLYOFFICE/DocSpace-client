@@ -1,13 +1,13 @@
 import React from "react";
-import PropTypes from "prop-types";
-import StyledErrorContainer from "./StyledErrorContainer";
-import Headline from "../Headline";
 import { Text } from "@docspace/shared/components/text";
-import { Button } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 
-const ErrorContainer = (props) => {
-  //console.log("ErrorContainer render");
+import Headline from "../headline/Headline";
 
+import StyledErrorContainer from "./ErrorContainer.styled";
+import type { ErrorContainerProps } from "./ErrorContainer.types";
+
+const ErrorContainer = (props: ErrorContainerProps) => {
   const {
     headerText,
     bodyText,
@@ -15,12 +15,12 @@ const ErrorContainer = (props) => {
     onClickButton,
     children,
     customizedBodyText,
-    isPrimaryButton,
+    isPrimaryButton = true,
     ...rest
   } = props;
 
   return (
-    <StyledErrorContainer {...rest}>
+    <StyledErrorContainer {...rest} data-testid="ErrorContainer">
       <div id="container">
         <svg
           id="background"
@@ -335,22 +335,13 @@ const ErrorContainer = (props) => {
         </svg>
       </div>
       {headerText && (
-        <Headline id="header" type="header" theme={rest?.theme}>
+        <Headline id="header" type="header">
           {headerText}
         </Headline>
       )}
-      {bodyText && (
-        <Text id="text" theme={rest?.theme}>
-          {bodyText}
-        </Text>
-      )}
+      {bodyText && <Text id="text">{bodyText}</Text>}
       {customizedBodyText && (
-        <Text
-          id="customized-text"
-          fontWeight={600}
-          theme={rest?.theme}
-          fontSize="13px"
-        >
+        <Text id="customized-text" fontWeight={600} fontSize="13px">
           {customizedBodyText}
         </Text>
       )}
@@ -358,32 +349,18 @@ const ErrorContainer = (props) => {
       {buttonText && onClickButton && (
         <div id="button-container">
           <Button
-            theme={rest?.theme}
             id="button"
-            size="normal"
             scale
-            primary={isPrimaryButton}
             label={buttonText}
             onClick={onClickButton}
+            size={ButtonSize.normal}
+            primary={isPrimaryButton}
           />
         </div>
       )}
       {children}
     </StyledErrorContainer>
   );
-};
-
-ErrorContainer.defaultProps = {
-  isPrimaryButton: true,
-};
-
-ErrorContainer.propTypes = {
-  headerText: PropTypes.string,
-  bodyText: PropTypes.string,
-  isPrimaryButton: PropTypes.bool,
-  buttonText: PropTypes.string,
-  onClickButton: PropTypes.func,
-  children: PropTypes.any,
 };
 
 export default ErrorContainer;

@@ -126,6 +126,7 @@ class UserStore {
     avatarSmall: string,
     avatarMedium: string,
     avatarMax: string,
+    avatarOriginal: string,
   ) => {
     if (this.user) {
       this.user = {
@@ -134,6 +135,7 @@ class UserStore {
         avatarSmall,
         avatarMedium,
         avatarMax,
+        avatarOriginal,
       };
     }
   };

@@ -131,6 +131,7 @@ import {
   FilesSelectorInputWrapper,
   SelectedItemsContainer,
   CheckboxGroup,
+  CodeWrapper,
 } from "./StyledPresets";
 
 const Manager = (props) => {
@@ -634,10 +635,10 @@ const Manager = (props) => {
   );
 
   const code = (
-    <>
+    <CodeWrapper width={width + widthDimension.label} height={height + heightDimension.label}>
       <CategorySubHeader className="copy-window-code">{t("CopyWindowCode")}</CategorySubHeader>
       <Textarea value={codeBlock} heightTextArea={153} />
-    </>
+    </CodeWrapper>
   );
 
   const dataTabs = [

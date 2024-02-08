@@ -511,6 +511,7 @@
 
         const renderContainer = document.createElement("div");
         renderContainer.id = this.config.frameId + "-container";
+        renderContainer.classList = ["frame-container"];
         renderContainer.style.position = "relative";
         renderContainer.style.width = this.config.width;
         renderContainer.style.height = this.config.height || "100%";

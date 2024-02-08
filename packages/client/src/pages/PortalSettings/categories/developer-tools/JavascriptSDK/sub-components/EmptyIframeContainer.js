@@ -5,8 +5,8 @@ import { RectangleSkeleton } from "@docspace/shared/skeletons/rectangle";
 import { Base } from "@docspace/shared/themes";
 
 const StyledContainer = styled.div`
-  width: ${(props) => props.width + "%"};
-  height: ${(props) => props.height + "px"};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
 
   display: flex;
   justify-content: center;
@@ -14,6 +14,8 @@ const StyledContainer = styled.div`
 
   border: 1px solid ${(props) => props.theme.plugins.borderColor};
   border-radius: 6px;
+
+  overflow: hidden;
 
   .emptyIframeText {
     position: absolute;
@@ -28,7 +30,7 @@ StyledContainer.defaultProps = { theme: Base };
 const EmptyIframeContainer = ({ text, width, height }) => {
   return (
     <StyledContainer width={width} height={height}>
-      <RectangleSkeleton height={height} borderRadius="6px" />
+      <RectangleSkeleton width="100%" height="100%" borderRadius="6px" />
       <span className="emptyIframeText">{text}</span>
     </StyledContainer>
   );

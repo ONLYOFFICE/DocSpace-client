@@ -38,6 +38,7 @@ import {
   GetCodeButtonWrapper,
   FilesSelectorInputWrapper,
   ControlsSection,
+  CodeWrapper,
 } from "./StyledPresets";
 
 const SimpleRoom = (props) => {
@@ -154,7 +155,7 @@ const SimpleRoom = (props) => {
     }
 
     setConfig((config) => {
-      return { ...config, ...newConfig };
+      return { ...config, ...newConfig, init: true };
     });
   };
 
@@ -215,16 +216,30 @@ const SimpleRoom = (props) => {
           <Box id={frameId}></Box>
         </>
       ) : (
-        <EmptyIframeContainer text={t("SelectRoom")} width={width} height={height} />
+        <EmptyIframeContainer
+          text={t("SelectRoom")}
+          width={width + widthDimension.label}
+          height={height + heightDimension.label}
+        />
       )}
     </Frame>
   );
 
   const code = (
-    <>
-      <CategorySubHeader className="copy-window-code">{t("CopyWindowCode")}</CategorySubHeader>
-      <Textarea value={codeBlock} heightTextArea={153} />
-    </>
+    <CodeWrapper width={width + widthDimension.label} height={height + heightDimension.label}>
+      {config.id !== undefined ? (
+        <>
+          <CategorySubHeader className="copy-window-code">{t("CopyWindowCode")}</CategorySubHeader>
+          <Textarea value={codeBlock} heightTextArea={153} />
+        </>
+      ) : (
+        <EmptyIframeContainer
+          text={t("SelectRoom")}
+          width={width + widthDimension.label}
+          height={height + heightDimension.label}
+        />
+      )}
+    </CodeWrapper>
   );
 
   const dataTabs = [

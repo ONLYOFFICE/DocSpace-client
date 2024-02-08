@@ -38,6 +38,7 @@ import {
   Preview,
   GetCodeButtonWrapper,
   FilesSelectorInputWrapper,
+  CodeWrapper,
 } from "./StyledPresets";
 
 const Editor = (props) => {
@@ -53,9 +54,9 @@ const Editor = (props) => {
   ];
 
   const [widthDimension, setWidthDimension] = useState(dataDimensions[0]);
-  const [heightDimension, setHeightDimension] = useState(dataDimensions[1]);
+  const [heightDimension, setHeightDimension] = useState(dataDimensions[0]);
   const [width, setWidth] = useState("100");
-  const [height, setHeight] = useState(isTablet() ? "400" : isMobile() ? "206" : "770");
+  const [height, setHeight] = useState("100");
   const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
   const [showPreview, setShowPreview] = useState(window.innerWidth > showPreviewThreshold);
 
@@ -114,7 +115,7 @@ const Editor = (props) => {
 
   const onChangeFileId = (file) => {
     setConfig((config) => {
-      return { ...config, id: file.id };
+      return { ...config, id: file.id, init: true };
     });
   };
 
@@ -169,16 +170,30 @@ const Editor = (props) => {
           <Box id={frameId}></Box>
         </>
       ) : (
-        <EmptyIframeContainer text={t("SelectFile")} width={width} height={height} />
+        <EmptyIframeContainer
+          text={t("SelectFile")}
+          width={width + widthDimension.label}
+          height={height + heightDimension.label}
+        />
       )}
     </Frame>
   );
 
   const code = (
-    <>
-      <CategorySubHeader className="copy-window-code">{t("CopyWindowCode")}</CategorySubHeader>
-      <Textarea value={codeBlock} heightTextArea={153} />
-    </>
+    <CodeWrapper width={width + widthDimension.label} height={height + heightDimension.label}>
+      {config.id !== undefined ? (
+        <>
+          <CategorySubHeader className="copy-window-code">{t("CopyWindowCode")}</CategorySubHeader>
+          <Textarea value={codeBlock} heightTextArea={153} />
+        </>
+      ) : (
+        <EmptyIframeContainer
+          text={t("SelectFile")}
+          width={width + widthDimension.label}
+          height={height + heightDimension.label}
+        />
+      )}
+    </CodeWrapper>
   );
 
   const dataTabs = [

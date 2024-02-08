@@ -36,6 +36,7 @@ import {
   RowContainer,
   Preview,
   GetCodeButtonWrapper,
+  CodeWrapper,
 } from "./StyledPresets";
 
 const RoomSelector = (props) => {
@@ -79,9 +80,9 @@ const RoomSelector = (props) => {
   ];
 
   const [widthDimension, setWidthDimension] = useState(dataDimensions[1]);
-  const [heightDimension, setHeightDimension] = useState(dataDimensions[1]);
+  const [heightDimension, setHeightDimension] = useState(dataDimensions[0]);
   const [width, setWidth] = useState("600");
-  const [height, setHeight] = useState(isTablet() ? "400" : isMobile() ? "206" : "778");
+  const [height, setHeight] = useState("100");
   const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
   const [showPreview, setShowPreview] = useState(window.innerWidth > showPreviewThreshold);
   const [selectedElementType, setSelectedElementType] = useState(elementDisplayOptions[0].value);
@@ -234,10 +235,10 @@ const RoomSelector = (props) => {
   );
 
   const code = (
-    <>
+    <CodeWrapper width={width + widthDimension.label} height={height + heightDimension.label}>
       <CategorySubHeader className="copy-window-code">{t("CopyWindowCode")}</CategorySubHeader>
       <Textarea value={codeBlock} heightTextArea={153} />
-    </>
+    </CodeWrapper>
   );
 
   const dataTabs =

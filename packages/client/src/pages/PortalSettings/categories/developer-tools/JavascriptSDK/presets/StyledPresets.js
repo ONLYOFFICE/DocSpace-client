@@ -12,6 +12,10 @@ export const SDKContainer = styled(Box)`
   css`
     width: 100%;
   `}
+
+  .tabs_body {
+    height: calc(100lvh - 260px);
+  }
 `;
 
 export const Controls = styled(Box)`
@@ -159,6 +163,14 @@ export const Frame = styled(Box)`
   css`
     margin-top: 4px;
   `}
+
+  .frame-container {
+    height: 100% !important;
+
+    & > iframe {
+      height: 100% !important;
+    }
+  }
 `;
 
 Frame.defaultProps = { theme: Base };
@@ -238,4 +250,15 @@ export const FilesSelectorInputWrapper = styled.div`
 export const SelectedItemsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
+`;
+
+export const CodeWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  margin-top: 16px;
+
+  width: calc(${(props) => (props.width ? props.width : "100%")} + 2px);
+  height: calc(${(props) => (props.height ? props.height : "400px")} + 2px);
 `;

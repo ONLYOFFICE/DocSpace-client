@@ -130,7 +130,7 @@ const Badges = ({
   const iconForm =
     sizeBadge === "medium" ? FormFillRectSvgUrl : AccessEditFormReactSvgUrl;
 
-  const iconEdit = !isForm ? FileActionsConvertEditDocReactSvgUrl : iconForm;
+  const iconEdit = !isPdf ? FileActionsConvertEditDocReactSvgUrl : iconForm;
 
   const iconRefresh = desktopView ? Refresh12ReactSvgUrl : RefreshReactSvgUrl;
 
@@ -215,7 +215,7 @@ const Badges = ({
           size={sizeBadge}
           onClick={onFilesClick}
           hoverColor={theme.filesBadges.hoverIconColor}
-          title={isForm ? t("Common:FillFormButton") : t("Common:EditButton")}
+          title={isPdf ? t("Common:FillFormButton") : t("Common:EditButton")}
         />
       )}
       {item.viewAccessibility?.MustConvert &&

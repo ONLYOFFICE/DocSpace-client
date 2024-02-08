@@ -15,6 +15,7 @@ export type TUser = {
   workFrom: string;
   avatarMax: string;
   avatarMedium: string;
+  avatarOriginal: string;
   avatar: string;
   isAdmin: boolean;
   isRoomAdmin: boolean;

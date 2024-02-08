@@ -1,26 +1,18 @@
 import styled from "styled-components";
-import { Heading } from "@docspace/shared/components/heading";
+
 import { Base } from "@docspace/shared/themes";
+import { Heading } from "@docspace/shared/components/heading";
 import { NoUserSelect, tablet } from "@docspace/shared/utils";
 
-const size = {
-  header: "28px",
-  menu: "23px",
-  content: "18px",
-};
+import { size, weight } from "./Headline.constants";
+import type { StyledHeadingProps } from "./Headline.types";
 
-const weight = {
-  header: 600,
-  menu: "bold",
-  content: "bold",
-};
-
-const StyledHeading = styled(Heading)`
+const StyledHeading = styled(Heading)<StyledHeadingProps>`
   margin: 0;
   line-height: 50px;
   font-size: ${(props) =>
     props.theme.getCorrectFontSize(
-      props.fontSize ? props.fontSize : size[props.headlineType]
+      props.fontSize ? props.fontSize : size[props.headlineType],
     )};
   font-weight: ${(props) => weight[props.headlineType]};
   color: ${(props) => (props.color ? props.color : props.theme.color)};

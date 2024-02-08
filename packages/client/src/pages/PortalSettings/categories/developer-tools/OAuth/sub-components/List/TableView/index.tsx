@@ -12,6 +12,7 @@ import Header from "./Header";
 
 import { TableViewProps } from "./TableView.types";
 import { TableWrapper } from "./TableView.styled";
+import { UserStore } from "@docspace/shared/store/UserStore";
 
 const TABLE_VERSION = "1";
 const COLUMNS_SIZE = `oauthConfigColumnsSize_ver-${TABLE_VERSION}`;
@@ -139,8 +140,14 @@ const TableView = ({
 };
 
 export default inject(
-  ({ auth, oauthStore }: { auth: any; oauthStore: OAuthStoreProps }) => {
-    const { id: userId } = auth.userStore.user;
+  ({
+    userStore,
+    oauthStore,
+  }: {
+    userStore: UserStore;
+    oauthStore: OAuthStoreProps;
+  }) => {
+    const userId = userStore.user?.id;
 
     const {
       viewAs,

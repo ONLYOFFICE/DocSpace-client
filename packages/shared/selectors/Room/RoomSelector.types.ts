@@ -1,11 +1,24 @@
-import { SelectorProps } from "../../components/selector";
+import {
+  TSelectorCancelButton,
+  TSelectorHeader,
+  TSelectorItem,
+} from "../../components/selector/Selector.types";
 import { TLogo } from "../../api/rooms/types";
 import { RoomsType } from "../../enums";
 
-export interface RoomSelectorProps extends SelectorProps {
-  excludeItems?: number[];
-  setIsDataReady?: (value: boolean) => void;
-}
+export type RoomSelectorProps = TSelectorHeader &
+  TSelectorCancelButton & {
+    id?: string;
+    className?: string;
+    style?: React.CSSProperties;
+
+    isMultiSelect: boolean;
+
+    onSubmit: (items: TSelectorItem[]) => void;
+
+    excludeItems?: number[];
+    setIsDataReady?: (value: boolean) => void;
+  };
 
 export type TItem = {
   id: number;

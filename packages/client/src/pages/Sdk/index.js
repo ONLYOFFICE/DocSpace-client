@@ -40,12 +40,12 @@ const Sdk = ({
 
   const callCommand = useCallback(
     () => frameCallCommand("setConfig"),
-    [frameCallCommand]
+    [frameCallCommand],
   );
 
   const callCommandLoad = useCallback(
     () => frameCallCommand("setIsLoaded"),
-    [frameCallCommand]
+    [frameCallCommand],
   );
 
   useEffect(() => {
@@ -62,7 +62,7 @@ const Sdk = ({
 
   const { mode } = useParams();
   const selectorType = new URLSearchParams(window.location.search).get(
-    "selectorType"
+    "selectorType",
   );
 
   const toRelativeUrl = (data) => {
@@ -162,7 +162,7 @@ const Sdk = ({
 
       frameCallEvent({ event: "onSelectCallback", data });
     },
-    [frameCallEvent]
+    [frameCallEvent],
   );
 
   const onSelectFile = useCallback(
@@ -179,7 +179,7 @@ const Sdk = ({
 
       frameCallEvent({ event: "onSelectCallback", data });
     },
-    [frameCallEvent]
+    [frameCallEvent],
   );
 
   const onClose = useCallback(() => {
@@ -195,13 +195,17 @@ const Sdk = ({
   let component;
   switch (mode) {
     case "room-selector":
+      const cancelButtonProps = frameConfig?.showSelectorCancel
+        ? { withCancelButton: true, cancelButtonLabel: "", onCancel: onClose }
+        : {};
+
       component = (
         <RoomSelector
-          withCancelButton={frameConfig?.showSelectorCancel}
+          {...cancelButtonProps}
           withHeader={frameConfig?.showSelectorHeader}
-          onAccept={onSelectRoom}
-          onCancel={onClose}
+          onSubmit={onSelectRoom}
           setIsDataReady={setIsDataReady}
+          isMultiSelect={false}
         />
       );
       break;
@@ -263,5 +267,5 @@ export default inject(
       fetchExternalLinks,
       getFilePrimaryLink,
     };
-  }
+  },
 )(observer(Sdk));

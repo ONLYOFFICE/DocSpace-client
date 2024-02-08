@@ -458,10 +458,14 @@ const FilterBlock = ({
           ) : (
             <RoomSelector
               className="people-selector"
+              onSubmit={selectOption}
+              withHeader
+              headerProps={{
+                onBackClick: onArrowClick,
+                headerLabel: selectorLabel,
+                withoutBackButton: false,
+              }}
               isMultiSelect={false}
-              onAccept={selectOption}
-              onBackClick={onArrowClick}
-              headerLabel={selectorLabel}
             />
           )}
           <StyledControlContainer onClick={hideFilterBlock}>

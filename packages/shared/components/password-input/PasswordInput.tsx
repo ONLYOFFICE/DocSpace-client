@@ -171,42 +171,42 @@ const PasswordInput = React.forwardRef(
           const specSymbolsRegExp = new RegExp(
             passwordSettings.specSymbolsRegexStr || "",
           );
-          const allowedRegExp = new RegExp(
-            `^${passwordSettings.allowedCharactersRegexStr}{1,}$`,
-          );
 
-          let capital;
-          let digits;
-          let special;
+          let capital = true;
+          let digits = true;
+          let special = true;
+          let allowed = true;
+          let length = true;
 
           if (passwordSettings.upperCase) {
             capital = capitalRegExp.test(value);
-          } else {
-            capital = true;
           }
 
           if (passwordSettings.digits) {
             digits = digitalRegExp.test(value);
-          } else {
-            digits = true;
           }
 
           if (passwordSettings.specSymbols) {
             special = specSymbolsRegExp.test(value);
-          } else {
-            special = true;
           }
 
-          const allowedCharacters = allowedRegExp.test(value);
+          if (passwordSettings.allowedCharactersRegexStr) {
+            const allowedRegExp = new RegExp(
+              `^${passwordSettings.allowedCharactersRegexStr}{1,}$`,
+            );
+            allowed = allowedRegExp.test(value);
+          }
+
+          if (passwordSettings?.minLength !== undefined) {
+            length = value.trim().length >= passwordSettings.minLength;
+          }
 
           return {
-            allowed: allowedCharacters,
+            allowed,
             digits,
             capital,
             special,
-            length: passwordSettings.minLength
-              ? value.trim().length >= passwordSettings.minLength
-              : true,
+            length,
           };
         }
         return {} as TPasswordValidation;
@@ -597,3 +597,4 @@ export { PasswordInput };
 // PasswordInput.displayName = "PasswordInput";
 
 // export { PasswordInput };
+

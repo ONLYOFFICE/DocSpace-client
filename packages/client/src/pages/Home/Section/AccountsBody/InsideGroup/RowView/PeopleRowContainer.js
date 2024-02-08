@@ -90,17 +90,17 @@ const PeopleRowContainer = ({
     currentDeviceType,
   });
 
-  return !!currentGroup?.members.length ? (
+  return !!peopleList?.length ? (
     <StyledRowContainer
       className="people-row-container"
       useReactWindow={!withPaging}
       fetchMoreFiles={() => {}}
       hasMoreFiles={false}
-      itemCount={currentGroup.members.length}
-      filesLength={currentGroup.members.length}
+      itemCount={peopleList.length}
+      filesLength={peopleList.length}
       itemHeight={58}
     >
-      {currentGroup.members.map((item, index) => (
+      {peopleList.map((item, index) => (
         <SimpleUserRow
           theme={theme}
           key={item.id}
@@ -115,13 +115,20 @@ const PeopleRowContainer = ({
   );
 };
 
-export default inject(({ peopleStore, auth, filesStore }) => {
-  const { viewAs: accountsViewAs, setViewAs } = peopleStore;
-  const { theme, withPaging, currentDeviceType } = auth.settingsStore;
-  const { isVisible: infoPanelVisible } = auth.infoPanelStore;
+export default inject(({ peopleStore, filesStore, settingsStore }) => {
+  const {
+    viewAs: accountsViewAs,
+    setViewAs,
+    usersStore,
+    infoPanelStore,
+  } = peopleStore;
+  const { theme, withPaging, currentDeviceType } = settingsStore;
+  const { isVisible: infoPanelVisible } = infoPanelStore;
   const { currentGroup } = peopleStore.groupsStore;
+  const { peopleList } = usersStore;
 
   return {
+    peopleList,
     currentGroup,
     accountsViewAs,
     setViewAs,

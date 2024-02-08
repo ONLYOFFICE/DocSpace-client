@@ -59,7 +59,7 @@ class PeopleTableHeader extends React.Component {
 
   getColumns = (defaultColumns) => {
     const storageColumns = localStorage.getItem(
-      `${TABLE_COLUMNS}=${this.props.userId}`
+      `${TABLE_COLUMNS}=${this.props.userId}`,
     );
     const columns = [];
 
@@ -180,9 +180,9 @@ export default inject(
     clientLoadingStore,
     userStore,
   }) => {
-    const { filterStore } = peopleStore;
+    const { groupsStore } = peopleStore;
 
-    const { filter } = filterStore;
+    const { insideGroupFilter: filter } = groupsStore;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { withPaging } = settingsStore;
@@ -195,9 +195,9 @@ export default inject(
       infoPanelVisible,
       withPaging,
     };
-  }
+  },
 )(
   withTranslation(["People", "Common", "PeopleTranslations"])(
-    observer(PeopleTableHeader)
-  )
+    observer(PeopleTableHeader),
+  ),
 );

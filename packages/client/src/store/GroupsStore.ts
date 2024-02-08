@@ -151,7 +151,6 @@ class GroupsStore {
     filterData.total = filteredMembersRes.total;
 
     group && this.setCurrentGroup(group);
-    console.log(this.peopleStore);
     this.peopleStore.usersStore.setUsers(filteredMembersRes.items);
 
     if (updateFilter) {

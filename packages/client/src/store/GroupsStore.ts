@@ -85,14 +85,8 @@ class GroupsStore {
     this.setInsideGroupFilterUrl(filter);
   };
 
-  setCurrentGroup = (currentGroup, filter, updateFilter = false) => {
-    const filterData = filter ? filter.clone() : Filter.getDefault();
-
+  setCurrentGroup = (currentGroup) => {
     this.currentGroup = currentGroup;
-
-    if (updateFilter) {
-      this.setInsideGroupFilterParams(filterData);
-    }
   };
 
   getGroups = async (

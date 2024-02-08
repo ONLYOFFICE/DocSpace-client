@@ -37,7 +37,7 @@ import {
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 
-const minSearchValue = 1;
+const minSearchValue = 2;
 
 const InviteInput = ({
   defaultAccess,
@@ -118,7 +118,7 @@ const InviteInput = ({
     };
   };
 
-  const searchByQuery = async (value, isValid) => {
+  const searchByQuery = async (value) => {
     const query = value.trim();
 
     if (query.length >= minSearchValue) {
@@ -129,13 +129,14 @@ const InviteInput = ({
 
       setUsersList(users.items);
 
-      if (users.total || isValid) setIsAddEmailPanelBlocked(false);
+      if (users.total) setIsAddEmailPanelBlocked(false);
       else setIsAddEmailPanelBlocked(true);
     }
 
     if (!query) {
       setInputValue("");
       setUsersList([]);
+      setIsAddEmailPanelBlocked(true);
     }
   };
 
@@ -160,15 +161,15 @@ const InviteInput = ({
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{0,}))$/g;
 
     const parts = getParts(value);
-    let isValid = false;
     for (let i = 0; i < parts.length; i += 1) {
       if (regex.test(parts[i])) {
-        isValid = true;
+        setIsAddEmailPanelBlocked(false);
+        return;
       }
     }
 
     if (roomId !== -1) {
-      debouncedSearch(clearValue, isValid);
+      debouncedSearch(clearValue);
 
       return;
     }
@@ -200,6 +201,7 @@ const InviteInput = ({
       setInviteItems(items);
       setInputValue("");
       setUsersList([]);
+      setIsAddEmailPanelBlocked(true);
     };
 
     return (

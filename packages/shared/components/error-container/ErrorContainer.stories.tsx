@@ -14,9 +14,9 @@ export default meta;
 
 export const Default: StoryObj<ErrorContainerType> = {
   args: {
-    bodyText: "Body",
-    buttonText: "Button",
-    headerText: "Header",
+    bodyText: "Try again later",
+    buttonText: "Go back",
+    headerText: "Some error has happened",
     customizedBodyText: "Customized body",
   },
 };

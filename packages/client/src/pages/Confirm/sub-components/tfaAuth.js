@@ -12,7 +12,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import withLoader from "../withLoader";
 import { mobile } from "@docspace/shared/utils";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-import DocspaceLogo from "../../../DocspaceLogo";
+import DocspaceLogo from "../../../components/DocspaceLogoWrapper";
 import { StyledPage, StyledContent } from "./StyledConfirm";
 import { validateTfaCode } from "@docspace/shared/api/settings";
 import { loginWithTfaCode } from "@docspace/shared/api/user";

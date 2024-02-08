@@ -18,7 +18,7 @@ class ErrorBoundary extends React.Component<
 
   public static getDerivedStateFromError(error?: Error): ErrorBoundaryState {
     // Update state so the next render will show the fallback UI.
-    return { error: error ?? "Unhandled exception" };
+    return { error: error ?? new Error("Unhandled exception") };
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {

@@ -5,5 +5,5 @@ export interface ErrorBoundaryProps extends PropsWithChildren {
 }
 
 export interface ErrorBoundaryState {
-  error: Error | null | string;
+  error: Error | null;
 }

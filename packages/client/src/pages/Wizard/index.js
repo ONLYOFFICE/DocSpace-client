@@ -42,7 +42,7 @@ import {
 } from "./StyledWizard";
 import { getUserTimezone, getSelectZone } from "./timezonesHelper";
 
-import DocspaceLogo from "SRC_DIR/DocspaceLogo";
+import DocspaceLogo from "../../components/DocspaceLogoWrapper";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
 import {
   DEFAULT_SELECT_TIMEZONE,

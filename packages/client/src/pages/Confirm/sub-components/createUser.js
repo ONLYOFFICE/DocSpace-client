@@ -28,7 +28,7 @@ import MoreLoginModal from "@docspace/common/components/MoreLoginModal";
 import { EmailInput } from "@docspace/shared/components/email-input";
 import { getPasswordErrorMessage } from "../../../helpers/utils";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-import DocspaceLogo from "../../../DocspaceLogo";
+import DocspaceLogo from "../../../components/DocspaceLogoWrapper";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import { StyledPage, StyledContent } from "./StyledConfirm";
 import {

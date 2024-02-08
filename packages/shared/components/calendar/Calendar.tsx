@@ -36,10 +36,10 @@ const Calendar = ({
     onChange?.(formattedDate);
   };
 
-  const [observedDate, setObservedDate] = useState(moment());
-  const [selectedScene, setSelectedScene] = useState(0);
-
   const date = initialDateProp ?? new Date();
+
+  const [observedDate, setObservedDate] = useState(moment(date));
+  const [selectedScene, setSelectedScene] = useState(0);
   const [initialDate, setInitialDate] = useState(moment(date));
 
   const momentMinDate = minDate
@@ -79,7 +79,7 @@ const Calendar = ({
         "Initial date is out of min/max dates boundaries. Initial date will be set as closest boundary value",
       );
     }
-    setObservedDate(initialDate);
+    // setObservedDate(initialDate);
   }, [initialDateProp, initialDate, resultMaxDate, resultMinDate]);
 
   return (

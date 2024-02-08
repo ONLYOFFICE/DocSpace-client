@@ -339,7 +339,7 @@ export default inject(
   ({
     settingsStore,
     currentQuotaStore,
-    payments,
+    paymentStore,
     paymentQuotasStore,
     currentTariffStatusStore,
   }) => {
@@ -363,7 +363,7 @@ export default inject(
     const { planCost, tariffPlanTitle, portalPaymentQuotas } =
       paymentQuotasStore;
 
-    const { isAlreadyPaid } = payments;
+    const { isAlreadyPaid } = paymentStore;
 
     return {
       paymentDate,
@@ -390,5 +390,5 @@ export default inject(
       isNonProfit,
       isPaymentDateValid,
     };
-  }
+  },
 )(observer(PaymentContainer));

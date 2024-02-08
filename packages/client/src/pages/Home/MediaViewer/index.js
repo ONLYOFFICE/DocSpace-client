@@ -4,7 +4,7 @@ import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import queryString from "query-string";
 
-import { PluginFileType } from "SRC_DIR/helpers/plugins/constants";
+import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
@@ -118,7 +118,7 @@ const FilesMediaViewer = (props) => {
       setCurrentId(id);
       navigate(url);
     },
-    [setCurrentId, navigate]
+    [setCurrentId, navigate],
   );
 
   const resetSelection = () => {
@@ -159,7 +159,7 @@ const FilesMediaViewer = (props) => {
           // try to fix with one check later (see deleteAction)
           const isActiveFile = activeFiles.find((elem) => elem.id === file.id);
           const isActiveFolder = activeFolders.find(
-            (elem) => elem.id === file.id
+            (elem) => elem.id === file.id,
           );
 
           if (isActiveFile || isActiveFolder) return;
@@ -169,7 +169,14 @@ const FilesMediaViewer = (props) => {
         }
       }
     },
-    [files, t, activeFiles, activeFolders, setRemoveMediaItem, deleteItemAction]
+    [
+      files,
+      t,
+      activeFiles,
+      activeFolders,
+      setRemoveMediaItem,
+      deleteItemAction,
+    ],
   );
 
   const onDownloadMediaFile = useCallback(
@@ -179,7 +186,7 @@ const FilesMediaViewer = (props) => {
         return window.open(viewUrlFile, "_self");
       }
     },
-    [playlist]
+    [playlist],
   );
 
   const onMediaViewerClose = useCallback(
@@ -227,7 +234,7 @@ const FilesMediaViewer = (props) => {
       setToPreviewFile,
       setMediaViewerData,
       setBufferSelection,
-    ]
+    ],
   );
   useEffect(() => {
     if (playlist.length === 0 && isOpenMediaViewer) onMediaViewerClose();
@@ -422,5 +429,5 @@ export default inject(
       pluginContextMenuItems,
       currentDeviceType,
     };
-  }
+  },
 )(withTranslation(["Files", "Translations"])(observer(FilesMediaViewer)));

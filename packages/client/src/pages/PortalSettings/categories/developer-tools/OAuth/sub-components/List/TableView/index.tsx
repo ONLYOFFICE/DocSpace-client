@@ -60,7 +60,7 @@ const TableView = ({
         if (columns != tagCount) setTagCount(columns);
       }
     },
-    [tagCount]
+    [tagCount],
   );
 
   const onSetTagRef = React.useCallback((node: HTMLDivElement) => {
@@ -85,7 +85,7 @@ const TableView = ({
 
       setSelection && setSelection("");
     },
-    [setSelection]
+    [setSelection],
   );
 
   React.useEffect(() => {
@@ -102,7 +102,7 @@ const TableView = ({
     async ({ startIndex }: { startIndex: number; stopIndex: number }) => {
       await fetchNextClients?.(startIndex);
     },
-    []
+    [],
   );
 
   return (
@@ -177,5 +177,5 @@ export default inject(
       itemCount,
       fetchNextClients,
     };
-  }
+  },
 )(observer(TableView));

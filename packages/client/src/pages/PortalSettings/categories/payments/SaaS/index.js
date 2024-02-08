@@ -42,7 +42,7 @@ const SaaSPage = ({
         setEncryptionKeys,
         false,
         null,
-        t
+        t,
       );
     }
     return () => resetTariffContainerToBasic();
@@ -72,7 +72,7 @@ export default inject(
   ({
     authStore,
     settingsStore,
-    payments,
+    paymentStore,
     userStore,
     currentQuotaStore,
     currentTariffStatusStore,
@@ -90,7 +90,7 @@ export default inject(
       init,
       isUpdatingBasicSettings,
       resetTariffContainerToBasic,
-    } = payments;
+    } = paymentStore;
     const {
       isEncryptionSupport,
       setEncryptionKeys,
@@ -116,5 +116,5 @@ export default inject(
       isLoadedCurrentQuota,
       isUpdatingBasicSettings,
     };
-  }
+  },
 )(observer(SaaSPage));

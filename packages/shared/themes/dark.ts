@@ -303,7 +303,7 @@ const Dark: TTheme = {
     border: "1px solid #474747",
     text: {
       width: "100%",
-      height: "16px",
+      height: "18px",
       margin: "0 11px",
       fontWeight: "500",
       fontSize: "14px",

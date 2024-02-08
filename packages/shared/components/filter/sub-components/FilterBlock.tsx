@@ -43,6 +43,9 @@ const FilterBlock = ({
   userId,
   isRooms,
   isAccounts,
+  isPeopleAccounts,
+  isGroupsAccounts,
+  isInsideGroup,
 }: FilterBlockProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -500,7 +503,13 @@ const FilterBlock = ({
           </StyledFilterBlockHeader>
           <div className="filter-body">
             {isLoading ? (
-              <FilterBlockLoader isRooms={isRooms} isAccounts={isAccounts} />
+              <FilterBlockLoader
+                isRooms={isRooms}
+                isAccounts={isAccounts}
+                isPeopleAccounts={isPeopleAccounts}
+                isGroupsAccounts={isGroupsAccounts}
+                isInsideGroup={isInsideGroup}
+              />
             ) : (
               <Scrollbar className="filter-body__scrollbar">
                 {filterData.map((item: TItem, index) => {

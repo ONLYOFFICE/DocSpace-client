@@ -2475,6 +2475,10 @@ const SectionFilterContent = ({
       onSortButtonClick={onSortButtonClick}
       currentDeviceType={currentDeviceType}
       userId={userId}
+      isAccounts={isAccountsPage}
+      isPeopleAccounts={isPeopleAccounts}
+      isGroupsAccounts={isGroupsAccounts}
+      isInsideGroup={isInsideGroup}
     />
   );
 };

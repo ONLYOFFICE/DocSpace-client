@@ -16,7 +16,7 @@ import {
   getCrashReport,
   downloadJson,
   getCurrentDate,
-} from "SRC_DIR/helpers/crashReport";
+} from "@docspace/shared/utils/crashReport";
 import { DeviceType } from "@docspace/shared/enums";
 
 const ModalDialogContainer = styled(ModalDialog)`

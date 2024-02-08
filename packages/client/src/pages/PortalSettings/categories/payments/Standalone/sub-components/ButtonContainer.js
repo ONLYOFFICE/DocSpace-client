@@ -21,8 +21,8 @@ const ButtonContainer = ({ t, buyUrl }) => {
   );
 };
 
-export default inject(({ payments }) => {
-  const { buyUrl } = payments;
+export default inject(({ paymentStore }) => {
+  const { buyUrl } = paymentStore;
 
   return {
     buyUrl,

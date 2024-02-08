@@ -1,5 +1,5 @@
 interface Window {
-  zESettings?: any;
+  zESettings?: unknown;
   zE?: {
     apply: Function;
   };

@@ -233,8 +233,8 @@ const PayerInformationContainer = ({
 };
 
 export default inject(
-  ({ settingsStore, payments, userStore, currentTariffStatusStore }) => {
-    const { accountLink, isStripePortalAvailable } = payments;
+  ({ settingsStore, paymentStore, userStore, currentTariffStatusStore }) => {
+    const { accountLink, isStripePortalAvailable } = paymentStore;
     const { theme } = settingsStore;
     const { customerId, isGracePeriod, isNotPaidPeriod, payerInfo } =
       currentTariffStatusStore;
@@ -250,5 +250,5 @@ export default inject(
       isGracePeriod,
       isNotPaidPeriod,
     };
-  }
+  },
 )(observer(PayerInformationContainer));

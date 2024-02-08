@@ -124,7 +124,7 @@ const StyledTableContainer = styled(TableContainer)`
 StyledTableContainer.defaultProps = { theme: Base };
 
 const Table = ({
-  currentGroup,
+  peopleList,
   sectionWidth,
   accountsViewAs,
   setViewAs,
@@ -154,7 +154,7 @@ const Table = ({
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
-  return !!currentGroup?.members.length ? (
+  return !!peopleList?.length ? (
     <StyledTableContainer useReactWindow={!withPaging} forwardedRef={ref}>
       <TableHeader
         columnStorageName={columnStorageName}
@@ -171,12 +171,12 @@ const Table = ({
         columnStorageName={columnStorageName}
         fetchMoreFiles={() => {}}
         hasMoreFiles={false}
-        itemCount={currentGroup.members.length}
-        filesLength={currentGroup.members.length}
+        itemCount={peopleList.length}
+        filesLength={peopleList.length}
         itemHeight={49}
         useReactWindow={!withPaging}
       >
-        {currentGroup.members.map((item, index) => (
+        {peopleList.map((item, index) => (
           <TableRow
             theme={theme}
             key={item.id}
@@ -213,7 +213,7 @@ export default inject(
       changeType,
     } = peopleStore;
     const { theme, withPaging, currentDeviceType } = settingsStore;
-    const { currentGroup } = peopleStore.groupsStore;
+    const { peopleList } = usersStore;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { isAdmin, isOwner, id: userId } = userStore.user;
@@ -221,7 +221,7 @@ export default inject(
     const { canChangeUserType } = accessRightsStore;
 
     return {
-      currentGroup,
+      peopleList,
       accountsViewAs,
       setViewAs,
       theme,
@@ -235,5 +235,5 @@ export default inject(
       canChangeUserType,
       currentDeviceType,
     };
-  }
+  },
 )(observer(Table));

@@ -66,7 +66,7 @@ class PeopleStore {
   ) {
     this.authStore = authStore;
     this.infoPanelStore = infoPanelStore;
-    this.groupsStore = new GroupsStore(authStore, this);
+    this.groupsStore = new GroupsStore(this, authStore);
     this.usersStore = new UsersStore(
       this,
       settingsStore,

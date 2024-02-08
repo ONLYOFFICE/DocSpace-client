@@ -5,3 +5,4 @@ export { default as useAccounts } from "./useAccounts";
 export { default as useGroups } from "./useGroups";
 export { default as useSettings } from "./useSettings";
 export { default as usePublic } from "./usePublic";
+export { default as useInsideGroup } from "./useInsideGroup";

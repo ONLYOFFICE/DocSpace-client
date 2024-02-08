@@ -13,24 +13,23 @@ const InsideGroup = ({
   accountsViewAs,
   currentGroup,
   setCurrentGroup,
-  getGroupById,
+  fetchGroup,
 }) => {
   const navigate = useNavigate();
   const { groupId } = useParams();
 
-  useEffect(() => {
-    (async () => {
-      if (!groupId) return;
-      if (!currentGroup) {
-        const newCurrentGroup = await getGroupById(groupId);
-        setCurrentGroup(newCurrentGroup);
-      }
-    })();
-  }, [groupId]);
+  // useEffect(() => {
+  //   (async () => {
+  //     if (!groupId) return;
+  //     if (!currentGroup) {
+  //       fetchGroup(groupId);
+  //     }
+  //   })();
+  // }, [groupId]);
 
-  useEffect(() => {
-    navigate(`/accounts/groups/${groupId}/filter`);
-  }, [groupId]);
+  // useEffect(() => {
+  //   navigate(`/accounts/groups/${groupId}/filter`);
+  // }, [groupId]);
 
   if (!currentGroup) return null;
 
@@ -53,7 +52,7 @@ const InsideGroup = ({
 export default inject(({ peopleStore }) => ({
   currentGroup: peopleStore.groupsStore.currentGroup,
   setCurrentGroup: peopleStore.groupsStore.setCurrentGroup,
-  getGroupById: peopleStore.groupsStore.getGroupById,
+  fetchGroup: peopleStore.groupsStore.fetchGroup,
 }))(
   withTranslation(["People", "Common", "PeopleTranslations"])(
     withLoader(observer(InsideGroup))(),

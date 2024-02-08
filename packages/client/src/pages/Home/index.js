@@ -31,6 +31,7 @@ import {
   useAccounts,
   useSettings,
   useGroups,
+  useInsideGroup,
 } from "./Hooks";
 
 const PureHome = (props) => {
@@ -113,6 +114,7 @@ const PureHome = (props) => {
     accountsViewAs,
     fetchPeople,
     fetchGroups,
+    fetchGroup,
     setSelectedNode,
     onClickBack,
 
@@ -132,7 +134,7 @@ const PureHome = (props) => {
   } = props;
 
   const location = useLocation();
-  const { groupId: isInsideGroup } = useParams();
+  const { groupId } = useParams();
 
   const isSettingsPage =
     location.pathname.includes("settings") &&
@@ -140,7 +142,7 @@ const PureHome = (props) => {
   const isAccountsPage = location.pathname.includes("/accounts");
   const isPeopleAccounts = location.pathname.includes("accounts/people");
   const isGroupsAccounts =
-    location.pathname.includes("accounts/groups") && !isInsideGroup;
+    location.pathname.includes("accounts/groups") && !groupId;
 
   const { onDrop } = useFiles({
     t,
@@ -210,6 +212,15 @@ const PureHome = (props) => {
 
     setSelectedNode,
     fetchGroups,
+  });
+
+  useInsideGroup({
+    t,
+    groupId,
+    location,
+    setIsLoading,
+    setPortalTariff,
+    fetchGroup,
   });
 
   useSettings({
@@ -503,7 +514,7 @@ export default inject(
     const { usersStore, groupsStore, viewAs: accountsViewAs } = peopleStore;
 
     const { getUsersList: fetchPeople } = usersStore;
-    const { getGroups: fetchGroups } = groupsStore;
+    const { getGroups: fetchGroups, fetchGroup } = groupsStore;
 
     if (!firstLoad) {
       if (isLoading) {
@@ -597,6 +608,7 @@ export default inject(
       accountsViewAs,
       fetchPeople,
       fetchGroups,
+      fetchGroup,
       setSelectedNode,
       onClickBack,
 

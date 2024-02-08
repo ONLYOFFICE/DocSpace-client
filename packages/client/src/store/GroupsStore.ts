@@ -10,6 +10,8 @@ import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import config from "PACKAGE_FILE";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import AccountsFilter from "@docspace/shared/api/people/filter";
+import api from "@docspace/shared/api";
 
 class GroupsStore {
   authStore;
@@ -63,11 +65,11 @@ class GroupsStore {
   };
 
   setInsideGroupFilterUrl = (filter) => {
-    if (!this.currentGroup) return;
+    if (!filter.group) return;
     const urlFilter = filter.toUrlParams();
 
     const newPath = combineUrl(
-      `/accounts/groups/${this.currentGroup.id}/filter?${urlFilter}`,
+      `/accounts/groups/${filter.group}/filter?${urlFilter}`,
     );
     const currentPath = window.location.pathname + window.location.search;
 
@@ -121,6 +123,42 @@ class GroupsStore {
   getGroupById = async (groupId) => {
     const res = await groupsApi.getGroupById(groupId);
     return res;
+  };
+
+  fetchGroup = async (
+    groupId,
+    filter,
+    updateFilter = false,
+    withFilterLocalStorage = false,
+  ) => {
+    const filterData = filter ? filter.clone() : AccountsFilter.getDefault();
+    filterData.group = groupId;
+
+    if (!this.authStore.settingsStore.withPaging) {
+      filterData.page = 0;
+      filterData.pageCount = 100;
+    }
+
+    const requests = [];
+
+    requests.push(api.people.getUserList(filterData));
+
+    if (groupId !== this.currentGroup?.id) {
+      requests.push(groupsApi.getGroupById(groupId));
+    }
+
+    const [filteredMembersRes, group] = await Promise.all(requests);
+    filterData.total = filteredMembersRes.total;
+
+    group && this.setCurrentGroup(group);
+    console.log(this.peopleStore);
+    this.peopleStore.usersStore.setUsers(filteredMembersRes.items);
+
+    if (updateFilter) {
+      this.setInsideGroupFilterParams(filterData);
+    }
+
+    return Promise.resolve(filteredMembersRes.items);
   };
 
   setSelection = (selection) => (this.selection = selection);

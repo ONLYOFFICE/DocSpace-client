@@ -46,7 +46,6 @@ import {
   getLogoFromPath,
   isBetaLanguage,
 } from "./common";
-import { isNumber } from "./typeGuards";
 
 export type { TInterfaceDirection };
 
@@ -96,7 +95,6 @@ export {
   handleAnyClick,
   DomHelpers,
   ObjectUtils,
-  isNumber,
 };
 
 export const getModalType = () => {

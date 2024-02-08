@@ -192,5 +192,7 @@
   "WithSubfolders": "With subfolders",
   "YouLeftTheRoom": "You have left the room",
   "LinkSettings": "Link settings",
-  "FileDownloadingIsRestricted": "File downloading is restricted in this room."
+  "FileDownloadingIsRestricted": "File downloading is restricted in this room.",
+  "RoomEmptyAtTheMoment": "This room is empty at the moment.",
+  "FilesWillAppearHere": "Files and folders added to the room will appear here."
 }

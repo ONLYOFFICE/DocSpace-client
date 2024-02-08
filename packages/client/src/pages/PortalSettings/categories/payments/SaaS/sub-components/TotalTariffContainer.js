@@ -123,10 +123,10 @@ const TotalTariffContainer = ({
   );
 };
 
-export default inject(({ settingsStore, payments, paymentQuotasStore }) => {
+export default inject(({ settingsStore, paymentStore, paymentQuotasStore }) => {
   const { theme } = settingsStore;
   const { isLoading, totalPrice, isNeedRequest, maxAvailableManagersCount } =
-    payments;
+    paymentStore;
 
   const { planCost } = paymentQuotasStore;
   return {

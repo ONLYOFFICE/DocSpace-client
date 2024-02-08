@@ -6,7 +6,6 @@ import SectionHeaderContent from "../Home/Section/Header";
 import SectionFilterContent from "../Home/Section/Filter";
 import FilesPanels from "../../components/FilesPanels";
 import SectionWrapper from "SRC_DIR/components/Section";
-import { RoomSharingDialog } from "../../components/dialogs";
 import SelectionArea from "../Home/SelectionArea/FilesSelectionArea";
 import MediaViewer from "../Home/MediaViewer";
 

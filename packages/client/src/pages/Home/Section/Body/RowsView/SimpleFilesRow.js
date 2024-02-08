@@ -33,11 +33,23 @@ const StyledWrapper = styled.div`
     border-right: none;
     margin-left: 0;
   }
-`;
+  height: 59px;
+  box-sizing: border-box;
 
-const StyledSimpleFilesRow = styled(Row)`
+  border-bottom: ${(props) =>
+    `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
+  border-top: ${(props) =>
+    `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
+  margin-top: -1px;
+
   ${(props) => (props.checked || props.isActive) && checkedStyle};
-  height: 56px;
+  ${(props) =>
+    (props.checked || props.isActive) &&
+    props.isFirstElem &&
+    css`
+      border-top-color: ${(props) =>
+        `${props.theme.filesSection.tableView.row.borderColor} !important`};
+    `};
 
   ${(props) =>
     !isMobile &&
@@ -46,20 +58,43 @@ const StyledSimpleFilesRow = styled(Row)`
       :hover {
         cursor: pointer;
         ${checkedStyle}
-
-        ${(props) =>
-          !props.showHotkeyBorder &&
-          css`
-            margin-top: -2px;
-            padding-top: 1px;
-            padding-bottom: 1px;
-            border-top: ${(props) =>
-              `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
-            border-bottom: ${(props) =>
-              `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
-          `}
       }
     `};
+
+  ${(props) =>
+    props.showHotkeyBorder &&
+    css`
+      border-color: #2da7db !important;
+      z-index: 1;
+      position: relative;
+
+      margin-left: -24px;
+      margin-right: -24px;
+      padding-left: 24px;
+      padding-right: 24px;
+    `}
+
+  ${(props) =>
+    props.isHighlight &&
+    css`
+      ${marginStyles}
+      animation: Highlight 2s 1;
+
+      @keyframes Highlight {
+        0% {
+          background: ${(props) => props.theme.filesSection.animationColor};
+        }
+
+        100% {
+          background: none;
+        }
+      }
+    `}
+`;
+
+const StyledSimpleFilesRow = styled(Row)`
+  height: 56px;
+
   position: unset;
   cursor: ${(props) =>
     !props.isThirdPartyFolder &&
@@ -73,63 +108,6 @@ const StyledSimpleFilesRow = styled(Row)`
     `}
 
   margin-top: 0px;
-
-  ${(props) =>
-    props.showHotkeyBorder &&
-    css`
-      border-top: 1px solid #2da7db !important;
-      margin-top: -1px;
-      margin-left: -24px;
-      margin-right: -24px;
-      padding-left: 24px;
-      padding-right: 24px;
-    `}
-
-  ${(props) =>
-    props.isHighlight &&
-    css`
-      ${marginStyles}
-
-      margin-top: -2px;
-      padding-top: 1px;
-      padding-bottom: 1px;
-      border-top: ${(props) =>
-        `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
-      border-bottom: ${(props) =>
-        `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
-
-      animation: Highlight 2s 1;
-
-      @keyframes Highlight {
-        0% {
-          background: ${(props) => props.theme.filesSection.animationColor};
-        }
-
-        100% {
-          background: none;
-        }
-      }
-    `}
-
-
-  ::after {
-    ${(props) =>
-      props.showHotkeyBorder &&
-      css`
-        background: #2da7db;
-        padding-left: 24px;
-        padding-right: 24px;
-        margin-left: -24px;
-        margin-right: -24px;
-
-        @media ${tablet} {
-          margin-left: -16px;
-          margin-right: -16px;
-          padding-left: 16px;
-          padding-right: 16px;
-        }
-      `}
-  }
 
   ${(props) =>
     (!props.contextOptions || props.isEdit) &&
@@ -354,6 +332,7 @@ const SimpleFilesRow = (props) => {
     badgesComponent,
     onDragOver,
     onDragLeave,
+    itemIndex,
     badgeUrl,
   } = props;
 
@@ -417,6 +396,11 @@ const SimpleFilesRow = (props) => {
             ? "row-selected"
             : ""
       }`}
+      checked={checkedProps}
+      isActive={isActive}
+      showHotkeyBorder={showHotkeyBorder}
+      isFirstElem={itemIndex === 0}
+      isHighlight={isHighlight}
     >
       <DragAndDrop
         data-title={item.title}
@@ -456,13 +440,13 @@ const SimpleFilesRow = (props) => {
           className="files-row"
           withAccess={withAccess}
           getContextModel={getContextModel}
-          showHotkeyBorder={showHotkeyBorder}
           isRoom={item.isRoom}
           isArchive={item.isArchive}
           isDragOver={isDragActive}
           isSmallContainer={isSmallContainer}
           isRooms={isRooms}
           folderCategory={folderCategory}
+          withoutBorder={true}
           isHighlight={isHighlight}
           badgeUrl={badgeUrl}
         >

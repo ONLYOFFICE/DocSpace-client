@@ -366,9 +366,6 @@ module.exports = (env, argv) => {
         configUrl: `/static/scripts/config.json?hash=${
           runtime.checksums["config.json"] || dateHash
         }`,
-        tiffUrl: `/static/scripts/tiff.min.js?hash=${
-          runtime.checksums["tiff.min.js"] || dateHash
-        }`,
       })
     );
   }

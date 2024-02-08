@@ -51,13 +51,13 @@ const Item = ({
     true,
     true,
     isOwner,
-    standalone
+    standalone,
   );
 
   const filteredAccesses = filterUserRoleOptions(accesses, item, true);
 
   const defaultAccess = filteredAccesses.find(
-    (option) => option.access === +access
+    (option) => option.access === +access,
   );
 
   const errorsInList = () => {
@@ -141,7 +141,9 @@ const Item = ({
           color="#A3A9AE"
           truncate
         >
-          {`${capitalize(role)} | ${email}`}
+          {item.userName
+            ? `${capitalize(role)} | ${email}`
+            : `${capitalize(role)}`}
         </Text>
       </StyledInviteUserBody>
 

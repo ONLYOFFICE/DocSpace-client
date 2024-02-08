@@ -24,7 +24,13 @@ import BackgroundPatternPurpleReactSvgUrl from "PUBLIC_DIR/images/background.pat
 import BackgroundPatternLightBlueReactSvgUrl from "PUBLIC_DIR/images/background.pattern.lightBlue.react.svg?url";
 import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.pattern.black.react.svg?url";
 
-import { ArticleAlerts, FolderType, RoomsType, ThemeKeys } from "../enums";
+import {
+  ArticleAlerts,
+  FolderType,
+  RoomsType,
+  ShareAccessRights,
+  ThemeKeys,
+} from "../enums";
 import { LANGUAGE, RTL_LANGUAGES } from "../constants";
 
 import { TI18n } from "../types";
@@ -180,13 +186,18 @@ export function isAdmin(currentUser: TUser) {
 
 export const getUserRole = (user: TUser) => {
   if (user.isOwner) return "owner";
-  if (isAdmin(user))
+  if (
+    isAdmin(user) ||
+    user.access === ShareAccessRights.RoomManager ||
+    user.access === ShareAccessRights.Collaborator
+  )
     // TODO: Change to People Product Id const
     return "admin";
   // TODO: Need refactoring
   if (user.isVisitor) return "user";
   if (user.isCollaborator) return "collaborator";
-  return "manager";
+
+  return "user";
 };
 
 export function clickBackdrop() {

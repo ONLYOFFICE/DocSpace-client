@@ -220,6 +220,12 @@ const InviteInput = ({
           </SearchItemText>
           <SearchItemText>{email}</SearchItemText>
         </div>
+        <div className="email-list_add-button">
+          <Text fontSize="13px" fontWeight={600}>
+            {t("Common:AddButton")}
+          </Text>
+          <ArrowIcon />
+        </div>
         {shared && <SearchItemText info>{t("Invited")}</SearchItemText>}
       </DropDownItem>
     );
@@ -276,12 +282,6 @@ const InviteInput = ({
         <Text truncate fontSize="14px" fontWeight={600}>
           {inputValue}
         </Text>
-      </div>
-      <div className="email-list_add-button">
-        <Text fontSize="13px" fontWeight={600}>
-          {t("Common:AddButton")}
-        </Text>
-        <ArrowIcon />
       </div>
     </DropDownItem>
   );

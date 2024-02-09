@@ -5,7 +5,7 @@ import loadable from "@loadable/component";
 import PrivateRoute from "@docspace/common/components/PrivateRoute";
 import ErrorBoundary from "../components/ErrorBoundaryWrapper";
 
-import Error404 from "SRC_DIR/pages/Errors/404";
+import Error404 from "@docspace/shared/components/errors/Error404";
 
 import { generalRoutes } from "./general";
 

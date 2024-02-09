@@ -4,9 +4,10 @@ import loadable from "@loadable/component";
 
 import PrivateRoute from "@docspace/common/components/PrivateRoute";
 import PublicRoute from "@docspace/common/components/PublicRoute";
+import Error404 from "@docspace/shared/components/errors/Error404";
+
 import ErrorBoundary from "../components/ErrorBoundaryWrapper";
 
-import Error404 from "SRC_DIR/pages/Errors/404";
 import FilesView from "SRC_DIR/pages/Home/View/Files";
 import AccountsView from "SRC_DIR/pages/Home/View/Accounts";
 import SettingsView from "SRC_DIR/pages/Home/View/Settings";

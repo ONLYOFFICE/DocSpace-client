@@ -14,7 +14,7 @@ import Payments from "./categories/payments";
 
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 
-import Error404 from "client/Error404";
+import Error404 from "@docspace/shared/components/errors/Error404";
 
 const routes = [
   {

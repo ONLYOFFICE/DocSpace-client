@@ -1,8 +1,9 @@
 import React from "react";
 import AppLoader from "@docspace/common/components/AppLoader";
+import Error404 from "@docspace/shared/components/errors/Error404";
+
 import ErrorBoundary from "../ErrorBoundaryWrapper";
 import Error520 from "client/Error520";
-import Error404 from "client/Error404";
 
 function loadComponent(scope, module) {
   return async () => {

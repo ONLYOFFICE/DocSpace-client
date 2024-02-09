@@ -35,18 +35,14 @@ const InfoPanelBodyContent = ({
   const isRooms = getIsRooms();
   const isGallery = getIsGallery();
   const isInsideGroup = getIsGroups() && groupId;
-  console.log("isInsideGroup", isInsideGroup);
   const isGroups =
     getIsGroups() ||
     (isInsideGroup && (!selectedItems.length || !!selectedItems[0].manager));
   const isPeople =
     getIsPeople() ||
     (isInsideGroup && selectedItems.length && !selectedItems[0].manager);
-  console.log("isPeople", isPeople);
 
   const isSeveralItems = props.selectedItems?.length > 1;
-
-  console.log("selection", infoPanelSelection);
 
   const isNoItemGallery = isGallery && !gallerySelected;
   const isNoItemPeople = isPeople && !isInsideGroup && !selectedItems.length;
@@ -85,8 +81,6 @@ const InfoPanelBodyContent = ({
 
   const getView = () => {
     const currentView = isRooms ? roomsView : fileView;
-
-    console.log(isNoItem, isSeveralItems, isGallery, isPeople, isGroups);
 
     if (isNoItem) return viewHelper.NoItemView();
     if (isSeveralItems) return viewHelper.SeveralItemsView();
@@ -146,10 +140,10 @@ const InfoPanelBodyContent = ({
   }, [selectedItems, selectedFolder, groupId]);
 
   // * DEV-ONLY - Logs selection change
-  useEffect(() => {
-    console.log("\nfor-dev  Selected items: ", selectedItems);
-    console.log("\nfor-dev  Selected folder: ", selectedFolder);
-  }, [selectedItems, selectedFolder]);
+  // useEffect(() => {
+  //   console.log("\nfor-dev  Selected items: ", selectedItems);
+  //   console.log("\nfor-dev  Selected folder: ", selectedFolder);
+  // }, [selectedItems, selectedFolder]);
 
   return (
     <StyledInfoPanelBody>

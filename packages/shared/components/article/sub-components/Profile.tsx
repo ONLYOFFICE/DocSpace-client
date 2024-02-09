@@ -65,7 +65,6 @@ const ArticleProfile = (props: ArticleProfileProps) => {
   };
 
   const model = getActions?.(t);
-  console.log(model);
 
   const firstName = user?.firstName
     .split(" ")

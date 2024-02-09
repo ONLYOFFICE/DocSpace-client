@@ -67,6 +67,10 @@ class GroupsStore {
     this.setGroupsFilter(filter);
   };
 
+  resetGroupsFilter = () => {
+    this.setFilterParams(GroupsFilter.getDefault());
+  };
+
   get groupsFilterTotal() {
     return this.groupsFilter.total;
   }
@@ -229,8 +233,6 @@ class GroupsStore {
   setSelections = (added, removed, clear = false) => {
     if (clear) this.selection = [];
 
-    console.log(added, removed);
-
     let newSelections = [...this.selection];
 
     for (let row of added) {
@@ -262,7 +264,6 @@ class GroupsStore {
       }
     }
 
-    console.log(newSelections);
     this.setSelection(newSelections);
   };
 

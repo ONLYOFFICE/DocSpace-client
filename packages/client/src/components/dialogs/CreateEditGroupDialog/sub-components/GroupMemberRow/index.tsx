@@ -16,7 +16,6 @@ const GroupMemberRow = ({
   groupMember,
   onClickRemove,
 }: GroupMemberRowProps) => {
-  console.log(groupMember);
   return (
     <Styled.GroupMemberRow>
       <Avatar

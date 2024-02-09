@@ -22,8 +22,6 @@ const GroupMember = ({ groupMember, isManager }: GroupMemberProps) => {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  console.log(groupMember);
-
   const onClick = (e) => {
     if (!isOpen) buttonMenuRef?.current?.show(e);
     else buttonMenuRef?.current?.hide(e);

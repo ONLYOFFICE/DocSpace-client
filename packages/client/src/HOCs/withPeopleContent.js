@@ -23,7 +23,6 @@ export default function withContent(WrappedContent) {
 
     const { mobilePhone, email, role, displayName, avatar, isGroup, name } =
       item;
-    console.log(item.role);
 
     const onContentRowSelect = (checked, user) => {
       checked ? selectUser(user) : deselectUser(user);
@@ -63,7 +62,7 @@ export default function withContent(WrappedContent) {
             key: group.id,
             label: group.name,
             onClick: () => selectGroup(group.id),
-          }),
+          })
         );
 
       if (temp.length <= 1) {

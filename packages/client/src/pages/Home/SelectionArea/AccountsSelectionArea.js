@@ -10,7 +10,6 @@ const SelectionArea = ({
   setSelectionsGroups,
 }) => {
   const { groupId } = useParams();
-  console.log(groupId);
   const location = useLocation();
 
   const isPeopleSelections =

@@ -421,9 +421,7 @@ const PeopleTableRow = (props) => {
         key: group.id,
         title: group.name,
         label: group.name,
-        action: () => {
-          navigate(`/accounts/groups/${group.id}`);
-        },
+        action: group.id,
       }))
       .slice(0, 5);
 
@@ -439,7 +437,7 @@ const PeopleTableRow = (props) => {
             title: groups[0].name,
             label: groups[0].name + " ",
           }}
-          onSelect={({ action }) => action()}
+          onSelect={({ action }) => navigate(`/accounts/groups/${action}`)}
           options={groupItems}
           scaled
           directionY="both"

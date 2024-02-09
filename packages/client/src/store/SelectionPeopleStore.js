@@ -57,7 +57,6 @@ class SelectionStore {
   setSelections = (added, removed, clear = false) => {
     if (clear) this.selection = [];
 
-    console.log(added, removed);
     let newSelections = JSON.parse(JSON.stringify(this.selection));
 
     for (let item of added) {
@@ -68,7 +67,6 @@ class SelectionStore {
         : null;
 
       if (!value) return;
-      console.log(value);
       const splitValue = value && value.split("_");
       const id = splitValue?.slice(1, -3).join("_");
 

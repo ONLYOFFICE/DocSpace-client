@@ -26,7 +26,6 @@ const useViewEffect = ({
   const { sectionWidth } = useContext<ContextType>(Context);
 
   useEffect(() => {
-    console.log("useViewEffect");
     const isNotRowView = view !== "row";
     const isNotTableView = view !== "table";
 

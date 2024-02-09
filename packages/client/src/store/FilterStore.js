@@ -27,14 +27,12 @@ class FilterStore {
     // const module = isPeople ? "people" : "groups";
     const newPath = combineUrl(`/accounts/people/filter?${urlFilter}`);
 
-    console.log(window.location.pathname + window.location.search === newPath);
-
     if (window.location.pathname + window.location.search === newPath) return;
 
     window.history.replaceState(
       "",
       "",
-      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, newPath),
+      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, newPath)
     );
   };
 

@@ -567,7 +567,10 @@ class UploadDataStore {
             }
           });
 
-          storeOriginalFiles && fileInfo && this.refreshFiles(file);
+          storeOriginalFiles &&
+            fileInfo &&
+            fileInfo !== "password" &&
+            this.refreshFiles(file);
 
           if (fileInfo && fileInfo !== "password") {
             file.fileInfo = fileInfo;

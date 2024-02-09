@@ -9,6 +9,7 @@ import { isMobileOnly } from "react-device-detect";
 import { ThemeProvider } from "@docspace/shared/components/theme-provider";
 import { Portal } from "@docspace/shared/components/portal";
 import { Toast } from "@docspace/shared/components/toast";
+import Error403 from "@docspace/shared/components/errors/Error403";
 
 import "@docspace/common/custom.scss";
 
@@ -20,7 +21,6 @@ import Layout from "client/Layout";
 import Main from "client/Main";
 import NavMenu from "client/NavMenu";
 import MainLayout from "SRC_DIR/Layout";
-import Error403 from "client/Error403";
 import i18n from "./i18n";
 
 declare global {

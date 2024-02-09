@@ -2,7 +2,7 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { inject, observer } from "mobx-react";
-import Error403 from "client/Error403";
+import Error403 from "@docspace/shared/components/errors/Error403";
 
 import AppLoader from "../AppLoader";
 

@@ -18,7 +18,7 @@ const Calendar = ({
   id,
   className,
   style,
-  initialDate: initialDateProp,
+  initialDate,
   onChange,
   isMobile,
   forwardedRef,
@@ -36,51 +36,47 @@ const Calendar = ({
     onChange?.(formattedDate);
   };
 
-  const date = initialDateProp ?? new Date();
-
-  const [observedDate, setObservedDate] = useState(moment(date));
+  const [observedDate, setObservedDate] = useState(moment());
   const [selectedScene, setSelectedScene] = useState(0);
-  const [initialDate, setInitialDate] = useState(moment(date));
-
-  const momentMinDate = minDate
-    ? moment(minDate)
-    : moment(new Date("1970/01/01"));
-  const momentMaxDate = maxDate
-    ? moment(maxDate)
-    : moment(new Date("2040/01/01"));
-  const [resultMinDate, resultMaxDate] = getValidDates(
-    momentMinDate,
-    momentMaxDate,
-  );
+  const [resultMinDate, setResultMinDate] = useState(moment());
+  const [resultMaxDate, setResultMaxDate] = useState(moment());
 
   useEffect(() => {
-    const today = moment();
-    if (!initialDateProp) {
-      setInitialDate(
-        today <= resultMaxDate && initialDate >= resultMinDate
-          ? today
-          : today.diff(resultMinDate, "day") > today.diff(resultMaxDate, "day")
-            ? resultMinDate.clone()
-            : resultMaxDate.clone(),
-      );
+    const [min, max] = getValidDates(minDate, maxDate);
 
-      initialDate.startOf("day");
-    } else if (initialDate > resultMaxDate || initialDate < resultMinDate) {
-      setInitialDate(
-        today <= resultMaxDate && today >= resultMinDate
-          ? today
-          : today.diff(resultMinDate, "day") > today.diff(resultMaxDate, "day")
-            ? resultMinDate.clone()
-            : resultMaxDate.clone(),
-      );
-      initialDate.startOf("day");
+    setResultMaxDate(max);
+    setResultMinDate(min);
+  }, [minDate, maxDate]);
 
-      console.error(
+  useEffect(() => {
+    let date = moment(initialDate);
+    const [min, max] = getValidDates(minDate, maxDate);
+
+    if (!initialDate) {
+      const today = moment();
+      date =
+        today <= max && today >= min
+          ? today
+          : Math.abs(today.diff(min, "day")) > Math.abs(today.diff(max, "day"))
+            ? max.clone()
+            : min.clone();
+
+      date.startOf("day");
+      date = moment();
+    } else if (date > max || date < min) {
+      date =
+        Math.abs(date.diff(min, "day")) > Math.abs(date.diff(max, "day"))
+          ? max.clone()
+          : min.clone();
+
+      date.startOf("day");
+
+      console.warn(
         "Initial date is out of min/max dates boundaries. Initial date will be set as closest boundary value",
       );
     }
-    // setObservedDate(initialDate);
-  }, [initialDateProp, initialDate, resultMaxDate, resultMinDate]);
+    setObservedDate(date);
+  }, [initialDate, maxDate, minDate]);
 
   return (
     <StyledContainerTheme

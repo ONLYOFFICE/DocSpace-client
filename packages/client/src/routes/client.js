@@ -26,7 +26,9 @@ const About = loadable(() => import("../pages/About"));
 const Wizard = loadable(() => import("../pages/Wizard"));
 const PreparationPortal = loadable(() => import("../pages/PreparationPortal"));
 const PortalUnavailable = loadable(() => import("../pages/PortalUnavailable"));
-const ErrorUnavailable = loadable(() => import("../pages/Errors/Unavailable"));
+const ErrorUnavailable = loadable(
+  () => import("../components/ErrorUnavailableWrapper")
+);
 const AccessRestricted = loadable(
   () => import("@docspace/shared/components/errors/AccessRestricted")
 );

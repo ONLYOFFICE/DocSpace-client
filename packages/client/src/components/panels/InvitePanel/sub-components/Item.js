@@ -37,8 +37,6 @@ const Item = ({
 
   const name = !!avatar ? (displayName !== "" ? displayName : email) : email;
   const source = !!avatar ? avatar : AtReactSvgUrl;
-  const role = getUserRole(item);
-  const typeLabel = getUserTypeLabel(role, t);
 
   const [edit, setEdit] = useState(false);
   const [inputValue, setInputValue] = useState(name);
@@ -51,6 +49,11 @@ const Item = ({
   const defaultAccess = filteredAccesses.find(
     (option) => option.access === +access,
   );
+
+  const role = getUserRole(item);
+  const typeLabel = item?.isEmailInvite
+    ? getUserTypeLabel(defaultAccess.type, t)
+    : getUserTypeLabel(role, t);
 
   const errorsInList = () => {
     const hasErrors = inviteItems.some((item) => !!item.errors?.length);

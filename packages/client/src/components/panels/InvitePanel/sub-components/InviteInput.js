@@ -95,6 +95,7 @@ const InviteInput = ({
           access: selectedAccess,
           displayName: address.email,
           errors: address.parseErrors,
+          isEmailInvite: true,
         };
       });
     }
@@ -105,6 +106,7 @@ const InviteInput = ({
       access: selectedAccess,
       displayName: addresses[0].email,
       errors: addresses[0].parseErrors,
+      isEmailInvite: true,
     };
   };
 
@@ -130,7 +132,7 @@ const InviteInput = ({
 
   const debouncedSearch = useCallback(
     debounce((value) => searchByQuery(value), 300),
-    []
+    [],
   );
 
   const onChange = (e) => {

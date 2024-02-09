@@ -130,7 +130,6 @@ const InviteInput = ({
       setUsersList(users.items);
 
       if (users.total) setIsAddEmailPanelBlocked(false);
-      else setIsAddEmailPanelBlocked(true);
     }
 
     if (!query) {
@@ -157,6 +156,10 @@ const InviteInput = ({
       return;
     }
 
+    if (roomId !== -1) {
+      debouncedSearch(clearValue);
+    }
+
     const regex =
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{0,}))$/g;
 
@@ -168,11 +171,7 @@ const InviteInput = ({
       }
     }
 
-    if (roomId !== -1) {
-      debouncedSearch(clearValue);
-
-      return;
-    }
+    setIsAddEmailPanelBlocked(true);
   };
 
   const removeExist = (items) => {
@@ -219,12 +218,6 @@ const InviteInput = ({
             {displayName}
           </SearchItemText>
           <SearchItemText>{email}</SearchItemText>
-        </div>
-        <div className="email-list_add-button">
-          <Text fontSize="13px" fontWeight={600}>
-            {t("Common:AddButton")}
-          </Text>
-          <ArrowIcon />
         </div>
         {shared && <SearchItemText info>{t("Invited")}</SearchItemText>}
       </DropDownItem>

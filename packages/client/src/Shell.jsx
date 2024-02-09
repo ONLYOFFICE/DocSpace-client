@@ -10,6 +10,7 @@ import { Toast, toastr } from "@docspace/shared/components/toast";
 import { ThemeProvider } from "@docspace/shared/components/theme-provider";
 import { SnackBar } from "@docspace/shared/components/snackbar";
 import { Portal } from "@docspace/shared/components/portal";
+import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 
 import { updateTempContent } from "@docspace/shared/utils/common";
 import { getLogoFromPath } from "@docspace/shared/utils";
@@ -506,9 +507,11 @@ const ThemeProviderWrapper = inject(
 export default () => (
   <MobxProvider {...store}>
     <I18nextProvider i18n={i18n}>
-      <ThemeProviderWrapper>
-        <ShellWrapper />
-      </ThemeProviderWrapper>
+      <ErrorBoundary>
+        <ThemeProviderWrapper>
+          <ShellWrapper />
+        </ThemeProviderWrapper>
+      </ErrorBoundary>
     </I18nextProvider>
   </MobxProvider>
 );

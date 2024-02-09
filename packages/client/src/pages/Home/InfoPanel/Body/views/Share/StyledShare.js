@@ -73,4 +73,13 @@ const StyledLinkRow = styled.div`
   }
 `;
 
-export { StyledLinks, StyledLinkRow };
+const StyledSquare = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  padding: 10px;
+  background: ${(props) => props.theme.avatar.icon.background};
+`;
+
+export { StyledLinks, StyledLinkRow, StyledSquare };

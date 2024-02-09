@@ -294,7 +294,7 @@ const InviteInput = ({
   };
 
   const onKeyPress = (e) => {
-    if (e.key === "Enter" && !!!usersList.length && inputValue.length > 2) {
+    if (e.key === "Enter") {
       addEmail();
     }
   };

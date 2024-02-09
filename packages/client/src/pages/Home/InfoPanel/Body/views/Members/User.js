@@ -288,19 +288,21 @@ const User = ({
             <div className="me-label">&nbsp;{`(${t("Common:MeLabel")})`}</div>
           )}
         </div>
-        <div className="role-email" style={{ display: "flex" }}>
-          <Text
-            className="label"
-            fontWeight={400}
-            fontSize="12px"
-            noSelect
-            truncate
-            color="#A3A9AE"
-            dir="auto"
-          >
-            {`${typeLabel} | ${user.email}`}
-          </Text>
-        </div>
+        {!user.isGroup && (
+          <div className="role-email" style={{ display: "flex" }}>
+            <Text
+              className="label"
+              fontWeight={400}
+              fontSize="12px"
+              noSelect
+              truncate
+              color="#A3A9AE"
+              dir="auto"
+            >
+              {`${typeLabel} | ${user.email}`}
+            </Text>
+          </div>
+        )}
       </div>
 
       {userRole && userRoleOptions && (

@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 
-import Error520 from "client/Error520";
+import Error520 from "../../../../components/Error520Wrapper";
 import { inject, observer } from "mobx-react";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";

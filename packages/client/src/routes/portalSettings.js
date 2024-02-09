@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import loadable from "@loadable/component";
 
 import PrivateRoute from "@docspace/common/components/PrivateRoute";
-import ErrorBoundary from "@docspace/shared/components/error-boundary/ErrorBoundary";
+import ErrorBoundary from "../components/ErrorBoundaryWrapper";
 
 import Error404 from "SRC_DIR/pages/Errors/404";
 

@@ -1,22 +1,57 @@
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import { Avatar } from "@docspace/shared/components/avatar";
-import { ContextMenu } from "@docspace/shared/components/context-menu";
+import {
+  ContextMenu,
+  ContextMenuModel,
+} from "@docspace/shared/components/context-menu";
 import { useState, useRef } from "react";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import FolderReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
+import { inject, observer } from "mobx-react";
+import { EmployeeStatus } from "@docspace/shared/enums";
+import { useTranslation } from "react-i18next";
 
 interface GroupMemberProps {
+  userId: string;
   isManager?: boolean;
   groupMember: {
     id: string;
     displayName: string;
     email: string;
     role: "string";
+    status: EmployeeStatus;
   };
+
+  getUserContextOptions: (
+    isMySelf: boolean,
+    statusType: any,
+    userRole: any,
+    status: EmployeeStatus
+  ) => string[];
+
+  getUserContextOptionsModel: (
+    t: any,
+    options: string[],
+    item: any
+  ) => ContextMenuModel[];
 }
 
-const GroupMember = ({ groupMember, isManager }: GroupMemberProps) => {
+const GroupMember = ({
+  userId,
+  groupMember,
+  isManager,
+  getUserContextOptions,
+  getUserContextOptionsModel,
+}: GroupMemberProps) => {
+  const { t } = useTranslation([
+    "Profile",
+    "PeopleTranslations",
+    "ProfileAction",
+    "Common",
+    "CreateEditRoomDialog",
+  ]);
+
   const iconRef = useRef(null);
   const buttonMenuRef = useRef(null);
 
@@ -32,24 +67,17 @@ const GroupMember = ({ groupMember, isManager }: GroupMemberProps) => {
     setIsOpen(false);
   };
 
-  const model = [
-    groupMember.id === "66faa6e4-f133-11ea-b126-00ffeec8b4ef"
-      ? {
-          key: "user-menu-profile",
-          icon: "http://192.168.0.104/static/images/profile.react.svg",
-          label: "Profile",
-        }
-      : {
-          key: "info",
-          icon: InfoReactSvgUrl,
-          label: "Info",
-        },
-    {
-      key: "room-list",
-      icon: FolderReactSvgUrl,
-      label: "Room List",
-    },
-  ];
+  console.log(groupMember);
+  const model = getUserContextOptionsModel(
+    t,
+    getUserContextOptions(
+      groupMember.id === userId,
+      "normal",
+      "user",
+      groupMember.status
+    ),
+    groupMember
+  );
 
   return (
     <div className="group-member">
@@ -71,10 +99,10 @@ const GroupMember = ({ groupMember, isManager }: GroupMemberProps) => {
         </div>
       </div>
 
-      <div ref={iconRef} className="context-btn-wrapper">
+      <div className="context-btn-wrapper">
         {isManager && <div className="group-manager-tag">Head of group</div>}
 
-        <div className="context-btn">
+        <div className="context-btn" ref={iconRef}>
           <ContextMenuButton
             isFill
             className="expandButton"
@@ -98,4 +126,9 @@ const GroupMember = ({ groupMember, isManager }: GroupMemberProps) => {
   );
 };
 
-export default GroupMember;
+export default inject(({ peopleStore }) => ({
+  userId: peopleStore.userStore.user.id,
+  getUserContextOptions: peopleStore.usersStore.getUserContextOptions,
+  getUserContextOptionsModel:
+    peopleStore.contextOptionsStore.getUserContextOptions,
+}))(GroupMember);

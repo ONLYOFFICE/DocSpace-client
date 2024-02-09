@@ -53,7 +53,7 @@ const AddUsersPanel = ({
   const onBackClick = () => onClose();
   const getFilterWithOutDisabledUser = useCallback(
     () => Filter.getFilterWithOutDisabledUser(),
-    []
+    [],
   );
 
   const onKeyPress = (e) => {
@@ -88,6 +88,8 @@ const AddUsersPanel = ({
         avatar: item.avatar,
         isOwner: item.isOwner,
         isAdmin: item.isAdmin,
+        isVisitor: item.isVisitor,
+        isCollaborator: item.isCollaborator,
       };
       items.push(newItem);
     }
@@ -100,7 +102,7 @@ const AddUsersPanel = ({
   };
 
   const selectedAccess = accessOptions.filter(
-    (access) => access.access === accessRight
+    (access) => access.access === accessRight,
   )[0];
 
   const [itemsList, setItemsList] = useState(null);
@@ -110,11 +112,11 @@ const AddUsersPanel = ({
   const [total, setTotal] = useState(0);
   const [isLoading, setIsLoading] = useLoadingWithTimeout(
     LOADER_TIMEOUT,
-    false
+    false,
   );
   const [isLoadingSearch, setIsLoadingSearch] = useLoadingWithTimeout(
     LOADER_TIMEOUT,
-    false
+    false,
   );
 
   useEffect(() => {
@@ -321,7 +323,7 @@ export default inject(({ settingsStore }) => {
 })(
   observer(
     withTranslation(["SharingPanel", "PeopleTranslations", "Common"])(
-      withLoader(AddUsersPanel)(<Loaders.DialogAsideLoader isPanel />)
-    )
-  )
+      withLoader(AddUsersPanel)(<Loaders.DialogAsideLoader isPanel />),
+    ),
+  ),
 );

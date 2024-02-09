@@ -70,11 +70,11 @@ export const AccessRightSelectPure = ({
       );
     });
 
-    return items;
+    return <div style={{ display: "contents" }}>{items}</div>;
   };
 
   const formattedOptions =
-    advancedOptions || formatToAccessRightItem(accessOptions);
+    advancedOptions ?? formatToAccessRightItem(accessOptions);
 
   // console.log(formattedOptions);
 

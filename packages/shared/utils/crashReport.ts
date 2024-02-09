@@ -26,7 +26,7 @@ export const getCrashReport = (
   return report;
 };
 
-export const downloadJson = (json: string, fileName: string) => {
+export const downloadJson = <T>(json: T, fileName: string) => {
   const cleanJson = JSON.stringify(json);
   const data = new Blob([cleanJson], { type: "application/json" });
   const url = window.URL.createObjectURL(data);

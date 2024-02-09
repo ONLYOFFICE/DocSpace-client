@@ -30,7 +30,9 @@ const AccessRestricted = loadable(
   () => import("../pages/Errors/AccessRestricted")
 );
 
-const Error401 = loadable(() => import("client/Error401"));
+const Error401 = loadable(
+  () => import("@docspace/shared/components/errors/Error401")
+);
 
 const ClientRoutes = [
   {

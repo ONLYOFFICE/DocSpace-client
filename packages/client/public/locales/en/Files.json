@@ -37,6 +37,7 @@
   "CreateNewLink": "Create new link",
   "CreateRoom": "Create room",
   "CustomRooms": "Custom",
+  "DateLastOpened": "Date last opened",
   "DaysRemaining": "Days remaining: {{daysRemaining}}",
   "DeleteSharedLink": "The previous link will become unavailable. A new shared link will be created.",
   "DeleteLink": "Delete link",

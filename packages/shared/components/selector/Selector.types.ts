@@ -273,7 +273,7 @@ export type SelectorProps = TSelectorHeader &
 
     renderCustomItem?: (
       label: string,
-      role?: AvatarRole,
+      role?: string,
       email?: string,
     ) => React.ReactNode | null;
 
@@ -296,7 +296,7 @@ export type BodyProps = TSelectorBreadCrumbs &
     items: TSelectorItem[];
     renderCustomItem?: (
       label: string,
-      role?: AvatarRole,
+      role?: string,
       email?: string,
     ) => React.ReactNode | null;
     onSelect: (item: TSelectorItem) => void;
@@ -435,7 +435,7 @@ export type Data = {
   rowLoader: React.ReactNode;
   renderCustomItem?: (
     label: string,
-    role?: AvatarRole,
+    role?: string,
     email?: string,
   ) => React.ReactNode | null;
 };

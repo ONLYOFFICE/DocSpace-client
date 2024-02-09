@@ -1,5 +1,6 @@
 import React from "react";
-
+import { useTranslation } from "react-i18next";
+import { getUserTypeLabel } from "../../../utils/common";
 import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
 import { Text } from "../../text";
 import { Checkbox } from "../../checkbox";
@@ -36,6 +37,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
     rowLoader,
     renderCustomItem,
   }: Data = data;
+  const { t } = useTranslation(["Common"]);
 
   const isLoaded = isItemLoaded(index);
 
@@ -49,6 +51,8 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       item;
 
     const currentRole = role || AvatarRole.user;
+
+    const typeLabel = getUserTypeLabel(role, t);
 
     const onChangeAction = () => {
       onSelect?.(item);
@@ -92,7 +96,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
           />
         ) : null}
         {renderCustomItem ? (
-          renderCustomItem(label, role, email)
+          renderCustomItem(label, typeLabel, email)
         ) : (
           <Text
             className="label"

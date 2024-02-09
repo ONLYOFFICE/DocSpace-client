@@ -3,11 +3,10 @@ import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import React, { useState, useEffect } from "react";
 import { Avatar } from "@docspace/shared/components/avatar";
 import { Text } from "@docspace/shared/components/text";
-import { capitalize } from "lodash";
 
 import { parseAddresses } from "@docspace/shared/utils";
 import { getAccessOptions } from "../utils";
-import { getUserRole } from "@docspace/shared/utils/common";
+import { getUserRole, getUserTypeLabel } from "@docspace/shared/utils/common";
 
 import {
   StyledEditInput,
@@ -33,24 +32,36 @@ const Item = ({
   inputsRef,
   setIsOpenItemAccess,
   isMobileView,
+  standalone,
 }) => {
   const { avatar, displayName, email, id, errors, access } = item;
 
   const name = !!avatar ? (displayName !== "" ? displayName : email) : email;
   const source = !!avatar ? avatar : AtReactSvgUrl;
-  const role = getUserRole(item);
 
   const [edit, setEdit] = useState(false);
   const [inputValue, setInputValue] = useState(name);
   const [parseErrors, setParseErrors] = useState(errors);
 
-  const accesses = getAccessOptions(t, roomType, true, true, isOwner);
+  const accesses = getAccessOptions(
+    t,
+    roomType,
+    true,
+    true,
+    isOwner,
+    standalone,
+  );
 
   const filteredAccesses = filterUserRoleOptions(accesses, item, true);
 
   const defaultAccess = filteredAccesses.find(
-    (option) => option.access === +access
+    (option) => option.access === +access,
   );
+
+  const role = getUserRole(item);
+  const typeLabel = item?.isEmailInvite
+    ? getUserTypeLabel(defaultAccess.type, t)
+    : getUserTypeLabel(role, t);
 
   const errorsInList = () => {
     const hasErrors = inviteItems.some((item) => !!item.errors?.length);
@@ -133,7 +144,7 @@ const Item = ({
           color="#A3A9AE"
           truncate
         >
-          {`${capitalize(role)} | ${email}`}
+          {item.userName ? `${typeLabel} | ${email}` : `${typeLabel}`}
         </Text>
       </StyledInviteUserBody>
 
@@ -167,6 +178,7 @@ const Item = ({
           setIsOpenItemAccess={setIsOpenItemAccess}
           isMobileView={isMobileView}
           noBorder
+          standalone={standalone}
         />
       )}
     </>

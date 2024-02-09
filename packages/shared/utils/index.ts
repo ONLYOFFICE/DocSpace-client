@@ -2,7 +2,7 @@ import moment from "moment-timezone";
 
 import { isArrayEqual } from "./array";
 import * as email from "./email";
-import { EmailSettings, parseAddress, parseAddresses } from "./email";
+import { EmailSettings, parseAddress, parseAddresses, getParts } from "./email";
 import useId from "./useId";
 import {
   getCorrectTextAlign,
@@ -57,6 +57,7 @@ export {
   RoomsTypeValues,
   RoomsTypes,
   parseAddresses,
+  getParts,
   NoUserSelect,
   commonInputStyles,
   commonTextStyles,

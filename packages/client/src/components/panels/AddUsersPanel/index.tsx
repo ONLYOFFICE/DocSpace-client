@@ -26,8 +26,6 @@ import { getMembersList } from "@docspace/shared/api/people";
 import { ShareAccessRights } from "@docspace/shared/enums";
 import { RowLoader, SearchLoader } from "@docspace/shared/skeletons/selector";
 import { TUser } from "@docspace/shared/api/people/types";
-import { AvatarRole } from "@docspace/shared/components/avatar";
-import { LOADER_TIMEOUT } from "@docspace/shared/constants";
 
 const toListItem = (item: TUser) => {
   const {
@@ -153,6 +151,8 @@ const AddUsersPanel = ({
         avatar: user.avatar,
         isOwner: user.isOwner,
         isAdmin: user.isAdmin,
+        isVisitor: user.isVisitor,
+        isCollaborator: user.isCollaborator,
       } as TSelectorItem;
 
       items.push(newItem);
@@ -250,7 +250,7 @@ const AddUsersPanel = ({
 
   const renderCustomItem = (
     label: string,
-    userType?: AvatarRole,
+    userType?: string,
     email?: string,
   ) => {
     return (

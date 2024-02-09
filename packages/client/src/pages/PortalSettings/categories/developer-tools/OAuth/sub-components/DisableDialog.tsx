@@ -2,10 +2,8 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation, Trans } from "react-i18next";
 
-import {
-  ModalDialog,
-  ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { ModalDialogType } from "@docspace/shared/components/modal-dialog/ModalDialog.enums";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";

@@ -10,24 +10,26 @@ import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
 
 import { getCookie } from "@docspace/shared/utils/cookie";
 
-import {
-  ModalDialog,
-  ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { ModalDialogType } from "@docspace/shared/components/modal-dialog/ModalDialog.enums";
 import { Text } from "@docspace/shared/components/text";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
 } from "@docspace/shared/components/context-menu-button";
 
-//@ts-ignore
+// @ts-ignore
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 import {
   Avatar,
   AvatarRole,
   AvatarSize,
 } from "@docspace/shared/components/avatar";
-import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
+import {
+  LinkTarget,
+  LinkType,
+} from "@docspace/shared/components/link/Link.enums";
+import { Link } from "@docspace/shared/components/link";
 import { Base } from "@docspace/shared/themes";
 import { TTranslation } from "@docspace/shared/types";
 import { ContextMenuModel } from "@docspace/shared/components/context-menu";
@@ -137,7 +139,7 @@ interface InfoDialogProps {
     t: TTranslation,
     item: IClientProps,
     isInfo?: boolean,
-    isSettings?: boolean
+    isSettings?: boolean,
   ) => ContextMenuModel[];
 
   client?: IClientProps;
@@ -203,12 +205,16 @@ const InfoDialog = ({
         >
           <div className="client-block">
             <div className="client-block__info">
-              <img className="client-block__info-logo" src={client?.logo} />
+              <img
+                className="client-block__info-logo"
+                alt="client-logo"
+                src={client?.logo}
+              />
 
               <Text
-                fontSize={"16px"}
-                lineHeight={"22px"}
-                fontWeight={"700"}
+                fontSize="16px"
+                lineHeight="22px"
+                fontWeight="700"
                 noSelect
                 truncate
               >
@@ -224,10 +230,10 @@ const InfoDialog = ({
           {!isProfile && (
             <>
               <Text
-                className={"block-header"}
-                fontSize={"14px"}
-                lineHeight={"16px"}
-                fontWeight={"600"}
+                className="block-header"
+                fontSize="14px"
+                lineHeight="16px"
+                fontWeight="600"
                 noSelect
                 truncate
               >
@@ -241,9 +247,9 @@ const InfoDialog = ({
                 />
 
                 <Text
-                  fontSize={"14px"}
-                  lineHeight={"16px"}
-                  fontWeight={"600"}
+                  fontSize="14px"
+                  lineHeight="16px"
+                  fontWeight="600"
                   noSelect
                   truncate
                 >
@@ -255,10 +261,10 @@ const InfoDialog = ({
           {!isProfile && (
             <>
               <Text
-                className={"block-header"}
-                fontSize={"14px"}
-                lineHeight={"16px"}
-                fontWeight={"600"}
+                className="block-header"
+                fontSize="14px"
+                lineHeight="16px"
+                fontWeight="600"
                 noSelect
                 truncate
               >
@@ -266,38 +272,36 @@ const InfoDialog = ({
               </Text>
 
               <Text
-                id={"client-info-description-text"}
-                className={"description"}
-                fontSize={"13px"}
-                lineHeight={"20px"}
-                fontWeight={"400"}
+                id="client-info-description-text"
+                className="description"
+                fontSize="13px"
+                lineHeight="20px"
+                fontWeight="400"
                 noSelect
               >
                 {client?.description}
               </Text>
               {withShowText && (
-                <>
-                  <Link
-                    className={"desc-link"}
-                    fontSize={"13px"}
-                    lineHeight={"15px"}
-                    fontWeight={"600"}
-                    isHovered
-                    onClick={() => setShowDescription((val) => !val)}
-                    type={LinkType.action}
-                  >
-                    {showDescription ? "Hide" : "Show more"}
-                  </Link>
-                </>
+                <Link
+                  className="desc-link"
+                  fontSize="13px"
+                  lineHeight="15px"
+                  fontWeight="600"
+                  isHovered
+                  onClick={() => setShowDescription((val) => !val)}
+                  type={"action"}
+                >
+                  {showDescription ? "Hide" : "Show more"}
+                </Link>
               )}
             </>
           )}
 
           <Text
-            className={"block-header"}
-            fontSize={"14px"}
-            lineHeight={"16px"}
-            fontWeight={"600"}
+            className="block-header"
+            fontSize="14px"
+            lineHeight="16px"
+            fontWeight="600"
             noSelect
             truncate
           >
@@ -305,22 +309,22 @@ const InfoDialog = ({
           </Text>
 
           <Link
-            fontSize={"13px"}
-            lineHeight={"15px"}
-            fontWeight={"600"}
+            fontSize="13px"
+            lineHeight="15px"
+            fontWeight="600"
             isHovered
             href={client?.websiteUrl}
-            type={LinkType.action}
-            target={LinkTarget.blank}
+            type={"action"}
+            target={"_blank"}
           >
             {client?.websiteUrl}
           </Link>
 
           <Text
-            className={"block-header"}
-            fontSize={"14px"}
-            lineHeight={"16px"}
-            fontWeight={"600"}
+            className="block-header"
+            fontSize="14px"
+            lineHeight="16px"
+            fontWeight="600"
             noSelect
             truncate
           >
@@ -334,10 +338,10 @@ const InfoDialog = ({
           {isProfile && (
             <>
               <Text
-                className={"block-header"}
-                fontSize={"14px"}
-                lineHeight={"16px"}
-                fontWeight={"600"}
+                className="block-header"
+                fontSize="14px"
+                lineHeight="16px"
+                fontWeight="600"
                 noSelect
                 truncate
               >
@@ -345,9 +349,9 @@ const InfoDialog = ({
               </Text>
 
               <Text
-                fontSize={"13px"}
-                lineHeight={"20px"}
-                fontWeight={"600"}
+                fontSize="13px"
+                lineHeight="20px"
+                fontWeight="600"
                 noSelect
                 truncate
               >
@@ -357,10 +361,10 @@ const InfoDialog = ({
           )}
 
           <Text
-            className={"block-header"}
-            fontSize={"14px"}
-            lineHeight={"20px"}
-            fontWeight={"600"}
+            className="block-header"
+            fontSize="14px"
+            lineHeight="20px"
+            fontWeight="600"
             noSelect
             truncate
           >
@@ -368,34 +372,34 @@ const InfoDialog = ({
           </Text>
 
           <Text
-            className={"privacy-block"}
-            fontSize={"13px"}
-            lineHeight={"15px"}
-            fontWeight={"600"}
+            className="privacy-block"
+            fontSize="13px"
+            lineHeight="15px"
+            fontWeight="600"
             noSelect
             truncate
           >
             <Link
-              fontSize={"13px"}
-              lineHeight={"15px"}
-              fontWeight={"600"}
+              fontSize="13px"
+              lineHeight="15px"
+              fontWeight="600"
               isHovered
               href={client?.policyUrl}
-              type={LinkType.action}
-              target={LinkTarget.blank}
+              type={"action"}
+              target={"_blank"}
             >
               {t("PrivacyPolicy")}
             </Link>
-            <span className="separator"></span>
+            <span className="separator" />
 
             <Link
-              fontSize={"13px"}
-              lineHeight={"15px"}
-              fontWeight={"600"}
+              fontSize="13px"
+              lineHeight="15px"
+              fontWeight="600"
               isHovered
               href={client?.termsUrl}
-              type={LinkType.action}
-              target={LinkTarget.blank}
+              type={"action"}
+              target={"_blank"}
             >
               {t("Terms of Service")}
             </Link>
@@ -403,10 +407,10 @@ const InfoDialog = ({
           {!isProfile && (
             <>
               <Text
-                className={"block-header"}
-                fontSize={"14px"}
-                lineHeight={"16px"}
-                fontWeight={"600"}
+                className="block-header"
+                fontSize="14px"
+                lineHeight="16px"
+                fontWeight="600"
                 noSelect
                 truncate
               >
@@ -414,9 +418,9 @@ const InfoDialog = ({
               </Text>
 
               <Text
-                fontSize={"13px"}
-                lineHeight={"20px"}
-                fontWeight={"600"}
+                fontSize="13px"
+                lineHeight="20px"
+                fontWeight="600"
                 noSelect
                 truncate
               >

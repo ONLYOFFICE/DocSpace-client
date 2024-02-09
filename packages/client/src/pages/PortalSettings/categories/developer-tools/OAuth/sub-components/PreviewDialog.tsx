@@ -5,10 +5,8 @@ import { useTranslation } from "react-i18next";
 
 import { IClientProps } from "@docspace/shared/utils/oauth/interfaces";
 
-import {
-  ModalDialog,
-  ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { ModalDialogType } from "@docspace/shared/components/modal-dialog/ModalDialog.enums";
 import { SocialButton } from "@docspace/shared/components/social-button";
 import { Text } from "@docspace/shared/components/text";
 import { Textarea } from "@docspace/shared/components/textarea";
@@ -16,7 +14,7 @@ import { Textarea } from "@docspace/shared/components/textarea";
 import OnlyofficeLight from "PUBLIC_DIR/images/onlyoffice.light.react.svg";
 import OnlyofficeDark from "PUBLIC_DIR/images/onlyoffice.dark.react.svg";
 
-//@ts-ignore
+// @ts-ignore
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Base } from "@docspace/shared/themes";
@@ -177,7 +175,7 @@ const PreviewDialog = ({
   const scopesString = client?.scopes.join(" ");
 
   const isClientSecretPost = !client?.authenticationMethods.includes(
-    AuthenticationMethod.none
+    AuthenticationMethod.none,
   );
 
   const encodingScopes = encodeURI(scopesString || "");
@@ -234,7 +232,7 @@ const PreviewDialog = ({
         <StyledContainer>
           <StyledPreviewContainer>
             <SocialButton
-              className={"social-button"}
+              className="social-button"
               label={t("SignIn")}
               IconComponent={icon}
               onClick={() => {
@@ -244,12 +242,7 @@ const PreviewDialog = ({
           </StyledPreviewContainer>
           <StyledBlocksContainer>
             <div className="block-container">
-              <Text
-                fontWeight={600}
-                lineHeight={"20px"}
-                fontSize={"13px"}
-                noSelect
-              >
+              <Text fontWeight={600} lineHeight="20px" fontSize="13px" noSelect>
                 HTML
               </Text>
               <Textarea
@@ -261,12 +254,7 @@ const PreviewDialog = ({
               />
             </div>
             <div className="block-container">
-              <Text
-                fontWeight={600}
-                lineHeight={"20px"}
-                fontSize={"13px"}
-                noSelect
-              >
+              <Text fontWeight={600} lineHeight="20px" fontSize="13px" noSelect>
                 CSS
               </Text>
               <Textarea
@@ -278,12 +266,7 @@ const PreviewDialog = ({
               />
             </div>
             <div className="block-container">
-              <Text
-                fontWeight={600}
-                lineHeight={"20px"}
-                fontSize={"13px"}
-                noSelect
-              >
+              <Text fontWeight={600} lineHeight="20px" fontSize="13px" noSelect>
                 JavaScript
               </Text>
               <Textarea
@@ -295,12 +278,7 @@ const PreviewDialog = ({
               />
             </div>
             <div className="block-container">
-              <Text
-                fontWeight={600}
-                lineHeight={"20px"}
-                fontSize={"13px"}
-                noSelect
-              >
+              <Text fontWeight={600} lineHeight="20px" fontSize="13px" noSelect>
                 {t("AuthorizeLink")}
               </Text>
               <Textarea
@@ -313,12 +291,7 @@ const PreviewDialog = ({
             </div>
 
             <div className="block-container">
-              <Text
-                fontWeight={600}
-                lineHeight={"20px"}
-                fontSize={"13px"}
-                noSelect
-              >
+              <Text fontWeight={600} lineHeight="20px" fontSize="13px" noSelect>
                 {t("Webhooks:State")}
               </Text>
               <Textarea
@@ -334,8 +307,8 @@ const PreviewDialog = ({
               <div className="block-container">
                 <Text
                   fontWeight={600}
-                  lineHeight={"20px"}
-                  fontSize={"13px"}
+                  lineHeight="20px"
+                  fontSize="13px"
                   noSelect
                 >
                   {t("CodeVerifier")}
@@ -381,5 +354,5 @@ export default inject(
       client: bufferSelection,
       theme,
     };
-  }
+  },
 )(observer(PreviewDialog));

@@ -3,10 +3,8 @@ import { useParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import { useTranslation, Trans } from "react-i18next";
 
-import {
-  ModalDialog,
-  ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { ModalDialogType } from "@docspace/shared/components/modal-dialog/ModalDialog.enums";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 
@@ -60,7 +58,7 @@ const ResetDialog = (props: ResetDialogProps) => {
           label={t("Common:OkButton")}
           size={ButtonSize.normal}
           scale
-          primary={true}
+          primary
           isLoading={isRequestRunning}
           onClick={onResetClick}
         />

@@ -5,6 +5,7 @@ import {
 } from "../../enums";
 
 export type TUser = {
+  access: number;
   firstName: string;
   lastName: string;
   userName: string;

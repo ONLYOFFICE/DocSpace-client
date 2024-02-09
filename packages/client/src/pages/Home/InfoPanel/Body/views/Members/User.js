@@ -9,9 +9,8 @@ import { toastr } from "@docspace/shared/components/toast";
 import { isMobileOnly, isMobile } from "react-device-detect";
 import { decode } from "he";
 import { filterUserRoleOptions } from "SRC_DIR/helpers";
-import { capitalize } from "lodash";
 
-import { getUserRole } from "@docspace/shared/utils/common";
+import { getUserRole, getUserTypeLabel } from "@docspace/shared/utils/common";
 import { Text } from "@docspace/shared/components/text";
 import EmailPlusReactSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
 import { StyledUserTypeHeader } from "../../styles/members";
@@ -48,7 +47,7 @@ const User = ({
 
   const fullRoomRoleOptions = membersHelper.getOptionsByRoomType(
     infoPanelSelection.roomType,
-    canChangeUserRole
+    canChangeUserRole,
   );
 
   const userRole = membersHelper.getOptionByUserAccess(user.access, user);
@@ -57,7 +56,7 @@ const User = ({
   const onRepeatInvitation = async () => {
     resendEmailInvitations(infoPanelSelection.id, true)
       .then(() =>
-        toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios"))
+        toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios")),
       )
       .catch((err) => toastr.error(err));
   };
@@ -77,10 +76,10 @@ const User = ({
           const newMembers = {
             users: infoPanelMembers.users?.filter((m) => m.id !== user.id),
             administrators: infoPanelMembers.administrators?.filter(
-              (m) => m.id !== user.id
+              (m) => m.id !== user.id,
             ),
             expected: infoPanelMembers.expected?.filter(
-              (m) => m.id !== user.id
+              (m) => m.id !== user.id,
             ),
           };
 
@@ -129,13 +128,13 @@ const User = ({
           setInfoPanelMembers({
             roomId: infoPanelSelection.id,
             users: infoPanelMembers.users?.map((m) =>
-              m.id === user.id ? { ...m, access: option.access } : m
+              m.id === user.id ? { ...m, access: option.access } : m,
             ),
             administrators: infoPanelMembers.administrators?.map((m) =>
-              m.id === user.id ? { ...m, access: option.access } : m
+              m.id === user.id ? { ...m, access: option.access } : m,
             ),
             expected: infoPanelMembers.expected?.map((m) =>
-              m.id === user.id ? { ...m, access: option.access } : m
+              m.id === user.id ? { ...m, access: option.access } : m,
             ),
           });
         }
@@ -182,6 +181,8 @@ const User = ({
   const onToggle = (e, isOpen) => {
     // setIsScrollLocked(isOpen);
   };
+  const role = getUserRole(user);
+  const typeLabel = getUserTypeLabel(role, t);
 
   const getTooltipContent = () => (
     <div>
@@ -197,14 +198,12 @@ const User = ({
         color="#A3A9AE !important"
         dir="auto"
       >
-        {`${capitalize(role)} | ${user.email}`}
+        {`${typeLabel} | ${user.email}`}
       </Text>
     </div>
   );
 
   const userAvatar = user.hasAvatar ? user.avatar : DefaultUserPhotoUrl;
-
-  const role = getUserRole(user);
 
   const withTooltip = user.isOwner || user.isAdmin;
 
@@ -269,7 +268,7 @@ const User = ({
             color="#A3A9AE"
             dir="auto"
           >
-            {`${capitalize(role)} | ${user.email}`}
+            {`${typeLabel} | ${user.email}`}
           </Text>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 import { tablet, mobile } from "@docspace/shared/utils";
-import Headline from "@docspace/common/components/Headline";
+import Headline from "@docspace/shared/components/Headline/Headline";
 
 const StyledHeadline = styled(Headline)`
   font-weight: 700;

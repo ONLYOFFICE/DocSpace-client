@@ -21,6 +21,7 @@ export interface UseRootHelperProps {
 
 export interface UseLoadersHelperProps {
   items: TSelectorItem[];
+  isInit: boolean;
 }
 
 export type UseSocketHelperProps = {

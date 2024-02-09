@@ -128,7 +128,7 @@ const FilesSelector = ({
     setIsFirstLoad,
     showBreadCrumbsLoader,
     showLoader,
-  } = useLoadersHelper({ items });
+  } = useLoadersHelper({ items, isInit });
 
   const { isRoot, setIsRoot, getRootData } = useRootHelper({
     setIsBreadCrumbsLoading,

@@ -6,7 +6,7 @@ import {
   SHOW_LOADER_TIMER,
 } from "../FilesSelector.constants";
 
-const useLoadersHelper = ({ items }: UseLoadersHelperProps) => {
+const useLoadersHelper = ({ items, isInit }: UseLoadersHelperProps) => {
   const [isBreadCrumbsLoading, setIsBreadCrumbsLoading] =
     React.useState<boolean>(true);
   const [isNextPageLoading, setIsNextPageLoading] =
@@ -98,10 +98,10 @@ const useLoadersHelper = ({ items }: UseLoadersHelperProps) => {
   }, [isBreadCrumbsLoading]);
 
   React.useEffect(() => {
-    if (items.length && isFirstLoad) {
+    if ((items.length || !isInit) && isFirstLoad) {
       setIsFirstLoad(false);
     }
-  }, [isFirstLoad, items]);
+  }, [isFirstLoad, items, isInit]);
 
   React.useEffect(() => {
     calculateLoader();

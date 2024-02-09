@@ -67,11 +67,6 @@ const Navigation = ({
 
   const isDesktop = currentDeviceType === DeviceType.desktop;
 
-  const infoPanelIsVisible = React.useMemo(
-    () => isDesktop && (!isEmptyPage || (isEmptyPage && isRoom)),
-    [isDesktop, isEmptyPage, isRoom],
-  );
-
   const toggleDropBox = useCallback(() => {
     if (navigationItems?.length === 0) return;
     if (isRootFolder) return setIsOpen(false);
@@ -263,7 +258,7 @@ const Navigation = ({
               isEmptyPage={isEmptyPage}
             />
           </StyledContainer>
-          {infoPanelIsVisible && !hideInfoPanel && (
+          {isDesktop && !hideInfoPanel && (
             <ToggleInfoPanelButton
               id="info-panel-toggle--open"
               isRootFolder={isRootFolder}
@@ -279,3 +274,4 @@ const Navigation = ({
 };
 
 export default React.memo(Navigation);
+

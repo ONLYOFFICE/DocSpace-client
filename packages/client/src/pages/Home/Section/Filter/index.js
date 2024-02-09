@@ -1919,7 +1919,7 @@ const SectionFilterContent = ({
           ?.getItem(`${columnsSizeInfoPanel}=${userId}`)
           ?.split(" ");
 
-        availableSort.forEach((columnTitle) => {
+        availableSort?.forEach((columnTitle) => {
           if (!hideableColumns[columnTitle]) return;
 
           if (availableSort?.includes(columnTitle)) {

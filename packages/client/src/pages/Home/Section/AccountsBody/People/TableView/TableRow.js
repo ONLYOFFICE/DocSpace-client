@@ -15,6 +15,7 @@ import { ReactSVG } from "react-svg";
 import Badges from "../../Badges";
 import { Base } from "@docspace/shared/themes";
 import { DropDown } from "@docspace/shared/components/drop-down";
+import { useNavigate } from "react-router-dom";
 
 const StyledWrapper = styled.div`
   display: contents;
@@ -229,9 +230,8 @@ const StyledPeopleRow = styled(TableRow)`
 
 StyledPeopleRow.defaultProps = { theme: Base };
 
-const StyledGroupsDropDown = styled.div`
-  position: relative;
-  .trigger {
+const StyledGroupsComboBox = styled(ComboBox)`
+  .combo-button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -239,45 +239,13 @@ const StyledGroupsDropDown = styled.div`
     padding: 4px 8px;
     background-color: ${({ isChecked, theme }) =>
       !isChecked ? "#fff" : theme.filesSection.tableView.row.backgroundActive};
+
+    ${({ isOpened }) => isOpened && "background-color: #fff !important"}
+
     border-radius: 3px;
 
     &:hover {
       background-color: #fff;
-    }
-
-    .trigger-group_name {
-      color: ${(props) => props.theme.peopleTableRow.sideInfoColor};
-      font-size: 13px;
-      font-weight: 600;
-      line-height: 20px;
-    }
-
-    .trigger-plus_badge {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 12px;
-      min-height: 12px;
-      background-color: ${(props) => props.theme.peopleTableRow.sideInfoColor};
-      padding: 0 3px;
-      color: #fff;
-      font-size: 9px;
-      font-weight: 800;
-      border-radius: 16px;
-    }
-
-    .trigger-expander {
-      height: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transform: ${({ isOpened }) =>
-        !isOpened ? "rotate(0def)" : "rotate(180deg)"};
-      svg {
-        path {
-          fill: ${(props) => props.theme.peopleTableRow.sideInfoColor};
-        }
-      }
     }
   }
 
@@ -286,7 +254,7 @@ const StyledGroupsDropDown = styled.div`
   }
 `;
 
-StyledGroupsDropDown.defaultProps = { theme: Base };
+StyledGroupsComboBox.defaultProps = { theme: Base };
 
 const fakeRooms = [
   {
@@ -337,13 +305,15 @@ const PeopleTableRow = (props) => {
     isSSO,
   } = item;
 
+  const navigate = useNavigate();
+
   const isPending = statusType === "pending" || statusType === "disabled";
 
   const groupsDropdownRef = React.useRef(null);
 
   const [groupDropDownIsOpened, setGroupDropDownIsOpened] = useState(false);
-  const onOpenGroupDropdown = () => setGroupDropDownIsOpened(true);
-  const onCloseGroupDropdown = () => setGroupDropDownIsOpened(false);
+  const onToggleGroupDropdown = () =>
+    setGroupDropDownIsOpened(!groupDropDownIsOpened);
 
   const [isLoading, setIsLoading] = React.useState(false);
 
@@ -447,55 +417,76 @@ const PeopleTableRow = (props) => {
 
   const renderGroupsCell = () => {
     const groups = item.groups || [];
-    const groupItems = groups.map((group) => ({
-      key: group.id,
-      label: group.name,
-      onClick: undefined,
-    }));
+    const groupItems = groups
+      .map((group) => ({
+        key: group.id,
+        title: group.name,
+        label: group.name,
+        action: () => {
+          navigate(`/accounts/groups/${group.id}`);
+        },
+      }))
+      .slice(0, 5);
 
     if (groups.length > 1)
       return (
-        <StyledGroupsDropDown
+        <StyledGroupsComboBox
+          isActive={groupDropDownIsOpened}
           isChecked={isChecked}
-          isOpened={groupDropDownIsOpened}
-        >
-          <div
-            ref={groupsDropdownRef}
-            className="trigger"
-            onClick={() => {
-              onOpenGroupDropdown();
-              console.log("ASDASDlasdjkdhjklahsdljkhagsdJLHG");
-            }}
-          >
-            <div className="trigger-group_name">{groups[0].name}</div>
-            <div className="trigger-plus_badge">{`+${groups.length - 1}`}</div>{" "}
-            <ReactSVG
-              className="trigger-expander"
-              src={ExpanderDownReactSvgUrl}
-            />
-          </div>
+          onToggle={onToggleGroupDropdown}
+          className="groups-combobox"
+          selectedOption={{
+            key: "selected-group",
+            title: groups[0].name,
+            label: groups[0].name + " ",
+          }}
+          onSelect={({ action }) => action()}
+          options={groupItems}
+          scaled
+          directionY="both"
+          size="content"
+          // displaySelectedOption
+          modernView
+          manualWidth={"fit-content"}
+          isLoading={isLoading}
+        />
+        // <StyledGroupsDropDown
+        //   isChecked={isChecked}
+        //   isOpened={groupDropDownIsOpened}
+        // >
+        //   <div
+        //     ref={groupsDropdownRef}
+        //     className="trigger"
+        //     onClick={onOpenGroupDropdown}
+        //   >
+        //     <div className="trigger-group_name">{groups[0].name}</div>
+        //     <div className="trigger-plus_badge">{`+${groups.length - 1}`}</div>{" "}
+        //     <ReactSVG
+        //       className="trigger-expander"
+        //       src={ExpanderDownReactSvgUrl}
+        //     />
+        //   </div>
 
-          <DropDown
-            forwardedRef={groupsDropdownRef}
-            className="dropdown"
-            open={groupDropDownIsOpened}
-            withBackdrop={true}
-            clickOutsideAction={onCloseGroupDropdown}
-            isDefaultMode={true}
-          >
-            {groupItems.map((option) => (
-              <DropDownItem
-                key={option.key}
-                label={option.label}
-                title={option.label}
-                onClick={(e) => {
-                  e.stopPropagation();
-                }}
-                noHover
-              />
-            ))}
-          </DropDown>
-        </StyledGroupsDropDown>
+        //   <DropDown
+        //     forwardedRef={groupsDropdownRef}
+        //     className="dropdown"
+        //     open={groupDropDownIsOpened}
+        //     clickOutsideAction={onCloseGroupDropdown}
+        //     withBackdrop={true}
+        //     isDefaultMode={true}
+        //     eventTypes={["click"]}
+        //   >
+        //     {groupItems.map((option) => (
+        //       <DropDownItem
+        //         key={option.key}
+        //         label={option.label}
+        //         title={option.label}
+        //         onClick={(e) => e.stopPropagation()}
+        //         noHover
+        //       />
+        //     ))}
+        //   </DropDown>
+        // </StyledGroupsDropDown>
       );
 
     if (groups.length === 1)

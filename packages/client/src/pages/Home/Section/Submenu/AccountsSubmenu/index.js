@@ -1,7 +1,13 @@
 import * as Styled from "./index.styled";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { inject, observer } from "mobx-react";
 
-const AccountsSubmenu = ({}) => {
+const AccountsSubmenu = ({
+  setPeopleSelection,
+  setGroupsSelection,
+  setPeopleBufferSelection,
+  setGroupsBufferSelection,
+}) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { groupId } = useParams();
@@ -9,10 +15,14 @@ const AccountsSubmenu = ({}) => {
   const isPeople = location.pathname.includes("/accounts/people");
 
   const onPeople = () => {
+    setGroupsSelection([]);
+    setGroupsBufferSelection(null);
     navigate("/accounts/people/filter");
   };
 
   const onGroups = () => {
+    setPeopleSelection([]);
+    setPeopleBufferSelection(null);
     navigate("/accounts/groups/filter");
   };
 
@@ -40,4 +50,9 @@ const AccountsSubmenu = ({}) => {
   );
 };
 
-export default AccountsSubmenu;
+export default inject(({ peopleStore }) => ({
+  setPeopleSelection: peopleStore.selectionStore.setSelection,
+  setPeopleBufferSelection: peopleStore.selectionStore.setBufferSelection,
+  setGroupsSelection: peopleStore.groupsStore.setSelection,
+  setGroupsBufferSelection: peopleStore.groupsStore.setBufferSelection,
+}))(observer(AccountsSubmenu));

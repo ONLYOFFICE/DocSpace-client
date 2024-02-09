@@ -38,9 +38,9 @@ const GroupsItemTitle = ({
     <StyledAccountsItemTitle ref={itemTitleRef}>
       <Avatar
         className="avatar"
-        role={infoPanelSelection.role ? infoPanelSelection.role : "user"}
         size={"big"}
-        source={userAvatar}
+        userName={infoPanelSelection.name}
+        isGroup={true}
       />
 
       <div className="info-panel__info-text">

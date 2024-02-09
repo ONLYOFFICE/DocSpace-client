@@ -41,7 +41,7 @@ class GroupsTableHeader extends React.Component {
   getColumns = (defaultColumns) => {
     const columns = [];
     const storageColumns = localStorage.getItem(
-      `${TABLE_COLUMNS}=${this.props.userId}`,
+      `${TABLE_COLUMNS}=${this.props.userId}`
     );
 
     if (storageColumns) {
@@ -152,15 +152,15 @@ export default inject(
     infoPanelStore,
     settingsStore,
   }) => ({
-    filter: peopleStore.groupsStore.filter,
-    setFilter: peopleStore.groupsStore.setFilter,
+    filter: peopleStore.groupsStore.groupsFilter,
+    setFilter: peopleStore.groupsStore.setGroupsFilter,
     setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
     userId: userStore.user?.id,
     infoPanelVisible: infoPanelStore.isVisible,
     withPaging: settingsStore,
-  }),
+  })
 )(
   withTranslation(["People", "Common", "PeopleTranslations"])(
-    observer(GroupsTableHeader),
-  ),
+    observer(GroupsTableHeader)
+  )
 );

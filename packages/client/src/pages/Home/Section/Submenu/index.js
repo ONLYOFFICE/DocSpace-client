@@ -1,67 +1,18 @@
+import AccountsSubmenu from "./AccountsSubmenu";
+import MyDocumentsSubmenu from "./MyDocumentsSubmenu";
 import { inject, observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 
-import { Submenu } from "@docspace/shared/components/submenu";
-import Loaders from "@docspace/common/components/Loaders";
-import FilesFilter from "@docspace/shared/api/files/filter";
-import { getObjectByLocation } from "@docspace/shared/utils/common";
+const SectionSubmenuContent = ({ isPersonalRoom, isRecentTab }) => {
+  const location = useLocation();
+  const isAccounts = location.pathname.includes("/accounts");
 
-const SectionSubmenuContent = ({
-  isPersonalRoom,
-  isRecentTab,
-  setFilter,
-  showBodyLoader,
-}) => {
-  const { t } = useTranslation("Files");
-
-  const submenu = [
-    {
-      id: "my",
-      name: t("MyDocuments"),
-    },
-    {
-      id: "recent",
-      name: t("RecentlyAccessible"),
-    },
-  ];
-
-  const onSelect = (e) => {
-    const filter = FilesFilter.getDefault();
-    const url = window.DocSpace.location.pathname;
-
-    if (e.id === "recent") {
-      filter.folder = e.id;
-      filter.searchArea = 3;
-    } else {
-      filter.searchArea = null;
-    }
-
-    setFilter(filter);
-    window.DocSpace.navigate(`${url}?${filter.toUrlParams()}`);
-  };
-
-  const showSubmenu = isPersonalRoom || isRecentTab;
-  const startSelect =
-    getObjectByLocation(window.DocSpace.location)?.folder === "recent" ? 1 : 0;
-
-  if (showSubmenu && showBodyLoader) return <Loaders.SectionSubmenuLoader />;
-
-  return showSubmenu ? (
-    <Submenu data={submenu} startSelect={startSelect} onSelect={onSelect} />
-  ) : null;
+  if (isPersonalRoom || isRecentTab) return <MyDocumentsSubmenu />;
+  if (isAccounts) return <AccountsSubmenu />;
+  return null;
 };
 
-export default inject(
-  ({ treeFoldersStore, filesStore, clientLoadingStore }) => {
-    const { isPersonalRoom, isRecentTab } = treeFoldersStore;
-    const { setFilter } = filesStore;
-    const { showBodyLoader } = clientLoadingStore;
-
-    return {
-      isPersonalRoom,
-      isRecentTab,
-      setFilter,
-      showBodyLoader,
-    };
-  }
-)(observer(SectionSubmenuContent));
+export default inject(({ treeFoldersStore }) => ({
+  isPersonalRoom: treeFoldersStore.isPersonalRoom,
+  isRecentTab: treeFoldersStore.isRecentTab,
+}))(observer(SectionSubmenuContent));

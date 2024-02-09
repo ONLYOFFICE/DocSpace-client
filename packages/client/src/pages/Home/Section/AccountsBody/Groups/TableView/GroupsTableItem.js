@@ -12,6 +12,7 @@ import Badges from "../../Badges";
 import { Base } from "@docspace/shared/themes";
 import { Events } from "@docspace/shared/enums";
 import { Text } from "@docspace/shared/components/text";
+import { Avatar } from "@docspace/shared/components/avatar";
 
 const GroupsTableItem = ({
   t,
@@ -28,14 +29,6 @@ const GroupsTableItem = ({
 
   const isChecked = selection.includes(item);
   const isActive = bufferSelection?.id === item.id;
-
-  const titleWithoutSpaces = item.name.replace(/\s+/g, " ").trim();
-  const indexAfterLastSpace = titleWithoutSpaces.lastIndexOf(" ");
-  const secondCharacter =
-    indexAfterLastSpace === -1
-      ? ""
-      : titleWithoutSpaces[indexAfterLastSpace + 1];
-  const groupName = (item.name[0] + secondCharacter).toUpperCase();
 
   const onChange = (e) => {
     if (!isChecked) setSelection([...selection, item]);
@@ -96,7 +89,12 @@ const GroupsTableItem = ({
             checked={isChecked}
           >
             <div className="table-container_element">
-              <div>{groupName}</div>
+              <Avatar
+                className="avatar"
+                size={"min"}
+                userName={item.name}
+                isGroup={true}
+              />
             </div>
             <Checkbox
               className="table-container_row-checkbox"
@@ -117,13 +115,13 @@ const GroupsTableItem = ({
           </Link>
         </TableCell>
 
-        <TableCell className={"table-container_group-title-cell"}>
+        <TableCell className={"table-container_group-manager"}>
           <Text
             title={item.manager.displayName}
             fontWeight="600"
             fontSize="13px"
             isTextOverflow
-            className="table-cell_group-title"
+            className="table-cell_group-manager"
             color={"#A3A9AE"}
           >
             {item.manager.displayName}

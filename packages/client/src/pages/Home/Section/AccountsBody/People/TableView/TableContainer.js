@@ -53,7 +53,6 @@ const contextCss = css`
 `;
 
 const StyledTableContainer = styled(TableContainer)`
-  margin-top: 0px;
   :has(
       .table-container_body
         .table-list-item:first-child:first-child
@@ -245,5 +244,5 @@ export default inject(
       isFiltered,
       currentDeviceType,
     };
-  },
+  }
 )(observer(Table));

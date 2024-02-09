@@ -6,8 +6,6 @@ import withLoader from "SRC_DIR/HOCs/withLoader";
 import RowView from "./RowView";
 
 const Groups = ({ tReady, accountsViewAs }) => {
-  console.log(accountsViewAs);
-
   return (
     <Consumer>
       {(context) =>
@@ -25,6 +23,6 @@ export default inject(({ peopleStore }) => ({
   accountsViewAs: peopleStore.viewAs,
 }))(
   withTranslation(["People", "Common", "PeopleTranslations"])(
-    withLoader(observer(Groups))(),
-  ),
+    withLoader(observer(Groups))()
+  )
 );

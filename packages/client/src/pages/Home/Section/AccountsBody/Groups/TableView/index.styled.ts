@@ -39,7 +39,6 @@ const contextCss = css`
 `;
 
 export const GroupsTableContainer = styled(TableContainer)`
-  margin-top: 0px;
   :has(
       .table-container_body
         .table-list-item:first-child:first-child
@@ -147,19 +146,6 @@ export const GroupsRow = styled(TableRow)`
     }
 
     .table-container_element {
-      div {
-        display: flex;
-        width: 32px;
-        height: 32px;
-        align-items: center;
-        justify-content: center;
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px;
-        background: #eceef1;
-        color: #333;
-        border-radius: 50%;
-      }
     }
   }
 

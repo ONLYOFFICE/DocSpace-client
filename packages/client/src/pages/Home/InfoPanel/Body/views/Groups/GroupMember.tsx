@@ -64,11 +64,13 @@ const GroupMember = ({ groupMember, isManager }: GroupMemberProps) => {
 
       <div className="main-wrapper">
         <div className="name-wrapper">
-          <div className="name" style={{}}>
+          <div className="name" style={{}} title={groupMember.displayName}>
             {groupMember.displayName}
           </div>
         </div>
-        <div className="email">{groupMember.email}</div>
+        <div className="email" title={groupMember.email}>
+          {groupMember.email}
+        </div>
       </div>
 
       <div ref={iconRef} className="context-btn-wrapper">

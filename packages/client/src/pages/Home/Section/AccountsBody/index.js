@@ -73,7 +73,6 @@ const SectionBodyContent = (props) => {
 
   return (
     <>
-      <Tabs />
       {location.pathname.includes("/accounts/people") ? (
         <People />
       ) : !groupId ? (
@@ -114,6 +113,6 @@ export default inject(({ peopleStore }) => {
   };
 })(
   withTranslation(["People", "Common", "PeopleTranslations"])(
-    withLoader(observer(SectionBodyContent))(),
-  ),
+    withLoader(observer(SectionBodyContent))()
+  )
 );

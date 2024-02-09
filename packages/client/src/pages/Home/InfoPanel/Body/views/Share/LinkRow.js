@@ -43,7 +43,6 @@ const LinkRow = ({
     toastr.success(t("Files:LinkSuccessfullyCopied"));
   };
 
-  console.log("links", links);
   return (
     <>
       {!links?.length ? (
@@ -62,7 +61,6 @@ const LinkRow = ({
         </StyledLinkRow>
       ) : (
         links.map((link, index) => {
-          console.log(link);
           if (link.isLoaded) return <RowLoader />;
 
           const shareOption = shareOptions.find(

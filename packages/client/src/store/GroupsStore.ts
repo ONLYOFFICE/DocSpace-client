@@ -16,6 +16,7 @@ import api from "@docspace/shared/api";
 class GroupsStore {
   authStore;
   peopleStore;
+  infoPanelStore;
 
   groups = [];
   selection = [];
@@ -29,9 +30,10 @@ class GroupsStore {
   insideGroupFilter = InsideGroupFilter.getDefault();
   insideGroupBackUrl = null;
 
-  constructor(peopleStore: any, authStore: any) {
+  constructor(authStore: any, peopleStore: any, infoPanelStore: any) {
     this.authStore = authStore;
     this.peopleStore = peopleStore;
+    this.infoPanelStore = infoPanelStore;
     makeAutoObservable(this);
   }
 
@@ -210,7 +212,7 @@ class GroupsStore {
     filterData.total = filteredMembersRes.total;
 
     group && this.setCurrentGroup(group);
-    this.peopleStore.usersStore.setUsers(filteredMembersRes.items);
+    this.usersStore.setUsers(filteredMembersRes.items);
 
     if (updateFilter) {
       this.setInsideGroupFilterParams(filterData);
@@ -287,7 +289,7 @@ class GroupsStore {
         title: t("Info"),
         icon: InfoReactSvgUrl,
         onClick: () => {
-          const { setIsVisible } = this.authStore.infoPanelStore;
+          const { setIsVisible } = this.infoPanelStore;
           this.selection = [item];
           setIsVisible(true);
         },

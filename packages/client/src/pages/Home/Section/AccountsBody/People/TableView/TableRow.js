@@ -57,7 +57,7 @@ const StyledPeopleRow = styled(TableRow)`
             `}
     }
 
-    .trigger {
+    .groups-combobox .combo-button {
       background-color: ${(props) =>
         `${props.theme.filesSection.tableView.row.backgroundActive}`};
     }
@@ -170,6 +170,7 @@ const StyledPeopleRow = styled(TableRow)`
   }
 
   .type-combobox,
+  .groups-combobox,
   .room-combobox {
     .combo-button {
       ${(props) =>
@@ -309,8 +310,6 @@ const PeopleTableRow = (props) => {
 
   const isPending = statusType === "pending" || statusType === "disabled";
 
-  const groupsDropdownRef = React.useRef(null);
-
   const [groupDropDownIsOpened, setGroupDropDownIsOpened] = useState(false);
   const onToggleGroupDropdown = () =>
     setGroupDropDownIsOpened(!groupDropDownIsOpened);
@@ -431,12 +430,12 @@ const PeopleTableRow = (props) => {
     if (groups.length > 1)
       return (
         <StyledGroupsComboBox
-          isActive={groupDropDownIsOpened}
-          isChecked={isChecked}
-          onToggle={onToggleGroupDropdown}
+          // isActive={groupDropDownIsOpened}
+          // isChecked={isChecked}
+          // onToggle={onToggleGroupDropdown}
           className="groups-combobox"
           selectedOption={{
-            key: "selected-group",
+            key: "first-group",
             title: groups[0].name,
             label: groups[0].name + " ",
           }}
@@ -445,48 +444,10 @@ const PeopleTableRow = (props) => {
           scaled
           directionY="both"
           size="content"
-          // displaySelectedOption
           modernView
           manualWidth={"fit-content"}
           isLoading={isLoading}
         />
-        // <StyledGroupsDropDown
-        //   isChecked={isChecked}
-        //   isOpened={groupDropDownIsOpened}
-        // >
-        //   <div
-        //     ref={groupsDropdownRef}
-        //     className="trigger"
-        //     onClick={onOpenGroupDropdown}
-        //   >
-        //     <div className="trigger-group_name">{groups[0].name}</div>
-        //     <div className="trigger-plus_badge">{`+${groups.length - 1}`}</div>{" "}
-        //     <ReactSVG
-        //       className="trigger-expander"
-        //       src={ExpanderDownReactSvgUrl}
-        //     />
-        //   </div>
-
-        //   <DropDown
-        //     forwardedRef={groupsDropdownRef}
-        //     className="dropdown"
-        //     open={groupDropDownIsOpened}
-        //     clickOutsideAction={onCloseGroupDropdown}
-        //     withBackdrop={true}
-        //     isDefaultMode={true}
-        //     eventTypes={["click"]}
-        //   >
-        //     {groupItems.map((option) => (
-        //       <DropDownItem
-        //         key={option.key}
-        //         label={option.label}
-        //         title={option.label}
-        //         onClick={(e) => e.stopPropagation()}
-        //         noHover
-        //       />
-        //     ))}
-        //   </DropDown>
-        // </StyledGroupsDropDown>
       );
 
     if (groups.length === 1)
@@ -632,7 +593,10 @@ const PeopleTableRow = (props) => {
 
         <TableCell className={"table-cell_type"}>{typeCell}</TableCell>
 
-        <TableCell className={"table-cell_groups"}>
+        <TableCell
+          className={"table-cell_groups"}
+          onClick={(e) => e.stopPropagation()}
+        >
           {renderGroupsCell()}
         </TableCell>
 

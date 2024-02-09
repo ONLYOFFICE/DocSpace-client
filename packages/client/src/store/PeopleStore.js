@@ -62,17 +62,17 @@ class PeopleStore {
     infoPanelStore,
     userStore,
     tfaStore,
-    settingsStore,
+    settingsStore
   ) {
     this.authStore = authStore;
     this.infoPanelStore = infoPanelStore;
-    this.groupsStore = new GroupsStore(this, authStore);
     this.usersStore = new UsersStore(
       this,
       settingsStore,
       infoPanelStore,
-      userStore,
+      userStore
     );
+    this.groupsStore = new GroupsStore(authStore, this, infoPanelStore);
     this.targetUserStore = new TargetUserStore(this, userStore);
     this.selectedGroupStore = new SelectedGroupStore(this);
     this.editingFormStore = new EditingFormStore(this);
@@ -93,7 +93,7 @@ class PeopleStore {
       infoPanelStore,
       userStore,
       tfaStore,
-      settingsStore,
+      settingsStore
     );
 
     makeAutoObservable(this);
@@ -140,7 +140,7 @@ class PeopleStore {
 
     if (users.length > 1) {
       fromType = fromType.filter(
-        (item, index) => fromType.indexOf(item) === index && item !== type,
+        (item, index) => fromType.indexOf(item) === index && item !== type
       );
 
       if (fromType.length === 0) fromType = [fromType[0]];

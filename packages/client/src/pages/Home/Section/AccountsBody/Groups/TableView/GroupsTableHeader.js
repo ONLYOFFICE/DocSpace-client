@@ -12,10 +12,10 @@ class GroupsTableHeader extends React.Component {
   constructor(props) {
     super(props);
 
-    const columns = this.getColumns([
+    const defaultColumns = [
       {
         key: "Name",
-        title: props.t("Common:Name"),
+        title: props.t("Common:Title"),
         resizable: true,
         enable: true,
         default: true,
@@ -27,13 +27,13 @@ class GroupsTableHeader extends React.Component {
       {
         key: "Head of Group",
         title: props.t("Head of Group"),
-        resizable: true,
-        sortBy: "manager",
         enable: true,
+        resizable: true,
         onChange: this.onColumnChange,
-        onClick: this.onFilter,
       },
-    ]);
+    ];
+
+    const columns = this.getColumns(defaultColumns);
 
     this.state = { columns };
   }
@@ -70,8 +70,8 @@ class GroupsTableHeader extends React.Component {
     localStorage.setItem(`${TABLE_COLUMNS}=${this.props.userId}`, tableColumns);
 
     const event = new Event(Events.CHANGE_COLUMN);
-
     window.dispatchEvent(event);
+    console.log("event", event);
   };
 
   onFilter = (sortBy) => {
@@ -120,16 +120,11 @@ class GroupsTableHeader extends React.Component {
     } = this.props;
     const { sortOrder } = filter;
 
-    const sortBy =
-      filter.sortBy === "firstname" || filter.sortBy === "lastname"
-        ? "AZ"
-        : filter.sortBy;
-
     return (
       <TableHeader
         checkboxSize="48px"
         sorted={sortOrder === "descending"}
-        sortBy={sortBy}
+        sortBy={filter.sortBy}
         containerRef={containerRef}
         columns={columns}
         columnStorageName={columnStorageName}

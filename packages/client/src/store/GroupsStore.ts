@@ -216,7 +216,7 @@ class GroupsStore {
     filterData.total = filteredMembersRes.total;
 
     group && this.setCurrentGroup(group);
-    this.usersStore.setUsers(filteredMembersRes.items);
+    this.peopleStore.usersStore.setUsers(filteredMembersRes.items);
 
     if (updateFilter) {
       this.setInsideGroupFilterParams(filterData);

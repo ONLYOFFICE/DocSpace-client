@@ -321,7 +321,7 @@ class UploadDataStore {
         this.filesToConversion.push(file);
 
         if (secondConvertingWithPassword && conversionPositionIndex) {
-          this.uploadedFilesHistory[file.index].error = null;
+          this.uploadedFilesHistory[file.index].error = null; //reset error to show loader for convert with password
         } else {
           this.uploadedFilesHistory.push(file);
         }

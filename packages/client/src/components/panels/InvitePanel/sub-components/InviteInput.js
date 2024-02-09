@@ -180,8 +180,7 @@ const InviteInput = ({
       return unique;
     }, []);
 
-    if (items.length > filtered.length)
-      toastr.warning("Some users have already been added");
+    if (items.length > filtered.length) toastr.warning(t("UsersAlreadyAdded"));
 
     return filtered;
   };
@@ -192,12 +191,16 @@ const InviteInput = ({
     item.access = selectedAccess;
 
     const addUser = () => {
-      if (item.isOwner || item.isAdmin)
-        item.access = ShareAccessRights.RoomManager;
+      if (shared) {
+        toastr.warning(t("UsersAlreadyAdded"));
+      } else {
+        if (item.isOwner || item.isAdmin)
+          item.access = ShareAccessRights.RoomManager;
 
-      const items = removeExist([item, ...inviteItems]);
+        const items = removeExist([item, ...inviteItems]);
+        setInviteItems(items);
+      }
 
-      setInviteItems(items);
       setInputValue("");
       setUsersList([]);
       setIsAddEmailPanelBlocked(true);
@@ -207,7 +210,6 @@ const InviteInput = ({
       <DropDownItem
         key={id}
         onClick={addUser}
-        disabled={shared}
         height={48}
         heightTablet={48}
         className="list-item"

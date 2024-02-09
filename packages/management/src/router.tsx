@@ -12,7 +12,7 @@ import Backup from "./categories/backup";
 import Restore from "./categories/restore";
 import Payments from "./categories/payments";
 
-import ErrorBoundary from "@docspace/shared/components/error-boundary/ErrorBoundary";
+import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 
 import Error404 from "client/Error404";
 

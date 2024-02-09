@@ -156,10 +156,10 @@ class CommonStore {
     this.enableRestoreButton = enableRestoreButton;
   };
 
-  restoreWhiteLabelSettings = async (isDefault) => {
+  restoreWhiteLabelSettings = async () => {
     const { getWhiteLabelLogoUrls } = this.settingsStore;
 
-    await api.settings.restoreWhiteLabelSettings(isDefault, isManagement());
+    await api.settings.restoreWhiteLabelSettings(isManagement());
     await getWhiteLabelLogoUrls();
     this.getWhiteLabelLogoUrls();
     this.getIsDefaultWhiteLabel();

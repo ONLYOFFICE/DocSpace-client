@@ -16,4 +16,3 @@ export type TItem = {
   logo: TLogo;
   roomType: RoomsType;
 };
-

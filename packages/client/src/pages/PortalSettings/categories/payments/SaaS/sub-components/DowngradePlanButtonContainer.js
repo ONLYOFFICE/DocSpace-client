@@ -59,7 +59,7 @@ const DowngradePlanButtonContainer = ({
   );
 };
 
-export default inject(({ payments }) => {
+export default inject(({ paymentStore }) => {
   const {
     isLoading,
     isLessCountThanAcceptable,
@@ -67,7 +67,7 @@ export default inject(({ payments }) => {
     canPayTariff,
 
     isAlreadyPaid,
-  } = payments;
+  } = paymentStore;
 
   return {
     isLoading,

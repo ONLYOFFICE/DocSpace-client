@@ -10,6 +10,7 @@ import { ComboBox } from "@docspace/shared/components/combobox";
 
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 import { StyledAccountContent } from "../../styles/accounts";
+import { getUserTypeLabel } from "@docspace/shared/utils/common";
 
 const Accounts = (props) => {
   const {
@@ -45,21 +46,6 @@ const Accounts = (props) => {
         return setStatusLabel(t("Common:Active"));
     }
   }, [infoPanelSelection]);
-
-  const getUserTypeLabel = React.useCallback((role) => {
-    switch (role) {
-      case "owner":
-        return t("Common:Owner");
-      case "admin":
-        return t("Common:DocSpaceAdmin");
-      case "manager":
-        return t("Common:RoomAdmin");
-      case "collaborator":
-        return t("Common:PowerUser");
-      case "user":
-        return t("Common:User");
-    }
-  }, []);
 
   const getTypesOptions = React.useCallback(() => {
     const options = [];
@@ -128,10 +114,10 @@ const Accounts = (props) => {
         setIsLoading(false);
       }
     },
-    [infoPanelSelection, changeUserType, t]
+    [infoPanelSelection, changeUserType, t],
   );
 
-  const typeLabel = getUserTypeLabel(role);
+  const typeLabel = React.useCallback(() => getUserTypeLabel(role, t), [])();
 
   const renderTypeData = () => {
     const typesOptions = getTypesOptions();
@@ -248,7 +234,7 @@ export default inject(
       getPeopleListItem: usersStore.getPeopleListItem,
       setInfoPanelSelection,
     };
-  }
+  },
 )(
   withTranslation([
     "People",
@@ -263,7 +249,7 @@ export default inject(
     "Translations",
   ])(
     withLoader(observer(Accounts))(
-      <Loaders.InfoPanelViewLoader view="accounts" />
-    )
-  )
+      <Loaders.InfoPanelViewLoader view="accounts" />,
+    ),
+  ),
 );

@@ -7,7 +7,6 @@ export { default as Section } from "./Section";
 export { default as ErrorContainer } from "./ErrorContainer";
 export { default as ErrorBoundary } from "./ErrorBoundary";
 export { default as FilterInput } from "./FilterInput";
-export { default as MediaViewer } from "./MediaViewer";
 export { default as Loaders } from "./Loaders";
 export { default as SystemThemeDetector } from "./SystemThemeDetector";
 export { default as RecoverAccessModalDialog } from "./Dialogs/RecoverAccessModalDialog";

@@ -93,7 +93,7 @@ const ConfirmRoute = ({
             window.location.href = combineUrl(
               window.DocSpaceConfig?.proxy?.url,
               path,
-              "/error"
+              "/error",
             );
             break;
           case ValidationResult.Expired:
@@ -104,7 +104,7 @@ const ConfirmRoute = ({
             window.location.href = combineUrl(
               window.DocSpaceConfig?.proxy?.url,
               path,
-              "/error"
+              "/error",
             );
             break;
           case ValidationResult.TariffLimit:
@@ -115,7 +115,7 @@ const ConfirmRoute = ({
             window.location.href = combineUrl(
               window.DocSpaceConfig?.proxy?.url,
               path,
-              "/error?messageKey=20"
+              "/error?messageKey=20",
             );
             break;
           default:
@@ -126,7 +126,7 @@ const ConfirmRoute = ({
             window.location.href = combineUrl(
               window.DocSpaceConfig?.proxy?.url,
               path,
-              "/error"
+              "/error",
             );
             break;
         }
@@ -145,7 +145,7 @@ const ConfirmRoute = ({
         window.location.href = combineUrl(
           window.DocSpaceConfig?.proxy?.url,
           path,
-          "/error"
+          "/error",
         );
       });
   }, [getData, doAuthenticated, isAuthenticated, storeIsLoaded, logout]);

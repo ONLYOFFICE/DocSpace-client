@@ -195,3 +195,15 @@ export type TThirdPartyProvider = {
   url: string;
   linked: boolean;
 };
+
+export type TPaymentSettings = {
+  salesEmail: string;
+  feedbackAndSupportUrl: string;
+  buyUrl: string;
+  standalone: boolean;
+  currentLicense: {
+    trial: boolean;
+    date: Date;
+  };
+  max: number;
+};

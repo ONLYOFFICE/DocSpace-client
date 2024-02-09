@@ -1,5 +1,7 @@
 import React from "react";
-import { RoomsType } from "../../enums";
+import { TFileSecurity, TFolderSecurity } from "../../api/files/types";
+import { TRoomSecurity } from "../../api/rooms/types";
+import { RoomsType, ShareAccessRights } from "../../enums";
 import { AvatarRole } from "../avatar";
 
 // header
@@ -18,7 +20,7 @@ export type HeaderProps = {
   headerLabel: string;
 } & (THeaderBackButton | THeaderNonBackButton);
 
-type TSelectorHeader =
+export type TSelectorHeader =
   | {
       withHeader: true;
       headerProps: HeaderProps;
@@ -33,6 +35,7 @@ export type TBreadCrumb = {
   isRoom?: boolean;
   minWidth?: string;
   onClick?: (e: React.MouseEvent, open: boolean, item: TBreadCrumb) => void;
+  roomType?: RoomsType;
 };
 
 export interface BreadCrumbsProps {
@@ -92,7 +95,7 @@ export interface SearchProps {
   setIsSearch: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-type TSelectorSearch =
+export type TSelectorSearch =
   | {
       withSearch: true;
       searchLoader: React.ReactNode;
@@ -141,7 +144,7 @@ type TSelectorEmptyScreen = {
 };
 
 // submit button
-type TSelectorSubmitButton = {
+export type TSelectorSubmitButton = {
   submitButtonLabel: string;
   disableSubmitButton: boolean;
   onSubmit: (
@@ -226,7 +229,7 @@ export type TSelectorCheckbox =
   | {
       withFooterCheckbox?: undefined;
       footerCheckboxLabel?: undefined;
-      isChecked: boolean;
+      isChecked?: boolean;
       setIsChecked?: undefined;
     };
 
@@ -259,13 +262,8 @@ export type SelectorProps = TSelectorHeader &
     selectedAccessRight?: TAccessRight;
     onAccessRightsChange?: (access: TAccessRight) => void;
 
-    loadNextPage:
-      | ((
-          startIndex: number,
-          search?: string,
-          ...rest: unknown[]
-        ) => Promise<void>)
-      | null;
+    disableFirstFetch?: boolean;
+    loadNextPage: (startIndex: number) => Promise<void>;
     hasNextPage: boolean;
     isNextPageLoading: boolean;
     totalItems: number;
@@ -273,7 +271,11 @@ export type SelectorProps = TSelectorHeader &
 
     rowLoader: React.ReactNode;
 
-    renderCustomItem?: (...args: unknown[]) => React.ReactNode | null;
+    renderCustomItem?: (
+      label: string,
+      role?: AvatarRole,
+      email?: string,
+    ) => React.ReactNode | null;
 
     alwaysShowFooter?: boolean;
     descriptionText?: string;
@@ -292,7 +294,11 @@ export type BodyProps = TSelectorBreadCrumbs &
     isMultiSelect: boolean;
 
     items: TSelectorItem[];
-    renderCustomItem?: (...args: unknown[]) => React.ReactNode | null;
+    renderCustomItem?: (
+      label: string,
+      role?: AvatarRole,
+      email?: string,
+    ) => React.ReactNode | null;
     onSelect: (item: TSelectorItem) => void;
 
     loadMoreItems: (startIndex: number) => void;
@@ -323,9 +329,22 @@ type TSelectorItemLogo =
       icon?: undefined;
       avatar: string;
       role?: AvatarRole;
+      hasAvatar?: boolean;
     }
-  | { color: string; icon: undefined; avatar?: string; role?: undefined }
-  | { color?: undefined; icon: string; avatar?: undefined; role?: undefined };
+  | {
+      hasAvatar?: undefined;
+      color: string;
+      icon?: undefined;
+      avatar?: undefined;
+      role?: undefined;
+    }
+  | {
+      hasAvatar?: undefined;
+      color?: undefined;
+      icon: string;
+      avatar?: undefined;
+      role?: undefined;
+    };
 
 type TSelectorItemType =
   | {
@@ -333,24 +352,68 @@ type TSelectorItemType =
       fileExst?: undefined;
       roomType?: undefined;
       shared?: undefined;
+      isOwner: boolean;
+      isAdmin: boolean;
+      isVisitor: boolean;
+      isCollaborator: boolean;
+      access: ShareAccessRights | string | number;
+      isFolder?: undefined;
+      parentId?: undefined;
+      rootFolderType?: undefined;
+      filesCount?: undefined;
+      foldersCount?: undefined;
+      security?: undefined;
     }
   | {
       email?: undefined;
       fileExst: string;
       roomType?: undefined;
       shared?: boolean;
+      isOwner?: undefined;
+      isAdmin?: undefined;
+      isVisitor?: undefined;
+      isCollaborator?: undefined;
+      access?: undefined;
+      isFolder?: undefined;
+      parentId?: string | number;
+      rootFolderType?: string | number;
+      filesCount?: undefined;
+      foldersCount?: undefined;
+      security?: TFileSecurity;
     }
   | {
       email?: undefined;
       fileExst?: undefined;
       roomType: RoomsType;
       shared?: boolean;
+      isOwner?: undefined;
+      isAdmin?: undefined;
+      isVisitor?: undefined;
+      isCollaborator?: undefined;
+      access?: undefined;
+      isFolder: boolean;
+      parentId?: string | number;
+      rootFolderType?: string | number;
+      filesCount?: number;
+      foldersCount?: number;
+      security?: TRoomSecurity;
     }
   | {
       email?: undefined;
       fileExst?: undefined;
       roomType?: undefined;
       shared?: boolean;
+      isOwner?: undefined;
+      isAdmin?: undefined;
+      isVisitor?: undefined;
+      isCollaborator?: undefined;
+      access?: undefined;
+      isFolder: boolean;
+      parentId?: string | number;
+      rootFolderType?: string | number;
+      filesCount?: number;
+      foldersCount?: number;
+      security?: TFolderSecurity;
     };
 
 export type TSelectorItem = TSelectorItemLogo &
@@ -358,9 +421,9 @@ export type TSelectorItem = TSelectorItemLogo &
     key?: string;
     id?: string | number;
     label: string;
+    displayName?: string;
 
     isSelected?: boolean;
-
     isDisabled?: boolean;
   };
 
@@ -370,7 +433,11 @@ export type Data = {
   isMultiSelect: boolean;
   isItemLoaded: (index: number) => boolean;
   rowLoader: React.ReactNode;
-  renderCustomItem?: (...args: unknown[]) => React.ReactNode | null;
+  renderCustomItem?: (
+    label: string,
+    role?: AvatarRole,
+    email?: string,
+  ) => React.ReactNode | null;
 };
 
 export interface ItemProps {

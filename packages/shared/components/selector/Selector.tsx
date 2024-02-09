@@ -26,7 +26,7 @@ const Selector = ({
   withHeader,
   headerProps,
 
-  isBreadCrumbsLoading,
+  isBreadCrumbsLoading = false,
   breadCrumbsLoader,
   withBreadCrumbs,
   breadCrumbs,
@@ -89,6 +89,7 @@ const Selector = ({
   loadNextPage,
   totalItems,
   isLoading,
+  disableFirstFetch,
 
   alwaysShowFooter,
 
@@ -109,30 +110,8 @@ const Selector = ({
   );
   const [isFooterCheckboxChecked, setIsFooterCheckboxChecked] =
     React.useState<boolean>(isChecked || false);
-
   const [selectedAccess, setSelectedAccess] =
     React.useState<TAccessRight | null>(null);
-
-  const compareSelectedItems = React.useCallback(
-    (newList: TSelectorItem[]) => {
-      let isEqual = true;
-
-      if (selectedItems?.length !== newList.length) {
-        return setFooterVisible(true);
-      }
-
-      if (newList.length === 0 && selectedItems?.length === 0) {
-        return setFooterVisible(false);
-      }
-
-      newList.forEach((item) => {
-        isEqual = selectedItems.some((x) => x.id === item.id);
-      });
-
-      return setFooterVisible(!isEqual);
-    },
-    [selectedItems],
-  );
 
   const onSelectAction = (item: TSelectorItem) => {
     onSelect?.({
@@ -140,24 +119,10 @@ const Selector = ({
     });
 
     if (isMultiSelect) {
-      setRenderedItems((value) => {
-        const idx = value.findIndex((x) => item.id === x.id);
-
-        const newValue = value.map((i: TSelectorItem) => ({ ...i }));
-
-        if (idx === -1) return newValue;
-
-        newValue[idx].isSelected = !value[idx].isSelected;
-
-        return newValue;
-      });
-
       if (item.isSelected) {
         setNewSelectedItems((value) => {
-          const newValue = value
-            .filter((x) => x.id !== item.id)
-            .map((x) => ({ ...x }));
-          compareSelectedItems(newValue);
+          const newValue = value.filter((x) => x.id !== item.id);
+
           return newValue;
         });
       } else {
@@ -166,11 +131,18 @@ const Selector = ({
             ...item,
           });
 
-          compareSelectedItems(value);
-
-          return value;
+          return [...value];
         });
       }
+      setRenderedItems((value) => {
+        const idx = value.findIndex((x) => item.id === x.id);
+
+        if (idx === -1) return value;
+
+        value[idx] = { ...value[idx], isSelected: !value[idx].isSelected };
+
+        return value;
+      });
     } else {
       setRenderedItems((value) => {
         const idx = value.findIndex((x) => item.id === x.id);
@@ -184,19 +156,13 @@ const Selector = ({
 
         newValue[idx].isSelected = !item.isSelected;
 
-        return newValue;
+        return [...newValue];
       });
-
-      const newItem = {
-        ...item,
-      };
 
       if (item.isSelected) {
         setNewSelectedItems([]);
-        compareSelectedItems([]);
       } else {
-        setNewSelectedItems([newItem]);
-        compareSelectedItems([newItem]);
+        setNewSelectedItems([item]);
       }
     }
   };
@@ -212,22 +178,27 @@ const Selector = ({
     ) {
       const cloneItems = items.map((x) => ({ ...x }));
 
-      const cloneRenderedItems = items.map((x) => ({ ...x, isSelected: true }));
+      setRenderedItems((i) => {
+        const cloneRenderedItems = i.map((x) => ({
+          ...x,
+          isSelected: true,
+        }));
 
-      setRenderedItems(cloneRenderedItems);
+        return cloneRenderedItems;
+      });
       setNewSelectedItems(cloneItems);
-      compareSelectedItems(cloneItems);
     } else {
-      const cloneRenderedItems = items.map((x) => ({
-        ...x,
-        isSelected: false,
-      }));
+      setRenderedItems((i) => {
+        const cloneRenderedItems = i.map((x) => ({
+          ...x,
+          isSelected: false,
+        }));
 
-      setRenderedItems(cloneRenderedItems);
+        return cloneRenderedItems;
+      });
       setNewSelectedItems([]);
-      compareSelectedItems([]);
     }
-  }, [compareSelectedItems, items, newSelectedItems.length, onSelectAll]);
+  }, [items, newSelectedItems.length, onSelectAll]);
 
   const onSubmitAction = () => {
     onSubmit(
@@ -248,19 +219,45 @@ const Selector = ({
 
   const loadMoreItems = React.useCallback(
     (startIndex: number) => {
-      if (startIndex === 1) return; // fix double fetch of the first page
-      if (!isNextPageLoading) loadNextPage?.(startIndex - 1);
+      if (!isNextPageLoading) loadNextPage(startIndex - 1);
     },
     [isNextPageLoading, loadNextPage],
   );
 
   React.useEffect(() => {
+    if (disableFirstFetch) return;
+    loadNextPage(0);
+  }, [disableFirstFetch, loadNextPage]);
+
+  React.useEffect(() => {
     if (selectedAccessRight) setSelectedAccess({ ...selectedAccessRight });
   }, [selectedAccessRight]);
 
+  React.useEffect(() => {
+    let isEqual = true;
+
+    if (selectedItems?.length !== newSelectedItems.length) {
+      return setFooterVisible(true);
+    }
+
+    if (newSelectedItems.length === 0 && selectedItems?.length === 0) {
+      return setFooterVisible(false);
+    }
+
+    newSelectedItems.forEach((item) => {
+      isEqual = selectedItems.some((x) => x.id === item.id);
+    });
+
+    setFooterVisible(!isEqual);
+  }, [selectedItems, newSelectedItems]);
+
   React.useLayoutEffect(() => {
-    if (items && selectedItems) {
-      if (selectedItems.length === 0 || !isMultiSelect) {
+    if (items) {
+      if (
+        !selectedItems ||
+        (selectedItems && selectedItems.length === 0) ||
+        !isMultiSelect
+      ) {
         const cloneItems = items.map((x) => ({ ...x, isSelected: false }));
         return setRenderedItems(cloneItems);
       }
@@ -279,9 +276,8 @@ const Selector = ({
 
       setRenderedItems(newItems);
       setNewSelectedItems(cloneSelectedItems);
-      compareSelectedItems(cloneSelectedItems);
     }
-  }, [items, selectedItems, isMultiSelect, compareSelectedItems]);
+  }, [items, selectedItems, isMultiSelect]);
 
   const breadCrumbsProps: TSelectorBreadCrumbs = withBreadCrumbs
     ? {
@@ -382,7 +378,7 @@ const Selector = ({
       <Body
         withHeader={withHeader}
         footerVisible={footerVisible || !!alwaysShowFooter}
-        items={renderedItems}
+        items={[...renderedItems]}
         isMultiSelect={isMultiSelect}
         onSelect={onSelectAction}
         // empty screen
@@ -430,22 +426,6 @@ const Selector = ({
       )}
     </StyledSelector>
   );
-};
-
-Selector.defaultProps = {
-  isMultiSelect: false,
-  withSelectAll: false,
-  withAccessRights: false,
-  withCancelButton: false,
-  withoutBackButton: false,
-  isBreadCrumbsLoading: false,
-  withSearch: true,
-  withFooterInput: false,
-  alwaysShowFooter: false,
-  disableAcceptButton: false,
-  withHeader: true,
-
-  selectedItems: [],
 };
 
 export { Selector };

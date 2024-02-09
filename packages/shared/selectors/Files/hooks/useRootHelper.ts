@@ -1,16 +1,13 @@
 import React from "react";
 
-import { FolderType } from "@docspace/shared/enums";
-// @ts-ignore
-import { getFoldersTree } from "@docspace/shared/api/files";
+import { FolderType } from "../../../enums";
+import { getFoldersTree } from "../../../api/files";
+import { TFolder } from "../../../api/files/types";
+import { getCatalogIconUrlByType } from "../../../utils/catalogIconHelper";
+import { TSelectorItem } from "../../../components/selector";
 
-import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
-import CatalogUserReactSvgUrl from "PUBLIC_DIR/images/catalog.user.react.svg?url";
-
-import { useRootHelperProps, Item } from "../FilesSelector.types";
-
-import { defaultBreadCrumb } from "../utils";
-import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
+import { UseRootHelperProps } from "../FilesSelector.types";
+import { DEFAULT_BREAD_CRUMB } from "../FilesSelector.constants";
 
 const useRootHelper = ({
   setBreadCrumbs,
@@ -21,25 +18,34 @@ const useRootHelper = ({
   setTotal,
   setHasNextPage,
   isUserOnly,
-}: useRootHelperProps) => {
+  setIsInit,
+}: UseRootHelperProps) => {
   const [isRoot, setIsRoot] = React.useState<boolean>(false);
+  const requestRunning = React.useRef(false);
 
   const getRootData = React.useCallback(async () => {
-    setBreadCrumbs([defaultBreadCrumb]);
-    setIsRoot(true);
-    setIsBreadCrumbsLoading(false);
-    const newItems: Item[] = [];
+    if (requestRunning.current) return;
 
-    let currentTree: Item[] | null = null;
+    requestRunning.current = true;
+    setBreadCrumbs([DEFAULT_BREAD_CRUMB]);
+    setIsRoot(true);
+    setIsNextPageLoading(true);
+    setIsBreadCrumbsLoading(false);
+    const newItems: TSelectorItem[] = [];
+
+    let currentTree: TFolder[] | null = null;
 
     if (treeFolders && treeFolders?.length > 0) {
       currentTree = treeFolders;
     } else {
-      currentTree = await getFoldersTree();
+      const folders = await getFoldersTree();
+      currentTree = folders;
     }
 
     currentTree?.forEach((folder) => {
-      const avatar = getCatalogIconUrlByType(folder.rootFolderType);
+      let avatar = "";
+      if (folder.rootFolderType)
+        avatar = getCatalogIconUrlByType(folder.rootFolderType);
 
       if (
         (!isUserOnly && folder.rootFolderType === FolderType.Rooms) ||
@@ -47,7 +53,6 @@ const useRootHelper = ({
       ) {
         newItems.push({
           label: folder.title,
-          title: folder.title,
           id: folder.id,
           parentId: folder.parentId,
           rootFolderType: folder.rootFolderType,
@@ -64,7 +69,19 @@ const useRootHelper = ({
     setTotal(newItems.length);
     setHasNextPage(false);
     setIsNextPageLoading(false);
-  }, [treeFolders]);
+    setIsInit(false);
+    requestRunning.current = false;
+  }, [
+    isUserOnly,
+    setBreadCrumbs,
+    setHasNextPage,
+    setIsBreadCrumbsLoading,
+    setIsInit,
+    setIsNextPageLoading,
+    setItems,
+    setTotal,
+    treeFolders,
+  ]);
 
   return { isRoot, setIsRoot, getRootData };
 };

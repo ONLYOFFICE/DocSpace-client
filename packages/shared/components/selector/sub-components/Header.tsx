@@ -12,7 +12,7 @@ const Header = React.memo(
   ({ onBackClick, withoutBackButton, headerLabel }: HeaderProps) => {
     return (
       <StyledHeader>
-        {!withoutBackButton && (
+        {!withoutBackButton && typeof withoutBackButton === "boolean" && (
           <IconButton
             className="arrow-button"
             iconName={ArrowPathReactSvgUrl}

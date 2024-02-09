@@ -13,7 +13,7 @@ export type TDirectionY = "bottom" | "top" | "both";
 
 export type TViewAs = "tile" | "table" | "row" | "settings" | "profile";
 
-export type TTranslation = (key: string) => string;
+export type TTranslation = (key: string, prop?: unknown) => string;
 
 export type NonFunctionPropertyNames<T, ExcludeTypes> = {
   [K in keyof T]: T[K] extends ExcludeTypes ? never : K;

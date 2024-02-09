@@ -137,6 +137,7 @@ export type TFolder = {
   rootFolderType: FolderType;
   isArchive?: boolean;
   roomType?: RoomsType;
+  path?: TPathParts[];
 };
 
 export type TGetFolderPath = TFolder[];
@@ -345,4 +346,3 @@ export type TFileLink = {
     title: string;
   };
 };
-

@@ -1,20 +1,23 @@
 import React from "react";
 
-import { useLoadersHelperProps } from "../FilesSelector.types";
-import { MIN_LOADER_TIMER, SHOW_LOADER_TIMER } from "../utils";
+import { UseLoadersHelperProps } from "../FilesSelector.types";
+import {
+  MIN_LOADER_TIMER,
+  SHOW_LOADER_TIMER,
+} from "../FilesSelector.constants";
 
-const useLoadersHelper = ({ items }: useLoadersHelperProps) => {
+const useLoadersHelper = ({ items }: UseLoadersHelperProps) => {
   const [isBreadCrumbsLoading, setIsBreadCrumbsLoading] =
     React.useState<boolean>(true);
   const [isNextPageLoading, setIsNextPageLoading] =
     React.useState<boolean>(false);
-  const [isFirstLoad, setIsFirstLoad] = React.useState<boolean>(true);
 
   const [showBreadCrumbsLoader, setShowBreadCrumbsLoader] =
     React.useState<boolean>(true);
   const [showLoader, setShowLoader] = React.useState<boolean>(true);
 
-  const loaderTimeout = React.useRef<NodeJS.Timeout | null>(null);
+  const [isFirstLoad, setIsFirstLoad] = React.useState(true);
+
   const startLoader = React.useRef<Date | null>(new Date());
 
   const breadCrumbsLoaderTimeout = React.useRef<NodeJS.Timeout | null>(null);
@@ -23,6 +26,7 @@ const useLoadersHelper = ({ items }: useLoadersHelperProps) => {
   const isMount = React.useRef<boolean>(true);
 
   React.useEffect(() => {
+    isMount.current = true;
     return () => {
       isMount.current = false;
     };
@@ -33,26 +37,24 @@ const useLoadersHelper = ({ items }: useLoadersHelperProps) => {
       setShowLoader(true);
 
       startLoader.current = new Date();
-    } else {
-      if (startLoader.current) {
-        const currentDate = new Date();
+    } else if (startLoader.current) {
+      const currentDate = new Date();
 
-        const ms = Math.abs(
-          startLoader.current.getTime() - currentDate.getTime()
-        );
+      const ms = Math.abs(
+        startLoader.current.getTime() - currentDate.getTime(),
+      );
 
-        if (ms >= MIN_LOADER_TIMER) {
-          startLoader.current = null;
-          return setShowLoader(false);
-        }
-
-        setTimeout(() => {
-          if (isMount.current) {
-            startLoader.current = null;
-            setShowLoader(false);
-          }
-        }, MIN_LOADER_TIMER - ms);
+      if (ms >= MIN_LOADER_TIMER) {
+        startLoader.current = null;
+        return setShowLoader(false);
       }
+
+      setTimeout(() => {
+        if (isMount.current) {
+          startLoader.current = null;
+          setShowLoader(false);
+        }
+      }, MIN_LOADER_TIMER - ms);
     }
   }, [isFirstLoad]);
 
@@ -63,7 +65,7 @@ const useLoadersHelper = ({ items }: useLoadersHelperProps) => {
       }
       breadCrumbsStartLoader.current = new Date();
       breadCrumbsLoaderTimeout.current = setTimeout(() => {
-        isMount.current && setShowBreadCrumbsLoader(true);
+        if (isMount.current) setShowBreadCrumbsLoader(true);
       }, SHOW_LOADER_TIMER);
     } else {
       if (breadCrumbsLoaderTimeout.current) {
@@ -77,7 +79,7 @@ const useLoadersHelper = ({ items }: useLoadersHelperProps) => {
         const currentDate = new Date();
 
         const ms = Math.abs(
-          breadCrumbsStartLoader.current.getTime() - currentDate.getTime()
+          breadCrumbsStartLoader.current.getTime() - currentDate.getTime(),
         );
 
         if (ms >= MIN_LOADER_TIMER) {
@@ -96,14 +98,14 @@ const useLoadersHelper = ({ items }: useLoadersHelperProps) => {
   }, [isBreadCrumbsLoading]);
 
   React.useEffect(() => {
-    if (isFirstLoad && items) {
+    if (items.length && isFirstLoad) {
       setIsFirstLoad(false);
     }
   }, [isFirstLoad, items]);
 
   React.useEffect(() => {
     calculateLoader();
-  }, [isFirstLoad, calculateLoader]);
+  }, [calculateLoader]);
 
   React.useEffect(() => {
     calculateBreadCrumbsLoader();
@@ -114,8 +116,10 @@ const useLoadersHelper = ({ items }: useLoadersHelperProps) => {
     setIsBreadCrumbsLoading,
     isNextPageLoading,
     setIsNextPageLoading,
+
     isFirstLoad,
     setIsFirstLoad,
+
     showBreadCrumbsLoader,
     showLoader,
   };

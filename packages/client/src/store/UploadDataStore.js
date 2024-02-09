@@ -319,8 +319,13 @@ class UploadDataStore {
 
       if (!this.filesToConversion.length) {
         this.filesToConversion.push(file);
-        if (!secondConvertingWithPassword && !conversionPositionIndex)
+
+        if (secondConvertingWithPassword && conversionPositionIndex) {
+          this.uploadedFilesHistory[file.index].error = null;
+        } else {
           this.uploadedFilesHistory.push(file);
+        }
+
         this.startConversion(t, isOpen);
       } else {
         this.filesToConversion.push(file);
@@ -1346,7 +1351,7 @@ class UploadDataStore {
       relativePath,
       file.encrypted,
       file.lastModifiedDate,
-      createNewIfExist
+      createNewIfExist,
     )
       .then((res) => {
         const location = res.data.location;

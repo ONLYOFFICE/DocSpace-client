@@ -236,19 +236,29 @@ const Selector = ({
   React.useEffect(() => {
     let isEqual = true;
 
-    if (selectedItems?.length !== newSelectedItems.length) {
+    if (selectedItems && selectedItems.length !== newSelectedItems.length) {
       return setFooterVisible(true);
     }
 
-    if (newSelectedItems.length === 0 && selectedItems?.length === 0) {
+    if (
+      newSelectedItems.length === 0 &&
+      selectedItems &&
+      selectedItems.length === 0
+    ) {
       return setFooterVisible(false);
     }
 
-    newSelectedItems.forEach((item) => {
-      isEqual = selectedItems.some((x) => x.id === item.id);
-    });
+    if (selectedItems) {
+      newSelectedItems.forEach((item) => {
+        isEqual = selectedItems.some((x) => x.id === item.id);
+      });
 
-    setFooterVisible(!isEqual);
+      return setFooterVisible(!isEqual);
+    }
+
+    isEqual = !!newSelectedItems.length;
+
+    setFooterVisible(isEqual);
   }, [selectedItems, newSelectedItems]);
 
   React.useLayoutEffect(() => {

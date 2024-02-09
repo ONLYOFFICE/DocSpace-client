@@ -6,8 +6,6 @@ import {
 } from "@docspace/shared/components/context-menu";
 import { useState, useRef } from "react";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
-import InfoReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
-import FolderReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
 import { inject, observer } from "mobx-react";
 import { EmployeeStatus } from "@docspace/shared/enums";
 import { useTranslation } from "react-i18next";
@@ -19,9 +17,13 @@ interface GroupMemberProps {
     id: string;
     displayName: string;
     email: string;
-    role: "string";
+    role: string;
+    avatarSmall: string;
     status: EmployeeStatus;
   };
+
+  getUserRole: (user: any) => string;
+  getStatusType: (user: any) => string;
 
   getUserContextOptions: (
     isMySelf: boolean,
@@ -41,15 +43,17 @@ const GroupMember = ({
   userId,
   groupMember,
   isManager,
+  getUserRole,
+  getStatusType,
   getUserContextOptions,
   getUserContextOptionsModel,
 }: GroupMemberProps) => {
   const { t } = useTranslation([
+    "People",
     "Profile",
     "PeopleTranslations",
     "ProfileAction",
     "Common",
-    "CreateEditRoomDialog",
   ]);
 
   const iconRef = useRef(null);
@@ -67,13 +71,12 @@ const GroupMember = ({
     setIsOpen(false);
   };
 
-  console.log(groupMember);
   const model = getUserContextOptionsModel(
     t,
     getUserContextOptions(
       groupMember.id === userId,
-      "normal",
-      "user",
+      getStatusType(groupMember),
+      getUserRole(groupMember),
       groupMember.status
     ),
     groupMember
@@ -85,7 +88,7 @@ const GroupMember = ({
         className="avatar"
         role={groupMember.role || "user"}
         size={"min"}
-        source={DefaultUserPhoto}
+        source={groupMember.avatarSmall}
       />
 
       <div className="main-wrapper">
@@ -128,6 +131,8 @@ const GroupMember = ({
 
 export default inject(({ peopleStore }) => ({
   userId: peopleStore.userStore.user.id,
+  getUserRole: peopleStore.getUserRole,
+  getStatusType: peopleStore.getStatusType,
   getUserContextOptions: peopleStore.usersStore.getUserContextOptions,
   getUserContextOptionsModel:
     peopleStore.contextOptionsStore.getUserContextOptions,

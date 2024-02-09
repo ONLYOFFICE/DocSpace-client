@@ -42,7 +42,7 @@ const Groups = ({
         <Loaders.InfoPanelViewLoader view="groups" />
       ) : (
         groupMembers?.map((groupMember: any) => (
-          <GroupMember groupMember={groupMember} />
+          <GroupMember key={groupMember.id} groupMember={groupMember} />
         ))
       )}
     </Styled.GroupsContent>

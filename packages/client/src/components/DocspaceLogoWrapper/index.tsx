@@ -15,7 +15,7 @@ const DocspaceLogoWrapper = ({
   );
 };
 
-export default inject<any>(({ settingsStore }) => {
+export default inject<TStore>(({ settingsStore }) => {
   const { whiteLabelLogoUrls } = settingsStore;
 
   return {

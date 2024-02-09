@@ -24,7 +24,13 @@ import BackgroundPatternPurpleReactSvgUrl from "PUBLIC_DIR/images/background.pat
 import BackgroundPatternLightBlueReactSvgUrl from "PUBLIC_DIR/images/background.pattern.lightBlue.react.svg?url";
 import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.pattern.black.react.svg?url";
 
-import { ArticleAlerts, FolderType, RoomsType, ThemeKeys } from "../enums";
+import {
+  ArticleAlerts,
+  FolderType,
+  RoomsType,
+  ShareAccessRights,
+  ThemeKeys,
+} from "../enums";
 import { LANGUAGE, RTL_LANGUAGES } from "../constants";
 
 import { TI18n } from "../types";
@@ -36,8 +42,8 @@ import TopLoaderService from "../components/top-loading-indicator";
 import { Encoder } from "./encoder";
 import { combineUrl } from "./combineUrl";
 import { getCookie } from "./cookie";
-import { isNumber } from "./typeGuards";
 import { checkIsSSR } from "./device";
+import { AvatarRole } from "../components/avatar/Avatar.enums";
 
 export const desktopConstants = Object.freeze({
   domain: !checkIsSSR() && window.location.origin,
@@ -84,6 +90,26 @@ export function createPasswordHash(
 
 export const isPublicRoom = () => {
   return window.location.pathname === "/rooms/share";
+};
+
+export const getUserTypeLabel = (
+  role: AvatarRole | undefined,
+  t: (key: string) => string,
+) => {
+  switch (role) {
+    case "owner":
+      return t("Common:Owner");
+    case "admin":
+      return t("Common:DocSpaceAdmin");
+    case "manager":
+      return t("Common:RoomAdmin");
+    case "collaborator":
+      return t("Common:PowerUser");
+    case "user":
+      return t("Common:User");
+    default:
+      return t("Common:User");
+  }
 };
 
 export const getShowText = () => {
@@ -181,13 +207,18 @@ export function isAdmin(currentUser: TUser) {
 
 export const getUserRole = (user: TUser) => {
   if (user.isOwner) return "owner";
-  if (isAdmin(user))
+  if (
+    isAdmin(user) ||
+    user.access === ShareAccessRights.RoomManager ||
+    user.access === ShareAccessRights.Collaborator
+  )
     // TODO: Change to People Product Id const
     return "admin";
   // TODO: Need refactoring
   if (user.isVisitor) return "user";
   if (user.isCollaborator) return "collaborator";
-  return "manager";
+
+  return "user";
 };
 
 export function clickBackdrop() {
@@ -348,10 +379,8 @@ export function convertLanguage(key: string) {
     case "fr-FR":
       return "fr";
     default:
-      return "en-GB";
+      return key;
   }
-
-  return key;
 }
 
 export function convertToCulture(key: string) {
@@ -377,9 +406,8 @@ export function convertToCulture(key: string) {
     case "zh":
       return "zh-CN";
     default:
-      return "en-US";
+      return key;
   }
-  return key;
 }
 
 export function convertToLanguage(key: string) {
@@ -757,7 +785,9 @@ export function getObjectByLocation(location: Location) {
   }
 }
 
-export const RoomsTypeValues = Object.values(RoomsType).filter(isNumber);
+export const RoomsTypeValues = Object.values(RoomsType).filter(
+  (item): item is number => typeof item === "number",
+);
 
 export const RoomsTypes = RoomsTypeValues.reduce<Record<number, number>>(
   (acc, current) => {

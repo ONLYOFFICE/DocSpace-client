@@ -21,6 +21,7 @@ import config from "PACKAGE_FILE";
 import { thumbnailStatuses } from "@docspace/client/src/helpers/filesConstants";
 import { openDocEditor as openEditor } from "@docspace/client/src/helpers/filesUtils";
 import { getDaysRemaining } from "@docspace/shared/utils/common";
+import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
 import {
   getCategoryType,
@@ -29,7 +30,7 @@ import {
 } from "SRC_DIR/helpers/utils";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
 
-import { PluginFileType } from "SRC_DIR/helpers/plugins/constants";
+import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import debounce from "lodash.debounce";
@@ -2975,7 +2976,7 @@ class FilesStore {
     const url = getCategoryUrl(this.categoryType, id);
 
     if (canOpenPlayer) {
-      return combineUrl(proxyURL, config.homepage, url, id);
+      return combineUrl(proxyURL, config.homepage, MEDIA_VIEW_URL, id);
     }
 
     if (isFolder) {

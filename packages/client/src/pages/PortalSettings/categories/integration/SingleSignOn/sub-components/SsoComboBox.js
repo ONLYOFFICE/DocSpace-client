@@ -22,8 +22,8 @@ const SsoComboBox = (props) => {
   const currentOption =
     options.find((option) => option.key === value) || options[0];
 
-  const onSelect = () => {
-    setComboBox(currentOption, name);
+  const onSelect = (option) => {
+    setComboBox(option, name);
   };
 
   return (

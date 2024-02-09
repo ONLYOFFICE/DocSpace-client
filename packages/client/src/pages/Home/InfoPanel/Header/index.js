@@ -15,7 +15,7 @@ import {
 
 import { StyledInfoPanelHeader } from "./styles/common";
 
-import { PluginFileType } from "SRC_DIR/helpers/plugins/constants";
+import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 
 const InfoPanelHeaderContent = (props) => {
   const {
@@ -245,12 +245,12 @@ export default inject(
 
       enablePlugins,
     };
-  }
+  },
 )(
   withTranslation(["Common", "InfoPanel"])(
-    InfoPanelHeaderContent
+    InfoPanelHeaderContent,
     // withLoader(observer(InfoPanelHeaderContent))(
     //   <Loaders.InfoPanelHeaderLoader />
     // )
-  )
+  ),
 );

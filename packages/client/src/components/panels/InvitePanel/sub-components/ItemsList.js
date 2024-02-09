@@ -22,6 +22,7 @@ const Row = memo(({ data, index, style }) => {
     inputsRef,
     setIsOpenItemAccess,
     isMobileView,
+    standalone,
   } = data;
 
   if (inviteItems === undefined) return;
@@ -42,6 +43,7 @@ const Row = memo(({ data, index, style }) => {
         inputsRef={inputsRef}
         setIsOpenItemAccess={setIsOpenItemAccess}
         isMobileView={isMobileView}
+        standalone={standalone}
       />
     </StyledRow>
   );
@@ -60,6 +62,7 @@ const ItemsList = ({
   inputsRef,
   invitePanelBodyRef,
   isMobileView,
+  standalone,
 }) => {
   const [bodyHeight, setBodyHeight] = useState(0);
   const [offsetTop, setOffsetTop] = useState(0);
@@ -146,6 +149,7 @@ const ItemsList = ({
           setIsOpenItemAccess,
           isMobileView,
           t,
+          standalone,
         }}
         outerElementType={!scrollAllPanelContent && CustomScrollbarsVirtualList}
       >
@@ -155,14 +159,16 @@ const ItemsList = ({
   );
 };
 
-export default inject(({ userStore, dialogsStore }) => {
+export default inject(({ userStore, dialogsStore, settingsStore }) => {
   const { setInviteItems, inviteItems, changeInviteItem } = dialogsStore;
   const { isOwner } = userStore.user;
+  const { standalone } = settingsStore;
 
   return {
     setInviteItems,
     inviteItems,
     changeInviteItem,
     isOwner,
+    standalone,
   };
 })(observer(ItemsList));

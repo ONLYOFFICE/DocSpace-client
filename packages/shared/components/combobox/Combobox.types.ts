@@ -104,8 +104,6 @@ export interface ComboboxProps {
   type?: TCombobox;
   /** Indicates that component's displayed option cannot change */
   isReadOnly?: boolean;
-  /** Indicates that component is being used  table side info */
-  isSideInfo?: boolean;
   setIsOpenItemAccess?: (value: boolean) => void;
   onClickSelectedItem?: (option: TOption) => void;
   withoutBackground?: boolean;

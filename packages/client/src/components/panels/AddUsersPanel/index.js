@@ -101,6 +101,10 @@ const AddUsersPanel = ({
         id: item.id,
         avatar: item.avatar,
         access: currentAccess,
+        isOwner: item.isOwner,
+        isAdmin: item.isAdmin,
+        isVisitor: item.isVisitor,
+        isCollaborator: item.isCollaborator,
       };
 
       if (item.isGroup) {
@@ -126,6 +130,10 @@ const AddUsersPanel = ({
   const selectedAccess = accessOptions.filter(
     (access) => access.access === accessRight,
   )[0];
+
+  useEffect(() => {
+    loadNextPage(0);
+  }, []);
 
   const onSearch = (value, callback) => {
     if (value === searchValue) return;

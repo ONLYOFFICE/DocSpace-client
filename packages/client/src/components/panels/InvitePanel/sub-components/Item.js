@@ -4,11 +4,11 @@ import AlertSvgUrl from "PUBLIC_DIR/images/icons/12/alert.react.svg?url";
 import React, { useState, useEffect } from "react";
 import { Avatar } from "@docspace/shared/components/avatar";
 import { Text } from "@docspace/shared/components/text";
-import { capitalize } from "lodash";
 
 import { parseAddresses } from "@docspace/shared/utils";
 import { getAccessOptions } from "../utils";
-import { getUserRole } from "@docspace/shared/utils/common";
+import { getUserRole, getUserTypeLabel } from "@docspace/shared/utils/common";
+import { capitalize } from "lodash";
 
 import {
   StyledEditInput,
@@ -34,6 +34,7 @@ const Item = ({
   inputsRef,
   setIsOpenItemAccess,
   isMobileView,
+  standalone,
 }) => {
   const {
     avatar,
@@ -55,13 +56,19 @@ const Item = ({
         : email
       : email;
   const source = !!avatar ? avatar : isGroup ? "" : AtReactSvgUrl;
-  const role = getUserRole(item);
 
   const [edit, setEdit] = useState(false);
   const [inputValue, setInputValue] = useState(name);
   const [parseErrors, setParseErrors] = useState(errors);
 
-  const accesses = getAccessOptions(t, roomType, true, true, isOwner);
+  const accesses = getAccessOptions(
+    t,
+    roomType,
+    true,
+    true,
+    isOwner,
+    standalone,
+  );
 
   const filteredAccesses = item.isGroup
     ? filterGroupRoleOptions(accesses)
@@ -70,6 +77,11 @@ const Item = ({
   const defaultAccess = filteredAccesses.find(
     (option) => option.access === +access,
   );
+
+  const role = getUserRole(item);
+  const typeLabel = item?.isEmailInvite
+    ? getUserTypeLabel(defaultAccess.type, t)
+    : getUserTypeLabel(role, t);
 
   const errorsInList = () => {
     const hasErrors = inviteItems.some((item) => !!item.errors?.length);

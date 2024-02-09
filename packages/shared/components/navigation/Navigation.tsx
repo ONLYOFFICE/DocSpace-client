@@ -10,7 +10,6 @@ import ArrowButton from "./sub-components/ArrowBtn";
 import Text from "./sub-components/Text";
 import ControlButtons from "./sub-components/ControlBtn";
 import ToggleInfoPanelButton from "./sub-components/ToggleInfoPanelBtn";
-import TrashWarning from "./sub-components/TrashWarning";
 import NavigationLogo from "./sub-components/LogoBlock";
 import DropBox from "./sub-components/DropBox";
 
@@ -67,11 +66,6 @@ const Navigation = ({
   const containerRef = React.useRef<HTMLDivElement | null>(null);
 
   const isDesktop = currentDeviceType === DeviceType.desktop;
-
-  const infoPanelIsVisible = React.useMemo(
-    () => isDesktop && (!isEmptyPage || (isEmptyPage && isRoom)),
-    [isDesktop, isEmptyPage, isRoom],
-  );
 
   const toggleDropBox = useCallback(() => {
     if (navigationItems?.length === 0) return;
@@ -225,6 +219,7 @@ const Navigation = ({
             isDesktopClient={isDesktopClient}
             isInfoPanelVisible={isInfoPanelVisible}
             withLogo={!!withLogo}
+            isPublicRoom={isPublicRoom}
             className="navigation-container"
           >
             {withLogo && (
@@ -260,12 +255,10 @@ const Navigation = ({
               onNavigationButtonClick={onNavigationButtonClick}
               tariffBar={tariffBar}
               title={title}
+              isEmptyPage={isEmptyPage}
             />
           </StyledContainer>
-          {isDesktop && isTrashFolder && !isEmptyPage && (
-            <TrashWarning title={titles.trashWarning} />
-          )}
-          {infoPanelIsVisible && !hideInfoPanel && (
+          {isDesktop && !hideInfoPanel && (
             <ToggleInfoPanelButton
               id="info-panel-toggle--open"
               isRootFolder={isRootFolder}
@@ -281,3 +274,4 @@ const Navigation = ({
 };
 
 export default React.memo(Navigation);
+

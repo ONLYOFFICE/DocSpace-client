@@ -11,7 +11,7 @@ import { decode } from "he";
 import { filterGroupRoleOptions, filterUserRoleOptions } from "SRC_DIR/helpers";
 import { capitalize } from "lodash";
 
-import { getUserRole } from "@docspace/shared/utils/common";
+import { getUserRole, getUserTypeLabel } from "@docspace/shared/utils/common";
 import { Text } from "@docspace/shared/components/text";
 import EmailPlusReactSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
 import { StyledUserTypeHeader } from "../../styles/members";
@@ -151,9 +151,6 @@ const User = ({
             expected: infoPanelMembers.expected?.map((m) =>
               m.id === user.id ? { ...m, access: option.access } : m,
             ),
-            groups: infoPanelMembers.groups?.map((m) =>
-              m.id === user.id ? { ...m, access: option.access } : m,
-            ),
           });
         }
       })
@@ -199,6 +196,8 @@ const User = ({
   const onToggle = (e, isOpen) => {
     // setIsScrollLocked(isOpen);
   };
+  const role = getUserRole(user);
+  const typeLabel = getUserTypeLabel(role, t);
 
   const getTooltipContent = () => (
     <div>
@@ -214,7 +213,7 @@ const User = ({
         color="#A3A9AE !important"
         dir="auto"
       >
-        {`${capitalize(role)} | ${user.email}`}
+        {`${typeLabel} | ${user.email}`}
       </Text>
     </div>
   );
@@ -228,8 +227,6 @@ const User = ({
     : user.isGroup
       ? ""
       : DefaultUserPhotoUrl;
-
-  const role = getUserRole(user);
 
   const withTooltip = user.isOwner || user.isAdmin;
 
@@ -291,22 +288,19 @@ const User = ({
             <div className="me-label">&nbsp;{`(${t("Common:MeLabel")})`}</div>
           )}
         </div>
-
-        {!user.isGroup && (
-          <div className="role-email" style={{ display: "flex" }}>
-            <Text
-              className="label"
-              fontWeight={400}
-              fontSize="12px"
-              noSelect
-              truncate
-              color="#A3A9AE"
-              dir="auto"
-            >
-              {`${capitalize(role)} | ${user.email}`}
-            </Text>
-          </div>
-        )}
+        <div className="role-email" style={{ display: "flex" }}>
+          <Text
+            className="label"
+            fontWeight={400}
+            fontSize="12px"
+            noSelect
+            truncate
+            color="#A3A9AE"
+            dir="auto"
+          >
+            {`${typeLabel} | ${user.email}`}
+          </Text>
+        </div>
       </div>
 
       {userRole && userRoleOptions && (

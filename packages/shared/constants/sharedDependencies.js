@@ -100,10 +100,6 @@ module.exports = {
     singleton: true,
     requiredVersion: deps["prop-types"],
   },
-  "react-custom-scrollbars": {
-    singleton: true,
-    requiredVersion: compDeps["react-custom-scrollbars"],
-  },
   "react-device-detect": {
     singleton: true,
     requiredVersion: compDeps["react-device-detect"],

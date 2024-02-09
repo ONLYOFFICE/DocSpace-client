@@ -27,6 +27,7 @@ import {
   frameCallEvent,
   getShowText,
   initArticleAlertsData,
+  isPublicRoom,
 } from "../utils/common";
 import { setCookie, getCookie } from "../utils/cookie";
 import { combineUrl } from "../utils/combineUrl";
@@ -185,11 +186,9 @@ class SettingsStore {
 
   limitedAccessSpace = null;
 
-  passwordSettings: TPasswordSettings = {} as TPasswordSettings;
+  passwordSettings: TPasswordSettings | null = null;
 
   hasShortenService = false;
-
-  isPublicRoom = false;
 
   withPaging = false;
 
@@ -834,7 +833,7 @@ class SettingsStore {
 
   get socketHelper() {
     const socketUrl =
-      this.isPublicRoom && !this.publicRoomKey ? "" : this.socketUrl;
+      isPublicRoom() && !this.publicRoomKey ? "" : this.socketUrl;
 
     return new SocketIOHelper(socketUrl, this.publicRoomKey);
   }
@@ -1101,3 +1100,4 @@ class SettingsStore {
 }
 
 export { SettingsStore };
+

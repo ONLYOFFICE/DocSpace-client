@@ -13,5 +13,6 @@
   "InviteViaLinkDescriptionRoom": "Create a universal link for self-authorization in the room",
   "LinkCopySuccess": "Link has been copied",
   "ResetChange": "Reset change",
-  "SendInvitation": "Send invitation"
+  "SendInvitation": "Send invitation",
+  "UsersAlreadyAdded": "Some users have already been added"
 }

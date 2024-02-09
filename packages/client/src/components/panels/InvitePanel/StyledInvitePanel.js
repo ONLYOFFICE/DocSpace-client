@@ -290,6 +290,28 @@ const StyledDropDown = styled(DropDown)`
       text-overflow: ellipsis;
       overflow: hidden;
     }
+
+    .email-list_avatar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow: hidden;
+    }
+
+    .email-list_add-button {
+      display: flex;
+      margin-left: auto;
+      align-items: center;
+      gap: 4px;
+
+      p {
+        color: #4781d1;
+      }
+
+      svg path {
+        fill: #4781d1;
+      }
+    }
   }
 `;
 

@@ -103,8 +103,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
     children,
     noBorder,
     scaledOptions,
-    displayType,
-    isSideInfo,
+    displayType = "default",
     textOverflow,
     showDisabledItems,
     comboIcon,
@@ -231,7 +230,6 @@ const ComboBoxPure = (props: ComboboxProps) => {
       // {...rest}
     >
       <ComboButton
-        isSideInfo={isSideInfo}
         noBorder={noBorder}
         isDisabled={isDisabled}
         selectedOption={selectedOption}

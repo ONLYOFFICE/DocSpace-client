@@ -76,7 +76,6 @@ const PureHome = (props) => {
     files,
     selection,
     filesList,
-    removeFirstUrl,
 
     createFile,
     createFolder,
@@ -167,7 +166,6 @@ const PureHome = (props) => {
     setIsPreview,
 
     setIsUpdatingRowItem,
-    removeFirstUrl,
 
     gallerySelected,
     folderSecurity,
@@ -497,7 +495,7 @@ export default inject(
       ? filesStore.selectionTitle
       : null;
 
-    const { setToPreviewFile, playlist, removeFirstUrl } = mediaViewerDataStore;
+    const { setToPreviewFile, playlist } = mediaViewerDataStore;
 
     const { setPortalTariff } = currentTariffStatusStore;
 
@@ -578,7 +576,6 @@ export default inject(
       setToPreviewFile,
       setIsPreview,
       playlist,
-      removeFirstUrl,
 
       getFileInfo,
       gallerySelected,

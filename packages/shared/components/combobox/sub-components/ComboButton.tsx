@@ -22,7 +22,6 @@ import type { ComboButtonProps } from "../Combobox.types";
 
 const ComboButton = (props: ComboButtonProps) => {
   const {
-    isSideInfo,
     noBorder,
     onClick,
     isDisabled,

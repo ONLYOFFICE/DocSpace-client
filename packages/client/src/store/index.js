@@ -221,7 +221,12 @@ const profileActionsStore = new ProfileActionsStore(
 
 peopleStore.profileActionsStore = profileActionsStore;
 
-const tableStore = new TableStore(authStore, treeFoldersStore, userStore);
+const tableStore = new TableStore(
+  authStore,
+  treeFoldersStore,
+  userStore,
+  settingsStore,
+);
 
 infoPanelStore.filesSettingsStore = filesSettingsStore;
 infoPanelStore.filesStore = filesStore;
@@ -254,8 +259,8 @@ const store = {
   paymentQuotasStore,
   settingsStore,
 
-  payments: paymentStore,
-  wizard: wizardStore,
+  paymentStore,
+  wizardStore,
   setup: setupStore,
   confirm: confirmStore,
   backup: backupStore,

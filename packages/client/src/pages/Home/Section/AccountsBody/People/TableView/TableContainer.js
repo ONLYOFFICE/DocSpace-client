@@ -16,12 +16,6 @@ import { TableVersions } from "SRC_DIR/helpers/constants";
 const COLUMNS_SIZE = `peopleColumnsSize_ver-${TableVersions.People}`;
 const INFO_PANEL_COLUMNS_SIZE = `infoPanelPeopleColumnsSize_ver-${TableVersions.People}`;
 
-const marginCss = css`
-  margin-top: -1px;
-  border-top: ${(props) =>
-    `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
-`;
-
 const userNameCss = css`
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
@@ -33,8 +27,6 @@ const userNameCss = css`
           margin-left: -24px;
           padding-left: 24px;
         `}
-
-  ${marginCss}
 `;
 
 const contextCss = css`
@@ -48,8 +40,6 @@ const contextCss = css`
           margin-right: -20px;
           padding-right: 20px;
         `}
-
-  ${marginCss}
 `;
 
 const StyledTableContainer = styled(TableContainer)`
@@ -79,9 +69,7 @@ const StyledTableContainer = styled(TableContainer)`
     .table-row {
       .table-container_user-name-cell,
       .table-container_row-context-menu-wrapper {
-        margin-top: -1px;
         border-image-slice: 1;
-        border-top: 1px solid;
       }
       .table-container_user-name-cell {
         ${userNameCss}
@@ -108,12 +96,6 @@ const StyledTableContainer = styled(TableContainer)`
 
       .table-container_row-context-menu-wrapper {
         ${contextCss}
-      }
-
-      .table-container_user-name-cell,
-      .table-container_row-context-menu-wrapper {
-        border-bottom: ${(props) =>
-          `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
       }
     }
   }
@@ -176,7 +158,7 @@ const Table = ({
         hasMoreFiles={hasMoreAccounts}
         itemCount={filterTotal}
         filesLength={peopleList.length}
-        itemHeight={49}
+        itemHeight={48}
         useReactWindow={!withPaging}
       >
         {peopleList.map((item, index) => (

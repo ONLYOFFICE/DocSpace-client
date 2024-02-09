@@ -121,7 +121,7 @@ const InviteInput = ({
   const searchByQuery = async (value) => {
     const query = value.trim();
 
-    if (query.length >= minSearchValue) {
+    if (query.length > minSearchValue) {
       const filter = Filter.getFilterWithOutDisabledUser();
       filter.search = query;
 

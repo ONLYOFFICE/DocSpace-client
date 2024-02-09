@@ -151,6 +151,9 @@ const User = ({
             expected: infoPanelMembers.expected?.map((m) =>
               m.id === user.id ? { ...m, access: option.access } : m,
             ),
+            groups: infoPanelMembers.groups?.map((m) =>
+              m.id === user.id ? { ...m, access: option.access } : m,
+            ),
           });
         }
       })

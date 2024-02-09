@@ -177,6 +177,7 @@ const Item = ({
           setIsOpenItemAccess={setIsOpenItemAccess}
           isMobileView={isMobileView}
           noBorder
+          standalone={standalone}
         />
       )}
     </>

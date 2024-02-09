@@ -22,6 +22,7 @@ const Row = memo(({ data, index, style }) => {
     inputsRef,
     setIsOpenItemAccess,
     isMobileView,
+    standalone,
   } = data;
 
   if (inviteItems === undefined) return;
@@ -42,6 +43,7 @@ const Row = memo(({ data, index, style }) => {
         inputsRef={inputsRef}
         setIsOpenItemAccess={setIsOpenItemAccess}
         isMobileView={isMobileView}
+        standalone={standalone}
       />
     </StyledRow>
   );

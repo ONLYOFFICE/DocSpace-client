@@ -7,7 +7,7 @@ import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import GroupsTableItem from "./GroupsTableItem";
 import GroupsTableHeader from "./GroupsTableHeader";
-import EmptyScreen from "../../EmptyScreen";
+import EmptyScreenGroups from "../../EmptyScreenGroups";
 import { TableVersions } from "SRC_DIR/helpers/constants";
 
 const COLUMNS_SIZE = `groupsColumnsSize_ver-${TableVersions.Groups}`;
@@ -46,7 +46,7 @@ const GroupsTableView = ({
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
-  return groups.length !== 0 || !groupsIsFiltered ? (
+  return groups.length !== 0 && !groupsIsFiltered ? (
     <Styled.GroupsTableContainer
       useReactWindow={!withPaging}
       forwardedRef={ref}
@@ -84,7 +84,7 @@ const GroupsTableView = ({
       </TableBody>
     </Styled.GroupsTableContainer>
   ) : (
-    <EmptyScreen />
+    <EmptyScreenGroups />
   );
 };
 

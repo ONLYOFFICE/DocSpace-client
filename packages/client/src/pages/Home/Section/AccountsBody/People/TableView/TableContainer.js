@@ -10,7 +10,7 @@ import { TableContainer, TableBody } from "@docspace/shared/components/table";
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
-import EmptyScreen from "../../EmptyScreen";
+import EmptyScreenGroups from "../../EmptyScreenGroups";
 import { TableVersions } from "SRC_DIR/helpers/constants";
 
 const COLUMNS_SIZE = `peopleColumnsSize_ver-${TableVersions.People}`;
@@ -195,7 +195,7 @@ const Table = ({
       </TableBody>
     </StyledTableContainer>
   ) : (
-    <EmptyScreen />
+    <EmptyScreenGroups />
   );
 };
 

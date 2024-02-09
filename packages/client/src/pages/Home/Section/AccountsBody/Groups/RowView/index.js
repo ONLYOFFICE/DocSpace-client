@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import * as Styled from "./index.styled";
-import EmptyScreen from "../../EmptyScreen";
+import EmptyScreenGroups from "../../EmptyScreenGroups";
 import GroupsRow from "./GroupsRow";
 
 const RowView = ({
@@ -24,7 +24,7 @@ const RowView = ({
     currentDeviceType,
   });
 
-  if (groups.length === 0 && !isFiltered) return <EmptyScreen />;
+  if (groups.length === 0 && !isFiltered) return <EmptyScreenGroups />;
 
   console.log(groups);
   return (

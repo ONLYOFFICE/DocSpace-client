@@ -28,7 +28,7 @@ const PreparationPortal = loadable(() => import("../pages/PreparationPortal"));
 const PortalUnavailable = loadable(() => import("../pages/PortalUnavailable"));
 const ErrorUnavailable = loadable(() => import("../pages/Errors/Unavailable"));
 const AccessRestricted = loadable(
-  () => import("../pages/Errors/AccessRestricted")
+  () => import("@docspace/shared/components/errors/AccessRestricted")
 );
 
 const Error401 = loadable(

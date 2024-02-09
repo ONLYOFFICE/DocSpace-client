@@ -290,6 +290,7 @@ const PeopleTableRow = (props) => {
     hideColumns,
     value,
     standalone,
+    setCurrentGroup,
   } = props;
 
   const {
@@ -378,6 +379,11 @@ const PeopleTableRow = (props) => {
     [item, changeUserType]
   );
 
+  const onOpenGroup = ({ action }) => {
+    setCurrentGroup(null);
+    navigate(`/accounts/groups/${action}`);
+  };
+
   // const getRoomsOptions = React.useCallback(() => {
   //   const options = [];
 
@@ -437,7 +443,7 @@ const PeopleTableRow = (props) => {
             title: groups[0].name,
             label: groups[0].name + " ",
           }}
-          onSelect={({ action }) => navigate(`/accounts/groups/${action}`)}
+          onSelect={onOpenGroup}
           options={groupItems}
           scaled
           directionY="both"

@@ -140,6 +140,7 @@ const Table = ({
   canChangeUserType,
   isFiltered,
   currentDeviceType,
+  setCurrentGroup,
 }) => {
   const ref = useRef(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -190,6 +191,7 @@ const Table = ({
             canChangeUserType={canChangeUserType}
             hideColumns={hideColumns}
             itemIndex={index}
+            setCurrentGroup={setCurrentGroup}
           />
         ))}
       </TableBody>
@@ -242,6 +244,7 @@ export default inject(
       canChangeUserType,
       isFiltered,
       currentDeviceType,
+      setCurrentGroup: peopleStore.groupsStore.setCurrentGroup,
     };
   }
 )(observer(Table));

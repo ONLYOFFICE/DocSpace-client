@@ -27,6 +27,7 @@ class GroupsStore {
   currentGroup = null;
 
   insideGroupFilter = InsideGroupFilter.getDefault();
+  insideGroupBackUrl = null;
 
   constructor(peopleStore: any, authStore: any) {
     this.authStore = authStore;
@@ -113,6 +114,10 @@ class GroupsStore {
 
   setCurrentGroup = (currentGroup = null) => {
     this.currentGroup = currentGroup;
+  };
+
+  setInsideGroupBackUrl = (url: string) => {
+    this.insideGroupBackUrl = url;
   };
 
   getGroups = async (
@@ -313,6 +318,12 @@ class GroupsStore {
         },
       },
     ];
+  };
+
+  clearInsideGroup = () => {
+    this.currentGroup = null;
+    this.insideGroupBackUrl = null;
+    this.peopleStore.usersStore.setUsers([]);
   };
 }
 

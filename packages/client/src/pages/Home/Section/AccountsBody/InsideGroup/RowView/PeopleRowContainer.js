@@ -74,7 +74,6 @@ const StyledRowContainer = styled(RowContainer)`
 `;
 
 const PeopleRowContainer = ({
-  currentGroup,
   peopleList,
   sectionWidth,
   accountsViewAs,

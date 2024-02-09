@@ -24,6 +24,7 @@ const GroupsTableItem = ({
   bufferSelection,
   setBufferSelection,
   getGroupContextOptions,
+  setInsideGroupBackUrl,
 }) => {
   const navigate = useNavigate();
 
@@ -42,6 +43,10 @@ const GroupsTableItem = ({
   const onOpenGroup = () => {
     setSelection([]);
     setBufferSelection(null);
+    setInsideGroupBackUrl(
+      `${window.location.pathname}${window.location.search}`,
+    );
+
     navigate(`/accounts/groups/${item.id}/filter`);
   };
 
@@ -138,10 +143,11 @@ export default inject(({ peopleStore }) => ({
   bufferSelection: peopleStore.groupsStore.bufferSelection,
   setBufferSelection: peopleStore.groupsStore.setBufferSelection,
   getGroupContextOptions: peopleStore.groupsStore.getGroupContextOptions,
+  setInsideGroupBackUrl: peopleStore.groupsStore.setInsideGroupBackUrl,
 }))(
   withTranslation(
     "People",
     "Common",
-    "PeopleTranslations"
-  )(observer(GroupsTableItem))
+    "PeopleTranslations",
+  )(observer(GroupsTableItem)),
 );

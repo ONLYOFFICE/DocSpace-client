@@ -78,7 +78,7 @@ const FilesSelector = ({
   setIsDataReady,
 }: FilesSelectorProps) => {
   const theme = useTheme();
-  const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Common", "Files"]);
 
   const [breadCrumbs, setBreadCrumbs] = React.useState<TBreadCrumb[]>([]);
   const [items, setItems] = React.useState<TSelectorItem[]>([]);
@@ -482,7 +482,7 @@ const FilesSelector = ({
       emptyScreenImage={
         theme?.isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl
       }
-      emptyScreenHeader={t("Common:SelectorEmptyScreenHeader")}
+      emptyScreenHeader={t("Files:SelectorEmptyScreenHeader")}
       emptyScreenDescription=""
       searchEmptyScreenImage={
         theme?.isBase
@@ -490,7 +490,7 @@ const FilesSelector = ({
           : EmptyScreenFilterAltDarkSvgUrl
       }
       searchEmptyScreenHeader={t("Common:NotFoundTitle")}
-      searchEmptyScreenDescription={t("Common:EmptyFilterDescriptionText")}
+      searchEmptyScreenDescription={t("Files:EmptyFilterDescriptionText")}
       isLoading={showLoader}
       rowLoader={
         <RowLoader

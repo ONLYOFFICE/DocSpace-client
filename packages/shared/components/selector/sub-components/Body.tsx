@@ -168,7 +168,9 @@ const Body = ({
 
       {(withSearch && isSearchLoading) || isBreadCrumbsLoading ? (
         searchLoader
-      ) : withSearch || (itemsCount > 0 && withSearch) ? (
+      ) : withSearch ||
+        (itemsCount > 0 && withSearch) ||
+        (withSearch && isSearch) ? (
         <Search
           placeholder={searchPlaceholder}
           value={searchValue}
@@ -182,7 +184,7 @@ const Body = ({
         <Scrollbar style={{ height: listHeight }}>{rowLoader}</Scrollbar>
       ) : itemsCount === 0 ? (
         <EmptyScreen
-          withSearch={isSearch && !!searchValue}
+          withSearch={isSearch}
           image={emptyScreenImage}
           header={emptyScreenHeader}
           description={emptyScreenDescription}

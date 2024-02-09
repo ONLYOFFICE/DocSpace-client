@@ -57,9 +57,8 @@ const RoomSelector = ({
 
   const onSearchAction = React.useCallback(
     (value: string, callback?: Function) => {
+      isFirstLoad.current = true;
       setSearchValue(() => {
-        isFirstLoad.current = true;
-
         return value;
       });
       callback?.();
@@ -68,9 +67,8 @@ const RoomSelector = ({
   );
 
   const onClearSearchAction = React.useCallback((callback?: Function) => {
+    isFirstLoad.current = true;
     setSearchValue(() => {
-      isFirstLoad.current = true;
-
       return "";
     });
     callback?.();
@@ -99,17 +97,19 @@ const RoomSelector = ({
 
       setHasNextPage(count === PAGE_COUNT);
 
-      setItems((prevItems) => {
-        const newItems = [...rooms] as TSelectorItem[];
+      if (isFirstLoad) {
+        setTotal(totalCount);
 
-        if (isFirstLoad) {
-          setTotal(totalCount);
-          isFirstLoad.current = false;
-          return newItems;
-        }
+        setItems([...rooms] as TSelectorItem[]);
+      } else {
+        setItems((prevItems) => {
+          const newItems = [...rooms] as TSelectorItem[];
 
-        return [...prevItems, ...newItems];
-      });
+          return [...prevItems, ...newItems];
+        });
+      }
+
+      isFirstLoad.current = false;
 
       setIsNextPageLoading(false);
     },

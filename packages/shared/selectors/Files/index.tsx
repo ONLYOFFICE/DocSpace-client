@@ -105,6 +105,7 @@ const FilesSelector = ({
   const [isSelectedParentFolder, setIsSelectedParentFolder] =
     React.useState<boolean>(false);
   const [searchValue, setSearchValue] = React.useState<string>("");
+
   const [isInit, setIsInit] = React.useState(true);
 
   const { getIcon } = useFilesSettings(getIconProp);
@@ -193,6 +194,7 @@ const FilesSelector = ({
     (item: TSelectorItem) => {
       if (item.isFolder) {
         setIsFirstLoad(true);
+
         setItems([]);
         setBreadCrumbs((value) => [
           ...value,
@@ -401,7 +403,8 @@ const FilesSelector = ({
     : {};
 
   const withSearch =
-    !isRoot && items.length ? items.length > 0 : !isRoot && isFirstLoad;
+    !!searchValue ||
+    (!isRoot && items?.length ? items.length > 0 : !isRoot && isFirstLoad);
 
   const searchProps: TSelectorSearch = withSearch
     ? {
@@ -479,7 +482,7 @@ const FilesSelector = ({
       emptyScreenImage={
         theme?.isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl
       }
-      emptyScreenHeader={t("SelectorEmptyScreenHeader")}
+      emptyScreenHeader={t("Common:SelectorEmptyScreenHeader")}
       emptyScreenDescription=""
       searchEmptyScreenImage={
         theme?.isBase
@@ -487,7 +490,7 @@ const FilesSelector = ({
           : EmptyScreenFilterAltDarkSvgUrl
       }
       searchEmptyScreenHeader={t("Common:NotFoundTitle")}
-      searchEmptyScreenDescription={t("EmptyFilterDescriptionText")}
+      searchEmptyScreenDescription={t("Common:EmptyFilterDescriptionText")}
       isLoading={showLoader}
       rowLoader={
         <RowLoader

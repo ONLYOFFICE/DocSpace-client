@@ -19,7 +19,7 @@ import {
 } from "@docspace/shared/components/selector/Selector.types";
 import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
-
+import useLoadingWithTimeout from "@docspace/shared/hooks/useLoadingWithTimeout";
 import { getUserRole } from "@docspace/shared/utils/common";
 import Filter from "@docspace/shared/api/people/filter";
 import { getMembersList } from "@docspace/shared/api/people";
@@ -27,6 +27,7 @@ import { ShareAccessRights } from "@docspace/shared/enums";
 import { RowLoader, SearchLoader } from "@docspace/shared/skeletons/selector";
 import { TUser } from "@docspace/shared/api/people/types";
 import { AvatarRole } from "@docspace/shared/components/avatar";
+import { LOADER_TIMEOUT } from "@docspace/shared/constants";
 
 const toListItem = (item: TUser) => {
   const {
@@ -103,6 +104,8 @@ const AddUsersPanel = ({
   ]);
 
   const isFirstLoad = useRef(true);
+  const [isInit, setIsInit] = useState(true);
+  const [isLoading, setIsLoading] = useLoadingWithTimeout<boolean>(0, true);
 
   const accessRight =
     defaultAccess ||
@@ -173,23 +176,29 @@ const AddUsersPanel = ({
   const [total, setTotal] = useState(0);
   const totalRef = useRef(0);
 
-  const onSearch = useCallback((value: string, callback?: Function) => {
-    setSearchValue(() => {
+  const onSearch = useCallback(
+    (value: string, callback?: Function) => {
       isFirstLoad.current = true;
+      setIsLoading(true);
+      setSearchValue(() => {
+        return value;
+      });
+      callback?.();
+    },
+    [setIsLoading],
+  );
 
-      return value;
-    });
-    callback?.();
-  }, []);
-
-  const onClearSearch = useCallback((callback?: Function) => {
-    setSearchValue(() => {
+  const onClearSearch = useCallback(
+    (callback?: Function) => {
       isFirstLoad.current = true;
-
-      return "";
-    });
-    callback?.();
-  }, []);
+      setIsLoading(true);
+      setSearchValue(() => {
+        return "";
+      });
+      callback?.();
+    },
+    [setIsLoading],
+  );
 
   const loadNextPage = useCallback(
     async (startIndex: number) => {
@@ -213,20 +222,26 @@ const AddUsersPanel = ({
 
       const newTotal = response.total - totalDifferent;
 
-      setItemsList((list) => {
-        const newItems = [...list, ...items];
+      if (isFirstLoad.current) {
+        setItemsList([...items]);
+        setHasNextPage(items.length < newTotal);
+      } else {
+        setItemsList((list) => {
+          const newItems = [...list, ...items];
+          setHasNextPage(newItems.length < newTotal);
 
-        setHasNextPage(newItems.length < newTotal);
-        return newItems;
-      });
+          return newItems;
+        });
+      }
       setTotal(newTotal);
       totalRef.current = newTotal;
 
       setIsNextPageLoading(false);
-
+      setIsLoading(false);
+      setIsInit(false);
       isFirstLoad.current = false;
     },
-    [getFilterWithOutDisabledUser, roomId, searchValue],
+    [getFilterWithOutDisabledUser, roomId, searchValue, setIsLoading],
   );
 
   const emptyScreenImage = theme.isBase
@@ -340,16 +355,16 @@ const AddUsersPanel = ({
           isNextPageLoading={isNextPageLoading}
           loadNextPage={loadNextPage}
           totalItems={total}
-          isLoading={isFirstLoad.current}
+          isLoading={isLoading}
           searchLoader={<SearchLoader />}
-          isSearchLoading={isFirstLoad.current}
+          isSearchLoading={isInit}
           rowLoader={
             <RowLoader
               isUser
               count={15}
-              isContainer={isFirstLoad.current}
+              isContainer={isLoading}
               isMultiSelect={isMultiSelect}
-              withAllSelect={!isFirstLoad.current}
+              withAllSelect={!isLoading}
             />
           }
         />

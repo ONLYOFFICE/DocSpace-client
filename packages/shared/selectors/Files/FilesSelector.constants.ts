@@ -6,7 +6,7 @@ export const DEFAULT_BREAD_CRUMB: TBreadCrumb = {
   isRoom: false,
 };
 
-export const SHOW_LOADER_TIMER = 500;
+export const SHOW_LOADER_TIMER = 200;
 export const MIN_LOADER_TIMER = 500;
 
 export const DEFAULT_FILE_EXTS = "file";

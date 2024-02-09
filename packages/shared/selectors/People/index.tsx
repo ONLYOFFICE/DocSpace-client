@@ -172,17 +172,26 @@ const PeopleSelector = ({
         ? response.total - totalDifferent - 1
         : response.total - totalDifferent;
 
-      setItemsList((i) => {
-        const tempItems = [...i, ...data];
-
+      if (isFirstLoad) {
         const newItems = withOutCurrentAuthorizedUser
-          ? removeCurrentUserFromList(tempItems)
-          : moveCurrentUserToTopOfList(tempItems);
+          ? removeCurrentUserFromList(data)
+          : moveCurrentUserToTopOfList(data);
 
         setHasNextPage(newItems.length < newTotal);
+        setItemsList(newItems);
+      } else {
+        setItemsList((i) => {
+          const tempItems = [...i, ...data];
 
-        return newItems;
-      });
+          const newItems = withOutCurrentAuthorizedUser
+            ? removeCurrentUserFromList(tempItems)
+            : moveCurrentUserToTopOfList(tempItems);
+
+          setHasNextPage(newItems.length < newTotal);
+
+          return newItems;
+        });
+      }
 
       setTotal(newTotal);
       totalRef.current = newTotal;
@@ -202,18 +211,16 @@ const PeopleSelector = ({
   );
 
   const onSearch = useCallback((value: string, callback?: Function) => {
+    isFirstLoad.current = true;
     setSearchValue(() => {
-      isFirstLoad.current = true;
-
       return value;
     });
     callback?.();
   }, []);
 
   const onClearSearch = useCallback((callback?: Function) => {
+    isFirstLoad.current = true;
     setSearchValue(() => {
-      isFirstLoad.current = true;
-
       return "";
     });
     callback?.();

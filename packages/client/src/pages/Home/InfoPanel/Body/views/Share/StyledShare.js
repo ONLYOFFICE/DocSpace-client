@@ -49,6 +49,10 @@ const StyledLinkRow = styled.div`
 
   .expired-options {
     padding: 0px;
+
+    & > span > a {
+      padding: 0px !important;
+    }
   }
 
   .expire-text {

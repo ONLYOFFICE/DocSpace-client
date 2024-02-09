@@ -4,7 +4,7 @@ import { Events } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import Filter from "@docspace/shared/api/groups/filter";
 import InsideGroupFilter from "@docspace/shared/api/people/filter";
-
+import GroupsFilter from "@docspace/shared/api/groups/filter";
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
@@ -18,13 +18,14 @@ class GroupsStore {
   peopleStore;
 
   groups = [];
-  groupsAreLoading = false;
   selection = [];
   bufferSelection = null;
 
+  groupsFilter = GroupsFilter.getDefault();
+  groupsIsIsLoading = false;
+
   currentGroup = null;
 
-  filter = Filter.getDefault();
   insideGroupFilter = InsideGroupFilter.getDefault();
   insideGroupBackUrl = null;
 
@@ -34,15 +35,17 @@ class GroupsStore {
     makeAutoObservable(this);
   }
 
-  setFilter = (filter) => {
+  // Groups Filter
+
+  setGroupsFilter = (filter = GroupsFilter.getDefault()) => {
     const key = `GroupsFilter=${this.peopleStore.userStore.user.id}`;
     const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
     localStorage.setItem(key, value);
 
-    this.filter = filter;
+    this.groupsFilter = filter;
   };
 
-  setFilterUrl = (filter) => {
+  setGroupsFilterUrl = (filter = GroupsFilter.getDefault()) => {
     const urlFilter = filter.toUrlParams();
 
     const newPath = combineUrl(`/accounts/groups/filter?${urlFilter}`);
@@ -53,14 +56,30 @@ class GroupsStore {
     window.history.replaceState(
       "",
       "",
-      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, newPath),
+      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, newPath)
     );
   };
 
-  setFilterParams = (filter) => {
-    this.setFilterUrl(filter);
-    this.setFilter(filter);
+  setFilterParams = (filter = GroupsFilter.getDefault()) => {
+    this.setGroupsFilterUrl(filter);
+    this.setGroupsFilter(filter);
   };
+
+  get groupsFilterTotal() {
+    return this.groupsFilter.total;
+  }
+
+  get hasMoreGroups() {
+    return this.groups.length < this.groupsFilterTotal;
+  }
+
+  get groupsIsFiltered() {
+    if (this.groupsFilter.search !== "") return true;
+    if (this.groupsFilter.userId !== null) return true;
+    return false;
+  }
+
+  // Inside Group Filter
 
   setInsideGroupFilter = (filter) => {
     const key = `InsideGroupFilter=${this.peopleStore.userStore.user.id}`;
@@ -70,12 +89,12 @@ class GroupsStore {
     this.insideGroupFilter = filter;
   };
 
-  setInsideGroupFilterUrl = (filter) => {
+  setInsideGroupFilterUrl = (filter = InsideGroupFilter.getDefault()) => {
     if (!filter.group) return;
     const urlFilter = filter.toUrlParams();
 
     const newPath = combineUrl(
-      `/accounts/groups/${filter.group}/filter?${urlFilter}`,
+      `/accounts/groups/${filter.group}/filter?${urlFilter}`
     );
     const currentPath = window.location.pathname + window.location.search;
 
@@ -84,41 +103,36 @@ class GroupsStore {
     window.history.replaceState(
       "",
       "",
-      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, newPath),
+      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, newPath)
     );
   };
 
-  setInsideGroupFilterParams = (filter) => {
+  setInsideGroupFilterParams = (filter = InsideGroupFilter.getDefault()) => {
     this.setInsideGroupFilter(filter);
     this.setInsideGroupFilterUrl(filter);
+  };
+
+  setCurrentGroup = (currentGroup = null) => {
+    this.currentGroup = currentGroup;
   };
 
   setInsideGroupBackUrl = (url: string) => {
     this.insideGroupBackUrl = url;
   };
 
-  setCurrentGroup = (currentGroup) => {
-    this.currentGroup = currentGroup;
-  };
-
-  setGroupsAreLoading = (value: boolean) => {
-    this.groupsAreLoading = value;
-  };
-
   getGroups = async (
-    filter,
+    filter = GroupsFilter.getDefault(),
     updateFilter = false,
-    withFilterLocalStorage = false,
+    withFilterLocalStorage = false
   ) => {
     const filterData = filter ? filter.clone() : Filter.getDefault();
 
     const filterStorageItem = localStorage.getItem(
-      `GroupsFilter=${this.peopleStore.userStore.user?.id}`,
+      `GroupsFilter=${this.peopleStore.userStore.user?.id}`
     );
 
     if (filterStorageItem && withFilterLocalStorage) {
       const splitFilter = filterStorageItem.split(",");
-
       filterData.sortBy = splitFilter[0];
       filterData.pageCount = +splitFilter[1];
       filterData.sortOrder = splitFilter[2];
@@ -127,23 +141,16 @@ class GroupsStore {
     const res = await groupsApi.getGroups(filterData);
     filterData.total = res.total;
 
-    if (updateFilter) {
-      this.setFilterParams(filterData);
-    }
-    console.log(res);
+    if (updateFilter) this.setFilterParams(filterData);
+
     this.groups = res.items;
   };
 
-  get hasMoreGroups() {
-    return this.groups.length < this.filter.total;
-  }
-
   fetchMoreGroups = async () => {
-    if (!this.hasMoreGroups || this.groupsAreLoading) return;
+    if (!this.hasMoreAccounts || this.groupsIsIsLoading) return;
+    this.groupsIsIsLoading = true;
 
-    this.setGroupsAreLoading(true);
-
-    const newFilter = this.filter.clone();
+    const newFilter = this.groupsFilter.clone();
     newFilter.page += 1;
     this.setFilterParams(newFilter);
 
@@ -151,9 +158,14 @@ class GroupsStore {
 
     runInAction(() => {
       this.groups = [...this.groups, ...res.items];
-      this.setGroupsAreLoading(false);
+      this.groupsFilter = newFilter;
+      this.groupsIsIsLoading = false;
     });
   };
+
+  get hasMoreAccounts() {
+    return this.groups.length < this.groupsFilter.total;
+  }
 
   getGroupById = async (groupId) => {
     const res = await groupsApi.getGroupById(groupId);
@@ -164,7 +176,7 @@ class GroupsStore {
     groupId,
     filter,
     updateFilter = false,
-    withFilterLocalStorage = false,
+    withFilterLocalStorage = false
   ) => {
     const filterData = filter ? filter.clone() : AccountsFilter.getDefault();
     filterData.group = groupId;
@@ -175,7 +187,7 @@ class GroupsStore {
     }
 
     const filterStorageItem = localStorage.getItem(
-      `InsideGroupFilter=${this.peopleStore.userStore.user?.id}`,
+      `InsideGroupFilter=${this.peopleStore.userStore.user?.id}`
     );
 
     if (filterStorageItem && withFilterLocalStorage) {
@@ -248,6 +260,7 @@ class GroupsStore {
       }
     }
 
+    console.log(newSelections);
     this.setSelection(newSelections);
   };
 
@@ -312,16 +325,6 @@ class GroupsStore {
     this.insideGroupBackUrl = null;
     this.peopleStore.usersStore.setUsers([]);
   };
-
-  get filterTotal() {
-    return this.filter.total;
-  }
-
-  get isFiltered() {
-    return (
-      this.filter.search || this.filter.searchByManager || this.filter.userId
-    );
-  }
 }
 
 export default GroupsStore;

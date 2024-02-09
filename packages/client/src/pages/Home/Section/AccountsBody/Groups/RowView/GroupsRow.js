@@ -106,6 +106,7 @@ const GroupsRow = ({
           >
             {[
               <Link
+                key={"group-title"}
                 containerWidth="28%"
                 target="_blank"
                 title={item.name}

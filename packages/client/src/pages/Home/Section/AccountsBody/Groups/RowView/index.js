@@ -12,8 +12,8 @@ const RowView = ({
   accountsViewAs,
   setViewAs,
   isFiltered,
-  fetchMoreGroups,
   hasMoreGroups,
+  fetchMoreGroups,
   filterTotal,
   withPaging,
   currentDeviceType,
@@ -26,6 +26,7 @@ const RowView = ({
 
   if (groups.length === 0 && !isFiltered) return <EmptyScreen />;
 
+  console.log(groups);
   return (
     <Styled.GroupsRowContainer
       className="people-row-container"
@@ -53,11 +54,12 @@ export default inject(({ peopleStore, settingsStore }) => ({
   accountsViewAs: peopleStore.viewAs,
   setViewAs: peopleStore.setViewAs,
 
+  peopleList: peopleStore.usersStore.peopleList,
   hasMoreGroups: peopleStore.groupsStore.hasMoreGroups,
   fetchMoreGroups: peopleStore.groupsStore.fetchMoreGroups,
 
-  filterTotal: peopleStore.groupsStore.filterTotal,
-  isFiltered: peopleStore.groupsStore.isFiltered,
+  filterTotal: peopleStore.groupsStore.groupsFilterTotal,
+  isFiltered: peopleStore.groupsStore.groupsIsFiltered,
 
   withPaging: settingsStore.withPaging,
   currentDeviceType: settingsStore.currentDeviceType,

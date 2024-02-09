@@ -1,12 +1,9 @@
 import React, { useRef } from "react";
 import { inject, observer } from "mobx-react";
-import styled, { css } from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import * as Styled from "./index.styled";
 import { TableBody } from "@docspace/shared/components/table";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
-
-import { Base } from "@docspace/shared/themes";
 
 import GroupsTableItem from "./GroupsTableItem";
 import GroupsTableHeader from "./GroupsTableHeader";
@@ -26,12 +23,13 @@ const GroupsTableView = ({
   userId,
   infoPanelVisible,
 
-  hasMoreGroups,
-  fetchMoreGroups,
-  filterTotal,
   withPaging,
-  isFiltered,
   currentDeviceType,
+
+  fetchMoreGroups,
+  hasMoreGroups,
+  groupsIsFiltered,
+  groupsFilterTotal,
 }) => {
   const ref = useRef(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -48,7 +46,7 @@ const GroupsTableView = ({
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
-  return groups.length !== 0 || !isFiltered ? (
+  return groups.length !== 0 || !groupsIsFiltered ? (
     <Styled.GroupsTableContainer
       useReactWindow={!withPaging}
       forwardedRef={ref}
@@ -68,7 +66,7 @@ const GroupsTableView = ({
         infoPanelVisible={infoPanelVisible}
         fetchMoreFiles={fetchMoreGroups}
         hasMoreFiles={hasMoreGroups}
-        itemCount={filterTotal}
+        itemCount={groupsFilterTotal}
         filesLength={groups.length}
         itemHeight={49}
         useReactWindow={!withPaging}
@@ -101,6 +99,7 @@ export default inject(
     const {
       usersStore,
       groupsStore,
+      filterStore,
       viewAs: accountsViewAs,
       setViewAs,
       changeType,
@@ -110,13 +109,15 @@ export default inject(
       groups,
       selection,
       setSelection,
-      hasMoreGroups,
+
       fetchMoreGroups,
-      filterTotal,
-      isFiltered,
+      hasMoreGroups,
+      groupsIsFiltered,
+      groupsFilterTotal,
     } = groupsStore;
 
     const { theme, withPaging, currentDeviceType } = settingsStore;
+    const { peopleList, hasMoreAccounts, fetchMoreAccounts } = usersStore;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
@@ -129,11 +130,14 @@ export default inject(
       infoPanelVisible,
       withPaging,
 
-      hasMoreGroups,
-      fetchMoreGroups,
-      filterTotal,
-      isFiltered,
+      fetchMoreAccounts,
+      hasMoreAccounts,
       currentDeviceType,
+
+      fetchMoreGroups,
+      hasMoreGroups,
+      groupsIsFiltered,
+      groupsFilterTotal,
     };
-  },
+  }
 )(observer(GroupsTableView));

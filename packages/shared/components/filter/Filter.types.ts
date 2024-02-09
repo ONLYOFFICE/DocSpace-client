@@ -149,6 +149,9 @@ export interface FilterBlockProps {
   userId: string;
   isRooms: boolean;
   isAccounts: boolean;
+  isPeopleAccounts: boolean;
+  isGroupsAccounts: boolean;
+  isInsideGroup: boolean;
 }
 
 export interface FilterButtonProps {
@@ -159,6 +162,9 @@ export interface FilterButtonProps {
   selectorLabel: string;
   isRooms: boolean;
   isAccounts: boolean;
+  isPeopleAccounts: boolean;
+  isGroupsAccounts: boolean;
+  isInsideGroup: boolean;
   id: string;
   title: string;
   userId: string;
@@ -195,6 +201,9 @@ export interface FilterProps {
 
   isRooms: boolean;
   isAccounts: boolean;
+  isPeopleAccounts: boolean;
+  isGroupsAccounts: boolean;
+  isInsideGroup: boolean;
   filterTitle: string;
   sortByTitle: string;
 

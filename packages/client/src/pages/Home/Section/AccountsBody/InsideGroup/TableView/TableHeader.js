@@ -3,6 +3,7 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import { TableHeader } from "@docspace/shared/components/table";
+import { Events } from "@docspace/shared/enums";
 
 const TABLE_VERSION = "6";
 const TABLE_COLUMNS = `insideGroupTableColumns_ver-${TABLE_VERSION}`;
@@ -89,10 +90,14 @@ class PeopleTableHeader extends React.Component {
 
     const tableColumns = columns.map((c) => c.enable && c.key);
     localStorage.setItem(`${TABLE_COLUMNS}=${this.props.userId}`, tableColumns);
+
+    const event = new Event(Events.CHANGE_COLUMN);
+
+    window.dispatchEvent(event);
   };
 
   onFilter = (sortBy) => {
-    const { filter, setIsLoading, navigate, location } = this.props;
+    const { filter, setFilter, setIsLoading, navigate, location } = this.props;
     const newFilter = filter.clone();
 
     if (newFilter.sortBy === sortBy && sortBy !== "AZ") {
@@ -118,7 +123,7 @@ class PeopleTableHeader extends React.Component {
     }
 
     setIsLoading(true);
-
+    setFilter(newFilter);
     navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
   };
 
@@ -182,13 +187,15 @@ export default inject(
   }) => {
     const { groupsStore } = peopleStore;
 
-    const { insideGroupFilter: filter } = groupsStore;
+    const { insideGroupFilter: filter, setInsideGroupFilter: setFilter } =
+      groupsStore;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { withPaging } = settingsStore;
 
     return {
       filter,
+      setFilter,
 
       setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
       userId: userStore.user?.id,

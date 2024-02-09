@@ -41,6 +41,9 @@ const FilterInput = React.memo(
 
     isRooms,
     isAccounts,
+    isPeopleAccounts,
+    isGroupsAccounts,
+    isInsideGroup,
     filterTitle,
     sortByTitle,
 
@@ -173,6 +176,9 @@ const FilterInput = React.memo(
             selectorLabel={selectorLabel}
             isRooms={isRooms}
             isAccounts={isAccounts}
+            isPeopleAccounts={isPeopleAccounts}
+            isGroupsAccounts={isGroupsAccounts}
+            isInsideGroup={isInsideGroup}
             title={filterTitle}
             userId={userId}
           />

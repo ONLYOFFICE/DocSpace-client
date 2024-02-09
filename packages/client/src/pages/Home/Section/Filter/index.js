@@ -251,6 +251,10 @@ const TABLE_GROUPS_COLUMNS = `groupsTableColumns_ver-${TableVersions.Groups}`;
 
 const COLUMNS_GROUPS_SIZE_INFO_PANEL = `infoPanelGroupsColumnsSize_ver-${TableVersions.Groups}`;
 
+const TABLE_INSIDE_GROUP_COLUMNS = `insideGroupTableColumns_ver-${TableVersions.InsideGroup}`;
+
+const COLUMNS_INSIDE_GROUP_SIZE_INFO_PANEL = `infoPanelInsideGroupPeopleColumnsSize_ver-${TableVersions.InsideGroup}`;
+
 const SectionFilterContent = ({
   t,
   filter,
@@ -1890,7 +1894,7 @@ const SectionFilterContent = ({
         default: true,
       };
 
-      const peopleHideableColumns = {
+      const hideableColumns = {
         Type: type,
         Department: department,
         Mail: email,
@@ -1898,21 +1902,25 @@ const SectionFilterContent = ({
 
       options.push(firstName, lastName);
 
-      if (isInsideGroup) {
-        options.push(type, department, email);
-      }
+      if ((viewAs = "table")) {
+        const tableColumns = isInsideGroup
+          ? TABLE_INSIDE_GROUP_COLUMNS
+          : TABLE_PEOPLE_COLUMNS;
 
-      if ((viewAs = "table") && isPeopleAccounts) {
+        const columnsSizeInfoPanel = isInsideGroup
+          ? COLUMNS_INSIDE_GROUP_SIZE_INFO_PANEL
+          : COLUMNS_PEOPLE_SIZE_INFO_PANEL;
+
         const availableSort = localStorage
-          ?.getItem(`${TABLE_PEOPLE_COLUMNS}=${userId}`)
+          ?.getItem(`${tableColumns}=${userId}`)
           ?.split(",");
 
         const infoPanelColumnsSize = localStorage
-          ?.getItem(`${COLUMNS_PEOPLE_SIZE_INFO_PANEL}=${userId}`)
+          ?.getItem(`${columnsSizeInfoPanel}=${userId}`)
           ?.split(" ");
 
-        availableSort?.forEach((columnTitle) => {
-          if (!peopleHideableColumns[columnTitle]) return;
+        availableSort.forEach((columnTitle) => {
+          if (!hideableColumns[columnTitle]) return;
 
           if (availableSort?.includes(columnTitle)) {
             const idx = availableSort.findIndex((x) => x === columnTitle);
@@ -1921,7 +1929,7 @@ const SectionFilterContent = ({
               infoPanelColumnsSize &&
               infoPanelColumnsSize[idx] === "0px";
 
-            !hide && options.push(peopleHideableColumns[columnTitle]);
+            !hide && options.push(hideableColumns[columnTitle]);
           }
         });
       }
@@ -2467,6 +2475,10 @@ const SectionFilterContent = ({
       onSortButtonClick={onSortButtonClick}
       currentDeviceType={currentDeviceType}
       userId={userId}
+      isAccounts={isAccountsPage}
+      isPeopleAccounts={isPeopleAccounts}
+      isGroupsAccounts={isGroupsAccounts}
+      isInsideGroup={isInsideGroup}
     />
   );
 };

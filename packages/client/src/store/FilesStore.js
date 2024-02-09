@@ -3060,6 +3060,7 @@ class FilesStore {
         mute,
         inRoom,
         requestToken,
+        lastOpened,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3226,6 +3227,7 @@ class FilesStore {
         isForm,
         canCopyPublicLink,
         requestToken,
+        lastOpened,
       };
     });
 

@@ -175,6 +175,26 @@ class FilesTableHeader extends React.Component {
           }
         : {};
 
+      const modifiedBlock = !this.props.isRecentTab
+        ? {
+            key: "Modified",
+            title: t("ByLastModified"),
+            enable: this.props.modifiedColumnIsEnabled,
+            resizable: true,
+            sortBy: SortByFieldName.ModifiedDate,
+            onClick: this.onFilter,
+            onChange: this.onColumnChange,
+          }
+        : {
+            key: "Modified",
+            title: t("DateLastOpened"),
+            enable: this.props.modifiedColumnIsEnabled,
+            resizable: true,
+            sortBy: SortByFieldName.LastOpened,
+            onClick: this.onFilter,
+            onChange: this.onColumnChange,
+          };
+
       const columns = [
         {
           key: "Name",
@@ -196,15 +216,7 @@ class FilesTableHeader extends React.Component {
           // onClick: this.onFilter,
           onChange: this.onColumnChange,
         },
-        {
-          key: "Modified",
-          title: t("ByLastModified"),
-          enable: this.props.modifiedColumnIsEnabled,
-          resizable: true,
-          sortBy: SortByFieldName.ModifiedDate,
-          onClick: this.onFilter,
-          onChange: this.onColumnChange,
-        },
+        { ...modifiedBlock },
         {
           key: "Size",
           title: t("Common:Size"),
@@ -310,13 +322,15 @@ class FilesTableHeader extends React.Component {
       isTrashFolder,
       columnStorageName,
       columnInfoPanelStorageName,
+      isRecentTab,
     } = this.props;
 
     if (
       isRooms !== prevProps.isRooms ||
       isTrashFolder !== prevProps.isTrashFolder ||
       columnStorageName !== prevProps.columnStorageName ||
-      columnInfoPanelStorageName !== prevProps.columnInfoPanelStorageName
+      columnInfoPanelStorageName !== prevProps.columnInfoPanelStorageName ||
+      isRecentTab !== prevProps.isRecentTab
     ) {
       return this.getTableColumns(true);
     }
@@ -379,11 +393,11 @@ class FilesTableHeader extends React.Component {
       window.DocSpace.navigate(
         `${
           window.DocSpace.location.pathname
-        }?key=${publicRoomKey}&${newFilter.toUrlParams()}`
+        }?key=${publicRoomKey}&${newFilter.toUrlParams()}`,
       );
     } else {
       window.DocSpace.navigate(
-        `${window.DocSpace.location.pathname}?${newFilter.toUrlParams()}`
+        `${window.DocSpace.location.pathname}?${newFilter.toUrlParams()}`,
       );
     }
   };
@@ -573,10 +587,11 @@ export default inject(
 
       isFrame,
       frameTableColumns: frameConfig?.viewTableColumns,
+      isRecentTab,
     };
-  }
+  },
 )(
   withTranslation(["Files", "Common", "Translations", "Notifications"])(
-    observer(FilesTableHeader)
-  )
+    observer(FilesTableHeader),
+  ),
 );

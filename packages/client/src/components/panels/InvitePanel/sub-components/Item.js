@@ -32,6 +32,7 @@ const Item = ({
   inputsRef,
   setIsOpenItemAccess,
   isMobileView,
+  standalone,
 }) => {
   const { avatar, displayName, email, id, errors, access } = item;
 
@@ -42,7 +43,14 @@ const Item = ({
   const [inputValue, setInputValue] = useState(name);
   const [parseErrors, setParseErrors] = useState(errors);
 
-  const accesses = getAccessOptions(t, roomType, true, true, isOwner);
+  const accesses = getAccessOptions(
+    t,
+    roomType,
+    true,
+    true,
+    isOwner,
+    standalone,
+  );
 
   const filteredAccesses = filterUserRoleOptions(accesses, item, true);
 
@@ -136,7 +144,7 @@ const Item = ({
           color="#A3A9AE"
           truncate
         >
-          {`${typeLabel} | ${email}`}
+          {item.userName ? `${typeLabel} | ${email}` : `${typeLabel}`}
         </Text>
       </StyledInviteUserBody>
 
@@ -170,6 +178,7 @@ const Item = ({
           setIsOpenItemAccess={setIsOpenItemAccess}
           isMobileView={isMobileView}
           noBorder
+          standalone={standalone}
         />
       )}
     </>

@@ -3,11 +3,10 @@ import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import React, { useState, useEffect } from "react";
 import { Avatar } from "@docspace/shared/components/avatar";
 import { Text } from "@docspace/shared/components/text";
-import { capitalize } from "lodash";
 
 import { parseAddresses } from "@docspace/shared/utils";
 import { getAccessOptions } from "../utils";
-import { getUserRole } from "@docspace/shared/utils/common";
+import { getUserRole, getUserTypeLabel } from "@docspace/shared/utils/common";
 
 import {
   StyledEditInput,
@@ -39,6 +38,7 @@ const Item = ({
   const name = !!avatar ? (displayName !== "" ? displayName : email) : email;
   const source = !!avatar ? avatar : AtReactSvgUrl;
   const role = getUserRole(item);
+  const typeLabel = getUserTypeLabel(role, t);
 
   const [edit, setEdit] = useState(false);
   const [inputValue, setInputValue] = useState(name);
@@ -49,7 +49,7 @@ const Item = ({
   const filteredAccesses = filterUserRoleOptions(accesses, item, true);
 
   const defaultAccess = filteredAccesses.find(
-    (option) => option.access === +access
+    (option) => option.access === +access,
   );
 
   const errorsInList = () => {
@@ -133,7 +133,7 @@ const Item = ({
           color="#A3A9AE"
           truncate
         >
-          {`${capitalize(role)} | ${email}`}
+          {`${typeLabel} | ${email}`}
         </Text>
       </StyledInviteUserBody>
 

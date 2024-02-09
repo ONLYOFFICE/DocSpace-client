@@ -98,7 +98,7 @@ class ContextOptionsStore {
     pluginStore,
     infoPanelStore,
     currentTariffStatusStore,
-    userStore
+    userStore,
   ) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -145,7 +145,7 @@ class ContextOptionsStore {
     setRoomCreation(true);
 
     const provider = connectItems.find(
-      (connectItem) => connectItem.providerName === item.providerKey
+      (connectItem) => connectItem.providerName === item.providerKey,
     );
 
     const itemThirdParty = {
@@ -159,7 +159,7 @@ class ContextOptionsStore {
       let authModal = window.open(
         "",
         t("Common:Authorization"),
-        "height=600, width=1020"
+        "height=600, width=1020",
       );
       await openConnectWindow(provider.providerName, authModal)
         .then(getOAuthToken)
@@ -287,7 +287,7 @@ class ContextOptionsStore {
       .then(() =>
         action === "mark"
           ? toastr.success(t("MarkedAsFavorite"))
-          : toastr.success(t("RemovedFromFavorites"))
+          : toastr.success(t("RemovedFromFavorites")),
       )
       .catch((err) => toastr.error(err));
   };
@@ -302,7 +302,7 @@ class ContextOptionsStore {
       .then(() =>
         locked
           ? toastr.success(t("Translations:FileUnlocked"))
-          : toastr.success(t("Translations:FileLocked"))
+          : toastr.success(t("Translations:FileLocked")),
       )
       .then(() => setInfoPanelSelection({ ...item, locked: !locked }))
       .catch((err) => {
@@ -319,7 +319,7 @@ class ContextOptionsStore {
         ? canOpenPlayer
           ? `${window.location.href}&preview=${id}`
           : webUrl
-        : `${window.location.origin + config.homepage}/filter?folder=${id}` //TODO: Change url by category
+        : `${window.location.origin + config.homepage}/filter?folder=${id}`, //TODO: Change url by category
     );
 
     toastr.success(t("Translations:LinkCopySuccess"));
@@ -361,7 +361,7 @@ class ContextOptionsStore {
       item.id,
       item.isRoom || item.isFolder,
       needConvert,
-      canOpenPlayer
+      canOpenPlayer,
     );
 
     copy(url);
@@ -408,7 +408,7 @@ class ContextOptionsStore {
       ? combineUrl(
           window.DocSpaceConfig?.proxy?.url,
           config.homepage,
-          `/doceditor?fileId=${encodeURIComponent(id)}&action=view`
+          `/doceditor?fileId=${encodeURIComponent(id)}&action=view`,
         )
       : null;
 
@@ -420,9 +420,9 @@ class ContextOptionsStore {
             combineUrl(
               window.DocSpaceConfig?.proxy?.url,
               config.homepage,
-              `/doceditor`
+              `/doceditor`,
             ),
-            "_blank"
+            "_blank",
           )
         : null;
 
@@ -432,7 +432,7 @@ class ContextOptionsStore {
   isPwa = () => {
     return ["fullscreen", "standalone", "minimal-ui"].some(
       (displayMode) =>
-        window.matchMedia("(display-mode: " + displayMode + ")").matches
+        window.matchMedia("(display-mode: " + displayMode + ")").matches,
     );
   };
 
@@ -532,7 +532,7 @@ class ContextOptionsStore {
       };
 
       deleteRoomsAction([selectedFolderId], translations).catch((err) =>
-        toastr.error(err)
+        toastr.error(err),
       );
     } else {
       translations = {
@@ -545,7 +545,7 @@ class ContextOptionsStore {
       const selectedFolder = getSelectedFolder();
 
       deleteAction(translations, [selectedFolder], true).catch((err) =>
-        toastr.error(err)
+        toastr.error(err),
       );
     }
   };
@@ -584,7 +584,7 @@ class ContextOptionsStore {
       translations,
       !isFolder,
       providerKey,
-      isRoom
+      isRoom,
     );
   };
 
@@ -624,7 +624,7 @@ class ContextOptionsStore {
         options[index] = model[index];
         if (model[index].items) {
           options[index].items = model[index].items.filter((item) =>
-            filter.includes(item.key)
+            filter.includes(item.key),
           );
 
           if (options[index].items.length === 1) {
@@ -885,15 +885,15 @@ class ContextOptionsStore {
     const filterUrlParams = filesFilter.toUrlParams();
     const url = getCategoryUrl(
       this.filesStore.categoryType,
-      filterUrlParams.folder
+      filterUrlParams.folder,
     );
 
     navigate(
       combineUrl(
         window.DocSpaceConfig?.proxy?.url,
         config.homepage,
-        `${url}?${filterUrlParams}`
-      )
+        `${url}?${filterUrlParams}`,
+      ),
     );
   };
 
@@ -1032,7 +1032,7 @@ class ContextOptionsStore {
                 this.showVersionHistory(
                   item.id,
                   item.security,
-                  item?.requestToken
+                  item?.requestToken,
                 ),
               disabled: false,
             },
@@ -1064,7 +1064,7 @@ class ContextOptionsStore {
                     this.showVersionHistory(
                       item.id,
                       item.security,
-                      item?.requestToken
+                      item?.requestToken,
                     ),
                   disabled: false,
                 },
@@ -1092,7 +1092,7 @@ class ContextOptionsStore {
               this.showVersionHistory(
                 item.id,
                 item.security,
-                item?.requestToken
+                item?.requestToken,
               ),
             disabled: false,
           },
@@ -1166,7 +1166,7 @@ class ContextOptionsStore {
 
     const { pinOptions, muteOptions } = this.getRoomsRootContextOptions(
       item,
-      t
+      t,
     );
 
     let withOpen = item.id !== this.selectedFolderStore.id;
@@ -1177,7 +1177,7 @@ class ContextOptionsStore {
     if (item.isRoom && withOpen) {
       withOpen =
         this.selectedFolderStore.navigationPath.findIndex(
-          (f) => f.id === item.id
+          (f) => f.id === item.id,
         ) === -1;
     }
 
@@ -1290,12 +1290,11 @@ class ContextOptionsStore {
       {
         id: "option_copy-general-link",
         key: "copy-general-link",
-        label: t("Files:CopyGeneralLink"),
+        label: t("Files:CopySharedLink"),
         icon: TabletLinkReactSvgUrl,
         disabled: !isShareable,
         onClick: async () => {
-          const { getPrimaryFileLink, setShareChanged } =
-            this.authStore.infoPanelStore;
+          const { getPrimaryFileLink, setShareChanged } = this.infoPanelStore;
 
           const primaryLink = await getPrimaryFileLink(item.id);
           if (primaryLink) {
@@ -1562,7 +1561,7 @@ class ContextOptionsStore {
     const newOptions = options.filter(
       (option, index) =>
         !(index === 0 && option.key === "separator1") &&
-        !(isCollaborator && option.key === "create-room")
+        !(isCollaborator && option.key === "create-room"),
     );
 
     return newOptions;
@@ -1588,11 +1587,11 @@ class ContextOptionsStore {
       }
 
       const canArchiveRoom = selection.every((k) =>
-        k.contextOptions.includes("archive-room")
+        k.contextOptions.includes("archive-room"),
       );
 
       const canRestoreRoom = selection.some((k) =>
-        k.contextOptions.includes("unarchive-room")
+        k.contextOptions.includes("unarchive-room"),
       );
 
       let archiveOptions;
@@ -1667,41 +1666,41 @@ class ContextOptionsStore {
 
     const sharingItems =
       selection.filter(
-        (k) => k.contextOptions.includes("sharing-settings") && k.canShare
+        (k) => k.contextOptions.includes("sharing-settings") && k.canShare,
       ).length && !personal;
 
     const favoriteItems = selection.filter((k) =>
-      k.contextOptions.includes("mark-as-favorite")
+      k.contextOptions.includes("mark-as-favorite"),
     );
 
     const moveItems = selection.filter((k) =>
-      k.contextOptions.includes("move-to")
+      k.contextOptions.includes("move-to"),
     ).length;
 
     const copyItems = selection.filter((k) =>
-      k.contextOptions.includes("copy-to")
+      k.contextOptions.includes("copy-to"),
     ).length;
 
     const restoreItems = selection.filter((k) =>
-      k.contextOptions.includes("restore")
+      k.contextOptions.includes("restore"),
     ).length;
 
     const removeFromFavoriteItems = selection.filter((k) =>
-      k.contextOptions.includes("remove-from-favorites")
+      k.contextOptions.includes("remove-from-favorites"),
     );
 
     const deleteItems = selection.filter((k) =>
-      k.contextOptions.includes("delete")
+      k.contextOptions.includes("delete"),
     ).length;
 
     const isRootThirdPartyFolder = selection.some(
-      (x) => x.providerKey && x.id === x.rootFolderId
+      (x) => x.providerKey && x.id === x.rootFolderId,
     );
 
     const favoriteItemsIds = favoriteItems.map((item) => item.id);
 
     const removeFromFavoriteItemsIds = removeFromFavoriteItems.map(
-      (item) => item.id
+      (item) => item.id,
     );
 
     const options = [
@@ -1822,7 +1821,7 @@ class ContextOptionsStore {
     const newOptions = options.filter(
       (option, index) =>
         !(index === 0 && option.key === "separator1") &&
-        !(isCollaborator && option.key === "create-room")
+        !(isCollaborator && option.key === "create-room"),
     );
 
     return newOptions;

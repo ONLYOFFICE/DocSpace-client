@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ErrorContainer from "@docspace/common/components/ErrorContainer";
+import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
 import { withTranslation } from "react-i18next";
 
 import { StyledPreparationPortal } from "./StyledPreparationPortal";

@@ -23,11 +23,15 @@ import {
 import { EditorWrapper } from "../components/StyledEditor";
 import { useTranslation } from "react-i18next";
 import withDialogs from "../helpers/withDialogs";
-import { assign, frameCallEvent, frameCallCommand } from "@docspace/shared/utils/common";
+import {
+  assign,
+  frameCallEvent,
+  frameCallCommand,
+} from "@docspace/shared/utils/common";
 import { getEditorTheme } from "@docspace/shared/utils";
 import { toastr } from "@docspace/shared/components/toast";
 import { DocumentEditor } from "@onlyoffice/document-editor-react";
-import ErrorContainer from "@docspace/common/components/ErrorContainer";
+import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
 import DeepLink from "./DeepLink";
 import { getDeepLink } from "../helpers/deepLinkHelper";
 
@@ -272,10 +276,10 @@ function Editor({
       documentType === "word"
         ? "docx"
         : documentType === "slide"
-        ? "pptx"
-        : documentType === "cell"
-        ? "xlsx"
-        : "docxf";
+          ? "pptx"
+          : documentType === "cell"
+            ? "xlsx"
+            : "docxf";
 
     let fileName = t("Common:NewDocument");
 

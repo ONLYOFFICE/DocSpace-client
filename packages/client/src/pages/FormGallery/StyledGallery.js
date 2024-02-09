@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 import { tablet, mobile } from "@docspace/shared/utils";
-import Headline from "@docspace/shared/components/Headline/Headline";
+import Headline from "@docspace/shared/components/headline/Headline";
 import { Base } from "@docspace/shared/themes";
 import { Button } from "@docspace/shared/components/button";
 

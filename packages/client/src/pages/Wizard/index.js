@@ -14,7 +14,7 @@ import { Link } from "@docspace/shared/components/link";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Button } from "@docspace/shared/components/button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-import ErrorContainer from "@docspace/common/components/ErrorContainer";
+import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
 import { FileInput } from "@docspace/shared/components/file-input";
 
 import { Loader } from "@docspace/shared/components/loader";

@@ -1,7 +1,7 @@
 ﻿import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import React from "react";
 import styled, { css } from "styled-components";
-import Headline from "@docspace/shared/components/Headline/Headline";
+import Headline from "@docspace/shared/components/headline/Headline";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { desktop, tablet } from "@docspace/shared/utils";
 

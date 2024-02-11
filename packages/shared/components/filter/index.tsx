@@ -176,25 +176,23 @@ const FilterInput = React.memo(
             title={filterTitle}
             userId={userId}
           />
-          {!isRecentTab && (
-            <SortButton
-              id="sort-by-button"
-              onSort={onSort}
-              getSortData={getSortData}
-              getSelectedSortData={getSelectedSortData}
-              view={view}
-              viewAs={viewAs === "table" ? "row" : viewAs}
-              viewSettings={viewSettings}
-              onChangeViewAs={onChangeViewAs}
-              onSortButtonClick={onSortButtonClick}
-              viewSelectorVisible={
-                viewSettings &&
-                viewSelectorVisible &&
-                currentDeviceType !== DeviceType.desktop
-              }
-              title={sortByTitle}
-            />
-          )}
+          <SortButton
+            id="sort-by-button"
+            onSort={onSort}
+            getSortData={getSortData}
+            getSelectedSortData={getSelectedSortData}
+            view={view}
+            viewAs={viewAs === "table" ? "row" : viewAs}
+            viewSettings={viewSettings}
+            onChangeViewAs={onChangeViewAs}
+            onSortButtonClick={onSortButtonClick}
+            viewSelectorVisible={
+              viewSettings &&
+              viewSelectorVisible &&
+              currentDeviceType !== DeviceType.desktop
+            }
+            title={sortByTitle}
+          />
 
           {((viewSettings &&
             currentDeviceType === DeviceType.desktop &&

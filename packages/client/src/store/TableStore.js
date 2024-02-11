@@ -143,6 +143,7 @@ class TableStore {
       this.setSizeColumn(splitColumns.includes("Size"));
       this.setTypeColumn(splitColumns.includes("Type"));
       this.setQuickButtonsColumn(splitColumns.includes("QuickButtons"));
+      this.setLastOpenedColumn(splitColumns.includes("LastOpened"));
     }
   };
 

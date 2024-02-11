@@ -20,6 +20,7 @@ const RowDataComponent = (props) => {
     sizeColumnIsEnabled,
     typeColumnIsEnabled,
     quickButtonsColumnIsEnabled,
+    lastOpenedColumnIsEnabled,
 
     dragStyles,
     selectionProp,
@@ -40,7 +41,7 @@ const RowDataComponent = (props) => {
         {...dragStyles}
         className={classNames(
           selectionProp?.className,
-          "table-container_file-name-cell"
+          "table-container_file-name-cell",
         )}
         value={value}
       >
@@ -84,6 +85,24 @@ const RowDataComponent = (props) => {
         >
           <DateCell
             create
+            sideColor={theme.filesSection.tableView.row.sideColor}
+            {...props}
+          />
+        </TableCell>
+      ) : (
+        <div />
+      )}
+
+      {lastOpenedColumnIsEnabled ? (
+        <TableCell
+          style={
+            !lastOpenedColumnIsEnabled
+              ? { background: "none" }
+              : dragStyles.style
+          }
+          {...selectionProp}
+        >
+          <DateCell
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
@@ -151,7 +170,7 @@ const RowDataComponent = (props) => {
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
-            "table-container_quick-buttons-wrapper"
+            "table-container_quick-buttons-wrapper",
           )}
         >
           <StyledQuickButtonsContainer>
@@ -173,6 +192,7 @@ export default inject(({ tableStore }) => {
     sizeColumnIsEnabled,
     typeColumnIsEnabled,
     quickButtonsColumnIsEnabled,
+    lastOpenedColumnIsEnabled,
   } = tableStore;
 
   return {
@@ -182,5 +202,6 @@ export default inject(({ tableStore }) => {
     sizeColumnIsEnabled,
     typeColumnIsEnabled,
     quickButtonsColumnIsEnabled,
+    lastOpenedColumnIsEnabled,
   };
 })(observer(RowDataComponent));

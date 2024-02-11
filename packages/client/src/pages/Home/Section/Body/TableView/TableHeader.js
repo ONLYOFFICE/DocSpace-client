@@ -175,25 +175,17 @@ class FilesTableHeader extends React.Component {
           }
         : {};
 
-      const modifiedBlock = !this.props.isRecentTab
+      const lastOpenedBlock = this.props.isRecentTab
         ? {
-            key: "Modified",
-            title: t("ByLastModified"),
-            enable: this.props.modifiedColumnIsEnabled,
-            resizable: true,
-            sortBy: SortByFieldName.ModifiedDate,
-            onClick: this.onFilter,
-            onChange: this.onColumnChange,
-          }
-        : {
-            key: "Modified",
+            key: "LastOpened",
             title: t("DateLastOpened"),
-            enable: this.props.modifiedColumnIsEnabled,
+            enable: this.props.lastOpenedColumnIsEnabled,
             resizable: true,
             sortBy: SortByFieldName.LastOpened,
             onClick: this.onFilter,
             onChange: this.onColumnChange,
-          };
+          }
+        : {};
 
       const columns = [
         {
@@ -216,7 +208,16 @@ class FilesTableHeader extends React.Component {
           // onClick: this.onFilter,
           onChange: this.onColumnChange,
         },
-        { ...modifiedBlock },
+        { ...lastOpenedBlock },
+        {
+          key: "Modified",
+          title: t("ByLastModified"),
+          enable: this.props.modifiedColumnIsEnabled,
+          resizable: true,
+          sortBy: SortByFieldName.ModifiedDate,
+          onClick: this.onFilter,
+          onChange: this.onColumnChange,
+        },
         {
           key: "Size",
           title: t("Common:Size"),
@@ -521,6 +522,7 @@ export default inject(
       typeColumnIsEnabled,
       typeTrashColumnIsEnabled,
       quickButtonsColumnIsEnabled,
+      lastOpenedColumnIsEnabled,
 
       roomColumnNameIsEnabled,
       roomColumnTypeIsEnabled,
@@ -570,6 +572,7 @@ export default inject(
       typeColumnIsEnabled,
       typeTrashColumnIsEnabled,
       quickButtonsColumnIsEnabled,
+      lastOpenedColumnIsEnabled,
 
       roomColumnNameIsEnabled,
       roomColumnTypeIsEnabled,

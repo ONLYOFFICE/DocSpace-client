@@ -38,6 +38,7 @@ class TableStore {
   sizeColumnIsEnabled = true;
   typeColumnIsEnabled = true;
   quickButtonsColumnIsEnabled = true;
+  lastOpenedColumnIsEnabled = true;
 
   authorTrashColumnIsEnabled = true;
   createdTrashColumnIsEnabled = false;
@@ -106,6 +107,7 @@ class TableStore {
     (this.createdTrashColumnIsEnabled = enable);
   setSizeTrashColumn = (enable) => (this.sizeTrashColumnIsEnabled = enable);
   setTypeTrashColumn = (enable) => (this.typeTrashColumnIsEnabled = enable);
+  setLastOpenedColumn = (enable) => (this.lastOpenedColumnIsEnabled = enable);
 
   setColumnsEnable = () => {
     const storageColumns = localStorage.getItem(this.tableStorageName);
@@ -206,6 +208,10 @@ class TableStore {
 
       case "Activity":
         this.setRoomColumnActivity(!this.roomColumnActivityIsEnabled);
+        return;
+
+      case "LastOpened":
+        this.setLastOpenedColumn(!this.lastOpenedColumnIsEnabled);
         return;
 
       default:

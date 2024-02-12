@@ -180,19 +180,9 @@ const Editor = (props) => {
   );
 
   const code = (
-    <CodeWrapper width={width + widthDimension.label} height={height + heightDimension.label}>
-      {config.id !== undefined ? (
-        <>
-          <CategorySubHeader className="copy-window-code">{t("CopyWindowCode")}</CategorySubHeader>
-          <Textarea value={codeBlock} heightTextArea={153} />
-        </>
-      ) : (
-        <EmptyIframeContainer
-          text={t("SelectFile")}
-          width={width + widthDimension.label}
-          height={height + heightDimension.label}
-        />
-      )}
+    <CodeWrapper>
+      <CategorySubHeader className="copy-window-code">{t("CopyWindowCode")}</CategorySubHeader>
+      <Textarea value={codeBlock} heightTextArea={153} />
     </CodeWrapper>
   );
 
@@ -218,7 +208,11 @@ const Editor = (props) => {
       <Container>
         {showPreview && (
           <Preview>
-            <TabsContainer onSelect={onChangeTab} elements={dataTabs} />
+            <TabsContainer
+              isDisabled={config?.id === undefined}
+              onSelect={onChangeTab}
+              elements={dataTabs}
+            />
           </Preview>
         )}
         <Controls>

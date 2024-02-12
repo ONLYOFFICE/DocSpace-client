@@ -7,7 +7,6 @@ import { ADS_TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
 const Banner = ({
   setSubmitToGalleryDialogVisible,
   setClosedCampaigns,
-  standalone,
   getBanner,
   campaignImage,
   campaignTranslate,
@@ -15,7 +14,7 @@ const Banner = ({
   currentCampaign,
 }) => {
   const updateBanner = async () => {
-    await getBanner(standalone);
+    await getBanner();
   };
 
   const onClose = () => {
@@ -59,9 +58,8 @@ const Banner = ({
   );
 };
 
-export default inject(({ settingsStore, dialogsStore, campaignsStore }) => {
+export default inject(({ dialogsStore, campaignsStore }) => {
   const { setSubmitToGalleryDialogVisible } = dialogsStore;
-  const { standalone } = settingsStore;
   const {
     setClosedCampaigns,
     getBanner,
@@ -74,7 +72,6 @@ export default inject(({ settingsStore, dialogsStore, campaignsStore }) => {
   return {
     setSubmitToGalleryDialogVisible,
     setClosedCampaigns,
-    standalone,
     getBanner,
     campaignImage,
     campaignTranslate,

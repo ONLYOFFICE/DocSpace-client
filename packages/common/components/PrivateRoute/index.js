@@ -4,7 +4,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import Error403 from "client/Error403";
 
-import AppLoader from "../AppLoader";
+import AppLoader from "@docspace/shared/components/app-loader";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { TenantStatus } from "@docspace/shared/enums";

@@ -1,5 +1,5 @@
 import React from "react";
-import AppLoader from "@docspace/common/components/AppLoader";
+import AppLoader from "@docspace/shared/components/app-loader";
 import ErrorBoundary from "@docspace/common/components/ErrorBoundary";
 import Error520 from "client/Error520";
 import Error404 from "client/Error404";
@@ -92,7 +92,7 @@ const System = (props) => {
   }
 
   const Component = React.lazy(
-    loadComponent(props.system.scope, props.system.module)
+    loadComponent(props.system.scope, props.system.module),
   );
 
   return (

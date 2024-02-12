@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useParams } from "react-router-dom";
-import AppLoader from "@docspace/common/components/AppLoader";
+import AppLoader from "@docspace/shared/components/app-loader";
 import RoomSelector from "@docspace/shared/selectors/Room";
 import FilesSelector from "../../components/FilesSelector";
 import {
@@ -40,12 +40,12 @@ const Sdk = ({
 
   const callCommand = useCallback(
     () => frameCallCommand("setConfig"),
-    [frameCallCommand]
+    [frameCallCommand],
   );
 
   const callCommandLoad = useCallback(
     () => frameCallCommand("setIsLoaded"),
-    [frameCallCommand]
+    [frameCallCommand],
   );
 
   useEffect(() => {
@@ -62,7 +62,7 @@ const Sdk = ({
 
   const { mode } = useParams();
   const selectorType = new URLSearchParams(window.location.search).get(
-    "selectorType"
+    "selectorType",
   );
 
   const toRelativeUrl = (data) => {
@@ -162,7 +162,7 @@ const Sdk = ({
 
       frameCallEvent({ event: "onSelectCallback", data });
     },
-    [frameCallEvent]
+    [frameCallEvent],
   );
 
   const onSelectFile = useCallback(
@@ -179,7 +179,7 @@ const Sdk = ({
 
       frameCallEvent({ event: "onSelectCallback", data });
     },
-    [frameCallEvent]
+    [frameCallEvent],
   );
 
   const onClose = useCallback(() => {
@@ -263,5 +263,5 @@ export default inject(
       fetchExternalLinks,
       getFilePrimaryLink,
     };
-  }
+  },
 )(observer(Sdk));

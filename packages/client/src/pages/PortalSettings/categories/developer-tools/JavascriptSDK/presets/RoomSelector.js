@@ -90,6 +90,10 @@ const RoomSelector = (props) => {
   const [selectedElementType, setSelectedElementType] = useState(elementDisplayOptions[0].value);
   const [roomType, setRoomType] = useState(roomTypeOptions[0]);
 
+  const debouncedOnSelect = debounce((items) => {
+    toastr.success(items[0].label);
+  }, 0);
+
   const [config, setConfig] = useState({
     mode: "room-selector",
     width: `${width}${widthDimension.label}`,
@@ -104,9 +108,7 @@ const RoomSelector = (props) => {
     isButtonMode: false,
     buttonWithLogo: true,
     events: {
-      onSelectCallback: (items) => {
-        toastr.success(items[0].label);
-      },
+      onSelectCallback: debouncedOnSelect,
       onCloseCallback: null,
       onAppReady: null,
       onAppError: (e) => console.log("onAppError", e),

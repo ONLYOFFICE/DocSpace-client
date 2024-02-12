@@ -603,19 +603,14 @@
       target.innerHTML = this.config.destroyText;
       target.className = this.#classNames;
 
-      const targetFrame = document.getElementById(
-        this.config.frameId + "-container"
-      );
+      const targetFrame = document.getElementById(this.config.frameId + "-container");
 
-      if (targetFrame) {
-        window.removeEventListener("message", this.#onMessage, false);
-        this.#isConnected = false;
+      window.removeEventListener("message", this.#onMessage, false);
+      this.#isConnected = false;
 
-        delete window.DocSpace.SDK.frames[this.config.frameId];
+      delete window.DocSpace.SDK.frames[this.config.frameId];
 
-        targetFrame.parentNode &&
-          targetFrame.parentNode.replaceChild(target, targetFrame);
-      }
+      targetFrame?.parentNode?.replaceChild(target, targetFrame);
 
       this.config = {};
     }

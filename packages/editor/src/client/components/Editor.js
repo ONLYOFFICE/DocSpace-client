@@ -23,7 +23,11 @@ import {
 import { EditorWrapper } from "../components/StyledEditor";
 import { useTranslation } from "react-i18next";
 import withDialogs from "../helpers/withDialogs";
-import { assign, frameCallEvent, frameCallCommand } from "@docspace/shared/utils/common";
+import {
+  assign,
+  frameCallEvent,
+  frameCallCommand,
+} from "@docspace/shared/utils/common";
 import { getEditorTheme } from "@docspace/shared/utils";
 import { toastr } from "@docspace/shared/components/toast";
 import { DocumentEditor } from "@onlyoffice/document-editor-react";
@@ -40,6 +44,7 @@ const onSDKInfo = (event) => {
 };
 
 const onSDKWarning = (event) => {
+  frameCallCommand("setIsLoaded");
   console.log(
     "ONLYOFFICE Document Editor reports a warning: code " +
       event.data.warningCode +
@@ -49,6 +54,7 @@ const onSDKWarning = (event) => {
 };
 
 const onSDKError = (event) => {
+  frameCallCommand("setIsLoaded");
   console.log(
     "ONLYOFFICE Document Editor reports an error: code " +
       event.data.errorCode +
@@ -272,10 +278,10 @@ function Editor({
       documentType === "word"
         ? "docx"
         : documentType === "slide"
-        ? "pptx"
-        : documentType === "cell"
-        ? "xlsx"
-        : "docxf";
+          ? "pptx"
+          : documentType === "cell"
+            ? "xlsx"
+            : "docxf";
 
     let fileName = t("Common:NewDocument");
 
@@ -565,13 +571,13 @@ function Editor({
     console.log("onDocumentReady", arguments, { docEditor });
     documentIsReady = true;
 
+    frameCallCommand("setIsLoaded");
+
     config?.errorMessage && docEditor?.showMessage(config.errorMessage);
 
     if (isSharingAccess) {
       loadUsersRightsList(docEditor);
     }
-
-    frameCallCommand("setIsLoaded");
 
     assign(window, ["ASC", "Files", "Editor", "docEditor"], docEditor); //Do not remove: it's for Back button on Mobile App
   };

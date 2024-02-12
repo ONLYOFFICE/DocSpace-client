@@ -18,6 +18,7 @@ const SubmitResetButtons = (props) => {
     hasErrors,
     hasChanges,
     isLoadingXml,
+    enableSso,
   } = props;
 
   return (
@@ -32,7 +33,9 @@ const SubmitResetButtons = (props) => {
         displaySettings={true}
         hasScroll={true}
         isSaving={isSubmitLoading}
-        saveButtonDisabled={hasErrors || !hasChanges || isLoadingXml}
+        saveButtonDisabled={
+          !enableSso || hasErrors || !hasChanges || isLoadingXml
+        }
         cancelEnable={!(isSubmitLoading || isLoadingXml)}
         additionalClassSaveButton="save-button"
         additionalClassCancelButton="restore-button"
@@ -53,6 +56,7 @@ export default inject(({ ssoStore }) => {
     hasErrors,
     hasChanges,
     isLoadingXml,
+    enableSso,
   } = ssoStore;
 
   return {
@@ -65,5 +69,6 @@ export default inject(({ ssoStore }) => {
     hasErrors,
     hasChanges,
     isLoadingXml,
+    enableSso,
   };
 })(observer(SubmitResetButtons));

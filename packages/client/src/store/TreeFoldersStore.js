@@ -215,6 +215,10 @@ class TreeFoldersStore {
     return this.recycleBinFolder ? this.recycleBinFolder.id : null;
   }
 
+  get isAccounts() {
+    return window.location.pathname.includes("accounts/filter");
+  }
+
   get isPersonalRoom() {
     return (
       this.myFolder &&

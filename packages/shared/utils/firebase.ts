@@ -12,26 +12,18 @@ import CampaignsEducationPngUrl from "PUBLIC_DIR/images/campaigns.education.png"
 import CampaignsEnterprisePngUrl from "PUBLIC_DIR/images/campaigns.enterprise.png";
 import CampaignsIntegrationPngUrl from "PUBLIC_DIR/images/campaigns.integration.png";
 
-export type TSettings = {
-  apiKey: string;
-  authDomain: string;
-  projectId: string;
-  storageBucket: string;
-  messagingSenderId: string;
-  appId: string;
-  databaseURL: string;
-};
+import { TFirebaseSettings } from "../api/settings/types";
 
 class FirebaseHelper {
   remoteConfig: firebase.remoteConfig.RemoteConfig | null = null;
 
-  firebaseConfig: TSettings | null = null;
+  firebaseConfig: TFirebaseSettings | null = null;
 
   firebaseStorage: firebase.storage.Storage | null = null;
 
   firebaseDB: firebase.database.Database | null = null;
 
-  constructor(settings: TSettings) {
+  constructor(settings: TFirebaseSettings) {
     this.firebaseConfig = settings;
 
     if (!this.isEnabled) return;

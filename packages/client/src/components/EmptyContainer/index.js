@@ -26,6 +26,8 @@ const EmptyContainer = ({
   isRoomNotFoundOrMoved,
   isGracePeriod,
   setInviteUsersWarningDialogVisible,
+  isRoot,
+  isPublicRoom,
 }) => {
   //const location = useLocation();
 
@@ -64,7 +66,8 @@ const EmptyContainer = ({
     );
   }
 
-  const isRootEmptyPage = parentId === 0;
+  const isRootEmptyPage = parentId === 0 || (isPublicRoom && isRoot);
+
   //isLoading && location?.state ? location.state?.isRoot : parentId === 0;
 
   return isFiltered ? (
@@ -88,27 +91,32 @@ const EmptyContainer = ({
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     filesStore,
     dialogsStore,
 
     selectedFolderStore,
     clientLoadingStore,
+    currentTariffStatusStore,
+    publicRoomStore,
   }) => {
     const { isErrorRoomNotAvailable, isFiltered } = filesStore;
     const { isLoading } = clientLoadingStore;
 
-    const { isGracePeriod } = auth.currentTariffStatusStore;
+    const { isGracePeriod } = currentTariffStatusStore;
 
     const { setInviteUsersWarningDialogVisible } = dialogsStore;
+    const { isPublicRoom } = publicRoomStore;
 
     const isRoomNotFoundOrMoved =
       isFiltered === null &&
       selectedFolderStore.parentId === null &&
       isErrorRoomNotAvailable;
 
+    const isRoot = selectedFolderStore.pathParts?.length === 1;
+
     return {
-      theme: auth.settingsStore.theme,
+      theme: settingsStore.theme,
       isFiltered,
       isLoading,
 
@@ -117,6 +125,8 @@ export default inject(
       isGracePeriod,
       setInviteUsersWarningDialogVisible,
       type: selectedFolderStore.type,
+      isRoot,
+      isPublicRoom,
     };
   }
 )(observer(EmptyContainer));

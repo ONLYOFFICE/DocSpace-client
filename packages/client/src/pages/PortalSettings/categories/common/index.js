@@ -23,6 +23,7 @@ const SubmenuCommon = (props) => {
     isLoadedSubmenu,
     getWhiteLabelLogoUrls,
     currentDeviceType,
+    isMobileView,
   } = props;
   const navigate = useNavigate();
 
@@ -41,7 +42,10 @@ const SubmenuCommon = (props) => {
   }, [tReady, isLoadedSubmenu]);
 
   const load = async () => {
-    await loadBaseInfo();
+    const currentTab = getCurrentTab();
+    await loadBaseInfo(
+      !isMobileView ? (currentTab === 0 ? "general" : "branding") : ""
+    );
   };
 
   const data = [
@@ -98,7 +102,7 @@ const SubmenuCommon = (props) => {
   );
 };
 
-export default inject(({ auth, common }) => {
+export default inject(({ settingsStore, common }) => {
   const {
     isLoaded,
     setIsLoadedSubmenu,
@@ -107,17 +111,18 @@ export default inject(({ auth, common }) => {
     getWhiteLabelLogoUrls,
   } = common;
 
-  const currentDeviceType = auth.settingsStore.currentDeviceType;
+  const currentDeviceType = settingsStore.currentDeviceType;
 
   const isMobileView = currentDeviceType === DeviceType.mobile;
   return {
-    loadBaseInfo: async () => {
-      await initSettings(!isMobileView ? "general" : "");
+    loadBaseInfo: async (page) => {
+      await initSettings(page);
     },
     isLoaded,
     setIsLoadedSubmenu,
     isLoadedSubmenu,
     getWhiteLabelLogoUrls,
     currentDeviceType,
+    isMobileView,
   };
 })(withLoading(withTranslation("Settings")(observer(SubmenuCommon))));

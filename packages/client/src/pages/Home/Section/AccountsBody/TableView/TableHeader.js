@@ -154,30 +154,39 @@ class PeopleTableHeader extends React.Component {
 }
 
 export default inject(
-  ({ auth, peopleStore, clientLoadingStore, tableStore }) => {
+  ({
+    settingsStore,
+    peopleStore,
+    infoPanelStore,
+    clientLoadingStore,
+    userStore,
+    tableStore
+  }) => {
     const { filterStore } = peopleStore;
 
     const { filter } = filterStore;
 
-    const { isVisible: infoPanelVisible } = auth.infoPanelStore;
-    const { withPaging } = auth.settingsStore;
+    const { isVisible: infoPanelVisible } = infoPanelStore;
+    const { withPaging } = settingsStore;
+    
     const {
       getColumns,
       setColumnEnable,
       typeAccountsColumnIsEnabled,
       emailAccountsColumnIsEnabled,
     } = tableStore;
+
     return {
       filter,
-
       setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
-      userId: auth.userStore.user?.id,
+      userId: userStore.user?.id,
       infoPanelVisible,
       withPaging,
       getColumns,
       setColumnEnable,
       typeAccountsColumnIsEnabled,
       emailAccountsColumnIsEnabled,
+
     };
   }
 )(

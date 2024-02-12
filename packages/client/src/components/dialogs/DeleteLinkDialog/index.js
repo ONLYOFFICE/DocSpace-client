@@ -82,7 +82,7 @@ const DeleteLinkDialogComponent = (props) => {
         <div className="modal-dialog-content-body">
           <Text noSelect>
             {link.sharedTo.primary && isPublicRoomType
-              ? t("Files:DeleteGeneralLink")
+              ? t("Files:DeleteSharedLink")
               : t("Files:DeleteLinkNote")}
           </Text>
         </div>
@@ -120,23 +120,25 @@ const DeleteLinkDialog = withTranslation(["Common", "Files"])(
   DeleteLinkDialogComponent
 );
 
-export default inject(({ auth, dialogsStore, publicRoomStore, filesStore }) => {
-  const { selectionParentRoom } = auth.infoPanelStore;
-  const {
-    deleteLinkDialogVisible: visible,
-    setDeleteLinkDialogVisible: setIsVisible,
-    linkParams,
-  } = dialogsStore;
-  const { editExternalLink, deleteExternalLink } = publicRoomStore;
+export default inject(
+  ({ dialogsStore, publicRoomStore, filesStore, infoPanelStore }) => {
+    const { infoPanelSelection } = infoPanelStore;
+    const {
+      deleteLinkDialogVisible: visible,
+      setDeleteLinkDialogVisible: setIsVisible,
+      linkParams,
+    } = dialogsStore;
+    const { editExternalLink, deleteExternalLink } = publicRoomStore;
 
-  return {
-    visible,
-    setIsVisible,
-    roomId: selectionParentRoom.id,
-    link: linkParams.link,
-    editExternalLink,
-    deleteExternalLink,
-    isPublicRoomType: selectionParentRoom.roomType === RoomsType.PublicRoom,
-    setRoomShared: filesStore.setRoomShared,
-  };
-})(observer(DeleteLinkDialog));
+    return {
+      visible,
+      setIsVisible,
+      roomId: infoPanelSelection.id,
+      link: linkParams.link,
+      editExternalLink,
+      deleteExternalLink,
+      isPublicRoomType: infoPanelSelection.roomType === RoomsType.PublicRoom,
+      setRoomShared: filesStore.setRoomShared,
+    };
+  }
+)(observer(DeleteLinkDialog));

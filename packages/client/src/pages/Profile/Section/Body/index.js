@@ -92,13 +92,13 @@ const SectionBodyContent = (props) => {
   );
 };
 
-export default inject(({ auth, peopleStore, clientLoadingStore }) => {
+export default inject(({ settingsStore, peopleStore, clientLoadingStore }) => {
   const { showProfileLoader } = clientLoadingStore;
   const { targetUser: profile } = peopleStore.targetUserStore;
 
   return {
     profile,
-    currentDeviceType: auth.settingsStore.currentDeviceType,
+    currentDeviceType: settingsStore.currentDeviceType,
     showProfileLoader,
   };
 })(

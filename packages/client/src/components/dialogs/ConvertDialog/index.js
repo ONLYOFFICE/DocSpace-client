@@ -149,7 +149,7 @@ export default inject(
     uploadDataStore,
     treeFoldersStore,
     dialogsStore,
-    settingsStore,
+    filesSettingsStore,
     selectedFolderStore,
   }) => {
     const {
@@ -161,7 +161,7 @@ export default inject(
     const { convertUploadedFiles, convertFile, setIsConvertSingleFile } =
       uploadDataStore;
     const { storeOriginalFiles, setStoreOriginal, hideConfirmConvert } =
-      settingsStore;
+      filesSettingsStore;
     const { id: folderId } = selectedFolderStore;
     const {
       convertDialogVisible: visible,

@@ -14,13 +14,13 @@ export interface CalendarProps {
   /** Changes the selected date state */
   setSelectedDate?: (formattedDate: moment.Moment) => void;
   /** Specifies the minimum selectable date */
-  minDate: moment.Moment | Date;
+  minDate?: moment.Moment | Date;
   /** Specifies the maximum selectable date */
-  maxDate: moment.Moment | Date;
+  maxDate?: moment.Moment | Date;
   /** Accepts css style */
   style?: React.CSSProperties;
   /** First shown date */
-  initialDate?: moment.Moment;
+  initialDate?: moment.Moment | Date;
   isMobile?: boolean;
   forwardedRef?: React.RefObject<HTMLDivElement>;
 }

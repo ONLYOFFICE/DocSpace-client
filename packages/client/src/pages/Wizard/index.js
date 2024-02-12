@@ -3,7 +3,7 @@ import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { inject, observer } from "mobx-react";
-
+import api from "@docspace/shared/api";
 import { Text } from "@docspace/shared/components/text";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { EmailInput } from "@docspace/shared/components/email-input";
@@ -70,7 +70,7 @@ const Wizard = (props) => {
     cultureNames,
     culture,
     hashSettings,
-    setPortalOwner,
+
     setWizardComplete,
     isLicenseRequired,
     setLicense,
@@ -133,7 +133,7 @@ const Wizard = (props) => {
       ])
       .then(() => {
         const select = cultureNames.filter(
-          (lang) => lang.key === convertedCulture
+          (lang) => lang.key === convertedCulture,
         );
 
         if (select.length === 0) {
@@ -255,13 +255,13 @@ const Wizard = (props) => {
     const hash = createPasswordHash(password, hashSettings);
 
     try {
-      await setPortalOwner(
+      await api.settings.setPortalOwner(
         emailTrim,
         hash,
         selectedLanguage.key,
         selectedTimezone.key,
         wizardToken,
-        analytics
+        analytics,
       );
 
       setCookie(LANGUAGE, selectedLanguage.key, {
@@ -500,7 +500,7 @@ const Wizard = (props) => {
   );
 };
 
-export default inject(({ auth, wizard }) => {
+export default inject(({ authStore, settingsStore, wizardStore }) => {
   const {
     passwordSettings,
     wizardToken,
@@ -511,9 +511,9 @@ export default inject(({ auth, wizard }) => {
     getPortalTimezones,
     getPortalPasswordSettings,
     theme,
-  } = auth.settingsStore;
+  } = settingsStore;
 
-  const { language } = auth;
+  const { language } = authStore;
   const {
     isWizardLoaded,
     machineName,
@@ -522,14 +522,14 @@ export default inject(({ auth, wizard }) => {
     setIsWizardLoaded,
     getMachineName,
     getIsRequiredLicense,
-    setPortalOwner,
+
     setLicense,
     resetLicenseUploaded,
-  } = wizard;
+  } = wizardStore;
 
   return {
     theme,
-    isLoaded: auth.isLoaded,
+    isLoaded: authStore.isLoaded,
     culture: language,
     wizardToken,
     passwordSettings,
@@ -546,7 +546,7 @@ export default inject(({ auth, wizard }) => {
     setIsWizardLoaded,
     getMachineName,
     getIsRequiredLicense,
-    setPortalOwner,
+
     setLicense,
     resetLicenseUploaded,
   };

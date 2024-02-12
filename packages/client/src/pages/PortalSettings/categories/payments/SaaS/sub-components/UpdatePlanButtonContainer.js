@@ -63,7 +63,7 @@ const UpdatePlanButtonContainer = ({
   const resetIntervalSuccess = () => {
     intervalId &&
       toastr.success(
-        t("BusinessUpdated", { planName: currentTariffPlanTitle })
+        t("BusinessUpdated", { planName: currentTariffPlanTitle }),
       );
     clearInterval(intervalId);
     intervalId = null;
@@ -186,42 +186,43 @@ const UpdatePlanButtonContainer = ({
   );
 };
 
-export default inject(({ auth, payments }) => {
-  const { currentTariffStatusStore, currentQuotaStore } = auth;
-  const {
-    maxCountManagersByQuota,
-    setPortalQuotaValue,
-    currentTariffPlanTitle,
-  } = currentQuotaStore;
+export default inject(
+  ({ currentQuotaStore, paymentStore, currentTariffStatusStore }) => {
+    const {
+      maxCountManagersByQuota,
+      setPortalQuotaValue,
+      currentTariffPlanTitle,
+    } = currentQuotaStore;
 
-  const { isNotPaidPeriod, isGracePeriod } = currentTariffStatusStore;
+    const { isNotPaidPeriod, isGracePeriod } = currentTariffStatusStore;
 
-  const {
-    setIsLoading,
-    paymentLink,
-    isNeedRequest,
-    isLoading,
-    managersCount,
-    isLessCountThanAcceptable,
-    accountLink,
-    isAlreadyPaid,
-    canPayTariff,
-  } = payments;
+    const {
+      setIsLoading,
+      paymentLink,
+      isNeedRequest,
+      isLoading,
+      managersCount,
+      isLessCountThanAcceptable,
+      accountLink,
+      isAlreadyPaid,
+      canPayTariff,
+    } = paymentStore;
 
-  return {
-    canPayTariff,
-    isAlreadyPaid,
-    setIsLoading,
-    paymentLink,
-    isNeedRequest,
-    isLoading,
-    managersCount,
-    maxCountManagersByQuota,
-    isLessCountThanAcceptable,
-    isNotPaidPeriod,
-    isGracePeriod,
-    accountLink,
-    setPortalQuotaValue,
-    currentTariffPlanTitle,
-  };
-})(observer(UpdatePlanButtonContainer));
+    return {
+      canPayTariff,
+      isAlreadyPaid,
+      setIsLoading,
+      paymentLink,
+      isNeedRequest,
+      isLoading,
+      managersCount,
+      maxCountManagersByQuota,
+      isLessCountThanAcceptable,
+      isNotPaidPeriod,
+      isGracePeriod,
+      accountLink,
+      setPortalQuotaValue,
+      currentTariffPlanTitle,
+    };
+  },
+)(observer(UpdatePlanButtonContainer));

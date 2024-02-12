@@ -111,13 +111,13 @@ const DeleteThirdPartyDialog = (props) => {
 export default inject(
   ({
     filesStore,
-    settingsStore,
+    filesSettingsStore,
     dialogsStore,
     selectedFolderStore,
     backup,
   }) => {
     const { providers, setThirdPartyProviders, deleteThirdParty } =
-      settingsStore.thirdPartyStore;
+      filesSettingsStore.thirdPartyStore;
     const { setIsLoading } = filesStore;
     const { selectedThirdPartyAccount: backupConnectionItem } = backup;
     const {

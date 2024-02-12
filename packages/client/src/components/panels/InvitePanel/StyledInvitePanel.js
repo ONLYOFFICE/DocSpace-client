@@ -105,6 +105,12 @@ const StyledBlock = styled.div`
 
 StyledBlock.defaultProps = { theme: Base };
 
+const StyledInviteUserBody = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+`;
+
 const StyledHeading = styled(Heading)`
   font-weight: 700;
   font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
@@ -285,6 +291,28 @@ const StyledDropDown = styled(DropDown)`
     .list-item_content {
       text-overflow: ellipsis;
       overflow: hidden;
+    }
+
+    .email-list_avatar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow: hidden;
+    }
+
+    .email-list_add-button {
+      display: flex;
+      margin-left: auto;
+      align-items: center;
+      gap: 4px;
+
+      p {
+        color: #4781d1;
+      }
+
+      svg path {
+        fill: #4781d1;
+      }
     }
   }
 `;
@@ -512,4 +540,5 @@ export {
   StyledInviteLanguage,
   StyledControlContainer,
   StyledCrossIconMobile,
+  StyledInviteUserBody,
 };

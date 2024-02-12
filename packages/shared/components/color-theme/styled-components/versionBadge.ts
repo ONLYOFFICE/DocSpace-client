@@ -26,7 +26,7 @@ const getDefaultStyles = ({
     }
 
     .version_badge-text {
-      color: ${$isVersion && $currentColorScheme.text.accent};
+      color: ${$isVersion && $currentColorScheme.text?.accent};
     }
   `;
 

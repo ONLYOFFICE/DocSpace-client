@@ -35,28 +35,26 @@ export default function withLoader(WrappedComponent) {
           type === "EmpInvite") &&
         !passwordSettings
       ) {
-        axios
-          .all([getSettings(), getPortalPasswordSettings(confirmHeader)])
-          .catch((error) => {
-            let errorMessage = "";
-            if (typeof error === "object") {
-              errorMessage =
-                error?.response?.data?.error?.message ||
-                error?.statusText ||
-                error?.message ||
-                "";
-            } else {
-              errorMessage = error;
-            }
+        getPortalPasswordSettings(confirmHeader).catch((error) => {
+          let errorMessage = "";
+          if (typeof error === "object") {
+            errorMessage =
+              error?.response?.data?.error?.message ||
+              error?.statusText ||
+              error?.message ||
+              "";
+          } else {
+            errorMessage = error;
+          }
 
-            console.error(errorMessage);
-            navigate(
-              combineUrl(
-                window.DocSpaceConfig?.proxy?.url,
-                `/login/error?message=${errorMessage}`
-              )
-            );
-          });
+          console.error(errorMessage);
+          navigate(
+            combineUrl(
+              window.DocSpaceConfig?.proxy?.url,
+              `/login/error?message=${errorMessage}`,
+            ),
+          );
+        });
       }
     }, [passwordSettings]);
 
@@ -77,8 +75,8 @@ export default function withLoader(WrappedComponent) {
           navigate(
             combineUrl(
               window.DocSpaceConfig?.proxy?.url,
-              `/login/error?message=${errorMessage}`
-            )
+              `/login/error?message=${errorMessage}`,
+            ),
           );
         });
       }
@@ -124,11 +122,11 @@ export default function withLoader(WrappedComponent) {
     );
   };
 
-  return inject(({ auth, confirm }) => {
+  return inject(({ authStore, settingsStore, confirm }) => {
     const { isLoaded, isLoading } = confirm;
     const { passwordSettings, getSettings, getPortalPasswordSettings } =
-      auth.settingsStore;
-    const { getAuthProviders, getCapabilities } = auth;
+      settingsStore;
+    const { getAuthProviders, getCapabilities } = authStore;
 
     return {
       isLoaded,

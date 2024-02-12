@@ -92,8 +92,8 @@ const RemovePortal = (props) => {
   );
 };
 
-export default inject(({ auth }) => ({
-  greetingTitle: auth.settingsStore.greetingSettings,
-  theme: auth.settingsStore.theme,
-  companyInfoSettingsData: auth.settingsStore.companyInfoSettingsData,
+export default inject(({ settingsStore }) => ({
+  greetingTitle: settingsStore.greetingSettings,
+  theme: settingsStore.theme,
+  companyInfoSettingsData: settingsStore.companyInfoSettingsData,
 }))(withTranslation(["Confirm", "Common"])(withLoader(observer(RemovePortal))));

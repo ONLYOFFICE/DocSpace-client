@@ -6,7 +6,7 @@ import { Text } from "@docspace/shared/components/text";
 
 import { parseAddresses } from "@docspace/shared/utils";
 import { getAccessOptions } from "../utils";
-import { getUserRole } from "@docspace/shared/utils/common";
+import { getUserRole, getUserTypeLabel } from "@docspace/shared/utils/common";
 
 import {
   StyledEditInput,
@@ -15,8 +15,9 @@ import {
   StyledCrossIcon,
   StyledHelpButton,
   StyledDeleteIcon,
+  StyledInviteUserBody,
 } from "../StyledInvitePanel";
-import { filterUserRoleOptions } from "SRC_DIR/helpers/utils";
+import { filterUserRoleOptions } from "SRC_DIR/helpers";
 import AccessSelector from "./AccessSelector";
 
 const Item = ({
@@ -31,24 +32,36 @@ const Item = ({
   inputsRef,
   setIsOpenItemAccess,
   isMobileView,
+  standalone,
 }) => {
   const { avatar, displayName, email, id, errors, access } = item;
 
   const name = !!avatar ? (displayName !== "" ? displayName : email) : email;
   const source = !!avatar ? avatar : AtReactSvgUrl;
-  const role = getUserRole(item);
 
   const [edit, setEdit] = useState(false);
   const [inputValue, setInputValue] = useState(name);
   const [parseErrors, setParseErrors] = useState(errors);
 
-  const accesses = getAccessOptions(t, roomType, true, true, isOwner);
+  const accesses = getAccessOptions(
+    t,
+    roomType,
+    true,
+    true,
+    isOwner,
+    standalone,
+  );
 
   const filteredAccesses = filterUserRoleOptions(accesses, item, true);
 
   const defaultAccess = filteredAccesses.find(
-    (option) => option.access === +access
+    (option) => option.access === +access,
   );
+
+  const role = getUserRole(item);
+  const typeLabel = item?.isEmailInvite
+    ? getUserTypeLabel(defaultAccess.type, t)
+    : getUserTypeLabel(role, t);
 
   const errorsInList = () => {
     const hasErrors = inviteItems.some((item) => !!item.errors?.length);
@@ -119,9 +132,22 @@ const Item = ({
 
   const displayBody = (
     <>
-      <Text {...textProps} truncate noSelect>
-        {inputValue}
-      </Text>
+      <StyledInviteUserBody>
+        <Text {...textProps} truncate noSelect>
+          {inputValue}
+        </Text>
+        <Text
+          className="label"
+          fontWeight={400}
+          fontSize="12px"
+          noSelect
+          color="#A3A9AE"
+          truncate
+        >
+          {item.userName ? `${typeLabel} | ${email}` : `${typeLabel}`}
+        </Text>
+      </StyledInviteUserBody>
+
       {hasError ? (
         <>
           <StyledHelpButton
@@ -152,6 +178,7 @@ const Item = ({
           setIsOpenItemAccess={setIsOpenItemAccess}
           isMobileView={isMobileView}
           noBorder
+          standalone={standalone}
         />
       )}
     </>

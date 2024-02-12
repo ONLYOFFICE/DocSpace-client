@@ -11,7 +11,7 @@ import { Button } from "@docspace/shared/components/button";
 import { Badge } from "@docspace/shared/components/badge";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { toastr } from "@docspace/shared/components/toast";
-
+import { isManagement } from "@docspace/shared/utils/common";
 import { size } from "@docspace/shared/utils";
 
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
@@ -43,7 +43,7 @@ const WhiteLabel = (props) => {
     setLogoUrlsWhiteLabel,
     defaultLogoTextWhiteLabel,
     enableRestoreButton,
-    isManagement,
+
     currentDeviceType,
     resetIsInit,
   } = props;
@@ -76,7 +76,7 @@ const WhiteLabel = (props) => {
   }, []);
 
   const checkWidth = () => {
-    const url = isManagement
+    const url = isManagement()
       ? "/branding"
       : "/portal-settings/customization/branding";
 
@@ -148,7 +148,7 @@ const WhiteLabel = (props) => {
 
   const onRestoreDefault = async () => {
     try {
-      await restoreWhiteLabelSettings(true);
+      await restoreWhiteLabelSettings();
       await onResetCompanyName();
       toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
     } catch (error) {
@@ -509,7 +509,7 @@ const WhiteLabel = (props) => {
   );
 };
 
-export default inject(({ auth, common }) => {
+export default inject(({ settingsStore, common, currentQuotaStore }) => {
   const {
     setLogoText,
     whiteLabelLogoText,
@@ -525,13 +525,12 @@ export default inject(({ auth, common }) => {
   } = common;
 
   const { whiteLabelLogoUrls: defaultWhiteLabelLogoUrls, currentDeviceType } =
-    auth.settingsStore;
-  const { isBrandingAndCustomizationAvailable } = auth.currentQuotaStore;
-  const { isManagement } = auth;
+    settingsStore;
+  const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
 
   return {
     setLogoText,
-    theme: auth.settingsStore.theme,
+    theme: settingsStore.theme,
     logoText: whiteLabelLogoText,
     getWhiteLabelLogoText,
     saveWhiteLabelSettings,
@@ -543,7 +542,7 @@ export default inject(({ auth, common }) => {
     setLogoUrlsWhiteLabel,
     defaultLogoTextWhiteLabel,
     enableRestoreButton,
-    isManagement,
+
     currentDeviceType,
     resetIsInit,
   };

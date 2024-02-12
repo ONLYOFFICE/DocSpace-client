@@ -138,20 +138,22 @@ class SectionBodyContent extends React.Component {
   }
 }
 
-export default inject(({ auth, versionHistoryStore, clientLoadingStore }) => {
-  const { setFirstLoad, isLoading, setIsSectionBodyLoading } =
-    clientLoadingStore;
-  const { versions, fetchFileVersions, fileId, fileSecurity } =
-    versionHistoryStore;
+export default inject(
+  ({ settingsStore, versionHistoryStore, clientLoadingStore }) => {
+    const { setFirstLoad, isLoading, setIsSectionBodyLoading } =
+      clientLoadingStore;
+    const { versions, fetchFileVersions, fileId, fileSecurity } =
+      versionHistoryStore;
 
-  return {
-    culture: auth.settingsStore.culture,
-    isLoading,
-    versions,
-    fileId,
-    fileSecurity,
-    setFirstLoad,
-    setIsLoading: setIsSectionBodyLoading,
-    fetchFileVersions,
-  };
-})(observer(SectionBodyContent));
+    return {
+      culture: settingsStore.culture,
+      isLoading,
+      versions,
+      fileId,
+      fileSecurity,
+      setFirstLoad,
+      setIsLoading: setIsSectionBodyLoading,
+      fetchFileVersions,
+    };
+  }
+)(observer(SectionBodyContent));

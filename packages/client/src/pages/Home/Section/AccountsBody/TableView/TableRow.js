@@ -14,20 +14,24 @@ import withContent from "SRC_DIR/HOCs/withPeopleContent";
 
 import Badges from "../Badges";
 import { Base } from "@docspace/shared/themes";
+import { getUserTypeLabel } from "@docspace/shared/utils/common";
 
 const StyledWrapper = styled.div`
   display: contents;
 `;
 
 const StyledPeopleRow = styled(TableRow)`
+  .table-container_cell {
+    border-top: ${(props) =>
+      `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+    margin-top: -1px;
+  }
+
   :hover {
     .table-container_cell {
       cursor: pointer;
       background: ${(props) =>
         `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
-      border-top: ${(props) =>
-        `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
-      margin-top: -1px;
     }
 
     .table-container_user-name-cell {
@@ -56,10 +60,18 @@ const StyledPeopleRow = styled(TableRow)`
     }
   }
 
-  .table-container_cell {
-    height: 48px;
-    max-height: 48px;
+  .table-container_row-context-menu-wrapper {
+    height: 49px !important;
+    max-height: none !important;
+    box-sizing: border-box;
+  }
 
+  .table-container_cell:not(.table-container_row-checkbox-wrapper) {
+    height: auto;
+    max-height: 48;
+  }
+
+  .table-container_cell {
     background: ${(props) =>
       (props.checked || props.isActive) &&
       `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
@@ -299,7 +311,7 @@ const PeopleTableRow = (props) => {
         setIsLoading(false);
       }
     },
-    [item, changeUserType]
+    [item, changeUserType],
   );
 
   // const getRoomsOptions = React.useCallback(() => {
@@ -319,22 +331,7 @@ const PeopleTableRow = (props) => {
   //   return <>{options.map((option) => option)}</>;
   // }, []);
 
-  const getUserTypeLabel = React.useCallback((role) => {
-    switch (role) {
-      case "owner":
-        return t("Common:Owner");
-      case "admin":
-        return t("Common:DocSpaceAdmin");
-      case "manager":
-        return t("Common:RoomAdmin");
-      case "collaborator":
-        return t("Common:PowerUser");
-      case "user":
-        return t("Common:User");
-    }
-  }, []);
-
-  const typeLabel = getUserTypeLabel(role);
+  const typeLabel = React.useCallback(() => getUserTypeLabel(role, t), [])();
 
   const isChecked = checkedProps.checked;
 
@@ -531,5 +528,5 @@ const PeopleTableRow = (props) => {
 };
 
 export default withTranslation(["People", "Common", "Settings"])(
-  withContent(PeopleTableRow)
+  withContent(PeopleTableRow),
 );

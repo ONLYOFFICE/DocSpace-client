@@ -18,18 +18,18 @@ import { Scrollbar } from "../scrollbar";
 import DragAndDrop from "../drag-and-drop/DragAndDrop";
 import { SectionContainerProps } from "./Section.types";
 
-const StyledScrollbar = styled(Scrollbar) <{ $isScrollLocked?: boolean }>`
+const StyledScrollbar = styled(Scrollbar)<{ $isScrollLocked?: boolean }>`
   ${({ $isScrollLocked }) =>
     $isScrollLocked &&
     css`
       & .scroll-wrapper > .scroller {
         overflow: hidden !important;
         ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
+          props.theme.interfaceDirection === "rtl"
+            ? css`
                 margin-left: -1px !important;
               `
-          : css`
+            : css`
                 margin-right: -1px !important;
               `}
       }
@@ -37,12 +37,12 @@ const StyledScrollbar = styled(Scrollbar) <{ $isScrollLocked?: boolean }>`
       css`
         & .scroll-wrapper > .scroller {
           ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
+            props.theme.interfaceDirection === "rtl"
+              ? css`
                   padding-left: 20px !important;
                   margin-left: -21px !important;
                 `
-            : css`
+              : css`
                   padding-right: 20px !important;
                   margin-right: -21px !important;
                 `}
@@ -93,11 +93,11 @@ const StyledInfoPanel = styled.div`
     position: absolute;
     border: none;
     ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
+      props.theme.interfaceDirection === "rtl"
+        ? css`
             left: 0;
           `
-      : css`
+        : css`
             right: 0;
           `}
     width: 480px;
@@ -130,11 +130,11 @@ const StyledControlContainer = styled.div`
 
     top: 18px;
     ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
+      props.theme.interfaceDirection === "rtl"
+        ? css`
             right: -27px;
           `
-      : css`
+        : css`
             left: -27px;
           `}
   }
@@ -144,11 +144,11 @@ const StyledControlContainer = styled.div`
 
     top: -27px;
     ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
+      props.theme.interfaceDirection === "rtl"
+        ? css`
             left: 10px;
           `
-      : css`
+        : css`
             right: 10px;
           `}
     left: unset;
@@ -185,22 +185,22 @@ const settingsStudioStyles = css<{ settingsStudio?: boolean }>`
 
       @media ${tablet} {
         ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
+          props.theme.interfaceDirection === "rtl"
+            ? css`
                 padding: 0 24px 16px 0;
               `
-          : css`
+            : css`
                 padding: 0 0 16px 24px;
               `}
       }
 
       @media ${mobile} {
         ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
+          props.theme.interfaceDirection === "rtl"
+            ? css`
                 padding: 0 24px 16px 0;
               `
-          : css`
+            : css`
                 padding: 0 0 16px 24px;
               `}
       }
@@ -222,22 +222,22 @@ const paddingStyles = css`
 
   @media ${tablet} {
     ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
+      props.theme.interfaceDirection === "rtl"
+        ? css`
             padding: 0px 24px 16px 0;
           `
-      : css`
+        : css`
             padding: 0px 0 16px 24px;
           `}
   }
 
   @media ${mobile} {
     ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
+      props.theme.interfaceDirection === "rtl"
+        ? css`
             padding: 0px 24px 16px 8px;
           `
-      : css`
+        : css`
             padding: 0px 8px 16px 24px;
           `}
   }
@@ -262,8 +262,8 @@ const commonStyles = css<{
   .section-wrapper {
     height: 100%;
     ${(props) =>
-    !props.withScroll &&
-    css`
+      !props.withScroll &&
+      css`
         display: flex;
         flex-direction: column;
         height: 100%;
@@ -277,20 +277,20 @@ const commonStyles = css<{
     flex: 1 0 auto;
     outline: none;
     ${(props) =>
-    props.viewAs === "tile" &&
-    css`
+      props.viewAs === "tile" &&
+      css`
         ${props.theme.interfaceDirection === "rtl"
-        ? css`
+          ? css`
               padding-right: 20px;
             `
-        : css`
+          : css`
               padding-left: 20px;
             `}
       `}
 
     ${(props) =>
-    (props.viewAs === "settings" || props.viewAs === "profile") &&
-    css`
+      (props.viewAs === "settings" || props.viewAs === "profile") &&
+      css`
         padding-top: 0;
 
         @media ${tablet} {
@@ -300,21 +300,21 @@ const commonStyles = css<{
 
     @media ${`${mobileMore} and ${tablet}`} {
       ${({ isFormGallery, theme }) =>
-    isFormGallery &&
-    css`
+        isFormGallery &&
+        css`
           padding: ${theme.interfaceDirection === "rtl"
-        ? "0 16px 20px 0"
-        : "0 0    20px 16px"} !important;
+            ? "0 16px 20px 0"
+            : "0 0    20px 16px"} !important;
         `}
     }
 
     @media ${mobile} {
       ${({ isFormGallery, theme }) =>
-    isFormGallery &&
-    css`
+        isFormGallery &&
+        css`
           padding: ${theme.interfaceDirection === "rtl"
-        ? "0px 16px 16px 16px"
-        : "0px 16px 16px 16px"} !important;
+            ? "0px 16px 16px 16px"
+            : "0px 16px 16px 16px"} !important;
         `}
     }
 
@@ -344,8 +344,8 @@ const commonStyles = css<{
 
       @media ${desktop} {
         ${(props) =>
-    props.viewAs === "row" &&
-    css`
+          props.viewAs === "row" &&
+          css`
             margin-top: -15px;
           `}
       }
@@ -372,10 +372,10 @@ const StyledSectionBody = styled.div`
 
       @media ${tablet} {
         ${props.theme.interfaceDirection === "rtl"
-        ? css`
+          ? css`
               margin-right: -24px;
             `
-        : css`
+          : css`
               margin-left: -24px;
             `}
       }
@@ -386,19 +386,19 @@ const StyledSectionBody = styled.div`
     css`
       @media ${tablet} {
         margin: ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? "0 -16px 0 0 "
-          : "0 0 0 -16px"};
+          props.theme.interfaceDirection === "rtl"
+            ? "0 -16px 0 0 "
+            : "0 0 0 -16px"};
 
         padding: ${(props) =>
-        props.theme.interfaceDirection === "rtl" ? "0 0 0 0 " : "0 0 0 0"};
+          props.theme.interfaceDirection === "rtl" ? "0 0 0 0 " : "0 0 0 0"};
       }
     `}
 
   .additional-scroll-height {
     ${({ withScroll }) =>
-    !withScroll &&
-    css`
+      !withScroll &&
+      css`
         height: 64px;
       `}
   }
@@ -427,10 +427,10 @@ const StyledDropZoneBody = styled(DragAndDrop)`
 
       @media ${tablet} {
         ${props.theme.interfaceDirection === "rtl"
-        ? css`
+          ? css`
               margin-right: -24px;
             `
-        : css`
+          : css`
               margin-left: -24px;
             `}
       }
@@ -452,16 +452,16 @@ const tabletProps = css<{ viewAs?: TViewAs }>`
     position: sticky;
     top: 0;
     background: ${(props) =>
-    props.viewAs === "profile" || props.viewAs === "settings"
-      ? props.theme.section.header.backgroundColor
-      : props.theme.section.header.background};
+      props.viewAs === "profile" || props.viewAs === "settings"
+        ? props.theme.section.header.backgroundColor
+        : props.theme.section.header.background};
 
     ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
+      props.theme.interfaceDirection === "rtl"
+        ? css`
             padding-left: 0;
           `
-      : css`
+        : css`
             padding-right: 0;
           `}
     z-index: 201;
@@ -498,11 +498,11 @@ const StyledSectionContainer = styled.section<SectionContainerProps>`
     width: 100%;
     max-width: 100vw !important;
     ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
+      props.theme.interfaceDirection === "rtl"
+        ? css`
             padding: 0 16px 0 0;
           `
-      : css`
+        : css`
             padding: 0 0 0 16px;
           `}
     ${tabletProps};
@@ -522,12 +522,12 @@ const StyledSectionContainer = styled.section<SectionContainerProps>`
     margin-bottom: 24px;
 
     ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
+      props.theme.interfaceDirection === "rtl"
+        ? css`
             margin-left: 24px;
             left: 0;
           `
-      : css`
+        : css`
             margin-right: 24px;
             right: 0;
           `}
@@ -544,11 +544,11 @@ const StyledSectionContainer = styled.section<SectionContainerProps>`
       .layout-progress-bar,
       .layout-progress-second-bar {
         ${(props) =>
-    props.showTwoProgress &&
-    css`
+          props.showTwoProgress &&
+          css`
             ${props.theme.interfaceDirection === "rtl"
-        ? `margin-right:calc(${closeIconSize} + ${sizeBetweenIcons}); `
-        : `margin-left:calc(${closeIconSize} + ${sizeBetweenIcons})`}
+              ? `margin-right:calc(${closeIconSize} + ${sizeBetweenIcons}); `
+              : `margin-left:calc(${closeIconSize} + ${sizeBetweenIcons})`}
           `}
       }
 
@@ -558,20 +558,20 @@ const StyledSectionContainer = styled.section<SectionContainerProps>`
         height: ${closeIconSize};
 
         ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
+          props.theme.interfaceDirection === "rtl"
+            ? css`
                 margin-left: ${sizeBetweenIcons};
               `
-      : css`
+            : css`
                 margin-right: ${sizeBetweenIcons};
               `}
 
         ${(props) =>
-    props.showTwoProgress &&
-    css`
+          props.showTwoProgress &&
+          css`
             ${props.theme.interfaceDirection === "rtl"
-        ? `margin-left:-${closeIconSize}`
-        : `margin-right:-${closeIconSize}`}
+              ? `margin-left:-${closeIconSize}`
+              : `margin-right:-${closeIconSize}`}
           `}
       }
     }
@@ -599,11 +599,11 @@ const StyledSectionFilter = styled.div`
         `}
   @media ${tablet} {
     ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
+      props.theme.interfaceDirection === "rtl"
+        ? css`
             margin-left: 16px;
           `
-      : css`
+        : css`
             margin-right: 16px;
           `}
   }
@@ -631,8 +631,8 @@ const StyledSectionHeader = styled.div<{ isFormGallery?: boolean }>`
     min-height: 61px;
 
     ${({ isFormGallery }) =>
-    isFormGallery &&
-    css`
+      isFormGallery &&
+      css`
         height: 69px;
         min-height: 69px;
       `}
@@ -673,12 +673,12 @@ const StyledSectionHeader = styled.div<{ isFormGallery?: boolean }>`
 
   @media ${tablet} {
     ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
+      props.theme.interfaceDirection === "rtl"
+        ? css`
             padding-left: 16px;
             margin-left: 0px;
           `
-      : css`
+        : css`
             padding-right: 16px;
             margin-right: 0px;
           `}
@@ -686,11 +686,11 @@ const StyledSectionHeader = styled.div<{ isFormGallery?: boolean }>`
 
   @media ${mobile} {
     ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
+      props.theme.interfaceDirection === "rtl"
+        ? css`
             margin-left: 0px;
           `
-      : css`
+        : css`
             margin-right: 0px;
           `}
   }
@@ -711,11 +711,11 @@ const StyledSectionPaging = styled.div`
 
   @media ${tablet} {
     ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
+      props.theme.interfaceDirection === "rtl"
+        ? css`
             padding-left: 0px;
           `
-      : css`
+        : css`
             padding-right: 0px;
           `}
   }
@@ -749,5 +749,5 @@ export {
   StyledSectionBody,
   StyledSpacer,
   StyledSectionContainer,
-  StyledSectionSubmenu
+  StyledSectionSubmenu,
 };

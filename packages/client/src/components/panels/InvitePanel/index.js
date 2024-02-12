@@ -54,9 +54,8 @@ const InvitePanel = ({
   defaultAccess,
   inviteUsers,
   setInfoPanelIsMobileHidden,
-  reloadSelectionParentRoom,
-  setUpdateRoomMembers,
-  roomsView,
+  updateInfoPanelSelection,
+  addInfoPanelMembers,
   setInviteLanguage,
   getUsersList,
   filter,
@@ -277,15 +276,15 @@ const InvitePanel = ({
 
     try {
       setIsLoading(true);
-      const result =
-        roomId === -1
-          ? await inviteUsers(data)
-          : await setRoomSecurity(roomId, data);
+      const isRooms = roomId !== -1;
+      const result = !isRooms
+        ? await inviteUsers(data)
+        : await setRoomSecurity(roomId, data);
 
       setIsLoading(false);
 
-      if (roomsView === "info_members") {
-        setUpdateRoomMembers(true);
+      if (isRooms) {
+        addInfoPanelMembers(t, result.members, true);
       }
 
       onClose();
@@ -295,7 +294,7 @@ const InvitePanel = ({
         toastr.warning(result?.warning);
       }
 
-      reloadSelectionParentRoom();
+      updateInfoPanelSelection();
     } catch (err) {
       toastr.error(err);
       setIsLoading(false);
@@ -464,67 +463,73 @@ const InvitePanel = ({
     : invitePanelComponent;
 };
 
-export default inject(({ auth, peopleStore, filesStore, dialogsStore }) => {
-  const { theme, currentDeviceType } = auth.settingsStore;
+export default inject(
+  ({
+    settingsStore,
+    peopleStore,
+    filesStore,
+    dialogsStore,
+    infoPanelStore,
+  }) => {
+    const { theme, currentDeviceType } = settingsStore;
 
-  const { getUsersByQuery, inviteUsers, getUsersList } = peopleStore.usersStore;
-  const { filter } = peopleStore.filterStore;
-  const {
-    setIsMobileHidden: setInfoPanelIsMobileHidden,
-    reloadSelectionParentRoom,
-    setUpdateRoomMembers,
-    roomsView,
-    filesView,
-  } = auth.infoPanelStore;
+    const { getUsersByQuery, inviteUsers, getUsersList } =
+      peopleStore.usersStore;
+    const { filter } = peopleStore.filterStore;
+    const {
+      setIsMobileHidden: setInfoPanelIsMobileHidden,
+      updateInfoPanelSelection,
+      addInfoPanelMembers,
+    } = infoPanelStore;
 
-  const {
-    getPortalInviteLinks,
-    userLink,
-    guestLink,
-    adminLink,
-    collaboratorLink,
-  } = peopleStore.inviteLinksStore;
+    const {
+      getPortalInviteLinks,
+      userLink,
+      guestLink,
+      adminLink,
+      collaboratorLink,
+    } = peopleStore.inviteLinksStore;
 
-  const {
-    inviteItems,
-    invitePanelOptions,
-    setInviteItems,
-    setInvitePanelOptions,
-    setInviteLanguage,
-  } = dialogsStore;
+    const {
+      inviteItems,
+      invitePanelOptions,
+      setInviteItems,
+      setInvitePanelOptions,
+      setInviteLanguage,
+    } = dialogsStore;
 
-  const { getFolderInfo, setRoomSecurity, getRoomSecurityInfo, folders } =
-    filesStore;
+    const { getFolderInfo, setRoomSecurity, getRoomSecurityInfo, folders } =
+      filesStore;
 
-  return {
-    folders,
-    setInviteLanguage,
-    getUsersByQuery,
-    getRoomSecurityInfo,
-    inviteItems,
-    roomId: invitePanelOptions.roomId,
-    setInviteItems,
-    setInvitePanelOptions,
-    setRoomSecurity,
-    theme,
-    visible: invitePanelOptions.visible,
-    defaultAccess: invitePanelOptions.defaultAccess,
-    getFolderInfo,
-    getPortalInviteLinks,
-    userLink,
-    guestLink,
-    adminLink,
-    collaboratorLink,
-    inviteUsers,
-    setInfoPanelIsMobileHidden,
-    reloadSelectionParentRoom,
-    setUpdateRoomMembers,
-    roomsView,
-    getUsersList,
-    filter,
-    currentDeviceType,
-  };
-})(
+    return {
+      folders,
+      setInviteLanguage,
+      getUsersByQuery,
+      getRoomSecurityInfo,
+      inviteItems,
+      roomId: invitePanelOptions.roomId,
+      setInviteItems,
+      setInvitePanelOptions,
+      setRoomSecurity,
+      theme,
+      visible: invitePanelOptions.visible,
+      defaultAccess: invitePanelOptions.defaultAccess,
+      getFolderInfo,
+      getPortalInviteLinks,
+      userLink,
+      guestLink,
+      adminLink,
+      collaboratorLink,
+      inviteUsers,
+      setInfoPanelIsMobileHidden,
+      updateInfoPanelSelection,
+      addInfoPanelMembers,
+      getUsersList,
+      filter,
+      currentDeviceType,
+    };
+  }
+)(
   withTranslation([
     "InviteDialog",
     "SharingPanel",

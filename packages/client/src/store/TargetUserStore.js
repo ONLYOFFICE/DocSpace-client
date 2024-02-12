@@ -12,6 +12,8 @@ import { toastr } from "@docspace/shared/components/toast";
 const { Badges, RoomsActivity, DailyFeed, UsefulTips } = NotificationsType;
 class TargetUserStore {
   peopleStore = null;
+  userStore = null;
+
   targetUser = null;
   isEditTargetUser = false;
 
@@ -26,15 +28,15 @@ class TargetUserStore {
 
   isFirstSubscriptionsLoad = true;
 
-  constructor(peopleStore) {
+  constructor(peopleStore, userStore) {
     this.peopleStore = peopleStore;
+    this.userStore = userStore;
     makeAutoObservable(this);
   }
 
   get getDisableProfileType() {
     const res =
-      this.peopleStore.authStore.userStore.user.id === this.targetUser.id ||
-      !this.peopleStore.authStore.isAdmin ||
+      this.userStore.user.id === this.targetUser.id ||
       this.peopleStore.isPeoplesAdmin
         ? false
         : true;
@@ -45,19 +47,18 @@ class TargetUserStore {
   get isMe() {
     return (
       this.targetUser &&
-      this.targetUser.userName ===
-        this.peopleStore.authStore.userStore.user.userName
+      this.targetUser.userName === this.userStore.user.userName
     );
   }
 
   setHasAvatar = (value) => {
     this.targetUser.hasAvatar = value;
-    this.peopleStore.authStore.userStore.user.hasAvatar = value;
+    this.userStore.user.hasAvatar = value;
   };
 
   getTargetUser = async (userName) => {
-    /*if (this.peopleStore.authStore.userStore.user.userName === userName) {
-      return this.setTargetUser(this.peopleStore.authStore.userStore.user);
+    /*if (this.userStore.user.userName === userName) {
+      return this.setTargetUser(this.userStore.user);
     } else {*/
     const user = await api.people.getUser(userName);
 
@@ -68,7 +69,7 @@ class TargetUserStore {
 
   setTargetUser = (user) => {
     this.targetUser = user;
-    this.peopleStore.authStore.userStore.setUser(user); //TODO
+    this.userStore.setUser(user); //TODO
   };
 
   updateProfile = async (profile) => {
@@ -76,41 +77,37 @@ class TargetUserStore {
       this.peopleStore.usersStore.employeeWrapperToMemberModel(profile);
 
     const res = await api.people.updateUser(member);
-    if (!res.theme) res.theme = this.peopleStore.authStore.userStore.user.theme;
+    if (!res.theme) res.theme = this.userStore.user.theme;
 
     this.setTargetUser(res);
     return Promise.resolve(res);
   };
 
   updateCreatedAvatar = (avatar) => {
-    const { big, small, medium, max } = avatar;
+    const { big, small, medium, max, main } = avatar;
 
     this.targetUser.avatar = big;
     this.targetUser.avatarSmall = small;
     this.targetUser.avatarMedium = medium;
     this.targetUser.avatarMax = max;
+    this.targetUser.avatarOriginal = main;
 
-    this.peopleStore.authStore.userStore.updateAvatarInfo(
-      big,
-      small,
-      medium,
-      max
-    );
+    this.userStore.updateAvatarInfo(big, small, medium, max, main);
 
     console.log("updateCreatedAvatar", {
       targetUser: this.targetUser,
-      user: this.peopleStore.authStore.userStore.user,
+      user: this.userStore.user,
     });
   };
 
   updateProfileCulture = async (id, culture) => {
     const res = await api.people.updateUserCulture(id, culture);
 
-    this.peopleStore.authStore.userStore.setUser(res);
+    this.userStore.setUser(res);
 
     this.setTargetUser(res);
-    //caches.delete("api-cache");
-    //await this.peopleStore.authStore.settingsStore.init();
+    // caches.delete("api-cache");
+
     setCookie(LANGUAGE, culture, {
       "max-age": COOKIE_EXPIRATION_YEAR,
     });
@@ -142,7 +139,7 @@ class TargetUserStore {
     isEnableBadges,
     isEnableRoomsActivity,
     isEnableDailyFeed,
-    isEnableTips
+    isEnableTips,
   ) => {
     this.badgesSubscription = isEnableBadges;
     this.roomsActivitySubscription = isEnableRoomsActivity;

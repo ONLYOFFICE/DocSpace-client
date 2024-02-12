@@ -91,8 +91,8 @@ HeaderUnAuth.propTypes = {
   isLoaded: PropTypes.bool,
 };
 
-export default inject(({ auth }) => {
-  const { settingsStore, isAuthenticated, isLoaded } = auth;
+export default inject(({ authStore, settingsStore }) => {
+  const { isAuthenticated, isLoaded } = authStore;
   const { enableAdmMess, wizardToken, logoUrl, theme } = settingsStore;
 
   return {

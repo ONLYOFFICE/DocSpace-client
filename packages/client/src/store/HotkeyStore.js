@@ -6,7 +6,7 @@ import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
-import { getFilesFromEvent } from "@docspace/shared/components/drag-and-drop";
+import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
 
 import config from "PACKAGE_FILE";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
@@ -15,7 +15,7 @@ import { encryptionUploadDialog } from "../helpers/encryptionUploadDialog";
 class HotkeyStore {
   filesStore;
   dialogsStore;
-  settingsStore;
+  filesSettingsStore;
   filesActionsStore;
   treeFoldersStore;
   uploadDataStore;
@@ -27,7 +27,7 @@ class HotkeyStore {
   constructor(
     filesStore,
     dialogsStore,
-    settingsStore,
+    filesSettingsStore,
     filesActionsStore,
     treeFoldersStore,
     uploadDataStore,
@@ -36,7 +36,7 @@ class HotkeyStore {
     makeAutoObservable(this);
     this.filesStore = filesStore;
     this.dialogsStore = dialogsStore;
-    this.settingsStore = settingsStore;
+    this.filesSettingsStore = filesSettingsStore;
     this.filesActionsStore = filesActionsStore;
     this.treeFoldersStore = treeFoldersStore;
     this.uploadDataStore = uploadDataStore;
@@ -494,14 +494,14 @@ class HotkeyStore {
     if (this.nextFile) this.setCaret(this.nextFile);
   };
 
-  openItem = () => {
+  openItem = (t) => {
     const { selection } = this.filesStore;
 
     const someDialogIsOpen = checkDialogsOpen();
 
     selection.length === 1 &&
       !someDialogIsOpen &&
-      this.filesActionsStore.openFileAction(selection[0]);
+      this.filesActionsStore.openFileAction(selection[0], t);
   };
 
   selectAll = () => {
@@ -539,7 +539,7 @@ class HotkeyStore {
     } else {
       if (this.treeFoldersStore.isPrivacyFolder) {
         encryptionUploadDialog(
-          this.settingsStore.extsWebEncrypt,
+          this.filesSettingsStore.extsWebEncrypt,
           (encryptedFile, encrypted) => {
             encryptedFile.encrypted = encrypted;
             this.goToHomePage(navigate);

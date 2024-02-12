@@ -361,6 +361,7 @@ class FileRow extends Component {
               <ErrorFileUpload
                 t={t}
                 item={item}
+                theme={theme}
                 onTextClick={this.onTextClick}
                 showPasswordInput={showPasswordInput}
               />
@@ -400,7 +401,12 @@ class FileRow extends Component {
 }
 export default inject(
   (
-    { auth, uploadDataStore, mediaViewerDataStore, settingsStore },
+    {
+      filesSettingsStore,
+      uploadDataStore,
+      mediaViewerDataStore,
+      settingsStore,
+    },
     { item }
   ) => {
     let ext;
@@ -425,8 +431,8 @@ export default inject(
 
     name = splitted.join(".");
 
-    const { personal, theme } = auth.settingsStore;
-    const { canViewedDocs, getIconSrc, isArchive } = settingsStore;
+    const { personal, theme } = settingsStore;
+    const { canViewedDocs, getIconSrc, isArchive } = filesSettingsStore;
     const {
       uploaded,
       cancelCurrentUpload,

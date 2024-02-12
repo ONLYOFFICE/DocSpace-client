@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { observer, inject } from "mobx-react";
 import { useNavigate, useLocation } from "react-router-dom";
-import Section from "@docspace/common/components/Section";
+import Section from "@docspace/shared/components/section";
 import { Loader } from "@docspace/shared/components/loader";
 import { ValidationStatus } from "../../helpers/constants";
 import SectionWrapper from "SRC_DIR/components/Section";
@@ -97,12 +97,17 @@ const PublicRoom = (props) => {
 };
 
 export default inject(
-  ({ auth, publicRoomStore, settingsStore, clientLoadingStore }) => {
+  ({
+    settingsStore,
+    publicRoomStore,
+    filesSettingsStore,
+    clientLoadingStore,
+  }) => {
     const { validatePublicRoomKey, isLoaded, isLoading, roomStatus, roomId } =
       publicRoomStore;
 
-    const { getFilesSettings } = settingsStore;
-    const { setPublicRoomKey } = auth.settingsStore;
+    const { getFilesSettings } = filesSettingsStore;
+    const { setPublicRoomKey } = settingsStore;
     const { setIsArticleLoading } = clientLoadingStore;
 
     return {

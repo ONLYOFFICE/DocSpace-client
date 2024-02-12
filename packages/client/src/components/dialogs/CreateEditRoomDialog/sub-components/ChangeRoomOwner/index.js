@@ -46,7 +46,7 @@ const ChangeRoomOwner = ({
         type="action"
         fontWeight={600}
         fontSize="13px"
-        color={currentColorScheme.main.accent}
+        color={currentColorScheme.main?.accent}
         onClick={onOwnerChange}
       >
         {t("Common:ChangeButton")}
@@ -55,7 +55,7 @@ const ChangeRoomOwner = ({
   );
 };
 
-export default inject(({ auth, dialogsStore }) => ({
-  currentUserId: auth.userStore.user.id,
-  currentColorScheme: auth.settingsStore.currentColorScheme,
+export default inject(({ settingsStore, userStore }) => ({
+  currentUserId: userStore.user.id,
+  currentColorScheme: settingsStore.currentColorScheme,
 }))(withTranslation(["Common"])(ChangeRoomOwner));

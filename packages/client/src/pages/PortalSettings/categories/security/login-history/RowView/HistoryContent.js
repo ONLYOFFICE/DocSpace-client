@@ -25,7 +25,12 @@ const HistoryContent = ({ sectionWidth, item, locale }) => {
       sectionWidth={sectionWidth}
     >
       <div className="user-container-wrapper">
-        <Text fontWeight={600} fontSize="14px" isTextOverflow={true}>
+        <Text
+          fontWeight={600}
+          fontSize="14px"
+          isTextOverflow={true}
+          className="settings_unavailable"
+        >
           {item.user}
         </Text>
       </div>
@@ -36,19 +41,25 @@ const HistoryContent = ({ sectionWidth, item, locale }) => {
         fontWeight={600}
         truncate={true}
         color="#A3A9AE"
+        className="settings_unavailable"
       >
         {dateStr}
       </Text>
-      <Text fontSize="12px" as="div" fontWeight={600}>
+      <Text
+        fontSize="12px"
+        as="div"
+        fontWeight={600}
+        className="settings_unavailable"
+      >
         {item.action}
       </Text>
     </StyledRowContent>
   );
 };
 
-export default inject(({ auth }) => {
-  const { culture } = auth.settingsStore;
-  const { user } = auth.userStore;
+export default inject(({ settingsStore, userStore }) => {
+  const { culture } = settingsStore;
+  const { user } = userStore;
   const locale = (user && user.cultureName) || culture || "en";
 
   return {

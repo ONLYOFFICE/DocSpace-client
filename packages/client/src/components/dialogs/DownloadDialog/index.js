@@ -396,10 +396,16 @@ const DownloadDialog = withTranslation([
 ])(DownloadDialogComponent);
 
 export default inject(
-  ({ auth, filesStore, dialogsStore, filesActionsStore, settingsStore }) => {
+  ({
+    filesStore,
+    dialogsStore,
+    filesActionsStore,
+    filesSettingsStore,
+    settingsStore,
+  }) => {
     const { sortedFiles, setSelected } = filesStore;
-    const { extsConvertible } = settingsStore;
-    const { theme } = auth.settingsStore;
+    const { extsConvertible } = filesSettingsStore;
+    const { theme } = settingsStore;
 
     const { downloadDialogVisible: visible, setDownloadDialogVisible } =
       dialogsStore;

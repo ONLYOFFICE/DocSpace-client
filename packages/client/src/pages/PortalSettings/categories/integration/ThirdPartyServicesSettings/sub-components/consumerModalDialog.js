@@ -282,8 +282,7 @@ ConsumerModalDialog.propTypes = {
   urlSupport: PropTypes.string,
 };
 
-export default inject(({ setup, auth }) => {
-  const { settingsStore } = auth;
+export default inject(({ setup, settingsStore }) => {
   const {
     theme,
     urlSupport,

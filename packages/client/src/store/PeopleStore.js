@@ -13,7 +13,7 @@ import EditingFormStore from "./EditingFormStore";
 import FilterStore from "./FilterStore";
 import SelectionStore from "./SelectionPeopleStore";
 import HeaderMenuStore from "./HeaderMenuStore";
-import AvatarEditorStore from "./AvatarEditorStore";
+
 import InviteLinksStore from "./InviteLinksStore";
 import DialogStore from "./DialogStore";
 
@@ -36,35 +36,59 @@ class PeopleStore {
   filterStore = null;
   selectionStore = null;
   headerMenuStore = null;
-  avatarEditorStore = null;
+
   inviteLinksStore = null;
   dialogStore = null;
   setupStore = null;
   accessRightsStore = null;
   profileActionsStore = null;
+  infoPanelStore = null;
+  userStore = null;
+
   isInit = false;
   viewAs = isDesktop() ? "table" : "row";
   isLoadedProfileSectionBody = false;
 
-  constructor(authStore, setupStore, accessRightsStore, dialogsStore) {
+  constructor(
+    authStore,
+    setupStore,
+    accessRightsStore,
+    dialogsStore,
+    infoPanelStore,
+    userStore,
+    tfaStore,
+    settingsStore
+  ) {
     this.authStore = authStore;
+    this.infoPanelStore = infoPanelStore;
     this.groupsStore = new GroupsStore(this);
-    this.usersStore = new UsersStore(this, authStore);
-    this.targetUserStore = new TargetUserStore(this);
+    this.usersStore = new UsersStore(
+      this,
+      settingsStore,
+      infoPanelStore,
+      userStore
+    );
+    this.targetUserStore = new TargetUserStore(this, userStore);
     this.selectedGroupStore = new SelectedGroupStore(this);
     this.editingFormStore = new EditingFormStore(this);
     this.filterStore = new FilterStore();
     this.selectionStore = new SelectionStore(this);
     this.headerMenuStore = new HeaderMenuStore(this);
-    this.avatarEditorStore = new AvatarEditorStore(this);
     this.inviteLinksStore = new InviteLinksStore(this);
     this.dialogStore = new DialogStore();
+    this.userStore = userStore;
 
     this.setupStore = setupStore;
     this.accessRightsStore = accessRightsStore;
     this.dialogsStore = dialogsStore;
 
-    this.contextOptionsStore = new AccountsContextOptionsStore(this);
+    this.contextOptionsStore = new AccountsContextOptionsStore(
+      this,
+      infoPanelStore,
+      userStore,
+      tfaStore,
+      settingsStore
+    );
 
     makeAutoObservable(this);
   }
@@ -167,14 +191,14 @@ class PeopleStore {
   };
 
   onOpenInfoPanel = () => {
-    const { setIsVisible } = this.authStore.infoPanelStore;
+    const { setIsVisible } = this.infoPanelStore;
     setIsVisible(true);
   };
 
   getUsersRightsSubmenu = (t) => {
     const { userSelectionRole, selectionUsersRights } = this.selectionStore;
 
-    const { isOwner } = this.authStore.userStore.user;
+    const { isOwner } = this.userStore.user;
 
     const options = [];
 
@@ -262,7 +286,7 @@ class PeopleStore {
     const { setSendInviteDialogVisible } = this.dialogStore;
     const { toggleDeleteProfileEverDialog } = this.contextOptionsStore;
 
-    const { isVisible } = this.authStore.infoPanelStore;
+    const { isVisible } = this.infoPanelStore;
 
     const headerMenu = [
       {

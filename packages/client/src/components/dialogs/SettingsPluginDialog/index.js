@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
-import { PluginComponents } from "SRC_DIR/helpers/plugins/constants";
+import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
 import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
 
 import Header from "./sub-components/Header";
@@ -117,7 +117,7 @@ const SettingsPluginDialog = ({
   );
 };
 
-export default inject(({ auth, pluginStore }) => {
+export default inject(({ settingsStore, pluginStore }) => {
   const {
     pluginList,
     settingsPluginDialogVisible,
@@ -129,7 +129,7 @@ export default inject(({ auth, pluginStore }) => {
     updatePlugin,
   } = pluginStore;
 
-  const { pluginOptions } = auth.settingsStore;
+  const { pluginOptions } = settingsStore;
 
   const { pluginName } = currentSettingsDialogPlugin;
 

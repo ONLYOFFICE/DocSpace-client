@@ -13,7 +13,7 @@ import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import Share from "SRC_DIR/pages/Home/InfoPanel/Body/views/Share";
 import store from "client/store";
 
-const { auth: authStore } = store;
+const { authStore } = store;
 
 const StyledWrapper = styled.div`
   ${NoUserSelect}

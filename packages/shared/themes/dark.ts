@@ -303,7 +303,7 @@ const Dark: TTheme = {
     border: "1px solid #474747",
     text: {
       width: "100%",
-      height: "16px",
+      height: "18px",
       margin: "0 11px",
       fontWeight: "500",
       fontSize: "14px",
@@ -934,6 +934,7 @@ const Dark: TTheme = {
     maxWidth: "340px",
     color: "#242424",
     textColor: white,
+    backgroundColor: "#282828",
 
     before: {
       border: "none",
@@ -1935,7 +1936,6 @@ const Dark: TTheme = {
     expanderColor: "#eeeeee",
     background: black,
     rootFolderTitleColor: "#ADADAD",
-    publicIcon: "#858585",
     boxShadow: "0px 12px 40px 0px #00000066",
 
     icon: {

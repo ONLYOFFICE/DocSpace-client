@@ -13,10 +13,10 @@ const getDefaultStyles = ({
   css`
     svg {
       path:nth-child(2) {
-        fill: ${$currentColorScheme.main.accent};
+        fill: ${$currentColorScheme.main?.accent};
       }
       circle {
-        stroke: ${$currentColorScheme.main.accent};
+        stroke: ${$currentColorScheme.main?.accent};
       }
     }
   `;

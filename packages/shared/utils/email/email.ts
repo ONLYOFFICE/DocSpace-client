@@ -90,7 +90,7 @@ export class Email {
   }
 }
 
-const getParts = (str: string) => {
+export const getParts = (str: string) => {
   const parts = [];
   const newStr = str.replace(/[\s,;]*$/, ",");
   const n = newStr.length;

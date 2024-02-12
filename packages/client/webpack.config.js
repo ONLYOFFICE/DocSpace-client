@@ -308,9 +308,6 @@ module.exports = (env, argv) => {
           "./src/components/FilesSelector/FilesSelectorWrapper",
         "./SelectFolderDialog":
           "./src/components/FilesSelector/FilesSelectorWrapper",
-        "./PeopleSelector": "./src/components/PeopleSelector",
-        "./PeopleSelector/UserTooltip":
-          "./src/components/PeopleSelector/sub-components/UserTooltip.js",
         "./BrandingPage":
           "./src/pages/PortalSettings/categories/common/branding.js",
         "./WhiteLabelPage":
@@ -368,9 +365,6 @@ module.exports = (env, argv) => {
         }`,
         configUrl: `/static/scripts/config.json?hash=${
           runtime.checksums["config.json"] || dateHash
-        }`,
-        tiffUrl: `/static/scripts/tiff.min.js?hash=${
-          runtime.checksums["tiff.min.js"] || dateHash
         }`,
       })
     );

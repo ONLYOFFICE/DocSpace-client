@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 import { getCorrectDate } from "@docspace/shared/utils";
 
-import { PluginStatus } from "SRC_DIR/helpers/plugins/constants";
+import { PluginStatus } from "SRC_DIR/helpers/plugins/enums";
 import { Link } from "@docspace/shared/components/link";
 
 import { getPluginUrl } from "../utils";

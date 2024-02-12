@@ -232,6 +232,7 @@ const PeopleTableRow = (props) => {
     standalone,
     typeAccountsColumnIsEnabled,
     emailAccountsColumnIsEnabled,
+    infoPanelVisible,
   } = props;
 
   const {
@@ -454,7 +455,12 @@ const PeopleTableRow = (props) => {
                 ? displayName
                 : email}
           </Link>
-          <Badges statusType={statusType} isPaid={isPaidUser} isSSO={isSSO} />
+          <Badges
+            statusType={statusType}
+            isPaid={isPaidUser}
+            isSSO={isSSO}
+            infoPanelVisible={infoPanelVisible}
+          />
         </TableCell>
 
         {typeAccountsColumnIsEnabled ? (

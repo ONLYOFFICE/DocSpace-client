@@ -177,6 +177,7 @@ const Table = ({
             itemIndex={index}
             typeAccountsColumnIsEnabled={typeAccountsColumnIsEnabled}
             emailAccountsColumnIsEnabled={emailAccountsColumnIsEnabled}
+            infoPanelVisible={infoPanelVisible}
           />
         ))}
       </TableBody>
@@ -193,7 +194,7 @@ export default inject(
     accessRightsStore,
     infoPanelStore,
     userStore,
-    tableStore
+    tableStore,
   }) => {
     const {
       usersStore,
@@ -234,5 +235,5 @@ export default inject(
       typeAccountsColumnIsEnabled,
       emailAccountsColumnIsEnabled,
     };
-  }
+  },
 )(observer(Table));

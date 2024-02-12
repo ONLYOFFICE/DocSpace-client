@@ -46,3 +46,8 @@ export const getConfig = async (campaign: string, standalone: boolean) => {
   const res = await fetch(configUrl);
   return Promise.resolve(res.json());
 };
+
+export const isHideBannerForUser = (userType: string, hideFor: string[]) => {
+  if (hideFor.includes(userType)) return true;
+  return false;
+};

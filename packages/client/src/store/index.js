@@ -7,7 +7,6 @@ import {
   currentQuotaStore,
   paymentQuotasStore,
   settingsStore,
-  campaignsStore,
 } from "@docspace/shared/store";
 
 import PaymentStore from "./PaymentStore";
@@ -51,6 +50,7 @@ import ClientLoadingStore from "./ClientLoadingStore";
 
 import PluginStore from "./PluginStore";
 import InfoPanelStore from "./InfoPanelStore";
+import CampaignsStore from "./CampaignsStore";
 
 const selectedFolderStore = new SelectedFolderStore(settingsStore);
 
@@ -225,7 +225,7 @@ const tableStore = new TableStore(
   authStore,
   treeFoldersStore,
   userStore,
-  settingsStore
+  settingsStore,
 );
 
 infoPanelStore.filesSettingsStore = filesSettingsStore;
@@ -248,6 +248,7 @@ const createEditRoomStore = new CreateEditRoomStore(
 );
 
 const webhooksStore = new WebhooksStore(settingsStore);
+const campaignsStore = new CampaignsStore(settingsStore, userStore);
 
 const store = {
   authStore,

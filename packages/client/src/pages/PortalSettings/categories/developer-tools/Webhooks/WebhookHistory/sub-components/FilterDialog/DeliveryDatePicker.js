@@ -129,7 +129,9 @@ const DeliveryDatePicker = ({
   const SelectedDateTime = () => {
     const formattedTime = isTimeEqual
       ? ""
-      : ` ${filters.deliveryFrom.format("HH:mm")} - ${moment(filters.deliveryTo)
+      : ` ${moment(filters.deliveryFrom).tz(window.timezone).format("HH:mm")} - ${moment(
+          filters.deliveryTo,
+        )
           .tz(window.timezone)
           .format("HH:mm")}`;
 
@@ -210,6 +212,7 @@ const DeliveryDatePicker = ({
                   hasError={!isTimeValid}
                   tabIndex={1}
                   locale={i18n.language}
+                  initialTime={filters.deliveryFrom}
                 />
               </span>
 
@@ -219,10 +222,11 @@ const DeliveryDatePicker = ({
               <TimePicker
                 classNameInput="before-time"
                 date={filters.deliveryTo}
-                setDate={setDeliveryTo}
+                onChange={setDeliveryTo}
                 hasError={!isTimeValid}
                 tabIndex={2}
                 locale={i18n.language}
+                initialTime={filters.deliveryTo}
               />
             </TimePickerCell>
           ) : (

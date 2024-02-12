@@ -102,10 +102,10 @@ const RoomIcon = ({
 }: RoomIconProps) => {
   const [correctImage, setCorrectImage] = React.useState(true);
 
-  const titleWithoutSpaces = title.replace(/\s+/g, " ").trim();
-  const indexAfterLastSpace = titleWithoutSpaces.lastIndexOf(" ");
+  const titleWithoutSpaces = title?.replace(/\s+/g, " ").trim();
+  const indexAfterLastSpace = titleWithoutSpaces?.lastIndexOf(" ");
   const secondCharacter =
-    indexAfterLastSpace === -1
+    !titleWithoutSpaces || indexAfterLastSpace === -1
       ? ""
       : titleWithoutSpaces[indexAfterLastSpace + 1];
 

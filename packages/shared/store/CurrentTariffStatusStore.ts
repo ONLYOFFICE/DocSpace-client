@@ -9,9 +9,10 @@ import { TPortalTariff } from "../api/portal/types";
 import { TUser } from "../api/people/types";
 import { isValidDate } from "../utils";
 import { getDaysLeft, getDaysRemaining } from "../utils/common";
+import { Nullable } from "../types";
 
 class CurrentTariffStatusStore {
-  portalTariffStatus: TPortalTariff = {} as TPortalTariff;
+  portalTariffStatus: Nullable<TPortalTariff> = null;
 
   isLoaded = false;
 
@@ -38,35 +39,35 @@ class CurrentTariffStatusStore {
   };
 
   get isGracePeriod() {
-    return this.portalTariffStatus.state === TariffState.Delay;
+    return this.portalTariffStatus?.state === TariffState.Delay;
   }
 
   get isPaidPeriod() {
-    return this.portalTariffStatus.state === TariffState.Paid;
+    return this.portalTariffStatus?.state === TariffState.Paid;
   }
 
   get isNotPaidPeriod() {
-    return this.portalTariffStatus.state === TariffState.NotPaid;
+    return this.portalTariffStatus?.state === TariffState.NotPaid;
   }
 
   get dueDate() {
-    return this.portalTariffStatus.dueDate;
+    return this.portalTariffStatus?.dueDate;
   }
 
   get delayDueDate() {
-    return this.portalTariffStatus.delayDueDate;
+    return this.portalTariffStatus?.delayDueDate;
   }
 
   get customerId() {
-    return this.portalTariffStatus.customerId;
+    return this.portalTariffStatus?.customerId;
   }
 
   get portalStatus() {
-    return this.portalTariffStatus.portalStatus;
+    return this.portalTariffStatus?.portalStatus;
   }
 
   get licenseDate() {
-    return this.portalTariffStatus.licenseDate;
+    return this.portalTariffStatus?.licenseDate;
   }
 
   setPayerInfo = async () => {
@@ -96,8 +97,7 @@ class CurrentTariffStatusStore {
   }
 
   get isPaymentDateValid() {
-    if (this.dueDate === null) return false;
-
+    if (this.dueDate === null || !this.dueDate) return false;
     return isValidDate(this.dueDate);
   }
 
@@ -115,7 +115,7 @@ class CurrentTariffStatusStore {
 
   get delayDaysCount() {
     moment.locale(this.language);
-    if (this.delayDueDate === null) return "";
+    if (this.delayDueDate === null || !this.delayDueDate) return "";
     return getDaysRemaining(this.delayDueDate);
   }
 

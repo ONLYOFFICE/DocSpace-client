@@ -51,11 +51,13 @@ class CurrentTariffStatusStore {
   }
 
   get dueDate() {
-    return this.portalTariffStatus?.dueDate;
+    return this.portalTariffStatus ? this.portalTariffStatus.dueDate : null;
   }
 
   get delayDueDate() {
-    return this.portalTariffStatus?.delayDueDate;
+    return this.portalTariffStatus
+      ? this.portalTariffStatus.delayDueDate
+      : null;
   }
 
   get customerId() {
@@ -97,7 +99,7 @@ class CurrentTariffStatusStore {
   }
 
   get isPaymentDateValid() {
-    if (this.dueDate === null || !this.dueDate) return false;
+    if (this.dueDate === null) return false;
     return isValidDate(this.dueDate);
   }
 
@@ -115,7 +117,7 @@ class CurrentTariffStatusStore {
 
   get delayDaysCount() {
     moment.locale(this.language);
-    if (this.delayDueDate === null || !this.delayDueDate) return "";
+    if (this.delayDueDate === null) return "";
     return getDaysRemaining(this.delayDueDate);
   }
 

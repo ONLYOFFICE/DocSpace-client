@@ -1,18 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 // @ts-ignore
 import Loaders from "@docspace/common/components/Loaders";
-import { FolderType, RoomsType } from "@docspace/common/constants";
-import { DeviceType } from "@docspace/common/constants";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { DeviceType } from "@docspace/shared/enums";
 
-import Aside from "@docspace/components/aside";
-import Backdrop from "@docspace/components/backdrop";
-import Selector from "@docspace/components/selector";
-import Portal from "@docspace/components/portal";
-// @ts-ignore
-import toastr from "@docspace/components/toast/toastr";
+import { Selector } from "@docspace/shared/components/selector";
+import { Aside } from "@docspace/shared/components/aside";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Portal } from "@docspace/shared/components/portal";
+import { toastr } from "@docspace/shared/components/toast";
+
+import { RowLoader, SearchLoader } from "@docspace/shared/skeletons/selector";
 
 import EmptyScreenFilterAltSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt.svg?url";
 import EmptyScreenFilterAltDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt_dark.svg?url";
@@ -40,7 +41,6 @@ const FilesSelector = ({
   isRoomsOnly = false,
   isUserOnly = false,
   isEditorDialog = false,
-
   rootThirdPartyId,
   filterParam,
 
@@ -76,7 +76,8 @@ const FilesSelector = ({
 
   onSelectFolder,
   onSetBaseFolderPath,
-  //onSetNewFolderPath,
+  // onSetNewFolderPath,
+  setIsDataReady,
   onSelectTreeNode,
   onSave,
   onSelectFile,
@@ -127,6 +128,7 @@ const FilesSelector = ({
     title: string;
     path?: string[];
     fileExst?: string;
+    inPublic?: boolean;
   } | null>(null);
 
   const [total, setTotal] = React.useState<number>(0);
@@ -158,6 +160,10 @@ const FilesSelector = ({
     showBreadCrumbsLoader,
     showLoader,
   } = useLoadersHelper({ items });
+
+  useEffect(() => {
+    setIsDataReady?.(!showLoader);
+  }, [showLoader, setIsDataReady]);
 
   const { isRoot, setIsRoot, getRootData } = useRootHelper({
     setIsBreadCrumbsLoading,
@@ -214,6 +220,9 @@ const FilesSelector = ({
   });
 
   const onSelectAction = (item: Item) => {
+    const inPublic =
+      breadCrumbs.findIndex((f: any) => f.roomType === RoomsType.PublicRoom) >
+      -1;
     if (item.isFolder) {
       setIsFirstLoad(true);
       setItems(null);
@@ -225,6 +234,7 @@ const FilesSelector = ({
           isRoom:
             item.parentId === 0 && item.rootFolderType === FolderType.Rooms,
           roomType: item.roomType,
+          shared: item.shared,
         },
       ]);
       setSelectedItemId(item.id);
@@ -242,6 +252,7 @@ const FilesSelector = ({
         id: item.id,
         title: item.title,
         fileExst: item.fileExst,
+        inPublic: inPublic,
       });
     }
   };
@@ -301,7 +312,7 @@ const FilesSelector = ({
         setItems(null);
 
         const idx = breadCrumbs.findIndex(
-          (value) => value.id.toString() === item.id.toString()
+          (value) => value.id.toString() === item.id.toString(),
         );
 
         const maxLength = breadCrumbs.length - 1;
@@ -310,7 +321,7 @@ const FilesSelector = ({
         const newBreadCrumbs = breadCrumbs.map((item, index) => {
           if (!foundParentId) {
             currentFolderIndex = disabledItems.findIndex(
-              (id) => id === item?.id
+              (id) => id === item?.id,
             );
           }
 
@@ -364,7 +375,7 @@ const FilesSelector = ({
     onCloseAction();
   };
 
-  const onSearchAction = (value: string) => {
+  const onSearchAction = (value: string, callback?: Function) => {
     setIsFirstLoad(true);
     setItems(null);
     if (selectedItemType === "rooms") {
@@ -374,9 +385,10 @@ const FilesSelector = ({
     }
 
     setSearchValue(value);
+    callback?.();
   };
 
-  const onClearSearchAction = () => {
+  const onClearSearchAction = (callback?: Function) => {
     setIsFirstLoad(true);
     setItems(null);
     if (selectedItemType === "rooms") {
@@ -386,13 +398,14 @@ const FilesSelector = ({
     }
 
     setSearchValue("");
+    callback?.();
   };
 
   const onAcceptAction = (
     items: any,
     accessRights: any,
     fileName: string,
-    isChecked: boolean
+    isChecked: boolean,
   ) => {
     const isPublic =
       breadCrumbs.findIndex((f: any) => f.roomType === RoomsType.PublicRoom) >
@@ -475,30 +488,32 @@ const FilesSelector = ({
         selectedItemId &&
         onSave(null, selectedItemId, fileName, isChecked);
       onSelectTreeNode && onSelectTreeNode(selectedTreeNode);
-      onSelectFile && onSelectFile(selectedFileInfo, breadCrumbs);
-      onCloseAndDeselectAction();
+      onSelectFile && onSelectFile(selectedFileInfo!, breadCrumbs);
+      !embedded && onCloseAndDeselectAction();
       //!withoutImmediatelyClose &&  onCloseAction();
     }
   };
 
   const headerLabel = getHeaderLabel(
     t,
+    isEditorDialog,
     isCopy,
     isRestoreAll,
     isMove,
     isSelect,
     filterParam,
-    isRestore
+    isRestore,
   );
 
   const acceptButtonLabel = getAcceptButtonLabel(
     t,
+    isEditorDialog,
     isCopy,
     isRestoreAll,
     isMove,
     isSelect,
     filterParam,
-    isRestore
+    isRestore,
   );
 
   const isDisabled = getIsDisabled(
@@ -515,7 +530,7 @@ const FilesSelector = ({
     filterParam,
     !!selectedFileInfo,
     includeFolder,
-    isRestore
+    isRestore,
   );
 
   const SelectorBody = (
@@ -553,13 +568,13 @@ const FilesSelector = ({
       isBreadCrumbsLoading={showBreadCrumbsLoader}
       withSearch={!isRoot && items ? items.length > 0 : !isRoot && isFirstLoad}
       rowLoader={
-        <Loaders.SelectorRowLoader
+        <RowLoader
           isMultiSelect={false}
           isUser={isRoot}
           isContainer={showLoader}
         />
       }
-      searchLoader={<Loaders.SelectorSearchLoader />}
+      searchLoader={<SearchLoader />}
       breadCrumbsLoader={<Loaders.SelectorBreadCrumbsLoader />}
       alwaysShowFooter={true}
       isNextPageLoading={isNextPageLoading}
@@ -620,15 +635,16 @@ const FilesSelector = ({
 export default inject(
   (
     {
-      auth,
+      settingsStore,
       selectedFolderStore,
       filesActionsStore,
       uploadDataStore,
       treeFoldersStore,
       dialogsStore,
       filesStore,
+      infoPanelStore,
     }: any,
-    { isCopy, isRestoreAll, isMove, isRestore, isPanelVisible, id }: any
+    { isCopy, isRestoreAll, isMove, isRestore, isPanelVisible, id }: any,
   ) => {
     const { id: selectedId, parentId, rootFolderType } = selectedFolderStore;
 
@@ -654,10 +670,9 @@ export default inject(
       setBackupToPublicRoomVisible,
     } = dialogsStore;
 
-    const { setIsMobileHidden: setInfoPanelIsMobileHidden } =
-      auth.infoPanelStore;
+    const { setIsMobileHidden: setInfoPanelIsMobileHidden } = infoPanelStore;
 
-    const { theme, socketHelper, currentDeviceType } = auth.settingsStore;
+    const { theme, socketHelper, currentDeviceType } = settingsStore;
 
     const socketSubscribesId = socketHelper.socketSubscribers;
 
@@ -671,26 +686,26 @@ export default inject(
     } = filesStore;
     const { getIcon } = filesSettingsStore;
     const { isVisible: infoPanelIsVisible, selection: infoPanelSelection } =
-      auth.infoPanelStore;
+      infoPanelStore;
 
     const selections =
       isMove || isCopy || isRestoreAll || isRestore
         ? isRestoreAll
           ? filesList
           : selection.length > 0 && selection?.[0] != null
-          ? selection
-          : bufferSelection != null
-          ? [bufferSelection]
-          : infoPanelIsVisible && infoPanelSelection != null
-          ? [infoPanelSelection]
-          : []
+            ? selection
+            : bufferSelection != null
+              ? [bufferSelection]
+              : infoPanelIsVisible && infoPanelSelection != null
+                ? [infoPanelSelection]
+                : []
         : [];
 
     const selectionsWithoutEditing = isRestoreAll
       ? filesList
       : isCopy
-      ? selections
-      : selections.filter((f: any) => f && !f?.isEditing);
+        ? selections
+        : selections.filter((f: any) => f && !f?.isEditing);
 
     const disabledItems: any[] = [];
 
@@ -706,11 +721,11 @@ export default inject(
     const fromFolderId = id
       ? id
       : rootFolderType === FolderType.Archive ||
-        rootFolderType === FolderType.TRASH
-      ? undefined
-      : selectedId === selectionsWithoutEditing[0]?.id
-      ? parentId
-      : selectedId;
+          rootFolderType === FolderType.TRASH
+        ? undefined
+        : selectedId === selectionsWithoutEditing[0]?.id
+          ? parentId
+          : selectedId;
 
     const currentFolderId =
       sessionPath && (isMove || isCopy || isRestore || isRestoreAll)
@@ -755,5 +770,5 @@ export default inject(
 
       roomsFolderId,
     };
-  }
+  },
 )(observer(FilesSelector));

@@ -2,9 +2,9 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import Link from "@docspace/components/link";
-import LinkWithDropdown from "@docspace/components/link-with-dropdown";
-import Avatar from "@docspace/components/avatar";
+import { Link } from "@docspace/shared/components/link";
+import { LinkWithDropdown } from "@docspace/shared/components/link-with-dropdown";
+import { Avatar } from "@docspace/shared/components/avatar";
 
 export default function withContent(WrappedContent) {
   const WithContent = (props) => {
@@ -29,8 +29,8 @@ export default function withContent(WrappedContent) {
 
     const onContentRowClick = (checked, user, addToSelection = true) => {
       checked
-        ? setBufferSelection(user, addToSelection)
-        : setBufferSelection(null);
+      ? setBufferSelection(user, addToSelection)
+      : setBufferSelection(null);
     };
 
     const checkedProps = { checked };
@@ -135,8 +135,7 @@ export default function withContent(WrappedContent) {
     );
   };
 
-  return inject(({ auth, peopleStore }, { item }) => {
-    const { userStore, settingsStore } = auth;
+  return inject(({ settingsStore, peopleStore, userStore }, { item }) => {
     const { theme, standalone } = settingsStore;
 
     const { selectGroup } = peopleStore.selectedGroupStore;

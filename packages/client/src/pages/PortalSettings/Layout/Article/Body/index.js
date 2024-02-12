@@ -3,10 +3,10 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import { DeviceType } from "@docspace/common/constants";
-import { getCatalogIconUrlByType } from "@docspace/common/utils/catalogIcon.helper";
+import { DeviceType } from "@docspace/shared/enums";
+import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 
-import { isArrayEqual } from "@docspace/components/utils/array";
+import { isArrayEqual } from "@docspace/shared/utils";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 
@@ -18,7 +18,7 @@ import {
   getCurrentSettingsCategory,
 } from "../../../utils";
 
-import CatalogItem from "@docspace/components/catalog-item";
+import { ArticleItem } from "@docspace/shared/components/article-item";
 import LoaderArticleBody from "./loaderArticleBody";
 
 const ArticleBodyContent = (props) => {
@@ -36,7 +36,7 @@ const ArticleBodyContent = (props) => {
     isCommunity,
     currentDeviceType,
     isProfileLoading,
-    limitedAccessSpace
+    limitedAccessSpace,
   } = props;
 
   const [selectedKeys, setSelectedKeys] = React.useState([]);
@@ -46,9 +46,9 @@ const ArticleBodyContent = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  React.useEffect(() => {
-    prevLocation.current = location;
-  }, [location]);
+  // React.useEffect(() => {
+  //   // prevLocation.current = location;
+  // }, [location]);
 
   React.useEffect(() => {
     const locationPathname = location.pathname;
@@ -84,8 +84,13 @@ const ArticleBodyContent = (props) => {
   React.useEffect(() => {
     if (tReady && !isProfileLoading) setIsLoadedArticleBody(true);
 
-    if (prevLocation.current.pathname !== location.pathname) {
-      if (location.pathname.includes("common")) {
+    if (
+      !prevLocation.current ||
+      prevLocation.current.pathname !== location.pathname
+    ) {
+      prevLocation.current = location;
+
+      if (location.pathname.includes("customization")) {
         setSelectedKeys(["0-0"]);
       }
 
@@ -116,8 +121,8 @@ const ArticleBodyContent = (props) => {
       if (location.pathname.includes("payments")) {
         setSelectedKeys(["7-0"]);
       }
-      if (this.props.location.pathname.includes("bonus")) {
-        this.setState({ selectedKeys: ["8-0"] });
+      if (location.pathname.includes("bonus")) {
+        setSelectedKeys(["8-0"]);
       }
     }
   }, [
@@ -133,7 +138,7 @@ const ArticleBodyContent = (props) => {
       return;
     }
 
-    setSelectedKeys([value + "-0"]);
+    // setSelectedKeys([value + "-0"]);
 
     if (currentDeviceType === DeviceType.mobile) {
       toggleArticleOpen();
@@ -240,7 +245,7 @@ const ArticleBodyContent = (props) => {
         isSettingsCatalog: true,
       });
       items.push(
-        <CatalogItem
+        <ArticleItem
           key={item.key}
           id={item.key}
           icon={icon}
@@ -271,41 +276,49 @@ const ArticleBodyContent = (props) => {
   );
 };
 
-export default inject(({ auth, common, clientLoadingStore }) => {
-  const { isLoadedArticleBody, setIsLoadedArticleBody } = common;
-  const {
-    currentTariffStatusStore,
-    userStore,
-    isEnterprise,
+export default inject(
+  ({
+    authStore,
     settingsStore,
-    isCommunity,
-  } = auth;
-  const { isNotPaidPeriod } = currentTariffStatusStore;
-  const { user } = userStore;
-  const { isOwner } = user;
-  const { standalone, showText, toggleArticleOpen, currentDeviceType, limitedAccessSpace } =
-    settingsStore;
+    common,
+    clientLoadingStore,
+    userStore,
+    currentTariffStatusStore,
+  }) => {
+    const { isLoadedArticleBody, setIsLoadedArticleBody } = common;
+    const { isEnterprise, isCommunity } = authStore;
+    const { isNotPaidPeriod } = currentTariffStatusStore;
+    const { user } = userStore;
+    const { isOwner } = user;
+    const {
+      standalone,
+      showText,
+      toggleArticleOpen,
+      currentDeviceType,
+      limitedAccessSpace,
+    } = settingsStore;
 
-  const isProfileLoading =
-    window.location.pathname.includes("profile") &&
-    clientLoadingStore.showProfileLoader &&
-    !isLoadedArticleBody;
+    const isProfileLoading =
+      window.location.pathname.includes("profile") &&
+      clientLoadingStore.showProfileLoader &&
+      !isLoadedArticleBody;
 
-  return {
-    standalone,
-    isEnterprise,
-    showText,
-    toggleArticleOpen,
-    isLoadedArticleBody,
-    setIsLoadedArticleBody,
-    isNotPaidPeriod,
-    isOwner,
-    isCommunity,
-    currentDeviceType,
-    isProfileLoading,
-    limitedAccessSpace,
-  };
-})(
+    return {
+      standalone,
+      isEnterprise,
+      showText,
+      toggleArticleOpen,
+      isLoadedArticleBody,
+      setIsLoadedArticleBody,
+      isNotPaidPeriod,
+      isOwner,
+      isCommunity,
+      currentDeviceType,
+      isProfileLoading,
+      limitedAccessSpace,
+    };
+  }
+)(
   withLoading(
     withTranslation(["Settings", "Common"])(observer(ArticleBodyContent))
   )

@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import moment from "moment-timezone";
 
-import ModalDialog from "@docspace/components/modal-dialog";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import styled, { css } from "styled-components";
 
-import Button from "@docspace/components/button";
+import { Button } from "@docspace/shared/components/button";
 import DeliveryDatePicker from "./DeliveryDatePicker";
 import StatusPicker from "./StatusPicker";
 
@@ -13,7 +13,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
 
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 
 const ModalDialogContainer = styled(ModalDialog)`
   .modal-body {
@@ -88,10 +88,10 @@ const FilterDialog = (props) => {
   const [filters, setFilters] = useState({
     deliveryDate: null,
     deliveryFrom: moment()
-      .tz(window.timezone || "")
+      .tz(window.timezone)
       .startOf("day"),
     deliveryTo: moment()
-      .tz(window.timezone || "")
+      .tz(window.timezone)
       .endOf("day"),
     status: [],
   });
@@ -118,10 +118,10 @@ const FilterDialog = (props) => {
         setFilters({
           deliveryDate: null,
           deliveryFrom: moment()
-            .tz(window.timezone || "")
+            .tz(window.timezone)
             .startOf("day"),
           deliveryTo: moment()
-            .tz(window.timezone || "")
+            .tz(window.timezone)
             .endOf("day"),
           status: [],
         });

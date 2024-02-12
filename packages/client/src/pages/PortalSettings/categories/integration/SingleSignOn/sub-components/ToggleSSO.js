@@ -1,11 +1,11 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import Box from "@docspace/components/box";
+import { Box } from "@docspace/shared/components/box";
 //import FormStore from "@docspace/studio/src/store/SsoFormStore";
-import Text from "@docspace/components/text";
-import ToggleButton from "@docspace/components/toggle-button";
-import Badge from "@docspace/components/badge";
+import { Text } from "@docspace/shared/components/text";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { Badge } from "@docspace/shared/components/badge";
 import DisableSsoConfirmationModal from "./DisableSsoConfirmationModal";
 
 const borderProp = { radius: "6px" };
@@ -83,8 +83,8 @@ const ToggleSSO = (props) => {
   );
 };
 
-export default inject(({ auth, ssoStore }) => {
-  const { theme } = auth.settingsStore;
+export default inject(({ settingsStore, ssoStore }) => {
+  const { theme } = settingsStore;
   const {
     enableSso,
     isSsoEnabled,

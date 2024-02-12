@@ -1,10 +1,7 @@
 import React from "react";
 import { Trans } from "react-i18next";
 
-const {
-  FeedActionTypes,
-  FeedItemTypes,
-} = require("@docspace/common/constants");
+const { FeedActionTypes, FeedItemTypes } = require("@docspace/shared/enums");
 
 const getBlockMessageTranslation = (
   t,

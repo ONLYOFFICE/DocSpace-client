@@ -1,6 +1,6 @@
 {
   "name": "docspace",
-  "version": "2.0.1",
+  "version": "2.0.3",
   "private": true,
   "workspaces": {
     "packages": [
@@ -8,8 +8,8 @@
     ]
   },
   "engines": {
-    "node": ">=18",
-    "yarn": ">=3"
+    "node": ">=20",
+    "yarn": ">=4"
   },
   "scripts": {
     "build": "node ./common/scripts/before-build.js && yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login,@docspace/editor,@docspace/management}' run build",
@@ -18,14 +18,16 @@
     "deploy": "shx rm -rf ../publish/web && yarn workspaces foreach -ptR --from '{@docspace/client,@docspace/login,@docspace/editor,@docspace/management}' run deploy && shx cp -r public ../publish/web/ && node common/scripts/minify-common-locales.js",
     "start": "node ./common/scripts/before-build.js && yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login,@docspace/editor,@docspace/management}' run start",
     "start-prod": "yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login,@docspace/editor,@docspace/management}' run start-prod",
-    "storybook": "yarn workspace @docspace/components storybook",
-    "storybook-build": "yarn workspace @docspace/components run storybook-build",
-    "storybook-serve": "yarn workspace @docspace/components run storybook-serve",
-    "test": "yarn workspace @docspace/components test",
+    "storybook": "yarn workspace @docspace/shared storybook",
+    "storybook-build": "yarn workspace @docspace/shared run storybook-build",
+    "storybook-serve": "yarn workspace @docspace/shared run storybook-serve",
+    "test": "yarn workspace @docspace/shared test",
     "wipe": "shx rm -rf node_modules yarn.lock packages/**/node_modules",
     "licenses-audit": "yarn licenses audit --output-csv=licenses.csv --config=licenses.config.js --summary",
     "check-circular": "yarn madge --circular ./packages",
-    "check-circular:graph": "yarn madge --circular --image graph.svg ./packages"
+    "check-circular:graph": "yarn madge --circular --image graph.svg ./packages",
+    "lint": "yarn workspace @docspace/shared lint",
+    "lint:fix": "yarn workspace @docspace/shared lint:fix"
   },
   "old-scripts": {
     "build:test": "yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login,@docspace/editor}' run build:test",
@@ -36,10 +38,11 @@
     "e2e.test:translation": "yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login}' run test:translation:model"
   },
   "devDependencies": {
+    "@types/react-text-mask": "^5.4.14",
     "he": "^1.2.0",
     "madge": "^6.1.0",
     "shx": "^0.3.4",
     "terser": "^5.16.6"
   },
-  "packageManager": "yarn@3.2.4"
+  "packageManager": "yarn@4.0.2"
 }

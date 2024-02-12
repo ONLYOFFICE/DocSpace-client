@@ -3,14 +3,14 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 
-import Link from "@docspace/components/link";
+import { Link } from "@docspace/shared/components/link";
 
 import TileContent from "./sub-components/TileContent";
 import withContent from "../../../../../HOCs/withContent";
 import withBadges from "../../../../../HOCs/withBadges";
 
-import { DeviceType } from "@docspace/common/constants";
-import { tablet } from "@docspace/components/utils/device";
+import { DeviceType } from "@docspace/shared/enums";
+import { tablet } from "@docspace/shared/utils";
 
 const SimpleFilesTileContent = styled(TileContent)`
   .row-main-container {
@@ -143,14 +143,14 @@ const FilesTileContent = ({
   );
 };
 
-export default inject(({ auth, treeFoldersStore }) => {
+export default inject(({ settingsStore, treeFoldersStore }) => {
   const { isRoomsFolder, isArchiveFolder } = treeFoldersStore;
 
   const isRooms = isRoomsFolder || isArchiveFolder;
 
   return {
-    theme: auth.settingsStore.theme,
-    currentDeviceType: auth.settingsStore.currentDeviceType,
+    theme: settingsStore.theme,
+    currentDeviceType: settingsStore.currentDeviceType,
     isRooms,
   };
 })(

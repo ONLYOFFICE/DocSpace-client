@@ -1,20 +1,25 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Trans, withTranslation } from "react-i18next";
 import styled from "styled-components";
-import Button from "@docspace/components/button";
-import TextInput from "@docspace/components/text-input";
-import FieldContainer from "@docspace/components/field-container";
-import Text from "@docspace/components/text";
+import { Button } from "@docspace/shared/components/button";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { Text } from "@docspace/shared/components/text";
 import { inject, observer } from "mobx-react";
-import Box from "@docspace/components/box";
+import { Box } from "@docspace/shared/components/box";
 import withLoader from "../withLoader";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 import ErrorContainer from "@docspace/common/components/ErrorContainer";
-import { mobile, tablet } from "@docspace/components/utils/device";
-import Link from "@docspace/components/link";
-import FormWrapper from "@docspace/components/form-wrapper";
+import { mobile, tablet } from "@docspace/shared/utils";
+import { Link } from "@docspace/shared/components/link";
+import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import DocspaceLogo from "../../../DocspaceLogo";
 import { StyledPage, StyledContent } from "./StyledConfirm";
+import {
+  getTfaSecretKeyAndQR,
+  validateTfaCode,
+} from "@docspace/shared/api/settings";
+import { loginWithTfaCode } from "@docspace/shared/api/user";
 
 const StyledForm = styled(Box)`
   margin: 56px auto;
@@ -95,8 +100,6 @@ const TfaActivationForm = withLoader((props) => {
     t,
     secretKey,
     qrCode,
-    loginWithCode,
-    loginWithCodeAndCookie,
 
     location,
     currentColorScheme,
@@ -114,9 +117,9 @@ const TfaActivationForm = withLoader((props) => {
       setIsLoading(true);
 
       if (user && hash) {
-        await loginWithCode(user, hash, code);
+        await loginWithTfaCode(user, hash, code);
       } else {
-        await loginWithCodeAndCookie(code, linkData.confirmHeader);
+        await validateTfaCode(code, linkData.confirmHeader);
       }
 
       const referenceUrl = sessionStorage.getItem("referenceUrl");
@@ -268,7 +271,7 @@ const TfaActivationForm = withLoader((props) => {
 });
 
 const TfaActivationWrapper = (props) => {
-  const { getSecretKeyAndQR, linkData, setIsLoaded, setIsLoading } = props;
+  const { linkData, setIsLoaded, setIsLoading } = props;
 
   const [secretKey, setSecretKey] = useState("");
   const [qrCode, setQrCode] = useState("");
@@ -278,7 +281,7 @@ const TfaActivationWrapper = (props) => {
     try {
       setIsLoading(true);
       const confirmKey = linkData.confirmHeader;
-      const res = await getSecretKeyAndQR(confirmKey);
+      const res = await getTfaSecretKeyAndQR(confirmKey);
       const { manualEntryKey, qrCodeSetupImageUrl } = res;
 
       setSecretKey(manualEntryKey);
@@ -302,15 +305,12 @@ const TfaActivationWrapper = (props) => {
   );
 };
 
-export default inject(({ auth, confirm }) => ({
+export default inject(({ settingsStore, confirm, tfaStore }) => ({
   setIsLoaded: confirm.setIsLoaded,
   setIsLoading: confirm.setIsLoading,
-  getSecretKeyAndQR: auth.tfaStore.getSecretKeyAndQR,
-  loginWithCode: auth.loginWithCode,
-  loginWithCodeAndCookie: auth.tfaStore.loginWithCodeAndCookie,
-  tfaAndroidAppUrl: auth.tfaStore.tfaAndroidAppUrl,
-  tfaIosAppUrl: auth.tfaStore.tfaIosAppUrl,
-  tfaWinAppUrl: auth.tfaStore.tfaWinAppUrl,
-  currentColorScheme: auth.settingsStore.currentColorScheme,
-  defaultPage: auth.settingsStore.defaultPage,
+  tfaAndroidAppUrl: tfaStore.tfaAndroidAppUrl,
+  tfaIosAppUrl: tfaStore.tfaIosAppUrl,
+  tfaWinAppUrl: tfaStore.tfaWinAppUrl,
+  currentColorScheme: settingsStore.currentColorScheme,
+  defaultPage: settingsStore.defaultPage,
 }))(withTranslation(["Confirm", "Common"])(observer(TfaActivationWrapper)));

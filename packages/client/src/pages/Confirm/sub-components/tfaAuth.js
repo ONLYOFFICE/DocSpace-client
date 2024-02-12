@@ -2,18 +2,20 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import styled from "styled-components";
-import Button from "@docspace/components/button";
-import TextInput from "@docspace/components/text-input";
-import FieldContainer from "@docspace/components/field-container";
-import Text from "@docspace/components/text";
+import { Button } from "@docspace/shared/components/button";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { Text } from "@docspace/shared/components/text";
 import { inject, observer } from "mobx-react";
-import Box from "@docspace/components/box";
-import toastr from "@docspace/components/toast/toastr";
+import { Box } from "@docspace/shared/components/box";
+import { toastr } from "@docspace/shared/components/toast";
 import withLoader from "../withLoader";
-import { mobile } from "@docspace/components/utils/device";
-import FormWrapper from "@docspace/components/form-wrapper";
+import { mobile } from "@docspace/shared/utils";
+import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import DocspaceLogo from "../../../DocspaceLogo";
 import { StyledPage, StyledContent } from "./StyledConfirm";
+import { validateTfaCode } from "@docspace/shared/api/settings";
+import { loginWithTfaCode } from "@docspace/shared/api/user";
 
 const StyledForm = styled(Box)`
   margin: 56px auto;
@@ -48,7 +50,7 @@ const StyledForm = styled(Box)`
 `;
 
 const TfaAuthForm = withLoader((props) => {
-  const { t, loginWithCode, loginWithCodeAndCookie } = props;
+  const { t } = props;
 
   const [code, setCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -64,9 +66,9 @@ const TfaAuthForm = withLoader((props) => {
       setIsLoading(true);
 
       if (user && hash) {
-        await loginWithCode(user, hash, code);
+        await loginWithTfaCode(user, hash, code);
       } else {
-        await loginWithCodeAndCookie(code, linkData.confirmHeader);
+        await validateTfaCode(code, linkData.confirmHeader);
       }
 
       const referenceUrl = sessionStorage.getItem("referenceUrl");
@@ -177,10 +179,9 @@ const TfaAuthFormWrapper = (props) => {
   return <TfaAuthForm {...props} />;
 };
 
-export default inject(({ auth, confirm }) => ({
+export default inject(({ settingsStore, confirm }) => ({
   setIsLoaded: confirm.setIsLoaded,
   setIsLoading: confirm.setIsLoading,
-  loginWithCode: auth.loginWithCode,
-  loginWithCodeAndCookie: auth.tfaStore.loginWithCodeAndCookie,
-  defaultPage: auth.settingsStore.defaultPage,
+
+  defaultPage: settingsStore.defaultPage,
 }))(withTranslation(["Confirm", "Common"])(observer(TfaAuthFormWrapper)));

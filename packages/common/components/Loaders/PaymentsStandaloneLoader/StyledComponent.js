@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { mobile, tablet } from "@docspace/components/utils/device";
+import { mobile, tablet } from "@docspace/shared/utils";
 const StyledEnterpriseComponent = styled.div`
   .payments-loader_4,
   .payments-loader_2,

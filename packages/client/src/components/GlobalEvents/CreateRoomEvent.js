@@ -48,8 +48,8 @@ const CreateRoomEvent = ({
   }, []);
 
   useEffect(() => {
-    fetchTagsAction;
-  }, []);
+    fetchTagsAction();
+  }, [fetchTagsAction]);
 
   useEffect(() => {
     setCreateRoomDialogVisible(true);
@@ -84,13 +84,13 @@ export default inject(
 
     tagsStore,
     dialogsStore,
-    settingsStore,
+    filesSettingsStore,
   }) => {
     const { fetchTags } = tagsStore;
 
     const { deleteThirdParty, fetchThirdPartyProviders } =
-      settingsStore.thirdPartyStore;
-    const { enableThirdParty } = settingsStore;
+      filesSettingsStore.thirdPartyStore;
+    const { enableThirdParty } = filesSettingsStore;
 
     const {
       createRoomConfirmDialogVisible,

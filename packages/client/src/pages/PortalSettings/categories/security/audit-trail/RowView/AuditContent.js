@@ -2,9 +2,9 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
-import Text from "@docspace/components/text";
-import RowContent from "@docspace/components/row-content";
-import { convertTime } from "@docspace/common/utils/convertTime";
+import { Text } from "@docspace/shared/components/text";
+import { RowContent } from "@docspace/shared/components/row-content";
+import { convertTime } from "@docspace/shared/utils/convertTime";
 
 import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 
@@ -29,7 +29,12 @@ const AuditContent = ({ sectionWidth, item, isSettingNotPaid, locale }) => {
       isSettingNotPaid={isSettingNotPaid}
     >
       <div className="user-container-wrapper">
-        <Text fontWeight={600} fontSize="14px" isTextOverflow={true}>
+        <Text
+          fontWeight={600}
+          fontSize="14px"
+          isTextOverflow={true}
+          className="settings_unavailable"
+        >
           {item.user}
         </Text>
       </div>
@@ -55,9 +60,9 @@ const AuditContent = ({ sectionWidth, item, isSettingNotPaid, locale }) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { culture } = auth.settingsStore;
-  const { user } = auth.userStore;
+export default inject(({ settingsStore, userStore }) => {
+  const { culture } = settingsStore;
+  const { user } = userStore;
   const locale = (user && user.cultureName) || culture || "en";
 
   return {

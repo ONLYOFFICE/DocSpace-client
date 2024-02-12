@@ -3,9 +3,9 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
-import Heading from "@docspace/components/heading";
-import { tablet, desktop } from "@docspace/components/utils/device";
-import { Base } from "@docspace/components/themes";
+import { Heading } from "@docspace/shared/components/heading";
+import { tablet, desktop } from "@docspace/shared/utils";
+import { Base } from "@docspace/shared/themes";
 import InfiniteGrid from "./InfiniteGrid";
 
 const paddingCss = css`
@@ -312,8 +312,8 @@ TileContainer.defaultProps = {
   id: "tileContainer",
 };
 
-export default inject(({ auth, filesStore, treeFoldersStore }) => {
-  const { personal } = auth.settingsStore;
+export default inject(({ settingsStore, filesStore, treeFoldersStore }) => {
+  const { personal } = settingsStore;
   const { filter } = filesStore;
   const { isFavoritesFolder, isRecentFolder } = treeFoldersStore;
 

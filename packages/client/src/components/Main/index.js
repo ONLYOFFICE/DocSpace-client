@@ -3,10 +3,7 @@ import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
 import { isMobile, isIOS, isFirefox } from "react-device-detect";
 
-import {
-  mobile,
-  isMobile as isMobileUtils,
-} from "@docspace/components/utils/device";
+import { mobile, isMobile as isMobileUtils } from "@docspace/shared/utils";
 
 const StyledMain = styled.main`
   height: ${(props) => props.mainHeight && `${props.mainHeight}px`};
@@ -47,7 +44,7 @@ const Main = (props) => {
       window.visualViewport.removeEventListener("resize", onResize);
       clearTimeout(updateSizeRef.current);
     };
-  }, [onResize]);
+  }, [onResize, isFrame]);
 
   React.useEffect(() => {
     onResize();
@@ -103,10 +100,10 @@ const Main = (props) => {
 
 Main.displayName = "Main";
 
-export default inject(({ auth }) => {
-  const { isBannerVisible } = auth.bannerStore;
+export default inject(({ settingsStore, bannerStore }) => {
+  const { isBannerVisible } = bannerStore;
 
-  const { mainBarVisible, isFrame } = auth.settingsStore;
+  const { mainBarVisible, isFrame } = settingsStore;
   return {
     mainBarVisible,
     isBannerVisible,

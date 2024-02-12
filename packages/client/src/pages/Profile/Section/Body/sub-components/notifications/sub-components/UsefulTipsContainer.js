@@ -1,9 +1,9 @@
-import Text from "@docspace/components/text";
-import ToggleButton from "@docspace/components/toggle-button";
+import { Text } from "@docspace/shared/components/text";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { inject, observer } from "mobx-react";
 
-import { NotificationsType } from "@docspace/common/constants";
-import toastr from "@docspace/components/toast/toastr";
+import { NotificationsType } from "@docspace/shared/enums";
+import { toastr } from "@docspace/shared/components/toast";
 const UsefulTipsContainer = ({
   t,
   changeSubscription,

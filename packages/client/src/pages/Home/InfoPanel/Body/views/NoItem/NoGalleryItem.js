@@ -1,6 +1,6 @@
 ﻿import FormGalleryEmptyInfoReactSvgUrl from "PUBLIC_DIR/images/form-gallery-empty-info.react.svg?url";
 import styled from "styled-components";
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 
 const StyledGalleryEmptyScreen = styled.div`
   .info-panel_gallery-empty-screen-img {

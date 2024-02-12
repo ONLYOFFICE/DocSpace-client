@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
-import OformsFilter from "@docspace/common/api/oforms/filter";
-import { submitToGallery } from "@docspace/common/api/oforms";
+import OformsFilter from "@docspace/shared/api/oforms/filter";
+import { submitToGallery } from "@docspace/shared/api/oforms";
 
 import {
   getOformLocales,
@@ -9,17 +9,20 @@ import {
   getCategoryById,
   getCategoryTypes,
   getCategoriesOfCategoryType,
-} from "@docspace/common/api/oforms";
-import toastr from "@docspace/components/toast/toastr";
+} from "@docspace/shared/api/oforms";
+import { toastr } from "@docspace/shared/components/toast";
 
-import { combineUrl, convertToLanguage } from "@docspace/common/utils";
-import { LANGUAGE } from "@docspace/common/constants";
-import { getCookie } from "@docspace/components/utils/cookie";
+import { convertToLanguage } from "@docspace/shared/utils/common";
+import { LANGUAGE } from "@docspace/shared/constants";
+import { getCookie } from "@docspace/shared/utils/cookie";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 const myDocumentsFolderId = 2;
 
 class OformsStore {
-  authStore;
+  settingsStore;
+  infoPanelStore;
+  userStore = null;
 
   oformFiles = null;
   gallerySelected = null;
@@ -43,14 +46,16 @@ class OformsStore {
     "submitToGalleryTileIsHidden"
   );
 
-  constructor(authStore) {
-    this.authStore = authStore;
+  constructor(settingsStore, infoPanelStore, userStore) {
+    this.settingsStore = settingsStore;
+    this.infoPanelStore = infoPanelStore;
+    this.userStore = userStore;
     makeAutoObservable(this);
   }
 
   get defaultOformLocale() {
     const userLocale =
-      getCookie(LANGUAGE) || this.authStore.userStore.user?.cultureName || "en";
+      getCookie(LANGUAGE) || this.userStore.user?.cultureName || "en";
     const convertedLocale = convertToLanguage(userLocale);
 
     return this.oformLocales?.includes(convertedLocale)
@@ -74,7 +79,7 @@ class OformsStore {
 
   setGallerySelected = (gallerySelected) => {
     this.gallerySelected = gallerySelected;
-    this.authStore.infoPanelStore.setSelection(gallerySelected);
+    this.infoPanelStore.setInfoPanelSelection(gallerySelected);
   };
 
   setOformLocales = (oformLocales) => (this.oformLocales = oformLocales);
@@ -96,8 +101,7 @@ class OformsStore {
   };
 
   fetchOformLocales = async () => {
-    const { uploadDomain, uploadDashboard } =
-      this.authStore.settingsStore.formGallery;
+    const { uploadDomain, uploadDashboard } = this.settingsStore.formGallery;
 
     const url = combineUrl(uploadDomain, uploadDashboard, "/i18n/locales");
 
@@ -113,7 +117,7 @@ class OformsStore {
   };
 
   getOforms = async (filter = OformsFilter.getDefault()) => {
-    const { domain, path } = this.authStore.settingsStore.formGallery;
+    const { domain, path } = this.settingsStore.formGallery;
 
     const formName = "&fields[0]=name_form";
     const updatedAt = "&fields[1]=updatedAt";
@@ -202,8 +206,7 @@ class OformsStore {
   };
 
   submitToFormGallery = async (file, formName, language, signal = null) => {
-    const { uploadDomain, uploadPath } =
-      this.authStore.settingsStore.formGallery;
+    const { uploadDomain, uploadPath } = this.settingsStore.formGallery;
 
     const res = await submitToGallery(
       combineUrl(uploadDomain, uploadPath),
@@ -216,8 +219,7 @@ class OformsStore {
   };
 
   fetchCurrentCategory = async () => {
-    const { uploadDomain, uploadDashboard } =
-      this.authStore.settingsStore.formGallery;
+    const { uploadDomain, uploadDashboard } = this.settingsStore.formGallery;
     const { categorizeBy, categoryId } = this.oformsFilter;
     const locale = this.defaultOformLocale;
 
@@ -237,8 +239,7 @@ class OformsStore {
   };
 
   fetchCategoryTypes = async () => {
-    const { uploadDomain, uploadDashboard } =
-      this.authStore.settingsStore.formGallery;
+    const { uploadDomain, uploadDashboard } = this.settingsStore.formGallery;
 
     const url = combineUrl(uploadDomain, uploadDashboard, "/menu-translations");
     const locale = this.defaultOformLocale;
@@ -257,8 +258,7 @@ class OformsStore {
   };
 
   fetchCategoriesOfCategoryType = async (categoryTypeId) => {
-    const { uploadDomain, uploadDashboard } =
-      this.authStore.settingsStore.formGallery;
+    const { uploadDomain, uploadDashboard } = this.settingsStore.formGallery;
 
     const url = combineUrl(uploadDomain, uploadDashboard, `/${categoryTypeId}`);
 

@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useEffect } from "react";
 import { isMobile } from "react-device-detect";
 import { useLocation } from "react-router-dom";
-import Paging from "@docspace/components/paging";
+import { Paging } from "@docspace/shared/components/paging";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -310,13 +310,7 @@ const SectionPagingContent = ({
 };
 
 export default inject(
-  ({
-    auth,
-    peopleStore,
-    filesStore,
-    selectedFolderStore,
-    treeFoldersStore,
-  }) => {
+  ({ peopleStore, filesStore, selectedFolderStore, treeFoldersStore }) => {
     const {
       files,
       folders,

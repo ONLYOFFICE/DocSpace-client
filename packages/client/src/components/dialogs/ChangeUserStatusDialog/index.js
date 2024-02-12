@@ -1,15 +1,17 @@
 import React, { memo } from "react";
 import PropTypes from "prop-types";
 
-import ModalDialog from "@docspace/components/modal-dialog";
-import Button from "@docspace/components/button";
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
-import { combineUrl } from "@docspace/common/utils";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Button } from "@docspace/shared/components/button";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { toastr } from "@docspace/shared/components/toast";
+
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { withTranslation } from "react-i18next";
-import toastr from "@docspace/components/toast/toastr";
-import { EmployeeStatus } from "@docspace/common/constants";
+
+import { EmployeeStatus } from "@docspace/shared/enums";
 import ModalDialogContainer from "../ModalDialogContainer";
 import { inject, observer } from "mobx-react";
 
@@ -38,7 +40,7 @@ class ChangeUserStatusDialogComponent extends React.Component {
       onClose,
       userIDs,
       getPeopleListItem,
-      setSelection,
+      setInfoPanelSelection,
       infoPanelVisible,
       needResetUserSelection,
     } = this.props;
@@ -49,7 +51,7 @@ class ChangeUserStatusDialogComponent extends React.Component {
           if (users.length === 1 && infoPanelVisible) {
             const user = getPeopleListItem(users[0]);
 
-            setSelection(user);
+            setInfoPanelSelection(user);
           }
 
           toastr.success(t("PeopleTranslations:SuccessChangeUserStatus"));
@@ -168,13 +170,13 @@ ChangeUserStatusDialog.propTypes = {
   userIDs: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-export default inject(({ peopleStore, auth }) => {
+export default inject(({ peopleStore, infoPanelStore }) => {
   const setSelected = peopleStore.selectionStore.setSelected;
 
   const { getPeopleListItem, updateUserStatus, needResetUserSelection } =
     peopleStore.usersStore;
 
-  const { setSelection, isVisible: infoPanelVisible } = auth.infoPanelStore;
+  const { setInfoPanelSelection, isVisible: infoPanelVisible } = infoPanelStore;
 
   return {
     needResetUserSelection,
@@ -184,7 +186,7 @@ export default inject(({ peopleStore, auth }) => {
 
     getPeopleListItem,
 
-    setSelection,
+    setInfoPanelSelection,
     infoPanelVisible,
   };
 })(observer(ChangeUserStatusDialog));

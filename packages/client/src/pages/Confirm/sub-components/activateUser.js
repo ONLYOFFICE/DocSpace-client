@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import { withTranslation } from "react-i18next";
-import Text from "@docspace/components/text";
-import TextInput from "@docspace/components/text-input";
-import PasswordInput from "@docspace/components/password-input";
-import Button from "@docspace/components/button";
-import FieldContainer from "@docspace/components/field-container";
+import { Text } from "@docspace/shared/components/text";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { PasswordInput } from "@docspace/shared/components/password-input";
+import { Button } from "@docspace/shared/components/button";
+import { FieldContainer } from "@docspace/shared/components/field-container";
 import { inject, observer } from "mobx-react";
-import { EmployeeActivationStatus } from "@docspace/common/constants";
+import { EmployeeActivationStatus } from "@docspace/shared/enums";
 import {
   changePassword,
   updateActivationStatus,
   updateUser,
-} from "@docspace/common/api/people";
-import { createPasswordHash } from "@docspace/common/utils";
-import toastr from "@docspace/components/toast/toastr";
+} from "@docspace/shared/api/people";
+import { createPasswordHash } from "@docspace/shared/utils/common";
+import { toastr } from "@docspace/shared/components/toast";
 import {
   StyledPage,
   StyledContent,
@@ -247,14 +247,14 @@ const ActivateUserForm = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
+export default inject(({ authStore, settingsStore }) => {
   const {
     greetingSettings,
     hashSettings,
     defaultPage,
     passwordSettings,
     theme,
-  } = auth.settingsStore;
+  } = settingsStore;
 
   return {
     theme,
@@ -262,7 +262,7 @@ export default inject(({ auth }) => {
     greetingTitle: greetingSettings,
     hashSettings,
     defaultPage,
-    login: auth.login,
+    login: authStore.login,
   };
 })(
   withTranslation(["Confirm", "Common", "Wizard"])(

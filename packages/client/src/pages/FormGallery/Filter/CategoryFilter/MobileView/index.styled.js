@@ -1,9 +1,9 @@
 import styled, { css } from "styled-components";
 
-import DropDown from "@docspace/components/drop-down";
-import DropDownItem from "@docspace/components/drop-down-item";
-import { Base } from "@docspace/components/themes";
-import { mobile, tablet } from "@docspace/components/utils/device";
+import { DropDown } from "@docspace/shared/components/drop-down";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { Base } from "@docspace/shared/themes";
+import { mobile, tablet } from "@docspace/shared/utils";
 
 export const CategoryFilterMobileWrapper = styled.div`
   width: 100%;

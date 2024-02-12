@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import Base from "@docspace/components/themes/base";
+import Base from "@docspace/shared/themes/base";
 
 const StyledSelectFolder = styled.div`
   .editor-select-folder_text-input {

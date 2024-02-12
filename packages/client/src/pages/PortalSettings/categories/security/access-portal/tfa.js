@@ -3,17 +3,17 @@ import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import RadioButtonGroup from "@docspace/components/radio-button-group";
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
-import toastr from "@docspace/components/toast/toastr";
+import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { toastr } from "@docspace/shared/components/toast";
 import { LearnMoreWrapper } from "../StyledSecurity";
-import { size } from "@docspace/components/utils/device";
+import { size } from "@docspace/shared/utils";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
 import TfaLoader from "../sub-components/loaders/tfa-loader";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -97,7 +97,7 @@ const TwoFactorAuth = (props) => {
   };
 
   const onSaveClick = async () => {
-    const { t, setTfaSettings, getTfaConfirmLink } = props;
+    const { t, setTfaSettings } = props;
 
     setIsSaving(true);
 
@@ -136,7 +136,7 @@ const TwoFactorAuth = (props) => {
         </Text>
         <Link
           className="link-learn-more"
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
           target="_blank"
           isHovered
           href={tfaSettingsUrl}
@@ -194,22 +194,22 @@ const TwoFactorAuth = (props) => {
   );
 };
 
-export default inject(({ auth, setup }) => {
+export default inject(({ settingsStore, setup, tfaStore }) => {
   const {
     setTfaSettings,
-    getTfaConfirmLink,
+
     tfaSettings,
     smsAvailable,
     appAvailable,
-  } = auth.tfaStore;
+  } = tfaStore;
 
   const { isInit, initSettings, setIsInit } = setup;
   const { currentColorScheme, tfaSettingsUrl, currentDeviceType } =
-    auth.settingsStore;
+    settingsStore;
 
   return {
     setTfaSettings,
-    getTfaConfirmLink,
+
     tfaSettings,
     smsAvailable,
     appAvailable,

@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import Submenu from "@docspace/components/submenu";
+import { Submenu } from "@docspace/shared/components/submenu";
 import { useNavigate } from "react-router-dom";
 import { withTranslation } from "react-i18next";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 import { inject, observer } from "mobx-react";
 import Customization from "./customization";
@@ -11,7 +11,7 @@ import Appearance from "./appearance";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import LoaderSubmenu from "./sub-components/loaderSubmenu";
 import { resetSessionStorage } from "../../utils";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const SubmenuCommon = (props) => {
   const {
@@ -23,6 +23,7 @@ const SubmenuCommon = (props) => {
     isLoadedSubmenu,
     getWhiteLabelLogoUrls,
     currentDeviceType,
+    isMobileView,
   } = props;
   const navigate = useNavigate();
 
@@ -41,7 +42,10 @@ const SubmenuCommon = (props) => {
   }, [tReady, isLoadedSubmenu]);
 
   const load = async () => {
-    await loadBaseInfo();
+    const currentTab = getCurrentTab();
+    await loadBaseInfo(
+      !isMobileView ? (currentTab === 0 ? "general" : "branding") : ""
+    );
   };
 
   const data = [
@@ -91,14 +95,14 @@ const SubmenuCommon = (props) => {
         currentDeviceType === DeviceType.desktop
           ? 0
           : currentDeviceType === DeviceType.mobile
-          ? "53px"
-          : "61px"
+            ? "53px"
+            : "61px"
       }
     />
   );
 };
 
-export default inject(({ auth, common }) => {
+export default inject(({ settingsStore, common }) => {
   const {
     isLoaded,
     setIsLoadedSubmenu,
@@ -106,14 +110,19 @@ export default inject(({ auth, common }) => {
     isLoadedSubmenu,
     getWhiteLabelLogoUrls,
   } = common;
+
+  const currentDeviceType = settingsStore.currentDeviceType;
+
+  const isMobileView = currentDeviceType === DeviceType.mobile;
   return {
-    loadBaseInfo: async () => {
-      await initSettings();
+    loadBaseInfo: async (page) => {
+      await initSettings(page);
     },
     isLoaded,
     setIsLoadedSubmenu,
     isLoadedSubmenu,
     getWhiteLabelLogoUrls,
-    currentDeviceType: auth.settingsStore.currentDeviceType,
+    currentDeviceType,
+    isMobileView,
   };
 })(withLoading(withTranslation("Settings")(observer(SubmenuCommon))));

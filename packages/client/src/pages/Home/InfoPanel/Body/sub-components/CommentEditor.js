@@ -3,16 +3,19 @@ import React, { useState, useEffect } from "react";
 import { inject } from "mobx-react";
 import { ReactSVG } from "react-svg";
 
-import toastr from "@docspace/components/toast/toastr";
-import { Button, Text, Textarea } from "@docspace/components";
-import { MAX_FILE_COMMENT_LENGTH } from "@docspace/common/constants";
-// import infoPanel from "@docspace/common/components/Section/sub-components/info-panel";
+import { toastr } from "@docspace/shared/components/toast";
+import { Textarea } from "@docspace/shared/components/textarea";
+import { Button } from "@docspace/shared/components/button";
+import { Text } from "@docspace/shared/components/text";
+
+import { MAX_FILE_COMMENT_LENGTH } from "@docspace/shared/constants";
+// import infoPanel from "@docspace/shared/components/section/sub-components/info-panel";
 
 const CommentEditor = ({
   t,
   item,
   editing,
-  setSelection,
+  setInfoPanelSelection,
   fetchFileVersions,
   updateCommentVersion,
 
@@ -58,7 +61,7 @@ const CommentEditor = ({
       setIsLoading(false);
     });
 
-    setSelection({ ...item, comment: inputValue });
+    setInfoPanelSelection({ ...item, comment: inputValue });
     setIsEdit(false);
     setIsLoading(false);
   };
@@ -94,7 +97,7 @@ const CommentEditor = ({
             onChange={onChangeInputValue}
             autoFocus
             areaSelect
-            heightTextArea={54}
+            heightTextArea="54px"
             fontSize={13}
           />
           <div className="property-comment_editor-editor-buttons">
@@ -117,8 +120,8 @@ const CommentEditor = ({
   );
 };
 
-export default inject(({ auth, versionHistoryStore }) => {
-  const { setSelection } = auth.infoPanelStore;
+export default inject(({ versionHistoryStore, infoPanelStore }) => {
+  const { setInfoPanelSelection } = infoPanelStore;
 
   const {
     fetchFileVersions,
@@ -133,7 +136,7 @@ export default inject(({ auth, versionHistoryStore }) => {
   const editing = isEditingVersion || isEditing;
 
   return {
-    setSelection,
+    setInfoPanelSelection,
     fetchFileVersions,
     updateCommentVersion,
 

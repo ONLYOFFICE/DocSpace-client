@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import TableHeader from "@docspace/components/table-container/TableHeader";
+import { TableHeader } from "@docspace/shared/components/table";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -101,8 +101,8 @@ const HistoryTableHeader = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
+export default inject(({ userStore }) => {
   return {
-    userId: auth.userStore.user.id,
+    userId: userStore.user.id,
   };
 })(observer(HistoryTableHeader));

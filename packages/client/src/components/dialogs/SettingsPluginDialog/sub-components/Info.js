@@ -1,15 +1,14 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-import { getCookie } from "@docspace/components/utils/cookie";
-import { LANGUAGE } from "@docspace/common/constants";
+import { LANGUAGE } from "@docspace/shared/constants";
 
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
-import getCorrectDate from "@docspace/components/utils/getCorrectDate";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { getCorrectDate, getCookie } from "@docspace/shared/utils";
 
-import { PluginStatus } from "SRC_DIR/helpers/plugins/constants";
-import { Base } from "@docspace/components/themes";
+import { PluginStatus } from "SRC_DIR/helpers/plugins/enums";
+import { Base } from "@docspace/shared/themes";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -122,7 +121,7 @@ const Info = ({ t, plugin, withDelete, withSeparator }) => {
               lineHeight={"20px"}
               noSelect
             >
-              {plugin.createBy}
+              {plugin.createBy.displayName}
             </Text>
           </>
         )}

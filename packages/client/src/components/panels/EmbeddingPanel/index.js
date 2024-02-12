@@ -1,13 +1,13 @@
 ﻿import React, { useRef, useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import Backdrop from "@docspace/components/backdrop";
-import Heading from "@docspace/components/heading";
-import Aside from "@docspace/components/aside";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Heading } from "@docspace/shared/components/heading";
+import { Aside } from "@docspace/shared/components/aside";
 import { withTranslation } from "react-i18next";
 import { StyledEmbeddingPanel, StyledScrollbar } from "./StyledEmbeddingPanel";
 import EmbeddingBody from "./EmbeddingBody";
-import { DeviceType } from "@docspace/common/constants";
-import Portal from "@docspace/components/portal";
+import { DeviceType } from "@docspace/shared/enums";
+import { Portal } from "@docspace/shared/components/portal";
 const EmbeddingPanelComponent = (props) => {
   const {
     t,
@@ -84,10 +84,10 @@ const EmbeddingPanelComponent = (props) => {
     : embeddingPanelComponent;
 };
 
-export default inject(({ dialogsStore, auth }) => {
+export default inject(({ dialogsStore, settingsStore }) => {
   const { embeddingPanelIsVisible, setEmbeddingPanelIsVisible, linkParams } =
     dialogsStore;
-  const { currentDeviceType } = auth.settingsStore;
+  const { currentDeviceType } = settingsStore;
 
   return {
     visible: embeddingPanelIsVisible,

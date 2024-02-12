@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { inject, observer } from "mobx-react";
-import Loader from "@docspace/components/loader";
-import Section from "@docspace/common/components/Section";
-import { combineUrl } from "@docspace/common/utils";
-import tryRedirectTo from "@docspace/common/utils/tryRedirectTo";
-
+import { Loader } from "@docspace/shared/components/loader";
+import Section from "@docspace/shared/components/section";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import tryRedirectTo from "@docspace/shared/utils/tryRedirectTo";
+import SectionWrapper from "SRC_DIR/components/Section";
 class ChangeEmail extends React.PureComponent {
   componentDidMount() {
     const { changeEmail, isLoaded, linkData } = this.props;
@@ -74,15 +74,15 @@ ChangeEmail.propTypes = {
   changeEmail: PropTypes.func.isRequired,
 };
 const ChangeEmailForm = (props) => (
-  <Section>
+  <SectionWrapper>
     <Section.SectionBody>
       <ChangeEmail {...props} />
     </Section.SectionBody>
-  </Section>
+  </SectionWrapper>
 );
 
-export default inject(({ auth }) => {
-  const { userStore, settingsStore, isLoaded } = auth;
+export default inject(({ authStore, settingsStore, userStore }) => {
+  const { isLoaded } = authStore;
   return {
     isLoaded,
     changeEmail: userStore.changeEmail,

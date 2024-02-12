@@ -1,5 +1,5 @@
 import React from "react";
-import Row from "@docspace/components/row";
+import { Row } from "@docspace/shared/components/row";
 import { RoomContent } from "./RoomContent";
 import { observer } from "mobx-react";
 import styled from "styled-components";
@@ -36,20 +36,18 @@ type TRow = {
   item: TPortals;
 };
 const SpacesRoomRow = ({ item }: TRow) => {
-  const { spacesStore, authStore } = useStore();
+  const { spacesStore, settingsStore } = useStore();
   const { setDeletePortalDialogVisible, setCurrentPortal } = spacesStore;
-  const { tenantAlias } = authStore.settingsStore;
-
+  const { tenantAlias } = settingsStore;
 
   const onDelete = () => {
     setCurrentPortal(item);
-    setDeletePortalDialogVisible(true)
-  }
+    setDeletePortalDialogVisible(true);
+  };
 
   const { t } = useTranslation(["Common", "Files", "Settings"]);
 
-  const logoElement = <ReactSVG id={item.key} src={DefaultLogoUrl} />
-  
+  const logoElement = <ReactSVG id={item.key} src={DefaultLogoUrl} />;
 
   const protocol = window?.location?.protocol;
 

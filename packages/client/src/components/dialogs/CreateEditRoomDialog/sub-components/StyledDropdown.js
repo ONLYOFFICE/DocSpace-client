@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-import { mobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/shared/utils";
 
-import DropDown from "@docspace/components/drop-down";
-import { Base } from "@docspace/components/themes";
+import { DropDown } from "@docspace/shared/components/drop-down";
+import { Base } from "@docspace/shared/themes";
 
 const StyledDropDownWrapper = styled.div`
   width: 100%;

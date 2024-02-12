@@ -1,9 +1,9 @@
 ﻿import React from "react";
 import styled from "styled-components";
 import { ReactSVG } from "react-svg";
-import { mobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/shared/utils";
 import { inject, observer } from "mobx-react";
-import { getLogoFromPath } from "@docspace/common/utils";
+import { getLogoFromPath } from "@docspace/shared/utils";
 
 const StyledWrapper = styled.div`
   .logo-wrapper {
@@ -36,8 +36,7 @@ const DocspaceLogo = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { settingsStore } = auth;
+export default inject(({ settingsStore }) => {
   const { whiteLabelLogoUrls, theme } = settingsStore;
 
   return {

@@ -4,8 +4,8 @@ import { inject, observer } from "mobx-react";
 import { I18nextProvider, useTranslation } from "react-i18next";
 import ErrorContainer from "@docspace/common/components/ErrorContainer";
 import { useParams } from "react-router-dom";
-import Link from "@docspace/components/link";
-import { ZendeskAPI } from "@docspace/common/components/Zendesk";
+import { Link } from "@docspace/shared/components/link";
+import { ZendeskAPI } from "@docspace/shared/components/zendesk";
 
 import { ReportDialog } from "SRC_DIR/components/dialogs";
 import DocspaceLogo from "SRC_DIR/DocspaceLogo";
@@ -109,15 +109,15 @@ const Error520 = ({
   );
 };
 
-const Error520Wrapper = inject(({ auth }) => {
-  const { currentColorScheme, firebaseHelper } = auth.settingsStore;
-  const { user } = auth.userStore;
+const Error520Wrapper = inject(({ authStore, settingsStore, userStore }) => {
+  const { currentColorScheme, firebaseHelper } = settingsStore;
+  const { user } = userStore;
 
   return {
     currentColorScheme,
     FirebaseHelper: firebaseHelper,
     user,
-    version: auth.version,
+    version: authStore.version,
   };
 })(observer(Error520));
 

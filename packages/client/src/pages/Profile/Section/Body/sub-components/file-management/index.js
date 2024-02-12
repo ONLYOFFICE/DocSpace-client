@@ -2,9 +2,9 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import ToggleButton from "@docspace/components/toggle-button";
-import Box from "@docspace/components/box";
-import Text from "@docspace/components/text";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { Box } from "@docspace/shared/components/box";
+import { Text } from "@docspace/shared/components/text";
 import Loaders from "@docspace/common/components/Loaders";
 
 import StyledWrapper from "./styled-file-management";
@@ -184,7 +184,7 @@ const FileManagement = ({
   );
 };
 
-export default inject(({ auth, settingsStore, treeFoldersStore }) => {
+export default inject(({ userStore, filesSettingsStore, treeFoldersStore }) => {
   const {
     storeOriginalFiles,
     confirmDelete,
@@ -206,7 +206,7 @@ export default inject(({ auth, settingsStore, treeFoldersStore }) => {
 
     setThumbnails1280x720,
     thumbnails1280x720,
-  } = settingsStore;
+  } = filesSettingsStore;
 
   const { myFolderId, commonFolderId } = treeFoldersStore;
 
@@ -217,7 +217,7 @@ export default inject(({ auth, settingsStore, treeFoldersStore }) => {
 
     myFolderId,
     commonFolderId,
-    isVisitor: auth.userStore.user.isVisitor,
+    isVisitor: userStore.user.isVisitor,
     favoritesSection,
     recentSection,
 

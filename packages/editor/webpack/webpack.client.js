@@ -8,13 +8,11 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const ExternalTemplateRemotesPlugin = require("external-remotes-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-const minifyJson = require("@docspace/common/utils/minifyJson");
+const minifyJson = require("@docspace/shared/utils/minifyJson");
 const runtime = require("../../runtime.json");
 const dateHash = runtime?.date || "";
 
-//const beforeBuild = require("@docspace/common/utils/beforeBuild");
-
-const sharedDeps = require("@docspace/common/constants/sharedDependencies");
+const sharedDeps = require("@docspace/shared/constants/sharedDependencies");
 const baseConfig = require("./webpack.base.js");
 
 for (let dep in sharedDeps) {

@@ -4,10 +4,10 @@ import styled, { css } from "styled-components";
 import { Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import Text from "@docspace/components/text";
-import { size, desktop, mobile } from "@docspace/components/utils/device";
-import { Consumer } from "@docspace/components/utils/context";
-import { HelpButton } from "@docspace/components";
+import { Text } from "@docspace/shared/components/text";
+import { size, desktop, mobile, Consumer } from "@docspace/shared/utils";
+
+import { HelpButton } from "@docspace/shared/components/help-button";
 
 import CurrentTariffContainer from "./CurrentTariffContainer";
 import PriceCalculation from "./PriceCalculation";
@@ -335,60 +335,60 @@ const PaymentContainer = (props) => {
   );
 };
 
-export default inject(({ auth, payments }) => {
-  const {
+export default inject(
+  ({
+    settingsStore,
     currentQuotaStore,
+    paymentStore,
     paymentQuotasStore,
     currentTariffStatusStore,
-    userStore,
-    settingsStore,
-  } = auth;
-  const { showText: expandArticle } = settingsStore;
+  }) => {
+    const { showText: expandArticle, theme } = settingsStore;
 
-  const { isFreeTariff, currentTariffPlanTitle, isNonProfit } =
-    currentQuotaStore;
+    const { isFreeTariff, currentTariffPlanTitle, isNonProfit } =
+      currentQuotaStore;
 
-  const {
-    isNotPaidPeriod,
-    isPaidPeriod,
-    isGracePeriod,
-    customerId,
-    portalTariffStatus,
-    paymentDate,
-    gracePeriodEndDate,
-    delayDaysCount,
-    isPaymentDateValid,
-  } = currentTariffStatusStore;
+    const {
+      isNotPaidPeriod,
+      isPaidPeriod,
+      isGracePeriod,
+      customerId,
+      portalTariffStatus,
+      paymentDate,
+      gracePeriodEndDate,
+      delayDaysCount,
+      isPaymentDateValid,
+    } = currentTariffStatusStore;
 
-  const { planCost, tariffPlanTitle, portalPaymentQuotas } = paymentQuotasStore;
+    const { planCost, tariffPlanTitle, portalPaymentQuotas } =
+      paymentQuotasStore;
 
-  const { theme } = auth.settingsStore;
+    const { isAlreadyPaid } = paymentStore;
 
-  const { isAlreadyPaid } = payments;
+    return {
+      paymentDate,
+      isAlreadyPaid,
 
-  return {
-    paymentDate,
-    isAlreadyPaid,
+      gracePeriodEndDate,
+      delayDaysCount,
 
-    gracePeriodEndDate,
-    delayDaysCount,
+      expandArticle,
+      isFreeTariff,
+      tariffPlanTitle,
 
-    expandArticle,
-    isFreeTariff,
-    tariffPlanTitle,
+      isGracePeriod,
+      theme,
+      currencySymbol: planCost.currencySymbol,
+      startValue: planCost.value,
+      isNotPaidPeriod,
+      payerEmail: customerId,
 
-    isGracePeriod,
-    theme,
-    currencySymbol: planCost.currencySymbol,
-    startValue: planCost.value,
-    isNotPaidPeriod,
-    payerEmail: customerId,
-
-    isPaidPeriod,
-    currentTariffPlanTitle,
-    portalTariffStatus,
-    portalPaymentQuotas,
-    isNonProfit,
-    isPaymentDateValid,
-  };
-})(observer(PaymentContainer));
+      isPaidPeriod,
+      currentTariffPlanTitle,
+      portalTariffStatus,
+      portalPaymentQuotas,
+      isNonProfit,
+      isPaymentDateValid,
+    };
+  },
+)(observer(PaymentContainer));

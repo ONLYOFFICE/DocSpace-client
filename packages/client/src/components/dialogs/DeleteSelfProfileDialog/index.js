@@ -2,14 +2,14 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import PropTypes from "prop-types";
 
-import Button from "@docspace/components/button";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Link from "@docspace/components/link";
-import Text from "@docspace/components/text";
+import { toastr } from "@docspace/shared/components/toast";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Link } from "@docspace/shared/components/link";
 import { Trans, withTranslation } from "react-i18next";
 import ModalDialogContainer from "../ModalDialogContainer";
-import { sendInstructionsToDelete } from "@docspace/common/api/people";
-import toastr from "@docspace/components/toast/toastr";
+import { sendInstructionsToDelete } from "@docspace/shared/api/people";
 
 class DeleteSelfProfileDialogComponent extends React.Component {
   constructor(props) {
@@ -89,8 +89,8 @@ class DeleteSelfProfileDialogComponent extends React.Component {
   }
 }
 
-const DeleteSelfProfileDialog = inject(({ auth }) => ({
-  theme: auth.settingsStore.theme,
+const DeleteSelfProfileDialog = inject(({ settingsStore }) => ({
+  theme: settingsStore.theme,
 }))(
   observer(
     withTranslation(["DeleteSelfProfileDialog", "Common"])(

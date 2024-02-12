@@ -1,15 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Button from "@docspace/components/button";
-import Text from "@docspace/components/text";
-import EmailInput from "@docspace/components/email-input";
-import FieldContainer from "@docspace/components/field-container";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Button } from "@docspace/shared/components/button";
+import { Text } from "@docspace/shared/components/text";
+import { EmailInput } from "@docspace/shared/components/email-input";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { toastr } from "@docspace/shared/components/toast";
+
 import { withTranslation } from "react-i18next";
 import ModalDialogContainer from "../ModalDialogContainer";
-import { sendInstructionsToChangeEmail } from "@docspace/common/api/people";
-import toastr from "@docspace/components/toast/toastr";
-import { errorKeys } from "@docspace/components/utils/constants";
+import { sendInstructionsToChangeEmail } from "@docspace/shared/api/people";
+
+import { ErrorKeys } from "@docspace/shared/enums";
 import { inject, observer } from "mobx-react";
 class ChangeEmailDialogComponent extends React.Component {
   constructor(props) {
@@ -97,27 +99,27 @@ class ChangeEmailDialogComponent extends React.Component {
     } else {
       const translatedErrors = emailErrors.map((errorKey) => {
         switch (errorKey) {
-          case errorKeys.LocalDomain:
+          case ErrorKeys.LocalDomain:
             return t("Common:LocalDomain");
-          case errorKeys.IncorrectDomain:
+          case ErrorKeys.IncorrectDomain:
             return t("Common:IncorrectDomain");
-          case errorKeys.DomainIpAddress:
+          case ErrorKeys.DomainIpAddress:
             return t("Common:DomainIpAddress");
-          case errorKeys.PunycodeDomain:
+          case ErrorKeys.PunycodeDomain:
             return t("Common:PunycodeDomain");
-          case errorKeys.PunycodeLocalPart:
+          case ErrorKeys.PunycodeLocalPart:
             return t("Common:PunycodeLocalPart");
-          case errorKeys.IncorrectLocalPart:
+          case ErrorKeys.IncorrectLocalPart:
             return t("Common:IncorrectLocalPart");
-          case errorKeys.SpacesInLocalPart:
+          case ErrorKeys.SpacesInLocalPart:
             return t("Common:SpacesInLocalPart");
-          case errorKeys.MaxLengthExceeded:
+          case ErrorKeys.MaxLengthExceeded:
             return t("Common:MaxLengthExceeded");
-          case errorKeys.IncorrectEmail:
+          case ErrorKeys.IncorrectEmail:
             return t("Common:IncorrectEmail");
-          case errorKeys.ManyEmails:
+          case ErrorKeys.ManyEmails:
             return t("Common:ManyEmails");
-          case errorKeys.EmptyEmail:
+          case ErrorKeys.EmptyEmail:
             return t("Common:EmptyEmail");
           default:
             throw new Error("Unknown translation key");
@@ -218,15 +220,15 @@ ChangeEmailDialog.propTypes = {
   user: PropTypes.object.isRequired,
 };
 
-export default inject(({ auth, peopleStore }) => {
+export default inject(({ settingsStore, peopleStore, userStore }) => {
   const { updateProfile } = peopleStore.targetUserStore;
   const { updateProfileInUsers } = peopleStore.usersStore;
-  const { user: profile } = auth.userStore;
+  const { user: profile } = userStore;
 
   return {
     updateProfile,
     updateProfileInUsers,
-    isTabletView: auth.settingsStore.isTabletView,
+    isTabletView: settingsStore.isTabletView,
     profile,
   };
 })(observer(ChangeEmailDialog));

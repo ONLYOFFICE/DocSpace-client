@@ -6,19 +6,18 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import ModalDialog from "@docspace/components/modal-dialog";
-import Text from "@docspace/components/text";
-import Button from "@docspace/components/button";
-import Textarea from "@docspace/components/textarea";
-import IconButton from "@docspace/components/icon-button";
-import toastr from "@docspace/components/toast/toastr";
-
+import { Textarea } from "@docspace/shared/components/textarea";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { toastr } from "@docspace/shared/components/toast";
 import {
   getCrashReport,
   downloadJson,
   getCurrentDate,
 } from "SRC_DIR/helpers/crashReport";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const ModalDialogContainer = styled(ModalDialog)`
   #modal-dialog {
@@ -120,7 +119,7 @@ const ReportDialog = (props) => {
           onChange={onChangeTextareaValue}
           autoFocus
           areaSelect
-          heightTextArea={72}
+          heightTextArea="72px"
           fontSize={13}
         />
         <div className="report-wrapper">
@@ -161,13 +160,13 @@ const ReportDialog = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { user, currentDeviceType } = auth.userStore;
-  const { firebaseHelper } = auth.settingsStore;
+export default inject(({ authStore, settingsStore, userStore }) => {
+  const { user } = userStore;
+  const { firebaseHelper } = settingsStore;
 
   return {
     user,
-    version: auth.version,
+    version: authStore.version,
     FirebaseHelper: firebaseHelper,
   };
 })(observer(ReportDialog));

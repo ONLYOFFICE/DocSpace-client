@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
-import { tablet } from "@docspace/components/utils/device";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { tablet } from "@docspace/shared/utils";
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
 
 const StyledLoader = styled.div`

@@ -1,9 +1,9 @@
 import React from "react";
 
-import Tags from "@docspace/components/tags";
+import { Tags } from "@docspace/shared/components/tags";
 
-//import { RoomsTypeTranslations } from "@docspace/common/constants";
-import Text from "@docspace/components/text";
+//import { ROOMS_TYPE_TRANSLATIONS } from "@docspace/shared/constants";
+import { Text } from "@docspace/shared/components/text";
 
 const TagsCell = ({
   t,
@@ -68,7 +68,7 @@ const TagsCell = ({
       ) : (
         <Tag
           isDefault
-          label={t(RoomsTypeTranslations[item.roomType])}
+          label={t(ROOMS_TYPE_TRANSLATIONS[item.roomType])}
           onClick={() =>
             onSelectOption({
               option: "defaultTypeRoom",

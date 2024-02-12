@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 const StyledHistoryLoader = styled.div`
   width: 100%;
@@ -63,8 +63,16 @@ const HistoryLoader = ({}) => {
   return (
     <StyledHistoryLoader>
       <StyledSubtitleLoader>
-        <RectangleSkeleton width={"111px"} height={"16px"} borderRadius={"3px"} />
-        <RectangleSkeleton width={"16px"} height={"16px"} borderRadius={"3px"} />
+        <RectangleSkeleton
+          width={"111px"}
+          height={"16px"}
+          borderRadius={"3px"}
+        />
+        <RectangleSkeleton
+          width={"16px"}
+          height={"16px"}
+          borderRadius={"3px"}
+        />
       </StyledSubtitleLoader>
 
       {[...Array(5).keys()].map((i) => (

@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Loader from "@docspace/components/loader";
-import Section from "@docspace/common/components/Section";
-import { combineUrl } from "@docspace/common/utils";
-import tryRedirectTo from "@docspace/common/utils/tryRedirectTo";
+import { Loader } from "@docspace/shared/components/loader";
+import Section from "@docspace/shared/components/section";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import tryRedirectTo from "@docspace/shared/utils/tryRedirectTo";
 import { inject, observer } from "mobx-react";
-import { EmployeeActivationStatus } from "@docspace/common/constants";
-
+import { EmployeeActivationStatus } from "@docspace/shared/enums";
+import SectionWrapper from "SRC_DIR/components/Section";
 class ActivateEmail extends React.PureComponent {
   componentDidMount() {
     const { logout, updateEmailActivationStatus, linkData } = this.props;
@@ -58,15 +58,15 @@ ActivateEmail.propTypes = {
   location: PropTypes.object.isRequired,
 };
 const ActivateEmailForm = (props) => (
-  <Section>
+  <SectionWrapper>
     <Section.SectionBody>
       <ActivateEmail {...props} />
     </Section.SectionBody>
-  </Section>
+  </SectionWrapper>
 );
 
-export default inject(({ auth }) => {
-  const { logout, userStore } = auth;
+export default inject(({ authStore, userStore }) => {
+  const { logout } = authStore;
   return {
     logout,
     updateEmailActivationStatus: userStore.updateEmailActivationStatus,

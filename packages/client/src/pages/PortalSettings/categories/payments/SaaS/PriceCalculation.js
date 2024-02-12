@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 import { inject, observer } from "mobx-react";
 import SelectUsersCountContainer from "./sub-components/SelectUsersCountContainer";
 import TotalTariffContainer from "./sub-components/TotalTariffContainer";
@@ -22,10 +22,10 @@ const StyledBody = styled.div`
   .payment_main-title {
     margin-bottom: 24px;
     ${(props) =>
-    props.isDisabled &&
-    css`
+      props.isDisabled &&
+      css`
         color: ${props.theme.client.settings.payment.priceContainer
-        .disableColor};
+          .disableColor};
       `}
   }
   .payment_price_user {
@@ -33,7 +33,7 @@ const StyledBody = styled.div`
     align-items: center;
     justify-content: center;
     background: ${(props) =>
-    props.theme.client.settings.payment.priceContainer.backgroundText};
+      props.theme.client.settings.payment.priceContainer.backgroundText};
     margin-top: 24px;
     min-height: 38px;
     border-radius: 6px;
@@ -176,44 +176,46 @@ const PriceCalculation = ({
   );
 };
 
-export default inject(({ auth, payments }) => {
-  const {
-    tariffsInfo,
-    setIsLoading,
-    setManagersCount,
-    maxAvailableManagersCount,
-
-    managersCount,
-    isAlreadyPaid,
-    getPaymentLink,
-    canUpdateTariff,
-  } = payments;
-  const { theme } = auth.settingsStore;
-  const {
-    currentTariffStatusStore,
-
+export default inject(
+  ({
+    settingsStore,
+    paymentStore,
     paymentQuotasStore,
-  } = auth;
+    currentTariffStatusStore,
+  }) => {
+    const {
+      tariffsInfo,
+      setIsLoading,
+      setManagersCount,
+      maxAvailableManagersCount,
 
-  const { planCost } = paymentQuotasStore;
-  const { isNotPaidPeriod, isGracePeriod } = currentTariffStatusStore;
+      managersCount,
+      isAlreadyPaid,
+      getPaymentLink,
+      canUpdateTariff,
+    } = paymentStore;
+    const { theme } = settingsStore;
 
-  return {
-    canUpdateTariff,
-    isAlreadyPaid,
-    managersCount,
+    const { planCost } = paymentQuotasStore;
+    const { isNotPaidPeriod, isGracePeriod } = currentTariffStatusStore;
 
-    setManagersCount,
-    tariffsInfo,
-    theme,
-    setIsLoading,
-    maxAvailableManagersCount,
+    return {
+      canUpdateTariff,
+      isAlreadyPaid,
+      managersCount,
 
-    isGracePeriod,
-    isNotPaidPeriod,
+      setManagersCount,
+      tariffsInfo,
+      theme,
+      setIsLoading,
+      maxAvailableManagersCount,
 
-    priceManagerPerMonth: planCost.value,
-    currencySymbol: planCost.currencySymbol,
-    getPaymentLink,
-  };
-})(observer(PriceCalculation));
+      isGracePeriod,
+      isNotPaidPeriod,
+
+      priceManagerPerMonth: planCost.value,
+      currencySymbol: planCost.currencySymbol,
+      getPaymentLink,
+    };
+  },
+)(observer(PriceCalculation));

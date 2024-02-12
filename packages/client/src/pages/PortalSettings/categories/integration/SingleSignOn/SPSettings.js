@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import Box from "@docspace/components/box";
-import { size } from "@docspace/components/utils/device";
+import { Box } from "@docspace/shared/components/box";
+import { size } from "@docspace/shared/utils";
 
 import IdpSettings from "./IdpSettings";
 import Certificates from "./Certificates";

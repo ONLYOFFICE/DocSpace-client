@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import Box from "@docspace/components/box";
-import RadioButtonGroup from "@docspace/components/radio-button-group";
-import Text from "@docspace/components/text";
+import { Box } from "@docspace/shared/components/box";
+import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
+import { Text } from "@docspace/shared/components/text";
 
 import SsoComboBox from "./sub-components/SsoComboBox";
 import SsoFormField from "./sub-components/SsoFormField";
@@ -16,7 +16,7 @@ import {
   nameIdOptions,
 } from "./sub-components/constants";
 import { useIsMobileView } from "../../../utils/useIsMobileView";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const PROVIDER_URL = "https://idpservice/idp";
 
@@ -180,7 +180,7 @@ const IdpSettings = (props) => {
   );
 };
 
-export default inject(({ auth, ssoStore }) => {
+export default inject(({ settingsStore, ssoStore }) => {
   const {
     ssoBinding,
     enableSso,
@@ -202,7 +202,7 @@ export default inject(({ auth, ssoStore }) => {
     init,
     isInit,
   } = ssoStore;
-  const { currentDeviceType } = auth.settingsStore;
+  const { currentDeviceType } = settingsStore;
 
   return {
     ssoBinding,

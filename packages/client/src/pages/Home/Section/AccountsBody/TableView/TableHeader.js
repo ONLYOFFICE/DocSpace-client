@@ -2,7 +2,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import TableHeader from "@docspace/components/table-container/TableHeader";
+import { TableHeader } from "@docspace/shared/components/table";
 
 const TABLE_VERSION = "3";
 const TABLE_COLUMNS = `peopleTableColumns_ver-${TABLE_VERSION}`;
@@ -172,23 +172,31 @@ class PeopleTableHeader extends React.Component {
   }
 }
 
-export default inject(({ auth, peopleStore, clientLoadingStore }) => {
-  const { filterStore } = peopleStore;
+export default inject(
+  ({
+    settingsStore,
+    peopleStore,
+    infoPanelStore,
+    clientLoadingStore,
+    userStore,
+  }) => {
+    const { filterStore } = peopleStore;
 
-  const { filter } = filterStore;
+    const { filter } = filterStore;
 
-  const { isVisible: infoPanelVisible } = auth.infoPanelStore;
-  const { withPaging } = auth.settingsStore;
+    const { isVisible: infoPanelVisible } = infoPanelStore;
+    const { withPaging } = settingsStore;
 
-  return {
-    filter,
+    return {
+      filter,
 
-    setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
-    userId: auth.userStore.user?.id,
-    infoPanelVisible,
-    withPaging,
-  };
-})(
+      setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
+      userId: userStore.user?.id,
+      infoPanelVisible,
+      withPaging,
+    };
+  }
+)(
   withTranslation(["People", "Common", "PeopleTranslations"])(
     observer(PeopleTableHeader)
   )

@@ -7,19 +7,20 @@ import {
   isTablet,
   mobile,
   tablet,
-} from "@docspace/components/utils/device";
+  desktop,
+} from "@docspace/shared/utils";
 
-import Link from "@docspace/components/link";
-import Text from "@docspace/components/text";
-import RowContent from "@docspace/components/row-content";
+import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { RowContent } from "@docspace/shared/components/row-content";
 
 import withContent from "../../../../../HOCs/withContent";
 
-import { Base } from "@docspace/components/themes";
-import { RoomsTypeTranslations } from "@docspace/common/constants";
-import { desktop } from "@docspace/components/utils/device";
+import { Base } from "@docspace/shared/themes";
+import { ROOMS_TYPE_TRANSLATIONS } from "@docspace/shared/constants";
+
 import { getFileTypeName } from "../../../../../helpers/filesUtils";
-import { SortByFieldName } from "../../../../../helpers/constants";
+import { SortByFieldName } from "SRC_DIR/helpers/enums";
 
 const SimpleFilesRowContent = styled(RowContent)`
   .row-main-container-wrapper {
@@ -60,6 +61,17 @@ const SimpleFilesRowContent = styled(RowContent)`
           `
         : css`
             margin: -2px 6px -2px -2px;
+          `}
+  }
+
+  .bagde_alert {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 8px;
+          `
+        : css`
+            margin-right: 8px;
           `}
   }
 
@@ -266,21 +278,21 @@ const FilesRowContent = ({
           truncate={true}
         >
           {isRooms
-            ? t(RoomsTypeTranslations[item.roomType])
+            ? t(ROOMS_TYPE_TRANSLATIONS[item.roomType])
             : !fileExst && !contentLength && !providerKey
-            ? `${foldersCount} ${t("Translations:Folders")} | ${filesCount} ${t(
-                "Translations:Files"
-              )}`
-            : fileExst
-            ? `${fileExst.toUpperCase().replace(/^\./, "")}`
-            : ""}
+              ? `${foldersCount} ${t(
+                  "Translations:Folders"
+                )} | ${filesCount} ${t("Translations:Files")}`
+              : fileExst
+                ? `${fileExst.toUpperCase().replace(/^\./, "")}`
+                : ""}
         </Text>
       </SimpleFilesRowContent>
     </>
   );
 };
 
-export default inject(({ auth, treeFoldersStore, filesStore }) => {
+export default inject(({ settingsStore, treeFoldersStore, filesStore }) => {
   const { filter, roomsFilter } = filesStore;
   const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
     treeFoldersStore;
@@ -290,7 +302,7 @@ export default inject(({ auth, treeFoldersStore, filesStore }) => {
 
   return {
     filterSortBy,
-    theme: auth.settingsStore.theme,
+    theme: settingsStore.theme,
     isTrashFolder: isRecycleBinFolder,
   };
 })(

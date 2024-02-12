@@ -1,5 +1,5 @@
 import React from "react";
-import TableHeader from "@docspace/components/table-container/TableHeader";
+import { TableHeader } from "@docspace/shared/components/table";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
@@ -119,9 +119,9 @@ class AuditTableHeader extends React.Component {
   }
 }
 
-export default inject(({ auth }) => {
+export default inject(({ userStore }) => {
   return {
-    userId: auth.userStore.user.id,
+    userId: userStore.user.id,
   };
 })(
   withTranslation(["Home", "Common", "Translations"])(

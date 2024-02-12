@@ -5,20 +5,20 @@ import { withTranslation } from "react-i18next";
 
 import { useNavigate, useLocation } from "react-router-dom";
 
-import { DeviceType, RoomSearchArea } from "@docspace/common/constants";
+import { DeviceType, RoomSearchArea } from "@docspace/shared/enums";
 import Items from "./Items";
-import { tablet } from "@docspace/components/utils/device";
+import { tablet } from "@docspace/shared/utils";
 
-import FilesFilter from "@docspace/common/api/files/filter";
-import RoomsFilter from "@docspace/common/api/rooms/filter";
-import AccountsFilter from "@docspace/common/api/people/filter";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import AccountsFilter from "@docspace/shared/api/people/filter";
 
 import Banner from "./Banner";
 
-import Loaders from "@docspace/common/components/Loaders";
-
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
+import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
+import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
 const StyledBlock = styled.div`
   padding: 0 20px;
@@ -221,7 +221,7 @@ const ArticleBodyContent = (props) => {
       return setActiveItemId(rootFolderId || roomsFolderId);
     }
 
-    if (location.pathname.includes("/products/files/#preview")) {
+    if (location.pathname.includes(MEDIA_VIEW_URL)) {
       setActiveItemId(rootFolderId);
     }
   }, [
@@ -239,7 +239,7 @@ const ArticleBodyContent = (props) => {
     setIsBurgerLoading(showArticleLoader);
   }, [showArticleLoader]);
 
-  if (showArticleLoader) return <Loaders.ArticleFolder />;
+  if (showArticleLoader) return <ArticleFolderLoader />;
 
   return (
     <>
@@ -264,12 +264,13 @@ const ArticleBodyContent = (props) => {
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     filesStore,
     treeFoldersStore,
     dialogsStore,
     selectedFolderStore,
     clientLoadingStore,
+    userStore,
   }) => {
     const { clearFiles, setSelection } = filesStore;
     const {
@@ -302,13 +303,13 @@ export default inject(
       theme,
       setIsBurgerLoading,
       currentDeviceType,
-    } = auth.settingsStore;
+    } = settingsStore;
 
     return {
       toggleArticleOpen,
       showText,
       showArticleLoader,
-      isVisitor: auth.userStore.user.isVisitor,
+      isVisitor: userStore.user.isVisitor,
 
       setNewFilesPanelVisible,
 

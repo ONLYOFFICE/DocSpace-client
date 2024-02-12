@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { observer, inject } from "mobx-react";
 import { useNavigate } from "react-router-dom";
-import Loader from "@docspace/components/loader";
+import { Loader } from "@docspace/shared/components/loader";
 import axios from "axios";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import ConfirmWrapper from "./ConfirmWrapper";
 
 let loadTimeout = null;
@@ -35,28 +35,26 @@ export default function withLoader(WrappedComponent) {
           type === "EmpInvite") &&
         !passwordSettings
       ) {
-        axios
-          .all([getSettings(), getPortalPasswordSettings(confirmHeader)])
-          .catch((error) => {
-            let errorMessage = "";
-            if (typeof error === "object") {
-              errorMessage =
-                error?.response?.data?.error?.message ||
-                error?.statusText ||
-                error?.message ||
-                "";
-            } else {
-              errorMessage = error;
-            }
+        getPortalPasswordSettings(confirmHeader).catch((error) => {
+          let errorMessage = "";
+          if (typeof error === "object") {
+            errorMessage =
+              error?.response?.data?.error?.message ||
+              error?.statusText ||
+              error?.message ||
+              "";
+          } else {
+            errorMessage = error;
+          }
 
-            console.error(errorMessage);
-            navigate(
-              combineUrl(
-                window.DocSpaceConfig?.proxy?.url,
-                `/login/error?message=${errorMessage}`
-              )
-            );
-          });
+          console.error(errorMessage);
+          navigate(
+            combineUrl(
+              window.DocSpaceConfig?.proxy?.url,
+              `/login/error?message=${errorMessage}`,
+            ),
+          );
+        });
       }
     }, [passwordSettings]);
 
@@ -77,8 +75,8 @@ export default function withLoader(WrappedComponent) {
           navigate(
             combineUrl(
               window.DocSpaceConfig?.proxy?.url,
-              `/login/error?message=${errorMessage}`
-            )
+              `/login/error?message=${errorMessage}`,
+            ),
           );
         });
       }
@@ -88,11 +86,11 @@ export default function withLoader(WrappedComponent) {
       type === "TfaActivation" || type === "TfaAuth"
         ? props.isLoaded
         : type === "PasswordChange" ||
-          type === "LinkInvite" ||
-          type === "Activation" ||
-          type === "EmpInvite"
-        ? !!passwordSettings
-        : true;
+            type === "LinkInvite" ||
+            type === "Activation" ||
+            type === "EmpInvite"
+          ? !!passwordSettings
+          : true;
 
     const cleanTimer = () => {
       loadTimeout && clearTimeout(loadTimeout);
@@ -124,11 +122,11 @@ export default function withLoader(WrappedComponent) {
     );
   };
 
-  return inject(({ auth, confirm }) => {
+  return inject(({ authStore, settingsStore, confirm }) => {
     const { isLoaded, isLoading } = confirm;
     const { passwordSettings, getSettings, getPortalPasswordSettings } =
-      auth.settingsStore;
-    const { getAuthProviders, getCapabilities } = auth;
+      settingsStore;
+    const { getAuthProviders, getCapabilities } = authStore;
 
     return {
       isLoaded,

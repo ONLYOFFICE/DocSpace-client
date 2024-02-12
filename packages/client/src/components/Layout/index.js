@@ -7,7 +7,7 @@ import {
   isTablet as isTabletUtils,
   isMobile as isMobileUtils,
   tablet,
-} from "@docspace/components/utils/device";
+} from "@docspace/shared/utils";
 import {
   isIOS,
   isMobile,
@@ -227,9 +227,9 @@ Layout.propTypes = {
   setIsTabletView: PropTypes.func,
 };
 
-export default inject(({ auth, bannerStore }) => {
+export default inject(({ settingsStore }) => {
   const { isTabletView, setIsTabletView, setWindowWidth, isFrame } =
-    auth.settingsStore;
+    settingsStore;
   return {
     isTabletView,
     setIsTabletView,

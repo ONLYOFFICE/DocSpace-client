@@ -3,7 +3,7 @@ import EmptyScreenRecentDarkUrl from "PUBLIC_DIR/images/empty_screen_recent_dark
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 
 import { StyledNoItemContainer } from "../../styles/noItem";
 
@@ -24,8 +24,8 @@ const NoHistory = ({ t, theme }) => {
   );
 };
 
-export default inject(({ auth }) => {
+export default inject(({ settingsStore }) => {
   return {
-    theme: auth.settingsStore.theme,
+    theme: settingsStore.theme,
   };
 })(observer(NoHistory));

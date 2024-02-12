@@ -188,6 +188,7 @@
         const winHtml = `<!DOCTYPE html>
           <html>
               <head>
+                  <meta charset="UTF-8">
                   <script src="${scriptUrl}"></script>
                   <title>DocSpace</title>
 

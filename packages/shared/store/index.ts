@@ -6,7 +6,6 @@ import { CurrentQuotasStore } from "./CurrentQuotaStore";
 import { PaymentQuotasStore } from "./PaymentQuotasStore";
 import { AuthStore } from "./AuthStore";
 import { SettingsStore } from "./SettingsStore";
-import { CampaignsStore } from "./CampaignsStore";
 
 export const userStore = new UserStore();
 export const tfaStore = new TfaStore();
@@ -15,7 +14,6 @@ export const currentQuotaStore = new CurrentQuotasStore();
 export const paymentQuotasStore = new PaymentQuotasStore();
 export const currentTariffStatusStore = new CurrentTariffStatusStore();
 export const settingsStore = new SettingsStore();
-export const campaignsStore = new CampaignsStore();
 export const authStore = new AuthStore(
   userStore,
   currentTariffStatusStore,

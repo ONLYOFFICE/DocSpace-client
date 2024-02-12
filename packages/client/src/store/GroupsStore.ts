@@ -58,7 +58,7 @@ class GroupsStore {
     window.history.replaceState(
       "",
       "",
-      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, newPath)
+      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, newPath),
     );
   };
 
@@ -100,7 +100,7 @@ class GroupsStore {
     const urlFilter = filter.toUrlParams();
 
     const newPath = combineUrl(
-      `/accounts/groups/${filter.group}/filter?${urlFilter}`
+      `/accounts/groups/${filter.group}/filter?${urlFilter}`,
     );
     const currentPath = window.location.pathname + window.location.search;
 
@@ -109,7 +109,7 @@ class GroupsStore {
     window.history.replaceState(
       "",
       "",
-      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, newPath)
+      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, newPath),
     );
   };
 
@@ -129,12 +129,12 @@ class GroupsStore {
   getGroups = async (
     filter = GroupsFilter.getDefault(),
     updateFilter = false,
-    withFilterLocalStorage = false
+    withFilterLocalStorage = false,
   ) => {
     const filterData = filter ? filter.clone() : Filter.getDefault();
 
     const filterStorageItem = localStorage.getItem(
-      `GroupsFilter=${this.peopleStore.userStore.user?.id}`
+      `GroupsFilter=${this.peopleStore.userStore.user?.id}`,
     );
 
     if (filterStorageItem && withFilterLocalStorage) {
@@ -149,7 +149,7 @@ class GroupsStore {
 
     if (updateFilter) this.setFilterParams(filterData);
 
-    this.groups = res.items;
+    this.groups = res.items || [];
   };
 
   fetchMoreGroups = async () => {
@@ -182,7 +182,7 @@ class GroupsStore {
     groupId,
     filter,
     updateFilter = false,
-    withFilterLocalStorage = false
+    withFilterLocalStorage = false,
   ) => {
     const filterData = filter ? filter.clone() : AccountsFilter.getDefault();
     filterData.group = groupId;
@@ -193,7 +193,7 @@ class GroupsStore {
     }
 
     const filterStorageItem = localStorage.getItem(
-      `InsideGroupFilter=${this.peopleStore.userStore.user?.id}`
+      `InsideGroupFilter=${this.peopleStore.userStore.user?.id}`,
     );
 
     if (filterStorageItem && withFilterLocalStorage) {

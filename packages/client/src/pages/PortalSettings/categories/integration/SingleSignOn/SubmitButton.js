@@ -32,7 +32,9 @@ const SubmitResetButtons = (props) => {
         displaySettings={true}
         hasScroll={true}
         isSaving={isSubmitLoading}
-        saveButtonDisabled={hasErrors || !hasChanges || isLoadingXml}
+        saveButtonDisabled={
+          !isSsoEnabled || hasErrors || !hasChanges || isLoadingXml
+        }
         cancelEnable={!(isSubmitLoading || isLoadingXml)}
         additionalClassSaveButton="save-button"
         additionalClassCancelButton="restore-button"

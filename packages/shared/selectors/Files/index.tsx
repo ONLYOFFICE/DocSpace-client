@@ -172,7 +172,6 @@ const FilesSelector = ({
     disabledItems,
     setSelectedItemSecurity,
     isThirdParty,
-
     setSelectedTreeNode,
     filterParam,
     getRootData,
@@ -181,7 +180,6 @@ const FilesSelector = ({
     rootThirdPartyId,
     getRoomList,
     getIcon,
-
     setIsSelectedParentFolder,
     roomsFolderId,
     getFilesArchiveError,

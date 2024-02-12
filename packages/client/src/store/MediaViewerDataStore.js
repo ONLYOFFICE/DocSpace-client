@@ -1,14 +1,16 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import {
-  isNullOrUndefined,
-  findNearestIndex,
-  isVideo,
-} from "@docspace/common/components/MediaViewer/helpers";
-import { thumbnailStatuses } from "SRC_DIR/helpers/filesConstants";
+
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { thumbnailStatuses } from "SRC_DIR/helpers/filesConstants";
+import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
 
-const FirstUrlKey = "isFirstUrl";
+import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+
+import {
+  findNearestIndex,
+  isVideo,
+} from "@docspace/shared/components/media-viewer/MediaViewer.utils";
 
 class MediaViewerDataStore {
   filesStore;
@@ -63,16 +65,16 @@ class MediaViewerDataStore {
     this.id = id;
   };
 
-  saveFirstUrl = (url) => {
-    localStorage.setItem(FirstUrlKey, url);
-  };
-
   getFirstUrl = () => {
-    return localStorage.getItem(FirstUrlKey);
-  };
+    const filter = this.filesStore.filter;
 
-  removeFirstUrl = () => {
-    localStorage.removeItem(FirstUrlKey);
+    const queryParams = filter.toUrlParams();
+
+    const url = getCategoryUrl(this.filesStore.categoryType, filter.folder);
+
+    const pathname = `${url}?${queryParams}`;
+
+    return pathname;
   };
 
   changeUrl = (id) => {

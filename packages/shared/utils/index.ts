@@ -2,7 +2,7 @@ import moment from "moment-timezone";
 
 import { isArrayEqual } from "./array";
 import * as email from "./email";
-import { EmailSettings, parseAddress, parseAddresses } from "./email";
+import { EmailSettings, parseAddress, parseAddresses, getParts } from "./email";
 import useId from "./useId";
 import {
   getCorrectTextAlign,
@@ -46,7 +46,6 @@ import {
   getLogoFromPath,
   isBetaLanguage,
 } from "./common";
-import { isNumber } from "./typeGuards";
 
 export type { TInterfaceDirection };
 
@@ -58,6 +57,7 @@ export {
   RoomsTypeValues,
   RoomsTypes,
   parseAddresses,
+  getParts,
   NoUserSelect,
   commonInputStyles,
   commonTextStyles,
@@ -96,7 +96,6 @@ export {
   handleAnyClick,
   DomHelpers,
   ObjectUtils,
-  isNumber,
 };
 
 export const getModalType = () => {

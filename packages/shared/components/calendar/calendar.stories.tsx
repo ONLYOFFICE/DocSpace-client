@@ -81,6 +81,6 @@ export const Default: Story = {
     locale: "en",
     maxDate: new Date(`${new Date().getFullYear() + 10}/01/01`),
     minDate: new Date("1970/01/01"),
-    initialDate: moment(),
+    initialDate: new Date(),
   },
 };

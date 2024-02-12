@@ -21,6 +21,8 @@ import { Button } from "@docspace/shared/components/button";
 
 import { RoomsType } from "@docspace/shared/enums";
 
+import { toastr } from "@docspace/shared/components/toast";
+
 const showPreviewThreshold = 720;
 
 import {
@@ -101,6 +103,17 @@ const RoomSelector = (props) => {
     cancelButtonLabel: t("Common:CancelButton"),
     isButtonMode: false,
     buttonWithLogo: true,
+    events: {
+      onSelectCallback: (items) => {
+        toastr.success(items[0].label);
+      },
+      onCloseCallback: null,
+      onAppReady: null,
+      onAppError: (e) => console.log("onAppError", e),
+      onEditorCloseCallback: null,
+      onAuthSuccess: null,
+      onSignOut: null,
+    },
   });
 
   const params = objectToGetParams(config);

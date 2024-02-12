@@ -56,8 +56,13 @@
       "mode",
     ],
     events: {
-      onSelectCallback: null,
-      onCloseCallback: null,
+      onSelectCallback: (items) => {
+        alert(items[0].label);
+        window.close();
+      },
+      onCloseCallback: () => {
+        window.close();
+      },
       onAppReady: null,
       onAppError: (e) => console.log("onAppError", e),
       onEditorCloseCallback: null,
@@ -455,7 +460,7 @@
 
     initButton(config) {
       const configFull = { ...defaultConfig, ...config };
-      this.config = { ...this.config, ...configFull };
+      this.config = { ...this.config, ...configFull, events: { ...defaultConfig.events } };
 
       const target = document.getElementById(this.config.frameId);
 

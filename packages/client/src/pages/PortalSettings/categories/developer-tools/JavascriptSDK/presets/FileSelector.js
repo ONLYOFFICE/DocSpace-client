@@ -29,6 +29,8 @@ import { TooltipContent } from "../sub-components/TooltipContent";
 import SubtitleUrl from "PUBLIC_DIR/images/sdk-presets_subtitle.react.svg?url";
 import SearchUrl from "PUBLIC_DIR/images/sdk-presets_files-search.react.svg?url";
 
+import { toastr } from "@docspace/shared/components/toast";
+
 const showPreviewThreshold = 720;
 
 import {
@@ -95,7 +97,7 @@ const FileSelector = (props) => {
   const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
   const [showPreview, setShowPreview] = useState(window.innerWidth > showPreviewThreshold);
   const [sharedLinks, setSharedLinks] = useState(null);
-  const [selectedElementType, setSelectedElementType] = useState(elementDisplayOptions[0].value);
+  const [selectedElementType, setSelectedElementType] = useState(elementDisplayOptions[1].value);
   const [typeDisplay, setTypeDisplay] = useState(fileTypeDisplay[0].value);
   const [selectedType, setSelectedType] = useState(fileOptions[0]);
   const [selectedFileTypes, setSelectedFileTypes] = useState([
@@ -126,6 +128,17 @@ const FileSelector = (props) => {
     filterParam: FilesSelectorFilterTypes.ALL,
     isButtonMode: false,
     buttonWithLogo: true,
+    events: {
+      onSelectCallback: (items) => {
+        toastr.success(items[0].label);
+      },
+      onCloseCallback: null,
+      onAppReady: null,
+      onAppError: (e) => console.log("onAppError", e),
+      onEditorCloseCallback: null,
+      onAuthSuccess: null,
+      onSignOut: null,
+    },
   });
 
   const params = objectToGetParams(config);

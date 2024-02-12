@@ -23,8 +23,10 @@ const RoomSelector = ({
   excludeItems = [],
 
   headerLabel,
+  withoutBackButton,
   onBackClick,
 
+  withSearch,
   searchPlaceholder,
   onSearch,
   onClearSearch,
@@ -57,6 +59,8 @@ const RoomSelector = ({
   searchEmptyScreenImage,
   searchEmptyScreenHeader,
   searchEmptyScreenDescription,
+
+  roomType,
 }: RoomSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["RoomSelector", "Common"]);
 
@@ -124,24 +128,27 @@ const RoomSelector = ({
 
       setItems((prevItems) => {
         const newItems = rooms.filter((x) => !excludeItems.includes(x.id));
+        const filteredByRoomType = rooms.filter(
+          (x) => !excludeItems.includes(x.id) && x.roomType === roomType,
+        );
 
         if (isFirstLoad) {
           setTotal(totalCount);
           setIsFirstLoad(false);
-          return newItems;
+          return roomType ? filteredByRoomType : newItems;
         }
 
-        return [...prevItems, ...newItems];
+        return roomType ? filteredByRoomType : [...prevItems, ...newItems];
       });
 
       setIsNextPageLoading(false);
     },
-    [isFirstLoad, excludeItems, searchValue],
+    [isFirstLoad, excludeItems, searchValue, roomType],
   );
 
   React.useEffect(() => {
     onLoadNextPage(0);
-  }, []);
+  }, [roomType]);
 
   return (
     <Selector
@@ -199,9 +206,10 @@ const RoomSelector = ({
           isUser={false}
         />
       }
+      withSearch={withSearch}
+      withoutBackButton={withoutBackButton}
     />
   );
 };
 
 export default RoomSelector;
-

@@ -82,7 +82,6 @@ export const Default: Story = {
     minDate: new Date("1970/01/01"),
     openDate: moment(),
     initialDate: moment(),
-    onChange: () => {},
     locale: "en",
   },
 };

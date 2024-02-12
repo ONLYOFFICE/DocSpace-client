@@ -20,6 +20,21 @@ const StyledBadgesContainer = styled.div`
   display: flex;
 
   align-items: center;
+
+  ${(props) =>
+    props.infoPanelVisible &&
+    css`
+      .accounts-badge:last-child {
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-left: 12px;
+              `
+            : css`
+                margin-right: 12px;
+              `}
+      }
+    `}
 `;
 
 const StyledPaidBadge = styled(Badge)`
@@ -52,7 +67,7 @@ const Badges = ({
   withoutPaid,
   isPaid = false,
   filter,
-
+  infoPanelVisible,
   isSSO = false,
 }) => {
   const navigate = useNavigate();
@@ -74,9 +89,13 @@ const Badges = ({
   };
 
   return (
-    <StyledBadgesContainer className="badges additional-badges">
+    <StyledBadgesContainer
+      className="badges additional-badges"
+      infoPanelVisible={infoPanelVisible}
+    >
       {isSSO && (
         <Badge
+          className="accounts-badge"
           label={SSO_LABEL}
           color={"#FFFFFF"}
           backgroundColor="#22C386"
@@ -89,7 +108,7 @@ const Badges = ({
       )}
       {!withoutPaid && isPaid && (
         <StyledPaidBadge
-          className="paid-badge"
+          className="paid-badge accounts-badge"
           label={t("Paid")}
           backgroundColor={"#EDC409"}
           fontSize={"9px"}
@@ -101,10 +120,16 @@ const Badges = ({
         />
       )}
       {statusType === "pending" && (
-        <StyledSendClockIcon className="pending-badge" size="small" />
+        <StyledSendClockIcon
+          className="pending-badge accounts-badge"
+          size="small"
+        />
       )}
       {statusType === "disabled" && (
-        <StyledCatalogSpamIcon className="disabled-badge" size="small" />
+        <StyledCatalogSpamIcon
+          className="disabled-badge accounts-badge"
+          size="small"
+        />
       )}
     </StyledBadgesContainer>
   );

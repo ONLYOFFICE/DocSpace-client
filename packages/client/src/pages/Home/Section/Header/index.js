@@ -249,6 +249,8 @@ const SectionHeaderContent = (props) => {
     moveToPublicRoom,
     currentDeviceType,
     isFrame,
+    showTitle,
+    hideInfoPanel,
     onClickArchive,
     setLeaveRoomDialogVisible,
     inRoom,
@@ -1171,7 +1173,7 @@ const SectionHeaderContent = (props) => {
                 onPlusClick={onCreateRoom}
                 isEmptyPage={isEmptyPage}
                 isRoom={isCurrentRoom || isAccountsPage}
-                hideInfoPanel={isSettingsPage || isPublicRoom}
+                hideInfoPanel={hideInfoPanel || isSettingsPage || isPublicRoom}
                 withLogo={isPublicRoom && logo}
                 burgerLogo={isPublicRoom && burgerLogo}
                 isPublicRoom={isPublicRoom}
@@ -1181,6 +1183,7 @@ const SectionHeaderContent = (props) => {
                 showRootFolderTitle={insideTheRoom || isInsideGroup}
                 currentDeviceType={currentDeviceType}
                 isFrame={isFrame}
+                showTitle={isFrame ? showTitle : true}
                 navigationButtonLabel={navigationButtonLabel}
                 onNavigationButtonClick={onNavigationButtonClick}
                 tariffBar={<TariffBar />}
@@ -1317,6 +1320,7 @@ export default inject(
       enablePlugins,
       theme,
       whiteLabelLogoUrls,
+      frameConfig,
       isFrame,
       currentDeviceType,
     } = settingsStore;
@@ -1370,9 +1374,10 @@ export default inject(
       folderPath = navigationPath.filter((item) => !item.isRootRoom);
     }
 
-    const isRoot = isFrame
-      ? pathParts?.length === 1 || pathParts?.length === 2
-      : pathParts?.length === 1;
+    const isRoot =
+      isFrame && frameConfig?.id
+        ? pathParts?.length === 1 || pathParts?.length === 2
+        : pathParts?.length === 1;
 
     const haveLinksRight =
       access === ShareAccessRights.RoomManager ||
@@ -1502,6 +1507,8 @@ export default inject(
       theme,
       whiteLabelLogoUrls,
       isFrame,
+      showTitle: frameConfig?.showTitle,
+      hideInfoPanel: isFrame && !frameConfig?.infoPanelVisible,
       currentDeviceType,
       setLeaveRoomDialogVisible,
       inRoom,

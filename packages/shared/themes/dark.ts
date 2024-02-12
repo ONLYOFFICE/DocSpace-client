@@ -3189,6 +3189,11 @@ const Dark: TTheme = {
     pluginName: "#A3A9AE",
     descriptionColor: "#ADADAD",
   },
+
+  sdkPresets: {
+    borderColor: "#474747",
+    secondaryColor: "#ADADAD",
+  },
 };
 
 export default Dark;

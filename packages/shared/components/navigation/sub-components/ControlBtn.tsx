@@ -30,6 +30,7 @@ const ControlButtons = ({
   isPublicRoom,
   isTrashFolder,
   isMobile,
+  showTitle,
   navigationButtonLabel,
   onNavigationButtonClick,
   tariffBar,
@@ -53,7 +54,7 @@ const ControlButtons = ({
   const isTabletView = isTablet();
 
   return (
-    <StyledControlButtonContainer isFrame={isFrame}>
+    <StyledControlButtonContainer isFrame={isFrame} showTitle={showTitle}>
       {!isRootFolder || (isTrashFolder && !isEmptyFilesList) ? (
         <>
           {!isMobile && canCreate && (

@@ -169,7 +169,7 @@ const TabsContainer = ({
           ))}
         </NavItem>
       </StyledScrollbar>
-      <div>{elements[state.activeTab].content}</div>
+      <div className="tabs_body">{elements[state.activeTab].content}</div>
     </>
   );
 };

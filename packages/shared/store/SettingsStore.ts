@@ -40,6 +40,7 @@ import { Dark, Base, TColorScheme } from "../themes";
 import { toastr } from "../components/toast";
 import { TData } from "../components/toast/Toast.type";
 import { version } from "../package.json";
+import { Nullable } from "../types";
 
 // import { getFromLocalStorage } from "@docspace/client/src/pages/PortalSettings/utils";
 
@@ -138,7 +139,7 @@ class SettingsStore {
     uploadDashboard: "",
   };
 
-  logoUrl: TWhiteLabel = {} as TWhiteLabel;
+  logoUrl: Nullable<TWhiteLabel> = null;
 
   isDesktopClient = isDesktopEditors;
 
@@ -167,7 +168,7 @@ class SettingsStore {
 
   folderPath: TFolder[] = [];
 
-  hashSettings: TPasswordHash = {} as TPasswordHash;
+  hashSettings: Nullable<TPasswordHash> = null;
 
   title = "";
 
@@ -175,7 +176,7 @@ class SettingsStore {
 
   nameSchemaId = null;
 
-  owner: TUser = {} as TUser;
+  owner: Nullable<TUser> = null;
 
   wizardToken = null;
 
@@ -229,7 +230,7 @@ class SettingsStore {
 
   selectedThemeId: number | null = null;
 
-  currentColorScheme: TColorScheme = {} as TColorScheme;
+  currentColorScheme: Nullable<TColorScheme> = null;
 
   enablePlugins = false;
 
@@ -237,11 +238,11 @@ class SettingsStore {
 
   domainValidator: TDomainValidator | null = null;
 
-  additionalResourcesData: TAdditionalResources = {} as TAdditionalResources;
+  additionalResourcesData: Nullable<TAdditionalResources> = null;
 
   additionalResourcesIsDefault = true;
 
-  companyInfoSettingsData: TCompanyInfo = {} as TCompanyInfo;
+  companyInfoSettingsData: Nullable<TCompanyInfo> = null;
 
   companyInfoSettingsIsDefault = true;
 
@@ -492,7 +493,7 @@ class SettingsStore {
   };
 
   getSettings = async () => {
-    let newSettings: TSettings = {} as TSettings;
+    let newSettings: Nullable<TSettings> = null;
 
     if (window?.__ASC_INITIAL_EDITOR_STATE__?.portalSettings)
       newSettings = window.__ASC_INITIAL_EDITOR_STATE__.portalSettings;
@@ -507,7 +508,7 @@ class SettingsStore {
 
     Object.keys(newSettings).forEach((forEachKey) => {
       const key = forEachKey as keyof TSettings;
-      if (key in this) {
+      if (key in this && newSettings) {
         this.setValue(
           key as keyof SettingsStore,
           key === "defaultPage"
@@ -523,7 +524,7 @@ class SettingsStore {
             });
           }
         }
-      } else if (key === "passwordHash") {
+      } else if (key === "passwordHash" && newSettings) {
         this.setValue("hashSettings", newSettings[key]);
       }
     });
@@ -741,6 +742,7 @@ class SettingsStore {
 
   getPortalOwner = async () => {
     const owner = await api.people.getUserById(this.ownerId);
+
     this.setPortalOwner(owner);
     return owner;
   };
@@ -958,7 +960,7 @@ class SettingsStore {
       this.frameConfig = frameConfig;
     });
 
-    if (!!frameConfig) {
+    if (frameConfig) {
       frameCallEvent({
         event: "onAppReady",
         data: { frameId: frameConfig.frameId },
@@ -985,13 +987,13 @@ class SettingsStore {
   };
 
   getAppearanceTheme = async () => {
-    let res: TGetColorTheme = {} as TGetColorTheme;
+    let res: Nullable<TGetColorTheme> = null;
     if (window?.__ASC_INITIAL_EDITOR_STATE__?.appearanceTheme)
       res = window.__ASC_INITIAL_EDITOR_STATE__.appearanceTheme;
     else res = await api.settings.getAppearanceTheme();
 
     const currentColorScheme = res.themes.find((theme) => {
-      return res.selected === theme.id;
+      return res && res.selected === theme.id;
     });
 
     this.setAppearanceTheme(res.themes);
@@ -1056,4 +1058,3 @@ class SettingsStore {
 }
 
 export { SettingsStore };
-

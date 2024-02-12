@@ -16,7 +16,7 @@ import MobileView from "./Branding/MobileView";
 
 import { UnavailableStyles } from "../../utils/commonSettingsStyles";
 import { resetSessionStorage } from "../../utils";
-import { useIsMobileView } from "../../utils/useIsMobileView";
+import { DeviceType } from "@docspace/shared/enums";
 
 const StyledComponent = styled.div`
   max-width: 700px;
@@ -60,8 +60,9 @@ const Branding = ({
   isLoadedCompanyInfoSettingsData,
   isSettingPaid,
   standalone,
+  currentDeviceType
 }) => {
-  const isMobileView = useIsMobileView();
+  const isMobileView = currentDeviceType === DeviceType.mobile;
 
   useEffect(() => {
     setDocumentTitle(t("Branding"));
@@ -104,11 +105,12 @@ const Branding = ({
 export default inject(({ settingsStore, currentQuotaStore, common }) => {
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
   const { isLoadedCompanyInfoSettingsData } = common;
-  const { standalone } = settingsStore;
+  const { standalone, currentDeviceType } = settingsStore;
 
   return {
     isLoadedCompanyInfoSettingsData,
     isSettingPaid: isBrandingAndCustomizationAvailable,
     standalone,
+    currentDeviceType
   };
 })(withLoading(withTranslation(["Settings", "Common"])(observer(Branding))));

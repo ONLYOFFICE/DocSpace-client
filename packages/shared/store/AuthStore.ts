@@ -13,7 +13,7 @@ import { getCookie, setCookie } from "../utils/cookie";
 import { TTenantExtraRes } from "../api/portal/types";
 import { TenantStatus } from "../enums";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "../constants";
-import { TI18n } from "../types";
+import { Nullable, TI18n } from "../types";
 import { UserStore } from "./UserStore";
 
 import { CurrentTariffStatusStore } from "./CurrentTariffStatusStore";
@@ -36,7 +36,7 @@ class AuthStore {
 
   providers: TThirdPartyProvider[] = [];
 
-  capabilities: TCapabilities = {} as TCapabilities;
+  capabilities: Nullable<TCapabilities> = null;
 
   isInit = false;
 
@@ -44,7 +44,7 @@ class AuthStore {
 
   isUpdatingTariff = false;
 
-  tenantExtra: TTenantExtraRes = {} as TTenantExtraRes;
+  tenantExtra: Nullable<TTenantExtraRes> = null;
 
   skipRequest = false;
 
@@ -159,12 +159,14 @@ class AuthStore {
   };
 
   get isEnterprise() {
-    this.currentTariffStatusStore?.setIsEnterprise(this.tenantExtra.enterprise);
-    return this.tenantExtra.enterprise;
+    this.currentTariffStatusStore?.setIsEnterprise(
+      this.tenantExtra?.enterprise || false,
+    );
+    return this.tenantExtra?.enterprise;
   }
 
   get isCommunity() {
-    return this.tenantExtra.opensource;
+    return this.tenantExtra?.opensource;
   }
 
   getTenantExtra = async () => {

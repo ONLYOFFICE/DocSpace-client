@@ -8,9 +8,9 @@ import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 
 import { mobile, size } from "@docspace/shared/utils";
+import { DeviceType } from "@docspace/shared/enums";
 
 import MetadataUrlField from "./sub-components/MetadataUrlField";
-import { useIsMobileView } from "../../../utils/useIsMobileView";
 
 const StyledWrapper = styled.div`
   .button-wrapper {
@@ -30,11 +30,11 @@ const StyledWrapper = styled.div`
 
 const ProviderMetadata = (props) => {
   const { t } = useTranslation("SingleSignOn");
-  const isMobileView = useIsMobileView();
   const navigate = useNavigate();
   const location = useLocation();
+  const { downloadMetadata, currentDeviceType } = props;
 
-  const { downloadMetadata } = props;
+  const isMobileView = currentDeviceType === DeviceType.mobile;
 
   const url = window.location.origin;
 
@@ -95,10 +95,12 @@ const ProviderMetadata = (props) => {
   );
 };
 
-export default inject(({ ssoStore }) => {
+export default inject(({ ssoStore, settingsStore }) => {
   const { downloadMetadata } = ssoStore;
+  const { currentDeviceType } = settingsStore;
 
   return {
     downloadMetadata,
+    currentDeviceType
   };
 })(observer(ProviderMetadata));

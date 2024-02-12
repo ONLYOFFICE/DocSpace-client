@@ -178,6 +178,7 @@ const FilterDialog = (props) => {
               size="normal"
               primary={true}
               onClick={handleApplyFilters}
+              isDisabled={filters.deliveryTo <= filters.deliveryFrom}
             />
             <Button
               className="cancel-button"

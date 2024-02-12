@@ -108,8 +108,6 @@ export default inject(({ settingsStore, userStore }) => {
   const { getPortalOwner, owner, currentColorScheme } = settingsStore;
   const { sendActivationLink } = userStore;
 
-  console.log(owner);
-
   return {
     getPortalOwner,
     owner,

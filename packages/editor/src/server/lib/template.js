@@ -22,7 +22,15 @@ export default function template(
 
   const editorApiScript =
     error || !editorUrl
-      ? ""
+      ? `<script>
+      window?.parent?.postMessage(
+        JSON.stringify({
+          type: "onCallCommand",
+          commandName: "setIsLoaded"
+        }),
+        "*",
+      );
+      </script>`
       : `<script type="text/javascript" id="onlyoffice-api-script" src="${editorUrl}" async></script>`;
 
   if (!IS_DEVELOPMENT) {

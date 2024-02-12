@@ -24,7 +24,7 @@ const RowView = ({
     currentDeviceType,
   });
 
-  if (groups.length === 0 || !isFiltered) return <EmptyScreenGroups />;
+  if (groups.length === 0) return <EmptyScreenGroups />;
 
   console.log(groups);
   return (

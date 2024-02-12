@@ -1,27 +1,23 @@
+import { observer } from "mobx-react";
 import React, { useEffect } from "react";
-import { observer, Provider as MobxProvider } from "mobx-react";
-import { I18nextProvider, useTranslation } from "react-i18next";
-import tryRedirectTo from "@docspace/shared/utils/tryRedirectTo";
 import { Outlet } from "react-router-dom";
-
 import { isMobileOnly } from "react-device-detect";
 
-import { ThemeProvider } from "@docspace/shared/components/theme-provider";
-import { Portal } from "@docspace/shared/components/portal";
+import { ThemeKeys } from "@docspace/shared/enums";
 import { Toast } from "@docspace/shared/components/toast";
+import { Portal } from "@docspace/shared/components/portal";
+import tryRedirectTo from "@docspace/shared/utils/tryRedirectTo";
 import Error403 from "@docspace/shared/components/errors/Error403";
 
 import "@docspace/common/custom.scss";
 
-import { RootStoreContext, RootStore, useStore } from "./store";
+import { useStore } from "./store";
 import SimpleHeader from "./SimpleHeader";
 
-import store from "client/store";
-import Layout from "client/Layout";
 import Main from "client/Main";
+import Layout from "client/Layout";
 import NavMenu from "client/NavMenu";
 import MainLayout from "SRC_DIR/Layout";
-import i18n from "./i18n";
 
 declare global {
   interface Window {
@@ -30,16 +26,16 @@ declare global {
 }
 
 const App = observer(() => {
-  const { i18n } = useTranslation();
-
   const { authStore, userStore, settingsStore } = useStore();
+
   const { init } = authStore;
-  const { theme, setTheme, currentColorScheme, limitedAccessSpace, timezone } =
-    settingsStore;
+  const { setTheme, limitedAccessSpace, timezone } = settingsStore;
 
   window.timezone = timezone;
 
-  const userTheme = userStore?.user?.theme ? userStore?.user?.theme : "Dark";
+  const userTheme = userStore?.user?.theme
+    ? userStore?.user?.theme
+    : ThemeKeys.DarkStr;
 
   useEffect(() => {
     const initData = async () => {
@@ -53,7 +49,7 @@ const App = observer(() => {
     if (userTheme) setTheme(userTheme);
   }, [userTheme]);
 
-  const rootElement = document.getElementById("root");
+  const rootElement = document.getElementById("root") as HTMLElement;
 
   const toast = isMobileOnly ? (
     <Portal element={<Toast />} appendTo={rootElement} visible={true} />
@@ -67,31 +63,18 @@ const App = observer(() => {
     return tryRedirectTo(window.location.origin);
 
   return (
-    <ThemeProvider
-      theme={{ ...theme, interfaceDirection: i18n.dir() }}
-      currentColorScheme={currentColorScheme}
-    >
-      <Layout>
-        {toast}
-        <NavMenu hideProfileMenu customHeader={<SimpleHeader />} />
-        <Main isDesktop={false}>
-          <div className="main-container">
-            <MainLayout>
-              <Outlet />
-            </MainLayout>
-          </div>
-        </Main>
-      </Layout>
-    </ThemeProvider>
+    <Layout>
+      {toast}
+      <NavMenu hideProfileMenu customHeader={<SimpleHeader />} />
+      <Main isDesktop={false}>
+        <div className="main-container">
+          <MainLayout>
+            <Outlet />
+          </MainLayout>
+        </div>
+      </Main>
+    </Layout>
   );
 });
 
-export default (props: any) => (
-  <MobxProvider {...store}>
-    <RootStoreContext.Provider value={new RootStore()}>
-      <I18nextProvider i18n={i18n}>
-        <App {...props} />
-      </I18nextProvider>
-    </RootStoreContext.Provider>
-  </MobxProvider>
-);
+export default App;

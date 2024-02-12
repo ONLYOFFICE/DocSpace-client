@@ -181,7 +181,7 @@ class SettingsStore {
 
   limitedAccessSpace = null;
 
-  passwordSettings: TPasswordSettings = {} as TPasswordSettings;
+  passwordSettings: TPasswordSettings | null = null;
 
   hasShortenService = false;
 
@@ -1056,3 +1056,4 @@ class SettingsStore {
 }
 
 export { SettingsStore };
+

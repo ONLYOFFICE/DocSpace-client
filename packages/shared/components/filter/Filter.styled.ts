@@ -541,6 +541,14 @@ const StyledSortButton = styled.div<{ viewAs: TViewAs; isDesc: boolean }>`
     .icon-button_svg {
       cursor: pointer;
     }
+    :hover {
+      border-color: ${(props) => props.theme.iconButton.color};
+      svg {
+        path {
+          fill: ${(props) => props.theme.iconButton.hoverColor};
+        }
+      }
+    }
   }
 
   .sort-combo-box {

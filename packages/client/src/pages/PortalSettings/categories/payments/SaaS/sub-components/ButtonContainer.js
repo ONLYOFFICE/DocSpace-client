@@ -49,8 +49,8 @@ const ButtonContainer = ({
   );
 };
 
-export default inject(({ currentTariffStatusStore, payments }) => {
-  const { isNeedRequest, isLoading, accountLink } = payments;
+export default inject(({ currentTariffStatusStore, paymentStore }) => {
+  const { isNeedRequest, isLoading, accountLink } = paymentStore;
   const { isNotPaidPeriod, isGracePeriod } = currentTariffStatusStore;
 
   return {

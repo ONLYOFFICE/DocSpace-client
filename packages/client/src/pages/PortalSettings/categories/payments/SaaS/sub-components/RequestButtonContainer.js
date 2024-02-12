@@ -44,8 +44,8 @@ const RequestButtonContainer = ({ isDisabled, isLoading }) => {
   );
 };
 
-export default inject(({ payments }) => {
-  const { isLoading } = payments;
+export default inject(({ paymentStore }) => {
+  const { isLoading } = paymentStore;
 
   return {
     isLoading,

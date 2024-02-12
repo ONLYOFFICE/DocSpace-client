@@ -24,7 +24,7 @@ import BackgroundPatternPurpleReactSvgUrl from "PUBLIC_DIR/images/background.pat
 import BackgroundPatternLightBlueReactSvgUrl from "PUBLIC_DIR/images/background.pattern.lightBlue.react.svg?url";
 import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.pattern.black.react.svg?url";
 
-import { FolderType, RoomsType, ThemeKeys } from "../enums";
+import { FolderType, RoomsType, ShareAccessRights, ThemeKeys } from "../enums";
 import { LANGUAGE, RTL_LANGUAGES } from "../constants";
 
 import { TI18n } from "../types";
@@ -37,6 +37,7 @@ import { Encoder } from "./encoder";
 import { combineUrl } from "./combineUrl";
 import { getCookie } from "./cookie";
 import { checkIsSSR } from "./device";
+import { AvatarRole } from "../components/avatar/Avatar.enums";
 
 export const desktopConstants = Object.freeze({
   domain: !checkIsSSR() && window.location.origin,
@@ -83,6 +84,26 @@ export function createPasswordHash(
 
 export const isPublicRoom = () => {
   return window.location.pathname === "/rooms/share";
+};
+
+export const getUserTypeLabel = (
+  role: AvatarRole | undefined,
+  t: (key: string) => string,
+) => {
+  switch (role) {
+    case "owner":
+      return t("Common:Owner");
+    case "admin":
+      return t("Common:DocSpaceAdmin");
+    case "manager":
+      return t("Common:RoomAdmin");
+    case "collaborator":
+      return t("Common:PowerUser");
+    case "user":
+      return t("Common:User");
+    default:
+      return t("Common:User");
+  }
 };
 
 export const getShowText = () => {
@@ -156,13 +177,18 @@ export function isAdmin(currentUser: TUser) {
 
 export const getUserRole = (user: TUser) => {
   if (user.isOwner) return "owner";
-  if (isAdmin(user))
+  if (
+    isAdmin(user) ||
+    user.access === ShareAccessRights.RoomManager ||
+    user.access === ShareAccessRights.Collaborator
+  )
     // TODO: Change to People Product Id const
     return "admin";
   // TODO: Need refactoring
   if (user.isVisitor) return "user";
   if (user.isCollaborator) return "collaborator";
-  return "manager";
+
+  return "user";
 };
 
 export function clickBackdrop() {

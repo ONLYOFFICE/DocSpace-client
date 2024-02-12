@@ -7,7 +7,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { getCorrectDate, getCookie } from "@docspace/shared/utils";
 
-import { PluginStatus } from "SRC_DIR/helpers/plugins/constants";
+import { PluginStatus } from "SRC_DIR/helpers/plugins/enums";
 import { Base } from "@docspace/shared/themes";
 
 const StyledContainer = styled.div`
@@ -121,7 +121,7 @@ const Info = ({ t, plugin, withDelete, withSeparator }) => {
               lineHeight={"20px"}
               noSelect
             >
-              {plugin.createBy}
+              {plugin.createBy.displayName}
             </Text>
           </>
         )}

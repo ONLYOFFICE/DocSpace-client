@@ -84,14 +84,15 @@ class TargetUserStore {
   };
 
   updateCreatedAvatar = (avatar) => {
-    const { big, small, medium, max } = avatar;
+    const { big, small, medium, max, main } = avatar;
 
     this.targetUser.avatar = big;
     this.targetUser.avatarSmall = small;
     this.targetUser.avatarMedium = medium;
     this.targetUser.avatarMax = max;
+    this.targetUser.avatarOriginal = main;
 
-    this.userStore.updateAvatarInfo(big, small, medium, max);
+    this.userStore.updateAvatarInfo(big, small, medium, max, main);
 
     console.log("updateCreatedAvatar", {
       targetUser: this.targetUser,
@@ -138,7 +139,7 @@ class TargetUserStore {
     isEnableBadges,
     isEnableRoomsActivity,
     isEnableDailyFeed,
-    isEnableTips
+    isEnableTips,
   ) => {
     this.badgesSubscription = isEnableBadges;
     this.roomsActivitySubscription = isEnableRoomsActivity;

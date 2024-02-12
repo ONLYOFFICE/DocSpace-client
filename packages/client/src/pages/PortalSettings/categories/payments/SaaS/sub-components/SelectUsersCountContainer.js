@@ -313,7 +313,7 @@ const SelectUsersCountContainer = ({
   );
 };
 
-export default inject(({ paymentQuotasStore, payments }) => {
+export default inject(({ paymentQuotasStore, paymentStore }) => {
   const {
     isLoading,
     minAvailableManagersValue,
@@ -324,7 +324,7 @@ export default inject(({ paymentQuotasStore, payments }) => {
     isLessCountThanAcceptable,
     stepByQuotaForManager,
     isAlreadyPaid,
-  } = payments;
+  } = paymentStore;
   const { addedManagersCountTitle } = paymentQuotasStore;
 
   const step = stepByQuotaForManager;

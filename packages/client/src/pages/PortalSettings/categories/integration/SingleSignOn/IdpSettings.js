@@ -15,7 +15,6 @@ import {
   sloBindingOptions,
   nameIdOptions,
 } from "./sub-components/constants";
-import { useIsMobileView } from "../../../utils/useIsMobileView";
 import { DeviceType } from "@docspace/shared/enums";
 
 const PROVIDER_URL = "https://idpservice/idp";

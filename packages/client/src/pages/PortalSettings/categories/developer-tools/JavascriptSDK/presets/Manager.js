@@ -458,6 +458,17 @@ const Manager = (props) => {
   };
 
   const changeColumnsOption = (e) => {
+    if (e.target.value === "default") {
+      setConfig((config) => ({
+        ...config,
+        viewTableColumns: "Name,Type,Tags",
+      }));
+    } else if (e.target.value === "custom") {
+      setConfig((config) => ({
+        ...config,
+        viewTableColumns: selectedColumns.map((column) => column.key).join(","),
+      }));
+    }
     setColumnDisplay(e.target.value);
   };
 

@@ -749,6 +749,7 @@ class SettingsStore {
 
   getPortalOwner = async () => {
     const owner = await api.people.getUserById(this.ownerId);
+
     this.setPortalOwner(owner);
     return owner;
   };

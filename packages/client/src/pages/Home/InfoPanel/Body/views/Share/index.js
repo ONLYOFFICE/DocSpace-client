@@ -52,10 +52,10 @@ const Share = (props) => {
   const fetchLinks = async () => {
     const res = await getFileLinks(infoPanelSelection.id);
     const primaryLink = res.items.filter(
-      (item) => item.sharedTo.primary === true
+      (item) => item.sharedTo.primary === true,
     );
     const additionalLinks = res.items.filter(
-      (item) => item.sharedTo.primary !== true
+      (item) => item.sharedTo.primary !== true,
     );
 
     setPrimaryFileLink(primaryLink);
@@ -68,7 +68,7 @@ const Share = (props) => {
     const link = await getPrimaryFileLink(infoPanelSelection.id);
     setPrimaryFileLink([link]);
     copy(link.sharedTo.shareLink);
-    toastr.success(t("SharingPanel:GeneralAccessLinkCopied"));
+    toastr.success(t("Common:GeneralAccessLinkCopied"));
   };
 
   const addAdditionalLinks = async () => {
@@ -77,7 +77,7 @@ const Share = (props) => {
       infoPanelSelection.id,
       ShareAccessRights.ReadOnly,
       false,
-      false
+      false,
     );
     setAdditionalFileLinks([...additionalFileLinks, ...[newLink]]);
   };
@@ -101,12 +101,12 @@ const Share = (props) => {
         link.access,
         link.sharedTo.primary,
         item.internal,
-        link.sharedTo.expirationDate
+        link.sharedTo.expirationDate,
       );
       updateLink(link, res);
 
       copy(link.sharedTo.shareLink);
-      toastr.success(t("Files:LinkSuccessfullyCopied"));
+      toastr.success(t("Common:LinkSuccessfullyCopied"));
     } catch (e) {
       toastr.error(e);
     }
@@ -122,22 +122,22 @@ const Share = (props) => {
         item.access,
         link.sharedTo.primary,
         link.sharedTo.internal,
-        link.sharedTo.expirationDate
+        link.sharedTo.expirationDate,
       );
       if (item.access === ShareAccessRights.None) {
         deleteLink(link, link.sharedTo.id);
         if (link.sharedTo.primary) {
-          toastr.success(t("GeneralAccessLinkRemove"));
+          toastr.success(t("Common:GeneralAccessLinkRemove"));
         } else {
-          toastr.success(t("AdditionalLinkRemove"));
+          toastr.success(t("Common:AdditionalLinkRemove"));
         }
       } else {
         updateLink(link, res);
         if (item.access === ShareAccessRights.DenyAccess) {
-          toastr.success(t("LinkAccessDenied"));
+          toastr.success(t("Common:LinkAccessDenied"));
         } else {
           copy(link.sharedTo.shareLink);
-          toastr.success(t("Files:LinkSuccessfullyCopied"));
+          toastr.success(t("Common:LinkSuccessfullyCopied"));
         }
       }
     } catch (e) {
@@ -155,12 +155,12 @@ const Share = (props) => {
         link.access,
         link.sharedTo.primary,
         link.sharedTo.internal,
-        expirationDate
+        expirationDate,
       );
       updateLink(link, res);
 
       copy(link.sharedTo.shareLink);
-      toastr.success(t("Files:LinkSuccessfullyCopied"));
+      toastr.success(t("Common:LinkSuccessfullyCopied"));
     } catch (e) {
       toastr.error(e);
     }
@@ -179,7 +179,7 @@ const Share = (props) => {
       setAdditionalFileLinks(newArr);
     }
     const newLoadingLinks = loadingLinks.filter(
-      (item) => item !== link.sharedTo.id
+      (item) => item !== link.sharedTo.id,
     );
     setLoadingLinks(newLoadingLinks);
   };
@@ -189,7 +189,7 @@ const Share = (props) => {
       setPrimaryFileLink(null);
     } else {
       const newArr = additionalFileLinks.filter(
-        (item) => item.sharedTo.id !== id
+        (item) => item.sharedTo.id !== id,
       );
       setAdditionalFileLinks(newArr);
     }
@@ -200,8 +200,8 @@ const Share = (props) => {
   return (
     <div>
       <PublicRoomBar
-        headerText={t("ShareDocument")}
-        bodyText={t("ShareDocumentDescription")}
+        headerText={t("Common:ShareDocument")}
+        bodyText={t("Common:ShareDocumentDescription")}
         iconName={InfoIcon}
       />
       {isLoading ? (
@@ -210,7 +210,7 @@ const Share = (props) => {
         <>
           <StyledLinks>
             <Text fontSize="14px" fontWeight={600} className="title-link">
-              {t("GeneralAccessLink")}
+              {t("Common:GeneralAccessLink")}
             </Text>
             <LinkRow
               onAddClick={addGeneralLink}
@@ -229,7 +229,7 @@ const Share = (props) => {
             <StyledLinks>
               <div className="additional-link">
                 <Text fontSize="14px" fontWeight={600} className="title-link">
-                  {t("AdditionalLinks")}
+                  {t("Common:AdditionalLinks")}
                 </Text>
                 <IconButton
                   className="link-to-viewing-icon"

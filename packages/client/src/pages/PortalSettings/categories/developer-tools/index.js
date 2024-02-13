@@ -53,7 +53,7 @@ const DeveloperToolsWrapper = (props) => {
       {t("WebPlugins:PluginSDK")}
 
       <Badge
-        label={t("Settings:BetaLabel")}
+        label={t("Common:BetaLabel")}
         backgroundColor="#533ED1"
         fontSize="9px"
         borderRadius="50px"
@@ -87,7 +87,7 @@ const DeveloperToolsWrapper = (props) => {
   ];
 
   const [currentTab, setCurrentTab] = useState(
-    data.findIndex((item) => location.pathname.includes(item.id))
+    data.findIndex((item) => location.pathname.includes(item.id)),
   );
 
   const load = async () => {
@@ -111,8 +111,8 @@ const DeveloperToolsWrapper = (props) => {
       combineUrl(
         window.DocSpaceConfig?.proxy?.url,
         config.homepage,
-        `/portal-settings/developer-tools/${e.id}`
-      )
+        `/portal-settings/developer-tools/${e.id}`,
+      ),
     );
   };
 

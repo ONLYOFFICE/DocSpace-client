@@ -61,7 +61,7 @@ const ShareLoader = ({ t }) => {
   return (
     <StyledWrapper>
       <Text fontSize="14px" fontWeight={600} className="title-link">
-        {t("GeneralAccessLink")}
+        {t("Common:GeneralAccessLink")}
       </Text>
       <RowLoader />
       <div className="title">

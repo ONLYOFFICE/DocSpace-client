@@ -34,7 +34,7 @@ const ArticleDevToolsBar = ({
     <StyledWrapper onClick={onClick}>
       <ReactSVG src={DeveloperReactSvgUrl} className="icon" />
       <Text fontWeight={600} fontSize="12px" className="label">
-        {t("DeveloperTools")}
+        {t("Common:DeveloperTools")}
       </Text>
       <ReactSVG src={ArrowReactSvgUrl} className="arrow" />
     </StyledWrapper>
@@ -42,3 +42,4 @@ const ArticleDevToolsBar = ({
 };
 
 export default ArticleDevToolsBar;
+

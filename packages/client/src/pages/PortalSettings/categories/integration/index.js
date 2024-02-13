@@ -70,7 +70,7 @@ const IntegrationWrapper = (props) => {
         {t("Common:Plugins")}
 
         <Badge
-          label={t("Settings:BetaLabel")}
+          label={t("Common:BetaLabel")}
           backgroundColor="#533ED1"
           fontSize="9px"
           borderRadius="50px"
@@ -100,8 +100,8 @@ const IntegrationWrapper = (props) => {
       combineUrl(
         window.DocSpaceConfig?.proxy?.url,
         config.homepage,
-        `/portal-settings/integration/${e.id}`
-      )
+        `/portal-settings/integration/${e.id}`,
+      ),
     );
   };
 
@@ -136,6 +136,6 @@ export default inject(({ settingsStore, ssoStore, currentQuotaStore }) => {
   };
 })(
   withTranslation(["Settings", "SingleSignOn", "Translations", "WebPlugins"])(
-    observer(IntegrationWrapper)
-  )
+    observer(IntegrationWrapper),
+  ),
 );

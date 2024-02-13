@@ -14,8 +14,8 @@ import { Grid } from "@docspace/shared/components/grid";
 const EmptyScreen = ({ resetFilter, setIsLoading, theme }) => {
   const { t } = useTranslation(["People", "Common"]);
 
-  const title = t("NotFoundUsers");
-  const description = t("NotFoundUsersDescription");
+  const title = t("Common:NotFoundUsers");
+  const description = t("Common:NotFoundUsersDescription");
 
   const onResetFilter = () => {
     setIsLoading(true);

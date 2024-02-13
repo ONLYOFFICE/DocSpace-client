@@ -71,7 +71,7 @@ const ArticleBodyContent = (props) => {
 
     const CurrentSettingsCategoryKey = getCurrentSettingsCategory(
       arrayOfParams,
-      settingsTree
+      settingsTree,
     );
 
     if (link === "") {
@@ -146,7 +146,7 @@ const ArticleBodyContent = (props) => {
 
     const settingsPath = `/portal-settings${getSelectedLinkByKey(
       value + "-0",
-      settingsTree
+      settingsTree,
     )}`;
 
     if (settingsPath === location.pathname) return;
@@ -188,8 +188,8 @@ const ArticleBodyContent = (props) => {
         return t("RestoreBackup");
       case "PortalDeletion":
         return t("PortalDeletion");
-      case "DeveloperTools":
-        return t("DeveloperTools");
+      case "Common:DeveloperTools":
+        return t("Common:DeveloperTools");
       case "Common:Bonus":
         return t("Common:Bonus");
       case "Common:FreeProFeatures":
@@ -260,7 +260,7 @@ const ArticleBodyContent = (props) => {
               item.key.includes(7) || item.key.includes(8) ? "16px" : "0"
             }`,
           }}
-        />
+        />,
       );
     });
 
@@ -317,9 +317,9 @@ export default inject(
       isProfileLoading,
       limitedAccessSpace,
     };
-  }
+  },
 )(
   withLoading(
-    withTranslation(["Settings", "Common", "JavascriptSdk"])(observer(ArticleBodyContent))
-  )
+    withTranslation(["Settings", "Common"])(observer(ArticleBodyContent)),
+  ),
 );

@@ -88,7 +88,6 @@ const PeopleSelector = ({
   headerProps,
 }: PeopleSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation([
-    "PeopleSelector",
     "PeopleTranslations",
     "People",
     "Common",
@@ -235,7 +234,7 @@ const PeopleSelector = ({
         withHeader,
         headerProps: {
           ...headerProps,
-          headerLabel: headerProps.headerLabel || t("ListAccounts"),
+          headerLabel: headerProps.headerLabel || t("Common:ListAccounts"),
         },
       }
     : ({} as TSelectorHeader);
@@ -282,11 +281,11 @@ const PeopleSelector = ({
       disableSubmitButton={disableSubmitButton || !selectedItem}
       submitButtonId={submitButtonId}
       emptyScreenImage={emptyScreenImage}
-      emptyScreenHeader={t("EmptyHeader")}
-      emptyScreenDescription={t("EmptyDescription")}
+      emptyScreenHeader={t("Common:EmptyHeader")}
+      emptyScreenDescription={t("Common:EmptyDescription")}
       searchEmptyScreenImage={emptyScreenImage}
-      searchEmptyScreenHeader={t("People:NotFoundUsers")}
-      searchEmptyScreenDescription={t("People:NotFoundUsersDescription")}
+      searchEmptyScreenHeader={t("Common:NotFoundUsers")}
+      searchEmptyScreenDescription={t("Common:NotFoundUsersDescription")}
       hasNextPage={hasNextPage}
       isNextPageLoading={isNextPageLoading}
       loadNextPage={loadNextPage}
@@ -301,3 +300,4 @@ const PeopleSelector = ({
 };
 
 export default PeopleSelector;
+

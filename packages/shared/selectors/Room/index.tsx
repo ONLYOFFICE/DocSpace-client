@@ -45,7 +45,7 @@ const RoomSelector = ({
 
   roomType,
 }: RoomSelectorProps) => {
-  const { t }: { t: TTranslation } = useTranslation(["RoomSelector", "Common"]);
+  const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
   const [searchValue, setSearchValue] = React.useState("");
   const [hasNextPage, setHasNextPage] = React.useState(false);
@@ -133,7 +133,7 @@ const RoomSelector = ({
         withHeader,
         headerProps: {
           ...headerProps,
-          headerLabel: headerProps.headerLabel || t("RoomList"),
+          headerLabel: headerProps.headerLabel || t("Common:RoomList"),
         },
       }
     : {};
@@ -172,8 +172,8 @@ const RoomSelector = ({
       onSubmit={onSubmit}
       isMultiSelect={isMultiSelect}
       emptyScreenImage={EmptyScreenCorporateSvgUrl}
-      emptyScreenHeader={t("EmptyRoomsHeader")}
-      emptyScreenDescription={t("EmptyRoomsDescription")}
+      emptyScreenHeader={t("Common:EmptyRoomsHeader")}
+      emptyScreenDescription={t("Common:EmptyRoomsDescription")}
       searchEmptyScreenImage={EmptyScreenCorporateSvgUrl}
       searchEmptyScreenHeader={t("Common:NotFoundTitle")}
       searchEmptyScreenDescription={t("Common:SearchEmptyRoomsDescription")}
@@ -195,3 +195,4 @@ const RoomSelector = ({
 };
 
 export default RoomSelector;
+

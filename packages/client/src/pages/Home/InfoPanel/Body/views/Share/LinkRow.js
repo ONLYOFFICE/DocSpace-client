@@ -40,7 +40,7 @@ const LinkRow = ({
 
   const onCopyLink = (link) => {
     copy(link.sharedTo.shareLink);
-    toastr.success(t("Files:LinkSuccessfullyCopied"));
+    toastr.success(t("Common:LinkSuccessfullyCopied"));
   };
 
   return (
@@ -54,7 +54,7 @@ const LinkRow = ({
             fontWeight={600}
             onClick={onAddClick}
           >
-            {t("CreateAndCopy")}
+            {t("Common:CreateAndCopy")}
           </Link>
         </StyledLinkRow>
       ) : (
@@ -62,10 +62,10 @@ const LinkRow = ({
           if (link.isLoaded) return <RowLoader />;
 
           const shareOption = shareOptions.find(
-            (option) => option.internal === link.sharedTo.internal
+            (option) => option.internal === link.sharedTo.internal,
           );
           const accessOption = accessOptions.find(
-            (option) => option.access === link.access
+            (option) => option.access === link.access,
           );
           const avatar =
             shareOption.key === "anyone" ? UniverseIcon : PeopleIcon;
@@ -108,7 +108,7 @@ const LinkRow = ({
                   size={16}
                   iconName={CopyIcon}
                   onClick={() => onCopyLink(link)}
-                  title={t("CreateAndCopy")}
+                  title={t("Common:CreateAndCopy")}
                   isDisabled={isExpiredLink || isLoaded}
                 />
                 <ComboBox

@@ -482,7 +482,7 @@ const FilesSelector = ({
       emptyScreenImage={
         theme?.isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl
       }
-      emptyScreenHeader={t("Files:SelectorEmptyScreenHeader")}
+      emptyScreenHeader={t("Common:SelectorEmptyScreenHeader")}
       emptyScreenDescription=""
       searchEmptyScreenImage={
         theme?.isBase
@@ -490,7 +490,7 @@ const FilesSelector = ({
           : EmptyScreenFilterAltDarkSvgUrl
       }
       searchEmptyScreenHeader={t("Common:NotFoundTitle")}
-      searchEmptyScreenDescription={t("Files:EmptyFilterDescriptionText")}
+      searchEmptyScreenDescription={t("Common:EmptyFilterDescriptionText")}
       isLoading={showLoader}
       rowLoader={
         <RowLoader
@@ -545,3 +545,4 @@ const FilesSelector = ({
 };
 
 export default FilesSelector;
+

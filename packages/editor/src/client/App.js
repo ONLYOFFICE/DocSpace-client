@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Editor from "./components/Editor.js";
 import { useSSR } from "react-i18next";
 import useMfScripts from "./helpers/useMfScripts";
-import { isRetina } from "@docspace/shared/utils/common";
+import { isRetina, frameCallCommand } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { getCookie, setCookie } from "@docspace/shared/utils/cookie";
 
@@ -40,7 +40,8 @@ const App = ({
 
     switch (rest?.config?.documentType) {
       case "word":
-        icon = rest?.config?.document?.fileType === "pdf" ? PDFIcoUrl : TextIcoUrl;
+        icon =
+          rest?.config?.document?.fileType === "pdf" ? PDFIcoUrl : TextIcoUrl;
         break;
       case "slide":
         icon = PresentationIcoUrl;
@@ -80,6 +81,8 @@ const App = ({
         (isLoadingDocumentError || isLoadedDocument)
       )
         tempElm.outerHTML = "";
+
+      if (isLoadingDocumentError) frameCallCommand("setIsLoaded");
     }
 
     if (isRetina() && getCookie("is_retina") == null) {

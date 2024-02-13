@@ -3,7 +3,7 @@ import {
   TSelectorHeader,
   TSelectorItem,
 } from "../../components/selector/Selector.types";
-import { TLogo } from "../../api/rooms/types";
+
 import { RoomsType } from "../../enums";
 
 export type RoomSelectorProps = TSelectorHeader &
@@ -15,16 +15,9 @@ export type RoomSelectorProps = TSelectorHeader &
     isMultiSelect: boolean;
 
     onSubmit: (items: TSelectorItem[]) => void;
-
+    roomType?: RoomsType;
     excludeItems?: number[];
     setIsDataReady?: (value: boolean) => void;
+    submitButtonLabel?: string;
+    withSearch?: boolean;
   };
-
-export type TItem = {
-  id: number;
-  label: string;
-  icon: string;
-  color: string | undefined;
-  logo: TLogo;
-  roomType: RoomsType;
-};

@@ -41,6 +41,10 @@ const FilesSelectorWrapper = ({
 
   onClose,
 
+  withSearch = true,
+  withBreadCrumbs = true,
+  withSubtitle = true,
+
   isMove,
   isCopy,
   isRestore,
@@ -96,6 +100,8 @@ const FilesSelectorWrapper = ({
   embedded,
   withHeader = true,
   withCancelButton = true,
+  cancelButtonLabel,
+  acceptButtonLabel,
   getIcon,
   isRoomBackup,
 
@@ -243,7 +249,7 @@ const FilesSelectorWrapper = ({
     isRestore,
   );
 
-  const acceptButtonLabel = getAcceptButtonLabel(
+  const defaultAcceptButtonLabel = getAcceptButtonLabel(
     t,
     isEditorDialog,
     isCopy,
@@ -309,7 +315,7 @@ const FilesSelectorWrapper = ({
       getIsDisabled={getIsDisabledAction}
       withHeader={withHeader}
       headerLabel={headerLabel}
-      submitButtonLabel={acceptButtonLabel}
+      submitButtonLabel={acceptButtonLabel || defaultAcceptButtonLabel}
       withCancelButton={withCancelButton}
       isPanelVisible={isPanelVisible}
       embedded={embedded}
@@ -318,8 +324,12 @@ const FilesSelectorWrapper = ({
       footerInputHeader={footerInputHeader || ""}
       currentFooterInputValue={currentFooterInputValue || ""}
       footerCheckboxLabel={footerCheckboxLabel || ""}
+      withoutBackButton
+      cancelButtonLabel={cancelButtonLabel}
+      withBreadCrumbs={withBreadCrumbs}
+      withSearch={withSearch}
       descriptionText={
-        !filterParam || filterParam === "ALL"
+        !withSubtitle || !filterParam || filterParam === "ALL"
           ? ""
           : descriptionText ?? t("Common:SelectDOCXFormat")
       }
@@ -362,6 +372,7 @@ export default inject(
       isRestore,
       isPanelVisible,
       id,
+      currentFolderId,
     }: FilesSelectorProps,
   ) => {
     const { id: selectedId, parentId, rootFolderType } = selectedFolderStore;
@@ -369,8 +380,6 @@ export default inject(
     const { setConflictDialogData, checkFileConflicts, setSelectedItems } =
       filesActionsStore;
     const { itemOperationToFolder, clearActiveOperations } = uploadDataStore;
-
-    const sessionPath = window.sessionStorage.getItem("filesSelectorPath");
 
     const { treeFolders, roomsFolderId } = treeFoldersStore;
 
@@ -419,6 +428,8 @@ export default inject(
                 : []
         : [];
 
+    const sessionPath = window.sessionStorage.getItem("filesSelectorPath");
+
     const selectionsWithoutEditing = isRestoreAll
       ? filesList
       : isCopy
@@ -445,13 +456,13 @@ export default inject(
           ? parentId
           : selectedId);
 
-    const currentFolderId =
-      sessionPath && (isMove || isCopy || isRestore || isRestoreAll)
+    const folderId =
+      currentFolderId ||
+      (sessionPath && (isMove || isCopy || isRestore || isRestoreAll)
         ? +sessionPath
-        : fromFolderId;
+        : fromFolderId);
 
     return {
-      currentFolderId,
       fromFolderId,
       parentId,
       rootFolderType,
@@ -487,6 +498,7 @@ export default inject(
       getIcon,
 
       roomsFolderId,
+      currentFolderId: folderId,
     };
   },
 )(observer(FilesSelectorWrapper));

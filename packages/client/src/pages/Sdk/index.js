@@ -1,4 +1,5 @@
-import { useEffect, useState, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
+import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useParams } from "react-router-dom";
 import AppLoader from "@docspace/common/components/AppLoader";
@@ -13,6 +14,7 @@ import {
 import { RoomsType } from "@docspace/shared/enums";
 
 const Sdk = ({
+  t,
   frameConfig,
   match,
   setFrameConfig,
@@ -29,6 +31,14 @@ const Sdk = ({
   getFilePrimaryLink,
 }) => {
   const [isDataReady, setIsDataReady] = useState(false);
+
+  const formatsDescription = {
+    DOCX: t("Common:SelectDOCXFormat"),
+    DOCXF: t("Common:SelectDOCXFFormat"),
+    BackupOnly: t("Common:SelectBackupOnlyFormat"),
+    IMG: t("Common:SelectIMGFormat"),
+    XLSX: t("Common:SelectXLSXFormat"),
+  };
 
   useEffect(() => {
     window.addEventListener("message", handleMessage, false);
@@ -134,8 +144,8 @@ const Sdk = ({
 
   const onSelectRoom = useCallback(
     async (data) => {
-      if (data[0].logo.large !== "") {
-        data[0].icon = toRelativeUrl(data[0].logo.large);
+      if (data[0].logo?.large !== "") {
+        data[0].icon = toRelativeUrl(data[0].logo?.large);
       } else {
         data[0].icon = await getRoomsIcon(data[0].roomType, false, 32);
       }
@@ -193,17 +203,30 @@ const Sdk = ({
     : {};
 
   let component;
+
   switch (mode) {
     case "room-selector":
       const cancelButtonProps = frameConfig?.showSelectorCancel
-        ? { withCancelButton: true, cancelButtonLabel: "", onCancel: onClose }
+        ? {
+            withCancelButton: true,
+            cancelButtonLabel: frameConfig?.cancelButtonLabel,
+            onCancel: onClose,
+          }
+        : {};
+
+      const headerProps = frameConfig?.showSelectorHeader
+        ? { withHeader: true, headerProps: { headerLabel: "" } }
         : {};
 
       component = (
         <RoomSelector
           {...cancelButtonProps}
-          withHeader={frameConfig?.showSelectorHeader}
+          {...headerProps}
           onSubmit={onSelectRoom}
+          withSearch={frameConfig?.withSearch}
+          submitButtonLabel={frameConfig?.acceptButtonLabel}
+          roomType={frameConfig?.roomType}
+          onSelect={() => {}}
           setIsDataReady={setIsDataReady}
           isMultiSelect={false}
         />
@@ -219,10 +242,19 @@ const Sdk = ({
           setIsDataReady={setIsDataReady}
           onSelectFile={onSelectFile}
           onClose={onClose}
-          filterParam={"ALL"}
+          withBreadCrumbs={frameConfig?.withBreadCrumbs}
+          withSubtitle={frameConfig?.withSubtitle}
+          filterParam={frameConfig?.filterParam}
           isUserOnly={selectorType === "userFolderOnly"}
           isRoomsOnly={selectorType === "roomsOnly"}
           withCancelButton={frameConfig?.showSelectorCancel}
+          withSearch={frameConfig?.withSearch}
+          acceptButtonLabel={frameConfig?.acceptButtonLabel}
+          cancelButtonLabel={frameConfig?.cancelButtonLabel}
+          currentFolderId={frameConfig?.id}
+          descriptionText={
+            formatsDescription[frameConfig?.filterParam || "DOCX"]
+          }
         />
       );
       break;
@@ -268,4 +300,4 @@ export default inject(
       getFilePrimaryLink,
     };
   },
-)(observer(Sdk));
+)(withTranslation(["JavascriptSdk", "Common"])(observer(Sdk)));

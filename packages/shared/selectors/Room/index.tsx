@@ -25,6 +25,13 @@ const RoomSelector = ({
   className,
   style,
 
+  excludeItems,
+
+  withSearch,
+
+  isMultiSelect,
+
+  submitButtonLabel,
   onSubmit,
 
   withHeader,
@@ -33,9 +40,10 @@ const RoomSelector = ({
   setIsDataReady,
 
   withCancelButton,
-  isMultiSelect,
-
+  cancelButtonLabel,
   onCancel,
+
+  roomType,
 }: RoomSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["RoomSelector", "Common"]);
 
@@ -84,7 +92,7 @@ const RoomSelector = ({
 
       filter.page = page;
       filter.pageCount = PAGE_COUNT;
-
+      filter.type = roomType;
       filter.filterValue = searchValue || null;
 
       const {
@@ -93,7 +101,9 @@ const RoomSelector = ({
         count,
       } = await api.rooms.getRooms(filter);
 
-      const rooms = convertToItems(folders);
+      const rooms = convertToItems(folders).filter((x) =>
+        excludeItems ? !excludeItems.includes(x.id) : true,
+      );
 
       setHasNextPage(count === PAGE_COUNT);
 
@@ -113,7 +123,7 @@ const RoomSelector = ({
 
       setIsNextPageLoading(false);
     },
-    [searchValue],
+    [excludeItems, roomType, searchValue],
   );
 
   const headerSelectorProps: TSelectorHeader = withHeader
@@ -124,25 +134,27 @@ const RoomSelector = ({
           headerLabel: headerProps.headerLabel || t("RoomList"),
         },
       }
-    : ({} as TSelectorHeader);
+    : {};
 
   const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton
     ? {
-        withCancelButton,
-        cancelButtonLabel: t("Common:CancelButton"),
+        withCancelButton: true,
+        cancelButtonLabel: cancelButtonLabel || t("Common:CancelButton"),
         onCancel,
       }
-    : ({} as TSelectorCancelButton);
+    : {};
 
-  const searchSelectorProps: TSelectorSearch = {
-    withSearch: true,
-    searchPlaceholder: t("Common:Search"),
-    searchValue,
-    onSearch: onSearchAction,
-    onClearSearch: onClearSearchAction,
-    searchLoader: <SearchLoader />,
-    isSearchLoading: isFirstLoad.current,
-  };
+  const searchSelectorProps: TSelectorSearch = withSearch
+    ? {
+        withSearch: true,
+        searchPlaceholder: t("Common:Search"),
+        searchValue,
+        onSearch: onSearchAction,
+        onClearSearch: onClearSearchAction,
+        searchLoader: <SearchLoader />,
+        isSearchLoading: isFirstLoad.current,
+      }
+    : {};
 
   return (
     <Selector
@@ -154,7 +166,7 @@ const RoomSelector = ({
       {...searchSelectorProps}
       onSelect={(item) => setSelectedItem(item)}
       items={items}
-      submitButtonLabel={t("Common:SelectAction")}
+      submitButtonLabel={submitButtonLabel || t("Common:SelectAction")}
       onSubmit={onSubmit}
       isMultiSelect={isMultiSelect}
       emptyScreenImage={EmptyScreenCorporateSvgUrl}

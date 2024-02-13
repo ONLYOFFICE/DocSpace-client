@@ -102,6 +102,10 @@ export interface FilesSelectorProps {
   socketSubscribers: Set<string>;
   disabledItems: string[] | number[];
   filterParam?: string;
+  withoutBackButton: boolean;
+  withBreadCrumbs: boolean;
+  withSearch: boolean;
+  cancelButtonLabel: string;
   getIcon?: (size: number, fileExst: string) => string;
   treeFolders?: TFolder[];
   onSetBaseFolderPath?: (

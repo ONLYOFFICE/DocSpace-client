@@ -1,8 +1,10 @@
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useCallback } from "react";
 import { Base } from "@docspace/shared/themes";
 import styled, { css } from "styled-components";
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
+import io from "socket.io-client";
 
 import { TableRow } from "@docspace/shared/components/table";
 import { TableCell } from "@docspace/shared/components/table";
@@ -146,7 +148,10 @@ const SessionsTableRow = (props) => {
     setDisableDialogVisible,
     setSessionModalData,
     setUserSessionPanelVisible,
+    userId,
   } = props;
+  const [sessions, setSessions] = useState([]);
+  const [socket, setSocket] = useState(null);
 
   const onClickSessions = () => {
     setSessionModalData({ ...item });
@@ -212,6 +217,29 @@ const SessionsTableRow = (props) => {
 
     onContentRowClick && onContentRowClick(!isChecked, item);
   };
+  // console.log(socket);
+
+  useEffect(() => {
+    const socketIo = io("/onlineusers");
+
+    console.log(socketIo);
+
+    setSocket(socketIo);
+
+    console.log({ userIds: userId });
+
+    socketIo.emit("getSessionsInPortal", {
+      userIds: userId,
+    });
+
+    socketIo.on("statuses-in-room", (data) => {
+      setSessions(data);
+      console.log(data);
+    });
+    return () => {
+      socketIo.disconnect();
+    };
+  }, []);
 
   return (
     <Wrapper

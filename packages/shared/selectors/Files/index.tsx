@@ -78,7 +78,7 @@ const FilesSelector = ({
   setIsDataReady,
 }: FilesSelectorProps) => {
   const theme = useTheme();
-  const { t } = useTranslation(["Common", "Files"]);
+  const { t } = useTranslation(["Common"]);
 
   const [breadCrumbs, setBreadCrumbs] = React.useState<TBreadCrumb[]>([]);
   const [items, setItems] = React.useState<TSelectorItem[]>([]);
@@ -545,4 +545,3 @@ const FilesSelector = ({
 };
 
 export default FilesSelector;
-

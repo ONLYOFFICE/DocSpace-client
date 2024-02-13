@@ -135,7 +135,11 @@ export default inject(({ settingsStore, ssoStore, currentQuotaStore }) => {
     enablePlugins,
   };
 })(
-  withTranslation(["Settings", "SingleSignOn", "Translations", "WebPlugins"])(
-    observer(IntegrationWrapper),
-  ),
+  withTranslation([
+    "Settings",
+    "SingleSignOn",
+    "Translations",
+    "WebPlugins",
+    "Common",
+  ])(observer(IntegrationWrapper)),
 );

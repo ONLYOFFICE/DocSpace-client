@@ -29,7 +29,7 @@ const Share = (props) => {
     shareChanged,
     setShareChanged,
   } = props;
-  const { t } = useTranslation(["SharingPanel", "Files"]);
+  const { t } = useTranslation(["SharingPanel", "Files", "Common"]);
   const [primaryFileLink, setPrimaryFileLink] = useState([]);
   const [additionalFileLinks, setAdditionalFileLinks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);

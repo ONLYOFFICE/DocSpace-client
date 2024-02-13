@@ -41,7 +41,7 @@ const DropDownItem = (props: DropDownItemProps) => {
     additionalElement,
   } = props;
 
-  const { t } = useTranslation(["Settings"]);
+  const { t } = useTranslation(["Common"]);
 
   const { withToggle, checked, onClick, onClickSelectedItem, label, ...rest } =
     props;
@@ -170,4 +170,3 @@ DropDownItem.defaultProps = {
 };
 
 export { DropDownItem };
-

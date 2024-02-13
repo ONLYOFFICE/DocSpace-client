@@ -19,7 +19,7 @@ const ArticleDevToolsBar = ({
   currentDeviceType,
   toggleArticleOpen,
 }: ArticleDevToolsBarProps) => {
-  const { t } = useTranslation(["Settings"]);
+  const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
 
   const onClick = () => {
@@ -42,4 +42,3 @@ const ArticleDevToolsBar = ({
 };
 
 export default ArticleDevToolsBar;
-

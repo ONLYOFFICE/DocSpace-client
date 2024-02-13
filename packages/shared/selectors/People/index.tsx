@@ -87,11 +87,7 @@ const PeopleSelector = ({
   withHeader,
   headerProps,
 }: PeopleSelectorProps) => {
-  const { t }: { t: TTranslation } = useTranslation([
-    "PeopleTranslations",
-    "People",
-    "Common",
-  ]);
+  const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
   const theme = useTheme();
 
@@ -300,4 +296,3 @@ const PeopleSelector = ({
 };
 
 export default PeopleSelector;
-

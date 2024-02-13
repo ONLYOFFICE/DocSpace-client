@@ -37,4 +37,3 @@ const ArticleSubmitToFormGalleryAlert = ({
 };
 
 export default ArticleSubmitToFormGalleryAlert;
-

@@ -1,19 +1,13 @@
+import {
+  TFileSecurity,
+  TFolderSecurity,
+} from "@docspace/shared/api/files/types";
+import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
-import { BreadCrumb, Security } from "./FilesSelector.types";
-
-export const PAGE_COUNT = 100;
-
-export const defaultBreadCrumb: BreadCrumb = {
-  label: "DocSpace",
-  id: 0,
-  isRoom: false,
-};
-
-export const SHOW_LOADER_TIMER = 500;
-export const MIN_LOADER_TIMER = 500;
+import { TTranslation } from "@docspace/shared/types";
 
 export const getHeaderLabel = (
-  t: any,
+  t: TTranslation,
   isEditorDialog: boolean,
   isCopy?: boolean,
   isRestoreAll?: boolean,
@@ -32,13 +26,13 @@ export const getHeaderLabel = (
 
   if (filterParam === FilesSelectorFilterTypes.DOCX)
     return t("Common:CreateMasterFormFromFile");
-  if (!!filterParam) return t("Common:SelectFile");
+  if (filterParam) return t("Common:SelectFile");
 
   return t("Common:SaveButton");
 };
 
 export const getAcceptButtonLabel = (
-  t: any,
+  t: TTranslation,
   isEditorDialog: boolean,
   isCopy?: boolean,
   isRestoreAll?: boolean,
@@ -55,7 +49,7 @@ export const getAcceptButtonLabel = (
 
   if (filterParam === FilesSelectorFilterTypes.DOCX) return t("Common:Create");
   // if (filterParam === FilesSelectorFilterTypes.DOCXF) return t("Common:SubmitToGallery");
-  if (!!filterParam) return t("Common:SaveButton");
+  if (filterParam) return t("Common:SaveButton");
 
   return t("Common:SaveHereButton");
 };
@@ -70,7 +64,7 @@ export const getIsDisabled = (
   isMove?: boolean,
   isRestoreAll?: boolean,
   isRequestRunning?: boolean,
-  security?: Security,
+  security?: TFileSecurity | TFolderSecurity | TRoomSecurity,
   filterParam?: string,
   isFileSelected?: boolean,
   includeFolder?: boolean,
@@ -78,14 +72,20 @@ export const getIsDisabled = (
 ) => {
   if (isFirstLoad) return true;
   if (isRequestRunning) return true;
-  if (!!filterParam) return !isFileSelected;
+  if (filterParam) return !isFileSelected;
   if (sameId && !isCopy) return true;
   if (sameId && isCopy && includeFolder) return true;
   if (isRooms) return true;
   if (isRoot) return true;
   if (isSelectedParentFolder) return true;
-  if (isCopy) return !security?.CopyTo;
-  if (isMove || isRestoreAll || isRestore) return !security?.MoveTo;
+  if (isCopy)
+    return security && "CopyTo" in security
+      ? !security?.CopyTo
+      : !security?.Copy;
+  if (isMove || isRestoreAll || isRestore)
+    return security && "MoveTo" in security
+      ? !security?.MoveTo
+      : !security?.Move;
 
   return false;
 };

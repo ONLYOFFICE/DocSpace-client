@@ -39,6 +39,7 @@ const DeveloperToolsWrapper = (props) => {
     "Webhooks",
     "Settings",
     "WebPlugins",
+    "Common",
   ]);
   const [isPending, startTransition] = useTransition();
 

@@ -258,7 +258,7 @@ const Items = ({
   const onMoveTo = React.useCallback(
     (destFolderId, title) => {
       moveDragItems(destFolderId, title, {
-        copy: t("Translations:CopyOperation"),
+        copy: t("Common:CopyOperation"),
         move: t("Common:MoveToOperation"),
       });
     },

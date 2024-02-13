@@ -1,5 +1,6 @@
 ﻿import InfoEditReactSvgUrl from "PUBLIC_DIR/images/info.edit.react.svg?url";
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
+import AlertSvgUrl from "PUBLIC_DIR/images/icons/12/alert.react.svg?url";
 import React, { useState, useEffect } from "react";
 import { Avatar } from "@docspace/shared/components/avatar";
 import { Text } from "@docspace/shared/components/text";
@@ -7,6 +8,7 @@ import { Text } from "@docspace/shared/components/text";
 import { parseAddresses } from "@docspace/shared/utils";
 import { getAccessOptions } from "../utils";
 import { getUserRole, getUserTypeLabel } from "@docspace/shared/utils/common";
+import { capitalize } from "lodash";
 
 import {
   StyledEditInput,
@@ -17,7 +19,7 @@ import {
   StyledDeleteIcon,
   StyledInviteUserBody,
 } from "../StyledInvitePanel";
-import { filterUserRoleOptions } from "SRC_DIR/helpers";
+import { filterGroupRoleOptions, filterUserRoleOptions } from "SRC_DIR/helpers";
 import AccessSelector from "./AccessSelector";
 
 const Item = ({
@@ -34,10 +36,26 @@ const Item = ({
   isMobileView,
   standalone,
 }) => {
-  const { avatar, displayName, email, id, errors, access } = item;
+  const {
+    avatar,
+    displayName,
+    email,
+    id,
+    errors,
+    access,
+    isGroup,
+    name: groupName,
+    warning,
+  } = item;
 
-  const name = !!avatar ? (displayName !== "" ? displayName : email) : email;
-  const source = !!avatar ? avatar : AtReactSvgUrl;
+  const name = isGroup
+    ? groupName
+    : !!avatar
+      ? displayName !== ""
+        ? displayName
+        : email
+      : email;
+  const source = !!avatar ? avatar : isGroup ? "" : AtReactSvgUrl;
 
   const [edit, setEdit] = useState(false);
   const [inputValue, setInputValue] = useState(name);
@@ -52,7 +70,9 @@ const Item = ({
     standalone,
   );
 
-  const filteredAccesses = filterUserRoleOptions(accesses, item, true);
+  const filteredAccesses = item.isGroup
+    ? filterGroupRoleOptions(accesses)
+    : filterUserRoleOptions(accesses, item, true);
 
   const defaultAccess = filteredAccesses.find(
     (option) => option.access === +access,
@@ -128,7 +148,7 @@ const Item = ({
     changeInviteItem({ id, access: selected.access });
   };
 
-  const textProps = !!avatar ? {} : { onClick: onEdit };
+  const textProps = !!avatar || isGroup ? {} : { onClick: onEdit };
 
   const displayBody = (
     <>
@@ -136,16 +156,19 @@ const Item = ({
         <Text {...textProps} truncate noSelect>
           {inputValue}
         </Text>
-        <Text
-          className="label"
-          fontWeight={400}
-          fontSize="12px"
-          noSelect
-          color="#A3A9AE"
-          truncate
-        >
-          {item.userName ? `${typeLabel} | ${email}` : `${typeLabel}`}
-        </Text>
+
+        {!isGroup && (
+          <Text
+            className="label"
+            fontWeight={400}
+            fontSize="12px"
+            noSelect
+            color="#A3A9AE"
+            truncate
+          >
+            {`${capitalize(role)} | ${email}`}
+          </Text>
+        )}
       </StyledInviteUserBody>
 
       {hasError ? (
@@ -165,21 +188,30 @@ const Item = ({
           />
         </>
       ) : (
-        <AccessSelector
-          className="user-access"
-          t={t}
-          roomType={roomType}
-          defaultAccess={defaultAccess?.access}
-          onSelectAccess={selectItemAccess}
-          containerRef={inputsRef}
-          isOwner={isOwner}
-          withRemove={true}
-          filteredAccesses={filteredAccesses}
-          setIsOpenItemAccess={setIsOpenItemAccess}
-          isMobileView={isMobileView}
-          noBorder
-          standalone={standalone}
-        />
+        <>
+          {warning && (
+            <div className="warning">
+              <StyledHelpButton
+                tooltipContent={warning}
+                iconName={AlertSvgUrl}
+              />
+            </div>
+          )}
+          <AccessSelector
+            className="user-access"
+            t={t}
+            roomType={roomType}
+            defaultAccess={defaultAccess?.access}
+            onSelectAccess={selectItemAccess}
+            containerRef={inputsRef}
+            isOwner={isOwner}
+            withRemove={true}
+            filteredAccesses={filteredAccesses}
+            setIsOpenItemAccess={setIsOpenItemAccess}
+            isMobileView={isMobileView}
+            noBorder
+          />
+        </>
       )}
     </>
   );
@@ -197,7 +229,13 @@ const Item = ({
 
   return (
     <>
-      <Avatar size="min" role={role} source={source} />
+      <Avatar
+        size="min"
+        role={role}
+        source={source}
+        isGroup={isGroup}
+        userName={groupName}
+      />
       {edit ? editBody : displayBody}
     </>
   );

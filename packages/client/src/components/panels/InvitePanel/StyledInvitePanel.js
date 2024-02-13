@@ -172,16 +172,14 @@ const StyledRow = styled.div`
   }
 
   .invite-panel_access-selector {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: auto;
-            margin-left: 0;
-          `
-        : css`
-            margin-left: auto;
-            margin-right: 0;
-          `}
+    margin-inline-start: auto;
+    margin-inline-end: 0;
+
+    ${({ hasWarning }) => hasWarning && `margin-inline-start: 0;`}
+  }
+
+  .warning {
+    margin-inline-start: auto;
   }
 
   .combo-button-label {
@@ -204,9 +202,9 @@ const StyledInviteInput = styled.div`
           margin-left: 16px;
           margin-right: ${(props) => (props.hideSelector ? "16px" : "8px")};
         `}
-  
-  
-  .input-link {
+
+
+    .input-link {
     height: 32px;
 
     > input {
@@ -241,7 +239,7 @@ const StyledComboBox = styled(ComboBox)`
         `}
 
   .combo-button-label,
-  .combo-button-label:hover {
+    .combo-button-label:hover {
     text-decoration: none;
   }
 
@@ -324,7 +322,7 @@ const SearchItemText = styled(Text)`
   overflow: hidden;
   font-size: ${(props) =>
     props.theme.getCorrectFontSize(
-      props.primary ? "14px" : props.info ? "11px" : "12px"
+      props.primary ? "14px" : props.info ? "11px" : "12px",
     )};
   font-weight: ${(props) => (props.primary || props.info ? "600" : "400")};
 
@@ -381,14 +379,7 @@ const StyledDeleteIcon = styled(DeleteIcon)`
 StyledDeleteIcon.defaultProps = { theme: Base };
 
 const StyledHelpButton = styled(HelpButton)`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-left: 8px;
-        `
-      : css`
-          margin-right: 8px;
-        `}
+  margin-inline-start: 8px;
 `;
 
 const StyledButtons = styled(Box)`

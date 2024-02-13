@@ -435,3 +435,9 @@ export enum RoomsType {
   PublicRoom = 6,
   CustomRoom = 5,
 }
+
+export enum AccountsSearchArea {
+  People = "0",
+  Groups = "1",
+  Any = "2",
+}

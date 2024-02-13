@@ -1,16 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Button from "@docspace/components/button";
-import Text from "@docspace/components/text";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Button } from "@docspace/shared/components/button";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { toastr } from "@docspace/shared/components/toast";
+import { getTfaNewBackupCodes } from "@docspace/shared/api/settings";
+
 import { withTranslation } from "react-i18next";
 import ModalDialogContainer from "../ModalDialogContainer";
-import toastr from "@docspace/components/toast/toastr";
-import Link from "@docspace/components/link";
 
-import { DeviceType } from "@docspace/common/constants";
-import { isDesktop } from "@docspace/components/utils/device";
+import { DeviceType } from "@docspace/shared/enums";
+import { isDesktop } from "@docspace/shared/utils";
 
 const StyledModal = styled(ModalDialogContainer)`
   .backup-codes-counter {
@@ -34,9 +36,9 @@ class BackupCodesDialogComponent extends React.Component {
   }
 
   getNewBackupCodes = async () => {
-    const { getNewBackupCodes, setBackupCodes } = this.props;
+    const { setBackupCodes } = this.props;
     try {
-      const newCodes = await getNewBackupCodes();
+      const newCodes = await getTfaNewBackupCodes();
       setBackupCodes(newCodes);
     } catch (e) {
       toastr.error(e);
@@ -145,7 +147,6 @@ const BackupCodesDialog = withTranslation(
 BackupCodesDialog.propTypes = {
   visible: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  getNewBackupCodes: PropTypes.func.isRequired,
   backupCodes: PropTypes.array.isRequired,
   backupCodesCount: PropTypes.number.isRequired,
   setBackupCodes: PropTypes.func.isRequired,

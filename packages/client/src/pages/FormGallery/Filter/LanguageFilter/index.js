@@ -2,13 +2,14 @@ import * as Styled from "./index.styled";
 
 import { withTranslation } from "react-i18next";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 
-import { flagsIcons } from "@docspace/common/utils/image-flags";
-import { convertToCulture } from "@docspace/common/utils";
-import Backdrop from "@docspace/components/backdrop";
-import { isMobile } from "@docspace/components/utils/device";
+import { flagsIcons } from "@docspace/shared/utils/image-flags";
+import { convertToCulture } from "@docspace/shared/utils/common";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { isMobile } from "@docspace/shared/utils";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 const LanguageFilter = ({
   t,
@@ -16,6 +17,11 @@ const LanguageFilter = ({
   defaultOformLocale,
   oformLocales,
   filterOformsByLocale,
+  filterOformsByLocaleIsLoading,
+  setLanguageFilterLoaded,
+  categoryFilterLoaded,
+  languageFilterLoaded,
+  oformFilesLoaded,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const onToggleDropdownIsOpen = () => setIsOpen(!isOpen);
@@ -29,7 +35,15 @@ const LanguageFilter = ({
     sectionScroll.scrollTop = 0;
   };
 
-  if (oformLocales !== null && oformLocales?.length === 0) return null;
+  useEffect(() => {
+    setLanguageFilterLoaded(oformLocales && oformLocales?.length !== 0);
+  }, [oformLocales, oformLocales?.length]);
+
+  if (
+    filterOformsByLocaleIsLoading ||
+    !(categoryFilterLoaded && languageFilterLoaded && oformFilesLoaded)
+  )
+    return <RectangleSkeleton width="41px" height="32px" />;
 
   return (
     <Styled.LanguageFilter>
@@ -100,4 +114,9 @@ export default inject(({ oformsStore }) => ({
   defaultOformLocale: oformsStore.defaultOformLocale,
   oformLocales: oformsStore.oformLocales,
   filterOformsByLocale: oformsStore.filterOformsByLocale,
+  filterOformsByLocaleIsLoading: oformsStore.filterOformsByLocaleIsLoading,
+  setLanguageFilterLoaded: oformsStore.setLanguageFilterLoaded,
+  categoryFilterLoaded: oformsStore.categoryFilterLoaded,
+  languageFilterLoaded: oformsStore.languageFilterLoaded,
+  oformFilesLoaded: oformsStore.oformFilesLoaded,
 }))(withTranslation(["Common"])(observer(LanguageFilter)));

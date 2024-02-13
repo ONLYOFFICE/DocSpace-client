@@ -4,70 +4,31 @@ import { inject, observer } from "mobx-react";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import { Base } from "@docspace/components/themes";
-import RowContainer from "@docspace/components/row-container";
+import { Base } from "@docspace/shared/themes";
+import { RowContainer } from "@docspace/shared/components/row-container";
 
-import marginStyles from "./CommonStyles";
 import SimpleFilesRow from "./SimpleFilesRow";
 
 const StyledRowContainer = styled(RowContainer)`
   .row-list-item:first-child {
-    .row-selected {
-      .files-row {
-        border-top: ${(props) =>
-          `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
-        margin-top: -1px;
-        padding-top: 0px;
-        padding-bottom: 1px;
-        ${marginStyles};
+    .row-wrapper {
+      height: 57px;
+
+      margin-top: 1px;
+      border-top: 1px solid transparent;
+
+      .styled-checkbox-container {
+        padding-bottom: 5px;
+      }
+
+      .row_content {
+        padding-bottom: 5px;
       }
     }
   }
-  .row-selected + .row-wrapper:not(.row-selected) {
-    .files-row {
-      border-top: ${(props) =>
-        `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
-      margin-top: -3px;
-      ${marginStyles}
-    }
-  }
 
-  .row-wrapper:not(.row-selected)
-    //+ .row-wrapper:not(.row-hotkey-border)
-    + .row-selected {
-    .files-row {
-      border-top: ${(props) =>
-        `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
-      margin-top: -3px;
-      ${marginStyles}
-    }
-  }
-
-  .row-hotkey-border + .row-selected {
-    .files-row {
-      border-top: 1px solid #2da7db !important;
-    }
-  }
-
-  .row-selected:last-child {
-    .files-row {
-      border-bottom: ${(props) =>
-        `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
-      ${marginStyles}
-    }
-    .files-row::after {
-      height: 0px;
-    }
-  }
-  .row-selected:first-child {
-    .files-row {
-      border-top: ${(props) =>
-        `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
-      margin-top: -2px;
-      padding-top: 1px;
-      padding-bottom: 1px;
-      ${marginStyles};
-    }
+  .row-list-item {
+    margin-top: -1px;
   }
 `;
 
@@ -129,42 +90,44 @@ const FilesRowContainer = ({
       hasMoreFiles={hasMoreFiles}
       draggable
       useReactWindow={!withPaging}
-      itemHeight={59}
+      itemHeight={58}
     >
       {filesListNode}
     </StyledRowContainer>
   );
 };
 
-export default inject(({ filesStore, auth, treeFoldersStore }) => {
-  const {
-    filesList,
-    viewAs,
-    setViewAs,
-    filterTotal,
-    fetchMoreFiles,
-    hasMoreFiles,
-    roomsFilterTotal,
-    highlightFile,
-  } = filesStore;
-  const { isVisible: infoPanelVisible } = auth.infoPanelStore;
-  const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
-  const { withPaging, currentDeviceType } = auth.settingsStore;
+export default inject(
+  ({ filesStore, settingsStore, infoPanelStore, treeFoldersStore }) => {
+    const {
+      filesList,
+      viewAs,
+      setViewAs,
+      filterTotal,
+      fetchMoreFiles,
+      hasMoreFiles,
+      roomsFilterTotal,
+      highlightFile,
+    } = filesStore;
+    const { isVisible: infoPanelVisible } = infoPanelStore;
+    const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
+    const { withPaging, currentDeviceType } = settingsStore;
 
-  const isRooms = isRoomsFolder || isArchiveFolder;
+    const isRooms = isRoomsFolder || isArchiveFolder;
 
-  return {
-    filesList,
-    viewAs,
-    setViewAs,
-    infoPanelVisible,
-    filterTotal: isRooms ? roomsFilterTotal : filterTotal,
-    fetchMoreFiles,
-    hasMoreFiles,
-    isRooms,
-    isTrashFolder,
-    withPaging,
-    highlightFile,
-    currentDeviceType,
-  };
-})(observer(FilesRowContainer));
+    return {
+      filesList,
+      viewAs,
+      setViewAs,
+      infoPanelVisible,
+      filterTotal: isRooms ? roomsFilterTotal : filterTotal,
+      fetchMoreFiles,
+      hasMoreFiles,
+      isRooms,
+      isTrashFolder,
+      withPaging,
+      highlightFile,
+      currentDeviceType,
+    };
+  }
+)(observer(FilesRowContainer));

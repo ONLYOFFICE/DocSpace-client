@@ -2,32 +2,36 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
 
-import TableRow from "@docspace/components/table-container/TableRow";
-import TableCell from "@docspace/components/table-container/TableCell";
-import Link from "@docspace/components/link";
-import Text from "@docspace/components/text";
-import Checkbox from "@docspace/components/checkbox";
-import ComboBox from "@docspace/components/combobox";
-import DropDownItem from "@docspace/components/drop-down-item";
+import { TableRow } from "@docspace/shared/components/table";
+import { TableCell } from "@docspace/shared/components/table";
+import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { ComboBox } from "@docspace/shared/components/combobox";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 
 import Badges from "../Badges";
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
+import { getUserTypeLabel } from "@docspace/shared/utils/common";
 
 const StyledWrapper = styled.div`
   display: contents;
 `;
 
 const StyledPeopleRow = styled(TableRow)`
+  .table-container_cell {
+    border-top: ${(props) =>
+      `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+    margin-top: -1px;
+  }
+
   :hover {
     .table-container_cell {
       cursor: pointer;
       background: ${(props) =>
         `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
-      border-top: ${(props) =>
-        `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
-      margin-top: -1px;
     }
 
     .table-container_user-name-cell {
@@ -56,10 +60,18 @@ const StyledPeopleRow = styled(TableRow)`
     }
   }
 
-  .table-container_cell {
-    height: 48px;
-    max-height: 48px;
+  .table-container_row-context-menu-wrapper {
+    height: 49px !important;
+    max-height: none !important;
+    box-sizing: border-box;
+  }
 
+  .table-container_cell:not(.table-container_row-checkbox-wrapper) {
+    height: auto;
+    max-height: 48;
+  }
+
+  .table-container_cell {
     background: ${(props) =>
       (props.checked || props.isActive) &&
       `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
@@ -218,6 +230,9 @@ const PeopleTableRow = (props) => {
     hideColumns,
     value,
     standalone,
+    typeAccountsColumnIsEnabled,
+    emailAccountsColumnIsEnabled,
+    infoPanelVisible,
   } = props;
 
   const {
@@ -297,7 +312,7 @@ const PeopleTableRow = (props) => {
         setIsLoading(false);
       }
     },
-    [item, changeUserType]
+    [item, changeUserType],
   );
 
   // const getRoomsOptions = React.useCallback(() => {
@@ -317,22 +332,7 @@ const PeopleTableRow = (props) => {
   //   return <>{options.map((option) => option)}</>;
   // }, []);
 
-  const getUserTypeLabel = React.useCallback((role) => {
-    switch (role) {
-      case "owner":
-        return t("Common:Owner");
-      case "admin":
-        return t("Common:DocSpaceAdmin");
-      case "manager":
-        return t("Common:RoomAdmin");
-      case "collaborator":
-        return t("Common:PowerUser");
-      case "user":
-        return t("Common:User");
-    }
-  }, []);
-
-  const typeLabel = getUserTypeLabel(role);
+  const typeLabel = React.useCallback(() => getUserTypeLabel(role, t), [])();
 
   const isChecked = checkedProps.checked;
 
@@ -452,13 +452,22 @@ const PeopleTableRow = (props) => {
             {statusType === "pending"
               ? email
               : displayName?.trim()
-              ? displayName
-              : email}
+                ? displayName
+                : email}
           </Link>
-          <Badges statusType={statusType} isPaid={isPaidUser} isSSO={isSSO} />
+          <Badges
+            statusType={statusType}
+            isPaid={isPaidUser}
+            isSSO={isSSO}
+            infoPanelVisible={infoPanelVisible}
+          />
         </TableCell>
 
-        <TableCell className={"table-cell_type"}>{typeCell}</TableCell>
+        {typeAccountsColumnIsEnabled ? (
+          <TableCell className={"table-cell_type"}>{typeCell}</TableCell>
+        ) : (
+          <div />
+        )}
 
         {/* <TableCell className="table-cell_room">
           {!rooms?.length ? (
@@ -501,25 +510,29 @@ const PeopleTableRow = (props) => {
           )}
         </TableCell> */}
 
-        <TableCell>
-          <Link
-            type="page"
-            title={email}
-            fontSize="13px"
-            fontWeight={600}
-            color={sideInfoColor}
-            onClick={onEmailClick}
-            isTextOverflow
-            enableUserSelect
-          >
-            {email}
-          </Link>
-        </TableCell>
+        {emailAccountsColumnIsEnabled ? (
+          <TableCell>
+            <Link
+              type="page"
+              title={email}
+              fontSize="13px"
+              fontWeight={600}
+              color={sideInfoColor}
+              onClick={onEmailClick}
+              isTextOverflow
+              enableUserSelect
+            >
+              {email}
+            </Link>
+          </TableCell>
+        ) : (
+          <div />
+        )}
       </StyledPeopleRow>
     </StyledWrapper>
   );
 };
 
 export default withTranslation(["People", "Common", "Settings"])(
-  withContent(PeopleTableRow)
+  withContent(PeopleTableRow),
 );

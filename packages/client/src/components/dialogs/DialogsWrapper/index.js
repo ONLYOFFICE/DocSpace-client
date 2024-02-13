@@ -31,8 +31,7 @@ const DialogsWrapper = (props) => {
   );
 };
 
-export default inject(({ auth, profileActionsStore }) => {
-  const { settingsStore } = auth;
+export default inject(({ settingsStore, profileActionsStore }) => {
   const { personal, buildVersionInfo } = settingsStore;
   const {
     isAboutDialogVisible,

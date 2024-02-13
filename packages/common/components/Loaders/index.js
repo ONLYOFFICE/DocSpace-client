@@ -1,18 +1,12 @@
-
 import Header from "./HeaderLoader";
 import SectionHeader from "./SectionHeaderLoader";
-import ArticleHeader from "./ArticleHeaderLoader";
-import ArticleButton from "./ArticleButtonLoader";
-import ArticleProfileLoader from "./ArticleProfileLoader";
-import ArticleFolder from "./ArticleFolderLoader";
-import ArticleGroup from "./ArticleGroupsLoader";
+
 import TreeFolders from "./TreeFolderLoader";
 import NewTreeFolders from "./NewTreeFolderLoader";
 import TreeSettingsLoader from "./TreeSettingsLoader";
 
 import Text from "./TextLoader";
-import Filter from "./FilterLoader";
-import FilterBlock from "./FilterBlockLoader";
+
 import ProfileView from "./ProfileViewLoader";
 import ProfileFooter from "./ProfileFooterLoader";
 import Notifications from "./NotificationsLoader";
@@ -38,8 +32,6 @@ import PaymentsLoader from "./PaymentsLoader";
 
 import SelectorBreadCrumbsLoader from "./SelectorBreadCrumbsLoader";
 import PaymentsStandaloneLoader from "./PaymentsStandaloneLoader";
-import SelectorSearchLoader from "./SelectorSearchLoader";
-import SelectorRowLoader from "./SelectorRowLoader";
 
 import InfoPanelViewLoader from "./InfoPanelBodyLoader/InfoPanelViewLoader";
 import InfoPanelHeaderLoader from "./InfoPanelHeaderLoader";
@@ -51,18 +43,17 @@ import SettingsSMTP from "./SettingsLoader/SettingsSMTPLoader";
 import SettingsDSConnect from "./SettingsLoader/SettingsDSConnectLoader";
 import EmptyContainerLoader from "./EmptyContainerLoader/EmptyContainerLoader";
 
-export default {
+import SectionSubmenuLoader from "./SectionSubmenuLoader";
 
+export default {
   Header,
   SectionHeader,
-  ArticleHeader,
-  ArticleProfileLoader,
+
   TreeFolders,
   TreeSettingsLoader,
 
   Text,
-  Filter,
-  FilterBlock,
+
   ProfileView,
   ProfileFooter,
 
@@ -73,9 +64,7 @@ export default {
 
   DialogLoader,
   DialogAsideLoader,
-  ArticleButton,
-  ArticleFolder,
-  ArticleGroup,
+
   ListLoader,
   NewTreeFolders,
   SharingPanelLoader,
@@ -91,8 +80,6 @@ export default {
 
   SelectorBreadCrumbsLoader,
   PaymentsStandaloneLoader,
-  SelectorSearchLoader,
-  SelectorRowLoader,
 
   InfoPanelHeaderLoader,
   InfoPanelViewLoader,
@@ -105,4 +92,6 @@ export default {
 
   EmptyContainerLoader,
   Notifications,
+
+  SectionSubmenuLoader,
 };

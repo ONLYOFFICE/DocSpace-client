@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { observer, inject } from "mobx-react";
 import { useLocation } from "react-router-dom";
-import TableSkeleton from "@docspace/components/skeletons/table";
-import RowsSkeleton from "@docspace/components/skeletons/rows";
+import { TableSkeleton } from "@docspace/shared/skeletons";
+import { RowsSkeleton } from "@docspace/shared/skeletons";
 import Loaders from "@docspace/common/components/Loaders";
 
 const pathname = window.location.pathname.toLowerCase();
@@ -51,23 +51,24 @@ const withLoader = (WrappedComponent) => (Loader) => {
 
   return inject(
     ({
-      auth,
+      authStore,
       filesStore,
       peopleStore,
       clientLoadingStore,
       publicRoomStore,
+      settingsStore,
     }) => {
       const { viewAs, isLoadingFilesFind, isInit } = filesStore;
       const { viewAs: accountsViewAs } = peopleStore;
 
       const { firstLoad, isLoading, showBodyLoader } = clientLoadingStore;
-      const { settingsStore } = auth;
+
       const { setIsBurgerLoading } = settingsStore;
       const { isPublicRoom } = publicRoomStore;
 
       return {
         firstLoad: isPublicRoom ? false : firstLoad,
-        isLoaded: isPublicRoom ? true : auth.isLoaded,
+        isLoaded: isPublicRoom ? true : authStore.isLoaded,
         isLoading,
         viewAs,
         setIsBurgerLoading,

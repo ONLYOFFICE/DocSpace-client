@@ -127,36 +127,9 @@ export const DEFAULT_SELECT_LANGUAGE = {
   icon: EnUSReactSvgUrl,
 };
 
-/**
- * Enum for sort by field name
- * @readonly
- */
-export const SortByFieldName = Object.freeze({
-  Name: "AZ",
-  ModifiedDate: "DateAndTime",
-  CreationDate: "DateAndTimeCreation",
-  Author: "Author",
-  Size: "Size",
-  Type: "Type",
-  Room: "Room",
-  Tags: "Tags",
-  RoomType: "roomType",
-});
-
 export const LinkType = Object.freeze({
   Invite: 0,
   External: 1,
 });
 
 export const SSO_LABEL = "SSO";
-
-export const ARTICLE_ALERTS = Object.freeze({
-  TeamTraining: "TeamTraining",
-  SubmitToFormGallery: "SubmitToFormGallery",
-});
-
-export const AuthenticatedAction = Object.freeze({
-  None: 0,
-  Logout: 1,
-  Redirect: 2,
-});

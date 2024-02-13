@@ -8,26 +8,21 @@ import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import RetryIcon from "PUBLIC_DIR/images/refresh.react.svg?url";
 
 import Headline from "@docspace/common/components/Headline";
-import IconButton from "@docspace/components/icon-button";
+import { IconButton } from "@docspace/shared/components/icon-button";
 // import { Hint } from "../../styled-components";
 
-import {
-  tablet,
-  mobile,
-  isTablet,
-  isMobile,
-} from "@docspace/components/utils/device";
+import { tablet, mobile, isTablet, isMobile } from "@docspace/shared/utils";
 
-import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu";
-import DropDownItem from "@docspace/components/drop-down-item";
+import { TableGroupMenu } from "@docspace/shared/components/table";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 
-import FloatingButton from "@docspace/components/floating-button";
+import { FloatingButton } from "@docspace/shared/components/floating-button";
 
-import Base from "@docspace/components/themes/base";
+import Base from "@docspace/shared/themes/base";
 
 const HeaderContainer = styled.div`
   position: sticky;
@@ -268,7 +263,7 @@ const HistoryHeader = (props) => {
   );
 };
 
-export default inject(({ webhooksStore, auth }) => {
+export default inject(({ webhooksStore, settingsStore }) => {
   const {
     isGroupMenuVisible,
     checkAllIds,
@@ -284,8 +279,6 @@ export default inject(({ webhooksStore, auth }) => {
     setRetryPendingFalse,
     setRetryPendingTrue,
   } = webhooksStore;
-
-  const { settingsStore } = auth;
 
   const { theme } = settingsStore;
 

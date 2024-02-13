@@ -3,14 +3,14 @@ import { withTranslation } from "react-i18next";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
-import { mobile } from "@docspace/components/utils/device";
-import Button from "@docspace/components/button";
-import EmptyScreenContainer from "@docspace/components/empty-screen-container";
+import { mobile } from "@docspace/shared/utils";
+import { Button } from "@docspace/shared/components/button";
+import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 import ConfirmWrapper from "../../../../Confirm/ConfirmWrapper";
 
 import ApiSvgUrl from "PUBLIC_DIR/images/settings.api.svg?url";
 import ApiDarkSvgUrl from "PUBLIC_DIR/images/settings.api.dark.svg?url";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const EmptyContainer = styled(EmptyScreenContainer)`
   .ec-header {
@@ -48,7 +48,7 @@ const Api = (props) => {
             label={t("Common:LearnMore")}
             primary
             size="normal"
-            minwidth="135px"
+            minWidth="135px"
             onClick={() => window.open(apiBasicLink, "_blank")}
             scale={currentDeviceType === DeviceType.mobile}
           />
@@ -62,9 +62,9 @@ const Api = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { settingsStore, setDocumentTitle, currentDeviceType } = auth;
-  const { theme, apiBasicLink } = settingsStore;
+export default inject(({ authStore, settingsStore }) => {
+  const { setDocumentTitle } = authStore;
+  const { theme, apiBasicLink, currentDeviceType } = settingsStore;
 
   return {
     theme,

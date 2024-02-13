@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { FooterBlock } from "./StyledProfileFooter";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
-import RowsSkeleton from "@docspace/components/skeletons/rows";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { RowsSkeleton } from "@docspace/shared/skeletons";
 
-import { isDesktop } from "@docspace/components/utils/device";
+import { isDesktop } from "@docspace/shared/utils";
 
 const ProfileFooterLoader = ({ id, className, style, ...rest }) => {
   const {

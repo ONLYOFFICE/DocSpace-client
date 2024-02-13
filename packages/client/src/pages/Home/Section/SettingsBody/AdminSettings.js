@@ -1,8 +1,8 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
-import ToggleButton from "@docspace/components/toggle-button";
-import Heading from "@docspace/components/heading";
-import Box from "@docspace/components/box";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { Heading } from "@docspace/shared/components/heading";
+import { Box } from "@docspace/shared/components/box";
 import StyledSettings from "./StyledSettings";
 
 const GeneralSettings = ({
@@ -33,7 +33,7 @@ const GeneralSettings = ({
           isChecked={storeForceSave}
         />
       </Box>
-      {/* //TODO: Uncomment when third-party storages will be  stable
+
       <Box className="settings-section">
         <Heading className="heading" level={2} size="xsmall">
           {t("ThirdPartyAccounts")}
@@ -44,18 +44,18 @@ const GeneralSettings = ({
           onChange={onChangeThirdParty}
           isChecked={enableThirdParty}
         />
-      </Box> */}
+      </Box>
     </StyledSettings>
   );
 };
 
-export default inject(({ settingsStore }) => {
+export default inject(({ filesSettingsStore }) => {
   const {
     enableThirdParty,
     setEnableThirdParty,
     storeForcesave,
     setStoreForceSave,
-  } = settingsStore;
+  } = filesSettingsStore;
 
   return {
     storeForceSave: storeForcesave,

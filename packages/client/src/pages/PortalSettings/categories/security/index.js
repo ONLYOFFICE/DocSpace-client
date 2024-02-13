@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Submenu from "@docspace/components/submenu";
+import { Submenu } from "@docspace/shared/components/submenu";
 import { useNavigate } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 
 import AccessPortal from "./access-portal/index.js";
@@ -13,7 +13,7 @@ import MobileSecurityLoader from "./sub-components/loaders/mobile-security-loade
 import AccessLoader from "./sub-components/loaders/access-loader";
 import AuditTrail from "./audit-trail/index.js";
 import { resetSessionStorage } from "../../utils";
-import { DeviceType } from "@docspace/common/constants/index.js";
+import { DeviceType } from "@docspace/shared/enums";
 
 const SecurityWrapper = (props) => {
   const { t, loadBaseInfo, resetIsInit, currentDeviceType } = props;
@@ -88,14 +88,14 @@ const SecurityWrapper = (props) => {
         currentDeviceType === DeviceType.desktop
           ? 0
           : currentDeviceType === DeviceType.mobile
-          ? "53px"
-          : "61px"
+            ? "53px"
+            : "61px"
       }
     />
   );
 };
 
-export default inject(({ auth, setup }) => {
+export default inject(({ settingsStore, setup }) => {
   const { initSettings, resetIsInit } = setup;
 
   return {
@@ -103,6 +103,6 @@ export default inject(({ auth, setup }) => {
       await initSettings();
     },
     resetIsInit,
-    currentDeviceType: auth.settingsStore.currentDeviceType,
+    currentDeviceType: settingsStore.currentDeviceType,
   };
 })(withTranslation(["Settings", "Common"])(observer(SecurityWrapper)));

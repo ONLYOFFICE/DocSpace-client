@@ -3,13 +3,13 @@ import { inject, observer } from "mobx-react";
 
 import { useNavigate, useParams } from "react-router-dom";
 
-import Row from "@docspace/components/row";
+import { Row } from "@docspace/shared/components/row";
 import { HistoryRowContent } from "./HistoryRowContent";
 
 import RetryIcon from "PUBLIC_DIR/images/refresh.react.svg?url";
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 
 import { useTranslation } from "react-i18next";
 

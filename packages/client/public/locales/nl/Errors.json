@@ -1,4 +1,5 @@
 {
+  "AccessDenied": "Toegang geweigerd",
   "Error401Text": "Sorry, de bron is momenteel niet beschikbaar.",
   "Error403Text": "Sorry, toegang geweigerd.",
   "Error404Text": "Sorry, de bron kan niet worden gevonden.",
@@ -8,5 +9,6 @@
   "ErrorUnavailableText": "DocSpace niet beschikbaar",
   "InvalidLink": "Ongeldige link",
   "LinkDoesNotExist": "De link die u probeert te openen bestaat niet.",
-  "LinkHasExpired": "De link die u heeft gevolgd is verlopen."
+  "LinkHasExpired": "De link die u heeft gevolgd is verlopen.",
+  "PortalRestriction": "Uw IP-adres staat niet in de lijst met toegestane IP-adressen voor toegang tot deze DocSpace. Als een VPN is ingeschakeld, schakel deze dan uit en laad de pagina opnieuw, of gebruik een ander IP-adres om in te loggen."
 }

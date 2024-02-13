@@ -13,7 +13,7 @@ import withReadme from "storybook-readme/with-readme";
 import Readme from "./README.md";
 import AdvancedSelector2 from ".";
 import Section from "../../../.storybook/decorators/section";
-import Button from "@docspace/components/button";
+import { Button } from "@docspace/shared/components/button";
 import equal from "fast-deep-equal/react";
 import UserTooltip from "@docspace/client/src/components/PeopleSelector/UserTooltip";
 

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 
 const StyledOwnerInfo = styled.div`
   display: flex;
@@ -160,12 +160,12 @@ const StyledSelectedOwner = styled.div`
 
   box-sizing: border-box;
 
-  background: ${({ currentColorScheme }) => currentColorScheme.main.accent};
+  background: ${({ currentColorScheme }) => currentColorScheme.main?.accent};
 
   border-radius: 16px;
 
   .text {
-    color: ${({ currentColorScheme }) => currentColorScheme.text.accent};
+    color: ${({ currentColorScheme }) => currentColorScheme.text?.accent};
 
     font-weight: 600;
     font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
@@ -180,7 +180,7 @@ const StyledSelectedOwner = styled.div`
       cursor: pointer;
 
       path {
-        fill: ${({ currentColorScheme }) => currentColorScheme.text.accent};
+        fill: ${({ currentColorScheme }) => currentColorScheme.text?.accent};
       }
     }
   }

@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import Submenu from "@docspace/components/submenu";
+import { Submenu } from "@docspace/shared/components/submenu";
 
 import RequestDetails from "./RequestDetails";
 import ResponseDetails from "./ResponseDetails";
 import { useTranslation } from "react-i18next";
-import { isMobile } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/shared/utils";
 import { inject, observer } from "mobx-react";
 
 const SubmenuWrapper = styled.div`

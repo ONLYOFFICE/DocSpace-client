@@ -1,16 +1,20 @@
 import { makeAutoObservable, runInAction } from "mobx";
+
+import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { thumbnailStatuses } from "SRC_DIR/helpers/filesConstants";
+import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
+
+import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+
 import {
-  isNullOrUndefined,
   findNearestIndex,
   isVideo,
-} from "@docspace/common/components/MediaViewer/helpers";
-import { thumbnailStatuses } from "SRC_DIR/helpers/filesConstants";
-
-const FirstUrlKey = "isFirstUrl";
+} from "@docspace/shared/components/media-viewer/MediaViewer.utils";
 
 class MediaViewerDataStore {
   filesStore;
-  settingsStore;
+
   publicRoomStore;
 
   id = null;
@@ -19,10 +23,10 @@ class MediaViewerDataStore {
   currentItem = null;
   prevPostionIndex = 0;
 
-  constructor(filesStore, settingsStore, publicRoomStore) {
+  constructor(filesStore, publicRoomStore) {
     makeAutoObservable(this);
     this.filesStore = filesStore;
-    this.settingsStore = settingsStore;
+
     this.publicRoomStore = publicRoomStore;
   }
 
@@ -61,22 +65,22 @@ class MediaViewerDataStore {
     this.id = id;
   };
 
-  saveFirstUrl = (url) => {
-    localStorage.setItem(FirstUrlKey, url);
-  };
-
   getFirstUrl = () => {
-    return localStorage.getItem(FirstUrlKey);
-  };
+    const filter = this.filesStore.filter;
 
-  removeFirstUrl = () => {
-    localStorage.removeItem(FirstUrlKey);
+    const queryParams = filter.toUrlParams();
+
+    const url = getCategoryUrl(this.filesStore.categoryType, filter.folder);
+
+    const pathname = `${url}?${queryParams}`;
+
+    return pathname;
   };
 
   changeUrl = (id) => {
     if (this.publicRoomStore.isPublicRoom) return;
 
-    const url = "/products/files/#preview/" + id;
+    const url = combineUrl(MEDIA_VIEW_URL, id);
     window.DocSpace.navigate(url);
   };
 

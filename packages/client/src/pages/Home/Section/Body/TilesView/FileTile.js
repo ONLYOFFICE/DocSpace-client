@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import DragAndDrop from "@docspace/components/drag-and-drop";
+import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
 
 import Tile from "./sub-components/Tile";
 import FilesTileContent from "./FilesTileContent";
@@ -57,6 +57,7 @@ const FileTile = (props) => {
     thumbnails1280x720,
     onDragOver,
     onDragLeave,
+    badgeUrl,
   } = props;
 
   const temporaryExtension =
@@ -81,6 +82,7 @@ const FileTile = (props) => {
       logo={item.logo}
       color={item.logo?.color}
       isArchive={item.isArchive}
+      badgeUrl={badgeUrl}
     />
   );
 
@@ -160,8 +162,8 @@ const FileTile = (props) => {
 };
 
 export default inject(
-  ({ settingsStore, filesStore, treeFoldersStore }, { item }) => {
-    const { getIcon, thumbnails1280x720 } = settingsStore;
+  ({ filesSettingsStore, filesStore, treeFoldersStore }, { item }) => {
+    const { getIcon, thumbnails1280x720 } = filesSettingsStore;
     const { setSelection, withCtrlSelect, withShiftSelect, highlightFile } =
       filesStore;
 

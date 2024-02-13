@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import Submenu from "@docspace/components/submenu";
+import { Submenu } from "@docspace/shared/components/submenu";
 import { inject, observer } from "mobx-react";
 import PortalDeactivationSection from "./portalDeactivation";
 import PortalDeletionSection from "./portalDeletion";
 import DeleteDataLoader from "./DeleteDataLoader";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "../../../../../package.json";
 
 const DeleteData = (props) => {
@@ -59,8 +59,7 @@ const DeleteData = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { currentTariffStatusStore } = auth;
+export default inject(({ currentTariffStatusStore }) => {
   const { isNotPaidPeriod } = currentTariffStatusStore;
 
   return {

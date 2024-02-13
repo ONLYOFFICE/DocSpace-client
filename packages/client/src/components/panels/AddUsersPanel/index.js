@@ -2,18 +2,21 @@ import PropTypes from "prop-types";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import React, { useState, useEffect, useCallback } from "react";
+import { capitalize } from "lodash";
 
-import Aside from "@docspace/components/aside";
-import Backdrop from "@docspace/components/backdrop";
-import Selector from "@docspace/components/selector";
-import toastr from "@docspace/components/toast/toastr";
+import { Aside } from "@docspace/shared/components/aside";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Selector } from "@docspace/shared/components/selector";
+import { toastr } from "@docspace/shared/components/toast";
+import { Text } from "@docspace/shared/components/text";
 
-import { getUserRole } from "@docspace/common/utils";
-import Filter from "@docspace/common/api/people/filter";
+import { getUserRole } from "@docspace/shared/utils/common";
+import Filter from "@docspace/shared/api/people/filter";
 import Loaders from "@docspace/common/components/Loaders";
-import { getMembersList } from "@docspace/common/api/people";
-import useLoadingWithTimeout from "SRC_DIR/Hooks/useLoadingWithTimeout";
-import { ShareAccessRights, LOADER_TIMEOUT } from "@docspace/common/constants";
+import { getMembersList } from "@docspace/shared/api/people";
+import useLoadingWithTimeout from "@docspace/shared/hooks/useLoadingWithTimeout";
+import { ShareAccessRights } from "@docspace/shared/enums";
+import { LOADER_TIMEOUT } from "@docspace/shared/constants";
 
 import withLoader from "../../../HOCs/withLoader";
 
@@ -22,6 +25,7 @@ import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.pn
 import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
 import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/catalog.accounts.react.svg?url";
 import EmptyScreenPersonsSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
+import { RowLoader, SearchLoader } from "@docspace/shared/skeletons/selector";
 
 const AddUsersPanel = ({
   isEncrypted,
@@ -43,13 +47,13 @@ const AddUsersPanel = ({
   const accessRight = defaultAccess
     ? defaultAccess
     : isEncrypted
-    ? ShareAccessRights.FullAccess
-    : ShareAccessRights.ReadOnly;
+      ? ShareAccessRights.FullAccess
+      : ShareAccessRights.ReadOnly;
 
   const onBackClick = () => onClose();
   const getFilterWithOutDisabledUser = useCallback(
     () => Filter.getFilterWithOutDisabledUser(),
-    []
+    [],
   );
 
   const onKeyPress = (e) => {
@@ -84,6 +88,8 @@ const AddUsersPanel = ({
         avatar: item.avatar,
         isOwner: item.isOwner,
         isAdmin: item.isAdmin,
+        isVisitor: item.isVisitor,
+        isCollaborator: item.isCollaborator,
       };
       items.push(newItem);
     }
@@ -96,7 +102,7 @@ const AddUsersPanel = ({
   };
 
   const selectedAccess = accessOptions.filter(
-    (access) => access.access === accessRight
+    (access) => access.access === accessRight,
   )[0];
 
   const [itemsList, setItemsList] = useState(null);
@@ -106,11 +112,11 @@ const AddUsersPanel = ({
   const [total, setTotal] = useState(0);
   const [isLoading, setIsLoading] = useLoadingWithTimeout(
     LOADER_TIMEOUT,
-    false
+    false,
   );
   const [isLoadingSearch, setIsLoadingSearch] = useLoadingWithTimeout(
     LOADER_TIMEOUT,
-    false
+    false,
   );
 
   useEffect(() => {
@@ -209,6 +215,36 @@ const AddUsersPanel = ({
     ? EmptyScreenPersonsSvgUrl
     : EmptyScreenPersonsSvgDarkUrl;
 
+  const renderCustomItem = (label, userType, email) => {
+    return (
+      <div style={{ width: "100%" }}>
+        <Text
+          className="label"
+          fontWeight={600}
+          fontSize="14px"
+          noSelect
+          truncate
+          dir="auto"
+        >
+          {label}
+        </Text>
+        <div style={{ display: "flex" }}>
+          <Text
+            className="label"
+            fontWeight={400}
+            fontSize="12px"
+            noSelect
+            truncate
+            color="#A3A9AE"
+            dir="auto"
+          >
+            {`${capitalize(userType)} | ${email}`}
+          </Text>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <>
       <Backdrop
@@ -228,6 +264,7 @@ const AddUsersPanel = ({
         <Selector
           headerLabel={t("PeopleSelector:ListAccounts")}
           onBackClick={onBackClick}
+          renderCustomItem={renderCustomItem}
           searchPlaceholder={t("Common:Search")}
           searchValue={searchValue}
           onSearch={onSearch}
@@ -256,10 +293,10 @@ const AddUsersPanel = ({
           loadNextPage={loadNextPage}
           totalItems={total}
           isLoading={isLoading}
-          searchLoader={<Loaders.SelectorSearchLoader />}
+          searchLoader={<SearchLoader />}
           isSearchLoading={isLoading && !isLoadingSearch}
           rowLoader={
-            <Loaders.SelectorRowLoader
+            <RowLoader
               isUser
               count={15}
               isContainer={isLoading}
@@ -279,14 +316,14 @@ AddUsersPanel.propTypes = {
   onClose: PropTypes.func,
 };
 
-export default inject(({ auth }) => {
+export default inject(({ settingsStore }) => {
   return {
-    theme: auth.settingsStore.theme,
+    theme: settingsStore.theme,
   };
 })(
   observer(
     withTranslation(["SharingPanel", "PeopleTranslations", "Common"])(
-      withLoader(AddUsersPanel)(<Loaders.DialogAsideLoader isPanel />)
-    )
-  )
+      withLoader(AddUsersPanel)(<Loaders.DialogAsideLoader isPanel />),
+    ),
+  ),
 );

@@ -1,4 +1,4 @@
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { PluginListContainer } from "../StyledPlugins";
 
 const ListLoader = ({ widthUpload }) => {

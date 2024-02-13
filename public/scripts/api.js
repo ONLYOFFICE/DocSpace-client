@@ -15,19 +15,33 @@
     editorType: "embedded", //TODO: ["desktop", "embedded"]
     editorGoBack: true,
     selectorType: "exceptPrivacyTrashArchiveFolders", //TODO: ["roomsOnly", "userFolderOnly", "exceptPrivacyTrashArchiveFolders", "exceptSortedByTagsFolders"]
+    showSelectorCancel: false,
+    showSelectorHeader: false,
     showHeader: false,
     showTitle: true,
     showMenu: false,
     showFilter: false,
     destroyText: "",
     viewAs: "row", //TODO: ["row", "table", "tile"]
+    viewTableColumns: "Name,Type,Tags",
+    checkCSP: true,
+    disableActionButton: false,
+    showSettings: false,
+    withSearch: true,
+    withBreadCrumbs: true,
+    withSubtitle: true,
+    filterParam: "ALL",
+    buttonColor: "#5299E0",
+    infoPanelVisible: true,
     filter: {
+      // filterType: 0,
+      // type: 0,
       count: 100,
       page: 1,
       sortorder: "descending", //TODO: ["descending", "ascending"]
       sortby: "DateAndTime", //TODO: ["DateAndTime", "AZ", "Type", "Size", "DateAndTimeCreation", "Author"]
       search: "",
-      withSubfolders: true,
+      withSubfolders: false,
     },
     keysForReload: [
       "src",
@@ -42,13 +56,37 @@
       "mode",
     ],
     events: {
-      onSelectCallback: null,
-      onCloseCallback: null,
+      onSelectCallback: (items) => {
+        alert(items[0].label);
+        window.close();
+      },
+      onCloseCallback: () => {
+        window.close();
+      },
       onAppReady: null,
-      onAppError: null,
+      onAppError: (e) => console.log("onAppError", e),
       onEditorCloseCallback: null,
       onAuthSuccess: null,
+      onSignOut: null,
     },
+  };
+
+  const cspErrorText =
+    "The current domain is not set in the Content Security Policy (CSP) settings.";
+
+  const validateCSP = async (targetSrc) => {
+    const currentSrc = window.location.origin;
+
+    if (currentSrc.indexOf(targetSrc) !== -1) return; //TODO: try work with localhost
+
+    const response = await fetch(`${targetSrc}/api/2.0/security/csp`);
+    const res = await response.json();
+    const passed =
+      res.response.header && res.response.header.includes(currentSrc);
+
+    if (!passed) throw new Error(cspErrorText);
+
+    return;
   };
 
   const getConfigFromParams = () => {
@@ -79,8 +117,8 @@
   };
 
   class DocSpace {
-    #iframe;
     #isConnected = false;
+    #frameOpacity = 0;
     #callbacks = [];
     #tasks = [];
     #classNames = "";
@@ -91,6 +129,114 @@
 
     #oneOfExistInObject = (array, object) => {
       return Object.keys(object).some((k) => array.includes(k));
+    };
+
+    #createLoader = (config) => {
+      const container = document.createElement("div");
+      container.style.width = config.width;
+      container.style.height = config.height;
+      container.style.display = "flex";
+      container.style.justifyContent = "center";
+      container.style.alignItems = "center";
+
+      const loader = document.createElement("img");
+      loader.setAttribute("src", `${config.src}/static/images/loader.svg`);
+      loader.setAttribute("width", `64px`);
+      loader.setAttribute("height", `64px`);
+
+      if (
+        config.theme === "Dark" ||
+        (config.theme === "System" &&
+          window.matchMedia("(prefers-color-scheme: dark)"))
+      ) {
+        container.style.backgroundColor = "#333333";
+        loader.style.filter =
+          "invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%)";
+      }
+
+      container.appendChild(loader);
+
+      container.setAttribute("id", config.frameId + "-loader");
+
+      return container;
+    };
+
+    #createButtonView = (config) => {
+      const button = document.createElement("button");
+      button.style.backgroundColor = config?.buttonColor || "#5299E0";
+      button.style.color = "#fff";
+      button.style.padding = "0 28px";
+      button.style.borderRadius = "3px";
+      button.style.border = `1px solid #5299E0`;
+      button.style.height = "32px";
+      button.style.fontWeight = "600";
+      button.style.fontFamily = "Open Sans";
+      button.style.cursor = "pointer";
+      button.style.display = "flex";
+      button.style.alignItems = "center";
+      button.style.gap = "10px";
+      button.style.userSelect = "none";
+      button.style.borderColor = config?.buttonColor || "#5299E0";
+
+      const logoSrc = `${config.src}/static/images/light_small_logo.react.svg`;
+
+      button.innerHTML = `${config?.buttonWithLogo ? `<img width="16px" heigth="16px" src="${logoSrc}" />` : ""}${config?.buttonText || "Select to DocSpace"}`;
+
+      const scriptUrl = `${window.location.origin}/static/scripts/api.js`;
+
+      button.addEventListener("click", () => {
+        const winHtml = `<!DOCTYPE html>
+          <html>
+              <head>
+                  <meta charset="UTF-8">
+                  <script src="${scriptUrl}"></script>
+                  <title>DocSpace</title>
+
+                  <style>
+                    #${config.frameId}-container {
+                      height: 98vh !important;
+                      width: 98vw !important;
+                    }
+
+                    html, body {
+                        height: 100%;
+                        width: 100%;
+                    }
+
+                    body {
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    }
+                </style>
+              </head>
+              <body style="margin:0;">
+                  <div id=${config.frameId}></div>
+                  <script id="integration">
+                    const config = {...${JSON.stringify(config, function (key, val) {
+                      return typeof val === "function" ? "" + val : val;
+                    })}, width: "100%", height: "100%", events: {
+                      onSelectCallback: eval(${config.events.onSelectCallback + ""}),
+                      onCloseCallback: eval(${config.events.onCloseCallback + ""}),
+                      onAppReady: eval(${config.events.onAppReady + ""}),
+                      onAppError: eval(${config.events.onAppError + ""}),
+                      onEditorCloseCallback: eval(${config.events.onEditorCloseCallback + ""}),
+                      onAuthSuccess: eval(${config.events.onAuthSuccess + ""}),
+                      onSignOut: eval(${config.events.onSignOut + ""}),
+                    }}
+                    window.DocSpace.SDK.initFrame(config)
+                  </script>
+              </body>
+          </html>`;
+
+        const winUrl = URL.createObjectURL(new Blob([winHtml], { type: "text/html" }));
+
+        window.open(winUrl, "_blank", `width=610,height=778`);
+      });
+
+      button.setAttribute("id", config.frameId + "-container");
+
+      return button;
     };
 
     #createIframe = (config) => {
@@ -106,6 +252,10 @@
             const params = config.requestToken
               ? { key: config.requestToken, ...config.filter }
               : config.filter;
+
+            if (!params.withSubfolders) {
+              delete params.withSubfolders;
+            }
 
             const urlParams = new URLSearchParams(params).toString();
 
@@ -144,6 +294,11 @@
           }
 
           path = `/doceditor/?fileId=${config.id}&type=${config.editorType}&editorGoBack=${goBack}`;
+
+          if (config.requestToken) {
+            path = `${path}&share=${config.requestToken}`;
+          }
+
           break;
         }
 
@@ -158,6 +313,11 @@
           }
 
           path = `/doceditor/?fileId=${config.id}&type=${config.editorType}&action=view&editorGoBack=${goBack}`;
+
+          if (config.requestToken) {
+            path = `${path}&share=${config.requestToken}`;
+          }
+
           break;
         }
 
@@ -166,21 +326,47 @@
       }
 
       iframe.src = config.src + path;
-      iframe.width = config.width;
-      iframe.height = config.height;
+      iframe.style.width = config.width;
+      iframe.style.height = config.height;
       iframe.name = config.name;
       iframe.id = config.frameId;
 
-      iframe.align = "top";
       iframe.frameBorder = 0;
       iframe.allowFullscreen = true;
-      iframe.setAttribute("allowfullscreen", "");
-      iframe.setAttribute("allow", "autoplay");
+      iframe.setAttribute("allow", "storage-access *");
 
       if (config.type == "mobile") {
         iframe.style.position = "fixed";
         iframe.style.overflow = "hidden";
         document.body.style.overscrollBehaviorY = "contain";
+      }
+
+      if (this.config.checkCSP) {
+        validateCSP(this.config.src).catch((e) => {
+          const html = `
+          <body style="background: #F3F4F4;">
+          <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300" rel="stylesheet" type="text/css">
+          <div style="display: flex; flex-direction: column; gap: 80px; align-items: center; justify-content: flex-start; margin-top: 60px; padding: 0 30px;">
+          <div style="flex-shrink: 0; width: 211px; height: 24px; position: relative">
+          <img src="${this.config.src}/static/images/logo/lightsmall.svg">
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 16px; align-items: center; justify-content: flex-start; flex-shrink: 0; position: relative;">
+          <div style="flex-shrink: 0; width: 120px; height: 100px; position: relative">
+          <img src="${this.config.src}/static/images/frame-error.svg">
+          </div>
+          <span style="color: #A3A9AE; text-align: center; font-family: Open Sans; font-size: 14px; font-style: normal; font-weight: 700; line-height: 16px;">
+          ${cspErrorText} Please add it via 
+          <a href="${this.config.src}/portal-settings/developer-tools/javascript-sdk" target="_blank" style="color: #4781D1; text-align: center; font-family: Open Sans; font-size: 14px; font-style: normal; font-weight: 700; line-height: 16px; text-decoration-line: underline;">
+          the Developer Tools section</a>.
+          </span>
+          </div>
+          </div>
+          </body>`;
+          iframe.srcdoc = html;
+          e.message && config.events.onAppError(e.message);
+
+          this.setIsLoaded();
+        });
       }
 
       return iframe;
@@ -193,8 +379,10 @@
         data: message,
       };
 
-      if (!!this.#iframe.contentWindow) {
-        this.#iframe.contentWindow.postMessage(
+      const targetFrame = document.getElementById(this.config.frameId);
+
+      if (targetFrame && !!targetFrame.contentWindow) {
+        targetFrame.contentWindow.postMessage(
           JSON.stringify(mes, (key, value) =>
             typeof value === "function" ? value.toString() : value
           ),
@@ -226,6 +414,7 @@
             break;
           }
           case "onEventReturn": {
+            if (Object.keys(this.config).length === 0) return;
             if (
               data?.eventReturnData?.event in this.config.events &&
               typeof this.config.events[data?.eventReturnData.event] ===
@@ -248,7 +437,9 @@
     };
     #executeMethod = (methodName, params, callback) => {
       if (!this.#isConnected) {
-        console.log("Message bus is not connected with frame");
+        this.config.events.onAppError(
+          "Message bus is not connected with frame"
+        );
         return;
       }
 
@@ -268,20 +459,29 @@
       this.#sendMessage(message);
     };
 
-    initFrame(config) {
+    initButton(config) {
       const configFull = { ...defaultConfig, ...config };
-      this.config = { ...this.config, ...configFull };
+      this.config = { ...this.config, ...configFull, events: { ...defaultConfig.events } };
 
       const target = document.getElementById(this.config.frameId);
 
+      let button = null;
+
       if (target) {
-        this.#iframe = this.#createIframe(this.config);
+        button = this.#createButtonView(this.config);
+
         this.#classNames = target.className;
 
-        target.parentNode &&
-          target.parentNode.replaceChild(this.#iframe, target);
+        const isSelfReplace = target.parentNode.isEqualNode(
+          document.getElementById(this.config.frameId + "-container"),
+        );
+
+        target && isSelfReplace
+          ? target.parentNode.replaceWith(button)
+          : target.replaceWith(button);
 
         window.addEventListener("message", this.#onMessage, false);
+
         this.#isConnected = true;
       }
 
@@ -289,13 +489,81 @@
 
       window.DocSpace.SDK.frames[this.config.frameId] = this;
 
-      return this.#iframe;
+      return button;
+    }
+
+    initFrame(config) {
+      const configFull = { ...defaultConfig, ...config };
+      this.config = { ...this.config, ...configFull };
+
+      const target = document.getElementById(this.config.frameId);
+
+      let iframe = null;
+
+      if (target) {
+        iframe = this.#createIframe(this.config);
+
+        iframe.style.opacity = this.#frameOpacity;
+        iframe.style.zIndex = 2;
+        iframe.style.position = "absolute";
+        iframe.style.width = "100%";
+        iframe.style.height = "100%";
+        iframe.style.top = 0;
+        iframe.style.left = 0;
+
+        const frameLoader = this.#createLoader(this.config);
+
+        this.#classNames = target.className;
+
+        const renderContainer = document.createElement("div");
+        renderContainer.id = this.config.frameId + "-container";
+        renderContainer.classList = ["frame-container"];
+        renderContainer.style.position = "relative";
+        renderContainer.style.width = this.config.width;
+        renderContainer.style.height = this.config.height || "100%";
+
+        renderContainer.appendChild(iframe);
+        renderContainer.appendChild(frameLoader);
+
+        const isSelfReplace = target.parentNode.isEqualNode(
+          document.getElementById(this.config.frameId + "-container")
+        );
+
+        target && isSelfReplace
+          ? target.parentNode.replaceWith(renderContainer)
+          : target.replaceWith(renderContainer);
+
+        window.addEventListener("message", this.#onMessage, false);
+
+        this.#isConnected = true;
+      }
+
+      window.DocSpace.SDK.frames = window.DocSpace.SDK.frames || [];
+
+      window.DocSpace.SDK.frames[this.config.frameId] = this;
+
+      return iframe;
     }
 
     initManager(config = {}) {
       config.mode = "manager";
 
       return this.initFrame(config);
+    }
+
+    setIsLoaded() {
+      const targetFrame = document.getElementById(this.config.frameId);
+      const loader = document.getElementById(this.config.frameId + "-loader");
+
+      if (targetFrame) {
+        targetFrame.style.opacity = 1;
+        targetFrame.style.position = "relative";
+        targetFrame.style.width = this.config.width;
+        targetFrame.style.height = this.config.height;
+        targetFrame.parentNode.style.height = "inherit";
+
+        if (loader) loader.remove();
+      }
     }
 
     initEditor(config = {}) {
@@ -335,15 +603,14 @@
       target.innerHTML = this.config.destroyText;
       target.className = this.#classNames;
 
-      if (this.#iframe) {
-        window.removeEventListener("message", this.#onMessage, false);
-        this.#isConnected = false;
+      const targetFrame = document.getElementById(this.config.frameId + "-container");
 
-        delete window.DocSpace.SDK.frames[this.config.frameId];
+      window.removeEventListener("message", this.#onMessage, false);
+      this.#isConnected = false;
 
-        this.#iframe.parentNode &&
-          this.#iframe.parentNode.replaceChild(target, this.#iframe);
-      }
+      delete window.DocSpace.SDK.frames[this.config.frameId];
+
+      targetFrame?.parentNode?.replaceChild(target, targetFrame);
 
       this.config = {};
     }
@@ -467,6 +734,8 @@
   window.DocSpace.SDK = new DocSpace(config);
 
   if (config.init) {
-    window.DocSpace.SDK.initFrame(config);
+    config?.isButtonMode
+      ? window.DocSpace.SDK.initButton(config)
+      : window.DocSpace.SDK.initFrame(config);
   }
 })();

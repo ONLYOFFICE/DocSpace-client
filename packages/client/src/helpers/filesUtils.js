@@ -7,14 +7,15 @@ import CloudServicesYandexReactSvgUrl from "PUBLIC_DIR/images/cloud.services.yan
 import CloudServicesNextcloudReactSvgUrl from "PUBLIC_DIR/images/cloud.services.nextcloud.react.svg?url";
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
 import CloudServicesWebdavReactSvgUrl from "PUBLIC_DIR/images/cloud.services.webdav.react.svg?url";
-import authStore from "@docspace/common/store/AuthStore";
-import { FileType, RoomsType } from "@docspace/common/constants";
+import { authStore, settingsStore } from "@docspace/shared/store";
+import { FileType, RoomsType } from "@docspace/shared/enums";
 import config from "PACKAGE_FILE";
-import { combineUrl, toUrlParams } from "@docspace/common/utils";
-import { addFileToRecentlyViewed } from "@docspace/common/api/files";
+import { toUrlParams } from "@docspace/shared/utils/common";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { addFileToRecentlyViewed } from "@docspace/shared/api/files";
 import i18n from "./i18n";
 
-import { request } from "@docspace/common/api/client";
+import { request } from "@docspace/shared/api/client";
 
 export const getFileTypeName = (fileType) => {
   switch (fileType) {
@@ -60,11 +61,13 @@ export const getDefaultRoomName = (room, t) => {
 
     case RoomsType.PublicRoom:
       return t("Files:PublicRoom");
+    case RoomsType.FormRoom:
+      return t("Files:FormRoom");
   }
 };
 
 export const setDocumentTitle = (subTitle = null) => {
-  const { isAuthenticated, settingsStore, product: currentModule } = authStore;
+  const { isAuthenticated, product: currentModule } = authStore;
   const { organizationName } = settingsStore;
 
   let title;

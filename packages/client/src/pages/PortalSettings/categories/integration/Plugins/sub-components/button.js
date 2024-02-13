@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import Button from "@docspace/components/button";
+import { Button } from "@docspace/shared/components/button";
 
 const StyledUploadButton = styled.div`
   width: auto;

@@ -1,8 +1,8 @@
 import React from "react";
 
-import { FolderType } from "@docspace/common/constants";
+import { FolderType } from "@docspace/shared/enums";
 // @ts-ignore
-import { getFoldersTree } from "@docspace/common/api/files";
+import { getFoldersTree } from "@docspace/shared/api/files";
 
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
 import CatalogUserReactSvgUrl from "PUBLIC_DIR/images/catalog.user.react.svg?url";
@@ -10,7 +10,7 @@ import CatalogUserReactSvgUrl from "PUBLIC_DIR/images/catalog.user.react.svg?url
 import { useRootHelperProps, Item } from "../FilesSelector.types";
 
 import { defaultBreadCrumb } from "../utils";
-import { getCatalogIconUrlByType } from "@docspace/common/utils/catalogIcon.helper";
+import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 
 const useRootHelper = ({
   setBreadCrumbs,
@@ -20,6 +20,7 @@ const useRootHelper = ({
   setIsNextPageLoading,
   setTotal,
   setHasNextPage,
+  isUserOnly,
 }: useRootHelperProps) => {
   const [isRoot, setIsRoot] = React.useState<boolean>(false);
 
@@ -41,7 +42,7 @@ const useRootHelper = ({
       const avatar = getCatalogIconUrlByType(folder.rootFolderType);
 
       if (
-        folder.rootFolderType === FolderType.Rooms ||
+        (!isUserOnly && folder.rootFolderType === FolderType.Rooms) ||
         folder.rootFolderType === FolderType.USER
       ) {
         newItems.push({

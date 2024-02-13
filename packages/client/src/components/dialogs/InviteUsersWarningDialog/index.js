@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import moment from "moment";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Button from "@docspace/components/button";
-import Text from "@docspace/components/text";
+import moment from "moment-timezone";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Button } from "@docspace/shared/components/button";
+import { Text } from "@docspace/shared/components/text";
 
-import { getDaysRemaining } from "@docspace/common/utils";
+import { getDaysRemaining } from "@docspace/shared/utils/common";
 
 const InviteUsersWarningDialog = (props) => {
   const {
@@ -32,9 +32,10 @@ const InviteUsersWarningDialog = (props) => {
 
   useEffect(() => {
     moment.locale(language);
+    if (window.timezone) moment().tz(window.timezone);
 
     gracePeriodDays();
-  }, [language, gracePeriodDays]);
+  }, [language, gracePeriodDays, window.timezone]);
 
   const gracePeriodDays = () => {
     const fromDateMoment = moment(dueDate);
@@ -124,25 +125,31 @@ const InviteUsersWarningDialog = (props) => {
   );
 };
 
-export default inject(({ auth, dialogsStore }) => {
-  const { isPaymentPageAvailable } = auth;
-  const { dueDate, delayDueDate, isGracePeriod } =
-    auth.currentTariffStatusStore;
-  const { currentTariffPlanTitle } = auth.currentQuotaStore;
+export default inject(
+  ({
+    authStore,
+    dialogsStore,
+    currentTariffStatusStore,
+    currentQuotaStore,
+  }) => {
+    const { isPaymentPageAvailable } = authStore;
+    const { dueDate, delayDueDate, isGracePeriod } = currentTariffStatusStore;
+    const { currentTariffPlanTitle } = currentQuotaStore;
 
-  const {
-    inviteUsersWarningDialogVisible,
-    setInviteUsersWarningDialogVisible,
-  } = dialogsStore;
+    const {
+      inviteUsersWarningDialogVisible,
+      setInviteUsersWarningDialogVisible,
+    } = dialogsStore;
 
-  return {
-    isPaymentPageAvailable,
-    currentTariffPlanTitle,
-    language: auth.language,
-    visible: inviteUsersWarningDialogVisible,
-    setIsVisible: setInviteUsersWarningDialogVisible,
-    dueDate,
-    delayDueDate,
-    isGracePeriod,
-  };
-})(observer(withTranslation(["Payments", "Common"])(InviteUsersWarningDialog)));
+    return {
+      isPaymentPageAvailable,
+      currentTariffPlanTitle,
+      language: authStore.language,
+      visible: inviteUsersWarningDialogVisible,
+      setIsVisible: setInviteUsersWarningDialogVisible,
+      dueDate,
+      delayDueDate,
+      isGracePeriod,
+    };
+  }
+)(observer(withTranslation(["Payments", "Common"])(InviteUsersWarningDialog)));

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { mobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/shared/utils";
 
 export const StyledSimpleNav = styled.div`
   width: 100%;
@@ -12,9 +12,14 @@ export const StyledSimpleNav = styled.div`
 `;
 
 export const StyledDeepLink = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   z-index: 1;
+
+  @media ${mobile} {
+    width: calc(100% - 32px);
+  }
 `;
 
 export const StyledBodyWrapper = styled.div`

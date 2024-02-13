@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 
 const StyledText = styled(Text)`
   display: inline-block;

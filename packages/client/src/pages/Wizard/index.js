@@ -3,31 +3,34 @@ import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { inject, observer } from "mobx-react";
-
-import Text from "@docspace/components/text";
-import FormWrapper from "@docspace/components/form-wrapper";
-import EmailInput from "@docspace/components/email-input";
-import PasswordInput from "@docspace/components/password-input";
-import IconButton from "@docspace/components/icon-button";
-import ComboBox from "@docspace/components/combobox";
-import Link from "@docspace/components/link";
-import Checkbox from "@docspace/components/checkbox";
-import Button from "@docspace/components/button";
-import FieldContainer from "@docspace/components/field-container";
+import api from "@docspace/shared/api";
+import { Text } from "@docspace/shared/components/text";
+import { FormWrapper } from "@docspace/shared/components/form-wrapper";
+import { EmailInput } from "@docspace/shared/components/email-input";
+import { PasswordInput } from "@docspace/shared/components/password-input";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { ComboBox } from "@docspace/shared/components/combobox";
+import { Link } from "@docspace/shared/components/link";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Button } from "@docspace/shared/components/button";
+import { FieldContainer } from "@docspace/shared/components/field-container";
 import ErrorContainer from "@docspace/common/components/ErrorContainer";
-import FileInput from "@docspace/components/file-input";
+import { FileInput } from "@docspace/shared/components/file-input";
 
-import Loader from "@docspace/components/loader";
+import { Loader } from "@docspace/shared/components/loader";
 
 import withCultureNames from "@docspace/common/hoc/withCultureNames";
-import { EmailSettings } from "@docspace/components/utils/email";
+
 import {
-  combineUrl,
   createPasswordHash,
   convertLanguage,
-  setCookie,
-} from "@docspace/common/utils";
-import { LANGUAGE, COOKIE_EXPIRATION_YEAR } from "@docspace/common/constants";
+} from "@docspace/shared/utils/common";
+import { setCookie } from "@docspace/shared/utils/cookie";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
+import { LANGUAGE } from "@docspace/shared/constants";
+import BetaBadge from "@docspace/common/components/BetaBadge";
+import { EmailSettings } from "@docspace/shared/utils";
 
 import {
   Wrapper,
@@ -45,7 +48,7 @@ import {
   DEFAULT_SELECT_TIMEZONE,
   DEFAULT_SELECT_LANGUAGE,
 } from "SRC_DIR/helpers/constants";
-import { isMobile } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/shared/utils";
 
 const emailSettings = new EmailSettings();
 emailSettings.allowDomainPunycode = true;
@@ -67,7 +70,7 @@ const Wizard = (props) => {
     cultureNames,
     culture,
     hashSettings,
-    setPortalOwner,
+
     setWizardComplete,
     isLicenseRequired,
     setLicense,
@@ -130,7 +133,7 @@ const Wizard = (props) => {
       ])
       .then(() => {
         const select = cultureNames.filter(
-          (lang) => lang.key === convertedCulture
+          (lang) => lang.key === convertedCulture,
         );
 
         if (select.length === 0) {
@@ -163,6 +166,7 @@ const Wizard = (props) => {
   }, []);
 
   const onEmailChangeHandler = (result) => {
+    console.log(result);
     setEmail(result.value);
     setHasErrorEmail(!result.isValid);
   };
@@ -177,6 +181,7 @@ const Wizard = (props) => {
 
   const generatePassword = () => {
     if (isCreated) return;
+
     refPassInput.current.onGeneratePassword();
   };
 
@@ -211,6 +216,8 @@ const Wizard = (props) => {
   const validateFields = () => {
     const emptyEmail = email.trim() === "";
     const emptyPassword = password.trim() === "";
+
+    console.log(emptyEmail, email);
 
     if (emptyEmail || emptyPassword) {
       emptyEmail && setHasErrorEmail(true);
@@ -248,13 +255,13 @@ const Wizard = (props) => {
     const hash = createPasswordHash(password, hashSettings);
 
     try {
-      await setPortalOwner(
+      await api.settings.setPortalOwner(
         emailTrim,
         hash,
         selectedLanguage.key,
         selectedTimezone.key,
         wizardToken,
-        analytics
+        analytics,
       );
 
       setCookie(LANGUAGE, selectedLanguage.key, {
@@ -399,24 +406,29 @@ const Wizard = (props) => {
               <Text color="#A3A9AE" fontWeight={400}>
                 {t("Common:Language")}
               </Text>
-              <ComboBox
-                withoutPadding
-                directionY="both"
-                options={cultureNames || []}
-                selectedOption={selectedLanguage || {}}
-                onSelect={onLanguageSelect}
-                isDisabled={isCreated}
-                scaled={isMobile()}
-                scaledOptions={false}
-                size="content"
-                showDisabledItems={true}
-                dropDownMaxHeight={364}
-                manualWidth="250px"
-                isDefaultMode={!isMobile()}
-                withBlur={isMobile()}
-                fillIcon={false}
-                modernView={true}
-              />
+              <div className="wrapper__language-selector">
+                <ComboBox
+                  withoutPadding
+                  directionY="both"
+                  options={cultureNames || []}
+                  selectedOption={selectedLanguage || {}}
+                  onSelect={onLanguageSelect}
+                  isDisabled={isCreated}
+                  scaled={isMobile()}
+                  scaledOptions={false}
+                  size="content"
+                  showDisabledItems={true}
+                  dropDownMaxHeight={364}
+                  manualWidth="250px"
+                  isDefaultMode={!isMobile()}
+                  withBlur={isMobile()}
+                  fillIcon={false}
+                  modernView={true}
+                />
+                {selectedLanguage?.isBeta && (
+                  <BetaBadge withOutFeedbackLink place="bottom" />
+                )}
+              </div>
             </StyledInfo>
             <StyledInfo>
               <Text color="#A3A9AE" fontWeight={400}>
@@ -488,7 +500,7 @@ const Wizard = (props) => {
   );
 };
 
-export default inject(({ auth, wizard }) => {
+export default inject(({ authStore, settingsStore, wizardStore }) => {
   const {
     passwordSettings,
     wizardToken,
@@ -499,9 +511,9 @@ export default inject(({ auth, wizard }) => {
     getPortalTimezones,
     getPortalPasswordSettings,
     theme,
-  } = auth.settingsStore;
+  } = settingsStore;
 
-  const { language } = auth;
+  const { language } = authStore;
   const {
     isWizardLoaded,
     machineName,
@@ -510,14 +522,14 @@ export default inject(({ auth, wizard }) => {
     setIsWizardLoaded,
     getMachineName,
     getIsRequiredLicense,
-    setPortalOwner,
+
     setLicense,
     resetLicenseUploaded,
-  } = wizard;
+  } = wizardStore;
 
   return {
     theme,
-    isLoaded: auth.isLoaded,
+    isLoaded: authStore.isLoaded,
     culture: language,
     wizardToken,
     passwordSettings,
@@ -534,7 +546,7 @@ export default inject(({ auth, wizard }) => {
     setIsWizardLoaded,
     getMachineName,
     getIsRequiredLicense,
-    setPortalOwner,
+
     setLicense,
     resetLicenseUploaded,
   };

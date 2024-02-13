@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { observer, inject } from "mobx-react";
 
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 import Loaders from "@docspace/common/components/Loaders";
 
 import BenefitsContainer from "SRC_DIR/components/StandaloneComponents/BenefitsContainer";
@@ -32,8 +32,8 @@ const Bonus = ({ standaloneInit, isInitPaymentPage }) => {
   );
 };
 
-export default inject(({ auth, payments }) => {
-  const { standaloneInit, isInitPaymentPage } = payments;
+export default inject(({ paymentStore }) => {
+  const { standaloneInit, isInitPaymentPage } = paymentStore;
 
   return {
     standaloneInit,

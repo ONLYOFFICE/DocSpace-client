@@ -2,9 +2,8 @@ import React, { useRef, useState, useEffect } from "react";
 
 import { StyledDropDown, StyledDropDownWrapper } from "../StyledDropdown";
 
-import DropDownItem from "@docspace/components/drop-down-item";
-import { isMobile } from "@docspace/components/utils/device";
-import DomHelpers from "@docspace/components/utils/domHelpers";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { isMobile, DomHelpers } from "@docspace/shared/utils";
 
 const TagDropdown = ({
   open,
@@ -28,12 +27,12 @@ const TagDropdown = ({
     return () => inputRef?.current?.removeEventListener("keyup", onKeyPress);
   }, [onKeyPress]);
 
-  const chosenTags = tagHandler.tags.map((tag) => tag.name);
+  const chosenTags = tagHandler.tags.map((tag) => tag.name.toLowerCase());
 
   const tagsForDropdown = tagHandler.fetchedTags.filter(
     (tag) =>
       tag.toLowerCase().includes(tagInputValue.toLowerCase()) &&
-      !chosenTags.includes(tag)
+      !chosenTags.includes(tag.toLowerCase())
   );
 
   const preventDefault = (e) => {
@@ -74,7 +73,7 @@ const TagDropdown = ({
 
     if (
       tagInputValue &&
-      ![...tagsForDropdown, ...chosenTags].find((tag) => tagInputValue === tag)
+      ![...tagsForDropdown, ...chosenTags].find((tag) => tagInputValue.toLowerCase() === tag.toLowerCase())
     )
       res = [
         <DropDownItem

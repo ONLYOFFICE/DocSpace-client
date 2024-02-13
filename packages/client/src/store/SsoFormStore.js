@@ -7,8 +7,8 @@ import {
   submitSsoForm,
   uploadXmlMetadata,
   validateCerts,
-} from "@docspace/common/api/settings";
-import toastr from "@docspace/components/toast/toastr";
+} from "@docspace/shared/api/settings";
+import { toastr } from "@docspace/shared/components/toast";
 import {
   BINDING_POST,
   BINDING_REDIRECT,
@@ -98,7 +98,6 @@ class SsoFormStore {
   spMetadata = false;
   idpIsModalVisible = false;
   spIsModalVisible = false;
-  confirmationDisableModal = false;
   confirmationResetModal = false;
 
   // errors
@@ -155,12 +154,13 @@ class SsoFormStore {
     }
   };
 
-  ssoToggle = () => {
+  ssoToggle = (t) => {
     if (!this.enableSso) {
       this.enableSso = true;
       this.serviceProviderSettings = true;
     } else {
       this.enableSso = false;
+      !this.hasErrors && this.saveSsoSettings(t);
     }
 
     for (let key in this) {
@@ -224,27 +224,12 @@ class SsoFormStore {
     this.defaultSettings = defaultSettings;
   };
 
-  openConfirmationDisableModal = () => {
-    this.confirmationDisableModal = true;
-  };
-
-  closeConfirmationDisableModal = () => {
-    this.confirmationDisableModal = false;
-  };
-
   openResetModal = () => {
     this.confirmationResetModal = true;
   };
 
   closeResetModal = () => {
     this.confirmationResetModal = false;
-  };
-
-  confirmDisable = () => {
-    this.resetForm();
-    this.setIsSsoEnabled(false);
-    this.ssoToggle();
-    this.confirmationDisableModal = false;
   };
 
   confirmReset = () => {
@@ -494,10 +479,10 @@ class SsoFormStore {
   setSloUrls = (o) => {
     switch (o.sloBinding) {
       case BINDING_POST:
-        this.sloUrlPost = o.ssoUrl;
+        this.sloUrlPost = o.sloUrl;
         break;
       case BINDING_REDIRECT:
-        this.sloUrlRedirect = o.ssoUrl;
+        this.sloUrlRedirect = o.sloUrl;
     }
   };
 
@@ -552,12 +537,12 @@ class SsoFormStore {
     if (meta.singleSignOnService) {
       this.ssoUrlPost = this.getPropValue(
         meta.singleSignOnService,
-        BINDING_POST
+        BINDING_POST,
       );
 
       this.ssoUrlRedirect = this.getPropValue(
         meta.singleSignOnService,
-        BINDING_REDIRECT
+        BINDING_REDIRECT,
       );
     }
 
@@ -568,12 +553,12 @@ class SsoFormStore {
 
       this.sloUrlRedirect = this.getPropValue(
         meta.singleLogoutService,
-        BINDING_REDIRECT
+        BINDING_REDIRECT,
       );
 
       this.sloUrlPost = this.getPropValue(
         meta.singleLogoutService,
-        BINDING_POST
+        BINDING_POST,
       );
     }
 
@@ -598,7 +583,7 @@ class SsoFormStore {
       if (meta.certificate.signing) {
         if (Array.isArray(meta.certificate.signing)) {
           meta.certificate.signing = this.getUniqueItems(
-            meta.certificate.signing
+            meta.certificate.signing,
           ).reverse();
           meta.certificate.signing.forEach((signingCrt) => {
             data.push({
@@ -690,14 +675,14 @@ class SsoFormStore {
   delSpCertificate = (action) => {
     this.resetSpCheckboxes(action);
     this.spCertificates = this.spCertificates.filter(
-      (certificate) => certificate.action !== action
+      (certificate) => certificate.action !== action,
     );
   };
 
   delIdpCertificate = (cert) => {
     this.resetIdpCheckboxes();
     this.idpCertificates = this.idpCertificates.filter(
-      (certificate) => certificate.crt !== cert
+      (certificate) => certificate.crt !== cert,
     );
   };
 
@@ -713,7 +698,7 @@ class SsoFormStore {
       (item) =>
         (item.action === this.spAction ||
           item.action === SSO_SIGNING_ENCRYPT) &&
-        !this.isEdit
+        !this.isEdit,
     );
   };
 
@@ -785,7 +770,7 @@ class SsoFormStore {
 
     if (
       this.idpCertificates.find(
-        (item) => item.crt === this.idpCertificate && !this.isEdit
+        (item) => item.crt === this.idpCertificate && !this.isEdit,
       )
     ) {
       toastr.error(t("CertificateExist"));
@@ -896,7 +881,7 @@ class SsoFormStore {
     if (!this.enableSso || this.isLoadingXml) return true;
     return !this.spCertificates.some(
       (cert) =>
-        cert.action === SSO_SIGNING || cert.action === SSO_SIGNING_ENCRYPT
+        cert.action === SSO_SIGNING || cert.action === SSO_SIGNING_ENCRYPT,
     );
   }
 
@@ -904,7 +889,7 @@ class SsoFormStore {
     if (!this.enableSso || this.isLoadingXml) return true;
     return !this.spCertificates.some(
       (cert) =>
-        cert.action === SSO_ENCRYPT || cert.action === SSO_SIGNING_ENCRYPT
+        cert.action === SSO_ENCRYPT || cert.action === SSO_SIGNING_ENCRYPT,
     );
   }
 }

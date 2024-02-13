@@ -2,18 +2,18 @@ import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import Text from "@docspace/components/text";
-import SocialButton from "@docspace/components/social-button";
-import toastr from "@docspace/components/toast/toastr";
+import { Text } from "@docspace/shared/components/text";
+import { SocialButton } from "@docspace/shared/components/social-button";
+import { toastr } from "@docspace/shared/components/toast";
 
-import { getAuthProviders } from "@docspace/common/api/settings";
-import { unlinkOAuth, linkOAuth } from "@docspace/common/api/people";
+import { getAuthProviders } from "@docspace/shared/api/settings";
+import { unlinkOAuth, linkOAuth } from "@docspace/shared/api/people";
 import {
   getProviderTranslation,
   getOAuthToken,
   getLoginLink,
-} from "@docspace/common/utils";
-import { providersData } from "@docspace/common/constants";
+} from "@docspace/shared/utils/common";
+import { PROVIDERS_DATA } from "@docspace/shared/constants";
 
 import { StyledWrapper } from "./styled-social-networks";
 
@@ -98,8 +98,8 @@ const SocialNetworks = (props) => {
   const providerButtons =
     providers &&
     providers.map((item) => {
-      if (!providersData[item.provider]) return;
-      const { icon, label, iconOptions } = providersData[item.provider];
+      if (!PROVIDERS_DATA[item.provider]) return;
+      const { icon, label, iconOptions } = PROVIDERS_DATA[item.provider];
       if (!icon || !label) return <></>;
 
       const onClick = (e) => {
@@ -137,10 +137,10 @@ const SocialNetworks = (props) => {
   );
 };
 
-export default inject(({ auth, peopleStore }) => {
+export default inject(({ currentQuotaStore, peopleStore }) => {
   const { usersStore } = peopleStore;
   const { providers, setProviders } = usersStore;
-  const { currentQuotaStore } = auth;
+
   const { isOAuthAvailable, setPortalQuota } = currentQuotaStore;
 
   return {

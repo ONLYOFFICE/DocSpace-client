@@ -1,11 +1,11 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import api from "@docspace/shared/api";
+import { toastr } from "@docspace/shared/components/toast";
 
-import toastr from "@docspace/components/toast/toastr";
-
-import { combineUrl } from "@docspace/common/utils";
-
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { setEncryptionAccess } from "SRC_DIR/helpers/desktop";
 import config from "PACKAGE_FILE";
 
 import { getTitleWithoutExtension } from "SRC_DIR/helpers/filesUtils";
@@ -42,9 +42,6 @@ const CreateEvent = ({
 
   setConvertPasswordDialogVisible,
   setFormCreationInfo,
-
-  replaceFileStream,
-  setEncryptionAccess,
 
   setEventDialogVisible,
   eventDialogVisible,
@@ -248,14 +245,11 @@ const CreateEvent = ({
                 if (!encryptedFile) return Promise.resolve();
                 toastr.info(t("Translations:EncryptedFileSaving"));
 
-                return replaceFileStream(
-                  file.id,
-                  encryptedFile,
-                  true,
-                  false
-                ).then(
-                  () => open && openDocEditor(file.id, file.providerKey, tab)
-                );
+                return api.files
+                  .updateFileStream(file.id, encryptedFile, true, false)
+                  .then(
+                    () => open && openDocEditor(file.id, file.providerKey, tab)
+                  );
               });
             }
 
@@ -296,7 +290,7 @@ const CreateEvent = ({
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     filesStore,
     filesActionsStore,
     selectedFolderStore,
@@ -304,8 +298,9 @@ export default inject(
     uploadDataStore,
     dialogsStore,
     oformsStore,
-    settingsStore,
+    filesSettingsStore,
     clientLoadingStore,
+    currentTariffStatusStore,
   }) => {
     const { setIsSectionBodyLoading } = clientLoadingStore;
 
@@ -332,10 +327,7 @@ export default inject(
 
     const { id: parentId } = selectedFolderStore;
 
-    const { replaceFileStream, setEncryptionAccess, currentTariffStatusStore } =
-      auth;
-
-    const { isDesktopClient } = auth.settingsStore;
+    const { isDesktopClient } = settingsStore;
 
     const { setPortalTariff } = currentTariffStatusStore;
 
@@ -346,7 +338,7 @@ export default inject(
       eventDialogVisible,
     } = dialogsStore;
 
-    const { keepNewFileName } = settingsStore;
+    const { keepNewFileName } = filesSettingsStore;
 
     return {
       setPortalTariff,
@@ -374,9 +366,6 @@ export default inject(
 
       setConvertPasswordDialogVisible,
       setFormCreationInfo,
-
-      replaceFileStream,
-      setEncryptionAccess,
 
       keepNewFileName,
     };

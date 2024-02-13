@@ -11,12 +11,11 @@ import NoHistory from "../NoItem/NoHistory";
 
 const History = ({
   t,
-  selection,
   historyWithFileList,
   selectedFolder,
   selectionHistory,
   setSelectionHistory,
-  selectionParentRoom,
+  infoPanelSelection,
   getInfoPanelItemIcon,
   getHistory,
   checkAndOpenLocationAction,
@@ -31,17 +30,23 @@ const History = ({
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const fetchHistory = async (itemId) => {
+  const fetchHistory = async (item) => {
+    if (!item?.id) return;
     if (isLoading) {
       abortControllerRef.current?.abort();
       abortControllerRef.current = new AbortController();
     } else setIsLoading(true);
 
     let module = "files";
-    if (selection.isRoom) module = "rooms";
-    else if (selection.isFolder) module = "folders";
+    if (infoPanelSelection.isRoom) module = "rooms";
+    else if (infoPanelSelection.isFolder) module = "folders";
 
-    getHistory(module, itemId, abortControllerRef.current?.signal)
+    getHistory(
+      module,
+      item.id,
+      abortControllerRef.current?.signal,
+      item?.requestToken
+    )
       .then((data) => {
         if (isMount.current)
           startTransition(() => {
@@ -59,8 +64,8 @@ const History = ({
 
   useEffect(() => {
     if (!isMount.current) return;
-    fetchHistory(selection.id);
-  }, [selection.id]);
+    fetchHistory(infoPanelSelection);
+  }, [infoPanelSelection.id]);
 
   useEffect(() => {
     return () => {
@@ -81,9 +86,8 @@ const History = ({
             key={feed.json.Id}
             t={t}
             feed={feed}
-            selection={selection}
             selectedFolder={selectedFolder}
-            selectionParentRoom={selectionParentRoom}
+            infoPanelSelection={infoPanelSelection}
             getInfoPanelItemIcon={getInfoPanelItemIcon}
             checkAndOpenLocationAction={checkAndOpenLocationAction}
             openUser={openUser}
@@ -98,39 +102,44 @@ const History = ({
   );
 };
 
-export default inject(({ auth, filesStore, filesActionsStore }) => {
-  const { userStore } = auth;
-  const {
-    selection,
-    selectionHistory,
-    setSelectionHistory,
-    historyWithFileList,
-    selectionParentRoom,
-    getInfoPanelItemIcon,
-    openUser,
-  } = auth.infoPanelStore;
-  const { personal, culture } = auth.settingsStore;
+export default inject(
+  ({
+    settingsStore,
+    filesStore,
+    filesActionsStore,
+    infoPanelStore,
+    userStore,
+  }) => {
+    const {
+      infoPanelSelection,
+      selectionHistory,
+      setSelectionHistory,
+      historyWithFileList,
+      getInfoPanelItemIcon,
+      openUser,
+    } = infoPanelStore;
+    const { personal, culture } = settingsStore;
 
-  const { getHistory } = filesStore;
-  const { checkAndOpenLocationAction } = filesActionsStore;
+    const { getHistory } = filesStore;
+    const { checkAndOpenLocationAction } = filesActionsStore;
 
-  const { user } = userStore;
-  const isVisitor = user.isVisitor;
-  const isCollaborator = user.isCollaborator;
+    const { user } = userStore;
+    const isVisitor = user.isVisitor;
+    const isCollaborator = user.isCollaborator;
 
-  return {
-    personal,
-    culture,
-    selection,
-    selectionHistory,
-    setSelectionHistory,
-    historyWithFileList,
-    selectionParentRoom,
-    getInfoPanelItemIcon,
-    getHistory,
-    checkAndOpenLocationAction,
-    openUser,
-    isVisitor,
-    isCollaborator,
-  };
-})(withTranslation(["InfoPanel", "Common", "Translations"])(observer(History)));
+    return {
+      personal,
+      culture,
+      selectionHistory,
+      setSelectionHistory,
+      historyWithFileList,
+      infoPanelSelection,
+      getInfoPanelItemIcon,
+      getHistory,
+      checkAndOpenLocationAction,
+      openUser,
+      isVisitor,
+      isCollaborator,
+    };
+  }
+)(withTranslation(["InfoPanel", "Common", "Translations"])(observer(History)));

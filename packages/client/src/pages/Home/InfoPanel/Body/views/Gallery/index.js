@@ -6,7 +6,7 @@ import { ReactSVG } from "react-svg";
 import withLoader from "@docspace/client/src/HOCs/withLoader";
 import Loaders from "@docspace/common/components/Loaders/index.js";
 
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 
 import { parseAndFormatDate } from "../../helpers/DetailsHelper.js";
 import {
@@ -19,7 +19,7 @@ import {
   StyledProperties,
   StyledSubtitle,
 } from "../../styles/common.js";
-import Link from "@docspace/components/link/index.js";
+import { Link } from "@docspace/shared/components/link";
 
 const Gallery = ({
   t,
@@ -55,7 +55,7 @@ const Gallery = ({
           target="_blank"
           type="action"
           isHovered
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
         >
           {t("FormGallery:SuggestChanges")}
         </Link>
@@ -106,10 +106,10 @@ const Gallery = ({
   );
 };
 
-export default inject(({ auth, settingsStore, oformsStore }) => {
-  const { personal, culture, currentColorScheme } = auth.settingsStore;
+export default inject(({ settingsStore, filesSettingsStore, oformsStore }) => {
+  const { personal, culture, currentColorScheme } = settingsStore;
   const { gallerySelected } = oformsStore;
-  const { getIcon } = settingsStore;
+  const { getIcon } = filesSettingsStore;
   return {
     getIcon,
     gallerySelected,

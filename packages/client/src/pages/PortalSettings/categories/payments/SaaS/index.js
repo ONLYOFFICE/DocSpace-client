@@ -4,7 +4,7 @@ import { inject, observer } from "mobx-react";
 import moment from "moment";
 import { useTranslation } from "react-i18next";
 
-import { regDesktop } from "@docspace/common/desktop";
+import { regDesktop } from "@docspace/shared/utils/desktop";
 import Loaders from "@docspace/common/components/Loaders";
 import { setDocumentTitle } from "@docspace/client/src/helpers/filesUtils";
 
@@ -42,7 +42,7 @@ const SaaSPage = ({
         setEncryptionKeys,
         false,
         null,
-        t
+        t,
       );
     }
     return () => resetTariffContainerToBasic();
@@ -68,47 +68,53 @@ const SaaSPage = ({
   );
 };
 
-export default inject(({ auth, payments }) => {
-  const {
-    language,
+export default inject(
+  ({
+    authStore,
+    settingsStore,
+    paymentStore,
+    userStore,
     currentQuotaStore,
     currentTariffStatusStore,
-    isUpdatingTariff,
-    userStore,
-    settingsStore,
-  } = auth;
-  const { user } = userStore;
-  const { isLoaded: isLoadedCurrentQuota } = currentQuotaStore;
-  const { isLoaded: isLoadedTariffStatus } = currentTariffStatusStore;
-  const {
-    isInitPaymentPage,
-    init,
-    isUpdatingBasicSettings,
-    resetTariffContainerToBasic,
-  } = payments;
-  const {
-    isEncryptionSupport,
-    setEncryptionKeys,
-    encryptionKeys,
-    isDesktopClient,
-    isDesktopClientInit,
-    setIsDesktopClientInit,
-  } = settingsStore;
-  return {
-    isDesktopClientInit,
-    setIsDesktopClientInit,
-    isDesktop: isDesktopClient,
-    user,
-    encryptionKeys,
-    isEncryption: isEncryptionSupport,
-    setEncryptionKeys,
-    resetTariffContainerToBasic,
-    isUpdatingTariff,
-    init,
-    isInitPaymentPage,
-    language,
-    isLoadedTariffStatus,
-    isLoadedCurrentQuota,
-    isUpdatingBasicSettings,
-  };
-})(observer(SaaSPage));
+  }) => {
+    const {
+      language,
+
+      isUpdatingTariff,
+    } = authStore;
+    const { user } = userStore;
+    const { isLoaded: isLoadedCurrentQuota } = currentQuotaStore;
+    const { isLoaded: isLoadedTariffStatus } = currentTariffStatusStore;
+    const {
+      isInitPaymentPage,
+      init,
+      isUpdatingBasicSettings,
+      resetTariffContainerToBasic,
+    } = paymentStore;
+    const {
+      isEncryptionSupport,
+      setEncryptionKeys,
+      encryptionKeys,
+      isDesktopClient,
+      isDesktopClientInit,
+      setIsDesktopClientInit,
+    } = settingsStore;
+    return {
+      isDesktopClientInit,
+      setIsDesktopClientInit,
+      isDesktop: isDesktopClient,
+      user,
+      encryptionKeys,
+      isEncryption: isEncryptionSupport,
+      setEncryptionKeys,
+      resetTariffContainerToBasic,
+      isUpdatingTariff,
+      init,
+      isInitPaymentPage,
+      language,
+      isLoadedTariffStatus,
+      isLoadedCurrentQuota,
+      isUpdatingBasicSettings,
+    };
+  },
+)(observer(SaaSPage));

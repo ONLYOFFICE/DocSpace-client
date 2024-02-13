@@ -1,21 +1,21 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Trans, withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
-
-import toastr from "@docspace/components/toast/toastr";
-import FieldContainer from "@docspace/components/field-container";
-import TextInput from "@docspace/components/text-input";
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
+import api from "@docspace/shared/api";
+import { toastr } from "@docspace/shared/components/toast";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { inject, observer } from "mobx-react";
 import isEqual from "lodash/isEqual";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import styled from "styled-components";
-import Link from "@docspace/components/link";
+import { Link } from "@docspace/shared/components/link";
 import LoaderCompanyInfoSettings from "../sub-components/loaderCompanyInfoSettings";
 import AboutDialog from "../../../../About/AboutDialog";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
-import { mobile, size } from "@docspace/components/utils/device";
-
+import { mobile, size } from "@docspace/shared/utils";
+import { isManagement } from "@docspace/shared/utils/common";
 const StyledComponent = styled.div`
   .link {
     font-weight: 600;
@@ -46,12 +46,6 @@ const StyledComponent = styled.div`
       display: none;
     }
   }
-
-  @media (max-height: 700px) {
-    .save-cancel-buttons {
-      bottom: auto;
-    }
-  }
 `;
 
 const CompanyInfoSettings = (props) => {
@@ -59,19 +53,26 @@ const CompanyInfoSettings = (props) => {
     t,
     isSettingPaid,
     getCompanyInfoSettings,
-    setCompanyInfoSettings,
+
     companyInfoSettingsIsDefault,
-    restoreCompanyInfoSettings,
+
     companyInfoSettingsData,
     tReady,
     setIsLoadedCompanyInfoSettingsData,
     isLoadedCompanyInfoSettingsData,
     buildVersionInfo,
     personal,
-    isManagement,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
+
+  const defaultCompanySettingsData = {
+    address: companyInfoSettingsData.address,
+    companyName: companyInfoSettingsData.companyName,
+    email: companyInfoSettingsData.email,
+    phone: companyInfoSettingsData.phone,
+    site: companyInfoSettingsData.site,
+  };
 
   const defaultCompanySettingsError = {
     hasErrorAddress: false,
@@ -81,9 +82,11 @@ const CompanyInfoSettings = (props) => {
     hasErrorSite: false,
   };
 
-  const [companySettings, setCompanySettings] = useState({});
+  const [companySettings, setCompanySettings] = useState(
+    defaultCompanySettingsData,
+  );
   const [companySettingsError, setCompanySettingsError] = useState(
-    defaultCompanySettingsError
+    defaultCompanySettingsError,
   );
   const [showReminder, setShowReminder] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -107,7 +110,7 @@ const CompanyInfoSettings = (props) => {
   }, []);
 
   const checkWidth = () => {
-    const url = isManagement
+    const url = isManagement()
       ? "/branding"
       : "portal-settings/customization/branding";
     window.innerWidth > size.mobile &&
@@ -121,18 +124,11 @@ const CompanyInfoSettings = (props) => {
     setIsLoadedCompanyInfoSettingsData(true);
   }, [companyInfoSettingsData, tReady]);
 
-  const getSettings = () => {
+  const getSettings = async () => {
+    await getCompanyInfoSettings();
     const companySettings = getFromSessionStorage("companySettings");
 
-    const defaultData = {
-      address: companyInfoSettingsData?.address,
-      companyName: companyInfoSettingsData?.companyName,
-      email: companyInfoSettingsData?.email,
-      phone: companyInfoSettingsData?.phone,
-      site: companyInfoSettingsData?.site,
-    };
-
-    saveToSessionStorage("defaultCompanySettings", defaultData);
+    saveToSessionStorage("defaultCompanySettings", defaultCompanySettingsData);
 
     if (companySettings) {
       setCompanySettings({
@@ -143,7 +139,7 @@ const CompanyInfoSettings = (props) => {
         site: companySettings?.site,
       });
     } else {
-      setCompanySettings(defaultData);
+      setCompanySettings(defaultCompanySettingsData);
     }
   };
 
@@ -153,7 +149,7 @@ const CompanyInfoSettings = (props) => {
 
   useEffect(() => {
     const defaultCompanySettings = getFromSessionStorage(
-      "defaultCompanySettings"
+      "defaultCompanySettings",
     );
 
     const newSettings = {
@@ -189,7 +185,7 @@ const CompanyInfoSettings = (props) => {
 
   const validateEmpty = (value, type) => {
     const hasError = value.trim() === "";
-    const phoneRegex = /^[\d\(\)\-+]+$/;
+    const phoneRegex = /^[\d\(\)\-\s+]+$/;
     const hasErrorPhone = !phoneRegex.test(value);
 
     if (type === "companyName") {
@@ -255,7 +251,8 @@ const CompanyInfoSettings = (props) => {
   const onSave = useCallback(async () => {
     setIsLoading(true);
 
-    await setCompanyInfoSettings(address, companyName, email, phone, site)
+    await api.settings
+      .setCompanyInfoSettings(address, companyName, email, phone, site)
       .then(() => {
         toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
       })
@@ -285,17 +282,13 @@ const CompanyInfoSettings = (props) => {
     });
 
     setIsLoading(false);
-  }, [
-    setIsLoading,
-    setCompanyInfoSettings,
-    getCompanyInfoSettings,
-    companySettings,
-  ]);
+  }, [setIsLoading, getCompanyInfoSettings, companySettings]);
 
   const onRestore = useCallback(async () => {
     setIsLoading(true);
 
-    await restoreCompanyInfoSettings()
+    await api.settings
+      .restoreCompanyInfoSettings()
       .then((res) => {
         toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
         setCompanySettings(res);
@@ -316,7 +309,7 @@ const CompanyInfoSettings = (props) => {
     });
 
     setIsLoading(false);
-  }, [setIsLoading, restoreCompanyInfoSettings, getCompanyInfoSettings]);
+  }, [setIsLoading, getCompanyInfoSettings]);
 
   const onShowExample = () => {
     if (!isSettingPaid) return;
@@ -328,6 +321,13 @@ const CompanyInfoSettings = (props) => {
     setShowModal(false);
   };
 
+  const isDisabled =
+    hasErrorAddress ||
+    hasErrorCompanyName ||
+    hasErrorEmail ||
+    hasErrorPhone ||
+    hasErrorSite;
+
   if (!isLoadedCompanyInfoSettingsData) return <LoaderCompanyInfoSettings />;
 
   return (
@@ -337,7 +337,7 @@ const CompanyInfoSettings = (props) => {
         onClose={onCloseModal}
         buildVersionInfo={buildVersionInfo}
         personal={personal}
-        previewData={companySettings}
+        previewData={defaultCompanySettingsData}
       />
 
       <StyledComponent isSettingPaid={isSettingPaid}>
@@ -454,6 +454,7 @@ const CompanyInfoSettings = (props) => {
           cancelButtonLabel={t("Common:Restore")}
           reminderText={t("YouHaveUnsavedChanges")}
           displaySettings={true}
+          saveButtonDisabled={isDisabled}
           hasScroll={true}
           hideBorder={true}
           showReminder={(isSettingPaid && showReminder) || isLoading}
@@ -466,9 +467,7 @@ const CompanyInfoSettings = (props) => {
   );
 };
 
-export default inject(({ auth, common }) => {
-  const { currentQuotaStore, settingsStore, isManagement } = auth;
-
+export default inject(({ settingsStore, common, currentQuotaStore }) => {
   const {
     setIsLoadedCompanyInfoSettingsData,
     isLoadedCompanyInfoSettingsData,
@@ -476,9 +475,9 @@ export default inject(({ auth, common }) => {
 
   const {
     getCompanyInfoSettings,
-    setCompanyInfoSettings,
+
     companyInfoSettingsIsDefault,
-    restoreCompanyInfoSettings,
+
     companyInfoSettingsData,
     buildVersionInfo,
     personal,
@@ -488,19 +487,18 @@ export default inject(({ auth, common }) => {
 
   return {
     getCompanyInfoSettings,
-    setCompanyInfoSettings,
+
     companyInfoSettingsIsDefault,
-    restoreCompanyInfoSettings,
+
     companyInfoSettingsData,
     setIsLoadedCompanyInfoSettingsData,
     isLoadedCompanyInfoSettingsData,
     buildVersionInfo,
     personal,
     isSettingPaid: isBrandingAndCustomizationAvailable,
-    isManagement,
   };
 })(
   withLoading(
-    withTranslation(["Settings", "Common"])(observer(CompanyInfoSettings))
-  )
+    withTranslation(["Settings", "Common"])(observer(CompanyInfoSettings)),
+  ),
 );

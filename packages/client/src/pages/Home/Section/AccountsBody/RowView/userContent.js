@@ -3,11 +3,11 @@ import styled, { css } from "styled-components";
 
 import { withTranslation } from "react-i18next";
 
-import RowContent from "@docspace/components/row-content";
-import Link from "@docspace/components/link";
+import { RowContent } from "@docspace/shared/components/row-content";
+import { Link } from "@docspace/shared/components/link";
 
 import Badges from "../Badges";
-import { tablet, mobile } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/shared/utils";
 
 const StyledRowContent = styled(RowContent)`
   @media ${tablet} {
@@ -20,7 +20,7 @@ const StyledRowContent = styled(RowContent)`
 
     .badges {
       flex-direction: row-reverse;
-      margin-top: 9px;
+      margin-top: 10px;
       ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
@@ -89,12 +89,12 @@ const UserContent = ({
     role === "owner"
       ? t("Common:Owner")
       : role === "admin"
-      ? t("Common:DocSpaceAdmin")
-      : isCollaborator
-      ? t("Common:PowerUser")
-      : isVisitor
-      ? t("Common:User")
-      : t("Common:RoomAdmin");
+        ? t("Common:DocSpaceAdmin")
+        : isCollaborator
+          ? t("Common:PowerUser")
+          : isVisitor
+            ? t("Common:User")
+            : t("Common:RoomAdmin");
 
   const isPaidUser = !standalone && !isVisitor;
 
@@ -118,8 +118,8 @@ const UserContent = ({
         {statusType === "pending"
           ? email
           : displayName?.trim()
-          ? displayName
-          : email}
+            ? displayName
+            : email}
       </Link>
 
       <Badges statusType={statusType} isPaid={isPaidUser} isSSO={isSSO} />

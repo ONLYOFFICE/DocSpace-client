@@ -4,18 +4,18 @@ import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
 import LockedReactSvgUrl from "PUBLIC_DIR/images/locked.react.svg?url";
 import FileActionsFavoriteReactSvgUrl from "PUBLIC_DIR/images/file.actions.favorite.react.svg?url";
 import FavoriteReactSvgUrl from "PUBLIC_DIR/images/favorite.react.svg?url";
+
 import React from "react";
 import styled from "styled-components";
-import IconButton from "@docspace/components/icon-button";
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
-import { isTablet } from "@docspace/components/utils/device";
+
+import { isTablet, isMobile, commonIconsStyles } from "@docspace/shared/utils";
 import {
   FileStatus,
   RoomsType,
   ShareAccessRights,
-} from "@docspace/common/constants";
+} from "@docspace/shared/enums";
 
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 const QuickButtons = (props) => {
   const {
@@ -31,10 +31,12 @@ const QuickButtons = (props) => {
     viewAs,
     folderCategory,
     isPublicRoom,
+    onClickShare,
+    isPersonalRoom,
     isArchiveFolder,
   } = props;
 
-  const { id, locked, fileStatus, title, fileExst } = item;
+  const { id, locked, shared, fileStatus, title, fileExst } = item;
 
   const isFavorite =
     (fileStatus & FileStatus.IsFavorite) === FileStatus.IsFavorite;
@@ -55,6 +57,10 @@ const QuickButtons = (props) => {
     ? theme.filesQuickButtons.sharedColor
     : theme.filesQuickButtons.color;
 
+  const colorShare = shared
+    ? theme.filesQuickButtons.sharedColor
+    : theme.filesQuickButtons.color;
+
   const tabletViewQuickButton = isTablet();
 
   const sizeQuickButton = isTile || tabletViewQuickButton ? "medium" : "small";
@@ -67,6 +73,8 @@ const QuickButtons = (props) => {
     !folderCategory && fileExst && displayBadges && item.security.Lock;
   const isAvailableDownloadFile =
     isPublicRoom && item.security.Download && viewAs === "tile";
+
+  const isAvailableShareFile = isPersonalRoom && item.canShare;
 
   const isPublicRoomType =
     item.roomType === RoomsType.PublicRoom ||
@@ -83,11 +91,16 @@ const QuickButtons = (props) => {
     !isArchiveFolder &&
     !isTile;
 
+  const onShare = () => {
+    if (isMobile()) return;
+    onClickShare();
+  };
+
   return (
     <div className="badges additional-badges  badges__quickButtons">
       {isAvailableLockFile && (
         <ColorTheme
-          themeId={ThemeType.IconButton}
+          themeId={ThemeId.IconButton}
           iconName={iconLock}
           className="badge lock-file icons-group"
           size={sizeQuickButton}
@@ -102,7 +115,7 @@ const QuickButtons = (props) => {
       )}
       {isAvailableDownloadFile && (
         <ColorTheme
-          themeId={ThemeType.IconButton}
+          themeId={ThemeId.IconButton}
           iconName={FileActionsDownloadReactSvgUrl}
           className="badge download-file icons-group"
           size={sizeQuickButton}
@@ -115,7 +128,7 @@ const QuickButtons = (props) => {
       )}
       {showCopyLinkIcon && (
         <ColorTheme
-          themeId={ThemeType.IconButton}
+          themeId={ThemeId.IconButton}
           iconName={LinkReactSvgUrl}
           className="badge copy-link icons-group"
           size={sizeQuickButton}
@@ -123,12 +136,25 @@ const QuickButtons = (props) => {
           color={colorLock}
           isDisabled={isDisabled}
           hoverColor={theme.filesQuickButtons.sharedColor}
-          title={t("Files:CopyGeneralLink")}
+          title={t("Files:CopySharedLink")}
+        />
+      )}
+      {isAvailableShareFile && (
+        <ColorTheme
+          themeId={ThemeId.IconButton}
+          iconName={LinkReactSvgUrl}
+          className="badge copy-link icons-group"
+          size={sizeQuickButton}
+          onClick={onShare}
+          color={colorShare}
+          isDisabled={isDisabled}
+          hoverColor={theme.filesQuickButtons.sharedColor}
+          title={t("Files:CopySharedLink")}
         />
       )}
       {/* {fileExst && !isTrashFolder && displayBadges && (
         <ColorTheme
-          themeId={ThemeType.IconButton}
+          themeId={ThemeId.IconButton}
           iconName={iconFavorite}
           isFavorite={isFavorite}
           className="favorite badge icons-group"

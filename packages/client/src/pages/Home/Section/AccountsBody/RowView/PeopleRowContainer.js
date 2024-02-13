@@ -4,8 +4,8 @@ import styled, { css } from "styled-components";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import RowContainer from "@docspace/components/row-container";
-import { tablet } from "@docspace/components/utils/device";
+import { RowContainer } from "@docspace/shared/components/row-container";
+import { tablet } from "@docspace/shared/utils";
 
 import EmptyScreen from "../EmptyScreen";
 import SimpleUserRow from "./SimpleUserRow";
@@ -27,50 +27,31 @@ const marginStyles = css`
 const StyledRowContainer = styled(RowContainer)`
   .row-selected + .row-wrapper:not(.row-selected) {
     .user-row {
-      border-top: ${(props) =>
-        `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
-      margin-top: -3px;
-
       ${marginStyles}
     }
   }
 
   .row-wrapper:not(.row-selected) + .row-selected {
     .user-row {
-      border-top: ${(props) =>
-        `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
-      margin-top: -3px;
-
       ${marginStyles}
     }
   }
 
-  .row-hotkey-border + .row-selected {
+  .row-list-item:first-child {
     .user-row {
-      border-top: 1px solid #2da7db !important;
+      border-top: 2px solid transparent;
+    }
+
+    .row-selected {
+      .user-row {
+        border-top-color: ${(props) =>
+          `${props.theme.filesSection.tableView.row.borderColor} !important`};
+      }
     }
   }
 
-  .row-selected:last-child {
-    .user-row {
-      border-bottom: ${(props) =>
-        `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
-      padding-bottom: 1px;
-
-      ${marginStyles}
-    }
-    .user-row::after {
-      height: 0px;
-    }
-  }
-  .row-selected:first-child {
-    .user-row {
-      border-top: ${(props) =>
-        `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
-      margin-top: -3px;
-
-      ${marginStyles}
-    }
+  .row-list-item {
+    margin-top: -1px;
   }
 `;
 
@@ -119,18 +100,18 @@ const PeopleRowContainer = ({
   );
 };
 
-export default inject(({ peopleStore, auth, filesStore }) => {
+export default inject(({ peopleStore, settingsStore, infoPanelStore }) => {
   const {
     usersStore,
     filterStore,
     viewAs: accountsViewAs,
     setViewAs,
   } = peopleStore;
-  const { theme, withPaging, currentDeviceType } = auth.settingsStore;
+  const { theme, withPaging, currentDeviceType } = settingsStore;
   const { peopleList, hasMoreAccounts, fetchMoreAccounts } = usersStore;
   const { filterTotal, isFiltered } = filterStore;
 
-  const { isVisible: infoPanelVisible } = auth.infoPanelStore;
+  const { isVisible: infoPanelVisible } = infoPanelStore;
 
   return {
     peopleList,

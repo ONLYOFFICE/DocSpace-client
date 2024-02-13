@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Button from "@docspace/components/button";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Button } from "@docspace/shared/components/button";
 import styled, { css } from "styled-components";
 import { useTranslation } from "react-i18next";
 
@@ -16,7 +16,7 @@ const Footer = styled.div`
     width: 100%;
   }
   button:first-of-type {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-left: 10px;
@@ -33,7 +33,8 @@ export const DeleteWebhookDialog = ({
   header,
   handleSubmit,
 }) => {
-  const onKeyPress = e => (e.key === "Esc" || e.key === "Escape") && onClose();
+  const onKeyPress = (e) =>
+    (e.key === "Esc" || e.key === "Escape") && onClose();
 
   const { t } = useTranslation(["Webhooks", "Common", "EmptyTrashDialog"]);
 

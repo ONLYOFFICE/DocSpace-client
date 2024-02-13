@@ -3,8 +3,8 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { Trans, useTranslation } from "react-i18next";
 
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
 
 import { StyledContactComponent } from "./StyledComponent";
 const ContactContainer = (props) => {
@@ -123,9 +123,9 @@ const ContactContainer = (props) => {
   );
 };
 
-export default inject(({ auth, payments }) => {
-  const { settingsStore, isCommunity } = auth;
-  const { helpUrl, salesEmail } = payments;
+export default inject(({ authStore, settingsStore, paymentStore }) => {
+  const { isCommunity } = authStore;
+  const { helpUrl, salesEmail } = paymentStore;
   const { theme } = settingsStore;
   return { helpUrl, salesEmail, theme, isCommunity };
 })(observer(ContactContainer));

@@ -6,29 +6,31 @@ import Main from "./components/Main";
 
 import Layout from "./components/Layout";
 import ScrollToTop from "./components/Layout/ScrollToTop";
-import Toast from "@docspace/components/toast";
-import toastr from "@docspace/components/toast/toastr";
-import { getLogoFromPath, updateTempContent } from "@docspace/common/utils";
+import { Toast, toastr } from "@docspace/shared/components/toast";
+import { ThemeProvider } from "@docspace/shared/components/theme-provider";
+import { SnackBar } from "@docspace/shared/components/snackbar";
+import { Portal } from "@docspace/shared/components/portal";
 
-import ThemeProvider from "@docspace/components/theme-provider";
+import { updateTempContent } from "@docspace/shared/utils/common";
+import { getLogoFromPath } from "@docspace/shared/utils";
+
 import store from "client/store";
 
 import config from "PACKAGE_FILE";
 import { I18nextProvider, useTranslation } from "react-i18next";
 import i18n from "./i18n";
 
-import Snackbar from "@docspace/components/snackbar";
-import moment from "moment";
+import moment from "moment-timezone";
 //import ReactSmartBanner from "./components/SmartBanner";
-import { useThemeDetector } from "@docspace/common/utils/useThemeDetector";
+import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
 import { isMobile, isIOS, isFirefox } from "react-device-detect";
 import IndicatorLoader from "./components/IndicatorLoader";
 import DialogsWrapper from "./components/dialogs/DialogsWrapper";
 import MainBar from "./components/MainBar";
-import { Portal } from "@docspace/components";
-import indexedDbHelper from "@docspace/common/utils/indexedDBHelper";
-import { DeviceType, IndexedDBStores } from "@docspace/common/constants";
-import { getRestoreProgress } from "@docspace/common/api/portal";
+
+import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
+import { DeviceType, IndexedDBStores } from "@docspace/shared/enums";
+import { getRestoreProgress } from "@docspace/shared/api/portal";
 import { useTheme } from "styled-components";
 
 const Shell = ({ items = [], page = "home", ...rest }) => {
@@ -54,7 +56,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     standalone,
     userId,
     currentDeviceType,
-
+    timezone,
     showArticleLoader,
   } = rest;
 
@@ -198,20 +200,20 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     if (now.isBefore(from)) {
       setSnackBarTimer(campaign);
 
-      Snackbar.close();
+      SnackBar.close();
       console.log(`Show snackBar has been delayed for 1 minute`, now);
       skipMaintenance = true;
     }
 
     if (now.isAfter(to)) {
       console.log("Skip snackBar by current date", now);
-      Snackbar.close();
+      SnackBar.close();
       skipMaintenance = true;
     }
 
     if (isDesktop && !desktop) {
       console.log("Skip snackBar by desktop", desktop);
-      Snackbar.close();
+      SnackBar.close();
       skipMaintenance = true;
     }
 
@@ -246,7 +248,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       onAction: () => {
         setMaintenanceExist(false);
         setSnackbarExist(false);
-        Snackbar.close();
+        SnackBar.close();
         localStorage.setItem(LS_CAMPAIGN_DATE, to.format(DATE_FORMAT));
       },
       opacity: 1,
@@ -258,7 +260,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       theme,
     };
 
-    Snackbar.show(barConfig);
+    SnackBar.show(barConfig);
   };
 
   const fetchMaintenance = () => {
@@ -271,7 +273,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
           if (!campaign) {
             setCheckedMaintenance(true);
             clearSnackBarTimer();
-            Snackbar.close();
+            SnackBar.close();
             return;
           }
 
@@ -405,92 +407,101 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   );
 };
 
-const ShellWrapper = inject(({ auth, backup, clientLoadingStore }) => {
-  const { i18n } = useTranslation();
+const ShellWrapper = inject(
+  ({ authStore, settingsStore, backup, clientLoadingStore, userStore }) => {
+    const { i18n } = useTranslation();
 
-  const { init, isLoaded, settingsStore, setProductVersion, language } = auth;
+    const { init, isLoaded, setProductVersion, language } = authStore;
 
-  const {
-    personal,
-    roomsMode,
-    isDesktopClient,
-    firebaseHelper,
-    setModuleInfo,
-    setCheckedMaintenance,
-    setMaintenanceExist,
-    setSnackbarExist,
-    socketHelper,
-    setTheme,
-    whiteLabelLogoUrls,
-    standalone,
-    currentDeviceType,
-  } = settingsStore;
+    const {
+      personal,
+      roomsMode,
+      isDesktopClient,
+      firebaseHelper,
+      setModuleInfo,
+      setCheckedMaintenance,
+      setMaintenanceExist,
+      setSnackbarExist,
+      socketHelper,
+      setTheme,
+      whiteLabelLogoUrls,
+      standalone,
+      currentDeviceType,
+      isFrame,
+      frameConfig,
+    } = settingsStore;
 
-  const isBase = settingsStore.theme.isBase;
-  const { setPreparationPortalDialogVisible } = backup;
+    const isBase = settingsStore.theme.isBase;
+    const { setPreparationPortalDialogVisible } = backup;
 
-  const userTheme = isDesktopClient
-    ? auth?.userStore?.user?.theme
-      ? auth?.userStore?.user?.theme
-      : window.RendererProcessVariable?.theme?.type === "dark"
-      ? "Dark"
-      : "Base"
-    : auth?.userStore?.user?.theme;
+    const userTheme = isDesktopClient
+      ? userStore?.user?.theme
+        ? userStore?.user?.theme
+        : window.RendererProcessVariable?.theme?.type === "dark"
+          ? "Dark"
+          : "Base"
+      : userStore?.user?.theme;
 
-  return {
-    loadBaseInfo: async () => {
-      await init(false, i18n);
+    return {
+      loadBaseInfo: async () => {
+        await init(false, i18n);
 
-      setModuleInfo(config.homepage, "home");
-      setProductVersion(config.version);
+        setModuleInfo(config.homepage, "home");
+        setProductVersion(config.version);
 
-      if (isDesktopClient) {
-        document.body.classList.add("desktop");
-      }
-    },
-    language,
-    isLoaded,
+        if (isDesktopClient) {
+          document.body.classList.add("desktop");
+        }
+      },
+      language,
+      isLoaded,
 
-    isDesktop: isDesktopClient,
-    FirebaseHelper: firebaseHelper,
-    personal,
-    setCheckedMaintenance,
-    setMaintenanceExist,
-    socketHelper,
-    setPreparationPortalDialogVisible,
-    isBase,
-    setTheme,
-    roomsMode,
-    setSnackbarExist,
-    userTheme: userTheme,
-    userId: auth?.userStore?.user?.id,
-    whiteLabelLogoUrls,
-    standalone,
-    currentDeviceType,
+      isDesktop: isDesktopClient,
+      FirebaseHelper: firebaseHelper,
+      personal,
+      setCheckedMaintenance,
+      setMaintenanceExist,
+      socketHelper,
+      setPreparationPortalDialogVisible,
+      isBase,
+      setTheme,
+      roomsMode,
+      setSnackbarExist,
+      userTheme: isFrame ? frameConfig?.theme : userTheme,
+      userId: userStore?.user?.id,
+      whiteLabelLogoUrls,
+      standalone,
+      currentDeviceType,
 
-    showArticleLoader: clientLoadingStore.showArticleLoader,
-  };
-})(observer(Shell));
-
-const ThemeProviderWrapper = inject(({ auth, loginStore }) => {
-  const { settingsStore } = auth;
-  let currentColorScheme = false;
-  const { theme } = settingsStore;
-  const { i18n } = useTranslation();
-
-  if (loginStore) {
-    currentColorScheme = loginStore.currentColorScheme;
-  } else if (auth) {
-    currentColorScheme = settingsStore.currentColorScheme || false;
+      showArticleLoader: clientLoadingStore.showArticleLoader,
+    };
   }
+)(observer(Shell));
 
-  window.theme = theme;
+const ThemeProviderWrapper = inject(
+  ({ authStore, settingsStore, loginStore }) => {
+    let currentColorScheme = false;
+    const { theme } = settingsStore;
+    const { i18n } = useTranslation();
 
-  return {
-    theme: { ...theme, interfaceDirection: i18n.dir() },
-    currentColorScheme,
-  };
-})(observer(ThemeProvider));
+    if (loginStore) {
+      currentColorScheme = loginStore.currentColorScheme;
+    } else if (authStore) {
+      currentColorScheme = settingsStore.currentColorScheme || false;
+    }
+
+    const { timezone } = settingsStore;
+
+    window.theme = theme;
+    window.timezone = timezone;
+
+    return {
+      theme: { ...theme, interfaceDirection: i18n.dir() },
+      currentColorScheme,
+      timezone,
+    };
+  }
+)(observer(ThemeProvider));
 
 export default () => (
   <MobxProvider {...store}>

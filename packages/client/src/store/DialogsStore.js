@@ -1,7 +1,7 @@
-import { getNewFiles } from "@docspace/common/api/files";
-import { ShareAccessRights } from "@docspace/common/constants";
+import { getNewFiles } from "@docspace/shared/api/files";
+import { ShareAccessRights } from "@docspace/shared/enums";
 import { makeAutoObservable, runInAction } from "mobx";
-import { Events } from "@docspace/common/constants";
+import { Events } from "@docspace/shared/enums";
 
 class DialogsStore {
   authStore;
@@ -9,9 +9,8 @@ class DialogsStore {
   filesStore;
   selectedFolderStore;
   versionHistoryStore;
+  infoPanelStore;
 
-  sharingPanelVisible = false;
-  roomSharingPanelVisible = false;
   ownerPanelVisible = false;
   moveToPanelVisible = false;
   restorePanelVisible = false;
@@ -81,7 +80,16 @@ class DialogsStore {
   changeRoomOwnerIsVisible = false;
   changeRoomOwnerData = null;
 
-  constructor(authStore, treeFoldersStore, filesStore, selectedFolderStore, versionHistoryStore) {
+  shareFolderDialogVisible = false;
+
+  constructor(
+    authStore,
+    treeFoldersStore,
+    filesStore,
+    selectedFolderStore,
+    versionHistoryStore,
+    infoPanelStore
+  ) {
     makeAutoObservable(this);
 
     this.treeFoldersStore = treeFoldersStore;
@@ -89,6 +97,7 @@ class DialogsStore {
     this.selectedFolderStore = selectedFolderStore;
     this.authStore = authStore;
     this.versionHistoryStore = versionHistoryStore;
+    this.infoPanelStore = infoPanelStore;
   }
   setInviteLanguage = (culture) => {
     this.culture = culture;
@@ -109,14 +118,6 @@ class DialogsStore {
     this.restoreRoomDialogVisible = visible;
   };
 
-  setSharingPanelVisible = (sharingPanelVisible) => {
-    this.sharingPanelVisible = sharingPanelVisible;
-  };
-
-  setRoomSharingPanelVisible = (roomSharingPanelVisible) => {
-    this.roomSharingPanelVisible = roomSharingPanelVisible;
-  };
-
   setIsFolderActions = (isFolderActions) => {
     this.isFolderActions = isFolderActions;
   };
@@ -130,7 +131,7 @@ class DialogsStore {
       visible &&
       !this.filesStore.hasSelection &&
       !this.filesStore.hasBufferSelection &&
-      !this.authStore.infoPanelStore.selection
+      !this.infoPanelStore.infoPanelSelection
     )
       return;
 
@@ -154,7 +155,7 @@ class DialogsStore {
       visible &&
       !this.filesStore.hasSelection &&
       !this.filesStore.hasBufferSelection &&
-      !this.authStore.infoPanelStore.selection
+      !this.infoPanelStore.infoPanelSelection
     ) {
       console.log("No files selected");
       return;
@@ -224,8 +225,8 @@ class DialogsStore {
     const newIds = newId
       ? [newId]
       : pathParts
-      ? pathParts.map((p) => p.id)
-      : [];
+        ? pathParts.map((p) => p.id)
+        : [];
     item &&
       pathParts.push({
         id: item.id,
@@ -425,6 +426,10 @@ class DialogsStore {
 
   setCancelUploadDialogVisible = (visible) => {
     this.cancelUploadDialogVisible = visible;
+  }
+
+  setShareFolderDialogVisible = (visible) => {
+    this.shareFolderDialogVisible = visible;
   };
 }
 

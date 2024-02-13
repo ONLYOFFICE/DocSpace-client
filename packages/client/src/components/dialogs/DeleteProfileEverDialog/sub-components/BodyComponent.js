@@ -2,8 +2,8 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { Trans } from "react-i18next";
 
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
 
 const BodyComponent = (props) => {
   const {
@@ -89,8 +89,8 @@ const BodyComponent = (props) => {
   );
 };
 
-export default inject(({ peopleStore }) => {
+export default inject(({ userStore }) => {
   return {
-    userPerformedDeletion: peopleStore.authStore.userStore.user,
+    userPerformedDeletion: userStore.user,
   };
 })(observer(BodyComponent));

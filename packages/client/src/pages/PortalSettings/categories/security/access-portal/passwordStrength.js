@@ -3,20 +3,20 @@ import styled, { css } from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import Box from "@docspace/components/box";
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
-import Slider from "@docspace/components/slider";
-import Checkbox from "@docspace/components/checkbox";
+import { Box } from "@docspace/shared/components/box";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { Slider } from "@docspace/shared/components/slider";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 import { LearnMoreWrapper } from "../StyledSecurity";
-import toastr from "@docspace/components/toast/toastr";
-import { size } from "@docspace/components/utils/device";
+import { toastr } from "@docspace/shared/components/toast";
+import { size } from "@docspace/shared/utils";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import isEqual from "lodash/isEqual";
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
 import PasswordLoader from "../sub-components/loaders/password-loader";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -48,7 +48,6 @@ const MainContainer = styled.div`
 const PasswordStrength = (props) => {
   const {
     t,
-
     setPortalPasswordSettings,
     passwordSettings,
     initSettings,
@@ -56,7 +55,6 @@ const PasswordStrength = (props) => {
     currentColorScheme,
     passwordStrengthSettingsUrl,
     currentDeviceType,
-    getPortalPasswordSettings,
   } = props;
 
   const navigate = useNavigate();
@@ -95,30 +93,20 @@ const PasswordStrength = (props) => {
     }
   };
 
-  const getPasswordSettings = async () => {
-    setIsLoading(true);
-    await getPortalPasswordSettings();
-    setIsLoading(false);
-  };
-
-  useEffect(() => {
-    if (!passwordSettings) getPasswordSettings();
-  }, [passwordSettings]);
-
   useEffect(() => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
 
-    if (!isInit) initSettings().then(() => setIsLoading(true));
+    if (!isInit) initSettings("password").then(() => setIsLoading(true));
     else setIsLoading(true);
 
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
   useEffect(() => {
-    if (!isInit) return;
+    if (!isInit || !passwordSettings) return;
     getSettings();
-  }, [isLoading]);
+  }, [isLoading, passwordSettings]);
 
   useEffect(() => {
     if (!isLoading) return;
@@ -216,7 +204,7 @@ const PasswordStrength = (props) => {
         </Text>
         <Link
           className="link-learn-more"
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
           target="_blank"
           isHovered
           href={passwordStrengthSettingsUrl}
@@ -284,15 +272,14 @@ const PasswordStrength = (props) => {
   );
 };
 
-export default inject(({ auth, setup }) => {
+export default inject(({ settingsStore, setup }) => {
   const {
     setPortalPasswordSettings,
     passwordSettings,
     currentColorScheme,
     passwordStrengthSettingsUrl,
     currentDeviceType,
-    getPortalPasswordSettings,
-  } = auth.settingsStore;
+  } = settingsStore;
   const { initSettings, isInit } = setup;
 
   return {
@@ -303,6 +290,5 @@ export default inject(({ auth, setup }) => {
     currentColorScheme,
     passwordStrengthSettingsUrl,
     currentDeviceType,
-    getPortalPasswordSettings,
   };
 })(withTranslation(["Settings", "Common"])(observer(PasswordStrength)));

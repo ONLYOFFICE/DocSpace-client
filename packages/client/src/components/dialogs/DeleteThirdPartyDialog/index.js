@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Button from "@docspace/components/button";
+import { toastr } from "@docspace/shared/components/toast";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Button } from "@docspace/shared/components/button";
+
 import { withTranslation } from "react-i18next";
-import toastr from "@docspace/components/toast/toastr";
+
 import { inject, observer } from "mobx-react";
 import { useNavigate, useLocation } from "react-router-dom";
-import FilesFilter from "@docspace/common/api/files/filter";
+import FilesFilter from "@docspace/shared/api/files/filter";
 
 const DeleteThirdPartyDialog = (props) => {
   const {
@@ -109,13 +111,13 @@ const DeleteThirdPartyDialog = (props) => {
 export default inject(
   ({
     filesStore,
-    settingsStore,
+    filesSettingsStore,
     dialogsStore,
     selectedFolderStore,
     backup,
   }) => {
     const { providers, setThirdPartyProviders, deleteThirdParty } =
-      settingsStore.thirdPartyStore;
+      filesSettingsStore.thirdPartyStore;
     const { setIsLoading } = filesStore;
     const { selectedThirdPartyAccount: backupConnectionItem } = backup;
     const {

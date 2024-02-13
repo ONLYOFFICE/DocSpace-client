@@ -1,7 +1,6 @@
 import styled, { css } from "styled-components";
 import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg";
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
-import { tablet, desktop } from "@docspace/components/utils/device";
+import { commonIconsStyles, tablet, desktop } from "@docspace/shared/utils";
 
 const StyledPublicRoomBar = styled.div`
   display: flex;
@@ -103,28 +102,25 @@ const StyledLinkRow = styled.div`
   }
 
   .avatar-wrapper {
-    ${({ isPrimary, theme }) =>
-      isPrimary &&
-      css`
-        svg {
-          path {
-            fill: ${theme.infoPanel.links.primaryColor} !important;
-          }
+    ${({ theme }) => css`
+      svg {
+        path {
+          fill: ${theme.infoPanel.links.primaryColor} !important;
         }
-      `}
+      }
+    `}
   }
 
   .avatar_role-wrapper {
-    ${({ isExpired, theme }) =>
-      css`
-        svg {
-          path {
-            fill: ${isExpired
-              ? theme.infoPanel.links.iconErrorColor
-              : theme.infoPanel.links.iconColor};
-          }
+    ${({ isExpired, theme }) => css`
+      svg {
+        path {
+          fill: ${isExpired
+            ? theme.infoPanel.links.iconErrorColor
+            : theme.infoPanel.links.iconColor};
         }
-      `}
+      }
+    `}
   }
 `;
 

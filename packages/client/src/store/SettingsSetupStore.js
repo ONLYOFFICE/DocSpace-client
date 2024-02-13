@@ -1,21 +1,24 @@
-import api from "@docspace/common/api";
+import api from "@docspace/shared/api";
 import { makeAutoObservable } from "mobx";
 const { Filter } = api;
 import SelectionStore from "./SelectionStore";
 //import CommonStore from "./CommonStore";
-import authStore from "@docspace/common/store/AuthStore";
+
 import {
   getSMTPSettings,
   resetSMTPSettings,
   setSMTPSettings,
-} from "@docspace/common/api/settings";
-import { combineUrl } from "@docspace/common/utils";
+} from "@docspace/shared/api/settings";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
-import { isDesktop } from "@docspace/components/utils/device";
+import { isDesktop } from "@docspace/shared/utils";
+import { DeviceType } from "@docspace/shared/enums";
 
 class SettingsSetupStore {
   selectionStore = null;
   authStore = null;
+  settingsStore = null;
+  tfaStore = null;
   isInit = false;
   logoutVisible = false;
   logoutAllVisible = false;
@@ -80,21 +83,56 @@ class SettingsSetupStore {
   sessions = [];
   currentSession = [];
 
-  constructor() {
+  constructor(tfaStore, authStore, settingsStore) {
     this.selectionStore = new SelectionStore(this);
     this.authStore = authStore;
+    this.tfaStore = tfaStore;
+    this.settingsStore = settingsStore;
     makeAutoObservable(this);
   }
 
-  initSettings = async () => {
-    if (this.isInit) return;
+  initSettings = async (page) => {
+    const isMobileView =
+      this.settingsStore.currentDeviceType === DeviceType.mobile;
 
-    if (authStore.isAuthenticated) {
-      await authStore.settingsStore.getPortalPasswordSettings();
-      await authStore.settingsStore.getIpRestrictionsEnable();
-      await authStore.settingsStore.getIpRestrictions();
-      await authStore.settingsStore.getSessionLifetime();
-      await authStore.settingsStore.getBruteForceProtection();
+    if (this.isInit && isMobileView) return;
+
+    if (this.authStore.isAuthenticated) {
+      if (isMobileView) {
+        switch (page) {
+          case "password":
+            await this.settingsStore.getPortalPasswordSettings();
+            break;
+          case "tfa":
+            await this.tfaStore.getTfaType();
+            break;
+          case "trusted-mail":
+            break;
+          case "ip":
+            await this.settingsStore.getIpRestrictionsEnable();
+            await this.settingsStore.getIpRestrictions();
+            break;
+          case "brute-force-protection":
+            await this.settingsStore.getBruteForceProtection();
+            break;
+          case "admin-message":
+            break;
+          case "lifetime":
+            await this.settingsStore.getSessionLifetime();
+
+            break;
+
+          default:
+            break;
+        }
+      } else {
+        await this.settingsStore.getPortalPasswordSettings();
+        await this.tfaStore.getTfaType();
+        await this.settingsStore.getIpRestrictionsEnable();
+        await this.settingsStore.getIpRestrictions();
+        await this.settingsStore.getSessionLifetime();
+        await this.settingsStore.getBruteForceProtection();
+      }
     }
 
     this.isInit = true;

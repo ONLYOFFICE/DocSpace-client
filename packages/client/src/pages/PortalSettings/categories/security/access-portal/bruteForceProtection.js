@@ -1,20 +1,20 @@
 import { useState, useEffect } from "react";
-
+import api from "@docspace/shared/api";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { StyledBruteForceProtection } from "../StyledSecurity";
 import isEqual from "lodash/isEqual";
-import FieldContainer from "@docspace/components/field-container";
-import toastr from "@docspace/components/toast/toastr";
-import TextInput from "@docspace/components/text-input";
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
-import Text from "@docspace/components/text";
-import { size } from "@docspace/components/utils/device";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { toastr } from "@docspace/shared/components/toast";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
+import { Text } from "@docspace/shared/components/text";
+import { size } from "@docspace/shared/utils";
 import { useNavigate, useLocation } from "react-router-dom";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import BruteForceProtectionLoader from "../sub-components/loaders/brute-force-protection-loader";
-import Link from "@docspace/components/link";
-import { DeviceType } from "@docspace/common/constants";
+import { Link } from "@docspace/shared/components/link";
+import { DeviceType } from "@docspace/shared/enums";
 
 const BruteForceProtection = (props) => {
   const {
@@ -22,12 +22,13 @@ const BruteForceProtection = (props) => {
     numberAttempt,
     blockingTime,
     checkPeriod,
-    setBruteForceProtection,
+
     getBruteForceProtection,
     initSettings,
     isInit,
     bruteForceProtectionUrl,
     currentDeviceType,
+    currentColorScheme,
   } = props;
 
   const defaultNumberAttempt = numberAttempt?.toString();
@@ -75,7 +76,7 @@ const BruteForceProtection = (props) => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
 
-    if (!isInit) initSettings();
+    if (!isInit) initSettings("brute-force-protection");
 
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
@@ -194,11 +195,12 @@ const BruteForceProtection = (props) => {
     const numberCurrentBlockingTime = parseInt(currentBlockingTime);
     const numberCurrentCheckPeriod = parseInt(currentCheckPeriod);
 
-    setBruteForceProtection(
-      numberCurrentNumberAttempt,
-      numberCurrentBlockingTime,
-      numberCurrentCheckPeriod
-    )
+    api.settings
+      .setBruteForceProtection(
+        numberCurrentNumberAttempt,
+        numberCurrentBlockingTime,
+        numberCurrentCheckPeriod
+      )
       .then(() => {
         saveToSessionStorage("defaultBruteForceProtection", {
           numberAttempt: currentNumberAttempt.replace(/^0+/, ""),
@@ -242,6 +244,7 @@ const BruteForceProtection = (props) => {
           target="_blank"
           isHovered
           href={bruteForceProtectionUrl}
+          color={currentColorScheme.main?.accent}
         >
           {t("Common:LearnMore")}
         </Link>
@@ -322,16 +325,17 @@ const BruteForceProtection = (props) => {
   );
 };
 
-export default inject(({ auth, setup }) => {
+export default inject(({ settingsStore, setup }) => {
   const {
     numberAttempt,
     blockingTime,
     checkPeriod,
-    setBruteForceProtection,
+
     getBruteForceProtection,
     bruteForceProtectionUrl,
     currentDeviceType,
-  } = auth.settingsStore;
+    currentColorScheme,
+  } = settingsStore;
 
   const { initSettings, isInit } = setup;
 
@@ -339,11 +343,12 @@ export default inject(({ auth, setup }) => {
     numberAttempt,
     blockingTime,
     checkPeriod,
-    setBruteForceProtection,
+
     getBruteForceProtection,
     initSettings,
     isInit,
     bruteForceProtectionUrl,
     currentDeviceType,
+    currentColorScheme,
   };
 })(withTranslation(["Settings", "Common"])(observer(BruteForceProtection)));

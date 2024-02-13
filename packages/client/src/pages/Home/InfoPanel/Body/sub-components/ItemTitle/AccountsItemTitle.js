@@ -1,20 +1,22 @@
 import React, { useRef } from "react";
 import { withTranslation } from "react-i18next";
 
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
-import { Avatar, ContextMenuButton } from "@docspace/components";
-import Badge from "@docspace/components/badge";
+import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
+import { Avatar } from "@docspace/shared/components/avatar";
+import { Badge } from "@docspace/shared/components/badge";
 import Badges from "@docspace/client/src/pages/Home/Section/AccountsBody/Badges";
 import { StyledAccountsItemTitle } from "../../styles/accounts";
 import { StyledTitle } from "../../styles/common";
 
 import { SSO_LABEL } from "SRC_DIR/helpers/constants";
+import { decode } from "he";
 
 const AccountsItemTitle = ({
   t,
   isSeveralItems,
-  selection,
+  infoPanelSelection,
   getUserContextOptions,
 }) => {
   if (isSeveralItems) {
@@ -24,18 +26,24 @@ const AccountsItemTitle = ({
   const itemTitleRef = useRef();
 
   const isPending =
-    selection.statusType === "pending" || selection.statusType === "disabled";
+    infoPanelSelection.statusType === "pending" ||
+    infoPanelSelection.statusType === "disabled";
 
   const getData = () => {
-    const newOptions = selection.options?.filter(
+    const newOptions = infoPanelSelection.options?.filter(
       (option) => option !== "details"
     );
-    return getUserContextOptions(t, newOptions || [], selection);
+    return getUserContextOptions(t, newOptions || [], infoPanelSelection);
   };
   const contextOptions = getData();
 
-  const userAvatar = selection.hasAvatar ? selection.avatar : DefaultUserPhoto;
-  const isSSO = selection.isSSO || false;
+  const userAvatar = infoPanelSelection.hasAvatar
+    ? infoPanelSelection.avatar
+    : DefaultUserPhoto;
+  const isSSO = infoPanelSelection.isSSO || false;
+  const displayName = infoPanelSelection.displayName
+    ? decode(infoPanelSelection.displayName).trim()
+    : "";
 
   return (
     <StyledAccountsItemTitle
@@ -45,7 +53,7 @@ const AccountsItemTitle = ({
     >
       <Avatar
         className="avatar"
-        role={selection.role ? selection.role : "user"}
+        role={infoPanelSelection.role ? infoPanelSelection.role : "user"}
         size={"big"}
         source={userAvatar}
       />
@@ -54,22 +62,21 @@ const AccountsItemTitle = ({
           <Text
             className={"info-text__name"}
             noSelect
-            title={selection.displayName}
+            title={displayName}
             truncate
           >
-            {isPending
-              ? selection.email
-              : selection.displayName?.trim()
-              ? selection.displayName
-              : selection.email}
+            {isPending || !displayName ? infoPanelSelection.email : displayName}
           </Text>
           {isPending && (
-            <Badges withoutPaid={true} statusType={selection.statusType} />
+            <Badges
+              withoutPaid={true}
+              statusType={infoPanelSelection.statusType}
+            />
           )}
         </div>
-        {!isPending && (
-          <Text className={"info-text__email"} title={selection.email}>
-            {selection.email}
+        {!isPending && !!displayName && (
+          <Text className={"info-text__email"} title={infoPanelSelection.email}>
+            {infoPanelSelection.email}
           </Text>
         )}
         {isSSO && (

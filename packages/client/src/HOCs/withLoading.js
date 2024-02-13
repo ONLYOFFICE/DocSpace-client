@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { observer, inject } from "mobx-react";
-import { isMobile } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/shared/utils";
 
 const withLoading = (WrappedComponent) => {
   const withLoading = (props) => {
@@ -107,14 +107,14 @@ const withLoading = (WrappedComponent) => {
       setting === "language-and-time-zone"
         ? isLoadedCustomizationSettingLngTZSettings
         : setting === "welcome-page-settings"
-        ? isLoadedCustomizationSettingWelcomePageSettings
-        : setting === "dns-settings"
-        ? isLoadedCustomizationSettingDNSSettings
-        : setting === "portal-renaming"
-        ? isLoadedCustomizationSettingPortalRenaming
-        : viewMobile
-        ? isLoadedCustomizationNavbarSettings
-        : isLoadedCustomizationSettings;
+          ? isLoadedCustomizationSettingWelcomePageSettings
+          : setting === "dns-settings"
+            ? isLoadedCustomizationSettingDNSSettings
+            : setting === "portal-renaming"
+              ? isLoadedCustomizationSettingPortalRenaming
+              : viewMobile
+                ? isLoadedCustomizationNavbarSettings
+                : isLoadedCustomizationSettings;
 
     return (
       <WrappedComponent
@@ -125,7 +125,7 @@ const withLoading = (WrappedComponent) => {
     );
   };
 
-  return inject(({ common, auth }) => {
+  return inject(({ common, settingsStore }) => {
     const {
       isLoadedArticleBody,
       isLoadedSectionHeader,
@@ -139,7 +139,7 @@ const withLoading = (WrappedComponent) => {
     } = common;
 
     const { isBurgerLoading, setIsBurgerLoading, enablePortalRename } =
-      auth.settingsStore;
+      settingsStore;
 
     return {
       isLoadedArticleBody,

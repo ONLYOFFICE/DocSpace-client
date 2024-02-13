@@ -4,8 +4,8 @@ import styled from "styled-components";
 import EmptyFilterImg from "PUBLIC_DIR/images/empty_filter.react.svg?url";
 import EmptyFilterDarkImg from "PUBLIC_DIR/images/empty_filter_dark.react.svg?url";
 import ClearEmptyFilterIcon from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
 
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
@@ -96,9 +96,9 @@ const EmptyFilter = (props) => {
   );
 };
 
-export default inject(({ webhooksStore, auth }) => {
+export default inject(({ webhooksStore, settingsStore }) => {
   const { formatFilters, clearHistoryFilters } = webhooksStore;
-  const { theme } = auth.settingsStore;
+  const { theme } = settingsStore;
 
   return { formatFilters, clearHistoryFilters, theme };
 })(observer(EmptyFilter));

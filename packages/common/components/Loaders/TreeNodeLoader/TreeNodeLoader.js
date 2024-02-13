@@ -1,6 +1,6 @@
 import React from "react";
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
-import CircleSkeleton from "@docspace/components/skeletons/circle";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { CircleSkeleton } from "@docspace/shared/skeletons";
 
 const TreeNodeLoader = ({
   title,

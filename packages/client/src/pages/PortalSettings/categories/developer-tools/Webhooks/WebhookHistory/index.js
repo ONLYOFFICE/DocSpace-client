@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useTransition, Suspense } from "react";
-import moment from "moment";
+import moment from "moment-timezone";
 import styled from "styled-components";
 
 import HistoryFilterHeader from "./sub-components/HistoryFilterHeader";
@@ -23,9 +23,15 @@ const parseUrl = (url) => {
     params[key] = value;
   }
   params.deliveryDate =
-    params.deliveryDate === "null" ? null : moment(params.deliveryDate, "YYYY-MM-DD");
-  params.deliveryFrom = moment(params.deliveryFrom, "HH:mm");
-  params.deliveryTo = moment(params.deliveryTo, "HH:mm");
+    params.deliveryDate === "null"
+      ? null
+      : moment(params.deliveryDate, "YYYY-MM-DD").tz(window.timezone);
+  params.deliveryFrom = moment(params.deliveryFrom, "HH:mm").tz(
+    window.timezone
+  );
+  params.deliveryTo = moment(params.deliveryTo, "HH:mm").tz(
+    window.timezone
+  );
   params.status = JSON.parse(params.status);
 
   return params;

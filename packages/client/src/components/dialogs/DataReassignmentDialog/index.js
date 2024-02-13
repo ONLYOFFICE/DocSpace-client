@@ -2,14 +2,15 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import PeopleSelector from "@docspace/client/src/components/PeopleSelector";
-import ModalDialog from "@docspace/components/modal-dialog";
-import toastr from "@docspace/components/toast/toastr";
+import PeopleSelector from "@docspace/shared/selectors/People";
+import { toastr } from "@docspace/shared/components/toast";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Backdrop } from "@docspace/shared/components/backdrop";
 import { useNavigate } from "react-router-dom";
-import Backdrop from "@docspace/components/backdrop";
+
 import Body from "./sub-components/Body";
 import Footer from "./sub-components/Footer";
-import api from "@docspace/common/api";
+import api from "@docspace/shared/api";
 const { Filter } = api;
 
 const StyledModalDialog = styled(ModalDialog)`
@@ -49,7 +50,7 @@ const DataReassignmentDialog = ({
   setDataReassignmentDeleteProfile,
   dataReassignmentUrl,
   needResetUserSelection,
-  setSelected
+  setSelected,
 }) => {
   const [selectorVisible, setSelectorVisible] = useState(false);
   const defaultSelectedUser = isDeletingUserWithReassignment
@@ -176,23 +177,24 @@ const DataReassignmentDialog = ({
         visible={visible}
         onClose={onClosePeopleSelector}
         containerVisible={selectorVisible}
-        withFooterBorder={true}
-        withBodyScroll={true}
+        withFooterBorder
+        withBodyScroll
       >
         <Backdrop
           onClick={onClosePeopleSelector}
           visible={selectorVisible}
-          isAside={true}
+          isAside
         />
         <ModalDialog.Container>
           <PeopleSelector
             acceptButtonLabel={t("Common:SelectAction")}
             excludeItems={[user.id]}
+            currentUserId={user.id}
             onAccept={onAccept}
             onCancel={onClosePeopleSelector}
             onBackClick={onTogglePeopleSelector}
-            withCancelButton={true}
-            withAbilityCreateRoomUsers={true}
+            withCancelButton
+            withAbilityCreateRoomUsers
           />
         </ModalDialog.Container>
       </StyledModalDialog>
@@ -205,8 +207,8 @@ const DataReassignmentDialog = ({
       visible={visible}
       onClose={onClose}
       containerVisible={selectorVisible}
-      withFooterBorder={true}
-      withBodyScroll={true}
+      withFooterBorder
+      withBodyScroll
     >
       <ModalDialog.Header>
         {t("DataReassignmentDialog:DataReassignment")}
@@ -246,7 +248,7 @@ const DataReassignmentDialog = ({
   );
 };
 
-export default inject(({ auth, peopleStore, setup }) => {
+export default inject(({ settingsStore, peopleStore, setup, userStore }) => {
   const {
     setDataReassignmentDialogVisible,
     dataReassignmentDeleteProfile,
@@ -254,21 +256,21 @@ export default inject(({ auth, peopleStore, setup }) => {
     isDeletingUserWithReassignment,
     setIsDeletingUserWithReassignment,
   } = peopleStore.dialogStore;
-  const { currentColorScheme, dataReassignmentUrl } = auth.settingsStore;
-  const {setSelected} = peopleStore.selectionStore;
+  const { currentColorScheme, dataReassignmentUrl } = settingsStore;
+  const { setSelected } = peopleStore.selectionStore;
   const {
     dataReassignment,
     dataReassignmentProgress,
     dataReassignmentTerminate,
   } = setup;
 
-  const { user: currentUser } = peopleStore.authStore.userStore;
+  const { user: currentUser } = userStore;
 
   const { getUsersList, needResetUserSelection } = peopleStore.usersStore;
 
   return {
     setDataReassignmentDialogVisible,
-    theme: auth.settingsStore.theme,
+    theme: settingsStore.theme,
     currentColorScheme,
     dataReassignment,
     currentUser,
@@ -281,7 +283,7 @@ export default inject(({ auth, peopleStore, setup }) => {
     setIsDeletingUserWithReassignment,
     dataReassignmentUrl,
     needResetUserSelection,
-    setSelected
+    setSelected,
   };
 })(
   observer(

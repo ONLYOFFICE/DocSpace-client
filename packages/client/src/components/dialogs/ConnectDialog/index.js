@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useCallback } from "react";
-import toastr from "@docspace/components/toast/toastr";
-import Button from "@docspace/components/button";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Checkbox from "@docspace/components/checkbox";
-import TextInput from "@docspace/components/text-input";
-import PasswordInput from "@docspace/components/password-input";
-import FieldContainer from "@docspace/components/field-container";
+
+import { toastr } from "@docspace/shared/components/toast";
+import { Button } from "@docspace/shared/components/button";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { PasswordInput } from "@docspace/shared/components/password-input";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { getOAuthToken } from "@docspace/common/utils";
-import { saveSettingsThirdParty } from "@docspace/common/api/files";
+import { getOAuthToken } from "@docspace/shared/utils/common";
+import { saveSettingsThirdParty } from "@docspace/shared/api/files";
 
 const PureConnectDialogContainer = (props) => {
   const {
@@ -286,6 +287,7 @@ const PureConnectDialogContainer = (props) => {
             )}
 
             <FieldContainer
+              labelVisible
               labelText={t("Login")}
               isRequired
               isVertical
@@ -304,6 +306,7 @@ const PureConnectDialogContainer = (props) => {
               />
             </FieldContainer>
             <FieldContainer
+              labelVisible
               labelText={t("Common:Password")}
               isRequired
               isVertical
@@ -377,14 +380,20 @@ const ConnectDialog = withTranslation([
 ])(PureConnectDialogContainer);
 
 export default inject(
-  ({ auth, settingsStore, selectedFolderStore, dialogsStore, backup }) => {
+  ({
+    settingsStore,
+    filesSettingsStore,
+    selectedFolderStore,
+    dialogsStore,
+    backup,
+  }) => {
     const {
       providers,
       saveThirdParty,
       openConnectWindow,
       fetchThirdPartyProviders,
-    } = settingsStore.thirdPartyStore;
-    const { personal, folderFormValidation } = auth.settingsStore;
+    } = filesSettingsStore.thirdPartyStore;
+    const { personal, folderFormValidation } = settingsStore;
 
     const { id, folders } = selectedFolderStore;
     const {

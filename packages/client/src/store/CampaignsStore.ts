@@ -94,4 +94,4 @@ class CampaignsStore {
   }
 }
 
-export { CampaignsStore };
+export default CampaignsStore;

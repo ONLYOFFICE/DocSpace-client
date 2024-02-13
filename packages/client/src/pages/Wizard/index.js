@@ -29,8 +29,8 @@ import { setCookie } from "@docspace/shared/utils/cookie";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
 import { LANGUAGE } from "@docspace/shared/constants";
-import BetaBadge from "@docspace/common/components/BetaBadge";
 import { EmailSettings } from "@docspace/shared/utils";
+import BetaBadge from "../../components/BetaBadgeWrapper";
 
 import {
   Wrapper,

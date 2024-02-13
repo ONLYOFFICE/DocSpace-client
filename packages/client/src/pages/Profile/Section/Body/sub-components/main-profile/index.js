@@ -18,7 +18,7 @@ import { isMobileOnly } from "react-device-detect";
 import { toastr } from "@docspace/shared/components/toast";
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
 import { getUserRole, convertLanguage } from "@docspace/shared/utils/common";
-import BetaBadge from "@docspace/common/components/BetaBadge";
+import BetaBadge from "../../../../../../components/BetaBadgeWrapper";
 
 import { Trans } from "react-i18next";
 //import TimezoneCombo from "./timezoneCombo";

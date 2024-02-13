@@ -15,6 +15,8 @@ export type TViewAs = "tile" | "table" | "row" | "settings" | "profile";
 
 export type TTranslation = (key: string) => string;
 
+export type Nullable<T> = T | null;
+
 export type NonFunctionPropertyNames<T, ExcludeTypes> = {
   [K in keyof T]: T[K] extends ExcludeTypes ? never : K;
 }[keyof T];

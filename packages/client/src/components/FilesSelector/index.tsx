@@ -46,6 +46,10 @@ const FilesSelector = ({
 
   onClose,
 
+  withSearch = true,
+  withBreadCrumbs = true,
+  withSubtitle = true,
+
   isMove,
   isCopy,
   isRestore,
@@ -103,6 +107,8 @@ const FilesSelector = ({
   embedded,
   withHeader,
   withCancelButton = true,
+  cancelButtonLabel,
+  acceptButtonLabel,
   getIcon,
   isRoomBackup,
 
@@ -265,24 +271,31 @@ const FilesSelector = ({
   }, [selectedItemId, isRoot]);
 
   React.useEffect(() => {
+    const sessionPath = window.sessionStorage.getItem("filesSelectorPath");
+    let folderId = currentFolderId
+      ? currentFolderId
+      : sessionPath && (isMove || isCopy || isRestore || isRestoreAll)
+      ? +sessionPath
+      : fromFolderId;
+
     const getRoomSettings = () => {
       setSelectedItemType("rooms");
       getRoomList(0, true);
     };
 
-    const needRoomList = isRoomsOnly && !currentFolderId;
+    const needRoomList = isRoomsOnly && !folderId;
 
     if (needRoomList) {
       getRoomSettings();
       return;
     }
 
-    if (!currentFolderId) {
+    if (!folderId) {
       getRootData();
       return;
     }
 
-    setSelectedItemId(currentFolderId);
+    setSelectedItemId(folderId);
 
     if (
       needRoomList ||
@@ -296,8 +309,8 @@ const FilesSelector = ({
     }
 
     setSelectedItemType("files");
-    getFileList(0, currentFolderId, true);
-  }, []);
+    getFileList(0, folderId, true);
+  }, [currentFolderId]);
 
   const onClickBreadCrumb = (item: BreadCrumb) => {
     if (!isFirstLoad) {
@@ -505,7 +518,7 @@ const FilesSelector = ({
     isRestore,
   );
 
-  const acceptButtonLabel = getAcceptButtonLabel(
+  const defaultAcceptButtonLabel = getAcceptButtonLabel(
     t,
     isEditorDialog,
     isCopy,
@@ -544,10 +557,10 @@ const FilesSelector = ({
       onClearSearch={onClearSearchAction}
       items={items ? items : []}
       onSelect={onSelectAction}
-      acceptButtonLabel={acceptButtonLabel}
+      acceptButtonLabel={acceptButtonLabel || defaultAcceptButtonLabel}
       onAccept={onAcceptAction}
       withCancelButton={withCancelButton}
-      cancelButtonLabel={t("Common:CancelButton")}
+      cancelButtonLabel={cancelButtonLabel || t("Common:CancelButton")}
       onCancel={onCloseAction}
       emptyScreenImage={
         theme.isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl
@@ -561,12 +574,12 @@ const FilesSelector = ({
       }
       searchEmptyScreenHeader={t("Common:NotFoundTitle")}
       searchEmptyScreenDescription={t("EmptyFilterDescriptionText")}
-      withBreadCrumbs
+      withBreadCrumbs={withBreadCrumbs}
       breadCrumbs={breadCrumbs}
       onSelectBreadCrumb={onClickBreadCrumb}
       isLoading={showLoader}
       isBreadCrumbsLoading={showBreadCrumbsLoader}
-      withSearch={!isRoot && items ? items.length > 0 : !isRoot && isFirstLoad}
+      withSearch={withSearch && !isRoot && items ? items.length > 0 : !isRoot && isFirstLoad}
       rowLoader={
         <RowLoader
           isMultiSelect={false}
@@ -590,7 +603,7 @@ const FilesSelector = ({
       currentFooterInputValue={currentFooterInputValue}
       footerCheckboxLabel={footerCheckboxLabel}
       descriptionText={
-        !filterParam || filterParam === "ALL"
+        !withSubtitle || !filterParam || filterParam === "ALL"
           ? ""
           : descriptionText ?? t("Common:SelectDOCXFormat")
       }
@@ -651,8 +664,6 @@ export default inject(
     const { setConflictDialogData, checkFileConflicts, setSelectedItems } =
       filesActionsStore;
     const { itemOperationToFolder, clearActiveOperations } = uploadDataStore;
-
-    const sessionPath = window.sessionStorage.getItem("filesSelectorPath");
 
     const { treeFolders, roomsFolderId } = treeFoldersStore;
 
@@ -727,13 +738,8 @@ export default inject(
           ? parentId
           : selectedId;
 
-    const currentFolderId =
-      sessionPath && (isMove || isCopy || isRestore || isRestoreAll)
-        ? +sessionPath
-        : fromFolderId;
 
     return {
-      currentFolderId,
       fromFolderId,
       parentId,
       rootFolderType,

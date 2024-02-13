@@ -13,7 +13,6 @@ import ToggleSSO from "./sub-components/ToggleSSO";
 import SSOLoader from "./sub-components/ssoLoader";
 
 import MobileView from "./MobileView";
-import { useIsMobileView } from "../../../utils/useIsMobileView";
 import { DeviceType } from "@docspace/shared/enums";
 
 const SERVICE_PROVIDER_SETTINGS = "serviceProviderSettings";

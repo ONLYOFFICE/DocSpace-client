@@ -51,6 +51,7 @@ const StatusBadge = (props) => {
       maxWidth="80px"
       fontWeight={700}
       noHover
+      isVersionBadge
     />
   );
 };

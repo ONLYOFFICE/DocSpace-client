@@ -2,6 +2,7 @@ import { makeAutoObservable } from "mobx";
 import { TableVersions } from "SRC_DIR/helpers/constants";
 
 const TABLE_COLUMNS = `filesTableColumns_ver-${TableVersions.Files}`;
+const TABLE_ACCOUNTS_COLUMNS = `peopleTableColumns_ver-${TableVersions.Accounts}`;
 const TABLE_ROOMS_COLUMNS = `roomsTableColumns_ver-${TableVersions.Rooms}`;
 const TABLE_TRASH_COLUMNS = `trashTableColumns_ver-${TableVersions.Trash}`;
 const TABLE_RECENT_COLUMNS = `recentTableColumns_ver-${TableVersions.Recent}`;
@@ -47,6 +48,8 @@ class TableStore {
   createdTrashColumnIsEnabled = false;
   sizeTrashColumnIsEnabled = false;
   typeTrashColumnIsEnabled = false;
+  typeAccountsColumnIsEnabled = true;
+  emailAccountsColumnIsEnabled = true;
 
   constructor(authStore, treeFoldersStore, userStore, settingsStore) {
     makeAutoObservable(this);
@@ -112,12 +115,17 @@ class TableStore {
   setTypeTrashColumn = (enable) => (this.typeTrashColumnIsEnabled = enable);
   setLastOpenedColumn = (enable) => (this.lastOpenedColumnIsEnabled = enable);
 
+  setAccountsColumnType = (enable) =>
+    (this.typeAccountsColumnIsEnabled = enable);
+  setAccountsColumnEmail = (enable) =>
+    (this.emailAccountsColumnIsEnabled = enable);
+
   setColumnsEnable = () => {
     const storageColumns = localStorage.getItem(this.tableStorageName);
     const splitColumns = storageColumns && storageColumns.split(",");
 
     if (splitColumns) {
-      const { isRoomsFolder, isArchiveFolder, isTrashFolder } =
+      const { isRoomsFolder, isArchiveFolder, isTrashFolder, isAccounts } =
         this.treeFoldersStore;
       const isRooms = isRoomsFolder || isArchiveFolder;
 
@@ -126,6 +134,12 @@ class TableStore {
         this.setRoomColumnTags(splitColumns.includes("Tags"));
         this.setRoomColumnOwner(splitColumns.includes("Owner"));
         this.setRoomColumnActivity(splitColumns.includes("Activity"));
+        return;
+      }
+
+      if (isAccounts) {
+        this.setAccountsColumnType(splitColumns.includes("Type"));
+        this.setAccountsColumnEmail(splitColumns.includes("Mail"));
         return;
       }
 
@@ -151,7 +165,7 @@ class TableStore {
   };
 
   setColumnEnable = (key) => {
-    const { isRoomsFolder, isArchiveFolder, isTrashFolder } =
+    const { isRoomsFolder, isArchiveFolder, isTrashFolder, isAccounts } =
       this.treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
 
@@ -192,7 +206,9 @@ class TableStore {
       case "Type":
         isRooms
           ? this.setRoomColumnType(!this.roomColumnTypeIsEnabled)
-          : this.setTypeColumn(!this.typeColumnIsEnabled);
+          : isAccounts
+            ? this.setAccountsColumnType(!this.typeAccountsColumnIsEnabled)
+            : this.setTypeColumn(!this.typeColumnIsEnabled);
         return;
       case "TypeTrash":
         this.setTypeTrashColumn(!this.typeTrashColumnIsEnabled);
@@ -216,6 +232,10 @@ class TableStore {
 
       case "LastOpened":
         this.setLastOpenedColumn(!this.lastOpenedColumnIsEnabled);
+        return;
+
+      case "Mail":
+        this.setAccountsColumnEmail(!this.emailAccountsColumnIsEnabled);
         return;
 
       default:
@@ -245,8 +265,13 @@ class TableStore {
   };
 
   get tableStorageName() {
-    const { isRoomsFolder, isArchiveFolder, isTrashFolder, isRecentTab } =
-      this.treeFoldersStore;
+    const {
+      isRoomsFolder,
+      isArchiveFolder,
+      isTrashFolder,
+      isAccounts,
+      isRecentTab,
+    } = this.treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
     const userId = this.userStore.user?.id;
     const isFrame = this.settingsStore.isFrame;
@@ -255,11 +280,13 @@ class TableStore {
 
     return isRooms
       ? `${TABLE_ROOMS_COLUMNS}=${userId}`
-      : isTrashFolder
-        ? `${TABLE_TRASH_COLUMNS}=${userId}`
-        : isRecentTab
-          ? `${TABLE_RECENT_COLUMNS}=${userId}}`
-          : `${TABLE_COLUMNS}=${userId}`;
+      : isAccounts
+        ? `${TABLE_ACCOUNTS_COLUMNS}=${userId}`
+        : isTrashFolder
+          ? `${TABLE_TRASH_COLUMNS}=${userId}`
+          : isRecentTab
+            ? `${TABLE_RECENT_COLUMNS}=${userId}`
+            : `${TABLE_COLUMNS}=${userId}`;
   }
 
   get columnStorageName() {

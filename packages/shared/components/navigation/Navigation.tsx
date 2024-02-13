@@ -51,6 +51,7 @@ const Navigation = ({
   titleIcon,
   currentDeviceType,
   rootRoomTitle,
+  showTitle,
   navigationButtonLabel,
   onNavigationButtonClick,
   tariffBar,
@@ -167,6 +168,7 @@ const Navigation = ({
         isRootFolderTitle
         onClick={onTextClick}
       />
+
       {navigationTitleNode}
     </div>
   ) : (
@@ -234,7 +236,7 @@ const Navigation = ({
               onBackToParentFolder={onBackToParentFolder}
             />
 
-            {navigationTitleContainerNode}
+            {showTitle && navigationTitleContainerNode}
 
             <ControlButtons
               isRootFolder={isRootFolder}
@@ -251,6 +253,7 @@ const Navigation = ({
               isFrame={isFrame}
               isPublicRoom={isPublicRoom}
               isTrashFolder={isTrashFolder}
+              showTitle={showTitle}
               navigationButtonLabel={navigationButtonLabel}
               onNavigationButtonClick={onNavigationButtonClick}
               tariffBar={tariffBar}

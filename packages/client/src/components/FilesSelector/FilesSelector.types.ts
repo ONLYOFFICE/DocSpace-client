@@ -142,6 +142,10 @@ export type FilesSelectorProps = {
 
   onClose?: () => void;
 
+  withSearch: boolean;
+  withBreadCrumbs: boolean;
+  withSubtitle: boolean;
+
   isMove?: boolean;
   isCopy?: boolean;
   isRestore: boolean;
@@ -226,6 +230,8 @@ export type FilesSelectorProps = {
   embedded: boolean;
   withHeader: boolean;
   withCancelButton: boolean;
+  cancelButtonLabel: string;
+  acceptButtonLabel: string;
   settings: any;
 
   roomsFolderId?: number;

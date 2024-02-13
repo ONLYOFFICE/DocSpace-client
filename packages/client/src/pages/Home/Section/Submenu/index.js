@@ -33,6 +33,7 @@ const SectionSubmenuContent = ({
     if (e.id === "recent") {
       filter.folder = e.id;
       filter.searchArea = 3;
+      filter.sortBy = "LastOpened";
     } else {
       filter.searchArea = null;
     }
@@ -65,5 +66,5 @@ export default inject(
       showBodyLoader,
       isRoot,
     };
-  }
+  },
 )(observer(SectionSubmenuContent));

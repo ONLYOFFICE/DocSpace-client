@@ -212,7 +212,7 @@ class FilesTableHeader extends React.Component {
           enable: this.props.modifiedColumnIsEnabled,
           resizable: true,
           sortBy: SortByFieldName.ModifiedDate,
-          onClick: this.onFilter,
+          // onClick: this.onFilter,
           onChange: this.onColumnChange,
         },
         {
@@ -569,7 +569,7 @@ export default inject(
       treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
     const withContent = canShare;
-    const sortingVisible = !isRecentTab;
+    const sortingVisible = true;
     const { withPaging, isFrame, frameConfig } = settingsStore;
 
     const {

@@ -1,14 +1,7 @@
-{
-  "AccessDenied": "액세스가 거부되었습니다",
-  "Error401Text": "죄송하지만, 현재 해당 리소스에 액세스할 수 없습니다.",
-  "Error403Text": "죄송하지만, 액세스가 거부되었습니다.",
-  "Error404Text": "죄송하지만, 해당 리소스를 찾을 수 없습니다.",
-  "ErrorDeactivatedText": "이 DocSpace는 비활성화 상태입니다",
+﻿{
   "ErrorEmptyResponse": "응답이 없습니다",
-  "ErrorOfflineText": "인터넷 연결을 찾을 수 없습니다.",
   "ErrorUnavailableText": "DocSpace 이용 불가",
   "InvalidLink": "유효하지 않은 링크입니다",
   "LinkDoesNotExist": "열려고 하는 링크가 존재하지 않습니다.",
-  "LinkHasExpired": "팔로우한 링크가 만료되었습니다.",
-  "PortalRestriction": "이 DocSpace에 액세스하도록 허용된 IP 주소 목록에 포함되어 있지 않은 IP 주소입니다. VPN이 켜져 있는 경우 VPN을 끄고 페이지를 다시 로드하거나 다른 IP 주소를 사용하여 로그인하세요."
+  "LinkHasExpired": "팔로우한 링크가 만료되었습니다."
 }

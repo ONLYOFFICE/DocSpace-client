@@ -5,7 +5,7 @@ import ErrorContainer from "../error-container/ErrorContainer";
 import { AccessRestrictedWrapper } from "./Errors.styled";
 
 const AccessRestricted = () => {
-  const { t, ready } = useTranslation("Errors");
+  const { t, ready } = useTranslation("Common");
 
   useEffect(() => {
     window.history.replaceState(null, "");

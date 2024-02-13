@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import ErrorContainer from "../error-container/ErrorContainer";
 
 const ErrorOfflineContainer = () => {
-  const { t } = useTranslation("Errors");
+  const { t } = useTranslation("Common");
 
   return <ErrorContainer headerText={t("ErrorOfflineText")} />;
 };

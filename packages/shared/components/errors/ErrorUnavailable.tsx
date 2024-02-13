@@ -8,7 +8,7 @@ import { ErrorUnavailableWrapper } from "./Errors.styled";
 import type { ErrorUnavailableProps } from "./Errors.types";
 
 const ErrorUnavailable = ({ whiteLabelLogoUrls }: ErrorUnavailableProps) => {
-  const { t, ready } = useTranslation("Errors");
+  const { t, ready } = useTranslation("Common");
 
   return (
     ready && (

@@ -1,14 +1,7 @@
-{
-  "AccessDenied": "Acesso negado",
-  "Error401Text": "Desculpe, o recurso não está atualmente acessível.",
-  "Error403Text": "Desculpe, acesso negado.",
-  "Error404Text": "Desculpe, o recurso não pode ser encontrado.",
-  "ErrorDeactivatedText": "Este DocSpace está desativado",
+﻿{
   "ErrorEmptyResponse": "Resposta vazia",
-  "ErrorOfflineText": "Nenhuma conexão com a Internet foi encontrada",
   "ErrorUnavailableText": "DocSpace indisponível",
   "InvalidLink": "Link inválido",
   "LinkDoesNotExist": "O link que você está tentando abrir não existe.",
-  "LinkHasExpired": "O link que você seguiu expirou.",
-  "PortalRestriction": "Seu endereço IP não está incluído na lista de endereços IP permitidos para acessar este DocSpace. Desative uma VPN se estiver ativada e recarregue a página ou use outro endereço IP para fazer login."
+  "LinkHasExpired": "O link que você seguiu expirou."
 }

@@ -135,7 +135,7 @@ const FilesSelectorWrapper = ({
   };
 
   const getFilesArchiveError = (name: string) =>
-    t("Files:ArchivedRoomAction", { name });
+    t("Common:ArchivedRoomAction", { name });
 
   const onAccept = async (
     selectedItemId: string | number | undefined,
@@ -158,7 +158,7 @@ const FilesSelectorWrapper = ({
         ) {
           fileIds.push(item.id);
         } else if (item.id === selectedItemId) {
-          toastr.error(t("MoveToFolderMessage"));
+          toastr.error(t("Common:MoveToFolderMessage"));
         } else {
           folderIds.push(item.id);
         }
@@ -174,7 +174,7 @@ const FilesSelectorWrapper = ({
           folderTitle,
           translations: {
             copy: t("Common:CopyOperation"),
-            move: t("Translations:MoveToOperation"),
+            move: t("Common:MoveToOperation"),
           },
         };
 

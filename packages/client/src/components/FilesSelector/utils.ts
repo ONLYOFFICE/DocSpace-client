@@ -20,7 +20,7 @@ export const getHeaderLabel = (
   isMove?: boolean,
   isSelect?: boolean,
   filterParam?: string,
-  isRestore?: boolean
+  isRestore?: boolean,
 ) => {
   if (isRestore) return t("Common:RestoreTo");
   if (isMove) return t("Common:MoveTo");
@@ -31,7 +31,7 @@ export const getHeaderLabel = (
   }
 
   if (filterParam === FilesSelectorFilterTypes.DOCX)
-    return t("Translations:CreateMasterFormFromFile");
+    return t("Common:CreateMasterFormFromFile");
   if (!!filterParam) return t("Common:SelectFile");
 
   return t("Common:SaveButton");
@@ -45,11 +45,11 @@ export const getAcceptButtonLabel = (
   isMove?: boolean,
   isSelect?: boolean,
   filterParam?: string,
-  isRestore?: boolean
+  isRestore?: boolean,
 ) => {
   if (isRestore) return t("Common:RestoreHere");
-  if (isMove) return t("Translations:MoveHere");
-  if (isCopy && !isEditorDialog) return t("Translations:CopyHere");
+  if (isMove) return t("Common:MoveHere");
+  if (isCopy && !isEditorDialog) return t("Common:CopyHere");
   if (isRestoreAll) return t("Common:RestoreHere");
   if (isSelect) return t("Common:SelectAction");
 
@@ -74,7 +74,7 @@ export const getIsDisabled = (
   filterParam?: string,
   isFileSelected?: boolean,
   includeFolder?: boolean,
-  isRestore?: boolean
+  isRestore?: boolean,
 ) => {
   if (isFirstLoad) return true;
   if (isRequestRunning) return true;

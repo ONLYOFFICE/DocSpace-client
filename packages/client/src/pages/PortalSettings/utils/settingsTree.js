@@ -316,7 +316,7 @@ export const settingsTree = [
     key: "5",
     type: PageType.developerTools,
     link: "developer-tools",
-    tKey: "DeveloperTools",
+    tKey: "Common:DeveloperTools",
     isHeader: true,
     children: [
       {
@@ -332,7 +332,7 @@ export const settingsTree = [
         key: "5-1",
         icon: "",
         link: "javascript-sdk",
-        tKey: "DeveloperTools",
+        tKey: "Common:DeveloperTools",
         isCategory: true,
       },
       {
@@ -348,7 +348,7 @@ export const settingsTree = [
         key: "5-3",
         icon: "",
         link: "webhooks",
-        tKey: "DeveloperTools",
+        tKey: "Common:DeveloperTools",
         isCategory: true,
       },
     ],

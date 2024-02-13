@@ -53,7 +53,7 @@ const SectionBodyContent = (props) => {
 
   useEffect(() => {
     const customScrollElm = document.querySelector(
-      "#customScrollBar > .scroll-wrapper > .scroller"
+      "#customScrollBar > .scroll-wrapper > .scroller",
     );
 
     if (isTablet() || isMobile() || currentDeviceType !== DeviceType.desktop) {
@@ -104,7 +104,7 @@ const SectionBodyContent = (props) => {
         const bodyScroll =
           isMobile() || currentDeviceType === DeviceType.mobile
             ? document.querySelector(
-                "#customScrollBar > .scroll-wrapper > .scroller"
+                "#customScrollBar > .scroll-wrapper > .scroller",
               )
             : document.querySelector(".section-scroll");
 
@@ -235,7 +235,7 @@ const SectionBodyContent = (props) => {
     const id = isNaN(+destFolderId) ? destFolderId : +destFolderId;
     moveDragItems(id, title, {
       copy: t("Common:CopyOperation"),
-      move: t("Translations:MoveToOperation"),
+      move: t("Common:MoveToOperation"),
     });
   };
 
@@ -347,9 +347,9 @@ export default inject(
       movingInProgress,
       currentDeviceType: settingsStore.currentDeviceType,
     };
-  }
+  },
 )(
   withTranslation(["Files", "Common", "Translations"])(
-    withHotkeys(withLoader(observer(SectionBodyContent))())
-  )
+    withHotkeys(withLoader(observer(SectionBodyContent))()),
+  ),
 );

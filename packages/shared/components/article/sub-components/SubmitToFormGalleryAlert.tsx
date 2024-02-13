@@ -26,8 +26,8 @@ const ArticleSubmitToFormGalleryAlert = ({
       titleColor={theme.catalog.teamTrainingAlert.titleColor}
       linkColor={theme.catalog.teamTrainingAlert.linkColor}
       borderColor={theme.catalog.teamTrainingAlert.borderColor}
-      title={t("FormGallery:SubmitToGalleryBlockHeader")}
-      description={t("FormGallery:SubmitToGalleryBlockBody")}
+      title={t("Common:SubmitToGalleryBlockHeader")}
+      description={t("Common:SubmitToGalleryBlockBody")}
       linkTitle={t("Common:SubmitToFormGallery")}
       onLinkClick={onSubmitToFormGallery}
       onCloseClick={onClose}
@@ -37,3 +37,4 @@ const ArticleSubmitToFormGalleryAlert = ({
 };
 
 export default ArticleSubmitToFormGalleryAlert;
+

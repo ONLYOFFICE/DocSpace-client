@@ -285,7 +285,7 @@ const AddUsersPanel = ({
   const withSelectAllProps: TSelectorSelectAll = isMultiSelect
     ? {
         withSelectAll: isMultiSelect,
-        selectAllLabel: t("PeopleSelector:AllAccounts"),
+        selectAllLabel: t("Common:AllAccounts"),
         selectAllIcon: CatalogAccountsReactSvgUrl,
         onSelectAll: () => {},
       }
@@ -327,7 +327,7 @@ const AddUsersPanel = ({
         <Selector
           withHeader
           headerProps={{
-            headerLabel: t("PeopleSelector:ListAccounts"),
+            headerLabel: t("Common:ListAccounts"),
             withoutBackButton: false,
             onBackClick,
           }}
@@ -346,11 +346,11 @@ const AddUsersPanel = ({
           {...withAccessRightsProps}
           {...withCancelButtonProps}
           emptyScreenImage={emptyScreenImage}
-          emptyScreenHeader={t("PeopleSelector:EmptyHeader")}
-          emptyScreenDescription={t("PeopleSelector:EmptyDescription")}
+          emptyScreenHeader={t("Common:EmptyHeader")}
+          emptyScreenDescription={t("Common:EmptyDescription")}
           searchEmptyScreenImage={emptyScreenImage}
-          searchEmptyScreenHeader={t("People:NotFoundUsers")}
-          searchEmptyScreenDescription={t("People:NotFoundUsersDescription")}
+          searchEmptyScreenHeader={t("Common:NotFoundUsers")}
+          searchEmptyScreenDescription={t("Common:NotFoundUsersDescription")}
           hasNextPage={hasNextPage}
           isNextPageLoading={isNextPageLoading}
           loadNextPage={loadNextPage}

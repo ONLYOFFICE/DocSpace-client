@@ -64,7 +64,7 @@ class MembersHelper {
           { key: "s2", isSeparator: true },
           {
             key: "remove",
-            label: this.t("Translations:Remove"),
+            label: this.t("Common:Remove"),
             access: ShareAccessRights.None,
           },
         ]
@@ -135,7 +135,7 @@ class MembersHelper {
 
     const options = this.getOptions();
     const [userOption] = Object.values(options).filter(
-      (opt) => opt.access === access
+      (opt) => opt.access === access,
     );
 
     return userOption;

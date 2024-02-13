@@ -172,7 +172,7 @@ export const getAccessOptions = (
     },
     {
       key: "remove",
-      label: t("Translations:Remove"),
+      label: t("Common:Remove"),
     },
   ];
 

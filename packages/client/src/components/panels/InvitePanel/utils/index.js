@@ -10,7 +10,7 @@ export const getAccessOptions = (
   withRemove = false,
   withSeparator = false,
   isOwner = false,
-  standalone = false
+  standalone = false,
 ) => {
   let options = [];
   const accesses = {
@@ -22,6 +22,7 @@ export const getAccessOptions = (
       color: "#EDC409",
       access:
         roomType === -1 ? EmployeeType.Admin : ShareAccessRights.FullAccess,
+      type: "admin",
     },
     roomAdmin: {
       key: "roomAdmin",
@@ -31,6 +32,7 @@ export const getAccessOptions = (
       color: "#EDC409",
       access:
         roomType === -1 ? EmployeeType.User : ShareAccessRights.RoomManager,
+      type: "manager",
     },
     collaborator: {
       key: "collaborator",
@@ -42,42 +44,49 @@ export const getAccessOptions = (
         roomType === -1
           ? EmployeeType.Collaborator
           : ShareAccessRights.Collaborator,
+      type: "collaborator",
     },
     user: {
       key: "user",
       label: t("Common:User"),
       description: t("Translations:RoleUserDescription"),
       access: EmployeeType.Guest,
+      type: "user",
     },
     editor: {
       key: "editor",
       label: t("Translations:RoleEditor"),
       description: t("Translations:RoleEditorDescription"),
       access: ShareAccessRights.Editing,
+      type: "user",
     },
     formFiller: {
       key: "formFiller",
       label: t("Translations:RoleFormFiller"),
       description: t("Translations:RoleFormFillerDescription"),
       access: ShareAccessRights.FormFilling,
+      type: "user",
     },
     reviewer: {
       key: "reviewer",
       label: t("Translations:RoleReviewer"),
       description: t("Translations:RoleReviewerDescription"),
       access: ShareAccessRights.Review,
+      type: "user",
     },
     commentator: {
       key: "commentator",
       label: t("Translations:RoleCommentator"),
       description: t("Translations:RoleCommentatorDescription"),
       access: ShareAccessRights.Comment,
+      type: "user",
     },
     viewer: {
       key: "viewer",
       label: t("Translations:RoleViewer"),
       description: t("Translations:RoleViewerDescription"),
       access: ShareAccessRights.ReadOnly,
+      type: "user",
     },
   };
 

@@ -13,8 +13,8 @@ const Calendar = ({
   locale = "en",
   selectedDate,
   setSelectedDate,
-  minDate = new Date("1970/01/01"),
-  maxDate = new Date("2040/01/01"),
+  minDate,
+  maxDate,
   id,
   className,
   style,
@@ -41,8 +41,6 @@ const Calendar = ({
   const [resultMinDate, setResultMinDate] = useState(moment());
   const [resultMaxDate, setResultMaxDate] = useState(moment());
 
-  const initialDateRef = React.useRef<moment.Moment>(moment(initialDate));
-
   useEffect(() => {
     const [min, max] = getValidDates(minDate, maxDate);
 
@@ -51,34 +49,34 @@ const Calendar = ({
   }, [minDate, maxDate]);
 
   useEffect(() => {
-    const today = moment();
+    let date = moment(initialDate);
+    const [min, max] = getValidDates(minDate, maxDate);
+
     if (!initialDate) {
-      initialDateRef.current =
-        today <= resultMaxDate && initialDateRef.current >= resultMinDate
+      const today = moment();
+      date =
+        today <= max && today >= min
           ? today
-          : today.diff(resultMinDate, "day") > today.diff(resultMaxDate, "day")
-            ? resultMinDate.clone()
-            : resultMaxDate.clone();
+          : Math.abs(today.diff(min, "day")) > Math.abs(today.diff(max, "day"))
+            ? max.clone()
+            : min.clone();
 
-      initialDateRef.current.startOf("day");
-    } else if (
-      initialDateRef.current > resultMaxDate ||
-      initialDateRef.current < resultMinDate
-    ) {
-      initialDateRef.current =
-        today <= resultMaxDate && today >= resultMinDate
-          ? today
-          : today.diff(resultMinDate, "day") > today.diff(resultMaxDate, "day")
-            ? resultMinDate.clone()
-            : resultMaxDate.clone();
-      initialDate.startOf("day");
+      date.startOf("day");
+      date = moment();
+    } else if (date > max || date < min) {
+      date =
+        Math.abs(date.diff(min, "day")) > Math.abs(date.diff(max, "day"))
+          ? max.clone()
+          : min.clone();
 
-      console.error(
+      date.startOf("day");
+
+      console.warn(
         "Initial date is out of min/max dates boundaries. Initial date will be set as closest boundary value",
       );
     }
-    setObservedDate(initialDateRef.current);
-  }, [initialDate, resultMaxDate, resultMinDate]);
+    setObservedDate(date);
+  }, [initialDate, maxDate, minDate]);
 
   return (
     <StyledContainerTheme

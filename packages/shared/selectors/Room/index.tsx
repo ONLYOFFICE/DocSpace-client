@@ -119,11 +119,13 @@ const RoomSelector = ({
         });
       }
 
+      if (isFirstLoad.current) setIsDataReady?.(true);
+
       isFirstLoad.current = false;
 
       setIsNextPageLoading(false);
     },
-    [excludeItems, roomType, searchValue],
+    [excludeItems, roomType, searchValue, setIsDataReady],
   );
 
   const headerSelectorProps: TSelectorHeader = withHeader

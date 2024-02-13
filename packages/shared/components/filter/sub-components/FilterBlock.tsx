@@ -462,7 +462,7 @@ const FilterBlock = ({
             />
           ) : (
             <RoomSelector
-              className="people-selector"
+              className="room-selector"
               onSubmit={selectOption}
               withHeader
               headerProps={{
@@ -471,6 +471,7 @@ const FilterBlock = ({
                 withoutBackButton: false,
               }}
               isMultiSelect={false}
+              withSearch
             />
           )}
           <StyledControlContainer onClick={hideFilterBlock}>

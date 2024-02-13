@@ -18,7 +18,7 @@ export const convertFoldersToItems: (
     const {
       id,
       title,
-      roomType,
+      //   roomType,
       filesCount,
       foldersCount,
       security,
@@ -27,7 +27,7 @@ export const convertFoldersToItems: (
     } = folder;
 
     const folderIconPath = getIconPathByFolderType(rootFolderType);
-    const icon = iconSize32.get(folderIconPath);
+    const icon = iconSize32.get(folderIconPath) as string;
 
     return {
       id,
@@ -40,7 +40,7 @@ export const convertFoldersToItems: (
       parentId,
       rootFolderType,
       isFolder: true,
-      roomType,
+      //   roomType,
       isDisabled: filterParam ? false : disabledItems?.includes(id),
     };
   });
@@ -71,7 +71,6 @@ export const convertFilesToItems: (
       security,
       parentId: folderId,
       rootFolderType,
-      isFolder: false,
       isDisabled: !filterParam,
       fileExst,
     };
@@ -97,11 +96,12 @@ export const convertRoomsToItems: (rooms: TRoom[]) => TSelectorItem[] = (
 
     const icon = logo.medium || "";
 
+    const iconProp = icon ? { icon } : { color: logo.color as string };
+
     return {
       id,
       label: title,
       title,
-      icon,
       filesCount,
       foldersCount,
       security,
@@ -109,7 +109,7 @@ export const convertRoomsToItems: (rooms: TRoom[]) => TSelectorItem[] = (
       rootFolderType,
       isFolder: true,
       roomType,
-      color: logo.color,
+      ...iconProp,
     };
   });
 

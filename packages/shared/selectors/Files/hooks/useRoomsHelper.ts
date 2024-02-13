@@ -16,26 +16,34 @@ const useRoomsHelper = ({
   setItems,
   setBreadCrumbs,
   setIsRoot,
-  isFirstLoad,
+  onSetBaseFolderPath,
   setIsBreadCrumbsLoading,
   searchValue,
   isRoomsOnly,
-  onSetBaseFolderPath,
+  isFirstLoad,
+  isInit,
+  setIsInit,
 }: UseRoomsHelperProps) => {
   const requestRunning = React.useRef(false);
+  const initRef = React.useRef(isInit);
+  const firstLoadRef = React.useRef(isFirstLoad);
+
+  React.useEffect(() => {
+    firstLoadRef.current = isFirstLoad;
+  }, [isFirstLoad]);
+
+  React.useEffect(() => {
+    initRef.current = isInit;
+  }, [isInit]);
+
   const getRoomList = React.useCallback(
-    async (
-      startIndex: number,
-      search?: string | null,
-      isInit?: boolean,
-      isErrorPath?: boolean,
-    ) => {
+    async (startIndex: number) => {
       if (requestRunning.current) return;
 
       requestRunning.current = true;
       setIsNextPageLoading(true);
 
-      const filterValue = search || (search === null ? "" : searchValue || "");
+      const filterValue = searchValue || "";
 
       const page = startIndex / PAGE_COUNT;
 
@@ -50,25 +58,24 @@ const useRoomsHelper = ({
 
       const { folders, total, count, current } = rooms;
 
-      const { title, id } = current;
+      if (initRef.current) {
+        const { title, id } = current;
 
-      if (isInit) {
         const breadCrumbs: TBreadCrumb[] = [{ label: title, id, isRoom: true }];
 
         if (!isRoomsOnly) breadCrumbs.unshift({ ...DEFAULT_BREAD_CRUMB });
 
-        onSetBaseFolderPath?.(isErrorPath ? [] : breadCrumbs);
+        onSetBaseFolderPath?.(breadCrumbs);
 
         setBreadCrumbs(breadCrumbs);
 
         setIsBreadCrumbsLoading(false);
       }
-
       const itemList: TSelectorItem[] = convertRoomsToItems(folders);
 
       setHasNextPage(count === PAGE_COUNT);
 
-      if (isFirstLoad || startIndex === 0) {
+      if (firstLoadRef.current || startIndex === 0) {
         setTotal(total);
         setItems(itemList);
       } else {
@@ -81,19 +88,20 @@ const useRoomsHelper = ({
       requestRunning.current = false;
       setIsNextPageLoading(false);
       setIsRoot(false);
+      setIsInit(false);
     },
     [
-      isFirstLoad,
+      setIsNextPageLoading,
+      searchValue,
+      setHasNextPage,
+      setIsRoot,
+      setIsInit,
       isRoomsOnly,
       onSetBaseFolderPath,
-      searchValue,
       setBreadCrumbs,
-      setHasNextPage,
       setIsBreadCrumbsLoading,
-      setIsNextPageLoading,
-      setIsRoot,
-      setItems,
       setTotal,
+      setItems,
     ],
   );
   return { getRoomList };

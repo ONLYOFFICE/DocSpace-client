@@ -378,7 +378,10 @@ export function getUsersByQuery(query) {
   });
 }
 
-export function getMembersList(roomId, filter = Filter.getDefault()) {
+export async function getMembersList(
+  roomId: string | number,
+  filter = Filter.getDefault(),
+) {
   let params = "";
 
   if (filter) {
@@ -397,16 +400,16 @@ export function getMembersList(roomId, filter = Filter.getDefault()) {
     params = `excludeShared=${excludeShared}`;
   }
 
-  return request({
+  const res = (await request({
     method: "get",
     url: `people/room/${roomId}${params}`,
-  }).then((res) => {
-    res.items = res.items.map((user) => {
-      if (user && user.displayName) {
-        user.displayName = Encoder.htmlDecode(user.displayName);
-      }
-      return user;
-    });
-    return res;
+  })) as { items: TUser[]; total: number };
+  res.items = res.items.map((user) => {
+    if (user && user.displayName) {
+      user.displayName = Encoder.htmlDecode(user.displayName);
+    }
+    return user;
   });
+
+  return res;
 }

@@ -10,7 +10,7 @@ import { FilterBlockLoader } from "../../../skeletons/filter";
 
 import { Backdrop } from "../../backdrop";
 import { Button, ButtonSize } from "../../button";
-import { Heading, HeadingSize } from "../../heading";
+import { Heading, HeadingLevel, HeadingSize } from "../../heading";
 import { IconButton } from "../../icon-button";
 import { Scrollbar } from "../../scrollbar";
 import { Portal } from "../../portal";
@@ -449,19 +449,29 @@ const FilterBlock = ({
             <PeopleSelector
               withOutCurrentAuthorizedUser
               className="people-selector"
-              isMultiSelect={false}
-              onAccept={selectOption}
-              onBackClick={onArrowClick}
-              headerLabel={selectorLabel}
+              onSubmit={selectOption}
+              submitButtonLabel=""
+              disableSubmitButton={false}
+              withHeader
+              headerProps={{
+                onBackClick: onArrowClick,
+                headerLabel: selectorLabel,
+                withoutBackButton: false,
+              }}
               currentUserId={userId}
             />
           ) : (
             <RoomSelector
-              className="people-selector"
+              className="room-selector"
+              onSubmit={selectOption}
+              withHeader
+              headerProps={{
+                onBackClick: onArrowClick,
+                headerLabel: selectorLabel,
+                withoutBackButton: false,
+              }}
               isMultiSelect={false}
-              onAccept={selectOption}
-              onBackClick={onArrowClick}
-              headerLabel={selectorLabel}
+              withSearch
             />
           )}
           <StyledControlContainer onClick={hideFilterBlock}>
@@ -471,7 +481,9 @@ const FilterBlock = ({
       ) : (
         <StyledFilterBlock showFooter={showFooter}>
           <StyledFilterBlockHeader>
-            <Heading size={HeadingSize.medium}>{filterHeader}</Heading>
+            <Heading size={HeadingSize.medium} level={HeadingLevel.h1}>
+              {filterHeader}
+            </Heading>
             {showFooter && (
               <IconButton
                 id="filter_search-options-clear"

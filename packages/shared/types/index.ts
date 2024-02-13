@@ -18,6 +18,8 @@ export type TTranslation = (
   params?: { [key: string]: string },
 ) => string;
 
+export type Nullable<T> = T | null;
+
 export type NonFunctionPropertyNames<T, ExcludeTypes> = {
   [K in keyof T]: T[K] extends ExcludeTypes ? never : K;
 }[keyof T];

@@ -45,23 +45,34 @@ const useFilesHelper = ({
   setIsSelectedParentFolder,
   roomsFolderId,
   getFilesArchiveError,
+  isInit,
+  setIsInit,
 }: UseFilesHelpersProps) => {
   const requestRunning = React.useRef(false);
+  const initRef = React.useRef(isInit);
+  const firstLoadRef = React.useRef(isFirstLoad);
+  const disabledItemsRef = React.useRef(disabledItems);
+
+  React.useEffect(() => {
+    disabledItemsRef.current = disabledItems;
+  }, [disabledItems]);
+
+  React.useEffect(() => {
+    firstLoadRef.current = isFirstLoad;
+  }, [isFirstLoad]);
+
+  React.useEffect(() => {
+    initRef.current = isInit;
+  }, [isInit]);
 
   const getFileList = React.useCallback(
-    async (
-      startIndex: number,
-      search: string | null | undefined,
-      itemId: number | string | undefined,
-      isInit?: boolean,
-    ) => {
+    async (startIndex: number) => {
       if (requestRunning.current) return;
 
       requestRunning.current = true;
       setIsNextPageLoading(true);
 
-      const currentSearch =
-        search || (search === null ? "" : searchValue || "");
+      const currentSearch = searchValue || "";
 
       const page = startIndex / PAGE_COUNT;
 
@@ -103,7 +114,7 @@ const useFilesHelper = ({
         }
       }
 
-      const id = itemId || selectedItemId || "";
+      const id = selectedItemId || "";
 
       filter.folder = id.toString();
 
@@ -111,14 +122,15 @@ const useFilesHelper = ({
         folderId: string | number,
         isErrorPath = false,
       ) => {
-        if (isInit && getRootData) {
+        if (initRef.current && getRootData) {
           const folder = await getFolderInfo(folderId, true);
 
           const isArchive = folder.rootFolderType === FolderType.Archive;
 
           if (folder.rootFolderType === FolderType.TRASH || isArchive) {
             if (isRoomsOnly && getRoomList) {
-              await getRoomList(0, null, true, true);
+              await getRoomList(0);
+              onSetBaseFolderPath?.([]);
               const error = getFilesArchiveError(folder.title);
               toastr.error(error);
 
@@ -147,7 +159,7 @@ const useFilesHelper = ({
 
         const foldersList: TSelectorItem[] = convertFoldersToItems(
           folders,
-          disabledItems,
+          disabledItemsRef.current,
           filterParam,
         );
 
@@ -163,7 +175,7 @@ const useFilesHelper = ({
 
         setSelectedTreeNode?.({ ...current, path: pathParts });
 
-        if (isInit) {
+        if (initRef.current) {
           let foundParentId = false;
           let currentFolderIndex = -1;
 
@@ -180,8 +192,10 @@ const useFilesHelper = ({
               },
               index,
             ) => {
-              if (!foundParentId && disabledItems) {
-                currentFolderIndex = disabledItems.findIndex((x) => x === id);
+              if (!foundParentId && disabledItemsRef.current) {
+                currentFolderIndex = disabledItemsRef.current.findIndex(
+                  (x) => x === id,
+                );
               }
 
               if (!foundParentId && currentFolderIndex !== -1) {
@@ -211,7 +225,7 @@ const useFilesHelper = ({
           setIsBreadCrumbsLoading(false);
         }
 
-        if (isFirstLoad || startIndex === 0) {
+        if (firstLoadRef.current || startIndex === 0) {
           setTotal(total);
           setItems(itemList);
         } else {
@@ -221,6 +235,7 @@ const useFilesHelper = ({
           });
         }
         setIsRoot(false);
+        setIsInit(false);
         setIsNextPageLoading(false);
       };
 
@@ -263,12 +278,11 @@ const useFilesHelper = ({
       selectedItemId,
       getRootData,
       setSelectedItemSecurity,
-      disabledItems,
       getIcon,
       setHasNextPage,
       setSelectedTreeNode,
-      isFirstLoad,
       setIsRoot,
+      setIsInit,
       isRoomsOnly,
       getRoomList,
       onSetBaseFolderPath,

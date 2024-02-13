@@ -64,7 +64,7 @@ const InvitePanel = ({
   const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
     () =>
       ((!userLink || !guestLink || !collaboratorLink) && !adminLink) ||
-      roomId !== -1
+      roomId !== -1,
   );
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [hasErrors, setHasErrors] = useState(false);
@@ -528,7 +528,7 @@ export default inject(
       filter,
       currentDeviceType,
     };
-  }
+  },
 )(
   withTranslation([
     "InviteDialog",
@@ -536,6 +536,5 @@ export default inject(
     "Translations",
     "Common",
     "InfoPanel",
-    "PeopleSelector",
-  ])(observer(InvitePanel))
+  ])(observer(InvitePanel)),
 );

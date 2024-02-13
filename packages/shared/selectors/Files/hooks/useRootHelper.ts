@@ -18,6 +18,7 @@ const useRootHelper = ({
   setTotal,
   setHasNextPage,
   isUserOnly,
+  setIsInit,
 }: UseRootHelperProps) => {
   const [isRoot, setIsRoot] = React.useState<boolean>(false);
   const requestRunning = React.useRef(false);
@@ -52,7 +53,6 @@ const useRootHelper = ({
       ) {
         newItems.push({
           label: folder.title,
-          title: folder.title,
           id: folder.id,
           parentId: folder.parentId,
           rootFolderType: folder.rootFolderType,
@@ -69,12 +69,14 @@ const useRootHelper = ({
     setTotal(newItems.length);
     setHasNextPage(false);
     setIsNextPageLoading(false);
+    setIsInit(false);
     requestRunning.current = false;
   }, [
     isUserOnly,
     setBreadCrumbs,
     setHasNextPage,
     setIsBreadCrumbsLoading,
+    setIsInit,
     setIsNextPageLoading,
     setItems,
     setTotal,

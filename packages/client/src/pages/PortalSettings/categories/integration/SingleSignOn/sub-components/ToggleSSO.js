@@ -6,21 +6,11 @@ import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Badge } from "@docspace/shared/components/badge";
-import DisableSsoConfirmationModal from "./DisableSsoConfirmationModal";
 
 const borderProp = { radius: "6px" };
 
 const ToggleSSO = (props) => {
-  const {
-    theme,
-    enableSso,
-    isSsoEnabled,
-    openConfirmationDisableModal,
-    ssoToggle,
-    confirmationDisableModal,
-    isSSOAvailable,
-    t,
-  } = props;
+  const { theme, enableSso, ssoToggle, isSSOAvailable, t } = props;
 
   return (
     <>
@@ -40,9 +30,7 @@ const ToggleSSO = (props) => {
         <ToggleButton
           className="enable-sso toggle"
           isChecked={enableSso}
-          onChange={
-            isSsoEnabled && enableSso ? openConfirmationDisableModal : ssoToggle
-          }
+          onChange={() => ssoToggle(t)}
           isDisabled={!isSSOAvailable}
         />
 
@@ -77,28 +65,17 @@ const ToggleSSO = (props) => {
           </Text>
         </div>
       </Box>
-
-      {confirmationDisableModal && <DisableSsoConfirmationModal />}
     </>
   );
 };
 
 export default inject(({ settingsStore, ssoStore }) => {
   const { theme } = settingsStore;
-  const {
-    enableSso,
-    isSsoEnabled,
-    openConfirmationDisableModal,
-    ssoToggle,
-    confirmationDisableModal,
-  } = ssoStore;
+  const { enableSso, ssoToggle } = ssoStore;
 
   return {
     theme,
     enableSso,
-    isSsoEnabled,
-    openConfirmationDisableModal,
     ssoToggle,
-    confirmationDisableModal,
   };
 })(withTranslation(["SingleSignOn"])(observer(ToggleSSO)));

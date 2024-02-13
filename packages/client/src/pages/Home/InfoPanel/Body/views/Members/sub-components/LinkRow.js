@@ -111,7 +111,7 @@ const LinkRow = (props) => {
 
   const onCopyExternalLink = () => {
     copy(shareLink);
-    toastr.success(t("Files:LinkSuccessfullyCopied"));
+    toastr.success(t("Common:LinkSuccessfullyCopied"));
     onCloseContextMenu();
   };
 

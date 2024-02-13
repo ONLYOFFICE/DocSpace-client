@@ -37,7 +37,7 @@ const DropDown = (props: DropDownProps) => {
     <>
       {withBackdrop ? (
         <Backdrop
-          visible={open}
+          visible={open || false}
           zIndex={199}
           onClick={toggleDropDown}
           withoutBlur={!withBlur}

@@ -135,7 +135,7 @@ class SocketIOHelper {
     }
   };
 
-  on = (eventName: string, callback: (opt: TOptSocket) => void) => {
+  on = (eventName: string, callback: (value: TOptSocket) => void) => {
     if (!this.isEnabled) {
       callbacks.push({ eventName, callback });
       return;

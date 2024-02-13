@@ -9,7 +9,6 @@ const useFilesSettings = (
   getIconProp?: (size: number, fileExst: string) => string,
 ) => {
   const [settings, setSettings] = React.useState({} as TFilesSettings);
-  const [settingsIsLoaded, setSettingsIsLoaded] = React.useState(false);
 
   const requestRunning = React.useRef(false);
 
@@ -21,7 +20,6 @@ const useFilesSettings = (
     const res = await getSettingsFiles();
 
     setSettings(res);
-    setSettingsIsLoaded(true);
     requestRunning.current = false;
   }, [getIconProp]);
 
@@ -249,7 +247,7 @@ const useFilesSettings = (
     [getIconProp, isArchive, isHtml, isImage, isSound],
   );
 
-  return { getIcon, settingsIsLoaded };
+  return { getIcon };
 };
 
 export default useFilesSettings;

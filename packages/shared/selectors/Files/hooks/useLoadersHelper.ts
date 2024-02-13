@@ -6,16 +6,17 @@ import {
   SHOW_LOADER_TIMER,
 } from "../FilesSelector.constants";
 
-const useLoadersHelper = ({ items }: UseLoadersHelperProps) => {
+const useLoadersHelper = ({ items, isInit }: UseLoadersHelperProps) => {
   const [isBreadCrumbsLoading, setIsBreadCrumbsLoading] =
     React.useState<boolean>(true);
   const [isNextPageLoading, setIsNextPageLoading] =
     React.useState<boolean>(false);
-  const [isFirstLoad, setIsFirstLoad] = React.useState<boolean>(true);
 
   const [showBreadCrumbsLoader, setShowBreadCrumbsLoader] =
     React.useState<boolean>(true);
   const [showLoader, setShowLoader] = React.useState<boolean>(true);
+
+  const [isFirstLoad, setIsFirstLoad] = React.useState(true);
 
   const startLoader = React.useRef<Date | null>(new Date());
 
@@ -97,14 +98,14 @@ const useLoadersHelper = ({ items }: UseLoadersHelperProps) => {
   }, [isBreadCrumbsLoading]);
 
   React.useEffect(() => {
-    if (isFirstLoad && items) {
+    if ((items.length || !isInit) && isFirstLoad) {
       setIsFirstLoad(false);
     }
-  }, [isFirstLoad, items]);
+  }, [isFirstLoad, items, isInit]);
 
   React.useEffect(() => {
     calculateLoader();
-  }, [isFirstLoad, calculateLoader]);
+  }, [calculateLoader]);
 
   React.useEffect(() => {
     calculateBreadCrumbsLoader();
@@ -115,8 +116,10 @@ const useLoadersHelper = ({ items }: UseLoadersHelperProps) => {
     setIsBreadCrumbsLoading,
     isNextPageLoading,
     setIsNextPageLoading,
+
     isFirstLoad,
     setIsFirstLoad,
+
     showBreadCrumbsLoader,
     showLoader,
   };

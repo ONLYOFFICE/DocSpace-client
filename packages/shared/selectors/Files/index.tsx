@@ -1,7 +1,6 @@
-"use client";
-
 import React from "react";
 import { useTheme } from "styled-components";
+import { useTranslation } from "react-i18next";
 
 import EmptyScreenFilterAltSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt.svg?url";
 import EmptyScreenFilterAltDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt_dark.svg?url";
@@ -22,7 +21,16 @@ import {
   SearchLoader,
   BreadCrumbsLoader,
 } from "../../skeletons/selector";
-import { TBreadCrumb } from "../../components/selector/Selector.types";
+import {
+  TBreadCrumb,
+  TSelectorBreadCrumbs,
+  TSelectorCancelButton,
+  TSelectorCheckbox,
+  TSelectorHeader,
+  TSelectorInput,
+  TSelectorSearch,
+  TSelectorSubmitButton,
+} from "../../components/selector/Selector.types";
 
 import useFilesHelper from "./hooks/useFilesHelper";
 import useLoadersHelper from "./hooks/useLoadersHelper";
@@ -38,7 +46,6 @@ const FilesSelector = ({
   disabledItems,
   filterParam,
   getIcon: getIconProp,
-
   treeFolders,
   onSetBaseFolderPath,
   isUserOnly,
@@ -49,30 +56,20 @@ const FilesSelector = ({
   currentFolderId,
   parentId,
   rootFolderType,
-
-  onClose,
-  onAccept,
-
+  onSubmit,
+  onCancel,
   getIsDisabled,
-
   withHeader,
   headerLabel,
-  searchPlaceholder,
-  acceptButtonLabel,
+  submitButtonLabel,
   withCancelButton,
-  cancelButtonLabel,
-  onCloseAction,
-  emptyScreenHeader,
-  emptyScreenDescription,
-  searchEmptyScreenHeader,
-  searchEmptyScreenDescription,
   withFooterInput,
   withFooterCheckbox,
   footerInputHeader,
   currentFooterInputValue,
   footerCheckboxLabel,
   descriptionText,
-  acceptButtonId,
+  submitButtonId,
   cancelButtonId,
   embedded,
   isPanelVisible,
@@ -81,6 +78,7 @@ const FilesSelector = ({
   setIsDataReady,
 }: FilesSelectorProps) => {
   const theme = useTheme();
+  const { t } = useTranslation(["Common"]);
 
   const [breadCrumbs, setBreadCrumbs] = React.useState<TBreadCrumb[]>([]);
   const [items, setItems] = React.useState<TSelectorItem[]>([]);
@@ -102,24 +100,25 @@ const FilesSelector = ({
     fileExst?: string;
     inPublic?: boolean;
   } | null>(null);
-
   const [total, setTotal] = React.useState<number>(0);
   const [hasNextPage, setHasNextPage] = React.useState<boolean>(false);
   const [isSelectedParentFolder, setIsSelectedParentFolder] =
     React.useState<boolean>(false);
   const [searchValue, setSearchValue] = React.useState<string>("");
 
-  const { getIcon, settingsIsLoaded } = useFilesSettings(getIconProp);
+  const [isInit, setIsInit] = React.useState(true);
+
+  const { getIcon } = useFilesSettings(getIconProp);
 
   const { subscribe, unsubscribe } = useSocketHelper({
     socketHelper,
     socketSubscribers,
-    setItems,
-    setBreadCrumbs,
-    setTotal,
     disabledItems,
     filterParam,
     getIcon,
+    setItems,
+    setBreadCrumbs,
+    setTotal,
   });
 
   const {
@@ -130,7 +129,7 @@ const FilesSelector = ({
     setIsFirstLoad,
     showBreadCrumbsLoader,
     showLoader,
-  } = useLoadersHelper({ items });
+  } = useLoadersHelper({ items, isInit });
 
   const { isRoot, setIsRoot, getRootData } = useRootHelper({
     setIsBreadCrumbsLoading,
@@ -140,8 +139,8 @@ const FilesSelector = ({
     treeFolders,
     setHasNextPage,
     setIsNextPageLoading,
-
     isUserOnly,
+    setIsInit,
   });
 
   const { getRoomList } = useRoomsHelper({
@@ -156,6 +155,8 @@ const FilesSelector = ({
     searchValue,
     isRoomsOnly,
     onSetBaseFolderPath,
+    isInit,
+    setIsInit,
   });
 
   const { getFileList } = useFilesHelper({
@@ -180,46 +181,54 @@ const FilesSelector = ({
     rootThirdPartyId,
     getRoomList,
     getIcon,
+
     setIsSelectedParentFolder,
     roomsFolderId,
     getFilesArchiveError,
+    isInit,
+    setIsInit,
   });
 
-  const onSelectAction = (item: TSelectorItem) => {
-    const inPublic =
-      breadCrumbs.findIndex((f) => f.roomType === RoomsType.PublicRoom) > -1;
-    if (item.isFolder) {
-      setIsFirstLoad(true);
-      setItems([]);
-      setBreadCrumbs((value) => [
-        ...value,
-        {
-          label: item.label,
-          id: item.id,
-          isRoom:
-            item.parentId === 0 && item.rootFolderType === FolderType.Rooms,
-          roomType: item.roomType,
-          shared: item.shared,
-        } as TBreadCrumb,
-      ]);
-      setSelectedItemId(item.id);
-      setSearchValue("");
+  const onSelectAction = React.useCallback(
+    (item: TSelectorItem) => {
+      if (item.isFolder) {
+        setIsFirstLoad(true);
 
-      if (item.parentId === 0 && item.rootFolderType === FolderType.Rooms) {
-        setSelectedItemType("rooms");
-        getRoomList(0, null, false);
-      } else {
-        setSelectedItemType("files");
-        getFileList(0, null, item.id, false);
+        setItems([]);
+        setBreadCrumbs((value) => [
+          ...value,
+          {
+            label: item.label,
+            id: item.id,
+            isRoom:
+              item.parentId === 0 && item.rootFolderType === FolderType.Rooms,
+            roomType: item.roomType,
+            shared: item.shared,
+          } as TBreadCrumb,
+        ]);
+        setSelectedItemId(item.id);
+        setSearchValue("");
+
+        if (item.parentId === 0 && item.rootFolderType === FolderType.Rooms) {
+          setSelectedItemType("rooms");
+        } else {
+          setSelectedItemType("files");
+        }
+      } else if (item.id && item.label) {
+        const inPublic =
+          breadCrumbs.findIndex((f) => f.roomType === RoomsType.PublicRoom) >
+          -1;
+
+        setSelectedFileInfo({
+          id: item.id,
+          title: item.label,
+          fileExst: item.fileExst,
+          inPublic,
+        });
       }
-    } else if (item.id && item.title)
-      setSelectedFileInfo({
-        id: item.id,
-        title: item.title,
-        fileExst: item.fileExst,
-        inPublic,
-      });
-  };
+    },
+    [breadCrumbs, setIsFirstLoad],
+  );
 
   React.useEffect(() => {
     if (!selectedItemId) return;
@@ -229,22 +238,16 @@ const FilesSelector = ({
   }, [selectedItemId, isRoot, unsubscribe, subscribe]);
 
   React.useEffect(() => {
-    if (!settingsIsLoaded && !getIconProp) return;
-
-    const getRoomSettings = () => {
-      setSelectedItemType("rooms");
-      getRoomList(0, null, true);
-    };
-
+    setIsFirstLoad(true);
     const needRoomList = isRoomsOnly && !currentFolderId;
 
     if (needRoomList) {
-      getRoomSettings();
+      setSelectedItemType("rooms");
       return;
     }
 
     if (!currentFolderId) {
-      getRootData();
+      setSelectedItemType("rooms");
       return;
     }
 
@@ -256,155 +259,238 @@ const FilesSelector = ({
         parentId === roomsFolderId &&
         rootFolderType === FolderType.Rooms)
     ) {
-      getRoomSettings();
+      setSelectedItemType("rooms");
 
       return;
     }
 
     setSelectedItemType("files");
-    getFileList(0, null, currentFolderId, true);
-    // TODO: refactoring
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [settingsIsLoaded, getIconProp]);
+  }, [
+    currentFolderId,
+    isRoomsOnly,
+    isThirdParty,
+    parentId,
+    roomsFolderId,
+    rootFolderType,
+    setIsFirstLoad,
+  ]);
 
-  const onClickBreadCrumb = (item: TBreadCrumb) => {
-    if (!isFirstLoad) {
-      setSearchValue("");
-      setIsFirstLoad(true);
-
-      if (+item.id === 0) {
-        setSelectedItemSecurity(undefined);
-        setSelectedItemType(undefined);
-        getRootData();
-      } else {
-        setItems([]);
-
-        const idx = breadCrumbs.findIndex(
-          (value) => value.id.toString() === item.id.toString(),
-        );
-
-        const maxLength = breadCrumbs.length - 1;
-        let foundParentId = false;
-        let currentFolderIndex = -1;
-
-        const newBreadCrumbs = breadCrumbs.map((i, index) => {
-          if (!foundParentId) {
-            currentFolderIndex = disabledItems.findIndex((id) => id === i?.id);
-          }
-
-          if (index !== maxLength && currentFolderIndex !== -1) {
-            foundParentId = true;
-            if (!isSelectedParentFolder) setIsSelectedParentFolder(true);
-          }
-
-          if (index === maxLength && !foundParentId && isSelectedParentFolder)
-            setIsSelectedParentFolder(false);
-
-          return { ...i };
-        });
-
-        newBreadCrumbs.splice(idx + 1, newBreadCrumbs.length - idx - 1);
-
-        setBreadCrumbs(newBreadCrumbs);
-
-        setSelectedItemId(item.id);
-        if (item.isRoom) {
-          setSelectedItemType("rooms");
-          getRoomList(0, null, false);
+  const onClickBreadCrumb = React.useCallback(
+    (item: TBreadCrumb) => {
+      if (!isFirstLoad) {
+        setSearchValue("");
+        setIsFirstLoad(true);
+        if (+item.id === 0) {
+          setSelectedItemSecurity(undefined);
+          setSelectedItemType(undefined);
+          getRootData();
         } else {
-          setSelectedItemType("files");
-          getFileList(0, null, item.id, false);
+          setItems([]);
+
+          setBreadCrumbs((bc) => {
+            const idx = bc.findIndex(
+              (value) => value.id.toString() === item.id.toString(),
+            );
+
+            const maxLength = bc.length - 1;
+            let foundParentId = false;
+            let currentFolderIndex = -1;
+
+            const newBreadCrumbs = bc.map((i, index) => {
+              if (!foundParentId) {
+                currentFolderIndex = disabledItems.findIndex(
+                  (id) => id === i?.id,
+                );
+              }
+
+              if (index !== maxLength && currentFolderIndex !== -1) {
+                foundParentId = true;
+                if (!isSelectedParentFolder) setIsSelectedParentFolder(true);
+              }
+
+              if (
+                index === maxLength &&
+                !foundParentId &&
+                isSelectedParentFolder
+              )
+                setIsSelectedParentFolder(false);
+
+              return { ...i };
+            });
+
+            newBreadCrumbs.splice(idx + 1, newBreadCrumbs.length - idx - 1);
+            return newBreadCrumbs;
+          });
+
+          setSelectedItemId(item.id);
+          if (item.isRoom) {
+            setSelectedItemType("rooms");
+          } else {
+            setSelectedItemType("files");
+          }
         }
       }
-    }
-  };
+    },
+    [
+      disabledItems,
+      getRootData,
+      isFirstLoad,
+      isSelectedParentFolder,
+      setIsFirstLoad,
+    ],
+  );
 
-  const onSearchAction = (value: string, callback?: Function) => {
-    setIsFirstLoad(true);
-    setItems([]);
-    if (selectedItemType === "rooms") {
-      getRoomList(0, value === "" ? null : value, false);
-    } else {
-      getFileList(0, value === "" ? null : value, selectedItemId, false);
-    }
+  const onSearchAction = React.useCallback(
+    (value: string, callback?: Function) => {
+      setIsFirstLoad(true);
+      setItems([]);
 
-    setSearchValue(value);
-    callback?.();
-  };
+      setSearchValue(value);
+      callback?.();
+    },
+    [setIsFirstLoad],
+  );
 
-  const onClearSearchAction = (callback?: Function) => {
-    setIsFirstLoad(true);
-    setItems([]);
-    if (selectedItemType === "rooms") {
-      getRoomList(0, null, false);
-    } else {
-      getFileList(0, null, selectedItemId, false);
-    }
+  const onClearSearchAction = React.useCallback(
+    (callback?: Function) => {
+      setIsFirstLoad(true);
+      setItems([]);
 
-    setSearchValue("");
-    callback?.();
-  };
+      setSearchValue("");
+      callback?.();
+    },
+    [setIsFirstLoad],
+  );
 
   React.useEffect(() => {
     if (setIsDataReady) setIsDataReady(!showLoader);
   }, [setIsDataReady, showLoader]);
 
-  const onAcceptAction = async (
-    i: unknown,
-    accessRights: unknown,
-    fileName: string,
-    isChecked: boolean,
-  ) => {
-    const isPublic =
-      breadCrumbs.findIndex((f) => f.roomType === RoomsType.PublicRoom) > -1;
-    const folderTitle = breadCrumbs[breadCrumbs.length - 1].label;
+  const onSubmitAction = React.useCallback(
+    async (
+      i: unknown,
+      accessRights: unknown,
+      fileName: string,
+      isChecked: boolean,
+    ) => {
+      const isPublic =
+        breadCrumbs.findIndex((f) => f.roomType === RoomsType.PublicRoom) > -1;
+      const folderTitle = breadCrumbs[breadCrumbs.length - 1].label;
 
-    onAccept(
+      onSubmit(
+        selectedItemId,
+        folderTitle,
+        isPublic,
+        breadCrumbs,
+        fileName,
+        isChecked,
+        selectedTreeNode,
+        selectedFileInfo,
+      );
+    },
+    [breadCrumbs, selectedFileInfo, selectedItemId, selectedTreeNode, onSubmit],
+  );
+
+  React.useEffect(() => {
+    if (selectedItemType === "rooms") getRoomList(0);
+    if (selectedItemType === "files" && typeof selectedItemId !== "undefined")
+      getFileList(0);
+  }, [getFileList, getRoomList, selectedItemType, selectedItemId]);
+
+  const headerProps: TSelectorHeader = withHeader
+    ? { withHeader, headerProps: { headerLabel } }
+    : {};
+
+  const withSearch =
+    !!searchValue ||
+    (!isRoot && items?.length ? items.length > 0 : !isRoot && isFirstLoad);
+
+  const searchProps: TSelectorSearch = withSearch
+    ? {
+        withSearch,
+        searchLoader: <SearchLoader />,
+        searchPlaceholder: t("Common:Search"),
+        searchValue,
+        isSearchLoading: showBreadCrumbsLoader,
+        onSearch: onSearchAction,
+        onClearSearch: onClearSearchAction,
+      }
+    : {};
+
+  const submitButtonProps: TSelectorSubmitButton = {
+    onSubmit: onSubmitAction,
+    submitButtonLabel,
+    submitButtonId,
+    disableSubmitButton: getIsDisabled(
+      isFirstLoad,
+      isSelectedParentFolder,
       selectedItemId,
-      folderTitle,
-      isPublic,
-      breadCrumbs,
-      fileName,
-      isChecked,
-      selectedTreeNode,
+      selectedItemType,
+      isRoot,
+      selectedItemSecurity,
       selectedFileInfo,
-    );
+    ),
+  };
+
+  const cancelButtonProps: TSelectorCancelButton = withCancelButton
+    ? {
+        withCancelButton,
+        cancelButtonLabel: t("Common:CancelButton"),
+        cancelButtonId,
+        onCancel,
+      }
+    : {};
+
+  const footerInputProps: TSelectorInput = withFooterInput
+    ? {
+        withFooterInput,
+        footerInputHeader,
+        currentFooterInputValue,
+      }
+    : {};
+
+  const footerCheckboxProps: TSelectorCheckbox = withFooterCheckbox
+    ? {
+        withFooterCheckbox,
+        footerCheckboxLabel,
+        isChecked: false,
+        setIsChecked: () => {},
+      }
+    : {};
+
+  const breadCrumbsProps: TSelectorBreadCrumbs = {
+    breadCrumbs,
+    breadCrumbsLoader: <BreadCrumbsLoader />,
+    isBreadCrumbsLoading: showBreadCrumbsLoader,
+    withBreadCrumbs: true,
+    onSelectBreadCrumb: onClickBreadCrumb,
   };
 
   const SelectorBody = (
     <Selector
-      withHeader={withHeader}
-      headerLabel={headerLabel}
-      withoutBackButton
-      searchPlaceholder={searchPlaceholder}
-      searchValue={searchValue}
-      onSearch={onSearchAction}
-      onClearSearch={onClearSearchAction}
+      {...headerProps}
+      {...searchProps}
+      {...submitButtonProps}
+      {...cancelButtonProps}
+      {...footerInputProps}
+      {...footerCheckboxProps}
+      {...breadCrumbsProps}
+      isMultiSelect={false}
       items={items}
       onSelect={onSelectAction}
-      acceptButtonLabel={acceptButtonLabel}
-      onAccept={onAcceptAction}
-      withCancelButton={withCancelButton}
-      cancelButtonLabel={cancelButtonLabel}
-      onCancel={onClose}
       emptyScreenImage={
         theme?.isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl
       }
-      emptyScreenHeader={emptyScreenHeader}
-      emptyScreenDescription={emptyScreenDescription}
+      emptyScreenHeader={t("Common:SelectorEmptyScreenHeader")}
+      emptyScreenDescription=""
       searchEmptyScreenImage={
         theme?.isBase
           ? EmptyScreenFilterAltSvgUrl
           : EmptyScreenFilterAltDarkSvgUrl
       }
-      searchEmptyScreenHeader={searchEmptyScreenHeader}
-      searchEmptyScreenDescription={searchEmptyScreenDescription}
-      withBreadCrumbs
-      breadCrumbs={breadCrumbs}
-      onSelectBreadCrumb={onClickBreadCrumb}
+      searchEmptyScreenHeader={t("Common:NotFoundTitle")}
+      searchEmptyScreenDescription={t("Common:EmptyFilterDescriptionText")}
       isLoading={showLoader}
-      isBreadCrumbsLoading={showBreadCrumbsLoader}
-      withSearch={!isRoot && items ? items.length > 0 : !isRoot && isFirstLoad}
       rowLoader={
         <RowLoader
           isMultiSelect={false}
@@ -412,32 +498,19 @@ const FilesSelector = ({
           isContainer={showLoader}
         />
       }
-      searchLoader={<SearchLoader />}
-      breadCrumbsLoader={<BreadCrumbsLoader />}
       alwaysShowFooter
       isNextPageLoading={isNextPageLoading}
       hasNextPage={hasNextPage}
       totalItems={total}
       loadNextPage={
-        isRoot ? null : selectedItemType === "rooms" ? getRoomList : getFileList
+        isRoot
+          ? async () => {}
+          : selectedItemType === "rooms"
+            ? getRoomList
+            : getFileList
       }
-      disableAcceptButton={getIsDisabled(
-        isFirstLoad,
-        isSelectedParentFolder,
-        selectedItemId,
-        selectedItemType,
-        isRoot,
-        selectedItemSecurity,
-        selectedFileInfo,
-      )}
-      withFooterInput={withFooterInput}
-      withFooterCheckbox={withFooterCheckbox}
-      footerInputHeader={footerInputHeader}
-      currentFooterInputValue={currentFooterInputValue}
-      footerCheckboxLabel={footerCheckboxLabel}
       descriptionText={descriptionText}
-      acceptButtonId={acceptButtonId}
-      cancelButtonId={cancelButtonId}
+      disableFirstFetch
     />
   );
 
@@ -450,13 +523,13 @@ const FilesSelector = ({
         isAside
         withBackground
         zIndex={309}
-        onClick={onCloseAction}
+        onClick={onCancel}
       />
       <Aside
         visible={isPanelVisible}
         withoutBodyScroll
         zIndex={310}
-        onClose={onCloseAction}
+        onClose={onCancel}
       >
         {SelectorBody}
       </Aside>

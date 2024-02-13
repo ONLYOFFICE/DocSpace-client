@@ -3209,6 +3209,11 @@ export const getBaseTheme = () => {
       pluginName: "#5C5C5C",
       descriptionColor: "#657077",
     },
+
+    sdkPresets: {
+      borderColor: "#d0d5da",
+      secondaryColor: "#657077",
+    },
   };
 };
 

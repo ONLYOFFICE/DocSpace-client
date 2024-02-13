@@ -16,12 +16,12 @@ export const getShareOptions = (t: TTranslation) => {
     {
       internal: false,
       key: "anyone",
-      label: t("AnyoneWithLink"),
+      label: t("Common:AnyoneWithLink"),
     },
     {
       internal: true,
       key: "users",
-      label: t("DocSpaceUsersOnly"),
+      label: t("Common:DoсSpaceUsersOnly"),
     },
   ];
 };
@@ -34,19 +34,19 @@ export const getAccessOptions = (
     available.Editing && {
       access: ShareAccessRights.Editing,
       key: "editing",
-      label: t("Editing"),
+      label: t("Common:Editing"),
       icon: AccessEditReactSvgUrl,
     },
     available.CustomFilter && {
       access: ShareAccessRights.CustomFilter,
       key: "custom-filter",
-      label: t("CustomFilter"),
+      label: t("Common:CustomFilter"),
       icon: CustomFilterReactSvgUrl,
     },
     available.Comment && {
       access: ShareAccessRights.Comment,
       key: "commenting",
-      label: t("Comment"),
+      label: t("Common:Comment"),
       icon: AccessCommentReactSvgUrl,
     },
     available.Read && {
@@ -58,7 +58,7 @@ export const getAccessOptions = (
     available.Restrict && {
       access: ShareAccessRights.DenyAccess,
       key: "deny-access",
-      label: t("DenyAccess"),
+      label: t("Common:DenyAccess"),
       icon: EyeOffReactSvgUrl,
     },
     available.Review && {
@@ -74,7 +74,7 @@ export const getAccessOptions = (
     available.None && {
       access: ShareAccessRights.None,
       key: "remove",
-      label: t("Translations:Remove"),
+      label: t("Common:Remove"),
       icon: RemoveReactSvgUrl,
     },
   ];
@@ -119,7 +119,7 @@ export const getExpiredOptions = (
     },
     {
       key: "custom",
-      label: t("Settings:Custom"),
+      label: t("Common:Custom"),
       onClick: () => onCalendarOpen(),
     },
   ];

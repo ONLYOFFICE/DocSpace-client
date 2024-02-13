@@ -41,6 +41,10 @@ const FilesSelectorWrapper = ({
 
   onClose,
 
+  withSearch = true,
+  withBreadCrumbs = true,
+  withSubtitle = true,
+
   isMove,
   isCopy,
   isRestore,
@@ -94,8 +98,10 @@ const FilesSelectorWrapper = ({
   currentDeviceType,
 
   embedded,
-  withHeader,
+  withHeader = true,
   withCancelButton = true,
+  cancelButtonLabel,
+  acceptButtonLabel,
   getIcon,
   isRoomBackup,
 
@@ -135,7 +141,7 @@ const FilesSelectorWrapper = ({
   };
 
   const getFilesArchiveError = (name: string) =>
-    t("Files:ArchivedRoomAction", { name });
+    t("Common:ArchivedRoomAction", { name });
 
   const onAccept = async (
     selectedItemId: string | number | undefined,
@@ -152,10 +158,13 @@ const FilesSelectorWrapper = ({
       const folderIds: number[] = [];
 
       for (const item of selection) {
-        if (item.fileExst || item.contentLength) {
+        if (
+          ("fileExst" in item && item.fileExst) ||
+          ("contentLength" in item && item.contentLength)
+        ) {
           fileIds.push(item.id);
         } else if (item.id === selectedItemId) {
-          toastr.error(t("MoveToFolderMessage"));
+          toastr.error(t("Common:MoveToFolderMessage"));
         } else {
           folderIds.push(item.id);
         }
@@ -171,7 +180,7 @@ const FilesSelectorWrapper = ({
           folderTitle,
           translations: {
             copy: t("Common:CopyOperation"),
-            move: t("Translations:MoveToOperation"),
+            move: t("Common:MoveToOperation"),
           },
         };
 
@@ -240,7 +249,7 @@ const FilesSelectorWrapper = ({
     isRestore,
   );
 
-  const acceptButtonLabel = getAcceptButtonLabel(
+  const defaultAcceptButtonLabel = getAcceptButtonLabel(
     t,
     isEditorDialog,
     isCopy,
@@ -297,37 +306,34 @@ const FilesSelectorWrapper = ({
       isThirdParty={isThirdParty}
       rootThirdPartyId={rootThirdPartyId}
       roomsFolderId={roomsFolderId}
-      currentFolderId={currentFolderId}
+      currentFolderId={currentFolderId || 0}
       parentId={parentId}
-      rootFolderType={rootFolderType}
+      rootFolderType={rootFolderType || FolderType.Rooms}
       currentDeviceType={currentDeviceType}
-      onClose={onCloseAction}
-      onCloseAction={onCloseAction}
-      onAccept={onAccept}
+      onCancel={onCloseAction}
+      onSubmit={onAccept}
       getIsDisabled={getIsDisabledAction}
       withHeader={withHeader}
       headerLabel={headerLabel}
-      searchPlaceholder={t("Common:Search")}
-      acceptButtonLabel={acceptButtonLabel}
+      submitButtonLabel={acceptButtonLabel || defaultAcceptButtonLabel}
       withCancelButton={withCancelButton}
-      cancelButtonLabel={t("Common:CancelButton")}
-      emptyScreenHeader={t("SelectorEmptyScreenHeader")}
-      emptyScreenDescription=""
-      searchEmptyScreenHeader={t("Common:NotFoundTitle")}
-      searchEmptyScreenDescription={t("EmptyFilterDescriptionText")}
       isPanelVisible={isPanelVisible}
       embedded={embedded}
-      withFooterInput={withFooterInput}
-      withFooterCheckbox={withFooterCheckbox}
+      withFooterInput={withFooterInput || false}
+      withFooterCheckbox={withFooterCheckbox || false}
       footerInputHeader={footerInputHeader || ""}
       currentFooterInputValue={currentFooterInputValue || ""}
       footerCheckboxLabel={footerCheckboxLabel || ""}
+      withoutBackButton
+      cancelButtonLabel={cancelButtonLabel}
+      withBreadCrumbs={withBreadCrumbs}
+      withSearch={withSearch}
       descriptionText={
-        !filterParam || filterParam === "ALL"
+        !withSubtitle || !filterParam || filterParam === "ALL"
           ? ""
           : descriptionText ?? t("Common:SelectDOCXFormat")
       }
-      acceptButtonId={
+      submitButtonId={
         isMove || isCopy || isRestore ? "select-file-modal-submit" : ""
       }
       cancelButtonId={
@@ -366,6 +372,7 @@ export default inject(
       isRestore,
       isPanelVisible,
       id,
+      currentFolderId,
     }: FilesSelectorProps,
   ) => {
     const { id: selectedId, parentId, rootFolderType } = selectedFolderStore;
@@ -373,8 +380,6 @@ export default inject(
     const { setConflictDialogData, checkFileConflicts, setSelectedItems } =
       filesActionsStore;
     const { itemOperationToFolder, clearActiveOperations } = uploadDataStore;
-
-    const sessionPath = window.sessionStorage.getItem("filesSelectorPath");
 
     const { treeFolders, roomsFolderId } = treeFoldersStore;
 
@@ -423,6 +428,8 @@ export default inject(
                 : []
         : [];
 
+    const sessionPath = window.sessionStorage.getItem("filesSelectorPath");
+
     const selectionsWithoutEditing = isRestoreAll
       ? filesList
       : isCopy
@@ -449,13 +456,13 @@ export default inject(
           ? parentId
           : selectedId);
 
-    const currentFolderId =
-      sessionPath && (isMove || isCopy || isRestore || isRestoreAll)
+    const folderId =
+      currentFolderId ||
+      (sessionPath && (isMove || isCopy || isRestore || isRestoreAll)
         ? +sessionPath
-        : fromFolderId;
+        : fromFolderId);
 
     return {
-      currentFolderId,
       fromFolderId,
       parentId,
       rootFolderType,
@@ -491,6 +498,7 @@ export default inject(
       getIcon,
 
       roomsFolderId,
+      currentFolderId: folderId,
     };
   },
 )(observer(FilesSelectorWrapper));

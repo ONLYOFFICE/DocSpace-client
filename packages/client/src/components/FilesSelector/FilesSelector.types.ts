@@ -1,6 +1,7 @@
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import { DeviceType } from "@docspace/shared/enums";
+import { TTheme } from "@docspace/shared/themes";
 import SocketIOHelper from "@docspace/shared/utils/socket";
 
 export type FilesSelectorProps = {
@@ -18,6 +19,11 @@ export type FilesSelectorProps = {
 
   onClose?: () => void;
 
+  id?: string | number;
+  withSearch: boolean;
+  withBreadCrumbs: boolean;
+  withSubtitle: boolean;
+
   isMove?: boolean;
   isCopy?: boolean;
   isRestore: boolean;
@@ -33,7 +39,9 @@ export type FilesSelectorProps = {
 
   treeFolders?: TFolder[];
 
-  selection: TFile[];
+  theme: TTheme;
+
+  selection: (TFolder | TFile)[];
   disabledItems: string[] | number[];
   setMoveToPanelVisible: (value: boolean) => void;
   setRestorePanelVisible: (value: boolean) => void;
@@ -62,7 +70,7 @@ export type FilesSelectorProps = {
     value: number | string | undefined,
     breadCrumbs: TBreadCrumb[],
   ) => void;
-  onSelectTreeNode?: (treeNode: unknown) => void;
+  onSelectTreeNode?: (treeNode: TFolder) => void;
   onSave?: (
     e: unknown,
     folderId: string | number,
@@ -100,8 +108,9 @@ export type FilesSelectorProps = {
   embedded: boolean;
   withHeader: boolean;
   withCancelButton: boolean;
-
-  id?: string | number;
+  cancelButtonLabel: string;
+  acceptButtonLabel: string;
+  settings: unknown;
 
   roomsFolderId?: number;
 };

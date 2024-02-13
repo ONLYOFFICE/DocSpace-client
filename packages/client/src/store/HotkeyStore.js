@@ -31,7 +31,7 @@ class HotkeyStore {
     filesActionsStore,
     treeFoldersStore,
     uploadDataStore,
-    selectedFolderStore
+    selectedFolderStore,
   ) {
     makeAutoObservable(this);
     this.filesStore = filesStore;
@@ -75,7 +75,7 @@ class HotkeyStore {
 
   activateHotkeys = (e) => {
     const infiniteLoaderComponent = document.getElementsByClassName(
-      "ReactVirtualized__List"
+      "ReactVirtualized__List",
     )[0];
 
     if (infiniteLoaderComponent) {
@@ -98,7 +98,7 @@ class HotkeyStore {
 
     if (
       ["Space", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].indexOf(
-        e.code
+        e.code,
       ) > -1
     ) {
       e.preventDefault();
@@ -170,7 +170,7 @@ class HotkeyStore {
       // scroll to first element
       const scroll = isMobile()
         ? document.querySelector(
-            "#customScrollBar > .scroll-wrapper > .scroller"
+            "#customScrollBar > .scroll-wrapper > .scroller",
           )
         : document.getElementsByClassName("section-scroll")[0];
 
@@ -193,7 +193,7 @@ class HotkeyStore {
       this.filesStore;
 
     const index = selection.findIndex(
-      (f) => f.id === hotkeyCaret?.id && f.isFolder === hotkeyCaret?.isFolder
+      (f) => f.id === hotkeyCaret?.id && f.isFolder === hotkeyCaret?.isFolder,
     );
     if (index !== -1) {
       const newSelection = selection;
@@ -288,7 +288,7 @@ class HotkeyStore {
         const startIndex = filesList.findIndex(
           (f) =>
             f.id === hotkeyCaretStart.id &&
-            f.isFolder === hotkeyCaretStart.isFolder
+            f.isFolder === hotkeyCaretStart.isFolder,
         );
 
         if (startIndex > this.caretIndex) {
@@ -331,13 +331,13 @@ class HotkeyStore {
       if (
         selection.findIndex(
           (f) =>
-            f.id === this.prevFile.id && f.isFolder === this.prevFile.isFolder
+            f.id === this.prevFile.id && f.isFolder === this.prevFile.isFolder,
         ) !== -1
       ) {
         const startIndex = filesList.findIndex(
           (f) =>
             f.id === hotkeyCaretStart.id &&
-            f.isFolder === hotkeyCaretStart.isFolder
+            f.isFolder === hotkeyCaretStart.isFolder,
         );
 
         if (startIndex < this.caretIndex) {
@@ -370,7 +370,7 @@ class HotkeyStore {
     const hotkeyCaretStartIndex = filesList.findIndex(
       (f) =>
         f.id === hotkeyCaretStart?.id &&
-        f.isFolder === hotkeyCaretStart?.isFolder
+        f.isFolder === hotkeyCaretStart?.isFolder,
     );
 
     const nextCaretIndex = this.caretIndex + 1;
@@ -384,13 +384,13 @@ class HotkeyStore {
             nextForTileRight.findIndex(
               (f) =>
                 f.id === filesList[iNext].id &&
-                f.isFolder === filesList[iNext].isFolder
+                f.isFolder === filesList[iNext].isFolder,
             ) !== -1
           ) {
             nextForTileRight.filter(
               (f) =>
                 f.id === filesList[iNext].id &&
-                f.isFolder === filesList[iNext].isFolder
+                f.isFolder === filesList[iNext].isFolder,
             );
           } else {
             nextForTileRight.push(filesList[iNext]);
@@ -402,7 +402,7 @@ class HotkeyStore {
 
     if (this.caretIndex < hotkeyCaretStartIndex) {
       const idx = nextForTileRight.findIndex(
-        (f) => f.id === hotkeyCaret.id && f.isFolder === hotkeyCaret.isFolder
+        (f) => f.id === hotkeyCaret.id && f.isFolder === hotkeyCaret.isFolder,
       );
       nextForTileRight = nextForTileRight.filter((_, index) => index !== idx);
     }
@@ -431,7 +431,7 @@ class HotkeyStore {
     const hotkeyCaretStartIndex = filesList.findIndex(
       (f) =>
         f.id === hotkeyCaretStart?.id &&
-        f.isFolder === hotkeyCaretStart?.isFolder
+        f.isFolder === hotkeyCaretStart?.isFolder,
     );
 
     const prevCaretIndex = this.caretIndex - 1;
@@ -445,13 +445,13 @@ class HotkeyStore {
             prevForTileLeft.findIndex(
               (f) =>
                 f.id === filesList[iPrev].id &&
-                f.isFolder === filesList[iPrev].isFolder
+                f.isFolder === filesList[iPrev].isFolder,
             ) !== -1
           ) {
             prevForTileLeft.filter(
               (f) =>
                 f.id === filesList[iPrev].id &&
-                f.isFolder === filesList[iPrev].isFolder
+                f.isFolder === filesList[iPrev].isFolder,
             );
           } else {
             prevForTileLeft.push(filesList[iPrev]);
@@ -463,7 +463,7 @@ class HotkeyStore {
 
     if (this.caretIndex > hotkeyCaretStartIndex) {
       const idx = prevForTileLeft.findIndex(
-        (f) => f.id === hotkeyCaret.id && f.isFolder === hotkeyCaret.isFolder
+        (f) => f.id === hotkeyCaret.id && f.isFolder === hotkeyCaret.isFolder,
       );
       prevForTileLeft = prevForTileLeft.filter((_, index) => index !== idx);
     }
@@ -526,8 +526,8 @@ class HotkeyStore {
       combineUrl(
         window.DocSpaceConfig?.proxy?.url,
         config.homepage,
-        `${url}?${filterParamsStr}`
-      )
+        `${url}?${filterParamsStr}`,
+      ),
     );
   };
 
@@ -544,7 +544,7 @@ class HotkeyStore {
             encryptedFile.encrypted = encrypted;
             this.goToHomePage(navigate);
             this.uploadDataStore.startUpload([encryptedFile], null, t);
-          }
+          },
         );
       } else {
         const fileInput = document.getElementById("customFileInput");
@@ -595,7 +595,7 @@ class HotkeyStore {
         const fileInAction = activeFiles.includes(item.id);
         !fileInAction && fileIds.push(item.id);
       } else if (item.id === selectedItemId) {
-        toastr.error(t("MoveToFolderMessage"));
+        toastr.error(t("Common:MoveToFolderMessage"));
       } else {
         const folderInAction = activeFolders.includes(item.id);
 
@@ -612,7 +612,7 @@ class HotkeyStore {
         isCopy,
         translations: {
           copy: t("Common:CopyOperation"),
-          move: t("Translations:MoveToOperation"),
+          move: t("Common:MoveToOperation"),
         },
       };
 
@@ -708,7 +708,7 @@ class HotkeyStore {
         : null;
 
     const caretIndex = filesList.findIndex(
-      (f) => f.id === item?.id && f.isFolder === item?.isFolder
+      (f) => f.id === item?.id && f.isFolder === item?.isFolder,
     );
 
     if (caretIndex !== -1) return caretIndex;
@@ -804,17 +804,17 @@ class HotkeyStore {
     const hotkeyCaretStartIndex = filesList.findIndex(
       (f) =>
         f.id === hotkeyCaretStart?.id &&
-        f.isFolder === hotkeyCaretStart?.isFolder
+        f.isFolder === hotkeyCaretStart?.isFolder,
     );
 
     const firstSelectionIndex = filesList.findIndex(
-      (f) => f.id === selection[0]?.id && f.isFolder === selection[0]?.isFolder
+      (f) => f.id === selection[0]?.id && f.isFolder === selection[0]?.isFolder,
     );
 
     const nextForTileDownIndex = filesList.findIndex(
       (f) =>
         f.id === this.nextForTileDown?.id &&
-        f.isFolder === this.nextForTileDown?.isFolder
+        f.isFolder === this.nextForTileDown?.isFolder,
     );
 
     let nextForTileDownItemIndex = nextForTileDownIndex;
@@ -836,7 +836,7 @@ class HotkeyStore {
         const fileIndex = selectionsDown.findIndex(
           (f) =>
             f.id === filesList[itemIndex].id &&
-            f.isFolder === filesList[itemIndex].isFolder
+            f.isFolder === filesList[itemIndex].isFolder,
         );
 
         if (fileIndex === -1) {
@@ -844,7 +844,7 @@ class HotkeyStore {
         } else {
           if (hotkeyCaretStartIndex > itemIndex) {
             selectionsDown = selectionsDown.filter(
-              (_, index) => index !== fileIndex
+              (_, index) => index !== fileIndex,
             );
           }
         }
@@ -856,7 +856,7 @@ class HotkeyStore {
         selectionsDown.findIndex(
           (f) =>
             f.id === this.nextForTileDown.id &&
-            f.isFolder === this.nextForTileDown.isFolder
+            f.isFolder === this.nextForTileDown.isFolder,
         ) === -1
       ) {
         selectionsDown.push(this.nextForTileDown);
@@ -874,17 +874,17 @@ class HotkeyStore {
     const hotkeyCaretStartIndex = filesList.findIndex(
       (f) =>
         f.id === hotkeyCaretStart?.id &&
-        f.isFolder === hotkeyCaretStart?.isFolder
+        f.isFolder === hotkeyCaretStart?.isFolder,
     );
 
     const firstSelectionIndex = filesList.findIndex(
-      (f) => f.id === selection[0]?.id && f.isFolder === selection[0]?.isFolder
+      (f) => f.id === selection[0]?.id && f.isFolder === selection[0]?.isFolder,
     );
 
     const prevForTileUpIndex = filesList.findIndex(
       (f) =>
         f.id === this.prevForTileUp?.id &&
-        f.isFolder === this.prevForTileUp?.isFolder
+        f.isFolder === this.prevForTileUp?.isFolder,
     );
     let prevForTileUpItemIndex = prevForTileUpIndex;
 
@@ -905,7 +905,7 @@ class HotkeyStore {
         const fileIndex = selectionsUp.findIndex(
           (f) =>
             f.id === filesList[itemIndex].id &&
-            f.isFolder === filesList[itemIndex].isFolder
+            f.isFolder === filesList[itemIndex].isFolder,
         );
 
         if (fileIndex === -1) {
@@ -913,7 +913,7 @@ class HotkeyStore {
         } else {
           if (hotkeyCaretStartIndex < itemIndex) {
             selectionsUp = selectionsUp.filter(
-              (_, index) => index !== fileIndex
+              (_, index) => index !== fileIndex,
             );
           }
         }
@@ -925,7 +925,7 @@ class HotkeyStore {
         selectionsUp.findIndex(
           (f) =>
             f.id === this.prevForTileUp.id &&
-            f.isFolder === this.prevForTileUp.isFolder
+            f.isFolder === this.prevForTileUp.isFolder,
         ) === -1
       ) {
         selectionsUp.push(this.prevForTileUp);

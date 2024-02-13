@@ -41,7 +41,7 @@ const DropDownItem = (props: DropDownItemProps) => {
     additionalElement,
   } = props;
 
-  const { t } = useTranslation(["Settings"]);
+  const { t } = useTranslation(["Common"]);
 
   const { withToggle, checked, onClick, onClickSelectedItem, label, ...rest } =
     props;
@@ -141,7 +141,7 @@ const DropDownItem = (props: DropDownItemProps) => {
             isHovered={false}
             borderRadius="50px"
             backgroundColor="#533ED1"
-            label={t("Settings:BetaLabel")}
+            label={t("Common:BetaLabel")}
           />
         </WrapperBadge>
       )}

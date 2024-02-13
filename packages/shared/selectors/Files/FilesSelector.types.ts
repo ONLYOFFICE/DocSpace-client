@@ -14,12 +14,14 @@ export interface UseRootHelperProps {
   setIsNextPageLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setHasNextPage: React.Dispatch<React.SetStateAction<boolean>>;
 
+  setIsInit: (value: boolean) => void;
   treeFolders?: TFolder[];
   isUserOnly?: boolean;
 }
 
 export interface UseLoadersHelperProps {
-  items: TSelectorItem[] | null;
+  items: TSelectorItem[];
+  isInit: boolean;
 }
 
 export type UseSocketHelperProps = {
@@ -28,7 +30,7 @@ export type UseSocketHelperProps = {
   setItems: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
   setBreadCrumbs: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
   setTotal: React.Dispatch<React.SetStateAction<number>>;
-  disabledItems: string[] | number[];
+  disabledItems: (string | number)[];
   filterParam?: string;
   getIcon: (fileExst: string) => string;
 };
@@ -47,6 +49,8 @@ export type UseRoomsHelperProps = {
   onSetBaseFolderPath?: (
     value: number | string | undefined | TBreadCrumb[],
   ) => void;
+  isInit: boolean;
+  setIsInit: (value: boolean) => void;
 };
 
 export type UseFilesHelpersProps = {
@@ -61,6 +65,7 @@ export type UseFilesHelpersProps = {
   isFirstLoad: boolean;
   selectedItemId: string | number | undefined;
   setIsRoot: (value: boolean) => void;
+  setIsInit: (value: boolean) => void;
   searchValue?: string;
   disabledItems: string[] | number[];
   setSelectedItemSecurity: (value: TFileSecurity | TFolderSecurity) => void;
@@ -81,6 +86,7 @@ export type UseFilesHelpersProps = {
   ) => Promise<void>;
   getIcon: (fileExst: string) => string;
   getFilesArchiveError: (name: string) => string;
+  isInit: boolean;
 };
 
 export type TSelectedFileInfo = {
@@ -96,6 +102,10 @@ export interface FilesSelectorProps {
   socketSubscribers: Set<string>;
   disabledItems: string[] | number[];
   filterParam?: string;
+  withoutBackButton: boolean;
+  withBreadCrumbs: boolean;
+  withSearch: boolean;
+  cancelButtonLabel: string;
   getIcon?: (size: number, fileExst: string) => string;
   treeFolders?: TFolder[];
   onSetBaseFolderPath?: (
@@ -109,9 +119,8 @@ export interface FilesSelectorProps {
   currentFolderId: number | string;
   parentId?: number | string;
   rootFolderType: FolderType;
-
-  onClose: () => void;
-  onAccept: (
+  onCancel: () => void;
+  onSubmit: (
     selectedItemId: string | number | undefined,
     folderTitle: string,
     isPublic: boolean,
@@ -121,7 +130,6 @@ export interface FilesSelectorProps {
     selectedTreeNode: TFolder,
     selectedFileInfo: TSelectedFileInfo,
   ) => void;
-
   getIsDisabled: (
     isFirstLoad: boolean,
     isSelectedParentFolder: boolean,
@@ -138,22 +146,15 @@ export interface FilesSelectorProps {
   setIsDataReady?: (value: boolean) => void;
   withHeader: boolean;
   headerLabel: string;
-  searchPlaceholder: string;
-  acceptButtonLabel: string;
+  submitButtonLabel: string;
   withCancelButton: boolean;
-  cancelButtonLabel: string;
-  onCloseAction: () => void;
-  emptyScreenHeader: string;
-  emptyScreenDescription: string;
-  searchEmptyScreenHeader: string;
-  searchEmptyScreenDescription: string;
   withFooterInput: boolean;
   withFooterCheckbox: boolean;
   footerInputHeader: string;
   currentFooterInputValue: string;
   footerCheckboxLabel: string;
   descriptionText: string;
-  acceptButtonId?: string;
+  submitButtonId?: string;
   cancelButtonId?: string;
   embedded?: boolean;
   isPanelVisible: boolean;

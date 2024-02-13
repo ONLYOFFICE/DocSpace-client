@@ -1,10 +1,10 @@
-import { TTranslation } from "@docspace/shared/types";
-import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import {
   TFileSecurity,
   TFolderSecurity,
 } from "@docspace/shared/api/files/types";
 import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
+import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
+import { TTranslation } from "@docspace/shared/types";
 
 export const getHeaderLabel = (
   t: TTranslation,
@@ -25,7 +25,7 @@ export const getHeaderLabel = (
   }
 
   if (filterParam === FilesSelectorFilterTypes.DOCX)
-    return t("Translations:CreateMasterFormFromFile");
+    return t("Common:CreateMasterFormFromFile");
   if (filterParam) return t("Common:SelectFile");
 
   return t("Common:SaveButton");
@@ -42,8 +42,8 @@ export const getAcceptButtonLabel = (
   isRestore?: boolean,
 ) => {
   if (isRestore) return t("Common:RestoreHere");
-  if (isMove) return t("Translations:MoveHere");
-  if (isCopy && !isEditorDialog) return t("Translations:CopyHere");
+  if (isMove) return t("Common:MoveHere");
+  if (isCopy && !isEditorDialog) return t("Common:CopyHere");
   if (isRestoreAll) return t("Common:RestoreHere");
   if (isSelect) return t("Common:SelectAction");
 
@@ -78,11 +78,14 @@ export const getIsDisabled = (
   if (isRooms) return true;
   if (isRoot) return true;
   if (isSelectedParentFolder) return true;
-
-  if (!security) return false;
-  if (isCopy) return "CopyTo" in security ? !security?.CopyTo : !security.Copy;
+  if (isCopy)
+    return security && "CopyTo" in security
+      ? !security?.CopyTo
+      : !security?.Copy;
   if (isMove || isRestoreAll || isRestore)
-    return "MoveTo" in security ? !security?.MoveTo : !security.Move;
+    return security && "MoveTo" in security
+      ? !security?.MoveTo
+      : !security?.Move;
 
   return false;
 };

@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { CircleSkeleton } from "@docspace/shared/skeletons";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "../../components/text";
+import { TTranslation } from "../../types";
+import { RectangleSkeleton, CircleSkeleton } from "../index";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -41,7 +41,7 @@ const StyledRow = styled.div`
   }
 `;
 
-export const RowLoader = () => {
+export const RowSkeleton = () => {
   return (
     <StyledRow>
       <CircleSkeleton x="16" y="16" radius="16" width="32" height="32" />
@@ -57,19 +57,23 @@ export const RowLoader = () => {
   );
 };
 
-const ShareLoader = ({ t }) => {
+interface ShareSkeletonProps {
+  t: TTranslation;
+}
+
+const ShareSkeleton = ({ t }: ShareSkeletonProps) => {
   return (
     <StyledWrapper>
       <Text fontSize="14px" fontWeight={600} className="title-link">
         {t("GeneralAccessLink")}
       </Text>
-      <RowLoader />
+      <RowSkeleton />
       <div className="title">
         <RectangleSkeleton width="154px" height="16px" />
       </div>
-      <RowLoader />
+      <RowSkeleton />
     </StyledWrapper>
   );
 };
 
-export default ShareLoader;
+export default ShareSkeleton;

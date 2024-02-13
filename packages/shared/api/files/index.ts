@@ -1,6 +1,10 @@
 import axios, { AxiosRequestConfig } from "axios";
 
-import { ConflictResolveType, FolderType } from "../../enums";
+import {
+  ConflictResolveType,
+  FolderType,
+  ShareAccessRights,
+} from "../../enums";
 import {
   checkFilterInstance,
   decodeDisplayName,
@@ -31,6 +35,7 @@ import {
   TTirdParties,
   TUploadOperation,
 } from "./types";
+import moment from "moment";
 
 export async function openEdit(
   fileId: number,
@@ -1266,7 +1271,7 @@ export async function getFileLink(fileId: number) {
 }
 
 export async function getExternalLinks(
-  fileId: number,
+  fileId: number | string,
   startIndex = 0,
   count = 50,
 ) {
@@ -1275,7 +1280,7 @@ export async function getExternalLinks(
   const res = (await request({
     method: "get",
     url: `files/file/${fileId}/links${linkParams}`,
-  })) as TFileLink[];
+  })) as { items: TFileLink[] };
 
   return res;
 }
@@ -1290,12 +1295,12 @@ export async function getPrimaryLink(fileId: number) {
 }
 
 export async function editExternalLink(
-  fileId: number,
-  linkId: number,
+  fileId: number | string,
+  linkId: number | string,
   access: number,
   primary: boolean,
   internal: boolean,
-  expirationDate: string,
+  expirationDate: moment.Moment,
 ) {
   const res = (await request({
     method: "put",
@@ -1307,8 +1312,8 @@ export async function editExternalLink(
 }
 
 export async function addExternalLink(
-  fileId: number,
-  access: number,
+  fileId: number | string,
+  access: ShareAccessRights,
   primary: boolean,
   internal: boolean,
 ) {

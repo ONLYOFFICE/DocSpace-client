@@ -1,8 +1,10 @@
 import styled, { css } from "styled-components";
 import moment from "moment";
 
-import { Calendar } from "@docspace/shared/components/calendar";
-import { isMobile } from "@docspace/shared/utils/device";
+import { isMobile } from "../../../utils/device";
+
+import { Calendar } from "../../calendar";
+import { ShareCalendarProps } from "../Share.types";
 
 const StyledCalendar = styled(Calendar)`
   position: absolute;
@@ -17,7 +19,12 @@ const StyledCalendar = styled(Calendar)`
     `}
 `;
 
-const ShareCalendar = ({ onDateSet, closeCalendar, calendarRef, locale }) => {
+const ShareCalendar = ({
+  onDateSet,
+  closeCalendar,
+  calendarRef,
+  locale,
+}: ShareCalendarProps) => {
   const selectedDate = moment();
   const maxDate = moment().add(10, "years");
 

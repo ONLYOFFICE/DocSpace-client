@@ -5,9 +5,13 @@ import AccessCommentReactSvgUrl from "PUBLIC_DIR/images/access.comment.react.svg
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 import EyeOffReactSvgUrl from "PUBLIC_DIR/images/eye.off.react.svg?url";
 import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
-import { ShareAccessRights } from "@docspace/shared/enums";
 
-export const getShareOptions = (t) => {
+import { ShareAccessRights } from "../../enums";
+import { TTranslation } from "../../types";
+import { TAvailableExternalRights } from "../../api/files/types";
+import { TOption } from "../combobox";
+
+export const getShareOptions = (t: TTranslation) => {
   return [
     {
       internal: false,
@@ -17,12 +21,15 @@ export const getShareOptions = (t) => {
     {
       internal: true,
       key: "users",
-      label: t("DoсSpaceUsersOnly"),
+      label: t("DocSpaceUsersOnly"),
     },
   ];
 };
 
-export const getAccessOptions = (t, available) => {
+export const getAccessOptions = (
+  t: TTranslation,
+  available: TAvailableExternalRights,
+) => {
   const accessOptions = [
     available.Editing && {
       access: ShareAccessRights.Editing,
@@ -72,16 +79,22 @@ export const getAccessOptions = (t, available) => {
     },
   ];
 
-  return accessOptions.filter((item) => item.key);
+  const items: TOption[] = [];
+
+  accessOptions.forEach((item) => {
+    if (item) return items.push(item as TOption);
+  });
+
+  return items;
 };
 
 export const getExpiredOptions = (
-  t,
-  setTwelveHours,
-  setOneDay,
-  setSevenDays,
-  setUnlimited,
-  onCalendarOpen
+  t: TTranslation,
+  setTwelveHours: VoidFunction,
+  setOneDay: VoidFunction,
+  setSevenDays: VoidFunction,
+  setUnlimited: VoidFunction,
+  onCalendarOpen: VoidFunction,
 ) => {
   return [
     {

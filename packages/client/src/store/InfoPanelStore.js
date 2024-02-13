@@ -184,7 +184,7 @@ class InfoPanelStore {
       newInfoPanelSelection = this.normalizeSelection(selectedFolder);
     } else if (selectedItems.length === 1) {
       newInfoPanelSelection = this.normalizeSelection(
-        this.getViewItem() ?? newInfoPanelSelection
+        this.getViewItem() ?? newInfoPanelSelection,
       );
     } else {
       newInfoPanelSelection = [...Array(selectedItems.length).keys()];
@@ -238,7 +238,7 @@ class InfoPanelStore {
     const newInfoPanelSelection = await getRoomInfo(currentFolderRoomId);
 
     const roomIndex = this.selectedFolderStore.navigationPath.findIndex(
-      (f) => f.id === currentFolderRoomId
+      (f) => f.id === currentFolderRoomId,
     );
     if (roomIndex > -1) {
       this.selectedFolderStore.navigationPath[roomIndex].title =
@@ -268,7 +268,7 @@ class InfoPanelStore {
               null,
               null,
               item.roomType,
-              true
+              true,
             )
           ? item.logo?.medium
           : item.icon
@@ -278,7 +278,7 @@ class InfoPanelStore {
                 null,
                 null,
                 null,
-                item.roomType
+                item.roomType,
               )
       : item.isFolder && item.folderType
         ? this.filesSettingsStore.getIconByFolderType(item.folderType, size)
@@ -330,7 +330,7 @@ class InfoPanelStore {
       false,
       fetchedUser.isOwner,
       fetchedUser.statusType,
-      fetchedUser.status
+      fetchedUser.status,
     );
 
     return fetchedUser;
@@ -423,7 +423,7 @@ class InfoPanelStore {
   addMembersTitle = (t, administrators, users, expectedMembers) => {
     let hasPrevAdminsTitle = this.getHasPrevTitle(
       administrators,
-      "administration"
+      "administration",
     );
 
     if (administrators.length && !hasPrevAdminsTitle) {
@@ -442,7 +442,7 @@ class InfoPanelStore {
 
     let hasPrevExpectedTitle = this.getHasPrevTitle(
       expectedMembers,
-      "expected"
+      "expected",
     );
 
     if (expectedMembers.length && !hasPrevExpectedTitle) {
@@ -512,7 +512,7 @@ class InfoPanelStore {
     const { administrators, users, expectedMembers } = this.convertMembers(
       t,
       data,
-      clearFilter
+      clearFilter,
     );
 
     return {
@@ -562,18 +562,17 @@ class InfoPanelStore {
     access,
     primary,
     internal,
-    expirationDate
+    expirationDate,
   ) => {
     const { getFileInfo } = this.filesStore;
 
-    const expDate = moment(expirationDate);
     const res = await editExternalLink(
       fileId,
       linkId,
       access,
       primary,
       internal,
-      expDate
+      expirationDate,
     );
     await getFileInfo(fileId);
     return res;

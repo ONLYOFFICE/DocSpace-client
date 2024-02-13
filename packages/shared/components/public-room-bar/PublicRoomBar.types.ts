@@ -4,7 +4,7 @@ export interface PublicRoomBarProps {
   headerText: string;
   bodyText: string;
   iconName?: string;
-  onClose: () => void;
+  onClose?: () => void;
   className?: string;
   style?: React.CSSProperties;
 }

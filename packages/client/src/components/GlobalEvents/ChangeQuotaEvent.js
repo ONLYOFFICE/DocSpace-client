@@ -103,33 +103,38 @@ const ChangeQuotaEvent = (props) => {
   );
 };
 
-export default inject(({ peopleStore, filesStore, auth }, { type }) => {
-  const { usersStore } = peopleStore;
-  const { setCustomUserQuota, getPeopleListItem, needResetUserSelection } =
-    usersStore;
-  const { updateRoomQuota, needResetFilesSelection } = filesStore;
-  const { currentQuotaStore, infoPanelStore } = auth;
-  const { defaultUsersQuota, defaultRoomsQuota } = currentQuotaStore;
-  const {
-    selection: infoPanelSelection,
-    setNewInfoPanelSelection,
-    setInfoPanelSelection,
-  } = infoPanelStore;
+export default inject(
+  (
+    { peopleStore, filesStore, auth, currentQuotaStore, infoPanelStore },
+    { type }
+  ) => {
+    const { usersStore } = peopleStore;
+    const { setCustomUserQuota, getPeopleListItem, needResetUserSelection } =
+      usersStore;
+    const { updateRoomQuota, needResetFilesSelection } = filesStore;
 
-  const initialSize = type === "user" ? defaultUsersQuota : defaultRoomsQuota;
+    const { defaultUsersQuota, defaultRoomsQuota } = currentQuotaStore;
+    const {
+      selection: infoPanelSelection,
+      setNewInfoPanelSelection,
+      setInfoPanelSelection,
+    } = infoPanelStore;
 
-  const inRoom = infoPanelSelection?.inRoom;
-  const needResetSelection =
-    type === "user" ? needResetUserSelection : needResetFilesSelection;
+    const initialSize = type === "user" ? defaultUsersQuota : defaultRoomsQuota;
 
-  return {
-    initialSize,
-    setCustomUserQuota,
-    updateRoomQuota,
-    inRoom,
-    setNewInfoPanelSelection,
-    getPeopleListItem,
-    needResetSelection,
-    setInfoPanelSelection,
-  };
-})(observer(ChangeQuotaEvent));
+    const inRoom = infoPanelSelection?.inRoom;
+    const needResetSelection =
+      type === "user" ? needResetUserSelection : needResetFilesSelection;
+
+    return {
+      initialSize,
+      setCustomUserQuota,
+      updateRoomQuota,
+      inRoom,
+      setNewInfoPanelSelection,
+      getPeopleListItem,
+      needResetSelection,
+      setInfoPanelSelection,
+    };
+  }
+)(observer(ChangeQuotaEvent));

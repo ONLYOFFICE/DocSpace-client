@@ -1,45 +1,24 @@
+/* eslint-disable jsx-a11y/tabindex-no-positive */
 import React, { useState } from "react";
-import styled from "styled-components";
-import { Button } from "@docspace/shared/components/button";
-import { EmailInput } from "@docspace/shared/components/email-input";
-import { Text } from "@docspace/shared/components/text";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Textarea } from "@docspace/shared/components/textarea";
-import { FieldContainer } from "@docspace/shared/components/field-container";
-import { mobile, tablet } from "@docspace/shared/utils";
-import { sendRecoverRequest } from "@docspace/shared/api/settings";
-import { toastr } from "@docspace/shared/components/toast";
 import { useTranslation } from "react-i18next";
 
-interface IRecoverAccessModalDialogProps {
-  visible: boolean;
-  onClose: () => void;
-  textBody: string;
-  emailPlaceholderText: string;
-  id?: string;
-}
+import { Text } from "@docspace/shared/components/text";
+import { toastr } from "@docspace/shared/components/toast";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Textarea } from "@docspace/shared/components/textarea";
+import { EmailInput } from "@docspace/shared/components/email-input";
+import { InputSize, InputType } from "@docspace/shared/components/text-input";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 
-const ModalDialogContainer = styled(ModalDialog)`
-  .modal-dialog-aside-footer {
-    @media ${tablet} {
-      width: 90%;
-    }
-  }
+import { sendRecoverRequest } from "@docspace/shared/api/settings";
 
-  .recover-button-dialog {
-    @media ${mobile} {
-      width: 100%;
-    }
-  }
-
-  .text-body {
-    margin-bottom: 16px;
-  }
-
-  .textarea {
-    margin-bottom: 0;
-  }
-`;
+import { ModalDialogContainer } from "./RecoverAccessModalDialog.styled";
+import type { IRecoverAccessModalDialogProps } from "./RecoverAccessModalDialog.types";
 
 const RecoverAccessModalDialog: React.FC<IRecoverAccessModalDialogProps> = ({
   visible,
@@ -67,7 +46,7 @@ const RecoverAccessModalDialog: React.FC<IRecoverAccessModalDialogProps> = ({
     setDescription("");
     setDescErr(false);
     setIsShowError(false);
-    onClose && onClose();
+    onClose?.();
   };
 
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,16 +55,18 @@ const RecoverAccessModalDialog: React.FC<IRecoverAccessModalDialogProps> = ({
     setIsShowError(false);
   };
 
-  const onValidateEmail = (res) => {
+  const onValidateEmail = (res: TValidate) => {
     setEmailErr(!res.isValid);
-    setEmailErrorMessage(res.errors[0]);
+    setEmailErrorMessage(res.errors?.[0] ?? "");
+
+    return undefined;
   };
 
   const onBlurEmail = () => {
     setIsShowError(true);
   };
 
-  const onChangeDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeDescription = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setDescription(e.currentTarget.value);
     setDescErr(false);
   };
@@ -101,11 +82,11 @@ const RecoverAccessModalDialog: React.FC<IRecoverAccessModalDialogProps> = ({
 
     setLoading(true);
     sendRecoverRequest(email, description)
-      .then((res: string) => {
+      ?.then((res) => {
         setLoading(false);
-        toastr.success(res);
+        if (typeof res === "string") toastr.success(res);
       })
-      .catch((error) => {
+      ?.catch((error) => {
         setLoading(false);
         toastr.error(error);
       })
@@ -114,13 +95,14 @@ const RecoverAccessModalDialog: React.FC<IRecoverAccessModalDialogProps> = ({
 
   return (
     <ModalDialogContainer
+      id={id}
+      isLarge
       visible={visible}
       onClose={onRecoverModalClose}
-      isLarge
-      id={id}
+      displayType={ModalDialogType.modal}
     >
       <ModalDialog.Header>
-        <Text isBold={true} fontSize="21px">
+        <Text isBold fontSize="21px">
           {t("Common:RecoverTitle")}
         </Text>
       </ModalDialog.Header>
@@ -135,8 +117,8 @@ const RecoverAccessModalDialog: React.FC<IRecoverAccessModalDialogProps> = ({
           {textBody}
         </Text>
         <FieldContainer
+          isVertical
           key="e-mail"
-          isVertical={true}
           labelVisible={false}
           hasError={isShowError && emailErr}
           errorMessage={
@@ -146,67 +128,67 @@ const RecoverAccessModalDialog: React.FC<IRecoverAccessModalDialogProps> = ({
           }
         >
           <EmailInput
+            scale
+            tabIndex={1}
+            name="e-mail"
+            value={email}
+            isAutoFocussed
+            isDisabled={loading}
+            size={InputSize.base}
+            type={InputType.email}
+            autoComplete="username"
+            id="recover-access-modal_email"
             hasError={isShowError && emailErr}
             placeholder={emailPlaceholderText}
-            isAutoFocussed={true}
-            id="recover-access-modal_email"
-            name="e-mail"
-            type="email"
-            size="base"
-            scale={true}
-            tabIndex={1}
-            isDisabled={loading}
-            value={email}
+            onBlur={onBlurEmail}
             onChange={onChangeEmail}
             onValidateInput={onValidateEmail}
-            onBlur={onBlurEmail}
-            autoComplete="username"
           />
         </FieldContainer>
         <FieldContainer
-          className="textarea"
-          key="text-description"
-          isVertical={true}
+          isVertical
           hasError={descErr}
           labelVisible={false}
+          className="textarea"
+          key="text-description"
           errorMessage={t("Common:RequiredField")}
         >
           <Textarea
-            id="recover-access-modal_description"
-            heightScale={false}
-            hasError={descErr}
-            placeholder={t("Common:RecoverDescribeYourProblemPlaceholder")}
             tabIndex={2}
+            hasError={descErr}
+            heightScale={false}
             value={description}
-            onChange={onChangeDescription}
             isDisabled={loading}
             heightTextArea="70px"
+            id="recover-access-modal_description"
+            placeholder={t("Common:RecoverDescribeYourProblemPlaceholder")}
+            onChange={onChangeDescription}
           />
         </FieldContainer>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
+          primary
+          tabIndex={3}
+          isLoading={loading}
+          isDisabled={loading}
+          key="RecoverySendBtn"
+          size={ButtonSize.normal}
           id="recover-access-modal_send"
           className="recover-button-dialog"
-          key="RecoverySendBtn"
           label={loading ? t("Common:Sending") : t("Common:SendButton")}
-          size="normal"
-          primary={true}
           onClick={onSendRecoverRequest}
-          isLoading={loading}
-          isDisabled={loading}
-          tabIndex={3}
         />
         <Button
-          id="recover-access-modal_cancel"
-          className="recover-button-dialog"
-          key="SendBtn-recover-close"
-          label={t("Common:CancelButton")}
-          size="normal"
-          onClick={onRecoverModalClose}
+          tabIndex={4}
           isLoading={loading}
           isDisabled={loading}
-          tabIndex={4}
+          size={ButtonSize.normal}
+          key="SendBtn-recover-close"
+          id="recover-access-modal_cancel"
+          className="recover-button-dialog"
+          label={t("Common:CancelButton")}
+          onClick={onRecoverModalClose}
         />
       </ModalDialog.Footer>
     </ModalDialogContainer>

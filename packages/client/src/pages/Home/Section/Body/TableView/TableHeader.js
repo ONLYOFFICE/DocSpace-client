@@ -25,6 +25,7 @@ class FilesTableHeader extends React.Component {
       isPublicRoom,
       isFrame,
       frameTableColumns,
+      isRecentTab,
     } = this.props;
 
     const defaultColumns = [];
@@ -162,7 +163,7 @@ class FilesTableHeader extends React.Component {
         },
       ];
       defaultColumns.push(...columns);
-    } else {
+    } else if (isRecentTab) {
       const authorBlock = !isPublicRoom
         ? {
             key: "Author",
@@ -171,18 +172,6 @@ class FilesTableHeader extends React.Component {
             resizable: true,
             sortBy: SortByFieldName.Author,
             // onClick: this.onFilter,
-            onChange: this.onColumnChange,
-          }
-        : {};
-
-      const lastOpenedBlock = this.props.isRecentTab
-        ? {
-            key: "LastOpened",
-            title: t("DateLastOpened"),
-            enable: this.props.lastOpenedColumnIsEnabled,
-            resizable: true,
-            sortBy: SortByFieldName.LastOpened,
-            onClick: this.onFilter,
             onChange: this.onColumnChange,
           }
         : {};
@@ -208,7 +197,85 @@ class FilesTableHeader extends React.Component {
           // onClick: this.onFilter,
           onChange: this.onColumnChange,
         },
-        { ...lastOpenedBlock },
+        {
+          key: "LastOpened",
+          title: t("DateLastOpened"),
+          enable: this.props.lastOpenedColumnIsEnabled,
+          resizable: true,
+          sortBy: SortByFieldName.LastOpened,
+          onClick: this.onFilter,
+          onChange: this.onColumnChange,
+        },
+        {
+          key: "Modified",
+          title: t("ByLastModified"),
+          enable: this.props.modifiedColumnIsEnabled,
+          resizable: true,
+          sortBy: SortByFieldName.ModifiedDate,
+          onClick: this.onFilter,
+          onChange: this.onColumnChange,
+        },
+        {
+          key: "Size",
+          title: t("Common:Size"),
+          enable: this.props.sizeColumnIsEnabled,
+          resizable: true,
+          sortBy: SortByFieldName.Size,
+          onClick: this.onFilter,
+          onChange: this.onColumnChange,
+        },
+        {
+          key: "Type",
+          title: t("Common:Type"),
+          enable: this.props.typeColumnIsEnabled,
+          resizable: true,
+          sortBy: SortByFieldName.Type,
+          // onClick: this.onFilter,
+          onChange: this.onColumnChange,
+        },
+        {
+          key: "QuickButtons",
+          title: "",
+          enable: this.props.quickButtonsColumnIsEnabled,
+          defaultSize: 75,
+          resizable: false,
+        },
+      ];
+      defaultColumns.push(...columns);
+    } else {
+      const authorBlock = !isPublicRoom
+        ? {
+            key: "Author",
+            title: t("ByAuthor"),
+            enable: this.props.authorColumnIsEnabled,
+            resizable: true,
+            sortBy: SortByFieldName.Author,
+            // onClick: this.onFilter,
+            onChange: this.onColumnChange,
+          }
+        : {};
+
+      const columns = [
+        {
+          key: "Name",
+          title: t("Common:Name"),
+          resizable: true,
+          enable: this.props.nameColumnIsEnabled,
+          default: true,
+          sortBy: SortByFieldName.Name,
+          minWidth: 210,
+          onClick: this.onFilter,
+        },
+        { ...authorBlock },
+        {
+          key: "Created",
+          title: t("ByCreation"),
+          enable: this.props.createdColumnIsEnabled,
+          resizable: true,
+          sortBy: SortByFieldName.CreationDate,
+          // onClick: this.onFilter,
+          onChange: this.onColumnChange,
+        },
         {
           key: "Modified",
           title: t("ByLastModified"),

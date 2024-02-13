@@ -11,6 +11,9 @@ const FilterBlockLoader = ({
   style,
   isRooms,
   isAccounts,
+  isPeopleAccounts,
+  isGroupsAccounts,
+  isInsideGroup,
 
   ...rest
 }: FilterBlockProps) => {
@@ -66,8 +69,8 @@ const FilterBlockLoader = ({
         </StyledBlock>
       )}
 
-      {!isAccounts && (
-        <StyledBlock>
+      {!isInsideGroup && (
+        <StyledBlock isLast={isGroupsAccounts}>
           <RectangleSkeleton
             width="51"
             height="16"
@@ -76,7 +79,7 @@ const FilterBlockLoader = ({
           />
           <div className="row-loader">
             <RectangleSkeleton
-              width="51"
+              width={isPeopleAccounts ? "120" : "51"}
               height="28"
               borderRadius="16"
               className="loader-item"
@@ -88,7 +91,7 @@ const FilterBlockLoader = ({
               className="loader-item"
             />
           </div>
-          {isRooms && (
+          {(isRooms || isGroupsAccounts) && (
             <div className="row-loader">
               <RectangleSkeleton
                 width="16"
@@ -97,7 +100,7 @@ const FilterBlockLoader = ({
                 className="loader-item"
               />
               <RectangleSkeleton
-                width="137"
+                width={isGroupsAccounts ? "150" : "137"}
                 height="20"
                 borderRadius="3"
                 className="loader-item"
@@ -107,7 +110,7 @@ const FilterBlockLoader = ({
         </StyledBlock>
       )}
 
-      {(isRooms || isAccounts) && (
+      {(isRooms || isPeopleAccounts || isInsideGroup) && (
         <StyledBlock>
           <RectangleSkeleton
             width="50"
@@ -116,7 +119,7 @@ const FilterBlockLoader = ({
             className="loader-item"
           />
           <div className="row-loader">
-            {isAccounts ? (
+            {isPeopleAccounts || isInsideGroup ? (
               <>
                 <RectangleSkeleton
                   width="67"
@@ -144,7 +147,7 @@ const FilterBlockLoader = ({
         </StyledBlock>
       )}
 
-      {isAccounts && (
+      {(isPeopleAccounts || isInsideGroup) && (
         <StyledBlock>
           <RectangleSkeleton
             width="50"
@@ -181,128 +184,130 @@ const FilterBlockLoader = ({
         </StyledBlock>
       )}
 
-      <StyledBlock isLast>
-        <RectangleSkeleton
-          width="50"
-          height="16"
-          borderRadius="3"
-          className="loader-item"
-        />
-        <div className="row-loader">
-          {isAccounts ? (
-            <>
-              <RectangleSkeleton
-                width="57"
-                height="28"
-                borderRadius="16"
-                className="loader-item tag-item"
-              />
-              <RectangleSkeleton
-                width="57"
-                height="28"
-                borderRadius="16"
-                className="loader-item tag-item"
-              />
-            </>
-          ) : isRooms ? (
-            <>
-              <RectangleSkeleton
-                width="67"
-                height="28"
-                borderRadius="16"
-                className="loader-item tag-item"
-              />
-              <RectangleSkeleton
-                width="73"
-                height="28"
-                borderRadius="16"
-                className="loader-item tag-item"
-              />
-              <RectangleSkeleton
-                width="67"
-                height="28"
-                borderRadius="16"
-                className="loader-item tag-item"
-              />
-              <RectangleSkeleton
-                width="74"
-                height="28"
-                borderRadius="16"
-                className="loader-item tag-item"
-              />
-              <RectangleSkeleton
-                width="65"
-                height="28"
-                borderRadius="16"
-                className="loader-item tag-item"
-              />
-              <RectangleSkeleton
-                width="72"
-                height="28"
-                borderRadius="16"
-                className="loader-item tag-item"
-              />
-            </>
-          ) : (
-            <>
-              <RectangleSkeleton
-                width="73"
-                height="28"
-                borderRadius="16"
-                className="loader-item tag-item"
-              />
-              <RectangleSkeleton
-                width="99"
-                height="28"
-                borderRadius="16"
-                className="loader-item tag-item"
-              />
-              <RectangleSkeleton
-                width="114"
-                height="28"
-                borderRadius="16"
-                className="loader-item tag-item"
-              />
-              <RectangleSkeleton
-                width="112"
-                height="28"
-                borderRadius="16"
-                className="loader-item tag-item"
-              />
-              <RectangleSkeleton
-                width="130"
-                height="28"
-                borderRadius="16"
-                className="loader-item tag-item"
-              />
-              <RectangleSkeleton
-                width="66"
-                height="28"
-                borderRadius="16"
-                className="loader-item tag-item"
-              />
-              <RectangleSkeleton
-                width="81"
-                height="28"
-                borderRadius="16"
-                className="loader-item tag-item"
-              />
-              <RectangleSkeleton
-                width="74"
-                height="28"
-                borderRadius="16"
-                className="loader-item tag-item"
-              />
-              <RectangleSkeleton
-                width="68"
-                height="28"
-                borderRadius="16"
-                className="loader-item tag-item"
-              />
-            </>
-          )}
-        </div>
-      </StyledBlock>
+      {!isGroupsAccounts && (
+        <StyledBlock isLast>
+          <RectangleSkeleton
+            width="50"
+            height="16"
+            borderRadius="3"
+            className="loader-item"
+          />
+          <div className="row-loader">
+            {isAccounts ? (
+              <>
+                <RectangleSkeleton
+                  width="57"
+                  height="28"
+                  borderRadius="16"
+                  className="loader-item tag-item"
+                />
+                <RectangleSkeleton
+                  width="57"
+                  height="28"
+                  borderRadius="16"
+                  className="loader-item tag-item"
+                />
+              </>
+            ) : isRooms ? (
+              <>
+                <RectangleSkeleton
+                  width="67"
+                  height="28"
+                  borderRadius="16"
+                  className="loader-item tag-item"
+                />
+                <RectangleSkeleton
+                  width="73"
+                  height="28"
+                  borderRadius="16"
+                  className="loader-item tag-item"
+                />
+                <RectangleSkeleton
+                  width="67"
+                  height="28"
+                  borderRadius="16"
+                  className="loader-item tag-item"
+                />
+                <RectangleSkeleton
+                  width="74"
+                  height="28"
+                  borderRadius="16"
+                  className="loader-item tag-item"
+                />
+                <RectangleSkeleton
+                  width="65"
+                  height="28"
+                  borderRadius="16"
+                  className="loader-item tag-item"
+                />
+                <RectangleSkeleton
+                  width="72"
+                  height="28"
+                  borderRadius="16"
+                  className="loader-item tag-item"
+                />
+              </>
+            ) : (
+              <>
+                <RectangleSkeleton
+                  width="73"
+                  height="28"
+                  borderRadius="16"
+                  className="loader-item tag-item"
+                />
+                <RectangleSkeleton
+                  width="99"
+                  height="28"
+                  borderRadius="16"
+                  className="loader-item tag-item"
+                />
+                <RectangleSkeleton
+                  width="114"
+                  height="28"
+                  borderRadius="16"
+                  className="loader-item tag-item"
+                />
+                <RectangleSkeleton
+                  width="112"
+                  height="28"
+                  borderRadius="16"
+                  className="loader-item tag-item"
+                />
+                <RectangleSkeleton
+                  width="130"
+                  height="28"
+                  borderRadius="16"
+                  className="loader-item tag-item"
+                />
+                <RectangleSkeleton
+                  width="66"
+                  height="28"
+                  borderRadius="16"
+                  className="loader-item tag-item"
+                />
+                <RectangleSkeleton
+                  width="81"
+                  height="28"
+                  borderRadius="16"
+                  className="loader-item tag-item"
+                />
+                <RectangleSkeleton
+                  width="74"
+                  height="28"
+                  borderRadius="16"
+                  className="loader-item tag-item"
+                />
+                <RectangleSkeleton
+                  width="68"
+                  height="28"
+                  borderRadius="16"
+                  className="loader-item tag-item"
+                />
+              </>
+            )}
+          </div>
+        </StyledBlock>
+      )}
     </StyledContainer>
   );
 };

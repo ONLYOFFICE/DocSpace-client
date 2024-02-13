@@ -86,12 +86,16 @@ const FilterBlockItem = ({
 
   const getSelectorItem = (item: TSelectorItem) => {
     const isRoomsSelector = item.group === FilterGroups.filterRoom;
+    const isGroupsSelector = item.group === FilterGroups.filterGroup;
     const selectorType = isRoomsSelector
       ? FilterSelectorTypes.rooms
-      : FilterSelectorTypes.people;
+      : isGroupsSelector
+        ? FilterSelectorTypes.groups
+        : FilterSelectorTypes.people;
 
     return !item.isSelected ||
       item.selectedKey === "me" ||
+      item.selectedKey === FilterKeys.withoutGroup ||
       item.selectedKey === "other" ? (
       <StyledFilterBlockItemSelector
         style={
@@ -205,21 +209,26 @@ const FilterBlockItem = ({
 
   const getTagItem = (item: TTagItem) => {
     const isRoomsSelector = item.group === FilterGroups.filterRoom;
+    const isGroupsSelector = item.group === FilterGroups.filterGroup;
 
     const selectorType = isRoomsSelector
       ? FilterSelectorTypes.rooms
-      : FilterSelectorTypes.people;
+      : isGroupsSelector
+        ? FilterSelectorTypes.groups
+        : FilterSelectorTypes.people;
 
     if (
       item.group === FilterGroups.filterAuthor ||
-      item.group === FilterGroups.roomFilterSubject
+      item.group === FilterGroups.roomFilterSubject ||
+      item.group === FilterGroups.filterGroup ||
+      item.group === FilterGroups.groupsFilterMember
     ) {
-      const [meItem, otherItem, userItem] = groupItem;
+      const [notSelectorItem, otherItem, selectorItem] = groupItem;
 
       if (
         item.key === otherItem.key &&
-        userItem?.isSelected &&
-        !meItem?.isSelected
+        selectorItem?.isSelected &&
+        !notSelectorItem?.isSelected
       )
         return;
     }
@@ -231,7 +240,7 @@ const FilterBlockItem = ({
         name={`${item.label}-${item.key}`}
         id={item.id}
         onClick={
-          item.key === FilterKeys.other
+          item.key === FilterKeys.other || item.key === "filter_group-other"
             ? (event: React.MouseEvent) =>
                 showSelectorAction(event, selectorType, item.group, [])
             : () =>

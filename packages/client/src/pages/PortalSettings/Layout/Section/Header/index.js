@@ -295,8 +295,6 @@ const SectionHeaderContent = (props) => {
     </>
   );
 
-  console.log(header);
-
   const headerMenu = [
     {
       label: t("Common:Delete"),

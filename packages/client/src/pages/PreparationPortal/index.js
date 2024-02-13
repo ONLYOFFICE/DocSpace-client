@@ -145,6 +145,13 @@ const PreparationPortal = (props) => {
         returnToPortal();
       }
     } catch (error) {
+      const status = err?.response?.status;
+      const needCreationTableTime = status === 404;
+
+      if (needCreationTableTime) {
+        return;
+      }
+
       clearAllIntervals();
       setErrorMessage(error);
     }
@@ -249,7 +256,7 @@ const PreparationPortalWrapper = inject(({ backup }) => {
     multiplicationFactor,
   };
 })(
-  withTranslation(["PreparationPortal", "Common"])(observer(PreparationPortal))
+  withTranslation(["PreparationPortal", "Common"])(observer(PreparationPortal)),
 );
 
 PreparationPortal.propTypes = {

@@ -14,6 +14,7 @@ import withContent from "SRC_DIR/HOCs/withPeopleContent";
 
 import Badges from "../Badges";
 import { Base } from "@docspace/shared/themes";
+import { getUserTypeLabel } from "@docspace/shared/utils/common";
 
 const StyledWrapper = styled.div`
   display: contents;
@@ -229,6 +230,9 @@ const PeopleTableRow = (props) => {
     hideColumns,
     value,
     standalone,
+    typeAccountsColumnIsEnabled,
+    emailAccountsColumnIsEnabled,
+    infoPanelVisible,
   } = props;
 
   const {
@@ -308,7 +312,7 @@ const PeopleTableRow = (props) => {
         setIsLoading(false);
       }
     },
-    [item, changeUserType]
+    [item, changeUserType],
   );
 
   // const getRoomsOptions = React.useCallback(() => {
@@ -328,22 +332,7 @@ const PeopleTableRow = (props) => {
   //   return <>{options.map((option) => option)}</>;
   // }, []);
 
-  const getUserTypeLabel = React.useCallback((role) => {
-    switch (role) {
-      case "owner":
-        return t("Common:Owner");
-      case "admin":
-        return t("Common:DocSpaceAdmin");
-      case "manager":
-        return t("Common:RoomAdmin");
-      case "collaborator":
-        return t("Common:PowerUser");
-      case "user":
-        return t("Common:User");
-    }
-  }, []);
-
-  const typeLabel = getUserTypeLabel(role);
+  const typeLabel = React.useCallback(() => getUserTypeLabel(role, t), [])();
 
   const isChecked = checkedProps.checked;
 
@@ -466,10 +455,19 @@ const PeopleTableRow = (props) => {
                 ? displayName
                 : email}
           </Link>
-          <Badges statusType={statusType} isPaid={isPaidUser} isSSO={isSSO} />
+          <Badges
+            statusType={statusType}
+            isPaid={isPaidUser}
+            isSSO={isSSO}
+            infoPanelVisible={infoPanelVisible}
+          />
         </TableCell>
 
-        <TableCell className={"table-cell_type"}>{typeCell}</TableCell>
+        {typeAccountsColumnIsEnabled ? (
+          <TableCell className={"table-cell_type"}>{typeCell}</TableCell>
+        ) : (
+          <div />
+        )}
 
         {/* <TableCell className="table-cell_room">
           {!rooms?.length ? (
@@ -512,25 +510,29 @@ const PeopleTableRow = (props) => {
           )}
         </TableCell> */}
 
-        <TableCell>
-          <Link
-            type="page"
-            title={email}
-            fontSize="13px"
-            fontWeight={600}
-            color={sideInfoColor}
-            onClick={onEmailClick}
-            isTextOverflow
-            enableUserSelect
-          >
-            {email}
-          </Link>
-        </TableCell>
+        {emailAccountsColumnIsEnabled ? (
+          <TableCell>
+            <Link
+              type="page"
+              title={email}
+              fontSize="13px"
+              fontWeight={600}
+              color={sideInfoColor}
+              onClick={onEmailClick}
+              isTextOverflow
+              enableUserSelect
+            >
+              {email}
+            </Link>
+          </TableCell>
+        ) : (
+          <div />
+        )}
       </StyledPeopleRow>
     </StyledWrapper>
   );
 };
 
 export default withTranslation(["People", "Common", "Settings"])(
-  withContent(PeopleTableRow)
+  withContent(PeopleTableRow),
 );

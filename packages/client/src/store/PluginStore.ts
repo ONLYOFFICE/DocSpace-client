@@ -1,23 +1,47 @@
+/* eslint-disable no-console */
 import { makeAutoObservable, runInAction } from "mobx";
 import { cloneDeep } from "lodash";
 
 import api from "@docspace/shared/api";
-
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { UserStore } from "@docspace/shared/store/UserStore";
 import { toastr } from "@docspace/shared/components/toast";
 
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
 import {
+  IContextMenuItem,
+  IEventListenerItem,
+  IFileItem,
+  IInfoPanelItem,
+  IMainButtonItem,
+  IProfileMenuItem,
+  IframeWindow,
+  TPlugin,
+} from "SRC_DIR/helpers/plugins/types";
+import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
+import {
+  TFile,
+  TFileSecurity,
+  TFolderSecurity,
+} from "@docspace/shared/api/files/types";
+import { TAPIPlugin } from "@docspace/shared/api/plugins/types";
+import { ModalDialogProps } from "@docspace/shared/components/modal-dialog/ModalDialog.types";
+
+import { getPluginUrl, messageActions } from "../helpers/plugins/utils";
+import {
   PluginFileType,
   PluginScopes,
   PluginUsersType,
   PluginStatus,
-} from "SRC_DIR/helpers/plugins/constants";
-import { getPluginUrl, messageActions } from "SRC_DIR/helpers/plugins/utils";
+  PluginDevices,
+} from "../helpers/plugins/enums";
 
-let { api: apiConf, proxy: proxyConf } = defaultConfig;
-let { orign: apiOrigin, prefix: apiPrefix } = apiConf;
-let { url: proxyURL } = proxyConf;
+import SelectedFolderStore from "./SelectedFolderStore";
+
+const { api: apiConf, proxy: proxyConf } = defaultConfig;
+const { origin: apiOrigin, prefix: apiPrefix } = apiConf;
+const { url: proxyURL } = proxyConf;
 
 const origin =
   window.DocSpaceConfig?.api?.origin || apiOrigin || window.location.origin;
@@ -25,95 +49,101 @@ const proxy = window.DocSpaceConfig?.proxy?.url || proxyURL;
 const prefix = window.DocSpaceConfig?.api?.prefix || apiPrefix;
 
 class PluginStore {
-  settingsStore = null;
-  selectedFolderStore = null;
-  userStore = null;
+  private settingsStore: SettingsStore = {} as SettingsStore;
 
-  plugins = null;
+  private selectedFolderStore: SelectedFolderStore = {} as SelectedFolderStore;
 
-  contextMenuItems = null;
-  infoPanelItems = null;
-  mainButtonItems = null;
-  profileMenuItems = null;
-  eventListenerItems = null;
-  fileItems = null;
+  private userStore: UserStore = {} as UserStore;
 
-  pluginFrame = null;
+  plugins: TPlugin[] = [];
+
+  contextMenuItems: Map<string, IContextMenuItem> = new Map();
+
+  infoPanelItems: Map<string, IInfoPanelItem> = new Map();
+
+  mainButtonItems: Map<string, IMainButtonItem> = new Map();
+
+  profileMenuItems: Map<string, IProfileMenuItem> = new Map();
+
+  eventListenerItems: Map<string, IEventListenerItem> = new Map();
+
+  fileItems: Map<string, IFileItem> = new Map();
+
+  pluginFrame: HTMLIFrameElement | null = null;
 
   isInit = false;
 
   settingsPluginDialogVisible = false;
-  currentSettingsDialogPlugin = null;
+
+  currentSettingsDialogPlugin: null | { pluginName: string } = null;
 
   pluginDialogVisible = false;
-  pluginDialogProps = null;
+
+  pluginDialogProps: null | ModalDialogProps = null;
 
   deletePluginDialogVisible = false;
-  deletePluginDialogProps = null;
+
+  deletePluginDialogProps: null | { pluginName: string } = null;
 
   isLoading = true;
+
   isEmptyList = false;
 
-  constructor(settingsStore, selectedFolderStore, userStore) {
+  constructor(
+    settingsStore: SettingsStore,
+    selectedFolderStore: SelectedFolderStore,
+    userStore: UserStore,
+  ) {
     this.settingsStore = settingsStore;
     this.selectedFolderStore = selectedFolderStore;
     this.userStore = userStore;
 
-    this.plugins = [];
-
-    this.contextMenuItems = new Map();
-    this.infoPanelItems = new Map();
-    this.mainButtonItems = new Map();
-    this.profileMenuItems = new Map();
-    this.eventListenerItems = new Map();
-    this.fileItems = new Map();
-
     makeAutoObservable(this);
   }
 
-  setIsLoading = (value) => {
+  setIsLoading = (value: boolean) => {
     this.isLoading = value;
   };
 
-  setIsEmptyList = (value) => {
+  setIsEmptyList = (value: boolean) => {
     this.isEmptyList = value;
   };
 
-  setCurrentSettingsDialogPlugin = (value) => {
+  setCurrentSettingsDialogPlugin = (value: null | { pluginName: string }) => {
     this.currentSettingsDialogPlugin = value;
   };
 
-  setSettingsPluginDialogVisible = (value) => {
+  setSettingsPluginDialogVisible = (value: boolean) => {
     this.settingsPluginDialogVisible = value;
   };
 
-  setPluginDialogVisible = (value) => {
+  setPluginDialogVisible = (value: boolean) => {
     this.pluginDialogVisible = value;
   };
 
-  setPluginDialogProps = (value) => {
+  setPluginDialogProps = (value: null | ModalDialogProps) => {
     this.pluginDialogProps = value;
   };
 
-  setDeletePluginDialogVisible = (value) => {
+  setDeletePluginDialogVisible = (value: boolean) => {
     this.deletePluginDialogVisible = value;
   };
 
-  setDeletePluginDialogProps = (value) => {
+  setDeletePluginDialogProps = (value: null | { pluginName: string }) => {
     this.deletePluginDialogProps = value;
   };
 
-  updatePluginStatus = (name) => {
+  updatePluginStatus = (name: string) => {
     const plugin = this.plugins.find((p) => p.name === name);
 
-    const newStatus = plugin.getStatus();
+    const newStatus = plugin?.getStatus();
 
     const pluginIdx = this.plugins.findIndex((p) => p.name === name);
 
     if (pluginIdx !== -1) {
       if (this.plugins[pluginIdx].status === newStatus) return;
 
-      this.plugins[pluginIdx].status = newStatus;
+      this.plugins[pluginIdx].status = newStatus || PluginStatus.active;
 
       if (
         newStatus === PluginStatus.active &&
@@ -148,23 +178,25 @@ class PluginStore {
     }
   };
 
-  setPluginFrame = (frame) => {
+  setPluginFrame = (frame: HTMLIFrameElement) => {
     this.pluginFrame = frame;
 
-    this.pluginFrame.contentWindow.Plugins = {};
+    const iWindow = this.pluginFrame?.contentWindow as IframeWindow;
+
+    if (this.pluginFrame && iWindow) iWindow.Plugins = {};
   };
 
-  setIsInit = (isInit) => {
+  setIsInit = (isInit: boolean) => {
     this.isInit = isInit;
   };
 
   initPlugins = async () => {
     const frame = document.createElement("iframe");
     frame.id = "plugin-iframe";
-    frame.width = 0;
-    frame.height = 0;
+    frame.width = "0px";
+    frame.height = "0px";
     frame.style.display = "none";
-    frame.sandbox = "allow-same-origin allow-scripts";
+    // frame.sandbox = "allow-same-origin allow-scripts";
 
     document.body.appendChild(frame);
 
@@ -176,14 +208,17 @@ class PluginStore {
   };
 
   updatePlugins = async () => {
+    if (!this.userStore || !this.userStore.user) return;
+
     const { isAdmin, isOwner } = this.userStore.user;
+
     this.setIsLoading(true);
 
     try {
       this.plugins = [];
 
       const plugins = await api.plugins.getPlugins(
-        !isAdmin && !isOwner ? true : null
+        !isAdmin && !isOwner ? true : null,
       );
 
       this.setIsEmptyList(plugins.length === 0);
@@ -197,19 +232,19 @@ class PluginStore {
     }
   };
 
-  addPlugin = async (data) => {
+  addPlugin = async (data: FormData) => {
     try {
       const plugin = await api.plugins.addPlugin(data);
 
       this.initPlugin(plugin);
     } catch (e) {
-      console.log(e);
+      const err = e as { response: { data: { error: { message: string } } } };
 
-      toastr.error(e.response.data.error.message);
+      toastr.error(err.response.data.error.message as string);
     }
   };
 
-  uninstallPlugin = async (name) => {
+  uninstallPlugin = async (name: string) => {
     const pluginIdx = this.plugins.findIndex((p) => p.name === name);
 
     try {
@@ -229,44 +264,52 @@ class PluginStore {
     }
   };
 
-  initPlugin = (plugin, callback) => {
+  initPlugin = (plugin: TAPIPlugin, callback?: (plugin: TPlugin) => void) => {
     const onLoad = async () => {
+      const iWindow = this.pluginFrame?.contentWindow as IframeWindow;
+
       const newPlugin = cloneDeep({
         ...plugin,
-        ...this.pluginFrame.contentWindow.Plugins[plugin.pluginName],
+        ...iWindow?.Plugins?.[plugin.pluginName],
       });
 
-      newPlugin.createBy = newPlugin.createBy.displayName;
-      newPlugin.scopes = newPlugin.scopes.split(",");
+      newPlugin.scopes =
+        typeof newPlugin.scopes === "string"
+          ? newPlugin.scopes.split(",")
+          : newPlugin.scopes;
+
       newPlugin.iconUrl = getPluginUrl(newPlugin.url, "");
 
       this.installPlugin(newPlugin);
 
       if (newPlugin.scopes.includes(PluginScopes.Settings)) {
-        newPlugin.setAdminPluginSettingsValue(plugin.settings || null);
+        newPlugin.setAdminPluginSettingsValue?.(plugin.settings || null);
       }
 
-      callback && callback(newPlugin);
+      callback?.(newPlugin);
     };
 
     const onError = () => {};
 
-    const frameDoc = this.pluginFrame.contentDocument;
+    const frameDoc = this.pluginFrame?.contentDocument;
 
-    const script = frameDoc.createElement("script");
-    script.setAttribute("type", "text/javascript");
-    script.setAttribute("id", `${plugin.name}`);
+    const script = frameDoc?.createElement("script");
 
-    if (onLoad) script.onload = onLoad.bind(this);
-    if (onError) script.onerror = onError.bind(this);
+    if (script) {
+      script.setAttribute("type", "text/javascript");
+      script.setAttribute("id", `${plugin.name}`);
 
-    script.src = plugin.url;
-    script.async = true;
+      if (onLoad) script.onload = onLoad.bind(this);
+      if (onError) script.onerror = onError.bind(this);
 
-    frameDoc.body.appendChild(script);
+      script.src = plugin.url;
+      script.async = true;
+
+      frameDoc?.body.appendChild(script);
+    }
   };
 
-  installPlugin = async (plugin, addToList = true) => {
+  installPlugin = async (plugin: TPlugin, addToList = true) => {
     if (addToList) {
       const idx = this.plugins.findIndex((p) => p.name === plugin.name);
 
@@ -284,7 +327,7 @@ class PluginStore {
     if (!plugin || !plugin.enabled) return;
 
     if (plugin.scopes.includes(PluginScopes.API)) {
-      plugin.setAPI && plugin.setAPI(origin, proxy, prefix);
+      plugin.setAPI?.(origin, proxy, prefix);
     }
 
     const { name } = plugin;
@@ -322,21 +365,22 @@ class PluginStore {
     }
   };
 
-  updatePlugin = async (name, status, settings) => {
+  updatePlugin = async (name: string, status: boolean, settings: string) => {
     try {
       let currentSettings = settings;
       let currentStatus = status;
 
       const oldPlugin = this.pluginList.find((p) => p.name === name);
 
-      if (!currentSettings) currentSettings = oldPlugin.settings || "";
+      if (!currentSettings) currentSettings = oldPlugin?.settings || "";
 
-      if (typeof status !== "boolean") currentStatus = oldPlugin.enabled;
+      if (typeof status !== "boolean")
+        currentStatus = oldPlugin?.enabled || false;
 
       const plugin = await api.plugins.updatePlugin(
         name,
         currentStatus,
-        currentSettings
+        currentSettings,
       );
 
       if (typeof status !== "boolean") return plugin;
@@ -353,7 +397,7 @@ class PluginStore {
     }
   };
 
-  activatePlugin = async (name) => {
+  activatePlugin = async (name: string) => {
     const plugin = this.plugins.find((p) => p.name === name);
 
     if (!plugin) return;
@@ -363,7 +407,7 @@ class PluginStore {
     this.installPlugin(plugin, false);
   };
 
-  deactivatePlugin = async (name) => {
+  deactivatePlugin = async (name: string) => {
     const plugin = this.plugins.find((p) => p.name === name);
 
     if (!plugin) return;
@@ -416,23 +460,29 @@ class PluginStore {
   };
 
   getCurrentDevice = () => {
-    const { currentDeviceType } = this.settingsStore;
+    const currentDeviceType = this.settingsStore.currentDeviceType as unknown;
 
-    return currentDeviceType;
+    return currentDeviceType as PluginDevices;
   };
 
-  getContextMenuKeysByType = (type, fileExst, security) => {
+  getContextMenuKeysByType = (
+    type: PluginFileType,
+    fileExst: string,
+    security: TRoomSecurity | TFileSecurity | TFolderSecurity,
+  ) => {
     if (!this.contextMenuItems) return;
 
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
 
     const itemsMap = Array.from(this.contextMenuItems);
-    const keys = [];
+    const keys: string[] = [];
 
     switch (type) {
       case PluginFileType.Files:
-        itemsMap.forEach(([key, item]) => {
+        itemsMap.forEach((val) => {
+          const item = val[1];
+
           if (!item.fileType) return;
 
           if (item.fileType.includes(PluginFileType.Files)) {
@@ -440,8 +490,8 @@ class PluginStore {
               ? item.fileExt.includes(fileExst)
               : true;
 
-            const correctUserType = item.usersType
-              ? item.usersType.includes(userRole)
+            const correctUserType = item.usersTypes
+              ? item.usersTypes.includes(userRole)
               : true;
 
             const correctDevice = item.devices
@@ -449,7 +499,8 @@ class PluginStore {
               : true;
 
             const correctSecurity = item.security
-              ? item.security.every((key) => security?.[key])
+              ? // @ts-expect-error its valid key
+                item.security.every((key) => security?.[key])
               : true;
 
             if (
@@ -463,12 +514,12 @@ class PluginStore {
         });
         break;
       case PluginFileType.Folders:
-        itemsMap.forEach(([key, item]) => {
-          if (!item.fileType) return;
+        itemsMap.forEach((val) => {
+          const item = val[1];
 
-          if (item.fileType.includes(PluginFileType.Folders)) {
-            const correctUserType = item.usersType
-              ? item.usersType.includes(userRole)
+          if (item.fileType?.includes(PluginFileType.Folders)) {
+            const correctUserType = item.usersTypes
+              ? item.usersTypes.includes(userRole)
               : true;
 
             const correctDevice = item.devices
@@ -476,7 +527,8 @@ class PluginStore {
               : true;
 
             const correctSecurity = item.security
-              ? item?.security?.every((key) => security?.[key])
+              ? // @ts-expect-error its valid key
+                item.security.every((key) => security?.[key])
               : true;
 
             if (correctUserType && correctDevice && correctSecurity)
@@ -485,12 +537,12 @@ class PluginStore {
         });
         break;
       case PluginFileType.Rooms:
-        itemsMap.forEach(([key, item]) => {
-          if (!item.fileType) return;
+        itemsMap.forEach((val) => {
+          const item = val[1];
 
-          if (item.fileType.includes(PluginFileType.Rooms)) {
-            const correctUserType = item.usersType
-              ? item.usersType.includes(userRole)
+          if (item.fileType?.includes(PluginFileType.Rooms)) {
+            const correctUserType = item.usersTypes
+              ? item.usersTypes.includes(userRole)
               : true;
 
             const correctDevice = item.devices
@@ -498,7 +550,8 @@ class PluginStore {
               : true;
 
             const correctSecurity = item.security
-              ? item.security.every((key) => security?.[key])
+              ? // @ts-expect-error its valid key
+                item.security.every((key) => security?.[key])
               : true;
 
             if (correctUserType && correctDevice && correctSecurity)
@@ -507,16 +560,16 @@ class PluginStore {
         });
         break;
       case PluginFileType.Image:
-        itemsMap.forEach(([key, item]) => {
-          if (!item.fileType) return;
+        itemsMap.forEach((val) => {
+          const item = val[1];
 
-          if (item.fileType.includes(PluginFileType.Image)) {
+          if (item.fileType?.includes(PluginFileType.Image)) {
             const correctFileExt = item.fileExt
               ? item.fileExt.includes(fileExst)
               : true;
 
-            const correctUserType = item.usersType
-              ? item.usersType.includes(userRole)
+            const correctUserType = item.usersTypes
+              ? item.usersTypes.includes(userRole)
               : true;
 
             const correctDevice = item.devices
@@ -524,7 +577,8 @@ class PluginStore {
               : true;
 
             const correctSecurity = item.security
-              ? item.security.every((key) => security?.[key])
+              ? // @ts-expect-error its valid key
+                item.security.every((key) => security?.[key])
               : true;
 
             if (
@@ -538,12 +592,12 @@ class PluginStore {
         });
         break;
       case PluginFileType.Video:
-        itemsMap.forEach(([key, item]) => {
-          if (!item.fileType) return;
+        itemsMap.forEach((val) => {
+          const item = val[1];
 
-          if (item.fileType.includes(PluginFileType.Video)) {
-            const correctUserType = item.usersType
-              ? item.usersType.includes(userRole)
+          if (item.fileType?.includes(PluginFileType.Video)) {
+            const correctUserType = item.usersTypes
+              ? item.usersTypes.includes(userRole)
               : true;
 
             const correctDevice = item.devices
@@ -551,7 +605,8 @@ class PluginStore {
               : true;
 
             const correctSecurity = item.security
-              ? item.security.every((key) => security?.[key])
+              ? // @ts-expect-error its valid key
+                item.security.every((key) => security?.[key])
               : true;
 
             if (correctUserType && correctDevice && correctSecurity)
@@ -560,11 +615,12 @@ class PluginStore {
         });
         break;
       default:
-        itemsMap.forEach(([key, item]) => {
+        itemsMap.forEach((val) => {
+          const item = val[1];
           if (item.fileType) return;
 
-          const correctUserType = item.usersType
-            ? item.usersType.includes(userRole)
+          const correctUserType = item.usersTypes
+            ? item.usersTypes.includes(userRole)
             : true;
 
           const correctDevice = item.devices
@@ -572,7 +628,8 @@ class PluginStore {
             : true;
 
           const correctSecurity = item.security
-            ? item.security.every((key) => security?.[key])
+            ? // @ts-expect-error its valid key
+              item.security.every((key) => security?.[key])
             : true;
 
           if (correctUserType && correctDevice && correctSecurity)
@@ -585,7 +642,7 @@ class PluginStore {
     return keys;
   };
 
-  updateContextMenuItems = (name) => {
+  updateContextMenuItems = (name: string) => {
     const plugin = this.plugins.find((p) => p.name === name);
 
     if (!plugin || !plugin.enabled) return;
@@ -594,8 +651,8 @@ class PluginStore {
 
     if (!items) return;
 
-    Array.from(items).map(([key, value]) => {
-      const onClick = async (fileId) => {
+    Array.from(items).forEach(([key, value]) => {
+      const onClick = async (fileId: number) => {
         if (!value.onClick) return;
 
         const message = await value.onClick(fileId);
@@ -618,7 +675,7 @@ class PluginStore {
           this.updateMainButtonItems,
           this.updateProfileMenuItems,
           this.updateEventListenerItems,
-          this.updateFileItems
+          this.updateFileItems,
         );
       };
 
@@ -633,19 +690,19 @@ class PluginStore {
     });
   };
 
-  deactivateContextMenuItems = (plugin) => {
+  deactivateContextMenuItems = (plugin: TPlugin) => {
     if (!plugin) return;
 
-    const items = plugin.getContextMenuItems && plugin.getContextMenuItems();
+    const items = plugin.getContextMenuItems?.();
 
     if (!items) return;
 
-    Array.from(items).map(([key, value]) => {
+    Array.from(items).forEach(([key]) => {
       this.contextMenuItems.delete(key);
     });
   };
 
-  updateInfoPanelItems = (name) => {
+  updateInfoPanelItems = (name: string) => {
     const plugin = this.plugins.find((p) => p.name === name);
 
     if (!plugin || !plugin.enabled) return;
@@ -657,9 +714,9 @@ class PluginStore {
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
 
-    Array.from(items).map(([key, value]) => {
-      const correctUserType = value.usersType
-        ? value.usersType.includes(userRole)
+    Array.from(items).forEach(([key, value]) => {
+      const correctUserType = value.usersTypes
+        ? value.usersTypes.includes(userRole)
         : true;
 
       const correctDevice = value.devices
@@ -671,8 +728,8 @@ class PluginStore {
       const submenu = { ...value.subMenu };
 
       if (value.subMenu.onClick) {
-        const onClick = async () => {
-          const message = await value.subMenu.onClick();
+        const onClick = async (id: number) => {
+          const message = await value?.subMenu?.onClick?.(id);
 
           messageActions(
             message,
@@ -692,7 +749,7 @@ class PluginStore {
             this.updateMainButtonItems,
             this.updateProfileMenuItems,
             this.updateEventListenerItems,
-            this.updateFileItems
+            this.updateFileItems,
           );
         };
 
@@ -708,31 +765,31 @@ class PluginStore {
     });
   };
 
-  deactivateInfoPanelItems = (plugin) => {
+  deactivateInfoPanelItems = (plugin: TPlugin) => {
     if (!plugin) return;
 
     const items = plugin.getInfoPanelItems && plugin.getInfoPanelItems();
 
     if (!items) return;
 
-    Array.from(items).map(([key, value]) => {
+    Array.from(items).forEach(([key]) => {
       this.infoPanelItems.delete(key);
     });
   };
 
-  updateMainButtonItems = (name) => {
+  updateMainButtonItems = (name: string) => {
     const plugin = this.plugins.find((p) => p.name === name);
 
     if (!plugin || !plugin.enabled) return;
 
-    const items = plugin.getMainButtonItems && plugin.getMainButtonItems();
+    const items = plugin.getMainButtonItems?.();
 
     if (!items) return;
 
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
 
-    Array.from(items).map(([key, value]) => {
+    Array.from(items).forEach(([key, value]) => {
       const correctUserType = value.usersType
         ? value.usersType.includes(userRole)
         : true;
@@ -743,11 +800,12 @@ class PluginStore {
 
       if (!correctUserType || !correctDevice) return;
 
-      const newItems = [];
-      if (value.items) {
+      const newItems: IMainButtonItem[] = [];
+      const storeId = this.selectedFolderStore.id;
+      if (value.items && storeId) {
         value.items.forEach((i) => {
           const onClick = async () => {
-            const message = await i.onClick(this.selectedFolderStore.id);
+            const message = await i?.onClick?.(storeId);
 
             messageActions(
               message,
@@ -767,7 +825,7 @@ class PluginStore {
               this.updateMainButtonItems,
               this.updateProfileMenuItems,
               this.updateEventListenerItems,
-              this.updateFileItems
+              this.updateFileItems,
             );
           };
 
@@ -781,8 +839,9 @@ class PluginStore {
 
       const onClick = async () => {
         if (!value.onClick) return;
+        if (!storeId) return;
 
-        const message = await value.onClick(this.selectedFolderStore.id);
+        const message = await value.onClick(storeId);
 
         messageActions(
           message,
@@ -802,7 +861,7 @@ class PluginStore {
           this.updateMainButtonItems,
           this.updateProfileMenuItems,
           this.updateEventListenerItems,
-          this.updateFileItems
+          this.updateFileItems,
         );
       };
 
@@ -818,19 +877,19 @@ class PluginStore {
     });
   };
 
-  deactivateMainButtonItems = (plugin) => {
+  deactivateMainButtonItems = (plugin: TPlugin) => {
     if (!plugin) return;
 
     const items = plugin.getMainButtonItems && plugin.getMainButtonItems();
 
     if (!items) return;
 
-    Array.from(items).map(([key, value]) => {
+    Array.from(items).forEach(([key]) => {
       this.mainButtonItems.delete(key);
     });
   };
 
-  updateProfileMenuItems = (name) => {
+  updateProfileMenuItems = (name: string) => {
     const plugin = this.plugins.find((p) => p.name === name);
 
     if (!plugin || !plugin.enabled) return;
@@ -842,7 +901,7 @@ class PluginStore {
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
 
-    Array.from(items).map(([key, value]) => {
+    Array.from(items).forEach(([key, value]) => {
       const correctUserType = value.usersType
         ? value.usersType.includes(userRole)
         : true;
@@ -876,7 +935,7 @@ class PluginStore {
           this.updateMainButtonItems,
           this.updateProfileMenuItems,
           this.updateEventListenerItems,
-          this.updateFileItems
+          this.updateFileItems,
         );
       };
 
@@ -891,19 +950,19 @@ class PluginStore {
     });
   };
 
-  deactivateProfileMenuItems = (plugin) => {
+  deactivateProfileMenuItems = (plugin: TPlugin) => {
     if (!plugin) return;
 
     const items = plugin.getProfileMenuItems && plugin.getProfileMenuItems();
 
     if (!items) return;
 
-    Array.from(items).map(([key, value]) => {
+    Array.from(items).forEach(([key]) => {
       this.profileMenuItems.delete(key);
     });
   };
 
-  updateEventListenerItems = (name) => {
+  updateEventListenerItems = (name: string) => {
     const plugin = this.plugins.find((p) => p.name === name);
 
     if (!plugin || !plugin.enabled) return;
@@ -916,9 +975,9 @@ class PluginStore {
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
 
-    Array.from(items).map(([key, value]) => {
-      const correctUserType = value.usersType
-        ? value.usersType.includes(userRole)
+    Array.from(items).forEach(([key, value]) => {
+      const correctUserType = value.usersTypes
+        ? value.usersTypes.includes(userRole)
         : true;
 
       const correctDevice = value.devices
@@ -926,10 +985,10 @@ class PluginStore {
         : true;
 
       if (!correctUserType || !correctDevice) return;
-      const eventHandler = async (e) => {
+      const eventHandler = async () => {
         if (!value.eventHandler) return;
 
-        const message = await value.eventHandler(e);
+        const message = await value.eventHandler();
 
         messageActions(
           message,
@@ -949,7 +1008,7 @@ class PluginStore {
           this.updateMainButtonItems,
           this.updateProfileMenuItems,
           this.updateEventListenerItems,
-          this.updateFileItems
+          this.updateFileItems,
         );
       };
 
@@ -962,7 +1021,7 @@ class PluginStore {
     });
   };
 
-  deactivateEventListenerItems = (plugin) => {
+  deactivateEventListenerItems = (plugin: TPlugin) => {
     if (!plugin) return;
 
     const items =
@@ -970,12 +1029,12 @@ class PluginStore {
 
     if (!items) return;
 
-    Array.from(items).map(([key, value]) => {
+    Array.from(items).forEach(([key]) => {
       this.eventListenerItems.delete(key);
     });
   };
 
-  updateFileItems = (name) => {
+  updateFileItems = (name: string) => {
     const plugin = this.plugins.find((p) => p.name === name);
 
     if (!plugin || !plugin.enabled) return;
@@ -986,7 +1045,7 @@ class PluginStore {
 
     const userRole = this.getUserRole();
 
-    Array.from(items).map(([key, value]) => {
+    Array.from(items).forEach(([key, value]) => {
       const correctUserType = value.usersType
         ? value.usersType.includes(userRole)
         : true;
@@ -996,7 +1055,7 @@ class PluginStore {
       const fileIcon = `${plugin.iconUrl}/assets/${value.fileRowIcon}`;
       const fileIconTile = `${plugin.iconUrl}/assets/${value.fileTileIcon}`;
 
-      const onClick = async (item) => {
+      const onClick = async (item: TFile) => {
         const device = this.getCurrentDevice();
         const correctDevice = value.devices
           ? value.devices.includes(device)
@@ -1023,7 +1082,7 @@ class PluginStore {
           this.updateMainButtonItems,
           this.updateProfileMenuItems,
           this.updateEventListenerItems,
-          this.updateFileItems
+          this.updateFileItems,
         );
       };
 
@@ -1038,14 +1097,14 @@ class PluginStore {
     });
   };
 
-  deactivateFileItems = (plugin) => {
+  deactivateFileItems = (plugin: TPlugin) => {
     if (!plugin) return;
 
     const items = plugin.getFileItems && plugin.getFileItems();
 
     if (!items) return;
 
-    Array.from(items).map(([key, value]) => {
+    Array.from(items).forEach(([key]) => {
       this.fileItems.delete(key);
     });
   };
@@ -1063,14 +1122,15 @@ class PluginStore {
   }
 
   get contextMenuItemsList() {
-    const items = [];
-
-    Array.from(this.contextMenuItems, ([key, value]) => {
-      items.push({ key, value: { ...value } });
-    });
+    const items: { key: string; value: IContextMenuItem }[] = Array.from(
+      this.contextMenuItems,
+      ([key, value]) => {
+        return { key, value: { ...value } };
+      },
+    );
 
     if (items.length > 0) {
-      items.sort((a, b) => a.value.position < b.value.position);
+      // items.sort((a, b) => a.value.position < b.value.position);
 
       return items;
     }
@@ -1079,29 +1139,25 @@ class PluginStore {
   }
 
   get infoPanelItemsList() {
-    const items = [];
-
-    Array.from(this.infoPanelItems, ([key, value]) => {
-      items.push({ key, value: { ...value } });
+    const items = Array.from(this.infoPanelItems, ([key, value]) => {
+      return { key, value: { ...value } };
     });
 
     return items;
   }
 
   get profileMenuItemsList() {
-    const items = [];
-
-    Array.from(this.profileMenuItems, ([key, value]) => {
-      items.push({
+    const items = Array.from(this.profileMenuItems, ([key, value]) => {
+      return {
         key,
         value: {
           ...value,
         },
-      });
+      };
     });
 
     if (items.length > 0) {
-      items.sort((a, b) => a.value.position < b.value.position);
+      // items.sort((a, b) => a.value.position < b.value.position);
 
       return items;
     }
@@ -1110,19 +1166,17 @@ class PluginStore {
   }
 
   get mainButtonItemsList() {
-    const items = [];
-
-    Array.from(this.mainButtonItems, ([key, value]) => {
-      items.push({
+    const items = Array.from(this.mainButtonItems, ([key, value]) => {
+      return {
         key,
         value: {
           ...value,
         },
-      });
+      };
     });
 
     if (items.length > 0) {
-      items.sort((a, b) => a.value.position < b.value.position);
+      // items.sort((a, b) => a.value.position < b.value.position);
 
       return items;
     }
@@ -1131,15 +1185,13 @@ class PluginStore {
   }
 
   get eventListenerItemsList() {
-    const items = [];
-
-    Array.from(this.eventListenerItems, ([key, value]) => {
-      items.push({
+    const items = Array.from(this.eventListenerItems, ([key, value]) => {
+      return {
         key,
         value: {
           ...value,
         },
-      });
+      };
     });
 
     if (items.length > 0) {
@@ -1150,15 +1202,13 @@ class PluginStore {
   }
 
   get fileItemsList() {
-    const items = [];
-
-    Array.from(this.fileItems, ([key, value]) => {
-      items.push({
+    const items = Array.from(this.fileItems, ([key, value]) => {
+      return {
         key,
         value: {
           ...value,
         },
-      });
+      };
     });
 
     if (items.length > 0) {

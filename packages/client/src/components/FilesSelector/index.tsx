@@ -46,6 +46,10 @@ const FilesSelector = ({
 
   onClose,
 
+  withSearch = true,
+  withBreadCrumbs = true,
+  withSubtitle = true,
+
   isMove,
   isCopy,
   isRestore,
@@ -76,7 +80,7 @@ const FilesSelector = ({
 
   onSelectFolder,
   onSetBaseFolderPath,
-  //onSetNewFolderPath,
+  // onSetNewFolderPath,
   setIsDataReady,
   onSelectTreeNode,
   onSave,
@@ -103,6 +107,8 @@ const FilesSelector = ({
   embedded,
   withHeader,
   withCancelButton = true,
+  cancelButtonLabel,
+  acceptButtonLabel,
   getIcon,
   isRoomBackup,
 
@@ -162,8 +168,8 @@ const FilesSelector = ({
   } = useLoadersHelper({ items });
 
   useEffect(() => {
-    setIsDataReady && setIsDataReady(!showLoader);
-  }, [showLoader]);
+    setIsDataReady?.(!showLoader);
+  }, [showLoader, setIsDataReady]);
 
   const { isRoot, setIsRoot, getRootData } = useRootHelper({
     setIsBreadCrumbsLoading,
@@ -265,24 +271,31 @@ const FilesSelector = ({
   }, [selectedItemId, isRoot]);
 
   React.useEffect(() => {
+    const sessionPath = window.sessionStorage.getItem("filesSelectorPath");
+    let folderId = currentFolderId
+      ? currentFolderId
+      : sessionPath && (isMove || isCopy || isRestore || isRestoreAll)
+      ? +sessionPath
+      : fromFolderId;
+
     const getRoomSettings = () => {
       setSelectedItemType("rooms");
       getRoomList(0, true);
     };
 
-    const needRoomList = isRoomsOnly && !currentFolderId;
+    const needRoomList = isRoomsOnly && !folderId;
 
     if (needRoomList) {
       getRoomSettings();
       return;
     }
 
-    if (!currentFolderId) {
+    if (!folderId) {
       getRootData();
       return;
     }
 
-    setSelectedItemId(currentFolderId);
+    setSelectedItemId(folderId);
 
     if (
       needRoomList ||
@@ -296,8 +309,8 @@ const FilesSelector = ({
     }
 
     setSelectedItemType("files");
-    getFileList(0, currentFolderId, true);
-  }, []);
+    getFileList(0, folderId, true);
+  }, [currentFolderId]);
 
   const onClickBreadCrumb = (item: BreadCrumb) => {
     if (!isFirstLoad) {
@@ -312,7 +325,7 @@ const FilesSelector = ({
         setItems(null);
 
         const idx = breadCrumbs.findIndex(
-          (value) => value.id.toString() === item.id.toString()
+          (value) => value.id.toString() === item.id.toString(),
         );
 
         const maxLength = breadCrumbs.length - 1;
@@ -321,7 +334,7 @@ const FilesSelector = ({
         const newBreadCrumbs = breadCrumbs.map((item, index) => {
           if (!foundParentId) {
             currentFolderIndex = disabledItems.findIndex(
-              (id) => id === item?.id
+              (id) => id === item?.id,
             );
           }
 
@@ -405,7 +418,7 @@ const FilesSelector = ({
     items: any,
     accessRights: any,
     fileName: string,
-    isChecked: boolean
+    isChecked: boolean,
   ) => {
     const isPublic =
       breadCrumbs.findIndex((f: any) => f.roomType === RoomsType.PublicRoom) >
@@ -502,10 +515,10 @@ const FilesSelector = ({
     isMove,
     isSelect,
     filterParam,
-    isRestore
+    isRestore,
   );
 
-  const acceptButtonLabel = getAcceptButtonLabel(
+  const defaultAcceptButtonLabel = getAcceptButtonLabel(
     t,
     isEditorDialog,
     isCopy,
@@ -513,7 +526,7 @@ const FilesSelector = ({
     isMove,
     isSelect,
     filterParam,
-    isRestore
+    isRestore,
   );
 
   const isDisabled = getIsDisabled(
@@ -530,7 +543,7 @@ const FilesSelector = ({
     filterParam,
     !!selectedFileInfo,
     includeFolder,
-    isRestore
+    isRestore,
   );
 
   const SelectorBody = (
@@ -544,10 +557,10 @@ const FilesSelector = ({
       onClearSearch={onClearSearchAction}
       items={items ? items : []}
       onSelect={onSelectAction}
-      acceptButtonLabel={acceptButtonLabel}
+      acceptButtonLabel={acceptButtonLabel || defaultAcceptButtonLabel}
       onAccept={onAcceptAction}
       withCancelButton={withCancelButton}
-      cancelButtonLabel={t("Common:CancelButton")}
+      cancelButtonLabel={cancelButtonLabel || t("Common:CancelButton")}
       onCancel={onCloseAction}
       emptyScreenImage={
         theme.isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl
@@ -561,12 +574,12 @@ const FilesSelector = ({
       }
       searchEmptyScreenHeader={t("Common:NotFoundTitle")}
       searchEmptyScreenDescription={t("EmptyFilterDescriptionText")}
-      withBreadCrumbs
+      withBreadCrumbs={withBreadCrumbs}
       breadCrumbs={breadCrumbs}
       onSelectBreadCrumb={onClickBreadCrumb}
       isLoading={showLoader}
       isBreadCrumbsLoading={showBreadCrumbsLoader}
-      withSearch={!isRoot && items ? items.length > 0 : !isRoot && isFirstLoad}
+      withSearch={withSearch && !isRoot && items ? items.length > 0 : !isRoot && isFirstLoad}
       rowLoader={
         <RowLoader
           isMultiSelect={false}
@@ -590,7 +603,7 @@ const FilesSelector = ({
       currentFooterInputValue={currentFooterInputValue}
       footerCheckboxLabel={footerCheckboxLabel}
       descriptionText={
-        !filterParam || filterParam === "ALL"
+        !withSubtitle || !filterParam || filterParam === "ALL"
           ? ""
           : descriptionText ?? t("Common:SelectDOCXFormat")
       }
@@ -644,15 +657,13 @@ export default inject(
       filesStore,
       infoPanelStore,
     }: any,
-    { isCopy, isRestoreAll, isMove, isRestore, isPanelVisible, id }: any
+    { isCopy, isRestoreAll, isMove, isRestore, isPanelVisible, id }: any,
   ) => {
     const { id: selectedId, parentId, rootFolderType } = selectedFolderStore;
 
     const { setConflictDialogData, checkFileConflicts, setSelectedItems } =
       filesActionsStore;
     const { itemOperationToFolder, clearActiveOperations } = uploadDataStore;
-
-    const sessionPath = window.sessionStorage.getItem("filesSelectorPath");
 
     const { treeFolders, roomsFolderId } = treeFoldersStore;
 
@@ -727,13 +738,8 @@ export default inject(
           ? parentId
           : selectedId;
 
-    const currentFolderId =
-      sessionPath && (isMove || isCopy || isRestore || isRestoreAll)
-        ? +sessionPath
-        : fromFolderId;
 
     return {
-      currentFolderId,
       fromFolderId,
       parentId,
       rootFolderType,
@@ -770,5 +776,5 @@ export default inject(
 
       roomsFolderId,
     };
-  }
+  },
 )(observer(FilesSelector));

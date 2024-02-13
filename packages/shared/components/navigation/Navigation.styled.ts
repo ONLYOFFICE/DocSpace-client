@@ -258,15 +258,19 @@ const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme) <{
 `;
 StyledInfoPanelToggleColorThemeWrapper.defaultProps = { theme: Base };
 
-const StyledControlButtonContainer = styled.div<{ isFrame?: boolean }>`
+const StyledControlButtonContainer = styled.div<{
+  isFrame?: boolean;
+  showTitle?: boolean;
+}>`
   ${(props) =>
-    props.theme.interfaceDirection === "rtl"
+    props.showTitle &&
+    (props.theme.interfaceDirection === "rtl"
       ? css`
           margin-right: 16px;
         `
       : css`
           margin-left: 16px;
-        `}
+        `)}
   display: flex;
   align-items: center;
   gap: 16px;

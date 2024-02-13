@@ -15,9 +15,10 @@ import {
   COUNT_FOR_SHOWING_BAR,
   PERCENTAGE_FOR_SHOWING_BAR,
 } from "../constants";
+import { Nullable } from "../types";
 
 class CurrentQuotasStore {
-  currentPortalQuota: TPaymentQuota = {} as TPaymentQuota;
+  currentPortalQuota: Nullable<TPaymentQuota> = null;
 
   currentPortalQuotaFeatures: TPaymentFeature[] = [];
 
@@ -32,15 +33,15 @@ class CurrentQuotasStore {
   };
 
   get isFreeTariff() {
-    return this.currentPortalQuota.free;
+    return this.currentPortalQuota?.free;
   }
 
   get isTrial() {
-    return this.currentPortalQuota.trial;
+    return this.currentPortalQuota?.trial;
   }
 
   get currentPlanCost() {
-    if (this.currentPortalQuota.price) return this.currentPortalQuota.price;
+    if (this.currentPortalQuota?.price) return this.currentPortalQuota.price;
 
     return { value: 0, currencySymbol: "" };
   }
@@ -159,7 +160,7 @@ class CurrentQuotasStore {
   }
 
   get currentTariffPlanTitle() {
-    return this.currentPortalQuota.title;
+    return this.currentPortalQuota?.title;
   }
 
   get quotaCharacteristics() {

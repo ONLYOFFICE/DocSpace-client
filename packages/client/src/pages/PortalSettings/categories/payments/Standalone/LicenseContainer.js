@@ -89,14 +89,14 @@ const LicenseContainer = (props) => {
   );
 };
 
-export default inject(({ payments }) => {
+export default inject(({ paymentStore }) => {
   const {
     setPaymentsLicense,
     acceptPaymentsLicense,
     isLicenseCorrect,
     setIsLoading,
     isLoading,
-  } = payments;
+  } = paymentStore;
 
   return {
     setPaymentsLicense,

@@ -44,6 +44,7 @@ const onSDKInfo = (event) => {
 };
 
 const onSDKWarning = (event) => {
+  frameCallCommand("setIsLoaded");
   console.log(
     "ONLYOFFICE Document Editor reports a warning: code " +
       event.data.warningCode +
@@ -53,6 +54,7 @@ const onSDKWarning = (event) => {
 };
 
 const onSDKError = (event) => {
+  frameCallCommand("setIsLoaded");
   console.log(
     "ONLYOFFICE Document Editor reports an error: code " +
       event.data.errorCode +
@@ -569,13 +571,13 @@ function Editor({
     console.log("onDocumentReady", arguments, { docEditor });
     documentIsReady = true;
 
+    frameCallCommand("setIsLoaded");
+
     config?.errorMessage && docEditor?.showMessage(config.errorMessage);
 
     if (isSharingAccess) {
       loadUsersRightsList(docEditor);
     }
-
-    frameCallCommand("setIsLoaded");
 
     assign(window, ["ASC", "Files", "Editor", "docEditor"], docEditor); //Do not remove: it's for Back button on Mobile App
   };

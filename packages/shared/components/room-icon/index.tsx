@@ -1,3 +1,5 @@
+import React from "react";
+
 import styled, { css } from "styled-components";
 import { Base } from "../../themes";
 import { Text } from "../text";
@@ -9,6 +11,7 @@ const StyledIcon = styled.div<{
   radius: string;
   isArchive?: boolean;
   color: string;
+  wrongImage: boolean;
 }>`
   display: flex;
   justify-content: center;
@@ -37,7 +40,8 @@ const StyledIcon = styled.div<{
     font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
     font-weight: 700;
     line-height: 16px;
-    color: #ffffff;
+    color: ${(props) =>
+      props.wrongImage && props.theme.isBase ? "#333333" : "#ffffff"};
     position: relative;
     ${(props) =>
       !props.theme.isBase &&
@@ -96,6 +100,8 @@ const RoomIcon = ({
   badgeUrl,
   onBadgeClick,
 }: RoomIconProps) => {
+  const [correctImage, setCorrectImage] = React.useState(true);
+
   const titleWithoutSpaces = title.replace(/\s+/g, " ").trim();
   const indexAfterLastSpace = titleWithoutSpaces.lastIndexOf(" ");
   const secondCharacter =
@@ -105,12 +111,28 @@ const RoomIcon = ({
 
   const roomTitle = (title[0] + secondCharacter).toUpperCase();
 
-  return showDefault ? (
+  const prefetchImage = React.useCallback(() => {
+    if (!imgSrc) return;
+    const img = new Image();
+
+    img.src = imgSrc;
+
+    img.onerror = () => {
+      setCorrectImage(false);
+    };
+  }, [imgSrc]);
+
+  React.useEffect(() => {
+    prefetchImage();
+  }, [prefetchImage]);
+
+  return showDefault || !correctImage ? (
     <StyledIcon
       color={color}
       size={size}
       radius={radius}
       isArchive={isArchive}
+      wrongImage={!correctImage}
       data-testid="room-icon"
     >
       <div className="room-background" />

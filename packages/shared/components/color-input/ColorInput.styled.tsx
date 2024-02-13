@@ -3,6 +3,7 @@ import { commonInputStyles } from "../../utils";
 import { Base } from "../../themes";
 
 export const Wrapper = styled.div`
+  position: relative;
   .hex-value {
     ${commonInputStyles}
     box-sizing: border-box;
@@ -28,7 +29,13 @@ export const InputWrapper = styled.div<{ scale?: boolean }>`
   align-items: center;
 
   width: ${(props) => (props.scale ? "100%" : "fit-content")};
+
+  input {
+    font-family: ${(props) => props.theme.fontFamily};
+  }
 `;
+
+InputWrapper.defaultProps = { theme: Base };
 
 export const ColorBlock = styled.span<{ isDisabled?: boolean }>`
   position: absolute;

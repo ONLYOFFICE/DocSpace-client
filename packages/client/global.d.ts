@@ -1,3 +1,4 @@
+import type { TTheme } from "@docspace/shared/themes";
 import type store from "./src/store";
 
 declare module "*.svg" {
@@ -11,4 +12,8 @@ declare module "*.svg?url" {
 
 declare global {
   type TStore = typeof store;
+
+  interface Window {
+    theme: TTheme;
+  }
 }

@@ -14,7 +14,7 @@ const ThemeProviderWrapper = ({ children }: PropsWithChildren) => {
   return (
     <ThemeProvider
       theme={{ ...theme, interfaceDirection: i18n.dir() }}
-      currentColorScheme={currentColorScheme}
+      currentColorScheme={currentColorScheme ?? undefined}
     >
       {children}
     </ThemeProvider>

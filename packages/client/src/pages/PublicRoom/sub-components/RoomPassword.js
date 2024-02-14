@@ -10,7 +10,7 @@ import { StyledPage, StyledBody, StyledContent } from "./RoomStyles";
 import { frameCallCommand } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/shared/components/toast";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-import DocspaceLogo from "../../../DocspaceLogo";
+import DocspaceLogo from "../../../components/DocspaceLogoWrapper";
 import { ValidationStatus } from "../../../helpers/constants";
 
 import PublicRoomIcon from "PUBLIC_DIR/images/icons/32/room/public.svg";

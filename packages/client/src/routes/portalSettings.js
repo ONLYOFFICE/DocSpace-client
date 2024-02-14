@@ -3,87 +3,103 @@ import { Navigate } from "react-router-dom";
 import loadable from "@loadable/component";
 
 import PrivateRoute from "@docspace/common/components/PrivateRoute";
-import ErrorBoundary from "@docspace/common/components/ErrorBoundary";
+import ErrorBoundary from "../components/ErrorBoundaryWrapper";
 
-import Error404 from "SRC_DIR/pages/Errors/404";
+import Error404 from "@docspace/shared/components/errors/Error404";
 
 import { generalRoutes } from "./general";
 
 const PortalSettings = loadable(() => import("../pages/PortalSettings"));
 
-const CustomizationSettings = loadable(() =>
-  import("../pages/PortalSettings/categories/common/index.js")
+const CustomizationSettings = loadable(
+  () => import("../pages/PortalSettings/categories/common/index.js")
 );
-const LanguageAndTimeZoneSettings = loadable(() =>
+const LanguageAndTimeZoneSettings = loadable(
+  () =>
   import(
     "../pages/PortalSettings/categories/common/Customization/language-and-time-zone"
   )
 );
-const WelcomePageSettings = loadable(() =>
+const WelcomePageSettings = loadable(
+  () =>
   import(
     "../pages/PortalSettings/categories/common/Customization/welcome-page-settings"
   )
 );
-const DNSSettings = loadable(() =>
-  import("../pages/PortalSettings/categories/common/Customization/dns-settings")
+const DNSSettings = loadable(
+  () =>
+    import(
+      "../pages/PortalSettings/categories/common/Customization/dns-settings"
+    )
 );
-const PortalRenaming = loadable(() =>
+const PortalRenaming = loadable(
+  () =>
   import(
     "../pages/PortalSettings/categories/common/Customization/portal-renaming"
   )
 );
-const WhiteLabel = loadable(() =>
-  import("../pages/PortalSettings/categories/common/Branding/whitelabel")
+const WhiteLabel = loadable(
+  () => import("../pages/PortalSettings/categories/common/Branding/whitelabel")
 );
-const CompanyInfoSettings = loadable(() =>
+const CompanyInfoSettings = loadable(
+  () =>
   import(
     "../pages/PortalSettings/categories/common/Branding/companyInfoSettings"
   )
 );
-const AdditionalResources = loadable(() =>
+const AdditionalResources = loadable(
+  () =>
   import(
     "../pages/PortalSettings/categories/common/Branding/additionalResources"
   )
 );
-const SecuritySettings = loadable(() =>
-  import("../pages/PortalSettings/categories/security/index.js")
+const SecuritySettings = loadable(
+  () => import("../pages/PortalSettings/categories/security/index.js")
 );
-const TfaPage = loadable(() =>
-  import("../pages/PortalSettings/categories/security/access-portal/tfa")
+const TfaPage = loadable(
+  () => import("../pages/PortalSettings/categories/security/access-portal/tfa")
 );
-const PasswordStrengthPage = loadable(() =>
+const PasswordStrengthPage = loadable(
+  () =>
   import(
     "../pages/PortalSettings/categories/security/access-portal/passwordStrength"
   )
 );
-const TrustedMailPage = loadable(() =>
+const TrustedMailPage = loadable(
+  () =>
   import(
     "../pages/PortalSettings/categories/security/access-portal/trustedMail"
   )
 );
-const IpSecurityPage = loadable(() =>
-  import("../pages/PortalSettings/categories/security/access-portal/ipSecurity")
+const IpSecurityPage = loadable(
+  () =>
+    import(
+      "../pages/PortalSettings/categories/security/access-portal/ipSecurity"
+    )
 );
-const BruteForceProtectionPage = loadable(() =>
+const BruteForceProtectionPage = loadable(
+  () =>
   import(
     "../pages/PortalSettings/categories/security/access-portal/bruteForceProtection"
   )
 );
-const AdminMessagePage = loadable(() =>
+const AdminMessagePage = loadable(
+  () =>
   import(
     "../pages/PortalSettings/categories/security/access-portal/adminMessage"
   )
 );
-const SessionLifetimePage = loadable(() =>
+const SessionLifetimePage = loadable(
+  () =>
   import(
     "../pages/PortalSettings/categories/security/access-portal/sessionLifetime"
   )
 );
-const Integration = loadable(() =>
-  import("../pages/PortalSettings/categories/integration")
+const Integration = loadable(
+  () => import("../pages/PortalSettings/categories/integration")
 );
-const Payments = loadable(() =>
-  import("../pages/PortalSettings/categories/payments")
+const Payments = loadable(
+  () => import("../pages/PortalSettings/categories/payments")
 );
 const Statistics = loadable(() =>
   import("../pages/PortalSettings/categories/storage-management")
@@ -104,44 +120,49 @@ const ThirdParty = loadable(() =>
   )
 );
 
-const DocumentService = loadable(() =>
-  import("../pages/PortalSettings/categories/integration/DocumentService")
+const DocumentService = loadable(
+  () => import("../pages/PortalSettings/categories/integration/DocumentService")
 );
 
-const SingleSignOn = loadable(() =>
-  import("../pages/PortalSettings/categories/integration/SingleSignOn")
+const SingleSignOn = loadable(
+  () => import("../pages/PortalSettings/categories/integration/SingleSignOn")
 );
-const SPSettings = loadable(() =>
+const SPSettings = loadable(
+  () =>
   import(
     "../pages/PortalSettings/categories/integration/SingleSignOn/SPSettings"
   )
 );
-const SPMetadata = loadable(() =>
+const SPMetadata = loadable(
+  () =>
   import(
     "../pages/PortalSettings/categories/integration/SingleSignOn/ProviderMetadata"
   )
 );
 
-const DeveloperTools = loadable(() =>
-  import("../pages/PortalSettings/categories/developer-tools/index.js")
+const DeveloperTools = loadable(
+  () => import("../pages/PortalSettings/categories/developer-tools/index.js")
 );
-const WebhookHistory = loadable(() =>
+const WebhookHistory = loadable(
+  () =>
   import(
     "../pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory"
   )
 );
-const WebhookDetails = loadable(() =>
+const WebhookDetails = loadable(
+  () =>
   import(
     "../pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails"
   )
 );
-const Backup = loadable(() =>
-  import("../pages/PortalSettings/categories/data-management/index")
+const Backup = loadable(
+  () => import("../pages/PortalSettings/categories/data-management/index")
 );
-const DeleteDataPage = loadable(() =>
-  import("../pages/PortalSettings/categories/delete-data")
+const DeleteDataPage = loadable(
+  () => import("../pages/PortalSettings/categories/delete-data")
 );
-const RestoreBackup = loadable(() =>
+const RestoreBackup = loadable(
+  () =>
   import(
     "../pages/PortalSettings/categories/data-management/backup/restore-backup/index"
   )

@@ -1,37 +1,33 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate, Outlet } from "react-router-dom";
-import { inject, observer, Provider as MobxProvider } from "mobx-react";
-import NavMenu from "./components/NavMenu";
-import Main from "./components/Main";
+import moment from "moment-timezone";
+import React, { useEffect } from "react";
+import { Outlet } from "react-router-dom";
+import { useTheme } from "styled-components";
+import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
+import { isMobile, isIOS, isFirefox } from "react-device-detect";
 
-import Layout from "./components/Layout";
-import ScrollToTop from "./components/Layout/ScrollToTop";
-import { Toast, toastr } from "@docspace/shared/components/toast";
-import { ThemeProvider } from "@docspace/shared/components/theme-provider";
-import { SnackBar } from "@docspace/shared/components/snackbar";
-import { Portal } from "@docspace/shared/components/portal";
-
-import { updateTempContent } from "@docspace/shared/utils/common";
 import { getLogoFromPath } from "@docspace/shared/utils";
-
-import store from "client/store";
+import { Portal } from "@docspace/shared/components/portal";
+import { SnackBar } from "@docspace/shared/components/snackbar";
+import { Toast, toastr } from "@docspace/shared/components/toast";
+import { getRestoreProgress } from "@docspace/shared/api/portal";
+import { updateTempContent } from "@docspace/shared/utils/common";
+import { DeviceType, IndexedDBStores } from "@docspace/shared/enums";
+import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
+import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
 
 import config from "PACKAGE_FILE";
-import { I18nextProvider, useTranslation } from "react-i18next";
-import i18n from "./i18n";
 
-import moment from "moment-timezone";
-//import ReactSmartBanner from "./components/SmartBanner";
-import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
-import { isMobile, isIOS, isFirefox } from "react-device-detect";
-import IndicatorLoader from "./components/IndicatorLoader";
-import DialogsWrapper from "./components/dialogs/DialogsWrapper";
+import Main from "./components/Main";
+import Layout from "./components/Layout";
+import NavMenu from "./components/NavMenu";
 import MainBar from "./components/MainBar";
+import ScrollToTop from "./components/Layout/ScrollToTop";
+import IndicatorLoader from "./components/IndicatorLoader";
+import ErrorBoundary from "./components/ErrorBoundaryWrapper";
+import DialogsWrapper from "./components/dialogs/DialogsWrapper";
 
-import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
-import { DeviceType, IndexedDBStores } from "@docspace/shared/enums";
-import { getRestoreProgress } from "@docspace/shared/api/portal";
-import { useTheme } from "styled-components";
+// import ReactSmartBanner from "./components/SmartBanner";
 
 const Shell = ({ items = [], page = "home", ...rest }) => {
   const {
@@ -107,13 +103,13 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     shortcutIconLink.href = favicon;
 
     const appleIconLink = document.querySelector(
-      "link[rel~='apple-touch-icon']"
+      "link[rel~='apple-touch-icon']",
     );
 
     if (appleIconLink) appleIconLink.href = favicon;
 
     const androidIconLink = document.querySelector(
-      "link[rel~='android-touch-icon']"
+      "link[rel~='android-touch-icon']",
     );
     if (androidIconLink) androidIconLink.href = favicon;
   }, [whiteLabelLogoUrls]);
@@ -128,7 +124,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
         .then((response) => {
           if (!response) {
             console.log(
-              "Skip show <PreparationPortalDialog /> - empty progress response"
+              "Skip show <PreparationPortalDialog /> - empty progress response",
             );
             return;
           }
@@ -178,7 +174,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     const { fromDate, toDate, desktop } = campaign;
 
     console.log(
-      `FB: 'bar/maintenance' desktop=${desktop} fromDate=${fromDate} toDate=${toDate}`
+      `FB: 'bar/maintenance' desktop=${desktop} fromDate=${fromDate} toDate=${toDate}`,
     );
 
     if (!campaign || !fromDate || !toDate) {
@@ -353,7 +349,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       Array.from(document.querySelectorAll("style")).forEach((sheet) => {
         if (
           sheet?.textContent?.includes(
-            "-webkit-filter: hue-rotate(180deg) invert(100%) !important;"
+            "-webkit-filter: hue-rotate(180deg) invert(100%) !important;",
           )
         ) {
           sheet.parentNode?.removeChild(sheet);
@@ -474,40 +470,13 @@ const ShellWrapper = inject(
     currentDeviceType,
     showArticleLoader: clientLoadingStore.showArticleLoader,
   };
-  }
+  },
 )(observer(Shell));
 
-const ThemeProviderWrapper = inject(
-  ({ authStore, settingsStore, loginStore }) => {
-  let currentColorScheme = false;
-  const { theme } = settingsStore;
-  const { i18n } = useTranslation();
-
-  if (loginStore) {
-    currentColorScheme = loginStore.currentColorScheme;
-    } else if (authStore) {
-    currentColorScheme = settingsStore.currentColorScheme || false;
-  }
-
-  const { timezone } = settingsStore;
-
-  window.theme = theme;
-  window.timezone = timezone;
-
-  return {
-    theme: { ...theme, interfaceDirection: i18n.dir() },
-    currentColorScheme,
-    timezone,
-  };
-  }
-)(observer(ThemeProvider));
-
-export default () => (
-  <MobxProvider {...store}>
-    <I18nextProvider i18n={i18n}>
-      <ThemeProviderWrapper>
+const Root = () => (
+  <ErrorBoundary>
         <ShellWrapper />
-      </ThemeProviderWrapper>
-    </I18nextProvider>
-  </MobxProvider>
+  </ErrorBoundary>
 );
+
+export default Root;

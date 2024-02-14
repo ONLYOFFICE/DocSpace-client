@@ -1,4 +1,4 @@
-export function classNames(...args: string[] | number[] | {}[]) {
+export function classNames(...args: (string | undefined | number | {})[]) {
   if (args) {
     let classes: (string | number)[] = [];
 
@@ -26,5 +26,5 @@ export function classNames(...args: string[] | number[] | {}[]) {
     return classes.join(" ");
   }
 
-  return null;
+  return "";
 }

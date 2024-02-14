@@ -15,20 +15,26 @@ import api from "@docspace/shared/api";
 
 class GroupsStore {
   authStore;
+
   peopleStore;
+
   infoPanelStore;
 
   groups = [];
+
   selection = [];
+
   bufferSelection = null;
 
   groupsFilter = GroupsFilter.getDefault();
+
   groupsIsIsLoading = false;
 
   currentGroup = null;
 
   insideGroupFilter = InsideGroupFilter.getDefault();
-  insideGroupBackUrl = null;
+
+  insideGroupBackUrl: string | null = null;
 
   constructor(authStore: any, peopleStore: any, infoPanelStore: any) {
     this.authStore = authStore;

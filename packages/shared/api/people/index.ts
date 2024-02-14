@@ -1,9 +1,9 @@
 import { AxiosRequestConfig } from "axios";
 
+import { AccountsSearchArea } from "@docspace/shared/enums";
 import { request } from "../client";
 // import axios from "axios";
 import { Encoder } from "@docspace/shared/utils/encoder";
-import { AccountsSearchArea } from "@docspace/shared/enums";
 import { checkFilterInstance } from "@docspace/shared/utils/common";
 
 import Filter from "./filter";

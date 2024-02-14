@@ -3,6 +3,7 @@ import { inject, observer } from "mobx-react";
 
 import ViewHelper from "./helpers/ViewHelper";
 import ItemTitle from "./sub-components/ItemTitle";
+import Search from "./sub-components/Search";
 
 import { StyledInfoPanelBody } from "./styles/common";
 
@@ -18,6 +19,8 @@ const InfoPanelBodyContent = ({
   getIsGallery,
   gallerySelected,
   isRootFolder,
+  showSearchBlock,
+  setShowSearchBlock,
   ...props
 }) => {
   const [selectedItems, setSelectedItems] = useState(props.selectedItems);
@@ -103,7 +106,7 @@ const InfoPanelBodyContent = ({
   useEffect(() => {
     const selectedFolderChanged = isItemChanged(
       selectedFolder,
-      props.selectedFolder
+      props.selectedFolder,
     );
     if (selectedFolderChanged) setSelectedFolder(props.selectedFolder);
   }, [props.selectedFolder]);
@@ -118,6 +121,8 @@ const InfoPanelBodyContent = ({
 
   return (
     <StyledInfoPanelBody>
+      {showSearchBlock && <Search />}
+
       {!isNoItem && (
         <ItemTitle
           {...defaultProps}
@@ -144,6 +149,8 @@ export default inject(
       getIsGallery,
       infoPanelSelectedItems,
       getInfoPanelSelectedFolder,
+      showSearchBlock,
+      setShowSearchBlock,
     } = infoPanelStore;
 
     const { gallerySelected } = oformsStore;
@@ -166,6 +173,9 @@ export default inject(
 
       isRootFolder,
       gallerySelected,
+
+      showSearchBlock,
+      setShowSearchBlock,
     };
-  }
+  },
 )(observer(InfoPanelBodyContent));

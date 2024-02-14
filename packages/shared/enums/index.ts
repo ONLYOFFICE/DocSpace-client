@@ -376,6 +376,9 @@ export const enum FilterGroups {
   roomFilterTags = "filter-tags",
   roomFilterFolders = "filter-withSubfolders",
   roomFilterContent = "filter-content",
+  filterGroup = "filter-group",
+  groupsFilterMember = "filter-group-member",
+  groupsFilterManager = "filter-group-manager",
 }
 
 export const enum FilterKeys {
@@ -385,6 +388,9 @@ export const enum FilterKeys {
   me = "me",
   other = "other",
   user = "user",
+  withoutGroup = "withoutGroup",
+  selectedGroup = "selectedGroup",
+  byManager = "byManager",
 }
 
 export const enum IndexedDBStores {
@@ -394,6 +400,7 @@ export const enum IndexedDBStores {
 export const enum FilterSelectorTypes {
   people = "people-selector",
   rooms = "rooms-selector",
+  groups = "groups-selector",
 }
 
 export const enum DeviceType {

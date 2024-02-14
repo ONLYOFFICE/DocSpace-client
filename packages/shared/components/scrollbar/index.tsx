@@ -1,7 +1,7 @@
 import { ScrollbarType } from "./Scrollbar.enums";
-import { ScrollbarComponent } from "./Scrollbar";
+import { ScrollbarComponent as Scrollbar } from "./Scrollbar";
 
 export { ScrollbarType };
-export { ScrollbarComponent };
+export { Scrollbar };
 export { CustomScrollbarsVirtualList } from "./sub-components/index";
 export type { ScrollbarProps } from "./Scrollbar.types";

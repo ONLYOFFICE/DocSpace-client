@@ -2258,7 +2258,10 @@ const SectionFilterContent = ({
     ({ key, group }) => {
       setIsLoading(true);
       if (isPeopleAccounts || isInsideGroup) {
-        const newFilter = accountsFilter.clone();
+        const newFilter = isInsideGroup
+          ? insideGroupFilter.clone()
+          : accountsFilter.clone();
+
         newFilter.page = 0;
 
         if (group === "filter-status") {

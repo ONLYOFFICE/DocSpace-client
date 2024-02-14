@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { frameCallCommand } from "@docspace/shared/utils/common";
-import ErrorContainer from "@docspace/common/components/ErrorContainer";
+import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
 
 const RoomErrors = ({ t, tReady, isInvalid }) => {
   const headerText = isInvalid ? t("InvalidLink") : t("Common:ExpiredLink");

@@ -12,7 +12,7 @@ import {
   StyledQuickButtonsContainer,
 } from "../StyledTable";
 
-const RowDataComponent = (props) => {
+const RecentRowDataComponent = (props) => {
   const {
     authorColumnIsEnabled,
     createdColumnIsEnabled,
@@ -20,6 +20,7 @@ const RowDataComponent = (props) => {
     sizeColumnIsEnabled,
     typeColumnIsEnabled,
     quickButtonsColumnIsEnabled,
+    lastOpenedColumnIsEnabled,
 
     dragStyles,
     selectionProp,
@@ -84,6 +85,24 @@ const RowDataComponent = (props) => {
         >
           <DateCell
             create
+            sideColor={theme.filesSection.tableView.row.sideColor}
+            {...props}
+          />
+        </TableCell>
+      ) : (
+        <div />
+      )}
+
+      {lastOpenedColumnIsEnabled ? (
+        <TableCell
+          style={
+            !lastOpenedColumnIsEnabled
+              ? { background: "none" }
+              : dragStyles.style
+          }
+          {...selectionProp}
+        >
+          <DateCell
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
@@ -173,6 +192,7 @@ export default inject(({ tableStore }) => {
     sizeColumnIsEnabled,
     typeColumnIsEnabled,
     quickButtonsColumnIsEnabled,
+    lastOpenedColumnIsEnabled,
   } = tableStore;
 
   return {
@@ -182,5 +202,6 @@ export default inject(({ tableStore }) => {
     sizeColumnIsEnabled,
     typeColumnIsEnabled,
     quickButtonsColumnIsEnabled,
+    lastOpenedColumnIsEnabled,
   };
-})(observer(RowDataComponent));
+})(observer(RecentRowDataComponent));

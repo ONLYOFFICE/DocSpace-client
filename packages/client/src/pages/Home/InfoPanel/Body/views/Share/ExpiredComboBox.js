@@ -87,7 +87,7 @@ const ExpiredComboBox = ({ link, changeExpirationOption, isDisabled }) => {
     setOneDay,
     setSevenDays,
     setUnlimited,
-    onCalendarOpen
+    onCalendarOpen,
   );
 
   const getExpirationTrans = () => {
@@ -104,7 +104,6 @@ const ExpiredComboBox = ({ link, changeExpirationOption, isDisabled }) => {
             data={expiredOptions}
             fontSize="12px"
             fontWeight={400}
-            withoutHover
             isDisabled={isDisabled}
           >
             {{ date }}
@@ -123,7 +122,6 @@ const ExpiredComboBox = ({ link, changeExpirationOption, isDisabled }) => {
             data={expiredOptions}
             fontSize="12px"
             fontWeight={400}
-            withoutHover
             isDisabled={isDisabled}
           >
             {{ date }}

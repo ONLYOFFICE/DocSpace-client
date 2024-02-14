@@ -40,12 +40,12 @@ const EmptyFolderContainer = ({
   const imageSrc = useMemo(getIcon, [getIcon]);
   const headerText = useMemo(
     () => getHeaderText(type, displayRoomCondition, t),
-    [t, displayRoomCondition, type]
+    [t, displayRoomCondition, type],
   );
 
   const descriptionText = useMemo(
     () => getDescriptionText(type, canCreateFiles, t),
-    [t, canCreateFiles, type]
+    [t, canCreateFiles, type],
   );
 
   return (
@@ -76,8 +76,6 @@ export default inject(
     const { isLoading } = clientLoadingStore;
     const { isArchiveFolderRoot } = treeFoldersStore;
 
-    const { isEmptyPage } = filesStore;
-
     return {
       isLoading,
 
@@ -85,7 +83,6 @@ export default inject(
       canCreateFiles,
       isArchiveFolderRoot,
       theme: settingsStore.theme,
-      isEmptyPage,
     };
-  }
+  },
 )(withTranslation(["Files", "Translations"])(observer(EmptyFolderContainer)));

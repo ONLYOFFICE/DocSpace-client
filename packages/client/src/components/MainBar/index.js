@@ -30,7 +30,6 @@ const StyledContainer = styled.div`
   }
 `;
 
-const pathname = window.location.pathname;
 const MainBar = ({
   firstLoad,
   checkedMaintenance,
@@ -39,18 +38,18 @@ const MainBar = ({
   isNotPaidPeriod,
   isFrame,
 }) => {
-  const location = useLocation();
+  const { pathname } = useLocation();
 
   React.useEffect(() => {
     return () => setMaintenanceExist && setMaintenanceExist(false);
   }, []);
 
   const isVisibleBar =
+    !isFrame &&
     !isNotPaidPeriod &&
-    pathname.indexOf("confirm") === -1 &&
-    pathname !== "/preparation-portal" &&
-    !location.pathname.includes("error") &&
-    !isFrame;
+    !pathname.includes("error") &&
+    !pathname.includes("confirm") &&
+    !pathname.includes("preparation-portal");
 
   return (
     <StyledContainer id={"main-bar"} className={"main-bar"}>

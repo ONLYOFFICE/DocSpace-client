@@ -17,7 +17,7 @@ const ExpiredComboBox = ({
   changeExpirationOption,
   isDisabled,
 }: ExpiredComboBoxProps) => {
-  const { t, i18n } = useTranslation(["SharingPanel", "Settings", "Common"]);
+  const { t, i18n } = useTranslation(["Common"]);
   const calendarRef = useRef<HTMLDivElement | null>(null);
   const bodyRef = useRef<HTMLDivElement | null>(null);
 

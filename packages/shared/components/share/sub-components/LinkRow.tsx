@@ -31,19 +31,14 @@ const LinkRow = ({
   availableExternalRights,
   loadingLinks,
 }: LinkRowProps) => {
-  const { t } = useTranslation([
-    "SharingPanel",
-    "Files",
-    "Translations",
-    "Common",
-  ]);
+  const { t } = useTranslation(["Common"]);
 
   const shareOptions = getShareOptions(t);
   const accessOptions = getAccessOptions(t, availableExternalRights);
 
   const onCopyLink = (link: TFileLink) => {
     copy(link.sharedTo.shareLink);
-    toastr.success(t("Files:LinkSuccessfullyCopied"));
+    toastr.success(t("Common:LinkSuccessfullyCopied"));
   };
 
   return !links?.length ? (
@@ -55,13 +50,13 @@ const LinkRow = ({
         fontWeight={600}
         onClick={onAddClick}
       >
-        {t("CreateAndCopy")}
+        {t("Common:CreateAndCopy")}
       </Link>
     </StyledLinkRow>
   ) : (
     links.map((link, index) => {
       if (("isLoaded" in link && link.isLoaded) || "isLoaded" in link)
-        return <RowSkeleton />;
+        return <RowSkeleton key="loading-link" />;
 
       const shareOption = shareOptions.find(
         (option) => option.internal === link.sharedTo.internal,
@@ -114,7 +109,7 @@ const LinkRow = ({
               size={16}
               iconName={CopyIcon}
               onClick={() => onCopyLink(link)}
-              title={t("CreateAndCopy")}
+              title={t("Common:CreateAndCopy")}
               isDisabled={isExpiredLink || isLoaded}
             />
             <ComboBox

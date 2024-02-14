@@ -40,7 +40,7 @@ const Share = (props: ShareProps) => {
     shareChanged,
     setShareChanged,
   } = props;
-  const { t } = useTranslation(["SharingPanel", "Files"]);
+  const { t } = useTranslation(["Common"]);
   const [primaryFileLink, setPrimaryFileLink] = useState<TLink[] | null>([]);
   const [additionalFileLinks, setAdditionalFileLinks] = useState<TLink[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -49,7 +49,6 @@ const Share = (props: ShareProps) => {
   const requestRunning = React.useRef(false);
 
   const hideSharePanel = isRooms || !infoPanelSelection?.canShare;
-  console.log(additionalFileLinks);
 
   const fetchLinks = React.useCallback(async () => {
     if (requestRunning.current) return;
@@ -98,7 +97,7 @@ const Share = (props: ShareProps) => {
 
     setPrimaryFileLink([link]);
     copy(link.sharedTo.shareLink);
-    toastr.success(t("SharingPanel:GeneralAccessLinkCopied"));
+    toastr.success(t("Common:GeneralAccessLinkCopied"));
   };
 
   const addAdditionalLinks = async () => {
@@ -117,7 +116,11 @@ const Share = (props: ShareProps) => {
           false,
         );
     setAdditionalFileLinks((links) => {
-      const newLinks: TLink[] = [...links, ...[newLink]];
+      const newLinks: TLink[] = [...links];
+
+      const idx = newLinks.findIndex((l) => "isLoaded" in l && l.isLoaded);
+
+      if (typeof idx !== "undefined") newLinks[idx] = { ...newLink };
 
       return newLinks;
     });
@@ -178,7 +181,7 @@ const Share = (props: ShareProps) => {
       updateLink(link, res);
 
       copy(link.sharedTo.shareLink);
-      toastr.success(t("Files:LinkSuccessfullyCopied"));
+      toastr.success(t("Common:LinkSuccessfullyCopied"));
     } catch (e) {
       toastr.error(e as TData);
     }
@@ -221,7 +224,7 @@ const Share = (props: ShareProps) => {
           toastr.success(t("LinkAccessDenied"));
         } else {
           copy(link.sharedTo.shareLink);
-          toastr.success(t("Files:LinkSuccessfullyCopied"));
+          toastr.success(t("Common:LinkSuccessfullyCopied"));
         }
       }
     } catch (e) {
@@ -259,7 +262,7 @@ const Share = (props: ShareProps) => {
       updateLink(link, res);
 
       copy(link.sharedTo.shareLink);
-      toastr.success(t("Files:LinkSuccessfullyCopied"));
+      toastr.success(t("Common:LinkSuccessfullyCopied"));
     } catch (e) {
       toastr.error(e as TData);
     }

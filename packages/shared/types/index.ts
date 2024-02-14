@@ -85,6 +85,7 @@ declare global {
         fetchTimeoutMillis?: number;
         minimumFetchIntervalMillis?: number;
       };
+      campaigns?: string[];
     };
     AscDesktopEditor: {
       execCommand: (key: string, value: string) => void;

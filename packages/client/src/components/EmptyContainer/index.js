@@ -28,6 +28,7 @@ const EmptyContainer = ({
   setInviteUsersWarningDialogVisible,
   isRoot,
   isPublicRoom,
+  isEmptyPage,
 }) => {
   //const location = useLocation();
 
@@ -85,6 +86,7 @@ const EmptyContainer = ({
       onCreate={onCreate}
       linkStyles={linkStyles}
       type={type}
+      isEmptyPage={isEmptyPage}
     />
   );
 };
@@ -128,5 +130,5 @@ export default inject(
       isRoot,
       isPublicRoom,
     };
-  }
+  },
 )(observer(EmptyContainer));

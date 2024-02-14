@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import Headline from "@docspace/common/components/Headline";
+import Headline from "@docspace/shared/components/headline/Headline";
 
 import { getItemByLink } from "SRC_DIR/utils";
 

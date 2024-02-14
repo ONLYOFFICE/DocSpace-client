@@ -195,7 +195,7 @@ const PrivateRoute = ({ children, ...rest }) => {
     // }
 
     if (isPortalRenameUrl && !enablePortalRename) {
-      return <Navigate replace to={"/error404"} />;
+      return <Navigate replace to={"/error/404"} />;
     }
 
     if (
@@ -208,10 +208,10 @@ const PrivateRoute = ({ children, ...rest }) => {
     }
 
     if (restricted) {
-      return <Navigate replace to={"/error401"} />;
+      return <Navigate replace to={"/error/401"} />;
     }
 
-    return <Navigate replace to={"/error404"} />;
+    return <Navigate replace to={"/error/404"} />;
   };
 
   const component = renderComponent();

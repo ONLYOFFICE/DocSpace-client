@@ -381,7 +381,7 @@ const ClientRoutes = [
     ),
   },
   {
-    path: "/error401",
+    path: "/error/401",
     element: (
       <PrivateRoute>
         <ErrorBoundary>
@@ -391,7 +391,7 @@ const ClientRoutes = [
     ),
   },
   {
-    path: "/error403",
+    path: "/error/403",
     element: (
       <PrivateRoute>
         <ErrorBoundary>
@@ -401,7 +401,7 @@ const ClientRoutes = [
     ),
   },
   {
-    path: "/error520",
+    path: "/error/520",
     element: (
       <PrivateRoute>
         <ErrorBoundary>
@@ -411,7 +411,7 @@ const ClientRoutes = [
     ),
   },
   {
-    path: "/errorAccessRestricted",
+    path: "/error/access/restricted",
     element: (
       <PrivateRoute>
         <ErrorBoundary>
@@ -421,7 +421,7 @@ const ClientRoutes = [
     ),
   },
   {
-    path: "/errorOffline",
+    path: "/error/offline",
     element: (
       <PrivateRoute>
         <ErrorBoundary>

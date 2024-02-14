@@ -76,14 +76,14 @@ const NextcloudWorkspace = (props) => {
   );
 };
 
-export default inject(({ setup, auth, importAccountsStore }) => {
+export default inject(({ setup, settingsStore, importAccountsStore }) => {
   const { clearCheckedAccounts } = importAccountsStore;
   const { initSettings, viewAs, setViewAs } = setup;
-  const { currentDeviceType } = auth.settingsStore;
+  const { currentDeviceType } = settingsStore;
 
   return {
     initSettings,
-    theme: auth.settingsStore.theme,
+    theme: settingsStore.theme,
     clearCheckedAccounts,
     viewAs,
     setViewAs,

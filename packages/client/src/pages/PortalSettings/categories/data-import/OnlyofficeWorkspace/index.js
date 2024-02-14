@@ -157,10 +157,10 @@ const OnlyofficeWorkspace = ({
   );
 };
 
-export default inject(({ setup, auth, importAccountsStore }) => {
+export default inject(({ setup, settingsStore, importAccountsStore }) => {
   const { clearCheckedAccounts } = importAccountsStore;
   const { viewAs, setViewAs } = setup;
-  const { currentDeviceType } = auth.settingsStore;
+  const { currentDeviceType } = settingsStore;
 
   return { clearCheckedAccounts, viewAs, setViewAs, currentDeviceType };
 })(withTranslation(["Common, Settings"])(observer(OnlyofficeWorkspace)));

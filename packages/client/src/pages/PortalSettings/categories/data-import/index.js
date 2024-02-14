@@ -65,7 +65,7 @@ const DataImport = ({ t, theme, services, setServices, getMigrationList }) => {
   };
 
   const filteredWorkspaces = workspaces.filter(
-    (workspace) => workspace.title !== "Owncloud"
+    (workspace) => workspace.title !== "Owncloud",
   );
 
   return (
@@ -100,13 +100,13 @@ const DataImport = ({ t, theme, services, setServices, getMigrationList }) => {
     </WorkspacesContainer>
   );
 };
-export default inject(({ auth, importAccountsStore }) => {
+export default inject(({ settingsStore, importAccountsStore }) => {
   const { services, setServices, getMigrationList } = importAccountsStore;
 
   return {
     services,
     setServices,
     getMigrationList,
-    theme: auth.settingsStore.theme,
+    theme: settingsStore.theme,
   };
 })(withTranslation(["Settings"])(observer(DataImport)));

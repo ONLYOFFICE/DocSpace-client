@@ -7,11 +7,15 @@ import { i18n } from "i18next";
 const useI18N = ({ settings, user }: UseI18NProps) => {
   const [i18n, setI18N] = React.useState<i18n | null>(null);
 
+  const isInit = React.useRef(false);
+
   React.useEffect(() => {
     window.timezone = settings.timezone;
   }, [settings.timezone]);
 
   React.useEffect(() => {
+    if (isInit.current) return;
+    isInit.current = true;
     const instance = getI18NInstance(
       user.cultureName || "en",
       settings.culture,

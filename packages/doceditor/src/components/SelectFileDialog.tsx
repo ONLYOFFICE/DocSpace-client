@@ -1,10 +1,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import FilesSelectorWrapper from "@docspace/shared/selectors/Files/FilesSelector.wrapper";
 
-import FilesSelector from "@docspace/shared/selectors/Files";
 import { DeviceType, FilesSelectorFilterTypes } from "@docspace/shared/enums";
 
 import { SelectFileDialogProps } from "@/types";
+import { useTheme } from "styled-components";
 
 const SelectFileDialog = ({
   socketHelper,
@@ -15,7 +16,7 @@ const SelectFileDialog = ({
   onSubmit,
   fileInfo,
 }: SelectFileDialogProps) => {
-  const { t } = useTranslation(["Common", "Editor"]);
+  const { t, i18n } = useTranslation(["Common", "Editor"]);
 
   const sessionPath = sessionStorage.getItem("filesSelectorPath");
 
@@ -45,41 +46,42 @@ const SelectFileDialog = ({
 
   const listTitle = selectFilesListTitle();
 
+  const theme = useTheme();
+
   return (
-    <FilesSelector
+    <FilesSelectorWrapper
+      theme={theme}
+      i18nProp={i18n}
+      withoutBackButton
+      withSearch
+      withBreadCrumbs
       socketHelper={socketHelper}
       socketSubscribers={socketHelper.socketSubscribers}
       disabledItems={[]}
       isPanelVisible={isVisible}
-      onClose={onClose}
-      onCloseAction={onClose}
-      onAccept={onSubmit}
+      onCancel={onClose}
+      onSubmit={onSubmit}
       isRoomsOnly={false}
       isThirdParty={false}
       currentFolderId={sessionPath || fileInfo.folderId}
       rootFolderType={fileInfo.rootFolderType}
       withHeader
       headerLabel={headerLabel}
-      searchPlaceholder={t("Common:Search")}
-      emptyScreenDescription=""
-      emptyScreenHeader=""
       embedded={false}
       withFooterInput={false}
       withFooterCheckbox={false}
       footerCheckboxLabel=""
       footerInputHeader=""
       currentFooterInputValue=""
-      acceptButtonLabel={t("Common:SelectAction")}
+      submitButtonLabel={t("Common:SelectAction")}
       cancelButtonLabel={t("Common:CancelButton")}
-      searchEmptyScreenDescription=""
-      searchEmptyScreenHeader={t("Common:NotFoundTitle")}
       withCancelButton
       descriptionText={listTitle}
       currentDeviceType={DeviceType.desktop}
       getFilesArchiveError={() => ""}
       parentId={0}
       getIsDisabled={getIsDisabled}
-      acceptButtonId="select-file-modal-submit"
+      submitButtonId="select-file-modal-submit"
       cancelButtonId="select-file-modal-cancel"
       {...fileTypeDetection}
     />

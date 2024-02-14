@@ -7,7 +7,6 @@ import { getLtrLanguageForEditor } from "@docspace/shared/utils/common";
 import { TenantStatus } from "@docspace/shared/enums";
 
 import { IResponse } from "@/types";
-import { getI18NInstance } from "./i18n";
 
 const API_PREFIX = "api/2.0";
 

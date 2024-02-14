@@ -31,6 +31,7 @@ const Editor = ({
 
   const { i18n } = useI18N({ settings, user });
   const { theme } = useTheme({ user });
+
   const { socketHelper } = useSocketHelper({ socketUrl: settings.socketUrl });
   const {
     onSDKRequestSaveAs,
@@ -77,41 +78,45 @@ const Editor = ({
   }
 
   return (
-    <I18nextProvider i18n={i18n || ({} as i18n)}>
-      <ThemeProvider theme={theme}>
-        <DocumentEditor
-          id={"docspace_editor"}
-          documentServerUrl={documentserverUrl}
-          config={newConfig}
-          height="100%"
-          width="100%"
-          events_onDocumentReady={onDocumentReady}
-        />
-
-        {isVisibleSelectFolderDialog && !!socketHelper && (
-          <SelectFolderDialog
-            socketHelper={socketHelper}
-            isVisible={isVisibleSelectFolderDialog}
-            onSubmit={onSubmitSelectFolderDialog}
-            onClose={onCloseSelectFolderDialog}
-            titleSelectorFolder={titleSelectorFolderDialog}
-            fileInfo={fileInfo}
-            getIsDisabled={getIsDisabledSelectFolderDialog}
-          />
-        )}
-        {selectFileDialogVisible && !!socketHelper && (
-          <SelectFileDialog
-            socketHelper={socketHelper}
-            isVisible={selectFileDialogVisible}
-            onSubmit={onSubmitSelectFileDialog}
-            onClose={onCloseSelectFileDialog}
-            getIsDisabled={getIsDisabledSelectFileDialog}
-            fileTypeDetection={selectFileDialogFileTypeDetection}
-            fileInfo={fileInfo}
-          />
-        )}
-      </ThemeProvider>
-    </I18nextProvider>
+    <>
+      {" "}
+      <DocumentEditor
+        id={"docspace_editor"}
+        documentServerUrl={documentserverUrl}
+        config={newConfig}
+        height="100%"
+        width="100%"
+        events_onDocumentReady={onDocumentReady}
+      />
+      {theme && i18n && (
+        <I18nextProvider i18n={i18n}>
+          <ThemeProvider theme={theme}>
+            {isVisibleSelectFolderDialog && !!socketHelper && (
+              <SelectFolderDialog
+                socketHelper={socketHelper}
+                isVisible={isVisibleSelectFolderDialog}
+                onSubmit={onSubmitSelectFolderDialog}
+                onClose={onCloseSelectFolderDialog}
+                titleSelectorFolder={titleSelectorFolderDialog}
+                fileInfo={fileInfo}
+                getIsDisabled={getIsDisabledSelectFolderDialog}
+              />
+            )}
+            {selectFileDialogVisible && !!socketHelper && (
+              <SelectFileDialog
+                socketHelper={socketHelper}
+                isVisible={selectFileDialogVisible}
+                onSubmit={onSubmitSelectFileDialog}
+                onClose={onCloseSelectFileDialog}
+                getIsDisabled={getIsDisabledSelectFileDialog}
+                fileTypeDetection={selectFileDialogFileTypeDetection}
+                fileInfo={fileInfo}
+              />
+            )}
+          </ThemeProvider>
+        </I18nextProvider>
+      )}
+    </>
   );
 };
 

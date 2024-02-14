@@ -25,16 +25,6 @@ export const ConfirmType = Object.freeze({
 });
 
 /**
- * Enum for result of validation confirm link.
- * @readonly
- */
-export const ValidationResult = Object.freeze({
-  Ok: 0,
-  Invalid: 1,
-  Expired: 2,
-  TariffLimit: 3,
-});
-/**
  * Enum for result of validation public room keys.
  * @readonly
  */

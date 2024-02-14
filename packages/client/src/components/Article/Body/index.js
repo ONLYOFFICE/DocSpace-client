@@ -43,6 +43,7 @@ const ArticleBodyContent = (props) => {
     setIsBurgerLoading,
     setSelection,
     currentDeviceType,
+    campaigns,
   } = props;
 
   const navigate = useNavigate();
@@ -50,10 +51,6 @@ const ArticleBodyContent = (props) => {
 
   const [disableBadgeClick, setDisableBadgeClick] = React.useState(false);
   const [activeItemId, setActiveItemId] = React.useState(null);
-
-  const campaigns = (localStorage.getItem("docspace_campaigns") || "")
-    .split(",")
-    .filter((campaign) => campaign.length > 0);
 
   const isAccounts = location.pathname.includes("accounts/filter");
 
@@ -156,7 +153,7 @@ const ArticleBodyContent = (props) => {
       selectedFolderId,
       isAccounts,
       setSelection,
-    ]
+    ],
   );
 
   const onShowNewFilesPanel = React.useCallback(
@@ -169,7 +166,7 @@ const ArticleBodyContent = (props) => {
 
       setDisableBadgeClick(false);
     },
-    [disableBadgeClick]
+    [disableBadgeClick],
   );
 
   React.useEffect(() => {
@@ -257,6 +254,7 @@ export default inject(
     selectedFolderStore,
     clientLoadingStore,
     userStore,
+    campaignsStore,
   }) => {
     const { clearFiles, setSelection } = filesStore;
     const {
@@ -291,6 +289,8 @@ export default inject(
       currentDeviceType,
     } = settingsStore;
 
+    const { campaigns } = campaignsStore;
+
     return {
       toggleArticleOpen,
       showText,
@@ -317,6 +317,7 @@ export default inject(
       setIsBurgerLoading,
       setSelection,
       currentDeviceType,
+      campaigns,
     };
-  }
+  },
 )(withTranslation([])(observer(ArticleBodyContent)));

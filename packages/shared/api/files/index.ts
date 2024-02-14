@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
-
+import moment from "moment";
 import {
   ConflictResolveType,
   FolderType,
@@ -35,7 +35,6 @@ import {
   TTirdParties,
   TUploadOperation,
 } from "./types";
-import moment from "moment";
 
 export async function openEdit(
   fileId: number,

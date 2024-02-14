@@ -1,4 +1,5 @@
 import React from "react";
+import { flushSync } from "react-dom";
 import { useTranslation } from "react-i18next";
 
 import ClearReactSvgUrl from "PUBLIC_DIR/images/clear.react.svg?url";
@@ -288,7 +289,7 @@ const FilterBlock = ({
   );
 
   const getDefaultFilterData = React.useCallback(async () => {
-    setIsLoading(true);
+    flushSync(() => setIsLoading(true));
     const data = await getFilterData();
 
     const items = data.filter((item) => item.isHeader === true);

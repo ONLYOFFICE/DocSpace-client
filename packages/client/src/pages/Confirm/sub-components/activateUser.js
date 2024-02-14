@@ -14,6 +14,8 @@ import {
 } from "@docspace/shared/api/people";
 import { createPasswordHash } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/shared/components/toast";
+import { getPasswordErrorMessage } from "@docspace/shared/utils/getPasswordErrorMessage";
+
 import {
   StyledPage,
   StyledContent,
@@ -21,7 +23,6 @@ import {
   StyledHeader,
 } from "./StyledConfirm";
 import withLoader from "../withLoader";
-import { getPasswordErrorMessage } from "SRC_DIR/helpers/utils";
 
 const ActivateUserForm = (props) => {
   const {
@@ -96,7 +97,7 @@ const ActivateUserForm = (props) => {
       loginData,
       linkData.confirmHeader,
       linkData.uid,
-      EmployeeActivationStatus.Activated
+      EmployeeActivationStatus.Activated,
     )
       .then(() => {
         setIsLoading(false);
@@ -114,7 +115,7 @@ const ActivateUserForm = (props) => {
     loginData,
     key,
     userId,
-    activationStatus
+    activationStatus,
   ) => {
     const changedData = {
       id: userId,
@@ -197,7 +198,7 @@ const ActivateUserForm = (props) => {
             labelVisible={false}
             hasError={isPasswordErrorShow && !passwordValid}
             errorMessage={`${t(
-              "Common:PasswordLimitMessage"
+              "Common:PasswordLimitMessage",
             )}: ${getPasswordErrorMessage(t, settings)}`}
           >
             <PasswordInput
@@ -225,7 +226,7 @@ const ActivateUserForm = (props) => {
               tooltipPasswordDigits={`${t("Common:PasswordLimitDigits")}`}
               tooltipPasswordCapital={`${t("Common:PasswordLimitUpperCase")}`}
               tooltipPasswordSpecial={`${t(
-                "Common:PasswordLimitSpecialSymbols"
+                "Common:PasswordLimitSpecialSymbols",
               )}`}
               generatePasswordTitle={t("Wizard:GeneratePassword")}
               // If need copy credentials use t("EmailAndPasswordCopiedToClipboard")
@@ -266,6 +267,6 @@ export default inject(({ authStore, settingsStore }) => {
   };
 })(
   withTranslation(["Confirm", "Common", "Wizard"])(
-    withLoader(observer(ActivateUserForm))
-  )
+    withLoader(observer(ActivateUserForm)),
+  ),
 );

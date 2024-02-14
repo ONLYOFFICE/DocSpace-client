@@ -74,7 +74,9 @@ class GroupsStore {
   };
 
   resetGroupsFilter = () => {
-    this.setFilterParams(GroupsFilter.getDefault());
+    const filter = GroupsFilter.getDefault();
+
+    window.DocSpace.navigate(`accounts/groups/filter?${filter.toUrlParams()}`);
   };
 
   get groupsFilterTotal() {

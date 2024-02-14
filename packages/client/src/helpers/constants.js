@@ -76,6 +76,7 @@ export const TableVersions = Object.freeze({
   Files: "2",
   Accounts: "3",
   Trash: "4",
+  Recent: "1",
 });
 
 /**

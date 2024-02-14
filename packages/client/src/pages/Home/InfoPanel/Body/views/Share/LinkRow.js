@@ -14,7 +14,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { toastr } from "@docspace/shared/components/toast";
 import { Loader } from "@docspace/shared/components/loader";
 
-import { StyledLinkRow } from "./StyledShare";
+import { StyledLinkRow, StyledSquare } from "./StyledShare";
 import { getShareOptions, getAccessOptions } from "./optionsHelper";
 import ExpiredComboBox from "./ExpiredComboBox";
 import { RowLoader } from "./ShareLoader";
@@ -47,7 +47,9 @@ const LinkRow = ({
     <>
       {!links?.length ? (
         <StyledLinkRow>
-          <Avatar size="min" source={PlusIcon} />
+          <StyledSquare>
+            <IconButton size={12} iconName={PlusIcon} isDisabled />
+          </StyledSquare>
           <Link
             type="action"
             isHovered={true}
@@ -62,13 +64,13 @@ const LinkRow = ({
           if (link.isLoaded) return <RowLoader />;
 
           const shareOption = shareOptions.find(
-            (option) => option.internal === link.sharedTo.internal
+            (option) => option.internal === link.sharedTo?.internal,
           );
           const accessOption = accessOptions.find(
-            (option) => option.access === link.access
+            (option) => option.access === link.access,
           );
           const avatar =
-            shareOption.key === "anyone" ? UniverseIcon : PeopleIcon;
+            shareOption?.key === "anyone" ? UniverseIcon : PeopleIcon;
 
           const isExpiredLink = link.sharedTo.isExpired;
 

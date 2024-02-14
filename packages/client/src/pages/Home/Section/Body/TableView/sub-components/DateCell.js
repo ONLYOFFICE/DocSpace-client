@@ -1,8 +1,19 @@
 import React from "react";
 import { StyledText } from "./CellStyles";
 
-const DateCell = ({ create, updatedDate, createdDate, sideColor }) => {
-  const date = create ? createdDate : updatedDate;
+const DateCell = ({
+  create,
+  updatedDate,
+  createdDate,
+  sideColor,
+  lastOpenedDate,
+  isRecentTab,
+}) => {
+  const date = isRecentTab
+    ? lastOpenedDate
+    : create
+      ? createdDate
+      : updatedDate;
 
   return (
     <StyledText

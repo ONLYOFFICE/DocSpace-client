@@ -33,6 +33,7 @@ const User = ({
   showTooltip,
   infoPanelMembers,
   setInfoPanelMembers,
+  resendEmailInvitations,
 }) => {
   if (!infoPanelSelection) return null;
   if (!user.displayName && !user.email) return null;

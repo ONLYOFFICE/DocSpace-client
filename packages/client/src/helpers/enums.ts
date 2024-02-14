@@ -18,4 +18,16 @@ export const enum SortByFieldName {
   Room = "Room",
   Tags = "Tags",
   RoomType = "roomType",
+  LastOpened = "LastOpened",
+}
+
+/**
+ * Enum for result of validation confirm link.
+ * @readonly
+ */
+export const enum ValidationResult {
+  Ok = 0,
+  Invalid = 1,
+  Expired = 2,
+  TariffLimit = 3,
 }

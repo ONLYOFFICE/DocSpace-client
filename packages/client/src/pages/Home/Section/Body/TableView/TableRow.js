@@ -8,6 +8,7 @@ import { withTranslation } from "react-i18next";
 import { classNames } from "@docspace/shared/utils";
 import RoomsRowDataComponent from "./sub-components/RoomsRowData";
 import TrashRowDataComponent from "./sub-components/TrashRowData";
+import RecentRowDataComponent from "./sub-components/RecentRowData";
 import RowDataComponent from "./sub-components/RowData";
 import { StyledTableRow, StyledDragAndDrop } from "./StyledTable";
 
@@ -43,6 +44,7 @@ const FilesTableRow = (props) => {
     onDragOver,
     onDragLeave,
     badgeUrl,
+    isRecentTab,
   } = props;
   const { acceptBackground, background } = theme.dragAndDrop;
 
@@ -165,6 +167,13 @@ const FilesTableRow = (props) => {
           <TrashRowDataComponent
             element={element}
             dragStyles={dragStyles}
+            {...props}
+          />
+        ) : isRecentTab ? (
+          <RecentRowDataComponent
+            element={element}
+            dragStyles={dragStyles}
+            selectionProp={selectionProp}
             {...props}
           />
         ) : (

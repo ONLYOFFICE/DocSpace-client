@@ -98,6 +98,7 @@ const PeopleSelector = ({
   const [isNextPageLoading, setIsNextPageLoading] = useState(false);
   const [selectedItem, setSelectedItem] = useState<TSelectorItem | null>(null);
   const isFirstLoad = useRef(true);
+  const afterSearch = useRef(false);
   const totalRef = useRef(0);
 
   const moveCurrentUserToTopOfList = useCallback(
@@ -207,6 +208,7 @@ const PeopleSelector = ({
 
   const onSearch = useCallback((value: string, callback?: Function) => {
     isFirstLoad.current = true;
+    afterSearch.current = true;
     setSearchValue(() => {
       return value;
     });
@@ -215,6 +217,7 @@ const PeopleSelector = ({
 
   const onClearSearch = useCallback((callback?: Function) => {
     isFirstLoad.current = true;
+    afterSearch.current = true;
     setSearchValue(() => {
       return "";
     });
@@ -250,7 +253,8 @@ const PeopleSelector = ({
     onSearch,
     onClearSearch,
     searchLoader: <SearchLoader />,
-    isSearchLoading: isFirstLoad.current,
+    isSearchLoading:
+      isFirstLoad.current && !searchValue && !afterSearch.current,
   };
 
   const checkboxSelectorProps: TSelectorCheckbox = withFooterCheckbox

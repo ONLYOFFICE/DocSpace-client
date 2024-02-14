@@ -3096,7 +3096,7 @@ __metadata:
     "@types/react-dom": "npm:^18"
     eslint: "npm:^8"
     eslint-config-next: "npm:14.0.4"
-    i18next: "npm:^23.8.2"
+    i18next: "npm:^20.6.1"
     mobx: "npm:^6.8.0"
     next: "npm:14.0.4"
     prettier: "npm:^3.2.4"
@@ -17619,15 +17619,6 @@ __metadata:
   dependencies:
     "@babel/runtime": "npm:^7.17.2"
   checksum: f0d2ab888627c24b00068461eeedad33437970396539b663a4916e7ba279f6bb91e34221ee9c3608079b9d320a0cb02e9f51458f5c47c809c45676900db94abf
-  languageName: node
-  linkType: hard
-
-"i18next@npm:^23.8.2":
-  version: 23.8.2
-  resolution: "i18next@npm:23.8.2"
-  dependencies:
-    "@babel/runtime": "npm:^7.23.2"
-  checksum: 594c4d5bafd9ac0073a5f2c0ccb40b157571857d43f7f22949a5ab6ea07e6e6f7e39058ddee6e7396369b54d5d741e76cba59c0d5c23ce0ab99e06b249c66f5e
   languageName: node
   linkType: hard
 

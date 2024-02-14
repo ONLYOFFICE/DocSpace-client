@@ -6,8 +6,8 @@ import Error403 from "client/Error403";
 
 import AppLoader from "../AppLoader";
 
-import combineUrl from "../../utils/combineUrl";
-import { TenantStatus } from "../../constants";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { TenantStatus } from "@docspace/shared/enums";
 
 const PrivateRoute = ({ children, ...rest }) => {
   const {
@@ -30,7 +30,7 @@ const PrivateRoute = ({ children, ...rest }) => {
     isEnterprise,
     isPortalDeactivate,
     enablePortalRename,
-    limitedAccessSpace
+    limitedAccessSpace,
   } = rest;
 
   const location = useLocation();
@@ -105,7 +105,7 @@ const PrivateRoute = ({ children, ...rest }) => {
     }
 
     if (isLoaded && limitedAccessSpace && isPortalDeletionUrl) {
-      return <Error403 />
+      return <Error403 />;
     }
 
     if (
@@ -219,48 +219,48 @@ const PrivateRoute = ({ children, ...rest }) => {
   return component;
 };
 
-export default inject(({ auth }) => {
-  const {
-    userStore,
-    isAuthenticated,
-    isLoaded,
-    isAdmin,
-    settingsStore,
-    currentTariffStatusStore,
-    isLogout,
-    isCommunity,
-    isEnterprise,
-  } = auth;
-  const { isNotPaidPeriod } = currentTariffStatusStore;
-  const { user } = userStore;
+export default inject(
+  ({ authStore, settingsStore, userStore, currentTariffStatusStore }) => {
+    const {
+      isAuthenticated,
+      isLoaded,
+      isAdmin,
 
-  const {
-    setModuleInfo,
-    wizardCompleted,
-    personal,
-    tenantStatus,
-    standalone,
-    isPortalDeactivate,
-    enablePortalRename,
-    limitedAccessSpace
-  } = settingsStore;
+      isLogout,
+      isCommunity,
+      isEnterprise,
+    } = authStore;
+    const { isNotPaidPeriod } = currentTariffStatusStore;
+    const { user } = userStore;
 
-  return {
-    isPortalDeactivate,
-    isCommunity,
-    isNotPaidPeriod,
-    user,
-    isAuthenticated,
-    isAdmin,
-    isLoaded,
+    const {
+      setModuleInfo,
+      wizardCompleted,
+      personal,
+      tenantStatus,
+      standalone,
+      isPortalDeactivate,
+      enablePortalRename,
+      limitedAccessSpace,
+    } = settingsStore;
 
-    wizardCompleted,
-    tenantStatus,
+    return {
+      isPortalDeactivate,
+      isCommunity,
+      isNotPaidPeriod,
+      user,
+      isAuthenticated,
+      isAdmin,
+      isLoaded,
 
-    isLogout,
-    standalone,
-    isEnterprise,
-    enablePortalRename,
-    limitedAccessSpace
-  };
-})(observer(PrivateRoute));
+      wizardCompleted,
+      tenantStatus,
+
+      isLogout,
+      standalone,
+      isEnterprise,
+      enablePortalRename,
+      limitedAccessSpace,
+    };
+  }
+)(observer(PrivateRoute));

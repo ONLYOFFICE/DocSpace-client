@@ -5,7 +5,7 @@ import GalleryItemTitle from "./GalleryItemTitle";
 import RoomsItemHeader from "./Rooms";
 
 const ItemTitle = ({
-  selection,
+  infoPanelSelection,
   gallerySelected,
   isNoItem,
   isAccounts,
@@ -18,13 +18,13 @@ const ItemTitle = ({
   setCalendarDay,
   roomsView,
 }) => {
-  if (!selection) return null;
+  if (!infoPanelSelection) return null;
   if (isNoItem) return null;
 
   if (isAccounts)
     return (
       <AccountsItemTitle
-        selection={selection}
+        infoPanelSelection={infoPanelSelection}
         isSeveralItems={isSeveralItems}
         getUserContextOptions={getUserContextOptions}
         selectionLength={selectionLength}
@@ -49,19 +49,27 @@ const ItemTitle = ({
   );
 };
 
-export default inject(({ auth, settingsStore, peopleStore, oformsStore }) => {
-  const { currentColorScheme } = auth.settingsStore;
-  const { roomsView, setCalendarDay } = auth.infoPanelStore;
-  const { getIcon } = settingsStore;
-  const { getUserContextOptions } = peopleStore.contextOptionsStore;
-  const { gallerySelected } = oformsStore;
+export default inject(
+  ({
+    settingsStore,
+    filesSettingsStore,
+    peopleStore,
+    oformsStore,
+    infoPanelStore,
+  }) => {
+    const { currentColorScheme } = settingsStore;
+    const { getIcon } = filesSettingsStore;
+    const { getUserContextOptions } = peopleStore.contextOptionsStore;
+    const { gallerySelected } = oformsStore;
+    const { roomsView, setCalendarDay } = infoPanelStore;
 
-  return {
-    currentColorScheme,
-    gallerySelected,
-    getUserContextOptions,
-    getIcon,
-    setCalendarDay,
-    roomsView,
-  };
-})(observer(ItemTitle));
+    return {
+      currentColorScheme,
+      gallerySelected,
+      getUserContextOptions,
+      getIcon,
+      roomsView,
+      setCalendarDay,
+    };
+  }
+)(observer(ItemTitle));

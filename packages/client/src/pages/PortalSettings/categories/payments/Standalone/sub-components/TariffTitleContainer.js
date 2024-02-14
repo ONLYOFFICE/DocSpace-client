@@ -2,7 +2,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 import { StyledTitleComponent } from "../StyledComponent";
 
 const TariffTitleContainer = ({
@@ -75,8 +75,7 @@ const TariffTitleContainer = ({
   );
 };
 
-export default inject(({ auth }) => {
-  const { currentTariffStatusStore, currentQuotaStore } = auth;
+export default inject(({ currentQuotaStore, currentTariffStatusStore }) => {
   const { trialDaysLeft, paymentDate, isLicenseDateExpired } =
     currentTariffStatusStore;
   const { isTrial } = currentQuotaStore;

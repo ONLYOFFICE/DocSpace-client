@@ -1,11 +1,11 @@
 import React from "react";
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
-import Avatar from "@docspace/components/avatar";
-import Text from "@docspace/components/text";
+import { Avatar } from "@docspace/shared/components/avatar";
+import { Text } from "@docspace/shared/components/text";
 import HistoryBlockMessage from "./HistoryBlockMessage";
 import HistoryBlockItemList from "./HistoryBlockItemList";
 import HistoryBlockUser from "./HistoryBlockUser";
-import { FeedItemTypes } from "@docspace/common/constants";
+import { FeedItemTypes } from "@docspace/shared/enums";
 import DefaultUserAvatarSmall from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
 import { StyledHistoryBlock } from "../../styles/history";
 import { getDateTime } from "../../helpers/HistoryHelper";
@@ -13,11 +13,10 @@ import { decode } from "he";
 
 const HistoryBlock = ({
   t,
-  selection,
   selectionIsFile,
   feed,
   selectedFolder,
-  selectionParentRoom,
+  infoPanelSelection,
   getInfoPanelItemIcon,
   checkAndOpenLocationAction,
   openUser,
@@ -73,9 +72,8 @@ const HistoryBlock = ({
           className="message"
           action={json}
           groupedActions={groupedFeeds}
-          selection={selection}
           selectedFolder={selectedFolder}
-          selectionParentRoom={selectionParentRoom}
+          infoPanelSelection={infoPanelSelection}
         />
 
         {isItemAction && withFileList && (

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import Button from "@docspace/components/button";
+import { Button } from "@docspace/shared/components/button";
 import styled, { css } from "styled-components";
 import SalesDepartmentRequestDialog from "../../../../../../components/dialogs/SalesDepartmentRequestDialog";
 import { inject, observer } from "mobx-react";
@@ -44,8 +44,8 @@ const RequestButtonContainer = ({ isDisabled, isLoading }) => {
   );
 };
 
-export default inject(({ payments }) => {
-  const { isLoading } = payments;
+export default inject(({ paymentStore }) => {
+  const { isLoading } = paymentStore;
 
   return {
     isLoading,

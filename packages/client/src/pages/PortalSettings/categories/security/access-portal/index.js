@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Trans, withTranslation } from "react-i18next";
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { MainContainer } from "../StyledSecurity";
 import TfaSection from "./tfa";
@@ -12,10 +12,10 @@ import SessionLifetimeSection from "./sessionLifetime";
 import BruteForceProtectionSection from "./bruteForceProtection";
 import MobileView from "./mobileView";
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
-import { size } from "@docspace/components/utils/device";
+import { size } from "@docspace/shared/utils";
 import { inject, observer } from "mobx-react";
-import Link from "@docspace/components/link";
-import { DeviceType } from "@docspace/common/constants";
+import { Link } from "@docspace/shared/components/link";
+import { DeviceType } from "@docspace/shared/enums";
 
 const AccessPortal = (props) => {
   const {
@@ -54,7 +54,7 @@ const AccessPortal = (props) => {
           className="link-learn-more"
           target="_blank"
           isHovered
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
           href={passwordStrengthSettingsUrl}
         >
           {t("Common:LearnMore")}
@@ -78,7 +78,7 @@ const AccessPortal = (props) => {
           className="link-learn-more"
           target="_blank"
           isHovered
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
           href={tfaSettingsUrl}
         >
           {t("Common:LearnMore")}
@@ -102,7 +102,7 @@ const AccessPortal = (props) => {
           className="link-learn-more"
           target="_blank"
           isHovered
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
           href={trustedMailDomainSettingsUrl}
         >
           {t("Common:LearnMore")}
@@ -123,7 +123,7 @@ const AccessPortal = (props) => {
           className="link-learn-more"
           target="_blank"
           isHovered
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
           href={ipSettingsUrl}
         >
           {t("Common:LearnMore")}
@@ -157,7 +157,7 @@ const AccessPortal = (props) => {
           className="link-learn-more"
           target="_blank"
           isHovered
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
           href={administratorMessageSettingsUrl}
         >
           {t("Common:LearnMore")}
@@ -180,7 +180,7 @@ const AccessPortal = (props) => {
           className="link-learn-more"
           target="_blank"
           isHovered
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
           href={lifetimeSettingsUrl}
         >
           {t("Common:LearnMore")}
@@ -192,7 +192,7 @@ const AccessPortal = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
+export default inject(({ settingsStore }) => {
   const {
     currentColorScheme,
     passwordStrengthSettingsUrl,
@@ -202,7 +202,7 @@ export default inject(({ auth }) => {
     lifetimeSettingsUrl,
     ipSettingsUrl,
     currentDeviceType,
-  } = auth.settingsStore;
+  } = settingsStore;
 
   const isMobileView = currentDeviceType === DeviceType.mobile;
 

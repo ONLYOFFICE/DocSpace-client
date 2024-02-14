@@ -1,4 +1,4 @@
-//import "@docspace/common/utils/wdyr";
+// import "@docspace/shared/utils/wdyr";
 import React from "react";
 import { RouterProvider } from "react-router-dom";
 

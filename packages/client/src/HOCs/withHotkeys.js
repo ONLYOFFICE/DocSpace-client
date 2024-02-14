@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { observer, inject } from "mobx-react";
 import { useNavigate } from "react-router-dom";
-import { Events } from "@docspace/common/constants";
-import toastr from "@docspace/components/toast/toastr";
+import { Events } from "@docspace/shared/enums";
+import { toastr } from "@docspace/shared/components/toast";
 import throttle from "lodash/throttle";
-import { checkDialogsOpen } from "@docspace/common/utils/checkDialogsOpen";
+import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 
 const withHotkeys = (Component) => {
   const WithHotkeys = (props) => {
@@ -218,7 +218,7 @@ const withHotkeys = (Component) => {
     useHotkeys("ctrl+RIGHT, command+RIGHT", moveCaretRight, hotkeysFilter);
 
     //Open item
-    useHotkeys("Enter", openItem, hotkeysFilter);
+    useHotkeys("Enter", () => openItem(t), hotkeysFilter);
 
     //Back to parent folder
     useHotkeys("Backspace", backToParentFolder, hotkeysFilter);
@@ -379,15 +379,17 @@ const withHotkeys = (Component) => {
 
   return inject(
     ({
-      auth,
+      settingsStore,
       filesStore,
       dialogsStore,
-      settingsStore,
+      filesSettingsStore,
       filesActionsStore,
       hotkeyStore,
       mediaViewerDataStore,
       treeFoldersStore,
       selectedFolderStore,
+      userStore,
+      currentTariffStatusStore,
     }) => {
       const {
         setSelected,
@@ -435,10 +437,10 @@ const withHotkeys = (Component) => {
       } = filesActionsStore;
 
       const { visible: mediaViewerIsVisible } = mediaViewerDataStore;
-      const { setHotkeyPanelVisible } = auth.settingsStore;
-      const { isGracePeriod } = auth.currentTariffStatusStore;
+      const { setHotkeyPanelVisible } = settingsStore;
+      const { isGracePeriod } = currentTariffStatusStore;
 
-      const isVisitor = auth.userStore.user?.isVisitor;
+      const isVisitor = userStore.user?.isVisitor;
 
       const {
         isFavoritesFolder,
@@ -458,7 +460,7 @@ const withHotkeys = (Component) => {
         setHotkeyPanelVisible,
         setDeleteDialogVisible,
         setSelectFileDialogVisible,
-        confirmDelete: settingsStore.confirmDelete,
+        confirmDelete: filesSettingsStore.confirmDelete,
         deleteAction,
         isAvailableOption,
 

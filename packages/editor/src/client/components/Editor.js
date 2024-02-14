@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { isMobile, isIOS, deviceType } from "react-device-detect";
-import combineUrl from "@docspace/common/utils/combineUrl";
-import { FolderType, EDITOR_ID } from "@docspace/common/constants";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { FolderType } from "@docspace/shared/enums";
+import { EDITOR_ID } from "@docspace/shared/constants";
 import throttle from "lodash/throttle";
-import Toast from "@docspace/components/toast";
+import { Toast } from "@docspace/shared/components/toast";
 import { toast } from "react-toastify";
 import {
   restoreDocumentsVersion,
@@ -18,12 +19,13 @@ import {
   getSharedUsers,
   getProtectUsers,
   sendEditorNotify,
-} from "@docspace/common/api/files";
+} from "@docspace/shared/api/files";
 import { EditorWrapper } from "../components/StyledEditor";
 import { useTranslation } from "react-i18next";
 import withDialogs from "../helpers/withDialogs";
-import { assign, frameCallEvent, getEditorTheme } from "@docspace/common/utils";
-import toastr from "@docspace/components/toast/toastr";
+import { assign, frameCallEvent, frameCallCommand } from "@docspace/shared/utils/common";
+import { getEditorTheme } from "@docspace/shared/utils";
+import { toastr } from "@docspace/shared/components/toast";
 import { DocumentEditor } from "@onlyoffice/document-editor-react";
 import ErrorContainer from "@docspace/common/components/ErrorContainer";
 import DeepLink from "./DeepLink";
@@ -95,14 +97,14 @@ function Editor({
   config,
   //personal,
   successAuth,
-  // isSharingAccess,
+  isSharingAccess,
   user,
   doc,
   error,
-  // sharingDialog,
-  // onSDKRequestSharingSettings,
-  // loadUsersRightsList,
-  // isVisible,
+  sharingDialog,
+  onSDKRequestSharingSettings,
+  loadUsersRightsList,
+  isVisible,
   selectFileDialog,
   onSDKRequestInsertImage,
   onSDKRequestSelectSpreadsheet,
@@ -138,6 +140,8 @@ function Editor({
     const androidID = portalSettings?.deepLink?.androidPackageName;
     const iOSId = portalSettings?.deepLink?.iosPackageId;
     const deepLinkUrl = portalSettings?.deepLink?.url;
+    const isAndroidWebView =
+      window.navigator.userAgent.includes("AscAndroidWebView");
 
     const defaultOpenDocument = localStorage.getItem("defaultOpenDocument");
     const params = new URLSearchParams(window.location.search);
@@ -149,7 +153,8 @@ function Editor({
       androidID &&
       iOSId &&
       deepLinkUrl &&
-      !withoutRedirect
+      !withoutRedirect &&
+      !isAndroidWebView
     ) {
       setIsShowDeepLink(true);
     }
@@ -192,6 +197,7 @@ function Editor({
       fileInfo &&
       fileInfo.viewAccessibility.WebRestrictedEditing &&
       fileInfo.security.FillForms &&
+      fileInfo.rootFolderType === FolderType.Rooms &&
       !fileInfo.security.Edit &&
       !config?.document?.isLinkedForMe
     ) {
@@ -473,7 +479,12 @@ function Editor({
 
   const onSDKRequestHistory = async () => {
     try {
-      const fileHistory = await getEditHistory(fileId, doc);
+      const search = window.location.search;
+      const shareIndex = search.indexOf("share=");
+      const requestToken =
+        shareIndex > -1 ? search.substring(shareIndex + 6) : null;
+
+      const fileHistory = await getEditHistory(fileId, doc, requestToken);
       const historyLength = fileHistory.length;
 
       docEditor.refreshHistory({
@@ -501,7 +512,17 @@ function Editor({
     const version = event.data;
 
     try {
-      const versionDifference = await getEditDiff(fileId, version, doc);
+      const search = window.location.search;
+      const shareIndex = search.indexOf("share=");
+      const requestToken =
+        shareIndex > -1 ? search.substring(shareIndex + 6) : null;
+
+      const versionDifference = await getEditDiff(
+        fileId,
+        version,
+        doc,
+        requestToken
+      );
       const changesUrl = versionDifference.changesUrl;
       const previous = versionDifference.previous;
       const token = versionDifference.token;
@@ -546,9 +567,11 @@ function Editor({
 
     config?.errorMessage && docEditor?.showMessage(config.errorMessage);
 
-    // if (isSharingAccess) {
-    //   loadUsersRightsList(docEditor);
-    // }
+    if (isSharingAccess) {
+      loadUsersRightsList(docEditor);
+    }
+
+    frameCallCommand("setIsLoaded");
 
     assign(window, ["ASC", "Files", "Editor", "docEditor"], docEditor); //Do not remove: it's for Back button on Mobile App
   };
@@ -791,7 +814,7 @@ function Editor({
         };
       }
 
-      let //onRequestSharingSettings,
+      let onRequestSharingSettings,
         onRequestRename,
         onRequestSaveAs,
         onRequestInsertImage,
@@ -833,9 +856,9 @@ function Editor({
         }
       }
 
-      // if (isSharingAccess) {
-      //   onRequestSharingSettings = onSDKRequestSharingSettings;
-      // }
+      if (isSharingAccess) {
+        onRequestSharingSettings = onSDKRequestSharingSettings;
+      }
 
       if (userAccessRights.Rename) {
         onRequestRename = onSDKRequestRename;
@@ -854,6 +877,12 @@ function Editor({
         onRequestSelectSpreadsheet = onSDKRequestSelectSpreadsheet;
         onRequestSelectDocument = onSDKRequestSelectDocument;
         onRequestReferenceSource = onSDKRequestReferenceSource;
+
+        if (fileInfo?.rootFolderType !== FolderType.USER) {
+          //TODO: remove condition for share in my
+          onRequestUsers = onSDKRequestUsers;
+          onRequestSendNotify = onSDKRequestSendNotify;
+        }
       }
 
       if (userAccessRights.EditHistory) {
@@ -866,11 +895,6 @@ function Editor({
         if (!isZoom) {
           onRequestOpen = onSDKRequestOpen;
         }
-      }
-
-      if (fileInfo?.rootFolderType !== FolderType.USER) {
-        onRequestUsers = onSDKRequestUsers;
-        onRequestSendNotify = onSDKRequestSendNotify;
       }
 
       if (window.DocSpaceConfig?.editor?.requestClose) {
@@ -888,7 +912,7 @@ function Editor({
           onInfo: onSDKInfo,
           onWarning: onSDKWarning,
           onError: onSDKError,
-          // onRequestSharingSettings,
+          onRequestSharingSettings,
           onRequestRename,
           onMakeActionLink: onMakeActionLink,
           onRequestInsertImage,
@@ -929,7 +953,7 @@ function Editor({
       />
     ) : (
       <>
-        {/* {sharingDialog} */}
+        {sharingDialog}
         {selectFileDialog}
         {selectFolderDialog}
       </>
@@ -948,9 +972,7 @@ function Editor({
     );
 
   return (
-    <EditorWrapper
-    // isVisibleSharingDialog={isVisible}
-    >
+    <EditorWrapper isVisibleSharingDialog={isVisible}>
       {newConfig && (
         <DocumentEditor
           id={EDITOR_ID}

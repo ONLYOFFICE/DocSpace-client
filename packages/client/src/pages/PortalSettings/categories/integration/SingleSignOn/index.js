@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import Box from "@docspace/components/box";
+import { Box } from "@docspace/shared/components/box";
 
 import HideButton from "./sub-components/HideButton";
 import SPSettings from "./SPSettings";
@@ -14,7 +14,7 @@ import SSOLoader from "./sub-components/ssoLoader";
 
 import MobileView from "./MobileView";
 import { useIsMobileView } from "../../../utils/useIsMobileView";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const SERVICE_PROVIDER_SETTINGS = "serviceProviderSettings";
 const SP_METADATA = "spMetadata";
@@ -78,20 +78,22 @@ const SingleSignOn = (props) => {
   );
 };
 
-export default inject(({ auth, ssoStore }) => {
-  const { currentQuotaStore, setDocumentTitle } = auth;
-  const { isSSOAvailable } = currentQuotaStore;
-  const { currentDeviceType } = auth.settingsStore;
+export default inject(
+  ({ authStore, settingsStore, ssoStore, currentQuotaStore }) => {
+    const { setDocumentTitle } = authStore;
+    const { isSSOAvailable } = currentQuotaStore;
+    const { currentDeviceType } = settingsStore;
 
-  const { init, serviceProviderSettings, spMetadata, isInit } = ssoStore;
+    const { init, serviceProviderSettings, spMetadata, isInit } = ssoStore;
 
-  return {
-    init,
-    serviceProviderSettings,
-    spMetadata,
-    isSSOAvailable,
-    setDocumentTitle,
-    isInit,
-    currentDeviceType,
-  };
-})(observer(SingleSignOn));
+    return {
+      init,
+      serviceProviderSettings,
+      spMetadata,
+      isSSOAvailable,
+      setDocumentTitle,
+      isInit,
+      currentDeviceType,
+    };
+  }
+)(observer(SingleSignOn));

@@ -11,14 +11,15 @@ import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url
 import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import SpacesReactSvgUrl from "PUBLIC_DIR/images/spaces.react.svg?url";
 import { makeAutoObservable } from "mobx";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { isMobile } from "react-device-detect";
 
-import { ZendeskAPI } from "@docspace/common/components/Zendesk";
-import { LIVE_CHAT_LOCAL_STORAGE_KEY } from "@docspace/common/constants";
-import toastr from "@docspace/components/toast/toastr";
-import { isDesktop, isTablet } from "@docspace/components/utils/device";
+import { ZendeskAPI } from "@docspace/shared/components/zendesk";
+import { LIVE_CHAT_LOCAL_STORAGE_KEY } from "@docspace/shared/constants";
+import { toastr } from "@docspace/shared/components/toast";
+import { isDesktop, isTablet } from "@docspace/shared/utils";
+import TariffBar from "SRC_DIR/components/TariffBar";
 
 const PROXY_HOMEPAGE_URL = combineUrl(window.DocSpaceConfig?.proxy?.url, "/");
 const PROFILE_SELF_URL = combineUrl(PROXY_HOMEPAGE_URL, "/profile");
@@ -34,6 +35,8 @@ const PAYMENTS_URL = combineUrl(
 const SPACES_URL = combineUrl(PROXY_HOMEPAGE_URL, "/management");
 class ProfileActionsStore {
   authStore = null;
+  userStore = null;
+  settingsStore = null;
   filesStore = null;
   peopleStore = null;
   treeFoldersStore = null;
@@ -50,7 +53,9 @@ class ProfileActionsStore {
     peopleStore,
     treeFoldersStore,
     selectedFolderStore,
-    pluginStore
+    pluginStore,
+    userStore,
+    settingsStore
   ) {
     this.authStore = authStore;
     this.filesStore = filesStore;
@@ -58,6 +63,8 @@ class ProfileActionsStore {
     this.treeFoldersStore = treeFoldersStore;
     this.selectedFolderStore = selectedFolderStore;
     this.pluginStore = pluginStore;
+    this.userStore = userStore;
+    this.settingsStore = settingsStore;
 
     this.isShowLiveChat = this.getStateLiveChat();
 
@@ -99,7 +106,7 @@ class ProfileActionsStore {
   };
 
   onProfileClick = () => {
-    const { isAdmin, isOwner } = this.authStore.userStore.user;
+    const { isAdmin, isOwner } = this.userStore.user;
     const { isRoomAdmin } = this.authStore;
 
     this.profileClicked = true;
@@ -109,7 +116,6 @@ class ProfileActionsStore {
 
     if ((isAdmin || isOwner || isRoomAdmin) && !prefix) {
       this.selectedFolderStore.setSelectedFolder(null);
-      this.treeFoldersStore.setSelectedNode(["accounts"]);
     }
 
     const state = {
@@ -125,7 +131,7 @@ class ProfileActionsStore {
   };
 
   onSpacesClick = () => {
-    this.selectedFolderStore.setSelectedFolder(null);
+    // this.selectedFolderStore.setSelectedFolder(null);
     window.open(SPACES_URL, "_blank");
   };
 
@@ -135,7 +141,7 @@ class ProfileActionsStore {
   };
 
   onHelpCenterClick = () => {
-    const helpUrl = this.authStore.settingsStore.helpLink;
+    const helpUrl = this.settingsStore.helpLink;
 
     window.open(helpUrl, "_blank");
   };
@@ -152,14 +158,13 @@ class ProfileActionsStore {
 
   onSupportClick = () => {
     const supportUrl =
-      this.authStore.settingsStore.additionalResourcesData
-        ?.feedbackAndSupportUrl;
+      this.settingsStore.additionalResourcesData?.feedbackAndSupportUrl;
 
     window.open(supportUrl, "_blank");
   };
 
   onBookTraining = () => {
-    const trainingEmail = this.authStore.settingsStore?.bookTrainingEmail;
+    const trainingEmail = this.settingsStore?.bookTrainingEmail;
 
     trainingEmail && window.open(`mailto:${trainingEmail}`, "_blank");
   };
@@ -169,7 +174,7 @@ class ProfileActionsStore {
   //};
 
   onHotkeysClick = () => {
-    this.authStore.settingsStore.setHotkeyPanelVisible(true);
+    this.settingsStore.setHotkeyPanelVisible(true);
   };
 
   onAboutClick = () => {
@@ -198,11 +203,17 @@ class ProfileActionsStore {
   };
 
   getActions = (t) => {
-    const { enablePlugins, standalone, portals, baseDomain, tenantAlias, limitedAccessSpace } =
-      this.authStore.settingsStore;
+    const {
+      enablePlugins,
+      standalone,
+      portals,
+      baseDomain,
+      tenantAlias,
+      limitedAccessSpace,
+    } = this.settingsStore;
     const isAdmin = this.authStore.isAdmin;
     const isCommunity = this.authStore.isCommunity;
-    const { isOwner } = this.authStore.userStore.user;
+    const { isOwner } = this.userStore.user;
 
     // const settingsModule = modules.find((module) => module.id === "settings");
     // const peopleAvailable = modules.some((m) => m.appName === "people");
@@ -213,7 +224,7 @@ class ProfileActionsStore {
       //isPersonal,
       //currentProductId,
       debugInfo,
-    } = this.authStore.settingsStore;
+    } = this.settingsStore;
 
     const settings = isAdmin
       ? {
@@ -232,7 +243,7 @@ class ProfileActionsStore {
         label: portal.domain,
         onClick: () => window.open(`${protocol}//${portal.domain}/`, "_self"),
         disabled: false,
-        checked: tenantAlias === portal.portalName
+        checked: tenantAlias === portal.portalName,
       };
     });
 
@@ -282,7 +293,7 @@ class ProfileActionsStore {
 
     let liveChat = null;
 
-    if (!isMobile && this.authStore.isLiveChatAvailable) {
+    if (!isMobile && this.isLiveChatAvailable) {
       liveChat = {
         key: "user-menu-live-chat",
         icon: LiveChatReactSvgUrl,
@@ -295,7 +306,7 @@ class ProfileActionsStore {
 
     let bookTraining = null;
 
-    if (!isMobile && this.authStore.isTeamTrainingAlertAvailable) {
+    if (!isMobile && this.isTeamTrainingAlertAvailable) {
       bookTraining = {
         key: "user-menu-book-training",
         icon: BookTrainingReactSvgUrl,
@@ -305,12 +316,11 @@ class ProfileActionsStore {
     }
 
     const feedbackAndSupportEnabled =
-      this.authStore.settingsStore.additionalResourcesData
-        ?.feedbackAndSupportEnabled;
+      this.settingsStore.additionalResourcesData?.feedbackAndSupportEnabled;
     const videoGuidesEnabled =
-      this.authStore.settingsStore.additionalResourcesData?.videoGuidesEnabled;
+      this.settingsStore.additionalResourcesData?.videoGuidesEnabled;
     const helpCenterEnabled =
-      this.authStore.settingsStore.additionalResourcesData?.helpCenterEnabled;
+      this.settingsStore.additionalResourcesData?.helpCenterEnabled;
 
     const actions = [
       {
@@ -327,6 +337,7 @@ class ProfileActionsStore {
           icon: PaymentsReactSvgUrl,
           label: t("Common:PaymentsTitle"),
           onClick: this.onPaymentsClick,
+          additionalElement: <TariffBar />,
         },
       {
         isSeparator: true,

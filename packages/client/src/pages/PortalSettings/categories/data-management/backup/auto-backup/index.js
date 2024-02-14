@@ -2,36 +2,37 @@ import React from "react";
 import moment from "moment";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import RadioButton from "@docspace/components/radio-button";
-import Text from "@docspace/components/text";
+import { RadioButton } from "@docspace/shared/components/radio-button";
+import { Text } from "@docspace/shared/components/text";
 import {
   deleteBackupSchedule,
   getBackupSchedule,
   createBackupSchedule,
-} from "@docspace/common/api/portal";
-import toastr from "@docspace/components/toast/toastr";
+} from "@docspace/shared/api/portal";
+import { toastr } from "@docspace/shared/components/toast";
 import {
   BackupStorageType,
   AutoBackupPeriod,
   FolderType,
-} from "@docspace/common/constants";
-import ToggleButton from "@docspace/components/toggle-button";
+} from "@docspace/shared/enums";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import {
   getBackupStorage,
   getStorageRegions,
-} from "@docspace/common/api/settings";
+} from "@docspace/shared/api/settings";
 import { StyledModules, StyledAutoBackup } from "../StyledBackup";
 import ThirdPartyModule from "./sub-components/ThirdPartyModule";
 import RoomsModule from "./sub-components/RoomsModule";
 import ThirdPartyStorageModule from "./sub-components/ThirdPartyStorageModule";
-//import { getThirdPartyCommonFolderTree } from "@docspace/common/api/files";
+//import { getThirdPartyCommonFolderTree } from "@docspace/shared/api/files";
 import ButtonContainer from "./sub-components/ButtonContainer";
 import AutoBackupLoader from "@docspace/common/components/Loaders/AutoBackupLoader";
-import FloatingButton from "@docspace/components/floating-button";
-import Badge from "@docspace/components/badge";
-import Link from "@docspace/components/link";
-import { getSettingsThirdParty } from "@docspace/common/api/files";
+import { FloatingButton } from "@docspace/shared/components/floating-button";
+import { Badge } from "@docspace/shared/components/badge";
+import { Link } from "@docspace/shared/components/link";
+import { getSettingsThirdParty } from "@docspace/shared/api/files";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import { isManagement } from "@docspace/shared/utils/common";
 
 const { DocumentModuleType, ResourcesModuleType, StorageModuleType } =
   BackupStorageType;
@@ -294,8 +295,8 @@ class AutomaticBackup extends React.PureComponent {
       const storageType = isCheckedDocuments
         ? DocumentModuleType
         : isCheckedThirdParty
-        ? ResourcesModuleType
-        : StorageModuleType;
+          ? ResourcesModuleType
+          : StorageModuleType;
 
       const storageParams = getStorageParams(
         isCheckedThirdPartyStorage,
@@ -330,8 +331,6 @@ class AutomaticBackup extends React.PureComponent {
       isCheckedThirdParty,
       isCheckedDocuments,
       updateBaseFolderPath,
-
-      isManagement,
     } = this.props;
 
     try {
@@ -345,7 +344,7 @@ class AutomaticBackup extends React.PureComponent {
         time,
         day,
         false,
-        isManagement
+        isManagement()
       );
       const [selectedSchedule, storageInfo] = await Promise.all([
         getBackupSchedule(),
@@ -451,7 +450,7 @@ class AutomaticBackup extends React.PureComponent {
             href={automaticBackupUrl}
             target="_blank"
             fontSize="13px"
-            color={currentColorScheme.main.accent}
+            color={currentColorScheme.main?.accent}
             isHovered
           >
             {t("Common:LearnMore")}
@@ -579,8 +578,15 @@ class AutomaticBackup extends React.PureComponent {
   }
 }
 export default inject(
-  ({ auth, backup, treeFoldersStore, filesSelectorInput }) => {
-    const { language, settingsStore, currentQuotaStore, isManagement } = auth;
+  ({
+    authStore,
+    settingsStore,
+    backup,
+    treeFoldersStore,
+    filesSelectorInput,
+    currentQuotaStore,
+  }) => {
+    const { language } = authStore;
     const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
     const { theme, currentColorScheme, automaticBackupUrl } = settingsStore;
 
@@ -672,7 +678,6 @@ export default inject(
       setStorageRegions,
       updateBaseFolderPath,
 
-      isManagement,
       automaticBackupUrl,
       currentColorScheme,
     };

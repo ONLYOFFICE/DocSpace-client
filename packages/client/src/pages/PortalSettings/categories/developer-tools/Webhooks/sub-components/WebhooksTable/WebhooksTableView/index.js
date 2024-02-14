@@ -3,9 +3,9 @@ import { inject, observer } from "mobx-react";
 import { useState, useRef } from "react";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import { Base } from "@docspace/components/themes";
-import TableBody from "@docspace/components/table-container/TableBody";
-import TableContainer from "@docspace/components/table-container/TableContainer";
+import { Base } from "@docspace/shared/themes";
+import { TableBody } from "@docspace/shared/components/table";
+import { TableContainer } from "@docspace/shared/components/table";
 
 import WebhooksTableRow from "./WebhooksTableRow";
 import WebhookTableHeader from "./WebhookTableHeader";
@@ -111,12 +111,12 @@ const WebhooksTableView = (props) => {
   );
 };
 
-export default inject(({ webhooksStore, setup, auth }) => {
+export default inject(({ webhooksStore, setup, settingsStore, userStore }) => {
   const { webhooks, loadWebhooks } = webhooksStore;
 
   const { viewAs, setViewAs } = setup;
-  const { id: userId } = auth.userStore.user;
-  const { currentDeviceType } = auth.settingsStore;
+  const { id: userId } = userStore.user;
+  const { currentDeviceType } = settingsStore;
 
   return {
     webhooks,

@@ -7,10 +7,9 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import EmptyContainer from "./EmptyContainer";
-import Link from "@docspace/components/link";
-
-import IconButton from "@docspace/components/icon-button";
-import RoomsFilter from "@docspace/common/api/rooms/filter";
+import { Link } from "@docspace/shared/components/link";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -84,19 +83,19 @@ const RoomNoAccessContainer = (props) => {
   );
 };
 
-export default inject(({ auth, filesStore, clientLoadingStore }) => {
+export default inject(({ settingsStore, filesStore, clientLoadingStore }) => {
   const { setIsSectionFilterLoading } = clientLoadingStore;
 
   const setIsLoading = (param) => {
     setIsSectionFilterLoading(param);
   };
   const { isEmptyPage } = filesStore;
-  const { isFrame } = auth.settingsStore;
+  const { isFrame, theme } = settingsStore;
   return {
     setIsLoading,
 
     isEmptyPage,
-    theme: auth.settingsStore.theme,
+    theme,
     isFrame,
   };
 })(withTranslation(["Files"])(observer(RoomNoAccessContainer)));

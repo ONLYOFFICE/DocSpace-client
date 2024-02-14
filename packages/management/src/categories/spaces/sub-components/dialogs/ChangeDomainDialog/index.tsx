@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import ModalDialogContainer from "@docspace/client/src/components/dialogs/ModalDialogContainer";
-import Text from "@docspace/components/text";
-import Button from "@docspace/components/button";
-import ModalDialog from "@docspace/components/modal-dialog";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
-import { TextInput, Checkbox } from "@docspace/components";
+import { TextInput } from "@docspace/shared/components/text-input";
 import { useStore } from "SRC_DIR/store";
 import { parseDomain } from "SRC_DIR/utils";
+import { toastr } from "@docspace/shared/components/toast";
 
 const StyledModal = styled(ModalDialogContainer)`
   .create-docspace-input-block {
@@ -21,9 +22,10 @@ const StyledModal = styled(ModalDialogContainer)`
 
 const ChangeDomainDialogComponent = () => {
   const { t } = useTranslation(["Management", "Common"]);
-  const { spacesStore, authStore } = useStore();
-  const [domainNameError, setDomainNameError] = React.useState<null | Array<object>>(null);
-
+  const { spacesStore, settingsStore } = useStore();
+  const [domainNameError, setDomainNameError] =
+    React.useState<null | Array<object>>(null);
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const {
     setDomainName,
     getPortalDomain,
@@ -43,15 +45,23 @@ const ChangeDomainDialogComponent = () => {
   };
 
   const onClickDomainChange = async () => {
-
     const isValidDomain = parseDomain(domain, setDomainNameError, t);
 
     if (!isValidDomain) return;
 
-    await setDomainName(domain);
-    await authStore.settingsStore.getAllPortals();
-    await getPortalDomain();
-    onClose();
+    try {
+      setIsLoading(true);
+
+      await setDomainName(domain);
+      await settingsStore.getAllPortals();
+      await getPortalDomain();
+
+      onClose();
+    } catch (err) {
+      toastr.error(err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -81,15 +91,24 @@ const ChangeDomainDialogComponent = () => {
             placeholder={t("EnterDomain")}
             className="create-docspace-input"
           />
-             <div>
-              {domainNameError && domainNameError.map((err, index) => (
-                <Text key={index} fontSize="12px" fontWeight="400" color="#F24724">{err}</Text>
+          <div>
+            {domainNameError &&
+              domainNameError.map((err, index) => (
+                <Text
+                  key={index}
+                  fontSize="12px"
+                  fontWeight="400"
+                  color="#F24724"
+                >
+                  {err}
+                </Text>
               ))}
-            </div>
+          </div>
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
+          isLoading={isLoading}
           key="CreateButton"
           label={t("Common:ChangeButton")}
           onClick={onClickDomainChange}

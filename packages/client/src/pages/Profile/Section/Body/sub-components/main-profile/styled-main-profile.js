@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import { mobile, tablet } from "@docspace/components/utils/device";
-import Text from "@docspace/components/text";
+import { mobile, tablet } from "@docspace/shared/utils";
+import { Text } from "@docspace/shared/components/text";
 
 export const StyledWrapper = styled.div`
   width: 100%;
@@ -201,9 +201,9 @@ export const StyledInfo = styled.div`
               margin-left: 5px;
             `}
       line-height: 15px;
-      color: ${(props) => props.currentColorScheme.main.accent};
+      color: ${(props) => props.currentColorScheme.main?.accent};
       border-bottom: 1px solid
-        ${(props) => props.currentColorScheme.main.accent};
+        ${(props) => props.currentColorScheme.main?.accent};
       margin-top: 2px;
     }
 
@@ -225,7 +225,7 @@ export const StyledInfo = styled.div`
         height: 12px;
 
         path {
-          fill: ${(props) => props.currentColorScheme.main.accent};
+          fill: ${(props) => props.currentColorScheme.main?.accent};
         }
       }
     }

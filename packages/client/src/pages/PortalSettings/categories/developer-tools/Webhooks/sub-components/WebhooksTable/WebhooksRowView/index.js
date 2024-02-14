@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import RowContainer from "@docspace/components/row-container";
+import { RowContainer } from "@docspace/shared/components/row-container";
 
 import WebhookRow from "./WebhookRow";
 
@@ -43,9 +43,9 @@ const WebhooksRowView = (props) => {
   );
 };
 
-export default inject(({ webhooksStore, setup, auth }) => {
+export default inject(({ webhooksStore, setup, settingsStore }) => {
   const { webhooks } = webhooksStore;
-  const { currentDeviceType } = auth.settingsStore;
+  const { currentDeviceType } = settingsStore;
   const { viewAs, setViewAs } = setup;
 
   return {

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Section from "@docspace/common/components/Section";
+import Section from "@docspace/shared/components/section";
 import { observer, inject } from "mobx-react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
@@ -8,10 +8,10 @@ import SectionBodyContent from "./Body";
 import { InfoPanelBodyContent } from "../Home/InfoPanel";
 import InfoPanelHeaderContent from "../Home/InfoPanel/Header";
 import SectionFilterContent from "./Filter";
-import OformsFilter from "@docspace/common/api/oforms/filter";
+import OformsFilter from "@docspace/shared/api/oforms/filter";
 import Dialogs from "./Dialogs";
 import ErrorView from "./ErrorView";
-
+import SectionWrapper from "SRC_DIR/components/Section";
 const FormGallery = ({
   oformsLoadError,
   currentCategory,
@@ -67,7 +67,7 @@ const FormGallery = ({
 
   return (
     <>
-      <Section
+      <SectionWrapper
         // withBodyScroll
         // withBodyAutoFocus={!isMobile}
         withPaging={false}
@@ -94,7 +94,7 @@ const FormGallery = ({
         <Section.InfoPanelBody>
           <InfoPanelBodyContent isGallery />
         </Section.InfoPanelBody>
-      </Section>
+      </SectionWrapper>
 
       <Dialogs />
     </>

@@ -9,10 +9,10 @@ import EmptyContainer from "../../../../components/EmptyContainer";
 import withLoader from "../../../../HOCs/withLoader";
 import TableView from "./TableView/TableContainer";
 import withHotkeys from "../../../../HOCs/withHotkeys";
-import { Consumer } from "@docspace/components/utils/context";
-import { isElementInViewport } from "@docspace/common/utils";
-import { isMobile, isTablet } from "@docspace/components/utils/device";
-import { DeviceType } from "@docspace/common/constants";
+import { Consumer, isMobile, isTablet } from "@docspace/shared/utils";
+import { isElementInViewport } from "@docspace/shared/utils/common";
+
+import { DeviceType } from "@docspace/shared/enums";
 
 let currentDroppable = null;
 let isDragActive = false;
@@ -113,8 +113,8 @@ const SectionBodyContent = (props) => {
           (isMobile() || currentDeviceType === DeviceType.mobile
             ? 57
             : viewAs === "table"
-            ? 40
-            : 48);
+              ? 40
+              : 48);
 
         bodyScroll.scrollTo(0, count);
       }
@@ -294,7 +294,7 @@ const SectionBodyContent = (props) => {
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     filesStore,
     selectedFolderStore,
     treeFoldersStore,
@@ -345,7 +345,7 @@ export default inject(
       uploaded: uploadDataStore.uploaded,
       onClickBack: filesActionsStore.onClickBack,
       movingInProgress,
-      currentDeviceType: auth.settingsStore,
+      currentDeviceType: settingsStore.currentDeviceType,
     };
   }
 )(

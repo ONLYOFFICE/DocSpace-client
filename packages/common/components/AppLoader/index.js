@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Loader from "@docspace/components/loader";
+import { Loader } from "@docspace/shared/components/loader";
 
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 
 const StyledContainer = styled.div`
   // width: 100vw;

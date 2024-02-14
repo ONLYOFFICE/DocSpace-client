@@ -3,16 +3,16 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import Text from "@docspace/components/text";
-import HelpButton from "@docspace/components/help-button";
-import FieldContainer from "@docspace/components/field-container";
-import TextInput from "@docspace/components/text-input";
-import Button from "@docspace/components/button";
-import Badge from "@docspace/components/badge";
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
-import toastr from "@docspace/components/toast/toastr";
-
-import { size } from "@docspace/components/utils/device";
+import { Text } from "@docspace/shared/components/text";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { Button } from "@docspace/shared/components/button";
+import { Badge } from "@docspace/shared/components/badge";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
+import { toastr } from "@docspace/shared/components/toast";
+import { isManagement } from "@docspace/shared/utils/common";
+import { size } from "@docspace/shared/utils";
 
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import WhiteLabelWrapper from "./StyledWhitelabel";
@@ -26,7 +26,7 @@ import {
 } from "../../../utils/whiteLabelHelper";
 
 import isEqual from "lodash/isEqual";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const WhiteLabel = (props) => {
   const {
@@ -43,7 +43,7 @@ const WhiteLabel = (props) => {
     setLogoUrlsWhiteLabel,
     defaultLogoTextWhiteLabel,
     enableRestoreButton,
-    isManagement,
+
     currentDeviceType,
     resetIsInit,
   } = props;
@@ -76,7 +76,7 @@ const WhiteLabel = (props) => {
   }, []);
 
   const checkWidth = () => {
-    const url = isManagement
+    const url = isManagement()
       ? "/branding"
       : "/portal-settings/customization/branding";
 
@@ -148,7 +148,7 @@ const WhiteLabel = (props) => {
 
   const onRestoreDefault = async () => {
     try {
-      await restoreWhiteLabelSettings(true);
+      await restoreWhiteLabelSettings();
       await onResetCompanyName();
       toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
     } catch (error) {
@@ -509,7 +509,7 @@ const WhiteLabel = (props) => {
   );
 };
 
-export default inject(({ auth, common }) => {
+export default inject(({ settingsStore, common, currentQuotaStore }) => {
   const {
     setLogoText,
     whiteLabelLogoText,
@@ -525,13 +525,12 @@ export default inject(({ auth, common }) => {
   } = common;
 
   const { whiteLabelLogoUrls: defaultWhiteLabelLogoUrls, currentDeviceType } =
-    auth.settingsStore;
-  const { isBrandingAndCustomizationAvailable } = auth.currentQuotaStore;
-  const { isManagement } = auth;
+    settingsStore;
+  const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
 
   return {
     setLogoText,
-    theme: auth.settingsStore.theme,
+    theme: settingsStore.theme,
     logoText: whiteLabelLogoText,
     getWhiteLabelLogoText,
     saveWhiteLabelSettings,
@@ -543,7 +542,7 @@ export default inject(({ auth, common }) => {
     setLogoUrlsWhiteLabel,
     defaultLogoTextWhiteLabel,
     enableRestoreButton,
-    isManagement,
+
     currentDeviceType,
     resetIsInit,
   };

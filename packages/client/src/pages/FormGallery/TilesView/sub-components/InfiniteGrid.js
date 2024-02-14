@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
-import InfiniteLoaderComponent from "@docspace/components/infinite-loader";
+import { InfiniteLoaderComponent } from "@docspace/shared/components/infinite-loader";
 import { StyledCard, StyledItem } from "../StyledTileView";
 import Loaders from "@docspace/common/components/Loaders";
 import uniqueid from "lodash/uniqueId";
@@ -128,14 +128,14 @@ const InfiniteGrid = (props) => {
   );
 };
 
-export default inject(({ auth, filesStore, oformsStore }) => {
+export default inject(({ filesStore, oformsStore, infoPanelStore }) => {
   const { oformFiles, hasMoreForms, oformsFilterTotal, fetchMoreOforms } =
     oformsStore;
 
   const { getCountTilesInRow } = filesStore;
 
   const filesLength = oformFiles.length;
-  const { isVisible } = auth.infoPanelStore;
+  const { isVisible } = infoPanelStore;
 
   return {
     filesList: oformFiles,

@@ -6,18 +6,12 @@ import React, { useEffect, useRef, useCallback, useMemo } from "react";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import { Base } from "@docspace/components/themes";
-import TableContainer from "@docspace/components/table-container";
-import TableBody from "@docspace/components/table-container/TableBody";
+import { Base } from "@docspace/shared/themes";
+import { TableContainer } from "@docspace/shared/components/table";
+import { TableBody } from "@docspace/shared/components/table";
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
-
-const marginCss = css`
-  margin-top: -1px;
-  border-top: ${(props) =>
-    `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
-`;
 
 const fileNameCss = css`
   ${(props) =>
@@ -30,8 +24,6 @@ const fileNameCss = css`
           margin-left: -24px;
           padding-left: 24px;
         `}
-
-  ${marginCss}
 `;
 
 const contextCss = css`
@@ -45,8 +37,6 @@ const contextCss = css`
           margin-right: -20px;
           padding-right: 20px;
         `}
-
-  ${marginCss}
 `;
 
 const StyledTableContainer = styled(TableContainer)`
@@ -64,9 +54,7 @@ const StyledTableContainer = styled(TableContainer)`
     .table-row {
       .table-container_file-name-cell,
       .table-container_row-context-menu-wrapper {
-        margin-top: -1px;
         border-image-slice: 1;
-        border-top: 1px solid;
       }
       .table-container_file-name-cell {
         ${fileNameCss}
@@ -85,20 +73,6 @@ const StyledTableContainer = styled(TableContainer)`
     }
   }
 
-  .table-hotkey-border + .table-row-selected {
-    .table-row {
-      .table-container_file-name-cell {
-        border-top: unset !important;
-        margin-top: 0 !important;
-      }
-
-      .table-container_row-context-menu-wrapper {
-        border-top: unset !important;
-        margin-top: 0 !important;
-      }
-    }
-  }
-
   .files-item:not(.table-row-selected) + .table-row-selected {
     .table-row {
       .table-container_file-name-cell {
@@ -107,12 +81,6 @@ const StyledTableContainer = styled(TableContainer)`
 
       .table-container_row-context-menu-wrapper {
         ${contextCss}
-      }
-
-      .table-container_file-name-cell,
-      .table-container_row-context-menu-wrapper {
-        border-bottom: ${(props) =>
-          `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
       }
     }
   }
@@ -251,7 +219,7 @@ const Table = ({
         useReactWindow={!withPaging}
         infoPanelVisible={infoPanelVisible}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
-        itemHeight={49}
+        itemHeight={48}
       >
         {filesListNode}
       </TableBody>
@@ -259,47 +227,57 @@ const Table = ({
   );
 };
 
-export default inject(({ filesStore, treeFoldersStore, auth, tableStore }) => {
-  const { isVisible: infoPanelVisible } = auth.infoPanelStore;
+export default inject(
+  ({
+    filesStore,
+    infoPanelStore,
+    treeFoldersStore,
 
-  const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
-  const isRooms = isRoomsFolder || isArchiveFolder;
+    tableStore,
+    userStore,
+    settingsStore,
+  }) => {
+    const { isVisible: infoPanelVisible } = infoPanelStore;
 
-  const { columnStorageName, columnInfoPanelStorageName } = tableStore;
+    const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
+    const isRooms = isRoomsFolder || isArchiveFolder;
 
-  const {
-    filesList,
-    viewAs,
-    setViewAs,
-    setFirsElemChecked,
-    setHeaderBorder,
-    fetchMoreFiles,
-    hasMoreFiles,
-    filterTotal,
-    roomsFilterTotal,
-    highlightFile,
-  } = filesStore;
+    const { columnStorageName, columnInfoPanelStorageName } = tableStore;
 
-  const { withPaging, theme, currentDeviceType } = auth.settingsStore;
+    const {
+      filesList,
+      viewAs,
+      setViewAs,
+      setFirsElemChecked,
+      setHeaderBorder,
+      fetchMoreFiles,
+      hasMoreFiles,
+      filterTotal,
+      roomsFilterTotal,
+      highlightFile,
+    } = filesStore;
 
-  return {
-    filesList,
-    viewAs,
-    setViewAs,
-    setFirsElemChecked,
-    setHeaderBorder,
-    theme,
-    userId: auth.userStore.user?.id,
-    infoPanelVisible,
-    fetchMoreFiles,
-    hasMoreFiles,
-    filterTotal: isRooms ? roomsFilterTotal : filterTotal,
-    isRooms,
-    isTrashFolder,
-    withPaging,
-    columnStorageName,
-    columnInfoPanelStorageName,
-    highlightFile,
-    currentDeviceType,
-  };
-})(observer(Table));
+    const { withPaging, theme, currentDeviceType } = settingsStore;
+
+    return {
+      filesList,
+      viewAs,
+      setViewAs,
+      setFirsElemChecked,
+      setHeaderBorder,
+      theme,
+      userId: userStore.user?.id,
+      infoPanelVisible,
+      fetchMoreFiles,
+      hasMoreFiles,
+      filterTotal: isRooms ? roomsFilterTotal : filterTotal,
+      isRooms,
+      isTrashFolder,
+      withPaging,
+      columnStorageName,
+      columnInfoPanelStorageName,
+      highlightFile,
+      currentDeviceType,
+    };
+  }
+)(observer(Table));

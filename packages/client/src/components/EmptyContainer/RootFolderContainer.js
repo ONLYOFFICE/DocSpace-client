@@ -4,16 +4,17 @@ import PlusSvgUrl from "PUBLIC_DIR/images/plus.svg?url";
 import RoomsReactSvgUrl from "PUBLIC_DIR/images/rooms.react.svg?url";
 
 import { useNavigate, useLocation } from "react-router-dom";
-import { FolderType, RoomSearchArea } from "@docspace/common/constants";
+import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
 import { inject, observer } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
 import EmptyContainer from "./EmptyContainer";
-import Link from "@docspace/components/link";
-import Text from "@docspace/components/text";
-import Box from "@docspace/components/box";
-import IconButton from "@docspace/components/icon-button";
-import RoomsFilter from "@docspace/common/api/rooms/filter";
-import FilesFilter from "@docspace/common/api/files/filter";
+import { Link } from "@docspace/shared/components/link";
+import { Box } from "@docspace/shared/components/box";
+import { Text } from "@docspace/shared/components/text";
+import { IconButton } from "@docspace/shared/components/icon-button";
+
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import FilesFilter from "@docspace/shared/api/files/filter";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -63,6 +64,7 @@ const RootFolderContainer = (props) => {
 
     myFolder,
     roomsFolder,
+    isPublicRoom,
   } = props;
   const personalDescription = t("EmptyFolderDecription");
 
@@ -74,12 +76,18 @@ const RootFolderContainer = (props) => {
   const noFilesHeader = t("NoFilesHereYet");
   const trashDescription = t("TrashEmptyDescription");
   const favoritesDescription = t("FavoritesEmptyContainerDescription");
-  const recentDescription = t("RecentEmptyContainerDescription");
+  const recentDescription = t("RecentViaLinkEmptyContainerDescription");
 
-  const roomsDescription =
-    isVisitor || isCollaborator
-      ? t("RoomEmptyContainerDescriptionUser")
-      : t("RoomEmptyContainerDescription");
+  const roomsDescription = isPublicRoom ? (
+    <>
+      <div>{t("RoomEmptyAtTheMoment")}</div>
+      <div>{t("FilesWillAppearHere")}</div>
+    </>
+  ) : isVisitor || isCollaborator ? (
+    t("RoomEmptyContainerDescriptionUser")
+  ) : (
+    t("RoomEmptyContainerDescription")
+  );
   const archiveRoomsDescription =
     isVisitor || isCollaborator
       ? t("ArchiveEmptyScreenUser")
@@ -293,7 +301,7 @@ const RootFolderContainer = (props) => {
   const goToPersonalButtons = (
     <div className="empty-folder_container-links">
       <img
-        className="empty-folder_container-image"
+        className="empty-folder_container-icon"
         src={PersonSvgUrl}
         alt="person_icon"
         onClick={onGoToPersonal}
@@ -331,14 +339,16 @@ const RootFolderContainer = (props) => {
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     filesStore,
     treeFoldersStore,
     selectedFolderStore,
     clientLoadingStore,
+    userStore,
+    publicRoomStore,
   }) => {
     const { isDesktopClient, isEncryptionSupport, organizationName, theme } =
-      auth.settingsStore;
+      settingsStore;
 
     const { setIsSectionFilterLoading } = clientLoadingStore;
 
@@ -351,12 +361,14 @@ export default inject(
     const { isPrivacyFolder, myFolderId, myFolder, roomsFolder } =
       treeFoldersStore;
 
+    const { isPublicRoom } = publicRoomStore;
+
     return {
       theme,
       isPrivacyFolder,
       isDesktop: isDesktopClient,
-      isVisitor: auth?.userStore?.user?.isVisitor,
-      isCollaborator: auth?.userStore?.user?.isCollaborator,
+      isVisitor: userStore?.user?.isVisitor,
+      isCollaborator: userStore?.user?.isCollaborator,
       isEncryptionSupport,
       organizationName,
       privacyInstructions,
@@ -373,6 +385,7 @@ export default inject(
 
       myFolder,
       roomsFolder,
+      isPublicRoom,
     };
   }
 )(withTranslation(["Files"])(observer(RootFolderContainer)));

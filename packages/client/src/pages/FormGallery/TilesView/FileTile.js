@@ -1,7 +1,7 @@
 import Tile from "./sub-components/Tile";
 import { SimpleFilesTileContent } from "./StyledTileView";
-import Link from "@docspace/components/link";
-import { isDesktop } from "@docspace/components/utils/device";
+import { Link } from "@docspace/shared/components/link";
+import { isDesktop } from "@docspace/shared/utils";
 
 const FileTile = (props) => {
   const { item } = props;

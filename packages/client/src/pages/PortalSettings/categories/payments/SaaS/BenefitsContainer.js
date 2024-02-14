@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 import { inject, observer } from "mobx-react";
 
 const StyledBody = styled.div`
@@ -62,8 +62,7 @@ const BenefitsContainer = ({ t, features, theme }) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { paymentQuotasStore, settingsStore } = auth;
+export default inject(({ settingsStore, paymentQuotasStore }) => {
   const { theme } = settingsStore;
   const { portalPaymentQuotasFeatures } = paymentQuotasStore;
 

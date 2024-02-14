@@ -5,11 +5,11 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import EmptyScreenContainer from "@docspace/components/empty-screen-container";
-import IconButton from "@docspace/components/icon-button";
-import Link from "@docspace/components/link";
-import Box from "@docspace/components/box";
-import Grid from "@docspace/components/grid";
+import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { Link } from "@docspace/shared/components/link";
+import { Box } from "@docspace/shared/components/box";
+import { Grid } from "@docspace/shared/components/grid";
 
 const EmptyScreen = ({ resetFilter, setIsLoading, theme }) => {
   const { t } = useTranslation(["People", "Common"]);
@@ -64,7 +64,7 @@ const EmptyScreen = ({ resetFilter, setIsLoading, theme }) => {
   );
 };
 
-export default inject(({ auth, peopleStore, clientLoadingStore }) => {
+export default inject(({ peopleStore, clientLoadingStore, settingsStore }) => {
   const { resetFilter } = peopleStore;
 
   const { setIsSectionBodyLoading } = clientLoadingStore;
@@ -76,6 +76,6 @@ export default inject(({ auth, peopleStore, clientLoadingStore }) => {
     resetFilter,
 
     setIsLoading,
-    theme: auth.settingsStore.theme,
+    theme: settingsStore.theme,
   };
 })(observer(EmptyScreen));

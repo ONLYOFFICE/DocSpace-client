@@ -1,7 +1,7 @@
-import Tooltip from "@docspace/components/tooltip";
+import { Tooltip } from "@docspace/shared/components/tooltip";
 import LoadErrorIcon from "PUBLIC_DIR/images/load.error.react.svg";
 import styled from "styled-components";
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 import React from "react";
 import { useTheme } from "styled-components";
 
@@ -9,7 +9,13 @@ const StyledLoadErrorIcon = styled(LoadErrorIcon)`
   outline: none !important;
 `;
 
-const ErrorFileUpload = ({ t, item, onTextClick, showPasswordInput }) => {
+const ErrorFileUpload = ({
+  t,
+  item,
+  theme,
+  onTextClick,
+  showPasswordInput,
+}) => {
   const { interfaceDirection } = useTheme();
   const placeTooltip = interfaceDirection === "rtl" ? "right" : "left";
   return (
@@ -29,7 +35,7 @@ const ErrorFileUpload = ({ t, item, onTextClick, showPasswordInput }) => {
           )}
           place={placeTooltip}
           maxWidth="320"
-          color="#f8f7bf"
+          color={theme.tooltip.backgroundColor}
         />
         {item.needPassword && (
           <Text

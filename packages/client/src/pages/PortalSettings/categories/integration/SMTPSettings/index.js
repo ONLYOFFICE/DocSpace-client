@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
 
 import CustomSettings from "./sub-components/CustomSettings";
 import { StyledComponent } from "./StyledComponent";
@@ -63,7 +63,7 @@ const SMTPSettings = (props) => {
         </Text>
         <Link
           className="link-learn-more"
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
           isHovered
           target="_blank"
           href={integrationSettingsUrl}
@@ -77,8 +77,7 @@ const SMTPSettings = (props) => {
   );
 };
 
-export default inject(({ auth, setup }) => {
-  const { settingsStore } = auth;
+export default inject(({ settingsStore, setup }) => {
   const { organizationName, currentColorScheme, integrationSettingsUrl } =
     settingsStore;
   const { setInitSMTPSettings } = setup;

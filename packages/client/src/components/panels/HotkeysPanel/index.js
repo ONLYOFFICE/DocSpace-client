@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import Heading from "@docspace/components/heading";
-import Backdrop from "@docspace/components/backdrop";
-import Aside from "@docspace/components/aside";
+import { Heading } from "@docspace/shared/components/heading";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Aside } from "@docspace/shared/components/aside";
 import { StyledHotkeysPanel, StyledScrollbar } from "./StyledHotkeys";
 import SelectionBlock from "./SelectionBlock";
 import MoveBlock from "./MoveBlock";
@@ -14,7 +14,7 @@ import NavigationBlock from "./NavigationBlock";
 import CreationBlock from "./CreationBlock";
 import UploadBlock from "./UploadBlock";
 import { isMacOs } from "react-device-detect";
-import Base from "@docspace/components/themes/base";
+import Base from "@docspace/shared/themes/base";
 
 const HotkeyPanel = ({
   visible,
@@ -149,15 +149,14 @@ const HotkeyPanel = ({
 
 HotkeyPanel.defaultProps = { theme: Base };
 
-export default inject(({ auth, publicRoomStore }) => {
-  const { hotkeyPanelVisible, setHotkeyPanelVisible, theme } =
-    auth.settingsStore;
+export default inject(({ settingsStore, publicRoomStore, userStore }) => {
+  const { hotkeyPanelVisible, setHotkeyPanelVisible, theme } = settingsStore;
 
   return {
     visible: hotkeyPanelVisible,
     setHotkeyPanelVisible,
     theme,
-    isVisitor: auth?.userStore?.user?.isVisitor || publicRoomStore.isPublicRoom,
+    isVisitor: userStore?.user?.isVisitor || publicRoomStore.isPublicRoom,
   };
 })(
   withTranslation(["HotkeysPanel", "Article", "Common", "Files"])(

@@ -19,8 +19,8 @@ const NoFileOrFolderItem = ({ t, theme }) => {
   );
 };
 
-export default inject(({ auth }) => {
+export default inject(({ settingsStore }) => {
   return {
-    theme: auth.settingsStore.theme,
+    theme: settingsStore.theme,
   };
 })(observer(NoFileOrFolderItem));

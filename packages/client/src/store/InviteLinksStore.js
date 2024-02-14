@@ -2,7 +2,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import {
   getInvitationLinks,
   getShortenedLink,
-} from "@docspace/common/api/portal";
+} from "@docspace/shared/api/portal";
 
 class InviteLinksStore {
   peopleStore = null;

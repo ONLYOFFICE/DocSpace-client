@@ -4,9 +4,9 @@ import {
   StyledSelectedOwnerContainer,
   StyledSelectedOwner,
 } from "../../../ChangePortalOwnerDialog/StyledDialog";
-import Link from "@docspace/components/link";
-import Text from "@docspace/components/text";
-import SelectorAddButton from "@docspace/components/selector-add-button";
+import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
+import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
 
 const ChoiceNewOwner = ({
   t,

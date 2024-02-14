@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { mobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/shared/utils";
 
 const StyledGroup = styled.div`
   width: 400px;

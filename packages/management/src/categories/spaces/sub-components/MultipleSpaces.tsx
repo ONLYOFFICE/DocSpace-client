@@ -1,7 +1,8 @@
 import React from "react";
-import { Button, TextInput } from "@docspace/components";
+import { TextInput } from "@docspace/shared/components/text-input";
 import { observer } from "mobx-react";
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
 import { isMobile } from "react-device-detect";
 import { SpacesRowContainer } from "./RowView/SpacesRowContainer";
 import { StyledMultipleSpaces } from "../StyledSpaces";
@@ -9,16 +10,16 @@ import { useStore } from "SRC_DIR/store";
 import { TranslationType } from "SRC_DIR/types/spaces";
 
 type TMultipleSpaces = {
-  t: TranslationType
-}
+  t: TranslationType;
+};
 
 const MultipleSpaces = ({ t }: TMultipleSpaces) => {
-  const { spacesStore, authStore } = useStore();
+  const { spacesStore, settingsStore } = useStore();
 
   const { setChangeDomainDialogVisible, setCreatePortalDialogVisible } =
     spacesStore;
 
-  const { portals, baseDomain } = authStore.settingsStore;
+  const { portals, baseDomain } = settingsStore;
 
   const buttonSize = isMobile ? "normal" : "small";
 

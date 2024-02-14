@@ -2,17 +2,17 @@
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
 import React from "react";
 import { withTranslation } from "react-i18next";
-import Filter from "@docspace/common/api/people/filter";
-import Loaders from "@docspace/common/components/Loaders";
+import Filter from "@docspace/shared/api/people/filter";
 import { inject, observer } from "mobx-react";
 import { getSelectedGroup } from "../../../helpers/people-helpers";
 import { useNavigate } from "react-router-dom";
-import { isMobile } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/shared/utils";
 import { isMobileOnly } from "react-device-detect";
 import config from "PACKAGE_FILE";
-import { combineUrl } from "@docspace/common/utils";
-import CatalogItem from "@docspace/components/catalog-item";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { ArticleItem } from "@docspace/shared/components/article-item";
 import withLoader from "../../../HOCs/withLoader";
+import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
 
 const departmentsIcon = DepartmentsGroupReactSvgUrl;
 const groupIcon = CatalogFolderReactSvgUrl;
@@ -86,7 +86,7 @@ const ArticleBodyContent = ({
       const items = data.map((group) => {
         const active = isActive(group.id);
         return (
-          <CatalogItem
+          <ArticleItem
             key={group.id}
             id={group.id}
             icon={groupIcon}
@@ -111,7 +111,7 @@ const ArticleBodyContent = ({
     <>
       {!isVisitor && (
         <div style={!isAdmin && isMobileOnly ? { marginTop: "16px" } : null}>
-          <CatalogItem
+          <ArticleItem
             key={"root"}
             id={"departments"}
             icon={departmentsIcon}
@@ -128,32 +128,34 @@ const ArticleBodyContent = ({
 };
 
 const BodyContent = withTranslation(["Article"])(
-  withLoader(ArticleBodyContent)(<Loaders.ArticleFolder />)
+  withLoader(ArticleBodyContent)(<ArticleFolderLoader />)
 );
 
-export default inject(({ auth, peopleStore }) => {
-  const { settingsStore, setDocumentTitle, isAdmin } = auth;
-  const { customNames, showText, toggleArticleOpen } = settingsStore;
-  const { groupsStore, selectedGroupStore, filterStore } = peopleStore;
-  const { filter } = filterStore;
-  const { groups } = groupsStore;
-  const { groupsCaption } = customNames;
-  const { selectedGroup, selectGroup } = selectedGroupStore;
-  const selectedKey = selectedGroup ? selectedGroup : "root";
+export default inject(
+  ({ authStore, settingsStore, peopleStore, userStore }) => {
+    const { setDocumentTitle, isAdmin } = authStore;
+    const { customNames, showText, toggleArticleOpen } = settingsStore;
+    const { groupsStore, selectedGroupStore, filterStore } = peopleStore;
+    const { filter } = filterStore;
+    const { groups } = groupsStore;
+    const { groupsCaption } = customNames;
+    const { selectedGroup, selectGroup } = selectedGroupStore;
+    const selectedKey = selectedGroup ? selectedGroup : "root";
 
-  return {
-    setDocumentTitle,
+    return {
+      setDocumentTitle,
 
-    isVisitor: auth.userStore.user.isVisitor,
-    isAdmin,
-    groups,
-    groupsCaption,
-    selectedKey,
-    selectGroup,
+      isVisitor: userStore.user.isVisitor,
+      isAdmin,
+      groups,
+      groupsCaption,
+      selectedKey,
+      selectGroup,
 
-    filter,
+      filter,
 
-    showText,
-    toggleArticleOpen,
-  };
-})(observer(BodyContent));
+      showText,
+      toggleArticleOpen,
+    };
+  }
+)(observer(BodyContent));

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import Text from "@docspace/components/text";
-import Button from "@docspace/components/button";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
 import { inject, observer } from "mobx-react";
 import {
   StyledPage,
@@ -11,11 +11,11 @@ import {
   StyledContent,
 } from "./StyledConfirm";
 import withLoader from "../withLoader";
-import FormWrapper from "@docspace/components/form-wrapper";
-import toastr from "@docspace/components/toast/toastr";
+import { FormWrapper } from "@docspace/shared/components/form-wrapper";
+import { toastr } from "@docspace/shared/components/toast";
 import DocspaceLogo from "../../../DocspaceLogo";
-import { ownerChange } from "@docspace/common/api/settings";
-import { getUserFromConfirm } from "@docspace/common/api/people";
+import { ownerChange } from "@docspace/shared/api/settings";
+import { getUserFromConfirm } from "@docspace/shared/api/people";
 
 const ChangeOwnerForm = (props) => {
   const { t, greetingTitle, linkData, history } = props;
@@ -95,9 +95,9 @@ const ChangeOwnerForm = (props) => {
   );
 };
 
-export default inject(({ auth }) => ({
-  greetingTitle: auth.settingsStore.greetingSettings,
-  defaultPage: auth.settingsStore.defaultPage,
+export default inject(({ settingsStore }) => ({
+  greetingTitle: settingsStore.greetingSettings,
+  defaultPage: settingsStore.defaultPage,
 }))(
   withTranslation(["Confirm", "Common"])(withLoader(observer(ChangeOwnerForm)))
 );

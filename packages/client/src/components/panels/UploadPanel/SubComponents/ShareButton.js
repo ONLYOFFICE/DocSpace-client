@@ -1,6 +1,6 @@
 ﻿import CatalogSharedReactSvgUrl from "PUBLIC_DIR/images/catalog.shared.react.svg?url";
 import React from "react";
-import IconButton from "@docspace/components/icon-button";
+import { IconButton } from "@docspace/shared/components/icon-button";
 import { inject, observer } from "mobx-react";
 
 const ShareButton = (props) => {
@@ -32,7 +32,7 @@ const ShareButton = (props) => {
 };
 
 export default inject(
-  ({ auth, dialogsStore, uploadDataStore }, { uniqueId }) => {
+  ({ settingsStore, dialogsStore, uploadDataStore }, { uniqueId }) => {
     const { setSharingPanelVisible } = dialogsStore;
     const { selectUploadedFile, getUploadedFile } = uploadDataStore;
 
@@ -41,7 +41,7 @@ export default inject(
     return {
       uploadedFile,
 
-      theme: auth.settingsStore.theme,
+      theme: settingsStore.theme,
 
       setSharingPanelVisible,
       selectUploadedFile,

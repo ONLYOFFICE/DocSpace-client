@@ -5,14 +5,14 @@ import { inject, observer } from "mobx-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 
-import Link from "@docspace/components/link";
-import Box from "@docspace/components/box";
-import { Text } from "@docspace/components";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { Link } from "@docspace/shared/components/link";
+import { Box } from "@docspace/shared/components/box";
+import { Text } from "@docspace/shared/components/text";
 
-import IconButton from "@docspace/components/icon-button";
-import { FolderType, RoomSearchArea } from "@docspace/common/constants";
-import RoomsFilter from "@docspace/common/api/rooms/filter";
-import FilesFilter from "@docspace/common/api/files/filter";
+import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import FilesFilter from "@docspace/shared/api/files/filter";
 
 import { getCategoryUrl, getCategoryType } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -229,12 +229,12 @@ const CommonButtons = (props) => {
 
 export default inject(
   ({
-    auth,
     accessRightsStore,
     treeFoldersStore,
     selectedFolderStore,
     contextOptionsStore,
     clientLoadingStore,
+    settingsStore,
   }) => {
     const {
       navigationPath,
@@ -277,7 +277,7 @@ export default inject(
       onClickInviteUsers,
       folderId,
 
-      theme: auth.settingsStore.theme,
+      theme: settingsStore.theme,
       isArchiveFolderRoot,
     };
   }

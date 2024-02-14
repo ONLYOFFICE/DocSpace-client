@@ -3,19 +3,19 @@ import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
-import RadioButtonGroup from "@docspace/components/radio-button-group";
-import toastr from "@docspace/components/toast/toastr";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
+import { toastr } from "@docspace/shared/components/toast";
 import { LearnMoreWrapper } from "../StyledSecurity";
 import UserFields from "../sub-components/user-fields";
-import { size } from "@docspace/components/utils/device";
+import { size } from "@docspace/shared/utils";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import isEqual from "lodash/isEqual";
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
 import IpSecurityLoader from "../sub-components/loaders/ip-security-loader";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -195,7 +195,7 @@ const IpSecurity = (props) => {
         </Text>
         <Link
           className="link-learn-more"
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
           target="_blank"
           isHovered
           href={ipSettingsUrl}
@@ -274,7 +274,7 @@ const IpSecurity = (props) => {
   );
 };
 
-export default inject(({ auth, setup }) => {
+export default inject(({ settingsStore, setup }) => {
   const {
     ipRestrictionEnable,
     setIpRestrictionsEnable,
@@ -283,7 +283,7 @@ export default inject(({ auth, setup }) => {
     ipSettingsUrl,
     currentColorScheme,
     currentDeviceType,
-  } = auth.settingsStore;
+  } = settingsStore;
 
   const { initSettings, isInit } = setup;
 

@@ -3,7 +3,7 @@ import { withTranslation } from "react-i18next";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject } from "mobx-react";
 import styled from "styled-components";
-import { Consumer } from "@docspace/components/utils/context";
+import { Consumer } from "@docspace/shared/utils";
 import { Table } from "./TableView/TableView";
 import HistoryRowContainer from "./RowView/HistoryRowContainer";
 import HistoryMainContent from "../sub-components/HistoryMainContent";
@@ -25,9 +25,7 @@ const LoginHistory = (props) => {
   useEffect(() => {
     setDocumentTitle(t("LoginHistoryTitle"));
 
-    if (isAuditAvailable) {
-      getLoginHistory();
-    }
+    getLoginHistory();
 
     getLifetimeAuditSettings();
   }, []);
@@ -73,7 +71,7 @@ const LoginHistory = (props) => {
           lifetime={securityLifetime.loginHistoryLifeTime}
           securityLifetime={securityLifetime}
           setLifetimeAuditSettings={setLifetimeAuditSettings}
-          content={isAuditAvailable && getContent()}
+          content={getContent()}
           downloadReport={t("DownloadReportBtnText")}
           downloadReportDescription={t("DownloadReportDescription")}
           getReport={getLoginHistoryReport}
@@ -84,7 +82,7 @@ const LoginHistory = (props) => {
   );
 };
 
-export default inject(({ setup, auth }) => {
+export default inject(({ setup, settingsStore, currentQuotaStore }) => {
   const {
     getLoginHistory,
     security,
@@ -94,9 +92,9 @@ export default inject(({ setup, auth }) => {
     setLifetimeAuditSettings,
     securityLifetime,
   } = setup;
-  const { theme } = auth.settingsStore;
+  const { theme } = settingsStore;
 
-  const { isAuditAvailable } = auth.currentQuotaStore;
+  const { isAuditAvailable } = currentQuotaStore;
 
   return {
     getLoginHistory,

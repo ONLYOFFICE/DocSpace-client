@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { observer, Provider as MobxProvider } from "mobx-react";
 import { I18nextProvider, useTranslation } from "react-i18next";
-import tryRedirectTo from "@docspace/common/utils/tryRedirectTo";
+import tryRedirectTo from "@docspace/shared/utils/tryRedirectTo";
 import { Outlet } from "react-router-dom";
 
 import { isMobileOnly } from "react-device-detect";
 
-import ThemeProvider from "@docspace/components/theme-provider";
-import { Portal } from "@docspace/components";
-import Toast from "@docspace/components/toast";
+import { ThemeProvider } from "@docspace/shared/components/theme-provider";
+import { Portal } from "@docspace/shared/components/portal";
+import { Toast } from "@docspace/shared/components/toast";
 
 import "@docspace/common/custom.scss";
 
@@ -23,12 +23,21 @@ import MainLayout from "SRC_DIR/Layout";
 import Error403 from "client/Error403";
 import i18n from "./i18n";
 
+declare global {
+  interface Window {
+    timezone: string;
+  }
+}
+
 const App = observer(() => {
   const { i18n } = useTranslation();
 
-  const { authStore } = useStore();
-  const { init, settingsStore, userStore } = authStore;
-  const { theme, setTheme, currentColorScheme, limitedAccessSpace } = settingsStore;
+  const { authStore, userStore, settingsStore } = useStore();
+  const { init } = authStore;
+  const { theme, setTheme, currentColorScheme, limitedAccessSpace, timezone } =
+    settingsStore;
+
+  window.timezone = timezone;
 
   const userTheme = userStore?.user?.theme ? userStore?.user?.theme : "Dark";
 
@@ -52,8 +61,10 @@ const App = observer(() => {
     <Toast />
   );
 
-  if (userStore?.user && !userStore?.user?.isAdmin || limitedAccessSpace) return <Error403 />
-  if (userStore?.isLoaded && !userStore?.user) return tryRedirectTo(window.location.origin);
+  if ((userStore?.user && !userStore?.user?.isAdmin) || limitedAccessSpace)
+    return <Error403 />;
+  if (userStore?.isLoaded && !userStore?.user)
+    return tryRedirectTo(window.location.origin);
 
   return (
     <ThemeProvider

@@ -2,7 +2,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { FilesSelectorFilterTypes } from "@docspace/common/constants";
+import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 
@@ -26,8 +26,7 @@ const RoomsModule = (props) => {
   );
 };
 
-export default inject(({ auth, backup }) => {
-  const { currentQuotaStore } = auth;
+export default inject(({ currentQuotaStore, backup }) => {
   const { setRestoreResource } = backup;
   const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
 

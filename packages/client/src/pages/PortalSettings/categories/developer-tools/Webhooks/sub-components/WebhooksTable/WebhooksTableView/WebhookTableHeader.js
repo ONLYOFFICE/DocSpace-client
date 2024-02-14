@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import TableHeader from "@docspace/components/table-container/TableHeader";
+import { TableHeader } from "@docspace/shared/components/table";
 
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -98,8 +98,8 @@ const WebhookTableHeader = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
+export default inject(({ userStore }) => {
   return {
-    userId: auth.userStore.user.id,
+    userId: userStore.user.id,
   };
 })(observer(WebhookTableHeader));

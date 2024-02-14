@@ -1,78 +1,89 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { inject, observer } from "mobx-react";
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import { StyledUser } from "../../styles/members";
-import Avatar from "@docspace/components/avatar";
-import ComboBox from "@docspace/components/combobox";
+import { Avatar } from "@docspace/shared/components/avatar";
+import { ComboBox } from "@docspace/shared/components/combobox";
 import DefaultUserPhotoUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 import { isMobileOnly, isMobile } from "react-device-detect";
 import { decode } from "he";
-import { filterUserRoleOptions } from "SRC_DIR/helpers/utils";
-import { getUserRole } from "@docspace/common/utils";
-import Text from "@docspace/components/text";
+import { filterUserRoleOptions } from "SRC_DIR/helpers";
+
+import { getUserRole, getUserTypeLabel } from "@docspace/shared/utils/common";
+import { Text } from "@docspace/shared/components/text";
 import EmailPlusReactSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
 import { StyledUserTypeHeader } from "../../styles/members";
-import IconButton from "@docspace/components/icon-button";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { Tooltip } from "@docspace/shared/components/tooltip";
 
 const User = ({
   t,
   user,
-  setMembers,
-  isExpect,
   membersHelper,
   currentMember,
   updateRoomMemberRole,
-  selectionParentRoom,
-  setSelectionParentRoom,
+  infoPanelSelection,
   changeUserType,
   setIsScrollLocked,
-  isTitle,
-  onRepeatInvitation,
-  showInviteIcon,
   membersFilter,
   setMembersFilter,
   fetchMembers,
   hasNextPage,
+  showTooltip,
+  infoPanelMembers,
+  setInfoPanelMembers,
 }) => {
-  if (!selectionParentRoom) return null;
+  if (!infoPanelSelection) return null;
   if (!user.displayName && !user.email) return null;
 
-  //const [userIsRemoved, setUserIsRemoved] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  //if (userIsRemoved) return null;
-
+  const security = infoPanelSelection ? infoPanelSelection.security : {};
+  const isExpect = user.isExpect;
+  const canInviteUserInRoomAbility = security?.EditAccess;
+  const showInviteIcon = canInviteUserInRoomAbility && isExpect;
   const canChangeUserRole = user.canEditAccess;
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const fullRoomRoleOptions = membersHelper.getOptionsByRoomType(
-    selectionParentRoom.roomType,
-    canChangeUserRole
+    infoPanelSelection.roomType,
+    canChangeUserRole,
   );
 
   const userRole = membersHelper.getOptionByUserAccess(user.access, user);
-
   const userRoleOptions = filterUserRoleOptions(fullRoomRoleOptions, user);
 
+  const onRepeatInvitation = async () => {
+    resendEmailInvitations(infoPanelSelection.id, true)
+      .then(() =>
+        toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios")),
+      )
+      .catch((err) => toastr.error(err));
+  };
+
   const updateRole = (option) => {
-    return updateRoomMemberRole(selectionParentRoom.id, {
+    return updateRoomMemberRole(infoPanelSelection.id, {
       invitations: [{ id: user.id, access: option.access }],
       notify: false,
       sharingMessage: "",
     })
       .then(async () => {
         setIsLoading(false);
-        const users = selectionParentRoom.members.users;
-        const administrators = selectionParentRoom.members.administrators;
-        const expectedMembers = selectionParentRoom.members.expected;
+
         if (option.key === "remove") {
           const newMembersFilter = JSON.parse(JSON.stringify(membersFilter));
 
           const newMembers = {
-            users: users?.filter((m) => m.id !== user.id),
-            administrators: administrators?.filter((m) => m.id !== user.id),
-            expected: expectedMembers?.filter((m) => m.id !== user.id),
+            users: infoPanelMembers.users?.filter((m) => m.id !== user.id),
+            administrators: infoPanelMembers.administrators?.filter(
+              (m) => m.id !== user.id,
+            ),
+            expected: infoPanelMembers.expected?.filter(
+              (m) => m.id !== user.id,
+            ),
           };
 
-          const roomId = selectionParentRoom.id;
+          const roomId = infoPanelSelection.id;
           const newUsers = newMembers.users.length > 1 ? newMembers?.users : [];
           const newAdministrators =
             newMembers.administrators.length > 1
@@ -81,7 +92,7 @@ const User = ({
           const newExpected =
             newMembers.expected.length > 1 ? newMembers?.expected : [];
 
-          setMembers({
+          setInfoPanelMembers({
             roomId,
             users: newUsers,
             administrators: newAdministrators,
@@ -90,25 +101,12 @@ const User = ({
 
           newMembersFilter.total -= 1;
 
-          setSelectionParentRoom({
-            ...selectionParentRoom,
-            members: {
-              users: newUsers,
-              administrators: newAdministrators,
-              expected: newExpected,
-            },
-          });
-
           if (hasNextPage) {
             newMembersFilter.startIndex =
               (newMembersFilter.page + 1) * newMembersFilter.pageCount - 1;
             newMembersFilter.pageCount = 1;
 
-            const fetchedMembers = await fetchMembers(
-              selectionParentRoom.id,
-              false,
-              newMembersFilter
-            );
+            const fetchedMembers = await fetchMembers(t, false);
 
             const newMembers = {
               administrators: [
@@ -119,47 +117,25 @@ const User = ({
               expected: [...newExpected, ...fetchedMembers.expected],
             };
 
-            setMembers({
-              roomId: selectionParentRoom.id,
+            setInfoPanelMembers({
+              roomId: infoPanelSelection.id,
               ...newMembers,
-            });
-
-            setSelectionParentRoom({
-              ...selectionParentRoom,
-              members: newMembers,
             });
           }
 
           setMembersFilter(newMembersFilter);
-
-          //setUserIsRemoved(true);
         } else {
-          setMembers({
-            roomId: selectionParentRoom.id,
-            users: users?.map((m) =>
-              m.id === user.id ? { ...m, access: option.access } : m
+          setInfoPanelMembers({
+            roomId: infoPanelSelection.id,
+            users: infoPanelMembers.users?.map((m) =>
+              m.id === user.id ? { ...m, access: option.access } : m,
             ),
-            administrators: administrators?.map((m) =>
-              m.id === user.id ? { ...m, access: option.access } : m
+            administrators: infoPanelMembers.administrators?.map((m) =>
+              m.id === user.id ? { ...m, access: option.access } : m,
             ),
-            expected: expectedMembers?.map((m) =>
-              m.id === user.id ? { ...m, access: option.access } : m
+            expected: infoPanelMembers.expected?.map((m) =>
+              m.id === user.id ? { ...m, access: option.access } : m,
             ),
-          });
-
-          setSelectionParentRoom({
-            ...selectionParentRoom,
-            members: {
-              users: users?.map((m) =>
-                m.id === user.id ? { ...m, access: option.access } : m
-              ),
-              administrators: administrators?.map((m) =>
-                m.id === user.id ? { ...m, access: option.access } : m
-              ),
-              expected: expectedMembers?.map((m) =>
-                m.id === user.id ? { ...m, access: option.access } : m
-              ),
-            },
           });
         }
       })
@@ -180,10 +156,10 @@ const User = ({
       option.key === "owner"
         ? "admin"
         : option.key === "roomAdmin"
-        ? "manager"
-        : option.key === "collaborator"
-        ? "collaborator"
-        : "user";
+          ? "manager"
+          : option.key === "collaborator"
+            ? "collaborator"
+            : "user";
 
     const successCallback = () => {
       updateRole(option);
@@ -203,20 +179,41 @@ const User = ({
   };
 
   const onToggle = (e, isOpen) => {
-    setIsScrollLocked(isOpen);
+    // setIsScrollLocked(isOpen);
   };
+  const role = getUserRole(user);
+  const typeLabel = getUserTypeLabel(role, t);
+
+  const getTooltipContent = () => (
+    <div>
+      <Text fontSize="14px" fontWeight={600} noSelect truncate>
+        {decode(user.displayName)}
+      </Text>
+      <Text
+        className="label"
+        fontWeight={400}
+        fontSize="12px"
+        noSelect
+        truncate
+        color="#A3A9AE !important"
+        dir="auto"
+      >
+        {`${typeLabel} | ${user.email}`}
+      </Text>
+    </div>
+  );
 
   const userAvatar = user.hasAvatar ? user.avatar : DefaultUserPhotoUrl;
 
-  const role = getUserRole(user);
-
   const withTooltip = user.isOwner || user.isAdmin;
+
+  const uniqueTooltipId = `userTooltip_${Math.random()}`;
 
   const tooltipContent = `${
     user.isOwner ? t("Common:DocSpaceOwner") : t("Common:DocSpaceAdmin")
   }. ${t("Common:HasFullAccess")}`;
 
-  return isTitle ? (
+  return user.isTitle ? (
     <StyledUserTypeHeader isExpect={isExpect}>
       <Text className="title">{user.displayName}</Text>
 
@@ -243,13 +240,38 @@ const User = ({
         tooltipContent={tooltipContent}
         hideRoleIcon={!withTooltip}
       />
-
-      <div className="name">
-        {isExpect ? user.email : decode(user.displayName) || user.email}
+      <div className="user_body-wrapper">
+        <div className="name-wrapper">
+          <Text className="name" data-tooltip-id={uniqueTooltipId}>
+            {decode(user.displayName)}
+          </Text>
+          {/* TODO: uncomment when information about online statuses appears */}
+          {/* {showTooltip && (
+            <Tooltip
+              float
+              id={uniqueTooltipId}
+              getContent={getTooltipContent}
+              place="bottom"
+            />
+          )} */}
+          {currentMember?.id === user.id && (
+            <div className="me-label">&nbsp;{`(${t("Common:MeLabel")})`}</div>
+          )}
+        </div>
+        <div className="role-email" style={{ display: "flex" }}>
+          <Text
+            className="label"
+            fontWeight={400}
+            fontSize="12px"
+            noSelect
+            truncate
+            color="#A3A9AE"
+            dir="auto"
+          >
+            {`${typeLabel} | ${user.email}`}
+          </Text>
+        </div>
       </div>
-      {currentMember?.id === user.id && (
-        <div className="me-label">&nbsp;{`(${t("Common:MeLabel")})`}</div>
-      )}
 
       {userRole && userRoleOptions && (
         <div className="role-wrapper">
@@ -282,4 +304,33 @@ const User = ({
   );
 };
 
-export default User;
+export default inject(({ infoPanelStore, filesStore, peopleStore }) => {
+  const {
+    infoPanelSelection,
+    setIsScrollLocked,
+    infoPanelMembers,
+    setInfoPanelMembers,
+    fetchMembers,
+  } = infoPanelStore;
+  const {
+    updateRoomMemberRole,
+    resendEmailInvitations,
+    membersFilter,
+    setMembersFilter,
+  } = filesStore;
+
+  const { changeType: changeUserType } = peopleStore;
+
+  return {
+    infoPanelSelection,
+    setIsScrollLocked,
+    updateRoomMemberRole,
+    resendEmailInvitations,
+    changeUserType,
+    membersFilter,
+    setMembersFilter,
+    infoPanelMembers,
+    setInfoPanelMembers,
+    fetchMembers,
+  };
+})(observer(User));

@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
-
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
+import api from "@docspace/shared/api";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { inject, observer } from "mobx-react";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import styled, { css } from "styled-components";
-import Checkbox from "@docspace/components/checkbox";
-import toastr from "@docspace/components/toast/toastr";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { toastr } from "@docspace/shared/components/toast";
 import LoaderAdditionalResources from "../sub-components/loaderAdditionalResources";
 import isEqual from "lodash/isEqual";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
-import { mobile, size } from "@docspace/components/utils/device";
-
+import { mobile, size } from "@docspace/shared/utils";
+import { isManagement } from "@docspace/shared/utils/common";
 const StyledComponent = styled.div`
   margin-top: 40px;
 
@@ -61,13 +61,11 @@ const AdditionalResources = (props) => {
     tReady,
     isSettingPaid,
     getAdditionalResources,
-    setAdditionalResources,
-    restoreAdditionalResources,
+
     additionalResourcesData,
     additionalResourcesIsDefault,
     setIsLoadedAdditionalResources,
     isLoadedAdditionalResources,
-    isManagement,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -110,7 +108,7 @@ const AdditionalResources = (props) => {
   }, []);
 
   const checkWidth = () => {
-    const url = isManagement
+    const url = isManagement()
       ? "/branding"
       : "portal-settings/customization/branding";
     window.innerWidth > size.mobile &&
@@ -149,11 +147,12 @@ const AdditionalResources = (props) => {
   const onSave = useCallback(async () => {
     setIsLoading(true);
 
-    await setAdditionalResources(
-      feedbackAndSupportEnabled,
-      videoGuidesEnabled,
-      helpCenterEnabled
-    )
+    await api.settings
+      .setAdditionalResources(
+        feedbackAndSupportEnabled,
+        videoGuidesEnabled,
+        helpCenterEnabled
+      )
       .then(() => {
         toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
       })
@@ -172,17 +171,13 @@ const AdditionalResources = (props) => {
     saveToSessionStorage("additionalSettings", data);
     saveToSessionStorage("defaultAdditionalSettings", data);
     setIsLoading(false);
-  }, [
-    setIsLoading,
-    setAdditionalResources,
-    getAdditionalResources,
-    additionalSettings,
-  ]);
+  }, [setIsLoading, getAdditionalResources, additionalSettings]);
 
   const onRestore = useCallback(async () => {
     setIsLoading(true);
 
-    await restoreAdditionalResources()
+    await api.settings
+      .restoreAdditionalResources()
       .then((res) => {
         setAdditionalSettings(res);
         saveToSessionStorage("additionalSettings", res);
@@ -195,7 +190,7 @@ const AdditionalResources = (props) => {
     await getAdditionalResources();
 
     setIsLoading(false);
-  }, [setIsLoading, restoreAdditionalResources, getAdditionalResources]);
+  }, [setIsLoading, getAdditionalResources]);
 
   const onChangeFeedback = () => {
     setAdditionalSettings({
@@ -288,16 +283,13 @@ const AdditionalResources = (props) => {
   );
 };
 
-export default inject(({ auth, common }) => {
-  const { currentQuotaStore, settingsStore, isManagement } = auth;
-
+export default inject(({ settingsStore, common, currentQuotaStore }) => {
   const { setIsLoadedAdditionalResources, isLoadedAdditionalResources } =
     common;
 
   const {
     getAdditionalResources,
-    setAdditionalResources,
-    restoreAdditionalResources,
+
     additionalResourcesData,
     additionalResourcesIsDefault,
   } = settingsStore;
@@ -306,14 +298,12 @@ export default inject(({ auth, common }) => {
 
   return {
     getAdditionalResources,
-    setAdditionalResources,
-    restoreAdditionalResources,
+
     additionalResourcesData,
     additionalResourcesIsDefault,
     setIsLoadedAdditionalResources,
     isLoadedAdditionalResources,
     isSettingPaid: isBrandingAndCustomizationAvailable,
-    isManagement,
   };
 })(
   withLoading(

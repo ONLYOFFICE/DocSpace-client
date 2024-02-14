@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
-import Button from "@docspace/components/button";
+import { Button } from "@docspace/shared/components/button";
 import styled from "styled-components";
 import ChangePricingPlanDialog from "../../../../../../components/dialogs/ChangePricingPlanDialog";
 
@@ -20,10 +20,8 @@ const DowngradePlanButtonContainer = ({
   canPayTariff,
   buttonLabel,
 }) => {
-  const [
-    isVisibleDowngradePlanDialog,
-    setIsVisibleDowngradePlanDialog,
-  ] = useState(false);
+  const [isVisibleDowngradePlanDialog, setIsVisibleDowngradePlanDialog] =
+    useState(false);
 
   const isPassedByQuota = () => {
     return isAlreadyPaid ? canDowngradeTariff : canPayTariff;
@@ -61,7 +59,7 @@ const DowngradePlanButtonContainer = ({
   );
 };
 
-export default inject(({ payments }) => {
+export default inject(({ paymentStore }) => {
   const {
     isLoading,
     isLessCountThanAcceptable,
@@ -69,7 +67,7 @@ export default inject(({ payments }) => {
     canPayTariff,
 
     isAlreadyPaid,
-  } = payments;
+  } = paymentStore;
 
   return {
     isLoading,

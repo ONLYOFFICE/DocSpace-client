@@ -2,10 +2,11 @@ import React, { useState, useCallback, useEffect, useRef, memo } from "react";
 import styled, { useTheme } from "styled-components";
 import { FixedSizeList as List, areEqual } from "react-window";
 import InfiniteLoader from "react-window-infinite-loader";
-import Loaders from "@docspace/common/components/Loaders";
-import CustomScrollbarsVirtualList from "@docspace/components/scrollbar/custom-scrollbars-virtual-list";
-import { isMobile } from "@docspace/components/utils/device";
-import Text from "@docspace/components/text";
+import { RowLoader } from "@docspace/shared/skeletons/selector";
+
+import { CustomScrollbarsVirtualList } from "@docspace/shared/components/scrollbar";
+import { isMobile } from "@docspace/shared/utils";
+import { Text } from "@docspace/shared/components/text";
 import { StyledUserTypeHeader } from "../../../styles/members";
 
 const MainStyles = styled.div`
@@ -31,11 +32,7 @@ const Item = memo(({ data, index, style }) => {
   if (!item) {
     return (
       <div style={{ ...style, width: "calc(100% - 20px)", margin: "0 -16px" }}>
-        <Loaders.SelectorRowLoader
-          isMultiSelect={false}
-          isContainer={true}
-          isUser={true}
-        />
+        <RowLoader isMultiSelect={false} isContainer={true} isUser={true} />
       </div>
     );
   }

@@ -5,9 +5,8 @@ import { useTranslation } from "react-i18next";
 
 import { isMobileOnly } from "react-device-detect";
 
-import { isMobile } from "@docspace/components/utils/device";
-import CatalogItem from "@docspace/components/catalog-item";
-
+import { isMobile } from "@docspace/shared/utils";
+import { ArticleItem } from "@docspace/shared/components/article-item";
 import { settingsTree } from "SRC_DIR/utils/settingsTree";
 import { getItemByLink } from "SRC_DIR/utils";
 import { TSettingsTreeItem } from "SRC_DIR/types/index";
@@ -20,8 +19,8 @@ const ArticleBodyContent = () => {
 
   const { t } = useTranslation(["Settings", "Common"]);
 
-  const { authStore } = useStore();
-  const { settingsStore } = authStore;
+  const { settingsStore } = useStore();
+
   const { toggleArticleOpen, setIsBurgerLoading } = settingsStore;
 
   const [selectedKey, setSelectedKey] = useState("0");
@@ -51,7 +50,7 @@ const ArticleBodyContent = () => {
 
     resultTree.map((item) => {
       items.push(
-        <CatalogItem
+        <ArticleItem
           key={item.key}
           id={item.key}
           icon={item.icon}

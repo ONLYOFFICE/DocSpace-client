@@ -2,15 +2,15 @@ import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import moment from "moment-timezone";
 
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 import { useTranslation } from "react-i18next";
-import DatePicker from "@docspace/components/date-picker";
-import Calendar from "@docspace/components/calendar";
-import TimePicker from "@docspace/components/time-picker";
-import SelectorAddButton from "@docspace/components/selector-add-button";
-import SelectedItem from "@docspace/components/selected-item";
+import { DatePicker } from "@docspace/shared/components/date-picker";
+import { Calendar } from "@docspace/shared/components/calendar";
+import { TimePicker } from "@docspace/shared/components/time-picker";
+import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
+import { SelectedItem } from "@docspace/shared/components/selected-item";
 
-import { isMobile } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/shared/utils";
 
 const Selectors = styled.div`
   position: relative;
@@ -72,10 +72,10 @@ const DeliveryDatePicker = ({
       ...prevFilters,
       deliveryDate: null,
       deliveryFrom: moment()
-        .tz(window.timezone || "")
+        .tz(window.timezone)
         .startOf("day"),
       deliveryTo: moment()
-        .tz(window.timezone || "")
+        .tz(window.timezone)
         .endOf("day"),
     }));
     setIsTimeOpen(false);
@@ -96,10 +96,10 @@ const DeliveryDatePicker = ({
       ...prevFilters,
       deliveryDate: date,
       deliveryFrom: moment()
-        .tz(window.timezone || "")
+        .tz(window.timezone)
         .startOf("day"),
       deliveryTo: moment()
-        .tz(window.timezone || "")
+        .tz(window.timezone)
         .endOf("day"),
     }));
   };
@@ -130,7 +130,7 @@ const DeliveryDatePicker = ({
     const formattedTime = isTimeEqual
       ? ""
       : ` ${filters.deliveryFrom.format("HH:mm")} - ${moment(filters.deliveryTo)
-          .tz(window.timezone || "")
+          .tz(window.timezone)
           .format("HH:mm")}`;
 
     return (

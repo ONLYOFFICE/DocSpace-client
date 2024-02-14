@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import { inject, observer } from "mobx-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Text from "@docspace/components/text";
-import Box from "@docspace/components/box";
-import Scrollbar from "@docspace/components/scrollbar";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Text } from "@docspace/shared/components/text";
+import { Box } from "@docspace/shared/components/box";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import axios from "axios";
 import styled from "styled-components";
 
@@ -144,8 +144,8 @@ DebugInfoDialog.propTypes = {
   buildVersionInfo: PropTypes.object,
 };
 
-export default inject(({ auth }) => {
-  const { user } = auth.userStore;
+export default inject(({ userStore }) => {
+  const { user } = userStore;
 
   return {
     user,

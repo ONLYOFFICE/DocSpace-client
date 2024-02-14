@@ -176,7 +176,8 @@ const filesActionsStore = new FilesActionsStore(
   pluginStore,
   infoPanelStore,
   userStore,
-  currentTariffStatusStore
+  currentTariffStatusStore,
+  currentQuotaStore
 );
 
 const contextOptionsStore = new ContextOptionsStore(

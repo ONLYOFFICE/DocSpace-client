@@ -75,7 +75,7 @@ class FilesActionStore {
   infoPanelStore;
   userStore = null;
   currentTariffStatusStore = null;
-
+  currentQuotaStore = null;
   isBulkDownload = false;
   isLoadedSearchFiles = false;
   isGroupMenuBlocked = false;
@@ -97,7 +97,8 @@ class FilesActionStore {
     pluginStore,
     infoPanelStore,
     userStore,
-    currentTariffStatusStore
+    currentTariffStatusStore,
+    currentQuotaStore
   ) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -115,6 +116,7 @@ class FilesActionStore {
     this.infoPanelStore = infoPanelStore;
     this.userStore = userStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
+    this.currentQuotaStore = currentQuotaStore;
   }
 
   setIsBulkDownload = (isBulkDownload) => {
@@ -1839,6 +1841,7 @@ class FilesActionStore {
       setDeleteDialogVisible,
     } = this.dialogsStore;
     const { selection } = this.filesStore;
+    const { showStorageInfo } = this.currentQuotaStore;
 
     switch (option) {
       case "show-info":
@@ -1952,7 +1955,7 @@ class FilesActionStore {
             label: t("Common:ChangeQuota"),
             iconUrl: ChangQuotaReactSvgUrl,
             onClick: () => this.changeRoomQuota(selection),
-            disabled: false,
+            disabled: !showStorageInfo,
           };
       case "default-quota":
         if (!this.isAvailableOption("default-quota")) return null;
@@ -1963,7 +1966,7 @@ class FilesActionStore {
             label: t("Common:SetToDefault"),
             iconUrl: DefaultQuotaReactSvgUrl,
             onClick: () => this.resetRoomQuota(selection, t),
-            disabled: false,
+            disabled: !showStorageInfo,
           };
       case "disable-quota":
         if (!this.isAvailableOption("disable-quota")) return null;
@@ -1974,7 +1977,7 @@ class FilesActionStore {
             label: t("Common:DisableQuota"),
             iconUrl: DisableQuotaReactSvgUrl,
             onClick: () => this.disableRoomQuota(selection, t),
-            disabled: false,
+            disabled: !showStorageInfo,
           };
 
       case "delete-room":

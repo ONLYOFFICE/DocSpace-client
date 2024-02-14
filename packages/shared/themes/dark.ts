@@ -32,7 +32,7 @@ const {
   strongBlue,
 
   darkRed,
-  darkMain,
+
   darkErrorStatus,
 } = globalColors;
 
@@ -50,7 +50,6 @@ const Dark: TTheme = {
     emailColor: "#a3a9ae",
     fontWeight: "normal",
     fontWeightBold: "bold",
-    descriptionColor: darkMain,
   },
 
   heading: {

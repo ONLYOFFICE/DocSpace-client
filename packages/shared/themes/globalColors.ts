@@ -10,7 +10,7 @@ export const globalColors = {
   grayMid: "#D0D5DA",
   gray: "#A3A9AE",
   grayMain: "#657077",
-  darkMain: "#ADADAD",
+
   shuttleGrey: "#63686A",
   veryLightGrey: "#CACACA",
   darkSilver: "#bbb",

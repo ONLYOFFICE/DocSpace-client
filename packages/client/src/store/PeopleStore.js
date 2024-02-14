@@ -60,7 +60,7 @@ class PeopleStore {
     infoPanelStore,
     userStore,
     tfaStore,
-    settingsStore
+    settingsStore,
   ) {
     this.authStore = authStore;
     this.infoPanelStore = infoPanelStore;
@@ -69,7 +69,7 @@ class PeopleStore {
       this,
       settingsStore,
       infoPanelStore,
-      userStore
+      userStore,
     );
     this.targetUserStore = new TargetUserStore(this, userStore);
     this.selectedGroupStore = new SelectedGroupStore(this);
@@ -90,7 +90,7 @@ class PeopleStore {
       infoPanelStore,
       userStore,
       tfaStore,
-      settingsStore
+      settingsStore,
     );
 
     makeAutoObservable(this);
@@ -137,7 +137,7 @@ class PeopleStore {
 
     if (users.length > 1) {
       fromType = fromType.filter(
-        (item, index) => fromType.indexOf(item) === index && item !== type
+        (item, index) => fromType.indexOf(item) === index && item !== type,
       );
 
       if (fromType.length === 0) fromType = [fromType[0]];
@@ -170,7 +170,7 @@ class PeopleStore {
     const userIDs = users.map((user) => {
       return user?.id ? user.id : user;
     });
-    console.log("==changeUserQuota", userIDs);
+
     const payload = {
       visible: true,
       type: "user",

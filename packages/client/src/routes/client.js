@@ -41,9 +41,7 @@ const Error403 = loadable(
   () => import("@docspace/shared/components/errors/Error403"),
 );
 
-const Error520 = loadable(
-  () => import("@docspace/shared/components/errors/Error520"),
-);
+const Error520 = loadable(() => import("../components/Error520Wrapper"));
 
 const ErrorAccessRestricted = loadable(
   () => import("@docspace/shared/components/errors/AccessRestricted"),

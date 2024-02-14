@@ -8,6 +8,15 @@ import "firebase/database";
 
 import { TFirebaseSettings } from "../api/settings/types";
 
+const fetchTimeoutMillis =
+  (typeof window !== "undefined" &&
+    window.DocSpaceConfig?.firebase?.fetchTimeoutMillis) ||
+  3600000;
+const minimumFetchIntervalMillis =
+  (typeof window !== "undefined" &&
+    window.DocSpaceConfig?.firebase?.minimumFetchIntervalMillis) ||
+  3600000;
+
 class FirebaseHelper {
   remoteConfig: firebase.remoteConfig.RemoteConfig | null = null;
 
@@ -35,8 +44,8 @@ class FirebaseHelper {
     this.firebaseDB = firebase.database();
 
     this.remoteConfig.settings = {
-      fetchTimeoutMillis: 3600000,
-      minimumFetchIntervalMillis: 3600000,
+      fetchTimeoutMillis,
+      minimumFetchIntervalMillis,
     };
 
     this.remoteConfig.defaultConfig = {

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import ErrorContainer from "@docspace/common/components/ErrorContainer";
 import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { ReactSVG } from "react-svg";
 import { Button } from "@docspace/shared/components/button";
+import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
 import RecoverAccessModalDialog from "@docspace/common/components/Dialogs/RecoverAccessModalDialog";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { mobile } from "@docspace/shared/utils";

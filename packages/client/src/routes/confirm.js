@@ -2,9 +2,9 @@ import React from "react";
 import loadable from "@loadable/component";
 
 import ConfirmRoute from "../helpers/confirmRoute";
-import ErrorBoundary from "@docspace/common/components/ErrorBoundary";
+import ErrorBoundary from "../components/ErrorBoundaryWrapper";
 
-import Error404 from "SRC_DIR/pages/Errors/404";
+import Error404 from "@docspace/shared/components/errors/Error404";
 import { AuthenticatedAction } from "../helpers/enums";
 
 const Confirm = loadable(() => import("../pages/Confirm"));

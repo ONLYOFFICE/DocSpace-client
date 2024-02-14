@@ -10,7 +10,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { StyledPage, StyledBody, StyledContent } from "./StyledConfirm";
 import withLoader from "../withLoader";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-import DocspaceLogo from "../../../DocspaceLogo";
+import DocspaceLogo from "../../../components/DocspaceLogoWrapper";
 
 const ProfileRemoveForm = (props) => {
   const { t, greetingTitle, linkData, legalTerms, currentColorScheme } = props;

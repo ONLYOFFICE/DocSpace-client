@@ -3,7 +3,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import Headline from "@docspace/common/components/Headline";
+import Headline from "@docspace/shared/components/headline/Headline";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { tablet } from "@docspace/shared/utils";
 

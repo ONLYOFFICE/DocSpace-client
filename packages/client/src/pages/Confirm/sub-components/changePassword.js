@@ -12,7 +12,7 @@ import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { createPasswordHash } from "@docspace/shared/utils/common";
 import { login } from "@docspace/shared/utils/loginUtils";
 
-import DocspaceLogo from "../../../DocspaceLogo";
+import DocspaceLogo from "../../../components/DocspaceLogoWrapper";
 import { getPasswordErrorMessage } from "../../../helpers/utils";
 import withLoader from "../withLoader";
 import { StyledPage, StyledBody, StyledContent } from "./StyledConfirm";

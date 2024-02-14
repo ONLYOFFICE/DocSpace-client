@@ -137,7 +137,7 @@ export const getCategoryType = (location) => {
     categoryType = CategoryType.Trash;
   } else if (pathname.startsWith("/settings")) {
     categoryType = CategoryType.Settings;
-  } else if (pathname.startsWith("/accounts/filter")) {
+  } else if (pathname.startsWith("/accounts")) {
     categoryType = CategoryType.Accounts;
   }
 
@@ -198,7 +198,7 @@ export const getCategoryUrl = (categoryType, folderId = null) => {
       return "/rooms/share";
 
     case CategoryType.Accounts:
-      return "/accounts/filter";
+      return "/accounts";
 
     case CategoryType.Settings:
       return "/settings/personal";

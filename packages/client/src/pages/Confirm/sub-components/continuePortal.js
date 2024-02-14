@@ -17,7 +17,7 @@ import {
 import withLoader from "../withLoader";
 
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-import DocspaceLogo from "../../../DocspaceLogo";
+import DocspaceLogo from "../../../components/DocspaceLogoWrapper";
 
 const ContinuePortal = (props) => {
   const { t, greetingTitle, linkData } = props;

@@ -1,14 +1,7 @@
 {
-  "AccessDenied": "Dostop je zavrnjen",
-  "Error401Text": "Žal vir trenutno ni dostopen.",
-  "Error403Text": "Žal je dostop zavrnjen.",
-  "Error404Text": "Žal vira ni mogoče najti.",
-  "ErrorDeactivatedText": "Ta DocSpace je deaktiviran",
   "ErrorEmptyResponse": "Prazen odziv",
-  "ErrorOfflineText": "Internetne povezave ni bilo mogoče najti",
   "ErrorUnavailableText": "DocSpace ni na voljo",
   "InvalidLink": "Neveljavna povezava",
   "LinkDoesNotExist": "Povezava, ki jo poskušate odpreti, ne obstaja.",
-  "LinkHasExpired": "Povezava, ki ste ji sledili, je potekla.",
-  "PortalRestriction": "Vaš naslov IP ni vključen na seznam dovoljenih naslovov IP za dostop do tega prostora DocSpace. Izklopite VPN, če je omogočen, in znova naložite stran ali uporabite drug naslov IP za prijavo."
+  "LinkHasExpired": "Povezava, ki ste ji sledili, je potekla."
 }

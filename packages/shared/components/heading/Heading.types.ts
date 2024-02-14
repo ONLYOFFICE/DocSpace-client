@@ -1,6 +1,7 @@
 import { HeadingLevel, HeadingSize } from "./Heading.enums";
 
 export interface HeadingProps {
+  id?: string;
   /** The heading level. It corresponds to the number after the 'H' for the DOM tag. Sets the level for semantic accuracy and accessibility. */
   level?: HeadingLevel;
   /** Specifies the headline color */

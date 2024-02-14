@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import Paging from "@docspace/components/paging";
+import { Paging } from "@docspace/shared/components/paging";
 
 const StyledPaging = styled(Paging)`
   display: flex;

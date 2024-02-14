@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { inject, observer } from "mobx-react";
 
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
-import SearchInput from "@docspace/components/search-input";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
+import { SearchInput } from "@docspace/shared/components/search-input";
 
 import AccountsTable from "./AccountsTable";
 import AccountsPaging from "../../../sub-components/AccountsPaging";
@@ -38,7 +38,7 @@ const SelectUsersStep = ({
   const filteredAccounts = dataPortion.filter(
     (data) =>
       data.displayName.toLowerCase().startsWith(searchValue.toLowerCase()) ||
-      data.email.toLowerCase().startsWith(searchValue.toLowerCase())
+      data.email.toLowerCase().startsWith(searchValue.toLowerCase()),
   );
 
   const handleStepIncrement = () => {

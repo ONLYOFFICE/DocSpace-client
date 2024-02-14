@@ -1,4 +1,4 @@
-import Row from "@docspace/components/row";
+import { Row } from "@docspace/shared/components/row";
 import UsersRowContent from "./UsersRowContent";
 
 const UsersRow = (props) => {

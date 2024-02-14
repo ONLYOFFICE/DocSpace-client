@@ -2,7 +2,7 @@ import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
 import ImportSection from "../../../sub-components/ImportSection";
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import PeopleIcon from "PUBLIC_DIR/images/catalog.accounts.react.svg";
 import AccountsIcon from "PUBLIC_DIR/images/catalog.accounts.react.svg";
 import DocumentsIcon from "PUBLIC_DIR/images/catalog.documents.react.svg";

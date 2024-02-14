@@ -3,19 +3,19 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
-import TableRow from "@docspace/components/table-container/TableRow";
-import TableCell from "@docspace/components/table-container/TableCell";
+import { TableRow } from "@docspace/shared/components/table/TableRow";
+import { TableCell } from "@docspace/shared/components/table/sub-components/TableCell";
 
-import Text from "@docspace/components/text";
-import Checkbox from "@docspace/components/checkbox";
-import EmailInput from "@docspace/components/email-input";
-import Button from "@docspace/components/button";
+import { Text } from "@docspace/shared/components/text";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { EmailInput } from "@docspace/shared/components/email-input";
+import { Button } from "@docspace/shared/components/button";
 
 import EditSvg from "PUBLIC_DIR/images/access.edit.react.svg";
 import CrossSvg from "PUBLIC_DIR/images/cross.edit.react.svg";
 import CheckSvg from "PUBLIC_DIR/images/check.edit.react.svg";
 
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 
 const EmailInputWrapper = styled.div`
   display: flex;

@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
-import Text from "@docspace/components/text";
-import Box from "@docspace/components/box";
-import RowContent from "@docspace/components/row-content";
+import { Text } from "@docspace/shared/components/text";
+import { Box } from "@docspace/shared/components/box";
+import { RowContent } from "@docspace/shared/components/row-content";
 
 const StyledRowContent = styled(RowContent)`
   display: flex;

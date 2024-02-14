@@ -1,16 +1,16 @@
 import { useRef } from "react";
 import { inject, observer } from "mobx-react";
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 import styled, { css } from "styled-components";
 
-import EmptyScreenContainer from "@docspace/components/empty-screen-container";
-import IconButton from "@docspace/components/icon-button";
-import Link from "@docspace/components/link";
-import Box from "@docspace/components/box";
+import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { Link } from "@docspace/shared/components/link";
+import { Box } from "@docspace/shared/components/box";
 import UsersTableHeader from "./UsersTableHeader";
 import UsersTableRow from "./UsersTableRow";
-import TableContainer from "@docspace/components/table-container/TableContainer";
-import TableBody from "@docspace/components/table-container/TableBody";
+import { TableContainer } from "@docspace/shared/components/table/TableContainer";
+import { TableBody } from "@docspace/shared/components/table/TableBody";
 import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 

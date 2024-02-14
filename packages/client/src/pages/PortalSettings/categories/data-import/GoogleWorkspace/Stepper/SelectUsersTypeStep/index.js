@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
-import SearchInput from "@docspace/components/search-input";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
+import { SearchInput } from "@docspace/shared/components/search-input";
 import AccountsTable from "./AccountsTable";
 import AccountsPaging from "../../../sub-components/AccountsPaging";
 
@@ -24,7 +24,7 @@ const SelectUsersTypeStep = ({
 }) => {
   const [boundaries, setBoundaries] = useState([0, 25]);
   const [dataPortion, setDataPortion] = useState(
-    users.result.slice(...boundaries)
+    users.result.slice(...boundaries),
   );
 
   const handleDataChange = (leftBoundary, rightBoundary) => {
@@ -43,7 +43,7 @@ const SelectUsersTypeStep = ({
   const filteredAccounts = dataPortion.filter(
     (data) =>
       data.displayName.toLowerCase().startsWith(searchValue.toLowerCase()) ||
-      data.email.toLowerCase().startsWith(searchValue.toLowerCase())
+      data.email.toLowerCase().startsWith(searchValue.toLowerCase()),
   );
 
   useEffect(() => {

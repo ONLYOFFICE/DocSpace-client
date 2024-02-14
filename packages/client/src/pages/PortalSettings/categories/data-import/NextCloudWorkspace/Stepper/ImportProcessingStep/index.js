@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { inject, observer } from "mobx-react";
-import { isTablet } from "@docspace/components/utils/device";
+import { isTablet } from "@docspace/shared/utils/device";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 import { Wrapper } from "../StyledStepper";
 
-import ProgressBar from "@docspace/components/progress-bar";
-import Button from "@docspace/components/button";
+import { ProgressBar } from "@docspace/shared/components/progress-bar";
+import { Button } from "@docspace/shared/components/button";
 
 const ImportProcessingStep = ({
   t,

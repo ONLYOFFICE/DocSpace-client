@@ -3,10 +3,10 @@ import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
-import Text from "@docspace/components/text";
-import Checkbox from "@docspace/components/checkbox";
-import HelpButton from "@docspace/components/help-button";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
+import { Text } from "@docspace/shared/components/text";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { HelpButton } from "@docspace/shared/components/help-button";
 
 import { Wrapper } from "../StyledStepper";
 

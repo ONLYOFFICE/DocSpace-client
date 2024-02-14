@@ -2,16 +2,16 @@ import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
-import { isTablet } from "@docspace/components/utils/device";
+import { isTablet } from "@docspace/shared/utils/device";
 import styled from "styled-components";
 
-import Text from "@docspace/components/text";
-import Button from "@docspace/components/button";
-import FileInput from "@docspace/components/file-input";
-import ProgressBar from "@docspace/components/progress-bar";
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
-import Box from "@docspace/components/box";
-import Link from "@docspace/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
+import { FileInput } from "@docspace/shared/components/file-input";
+import { ProgressBar } from "@docspace/shared/components/progress-bar";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
+import { Box } from "@docspace/shared/components/box";
+import { Link } from "@docspace/shared/components/link";
 // import { mockRes } from "./tempMock";
 
 const Wrapper = styled.div`
@@ -141,7 +141,7 @@ const SelectFileStep = ({
           (res) =>
             new Blob([res.parseResult.failedArchives], {
               type: "text/csv;charset=utf-8",
-            })
+            }),
         )
         .then((blob) => {
           let a = document.createElement("a");

@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 
-import Link from "@docspace/components/link";
-import Box from "@docspace/components/box";
-import Text from "@docspace/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { Box } from "@docspace/shared/components/box";
+import { Text } from "@docspace/shared/components/text";
 import { WorkspacesContainer } from "./StyledDataImport";
 
 import GoogleWorkspaceSvgUrl from "PUBLIC_DIR/images/workspace.google.react.svg?url";

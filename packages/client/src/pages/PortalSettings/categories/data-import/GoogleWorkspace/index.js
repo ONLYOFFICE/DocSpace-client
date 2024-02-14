@@ -2,15 +2,15 @@ import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { Trans, withTranslation } from "react-i18next";
 import { getStepTitle, getGoogleStepDescription } from "../../../utils";
-import { tablet, isMobile } from "@docspace/components/utils/device";
+import { tablet, isMobile } from "@docspace/shared/utils/device";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import styled, { css } from "styled-components";
 
 import StepContent from "./Stepper";
 import BreakpointWarning from "SRC_DIR/components/BreakpointWarning";
-import Text from "@docspace/components/text";
-import Box from "@docspace/components/box";
-import HelpButton from "@docspace/components/help-button";
+import { Text } from "@docspace/shared/components/text";
+import { Box } from "@docspace/shared/components/box";
+import { HelpButton } from "@docspace/shared/components/help-button";
 
 const STEP_LENGTH = 6;
 

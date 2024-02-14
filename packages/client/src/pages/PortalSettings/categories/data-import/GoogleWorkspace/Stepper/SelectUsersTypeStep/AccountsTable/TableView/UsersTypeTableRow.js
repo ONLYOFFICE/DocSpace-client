@@ -2,11 +2,11 @@ import { useRef } from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
-import TableRow from "@docspace/components/table-container/TableRow";
-import TableCell from "@docspace/components/table-container/TableCell";
-import Text from "@docspace/components/text";
-import Checkbox from "@docspace/components/checkbox";
-import ComboBox from "@docspace/components/combobox";
+import { TableRow } from "@docspace/shared/components/table/TableRow";
+import { TableCell } from "@docspace/shared/components/table/sub-components/TableCell";
+import { Text } from "@docspace/shared/components/text";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { ComboBox } from "@docspace/shared/components/combobox";
 
 const StyledTableRow = styled(TableRow)`
   .table-container_cell {

@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import Row from "@docspace/components/row";
+import { Row } from "@docspace/shared/components/row";
 import UsersTypeRowContent from "./UsersTypeRowContent";
 
 const UsersTypeRow = ({

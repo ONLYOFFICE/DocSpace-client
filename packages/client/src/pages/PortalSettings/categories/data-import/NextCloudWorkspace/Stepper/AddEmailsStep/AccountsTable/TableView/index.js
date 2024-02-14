@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 
 import UsersTableHeader from "./UsersTableHeader";
 import UsersTableRow from "./UsersTableRow";
-import TableBody from "@docspace/components/table-container/TableBody";
+import { TableBody } from "@docspace/shared/components/table/TableBody";
 import { StyledTableContainer } from "../../../StyledStepper";
 
 const TABLE_VERSION = "6";
@@ -29,14 +29,14 @@ const TableView = (props) => {
   const tableRef = useRef(null);
 
   const usersWithFilledEmails = users.withoutEmail.filter(
-    (user) => user.email.length > 0
+    (user) => user.email.length > 0,
   );
 
   const toggleAll = (e) =>
     toggleAllAccounts(
       e.target.checked,
       usersWithFilledEmails,
-      checkedAccountType
+      checkedAccountType,
     );
 
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;

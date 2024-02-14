@@ -1,7 +1,7 @@
-import TableRow from "@docspace/components/table-container/TableRow";
-import TableCell from "@docspace/components/table-container/TableCell";
-import Text from "@docspace/components/text";
-import Checkbox from "@docspace/components/checkbox";
+import { TableRow } from "@docspace/shared/components/table/TableRow";
+import { TableCell } from "@docspace/shared/components/table/sub-components/TableCell";
+import { Text } from "@docspace/shared/components/text";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 import styled from "styled-components";
 
 const StyledTableRow = styled(TableRow)`
@@ -20,25 +20,35 @@ const StyledTableRow = styled(TableRow)`
     margin-right: 5px;
     font-size: 13px;
     font-weight: 600;
-    color: ${(props) => props.theme.client.settings.migration.tableRowTextColor};
+    color: ${(props) =>
+      props.theme.client.settings.migration.tableRowTextColor};
   }
 
   .not-existing {
     font-size: 13px;
     font-weight: 600;
-    color: ${(props) => props.theme.client.settings.migration.tableRowTextColor};
+    color: ${(props) =>
+      props.theme.client.settings.migration.tableRowTextColor};
   }
 
   .user-existing {
     font-size: 13px;
     font-weight: 600;
-    color: ${(props) => props.theme.client.settings.migration.existingTextColor};
+    color: ${(props) =>
+      props.theme.client.settings.migration.existingTextColor};
   }
 `;
 
 const NOT_EXIST = "—";
 
-const UsersTableRow = ({ t, displayName, email, isDuplicate, isChecked, toggleAccount }) => {
+const UsersTableRow = ({
+  t,
+  displayName,
+  email,
+  isDuplicate,
+  isChecked,
+  toggleAccount,
+}) => {
   return (
     <StyledTableRow checked={isChecked} onClick={toggleAccount}>
       <TableCell className="checkboxWrapper">

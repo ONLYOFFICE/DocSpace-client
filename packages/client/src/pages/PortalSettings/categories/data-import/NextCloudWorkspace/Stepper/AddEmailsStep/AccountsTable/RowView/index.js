@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { inject, observer } from "mobx-react";
-import { tablet } from "@docspace/components/utils/device";
+import { tablet } from "@docspace/shared/utils/device";
 import styled from "styled-components";
 
-import RowContainer from "@docspace/components/row-container";
+import { RowContainer } from "@docspace/shared/components/row-container";
 import UsersRow from "./UsersRow";
-import Row from "@docspace/components/row";
-import Text from "@docspace/components/text";
+import { Row } from "@docspace/shared/components/row";
+import { Text } from "@docspace/shared/components/text";
 
 const StyledRow = styled(Row)`
   box-sizing: border-box;
@@ -37,7 +37,7 @@ const RowView = (props) => {
   const [openedEmailKey, setOpenedEmailKey] = useState(null);
 
   const usersWithFilledEmails = users.withoutEmail.filter(
-    (user) => user.email.length > 0
+    (user) => user.email.length > 0,
   );
 
   const toggleAll = (isChecked) =>

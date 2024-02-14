@@ -1,14 +1,24 @@
 import { useState, useRef } from "react";
-import Row from "@docspace/components/row";
+import { Row } from "@docspace/shared/components/row";
 import UsersRowContent from "./UsersRowContent";
 
 const UsersRow = (props) => {
-  const { t, data, sectionWidth, isChecked, toggleAccount, isEmailOpen, setOpenedEmailKey } = props;
+  const {
+    t,
+    data,
+    sectionWidth,
+    isChecked,
+    toggleAccount,
+    isEmailOpen,
+    setOpenedEmailKey,
+  } = props;
 
   const emailInputRef = useRef();
   const emailTextRef = useRef();
 
-  const [isPrevEmailValid, setIsPrevEmailValid] = useState(data.email.length > 0);
+  const [isPrevEmailValid, setIsPrevEmailValid] = useState(
+    data.email.length > 0,
+  );
 
   const handleAccountToggle = (e) => {
     e.preventDefault();
@@ -25,7 +35,8 @@ const UsersRow = (props) => {
       sectionWidth={sectionWidth}
       checked={isChecked}
       onClick={handleAccountToggle}
-      isDisabled={!isPrevEmailValid}>
+      isDisabled={!isPrevEmailValid}
+    >
       <UsersRowContent
         t={t}
         id={data.key}

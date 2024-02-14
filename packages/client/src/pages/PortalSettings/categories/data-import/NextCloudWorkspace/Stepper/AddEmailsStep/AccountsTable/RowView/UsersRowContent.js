@@ -3,17 +3,17 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import Text from "@docspace/components/text";
-import RowContent from "@docspace/components/row-content";
+import { Text } from "@docspace/shared/components/text";
+import { RowContent } from "@docspace/shared/components/row-content";
 
-import EmailInput from "@docspace/components/email-input";
-import Button from "@docspace/components/button";
+import { EmailInput } from "@docspace/shared/components/email-input";
+import { Button } from "@docspace/shared/components/button";
 
 import EditSvg from "PUBLIC_DIR/images/access.edit.react.svg";
 import CrossSvg from "PUBLIC_DIR/images/cross.edit.react.svg";
 import CheckSvg from "PUBLIC_DIR/images/check.edit.react.svg";
 
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 
 const EmailInputWrapper = styled.div`
   display: flex;

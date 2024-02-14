@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { tablet, mobile } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/shared/utils/device";
 
 const WorkspacesContainer = styled.div`
   max-width: 700px;

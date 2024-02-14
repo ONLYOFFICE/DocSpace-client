@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { isMobile } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/shared/utils/device";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import styled from "styled-components";
 
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 import BreakpointWarning from "SRC_DIR/components/BreakpointWarning";
 import { getStepsData } from "./Stepper";
 
@@ -91,6 +91,6 @@ export default inject(({ setup, auth, importAccountsStore }) => {
   };
 })(
   withTranslation(["Common, SMTPSettings, Settings"])(
-    observer(NextcloudWorkspace)
-  )
+    observer(NextcloudWorkspace),
+  ),
 );

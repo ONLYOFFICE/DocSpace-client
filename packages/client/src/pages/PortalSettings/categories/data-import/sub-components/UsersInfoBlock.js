@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-import HelpButton from "@docspace/components/help-button";
-import Text from "@docspace/components/text";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { Text } from "@docspace/shared/components/text";
 
 const Wrapper = styled.div`
   margin: 16px 0;

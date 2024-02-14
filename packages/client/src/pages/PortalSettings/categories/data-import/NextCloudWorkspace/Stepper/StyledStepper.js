@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import TableContainer from "@docspace/components/table-container/TableContainer";
-import { Base } from "@docspace/components/themes";
+import { TableContainer } from "@docspace/shared/components/table/TableContainer";
+import { Base } from "@docspace/shared/themes";
 
 export const Wrapper = styled.div`
   .users-without-email {

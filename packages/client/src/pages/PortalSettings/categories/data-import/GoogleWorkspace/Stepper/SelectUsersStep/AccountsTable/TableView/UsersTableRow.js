@@ -1,7 +1,7 @@
-import TableRow from "@docspace/components/table-container/TableRow";
-import TableCell from "@docspace/components/table-container/TableCell";
-import Text from "@docspace/components/text";
-import Checkbox from "@docspace/components/checkbox";
+import { TableRow } from "@docspace/shared/components/table/TableRow";
+import { TableCell } from "@docspace/shared/components/table/sub-components/TableCell";
+import { Text } from "@docspace/shared/components/text";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 import styled from "styled-components";
 
 const StyledTableRow = styled(TableRow)`

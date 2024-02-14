@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { inject, observer } from "mobx-react";
 
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
-import SearchInput from "@docspace/components/search-input";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
+import { SearchInput } from "@docspace/shared/components/search-input";
 
 import AccountsTable from "./AccountsTable";
 import AccountsPaging from "../../../sub-components/AccountsPaging";
@@ -29,7 +29,7 @@ const AddEmailsStep = (props) => {
   } = props;
 
   const [dataPortion, setDataPortion] = useState(
-    users.withoutEmail.slice(0, 25)
+    users.withoutEmail.slice(0, 25),
   );
 
   const handleDataChange = (leftBoundary, rightBoundary) => {
@@ -47,7 +47,7 @@ const AddEmailsStep = (props) => {
   const filteredAccounts = dataPortion.filter(
     (data) =>
       data.displayName.toLowerCase().startsWith(searchValue.toLowerCase()) ||
-      data.email.toLowerCase().startsWith(searchValue.toLowerCase())
+      data.email.toLowerCase().startsWith(searchValue.toLowerCase()),
   );
 
   const handleStepIncrement = () => {

@@ -6,8 +6,8 @@ import ImportStep from "./ImportStep";
 import ImportProcessingStep from "./ImportProcessingStep";
 import ImportCompleteStep from "./ImportCompleteStep";
 
-import HelpButton from "@docspace/components/help-button";
-import Text from "@docspace/components/text";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { Text } from "@docspace/shared/components/text";
 
 import { Trans } from "react-i18next";
 

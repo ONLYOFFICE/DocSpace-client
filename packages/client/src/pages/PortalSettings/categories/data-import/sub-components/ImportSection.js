@@ -1,9 +1,9 @@
 import { ReactSVG } from "react-svg";
-import { tablet } from "@docspace/components/utils/device";
-
-import Text from "@docspace/components/text";
-import ToggleButton from "@docspace/components/toggle-button";
 import styled, { css } from "styled-components";
+import { tablet } from "@docspace/shared/utils/device";
+
+import { Text } from "@docspace/shared/components/text";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import ArrowSvg from "PUBLIC_DIR/images/arrow2.react.svg?url";
 
 const SectionWrapper = styled.div`

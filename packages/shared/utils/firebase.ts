@@ -158,7 +158,7 @@ class FirebaseHelper {
     return `https://${domain}/configs/${banner}.json`;
   }
 
-  async sendCrashReport(report: string) {
+  async sendCrashReport<T>(report: T) {
     try {
       const reportListRef = this.firebaseDB?.ref("reports");
       const neReportRef = reportListRef?.push();

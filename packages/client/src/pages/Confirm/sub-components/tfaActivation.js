@@ -9,11 +9,11 @@ import { inject, observer } from "mobx-react";
 import { Box } from "@docspace/shared/components/box";
 import withLoader from "../withLoader";
 import { toastr } from "@docspace/shared/components/toast";
-import ErrorContainer from "@docspace/common/components/ErrorContainer";
+import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
 import { mobile, tablet } from "@docspace/shared/utils";
 import { Link } from "@docspace/shared/components/link";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-import DocspaceLogo from "../../../DocspaceLogo";
+import DocspaceLogo from "../../../components/DocspaceLogoWrapper";
 import { StyledPage, StyledContent } from "./StyledConfirm";
 import {
   getTfaSecretKeyAndQR,

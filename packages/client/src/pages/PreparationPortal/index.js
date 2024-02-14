@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ErrorContainer from "@docspace/common/components/ErrorContainer";
+import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
 import { withTranslation } from "react-i18next";
 
 import { StyledPreparationPortal } from "./StyledPreparationPortal";
@@ -145,13 +145,6 @@ const PreparationPortal = (props) => {
         returnToPortal();
       }
     } catch (error) {
-      const status = err?.response?.status;
-      const needCreationTableTime = status === 404;
-
-      if (needCreationTableTime) {
-        return;
-      }
-
       clearAllIntervals();
       setErrorMessage(error);
     }
@@ -194,13 +187,21 @@ const PreparationPortal = (props) => {
 
       setPercent(progress);
     } catch (err) {
+      const status = err?.response?.status;
+      const needCreationTableTime = status === 404;
+
+      if (needCreationTableTime) {
+        getRecoveryProgress();
+        return;
+      }
+
       setErrorMessage(errorMessage(err));
     }
   };
   useEffect(() => {
     setTimeout(() => {
       getRecoveryProgress();
-    }, 4000);
+    }, 6000);
 
     return () => {
       clearAllIntervals();

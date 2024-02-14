@@ -27,14 +27,30 @@ const Wizard = loadable(() => import("../pages/Wizard"));
 const PreparationPortal = loadable(() => import("../pages/PreparationPortal"));
 const PortalUnavailable = loadable(() => import("../pages/PortalUnavailable"));
 const ErrorUnavailable = loadable(
-  () => import("../components/ErrorUnavailableWrapper")
+  () => import("../components/ErrorUnavailableWrapper"),
 );
 const AccessRestricted = loadable(
-  () => import("@docspace/shared/components/errors/AccessRestricted")
+  () => import("@docspace/shared/components/errors/AccessRestricted"),
 );
 
 const Error401 = loadable(
-  () => import("@docspace/shared/components/errors/Error401")
+  () => import("@docspace/shared/components/errors/Error401"),
+);
+
+const Error403 = loadable(
+  () => import("@docspace/shared/components/errors/Error403"),
+);
+
+const Error520 = loadable(
+  () => import("@docspace/shared/components/errors/Error520"),
+);
+
+const ErrorAccessRestricted = loadable(
+  () => import("@docspace/shared/components/errors/AccessRestricted"),
+);
+
+const ErrorOffline = loadable(
+  () => import("@docspace/shared/components/errors/ErrorOffline"),
 );
 
 const ClientRoutes = [
@@ -372,6 +388,46 @@ const ClientRoutes = [
       <PrivateRoute>
         <ErrorBoundary>
           <Error401 />
+        </ErrorBoundary>
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/error403",
+    element: (
+      <PrivateRoute>
+        <ErrorBoundary>
+          <Error403 />
+        </ErrorBoundary>
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/error520",
+    element: (
+      <PrivateRoute>
+        <ErrorBoundary>
+          <Error520 />
+        </ErrorBoundary>
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/errorAccessRestricted",
+    element: (
+      <PrivateRoute>
+        <ErrorBoundary>
+          <ErrorAccessRestricted />
+        </ErrorBoundary>
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/errorOffline",
+    element: (
+      <PrivateRoute>
+        <ErrorBoundary>
+          <ErrorOffline />
         </ErrorBoundary>
       </PrivateRoute>
     ),

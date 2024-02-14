@@ -1,6 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
+import { useLocation } from "react-router-dom";
 
 import { mobile } from "@docspace/shared/utils";
 import Bar from "./Bar";
@@ -38,6 +39,8 @@ const MainBar = ({
   isNotPaidPeriod,
   isFrame,
 }) => {
+  const location = useLocation();
+
   React.useEffect(() => {
     return () => setMaintenanceExist && setMaintenanceExist(false);
   }, []);
@@ -46,6 +49,7 @@ const MainBar = ({
     !isNotPaidPeriod &&
     pathname.indexOf("confirm") === -1 &&
     pathname !== "/preparation-portal" &&
+    !location.pathname.includes("error") &&
     !isFrame;
 
   return (
@@ -78,5 +82,5 @@ export default inject(
       isNotPaidPeriod,
       isFrame,
     };
-  }
+  },
 )(observer(MainBar));

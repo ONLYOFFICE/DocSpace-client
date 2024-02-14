@@ -1,6 +1,6 @@
-export const getCampaignsLs = () => {
-  if (CAMPAIGNS) {
-    return CAMPAIGNS;
+export const getCampaignsLs = (standalone: boolean) => {
+  if (standalone) {
+    return window.DocSpaceConfig?.campaigns || [];
   }
   return (localStorage.getItem("docspace_campaigns") || "")
     .split(",")

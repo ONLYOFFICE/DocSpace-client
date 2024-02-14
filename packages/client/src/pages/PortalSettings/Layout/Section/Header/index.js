@@ -6,7 +6,7 @@ import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
-import Headline from "@docspace/common/components/Headline";
+import Headline from "@docspace/shared/components/headline/Headline";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { TableGroupMenu } from "@docspace/shared/components/table";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";

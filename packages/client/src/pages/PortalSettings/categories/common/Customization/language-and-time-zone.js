@@ -19,9 +19,10 @@ import LoaderCustomization from "../sub-components/loaderCustomization";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
-import BetaBadge from "@docspace/common/components/BetaBadge";
 import { isBetaLanguage } from "@docspace/shared/utils";
 import withCultureNames from "@docspace/common/hoc/withCultureNames";
+
+import BetaBadge from "../../../../../components/BetaBadgeWrapper";
 
 const mapTimezonesToArray = (timezones) => {
   return timezones.map((timezone) => {
@@ -327,7 +328,7 @@ const LanguageAndTimeZone = (props) => {
       })
       .then(() => toastr.success(t("SuccessfullySaveSettingsMessage")))
       .then(
-        () => !user.cultureName && lng !== language.key && location.reload()
+        () => !user.cultureName && lng !== language.key && location.reload(),
       )
       .catch((error) => toastr.error(error))
       .finally(() => setState((val) => ({ ...val, isLoading: false })));
@@ -396,7 +397,7 @@ const LanguageAndTimeZone = (props) => {
 
       const currentUrl = window.location.href.replace(
         window.location.origin,
-        ""
+        "",
       );
 
       const newUrl = "/portal-settings/customization/general";
@@ -567,7 +568,7 @@ export default inject(({ settingsStore, setup, common, userStore }) => {
 })(
   withCultureNames(
     withLoading(
-      withTranslation(["Settings", "Common"])(observer(LanguageAndTimeZone))
-    )
-  )
+      withTranslation(["Settings", "Common"])(observer(LanguageAndTimeZone)),
+    ),
+  ),
 );

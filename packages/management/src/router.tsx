@@ -12,9 +12,9 @@ import Backup from "./categories/backup";
 import Restore from "./categories/restore";
 import Payments from "./categories/payments";
 
-import ErrorBoundary from "@docspace/common/components/ErrorBoundary";
+import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 
-import Error404 from "client/Error404";
+import Error404 from "@docspace/shared/components/errors/Error404";
 
 const routes = [
   {

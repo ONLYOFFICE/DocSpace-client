@@ -28,9 +28,9 @@ export interface ToggleButtonProps {
   /** Used as HTML `name` property  */
   name?: string;
   /** Sets the font weight */
-  fontWeight: number | string;
+  fontWeight?: number | string;
   /** Sets the font size */
-  fontSize: string;
+  fontSize?: string;
 }
 
 export interface StyledToggleButtonProps {

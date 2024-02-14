@@ -361,6 +361,7 @@ class FileRow extends Component {
               <ErrorFileUpload
                 t={t}
                 item={item}
+                theme={theme}
                 onTextClick={this.onTextClick}
                 showPasswordInput={showPasswordInput}
               />

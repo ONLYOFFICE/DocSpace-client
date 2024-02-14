@@ -16,7 +16,7 @@ import EditingFormStore from "./EditingFormStore";
 import FilterStore from "./FilterStore";
 import SelectionStore from "./SelectionPeopleStore";
 import HeaderMenuStore from "./HeaderMenuStore";
-import AvatarEditorStore from "./AvatarEditorStore";
+
 import InviteLinksStore from "./InviteLinksStore";
 import DialogStore from "./DialogStore";
 
@@ -39,7 +39,7 @@ class PeopleStore {
   filterStore = null;
   selectionStore = null;
   headerMenuStore = null;
-  avatarEditorStore = null;
+
   inviteLinksStore = null;
   dialogStore = null;
   setupStore = null;
@@ -77,7 +77,6 @@ class PeopleStore {
     this.filterStore = new FilterStore();
     this.selectionStore = new SelectionStore(this);
     this.headerMenuStore = new HeaderMenuStore(this);
-    this.avatarEditorStore = new AvatarEditorStore(this);
     this.inviteLinksStore = new InviteLinksStore(this);
     this.dialogStore = new DialogStore();
     this.userStore = userStore;

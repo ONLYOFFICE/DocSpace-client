@@ -123,6 +123,8 @@ const Table = ({
   canChangeUserType,
   isFiltered,
   currentDeviceType,
+  typeAccountsColumnIsEnabled,
+  emailAccountsColumnIsEnabled,
 }) => {
   const ref = useRef(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -173,6 +175,9 @@ const Table = ({
             canChangeUserType={canChangeUserType}
             hideColumns={hideColumns}
             itemIndex={index}
+            typeAccountsColumnIsEnabled={typeAccountsColumnIsEnabled}
+            emailAccountsColumnIsEnabled={emailAccountsColumnIsEnabled}
+            infoPanelVisible={infoPanelVisible}
           />
         ))}
       </TableBody>
@@ -189,6 +194,7 @@ export default inject(
     accessRightsStore,
     infoPanelStore,
     userStore,
+    tableStore,
   }) => {
     const {
       usersStore,
@@ -205,6 +211,8 @@ export default inject(
     const { isAdmin, isOwner, id: userId } = userStore.user;
 
     const { canChangeUserType } = accessRightsStore;
+    const { typeAccountsColumnIsEnabled, emailAccountsColumnIsEnabled } =
+      tableStore;
 
     return {
       peopleList,
@@ -224,6 +232,8 @@ export default inject(
       canChangeUserType,
       isFiltered,
       currentDeviceType,
+      typeAccountsColumnIsEnabled,
+      emailAccountsColumnIsEnabled,
     };
-  }
+  },
 )(observer(Table));

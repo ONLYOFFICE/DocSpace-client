@@ -164,7 +164,7 @@ const DNSSettings = (props) => {
           <TextInput
             {...textInputProps}
             isDisabled={isLoading || !enable}
-            value={dnsName}
+            value={dnsName?.trim()}
             onChange={onChangeTextInput}
             hasError={isError}
           />
@@ -183,7 +183,7 @@ const DNSSettings = (props) => {
             <TextInput
               {...textInputProps}
               isDisabled={true}
-              value={location.hostname}
+              value={location.hostname?.trim()}
             />
           </FieldContainer>
         </>

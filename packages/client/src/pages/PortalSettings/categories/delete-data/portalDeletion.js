@@ -49,7 +49,7 @@ const PortalDeletion = (props) => {
       try {
         await sendDeletePortalEmail();
         toastr.success(
-          t("PortalDeletionEmailSended", { ownerEmail: owner.email })
+          t("PortalDeletionEmailSended", { ownerEmail: owner.email }),
         );
       } catch (error) {
         toastr.error(error);
@@ -62,7 +62,7 @@ const PortalDeletion = (props) => {
   };
 
   const notActivatedEmail =
-    owner.activationStatus === EmployeeActivationStatus.NotActivated;
+    owner?.activationStatus === EmployeeActivationStatus.NotActivated;
 
   return (
     <MainContainer>
@@ -115,5 +115,5 @@ export default inject(({ settingsStore, userStore }) => {
     sendActivationLink,
   };
 })(
-  withTranslation(["Settings", "MainBar", "People", "Common"])(PortalDeletion)
+  withTranslation(["Settings", "MainBar", "People", "Common"])(PortalDeletion),
 );

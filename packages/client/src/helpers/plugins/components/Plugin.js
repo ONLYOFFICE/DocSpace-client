@@ -5,7 +5,7 @@ import PluginHeader from "./PluginHeader";
 import PluginInfo from "./PluginInfo";
 import PluginSettings from "./PluginSettings";
 
-import { PluginScopes } from "../constants";
+import { PluginScopes } from "../enums";
 
 const StyledPlugin = styled.div`
   display: flex;
@@ -79,7 +79,7 @@ const Plugin = ({
         author={author}
         status={status}
         description={description}
-        createBy={createBy}
+        createBy={createBy.displayName}
         createOn={createOn}
         homePage={homePage}
         url={url}

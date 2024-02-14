@@ -2,6 +2,7 @@ import { makeAutoObservable } from "mobx";
 import { TableVersions } from "SRC_DIR/helpers/constants";
 
 const TABLE_COLUMNS = `filesTableColumns_ver-${TableVersions.Files}`;
+const TABLE_ACCOUNTS_COLUMNS = `peopleTableColumns_ver-${TableVersions.Accounts}`;
 const TABLE_ROOMS_COLUMNS = `roomsTableColumns_ver-${TableVersions.Rooms}`;
 const TABLE_TRASH_COLUMNS = `trashTableColumns_ver-${TableVersions.Trash}`;
 const TABLE_SDK_COLUMNS = `filesSDKTableColumns_ver-${TableVersions.Files}`;
@@ -44,6 +45,8 @@ class TableStore {
   createdTrashColumnIsEnabled = false;
   sizeTrashColumnIsEnabled = false;
   typeTrashColumnIsEnabled = false;
+  typeAccountsColumnIsEnabled = true;
+  emailAccountsColumnIsEnabled = true;
 
   constructor(authStore, treeFoldersStore, userStore, settingsStore) {
     makeAutoObservable(this);
@@ -112,12 +115,17 @@ class TableStore {
   setSizeTrashColumn = (enable) => (this.sizeTrashColumnIsEnabled = enable);
   setTypeTrashColumn = (enable) => (this.typeTrashColumnIsEnabled = enable);
 
+  setAccountsColumnType = (enable) =>
+    (this.typeAccountsColumnIsEnabled = enable);
+  setAccountsColumnEmail = (enable) =>
+    (this.emailAccountsColumnIsEnabled = enable);
+
   setColumnsEnable = () => {
     const storageColumns = localStorage.getItem(this.tableStorageName);
     const splitColumns = storageColumns && storageColumns.split(",");
 
     if (splitColumns) {
-      const { isRoomsFolder, isArchiveFolder, isTrashFolder } =
+      const { isRoomsFolder, isArchiveFolder, isTrashFolder, isAccounts } =
         this.treeFoldersStore;
       const isRooms = isRoomsFolder || isArchiveFolder;
 
@@ -127,6 +135,12 @@ class TableStore {
         this.setRoomColumnOwner(splitColumns.includes("Owner"));
         this.setRoomColumnActivity(splitColumns.includes("Activity"));
         this.setRoomColumnQuota(splitColumns.includes("Storage"));
+        return;
+      }
+
+      if (isAccounts) {
+        this.setAccountsColumnType(splitColumns.includes("Type"));
+        this.setAccountsColumnEmail(splitColumns.includes("Mail"));
         return;
       }
 
@@ -151,7 +165,7 @@ class TableStore {
   };
 
   setColumnEnable = (key) => {
-    const { isRoomsFolder, isArchiveFolder, isTrashFolder } =
+    const { isRoomsFolder, isArchiveFolder, isTrashFolder, isAccounts  } =
       this.treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
 
@@ -192,6 +206,8 @@ class TableStore {
       case "Type":
         isRooms
           ? this.setRoomColumnType(!this.roomColumnTypeIsEnabled)
+          : isAccounts
+            ? this.setAccountsColumnType(!this.typeAccountsColumnIsEnabled)
           : this.setTypeColumn(!this.typeColumnIsEnabled);
         return;
       case "TypeTrash":
@@ -214,6 +230,9 @@ class TableStore {
         this.setRoomColumnActivity(!this.roomColumnActivityIsEnabled);
         return;
 
+      case "Mail":
+        this.setAccountsColumnEmail(!this.emailAccountsColumnIsEnabled);
+        return;
       case "Storage":
         this.setRoomColumnQuota(!this.roomQuotaColumnIsEnable);
         return;
@@ -245,7 +264,7 @@ class TableStore {
   };
 
   get tableStorageName() {
-    const { isRoomsFolder, isArchiveFolder, isTrashFolder } =
+    const { isRoomsFolder, isArchiveFolder, isTrashFolder, isAccounts } =
       this.treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
     const userId = this.userStore.user?.id;
@@ -255,6 +274,8 @@ class TableStore {
 
     return isRooms
       ? `${TABLE_ROOMS_COLUMNS}=${userId}`
+      : isAccounts
+        ? `${TABLE_ACCOUNTS_COLUMNS}=${userId}`
       : isTrashFolder
         ? `${TABLE_TRASH_COLUMNS}=${userId}`
         : `${TABLE_COLUMNS}=${userId}`;

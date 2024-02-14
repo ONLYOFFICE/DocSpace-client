@@ -443,6 +443,7 @@ class FilesTableHeader extends React.Component {
       tagRef,
       setHideColumns,
       isFrame,
+      showSettings,
     } = this.props;
 
     const {
@@ -473,7 +474,7 @@ class FilesTableHeader extends React.Component {
         tagRef={tagRef}
         setHideColumns={setHideColumns}
         settingsTitle={t("Files:TableSettingsTitle")}
-        showSettings={!isFrame}
+        showSettings={isFrame ? showSettings : true}
       />
     );
   }
@@ -599,6 +600,7 @@ export default inject(
 
       isFrame,
       frameTableColumns: frameConfig?.viewTableColumns,
+      showSettings: frameConfig?.showSettings,
       isDefaultRoomsQuotaSet,
       showStorageInfo,
       isArchiveFolder,

@@ -253,12 +253,21 @@ export async function getPortalTariff(refresh = false) {
   return res;
 }
 
-export function getPaymentAccount() {
-  return request({ method: "get", url: "/portal/payment/account" });
+export async function getPaymentAccount() {
+  const res = (await request({
+    method: "get",
+    url: "/portal/payment/account",
+  })) as string;
+
+  return res;
 }
 
-export function getPaymentLink(adminCount, backUrl, signal) {
-  return request({
+export async function getPaymentLink(
+  adminCount: number,
+  backUrl: string,
+  signal?: AbortSignal,
+) {
+  const res = (await request({
     method: "put",
     url: `/portal/payment/url`,
     data: {
@@ -266,7 +275,9 @@ export function getPaymentLink(adminCount, backUrl, signal) {
       backUrl,
     },
     signal,
-  });
+  })) as string;
+
+  return res;
 }
 
 export function updatePayment(adminCount) {

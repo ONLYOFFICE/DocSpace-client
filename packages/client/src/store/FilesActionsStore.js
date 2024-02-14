@@ -2322,11 +2322,6 @@ class FilesActionStore {
       }
 
       if (isMediaOrImage) {
-        // localStorage.setItem("isFirstUrl", window.location.href);
-
-        this.mediaViewerDataStore.saveFirstUrl(
-          `${window.DocSpace.location.pathname}${window.DocSpace.location.search}`
-        );
         setMediaViewerData({ visible: true, id });
 
         const url = combineUrl(MEDIA_VIEW_URL, id);

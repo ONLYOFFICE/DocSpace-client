@@ -43,16 +43,14 @@ const StatusBar = (props) => {
       <SelectedItem
         label={
           moment(historyFilters.deliveryDate)
-            .format("DD MMM YYYY")
-            .tz(window.timezone) +
+            .tz(window.timezone)
+            .format("DD MMM YYYY") +
           " " +
           moment(historyFilters.deliveryFrom)
-            .format("HH:mm")
-            .tz(window.timezone) +
-          " - " +
-          moment(historyFilters.deliveryTo)
-            .format("HH:mm")
             .tz(window.timezone)
+            .format("HH:mm") +
+          " - " +
+          moment(historyFilters.deliveryTo).tz(window.timezone).format("HH:mm")
         }
         onClose={clearDate}
         onClick={clearDate}

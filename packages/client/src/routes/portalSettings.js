@@ -148,6 +148,25 @@ const RestoreBackup = loadable(() =>
 );
 const Bonus = loadable(() => import("../pages/Bonus"));
 
+const SimpleRoom = loadable(() =>
+  import("../pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom")
+);
+const Manager = loadable(() =>
+  import("../pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager")
+);
+const RoomSelector = loadable(() =>
+  import("../pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector")
+);
+const FileSelector = loadable(() =>
+  import("../pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector")
+);
+const Editor = loadable(() =>
+  import("../pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Editor")
+);
+const Viewer = loadable(() =>
+  import("../pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Viewer")
+);
+
 const PortalSettingsRoutes = {
   path: "portal-settings/",
   element: (
@@ -314,6 +333,30 @@ const PortalSettingsRoutes = {
     {
       path: "developer-tools/javascript-sdk",
       element: <DeveloperTools />,
+    },
+    {
+      path: "developer-tools/javascript-sdk/room",
+      element: <SimpleRoom />,
+    },
+    {
+      path: "developer-tools/javascript-sdk/manager",
+      element: <Manager />,
+    },
+    {
+      path: "developer-tools/javascript-sdk/room-selector",
+      element: <RoomSelector />,
+    },
+    {
+      path: "developer-tools/javascript-sdk/file-selector",
+      element: <FileSelector />,
+    },
+    {
+      path: "developer-tools/javascript-sdk/editor",
+      element: <Editor />,
+    },
+    {
+      path: "developer-tools/javascript-sdk/viewer",
+      element: <Viewer />,
     },
     {
       path: "developer-tools/plugin-sdk",

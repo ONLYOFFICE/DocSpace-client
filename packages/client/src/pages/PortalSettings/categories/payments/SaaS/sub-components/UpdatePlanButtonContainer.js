@@ -63,7 +63,7 @@ const UpdatePlanButtonContainer = ({
   const resetIntervalSuccess = () => {
     intervalId &&
       toastr.success(
-        t("BusinessUpdated", { planName: currentTariffPlanTitle })
+        t("BusinessUpdated", { planName: currentTariffPlanTitle }),
       );
     clearInterval(intervalId);
     intervalId = null;
@@ -187,7 +187,7 @@ const UpdatePlanButtonContainer = ({
 };
 
 export default inject(
-  ({ currentQuotaStore, payments, currentTariffStatusStore }) => {
+  ({ currentQuotaStore, paymentStore, currentTariffStatusStore }) => {
     const {
       maxCountManagersByQuota,
       setPortalQuotaValue,
@@ -206,7 +206,7 @@ export default inject(
       accountLink,
       isAlreadyPaid,
       canPayTariff,
-    } = payments;
+    } = paymentStore;
 
     return {
       canPayTariff,
@@ -224,5 +224,5 @@ export default inject(
       setPortalQuotaValue,
       currentTariffPlanTitle,
     };
-  }
+  },
 )(observer(UpdatePlanButtonContainer));

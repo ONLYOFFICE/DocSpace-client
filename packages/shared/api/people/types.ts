@@ -5,6 +5,7 @@ import {
 } from "../../enums";
 
 export type TUser = {
+  access: number;
   firstName: string;
   lastName: string;
   userName: string;
@@ -15,6 +16,7 @@ export type TUser = {
   workFrom: string;
   avatarMax: string;
   avatarMedium: string;
+  avatarOriginal: string;
   avatar: string;
   isAdmin: boolean;
   isRoomAdmin: boolean;

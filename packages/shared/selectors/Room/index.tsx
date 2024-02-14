@@ -23,8 +23,10 @@ const RoomSelector = ({
   excludeItems = [],
 
   headerLabel,
+  withoutBackButton,
   onBackClick,
 
+  withSearch,
   searchPlaceholder,
   onSearch,
   onClearSearch,
@@ -57,6 +59,8 @@ const RoomSelector = ({
   searchEmptyScreenImage,
   searchEmptyScreenHeader,
   searchEmptyScreenDescription,
+
+  roomType,
 }: RoomSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["RoomSelector", "Common"]);
 
@@ -70,7 +74,7 @@ const RoomSelector = ({
   const [items, setItems] = React.useState<TSelectorItem[]>([]);
 
   useEffect(() => {
-    setIsDataReady(!isFirstLoad);
+    setIsDataReady?.(!isFirstLoad);
   }, [isFirstLoad, setIsDataReady]);
 
   const onSearchAction = React.useCallback(
@@ -120,31 +124,31 @@ const RoomSelector = ({
 
       const rooms = convertToItems(folders);
 
-      const itemList = rooms.filter((x) => !excludeItems.includes(x.id));
-
       setHasNextPage(count === PAGE_COUNT);
 
-      if (isFirstLoad) {
-        setTotal(totalCount);
-        setItems(itemList);
-      } else {
-        setItems((value) => [...value, ...itemList]);
-      }
+      setItems((prevItems) => {
+        const newItems = rooms.filter((x) => !excludeItems.includes(x.id));
+        const filteredByRoomType = rooms.filter(
+          (x) => !excludeItems.includes(x.id) && x.roomType === roomType,
+        );
 
-      if (isFirstLoad) {
-        setTimeout(() => {
+        if (isFirstLoad) {
+          setTotal(totalCount);
           setIsFirstLoad(false);
-        }, 500);
-      }
+          return roomType ? filteredByRoomType : newItems;
+        }
+
+        return roomType ? filteredByRoomType : [...prevItems, ...newItems];
+      });
 
       setIsNextPageLoading(false);
     },
-    [isFirstLoad, excludeItems, searchValue],
+    [isFirstLoad, excludeItems, searchValue, roomType],
   );
 
   React.useEffect(() => {
     onLoadNextPage(0);
-  }, [onLoadNextPage]);
+  }, [roomType]);
 
   return (
     <Selector
@@ -202,6 +206,8 @@ const RoomSelector = ({
           isUser={false}
         />
       }
+      withSearch={withSearch}
+      withoutBackButton={withoutBackButton}
     />
   );
 };

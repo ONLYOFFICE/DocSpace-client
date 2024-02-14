@@ -22,5 +22,6 @@
   "firebase": {
     "fetchTimeoutMillis": 3600000,
     "minimumFetchIntervalMillis": 3600000
-  }
+  },
+  "campaigns": ["CreateDocSpace", "FormGallery"]
 }

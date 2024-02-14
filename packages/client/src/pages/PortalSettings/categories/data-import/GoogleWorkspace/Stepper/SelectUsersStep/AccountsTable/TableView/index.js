@@ -195,8 +195,8 @@ const TableView = (props) => {
   );
 };
 
-export default inject(({ auth, importAccountsStore }) => {
-  const { id: userId } = auth.userStore.user;
+export default inject(({ userStore, importAccountsStore }) => {
+  const { id: userId } = userStore.user;
   const {
     withEmailUsers,
     checkedUsers,

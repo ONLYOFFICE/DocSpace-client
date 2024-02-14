@@ -102,8 +102,8 @@ const UsersTableHeader = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
+export default inject(({ userStore }) => {
   return {
-    userId: auth.userStore.user.id,
+    userId: userStore.user.id,
   };
 })(observer(UsersTableHeader));

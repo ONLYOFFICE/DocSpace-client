@@ -134,7 +134,7 @@ const ArticleMainButtonContent = (props) => {
     isGracePeriod,
     setInviteUsersWarningDialogVisible,
     currentDeviceType,
-    
+
     isFrame,
     disableActionButton,
   } = props;
@@ -167,7 +167,7 @@ const ArticleMainButtonContent = (props) => {
 
       window.dispatchEvent(event);
     },
-    [setAction]
+    [setAction],
   );
 
   const onCreateRoom = React.useCallback(() => {
@@ -188,7 +188,7 @@ const ArticleMainButtonContent = (props) => {
     (e) => {
       startUpload(e.target.files, null, t);
     },
-    [startUpload, t]
+    [startUpload, t],
   );
 
   const onUploadFileClick = React.useCallback(() => {
@@ -241,10 +241,15 @@ const ArticleMainButtonContent = (props) => {
   const onInviteAgain = React.useCallback(() => {
     resendInvitesAgain()
       .then(() =>
-        toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios"))
+        toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios")),
       )
       .catch((err) => toastr.error(err));
   }, [resendInvitesAgain]);
+
+  const onCreateGroup = React.useCallback(() => {
+    const event = new Event(Events.GROUP_CREATE);
+    window.dispatchEvent(event);
+  }, []);
 
   React.useEffect(() => {
     const isFolderHiddenDropdown =
@@ -320,49 +325,78 @@ const ArticleMainButtonContent = (props) => {
       },
     ];
 
-    const addAdmin = isOwner
-      ? [
-          {
-            id: "invite_doc-space-administrator",
-            className: "main-button_drop-down",
-            icon: PersonAdminReactSvgUrl,
-            label: t("Common:DocSpaceAdmin"),
-            onClick: onInvite,
-            action: EmployeeType.Admin,
-            key: "administrator",
-          },
-        ]
-      : [];
-
     const actions = isAccountsPage
       ? [
-          ...addAdmin,
           {
-            id: "invite_room-admin",
-            className: "main-button_drop-down",
-            icon: PersonManagerReactSvgUrl,
-            label: t("Common:RoomAdmin"),
-            onClick: onInvite,
-            action: EmployeeType.User,
-            key: "manager",
-          },
-          {
-            id: "invite_room-collaborator",
-            className: "main-button_drop-down",
-            icon: PersonReactSvgUrl,
-            label: t("Common:PowerUser"),
-            onClick: onInvite,
-            action: EmployeeType.Collaborator,
-            key: "collaborator",
-          },
-          {
-            id: "invite_user",
+            id: "actions_invite_user",
             className: "main-button_drop-down",
             icon: PersonUserReactSvgUrl,
-            label: t("Common:User"),
-            onClick: onInvite,
-            action: EmployeeType.Guest,
-            key: "user",
+            label: t("Common:Invite"),
+            key: "new-user",
+            items: [
+              ...(isOwner
+                ? [
+                    {
+                      id: "invite_doc-space-administrator",
+                      className: "main-button_drop-down",
+                      icon: PersonAdminReactSvgUrl,
+                      label: t("Common:DocSpaceAdmin"),
+                      onClick: onInvite,
+                      action: EmployeeType.Admin,
+                      key: "administrator",
+                    },
+                  ]
+                : []),
+              {
+                id: "invite_room-admin",
+                className: "main-button_drop-down",
+                icon: PersonManagerReactSvgUrl,
+                label: t("Common:RoomAdmin"),
+                onClick: onInvite,
+                action: EmployeeType.User,
+                key: "manager",
+              },
+              {
+                id: "invite_room-collaborator",
+                className: "main-button_drop-down",
+                icon: PersonReactSvgUrl,
+                label: t("Common:PowerUser"),
+                onClick: onInvite,
+                action: EmployeeType.Collaborator,
+                key: "collaborator",
+              },
+              {
+                id: "invite_user",
+                className: "main-button_drop-down",
+                icon: PersonUserReactSvgUrl,
+                label: t("Common:User"),
+                onClick: onInvite,
+                action: EmployeeType.Guest,
+                key: "user",
+              },
+              {
+                isSeparator: true,
+                key: "invite-users-separator",
+              },
+              {
+                id: "invite_again",
+                className: "main-button_drop-down",
+                icon: InviteAgainReactSvgUrl,
+                label: t("People:LblInviteAgain"),
+                onClick: onInviteAgain,
+                action: "invite-again",
+                key: "invite-again",
+              },
+            ],
+          },
+          {
+            id: "create_group",
+            className: "main-button_drop-down",
+            icon: PersonUserReactSvgUrl,
+            label: t("Create Group"),
+            onClick: onCreateGroup,
+            action: "group",
+            key: "group",
           },
         ]
       : [
@@ -404,37 +438,25 @@ const ArticleMainButtonContent = (props) => {
           },
         ];
 
-    const uploadActions = isAccountsPage
-      ? [
-          {
-            id: "invite_again",
-            className: "main-button_drop-down",
-            icon: InviteAgainReactSvgUrl,
-            label: t("People:LblInviteAgain"),
-            onClick: onInviteAgain,
-            action: "invite-again",
-            key: "invite-again",
-          },
-        ]
-      : [
-          {
-            id: "actions_upload-files",
-            className: "main-button_drop-down",
-            icon: ActionsUploadReactSvgUrl,
-            label: t("UploadFiles"),
-            onClick: onUploadFileClick,
-            key: "upload-files",
-          },
-          {
-            id: "actions_upload-folders",
-            className: "main-button_drop-down",
-            icon: ActionsUploadReactSvgUrl,
-            label: t("UploadFolder"),
-            disabled: isPrivacy,
-            onClick: onUploadFolderClick,
-            key: "upload-folder",
-          },
-        ];
+    const uploadActions = [
+      {
+        id: "actions_upload-files",
+        className: "main-button_drop-down",
+        icon: ActionsUploadReactSvgUrl,
+        label: t("UploadFiles"),
+        onClick: onUploadFileClick,
+        key: "upload-files",
+      },
+      {
+        id: "actions_upload-folders",
+        className: "main-button_drop-down",
+        icon: ActionsUploadReactSvgUrl,
+        label: t("UploadFolder"),
+        disabled: isPrivacy,
+        onClick: onUploadFolderClick,
+        key: "upload-folder",
+      },
+    ];
 
     if (pluginItems.length > 0) {
       // menuModel.push({
@@ -460,13 +482,15 @@ const ArticleMainButtonContent = (props) => {
 
     const menuModel = [...actions];
 
-    menuModel.push({
-      isSeparator: true,
-      key: "separator",
-    });
+    if (!isAccountsPage) {
+      menuModel.push({
+        isSeparator: true,
+        key: "separator",
+      });
 
-    menuModel.push(...uploadActions);
-    setUploadActions(uploadActions);
+      menuModel.push(...uploadActions);
+      setUploadActions(uploadActions);
+    }
 
     setModel(menuModel);
     setActions(actions);
@@ -491,17 +515,15 @@ const ArticleMainButtonContent = (props) => {
     onUploadFolderClick,
   ]);
 
-  const mainButtonText = isAccountsPage
-    ? t("Common:Invite")
-    : t("Common:Actions");
+  const mainButtonText = t("Common:Actions");
 
-  const isDisabled = isFrame 
-    ? disableActionButton 
+  const isDisabled = isFrame
+    ? disableActionButton
     : isSettingsPage
-    ? isSettingsPage
-    : isAccountsPage
-      ? !isAccountsPage
-      : !security?.Create;
+      ? isSettingsPage
+      : isAccountsPage
+        ? !isAccountsPage
+        : !security?.Create;
 
   const isProfile = location.pathname.includes("/profile");
 
@@ -530,8 +552,9 @@ const ArticleMainButtonContent = (props) => {
               t={t}
               titleProp={t("Upload")}
               actionOptions={actions}
-              buttonOptions={uploadActions}
-              isRooms={isRoomsFolder}
+              buttonOptions={!isAccountsPage && uploadActions}
+              withoutButton={isRoomsFolder || isAccountsPage}
+              withMenu={!isRoomsFolder}
               mainButtonMobileVisible={
                 mainButtonMobileVisible && mainButtonVisible
               }
@@ -643,7 +666,7 @@ export default inject(
     const { setOformFromFolderId, oformsFilter } = oformsStore;
     const { mainButtonItemsList } = pluginStore;
 
-    const { frameConfig, isFrame } = settingsStore
+    const { frameConfig, isFrame } = settingsStore;
 
     return {
       isGracePeriod,
@@ -691,7 +714,7 @@ export default inject(
       isFrame,
       disableActionButton: frameConfig?.disableActionButton,
     };
-  }
+  },
 )(
   withTranslation([
     "Article",
@@ -700,5 +723,5 @@ export default inject(
     "Files",
     "People",
     "PeopleTranslations",
-  ])(observer(ArticleMainButtonContent))
+  ])(observer(ArticleMainButtonContent)),
 );

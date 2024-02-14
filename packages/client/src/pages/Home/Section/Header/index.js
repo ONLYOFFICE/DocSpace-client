@@ -38,7 +38,7 @@ import { withTranslation } from "react-i18next";
 import { isMobile, isTablet } from "react-device-detect";
 import styled, { css } from "styled-components";
 import copy from "copy-to-clipboard";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 
 import Loaders from "@docspace/common/components/Loaders";
 import Navigation from "@docspace/shared/components/navigation";
@@ -150,6 +150,8 @@ const StyledContainer = styled.div`
 const SectionHeaderContent = (props) => {
   const {
     currentFolderId,
+    currentGroup,
+    getGroupContextOptions,
     setSelectFileDialogVisible,
     t,
     isPrivacyFolder,
@@ -259,6 +261,9 @@ const SectionHeaderContent = (props) => {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const { groupId } = useParams();
+
+  const isInsideGroup = !!groupId;
 
   const isAccountsPage = location.pathname.includes("/accounts");
 
@@ -321,54 +326,72 @@ const SectionHeaderContent = (props) => {
   const getContextOptionsPlus = () => {
     if (isAccountsPage) {
       return [
-        isOwner && {
-          id: "accounts-add_administrator",
-          className: "main-button_drop-down",
-          icon: PersonAdminReactSvgUrl,
-          label: t("Common:DocSpaceAdmin"),
-          onClick: onInvite,
-          "data-type": EmployeeType.Admin,
-          key: "administrator",
-        },
         {
-          id: "accounts-add_manager",
-          className: "main-button_drop-down",
-          icon: PersonManagerReactSvgUrl,
-          label: t("Common:RoomAdmin"),
-          onClick: onInvite,
-          "data-type": EmployeeType.User,
-          key: "manager",
-        },
-        {
-          id: "accounts-add_collaborator",
-          className: "main-button_drop-down",
-          icon: PersonReactSvgUrl,
-          label: t("Common:PowerUser"),
-          onClick: onInvite,
-          "data-type": EmployeeType.Collaborator,
-          key: "collaborator",
-        },
-        {
-          id: "accounts-add_user",
+          id: "actions_invite_user",
           className: "main-button_drop-down",
           icon: PersonUserReactSvgUrl,
-          label: t("Common:User"),
-          onClick: onInvite,
-          "data-type": EmployeeType.Guest,
-          key: "user",
+          label: t("Common:Invite"),
+          key: "new-user",
+          items: [
+            isOwner && {
+              id: "accounts-add_administrator",
+              className: "main-button_drop-down",
+              icon: PersonAdminReactSvgUrl,
+              label: t("Common:DocSpaceAdmin"),
+              onClick: onInvite,
+              "data-type": EmployeeType.Admin,
+              key: "administrator",
+            },
+            {
+              id: "accounts-add_manager",
+              className: "main-button_drop-down",
+              icon: PersonManagerReactSvgUrl,
+              label: t("Common:RoomAdmin"),
+              onClick: onInvite,
+              "data-type": EmployeeType.User,
+              key: "manager",
+            },
+            {
+              id: "accounts-add_collaborator",
+              className: "main-button_drop-down",
+              icon: PersonReactSvgUrl,
+              label: t("Common:PowerUser"),
+              onClick: onInvite,
+              "data-type": EmployeeType.Collaborator,
+              key: "collaborator",
+            },
+            {
+              id: "accounts-add_user",
+              className: "main-button_drop-down",
+              icon: PersonUserReactSvgUrl,
+              label: t("Common:User"),
+              onClick: onInvite,
+              "data-type": EmployeeType.Guest,
+              key: "user",
+            },
+            {
+              key: "separator",
+              isSeparator: true,
+            },
+            {
+              id: "accounts-add_invite-again",
+              className: "main-button_drop-down",
+              icon: InviteAgainReactSvgUrl,
+              label: t("People:LblInviteAgain"),
+              onClick: onInviteAgain,
+              "data-action": "invite-again",
+              key: "invite-again",
+            },
+          ],
         },
         {
-          key: "separator",
-          isSeparator: true,
-        },
-        {
-          id: "accounts-add_invite-again",
+          id: "create_group",
           className: "main-button_drop-down",
-          icon: InviteAgainReactSvgUrl,
-          label: t("People:LblInviteAgain"),
-          onClick: onInviteAgain,
-          "data-action": "invite-again",
-          key: "invite-again",
+          icon: PersonUserReactSvgUrl,
+          label: t("Create Group"),
+          onClick: onCreateGroup,
+          action: "group",
+          key: "group",
         },
       ];
     }
@@ -483,7 +506,7 @@ const SectionHeaderContent = (props) => {
 
   const createLinkForPortalUsers = () => {
     copy(
-      `${window.location.origin}/filter?folder=${currentFolderId}` //TODO: Change url by category
+      `${window.location.origin}/filter?folder=${currentFolderId}`, //TODO: Change url by category
     );
 
     toastr.success(t("Translations:LinkCopySuccess"));
@@ -547,7 +570,7 @@ const SectionHeaderContent = (props) => {
       };
 
       deleteAction(translations, [selectedFolder], true).catch((err) =>
-        toastr.error(err)
+        toastr.error(err),
       );
     }
   };
@@ -667,6 +690,10 @@ const SectionHeaderContent = (props) => {
           icon: MoveReactSvgUrl,
         },
       ];
+    }
+
+    if (isInsideGroup) {
+      return getGroupContextOptions(t, currentGroup);
     }
 
     return [
@@ -927,7 +954,7 @@ const SectionHeaderContent = (props) => {
 
     const path = getCategoryUrl(
       getCategoryTypeByFolderType(rootFolderType, id),
-      id
+      id,
     );
 
     const filter = FilesFilter.getDefault();
@@ -977,7 +1004,7 @@ const SectionHeaderContent = (props) => {
   const onInviteAgain = React.useCallback(() => {
     resendInvitesAgain()
       .then(() =>
-        toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios"))
+        toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios")),
       )
       .catch((err) => toastr.error(err));
   }, [resendInvitesAgain]);
@@ -985,6 +1012,11 @@ const SectionHeaderContent = (props) => {
   const onNavigationButtonClick = () => {
     onCreateAndCopySharedLink(selectedFolder, t);
   };
+
+  const onCreateGroup = React.useCallback(() => {
+    const event = new Event(Events.GROUP_CREATE);
+    window.dispatchEvent(event);
+  }, []);
 
   const headerMenu = isAccountsPage
     ? getAccountsHeaderMenu(t)
@@ -1033,7 +1065,9 @@ const SectionHeaderContent = (props) => {
   const currentTitle = isSettingsPage
     ? t("Common:Settings")
     : isAccountsPage
-      ? t("Common:Accounts")
+      ? isInsideGroup && currentGroup
+        ? currentGroup.name
+        : t("Common:Accounts")
       : isLoading && stateTitle
         ? stateTitle
         : title;
@@ -1048,6 +1082,15 @@ const SectionHeaderContent = (props) => {
       ? stateRootRoomTitle
       : navigationPath?.length > 1 &&
         navigationPath[navigationPath?.length - 2].title;
+
+  const accountsNavigationPath = isInsideGroup && [
+    {
+      id: 0,
+      title: "Accounts",
+      isRoom: false,
+      isRootRoom: true,
+    },
+  ];
 
   const currentIsPublicRoomType =
     isLoading && typeof stateIsPublicRoomType === "boolean"
@@ -1089,7 +1132,7 @@ const SectionHeaderContent = (props) => {
               <Navigation
                 sectionWidth={context.sectionWidth}
                 showText={showText}
-                isRootFolder={isRoot}
+                isRootFolder={isRoot && !isInsideGroup}
                 canCreate={
                   (currentCanCreate || isAccountsPage) &&
                   !isSettingsPage &&
@@ -1102,7 +1145,9 @@ const SectionHeaderContent = (props) => {
                 personal={personal}
                 tReady={tReady}
                 menuItems={menuItems}
-                navigationItems={navigationPath}
+                navigationItems={
+                  !isInsideGroup ? navigationPath : accountsNavigationPath
+                }
                 getContextOptionsPlus={getContextOptionsPlus}
                 getContextOptionsFolder={getContextOptionsFolder}
                 onClose={onClose}
@@ -1135,7 +1180,7 @@ const SectionHeaderContent = (props) => {
                 titleIcon={
                   currentIsPublicRoomType && !isPublicRoom && PublicRoomIconUrl
                 }
-                showRootFolderTitle={insideTheRoom}
+                showRootFolderTitle={insideTheRoom || isInsideGroup}
                 currentDeviceType={currentDeviceType}
                 isFrame={isFrame}
                 showTitle={isFrame ? showTitle : true}
@@ -1269,6 +1314,7 @@ export default inject(
     } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
+    const { currentGroup, getGroupContextOptions } = peopleStore.groupsStore;
 
     const {
       enablePlugins,
@@ -1466,11 +1512,13 @@ export default inject(
       currentDeviceType,
       setLeaveRoomDialogVisible,
       inRoom,
+      currentGroup,
+      getGroupContextOptions,
       onCreateAndCopySharedLink,
       showNavigationButton,
       haveLinksRight,
     };
-  }
+  },
 )(
   withTranslation([
     "Files",
@@ -1482,5 +1530,5 @@ export default inject(
     "People",
     "PeopleTranslations",
     "ChangeUserTypeDialog",
-  ])(observer(SectionHeaderContent))
+  ])(observer(SectionHeaderContent)),
 );

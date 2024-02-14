@@ -12,7 +12,7 @@ import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 
-import Badges from "../Badges";
+import Badges from "../../Badges";
 import { Base } from "@docspace/shared/themes";
 import { getUserTypeLabel } from "@docspace/shared/utils/common";
 

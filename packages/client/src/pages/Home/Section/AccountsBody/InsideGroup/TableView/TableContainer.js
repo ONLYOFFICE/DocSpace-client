@@ -11,11 +11,17 @@ import { TableBody } from "@docspace/shared/components/table";
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
-import EmptyScreen from "../EmptyScreen";
+import EmptyScreen from "../../EmptyScreen";
 import { TableVersions } from "SRC_DIR/helpers/constants";
 
-const COLUMNS_SIZE = `peopleColumnsSize_ver-${TableVersions.Accounts}`;
-const INFO_PANEL_COLUMNS_SIZE = `infoPanelPeopleColumnsSize_ver-${TableVersions.Accounts}`;
+const COLUMNS_SIZE = `insideGroupColumnsSize_ver-${TableVersions.InsideGroup}`;
+const INFO_PANEL_COLUMNS_SIZE = `infoPanelInsideGroupPeopleColumnsSize_ver-${TableVersions.InsideGroup}`;
+
+const marginCss = css`
+  margin-top: -1px;
+  border-top: ${(props) =>
+    `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+`;
 
 const userNameCss = css`
   ${(props) =>
@@ -28,6 +34,8 @@ const userNameCss = css`
           margin-left: -24px;
           padding-left: 24px;
         `}
+
+  ${marginCss}
 `;
 
 const contextCss = css`
@@ -41,6 +49,8 @@ const contextCss = css`
           margin-right: -20px;
           padding-right: 20px;
         `}
+
+  ${marginCss}
 `;
 
 const StyledTableContainer = styled(TableContainer)`
@@ -70,7 +80,9 @@ const StyledTableContainer = styled(TableContainer)`
     .table-row {
       .table-container_user-name-cell,
       .table-container_row-context-menu-wrapper {
+        margin-top: -1px;
         border-image-slice: 1;
+        border-top: 1px solid;
       }
       .table-container_user-name-cell {
         ${userNameCss}
@@ -98,6 +110,12 @@ const StyledTableContainer = styled(TableContainer)`
       .table-container_row-context-menu-wrapper {
         ${contextCss}
       }
+
+      .table-container_user-name-cell,
+      .table-container_row-context-menu-wrapper {
+        border-bottom: ${(props) =>
+          `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+      }
     }
   }
 `;
@@ -116,12 +134,8 @@ const Table = ({
   userId,
   infoPanelVisible,
 
-  fetchMoreAccounts,
-  hasMoreAccounts,
-  filterTotal,
   withPaging,
   canChangeUserType,
-  isFiltered,
   currentDeviceType,
   typeAccountsColumnIsEnabled,
   emailAccountsColumnIsEnabled,
@@ -141,7 +155,7 @@ const Table = ({
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
-  return peopleList.length !== 0 || !isFiltered ? (
+  return !!peopleList?.length ? (
     <StyledTableContainer useReactWindow={!withPaging} forwardedRef={ref}>
       <TableHeader
         columnStorageName={columnStorageName}
@@ -156,11 +170,11 @@ const Table = ({
         infoPanelVisible={infoPanelVisible}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
         columnStorageName={columnStorageName}
-        fetchMoreFiles={fetchMoreAccounts}
-        hasMoreFiles={hasMoreAccounts}
-        itemCount={filterTotal}
+        fetchMoreFiles={() => {}}
+        hasMoreFiles={false}
+        itemCount={peopleList.length}
         filesLength={peopleList.length}
-        itemHeight={48}
+        itemHeight={49}
         useReactWindow={!withPaging}
       >
         {peopleList.map((item, index) => (
@@ -204,8 +218,7 @@ export default inject(
       changeType,
     } = peopleStore;
     const { theme, withPaging, currentDeviceType } = settingsStore;
-    const { peopleList, hasMoreAccounts, fetchMoreAccounts } = usersStore;
-    const { filterTotal, isFiltered } = filterStore;
+    const { peopleList } = usersStore;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { isAdmin, isOwner, id: userId } = userStore.user;
@@ -226,11 +239,7 @@ export default inject(
       infoPanelVisible,
       withPaging,
 
-      fetchMoreAccounts,
-      hasMoreAccounts,
-      filterTotal,
       canChangeUserType,
-      isFiltered,
       currentDeviceType,
       typeAccountsColumnIsEnabled,
       emailAccountsColumnIsEnabled,

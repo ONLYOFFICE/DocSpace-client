@@ -42,6 +42,8 @@ const MobileView = ({
   actionOptions,
   buttonOptions,
   isRooms,
+  withoutButton,
+  withMenu,
   files,
   clearUploadData,
   setUploadPanelVisible,
@@ -85,7 +87,7 @@ const MobileView = ({
     let currentPrimaryNumEl = primaryNumEl;
 
     const uploadedFileCount = files.filter(
-      (item) => item.percent === 100 && !item.cancel
+      (item) => item.percent === 100 && !item.cancel,
     ).length;
     const fileLength = files.filter((item) => !item.cancel).length;
 
@@ -111,7 +113,7 @@ const MobileView = ({
     const secondaryProgressStatus = secondaryProgressDataStoreIsDownload
       ? `${Math.floor(secondaryProgressDataStorePercent)}%`
       : `${Math.floor(
-          currentSecondaryProgressItem
+          currentSecondaryProgressItem,
         )}/${secondaryProgressDataStoreCurrentFilesCount}`;
 
     const newProgressOptions = [
@@ -184,9 +186,9 @@ const MobileView = ({
           percent={percentProgress}
           progressOptions={progressOptions}
           title={titleProp}
-          withoutButton={isRooms}
+          withoutButton={withoutButton}
           alert={primaryProgressDataAlert}
-          withMenu={!isRooms}
+          withMenu={withMenu}
           onClick={onMainButtonClick}
           onAlertClick={showUploadPanel}
           withAlertClick={isRoomsFolder}

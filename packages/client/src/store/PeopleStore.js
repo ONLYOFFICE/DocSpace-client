@@ -4,7 +4,7 @@ import DisableReactSvgUrl from "PUBLIC_DIR/images/disable.react.svg?url";
 import ChangeToEmployeeReactSvgUrl from "PUBLIC_DIR/images/change.to.employee.react.svg?url";
 import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
 import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import GroupsStore from "./GroupsStore";
 import UsersStore from "./UsersStore";
 import TargetUserStore from "./TargetUserStore";
@@ -21,7 +21,12 @@ import AccountsContextOptionsStore from "./AccountsContextOptionsStore";
 import { isMobile, isTablet, isDesktop } from "@docspace/shared/utils";
 
 import { toastr } from "@docspace/shared/components/toast";
-import { EmployeeStatus, Events } from "@docspace/shared/enums";
+import api from "@docspace/shared/api";
+import {
+  EmployeeActivationStatus,
+  EmployeeStatus,
+  Events,
+} from "@docspace/shared/enums";
 import Filter from "@docspace/shared/api/people/filter";
 
 class PeopleStore {
@@ -57,21 +62,21 @@ class PeopleStore {
     infoPanelStore,
     userStore,
     tfaStore,
-    settingsStore
+    settingsStore,
   ) {
     this.authStore = authStore;
     this.infoPanelStore = infoPanelStore;
-    this.groupsStore = new GroupsStore(this);
     this.usersStore = new UsersStore(
       this,
       settingsStore,
       infoPanelStore,
-      userStore
+      userStore,
     );
+    this.groupsStore = new GroupsStore(authStore, this, infoPanelStore);
     this.targetUserStore = new TargetUserStore(this, userStore);
     this.selectedGroupStore = new SelectedGroupStore(this);
     this.editingFormStore = new EditingFormStore(this);
-    this.filterStore = new FilterStore();
+    this.filterStore = new FilterStore(userStore);
     this.selectionStore = new SelectionStore(this);
     this.headerMenuStore = new HeaderMenuStore(this);
     this.inviteLinksStore = new InviteLinksStore(this);
@@ -87,7 +92,7 @@ class PeopleStore {
       infoPanelStore,
       userStore,
       tfaStore,
-      settingsStore
+      settingsStore,
     );
 
     makeAutoObservable(this);
@@ -111,7 +116,7 @@ class PeopleStore {
   resetFilter = () => {
     const filter = Filter.getDefault();
 
-    window.DocSpace.navigate(`accounts/filter?${filter.toUrlParams()}`);
+    window.DocSpace.navigate(`accounts/people/filter?${filter.toUrlParams()}`);
   };
 
   onChangeType = (e) => {
@@ -134,7 +139,7 @@ class PeopleStore {
 
     if (users.length > 1) {
       fromType = fromType.filter(
-        (item, index) => fromType.indexOf(item) === index && item !== type
+        (item, index) => fromType.indexOf(item) === index && item !== type,
       );
 
       if (fromType.length === 0) fromType = [fromType[0]];
@@ -352,6 +357,32 @@ class PeopleStore {
 
   setIsLoadedProfileSectionBody = (isLoadedProfileSectionBody) => {
     this.isLoadedProfileSectionBody = isLoadedProfileSectionBody;
+  };
+
+  getStatusType = (user) => {
+    if (
+      user.status === EmployeeStatus.Active &&
+      user.activationStatus === EmployeeActivationStatus.Activated
+    ) {
+      return "normal";
+    } else if (
+      user.status === EmployeeStatus.Active &&
+      user.activationStatus === EmployeeActivationStatus.Pending
+    ) {
+      return "pending";
+    } else if (user.status === EmployeeStatus.Disabled) {
+      return "disabled";
+    } else {
+      return "unknown";
+    }
+  };
+
+  getUserRole = (user) => {
+    if (user.isOwner) return "owner";
+    else if (user.isAdmin) return "admin";
+    else if (user.isCollaborator) return "collaborator";
+    else if (user.isVisitor) return "user";
+    else return "manager";
   };
 }
 

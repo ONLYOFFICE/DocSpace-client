@@ -7,7 +7,7 @@ import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import { RowContainer } from "@docspace/shared/components/row-container";
 import { tablet } from "@docspace/shared/utils";
 
-import EmptyScreen from "../EmptyScreen";
+import EmptyScreen from "../../EmptyScreen";
 import SimpleUserRow from "./SimpleUserRow";
 
 const marginStyles = css`

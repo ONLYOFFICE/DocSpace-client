@@ -301,6 +301,8 @@ export const enum Events {
   RENAME = "rename",
   ROOM_CREATE = "create_room",
   ROOM_EDIT = "edit_room",
+  GROUP_CREATE = "create_group",
+  GROUP_EDIT = "edit_group",
   CHANGE_COLUMN = "change_column",
   CHANGE_USER_TYPE = "change_user_type",
   CREATE_PLUGIN_FILE = "create_plugin_file",
@@ -434,4 +436,10 @@ export enum RoomsType {
   // ReadOnlyRoom: 4, //TODO: Restore when certs will be done
   PublicRoom = 6,
   CustomRoom = 5,
+}
+
+export enum AccountsSearchArea {
+  People = "0",
+  Groups = "1",
+  Any = "2",
 }

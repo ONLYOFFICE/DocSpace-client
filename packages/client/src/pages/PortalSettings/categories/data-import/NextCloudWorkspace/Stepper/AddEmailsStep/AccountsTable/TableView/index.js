@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 
 import UsersTableHeader from "./UsersTableHeader";
 import UsersTableRow from "./UsersTableRow";
-import { TableBody } from "@docspace/shared/components/table/TableBody";
+import { TableBody } from "@docspace/shared/components/table";
 import { StyledTableContainer } from "../../../StyledStepper";
 
 const TABLE_VERSION = "6";

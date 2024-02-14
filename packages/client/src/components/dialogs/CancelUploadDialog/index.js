@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Button from "@docspace/components/button";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Button } from "@docspace/shared/components/button";
 import ModalDialogContainer from "../ModalDialogContainer";
 
 const CancelUploadDialog = ({

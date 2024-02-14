@@ -8,7 +8,7 @@ import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-c
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Link } from "@docspace/shared/components/link";
 import { Box } from "@docspace/shared/components/box";
-import { TableGroupMenu } from "@docspace/shared/components/table/TableGroupMenu";
+import { TableGroupMenu } from "@docspace/shared/components/table";
 import { RowContainer } from "@docspace/shared/components/row-container";
 import { Row } from "@docspace/shared/components/row";
 import { Text } from "@docspace/shared/components/text";

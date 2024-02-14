@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import RectangleSkeleton from "@docspace/shared/skeletons";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 import {
   getCorrectFourValuesStyle,

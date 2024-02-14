@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { TableContainer } from "@docspace/shared/components/table/TableContainer";
+import { TableContainer } from "@docspace/shared/components/table";
 import { Base } from "@docspace/shared/themes";
 
 export const Wrapper = styled.div`

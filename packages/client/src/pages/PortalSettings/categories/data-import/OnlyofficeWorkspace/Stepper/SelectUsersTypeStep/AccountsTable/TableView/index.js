@@ -10,8 +10,8 @@ import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-c
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Link } from "@docspace/shared/components/link";
 import { Box } from "@docspace/shared/components/box";
-import { TableGroupMenu } from "@docspace/shared/components/table/TableGroupMenu";
-import { TableContainer } from "@docspace/shared/components/table/TableContainer";
+import { TableGroupMenu } from "@docspace/shared/components/table";
+import { TableContainer } from "@docspace/shared/components/table";
 import { TableBody } from "@docspace/shared/components/table/TableBody";
 import ChangeTypeReactSvgUrl from "PUBLIC_DIR/images/change.type.react.svg?url";
 import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";

@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { inject, observer } from "mobx-react";
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 import styled, { css } from "styled-components";
 
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
@@ -9,8 +9,8 @@ import { Link } from "@docspace/shared/components/link";
 import { Box } from "@docspace/shared/components/box";
 import UsersTableHeader from "./UsersTableHeader";
 import UsersTableRow from "./UsersTableRow";
-import { TableContainer } from "@docspace/shared/components/table/TableContainer";
-import { TableBody } from "@docspace/shared/components/table/TableBody";
+import { TableContainer } from "@docspace/shared/components/table";
+import { TableBody } from "@docspace/shared/components/table";
 import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 

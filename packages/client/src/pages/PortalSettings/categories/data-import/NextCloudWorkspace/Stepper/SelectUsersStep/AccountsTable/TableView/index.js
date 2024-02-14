@@ -8,7 +8,7 @@ import { Link } from "@docspace/shared/components/link";
 import { Box } from "@docspace/shared/components/box";
 import UsersTableHeader from "./UsersTableHeader";
 import UsersTableRow from "./UsersTableRow";
-import { TableBody } from "@docspace/shared/components/table/TableBody";
+import { TableBody } from "@docspace/shared/components/table";
 import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 

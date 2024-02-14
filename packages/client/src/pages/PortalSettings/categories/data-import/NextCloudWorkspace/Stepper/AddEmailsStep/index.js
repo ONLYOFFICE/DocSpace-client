@@ -6,7 +6,7 @@ import { SearchInput } from "@docspace/shared/components/search-input";
 
 import AccountsTable from "./AccountsTable";
 import AccountsPaging from "../../../sub-components/AccountsPaging";
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 
 import { Wrapper } from "../StyledStepper";
 

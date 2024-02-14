@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 
-import { TableHeader } from "@docspace/components/table/TableHeader";
+import { TableHeader } from "@docspace/shared/components/table";
 
 const TABLE_VERSION = "6";
 const TABLE_COLUMNS = `nextcloudThirdColumns_ver-${TABLE_VERSION}`;

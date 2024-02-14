@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
-import { TableRow } from "@docspace/shared/components/table/TableRow";
-import { TableCell } from "@docspace/shared/components/table/sub-components/TableCell";
+import { TableRow } from "@docspace/shared/components/table";
+import { TableCell } from "@docspace/shared/components/table";
 
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";

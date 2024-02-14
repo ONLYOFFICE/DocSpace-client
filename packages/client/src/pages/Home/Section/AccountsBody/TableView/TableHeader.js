@@ -68,7 +68,7 @@ class PeopleTableHeader extends React.Component {
         minWidth: 179,
       });
 
-	const columns = props.getColumns(defaultColumns);
+    const columns = props.getColumns(defaultColumns);
 
     this.state = { columns };
   }
@@ -176,7 +176,7 @@ export default inject(
     infoPanelStore,
     clientLoadingStore,
     userStore,
-    tableStore
+    tableStore,
     currentQuotaStore,
   }) => {
     const { filterStore } = peopleStore;
@@ -209,9 +209,9 @@ export default inject(
       isDefaultUsersQuotaSet,
       showStorageInfo,
     };
-  }
+  },
 )(
   withTranslation(["People", "Common", "PeopleTranslations"])(
-    observer(PeopleTableHeader)
-  )
+    observer(PeopleTableHeader),
+  ),
 );

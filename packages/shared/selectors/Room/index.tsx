@@ -58,6 +58,7 @@ const RoomSelector = ({
   const [items, setItems] = React.useState<TSelectorItem[]>([]);
 
   const isFirstLoad = React.useRef(true);
+  const afterSearch = React.useRef(false);
 
   useEffect(() => {
     setIsDataReady?.(!isFirstLoad.current);
@@ -66,6 +67,7 @@ const RoomSelector = ({
   const onSearchAction = React.useCallback(
     (value: string, callback?: Function) => {
       isFirstLoad.current = true;
+      afterSearch.current = true;
       setSearchValue(() => {
         return value;
       });
@@ -76,6 +78,7 @@ const RoomSelector = ({
 
   const onClearSearchAction = React.useCallback((callback?: Function) => {
     isFirstLoad.current = true;
+    afterSearch.current = true;
     setSearchValue(() => {
       return "";
     });
@@ -154,7 +157,8 @@ const RoomSelector = ({
         onSearch: onSearchAction,
         onClearSearch: onClearSearchAction,
         searchLoader: <SearchLoader />,
-        isSearchLoading: isFirstLoad.current,
+        isSearchLoading:
+          isFirstLoad.current && !searchValue && !afterSearch.current,
       }
     : {};
 

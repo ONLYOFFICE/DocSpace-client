@@ -76,6 +76,8 @@ const FilesSelector = ({
   currentDeviceType,
   getFilesArchiveError,
   setIsDataReady,
+  withSearch: withSearchProp,
+  withBreadCrumbs: withBreadCrumbsProp,
 }: FilesSelectorProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["Common"]);
@@ -105,6 +107,8 @@ const FilesSelector = ({
   const [isSelectedParentFolder, setIsSelectedParentFolder] =
     React.useState<boolean>(false);
   const [searchValue, setSearchValue] = React.useState<string>("");
+
+  const afterSearch = React.useRef(false);
 
   const [isInit, setIsInit] = React.useState(true);
 
@@ -278,6 +282,7 @@ const FilesSelector = ({
   const onClickBreadCrumb = React.useCallback(
     (item: TBreadCrumb) => {
       if (!isFirstLoad) {
+        afterSearch.current = false;
         setSearchValue("");
         setIsFirstLoad(true);
         if (+item.id === 0) {
@@ -346,7 +351,9 @@ const FilesSelector = ({
       setItems([]);
 
       setSearchValue(value);
+
       callback?.();
+      afterSearch.current = true;
     },
     [setIsFirstLoad],
   );
@@ -357,7 +364,9 @@ const FilesSelector = ({
       setItems([]);
 
       setSearchValue("");
+
       callback?.();
+      afterSearch.current = true;
     },
     [setIsFirstLoad],
   );
@@ -401,9 +410,22 @@ const FilesSelector = ({
     ? { withHeader, headerProps: { headerLabel } }
     : {};
 
-  const withSearch =
-    !!searchValue ||
-    (!isRoot && items?.length ? items.length > 0 : !isRoot && isFirstLoad);
+  // const withSearch = withSearchProp
+  //   ? prevWithSearch.current && isFirstLoad
+  //     ? prevWithSearch.current
+  //     : !!searchValue ||
+  //       (!isRoot && items?.length ? items.length > 0 : !isRoot && isFirstLoad)
+  //   : false;
+
+  const withSearch = withSearchProp
+    ? isRoot
+      ? false
+      : searchValue
+        ? true
+        : isFirstLoad
+          ? true
+          : afterSearch.current || !!items.length
+    : false;
 
   const searchProps: TSelectorSearch = withSearch
     ? {
@@ -458,13 +480,15 @@ const FilesSelector = ({
       }
     : {};
 
-  const breadCrumbsProps: TSelectorBreadCrumbs = {
-    breadCrumbs,
-    breadCrumbsLoader: <BreadCrumbsLoader />,
-    isBreadCrumbsLoading: showBreadCrumbsLoader,
-    withBreadCrumbs: true,
-    onSelectBreadCrumb: onClickBreadCrumb,
-  };
+  const breadCrumbsProps: TSelectorBreadCrumbs = withBreadCrumbsProp
+    ? {
+        breadCrumbs,
+        breadCrumbsLoader: <BreadCrumbsLoader />,
+        isBreadCrumbsLoading: showBreadCrumbsLoader,
+        withBreadCrumbs: true,
+        onSelectBreadCrumb: onClickBreadCrumb,
+      }
+    : {};
 
   const SelectorBody = (
     <Selector

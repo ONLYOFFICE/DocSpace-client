@@ -126,6 +126,18 @@ class GroupsStore {
     this.setInsideGroupFilterUrl(filter);
   };
 
+  resetInsideGroupFilter = () => {
+    const groupId = this.currentGroup?.id;
+    if (!groupId) return;
+
+    const filter = InsideGroupFilter.getDefault();
+    filter.group = groupId;
+
+    window.DocSpace.navigate(
+      `/accounts/groups/${groupId}/filter?${filter.toUrlParams()}`,
+    );
+  };
+
   setCurrentGroup = (currentGroup = null) => {
     this.currentGroup = currentGroup;
   };

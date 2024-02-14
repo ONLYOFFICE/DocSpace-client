@@ -89,7 +89,8 @@ class CampaignsStore {
   };
 
   get campaigns() {
-    const campaignsLs = getCampaignsLs();
+    const { standalone } = this.settingsStore;
+    const campaignsLs = getCampaignsLs(standalone);
     return difference(campaignsLs, JSON.parse(this.closedCampaignsLS));
   }
 }

@@ -32,6 +32,8 @@ ArticleMainButton.displayName = MAIN_BUTTON_NAME;
 const ArticleBody = ({ children }: { children: React.ReactNode }) => null;
 ArticleBody.displayName = BODY_NAME;
 
+console.log(ArticleAlerts, ArticleLiveChat);
+
 const Article = ({
   showText,
   setShowText,
@@ -273,7 +275,7 @@ const Article = ({
           {articleBodyContent ? articleBodyContent.props.children : null}
           {!showArticleLoader && (
             <>
-              {!hideAlerts && (
+              {/* {!hideAlerts && (
                 <ArticleAlerts
                   articleAlertsData={articleAlertsData}
                   showText={showText}
@@ -292,7 +294,7 @@ const Article = ({
                     setSubmitToGalleryDialogVisible
                   }
                 />
-              )}
+              )} */}
               {withDevTools && (
                 <ArticleDevToolsBar
                   articleOpen={articleOpen}
@@ -304,7 +306,7 @@ const Article = ({
               {!hideAppsBlock && (
                 <ArticleApps withDevTools={withDevTools} showText={showText} />
               )}
-              {!isMobile && isLiveChatAvailable && (
+              {/* {!isMobile && !isLiveChatAvailable && (
                 <ArticleLiveChat
                   currentColorScheme={currentColorScheme}
                   withMainButton={
@@ -317,7 +319,7 @@ const Article = ({
                   zendeskKey={zendeskKey}
                   showProgress={showProgress}
                 />
-              )}
+              )} */}
             </>
           )}
         </SubArticleBody>

@@ -1,13 +1,15 @@
 import React from "react";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import StyledRestoreBackup from "./StyledRestoreBackup";
+import { RectangleSkeleton } from "../rectangle";
+
+import { StyledRestoreBackup } from "./Backup.styled";
+import type { BackupLoaderProps } from "./Backup.types";
+
 const RestoreBackupLoader = ({
   id,
   className,
   style,
-  isRectangle,
   ...rest
-}) => {
+}: BackupLoaderProps) => {
   const {
     title,
     borderRadius,

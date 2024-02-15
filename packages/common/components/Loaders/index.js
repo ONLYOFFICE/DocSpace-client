@@ -25,7 +25,6 @@ import SharingPanelLoaderModal from "./SharingPanelLoader/modal";
 import RoomTypeListLoader from "./CreateEditRoomLoader/RoomTypeListLoader";
 import SetRoomParamsLoader from "./CreateEditRoomLoader/SetRoomParamsLoader";
 import CreateEditRoomDilogHeaderLoader from "./CreateEditRoomLoader/CreateEditRoomDilogHeaderLoader";
-import DataBackupLoader from "./DataBackupLoader";
 import RestoreBackupLoader from "./RestoreBackupLoader";
 import PaymentsLoader from "./PaymentsLoader";
 
@@ -72,7 +71,6 @@ export default {
   RoomTypeListLoader,
   SetRoomParamsLoader,
   CreateEditRoomDilogHeaderLoader,
-  DataBackupLoader,
   RestoreBackupLoader,
   PaymentsLoader,
 

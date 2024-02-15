@@ -26,7 +26,6 @@ import RoomTypeListLoader from "./CreateEditRoomLoader/RoomTypeListLoader";
 import SetRoomParamsLoader from "./CreateEditRoomLoader/SetRoomParamsLoader";
 import CreateEditRoomDilogHeaderLoader from "./CreateEditRoomLoader/CreateEditRoomDilogHeaderLoader";
 import DataBackupLoader from "./DataBackupLoader";
-import AutoBackupLoader from "./AutoBackupLoader";
 import RestoreBackupLoader from "./RestoreBackupLoader";
 import PaymentsLoader from "./PaymentsLoader";
 
@@ -74,7 +73,6 @@ export default {
   SetRoomParamsLoader,
   CreateEditRoomDilogHeaderLoader,
   DataBackupLoader,
-  AutoBackupLoader,
   RestoreBackupLoader,
   PaymentsLoader,
 

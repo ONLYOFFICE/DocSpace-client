@@ -1,7 +1,15 @@
 import React from "react";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import StyledAutoBackup from "./StyledAutoBackup";
-const AutoBackupLoader = ({ id, className, style, isRectangle, ...rest }) => {
+import { RectangleSkeleton } from "../../rectangle";
+
+import StyledAutoBackup from "./AutoBackup.styled";
+import type { AutoBackupLoaderProps } from "./AutoBackup.types";
+
+const AutoBackupLoader = ({
+  id,
+  className,
+  style,
+  ...rest
+}: AutoBackupLoaderProps) => {
   const {
     title,
     borderRadius,
@@ -85,7 +93,7 @@ const AutoBackupLoader = ({ id, className, style, isRectangle, ...rest }) => {
           speed={speed}
           animate={animate}
         />
-        <div></div>
+        <div />
         <RectangleSkeleton
           className="auto-backup-loader_option-description"
           title={title}
@@ -99,7 +107,7 @@ const AutoBackupLoader = ({ id, className, style, isRectangle, ...rest }) => {
           speed={speed}
           animate={animate}
         />
-        <div></div>
+        <div />
         <RectangleSkeleton
           className="auto-backup-loader_option-description-second"
           title={title}
@@ -113,7 +121,7 @@ const AutoBackupLoader = ({ id, className, style, isRectangle, ...rest }) => {
           speed={speed}
           animate={animate}
         />
-        <div></div>
+        <div />
         <RectangleSkeleton
           className="auto-backup-loader_option-description-third"
           title={title}
@@ -127,7 +135,7 @@ const AutoBackupLoader = ({ id, className, style, isRectangle, ...rest }) => {
           speed={speed}
           animate={animate}
         />
-        <div></div>
+        <div />
         <RectangleSkeleton
           className="auto-backup-loader_option-description-fourth"
           title={title}

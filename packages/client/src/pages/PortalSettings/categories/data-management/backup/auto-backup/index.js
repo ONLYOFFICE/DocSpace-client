@@ -26,7 +26,7 @@ import RoomsModule from "./sub-components/RoomsModule";
 import ThirdPartyStorageModule from "./sub-components/ThirdPartyStorageModule";
 //import { getThirdPartyCommonFolderTree } from "@docspace/shared/api/files";
 import ButtonContainer from "./sub-components/ButtonContainer";
-import AutoBackupLoader from "@docspace/common/components/Loaders/AutoBackupLoader";
+import AutoBackupLoader from "@docspace/shared/skeletons/backup/auto-backup";
 import { FloatingButton } from "@docspace/shared/components/floating-button";
 import { Badge } from "@docspace/shared/components/badge";
 import { Link } from "@docspace/shared/components/link";
@@ -301,7 +301,7 @@ class AutomaticBackup extends React.PureComponent {
       const storageParams = getStorageParams(
         isCheckedThirdPartyStorage,
         selectedFolderId,
-        selectedStorageId
+        selectedStorageId,
       );
 
       this.createSchedule(
@@ -310,7 +310,7 @@ class AutomaticBackup extends React.PureComponent {
         selectedMaxCopiesNumber,
         period.toString(),
         time,
-        day?.toString()
+        day?.toString(),
       );
     });
   };
@@ -320,7 +320,7 @@ class AutomaticBackup extends React.PureComponent {
     selectedMaxCopiesNumber,
     period,
     time,
-    day
+    day,
   ) => {
     const {
       t,
@@ -344,7 +344,7 @@ class AutomaticBackup extends React.PureComponent {
         time,
         day,
         false,
-        isManagement()
+        isManagement(),
       );
       const [selectedSchedule, storageInfo] = await Promise.all([
         getBackupSchedule(),
@@ -681,5 +681,5 @@ export default inject(
       automaticBackupUrl,
       currentColorScheme,
     };
-  }
+  },
 )(withTranslation(["Settings", "Common"])(observer(AutomaticBackup)));

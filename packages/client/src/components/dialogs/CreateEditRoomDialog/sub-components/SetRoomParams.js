@@ -13,7 +13,7 @@ import ThirdPartyStorage from "./ThirdPartyStorage";
 // import IsPrivateParam from "./IsPrivateParam";
 
 import withLoader from "@docspace/client/src/HOCs/withLoader";
-import Loaders from "@docspace/common/components/Loaders";
+import SetRoomParamsLoader from "@docspace/shared/skeletons/create-edit-room/SetRoomParams";
 import { getRoomTypeDefaultTagTranslation } from "../data";
 
 import { ImageEditor } from "@docspace/shared/components/image-editor";
@@ -87,7 +87,7 @@ const SetRoomParams = ({
 
   const onOwnerChange = () => {
     setChangeRoomOwnerIsVisible(true, true, (roomOwner) =>
-      setRoomParams({ ...roomParams, roomOwner })
+      setRoomParams({ ...roomParams, roomOwner }),
     );
   };
 
@@ -187,7 +187,7 @@ const SetRoomParams = ({
               isDisabled={isDisabled}
               defaultTagLabel={getRoomTypeDefaultTagTranslation(
                 roomParams.type,
-                t
+                t,
               )}
             />
           }
@@ -208,7 +208,7 @@ export default inject(({ settingsStore, dialogsStore }) => {
 })(
   observer(
     withTranslation(["CreateEditRoomDialog", "Translations"])(
-      withLoader(SetRoomParams)(<Loaders.SetRoomParamsLoader />)
-    )
-  )
+      withLoader(SetRoomParams)(<SetRoomParamsLoader />),
+    ),
+  ),
 );

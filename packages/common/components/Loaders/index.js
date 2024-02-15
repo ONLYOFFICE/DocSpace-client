@@ -22,9 +22,6 @@ import ListLoader from "./ListLoader";
 import SharingPanelLoader from "./SharingPanelLoader";
 import SharingPanelLoaderModal from "./SharingPanelLoader/modal";
 
-import RoomTypeListLoader from "./CreateEditRoomLoader/RoomTypeListLoader";
-import SetRoomParamsLoader from "./CreateEditRoomLoader/SetRoomParamsLoader";
-import CreateEditRoomDilogHeaderLoader from "./CreateEditRoomLoader/CreateEditRoomDilogHeaderLoader";
 import PaymentsLoader from "./PaymentsLoader";
 
 import SelectorBreadCrumbsLoader from "./SelectorBreadCrumbsLoader";
@@ -67,9 +64,6 @@ export default {
   SharingPanelLoader,
   SharingPanelLoaderModal,
 
-  RoomTypeListLoader,
-  SetRoomParamsLoader,
-  CreateEditRoomDilogHeaderLoader,
   PaymentsLoader,
 
   SelectorBreadCrumbsLoader,

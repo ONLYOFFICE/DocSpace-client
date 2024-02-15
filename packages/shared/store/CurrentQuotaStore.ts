@@ -1,5 +1,9 @@
 import { makeAutoObservable } from "mobx";
 
+import {
+  setDefaultUserQuota,
+  setDefaultRoomQuota,
+} from "@docspace/shared/api/settings";
 import { toastr } from "../components/toast";
 import { TData } from "../components/toast/Toast.type";
 import { PortalFeaturesLimitations } from "../enums";
@@ -17,13 +21,10 @@ import {
 } from "../constants";
 import { Nullable } from "../types";
 import { UserStore } from "./UserStore";
-import {
-  setDefaultUserQuota,
-  setDefaultRoomQuota,
-} from "@docspace/shared/api/settings";
 
 class CurrentQuotasStore {
   currentPortalQuota: Nullable<TPaymentQuota> = null;
+
   userStore: UserStore | null = null;
 
   currentPortalQuotaFeatures: TPaymentFeature[] = [];
@@ -149,6 +150,7 @@ class CurrentQuotasStore {
 
     return result?.value;
   }
+
   get isStatisticsAvailable() {
     const result = this.currentPortalQuotaFeatures.find(
       (obj) => obj.id === "statistic",
@@ -156,6 +158,7 @@ class CurrentQuotasStore {
 
     return result?.value;
   }
+
   get isRestoreAndAutoBackupAvailable() {
     const result = this.currentPortalQuotaFeatures.find(
       (obj) => obj.id === "restore",
@@ -213,14 +216,17 @@ class CurrentQuotasStore {
       PERCENTAGE_FOR_SHOWING_BAR
     );
   }
+
   get showTenantCustomQuotaBar() {
-    if (!this.isTenantCustomQuotaSet) return false;
+    if (!this.isTenantCustomQuotaSet || this.tenantCustomQuota === undefined)
+      return false;
 
     return (
       (this.usedTotalStorageSizeCount / this.tenantCustomQuota) * 100 >=
       PERCENTAGE_FOR_SHOWING_BAR
     );
   }
+
   get showUserQuotaBar() {
     return (
       this.addedManagersCount > 1 &&
@@ -249,6 +255,7 @@ class CurrentQuotasStore {
   get isDefaultUsersQuotaSet() {
     return this.currentPortalQuota?.usersQuota?.enableQuota;
   }
+
   get isTenantCustomQuotaSet() {
     return this.currentPortalQuota?.tenantCustomQuota?.enableQuota;
   }
@@ -264,6 +271,7 @@ class CurrentQuotasStore {
   get tenantCustomQuota() {
     return this.currentPortalQuota?.tenantCustomQuota?.quota;
   }
+
   get showStorageInfo() {
     const user = this.userStore?.user;
 

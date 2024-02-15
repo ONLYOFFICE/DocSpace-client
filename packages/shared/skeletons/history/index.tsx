@@ -1,9 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types";
-import StyledRow from "./StyledHistoryRowsLoader";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import StyledRow from "./History.styled";
 
-const HistoryRow = ({ id, className, style, ...rest }) => {
+import { RectangleSkeleton } from "../rectangle";
+import type { HistoryProps } from "./History.types";
+
+const History = ({ id, className, style, ...rest }: HistoryProps) => {
   const {
     title,
     borderRadius,
@@ -16,7 +17,7 @@ const HistoryRow = ({ id, className, style, ...rest }) => {
   } = rest;
 
   return (
-    <StyledRow id={id} className={className} style={style} gap="16px">
+    <StyledRow id={id} className={className} style={style}>
       <RectangleSkeleton
         className="history-loader-file-link"
         title={title}
@@ -99,27 +100,15 @@ const HistoryRow = ({ id, className, style, ...rest }) => {
     </StyledRow>
   );
 };
-const HistoryRowsLoader = (props) => {
+const HistoryRowsSkeleton = (props: HistoryProps) => {
   return (
     <>
-      <HistoryRow {...props} />
-      <HistoryRow {...props} />
-      <HistoryRow {...props} />
-      <HistoryRow {...props} />
+      <History {...props} />
+      <History {...props} />
+      <History {...props} />
+      <History {...props} />
     </>
   );
 };
 
-HistoryRowsLoader.propTypes = {
-  id: PropTypes.string,
-  className: PropTypes.string,
-  style: PropTypes.object,
-};
-
-HistoryRowsLoader.defaultProps = {
-  id: undefined,
-  className: undefined,
-  style: undefined,
-};
-
-export default HistoryRowsLoader;
+export default HistoryRowsSkeleton;

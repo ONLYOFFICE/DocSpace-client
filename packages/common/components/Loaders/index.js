@@ -12,7 +12,6 @@ import ProfileFooter from "./ProfileFooterLoader";
 import Notifications from "./NotificationsLoader";
 
 import Group from "./GroupLoader";
-import HistoryRows from "./HistoryRowsLoader";
 import Tile from "./TileLoader";
 import Tiles from "./TilesLoader";
 
@@ -52,7 +51,6 @@ export default {
   ProfileFooter,
 
   Group,
-  HistoryRows,
   Tile,
   Tiles,
 

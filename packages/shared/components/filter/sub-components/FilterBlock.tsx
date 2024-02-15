@@ -1,5 +1,4 @@
 import React from "react";
-import { flushSync } from "react-dom";
 import { useTranslation } from "react-i18next";
 
 import ClearReactSvgUrl from "PUBLIC_DIR/images/clear.react.svg?url";
@@ -62,7 +61,7 @@ const FilterBlock = ({
 
   const [filterData, setFilterData] = React.useState<TItem[]>([]);
   const [filterValues, setFilterValues] = React.useState<TGroupItem[]>([]);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   const setFilterDataFn = (data: TItem[]) => {
     const filterSubject = data.find(
@@ -289,7 +288,7 @@ const FilterBlock = ({
   );
 
   const getDefaultFilterData = React.useCallback(async () => {
-    flushSync(() => setIsLoading(true));
+    setIsLoading(true);
     const data = await getFilterData();
 
     const items = data.filter((item) => item.isHeader === true);

@@ -1,6 +1,8 @@
 import React from "react";
 import { Scrollbar } from "../../scrollbar";
 
+console.log(Scrollbar);
+
 const ArticleBody = ({ children }: { children: React.ReactNode }) => {
   return (
     <Scrollbar

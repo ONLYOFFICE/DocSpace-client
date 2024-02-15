@@ -32,6 +32,8 @@ ArticleMainButton.displayName = MAIN_BUTTON_NAME;
 const ArticleBody = ({ children }: { children: React.ReactNode }) => null;
 ArticleBody.displayName = BODY_NAME;
 
+console.log(SubArticleBody);
+
 const Article = ({
   showText,
   setShowText,
@@ -239,6 +241,8 @@ const Article = ({
     !window.location.pathname.includes("management") &&
     isAdmin;
 
+  console.log(withDevTools, hideAppsBlock, isLiveChatAvailable);
+
   const articleComponent = (
     <>
       <StyledArticle
@@ -271,7 +275,7 @@ const Article = ({
 
         <SubArticleBody>
           {articleBodyContent ? articleBodyContent.props.children : null}
-          {!showArticleLoader && (
+          {/* {!showArticleLoader && (
             <>
               {!hideAlerts && (
                 <ArticleAlerts
@@ -304,7 +308,7 @@ const Article = ({
               {!hideAppsBlock && (
                 <ArticleApps withDevTools={withDevTools} showText={showText} />
               )}
-              {!isMobile && isLiveChatAvailable && (
+              {!isMobile && !isLiveChatAvailable && (
                 <ArticleLiveChat
                   currentColorScheme={currentColorScheme}
                   withMainButton={
@@ -319,7 +323,7 @@ const Article = ({
                 />
               )}
             </>
-          )}
+          )} */}
         </SubArticleBody>
         {!showArticleLoader && (
           <HideArticleMenuButton

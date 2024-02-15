@@ -6,4 +6,3 @@ export { default as Section } from "./Section";
 export { default as FilterInput } from "./FilterInput";
 export { default as Loaders } from "./Loaders";
 export { default as SystemThemeDetector } from "./SystemThemeDetector";
-export { default as RecoverAccessModalDialog } from "./Dialogs/RecoverAccessModalDialog";

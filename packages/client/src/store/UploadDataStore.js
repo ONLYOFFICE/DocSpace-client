@@ -93,7 +93,7 @@ class UploadDataStore {
   removeFiles = (fileIds) => {
     fileIds.forEach((id) => {
       this.files = this.files?.filter(
-        (file) => !(file.action === "converted" && file.fileInfo.id === id)
+        (file) => !(file.action === "converted" && file.fileInfo?.id === id)
       );
     });
   };
@@ -319,8 +319,13 @@ class UploadDataStore {
 
       if (!this.filesToConversion.length) {
         this.filesToConversion.push(file);
-        if (!secondConvertingWithPassword && !conversionPositionIndex)
+
+        if (secondConvertingWithPassword && conversionPositionIndex) {
+          this.uploadedFilesHistory[file.index].error = null; //reset error to show loader for convert with password
+        } else {
           this.uploadedFilesHistory.push(file);
+        }
+
         this.startConversion(t, isOpen);
       } else {
         this.filesToConversion.push(file);
@@ -464,7 +469,7 @@ class UploadDataStore {
         while (progress < 100) {
           const res = await this.getConversationProgress(fileId);
           progress = res && res[0] && res[0].progress;
-          fileInfo = res && res[0].result;
+          fileInfo = res && res[0] && res[0].result;
 
           runInAction(() => {
             const file = this.files.find((file) => file.fileId === fileId);
@@ -567,7 +572,10 @@ class UploadDataStore {
             }
           });
 
-          storeOriginalFiles && fileInfo && this.refreshFiles(file);
+          storeOriginalFiles &&
+            fileInfo &&
+            fileInfo !== "password" &&
+            this.refreshFiles(file);
 
           if (fileInfo && fileInfo !== "password") {
             file.fileInfo = fileInfo;
@@ -905,19 +913,22 @@ class UploadDataStore {
     }
   };
 
-  checkChunkUpload = (
-    t,
-    res,
-    fileSize,
-    index,
-    indexOfFile,
-    path,
-    length,
-    resolve,
-    reject,
-    isAsyncUpload = false,
-    isFinalize = false
-  ) => {
+  checkChunkUpload = (chunkUploadObj) => {
+    const {
+      t,
+      res, // file response data
+      fileSize, // file size
+      index, // chunk index
+      indexOfFile, // file index in the list
+      path, // file path
+      chunksLength, // length of file chunks
+      resolve, // resolve cb
+      reject, // reject cb
+      isAsyncUpload = false, // async upload checker
+      isFinalize = false, // is finalize chunk
+      allChunkUploaded, // needed for progress, files is uploaded, awaiting finalized chunk
+    } = chunkUploadObj;
+
     if (!res.data.data && res.data.message) {
       return reject(res.data.message);
     }
@@ -933,7 +944,7 @@ class UploadDataStore {
 
       newPercent = this.getNewPercent(uploadedSize, indexOfFile);
     } else {
-      if (!uploaded) {
+      if (!uploaded && !allChunkUploaded) {
         uploadedSize =
           fileSize <= this.filesSettingsStore.chunkUploadSize
             ? fileSize
@@ -948,11 +959,7 @@ class UploadDataStore {
       newPercent = this.getFilesPercent(uploadedSize);
     }
 
-    if (isAsyncUpload && !uploaded && newPercent >= 100) {
-      newPercent = 99;
-    }
-
-    const percentCurrentFile = ((index + 1) / length) * 100;
+    const percentCurrentFile = ((index + 1) / chunksLength) * 100;
 
     const fileIndex = this.uploadedFilesHistory.findIndex(
       (f) => f.uniqueId === this.files[indexOfFile].uniqueId
@@ -1055,8 +1062,11 @@ class UploadDataStore {
             chunkObjIndex
           ].onUpload();
 
-        this.asyncUploadObj[operationId].chunksArray[chunkObjIndex].isFinished =
-          true;
+        if (this.asyncUploadObj[operationId]) {
+          this.asyncUploadObj[operationId].chunksArray[
+            chunkObjIndex
+          ].isFinished = true;
+        }
 
         if (!res.data.data && res.data.message) {
           delete this.asyncUploadObj[operationId];
@@ -1069,22 +1079,39 @@ class UploadDataStore {
             ).length - 1
           : 0;
 
-        this.checkChunkUpload(
+        let allIsUploaded;
+        if (this.asyncUploadObj[operationId]) {
+          const finished = this.asyncUploadObj[operationId].chunksArray.filter(
+            (x) => x.isFinished
+          );
+
+          allIsUploaded =
+            this.asyncUploadObj[operationId].chunksArray.length -
+            finished.length -
+            1; // 1 last
+        }
+
+        this.checkChunkUpload({
           t,
           res,
           fileSize,
-          activeLength,
+          index: activeLength,
           indexOfFile,
           path,
-          length,
+          chunksLength: length,
           resolve,
           reject,
-          true
-        );
+          isAsyncUpload: true,
+          isFinalize: false,
+          allChunkUploaded: allIsUploaded === 0,
+        });
 
-        const finalizeChunk = this.asyncUploadObj[
-          operationId
-        ].chunksArray.findIndex((x) => !x.isFinished && !x.isFinalize);
+        let finalizeChunk = -1;
+        if (this.asyncUploadObj[operationId]) {
+          finalizeChunk = this.asyncUploadObj[
+            operationId
+          ].chunksArray.findIndex((x) => !x.isFinished && !x.isFinalize);
+        }
 
         if (finalizeChunk === -1) {
           const finalizeChunkIndex = this.asyncUploadObj[
@@ -1100,19 +1127,19 @@ class UploadDataStore {
                 finalizeChunkIndex
               ].onUpload();
 
-            this.checkChunkUpload(
+            this.checkChunkUpload({
               t,
-              finalizeRes,
+              res: finalizeRes,
               fileSize,
-              finalizeIndex,
+              index: finalizeIndex,
               indexOfFile,
               path,
-              length,
+              chunksLength: length,
               resolve,
               reject,
-              true, // isAsyncUpload
-              true //isFinalize
-            );
+              isAsyncUpload: true,
+              isFinalize: true,
+            });
           }
         }
       } catch (error) {
@@ -1191,17 +1218,17 @@ class UploadDataStore {
         const resolve = (res) => Promise.resolve(res);
         const reject = (err) => Promise.reject(err);
 
-        this.checkChunkUpload(
+        this.checkChunkUpload({
           t,
           res,
           fileSize,
           index,
           indexOfFile,
           path,
-          length,
+          chunksLength: length,
           resolve,
-          reject
-        );
+          reject,
+        });
 
         //console.log(`Uploaded chunk ${index}/${length}`, res);
       }
@@ -1324,7 +1351,7 @@ class UploadDataStore {
       relativePath,
       file.encrypted,
       file.lastModifiedDate,
-      createNewIfExist
+      createNewIfExist,
     )
       .then((res) => {
         const location = res.data.location;

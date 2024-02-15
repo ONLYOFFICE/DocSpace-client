@@ -40,7 +40,7 @@ const RowDataComponent = (props) => {
         {...dragStyles}
         className={classNames(
           selectionProp?.className,
-          "table-container_file-name-cell"
+          "table-container_file-name-cell",
         )}
         value={value}
       >
@@ -151,7 +151,7 @@ const RowDataComponent = (props) => {
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
-            "table-container_quick-buttons-wrapper"
+            "table-container_quick-buttons-wrapper",
           )}
         >
           <StyledQuickButtonsContainer>

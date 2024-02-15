@@ -3,7 +3,7 @@ import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { inject, observer } from "mobx-react";
-
+import api from "@docspace/shared/api";
 import { Text } from "@docspace/shared/components/text";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { EmailInput } from "@docspace/shared/components/email-input";
@@ -14,7 +14,7 @@ import { Link } from "@docspace/shared/components/link";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Button } from "@docspace/shared/components/button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-import ErrorContainer from "@docspace/common/components/ErrorContainer";
+import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
 import { FileInput } from "@docspace/shared/components/file-input";
 
 import { Loader } from "@docspace/shared/components/loader";
@@ -29,8 +29,8 @@ import { setCookie } from "@docspace/shared/utils/cookie";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
 import { LANGUAGE } from "@docspace/shared/constants";
-import BetaBadge from "@docspace/common/components/BetaBadge";
 import { EmailSettings } from "@docspace/shared/utils";
+import BetaBadge from "../../components/BetaBadgeWrapper";
 
 import {
   Wrapper,
@@ -42,7 +42,7 @@ import {
 } from "./StyledWizard";
 import { getUserTimezone, getSelectZone } from "./timezonesHelper";
 
-import DocspaceLogo from "SRC_DIR/DocspaceLogo";
+import DocspaceLogo from "../../components/DocspaceLogoWrapper";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
 import {
   DEFAULT_SELECT_TIMEZONE,
@@ -70,7 +70,7 @@ const Wizard = (props) => {
     cultureNames,
     culture,
     hashSettings,
-    setPortalOwner,
+
     setWizardComplete,
     isLicenseRequired,
     setLicense,
@@ -133,7 +133,7 @@ const Wizard = (props) => {
       ])
       .then(() => {
         const select = cultureNames.filter(
-          (lang) => lang.key === convertedCulture
+          (lang) => lang.key === convertedCulture,
         );
 
         if (select.length === 0) {
@@ -255,13 +255,13 @@ const Wizard = (props) => {
     const hash = createPasswordHash(password, hashSettings);
 
     try {
-      await setPortalOwner(
+      await api.settings.setPortalOwner(
         emailTrim,
         hash,
         selectedLanguage.key,
         selectedTimezone.key,
         wizardToken,
-        analytics
+        analytics,
       );
 
       setCookie(LANGUAGE, selectedLanguage.key, {
@@ -500,7 +500,7 @@ const Wizard = (props) => {
   );
 };
 
-export default inject(({ authStore, settingsStore, wizard }) => {
+export default inject(({ authStore, settingsStore, wizardStore }) => {
   const {
     passwordSettings,
     wizardToken,
@@ -522,10 +522,10 @@ export default inject(({ authStore, settingsStore, wizard }) => {
     setIsWizardLoaded,
     getMachineName,
     getIsRequiredLicense,
-    setPortalOwner,
+
     setLicense,
     resetLicenseUploaded,
-  } = wizard;
+  } = wizardStore;
 
   return {
     theme,
@@ -546,7 +546,7 @@ export default inject(({ authStore, settingsStore, wizard }) => {
     setIsWizardLoaded,
     getMachineName,
     getIsRequiredLicense,
-    setPortalOwner,
+
     setLicense,
     resetLicenseUploaded,
   };

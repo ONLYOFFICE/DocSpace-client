@@ -1,4 +1,4 @@
-import { InputSize } from "../text-input";
+import { InputSize, InputType } from "../text-input";
 import { EmailSettings } from "../../utils";
 
 export type TValidate = { value: string; isValid: boolean; errors?: string[] };
@@ -40,4 +40,10 @@ export interface EmailInputProps {
   placeholder?: string;
   /** Indicates that the input field has scale */
   scale?: boolean;
+  /** Focus the input field on initial render */
+  isAutoFocussed?: boolean;
+  /** Supported type of the input fields. */
+  type: InputType;
+  /** Used as HTML `tabindex` property */
+  tabIndex?: number;
 }

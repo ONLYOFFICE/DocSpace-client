@@ -15,7 +15,7 @@ import Api from "./Api";
 
 import { useTranslation } from "react-i18next";
 import { isMobile, isMobileOnly } from "react-device-detect";
-import AppLoader from "@docspace/common/components/AppLoader";
+import AppLoader from "@docspace/shared/components/app-loader";
 import SSOLoader from "./sub-components/ssoLoader";
 import { WebhookConfigsLoader } from "./Webhooks/sub-components/Loaders";
 import { DeviceType } from "@docspace/shared/enums";
@@ -87,7 +87,7 @@ const DeveloperToolsWrapper = (props) => {
   ];
 
   const [currentTab, setCurrentTab] = useState(
-    data.findIndex((item) => location.pathname.includes(item.id))
+    data.findIndex((item) => location.pathname.includes(item.id)),
   );
 
   const load = async () => {
@@ -111,8 +111,8 @@ const DeveloperToolsWrapper = (props) => {
       combineUrl(
         window.DocSpaceConfig?.proxy?.url,
         config.homepage,
-        `/portal-settings/developer-tools/${e.id}`
-      )
+        `/portal-settings/developer-tools/${e.id}`,
+      ),
     );
   };
 

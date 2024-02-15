@@ -148,7 +148,7 @@ const WhiteLabel = (props) => {
 
   const onRestoreDefault = async () => {
     try {
-      await restoreWhiteLabelSettings(true);
+      await restoreWhiteLabelSettings();
       await onResetCompanyName();
       toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
     } catch (error) {

@@ -51,6 +51,7 @@ const Navigation = ({
   titleIcon,
   currentDeviceType,
   rootRoomTitle,
+  showTitle,
   navigationButtonLabel,
   onNavigationButtonClick,
   tariffBar,
@@ -66,11 +67,6 @@ const Navigation = ({
   const containerRef = React.useRef<HTMLDivElement | null>(null);
 
   const isDesktop = currentDeviceType === DeviceType.desktop;
-
-  const infoPanelIsVisible = React.useMemo(
-    () => isDesktop && (!isEmptyPage || (isEmptyPage && isRoom)),
-    [isDesktop, isEmptyPage, isRoom],
-  );
 
   const toggleDropBox = useCallback(() => {
     if (navigationItems?.length === 0) return;
@@ -172,6 +168,7 @@ const Navigation = ({
         isRootFolderTitle
         onClick={onTextClick}
       />
+
       {navigationTitleNode}
     </div>
   ) : (
@@ -239,7 +236,7 @@ const Navigation = ({
               onBackToParentFolder={onBackToParentFolder}
             />
 
-            {navigationTitleContainerNode}
+            {showTitle && navigationTitleContainerNode}
 
             <ControlButtons
               isRootFolder={isRootFolder}
@@ -256,6 +253,7 @@ const Navigation = ({
               isFrame={isFrame}
               isPublicRoom={isPublicRoom}
               isTrashFolder={isTrashFolder}
+              showTitle={showTitle}
               navigationButtonLabel={navigationButtonLabel}
               onNavigationButtonClick={onNavigationButtonClick}
               tariffBar={tariffBar}
@@ -263,7 +261,7 @@ const Navigation = ({
               isEmptyPage={isEmptyPage}
             />
           </StyledContainer>
-          {infoPanelIsVisible && !hideInfoPanel && (
+          {isDesktop && !hideInfoPanel && (
             <ToggleInfoPanelButton
               id="info-panel-toggle--open"
               isRootFolder={isRootFolder}
@@ -279,3 +277,4 @@ const Navigation = ({
 };
 
 export default React.memo(Navigation);
+

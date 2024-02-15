@@ -43,7 +43,9 @@ const AvatarEditorDialog = (props) => {
   const { visible, onClose, profile, updateCreatedAvatar, setHasAvatar } =
     props;
   const [avatar, setAvatar] = useState({
-    uploadedFile: profile.hasAvatar ? profile.avatarMax : DefaultUserAvatarMax,
+    uploadedFile: profile.hasAvatar
+      ? profile.avatarOriginal
+      : DefaultUserAvatarMax,
     x: 0.5,
     y: 0.5,
     zoom: 1,
@@ -63,7 +65,6 @@ const AvatarEditorDialog = (props) => {
       onClose();
       return;
     }
-
     const file = await dataUrlToFile(preview);
 
     const avatarData = new FormData();

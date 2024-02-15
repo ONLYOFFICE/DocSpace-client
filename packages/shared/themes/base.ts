@@ -331,7 +331,7 @@ export const getBaseTheme = () => {
       border: "none",
       text: {
         width: "100%",
-        height: "16px",
+        height: "18px",
         margin: "0 11px",
         fontWeight: "500",
         fontSize: "14px",
@@ -968,6 +968,7 @@ export const getBaseTheme = () => {
       maxWidth: "340px",
       color: white,
       textColor: black,
+      backgroundColor: "#f8f7bf",
 
       before: {
         border: "none",
@@ -3213,6 +3214,11 @@ export const getBaseTheme = () => {
       borderColor: "#D0D5DA",
       pluginName: "#5C5C5C",
       descriptionColor: "#657077",
+    },
+
+    sdkPresets: {
+      borderColor: "#d0d5da",
+      secondaryColor: "#657077",
     },
   };
 };

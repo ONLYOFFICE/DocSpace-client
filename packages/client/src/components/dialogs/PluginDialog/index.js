@@ -7,7 +7,7 @@ import { Portal } from "@docspace/shared/components/portal";
 import { Base } from "@docspace/shared/themes";
 
 import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
-import { PluginComponents } from "SRC_DIR/helpers/plugins/constants";
+import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
 import { messageActions } from "SRC_DIR/helpers/plugins/utils";
 
 const StyledFullScreen = styled.div`
@@ -83,7 +83,7 @@ const PluginDialog = ({
       updateMainButtonItems,
       updateProfileMenuItems,
       updateEventListenerItems,
-      updateFileItems
+      updateFileItems,
     );
   };
 
@@ -111,7 +111,7 @@ const PluginDialog = ({
             updateMainButtonItems,
             updateProfileMenuItems,
             updateEventListenerItems,
-            updateFileItems
+            updateFileItems,
           );
         };
 

@@ -215,6 +215,10 @@ class TreeFoldersStore {
     return this.recycleBinFolder ? this.recycleBinFolder.id : null;
   }
 
+  get isAccounts() {
+    return window.location.pathname.includes("accounts/filter");
+  }
+
   get isPersonalRoom() {
     return (
       this.myFolder &&
@@ -300,6 +304,10 @@ class TreeFoldersStore {
 
   get isRecentTab() {
     return this.selectedFolderStore.rootFolderType === FolderType.Recent;
+  }
+
+  get isRoot() {
+    return this.selectedFolderStore?.pathParts?.length === 1;
   }
 
   get selectedKeys() {

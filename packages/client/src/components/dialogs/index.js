@@ -35,7 +35,6 @@ import DeleteLinkDialog from "./DeleteLinkDialog";
 import MoveToPublicRoom from "./MoveToPublicRoom";
 import BackupToPublicRoom from "./BackupToPublicRoom";
 import SettingsPluginDialog from "./SettingsPluginDialog";
-import ReportDialog from "./ReportDialog";
 import PluginDialog from "./PluginDialog";
 import DeletePluginDialog from "./DeletePluginDialog";
 import DisableUserDialog from "./DisableUserDialog";
@@ -79,7 +78,6 @@ export {
   MoveToPublicRoom,
   BackupToPublicRoom,
   SettingsPluginDialog,
-  ReportDialog,
   PluginDialog,
   DeletePluginDialog,
   DisableUserDialog,

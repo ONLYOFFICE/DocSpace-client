@@ -37,6 +37,7 @@ const StatusBadgeSelector = ({
       label={label}
       onClick={handleOnClick}
       primary={isStatusSelected(statusCode)}
+      size="extraSmall"
     />
   );
 };
@@ -77,7 +78,7 @@ const StatusPicker = ({ filters, setFilters }) => {
         handleStatusClick={handleStatusClick}
         key={code}
       />
-    )
+    ),
   );
 
   return (

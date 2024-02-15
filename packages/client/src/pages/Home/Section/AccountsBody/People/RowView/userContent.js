@@ -7,7 +7,7 @@ import { RowContent } from "@docspace/shared/components/row-content";
 import { Link } from "@docspace/shared/components/link";
 
 import Badges from "../../Badges";
-import { tablet, mobile } from "@docspace/shared/utils";
+import { tablet, mobile } from "@docspace/shared/utils/device";
 
 const StyledRowContent = styled(RowContent)`
   @media ${tablet} {
@@ -20,7 +20,7 @@ const StyledRowContent = styled(RowContent)`
 
     .badges {
       flex-direction: row-reverse;
-      margin-top: 10px;
+      margin-top: 9px;
       ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`

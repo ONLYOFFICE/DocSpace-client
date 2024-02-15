@@ -138,21 +138,37 @@ class InfoPanelStore {
       bufferSelection: peopleBufferSelection,
     } = this.peopleStore.selectionStore;
 
-    return this.getIsAccounts()
-      ? peopleSelection.length
-        ? [...peopleSelection]
-        : peopleBufferSelection
-          ? [peopleBufferSelection]
-          : []
-      : filesSelection?.length > 0
-        ? [...filesSelection]
-        : filesBufferSelection
-          ? [filesBufferSelection]
-          : [];
+    const {
+      selection: groupsSelection,
+      bufferSelection: groupsBufferSelection,
+    } = this.peopleStore.groupsStore;
+
+    if (this.getIsPeople() || this.getIsGroups()) {
+      if (peopleSelection.length) return [...peopleSelection];
+      if (peopleBufferSelection) return [peopleBufferSelection];
+    }
+
+    if (this.getIsGroups()) {
+      if (groupsSelection.length) return [...groupsSelection];
+      if (groupsBufferSelection) return [groupsBufferSelection];
+    }
+
+    if (filesSelection?.length) return [...filesSelection];
+    if (filesBufferSelection) return [filesBufferSelection];
+
+    return [];
   }
 
   getInfoPanelSelectedFolder = () => {
     const isRooms = this.getIsRooms();
+    const { currentGroup } = this.peopleStore.groupsStore;
+
+    if (this.getIsGroups()) {
+      return {
+        ...currentGroup,
+        isGroup: true,
+      };
+    }
 
     return this.roomsView === infoMembers && this.infoPanelRoom && isRooms
       ? this.infoPanelRoom
@@ -391,6 +407,25 @@ class InfoPanelStore {
     );
   };
 
+  getIsPeople = (givenPathName) => {
+    const pathname = givenPathName || window.location.pathname.toLowerCase();
+    return pathname.indexOf("accounts/people") !== -1;
+  };
+
+  getIsGroups = (givenPathName) => {
+    const pathname = givenPathName || window.location.pathname.toLowerCase();
+    return pathname.indexOf("accounts/groups") !== -1;
+  };
+
+  getIsInsideGroup = (givenPathName) => {
+    const pathname = givenPathName || window.location.pathname.toLowerCase();
+    return (
+      pathname.indexOf("accounts") !== -1 &&
+      pathname.indexOf("groups/filter") === -1 &&
+      pathname.indexOf("people/filter") === -1
+    );
+  };
+
   getIsGallery = (givenPathName) => {
     const pathname = givenPathName || window.location.pathname.toLowerCase();
     return pathname.indexOf("form-gallery") !== -1;
@@ -411,7 +446,7 @@ class InfoPanelStore {
     }
 
     if (
-      this.getIsAccounts() &&
+      this.getIsPeople() &&
       (!infoPanelSelection.email || !infoPanelSelection.displayName)
     ) {
       this.infoPanelSelection = infoPanelSelection.length
@@ -527,9 +562,10 @@ class InfoPanelStore {
     withoutTitlesAndLinks = false,
   ) => {
     if (this.membersIsLoading) return;
+    const roomId = this.infoPanelSelection.id;
+
     const isPublic =
       this.infoPanelSelection?.roomType ?? this.infoPanelSelection?.roomType;
-    const roomId = this.infoPanelSelection.id;
 
     const requests = [this.filesStore.getRoomMembers(roomId, clearFilter)];
 

@@ -54,10 +54,8 @@ export default inject(({ peopleStore, settingsStore }) => ({
   accountsViewAs: peopleStore.viewAs,
   setViewAs: peopleStore.setViewAs,
 
-  peopleList: peopleStore.usersStore.peopleList,
   hasMoreGroups: peopleStore.groupsStore.hasMoreGroups,
   fetchMoreGroups: peopleStore.groupsStore.fetchMoreGroups,
-
   filterTotal: peopleStore.groupsStore.groupsFilterTotal,
   isFiltered: peopleStore.groupsStore.groupsIsFiltered,
 

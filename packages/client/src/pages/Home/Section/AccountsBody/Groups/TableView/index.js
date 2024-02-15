@@ -46,7 +46,7 @@ const GroupsTableView = ({
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
-  return groups.length !== 0 ? (
+  return groups.length ? (
     <Styled.GroupsTableContainer
       useReactWindow={!withPaging}
       forwardedRef={ref}

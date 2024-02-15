@@ -12,7 +12,7 @@ const Groups = ({ infoPanelSelection, currentGroup, setCurrentGroup }) => {
   const { groupId: paramsGroupId } = useParams();
   const isInsideGroup = !!paramsGroupId;
 
-  const [fetchedGroup, setFetchedGroup] = useState < any > null;
+  const [fetchedGroup, setFetchedGroup] = useState(null);
   const group = isInsideGroup ? currentGroup : fetchedGroup;
 
   const groupId = isInsideGroup ? paramsGroupId : infoPanelSelection?.id;

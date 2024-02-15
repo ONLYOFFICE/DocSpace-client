@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
-
+import ExpanderDownReactSvgUrl from "PUBLIC_DIR/images/expander-down.react.svg?url";
 import { TableRow } from "@docspace/shared/components/table";
 import { TableCell } from "@docspace/shared/components/table";
 import { Link } from "@docspace/shared/components/link";
@@ -9,29 +9,27 @@ import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-
+import { LinkWithDropdown } from "@docspace/shared/components/link-with-dropdown";
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
-
+import { ReactSVG } from "react-svg";
 import Badges from "../../Badges";
 import { Base } from "@docspace/shared/themes";
-import { getUserTypeLabel } from "@docspace/shared/utils/common";
+import { DropDown } from "@docspace/shared/components/drop-down";
+import { useNavigate } from "react-router-dom";
 
 const StyledWrapper = styled.div`
   display: contents;
 `;
 
 const StyledPeopleRow = styled(TableRow)`
-  .table-container_cell {
-    border-top: ${(props) =>
-      `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
-    margin-top: -1px;
-  }
-
   :hover {
     .table-container_cell {
       cursor: pointer;
       background: ${(props) =>
         `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
+      border-top: ${(props) =>
+        `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+      margin-top: -1px;
     }
 
     .table-container_user-name-cell {
@@ -58,20 +56,17 @@ const StyledPeopleRow = styled(TableRow)`
               padding-right: 20px;
             `}
     }
-  }
 
-  .table-container_row-context-menu-wrapper {
-    height: 49px !important;
-    max-height: none !important;
-    box-sizing: border-box;
-  }
-
-  .table-container_cell:not(.table-container_row-checkbox-wrapper) {
-    height: auto;
-    max-height: 48;
+    .groups-combobox .combo-button {
+      background-color: ${(props) =>
+        `${props.theme.filesSection.tableView.row.backgroundActive}`};
+    }
   }
 
   .table-container_cell {
+    height: 48px;
+    max-height: 48px;
+
     background: ${(props) =>
       (props.checked || props.isActive) &&
       `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
@@ -138,6 +133,7 @@ const StyledPeopleRow = styled(TableRow)`
   }
 
   .table-cell_type,
+  .table-cell_groups,
   .table-cell_room {
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
@@ -149,6 +145,7 @@ const StyledPeopleRow = styled(TableRow)`
           `}
   }
 
+  .groups-combobox,
   .type-combobox {
     visibility: ${(props) => (props.hideColumns ? "hidden" : "visible")};
     opacity: ${(props) => (props.hideColumns ? 0 : 1)};
@@ -159,6 +156,7 @@ const StyledPeopleRow = styled(TableRow)`
   }
 
   .type-combobox,
+  .groups-combobox,
   .room-combobox {
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
@@ -169,6 +167,11 @@ const StyledPeopleRow = styled(TableRow)`
             padding-left: 8px;
           `}
     overflow: hidden;
+  }
+
+  .type-combobox,
+  .groups-combobox,
+  .room-combobox {
     .combo-button {
       ${(props) =>
         props.theme.interfaceDirection === "rtl"
@@ -188,6 +191,37 @@ const StyledPeopleRow = styled(TableRow)`
     }
   }
 
+  .groups-combobox {
+    .combo-button {
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              padding-right: 8px;
+              margin-right: -8px;
+            `
+          : css`
+              padding-left: 8px;
+              margin-left: -8px;
+            `}
+
+      &:hover {
+        background-color: #fff !important;
+      }
+
+      .combo-button-label {
+        font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
+        color: ${(props) => props.theme.peopleTableRow.sideInfoColor};
+        font-weight: 600;
+      }
+
+      .combo-buttons_arrow-icon {
+        svg path {
+          fill: ${(props) => props.theme.peopleTableRow.sideInfoColor};
+        }
+      }
+    }
+  }
+
   .room-combobox {
     .combo-buttons_arrow-icon {
       display: none;
@@ -196,6 +230,32 @@ const StyledPeopleRow = styled(TableRow)`
 `;
 
 StyledPeopleRow.defaultProps = { theme: Base };
+
+const StyledGroupsComboBox = styled(ComboBox)`
+  .combo-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 4px 8px;
+    background-color: ${({ isChecked, theme }) =>
+      !isChecked ? "#fff" : theme.filesSection.tableView.row.backgroundActive};
+
+    ${({ isOpened }) => isOpened && "background-color: #fff !important"}
+
+    border-radius: 3px;
+
+    &:hover {
+      background-color: #fff;
+    }
+  }
+
+  .dropdown {
+    z-index: 105;
+  }
+`;
+
+StyledGroupsComboBox.defaultProps = { theme: Base };
 
 const fakeRooms = [
   {
@@ -230,9 +290,7 @@ const PeopleTableRow = (props) => {
     hideColumns,
     value,
     standalone,
-    typeAccountsColumnIsEnabled,
-    emailAccountsColumnIsEnabled,
-    infoPanelVisible,
+    setCurrentGroup,
   } = props;
 
   const {
@@ -249,7 +307,13 @@ const PeopleTableRow = (props) => {
     isSSO,
   } = item;
 
+  const navigate = useNavigate();
+
   const isPending = statusType === "pending" || statusType === "disabled";
+
+  const [groupDropDownIsOpened, setGroupDropDownIsOpened] = useState(false);
+  const onToggleGroupDropdown = () =>
+    setGroupDropDownIsOpened(!groupDropDownIsOpened);
 
   const [isLoading, setIsLoading] = React.useState(false);
 
@@ -315,6 +379,11 @@ const PeopleTableRow = (props) => {
     [item, changeUserType],
   );
 
+  const onOpenGroup = ({ action }) => {
+    setCurrentGroup(null);
+    navigate(`/accounts/groups/${action}`);
+  };
+
   // const getRoomsOptions = React.useCallback(() => {
   //   const options = [];
 
@@ -332,9 +401,77 @@ const PeopleTableRow = (props) => {
   //   return <>{options.map((option) => option)}</>;
   // }, []);
 
-  const typeLabel = React.useCallback(() => getUserTypeLabel(role, t), [])();
+  const getUserTypeLabel = React.useCallback((role) => {
+    switch (role) {
+      case "owner":
+        return t("Common:Owner");
+      case "admin":
+        return t("Common:DocSpaceAdmin");
+      case "manager":
+        return t("Common:RoomAdmin");
+      case "collaborator":
+        return t("Common:PowerUser");
+      case "user":
+        return t("Common:User");
+    }
+  }, []);
+
+  const typeLabel = getUserTypeLabel(role);
 
   const isChecked = checkedProps.checked;
+
+  const renderGroupsCell = () => {
+    const groups = item.groups || [];
+    const groupItems = groups
+      .map((group) => ({
+        key: group.id,
+        title: group.name,
+        label: group.name,
+        action: group.id,
+      }))
+      .slice(0, 5);
+
+    if (groups.length > 1)
+      return (
+        <StyledGroupsComboBox
+          // isActive={groupDropDownIsOpened}
+          // isChecked={isChecked}
+          // onToggle={onToggleGroupDropdown}
+          className="groups-combobox"
+          selectedOption={{
+            key: "first-group",
+            title: groups[0].name,
+            label: groups[0].name + " ",
+          }}
+          onSelect={onOpenGroup}
+          options={groupItems}
+          scaled
+          directionY="both"
+          size="content"
+          modernView
+          manualWidth={"fit-content"}
+          isLoading={isLoading}
+        />
+      );
+
+    if (groups.length === 1)
+      return (
+        <Text
+          type="page"
+          title={position}
+          fontSize="13px"
+          fontWeight={600}
+          color={sideInfoColor}
+          truncate
+          noSelect
+          style={{ paddingLeft: "8px" }}
+        >
+          {groups[0].name}
+        </Text>
+      );
+
+    return null;
+  };
 
   const renderTypeCell = () => {
     const typesOptions = getTypesOptions();
@@ -455,19 +592,17 @@ const PeopleTableRow = (props) => {
                 ? displayName
                 : email}
           </Link>
-          <Badges
-            statusType={statusType}
-            isPaid={isPaidUser}
-            isSSO={isSSO}
-            infoPanelVisible={infoPanelVisible}
-          />
+          <Badges statusType={statusType} isPaid={isPaidUser} isSSO={isSSO} />
         </TableCell>
 
-        {typeAccountsColumnIsEnabled ? (
-          <TableCell className={"table-cell_type"}>{typeCell}</TableCell>
-        ) : (
-          <div />
-        )}
+        <TableCell className={"table-cell_type"}>{typeCell}</TableCell>
+
+        <TableCell
+          className={"table-cell_groups"}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {renderGroupsCell()}
+        </TableCell>
 
         {/* <TableCell className="table-cell_room">
           {!rooms?.length ? (
@@ -510,24 +645,20 @@ const PeopleTableRow = (props) => {
           )}
         </TableCell> */}
 
-        {emailAccountsColumnIsEnabled ? (
-          <TableCell>
-            <Link
-              type="page"
-              title={email}
-              fontSize="13px"
-              fontWeight={600}
-              color={sideInfoColor}
-              onClick={onEmailClick}
-              isTextOverflow
-              enableUserSelect
-            >
-              {email}
-            </Link>
-          </TableCell>
-        ) : (
-          <div />
-        )}
+        <TableCell>
+          <Link
+            type="page"
+            title={email}
+            fontSize="13px"
+            fontWeight={600}
+            color={sideInfoColor}
+            onClick={onEmailClick}
+            isTextOverflow
+            enableUserSelect
+          >
+            {email}
+          </Link>
+        </TableCell>
       </StyledPeopleRow>
     </StyledWrapper>
   );

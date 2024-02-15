@@ -6,16 +6,15 @@ import { useNavigate, useLocation } from "react-router-dom";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { Base } from "@docspace/shared/themes";
-import { TableContainer } from "@docspace/shared/components/table";
-import { TableBody } from "@docspace/shared/components/table";
+import { TableContainer, TableBody } from "@docspace/shared/components/table";
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
-import EmptyScreen from "../../EmptyScreen";
+import EmptyScreenGroups from "../../EmptyScreenGroups";
 import { TableVersions } from "SRC_DIR/helpers/constants";
 
-const COLUMNS_SIZE = `peopleColumnsSize_ver-${TableVersions.Accounts}`;
-const INFO_PANEL_COLUMNS_SIZE = `infoPanelPeopleColumnsSize_ver-${TableVersions.Accounts}`;
+const COLUMNS_SIZE = `peopleColumnsSize_ver-${TableVersions.People}`;
+const INFO_PANEL_COLUMNS_SIZE = `infoPanelPeopleColumnsSize_ver-${TableVersions.People}`;
 
 const userNameCss = css`
   ${(props) =>
@@ -123,6 +122,7 @@ const Table = ({
   canChangeUserType,
   isFiltered,
   currentDeviceType,
+  setCurrentGroup,
   typeAccountsColumnIsEnabled,
   emailAccountsColumnIsEnabled,
 }) => {
@@ -175,6 +175,7 @@ const Table = ({
             canChangeUserType={canChangeUserType}
             hideColumns={hideColumns}
             itemIndex={index}
+            setCurrentGroup={setCurrentGroup}
             typeAccountsColumnIsEnabled={typeAccountsColumnIsEnabled}
             emailAccountsColumnIsEnabled={emailAccountsColumnIsEnabled}
             infoPanelVisible={infoPanelVisible}
@@ -183,15 +184,16 @@ const Table = ({
       </TableBody>
     </StyledTableContainer>
   ) : (
-    <EmptyScreen />
+    <EmptyScreenGroups />
   );
 };
 
 export default inject(
   ({
     peopleStore,
-    settingsStore,
     accessRightsStore,
+    filesStore,
+    settingsStore,
     infoPanelStore,
     userStore,
     tableStore,
@@ -232,6 +234,7 @@ export default inject(
       canChangeUserType,
       isFiltered,
       currentDeviceType,
+      setCurrentGroup: peopleStore.groupsStore.setCurrentGroup,
       typeAccountsColumnIsEnabled,
       emailAccountsColumnIsEnabled,
     };

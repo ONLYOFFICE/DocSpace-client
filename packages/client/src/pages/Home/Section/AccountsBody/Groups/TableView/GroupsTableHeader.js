@@ -28,6 +28,8 @@ class GroupsTableHeader extends React.Component {
         key: "Head of Group",
         title: props.t("Head of Group"),
         enable: true,
+        sortBy: "manager",
+        onClick: this.onFilter,
         resizable: true,
         onChange: this.onColumnChange,
       },

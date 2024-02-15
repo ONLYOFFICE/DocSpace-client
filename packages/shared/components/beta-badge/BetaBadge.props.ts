@@ -1,8 +1,10 @@
 import type { PlacesType } from "react-tooltip";
+import type { TColorScheme } from "../../themes";
+
 interface BetaBadgeProps {
   forumLink?: string;
   documentationEmail?: string;
-  currentColorScheme?: any;
+  currentColorScheme?: TColorScheme;
   currentDeviceType?: "desktop" | "tablet" | "mobile";
 
   place: PlacesType;

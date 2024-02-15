@@ -319,8 +319,13 @@ class UploadDataStore {
 
       if (!this.filesToConversion.length) {
         this.filesToConversion.push(file);
-        if (!secondConvertingWithPassword && !conversionPositionIndex)
+
+        if (secondConvertingWithPassword && conversionPositionIndex) {
+          this.uploadedFilesHistory[file.index].error = null; //reset error to show loader for convert with password
+        } else {
           this.uploadedFilesHistory.push(file);
+        }
+
         this.startConversion(t, isOpen);
       } else {
         this.filesToConversion.push(file);
@@ -567,7 +572,10 @@ class UploadDataStore {
             }
           });
 
-          storeOriginalFiles && fileInfo && this.refreshFiles(file);
+          storeOriginalFiles &&
+            fileInfo &&
+            fileInfo !== "password" &&
+            this.refreshFiles(file);
 
           if (fileInfo && fileInfo !== "password") {
             file.fileInfo = fileInfo;
@@ -1343,7 +1351,7 @@ class UploadDataStore {
       relativePath,
       file.encrypted,
       file.lastModifiedDate,
-      createNewIfExist
+      createNewIfExist,
     )
       .then((res) => {
         const location = res.data.location;

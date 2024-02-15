@@ -49,6 +49,10 @@ const StyledLinkRow = styled.div`
 
   .expired-options {
     padding: 0px;
+
+    & > span > a {
+      padding: 0px !important;
+    }
   }
 
   .expire-text {
@@ -73,4 +77,13 @@ const StyledLinkRow = styled.div`
   }
 `;
 
-export { StyledLinks, StyledLinkRow };
+const StyledSquare = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  padding: 10px;
+  background: ${(props) => props.theme.avatar.icon.background};
+`;
+
+export { StyledLinks, StyledLinkRow, StyledSquare };

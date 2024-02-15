@@ -306,6 +306,10 @@ class TreeFoldersStore {
     return this.selectedFolderStore.rootFolderType === FolderType.Recent;
   }
 
+  get isRoot() {
+    return this.selectedFolderStore?.pathParts?.length === 1;
+  }
+
   get selectedKeys() {
     const selectedKeys =
       this.selectedTreeNode.length > 0 &&

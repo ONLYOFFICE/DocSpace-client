@@ -1,14 +1,15 @@
 import React from "react";
 import { useLocation, Navigate } from "react-router-dom";
-import { AuthenticatedAction } from "../helpers/enums";
-import { ValidationResult } from "../helpers/constants";
+import { inject, observer } from "mobx-react";
+
 import { Loader } from "@docspace/shared/components/loader";
 import Section from "@docspace/shared/components/section";
 import { checkConfirmLink } from "@docspace/shared/api/user"; //TODO: Move AuthStore
 import { getObjectByLocation } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+
 import SectionWrapper from "SRC_DIR/components/Section";
-import { inject, observer } from "mobx-react";
+import { AuthenticatedAction, ValidationResult } from "./enums";
 
 const ConfirmRoute = ({
   doAuthenticated,

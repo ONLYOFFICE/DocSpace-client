@@ -25,6 +25,7 @@ class FilesTableHeader extends React.Component {
       isPublicRoom,
       isFrame,
       frameTableColumns,
+      isRecentTab,
       isDefaultRoomsQuotaSet,
       showStorageInfo,
       isArchiveFolder,
@@ -167,6 +168,85 @@ class FilesTableHeader extends React.Component {
           key: "TypeTrash",
           title: t("Common:Type"),
           enable: this.props.typeTrashColumnIsEnabled,
+          resizable: true,
+          sortBy: SortByFieldName.Type,
+          // onClick: this.onFilter,
+          onChange: this.onColumnChange,
+        },
+        {
+          key: "QuickButtons",
+          title: "",
+          enable: this.props.quickButtonsColumnIsEnabled,
+          defaultSize: 75,
+          resizable: false,
+        },
+      ];
+      defaultColumns.push(...columns);
+    } else if (isRecentTab) {
+      const authorBlock = !isPublicRoom
+        ? {
+            key: "Author",
+            title: t("ByAuthor"),
+            enable: this.props.authorColumnIsEnabled,
+            resizable: true,
+            sortBy: SortByFieldName.Author,
+            // onClick: this.onFilter,
+            onChange: this.onColumnChange,
+          }
+        : {};
+
+      const columns = [
+        {
+          key: "Name",
+          title: t("Common:Name"),
+          resizable: true,
+          enable: this.props.nameColumnIsEnabled,
+          default: true,
+          sortBy: SortByFieldName.Name,
+          minWidth: 210,
+          onClick: this.onFilter,
+        },
+        { ...authorBlock },
+        {
+          key: "Created",
+          title: t("ByCreation"),
+          enable: this.props.createdColumnIsEnabled,
+          resizable: true,
+          sortBy: SortByFieldName.CreationDate,
+          // onClick: this.onFilter,
+          onChange: this.onColumnChange,
+        },
+        {
+          key: "LastOpened",
+          title: t("DateLastOpened"),
+          enable: this.props.lastOpenedColumnIsEnabled,
+          resizable: true,
+          sortBy: SortByFieldName.LastOpened,
+          onClick: this.onFilter,
+          onChange: this.onColumnChange,
+        },
+        {
+          key: "Modified",
+          title: t("ByLastModified"),
+          enable: this.props.modifiedColumnIsEnabled,
+          resizable: true,
+          sortBy: SortByFieldName.ModifiedDate,
+          // onClick: this.onFilter,
+          onChange: this.onColumnChange,
+        },
+        {
+          key: "Size",
+          title: t("Common:Size"),
+          enable: this.props.sizeColumnIsEnabled,
+          resizable: true,
+          sortBy: SortByFieldName.Size,
+          onClick: this.onFilter,
+          onChange: this.onColumnChange,
+        },
+        {
+          key: "Type",
+          title: t("Common:Type"),
+          enable: this.props.typeColumnIsEnabled,
           resizable: true,
           sortBy: SortByFieldName.Type,
           // onClick: this.onFilter,
@@ -329,6 +409,7 @@ class FilesTableHeader extends React.Component {
       isTrashFolder,
       columnStorageName,
       columnInfoPanelStorageName,
+      isRecentTab,
       isArchiveFolder,
     } = this.props;
 
@@ -337,7 +418,8 @@ class FilesTableHeader extends React.Component {
       isRooms !== prevProps.isRooms ||
       isTrashFolder !== prevProps.isTrashFolder ||
       columnStorageName !== prevProps.columnStorageName ||
-      columnInfoPanelStorageName !== prevProps.columnInfoPanelStorageName
+      columnInfoPanelStorageName !== prevProps.columnInfoPanelStorageName ||
+      isRecentTab !== prevProps.isRecentTab
     ) {
       return this.getTableColumns(true);
     }
@@ -400,11 +482,11 @@ class FilesTableHeader extends React.Component {
       window.DocSpace.navigate(
         `${
           window.DocSpace.location.pathname
-        }?key=${publicRoomKey}&${newFilter.toUrlParams()}`
+        }?key=${publicRoomKey}&${newFilter.toUrlParams()}`,
       );
     } else {
       window.DocSpace.navigate(
-        `${window.DocSpace.location.pathname}?${newFilter.toUrlParams()}`
+        `${window.DocSpace.location.pathname}?${newFilter.toUrlParams()}`,
       );
     }
   };
@@ -507,11 +589,11 @@ export default inject(
       roomsFilter,
       setRoomsFilter,
     } = filesStore;
-    const { isRecentFolder, isRoomsFolder, isArchiveFolder, isTrashFolder } =
+    const { isRecentTab, isRoomsFolder, isArchiveFolder, isTrashFolder } =
       treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
     const withContent = canShare;
-    const sortingVisible = !isRecentFolder;
+    const sortingVisible = true;
     const { withPaging, isFrame, frameConfig } = settingsStore;
 
     const {
@@ -532,6 +614,7 @@ export default inject(
       typeColumnIsEnabled,
       typeTrashColumnIsEnabled,
       quickButtonsColumnIsEnabled,
+      lastOpenedColumnIsEnabled,
 
       roomColumnNameIsEnabled,
       roomColumnTypeIsEnabled,
@@ -582,6 +665,7 @@ export default inject(
       typeColumnIsEnabled,
       typeTrashColumnIsEnabled,
       quickButtonsColumnIsEnabled,
+      lastOpenedColumnIsEnabled,
 
       roomColumnNameIsEnabled,
       roomColumnTypeIsEnabled,
@@ -600,14 +684,15 @@ export default inject(
 
       isFrame,
       frameTableColumns: frameConfig?.viewTableColumns,
+      isRecentTab,
       showSettings: frameConfig?.showSettings,
       isDefaultRoomsQuotaSet,
       showStorageInfo,
       isArchiveFolder,
     };
-  }
+  },
 )(
   withTranslation(["Files", "Common", "Translations", "Notifications"])(
-    observer(FilesTableHeader)
-  )
+    observer(FilesTableHeader),
+  ),
 );

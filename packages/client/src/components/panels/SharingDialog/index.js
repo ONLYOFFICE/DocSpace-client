@@ -73,7 +73,7 @@ const SharingDialog = ({
               <Text className="share-file_heading">{t("Files:Share")}</Text>
             </div>
             <div className="share-file_body">
-              <Share selection={sharingObject} />
+              <Share infoPanelSelection={sharingObject} />
             </div>
           </Scrollbar>
           <div className="share-file_footer">

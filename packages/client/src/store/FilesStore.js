@@ -1964,6 +1964,7 @@ class FilesStore {
         // "unsubscribe",
         "delete",
         "remove-from-recent",
+        "copy-general-link",
       ];
 
       if (!canDownload) {
@@ -3083,6 +3084,7 @@ class FilesStore {
         mute,
         inRoom,
         requestToken,
+        lastOpened,
         quotaLimit,
         usedSpace,
         isCustomQuota,
@@ -3252,6 +3254,7 @@ class FilesStore {
         isForm,
         canCopyPublicLink,
         requestToken,
+        lastOpened,
         quotaLimit,
         usedSpace,
         isCustomQuota,

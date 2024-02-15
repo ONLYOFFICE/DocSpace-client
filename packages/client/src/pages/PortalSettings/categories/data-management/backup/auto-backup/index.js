@@ -26,7 +26,7 @@ import RoomsModule from "./sub-components/RoomsModule";
 import ThirdPartyStorageModule from "./sub-components/ThirdPartyStorageModule";
 //import { getThirdPartyCommonFolderTree } from "@docspace/shared/api/files";
 import ButtonContainer from "./sub-components/ButtonContainer";
-import AutoBackupLoader from "@docspace/shared/skeletons/backup/auto-backup";
+import AutoBackupLoader from "@docspace/shared/skeletons/backup/AutoBackup";
 import { FloatingButton } from "@docspace/shared/components/floating-button";
 import { Badge } from "@docspace/shared/components/badge";
 import { Link } from "@docspace/shared/components/link";

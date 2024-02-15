@@ -1,4 +1,4 @@
-export interface AutoBackupLoaderProps {
+export interface BackupLoaderProps {
   id?: string;
   className?: string;
   style?: React.CSSProperties;

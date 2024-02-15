@@ -1,15 +1,15 @@
 import React from "react";
-import { RectangleSkeleton } from "../../rectangle";
+import { RectangleSkeleton } from "../rectangle";
 
-import StyledAutoBackup from "./AutoBackup.styled";
-import type { AutoBackupLoaderProps } from "./AutoBackup.types";
+import { StyledAutoBackup } from "./Backup.styled";
+import type { BackupLoaderProps } from "./Backup.types";
 
 const AutoBackupLoader = ({
   id,
   className,
   style,
   ...rest
-}: AutoBackupLoaderProps) => {
+}: BackupLoaderProps) => {
   const {
     title,
     borderRadius,

@@ -1,8 +1,15 @@
 import React from "react";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import StyledDataBackup from "./StyledDataBackup";
+import { RectangleSkeleton } from "../rectangle";
 
-const DataBackupLoader = ({ id, className, style, isRectangle, ...rest }) => {
+import { StyledDataBackup } from "./Backup.styled";
+import type { BackupLoaderProps } from "./Backup.types";
+
+const DataBackupLoader = ({
+  id,
+  className,
+  style,
+  ...rest
+}: BackupLoaderProps) => {
   const {
     title,
     borderRadius,
@@ -72,7 +79,7 @@ const DataBackupLoader = ({ id, className, style, isRectangle, ...rest }) => {
           speed={speed}
           animate={animate}
         />
-        <div></div>
+        <div />
         <RectangleSkeleton
           className="data-backup-loader_menu-description"
           title={title}

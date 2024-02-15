@@ -2208,7 +2208,6 @@ const SectionFilterContent = ({
       placeholder={t("Common:Search")}
       view={t("Common:View")}
       isFavoritesFolder={isFavoritesFolder}
-      isRecentTab={isRecentTab}
       isPersonalRoom={isPersonalRoom}
       isRooms={isRooms}
       removeSelectedItem={removeSelectedItem}

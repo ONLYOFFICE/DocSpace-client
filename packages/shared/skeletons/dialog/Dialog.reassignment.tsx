@@ -1,8 +1,9 @@
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { CircleSkeleton } from "@docspace/shared/skeletons";
-import StyledDataReassignmentLoader from "./StyledDataReassignmentLoader";
+import { CircleSkeleton } from "../circle";
+import { RectangleSkeleton } from "../rectangle";
 
-const DataReassignmentLoader = () => {
+import { StyledDataReassignmentLoader } from "./Dialog.styled";
+
+export const DialogReassignmentSkeleton = () => {
   return (
     <StyledDataReassignmentLoader>
       <div className="user">
@@ -34,5 +35,3 @@ const DataReassignmentLoader = () => {
     </StyledDataReassignmentLoader>
   );
 };
-
-export default DataReassignmentLoader;

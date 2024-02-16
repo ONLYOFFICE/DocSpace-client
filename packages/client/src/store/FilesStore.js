@@ -1783,7 +1783,7 @@ class FilesStore {
   };
 
   updateRoomQuota = async (quotaSize, itemsIDs, inRoom = false, filter) => {
-    const rooms = await api.rooms.setCustomRoomQuota(itemsIDs, quotaSize);
+    const rooms = await api.rooms.setCustomRoomQuota(itemsIDs, +quotaSize);
 
     if (!inRoom) await this.fetchRooms(null, filter, false, false, false);
 

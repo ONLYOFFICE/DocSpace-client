@@ -157,7 +157,7 @@ class UsersStore {
 
   setCustomUserQuota = async (quotaSize, userIds) => {
     const filter = this.peopleStore.filterStore.filter;
-    const users = await api.people.setCustomUserQuota(userIds, quotaSize);
+    const users = await api.people.setCustomUserQuota(userIds, +quotaSize);
 
     await this.getUsersList(filter, true);
 
@@ -197,7 +197,7 @@ class UsersStore {
     }
 
     const updatedUsers = this.users.map((user) =>
-      user.id === newProfile.id ? newProfile : user
+      user.id === newProfile.id ? newProfile : user,
     );
 
     this.setUsers(updatedUsers);
@@ -431,7 +431,7 @@ class UsersStore {
       isMySelf,
       statusType,
       role,
-      status
+      status,
     );
 
     const currentAvatar = hasAvatar ? avatar : DefaultUserPhotoSize32PngUrl;

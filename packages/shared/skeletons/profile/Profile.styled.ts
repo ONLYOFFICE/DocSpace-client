@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const FooterBlock = styled.div`
+export const FooterBlock = styled.div`
   .header {
     display: flex;
     flex-direction: column;
@@ -15,5 +15,3 @@ const FooterBlock = styled.div`
     padding-bottom: 26px;
   }
 `;
-
-export { FooterBlock };

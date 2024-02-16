@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { FooterBlock } from "./StyledProfileFooter";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { RowsSkeleton } from "@docspace/shared/skeletons";
 
 import { isDesktop } from "@docspace/shared/utils";
 
-const ProfileFooterLoader = ({ id, className, style, ...rest }) => {
+import { RowsSkeleton } from "../rows";
+import { RectangleSkeleton } from "../rectangle";
+
+import { FooterBlock } from "./Profile.styled";
+import { ProfileFooterLoaderProps } from "./Profile.types";
+
+export const ProfileFooterLoader = ({
+  id,
+  className,
+  style,
+  ...rest
+}: ProfileFooterLoaderProps) => {
   const {
     title,
     borderRadius,
@@ -20,15 +27,15 @@ const ProfileFooterLoader = ({ id, className, style, ...rest }) => {
 
   const [isDesktopView, setIsDesktopView] = useState(false);
 
+  const checkWidth = () => {
+    setIsDesktopView(isDesktop());
+  };
+
   useEffect(() => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
-
-  const checkWidth = () => {
-    setIsDesktopView(isDesktop());
-  };
 
   return (
     <div id={id} className={className} style={style}>
@@ -109,17 +116,3 @@ const ProfileFooterLoader = ({ id, className, style, ...rest }) => {
     </div>
   );
 };
-
-ProfileFooterLoader.propTypes = {
-  id: PropTypes.string,
-  className: PropTypes.string,
-  style: PropTypes.object,
-};
-
-ProfileFooterLoader.defaultProps = {
-  id: undefined,
-  className: undefined,
-  style: undefined,
-};
-
-export default ProfileFooterLoader;

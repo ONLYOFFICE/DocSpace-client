@@ -185,6 +185,14 @@ class ImportAccountsStore {
         withoutEmail: [],
         result: [],
       };
+      this.importOptions = {
+        importGroups: true,
+        importPersonalFiles: true,
+        importSharedFiles: true,
+        importSharedFolders: true,
+        importCommonFiles: true,
+        importProjectFiles: true,
+      };
     });
   };
 

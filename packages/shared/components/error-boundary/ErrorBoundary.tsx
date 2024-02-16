@@ -1,4 +1,6 @@
 import React, { ErrorInfo } from "react";
+import { ThemeProvider } from "styled-components";
+import { I18nextProvider } from "react-i18next";
 
 import Error520 from "../errors/Error520";
 
@@ -41,10 +43,31 @@ class ErrorBoundary extends React.Component<
       currentDeviceType,
       whiteLabelLogoUrls,
       currentColorScheme,
+      isNextJS,
+      theme,
+      i18n,
     } = this.props;
 
     if (error) {
       // You can render any custom fallback UI
+
+      if (isNextJS && theme && i18n) {
+        return (
+          <ThemeProvider theme={theme}>
+            <I18nextProvider i18n={i18n}>
+              <Error520
+                user={user}
+                errorLog={error}
+                version={version}
+                firebaseHelper={firebaseHelper}
+                currentDeviceType={currentDeviceType}
+                whiteLabelLogoUrls={whiteLabelLogoUrls}
+                currentColorScheme={theme.currentColorScheme}
+              />
+            </I18nextProvider>
+          </ThemeProvider>
+        );
+      }
       return (
         <Error520
           user={user}

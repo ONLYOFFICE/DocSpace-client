@@ -1782,7 +1782,7 @@ class FilesStore {
     return request();
   };
 
-  updateRoomQuota = async (quotaSize, itemsIDs, inRoom = false, filter) => {
+  setCustomRoomQuota = async (quotaSize, itemsIDs, inRoom = false, filter) => {
     const rooms = await api.rooms.setCustomRoomQuota(itemsIDs, +quotaSize);
 
     if (!inRoom) await this.fetchRooms(null, filter, false, false, false);

@@ -1804,14 +1804,14 @@ class FilesActionStore {
     window.dispatchEvent(event);
   };
   disableRoomQuota = async (items, t) => {
-    const { updateRoomQuota } = this.filesStore;
+    const { setCustomRoomQuota } = this.filesStore;
 
     const userIDs = items.map((item) => {
       return item?.id ? item.id : item;
     });
 
     try {
-      await updateRoomQuota(-1, userIDs);
+      await setCustomRoomQuota(-1, userIDs);
       toastr.success(t("Common:StorageQuotaDisabled"));
     } catch (e) {
       toastr.error(e);

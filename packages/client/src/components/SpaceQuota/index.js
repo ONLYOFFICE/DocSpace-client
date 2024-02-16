@@ -169,14 +169,14 @@ const SpaceQuota = (props) => {
 export default inject(
   (
     { peopleStore, filesActionsStore, filesStore, currentQuotaStore },
-    { type }
+    { type },
   ) => {
     const { changeUserQuota, usersStore, selectionStore } = peopleStore;
     const { setCustomUserQuota, resetUserQuota, needResetUserSelection } =
       usersStore;
     const { changeRoomQuota } = filesActionsStore;
     const {
-      updateRoomQuota,
+      setCustomRoomQuota,
       setSelected: setRoomsSelected,
       resetRoomQuota,
       needResetFilesSelection,
@@ -192,7 +192,8 @@ export default inject(
     const { setSelected: setUsersSelected } = selectionStore;
 
     const changeQuota = type === "user" ? changeUserQuota : changeRoomQuota;
-    const updateQuota = type === "user" ? setCustomUserQuota : updateRoomQuota;
+    const updateQuota =
+      type === "user" ? setCustomUserQuota : setCustomRoomQuota;
 
     const resetQuota = type === "user" ? resetUserQuota : resetRoomQuota;
 
@@ -215,5 +216,5 @@ export default inject(
       defaultSize,
       needResetSelection,
     };
-  }
+  },
 )(observer(SpaceQuota));

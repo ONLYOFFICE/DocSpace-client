@@ -37,7 +37,7 @@ const getInitialSize = (initialSize, initPower) => {
 const getInitialPower = (initialSize) => {
   if (initialSize > 0) return getPowerFromBytes(initialSize, 4);
 
-  return 0;
+  return 2;
 };
 
 const getOptions = (t) => [
@@ -156,7 +156,7 @@ const QuotaForm = ({
     initSize,
     power,
     size,
-    initialSize
+    initialSize,
   );
 
   return (

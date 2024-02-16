@@ -2950,7 +2950,13 @@ export const getBaseTheme = () => {
             tooltipColor: lightCumulus,
           },
           auditTrail: {
+            sideColor: "#A3A9AE",
+            nameColor: "#333333",
             downloadReportDescriptionColor: gray,
+          },
+          loginHistory: {
+            sideColor: "#A3A9AE",
+            nameColor: "#333333",
           },
         },
 

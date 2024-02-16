@@ -17,7 +17,6 @@ import Tiles from "./TilesLoader";
 
 import DialogLoader from "./DialogLoader";
 import DialogAsideLoader from "./DialogAsideLoader";
-import ListLoader from "./ListLoader";
 import SharingPanelLoader from "./SharingPanelLoader";
 import SharingPanelLoaderModal from "./SharingPanelLoader/modal";
 
@@ -53,8 +52,6 @@ export default {
 
   DialogLoader,
   DialogAsideLoader,
-
-  ListLoader,
   NewTreeFolders,
   SharingPanelLoader,
   SharingPanelLoaderModal,

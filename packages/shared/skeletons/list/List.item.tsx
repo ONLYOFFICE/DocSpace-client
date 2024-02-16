@@ -1,16 +1,18 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { StyledRow } from "./StyledListLoader";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+
+import { RectangleSkeleton } from "../rectangle";
+
+import { StyledRow } from "./List.styled";
+import { ListItemLoaderProps } from "./List.types";
 
 const ListItemLoader = ({
   id,
   className,
   style,
-  withoutFirstRectangle,
-  withoutLastRectangle,
+  withoutFirstRectangle = false,
+  withoutLastRectangle = false,
   ...rest
-}) => {
+}: ListItemLoaderProps) => {
   const {
     title,
     borderRadius,
@@ -89,22 +91,6 @@ const ListItemLoader = ({
       )}
     </StyledRow>
   );
-};
-
-ListItemLoader.propTypes = {
-  id: PropTypes.string,
-  className: PropTypes.string,
-  style: PropTypes.object,
-  withoutFirstRectangle: PropTypes.bool,
-  withoutLastRectangle: PropTypes.bool,
-};
-
-ListItemLoader.defaultProps = {
-  id: undefined,
-  className: undefined,
-  style: undefined,
-  withoutFirstRectangle: false,
-  withoutLastRectangle: false,
 };
 
 export default ListItemLoader;

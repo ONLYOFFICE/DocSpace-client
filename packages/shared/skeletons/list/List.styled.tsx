@@ -1,11 +1,12 @@
 import styled from "styled-components";
-
-import { desktop } from "@docspace/shared/utils";
+import { ListItemLoaderProps } from "./List.types";
 
 const StyledList = styled.div`
   padding: 0 16px;
 `;
-const StyledRow = styled.div`
+const StyledRow = styled.div<
+  Pick<ListItemLoaderProps, "withoutFirstRectangle" | "withoutLastRectangle">
+>`
   width: 100%;
   display: grid;
   grid-template-columns: 16px 32px 1fr 16px;

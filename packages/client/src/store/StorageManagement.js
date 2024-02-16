@@ -20,6 +20,7 @@ class StorageManagement {
   quotaSettings = {};
   intervalId = null;
 
+  needRecalculating = false;
   isRecalculating = false;
 
   constructor(filesStore, peopleStore, authStore) {
@@ -29,7 +30,7 @@ class StorageManagement {
     makeAutoObservable(this);
   }
 
-  init = async () => {
+  basicRequests = async (isInit) => {
     const { fetchRooms } = this.filesStore;
     const { usersStore } = this.peopleStore;
     const { getUsersList } = usersStore;
@@ -39,21 +40,33 @@ class StorageManagement {
 
     const roomFilterData = RoomsFilter.getDefault();
     roomFilterData.pageCount = FILTER_COUNT;
+    const requests = [
+      getUsersList(userFilterData),
+      fetchRooms(null, roomFilterData),
+      getPortal(),
+      getPortalUsersCount(),
+      getFilesUsedSpace(),
+      getQuotaSettings(),
+    ];
 
+    isInit && requests.push(checkRecalculateQuota());
+
+    [
+      ,
+      ,
+      this.portalInfo,
+      this.activeUsersCount,
+      this.filesUsedSpace,
+      this.quotaSettings,
+      this.needRecalculating,
+    ] = await Promise.all(requests);
+
+    if (this.needRecalculating) this.getIntervalCheckRecalculate();
+  };
+
+  init = async () => {
     try {
-      [
-        this.portalInfo,
-        this.activeUsersCount,
-        this.filesUsedSpace,
-        this.quotaSettings,
-      ] = await Promise.all([
-        getPortal(),
-        getPortalUsersCount(),
-        getFilesUsedSpace(),
-        getQuotaSettings(),
-        getUsersList(userFilterData),
-        fetchRooms(null, roomFilterData),
-      ]);
+      await this.basicRequests(true);
 
       this.isInit = true;
     } catch (e) {
@@ -108,7 +121,7 @@ class StorageManagement {
           this.setIsRecalculating(false);
 
           try {
-            this.quotaSettings = await getQuotaSettings();
+            await this.basicRequests();
           } catch (e) {
             toastr.error(e);
           }

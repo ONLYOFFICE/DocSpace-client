@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import moment from "moment";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -14,20 +13,11 @@ const RecalculateButton = (props) => {
 
   const {
     isRecalculating,
-    getIntervalCheckRecalculate,
-    clearIntervalCheckRecalculate,
     setIsRecalculating,
     lastRecalculateDate,
   } = props;
 
-  useEffect(() => {
-    getIntervalCheckRecalculate();
-
-    return () => {
-      clearIntervalCheckRecalculate();
-    };
-  }, []);
-
+ 
   const onRecalculateClick = async () => {
     try {
       setIsRecalculating(true);
@@ -78,7 +68,6 @@ export default inject(({ storageManagement }) => {
   return {
     isRecalculating,
     getIntervalCheckRecalculate,
-    clearIntervalCheckRecalculate,
     setIsRecalculating,
     lastRecalculateDate,
   };

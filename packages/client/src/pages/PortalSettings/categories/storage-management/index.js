@@ -11,10 +11,19 @@ import MainInfoComponent from "./MainInfo";
 import { StyledBody } from "./StyledComponent";
 import StyledSettingsSeparator from "../../StyledSettingsSeparator";
 
-const StorageManagement = ({ isInit, language, init }) => {
+const StorageManagement = ({
+  isInit,
+  language,
+  init,
+  clearIntervalCheckRecalculate,
+}) => {
   useEffect(() => {
     moment.locale(language);
     init();
+
+    return () => {
+      clearIntervalCheckRecalculate();
+    };
   }, []);
 
   if (!isInit) return <Loaders.SettingsStorageManagement />;
@@ -34,10 +43,11 @@ const StorageManagement = ({ isInit, language, init }) => {
 
 export default inject(({ authStore, storageManagement }) => {
   const { language } = authStore;
-  const { init, isInit } = storageManagement;
+  const { init, isInit, clearIntervalCheckRecalculate } = storageManagement;
   return {
     isInit,
     language,
     init,
+    clearIntervalCheckRecalculate,
   };
 })(observer(StorageManagement));

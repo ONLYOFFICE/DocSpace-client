@@ -25,6 +25,7 @@ import { UserStore } from "./UserStore";
 
 class CurrentQuotasStore {
   currentPortalQuota: Nullable<TPaymentQuota> = null;
+
   userStore: UserStore | null = null;
 
   currentPortalQuotaFeatures: TPaymentFeature[] = [];
@@ -218,7 +219,8 @@ class CurrentQuotasStore {
   }
 
   get showTenantCustomQuotaBar() {
-    if (!this.isTenantCustomQuotaSet) return false;
+    if (!this.isTenantCustomQuotaSet || this.tenantCustomQuota === undefined)
+      return false;
     if (!this.tenantCustomQuota) return false;
 
     return (

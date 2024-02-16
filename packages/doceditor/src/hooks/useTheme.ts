@@ -4,10 +4,13 @@ import { Base, Dark, TColorScheme, TTheme } from "@docspace/shared/themes";
 import { getSystemTheme } from "@docspace/shared/utils";
 import { ThemeKeys } from "@docspace/shared/enums";
 import { getAppearanceTheme } from "@docspace/shared/api/settings";
-
-import { UseThemeProps } from "@/types";
+import { TUser } from "@docspace/shared/api/people/types";
 
 const SYSTEM_THEME = getSystemTheme();
+
+export interface UseThemeProps {
+  user?: TUser;
+}
 
 const useTheme = ({ user }: UseThemeProps) => {
   const [currentColorTheme, setCurrentColorTheme] =
@@ -34,7 +37,7 @@ const useTheme = ({ user }: UseThemeProps) => {
   }, []);
 
   const getUserTheme = React.useCallback(() => {
-    if (!currentColorTheme) return;
+    if (!currentColorTheme || !user?.theme) return;
     let theme = user.theme;
     if (user.theme === ThemeKeys.SystemStr) theme = SYSTEM_THEME;
 
@@ -50,7 +53,7 @@ const useTheme = ({ user }: UseThemeProps) => {
       currentColorScheme: currentColorTheme,
       interfaceDirection: "ltr",
     });
-  }, [currentColorTheme, user.theme]);
+  }, [currentColorTheme, user?.theme]);
 
   React.useEffect(() => {
     getCurrentColorTheme();

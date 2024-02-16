@@ -1,20 +1,27 @@
 import styled from "styled-components";
 import { Base } from "@docspace/shared/themes";
 import { tablet } from "@docspace/shared/utils";
+import { StyledInfoPanelHeaderProps } from "./Header.types";
 
-const getHeaderHeight = ({ withSubmenu, isTablet }) => {
+const getHeaderHeight = ({
+  withSubmenu,
+  isTablet,
+}: StyledInfoPanelHeaderProps) => {
   let res = isTablet ? 53 : 69;
   if (withSubmenu) res += 32;
   return `${res}px`;
 };
 
-const getMainHeight = ({ withSubmenu, isTablet }) => {
+const getMainHeight = ({
+  withSubmenu,
+  isTablet,
+}: StyledInfoPanelHeaderProps) => {
   let res = isTablet ? 52 : 68;
   if (withSubmenu) res += 1;
   return `${res}px`;
 };
 
-const StyledInfoPanelHeader = styled.div`
+const StyledInfoPanelHeader = styled.div<StyledInfoPanelHeaderProps>`
   width: 100%;
   max-width: 100%;
 

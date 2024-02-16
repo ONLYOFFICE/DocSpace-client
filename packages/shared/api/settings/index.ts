@@ -1052,10 +1052,7 @@ export function migrationCancel() {
 }
 
 export function migrationLog() {
-  return request({
-    method: "get",
-    url: `/migration/logs`,
-  });
+  return axios.get("/api/2.0/migration/logs");
 }
 
 export function migrationFinish(data) {

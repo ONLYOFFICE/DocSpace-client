@@ -329,8 +329,16 @@ class ImportAccountsStore {
     return migrationStatus();
   };
 
-  getMigrationLog = () => {
-    return migrationLog();
+  getMigrationLog = async () => {
+    return migrationLog()
+      .then((response) => {
+        if (!response || !response.data) return null;
+        return response.data;
+      })
+      .catch((error) => {
+        console.log("Request Failed:", { error });
+        return Promise.reject(error);
+      });
   };
 
   sendWelcomeLetter = (data) => {

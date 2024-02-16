@@ -214,33 +214,27 @@ const Wizard = (props) => {
   };
 
   const validateFields = () => {
+    let anyError = false;
     const emptyEmail = email.trim() === "";
     const emptyPassword = password.trim() === "";
-
-    console.log(emptyEmail, email);
 
     if (emptyEmail || emptyPassword) {
       emptyEmail && setHasErrorEmail(true);
       emptyPassword && setHasErrorPass(true);
+      anyError = true;
     }
 
     if (!agreeTerms) {
       setHasErrorAgree(true);
+      anyError = true;
     }
 
-    if (isLicenseRequired && !licenseUpload) {
+    if (isLicenseRequired && licenseUpload === null) {
       setHasErrorLicense(true);
+      anyError = true;
     }
 
-    if (
-      emptyEmail ||
-      emptyPassword ||
-      hasErrorEmail ||
-      hasErrorPass ||
-      !agreeTerms ||
-      (isLicenseRequired && !licenseUpload)
-    )
-      return false;
+    if (anyError || hasErrorEmail || hasErrorPass) return false;
 
     return true;
   };

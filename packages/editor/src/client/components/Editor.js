@@ -31,7 +31,7 @@ import {
 import { getEditorTheme } from "@docspace/shared/utils";
 import { toastr } from "@docspace/shared/components/toast";
 import { DocumentEditor } from "@onlyoffice/document-editor-react";
-import ErrorContainer from "@docspace/common/components/ErrorContainer";
+import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
 import DeepLink from "./DeepLink";
 import { getDeepLink } from "../helpers/deepLinkHelper";
 

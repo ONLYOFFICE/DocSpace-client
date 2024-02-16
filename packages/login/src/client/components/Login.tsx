@@ -14,8 +14,8 @@ import { PROVIDERS_DATA } from "@docspace/shared/constants";
 import { Link } from "@docspace/shared/components/link";
 import { Toast } from "@docspace/shared/components/toast";
 import LoginForm from "./sub-components/LoginForm";
-import MoreLoginModal from "@docspace/common/components/MoreLoginModal";
-import RecoverAccessModalDialog from "@docspace/common/components/Dialogs/RecoverAccessModalDialog";
+import RecoverAccessModalDialog from "@docspace/shared/components/recover-access-modal-dialog/RecoverAccessModalDialog";
+import MoreLoginModal from "@docspace/shared/components/more-login-modal";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import Register from "./sub-components/register-container";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
@@ -216,8 +216,8 @@ const Login: React.FC<ILoginProps> = ({
   const logoUrl = !logo
     ? undefined
     : !theme?.isBase
-    ? getLogoFromPath(logo.path.dark)
-    : getLogoFromPath(logo.path.light);
+      ? getLogoFromPath(logo.path.dark)
+      : getLogoFromPath(logo.path.light);
 
   if (!mounted) return <></>;
   if (isRestoringPortal) return <></>;

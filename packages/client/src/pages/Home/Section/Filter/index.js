@@ -237,6 +237,8 @@ const COLUMNS_SIZE_INFO_PANEL = `filesColumnsSizeInfoPanel_ver-${TableVersions.F
 
 const TABLE_ROOMS_COLUMNS = `roomsTableColumns_ver-${TableVersions.Rooms}`;
 
+const TABLE_RECENT_COLUMNS = `recentTableColumns_ver-${TableVersions.Recent}`;
+
 const COLUMNS_ROOMS_SIZE_INFO_PANEL = `roomsColumnsSizeInfoPanel_ver-${TableVersions.Rooms}`;
 
 const TABLE_TRASH_COLUMNS = `trashTableColumns_ver-${TableVersions.Trash}`;
@@ -254,6 +256,8 @@ const COLUMNS_GROUPS_SIZE_INFO_PANEL = `infoPanelGroupsColumnsSize_ver-${TableVe
 const TABLE_INSIDE_GROUP_COLUMNS = `insideGroupTableColumns_ver-${TableVersions.InsideGroup}`;
 
 const COLUMNS_INSIDE_GROUP_SIZE_INFO_PANEL = `infoPanelInsideGroupPeopleColumnsSize_ver-${TableVersions.InsideGroup}`;
+
+const COLUMNS_RECENT_SIZE_INFO_PANEL = `recentColumnsSizeInfoPanel_ver-${TableVersions.Recent}`;
 
 const SectionFilterContent = ({
   t,
@@ -467,6 +471,7 @@ const SectionFilterContent = ({
     [
       isRooms,
       isTrash,
+      isRecentTab,
       setIsLoading,
       roomsFilter,
       accountsFilter,
@@ -634,6 +639,7 @@ const SectionFilterContent = ({
       isRooms,
       isPeopleAccounts,
       isGroupsAccounts,
+      isAccountsPage,
       setIsLoading,
       filter,
       roomsFilter,
@@ -1993,6 +1999,13 @@ const SectionFilterContent = ({
       label: t("Common:LastModifiedDate"),
       default: true,
     };
+    const lastOpenedDate = {
+      id: "sort-by_last-opened",
+      key: SortByFieldName.LastOpened,
+      label: t("DateLastOpened"),
+      default: true,
+    };
+
     const room = {
       id: "sort-by_room",
       key: SortByFieldName.Room,
@@ -2161,6 +2174,34 @@ const SectionFilterContent = ({
             infoPanelColumnsSize[idx] === "0px";
 
           // !hide && commonOptions.push(type);
+        }
+      } else if (isRecentTab) {
+        const availableSort = localStorage
+          ?.getItem(`${TABLE_RECENT_COLUMNS}=${userId}`)
+          ?.split(",");
+
+        const infoPanelColumnsSize = localStorage
+          ?.getItem(`${COLUMNS_RECENT_SIZE_INFO_PANEL}=${userId}`)
+          ?.split(" ");
+
+        if (availableSort?.includes("LastOpened")) {
+          const idx = availableSort.findIndex((x) => x === "LastOpened");
+          const hide =
+            infoPanelVisible &&
+            infoPanelColumnsSize &&
+            infoPanelColumnsSize[idx] === "0px";
+
+          !hide && commonOptions.push(lastOpenedDate);
+        }
+
+        if (availableSort?.includes("Size")) {
+          const idx = availableSort.findIndex((x) => x === "Size");
+          const hide =
+            infoPanelVisible &&
+            infoPanelColumnsSize &&
+            infoPanelColumnsSize[idx] === "0px";
+
+          !hide && commonOptions.push(size);
         }
       } else {
         const availableSort = localStorage
@@ -2466,7 +2507,6 @@ const SectionFilterContent = ({
       placeholder={t("Common:Search")}
       view={t("Common:View")}
       isFavoritesFolder={isFavoritesFolder}
-      isRecentTab={isRecentTab}
       isPersonalRoom={isPersonalRoom}
       isRooms={isRooms}
       removeSelectedItem={removeSelectedItem}

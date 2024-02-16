@@ -5,6 +5,7 @@ import styled, { css } from "styled-components";
 import { Button } from "@docspace/shared/components/button";
 import { withTranslation } from "react-i18next";
 import { isMobileOnly } from "react-device-detect";
+import { isMobile } from "@docspace/shared/utils";
 
 const StyledComponent = styled(ModalDialog)`
   .modal-dialog-aside-footer {
@@ -29,6 +30,11 @@ const StyledComponent = styled(ModalDialog)`
     :not(:last-child) {
       padding-bottom: 20px;
     }
+
+    ${!isMobile() &&
+    css`
+      max-width: 448px;
+    `}
   }
 
   .name-color {
@@ -41,7 +47,7 @@ const StyledComponent = styled(ModalDialog)`
     position: relative;
   }
 
-  ?.accent-box {
+  .accent-box {
     background: ${(props) =>
       props.currentColorAccent
         ? props.currentColorAccent
@@ -82,6 +88,19 @@ const StyledComponent = styled(ModalDialog)`
     :hover {
       background-color: unset;
     }
+
+    ${!isMobile() &&
+    css`
+      max-width: 227px;
+
+      .hex-color-picker {
+        max-width: 195px;
+      }
+
+      .react-colorful__interactive {
+        max-width: 183px;
+      }
+    `}
   }
 `;
 
@@ -117,6 +136,7 @@ const ColorSchemeDialog = (props) => {
       currentColorAccent={currentColorAccent}
       currentColorButtons={currentColorButtons}
       withFooterBorder={showSaveButtonDialog}
+      withBodyScroll={true}
     >
       <ModalDialog.Header>{header}</ModalDialog.Header>
       <ModalDialog.Body>

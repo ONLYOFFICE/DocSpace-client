@@ -35,6 +35,7 @@ const User = ({
   infoPanelMembers,
   setInfoPanelMembers,
   searchValue,
+  resendEmailInvitations,
 }) => {
   if (!infoPanelSelection) return null;
   if (!user.displayName && !user.name && !user.email) return null;
@@ -198,8 +199,22 @@ const User = ({
   const onToggle = (e, isOpen) => {
     // setIsScrollLocked(isOpen);
   };
-  const role = getUserRole(user);
-  const typeLabel = getUserTypeLabel(role, t);
+  const getUserType = (item) => {
+    if (item.isOwner) return "owner";
+    if (item.isAdmin) return "admin";
+    if (item.isRoomAdmin) return "manager";
+    if (item.isCollaborator) return "collaborator";
+    return "user";
+  };
+
+  const type = getUserType(user);
+  const role = getUserRole(user, userRole?.type);
+
+  const typeLabel =
+    (type === "user" && userRole?.type !== type) ||
+    (userRole?.type === "manager" && type !== "admin")
+      ? getUserTypeLabel(userRole?.type, t)
+      : getUserTypeLabel(type, t);
 
   const getTooltipContent = () => (
     <div>

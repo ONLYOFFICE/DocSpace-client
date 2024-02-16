@@ -17,7 +17,7 @@ import {
 import withLoader from "../withLoader";
 
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-import DocspaceLogo from "../../../DocspaceLogo";
+import DocspaceLogo from "../../../components/DocspaceLogoWrapper";
 
 const DeactivatePortal = (props) => {
   const { t, greetingTitle, linkData, companyInfoSettingsData } = props;

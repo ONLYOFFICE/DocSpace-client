@@ -105,6 +105,7 @@ const AddUsersPanel = ({
         isAdmin: item.isAdmin,
         isVisitor: item.isVisitor,
         isCollaborator: item.isCollaborator,
+        isRoomAdmin: item.isRoomAdmin,
       };
 
       if (item.isGroup) {
@@ -161,6 +162,7 @@ const AddUsersPanel = ({
       isCollaborator,
       isGroup,
       name: groupName,
+      isRoomAdmin,
     } = item;
 
     const role = getUserRole(item);
@@ -179,6 +181,7 @@ const AddUsersPanel = ({
       isVisitor,
       isCollaborator,
       isGroup,
+      isRoomAdmin,
     };
   };
 
@@ -270,7 +273,7 @@ const AddUsersPanel = ({
               color="#A3A9AE"
               dir="auto"
             >
-              {`${capitalize(userType)} | ${email}`}
+              {`${userType} | ${email}`}
             </Text>
           </div>
         )}

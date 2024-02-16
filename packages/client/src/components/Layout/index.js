@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
 import MobileLayout from "./MobileLayout";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -30,6 +30,17 @@ const StyledContainer = styled.div`
       -webkit-user-select: none;
     }
   }
+
+  ${(props) =>
+    isMobileOnly &&
+    isIOS &&
+    !props.isPortrait &&
+    css`
+      display: flex;
+      width: auto;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right)
+        env(safe-area-inset-bottom) env(safe-area-inset-left);
+    `}
 `;
 
 const Layout = (props) => {
@@ -87,7 +98,7 @@ const Layout = (props) => {
       window.removeEventListener("orientationchange", onOrientationChange);
       window?.visualViewport?.removeEventListener(
         "resize",
-        onOrientationChange
+        onOrientationChange,
       );
       window.removeEventListener("scroll", onScroll);
     };
@@ -215,7 +226,11 @@ const Layout = (props) => {
   };
 
   return (
-    <StyledContainer className="Layout" contentHeight={contentHeight}>
+    <StyledContainer
+      className="Layout"
+      contentHeight={contentHeight}
+      isPortrait={isPortrait}
+    >
       {isMobileUtils() ? <MobileLayout {...props} /> : children}
     </StyledContainer>
   );

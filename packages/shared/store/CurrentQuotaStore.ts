@@ -149,6 +149,7 @@ class CurrentQuotasStore {
 
     return result?.value;
   }
+
   get isStatisticsAvailable() {
     const result = this.currentPortalQuotaFeatures.find(
       (obj) => obj.id === "statistic",
@@ -156,6 +157,7 @@ class CurrentQuotasStore {
 
     return result?.value;
   }
+
   get isRestoreAndAutoBackupAvailable() {
     const result = this.currentPortalQuotaFeatures.find(
       (obj) => obj.id === "restore",
@@ -213,14 +215,17 @@ class CurrentQuotasStore {
       PERCENTAGE_FOR_SHOWING_BAR
     );
   }
+
   get showTenantCustomQuotaBar() {
     if (!this.isTenantCustomQuotaSet) return false;
+    if (!this.tenantCustomQuota) return false;
 
     return (
       (this.usedTotalStorageSizeCount / this.tenantCustomQuota) * 100 >=
       PERCENTAGE_FOR_SHOWING_BAR
     );
   }
+
   get showUserQuotaBar() {
     return (
       this.addedManagersCount > 1 &&
@@ -249,6 +254,7 @@ class CurrentQuotasStore {
   get isDefaultUsersQuotaSet() {
     return this.currentPortalQuota?.usersQuota?.enableQuota;
   }
+
   get isTenantCustomQuotaSet() {
     return this.currentPortalQuota?.tenantCustomQuota?.enableQuota;
   }
@@ -264,6 +270,7 @@ class CurrentQuotasStore {
   get tenantCustomQuota() {
     return this.currentPortalQuota?.tenantCustomQuota?.quota;
   }
+
   get showStorageInfo() {
     const user = this.userStore?.user;
 

@@ -8,7 +8,7 @@ import { Events } from "@docspace/shared/enums";
 const TABLE_VERSION = "6";
 const TABLE_COLUMNS = `insideGroupTableColumns_ver-${TABLE_VERSION}`;
 
-class PeopleTableHeader extends React.Component {
+class InsideGroupTableHeader extends React.Component {
   constructor(props) {
     super(props);
 
@@ -29,8 +29,17 @@ class PeopleTableHeader extends React.Component {
       {
         key: "Type",
         title: t("Common:Type"),
-        enable: props.typeAccountsColumnIsEnabled,
+        enable: true,
         sortBy: "type",
+        resizable: true,
+        onChange: this.onColumnChange,
+        onClick: this.onFilter,
+      },
+      {
+        key: "Department",
+        title: t("Department"),
+        enable: true,
+        sortBy: "department",
         resizable: true,
         onChange: this.onColumnChange,
         onClick: this.onFilter,
@@ -45,7 +54,7 @@ class PeopleTableHeader extends React.Component {
       {
         key: "Mail",
         title: t("Common:Email"),
-        enable: props.emailAccountsColumnIsEnabled,
+        enable: true,
         resizable: true,
         sortBy: "email",
         onChange: this.onColumnChange,
@@ -53,18 +62,37 @@ class PeopleTableHeader extends React.Component {
       },
     ];
 
-    const columns = props.getColumns(defaultColumns);
+    const columns = this.getColumns(defaultColumns);
 
     this.state = { columns };
   }
+
+  getColumns = (defaultColumns) => {
+    const storageColumns = localStorage.getItem(
+      `${TABLE_COLUMNS}=${this.props.userId}`,
+    );
+    const columns = [];
+
+    if (storageColumns) {
+      const splitColumns = storageColumns.split(",");
+
+      for (let col of defaultColumns) {
+        const column = splitColumns.find((key) => key === col.key);
+        column ? (col.enable = true) : (col.enable = false);
+
+        columns.push(col);
+      }
+      return columns;
+    } else {
+      return defaultColumns;
+    }
+  };
 
   onColumnChange = (key, e) => {
     const { columns } = this.state;
     const columnIndex = columns.findIndex((c) => c.key === key);
 
     if (columnIndex === -1) return;
-
-    this.props.setColumnEnable(key);
 
     columns[columnIndex].enable = !columns[columnIndex].enable;
     this.setState({ columns });
@@ -160,27 +188,18 @@ class PeopleTableHeader extends React.Component {
 
 export default inject(
   ({
-    settingsStore,
     peopleStore,
-    infoPanelStore,
     clientLoadingStore,
+    infoPanelStore,
+    settingsStore,
     userStore,
-    tableStore,
   }) => {
-    const { groupsStore } = peopleStore;
+    const { filterStore } = peopleStore;
 
-    const { insideGroupFilter: filter, setInsideGroupFilter: setFilter } =
-      groupsStore;
+    const { filter, setFilter } = filterStore;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { withPaging } = settingsStore;
-
-    const {
-      getColumns,
-      setColumnEnable,
-      typeAccountsColumnIsEnabled,
-      emailAccountsColumnIsEnabled,
-    } = tableStore;
 
     return {
       filter,
@@ -190,14 +209,10 @@ export default inject(
       userId: userStore.user?.id,
       infoPanelVisible,
       withPaging,
-      getColumns,
-      setColumnEnable,
-      typeAccountsColumnIsEnabled,
-      emailAccountsColumnIsEnabled,
     };
   },
 )(
   withTranslation(["People", "Common", "PeopleTranslations"])(
-    observer(PeopleTableHeader),
+    observer(InsideGroupTableHeader),
   ),
 );

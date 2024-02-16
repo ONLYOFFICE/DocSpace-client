@@ -19,6 +19,7 @@ import MoreLoginModal from "@docspace/shared/components/more-login-modal";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import Register from "./sub-components/register-container";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import SSOIcon from "PUBLIC_DIR/images/sso.react.svg";
 import { Dark, Base } from "@docspace/shared/themes";
 import { useMounted } from "../helpers/useMounted";
 import { getBgPattern, frameCallCommand } from "@docspace/shared/utils/common";

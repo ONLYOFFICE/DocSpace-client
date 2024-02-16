@@ -202,5 +202,4 @@ export interface FilterProps {
   onClearFilter: () => void;
   currentDeviceType: DeviceType;
   userId: string;
-  isRecentTab: boolean;
 }

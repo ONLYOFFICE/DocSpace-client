@@ -21,7 +21,6 @@ import SharingPanelLoader from "./SharingPanelLoader";
 import SharingPanelLoaderModal from "./SharingPanelLoader/modal";
 
 import SelectorBreadCrumbsLoader from "./SelectorBreadCrumbsLoader";
-import PaymentsStandaloneLoader from "./PaymentsStandaloneLoader";
 
 import SettingsHeader from "./SettingsLoader/SettingsHeaderLoader";
 import SettingsAdmin from "./SettingsLoader/SettingsAdminLoader";
@@ -55,7 +54,6 @@ export default {
   SharingPanelLoaderModal,
 
   SelectorBreadCrumbsLoader,
-  PaymentsStandaloneLoader,
 
   SettingsHeader,
   SettingsAdmin,

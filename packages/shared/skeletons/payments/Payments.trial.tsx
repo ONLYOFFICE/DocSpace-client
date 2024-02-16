@@ -1,8 +1,9 @@
 import React from "react";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { StyledEnterpriseComponent } from "../StyledComponent";
+import { StyledTrialComponent } from "./Payments.styled";
+import { PaymentsLoaderProps } from "./Payments.types";
 
-const EnterpriseLoader = ({ id, className, style, isRectangle, ...rest }) => {
+const TrialLoader = ({ className, style, ...rest }: PaymentsLoaderProps) => {
   const {
     title,
     borderRadius,
@@ -15,12 +16,12 @@ const EnterpriseLoader = ({ id, className, style, isRectangle, ...rest }) => {
   } = rest;
 
   return (
-    <StyledEnterpriseComponent>
+    <StyledTrialComponent>
       <RectangleSkeleton
         className="payments-loader_1"
         title={title}
         width="100%"
-        height="22px"
+        height="100%"
         borderRadius={borderRadius}
         backgroundColor={backgroundColor}
         foregroundColor={foregroundColor}
@@ -33,7 +34,7 @@ const EnterpriseLoader = ({ id, className, style, isRectangle, ...rest }) => {
         className="payments-loader_2"
         title={title}
         width="100%"
-        height="100%"
+        height="40px"
         borderRadius={borderRadius}
         backgroundColor={backgroundColor}
         foregroundColor={foregroundColor}
@@ -46,7 +47,7 @@ const EnterpriseLoader = ({ id, className, style, isRectangle, ...rest }) => {
         className="payments-loader_3"
         title={title}
         width="100%"
-        height="16px"
+        height="20px"
         borderRadius={borderRadius}
         backgroundColor={backgroundColor}
         foregroundColor={foregroundColor}
@@ -59,7 +60,7 @@ const EnterpriseLoader = ({ id, className, style, isRectangle, ...rest }) => {
         className="payments-loader_4"
         title={title}
         width="100%"
-        height="100%"
+        height="20px"
         borderRadius={borderRadius}
         backgroundColor={backgroundColor}
         foregroundColor={foregroundColor}
@@ -72,7 +73,7 @@ const EnterpriseLoader = ({ id, className, style, isRectangle, ...rest }) => {
         className="payments-loader_5"
         title={title}
         width="100%"
-        height="100%"
+        height="20px"
         borderRadius={borderRadius}
         backgroundColor={backgroundColor}
         foregroundColor={foregroundColor}
@@ -85,7 +86,7 @@ const EnterpriseLoader = ({ id, className, style, isRectangle, ...rest }) => {
         className="payments-loader_6"
         title={title}
         width="100%"
-        height="22px"
+        height="20px"
         borderRadius={borderRadius}
         backgroundColor={backgroundColor}
         foregroundColor={foregroundColor}
@@ -98,7 +99,7 @@ const EnterpriseLoader = ({ id, className, style, isRectangle, ...rest }) => {
         className="payments-loader_7"
         title={title}
         width="100%"
-        height="100%"
+        height="20px"
         borderRadius={borderRadius}
         backgroundColor={backgroundColor}
         foregroundColor={foregroundColor}
@@ -124,7 +125,7 @@ const EnterpriseLoader = ({ id, className, style, isRectangle, ...rest }) => {
         className="payments-loader_9"
         title={title}
         width="100%"
-        height="100%"
+        height="20px"
         borderRadius={borderRadius}
         backgroundColor={backgroundColor}
         foregroundColor={foregroundColor}
@@ -134,7 +135,7 @@ const EnterpriseLoader = ({ id, className, style, isRectangle, ...rest }) => {
         animate={animate}
       />
       <RectangleSkeleton
-        className="payments-loader_10"
+        className="payments-loader_9"
         title={title}
         width="100%"
         height="20px"
@@ -146,20 +147,7 @@ const EnterpriseLoader = ({ id, className, style, isRectangle, ...rest }) => {
         speed={speed}
         animate={animate}
       />
-      <RectangleSkeleton
-        className="payments-loader_11"
-        title={title}
-        width="100%"
-        height="20px"
-        borderRadius={borderRadius}
-        backgroundColor={backgroundColor}
-        foregroundColor={foregroundColor}
-        backgroundOpacity={backgroundOpacity}
-        foregroundOpacity={foregroundOpacity}
-        speed={speed}
-        animate={animate}
-      />
-    </StyledEnterpriseComponent>
+    </StyledTrialComponent>
   );
 };
-export default EnterpriseLoader;
+export default TrialLoader;

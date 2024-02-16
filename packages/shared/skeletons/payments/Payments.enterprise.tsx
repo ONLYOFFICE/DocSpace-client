@@ -1,8 +1,14 @@
 import React from "react";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { StyledTrialComponent } from "../StyledComponent";
+import { RectangleSkeleton } from "../rectangle";
 
-const TrialLoader = ({ id, className, style, isRectangle, ...rest }) => {
+import { StyledEnterpriseComponent } from "./Payments.styled";
+import type { PaymentsLoaderProps } from "./Payments.types";
+
+const EnterpriseLoader = ({
+  className,
+  style,
+  ...rest
+}: PaymentsLoaderProps) => {
   const {
     title,
     borderRadius,
@@ -15,12 +21,12 @@ const TrialLoader = ({ id, className, style, isRectangle, ...rest }) => {
   } = rest;
 
   return (
-    <StyledTrialComponent>
+    <StyledEnterpriseComponent>
       <RectangleSkeleton
         className="payments-loader_1"
         title={title}
         width="100%"
-        height="100%"
+        height="22px"
         borderRadius={borderRadius}
         backgroundColor={backgroundColor}
         foregroundColor={foregroundColor}
@@ -33,7 +39,7 @@ const TrialLoader = ({ id, className, style, isRectangle, ...rest }) => {
         className="payments-loader_2"
         title={title}
         width="100%"
-        height="40px"
+        height="100%"
         borderRadius={borderRadius}
         backgroundColor={backgroundColor}
         foregroundColor={foregroundColor}
@@ -46,7 +52,7 @@ const TrialLoader = ({ id, className, style, isRectangle, ...rest }) => {
         className="payments-loader_3"
         title={title}
         width="100%"
-        height="20px"
+        height="16px"
         borderRadius={borderRadius}
         backgroundColor={backgroundColor}
         foregroundColor={foregroundColor}
@@ -59,7 +65,7 @@ const TrialLoader = ({ id, className, style, isRectangle, ...rest }) => {
         className="payments-loader_4"
         title={title}
         width="100%"
-        height="20px"
+        height="100%"
         borderRadius={borderRadius}
         backgroundColor={backgroundColor}
         foregroundColor={foregroundColor}
@@ -72,7 +78,7 @@ const TrialLoader = ({ id, className, style, isRectangle, ...rest }) => {
         className="payments-loader_5"
         title={title}
         width="100%"
-        height="20px"
+        height="100%"
         borderRadius={borderRadius}
         backgroundColor={backgroundColor}
         foregroundColor={foregroundColor}
@@ -85,7 +91,7 @@ const TrialLoader = ({ id, className, style, isRectangle, ...rest }) => {
         className="payments-loader_6"
         title={title}
         width="100%"
-        height="20px"
+        height="22px"
         borderRadius={borderRadius}
         backgroundColor={backgroundColor}
         foregroundColor={foregroundColor}
@@ -98,7 +104,7 @@ const TrialLoader = ({ id, className, style, isRectangle, ...rest }) => {
         className="payments-loader_7"
         title={title}
         width="100%"
-        height="20px"
+        height="100%"
         borderRadius={borderRadius}
         backgroundColor={backgroundColor}
         foregroundColor={foregroundColor}
@@ -124,7 +130,7 @@ const TrialLoader = ({ id, className, style, isRectangle, ...rest }) => {
         className="payments-loader_9"
         title={title}
         width="100%"
-        height="20px"
+        height="100%"
         borderRadius={borderRadius}
         backgroundColor={backgroundColor}
         foregroundColor={foregroundColor}
@@ -134,7 +140,7 @@ const TrialLoader = ({ id, className, style, isRectangle, ...rest }) => {
         animate={animate}
       />
       <RectangleSkeleton
-        className="payments-loader_9"
+        className="payments-loader_10"
         title={title}
         width="100%"
         height="20px"
@@ -146,7 +152,20 @@ const TrialLoader = ({ id, className, style, isRectangle, ...rest }) => {
         speed={speed}
         animate={animate}
       />
-    </StyledTrialComponent>
+      <RectangleSkeleton
+        className="payments-loader_11"
+        title={title}
+        width="100%"
+        height="20px"
+        borderRadius={borderRadius}
+        backgroundColor={backgroundColor}
+        foregroundColor={foregroundColor}
+        backgroundOpacity={backgroundOpacity}
+        foregroundOpacity={foregroundOpacity}
+        speed={speed}
+        animate={animate}
+      />
+    </StyledEnterpriseComponent>
   );
 };
-export default TrialLoader;
+export default EnterpriseLoader;

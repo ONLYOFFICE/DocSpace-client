@@ -1,8 +1,10 @@
 import React from "react";
 import { RectangleSkeleton } from "../rectangle";
 
-import StyledPaymentsLoader from "./Payments.styled";
+import { StyledPaymentsLoader } from "./Payments.styled";
 import type { PaymentsLoaderProps } from "./Payments.types";
+
+export { PaymentsStandaloneLoader } from "./Payments.standalone";
 
 const PaymentsLoader = (props: PaymentsLoaderProps) => {
   const {

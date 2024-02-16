@@ -22,7 +22,7 @@ class GroupsStore {
 
   clientLoadingStore;
 
-  groups = [];
+  groups: any[] | undefined;
 
   selection = [];
 

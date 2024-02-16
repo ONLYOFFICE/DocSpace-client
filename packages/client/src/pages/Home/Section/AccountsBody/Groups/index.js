@@ -6,10 +6,12 @@ import { Consumer } from "@docspace/shared/utils/context";
 import withLoader from "SRC_DIR/HOCs/withLoader";
 import RowView from "./RowView";
 import { useLocation } from "react-router-dom";
+import { RowsSkeleton, TableSkeleton } from "@docspace/shared/skeletons";
 
 const Groups = ({
   tReady,
   accountsViewAs,
+  isGroupsLoaded,
   setPeopleSelection,
   setPeopleBufferSelection,
 }) => {
@@ -19,6 +21,11 @@ const Groups = ({
     setPeopleSelection([]);
     setPeopleBufferSelection();
   }, [location]);
+
+  if (!isGroupsLoaded) {
+    if (accountsViewAs === "table") return <TableSkeleton />;
+    return <RowsSkeleton />;
+  }
 
   return (
     <Consumer>
@@ -35,6 +42,7 @@ const Groups = ({
 
 export default inject(({ peopleStore }) => ({
   accountsViewAs: peopleStore.viewAs,
+  isGroupsLoaded: peopleStore.groupsStore.groups !== undefined,
   setPeopleSelection: peopleStore.selectionStore.setSelection,
   setPeopleBufferSelection: peopleStore.selectionStore.setBufferSelection,
 }))(

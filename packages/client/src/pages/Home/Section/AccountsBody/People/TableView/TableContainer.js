@@ -7,7 +7,6 @@ import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { Base } from "@docspace/shared/themes";
 import { TableContainer, TableBody } from "@docspace/shared/components/table";
-
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
 import EmptyScreenGroups from "../../EmptyScreenGroups";

@@ -77,7 +77,7 @@ const withLoader = (WrappedComponent) => (Loader) => {
         showBodyLoader,
         accountsViewAs,
       };
-    }
+    },
   )(observer(withLoader));
 };
 export default withLoader;

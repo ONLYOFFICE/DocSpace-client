@@ -63,6 +63,7 @@ class PeopleStore {
     userStore,
     tfaStore,
     settingsStore,
+    clientLoadingStore,
   ) {
     this.authStore = authStore;
     this.infoPanelStore = infoPanelStore;
@@ -72,7 +73,12 @@ class PeopleStore {
       infoPanelStore,
       userStore,
     );
-    this.groupsStore = new GroupsStore(authStore, this, infoPanelStore);
+    this.groupsStore = new GroupsStore(
+      authStore,
+      this,
+      infoPanelStore,
+      clientLoadingStore,
+    );
     this.targetUserStore = new TargetUserStore(this, userStore);
     this.selectedGroupStore = new SelectedGroupStore(this);
     this.editingFormStore = new EditingFormStore(this);

@@ -20,6 +20,8 @@ class GroupsStore {
 
   infoPanelStore;
 
+  clientLoadingStore;
+
   groups = [];
 
   selection = [];
@@ -36,10 +38,16 @@ class GroupsStore {
 
   insideGroupBackUrl: string | null = null;
 
-  constructor(authStore: any, peopleStore: any, infoPanelStore: any) {
+  constructor(
+    authStore: any,
+    peopleStore: any,
+    infoPanelStore: any,
+    clientLoadingStore: any,
+  ) {
     this.authStore = authStore;
     this.peopleStore = peopleStore;
     this.infoPanelStore = infoPanelStore;
+    this.clientLoadingStore = clientLoadingStore;
     makeAutoObservable(this);
   }
 
@@ -151,6 +159,7 @@ class GroupsStore {
     updateFilter = false,
     withFilterLocalStorage = false,
   ) => {
+    this.clientLoadingStore.setIsSectionBodyLoading(true);
     const filterData = filter ? filter.clone() : Filter.getDefault();
 
     const filterStorageItem = localStorage.getItem(
@@ -169,6 +178,7 @@ class GroupsStore {
 
     if (updateFilter) this.setFilterParams(filterData);
 
+    this.clientLoadingStore.setIsSectionBodyLoading(false);
     this.groups = res.items || [];
   };
 

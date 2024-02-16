@@ -147,6 +147,7 @@ const peopleStore = new PeopleStore(
   userStore,
   tfaStore,
   settingsStore,
+  clientLoadingStore,
 );
 
 const uploadDataStore = new UploadDataStore(

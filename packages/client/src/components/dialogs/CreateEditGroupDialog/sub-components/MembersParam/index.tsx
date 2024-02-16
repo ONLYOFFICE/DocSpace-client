@@ -57,6 +57,7 @@ const MembersParam = ({
         (member) =>
           member.id !== groupManager?.id && (
             <GroupMemberRow
+              key={member.id}
               groupMember={member}
               onClickRemove={() => onRemoveUserById(member.id)}
             />

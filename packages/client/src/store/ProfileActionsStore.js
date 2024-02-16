@@ -15,7 +15,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { isMobile } from "react-device-detect";
 
-import { ZendeskAPI } from "@docspace/shared/components/zendesk";
+import { zendeskAPI } from "@docspace/shared/components/zendesk/Zendesk.utils";
 import { LIVE_CHAT_LOCAL_STORAGE_KEY } from "@docspace/shared/constants";
 import { toastr } from "@docspace/shared/components/toast";
 import { isDesktop, isTablet } from "@docspace/shared/utils";
@@ -27,7 +27,7 @@ const PROFILE_SELF_URL = combineUrl(PROXY_HOMEPAGE_URL, "/profile");
 const ABOUT_URL = combineUrl(PROXY_HOMEPAGE_URL, "/about");
 const PAYMENTS_URL = combineUrl(
   PROXY_HOMEPAGE_URL,
-  "/portal-settings/payments/portal-payments"
+  "/portal-settings/payments/portal-payments",
 );
 
 //const VIDEO_GUIDES_URL = "https://onlyoffice.com/";
@@ -55,7 +55,7 @@ class ProfileActionsStore {
     selectedFolderStore,
     pluginStore,
     userStore,
-    settingsStore
+    settingsStore,
   ) {
     this.authStore = authStore;
     this.filesStore = filesStore;
@@ -151,7 +151,7 @@ class ProfileActionsStore {
 
     this.setStateLiveChat(isShow);
 
-    ZendeskAPI("webWidget", isShow ? "show" : "hide");
+    zendeskAPI.addChanges("webWidget", isShow ? "show" : "hide");
 
     toastr.success(isShow ? t("LiveChatOn") : t("LiveChatOff"));
   };
@@ -190,7 +190,7 @@ class ProfileActionsStore {
       const ssoLogoutUrl = await this.authStore.logout(false);
 
       window.location.replace(
-        combineUrl(window.DocSpaceConfig?.proxy?.url, ssoLogoutUrl || "/login")
+        combineUrl(window.DocSpaceConfig?.proxy?.url, ssoLogoutUrl || "/login"),
       );
     } catch (e) {
       console.error(e);

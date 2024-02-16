@@ -1,7 +1,10 @@
 import React from "react";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import StyledPaymentsLoader from "./StyledPaymentsLoader";
-const PaymentsLoader = ({ id, className, style, isRectangle, ...rest }) => {
+import { RectangleSkeleton } from "../rectangle";
+
+import StyledPaymentsLoader from "./Payments.styled";
+import type { PaymentsLoaderProps } from "./Payments.types";
+
+const PaymentsLoader = (props: PaymentsLoaderProps) => {
   const {
     title,
     borderRadius,
@@ -11,7 +14,7 @@ const PaymentsLoader = ({ id, className, style, isRectangle, ...rest }) => {
     foregroundOpacity,
     speed,
     animate,
-  } = rest;
+  } = props;
 
   return (
     <StyledPaymentsLoader>

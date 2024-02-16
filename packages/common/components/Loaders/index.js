@@ -20,8 +20,6 @@ import DialogAsideLoader from "./DialogAsideLoader";
 import SharingPanelLoader from "./SharingPanelLoader";
 import SharingPanelLoaderModal from "./SharingPanelLoader/modal";
 
-import PaymentsLoader from "./PaymentsLoader";
-
 import SelectorBreadCrumbsLoader from "./SelectorBreadCrumbsLoader";
 import PaymentsStandaloneLoader from "./PaymentsStandaloneLoader";
 
@@ -55,8 +53,6 @@ export default {
   NewTreeFolders,
   SharingPanelLoader,
   SharingPanelLoaderModal,
-
-  PaymentsLoader,
 
   SelectorBreadCrumbsLoader,
   PaymentsStandaloneLoader,

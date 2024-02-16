@@ -46,6 +46,11 @@ import {
   RegisterContainer,
 } from "./StyledCreateUser";
 
+const DEFAULT_ROOM_TEXT =
+  "<strong>{{firstName}} {{lastName}}</strong> invites you to join the room <strong>{{roomName}}</strong> for secure document collaboration.";
+const DEFAULT_PORTAL_TEXT =
+  "<strong>{{firstName}} {{lastName}}</strong> invites you to join the room <strong>{{roomName}}</strong> for secure document collaboration.";
+
 const CreateUserForm = (props) => {
   const {
     settings,
@@ -428,67 +433,37 @@ const CreateUserForm = (props) => {
     );
   };
 
-  const userAvatar = user && user.hasAvatar ? user.avatar : DefaultUserPhoto;
-
   return (
     <StyledPage>
       <StyledContent>
         <ConfirmContainer>
           <GreetingContainer>
             <DocspaceLogo className="docspace-logo" />
-            <Text
-              fontSize="23px"
-              fontWeight={700}
-              textAlign="left"
-              className="greeting-title"
-            >
-              {greetingTitle}
-            </Text>
-
             {showGreeting && (
-              <>
-                {user && (
-                  <div className="greeting-block">
-                    <Avatar
-                      className="avatar"
-                      role="user"
-                      source={userAvatar}
-                    />
-                    <div className="user-info">
-                      <Text fontSize="15px" fontWeight={600}>
-                        {user.firstName} {user.lastName}
-                      </Text>
-                      <Text fontSize="12px" fontWeight={600} color="#A3A9AE">
-                        {user.department}
-                      </Text>
-                    </div>
-                  </div>
-                )}
-
-                <div className="tooltip">
-                  <p className="tooltiptext">
-                    {roomName ? (
-                      <Trans
-                        t={t}
-                        i18nKey="WelcomeToRoom"
-                        ns="Confirm"
-                        key={roomName}
-                      >
-                        Welcome to the <strong>{{ roomName }}</strong> room!
-                      </Trans>
-                    ) : (
-                      t("WelcomeToDocspace")
-                    )}
-                  </p>
-                  <p className="tooltiptext">
-                    {ssoExists() && !oauthDataExists()
-                      ? t("WelcomeRegisterViaSSO")
-                      : oauthDataExists()
-                        ? t("WelcomeRegisterViaSocial")
-                        : t("WelcomeRegister")}
-                  </p>
-                </div>
-              </>
+              <div className="tooltip">
+                <Text fontSize="16px">
+                  <Trans
+                    t={t}
+                    i18nKey={
+                      roomName ? "InvitationToRoom" : "InvitationToPortal"
+                    }
+                    ns="Confirm"
+                    defaults={
+                      roomName ? DEFAULT_ROOM_TEXT : DEFAULT_PORTAL_TEXT
+                    }
+                    values={{
+                      firstName: user.firstName,
+                      lastName: user.lastName,
+                      ...(roomName
+                        ? { roomName }
+                        : { spaceAddress: window.location.host }),
+                    }}
+                    components={{
+                      1: <Text fontWeight={600} as="strong" fontSize="16px" />,
+                    }}
+                  />
+                </Text>
+              </div>
             )}
           </GreetingContainer>
 

@@ -1,5 +1,10 @@
 import { makeAutoObservable } from "mobx";
 
+import {
+  setDefaultUserQuota,
+  setDefaultRoomQuota,
+} from "@docspace/shared/api/settings";
+
 import { toastr } from "../components/toast";
 import { TData } from "../components/toast/Toast.type";
 import { PortalFeaturesLimitations } from "../enums";
@@ -17,10 +22,6 @@ import {
 } from "../constants";
 import { Nullable } from "../types";
 import { UserStore } from "./UserStore";
-import {
-  setDefaultUserQuota,
-  setDefaultRoomQuota,
-} from "@docspace/shared/api/settings";
 
 class CurrentQuotasStore {
   currentPortalQuota: Nullable<TPaymentQuota> = null;
@@ -322,10 +323,10 @@ class CurrentQuotasStore {
   };
 
   setUserQuota = async (quota: string | number, t: (key: string) => string) => {
-    const isEnable = quota !== -1;
+    const isEnable = +quota !== -1;
 
     try {
-      await setDefaultUserQuota(isEnable, quota);
+      await setDefaultUserQuota(isEnable, +quota);
       const toastrText = isEnable
         ? t("MemoryQuotaEnabled")
         : t("MemoryQuotaDisabled");
@@ -337,10 +338,10 @@ class CurrentQuotasStore {
   };
 
   setRoomQuota = async (quota: string | number, t: (key: string) => string) => {
-    const isEnable = quota !== -1;
+    const isEnable = +quota !== -1;
 
     try {
-      await setDefaultRoomQuota(isEnable, quota);
+      await setDefaultRoomQuota(isEnable, +quota);
       const toastrText = isEnable
         ? t("MemoryQuotaEnabled")
         : t("MemoryQuotaDisabled");

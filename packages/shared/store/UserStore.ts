@@ -166,7 +166,7 @@ class UserStore {
 
     if (this.user.quotaLimit === -1) return false;
 
-    return this.user.quotaLimit <= this.user.usedSpace;
+    return +this.user.quotaLimit <= +this.user.usedSpace;
   }
 }
 

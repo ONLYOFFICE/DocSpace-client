@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
 
-import EmptyScreenGroupsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
+import EmptyScreenGroupSvgUrl from "PUBLIC_DIR/images/empty_screen_groups_75-75.svg?url";
+import EmptyScreenGroupSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_groups_dark_75-75.svg?url";
 
 import api from "../../api";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
@@ -35,6 +37,7 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
   } = props;
 
   const { t } = useTranslation(["GroupsSelector", "Common"]);
+  const theme = useTheme();
 
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [searchValue, setSearchValue] = useState("");
@@ -42,6 +45,10 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
   const [isNextPageLoading, setIsNextPageLoading] = useState(false);
   const [total, setTotal] = useState(0);
   const [itemsList, setItemsList] = useState<GroupsSelectorItem[]>([]);
+
+  const emptyScreenImg = theme.isBase
+    ? EmptyScreenGroupSvgUrl
+    : EmptyScreenGroupSvgDarkUrl;
 
   const onSearchAction = (value: string, isSearchCallback?: Function) => {
     setSearchValue(() => {
@@ -119,12 +126,12 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
       cancelButtonLabel={cancelButtonLabel || t("Common:CancelButton")}
       onCancel={onCancel}
       isMultiSelect={isMultiSelect}
-      emptyScreenImage={emptyScreenImage || EmptyScreenGroupsSvgUrl}
+      emptyScreenImage={emptyScreenImage || emptyScreenImg}
       emptyScreenHeader={emptyScreenHeader || t("GroupsNotFoundHeader")} // Todo: Update empty screen texts when they are ready
       emptyScreenDescription={
         emptyScreenDescription || t("GroupsNotFoundDescription")
       }
-      searchEmptyScreenImage={searchEmptyScreenImage || EmptyScreenGroupsSvgUrl}
+      searchEmptyScreenImage={searchEmptyScreenImage || emptyScreenImg}
       searchEmptyScreenHeader={
         searchEmptyScreenHeader || t("GroupsNotFoundHeader")
       }

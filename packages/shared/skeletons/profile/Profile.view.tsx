@@ -1,5 +1,11 @@
 import React from "react";
-import PropTypes from "prop-types";
+
+import { isMobile } from "@docspace/shared/utils";
+
+import { RectangleSkeleton } from "../rectangle";
+import { CircleSkeleton } from "../circle";
+
+import MobileViewLoader from "./Profile.mobile-view";
 import {
   StyledWrapper,
   MainBlock,
@@ -7,14 +13,15 @@ import {
   SocialBlock,
   SubBlock,
   ThemeBlock,
-} from "./StyledProfileView";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { CircleSkeleton } from "@docspace/shared/skeletons";
+} from "./Profile.styled";
+import { ProfileViewLoaderProps } from "./Profile.types";
 
-import MobileViewLoader from "./MobileView";
-import { isMobile } from "@docspace/shared/utils";
-
-const ProfileViewLoader = ({ id, className, style, ...rest }) => {
+export const ProfileViewLoader = ({
+  id,
+  className,
+  style,
+  ...rest
+}: ProfileViewLoaderProps) => {
   const {
     title,
     borderRadius,
@@ -429,17 +436,3 @@ const ProfileViewLoader = ({ id, className, style, ...rest }) => {
     </div>
   );
 };
-
-ProfileViewLoader.propTypes = {
-  id: PropTypes.string,
-  className: PropTypes.string,
-  style: PropTypes.object,
-};
-
-ProfileViewLoader.defaultProps = {
-  id: undefined,
-  className: undefined,
-  style: undefined,
-};
-
-export default ProfileViewLoader;

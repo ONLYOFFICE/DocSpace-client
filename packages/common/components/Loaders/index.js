@@ -7,7 +7,6 @@ import TreeSettingsLoader from "./TreeSettingsLoader";
 
 import Text from "./TextLoader";
 
-import ProfileView from "./ProfileViewLoader";
 import Notifications from "./NotificationsLoader";
 
 import Group from "./GroupLoader";
@@ -38,8 +37,6 @@ export default {
   TreeSettingsLoader,
 
   Text,
-
-  ProfileView,
 
   Group,
   Tile,

@@ -1,9 +1,10 @@
 import React from "react";
-import { MobileView } from "./StyledProfileView";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { CircleSkeleton } from "@docspace/shared/skeletons";
+import { RectangleSkeleton, RectangleSkeletonProps } from "../rectangle";
+import { CircleSkeleton } from "../circle";
 
-const MobileViewLoader = ({ ...rest }) => {
+import { MobileView } from "./Profile.styled";
+
+const MobileViewLoader = (props: RectangleSkeletonProps) => {
   const {
     title,
     borderRadius,
@@ -13,7 +14,7 @@ const MobileViewLoader = ({ ...rest }) => {
     foregroundOpacity,
     speed,
     animate,
-  } = rest;
+  } = props;
 
   return (
     <MobileView>

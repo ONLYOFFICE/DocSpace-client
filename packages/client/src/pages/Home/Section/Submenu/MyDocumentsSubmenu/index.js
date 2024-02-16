@@ -6,7 +6,13 @@ import Loaders from "@docspace/common/components/Loaders";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { getObjectByLocation } from "@docspace/shared/utils/common";
 
-const MyDocumentsSubmenu = ({ setFilter, showBodyLoader }) => {
+const MyDocumentsSubmenu = ({
+  isPersonalRoom,
+  isRecentTab,
+  setFilter,
+  showBodyLoader,
+  isRoot,
+}) => {
   const { t } = useTranslation("Files");
 
   const submenu = [
@@ -27,6 +33,7 @@ const MyDocumentsSubmenu = ({ setFilter, showBodyLoader }) => {
     if (e.id === "recent") {
       filter.folder = e.id;
       filter.searchArea = 3;
+      filter.sortBy = "LastOpened";
     } else {
       filter.searchArea = null;
     }
@@ -35,22 +42,29 @@ const MyDocumentsSubmenu = ({ setFilter, showBodyLoader }) => {
     window.DocSpace.navigate(`${url}?${filter.toUrlParams()}`);
   };
 
+  const showSubmenu = (isPersonalRoom || isRecentTab) && isRoot;
   const startSelect =
     getObjectByLocation(window.DocSpace.location)?.folder === "recent" ? 1 : 0;
 
-  if (showBodyLoader) return <Loaders.SectionSubmenuLoader />;
+  if (showSubmenu && showBodyLoader) return <Loaders.SectionSubmenuLoader />;
 
-  return (
+  return showSubmenu ? (
     <Submenu data={submenu} startSelect={startSelect} onSelect={onSelect} />
-  );
+  ) : null;
 };
 
-export default inject(({ filesStore, clientLoadingStore }) => {
-  const { setFilter } = filesStore;
-  const { showBodyLoader } = clientLoadingStore;
+export default inject(
+  ({ treeFoldersStore, filesStore, clientLoadingStore }) => {
+    const { isPersonalRoom, isRecentTab, isRoot } = treeFoldersStore;
+    const { setFilter } = filesStore;
+    const { showBodyLoader } = clientLoadingStore;
 
-  return {
-    setFilter,
-    showBodyLoader,
-  };
-})(observer(MyDocumentsSubmenu));
+    return {
+      isPersonalRoom,
+      isRecentTab,
+      setFilter,
+      showBodyLoader,
+      isRoot,
+    };
+  },
+)(observer(MyDocumentsSubmenu));

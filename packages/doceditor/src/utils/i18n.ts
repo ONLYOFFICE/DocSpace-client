@@ -12,11 +12,13 @@ export const getI18NInstance = (lng: string, portalLng: string) => {
 
   const currentLng = getLtrLanguageForEditor(lng, portalLng, true);
 
+  // const cultures = config.web.cultures.split(",");
+
   newInstance.use(initReactI18next).init({
     lng: currentLng,
     fallbackLng: "en",
     load: "currentOnly",
-    supportedLngs: config.web.cultures.split(","),
+
     debug: false,
 
     interpolation: {

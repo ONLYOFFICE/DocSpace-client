@@ -141,7 +141,7 @@ class AuthStore {
     ) {
       requests.push(
         this.userStore?.init(i18n).then(() => {
-          if (this.isQuotaAvailable && !isPortalRestore) {
+          if (!isPortalRestore) {
             this.getTenantExtra();
           }
         }),
@@ -273,13 +273,13 @@ class AuthStore {
     );
   }
 
-  get isQuotaAvailable() {
-    const user = this.userStore?.user;
+  // get isQuotaAvailable() {
+  //   const user = this.userStore?.user;
 
-    if (!user) return false;
+  //   if (!user) return false;
 
-    return user.isOwner || user.isAdmin || this.isRoomAdmin;
-  }
+  //   return user.isOwner || user.isAdmin || this.isRoomAdmin;
+  // }
 
   get isPaymentPageAvailable() {
     const user = this.userStore?.user;

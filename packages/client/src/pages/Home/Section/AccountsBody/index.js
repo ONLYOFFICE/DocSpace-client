@@ -93,8 +93,6 @@ export default inject(({ peopleStore }) => {
     selectUser,
   } = peopleStore.selectionStore;
 
-  console.log(peopleStore, peopleStore.groupsStore);
-
   const {
     setSelection: setGroupsSelection,
     setBufferSelection: setGroupsBufferSelection,

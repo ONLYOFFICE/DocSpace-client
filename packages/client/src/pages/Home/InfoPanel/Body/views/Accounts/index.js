@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import withLoader from "@docspace/client/src/HOCs/withLoader";
-import Loaders from "@docspace/common/components/Loaders";
+import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 
 import { Text } from "@docspace/shared/components/text";
 import { ComboBox } from "@docspace/shared/components/combobox";
@@ -247,9 +247,5 @@ export default inject(
     "SmartBanner",
     "DeleteProfileEverDialog",
     "Translations",
-  ])(
-    withLoader(observer(Accounts))(
-      <Loaders.InfoPanelViewLoader view="accounts" />,
-    ),
-  ),
+  ])(withLoader(observer(Accounts))(<InfoPanelViewLoader view="accounts" />)),
 );

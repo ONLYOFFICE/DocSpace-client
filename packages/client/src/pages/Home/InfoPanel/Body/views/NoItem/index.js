@@ -2,7 +2,6 @@ import React from "react";
 import { withTranslation } from "react-i18next";
 
 import withLoader from "@docspace/client/src/HOCs/withLoader";
-import Loaders from "@docspace/common/components/Loaders/index.js";
 
 import NoGalleryItem from "./NoGalleryItem";
 import NoRoomItem from "./NoRoomItem";
@@ -18,6 +17,6 @@ const NoItem = ({ t, isAccounts, isGallery, isRooms, isFiles }) => {
 };
 
 export default withTranslation(["InfoPanel", "FormGallery"])(
-  NoItem
+  NoItem,
   // withLoader(NoItem)(<Loaders.InfoPanelViewLoader view="noItem" />)
 );

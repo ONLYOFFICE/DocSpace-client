@@ -7,7 +7,9 @@ import GalleryLoader from "./views/GalleryLoader";
 import NoItemLoader from "./views/NoItemLoader";
 import SeveralItemsLoader from "./views/SeveralItemsLoader";
 
-const InfoPanelViewLoader = ({ view }) => {
+import type { InfoPanelViewLoaderProps } from "./body.types";
+
+const InfoPanelViewLoader = ({ view }: InfoPanelViewLoaderProps) => {
   switch (view) {
     case "members":
       return <MembersLoader />;

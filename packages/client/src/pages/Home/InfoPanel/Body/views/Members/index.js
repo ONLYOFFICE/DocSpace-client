@@ -5,7 +5,7 @@ import { toastr } from "@docspace/shared/components/toast";
 
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 import { LINKS_LIMIT_COUNT } from "@docspace/shared/constants";
-import Loaders from "@docspace/common/components/Loaders";
+import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import MembersHelper from "../../helpers/MembersHelper";
 import MembersList from "./sub-components/MembersList";
 import User from "./User";
@@ -72,11 +72,11 @@ const Members = ({
     setInfoPanelMembers(newMembers);
   };
 
-  if (membersIsLoading) return <Loaders.InfoPanelViewLoader view="members" />;
+  if (membersIsLoading) return <InfoPanelViewLoader view="members" />;
   else if (!infoPanelMembers) return <></>;
 
   const [currentMember] = infoPanelMembers.administrators.filter(
-    (member) => member.id === selfId
+    (member) => member.id === selfId,
   );
 
   const { administrators, users, expected } = infoPanelMembers;
@@ -116,7 +116,7 @@ const Members = ({
             <div
               data-tooltip-id="emailTooltip"
               data-tooltip-content={t(
-                "Files:MaximumNumberOfExternalLinksCreated"
+                "Files:MaximumNumberOfExternalLinksCreated",
               )}
             >
               <IconButton
@@ -140,7 +140,7 @@ const Members = ({
               )}
             </div>
           )}
-        </LinksBlock>
+        </LinksBlock>,
       );
     }
 
@@ -150,7 +150,7 @@ const Members = ({
           key="general-link"
           link={primaryLink}
           setIsScrollLocked={setIsScrollLocked}
-        />
+        />,
       );
     }
 
@@ -161,7 +161,7 @@ const Members = ({
             link={link}
             key={link?.sharedTo?.id}
             setIsScrollLocked={setIsScrollLocked}
-          />
+          />,
         );
       });
     } else if (!isArchiveFolder && !primaryLink) {
@@ -182,7 +182,7 @@ const Members = ({
           >
             {t("Files:CreateNewLink")}
           </Link>
-        </StyledLinkRow>
+        </StyledLinkRow>,
       );
     }
   }
@@ -290,7 +290,7 @@ export default inject(
       fetchMembers,
       membersIsLoading,
     };
-  }
+  },
 )(
   withTranslation([
     "InfoPanel",
@@ -300,5 +300,5 @@ export default inject(
     "PeopleTranslations",
     "Settings",
     "CreateEditRoomDialog",
-  ])(observer(Members))
+  ])(observer(Members)),
 );

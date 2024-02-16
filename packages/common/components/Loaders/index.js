@@ -26,7 +26,6 @@ import PaymentsLoader from "./PaymentsLoader";
 import SelectorBreadCrumbsLoader from "./SelectorBreadCrumbsLoader";
 import PaymentsStandaloneLoader from "./PaymentsStandaloneLoader";
 
-import InfoPanelViewLoader from "./InfoPanelBodyLoader/InfoPanelViewLoader";
 import InfoPanelHeaderLoader from "./InfoPanelHeaderLoader";
 
 import SettingsHeader from "./SettingsLoader/SettingsHeaderLoader";
@@ -68,7 +67,6 @@ export default {
   PaymentsStandaloneLoader,
 
   InfoPanelHeaderLoader,
-  InfoPanelViewLoader,
 
   SettingsHeader,
   SettingsAdmin,

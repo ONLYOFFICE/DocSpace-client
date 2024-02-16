@@ -293,7 +293,7 @@ class ProfileActionsStore {
 
     let liveChat = null;
 
-    if (!isMobile && this.isLiveChatAvailable) {
+    if (!isMobile && this.authStore.isLiveChatAvailable) {
       liveChat = {
         key: "user-menu-live-chat",
         icon: LiveChatReactSvgUrl,

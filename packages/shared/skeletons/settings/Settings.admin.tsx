@@ -1,7 +1,10 @@
 import React from "react";
-import { LOADER_STYLE } from "@docspace/shared/constants";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { Box } from "@docspace/shared/components/box";
+import { LOADER_STYLE } from "@docspace/shared/constants";
+
+import { RectangleSkeleton } from "../rectangle";
+
+import type { SectionTitleProps, SettingProps } from "./Settings.types";
 
 const speed = 2;
 const heightText = "20px";
@@ -9,7 +12,7 @@ const heightRadio = "16px";
 const sectionGap = "16px";
 const sectionsGap = "32px";
 
-const Setting = ({ width = "280px" }) => (
+const Setting = ({ width = "280px" }: SettingProps) => (
   <Box
     displayProp="grid"
     style={{
@@ -25,7 +28,7 @@ const Setting = ({ width = "280px" }) => (
       backgroundOpacity={LOADER_STYLE.backgroundOpacity}
       foregroundOpacity={LOADER_STYLE.foregroundOpacity}
       speed={speed}
-      animate={true}
+      animate
     />
     <RectangleSkeleton
       height={heightText}
@@ -34,12 +37,15 @@ const Setting = ({ width = "280px" }) => (
       backgroundOpacity={LOADER_STYLE.backgroundOpacity}
       foregroundOpacity={LOADER_STYLE.foregroundOpacity}
       speed={speed}
-      animate={true}
+      animate
     />
   </Box>
 );
 
-const SectionTitle = ({ height = "16px", width = "141px" }) => (
+const SectionTitle = ({
+  height = "16px",
+  width = "141px",
+}: SectionTitleProps) => (
   <RectangleSkeleton
     height={height}
     width={width}
@@ -48,11 +54,11 @@ const SectionTitle = ({ height = "16px", width = "141px" }) => (
     backgroundOpacity={LOADER_STYLE.backgroundOpacity}
     foregroundOpacity={LOADER_STYLE.foregroundOpacity}
     speed={speed}
-    animate={true}
+    animate
   />
 );
 
-const SettingsSection = ({ width }) => (
+const SettingsSection = ({ width }: Required<SettingProps>) => (
   <Box displayProp="grid" style={{ gridGap: sectionGap }}>
     <SectionTitle />
     <Setting width={width} />
@@ -68,27 +74,27 @@ const SettingsTabs = () => (
     }}
   >
     <RectangleSkeleton
-      height={"32"}
+      height="32"
       backgroundColor={LOADER_STYLE.backgroundColor}
       foregroundColor={LOADER_STYLE.foregroundColor}
       backgroundOpacity={LOADER_STYLE.backgroundOpacity}
       foregroundOpacity={LOADER_STYLE.foregroundOpacity}
       speed={speed}
-      animate={true}
+      animate
     />
     <RectangleSkeleton
-      height={"32"}
+      height="32"
       backgroundColor={LOADER_STYLE.backgroundColor}
       foregroundColor={LOADER_STYLE.foregroundColor}
       backgroundOpacity={LOADER_STYLE.backgroundOpacity}
       foregroundOpacity={LOADER_STYLE.foregroundOpacity}
       speed={speed}
-      animate={true}
+      animate
     />
   </Box>
 );
 
-const SettingsAdminLoader = () => (
+export const SettingsAdminSkeleton = () => (
   <Box
     widthProp="100%"
     heightProp="100%"
@@ -96,9 +102,7 @@ const SettingsAdminLoader = () => (
     style={{ gridGap: sectionsGap }}
   >
     <SettingsTabs />
-    <SettingsSection width={"222px"} />
-    <SettingsSection width={"260px"} />
+    <SettingsSection width="222px" />
+    <SettingsSection width="260px" />
   </Box>
 );
-
-export default SettingsAdminLoader;

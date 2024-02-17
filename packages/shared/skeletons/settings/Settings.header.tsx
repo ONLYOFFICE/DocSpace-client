@@ -4,7 +4,7 @@ import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 const speed = 2;
 
-const SettingsHeaderLoader = () => (
+export const SettingsHeaderSkeleton = () => (
   <RectangleSkeleton
     height="24"
     width="140"
@@ -13,8 +13,6 @@ const SettingsHeaderLoader = () => (
     backgroundOpacity={LOADER_STYLE.backgroundOpacity}
     foregroundOpacity={LOADER_STYLE.foregroundOpacity}
     speed={speed}
-    animate={true}
+    animate
   />
 );
-
-export default SettingsHeaderLoader;

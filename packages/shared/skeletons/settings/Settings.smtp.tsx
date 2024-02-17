@@ -1,10 +1,13 @@
 import React from "react";
 import { LOADER_STYLE } from "@docspace/shared/constants";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { StyledSMTPContent } from "./StyledComponent";
+
+import { RectangleSkeleton } from "../rectangle";
+
+import { StyledSMTPContent } from "./Settings.styled";
+
 const speed = 2;
 
-const SettingsSMTP = () => {
+export const SettingsSMTPSkeleton = () => {
   const firstComponent = (
     <div>
       <div>
@@ -16,7 +19,7 @@ const SettingsSMTP = () => {
           backgroundOpacity={LOADER_STYLE.backgroundOpacity}
           foregroundOpacity={LOADER_STYLE.foregroundOpacity}
           speed={speed}
-          animate={true}
+          animate
         />
       </div>
       <RectangleSkeleton
@@ -27,7 +30,7 @@ const SettingsSMTP = () => {
         backgroundOpacity={LOADER_STYLE.backgroundOpacity}
         foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
-        animate={true}
+        animate
       />
     </div>
   );
@@ -42,7 +45,7 @@ const SettingsSMTP = () => {
         backgroundOpacity={LOADER_STYLE.backgroundOpacity}
         foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
-        animate={true}
+        animate
       />
       <RectangleSkeleton
         className="rectangle-loader-2"
@@ -52,7 +55,7 @@ const SettingsSMTP = () => {
         backgroundOpacity={LOADER_STYLE.backgroundOpacity}
         foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
-        animate={true}
+        animate
       />
     </div>
   );
@@ -66,7 +69,7 @@ const SettingsSMTP = () => {
         backgroundOpacity={LOADER_STYLE.backgroundOpacity}
         foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
-        animate={true}
+        animate
       />
       <RectangleSkeleton
         className="rectangle-loader-2"
@@ -76,7 +79,7 @@ const SettingsSMTP = () => {
         backgroundOpacity={LOADER_STYLE.backgroundOpacity}
         foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
-        animate={true}
+        animate
       />
     </div>
   );
@@ -91,7 +94,7 @@ const SettingsSMTP = () => {
         backgroundOpacity={LOADER_STYLE.backgroundOpacity}
         foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
-        animate={true}
+        animate
       />
       <RectangleSkeleton
         height="22"
@@ -101,7 +104,7 @@ const SettingsSMTP = () => {
         backgroundOpacity={LOADER_STYLE.backgroundOpacity}
         foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
-        animate={true}
+        animate
       />
     </div>
   );
@@ -115,7 +118,7 @@ const SettingsSMTP = () => {
         backgroundOpacity={LOADER_STYLE.backgroundOpacity}
         foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
-        animate={true}
+        animate
       />
       <RectangleSkeleton
         height="20"
@@ -125,7 +128,7 @@ const SettingsSMTP = () => {
         backgroundOpacity={LOADER_STYLE.backgroundOpacity}
         foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
-        animate={true}
+        animate
       />
     </div>
   );
@@ -138,7 +141,7 @@ const SettingsSMTP = () => {
         backgroundOpacity={LOADER_STYLE.backgroundOpacity}
         foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
-        animate={true}
+        animate
       />
       <RectangleSkeleton
         height="32"
@@ -147,7 +150,7 @@ const SettingsSMTP = () => {
         backgroundOpacity={LOADER_STYLE.backgroundOpacity}
         foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
-        animate={true}
+        animate
       />
       <RectangleSkeleton
         height="32"
@@ -156,7 +159,7 @@ const SettingsSMTP = () => {
         backgroundOpacity={LOADER_STYLE.backgroundOpacity}
         foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
-        animate={true}
+        animate
       />
     </div>
   );
@@ -171,7 +174,7 @@ const SettingsSMTP = () => {
         backgroundOpacity={LOADER_STYLE.backgroundOpacity}
         foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
-        animate={true}
+        animate
       />
 
       <RectangleSkeleton
@@ -182,7 +185,7 @@ const SettingsSMTP = () => {
         backgroundOpacity={LOADER_STYLE.backgroundOpacity}
         foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
-        animate={true}
+        animate
       />
 
       {firstComponent}
@@ -196,7 +199,7 @@ const SettingsSMTP = () => {
         backgroundOpacity={LOADER_STYLE.backgroundOpacity}
         foregroundOpacity={LOADER_STYLE.foregroundOpacity}
         speed={speed}
-        animate={true}
+        animate
       />
       {secondComponent}
       {secondComponent}
@@ -211,5 +214,3 @@ const SettingsSMTP = () => {
     </StyledSMTPContent>
   );
 };
-
-export default SettingsSMTP;

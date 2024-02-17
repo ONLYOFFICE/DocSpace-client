@@ -13,8 +13,6 @@ import DialogAsideLoader from "./DialogAsideLoader";
 import SharingPanelLoader from "./SharingPanelLoader";
 import SharingPanelLoaderModal from "./SharingPanelLoader/modal";
 
-import SelectorBreadCrumbsLoader from "./SelectorBreadCrumbsLoader";
-
 import SettingsHeader from "./SettingsLoader/SettingsHeaderLoader";
 import SettingsAdmin from "./SettingsLoader/SettingsAdminLoader";
 import SettingsCommon from "./SettingsLoader/SettingsCommonLoader";
@@ -37,8 +35,6 @@ export default {
   NewTreeFolders,
   SharingPanelLoader,
   SharingPanelLoaderModal,
-
-  SelectorBreadCrumbsLoader,
 
   SettingsHeader,
   SettingsAdmin,

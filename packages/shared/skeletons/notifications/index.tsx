@@ -1,6 +1,7 @@
 import React from "react";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { StyledComponent } from "./StyledComponent";
+import { RectangleSkeleton } from "../rectangle";
+import { StyledComponent } from "./Notifications.styled";
+import { NotificationsLoaderProps } from "./Notifications.types";
 
 const NotificationsLoader = ({
   title,
@@ -11,7 +12,7 @@ const NotificationsLoader = ({
   foregroundOpacity,
   speed,
   count = 1,
-}) => {
+}: NotificationsLoaderProps) => {
   const items = [];
 
   const contentItem = (
@@ -60,11 +61,11 @@ const NotificationsLoader = ({
     </>
   );
 
-  for (var i = 0; i < count; i++) {
+  for (let i = 0; i < count; i += 1) {
     items.push(
       <StyledComponent key={`notification_loader_${i}`}>
         {contentItem}
-      </StyledComponent>
+      </StyledComponent>,
     );
   }
   return items;

@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import { tablet } from "@docspace/shared/utils";
 
-const StyledComponent = styled.div`
+export const StyledComponent = styled.div`
   display: grid;
   grid-template-columns: 1fr 24px;
   max-width: 660px;
@@ -17,5 +16,3 @@ const StyledComponent = styled.div`
   }
   margin-bottom: 24px;
 `;
-
-export { StyledComponent };

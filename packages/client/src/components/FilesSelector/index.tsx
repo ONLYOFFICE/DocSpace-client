@@ -31,7 +31,7 @@ import {
 import useRootHelper from "./helpers/useRootHelper";
 import useRoomsHelper from "./helpers/useRoomsHelper";
 import useLoadersHelper from "./helpers/useLoadersHelper";
-import useFilesHelper from "./helpers/useFilesHelper";
+import { useFilesHelper } from "./helpers/useFilesHelper";
 import { getAcceptButtonLabel, getHeaderLabel, getIsDisabled } from "./utils";
 import useSocketHelper from "./helpers/useSocketHelper";
 

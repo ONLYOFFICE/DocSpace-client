@@ -22,8 +22,6 @@ import SettingsSMTP from "./SettingsLoader/SettingsSMTPLoader";
 import SettingsDSConnect from "./SettingsLoader/SettingsDSConnectLoader";
 import EmptyContainerLoader from "./EmptyContainerLoader/EmptyContainerLoader";
 
-import SectionSubmenuLoader from "./SectionSubmenuLoader";
-
 export default {
   TreeFolders,
   TreeSettingsLoader,
@@ -49,6 +47,4 @@ export default {
   SettingsDSConnect,
 
   EmptyContainerLoader,
-
-  SectionSubmenuLoader,
 };

@@ -48,9 +48,18 @@ const StyledHeaderBox2 = styled.div`
 
 const StyledHeaderSpacer = styled.div``;
 
+const StyledSubmenu = styled.div`
+  width: 100%;
+  height: 32px;
+  display: flex;
+  gap: 20px;
+  padding-bottom: 20px;
+`;
+
 export {
   StyledHeaderContainer,
   StyledHeaderBox1,
   StyledHeaderBox2,
   StyledHeaderSpacer,
+  StyledSubmenu,
 };

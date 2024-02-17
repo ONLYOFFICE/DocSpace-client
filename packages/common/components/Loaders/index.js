@@ -1,4 +1,3 @@
-import Header from "./HeaderLoader";
 import SectionHeader from "./SectionHeaderLoader";
 
 import TreeFolders from "./TreeFolderLoader";
@@ -30,7 +29,6 @@ import EmptyContainerLoader from "./EmptyContainerLoader/EmptyContainerLoader";
 import SectionSubmenuLoader from "./SectionSubmenuLoader";
 
 export default {
-  Header,
   SectionHeader,
 
   TreeFolders,

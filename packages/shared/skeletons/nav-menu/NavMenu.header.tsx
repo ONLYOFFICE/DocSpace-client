@@ -1,17 +1,24 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { StyledHeader, StyledSpacer } from "./StyledHeaderLoader";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { CircleSkeleton } from "@docspace/shared/skeletons";
 
-const HeaderLoader = ({ id, className, style, ...rest }) => {
+import { CircleSkeleton } from "../circle";
+import { RectangleSkeleton } from "../rectangle";
+
+import { StyledHeader, StyledSpacer } from "./NavMenu.styled";
+import type { NavMenuHeaderLoaderProps } from "./NavMenu.types";
+
+export const NavMenuHeaderLoader = ({
+  id,
+  className,
+  style,
+  ...rest
+}: NavMenuHeaderLoaderProps) => {
   const {
     title,
     borderRadius,
-    backgroundColor,
-    foregroundColor,
-    backgroundOpacity,
-    foregroundOpacity,
+    backgroundColor = "#fff",
+    foregroundColor = "#fff",
+    backgroundOpacity = 0.25,
+    foregroundOpacity = 0.2,
     speed,
     animate,
   } = rest;
@@ -45,21 +52,3 @@ const HeaderLoader = ({ id, className, style, ...rest }) => {
     </StyledHeader>
   );
 };
-
-HeaderLoader.propTypes = {
-  id: PropTypes.string,
-  className: PropTypes.string,
-  style: PropTypes.object,
-};
-
-HeaderLoader.defaultProps = {
-  id: undefined,
-  className: undefined,
-  style: undefined,
-  backgroundColor: "#fff",
-  foregroundColor: "#fff",
-  backgroundOpacity: 0.25,
-  foregroundOpacity: 0.2,
-};
-
-export default HeaderLoader;

@@ -1,12 +1,8 @@
-import SectionHeader from "./SectionHeaderLoader";
-
 import TreeFolders from "./TreeFolderLoader";
 import NewTreeFolders from "./NewTreeFolderLoader";
 import TreeSettingsLoader from "./TreeSettingsLoader";
 
 import Text from "./TextLoader";
-
-import Notifications from "./NotificationsLoader";
 
 import Group from "./GroupLoader";
 import Tile from "./TileLoader";
@@ -29,8 +25,6 @@ import EmptyContainerLoader from "./EmptyContainerLoader/EmptyContainerLoader";
 import SectionSubmenuLoader from "./SectionSubmenuLoader";
 
 export default {
-  SectionHeader,
-
   TreeFolders,
   TreeSettingsLoader,
 
@@ -55,7 +49,6 @@ export default {
   SettingsDSConnect,
 
   EmptyContainerLoader,
-  Notifications,
 
   SectionSubmenuLoader,
 };

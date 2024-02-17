@@ -5,7 +5,6 @@ import TreeSettingsLoader from "./TreeSettingsLoader";
 import Text from "./TextLoader";
 
 import Group from "./GroupLoader";
-import Tile from "./TileLoader";
 import Tiles from "./TilesLoader";
 
 import DialogLoader from "./DialogLoader";
@@ -22,7 +21,6 @@ export default {
   Text,
 
   Group,
-  Tile,
   Tiles,
 
   DialogLoader,

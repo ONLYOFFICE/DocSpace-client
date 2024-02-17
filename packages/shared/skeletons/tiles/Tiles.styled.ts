@@ -1,8 +1,11 @@
 import styled, { css } from "styled-components";
-import { mobile, tablet } from "@docspace/shared/utils";
-import Base from "@docspace/shared/themes/base";
 
-const StyledTile = styled.div`
+import Base from "@docspace/shared/themes/base";
+import { mobile, tablet } from "@docspace/shared/utils";
+
+import type { StyledBottomProps } from "./Tiles.types";
+
+export const StyledTile = styled.div`
   position: relative;
   display: grid;
   width: 100%;
@@ -22,7 +25,7 @@ const StyledTile = styled.div`
 
 StyledTile.defaultProps = { theme: Base };
 
-const StyledMainContent = styled.div`
+export const StyledMainContent = styled.div`
   height: 156px;
 
   .main-content {
@@ -33,7 +36,7 @@ const StyledMainContent = styled.div`
   }
 `;
 
-const StyledBottom = styled.div`
+export const StyledBottom = styled.div<StyledBottomProps>`
   display: flex;
   align-items: center;
   border: ${(props) => props.theme.filesSection.tilesView.tile.border};
@@ -53,13 +56,15 @@ const StyledBottom = styled.div`
       theme.interfaceDirection === "rtl"
         ? `margin-right: 8px;`
         : `margin-left: 8px;`}
-  } {
+  }
+
   ${(props) =>
     !props.isFolder &&
     css`
       border-top-style: none;
       border-radius: 0 0 6px 6px;
     `}
+
   .option-button {
     min-width: 16px;
     ${({ theme }) =>
@@ -69,4 +74,23 @@ const StyledBottom = styled.div`
   }
 `;
 
-export { StyledTile, StyledBottom, StyledMainContent };
+export const StyledTilesSkeleton = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 216px);
+  width: 100%;
+  grid-gap: 16px;
+
+  @media ${tablet} {
+    grid-template-columns: repeat(auto-fill, 214px);
+  }
+
+  @media ${mobile} {
+    grid-template-columns: repeat(auto-fill, minmax(214px, 1fr));
+  }
+`;
+
+export const StyledTilesWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 16px;
+`;

@@ -1,13 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types";
-import {
-  StyledTile,
-  StyledBottom,
-  StyledMainContent,
-} from "./StyledTileLoader";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-const TileLoader = ({
+import { StyledTile, StyledBottom, StyledMainContent } from "./Tiles.styled";
+import type { TileSkeletonProps } from "./Tiles.types";
+
+export const TileSkeleton = ({
   isFolder,
   title,
   borderRadius,
@@ -18,9 +15,9 @@ const TileLoader = ({
   speed,
   animate,
   ...rest
-}) => {
+}: TileSkeletonProps) => {
   return isFolder ? (
-    <StyledTile {...rest} isFolder>
+    <StyledTile {...rest}>
       <StyledBottom className="bottom-content" isFolder>
         <RectangleSkeleton
           className="first-content"
@@ -32,7 +29,7 @@ const TileLoader = ({
           backgroundOpacity={backgroundOpacity}
           foregroundOpacity={foregroundOpacity}
           speed={speed}
-          animate={true}
+          animate
         />
         <RectangleSkeleton
           className="second-content"
@@ -44,7 +41,7 @@ const TileLoader = ({
           backgroundOpacity={backgroundOpacity}
           foregroundOpacity={foregroundOpacity}
           speed={speed}
-          animate={true}
+          animate
         />
         <RectangleSkeleton
           className="option-button"
@@ -57,7 +54,7 @@ const TileLoader = ({
           backgroundOpacity={backgroundOpacity}
           foregroundOpacity={foregroundOpacity}
           speed={speed}
-          animate={true}
+          animate
         />
       </StyledBottom>
     </StyledTile>
@@ -68,13 +65,13 @@ const TileLoader = ({
           className="main-content"
           title={title}
           height="156px"
-          borderRadius={borderRadius ? borderRadius : "0"}
+          borderRadius={borderRadius || "0"}
           backgroundColor={backgroundColor}
           foregroundColor={foregroundColor}
           backgroundOpacity={backgroundOpacity}
           foregroundOpacity={foregroundOpacity}
           speed={speed}
-          animate={true}
+          animate
         />
       </StyledMainContent>
 
@@ -89,7 +86,7 @@ const TileLoader = ({
           backgroundOpacity={backgroundOpacity}
           foregroundOpacity={foregroundOpacity}
           speed={speed}
-          animate={true}
+          animate
         />
         <RectangleSkeleton
           className="second-content"
@@ -101,7 +98,7 @@ const TileLoader = ({
           backgroundOpacity={backgroundOpacity}
           foregroundOpacity={foregroundOpacity}
           speed={speed}
-          animate={true}
+          animate
         />
         <RectangleSkeleton
           className="option-button"
@@ -114,27 +111,9 @@ const TileLoader = ({
           backgroundOpacity={backgroundOpacity}
           foregroundOpacity={foregroundOpacity}
           speed={speed}
-          animate={true}
+          animate
         />
       </StyledBottom>
     </StyledTile>
   );
 };
-
-TileLoader.propTypes = {
-  id: PropTypes.string,
-  className: PropTypes.string,
-  style: PropTypes.object,
-  isRectangle: PropTypes.bool,
-  isFolder: PropTypes.bool,
-};
-
-TileLoader.defaultProps = {
-  id: undefined,
-  className: undefined,
-  style: undefined,
-  isRectangle: true,
-  isFolder: false,
-};
-
-export default TileLoader;

@@ -531,8 +531,8 @@ class Tile extends React.PureComponent {
     const icon = item.isPlugin
       ? item.fileTileIcon
       : thumbnail && !this.state.errorLoadSrc
-      ? thumbnail
-      : temporaryIcon;
+        ? thumbnail
+        : temporaryIcon;
 
     return (
       <Link type="page" onClick={thumbnailClick}>
@@ -552,7 +552,7 @@ class Tile extends React.PureComponent {
 
   changeCheckbox = (e) => {
     const { onSelect, item } = this.props;
-    onSelect && onSelect(!e.target.checked, item);
+    onSelect && onSelect(e.target.checked, item);
   };
 
   onFileIconClick = () => {
@@ -637,12 +637,12 @@ class Tile extends React.PureComponent {
 
     const renderElement = Object.prototype.hasOwnProperty.call(
       this.props,
-      "element"
+      "element",
     );
 
     const renderContentElement = Object.prototype.hasOwnProperty.call(
       this.props,
-      "contentElement"
+      "contentElement",
     );
 
     const renderContext =

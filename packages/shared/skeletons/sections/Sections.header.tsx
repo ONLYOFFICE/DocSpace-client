@@ -1,14 +1,21 @@
 import React from "react";
-import PropTypes from "prop-types";
-import {
-  StyledContainer,
-  StyledBox1,
-  StyledBox2,
-  StyledSpacer,
-} from "./StyledSectionHeaderLoader";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-const SectionHeaderLoader = ({ id, className, style, ...rest }) => {
+import { RectangleSkeleton } from "../rectangle";
+
+import {
+  StyledHeaderContainer,
+  StyledHeaderBox1,
+  StyledHeaderBox2,
+  StyledHeaderSpacer,
+} from "./Sections.styled";
+import type { SectionHeaderSkeloton } from "./Sections.types";
+
+export const SectionHeaderSkeleton = ({
+  id,
+  className,
+  style,
+  ...rest
+}: SectionHeaderSkeloton) => {
   const {
     title,
     borderRadius,
@@ -21,8 +28,8 @@ const SectionHeaderLoader = ({ id, className, style, ...rest }) => {
   } = rest;
 
   return (
-    <StyledContainer id={id} className={className} style={style}>
-      <StyledBox1>
+    <StyledHeaderContainer id={id} className={className} style={style}>
+      <StyledHeaderBox1>
         <RectangleSkeleton
           title={title}
           width="100%"
@@ -35,9 +42,9 @@ const SectionHeaderLoader = ({ id, className, style, ...rest }) => {
           speed={speed}
           animate={animate}
         />
-      </StyledBox1>
-      <StyledSpacer />
-      <StyledBox2>
+      </StyledHeaderBox1>
+      <StyledHeaderSpacer />
+      <StyledHeaderBox2>
         <RectangleSkeleton
           title={title}
           width="17"
@@ -50,21 +57,7 @@ const SectionHeaderLoader = ({ id, className, style, ...rest }) => {
           speed={speed}
           animate={animate}
         />
-      </StyledBox2>
-    </StyledContainer>
+      </StyledHeaderBox2>
+    </StyledHeaderContainer>
   );
 };
-
-SectionHeaderLoader.propTypes = {
-  id: PropTypes.string,
-  className: PropTypes.string,
-  style: PropTypes.object,
-};
-
-SectionHeaderLoader.defaultProps = {
-  id: undefined,
-  className: undefined,
-  style: undefined,
-};
-
-export default SectionHeaderLoader;

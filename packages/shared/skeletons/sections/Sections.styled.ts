@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { tablet, mobile } from "@docspace/shared/utils";
 
-const StyledContainer = styled.div`
+const StyledHeaderContainer = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: 140px 0fr 17px;
@@ -25,7 +25,7 @@ const StyledContainer = styled.div`
   }
 `;
 
-const StyledBox1 = styled.div`
+const StyledHeaderBox1 = styled.div`
   width: 140px;
   height: 24px;
 
@@ -40,12 +40,17 @@ const StyledBox1 = styled.div`
   }
 `;
 
-const StyledBox2 = styled.div`
+const StyledHeaderBox2 = styled.div`
   display: grid;
   grid-template-columns: 17px 17px;
   grid-template-rows: 1fr;
 `;
 
-const StyledSpacer = styled.div``;
+const StyledHeaderSpacer = styled.div``;
 
-export { StyledContainer, StyledBox1, StyledBox2, StyledSpacer };
+export {
+  StyledHeaderContainer,
+  StyledHeaderBox1,
+  StyledHeaderBox2,
+  StyledHeaderSpacer,
+};

@@ -40,7 +40,7 @@ import styled, { css } from "styled-components";
 import copy from "copy-to-clipboard";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import Loaders from "@docspace/common/components/Loaders";
+import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 import Navigation from "@docspace/shared/components/navigation";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { resendInvitesAgain } from "@docspace/shared/api/people";
@@ -483,7 +483,7 @@ const SectionHeaderContent = (props) => {
 
   const createLinkForPortalUsers = () => {
     copy(
-      `${window.location.origin}/filter?folder=${currentFolderId}` //TODO: Change url by category
+      `${window.location.origin}/filter?folder=${currentFolderId}`, //TODO: Change url by category
     );
 
     toastr.success(t("Translations:LinkCopySuccess"));
@@ -547,7 +547,7 @@ const SectionHeaderContent = (props) => {
       };
 
       deleteAction(translations, [selectedFolder], true).catch((err) =>
-        toastr.error(err)
+        toastr.error(err),
       );
     }
   };
@@ -927,7 +927,7 @@ const SectionHeaderContent = (props) => {
 
     const path = getCategoryUrl(
       getCategoryTypeByFolderType(rootFolderType, id),
-      id
+      id,
     );
 
     const filter = FilesFilter.getDefault();
@@ -977,7 +977,7 @@ const SectionHeaderContent = (props) => {
   const onInviteAgain = React.useCallback(() => {
     resendInvitesAgain()
       .then(() =>
-        toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios"))
+        toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios")),
       )
       .catch((err) => toastr.error(err));
   }, [resendInvitesAgain]);
@@ -1057,7 +1057,7 @@ const SectionHeaderContent = (props) => {
   const isCurrentRoom =
     isLoading && typeof stateIsRoom === "boolean" ? stateIsRoom : isRoom;
 
-  if (showHeaderLoader) return <Loaders.SectionHeader />;
+  if (showHeaderLoader) return <SectionHeaderSkeleton />;
 
   const insideTheRoom =
     (categoryType === CategoryType.SharedRoom ||
@@ -1470,7 +1470,7 @@ export default inject(
       showNavigationButton,
       haveLinksRight,
     };
-  }
+  },
 )(
   withTranslation([
     "Files",
@@ -1482,5 +1482,5 @@ export default inject(
     "People",
     "PeopleTranslations",
     "ChangeUserTypeDialog",
-  ])(observer(SectionHeaderContent))
+  ])(observer(SectionHeaderContent)),
 );

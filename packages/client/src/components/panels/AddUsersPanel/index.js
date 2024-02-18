@@ -12,7 +12,7 @@ import { Text } from "@docspace/shared/components/text";
 
 import { getUserRole } from "@docspace/shared/utils/common";
 import Filter from "@docspace/shared/api/people/filter";
-import Loaders from "@docspace/common/components/Loaders";
+import { DialogAsideSkeleton } from "@docspace/shared/skeletons/dialog";
 import { getMembersList } from "@docspace/shared/api/people";
 import useLoadingWithTimeout from "@docspace/shared/hooks/useLoadingWithTimeout";
 import { ShareAccessRights } from "@docspace/shared/enums";
@@ -323,7 +323,7 @@ export default inject(({ settingsStore }) => {
 })(
   observer(
     withTranslation(["SharingPanel", "PeopleTranslations", "Common"])(
-      withLoader(AddUsersPanel)(<Loaders.DialogAsideLoader isPanel />),
+      withLoader(AddUsersPanel)(<DialogAsideSkeleton isPanel />),
     ),
   ),
 );

@@ -4,9 +4,10 @@ import { Text } from "@docspace/shared/components/text";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { ReactSVG } from "react-svg";
+
 import { Button } from "@docspace/shared/components/button";
+import RecoverAccessModalDialog from "@docspace/shared/components/recover-access-modal-dialog/RecoverAccessModalDialog";
 import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
-import RecoverAccessModalDialog from "@docspace/common/components/Dialogs/RecoverAccessModalDialog";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { mobile } from "@docspace/shared/utils";
 

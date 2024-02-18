@@ -11,9 +11,9 @@ import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
 import { createPasswordHash } from "@docspace/shared/utils/common";
 import { login } from "@docspace/shared/utils/loginUtils";
+import { getPasswordErrorMessage } from "@docspace/shared/utils/getPasswordErrorMessage";
 
 import DocspaceLogo from "../../../components/DocspaceLogoWrapper";
-import { getPasswordErrorMessage } from "../../../helpers/utils";
 import withLoader from "../withLoader";
 import { StyledPage, StyledBody, StyledContent } from "./StyledConfirm";
 
@@ -129,7 +129,7 @@ const ChangePasswordForm = (props) => {
                 labelVisible={false}
                 hasError={isPasswordErrorShow && !passwordValid}
                 errorMessage={`${t(
-                  "Common:PasswordLimitMessage"
+                  "Common:PasswordLimitMessage",
                 )}: ${getPasswordErrorMessage(t, settings)}`}
               >
                 <PasswordInput
@@ -151,14 +151,14 @@ const ChangePasswordForm = (props) => {
                   onKeyDown={onKeyPress}
                   tooltipPasswordTitle={`${t("Common:PasswordLimitMessage")}:`}
                   tooltipPasswordLength={`${t(
-                    "Common:PasswordMinimumLength"
+                    "Common:PasswordMinimumLength",
                   )}: ${settings ? settings.minLength : 8}`}
                   tooltipPasswordDigits={`${t("Common:PasswordLimitDigits")}`}
                   tooltipPasswordCapital={`${t(
-                    "Common:PasswordLimitUpperCase"
+                    "Common:PasswordLimitUpperCase",
                   )}`}
                   tooltipPasswordSpecial={`${t(
-                    "Common:PasswordLimitSpecialSymbols"
+                    "Common:PasswordLimitSpecialSymbols",
                   )}`}
                   generatePasswordTitle={t("Wizard:GeneratePassword")}
                 />
@@ -204,6 +204,6 @@ export default inject(({ authStore, settingsStore, setup }) => {
   };
 })(
   withTranslation(["Confirm", "Common", "Wizard"])(
-    withLoader(observer(ChangePasswordForm))
-  )
+    withLoader(observer(ChangePasswordForm)),
+  ),
 );

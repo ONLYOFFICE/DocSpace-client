@@ -93,7 +93,7 @@ const System = (props) => {
   }
 
   const Component = React.lazy(
-    loadComponent(props.system.scope, props.system.module)
+    loadComponent(props.system.scope, props.system.module),
   );
 
   return (

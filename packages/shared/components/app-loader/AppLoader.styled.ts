@@ -1,10 +1,8 @@
-import React from "react";
 import styled from "styled-components";
-import { Loader } from "@docspace/shared/components/loader";
 
 import { Base } from "@docspace/shared/themes";
 
-const StyledContainer = styled.div`
+export const StyledContainer = styled.div`
   // width: 100vw;
   // height: 100vh;
   overflow: hidden;
@@ -18,11 +16,3 @@ const StyledContainer = styled.div`
 `;
 
 StyledContainer.defaultProps = { theme: Base };
-
-const AppLoader = () => (
-  <StyledContainer>
-    <Loader className="pageLoader" type="rombs" size="40px" />
-  </StyledContainer>
-);
-
-export default AppLoader;

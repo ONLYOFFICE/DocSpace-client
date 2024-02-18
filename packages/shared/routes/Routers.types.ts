@@ -30,3 +30,11 @@ export interface PrivateRouteProps
   withManager?: boolean;
   withCollaborator?: boolean;
 }
+
+export interface PublicRouteProps
+  extends PropsWithChildren,
+    Pick<AuthStore, "isAuthenticated">,
+    Pick<
+      SettingsStore,
+      "wizardCompleted" | "tenantStatus" | "isPortalDeactivate"
+    > {}

@@ -1,3 +1,4 @@
 export { PrivateRoute } from "./Route.private";
+export { PublicRoute } from "./Route.public";
 
-export type { PrivateRouteProps } from "./Routers.types";
+export type { PrivateRouteProps, PublicRouteProps } from "./Routers.types";

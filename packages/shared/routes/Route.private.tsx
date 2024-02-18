@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
-// import { inject, observer } from "mobx-react";
 
 import Error403 from "@docspace/shared/components/errors/Error403";
 import AppLoader from "@docspace/shared/components/app-loader";
@@ -219,46 +218,3 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
 
   return component;
 };
-
-// export default inject(
-//   ({ authStore, settingsStore, userStore, currentTariffStatusStore }) => {
-//     const {
-//       isAuthenticated,
-//       isLoaded,
-//       isAdmin,
-
-//       isLogout,
-//       isCommunity,
-//       isEnterprise,
-//     } = authStore;
-//     const { isNotPaidPeriod } = currentTariffStatusStore;
-//     const { user } = userStore;
-
-//     const {
-//       wizardCompleted,
-//       tenantStatus,
-//       isPortalDeactivate,
-//       enablePortalRename,
-//       limitedAccessSpace,
-//     } = settingsStore;
-
-//     return {
-//       isPortalDeactivate,
-//       isCommunity,
-//       isNotPaidPeriod,
-//       user,
-//       isAuthenticated,
-//       isAdmin,
-//       isLoaded,
-
-//       wizardCompleted,
-//       tenantStatus,
-
-//       isLogout,
-//       standalone,
-//       isEnterprise,
-//       enablePortalRename,
-//       limitedAccessSpace,
-//     };
-//   }
-// )(observer(PrivateRoute));

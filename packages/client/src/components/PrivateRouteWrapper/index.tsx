@@ -3,22 +3,6 @@ import { inject, observer } from "mobx-react";
 import { PrivateRoute } from "@docspace/shared/routes";
 import type { PrivateRouteProps } from "@docspace/shared/routes";
 
-// return {
-//   isPortalDeactivate,
-//   isCommunity,
-//   isNotPaidPeriod,
-//   user,
-//   isAuthenticated,
-//   isAdmin,
-//   isLoaded,
-//   wizardCompleted,
-//   tenantStatus,
-//   isLogout,
-//   isEnterprise,
-//   enablePortalRename,
-//   limitedAccessSpace,
-// };
-
 const PrivateRouteWrapper = ({
   wizardCompleted,
   children,

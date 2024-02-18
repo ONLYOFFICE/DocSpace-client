@@ -2,7 +2,7 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 import loadable from "@loadable/component";
 
-import PrivateRoute from "@docspace/common/components/PrivateRoute";
+import PrivateRoute from "../components/PrivateRouteWrapper";
 import PublicRoute from "@docspace/common/components/PublicRoute";
 import Error404 from "@docspace/shared/components/errors/Error404";
 

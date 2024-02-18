@@ -1,4 +1,3 @@
-export { default as PrivateRoute } from "./PrivateRoute";
 export { default as PublicRoute } from "./PublicRoute";
 export { default as ExternalRedirect } from "./ExternalRedirect";
 export { default as AdvancedSelector } from "./AdvancedSelector";

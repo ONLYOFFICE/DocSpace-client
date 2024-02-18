@@ -1,37 +1,38 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { inject, observer } from "mobx-react";
-import Error403 from "@docspace/shared/components/errors/Error403";
+// import { inject, observer } from "mobx-react";
 
+import Error403 from "@docspace/shared/components/errors/Error403";
 import AppLoader from "@docspace/shared/components/app-loader";
 
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { TenantStatus } from "@docspace/shared/enums";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
-const PrivateRoute = ({ children, ...rest }) => {
+import type { PrivateRouteProps } from "./Routers.types";
+
+export const PrivateRoute = (props: PrivateRouteProps) => {
   const {
     isAdmin,
-    isAuthenticated,
     isLoaded,
-    restricted,
-
-    user,
-
-    wizardCompleted,
-
-    tenantStatus,
-    isNotPaidPeriod,
-    withManager,
-    withCollaborator,
     isLogout,
-    standalone,
     isCommunity,
     isEnterprise,
+    isNotPaidPeriod,
+    isAuthenticated,
     isPortalDeactivate,
-    enablePortalRename,
+
+    withManager,
+    withCollaborator,
+    wizardCompleted,
+
+    user,
+    children,
+    restricted,
+    tenantStatus,
     limitedAccessSpace,
-  } = rest;
+    enablePortalRename,
+  } = props;
 
   const location = useLocation();
 
@@ -39,7 +40,7 @@ const PrivateRoute = ({ children, ...rest }) => {
     if (!user && isAuthenticated) {
       if (isPortalDeactivate) {
         window.location.replace(
-          combineUrl(window.DocSpaceConfig?.proxy?.url, "/unavailable")
+          combineUrl(window.DocSpaceConfig?.proxy?.url, "/unavailable"),
         );
 
         return null;
@@ -71,7 +72,7 @@ const PrivateRoute = ({ children, ...rest }) => {
     if (isLoaded && !isAuthenticated) {
       if (isPortalDeactivate) {
         window.location.replace(
-          combineUrl(window.DocSpaceConfig?.proxy?.url, "/unavailable")
+          combineUrl(window.DocSpaceConfig?.proxy?.url, "/unavailable"),
         );
 
         return null;
@@ -88,7 +89,7 @@ const PrivateRoute = ({ children, ...rest }) => {
       }
 
       window.location.replace(
-        combineUrl(window.DocSpaceConfig?.proxy?.url, redirectPath)
+        combineUrl(window.DocSpaceConfig?.proxy?.url, redirectPath),
       );
 
       return null;
@@ -97,11 +98,11 @@ const PrivateRoute = ({ children, ...rest }) => {
     if (
       isLoaded &&
       ((!isNotPaidPeriod && isPortalUnavailableUrl) ||
-        (!user.isOwner && isPortalDeletionUrl) ||
+        (!user?.isOwner && isPortalDeletionUrl) ||
         (isCommunity && isPaymentsUrl) ||
         (isEnterprise && isBonusPage))
     ) {
-      return <Navigate replace to={"/"} />;
+      return <Navigate replace to="/" />;
     }
 
     if (isLoaded && limitedAccessSpace && isPortalDeletionUrl) {
@@ -119,7 +120,7 @@ const PrivateRoute = ({ children, ...rest }) => {
           replace
           to={combineUrl(
             window.DocSpaceConfig?.proxy?.url,
-            "/preparation-portal"
+            "/preparation-portal",
           )}
         />
       );
@@ -128,7 +129,7 @@ const PrivateRoute = ({ children, ...rest }) => {
     if (
       isNotPaidPeriod &&
       isLoaded &&
-      (user.isOwner || user.isAdmin) &&
+      (user?.isOwner || user?.isAdmin) &&
       !isPaymentsUrl &&
       !isBackupUrl &&
       !isPortalDeletionUrl
@@ -138,7 +139,7 @@ const PrivateRoute = ({ children, ...rest }) => {
           replace
           to={combineUrl(
             window.DocSpaceConfig?.proxy?.url,
-            "/portal-settings/payments/portal-payments"
+            "/portal-settings/payments/portal-payments",
           )}
         />
       );
@@ -147,8 +148,8 @@ const PrivateRoute = ({ children, ...rest }) => {
     if (
       isNotPaidPeriod &&
       isLoaded &&
-      !user.isOwner &&
-      !user.isAdmin &&
+      !user?.isOwner &&
+      !user?.isAdmin &&
       !isPortalUnavailableUrl
     ) {
       return (
@@ -156,7 +157,7 @@ const PrivateRoute = ({ children, ...rest }) => {
           replace
           to={combineUrl(
             window.DocSpaceConfig?.proxy?.url,
-            "/portal-unavailable"
+            "/portal-unavailable",
           )}
         />
       );
@@ -195,23 +196,23 @@ const PrivateRoute = ({ children, ...rest }) => {
     // }
 
     if (isPortalRenameUrl && !enablePortalRename) {
-      return <Navigate replace to={"/error/404"} />;
+      return <Navigate replace to="/error/404" />;
     }
 
     if (
       !restricted ||
       isAdmin ||
-      (withManager && !user.isVisitor && !user.isCollaborator) ||
-      (withCollaborator && !user.isVisitor)
+      (withManager && !user?.isVisitor && !user?.isCollaborator) ||
+      (withCollaborator && !user?.isVisitor)
     ) {
       return children;
     }
 
     if (restricted) {
-      return <Navigate replace to={"/error/401"} />;
+      return <Navigate replace to="/error/401" />;
     }
 
-    return <Navigate replace to={"/error/404"} />;
+    return <Navigate replace to="/error/404" />;
   };
 
   const component = renderComponent();
@@ -219,48 +220,45 @@ const PrivateRoute = ({ children, ...rest }) => {
   return component;
 };
 
-export default inject(
-  ({ authStore, settingsStore, userStore, currentTariffStatusStore }) => {
-    const {
-      isAuthenticated,
-      isLoaded,
-      isAdmin,
+// export default inject(
+//   ({ authStore, settingsStore, userStore, currentTariffStatusStore }) => {
+//     const {
+//       isAuthenticated,
+//       isLoaded,
+//       isAdmin,
 
-      isLogout,
-      isCommunity,
-      isEnterprise,
-    } = authStore;
-    const { isNotPaidPeriod } = currentTariffStatusStore;
-    const { user } = userStore;
+//       isLogout,
+//       isCommunity,
+//       isEnterprise,
+//     } = authStore;
+//     const { isNotPaidPeriod } = currentTariffStatusStore;
+//     const { user } = userStore;
 
-    const {
-      setModuleInfo,
-      wizardCompleted,
-      personal,
-      tenantStatus,
-      standalone,
-      isPortalDeactivate,
-      enablePortalRename,
-      limitedAccessSpace,
-    } = settingsStore;
+//     const {
+//       wizardCompleted,
+//       tenantStatus,
+//       isPortalDeactivate,
+//       enablePortalRename,
+//       limitedAccessSpace,
+//     } = settingsStore;
 
-    return {
-      isPortalDeactivate,
-      isCommunity,
-      isNotPaidPeriod,
-      user,
-      isAuthenticated,
-      isAdmin,
-      isLoaded,
+//     return {
+//       isPortalDeactivate,
+//       isCommunity,
+//       isNotPaidPeriod,
+//       user,
+//       isAuthenticated,
+//       isAdmin,
+//       isLoaded,
 
-      wizardCompleted,
-      tenantStatus,
+//       wizardCompleted,
+//       tenantStatus,
 
-      isLogout,
-      standalone,
-      isEnterprise,
-      enablePortalRename,
-      limitedAccessSpace,
-    };
-  }
-)(observer(PrivateRoute));
+//       isLogout,
+//       standalone,
+//       isEnterprise,
+//       enablePortalRename,
+//       limitedAccessSpace,
+//     };
+//   }
+// )(observer(PrivateRoute));

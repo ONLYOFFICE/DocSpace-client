@@ -223,16 +223,17 @@ const Accounts = (props) => {
           </Text>
           <div>Rooms list</div> */}
 
-          <Text
+          {infoPanelSelection?.groups?.length && <>
+            <Text
             className={"info_field info_field_groups"}
             noSelect
-            title={t("Department")}
+            title={t("Common:Department")}
           >
-            {t("Department")}
+            {t("Common:Department")}
           </Text>
 
           <div className={"info_groups"}>
-            {infoPanelSelection?.groups?.map((group) => (
+            {infoPanelSelection.groups.map((group) => (
               <Link
                 key={group.id}
                 className={"info_data first-row info_group"}
@@ -247,6 +248,8 @@ const Accounts = (props) => {
               </Link>
             ))}
           </div>
+          </>}
+
         </div>
       </StyledAccountContent>
     </>

@@ -17,7 +17,7 @@ const NoGroupsItem = ({ t, theme }) => {
         <img src={imgSrc} />
       </div>
       <Text className="no-item-text" textAlign="center">
-        {t("See group details here")}
+        {t("InfoPanel:GroupsEmptyScreenText")}
       </Text>
     </StyledNoItemContainer>
   );

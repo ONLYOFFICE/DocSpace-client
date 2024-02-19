@@ -69,7 +69,7 @@ const GroupMember = ({
       </div>
 
       <div className="context-btn-wrapper">
-        {isManager && <div className="group-manager-tag">Head of group</div>}
+        {isManager && <div className="group-manager-tag">{t("Common:HeadOfGroup")}</div>}
 
         <div className="context-btn" ref={iconRef}>
           <ContextMenuButton

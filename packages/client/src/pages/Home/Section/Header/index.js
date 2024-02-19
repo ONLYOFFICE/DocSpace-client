@@ -388,7 +388,7 @@ const SectionHeaderContent = (props) => {
           id: "create_group",
           className: "main-button_drop-down",
           icon: PersonUserReactSvgUrl,
-          label: t("Create Group"),
+          label: t("People:CreateGroup"),
           onClick: onCreateGroup,
           action: "group",
           key: "group",
@@ -1086,7 +1086,7 @@ const SectionHeaderContent = (props) => {
   const accountsNavigationPath = isInsideGroup && [
     {
       id: 0,
-      title: "Accounts",
+      title: t("Common:Accounts"),
       isRoom: false,
       isRootRoom: true,
     },

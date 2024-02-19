@@ -61,10 +61,6 @@ const GroupsRow = ({
       : theme.peopleTableRow.nameColor;
   const sideInfoColor = theme.peopleTableRow.pendingSideInfoColor;
 
-  const contextOptionsProps = {
-    contextOptions: getGroupContextOptions(t, item),
-  };
-
   const titleWithoutSpaces = item.name.replace(/\s+/g, " ").trim();
   const indexAfterLastSpace = titleWithoutSpaces.lastIndexOf(" ");
   const secondCharacter =

@@ -37,7 +37,7 @@ class PeopleTableHeader extends React.Component {
       },
       {
         key: "Department",
-        title: t("Department"),
+        title: t("Common:Department"),
         enable: true,
         sortBy: "department",
         resizable: true,

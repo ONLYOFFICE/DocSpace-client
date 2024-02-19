@@ -74,7 +74,9 @@ const CreateGroupDialog = ({
       //   isScrollLocked={isScrollLocked}
       //   isOauthWindowOpen={isOauthWindowOpen}
     >
-      <ModalDialog.Header>{t("PeopleTranslations:CreateDepartment")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {t("PeopleTranslations:CreateGroup")}
+      </ModalDialog.Header>
 
       <ModalDialog.Body>
         <GroupNameParam

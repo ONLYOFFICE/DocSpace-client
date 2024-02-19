@@ -4,17 +4,27 @@ import {
   TFileSecurity,
   TFolder,
   TFolderSecurity,
+  TGetReferenceData,
+  TGetReferenceDataRequest,
+  TSharedUsers,
 } from "@docspace/shared/api/files/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import { TSettings } from "@docspace/shared/api/settings/types";
 import { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
 import SocketIOHelper from "@docspace/shared/utils/socket";
-import {
-  ConflictResolveType,
-  FilesSelectorFilterTypes,
-} from "@docspace/shared/enums";
+import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
+import { Nullable, TPathParts, TTranslation } from "@docspace/shared/types";
+import { TTheme } from "@docspace/shared/themes";
+import { i18n } from "i18next";
+
+export type TGoBack = {
+  requestClose: boolean;
+  text?: string;
+  blank?: boolean;
+  url?: string;
+};
 
 export type TDocumentInfoSharingSettings = {
   user: string;
@@ -52,6 +62,7 @@ export type TDocument = {
   referenceData: {
     fileKey: string;
     instanceId: string;
+    key: string;
   };
   title: string;
   token: string;
@@ -71,9 +82,7 @@ export type TEditorConfigCustomization = {
   };
   feedback: boolean;
   forcesave: boolean;
-  goback: {
-    url: string;
-  };
+  goback: TGoBack;
   logo: {
     image: string;
     imageDark: string;
@@ -117,6 +126,7 @@ export type TEditorConfig = {
   recent: [];
   templates: [];
   user: { id: string; name: string };
+  encryptionKeys?: { [key: string]: string | boolean };
 };
 
 export interface IInitialConfig {
@@ -128,24 +138,65 @@ export interface IInitialConfig {
   file: TFile;
   token: string;
   type: string;
+  Error?: string;
+  errorMessage?: string;
 }
 
-export interface IResponse {
+export type TError = {
+  message: "unauthorized" | "restore-backup" | string;
+  status?: number | string;
+};
+
+export type TResponse =
+  | {
+      config: IInitialConfig;
+      editorUrl: TDocServiceLocation;
+      user: TUser;
+      settings: TSettings;
+      successAuth: boolean;
+      isSharingAccess: boolean;
+      error?: TError;
+      doc?: string;
+    }
+  | {
+      error: TError;
+      config?: undefined;
+      editorUrl?: undefined;
+      user?: undefined;
+      settings?: undefined;
+      successAuth?: undefined;
+      isSharingAccess?: undefined;
+      doc?: undefined;
+    };
+
+export type EditorProps = {
   config: IInitialConfig;
-  editorUrl: TDocServiceLocation;
-  user: TUser;
-  settings: TSettings;
   successAuth: boolean;
-  isSharingAccess: boolean;
-  error?: unknown;
-}
-
-export interface EditorProps extends IResponse {}
+  user: TUser;
+  view: boolean;
+  doc?: string;
+  documentserverUrl: string;
+  fileInfo: TFile;
+  t: TTranslation | null;
+  onSDKRequestSaveAs: (event: object) => void;
+  onSDKRequestInsertImage: (event: object) => void;
+  onSDKRequestSelectSpreadsheet: (event: object) => void;
+  onSDKRequestSelectDocument: (event: object) => void;
+  onSDKRequestReferenceSource: (event: object) => void;
+};
 
 export type TEventData = {
-  title: string;
-  url: string;
-  fileType: string;
+  title?: string;
+  url?: string;
+  fileType?: string;
+  referenceData?: TGetReferenceData;
+  windowName?: string;
+  path?: string;
+  actionLink?: string;
+  message?: string;
+  emails?: string[];
+  c?: string;
+  version?: number;
 };
 
 export type TEvent = {
@@ -187,6 +238,8 @@ export interface SelectFolderDialogProps {
     selectedFileInfo: TSelectedFileInfo,
   ) => Promise<void>;
   fileInfo: TFile;
+  t: TTranslation | null;
+  i18n: i18n;
 }
 
 export interface SelectFileDialogProps {
@@ -221,17 +274,74 @@ export interface SelectFileDialogProps {
     selectedFileInfo: TSelectedFileInfo,
   ) => Promise<void>;
   fileInfo: TFile;
+  t: TTranslation | null;
+  i18n: i18n;
 }
 
 export interface UseSocketHelperProps {
   socketUrl: string;
 }
 
-export interface UseI18NProps {
-  settings: TSettings;
+export interface UseEventsProps {
   user: TUser;
+  successAuth: boolean;
+  fileInfo: TFile;
+  config: IInitialConfig;
+  doc?: string;
+  t?: Nullable<TTranslation>;
 }
 
-export interface UseThemeProps {
+export interface UseInitProps {
+  config: IInitialConfig;
+  successAuth: boolean;
+  fileInfo: TFile;
   user: TUser;
+  t: Nullable<TTranslation>;
+
+  setDocTitle: (value: string) => void;
+  documentReady: boolean;
 }
+
+export type THistoryData =
+  | {
+      url: string;
+      version: string | number;
+      key: string;
+      fileType: string;
+      changesUrl?: string;
+      previous?: { fileType: string; key: string; url: string };
+      token?: string;
+    }
+  | { error: string; version: string | number };
+
+export type TDocEditor = {
+  setReferenceData?: (data: TGetReferenceDataRequest) => void;
+  showMessage?: (data: string) => void;
+  refreshHistory?: ({
+    currentVersion,
+    history,
+  }: {
+    currentVersion?: number;
+    history?: {};
+    error?: string;
+  }) => void;
+  setHistoryData?: (obj: THistoryData) => void;
+  setActionLink: (link: string) => void;
+  setUsers?: ({ c, users }: { c: string; users: TSharedUsers[] }) => void;
+};
+
+export type TCatchError =
+  | {
+      response: {
+        data: {
+          status?: number | string;
+          statusCode?: number | string;
+          error: {
+            message: string;
+          };
+        };
+      };
+    }
+  | { statusText: string }
+  | { message: string }
+  | string;

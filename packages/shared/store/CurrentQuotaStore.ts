@@ -221,7 +221,8 @@ class CurrentQuotasStore {
   get showTenantCustomQuotaBar() {
     if (!this.isTenantCustomQuotaSet || this.tenantCustomQuota === undefined)
       return false;
-    if (!this.tenantCustomQuota) return false;
+
+    if (+this.tenantCustomQuota === -1) return false;
 
     return (
       (this.usedTotalStorageSizeCount / this.tenantCustomQuota) * 100 >=

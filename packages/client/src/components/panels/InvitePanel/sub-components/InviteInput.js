@@ -12,7 +12,7 @@ import { parseAddresses, getParts } from "@docspace/shared/utils";
 import { ComboBox } from "@docspace/shared/components/combobox";
 
 import Filter from "@docspace/shared/api/people/filter";
-import BetaBadge from "@docspace/common/components/BetaBadge";
+import BetaBadge from "../../../BetaBadgeWrapper";
 import { getMembersList } from "@docspace/shared/api/people";
 import { ShareAccessRights } from "@docspace/shared/enums";
 import withCultureNames from "@docspace/common/hoc/withCultureNames";

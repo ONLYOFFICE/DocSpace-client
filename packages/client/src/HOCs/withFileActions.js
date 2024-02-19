@@ -255,6 +255,7 @@ export default function withFileActions(WrappedFileItem) {
         itemIndex,
         currentDeviceType,
         isDisabledDropItem,
+        isRecentTab,
       } = this.props;
       const { access, id } = item;
 
@@ -320,6 +321,7 @@ export default function withFileActions(WrappedFileItem) {
           onDragOver={this.onDragOver}
           onDragLeave={this.onDragLeave}
           badgeUrl={badgeUrl}
+          isRecentTab={isRecentTab}
           {...this.props}
         />
       );
@@ -338,7 +340,7 @@ export default function withFileActions(WrappedFileItem) {
         uploadDataStore,
         contextOptionsStore,
       },
-      { item, t }
+      { item, t },
     ) => {
       const {
         selectRowAction,
@@ -355,6 +357,7 @@ export default function withFileActions(WrappedFileItem) {
         isRecycleBinFolder,
         isRoomsFolder,
         isArchiveFolder,
+        isRecentTab,
       } = treeFoldersStore;
       const {
         dragging,
@@ -380,7 +383,7 @@ export default function withFileActions(WrappedFileItem) {
       const { startUpload } = uploadDataStore;
 
       const selectedItem = selection.find(
-        (x) => x.id === item.id && x.fileExst === item.fileExst
+        (x) => x.id === item.id && x.fileExst === item.fileExst,
       );
 
       const isDisabledDropItem = !item.security.Create;
@@ -402,12 +405,12 @@ export default function withFileActions(WrappedFileItem) {
       const activeFileIndex = activeFiles.findIndex(
         (x) =>
           x.id === item.id &&
-          (Boolean(item.fileExst) || item.fileType !== undefined)
+          (Boolean(item.fileExst) || item.fileType !== undefined),
       );
       const activeFolderIndex = activeFolders.findIndex(
         (x) =>
           x.id === item.id &&
-          (item.isFolder || (!item.fileExst && item.id === -1))
+          (item.isFolder || (!item.fileExst && item.id === -1)),
       );
 
       const isFileProgress = isProgress(activeFileIndex, activeFiles);
@@ -471,7 +474,8 @@ export default function withFileActions(WrappedFileItem) {
         setSelection,
         currentDeviceType: settingsStore.currentDeviceType,
         isDisabledDropItem,
+        isRecentTab,
       };
-    }
+    },
   )(observer(WithFileActions));
 }

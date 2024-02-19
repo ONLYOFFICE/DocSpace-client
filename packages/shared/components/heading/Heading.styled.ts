@@ -16,12 +16,12 @@ const styleCss = css<{
   font-size: ${(props) => props.theme.getCorrectFontSize(fontSizeStyle(props))};
   font-weight: ${(props) => props.theme.heading.fontWeight};
 
-  color: ${(props) => props.colorProp || props.theme.heading.color}
-    ${(props) =>
-      props.isInline &&
-      css`
-        display: inline-block;
-      `};
+  color: ${(props) => props.colorProp || props.theme.heading.color};
+  ${(props) =>
+    props.isInline &&
+    css`
+      display: inline-block;
+    `};
 `;
 
 const StyledHeading = styled.h1`

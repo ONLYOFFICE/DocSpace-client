@@ -3,124 +3,123 @@ import { Navigate } from "react-router-dom";
 import loadable from "@loadable/component";
 
 import PrivateRoute from "@docspace/common/components/PrivateRoute";
-import ErrorBoundary from "@docspace/common/components/ErrorBoundary";
+import ErrorBoundary from "../components/ErrorBoundaryWrapper";
 
-import Error404 from "SRC_DIR/pages/Errors/404";
+import Error404 from "@docspace/shared/components/errors/Error404";
 
 import { generalRoutes } from "./general";
 
 const PortalSettings = loadable(() => import("../pages/PortalSettings"));
 
 const CustomizationSettings = loadable(
-  () => import("../pages/PortalSettings/categories/common/index.js"),
+  () => import("../pages/PortalSettings/categories/common/index.js")
 );
 const LanguageAndTimeZoneSettings = loadable(
   () =>
     import(
       "../pages/PortalSettings/categories/common/Customization/language-and-time-zone"
-    ),
+    )
 );
 const WelcomePageSettings = loadable(
   () =>
     import(
       "../pages/PortalSettings/categories/common/Customization/welcome-page-settings"
-    ),
+    )
 );
 const DNSSettings = loadable(
   () =>
     import(
       "../pages/PortalSettings/categories/common/Customization/dns-settings"
-    ),
+    )
 );
 const PortalRenaming = loadable(
   () =>
     import(
       "../pages/PortalSettings/categories/common/Customization/portal-renaming"
-    ),
+    )
 );
 const WhiteLabel = loadable(
-  () => import("../pages/PortalSettings/categories/common/Branding/whitelabel"),
+  () => import("../pages/PortalSettings/categories/common/Branding/whitelabel")
 );
 const CompanyInfoSettings = loadable(
   () =>
     import(
       "../pages/PortalSettings/categories/common/Branding/companyInfoSettings"
-    ),
+    )
 );
 const AdditionalResources = loadable(
   () =>
     import(
       "../pages/PortalSettings/categories/common/Branding/additionalResources"
-    ),
+    )
 );
 const SecuritySettings = loadable(
-  () => import("../pages/PortalSettings/categories/security/index.js"),
+  () => import("../pages/PortalSettings/categories/security/index.js")
 );
 const TfaPage = loadable(
-  () => import("../pages/PortalSettings/categories/security/access-portal/tfa"),
+  () => import("../pages/PortalSettings/categories/security/access-portal/tfa")
 );
 const PasswordStrengthPage = loadable(
   () =>
     import(
       "../pages/PortalSettings/categories/security/access-portal/passwordStrength"
-    ),
+    )
 );
 const TrustedMailPage = loadable(
   () =>
     import(
       "../pages/PortalSettings/categories/security/access-portal/trustedMail"
-    ),
+    )
 );
 const IpSecurityPage = loadable(
   () =>
     import(
       "../pages/PortalSettings/categories/security/access-portal/ipSecurity"
-    ),
+    )
 );
 const BruteForceProtectionPage = loadable(
   () =>
     import(
       "../pages/PortalSettings/categories/security/access-portal/bruteForceProtection"
-    ),
+    )
 );
 const AdminMessagePage = loadable(
   () =>
     import(
       "../pages/PortalSettings/categories/security/access-portal/adminMessage"
-    ),
+    )
 );
 const SessionLifetimePage = loadable(
   () =>
     import(
       "../pages/PortalSettings/categories/security/access-portal/sessionLifetime"
-    ),
+    )
 );
 const Integration = loadable(
-  () => import("../pages/PortalSettings/categories/integration"),
+  () => import("../pages/PortalSettings/categories/integration")
 );
 const Payments = loadable(
-  () => import("../pages/PortalSettings/categories/payments"),
+  () => import("../pages/PortalSettings/categories/payments")
 );
 const ThirdParty = loadable(
   () =>
     import(
       "../pages/PortalSettings/categories/integration/ThirdPartyServicesSettings"
-    ),
+    )
 );
 
 const DocumentService = loadable(
-  () =>
-    import("../pages/PortalSettings/categories/integration/DocumentService"),
+  () => import("../pages/PortalSettings/categories/integration/DocumentService")
 );
 
 const SingleSignOn = loadable(
-  () => import("../pages/PortalSettings/categories/integration/SingleSignOn"),
+  () => import("../pages/PortalSettings/categories/integration/SingleSignOn")
 );
 const SPSettings = loadable(
   () =>
     import(
       "../pages/PortalSettings/categories/integration/SingleSignOn/SPSettings"
-    ),
+    )
 );
 const SPMetadata = loadable(
   () =>
@@ -130,7 +129,7 @@ const SPMetadata = loadable(
 );
 
 const DeveloperTools = loadable(
-  () => import("../pages/PortalSettings/categories/developer-tools/index.js"),
+  () => import("../pages/PortalSettings/categories/developer-tools/index.js")
 );
 
 const DataImport = loadable(
@@ -159,25 +158,25 @@ const WebhookHistory = loadable(
   () =>
     import(
       "../pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory"
-    ),
+    )
 );
 const WebhookDetails = loadable(
   () =>
     import(
       "../pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails"
-    ),
+    )
 );
 const Backup = loadable(
-  () => import("../pages/PortalSettings/categories/data-management/index"),
+  () => import("../pages/PortalSettings/categories/data-management/index")
 );
 const DeleteDataPage = loadable(
-  () => import("../pages/PortalSettings/categories/delete-data"),
+  () => import("../pages/PortalSettings/categories/delete-data")
 );
 const RestoreBackup = loadable(
   () =>
     import(
       "../pages/PortalSettings/categories/data-management/backup/restore-backup/index"
-    ),
+    )
 );
 const Bonus = loadable(() => import("../pages/Bonus"));
 

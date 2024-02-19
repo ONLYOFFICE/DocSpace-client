@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-import {
-  StyledLoadingButton,
-  StyledCircle,
-} from "@docspace/shared/components/color-theme/index";
+import StyledLoadingButton from "@docspace/shared/components/color-theme/sub-components/StyledLoadingButton";
+import StyledCircle from "@docspace/shared/components/color-theme/sub-components/StyledCircle";
+
 const LoadingButton = (props) => {
   const { id, className, style, percent, onClick, isConversion, inConversion } =
     props;

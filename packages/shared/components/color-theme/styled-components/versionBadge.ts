@@ -13,18 +13,6 @@ const getDefaultStyles = ({
 }) =>
   $currentColorScheme &&
   css`
-    .version-mark-icon {
-      path {
-        fill: ${!$isVersion
-          ? theme.filesVersionHistory.badge.defaultFill
-          : theme.filesVersionHistory.badge.fill};
-
-        stroke: ${!$isVersion
-          ? theme.filesVersionHistory.badge.stroke
-          : theme.filesVersionHistory.badge.fill};
-      }
-    }
-
     .version_badge-text {
       color: ${$isVersion && $currentColorScheme.text?.accent};
     }

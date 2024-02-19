@@ -36,7 +36,6 @@ const FilterInput = React.memo(
     selectorLabel,
     clearAll,
 
-    isRecentFolder,
     removeSelectedItem,
 
     isRooms,
@@ -176,39 +175,38 @@ const FilterInput = React.memo(
             title={filterTitle}
             userId={userId}
           />
-          {!isRecentFolder && (
-            <SortButton
-              id="sort-by-button"
-              onSort={onSort}
-              getSortData={getSortData}
-              getSelectedSortData={getSelectedSortData}
-              view={view}
-              viewAs={viewAs === "table" ? "row" : viewAs}
-              viewSettings={viewSettings}
-              onChangeViewAs={onChangeViewAs}
-              onSortButtonClick={onSortButtonClick}
-              viewSelectorVisible={
-                viewSettings &&
-                viewSelectorVisible &&
-                currentDeviceType !== DeviceType.desktop
-              }
-              title={sortByTitle}
-            />
-          )}
+          <SortButton
+            id="sort-by-button"
+            onSort={onSort}
+            getSortData={getSortData}
+            getSelectedSortData={getSelectedSortData}
+            view={view}
+            viewAs={viewAs === "table" ? "row" : viewAs}
+            viewSettings={viewSettings}
+            onChangeViewAs={onChangeViewAs}
+            onSortButtonClick={onSortButtonClick}
+            viewSelectorVisible={
+              viewSettings &&
+              viewSelectorVisible &&
+              currentDeviceType !== DeviceType.desktop
+            }
+            title={sortByTitle}
+          />
 
-          {((viewSettings &&
+          {viewSettings &&
             currentDeviceType === DeviceType.desktop &&
-            viewSelectorVisible) ||
-            isRecentFolder) && (
-            <ViewSelector
-              id={viewAs === "tile" ? "view-switch--row" : "view-switch--tile"}
-              style={styleViewSelector}
-              viewAs={viewAs === "table" ? "row" : viewAs}
-              viewSettings={viewSettings}
-              onChangeView={onChangeViewAs}
-              isFilter
-            />
-          )}
+            viewSelectorVisible && (
+              <ViewSelector
+                id={
+                  viewAs === "tile" ? "view-switch--row" : "view-switch--tile"
+                }
+                style={styleViewSelector}
+                viewAs={viewAs === "table" ? "row" : viewAs}
+                viewSettings={viewSettings}
+                onChangeView={onChangeViewAs}
+                isFilter
+              />
+            )}
         </div>
         {selectedItems && selectedItems.length > 0 && (
           <div className="filter-input_selected-row">

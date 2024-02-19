@@ -143,19 +143,19 @@ class FirebaseHelper {
     return Promise.resolve(campaigns);
   }
 
-  async getCampaignsImages(banner: string) {
+  async getCampaignsImages(campaign: string) {
     const domain = this.config?.authDomain;
-    return `https://${domain}/images/${banner}.svg`;
+    return `https://${domain}/images/campaign.${campaign.toLowerCase()}.svg`;
   }
 
-  async getCampaignsTranslations(banner: string, lng: string) {
+  async getCampaignsTranslations(campaign: string, lng: string) {
     const domain = this.config?.authDomain;
-    return `https://${domain}/locales/${lng}/${banner}.json`;
+    return `https://${domain}/locales/${lng}/Campaign${campaign}.json`;
   }
 
-  async getCampaignConfig(banner: string) {
+  async getCampaignConfig(campaign: string) {
     const domain = this.config?.authDomain;
-    return `https://${domain}/configs/${banner}.json`;
+    return `https://${domain}/configs/Campaign${campaign}.json`;
   }
 
   async sendCrashReport<T>(report: T) {

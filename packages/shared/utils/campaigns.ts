@@ -12,7 +12,7 @@ export const getImage = async (
   standalone: boolean,
 ): Promise<string> => {
   if (standalone) {
-    return `/static/campaigns/images/${campaign}.svg`;
+    return `/static/campaigns/images/campaign.${campaign.toLowerCase()}.svg`;
   }
   const imageUrl = await window.firebaseHelper.getCampaignsImages(campaign);
   return imageUrl;
@@ -25,7 +25,7 @@ export const getTranslation = async (
 ) => {
   let translationUrl;
   if (standalone) {
-    translationUrl = `/static/campaigns/locales/${lng}/${campaign}.json`;
+    translationUrl = `/static/campaigns/locales/${lng}/Campaign${campaign}.json`;
   } else {
     translationUrl = await window.firebaseHelper.getCampaignsTranslations(
       campaign,
@@ -39,7 +39,7 @@ export const getTranslation = async (
 export const getConfig = async (campaign: string, standalone: boolean) => {
   let configUrl;
   if (standalone) {
-    configUrl = `/static/campaigns/configs/${campaign}.json`;
+    configUrl = `/static/campaigns/configs/Campaign${campaign}.json`;
   } else {
     configUrl = await window.firebaseHelper.getCampaignConfig(campaign);
   }

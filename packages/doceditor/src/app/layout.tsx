@@ -12,6 +12,9 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link id="favicon" rel="shortcut icon" type="image/x-icon" />
+      </head>
       <body className={inter.className}>
         <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
       </body>

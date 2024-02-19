@@ -321,50 +321,44 @@ module.exports = (env, argv) => {
         ...deps,
         ...sharedDeps,
       },
-    })
+    }),
   );
 
+  const htmlTemplate = {
+    title: title,
+    template: "./public/index.html",
+    publicPath: homepage,
+    base: `${homepage}/`,
+  };
+
   if (!!env.hideText) {
-    config.plugins.push(
-      new HtmlWebpackPlugin({
-        title: title,
-        template: "./public/index.html",
-        publicPath: homepage,
-        base: `${homepage}/`,
-        custom: `<style type="text/css">
-          div,
-          p,
-          a,
-          span,
-          button,
-          h1,
-          h2,
-          h3,
-          h4,
-          h5,
-          h6,
-          ::placeholder {
-            color: rgba(0, 0, 0, 0) !important;
+    htmlTemplate.custom = `
+      <style type="text/css">
+        div,
+        p,
+        a,
+        span,
+        button,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        ::placeholder {
+          color: rgba(0, 0, 0, 0) !important;
         }
-        </style>`,
-      })
-    );
+      </style>`;
   } else {
-    config.plugins.push(
-      new HtmlWebpackPlugin({
-        template: "./public/index.html",
-        publicPath: homepage,
-        title: title,
-        base: `${homepage}/`,
-        browserDetectorUrl: `/static/scripts/browserDetector.js?hash=${
-          runtime.checksums["browserDetector.js"] || dateHash
-        }`,
-        configUrl: `/static/scripts/config.json?hash=${
-          runtime.checksums["config.json"] || dateHash
-        }`,
-      })
-    );
+    htmlTemplate.browserDetectorUrl = `/static/scripts/browserDetector.js?hash=${
+      runtime.checksums["browserDetector.js"] || dateHash
+    }`;
+    htmlTemplate.configUrl = `/static/scripts/config.json?hash=${
+      runtime.checksums["config.json"] || dateHash
+    }`;
   }
+
+  config.plugins.push(new HtmlWebpackPlugin(htmlTemplate));
 
   const defines = {
     VERSION: JSON.stringify(version),

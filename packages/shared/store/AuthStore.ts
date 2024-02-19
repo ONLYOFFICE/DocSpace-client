@@ -8,7 +8,12 @@ import { getPortalTenantExtra } from "../api/portal";
 import { TUser } from "../api/people/types";
 import { TCapabilities, TThirdPartyProvider } from "../api/settings/types";
 import { logout as logoutDesktop } from "../utils/desktop";
-import { frameCallEvent, isAdmin, isPublicRoom } from "../utils/common";
+import {
+  frameCallEvent,
+  isAdmin,
+  isPublicRoom,
+  insertDataLayer,
+} from "../utils/common";
 import { getCookie, setCookie } from "../utils/cookie";
 import { TTenantExtraRes } from "../api/portal/types";
 import { TenantStatus } from "../enums";
@@ -145,6 +150,10 @@ class AuthStore {
 
     return Promise.all(requests).then(() => {
       const user = this.userStore?.user;
+
+      if (user?.id) {
+        insertDataLayer(user.id);
+      }
 
       if (
         user &&

@@ -895,3 +895,8 @@ export const insertTagManager = (id: string) => {
   document.head.insertBefore(script, document.head.childNodes[0]);
   document.body.insertBefore(noScript, document.body.childNodes[0]);
 };
+
+export const insertDataLayer = (id: string) => {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ user_id: id });
+};

@@ -1,8 +1,9 @@
 export const translates = {
-  Title: "ONLYOFFICE for developers",
-  BodyText:
+  Header: "ONLYOFFICE for developers",
+  SubHeader:
     "The best online office experience within your app, under your brand.",
-  ActionText: "Start now",
+  ButtonLabel: "Start now",
+  Link: "https://onlyoffice.com",
 };
 
 export const config = {
@@ -23,7 +24,6 @@ export const config = {
     backgroundColor: "#388BDE",
     fontSize: "12px",
     fontWeight: "700",
-    url: "https://onlyoffice.com",
     type: "open-url",
   },
 };

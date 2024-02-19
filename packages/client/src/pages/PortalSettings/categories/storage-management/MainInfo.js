@@ -10,7 +10,7 @@ const MainInfoComponent = (props) => {
   const { portalInfo, activeUsersCount } = props;
   const { t } = useTranslation("Settings");
 
-  const creationDate = moment(portalInfo.creationDateTime).format("l");
+  const creationDate = moment(portalInfo.creationDateTime).format("L");
 
   return (
     <StyledMainInfo>

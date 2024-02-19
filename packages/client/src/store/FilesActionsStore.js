@@ -31,13 +31,19 @@ import {
   FolderType,
   RoomsType,
   ShareAccessRights,
+  RoomSearchArea,
+  Events,
 } from "@docspace/common/constants";
 import { makeAutoObservable } from "mobx";
 
 import toastr from "@docspace/components/toast/toastr";
 import { TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
 import { checkProtocol } from "../helpers/files-helpers";
-import { combineUrl } from "@docspace/common/utils";
+import {
+  combineUrl,
+  getObjectByLocation,
+  frameCallEvent,
+} from "@docspace/common/utils";
 import config from "PACKAGE_FILE";
 import { isDesktop } from "@docspace/components/utils/device";
 import { getCategoryType } from "SRC_DIR/helpers/utils";
@@ -45,9 +51,6 @@ import { muteRoomNotification } from "@docspace/common/api/settings";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import RoomsFilter from "@docspace/common/api/rooms/filter";
 import AccountsFilter from "@docspace/common/api/people/filter";
-import { RoomSearchArea } from "@docspace/common/constants";
-import { getObjectByLocation } from "@docspace/common/utils";
-import { Events } from "@docspace/common/constants";
 import uniqueid from "lodash/uniqueId";
 import FilesFilter from "@docspace/common/api/files/filter";
 import {
@@ -527,6 +530,16 @@ class FilesActionStore {
     }
   };
 
+  tryDownloadInFrame = (url, replace = false) => {
+    const { isFrame, frameConfig } = this.authStore.settingsStore;
+
+    isFrame && frameConfig?.actionLinksFromEvents
+      ? frameCallEvent({ event: "onDownload", data: url })
+      : replace
+      ? (window.location.href = url)
+      : window.open(url, "_self");
+  };
+
   downloadFiles = async (fileConvertIds, folderIds, translations) => {
     const { clearActiveOperations, secondaryProgressDataStore } =
       this.uploadDataStore;
@@ -534,6 +547,7 @@ class FilesActionStore {
       secondaryProgressDataStore;
 
     const { addActiveItems } = this.filesStore;
+
     const { label } = translations;
 
     if (this.isBulkDownload) {
@@ -583,7 +597,7 @@ class FilesActionStore {
           this.setIsBulkDownload(false);
 
           if (item.url) {
-            window.location.href = item.url;
+            this.tryDownloadInFrame(item.url, true);
           } else {
             setSecondaryProgressBarData({
               visible: true,
@@ -627,7 +641,8 @@ class FilesActionStore {
     const items = [];
 
     if (selection.length === 1 && selection[0].fileExst && !folderId) {
-      window.open(selection[0].viewUrl, "_self");
+      this.tryDownloadInFrame(selection[0].viewUrl);
+
       return Promise.resolve();
     }
 
@@ -1375,6 +1390,7 @@ class FilesActionStore {
       highlightFileId: item.id,
       isFileHasExst: !item.fileExst,
       rootFolderType,
+      settingsStore,
     };
 
     const url = getCategoryUrl(categoryType, ExtraLocation);

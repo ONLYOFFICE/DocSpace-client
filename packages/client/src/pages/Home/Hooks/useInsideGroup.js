@@ -10,7 +10,6 @@ const useInsideGroup = ({
   location,
 
   setIsLoading,
-
   fetchGroup,
   setPortalTariff,
 }) => {

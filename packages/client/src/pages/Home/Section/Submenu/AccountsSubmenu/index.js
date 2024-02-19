@@ -1,8 +1,10 @@
 import * as Styled from "./index.styled";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
+import Loaders from "@docspace/common/components/Loaders";
 
 const AccountsSubmenu = ({
+  showBodyLoader,
   setPeopleSelection,
   setGroupsSelection,
   setPeopleBufferSelection,
@@ -28,6 +30,8 @@ const AccountsSubmenu = ({
 
   if (groupId !== undefined) return null;
 
+  if (showBodyLoader) return <Loaders.SectionSubmenuLoader />;
+
   return (
     <Styled.AccountsSubmenu
       className="accounts-tabs"
@@ -50,9 +54,11 @@ const AccountsSubmenu = ({
   );
 };
 
-export default inject(({ peopleStore }) => ({
+export default inject(({ peopleStore, clientLoadingStore }) => ({
+  showBodyLoader:  clientLoadingStore.showBodyLoader,
   setPeopleSelection: peopleStore.selectionStore.setSelection,
   setPeopleBufferSelection: peopleStore.selectionStore.setBufferSelection,
   setGroupsSelection: peopleStore.groupsStore.setSelection,
   setGroupsBufferSelection: peopleStore.groupsStore.setBufferSelection,
+
 }))(observer(AccountsSubmenu));

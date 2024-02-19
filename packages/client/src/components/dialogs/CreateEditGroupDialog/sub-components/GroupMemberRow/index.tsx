@@ -2,7 +2,8 @@ import { Avatar } from "@docspace/shared/components/avatar";
 import * as Styled from "./index.styled";
 import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import { ReactSVG } from "react-svg";
-
+import { getUserTypeLabel } from "@docspace/shared/utils/common";
+import {useTranslation} from 'react-i18next'
 interface GroupMemberRowProps {
   groupMember: {
     avatarSmall: string;
@@ -16,6 +17,9 @@ const GroupMemberRow = ({
   groupMember,
   onClickRemove,
 }: GroupMemberRowProps) => {
+
+  const { t } = useTranslation(["Common"])
+
   return (
     <Styled.GroupMemberRow>
       <Avatar
@@ -25,7 +29,7 @@ const GroupMemberRow = ({
       />
       <div className="info">
         <div className="name">{groupMember.displayName}</div>
-        <div className="email">{groupMember.email}</div>
+        <div className="email">{`${getUserTypeLabel(groupMember.role, t)} | ${groupMember.email}`}</div>
       </div>
       <ReactSVG
         className="remove-icon"

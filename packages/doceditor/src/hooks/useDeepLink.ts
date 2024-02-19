@@ -4,7 +4,7 @@ import { isMobile } from "react-device-detect";
 import { TFile } from "@docspace/shared/api/files/types";
 import { TSettings } from "@docspace/shared/api/settings/types";
 
-import { getDeepLink } from "@/utils/deepLinkHelper";
+import { getDeepLink } from "../components/deep-link/DeepLink.helper";
 
 export interface UseDeepLinkProps {
   settings?: TSettings;

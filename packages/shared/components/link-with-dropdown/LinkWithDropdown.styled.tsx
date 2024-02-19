@@ -191,7 +191,7 @@ StyledText.defaultProps = { theme: Base };
 //   }
 // `;
 
-const StyledSpan = styled.span<{ $isOpen?: boolean; withoutHover?: boolean }>`
+const StyledSpan = styled.span<{ $isOpen?: boolean }>`
   display: inline-block;
   padding: 4px 8px;
   border-radius: 3px;
@@ -213,19 +213,22 @@ const StyledSpan = styled.span<{ $isOpen?: boolean; withoutHover?: boolean }>`
     }
   }
 
-  ${(props) =>
-    !props.withoutHover &&
-    css`
-      :hover {
-        color: ${props.theme.linkWithDropdown.color.hover};
+  :hover {
+    color: ${(props) => props.theme.linkWithDropdown.color.hover};
 
-        background: ${props.theme.linkWithDropdown.background.hover};
-        .expander {
-          path {
-            fill: ${props.theme.linkWithDropdown.color.hover};
-          }
-        }
+    background: ${(props) => props.theme.linkWithDropdown.background.hover};
+    .expander {
+      path {
+        fill: ${(props) => props.theme.linkWithDropdown.color.hover};
       }
+    }
+  }
+
+  ${(props) =>
+    props.$isOpen &&
+    css`
+      color: ${props.theme.linkWithDropdown.color.hover};
+      background: ${props.theme.linkWithDropdown.background.hover};
     `}
 `;
 StyledSpan.defaultProps = { theme: Base };
@@ -237,3 +240,4 @@ export {
   StyledLinkWithDropdown,
   Caret,
 };
+

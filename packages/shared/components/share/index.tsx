@@ -41,8 +41,7 @@ const Share = (props: ShareProps) => {
     setShareChanged,
   } = props;
   const { t } = useTranslation(["Common"]);
-  const [primaryFileLink, setPrimaryFileLink] = useState<TLink[] | null>([]);
-  const [additionalFileLinks, setAdditionalFileLinks] = useState<TLink[]>([]);
+  const [fileLinks, setFileLinks] = useState<TLink[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [loadingLinks, setLoadingLinks] = useState<(string | number)[]>([]);
 
@@ -54,15 +53,8 @@ const Share = (props: ShareProps) => {
     if (requestRunning.current) return;
     requestRunning.current = true;
     const res = await getExternalLinks(infoPanelSelection.id);
-    const primaryLink = res.items.filter(
-      (item) => item.sharedTo.primary === true,
-    );
-    const additionalLinks = res.items.filter(
-      (item) => item.sharedTo.primary !== true,
-    );
 
-    setPrimaryFileLink(primaryLink);
-    setAdditionalFileLinks(additionalLinks);
+    setFileLinks(res.items);
     setIsLoading(false);
     requestRunning.current = false;
   }, [infoPanelSelection.id]);
@@ -79,29 +71,25 @@ const Share = (props: ShareProps) => {
     setShareChanged?.(false);
   }, [fetchLinks, setShareChanged, shareChanged]);
 
-  const addLoaderLink = (primary: boolean) => {
+  const addLoaderLink = () => {
     const link = { isLoaded: true };
-    if (primary) {
-      setPrimaryFileLink([link]);
-    } else {
-      setAdditionalFileLinks([...additionalFileLinks, ...[link]]);
-    }
+    setFileLinks([...fileLinks, ...[link]]);
   };
 
   const addGeneralLink = async () => {
-    addLoaderLink(true);
+    addLoaderLink();
 
     const link = getPrimaryFileLink
       ? await getPrimaryFileLink(infoPanelSelection.id)
       : await getPrimaryLink(infoPanelSelection.id);
 
-    setPrimaryFileLink([link]);
+    setFileLinks([link]);
     copy(link.sharedTo.shareLink);
     toastr.success(t("Common:GeneralAccessLinkCopied"));
   };
 
   const addAdditionalLinks = async () => {
-    addLoaderLink(false);
+    addLoaderLink();
     const newLink = addFileLink
       ? await addFileLink(
           infoPanelSelection.id,
@@ -115,7 +103,7 @@ const Share = (props: ShareProps) => {
           false,
           false,
         );
-    setAdditionalFileLinks((links) => {
+    setFileLinks((links) => {
       const newLinks: TLink[] = [...links];
 
       const idx = newLinks.findIndex((l) => "isLoaded" in l && l.isLoaded);
@@ -127,32 +115,25 @@ const Share = (props: ShareProps) => {
   };
 
   const updateLink = (link: TFileLink, newItem: TFileLink) => {
-    if (link.sharedTo.primary) {
-      setPrimaryFileLink([newItem]);
-    } else {
-      const newArr = additionalFileLinks.map((item) => {
-        if ("sharedTo" in item && item.sharedTo.id === newItem.sharedTo.id) {
-          return newItem || null;
-        }
-        return item;
-      });
-      setAdditionalFileLinks(newArr);
-    }
+    const newArr = fileLinks.map((item) => {
+      if ("sharedTo" in item && item.sharedTo.id === newItem.sharedTo.id) {
+        return newItem || null;
+      }
+      return item;
+    });
+    setFileLinks(newArr);
+
     const newLoadingLinks = loadingLinks.filter(
       (item) => item !== link.sharedTo.id,
     );
     setLoadingLinks(newLoadingLinks);
   };
 
-  const deleteLink = (link: TFileLink, id: string | number) => {
-    if (link.sharedTo.primary) {
-      setPrimaryFileLink(null);
-    } else {
-      const newArr = additionalFileLinks.filter(
-        (item) => "sharedTo" in item && item.sharedTo.id !== id,
-      );
-      setAdditionalFileLinks(newArr);
-    }
+  const deleteLink = (id: string | number) => {
+    const newArr = fileLinks.filter(
+      (item) => "sharedTo" in item && item.sharedTo.id !== id,
+    );
+    setFileLinks(newArr);
   };
 
   const changeShareOption = async (item: TOption, link: TFileLink) => {
@@ -212,7 +193,7 @@ const Share = (props: ShareProps) => {
           );
 
       if (item.access === ShareAccessRights.None) {
-        deleteLink(link, link.sharedTo.id);
+        deleteLink(link.sharedTo.id);
         if (link.sharedTo.primary) {
           toastr.success(t("GeneralAccessLinkRemove"));
         } else {
@@ -280,54 +261,33 @@ const Share = (props: ShareProps) => {
       {isLoading ? (
         <ShareLoader t={t} />
       ) : (
-        <>
-          <StyledLinks>
+        <StyledLinks>
+          <div className="additional-link">
             <Text fontSize="14px" fontWeight={600} className="title-link">
-              {t("GeneralAccessLink")}
+              {t("Common:SharedLinks")}
             </Text>
-            <LinkRow
-              onAddClick={addGeneralLink}
-              links={primaryFileLink}
-              changeShareOption={changeShareOption}
-              changeAccessOption={changeAccessOption}
-              changeExpirationOption={changeExpirationOption}
-              availableExternalRights={
-                infoPanelSelection.availableExternalRights ??
-                ({} as TAvailableExternalRights)
-              }
-              loadingLinks={loadingLinks}
-            />
-          </StyledLinks>
-
-          {((primaryFileLink && primaryFileLink.length > 0) ||
-            additionalFileLinks?.length > 0) && (
-            <StyledLinks>
-              <div className="additional-link">
-                <Text fontSize="14px" fontWeight={600} className="title-link">
-                  {t("AdditionalLinks")}
-                </Text>
-                <IconButton
-                  className="link-to-viewing-icon"
-                  iconName={LinksToViewingIconUrl}
-                  onClick={addAdditionalLinks}
-                  size={16}
-                />
-              </div>
-              <LinkRow
-                onAddClick={addAdditionalLinks}
-                links={additionalFileLinks}
-                changeShareOption={changeShareOption}
-                changeAccessOption={changeAccessOption}
-                changeExpirationOption={changeExpirationOption}
-                availableExternalRights={
-                  infoPanelSelection.availableExternalRights ??
-                  ({} as TAvailableExternalRights)
-                }
-                loadingLinks={loadingLinks}
+            {fileLinks.length > 0 && (
+              <IconButton
+                className="link-to-viewing-icon"
+                iconName={LinksToViewingIconUrl}
+                onClick={addAdditionalLinks}
+                size={16}
               />
-            </StyledLinks>
-          )}
-        </>
+            )}
+          </div>
+          <LinkRow
+            onAddClick={addGeneralLink}
+            links={fileLinks}
+            changeShareOption={changeShareOption}
+            changeAccessOption={changeAccessOption}
+            changeExpirationOption={changeExpirationOption}
+            availableExternalRights={
+              infoPanelSelection.availableExternalRights ??
+              ({} as TAvailableExternalRights)
+            }
+            loadingLinks={loadingLinks}
+          />
+        </StyledLinks>
       )}
     </div>
   );

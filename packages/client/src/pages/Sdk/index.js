@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useParams } from "react-router-dom";
-import AppLoader from "@docspace/common/components/AppLoader";
+import AppLoader from "@docspace/shared/components/app-loader";
 import RoomSelector from "@docspace/shared/selectors/Room";
 import FilesSelector from "../../components/FilesSelector";
 import {

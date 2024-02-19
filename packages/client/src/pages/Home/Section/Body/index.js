@@ -42,7 +42,7 @@ const SectionBodyContent = (props) => {
     filesList,
     uploaded,
     onClickBack,
-
+    isEmptyPage,
     movingInProgress,
     currentDeviceType,
   } = props;
@@ -262,14 +262,17 @@ const SectionBodyContent = (props) => {
 
   if (isEmptyFilesList && movingInProgress) return <></>;
 
-  const isEmptyPage = isEmptyFilesList;
+  const showEmptyPage = isEmptyFilesList;
 
   return (
     <Consumer>
       {(context) =>
-        isEmptyPage ? (
+        showEmptyPage ? (
           <>
-            <EmptyContainer sectionWidth={context.sectionWidth} />
+            <EmptyContainer
+              sectionWidth={context.sectionWidth}
+              isEmptyPage={isEmptyPage}
+            />
           </>
         ) : viewAs === "tile" ? (
           <>
@@ -318,7 +321,7 @@ export default inject(
       scrollToItem,
       setScrollToItem,
       filesList,
-
+      isEmptyPage,
       movingInProgress,
     } = filesStore;
     return {
@@ -346,6 +349,7 @@ export default inject(
       onClickBack: filesActionsStore.onClickBack,
       movingInProgress,
       currentDeviceType: settingsStore.currentDeviceType,
+      isEmptyPage,
     };
   },
 )(

@@ -58,12 +58,15 @@ export default function withContent(WrappedContent) {
         titleWithoutExt,
         isPublicRoom,
         publicRoomKey,
+        culture,
       } = this.props;
+      const locale = getCookie(LANGUAGE) || culture;
 
-      const { access, createdBy, fileStatus, href } = item;
+      const { access, createdBy, fileStatus, href, lastOpened } = item;
 
       const updatedDate = this.getStatusByDate(false);
       const createdDate = this.getStatusByDate(true);
+      const lastOpenedDate = getCorrectDate(locale, lastOpened);
 
       const fileOwner =
         createdBy &&
@@ -93,6 +96,7 @@ export default function withContent(WrappedContent) {
           titleWithoutExt={titleWithoutExt}
           updatedDate={updatedDate}
           createdDate={createdDate}
+          lastOpenedDate={lastOpenedDate}
           fileOwner={fileOwner}
           accessToEdit={accessToEdit}
           linkStyles={linkStyles}
@@ -118,7 +122,7 @@ export default function withContent(WrappedContent) {
         publicRoomStore,
         userStore,
       },
-      { item }
+      { item },
     ) => {
       const {
         createFile,
@@ -187,6 +191,6 @@ export default function withContent(WrappedContent) {
         isPublicRoom,
         publicRoomKey,
       };
-    }
+    },
   )(observer(WithContent));
 }

@@ -1940,6 +1940,7 @@ class FilesStore {
         // "unsubscribe",
         "delete",
         "remove-from-recent",
+        "copy-general-link",
       ];
 
       if (!canDownload) {
@@ -3059,6 +3060,7 @@ class FilesStore {
         mute,
         inRoom,
         requestToken,
+        lastOpened,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3225,6 +3227,7 @@ class FilesStore {
         isForm,
         canCopyPublicLink,
         requestToken,
+        lastOpened,
       };
     });
 

@@ -57,11 +57,23 @@ const Item = ({
   const defaultAccess = filteredAccesses.find(
     (option) => option.access === +access,
   );
+  const getUserType = (item) => {
+    if (item.isOwner) return "owner";
+    if (item.isAdmin) return "admin";
+    if (item.isRoomAdmin) return "manager";
+    if (item.isCollaborator) return "collaborator";
+    return "user";
+  };
 
   const role = getUserRole(item);
+  const type = getUserType(item);
+
   const typeLabel = item?.isEmailInvite
     ? getUserTypeLabel(defaultAccess.type, t)
-    : getUserTypeLabel(role, t);
+    : (type === "user" && defaultAccess?.type !== type) ||
+        (defaultAccess?.type === "manager" && type !== "admin")
+      ? getUserTypeLabel(defaultAccess.type, t)
+      : getUserTypeLabel(type, t);
 
   const errorsInList = () => {
     const hasErrors = inviteItems.some((item) => !!item.errors?.length);

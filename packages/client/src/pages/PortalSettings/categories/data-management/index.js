@@ -12,7 +12,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Box } from "@docspace/shared/components/box";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import AppLoader from "@docspace/common/components/AppLoader";
+import AppLoader from "@docspace/shared/components/app-loader";
 import { removeLocalStorage } from "../../utils";
 import config from "../../../../../package.json";
 import ManualBackup from "./backup/manual-backup";
@@ -47,7 +47,7 @@ const DataManagementWrapper = (props) => {
 
   const renderTooltip = (helpInfo, className) => {
     const isAutoBackupPage = window.location.pathname.includes(
-      "portal-settings/backup/auto-backup"
+      "portal-settings/backup/auto-backup",
     );
     return (
       <>
@@ -112,7 +112,7 @@ const DataManagementWrapper = (props) => {
       ? `/backup/${e.id}`
       : `/portal-settings/backup/${e.id}`;
     navigate(
-      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, url)
+      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, url),
     );
   };
 
@@ -156,5 +156,5 @@ export default inject(
       currentColorScheme,
       toDefault,
     };
-  }
+  },
 )(withTranslation(["Settings", "Common"])(observer(DataManagementWrapper)));

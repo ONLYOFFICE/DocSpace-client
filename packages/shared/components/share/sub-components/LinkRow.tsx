@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import { isMobileOnly } from "react-device-detect";
 import copy from "copy-to-clipboard";
 
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
@@ -16,7 +15,7 @@ import { IconButton } from "../../icon-button";
 import { toastr } from "../../toast";
 import { Loader, LoaderTypes } from "../../loader";
 
-import { StyledLinkRow } from "../Share.styled";
+import { StyledLinkRow, StyledSquare } from "../Share.styled";
 import { getShareOptions, getAccessOptions } from "../Share.helpers";
 import { LinkRowProps } from "../Share.types";
 
@@ -43,7 +42,9 @@ const LinkRow = ({
 
   return !links?.length ? (
     <StyledLinkRow>
-      <Avatar size={AvatarSize.min} role={AvatarRole.user} source={PlusIcon} />
+      <StyledSquare>
+        <IconButton size={12} iconName={PlusIcon} isDisabled />
+      </StyledSquare>
       <Link
         type={LinkType.action}
         isHovered
@@ -94,7 +95,6 @@ const LinkRow = ({
               showDisabledItems
               size={ComboBoxSize.content}
               fillIcon={false}
-              withBlur={isMobileOnly}
               modernView
               isDisabled={isExpiredLink || isLoaded}
             />
@@ -122,7 +122,6 @@ const LinkRow = ({
               showDisabledItems
               size={ComboBoxSize.content}
               fillIcon
-              withBlur={isMobileOnly}
               modernView
               type="onlyIcon"
               isDisabled={isExpiredLink || isLoaded}

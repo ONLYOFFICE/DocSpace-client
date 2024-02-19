@@ -58,7 +58,9 @@ export default function withQuickButtons(WrappedComponent) {
       const primaryLink = await getPrimaryFileLink(item.id);
       if (primaryLink) {
         copy(primaryLink.sharedTo.shareLink);
-        toastr.success(t("Common:LinkSuccessfullyCopied"));
+        item.shared
+          ? toastr.success(t("Common:LinkSuccessfullyCopied"))
+          : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
         setShareChanged(true);
       }
     };

@@ -63,7 +63,7 @@ const useTheme = ({ user }: UseThemeProps) => {
     getUserTheme();
   }, [currentColorTheme, getUserTheme]);
 
-  return { theme };
+  return { theme, currentColorTheme };
 };
 
 export default useTheme;

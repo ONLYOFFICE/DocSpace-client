@@ -10,12 +10,14 @@ const useWhiteLabel = () => {
   const alreadyFetched = React.useRef(false);
 
   const fetchWhiteLabel = React.useCallback(async () => {
-    if (alreadyFetched) return;
+    if (alreadyFetched.current) return;
 
     requestRunning.current = true;
     const urls = await getLogoUrls();
     requestRunning.current = false;
+    console.log("====", urls);
     setLogoUrls(urls);
+    alreadyFetched.current = true;
   }, []);
 
   React.useEffect(() => {

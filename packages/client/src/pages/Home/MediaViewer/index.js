@@ -60,6 +60,7 @@ const FilesMediaViewer = (props) => {
     setActiveFiles,
     pluginContextMenuItems,
     someDialogIsOpen,
+    tryDownloadInFrame,
   } = props;
 
   const navigate = useNavigate();
@@ -162,7 +163,7 @@ const FilesMediaViewer = (props) => {
   const onDownloadMediaFile = (id) => {
     if (playlist.length > 0) {
       let viewUrlFile = playlist.find((file) => file.fileId === id).src;
-      return window.open(viewUrlFile, "_self");
+      return tryDownloadInFrame(viewUrlFile);
     }
   };
 
@@ -286,7 +287,7 @@ export default inject(
       nextMedia,
       prevMedia,
     } = mediaViewerDataStore;
-    const { deleteItemAction } = filesActionsStore;
+    const { deleteItemAction, tryDownloadInFrame } = filesActionsStore;
     const { getIcon, extsImagePreviewed, extsMediaPreviewed } = settingsStore;
     const { isFavoritesFolder, archiveRoomsId } = treeFoldersStore;
 
@@ -375,6 +376,7 @@ export default inject(
       activeFolders,
       setActiveFiles,
       pluginContextMenuItems,
+      tryDownloadInFrame,
     };
   }
 )(withTranslation(["Files", "Translations"])(observer(FilesMediaViewer)));

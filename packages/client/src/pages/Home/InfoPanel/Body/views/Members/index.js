@@ -52,7 +52,7 @@ const Members = ({
   const membersHelper = new MembersHelper({ t });
 
   const updateInfoPanelMembers = async () => {
-    if (!infoPanelSelection) return;
+    if (!infoPanelSelection || !infoPanelSelection.id) return;
     const fetchedMembers = await fetchMembers(t, true, withoutTitlesAndLinks);
     setInfoPanelMembers(fetchedMembers);
   };

@@ -25,6 +25,7 @@ import {
   TFolder,
   TGetFolder,
   TGetFolderPath,
+  TGetReferenceData,
   TGetReferenceDataRequest,
   TOpenEditRequest,
   TOperation,
@@ -76,12 +77,7 @@ export async function openEdit(
   return res;
 }
 
-export async function getReferenceData(data: {
-  fileKey: number | string;
-  instanceId: string;
-  sourceFileId?: number;
-  path?: string;
-}) {
+export async function getReferenceData(data: TGetReferenceData) {
   const options: AxiosRequestConfig = {
     method: "post",
     url: `/files/file/referencedata`,
@@ -358,8 +354,8 @@ export async function deleteFolder(
 export async function createFile(
   folderId: number,
   title: string,
-  templateId: number,
-  formId: number,
+  templateId?: number,
+  formId?: number,
 ) {
   const data = { title, templateId, formId };
   const options: AxiosRequestConfig = {
@@ -459,9 +455,9 @@ export async function getFileInfo(fileId: number) {
 }
 
 export async function updateFile(
-  fileId: string,
+  fileId: string | number,
   title: string,
-  lastVersion: number,
+  lastVersion?: number,
 ) {
   const data = { title, lastVersion };
   const options: AxiosRequestConfig = {
@@ -739,14 +735,18 @@ export async function getNewFiles(folderId: number) {
 }
 
 // TODO: update res type
-export async function convertFile(fileId: null, password = null, sync = false) {
+export async function convertFile(
+  fileId: string | number | null,
+  password = null,
+  sync = false,
+) {
   const data = { password, sync };
 
-  const res = await request({
+  const res = (await request({
     method: "put",
     url: `/files/file/${fileId}/checkconversion`,
     data,
-  });
+  })) as { result: { webUrl: string } }[];
 
   return res;
 }
@@ -1034,12 +1034,14 @@ export async function getEncryptionKeys() {
 }
 
 // TODO: Need update res type
-export function getEncryptionAccess(fileId: number) {
-  return request({
+export async function getEncryptionAccess(fileId: number | string) {
+  const res = (await request({
     method: "get",
     url: `privacyroom/access/${fileId}`,
     data: fileId,
-  });
+  })) as { [key: string]: string | boolean };
+
+  return res;
 }
 
 // export function updateFileStream(file, fileId, encrypted, forcesave) {
@@ -1115,13 +1117,14 @@ export async function getPresignedUri(fileId: number | string) {
   return res;
 }
 
-// TODO: Need update res type
-export function checkFillFormDraft(fileId: number) {
-  return request({
+export async function checkFillFormDraft(fileId: number | string) {
+  const res = (await request({
     method: "post",
     url: `files/masterform/${fileId}/checkfillformdraft`,
     data: { fileId },
-  });
+  })) as string;
+
+  return res;
 }
 
 export async function fileCopyAs(
@@ -1191,7 +1194,7 @@ export async function getSharedUsers(fileId: number) {
     url: `/files/file/${fileId}/sharedusers`,
   };
 
-  const res = (await request(options)) as TSharedUsers;
+  const res = (await request(options)) as TSharedUsers[];
 
   return res;
 }
@@ -1202,14 +1205,14 @@ export async function getProtectUsers(fileId: number) {
     url: `/files/file/${fileId}/protectusers`,
   };
 
-  const res = (await request(options)) as TSharedUsers;
+  const res = (await request(options)) as TSharedUsers[];
 
   return res;
 }
 
 export async function sendEditorNotify(
-  fileId: number,
-  actionLink: {},
+  fileId: number | string,
+  actionLink: string,
   emails: string[],
   message: string,
 ) {

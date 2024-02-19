@@ -509,7 +509,10 @@ export const frameCallEvent = (eventReturnData: unknown) => {
   );
 };
 
-export const frameCallCommand = (commandName: string, commandData: unknown) => {
+export const frameCallCommand = (
+  commandName: string,
+  commandData?: unknown,
+) => {
   window.parent.postMessage(
     JSON.stringify({
       type: "onCallCommand",
@@ -816,7 +819,7 @@ export const getSystemTheme = () => {
   return ThemeKeys.BaseStr;
 };
 
-export const getEditorTheme = (theme: ThemeKeys) => {
+export const getEditorTheme = (theme?: ThemeKeys) => {
   switch (theme) {
     case ThemeKeys.BaseStr:
       return "default-light";

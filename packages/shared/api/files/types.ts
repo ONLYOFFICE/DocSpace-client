@@ -83,6 +83,7 @@ export type TFile = {
   viewUrl: string;
   webUrl: string;
   availableExternalRights?: TAvailableExternalRights;
+  providerKey?: string;
 };
 
 export type TOpenEditRequest = {
@@ -92,6 +93,13 @@ export type TOpenEditRequest = {
   type: string;
   file: TFile;
   errorMessage: string;
+};
+
+export type TGetReferenceData = {
+  fileKey: number | string;
+  instanceId: string;
+  sourceFileId?: number;
+  path?: string;
 };
 
 export type TGetReferenceDataRequest = {

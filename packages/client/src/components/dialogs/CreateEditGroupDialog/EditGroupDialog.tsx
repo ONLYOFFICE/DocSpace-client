@@ -33,7 +33,7 @@ const EditGroupDialog = ({
   onClose,
   getGroups,
 }: EditGroupDialogProps) => {
-  const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
+  const { t } = useTranslation(["PeopleTranslations", "Common"]);
   const navigate = useNavigate();
 
   const [isCreateGroupLoading, setCreateGroupIsLoading] =
@@ -100,7 +100,8 @@ const EditGroupDialog = ({
       //   isScrollLocked={isScrollLocked}
       //   isOauthWindowOpen={isOauthWindowOpen}
     >
-      <ModalDialog.Header>Create department</ModalDialog.Header>
+      <ModalDialog.Header>{t("PeopleTranslations:EditDepartment")}</ModalDialog.Header>
+
 
       <ModalDialog.Body>
         <GroupNameParam

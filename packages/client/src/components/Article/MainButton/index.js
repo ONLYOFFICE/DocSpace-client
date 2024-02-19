@@ -393,7 +393,7 @@ const ArticleMainButtonContent = (props) => {
             id: "create_group",
             className: "main-button_drop-down",
             icon: PersonUserReactSvgUrl,
-            label: t("People:CreateGroup"),
+            label: t("PeopleTranslations:CreateGroup"),
             onClick: onCreateGroup,
             action: "group",
             key: "group",

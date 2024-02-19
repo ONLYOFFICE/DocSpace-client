@@ -2,6 +2,7 @@ import * as Styled from "./index.styled";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import Loaders from "@docspace/common/components/Loaders";
+import { useTranslation } from "react-i18next";
 
 const AccountsSubmenu = ({
   showBodyLoader,
@@ -9,7 +10,9 @@ const AccountsSubmenu = ({
   setGroupsSelection,
   setPeopleBufferSelection,
   setGroupsBufferSelection,
-}) => {
+}) => {    
+  const { t } = useTranslation(["Common"]);
+  
   const location = useLocation();
   const navigate = useNavigate();
   const { groupId } = useParams();
@@ -39,13 +42,13 @@ const AccountsSubmenu = ({
       data={[
         {
           id: "people",
-          name: "People",
+          name: t("Common:People"),
           onClick: onPeople,
           content: null,
         },
         {
           id: "groups",
-          name: "Groups",
+          name:  t("Common:Groups"),
           onClick: onGroups,
           content: null,
         },

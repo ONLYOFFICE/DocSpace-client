@@ -4,6 +4,7 @@ import PlusSvgUrl from "PUBLIC_DIR/images/plus.svg?url";
 import { useState } from "react";
 import SelectGroupMembersPanel from "./SelectGroupMembersPanel";
 import GroupMemberRow from "../GroupMemberRow";
+import { useTranslation } from "react-i18next";
 
 interface MembersParamProps {
   groupManager: object | null;
@@ -18,6 +19,9 @@ const MembersParam = ({
   setGroupMembers,
   onClose,
 }: MembersParamProps) => {
+
+  const { t } = useTranslation(["Common", "PeopleTranslation"]);
+
   const [selectMembersPanelIsVisible, setSelectMembersPanelIsVisible] =
     useState<boolean>(false);
 
@@ -44,13 +48,13 @@ const MembersParam = ({
 
   return (
     <div>
-      <Styled.Header>Members</Styled.Header>
+      <Styled.Header>{t("Common:Members")}</Styled.Header>
 
       <Styled.AddMembersButton onClick={onShowSelectMembersPanel}>
         <div className="add-button">
           <IconButton className="plus-icon" size={12} iconName={PlusSvgUrl} />
         </div>
-        <div className="label">Add members</div>
+        <div className="label">{t("PeopleTranslations:AddMembers")}</div>
       </Styled.AddMembersButton>
 
       {groupMembers.map(
@@ -61,7 +65,7 @@ const MembersParam = ({
               groupMember={member}
               onClickRemove={() => onRemoveUserById(member.id)}
             />
-          ),
+          )
       )}
     </div>
   );

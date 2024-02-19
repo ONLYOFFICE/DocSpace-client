@@ -27,7 +27,7 @@ const CreateGroupDialog = ({
   getGroups,
 }: CreateGroupDialogProps) => {
   const navigate = useNavigate();
-  const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
+  const { t } = useTranslation(["Common", "PeopleTranslations"]);
 
   const [groupParams, setGroupParams] = useState<GroupParams>({
     groupName: "",
@@ -74,7 +74,7 @@ const CreateGroupDialog = ({
       //   isScrollLocked={isScrollLocked}
       //   isOauthWindowOpen={isOauthWindowOpen}
     >
-      <ModalDialog.Header>Create department</ModalDialog.Header>
+      <ModalDialog.Header>{t("PeopleTranslations:CreateDepartment")}</ModalDialog.Header>
 
       <ModalDialog.Body>
         <GroupNameParam

@@ -139,6 +139,7 @@ const Table = ({
   currentDeviceType,
   typeAccountsColumnIsEnabled,
   emailAccountsColumnIsEnabled,
+  setCurrentGroup,
 }) => {
   const ref = useRef(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -192,6 +193,7 @@ const Table = ({
             typeAccountsColumnIsEnabled={typeAccountsColumnIsEnabled}
             emailAccountsColumnIsEnabled={emailAccountsColumnIsEnabled}
             infoPanelVisible={infoPanelVisible}
+            setCurrentGroup={setCurrentGroup}
           />
         ))}
       </TableBody>
@@ -243,6 +245,7 @@ export default inject(
       currentDeviceType,
       typeAccountsColumnIsEnabled,
       emailAccountsColumnIsEnabled,
+      setCurrentGroup:peopleStore.groupsStore.setCurrentGroup,
     };
   },
 )(observer(Table));

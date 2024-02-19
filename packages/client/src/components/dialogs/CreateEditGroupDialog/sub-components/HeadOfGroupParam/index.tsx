@@ -4,7 +4,7 @@ import PlusSvgUrl from "PUBLIC_DIR/images/plus.svg?url";
 import { useState } from "react";
 import SelectGroupManagerPanel from "./SelectGroupManagerPanel";
 import GroupMemberRow from "../GroupMemberRow";
-
+import { useTranslation } from "react-i18next";
 interface HeadOfGroupProps {
   groupManager: object | null;
   setGroupManager: (groupManager: object | null) => void;
@@ -16,6 +16,8 @@ const HeadOfGroup = ({
   setGroupManager,
   onClose,
 }: HeadOfGroupProps) => {
+
+    const { t } = useTranslation(["Common"]);
   const [selectGroupMangerPanelIsVisible, setSelectGroupMangerPanelIsVisible] =
     useState<boolean>(false);
 
@@ -42,14 +44,14 @@ const HeadOfGroup = ({
 
   return (
     <div>
-      <Styled.Header>Head of department</Styled.Header>
+      <Styled.Header>{t("Common:HeadOfGroup")}</Styled.Header>
 
       {!groupManager ? (
         <Styled.SelectGroupManager onClick={onShowSelectGroupManagerPanel}>
           <div className="add-button">
             <IconButton className="plus-icon" size="12" iconName={PlusSvgUrl} />
           </div>
-          <div className="label">Select</div>
+          <div className="label">{t("Common:SelectAction")}</div>
         </Styled.SelectGroupManager>
       ) : (
         <GroupMemberRow

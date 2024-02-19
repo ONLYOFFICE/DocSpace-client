@@ -33,7 +33,6 @@ const StyledContainer = styled.div`
 
   ${(props) =>
     isMobileOnly &&
-    isIOS &&
     !props.isPortrait &&
     css`
       display: flex;

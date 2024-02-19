@@ -15,9 +15,9 @@ const RecalculateButton = (props) => {
     isRecalculating,
     setIsRecalculating,
     lastRecalculateDate,
+    getIntervalCheckRecalculate,
   } = props;
 
- 
   const onRecalculateClick = async () => {
     try {
       setIsRecalculating(true);
@@ -57,8 +57,8 @@ const RecalculateButton = (props) => {
 export default inject(({ storageManagement }) => {
   const {
     isRecalculating,
+
     getIntervalCheckRecalculate,
-    clearIntervalCheckRecalculate,
     setIsRecalculating,
     quotaSettings,
   } = storageManagement;

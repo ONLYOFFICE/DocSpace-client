@@ -475,7 +475,7 @@ export const settingsTree = [
   },
   {
     id: "portal-settings_catalog-bonus",
-    key: "8",
+    key: "9",
     type: PageType.bonus,
     link: "bonus",
     tKey: "Common:Bonus",
@@ -483,7 +483,7 @@ export const settingsTree = [
     children: [
       {
         id: "portal-settings_catalog-portal-bonus",
-        key: "8-0",
+        key: "9-0",
         icon: "",
         link: "",
         tKey: "Common:FreeProFeatures",

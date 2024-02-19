@@ -35,7 +35,9 @@ export default function withQuickButtons(WrappedComponent) {
     };
 
     onClickDownload = () => {
-      window.open(this.props.item.viewUrl, "_self");
+      const { tryDownloadInFrame, item } = this.props;
+
+      tryDownloadInFrame(item.viewUrl);
     };
 
     onClickFavorite = (showFavorite) => {
@@ -114,8 +116,12 @@ export default function withQuickButtons(WrappedComponent) {
       treeFoldersStore,
       filesStore,
     }) => {
-      const { lockFileAction, setFavoriteAction, onSelectItem } =
-        filesActionsStore;
+      const {
+        lockFileAction,
+        setFavoriteAction,
+        onSelectItem,
+        tryDownloadInFrame,
+      } = filesActionsStore;
       const {
         isPersonalFolderRoot,
         isArchiveFolderRoot,
@@ -141,6 +147,7 @@ export default function withQuickButtons(WrappedComponent) {
         isPublicRoom,
         getPrimaryLink: filesStore.getPrimaryLink,
         isArchiveFolder,
+        tryDownloadInFrame,
       };
     }
   )(observer(WithQuickButtons));

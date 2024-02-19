@@ -63,11 +63,6 @@ class UsersStore {
       this.peopleStore.filterStore.setFilterParams(filterData);
     }
 
-    /*     this.peopleStore.filterStore.setFilterParams(filterData);
-    this.peopleStore.selectedGroupStore.setSelectedGroup(
-      filterData.group || "root"
-    ); */
-
     this.setUsers(res.items);
 
     return Promise.resolve(res.items);

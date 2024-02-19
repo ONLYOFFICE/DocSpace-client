@@ -73,7 +73,6 @@ class GroupsTableHeader extends React.Component {
 
     const event = new Event(Events.CHANGE_COLUMN);
     window.dispatchEvent(event);
-    console.log("event", event);
   };
 
   onFilter = (sortBy) => {

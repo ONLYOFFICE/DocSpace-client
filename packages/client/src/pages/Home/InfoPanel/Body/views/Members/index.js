@@ -52,6 +52,7 @@ const Members = ({
   const membersHelper = new MembersHelper({ t });
 
   const updateInfoPanelMembers = async () => {
+    console.log(infoPanelSelection)
     if (!infoPanelSelection || !infoPanelSelection.id) return;
     const fetchedMembers = await fetchMembers(t, true, withoutTitlesAndLinks);
     setInfoPanelMembers(fetchedMembers);

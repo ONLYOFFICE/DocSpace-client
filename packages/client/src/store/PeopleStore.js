@@ -8,7 +8,6 @@ import { makeAutoObservable, runInAction } from "mobx";
 import GroupsStore from "./GroupsStore";
 import UsersStore from "./UsersStore";
 import TargetUserStore from "./TargetUserStore";
-import SelectedGroupStore from "./SelectedGroupStore";
 import EditingFormStore from "./EditingFormStore";
 import FilterStore from "./FilterStore";
 import SelectionStore from "./SelectionPeopleStore";
@@ -36,7 +35,6 @@ class PeopleStore {
   groupsStore = null;
   usersStore = null;
   targetUserStore = null;
-  selectedGroupStore = null;
   editingFormStore = null;
   filterStore = null;
   selectionStore = null;
@@ -80,7 +78,6 @@ class PeopleStore {
       clientLoadingStore,
     );
     this.targetUserStore = new TargetUserStore(this, userStore);
-    this.selectedGroupStore = new SelectedGroupStore(this);
     this.editingFormStore = new EditingFormStore(this);
     this.filterStore = new FilterStore(userStore);
     this.selectionStore = new SelectionStore(this);

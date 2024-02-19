@@ -879,3 +879,19 @@ export const getIconPathByFolderType = (
 
   return folderIconPath[folderType ?? FolderType.DEFAULT] ?? defaultPath;
 };
+
+export const insertTagManager = (id: string) => {
+  const script = document.createElement("script");
+  script.innerHTML = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','${id}');`;
+
+  const noScript = document.createElement("noscript");
+  noScript.innerHTML = `<iframe src="https://www.googletagmanager.com/ns.html?id=${id}"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe>`;
+
+  document.head.insertBefore(script, document.head.childNodes[0]);
+  document.body.insertBefore(noScript, document.body.childNodes[0]);
+};

@@ -2,7 +2,7 @@ import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg?url";
 
 import React from "react";
 import { Text } from "../text";
-import { Link } from "../link";
+import { Link as LinkComponent } from "../link";
 import { IconButton } from "../icon-button";
 
 import {
@@ -20,11 +20,11 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
     onAction,
     onClose,
   } = props;
-  const { Title, BodyText, ActionText } = campaignTranslate;
+  const { Header, SubHeader, ButtonLabel, Link } = campaignTranslate;
   const { borderColor, title, body, action } = campaignConfig;
 
-  const hasTitle = !!Title;
-  const hasBodyText = !!BodyText;
+  const hasTitle = !!Header;
+  const hasBodyText = !!SubHeader;
   const isButton = action?.isButton;
 
   return (
@@ -40,7 +40,7 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
             fontSize={title?.fontSize}
             fontWeight={title?.fontWeight}
           >
-            {Title}
+            {Header}
           </Text>
         )}
         {hasBodyText && (
@@ -49,26 +49,26 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
             fontSize={body?.fontSize}
             fontWeight={body?.fontWeight}
           >
-            {BodyText}
+            {SubHeader}
           </Text>
         )}
         {isButton ? (
           <BannerButton
             buttonTextColor={action?.color}
             buttonColor={action?.backgroundColor}
-            onClick={() => onAction(action?.type, action?.url)}
+            onClick={() => onAction(action?.type, Link)}
           >
-            {ActionText}
+            {ButtonLabel}
           </BannerButton>
         ) : (
-          <Link
+          <LinkComponent
             color={action?.color}
             fontSize={action?.fontSize}
             fontWeight={action?.fontWeight}
-            onClick={() => onAction(action?.type, action?.url)}
+            onClick={() => onAction(action?.type, Link)}
           >
-            {ActionText}
-          </Link>
+            {ButtonLabel}
+          </LinkComponent>
         )}
       </BannerContent>
       <IconButton
@@ -82,3 +82,4 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
 };
 
 export { CampaignsBanner };
+

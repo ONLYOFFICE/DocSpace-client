@@ -18,9 +18,10 @@ export interface CampaignsBannerProps {
 }
 
 interface ITranslate {
-  Title?: string;
-  BodyText?: string;
-  ActionText?: string;
+  Header?: string;
+  SubHeader?: string;
+  ButtonLabel?: string;
+  Link?: string;
 }
 
 interface IStyle {
@@ -32,7 +33,6 @@ interface IStyle {
 interface IAction {
   isButton?: boolean;
   backgroundColor?: string;
-  url?: string;
   type?: string;
 }
 

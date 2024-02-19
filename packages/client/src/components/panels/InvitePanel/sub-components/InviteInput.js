@@ -15,7 +15,7 @@ import Filter from "@docspace/shared/api/people/filter";
 import BetaBadge from "../../../BetaBadgeWrapper";
 import { getMembersList } from "@docspace/shared/api/people";
 import { ShareAccessRights } from "@docspace/shared/enums";
-import withCultureNames from "@docspace/common/hoc/withCultureNames";
+import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 import { isBetaLanguage } from "@docspace/shared/utils";
 
 import AddUsersPanel from "../../AddUsersPanel";

@@ -29,7 +29,7 @@ const DiskSpaceUsedComponent = (props) => {
     updateTenantCustomQuota,
   } = props;
 
-  const { t } = useTranslation("Settings");
+  const { t } = useTranslation(["Settings", "Common"]);
   const [isVisibleDialog, setIsVisibleChangeQuotaDialog] = useState();
   const [isDisableQuota, setIsDisableQuota] = useState();
 
@@ -160,5 +160,5 @@ export default inject(
       portalInfo,
       updateTenantCustomQuota,
     };
-  }
+  },
 )(observer(DiskSpaceUsedComponent));

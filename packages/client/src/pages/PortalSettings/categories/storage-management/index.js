@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 import moment from "moment";
 
 import Loaders from "@docspace/common/components/Loaders";
+import { setDocumentTitle } from "@docspace/client/src/helpers/filesUtils";
 
 import QuotasComponent from "./Quotas";
 import StatisticsComponent from "./Statistics";
@@ -26,7 +28,13 @@ const StorageManagement = ({
     };
   }, []);
 
-  if (!isInit) return <Loaders.SettingsStorageManagement />;
+  const { t, ready } = useTranslation(["Settings", "Common"]);
+
+  useEffect(() => {
+    ready && setDocumentTitle(t("Settings:StorageManagement"));
+  }, [ready]);
+
+  if (!isInit || !ready) return <Loaders.SettingsStorageManagement />;
 
   return (
     <StyledBody>

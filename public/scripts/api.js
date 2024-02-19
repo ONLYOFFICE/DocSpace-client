@@ -25,6 +25,7 @@
     viewAs: "row", //TODO: ["row", "table", "tile"]
     viewTableColumns: "Name,Size,Type",
     checkCSP: true,
+    actionLinksFromEvents: true,
     filter: {
       count: 100,
       page: 1,
@@ -53,6 +54,8 @@
       onEditorCloseCallback: null,
       onAuthSuccess: null,
       onSignOut: null,
+      onDownload: null,
+      onOpenLink: null,
     },
   };
 

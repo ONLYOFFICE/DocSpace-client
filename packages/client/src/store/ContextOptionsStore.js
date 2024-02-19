@@ -417,6 +417,8 @@ class ContextOptionsStore {
     const { fileExst, contentLength, viewUrl } = item;
     const isFile = !!fileExst && contentLength;
 
+    const { tryDownloadInFrame, downloadAction } = this.filesActionsStore;
+
     if (isIOS && this.isPwa()) {
       const xhr = new XMLHttpRequest();
       xhr.open("GET", viewUrl);
@@ -435,10 +437,10 @@ class ContextOptionsStore {
     }
 
     isFile
-      ? window.open(viewUrl, "_self")
-      : this.filesActionsStore
-          .downloadAction(t("Translations:ArchivingData"), item)
-          .catch((err) => toastr.error(err));
+      ? tryDownloadInFrame(viewUrl)
+      : downloadAction(t("Translations:ArchivingData"), item).catch((err) =>
+          toastr.error(err)
+        );
   };
 
   onClickDownloadAs = () => {

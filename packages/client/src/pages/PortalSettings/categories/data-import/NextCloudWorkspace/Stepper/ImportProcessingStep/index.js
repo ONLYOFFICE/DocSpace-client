@@ -47,8 +47,12 @@ const ImportProcessingStep = ({
 
   const onCancel = () => {
     setIsVisible(true);
-    setIsLoading(false);
   };
+
+  const handleCancelMigration = () => {
+    setIsLoading(false);
+    cancelMigration();
+  }
 
   useEffect(() => {
     handleFileMigration();
@@ -69,7 +73,7 @@ const ImportProcessingStep = ({
           visible={isVisible}
           loading={false}
           isSixthStep={isSixthStep}
-          cancelMigration={cancelMigration}
+          cancelMigration={handleCancelMigration}
           onClose={hideCancelDialog}
         />
       )}

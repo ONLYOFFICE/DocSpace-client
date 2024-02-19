@@ -23,11 +23,10 @@ const CancelUploadDialog = ({
   const onCancelProcess = () => {
     if (isFifthStep || isSixthStep) {
       navigate(-1);
-      cancelMigration();
     } else {
       onClose();
-      cancelMigration();
     }
+    cancelMigration();
   };
 
   return (

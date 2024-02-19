@@ -158,11 +158,11 @@ const SelectFileStep = ({
 
   const onCancel = () => {
     setCancelDialogVisibile(true);
-    setProgress(0);
-    setIsFileLoading(false);
   };
 
   const handleCancelMigration = () => {
+    setProgress(0);
+    setIsFileLoading(false);
     clearInterval(uploadInterval.current);
     cancelMigration();
   };
@@ -235,7 +235,7 @@ const SelectFileStep = ({
       {cancelDialogVisible && (
         <CancelUploadDialog
           visible={cancelDialogVisible}
-          loading={isFileLoading}
+          // loading={isFileLoading}
           onClose={hideCancelDialog}
           cancelMigration={handleCancelMigration}
         />

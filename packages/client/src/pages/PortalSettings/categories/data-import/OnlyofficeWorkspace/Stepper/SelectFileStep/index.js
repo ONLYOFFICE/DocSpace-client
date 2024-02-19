@@ -68,7 +68,7 @@ const SelectFileStep = ({
   showReminder,
   setShowReminder,
   cancelDialogVisble,
-  setCancelDialogVisbile,
+  setCancelDialogVisible,
   initMigrationName,
   singleFileUploading,
   getMigrationStatus,
@@ -144,15 +144,17 @@ const SelectFileStep = ({
   };
 
   const onCancel = () => {
-    setCancelDialogVisbile(true);
-    setProgress(0);
-    setIsFileLoading(false);
+    setCancelDialogVisible(true);
   };
 
   const handleCancelMigration = () => {
+    setProgress(0);
+    setIsFileLoading(false);
     clearInterval(uploadInterval.current);
     cancelMigration();
   };
+
+  const hideCancelDialog = () => setCancelDialogVisible(false);
 
   return (
     <>
@@ -221,8 +223,8 @@ const SelectFileStep = ({
       {cancelDialogVisble && (
         <CancelUploadDialog
           visible={cancelDialogVisble}
-          loading={isFileLoading}
-          onClose={() => setCancelDialogVisbile(false)}
+          // loading={isFileLoading}
+          onClose={hideCancelDialog}
           cancelMigration={handleCancelMigration}
         />
       )}
@@ -252,6 +254,6 @@ export default inject(({ dialogsStore, importAccountsStore }) => {
     setIsFileLoading,
     cancelMigration,
     cancelDialogVisble: cancelUploadDialogVisible,
-    setCancelDialogVisbile: setCancelUploadDialogVisible,
+    setCancelDialogVisible: setCancelUploadDialogVisible,
   };
 })(observer(SelectFileStep));

@@ -17,11 +17,6 @@ import { ThemeProvider } from "@docspace/shared/components/theme-provider";
 
 const isDesktopEditor = window["AscDesktopEditor"] !== undefined;
 
-import PresentationIcoUrl from "PUBLIC_DIR/images/presentation.ico";
-import SpreadSheetIcoUrl from "PUBLIC_DIR/images/spreadsheet.ico";
-import TextIcoUrl from "PUBLIC_DIR/images/text.ico";
-import PDFIcoUrl from "PUBLIC_DIR/images/pdf.ico";
-
 const App = ({
   initialLanguage,
   initialI18nStoreASC,
@@ -34,73 +29,6 @@ const App = ({
   useSSR(initialI18nStoreASC, initialLanguage);
 
   //console.log(rest);
-
-  useEffect(() => {
-    let icon = "";
-
-    switch (rest?.config?.documentType) {
-      case "word":
-        icon =
-          rest?.config?.document?.fileType === "pdf" ? PDFIcoUrl : TextIcoUrl;
-        break;
-      case "slide":
-        icon = PresentationIcoUrl;
-        break;
-      case "cell":
-        icon = SpreadSheetIcoUrl;
-        break;
-      default:
-        icon = TextIcoUrl;
-        break;
-    }
-
-    if (icon) {
-      const el = document.getElementById("favicon");
-
-      el.href = icon;
-    }
-  }, [rest?.config?.documentType]);
-
-  useEffect(() => {
-    if (rest?.error?.errorStatus === 402) {
-      const portalUrl = window.location.origin;
-
-      history.pushState({}, null, portalUrl);
-      document.location.reload();
-    } else {
-      const tempElm = document.getElementById("loader");
-      const userTheme = rest.user?.theme;
-      if (userTheme) setTheme(userTheme);
-
-      const isLoadingDocumentError = rest.error !== null;
-      const isLoadedDocument = !rest.error && rest?.config?.editorUrl;
-
-      if (
-        tempElm &&
-        !rest.props?.needLoader &&
-        (isLoadingDocumentError || isLoadedDocument)
-      )
-        tempElm.outerHTML = "";
-
-      if (isLoadingDocumentError) frameCallCommand("setIsLoaded");
-    }
-
-    if (isRetina() && getCookie("is_retina") == null) {
-      setCookie("is_retina", true, { path: "/" });
-    }
-
-    getAppearanceTheme();
-  }, []);
-
-  const onError = () => {
-    window.open(
-      combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
-        rest.personal ? "sign-in" : "/login"
-      ),
-      "_self"
-    );
-  };
 
   return (
     <ErrorBoundary onError={onError}>

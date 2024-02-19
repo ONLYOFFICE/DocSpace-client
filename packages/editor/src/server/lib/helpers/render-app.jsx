@@ -14,8 +14,8 @@ const renderApp = (i18n, initialState) => {
           <GlobalStyle />
           <Editor {...initialState} />
         </I18nextProvider>
-      </React.Suspense>
-    )
+      </React.Suspense>,
+    ),
   );
 
   const styleTags = sheet.getStyleTags();

@@ -80,7 +80,7 @@ const FilesSelector = ({
   withBreadCrumbs: withBreadCrumbsProp,
 }: FilesSelectorProps) => {
   const theme = useTheme();
-  const { t } = useTranslation(["Common"]);
+  const { t, i18n } = useTranslation(["Common"]);
 
   const [breadCrumbs, setBreadCrumbs] = React.useState<TBreadCrumb[]>([]);
   const [items, setItems] = React.useState<TSelectorItem[]>([]);

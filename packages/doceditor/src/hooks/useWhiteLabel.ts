@@ -15,7 +15,7 @@ const useWhiteLabel = () => {
     requestRunning.current = true;
     const urls = await getLogoUrls();
     requestRunning.current = false;
-    console.log("====", urls);
+
     setLogoUrls(urls);
     alreadyFetched.current = true;
   }, []);

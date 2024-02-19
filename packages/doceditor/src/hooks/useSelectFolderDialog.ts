@@ -25,9 +25,10 @@ const useSelectFolderDialog = ({}: UseSelectFolderDialogProps) => {
   const onSDKRequestSaveAs = useCallback((event: object) => {
     if ("data" in event) {
       const data = event.data as TEventData;
-      setTitle(data.title);
-      setUrl(data.url);
-      setExtension(data.fileType);
+
+      setTitle(data.title ?? "");
+      setUrl(data.url ?? "");
+      setExtension(data.fileType ?? "");
 
       setIsVisible(true);
     }

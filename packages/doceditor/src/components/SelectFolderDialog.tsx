@@ -8,7 +8,6 @@ import { DeviceType } from "@docspace/shared/enums";
 
 import { SelectFolderDialogProps } from "@/types";
 import { TSelectorCancelButton } from "@docspace/shared/components/selector/Selector.types";
-import { useTheme } from "styled-components";
 
 const SelectFolderDialog = ({
   socketHelper,
@@ -18,23 +17,20 @@ const SelectFolderDialog = ({
   titleSelectorFolder,
   fileInfo,
   getIsDisabled,
+  t,
+  i18n,
 }: SelectFolderDialogProps) => {
-  const { t, i18n } = useTranslation(["Common", "Editor"]);
-
   const sessionPath = sessionStorage.getItem("filesSelectorPath");
 
   const cancelButtonProps: TSelectorCancelButton = {
     withCancelButton: true,
     onCancel: onClose,
-    cancelButtonLabel: t("CancelButton"),
+    cancelButtonLabel: t?.("Common:CancelButton") ?? "",
     cancelButtonId: "select-file-modal-cancel",
   };
 
-  const theme = useTheme();
-
   return (
     <FilesSelectorWrapper
-      theme={theme}
       i18nProp={i18n}
       {...cancelButtonProps}
       withHeader
@@ -42,16 +38,16 @@ const SelectFolderDialog = ({
       withSearch
       withoutBackButton
       withCancelButton
-      headerLabel={t("SaveButton")}
+      headerLabel={i18n.t?.("Common:SaveButton") ?? ""}
       disabledItems={[]}
       onSubmit={onSubmit}
-      submitButtonLabel={t("SaveHereButton")}
+      submitButtonLabel={i18n.t?.("Common:SaveHereButton") ?? ""}
       submitButtonId="select-file-modal-submit"
       socketHelper={socketHelper}
       socketSubscribers={socketHelper.socketSubscribers}
-      footerInputHeader={t("Editor:FileName")}
+      footerInputHeader={i18n.t?.("Editor:FileName") ?? ""}
       currentFooterInputValue={titleSelectorFolder}
-      footerCheckboxLabel={t("Editor:OpenSavedDocument")}
+      footerCheckboxLabel={i18n.t?.("Editor:OpenSavedDocument") ?? ""}
       isPanelVisible={isVisible}
       isRoomsOnly={false}
       isThirdParty={false}

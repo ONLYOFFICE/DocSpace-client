@@ -1,122 +1,225 @@
 "use client";
 
 import React from "react";
-import { ThemeProvider } from "styled-components";
-import { I18nextProvider } from "react-i18next";
-import { i18n } from "i18next";
+import { isMobile } from "react-device-detect";
 
 import { DocumentEditor } from "@onlyoffice/document-editor-react";
-import IConfig from "@onlyoffice/document-editor-react/dist/esm/model/config";
+import IConfig from "@onlyoffice/document-editor-react/dist/esm/types/model/config";
+import { EditorProps, TGoBack } from "@/types";
 
-import { EditorProps } from "@/types";
-import useSocketHelper from "@/hooks/useSocketHelper";
-import useSelectFolderDialog from "@/hooks/useSelectFolderDialog";
-import useSelectFileDialog from "@/hooks/useSelectFileDialog";
-import useTheme from "@/hooks/useTheme";
-import useI18N from "@/hooks/useI18N";
+import useInit from "@/hooks/useInit";
+import useEditorEvents from "@/hooks/useEditorEvents";
 
-import SelectFolderDialog from "./SelectFolderDialog";
-import SelectFileDialog from "./SelectFileDialog";
+import { FolderType } from "@docspace/shared/enums";
+import { getBackUrl, getIsZoom } from "@/utils";
+import { IS_DESKTOP_EDITOR } from "@/utils/constants";
+import {
+  onSDKRequestHistoryClose,
+  onSDKRequestEditRights,
+  onSDKInfo,
+  onSDKWarning,
+  onSDKError,
+  onSDKRequestRename,
+} from "@/utils/events";
+
+import { getEditorTheme } from "@docspace/shared/utils";
 
 const Editor = ({
   config,
-  editorUrl,
-  settings,
   successAuth,
   user,
+  view,
+  doc,
+  documentserverUrl,
+  fileInfo,
+  t,
+  onSDKRequestSaveAs,
+  onSDKRequestInsertImage,
+  onSDKRequestSelectSpreadsheet,
+  onSDKRequestSelectDocument,
+  onSDKRequestReferenceSource,
 }: EditorProps) => {
-  const fileInfo = config?.file;
-  const documentserverUrl = editorUrl.docServiceUrl;
-  const instanceId = config?.document?.referenceData.instanceId;
-
-  const { i18n } = useI18N({ settings, user });
-  const { theme } = useTheme({ user });
-
-  const { socketHelper } = useSocketHelper({ socketUrl: settings.socketUrl });
   const {
-    onSDKRequestSaveAs,
-    onCloseSelectFolderDialog,
-    onSubmitSelectFolderDialog,
-    getIsDisabledSelectFolderDialog,
-    isVisibleSelectFolderDialog,
-    titleSelectorFolderDialog,
-  } = useSelectFolderDialog({});
-  const {
-    onSDKRequestInsertImage,
-    onSDKRequestReferenceSource,
-    onSDKRequestSelectDocument,
-    onSDKRequestSelectSpreadsheet,
-    onCloseSelectFileDialog,
-    onSubmitSelectFileDialog,
-    getIsDisabledSelectFileDialog,
+    onDocumentReady,
+    onSDKRequestOpen,
+    onSDKRequestReferenceData,
+    onSDKAppReady,
+    onSDKRequestClose,
+    onSDKRequestCreateNew,
+    onSDKRequestHistory,
+    onSDKRequestUsers,
+    onSDKRequestSendNotify,
+    onSDKRequestRestore,
+    onSDKRequestHistoryData,
+    onDocumentStateChange,
+    onMetaChange,
+    onMakeActionLink,
 
-    selectFileDialogFileTypeDetection,
+    createUrl,
+    documentReady,
+    usersInRoom,
+    setDocTitle,
+  } = useEditorEvents({
+    user,
+    successAuth,
+    fileInfo,
+    config,
+    doc,
+    t,
+  });
 
-    selectFileDialogVisible,
-  } = useSelectFileDialog({ instanceId });
-
-  const onDocumentReady = (): void => {
-    throw new Error("Function not implemented.");
-  };
+  useInit({
+    config,
+    successAuth,
+    fileInfo,
+    user,
+    documentReady,
+    setDocTitle,
+    t,
+  });
 
   const newConfig: IConfig = {
     document: config.document,
     documentType: config.documentType,
-    editorConfig: config.editorConfig,
     token: config.token,
     type: config.type,
-    events: {},
   };
 
-  if (successAuth && newConfig.events) {
+  newConfig.editorConfig = { ...config.editorConfig };
+
+  if (view && newConfig.editorConfig) newConfig.editorConfig.mode = "view";
+  if (isMobile) config.type = "mobile";
+
+  let goBack: TGoBack = {} as TGoBack;
+
+  if (fileInfo) {
+    const search = typeof window !== "undefined" ? window.location.search : "";
+    const editorGoBack = new URLSearchParams(search).get("editorGoBack");
+
+    if (editorGoBack === "false") {
+    } else if (editorGoBack === "event") {
+      goBack = {
+        requestClose: true,
+        text: t?.("FileLocation"),
+      };
+    } else {
+      goBack = {
+        requestClose:
+          typeof window !== "undefined"
+            ? window.DocSpaceConfig?.editor?.requestClose ?? false
+            : false,
+        text: t?.("FileLocation"),
+      };
+      if (
+        typeof window !== "undefined" &&
+        !window.DocSpaceConfig?.editor?.requestClose
+      ) {
+        goBack.blank =
+          typeof window !== "undefined"
+            ? window.DocSpaceConfig?.editor?.openOnNewPage ?? true
+            : false;
+        goBack.url = getBackUrl(fileInfo.rootFolderId, fileInfo.folderId);
+      }
+    }
+  }
+
+  if (newConfig.editorConfig)
+    newConfig.editorConfig.customization = {
+      ...newConfig.editorConfig.customization,
+      goback: { ...goBack },
+      uiTheme: getEditorTheme(user?.theme),
+    };
+
+  if (newConfig.document && newConfig.document.info)
+    newConfig.document.info.favorite = false;
+
+  // const url = window.location.href;
+
+  // if (url.indexOf("anchor") !== -1) {
+  //   const splitUrl = url.split("anchor=");
+  //   const decodeURI = decodeURIComponent(splitUrl[1]);
+  //   const obj = JSON.parse(decodeURI);
+
+  //   config.editorConfig.actionLink = {
+  //     action: obj.action,
+  //   };
+  // }
+
+  newConfig.events = {
+    onDocumentReady,
+    onRequestHistoryClose: onSDKRequestHistoryClose,
+    onRequestEditRights: () => onSDKRequestEditRights(fileInfo),
+    onAppReady: onSDKAppReady,
+    onInfo: onSDKInfo,
+    onWarning: onSDKWarning,
+    onError: onSDKError,
+    onRequestHistoryData: onSDKRequestHistoryData,
+    onDocumentStateChange,
+    onMetaChange,
+    onMakeActionLink,
+  };
+
+  if (successAuth) {
+    if (fileInfo?.rootFolderType !== FolderType.USER) {
+      //TODO: remove condition for share in my
+      newConfig.events.onRequestUsers = onSDKRequestUsers;
+      newConfig.events.onRequestSendNotify = onSDKRequestSendNotify;
+    }
+    if (!user.isVisitor) {
+      newConfig.events.onRequestSaveAs = onSDKRequestSaveAs;
+      if (
+        IS_DESKTOP_EDITOR ||
+        (typeof window !== "undefined" &&
+          window.DocSpaceConfig?.editor?.openOnNewPage === false)
+      ) {
+        newConfig.events.onRequestCreateNew = onSDKRequestCreateNew;
+      }
+    }
+
     newConfig.events.onRequestInsertImage = onSDKRequestInsertImage;
-    // restore for 1.4 editor version
-    // newConfig.events.onRequestSelectSpreadsheet = onSDKRequestSelectSpreadsheet;
-    // newConfig.events.onRequestSelectDocument = onSDKRequestSelectDocument;
-    // newConfig.events.onRequestReferenceSource = onSDKRequestReferenceSource;
-    if (!user.isVisitor) newConfig.events.onRequestSaveAs = onSDKRequestSaveAs;
+    newConfig.events.onRequestSelectSpreadsheet = onSDKRequestSelectSpreadsheet;
+    newConfig.events.onRequestSelectDocument = onSDKRequestSelectDocument;
+    newConfig.events.onRequestReferenceSource = onSDKRequestReferenceSource;
+  }
+
+  if (!fileInfo.providerKey) {
+    newConfig.events.onRequestReferenceData = onSDKRequestReferenceData;
+    const isZoom = getIsZoom();
+
+    if (!isZoom) {
+      newConfig.events.onRequestOpen = onSDKRequestOpen;
+    }
+  }
+
+  if (fileInfo.security.Rename) {
+    newConfig.events.onRequestRename = (obj: object) =>
+      onSDKRequestRename(obj, fileInfo.id);
+  }
+
+  if (fileInfo.security.ReadHistory) {
+    newConfig.events.onRequestHistory = onSDKRequestHistory;
+  }
+
+  if (fileInfo.security.EditHistory) {
+    newConfig.events.onRequestRestore = onSDKRequestRestore;
+  }
+
+  if (
+    typeof window !== "undefined" &&
+    window.DocSpaceConfig?.editor?.requestClose
+  ) {
+    newConfig.events.onRequestClose = onSDKRequestClose;
   }
 
   return (
-    <>
-      {" "}
-      <DocumentEditor
-        id={"docspace_editor"}
-        documentServerUrl={documentserverUrl}
-        config={newConfig}
-        height="100%"
-        width="100%"
-        events_onDocumentReady={onDocumentReady}
-      />
-      {theme && i18n && (
-        <I18nextProvider i18n={i18n}>
-          <ThemeProvider theme={theme}>
-            {isVisibleSelectFolderDialog && !!socketHelper && (
-              <SelectFolderDialog
-                socketHelper={socketHelper}
-                isVisible={isVisibleSelectFolderDialog}
-                onSubmit={onSubmitSelectFolderDialog}
-                onClose={onCloseSelectFolderDialog}
-                titleSelectorFolder={titleSelectorFolderDialog}
-                fileInfo={fileInfo}
-                getIsDisabled={getIsDisabledSelectFolderDialog}
-              />
-            )}
-            {selectFileDialogVisible && !!socketHelper && (
-              <SelectFileDialog
-                socketHelper={socketHelper}
-                isVisible={selectFileDialogVisible}
-                onSubmit={onSubmitSelectFileDialog}
-                onClose={onCloseSelectFileDialog}
-                getIsDisabled={getIsDisabledSelectFileDialog}
-                fileTypeDetection={selectFileDialogFileTypeDetection}
-                fileInfo={fileInfo}
-              />
-            )}
-          </ThemeProvider>
-        </I18nextProvider>
-      )}
-    </>
+    <DocumentEditor
+      id={"docspace_editor"}
+      documentServerUrl={documentserverUrl}
+      config={newConfig}
+      height="100%"
+      width="100%"
+      events_onDocumentReady={onDocumentReady}
+    />
   );
 };
 

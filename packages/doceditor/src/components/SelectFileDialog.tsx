@@ -1,11 +1,10 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
+
 import FilesSelectorWrapper from "@docspace/shared/selectors/Files/FilesSelector.wrapper";
 
 import { DeviceType, FilesSelectorFilterTypes } from "@docspace/shared/enums";
 
 import { SelectFileDialogProps } from "@/types";
-import { useTheme } from "styled-components";
 
 const SelectFileDialog = ({
   socketHelper,
@@ -15,23 +14,23 @@ const SelectFileDialog = ({
   onClose,
   onSubmit,
   fileInfo,
+  t,
+  i18n,
 }: SelectFileDialogProps) => {
-  const { t, i18n } = useTranslation(["Common", "Editor"]);
-
   const sessionPath = sessionStorage.getItem("filesSelectorPath");
 
   const headerLabel = fileTypeDetection.filterParam
-    ? t("Common:SelectFile")
-    : t("Common:SelectAction");
+    ? t?.("Common:SelectFile") ?? ""
+    : t?.("Common:SelectAction") ?? "";
 
   const getFileTypeTranslation = React.useCallback(() => {
     switch (fileTypeDetection.filterParam) {
       case FilesSelectorFilterTypes.XLSX:
-        return t("Editor:MailMergeFileType");
+        return t?.("Editor:MailMergeFileType") ?? "";
       case FilesSelectorFilterTypes.IMG:
-        return t("Editor:ImageFileType");
+        return t?.("Editor:ImageFileType") ?? "";
       case FilesSelectorFilterTypes.DOCX:
-        return t("Editor:DocumentsFileType");
+        return t?.("Editor:DocumentsFileType") ?? "";
       default:
         return "";
     }
@@ -41,16 +40,13 @@ const SelectFileDialog = ({
     const type = getFileTypeTranslation();
     return fileTypeDetection.filterParam === FilesSelectorFilterTypes.XLSX
       ? type
-      : t("Editor:SelectFilesType", { fileType: type });
+      : t?.("Editor:SelectFilesType", { fileType: type }) ?? "";
   }, [fileTypeDetection.filterParam, getFileTypeTranslation, t]);
 
   const listTitle = selectFilesListTitle();
 
-  const theme = useTheme();
-
   return (
     <FilesSelectorWrapper
-      theme={theme}
       i18nProp={i18n}
       withoutBackButton
       withSearch
@@ -73,8 +69,8 @@ const SelectFileDialog = ({
       footerCheckboxLabel=""
       footerInputHeader=""
       currentFooterInputValue=""
-      submitButtonLabel={t("Common:SelectAction")}
-      cancelButtonLabel={t("Common:CancelButton")}
+      submitButtonLabel={t?.("Common:SelectAction") ?? ""}
+      cancelButtonLabel={t?.("Common:CancelButton") ?? ""}
       withCancelButton
       descriptionText={listTitle}
       currentDeviceType={DeviceType.desktop}

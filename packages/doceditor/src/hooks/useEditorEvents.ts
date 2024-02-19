@@ -1,0 +1,605 @@
+import React from "react";
+
+import IConfig from "@onlyoffice/document-editor-react/dist/esm/types/model/config";
+
+import {
+  createFile,
+  getEditDiff,
+  getEditHistory,
+  getProtectUsers,
+  getReferenceData,
+  getSharedUsers,
+  restoreDocumentsVersion,
+  sendEditorNotify,
+} from "@docspace/shared/api/files";
+import {
+  TEditHistory,
+  TGetReferenceData,
+} from "@docspace/shared/api/files/types";
+import { TUser } from "@docspace/shared/api/people/types";
+import { EDITOR_ID } from "@docspace/shared/constants";
+import {
+  assign,
+  frameCallCommand,
+  frameCallEvent,
+} from "@docspace/shared/utils/common";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { FolderType } from "@docspace/shared/enums";
+import { toastr } from "@docspace/shared/components/toast";
+import { TData } from "@docspace/shared/components/toast/Toast.type";
+import { Nullable } from "@docspace/shared/types";
+
+import { IS_DESKTOP_EDITOR } from "@/utils/constants";
+
+import { getCurrentDocumentVersion, setDocumentTitle } from "@/utils";
+
+import {
+  TCatchError,
+  TDocEditor,
+  TEvent,
+  THistoryData,
+  UseEventsProps,
+} from "@/types";
+
+type IConfigEvents = Pick<IConfig, "events">;
+
+let docEditor: TDocEditor | null = null;
+
+const useEditorEvents = ({
+  user,
+  successAuth,
+  fileInfo,
+  config,
+  doc,
+  t,
+}: UseEventsProps) => {
+  const [events, setEvents] = React.useState<IConfigEvents>({});
+  const [documentReady, setDocumentReady] = React.useState(false);
+  const [createUrl, setCreateUrl] = React.useState<Nullable<string>>(null);
+  const [usersInRoom, setUsersInRoom] = React.useState<TUser[]>([]);
+  const [docTitle, setDocTitle] = React.useState("");
+  const [docSaved, setDocSaved] = React.useState(false);
+
+  const onSDKRequestReferenceData = React.useCallback(async (event: object) => {
+    const currEvent = event as TEvent;
+    const referenceData = await getReferenceData(
+      currEvent.data.referenceData ??
+        (currEvent.data as unknown as TGetReferenceData),
+    );
+
+    docEditor?.setReferenceData?.(referenceData);
+  }, []);
+
+  const onSDKRequestOpen = React.useCallback(
+    async (event: object) => {
+      const currEvent = event as TEvent;
+      const windowName = currEvent.data.windowName;
+      const reference = currEvent.data;
+
+      try {
+        const data = {
+          fileKey: reference.referenceData
+            ? reference.referenceData.fileKey
+            : "",
+          instanceId: reference.referenceData
+            ? reference.referenceData.instanceId
+            : "",
+          fileId: fileInfo.id,
+          path: reference.path || "",
+        };
+
+        const result = await getReferenceData(data);
+
+        if (result.error) throw new Error(result.error);
+
+        var link = result.link;
+        window.open(link, windowName);
+      } catch (e) {
+        var winEditor = window.open("", windowName);
+
+        winEditor?.close();
+        docEditor?.showMessage?.(
+          (e as { message?: string })?.message ??
+            t?.("ErrorConnectionLost") ??
+            "",
+        );
+      }
+    },
+    [fileInfo.id, t],
+  );
+
+  const onSDKAppReady = React.useCallback(() => {
+    docEditor = window.DocEditor.instances[EDITOR_ID];
+
+    console.log("ONLYOFFICE Document Editor is ready", docEditor);
+    const url = window.location.href;
+
+    const index = url.indexOf("#message/");
+
+    if (index > -1) {
+      const splitUrl = url.split("#message/");
+
+      if (splitUrl.length === 2) {
+        const message = decodeURIComponent(splitUrl[1]).replace(/\+/g, " ");
+
+        docEditor?.showMessage?.(message);
+        history.pushState({}, "", url.substring(0, index));
+      } else {
+        if (config?.Error) docEditor?.showMessage?.(config.Error);
+      }
+    }
+  }, [config.Error]);
+
+  const onDocumentReady = React.useCallback(() => {
+    // console.log("onDocumentReady", arguments, { docEditor });
+    setDocumentReady(true);
+
+    frameCallCommand("setIsLoaded");
+
+    if (config?.errorMessage) docEditor?.showMessage?.(config.errorMessage);
+
+    // if (config?.file?.canShare) {
+    //   loadUsersRightsList(docEditor);
+    // }
+
+    if (docEditor)
+      assign(
+        window as unknown as { [key: string]: {} },
+        ["ASC", "Files", "Editor", "docEditor"],
+        docEditor,
+      ); //Do not remove: it's for Back button on Mobile App
+  }, [config.errorMessage]);
+
+  const getBackUrl = React.useCallback(() => {
+    if (!fileInfo) return;
+    const search = window.location.search;
+    const shareIndex = search.indexOf("share=");
+    const key = shareIndex > -1 ? search.substring(shareIndex + 6) : null;
+
+    let backUrl = "";
+
+    if (fileInfo.rootFolderType === FolderType.Rooms) {
+      if (key) {
+        backUrl = `/rooms/share?key=${key}`;
+      } else {
+        backUrl = `/rooms/shared/${fileInfo.folderId}/filter?folder=${fileInfo.folderId}`;
+      }
+    } else {
+      backUrl = `/rooms/personal/filter?folder=${fileInfo.folderId}`;
+    }
+
+    const url = window.location.href;
+    const origin = url.substring(0, url.indexOf("/doceditor"));
+
+    return `${combineUrl(origin, backUrl)}`;
+  }, [fileInfo]);
+
+  const onSDKRequestClose = React.useCallback(() => {
+    const search = window.location.search;
+    const editorGoBack = new URLSearchParams(search).get("editorGoBack");
+
+    if (editorGoBack === "event") {
+      frameCallEvent({ event: "onEditorCloseCallback" });
+    } else {
+      const backUrl = getBackUrl();
+      if (backUrl) window.location.replace(backUrl);
+    }
+  }, [getBackUrl]);
+
+  const getDefaultFileName = React.useCallback(
+    (withExt = false) => {
+      const documentType = config?.documentType;
+
+      const fileExt =
+        documentType === "word"
+          ? "docx"
+          : documentType === "slide"
+            ? "pptx"
+            : documentType === "cell"
+              ? "xlsx"
+              : "docxf";
+
+      let fileName = t?.("Common:NewDocument");
+
+      switch (fileExt) {
+        case "xlsx":
+          fileName = t?.("Common:NewSpreadsheet");
+          break;
+        case "pptx":
+          fileName = t?.("Common:NewPresentation");
+          break;
+        case "docxf":
+          fileName = t?.("Common:NewMasterForm");
+          break;
+        default:
+          break;
+      }
+
+      if (withExt) {
+        fileName = `${fileName}.${fileExt}`;
+      }
+
+      return fileName;
+    },
+    [config?.documentType, t],
+  );
+
+  const onSDKRequestCreateNew = React.useCallback(() => {
+    const defaultFileName = getDefaultFileName(true);
+
+    createFile(fileInfo.folderId, defaultFileName ?? "")
+      ?.then((newFile) => {
+        const newUrl = combineUrl(
+          window.DocSpaceConfig?.proxy?.url,
+          `/doceditor?fileId=${encodeURIComponent(newFile.id)}`,
+        );
+        window.open(
+          newUrl,
+          window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self",
+        );
+      })
+      .catch((e) => {
+        toastr.error(e);
+      });
+  }, [fileInfo.folderId, getDefaultFileName]);
+
+  const getDocumentHistory = React.useCallback(
+    (fileHistory: TEditHistory[], historyLength: number) => {
+      let result = [];
+
+      for (let i = 0; i < historyLength; i++) {
+        const changes = fileHistory[i].changes;
+        const serverVersion = fileHistory[i].serverVersion;
+        const version = fileHistory[i].version;
+        const versionGroup = fileHistory[i].versionGroup;
+
+        let obj = {
+          ...(changes.length !== 0 && { changes }),
+          created: `${new Date(fileHistory[i].created).toLocaleString(
+            config.editorConfig.lang,
+          )}`,
+          ...(serverVersion && { serverVersion }),
+          key: fileHistory[i].key,
+          user: {
+            id: fileHistory[i].user.id,
+            name: fileHistory[i].user.name,
+          },
+          version,
+          versionGroup,
+        };
+
+        result.push(obj);
+      }
+      return result;
+    },
+    [config.editorConfig.lang],
+  );
+
+  const onSDKRequestRestore = React.useCallback(
+    async (event: object) => {
+      const restoreVersion = (event as TEvent).data.version;
+
+      try {
+        const updateVersions = await restoreDocumentsVersion(
+          fileInfo.id,
+          restoreVersion ?? 0,
+          doc ?? "",
+        );
+        const historyLength = updateVersions.length;
+        docEditor?.refreshHistory?.({
+          currentVersion: getCurrentDocumentVersion(
+            updateVersions,
+            historyLength,
+          ),
+          history: getDocumentHistory(updateVersions, historyLength),
+        });
+      } catch (error) {
+        let errorMessage = "";
+
+        const typedError = error as TCatchError;
+        if (typeof typedError === "object") {
+          errorMessage =
+            ("response" in typedError &&
+              typedError?.response?.data?.error?.message) ||
+            ("statusText" in typedError && typedError?.statusText) ||
+            ("message" in typedError && typedError?.message) ||
+            "";
+        } else {
+          errorMessage = error as string;
+        }
+
+        docEditor?.refreshHistory?.({
+          error: `${errorMessage}`, //TODO: maybe need to display something else.
+        });
+      }
+    },
+    [doc, fileInfo.id, getDocumentHistory],
+  );
+
+  const onSDKRequestHistory = React.useCallback(async () => {
+    try {
+      //   const search = window.location.search;
+      //   const shareIndex = search.indexOf("share=");
+      //   const requestToken =
+      //     shareIndex > -1 ? search.substring(shareIndex + 6) : null;
+      //   const docIdx = search.indexOf("doc=");
+
+      const fileHistory = await getEditHistory(fileInfo.id, doc ?? "");
+      const historyLength = fileHistory.length;
+
+      docEditor?.refreshHistory?.({
+        currentVersion: getCurrentDocumentVersion(fileHistory, historyLength),
+        history: getDocumentHistory(fileHistory, historyLength),
+      });
+    } catch (error) {
+      let errorMessage = "";
+      const typedError = error as TCatchError;
+      if (typeof typedError === "object") {
+        errorMessage =
+          ("response" in typedError &&
+            typedError?.response?.data?.error?.message) ||
+          ("statusText" in typedError && typedError?.statusText) ||
+          ("message" in typedError && typedError?.message) ||
+          "";
+      } else {
+        errorMessage = error as string;
+      }
+      docEditor?.refreshHistory?.({
+        error: `${errorMessage}`, //TODO: maybe need to display something else.
+      });
+    }
+  }, [doc, fileInfo.id, getDocumentHistory]);
+
+  const onSDKRequestSendNotify = React.useCallback(
+    async (event: object) => {
+      const currEvent = event as TEvent;
+
+      const actionData = currEvent.data.actionLink;
+      const comment = currEvent.data.message;
+      const emails = currEvent.data.emails;
+
+      try {
+        await sendEditorNotify(
+          fileInfo.id,
+          actionData ?? "",
+          emails ?? [],
+          comment ?? "",
+        );
+
+        if (usersInRoom.length === 0) return;
+
+        const usersNotFound = emails?.filter((row) =>
+          usersInRoom.every((value) => {
+            return row !== value.email;
+          }),
+        );
+
+        usersNotFound &&
+          usersNotFound.length > 0 &&
+          docEditor?.showMessage?.(
+            t?.("UsersWithoutAccess", {
+              users: usersNotFound,
+            }) ?? "",
+          );
+      } catch (e) {
+        toastr.error(e as TData);
+      }
+    },
+    [fileInfo.id, t, usersInRoom],
+  );
+
+  const onSDKRequestUsers = React.useCallback(
+    async (event: object) => {
+      try {
+        const currEvent = event as TEvent;
+        const c = currEvent?.data?.c;
+        const users = await (c == "protect"
+          ? getProtectUsers(fileInfo.id)
+          : getSharedUsers(fileInfo.id));
+
+        if (c !== "protect") {
+          const usersArray = users.map(
+            (item) =>
+              ({
+                email: item.email,
+                name: item.name,
+              }) as unknown as TUser,
+          );
+          setUsersInRoom(usersArray);
+        }
+
+        docEditor?.setUsers?.({
+          c: c ?? "",
+          users,
+        });
+      } catch (e) {
+        docEditor?.showMessage?.(
+          ((e as { message?: string })?.message ||
+            t?.("ErrorConnectionLost")) ??
+            "",
+        );
+      }
+    },
+    [fileInfo.id, t],
+  );
+
+  const onSDKRequestHistoryData = React.useCallback(
+    async (event: object) => {
+      const version = (event as { data: number }).data;
+
+      try {
+        // const search = window.location.search;
+        // const shareIndex = search.indexOf("share=");
+        // const requestToken =
+        //   shareIndex > -1 ? search.substring(shareIndex + 6) : null;
+
+        const versionDifference = await getEditDiff(
+          fileInfo.id,
+          version,
+          doc ?? "",
+          // requestToken,
+        );
+        const changesUrl = versionDifference.changesUrl;
+        const previous = versionDifference.previous;
+        const token = versionDifference.token;
+
+        const obj: THistoryData = {
+          url: versionDifference.url,
+          version,
+          key: versionDifference.key,
+          fileType: versionDifference.fileType,
+        };
+
+        if (changesUrl) obj.changesUrl = changesUrl;
+        if (previous)
+          obj.previous = {
+            fileType: previous.fileType,
+            key: previous.key,
+            url: previous.url,
+          };
+        if (token) obj.token = token;
+
+        docEditor?.setHistoryData?.(obj);
+      } catch (error) {
+        let errorMessage = "";
+        const typedError = error as TCatchError;
+        if (typeof typedError === "object") {
+          errorMessage =
+            ("response" in typedError &&
+              typedError?.response?.data?.error?.message) ||
+            ("statusText" in typedError && typedError?.statusText) ||
+            ("message" in typedError && typedError?.message) ||
+            "";
+        } else {
+          errorMessage = error as string;
+        }
+
+        docEditor?.setHistoryData?.({
+          error: `${errorMessage}`, //TODO: maybe need to display something else.
+          version,
+        });
+      }
+    },
+    [doc, fileInfo.id],
+  );
+
+  const onDocumentStateChange = React.useCallback(
+    (event: object) => {
+      if (!documentReady) return;
+
+      setDocSaved(!(event as { data: boolean }).data);
+
+      setTimeout(() => {
+        docSaved
+          ? setDocumentTitle(
+              docTitle,
+              config.document.fileType,
+              documentReady,
+              successAuth,
+              setDocTitle,
+            )
+          : setDocumentTitle(
+              `*${docTitle}`,
+              config.document.fileType,
+              documentReady,
+              successAuth,
+              setDocTitle,
+            );
+      }, 500);
+    },
+    [config.document.fileType, docSaved, docTitle, documentReady, successAuth],
+  );
+
+  const onMetaChange = React.useCallback(
+    (event: object) => {
+      const newTitle = (event as { data: { title: string } }).data.title;
+      //const favorite = event.data.favorite;
+
+      if (newTitle && newTitle !== docTitle) {
+        setDocumentTitle(
+          newTitle,
+          config.document.fileType,
+          documentReady,
+          successAuth,
+          setDocTitle,
+        );
+        setDocTitle(newTitle);
+      }
+    },
+    [config.document.fileType, docTitle, documentReady, successAuth],
+  );
+
+  const onMakeActionLink = React.useCallback((event: object) => {
+    const url = window.location.href;
+
+    const actionData = (event as { data: {} }).data;
+
+    const link = generateLink(actionData);
+
+    const urlFormation = url.split("&anchor=")[0];
+
+    const linkFormation = `${urlFormation}&anchor=${link}`;
+
+    docEditor?.setActionLink?.(linkFormation);
+  }, []);
+
+  const generateLink = (actionData: {}) => {
+    return encodeURIComponent(JSON.stringify(actionData));
+  };
+
+  React.useEffect(() => {
+    const tempEvents: IConfigEvents = {};
+
+    setEvents(tempEvents);
+  }, [successAuth, user.isVisitor, config?.documentType, fileInfo]);
+
+  React.useEffect(() => {
+    if (
+      IS_DESKTOP_EDITOR ||
+      (typeof window !== "undefined" &&
+        window.DocSpaceConfig?.editor?.openOnNewPage === false)
+    )
+      return;
+
+    //FireFox security issue fix (onRequestCreateNew will be blocked)
+    const documentType = config?.documentType || "word";
+    const defaultFileName = getDefaultFileName();
+    const url = new URL(
+      combineUrl(
+        window.location.origin,
+        window.DocSpaceConfig?.proxy?.url,
+        "/filehandler.ashx",
+      ),
+    );
+    url.searchParams.append("action", "create");
+    url.searchParams.append("doctype", documentType);
+    url.searchParams.append("title", defaultFileName ?? "");
+    setCreateUrl(url.toString());
+  }, [config?.documentType, getDefaultFileName]);
+
+  return {
+    events,
+    createUrl,
+    documentReady,
+    usersInRoom,
+
+    onDocumentReady,
+    onSDKRequestOpen,
+    onSDKRequestReferenceData,
+    onSDKAppReady,
+    onSDKRequestClose,
+    onSDKRequestCreateNew,
+    onSDKRequestHistory,
+    onSDKRequestUsers,
+    onSDKRequestSendNotify,
+    onSDKRequestRestore,
+    onSDKRequestHistoryData,
+    onDocumentStateChange,
+    onMetaChange,
+    onMakeActionLink,
+
+    setDocTitle,
+  };
+};
+
+export default useEditorEvents;

@@ -15,7 +15,7 @@ import Api from "./Api";
 
 import { useTranslation } from "react-i18next";
 import { isMobile, isMobileOnly } from "react-device-detect";
-import AppLoader from "@docspace/common/components/AppLoader";
+import AppLoader from "@docspace/shared/components/app-loader";
 import SSOLoader from "./sub-components/ssoLoader";
 import { WebhookConfigsLoader } from "./Webhooks/sub-components/Loaders";
 import { DeviceType } from "@docspace/shared/enums";

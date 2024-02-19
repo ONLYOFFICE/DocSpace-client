@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 import { TColorScheme } from "../../../themes";
-import { StyledCircleWrap } from "../sub-components/StyledLoadingButton";
+import StyledCircleWrap from "../sub-components/StyledCircleWrap";
 
 const getDefaultStyles = ({
   $currentColorScheme,

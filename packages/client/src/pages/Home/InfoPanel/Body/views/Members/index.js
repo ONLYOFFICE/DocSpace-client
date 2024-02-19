@@ -76,7 +76,7 @@ const Members = ({
   else if (!infoPanelMembers) return <></>;
 
   const [currentMember] = infoPanelMembers.administrators.filter(
-    (member) => member.id === selfId
+    (member) => member.id === selfId,
   );
 
   const { administrators, users, expected } = infoPanelMembers;
@@ -109,14 +109,14 @@ const Members = ({
       publicRoomItems.push(
         <LinksBlock key="general-link_header">
           <Text fontSize="14px" fontWeight={600}>
-            {t("Files:SharedLinks")}
+            {t("Common:SharedLinks")}
           </Text>
 
           {!isArchiveFolder && (
             <div
               data-tooltip-id="emailTooltip"
               data-tooltip-content={t(
-                "Files:MaximumNumberOfExternalLinksCreated"
+                "Files:MaximumNumberOfExternalLinksCreated",
               )}
             >
               <IconButton
@@ -140,7 +140,7 @@ const Members = ({
               )}
             </div>
           )}
-        </LinksBlock>
+        </LinksBlock>,
       );
     }
 
@@ -150,7 +150,7 @@ const Members = ({
           key="general-link"
           link={primaryLink}
           setIsScrollLocked={setIsScrollLocked}
-        />
+        />,
       );
     }
 
@@ -161,7 +161,7 @@ const Members = ({
             link={link}
             key={link?.sharedTo?.id}
             setIsScrollLocked={setIsScrollLocked}
-          />
+          />,
         );
       });
     } else if (!isArchiveFolder && !primaryLink) {
@@ -182,7 +182,7 @@ const Members = ({
           >
             {t("Files:CreateNewLink")}
           </Link>
-        </StyledLinkRow>
+        </StyledLinkRow>,
       );
     }
   }
@@ -290,7 +290,7 @@ export default inject(
       fetchMembers,
       membersIsLoading,
     };
-  }
+  },
 )(
   withTranslation([
     "InfoPanel",
@@ -300,5 +300,5 @@ export default inject(
     "PeopleTranslations",
     "Settings",
     "CreateEditRoomDialog",
-  ])(observer(Members))
+  ])(observer(Members)),
 );

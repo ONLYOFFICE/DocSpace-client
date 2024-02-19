@@ -104,8 +104,8 @@ const ExpiredComboBox = ({ link, changeExpirationOption, isDisabled }) => {
             data={expiredOptions}
             fontSize="12px"
             fontWeight={400}
-            withoutHover
             isDisabled={isDisabled}
+            directionY={"both"}
           >
             {{ date }}
           </LinkWithDropdown>
@@ -123,7 +123,6 @@ const ExpiredComboBox = ({ link, changeExpirationOption, isDisabled }) => {
             data={expiredOptions}
             fontSize="12px"
             fontWeight={400}
-            withoutHover
             isDisabled={isDisabled}
           >
             {{ date }}

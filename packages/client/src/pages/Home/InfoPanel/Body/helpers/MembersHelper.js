@@ -15,41 +15,49 @@ class MembersHelper {
         key: "owner",
         label: this.t("Common:Owner"),
         access: ShareAccessRights.FullAccess,
+        type: "admin",
       },
       roomAdmin: {
         key: "roomAdmin",
         label: this.t("Common:RoomAdmin"),
         access: ShareAccessRights.RoomManager,
+        type: "manager",
       },
       collaborator: {
         key: "collaborator",
         label: this.t("Common:PowerUser"),
         access: ShareAccessRights.Collaborator,
+        type: "collaborator",
       },
       viewer: {
         key: "viewer",
         label: this.t("Translations:RoleViewer"),
         access: ShareAccessRights.ReadOnly,
+        type: "user",
       },
       editor: {
         key: "editor",
         label: this.t("Translations:RoleEditor"),
         access: ShareAccessRights.Editing,
+        type: "user",
       },
       formFiller: {
         key: "formFiller",
         label: this.t("Translations:RoleFormFiller"),
         access: ShareAccessRights.FormFilling,
+        type: "user",
       },
       reviewer: {
         key: "reviewer",
         label: this.t("Translations:RoleReviewer"),
         access: ShareAccessRights.Review,
+        type: "user",
       },
       commentator: {
         key: "commentator",
         label: this.t("Translations:RoleCommentator"),
         access: ShareAccessRights.Comment,
+        type: "user",
       },
     };
   };

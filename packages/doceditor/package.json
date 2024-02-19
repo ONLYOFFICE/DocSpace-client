@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@onlyoffice/document-editor-react": "^1.3.0",
+    "@onlyoffice/document-editor-react": "file:../../../../onlyoffice-document-editor-react-1.4.0.tgz",
     "i18next": "^20.6.1",
     "mobx": "^6.8.0",
     "next": "14.0.4",

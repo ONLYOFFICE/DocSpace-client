@@ -45,7 +45,7 @@ const RecalculateButton = (props) => {
         {!isRecalculating && lastRecalculateDate && (
           <Text fontSize="12px" className="last-update">
             {t("LastUpdate", {
-              date: moment(lastRecalculateDate).format("l LT"),
+              date: moment(lastRecalculateDate).format("L LT"),
             })}
           </Text>
         )}

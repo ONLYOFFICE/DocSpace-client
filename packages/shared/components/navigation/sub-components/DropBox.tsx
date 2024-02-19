@@ -118,6 +118,7 @@ const DropBox = React.forwardRef<HTMLDivElement, IDropBoxProps>(
             toggleInfoPanel={toggleInfoPanel}
             toggleDropBox={toggleDropBox}
             isInfoPanelVisible={isInfoPanelVisible}
+            showTitle
           />
         </StyledContainer>
 

@@ -17,6 +17,9 @@ const FilterButton = ({
   selectorLabel,
   isRooms,
   isAccounts,
+  isPeopleAccounts,
+  isGroupsAccounts,
+  isInsideGroup,
   id,
   title,
   userId,
@@ -51,6 +54,9 @@ const FilterButton = ({
           selectorLabel={selectorLabel}
           isRooms={isRooms}
           isAccounts={isAccounts}
+          isPeopleAccounts={isPeopleAccounts}
+          isGroupsAccounts={isGroupsAccounts}
+          isInsideGroup={isInsideGroup}
           userId={userId}
         />
       )}

@@ -8,6 +8,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import {
   checkRecalculateQuota,
   getQuotaSettings,
+  recalculateQuota,
 } from "@docspace/shared/api/settings";
 
 const FILTER_COUNT = 6;
@@ -60,6 +61,12 @@ class StorageManagement {
       this.quotaSettings,
       this.needRecalculating,
     ] = await Promise.all(requests);
+
+    if (!this.quotaSettings.lastRecalculateDate && isInit) {
+      await recalculateQuota();
+      this.getIntervalCheckRecalculate();
+      return;
+    }
 
     if (this.needRecalculating) this.getIntervalCheckRecalculate();
   };

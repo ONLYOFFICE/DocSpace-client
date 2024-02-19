@@ -20,6 +20,8 @@ const useDeviceType = () => {
     if (typeof window !== "undefined")
       window.addEventListener("resize", onResize);
 
+    onResize();
+
     return () => {
       window.removeEventListener("resize", onResize);
     };

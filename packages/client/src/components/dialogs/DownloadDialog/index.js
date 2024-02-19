@@ -84,23 +84,24 @@ class DownloadDialogComponent extends React.Component {
   };
 
   onDownload = () => {
-    const { t, downloadFiles } = this.props;
+    const { t, downloadFiles, tryDownloadInFrame, setSelected } = this.props;
     const [fileConvertIds, folderIds, singleFileUrl] = this.getDownloadItems();
     if (fileConvertIds.length === 1 && folderIds.length === 0) {
       // Single file download as
       const file = fileConvertIds[0];
       if (file.value && singleFileUrl) {
         const viewUrl = `${singleFileUrl}&outputtype=${file.value}`;
-        window.open(viewUrl, "_self");
+
+        tryDownloadInFrame(viewUrl);
       }
-      this.props.setSelected("none");
+      setSelected("none");
       this.onClose();
     } else if (fileConvertIds.length || folderIds.length) {
       downloadFiles(fileConvertIds, folderIds, {
         label: t("Translations:ArchivingData"),
         error: t("Common:ErrorInternalServer"),
       });
-      this.props.setSelected("none");
+      setSelected("none");
       this.onClose();
     }
   };
@@ -405,7 +406,7 @@ export default inject(
     const { downloadDialogVisible: visible, setDownloadDialogVisible } =
       dialogsStore;
 
-    const { downloadFiles } = filesActionsStore;
+    const { downloadFiles, tryDownloadInFrame } = filesActionsStore;
 
     return {
       sortedFiles,
@@ -415,6 +416,7 @@ export default inject(
       setDownloadDialogVisible,
       setSelected,
       downloadFiles,
+      tryDownloadInFrame,
 
       theme,
     };

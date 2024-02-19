@@ -1,4 +1,4 @@
-import Scrollbar from "react-scrollbars-custom";
+import { Scrollbar } from "./custom-scrollbar"
 import styled from "styled-components";
 import Base from "../themes/base";
 

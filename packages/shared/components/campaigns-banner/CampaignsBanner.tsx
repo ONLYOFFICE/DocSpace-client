@@ -1,7 +1,7 @@
 import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg?url";
 
 import React from "react";
-import { Text } from "../text";
+import { Text as TextComponent } from "../text";
 import { Link as LinkComponent } from "../link";
 import { IconButton } from "../icon-button";
 
@@ -20,11 +20,12 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
     onAction,
     onClose,
   } = props;
-  const { Header, SubHeader, ButtonLabel, Link } = campaignTranslate;
-  const { borderColor, title, body, action } = campaignConfig;
+  const { Header, SubHeader, Text, ButtonLabel, Link } = campaignTranslate;
+  const { borderColor, title, body, text, action } = campaignConfig;
 
   const hasTitle = !!Header;
   const hasBodyText = !!SubHeader;
+  const hasText = !!Text;
   const isButton = action?.isButton;
 
   return (
@@ -35,23 +36,33 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
     >
       <BannerContent>
         {hasTitle && (
-          <Text
+          <TextComponent
             color={title?.color}
             fontSize={title?.fontSize}
             fontWeight={title?.fontWeight}
           >
             {Header}
-          </Text>
+          </TextComponent>
         )}
         {hasBodyText && (
-          <Text
+          <TextComponent
             color={body?.color}
             fontSize={body?.fontSize}
             fontWeight={body?.fontWeight}
           >
             {SubHeader}
-          </Text>
+          </TextComponent>
         )}
+        {hasText && (
+          <TextComponent
+            color={text?.color}
+            fontSize={text?.fontSize}
+            fontWeight={text?.fontWeight}
+          >
+            {Text}
+          </TextComponent>
+        )}
+
         {isButton ? (
           <BannerButton
             buttonTextColor={action?.color}
@@ -82,4 +93,3 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
 };
 
 export { CampaignsBanner };
-

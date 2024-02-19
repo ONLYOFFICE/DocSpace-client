@@ -181,6 +181,23 @@ const StyledTitle = styled.div`
   }
 `;
 
+const StyledSearchContainer = styled.div`
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 68px;
+  width: 100%;
+  padding: 0 16px;
+  border-radius: 0 0 6px 6px;
+  background-color: ${(props) => props.theme.infoPanel.backgroundColor};
+  z-index: 101;
+  box-shadow: 0px 5px 20px 0px rgba(4, 15, 27, 0.07);
+`;
+
 const StyledLink = styled.div`
   display: flex;
   padding: 8px 0;
@@ -309,6 +326,7 @@ StyledTitle.defaultProps = { theme: Base };
 export {
   StyledInfoPanelBody,
   StyledTitle,
+  StyledSearchContainer,
   StyledSubtitle,
   StyledProperties,
   StyledLink,

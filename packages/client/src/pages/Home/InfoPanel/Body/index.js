@@ -3,8 +3,10 @@ import { inject, observer } from "mobx-react";
 
 import ViewHelper from "./helpers/ViewHelper";
 import ItemTitle from "./sub-components/ItemTitle";
+import Search from "./sub-components/Search";
 
 import { StyledInfoPanelBody } from "./styles/common";
+import { useParams } from "react-router-dom";
 
 const InfoPanelBodyContent = ({
   infoPanelSelection,
@@ -15,34 +17,52 @@ const InfoPanelBodyContent = ({
   getIsFiles,
   getIsRooms,
   getIsAccounts,
+  getIsPeople,
+  getIsGroups,
   getIsGallery,
   gallerySelected,
   isRootFolder,
+  showSearchBlock,
+  setShowSearchBlock,
   ...props
 }) => {
+  const { groupId } = useParams();
+
   const [selectedItems, setSelectedItems] = useState(props.selectedItems);
   const [selectedFolder, setSelectedFolder] = useState(props.selectedFolder);
 
   const isFiles = getIsFiles();
   const isRooms = getIsRooms();
-  const isAccounts = getIsAccounts();
   const isGallery = getIsGallery();
+  const isInsideGroup = getIsGroups() && groupId;
+  const isGroups =
+    getIsGroups() ||
+    (isInsideGroup && (!selectedItems.length || !!selectedItems[0].manager));
+  const isPeople =
+    getIsPeople() ||
+    (isInsideGroup && selectedItems.length && !selectedItems[0].manager);
 
   const isSeveralItems = props.selectedItems?.length > 1;
 
   const isNoItemGallery = isGallery && !gallerySelected;
+  const isNoItemPeople = isPeople && !isInsideGroup && !selectedItems.length;
+  const isNoItemGroups = isGroups && !isInsideGroup && !selectedItems.length;
   const isRoot =
     infoPanelSelection?.isFolder &&
     infoPanelSelection?.id === infoPanelSelection?.rootFolderId;
   const isNoItem =
     !infoPanelSelection ||
-    (!isSeveralItems && (isNoItemGallery || (isRoot && !isGallery)));
+    isNoItemPeople ||
+    isNoItemGallery ||
+    isNoItemGroups ||
+    (isRoot && !isGallery);
 
   const defaultProps = {
     infoPanelSelection,
     isFiles,
     isRooms,
-    isAccounts,
+    isPeople,
+    isGroups,
     isGallery,
     isRootFolder: selectedFolder.id === selectedFolder.rootFolderId,
     isSeveralItems,
@@ -54,6 +74,7 @@ const InfoPanelBodyContent = ({
     membersProps: {},
     historyProps: { selectedFolder },
     accountsProps: {},
+    groupsProps: {},
     galleryProps: {},
     pluginProps: { isRooms, roomsView, fileView },
   });
@@ -63,8 +84,10 @@ const InfoPanelBodyContent = ({
 
     if (isNoItem) return viewHelper.NoItemView();
     if (isSeveralItems) return viewHelper.SeveralItemsView();
+
     if (isGallery) return viewHelper.GalleryView();
-    if (isAccounts) return viewHelper.AccountsView();
+    if (isPeople) return viewHelper.AccountsView();
+    if (isGroups) return viewHelper.GroupsView();
 
     switch (currentView) {
       case "info_members":
@@ -103,7 +126,7 @@ const InfoPanelBodyContent = ({
   useEffect(() => {
     const selectedFolderChanged = isItemChanged(
       selectedFolder,
-      props.selectedFolder
+      props.selectedFolder,
     );
     if (selectedFolderChanged) setSelectedFolder(props.selectedFolder);
   }, [props.selectedFolder]);
@@ -114,10 +137,18 @@ const InfoPanelBodyContent = ({
   // Setting infoPanelSelection after selectedItems or selectedFolder update
   useEffect(() => {
     setNewInfoPanelSelection();
-  }, [selectedItems, selectedFolder]);
+  }, [selectedItems, selectedFolder, groupId]);
+
+  // * DEV-ONLY - Logs selection change
+  // useEffect(() => {
+  //   console.log("\nfor-dev  Selected items: ", selectedItems);
+  //   console.log("\nfor-dev  Selected folder: ", selectedFolder);
+  // }, [selectedItems, selectedFolder]);
 
   return (
     <StyledInfoPanelBody>
+      {showSearchBlock && <Search />}
+
       {!isNoItem && (
         <ItemTitle
           {...defaultProps}
@@ -144,6 +175,10 @@ export default inject(
       getIsGallery,
       infoPanelSelectedItems,
       getInfoPanelSelectedFolder,
+      getIsPeople,
+      getIsGroups,
+      showSearchBlock,
+      setShowSearchBlock,
     } = infoPanelStore;
 
     const { gallerySelected } = oformsStore;
@@ -159,6 +194,8 @@ export default inject(
       getIsFiles,
       getIsRooms,
       getIsAccounts,
+      getIsPeople,
+      getIsGroups,
       getIsGallery,
 
       selectedItems: infoPanelSelectedItems,
@@ -166,6 +203,9 @@ export default inject(
 
       isRootFolder,
       gallerySelected,
+
+      showSearchBlock,
+      setShowSearchBlock,
     };
-  }
+  },
 )(observer(InfoPanelBodyContent));

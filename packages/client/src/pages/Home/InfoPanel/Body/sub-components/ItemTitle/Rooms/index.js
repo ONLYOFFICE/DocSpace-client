@@ -5,6 +5,7 @@ import { Text } from "@docspace/shared/components/text";
 import { inject, observer } from "mobx-react";
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
 import Planet12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/planet.react.svg?url";
+import SearchIconReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { StyledTitle } from "../../../styles/common";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
@@ -29,6 +30,7 @@ const RoomsItemHeader = ({
   setBufferSelection,
   isArchive,
   hasLinks,
+  setShowSearchBlock,
 }) => {
   const itemTitleRef = useRef();
 
@@ -39,13 +41,13 @@ const RoomsItemHeader = ({
   const showDefaultRoomIcon = !isLoadedRoomIcon && selection.isRoom;
   const security = infoPanelSelection ? infoPanelSelection.security : {};
   const canInviteUserInRoomAbility = security?.EditAccess;
-  const showInviteUserIcon = selection?.isRoom && roomsView === "info_members";
   const showPlanetIcon =
     (selection.roomType === RoomsType.PublicRoom ||
       selection.roomType === RoomsType.CustomRoom) &&
     hasLinks;
 
   const badgeUrl = showPlanetIcon ? Planet12ReactSvgUrl : null;
+  const isRoomMembersPanel = selection?.isRoom && roomsView === "info_members";
 
   const onSelectItem = () => {
     setSelected("none");
@@ -71,6 +73,8 @@ const RoomsItemHeader = ({
     });
   };
 
+  const onSearchClick = () => setShowSearchBlock(true);
+
   return (
     <StyledTitle ref={itemTitleRef}>
       <div className="item-icon">
@@ -88,7 +92,18 @@ const RoomsItemHeader = ({
       <Text className="text">{selection.title}</Text>
 
       <div className="info_title-icons">
-        {canInviteUserInRoomAbility && showInviteUserIcon && (
+        {isRoomMembersPanel && (
+          <IconButton
+            id="info_search"
+            className="icon"
+            title={t("Common:Search")}
+            iconName={SearchIconReactSvgUrl}
+            onClick={onSearchClick}
+            size={16}
+          />
+        )}
+
+        {canInviteUserInRoomAbility && isRoomMembersPanel && (
           <IconButton
             id="info_add-user"
             className={"icon"}
@@ -119,7 +134,12 @@ export default inject(
     infoPanelStore,
     publicRoomStore,
   }) => {
-    const { infoPanelSelection, roomsView, setIsMobileHidden } = infoPanelStore;
+    const {
+      infoPanelSelection,
+      roomsView,
+      setIsMobileHidden,
+      setShowSearchBlock,
+    } = infoPanelStore;
     const { externalLinks } = publicRoomStore;
 
     const selection = infoPanelSelection.length > 1 ? null : infoPanelSelection;
@@ -130,6 +150,7 @@ export default inject(
       roomsView,
       infoPanelSelection,
       setIsMobileHidden,
+      setShowSearchBlock,
 
       isGracePeriod: currentTariffStatusStore.isGracePeriod,
 
@@ -146,7 +167,7 @@ export default inject(
       isArchive,
       hasLinks: externalLinks.length,
     };
-  }
+  },
 )(
   withTranslation([
     "Files",
@@ -154,5 +175,5 @@ export default inject(
     "Translations",
     "InfoPanel",
     "SharingPanel",
-  ])(observer(RoomsItemHeader))
+  ])(observer(RoomsItemHeader)),
 );

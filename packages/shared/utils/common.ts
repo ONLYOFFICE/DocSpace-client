@@ -748,7 +748,11 @@ export const toUrlParams = (
       }
     } else if (typeof item === "object") {
       str += `${key}=${encodeURIComponent(JSON.stringify(item))}`;
-    } else if (typeof item === "string" || typeof item === "number") {
+    } else if (
+      typeof item === "string" ||
+      typeof item === "number" ||
+      typeof item === "boolean"
+    ) {
       str += `${key}=${encodeURIComponent(item)}`;
     }
   });

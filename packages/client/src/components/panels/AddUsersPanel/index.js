@@ -402,6 +402,7 @@ export default inject(({ settingsStore }) => {
 })(
   observer(
     withTranslation([
+      "PeopleSelector",
       "SharingPanel",
       "PeopleTranslations",
       "Common",

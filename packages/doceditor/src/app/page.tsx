@@ -1,11 +1,12 @@
-import { redirect } from "next/navigation";
 import type { Metadata } from "next";
 
-import Editor from "@/components/Editor";
 import { getData } from "@/utils/actions";
+
+import Root from "@/components/Root";
 
 export const metadata: Metadata = {
   title: "Onlyoffice DocEditor page",
+
   description: "",
 };
 
@@ -28,11 +29,9 @@ async function Page({
     share: undefined,
   };
 
-  if (!fileId) return redirect("/error");
-
   const data = await getData(fileId, version, doc, action === "view", share);
 
-  return <Editor {...data} />;
+  return <Root {...data} />;
 }
 
 export default Page;

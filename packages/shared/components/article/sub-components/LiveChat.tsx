@@ -4,7 +4,8 @@ import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
 import { LIVE_CHAT_LOCAL_STORAGE_KEY } from "../../../constants";
-import Zendesk, { ZendeskAPI } from "../../zendesk";
+import { Zendesk } from "../../zendesk";
+import { zendeskAPI } from "../../zendesk/Zendesk.utils";
 import { ArticleZendeskProps } from "../Article.types";
 
 const baseConfig = {
@@ -30,7 +31,7 @@ const ArticleLiveChat = ({
   const { interfaceDirection } = useTheme();
   useEffect(() => {
     // console.log("Zendesk useEffect", { withMainButton, isMobileArticle });
-    ZendeskAPI("webWidget", "updateSettings", {
+    zendeskAPI.addChanges("webWidget", "updateSettings", {
       offset:
         withMainButton && isMobileArticle
           ? { horizontal: "68px", vertical: "11px" }
@@ -43,10 +44,10 @@ const ArticleLiveChat = ({
 
   useEffect(() => {
     // console.log("Zendesk useEffect", { languageBaseName });
-    ZendeskAPI("webWidget", "setLocale", languageBaseName);
+    zendeskAPI.addChanges("webWidget", "setLocale", languageBaseName);
 
     if (ready)
-      ZendeskAPI("webWidget", "updateSettings", {
+      zendeskAPI.addChanges("webWidget", "updateSettings", {
         launcher: {
           label: {
             "*": t("Common:Support"),
@@ -60,7 +61,7 @@ const ArticleLiveChat = ({
 
   useEffect(() => {
     // console.log("Zendesk useEffect", { currentColorScheme });
-    ZendeskAPI("webWidget", "updateSettings", {
+    zendeskAPI.addChanges("webWidget", "updateSettings", {
       color: {
         theme: currentColorScheme?.main?.accent,
       },
@@ -69,7 +70,7 @@ const ArticleLiveChat = ({
 
   useEffect(() => {
     // console.log("Zendesk useEffect", { email, displayName });
-    ZendeskAPI("webWidget", "prefill", {
+    zendeskAPI.addChanges("webWidget", "prefill", {
       email: {
         value: email,
         // readOnly: true, // optional
@@ -82,7 +83,7 @@ const ArticleLiveChat = ({
   }, [email, displayName]);
 
   useEffect(() => {
-    ZendeskAPI("webWidget", "updateSettings", {
+    zendeskAPI.addChanges("webWidget", "updateSettings", {
       position: { horizontal: interfaceDirection === "ltr" ? "right" : "left" },
     });
   }, [interfaceDirection]);
@@ -91,7 +92,7 @@ const ArticleLiveChat = ({
     const isShowLiveChat =
       localStorage.getItem(LIVE_CHAT_LOCAL_STORAGE_KEY) === "true" || false;
 
-    ZendeskAPI("webWidget", isShowLiveChat ? "show" : "hide");
+    zendeskAPI.addChanges("webWidget", isShowLiveChat ? "show" : "hide");
   };
 
   return zendeskKey ? (

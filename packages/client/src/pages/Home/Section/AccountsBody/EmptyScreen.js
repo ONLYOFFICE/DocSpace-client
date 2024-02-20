@@ -11,15 +11,21 @@ import { Link } from "@docspace/shared/components/link";
 import { Box } from "@docspace/shared/components/box";
 import { Grid } from "@docspace/shared/components/grid";
 
-const EmptyScreen = ({ resetFilter, setIsLoading, theme }) => {
+const EmptyScreen = ({
+  resetFilter,
+  resetInsideGroupFilter,
+  setIsLoading,
+  theme,
+}) => {
   const { t } = useTranslation(["People", "Common"]);
+  const isPeopleAccounts = window.location.pathname.includes("accounts/people");
 
   const title = t("NotFoundUsers");
   const description = t("NotFoundUsersDescription");
 
   const onResetFilter = () => {
     setIsLoading(true);
-    resetFilter();
+    isPeopleAccounts ? resetFilter() : resetInsideGroupFilter();
   };
 
   const imageSrc = theme.isBase
@@ -65,7 +71,9 @@ const EmptyScreen = ({ resetFilter, setIsLoading, theme }) => {
 };
 
 export default inject(({ peopleStore, clientLoadingStore, settingsStore }) => {
-  const { resetFilter } = peopleStore;
+  const { resetFilter, groupsStore } = peopleStore;
+
+  const { resetInsideGroupFilter } = groupsStore;
 
   const { setIsSectionBodyLoading } = clientLoadingStore;
 
@@ -74,6 +82,7 @@ export default inject(({ peopleStore, clientLoadingStore, settingsStore }) => {
   };
   return {
     resetFilter,
+    resetInsideGroupFilter,
 
     setIsLoading,
     theme: settingsStore.theme,

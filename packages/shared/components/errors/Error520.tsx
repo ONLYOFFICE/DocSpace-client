@@ -3,11 +3,11 @@ import { useTranslation } from "react-i18next";
 
 import { getCrashReport } from "@docspace/shared/utils/crashReport";
 
-import { ZendeskAPI } from "../zendesk";
 import { Link, LinkType } from "../link";
 import ReportDialog from "../report-dialog";
 import ErrorContainer from "../error-container/ErrorContainer";
 import DocspaceLogo from "../docspace-logo/DocspaceLogo";
+import { zendeskAPI } from "../zendesk/Zendesk.utils";
 
 import { Error520Wrapper } from "./Errors.styled";
 import type { Error520Props } from "./Errors.types";
@@ -50,7 +50,7 @@ const Error520 = ({
     window.location.reload();
   };
 
-  ZendeskAPI("webWidget", "show");
+  zendeskAPI.addChanges("webWidget", "show");
 
   if (!firebaseHelper.isEnabledDB)
     return <ErrorContainer headerText={t("SomethingWentWrong")} />;

@@ -6,6 +6,8 @@ import ModalDialog from "@docspace/components/modal-dialog";
 import Button from "@docspace/components/button";
 import Text from "@docspace/components/text";
 
+import { UrlActionType } from "@docspace/common/constants";
+
 import DownloadContent from "./DownloadContent";
 
 class DownloadDialogComponent extends React.Component {
@@ -84,7 +86,7 @@ class DownloadDialogComponent extends React.Component {
   };
 
   onDownload = () => {
-    const { t, downloadFiles, tryDownloadInFrame, setSelected } = this.props;
+    const { t, downloadFiles, openUrl, setSelected } = this.props;
     const [fileConvertIds, folderIds, singleFileUrl] = this.getDownloadItems();
     if (fileConvertIds.length === 1 && folderIds.length === 0) {
       // Single file download as
@@ -92,7 +94,7 @@ class DownloadDialogComponent extends React.Component {
       if (file.value && singleFileUrl) {
         const viewUrl = `${singleFileUrl}&outputtype=${file.value}`;
 
-        tryDownloadInFrame(viewUrl);
+        openUrl(viewUrl, UrlActionType.Download);
       }
       setSelected("none");
       this.onClose();
@@ -401,12 +403,12 @@ export default inject(
   ({ auth, filesStore, dialogsStore, filesActionsStore, settingsStore }) => {
     const { sortedFiles, setSelected } = filesStore;
     const { extsConvertible } = settingsStore;
-    const { theme } = auth.settingsStore;
+    const { theme, openUrl } = auth.settingsStore;
 
     const { downloadDialogVisible: visible, setDownloadDialogVisible } =
       dialogsStore;
 
-    const { downloadFiles, tryDownloadInFrame } = filesActionsStore;
+    const { downloadFiles } = filesActionsStore;
 
     return {
       sortedFiles,
@@ -416,7 +418,7 @@ export default inject(
       setDownloadDialogVisible,
       setSelected,
       downloadFiles,
-      tryDownloadInFrame,
+      openUrl,
 
       theme,
     };

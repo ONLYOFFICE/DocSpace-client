@@ -4,6 +4,7 @@ import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import queryString from "query-string";
 import MediaViewer from "@docspace/common/components/MediaViewer";
+import { UrlActionType } from "@docspace/common/constants";
 import { PluginFileType } from "SRC_DIR/helpers/plugins/constants";
 
 const FilesMediaViewer = (props) => {
@@ -60,7 +61,7 @@ const FilesMediaViewer = (props) => {
     setActiveFiles,
     pluginContextMenuItems,
     someDialogIsOpen,
-    tryDownloadInFrame,
+    openUrl,
   } = props;
 
   const navigate = useNavigate();
@@ -163,7 +164,7 @@ const FilesMediaViewer = (props) => {
   const onDownloadMediaFile = (id) => {
     if (playlist.length > 0) {
       let viewUrlFile = playlist.find((file) => file.fileId === id).src;
-      return tryDownloadInFrame(viewUrlFile);
+      return openUrl(viewUrlFile, UrlActionType.Download);
     }
   };
 
@@ -237,6 +238,7 @@ const FilesMediaViewer = (props) => {
 
 export default inject(
   ({
+    auth,
     filesStore,
     mediaViewerDataStore,
     filesActionsStore,
@@ -247,11 +249,7 @@ export default inject(
     clientLoadingStore,
     pluginStore,
   }) => {
-    const {
-      firstLoad,
-
-      setIsSectionFilterLoading,
-    } = clientLoadingStore;
+    const { firstLoad, setIsSectionFilterLoading } = clientLoadingStore;
 
     const setIsLoading = (param) => {
       setIsSectionFilterLoading(param);
@@ -287,8 +285,10 @@ export default inject(
       nextMedia,
       prevMedia,
     } = mediaViewerDataStore;
-    const { deleteItemAction, tryDownloadInFrame } = filesActionsStore;
+    const { deleteItemAction } = filesActionsStore;
     const { getIcon, extsImagePreviewed, extsMediaPreviewed } = settingsStore;
+
+    const { openUrl } = auth.settingsStore;
     const { isFavoritesFolder, archiveRoomsId } = treeFoldersStore;
 
     const {
@@ -376,7 +376,7 @@ export default inject(
       activeFolders,
       setActiveFiles,
       pluginContextMenuItems,
-      tryDownloadInFrame,
+      openUrl,
     };
   }
 )(withTranslation(["Files", "Translations"])(observer(FilesMediaViewer)));

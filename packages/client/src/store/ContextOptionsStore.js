@@ -53,7 +53,7 @@ import { Events } from "@docspace/common/constants";
 import { connectedCloudsTypeTitleTranslation } from "@docspace/client/src/helpers/filesUtils";
 import { getOAuthToken } from "@docspace/common/utils";
 import api from "@docspace/common/api";
-import { FolderType } from "@docspace/common/constants";
+import { FolderType, UrlActionType } from "@docspace/common/constants";
 import FilesFilter from "@docspace/common/api/files/filter";
 import { getFileLink } from "@docspace/common/api/files";
 
@@ -417,7 +417,8 @@ class ContextOptionsStore {
     const { fileExst, contentLength, viewUrl } = item;
     const isFile = !!fileExst && contentLength;
 
-    const { tryDownloadInFrame, downloadAction } = this.filesActionsStore;
+    const { downloadAction } = this.filesActionsStore;
+    const { openUrl } = this.authStore.settingsStore;
 
     if (isIOS && this.isPwa()) {
       const xhr = new XMLHttpRequest();
@@ -437,7 +438,7 @@ class ContextOptionsStore {
     }
 
     isFile
-      ? tryDownloadInFrame(viewUrl)
+      ? openUrl(viewUrl, UrlActionType.Download)
       : downloadAction(t("Translations:ArchivingData"), item).catch((err) =>
           toastr.error(err)
         );

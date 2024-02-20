@@ -513,3 +513,12 @@ export const DeviceType = Object.freeze({
   tablet: "tablet",
   desktop: "desktop",
 });
+
+/**
+ * Enum for open url action.
+ * @readonly
+ */
+export const UrlActionType = Object.freeze({
+  Download: 0,
+  Link: 1,
+});

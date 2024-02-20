@@ -33,17 +33,14 @@ import {
   ShareAccessRights,
   RoomSearchArea,
   Events,
+  UrlActionType,
 } from "@docspace/common/constants";
 import { makeAutoObservable } from "mobx";
 
 import toastr from "@docspace/components/toast/toastr";
 import { TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
 import { checkProtocol } from "../helpers/files-helpers";
-import {
-  combineUrl,
-  getObjectByLocation,
-  frameCallEvent,
-} from "@docspace/common/utils";
+import { combineUrl, getObjectByLocation } from "@docspace/common/utils";
 import config from "PACKAGE_FILE";
 import { isDesktop } from "@docspace/components/utils/device";
 import { getCategoryType } from "SRC_DIR/helpers/utils";
@@ -530,16 +527,6 @@ class FilesActionStore {
     }
   };
 
-  tryDownloadInFrame = (url, replace = false) => {
-    const { isFrame, frameConfig } = this.authStore.settingsStore;
-
-    isFrame && frameConfig?.actionLinksFromEvents
-      ? frameCallEvent({ event: "onDownload", data: url })
-      : replace
-      ? (window.location.href = url)
-      : window.open(url, "_self");
-  };
-
   downloadFiles = async (fileConvertIds, folderIds, translations) => {
     const { clearActiveOperations, secondaryProgressDataStore } =
       this.uploadDataStore;
@@ -547,6 +534,7 @@ class FilesActionStore {
       secondaryProgressDataStore;
 
     const { addActiveItems } = this.filesStore;
+    const { openUrl } = this.authStore.settingsStore;
 
     const { label } = translations;
 
@@ -597,7 +585,7 @@ class FilesActionStore {
           this.setIsBulkDownload(false);
 
           if (item.url) {
-            this.tryDownloadInFrame(item.url, true);
+            openUrl(item.url, UrlActionType.Download, true);
           } else {
             setSecondaryProgressBarData({
               visible: true,
@@ -625,6 +613,7 @@ class FilesActionStore {
 
   downloadAction = (label, item, folderId) => {
     const { bufferSelection } = this.filesStore;
+    const { openUrl } = this.authStore.settingsStore;
 
     const selection = item
       ? [item]
@@ -641,7 +630,7 @@ class FilesActionStore {
     const items = [];
 
     if (selection.length === 1 && selection[0].fileExst && !folderId) {
-      this.tryDownloadInFrame(selection[0].viewUrl);
+      openUrl(selection[0].viewUrl, UrlActionType.Download);
 
       return Promise.resolve();
     }

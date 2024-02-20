@@ -18,7 +18,10 @@ import { inject, observer } from "mobx-react";
 import toastr from "@docspace/components/toast/toastr";
 import { Encoder } from "@docspace/common/utils/encoder";
 import { Base } from "@docspace/components/themes";
-import { MAX_FILE_COMMENT_LENGTH } from "@docspace/common/constants";
+import {
+  MAX_FILE_COMMENT_LENGTH,
+  UrlActionType,
+} from "@docspace/common/constants";
 import moment from "moment-timezone";
 import getCorrectDate from "@docspace/components/utils/getCorrectDate";
 
@@ -53,7 +56,7 @@ const VersionRow = (props) => {
     fileItemsList,
     enablePlugins,
     currentDeviceType,
-    tryDownloadInFrame,
+    openUrl,
   } = props;
 
   const navigate = useNavigate();
@@ -73,7 +76,7 @@ const VersionRow = (props) => {
   const title = `${Encoder.htmlDecode(info.updatedBy?.displayName)}`;
 
   const onDownloadAction = () =>
-    tryDownloadInFrame(`${info.viewUrl}&version=${info.version}`);
+    openUrl(`${info.viewUrl}&version=${info.version}`, UrlActionType.Download);
 
   const onEditComment = () => !isEditing && setShowEditPanel(!showEditPanel);
 
@@ -320,48 +323,44 @@ const VersionRow = (props) => {
   );
 };
 
-export default inject(
-  ({ auth, versionHistoryStore, pluginStore, filesActionsStore }) => {
-    const { user } = auth.userStore;
-    const { openUser, setIsVisible } = auth.infoPanelStore;
-    const { culture, isTabletView, enablePlugins, currentDeviceType } =
-      auth.settingsStore;
-    const language = (user && user.cultureName) || culture || "en";
+export default inject(({ auth, versionHistoryStore, pluginStore }) => {
+  const { user } = auth.userStore;
+  const { openUser, setIsVisible } = auth.infoPanelStore;
+  const { culture, isTabletView, enablePlugins, currentDeviceType, openUrl } =
+    auth.settingsStore;
+  const language = (user && user.cultureName) || culture || "en";
 
-    const { fileItemsList } = pluginStore;
+  const { fileItemsList } = pluginStore;
 
-    const { tryDownloadInFrame } = filesActionsStore;
+  const {
+    // markAsVersion,
+    restoreVersion,
+    updateCommentVersion,
+    isEditing,
+    isEditingVersion,
+    fileSecurity,
+  } = versionHistoryStore;
 
-    const {
-      // markAsVersion,
-      restoreVersion,
-      updateCommentVersion,
-      isEditing,
-      isEditingVersion,
-      fileSecurity,
-    } = versionHistoryStore;
+  const isEdit = isEditingVersion || isEditing;
+  const canChangeVersionFileHistory = !isEdit && fileSecurity?.EditHistory;
 
-    const isEdit = isEditingVersion || isEditing;
-    const canChangeVersionFileHistory = !isEdit && fileSecurity?.EditHistory;
-
-    return {
-      currentDeviceType,
-      fileItemsList,
-      enablePlugins,
-      theme: auth.settingsStore.theme,
-      culture: language,
-      isTabletView,
-      // markAsVersion,
-      restoreVersion,
-      updateCommentVersion,
-      isEditing: isEdit,
-      canChangeVersionFileHistory,
-      openUser,
-      setIsVisible,
-      tryDownloadInFrame,
-    };
-  }
-)(
+  return {
+    currentDeviceType,
+    fileItemsList,
+    enablePlugins,
+    theme: auth.settingsStore.theme,
+    culture: language,
+    isTabletView,
+    // markAsVersion,
+    restoreVersion,
+    updateCommentVersion,
+    isEditing: isEdit,
+    canChangeVersionFileHistory,
+    openUser,
+    setIsVisible,
+    openUrl,
+  };
+})(
   withTranslation(["VersionHistory", "Common", "Translations"])(
     observer(VersionRow)
   )

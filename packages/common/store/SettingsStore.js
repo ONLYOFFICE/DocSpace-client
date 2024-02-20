@@ -15,6 +15,7 @@ import {
   LANGUAGE,
   TenantStatus,
   DeviceType,
+  UrlActionType,
 } from "../constants";
 import { version } from "../package.json";
 import SocketIOHelper from "../utils/socket";
@@ -1065,6 +1066,21 @@ class SettingsStore {
       !this.standalone || (this.standalone && this.baseDomain !== "localhost")
     );
   }
+
+  openUrl = (url, action, replace = false) => {
+    if (action === UrlActionType.Download) {
+      this.isFrame &&
+      this.frameConfig?.downloadToEvent &&
+      this.frameConfig?.events.onDownload
+        ? frameCallEvent({ event: "onDownload", data: url })
+        : replace
+        ? (window.location.href = url)
+        : window.open(url, "_self");
+    }
+
+    if (action === UrlActionType.Link) {
+    }
+  };
 }
 
 export default SettingsStore;

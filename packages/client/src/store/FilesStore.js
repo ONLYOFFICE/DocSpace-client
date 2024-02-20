@@ -1492,7 +1492,7 @@ class FilesStore {
             //   folderId = this.treeFoldersStore.myRoomsId;
             // }
 
-            const isCurrentFolder = data.current.id === folderId;
+            const isCurrentFolder = data.current.id == folderId;
 
             const folderInfo = isCurrentFolder
               ? data.current

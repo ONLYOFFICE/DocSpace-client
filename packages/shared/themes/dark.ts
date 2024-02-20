@@ -3207,10 +3207,10 @@ const Dark: TTheme = {
       headerBorder: "1px solid #474747",
       scopeDesc: "#858585",
     },
-    sdkPresets: {
-      borderColor: "#474747",
-      secondaryColor: "#ADADAD",
-    },
+  },
+  sdkPresets: {
+    borderColor: "#474747",
+    secondaryColor: "#ADADAD",
   },
 };
 

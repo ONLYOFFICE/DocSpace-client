@@ -150,7 +150,7 @@ const PortalIntegration = (props) => {
         <CSP t={t} />
       </CategoryDescription>
       <CategoryHeader>{t("CreateSampleHeader")}</CategoryHeader>
-      <Text lineHeight="20px" color={theme.sdkPresets.secondaryColor}>
+      <Text lineHeight="20px" color={theme.sdkPresets?.secondaryColor}>
         {t("InitializeSDK")}
       </Text>
       <PresetsContainer>

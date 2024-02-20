@@ -1,9 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-// @ts-ignore
-import Headline from "@docspace/common/components/Headline";
-
+import Headline from "@docspace/shared/components/headline/Headline";
 import { IconButton } from "@docspace/shared/components/icon-button";
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";

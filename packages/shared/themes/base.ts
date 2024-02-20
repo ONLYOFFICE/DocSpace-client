@@ -3230,11 +3230,10 @@ export const getBaseTheme = () => {
         headerBorder: "1px solid #d0d5da",
         scopeDesc: "#a3a9ae",
       },
-
-      sdkPresets: {
-        borderColor: "#d0d5da",
-        secondaryColor: "#657077",
-      },
+    },
+    sdkPresets: {
+      borderColor: "#d0d5da",
+      secondaryColor: "#657077",
     },
   };
 };

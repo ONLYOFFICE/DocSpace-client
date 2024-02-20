@@ -90,9 +90,15 @@ const ThirdParty = loadable(() =>
     "../pages/PortalSettings/categories/integration/ThirdPartyServicesSettings"
   )
 );
-
-const DocumentService = loadable(() =>
-  import("../pages/PortalSettings/categories/integration/DocumentService")
+const OAuthCreatePage = loadable(() =>
+  import(
+    "../pages/PortalSettings/categories/developer-tools/OAuth/OAuthCreatePage"
+  )
+);
+const OAuthEditPage = loadable(() =>
+  import(
+    "../pages/PortalSettings/categories/developer-tools/OAuth/OAuthEditPage"
+  )
 );
 
 const SingleSignOn = loadable(() =>

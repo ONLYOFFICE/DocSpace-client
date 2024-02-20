@@ -24,7 +24,7 @@ const Container = styled.div`
 
   &.description-holder {
     display: block;
-    color: ${(props) => props.theme.sdkPresets.secondaryColor};
+    color: ${(props) => props.theme.sdkPresets?.secondaryColor};
   }
 
   &.description-holder > div {

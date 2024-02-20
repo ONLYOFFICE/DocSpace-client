@@ -37,7 +37,7 @@ const RowView = (props) => {
   const [openedEmailKey, setOpenedEmailKey] = useState(null);
 
   const usersWithFilledEmails = users.withoutEmail.filter(
-    (user) => user.email.length > 0,
+    (user) => user.email && user.email.length > 0,
   );
 
   const toggleAll = (isChecked) =>

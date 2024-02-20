@@ -29,7 +29,7 @@ const TableView = (props) => {
   const tableRef = useRef(null);
 
   const usersWithFilledEmails = users.withoutEmail.filter(
-    (user) => user.email.length > 0,
+    (user) => user.email && user.email.length > 0,
   );
 
   const toggleAll = (e) =>
@@ -77,7 +77,7 @@ const TableView = (props) => {
             t={t}
             key={data.key}
             id={data.key}
-            email={data.email}
+            email={data.email || ""}
             displayName={data.displayName}
             hideColumns={hideColumns}
             isChecked={isAccountChecked(data.key, checkedAccountType)}

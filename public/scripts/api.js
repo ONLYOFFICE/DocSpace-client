@@ -17,16 +17,16 @@
     selectorType: "exceptPrivacyTrashArchiveFolders", //TODO: ["roomsOnly", "userFolderOnly", "exceptPrivacyTrashArchiveFolders", "exceptSortedByTagsFolders"]
     showSelectorCancel: false,
     showSelectorHeader: false,
-    showHeader: true,
+    showHeader: false,
     showTitle: true,
-    showMenu: true,
-    showFilter: true,
+    showMenu: false,
+    showFilter: false,
     destroyText: "",
     viewAs: "row", //TODO: ["row", "table", "tile"]
     viewTableColumns: "Name,Size,Type",
-    checkCSP: false,
-    downloadToEvent: true,
-    openLinkToEvent: true,
+    checkCSP: true,
+    downloadToEvent: false,
+    openLinkToEvent: false,
     filter: {
       count: 100,
       page: 1,
@@ -55,8 +55,8 @@
       onEditorCloseCallback: null,
       onAuthSuccess: null,
       onSignOut: null,
-      onDownload: (e) => console.log("onDownload", e),
-      onOpenLink: (e) => console.log("onOpenLink", e),
+      onDownload: null,
+      onOpenLink: null,
     },
   };
 

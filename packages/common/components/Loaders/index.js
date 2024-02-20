@@ -41,6 +41,7 @@ import SettingsAdmin from "./SettingsLoader/SettingsAdminLoader";
 import SettingsCommon from "./SettingsLoader/SettingsCommonLoader";
 import SettingsSMTP from "./SettingsLoader/SettingsSMTPLoader";
 import SettingsDSConnect from "./SettingsLoader/SettingsDSConnectLoader";
+import SettingsStorageManagement from "./SettingsLoader/SettingsStorageManagementLoader";
 import EmptyContainerLoader from "./EmptyContainerLoader/EmptyContainerLoader";
 
 import SectionSubmenuLoader from "./SectionSubmenuLoader";
@@ -89,6 +90,7 @@ export default {
   SettingsCommon,
   SettingsSMTP,
   SettingsDSConnect,
+  SettingsStorageManagement,
 
   EmptyContainerLoader,
   Notifications,

@@ -81,6 +81,8 @@ export const QuotaBarTypes = Object.freeze({
   UserQuota: "user-quota",
   UserAndStorageQuota: "user-storage-quota",
   RoomAndStorageQuota: "room-storage-quota",
+  PersonalUserQuota: "personal-user-quota",
+  TenantCustomQuota: "tenant-custom-quota",
 });
 
 export const BINDING_POST = "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST";
@@ -118,6 +120,23 @@ export const DEFAULT_SELECT_LANGUAGE = {
   label: "English (United States)",
   icon: EnUSReactSvgUrl,
 };
+
+/**
+ * Enum for sort by field name
+ * @readonly
+ */
+export const SortByFieldName = Object.freeze({
+  Name: "AZ",
+  ModifiedDate: "DateAndTime",
+  CreationDate: "DateAndTimeCreation",
+  Author: "Author",
+  Size: "Size",
+  Type: "Type",
+  Room: "Room",
+  Tags: "Tags",
+  RoomType: "roomType",
+  UsedSpace: "usedspace",
+});
 
 export const LinkType = Object.freeze({
   Invite: 0,

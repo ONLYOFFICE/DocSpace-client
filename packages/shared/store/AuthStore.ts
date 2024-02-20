@@ -85,6 +85,24 @@ class AuthStore {
         this.currentQuotaStore?.updateQuotaFeatureValue(featureId, value);
       });
     });
+    socketHelper.on("s:change-user-quota-used-value", (options) => {
+      console.log(`[WS] change-user-quota-used-value`, options);
+
+      runInAction(() => {
+        if (options.customQuotaFeature === "user_custom_quota") {
+          this.userStore?.updateUserQuota(
+            options.usedSpace,
+            options.quotaLimit,
+          );
+
+          return;
+        }
+
+        const { customQuotaFeature, ...updatableObject } = options;
+
+        this.currentQuotaStore?.updateTenantCustomQuota(updatableObject);
+      });
+    });
   }
 
   setIsUpdatingTariff = (isUpdatingTariff: boolean) => {
@@ -123,7 +141,7 @@ class AuthStore {
     ) {
       requests.push(
         this.userStore?.init(i18n).then(() => {
-          if (this.isQuotaAvailable && !isPortalRestore) {
+          if (!isPortalRestore) {
             this.getTenantExtra();
           }
         }),
@@ -255,13 +273,13 @@ class AuthStore {
     );
   }
 
-  get isQuotaAvailable() {
-    const user = this.userStore?.user;
+  // get isQuotaAvailable() {
+  //   const user = this.userStore?.user;
 
-    if (!user) return false;
+  //   if (!user) return false;
 
-    return user.isOwner || user.isAdmin || this.isRoomAdmin;
-  }
+  //   return user.isOwner || user.isAdmin || this.isRoomAdmin;
+  // }
 
   get isPaymentPageAvailable() {
     const user = this.userStore?.user;

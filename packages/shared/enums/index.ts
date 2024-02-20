@@ -164,6 +164,7 @@ export const enum PageType {
   portalDeletion = "portalDeletion",
   payments = "payments",
   bonus = "bonus",
+  storageManagement = "storageManagement",
 }
 
 /**
@@ -300,6 +301,7 @@ export const enum Events {
   GROUP_EDIT = "edit_group",
   CHANGE_COLUMN = "change_column",
   CHANGE_USER_TYPE = "change_user_type",
+  CHANGE_QUOTA = "change_quota",
   CREATE_PLUGIN_FILE = "create_plugin_file",
 }
 
@@ -364,6 +366,7 @@ export const enum FilterGroups {
   filterFolders = "filter-folders",
   filterRoom = "filter-room",
   filterContent = "filter-withContent",
+  filterQuota = "filter-quota",
   roomFilterProviderType = "filter-provider-type",
   roomFilterType = "filter-type",
   roomFilterSubject = "filter-subject",
@@ -386,6 +389,8 @@ export const enum FilterKeys {
   withoutGroup = "withoutGroup",
   selectedGroup = "selectedGroup",
   byManager = "byManager",
+  customQuota = "2",
+  defaultQuota = "1",
 }
 
 export const enum IndexedDBStores {

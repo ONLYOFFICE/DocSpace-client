@@ -182,9 +182,9 @@ export const getUserRole = (user: TUser) => {
     user.access === ShareAccessRights.RoomManager ||
     user.access === ShareAccessRights.Collaborator
   )
-    // TODO: Change to People Product Id const
+    //TODO: Change to People Product Id const
     return "admin";
-  // TODO: Need refactoring
+  //TODO: Need refactoring
   if (user.isVisitor) return "user";
   if (user.isCollaborator) return "collaborator";
   if (user.isRoomAdmin) return "manager";
@@ -350,8 +350,8 @@ export function convertLanguage(key: string) {
     case "fr-FR":
       return "fr";
     default:
-      return key;
-  }
+  return key;
+}
 }
 
 export function convertToCulture(key: string) {
@@ -377,8 +377,8 @@ export function convertToCulture(key: string) {
     case "zh":
       return "zh-CN";
     default:
-      return key;
-  }
+  return key;
+}
 }
 
 export function convertToLanguage(key: string) {
@@ -491,6 +491,15 @@ export const frameCallCommand = (commandName: string, commandData: unknown) => {
   );
 };
 
+export const getPowerFromBytes = (bytes: number, maxPower = 6) => {
+  const power = Math.floor(Math.log(bytes) / Math.log(1024));
+  return power <= maxPower ? power : maxPower;
+};
+
+export const getSizeFromBytes = (bytes: number, power: number) => {
+  return parseFloat((bytes / Math.pow(1024, power)).toFixed(2));
+};
+
 export const getConvertedSize = (t: (key: string) => string, bytes: number) => {
   let power = 0;
   let resultSize = bytes;
@@ -508,12 +517,38 @@ export const getConvertedSize = (t: (key: string) => string, bytes: number) => {
   if (bytes <= 0) return `${`0 ${t("Common:Bytes")}`}`;
 
   if (bytes >= 1024) {
-    power = Math.floor(Math.log(bytes) / Math.log(1024));
-    power = power < sizeNames.length ? power : sizeNames.length - 1;
-    resultSize = parseFloat((bytes / 1024 ** power).toFixed(2));
+    power = getPowerFromBytes(bytes, sizeNames.length - 1);
+    resultSize = getSizeFromBytes(bytes, power);
   }
 
   return `${resultSize} ${sizeNames[power]}`;
+};
+
+export const getConvertedQuota = (
+  t: (key: string) => string,
+  bytes: number,
+) => {
+  if (bytes === -1) return t("Common:Unlimited");
+  return getConvertedSize(t, bytes);
+};
+
+export const getSpaceQuotaAsText = (
+  t: (key: string) => string,
+  usedSpace: number,
+  quotaLimit: number,
+  isDefaultQuotaSet: boolean,
+) => {
+  const usedValue = getConvertedQuota(t, usedSpace);
+  const quotaValue = getConvertedQuota(t, quotaLimit);
+
+  if (isDefaultQuotaSet) return `${usedValue} / ${quotaValue}`;
+
+  return usedValue;
+};
+
+export const conversionToBytes = (size: number, power: number) => {
+  const value = Math.floor(size) * Math.pow(1024, power);
+  return value.toString();
 };
 
 export const getBgPattern = (colorSchemeId: number | undefined) => {

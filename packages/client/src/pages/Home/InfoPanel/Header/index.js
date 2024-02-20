@@ -184,8 +184,8 @@ const InfoPanelHeaderContent = (props) => {
 
       {withSubmenu && (
         <div className="submenu">
-          {selection?.rootFolderId === myRoomsId ||
-          selection?.rootFolderId === archiveRoomsId ? (
+          {selection?.rootFolderId == myRoomsId ||
+          selection?.rootFolderId == archiveRoomsId ? (
             <Submenu
               style={{ width: "100%" }}
               data={roomsSubmenu}

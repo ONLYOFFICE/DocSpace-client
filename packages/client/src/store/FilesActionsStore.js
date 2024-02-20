@@ -9,6 +9,9 @@ import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/catalog.rooms.react.svg?url";
+import ChangQuotaReactSvgUrl from "PUBLIC_DIR/images/change.quota.react.svg?url";
+import DisableQuotaReactSvgUrl from "PUBLIC_DIR/images/disable.quota.react.svg?url";
+import DefaultQuotaReactSvgUrl from "PUBLIC_DIR/images/default.quota.react.svg?url";
 import {
   checkFileConflicts,
   deleteFile,
@@ -27,6 +30,7 @@ import {
 } from "@docspace/shared/api/files";
 import {
   ConflictResolveType,
+  Events,
   FileAction,
   FileStatus,
   FolderType,
@@ -48,7 +52,6 @@ import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import AccountsFilter from "@docspace/shared/api/people/filter";
 import { RoomSearchArea } from "@docspace/shared/enums";
 import { getObjectByLocation } from "@docspace/shared/utils/common";
-import { Events } from "@docspace/shared/enums";
 import uniqueid from "lodash/uniqueId";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import {
@@ -73,7 +76,7 @@ class FilesActionStore {
   peopleStore;
   userStore = null;
   currentTariffStatusStore = null;
-
+  currentQuotaStore = null;
   isBulkDownload = false;
   isLoadedSearchFiles = false;
   isGroupMenuBlocked = false;
@@ -97,6 +100,7 @@ class FilesActionStore {
     userStore,
     currentTariffStatusStore,
     peopleStore,
+    currentQuotaStore,
   ) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -115,6 +119,7 @@ class FilesActionStore {
     this.userStore = userStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.peopleStore = peopleStore;
+    this.currentQuotaStore = currentQuotaStore;
   }
 
   setIsBulkDownload = (isBulkDownload) => {
@@ -1574,8 +1579,15 @@ class FilesActionStore {
   };
 
   isAvailableOption = (option) => {
-    const { canConvertSelected, hasSelection, allFilesIsEditing, selection } =
-      this.filesStore;
+    const {
+      canConvertSelected,
+      hasSelection,
+      allFilesIsEditing,
+      selection,
+      hasRoomsToResetQuota,
+      hasRoomsToDisableQuota,
+      hasRoomsToChangeQuota,
+    } = this.filesStore;
 
     const { rootFolderType } = this.selectedFolderStore;
     const canDownload = selection.every((s) => s.security?.Download);
@@ -1625,6 +1637,13 @@ class FilesActionStore {
           !isCollaborator && rootFolderType === FolderType.USER;
 
         return canCreateRoom;
+
+      case "change-quota":
+        return hasRoomsToChangeQuota;
+      case "disable-quota":
+        return hasRoomsToDisableQuota;
+      case "default-quota":
+        return hasRoomsToResetQuota;
     }
   };
 
@@ -1768,14 +1787,64 @@ class FilesActionStore {
     window.dispatchEvent(event);
   };
 
+  changeRoomQuota = (items, successCallback, abortCallback) => {
+    const event = new Event(Events.CHANGE_QUOTA);
+
+    const itemsIDs = items.map((item) => {
+      return item?.id ? item.id : item;
+    });
+
+    const payload = {
+      visible: true,
+      type: "room",
+      ids: itemsIDs,
+      successCallback,
+      abortCallback,
+    };
+
+    event.payload = payload;
+
+    window.dispatchEvent(event);
+  };
+  disableRoomQuota = async (items, t) => {
+    const { setCustomRoomQuota } = this.filesStore;
+
+    const userIDs = items.map((item) => {
+      return item?.id ? item.id : item;
+    });
+
+    try {
+      await setCustomRoomQuota(-1, userIDs);
+      toastr.success(t("Common:StorageQuotaDisabled"));
+    } catch (e) {
+      toastr.error(e);
+    }
+  };
+
+  resetRoomQuota = async (items, t) => {
+    const { resetRoomQuota } = this.filesStore;
+
+    const userIDs = items.map((item) => {
+      return item?.id ? item.id : item;
+    });
+
+    try {
+      await resetRoomQuota(userIDs);
+      toastr.success(t("Common:StorageQuotaReset"));
+    } catch (e) {
+      toastr.error(e);
+    }
+  };
   getOption = (option, t) => {
     const {
-      setSharingPanelVisible,
+      // setSharingPanelVisible,
       setDownloadDialogVisible,
       setMoveToPanelVisible,
       setCopyPanelVisible,
       setDeleteDialogVisible,
     } = this.dialogsStore;
+    const { selection } = this.filesStore;
+    const { showStorageInfo } = this.currentQuotaStore;
 
     switch (option) {
       case "show-info":
@@ -1880,6 +1949,40 @@ class FilesActionStore {
             onClick: () => this.archiveRooms("unarchive"),
             disabled: false,
           };
+      case "change-quota":
+        if (!this.isAvailableOption("change-quota")) return null;
+        else
+          return {
+            id: "menu-change-quota",
+            key: "change-quota",
+            label: t("Common:ChangeQuota"),
+            iconUrl: ChangQuotaReactSvgUrl,
+            onClick: () => this.changeRoomQuota(selection),
+            disabled: !showStorageInfo,
+          };
+      case "default-quota":
+        if (!this.isAvailableOption("default-quota")) return null;
+        else
+          return {
+            id: "menu-default-quota",
+            key: "default-quota",
+            label: t("Common:SetToDefault"),
+            iconUrl: DefaultQuotaReactSvgUrl,
+            onClick: () => this.resetRoomQuota(selection, t),
+            disabled: !showStorageInfo,
+          };
+      case "disable-quota":
+        if (!this.isAvailableOption("disable-quota")) return null;
+        else
+          return {
+            id: "menu-disable-quota",
+            key: "disable-quota",
+            label: t("Common:DisableQuota"),
+            iconUrl: DisableQuotaReactSvgUrl,
+            onClick: () => this.disableRoomQuota(selection, t),
+            disabled: !showStorageInfo,
+          };
+
       case "delete-room":
         if (!this.isAvailableOption("delete-room")) return null;
         else
@@ -1928,8 +2031,16 @@ class FilesActionStore {
 
     const pin = this.getOption(pinName, t);
     const archive = this.getOption("archive", t);
+    const changeQuota = this.getOption("change-quota", t);
+    const disableQuota = this.getOption("disable-quota", t);
+    const defaultQuota = this.getOption("default-quota", t);
 
-    itemsCollection.set(pinName, pin).set("archive", archive);
+    itemsCollection
+      .set(pinName, pin)
+      .set("archive", archive)
+      .set("change-quota", changeQuota)
+      .set("default-quota", defaultQuota)
+      .set("disable-quota", disableQuota);
     return this.convertToArray(itemsCollection);
   };
 

@@ -36,6 +36,18 @@ export type TPaymentQuota = {
   free: boolean;
   trial: boolean;
   features: TPaymentFeature[];
+  usersQuota: {
+    defaultQuota: number;
+    enableQuota: boolean;
+  };
+  roomsQuota: {
+    defaultQuota: number;
+    enableQuota: boolean;
+  };
+  tenantCustomQuota: {
+    quota: number;
+    enableQuota: boolean;
+  };
 };
 
 export type TPortal = {

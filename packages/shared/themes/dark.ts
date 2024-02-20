@@ -2933,7 +2933,13 @@ const Dark: TTheme = {
           tooltipColor: "#F5E9BA",
         },
         auditTrail: {
+          sideColor: "#858585",
+          nameColor: "#eeeeee",
           downloadReportDescriptionColor: "#858585",
+        },
+        loginHistory: {
+          sideColor: "#858585",
+          nameColor: "#eeeeee",
         },
       },
 
@@ -3014,6 +3020,11 @@ const Dark: TTheme = {
         },
         warningColor: "#E06451",
         color: "#E17415",
+      },
+
+      storageManagement: {
+        grayBackgroundText: "#858585",
+        descriptionColor: "#ADADAD",
       },
     },
 

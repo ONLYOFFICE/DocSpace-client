@@ -49,7 +49,6 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     userTheme,
     //user,
     whiteLabelLogoUrls,
-    standalone,
     userId,
     currentDeviceType,
     timezone,
@@ -120,13 +119,6 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       command: "subscribe",
       data: { roomParts: "backup-restore" },
     });
-
-    !standalone && // unlimited quota (standalone)
-      socketHelper.emit({
-        command: "subscribe",
-        data: { roomParts: "quota" },
-      });
-
     socketHelper.on("restore-backup", () => {
       getRestoreProgress()
         .then((response) => {
@@ -141,6 +133,16 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
         .catch((e) => {
           console.error("getRestoreProgress", e);
         });
+    });
+
+    socketHelper.emit({
+      command: "subscribe",
+      data: { roomParts: "quota" },
+    });
+
+    socketHelper.emit({
+      command: "subscribe",
+      data: { roomParts: "QUOTA", individual: true },
     });
   }, [socketHelper]);
 
@@ -405,78 +407,75 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 
 const ShellWrapper = inject(
   ({ authStore, settingsStore, backup, clientLoadingStore, userStore }) => {
-    const { i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
     const { init, isLoaded, setProductVersion, language } = authStore;
 
-    const {
-      personal,
-      roomsMode,
-      isDesktopClient,
-      firebaseHelper,
-      setModuleInfo,
-      setCheckedMaintenance,
-      setMaintenanceExist,
-      setSnackbarExist,
-      socketHelper,
-      setTheme,
-      whiteLabelLogoUrls,
-      standalone,
-      currentDeviceType,
+  const {
+    personal,
+    roomsMode,
+    isDesktopClient,
+    firebaseHelper,
+    setModuleInfo,
+    setCheckedMaintenance,
+    setMaintenanceExist,
+    setSnackbarExist,
+    socketHelper,
+    setTheme,
+    whiteLabelLogoUrls,
+    currentDeviceType,
       isFrame,
       frameConfig,
-    } = settingsStore;
+  } = settingsStore;
 
-    const isBase = settingsStore.theme.isBase;
-    const { setPreparationPortalDialogVisible } = backup;
+  const isBase = settingsStore.theme.isBase;
+  const { setPreparationPortalDialogVisible } = backup;
 
-    const userTheme = isDesktopClient
+  const userTheme = isDesktopClient
       ? userStore?.user?.theme
         ? userStore?.user?.theme
-        : window.RendererProcessVariable?.theme?.type === "dark"
-          ? "Dark"
-          : "Base"
+      : window.RendererProcessVariable?.theme?.type === "dark"
+        ? "Dark"
+        : "Base"
       : userStore?.user?.theme;
 
-    return {
-      loadBaseInfo: async () => {
-        await init(false, i18n);
+  return {
+    loadBaseInfo: async () => {
+      await init(false, i18n);
 
-        setModuleInfo(config.homepage, "home");
-        setProductVersion(config.version);
+      setModuleInfo(config.homepage, "home");
+      setProductVersion(config.version);
 
-        if (isDesktopClient) {
-          document.body.classList.add("desktop");
-        }
-      },
-      language,
-      isLoaded,
+      if (isDesktopClient) {
+        document.body.classList.add("desktop");
+      }
+    },
+    language,
+    isLoaded,
 
-      isDesktop: isDesktopClient,
-      FirebaseHelper: firebaseHelper,
-      personal,
-      setCheckedMaintenance,
-      setMaintenanceExist,
-      socketHelper,
-      setPreparationPortalDialogVisible,
-      isBase,
-      setTheme,
-      roomsMode,
-      setSnackbarExist,
+    isDesktop: isDesktopClient,
+    FirebaseHelper: firebaseHelper,
+    personal,
+    setCheckedMaintenance,
+    setMaintenanceExist,
+    socketHelper,
+    setPreparationPortalDialogVisible,
+    isBase,
+    setTheme,
+    roomsMode,
+    setSnackbarExist,
       userTheme: isFrame ? frameConfig?.theme : userTheme,
       userId: userStore?.user?.id,
-      whiteLabelLogoUrls,
-      standalone,
-      currentDeviceType,
-
-      showArticleLoader: clientLoadingStore.showArticleLoader,
-    };
+    whiteLabelLogoUrls,
+    currentDeviceType,
+    showArticleLoader: clientLoadingStore.showArticleLoader,
+  };
   },
 )(observer(Shell));
 
 const Root = () => (
   <ErrorBoundary>
-    <ShellWrapper />
+        <ShellWrapper />
   </ErrorBoundary>
 );
 

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
+import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import ExpanderDownReactSvgUrl from "PUBLIC_DIR/images/expander-down.react.svg?url";
 import { TableRow } from "@docspace/shared/components/table";
@@ -16,6 +17,8 @@ import Badges from "../../Badges";
 import { Base } from "@docspace/shared/themes";
 import { DropDown } from "@docspace/shared/components/drop-down";
 import { useNavigate } from "react-router-dom";
+
+import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 
 const StyledWrapper = styled.div`
   display: contents;
@@ -291,6 +294,7 @@ const PeopleTableRow = (props) => {
     value,
     standalone,
     setCurrentGroup,
+    showStorageInfo,
   } = props;
 
   const {
@@ -659,11 +663,25 @@ const PeopleTableRow = (props) => {
             {email}
           </Link>
         </TableCell>
+
+        {showStorageInfo && (
+          <TableCell className={"table-cell_Storage/Quota"}>
+            <SpaceQuota hideColumns={hideColumns} item={item} type="user" />
+          </TableCell>
+        )}
       </StyledPeopleRow>
     </StyledWrapper>
   );
 };
 
-export default withTranslation(["People", "Common", "Settings"])(
-  withContent(PeopleTableRow),
+export default inject(({ currentQuotaStore }) => {
+  const { showStorageInfo } = currentQuotaStore;
+
+  return {
+    showStorageInfo,
+  };
+})(
+  withContent(
+    withTranslation(["People", "Common", "Settings"])(observer(PeopleTableRow)),
+  ),
 );

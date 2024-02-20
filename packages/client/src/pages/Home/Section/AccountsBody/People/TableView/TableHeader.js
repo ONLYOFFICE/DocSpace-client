@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import { TableHeader } from "@docspace/shared/components/table";
-import { SortByFieldName } from "SRC_DIR/helpers/enums";
+import { Events } from "@docspace/shared/enums";
 
 const TABLE_VERSION = "3";
 const TABLE_COLUMNS = `peopleTableColumns_ver-${TABLE_VERSION}`;
@@ -30,8 +30,17 @@ class PeopleTableHeader extends React.Component {
       {
         key: "Type",
         title: t("Common:Type"),
-        enable: props.typeAccountsColumnIsEnabled,
+        enable: true,
         sortBy: "type",
+        resizable: true,
+        onChange: this.onColumnChange,
+        onClick: this.onFilter,
+      },
+      {
+        key: "Department",
+        title: t("Common:Group"),
+        enable: true,
+        sortBy: "department",
         resizable: true,
         onChange: this.onColumnChange,
         onClick: this.onFilter,
@@ -46,7 +55,7 @@ class PeopleTableHeader extends React.Component {
       {
         key: "Mail",
         title: t("Common:Email"),
-        enable: props.emailAccountsColumnIsEnabled,
+        enable: true,
         resizable: true,
         sortBy: "email",
         onChange: this.onColumnChange,
@@ -68,10 +77,31 @@ class PeopleTableHeader extends React.Component {
         minWidth: 179,
       });
 
-    const columns = props.getColumns(defaultColumns);
+    const columns = this.getColumns(defaultColumns);
 
     this.state = { columns };
   }
+
+  getColumns = (defaultColumns) => {
+    const storageColumns = localStorage.getItem(
+      `${TABLE_COLUMNS}=${this.props.userId}`,
+    );
+    const columns = [];
+
+    if (storageColumns) {
+      const splitColumns = storageColumns.split(",");
+
+      for (let col of defaultColumns) {
+        const column = splitColumns.find((key) => key === col.key);
+        column ? (col.enable = true) : (col.enable = false);
+
+        columns.push(col);
+      }
+      return columns;
+    } else {
+      return defaultColumns;
+    }
+  };
 
   onColumnChange = (key, e) => {
     const { columns } = this.state;
@@ -79,17 +109,19 @@ class PeopleTableHeader extends React.Component {
 
     if (columnIndex === -1) return;
 
-    this.props.setColumnEnable(key);
-
     columns[columnIndex].enable = !columns[columnIndex].enable;
     this.setState({ columns });
 
     const tableColumns = columns.map((c) => c.enable && c.key);
     localStorage.setItem(`${TABLE_COLUMNS}=${this.props.userId}`, tableColumns);
+
+    const event = new Event(Events.CHANGE_COLUMN);
+
+    window.dispatchEvent(event);
   };
 
   onFilter = (sortBy) => {
-    const { filter, setIsLoading, navigate, location } = this.props;
+    const { filter, setFilter, setIsLoading, navigate, location } = this.props;
     const newFilter = filter.clone();
 
     if (newFilter.sortBy === sortBy && sortBy !== "AZ") {
@@ -115,7 +147,7 @@ class PeopleTableHeader extends React.Component {
     }
 
     setIsLoading(true);
-
+    setFilter(newFilter);
     navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
   };
 
@@ -171,41 +203,30 @@ class PeopleTableHeader extends React.Component {
 
 export default inject(
   ({
-    settingsStore,
     peopleStore,
-    infoPanelStore,
     clientLoadingStore,
+    infoPanelStore,
+    settingsStore,
     userStore,
-    tableStore,
     currentQuotaStore,
   }) => {
     const { filterStore } = peopleStore;
 
-    const { filter } = filterStore;
+    const { filter, setFilter } = filterStore;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { withPaging } = settingsStore;
-
-    const {
-      getColumns,
-      setColumnEnable,
-      typeAccountsColumnIsEnabled,
-      emailAccountsColumnIsEnabled,
-    } = tableStore;
 
     const { isDefaultUsersQuotaSet, showStorageInfo } = currentQuotaStore;
 
     return {
       filter,
+      setFilter,
+
       setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
       userId: userStore.user?.id,
       infoPanelVisible,
       withPaging,
-      getColumns,
-      setColumnEnable,
-      typeAccountsColumnIsEnabled,
-      emailAccountsColumnIsEnabled,
-
       isDefaultUsersQuotaSet,
       showStorageInfo,
     };

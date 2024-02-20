@@ -64,8 +64,10 @@ export const CategoryType = Object.freeze({
 export const TableVersions = Object.freeze({
   Rooms: "2",
   Files: "2",
-  Accounts: "3",
+  People: "3",
   Trash: "4",
+  Groups: "5",
+  InsideGroup: "6",
   Recent: "1",
 });
 

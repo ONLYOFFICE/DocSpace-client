@@ -29,8 +29,24 @@ class UsersStore {
     makeAutoObservable(this);
   }
 
-  getUsersList = async (filter, updateFilter = false) => {
+  getUsersList = async (
+    filter,
+    updateFilter = false,
+    withFilterLocalStorage = false,
+  ) => {
     const filterData = filter ? filter.clone() : Filter.getDefault();
+
+    const filterStorageItem = localStorage.getItem(
+      `PeopleFilter=${this.userStore.user?.id}`,
+    );
+
+    if (filterStorageItem && withFilterLocalStorage) {
+      const splitFilter = filterStorageItem.split(",");
+
+      filterData.sortBy = splitFilter[0];
+      filterData.pageCount = +splitFilter[1];
+      filterData.sortOrder = splitFilter[2];
+    }
 
     if (!this.settingsStore.withPaging) {
       const isCustomCountPage =
@@ -51,11 +67,6 @@ class UsersStore {
     if (updateFilter) {
       this.peopleStore.filterStore.setFilterParams(filterData);
     }
-
-    /*     this.peopleStore.filterStore.setFilterParams(filterData);
-    this.peopleStore.selectedGroupStore.setSelectedGroup(
-      filterData.group || "root"
-    ); */
 
     this.setUsers(res.items);
 

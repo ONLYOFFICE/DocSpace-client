@@ -64,6 +64,12 @@ export function getRoomMembers(id, filter) {
   };
 
   return request(options).then((res) => {
+    res.items.forEach((item) => {
+      if (item.sharedTo.manager) {
+        item.sharedTo.isGroup = true;
+      }
+    });
+
     return res;
   });
 }
@@ -338,6 +344,12 @@ export const setRoomSecurity = async (id, data) => {
   };
 
   const res = await request(options);
+
+  res.members.forEach((item) => {
+    if (item.sharedTo.manager) {
+      item.sharedTo.isGroup = true;
+    }
+  });
 
   return res;
 };

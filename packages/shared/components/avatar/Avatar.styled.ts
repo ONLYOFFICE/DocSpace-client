@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { TTheme, Base } from "../../themes";
+import { Base, TTheme } from "../../themes";
 import { commonIconsStyles, NoUserSelect } from "../../utils";
 
 import { CameraReactSvg } from "./svg";
@@ -40,16 +40,25 @@ const EditContainer = styled.div`
 `;
 EditContainer.defaultProps = { theme: Base };
 
-const AvatarWrapper = styled.div<{ source: string; userName: string }>`
+const AvatarWrapper = styled.div<{
+  source: string;
+  userName: string;
+  isGroup: boolean;
+}>`
   border-radius: ${(props) => props.theme.avatar.imageContainer.borderRadius};
   height: ${(props) => props.theme.avatar.imageContainer.height};
 
-  background-color: ${(props) =>
-    props.source
-      ? props.theme.avatar.icon.background
-      : props.userName
-        ? props.theme.avatar.imageContainer.backgroundImage
-        : props.theme.avatar.imageContainer.background};
+  background-color: ${(props) => {
+    if (props.source) return props.theme.avatar.icon.background;
+
+    if (props.isGroup && props.userName)
+      return props.theme.avatar.imageContainer.groupBackground;
+
+    if (props.userName)
+      return props.theme.avatar.imageContainer.backgroundImage;
+
+    return props.theme.avatar.imageContainer.background;
+  }};
 
   & > svg {
     display: ${(props) => props.theme.avatar.imageContainer.svg.display};
@@ -105,16 +114,34 @@ const RoleWrapper = styled.div<{
 `;
 RoleWrapper.defaultProps = { theme: Base };
 
-const fontSizeStyle = ({ size, theme }: { size: AvatarSize; theme: TTheme }) =>
-  theme.avatar.initialsContainer.fontSize[size];
+const fontSizeStyle = ({
+  size,
+  theme,
+  isGroup,
+}: {
+  size: AvatarSize;
+  theme: TTheme;
+  isGroup: boolean;
+}) => {
+  if (isGroup && size === AvatarSize.big)
+    return theme.avatar.initialsContainer.fontSize.groupBig;
 
-const NamedAvatar = styled.div<{ size: AvatarSize }>`
+  return theme.avatar.initialsContainer.fontSize[size];
+};
+
+const NamedAvatar = styled.div<{ size: AvatarSize; isGroup: boolean }>`
   position: absolute;
-  color: ${(props) => props.theme.avatar.initialsContainer.color};
+  color: ${(props) =>
+    props.isGroup
+      ? props.theme.avatar.initialsContainer.groupColor
+      : props.theme.avatar.initialsContainer.color};
   left: ${(props) => props.theme.avatar.initialsContainer.left};
   top: ${(props) => props.theme.avatar.initialsContainer.top};
   transform: ${(props) => props.theme.avatar.initialsContainer.transform};
-  font-weight: ${(props) => props.theme.avatar.initialsContainer.fontWeight};
+  font-weight: ${(props) =>
+    props.theme.avatar.initialsContainer[
+      props.isGroup ? "groupFontWeight" : "fontWeight"
+    ]};
   font-size: ${(props) => props.theme.getCorrectFontSize(fontSizeStyle(props))};
 
   ${NoUserSelect}

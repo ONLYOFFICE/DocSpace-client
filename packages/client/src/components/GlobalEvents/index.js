@@ -9,6 +9,8 @@ import CreateEvent from "./CreateEvent";
 import RenameEvent from "./RenameEvent";
 import CreateRoomEvent from "./CreateRoomEvent";
 import EditRoomEvent from "./EditRoomEvent";
+import CreateGroupEvent from "./GroupEvents/CreateGroupEvent";
+import EditGroupEvent from "./GroupEvents/EditGroupEvent";
 import ChangeUserTypeEvent from "./ChangeUserTypeEvent";
 import CreatePluginFile from "./CreatePluginFileEvent";
 import ChangeQuotaEvent from "./ChangeQuotaEvent";
@@ -39,6 +41,16 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
   const [editRoomDialogProps, setEditRoomDialogProps] = useState({
     visible: false,
     item: null,
+    onClose: null,
+  });
+
+  const [createGroupDialogProps, setCreateGroupDialogProps] = useState({
+    visible: false,
+    onClose: null,
+  });
+
+  const [editGroupDialogProps, setEditGroupDialogProps] = useState({
+    visible: false,
     onClose: null,
   });
 
@@ -111,18 +123,44 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
       title: e?.title,
       visible: true,
       onClose: () =>
-        setCreateRoomDialogProps({ title: "", visible: false, onClose: null }),
+        setCreateRoomDialogProps({ visible: false, onClose: null }),
     });
   }, []);
 
   const onEditRoom = useCallback((e) => {
-    const visible = e.item ? true : false;
+    console.log(e);
+    const visible = !!e.item;
 
     setEditRoomDialogProps({
       visible: visible,
       item: e.item,
       onClose: () => {
         setEditRoomDialogProps({
+          visible: false,
+          item: null,
+          onClose: null,
+        });
+      },
+    });
+  }, []);
+
+  const onCreateGroup = useCallback((e) => {
+    setCreateGroupDialogProps({
+      title: e?.title,
+      visible: true,
+      onClose: () =>
+        setCreateGroupDialogProps({ title: "", visible: false, onClose: null }),
+    });
+  }, []);
+
+  const onEditGroup = useCallback((e) => {
+    const visible = !!e.item;
+
+    setEditGroupDialogProps({
+      visible: visible,
+      item: e.item,
+      onClose: () => {
+        setEditGroupDialogProps({
           visible: false,
           item: null,
           onClose: null,
@@ -154,7 +192,7 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
         },
       });
     },
-    [enablePlugins]
+    [enablePlugins],
   );
 
   const onChangeQuota = useCallback((e) => {
@@ -188,11 +226,13 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
     window.addEventListener(Events.ROOM_CREATE, onCreateRoom);
     window.addEventListener(Events.ROOM_EDIT, onEditRoom);
     window.addEventListener(Events.CHANGE_USER_TYPE, onChangeUserType);
+    window.addEventListener(Events.GROUP_CREATE, onCreateGroup);
+    window.addEventListener(Events.GROUP_EDIT, onEditGroup);
     window.addEventListener(Events.CHANGE_QUOTA, onChangeQuota);
     if (enablePlugins) {
       window.addEventListener(
         Events.CREATE_PLUGIN_FILE,
-        onCreatePluginFileDialog
+        onCreatePluginFileDialog,
       );
 
       if (eventListenerItemsList) {
@@ -214,18 +254,20 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
       window.removeEventListener(Events.ROOM_CREATE, onCreateRoom);
       window.removeEventListener(Events.ROOM_EDIT, onEditRoom);
       window.removeEventListener(Events.CHANGE_USER_TYPE, onChangeUserType);
+      window.removeEventListener(Events.GROUP_CREATE, onCreateGroup);
+      window.removeEventListener(Events.GROUP_EDIT, onEditGroup);
 
       if (enablePlugins) {
         window.removeEventListener(
           Events.CREATE_PLUGIN_FILE,
-          onCreatePluginFileDialog
+          onCreatePluginFileDialog,
         );
 
         if (eventListenerItemsList) {
           eventListenerItemsList.forEach((item, index) => {
             window.removeEventListener(
               item.eventType,
-              eventHandlersList.current[index]
+              eventHandlersList.current[index],
             );
           });
         }
@@ -236,6 +278,8 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
     onCreate,
     onCreateRoom,
     onEditRoom,
+    onCreateGroup,
+    onEditGroup,
     onChangeUserType,
     onCreatePluginFileDialog,
     enablePlugins,
@@ -253,6 +297,12 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
     ),
     editRoomDialogProps.visible && (
       <EditRoomEvent key={Events.ROOM_EDIT} {...editRoomDialogProps} />
+    ),
+    createGroupDialogProps.visible && (
+      <CreateGroupEvent key={Events.GROUP_CREATE} {...createGroupDialogProps} />
+    ),
+    editGroupDialogProps.visible && (
+      <EditGroupEvent key={Events.GROUP_EDIT} {...editGroupDialogProps} />
     ),
     changeUserTypeDialog.visible && (
       <ChangeUserTypeEvent

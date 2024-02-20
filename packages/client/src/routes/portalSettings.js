@@ -4,136 +4,199 @@ import loadable from "@loadable/component";
 
 import PrivateRoute from "@docspace/common/components/PrivateRoute";
 import ErrorBoundary from "@docspace/common/components/ErrorBoundary";
+import componentLoader from "@docspace/components/utils/component-loader";
 
 import Error404 from "SRC_DIR/pages/Errors/404";
 
 import { generalRoutes } from "./general";
 
-const PortalSettings = loadable(() => import("../pages/PortalSettings"));
+const PortalSettings = loadable(() =>
+  componentLoader(() => import("../pages/PortalSettings"))
+);
 
 const CustomizationSettings = loadable(() =>
-  import("../pages/PortalSettings/categories/common/index.js")
+  componentLoader(() =>
+    import("../pages/PortalSettings/categories/common/index.js")
+  )
 );
 const LanguageAndTimeZoneSettings = loadable(() =>
-  import(
-    "../pages/PortalSettings/categories/common/Customization/language-and-time-zone"
+  componentLoader(() =>
+    import(
+      "../pages/PortalSettings/categories/common/Customization/language-and-time-zone"
+    )
   )
 );
 const WelcomePageSettings = loadable(() =>
-  import(
-    "../pages/PortalSettings/categories/common/Customization/welcome-page-settings"
+  componentLoader(() =>
+    import(
+      "../pages/PortalSettings/categories/common/Customization/welcome-page-settings"
+    )
   )
 );
 const DNSSettings = loadable(() =>
-  import("../pages/PortalSettings/categories/common/Customization/dns-settings")
+  componentLoader(() =>
+    import(
+      "../pages/PortalSettings/categories/common/Customization/dns-settings"
+    )
+  )
 );
 const PortalRenaming = loadable(() =>
-  import(
-    "../pages/PortalSettings/categories/common/Customization/portal-renaming"
+  componentLoader(() =>
+    import(
+      "../pages/PortalSettings/categories/common/Customization/portal-renaming"
+    )
   )
 );
 const WhiteLabel = loadable(() =>
-  import("../pages/PortalSettings/categories/common/Branding/whitelabel")
+  componentLoader(() =>
+    import("../pages/PortalSettings/categories/common/Branding/whitelabel")
+  )
 );
 const CompanyInfoSettings = loadable(() =>
-  import(
-    "../pages/PortalSettings/categories/common/Branding/companyInfoSettings"
+  componentLoader(() =>
+    import(
+      "../pages/PortalSettings/categories/common/Branding/companyInfoSettings"
+    )
   )
 );
 const AdditionalResources = loadable(() =>
-  import(
-    "../pages/PortalSettings/categories/common/Branding/additionalResources"
+  componentLoader(() =>
+    import(
+      "../pages/PortalSettings/categories/common/Branding/additionalResources"
+    )
   )
 );
 const SecuritySettings = loadable(() =>
-  import("../pages/PortalSettings/categories/security/index.js")
+  componentLoader(() =>
+    import("../pages/PortalSettings/categories/security/index.js")
+  )
 );
 const TfaPage = loadable(() =>
-  import("../pages/PortalSettings/categories/security/access-portal/tfa")
+  componentLoader(() =>
+    import("../pages/PortalSettings/categories/security/access-portal/tfa")
+  )
 );
 const PasswordStrengthPage = loadable(() =>
-  import(
-    "../pages/PortalSettings/categories/security/access-portal/passwordStrength"
+  componentLoader(() =>
+    import(
+      "../pages/PortalSettings/categories/security/access-portal/passwordStrength"
+    )
   )
 );
 const TrustedMailPage = loadable(() =>
-  import(
-    "../pages/PortalSettings/categories/security/access-portal/trustedMail"
+  componentLoader(() =>
+    import(
+      "../pages/PortalSettings/categories/security/access-portal/trustedMail"
+    )
   )
 );
 const IpSecurityPage = loadable(() =>
-  import("../pages/PortalSettings/categories/security/access-portal/ipSecurity")
+  componentLoader(() =>
+    import(
+      "../pages/PortalSettings/categories/security/access-portal/ipSecurity"
+    )
+  )
 );
 const BruteForceProtectionPage = loadable(() =>
-  import(
-    "../pages/PortalSettings/categories/security/access-portal/bruteForceProtection"
+  componentLoader(() =>
+    import(
+      "../pages/PortalSettings/categories/security/access-portal/bruteForceProtection"
+    )
   )
 );
 const AdminMessagePage = loadable(() =>
-  import(
-    "../pages/PortalSettings/categories/security/access-portal/adminMessage"
+  componentLoader(() =>
+    import(
+      "../pages/PortalSettings/categories/security/access-portal/adminMessage"
+    )
   )
 );
 const SessionLifetimePage = loadable(() =>
-  import(
-    "../pages/PortalSettings/categories/security/access-portal/sessionLifetime"
+  componentLoader(() =>
+    import(
+      "../pages/PortalSettings/categories/security/access-portal/sessionLifetime"
+    )
   )
 );
 const Integration = loadable(() =>
-  import("../pages/PortalSettings/categories/integration")
+  componentLoader(() =>
+    import("../pages/PortalSettings/categories/integration")
+  )
 );
 const Payments = loadable(() =>
-  import("../pages/PortalSettings/categories/payments")
+  componentLoader(() => import("../pages/PortalSettings/categories/payments"))
 );
 const ThirdParty = loadable(() =>
-  import(
-    "../pages/PortalSettings/categories/integration/ThirdPartyServicesSettings"
+  componentLoader(() =>
+    import(
+      "../pages/PortalSettings/categories/integration/ThirdPartyServicesSettings"
+    )
   )
 );
 
 const DocumentService = loadable(() =>
-  import("../pages/PortalSettings/categories/integration/DocumentService")
+  componentLoader(() =>
+    import("../pages/PortalSettings/categories/integration/DocumentService")
+  )
 );
 
 const SingleSignOn = loadable(() =>
-  import("../pages/PortalSettings/categories/integration/SingleSignOn")
+  componentLoader(() =>
+    import("../pages/PortalSettings/categories/integration/SingleSignOn")
+  )
 );
 const SPSettings = loadable(() =>
-  import(
-    "../pages/PortalSettings/categories/integration/SingleSignOn/SPSettings"
+  componentLoader(() =>
+    import(
+      "../pages/PortalSettings/categories/integration/SingleSignOn/SPSettings"
+    )
   )
 );
 const SPMetadata = loadable(() =>
-  import(
-    "../pages/PortalSettings/categories/integration/SingleSignOn/ProviderMetadata"
+  componentLoader(() =>
+    import(
+      "../pages/PortalSettings/categories/integration/SingleSignOn/ProviderMetadata"
+    )
   )
 );
 
 const DeveloperTools = loadable(() =>
-  import("../pages/PortalSettings/categories/developer-tools/index.js")
+  componentLoader(() =>
+    import("../pages/PortalSettings/categories/developer-tools/index.js")
+  )
 );
 const WebhookHistory = loadable(() =>
-  import(
-    "../pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory"
+  componentLoader(() =>
+    import(
+      "../pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory"
+    )
   )
 );
 const WebhookDetails = loadable(() =>
-  import(
-    "../pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails"
+  componentLoader(() =>
+    import(
+      "../pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails"
+    )
   )
 );
 const Backup = loadable(() =>
-  import("../pages/PortalSettings/categories/data-management/index")
-);
-const DeleteDataPage = loadable(() =>
-  import("../pages/PortalSettings/categories/delete-data")
-);
-const RestoreBackup = loadable(() =>
-  import(
-    "../pages/PortalSettings/categories/data-management/backup/restore-backup/index"
+  componentLoader(() =>
+    import("../pages/PortalSettings/categories/data-management/index")
   )
 );
-const Bonus = loadable(() => import("../pages/Bonus"));
+const DeleteDataPage = loadable(() =>
+  componentLoader(() =>
+    import("../pages/PortalSettings/categories/delete-data")
+  )
+);
+const RestoreBackup = loadable(() =>
+  componentLoader(() =>
+    import(
+      "../pages/PortalSettings/categories/data-management/backup/restore-backup/index"
+    )
+  )
+);
+const Bonus = loadable(() => componentLoader(() => import("../pages/Bonus")));
 
 const PortalSettingsRoutes = {
   path: "portal-settings/",

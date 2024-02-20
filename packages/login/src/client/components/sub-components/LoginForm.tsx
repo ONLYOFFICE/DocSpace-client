@@ -19,6 +19,7 @@ import { setWithCredentialsStatus } from "@docspace/shared/api/client";
 import { isMobileOnly } from "react-device-detect";
 import ReCAPTCHA from "react-google-recaptcha";
 import { StyledCaptcha } from "../StyledLogin";
+import EmailContainer from "./EmailContainer";
 
 interface ILoginFormProps {
   isLoading: boolean;
@@ -30,6 +31,7 @@ interface ILoginFormProps {
   enableAdmMess: boolean;
   recaptchaPublicKey: CaptchaPublicKeyType;
   isBaseTheme: boolean;
+  emailFromInvitation?: string;
 }
 
 const settings = {
@@ -48,12 +50,13 @@ const LoginForm: React.FC<ILoginFormProps> = ({
   cookieSettingsEnabled,
   recaptchaPublicKey,
   isBaseTheme,
+  emailFromInvitation,
 }) => {
   const captchaRef = useRef(null);
 
   const [isEmailErrorShow, setIsEmailErrorShow] = useState(false);
   const [errorText, setErrorText] = useState("");
-  const [identifier, setIdentifier] = useState("");
+  const [identifier, setIdentifier] = useState(emailFromInvitation ?? "");
   const [passwordValid, setPasswordValid] = useState(true);
   const [identifierValid, setIdentifierValid] = useState(true);
   const [password, setPassword] = useState("");
@@ -280,33 +283,18 @@ const LoginForm: React.FC<ILoginFormProps> = ({
 
   return (
     <form className="auth-form-container">
-      <FieldContainer
-        isVertical={true}
-        labelVisible={false}
-        hasError={isEmailErrorShow}
-        errorMessage={
-          errorText ? t(`Common:${errorText}`) : t("Common:RequiredField")
-        } //TODO: Add wrong login server error
-      >
-        <EmailInput
-          id="login_username"
-          name="login"
-          type="email"
-          hasError={isEmailErrorShow}
-          value={identifier}
-          placeholder={t("RegistrationEmailWatermark")}
-          size="large"
-          scale={true}
-          isAutoFocussed={true}
-          tabIndex={1}
-          isDisabled={isLoading}
-          autoComplete="username"
-          onChange={onChangeLogin}
-          onBlur={onBlurEmail}
-          onValidateInput={onValidateEmail}
-          forwardedRef={inputRef}
-        />
-      </FieldContainer>
+      <EmailContainer
+        emailFromInvitation={emailFromInvitation}
+        isEmailErrorShow={isEmailErrorShow}
+        errorText={errorText}
+        identifier={identifier}
+        isLoading={isLoading}
+        inputRef={inputRef}
+        onChangeLogin={onChangeLogin}
+        onBlurEmail={onBlurEmail}
+        onValidateEmail={onValidateEmail}
+        t={t}
+      />
 
       <FieldContainer
         isVertical={true}

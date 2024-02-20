@@ -1,6 +1,8 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import { useLocation } from "react-router-dom";
+
 import { ButtonsWrapper, LoginFormWrapper, LoginContent } from "./StyledLogin";
 import { Text } from "@docspace/shared/components/text";
 import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
@@ -25,6 +27,7 @@ import { getBgPattern, frameCallCommand } from "@docspace/shared/utils/common";
 import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 import { getLogoFromPath, getSystemTheme } from "@docspace/shared/utils";
 import { TenantStatus } from "@docspace/shared/enums";
+import { getObjectByLocation } from "@docspace/shared/utils/common";
 
 const themes = {
   Dark: Dark,
@@ -50,14 +53,28 @@ const Login: React.FC<ILoginProps> = ({
   logoUrls,
   isBaseTheme,
 }) => {
+  const location = useLocation();
+
   const isRestoringPortal =
     portalSettings?.tenantStatus === TenantStatus.PortalRestore;
 
   useEffect(() => {
+    if (location.search) {
+      const queryParams = getObjectByLocation(location);
+      setInvitationLinkData(queryParams);
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+
     isRestoringPortal && window.location.replace("/preparation-portal");
   }, []);
   const [isLoading, setIsLoading] = useState(false);
   const [recoverDialogVisible, setRecoverDialogVisible] = useState(false);
+  const [invitationLinkData, setInvitationLinkData] = useState({
+    email: "",
+    roomName: "",
+    userFirstName: "",
+    userLastName: "",
+  });
 
   const {
     enabledJoin,
@@ -175,6 +192,7 @@ const Login: React.FC<ILoginProps> = ({
         ssoSVG: SSOIcon,
       }
     : {};
+
   return (
     <LoginFormWrapper
       id="login-page"
@@ -205,6 +223,7 @@ const Login: React.FC<ILoginProps> = ({
               match={match}
               enableAdmMess={enableAdmMess}
               cookieSettingsEnabled={cookieSettingsEnabled}
+              emailFromInvitation={invitationLinkData.email}
             />
             {(oauthDataExists() || ssoExists()) && (
               <>

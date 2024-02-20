@@ -52,6 +52,25 @@ export const LoginFormWrapper = styled.div`
       background-image: none;
     }
   }
+
+  .invitation-info-container {
+    margin-bottom: 16px;
+    .sign-in-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+
+      margin-bottom: 16px;
+      p:first-child {
+        position: absolute;
+        max-width: 60px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        left: 0;
+      }
+    }
+  }
 `;
 
 export const LoginContent = styled.div`

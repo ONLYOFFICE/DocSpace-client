@@ -23,6 +23,7 @@ import {
   getUserFromConfirm,
   createUser,
   signupOAuth,
+  getUserByEmail,
 } from "@docspace/shared/api/people";
 import {
   createPasswordHash,
@@ -69,9 +70,9 @@ const CreateUserForm = (props) => {
   const emailFromLink = linkData?.email ? linkData.email : "";
   const roomName = roomData?.title;
 
-  // const [email, setEmail] = useState(emailFromLink);
-  // const [emailValid, setEmailValid] = useState(true);
-  // const [emailErrorText, setEmailErrorText] = useState("");
+  const [email, setEmail] = useState(emailFromLink);
+  const [emailValid, setEmailValid] = useState(true);
+  const [emailErrorText, setEmailErrorText] = useState("");
 
   // const [password, setPassword] = useState("");
   // const [passwordValid, setPasswordValid] = useState(true);
@@ -83,11 +84,9 @@ const CreateUserForm = (props) => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  // const [errorText, setErrorText] = useState("");
-
   const [user, setUser] = useState("");
 
-  // const [isEmailErrorShow, setIsEmailErrorShow] = useState(false);
+  const [isEmailErrorShow, setIsEmailErrorShow] = useState(false);
   // const [isPasswordErrorShow, setIsPasswordErrorShow] = useState(false);
 
   const [showForm, setShowForm] = useState(true);
@@ -136,6 +135,50 @@ const CreateUserForm = (props) => {
     fetchData();
   }, []);
 
+  const onContinue = async () => {
+    const { linkData, hashSettings } = props;
+    setIsLoading(true);
+
+    let hasError = false;
+
+    const emailRegex = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$";
+    const validationEmail = new RegExp(emailRegex);
+
+    if (!validationEmail.test(email.trim())) {
+      hasError = true;
+      setEmailValid(!hasError);
+    }
+
+    if (hasError) {
+      setIsLoading(false);
+      return;
+    }
+
+    const headerKey = linkData.confirmHeader;
+
+    try {
+      const user = await getUserByEmail(email, headerKey);
+
+      console.log("roomName", roomName);
+
+      window.location.href = combineUrl(
+        window.DocSpaceConfig?.proxy?.url,
+        "/login",
+        `?type=invitation&email=${email}&roomName=${roomName}&firstName=${user.firstName}&lastName=${user.lastName}`,
+      );
+
+   
+    } catch (err) {
+      const status = err?.response?.status;
+      const isNotExistUser = status === 404;
+
+      if (isNotExistUser) {
+       
+      }
+    }
+
+    setIsLoading(false);
+  };
   // const onSubmit = () => {
   //   const { linkData, hashSettings } = props;
   //   const type = parseInt(linkData.emplType);
@@ -239,68 +282,50 @@ const CreateUserForm = (props) => {
       });
   };
 
-  const createConfirmUser = async (registerData, loginData, key) => {
-    const { defaultPage } = props;
+  // const createConfirmUser = async (registerData, loginData, key) => {
+  //   const { defaultPage } = props;
 
-    const fromInviteLink = linkData.type === "LinkInvite" ? true : false;
+  //   const fromInviteLink = linkData.type === "LinkInvite" ? true : false;
 
-    const data = Object.assign(
-      { fromInviteLink: fromInviteLink },
-      registerData,
-      loginData,
-    );
+  //   const data = Object.assign(
+  //     { fromInviteLink: fromInviteLink },
+  //     registerData,
+  //     loginData,
+  //   );
 
-    await createUser(data, key);
+  //   await createUser(data, key);
 
-    const { userName, passwordHash } = loginData;
+  //   const { userName, passwordHash } = loginData;
 
-    const res = await login(userName, passwordHash);
+  //   const res = await login(userName, passwordHash);
 
-    //console.log({ res });
+  //   //console.log({ res });
 
-    const finalUrl = roomData.roomId
-      ? `/rooms/shared/filter?folder=${roomData.roomId}`
-      : defaultPage;
+  //   const finalUrl = roomData.roomId
+  //     ? `/rooms/shared/filter?folder=${roomData.roomId}`
+  //     : defaultPage;
 
-    const isConfirm = typeof res === "string" && res.includes("confirm");
+  //   const isConfirm = typeof res === "string" && res.includes("confirm");
 
-    if (isConfirm) {
-      sessionStorage.setItem("referenceUrl", finalUrl);
+  //   if (isConfirm) {
+  //     sessionStorage.setItem("referenceUrl", finalUrl);
 
-      return window.location.replace(typeof res === "string" ? res : "/");
-    }
+  //     return window.location.replace(typeof res === "string" ? res : "/");
+  //   }
 
-    window.location.replace(finalUrl);
+  //   window.location.replace(finalUrl);
+  // };
+
+  const onChangeEmail = (e) => {
+    setEmail(e.target.value);
+    setIsEmailErrorShow(false);
   };
 
-  // const onChangeEmail = (e) => {
-  //   setEmail(e.target.value);
-  //   setIsEmailErrorShow(false);
-  // };
-
-  // const onChangeFname = (e) => {
-  //   setFname(e.target.value);
-  //   setFnameValid(nameRegex.test(e.target.value.trim()));
-  //   setErrorText("");
-  // };
-
-  // const onChangeSname = (e) => {
-  //   setSname(e.target.value);
-  //   setSnameValid(nameRegex.test(e.target.value.trim()));
-  //   setErrorText("");
-  // };
-
-  // const onChangePassword = (e) => {
-  //   setPassword(e.target.value);
-  //   setErrorText("");
-  //   setIsPasswordErrorShow(false);
-  // };
-
-  // const onKeyPress = (event) => {
-  //   if (event.key === "Enter") {
-  //     onSubmit();
-  //   }
-  // };
+  const onKeyPress = (event) => {
+    if (event.key === "Enter") {
+      onContinue();
+    }
+  };
 
   const onSocialButtonClick = useCallback((e) => {
     const { target } = e;
@@ -356,28 +381,15 @@ const CreateUserForm = (props) => {
     else return false;
   };
 
-  // const onValidateEmail = (res) => {
-  //   setEmailValid(res.isValid);
-  //   setEmailErrorText(res.errors[0]);
-  // };
+  const onValidateEmail = (res) => {
+    setEmailValid(res.isValid);
+    setEmailErrorText(res.errors[0]);
+  };
 
-  // const onValidatePassword = (res) => {
-  //   setPasswordValid(res);
-  // };
+  const onBlurEmail = () => {
+    setIsEmailErrorShow(true);
+  };
 
-  // const onBlurEmail = () => {
-  //   setIsEmailErrorShow(true);
-  // };
-
-  // const onBlurPassword = () => {
-  //   setIsPasswordErrorShow(true);
-  // };
-
-  // const onSignIn = () => {
-  //   return window.location.replace(
-  //     combineUrl(window.DocSpaceConfig?.proxy?.url, "/login"),
-  //   );
-  // };
   const ssoProps = ssoExists()
     ? {
         ssoUrl: capabilities?.ssoUrl,
@@ -424,7 +436,7 @@ const CreateUserForm = (props) => {
 
           <FormWrapper>
             <RegisterContainer>
-              {/* {showForm && (
+              {showForm && (
                 <form className="auth-form-container">
                   <div className="auth-form-fields">
                     <FieldContainer
@@ -459,129 +471,19 @@ const CreateUserForm = (props) => {
                       />
                     </FieldContainer>
 
-                    <FieldContainer
-                      className="form-field"
-                      isVertical={true}
-                      labelVisible={false}
-                      hasError={!fnameValid}
-                      errorMessage={
-                        errorText
-                          ? errorText
-                          : fname.trim().length === 0
-                            ? t("Common:RequiredField")
-                            : t("Common:IncorrectFirstName")
-                      }
-                    >
-                      <TextInput
-                        id="first-name"
-                        name="first-name"
-                        type="text"
-                        hasError={!fnameValid}
-                        value={fname}
-                        placeholder={t("Common:FirstName")}
-                        size="large"
-                        scale={true}
-                        tabIndex={1}
-                        isDisabled={isLoading}
-                        onChange={onChangeFname}
-                        onKeyDown={onKeyPress}
-                      />
-                    </FieldContainer>
-
-                    <FieldContainer
-                      className="form-field"
-                      isVertical={true}
-                      labelVisible={false}
-                      hasError={!snameValid}
-                      errorMessage={
-                        errorText
-                          ? errorText
-                          : sname.trim().length === 0
-                            ? t("Common:RequiredField")
-                            : t("Common:IncorrectLastName")
-                      }
-                    >
-                      <TextInput
-                        id="last-name"
-                        name="last-name"
-                        type="text"
-                        hasError={!snameValid}
-                        value={sname}
-                        placeholder={t("Common:LastName")}
-                        size="large"
-                        scale={true}
-                        tabIndex={1}
-                        isDisabled={isLoading}
-                        onChange={onChangeSname}
-                        onKeyDown={onKeyPress}
-                      />
-                    </FieldContainer>
-
-                    <FieldContainer
-                      className="form-field password-field"
-                      isVertical={true}
-                      labelVisible={false}
-                      hasError={isPasswordErrorShow && !passwordValid}
-                      errorMessage={`${t(
-                        "Common:PasswordLimitMessage",
-                      )}: ${getPasswordErrorMessage(t, settings)}`}
-                    >
-                      <PasswordInput
-                        simpleView={false}
-                        hideNewPasswordButton
-                        showCopyLink={false}
-                        passwordSettings={settings}
-                        id="password"
-                        inputName="password"
-                        placeholder={t("Common:Password")}
-                        type="password"
-                        hasError={isPasswordErrorShow && !passwordValid}
-                        inputValue={password}
-                        size="large"
-                        scale={true}
-                        tabIndex={1}
-                        isDisabled={isLoading}
-                        autoComplete="current-password"
-                        onChange={onChangePassword}
-                        onBlur={onBlurPassword}
-                        onKeyDown={onKeyPress}
-                        onValidateInput={onValidatePassword}
-                        tooltipPasswordTitle={`${t(
-                          "Common:PasswordLimitMessage",
-                        )}:`}
-                        tooltipPasswordLength={`${t(
-                          "Common:PasswordMinimumLength",
-                        )}: ${settings ? settings.minLength : 8}`}
-                        tooltipPasswordDigits={`${t(
-                          "Common:PasswordLimitDigits",
-                        )}`}
-                        tooltipPasswordCapital={`${t(
-                          "Common:PasswordLimitUpperCase",
-                        )}`}
-                        tooltipPasswordSpecial={`${t(
-                          "Common:PasswordLimitSpecialSymbols",
-                        )}`}
-                        generatePasswordTitle={t("Wizard:GeneratePassword")}
-                      />
-                    </FieldContainer>
-
                     <Button
                       className="login-button"
                       primary
                       size="medium"
                       scale={true}
-                      label={
-                        isLoading
-                          ? t("Common:LoadingProcessing")
-                          : t("LoginRegistryButton")
-                      }
+                      label={t("Common:ContinueButton")}
                       tabIndex={1}
                       isDisabled={isLoading}
                       isLoading={isLoading}
-                      onClick={onSubmit}
+                      onClick={onContinue}
                     />
                   </div>
-                  <div className="signin-container">
+                  {/* <div className="signin-container">
                     <Link
                       isHovered
                       type="action"
@@ -593,9 +495,9 @@ const CreateUserForm = (props) => {
                     >
                       {t("Common:LoginButton")}
                     </Link>
-                  </div>
+                  </div> */}
                 </form>
-              )} */}
+              )}
               {!emailFromLink && (
                 <>
                   {(oauthDataExists() || ssoExists()) && (

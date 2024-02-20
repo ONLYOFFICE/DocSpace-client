@@ -15,11 +15,9 @@ import Filter from "@docspace/shared/api/people/filter";
 import { DialogAsideSkeleton } from "@docspace/shared/skeletons/dialog";
 import { getMembersList, getUserList } from "@docspace/shared/api/people";
 import useLoadingWithTimeout from "@docspace/shared/hooks/useLoadingWithTimeout";
-import { ShareAccessRights } from "@docspace/shared/enums";
 
 import { LOADER_TIMEOUT } from "@docspace/shared/constants";
 import { AccountsSearchArea, ShareAccessRights } from "@docspace/shared/enums";
-import useLoadingWithTimeout from "@docspace/shared/hooks/useLoadingWithTimeout";
 
 import withLoader from "../../../HOCs/withLoader";
 

@@ -12,6 +12,7 @@ const DEFAULT_SEARCH = "";
 const DEFAULT_GROUP = null;
 const DEFAULT_PAYMENTS = null;
 const DEFAULT_ACCOUNT_LOGIN_TYPE = null;
+const DEFAULT_WITHOUT_GROUP = false;
 
 const ACTIVE_EMPLOYEE_STATUS = 1;
 
@@ -26,6 +27,7 @@ const PAGE = "page";
 const PAGE_COUNT = "pagecount";
 const PAYMENTS = "payments";
 const ACCOUNT_LOGIN_TYPE = "accountLoginType";
+const WITHOUT_GROUP = "withoutGroup";
 
 class Filter {
   static getDefault(total = DEFAULT_TOTAL) {
@@ -77,6 +79,7 @@ class Filter {
     const payments = urlFilter[PAYMENTS] || defaultFilter.payments;
     const accountLoginType =
       urlFilter[ACCOUNT_LOGIN_TYPE] || defaultFilter.accountLoginType;
+    const withoutGroup = urlFilter[WITHOUT_GROUP] || defaultFilter.withoutGroup;
 
     const newFilter = new Filter(
       page,
@@ -91,6 +94,7 @@ class Filter {
       group,
       payments,
       accountLoginType,
+      withoutGroup,
     );
 
     return newFilter;
@@ -109,6 +113,7 @@ class Filter {
     group = DEFAULT_GROUP,
     payments = DEFAULT_PAYMENTS,
     accountLoginType = DEFAULT_ACCOUNT_LOGIN_TYPE,
+    withoutGroup = DEFAULT_WITHOUT_GROUP,
   ) {
     this.page = page;
     this.pageCount = pageCount;
@@ -122,6 +127,7 @@ class Filter {
     this.group = group;
     this.payments = payments;
     this.accountLoginType = accountLoginType;
+    this.withoutGroup = withoutGroup;
   }
 
   getStartIndex = () => {
@@ -148,6 +154,7 @@ class Filter {
       group,
       payments,
       accountLoginType,
+      withoutGroup,
     } = this;
 
     let employeetype = null;
@@ -170,6 +177,7 @@ class Filter {
       fields,
       payments,
       accountLoginType,
+      withoutGroup,
     };
 
     dtoFilter = { ...dtoFilter, ...employeetype };
@@ -191,6 +199,7 @@ class Filter {
       page,
       payments,
       accountLoginType,
+      withoutGroup,
     } = this;
 
     const dtoFilter = {};
@@ -217,6 +226,10 @@ class Filter {
 
     if (pageCount !== DEFAULT_PAGE_COUNT) {
       dtoFilter[PAGE_COUNT] = pageCount;
+    }
+
+    if (withoutGroup) {
+      dtoFilter[WITHOUT_GROUP] = withoutGroup;
     }
 
     dtoFilter[PAGE] = page + 1;
@@ -252,6 +265,7 @@ class Filter {
           this.group,
           this.payments,
           this.accountLoginType,
+          this.withoutGroup,
         );
   }
 
@@ -270,6 +284,7 @@ class Filter {
         idGroup,
         null,
         null,
+        false,
       );
     }
 
@@ -288,7 +303,8 @@ class Filter {
       this.page === filter.page &&
       this.pageCount === filter.pageCount &&
       this.payments === filter.payments &&
-      this.accountLoginType === filter.accountLoginType;
+      this.accountLoginType === filter.accountLoginType &&
+      this.withoutGroup === filter.withoutGroup;
 
     return equals;
   }

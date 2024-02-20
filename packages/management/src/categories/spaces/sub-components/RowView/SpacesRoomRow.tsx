@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Row } from "@docspace/shared/components/row";
 import { RoomContent } from "./RoomContent";
 import { observer } from "mobx-react";
@@ -7,6 +7,10 @@ import CatalogSettingsReactSvgUrl from "PUBLIC_DIR/images/catalog.settings.react
 import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.react.svg?url";
 import DefaultLogoUrl from "PUBLIC_DIR/images/logo/leftmenu.svg?url";
+import ChangQuotaReactSvgUrl from "PUBLIC_DIR/images/change.quota.react.svg?url";
+import DisableQuotaReactSvgUrl from "PUBLIC_DIR/images/disable.quota.react.svg?url";
+import ChangeStorageQuotaDialog from "client/ChangeStorageQuotaDialog";
+
 import { useTranslation } from "react-i18next";
 import { TPortals } from "SRC_DIR/types/spaces";
 
@@ -38,7 +42,10 @@ type TRow = {
 const SpacesRoomRow = ({ item }: TRow) => {
   const { spacesStore, settingsStore } = useStore();
   const { setDeletePortalDialogVisible, setCurrentPortal } = spacesStore;
-  const { tenantAlias } = settingsStore;
+  const { tenantAlias, getAllPortals } = settingsStore;
+
+  const [isVisibleDialog, setIsVisibleDialog] = useState(false);
+  const [isDisableQuota, setIsDisableQuota] = useState(false);
 
   const onDelete = () => {
     setCurrentPortal(item);
@@ -66,6 +73,24 @@ const SpacesRoomRow = ({ item }: TRow) => {
         window.open(`${protocol}//${item.domain}/portal-settings/`, "_blank"),
     },
     {
+      label: t("Common:ManageStorageQuota"),
+      key: "change_quota",
+      icon: ChangQuotaReactSvgUrl,
+      onClick: () => {
+        setIsVisibleDialog(true);
+        isDisableQuota && setIsDisableQuota(false);
+      },
+    },
+    {
+      key: "disable_quota",
+      label: t("Common:DisableQuota"),
+      icon: DisableQuotaReactSvgUrl,
+      onClick: () => {
+        setIsVisibleDialog(true);
+        setIsDisableQuota(true);
+      },
+    },
+    {
       key: "separator",
       isSeparator: true,
     },
@@ -77,17 +102,34 @@ const SpacesRoomRow = ({ item }: TRow) => {
     },
   ];
 
+  const updateFunction = async () => {
+    await getAllPortals();
+  };
+
+  const onCloseClick = () => {
+    setIsVisibleDialog(false);
+  };
+
   const isCurrentPortal = tenantAlias === item.portalName;
 
   return (
-    <StyledRoomRow
-      contextOptions={contextOptionsProps}
-      element={logoElement}
-      key={item.id}
-      data={item}
-    >
-      <RoomContent item={item} isCurrentPortal={isCurrentPortal} />
-    </StyledRoomRow>
+    <>
+      <ChangeStorageQuotaDialog
+        isVisible={isVisibleDialog}
+        updateFunction={updateFunction}
+        onClose={onCloseClick}
+        portalInfo={item}
+        isDisableQuota={isDisableQuota}
+      />
+      <StyledRoomRow
+        contextOptions={contextOptionsProps}
+        element={logoElement}
+        key={item.id}
+        data={item}
+      >
+        <RoomContent item={item} isCurrentPortal={isCurrentPortal} />
+      </StyledRoomRow>
+    </>
   );
 };
 

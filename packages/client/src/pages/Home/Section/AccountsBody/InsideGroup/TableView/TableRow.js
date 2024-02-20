@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
-import { withTranslation } from "react-i18next";
+
 import { TableRow } from "@docspace/shared/components/table";
 import { TableCell } from "@docspace/shared/components/table";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { ComboBox } from "@docspace/shared/components/combobox";
-import withContent from "SRC_DIR/HOCs/withPeopleContent";
 import Badges from "../../Badges";
 import { Base } from "@docspace/shared/themes";
 import { useNavigate } from "react-router-dom";
@@ -283,8 +282,10 @@ const InsideGroupTableRow = (props) => {
     isSeveralSelection,
     canChangeUserType,
     hideColumns,
-    value,
     standalone,
+    value,
+
+    showStorageInfo,
     setCurrentGroup,
   } = props;
 
@@ -659,6 +660,4 @@ const InsideGroupTableRow = (props) => {
   );
 };
 
-export default withTranslation(["People", "Common", "Settings"])(
-  withContent(InsideGroupTableRow),
-);
+export default InsideGroupTableRow;

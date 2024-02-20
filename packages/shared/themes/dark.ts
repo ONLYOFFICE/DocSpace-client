@@ -3015,6 +3015,11 @@ const Dark: TTheme = {
         warningColor: "#E06451",
         color: "#E17415",
       },
+
+      storageManagement: {
+        grayBackgroundText: "#858585",
+        descriptionColor: "#ADADAD",
+      },
     },
 
     wizard: {

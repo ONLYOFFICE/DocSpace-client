@@ -8,7 +8,7 @@ import { Link } from "@docspace/shared/components/link";
 
 import { Text } from "@docspace/shared/components/text";
 import { ComboBox } from "@docspace/shared/components/combobox";
-
+import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 import { StyledAccountContent } from "../../styles/accounts";
 import { getUserTypeLabel } from "@docspace/shared/utils/common";
@@ -25,6 +25,8 @@ const Accounts = (props) => {
     getPeopleListItem,
     setPeopleSelection,
     setPeopleBufferSelection,
+
+    showStorageInfo,
   } = props;
 
   const navigate = useNavigate();
@@ -217,6 +219,24 @@ const Accounts = (props) => {
           >
             {statusText}
           </Text>
+          {showStorageInfo && (
+            <>
+              <Text
+                className={"info_field"}
+                noSelect
+                title={t("Common:Storage")}
+              >
+                {t("Common:Storage")}
+              </Text>
+              <SpaceQuota
+                type="user"
+                item={infoPanelSelection}
+                className="type-combobox"
+                onSuccess={onSuccess}
+                onAbort={onAbort}
+              />
+            </>
+          )}
 
           {/* <Text className={"info_field"} noSelect title={t("Common:Room")}>
             {t("Common:Room")}
@@ -247,7 +267,7 @@ const Accounts = (props) => {
                 {group.name}
               </Link>
             ))}
-          </div>
+        </div>
           </>}
 
         </div>
@@ -257,10 +277,10 @@ const Accounts = (props) => {
 };
 
 export default inject(
-  ({ userStore, peopleStore, accessRightsStore, infoPanelStore }) => {
+  ({ userStore, peopleStore, accessRightsStore, infoPanelStore, currentQuotaStore }) => {
     const { isOwner, isAdmin, id: selfId } = userStore.user;
-    const { changeType: changeUserType, usersStore } = peopleStore;
-    const { canChangeUserType } = accessRightsStore;
+  const { changeType: changeUserType, usersStore } = peopleStore;
+  const { canChangeUserType } = accessRightsStore;
 
     const { setInfoPanelSelection } = infoPanelStore;
 
@@ -269,18 +289,20 @@ export default inject(
       setBufferSelection: setPeopleBufferSelection,
     } = peopleStore.selectionStore;
 
-    return {
-      isOwner,
-      isAdmin,
-      changeUserType,
-      selfId,
-      canChangeUserType,
-      loading: usersStore.operationRunning,
-      getPeopleListItem: usersStore.getPeopleListItem,
-      setInfoPanelSelection,
+  const { showStorageInfo } = currentQuotaStore;
+  return {
+    isOwner,
+    isAdmin,
+    changeUserType,
+    selfId,
+    canChangeUserType,
+    loading: usersStore.operationRunning,
+    getPeopleListItem: usersStore.getPeopleListItem,
+    setInfoPanelSelection,
       setPeopleSelection,
       setPeopleBufferSelection,
-    };
+    showStorageInfo,
+  };
   },
 )(
   withTranslation([

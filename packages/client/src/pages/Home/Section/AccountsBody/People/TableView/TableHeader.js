@@ -2,6 +2,8 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
+import { SortByFieldName } from "SRC_DIR/helpers/enums";
+
 import { TableHeader } from "@docspace/shared/components/table";
 import { Events } from "@docspace/shared/enums";
 

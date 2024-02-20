@@ -58,7 +58,7 @@ const StyledPeopleRow = styled(TableRow)`
     .groups-combobox .combo-button {
       background-color: ${(props) =>
         `${props.theme.filesSection.tableView.row.backgroundActive}`};
-  }
+    }
   }
 
   .table-container_cell {
@@ -678,6 +678,8 @@ export default inject(({ currentQuotaStore }) => {
   };
 })(
   withContent(
-    withTranslation(["People", "Common", "Settings"])(observer(PeopleTableRow))
-  )
+    withTranslation(["People", "Common", "Settings"])(
+      observer(InsideGroupTableRow),
+    ),
+  ),
 );

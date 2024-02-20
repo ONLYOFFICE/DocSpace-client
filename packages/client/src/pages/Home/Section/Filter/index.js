@@ -236,7 +236,7 @@ const getQuotaFilter = (filterValues) => {
     find(filterValues, (value) => {
       return value.group === FilterGroups.filterQuota;
     }),
-    "key"
+    "key",
   );
 
   return filterType?.toString() ? +filterType : null;
@@ -696,20 +696,20 @@ const SectionFilterContent = ({
         ? insideGroupFilter.search
         : ""
       : isPeopleAccounts
-      ? accountsFilter.search
         ? accountsFilter.search
-        : ""
+          ? accountsFilter.search
+          : ""
         : isGroupsAccounts
           ? groupsFilter.search
             ? groupsFilter.search
             : ""
-      : isRooms
-        ? roomsFilter.filterValue
-          ? roomsFilter.filterValue
-          : ""
-        : filter.search
-          ? filter.search
-          : "";
+          : isRooms
+            ? roomsFilter.filterValue
+              ? roomsFilter.filterValue
+              : ""
+            : filter.search
+              ? filter.search
+              : "";
   }, [
     isRooms,
     isPeopleAccounts,
@@ -726,12 +726,12 @@ const SectionFilterContent = ({
     const currentFilter = isInsideGroup
       ? insideGroupFilter
       : isPeopleAccounts
-      ? accountsFilter
+        ? accountsFilter
         : isGroupsAccounts
           ? groupsFilter
-      : isRooms
-        ? roomsFilter
-        : filter;
+          : isRooms
+            ? roomsFilter
+            : filter;
     return {
       sortDirection: currentFilter.sortOrder === "ascending" ? "asc" : "desc",
       sortId: currentFilter.sortBy,
@@ -761,106 +761,106 @@ const SectionFilterContent = ({
         const filter = isInsideGroup ? insideGroupFilter : accountsFilter;
         if (filter.employeeStatus || filter.activationStatus) {
           const key = filter.employeeStatus === 2 ? 3 : filter.activationStatus;
-        let label = "";
+          let label = "";
 
-        switch (key) {
-          case 1:
-            label = t("Common:Active");
-            break;
-          case 2:
-            label = t("PeopleTranslations:PendingTitle");
-            break;
-          case 3:
-            label = t("PeopleTranslations:DisabledEmployeeStatus");
-            break;
+          switch (key) {
+            case 1:
+              label = t("Common:Active");
+              break;
+            case 2:
+              label = t("PeopleTranslations:PendingTitle");
+              break;
+            case 3:
+              label = t("PeopleTranslations:DisabledEmployeeStatus");
+              break;
+          }
+
+          filterValues.push({
+            key,
+            label,
+            group: "filter-status",
+          });
         }
-
-        filterValues.push({
-          key,
-          label,
-          group: "filter-status",
-        });
-      }
 
         if (filter.role) {
-        let label = null;
+          let label = null;
 
           switch (+filter.role) {
-          case EmployeeType.Admin:
-            label = t("Common:DocSpaceAdmin");
-            break;
-          case EmployeeType.User:
-            label = t("Common:RoomAdmin");
-            break;
-          case EmployeeType.Collaborator:
-            label = t("Common:PowerUser");
-            break;
-          case EmployeeType.Guest:
-            label = t("Common:User");
-            break;
-          default:
-            label = "";
+            case EmployeeType.Admin:
+              label = t("Common:DocSpaceAdmin");
+              break;
+            case EmployeeType.User:
+              label = t("Common:RoomAdmin");
+              break;
+            case EmployeeType.Collaborator:
+              label = t("Common:PowerUser");
+              break;
+            case EmployeeType.Guest:
+              label = t("Common:User");
+              break;
+            default:
+              label = "";
+          }
+
+          filterValues.push({
+            key: +filter.role,
+            label: label,
+            group: "filter-type",
+          });
         }
 
-        filterValues.push({
-            key: +filter.role,
-          label: label,
-          group: "filter-type",
-        });
-      }
+        if (accountsFilter.quotaFilter) {
+          const key = +accountsFilter.quotaFilter;
 
-      if (accountsFilter.quotaFilter) {
-        const key = +accountsFilter.quotaFilter;
+          const label =
+            key === FilterKeys.customQuota
+              ? t("Common:CustomQuota")
+              : t("Common:DefaultQuota");
 
-        const label =
-          key === FilterKeys.customQuota
-            ? t("Common:CustomQuota")
-            : t("Common:DefaultQuota");
+          filterValues.push({
+            key: accountsFilter.quotaFilter,
+            label: label,
+            group: FilterGroups.filterQuota,
+          });
+        }
 
-        filterValues.push({
-          key: accountsFilter.quotaFilter,
-          label: label,
-          group: FilterGroups.filterQuota,
-        });
-      }
-
-      if (accountsFilter?.payments?.toString()) {
-        filterValues.push({
+        if (accountsFilter?.payments?.toString()) {
+          filterValues.push({
             key: filter.payments.toString(),
-          label:
+            label:
               PaymentsType.Paid === filter.payments.toString()
-              ? t("Common:Paid")
-              : t("Common:Free"),
-          group: "filter-account",
-        });
-      }
+                ? t("Common:Paid")
+                : t("Common:Free"),
+            group: "filter-account",
+          });
+        }
 
         if (filter?.accountLoginType?.toString()) {
-        const label =
+          const label =
             AccountLoginType.SSO === filter.accountLoginType.toString()
-            ? SSO_LABEL
+              ? SSO_LABEL
               : AccountLoginType.LDAP === filter.accountLoginType.toString()
-              ? t("PeopleTranslations:LDAPLbl")
-              : t("PeopleTranslations:StandardLogin");
-        filterValues.push({
+                ? t("PeopleTranslations:LDAPLbl")
+                : t("PeopleTranslations:StandardLogin");
+          filterValues.push({
             key: filter.accountLoginType.toString(),
-          label: label,
-          group: "filter-login-type",
-        });
-      }
+            label: label,
+            group: "filter-login-type",
+          });
+        }
 
         if (isPeopleAccounts && filter.group) {
           const groupId = filter.group;
           const group = await getGroupById(groupId);
 
-        if (group) {
-          filterValues.push({
+          if (group) {
+            filterValues.push({
               key: groupId,
               group: FilterGroups.filterGroup,
-            label: group.name,
-          });
+              label: group.name,
+            });
+          }
         }
-      }
 
         if (isPeopleAccounts && filter.withoutGroup) {
           filterValues.push({
@@ -1946,23 +1946,23 @@ const SectionFilterContent = ({
 
       const firstName = {
         id: "sort-by_first-name",
-          key: "firstname",
-          label: t("Common:ByFirstNameSorting"),
-          default: true,
+        key: "firstname",
+        label: t("Common:ByFirstNameSorting"),
+        default: true,
       };
 
       const lastName = {
         id: "sort-by_last-name",
-          key: "lastname",
-          label: t("Common:ByLastNameSorting"),
-          default: true,
+        key: "lastname",
+        label: t("Common:ByLastNameSorting"),
+        default: true,
       };
 
       const type = {
         id: "sort-by_type",
-          key: "type",
-          label: t("Common:Type"),
-          default: true,
+        key: "type",
+        label: t("Common:Type"),
+        default: true,
       };
 
       const department = {
@@ -1974,9 +1974,9 @@ const SectionFilterContent = ({
 
       const email = {
         id: "sort-by_email",
-          key: "email",
-          label: t("Common:Email"),
-          default: true,
+        key: "email",
+        label: t("Common:Email"),
+        default: true,
       };
 
       const hideableColumns = {
@@ -1986,6 +1986,15 @@ const SectionFilterContent = ({
       };
 
       options.push(firstName, lastName);
+
+      if (showStorageInfo) {
+        options.push({
+          id: "sort-quota",
+          key: SortByFieldName.UsedSpace,
+          label: t("Common:Storage"),
+          default: true,
+        });
+      }
 
       if ((viewAs = "table")) {
         const tableColumns = isInsideGroup
@@ -2016,16 +2025,8 @@ const SectionFilterContent = ({
 
             !hide && options.push(hideableColumns[columnTitle]);
 
-      showStorageInfo &&
-        accountsOptions.push({
-          id: "sort-quota",
-          key: SortByFieldName.UsedSpace,
-          label: t("Common:Storage"),
-          default: true,
-        });
-
-      return accountsOptions;
-    }
+          
+          }
         });
       }
 
@@ -2201,7 +2202,7 @@ const SectionFilterContent = ({
 
         if (showStorageInfo && availableSort?.includes("Storage")) {
           const idx = availableSort.findIndex(
-            (x) => x === SortByFieldName.UsedSpace
+            (x) => x === SortByFieldName.UsedSpace,
           );
           const hide = hideOption && infoPanelColumnsSize[idx] === "0px";
 

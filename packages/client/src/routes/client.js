@@ -5,6 +5,7 @@ import loadable from "@loadable/component";
 import PrivateRoute from "@docspace/common/components/PrivateRoute";
 import PublicRoute from "@docspace/common/components/PublicRoute";
 import ErrorBoundary from "@docspace/common/components/ErrorBoundary";
+import componentLoader from "@docspace/components/utils/component-loader";
 
 import Error404 from "SRC_DIR/pages/Errors/404";
 import FilesView from "SRC_DIR/pages/Home/View/Files";
@@ -13,24 +14,36 @@ import SettingsView from "SRC_DIR/pages/Home/View/Settings";
 
 import { generalRoutes } from "./general";
 
-const Client = loadable(() => import("../Client"));
+const Client = loadable(() => componentLoader(() => import("../Client")));
 
-const Home = loadable(() => import("../pages/Home"));
+const Home = loadable(() => componentLoader(() => import("../pages/Home")));
 
-const Sdk = loadable(() => import("../pages/Sdk"));
+const Sdk = loadable(() => componentLoader(() => import("../pages/Sdk")));
 
-const FormGallery = loadable(() => import("../pages/FormGallery"));
-const PublicRoom = loadable(() => import("../pages/PublicRoom"));
-const About = loadable(() => import("../pages/About"));
-const Wizard = loadable(() => import("../pages/Wizard"));
-const PreparationPortal = loadable(() => import("../pages/PreparationPortal"));
-const PortalUnavailable = loadable(() => import("../pages/PortalUnavailable"));
-const ErrorUnavailable = loadable(() => import("../pages/Errors/Unavailable"));
+const FormGallery = loadable(() =>
+  componentLoader(() => import("../pages/FormGallery"))
+);
+const PublicRoom = loadable(() =>
+  componentLoader(() => import("../pages/PublicRoom"))
+);
+const About = loadable(() => componentLoader(() => import("../pages/About")));
+const Wizard = loadable(() => componentLoader(() => import("../pages/Wizard")));
+const PreparationPortal = loadable(() =>
+  componentLoader(() => import("../pages/PreparationPortal"))
+);
+const PortalUnavailable = loadable(() =>
+  componentLoader(() => import("../pages/PortalUnavailable"))
+);
+const ErrorUnavailable = loadable(() =>
+  componentLoader(() => import("../pages/Errors/Unavailable"))
+);
 const AccessRestricted = loadable(() =>
-  import("../pages/Errors/AccessRestricted")
+  componentLoader(() => import("../pages/Errors/AccessRestricted"))
 );
 
-const Error401 = loadable(() => import("client/Error401"));
+const Error401 = loadable(() =>
+  componentLoader(() => import("client/Error401"))
+);
 
 const ClientRoutes = [
   {

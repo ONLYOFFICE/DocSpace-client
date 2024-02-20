@@ -3231,9 +3231,10 @@ export const getBaseTheme = () => {
         scopeDesc: "#a3a9ae",
       },
 
-    sdkPresets: {
-      borderColor: "#d0d5da",
-      secondaryColor: "#657077",
+      sdkPresets: {
+        borderColor: "#d0d5da",
+        secondaryColor: "#657077",
+      },
     },
   };
 };

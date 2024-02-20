@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
-import { withTranslation } from "react-i18next";
-import { inject, observer } from "mobx-react";
 
 import { TableRow } from "@docspace/shared/components/table";
 import { TableCell } from "@docspace/shared/components/table";
@@ -9,8 +7,6 @@ import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { ComboBox } from "@docspace/shared/components/combobox";
-import SpaceQuota from "SRC_DIR/components/SpaceQuota";
-import withContent from "SRC_DIR/HOCs/withPeopleContent";
 import Badges from "../../Badges";
 import { Base } from "@docspace/shared/themes";
 import { useNavigate } from "react-router-dom";
@@ -659,27 +655,9 @@ const InsideGroupTableRow = (props) => {
             {email}
           </Link>
         </TableCell>
-
-        {showStorageInfo && (
-          <TableCell className={"table-cell_Storage/Quota"}>
-            <SpaceQuota hideColumns={hideColumns} item={item} type="user" />
-          </TableCell>
-        )}
       </StyledPeopleRow>
     </StyledWrapper>
   );
 };
 
-export default inject(({ currentQuotaStore }) => {
-  const { showStorageInfo } = currentQuotaStore;
-
-  return {
-    showStorageInfo,
-  };
-})(
-  withContent(
-    withTranslation(["People", "Common", "Settings"])(
-      observer(InsideGroupTableRow),
-    ),
-  ),
-);
+export default InsideGroupTableRow;

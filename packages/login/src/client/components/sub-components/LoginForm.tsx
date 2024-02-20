@@ -425,9 +425,9 @@ const LoginForm: React.FC<ILoginFormProps> = ({
         onClick={onSubmit}
       />
       {/*Uncomment when add api*/}
-      {(!IS_ROOMS_MODE || !isWithoutPasswordLogin) && (
-        <div className="login-or-access">
-          {/*<Link
+      {/* {(!IS_ROOMS_MODE || !isWithoutPasswordLogin) && (
+        <div className="login-or-access"> */}
+      {/*<Link
                   fontWeight="600"
                   fontSize="13px"
                   type="action"
@@ -436,24 +436,21 @@ const LoginForm: React.FC<ILoginFormProps> = ({
                 >
                   {t("SignInWithCode")}
                 </Link>*/}
-          {enableAdmMess && (
-            <>
-              <Text className="login-or-access-text">{t("Or")}</Text>
-              <Link
-                id="login_recover-link"
-                fontWeight="600"
-                fontSize="13px"
-                type="action"
-                isHovered={true}
-                className="login-link recover-link"
-                onClick={openRecoverDialog}
-              >
-                {t("RecoverAccess")}
-              </Link>
-            </>
-          )}
-        </div>
-      )}
+      {/* {enableAdmMess && (
+            <Link
+              id="login_recover-link"
+              fontWeight="600"
+              fontSize="13px"
+              type="action"
+              isHovered={true}
+              className="login-link recover-link"
+              onClick={openRecoverDialog}
+            >
+              {t("RecoverAccess")}
+            </Link>
+          )} */}
+      {/* </div>
+      )} */}
 
       {IS_ROOMS_MODE && isWithoutPasswordLogin && (
         <div className="login-link">

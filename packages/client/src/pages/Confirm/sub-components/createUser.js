@@ -601,7 +601,7 @@ const CreateUserForm = (props) => {
                   {(oauthDataExists() || ssoExists()) && (
                     <div className="line">
                       <Text color="#A3A9AE" className="or-label">
-                        {t("Common:Or")}
+                        {t("Common:orContinueWith")}
                       </Text>
                     </div>
                   )}

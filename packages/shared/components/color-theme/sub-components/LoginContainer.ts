@@ -49,6 +49,7 @@ const LoginContainer = styled.div`
 
   .recover-link {
     min-height: 19px;
+    margin-top: 20px;
   }
 
   .greeting-title {
@@ -221,7 +222,7 @@ const LoginContainer = styled.div`
       margin: 0 8px;
     }
 
-    .login-or-access {
+    /* .login-or-access {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -230,7 +231,7 @@ const LoginContainer = styled.div`
       & > :first-child {
         margin-top: 24px;
       }
-    }
+    } */
   }
 
   .logo-wrapper {

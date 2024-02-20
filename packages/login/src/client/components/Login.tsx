@@ -9,6 +9,7 @@ import {
   getOAuthToken,
   getLoginLink,
 } from "@docspace/shared/utils/common";
+import { Link } from "@docspace/shared/components/link";
 import { checkIsSSR } from "@docspace/shared/utils";
 import { PROVIDERS_DATA } from "@docspace/shared/constants";
 import { Toast } from "@docspace/shared/components/toast";
@@ -194,6 +195,22 @@ const Login: React.FC<ILoginProps> = ({
             {greetingSettings}
           </Text>
           <FormWrapper id="login-form" theme={theme}>
+            <LoginForm
+              isBaseTheme={isBaseTheme}
+              recaptchaPublicKey={portalSettings?.recaptchaPublicKey}
+              isDesktop={!!isDesktopEditor}
+              isLoading={isLoading}
+              hashSettings={portalSettings?.passwordHash}
+              setIsLoading={setIsLoading}
+              match={match}
+              enableAdmMess={enableAdmMess}
+              cookieSettingsEnabled={cookieSettingsEnabled}
+            />
+            {(oauthDataExists() || ssoExists()) && (
+              <div className="line">
+                <Text className="or-label">{t("Common:orContinueWith")}</Text>
+              </div>
+            )}
             {oauthDataExists() && providers && (
               <SocialButtonsGroup
                 providers={providers}
@@ -203,23 +220,18 @@ const Login: React.FC<ILoginProps> = ({
                 {...ssoProps}
               />
             )}
-            {(oauthDataExists() || ssoExists()) && (
-              <div className="line">
-                <Text className="or-label">{t("Or")}</Text>
-              </div>
+            {enableAdmMess && (
+              <Link
+                fontWeight="600"
+                fontSize="13px"
+                type="action"
+                isHovered={true}
+                className="login-link recover-link"
+                onClick={openRecoverDialog}
+              >
+                {t("RecoverAccess")}
+              </Link>
             )}
-            <LoginForm
-              isBaseTheme={isBaseTheme}
-              recaptchaPublicKey={portalSettings?.recaptchaPublicKey}
-              isDesktop={!!isDesktopEditor}
-              isLoading={isLoading}
-              hashSettings={portalSettings?.passwordHash}
-              setIsLoading={setIsLoading}
-              openRecoverDialog={openRecoverDialog}
-              match={match}
-              enableAdmMess={enableAdmMess}
-              cookieSettingsEnabled={cookieSettingsEnabled}
-            />
           </FormWrapper>
           <Toast />
 

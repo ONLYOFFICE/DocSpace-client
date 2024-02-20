@@ -1484,13 +1484,13 @@ class FilesStore {
 
             let folderId = folder.id;
 
-            if (
-              data.current.providerKey &&
-              data.current.rootFolderType === Rooms &&
-              this.treeFoldersStore.myRoomsId
-            ) {
-              folderId = this.treeFoldersStore.myRoomsId;
-            }
+            // if (
+            //   data.current.providerKey &&
+            //   data.current.rootFolderType === Rooms &&
+            //   this.treeFoldersStore.myRoomsId
+            // ) {
+            //   folderId = this.treeFoldersStore.myRoomsId;
+            // }
 
             const isCurrentFolder = data.current.id === folderId;
 

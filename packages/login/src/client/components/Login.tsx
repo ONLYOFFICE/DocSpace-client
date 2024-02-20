@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { ButtonsWrapper, LoginFormWrapper, LoginContent } from "./StyledLogin";
 import { Text } from "@docspace/shared/components/text";
-import { SocialButton } from "@docspace/shared/components/social-button";
+import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
 import {
   getProviderTranslation,
   getOAuthToken,
@@ -11,11 +11,9 @@ import {
 } from "@docspace/shared/utils/common";
 import { checkIsSSR } from "@docspace/shared/utils";
 import { PROVIDERS_DATA } from "@docspace/shared/constants";
-import { Link } from "@docspace/shared/components/link";
 import { Toast } from "@docspace/shared/components/toast";
 import LoginForm from "./sub-components/LoginForm";
 import RecoverAccessModalDialog from "@docspace/shared/components/recover-access-modal-dialog/RecoverAccessModalDialog";
-import MoreLoginModal from "@docspace/shared/components/more-login-modal";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import Register from "./sub-components/register-container";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
@@ -58,7 +56,6 @@ const Login: React.FC<ILoginProps> = ({
     isRestoringPortal && window.location.replace("/preparation-portal");
   }, []);
   const [isLoading, setIsLoading] = useState(false);
-  const [moreAuthVisible, setMoreAuthVisible] = useState(false);
   const [recoverDialogVisible, setRecoverDialogVisible] = useState(false);
 
   const {
@@ -88,21 +85,6 @@ const Login: React.FC<ILoginProps> = ({
   const ssoExists = () => {
     if (ssoUrl) return true;
     else return false;
-  };
-
-  const ssoButton = () => {
-    const onClick = () => (window.location.href = ssoUrl);
-    return (
-      <div className="buttonWrapper">
-        <SocialButton
-          IconComponent={SSOIcon}
-          className="socialButton"
-          label={ssoLabel || getProviderTranslation("sso", t)}
-          onClick={onClick}
-          isDisabled={isLoading}
-        />
-      </div>
-    );
   };
 
   const oauthDataExists = () => {
@@ -165,43 +147,6 @@ const Login: React.FC<ILoginProps> = ({
     []
   );
 
-  const providerButtons = () => {
-    const providerButtons =
-      providers &&
-      providers.map((item, index) => {
-        if (!PROVIDERS_DATA[item.provider]) return;
-        if (index > 1) return;
-
-        const { icon, label, iconOptions, className } =
-          PROVIDERS_DATA[item.provider];
-
-        return (
-          <div className="buttonWrapper" key={`${item.provider}ProviderItem`}>
-            <SocialButton
-              iconName={icon}
-              label={getProviderTranslation(label, t)}
-              className={`socialButton ${className ? className : ""}`}
-              $iconOptions={iconOptions}
-              data-url={item.url}
-              data-providername={item.provider}
-              onClick={onSocialButtonClick}
-              isDisabled={isLoading}
-            />
-          </div>
-        );
-      });
-
-    return providerButtons;
-  };
-
-  const moreAuthOpen = () => {
-    setMoreAuthVisible(true);
-  };
-
-  const moreAuthClose = () => {
-    setMoreAuthVisible(false);
-  };
-
   const openRecoverDialog = () => {
     setRecoverDialogVisible(true);
   };
@@ -222,6 +167,13 @@ const Login: React.FC<ILoginProps> = ({
   if (!mounted) return <></>;
   if (isRestoringPortal) return <></>;
 
+  const ssoProps = ssoExists()
+    ? {
+        ssoUrl: ssoUrl,
+        ssoLabel: ssoLabel || getProviderTranslation("sso", t),
+        ssoSVG: SSOIcon,
+      }
+    : {};
   return (
     <LoginFormWrapper
       id="login-page"
@@ -242,24 +194,14 @@ const Login: React.FC<ILoginProps> = ({
             {greetingSettings}
           </Text>
           <FormWrapper id="login-form" theme={theme}>
-            {ssoExists() && <ButtonsWrapper>{ssoButton()}</ButtonsWrapper>}
-            {oauthDataExists() && (
-              <>
-                <ButtonsWrapper>{providerButtons()}</ButtonsWrapper>
-                {providers && providers.length > 2 && (
-                  <Link
-                    isHovered
-                    type="action"
-                    fontSize="13px"
-                    fontWeight="600"
-                    color={currentColorScheme?.main?.accent}
-                    className="more-label"
-                    onClick={moreAuthOpen}
-                  >
-                    {t("Common:ShowMore")}
-                  </Link>
-                )}
-              </>
+            {oauthDataExists() && providers && (
+              <SocialButtonsGroup
+                providers={providers}
+                onClick={onSocialButtonClick}
+                t={t}
+                isDisabled={isLoading}
+                {...ssoProps}
+              />
             )}
             {(oauthDataExists() || ssoExists()) && (
               <div className="line">
@@ -280,15 +222,6 @@ const Login: React.FC<ILoginProps> = ({
             />
           </FormWrapper>
           <Toast />
-          <MoreLoginModal
-            visible={moreAuthVisible}
-            onClose={moreAuthClose}
-            providers={providers}
-            onSocialLoginClick={onSocialButtonClick}
-            ssoLabel={ssoLabel}
-            ssoUrl={ssoUrl}
-            t={t}
-          />
 
           <RecoverAccessModalDialog
             visible={recoverDialogVisible}

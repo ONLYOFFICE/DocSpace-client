@@ -14,7 +14,7 @@ import { Link } from "@docspace/shared/components/link";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { toastr } from "@docspace/shared/components/toast";
-import { SocialButton } from "@docspace/shared/components/social-button";
+import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
 import MoreLoginModal from "@docspace/shared/components/more-login-modal";
 import { EmailInput } from "@docspace/shared/components/email-input";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
@@ -55,7 +55,6 @@ const CreateUserForm = (props) => {
   const {
     settings,
     t,
-    greetingTitle,
     providers,
     isDesktop,
     linkData,
@@ -70,31 +69,30 @@ const CreateUserForm = (props) => {
   const emailFromLink = linkData?.email ? linkData.email : "";
   const roomName = roomData?.title;
 
-  const [moreAuthVisible, setMoreAuthVisible] = useState(false);
-  const [email, setEmail] = useState(emailFromLink);
-  const [emailValid, setEmailValid] = useState(true);
-  const [emailErrorText, setEmailErrorText] = useState("");
+  // const [email, setEmail] = useState(emailFromLink);
+  // const [emailValid, setEmailValid] = useState(true);
+  // const [emailErrorText, setEmailErrorText] = useState("");
 
-  const [password, setPassword] = useState("");
-  const [passwordValid, setPasswordValid] = useState(true);
+  // const [password, setPassword] = useState("");
+  // const [passwordValid, setPasswordValid] = useState(true);
 
-  const [fname, setFname] = useState("");
-  const [fnameValid, setFnameValid] = useState(true);
-  const [sname, setSname] = useState("");
-  const [snameValid, setSnameValid] = useState(true);
+  // const [fname, setFname] = useState("");
+  // const [fnameValid, setFnameValid] = useState(true);
+  // const [sname, setSname] = useState("");
+  // const [snameValid, setSnameValid] = useState(true);
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const [errorText, setErrorText] = useState("");
+  // const [errorText, setErrorText] = useState("");
 
   const [user, setUser] = useState("");
 
-  const [isEmailErrorShow, setIsEmailErrorShow] = useState(false);
-  const [isPasswordErrorShow, setIsPasswordErrorShow] = useState(false);
+  // const [isEmailErrorShow, setIsEmailErrorShow] = useState(false);
+  // const [isPasswordErrorShow, setIsPasswordErrorShow] = useState(false);
 
   const [showForm, setShowForm] = useState(true);
   const [showGreeting, setShowGreeting] = useState(true);
-  const [searchParams, setSearchParams] = useSearchParams();
+  //const [searchParams, setSearchParams] = useSearchParams();
 
   const focusInput = () => {
     if (inputRef) {
@@ -138,88 +136,88 @@ const CreateUserForm = (props) => {
     fetchData();
   }, []);
 
-  const onSubmit = () => {
-    const { linkData, hashSettings } = props;
-    const type = parseInt(linkData.emplType);
-    const culture = searchParams.get("culture");
-    setIsLoading(true);
+  // const onSubmit = () => {
+  //   const { linkData, hashSettings } = props;
+  //   const type = parseInt(linkData.emplType);
+  //   const culture = searchParams.get("culture");
+  //   setIsLoading(true);
 
-    setErrorText("");
+  //   setErrorText("");
 
-    let hasError = false;
+  //   let hasError = false;
 
-    if (!fname.trim() || !fnameValid) {
-      hasError = true;
-      setFnameValid(!hasError);
-    }
+  //   if (!fname.trim() || !fnameValid) {
+  //     hasError = true;
+  //     setFnameValid(!hasError);
+  //   }
 
-    if (!sname.trim() || !snameValid) {
-      hasError = true;
-      setSnameValid(!hasError);
-    }
+  //   if (!sname.trim() || !snameValid) {
+  //     hasError = true;
+  //     setSnameValid(!hasError);
+  //   }
 
-    const emailRegex = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$";
-    const validationEmail = new RegExp(emailRegex);
+  //   const emailRegex = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$";
+  //   const validationEmail = new RegExp(emailRegex);
 
-    if (!validationEmail.test(email.trim())) {
-      hasError = true;
-      setEmailValid(!hasError);
-    }
+  //   if (!validationEmail.test(email.trim())) {
+  //     hasError = true;
+  //     setEmailValid(!hasError);
+  //   }
 
-    if (!passwordValid || !password.trim()) {
-      hasError = true;
-      setPasswordValid(!hasError);
-      setIsPasswordErrorShow(true);
-    }
+  //   if (!passwordValid || !password.trim()) {
+  //     hasError = true;
+  //     setPasswordValid(!hasError);
+  //     setIsPasswordErrorShow(true);
+  //   }
 
-    if (hasError) {
-      setIsLoading(false);
-      return false;
-    }
+  //   if (hasError) {
+  //     setIsLoading(false);
+  //     return false;
+  //   }
 
-    const hash = createPasswordHash(password, hashSettings);
+  //   const hash = createPasswordHash(password, hashSettings);
 
-    const loginData = {
-      userName: email,
-      passwordHash: hash,
-    };
+  //   const loginData = {
+  //     userName: email,
+  //     passwordHash: hash,
+  //   };
 
-    const personalData = {
-      firstname: fname.trim(),
-      lastname: sname.trim(),
-      email: email,
-      cultureName: culture,
-    };
+  //   const personalData = {
+  //     firstname: fname.trim(),
+  //     lastname: sname.trim(),
+  //     email: email,
+  //     cultureName: culture,
+  //   };
 
-    if (!!type) {
-      personalData.type = type;
-    }
+  //   if (!!type) {
+  //     personalData.type = type;
+  //   }
 
-    if (!!linkData.key) {
-      personalData.key = linkData.key;
-    }
+  //   if (!!linkData.key) {
+  //     personalData.key = linkData.key;
+  //   }
 
-    const headerKey = linkData.confirmHeader;
+  //   const headerKey = linkData.confirmHeader;
 
-    createConfirmUser(personalData, loginData, headerKey).catch((error) => {
-      let errorMessage = "";
-      if (typeof error === "object") {
-        errorMessage =
-          error?.response?.data?.error?.message ||
-          error?.statusText ||
-          error?.message ||
-          "";
-      } else {
-        errorMessage = error;
-      }
+  //   createConfirmUser(personalData, loginData, headerKey).catch((error) => {
+  //     let errorMessage = "";
+  //     if (typeof error === "object") {
+  //       errorMessage =
+  //         error?.response?.data?.error?.message ||
+  //         error?.statusText ||
+  //         error?.message ||
+  //         "";
+  //     } else {
+  //       errorMessage = error;
+  //     }
 
-      console.error("confirm error", errorMessage);
-      setIsEmailErrorShow(true);
-      setEmailErrorText(errorMessage);
-      setEmailValid(false);
-      setIsLoading(false);
-    });
-  };
+  //     console.error("confirm error", errorMessage);
+  //     setIsEmailErrorShow(true);
+  //     setEmailErrorText(errorMessage);
+  //     setEmailValid(false);
+  //     setIsLoading(false);
+  //   });
+  // };
 
   const authCallback = (profile) => {
     const signupAccount = {
@@ -275,42 +273,34 @@ const CreateUserForm = (props) => {
     window.location.replace(finalUrl);
   };
 
-  const moreAuthOpen = () => {
-    setMoreAuthVisible(true);
-  };
+  // const onChangeEmail = (e) => {
+  //   setEmail(e.target.value);
+  //   setIsEmailErrorShow(false);
+  // };
 
-  const moreAuthClose = () => {
-    setMoreAuthVisible(false);
-  };
+  // const onChangeFname = (e) => {
+  //   setFname(e.target.value);
+  //   setFnameValid(nameRegex.test(e.target.value.trim()));
+  //   setErrorText("");
+  // };
 
-  const onChangeEmail = (e) => {
-    setEmail(e.target.value);
-    setIsEmailErrorShow(false);
-  };
+  // const onChangeSname = (e) => {
+  //   setSname(e.target.value);
+  //   setSnameValid(nameRegex.test(e.target.value.trim()));
+  //   setErrorText("");
+  // };
 
-  const onChangeFname = (e) => {
-    setFname(e.target.value);
-    setFnameValid(nameRegex.test(e.target.value.trim()));
-    setErrorText("");
-  };
+  // const onChangePassword = (e) => {
+  //   setPassword(e.target.value);
+  //   setErrorText("");
+  //   setIsPasswordErrorShow(false);
+  // };
 
-  const onChangeSname = (e) => {
-    setSname(e.target.value);
-    setSnameValid(nameRegex.test(e.target.value.trim()));
-    setErrorText("");
-  };
-
-  const onChangePassword = (e) => {
-    setPassword(e.target.value);
-    setErrorText("");
-    setIsPasswordErrorShow(false);
-  };
-
-  const onKeyPress = (event) => {
-    if (event.key === "Enter") {
-      onSubmit();
-    }
-  };
+  // const onKeyPress = (event) => {
+  //   if (event.key === "Enter") {
+  //     onSubmit();
+  //   }
+  // };
 
   const onSocialButtonClick = useCallback((e) => {
     const { target } = e;
@@ -348,50 +338,6 @@ const CreateUserForm = (props) => {
     }
   }, []);
 
-  const providerButtons = () => {
-    const providerButtons =
-      providers &&
-      providers.map((item, index) => {
-        if (!PROVIDERS_DATA[item.provider]) return;
-        if (index > 1) return;
-
-        const { icon, label, iconOptions, className } =
-          PROVIDERS_DATA[item.provider];
-
-        return (
-          <div className="buttonWrapper" key={`${item.provider}ProviderItem`}>
-            <SocialButton
-              iconName={icon}
-              label={getProviderTranslation(label, t, false, true)}
-              className={`socialButton ${className ? className : ""}`}
-              $iconOptions={iconOptions}
-              data-url={item.url}
-              data-providername={item.provider}
-              onClick={onSocialButtonClick}
-            />
-          </div>
-        );
-      });
-
-    return providerButtons;
-  };
-
-  const ssoButton = () => {
-    return (
-      <div className="buttonWrapper">
-        <SocialButton
-          iconName={SsoReactSvgUrl}
-          className="socialButton"
-          label={
-            capabilities?.ssoLabel ||
-            getProviderTranslation("sso", t, false, true)
-          }
-          onClick={() => (window.location.href = capabilities?.ssoUrl)}
-        />
-      </div>
-    );
-  };
-
   const oauthDataExists = () => {
     if (!capabilities?.oauthEnabled) return false;
 
@@ -410,28 +356,37 @@ const CreateUserForm = (props) => {
     else return false;
   };
 
-  const onValidateEmail = (res) => {
-    setEmailValid(res.isValid);
-    setEmailErrorText(res.errors[0]);
-  };
+  // const onValidateEmail = (res) => {
+  //   setEmailValid(res.isValid);
+  //   setEmailErrorText(res.errors[0]);
+  // };
 
-  const onValidatePassword = (res) => {
-    setPasswordValid(res);
-  };
+  // const onValidatePassword = (res) => {
+  //   setPasswordValid(res);
+  // };
 
-  const onBlurEmail = () => {
-    setIsEmailErrorShow(true);
-  };
+  // const onBlurEmail = () => {
+  //   setIsEmailErrorShow(true);
+  // };
 
-  const onBlurPassword = () => {
-    setIsPasswordErrorShow(true);
-  };
+  // const onBlurPassword = () => {
+  //   setIsPasswordErrorShow(true);
+  // };
 
-  const onSignIn = () => {
-    return window.location.replace(
-      combineUrl(window.DocSpaceConfig?.proxy?.url, "/login"),
-    );
-  };
+  // const onSignIn = () => {
+  //   return window.location.replace(
+  //     combineUrl(window.DocSpaceConfig?.proxy?.url, "/login"),
+  //   );
+  // };
+  const ssoProps = ssoExists()
+    ? {
+        ssoUrl: capabilities?.ssoUrl,
+        ssoLabel:
+          capabilities?.ssoLabel ||
+          getProviderTranslation("sso", t, false, true),
+        ssoSVG: SsoReactSvgUrl,
+      }
+    : {};
 
   return (
     <StyledPage>
@@ -469,42 +424,7 @@ const CreateUserForm = (props) => {
 
           <FormWrapper>
             <RegisterContainer>
-              {!emailFromLink && (
-                <>
-                  {ssoExists() && (
-                    <ButtonsWrapper>{ssoButton()}</ButtonsWrapper>
-                  )}
-
-                  {oauthDataExists() && (
-                    <>
-                      <ButtonsWrapper>{providerButtons()}</ButtonsWrapper>
-                      {providers && providers.length > 2 && (
-                        <Link
-                          isHovered
-                          type="action"
-                          fontSize="13px"
-                          fontWeight="600"
-                          color={currentColorScheme?.main?.accent}
-                          className="more-label"
-                          onClick={moreAuthOpen}
-                        >
-                          {t("Common:ShowMore")}
-                        </Link>
-                      )}
-                    </>
-                  )}
-
-                  {(oauthDataExists() || ssoExists()) && (
-                    <div className="line">
-                      <Text color="#A3A9AE" className="or-label">
-                        {t("Common:Or")}
-                      </Text>
-                    </div>
-                  )}
-                </>
-              )}
-
-              {showForm && (
+              {/* {showForm && (
                 <form className="auth-form-container">
                   <div className="auth-form-fields">
                     <FieldContainer
@@ -675,6 +595,27 @@ const CreateUserForm = (props) => {
                     </Link>
                   </div>
                 </form>
+              )} */}
+              {!emailFromLink && (
+                <>
+                  {(oauthDataExists() || ssoExists()) && (
+                    <div className="line">
+                      <Text color="#A3A9AE" className="or-label">
+                        {t("Common:Or")}
+                      </Text>
+                    </div>
+                  )}
+
+                  {oauthDataExists() && providers && (
+                    <SocialButtonsGroup
+                      providers={providers}
+                      onClick={onSocialButtonClick}
+                      t={t}
+                      isDisabled={isLoading}
+                      {...ssoProps}
+                    />
+                  )}
+                </>
               )}
 
               {!showForm && (
@@ -694,17 +635,6 @@ const CreateUserForm = (props) => {
                   onClick={onGreetingJoin}
                 />
               )}
-
-              <MoreLoginModal
-                t={t}
-                visible={moreAuthVisible}
-                onClose={moreAuthClose}
-                providers={providers}
-                onSocialLoginClick={onSocialButtonClick}
-                ssoLabel={capabilities?.ssoLabel}
-                ssoUrl={capabilities?.ssoUrl}
-                isSignUp
-              />
             </RegisterContainer>
           </FormWrapper>
         </ConfirmContainer>
@@ -727,7 +657,6 @@ export default inject(({ settingsStore, authStore }) => {
   } = settingsStore;
   return {
     settings: passwordSettings,
-    greetingTitle: greetingSettings,
     hashSettings,
     defaultPage,
 

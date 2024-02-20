@@ -318,7 +318,7 @@ const Dark: TTheme = {
     },
 
     svg: {
-      margin: "11px 16px",
+      margin: "11px 8px",
       width: "18px",
       height: "18px",
       minWidth: "18px",

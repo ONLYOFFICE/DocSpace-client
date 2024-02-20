@@ -103,7 +103,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
     children,
     noBorder,
     scaledOptions,
-    displayType,
+    displayType = "default",
 
     textOverflow,
     showDisabledItems,

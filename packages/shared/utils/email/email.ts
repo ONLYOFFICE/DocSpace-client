@@ -3,7 +3,6 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable no-control-regex */
 import emailAddresses, { ParsedGroup, ParsedMailbox } from "email-addresses";
-import punycode from "punycode";
 
 import { ErrorKeys, ParseErrorTypes } from "../../enums";
 
@@ -90,7 +89,7 @@ export class Email {
   }
 }
 
-const getParts = (str: string) => {
+export const getParts = (str: string) => {
   const parts = [];
   const newStr = str.replace(/[\s,;]*$/, ",");
   const n = newStr.length;
@@ -206,7 +205,7 @@ const checkErrors = (
   if (
     !options.allowDomainPunycode &&
     "domain" in parsedAddress &&
-    !/^[\x00-\x7F]+$/.test(punycode.toUnicode(parsedAddress.domain))
+    /^xn--/.test(parsedAddress.domain)
   ) {
     errors.push({
       message: "Punycode domains are not supported",
@@ -220,7 +219,7 @@ const checkErrors = (
     !options.allowLocalPartPunycode &&
     "local" in parsedAddress &&
     parsedAddress.local.length > 0 &&
-    !/^[\x00-\x7F]+$/.test(punycode.toUnicode(parsedAddress.local))
+    /^xn--/.test(parsedAddress.local)
   ) {
     errors.push({
       message: "Punycode local part are not supported",
@@ -359,3 +358,4 @@ export const isEqualEmail = (email1: string, email2: string) => {
 
   return parsed1.email === parsed2.email;
 };
+

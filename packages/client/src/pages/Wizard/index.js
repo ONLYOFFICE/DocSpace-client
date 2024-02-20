@@ -14,7 +14,7 @@ import { Link } from "@docspace/shared/components/link";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Button } from "@docspace/shared/components/button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-import ErrorContainer from "@docspace/common/components/ErrorContainer";
+import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
 import { FileInput } from "@docspace/shared/components/file-input";
 
 import { Loader } from "@docspace/shared/components/loader";
@@ -29,8 +29,8 @@ import { setCookie } from "@docspace/shared/utils/cookie";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
 import { LANGUAGE } from "@docspace/shared/constants";
-import BetaBadge from "@docspace/common/components/BetaBadge";
 import { EmailSettings } from "@docspace/shared/utils";
+import BetaBadge from "../../components/BetaBadgeWrapper";
 
 import {
   Wrapper,
@@ -42,7 +42,7 @@ import {
 } from "./StyledWizard";
 import { getUserTimezone, getSelectZone } from "./timezonesHelper";
 
-import DocspaceLogo from "SRC_DIR/DocspaceLogo";
+import DocspaceLogo from "../../components/DocspaceLogoWrapper";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
 import {
   DEFAULT_SELECT_TIMEZONE,
@@ -214,33 +214,27 @@ const Wizard = (props) => {
   };
 
   const validateFields = () => {
+    let anyError = false;
     const emptyEmail = email.trim() === "";
     const emptyPassword = password.trim() === "";
-
-    console.log(emptyEmail, email);
 
     if (emptyEmail || emptyPassword) {
       emptyEmail && setHasErrorEmail(true);
       emptyPassword && setHasErrorPass(true);
+      anyError = true;
     }
 
     if (!agreeTerms) {
       setHasErrorAgree(true);
+      anyError = true;
     }
 
-    if (isLicenseRequired && !licenseUpload) {
+    if (isLicenseRequired && licenseUpload === null) {
       setHasErrorLicense(true);
+      anyError = true;
     }
 
-    if (
-      emptyEmail ||
-      emptyPassword ||
-      hasErrorEmail ||
-      hasErrorPass ||
-      !agreeTerms ||
-      (isLicenseRequired && !licenseUpload)
-    )
-      return false;
+    if (anyError || hasErrorEmail || hasErrorPass) return false;
 
     return true;
   };

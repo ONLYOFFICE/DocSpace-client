@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, useNavigate, Outlet } from "react-router-dom";
+import { useLocation, useNavigate, Outlet, useParams } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -30,6 +30,8 @@ import {
   useOperations,
   useAccounts,
   useSettings,
+  useGroups,
+  useInsideGroup,
 } from "./Hooks";
 
 const PureHome = (props) => {
@@ -110,6 +112,8 @@ const PureHome = (props) => {
 
     accountsViewAs,
     fetchPeople,
+    fetchGroups,
+    fetchGroup,
     setSelectedNode,
     onClickBack,
 
@@ -129,11 +133,15 @@ const PureHome = (props) => {
   } = props;
 
   const location = useLocation();
+  const { groupId } = useParams();
 
   const isSettingsPage =
     location.pathname.includes("settings") &&
     !location.pathname.includes("settings/plugins");
   const isAccountsPage = location.pathname.includes("/accounts");
+  const isPeopleAccounts = location.pathname.includes("accounts/people");
+  const isGroupsAccounts =
+    location.pathname.includes("accounts/groups") && !groupId;
 
   const { onDrop } = useFiles({
     t,
@@ -182,6 +190,7 @@ const PureHome = (props) => {
   useAccounts({
     t,
     isAccountsPage,
+    isPeopleAccounts,
     location,
 
     setIsLoading,
@@ -189,6 +198,27 @@ const PureHome = (props) => {
     setSelectedNode,
     fetchPeople,
     setPortalTariff,
+  });
+
+  useGroups({
+    t,
+    isAccountsPage,
+    isGroupsAccounts,
+    location,
+
+    setIsLoading,
+
+    setSelectedNode,
+    fetchGroups,
+  });
+
+  useInsideGroup({
+    t,
+    groupId,
+    location,
+    setIsLoading,
+    setPortalTariff,
+    fetchGroup,
   });
 
   useSettings({
@@ -246,6 +276,7 @@ const PureHome = (props) => {
       firstLoad,
       isLoaded: !firstLoad,
       viewAs: accountsViewAs,
+      isAccounts: isAccountsPage,
     };
 
     if (!isAccountsPage) {
@@ -261,6 +292,8 @@ const PureHome = (props) => {
 
       sectionProps.isEmptyPage = isEmptyPage;
       sectionProps.isTrashFolder = isRecycleBinFolder;
+    } else {
+      sectionProps.isAccounts = isAccountsPage;
     }
   }
 
@@ -293,11 +326,7 @@ const PureHome = (props) => {
       <SectionWrapper {...sectionProps}>
         {(!isErrorRoomNotAvailable || isAccountsPage || isSettingsPage) && (
           <Section.SectionHeader>
-            {isFrame ? (
-              showTitle && <SectionHeaderContent />
-            ) : (
-              <SectionHeaderContent />
-            )}
+            <SectionHeaderContent />
           </Section.SectionHeader>
         )}
 
@@ -323,7 +352,7 @@ const PureHome = (props) => {
             </Section.SectionFilter>
           )}
 
-        <Section.SectionBody>
+        <Section.SectionBody isAccounts={isAccountsPage}>
           <Outlet />
         </Section.SectionBody>
 
@@ -476,13 +505,10 @@ export default inject(
       getSettings,
     } = settingsStore;
 
-    const {
-      usersStore,
-
-      viewAs: accountsViewAs,
-    } = peopleStore;
+    const { usersStore, groupsStore, viewAs: accountsViewAs } = peopleStore;
 
     const { getUsersList: fetchPeople } = usersStore;
+    const { getGroups: fetchGroups, fetchGroup } = groupsStore;
 
     if (!firstLoad) {
       if (isLoading) {
@@ -574,6 +600,8 @@ export default inject(
 
       accountsViewAs,
       fetchPeople,
+      fetchGroups,
+      fetchGroup,
       setSelectedNode,
       onClickBack,
 
@@ -591,5 +619,5 @@ export default inject(
       getRooms,
       setSelectedFolder,
     };
-  }
+  },
 )(observer(Home));

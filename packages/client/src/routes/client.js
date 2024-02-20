@@ -4,9 +4,10 @@ import loadable from "@loadable/component";
 
 import PrivateRoute from "@docspace/common/components/PrivateRoute";
 import PublicRoute from "@docspace/common/components/PublicRoute";
-import ErrorBoundary from "@docspace/common/components/ErrorBoundary";
+import Error404 from "@docspace/shared/components/errors/Error404";
 
-import Error404 from "SRC_DIR/pages/Errors/404";
+import ErrorBoundary from "../components/ErrorBoundaryWrapper";
+
 import FilesView from "SRC_DIR/pages/Home/View/Files";
 import AccountsView from "SRC_DIR/pages/Home/View/Accounts";
 import SettingsView from "SRC_DIR/pages/Home/View/Settings";
@@ -25,12 +26,30 @@ const About = loadable(() => import("../pages/About"));
 const Wizard = loadable(() => import("../pages/Wizard"));
 const PreparationPortal = loadable(() => import("../pages/PreparationPortal"));
 const PortalUnavailable = loadable(() => import("../pages/PortalUnavailable"));
-const ErrorUnavailable = loadable(() => import("../pages/Errors/Unavailable"));
+const ErrorUnavailable = loadable(
+  () => import("../components/ErrorUnavailableWrapper"),
+);
 const AccessRestricted = loadable(
-  () => import("../pages/Errors/AccessRestricted")
+  () => import("@docspace/shared/components/errors/AccessRestricted"),
 );
 
-const Error401 = loadable(() => import("client/Error401"));
+const Error401 = loadable(
+  () => import("@docspace/shared/components/errors/Error401"),
+);
+
+const Error403 = loadable(
+  () => import("@docspace/shared/components/errors/Error403"),
+);
+
+const Error520 = loadable(() => import("../components/Error520Wrapper"));
+
+const ErrorAccessRestricted = loadable(
+  () => import("@docspace/shared/components/errors/AccessRestricted"),
+);
+
+const ErrorOffline = loadable(
+  () => import("@docspace/shared/components/errors/ErrorOffline"),
+);
 
 const ClientRoutes = [
   {
@@ -180,7 +199,15 @@ const ClientRoutes = [
             path: "accounts",
             element: (
               <PrivateRoute restricted withManager>
-                <Navigate to="/accounts/filter" replace />
+                <Navigate to="/accounts/people/filter" replace />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "accounts/filter",
+            element: (
+              <PrivateRoute restricted withManager>
+                <Navigate to="/accounts/people/filter" replace />
               </PrivateRoute>
             ),
           },
@@ -189,7 +216,7 @@ const ClientRoutes = [
             element: (
               <PrivateRoute restricted withManager>
                 <Navigate
-                  to="/accounts/filter"
+                  to="/accounts/people/filter"
                   state={{ openChangeOwnerDialog: true }}
                   replace
                 />
@@ -197,7 +224,47 @@ const ClientRoutes = [
             ),
           },
           {
-            path: "accounts/filter",
+            path: "accounts/people",
+            element: (
+              <PrivateRoute restricted withManager>
+                <Navigate to="/accounts/people/filter" replace />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "accounts/people/filter",
+            element: (
+              <PrivateRoute restricted withManager>
+                <AccountsView />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "accounts/groups",
+            element: (
+              <PrivateRoute restricted withManager>
+                <Navigate to="/accounts/groups/filter" replace />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "accounts/groups/filter",
+            element: (
+              <PrivateRoute restricted withManager>
+                <AccountsView />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "accounts/groups/:groupId",
+            element: (
+              <PrivateRoute restricted withManager>
+                <Navigate to="/accounts/groups/:groupId/filter" replace />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "accounts/groups/:groupId/filter",
             element: (
               <PrivateRoute restricted withManager>
                 <AccountsView />
@@ -362,11 +429,51 @@ const ClientRoutes = [
     ),
   },
   {
-    path: "/error401",
+    path: "/error/401",
     element: (
       <PrivateRoute>
         <ErrorBoundary>
           <Error401 />
+        </ErrorBoundary>
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/error/403",
+    element: (
+      <PrivateRoute>
+        <ErrorBoundary>
+          <Error403 />
+        </ErrorBoundary>
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/error/520",
+    element: (
+      <PrivateRoute>
+        <ErrorBoundary>
+          <Error520 />
+        </ErrorBoundary>
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/error/access/restricted",
+    element: (
+      <PrivateRoute>
+        <ErrorBoundary>
+          <ErrorAccessRestricted />
+        </ErrorBoundary>
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/error/offline",
+    element: (
+      <PrivateRoute>
+        <ErrorBoundary>
+          <ErrorOffline />
         </ErrorBoundary>
       </PrivateRoute>
     ),

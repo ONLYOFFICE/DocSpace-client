@@ -100,18 +100,6 @@ export const onItemClick = (e) => {
   // router.navigate(link);
 };
 
-export const getPasswordErrorMessage = (t, settings) => {
-  return `${t("Common:PasswordMinimumLength")} ${
-    settings ? settings?.minLength : 8
-  } ${settings?.digits ? t("Common:PasswordLimitDigits") : ""} ${
-    settings?.upperCase ? t("Common:PasswordLimitUpperCase") : ""
-  } ${
-    settings?.specSymbols
-      ? `${t("Common:PasswordLimitSpecialSymbols")} (!@#$%^&*)`
-      : ""
-  }`;
-};
-
 export const getCategoryType = (location) => {
   let categoryType = CategoryType.Shared;
   const { pathname } = location;
@@ -137,7 +125,7 @@ export const getCategoryType = (location) => {
     categoryType = CategoryType.Trash;
   } else if (pathname.startsWith("/settings")) {
     categoryType = CategoryType.Settings;
-  } else if (pathname.startsWith("/accounts/filter")) {
+  } else if (pathname.startsWith("/accounts")) {
     categoryType = CategoryType.Accounts;
   }
 
@@ -198,7 +186,7 @@ export const getCategoryUrl = (categoryType, folderId = null) => {
       return "/rooms/share";
 
     case CategoryType.Accounts:
-      return "/accounts/filter";
+      return "/accounts";
 
     case CategoryType.Settings:
       return "/settings/personal";

@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import ErrorContainer from "@docspace/common/components/ErrorContainer";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
 
 const Error520 = ({ match }) => {
   const { t } = useTranslation(["Common"]);

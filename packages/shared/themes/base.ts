@@ -1058,10 +1058,12 @@ export const getBaseTheme = () => {
       defaultImage: `url("${AvatarBaseReactSvgUrl}")`,
       initialsContainer: {
         color: white,
+        groupColor: black,
         left: "50%",
         top: "50%",
         transform: "translate(-50%, -50%)",
         fontWeight: "600",
+        groupFontWeight: "700",
 
         fontSize: {
           min: "12px",
@@ -1070,6 +1072,7 @@ export const getBaseTheme = () => {
           medium: "20px",
           big: "34px",
           max: "72px",
+          groupBig: "23px",
         },
       },
 
@@ -1106,6 +1109,7 @@ export const getBaseTheme = () => {
       imageContainer: {
         backgroundImage: blueMain,
         background: grayMid,
+        groupBackground: grayLightMid,
         borderRadius: "50%",
         height: "100%",
 
@@ -3226,6 +3230,10 @@ export const getBaseTheme = () => {
         headerBorder: "1px solid #d0d5da",
         scopeDesc: "#a3a9ae",
       },
+
+    sdkPresets: {
+      borderColor: "#d0d5da",
+      secondaryColor: "#657077",
     },
   };
 };

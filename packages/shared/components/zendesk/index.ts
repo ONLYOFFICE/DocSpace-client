@@ -1,19 +1,6 @@
 import { useEffect, useCallback } from "react";
 
-let waitingChanges: string[][] = [];
-
-const canUseDOM = (): boolean =>
-  typeof window?.document?.createElement !== "undefined";
-
-export const ZendeskAPI: Function = (...args: string[]) => {
-  if (canUseDOM() && window?.zE) {
-    // @ts-expect-error its ok
-    window?.zE?.apply(null, args);
-  } else {
-    // console.warn("Zendesk is not initialized yet");
-    waitingChanges.push(args);
-  }
-};
+import { zendeskAPI } from "./Zendesk.utils";
 
 interface Props {
   zendeskKey: string;
@@ -24,9 +11,10 @@ interface Props {
 
 const Zendesk = ({ zendeskKey, defer, onLoaded, config }: Props) => {
   const onScriptLoaded = useCallback(() => {
+    const waitingChanges = zendeskAPI.getChanges();
     if (waitingChanges.length > 0) {
-      waitingChanges.forEach((v) => ZendeskAPI(...v));
-      waitingChanges = [];
+      waitingChanges.forEach((v) => zendeskAPI.addChanges(...v));
+      zendeskAPI.clearChanges();
     }
 
     if (typeof onLoaded === "function") {
@@ -51,14 +39,14 @@ const Zendesk = ({ zendeskKey, defer, onLoaded, config }: Props) => {
   );
 
   useEffect(() => {
-    if (canUseDOM() && !window?.zE) {
+    if (typeof window?.document?.createElement !== "undefined" && !window?.zE) {
       insertScript(zendeskKey, defer);
 
       window.zESettings = { ...(config || {}) };
     }
 
     return () => {
-      if (canUseDOM() && window.zE) {
+      if (typeof window?.document?.createElement !== "undefined" && window.zE) {
         // @ts-expect-error its ok
         delete window.zE;
         // @ts-expect-error its ok
@@ -70,4 +58,4 @@ const Zendesk = ({ zendeskKey, defer, onLoaded, config }: Props) => {
   return null;
 };
 
-export default Zendesk;
+export { Zendesk };

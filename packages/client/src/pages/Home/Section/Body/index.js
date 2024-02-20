@@ -42,7 +42,7 @@ const SectionBodyContent = (props) => {
     filesList,
     uploaded,
     onClickBack,
-
+    isEmptyPage,
     movingInProgress,
     currentDeviceType,
   } = props;
@@ -53,7 +53,7 @@ const SectionBodyContent = (props) => {
 
   useEffect(() => {
     const customScrollElm = document.querySelector(
-      "#customScrollBar > .scroll-wrapper > .scroller"
+      "#customScrollBar > .scroll-wrapper > .scroller",
     );
 
     if (isTablet() || isMobile() || currentDeviceType !== DeviceType.desktop) {
@@ -104,7 +104,7 @@ const SectionBodyContent = (props) => {
         const bodyScroll =
           isMobile() || currentDeviceType === DeviceType.mobile
             ? document.querySelector(
-                "#customScrollBar > .scroll-wrapper > .scroller"
+                "#customScrollBar > .scroll-wrapper > .scroller",
               )
             : document.querySelector(".section-scroll");
 
@@ -262,14 +262,17 @@ const SectionBodyContent = (props) => {
 
   if (isEmptyFilesList && movingInProgress) return <></>;
 
-  const isEmptyPage = isEmptyFilesList;
+  const showEmptyPage = isEmptyFilesList;
 
   return (
     <Consumer>
       {(context) =>
-        isEmptyPage ? (
+        showEmptyPage ? (
           <>
-            <EmptyContainer sectionWidth={context.sectionWidth} />
+            <EmptyContainer
+              sectionWidth={context.sectionWidth}
+              isEmptyPage={isEmptyPage}
+            />
           </>
         ) : viewAs === "tile" ? (
           <>
@@ -318,7 +321,7 @@ export default inject(
       scrollToItem,
       setScrollToItem,
       filesList,
-
+      isEmptyPage,
       movingInProgress,
     } = filesStore;
     return {
@@ -346,10 +349,11 @@ export default inject(
       onClickBack: filesActionsStore.onClickBack,
       movingInProgress,
       currentDeviceType: settingsStore.currentDeviceType,
+      isEmptyPage,
     };
-  }
+  },
 )(
   withTranslation(["Files", "Common", "Translations"])(
-    withHotkeys(withLoader(observer(SectionBodyContent))())
-  )
+    withHotkeys(withLoader(observer(SectionBodyContent))()),
+  ),
 );

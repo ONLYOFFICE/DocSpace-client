@@ -1,7 +1,8 @@
 ﻿import SsoReactSvgUrl from "PUBLIC_DIR/images/sso.react.svg?url";
+import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
+
 import React, { useEffect, useState, useCallback } from "react";
 import { withTranslation, Trans } from "react-i18next";
-import { createUser, signupOAuth } from "@docspace/shared/api/people";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 import { useSearchParams } from "react-router-dom";
@@ -14,7 +15,15 @@ import { PasswordInput } from "@docspace/shared/components/password-input";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { toastr } from "@docspace/shared/components/toast";
 import { SocialButton } from "@docspace/shared/components/social-button";
-import { getUserFromConfirm } from "@docspace/shared/api/people";
+import MoreLoginModal from "@docspace/shared/components/more-login-modal";
+import { EmailInput } from "@docspace/shared/components/email-input";
+import { FormWrapper } from "@docspace/shared/components/form-wrapper";
+
+import {
+  getUserFromConfirm,
+  createUser,
+  signupOAuth,
+} from "@docspace/shared/api/people";
 import {
   createPasswordHash,
   getProviderTranslation,
@@ -23,13 +32,12 @@ import {
 } from "@docspace/shared/utils/common";
 import { login } from "@docspace/shared/utils/loginUtils";
 import { PROVIDERS_DATA } from "@docspace/shared/constants";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+
+import { getPasswordErrorMessage } from "@docspace/shared/utils/getPasswordErrorMessage";
+import DocspaceLogo from "SRC_DIR/components/DocspaceLogoWrapper";
 import withLoader from "../withLoader";
-import MoreLoginModal from "@docspace/common/components/MoreLoginModal";
-import { EmailInput } from "@docspace/shared/components/email-input";
-import { getPasswordErrorMessage } from "../../../helpers/utils";
-import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-import DocspaceLogo from "../../../DocspaceLogo";
-import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
+
 import { StyledPage, StyledContent } from "./StyledConfirm";
 import {
   ButtonsWrapper,
@@ -37,7 +45,6 @@ import {
   GreetingContainer,
   RegisterContainer,
 } from "./StyledCreateUser";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 const CreateUserForm = (props) => {
   const {
@@ -237,7 +244,7 @@ const CreateUserForm = (props) => {
     const data = Object.assign(
       { fromInviteLink: fromInviteLink },
       registerData,
-      loginData
+      loginData,
     );
 
     await createUser(data, key);
@@ -317,7 +324,7 @@ const CreateUserForm = (props) => {
         : window.open(
             url,
             "login",
-            "width=800,height=500,status=no,toolbar=no,menubar=no,resizable=yes,scrollbars=no"
+            "width=800,height=500,status=no,toolbar=no,menubar=no,resizable=yes,scrollbars=no",
           );
 
       getOAuthToken(tokenGetterWin).then((code) => {
@@ -326,7 +333,7 @@ const CreateUserForm = (props) => {
             auth: providerName,
             mode: "popup",
             callback: "authCallback",
-          })
+          }),
         );
 
         tokenGetterWin.location.href = getLoginLink(token, code);
@@ -417,7 +424,7 @@ const CreateUserForm = (props) => {
 
   const onSignIn = () => {
     return window.location.replace(
-      combineUrl(window.DocSpaceConfig?.proxy?.url, "/login")
+      combineUrl(window.DocSpaceConfig?.proxy?.url, "/login"),
     );
   };
 
@@ -621,7 +628,7 @@ const CreateUserForm = (props) => {
                       labelVisible={false}
                       hasError={isPasswordErrorShow && !passwordValid}
                       errorMessage={`${t(
-                        "Common:PasswordLimitMessage"
+                        "Common:PasswordLimitMessage",
                       )}: ${getPasswordErrorMessage(t, settings)}`}
                     >
                       <PasswordInput
@@ -645,19 +652,19 @@ const CreateUserForm = (props) => {
                         onKeyDown={onKeyPress}
                         onValidateInput={onValidatePassword}
                         tooltipPasswordTitle={`${t(
-                          "Common:PasswordLimitMessage"
+                          "Common:PasswordLimitMessage",
                         )}:`}
                         tooltipPasswordLength={`${t(
-                          "Common:PasswordMinimumLength"
+                          "Common:PasswordMinimumLength",
                         )}: ${settings ? settings.minLength : 8}`}
                         tooltipPasswordDigits={`${t(
-                          "Common:PasswordLimitDigits"
+                          "Common:PasswordLimitDigits",
                         )}`}
                         tooltipPasswordCapital={`${t(
-                          "Common:PasswordLimitUpperCase"
+                          "Common:PasswordLimitUpperCase",
                         )}`}
                         tooltipPasswordSpecial={`${t(
-                          "Common:PasswordLimitSpecialSymbols"
+                          "Common:PasswordLimitSpecialSymbols",
                         )}`}
                         generatePasswordTitle={t("Wizard:GeneratePassword")}
                       />
@@ -759,6 +766,6 @@ export default inject(({ settingsStore, authStore }) => {
   };
 })(
   withTranslation(["Confirm", "Common", "Wizard"])(
-    withLoader(observer(CreateUserForm))
-  )
+    withLoader(observer(CreateUserForm)),
+  ),
 );

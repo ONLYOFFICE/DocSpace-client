@@ -151,6 +151,7 @@ const peopleStore = new PeopleStore(
   userStore,
   tfaStore,
   settingsStore,
+  clientLoadingStore,
 );
 
 const uploadDataStore = new UploadDataStore(
@@ -180,6 +181,7 @@ const filesActionsStore = new FilesActionsStore(
   infoPanelStore,
   userStore,
   currentTariffStatusStore,
+  peopleStore,
 );
 
 const contextOptionsStore = new ContextOptionsStore(
@@ -228,7 +230,7 @@ const tableStore = new TableStore(
   authStore,
   treeFoldersStore,
   userStore,
-  settingsStore
+  settingsStore,
 );
 
 infoPanelStore.filesSettingsStore = filesSettingsStore;

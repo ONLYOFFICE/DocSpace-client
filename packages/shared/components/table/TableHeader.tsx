@@ -1356,7 +1356,7 @@ class TableHeader extends React.Component<
             let overWidth = 0;
 
             tableInfoPanelContainer.forEach((item, index) => {
-              if (index === 0) {
+              if (index === 0 && enabledColumnsCount > 0) {
                 gridTemplateColumns.push(item);
               } else {
                 const column = document.getElementById(`column_${index}`);

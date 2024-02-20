@@ -13,7 +13,7 @@ import {
 import withLoader from "../withLoader";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { toastr } from "@docspace/shared/components/toast";
-import DocspaceLogo from "../../../DocspaceLogo";
+import DocspaceLogo from "../../../components/DocspaceLogoWrapper";
 import { ownerChange } from "@docspace/shared/api/settings";
 import { getUserFromConfirm } from "@docspace/shared/api/people";
 

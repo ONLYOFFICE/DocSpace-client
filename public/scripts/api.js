@@ -23,9 +23,19 @@
     showFilter: false,
     destroyText: "",
     viewAs: "row", //TODO: ["row", "table", "tile"]
-    viewTableColumns: "Name,Size,Type",
+    viewTableColumns: "Name,Type,Tags",
     checkCSP: true,
+    disableActionButton: false,
+    showSettings: false,
+    withSearch: true,
+    withBreadCrumbs: true,
+    withSubtitle: true,
+    filterParam: "ALL",
+    buttonColor: "#5299E0",
+    infoPanelVisible: true,
     filter: {
+      // filterType: 0,
+      // type: 0,
       count: 100,
       page: 1,
       sortorder: "descending", //TODO: ["descending", "ascending"]
@@ -46,8 +56,13 @@
       "mode",
     ],
     events: {
-      onSelectCallback: null,
-      onCloseCallback: null,
+      onSelectCallback: (items) => {
+        alert(items[0].label);
+        window.close();
+      },
+      onCloseCallback: () => {
+        window.close();
+      },
       onAppReady: null,
       onAppError: (e) => console.log("onAppError", e),
       onEditorCloseCallback: null,
@@ -144,6 +159,84 @@
       container.setAttribute("id", config.frameId + "-loader");
 
       return container;
+    };
+
+    #createButtonView = (config) => {
+      const button = document.createElement("button");
+      button.style.backgroundColor = config?.buttonColor || "#5299E0";
+      button.style.color = "#fff";
+      button.style.padding = "0 28px";
+      button.style.borderRadius = "3px";
+      button.style.border = `1px solid #5299E0`;
+      button.style.height = "32px";
+      button.style.fontWeight = "600";
+      button.style.fontFamily = "Open Sans";
+      button.style.cursor = "pointer";
+      button.style.display = "flex";
+      button.style.alignItems = "center";
+      button.style.gap = "10px";
+      button.style.userSelect = "none";
+      button.style.borderColor = config?.buttonColor || "#5299E0";
+
+      const logoSrc = `${config.src}/static/images/light_small_logo.react.svg`;
+
+      button.innerHTML = `${config?.buttonWithLogo ? `<img width="16px" heigth="16px" src="${logoSrc}" />` : ""}${config?.buttonText || "Select to DocSpace"}`;
+
+      const scriptUrl = `${window.location.origin}/static/scripts/api.js`;
+
+      button.addEventListener("click", () => {
+        const winHtml = `<!DOCTYPE html>
+          <html>
+              <head>
+                  <meta charset="UTF-8">
+                  <script src="${scriptUrl}"></script>
+                  <title>DocSpace</title>
+
+                  <style>
+                    #${config.frameId}-container {
+                      height: 98vh !important;
+                      width: 98vw !important;
+                    }
+
+                    html, body {
+                        height: 100%;
+                        width: 100%;
+                    }
+
+                    body {
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    }
+                </style>
+              </head>
+              <body style="margin:0;">
+                  <div id=${config.frameId}></div>
+                  <script id="integration">
+                    const config = {...${JSON.stringify(config, function (key, val) {
+                      return typeof val === "function" ? "" + val : val;
+                    })}, width: "100%", height: "100%", events: {
+                      onSelectCallback: eval(${config.events.onSelectCallback + ""}),
+                      onCloseCallback: eval(${config.events.onCloseCallback + ""}),
+                      onAppReady: eval(${config.events.onAppReady + ""}),
+                      onAppError: eval(${config.events.onAppError + ""}),
+                      onEditorCloseCallback: eval(${config.events.onEditorCloseCallback + ""}),
+                      onAuthSuccess: eval(${config.events.onAuthSuccess + ""}),
+                      onSignOut: eval(${config.events.onSignOut + ""}),
+                    }}
+                    window.DocSpace.SDK.initFrame(config)
+                  </script>
+              </body>
+          </html>`;
+
+        const winUrl = URL.createObjectURL(new Blob([winHtml], { type: "text/html" }));
+
+        window.open(winUrl, "_blank", `width=610,height=778`);
+      });
+
+      button.setAttribute("id", config.frameId + "-container");
+
+      return button;
     };
 
     #createIframe = (config) => {
@@ -366,6 +459,39 @@
       this.#sendMessage(message);
     };
 
+    initButton(config) {
+      const configFull = { ...defaultConfig, ...config };
+      this.config = { ...this.config, ...configFull, events: { ...defaultConfig.events } };
+
+      const target = document.getElementById(this.config.frameId);
+
+      let button = null;
+
+      if (target) {
+        button = this.#createButtonView(this.config);
+
+        this.#classNames = target.className;
+
+        const isSelfReplace = target.parentNode.isEqualNode(
+          document.getElementById(this.config.frameId + "-container"),
+        );
+
+        target && isSelfReplace
+          ? target.parentNode.replaceWith(button)
+          : target.replaceWith(button);
+
+        window.addEventListener("message", this.#onMessage, false);
+
+        this.#isConnected = true;
+      }
+
+      window.DocSpace.SDK.frames = window.DocSpace.SDK.frames || [];
+
+      window.DocSpace.SDK.frames[this.config.frameId] = this;
+
+      return button;
+    }
+
     initFrame(config) {
       const configFull = { ...defaultConfig, ...config };
       this.config = { ...this.config, ...configFull };
@@ -391,6 +517,7 @@
 
         const renderContainer = document.createElement("div");
         renderContainer.id = this.config.frameId + "-container";
+        renderContainer.classList = ["frame-container"];
         renderContainer.style.position = "relative";
         renderContainer.style.width = this.config.width;
         renderContainer.style.height = this.config.height || "100%";
@@ -476,19 +603,14 @@
       target.innerHTML = this.config.destroyText;
       target.className = this.#classNames;
 
-      const targetFrame = document.getElementById(
-        this.config.frameId + "-container"
-      );
+      const targetFrame = document.getElementById(this.config.frameId + "-container");
 
-      if (targetFrame) {
-        window.removeEventListener("message", this.#onMessage, false);
-        this.#isConnected = false;
+      window.removeEventListener("message", this.#onMessage, false);
+      this.#isConnected = false;
 
-        delete window.DocSpace.SDK.frames[this.config.frameId];
+      delete window.DocSpace.SDK.frames[this.config.frameId];
 
-        targetFrame.parentNode &&
-          targetFrame.parentNode.replaceChild(target, targetFrame);
-      }
+      targetFrame?.parentNode?.replaceChild(target, targetFrame);
 
       this.config = {};
     }
@@ -612,6 +734,8 @@
   window.DocSpace.SDK = new DocSpace(config);
 
   if (config.init) {
-    window.DocSpace.SDK.initFrame(config);
+    config?.isButtonMode
+      ? window.DocSpace.SDK.initButton(config)
+      : window.DocSpace.SDK.initFrame(config);
   }
 })();

@@ -91,7 +91,12 @@ class FilesStore {
 
   filter = FilesFilter.getDefault();
   roomsFilter = RoomsFilter.getDefault();
-  membersFilter = { page: 0, pageCount: 100, total: 0, startIndex: 0 };
+  membersFilter = {
+    page: 0,
+    pageCount: 100,
+    total: 0,
+    startIndex: 0,
+  };
 
   categoryType = getCategoryType(window.location);
 
@@ -1940,6 +1945,7 @@ class FilesStore {
         // "unsubscribe",
         "delete",
         "remove-from-recent",
+        "copy-general-link",
       ];
 
       if (!canDownload) {
@@ -2534,7 +2540,12 @@ class FilesStore {
   }
 
   getDefaultMembersFilter = () => {
-    return { page: 0, pageCount: 100, total: 0, startIndex: 0 };
+    return {
+      page: 0,
+      pageCount: 100,
+      total: 0,
+      startIndex: 0,
+    };
   };
 
   setRoomMembersFilter = (roomMembersFilter) => {
@@ -2557,6 +2568,7 @@ class FilesStore {
       startIndex: newFilter.startIndex,
       count: newFilter.pageCount,
       filterType: 0, // 0 (Members)
+      filterValue: this.infoPanelStore.searchValue,
     };
 
     return api.rooms.getRoomMembers(id, membersFilters).then((res) => {
@@ -3059,6 +3071,7 @@ class FilesStore {
         mute,
         inRoom,
         requestToken,
+        lastOpened,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3225,6 +3238,7 @@ class FilesStore {
         isForm,
         canCopyPublicLink,
         requestToken,
+        lastOpened,
       };
     });
 

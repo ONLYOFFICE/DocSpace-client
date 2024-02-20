@@ -1,9 +1,10 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-
+import { useNavigate } from "react-router-dom";
 import withLoader from "@docspace/client/src/HOCs/withLoader";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
+import { Link } from "@docspace/shared/components/link";
 
 import { Text } from "@docspace/shared/components/text";
 import { ComboBox } from "@docspace/shared/components/combobox";
@@ -22,7 +23,11 @@ const Accounts = (props) => {
     canChangeUserType,
     setInfoPanelSelection,
     getPeopleListItem,
+    setPeopleSelection,
+    setPeopleBufferSelection,
   } = props;
+
+  const navigate = useNavigate();
 
   const [statusLabel, setStatusLabel] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
@@ -117,6 +122,12 @@ const Accounts = (props) => {
     [infoPanelSelection, changeUserType, t],
   );
 
+  const onGroupClick = (groupId) => {
+    navigate(`/accounts/groups/${groupId}/filter`);
+    setPeopleSelection([]);
+    setPeopleBufferSelection(null);
+  };
+
   const typeLabel = React.useCallback(() => getUserTypeLabel(role, t), [])();
 
   const renderTypeData = () => {
@@ -206,10 +217,40 @@ const Accounts = (props) => {
           >
             {statusText}
           </Text>
+
           {/* <Text className={"info_field"} noSelect title={t("Common:Room")}>
             {t("Common:Room")}
           </Text>
           <div>Rooms list</div> */}
+
+          {infoPanelSelection?.groups?.length && (
+            <>
+              <Text
+                className={"info_field info_field_groups"}
+                noSelect
+                title={t("Common:Group")}
+              >
+                {t("Common:Group")}
+              </Text>
+
+              <div className={"info_groups"}>
+                {infoPanelSelection.groups.map((group) => (
+                  <Link
+                    key={group.id}
+                    className={"info_data first-row info_group"}
+                    isHovered={true}
+                    fontSize={"13px"}
+                    lineHeight={"20px"}
+                    fontWeight={600}
+                    title={group.name}
+                    onClick={() => onGroupClick(group.id)}
+                  >
+                    {group.name}
+                  </Link>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </StyledAccountContent>
     </>
@@ -224,6 +265,11 @@ export default inject(
 
     const { setInfoPanelSelection } = infoPanelStore;
 
+    const {
+      setSelection: setPeopleSelection,
+      setBufferSelection: setPeopleBufferSelection,
+    } = peopleStore.selectionStore;
+
     return {
       isOwner,
       isAdmin,
@@ -233,6 +279,8 @@ export default inject(
       loading: usersStore.operationRunning,
       getPeopleListItem: usersStore.getPeopleListItem,
       setInfoPanelSelection,
+      setPeopleSelection,
+      setPeopleBufferSelection,
     };
   },
 )(

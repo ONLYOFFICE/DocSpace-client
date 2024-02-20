@@ -270,20 +270,6 @@ const StyledTableRow = styled(TableRow)`
         }
       }
 
-      .table-container_cell:not(
-          .table-container_element-wrapper,
-          .table-container_file-name-cell
-        ) {
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                padding-left: ${(props) => props.hideColumns && `0px`};
-              `
-            : css`
-                padding-right: ${(props) => props.hideColumns && `0px`};
-              `}
-      }
-
       .table-container_file-name-cell {
         ${(props) =>
           props.theme.interfaceDirection === "rtl"

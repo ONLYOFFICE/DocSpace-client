@@ -16,22 +16,25 @@ const DetailsLoader = () => {
       </StyledDetailsSubtitleLoader>
 
       <StyledDetailsProperty>
-        {propertyDetailsDimensions.map((property) => [
-          <RectangleSkeleton
-            key={property.propertyTitle}
-            className="property-title"
-            width={property.propertyTitle}
-            height="20px"
-            borderRadius="3px"
-          />,
-          <RectangleSkeleton
-            key={property.propertyContent}
-            className="property-content"
-            width={property.propertyContent}
-            height="20px"
-            borderRadius="3px"
-          />,
-        ])}
+        {propertyDetailsDimensions.map((property) => (
+          <>
+            <RectangleSkeleton
+              key={property.propertyTitle}
+              className="property-title"
+              width={property.propertyTitle}
+              height="20px"
+              borderRadius="3px"
+            />
+            <RectangleSkeleton
+              key={property.propertyContent}
+              className="property-content"
+              width={property.propertyContent}
+              height="20px"
+              borderRadius="3px"
+            />
+            ,
+          </>
+        ))}
       </StyledDetailsProperty>
     </StyledDetailsLoader>
   );

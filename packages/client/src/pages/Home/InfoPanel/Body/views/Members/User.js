@@ -8,7 +8,7 @@ import DefaultUserPhotoUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82
 import { toastr } from "@docspace/shared/components/toast";
 import { isMobileOnly, isMobile } from "react-device-detect";
 import { decode } from "he";
-import { filterUserRoleOptions } from "SRC_DIR/helpers";
+import { filterGroupRoleOptions, filterUserRoleOptions } from "SRC_DIR/helpers";
 
 import { getUserRole, getUserTypeLabel } from "@docspace/shared/utils/common";
 import { Text } from "@docspace/shared/components/text";
@@ -16,6 +16,7 @@ import EmailPlusReactSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
 import { StyledUserTypeHeader } from "../../styles/members";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Tooltip } from "@docspace/shared/components/tooltip";
+import { Link } from "@docspace/shared/components/link";
 
 const User = ({
   t,
@@ -33,16 +34,18 @@ const User = ({
   showTooltip,
   infoPanelMembers,
   setInfoPanelMembers,
+  searchValue,
   resendEmailInvitations,
 }) => {
   if (!infoPanelSelection) return null;
-  if (!user.displayName && !user.email) return null;
+  if (!user.displayName && !user.name && !user.email) return null;
 
   const security = infoPanelSelection ? infoPanelSelection.security : {};
   const isExpect = user.isExpect;
   const canInviteUserInRoomAbility = security?.EditAccess;
   const showInviteIcon = canInviteUserInRoomAbility && isExpect;
   const canChangeUserRole = user.canEditAccess;
+  const withoutTitles = !!searchValue;
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -52,7 +55,9 @@ const User = ({
   );
 
   const userRole = membersHelper.getOptionByUserAccess(user.access, user);
-  const userRoleOptions = filterUserRoleOptions(fullRoomRoleOptions, user);
+  const userRoleOptions = user.isGroup
+    ? filterGroupRoleOptions(fullRoomRoleOptions)
+    : filterUserRoleOptions(fullRoomRoleOptions, user);
 
   const onRepeatInvitation = async () => {
     resendEmailInvitations(infoPanelSelection.id, true)
@@ -82,22 +87,30 @@ const User = ({
             expected: infoPanelMembers.expected?.filter(
               (m) => m.id !== user.id,
             ),
+            groups: infoPanelMembers.groups?.filter((m) => m.id !== user.id),
           };
 
           const roomId = infoPanelSelection.id;
-          const newUsers = newMembers.users.length > 1 ? newMembers?.users : [];
+          const minItemsCount = withoutTitles ? 0 : 1;
+          const newUsers =
+            newMembers.users.length > minItemsCount ? newMembers?.users : [];
           const newAdministrators =
-            newMembers.administrators.length > 1
+            newMembers.administrators.length > minItemsCount
               ? newMembers?.administrators
               : [];
           const newExpected =
-            newMembers.expected.length > 1 ? newMembers?.expected : [];
+            newMembers.expected.length > minItemsCount
+              ? newMembers?.expected
+              : [];
+          const newGroups =
+            newMembers.groups.length > minItemsCount ? newMembers?.groups : [];
 
           setInfoPanelMembers({
             roomId,
             users: newUsers,
             administrators: newAdministrators,
             expected: newExpected,
+            groups: newGroups,
           });
 
           newMembersFilter.total -= 1;
@@ -116,6 +129,7 @@ const User = ({
               ],
               users: [...newUsers, ...fetchedMembers.users],
               expected: [...newExpected, ...fetchedMembers.expected],
+              groups: [...newGroups, ...fetchedMembers.groups],
             };
 
             setInfoPanelMembers({
@@ -135,6 +149,9 @@ const User = ({
               m.id === user.id ? { ...m, access: option.access } : m,
             ),
             expected: infoPanelMembers.expected?.map((m) =>
+              m.id === user.id ? { ...m, access: option.access } : m,
+            ),
+            groups: infoPanelMembers.groups?.map((m) =>
               m.id === user.id ? { ...m, access: option.access } : m,
             ),
           });
@@ -182,8 +199,22 @@ const User = ({
   const onToggle = (e, isOpen) => {
     // setIsScrollLocked(isOpen);
   };
-  const role = getUserRole(user);
-  const typeLabel = getUserTypeLabel(role, t);
+  const getUserType = (item) => {
+    if (item.isOwner) return "owner";
+    if (item.isAdmin) return "admin";
+    if (item.isRoomAdmin) return "manager";
+    if (item.isCollaborator) return "collaborator";
+    return "user";
+  };
+
+  const type = getUserType(user);
+  const role = getUserRole(user, userRole?.type);
+
+  const typeLabel =
+    (type === "user" && userRole?.type !== type) ||
+    (userRole?.type === "manager" && type !== "admin")
+      ? getUserTypeLabel(userRole?.type, t)
+      : getUserTypeLabel(type, t);
 
   const getTooltipContent = () => (
     <div>
@@ -204,7 +235,15 @@ const User = ({
     </div>
   );
 
-  const userAvatar = user.hasAvatar ? user.avatar : DefaultUserPhotoUrl;
+  const onOpenGroup = () => {
+    console.log("Open group: ", user.name);
+  };
+
+  const userAvatar = user.hasAvatar
+    ? user.avatar
+    : user.isGroup
+      ? ""
+      : DefaultUserPhotoUrl;
 
   const withTooltip = user.isOwner || user.isAdmin;
 
@@ -236,16 +275,23 @@ const User = ({
         className="avatar"
         size="min"
         source={isExpect ? AtReactSvgUrl : userAvatar || ""}
-        userName={isExpect ? "" : user.displayName}
+        userName={isExpect ? "" : user.displayName || user.name}
         withTooltip={withTooltip}
         tooltipContent={tooltipContent}
         hideRoleIcon={!withTooltip}
+        isGroup={user.isGroup}
       />
       <div className="user_body-wrapper">
         <div className="name-wrapper">
-          <Text className="name" data-tooltip-id={uniqueTooltipId}>
-            {decode(user.displayName)}
-          </Text>
+          {user.isGroup ? (
+            <Link className="name" type="action" onClick={onOpenGroup}>
+              {decode(user.name)}
+            </Link>
+          ) : (
+            <Text className="name" data-tooltip-id={uniqueTooltipId}>
+              {decode(user.displayName)}
+            </Text>
+          )}
           {/* TODO: uncomment when information about online statuses appears */}
           {/* {showTooltip && (
             <Tooltip
@@ -259,19 +305,21 @@ const User = ({
             <div className="me-label">&nbsp;{`(${t("Common:MeLabel")})`}</div>
           )}
         </div>
-        <div className="role-email" style={{ display: "flex" }}>
-          <Text
-            className="label"
-            fontWeight={400}
-            fontSize="12px"
-            noSelect
-            truncate
-            color="#A3A9AE"
-            dir="auto"
-          >
-            {`${typeLabel} | ${user.email}`}
-          </Text>
-        </div>
+        {!user.isGroup && (
+          <div className="role-email" style={{ display: "flex" }}>
+            <Text
+              className="label"
+              fontWeight={400}
+              fontSize="12px"
+              noSelect
+              truncate
+              color="#A3A9AE"
+              dir="auto"
+            >
+              {`${typeLabel} | ${user.email}`}
+            </Text>
+          </div>
+        )}
       </div>
 
       {userRole && userRoleOptions && (
@@ -312,6 +360,7 @@ export default inject(({ infoPanelStore, filesStore, peopleStore }) => {
     infoPanelMembers,
     setInfoPanelMembers,
     fetchMembers,
+    searchValue,
   } = infoPanelStore;
   const {
     updateRoomMemberRole,
@@ -333,5 +382,6 @@ export default inject(({ infoPanelStore, filesStore, peopleStore }) => {
     infoPanelMembers,
     setInfoPanelMembers,
     fetchMembers,
+    searchValue,
   };
 })(observer(User));

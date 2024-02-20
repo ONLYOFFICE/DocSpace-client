@@ -63,6 +63,7 @@ export type TSelectorItem = {
 };
 
 export type TToggleButtonItem = {
+  group: FilterGroups;
   key: string;
   label?: string;
   isSelected?: boolean;
@@ -70,6 +71,7 @@ export type TToggleButtonItem = {
 };
 
 export type TWithOptionItem = {
+  group: FilterGroups;
   options: TOption[];
   withOptions?: boolean;
   id?: string;
@@ -78,6 +80,7 @@ export type TWithOptionItem = {
 };
 
 export type TCheckboxItem = {
+  group: FilterGroups;
   key: string;
   id: string;
   label?: string;
@@ -146,6 +149,9 @@ export interface FilterBlockProps {
   userId: string;
   isRooms: boolean;
   isAccounts: boolean;
+  isPeopleAccounts: boolean;
+  isGroupsAccounts: boolean;
+  isInsideGroup: boolean;
 }
 
 export interface FilterButtonProps {
@@ -156,6 +162,9 @@ export interface FilterButtonProps {
   selectorLabel: string;
   isRooms: boolean;
   isAccounts: boolean;
+  isPeopleAccounts: boolean;
+  isGroupsAccounts: boolean;
+  isInsideGroup: boolean;
   id: string;
   title: string;
   userId: string;
@@ -192,6 +201,9 @@ export interface FilterProps {
 
   isRooms: boolean;
   isAccounts: boolean;
+  isPeopleAccounts: boolean;
+  isGroupsAccounts: boolean;
+  isInsideGroup: boolean;
   filterTitle: string;
   sortByTitle: string;
 
@@ -202,5 +214,4 @@ export interface FilterProps {
   onClearFilter: () => void;
   currentDeviceType: DeviceType;
   userId: string;
-  isRecentTab: boolean;
 }

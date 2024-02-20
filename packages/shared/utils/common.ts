@@ -217,6 +217,7 @@ export const getUserRole = (user: TUser) => {
   // TODO: Need refactoring
   if (user.isVisitor) return "user";
   if (user.isCollaborator) return "collaborator";
+  if (user.isRoomAdmin) return "manager";
 
   return "user";
 };
@@ -747,7 +748,11 @@ export const toUrlParams = (
       }
     } else if (typeof item === "object") {
       str += `${key}=${encodeURIComponent(JSON.stringify(item))}`;
-    } else if (typeof item === "string" || typeof item === "number") {
+    } else if (
+      typeof item === "string" ||
+      typeof item === "number" ||
+      typeof item === "boolean"
+    ) {
       str += `${key}=${encodeURIComponent(item)}`;
     }
   });

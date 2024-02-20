@@ -4,7 +4,6 @@ import PeopleIcon from "PUBLIC_DIR/images/people.react.svg?url";
 import CopyIcon from "PUBLIC_DIR/images/copy.react.svg?url";
 
 import { useTranslation } from "react-i18next";
-import { isMobileOnly } from "react-device-detect";
 import copy from "copy-to-clipboard";
 
 import { Avatar } from "@docspace/shared/components/avatar";
@@ -95,7 +94,6 @@ const LinkRow = ({
                   showDisabledItems={true}
                   size="content"
                   fillIcon={false}
-                  withBlur={isMobileOnly}
                   modernView={true}
                   isDisabled={isExpiredLink || isLoaded}
                 />
@@ -123,7 +121,6 @@ const LinkRow = ({
                   showDisabledItems={true}
                   size="content"
                   fillIcon={true}
-                  withBlur={isMobileOnly}
                   modernView={true}
                   type="onlyIcon"
                   isDisabled={isExpiredLink || isLoaded}

@@ -25,9 +25,11 @@ const withLoader = (WrappedComponent) => (Loader) => {
 
     const location = useLocation();
 
-    const currentViewAs = location.pathname.includes("/accounts/filter")
-      ? accountsViewAs
-      : viewAs;
+    const currentViewAs =
+      location.pathname.includes("/accounts/people") ||
+      location.pathname.includes("/accounts/groups")
+        ? accountsViewAs
+        : viewAs;
 
     return (!isEditor && firstLoad && !isGallery) ||
       !isLoaded ||

@@ -105,6 +105,7 @@ const ExpiredComboBox = ({ link, changeExpirationOption, isDisabled }) => {
             fontSize="12px"
             fontWeight={400}
             isDisabled={isDisabled}
+            directionY={"both"}
           >
             {{ date }}
           </LinkWithDropdown>

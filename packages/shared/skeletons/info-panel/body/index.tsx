@@ -6,6 +6,7 @@ import AccountsLoader from "./views/AccountsLoader";
 import GalleryLoader from "./views/GalleryLoader";
 import NoItemLoader from "./views/NoItemLoader";
 import SeveralItemsLoader from "./views/SeveralItemsLoader";
+import GroupsLoader from "./views/GroupsLoader";
 
 import type { InfoPanelViewLoaderProps } from "./body.types";
 
@@ -21,6 +22,8 @@ const InfoPanelViewLoader = ({ view }: InfoPanelViewLoaderProps) => {
       return <GalleryLoader />;
     case "accounts":
       return <AccountsLoader />;
+    case "groups":
+      return <GroupsLoader />;
     case "noItem":
       return <NoItemLoader />;
     case "severalItems":

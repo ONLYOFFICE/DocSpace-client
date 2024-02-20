@@ -11,6 +11,7 @@ import MembersList from "./sub-components/MembersList";
 import User from "./User";
 import PublicRoomBar from "./sub-components/PublicRoomBar";
 import { LinksBlock, StyledLinkRow } from "./sub-components/StyledPublicRoom";
+import EmptyContainer from "./sub-components/EmptyContainer";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
@@ -44,29 +45,40 @@ const Members = ({
   withPublicRoomBlock,
   fetchMembers,
   membersIsLoading,
+  searchValue,
+  searchResultIsLoading,
 }) => {
+  const withoutTitlesAndLinks = !!searchValue;
   const membersHelper = new MembersHelper({ t });
 
   const updateInfoPanelMembers = async () => {
-    if (!infoPanelSelection) return;
-    const fetchedMembers = await fetchMembers(t);
+    if (
+      !infoPanelSelection ||
+      !infoPanelSelection.isRoom ||
+      !infoPanelSelection.id
+    ) {
+      return;
+    }
+
+    const fetchedMembers = await fetchMembers(t, true, withoutTitlesAndLinks);
     setInfoPanelMembers(fetchedMembers);
   };
 
   useEffect(() => {
     updateInfoPanelMembers();
-  }, [infoPanelSelection]);
+  }, [infoPanelSelection, searchValue]);
 
   const loadNextPage = async () => {
     const roomId = infoPanelSelection.id;
-    const fetchedMembers = await fetchMembers(t, false);
-    const { users, administrators, expected } = fetchedMembers;
+    const fetchedMembers = await fetchMembers(t, false, withoutTitlesAndLinks);
+    const { users, administrators, expected, groups } = fetchedMembers;
 
     const newMembers = {
       roomId: roomId,
       administrators: [...infoPanelMembers.administrators, ...administrators],
       users: [...infoPanelMembers.users, ...users],
       expected: [...infoPanelMembers.expected, ...expected],
+      groups: [...infoPanelMembers.groups, ...groups],
     };
 
     setInfoPanelMembers(newMembers);
@@ -79,15 +91,21 @@ const Members = ({
     (member) => member.id === selfId,
   );
 
-  const { administrators, users, expected } = infoPanelMembers;
+  const { administrators, users, expected, groups } = infoPanelMembers;
 
-  const membersList = [...administrators, ...users, ...expected];
+  const membersList = [...administrators, ...groups, ...users, ...expected];
 
   const adminsTitleCount = administrators.length ? 1 : 0;
   const usersTitleCount = users.length ? 1 : 0;
   const expectedTitleCount = expected.length ? 1 : 0;
+  const groupsTitleCount = groups.length ? 1 : 0;
 
-  const headersCount = adminsTitleCount + usersTitleCount + expectedTitleCount;
+  const headersCount = withoutTitlesAndLinks
+    ? 0
+    : adminsTitleCount +
+      usersTitleCount +
+      expectedTitleCount +
+      groupsTitleCount;
 
   const onAddNewLink = async () => {
     if (isPublicRoom || primaryLink) {
@@ -104,7 +122,7 @@ const Members = ({
 
   const publicRoomItems = [];
 
-  if (isPublicRoomType && withPublicRoomBlock) {
+  if (isPublicRoomType && withPublicRoomBlock && !withoutTitlesAndLinks) {
     if (!isArchiveFolder || primaryLink) {
       publicRoomItems.push(
         <LinksBlock key="general-link_header">
@@ -144,7 +162,7 @@ const Members = ({
       );
     }
 
-    if (primaryLink) {
+    if (primaryLink && !withoutTitlesAndLinks) {
       publicRoomItems.push(
         <LinkRow
           key="general-link"
@@ -154,7 +172,7 @@ const Members = ({
       );
     }
 
-    if (additionalLinks.length) {
+    if (additionalLinks.length && !withoutTitlesAndLinks) {
       additionalLinks.map((link) => {
         publicRoomItems.push(
           <LinkRow
@@ -164,7 +182,7 @@ const Members = ({
           />,
         );
       });
-    } else if (!isArchiveFolder && !primaryLink) {
+    } else if (!isArchiveFolder && !primaryLink && !withoutTitlesAndLinks) {
       publicRoomItems.push(
         <StyledLinkRow
           key="create-additional-link"
@@ -188,8 +206,14 @@ const Members = ({
   }
 
   const showPublicRoomBar =
-    ((primaryLink && !isArchiveFolder) || isPublicRoom) && withPublicRoomBlock;
+    ((primaryLink && !isArchiveFolder) || isPublicRoom) &&
+    withPublicRoomBlock &&
+    !withoutTitlesAndLinks;
   const publicRoomItemsLength = publicRoomItems.length;
+
+  if (!membersList.length) {
+    return <EmptyContainer />;
+  }
 
   return (
     <>
@@ -202,7 +226,10 @@ const Members = ({
 
       <MembersList
         loadNextPage={loadNextPage}
-        hasNextPage={membersList.length - headersCount < membersFilter.total}
+        hasNextPage={
+          membersList.length - headersCount < membersFilter.total &&
+          !searchResultIsLoading
+        }
         itemCount={membersFilter.total + headersCount + publicRoomItemsLength}
         showPublicRoomBar={showPublicRoomBar}
         linksBlockLength={publicRoomItemsLength}
@@ -247,6 +274,8 @@ export default inject(
       fetchMembers,
       membersIsLoading,
       withPublicRoomBlock,
+      searchValue,
+      searchResultIsLoading,
     } = infoPanelStore;
     const { membersFilter } = filesStore;
     const { id: selfId, isAdmin } = userStore.user;
@@ -280,15 +309,15 @@ export default inject(
       isArchiveFolder: isArchiveFolderRoot,
       isPublicRoom,
       additionalLinks: additionalLinks,
-      isArchiveFolder: isArchiveFolderRoot,
       setLinkParams,
       setEditLinkPanelIsVisible,
-      primaryLink,
       getPrimaryLink: filesStore.getPrimaryLink,
       setExternalLink,
       withPublicRoomBlock,
       fetchMembers,
       membersIsLoading,
+      searchValue,
+      searchResultIsLoading,
     };
   },
 )(

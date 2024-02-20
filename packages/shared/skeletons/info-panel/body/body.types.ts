@@ -6,5 +6,6 @@ export interface InfoPanelViewLoaderProps {
     | "gallery"
     | "accounts"
     | "noItem"
-    | "severalItems";
+    | "severalItems"
+    | "groups";
 }

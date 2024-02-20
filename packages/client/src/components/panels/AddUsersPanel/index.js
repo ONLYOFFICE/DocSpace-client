@@ -13,10 +13,13 @@ import { Text } from "@docspace/shared/components/text";
 import { getUserRole } from "@docspace/shared/utils/common";
 import Filter from "@docspace/shared/api/people/filter";
 import { DialogAsideSkeleton } from "@docspace/shared/skeletons/dialog";
-import { getMembersList } from "@docspace/shared/api/people";
+import { getMembersList, getUserList } from "@docspace/shared/api/people";
 import useLoadingWithTimeout from "@docspace/shared/hooks/useLoadingWithTimeout";
 import { ShareAccessRights } from "@docspace/shared/enums";
+
 import { LOADER_TIMEOUT } from "@docspace/shared/constants";
+import { AccountsSearchArea, ShareAccessRights } from "@docspace/shared/enums";
+import useLoadingWithTimeout from "@docspace/shared/hooks/useLoadingWithTimeout";
 
 import withLoader from "../../../HOCs/withLoader";
 
@@ -26,12 +29,17 @@ import EmptyScreenPersonsSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg
 import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/catalog.accounts.react.svg?url";
 import EmptyScreenPersonsSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
 import { RowLoader, SearchLoader } from "@docspace/shared/skeletons/selector";
+import { checkIfAccessPaid } from "SRC_DIR/helpers";
+
+const PEOPLE_TAB_ID = 0;
+const GROUP_TAB_ID = 1;
 
 const AddUsersPanel = ({
   isEncrypted,
   defaultAccess,
   onClose,
   onParentPanelClose,
+  withAccessRights,
   tempDataItems,
   setDataItems,
   t,
@@ -43,7 +51,24 @@ const AddUsersPanel = ({
   withoutBackground,
   withBlur,
   roomId,
+  userIdsToFilterOut,
+  withGroups,
 }) => {
+  const [itemsList, setItemsList] = useState(null);
+  const [searchValue, setSearchValue] = useState("");
+  const [hasNextPage, setHasNextPage] = useState(true);
+  const [isNextPageLoading, setIsNextPageLoading] = useState(false);
+  const [total, setTotal] = useState(0);
+  const [isLoading, setIsLoading] = useLoadingWithTimeout(
+    LOADER_TIMEOUT,
+    false,
+  );
+  const [isLoadingSearch, setIsLoadingSearch] = useLoadingWithTimeout(
+    LOADER_TIMEOUT,
+    false,
+  );
+  const [activeTabId, setActiveTabId] = useState(PEOPLE_TAB_ID);
+
   const accessRight = defaultAccess
     ? defaultAccess
     : isEncrypted
@@ -60,12 +85,6 @@ const AddUsersPanel = ({
     if (e.key === "Esc" || e.key === "Escape") onClose();
   };
 
-  useEffect(() => {
-    window.addEventListener("keyup", onKeyPress);
-
-    return () => window.removeEventListener("keyup", onKeyPress);
-  });
-
   const onClosePanels = () => {
     onClose();
     onParentPanelClose();
@@ -78,19 +97,29 @@ const AddUsersPanel = ({
       const currentAccess =
         item.isOwner || item.isAdmin
           ? ShareAccessRights.RoomManager
-          : access.access;
+          : access?.access;
 
       const newItem = {
-        access: currentAccess,
-        email: item.email,
         id: item.id,
-        displayName: item.label,
         avatar: item.avatar,
+        access: currentAccess,
         isOwner: item.isOwner,
         isAdmin: item.isAdmin,
         isVisitor: item.isVisitor,
         isCollaborator: item.isCollaborator,
+        isRoomAdmin: item.isRoomAdmin,
       };
+
+      if (item.isGroup) {
+        newItem.isGroup = item.isGroup;
+        newItem.name = item.label;
+      } else {
+        newItem.displayName = item.label;
+        newItem.isOwner = item.isOwner;
+        newItem.isAdmin = item.isAdmin;
+        newItem.email = item.email;
+      }
+
       items.push(newItem);
     }
 
@@ -104,20 +133,6 @@ const AddUsersPanel = ({
   const selectedAccess = accessOptions.filter(
     (access) => access.access === accessRight,
   )[0];
-
-  const [itemsList, setItemsList] = useState(null);
-  const [searchValue, setSearchValue] = useState("");
-  const [hasNextPage, setHasNextPage] = useState(true);
-  const [isNextPageLoading, setIsNextPageLoading] = useState(false);
-  const [total, setTotal] = useState(0);
-  const [isLoading, setIsLoading] = useLoadingWithTimeout(
-    LOADER_TIMEOUT,
-    false,
-  );
-  const [isLoadingSearch, setIsLoadingSearch] = useLoadingWithTimeout(
-    LOADER_TIMEOUT,
-    false,
-  );
 
   useEffect(() => {
     loadNextPage(0);
@@ -147,23 +162,28 @@ const AddUsersPanel = ({
       isAdmin,
       isVisitor,
       isCollaborator,
+      isGroup,
+      name: groupName,
+      isRoomAdmin,
     } = item;
 
     const role = getUserRole(item);
 
-    const userAvatar = hasAvatar ? avatar : DefaultUserPhoto;
+    const userAvatar = hasAvatar ? avatar : isGroup ? "" : DefaultUserPhoto;
 
     return {
       id,
       email,
       avatar: userAvatar,
       icon,
-      label: displayName || email,
+      label: groupName || displayName || email,
       role,
       isOwner,
       isAdmin,
       isVisitor,
       isCollaborator,
+      isGroup,
+      isRoomAdmin,
     };
   };
 
@@ -176,6 +196,15 @@ const AddUsersPanel = ({
       setIsLoading(true);
     }
 
+    let searchArea = AccountsSearchArea.People;
+
+    if (withGroups) {
+      searchArea =
+        activeTabId === PEOPLE_TAB_ID
+          ? AccountsSearchArea.People
+          : AccountsSearchArea.Groups;
+    }
+
     const currentFilter = getFilterWithOutDisabledUser();
 
     currentFilter.page = startIndex / pageCount;
@@ -186,16 +215,22 @@ const AddUsersPanel = ({
       currentFilter.search = search;
     }
 
-    getMembersList(roomId, currentFilter)
+    (!roomId
+      ? getUserList(currentFilter)
+      : getMembersList(searchArea, roomId, currentFilter)
+    )
       .then((response) => {
         let newItems = startIndex ? itemsList : [];
         let totalDifferent = startIndex ? response.total - total : 0;
 
-        const items = response.items.map((item) => toListItem(item));
+        let items = response.items.map((item) => toListItem(item));
+        if (userIdsToFilterOut && userIdsToFilterOut.length)
+          items = items.filter((item) => !userIdsToFilterOut.includes(item.id));
 
         newItems = [...newItems, ...items];
 
-        const newTotal = response.total - totalDifferent;
+        const newTotal =
+          response.total - totalDifferent - userIdsToFilterOut?.length;
 
         setHasNextPage(newItems.length < newTotal);
         setItemsList(newItems);
@@ -215,7 +250,7 @@ const AddUsersPanel = ({
     ? EmptyScreenPersonsSvgUrl
     : EmptyScreenPersonsSvgDarkUrl;
 
-  const renderCustomItem = (label, userType, email) => {
+  const renderCustomItem = (label, userType, email, isGroup) => {
     return (
       <div style={{ width: "100%" }}>
         <Text
@@ -228,22 +263,35 @@ const AddUsersPanel = ({
         >
           {label}
         </Text>
-        <div style={{ display: "flex" }}>
-          <Text
-            className="label"
-            fontWeight={400}
-            fontSize="12px"
-            noSelect
-            truncate
-            color="#A3A9AE"
-            dir="auto"
-          >
-            {`${capitalize(userType)} | ${email}`}
-          </Text>
-        </div>
+
+        {!isGroup && (
+          <div style={{ display: "flex" }}>
+            <Text
+              className="label"
+              fontWeight={400}
+              fontSize="12px"
+              noSelect
+              truncate
+              color="#A3A9AE"
+              dir="auto"
+            >
+              {`${userType} | ${email}`}
+            </Text>
+          </div>
+        )}
       </div>
     );
   };
+
+  useEffect(() => {
+    window.addEventListener("keyup", onKeyPress);
+
+    return () => window.removeEventListener("keyup", onKeyPress);
+  });
+
+  useEffect(() => {
+    loadNextPage(0);
+  }, [activeTabId]);
 
   return (
     <>
@@ -273,21 +321,38 @@ const AddUsersPanel = ({
           isMultiSelect={isMultiSelect}
           acceptButtonLabel={t("Common:AddButton")}
           onAccept={onUsersSelect}
-          withSelectAll={isMultiSelect}
+          withSelectAll={isMultiSelect && !withGroups}
           selectAllLabel={t("PeopleSelector:AllAccounts")}
           selectAllIcon={CatalogAccountsReactSvgUrl}
-          withAccessRights={isMultiSelect}
+          withAccessRights={withAccessRights && isMultiSelect}
           accessRights={accessOptions}
           selectedAccessRight={selectedAccess}
           withCancelButton={!isMultiSelect}
           cancelButtonLabel={t("Common:CancelButton")}
           onCancel={onClosePanels}
           emptyScreenImage={emptyScreenImage}
-          emptyScreenHeader={t("PeopleSelector:EmptyHeader")}
-          emptyScreenDescription={t("PeopleSelector:EmptyDescription")}
+          emptyScreenHeader={
+            // Todo: Update groups empty screen texts when they are ready
+            activeTabId === PEOPLE_TAB_ID
+              ? t("PeopleSelector:EmptyHeader")
+              : t("GroupsSelector:GroupsNotFoundHeader")
+          }
+          emptyScreenDescription={
+            activeTabId === PEOPLE_TAB_ID
+              ? t("PeopleSelector:EmptyDescription")
+              : t("GroupsSelector:GroupsNotFoundDescription")
+          }
           searchEmptyScreenImage={emptyScreenImage}
-          searchEmptyScreenHeader={t("People:NotFoundUsers")}
-          searchEmptyScreenDescription={t("People:NotFoundUsersDescription")}
+          searchEmptyScreenHeader={
+            activeTabId === PEOPLE_TAB_ID
+              ? t("People:NotFoundUsers")
+              : t("GroupsSelector:GroupsNotFoundHeader")
+          }
+          searchEmptyScreenDescription={
+            activeTabId === PEOPLE_TAB_ID
+              ? t("People:NotFoundUsersDescription")
+              : t("GroupsSelector:GroupsNotFoundDescription")
+          }
           hasNextPage={hasNextPage}
           isNextPageLoading={isNextPageLoading}
           loadNextPage={loadNextPage}
@@ -304,6 +369,22 @@ const AddUsersPanel = ({
               withAllSelect={!isLoadingSearch}
             />
           }
+          withTabs={withGroups}
+          tabsData={[
+            {
+              id: PEOPLE_TAB_ID,
+              name: t("Common:People"),
+              onClick: () => setActiveTabId(PEOPLE_TAB_ID),
+              content: null,
+            },
+            {
+              id: GROUP_TAB_ID,
+              name: t("Common:Groups"),
+              onClick: () => setActiveTabId(GROUP_TAB_ID),
+              content: null,
+            },
+          ]}
+          activeTabId={activeTabId}
         />
       </Aside>
     </>
@@ -322,8 +403,13 @@ export default inject(({ settingsStore }) => {
   };
 })(
   observer(
-    withTranslation(["SharingPanel", "PeopleTranslations", "Common"])(
-      withLoader(AddUsersPanel)(<DialogAsideSkeleton isPanel />),
-    ),
+    withTranslation([
+      "PeopleSelector",
+      "SharingPanel",
+      "PeopleTranslations",
+      "Common",
+      "InviteDialog",
+      "GroupsSelector",
+    ])(withLoader(AddUsersPanel)(<DialogAsideSkeleton isPanel />)),
   ),
 );

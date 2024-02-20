@@ -158,6 +158,7 @@ const TableView = ({
       withDropDown: true,
       options: typeOptions,
       iconUrl: ChangeTypeReactSvgUrl,
+      onClick: () => {},
     },
   ];
 

@@ -127,6 +127,7 @@ const RowView = (props) => {
       withDropDown: true,
       options: typeOptions,
       iconUrl: ChangeTypeReactSvgUrl,
+      onClick: () => {},
     },
   ];
 

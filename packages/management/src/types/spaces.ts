@@ -33,7 +33,7 @@ export type TPortals = {
   owner: TOwner;
   timeZoneName: string;
   quotaUsage: TQuotaUsage;
-  quota: number;
+  customQuota: number;
   usedSize: number;
 };
 

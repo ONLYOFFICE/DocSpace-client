@@ -1418,6 +1418,83 @@ class FilesStore {
         const isPrivacyFolder =
           data.current.rootFolderType === FolderType.Privacy;
 
+        const navigationPath = await Promise.all(
+          data.pathParts.map(async (folder, idx) => {
+            const { Rooms, Archive } = FolderType;
+
+            let navigationFolderId = folder.id;
+
+            if (
+              data.current.providerKey &&
+              data.current.rootFolderType === Rooms &&
+              this.treeFoldersStore.myRoomsId
+            ) {
+              navigationFolderId = this.treeFoldersStore.myRoomsId;
+            }
+
+            const isCurrentFolder = data.current.id === navigationFolderId;
+
+            const folderInfo = isCurrentFolder
+              ? data.current
+              : { ...folder, id: navigationFolderId };
+
+            const { title, roomType } = folderInfo;
+
+            const isRootRoom =
+              idx === 0 &&
+              (data.current.rootFolderType === Rooms ||
+                data.current.rootFolderType === Archive);
+
+            let shared, canCopyPublicLink;
+            if (idx === 1) {
+              let room = data.current;
+
+              if (!isCurrentFolder) {
+                room = await api.files.getFolderInfo(navigationFolderId);
+                shared = room.shared;
+                canCopyPublicLink =
+                  room.access === ShareAccessRights.RoomManager ||
+                  room.access === ShareAccessRights.None;
+
+                room.canCopyPublicLink = canCopyPublicLink;
+                this.infoPanelStore.setInfoPanelRoom(room);
+              }
+
+              const { mute } = room;
+
+              runInAction(() => {
+                this.isMuteCurrentRoomNotifications = mute;
+              });
+            }
+
+            return {
+              id: navigationFolderId,
+              title,
+              isRoom: !!roomType,
+              roomType,
+              isRootRoom,
+              shared,
+              canCopyPublicLink,
+            };
+          }),
+        ).then((res) => {
+          return res
+            .filter((item, index) => {
+              return index !== res.length - 1;
+            })
+            .reverse();
+        });
+
+        this.selectedFolderStore.setSelectedFolder({
+          folders: data.folders,
+          ...data.current,
+          inRoom: !!data.current.inRoom,
+          pathParts: data.pathParts,
+          navigationPath,
+          ...{ new: data.new },
+          // type,
+        });
+
         runInAction(() => {
           const isEmptyList = [...data.folders, ...data.files].length === 0;
 
@@ -1477,83 +1554,6 @@ class FilesStore {
             }
           }
         }
-
-        const navigationPath = await Promise.all(
-          data.pathParts.map(async (folder, idx) => {
-            const { Rooms, Archive } = FolderType;
-
-            let folderId = folder.id;
-
-            if (
-              data.current.providerKey &&
-              data.current.rootFolderType === Rooms &&
-              this.treeFoldersStore.myRoomsId
-            ) {
-              folderId = this.treeFoldersStore.myRoomsId;
-            }
-
-            const isCurrentFolder = data.current.id === folderId;
-
-            const folderInfo = isCurrentFolder
-              ? data.current
-              : { ...folder, id: folderId };
-
-            const { title, roomType } = folderInfo;
-
-            const isRootRoom =
-              idx === 0 &&
-              (data.current.rootFolderType === Rooms ||
-                data.current.rootFolderType === Archive);
-
-            let shared, canCopyPublicLink;
-            if (idx === 1) {
-              let room = data.current;
-
-              if (!isCurrentFolder) {
-                room = await api.files.getFolderInfo(folderId);
-                shared = room.shared;
-                canCopyPublicLink =
-                  room.access === ShareAccessRights.RoomManager ||
-                  room.access === ShareAccessRights.None;
-
-                room.canCopyPublicLink = canCopyPublicLink;
-                this.infoPanelStore.setInfoPanelRoom(room);
-              }
-
-              const { mute } = room;
-
-              runInAction(() => {
-                this.isMuteCurrentRoomNotifications = mute;
-              });
-            }
-
-            return {
-              id: folderId,
-              title,
-              isRoom: !!roomType,
-              roomType,
-              isRootRoom,
-              shared,
-              canCopyPublicLink,
-            };
-          }),
-        ).then((res) => {
-          return res
-            .filter((item, index) => {
-              return index !== res.length - 1;
-            })
-            .reverse();
-        });
-
-        this.selectedFolderStore.setSelectedFolder({
-          folders: data.folders,
-          ...data.current,
-          inRoom: !!data.current.inRoom,
-          pathParts: data.pathParts,
-          navigationPath,
-          ...{ new: data.new },
-          // type,
-        });
 
         this.clientLoadingStore.setIsSectionHeaderLoading(false);
 

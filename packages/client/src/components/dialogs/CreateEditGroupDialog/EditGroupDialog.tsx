@@ -100,8 +100,9 @@ const EditGroupDialog = ({
       //   isScrollLocked={isScrollLocked}
       //   isOauthWindowOpen={isOauthWindowOpen}
     >
-      <ModalDialog.Header>{t("PeopleTranslations:EditDepartment")}</ModalDialog.Header>
-
+      <ModalDialog.Header>
+        {t("PeopleTranslations:EditGroup")}
+      </ModalDialog.Header>
 
       <ModalDialog.Body>
         <GroupNameParam

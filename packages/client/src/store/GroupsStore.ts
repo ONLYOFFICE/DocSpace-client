@@ -303,8 +303,8 @@ class GroupsStore {
         id: "edit-group",
         key: "edit-group",
         className: "group-menu_drop-down",
-        label: t("PeopleTranslations:EditDepartment"),
-        title: t("PeopleTranslations:EditDepartment"),
+        label: t("PeopleTranslations:EditGroup"),
+        title: t("PeopleTranslations:EditGroup"),
         icon: PencilReactSvgUrl,
         onClick: () => {
           const event = new Event(Events.GROUP_EDIT);

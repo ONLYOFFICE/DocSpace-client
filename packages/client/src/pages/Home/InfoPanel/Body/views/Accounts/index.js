@@ -227,9 +227,9 @@ const Accounts = (props) => {
             <Text
             className={"info_field info_field_groups"}
             noSelect
-            title={t("Common:Department")}
+            title={t("Common:Group")}
           >
-            {t("Common:Department")}
+            {t("Common:Group")}
           </Text>
 
           <div className={"info_groups"}>

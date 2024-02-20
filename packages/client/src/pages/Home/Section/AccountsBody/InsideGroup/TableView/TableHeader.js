@@ -37,7 +37,7 @@ class InsideGroupTableHeader extends React.Component {
       },
       {
         key: "Department",
-        title: t("Common:Department"),
+        title: t("Common:Group"),
         enable: true,
         sortBy: "department",
         resizable: true,

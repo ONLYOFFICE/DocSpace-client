@@ -1889,7 +1889,7 @@ const SectionFilterContent = ({
       const department = {
         id: "sort-by_department",
         key: "department",
-        label: t("Common:Department"),
+        label: t("Common:Group"),
         default: true,
       };
 

@@ -10,6 +10,18 @@ import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 
 const StyledRowContent = styled(RowContent)`
   padding-bottom: 10px;
+  .user-container-wrapper {
+    p {
+      color: ${(props) =>
+        props.theme.client.settings.security.auditTrail.nameColor};
+    }
+  }
+  .mainIcons {
+    p {
+      color: ${(props) =>
+        props.theme.client.settings.security.auditTrail.sideColor};
+    }
+  }
   .row-main-container-wrapper {
     display: flex;
     justify-content: flex-start;
@@ -18,13 +30,19 @@ const StyledRowContent = styled(RowContent)`
   ${(props) => props.isSettingNotPaid && UnavailableStyles}
 `;
 
-const AuditContent = ({ sectionWidth, item, isSettingNotPaid, locale }) => {
+const AuditContent = ({
+  sectionWidth,
+  item,
+  isSettingNotPaid,
+  locale,
+  theme,
+}) => {
   const dateStr = convertTime(item.date, locale);
 
   return (
     <StyledRowContent
-      sideColor="#A3A9AE"
-      nameColor="#D0D5DA"
+      sideColor={theme.client.settings.security.auditTrail.sideColor}
+      nameColor={theme.client.settings.security.auditTrail.nameColor}
       sectionWidth={sectionWidth}
       isSettingNotPaid={isSettingNotPaid}
     >
@@ -61,11 +79,12 @@ const AuditContent = ({ sectionWidth, item, isSettingNotPaid, locale }) => {
 };
 
 export default inject(({ settingsStore, userStore }) => {
-  const { culture } = settingsStore;
+  const { culture, theme } = settingsStore;
   const { user } = userStore;
   const locale = (user && user.cultureName) || culture || "en";
 
   return {
     locale,
+    theme,
   };
 })(observer(AuditContent));

@@ -2933,7 +2933,13 @@ const Dark: TTheme = {
           tooltipColor: "#F5E9BA",
         },
         auditTrail: {
+          sideColor: "#858585",
+          nameColor: "#eeeeee",
           downloadReportDescriptionColor: "#858585",
+        },
+        loginHistory: {
+          sideColor: "#858585",
+          nameColor: "#eeeeee",
         },
       },
 

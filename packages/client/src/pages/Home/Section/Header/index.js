@@ -19,6 +19,8 @@ import ShareReactSvgUrl from "PUBLIC_DIR/images/share.react.svg?url";
 import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import PersonReactSvgUrl from "PUBLIC_DIR/images/person.react.svg?url";
+import PersonDefaultReactSvgUrl from "PUBLIC_DIR/images/person.default.react.svg?url";
+import GroupReactSvgUrl from "PUBLIC_DIR/images/group.react.svg?url";
 import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/catalog.trash.react.svg?url";
@@ -354,7 +356,7 @@ const SectionHeaderContent = (props) => {
             {
               id: "accounts-add_collaborator",
               className: "main-button_drop-down",
-              icon: PersonReactSvgUrl,
+              icon: PersonDefaultReactSvgUrl,
               label: t("Common:PowerUser"),
               onClick: onInvite,
               "data-type": EmployeeType.Collaborator,
@@ -363,7 +365,7 @@ const SectionHeaderContent = (props) => {
             {
               id: "accounts-add_user",
               className: "main-button_drop-down",
-              icon: PersonUserReactSvgUrl,
+              icon: PersonDefaultReactSvgUrl,
               label: t("Common:User"),
               onClick: onInvite,
               "data-type": EmployeeType.Guest,
@@ -387,7 +389,7 @@ const SectionHeaderContent = (props) => {
         {
           id: "create_group",
           className: "main-button_drop-down",
-          icon: PersonUserReactSvgUrl,
+          icon: GroupReactSvgUrl,
           label: t("PeopleTranslations:CreateGroup"),
           onClick: onCreateGroup,
           action: "group",

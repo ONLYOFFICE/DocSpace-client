@@ -15,7 +15,7 @@ import MoreLoginModal from "../more-login-modal";
 
 export const SocialButtonsGroup = memo(
   ({
-    providers,
+    providers = [],
     onClick,
     ssoLabel,
     ssoUrl,
@@ -72,31 +72,33 @@ export const SocialButtonsGroup = memo(
             onClick={() => (window.location.href = ssoUrl)}
           />
         )}
-        <div className="social-buttons-group">
-          {elements}
-          {length > 2 && (
-            <div className="show-more-button">
-              <IconButton
-                size={20}
-                onClick={moreAuthOpen}
-                iconName={VerticalDotsReactSvgUrl}
-                isFill
-                isClickable={false}
-              />
-            </div>
-          )}
+        {providers.length !== 0 && (
+          <div className="social-buttons-group">
+            {elements}
+            {length > 2 && (
+              <div className="show-more-button">
+                <IconButton
+                  size={20}
+                  onClick={moreAuthOpen}
+                  iconName={VerticalDotsReactSvgUrl}
+                  isFill
+                  isClickable={false}
+                />
+              </div>
+            )}
 
-          <MoreLoginModal
-            t={t}
-            visible={moreAuthVisible}
-            onClose={moreAuthClose}
-            providers={providers}
-            onSocialLoginClick={onClick}
-            ssoLabel={ssoLabel}
-            ssoUrl={ssoUrl}
-            isSignUp
-          />
-        </div>
+            <MoreLoginModal
+              t={t}
+              visible={moreAuthVisible}
+              onClose={moreAuthClose}
+              providers={providers}
+              onSocialLoginClick={onClick}
+              ssoLabel={ssoLabel}
+              ssoUrl={ssoUrl}
+              isSignUp
+            />
+          </div>
+        )}
       </StyledSocialButtonsGroup>
     );
   },

@@ -207,19 +207,20 @@ const Login: React.FC<ILoginProps> = ({
               cookieSettingsEnabled={cookieSettingsEnabled}
             />
             {(oauthDataExists() || ssoExists()) && (
-              <div className="line">
-                <Text className="or-label">{t("Common:orContinueWith")}</Text>
-              </div>
+              <>
+                <div className="line">
+                  <Text className="or-label">{t("Common:orContinueWith")}</Text>
+                </div>
+                <SocialButtonsGroup
+                  providers={providers}
+                  onClick={onSocialButtonClick}
+                  t={t}
+                  isDisabled={isLoading}
+                  {...ssoProps}
+                />
+              </>
             )}
-            {oauthDataExists() && providers && (
-              <SocialButtonsGroup
-                providers={providers}
-                onClick={onSocialButtonClick}
-                t={t}
-                isDisabled={isLoading}
-                {...ssoProps}
-              />
-            )}
+
             {enableAdmMess && (
               <Link
                 fontWeight="600"

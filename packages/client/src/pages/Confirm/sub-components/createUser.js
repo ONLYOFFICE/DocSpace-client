@@ -606,7 +606,7 @@ const CreateUserForm = (props) => {
                     </div>
                   )}
 
-                  {oauthDataExists() && providers && (
+                  {(oauthDataExists() || ssoExists()) && (
                     <SocialButtonsGroup
                       providers={providers}
                       onClick={onSocialButtonClick}

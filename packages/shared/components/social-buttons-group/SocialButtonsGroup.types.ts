@@ -9,7 +9,7 @@ interface IProvider {
 }
 
 export interface SocialButtonProps {
-  providers: IProvider[];
+  providers: IProvider[] | undefined;
   provider: string;
   ssoLabel: string;
   ssoUrl: string;

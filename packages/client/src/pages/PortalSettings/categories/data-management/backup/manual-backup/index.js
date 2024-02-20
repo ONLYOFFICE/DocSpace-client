@@ -7,7 +7,11 @@ import Link from "@docspace/components/link";
 import { startBackup } from "@docspace/common/api/portal";
 import RadioButton from "@docspace/components/radio-button";
 import toastr from "@docspace/components/toast/toastr";
-import { BackupStorageType, FolderType } from "@docspace/common/constants";
+import {
+  BackupStorageType,
+  FolderType,
+  UrlActionType,
+} from "@docspace/common/constants";
 import ThirdPartyModule from "./sub-components/ThirdPartyModule";
 import RoomsModule from "./sub-components/RoomsModule";
 import ThirdPartyStorageModule from "./sub-components/ThirdPartyStorageModule";
@@ -151,10 +155,10 @@ class ManualBackup extends React.Component {
     }
   };
   onClickDownloadBackup = () => {
-    const { temporaryLink } = this.props;
+    const { temporaryLink, openUrl } = this.props;
     const url = window.location.origin;
     const downloadUrl = `${url}` + `${temporaryLink}`;
-    window.open(downloadUrl, "_self");
+    openUrl(downloadUrl, UrlActionType.Download);
   };
   onClickShowStorage = (e) => {
     let newStateObj = {};
@@ -411,7 +415,7 @@ export default inject(({ auth, backup, treeFoldersStore }) => {
     setConnectedThirdPartyAccount,
   } = backup;
   const { currentTariffStatusStore } = auth;
-  const { currentColorScheme, dataBackupUrl } = auth.settingsStore;
+  const { currentColorScheme, dataBackupUrl, openUrl } = auth.settingsStore;
   const { rootFoldersTitles, fetchTreeFolders } = treeFoldersStore;
   const { isNotPaidPeriod } = currentTariffStatusStore;
 
@@ -436,5 +440,6 @@ export default inject(({ auth, backup, treeFoldersStore }) => {
     setConnectedThirdPartyAccount,
     dataBackupUrl,
     currentColorScheme,
+    openUrl,
   };
 })(withTranslation(["Settings", "Common"])(observer(ManualBackup)));

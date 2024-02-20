@@ -5,4 +5,7 @@ export interface FilterBlockProps extends RectangleSkeletonProps {
   className?: string;
   isRooms?: boolean;
   isAccounts?: boolean;
+  isPeopleAccounts?: boolean;
+  isGroupsAccounts?: boolean;
+  isInsideGroup?: boolean;
 }

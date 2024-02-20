@@ -174,6 +174,7 @@ class ImportAccountsStore {
 
   clearCheckedAccounts = () => {
     runInAction(() => {
+      this.cancelMigration();
       this.users = {
         new: [],
         existing: [],

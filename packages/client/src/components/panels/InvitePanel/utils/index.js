@@ -3,6 +3,7 @@ import {
   RoomsType,
   EmployeeType,
 } from "@docspace/shared/enums";
+import { checkIfAccessPaid } from "SRC_DIR/helpers";
 
 export const getAccessOptions = (
   t,
@@ -177,4 +178,12 @@ export const getAccessOptions = (
   ];
 
   return withRemove ? [...options, ...removeOption] : options;
+};
+
+export const getTopFreeRole = (t, roomType) => {
+  const accesses = getAccessOptions(t, roomType);
+  const freeAccesses = accesses.filter(
+    (item) => !checkIfAccessPaid(item.access) && item.key !== "s1",
+  );
+  return freeAccesses[0];
 };

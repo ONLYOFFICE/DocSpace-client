@@ -47,8 +47,17 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
     if (!item || (item && !item.id))
       return <div style={style}>{rowLoader}</div>;
 
-    const { label, avatar, icon, role, isSelected, isDisabled, color, email } =
-      item;
+    const {
+      label,
+      avatar,
+      icon,
+      role,
+      isSelected,
+      isDisabled,
+      color,
+      email,
+      isGroup,
+    } = item;
 
     const currentRole = role || AvatarRole.user;
 
@@ -84,6 +93,8 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
             source={avatar}
             role={currentRole}
             size={AvatarSize.min}
+            isGroup={isGroup}
+            userName={isGroup ? label : ""}
           />
         ) : color ? (
           <RoomIcon color={color} title={label} showDefault />
@@ -96,7 +107,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
           />
         ) : null}
         {renderCustomItem ? (
-          renderCustomItem(label, typeLabel, email)
+          renderCustomItem(label, typeLabel, email, isGroup)
         ) : (
           <Text
             className="label"

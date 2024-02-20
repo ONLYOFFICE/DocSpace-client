@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 
 import ClearReactSvgUrl from "PUBLIC_DIR/images/clear.react.svg?url";
 
+import GroupsSelector from "../../../selectors/Groups";
 import PeopleSelector from "../../../selectors/People";
 import RoomSelector from "../../../selectors/Room";
 import { FilterGroups, FilterSelectorTypes } from "../../../enums";
@@ -17,14 +18,18 @@ import { Portal } from "../../portal";
 import { TSelectorItem } from "../../selector";
 
 import {
-  StyledFilterBlock,
-  StyledFilterBlockHeader,
-  StyledFilterBlockFooter,
   StyledControlContainer,
   StyledCrossIcon,
+  StyledFilterBlock,
+  StyledFilterBlockFooter,
+  StyledFilterBlockHeader,
 } from "../Filter.styled";
 
 import { FilterBlockProps, TGroupItem, TItem } from "../Filter.types";
+import {
+  removeGroupManagerFilterValueIfNeeded,
+  syncGroupManagerCheckBox,
+} from "../Filter.utils";
 
 import FilterBlockItem from "./FilterBlockItem";
 
@@ -38,6 +43,9 @@ const FilterBlock = ({
   userId,
   isRooms,
   isAccounts,
+  isPeopleAccounts,
+  isGroupsAccounts,
+  isInsideGroup,
 }: FilterBlockProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -53,7 +61,7 @@ const FilterBlock = ({
 
   const [filterData, setFilterData] = React.useState<TItem[]>([]);
   const [filterValues, setFilterValues] = React.useState<TGroupItem[]>([]);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   const setFilterDataFn = (data: TItem[]) => {
     const filterSubject = data.find(
@@ -75,6 +83,8 @@ const FilterBlock = ({
       )
         filterOwner.groupItem[0].isDisabled = !isSelected;
     }
+
+    syncGroupManagerCheckBox(data);
 
     setFilterData(data);
   };
@@ -215,6 +225,8 @@ const FilterBlock = ({
             (item) => "group" in item && item.group !== group,
           );
         }
+
+        value = removeGroupManagerFilterValueIfNeeded(value);
 
         setFilterValues(value);
         changeSelectedItems(value);
@@ -460,6 +472,13 @@ const FilterBlock = ({
               }}
               currentUserId={userId}
             />
+          ) : showSelector.type === FilterSelectorTypes.groups ? (
+            <GroupsSelector
+              className="group-selector"
+              onAccept={selectOption}
+              onBackClick={onArrowClick}
+              headerLabel={selectorLabel}
+            />
           ) : (
             <RoomSelector
               className="room-selector"
@@ -494,7 +513,13 @@ const FilterBlock = ({
           </StyledFilterBlockHeader>
           <div className="filter-body">
             {isLoading ? (
-              <FilterBlockLoader isRooms={isRooms} isAccounts={isAccounts} />
+              <FilterBlockLoader
+                isRooms={isRooms}
+                isAccounts={isAccounts}
+                isPeopleAccounts={isPeopleAccounts}
+                isGroupsAccounts={isGroupsAccounts}
+                isInsideGroup={isInsideGroup}
+              />
             ) : (
               <Scrollbar className="filter-body__scrollbar">
                 {filterData.map((item: TItem, index) => {

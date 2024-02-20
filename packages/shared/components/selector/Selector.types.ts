@@ -3,6 +3,7 @@ import { TFileSecurity, TFolderSecurity } from "../../api/files/types";
 import { TRoomSecurity } from "../../api/rooms/types";
 import { RoomsType, ShareAccessRights } from "../../enums";
 import { AvatarRole } from "../avatar";
+import { TSubmenuItem } from "../submenu";
 
 // header
 
@@ -59,6 +60,12 @@ export type TSelectorBreadCrumbs =
       breadCrumbsLoader?: undefined;
       isBreadCrumbsLoading?: undefined;
     };
+
+// tabs
+
+export type TWithTabs =
+  | { withTabs: true; tabsData: TSubmenuItem[]; activeTabId: number }
+  | { withTabs?: undefined; tabsData?: undefined; activeTabId?: undefined };
 
 // select all
 
@@ -238,6 +245,7 @@ export type TSelectorFooterCheckbox = TSelectorCheckbox & {
 };
 
 export type SelectorProps = TSelectorHeader &
+  TWithTabs &
   TSelectorSelectAll &
   TSelectorEmptyScreen &
   TSelectorSearch &
@@ -282,6 +290,7 @@ export type SelectorProps = TSelectorHeader &
   };
 
 export type BodyProps = TSelectorBreadCrumbs &
+  TWithTabs &
   TSelectorBodySearch &
   TSelectorSelectAll &
   TSelectorEmptyScreen &

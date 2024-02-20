@@ -70,6 +70,7 @@ class FilesActionStore {
   clientLoadingStore;
   publicRoomStore;
   infoPanelStore;
+  peopleStore;
   userStore = null;
   currentTariffStatusStore = null;
 
@@ -95,6 +96,7 @@ class FilesActionStore {
     infoPanelStore,
     userStore,
     currentTariffStatusStore,
+    peopleStore,
   ) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -112,6 +114,7 @@ class FilesActionStore {
     this.infoPanelStore = infoPanelStore;
     this.userStore = userStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
+    this.peopleStore = peopleStore;
   }
 
   setIsBulkDownload = (isBulkDownload) => {
@@ -2249,6 +2252,8 @@ class FilesActionStore {
     const { roomType, ...rest } = this.selectedFolderStore;
     const { setSelectedNode } = this.treeFoldersStore;
     const { clearFiles, setBufferSelection } = this.filesStore;
+    const { clearInsideGroup, insideGroupBackUrl } =
+      this.peopleStore.groupsStore;
 
     setBufferSelection(null);
 
@@ -2297,13 +2302,18 @@ class FilesActionStore {
     }
 
     if (categoryType === CategoryType.Accounts) {
+      if (insideGroupBackUrl) {
+        window.DocSpace.navigate(insideGroupBackUrl);
+        clearInsideGroup();
+        return;
+      }
       const accountsFilter = AccountsFilter.getDefault();
       const params = accountsFilter.toUrlParams();
       const path = getCategoryUrl(CategoryType.Accounts);
 
       clearFiles();
 
-      setSelectedNode(["accounts", "filter"]);
+      setSelectedNode(["accounts", "people", "filter"]);
 
       return window.DocSpace.navigate(`${path}?${params}`, { replace: true });
     }

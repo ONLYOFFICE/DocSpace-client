@@ -130,14 +130,14 @@ const RoomIcon = ({
 }: RoomIconProps) => {
   const [correctImage, setCorrectImage] = React.useState(true);
 
-  const titleWithoutSpaces = title.replace(/\s+/g, " ").trim();
-  const indexAfterLastSpace = titleWithoutSpaces.lastIndexOf(" ");
+  const titleWithoutSpaces = title?.replace(/\s+/g, " ").trim();
+  const indexAfterLastSpace = titleWithoutSpaces?.lastIndexOf(" ");
   const secondCharacter =
-    indexAfterLastSpace === -1
+    !titleWithoutSpaces || indexAfterLastSpace === -1
       ? ""
       : titleWithoutSpaces[indexAfterLastSpace + 1];
 
-  const roomTitle = (title[0] + secondCharacter).toUpperCase();
+  const roomTitle = title && (title[0] + secondCharacter).toUpperCase();
 
   const prefetchImage = React.useCallback(() => {
     if (!imgSrc) return;

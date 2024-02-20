@@ -16,6 +16,7 @@ import {
   TSelectorAccessRights,
   TSelectorFooterInput,
   TSelectorFooterCheckbox,
+  TWithTabs,
 } from "./Selector.types";
 
 const Selector = ({
@@ -96,7 +97,12 @@ const Selector = ({
   descriptionText,
 
   cancelButtonId,
+
+  withTabs,
+  tabsData,
+  activeTabId,
 }: SelectorProps) => {
+  const [areItemsUpdated, setAreItemsUpdated] = React.useState(false);
   const [footerVisible, setFooterVisible] = React.useState<boolean>(false);
   const [isSearch, setIsSearch] = React.useState<boolean>(false);
 
@@ -376,6 +382,41 @@ const Selector = ({
         setIsChecked,
       } as TSelectorFooterCheckbox);
 
+  const tabsProps: TWithTabs = withTabs
+    ? { withTabs, tabsData, activeTabId }
+    : {};
+
+  // React.useEffect(() => {
+  //   if (!areItemsUpdated) return;
+  //   if (!newSelectedItems.length || !isMultiSelect || !items) {
+  //     setAreItemsUpdated(false);
+  //     return;
+  //   }
+
+  //   let hasConflict = false;
+
+  //   const cloneItems = items.map((x) => {
+  //     if (x.isSelected) return { ...x };
+
+  //     const isSelected = newSelectedItems.some(
+  //       (selectedItem) => selectedItem.id === x.id,
+  //     );
+
+  //     if (isSelected) hasConflict = true;
+
+  //     return { ...x, isSelected };
+  //   });
+
+  //   if (hasConflict) {
+  //     setRenderedItems(cloneItems);
+  //   }
+  //   setAreItemsUpdated(false);
+  // }, [areItemsUpdated, isMultiSelect, items, newSelectedItems]);
+
+  // React.useEffect(() => {
+  //   setAreItemsUpdated(true);
+  // }, [items]);
+
   return (
     <StyledSelector
       id={id}
@@ -384,7 +425,6 @@ const Selector = ({
       data-testid="selector"
     >
       {withHeader && <Header {...headerProps} />}
-
       <Body
         withHeader={withHeader}
         footerVisible={footerVisible || !!alwaysShowFooter}
@@ -414,6 +454,8 @@ const Selector = ({
         {...onSelectAllProps}
         // search
         {...searchProps}
+        //tabs
+        {...tabsProps}
       />
 
       {(footerVisible || alwaysShowFooter) && (

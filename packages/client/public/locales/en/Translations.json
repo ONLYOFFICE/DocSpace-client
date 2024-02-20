@@ -45,6 +45,7 @@
   "RoleViewer": "Viewer",
   "RoleViewerDescription": "File viewing",
   "SearchByOwner": "Search by Owners",
+  "SearchByHeadOfGroup": "Search by Head of group",
   "Spreadsheets": "Spreadsheets",
   "SubNewForm": "Blank",
   "SubNewFormFile": "From text file",

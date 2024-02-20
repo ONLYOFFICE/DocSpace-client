@@ -260,7 +260,9 @@ const InvitePanel = ({
         ? (newItem.type = item.access)
         : (newItem.access = item.access);
 
-      item.avatar ? (newItem.id = item.id) : (newItem.email = item.email);
+      item.avatar || item.isGroup
+        ? (newItem.id = item.id)
+        : (newItem.email = item.email);
 
       return newItem;
     });
@@ -536,5 +538,6 @@ export default inject(
     "Translations",
     "Common",
     "InfoPanel",
+    "PeopleSelector",
   ])(observer(InvitePanel)),
 );

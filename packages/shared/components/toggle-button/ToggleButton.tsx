@@ -68,6 +68,9 @@ const ToggleButton = ({
   style,
   isLoading,
   noAnimation,
+  name,
+  fontWeight,
+  fontSize,
 }: ToggleButtonProps) => {
   return (
     <ToggleButtonTheme
@@ -86,6 +89,7 @@ const ToggleButton = ({
         isChecked={isChecked}
       >
         <HiddenInput
+          name={name}
           type="checkbox"
           checked={isChecked}
           disabled={isDisabled}
@@ -97,7 +101,12 @@ const ToggleButton = ({
           noAnimation={noAnimation || false}
         />
         {label && (
-          <Text className="toggle-button-text" as="span">
+          <Text
+            className="toggle-button-text"
+            as="span"
+            fontWeight={fontWeight}
+            fontSize={fontSize}
+          >
             {label}
           </Text>
         )}

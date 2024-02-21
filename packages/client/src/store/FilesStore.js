@@ -63,6 +63,7 @@ class FilesStore {
   accessRightsStore;
   publicRoomStore;
   settingsStore;
+  currentQuotaStore;
 
   pluginStore;
 
@@ -91,7 +92,12 @@ class FilesStore {
 
   filter = FilesFilter.getDefault();
   roomsFilter = RoomsFilter.getDefault();
-  membersFilter = { page: 0, pageCount: 100, total: 0, startIndex: 0 };
+  membersFilter = {
+    page: 0,
+    pageCount: 100,
+    total: 0,
+    startIndex: 0,
+  };
 
   categoryType = getCategoryType(window.location);
 
@@ -1479,15 +1485,15 @@ class FilesStore {
 
             let folderId = folder.id;
 
-            if (
-              data.current.providerKey &&
-              data.current.rootFolderType === Rooms &&
-              this.treeFoldersStore.myRoomsId
-            ) {
-              folderId = this.treeFoldersStore.myRoomsId;
-            }
+            // if (
+            //   data.current.providerKey &&
+            //   data.current.rootFolderType === Rooms &&
+            //   this.treeFoldersStore.myRoomsId
+            // ) {
+            //   folderId = this.treeFoldersStore.myRoomsId;
+            // }
 
-            const isCurrentFolder = data.current.id === folderId;
+            const isCurrentFolder = data.current.id == folderId;
 
             const folderInfo = isCurrentFolder
               ? data.current
@@ -1646,8 +1652,13 @@ class FilesStore {
     }
 
     if (!this.settingsStore.withPaging) {
-      filterData.page = 0;
-      filterData.pageCount = 100;
+      const isCustomCountPage =
+        filter && filter.pageCount !== 100 && filter.pageCount !== 25;
+
+      if (!isCustomCountPage) {
+        filterData.page = 0;
+        filterData.pageCount = 100;
+      }
     }
 
     if (folderId) setSelectedNode([folderId + ""]);
@@ -1697,6 +1708,7 @@ class FilesStore {
                 searchInContent: searchInContentRooms,
                 tags,
                 withoutTags,
+                quotaFilter,
               } = filter;
 
               const isFiltered =
@@ -1706,7 +1718,8 @@ class FilesStore {
                 withRoomsSubfolders ||
                 searchInContentRooms ||
                 tags ||
-                withoutTags;
+                withoutTags ||
+                quotaFilter;
 
               if (!!isFiltered) {
                 this.setIsEmptyPage(false);
@@ -1772,6 +1785,22 @@ class FilesStore {
         });
 
     return request();
+  };
+
+  setCustomRoomQuota = async (quotaSize, itemsIDs, inRoom = false, filter) => {
+    const rooms = await api.rooms.setCustomRoomQuota(itemsIDs, +quotaSize);
+
+    if (!inRoom) await this.fetchRooms(null, filter, false, false, false);
+
+    return rooms;
+  };
+
+  resetRoomQuota = async (itemsIDs, filter) => {
+    const rooms = await api.rooms.resetRoomQuota(itemsIDs);
+
+    await this.fetchRooms(null, filter, false, false, false);
+
+    return rooms;
   };
 
   setAlreadyFetchingRooms = (alreadyFetchingRooms) => {
@@ -2535,7 +2564,12 @@ class FilesStore {
   }
 
   getDefaultMembersFilter = () => {
-    return { page: 0, pageCount: 100, total: 0, startIndex: 0 };
+    return {
+      page: 0,
+      pageCount: 100,
+      total: 0,
+      startIndex: 0,
+    };
   };
 
   setRoomMembersFilter = (roomMembersFilter) => {
@@ -2558,6 +2592,7 @@ class FilesStore {
       startIndex: newFilter.startIndex,
       count: newFilter.pageCount,
       filterType: 0, // 0 (Members)
+      filterValue: this.infoPanelStore.searchValue,
     };
 
     return api.rooms.getRoomMembers(id, membersFilters).then((res) => {
@@ -3061,6 +3096,9 @@ class FilesStore {
         inRoom,
         requestToken,
         lastOpened,
+        quotaLimit,
+        usedSpace,
+        isCustomQuota,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3228,6 +3266,9 @@ class FilesStore {
         canCopyPublicLink,
         requestToken,
         lastOpened,
+        quotaLimit,
+        usedSpace,
+        isCustomQuota,
       };
     });
 
@@ -3484,6 +3525,42 @@ class FilesStore {
     }
 
     return this.selection.find((el) => el.title)?.title || null;
+  }
+
+  get hasRoomsToResetQuota() {
+    const canResetCustomQuota = (item) => {
+      const { isDefaultRoomsQuotaSet } = this.authStore.currentQuotaStore;
+
+      if (!isDefaultRoomsQuotaSet) return false;
+
+      return item.security?.EditRoom && item.isCustomQuota;
+    };
+
+    return this.selection.every((x) => canResetCustomQuota(x));
+  }
+
+  get hasRoomsToDisableQuota() {
+    const { isDefaultRoomsQuotaSet } = this.authStore.currentQuotaStore;
+
+    const canDisableQuota = (item) => {
+      if (!isDefaultRoomsQuotaSet) return false;
+
+      return item.security?.EditRoom;
+    };
+
+    return this.selection.every((x) => canDisableQuota(x));
+  }
+
+  get hasRoomsToChangeQuota() {
+    const { isDefaultRoomsQuotaSet } = this.authStore.currentQuotaStore;
+
+    const canChangeQuota = (item) => {
+      if (!isDefaultRoomsQuotaSet) return false;
+
+      return item.security?.EditRoom;
+    };
+
+    return this.selection.every((x) => canChangeQuota(x));
   }
 
   get hasSelection() {
@@ -4033,6 +4110,7 @@ class FilesStore {
       searchInContent: searchInContentRooms,
       tags,
       withoutTags,
+      quotaFilter,
     } = this.roomsFilter;
 
     const {
@@ -4052,7 +4130,8 @@ class FilesStore {
           searchInContentRooms ||
           subjectId ||
           tags ||
-          withoutTags
+          withoutTags ||
+          quotaFilter
         : authorType ||
           roomId ||
           search ||
@@ -4061,6 +4140,12 @@ class FilesStore {
           searchInContent;
 
     return isFiltered;
+  }
+
+  get needResetFilesSelection() {
+    const { isVisible: infoPanelVisible } = this.infoPanelStore;
+
+    return !infoPanelVisible || this.selection.length > 1;
   }
 }
 

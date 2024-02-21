@@ -19,12 +19,17 @@ import { StyledWrapper } from "./styled-social-networks";
 
 const SocialNetworks = (props) => {
   const { t } = useTranslation(["Profile", "Common"]);
-  const { providers, setProviders, isOAuthAvailable, setPortalQuota } = props;
+  const {
+    providers,
+    setProviders,
+    isOAuthAvailable,
+    //setPortalQuota
+  } = props;
 
   const fetchData = async () => {
     try {
       const data = await getAuthProviders();
-      if (typeof isOAuthAvailable === "undefined") await setPortalQuota();
+      //if (typeof isOAuthAvailable === "undefined") await setPortalQuota();
       setProviders(data);
     } catch (e) {
       console.error(e);
@@ -43,7 +48,7 @@ const SocialNetworks = (props) => {
       const tokenGetterWin = window.open(
         link,
         "login",
-        "width=800,height=500,status=no,toolbar=no,menubar=no,resizable=yes,scrollbars=no"
+        "width=800,height=500,status=no,toolbar=no,menubar=no,resizable=yes,scrollbars=no",
       );
 
       const code = await getOAuthToken(tokenGetterWin);
@@ -52,7 +57,7 @@ const SocialNetworks = (props) => {
           auth: providerName,
           mode: "popup",
           callback: "loginCallback",
-        })
+        }),
       );
 
       tokenGetterWin.location.href = getLoginLink(token, code);
@@ -141,12 +146,15 @@ export default inject(({ currentQuotaStore, peopleStore }) => {
   const { usersStore } = peopleStore;
   const { providers, setProviders } = usersStore;
 
-  const { isOAuthAvailable, setPortalQuota } = currentQuotaStore;
+  const {
+    isOAuthAvailable,
+    //setPortalQuota
+  } = currentQuotaStore;
 
   return {
     providers,
     setProviders,
     isOAuthAvailable,
-    setPortalQuota,
+    //   setPortalQuota,
   };
 })(observer(SocialNetworks));

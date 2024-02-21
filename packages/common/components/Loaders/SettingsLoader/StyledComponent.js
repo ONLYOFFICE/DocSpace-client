@@ -37,5 +37,61 @@ const StyledSMTPContent = styled.div`
     }
   }
 `;
+const StyledStorageManagementLoader = styled.div`
+  max-width: 660px;
 
-export { StyledSMTPContent };
+  svg {
+    display: block;
+  }
+  .storage-loader_title {
+    height: 40px;
+    margin-bottom: 24px;
+
+    @media ${mobile} {
+      height: 68px;
+    }
+  }
+
+  svg:last-child {
+    max-width: 123px;
+    @media ${mobile} {
+      max-width: 100%;
+    }
+  }
+
+  .storage-loader_grid {
+    svg:nth-child(1) {
+      max-width: 158px;
+    }
+    svg:nth-child(2) {
+      max-width: 130px;
+    }
+    svg:nth-child(3) {
+      max-width: 100px;
+    }
+    svg:nth-child(4) {
+      max-width: 120px;
+    }
+
+    display: grid;
+    grid-gap: 24px;
+    grid-template-columns:
+      minmax(50px, 158px) minmax(70px, 130px) minmax(40px, 100px)
+      minmax(60px, 120px);
+
+    @media ${mobile} {
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(4, 20px);
+      grid-gap: 8px;
+      margin-bottom: 12px;
+    }
+  }
+
+  div {
+    svg {
+      margin-bottom: 16px;
+    }
+  }
+`;
+
+export { StyledSMTPContent, StyledStorageManagementLoader };

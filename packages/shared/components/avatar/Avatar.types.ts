@@ -29,4 +29,6 @@ export interface AvatarProps {
   /** Tooltip content */
   tooltipContent?: string;
   onClick?: (e: React.MouseEvent) => void;
+  /** Display initials for group when `source` is set to blank */
+  isGroup?: boolean;
 }

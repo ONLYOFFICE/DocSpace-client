@@ -166,7 +166,7 @@ const ArticleBodyContent = (props) => {
       selectedFolderId,
       isAccounts,
       setSelection,
-    ]
+    ],
   );
 
   const onShowNewFilesPanel = React.useCallback(
@@ -179,7 +179,7 @@ const ArticleBodyContent = (props) => {
 
       setDisableBadgeClick(false);
     },
-    [disableBadgeClick]
+    [disableBadgeClick],
   );
 
   React.useEffect(() => {
@@ -207,10 +207,7 @@ const ArticleBodyContent = (props) => {
     )
       return setActiveItemId(recycleBinFolderId);
 
-    if (
-      location.pathname.includes("/accounts/filter") &&
-      activeItemId !== "accounts"
-    )
+    if (location.pathname.includes("/accounts") && activeItemId !== "accounts")
       return setActiveItemId("accounts");
 
     if (location.pathname.includes("/settings") && activeItemId !== "settings")
@@ -332,5 +329,5 @@ export default inject(
       setSelection,
       currentDeviceType,
     };
-  }
+  },
 )(withTranslation([])(observer(ArticleBodyContent)));

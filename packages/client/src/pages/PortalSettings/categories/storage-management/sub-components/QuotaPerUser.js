@@ -1,0 +1,29 @@
+import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
+
+import QuotaPerItemComponent from "./QuotaPerItem";
+
+const QuotaPerUserComponent = (props) => {
+  const { setUserQuota, isDefaultUsersQuotaSet, defaultUsersQuota } = props;
+
+  const { t } = useTranslation("Settings");
+
+  return (
+    <QuotaPerItemComponent
+      type="user"
+      formLabel={t("QuotaPerUser")}
+      toggleLabel={t("DefineQuotaPerUser")}
+      disableQuota={() => setUserQuota(-1, t)}
+      saveQuota={(size) => setUserQuota(size, t)}
+      initialSize={defaultUsersQuota}
+      isQuotaSet={isDefaultUsersQuotaSet}
+    />
+  );
+};
+
+export default inject(({ currentQuotaStore }) => {
+  const { setUserQuota, defaultUsersQuota, isDefaultUsersQuotaSet } =
+    currentQuotaStore;
+
+  return { setUserQuota, defaultUsersQuota, isDefaultUsersQuotaSet };
+})(observer(QuotaPerUserComponent));

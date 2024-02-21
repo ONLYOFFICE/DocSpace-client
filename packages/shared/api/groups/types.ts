@@ -1,19 +1,9 @@
-export type TGroupManager = {
-  avatarSmall: string;
-  displayName: string;
-  hasAvatar: boolean;
-  id: string;
-  profileUrl: string;
-};
+import { TUser } from "../people/types";
 
-export type TApiGroup = {
+export type TGroup = {
   category: string;
   id: string;
-  manager: TGroupManager;
+  manager: TUser;
   name: string;
   parent: string;
-};
-
-export type TGroup = TApiGroup & {
-  isGroup: true;
 };

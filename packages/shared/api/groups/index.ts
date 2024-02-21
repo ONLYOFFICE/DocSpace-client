@@ -2,10 +2,15 @@ import Filter from "./filter";
 
 import { request } from "../client";
 import { checkFilterInstance } from "../../utils/common";
+import { TGroup } from "./types";
 
 // * Create
 
-export const createGroup = (groupName, groupManager, members) => {
+export const createGroup = (
+  groupName: string,
+  groupManager: string,
+  members: string[],
+) => {
   return request({
     method: "post",
     url: "/group",
@@ -34,7 +39,7 @@ export const getGroups = (filter = Filter.getDefault()) => {
   });
 };
 
-export const getGroupById = (groupId, signal) => {
+export const getGroupById = (groupId: string, signal: AbortSignal) => {
   return request({
     method: "get",
     url: `/group/${groupId}`,
@@ -42,12 +47,18 @@ export const getGroupById = (groupId, signal) => {
   });
 };
 
-export const getGroupsByName = (groupName, startIndex = 0, pageCount = 100) => {
-  return request({
+export const getGroupsByName = async (
+  groupName: string,
+  startIndex = 0,
+  pageCount = 100,
+) => {
+  const res = (await request({
     method: "get",
     url: `/group?filterValue=${groupName}&startIndex=${startIndex}&count=${pageCount}`,
     data: { groupName },
-  });
+  })) as { items: TGroup[]; total: number };
+
+  return res;
 };
 
 export const getGroupsFull = () => {
@@ -57,7 +68,7 @@ export const getGroupsFull = () => {
   });
 };
 
-export const getGroupsByUserId = (userId) => {
+export const getGroupsByUserId = (userId: string) => {
   return request({
     method: "get",
     url: `/group/user/${userId}`,
@@ -66,7 +77,12 @@ export const getGroupsByUserId = (userId) => {
 
 // * Update
 
-export const updateGroup = (groupId, groupName, groupManager, members) => {
+export const updateGroup = (
+  groupId: string,
+  groupName: string,
+  groupManager: string,
+  members: string,
+) => {
   return request({
     method: "put",
     url: `/group/${groupId}`,
@@ -74,7 +90,7 @@ export const updateGroup = (groupId, groupName, groupManager, members) => {
   });
 };
 
-export const addGroupMembers = (groupId, members) => {
+export const addGroupMembers = (groupId: string, members: string) => {
   return request({
     method: "put",
     url: `/group/${groupId}/members`,
@@ -84,7 +100,7 @@ export const addGroupMembers = (groupId, members) => {
 
 // * Delete
 
-export const deleteGroup = (groupId) => {
+export const deleteGroup = (groupId: string) => {
   return request({
     method: "delete",
     url: `/group/${groupId}`,

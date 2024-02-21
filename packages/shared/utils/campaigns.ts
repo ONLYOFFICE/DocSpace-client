@@ -33,6 +33,20 @@ export const getTranslation = async (
     );
   }
   const res = await fetch(translationUrl);
+
+  if (!res.ok) {
+    if (standalone) {
+      translationUrl = `/static/campaigns/locales/en/Campaign${campaign}.json`;
+    } else {
+      translationUrl = await window.firebaseHelper.getCampaignsTranslations(
+        campaign,
+        "en",
+      );
+    }
+    const enRes = await fetch(translationUrl);
+    return Promise.resolve(enRes.json());
+  }
+
   return Promise.resolve(res.json());
 };
 

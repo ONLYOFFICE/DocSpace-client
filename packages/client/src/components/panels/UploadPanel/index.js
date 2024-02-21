@@ -15,7 +15,7 @@ import {
 } from "../StyledPanels";
 import FileList from "./FileList";
 import { inject, observer } from "mobx-react";
-import Loaders from "@docspace/common/components/Loaders";
+import { DialogAsideSkeleton } from "@docspace/shared/skeletons/dialog";
 import withLoader from "../../../HOCs/withLoader";
 
 class UploadPanelComponent extends React.Component {
@@ -154,7 +154,7 @@ class UploadPanelComponent extends React.Component {
 }
 
 const UploadPanel = withTranslation(["UploadPanel", "Files"])(
-  withLoader(UploadPanelComponent)(<Loaders.DialogAsideLoader isPanel />)
+  withLoader(UploadPanelComponent)(<DialogAsideSkeleton isPanel />),
 );
 
 export default inject(({ settingsStore, uploadDataStore }) => {

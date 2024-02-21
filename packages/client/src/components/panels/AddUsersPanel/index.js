@@ -12,12 +12,12 @@ import { Text } from "@docspace/shared/components/text";
 
 import { getUserRole } from "@docspace/shared/utils/common";
 import Filter from "@docspace/shared/api/people/filter";
-import Loaders from "@docspace/common/components/Loaders";
-
+import { DialogAsideSkeleton } from "@docspace/shared/skeletons/dialog";
 import { getMembersList, getUserList } from "@docspace/shared/api/people";
+import useLoadingWithTimeout from "@docspace/shared/hooks/useLoadingWithTimeout";
+
 import { LOADER_TIMEOUT } from "@docspace/shared/constants";
 import { AccountsSearchArea, ShareAccessRights } from "@docspace/shared/enums";
-import useLoadingWithTimeout from "@docspace/shared/hooks/useLoadingWithTimeout";
 
 import withLoader from "../../../HOCs/withLoader";
 
@@ -408,6 +408,6 @@ export default inject(({ settingsStore }) => {
       "Common",
       "InviteDialog",
       "GroupsSelector",
-    ])(withLoader(AddUsersPanel)(<Loaders.DialogAsideLoader isPanel />)),
+    ])(withLoader(AddUsersPanel)(<DialogAsideSkeleton isPanel />)),
   ),
 );

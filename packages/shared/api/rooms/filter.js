@@ -1,3 +1,5 @@
+/* eslint-disable guard-for-in */
+import transform from "lodash/transform";
 import { RoomSearchArea } from "../../enums";
 import { getObjectByLocation, toUrlParams } from "../../utils/common";
 
@@ -47,8 +49,33 @@ const SUBJECT_FILTER = "subjectFilter";
 const DEFAULT_SUBJECT_FILTER = null;
 
 class RoomsFilter {
-  static getDefault(total = DEFAULT_TOTAL) {
-    return new RoomsFilter(DEFAULT_PAGE, DEFAULT_PAGE_COUNT, total);
+  static getDefault(userId) {
+    const defaultFilter = new RoomsFilter(
+      DEFAULT_PAGE,
+      DEFAULT_PAGE_COUNT,
+      DEFAULT_TOTAL,
+    );
+
+    if (userId) {
+      const filterStorageItem =
+        defaultFilter.searchArea === RoomSearchArea.Active
+          ? JSON.parse(localStorage.getItem(`UserRoomsSharedFilter=${userId}`))
+          : JSON.parse(
+              localStorage.getItem(`UserRoomsArchivedFilter=${userId}`),
+            );
+      if (filterStorageItem) {
+        // eslint-disable-next-line no-restricted-syntax
+        for (const filterProperty in filterStorageItem) {
+          defaultFilter[filterProperty] = filterStorageItem[filterProperty];
+        }
+      }
+    }
+
+    return defaultFilter;
+  }
+
+  static clean() {
+    return new RoomsFilter(DEFAULT_PAGE, DEFAULT_PAGE_COUNT, DEFAULT_TOTAL);
   }
 
   static getFilter(location) {
@@ -183,6 +210,19 @@ class RoomsFilter {
     return this.page > 0;
   };
 
+  toJSON = (filter) => {
+    const filterObject = transform(
+      filter,
+      (result, value, key) => {
+        if (value instanceof Function) return result;
+        if (value === null || value === false) return result;
+        result[key] = value;
+      },
+      {},
+    );
+    return JSON.stringify(filterObject);
+  };
+
   toApiUrlParams = () => {
     const {
       page,
@@ -225,7 +265,7 @@ class RoomsFilter {
     return str;
   };
 
-  toUrlParams = () => {
+  toUrlParams = (userId, withLocalStorage) => {
     const {
       page,
       pageCount,
@@ -295,7 +335,56 @@ class RoomsFilter {
     dtoFilter[SORT_ORDER] = sortOrder;
     dtoFilter[SEARCH_TYPE] = withSubfolders;
 
-    const str = toUrlParams(dtoFilter, true);
+    const archivedStorageFilter = JSON.parse(
+      localStorage.getItem(`UserRoomsArchivedFilter=${userId}`),
+    );
+
+    const sharedStorageFilter = JSON.parse(
+      localStorage.getItem(`UserRoomsSharedFilter=${userId}`),
+    );
+
+    const defaultFilter = new RoomsFilter(
+      DEFAULT_PAGE,
+      DEFAULT_PAGE_COUNT,
+      DEFAULT_TOTAL,
+    );
+
+    if (!sharedStorageFilter && userId) {
+      localStorage.setItem(
+        `UserRoomsSharedFilter=${userId}`,
+        this.toJSON(defaultFilter),
+      );
+    }
+
+    if (!archivedStorageFilter && userId) {
+      defaultFilter.searchArea = RoomSearchArea.Archive;
+      localStorage.setItem(
+        `UserRoomsArchivedFilter=${userId}`,
+        this.toJSON(defaultFilter),
+      );
+    }
+
+    const filterJSON = this.toJSON(dtoFilter);
+
+    const currentStorageFilter =
+      dtoFilter.searchArea === RoomSearchArea.Active
+        ? sharedStorageFilter
+        : archivedStorageFilter;
+
+    const urlParams =
+      withLocalStorage && currentStorageFilter
+        ? currentStorageFilter
+        : dtoFilter;
+
+    if (userId && !withLocalStorage) {
+      if (dtoFilter.searchArea === RoomSearchArea.Active) {
+        localStorage.setItem(`UserRoomsSharedFilter=${userId}`, filterJSON);
+      } else {
+        localStorage.setItem(`UserRoomsArchivedFilter=${userId}`, filterJSON);
+      }
+    }
+
+    const str = toUrlParams(urlParams, true);
     return str;
   };
 

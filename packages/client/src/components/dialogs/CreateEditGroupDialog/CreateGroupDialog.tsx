@@ -49,10 +49,10 @@ const CreateGroupDialog = ({
   const onCreateGroup = async () => {
     setIsLoading(true);
 
-    const groupManagerId = groupParams.groupManager.id;
-    const groupMemebersIds = groupParams.groupMembers.map((gm) => gm.id);
+    const groupManagerId = groupParams.groupManager?.id || undefined;
+    const groupMembersIds = groupParams.groupMembers.map((gm) => gm.id);
 
-    createGroup(groupParams.groupName, groupManagerId, groupMemebersIds)
+    createGroup(groupParams.groupName, groupManagerId, groupMembersIds)
       .then(() => {
         navigate("/accounts/groups/filter");
         getGroups();
@@ -86,6 +86,8 @@ const CreateGroupDialog = ({
         <HeadOfGroup
           groupManager={groupParams.groupManager}
           setGroupManager={setGroupManager}
+          groupMembers={groupParams.groupMembers}
+          setGroupMembers={setGroupMembers}
           onClose={onClose}
         />
         <MembersParam
@@ -105,7 +107,10 @@ const CreateGroupDialog = ({
           primary
           scale
           onClick={onCreateGroup}
-          isDisabled={!groupParams.groupManager || !groupParams.groupName}
+          isDisabled={
+            !groupParams.groupName ||
+            (!groupParams.groupManager && !groupParams.groupMembers.length)
+          }
           isLoading={isLoading}
         />
         <Button

@@ -216,8 +216,8 @@ const Body = ({
             <SelectAll
               label={selectAllLabel}
               icon={selectAllIcon}
-              isChecked={isAllChecked}
-              isIndeterminate={isAllIndeterminate}
+              isChecked={isAllChecked || false}
+              isIndeterminate={isAllIndeterminate || false}
               onSelectAll={onSelectAll}
               isLoading={isLoading}
               rowLoader={rowLoader}

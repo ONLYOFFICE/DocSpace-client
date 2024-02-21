@@ -80,8 +80,8 @@ export interface SelectAllProps {
 }
 
 export type TSelectorSelectAll = {
-  isAllIndeterminate: boolean;
-  isAllChecked: boolean;
+  isAllIndeterminate?: boolean;
+  isAllChecked?: boolean;
 } & (
   | {
       withSelectAll: true;

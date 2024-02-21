@@ -1212,10 +1212,6 @@ class FilesStore {
   };
 
   setRoomsFilter = (filter) => {
-    const key = `UserRoomsFilter=${this.userStore.user.id}`;
-    const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
-    localStorage.setItem(key, value);
-
     if (!this.settingsStore.withPaging) filter.pageCount = 100;
 
     // this.setFilterUrl(filter, true);
@@ -1631,19 +1627,9 @@ class FilesStore {
       this.filesController = new AbortController();
     }
 
-    const filterData = !!filter ? filter.clone() : RoomsFilter.getDefault();
-
-    const filterStorageItem = localStorage.getItem(
-      `UserRoomsFilter=${this.userStore.user?.id}`,
-    );
-
-    if (filterStorageItem && (!filter || withFilterLocalStorage)) {
-      const splitFilter = filterStorageItem.split(",");
-
-      filterData.sortBy = splitFilter[0];
-      filterData.pageCount = +splitFilter[1];
-      filterData.sortOrder = splitFilter[2];
-    }
+    const filterData = !!filter
+      ? filter.clone()
+      : RoomsFilter.getDefault(this.userStore.user?.id);
 
     if (!this.settingsStore.withPaging) {
       filterData.page = 0;
@@ -2722,7 +2708,6 @@ class FilesStore {
     newFilter.startIndex =
       (newFilter.page + 1) * newFilter.pageCount - deleteCount;
     newFilter.pageCount = deleteCount;
-
     if (isRooms) {
       return api.rooms
         .getRooms(newFilter)
@@ -3977,7 +3962,8 @@ class FilesStore {
   }
 
   getRooms = async (filter) => {
-    let newFilter = RoomsFilter.getDefault();
+    const userId = this.userStore.user && this.userStore.user.id;
+    let newFilter = RoomsFilter.getDefault(userId);
     Object.assign(newFilter, filter);
 
     return await api.rooms.getRooms(newFilter);

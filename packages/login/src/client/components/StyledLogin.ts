@@ -53,6 +53,24 @@ export const LoginFormWrapper = styled.div`
     }
   }
 
+  .greeting-container {
+    margin-bottom: 40px;
+    max-width: 380px;
+    min-width: 380px;
+
+    @media ${tablet} {
+      max-width: 480px;
+      min-width: 480px;
+    }
+
+    @media ${mobile} {
+      max-width: 100%;
+      min-width: 100%;
+    }
+    p {
+      text-align: center;
+    }
+  }
   .invitation-info-container {
     margin-bottom: 16px;
     .sign-in-container {

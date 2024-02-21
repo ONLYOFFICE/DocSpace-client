@@ -28,6 +28,8 @@ import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 import { getLogoFromPath, getSystemTheme } from "@docspace/shared/utils";
 import { TenantStatus } from "@docspace/shared/enums";
 import { getObjectByLocation } from "@docspace/shared/utils/common";
+import InvitationContainer from "./sub-components/GreetingContainer";
+import GreetingContainer from "./sub-components/GreetingContainer";
 
 const themes = {
   Dark: Dark,
@@ -62,7 +64,8 @@ const Login: React.FC<ILoginProps> = ({
     if (location.search) {
       const queryParams = getObjectByLocation(location);
       setInvitationLinkData(queryParams);
-      window.history.replaceState({}, document.title, window.location.pathname);
+
+      //window.history.replaceState({}, document.title, window.location.pathname);
     }
 
     isRestoringPortal && window.location.replace("/preparation-portal");
@@ -72,8 +75,9 @@ const Login: React.FC<ILoginProps> = ({
   const [invitationLinkData, setInvitationLinkData] = useState({
     email: "",
     roomName: "",
-    userFirstName: "",
-    userLastName: "",
+    firstName: "",
+    lastName: "",
+    type: "",
   });
 
   const {
@@ -83,7 +87,7 @@ const Login: React.FC<ILoginProps> = ({
     cookieSettingsEnabled,
   } = portalSettings || {
     enabledJoin: false,
-    greetingSettings: false,
+    greetingSettings: "",
     enableAdmMess: false,
     cookieSettingsEnabled: false,
   };
@@ -192,7 +196,7 @@ const Login: React.FC<ILoginProps> = ({
         ssoSVG: SSOIcon,
       }
     : {};
-
+  console.log("invitationLinkData.type", invitationLinkData.type);
   return (
     <LoginFormWrapper
       id="login-page"
@@ -202,16 +206,19 @@ const Login: React.FC<ILoginProps> = ({
     >
       <div className="bg-cover"></div>
       <LoginContent enabledJoin={enabledJoin}>
-        <ColorTheme themeId={ThemeId.LinkForgotPassword}>
-          <img src={logoUrl} className="logo-wrapper" />
-          <Text
-            fontSize="23px"
-            fontWeight={700}
-            textAlign="center"
-            className="greeting-title"
-          >
-            {greetingSettings}
-          </Text>
+        <ColorTheme
+          themeId={ThemeId.LinkForgotPassword}
+          type={invitationLinkData.type}
+        >
+          <GreetingContainer
+            t={t}
+            roomName={invitationLinkData.roomName}
+            firstName={invitationLinkData.firstName}
+            lastName={invitationLinkData.lastName}
+            logoUrl={logoUrl}
+            greetingSettings={greetingSettings}
+            type={invitationLinkData.type}
+          />
           <FormWrapper id="login-form" theme={theme}>
             <LoginForm
               isBaseTheme={isBaseTheme}

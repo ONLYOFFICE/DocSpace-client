@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { tablet, mobile } from "../../../utils";
 import { Base } from "../../../themes";
 
-const LoginContainer = styled.div`
+const LoginContainer = styled.div<{ type: string }>`
   user-select: none;
   display: flex;
   flex-direction: column;
@@ -128,11 +128,7 @@ const LoginContainer = styled.div`
   }
 
   .auth-form-container {
-    width: 320px;
-
-    @media ${tablet} {
-      width: 100%;
-    }
+    width: 100%;
 
     .field-body {
       input,
@@ -239,8 +235,9 @@ const LoginContainer = styled.div`
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 46px;
-    padding-bottom: 40px;
+    height: ${(props) => (props.type === "invitation" ? "26.56px" : "44px")};
+    padding-bottom: ${(props) =>
+      props.type === "invitation" ? "16px" : "40px"};
 
     svg {
       path:last-child {

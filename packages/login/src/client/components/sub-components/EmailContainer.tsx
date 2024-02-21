@@ -8,7 +8,7 @@ import { FieldContainer } from "@docspace/shared/components/field-container";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 
-interface IEmailContainer extends IInitialState {
+interface IEmailContainer {
   emailFromInvitation?: string;
   isEmailErrorShow: boolean;
   errorText?: string;

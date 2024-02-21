@@ -166,14 +166,11 @@ const CreateUserForm = (props) => {
         "/login",
         `?type=invitation&email=${email}&roomName=${roomName}&firstName=${user.firstName}&lastName=${user.lastName}`,
       );
-
-   
     } catch (err) {
       const status = err?.response?.status;
       const isNotExistUser = status === 404;
 
       if (isNotExistUser) {
-       
       }
     }
 
@@ -414,7 +411,7 @@ const CreateUserForm = (props) => {
                     i18nKey={
                       roomName ? "InvitationToRoom" : "InvitationToPortal"
                     }
-                    ns="Confirm"
+                    ns="Common"
                     defaults={
                       roomName ? DEFAULT_ROOM_TEXT : DEFAULT_PORTAL_TEXT
                     }

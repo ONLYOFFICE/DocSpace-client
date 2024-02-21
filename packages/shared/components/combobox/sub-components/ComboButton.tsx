@@ -106,6 +106,7 @@ const ComboButton = (props: ComboButtonProps) => {
           truncate
           fontWeight={600}
           className="combo-button-label"
+          dir="auto"
         >
           {selectedOption?.label}
         </Text>

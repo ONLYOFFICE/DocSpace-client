@@ -117,6 +117,7 @@ const GroupsTableItem = ({
             fontSize="12px"
             isTextOverflow
             className="table-cell_group-manager"
+            dir="auto"
           >
             {item.name}
           </Link>
@@ -130,6 +131,7 @@ const GroupsTableItem = ({
             isTextOverflow
             className="table-cell_group-manager"
             color={"#A3A9AE"}
+            dir="auto"
           >
             {item.manager.displayName}
           </Text>

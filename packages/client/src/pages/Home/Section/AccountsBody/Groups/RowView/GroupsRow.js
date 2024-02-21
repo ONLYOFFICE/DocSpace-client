@@ -110,6 +110,7 @@ const GroupsRow = ({
                 title={item.name}
                 fontWeight={600}
                 fontSize="15px"
+                lineHeight="20px"
                 color={nameColor}
                 isTextOverflow={true}
                 onClick={onOpenGroup}

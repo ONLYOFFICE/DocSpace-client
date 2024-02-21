@@ -257,6 +257,11 @@ const StyledGroupsComboBox = styled(ComboBox)`
 
 StyledGroupsComboBox.defaultProps = { theme: Base };
 
+const StyledTextWrapper = styled.div`
+  padding-inline-start: 8px;
+  overflow: hidden;
+`;
+
 const fakeRooms = [
   {
     name: "Room 1",
@@ -456,18 +461,20 @@ const PeopleTableRow = (props) => {
 
     if (groups.length === 1)
       return (
-        <Text
-          type="page"
-          title={position}
-          fontSize="13px"
-          fontWeight={600}
-          color={sideInfoColor}
-          truncate
-          noSelect
-          style={{ paddingLeft: "8px" }}
-        >
-          {groups[0].name}
-        </Text>
+        <StyledTextWrapper>
+          <Text
+            type="page"
+            title={position}
+            fontSize="13px"
+            fontWeight={600}
+            color={sideInfoColor}
+            truncate
+            noSelect
+            dir="auto"
+          >
+            {groups[0].name}
+          </Text>
+        </StyledTextWrapper>
       );
 
     return null;
@@ -495,18 +502,20 @@ const PeopleTableRow = (props) => {
     );
 
     const text = (
-      <Text
-        type="page"
-        title={position}
-        fontSize="13px"
-        fontWeight={600}
-        color={sideInfoColor}
-        truncate
-        noSelect
-        style={{ paddingLeft: "8px" }}
-      >
-        {typeLabel}
-      </Text>
+      <StyledTextWrapper>
+        <Text
+          type="page"
+          title={position}
+          fontSize="13px"
+          fontWeight={600}
+          color={sideInfoColor}
+          truncate
+          noSelect
+          dir="auto"
+        >
+          {typeLabel}
+        </Text>
+      </StyledTextWrapper>
     );
 
     const canChange = canChangeUserType(item);
@@ -585,6 +594,7 @@ const PeopleTableRow = (props) => {
             isTextOverflow
             className="table-cell_username"
             noHover
+            dir="auto"
           >
             {statusType === "pending"
               ? email
@@ -655,6 +665,7 @@ const PeopleTableRow = (props) => {
             onClick={onEmailClick}
             isTextOverflow
             enableUserSelect
+            dir="auto"
           >
             {email}
           </Link>

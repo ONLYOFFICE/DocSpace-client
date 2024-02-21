@@ -21,14 +21,14 @@ export const GroupMemberRow = styled.div<{}>`
 
     .name {
       color: #333;
-      font-size: 14px;
+      font-size: ${({ theme }) => theme.getCorrectFontSize("14px")};
       font-weight: 600;
       line-height: 16px;
     }
 
     .email {
       color: #a3a9ae;
-      font-size: 10px;
+      font-size: ${({ theme }) => theme.getCorrectFontSize("10px")};
       font-weight: 400;
       line-height: normal;
     }
@@ -36,7 +36,7 @@ export const GroupMemberRow = styled.div<{}>`
 
   .remove-icon {
     cursor: pointer;
-    margin-left: auto;
+    margin-inline-start: auto;
 
     svg {
       path {

@@ -1,16 +1,15 @@
 import React from "react";
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { RectangleSkeleton } from "../rectangle";
 
-import { StyledStorageManagementLoader } from "./StyledComponent";
+import { StyledStorageManagementLoader } from "./Settings.styled";
+import type { SettingsStorageManagementSkeletonProps } from "./Settings.types";
 
-const SettingsStorageManagementLoader = ({
-  id,
+export const SettingsStorageManagementSkeleton = ({
   className,
   style,
-  isRectangle,
   ...rest
-}) => {
+}: SettingsStorageManagementSkeletonProps) => {
   const {
     title,
     borderRadius,
@@ -23,7 +22,7 @@ const SettingsStorageManagementLoader = ({
   } = rest;
 
   return (
-    <StyledStorageManagementLoader>
+    <StyledStorageManagementLoader className={className} style={style}>
       <RectangleSkeleton
         className="storage-loader_title"
         title={title}
@@ -144,5 +143,3 @@ const SettingsStorageManagementLoader = ({
     </StyledStorageManagementLoader>
   );
 };
-
-export default SettingsStorageManagementLoader;

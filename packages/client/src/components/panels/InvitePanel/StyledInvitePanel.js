@@ -14,6 +14,7 @@ import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 import CrossIconMobile from "PUBLIC_DIR/images/cross.react.svg";
 import DeleteIcon from "PUBLIC_DIR/images/mobile.actions.remove.react.svg";
+import { isMobile } from "@docspace/shared/utils";
 
 import Base from "@docspace/shared/themes/base";
 
@@ -65,10 +66,17 @@ const StyledInvitePanel = styled.div`
           : css`
               padding-right: 0px !important;
             `}
+
+      ${!isMobile() &&
+      css`
+        width: 480px;
+        min-width: auto !important;
+      `}
     }
 
     ${(props) =>
       !props.addUsersPanelVisible &&
+      isMobile() &&
       props.theme.interfaceDirection !== "rtl" &&
       css`
         .trackYVisible {
@@ -78,16 +86,6 @@ const StyledInvitePanel = styled.div`
         }
       `}
   }
-
-  ${(props) =>
-    !props.scrollAllPanelContent &&
-    css`
-      .trackYVisible {
-        .scroller {
-          margin-right: -20px !important;
-        }
-      }
-    `}
 `;
 
 const ScrollList = styled.div`
@@ -96,6 +94,13 @@ const ScrollList = styled.div`
     props.scrollAllPanelContent && props.isTotalListHeight
       ? "auto"
       : props.offsetTop && `calc(100% - ${props.offsetTop}px)`};
+
+  ${!isMobile() &&
+  css`
+    .row-item {
+      width: 448px !important;
+    }
+  `}
 `;
 
 const StyledBlock = styled.div`

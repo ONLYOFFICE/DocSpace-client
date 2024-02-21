@@ -436,3 +436,29 @@ export function getMembersList(
     return res;
   });
 }
+
+export function setCustomUserQuota(userIds, quota) {
+  const data = {
+    userIds,
+    quota,
+  };
+  const options = {
+    method: "put",
+    url: "/people/userquota",
+    data,
+  };
+
+  return request(options);
+}
+export function resetUserQuota(userIds) {
+  const data = {
+    userIds,
+  };
+  const options = {
+    method: "put",
+    url: "/people/resetquota",
+    data,
+  };
+
+  return request(options);
+}

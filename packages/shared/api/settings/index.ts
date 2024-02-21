@@ -880,6 +880,40 @@ export function removeActiveSession(eventId) {
   });
 }
 
+export function setDefaultUserQuota(enableQuota, defaultQuota) {
+  const data = {
+    enableQuota,
+    defaultQuota,
+  };
+  const options = {
+    method: "post",
+    url: "/settings/userquotasettings",
+    data,
+  };
+
+  return request(options);
+}
+export function setDefaultRoomQuota(enableQuota, defaultQuota) {
+  const data = {
+    enableQuota,
+    defaultQuota,
+  };
+  const options = {
+    method: "post",
+    url: "/settings/roomquotasettings",
+    data,
+  };
+
+  return request(options);
+}
+
+export function getQuotaSettings() {
+  return request({
+    method: "get",
+    url: "/settings/userquotasettings",
+  });
+}
+
 export function createWebhook(name, uri, secretKey, ssl) {
   return request({
     method: "post",
@@ -1032,4 +1066,28 @@ export async function getCSPSettings() {
   })) as TGetCSPSettings;
 
   return res;
+}
+
+export function recalculateQuota() {
+  return request({
+    method: "get",
+    url: `/settings/recalculatequota`,
+  });
+}
+
+export function checkRecalculateQuota() {
+  return request({
+    method: "get",
+    url: `/settings/checkrecalculatequota`,
+  });
+}
+
+export function setTenantQuotaSettings(data) {
+  const options = {
+    method: "put",
+    url: `/settings/tenantquotasettings`,
+    data,
+  };
+
+  return request(options);
 }

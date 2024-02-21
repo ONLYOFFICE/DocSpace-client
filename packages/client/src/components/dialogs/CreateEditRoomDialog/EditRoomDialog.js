@@ -39,7 +39,8 @@ const EditRoomDialog = ({
         currentParams.tags.map((t) => t.name).sort().join("|").toLowerCase() &&
       ((prevParams.icon.uploadedFile === "" &&
         currentParams.icon.uploadedFile === null) ||
-        prevParams.icon.uploadedFile === currentParams.icon.uploadedFile)
+        prevParams.icon.uploadedFile === currentParams.icon.uploadedFile) &&
+      prevParams.quota === currentParams.quota
     );
   };
 

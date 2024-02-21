@@ -18,6 +18,7 @@ import {
   TFile,
   TFileLink,
   TFilesSettings,
+  TFilesUsedSpace,
   TFolder,
   TGetFolder,
   TGetFolderPath,
@@ -1331,4 +1332,15 @@ export function deleteFilesFromRecent(fileIds: number[]) {
       fileIds,
     },
   });
+}
+
+export async function getFilesUsedSpace() {
+  const options: AxiosRequestConfig = {
+    method: "get",
+    url: `/files/filesusedspace`,
+  };
+
+  const res = (await request(options)) as TFilesUsedSpace;
+
+  return res;
 }

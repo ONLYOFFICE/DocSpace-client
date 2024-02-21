@@ -9,6 +9,10 @@
   "StorageAndUserHeader": "Storage and admins/power users limits are about to be exceeded.",
   "StorageQuotaDescription": "You can remove the unnecessary files or <1>{{clickHere}}</1> to find a more suitable  pricing plan for your DocSpace.",
   "StorageQuotaHeader": "Storage space amount is about to be exceeded: {{currentValue}} / {{maxValue}}",
+  "TenantCustomQuotaDescription": "You can remove the unnecessary files or change quota in the <1>Storage management settings.</1>",
   "UserQuotaDescription": "<1>{{clickHere}}</1> to find a better pricing plan for your DocSpace.",
-  "UserQuotaHeader": "The number of admins/power users is about to be exceeded: {{currentValue}} / {{maxValue}}."
+  "UserQuotaHeader": "The number of admins/power users is about to be exceeded: {{currentValue}} / {{maxValue}}.",
+  "StorageQuotaExceeded": "Storage quota exceeded",
+  "PersonalUserQuotaDescription": "To upload and create new files and folders, please free up disk space or contact the administrator to increase the storage quota.",
+  "PersonalUserQuotaAdminsDescription": "To upload and create new files and folders, please free up disk space, or manage quota per user in the <1>Storage management settings.</1>"
 }

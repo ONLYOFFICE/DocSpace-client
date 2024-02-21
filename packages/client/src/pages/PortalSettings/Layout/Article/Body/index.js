@@ -109,20 +109,24 @@ const ArticleBodyContent = (props) => {
       if (location.pathname.includes("integration")) {
         setSelectedKeys(["4-0"]);
       }
-
-      if (location.pathname.includes("developer")) {
+      if (location.pathname.includes("management")) {
         setSelectedKeys(["5-0"]);
       }
 
-      if (location.pathname.includes("delete-data")) {
+      if (location.pathname.includes("developer")) {
         setSelectedKeys(["6-0"]);
       }
 
-      if (location.pathname.includes("payments")) {
+      if (location.pathname.includes("delete-data")) {
         setSelectedKeys(["7-0"]);
       }
-      if (location.pathname.includes("bonus")) {
+
+      if (location.pathname.includes("payments")) {
         setSelectedKeys(["8-0"]);
+      }
+
+      if (location.pathname.includes("bonus")) {
+        setSelectedKeys(["9-0"]);
       }
     }
   }, [
@@ -194,6 +198,8 @@ const ArticleBodyContent = (props) => {
         return t("Common:Bonus");
       case "Common:FreeProFeatures":
         return "Common:FreeProFeatures";
+      case "StorageManagement":
+        return t("StorageManagement");
       default:
         throw new Error("Unexpected translation key");
     }

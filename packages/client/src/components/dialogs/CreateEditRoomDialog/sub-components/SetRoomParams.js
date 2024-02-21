@@ -1,7 +1,7 @@
 import React from "react";
-import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 import { withTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
 
 import RoomTypeDropdown from "./RoomTypeDropdown";
 import TagInput from "./TagInput";
@@ -24,6 +24,8 @@ import SystemFolders from "./SystemFolders";
 import { RoomsType } from "@docspace/shared/enums";
 
 import ChangeRoomOwner from "./ChangeRoomOwner";
+import RoomQuota from "./RoomQuota";
+
 
 const StyledSetRoomParams = styled.div`
   display: flex;
@@ -59,6 +61,8 @@ const SetRoomParams = ({
   setIsWrongTitle,
   onKeyUp,
   enableThirdParty,
+  isDefaultRoomsQuotaSet,
+  currentColorScheme,
   setChangeRoomOwnerIsVisible,
   folderFormValidation,
 }) => {
@@ -167,6 +171,15 @@ const SetRoomParams = ({
         />
       )}
 
+      {isDefaultRoomsQuotaSet && (
+        <RoomQuota
+          setRoomParams={setRoomParams}
+          roomParams={roomParams}
+          isEdit={isEdit}
+          isDisabled={isDisabled}
+        />
+      )}
+
       <div>
         <Text fontWeight={600} className="icon-editor_text">
           {t("Icon")}
@@ -197,11 +210,14 @@ const SetRoomParams = ({
   );
 };
 
-export default inject(({ settingsStore, dialogsStore }) => {
+export default inject(({ settingsStore, dialogsStore, currentQuotaStore }) => {
+  const { isDefaultRoomsQuotaSet } = currentQuotaStore;
+
   const { setChangeRoomOwnerIsVisible } = dialogsStore;
   const { folderFormValidation } = settingsStore;
 
   return {
+    isDefaultRoomsQuotaSet,
     folderFormValidation,
     setChangeRoomOwnerIsVisible,
   };

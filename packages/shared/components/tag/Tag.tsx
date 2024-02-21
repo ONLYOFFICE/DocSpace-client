@@ -131,7 +131,7 @@ export const TagPure = ({
               fontSize="12px"
               truncate
             >
-              {tag}
+              {t}
             </StyledDropdownText>
           </DropDownItem>
         ))}

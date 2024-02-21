@@ -22,6 +22,8 @@ const Details = ({
   isCollaborator,
   selectTag,
   isArchive,
+  isDefaultRoomsQuotaSet,
+  setNewInfoPanelSelection,
 }) => {
   const [itemProperties, setItemProperties] = useState([]);
 
@@ -40,6 +42,8 @@ const Details = ({
     personal,
     culture,
     selectTag,
+    isDefaultRoomsQuotaSet,
+    setNewInfoPanelSelection,
   });
 
   const createThumbnailAction = useCallback(async () => {
@@ -139,9 +143,14 @@ export default inject(
     filesActionsStore,
     infoPanelStore,
     userStore,
+    currentQuotaStore,
   }) => {
-    const { infoPanelSelection, getInfoPanelItemIcon, openUser } =
-      infoPanelStore;
+    const {
+      infoPanelSelection,
+      getInfoPanelItemIcon,
+      openUser,
+      setNewInfoPanelSelection,
+    } = infoPanelStore;
     const { createThumbnail } = filesStore;
     const { personal, culture } = settingsStore;
     const { user } = userStore;
@@ -152,6 +161,7 @@ export default inject(
     const isCollaborator = user.isCollaborator;
 
     const isArchive = infoPanelSelection?.rootFolderType === FolderType.Archive;
+    const { isDefaultRoomsQuotaSet } = currentQuotaStore;
 
     return {
       personal,
@@ -164,6 +174,8 @@ export default inject(
       isCollaborator,
       selectTag,
       isArchive,
+      isDefaultRoomsQuotaSet,
+      setNewInfoPanelSelection,
     };
   }
 )(withTranslation(["InfoPanel", "Common", "Translations", "Files"])(Details));

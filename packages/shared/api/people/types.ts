@@ -33,8 +33,8 @@ export type TUser = {
   isCollaborator: boolean;
   mobilePhoneActivationStatus: number;
   isSSO: boolean;
-  quotaLimit: number;
-  usedSpace: number;
+  quotaLimit?: number;
+  usedSpace?: number;
   id: string;
   displayName: string;
   avatarSmall: string;

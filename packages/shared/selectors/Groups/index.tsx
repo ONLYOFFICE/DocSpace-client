@@ -21,7 +21,7 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
     onSubmit,
   } = props;
 
-  const { t } = useTranslation(["GroupsSelector", "Common"]);
+  const { t } = useTranslation(["Common"]);
   const theme = useTheme();
 
   const [searchValue, setSearchValue] = useState("");
@@ -123,11 +123,11 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
       onSubmit={onSubmitAction}
       cancelButtonLabel={t("Common:CancelButton")}
       emptyScreenImage={emptyScreenImg}
-      emptyScreenHeader={t("GroupsNotFoundHeader")} // Todo: Update empty screen texts when they are ready
-      emptyScreenDescription={t("GroupsNotFoundDescription")}
+      emptyScreenHeader={t("Common:GroupsNotFoundHeader")} // Todo: Update empty screen texts when they are ready
+      emptyScreenDescription={t("Common:GroupsNotFoundDescription")}
       searchEmptyScreenImage={emptyScreenImg}
-      searchEmptyScreenHeader={t("GroupsNotFoundHeader")}
-      searchEmptyScreenDescription={t("GroupsNotFoundDescription")}
+      searchEmptyScreenHeader={t("Common:GroupsNotFoundHeader")}
+      searchEmptyScreenDescription={t("Common:GroupsNotFoundDescription")}
       totalItems={totalRef.current}
       hasNextPage={hasNextPage}
       isNextPageLoading={isNextPageLoading}

@@ -135,7 +135,6 @@ const AddUsersPanel = ({
     "PeopleTranslations",
     "Common",
     "InviteDialog",
-    "GroupsSelector",
     "People",
   ]);
 
@@ -467,23 +466,23 @@ const AddUsersPanel = ({
             // Todo: Update groups empty screen texts when they are ready
             activeTabId === PEOPLE_TAB_ID
               ? t("Common:EmptyHeader")
-              : t("GroupsSelector:GroupsNotFoundHeader")
+              : t("Common:GroupsNotFoundHeader")
           }
           emptyScreenDescription={
             activeTabId === PEOPLE_TAB_ID
               ? t("Common:EmptyDescription")
-              : t("GroupsSelector:GroupsNotFoundDescription")
+              : t("Common:GroupsNotFoundDescription")
           }
           searchEmptyScreenImage={emptyScreenImage}
           searchEmptyScreenHeader={
             activeTabId === PEOPLE_TAB_ID
               ? t("Common:NotFoundUsers")
-              : t("GroupsSelector:GroupsNotFoundHeader")
+              : t("Common:GroupsNotFoundHeader")
           }
           searchEmptyScreenDescription={
             activeTabId === PEOPLE_TAB_ID
               ? t("Common:NotFoundUsersDescription")
-              : t("GroupsSelector:GroupsNotFoundDescription")
+              : t("Common:GroupsNotFoundDescription")
           }
           hasNextPage={hasNextPage}
           isNextPageLoading={isNextPageLoading}

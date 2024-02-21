@@ -76,6 +76,7 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
       const convertedItems: TSelectorItem[] = items.map((group) => ({
         id: group.id,
         label: group.name,
+        name: group.name,
         isGroup: true,
         avatar: "",
       }));

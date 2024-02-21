@@ -64,7 +64,7 @@ export type TSelectorBreadCrumbs =
 // tabs
 
 export type TWithTabs =
-  | { withTabs: true; tabsData: TSubmenuItem[]; activeTabId: number }
+  | { withTabs: true; tabsData: TSubmenuItem[]; activeTabId: string }
   | { withTabs?: undefined; tabsData?: undefined; activeTabId?: undefined };
 
 // select all
@@ -79,7 +79,10 @@ export interface SelectAllProps {
   rowLoader: React.ReactNode;
 }
 
-export type TSelectorSelectAll =
+export type TSelectorSelectAll = {
+  isAllIndeterminate: boolean;
+  isAllChecked: boolean;
+} & (
   | {
       withSelectAll: true;
       selectAllLabel: string;
@@ -91,7 +94,8 @@ export type TSelectorSelectAll =
       selectAllLabel?: undefined;
       selectAllIcon?: undefined;
       onSelectAll?: undefined;
-    };
+    }
+);
 
 // search
 export interface SearchProps {
@@ -125,8 +129,6 @@ export type TSelectorSearch =
 export type TSelectorBodySearch = TSelectorSearch & {
   isSearch: boolean;
   setIsSearch: React.Dispatch<React.SetStateAction<boolean>>;
-  isAllIndeterminate: boolean;
-  isAllChecked: boolean;
 };
 
 // empty screen
@@ -265,11 +267,6 @@ export type SelectorProps = TSelectorHeader &
     isMultiSelect: boolean;
     selectedItems?: TSelectorItem[];
 
-    withAccessRights?: boolean;
-    accessRights?: TAccessRight[];
-    selectedAccessRight?: TAccessRight;
-    onAccessRightsChange?: (access: TAccessRight) => void;
-
     disableFirstFetch?: boolean;
     loadNextPage: (startIndex: number) => Promise<void>;
     hasNextPage: boolean;
@@ -283,6 +280,7 @@ export type SelectorProps = TSelectorHeader &
       label: string,
       role?: string,
       email?: string,
+      isGroup?: boolean,
     ) => React.ReactNode | null;
 
     alwaysShowFooter?: boolean;
@@ -365,13 +363,15 @@ type TSelectorItemType =
       isAdmin: boolean;
       isVisitor: boolean;
       isCollaborator: boolean;
-      access: ShareAccessRights | string | number;
+      access?: ShareAccessRights | string | number;
       isFolder?: undefined;
       parentId?: undefined;
       rootFolderType?: undefined;
       filesCount?: undefined;
       foldersCount?: undefined;
       security?: undefined;
+      isGroup?: undefined;
+      name?: undefined;
     }
   | {
       email?: undefined;
@@ -389,6 +389,8 @@ type TSelectorItemType =
       filesCount?: undefined;
       foldersCount?: undefined;
       security?: TFileSecurity;
+      isGroup?: undefined;
+      name?: undefined;
     }
   | {
       email?: undefined;
@@ -406,6 +408,8 @@ type TSelectorItemType =
       filesCount?: number;
       foldersCount?: number;
       security?: TRoomSecurity;
+      isGroup?: undefined;
+      name?: undefined;
     }
   | {
       email?: undefined;
@@ -423,6 +427,27 @@ type TSelectorItemType =
       filesCount?: number;
       foldersCount?: number;
       security?: TFolderSecurity;
+      isGroup?: undefined;
+      name?: undefined;
+    }
+  | {
+      email?: undefined;
+      fileExst?: undefined;
+      roomType?: undefined;
+      shared?: boolean;
+      isOwner?: undefined;
+      isAdmin?: undefined;
+      isVisitor?: undefined;
+      isCollaborator?: undefined;
+      access?: undefined;
+      isFolder?: undefined;
+      parentId?: string | number;
+      rootFolderType?: string | number;
+      filesCount?: number;
+      foldersCount?: number;
+      security?: TFolderSecurity;
+      isGroup: true;
+      name: string;
     };
 
 export type TSelectorItem = TSelectorItemLogo &
@@ -446,6 +471,7 @@ export type Data = {
     label: string,
     role?: string,
     email?: string,
+    isGroup?: boolean,
   ) => React.ReactNode | null;
 };
 

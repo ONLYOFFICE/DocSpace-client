@@ -17,6 +17,7 @@ import { Item } from "./Item";
 
 const CONTAINER_PADDING = 16;
 const HEADER_HEIGHT = 54;
+const TABS_HEIGHT = 40;
 const BREAD_CRUMBS_HEIGHT = 38;
 const SEARCH_HEIGHT = 44;
 const BODY_DESCRIPTION_TEXT_HEIGHT = 32;
@@ -135,6 +136,7 @@ const Body = ({
   let listHeight = bodyHeight - CONTAINER_PADDING;
 
   if (withSearch || isSearch || itemsCount > 0) listHeight -= SEARCH_HEIGHT;
+  if (withTabs) listHeight -= TABS_HEIGHT;
 
   if (withBreadCrumbs) listHeight -= BREAD_CRUMBS_HEIGHT;
 

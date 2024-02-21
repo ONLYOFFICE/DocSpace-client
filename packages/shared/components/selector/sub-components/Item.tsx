@@ -87,10 +87,10 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
         className="test-22"
         isDisabled={isDisabled}
       >
-        {avatar ? (
+        {avatar || isGroup ? (
           <Avatar
             className="user-avatar"
-            source={avatar}
+            source={avatar ?? ""}
             role={currentRole}
             size={AvatarSize.min}
             isGroup={isGroup}

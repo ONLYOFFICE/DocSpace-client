@@ -4,6 +4,12 @@ import {
   ThemeKeys,
 } from "../../enums";
 
+export type TUserGroup = {
+  id: string;
+  manager: string;
+  name: string;
+};
+
 export type TUser = {
   access: number;
   firstName: string;
@@ -37,6 +43,7 @@ export type TUser = {
   theme?: ThemeKeys;
   mobilePhone?: string;
   cultureName?: string;
+  groups?: TUserGroup[];
 };
 
 export type TGetUserList = {

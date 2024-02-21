@@ -21,6 +21,7 @@ import ConsumerItem from "./sub-components/consumerItem";
 import ConsumerModalDialog from "./sub-components/consumerModalDialog";
 
 import ThirdPartyLoader from "./sub-components/thirdPartyLoader";
+import { UrlActionType } from "@docspace/common/constants";
 
 const RootContainer = styled(Box)`
   max-width: 700px;
@@ -163,6 +164,7 @@ class ThirdPartyServices extends React.Component {
       theme,
       currentColorScheme,
       isThirdPartyAvailable,
+      openUrl,
     } = this.props;
     const { dialogVisible, isLoading } = this.state;
     const { onModalClose, onModalOpen, setConsumer, onChangeLoading } = this;
@@ -201,6 +203,9 @@ class ThirdPartyServices extends React.Component {
               isHovered
               target="_blank"
               href={integrationSettingsUrl}
+              onClick={() =>
+                openUrl(integrationSettingsUrl, UrlActionType.Link)
+              }
             >
               {t("Common:LearnMore")}
             </Link>
@@ -306,6 +311,7 @@ export default inject(({ setup, auth }) => {
     theme,
     currentColorScheme,
     companyInfoSettingsData,
+    openUrl,
   } = settingsStore;
   const {
     getConsumers,
@@ -327,5 +333,6 @@ export default inject(({ setup, auth }) => {
     currentColorScheme,
     isThirdPartyAvailable,
     supportEmail: companyInfoSettingsData?.email,
+    openUrl,
   };
 })(withTranslation(["Settings", "Common"])(observer(ThirdPartyServices)));

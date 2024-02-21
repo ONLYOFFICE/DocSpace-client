@@ -14,7 +14,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import BruteForceProtectionLoader from "../sub-components/loaders/brute-force-protection-loader";
 import Link from "@docspace/components/link";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType, UrlActionType } from "@docspace/common/constants";
 
 const BruteForceProtection = (props) => {
   const {
@@ -29,6 +29,7 @@ const BruteForceProtection = (props) => {
     bruteForceProtectionUrl,
     currentDeviceType,
     currentColorScheme,
+    openUrl,
   } = props;
 
   const defaultNumberAttempt = numberAttempt?.toString();
@@ -244,6 +245,7 @@ const BruteForceProtection = (props) => {
           isHovered
           href={bruteForceProtectionUrl}
           color={currentColorScheme.main.accent}
+          onClick={() => openUrl(bruteForceProtectionUrl, UrlActionType.Link)}
         >
           {t("Common:LearnMore")}
         </Link>
@@ -334,6 +336,7 @@ export default inject(({ auth, setup }) => {
     bruteForceProtectionUrl,
     currentDeviceType,
     currentColorScheme,
+    openUrl,
   } = auth.settingsStore;
 
   const { initSettings, isInit } = setup;
@@ -349,5 +352,6 @@ export default inject(({ auth, setup }) => {
     bruteForceProtectionUrl,
     currentDeviceType,
     currentColorScheme,
+    openUrl,
   };
 })(withTranslation(["Settings", "Common"])(observer(BruteForceProtection)));

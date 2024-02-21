@@ -13,6 +13,8 @@ import IconButton from "@docspace/components/icon-button";
 import { Base } from "@docspace/components/themes";
 import { tablet, mobile } from "@docspace/components/utils/device";
 
+import { UrlActionType } from "@docspace/common/constants";
+
 const StyledArticleApps = styled.div`
   display: flex;
   flex-direction: column;
@@ -50,7 +52,7 @@ const StyledArticleApps = styled.div`
 
 StyledArticleApps.defaultProps = { theme: Base };
 
-const ArticleApps = React.memo(({ theme, showText, withDevTools }) => {
+const ArticleApps = React.memo(({ theme, showText, withDevTools, openUrl }) => {
   const { t } = useTranslation(["Translations"]);
 
   const desktopLink = "https://www.onlyoffice.com/desktop.aspx";
@@ -66,7 +68,7 @@ const ArticleApps = React.memo(({ theme, showText, withDevTools }) => {
       </Text>
       <div className="download-app-list">
         <IconButton
-          onClick={() => window.open(desktopLink)}
+          onClick={() => openUrl(desktopLink, UrlActionType.Link)}
           iconName={WindowsReactSvgUrl}
           size="32"
           isFill={true}
@@ -74,7 +76,7 @@ const ArticleApps = React.memo(({ theme, showText, withDevTools }) => {
           title={t("Translations:MobileWin")}
         />
         <IconButton
-          onClick={() => window.open(desktopLink)}
+          onClick={() => openUrl(desktopLink, UrlActionType.Link)}
           iconName={MacOSReactSvgUrl}
           size="32"
           isFill={true}
@@ -82,7 +84,7 @@ const ArticleApps = React.memo(({ theme, showText, withDevTools }) => {
           title={t("Translations:MobileMac")}
         />
         <IconButton
-          onClick={() => window.open(desktopLink)}
+          onClick={() => openUrl(desktopLink, UrlActionType.Link)}
           iconName={LinuxReactSvgUrl}
           size="32"
           isFill={true}
@@ -90,7 +92,7 @@ const ArticleApps = React.memo(({ theme, showText, withDevTools }) => {
           title={t("Translations:MobileLinux")}
         />
         <IconButton
-          onClick={() => window.open(androidLink)}
+          onClick={() => openUrl(androidLink, UrlActionType.Link)}
           iconName={AndroidReactSvgUrl}
           size="32"
           isFill={true}
@@ -98,7 +100,7 @@ const ArticleApps = React.memo(({ theme, showText, withDevTools }) => {
           title={t("Translations:MobileAndroid")}
         />
         <IconButton
-          onClick={() => window.open(iosLink)}
+          onClick={() => openUrl(iosLink, UrlActionType.Link)}
           iconName={IOSReactSvgUrl}
           size="32"
           isFill={true}

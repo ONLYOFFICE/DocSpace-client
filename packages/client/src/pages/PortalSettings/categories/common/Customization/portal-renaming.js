@@ -16,6 +16,7 @@ import withLoading from "SRC_DIR/HOCs/withLoading";
 import { PortalRenamingDialog } from "SRC_DIR/components/dialogs";
 import Text from "@docspace/components/text";
 import Link from "@docspace/components/link";
+import { UrlActionType } from "@docspace/common/constants";
 
 const PortalRenaming = (props) => {
   const {
@@ -33,6 +34,7 @@ const PortalRenaming = (props) => {
     currentColorScheme,
     renamingSettingsUrl,
     domainValidator,
+    openUrl,
   } = props;
 
   const navigate = useNavigate();
@@ -311,6 +313,7 @@ const PortalRenaming = (props) => {
           target="_blank"
           isHovered
           href={renamingSettingsUrl}
+          onClick={() => openUrl(renamingSettingsUrl, UrlActionType.Link)}
         >
           {t("Common:LearnMore")}
         </Link>
@@ -350,6 +353,7 @@ export default inject(({ auth, setup, common }) => {
     currentColorScheme,
     renamingSettingsUrl,
     domainValidator,
+    openUrl,
   } = auth.settingsStore;
   const { setPortalRename } = setup;
   const { isLoaded, setIsLoadedPortalRenaming, initSettings, setIsLoaded } =
@@ -367,6 +371,7 @@ export default inject(({ auth, setup, common }) => {
     currentColorScheme,
     renamingSettingsUrl,
     domainValidator,
+    openUrl,
   };
 })(
   withLoading(withTranslation(["Settings", "Common"])(observer(PortalRenaming)))

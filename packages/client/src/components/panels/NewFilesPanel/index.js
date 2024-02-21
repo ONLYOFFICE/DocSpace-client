@@ -30,7 +30,7 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import FilesFilter from "@docspace/common/api/files/filter";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType, UrlActionType } from "@docspace/common/constants";
 
 const SharingBodyStyle = { height: `calc(100vh - 156px)` };
 
@@ -52,6 +52,7 @@ const NewFilesPanel = (props) => {
     currentDeviceType,
     fileItemsList,
     enablePlugins,
+    openUrl,
   } = props;
 
   const [listFiles, setListFiles] = useState(newFiles);
@@ -244,7 +245,7 @@ const NewFilesPanel = (props) => {
         }
       }
 
-      return window.open(webUrl, "_blank");
+      return openUrl(webUrl, UrlActionType.Link);
     }
   };
 
@@ -371,9 +372,12 @@ export default inject(
 
     const { fileItemsList } = pluginStore;
 
+    const { openUrl, enablePlugins, theme, currentDeviceType } =
+      auth.settingsStore;
+
     return {
       fileItemsList,
-      enablePlugins: auth.settingsStore.enablePlugins,
+      enablePlugins,
       visible,
       newFiles,
       newFilesIds,
@@ -387,11 +391,12 @@ export default inject(
       getFolderIcon,
       markAsRead,
       setNewFilesPanelVisible,
-      theme: auth.settingsStore.theme,
+      theme,
       hasNew,
       refreshFiles,
       setIsLoading,
-      currentDeviceType: auth.settingsStore.currentDeviceType,
+      currentDeviceType,
+      openUrl,
     };
   }
 )(

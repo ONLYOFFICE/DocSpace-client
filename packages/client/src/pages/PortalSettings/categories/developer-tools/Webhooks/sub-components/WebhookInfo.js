@@ -8,6 +8,7 @@ import Link from "@docspace/components/link";
 import Text from "@docspace/components/text";
 
 import { useTranslation } from "react-i18next";
+import { UrlActionType } from "@docspace/common/constants";
 
 const InfoWrapper = styled.div`
   margin-bottom: 25px;
@@ -34,7 +35,7 @@ StyledGuideLink.defaultProps = { theme: Base };
 
 const WebhookInfo = (props) => {
   const { t } = useTranslation(["Webhooks"]);
-  const { webhooksGuideUrl } = props;
+  const { webhooksGuideUrl, openUrl } = props;
 
   return (
     <InfoWrapper>
@@ -46,6 +47,7 @@ const WebhookInfo = (props) => {
         type="page"
         href={webhooksGuideUrl}
         target="_blank"
+        onClick={() => openUrl(webhooksGuideUrl, UrlActionType.Link)}
       >
         {t("WebhooksGuide")}
       </StyledGuideLink>
@@ -54,9 +56,10 @@ const WebhookInfo = (props) => {
 };
 
 export default inject(({ auth }) => {
-  const { webhooksGuideUrl } = auth.settingsStore;
+  const { webhooksGuideUrl, openUrl } = auth.settingsStore;
 
   return {
     webhooksGuideUrl,
+    openUrl,
   };
 })(observer(WebhookInfo));

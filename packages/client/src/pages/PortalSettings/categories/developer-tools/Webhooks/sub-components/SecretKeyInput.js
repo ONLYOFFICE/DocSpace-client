@@ -13,6 +13,7 @@ import PasswordInput from "@docspace/components/password-input";
 import { inject, observer } from "mobx-react";
 
 import { useTranslation } from "react-i18next";
+import { UrlActionType } from "@docspace/common/constants";
 
 const SecretKeyWrapper = styled.div`
   .link {
@@ -65,6 +66,7 @@ const SecretKeyInput = (props) => {
     passwordInputKey,
     additionalId,
     isDisabled,
+    openUrl,
   } = props;
 
   const { t } = useTranslation(["Webhooks"]);
@@ -114,6 +116,7 @@ const SecretKeyInput = (props) => {
                 href={webhooksGuideUrl}
                 target="_blank"
                 className="link"
+                onClick={() => openUrl(webhooksGuideUrl, UrlActionType.Link)}
               >
                 {t("ReadMore")}
               </Link>
@@ -171,11 +174,12 @@ const SecretKeyInput = (props) => {
 };
 
 export default inject(({ auth, webhooksStore }) => {
-  const { webhooksGuideUrl } = auth.settingsStore;
+  const { webhooksGuideUrl, openUrl } = auth.settingsStore;
   const { PASSWORD_SETTINGS } = webhooksStore;
 
   return {
     webhooksGuideUrl,
     PASSWORD_SETTINGS,
+    openUrl,
   };
 })(observer(SecretKeyInput));

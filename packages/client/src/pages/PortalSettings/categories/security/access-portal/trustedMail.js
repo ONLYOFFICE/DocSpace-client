@@ -15,7 +15,7 @@ import isEqual from "lodash/isEqual";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 
 import TrustedMailLoader from "../sub-components/loaders/trusted-mail-loader";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType, UrlActionType } from "@docspace/common/constants";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -39,6 +39,7 @@ const TrustedMail = (props) => {
     currentColorScheme,
     trustedMailDomainSettingsUrl,
     currentDeviceType,
+    openUrl,
   } = props;
 
   const navigate = useNavigate();
@@ -177,6 +178,9 @@ const TrustedMail = (props) => {
           target="_blank"
           isHovered
           href={trustedMailDomainSettingsUrl}
+          onClick={() =>
+            openUrl(trustedMailDomainSettingsUrl, UrlActionType.Link)
+          }
         >
           {t("Common:LearnMore")}
         </Link>
@@ -249,6 +253,7 @@ export default inject(({ auth }) => {
     currentColorScheme,
     trustedMailDomainSettingsUrl,
     currentDeviceType,
+    openUrl,
   } = auth.settingsStore;
 
   return {
@@ -259,5 +264,6 @@ export default inject(({ auth }) => {
     currentColorScheme,
     trustedMailDomainSettingsUrl,
     currentDeviceType,
+    openUrl,
   };
 })(withTranslation(["Settings", "Common"])(observer(TrustedMail)));

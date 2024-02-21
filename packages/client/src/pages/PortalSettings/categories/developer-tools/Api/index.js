@@ -10,7 +10,7 @@ import ConfirmWrapper from "../../../../Confirm/ConfirmWrapper";
 
 import ApiSvgUrl from "PUBLIC_DIR/images/settings.api.svg?url";
 import ApiDarkSvgUrl from "PUBLIC_DIR/images/settings.api.dark.svg?url";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType, UrlActionType } from "@docspace/common/constants";
 
 const EmptyContainer = styled(EmptyScreenContainer)`
   .ec-header {
@@ -34,7 +34,14 @@ const EmptyContainer = styled(EmptyScreenContainer)`
 `;
 
 const Api = (props) => {
-  const { t, setDocumentTitle, theme, apiBasicLink, currentDeviceType } = props;
+  const {
+    t,
+    setDocumentTitle,
+    theme,
+    apiBasicLink,
+    currentDeviceType,
+    openUrl,
+  } = props;
 
   const imgSrc = theme.isBase ? ApiSvgUrl : ApiDarkSvgUrl;
 
@@ -49,7 +56,7 @@ const Api = (props) => {
             primary
             size="normal"
             minwidth="135px"
-            onClick={() => window.open(apiBasicLink, "_blank")}
+            onClick={() => openUrl(apiBasicLink, UrlActionType.Link)}
             scale={currentDeviceType === DeviceType.mobile}
           />
         }
@@ -64,12 +71,13 @@ const Api = (props) => {
 
 export default inject(({ auth }) => {
   const { settingsStore, setDocumentTitle, currentDeviceType } = auth;
-  const { theme, apiBasicLink } = settingsStore;
+  const { theme, apiBasicLink, openUrl } = settingsStore;
 
   return {
     theme,
     setDocumentTitle,
     apiBasicLink,
     currentDeviceType,
+    openUrl,
   };
 })(withTranslation(["Settings", "Common"])(observer(Api)));

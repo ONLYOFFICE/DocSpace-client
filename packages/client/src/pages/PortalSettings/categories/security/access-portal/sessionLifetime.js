@@ -15,7 +15,7 @@ import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import isEqual from "lodash/isEqual";
 
 import SessionLifetimeLoader from "../sub-components/loaders/session-lifetime-loader";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType, UrlActionType } from "@docspace/common/constants";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -47,6 +47,7 @@ const SessionLifetime = (props) => {
     lifetimeSettingsUrl,
     currentColorScheme,
     currentDeviceType,
+    openUrl,
   } = props;
   const [type, setType] = useState(false);
   const [sessionLifetime, setSessionLifetime] = useState("1440");
@@ -203,6 +204,7 @@ const SessionLifetime = (props) => {
           target="_blank"
           isHovered
           href={lifetimeSettingsUrl}
+          onClick={() => openUrl(lifetimeSettingsUrl, UrlActionType.Link)}
         >
           {t("Common:LearnMore")}
         </Link>
@@ -274,6 +276,7 @@ export default inject(({ auth, setup }) => {
     lifetimeSettingsUrl,
     currentColorScheme,
     currentDeviceType,
+    openUrl,
   } = auth.settingsStore;
   const { initSettings, isInit } = setup;
 
@@ -286,5 +289,6 @@ export default inject(({ auth, setup }) => {
     lifetimeSettingsUrl,
     currentColorScheme,
     currentDeviceType,
+    openUrl,
   };
 })(withTranslation(["Settings", "Common"])(observer(SessionLifetime)));

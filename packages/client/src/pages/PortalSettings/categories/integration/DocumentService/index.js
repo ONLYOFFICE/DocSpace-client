@@ -5,7 +5,7 @@ import * as Styled from "./index.styled";
 import { Link, Button, InputBlock, Label, Text } from "@docspace/components";
 import toastr from "@docspace/components/toast/toastr";
 import Loaders from "@docspace/common/components/Loaders";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType, UrlActionType } from "@docspace/common/constants";
 
 const URL_REGEX = /^https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{1,256}\/?$/;
 const DNS_PLACEHOLDER = `${window.location.protocol}//<docspace-dns-name>/`;
@@ -17,6 +17,7 @@ const DocumentService = ({
   currentColorScheme,
   integrationSettingsUrl,
   currentDeviceType,
+  openUrl,
 }) => {
   const { t, ready } = useTranslation(["Settings", "Common"]);
 
@@ -144,6 +145,7 @@ const DocumentService = ({
           isHovered
           target="_blank"
           href={integrationSettingsUrl}
+          onClick={() => openUrl(integrationSettingsUrl, UrlActionType.Link)}
         >
           {t("Common:LearnMore")}
         </Link>
@@ -255,8 +257,12 @@ const DocumentService = ({
 };
 
 export default inject(({ auth, settingsStore }) => {
-  const { currentColorScheme, integrationSettingsUrl, currentDeviceType } =
-    auth.settingsStore;
+  const {
+    currentColorScheme,
+    integrationSettingsUrl,
+    currentDeviceType,
+    openUrl,
+  } = auth.settingsStore;
   const { getDocumentServiceLocation, changeDocumentServiceLocation } =
     settingsStore;
   return {
@@ -265,5 +271,6 @@ export default inject(({ auth, settingsStore }) => {
     currentColorScheme,
     integrationSettingsUrl,
     currentDeviceType,
+    openUrl,
   };
 })(observer(DocumentService));

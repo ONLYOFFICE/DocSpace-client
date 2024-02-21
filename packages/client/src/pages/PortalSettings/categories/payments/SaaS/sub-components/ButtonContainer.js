@@ -5,6 +5,7 @@ import styled from "styled-components";
 import RequestButtonContainer from "./RequestButtonContainer";
 import UpdatePlanButtonContainer from "./UpdatePlanButtonContainer";
 import toastr from "@docspace/components/toast/toastr";
+import { UrlActionType } from "@docspace/common/constants";
 
 const StyledBody = styled.div`
   button {
@@ -21,10 +22,11 @@ const ButtonContainer = ({
   isGracePeriod,
   accountLink,
   isFreeAfterPaidPeriod,
+  openUrl,
 }) => {
   const goToStripeAccount = () => {
     accountLink
-      ? window.open(accountLink, "_blank")
+      ? openUrl(accountLink, UrlActionType.Link)
       : toastr.error(t("ErrorNotification"));
   };
 
@@ -51,6 +53,7 @@ const ButtonContainer = ({
 
 export default inject(({ auth, payments }) => {
   const { currentTariffStatusStore } = auth;
+  const { openUrl } = auth.settingsStore;
   const { isNeedRequest, isLoading, accountLink } = payments;
   const { isNotPaidPeriod, isGracePeriod } = currentTariffStatusStore;
 
@@ -60,5 +63,6 @@ export default inject(({ auth, payments }) => {
     isNotPaidPeriod,
     isGracePeriod,
     accountLink,
+    openUrl,
   };
 })(observer(ButtonContainer));

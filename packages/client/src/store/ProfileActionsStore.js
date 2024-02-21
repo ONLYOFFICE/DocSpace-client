@@ -15,7 +15,10 @@ import { combineUrl } from "@docspace/common/utils";
 import { isMobile } from "react-device-detect";
 
 import { ZendeskAPI } from "@docspace/common/components/Zendesk";
-import { LIVE_CHAT_LOCAL_STORAGE_KEY } from "@docspace/common/constants";
+import {
+  LIVE_CHAT_LOCAL_STORAGE_KEY,
+  UrlActionType,
+} from "@docspace/common/constants";
 import toastr from "@docspace/components/toast/toastr";
 import { isDesktop, isTablet } from "@docspace/components/utils/device";
 
@@ -127,9 +130,9 @@ class ProfileActionsStore {
   };
 
   onHelpCenterClick = () => {
-    const helpUrl = this.authStore.settingsStore.helpLink;
+    const { helpLink, openUrl } = this.authStore.settingsStore;
 
-    window.open(helpUrl, "_blank");
+    openUrl(helpLink, UrlActionType.Link);
   };
 
   onLiveChatClick = (t) => {
@@ -143,17 +146,17 @@ class ProfileActionsStore {
   };
 
   onSupportClick = () => {
-    const supportUrl =
-      this.authStore.settingsStore.additionalResourcesData
-        ?.feedbackAndSupportUrl;
+    const { additionalResourcesData, openUrl } = this.authStore.settingsStore;
+    const supportUrl = additionalResourcesData?.feedbackAndSupportUrl;
 
-    window.open(supportUrl, "_blank");
+    supportUrl && openUrl(supportUrl, UrlActionType.Link);
   };
 
   onBookTraining = () => {
-    const trainingEmail = this.authStore.settingsStore?.bookTrainingEmail;
+    const { bookTrainingEmail, openUrl } = this.authStore.settingsStore;
 
-    trainingEmail && window.open(`mailto:${trainingEmail}`, "_blank");
+    bookTrainingEmail &&
+      openUrl(`mailto:${bookTrainingEmail}`, UrlActionType.Link);
   };
 
   //onVideoGuidesClick = () => {
@@ -234,7 +237,12 @@ class ProfileActionsStore {
 
     let liveChat = null;
 
-    if (!isMobile && this.authStore.isLiveChatAvailable) {
+    if (
+      !isMobile &&
+      this.authStore.isLiveChatAvailable &&
+      !window.navigator.userAgent.includes("ZoomWebKit") &&
+      !window.navigator.userAgent.includes("ZoomApps")
+    ) {
       liveChat = {
         key: "user-menu-live-chat",
         icon: LiveChatReactSvgUrl,

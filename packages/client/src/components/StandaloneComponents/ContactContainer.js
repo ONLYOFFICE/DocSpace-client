@@ -7,10 +7,11 @@ import Text from "@docspace/components/text";
 import Link from "@docspace/components/link";
 
 import { StyledContactComponent } from "./StyledComponent";
+import { UrlActionType } from "@docspace/common/constants";
 const ContactContainer = (props) => {
   const { t } = useTranslation("PaymentsEnterprise");
 
-  const { helpUrl, salesEmail, theme, isCommunity } = props;
+  const { helpUrl, salesEmail, theme, isCommunity, openUrl } = props;
 
   const officialWebsiteUrl = "https://www.onlyoffice.com/for-enterprises.aspx";
   const demonstrationUrl = "https://www.onlyoffice.com/demo-order.aspx";
@@ -38,6 +39,9 @@ const ContactContainer = (props) => {
                   color={
                     theme.client.settings.payment.contactContainer.linkColor
                   }
+                  onClick={() =>
+                    openUrl(officialWebsiteUrl, UrlActionType.Link)
+                  }
                 >
                   on the official website
                 </Link>
@@ -63,6 +67,7 @@ const ContactContainer = (props) => {
                   color={
                     theme.client.settings.payment.contactContainer.linkColor
                   }
+                  onClick={() => openUrl(demonstrationUrl, UrlActionType.Link)}
                 >
                   here
                 </Link>
@@ -89,6 +94,9 @@ const ContactContainer = (props) => {
                 tag="a"
                 href={`mailto:${salesEmail}`}
                 color={theme.client.settings.payment.contactContainer.linkColor}
+                onClick={() =>
+                  openUrl(`mailto:${salesEmail}`, UrlActionType.Link)
+                }
               >
                 {{ email: salesEmail }}
               </Link>
@@ -112,6 +120,7 @@ const ContactContainer = (props) => {
                 fontWeight="600"
                 href={helpUrl}
                 color={theme.client.settings.payment.contactContainer.linkColor}
+                onClick={() => openUrl(helpUrl, UrlActionType.Link)}
               >
                 {{ helpUrl }}
               </Link>
@@ -126,6 +135,6 @@ const ContactContainer = (props) => {
 export default inject(({ auth, payments }) => {
   const { settingsStore, isCommunity } = auth;
   const { helpUrl, salesEmail } = payments;
-  const { theme } = settingsStore;
-  return { helpUrl, salesEmail, theme, isCommunity };
+  const { theme, openUrl } = settingsStore;
+  return { helpUrl, salesEmail, theme, isCommunity, openUrl };
 })(observer(ContactContainer));

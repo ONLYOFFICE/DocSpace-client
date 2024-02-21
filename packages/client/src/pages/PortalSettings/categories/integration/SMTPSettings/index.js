@@ -9,6 +9,7 @@ import CustomSettings from "./sub-components/CustomSettings";
 import { StyledComponent } from "./StyledComponent";
 import Loaders from "@docspace/common/components/Loaders";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import { UrlActionType } from "@docspace/common/constants";
 
 let timerId = null;
 const SMTPSettings = (props) => {
@@ -17,6 +18,7 @@ const SMTPSettings = (props) => {
     organizationName,
     currentColorScheme,
     integrationSettingsUrl,
+    openUrl,
   } = props;
 
   const { t, ready } = useTranslation([
@@ -67,6 +69,7 @@ const SMTPSettings = (props) => {
           isHovered
           target="_blank"
           href={integrationSettingsUrl}
+          onClick={() => openUrl(integrationSettingsUrl, UrlActionType.Link)}
         >
           {t("Common:LearnMore")}
         </Link>
@@ -79,8 +82,12 @@ const SMTPSettings = (props) => {
 
 export default inject(({ auth, setup }) => {
   const { settingsStore } = auth;
-  const { organizationName, currentColorScheme, integrationSettingsUrl } =
-    settingsStore;
+  const {
+    organizationName,
+    currentColorScheme,
+    integrationSettingsUrl,
+    openUrl,
+  } = settingsStore;
   const { setInitSMTPSettings } = setup;
 
   return {
@@ -88,5 +95,6 @@ export default inject(({ auth, setup }) => {
     organizationName,
     currentColorScheme,
     integrationSettingsUrl,
+    openUrl,
   };
 })(observer(SMTPSettings));

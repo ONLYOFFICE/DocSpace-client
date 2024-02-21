@@ -2,6 +2,8 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
+import { UrlActionType } from "@docspace/common/constants";
+
 import Text from "@docspace/components/text";
 import Button from "@docspace/components/button";
 import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
@@ -19,6 +21,7 @@ const PluginSDK = ({
   isLoading,
   isEmptyList,
   theme,
+  openUrl,
 }) => {
   const { t } = useTranslation(["WebPlugins", "VersionHistory", "Common"]);
 
@@ -64,7 +67,7 @@ const PluginSDK = ({
         <Text className={"description-text"}>{p.description}</Text>
         <Button
           icon={icon}
-          onClick={() => window.open(p.homePage, "_blank")}
+          onClick={() => openUrl(p.homePage, UrlActionType.Link)}
           scale
           label={t("GoToRepo")}
           size={"small"}
@@ -106,7 +109,7 @@ const PluginSDK = ({
         primary
         scale={isMobile}
         size={isMobile ? "normal" : "small"}
-        onClick={() => window.open(LEARN_MORE_LINK, "_blank")}
+        onClick={() => openUrl(LEARN_MORE_LINK, UrlActionType.Link)}
       ></Button>
       {!isEmptyList && list.length > 0 && (
         <>
@@ -121,8 +124,15 @@ const PluginSDK = ({
 };
 
 export default inject(({ pluginStore, auth }) => {
-  const { currentDeviceType, theme } = auth.settingsStore;
+  const { currentDeviceType, theme, openUrl } = auth.settingsStore;
   const { systemPluginList, isLoading, isEmptyList } = pluginStore;
 
-  return { currentDeviceType, systemPluginList, theme, isLoading, isEmptyList };
+  return {
+    currentDeviceType,
+    systemPluginList,
+    theme,
+    isLoading,
+    isEmptyList,
+    openUrl,
+  };
 })(observer(PluginSDK));

@@ -16,6 +16,7 @@ import LoaderCustomization from "../sub-components/loaderCustomization";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import Text from "@docspace/components/text";
 import Link from "@docspace/components/link";
+import { UrlActionType } from "@docspace/common/constants";
 
 let greetingTitleFromSessionStorage = "";
 let greetingTitleDefaultFromSessionStorage = "";
@@ -38,6 +39,7 @@ const WelcomePageSettings = (props) => {
     getGreetingSettingsIsDefault,
     currentColorScheme,
     welcomePageSettingsUrl,
+    openUrl,
   } = props;
 
   const navigate = useNavigate();
@@ -197,8 +199,7 @@ const WelcomePageSettings = (props) => {
       .finally(() => {
         getGreetingSettingsIsDefault();
         setState((val) => ({ ...val, isLoadingGreetingSave: false }));
-      }
-      );
+      });
 
     setState((val) => ({ ...val, showReminder: false }));
 
@@ -225,8 +226,7 @@ const WelcomePageSettings = (props) => {
       .finally(() => {
         getGreetingSettingsIsDefault();
         setState((val) => ({ ...val, isLoadingGreetingRestore: false }));
-      }
-      );
+      });
   };
 
   const settingIsEqualInitialValue = (stateName, value) => {
@@ -326,6 +326,7 @@ const WelcomePageSettings = (props) => {
           target="_blank"
           isHovered
           href={welcomePageSettingsUrl}
+          onClick={() => openUrl(welcomePageSettingsUrl, UrlActionType.Link)}
         >
           {t("Common:LearnMore")}
         </Link>
@@ -358,6 +359,7 @@ export default inject(({ auth, setup, common }) => {
     theme,
     currentColorScheme,
     welcomePageSettingsUrl,
+    openUrl,
   } = auth.settingsStore;
   const { setGreetingTitle, restoreGreetingTitle } = setup;
   const {
@@ -383,6 +385,7 @@ export default inject(({ auth, setup, common }) => {
     setIsLoaded,
     currentColorScheme,
     welcomePageSettingsUrl,
+    openUrl,
   };
 })(
   withLoading(

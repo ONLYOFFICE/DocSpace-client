@@ -45,6 +45,7 @@ const Article = ({
   currentDeviceType,
   showArticleLoader,
   isAdmin,
+  openUrl,
   ...rest
 }) => {
   const [articleHeaderContent, setArticleHeaderContent] = React.useState(null);
@@ -215,6 +216,7 @@ const Article = ({
               )}
               <ArticleApps
                 withDevTools={withDevTools}
+                openUrl={openUrl}
                 showText={showText}
                 theme={theme}
               />
@@ -332,6 +334,7 @@ export default inject(({ auth }) => {
     mainBarVisible,
     theme,
     currentDeviceType,
+    openUrl,
   } = settingsStore;
 
   return {
@@ -354,5 +357,6 @@ export default inject(({ auth }) => {
     currentDeviceType,
 
     isAdmin,
+    openUrl,
   };
 })(observer(Article));

@@ -9,6 +9,7 @@ import { tablet } from "@docspace/components/utils/device";
 import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
 import logoPersonalAboutUrl from "PUBLIC_DIR/images/logo_personal_about.svg?url";
 import { getLogoFromPath } from "@docspace/common/utils";
+import { UrlActionType } from "@docspace/common/constants";
 
 const StyledAboutBody = styled.div`
   width: 100%;
@@ -84,6 +85,7 @@ const AboutContent = (props) => {
     companyInfoSettingsData,
     previewData,
     whiteLabelLogoUrls,
+    openUrl,
   } = props;
   const { t } = useTranslation("About");
   const license = "AGPL-3.0";
@@ -146,6 +148,7 @@ const AboutContent = (props) => {
             href={linkRepo}
             target="_blank"
             enableUserSelect
+            onClick={() => openUrl(linkRepo, UrlActionType.Link)}
           >
             &nbsp;ONLYOFFICE DocSpace&nbsp;
           </ColorTheme>
@@ -177,6 +180,7 @@ const AboutContent = (props) => {
             href={linkDocs}
             target="_blank"
             enableUserSelect
+            onClick={() => openUrl(linkDocs, UrlActionType.Link)}
           >
             &nbsp;ONLYOFFICE Docs&nbsp;
           </ColorTheme>
@@ -233,6 +237,12 @@ const AboutContent = (props) => {
             fontWeight="600"
             href={`mailto:${companyInfoSettingsData.email}`}
             enableUserSelect
+            onClick={() =>
+              openUrl(
+                `mailto:${companyInfoSettingsData.email}`,
+                UrlActionType.Link
+              )
+            }
           >
             &nbsp;{email}
           </ColorTheme>
@@ -253,6 +263,7 @@ const AboutContent = (props) => {
             target="_blank"
             href={site}
             enableUserSelect
+            onClick={() => openUrl(site, UrlActionType.Link)}
           >
             &nbsp;{site?.replace(/^https?\:\/\//i, "")}
           </ColorTheme>
@@ -265,11 +276,13 @@ const AboutContent = (props) => {
 export default inject(({ auth }) => {
   const { settingsStore } = auth;
 
-  const { theme, companyInfoSettingsData, whiteLabelLogoUrls } = settingsStore;
+  const { theme, companyInfoSettingsData, whiteLabelLogoUrls, openUrl } =
+    settingsStore;
 
   return {
     theme,
     companyInfoSettingsData,
     whiteLabelLogoUrls,
+    openUrl,
   };
 })(observer(AboutContent));

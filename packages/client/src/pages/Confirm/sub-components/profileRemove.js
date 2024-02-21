@@ -11,9 +11,17 @@ import { StyledPage, StyledBody, StyledContent } from "./StyledConfirm";
 import withLoader from "../withLoader";
 import FormWrapper from "@docspace/components/form-wrapper";
 import DocspaceLogo from "../../../DocspaceLogo";
+import { UrlActionType } from "@docspace/common/constants";
 
 const ProfileRemoveForm = (props) => {
-  const { t, greetingTitle, linkData, legalTerms, currentColorScheme } = props;
+  const {
+    t,
+    greetingTitle,
+    linkData,
+    legalTerms,
+    currentColorScheme,
+    openUrl,
+  } = props;
   const [isProfileDeleted, setIsProfileDeleted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -56,6 +64,7 @@ const ProfileRemoveForm = (props) => {
                   href={legalTerms}
                   color={currentColorScheme?.main?.accent}
                   target="_blank"
+                  onClick={() => openUrl(legalTerms, UrlActionType.Link)}
                 >
                   Privacy policy
                 </Link>
@@ -100,6 +109,7 @@ const ProfileRemoveForm = (props) => {
                     href={legalTerms}
                     color={currentColorScheme?.main?.accent}
                     target="_blank"
+                    onClick={() => openUrl(legalTerms, UrlActionType.Link)}
                   >
                     Privacy policy.
                   </Link>
@@ -128,4 +138,5 @@ export default inject(({ auth }) => ({
   theme: auth.settingsStore.theme,
   legalTerms: auth.settingsStore.legalTerms,
   currentColorScheme: auth.settingsStore.currentColorScheme,
+  openUrl: auth.settingsStore.openUrl,
 }))(withTranslation("Confirm")(withLoader(observer(ProfileRemoveForm))));

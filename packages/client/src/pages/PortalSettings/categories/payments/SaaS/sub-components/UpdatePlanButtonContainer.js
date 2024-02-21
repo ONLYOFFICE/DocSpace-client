@@ -7,6 +7,7 @@ import DowngradePlanButtonContainer from "./DowngradePlanButtonContainer";
 import api from "@docspace/common/api";
 import { Trans } from "react-i18next";
 import { updatePayment } from "@docspace/common/api/portal";
+import { UrlActionType } from "@docspace/common/constants";
 
 const StyledBody = styled.div`
   button {
@@ -31,6 +32,7 @@ const UpdatePlanButtonContainer = ({
   currentTariffPlanTitle,
   t,
   canPayTariff,
+  openUrl,
 }) => {
   const onUpdateTariff = async () => {
     try {
@@ -120,7 +122,7 @@ const UpdatePlanButtonContainer = ({
 
   const goToStripePortal = () => {
     paymentLink
-      ? window.open(paymentLink, "_blank")
+      ? openUrl(paymentLink, UrlActionType.Link)
       : toastr.error(t("ErrorNotification"));
   };
 
@@ -208,6 +210,8 @@ export default inject(({ auth, payments }) => {
     canPayTariff,
   } = payments;
 
+  const { openUrl } = auth.settingsStore;
+
   return {
     canPayTariff,
     isAlreadyPaid,
@@ -223,5 +227,6 @@ export default inject(({ auth, payments }) => {
     accountLink,
     setPortalQuotaValue,
     currentTariffPlanTitle,
+    openUrl,
   };
 })(observer(UpdatePlanButtonContainer));

@@ -16,11 +16,17 @@ import AppLoader from "@docspace/common/components/AppLoader";
 import config from "../../../../../package.json";
 import ManualBackup from "./backup/manual-backup";
 import AutoBackup from "./backup/auto-backup";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType, UrlActionType } from "@docspace/common/constants";
 
 const DataManagementWrapper = (props) => {
-  const { dataBackupUrl, automaticBackupUrl, buttonSize, t, isNotPaidPeriod } =
-    props;
+  const {
+    dataBackupUrl,
+    automaticBackupUrl,
+    buttonSize,
+    t,
+    isNotPaidPeriod,
+    openUrl,
+  } = props;
 
   const navigate = useNavigate();
 
@@ -55,6 +61,12 @@ const DataManagementWrapper = (props) => {
                   target="_blank"
                   isBold
                   isHovered
+                  onClick={() =>
+                    openUrl(
+                      isAutoBackupPage ? automaticBackupUrl : dataBackupUrl,
+                      UrlActionType.Link
+                    )
+                  }
                 >
                   {t("Common:LearnMore")}
                 </Link>
@@ -126,6 +138,7 @@ export default inject(({ auth, setup }) => {
 
     currentColorScheme,
     currentDeviceType,
+    openUrl,
   } = settingsStore;
 
   const buttonSize =
@@ -139,5 +152,6 @@ export default inject(({ auth, setup }) => {
     buttonSize,
     isNotPaidPeriod,
     currentColorScheme,
+    openUrl,
   };
 })(withTranslation(["Settings", "Common"])(observer(DataManagementWrapper)));

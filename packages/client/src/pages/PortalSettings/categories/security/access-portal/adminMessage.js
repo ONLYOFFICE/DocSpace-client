@@ -14,7 +14,7 @@ import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import isEqual from "lodash/isEqual";
 
 import AdmMsgLoader from "../sub-components/loaders/admmsg-loader";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType, UrlActionType } from "@docspace/common/constants";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -39,6 +39,7 @@ const AdminMessage = (props) => {
     currentColorScheme,
     administratorMessageSettingsUrl,
     currentDeviceType,
+    openUrl,
   } = props;
   const [type, setType] = useState("");
   const [showReminder, setShowReminder] = useState(false);
@@ -138,6 +139,9 @@ const AdminMessage = (props) => {
           target="_blank"
           isHovered
           href={administratorMessageSettingsUrl}
+          onClick={() =>
+            openUrl(administratorMessageSettingsUrl, UrlActionType.Link)
+          }
         >
           {t("Common:LearnMore")}
         </Link>
@@ -190,6 +194,7 @@ export default inject(({ auth, setup }) => {
     currentColorScheme,
     administratorMessageSettingsUrl,
     currentDeviceType,
+    openUrl,
   } = auth.settingsStore;
   const { initSettings, isInit } = setup;
 
@@ -201,5 +206,6 @@ export default inject(({ auth, setup }) => {
     currentColorScheme,
     administratorMessageSettingsUrl,
     currentDeviceType,
+    openUrl,
   };
 })(withTranslation(["Settings", "Common"])(observer(AdminMessage)));

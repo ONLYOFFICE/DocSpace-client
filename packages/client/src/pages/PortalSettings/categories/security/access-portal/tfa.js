@@ -13,7 +13,7 @@ import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 
 import TfaLoader from "../sub-components/loaders/tfa-loader";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType, UrlActionType } from "@docspace/common/constants";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -36,6 +36,7 @@ const TwoFactorAuth = (props) => {
     smsAvailable,
     appAvailable,
     tfaSettings,
+    openUrl,
   } = props;
   const [type, setType] = useState("none");
   const [showReminder, setShowReminder] = useState(false);
@@ -145,6 +146,7 @@ const TwoFactorAuth = (props) => {
           target="_blank"
           isHovered
           href={tfaSettingsUrl}
+          onClick={() => openUrl(tfaSettingsUrl, UrlActionType.Link)}
         >
           {t("Common:LearnMore")}
         </Link>
@@ -210,7 +212,7 @@ export default inject(({ auth, setup }) => {
   } = auth.tfaStore;
 
   const { isInit, initSettings, setIsInit } = setup;
-  const { currentColorScheme, tfaSettingsUrl, currentDeviceType } =
+  const { currentColorScheme, tfaSettingsUrl, currentDeviceType, openUrl } =
     auth.settingsStore;
 
   return {
@@ -226,5 +228,6 @@ export default inject(({ auth, setup }) => {
     tfaSettingsUrl,
     currentDeviceType,
     getTfaType,
+    openUrl,
   };
 })(withTranslation(["Settings", "Common"])(observer(TwoFactorAuth)));

@@ -230,6 +230,7 @@ class ManualBackup extends React.Component {
       isNotPaidPeriod,
       dataBackupUrl,
       currentColorScheme,
+      openUrl,
     } = this.props;
     const {
       isInitialLoading,
@@ -278,6 +279,7 @@ class ManualBackup extends React.Component {
             fontSize="13px"
             color={currentColorScheme.main.accent}
             isHovered
+            onClick={() => openUrl(dataBackupUrl, UrlActionType.Link)}
           >
             {t("Common:LearnMore")}
           </Link>

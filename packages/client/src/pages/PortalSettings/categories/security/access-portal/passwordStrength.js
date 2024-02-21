@@ -16,7 +16,7 @@ import isEqual from "lodash/isEqual";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 
 import PasswordLoader from "../sub-components/loaders/password-loader";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType, UrlActionType } from "@docspace/common/constants";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -57,6 +57,7 @@ const PasswordStrength = (props) => {
     passwordStrengthSettingsUrl,
     currentDeviceType,
     getPortalPasswordSettings,
+    openUrl,
   } = props;
 
   const navigate = useNavigate();
@@ -220,6 +221,9 @@ const PasswordStrength = (props) => {
           target="_blank"
           isHovered
           href={passwordStrengthSettingsUrl}
+          onClick={() =>
+            openUrl(passwordStrengthSettingsUrl, UrlActionType.Link)
+          }
         >
           {t("Common:LearnMore")}
         </Link>
@@ -292,6 +296,7 @@ export default inject(({ auth, setup }) => {
     passwordStrengthSettingsUrl,
     currentDeviceType,
     getPortalPasswordSettings,
+    openUrl,
   } = auth.settingsStore;
   const { initSettings, isInit } = setup;
 
@@ -304,5 +309,6 @@ export default inject(({ auth, setup }) => {
     passwordStrengthSettingsUrl,
     currentDeviceType,
     getPortalPasswordSettings,
+    openUrl,
   };
 })(withTranslation(["Settings", "Common"])(observer(PasswordStrength)));

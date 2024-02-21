@@ -15,7 +15,7 @@ import isEqual from "lodash/isEqual";
 import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 
 import IpSecurityLoader from "../sub-components/loaders/ip-security-loader";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType, UrlActionType } from "@docspace/common/constants";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -57,6 +57,7 @@ const IpSecurity = (props) => {
     ipSettingsUrl,
     currentColorScheme,
     currentDeviceType,
+    openUrl,
   } = props;
 
   const navigate = useNavigate();
@@ -199,6 +200,7 @@ const IpSecurity = (props) => {
           target="_blank"
           isHovered
           href={ipSettingsUrl}
+          onClick={() => openUrl(ipSettingsUrl, UrlActionType.Link)}
         >
           {t("Common:LearnMore")}
         </Link>
@@ -283,6 +285,7 @@ export default inject(({ auth, setup }) => {
     ipSettingsUrl,
     currentColorScheme,
     currentDeviceType,
+    openUrl,
   } = auth.settingsStore;
 
   const { initSettings, isInit } = setup;
@@ -297,5 +300,6 @@ export default inject(({ auth, setup }) => {
     ipSettingsUrl,
     currentColorScheme,
     currentDeviceType,
+    openUrl,
   };
 })(withTranslation(["Settings", "Common"])(observer(IpSecurity)));

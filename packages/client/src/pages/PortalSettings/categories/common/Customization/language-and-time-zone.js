@@ -7,7 +7,11 @@ import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject, observer } from "mobx-react";
-import { LANGUAGE, COOKIE_EXPIRATION_YEAR } from "@docspace/common/constants";
+import {
+  LANGUAGE,
+  COOKIE_EXPIRATION_YEAR,
+  UrlActionType,
+} from "@docspace/common/constants";
 import { setCookie } from "@docspace/common/utils";
 import { useNavigate } from "react-router-dom";
 import { isMobile } from "@docspace/components/utils/device";
@@ -412,6 +416,7 @@ const LanguageAndTimeZone = (props) => {
     helpLink,
     organizationName,
     currentColorScheme,
+    openUrl,
   } = props;
 
   const {
@@ -504,6 +509,9 @@ const LanguageAndTimeZone = (props) => {
           target="_blank"
           isHovered
           href={languageAndTimeZoneSettingsUrl}
+          onClick={() =>
+            openUrl(languageAndTimeZoneSettingsUrl, UrlActionType.Link)
+          }
         >
           {t("Common:LearnMore")}
         </Link>
@@ -540,6 +548,7 @@ export default inject(({ auth, setup, common }) => {
     helpLink,
     currentColorScheme,
     languageAndTimeZoneSettingsUrl,
+    openUrl,
   } = auth.settingsStore;
 
   const { user } = auth.userStore;
@@ -567,6 +576,7 @@ export default inject(({ auth, setup, common }) => {
     setIsLoaded,
     currentColorScheme,
     languageAndTimeZoneSettingsUrl,
+    openUrl,
   };
 })(
   withLoading(

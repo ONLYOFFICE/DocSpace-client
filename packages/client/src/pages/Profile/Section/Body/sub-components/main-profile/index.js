@@ -36,6 +36,7 @@ import withCultureNames from "@docspace/common/hoc/withCultureNames";
 import { isMobile } from "@docspace/components/utils/device";
 import { SSO_LABEL } from "SRC_DIR/helpers/constants";
 import { useTheme } from "styled-components";
+import { UrlActionType } from "@docspace/common/constants";
 
 const MainProfile = (props) => {
   const { t } = useTranslation(["Profile", "Common"]);
@@ -58,6 +59,7 @@ const MainProfile = (props) => {
     updateProfileCulture,
     documentationEmail,
     setDialogData,
+    openUrl,
   } = props;
 
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
@@ -124,6 +126,12 @@ const MainProfile = (props) => {
           fontSize="13px"
           href={`${helpLink}/guides/become-translator.aspx`}
           target="_blank"
+          onClick={() =>
+            openUrl(
+              `${helpLink}/guides/become-translator.aspx`,
+              UrlActionType.Link
+            )
+          }
         >
           {t("Common:LearnMore")}
         </Link>
@@ -464,8 +472,14 @@ const MainProfile = (props) => {
 
 export default inject(({ auth, peopleStore }) => {
   const { withActivationBar, sendActivationLink } = auth.userStore;
-  const { theme, helpLink, culture, currentColorScheme, documentationEmail } =
-    auth.settingsStore;
+  const {
+    theme,
+    helpLink,
+    culture,
+    currentColorScheme,
+    documentationEmail,
+    openUrl,
+  } = auth.settingsStore;
 
   const {
     targetUser: profile,
@@ -494,5 +508,6 @@ export default inject(({ auth, peopleStore }) => {
     updateProfileCulture,
     documentationEmail,
     setDialogData,
+    openUrl,
   };
 })(withCultureNames(observer(MainProfile)));

@@ -1079,6 +1079,13 @@ class SettingsStore {
     }
 
     if (action === UrlActionType.Link) {
+      this.isFrame &&
+      this.frameConfig?.openLinkToEvent &&
+      this.frameConfig?.events.onOpenLink
+        ? frameCallEvent({ event: "onOpenLink", data: url })
+        : replace
+        ? (window.location.href = url)
+        : window.open(url, "_blank");
     }
   };
 }

@@ -19,7 +19,7 @@ import toastr from "@docspace/components/toast/toastr";
 import ToggleButton from "@docspace/components/toggle-button";
 import Text from "@docspace/components/text";
 import Link from "@docspace/components/link";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType, UrlActionType } from "@docspace/common/constants";
 
 const toggleStyle = {
   position: "static",
@@ -60,6 +60,7 @@ const DNSSettings = (props) => {
     isDefaultDNS,
     dnsSettingsUrl,
     currentDeviceType,
+    openUrl,
   } = props;
   const [hasScroll, setHasScroll] = useState(false);
   const isLoadedSetting = isLoaded && tReady;
@@ -240,6 +241,7 @@ const DNSSettings = (props) => {
           target="_blank"
           isHovered
           href={dnsSettingsUrl}
+          onClick={() => openUrl(dnsSettingsUrl, UrlActionType.Link)}
         >
           {t("Common:LearnMore")}
         </Link>
@@ -257,6 +259,7 @@ export default inject(({ auth, common }) => {
     standalone,
     dnsSettingsUrl,
     currentDeviceType,
+    openUrl,
   } = auth.settingsStore;
   const {
     isLoaded,
@@ -291,5 +294,6 @@ export default inject(({ auth, common }) => {
     saveDNSSettings,
     dnsSettingsUrl,
     currentDeviceType,
+    openUrl,
   };
 })(withLoading(withTranslation(["Settings", "Common"])(observer(DNSSettings))));

@@ -10,9 +10,10 @@ import { StyledEnterpriseComponent } from "./StyledComponent";
 import BenefitsContainer from "SRC_DIR/components/StandaloneComponents/BenefitsContainer";
 import ButtonContainer from "./sub-components/ButtonContainer";
 import TariffTitleContainer from "./sub-components/TariffTitleContainer";
+import { UrlActionType } from "@docspace/common/constants";
 
 const EnterpriseContainer = (props) => {
-  const { salesEmail, t, isLicenseDateExpired } = props;
+  const { salesEmail, t, isLicenseDateExpired, openUrl } = props;
 
   return (
     <StyledEnterpriseComponent>
@@ -41,6 +42,9 @@ const EnterpriseContainer = (props) => {
               tag="a"
               href={`mailto:${salesEmail}`}
               themeId={ThemeType.Link}
+              onClick={() =>
+                openUrl(`mailto:${salesEmail}`, UrlActionType.Link)
+              }
             >
               {{ email: salesEmail }}
             </ColorTheme>
@@ -54,7 +58,8 @@ const EnterpriseContainer = (props) => {
 export default inject(({ auth, payments }) => {
   const { buyUrl, salesEmail } = payments;
   const { currentTariffStatusStore } = auth;
+  const { openUrl } = auth.settingsStore;
 
   const { isLicenseDateExpired } = currentTariffStatusStore;
-  return { buyUrl, salesEmail, isLicenseDateExpired };
+  return { buyUrl, salesEmail, isLicenseDateExpired, openUrl };
 })(observer(EnterpriseContainer));

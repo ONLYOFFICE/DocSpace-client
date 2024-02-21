@@ -4,10 +4,11 @@ import { observer, inject } from "mobx-react";
 
 import Text from "@docspace/components/text";
 import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { UrlActionType } from "@docspace/common/constants";
 
 import StyledComponent from "../StyledComponent";
 
-const OfficialDocumentation = ({ dataBackupUrl }) => {
+const OfficialDocumentation = ({ dataBackupUrl, openUrl }) => {
   const { t } = useTranslation("PaymentsEnterprise");
 
   const dockerLink =
@@ -30,6 +31,7 @@ const OfficialDocumentation = ({ dataBackupUrl }) => {
             fontWeight="600"
             href={dockerLink}
             target="_blank"
+            onClick={() => openUrl(dockerLink, UrlActionType.Link)}
           >
             {t("UpgradeToProBannerInstructionReadNow")}
           </ColorTheme>
@@ -45,6 +47,7 @@ const OfficialDocumentation = ({ dataBackupUrl }) => {
             fontWeight="600"
             href={linuxDocker}
             target="_blank"
+            onClick={() => openUrl(linuxDocker, UrlActionType.Link)}
           >
             {t("UpgradeToProBannerInstructionReadNow")}
           </ColorTheme>
@@ -60,6 +63,7 @@ const OfficialDocumentation = ({ dataBackupUrl }) => {
             fontWeight="600"
             href={windowsDocker}
             target="_blank"
+            onClick={() => openUrl(windowsDocker, UrlActionType.Link)}
           >
             {t("UpgradeToProBannerInstructionReadNow")}
           </ColorTheme>
@@ -80,6 +84,7 @@ const OfficialDocumentation = ({ dataBackupUrl }) => {
             fontWeight="600"
             href={dataBackupUrl}
             target="_blank"
+            onClick={() => openUrl(dataBackupUrl, UrlActionType.Link)}
           >
             backup your data
           </ColorTheme>
@@ -92,7 +97,7 @@ const OfficialDocumentation = ({ dataBackupUrl }) => {
 
 export default inject(({ auth }) => {
   const { settingsStore } = auth;
-  const { dataBackupUrl } = settingsStore;
+  const { dataBackupUrl, openUrl } = settingsStore;
 
-  return { dataBackupUrl };
+  return { dataBackupUrl, openUrl };
 })(observer(OfficialDocumentation));

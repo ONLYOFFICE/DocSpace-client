@@ -15,6 +15,7 @@ import Link from "@docspace/components/link";
 import FormWrapper from "@docspace/components/form-wrapper";
 import DocspaceLogo from "../../../DocspaceLogo";
 import { StyledPage, StyledContent } from "./StyledConfirm";
+import { UrlActionType } from "@docspace/common/constants";
 
 const StyledForm = styled(Box)`
   margin: 56px auto;
@@ -100,6 +101,7 @@ const TfaActivationForm = withLoader((props) => {
 
     location,
     currentColorScheme,
+    openUrl,
   } = props;
 
   const [code, setCode] = useState("");
@@ -167,6 +169,9 @@ const TfaActivationForm = withLoader((props) => {
                 color={currentColorScheme?.main?.accent}
                 href={props.tfaAndroidAppUrl}
                 target="_blank"
+                onClick={() =>
+                  openUrl(props.tfaAndroidAppUrl, UrlActionType.Link)
+                }
               >
                 Android
               </Link>
@@ -175,6 +180,7 @@ const TfaActivationForm = withLoader((props) => {
                 color={currentColorScheme?.main?.accent}
                 href={props.tfaIosAppUrl}
                 target="_blank"
+                onClick={() => openUrl(props.tfaIosAppUrl, UrlActionType.Link)}
               >
                 iOS
               </Link>{" "}
@@ -183,6 +189,7 @@ const TfaActivationForm = withLoader((props) => {
                 color={currentColorScheme?.main?.accent}
                 href={props.tfaWinAppUrl}
                 target="_blank"
+                onClick={() => openUrl(props.tfaWinAppUrl, UrlActionType.Link)}
               >
                 Windows Phone
               </Link>{" "}
@@ -313,4 +320,5 @@ export default inject(({ auth, confirm }) => ({
   tfaWinAppUrl: auth.tfaStore.tfaWinAppUrl,
   currentColorScheme: auth.settingsStore.currentColorScheme,
   defaultPage: auth.settingsStore.defaultPage,
+  openUrl: auth.settingsStore.openUrl,
 }))(withTranslation(["Confirm", "Common"])(observer(TfaActivationWrapper)));

@@ -8,6 +8,7 @@ import { HelpButton, Link } from "@docspace/components";
 import Avatar from "@docspace/components/avatar";
 import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
+import { UrlActionType } from "@docspace/common/constants";
 const StyledContainer = styled.div`
   display: flex;
   background: ${(props) => props.theme.client.settings.payment.backgroundColor};
@@ -89,6 +90,7 @@ const PayerInformationContainer = ({
   isNotPaidPeriod,
   isFreeAfterPaidPeriod,
   isStripePortalAvailable,
+  openUrl,
 }) => {
   const { t } = useTranslation("Payments");
 
@@ -138,6 +140,7 @@ const PayerInformationContainer = ({
             themeId={ThemeType.Link}
             target="_blank"
             className="payer-info_account-link"
+            onClick={() => openUrl(accountLink, UrlActionType.Link)}
           >
             {t("ChooseNewPayer")}
           </ColorTheme>
@@ -157,6 +160,7 @@ const PayerInformationContainer = ({
           tag="a"
           themeId={ThemeType.Link}
           target="_blank"
+          onClick={() => openUrl(accountLink, UrlActionType.Link)}
         >
           {t("StripeCustomerPortal")}
         </ColorTheme>
@@ -166,6 +170,7 @@ const PayerInformationContainer = ({
           href={`mailto:${email}`}
           tag="a"
           themeId={ThemeType.Link}
+          onClick={() => openUrl(`mailto:${email}`, UrlActionType.Link)}
         >
           {email}
         </ColorTheme>
@@ -235,7 +240,7 @@ const PayerInformationContainer = ({
 export default inject(({ auth, payments }) => {
   const { userStore, settingsStore, currentTariffStatusStore } = auth;
   const { accountLink, isStripePortalAvailable } = payments;
-  const { theme } = settingsStore;
+  const { theme, openUrl } = settingsStore;
   const { customerId, isGracePeriod, isNotPaidPeriod, payerInfo } =
     currentTariffStatusStore;
   const { user } = userStore;
@@ -249,5 +254,6 @@ export default inject(({ auth, payments }) => {
     email: customerId,
     isGracePeriod,
     isNotPaidPeriod,
+    openUrl,
   };
 })(observer(PayerInformationContainer));

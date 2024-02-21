@@ -15,6 +15,7 @@ import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettings
 import { size } from "@docspace/components/utils/device";
 import { inject, observer } from "mobx-react";
 import Link from "@docspace/components/link";
+import { UrlActionType } from "@docspace/common/constants";
 
 const AccessPortal = (props) => {
   const {
@@ -26,6 +27,7 @@ const AccessPortal = (props) => {
     administratorMessageSettingsUrl,
     lifetimeSettingsUrl,
     ipSettingsUrl,
+    openUrl,
   } = props;
   const [isMobileView, setIsMobileView] = useState(false);
 
@@ -64,6 +66,9 @@ const AccessPortal = (props) => {
           isHovered
           color={currentColorScheme.main.accent}
           href={passwordStrengthSettingsUrl}
+          onClick={() =>
+            openUrl(passwordStrengthSettingsUrl, UrlActionType.Link)
+          }
         >
           {t("Common:LearnMore")}
         </Link>
@@ -88,6 +93,7 @@ const AccessPortal = (props) => {
           isHovered
           color={currentColorScheme.main.accent}
           href={tfaSettingsUrl}
+          onClick={() => openUrl(tfaSettingsUrl, UrlActionType.Link)}
         >
           {t("Common:LearnMore")}
         </Link>
@@ -112,6 +118,9 @@ const AccessPortal = (props) => {
           isHovered
           color={currentColorScheme.main.accent}
           href={trustedMailDomainSettingsUrl}
+          onClick={() =>
+            openUrl(trustedMailDomainSettingsUrl, UrlActionType.Link)
+          }
         >
           {t("Common:LearnMore")}
         </Link>
@@ -133,6 +142,7 @@ const AccessPortal = (props) => {
           isHovered
           color={currentColorScheme.main.accent}
           href={ipSettingsUrl}
+          onClick={() => openUrl(ipSettingsUrl, UrlActionType.Link)}
         >
           {t("Common:LearnMore")}
         </Link>
@@ -167,6 +177,9 @@ const AccessPortal = (props) => {
           isHovered
           color={currentColorScheme.main.accent}
           href={administratorMessageSettingsUrl}
+          onClick={() =>
+            openUrl(administratorMessageSettingsUrl, UrlActionType.Link)
+          }
         >
           {t("Common:LearnMore")}
         </Link>
@@ -190,6 +203,7 @@ const AccessPortal = (props) => {
           isHovered
           color={currentColorScheme.main.accent}
           href={lifetimeSettingsUrl}
+          onClick={() => openUrl(lifetimeSettingsUrl, UrlActionType.Link)}
         >
           {t("Common:LearnMore")}
         </Link>
@@ -209,6 +223,7 @@ export default inject(({ auth }) => {
     administratorMessageSettingsUrl,
     lifetimeSettingsUrl,
     ipSettingsUrl,
+    openUrl,
   } = auth.settingsStore;
   return {
     currentColorScheme,
@@ -218,5 +233,6 @@ export default inject(({ auth }) => {
     administratorMessageSettingsUrl,
     lifetimeSettingsUrl,
     ipSettingsUrl,
+    openUrl,
   };
 })(withTranslation(["Settings", "Profile"])(observer(AccessPortal)));

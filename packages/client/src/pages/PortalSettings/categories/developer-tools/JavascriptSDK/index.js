@@ -13,7 +13,7 @@ import TabContainer from "@docspace/components/tabs-container";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { mobile, tablet } from "@docspace/components/utils/device";
 import { objectToGetParams, loadScript } from "@docspace/common/utils";
-import { RoomsType } from "@docspace/common/constants";
+import { UrlActionType } from "@docspace/common/constants";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
 
@@ -254,6 +254,7 @@ const PortalIntegration = (props) => {
     currentColorScheme,
     sdkLink,
     fetchExternalLinks,
+    openUrl,
   } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
@@ -534,7 +535,7 @@ const PortalIntegration = (props) => {
           color={currentColorScheme?.main?.accent}
           fontSize="12px"
           fontWeight="400"
-          onClick={() => window.open(sdkLink, "_blank")}
+          onClick={() => openUrl(sdkLink, UrlActionType.Link)}
         >
           {t("APILink")}.
         </Link>
@@ -774,7 +775,7 @@ const PortalIntegration = (props) => {
 
 export default inject(({ setup, auth, publicRoomStore }) => {
   const { settingsStore, setDocumentTitle } = auth;
-  const { theme, currentColorScheme, sdkLink } = settingsStore;
+  const { theme, currentColorScheme, sdkLink, openUrl } = settingsStore;
   const { fetchExternalLinks } = publicRoomStore;
 
   return {
@@ -783,6 +784,7 @@ export default inject(({ setup, auth, publicRoomStore }) => {
     currentColorScheme,
     sdkLink,
     fetchExternalLinks,
+    openUrl,
   };
 })(
   withTranslation([

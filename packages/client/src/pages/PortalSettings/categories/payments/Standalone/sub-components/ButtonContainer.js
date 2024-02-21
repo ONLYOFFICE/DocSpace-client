@@ -4,10 +4,11 @@ import { inject, observer } from "mobx-react";
 import Button from "@docspace/components/button";
 
 import { StyledButtonComponent } from "../StyledComponent";
+import { UrlActionType } from "@docspace/common/constants";
 
-const ButtonContainer = ({ t, buyUrl }) => {
+const ButtonContainer = ({ t, buyUrl, openUrl }) => {
   const onClickBuy = () => {
-    window.open(buyUrl, "_blank");
+    openUrl(buyUrl, UrlActionType.Link);
   };
   return (
     <StyledButtonComponent>
@@ -21,10 +22,12 @@ const ButtonContainer = ({ t, buyUrl }) => {
   );
 };
 
-export default inject(({ payments }) => {
+export default inject(({ payments, auth }) => {
   const { buyUrl } = payments;
+  const { openUrl } = auth.settingsStore;
 
   return {
     buyUrl,
+    openUrl,
   };
 })(observer(ButtonContainer));

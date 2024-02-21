@@ -14,6 +14,7 @@ import {
   BackupStorageType,
   AutoBackupPeriod,
   FolderType,
+  UrlActionType,
 } from "@docspace/common/constants";
 import ToggleButton from "@docspace/components/toggle-button";
 import {
@@ -400,6 +401,7 @@ class AutomaticBackup extends React.PureComponent {
       isEnableAuto,
       automaticBackupUrl,
       currentColorScheme,
+      openUrl,
     } = this.props;
 
     const {
@@ -449,6 +451,7 @@ class AutomaticBackup extends React.PureComponent {
             fontSize="13px"
             color={currentColorScheme.main.accent}
             isHovered
+            onClick={() => openUrl(automaticBackupUrl, UrlActionType.Link)}
           >
             {t("Common:LearnMore")}
           </Link>
@@ -578,7 +581,8 @@ export default inject(
   ({ auth, backup, treeFoldersStore, filesSelectorInput }) => {
     const { language, settingsStore, currentQuotaStore } = auth;
     const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
-    const { theme, currentColorScheme, automaticBackupUrl } = settingsStore;
+    const { theme, currentColorScheme, automaticBackupUrl, openUrl } =
+      settingsStore;
 
     const {
       downloadingProgress,
@@ -669,6 +673,7 @@ export default inject(
       updateBaseFolderPath,
       automaticBackupUrl,
       currentColorScheme,
+      openUrl,
     };
   }
 )(withTranslation(["Settings", "Common"])(observer(AutomaticBackup)));

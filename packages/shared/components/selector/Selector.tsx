@@ -262,7 +262,13 @@ const Selector = ({
         setNewSelectedItems([]);
       }
     }
-  }, [activeTabId, items, newSelectedItems.length, onSelectAll]);
+  }, [
+    activeTabId,
+    items,
+    newSelectedItems.length,
+    onSelectAll,
+    selectedTabItems,
+  ]);
 
   const onSubmitAction = () => {
     onSubmit(

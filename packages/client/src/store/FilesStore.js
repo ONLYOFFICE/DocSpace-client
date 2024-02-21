@@ -63,6 +63,7 @@ class FilesStore {
   accessRightsStore;
   publicRoomStore;
   settingsStore;
+  currentQuotaStore;
 
   pluginStore;
 
@@ -91,7 +92,12 @@ class FilesStore {
 
   filter = FilesFilter.getDefault();
   roomsFilter = RoomsFilter.getDefault();
-  membersFilter = { page: 0, pageCount: 100, total: 0, startIndex: 0 };
+  membersFilter = {
+    page: 0,
+    pageCount: 100,
+    total: 0,
+    startIndex: 0,
+  };
 
   categoryType = getCategoryType(window.location);
 
@@ -1409,81 +1415,21 @@ class FilesStore {
         const isPrivacyFolder =
           data.current.rootFolderType === FolderType.Privacy;
 
-        runInAction(() => {
-          const isEmptyList = [...data.folders, ...data.files].length === 0;
-
-          if (filter && isEmptyList) {
-            const {
-              authorType,
-              roomId,
-              search,
-              withSubfolders,
-              filterType,
-              searchInContent,
-            } = filter;
-            const isFiltered =
-              authorType ||
-              roomId ||
-              search ||
-              withSubfolders ||
-              filterType ||
-              searchInContent;
-
-            if (isFiltered) {
-              this.setIsEmptyPage(false);
-            } else {
-              this.setIsEmptyPage(isEmptyList);
-            }
-          } else {
-            this.setIsEmptyPage(isEmptyList);
-          }
-          this.setFolders(isPrivacyFolder && !isDesktop() ? [] : data.folders);
-          this.setFiles(isPrivacyFolder && !isDesktop() ? [] : data.files);
-        });
-
-        if (clearFilter) {
-          if (clearSelection) {
-            // Find not processed
-            const tempSelection = this.selection.filter(
-              (f) => !this.activeFiles.find((elem) => elem.id === f.id),
-            );
-            const tempBuffer =
-              this.bufferSelection &&
-              this.activeFiles.find(
-                (elem) => elem.id === this.bufferSelection.id,
-              ) == null
-                ? this.bufferSelection
-                : null;
-
-            // console.log({ tempSelection, tempBuffer });
-
-            // Clear all selections
-            this.setSelected("close");
-
-            // TODO: see bug 63479
-            if (this.selectedFolderStore?.id === folderId) {
-              // Restore not processed
-              tempSelection.length && this.setSelection(tempSelection);
-              tempBuffer && this.setBufferSelection(tempBuffer);
-            }
-          }
-        }
-
         const navigationPath = await Promise.all(
           data.pathParts.map(async (folder, idx) => {
             const { Rooms, Archive } = FolderType;
 
             let folderId = folder.id;
 
-            if (
-              data.current.providerKey &&
-              data.current.rootFolderType === Rooms &&
-              this.treeFoldersStore.myRoomsId
-            ) {
-              folderId = this.treeFoldersStore.myRoomsId;
-            }
+            // if (
+            //   data.current.providerKey &&
+            //   data.current.rootFolderType === Rooms &&
+            //   this.treeFoldersStore.myRoomsId
+            // ) {
+            //   folderId = this.treeFoldersStore.myRoomsId;
+            // }
 
-            const isCurrentFolder = data.current.id === folderId;
+            const isCurrentFolder = data.current.id == folderId;
 
             const folderInfo = isCurrentFolder
               ? data.current
@@ -1545,6 +1491,66 @@ class FilesStore {
           ...{ new: data.new },
           // type,
         });
+
+        runInAction(() => {
+          const isEmptyList = [...data.folders, ...data.files].length === 0;
+
+          if (filter && isEmptyList) {
+            const {
+              authorType,
+              roomId,
+              search,
+              withSubfolders,
+              filterType,
+              searchInContent,
+            } = filter;
+            const isFiltered =
+              authorType ||
+              roomId ||
+              search ||
+              withSubfolders ||
+              filterType ||
+              searchInContent;
+
+            if (isFiltered) {
+              this.setIsEmptyPage(false);
+            } else {
+              this.setIsEmptyPage(isEmptyList);
+            }
+          } else {
+            this.setIsEmptyPage(isEmptyList);
+          }
+          this.setFolders(isPrivacyFolder && !isDesktop() ? [] : data.folders);
+          this.setFiles(isPrivacyFolder && !isDesktop() ? [] : data.files);
+        });
+
+        if (clearFilter) {
+          if (clearSelection) {
+            // Find not processed
+            const tempSelection = this.selection.filter(
+              (f) => !this.activeFiles.find((elem) => elem.id === f.id),
+            );
+            const tempBuffer =
+              this.bufferSelection &&
+              this.activeFiles.find(
+                (elem) => elem.id === this.bufferSelection.id,
+              ) == null
+                ? this.bufferSelection
+                : null;
+
+            // console.log({ tempSelection, tempBuffer });
+
+            // Clear all selections
+            this.setSelected("close");
+
+            // TODO: see bug 63479
+            if (this.selectedFolderStore?.id === folderId) {
+              // Restore not processed
+              tempSelection.length && this.setSelection(tempSelection);
+              tempBuffer && this.setBufferSelection(tempBuffer);
+            }
+          }
+        }
 
         this.clientLoadingStore.setIsSectionHeaderLoading(false);
 
@@ -1632,8 +1638,13 @@ class FilesStore {
       : RoomsFilter.getDefault(this.userStore.user?.id);
 
     if (!this.settingsStore.withPaging) {
-      filterData.page = 0;
-      filterData.pageCount = 100;
+      const isCustomCountPage =
+        filter && filter.pageCount !== 100 && filter.pageCount !== 25;
+
+      if (!isCustomCountPage) {
+        filterData.page = 0;
+        filterData.pageCount = 100;
+      }
     }
 
     if (folderId) setSelectedNode([folderId + ""]);
@@ -1683,6 +1694,7 @@ class FilesStore {
                 searchInContent: searchInContentRooms,
                 tags,
                 withoutTags,
+                quotaFilter,
               } = filter;
 
               const isFiltered =
@@ -1692,7 +1704,8 @@ class FilesStore {
                 withRoomsSubfolders ||
                 searchInContentRooms ||
                 tags ||
-                withoutTags;
+                withoutTags ||
+                quotaFilter;
 
               if (!!isFiltered) {
                 this.setIsEmptyPage(false);
@@ -1758,6 +1771,22 @@ class FilesStore {
         });
 
     return request();
+  };
+
+  setCustomRoomQuota = async (quotaSize, itemsIDs, inRoom = false, filter) => {
+    const rooms = await api.rooms.setCustomRoomQuota(itemsIDs, +quotaSize);
+
+    if (!inRoom) await this.fetchRooms(null, filter, false, false, false);
+
+    return rooms;
+  };
+
+  resetRoomQuota = async (itemsIDs, filter) => {
+    const rooms = await api.rooms.resetRoomQuota(itemsIDs);
+
+    await this.fetchRooms(null, filter, false, false, false);
+
+    return rooms;
   };
 
   setAlreadyFetchingRooms = (alreadyFetchingRooms) => {
@@ -2521,7 +2550,12 @@ class FilesStore {
   }
 
   getDefaultMembersFilter = () => {
-    return { page: 0, pageCount: 100, total: 0, startIndex: 0 };
+    return {
+      page: 0,
+      pageCount: 100,
+      total: 0,
+      startIndex: 0,
+    };
   };
 
   setRoomMembersFilter = (roomMembersFilter) => {
@@ -2544,6 +2578,7 @@ class FilesStore {
       startIndex: newFilter.startIndex,
       count: newFilter.pageCount,
       filterType: 0, // 0 (Members)
+      filterValue: this.infoPanelStore.searchValue,
     };
 
     return api.rooms.getRoomMembers(id, membersFilters).then((res) => {
@@ -3046,6 +3081,9 @@ class FilesStore {
         inRoom,
         requestToken,
         lastOpened,
+        quotaLimit,
+        usedSpace,
+        isCustomQuota,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3213,6 +3251,9 @@ class FilesStore {
         canCopyPublicLink,
         requestToken,
         lastOpened,
+        quotaLimit,
+        usedSpace,
+        isCustomQuota,
       };
     });
 
@@ -3469,6 +3510,42 @@ class FilesStore {
     }
 
     return this.selection.find((el) => el.title)?.title || null;
+  }
+
+  get hasRoomsToResetQuota() {
+    const canResetCustomQuota = (item) => {
+      const { isDefaultRoomsQuotaSet } = this.authStore.currentQuotaStore;
+
+      if (!isDefaultRoomsQuotaSet) return false;
+
+      return item.security?.EditRoom && item.isCustomQuota;
+    };
+
+    return this.selection.every((x) => canResetCustomQuota(x));
+  }
+
+  get hasRoomsToDisableQuota() {
+    const { isDefaultRoomsQuotaSet } = this.authStore.currentQuotaStore;
+
+    const canDisableQuota = (item) => {
+      if (!isDefaultRoomsQuotaSet) return false;
+
+      return item.security?.EditRoom;
+    };
+
+    return this.selection.every((x) => canDisableQuota(x));
+  }
+
+  get hasRoomsToChangeQuota() {
+    const { isDefaultRoomsQuotaSet } = this.authStore.currentQuotaStore;
+
+    const canChangeQuota = (item) => {
+      if (!isDefaultRoomsQuotaSet) return false;
+
+      return item.security?.EditRoom;
+    };
+
+    return this.selection.every((x) => canChangeQuota(x));
   }
 
   get hasSelection() {
@@ -4019,6 +4096,7 @@ class FilesStore {
       searchInContent: searchInContentRooms,
       tags,
       withoutTags,
+      quotaFilter,
     } = this.roomsFilter;
 
     const {
@@ -4038,7 +4116,8 @@ class FilesStore {
           searchInContentRooms ||
           subjectId ||
           tags ||
-          withoutTags
+          withoutTags ||
+          quotaFilter
         : authorType ||
           roomId ||
           search ||
@@ -4047,6 +4126,12 @@ class FilesStore {
           searchInContent;
 
     return isFiltered;
+  }
+
+  get needResetFilesSelection() {
+    const { isVisible: infoPanelVisible } = this.infoPanelStore;
+
+    return !infoPanelVisible || this.selection.length > 1;
   }
 }
 

@@ -46,6 +46,9 @@ const EditRoomEvent = ({
 
   updateInfoPanelSelection,
   changeRoomOwner,
+
+  defaultRoomsQuota,
+  isDefaultRoomsQuotaSet,
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
 
@@ -76,6 +79,10 @@ const EditRoomEvent = ({
       zoom: 1,
     },
     roomOwner: item.createdBy,
+
+    ...(isDefaultRoomsQuotaSet && {
+      quota: item.quotaLimit,
+    }),
   };
 
   const updateRoom = (oldRoom, newRoom) => {
@@ -96,6 +103,9 @@ const EditRoomEvent = ({
   const onSave = async (roomParams) => {
     const editRoomParams = {
       title: roomParams.title || t("Files:NewRoom"),
+      ...(isDefaultRoomsQuotaSet && {
+        quota: roomParams.quota || item.quotaLimit,
+      }),
     };
 
     const isOwnerChanged = roomParams?.roomOwner?.id !== item.createdBy.id;
@@ -125,7 +135,8 @@ const EditRoomEvent = ({
       }
 
       tags.length && (room = await addTagsToRoom(room.id, tags));
-      removedTags.length && (room = await removeTagsFromRoom(room.id, removedTags));
+      removedTags.length &&
+        (room = await removeTagsFromRoom(room.id, removedTags));
 
       if (!!item.logo.original && !roomParams.icon.uploadedFile) {
         room = await removeLogoFromRoom(room.id);
@@ -245,6 +256,7 @@ export default inject(
     dialogsStore,
     filesSettingsStore,
     infoPanelStore,
+    currentQuotaStore,
   }) => {
     const {
       editRoom,
@@ -274,7 +286,12 @@ export default inject(
     const { setCreateRoomDialogVisible } = dialogsStore;
     const { withPaging } = settingsStore;
     const { updateInfoPanelSelection } = infoPanelStore;
+
+    const { defaultRoomsQuota, isDefaultRoomsQuotaSet } = currentQuotaStore;
+
     return {
+      defaultRoomsQuota,
+      isDefaultRoomsQuotaSet,
       addActiveItems,
       setActiveFolders,
 

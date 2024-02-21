@@ -36,11 +36,13 @@ const FilterInput = React.memo(
     selectorLabel,
     clearAll,
 
-    isRecentTab,
     removeSelectedItem,
 
     isRooms,
     isAccounts,
+    isPeopleAccounts,
+    isGroupsAccounts,
+    isInsideGroup,
     filterTitle,
     sortByTitle,
 
@@ -173,6 +175,9 @@ const FilterInput = React.memo(
             selectorLabel={selectorLabel}
             isRooms={isRooms}
             isAccounts={isAccounts}
+            isPeopleAccounts={isPeopleAccounts}
+            isGroupsAccounts={isGroupsAccounts}
+            isInsideGroup={isInsideGroup}
             title={filterTitle}
             userId={userId}
           />
@@ -194,19 +199,20 @@ const FilterInput = React.memo(
             title={sortByTitle}
           />
 
-          {((viewSettings &&
+          {viewSettings &&
             currentDeviceType === DeviceType.desktop &&
-            viewSelectorVisible) ||
-            isRecentTab) && (
-            <ViewSelector
-              id={viewAs === "tile" ? "view-switch--row" : "view-switch--tile"}
-              style={styleViewSelector}
-              viewAs={viewAs === "table" ? "row" : viewAs}
-              viewSettings={viewSettings}
-              onChangeView={onChangeViewAs}
-              isFilter
-            />
-          )}
+            viewSelectorVisible && (
+              <ViewSelector
+                id={
+                  viewAs === "tile" ? "view-switch--row" : "view-switch--tile"
+                }
+                style={styleViewSelector}
+                viewAs={viewAs === "table" ? "row" : viewAs}
+                viewSettings={viewSettings}
+                onChangeView={onChangeViewAs}
+                isFilter
+              />
+            )}
         </div>
         {selectedItems && selectedItems.length > 0 && (
           <div className="filter-input_selected-row">

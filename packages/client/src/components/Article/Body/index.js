@@ -208,10 +208,7 @@ const ArticleBodyContent = (props) => {
     )
       return setActiveItemId(recycleBinFolderId);
 
-    if (
-      location.pathname.includes("/accounts/filter") &&
-      activeItemId !== "accounts"
-    )
+    if (location.pathname.includes("/accounts") && activeItemId !== "accounts")
       return setActiveItemId("accounts");
 
     if (location.pathname.includes("/settings") && activeItemId !== "settings")

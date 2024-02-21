@@ -64,7 +64,7 @@ const InvitePanel = ({
   const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
     () =>
       ((!userLink || !guestLink || !collaboratorLink) && !adminLink) ||
-      roomId !== -1
+      roomId !== -1,
   );
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [hasErrors, setHasErrors] = useState(false);
@@ -260,7 +260,9 @@ const InvitePanel = ({
         ? (newItem.type = item.access)
         : (newItem.access = item.access);
 
-      item.avatar ? (newItem.id = item.id) : (newItem.email = item.email);
+      item.avatar || item.isGroup
+        ? (newItem.id = item.id)
+        : (newItem.email = item.email);
 
       return newItem;
     });
@@ -528,7 +530,7 @@ export default inject(
       filter,
       currentDeviceType,
     };
-  }
+  },
 )(
   withTranslation([
     "InviteDialog",
@@ -537,5 +539,5 @@ export default inject(
     "Common",
     "InfoPanel",
     "PeopleSelector",
-  ])(observer(InvitePanel))
+  ])(observer(InvitePanel)),
 );

@@ -14,12 +14,17 @@ import { ComboBox } from "@docspace/shared/components/combobox";
 import Filter from "@docspace/shared/api/people/filter";
 import BetaBadge from "../../../BetaBadgeWrapper";
 import { getMembersList } from "@docspace/shared/api/people";
-import { ShareAccessRights } from "@docspace/shared/enums";
+import {
+  AccountsSearchArea,
+  RoomsType,
+  ShareAccessRights,
+} from "@docspace/shared/enums";
 import withCultureNames from "@docspace/common/hoc/withCultureNames";
 import { isBetaLanguage } from "@docspace/shared/utils";
+import { checkIfAccessPaid } from "SRC_DIR/helpers";
 
 import AddUsersPanel from "../../AddUsersPanel";
-import { getAccessOptions } from "../utils";
+import { getAccessOptions, getTopFreeRole } from "../utils";
 import AccessSelector from "./AccessSelector";
 
 import {
@@ -60,6 +65,8 @@ const InviteInput = ({
   i18n,
   setCultureKey,
 }) => {
+  const isPublicRoomType = roomType === RoomsType.PublicRoom;
+
   const [inputValue, setInputValue] = useState("");
   const [usersList, setUsersList] = useState([]);
   const [isChangeLangMail, setIsChangeLangMail] = useState(false);
@@ -123,11 +130,14 @@ const InviteInput = ({
   const searchByQuery = async (value) => {
     const query = value.trim();
 
-    if (query.length > minSearchValue) {
+    if (query.length >= minSearchValue) {
+      const searchArea = isPublicRoomType
+        ? AccountsSearchArea.People
+        : AccountsSearchArea.Any;
       const filter = Filter.getFilterWithOutDisabledUser();
       filter.search = query;
 
-      const users = await getMembersList(roomId, filter);
+      const users = await getMembersList(searchArea, roomId, filter);
 
       setUsersList(users.items);
 
@@ -178,7 +188,10 @@ const InviteInput = ({
 
   const removeExist = (items) => {
     const filtered = items.reduce((unique, o) => {
-      !unique.some((obj) => obj.email === o.email) && unique.push(o);
+      !unique.some((obj) =>
+        obj.isGroup ? obj.id === o.id : obj.email === o.email,
+      ) && unique.push(o);
+
       return unique;
     }, []);
 
@@ -188,7 +201,15 @@ const InviteInput = ({
   };
 
   const getItemContent = (item) => {
-    const { avatar, displayName, email, id, shared } = item;
+    const {
+      avatar,
+      displayName,
+      name: groupName,
+      email,
+      id,
+      shared,
+      isGroup = false,
+    } = item;
 
     item.access = selectedAccess;
 
@@ -198,6 +219,14 @@ const InviteInput = ({
       } else {
         if (item.isOwner || item.isAdmin)
           item.access = ShareAccessRights.RoomManager;
+
+        if (isGroup && checkIfAccessPaid(item.access)) {
+          const topFreeRole = getTopFreeRole(t, roomType);
+          item.access = topFreeRole.access;
+          item.warning = t("GroupMaxAvailableRoleWarning", {
+            role: topFreeRole.label,
+          });
+        }
 
         const items = removeExist([item, ...inviteItems]);
         setInviteItems(items);
@@ -216,10 +245,16 @@ const InviteInput = ({
         heightTablet={48}
         className="list-item"
       >
-        <Avatar size="min" role="user" source={avatar} />
+        <Avatar
+          size="min"
+          role="user"
+          source={avatar}
+          userName={groupName}
+          isGroup={isGroup}
+        />
         <div className="list-item_content">
           <SearchItemText primary disabled={shared}>
-            {displayName}
+            {displayName || groupName}
           </SearchItemText>
           <SearchItemText>{email}</SearchItemText>
         </div>
@@ -243,6 +278,16 @@ const InviteInput = ({
   };
 
   const addItems = (users) => {
+    const topFreeRole = getTopFreeRole(t, roomType);
+    users.forEach((u) => {
+      if (u.isGroup && checkIfAccessPaid(u.access)) {
+        u.access = topFreeRole.access;
+        u.warning = t("GroupMaxAvailableRoleWarning", {
+          role: topFreeRole.label,
+        });
+      }
+    });
+
     const items = [...users, ...inviteItems];
 
     const filtered = removeExist(items);
@@ -466,6 +511,8 @@ const InviteInput = ({
             withoutBackground={isMobileView}
             withBlur={!isMobileView}
             roomId={roomId}
+            withGroups={!isPublicRoomType}
+            withAccessRights
           />
         )}
       </StyledInviteInputContainer>

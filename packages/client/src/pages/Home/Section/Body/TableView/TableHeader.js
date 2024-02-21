@@ -26,6 +26,9 @@ class FilesTableHeader extends React.Component {
       isFrame,
       frameTableColumns,
       isRecentTab,
+      isDefaultRoomsQuotaSet,
+      showStorageInfo,
+      isArchiveFolder,
     } = this.props;
 
     const defaultColumns = [];
@@ -87,6 +90,22 @@ class FilesTableHeader extends React.Component {
           resizable: false,
         },
       ];
+
+      showStorageInfo &&
+        columns.splice(columns.length - 1, 0, {
+          key: "Storage",
+          title:
+            isDefaultRoomsQuotaSet && !isArchiveFolder
+              ? t("Common:StorageAndQuota")
+              : t("Common:Storage"),
+          enable: this.props.roomQuotaColumnIsEnable,
+          sortBy: SortByFieldName.UsedSpace,
+          resizable: true,
+          onChange: this.onColumnChange,
+          onClick: this.onRoomsFilter,
+          minWidth: 179,
+        });
+
       defaultColumns.push(...columns);
     } else if (isTrashFolder) {
       const columns = [
@@ -391,9 +410,11 @@ class FilesTableHeader extends React.Component {
       columnStorageName,
       columnInfoPanelStorageName,
       isRecentTab,
+      isArchiveFolder,
     } = this.props;
 
     if (
+      isArchiveFolder !== prevProps.isArchiveFolder ||
       isRooms !== prevProps.isRooms ||
       isTrashFolder !== prevProps.isTrashFolder ||
       columnStorageName !== prevProps.columnStorageName ||
@@ -551,8 +572,11 @@ export default inject(
     publicRoomStore,
     clientLoadingStore,
     infoPanelStore,
+    currentQuotaStore,
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
+
+    const { isDefaultRoomsQuotaSet, showStorageInfo } = currentQuotaStore;
 
     const {
       isHeaderChecked,
@@ -598,6 +622,7 @@ export default inject(
       roomColumnOwnerIsEnabled,
       roomColumnQuickButtonsIsEnabled,
       roomColumnActivityIsEnabled,
+      roomQuotaColumnIsEnable,
 
       getColumns,
       setColumnEnable,
@@ -648,6 +673,7 @@ export default inject(
       roomColumnOwnerIsEnabled,
       roomColumnQuickButtonsIsEnabled,
       roomColumnActivityIsEnabled,
+      roomQuotaColumnIsEnable,
 
       getColumns,
       setColumnEnable,
@@ -660,6 +686,9 @@ export default inject(
       frameTableColumns: frameConfig?.viewTableColumns,
       isRecentTab,
       showSettings: frameConfig?.showSettings,
+      isDefaultRoomsQuotaSet,
+      showStorageInfo,
+      isArchiveFolder,
     };
   },
 )(

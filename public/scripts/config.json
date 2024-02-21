@@ -23,5 +23,10 @@
     "fetchTimeoutMillis": 3600000,
     "minimumFetchIntervalMillis": 3600000
   },
-  "campaigns": ["CreateDocSpace", "FormGallery"]
+  "campaigns": [
+    "OnlyofficeForDevelopers",
+    "OnlyofficeForPlatform",
+    "BookTraining",
+    "FormGallery"
+  ]
 }

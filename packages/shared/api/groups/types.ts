@@ -6,4 +6,5 @@ export type TGroup = {
   manager: TUser;
   name: string;
   parent: string;
+  isGroup?: boolean;
 };

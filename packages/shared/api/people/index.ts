@@ -12,6 +12,7 @@ import { TChangeTheme, TGetUserList, TUser } from "./types";
 
 import { TReqOption } from "../../utils/axiosClient";
 import { EmployeeActivationStatus, ThemeKeys } from "../../enums";
+import { TGroup } from "../groups/types";
 
 export async function getUserList(filter = Filter.getDefault()) {
   let params = "";
@@ -421,14 +422,14 @@ export async function getMembersList(
   const res = (await request({
     method: "get",
     url,
-  })) as { items: TUser[]; total: number };
+  })) as { items: (TUser | TGroup)[]; total: number };
 
   res.items = res.items.map((member) => {
-    if (member && member.displayName) {
+    if (member && "displayName" in member && member.displayName) {
       member.displayName = Encoder.htmlDecode(member.displayName);
     }
 
-    if (member.manager) {
+    if ("manager" in member && member.manager) {
       member.isGroup = true;
     }
 

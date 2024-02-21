@@ -329,14 +329,14 @@ export const settingsTree = [
         children: [
           {
             id: "portal-settings_catalog-storageManagement_quota-per-room",
-            key: "5-0-1",
+            key: "5-1-0",
             icon: "",
             link: "quota-per-room",
             tKey: "QuotaPerRoom",
           },
           {
             id: "portal-settings_catalog-storageManagement_quota-per-user",
-            key: "5-0-2",
+            key: "5-1-1",
             icon: "",
             link: "quota-per-user",
             tKey: "QuotaPerUser",
@@ -363,7 +363,7 @@ export const settingsTree = [
       },
       {
         id: "portal-settings_catalog-javascript-sdk",
-        key: "5-1",
+        key: "6-1",
         icon: "",
         link: "javascript-sdk",
         tKey: "DeveloperTools",
@@ -371,42 +371,42 @@ export const settingsTree = [
         children: [
           {
             id: "portal-settings_catalog-javascript-sdk_simple-room",
-            key: "5-1-0",
+            key: "6-1-0",
             icon: "",
             link: "room",
             tKey: "Common:Room",
           },
           {
             id: "portal-settings_catalog-javascript-sdk_manager",
-            key: "5-1-1",
+            key: "6-1-1",
             icon: "",
             link: "manager",
             tKey: "JavascriptSdk:Manager",
           },
           {
             id: "portal-settings_catalog-javascript-sdk_room-selector",
-            key: "5-1-2",
+            key: "6-1-2",
             icon: "",
             link: "room-selector",
             tKey: "JavascriptSdk:RoomSelector",
           },
           {
             id: "portal-settings_catalog-javascript-sdk_file-selector",
-            key: "5-1-3",
+            key: "6-1-3",
             icon: "",
             link: "file-selector",
             tKey: "JavascriptSdk:FileSelector",
           },
           {
             id: "portal-settings_catalog-javascript-sdk_editor",
-            key: "5-1-4",
+            key: "6-1-4",
             icon: "",
             link: "editor",
             tKey: "JavascriptSdk:Editor",
           },
           {
             id: "portal-settings_catalog-javascript-sdk_viewer",
-            key: "5-1-5",
+            key: "6-1-5",
             icon: "",
             link: "viewer",
             tKey: "JavascriptSdk:Viewer",
@@ -415,7 +415,7 @@ export const settingsTree = [
       },
       {
         id: "portal-settings_catalog-plugin-sdk",
-        key: "5-2",
+        key: "6-2",
         icon: "",
         link: "plugin-sdk",
         tKey: "PluginSDK",
@@ -423,7 +423,7 @@ export const settingsTree = [
       },
       {
         id: "portal-settings_catalog-webhooks",
-        key: "5-3",
+        key: "6-3",
         icon: "",
         link: "webhooks",
         tKey: "DeveloperTools",

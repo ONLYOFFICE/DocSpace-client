@@ -323,6 +323,30 @@ class SelectionStore {
 
     return users.map((u) => u.id);
   }
+
+  get hasUsersToChangeQuota() {
+    const { canChangeQuota } = this.peopleStore.accessRightsStore;
+
+    const users = this.selection.filter(() => canChangeQuota());
+
+    return users.length > 0;
+  }
+
+  get hasUsersToDisableQuota() {
+    const { canDisableQuota } = this.peopleStore.accessRightsStore;
+
+    const users = this.selection.filter(() => canDisableQuota());
+
+    return users.length > 0;
+  }
+
+  get hasUsersToResetQuota() {
+    const { caResetCustomQuota } = this.peopleStore.accessRightsStore;
+
+    const users = this.selection.filter((x) => caResetCustomQuota(x));
+
+    return users.length > 0;
+  }
 }
 
 export default SelectionStore;

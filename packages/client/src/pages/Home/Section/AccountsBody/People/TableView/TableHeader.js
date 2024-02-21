@@ -2,6 +2,8 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
+import { SortByFieldName } from "SRC_DIR/helpers/enums";
+
 import { TableHeader } from "@docspace/shared/components/table";
 import { Events } from "@docspace/shared/enums";
 
@@ -13,6 +15,7 @@ class PeopleTableHeader extends React.Component {
     super(props);
 
     const { t } = props;
+    const { isDefaultUsersQuotaSet, showStorageInfo } = this.props;
 
     const defaultColumns = [
       {
@@ -61,6 +64,20 @@ class PeopleTableHeader extends React.Component {
         onClick: this.onFilter,
       },
     ];
+
+    showStorageInfo &&
+      defaultColumns.push({
+        key: "Storage",
+        title: isDefaultUsersQuotaSet
+          ? t("Common:StorageAndQuota")
+          : t("Common:Storage"),
+        enable: true,
+        sortBy: SortByFieldName.UsedSpace,
+        resizable: true,
+        onChange: this.onColumnChange,
+        onClick: this.onFilter,
+        minWidth: 179,
+      });
 
     const columns = this.getColumns(defaultColumns);
 
@@ -193,6 +210,7 @@ export default inject(
     infoPanelStore,
     settingsStore,
     userStore,
+    currentQuotaStore,
   }) => {
     const { filterStore } = peopleStore;
 
@@ -200,6 +218,8 @@ export default inject(
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { withPaging } = settingsStore;
+
+    const { isDefaultUsersQuotaSet, showStorageInfo } = currentQuotaStore;
 
     return {
       filter,
@@ -209,6 +229,8 @@ export default inject(
       userId: userStore.user?.id,
       infoPanelVisible,
       withPaging,
+      isDefaultUsersQuotaSet,
+      showStorageInfo,
     };
   },
 )(

@@ -1,5 +1,10 @@
 import { makeAutoObservable } from "mobx";
 
+import {
+  setDefaultUserQuota,
+  setDefaultRoomQuota,
+} from "@docspace/shared/api/settings";
+
 import { toastr } from "../components/toast";
 import { TData } from "../components/toast/Toast.type";
 import { PortalFeaturesLimitations } from "../enums";
@@ -16,16 +21,20 @@ import {
   PERCENTAGE_FOR_SHOWING_BAR,
 } from "../constants";
 import { Nullable } from "../types";
+import { UserStore } from "./UserStore";
 
 class CurrentQuotasStore {
   currentPortalQuota: Nullable<TPaymentQuota> = null;
+
+  userStore: UserStore | null = null;
 
   currentPortalQuotaFeatures: TPaymentFeature[] = [];
 
   isLoaded = false;
 
-  constructor() {
+  constructor(userStoreConst: UserStore) {
     makeAutoObservable(this);
+    this.userStore = userStoreConst;
   }
 
   setIsLoaded = (isLoaded: boolean) => {
@@ -143,6 +152,14 @@ class CurrentQuotasStore {
     return result?.value;
   }
 
+  get isStatisticsAvailable() {
+    const result = this.currentPortalQuotaFeatures.find(
+      (obj) => obj.id === "statistic",
+    );
+
+    return result?.value;
+  }
+
   get isRestoreAndAutoBackupAvailable() {
     const result = this.currentPortalQuotaFeatures.find(
       (obj) => obj.id === "restore",
@@ -201,6 +218,18 @@ class CurrentQuotasStore {
     );
   }
 
+  get showTenantCustomQuotaBar() {
+    if (!this.isTenantCustomQuotaSet || this.tenantCustomQuota === undefined)
+      return false;
+
+    if (+this.tenantCustomQuota === -1) return false;
+
+    return (
+      (this.usedTotalStorageSizeCount / this.tenantCustomQuota) * 100 >=
+      PERCENTAGE_FOR_SHOWING_BAR
+    );
+  }
+
   get showUserQuotaBar() {
     return (
       this.addedManagersCount > 1 &&
@@ -210,9 +239,58 @@ class CurrentQuotasStore {
     );
   }
 
+  get showUserPersonalQuotaBar() {
+    const personalQuotaLimitReached = this.userStore?.personalQuotaLimitReached;
+
+    if (!this.isDefaultUsersQuotaSet) return false;
+
+    return personalQuotaLimitReached;
+  }
+
   get isNonProfit() {
     return this.currentPortalQuota?.nonProfit;
   }
+
+  get isDefaultRoomsQuotaSet() {
+    return this.currentPortalQuota?.roomsQuota?.enableQuota;
+  }
+
+  get isDefaultUsersQuotaSet() {
+    return this.currentPortalQuota?.usersQuota?.enableQuota;
+  }
+
+  get isTenantCustomQuotaSet() {
+    return this.currentPortalQuota?.tenantCustomQuota?.enableQuota;
+  }
+
+  get defaultRoomsQuota() {
+    return this.currentPortalQuota?.roomsQuota?.defaultQuota;
+  }
+
+  get defaultUsersQuota() {
+    return this.currentPortalQuota?.usersQuota?.defaultQuota;
+  }
+
+  get tenantCustomQuota() {
+    return this.currentPortalQuota?.tenantCustomQuota?.quota;
+  }
+
+  get showStorageInfo() {
+    const user = this.userStore?.user;
+
+    if (!user) return false;
+
+    return this.isStatisticsAvailable && (user.isOwner || user.isAdmin);
+  }
+
+  updateTenantCustomQuota = (obj: {
+    [key: string]: string | number | boolean;
+  }) => {
+    for (let key in obj) {
+      // @ts-expect-error is always writable property
+      this.currentPortalQuota.tenantCustomQuota[key] = obj[key];
+    }
+  };
 
   setPortalQuotaValue = (res: TPaymentQuota) => {
     this.currentPortalQuota = res;
@@ -244,6 +322,36 @@ class CurrentQuotasStore {
       this.setIsLoaded(true);
     } catch (e) {
       toastr.error(e as TData);
+    }
+  };
+
+  setUserQuota = async (quota: string | number, t: (key: string) => string) => {
+    const isEnable = +quota !== -1;
+
+    try {
+      await setDefaultUserQuota(isEnable, +quota);
+      const toastrText = isEnable
+        ? t("MemoryQuotaEnabled")
+        : t("MemoryQuotaDisabled");
+
+      toastr.success(toastrText);
+    } catch (e: any) {
+      toastr.error(e);
+    }
+  };
+
+  setRoomQuota = async (quota: string | number, t: (key: string) => string) => {
+    const isEnable = +quota !== -1;
+
+    try {
+      await setDefaultRoomQuota(isEnable, +quota);
+      const toastrText = isEnable
+        ? t("MemoryQuotaEnabled")
+        : t("MemoryQuotaDisabled");
+
+      toastr.success(toastrText);
+    } catch (e: any) {
+      toastr.error(e);
     }
   };
 }

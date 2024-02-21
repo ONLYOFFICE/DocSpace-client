@@ -49,8 +49,13 @@ class UsersStore {
     }
 
     if (!this.settingsStore.withPaging) {
-      filterData.page = 0;
-      filterData.pageCount = 100;
+      const isCustomCountPage =
+        filter && filter.pageCount !== 100 && filter.pageCount !== 25;
+
+      if (!isCustomCountPage) {
+        filterData.page = 0;
+        filterData.pageCount = 100;
+      }
     }
 
     if (filterData.group && filterData.group === "root")
@@ -157,6 +162,24 @@ class UsersStore {
     if (users && !this.needResetUserSelection) {
       this.peopleStore.selectionStore.updateSelection(this.peopleList);
     }
+
+    return users;
+  };
+
+  setCustomUserQuota = async (quotaSize, userIds) => {
+    const filter = this.peopleStore.filterStore.filter;
+    const users = await api.people.setCustomUserQuota(userIds, +quotaSize);
+
+    await this.getUsersList(filter, true);
+
+    return users;
+  };
+
+  resetUserQuota = async (userIds) => {
+    const filter = this.peopleStore.filterStore.filter;
+    const users = await api.people.resetUserQuota(userIds);
+
+    await this.getUsersList(filter, true);
 
     return users;
   };
@@ -406,6 +429,9 @@ class UsersStore {
       firstName,
       lastName,
       isSSO,
+      quotaLimit,
+      usedSpace,
+      isCustomQuota,
     } = user;
     const statusType = this.getStatusType(user);
     const role = this.getUserRole(user);
@@ -444,6 +470,9 @@ class UsersStore {
       firstName,
       lastName,
       isSSO,
+      quotaLimit,
+      usedSpace,
+      isCustomQuota,
     };
   };
 

@@ -43,6 +43,7 @@ const useFiles = ({
 
   gallerySelected,
   folderSecurity,
+  userId,
 }) => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -211,7 +212,7 @@ const useFiles = ({
     const newFilter = filter
       ? filter.clone()
       : isRooms
-        ? RoomsFilter.getDefault()
+        ? RoomsFilter.getDefault(userId)
         : FilesFilter.getDefault();
     const requests = [Promise.resolve(newFilter)];
 
@@ -225,7 +226,7 @@ const useFiles = ({
       .all(requests)
       .catch((err) => {
         if (isRooms) {
-          Promise.resolve(RoomsFilter.getDefault());
+          Promise.resolve(RoomsFilter.getDefault(userId));
         } else {
           Promise.resolve(FilesFilter.getDefault());
         }
@@ -255,7 +256,7 @@ const useFiles = ({
               undefined,
               undefined,
               undefined,
-              true
+              true,
             );
           } else {
             const folderId = filter.folder;

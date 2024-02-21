@@ -160,7 +160,7 @@ export default inject(
     infoPanelStore,
     clientLoadingStore,
     userStore,
-    tableStore
+    tableStore,
   }) => {
     const { filterStore } = peopleStore;
 
@@ -168,7 +168,7 @@ export default inject(
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { withPaging } = settingsStore;
-    
+
     const {
       getColumns,
       setColumnEnable,
@@ -186,11 +186,10 @@ export default inject(
       setColumnEnable,
       typeAccountsColumnIsEnabled,
       emailAccountsColumnIsEnabled,
-
     };
-  }
+  },
 )(
   withTranslation(["People", "Common", "PeopleTranslations"])(
-    observer(PeopleTableHeader)
-  )
+    observer(PeopleTableHeader),
+  ),
 );

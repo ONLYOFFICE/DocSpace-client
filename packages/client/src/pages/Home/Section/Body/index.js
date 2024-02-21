@@ -226,7 +226,9 @@ const SectionBodyContent = (props) => {
       return;
     }
 
-    const folderId = value ? value.split("_")[1] : treeValue;
+    const folderId = value
+      ? value.split("_").slice(1, -3).join("_")
+      : treeValue;
     onMoveTo(folderId, title);
     return;
   };

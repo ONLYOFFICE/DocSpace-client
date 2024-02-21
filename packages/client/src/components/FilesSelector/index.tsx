@@ -2,10 +2,7 @@ import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-// @ts-ignore
-import Loaders from "@docspace/common/components/Loaders";
-import { FolderType, RoomsType } from "@docspace/shared/enums";
-import { DeviceType } from "@docspace/shared/enums";
+import { FolderType, RoomsType, DeviceType } from "@docspace/shared/enums";
 
 import { Selector } from "@docspace/shared/components/selector";
 import { Aside } from "@docspace/shared/components/aside";
@@ -13,7 +10,11 @@ import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Portal } from "@docspace/shared/components/portal";
 import { toastr } from "@docspace/shared/components/toast";
 
-import { RowLoader, SearchLoader } from "@docspace/shared/skeletons/selector";
+import {
+  RowLoader,
+  SearchLoader,
+  SelectorBreadCrumbsSkeleton,
+} from "@docspace/shared/skeletons/selector";
 
 import EmptyScreenFilterAltSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt.svg?url";
 import EmptyScreenFilterAltDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt_dark.svg?url";
@@ -30,7 +31,7 @@ import {
 import useRootHelper from "./helpers/useRootHelper";
 import useRoomsHelper from "./helpers/useRoomsHelper";
 import useLoadersHelper from "./helpers/useLoadersHelper";
-import useFilesHelper from "./helpers/useFilesHelper";
+import { useFilesHelper } from "./helpers/useFilesHelper";
 import { getAcceptButtonLabel, getHeaderLabel, getIsDisabled } from "./utils";
 import useSocketHelper from "./helpers/useSocketHelper";
 
@@ -275,8 +276,8 @@ const FilesSelector = ({
     let folderId = currentFolderId
       ? currentFolderId
       : sessionPath && (isMove || isCopy || isRestore || isRestoreAll)
-      ? +sessionPath
-      : fromFolderId;
+        ? +sessionPath
+        : fromFolderId;
 
     const getRoomSettings = () => {
       setSelectedItemType("rooms");
@@ -579,7 +580,11 @@ const FilesSelector = ({
       onSelectBreadCrumb={onClickBreadCrumb}
       isLoading={showLoader}
       isBreadCrumbsLoading={showBreadCrumbsLoader}
-      withSearch={withSearch && !isRoot && items ? items.length > 0 : !isRoot && isFirstLoad}
+      withSearch={
+        withSearch && !isRoot && items
+          ? items.length > 0
+          : !isRoot && isFirstLoad
+      }
       rowLoader={
         <RowLoader
           isMultiSelect={false}
@@ -588,7 +593,7 @@ const FilesSelector = ({
         />
       }
       searchLoader={<SearchLoader />}
-      breadCrumbsLoader={<Loaders.SelectorBreadCrumbsLoader />}
+      breadCrumbsLoader={<SelectorBreadCrumbsSkeleton />}
       alwaysShowFooter={true}
       isNextPageLoading={isNextPageLoading}
       hasNextPage={hasNextPage}
@@ -737,7 +742,6 @@ export default inject(
         : selectedId === selectionsWithoutEditing[0]?.id
           ? parentId
           : selectedId;
-
 
     return {
       fromFolderId,

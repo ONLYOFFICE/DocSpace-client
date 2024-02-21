@@ -2,7 +2,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Submenu } from "@docspace/shared/components/submenu";
-import Loaders from "@docspace/common/components/Loaders";
+import { SectionSubmenuSkeleton } from "@docspace/shared/skeletons/sections";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { getObjectByLocation } from "@docspace/shared/utils/common";
 
@@ -46,7 +46,7 @@ const MyDocumentsSubmenu = ({
   const startSelect =
     getObjectByLocation(window.DocSpace.location)?.folder === "recent" ? 1 : 0;
 
-  if (showSubmenu && showBodyLoader) return <Loaders.SectionSubmenuLoader />;
+  if (showSubmenu && showBodyLoader) return <SectionSubmenuSkeleton />;
 
   return showSubmenu ? (
     <Submenu data={submenu} startSelect={startSelect} onSelect={onSelect} />

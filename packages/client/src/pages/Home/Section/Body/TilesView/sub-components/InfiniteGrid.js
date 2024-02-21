@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
-import { InfiniteLoaderComponent } from "@docspace/shared/components/infinite-loader";
-import { StyledCard, StyledItem, StyledHeaderItem } from "./StyledInfiniteGrid";
-import Loaders from "@docspace/common/components/Loaders";
+import React, { useEffect, useState } from "react";
 import uniqueid from "lodash/uniqueId";
+
+import { TileSkeleton } from "@docspace/shared/skeletons/tiles";
+import { InfiniteLoaderComponent } from "@docspace/shared/components/infinite-loader";
+
+import { StyledCard, StyledItem, StyledHeaderItem } from "./StyledInfiniteGrid";
 
 const HeaderItem = ({ children, className, ...rest }) => {
   return (
@@ -72,7 +74,7 @@ const InfiniteGrid = (props) => {
     list.push(
       <Item key={key} className={className}>
         {cards}
-      </Item>
+      </Item>,
     );
     if (clear) cards = [];
   };
@@ -130,7 +132,7 @@ const InfiniteGrid = (props) => {
             key="header_item"
           >
             {child}
-          </HeaderItem>
+          </HeaderItem>,
         );
       } else {
         const isFile = child?.props?.className?.includes("file");
@@ -146,7 +148,7 @@ const InfiniteGrid = (props) => {
         cards.push(
           <Card countTilesInRow={countTilesInRow} key={cardKey}>
             {child}
-          </Card>
+          </Card>,
         );
       }
     }
@@ -164,11 +166,11 @@ const InfiniteGrid = (props) => {
     while (countTilesInRow > cards.length && cards.length !== countTilesInRow) {
       const key = `tiles-loader_${countTilesInRow - cards.length}`;
       cards.push(
-        <Loaders.Tile
+        <TileSkeleton
           key={key}
           className={`tiles-loader ${type}`}
           isFolder={type === "isFolder"}
-        />
+        />,
       );
     }
 
@@ -223,5 +225,5 @@ export default inject(
       getCountTilesInRow,
       isLoading,
     };
-  }
+  },
 )(observer(InfiniteGrid));

@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import moment from "moment";
 
-import Loaders from "@docspace/common/components/Loaders";
+import { SettingsStorageManagementSkeleton } from "@docspace/shared/skeletons/settings";
 import { setDocumentTitle } from "@docspace/client/src/helpers/filesUtils";
 
 import QuotasComponent from "./Quotas";
@@ -34,7 +34,7 @@ const StorageManagement = ({
     ready && setDocumentTitle(t("Settings:StorageManagement"));
   }, [ready]);
 
-  if (!isInit || !ready) return <Loaders.SettingsStorageManagement />;
+  if (!isInit || !ready) return <SettingsStorageManagementSkeleton />;
 
   return (
     <StyledBody>

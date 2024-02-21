@@ -3,52 +3,63 @@ import loadable from "@loadable/component";
 
 import ConfirmRoute from "../helpers/confirmRoute";
 import ErrorBoundary from "@docspace/common/components/ErrorBoundary";
+import componentLoader from "@docspace/components/utils/component-loader";
 
 import Error404 from "SRC_DIR/pages/Errors/404";
 import { AuthenticatedAction } from "../helpers/constants";
 
-const Confirm = loadable(() => import("../pages/Confirm"));
+const Confirm = loadable(() =>
+  componentLoader(() => import("../pages/Confirm"))
+);
 
 const ActivateUserForm = loadable(() =>
-  import("../pages/Confirm/sub-components/activateUser")
+  componentLoader(() => import("../pages/Confirm/sub-components/activateUser"))
 );
 const CreateUserForm = loadable(() =>
-  import("../pages/Confirm/sub-components/createUser")
+  componentLoader(() => import("../pages/Confirm/sub-components/createUser"))
 );
 const ChangePasswordForm = loadable(() =>
-  import("../pages/Confirm/sub-components/changePassword")
+  componentLoader(() =>
+    import("../pages/Confirm/sub-components/changePassword")
+  )
 );
 const ActivateEmailForm = loadable(() =>
-  import("../pages/Confirm/sub-components/activateEmail")
+  componentLoader(() => import("../pages/Confirm/sub-components/activateEmail"))
 );
 const ChangeEmailForm = loadable(() =>
-  import("../pages/Confirm/sub-components/changeEmail")
+  componentLoader(() => import("../pages/Confirm/sub-components/changeEmail"))
 );
 const ChangePhoneForm = loadable(() =>
-  import("../pages/Confirm/sub-components/changePhone")
+  componentLoader(() => import("../pages/Confirm/sub-components/changePhone"))
 );
 const ProfileRemoveForm = loadable(() =>
-  import("../pages/Confirm/sub-components/profileRemove")
+  componentLoader(() => import("../pages/Confirm/sub-components/profileRemove"))
 );
 const ChangeOwnerForm = loadable(() =>
-  import("../pages/Confirm/sub-components/changeOwner")
+  componentLoader(() => import("../pages/Confirm/sub-components/changeOwner"))
 );
 const TfaAuthForm = loadable(() =>
-  import("../pages/Confirm/sub-components/tfaAuth")
+  componentLoader(() => import("../pages/Confirm/sub-components/tfaAuth"))
 );
 const TfaActivationForm = loadable(() =>
-  import("../pages/Confirm/sub-components/tfaActivation")
+  componentLoader(() => import("../pages/Confirm/sub-components/tfaActivation"))
 );
 const RemovePortal = loadable(() =>
-  import("../pages/Confirm/sub-components/removePortal")
+  componentLoader(() => import("../pages/Confirm/sub-components/removePortal"))
 );
 const DeactivatePortal = loadable(() =>
-  import("../pages/Confirm/sub-components/deactivatePortal")
+  componentLoader(() =>
+    import("../pages/Confirm/sub-components/deactivatePortal")
+  )
 );
 const ContinuePortal = loadable(() =>
-  import("../pages/Confirm/sub-components/continuePortal")
+  componentLoader(() =>
+    import("../pages/Confirm/sub-components/continuePortal")
+  )
 );
-const Auth = loadable(() => import("../pages/Confirm/sub-components/auth"));
+const Auth = loadable(() =>
+  componentLoader(() => import("../pages/Confirm/sub-components/auth"))
+);
 
 const confirmRoutes = [
   {

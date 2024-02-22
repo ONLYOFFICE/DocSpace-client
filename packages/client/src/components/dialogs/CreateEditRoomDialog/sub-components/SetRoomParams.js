@@ -162,6 +162,7 @@ const SetRoomParams = ({
       {!isEdit && enableThirdParty && (
         <ThirdPartyStorage
           t={t}
+          roomType={roomParams.type}
           roomTitle={roomParams.title}
           storageLocation={roomParams.storageLocation}
           onChangeStorageLocation={onChangeStorageLocation}

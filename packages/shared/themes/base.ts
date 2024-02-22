@@ -3075,6 +3075,7 @@ export const getBaseTheme = () => {
     errorContainer: {
       background: white,
       bodyText: "#A3A9AE",
+      textColor: "#555F65",
     },
 
     editor: {

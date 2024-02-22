@@ -9,6 +9,8 @@ export interface ErrorContainerProps extends PropsWithChildren {
   buttonText?: string;
   isPrimaryButton?: boolean;
   customizedBodyText?: string;
+  img?: string;
+  withImg?: boolean;
 
   onClickButton?: VoidFunction;
 }

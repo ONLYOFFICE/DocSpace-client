@@ -123,6 +123,8 @@
   "Error401Text": "Sorry, the resource is not currently accessible.",
   "Error403Text": "Sorry, access denied.",
   "Error404Text": "Sorry, the resource cannot be found.",
+  "Error401HeaderText": "401 Error!",
+  "Error401BodyText": "Unauthorized request. To access this file, you must enter a password or be a registered user.",
   "ErrorDeactivatedText": "This DocSpace is deactivated",
   "ErrorEmptyList": "The list of entities has been changed. Please check the contents and try again.",
   "ErrorInternalServer": "Internal server error. Try again later.",

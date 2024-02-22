@@ -3051,6 +3051,7 @@ const Dark: TTheme = {
   errorContainer: {
     background: black,
     bodyText: "#858585",
+    textColor: "#ADADAD",
   },
 
   editor: {

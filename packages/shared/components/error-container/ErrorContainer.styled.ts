@@ -28,12 +28,18 @@ const StyledErrorContainer = styled.div`
     margin: 12px 16px 60px 16px;
   }
 
-  #header {
+  #header,
+  #header-with-image {
     font-weight: 700;
     font-size: ${(props) => props.theme.getCorrectFontSize("23px")};
     line-height: 28px;
     margin: 8px 0 20px 0;
     text-align: center;
+  }
+
+  #header-with-image {
+    margin-top: 0px;
+    margin-bottom: 20px;
   }
 
   #text {
@@ -51,8 +57,24 @@ const StyledErrorContainer = styled.div`
     margin-top: 24px;
   }
 
+  #button-container-with-image {
+    width: 107px;
+    margin-top: 24px;
+  }
+
   #customized-text {
+    font-weight: 600;
+    font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     color: ${(props) => props.theme.errorContainer.bodyText};
+  }
+
+  #customized-text-with-image {
+    font-weight: 400;
+    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
+    line-height: 16px;
+    text-align: center;
+    max-width: 640px;
+    color: ${(props) => props.theme.errorContainer.textColor};
   }
 
   @media ${desktop} {
@@ -61,7 +83,7 @@ const StyledErrorContainer = styled.div`
     }
 
     #container {
-      margin: 12px 16px 48px 16px;
+      margin: 12px 16px 40px 16px;
     }
   }
 
@@ -84,6 +106,15 @@ const StyledErrorContainer = styled.div`
 
     #button {
       width: 100%;
+    }
+
+    #customized-text-with-image {
+      max-width: 287px;
+    }
+
+    #error-img {
+      width: 200px;
+      height: 200px;
     }
   }
 

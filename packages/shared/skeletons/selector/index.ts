@@ -1,5 +1,5 @@
 import RowLoader from "./Row";
 import SearchLoader from "./Search";
-import { SelectorBreadCrumbsSkeleton } from "./Selector.bread-crumbs";
+import BreadCrumbsLoader from "./BreadCrumbs";
 
-export { SearchLoader, RowLoader, SelectorBreadCrumbsSkeleton };
+export { SearchLoader, RowLoader, BreadCrumbsLoader };

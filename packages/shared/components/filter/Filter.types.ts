@@ -76,6 +76,7 @@ export type TWithOptionItem = {
   withOptions?: boolean;
   id?: string;
   key?: string;
+  label?: undefined;
   isSelected?: boolean;
 };
 

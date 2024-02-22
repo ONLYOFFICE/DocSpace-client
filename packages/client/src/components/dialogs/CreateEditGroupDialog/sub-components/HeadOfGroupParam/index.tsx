@@ -1,23 +1,28 @@
 import { IconButton } from "@docspace/shared/components/icon-button";
-import * as Styled from "./index.styled";
-import PlusSvgUrl from "PUBLIC_DIR/images/plus.svg?url";
 import { useState } from "react";
-import SelectGroupManagerPanel from "./SelectGroupManagerPanel";
-import GroupMemberRow from "../GroupMemberRow";
 import { useTranslation } from "react-i18next";
+import PlusSvgUrl from "PUBLIC_DIR/images/plus.svg?url";
+import GroupMemberRow from "../GroupMemberRow";
+import SelectGroupManagerPanel from "./SelectGroupManagerPanel";
+import * as Styled from "./index.styled";
+
 interface HeadOfGroupProps {
   groupManager: object | null;
   setGroupManager: (groupManager: object | null) => void;
+  groupMembers: object[] | null;
+  setGroupMembers: (groupMembers: object[]) => void;
   onClose: () => void;
 }
 
 const HeadOfGroup = ({
   groupManager,
   setGroupManager,
+  groupMembers,
+  setGroupMembers,
   onClose,
 }: HeadOfGroupProps) => {
+  const { t } = useTranslation(["Common"]);
 
-    const { t } = useTranslation(["Common"]);
   const [selectGroupMangerPanelIsVisible, setSelectGroupMangerPanelIsVisible] =
     useState<boolean>(false);
 
@@ -29,6 +34,9 @@ const HeadOfGroup = ({
 
   const onRemoveGroupManager = () => {
     setGroupManager(null);
+    setGroupMembers(
+      groupMembers?.filter((gm) => gm.id !== groupManager!.id) || [],
+    );
   };
 
   if (selectGroupMangerPanelIsVisible) {

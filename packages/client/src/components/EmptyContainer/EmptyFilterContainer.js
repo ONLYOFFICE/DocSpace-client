@@ -31,7 +31,7 @@ const EmptyFilterContainer = ({
   const subheadingText = t("EmptyFilterSubheadingText");
   const descriptionText = isRooms
     ? t("Common:SearchEmptyRoomsDescription")
-    : t("EmptyFilterDescriptionText");
+    : t("Common:EmptyFilterDescriptionText");
 
   const onResetFilter = () => {
     setIsLoading(true);
@@ -52,7 +52,7 @@ const EmptyFilterContainer = ({
 
       if (isPublicRoom) {
         navigate(
-          `${location.pathname}?key=${publicRoomKey}&${newFilter.toUrlParams()}`
+          `${location.pathname}?key=${publicRoomKey}&${newFilter.toUrlParams()}`,
         );
       } else {
         navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
@@ -115,5 +115,5 @@ export default inject(
       isPublicRoom,
       publicRoomKey,
     };
-  }
+  },
 )(withTranslation(["Files", "Common"])(observer(EmptyFilterContainer)));

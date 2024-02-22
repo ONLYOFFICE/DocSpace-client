@@ -11,7 +11,7 @@ export interface SubmenuProps {
   /** Specifies the first item or the item's index to be displayed in the submenu. */
   startSelect: number | TSubmenuItem;
   /** Property that allows explicitly selecting content passed through an external operation  */
-  forsedActiveItemId?: number;
+  forsedActiveItemId?: number | string;
   /** Sets a callback function that is triggered when the submenu item is selected */
   onSelect?: (item: TSubmenuItem) => void;
   topProps?: string;

@@ -1188,8 +1188,8 @@ class FilesActionStore {
               folders.length !== 1 && Array.isArray(folders)
                 ? t("ArchivedRoomsAction")
                 : Array.isArray(folders)
-                  ? t("ArchivedRoomAction", { name: folders[0].title })
-                  : t("ArchivedRoomAction", { name: folders.title });
+                  ? t("Common:ArchivedRoomAction", { name: folders[0].title })
+                  : t("Common:ArchivedRoomAction", { name: folders.title });
 
             toastr.success(successTranslation);
           })

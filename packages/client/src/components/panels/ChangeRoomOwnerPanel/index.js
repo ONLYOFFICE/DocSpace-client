@@ -89,8 +89,6 @@ const ChangeRoomOwner = (props) => {
   const filter = new Filter();
   filter.role = [EmployeeType.Admin, EmployeeType.User]; // 1(EmployeeType.User) - RoomAdmin | 3(EmployeeType.Admin) - DocSpaceAdmin
 
-  const backClickProp = showBackButton ? { onBackClick } : {};
-
   const asideComponent = (
     <StyledChangeRoomOwner showBackButton={showBackButton}>
       <Backdrop
@@ -108,13 +106,19 @@ const ChangeRoomOwner = (props) => {
       >
         <PeopleSelector
           withCancelButton
-          {...backClickProp}
-          onAccept={onChangeRoomOwner}
+          cancelButtonLabel=""
           onCancel={onClose}
-          acceptButtonLabel={
+          onSubmit={onChangeRoomOwner}
+          submitButtonLabel={
             showBackButton ? t("Common:SelectAction") : t("Files:AssignOwner")
           }
-          headerLabel={t("Files:ChangeTheRoomOwner")}
+          disableSubmitButton={false}
+          withHeader
+          headerProps={{
+            onBackClick,
+            withoutBackButton: !showBackButton,
+            headerLabel: t("Files:ChangeTheRoomOwner"),
+          }}
           filter={filter}
           isLoading={isLoading}
           withFooterCheckbox={!showBackButton}
@@ -174,5 +178,5 @@ export default inject(
       userId: id,
       updateInfoPanelSelection,
     };
-  }
+  },
 )(observer(withTranslation(["Files"])(ChangeRoomOwner)));

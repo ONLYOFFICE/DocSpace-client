@@ -23,7 +23,7 @@ import {
 import { inject, observer } from "mobx-react";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
-import Loaders from "@docspace/common/components/Loaders";
+import { DialogAsideSkeleton } from "@docspace/shared/skeletons/dialog";
 import withLoader from "../../../HOCs/withLoader";
 import {
   getCategoryTypeByFolderType,
@@ -125,7 +125,7 @@ const NewFilesPanel = (props) => {
         onFileClick(item);
 
         const newListFiles = listFiles.filter(
-          (file) => file.id.toString() !== id
+          (file) => file.id.toString() !== id,
         );
 
         setListFiles(newListFiles);
@@ -185,10 +185,10 @@ const NewFilesPanel = (props) => {
               combineUrl(
                 window.DocSpaceConfig?.proxy?.url,
                 config.homepage,
-                `/doceditor?fileId=${id}`
+                `/doceditor?fileId=${id}`,
               ),
-              window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self"
-            )
+              window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self",
+            ),
           );
       }
 
@@ -196,7 +196,7 @@ const NewFilesPanel = (props) => {
         if (currentFolderId !== item.folderId) {
           const categoryType = getCategoryTypeByFolderType(
             rootFolderType,
-            item.folderId
+            item.folderId,
           );
 
           const state = {
@@ -303,7 +303,7 @@ const NewFilesPanel = (props) => {
             <div key="loader" className="panel-loader-wrapper">
               <Loader type="oval" size="16px" className="panel-loader" />
               <Text as="span">{`${t("Common:LoadingProcessing")} ${t(
-                "Common:LoadingDescription"
+                "Common:LoadingDescription",
               )}`}</Text>
             </div>
           )}
@@ -393,9 +393,9 @@ export default inject(
       setIsLoading,
       currentDeviceType: settingsStore.currentDeviceType,
     };
-  }
+  },
 )(
   withTranslation(["NewFilesPanel", "Common"])(
-    withLoader(observer(NewFilesPanel))(<Loaders.DialogAsideLoader isPanel />)
-  )
+    withLoader(observer(NewFilesPanel))(<DialogAsideSkeleton isPanel />),
+  ),
 );

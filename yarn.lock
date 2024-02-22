@@ -5099,11 +5099,11 @@ __metadata:
 
 "@onlyoffice/document-editor-react@file:../../../../onlyoffice-document-editor-react-1.4.0.tgz::locator=%40docspace%2Fdoceditor%40workspace%3Apackages%2Fdoceditor":
   version: 1.4.0
-  resolution: "@onlyoffice/document-editor-react@file:../../../../onlyoffice-document-editor-react-1.4.0.tgz#../../../../onlyoffice-document-editor-react-1.4.0.tgz::hash=65d33a&locator=%40docspace%2Fdoceditor%40workspace%3Apackages%2Fdoceditor"
+  resolution: "@onlyoffice/document-editor-react@file:../../../../onlyoffice-document-editor-react-1.4.0.tgz#../../../../onlyoffice-document-editor-react-1.4.0.tgz::hash=fc9cb0&locator=%40docspace%2Fdoceditor%40workspace%3Apackages%2Fdoceditor"
   peerDependencies:
     react: ^16.9.0 || ^17 || ^18
     react-dom: ^16.9.0 || ^17 || ^18
-  checksum: c8efcdf80ebc00cc6fae8a3f0f5755ffa1bf0856c2afaa1c0543bc797c20e8ed0ff4f2dbe11b6369cb8ba0debc7c8b06df0f829d365ade8e8f18268acece4652
+  checksum: 06490503b3d4283a1c9aec8429686cd6c1c719d224b117ca1609fc80ebbf94e5b7860eed8ab753bef23302bb15dd8c940d8d71f39195149aedd1dc27931db5a3
   languageName: node
   linkType: hard
 

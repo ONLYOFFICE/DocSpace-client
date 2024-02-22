@@ -56,6 +56,7 @@
   "CopyOperation": "Kopieren",
   "CountPerPage": "{{count}} pro Seite",
   "Create": "Erstellen",
+  "CreateAndCopy": "Erstellen und kopieren",
   "CreateCopy": "Kopie erstellen",
   "CreateFileCopy": "als Kopie speichern",
   "CreateMasterFormFromFile": "Formularvorlage aus Datei erstellen",

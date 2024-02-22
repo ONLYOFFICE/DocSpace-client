@@ -56,6 +56,7 @@
   "CopyOperation": "복사 중",
   "CountPerPage": "페이지당 {{count}}",
   "Create": "생성",
+  "CreateAndCopy": "생성 및 복사",
   "CreateCopy": "복사본 생성",
   "CreateFileCopy": "파일 본사본 생성",
   "CreateMasterFormFromFile": "파일에서 양식 템플릿 만들기",

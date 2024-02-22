@@ -52,6 +52,7 @@
   "CopyOperation": "ການສໍາເນົາ",
   "CountPerPage": "{{count}} ຕໍ່ ໜ້າ",
   "Create": "ສ້າງໃໝ່",
+  "CreateAndCopy": "ສ້າງ ແລະສຳເນົາ",
   "CreateCopy": "ສ້າງສຳເນົາ",
   "CreateFileCopy": "ສ້າງສຳເນົາໄຟລ໌",
   "CreateMasterFormFromFile": "ສ້າງໄຟລ໌ແບບຟອມ",

@@ -380,8 +380,8 @@ export function convertLanguage(key: string) {
     case "fr-FR":
       return "fr";
     default:
-  return key;
-}
+      return key;
+  }
 }
 
 export function convertToCulture(key: string) {
@@ -407,8 +407,8 @@ export function convertToCulture(key: string) {
     case "zh":
       return "zh-CN";
     default:
-  return key;
-}
+      return key;
+  }
 }
 
 export function convertToLanguage(key: string) {
@@ -824,8 +824,12 @@ export function getObjectByLocation(location: Location) {
   }
 }
 
-export const RoomsTypeValues = Object.values(RoomsType).filter(
+const RoomsValues = Object.values(RoomsType).filter(
   (item): item is number => typeof item === "number",
+);
+
+export const RoomsTypeValues = RoomsValues.filter(
+  (room) => room !== RoomsType.FormRoom,
 );
 
 export const RoomsTypes = RoomsTypeValues.reduce<Record<number, number>>(

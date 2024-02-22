@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 import React from "react";
 import { Provider as MobxProvider } from "mobx-react";
 import { I18nextProvider } from "react-i18next";
@@ -12,10 +13,10 @@ const { authStore, filesSettingsStore } = store;
 const FilesSelectorWrapper = (props: FilesSelectorProps) => {
   React.useEffect(() => {
     const { setFilesSettings } = filesSettingsStore;
-    const { settings } = props;
+    const settings = props.settings;
     authStore.init(true);
     if (settings) setFilesSettings(settings);
-  }, [props]);
+  }, [props.settings]);
 
   return (
     <MobxProvider {...store}>

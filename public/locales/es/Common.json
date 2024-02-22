@@ -56,6 +56,7 @@
   "CopyOperation": "Copiando",
   "CountPerPage": "{{count}} por página",
   "Create": "Crear",
+  "CreateAndCopy": "Crear y copiar ",
   "CreateCopy": "Crear una copia",
   "CreateFileCopy": "Crear copia de archivo",
   "CreateMasterFormFromFile": "Crear plantilla de formulario desde archivo",

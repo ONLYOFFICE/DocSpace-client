@@ -127,4 +127,25 @@ export const RegisterContainer = styled.div`
     margin-top: 24px;
     text-align: center;
   }
+  .greeting-container{
+    margin-bottom: 32px;
+    p{
+      text-align: center;
+    }
+    .sign-in-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+
+      margin-bottom: 16px;
+      p:first-child {
+        position: absolute;
+        max-width: 60px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        left: 0;
+      }
+    }
+  }
 }`;

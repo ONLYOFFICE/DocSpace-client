@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useLocation } from "react-router-dom";
 
-import { ButtonsWrapper, LoginFormWrapper, LoginContent } from "./StyledLogin";
+import { LoginFormWrapper, LoginContent } from "./StyledLogin";
 import { Text } from "@docspace/shared/components/text";
 import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
 import {
@@ -27,8 +27,6 @@ import { getBgPattern, frameCallCommand } from "@docspace/shared/utils/common";
 import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 import { getLogoFromPath, getSystemTheme } from "@docspace/shared/utils";
 import { TenantStatus } from "@docspace/shared/enums";
-import { getObjectByLocation } from "@docspace/shared/utils/common";
-import InvitationContainer from "./sub-components/GreetingContainer";
 import GreetingContainer from "./sub-components/GreetingContainer";
 
 const themes = {
@@ -57,14 +55,20 @@ const Login: React.FC<ILoginProps> = ({
 }) => {
   const location = useLocation();
 
+  const { search } = location;
   const isRestoringPortal =
     portalSettings?.tenantStatus === TenantStatus.PortalRestore;
 
   useEffect(() => {
-    if (location.search) {
-      const queryParams = getObjectByLocation(location);
-      setInvitationLinkData(queryParams);
+    if (search) {
+     
+      const encodeString = search.slice(search.indexOf("=") + 1);
 
+      const decodeString = atob(encodeString);
+      const queryParams = JSON.parse(decodeString);
+
+      setInvitationLinkData(queryParams);
+      console.log("queryParams", queryParams);
       //window.history.replaceState({}, document.title, window.location.pathname);
     }
 

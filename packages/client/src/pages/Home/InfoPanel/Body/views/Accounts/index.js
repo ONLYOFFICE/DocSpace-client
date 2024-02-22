@@ -1,13 +1,14 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-
+import { useNavigate } from "react-router-dom";
 import withLoader from "@docspace/client/src/HOCs/withLoader";
-import Loaders from "@docspace/common/components/Loaders";
+import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
+import { Link } from "@docspace/shared/components/link";
 
 import { Text } from "@docspace/shared/components/text";
 import { ComboBox } from "@docspace/shared/components/combobox";
-
+import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 import { StyledAccountContent } from "../../styles/accounts";
 import { getUserTypeLabel } from "@docspace/shared/utils/common";
@@ -22,7 +23,13 @@ const Accounts = (props) => {
     canChangeUserType,
     setInfoPanelSelection,
     getPeopleListItem,
+    setPeopleSelection,
+    setPeopleBufferSelection,
+
+    showStorageInfo,
   } = props;
+
+  const navigate = useNavigate();
 
   const [statusLabel, setStatusLabel] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
@@ -117,6 +124,12 @@ const Accounts = (props) => {
     [infoPanelSelection, changeUserType, t],
   );
 
+  const onGroupClick = (groupId) => {
+    navigate(`/accounts/groups/${groupId}/filter`);
+    setPeopleSelection([]);
+    setPeopleBufferSelection(null);
+  };
+
   const typeLabel = React.useCallback(() => getUserTypeLabel(role, t), [])();
 
   const renderTypeData = () => {
@@ -206,10 +219,58 @@ const Accounts = (props) => {
           >
             {statusText}
           </Text>
+          {showStorageInfo && (
+            <>
+              <Text
+                className={"info_field"}
+                noSelect
+                title={t("Common:Storage")}
+              >
+                {t("Common:Storage")}
+              </Text>
+              <SpaceQuota
+                type="user"
+                item={infoPanelSelection}
+                className="type-combobox"
+                onSuccess={onSuccess}
+                onAbort={onAbort}
+              />
+            </>
+          )}
+
           {/* <Text className={"info_field"} noSelect title={t("Common:Room")}>
             {t("Common:Room")}
           </Text>
           <div>Rooms list</div> */}
+
+          {infoPanelSelection?.groups?.length && (
+            <>
+              <Text
+                className={"info_field info_field_groups"}
+                noSelect
+                title={t("Common:Group")}
+              >
+                {t("Common:Group")}
+              </Text>
+
+              <div className={"info_groups"}>
+                {infoPanelSelection.groups.map((group) => (
+                  <Link
+                    key={group.id}
+                    className={"info_data first-row info_group"}
+                    isHovered={true}
+                    fontSize={"13px"}
+                    lineHeight={"20px"}
+                    fontWeight={600}
+                    title={group.name}
+                    onClick={() => onGroupClick(group.id)}
+                  >
+                    {group.name}
+                  </Link>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </StyledAccountContent>
     </>
@@ -217,13 +278,25 @@ const Accounts = (props) => {
 };
 
 export default inject(
-  ({ userStore, peopleStore, accessRightsStore, infoPanelStore }) => {
+  ({
+    userStore,
+    peopleStore,
+    accessRightsStore,
+    infoPanelStore,
+    currentQuotaStore,
+  }) => {
     const { isOwner, isAdmin, id: selfId } = userStore.user;
     const { changeType: changeUserType, usersStore } = peopleStore;
     const { canChangeUserType } = accessRightsStore;
 
     const { setInfoPanelSelection } = infoPanelStore;
 
+    const {
+      setSelection: setPeopleSelection,
+      setBufferSelection: setPeopleBufferSelection,
+    } = peopleStore.selectionStore;
+
+    const { showStorageInfo } = currentQuotaStore;
     return {
       isOwner,
       isAdmin,
@@ -233,6 +306,9 @@ export default inject(
       loading: usersStore.operationRunning,
       getPeopleListItem: usersStore.getPeopleListItem,
       setInfoPanelSelection,
+      setPeopleSelection,
+      setPeopleBufferSelection,
+      showStorageInfo,
     };
   },
 )(
@@ -247,9 +323,5 @@ export default inject(
     "SmartBanner",
     "DeleteProfileEverDialog",
     "Translations",
-  ])(
-    withLoader(observer(Accounts))(
-      <Loaders.InfoPanelViewLoader view="accounts" />,
-    ),
-  ),
+  ])(withLoader(observer(Accounts))(<InfoPanelViewLoader view="accounts" />)),
 );

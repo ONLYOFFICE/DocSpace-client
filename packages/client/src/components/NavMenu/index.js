@@ -12,7 +12,7 @@ import HeaderUnAuth from "./sub-components/header-unauth";
 import { I18nextProvider, withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import Loaders from "@docspace/common/components/Loaders";
+import { NavMenuHeaderLoader } from "@docspace/shared/skeletons/nav-menu";
 import { LayoutContextConsumer } from "../Layout/context";
 
 import { inject, observer } from "mobx-react";
@@ -65,12 +65,12 @@ const NavMenu = (props) => {
   const location = useLocation();
 
   const [isBackdropVisible, setIsBackdropVisible] = React.useState(
-    props.isBackdropVisible
+    props.isBackdropVisible,
   );
   const [isNavOpened, setIsNavOpened] = React.useState(props.isNavHoverEnabled);
   const [isAsideVisible, setIsAsideVisible] = React.useState(props.isNavOpened);
   const [isNavHoverEnabled, setIsNavHoverEnabled] = React.useState(
-    props.isAsideVisible
+    props.isAsideVisible,
   );
 
   const backdropClick = () => {
@@ -168,7 +168,7 @@ const NavMenu = (props) => {
                 />
               </>
             ) : !isLoaded && isAuthenticated ? (
-              <Loaders.Header />
+              <NavMenuHeaderLoader />
             ) : (
               <HeaderUnAuth />
             ))}

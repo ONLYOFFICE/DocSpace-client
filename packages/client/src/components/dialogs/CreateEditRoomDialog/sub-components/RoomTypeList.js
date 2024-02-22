@@ -5,7 +5,7 @@ import { withTranslation } from "react-i18next";
 import RoomType from "./RoomType";
 
 import withLoader from "@docspace/client/src/HOCs/withLoader";
-import Loaders from "@docspace/common/components/Loaders";
+import RoomTypeListLoader from "@docspace/shared/skeletons/create-edit-room/RoomTypeList";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
 
 const StyledRoomTypeList = styled.div`
@@ -34,5 +34,5 @@ const RoomTypeList = ({ t, setRoomType }) => {
 };
 
 export default withTranslation(["CreateEditRoomDialog"])(
-  withLoader(RoomTypeList)(<Loaders.RoomTypeListLoader />)
+  withLoader(RoomTypeList)(<RoomTypeListLoader />),
 );

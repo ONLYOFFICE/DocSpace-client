@@ -6,12 +6,26 @@ import io, { Socket } from "socket.io-client";
 export type TOnCallback = {
   featureId: string;
   value: number;
+  usedSpace: number;
+  quotaLimit: number;
+  customQuotaFeature: string;
+  enableQuota: boolean;
+  quota: number;
 };
 let client: Socket<DefaultEventsMap, DefaultEventsMap> | null = null;
 let callbacks: { eventName: string; callback: (value: TOnCallback) => void }[] =
   [];
 
-const subscribers = new Set();
+const subscribers = new Set<string>();
+
+export type TOptSocket = {
+  featureId: string;
+  value: number;
+  data?: string;
+  type?: "folder" | "file";
+  id?: string;
+  cmd?: "create" | "update" | "delete";
+};
 
 export type TEmit = {
   command: string;
@@ -126,7 +140,7 @@ class SocketIOHelper {
     }
   };
 
-  on = (eventName: string, callback: (value: TOnCallback) => void) => {
+  on = (eventName: string, callback: (value: TOptSocket) => void) => {
     if (!this.isEnabled) {
       callbacks.push({ eventName, callback });
       return;

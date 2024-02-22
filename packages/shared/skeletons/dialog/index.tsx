@@ -3,6 +3,7 @@ import { RectangleSkeleton } from "../rectangle";
 import { StyledDialogLoader } from "./Dialog.styled";
 import { DialogSkeletonProps } from "./Dialog.types";
 import { DialogAsideSkeleton } from "./Dialog.aside";
+import { DialogReassignmentSkeleton } from "./Dialog.reassignment";
 
 const DialogSkeleton = ({ isLarge, withFooterBorder }: DialogSkeletonProps) => {
   return (
@@ -21,4 +22,4 @@ const DialogSkeleton = ({ isLarge, withFooterBorder }: DialogSkeletonProps) => {
   );
 };
 
-export { DialogSkeleton, DialogAsideSkeleton };
+export { DialogSkeleton, DialogAsideSkeleton, DialogReassignmentSkeleton };

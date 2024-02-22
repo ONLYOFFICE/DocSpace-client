@@ -6,22 +6,38 @@ import { Text } from "@docspace/shared/components/text";
 import { RowContent } from "@docspace/shared/components/row-content";
 import { convertTime } from "@docspace/shared/utils/convertTime";
 
+import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
+
 const StyledRowContent = styled(RowContent)`
+  padding-bottom: 10px;
+  .user-container-wrapper {
+    p {
+      color: ${(props) =>
+        props.theme.client.settings.security.loginHistory.nameColor};
+    }
+  }
+  .mainIcons {
+    p {
+      color: ${(props) =>
+        props.theme.client.settings.security.loginHistory.sideColor};
+    }
+  }
   .row-main-container-wrapper {
     display: flex;
     justify-content: flex-start;
     width: min-content;
   }
-  padding-bottom: 10px;
+
+  ${(props) => props.isSettingNotPaid && UnavailableStyles}
 `;
 
-const HistoryContent = ({ sectionWidth, item, locale }) => {
+const HistoryContent = ({ sectionWidth, item, locale, theme }) => {
   const dateStr = convertTime(item.date, locale);
 
   return (
     <StyledRowContent
-      sideColor="#A3A9AE"
-      nameColor="#D0D5DA"
+      sideColor={theme.client.settings.security.loginHistory.sideColor}
+      nameColor={theme.client.settings.security.loginHistory.nameColor}
       sectionWidth={sectionWidth}
     >
       <div className="user-container-wrapper">
@@ -58,11 +74,12 @@ const HistoryContent = ({ sectionWidth, item, locale }) => {
 };
 
 export default inject(({ settingsStore, userStore }) => {
-  const { culture } = settingsStore;
+  const { culture, theme } = settingsStore;
   const { user } = userStore;
   const locale = (user && user.cultureName) || culture || "en";
 
   return {
     locale,
+    theme,
   };
 })(observer(HistoryContent));

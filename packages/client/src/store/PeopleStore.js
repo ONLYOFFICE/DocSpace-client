@@ -4,11 +4,13 @@ import DisableReactSvgUrl from "PUBLIC_DIR/images/disable.react.svg?url";
 import ChangeToEmployeeReactSvgUrl from "PUBLIC_DIR/images/change.to.employee.react.svg?url";
 import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
 import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
+import ChangQuotaReactSvgUrl from "PUBLIC_DIR/images/change.quota.react.svg?url";
+import DisableQuotaReactSvgUrl from "PUBLIC_DIR/images/disable.quota.react.svg?url";
+import DefaultQuotaReactSvgUrl from "PUBLIC_DIR/images/default.quota.react.svg?url";
 import GroupsStore from "./GroupsStore";
 import UsersStore from "./UsersStore";
 import TargetUserStore from "./TargetUserStore";
-import SelectedGroupStore from "./SelectedGroupStore";
 import EditingFormStore from "./EditingFormStore";
 import FilterStore from "./FilterStore";
 import SelectionStore from "./SelectionPeopleStore";
@@ -21,7 +23,12 @@ import AccountsContextOptionsStore from "./AccountsContextOptionsStore";
 import { isMobile, isTablet, isDesktop } from "@docspace/shared/utils";
 
 import { toastr } from "@docspace/shared/components/toast";
-import { EmployeeStatus, Events } from "@docspace/shared/enums";
+import api from "@docspace/shared/api";
+import {
+  EmployeeActivationStatus,
+  EmployeeStatus,
+  Events,
+} from "@docspace/shared/enums";
 import Filter from "@docspace/shared/api/people/filter";
 
 class PeopleStore {
@@ -31,7 +38,6 @@ class PeopleStore {
   groupsStore = null;
   usersStore = null;
   targetUserStore = null;
-  selectedGroupStore = null;
   editingFormStore = null;
   filterStore = null;
   selectionStore = null;
@@ -57,21 +63,26 @@ class PeopleStore {
     infoPanelStore,
     userStore,
     tfaStore,
-    settingsStore
+    settingsStore,
+    clientLoadingStore,
   ) {
     this.authStore = authStore;
     this.infoPanelStore = infoPanelStore;
-    this.groupsStore = new GroupsStore(this);
     this.usersStore = new UsersStore(
       this,
       settingsStore,
       infoPanelStore,
-      userStore
+      userStore,
+    );
+    this.groupsStore = new GroupsStore(
+      authStore,
+      this,
+      infoPanelStore,
+      clientLoadingStore,
     );
     this.targetUserStore = new TargetUserStore(this, userStore);
-    this.selectedGroupStore = new SelectedGroupStore(this);
     this.editingFormStore = new EditingFormStore(this);
-    this.filterStore = new FilterStore();
+    this.filterStore = new FilterStore(userStore);
     this.selectionStore = new SelectionStore(this);
     this.headerMenuStore = new HeaderMenuStore(this);
     this.inviteLinksStore = new InviteLinksStore(this);
@@ -87,7 +98,7 @@ class PeopleStore {
       infoPanelStore,
       userStore,
       tfaStore,
-      settingsStore
+      settingsStore,
     );
 
     makeAutoObservable(this);
@@ -111,7 +122,7 @@ class PeopleStore {
   resetFilter = () => {
     const filter = Filter.getDefault();
 
-    window.DocSpace.navigate(`accounts/filter?${filter.toUrlParams()}`);
+    window.DocSpace.navigate(`accounts/people/filter?${filter.toUrlParams()}`);
   };
 
   onChangeType = (e) => {
@@ -134,7 +145,7 @@ class PeopleStore {
 
     if (users.length > 1) {
       fromType = fromType.filter(
-        (item, index) => fromType.indexOf(item) === index && item !== type
+        (item, index) => fromType.indexOf(item) === index && item !== type,
       );
 
       if (fromType.length === 0) fromType = [fromType[0]];
@@ -159,6 +170,76 @@ class PeopleStore {
     window.dispatchEvent(event);
 
     return true;
+  };
+
+  changeUserQuota = (users, successCallback, abortCallback) => {
+    const event = new Event(Events.CHANGE_QUOTA);
+
+    const userIDs = users.map((user) => {
+      return user?.id ? user.id : user;
+    });
+
+    const payload = {
+      visible: true,
+      type: "user",
+      ids: userIDs,
+      successCallback,
+      abortCallback,
+    };
+
+    event.payload = payload;
+
+    window.dispatchEvent(event);
+  };
+  disableUserQuota = async (users, t) => {
+    const { setCustomUserQuota, getPeopleListItem } = this.usersStore;
+    const { infoPanelStore } = this.authStore;
+    const { setInfoPanelSelection } = infoPanelStore;
+
+    const userIDs = users.map((user) => {
+      return user?.id ? user.id : user;
+    });
+
+    try {
+      const items = await setCustomUserQuota(-1, userIDs);
+      const users = [];
+      items.map((u) => users.push(getPeopleListItem(u)));
+
+      if (items.length === 1) {
+        setInfoPanelSelection(getPeopleListItem(items[0]));
+      } else {
+        setInfoPanelSelection(items);
+      }
+
+      toastr.success(t("Common:StorageQuotaDisabled"));
+    } catch (e) {
+      toastr.error(e);
+    }
+  };
+  resetUserQuota = async (users, t) => {
+    const { resetUserQuota, getPeopleListItem } = this.usersStore;
+    const { infoPanelStore } = this.authStore;
+    const { setInfoPanelSelection } = infoPanelStore;
+    const userIDs = users.map((user) => {
+      return user?.id ? user.id : user;
+    });
+
+    try {
+      const items = await resetUserQuota(userIDs);
+
+      const users = [];
+      items.map((u) => users.push(getPeopleListItem(u)));
+
+      if (items.length === 1) {
+        setInfoPanelSelection(getPeopleListItem(items[0]));
+      } else {
+        setInfoPanelSelection(items);
+      }
+
+      toastr.success(t("Common:StorageQuotaReset"));
+    } catch (e) {
+      toastr.error(e);
+    }
   };
 
   onChangeStatus = (status) => {
@@ -280,6 +361,9 @@ class PeopleStore {
       hasUsersToDisable,
       hasUsersToInvite,
       hasUsersToRemove,
+      hasUsersToChangeQuota,
+      hasUsersToResetQuota,
+      hasUsersToDisableQuota,
       selection,
     } = this.selectionStore;
 
@@ -334,6 +418,30 @@ class PeopleStore {
         iconUrl: DisableReactSvgUrl,
       },
       {
+        id: "menu-change-quota",
+        key: "change-quota",
+        label: t("Common:ChangeQuota"),
+        disabled: !hasUsersToChangeQuota,
+        iconUrl: ChangQuotaReactSvgUrl,
+        onClick: () => this.changeUserQuota(selection),
+      },
+      {
+        id: "menu-default-quota",
+        key: "default-quota",
+        label: t("Common:SetToDefault"),
+        disabled: !hasUsersToResetQuota,
+        iconUrl: DefaultQuotaReactSvgUrl,
+        onClick: () => this.resetUserQuota(selection, t),
+      },
+      {
+        id: "menu-disable-quota",
+        key: "disable-quota",
+        label: t("Common:DisableQuota"),
+        disabled: !hasUsersToDisableQuota,
+        iconUrl: DisableQuotaReactSvgUrl,
+        onClick: () => this.disableUserQuota(selection, t),
+      },
+      {
         id: "menu-delete",
         key: "delete",
         label: t("Common:Delete"),
@@ -352,6 +460,32 @@ class PeopleStore {
 
   setIsLoadedProfileSectionBody = (isLoadedProfileSectionBody) => {
     this.isLoadedProfileSectionBody = isLoadedProfileSectionBody;
+  };
+
+  getStatusType = (user) => {
+    if (
+      user.status === EmployeeStatus.Active &&
+      user.activationStatus === EmployeeActivationStatus.Activated
+    ) {
+      return "normal";
+    } else if (
+      user.status === EmployeeStatus.Active &&
+      user.activationStatus === EmployeeActivationStatus.Pending
+    ) {
+      return "pending";
+    } else if (user.status === EmployeeStatus.Disabled) {
+      return "disabled";
+    } else {
+      return "unknown";
+}
+  };
+
+  getUserRole = (user) => {
+    if (user.isOwner) return "owner";
+    else if (user.isAdmin) return "admin";
+    else if (user.isCollaborator) return "collaborator";
+    else if (user.isVisitor) return "user";
+    else return "manager";
   };
 }
 

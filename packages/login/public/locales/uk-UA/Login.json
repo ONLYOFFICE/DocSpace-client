@@ -10,7 +10,6 @@
   "MessageEmailConfirmed": "Вашу електронну пошту успішно активовано.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "Введіть електронну пошту, яку ви використовували для реєстрації. На неї буде надіслано інструкції з відновлення пароля.",
   "NotFoundCode": "Не можете знайти код? Перевірте папку «Спам».",
-  "Or": "АБО",
   "PasswordRecoveryTitle": "Відновлення пароля",
   "RecoverAccess": "Відновити доступ",
   "RecoverContactEmailPlaceholder": "Контактна електронна пошта",

@@ -10,7 +10,6 @@
   "MessageEmailConfirmed": "あなたのメールは正常に作動しました。",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "登録時に使用したメールアドレスを入力してください。パスワード回復の手順がそれに送られます。",
   "NotFoundCode": "コードが見つかりませんか？「迷惑メール」のフォルダをご確認ください。",
-  "Or": "または",
   "PasswordRecoveryTitle": "パスワード復旧",
   "RecoverAccess": "アクセス回復",
   "RecoverContactEmailPlaceholder": "連絡先メール",

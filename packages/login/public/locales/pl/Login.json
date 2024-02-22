@@ -10,7 +10,6 @@
   "MessageEmailConfirmed": "Twój e-mail został pomyślnie aktywowany.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "Podaj adres e-mail użyty podczas rejestracji. Instrukcje dotyczące odzyskiwania hasła zostaną wysłane pod wskazany adres.",
   "NotFoundCode": "Nie możesz znaleźć kodu? Sprawdź swój folder ze spamem.",
-  "Or": "LUB",
   "PasswordRecoveryTitle": "Odzyskaj hasło",
   "RecoverAccess": "Odzyskaj dostęp",
   "RecoverContactEmailPlaceholder": "E-mail kontaktowy",

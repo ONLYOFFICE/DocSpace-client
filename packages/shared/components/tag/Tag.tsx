@@ -120,7 +120,7 @@ export const TagPure = ({
             className="tag__dropdown-item tag"
             key={`${t}_${index * 50}`}
             onClick={onClickAction}
-            data-tag={tag}
+            data-tag={t}
           >
             <StyledDropdownIcon
               className="tag__dropdown-item-icon"

@@ -5,18 +5,6 @@ import { mobile, tablet } from "@docspace/shared/utils";
 const DESKTOP_WIDTH = 384;
 const TABLET_WIDTH = 480;
 
-// export const ButtonsWrapper = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   width: 100%;
-
-//   gap: 8px;
-//   .buttonWrapper {
-//     margin-bottom: 8px;
-//     width: 100%;
-//   }
-// `;
-
 export const ConfirmContainer = styled(Box)`
   width: 100%;
   margin: 56px auto;

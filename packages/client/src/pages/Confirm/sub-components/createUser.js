@@ -38,7 +38,6 @@ import withLoader from "../withLoader";
 
 import { StyledPage, StyledContent } from "./StyledConfirm";
 import {
-  ButtonsWrapper,
   ConfirmContainer,
   GreetingContainer,
   RegisterContainer,

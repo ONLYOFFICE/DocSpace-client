@@ -14,7 +14,7 @@ export interface TagProps {
   /** Accepts the tag styles as disabled and disables clicking */
   isDisabled?: boolean;
   /** Accepts the function that is called when the tag is clicked */
-  onClick: (tag?: string) => void;
+  onClick: (tag?: object) => void;
   /** Accepts the function that ist called when the tag delete button is clicked */
   onDelete?: (tag?: string) => void;
   /** Accepts the max width of the tag */
@@ -24,4 +24,5 @@ export interface TagProps {
   icon?: string;
   isDefault?: boolean;
   isLast?: boolean;
+  roomType?: number;
 }

@@ -47,7 +47,6 @@ export interface ArticleProfileProps {
   getActions?: (t: TTranslation) => ContextMenuModel[];
   onProfileClick?: () => void;
   currentDeviceType: DeviceType;
-  isVirtualKeyboardOpen: boolean;
 }
 
 export interface ArticleEnterpriseAlertProps {
@@ -97,7 +96,6 @@ export interface ArticleHideMenuButtonProps {
   showText: boolean;
   toggleShowText: () => void;
   currentColorScheme: TColorScheme;
-  isVirtualKeyboardOpen: boolean;
   hideProfileBlock: boolean;
 }
 

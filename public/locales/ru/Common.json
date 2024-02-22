@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "О программе",
   "AboutCompanyTitle": "О программе",
   "AccessDenied": "Доступ запрещен",
@@ -56,6 +56,7 @@
   "CopyOperation": "Копирование",
   "CountPerPage": "{{count}} на странице",
   "Create": "Создать",
+  "CreateAndCopy": "Создать и скопировать",
   "CreateCopy": "Создать копию",
   "CreateFileCopy": "Создать копию файла",
   "CreateMasterFormFromFile": "Создать шаблон формы из файла",

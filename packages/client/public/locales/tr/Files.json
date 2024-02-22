@@ -1,4 +1,4 @@
-{
+﻿{
   "AddedToClipboard": "Öğeler panoya eklendi",
   "AddMembersDescription": "Yeni ekip üyelerini manuel olarak ekleyebilir veya bağlantı yoluyla davet edebilirsiniz.",
   "AddNewLink": "Yeni bağlantı ekle",
@@ -29,7 +29,6 @@
   "CopyLink": "Bağlantıyı kopyala",
   "CopyLinkPassword": "Bağlantı şifresini kopyala",
   "CopyPassword": "Şifreyi kopyala",
-  "CreateAndCopy": "Oluşturun ve kopyalayın",
   "CreateNewLink": "Yeni bağlantı oluştur",
   "CreateRoom": "Oda oluştur",
   "CustomRooms": "Özel",

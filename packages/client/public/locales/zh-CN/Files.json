@@ -1,4 +1,4 @@
-{
+﻿{
   "AddedToClipboard": "已将项目添加到剪贴板中",
   "AddMembersDescription": "您可手动添加新的团队成员或通过链接进行邀请。",
   "AddNewLink": "添加新链接",
@@ -29,7 +29,6 @@
   "CopyLink": "复制链接",
   "CopyLinkPassword": "复制链接密码",
   "CopyPassword": "复制密码",
-  "CreateAndCopy": "创建并复制",
   "CreateNewLink": "创建新链接",
   "CreateRoom": "创建房间",
   "CustomRooms": "自定义",

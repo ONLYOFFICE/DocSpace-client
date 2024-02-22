@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Haqqında",
   "AboutCompanyTitle": "Proqram haqqında",
   "AccessDenied": "Giriş qadağandır",
@@ -56,6 +56,7 @@
   "CopyOperation": "Köçürülür",
   "CountPerPage": "{{count}} hər səhifə üzrə",
   "Create": "Yaradın",
+  "CreateAndCopy": "Yaradın və kopyalayın",
   "CreateCopy": "Sürətini yaratmaq",
   "CreateFileCopy": "Faylın sürətini yaratmaq",
   "CreateMasterFormFromFile": "Fayldan forma şablonunu yaradın",

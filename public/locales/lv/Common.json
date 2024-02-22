@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Par",
   "AboutCompanyTitle": "Par šo programmu",
   "AccessDenied": "Pieeja ir liegta",
@@ -56,6 +56,7 @@
   "CopyOperation": "Kopē",
   "CountPerPage": "{{count}}vienā lapā",
   "Create": "Izveidot",
+  "CreateAndCopy": "Izveidot un kopēt",
   "CreateCopy": "Izveidojiet kopiju",
   "CreateFileCopy": "Izveidojiet faila kopiju",
   "CreateMasterFormFromFile": "Izveidojiet veidlapas veidni no faila",

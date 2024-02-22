@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Інформація",
   "AboutCompanyTitle": "Про цю програму",
   "AccessDenied": "Доступ заборонено",
@@ -56,6 +56,7 @@
   "CopyOperation": "Копіювання",
   "CountPerPage": "{{count}} на сторінці",
   "Create": "Створити",
+  "CreateAndCopy": "Створити та скопіювати",
   "CreateCopy": "Створити копію",
   "CreateFileCopy": "Створення копії файлу",
   "CreateMasterFormFromFile": "Створити шаблон форми з файлу",

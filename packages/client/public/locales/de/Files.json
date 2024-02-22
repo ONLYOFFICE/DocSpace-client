@@ -1,4 +1,4 @@
-{
+﻿{
   "AddedToClipboard": "Objekte in der Zwischenablage hinzugefügt",
   "AddMembersDescription": "Sie können neue Teammitglieder manuell hinzufügen oder sie über einen Link einladen.",
   "AddNewLink": "Neuen Link hinzufügen",
@@ -29,7 +29,6 @@
   "CopyLink": "Link kopieren",
   "CopyLinkPassword": "Passwort für Link kopieren",
   "CopyPassword": "Passwort kopieren",
-  "CreateAndCopy": "Erstellen und kopieren",
   "CreateNewLink": "Neuen Link erstellen",
   "CreateRoom": "Raum erstellen",
   "CustomRooms": "Benutzerdefiniert",

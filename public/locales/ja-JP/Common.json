@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "について",
   "AboutCompanyTitle": "本プログラムについて",
   "AccessDenied": "アクセス拒否",
@@ -56,6 +56,7 @@
   "CopyOperation": "コピー中",
   "CountPerPage": "ページあたりの{{count}}",
   "Create": "クリエイト",
+  "CreateAndCopy": "作成してコピーする",
   "CreateCopy": "コピーの作成",
   "CreateFileCopy": "ファイルコピーの作成",
   "CreateMasterFormFromFile": "ファイルからフォームテンプレートを作成する",

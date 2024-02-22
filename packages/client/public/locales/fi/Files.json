@@ -1,4 +1,4 @@
-{
+﻿{
   "AddedToClipboard": "Kohteet lisätty leikepöydälle",
   "AddMembersDescription": "Voit lisätä uusia tiimin jäseniä manuaalisesti tai kutsua heidät linkin kautta.",
   "AddNewLink": "Lisää uusi linkki",
@@ -29,7 +29,6 @@
   "CopyLink": "Kopioi linkki",
   "CopyLinkPassword": "Kopioi linkin salasana",
   "CopyPassword": "Kopioi salasana",
-  "CreateAndCopy": "Luo ja kopioi ",
   "CreateNewLink": "Kopioi salasana",
   "CreateRoom": "Luo huone",
   "CustomRooms": "Mukautettu",

@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "من نحن",
   "AboutCompanyTitle": "نبذة تعريفية عن البرنامج",
   "AccessDenied": "المحاولة مرفوضة",
@@ -56,6 +56,7 @@
   "CopyOperation": "جارِ النسخ",
   "CountPerPage": "{{count}} لكل صفحة",
   "Create": "انشاء",
+  "CreateAndCopy": "إنشاء ونسخ",
   "CreateCopy": "انشاء نسخة",
   "CreateFileCopy": "انشاء نسخة ملف",
   "CreateMasterFormFromFile": "إنشاء قالب نموذج من ملف",

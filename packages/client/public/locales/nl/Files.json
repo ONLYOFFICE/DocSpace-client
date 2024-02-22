@@ -1,4 +1,4 @@
-{
+﻿{
   "AddedToClipboard": "Items toegevoegd aan klembord",
   "AddMembersDescription": "U kunt nieuwe teamleden handmatig toevoegen of uitnodigen door middel van een link.",
   "AddNewLink": "Voeg nieuwe link toe",
@@ -29,7 +29,6 @@
   "CopyLink": "Kopieer link",
   "CopyLinkPassword": "Kopieer link wachtwoord",
   "CopyPassword": "Kopieer wachtwoord",
-  "CreateAndCopy": "Aanmaken en kopiëren",
   "CreateNewLink": "Nieuwe link aanmaken",
   "CreateRoom": "Maak kamer aan",
   "CustomRooms": "Aangepast",

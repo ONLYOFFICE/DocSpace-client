@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Informazioni su",
   "AboutCompanyTitle": "Informazioni sul programma",
   "AccessDenied": " Accesso negato",
@@ -56,6 +56,7 @@
   "CopyOperation": "Sta copiando",
   "CountPerPage": "{{count}} per pagina",
   "Create": "Crea",
+  "CreateAndCopy": " Crea e copia",
   "CreateCopy": "Crea una copia",
   "CreateFileCopy": "Creare copia del file",
   "CreateMasterFormFromFile": "Creare modello di modulo da file",

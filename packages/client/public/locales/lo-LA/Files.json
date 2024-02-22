@@ -1,4 +1,4 @@
-{
+﻿{
   "AddMembersDescription": "ທ່ານສາມາດເພີ່ມສະມາຊິກທີມໃຫມ່ດ້ວຍຕົນເອງ ຫຼືເຊີນເຂົາເຈົ້າຜ່ານລິ້ງ.",
   "All": "ທັງໝົດ",
   "AllFiles": "ເອກະສານທັງໝົດ",
@@ -19,7 +19,6 @@
   "CopyItem": "<strong>{{title}}</strong> ຄັດລອກ",
   "CopyItems": "<strong>{{qty}}</strong> ອົງປະກອບທີ່ຖືກຄັດລອກ",
   "CopyLink": "ສຳເນົາລິ້ງ",
-  "CreateAndCopy": "ສ້າງ ແລະສຳເນົາ",
   "CreateRoom": "ສ້າງຫ້ອງ",
   "CustomRooms": "ກຳນົດເອງ",
   "DaysRemaining": "ມື້ທີ່ຍັງເຫຼືອ: {{daysRemaining}}",

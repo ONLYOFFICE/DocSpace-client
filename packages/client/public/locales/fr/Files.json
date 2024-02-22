@@ -1,4 +1,4 @@
-{
+﻿{
   "AddedToClipboard": "Éléments ajoutés au presse-papiers",
   "AddMembersDescription": "Vous pouvez ajouter de nouveaux membres de l’équipe manuellement ou les inviter via un lien.",
   "AddNewLink": "Ajouter un nouveau lien",
@@ -29,7 +29,6 @@
   "CopyLink": " Copier le lien",
   "CopyLinkPassword": "Copier le mot de passe du lien",
   "CopyPassword": "Copier le mot de passe",
-  "CreateAndCopy": " Créer et copier",
   "CreateNewLink": "Créer un nouveau lien",
   "CreateRoom": "Créer une salle",
   "CustomRooms": "Pesonnalisée",

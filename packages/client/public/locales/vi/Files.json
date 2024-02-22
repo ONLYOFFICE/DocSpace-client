@@ -1,4 +1,4 @@
-{
+﻿{
   "AddedToClipboard": "Đã thêm các mục vào bộ nhớ tạm",
   "AddMembersDescription": "Bạn có thể thêm thành viên nhóm mới theo cách thủ công hoặc mời họ qua liên kết.",
   "AddNewLink": "Thêm liên kết mới",
@@ -29,7 +29,6 @@
   "CopyLink": "Sao chép liên kết",
   "CopyLinkPassword": "Sao chép liên kết mật khẩu",
   "CopyPassword": "Sao chép mật khẩu",
-  "CreateAndCopy": "Tạo và sao chép",
   "CreateNewLink": "Tạo liên kết mới",
   "CreateRoom": "Tạo phòng",
   "CustomRooms": "Tùy chỉnh",

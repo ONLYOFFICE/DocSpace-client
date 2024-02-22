@@ -1,4 +1,4 @@
-{
+﻿{
   "AddedToClipboard": "Itens adicionados à área de transferência",
   "AddMembersDescription": "Pode adicionar novos membros da equipa manualmente ou convidá-los através de um link.",
   "AddNewLink": "Adicionar novo link",
@@ -29,7 +29,6 @@
   "CopyLink": "Link de cópia",
   "CopyLinkPassword": "Copiar senha do link",
   "CopyPassword": "Copiar senha",
-  "CreateAndCopy": "Criar e copiar",
   "CreateNewLink": "Criar novo link",
   "CreateRoom": "Criar sala",
   "CustomRooms": "Personalizada",

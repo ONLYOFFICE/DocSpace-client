@@ -1,4 +1,4 @@
-{
+﻿{
   "AddedToClipboard": "Pozycje zostały dodane do schowka",
   "AddMembersDescription": "Możesz dodać nowych członków zespołu ręcznie lub zaprosić ich za pomocą linku.",
   "AddNewLink": "Dodaj nowy link",
@@ -29,7 +29,6 @@
   "CopyLink": "Kopiuj link",
   "CopyLinkPassword": "Kopiuj hasło linku",
   "CopyPassword": "Kopiuj hasło",
-  "CreateAndCopy": "Utwórz i skopiuj",
   "CreateNewLink": "Utwórz nowy link",
   "CreateRoom": "Utwórz pokój",
   "CustomRooms": "Niestandardowa ",

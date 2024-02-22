@@ -1,4 +1,4 @@
-{
+﻿{
   "AddedToClipboard": "Елементите са добавени към клипборда",
   "AddMembersDescription": "Можете да добавите нови членове на екипа ръчно или да ги поканите чрез линк.",
   "AddNewLink": "Добави нов линк",
@@ -29,7 +29,6 @@
   "CopyLink": "Копиране на линка",
   "CopyLinkPassword": "Копирай парола на линка",
   "CopyPassword": "Копирай парола",
-  "CreateAndCopy": "Създай и копирай",
   "CreateNewLink": "Копирай парола",
   "CreateRoom": "Създайте стая",
   "CustomRooms": "Персонализиран",

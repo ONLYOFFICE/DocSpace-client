@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Hakkında",
   "AboutCompanyTitle": "Bu program hakkında",
   "AccessDenied": "Erişim engellendi",
@@ -56,6 +56,7 @@
   "CopyOperation": "Kopyalanıyor",
   "CountPerPage": "Sayfa başına {{count}}",
   "Create": "Oluştur",
+  "CreateAndCopy": "Oluşturun ve kopyalayın",
   "CreateCopy": "Bir kopya oluştur",
   "CreateFileCopy": "Dosya kopyası oluştur",
   "CreateMasterFormFromFile": "Dosyadan Form şablonu oluştur",

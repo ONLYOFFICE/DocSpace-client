@@ -1,4 +1,4 @@
-{
+﻿{
   "AddedToClipboard": "Elementos añadidos al portapapeles",
   "AddMembersDescription": "Puede añadir nuevos miembros del equipo manualmente o invitarlos a través de un enlace.",
   "AddNewLink": "Añadir nuevo enlace",
@@ -29,7 +29,6 @@
   "CopyLink": "Copiar enlace",
   "CopyLinkPassword": "Copiar contraseña del enlace",
   "CopyPassword": "Copiar contraseña",
-  "CreateAndCopy": "Crear y copiar ",
   "CreateNewLink": "Crear nuevo enlace",
   "CreateRoom": "Crear sala",
   "CustomRooms": "Personalizada",

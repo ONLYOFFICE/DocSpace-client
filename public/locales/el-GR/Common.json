@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Σχετικά",
   "AboutCompanyTitle": "Σχετικά με αυτό το πρόγραμμα",
   "AccessDenied": "Απαγόρευση πρόσβασης",
@@ -56,6 +56,7 @@
   "CopyOperation": "Αντιγραφή",
   "CountPerPage": "{{count}} ανά σελίδα",
   "Create": "Δημιουργία",
+  "CreateAndCopy": "Δημιουργία και αντιγραφή",
   "CreateCopy": "Δημιουργήστε ένα αντίγραφο",
   "CreateFileCopy": "Δημιουργία αντιγράφου αρχείου",
   "CreateMasterFormFromFile": "Δημιουργία προτύπου φόρμας από αρχείο",

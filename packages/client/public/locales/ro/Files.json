@@ -1,4 +1,4 @@
-{
+﻿{
   "AddedToClipboard": "Elementele sunt adăugate la clipboard",
   "AddMembersDescription": "Puteţi adăuga noi membri ai echipei manual sau îi puteţi invita prin intermediul unui link.",
   "AddNewLink": "Adăugarea unui link nou",
@@ -29,7 +29,6 @@
   "CopyLink": "Copiere link",
   "CopyLinkPassword": "Copiere parola linkului",
   "CopyPassword": "Copiere parola",
-  "CreateAndCopy": "Creare și copiere",
   "CreateNewLink": "Creați un link nou",
   "CreateRoom": "Creare sală",
   "CustomRooms": "Particularizată",

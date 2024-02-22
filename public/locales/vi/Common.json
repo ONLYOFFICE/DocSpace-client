@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Giới thiệu",
   "AboutCompanyTitle": "Giới thiệu về chương trình này",
   "AccessDenied": "Truy cập bị từ chối",
@@ -56,6 +56,7 @@
   "CopyOperation": "Đang sao chép",
   "CountPerPage": "{{count}} mỗi trang",
   "Create": "Tạo",
+  "CreateAndCopy": "Tạo và sao chép",
   "CreateCopy": "Tạo bản sao",
   "CreateFileCopy": "Tạo bản sao tệp",
   "CreateMasterFormFromFile": "Tạo mẫu Biểu mẫu từ tệp",

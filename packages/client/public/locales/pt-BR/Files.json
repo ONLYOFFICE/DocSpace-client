@@ -1,4 +1,4 @@
-{
+﻿{
   "AddedToClipboard": "Criar novo link",
   "AddMembersDescription": "Você pode adicionar novos membros da equipe manualmente ou convidá-los por meio do link.",
   "AddNewLink": "Adicionar novo link",
@@ -29,7 +29,6 @@
   "CopyLink": "Copiar link",
   "CopyLinkPassword": "Copiar senha do link",
   "CopyPassword": "Copiar senha",
-  "CreateAndCopy": "Criar e copiar",
   "CreateNewLink": "Criar novo link",
   "CreateRoom": "Criar sala",
   "CustomRooms": "Personalizada",

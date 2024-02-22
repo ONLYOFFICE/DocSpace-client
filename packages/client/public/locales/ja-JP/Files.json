@@ -1,4 +1,4 @@
-{
+﻿{
   "AddedToClipboard": "項目は、クリップボードに追加されました",
   "AddMembersDescription": "新しいチームメンバーを手動で追加したり、リンクで招待したりすることができます。",
   "AddNewLink": "新しいリンクの追加",
@@ -29,7 +29,6 @@
   "CopyLink": "リンクをコピーする",
   "CopyLinkPassword": "リンクパスワードをコピー",
   "CopyPassword": "パスワードをコピーする",
-  "CreateAndCopy": "作成してコピーする",
   "CreateNewLink": "新しいリンクを作成する",
   "CreateRoom": "ルームを作成する",
   "CustomRooms": "カスタム",

@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Մասին",
   "AboutCompanyTitle": "Մատչման իրավունքներ",
   "AccessDenied": "Մուտքն արգելված է",
@@ -56,6 +56,7 @@
   "CopyOperation": "Պատճենում",
   "CountPerPage": "{{count}} ամեն մի էջի համար",
   "Create": "Ստեղծել",
+  "CreateAndCopy": "Ստեղծել և պատճենել",
   "CreateCopy": "Ստեղծել պատճեն",
   "CreateFileCopy": "Ստեղծել ֆայլի պատճեն",
   "CreateMasterFormFromFile": "Ստեղծել ձևանմուշ ֆայլից",

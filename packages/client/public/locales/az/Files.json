@@ -1,4 +1,4 @@
-{
+﻿{
   "AddedToClipboard": "Elementlər mübadilə buferinə əlavə edildi",
   "AddMembersDescription": "Yeni komanda üzvlərini əl ilə əlavə edə və ya onları keçid vasitəsilə dəvət edə bilərsiniz.",
   "AddNewLink": "Yeni keçid əlavə edin",
@@ -29,7 +29,6 @@
   "CopyLink": "Linki kopyalayın",
   "CopyLinkPassword": "Keçid şifrəsini nüsxələyin",
   "CopyPassword": "Şifrəni nüsxələyin",
-  "CreateAndCopy": "Yaradın və kopyalayın",
   "CreateNewLink": "Şifrəni nüsxələyin",
   "CreateRoom": "Otaq yaradın",
   "CustomRooms": "Fərdi",

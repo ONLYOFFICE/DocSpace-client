@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Tietoja",
   "AboutCompanyTitle": "Tietoja tästä ohjelmasta",
   "AccessDenied": "Pääsy evätty",
@@ -56,6 +56,7 @@
   "CopyOperation": "Kopioidaan",
   "CountPerPage": "{{count}} sivua kohti,",
   "Create": "Luo",
+  "CreateAndCopy": "Luo ja kopioi ",
   "CreateCopy": "Luo kopio",
   "CreateFileCopy": "Luo kopio tiedostosta",
   "CreateMasterFormFromFile": "Luo lomakemalli tiedostosta",

@@ -1,4 +1,4 @@
-{
+﻿{
   "AddedToClipboard": "Položky přidané do schránky",
   "AddMembersDescription": "Nové členy týmu můžete přidat ručně nebo je pozvat prostřednictvím odkazu.",
   "AddNewLink": "Přidat nový odkaz",
@@ -29,7 +29,6 @@
   "CopyLink": "Kopírovat odkaz",
   "CopyLinkPassword": "Kopírovat heslo odkazu",
   "CopyPassword": "Kopírování hesla",
-  "CreateAndCopy": "Vytvořit a zkopírovat",
   "CreateNewLink": "Kopírování hesla",
   "CreateRoom": "Vytvoření místnosti",
   "CustomRooms": "Vlastní",

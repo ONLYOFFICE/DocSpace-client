@@ -252,6 +252,7 @@ const MainProfile = (props) => {
                     as="div"
                     className="email-text-container"
                     fontWeight={600}
+                    truncate
                   >
                     {profile.email}
                   </Text>
@@ -359,6 +360,7 @@ const MainProfile = (props) => {
                       as="div"
                       className="email-text-container"
                       fontWeight={600}
+                      truncate
                     >
                       {profile.email}
                     </Text>

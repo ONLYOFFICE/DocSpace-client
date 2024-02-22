@@ -12,6 +12,7 @@ import { TChangeTheme, TGetUserList, TUser } from "./types";
 
 import { TReqOption } from "../../utils/axiosClient";
 import { EmployeeActivationStatus, ThemeKeys } from "../../enums";
+import { TGroup } from "../groups/types";
 
 export async function getUserList(filter = Filter.getDefault()) {
   let params = "";
@@ -382,9 +383,9 @@ export function getUsersByQuery(query) {
   });
 }
 
-export function getMembersList(
+export async function getMembersList(
   searchArea: AccountsSearchArea,
-  roomId: number,
+  roomId: string | number,
   filter = Filter.getDefault(),
 ) {
   let params = "";
@@ -418,23 +419,24 @@ export function getMembersList(
       url = `accounts/room/${roomId}/search${params}`;
   }
 
-  return request({
+  const res = (await request({
     method: "get",
     url,
-  })?.then((res) => {
-    res.items = res.items.map((member) => {
-      if (member && member.displayName) {
-        member.displayName = Encoder.htmlDecode(member.displayName);
-      }
+  })) as { items: (TUser | TGroup)[]; total: number };
 
-      if (member.manager) {
-        member.isGroup = true;
-      }
+  res.items = res.items.map((member) => {
+    if (member && "displayName" in member && member.displayName) {
+      member.displayName = Encoder.htmlDecode(member.displayName);
+    }
 
-      return member;
-    });
-    return res;
+    if ("manager" in member && member.manager) {
+      member.isGroup = true;
+    }
+
+    return member;
   });
+
+  return res;
 }
 
 export function setCustomUserQuota(userIds, quota) {

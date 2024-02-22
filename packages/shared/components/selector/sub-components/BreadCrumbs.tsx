@@ -29,7 +29,7 @@ const BreadCrumbs = ({
   const onClickItem = React.useCallback(
     (e: React.MouseEvent, open: boolean, item: TBreadCrumb) => {
       if (isLoading) return;
-      onSelectBreadCrumb?.(item);
+      onSelectBreadCrumb(item);
     },
     [isLoading, onSelectBreadCrumb],
   );
@@ -191,7 +191,7 @@ const BreadCrumbs = ({
             onClick={() => {
               if (index === displayedItems.length - 1 || isLoading) return;
 
-              onSelectBreadCrumb?.({
+              onSelectBreadCrumb({
                 id: item.id,
                 label: item.label,
                 isRoom: item.isRoom,

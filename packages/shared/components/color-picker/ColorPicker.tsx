@@ -17,6 +17,7 @@ const ColorPicker = ({
   cancelButtonLabel,
   isPickerOnly,
   handleChange,
+  hexCodeLabel,
 }: ColorPickerProps) => {
   const [color, setColor] = useState(appliedColor || "#4781D1");
 
@@ -32,7 +33,7 @@ const ColorPicker = ({
       <div className="hex-color-picker">
         {!isPickerOnly && (
           <div className="hex-value-container">
-            <div className="hex-value-label">Hex code:</div>
+            <div className="hex-value-label">{hexCodeLabel}:</div>
 
             <HexColorInput
               className="hex-value"
@@ -81,6 +82,7 @@ ColorPicker.defaultProps = {
   appliedColor: "#4781D1",
   applyButtonLabel: "Apply",
   cancelButtonLabel: "Cancel",
+  hexCodeLabel: "Hex code",
 };
 
 export { ColorPicker };

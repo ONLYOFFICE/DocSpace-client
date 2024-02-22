@@ -12,22 +12,22 @@ import {
   StyledNewNameContainer,
   StyledNewNameHeader,
 } from "../Selector.styled";
-import { AccessRight, FooterProps } from "../Selector.types";
+import { TAccessRight, FooterProps } from "../Selector.types";
 
 const Footer = React.memo(
   ({
     isMultiSelect,
-    acceptButtonLabel,
+    submitButtonLabel,
     selectedItemsCount,
     withCancelButton,
     cancelButtonLabel,
     withAccessRights,
     accessRights,
     selectedAccessRight,
-    onAccept,
-    disableAcceptButton,
+    onSubmit,
+    disableSubmitButton,
     onCancel,
-    onChangeAccessRights,
+    onAccessRightsChange,
 
     withFooterInput,
     withFooterCheckbox,
@@ -35,16 +35,16 @@ const Footer = React.memo(
     footerCheckboxLabel,
     currentFooterInputValue,
     setNewFooterInputValue,
-    isFooterCheckboxChecked,
+    isChecked,
     setIsFooterCheckboxChecked,
     setIsChecked,
-    acceptButtonId,
+    submitButtonId,
     cancelButtonId,
   }: FooterProps) => {
     const label =
       selectedItemsCount && isMultiSelect
-        ? `${acceptButtonLabel} (${selectedItemsCount})`
-        : acceptButtonLabel;
+        ? `${submitButtonLabel} (${selectedItemsCount})`
+        : submitButtonLabel;
 
     const onChangeFileName = (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
@@ -83,7 +83,7 @@ const Footer = React.memo(
             {withFooterCheckbox && (
               <Checkbox
                 label={footerCheckboxLabel}
-                isChecked={isFooterCheckboxChecked}
+                isChecked={isChecked}
                 onChange={onChangeCheckbox}
               />
             )}
@@ -93,7 +93,7 @@ const Footer = React.memo(
         {withFooterCheckbox && !withFooterInput && (
           <Checkbox
             label={footerCheckboxLabel}
-            isChecked={isFooterCheckboxChecked}
+            isChecked={isChecked}
             onChange={onChangeCheckbox}
             className="selector_footer-checkbox"
           />
@@ -101,20 +101,24 @@ const Footer = React.memo(
 
         <StyledButtonContainer>
           <Button
-            id={acceptButtonId}
+            id={submitButtonId}
             className="button accept-button"
             label={label}
             primary
             scale
             size={ButtonSize.normal}
-            isDisabled={disableAcceptButton}
-            onClick={onAccept}
+            isDisabled={
+              !withFooterInput
+                ? disableSubmitButton
+                : disableSubmitButton && !currentFooterInputValue.trim()
+            }
+            onClick={onSubmit}
           />
 
           {withAccessRights && (
             <StyledComboBox
               onSelect={(opt?: TOption) =>
-                onChangeAccessRights?.({ ...opt } as AccessRight)
+                onAccessRightsChange?.({ ...opt } as TAccessRight)
               }
               options={accessRights as TOption[]}
               size={ComboBoxSize.content}

@@ -10,7 +10,7 @@ const StyledIcon = styled.div<{
   size: string;
   radius: string;
   isArchive?: boolean;
-  color: string;
+  color?: string;
   wrongImage: boolean;
 }>`
   display: flex;
@@ -75,18 +75,46 @@ const StyledIcon = styled.div<{
 
 StyledIcon.defaultProps = { theme: Base };
 
-interface RoomIconProps {
+// interface RoomIconProps {
+//   title: string;
+//   isArchive?: boolean;
+//   color: string;
+//   size?: string;
+//   radius?: string;
+//   showDefault: boolean;
+//   imgClassName?: string;
+//   imgSrc?: string;
+
+// }
+
+type RoomIconDefault = {
   title: string;
   isArchive?: boolean;
-  color: string;
   size?: string;
   radius?: string;
   showDefault: boolean;
   imgClassName?: string;
-  imgSrc?: string;
-  badgeUrl?: string;
-  onBadgeClick?: () => void;
-}
+};
+
+type RoomIconColor = {
+  color: string;
+  imgSrc?: undefined;
+  imgClassName?: undefined;
+};
+
+type RoomIconImage = {
+  color?: undefined;
+  imgSrc: string;
+  imgClassName?: string;
+};
+
+type RoomIconBadge = { badgeUrl?: string; onBadgeClick?: () => void };
+
+type RoomIconNonBadge = { badgeUrl?: undefined; onBadgeClick?: undefined };
+
+type RoomIconProps = RoomIconDefault &
+  (RoomIconColor | RoomIconImage) &
+  (RoomIconBadge | RoomIconNonBadge);
 
 const RoomIcon = ({
   title,
@@ -102,14 +130,14 @@ const RoomIcon = ({
 }: RoomIconProps) => {
   const [correctImage, setCorrectImage] = React.useState(true);
 
-  const titleWithoutSpaces = title.replace(/\s+/g, " ").trim();
-  const indexAfterLastSpace = titleWithoutSpaces.lastIndexOf(" ");
+  const titleWithoutSpaces = title?.replace(/\s+/g, " ").trim();
+  const indexAfterLastSpace = titleWithoutSpaces?.lastIndexOf(" ");
   const secondCharacter =
-    indexAfterLastSpace === -1
+    !titleWithoutSpaces || indexAfterLastSpace === -1
       ? ""
       : titleWithoutSpaces[indexAfterLastSpace + 1];
 
-  const roomTitle = (title[0] + secondCharacter).toUpperCase();
+  const roomTitle = title && (title[0] + secondCharacter).toUpperCase();
 
   const prefetchImage = React.useCallback(() => {
     if (!imgSrc) return;

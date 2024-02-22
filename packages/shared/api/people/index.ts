@@ -1,15 +1,18 @@
 import { AxiosRequestConfig } from "axios";
 
+import { AccountsSearchArea } from "@docspace/shared/enums";
 import { request } from "../client";
 // import axios from "axios";
+import { Encoder } from "@docspace/shared/utils/encoder";
+import { checkFilterInstance } from "@docspace/shared/utils/common";
+
 import Filter from "./filter";
 
-import { Encoder } from "../../utils/encoder";
-import { checkFilterInstance } from "../../utils/common";
 import { TChangeTheme, TGetUserList, TUser } from "./types";
 
 import { TReqOption } from "../../utils/axiosClient";
 import { EmployeeActivationStatus, ThemeKeys } from "../../enums";
+import { TGroup } from "../groups/types";
 
 export async function getUserList(filter = Filter.getDefault()) {
   let params = "";
@@ -20,7 +23,9 @@ export async function getUserList(filter = Filter.getDefault()) {
   if (filter) {
     checkFilterInstance(filter, Filter);
 
-    params = `/filter?${filter.toApiUrlParams()}`;
+    params = `/filter?${filter.toApiUrlParams(
+      "id,status,isAdmin,isOwner,isRoomAdmin,isVisitor,activationStatus,userName,email,mobilePhone,displayName,avatar,listAdminModules,birthday,title,location,isLDAP,isSSO,groups",
+    )}`;
   }
 
   const res = (await request({
@@ -378,7 +383,11 @@ export function getUsersByQuery(query) {
   });
 }
 
-export function getMembersList(roomId, filter = Filter.getDefault()) {
+export async function getMembersList(
+  searchArea: AccountsSearchArea,
+  roomId: string | number,
+  filter = Filter.getDefault(),
+) {
   let params = "";
 
   if (filter) {
@@ -397,16 +406,61 @@ export function getMembersList(roomId, filter = Filter.getDefault()) {
     params = `excludeShared=${excludeShared}`;
   }
 
-  return request({
+  let url = "";
+
+  switch (searchArea) {
+    case AccountsSearchArea.People:
+      url = `people/room/${roomId}${params}`;
+      break;
+    case AccountsSearchArea.Groups:
+      url = `group/room/${roomId}${params}`;
+      break;
+    default:
+      url = `accounts/room/${roomId}/search${params}`;
+  }
+
+  const res = (await request({
     method: "get",
-    url: `people/room/${roomId}${params}`,
-  }).then((res) => {
-    res.items = res.items.map((user) => {
-      if (user && user.displayName) {
-        user.displayName = Encoder.htmlDecode(user.displayName);
-      }
-      return user;
-    });
-    return res;
+    url,
+  })) as { items: (TUser | TGroup)[]; total: number };
+
+  res.items = res.items.map((member) => {
+    if (member && "displayName" in member && member.displayName) {
+      member.displayName = Encoder.htmlDecode(member.displayName);
+    }
+
+    if ("manager" in member && member.manager) {
+      member.isGroup = true;
+    }
+
+    return member;
   });
+
+  return res;
+}
+
+export function setCustomUserQuota(userIds, quota) {
+  const data = {
+    userIds,
+    quota,
+  };
+  const options = {
+    method: "put",
+    url: "/people/userquota",
+    data,
+  };
+
+  return request(options);
+}
+export function resetUserQuota(userIds) {
+  const data = {
+    userIds,
+  };
+  const options = {
+    method: "put",
+    url: "/people/resetquota",
+    data,
+  };
+
+  return request(options);
 }

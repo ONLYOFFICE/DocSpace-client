@@ -54,8 +54,8 @@ const getRoleIcon = (role: AvatarRole) => {
   }
 };
 
-const getInitials = (userName: string) =>
-  userName
+const getInitials = (userName: string, isGroup: boolean) => {
+  const initials = userName
     .split(/\s/)
     .reduce(
       (response: string, word: string) => (response += word.slice(0, 1)),
@@ -63,13 +63,22 @@ const getInitials = (userName: string) =>
     )
     .substring(0, 2);
 
+  return isGroup ? initials.toUpperCase() : initials;
+};
+
 const Initials = ({
   userName,
   size,
+  isGroup,
 }: {
   userName: string;
   size: AvatarSize;
-}) => <NamedAvatar size={size}>{getInitials(userName)}</NamedAvatar>;
+  isGroup: boolean;
+}) => (
+  <NamedAvatar size={size} isGroup={isGroup}>
+    {getInitials(userName, isGroup)}
+  </NamedAvatar>
+);
 
 const AvatarPure = ({
   size,
@@ -84,6 +93,7 @@ const AvatarPure = ({
   withTooltip,
   className,
   onClick,
+  isGroup = false,
 }: AvatarProps) => {
   const defaultTheme = useTheme();
 
@@ -104,7 +114,7 @@ const AvatarPure = ({
       <StyledImage src={source} isDefault={isDefault} />
     )
   ) : userName ? (
-    <Initials userName={userName} size={size} />
+    <Initials userName={userName} size={size} isGroup={isGroup} />
   ) : isDefaultSource ? (
     <StyledImage isDefault />
   ) : (
@@ -131,6 +141,7 @@ const AvatarPure = ({
         source={source}
         userName={userName || ""}
         className="avatar-wrapper"
+        isGroup={isGroup}
       >
         {avatarContent}
       </AvatarWrapper>

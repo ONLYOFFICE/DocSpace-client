@@ -215,9 +215,8 @@ const useFiles = ({
         : FilesFilter.getDefault();
     const requests = [Promise.resolve(newFilter)];
 
-    if (type === "group") {
-      requests.push(getGroup(itemId));
-    } else if (type === "user") {
+
+     if (type === "user") {
       requests.push(getUserById(itemId));
     }
 

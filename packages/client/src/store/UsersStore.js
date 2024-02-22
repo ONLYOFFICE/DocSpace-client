@@ -29,12 +29,33 @@ class UsersStore {
     makeAutoObservable(this);
   }
 
-  getUsersList = async (filter, updateFilter = false) => {
+  getUsersList = async (
+    filter,
+    updateFilter = false,
+    withFilterLocalStorage = false,
+  ) => {
     const filterData = filter ? filter.clone() : Filter.getDefault();
 
+    const filterStorageItem = localStorage.getItem(
+      `PeopleFilter=${this.userStore.user?.id}`,
+    );
+
+    if (filterStorageItem && withFilterLocalStorage) {
+      const splitFilter = filterStorageItem.split(",");
+
+      filterData.sortBy = splitFilter[0];
+      filterData.pageCount = +splitFilter[1];
+      filterData.sortOrder = splitFilter[2];
+    }
+
     if (!this.settingsStore.withPaging) {
-      filterData.page = 0;
-      filterData.pageCount = 100;
+      const isCustomCountPage =
+        filter && filter.pageCount !== 100 && filter.pageCount !== 25;
+
+      if (!isCustomCountPage) {
+        filterData.page = 0;
+        filterData.pageCount = 100;
+      }
     }
 
     if (filterData.group && filterData.group === "root")
@@ -46,11 +67,6 @@ class UsersStore {
     if (updateFilter) {
       this.peopleStore.filterStore.setFilterParams(filterData);
     }
-
-    /*     this.peopleStore.filterStore.setFilterParams(filterData);
-    this.peopleStore.selectedGroupStore.setSelectedGroup(
-      filterData.group || "root"
-    ); */
 
     this.setUsers(res.items);
 
@@ -150,6 +166,24 @@ class UsersStore {
     return users;
   };
 
+  setCustomUserQuota = async (quotaSize, userIds) => {
+    const filter = this.peopleStore.filterStore.filter;
+    const users = await api.people.setCustomUserQuota(userIds, +quotaSize);
+
+    await this.getUsersList(filter, true);
+
+    return users;
+  };
+
+  resetUserQuota = async (userIds) => {
+    const filter = this.peopleStore.filterStore.filter;
+    const users = await api.people.resetUserQuota(userIds);
+
+    await this.getUsersList(filter, true);
+
+    return users;
+  };
+
   updateProfileInUsers = async (updatedProfile) => {
     if (!this.users) {
       return this.getUsersList();
@@ -174,7 +208,7 @@ class UsersStore {
     }
 
     const updatedUsers = this.users.map((user) =>
-      user.id === newProfile.id ? newProfile : user
+      user.id === newProfile.id ? newProfile : user,
     );
 
     this.setUsers(updatedUsers);
@@ -395,6 +429,9 @@ class UsersStore {
       firstName,
       lastName,
       isSSO,
+      quotaLimit,
+      usedSpace,
+      isCustomQuota,
     } = user;
     const statusType = this.getStatusType(user);
     const role = this.getUserRole(user);
@@ -405,7 +442,7 @@ class UsersStore {
       isMySelf,
       statusType,
       role,
-      status
+      status,
     );
 
     const currentAvatar = hasAvatar ? avatar : DefaultUserPhotoSize32PngUrl;
@@ -433,6 +470,9 @@ class UsersStore {
       firstName,
       lastName,
       isSSO,
+      quotaLimit,
+      usedSpace,
+      isCustomQuota,
     };
   };
 

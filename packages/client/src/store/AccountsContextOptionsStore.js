@@ -100,7 +100,7 @@ class AccountsContextOptionsStore {
           return {
             key: option,
             icon: FolderReactSvgUrl,
-            label: t("RoomSelector:RoomList"),
+            label: t("Common:RoomList"),
             onClick: () => this.openUserRoomList(item),
           };
         case "enable":
@@ -309,7 +309,7 @@ class AccountsContextOptionsStore {
 
     window.open(
       combineUrl(PROXY_HOMEPAGE_URL, `${url}?${filterParamsStr}`),
-      type
+      type,
     );
   };
 

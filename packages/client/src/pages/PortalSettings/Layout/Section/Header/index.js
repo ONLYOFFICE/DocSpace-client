@@ -195,12 +195,12 @@ const SectionHeaderContent = (props) => {
     const isCategory = checkPropertyByLink(
       arrayOfParams,
       settingsTree,
-      "isCategory"
+      "isCategory",
     );
     const isHeader = checkPropertyByLink(
       arrayOfParams,
       settingsTree,
-      "isHeader"
+      "isHeader",
     );
     const isCategoryOrHeader = isCategory || isHeader;
 
@@ -406,8 +406,8 @@ export default inject(({ currentQuotaStore, setup, common }) => {
   };
 })(
   withLoading(
-    withTranslation(["Settings", "SingleSignOn", "Common"])(
-      observer(SectionHeaderContent)
-    )
-  )
+    withTranslation(["Settings", "SingleSignOn", "Common", "JavascriptSdk"])(
+      observer(SectionHeaderContent),
+    ),
+  ),
 );

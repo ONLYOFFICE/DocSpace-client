@@ -24,11 +24,11 @@ export default function withQuickButtons(WrappedComponent) {
           .then(() =>
             locked
               ? toastr.success(t("Translations:FileUnlocked"))
-              : toastr.success(t("Translations:FileLocked"))
+              : toastr.success(t("Translations:FileLocked")),
           )
           .catch(
             (err) => toastr.error(err),
-            this.setState({ isLoading: false })
+            this.setState({ isLoading: false }),
           );
       }
       return;
@@ -59,7 +59,7 @@ export default function withQuickButtons(WrappedComponent) {
       if (primaryLink) {
         copy(primaryLink.sharedTo.shareLink);
         item.shared
-          ? toastr.success(t("Files:LinkSuccessfullyCopied"))
+          ? toastr.success(t("Common:LinkSuccessfullyCopied"))
           : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
         setShareChanged(true);
       }
@@ -70,7 +70,7 @@ export default function withQuickButtons(WrappedComponent) {
       const primaryLink = await getPrimaryLink(item.id);
       if (primaryLink) {
         copy(primaryLink.sharedTo.shareLink);
-        toastr.success(t("Files:LinkSuccessfullyCopied"));
+        toastr.success(t("Common:LinkSuccessfullyCopied"));
       }
     };
 
@@ -164,6 +164,6 @@ export default function withQuickButtons(WrappedComponent) {
         getPrimaryFileLink,
         setShareChanged,
       };
-    }
+    },
   )(observer(WithQuickButtons));
 }

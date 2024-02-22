@@ -56,6 +56,7 @@
   "CopyOperation": "Copiază",
   "CountPerPage": "{{count}} per pagină",
   "Create": "Creare",
+  "CreateAndCopy": "Creare și copiere",
   "CreateCopy": "Crează o copie",
   "CreateFileCopy": "Crearea copiei fișierului",
   "CreateMasterFormFromFile": "Crearea unui șablon formă din fișier",

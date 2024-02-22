@@ -56,6 +56,7 @@
   "CopyOperation": "Kopírovanie",
   "CountPerPage": "{{count}} za stránku",
   "Create": "Vytvoriť",
+  "CreateAndCopy": "Vytvoriť a skopírovať",
   "CreateCopy": "Vytvoriť kópiu",
   "CreateFileCopy": "Vytvorte kópiu súboru",
   "CreateMasterFormFromFile": "Vytvoriť šablónu formulára zo súboru",

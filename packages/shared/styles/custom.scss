@@ -66,3 +66,110 @@ body.desktop {
   padding: 30px;
   bottom: 15px;
 }
+
+// TEMP SOLUTIONS
+.profile-container {
+  container: profile-wrapper / inline-size;
+}
+
+.profile-wrapper {
+  @container (max-width: 600px) {
+    background: none !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+    align-items: center !important;
+    padding: 0 !important;
+
+    .avatar-wrapper {
+      @conainer (max-width: 600px) {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    .rows-container {
+      display: none !important;
+    }
+
+    .mobile-profile-block {
+      display: flex !important;
+      flex-direction: column;
+      gap: 16px;
+      max-width: 100%;
+
+      .mobile-profile-row {
+        gap: 8px;
+        padding: 12px 16px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        line-height: 20px;
+        max-width: 100%;
+
+        .mobile-profile-field {
+          display: flex;
+          max-width: calc(100% - 28px);
+          flex-direction: column;
+          gap: 2px;
+        }
+
+        .mobile-profile-label {
+          min-width: 100%;
+          max-width: 100%;
+          line-height: 16px !important;
+          white-space: nowrap;
+          color: rgb(163, 169, 174);
+        }
+
+        .mobile-profile-label-field {
+          padding-left: 0px;
+          max-width: 100%;
+          line-height: 16px;
+        }
+
+        .email-container {
+          padding-left: 0px;
+
+          display: flex;
+          flex-wrap: wrap;
+          align-items: baseline;
+        }
+
+        .mobile-profile-password {
+          max-width: 100%;
+          line-height: 16px !important;
+        }
+      }
+
+      .mobile-language {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        gap: 4px;
+
+        @container (max-width: 600px) {
+          margin-top: 8px;
+        }
+
+        &__wrapper-combo-box {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .mobile-profile-label {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          min-width: 75px;
+          max-width: 75px;
+          white-space: nowrap;
+        }
+      }
+
+      @container (max-width: 600px) {
+        gap: 8px;
+      }
+    }
+  }
+}

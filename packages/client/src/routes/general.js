@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 
 import loadable from "@loadable/component";
 
-import PrivateRoute from "@docspace/common/components/PrivateRoute";
+import PrivateRoute from "../components/PrivateRouteWrapper";
 
 const Profile = loadable(() => import("../pages/Profile"));
 

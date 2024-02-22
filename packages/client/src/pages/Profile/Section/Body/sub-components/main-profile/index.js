@@ -156,200 +156,94 @@ const MainProfile = (props) => {
   const isBetaLanguage = selectedLanguage?.isBeta;
 
   return (
-    <StyledWrapper>
-      <StyledAvatarWrapper>
-        <Avatar
-          className={"avatar"}
-          size="max"
-          role={role}
-          source={userAvatar}
-          userName={profile.displayName}
-          editing={true}
-          editAction={() => setChangeAvatarVisible(true)}
-        />
-        {profile.isSSO && (
-          <div className="badges-wrapper">
-            <Badge
-              className="sso-badge"
-              label={SSO_LABEL}
-              color={"#FFFFFF"}
-              backgroundColor="#22C386"
-              fontSize={"9px"}
-              fontWeight={800}
-              noHover
-              lineHeight={"13px"}
-            />
-          </div>
-        )}
-      </StyledAvatarWrapper>
-      <StyledInfo
-        withActivationBar={withActivationBar}
-        currentColorScheme={currentColorScheme}
-      >
-        <div className="rows-container">
-          <div className="profile-block">
-            <StyledLabel as="div">{t("Common:Name")}</StyledLabel>
-
-            <StyledLabel as="div" marginTopProp="16px">
-              {t("Common:Email")}
-            </StyledLabel>
-
-            <StyledLabel
-              as="div"
-              marginTopProp={withActivationBar ? "34px" : "16px"}
-            >
-              {t("Common:Password")}
-            </StyledLabel>
-
-            <StyledLabel
-              as="div"
-              className="profile-language"
-              marginTopProp="15px"
-            >
-              {t("Common:Language")}
-              <HelpButton
-                size={12}
-                offsetRight={0}
-                place={dirTooltip}
-                tooltipContent={tooltipLanguage}
+    <div className="profile-container">
+      <StyledWrapper className="profile-wrapper">
+        <StyledAvatarWrapper className="avatar-wrapper">
+          <Avatar
+            className={"avatar"}
+            size="max"
+            role={role}
+            source={userAvatar}
+            userName={profile.displayName}
+            editing={true}
+            editAction={() => setChangeAvatarVisible(true)}
+          />
+          {profile.isSSO && (
+            <div className="badges-wrapper">
+              <Badge
+                className="sso-badge"
+                label={SSO_LABEL}
+                color={"#FFFFFF"}
+                backgroundColor="#22C386"
+                fontSize={"9px"}
+                fontWeight={800}
+                noHover
+                lineHeight={"13px"}
               />
-            </StyledLabel>
-          </div>
-
-          <div className="profile-block">
-            <div className="profile-block-field">
-              <Text fontWeight={600} truncate title={profile.displayName}>
-                {profile.displayName}
-              </Text>
-              {profile.isSSO && (
-                <Badge
-                  className="sso-badge"
-                  label={SSO_LABEL}
-                  color={"#FFFFFF"}
-                  backgroundColor="#22C386"
-                  fontSize={"9px"}
-                  fontWeight={800}
-                  noHover
-                  lineHeight={"13px"}
-                />
-              )}
-
-              {!profile.isSSO && (
-                <IconButton
-                  className="edit-button"
-                  iconName={PencilOutlineReactSvgUrl}
-                  size="12"
-                  onClick={() => setChangeNameVisible(true)}
-                />
-              )}
             </div>
-            <div className="email-container">
-              <div className="email-edit-container">
-                <Text
-                  data-tooltip-id="emailTooltip"
-                  data-tooltip-content={t("EmailNotVerified")}
-                  as="div"
-                  className="email-text-container"
-                  fontWeight={600}
-                >
-                  {profile.email}
+          )}
+        </StyledAvatarWrapper>
+        <StyledInfo
+          withActivationBar={withActivationBar}
+          currentColorScheme={currentColorScheme}
+        >
+          <div className="rows-container">
+            <div className="profile-block">
+              <StyledLabel as="div">{t("Common:Name")}</StyledLabel>
+
+              <StyledLabel as="div" marginTopProp="16px">
+                {t("Common:Email")}
+              </StyledLabel>
+
+              <StyledLabel
+                as="div"
+                marginTopProp={withActivationBar ? "34px" : "16px"}
+              >
+                {t("Common:Password")}
+              </StyledLabel>
+
+              <StyledLabel
+                as="div"
+                className="profile-language"
+                marginTopProp="15px"
+              >
+                {t("Common:Language")}
+                <HelpButton
+                  size={12}
+                  offsetRight={0}
+                  place={dirTooltip}
+                  tooltipContent={tooltipLanguage}
+                />
+              </StyledLabel>
+            </div>
+
+            <div className="profile-block">
+              <div className="profile-block-field">
+                <Text fontWeight={600} truncate title={profile.displayName}>
+                  {profile.displayName}
                 </Text>
-                {withActivationBar && (
-                  <Tooltip
-                    float
-                    id="emailTooltip"
-                    getContent={({ content }) => (
-                      <Text fontSize="12px">{content}</Text>
-                    )}
-                    place="bottom"
+                {profile.isSSO && (
+                  <Badge
+                    className="sso-badge"
+                    label={SSO_LABEL}
+                    color={"#FFFFFF"}
+                    backgroundColor="#22C386"
+                    fontSize={"9px"}
+                    fontWeight={800}
+                    noHover
+                    lineHeight={"13px"}
                   />
                 )}
+
                 {!profile.isSSO && (
                   <IconButton
-                    className="edit-button email-edit-button"
+                    className="edit-button"
                     iconName={PencilOutlineReactSvgUrl}
                     size="12"
-                    onClick={onChangeEmailClick}
+                    onClick={() => setChangeNameVisible(true)}
                   />
                 )}
               </div>
-              {withActivationBar && (
-                <div
-                  className="send-again-container"
-                  onClick={sendActivationLinkAction}
-                >
-                  <ReactSVG
-                    className="send-again-icon"
-                    src={SendClockReactSvgUrl}
-                  />
-                  <Text className="send-again-text" fontWeight={600} noSelect>
-                    {t("SendAgain")}
-                  </Text>
-                </div>
-              )}
-            </div>
-            <div className="profile-block-field profile-block-password">
-              <Text fontWeight={600}>********</Text>
-              <IconButton
-                className="edit-button password-edit-button"
-                iconName={PencilOutlineReactSvgUrl}
-                size="12"
-                onClick={onChangePasswordClick}
-              />
-            </div>
-            <div className="language-combo-box-wrapper">
-              <ComboBox
-                className="language-combo-box"
-                directionY={isMobileHorizontalOrientation ? "bottom" : "both"}
-                options={cultureNames}
-                selectedOption={selectedLanguage}
-                onSelect={onLanguageSelect}
-                isDisabled={false}
-                scaled={isMobile()}
-                scaledOptions={false}
-                size="content"
-                showDisabledItems={true}
-                dropDownMaxHeight={dimension < 620 ? 200 : 364}
-                manualWidth="280px"
-                isDefaultMode={
-                  isMobileHorizontalOrientation
-                    ? isMobileHorizontalOrientation
-                    : !isMobile()
-                }
-                withBlur={isMobileHorizontalOrientation ? false : isMobile()}
-                fillIcon={false}
-                modernView={!isMobile()}
-              />
-              {isBetaLanguage && <BetaBadge place="bottom-end" />}
-            </div>
-          </div>
-        </div>
-        <div className="mobile-profile-block">
-          <div className="mobile-profile-row">
-            <div className="mobile-profile-field">
-              <Text className="mobile-profile-label" as="div">
-                {t("Common:Name")}
-              </Text>
-              <Text
-                className="mobile-profile-label-field"
-                fontWeight={600}
-                truncate
-              >
-                {profile.displayName}
-              </Text>
-            </div>
-            <IconButton
-              className="edit-button"
-              iconName={PencilOutlineReactSvgUrl}
-              size="12"
-              onClick={() => setChangeNameVisible(true)}
-            />
-          </div>
-          <div className="mobile-profile-row">
-            <div className="mobile-profile-field">
-              <Text className="mobile-profile-label" as="div">
-                {t("Common:Email")}
-              </Text>
               <div className="email-container">
                 <div className="email-edit-container">
                   <Text
@@ -358,108 +252,218 @@ const MainProfile = (props) => {
                     as="div"
                     className="email-text-container"
                     fontWeight={600}
+                    truncate
                   >
                     {profile.email}
                   </Text>
+                  {withActivationBar && (
+                    <Tooltip
+                      float
+                      id="emailTooltip"
+                      getContent={({ content }) => (
+                        <Text fontSize="12px">{content}</Text>
+                      )}
+                      place="bottom"
+                    />
+                  )}
+                  {!profile.isSSO && (
+                    <IconButton
+                      className="edit-button email-edit-button"
+                      iconName={PencilOutlineReactSvgUrl}
+                      size="12"
+                      onClick={onChangeEmailClick}
+                    />
+                  )}
                 </div>
                 {withActivationBar && (
-                  <Tooltip
-                    float
-                    id="emailTooltip"
-                    getContent={({ content }) => (
-                      <Text fontSize="12px">{content}</Text>
-                    )}
-                    place="bottom"
-                  />
+                  <div
+                    className="send-again-container"
+                    onClick={sendActivationLinkAction}
+                  >
+                    <ReactSVG
+                      className="send-again-icon"
+                      src={SendClockReactSvgUrl}
+                    />
+                    <Text className="send-again-text" fontWeight={600} noSelect>
+                      {t("SendAgain")}
+                    </Text>
+                  </div>
                 )}
               </div>
-              {withActivationBar && (
-                <div
-                  className="send-again-container"
-                  onClick={sendActivationLinkAction}
+              <div className="profile-block-field profile-block-password">
+                <Text fontWeight={600}>********</Text>
+                <IconButton
+                  className="edit-button password-edit-button"
+                  iconName={PencilOutlineReactSvgUrl}
+                  size="12"
+                  onClick={onChangePasswordClick}
+                />
+              </div>
+              <div className="language-combo-box-wrapper">
+                <ComboBox
+                  className="language-combo-box"
+                  directionY={isMobileHorizontalOrientation ? "bottom" : "both"}
+                  options={cultureNames}
+                  selectedOption={selectedLanguage}
+                  onSelect={onLanguageSelect}
+                  isDisabled={false}
+                  scaled={isMobile()}
+                  scaledOptions={false}
+                  size="content"
+                  showDisabledItems={true}
+                  dropDownMaxHeight={dimension < 620 ? 200 : 364}
+                  manualWidth="280px"
+                  isDefaultMode={
+                    isMobileHorizontalOrientation
+                      ? isMobileHorizontalOrientation
+                      : !isMobile()
+                  }
+                  withBlur={isMobileHorizontalOrientation ? false : isMobile()}
+                  fillIcon={false}
+                  modernView={!isMobile()}
+                />
+                {isBetaLanguage && <BetaBadge place="bottom-end" />}
+              </div>
+            </div>
+          </div>
+          <div className="mobile-profile-block">
+            <div className="mobile-profile-row">
+              <div className="mobile-profile-field">
+                <Text className="mobile-profile-label" as="div">
+                  {t("Common:Name")}
+                </Text>
+                <Text
+                  className="mobile-profile-label-field"
+                  fontWeight={600}
+                  truncate
                 >
-                  <ReactSVG
-                    className="send-again-icon"
-                    src={SendClockReactSvgUrl}
-                  />
-                  <Text className="send-again-text" fontWeight={600} noSelect>
-                    {t("SendAgain")}
-                  </Text>
+                  {profile.displayName}
+                </Text>
+              </div>
+              <IconButton
+                className="edit-button"
+                iconName={PencilOutlineReactSvgUrl}
+                size="12"
+                onClick={() => setChangeNameVisible(true)}
+              />
+            </div>
+            <div className="mobile-profile-row">
+              <div className="mobile-profile-field">
+                <Text className="mobile-profile-label" as="div">
+                  {t("Common:Email")}
+                </Text>
+                <div className="email-container">
+                  <div className="email-edit-container">
+                    <Text
+                      data-tooltip-id="emailTooltip"
+                      data-tooltip-content={t("EmailNotVerified")}
+                      as="div"
+                      className="email-text-container"
+                      fontWeight={600}
+                      truncate
+                    >
+                      {profile.email}
+                    </Text>
+                  </div>
+                  {withActivationBar && (
+                    <Tooltip
+                      float
+                      id="emailTooltip"
+                      getContent={({ content }) => (
+                        <Text fontSize="12px">{content}</Text>
+                      )}
+                      place="bottom"
+                    />
+                  )}
                 </div>
-              )}
-            </div>
-            <IconButton
-              className="edit-button"
-              iconName={PencilOutlineReactSvgUrl}
-              size="12"
-              onClick={onChangeEmailClick}
-            />
-          </div>
-          <div className="mobile-profile-row">
-            <div className="mobile-profile-field">
-              <Text as="div" className="mobile-profile-label">
-                {t("Common:Password")}
-              </Text>
-              <Text className="mobile-profile-password" fontWeight={600}>
-                ********
-              </Text>
-            </div>
-            <IconButton
-              className="edit-button"
-              iconName={PencilOutlineReactSvgUrl}
-              size="12"
-              onClick={onChangePasswordClick}
-            />
-          </div>
-
-          <div className="mobile-language">
-            <Text as="div" fontWeight={600} className="mobile-profile-label">
-              {t("Common:Language")}
-              <HelpButton
-                size={12}
-                offsetRight={0}
-                place="right"
-                tooltipContent={tooltipLanguage}
+                {withActivationBar && (
+                  <div
+                    className="send-again-container"
+                    onClick={sendActivationLinkAction}
+                  >
+                    <ReactSVG
+                      className="send-again-icon"
+                      src={SendClockReactSvgUrl}
+                    />
+                    <Text className="send-again-text" fontWeight={600} noSelect>
+                      {t("SendAgain")}
+                    </Text>
+                  </div>
+                )}
+              </div>
+              <IconButton
+                className="edit-button"
+                iconName={PencilOutlineReactSvgUrl}
+                size="12"
+                onClick={onChangeEmailClick}
               />
-            </Text>
-            <div className="mobile-language__wrapper-combo-box">
-              <ComboBox
-                className="language-combo-box"
-                directionY={isMobileHorizontalOrientation ? "bottom" : "both"}
-                options={cultureNames}
-                selectedOption={selectedLanguage}
-                onSelect={onLanguageSelect}
-                isDisabled={false}
-                scaled={isMobile()}
-                scaledOptions={false}
-                size="content"
-                showDisabledItems={true}
-                dropDownMaxHeight={364}
-                manualWidth="250px"
-                isDefaultMode={
-                  isMobileHorizontalOrientation
-                    ? isMobileHorizontalOrientation
-                    : !isMobile()
-                }
-                withBlur={isMobileHorizontalOrientation ? false : isMobile()}
-                fillIcon={false}
-                modernView={!isMobile()}
+            </div>
+            <div className="mobile-profile-row">
+              <div className="mobile-profile-field">
+                <Text as="div" className="mobile-profile-label">
+                  {t("Common:Password")}
+                </Text>
+                <Text className="mobile-profile-password" fontWeight={600}>
+                  ********
+                </Text>
+              </div>
+              <IconButton
+                className="edit-button"
+                iconName={PencilOutlineReactSvgUrl}
+                size="12"
+                onClick={onChangePasswordClick}
               />
-              {isBetaLanguage && <BetaBadge place="bottom-end" />}
+            </div>
+
+            <div className="mobile-language">
+              <Text as="div" fontWeight={600} className="mobile-profile-label">
+                {t("Common:Language")}
+                <HelpButton
+                  size={12}
+                  offsetRight={0}
+                  place="right"
+                  tooltipContent={tooltipLanguage}
+                />
+              </Text>
+              <div className="mobile-language__wrapper-combo-box">
+                <ComboBox
+                  className="language-combo-box"
+                  directionY={isMobileHorizontalOrientation ? "bottom" : "both"}
+                  options={cultureNames}
+                  selectedOption={selectedLanguage}
+                  onSelect={onLanguageSelect}
+                  isDisabled={false}
+                  scaled={true}
+                  scaledOptions={false}
+                  size="content"
+                  showDisabledItems={true}
+                  dropDownMaxHeight={364}
+                  manualWidth="250px"
+                  isDefaultMode={
+                    isMobileHorizontalOrientation
+                      ? isMobileHorizontalOrientation
+                      : !isMobile()
+                  }
+                  withBlur={isMobileHorizontalOrientation ? false : isMobile()}
+                  fillIcon={false}
+                  modernView={false}
+                />
+                {isBetaLanguage && <BetaBadge place="bottom-end" />}
+              </div>
             </div>
           </div>
-        </div>
-        {/* <TimezoneCombo title={t("Common:ComingSoon")} /> */}
-      </StyledInfo>
+          {/* <TimezoneCombo title={t("Common:ComingSoon")} /> */}
+        </StyledInfo>
 
-      {changeAvatarVisible && (
-        <AvatarEditorDialog
-          t={t}
-          visible={changeAvatarVisible}
-          onClose={() => setChangeAvatarVisible(false)}
-        />
-      )}
-    </StyledWrapper>
+        {changeAvatarVisible && (
+          <AvatarEditorDialog
+            t={t}
+            visible={changeAvatarVisible}
+            onClose={() => setChangeAvatarVisible(false)}
+          />
+        )}
+      </StyledWrapper>
+    </div>
   );
 };
 

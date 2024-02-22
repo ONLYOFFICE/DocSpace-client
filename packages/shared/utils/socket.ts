@@ -6,6 +6,11 @@ import io, { Socket } from "socket.io-client";
 export type TOnCallback = {
   featureId: string;
   value: number;
+  usedSpace: number;
+  quotaLimit: number;
+  customQuotaFeature: string;
+  enableQuota: boolean;
+  quota: number;
 };
 let client: Socket<DefaultEventsMap, DefaultEventsMap> | null = null;
 let callbacks: { eventName: string; callback: (value: TOnCallback) => void }[] =

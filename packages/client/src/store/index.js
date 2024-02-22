@@ -10,6 +10,7 @@ import {
 } from "@docspace/shared/store";
 
 import PaymentStore from "./PaymentStore";
+import StorageManagement from "./StorageManagement";
 import WizardStore from "./WizardStore";
 import SettingsSetupStore from "./SettingsSetupStore";
 import ConfirmStore from "./ConfirmStore";
@@ -147,6 +148,7 @@ const peopleStore = new PeopleStore(
   userStore,
   tfaStore,
   settingsStore,
+  clientLoadingStore,
 );
 
 const uploadDataStore = new UploadDataStore(
@@ -176,6 +178,8 @@ const filesActionsStore = new FilesActionsStore(
   infoPanelStore,
   userStore,
   currentTariffStatusStore,
+  peopleStore,
+  currentQuotaStore
 );
 
 const contextOptionsStore = new ContextOptionsStore(
@@ -224,7 +228,7 @@ const tableStore = new TableStore(
   authStore,
   treeFoldersStore,
   userStore,
-  settingsStore
+  settingsStore,
 );
 
 infoPanelStore.filesSettingsStore = filesSettingsStore;
@@ -247,6 +251,11 @@ const createEditRoomStore = new CreateEditRoomStore(
 );
 
 const webhooksStore = new WebhooksStore(settingsStore);
+const storageManagement = new StorageManagement(
+  filesStore,
+  peopleStore,
+  authStore
+);
 
 const store = {
   authStore,
@@ -297,6 +306,7 @@ const store = {
   publicRoomStore,
 
   pluginStore,
+  storageManagement,
 };
 
 export default store;

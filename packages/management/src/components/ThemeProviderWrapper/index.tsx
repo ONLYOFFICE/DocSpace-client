@@ -1,5 +1,6 @@
 import React, { PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";
+import { observer } from "mobx-react";
 
 import { ThemeProvider } from "@docspace/shared/components/theme-provider";
 
@@ -21,4 +22,4 @@ const ThemeProviderWrapper = ({ children }: PropsWithChildren) => {
   );
 };
 
-export default ThemeProviderWrapper;
+export default observer(ThemeProviderWrapper);

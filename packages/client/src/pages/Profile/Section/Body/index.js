@@ -5,7 +5,7 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 
-import Loaders from "@docspace/common/components/Loaders";
+import { ProfileViewLoader } from "@docspace/shared/skeletons/profile";
 import { Submenu } from "@docspace/shared/components/submenu";
 
 import MainProfile from "./sub-components/main-profile";
@@ -72,7 +72,7 @@ const SectionBodyContent = (props) => {
     navigate(`${path}/${e.id}`, { state: { disableScrollToTop: true } });
   };
 
-  if (showProfileLoader) return <Loaders.ProfileView />;
+  if (showProfileLoader) return <ProfileViewLoader />;
   return (
     <Wrapper>
       <MainProfile />
@@ -113,6 +113,6 @@ export default inject(({ settingsStore, peopleStore, clientLoadingStore }) => {
       "DeleteSelfProfileDialog",
       "Notifications",
       "ConnectDialog",
-    ])(SectionBodyContent)
-  )
+    ])(SectionBodyContent),
+  ),
 );

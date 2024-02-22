@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { observer, inject } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";
-import Loaders from "@docspace/common/components/Loaders";
+import { PaymentsStandaloneLoader } from "@docspace/shared/skeletons/payments";
 
 import BenefitsContainer from "SRC_DIR/components/StandaloneComponents/BenefitsContainer";
 import StyledComponent from "./StyledComponent";
@@ -17,7 +17,7 @@ const Bonus = ({ standaloneInit, isInitPaymentPage }) => {
     standaloneInit();
   }, []);
 
-  if (!isInitPaymentPage || !ready) return <Loaders.PaymentsStandaloneLoader />;
+  if (!isInitPaymentPage || !ready) return <PaymentsStandaloneLoader />;
 
   return (
     <StyledComponent>

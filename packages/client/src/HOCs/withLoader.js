@@ -3,7 +3,7 @@ import { observer, inject } from "mobx-react";
 import { useLocation } from "react-router-dom";
 import { TableSkeleton } from "@docspace/shared/skeletons";
 import { RowsSkeleton } from "@docspace/shared/skeletons";
-import Loaders from "@docspace/common/components/Loaders";
+import { TilesSkeleton } from "@docspace/shared/skeletons/tiles";
 
 const pathname = window.location.pathname.toLowerCase();
 const isEditor = pathname.indexOf("doceditor") !== -1;
@@ -25,9 +25,11 @@ const withLoader = (WrappedComponent) => (Loader) => {
 
     const location = useLocation();
 
-    const currentViewAs = location.pathname.includes("/accounts/filter")
-      ? accountsViewAs
-      : viewAs;
+    const currentViewAs =
+      location.pathname.includes("/accounts/people") ||
+      location.pathname.includes("/accounts/groups")
+        ? accountsViewAs
+        : viewAs;
 
     return (!isEditor && firstLoad && !isGallery) ||
       !isLoaded ||
@@ -38,7 +40,7 @@ const withLoader = (WrappedComponent) => (Loader) => {
       Loader ? (
         Loader
       ) : currentViewAs === "tile" ? (
-        <Loaders.Tiles />
+        <TilesSkeleton />
       ) : currentViewAs === "table" ? (
         <TableSkeleton />
       ) : (
@@ -77,7 +79,7 @@ const withLoader = (WrappedComponent) => (Loader) => {
         showBodyLoader,
         accountsViewAs,
       };
-    }
+    },
   )(observer(withLoader));
 };
 export default withLoader;

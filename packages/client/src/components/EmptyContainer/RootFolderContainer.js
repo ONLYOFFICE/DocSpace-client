@@ -300,11 +300,12 @@ const RootFolderContainer = (props) => {
 
   const goToPersonalButtons = (
     <div className="empty-folder_container-links">
-      <img
+      <IconButton
         className="empty-folder_container-icon"
-        src={PersonSvgUrl}
-        alt="person_icon"
+        size="12"
         onClick={onGoToPersonal}
+        iconName={PersonSvgUrl}
+        isFill
       />
       <Link onClick={onGoToPersonal} {...linkStyles}>
         {t("GoToPersonal")}
@@ -387,5 +388,5 @@ export default inject(
       roomsFolder,
       isPublicRoom,
     };
-  }
+  },
 )(withTranslation(["Files"])(observer(RootFolderContainer)));

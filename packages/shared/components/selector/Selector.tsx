@@ -18,6 +18,7 @@ import {
   TSelectorAccessRights,
   TSelectorFooterInput,
   TSelectorFooterCheckbox,
+  TWithTabs,
 } from "./Selector.types";
 
 const Selector = ({
@@ -97,6 +98,10 @@ const Selector = ({
   alwaysShowFooter,
 
   descriptionText,
+
+  withTabs,
+  tabsData,
+  activeTabId,
 }: SelectorProps) => {
   const [footerVisible, setFooterVisible] = React.useState<boolean>(false);
   const [isSearch, setIsSearch] = React.useState<boolean>(false);
@@ -105,6 +110,9 @@ const Selector = ({
   const [newSelectedItems, setNewSelectedItems] = React.useState<
     TSelectorItem[]
   >([]);
+  const [selectedTabItems, setSelectedTabItems] = React.useState<{
+    [key: string]: TSelectorItem[];
+  }>({});
 
   const [newFooterInputValue, setNewFooterInputValue] = React.useState<string>(
     currentFooterInputValue || "",
@@ -126,6 +134,16 @@ const Selector = ({
 
           return newValue;
         });
+        if (activeTabId) {
+          setSelectedTabItems((value) => {
+            const newValue = { ...value };
+            newValue[activeTabId] = newValue[activeTabId].filter(
+              (x) => x.id !== item.id,
+            );
+
+            return newValue;
+          });
+        }
       } else {
         setNewSelectedItems((value) => {
           value.push({
@@ -134,6 +152,16 @@ const Selector = ({
 
           return [...value];
         });
+        if (activeTabId) {
+          setSelectedTabItems((value) => {
+            const newValue = { ...value };
+
+            if (newValue[activeTabId]) newValue[activeTabId].push(item);
+            else newValue[activeTabId] = [{ ...item }];
+
+            return newValue;
+          });
+        }
       }
       setRenderedItems((value) => {
         const idx = value.findIndex((x) => item.id === x.id);
@@ -173,10 +201,14 @@ const Selector = ({
 
     if (!items) return;
 
-    if (
-      newSelectedItems.length === 0 ||
-      newSelectedItems.length !== items.length
-    ) {
+    const query =
+      activeTabId && selectedTabItems[activeTabId]
+        ? selectedTabItems[activeTabId].length === 0 ||
+          selectedTabItems[activeTabId].length !== items.length
+        : newSelectedItems.length === 0 ||
+          newSelectedItems.length !== items.length;
+
+    if (query) {
       const cloneItems = items.map((x) => ({ ...x }));
 
       setRenderedItems((i) => {
@@ -187,7 +219,19 @@ const Selector = ({
 
         return cloneRenderedItems;
       });
-      setNewSelectedItems(cloneItems);
+      // setNewSelectedItems(cloneItems);
+      if (activeTabId) {
+        setSelectedTabItems((value) => {
+          const newValue = { ...value };
+
+          newValue[activeTabId] = [...cloneItems];
+
+          return newValue;
+        });
+        setNewSelectedItems((value) => [...value, ...cloneItems]);
+      } else {
+        setNewSelectedItems(cloneItems);
+      }
     } else {
       setRenderedItems((i) => {
         const cloneRenderedItems = i.map((x) => ({
@@ -197,9 +241,35 @@ const Selector = ({
 
         return cloneRenderedItems;
       });
-      setNewSelectedItems([]);
+      // setNewSelectedItems([]);
+
+      if (activeTabId) {
+        setSelectedTabItems((value) => {
+          const newValue = { ...value };
+
+          newValue[activeTabId] = [];
+
+          return newValue;
+        });
+
+        setNewSelectedItems((value) => {
+          const newValue = value.filter(
+            (v) => items.findIndex((i) => i.id === v.id) === -1,
+          );
+
+          return newValue;
+        });
+      } else {
+        setNewSelectedItems([]);
+      }
     }
-  }, [items, newSelectedItems.length, onSelectAll]);
+  }, [
+    activeTabId,
+    items,
+    newSelectedItems.length,
+    onSelectAll,
+    selectedTabItems,
+  ]);
 
   const onSubmitAction = () => {
     onSubmit(
@@ -301,14 +371,32 @@ const Selector = ({
       }
     : ({} as TSelectorBreadCrumbs);
 
+  const isAllIndeterminate =
+    activeTabId && selectedTabItems[activeTabId]
+      ? selectedTabItems[activeTabId].length !== renderedItems.length &&
+        selectedTabItems[activeTabId].length !== 0
+      : newSelectedItems.length !== renderedItems.length &&
+        newSelectedItems.length !== 0;
+  const isAllChecked =
+    activeTabId && selectedTabItems[activeTabId]
+      ? selectedTabItems[activeTabId].length === renderedItems.length &&
+        renderedItems.length !== 0
+      : newSelectedItems.length === renderedItems.length &&
+        renderedItems.length !== 0;
+
   const onSelectAllProps: TSelectorSelectAll = withSelectAll
     ? {
         withSelectAll,
         selectAllLabel,
         selectAllIcon,
         onSelectAll: onSelectAllAction,
+        isAllIndeterminate,
+        isAllChecked,
       }
-    : ({} as TSelectorSelectAll);
+    : {
+        isAllIndeterminate,
+        isAllChecked,
+      };
 
   const searchProps: TSelectorBodySearch = withSearch
     ? {
@@ -321,22 +409,10 @@ const Selector = ({
         onClearSearch,
         isSearch,
         onSearch,
-        isAllIndeterminate:
-          newSelectedItems.length !== renderedItems.length &&
-          newSelectedItems.length !== 0,
-        isAllChecked:
-          newSelectedItems.length === renderedItems.length &&
-          renderedItems.length !== 0,
       }
     : ({
         isSearch,
         setIsSearch,
-        isAllIndeterminate:
-          newSelectedItems.length !== renderedItems.length &&
-          newSelectedItems.length !== 0,
-        isAllChecked:
-          newSelectedItems.length === renderedItems.length &&
-          renderedItems.length !== 0,
       } as TSelectorBodySearch);
 
   const cancelButtonProps = withCancelButton
@@ -378,6 +454,42 @@ const Selector = ({
         setIsChecked,
       } as TSelectorFooterCheckbox);
 
+  const tabsProps: TWithTabs = withTabs
+    ? { withTabs, tabsData, activeTabId }
+    : {};
+
+  React.useEffect(() => {
+    if (!isMultiSelect) return;
+    let hasConflict = false;
+
+    const cloneItems = renderedItems.map((x) => {
+      if (x.isSelected) return { ...x };
+
+      const isSelected = newSelectedItems.some(
+        (selectedItem) => selectedItem.id === x.id,
+      );
+
+      if (isSelected) hasConflict = true;
+
+      return { ...x, isSelected };
+    });
+
+    if (hasConflict) {
+      setRenderedItems(cloneItems);
+    }
+  }, [isMultiSelect, renderedItems, newSelectedItems]);
+
+  React.useEffect(() => {
+    setSelectedTabItems((value) => {
+      const newValue = { ...value };
+      tabsData?.forEach((tab) => {
+        if (!newValue[tab.id]) newValue[tab.id] = [];
+      });
+
+      return newValue;
+    });
+  }, [tabsData]);
+
   return (
     <StyledSelector
       id={id}
@@ -386,7 +498,6 @@ const Selector = ({
       data-testid="selector"
     >
       {withHeader && <Header {...headerProps} />}
-
       <Body
         withHeader={withHeader}
         footerVisible={footerVisible || !!alwaysShowFooter}
@@ -416,6 +527,8 @@ const Selector = ({
         {...onSelectAllProps}
         // search
         {...searchProps}
+        // tabs
+        {...tabsProps}
       />
 
       {(footerVisible || alwaysShowFooter) && (

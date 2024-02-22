@@ -5,7 +5,7 @@ import moment from "moment";
 import { useTranslation } from "react-i18next";
 
 import { regDesktop } from "@docspace/shared/utils/desktop";
-import Loaders from "@docspace/common/components/Loaders";
+import PaymentsLoader from "@docspace/shared/skeletons/payments";
 import { setDocumentTitle } from "@docspace/client/src/helpers/filesUtils";
 
 import PaymentContainer from "./PaymentContainer";
@@ -62,7 +62,7 @@ const SaaSPage = ({
     !ready ||
     isUpdatingTariff ||
     isUpdatingBasicSettings ? (
-    <Loaders.PaymentsLoader />
+    <PaymentsLoader />
   ) : (
     <PaymentContainer t={t} />
   );

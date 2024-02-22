@@ -16,6 +16,8 @@ import {
 } from "@docspace/client/src/helpers/filesUtils";
 import CommentEditor from "../sub-components/CommentEditor";
 
+import SpaceQuota from "SRC_DIR/components/SpaceQuota";
+
 // Property Content Components
 
 const text = (text) => (
@@ -76,6 +78,8 @@ class DetailsHelper {
     this.isVisitor = props.isVisitor;
     this.isCollaborator = props.isCollaborator;
     this.selectTag = props.selectTag;
+    this.isDefaultRoomsQuotaSet = props.isDefaultRoomsQuotaSet;
+    this.setNewInfoPanelSelection = props.setNewInfoPanelSelection;
   }
 
   getPropertyList = () => {
@@ -115,6 +119,8 @@ class DetailsHelper {
         return "info_details_comments";
       case "Tags":
         return "info_details_tags";
+      case "Storage":
+        return "info_details_storage";
     }
   };
 
@@ -130,6 +136,7 @@ class DetailsHelper {
             "Last modified by",
             "Creation date",
             this.item.tags.length && "Tags",
+            "Storage",
           ]
         : this.item.isFolder
           ? [
@@ -189,6 +196,15 @@ class DetailsHelper {
         return this.t("Common:Comments");
       case "Tags":
         return this.t("Common:Tags");
+      case "Storage":
+        if (this.item.usedSpace !== undefined) {
+          return this.isDefaultRoomsQuotaSet &&
+            this.item.quotaLimit !== undefined
+            ? this.t("Common:StorageAndQuota")
+            : this.t("Common:Storage");
+        }
+
+        return <></>;
     }
   };
 
@@ -227,6 +243,8 @@ class DetailsHelper {
         return this.getItemComments();
       case "Tags":
         return this.getItemTags();
+      case "Storage":
+        return this.getQuotaItem();
     }
   };
 
@@ -305,6 +323,24 @@ class DetailsHelper {
 
   getItemTags = () => {
     return tagList(this.item.tags, this.selectTag);
+  };
+
+  getQuotaItem = () => {
+    const onSuccess = () => {
+      this.setNewInfoPanelSelection();
+    };
+
+    if (this.item.usedSpace !== undefined) {
+      return (
+        <SpaceQuota
+          item={this.item}
+          isReadOnly={!this.item?.security?.EditRoom}
+          onSuccess={onSuccess}
+        />
+      );
+    }
+
+    return <></>;
   };
 }
 

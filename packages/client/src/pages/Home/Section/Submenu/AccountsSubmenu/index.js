@@ -1,7 +1,7 @@
 import * as Styled from "./index.styled";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
-import Loaders from "@docspace/common/components/Loaders";
+import { SectionSubmenuSkeleton } from "@docspace/shared/skeletons/sections";
 import { useTranslation } from "react-i18next";
 
 const AccountsSubmenu = ({
@@ -10,9 +10,9 @@ const AccountsSubmenu = ({
   setGroupsSelection,
   setPeopleBufferSelection,
   setGroupsBufferSelection,
-}) => {    
+}) => {
   const { t } = useTranslation(["Common"]);
-  
+
   const location = useLocation();
   const navigate = useNavigate();
   const { groupId } = useParams();
@@ -33,7 +33,7 @@ const AccountsSubmenu = ({
 
   if (groupId !== undefined) return null;
 
-  if (showBodyLoader) return <Loaders.SectionSubmenuLoader />;
+  if (showBodyLoader) return <SectionSubmenuSkeleton />;
 
   return (
     <Styled.AccountsSubmenu
@@ -48,7 +48,7 @@ const AccountsSubmenu = ({
         },
         {
           id: "groups",
-          name:  t("Common:Groups"),
+          name: t("Common:Groups"),
           onClick: onGroups,
           content: null,
         },
@@ -58,10 +58,9 @@ const AccountsSubmenu = ({
 };
 
 export default inject(({ peopleStore, clientLoadingStore }) => ({
-  showBodyLoader:  clientLoadingStore.showBodyLoader,
+  showBodyLoader: clientLoadingStore.showBodyLoader,
   setPeopleSelection: peopleStore.selectionStore.setSelection,
   setPeopleBufferSelection: peopleStore.selectionStore.setBufferSelection,
   setGroupsSelection: peopleStore.groupsStore.setSelection,
   setGroupsBufferSelection: peopleStore.groupsStore.setBufferSelection,
-
 }))(observer(AccountsSubmenu));

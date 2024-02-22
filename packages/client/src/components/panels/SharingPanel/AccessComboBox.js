@@ -68,7 +68,7 @@ const AccessComboBox = (props) => {
         onRemoveUserClick && onRemoveUserClick(e);
       }
     },
-    [availableOptions, onAccessChange, onRemoveUserClick]
+    [availableOptions, onAccessChange, onRemoveUserClick],
   );
 
   React.useEffect(() => {
@@ -96,8 +96,8 @@ const AccessComboBox = (props) => {
     if (accessOptions.includes("FilterEditing")) {
       const filterItem = {
         key: CustomFilter,
-        title: t("CustomFilter"),
-        label: t("CustomFilter"),
+        title: t("Common:CustomFilter"),
+        label: t("Common:CustomFilter"),
         icon: CustomFilterReactSvgUrl,
         itemId: itemId,
         dataAccess: CustomFilter,
@@ -147,8 +147,8 @@ const AccessComboBox = (props) => {
     if (accessOptions.includes("Comment")) {
       const commentItem = {
         key: Comment,
-        title: t("Comment"),
-        label: t("Comment"),
+        title: t("Common:Comment"),
+        label: t("Common:Comment"),
         icon: AccessCommentReactSvgUrl,
         itemId: itemId,
         dataAccess: Comment,
@@ -164,8 +164,8 @@ const AccessComboBox = (props) => {
     if (accessOptions.includes("ReadOnly")) {
       const readItem = {
         key: ReadOnly,
-        title: t("ReadOnly"),
-        label: t("ReadOnly"),
+        title: t("Common:ReadOnly"),
+        label: t("Common:ReadOnly"),
         icon: EyeReactSvgUrl,
         itemId: itemId,
         dataAccess: ReadOnly,
@@ -181,8 +181,8 @@ const AccessComboBox = (props) => {
     if (accessOptions.includes("DenyAccess")) {
       const denyItem = {
         key: DenyAccess,
-        title: t("DenyAccess"),
-        label: t("DenyAccess"),
+        title: t("Common:DenyAccess"),
+        label: t("Common:DenyAccess"),
         icon: AccessNoneReactSvgUrl,
         itemId: itemId,
         dataAccess: DenyAccess,

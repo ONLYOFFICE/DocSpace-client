@@ -94,10 +94,8 @@ const SubmitToGalleryTile = ({
       />
 
       <div className="info">
-        <div className="title">
-          {t("FormGallery:SubmitToGalleryBlockHeader")}
-        </div>
-        <div className="body">{t("FormGallery:SubmitToGalleryBlockBody")}</div>
+        <div className="title">{t("Common:SubmitToGalleryBlockHeader")}</div>
+        <div className="body">{t("Common:SubmitToGalleryBlockBody")}</div>
       </div>
 
       <Button

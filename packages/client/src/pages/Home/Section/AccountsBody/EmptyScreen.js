@@ -20,8 +20,8 @@ const EmptyScreen = ({
   const { t } = useTranslation(["People", "Common"]);
   const isPeopleAccounts = window.location.pathname.includes("accounts/people");
 
-  const title = t("NotFoundUsers");
-  const description = t("NotFoundUsersDescription");
+  const title = t("Common:NotFoundUsers");
+  const description = t("Common:NotFoundUsersDescription");
 
   const onResetFilter = () => {
     setIsLoading(true);

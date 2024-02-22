@@ -461,26 +461,40 @@ const FilterBlock = ({
             <PeopleSelector
               withOutCurrentAuthorizedUser
               className="people-selector"
-              isMultiSelect={false}
-              onAccept={selectOption}
-              onBackClick={onArrowClick}
-              headerLabel={selectorLabel}
+              onSubmit={selectOption}
+              submitButtonLabel=""
+              disableSubmitButton={false}
+              withHeader
+              headerProps={{
+                onBackClick: onArrowClick,
+                headerLabel: selectorLabel,
+                withoutBackButton: false,
+              }}
               currentUserId={userId}
             />
           ) : showSelector.type === FilterSelectorTypes.groups ? (
             <GroupsSelector
               className="group-selector"
-              onAccept={selectOption}
-              onBackClick={onArrowClick}
-              headerLabel={selectorLabel}
+              onSubmit={selectOption}
+              withHeader
+              headerProps={{
+                onBackClick: onArrowClick,
+                headerLabel: selectorLabel,
+                withoutBackButton: false,
+              }}
             />
           ) : (
             <RoomSelector
-              className="people-selector"
+              className="room-selector"
+              onSubmit={selectOption}
+              withHeader
+              headerProps={{
+                onBackClick: onArrowClick,
+                headerLabel: selectorLabel,
+                withoutBackButton: false,
+              }}
               isMultiSelect={false}
-              onAccept={selectOption}
-              onBackClick={onArrowClick}
-              headerLabel={selectorLabel}
+              withSearch
             />
           )}
           <StyledControlContainer onClick={hideFilterBlock}>

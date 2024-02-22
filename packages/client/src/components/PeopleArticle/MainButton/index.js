@@ -11,7 +11,6 @@ import { MainButton } from "@docspace/shared/components/main-button";
 import InviteDialog from "../../dialogs/InviteDialog/index";
 import { withTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
-import Loaders from "@docspace/common/components/Loaders";
 import { inject, observer } from "mobx-react";
 import config from "PACKAGE_FILE";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";

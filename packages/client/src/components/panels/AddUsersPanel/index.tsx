@@ -130,7 +130,6 @@ const AddUsersPanel = ({
 }: AddUsersPanelProps) => {
   const theme = useTheme();
   const { t } = useTranslation([
-    "PeopleSelector",
     "SharingPanel",
     "PeopleTranslations",
     "Common",

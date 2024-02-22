@@ -15,7 +15,7 @@ import {
   startRestore,
 } from "@docspace/shared/api/portal";
 import { toastr } from "@docspace/shared/components/toast";
-import Loaders from "@docspace/common/components/Loaders";
+import ListLoader from "@docspace/shared/skeletons/list";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { HelpButton } from "@docspace/shared/components/help-button";
@@ -71,7 +71,7 @@ const BackupListModalDialog = (props) => {
   React.useEffect(() => {
     getBackupHistory()
       .then((filesList) =>
-        setState((val) => ({ ...val, filesList, isLoading: false }))
+        setState((val) => ({ ...val, filesList, isLoading: false })),
       )
       .catch(() => setState((val) => ({ ...val, isLoading: false })));
   }, []);
@@ -94,7 +94,7 @@ const BackupListModalDialog = (props) => {
     deleteBackupHistory()
       .then(() => getBackupHistory())
       .then((filesList) =>
-        setState((val) => ({ ...val, filesList, isLoading: false }))
+        setState((val) => ({ ...val, filesList, isLoading: false })),
       )
       .catch((error) => {
         toastr.error(error);
@@ -114,7 +114,7 @@ const BackupListModalDialog = (props) => {
           isLoading: false,
           selectedFileIndex: null,
           selectedFileId: null,
-        }))
+        })),
       )
       .catch((error) => {
         toastr.error(error);
@@ -151,9 +151,9 @@ const BackupListModalDialog = (props) => {
           combineUrl(
             window.DocSpaceConfig?.proxy?.url,
             config.homepage,
-            "/preparation-portal"
-          )
-        )
+            "/preparation-portal",
+          ),
+        ),
       )
       .catch((error) => toastr.error(error))
       .finally(() =>
@@ -162,7 +162,7 @@ const BackupListModalDialog = (props) => {
           isLoading: false,
           selectedFileIndex: null,
           selectedFileId: null,
-        }))
+        })),
       );
   };
 
@@ -248,7 +248,7 @@ const BackupListModalDialog = (props) => {
                 )
               ) : (
                 <div className="loader" key="loader">
-                  <Loaders.ListLoader count={7} />
+                  <ListLoader count={7} />
                 </div>
               )}
             </div>
@@ -318,6 +318,6 @@ export default inject(({ settingsStore, backup }) => {
   };
 })(
   withTranslation(["Settings", "Common", "Translations"])(
-    observer(BackupListModalDialog)
-  )
+    observer(BackupListModalDialog),
+  ),
 );

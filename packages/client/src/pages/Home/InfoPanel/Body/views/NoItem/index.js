@@ -1,7 +1,5 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
-import withLoader from "@docspace/client/src/HOCs/withLoader";
-import Loaders from "@docspace/common/components/Loaders/index.js";
 import NoGalleryItem from "./NoGalleryItem";
 import NoRoomItem from "./NoRoomItem";
 import NoFileOrFolderItem from "./NoFileOrFolderItem";

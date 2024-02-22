@@ -7,7 +7,7 @@ import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-c
 import { withTranslation } from "react-i18next";
 import TileContainer from "./TilesView/sub-components/TileContainer";
 import FileTile from "./TilesView/FileTile";
-import Loaders from "@docspace/common/components/Loaders";
+import { TilesSkeleton } from "@docspace/shared/skeletons/tiles";
 import SubmitToGalleryTile from "./TilesView/sub-components/SubmitToGalleryTile";
 import { Link } from "@docspace/shared/components/link";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
@@ -75,7 +75,7 @@ const SectionBodyContent = ({
   }, [tReady, oformFiles]);
 
   return !(categoryFilterLoaded && languageFilterLoaded && oformFilesLoaded) ? (
-    <Loaders.Tiles foldersCount={0} withTitle={false} />
+    <TilesSkeleton foldersCount={0} withTitle={false} />
   ) : !hasGalleryFiles ? (
     <EmptyScreenContainer
       imageSrc={

@@ -731,7 +731,6 @@ export default inject(({ settingsStore, authStore }) => {
   const { providers, thirdPartyLogin, capabilities } = authStore;
   const {
     passwordSettings,
-    greetingSettings,
     hashSettings,
     defaultPage,
     getSettings,

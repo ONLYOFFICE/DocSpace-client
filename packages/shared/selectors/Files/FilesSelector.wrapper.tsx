@@ -2,8 +2,8 @@ import React from "react";
 import { i18n } from "i18next";
 import { I18nextProvider } from "react-i18next";
 
-import FilesSelector from ".";
 import { FilesSelectorProps } from "./FilesSelector.types";
+import FilesSelector from ".";
 
 const FilesSelectorWrapper = ({
   i18nProp,

@@ -300,10 +300,6 @@ module.exports = (env, argv) => {
           "./src/components/dialogs/PreparationPortalDialog/PreparationPortalDialogWrapper.js",
         "./SharingDialog": "./src/components/panels/SharingDialog",
         "./utils": "./src/helpers/filesUtils.js",
-        "./SelectFileDialog":
-          "./src/components/FilesSelector/FilesSelectorWrapper",
-        "./SelectFolderDialog":
-          "./src/components/FilesSelector/FilesSelectorWrapper",
         "./BrandingPage":
           "./src/pages/PortalSettings/categories/common/branding.js",
         "./WhiteLabelPage":
@@ -323,7 +319,7 @@ module.exports = (env, argv) => {
         ...deps,
         ...sharedDeps,
       },
-    })
+    }),
   );
 
   if (!!env.hideText) {
@@ -349,7 +345,7 @@ module.exports = (env, argv) => {
             color: rgba(0, 0, 0, 0) !important;
         }
         </style>`,
-      })
+      }),
     );
   } else {
     config.plugins.push(
@@ -364,7 +360,7 @@ module.exports = (env, argv) => {
         configUrl: `/static/scripts/config.json?hash=${
           runtime.checksums["config.json"] || dateHash
         }`,
-      })
+      }),
     );
   }
 

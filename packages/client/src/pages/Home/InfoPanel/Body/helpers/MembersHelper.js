@@ -72,7 +72,7 @@ class MembersHelper {
           { key: "s2", isSeparator: true },
           {
             key: "remove",
-            label: this.t("Translations:Remove"),
+            label: this.t("Common:Remove"),
             access: ShareAccessRights.None,
           },
         ]

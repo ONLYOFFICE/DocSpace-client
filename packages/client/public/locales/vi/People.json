@@ -1,7 +1,5 @@
 {
   "LblInviteAgain": "Mời lại",
   "MessageEmailActivationInstuctionsSentOnEmail": "Email hướng dẫn kích hoạt đã được gửi đến địa chỉ email <1>{{email}}</1>.",
-  "NotFoundUsers": "Không tìm thấy người dùng",
-  "NotFoundUsersDescription": "Không có người dùng nào phù hợp với tìm kiếm của bạn. Vui lòng điều chỉnh thông số tìm kiếm của bạn hoặc xóa trường tìm kiếm để xem toàn bộ danh sách người dùng.",
   "UserStatus": "Trạng thái"
 }

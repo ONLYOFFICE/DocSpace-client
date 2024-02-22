@@ -10,7 +10,7 @@ import { SettingsStore } from "./SettingsStore";
 export const userStore = new UserStore();
 export const tfaStore = new TfaStore();
 export const bannerStore = new BannerStore();
-export const currentQuotaStore = new CurrentQuotasStore();
+export const currentQuotaStore = new CurrentQuotasStore(userStore);
 export const paymentQuotasStore = new PaymentQuotasStore();
 export const currentTariffStatusStore = new CurrentTariffStatusStore();
 export const settingsStore = new SettingsStore();

@@ -9,7 +9,7 @@ import { InputBlock } from "@docspace/shared/components/input-block";
 import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
-import Loaders from "@docspace/common/components/Loaders";
+import { SettingsDSConnectSkeleton } from "@docspace/shared/skeletons/settings";
 import { DeviceType } from "@docspace/shared/enums";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
@@ -132,7 +132,7 @@ const DocumentService = ({
     internalUrl == initInternalUrl &&
     portalUrl == initPortalUrl;
 
-  if (isLoading || !ready) return <Loaders.SettingsDSConnect />;
+  if (isLoading || !ready) return <SettingsDSConnectSkeleton />;
 
   const buttonSize =
     currentDeviceType === DeviceType.desktop ? "small" : "normal";

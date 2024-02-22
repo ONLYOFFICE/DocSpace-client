@@ -6,7 +6,7 @@ import {
   getBackupStorage,
   getStorageRegions,
 } from "@docspace/shared/api/settings";
-import RestoreBackupLoader from "@docspace/common/components/Loaders/RestoreBackupLoader";
+import RestoreBackupLoader from "@docspace/shared/skeletons/backup/RestoreBackup";
 import { toastr } from "@docspace/shared/components/toast";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { BackupStorageType, DeviceType } from "@docspace/shared/enums";

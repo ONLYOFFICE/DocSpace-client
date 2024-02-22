@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { RowsSkeleton } from "@docspace/shared/skeletons";
+import { TilesSkeleton } from "@docspace/shared/skeletons/tiles";
 
 import { isMobile, isTablet } from "@docspace/shared/utils";
 
@@ -32,9 +33,9 @@ const EmptyContainerLoader = ({ viewAs, style, ...rest }) => {
     <div {...rest} style={{ display: "contents", style }}>
       {viewAs === "tile" ? (
         !viewMobile && !viewTablet ? (
-          <Loaders.Tiles filesCount={7} />
+          <TilesSkeleton filesCount={7} />
         ) : (
-          <Loaders.Tiles />
+          <TilesSkeleton />
         )
       ) : (
         <RowsSkeleton count={(viewMobile && 8) || (viewTablet && 12) || 9} />

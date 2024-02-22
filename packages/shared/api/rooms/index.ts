@@ -64,6 +64,12 @@ export function getRoomMembers(id, filter) {
   };
 
   return request(options).then((res) => {
+    res.items.forEach((item) => {
+      if (item.sharedTo.manager) {
+        item.sharedTo.isGroup = true;
+      }
+    });
+
     return res;
   });
 }
@@ -339,6 +345,12 @@ export const setRoomSecurity = async (id, data) => {
 
   const res = await request(options);
 
+  res.members.forEach((item) => {
+    if (item.sharedTo.manager) {
+      item.sharedTo.isGroup = true;
+    }
+  });
+
   return res;
 };
 
@@ -410,4 +422,31 @@ export function validatePublicRoomPassword(key, passwordHash) {
     url: `files/share/${key}/password`,
     data: { password: passwordHash },
   });
+}
+
+export function setCustomRoomQuota(roomIds, quota) {
+  const data = {
+    roomIds,
+    quota,
+  };
+  const options = {
+    method: "put",
+    url: "files/rooms/roomquota",
+    data,
+  };
+
+  return request(options);
+}
+
+export function resetRoomQuota(roomIds) {
+  const data = {
+    roomIds,
+  };
+  const options = {
+    method: "put",
+    url: "files/rooms/resetquota",
+    data,
+  };
+
+  return request(options);
 }

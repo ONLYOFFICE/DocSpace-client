@@ -30,12 +30,20 @@ type TRoomContent = {
 
 export const RoomContent = ({ item, isCurrentPortal }: TRoomContent) => {
   const { t } = useTranslation(["Management", "Common", "Settings"]);
+ 
+  const { roomAdminCount, usersCount, roomsCount, usedSize } =
+    item?.quotaUsage || {
+      roomAdminCount: null,
+      usersCount: null,
+      roomsCount: null,
+    };
+  const { customQuota } = item;
 
-  const { roomAdminCount, usersCount, storageSize, roomsCount, usedSize } =
-    item?.quotaUsage;
-
-  const maxStorage = getConvertedSize(t, storageSize);
+  const maxStorage = customQuota && getConvertedSize(t, customQuota);
   const usedStorage = getConvertedSize(t, usedSize);
+
+  const storageSpace =
+    customQuota >= 0 ? `${usedStorage}/${maxStorage}` : `${usedStorage}`;
 
   return (
     <StyledRowContent
@@ -64,8 +72,7 @@ export const RoomContent = ({ item, isCurrentPortal }: TRoomContent) => {
         {`${t("PortalStats", {
           roomCount: roomsCount,
           userCount: roomAdminCount + usersCount,
-          usedStorage,
-          maxStorage,
+          storageSpace,
         })}`}
       </Text>
     </StyledRowContent>

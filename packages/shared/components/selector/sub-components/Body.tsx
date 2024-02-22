@@ -11,12 +11,13 @@ import { SelectAll } from "./SelectAll";
 import { EmptyScreen } from "./EmptyScreen";
 import { BreadCrumbs } from "./BreadCrumbs";
 
-import { StyledBody } from "../Selector.styled";
+import { StyledBody, StyledTabs } from "../Selector.styled";
 import { BodyProps } from "../Selector.types";
 import { Item } from "./Item";
 
 const CONTAINER_PADDING = 16;
 const HEADER_HEIGHT = 54;
+const TABS_HEIGHT = 40;
 const BREAD_CRUMBS_HEIGHT = 38;
 const SEARCH_HEIGHT = 44;
 const BODY_DESCRIPTION_TEXT_HEIGHT = 32;
@@ -30,8 +31,9 @@ const Body = ({
   isSearch,
   isAllIndeterminate,
   isAllChecked,
-  placeholder,
-  value,
+  searchPlaceholder,
+  setIsSearch,
+  searchValue,
   onSearch,
   onClearSearch,
   items,
@@ -65,6 +67,10 @@ const Body = ({
   withFooterCheckbox,
   descriptionText,
   withHeader,
+
+  withTabs,
+  tabsData,
+  activeTabId,
 }: BodyProps) => {
   const [bodyHeight, setBodyHeight] = React.useState(0);
 
@@ -130,6 +136,7 @@ const Body = ({
   let listHeight = bodyHeight - CONTAINER_PADDING;
 
   if (withSearch || isSearch || itemsCount > 0) listHeight -= SEARCH_HEIGHT;
+  if (withTabs) listHeight -= TABS_HEIGHT;
 
   if (withBreadCrumbs) listHeight -= BREAD_CRUMBS_HEIGHT;
 
@@ -152,6 +159,7 @@ const Body = ({
       headerHeight={HEADER_HEIGHT}
       footerVisible={footerVisible}
       withHeader={withHeader}
+      withTabs={withTabs}
     >
       {withBreadCrumbs ? (
         isBreadCrumbsLoading ? (
@@ -165,14 +173,25 @@ const Body = ({
         )
       ) : null}
 
+      {withTabs && tabsData && (
+        <StyledTabs
+          startSelect={0}
+          data={tabsData}
+          forsedActiveItemId={activeTabId}
+        />
+      )}
+
       {isSearchLoading || isBreadCrumbsLoading ? (
         searchLoader
-      ) : withSearch || isSearch || (itemsCount > 0 && withSearch) ? (
+      ) : withSearch ||
+        (itemsCount > 0 && withSearch) ||
+        (withSearch && isSearch) ? (
         <Search
-          placeholder={placeholder}
-          value={value}
+          placeholder={searchPlaceholder}
+          value={searchValue}
           onSearch={onSearch}
           onClearSearch={onClearSearch}
+          setIsSearch={setIsSearch}
         />
       ) : null}
 
@@ -180,7 +199,7 @@ const Body = ({
         <Scrollbar style={{ height: listHeight }}>{rowLoader}</Scrollbar>
       ) : itemsCount === 0 ? (
         <EmptyScreen
-          withSearch={isSearch && !!value}
+          withSearch={isSearch}
           image={emptyScreenImage}
           header={emptyScreenHeader}
           description={emptyScreenDescription}
@@ -197,8 +216,8 @@ const Body = ({
             <SelectAll
               label={selectAllLabel}
               icon={selectAllIcon}
-              isChecked={isAllChecked}
-              isIndeterminate={isAllIndeterminate}
+              isChecked={isAllChecked || false}
+              isIndeterminate={isAllIndeterminate || false}
               onSelectAll={onSelectAll}
               isLoading={isLoading}
               rowLoader={rowLoader}

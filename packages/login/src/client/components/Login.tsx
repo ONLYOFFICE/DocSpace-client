@@ -61,7 +61,6 @@ const Login: React.FC<ILoginProps> = ({
 
   useEffect(() => {
     if (search) {
-     
       const encodeString = search.slice(search.indexOf("=") + 1);
 
       const decodeString = atob(encodeString);
@@ -200,7 +199,7 @@ const Login: React.FC<ILoginProps> = ({
         ssoSVG: SSOIcon,
       }
     : {};
-  console.log("invitationLinkData.type", invitationLinkData.type);
+
   return (
     <LoginFormWrapper
       id="login-page"

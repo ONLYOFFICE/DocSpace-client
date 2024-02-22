@@ -132,14 +132,14 @@ export const RegisterContainer = styled.div`
     p{
       text-align: center;
     }
-    .sign-in-container {
+    .back-sign-in-container {
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
 
       margin-bottom: 16px;
-      p:first-child {
+      .back-button {
         position: absolute;
         max-width: 60px;
         text-overflow: ellipsis;

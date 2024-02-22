@@ -52,19 +52,21 @@ const DEFAULT_PORTAL_TEXT =
 const DEFAULT_CREATION_TEXT =
   "A DocSpace account will be created for {{email}}. Please, complete your registration:";
 
-const RegistrationFormGreeting = ({ email, t, setRegistrationForm }) => {
+const RegistrationFormGreeting = ({ email, t, setRegistrationForm, type }) => {
   const onClickBack = () => {
     setRegistrationForm(false);
   };
   return (
     <div className="greeting-container">
-      <div className="sign-in-container">
-        <Text fontWeight={600} onClick={onClickBack}>
-          {t("Back")}
-        </Text>
+      <div className="back-sign-in-container">
+        {type === "LinkInvite" && (
+          <Text fontWeight={600} onClick={onClickBack} className="back-button">
+            {t("Back")}
+          </Text>
+        )}
 
         <Text fontWeight={600} fontSize={"16px"}>
-          {t("Common:LoginButton")}
+          {t("SignUp")}
         </Text>
       </div>
       <Text>
@@ -472,7 +474,7 @@ const CreateUserForm = (props) => {
         <ConfirmContainer>
           <GreetingContainer>
             <DocspaceLogo className="docspace-logo" />
-            {showGreeting && (
+            {showGreeting && linkData.type === "LinkInvite" && (
               <div className="tooltip">
                 <Text fontSize="16px">
                   <Trans
@@ -558,6 +560,7 @@ const CreateUserForm = (props) => {
                           email={email}
                           t={t}
                           setRegistrationForm={setRegistrationForm}
+                          type={linkData.type}
                         />
                         <FieldContainer
                           className="form-field"
@@ -671,7 +674,7 @@ const CreateUserForm = (props) => {
                           label={
                             isLoading
                               ? t("Common:LoadingProcessing")
-                              : t("LoginRegistryButton")
+                              : t("SignUp")
                           }
                           tabIndex={1}
                           isDisabled={isLoading}

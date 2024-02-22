@@ -10,6 +10,7 @@ import ThirdPartyComboBox from "./ThirdPartyComboBox";
 
 import FolderInput from "./FolderInput";
 import { getOAuthToken } from "@docspace/shared/utils/common";
+import { RoomsType } from "@docspace/shared/enums";
 
 const StyledThirdPartyStorage = styled(StyledParam)`
   flex-direction: column;
@@ -40,12 +41,12 @@ const ThirdPartyStorage = ({
   isDisabled,
   currentColorScheme,
   isRoomAdmin,
+  roomType,
 }) => {
   const onChangeIsThirdparty = () => {
     if (isDisabled) return;
 
     if (!connectItems.length) {
-
       const data = isRoomAdmin ? (
         <Text as="p">{t("ThirdPartyStorageRoomAdminNoStorageAlert")}</Text>
       ) : (
@@ -93,15 +94,19 @@ const ThirdPartyStorage = ({
       storageFolderId,
     });
 
+  const isPublicRoom = roomType === RoomsType.PublicRoom;
+
   return (
     <StyledThirdPartyStorage>
-      <ToggleParam
-        id="shared_third-party-storage-toggle"
-        title={t("Common:ThirdPartyStorage")}
-        description={t("ThirdPartyStorageDescription")}
-        isChecked={storageLocation.isThirdparty}
-        onCheckedChange={onChangeIsThirdparty}
-      />
+      {isPublicRoom && (
+        <ToggleParam
+          id="shared_third-party-storage-toggle"
+          title={t("Common:ThirdPartyStorage")}
+          description={t("ThirdPartyStorageDescription")}
+          isChecked={storageLocation.isThirdparty}
+          onCheckedChange={onChangeIsThirdparty}
+        />
+      )}
 
       {storageLocation.isThirdparty && (
         <ThirdPartyComboBox
@@ -183,7 +188,7 @@ export default inject(
             ...(item[0] === "WebDav" && {
               category: item[item.length - 1],
             }),
-          }
+          },
       )
       .filter((item) => !!item);
 
@@ -207,5 +212,5 @@ export default inject(
       currentColorScheme,
       isRoomAdmin,
     };
-  }
+  },
 )(observer(ThirdPartyStorage));

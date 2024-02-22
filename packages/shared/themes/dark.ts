@@ -16,6 +16,7 @@ const {
   graySilver,
   gray,
   grayMain,
+  grayDark,
   shuttleGrey,
 
   blueMain,
@@ -3193,6 +3194,11 @@ const Dark: TTheme = {
   sdkPresets: {
     borderColor: "#474747",
     secondaryColor: "#ADADAD",
+  },
+
+  sideBarRow: {
+    titleColor: white,
+    metaDataColor: grayDark,
   },
 };
 

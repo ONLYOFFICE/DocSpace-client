@@ -3218,6 +3218,10 @@ export const getBaseTheme = () => {
       borderColor: "#d0d5da",
       secondaryColor: "#657077",
     },
+    sideBarRow: {
+      titleColor: black,
+      metaDataColor: gray,
+    },
   };
 };
 

@@ -1,10 +1,10 @@
-import { IconButton } from "@docspace/shared/components/icon-button";
-import * as Styled from "./index.styled";
-import PlusSvgUrl from "PUBLIC_DIR/images/plus.svg?url";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
+import PlusSvgUrl from "PUBLIC_DIR/images/icons/16/button.plus.react.svg?url";
+import * as Styled from "./index.styled";
 import SelectGroupMembersPanel from "./SelectGroupMembersPanel";
 import GroupMemberRow from "../GroupMemberRow";
-import { useTranslation } from "react-i18next";
 
 interface MembersParamProps {
   groupManager: object | null;
@@ -19,7 +19,6 @@ const MembersParam = ({
   setGroupMembers,
   onClose,
 }: MembersParamProps) => {
-
   const { t } = useTranslation(["Common", "PeopleTranslation"]);
 
   const [selectMembersPanelIsVisible, setSelectMembersPanelIsVisible] =
@@ -51,9 +50,7 @@ const MembersParam = ({
       <Styled.Header>{t("Common:Members")}</Styled.Header>
 
       <Styled.AddMembersButton onClick={onShowSelectMembersPanel}>
-        <div className="add-button">
-          <IconButton className="plus-icon" size={12} iconName={PlusSvgUrl} />
-        </div>
+        <SelectorAddButton iconName={PlusSvgUrl} />
         <div className="label">{t("PeopleTranslations:AddMembers")}</div>
       </Styled.AddMembersButton>
 
@@ -65,7 +62,7 @@ const MembersParam = ({
               groupMember={member}
               onClickRemove={() => onRemoveUserById(member.id)}
             />
-          )
+          ),
       )}
     </div>
   );

@@ -83,7 +83,10 @@ const UserContent = ({
     statusType === "pending" || statusType === "disabled"
       ? theme.peopleTableRow.pendingNameColor
       : theme.peopleTableRow.nameColor;
-  const sideInfoColor = theme.peopleTableRow.pendingSideInfoColor;
+  const sideInfoColor =
+    statusType === "pending" || statusType === "disabled"
+      ? theme.peopleTableRow.pendingSideInfoColor
+      : theme.peopleTableRow.sideInfoColor;
 
   const roleLabel =
     role === "owner"

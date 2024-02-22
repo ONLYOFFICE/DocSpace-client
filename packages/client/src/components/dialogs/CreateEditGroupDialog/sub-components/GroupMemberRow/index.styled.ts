@@ -20,14 +20,14 @@ export const GroupMemberRow = styled.div<{}>`
     padding: 9px 0;
 
     .name {
-      color: #333;
+      color: ${({ theme }) => theme.sideBarRow.titleColor};
       font-size: ${({ theme }) => theme.getCorrectFontSize("14px")};
       font-weight: 600;
       line-height: 16px;
     }
 
     .email {
-      color: #a3a9ae;
+      color: ${({ theme }) => theme.sideBarRow.metaDataColor};
       font-size: ${({ theme }) => theme.getCorrectFontSize("10px")};
       font-weight: 400;
       line-height: normal;

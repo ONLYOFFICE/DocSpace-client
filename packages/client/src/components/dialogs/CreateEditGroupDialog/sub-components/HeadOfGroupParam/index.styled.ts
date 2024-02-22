@@ -20,23 +20,6 @@ export const SelectGroupManager = styled.div<{}>`
   cursor: pointer;
   margin: 8px 0;
 
-  .add-button {
-    width: 32px;
-    height: 32px;
-    background-color: #eceef1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .plus-icon: {
-      svg {
-        path {
-          fill: #657077;
-        }
-      }
-    }
-  }
-
   .label {
     font-size: ${({ theme }) => theme.getCorrectFontSize("13px")};
     font-weight: 600;

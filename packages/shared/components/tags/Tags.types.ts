@@ -10,6 +10,7 @@ export type TagType = {
   advancedOptions?: React.ReactNode[];
   /** Accepts the tag styles as disabled and disables clicking */
   isDisabled?: boolean;
+  roomType?: number;
 };
 
 export interface TagsProps {
@@ -24,5 +25,5 @@ export interface TagsProps {
   /** Accepts css style */
   style?: React.CSSProperties;
   /** Accepts the function that is called when the tag is selected */
-  onSelectTag: (tag?: string) => void;
+  onSelectTag: (tag?: object) => void;
 }

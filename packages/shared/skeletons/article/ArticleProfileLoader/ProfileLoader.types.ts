@@ -4,5 +4,4 @@ export interface ProfileLoaderProps {
   style?: React.CSSProperties;
   showText?: boolean;
   isVisitor?: boolean;
-  isVirtualKeyboardOpen?: boolean;
 }

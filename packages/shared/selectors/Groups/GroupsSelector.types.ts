@@ -1,28 +1,18 @@
-import { SelectorProps, TSelectorItem } from "../../components/selector";
+import {
+  TAccessRight,
+  TSelectorHeader,
+} from "../../components/selector/Selector.types";
+import { TSelectorItem } from "../../components/selector";
 
-type PickedSelectorProps = Pick<
-  SelectorProps,
-  | "id"
-  | "headerLabel"
-  | "className"
-  | "onBackClick"
-  | "onCancel"
-  | "isMultiSelect"
-  | "cancelButtonLabel"
-  | "emptyScreenDescription"
-  | "emptyScreenHeader"
-  | "emptyScreenImage"
-  | "withCancelButton"
-  | "withHeader"
-  | "searchEmptyScreenDescription"
-  | "searchEmptyScreenHeader"
-  | "searchEmptyScreenImage"
-  | "searchPlaceholder"
->;
-
-export interface GroupsSelectorProps extends PickedSelectorProps {
-  onAccept?: (items: GroupsSelectorItem[]) => void;
-  onSelect?: (item: GroupsSelectorItem) => void;
-}
+export type GroupsSelectorProps = TSelectorHeader & {
+  id?: string;
+  className?: string;
+  onSubmit: (
+    selectedItems: TSelectorItem[],
+    access?: TAccessRight | null,
+    fileName?: string,
+    isFooterCheckboxChecked?: boolean,
+  ) => void;
+};
 
 export type GroupsSelectorItem = Pick<TSelectorItem, "id" | "label">;

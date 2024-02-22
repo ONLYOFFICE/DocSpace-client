@@ -29,7 +29,7 @@ const Share = (props) => {
     shareChanged,
     setShareChanged,
   } = props;
-  const { t } = useTranslation(["SharingPanel", "Files"]);
+  const { t } = useTranslation(["SharingPanel", "Files", "Common"]);
   const [fileLinks, setFileLinks] = useState([]);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -60,7 +60,7 @@ const Share = (props) => {
     const link = await getPrimaryFileLink(infoPanelSelection.id);
     setFileLinks([link]);
     copy(link.sharedTo.shareLink);
-    toastr.success(t("SharingPanel:GeneralAccessLinkCopied"));
+    toastr.success(t("Common:GeneralAccessLinkCopied"));
   };
 
   const addAdditionalLinks = async () => {
@@ -94,7 +94,7 @@ const Share = (props) => {
       updateLink(link, res);
 
       copy(link.sharedTo.shareLink);
-      toastr.success(t("Files:LinkSuccessfullyCopied"));
+      toastr.success(t("Common:LinkSuccessfullyCopied"));
     } catch (e) {
       toastr.error(e);
     }
@@ -115,17 +115,17 @@ const Share = (props) => {
       if (item.access === ShareAccessRights.None) {
         deleteLink(link.sharedTo.id);
         if (link.sharedTo.primary) {
-          toastr.success(t("GeneralAccessLinkRemove"));
+          toastr.success(t("Common:GeneralAccessLinkRemove"));
         } else {
-          toastr.success(t("AdditionalLinkRemove"));
+          toastr.success(t("Common:AdditionalLinkRemove"));
         }
       } else {
         updateLink(link, res);
         if (item.access === ShareAccessRights.DenyAccess) {
-          toastr.success(t("LinkAccessDenied"));
+          toastr.success(t("Common:LinkAccessDenied"));
         } else {
           copy(link.sharedTo.shareLink);
-          toastr.success(t("Files:LinkSuccessfullyCopied"));
+          toastr.success(t("Common:LinkSuccessfullyCopied"));
         }
       }
     } catch (e) {
@@ -148,7 +148,7 @@ const Share = (props) => {
       updateLink(link, res);
 
       copy(link.sharedTo.shareLink);
-      toastr.success(t("Files:LinkSuccessfullyCopied"));
+      toastr.success(t("Common:LinkSuccessfullyCopied"));
     } catch (e) {
       toastr.error(e);
     }
@@ -178,8 +178,8 @@ const Share = (props) => {
   return (
     <div>
       <PublicRoomBar
-        headerText={t("ShareDocument")}
-        bodyText={t("ShareDocumentDescription")}
+        headerText={t("Common:ShareDocument")}
+        bodyText={t("Common:ShareDocumentDescription")}
         iconName={InfoIcon}
       />
       {isLoading ? (
@@ -189,7 +189,7 @@ const Share = (props) => {
           <StyledLinks>
             <div className="additional-link">
               <Text fontSize="14px" fontWeight={600} className="title-link">
-                {t("Files:SharedLinks")}
+                {t("Common:SharedLinks")}
               </Text>
               {fileLinks.length > 0 && (
                 <IconButton

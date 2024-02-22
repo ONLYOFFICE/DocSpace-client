@@ -40,7 +40,7 @@ const ConvertPasswordDialogComponent = (props) => {
 
   const dialogHeading = makeForm
     ? t("Common:MakeForm")
-    : t("Translations:CreateMasterFormFromFile");
+    : t("Common:CreateMasterFormFromFile");
 
   const onClose = () => {
     setConvertPasswordDialogVisible(false);
@@ -66,9 +66,9 @@ const ConvertPasswordDialogComponent = (props) => {
             combineUrl(
               window.DocSpaceConfig?.proxy?.url,
               config.homepage,
-              "/doceditor"
+              "/doceditor",
             ),
-            "_blank"
+            "_blank",
           )
         : null;
 
@@ -95,7 +95,7 @@ const ConvertPasswordDialogComponent = (props) => {
       if (makeForm) {
         copyAsAction(id, newTitle, folderId, false, password)
           .then(() =>
-            toastr.success(t("SuccessfullyCreated", { fileTitle: newTitle }))
+            toastr.success(t("SuccessfullyCreated", { fileTitle: newTitle })),
           )
           .then(() => {
             onClose();
@@ -183,7 +183,7 @@ const ConvertPasswordDialogComponent = (props) => {
       !passwordValid && setPasswordValid(true);
       setPassword(password);
     },
-    [onChangePassword, passwordValid]
+    [onChangePassword, passwordValid],
   );
 
   return (
@@ -203,11 +203,11 @@ const ConvertPasswordDialogComponent = (props) => {
                 {makeForm
                   ? t("Translations:FileProtected").concat(
                       ". ",
-                      t("ConversionPasswordMasterFormCaption")
+                      t("ConversionPasswordMasterFormCaption"),
                     )
                   : t("Translations:FileProtected").concat(
                       ". ",
-                      t("ConversionPasswordFormCaption")
+                      t("ConversionPasswordFormCaption"),
                     )}
               </Text>
             </div>
@@ -289,5 +289,5 @@ export default inject(
       isDesktop: isDesktopClient,
       completeAction,
     };
-  }
+  },
 )(observer(ConvertPasswordDialog));

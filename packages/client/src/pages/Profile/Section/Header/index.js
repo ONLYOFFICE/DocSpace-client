@@ -12,7 +12,7 @@ import { inject, observer } from "mobx-react";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import Headline from "@docspace/shared/components/headline/Headline";
-import Loaders from "@docspace/common/components/Loaders";
+import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 import { DeleteSelfProfileDialog } from "SRC_DIR/components/dialogs";
 import { DeleteOwnerProfileDialog } from "SRC_DIR/components/dialogs";
 
@@ -125,7 +125,7 @@ const Header = (props) => {
     // setFilter(filter);
   };
 
-  if (showProfileLoader) return <Loaders.SectionHeader />;
+  if (showProfileLoader) return <SectionHeaderSkeleton />;
 
   return (
     <StyledHeader
@@ -226,7 +226,9 @@ export default inject(
       showProfileLoader,
       profileClicked,
     };
-  }
+  },
 )(
-  observer(withTranslation(["Profile", "Common", "PeopleTranslations"])(Header))
+  observer(
+    withTranslation(["Profile", "Common", "PeopleTranslations"])(Header),
+  ),
 );

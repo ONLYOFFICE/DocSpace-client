@@ -136,7 +136,7 @@ const ExpiredComboBox = ({ link, changeExpirationOption, isDisabled }) => {
     <div ref={bodyRef}>
       {isExpired ? (
         <Text className="expire-text" as="div" fontSize="12px" fontWeight="400">
-          {t("LinkExpired")}{" "}
+          {t("Common:LinkExpired")}{" "}
           <Link
             type="action"
             fontWeight={400}

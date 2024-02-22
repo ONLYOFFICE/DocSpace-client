@@ -775,11 +775,7 @@ class FilesStore {
   };
 
   setIsEmptyPage = (isEmptyPage) => {
-    // this.isEmptyPage = isEmptyPage;
-
-    runInAction(() => {
-      this.isEmptyPage = isEmptyPage;
-    });
+    this.isEmptyPage = isEmptyPage;
   };
 
   setIsLoadedEmptyPage = (isLoadedEmptyPage) => {
@@ -1419,66 +1415,6 @@ class FilesStore {
         const isPrivacyFolder =
           data.current.rootFolderType === FolderType.Privacy;
 
-        runInAction(() => {
-          const isEmptyList = [...data.folders, ...data.files].length === 0;
-
-          if (filter && isEmptyList) {
-            const {
-              authorType,
-              roomId,
-              search,
-              withSubfolders,
-              filterType,
-              searchInContent,
-            } = filter;
-            const isFiltered =
-              authorType ||
-              roomId ||
-              search ||
-              withSubfolders ||
-              filterType ||
-              searchInContent;
-
-            if (isFiltered) {
-              this.setIsEmptyPage(false);
-            } else {
-              this.setIsEmptyPage(isEmptyList);
-            }
-          } else {
-            this.setIsEmptyPage(isEmptyList);
-          }
-          this.setFolders(isPrivacyFolder && !isDesktop() ? [] : data.folders);
-          this.setFiles(isPrivacyFolder && !isDesktop() ? [] : data.files);
-        });
-
-        if (clearFilter) {
-          if (clearSelection) {
-            // Find not processed
-            const tempSelection = this.selection.filter(
-              (f) => !this.activeFiles.find((elem) => elem.id === f.id),
-            );
-            const tempBuffer =
-              this.bufferSelection &&
-              this.activeFiles.find(
-                (elem) => elem.id === this.bufferSelection.id,
-              ) == null
-                ? this.bufferSelection
-                : null;
-
-            // console.log({ tempSelection, tempBuffer });
-
-            // Clear all selections
-            this.setSelected("close");
-
-            // TODO: see bug 63479
-            if (this.selectedFolderStore?.id === folderId) {
-              // Restore not processed
-              tempSelection.length && this.setSelection(tempSelection);
-              tempBuffer && this.setBufferSelection(tempBuffer);
-            }
-          }
-        }
-
         const navigationPath = await Promise.all(
           data.pathParts.map(async (folder, idx) => {
             const { Rooms, Archive } = FolderType;
@@ -1555,6 +1491,66 @@ class FilesStore {
           ...{ new: data.new },
           // type,
         });
+
+        runInAction(() => {
+          const isEmptyList = [...data.folders, ...data.files].length === 0;
+
+          if (filter && isEmptyList) {
+            const {
+              authorType,
+              roomId,
+              search,
+              withSubfolders,
+              filterType,
+              searchInContent,
+            } = filter;
+            const isFiltered =
+              authorType ||
+              roomId ||
+              search ||
+              withSubfolders ||
+              filterType ||
+              searchInContent;
+
+            if (isFiltered) {
+              this.setIsEmptyPage(false);
+            } else {
+              this.setIsEmptyPage(isEmptyList);
+            }
+          } else {
+            this.setIsEmptyPage(isEmptyList);
+          }
+          this.setFolders(isPrivacyFolder && !isDesktop() ? [] : data.folders);
+          this.setFiles(isPrivacyFolder && !isDesktop() ? [] : data.files);
+        });
+
+        if (clearFilter) {
+          if (clearSelection) {
+            // Find not processed
+            const tempSelection = this.selection.filter(
+              (f) => !this.activeFiles.find((elem) => elem.id === f.id),
+            );
+            const tempBuffer =
+              this.bufferSelection &&
+              this.activeFiles.find(
+                (elem) => elem.id === this.bufferSelection.id,
+              ) == null
+                ? this.bufferSelection
+                : null;
+
+            // console.log({ tempSelection, tempBuffer });
+
+            // Clear all selections
+            this.setSelected("close");
+
+            // TODO: see bug 63479
+            if (this.selectedFolderStore?.id === folderId) {
+              // Restore not processed
+              tempSelection.length && this.setSelection(tempSelection);
+              tempBuffer && this.setBufferSelection(tempBuffer);
+            }
+          }
+        }
 
         this.clientLoadingStore.setIsSectionHeaderLoading(false);
 

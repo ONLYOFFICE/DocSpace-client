@@ -145,6 +145,7 @@ const PortalIntegration = (props) => {
           fontWeight="400"
           onClick={() => window.open(sdkLink, "_blank")}
         >
+          {" "}
           {t("APILink")}.
         </Link>
         <CSP t={t} />

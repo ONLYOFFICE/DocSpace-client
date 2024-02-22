@@ -9,7 +9,7 @@ import { Portal } from "@docspace/shared/components/portal";
 import tryRedirectTo from "@docspace/shared/utils/tryRedirectTo";
 import Error403 from "@docspace/shared/components/errors/Error403";
 
-import "@docspace/common/custom.scss";
+import "@docspace/shared/styles/custom.scss";
 
 import { useStore } from "./store";
 import SimpleHeader from "./SimpleHeader";

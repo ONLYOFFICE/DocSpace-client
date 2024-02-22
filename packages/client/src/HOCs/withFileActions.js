@@ -386,7 +386,7 @@ export default function withFileActions(WrappedFileItem) {
         (x) => x.id === item.id && x.fileExst === item.fileExst,
       );
 
-      const isDisabledDropItem = !item.security.Create;
+      const isDisabledDropItem = item.security?.Create === false;
 
       const draggable =
         !isRecycleBinFolder && selectedItem && !isDisabledDropItem;

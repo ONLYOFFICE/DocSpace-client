@@ -309,10 +309,9 @@ const StyledUserName = styled.div`
 
 const StyledProfileWrapper = styled.div<{
   showText?: boolean;
-  isVirtualKeyboardOpen?: boolean;
 }>`
   z-index: 209;
-  position: ${(props) => (props.isVirtualKeyboardOpen ? "absolute" : "fixed")};
+  position: absolute;
   bottom: 0;
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
@@ -416,13 +415,12 @@ const StyledWrapper = styled.div`
 
 const StyledHideArticleMenuButton = styled.div<{
   currentColorScheme: TColorScheme;
-  isVirtualKeyboardOpen: boolean;
   hideProfileBlock: boolean;
   showText: boolean;
 }>`
   display: flex;
   align-items: center;
-  position: ${(props) => (props.isVirtualKeyboardOpen ? "absolute" : "fixed")};
+  position: absolute;
   height: 44px;
   z-index: 209;
   bottom: ${(props) => (props.hideProfileBlock ? "16px" : "89px")};

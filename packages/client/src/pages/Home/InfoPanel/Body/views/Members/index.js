@@ -5,7 +5,7 @@ import { toastr } from "@docspace/shared/components/toast";
 
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 import { LINKS_LIMIT_COUNT } from "@docspace/shared/constants";
-import Loaders from "@docspace/common/components/Loaders";
+import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import MembersHelper from "../../helpers/MembersHelper";
 import MembersList from "./sub-components/MembersList";
 import User from "./User";
@@ -84,7 +84,7 @@ const Members = ({
     setInfoPanelMembers(newMembers);
   };
 
-  if (membersIsLoading) return <Loaders.InfoPanelViewLoader view="members" />;
+  if (membersIsLoading) return <InfoPanelViewLoader view="members" />;
   else if (!infoPanelMembers) return <></>;
 
   const [currentMember] = infoPanelMembers.administrators.filter(
@@ -127,7 +127,7 @@ const Members = ({
       publicRoomItems.push(
         <LinksBlock key="general-link_header">
           <Text fontSize="14px" fontWeight={600}>
-            {t("Files:SharedLinks")}
+            {t("Common:SharedLinks")}
           </Text>
 
           {!isArchiveFolder && (

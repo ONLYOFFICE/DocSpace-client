@@ -28,8 +28,8 @@ export default function withContent(WrappedContent) {
 
     const onContentRowClick = (checked, user, addToSelection = true) => {
       checked
-      ? setBufferSelection(user, addToSelection)
-      : setBufferSelection(null);
+        ? setBufferSelection(user, addToSelection)
+        : setBufferSelection(null);
     };
 
     const checkedProps = { checked };
@@ -49,7 +49,6 @@ export default function withContent(WrappedContent) {
       "Translations",
       "Files",
       "ChangeUserTypeDialog",
-      "RoomSelector",
       "DataReassignmentDialog",
     ]);
 

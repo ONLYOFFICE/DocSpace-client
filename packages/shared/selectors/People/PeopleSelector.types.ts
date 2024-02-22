@@ -1,5 +1,10 @@
-import { SelectorProps } from "../../components/selector";
 import PeopleFilter from "../../api/people/filter";
+import {
+  TSelectorCancelButton,
+  TSelectorCheckbox,
+  TSelectorHeader,
+  TSelectorSubmitButton,
+} from "../../components/selector/Selector.types";
 
 export interface UserTooltipProps {
   avatarUrl: string;
@@ -8,11 +13,18 @@ export interface UserTooltipProps {
   position: string;
 }
 
-export interface PeopleSelectorProps extends SelectorProps {
-  filter?: PeopleFilter | Function;
-  excludeItems?: string[];
-  currentUserId: string;
-  withOutCurrentAuthorizedUser?: boolean;
-  withAbilityCreateRoomUsers?: boolean;
-  filterUserId?: string;
-}
+export type PeopleSelectorProps = TSelectorHeader &
+  TSelectorCancelButton &
+  TSelectorCheckbox &
+  TSelectorSubmitButton & {
+    id?: string;
+    className?: string;
+    style?: React.CSSProperties;
+
+    filter?: PeopleFilter | Function;
+    excludeItems?: string[];
+    currentUserId: string;
+    withOutCurrentAuthorizedUser?: boolean;
+    withAbilityCreateRoomUsers?: boolean;
+    filterUserId?: string;
+  };

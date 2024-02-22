@@ -17,7 +17,7 @@ const SelectFolderDialog = ({
   titleSelectorFolder,
   fileInfo,
   getIsDisabled,
-
+  filesSettings,
   i18n,
 }: SelectFolderDialogProps) => {
   const { t } = useTranslation();
@@ -33,6 +33,7 @@ const SelectFolderDialog = ({
   return (
     <FilesSelectorWrapper
       i18nProp={i18n}
+      filesSettings={filesSettings}
       {...cancelButtonProps}
       withHeader
       withBreadCrumbs

@@ -15,7 +15,7 @@ const SelectFileDialog = ({
   onClose,
   onSubmit,
   fileInfo,
-
+  filesSettings,
   i18n,
 }: SelectFileDialogProps) => {
   const { t } = useTranslation();
@@ -50,6 +50,7 @@ const SelectFileDialog = ({
 
   return (
     <FilesSelectorWrapper
+      filesSettings={filesSettings}
       i18nProp={i18n}
       withoutBackButton
       withSearch

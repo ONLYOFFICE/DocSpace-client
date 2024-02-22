@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 import FilesSelectorWrapper from "@docspace/shared/selectors/Files/FilesSelector.wrapper";
 
@@ -14,9 +15,11 @@ const SelectFileDialog = ({
   onClose,
   onSubmit,
   fileInfo,
-  t,
+
   i18n,
 }: SelectFileDialogProps) => {
+  const { t } = useTranslation();
+
   const sessionPath = sessionStorage.getItem("filesSelectorPath");
 
   const headerLabel = fileTypeDetection.filterParam

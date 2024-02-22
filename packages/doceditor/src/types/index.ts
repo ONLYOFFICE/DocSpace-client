@@ -238,7 +238,7 @@ export interface SelectFolderDialogProps {
     selectedFileInfo: TSelectedFileInfo,
   ) => Promise<void>;
   fileInfo: TFile;
-  t: TTranslation | null;
+
   i18n: i18n;
 }
 
@@ -274,7 +274,7 @@ export interface SelectFileDialogProps {
     selectedFileInfo: TSelectedFileInfo,
   ) => Promise<void>;
   fileInfo: TFile;
-  t: TTranslation | null;
+
   i18n: i18n;
 }
 

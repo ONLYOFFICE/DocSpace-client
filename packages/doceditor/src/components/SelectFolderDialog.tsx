@@ -17,9 +17,10 @@ const SelectFolderDialog = ({
   titleSelectorFolder,
   fileInfo,
   getIsDisabled,
-  t,
+
   i18n,
 }: SelectFolderDialogProps) => {
+  const { t } = useTranslation();
   const sessionPath = sessionStorage.getItem("filesSelectorPath");
 
   const cancelButtonProps: TSelectorCancelButton = {

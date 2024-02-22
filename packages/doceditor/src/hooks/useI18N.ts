@@ -21,16 +21,16 @@ const useI18N = ({ settings, user }: UseI18NProps) => {
   }, [settings?.timezone]);
 
   React.useEffect(() => {
-    if (isInit.current || !user?.cultureName || !settings?.culture) return;
+    if (isInit.current || (!user?.cultureName && !settings?.culture)) return;
 
     isInit.current = true;
 
     const instance = getI18NInstance(
-      user.cultureName || "en",
-      settings.culture,
+      user?.cultureName ?? "en",
+      settings?.culture ?? "en",
     );
 
-    setI18N(instance);
+    if (instance) setI18N(instance);
   }, [settings?.culture, user?.cultureName]);
 
   return { i18n };

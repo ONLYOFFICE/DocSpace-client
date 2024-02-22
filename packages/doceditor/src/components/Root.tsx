@@ -100,86 +100,84 @@ const Root = ({
   } = useSelectFileDialog({ instanceId: instanceId ?? "" });
 
   return (
-    <I18nextProvider i18n={i18n}>
-      <ThemeProvider theme={theme} currentColorScheme={currentColorTheme}>
-        <ErrorBoundary
-          user={user ?? ({} as TUser)}
-          version={pkgFile.version}
-          firebaseHelper={firebaseHelper}
-          currentDeviceType={currentDeviceType}
-          whiteLabelLogoUrls={logoUrls}
-          isNextJS
-          theme={theme}
-          i18n={i18n}
-          onError={onError}
-        >
-          {isShowDeepLink ? (
-            <DeepLink
-              fileInfo={fileInfo}
-              logoUrls={logoUrls}
-              userEmail={user?.email}
-              theme={theme}
-              currentDeviceType={currentDeviceType}
-              deepLinkConfig={settings?.deepLink}
-              setIsShowDeepLink={setIsShowDeepLink}
-            />
-          ) : error && error.message !== "unauthorized" ? (
-            <ErrorContainer
-              headerText={t?.("Common:Error")}
-              customizedBodyText={getErrorMessage()}
-              isEditor
-            />
-          ) : (
-            <>
-              {config && user && documentserverUrl && fileInfo && (
-                <Editor
-                  config={config}
-                  user={user}
-                  view={IS_VIEW}
-                  successAuth={successAuth}
-                  doc={doc}
-                  t={t}
-                  documentserverUrl={documentserverUrl}
-                  fileInfo={fileInfo}
-                  onSDKRequestSaveAs={onSDKRequestSaveAs}
-                  onSDKRequestInsertImage={onSDKRequestInsertImage}
-                  onSDKRequestReferenceSource={onSDKRequestReferenceSource}
-                  onSDKRequestSelectDocument={onSDKRequestSelectDocument}
-                  onSDKRequestSelectSpreadsheet={onSDKRequestSelectSpreadsheet}
-                />
-              )}
-              <Toast />
-              {isVisibleSelectFolderDialog && !!socketHelper && (
-                <SelectFolderDialog
-                  socketHelper={socketHelper}
-                  isVisible={isVisibleSelectFolderDialog}
-                  onSubmit={onSubmitSelectFolderDialog}
-                  onClose={onCloseSelectFolderDialog}
-                  titleSelectorFolder={titleSelectorFolderDialog}
-                  fileInfo={fileInfo ?? ({} as TFile)}
-                  getIsDisabled={getIsDisabledSelectFolderDialog}
-                  t={t}
-                  i18n={i18n}
-                />
-              )}
-              {selectFileDialogVisible && !!socketHelper && (
-                <SelectFileDialog
-                  socketHelper={socketHelper}
-                  isVisible={selectFileDialogVisible}
-                  onSubmit={onSubmitSelectFileDialog}
-                  onClose={onCloseSelectFileDialog}
-                  getIsDisabled={getIsDisabledSelectFileDialog}
-                  fileTypeDetection={selectFileDialogFileTypeDetection}
-                  fileInfo={fileInfo ?? ({} as TFile)}
-                  t={t}
-                  i18n={i18n}
-                />
-              )}
-            </>
-          )}
-        </ErrorBoundary>
-      </ThemeProvider>
-    </I18nextProvider>
+    // <I18nextProvider i18n={i18n}>
+    <ThemeProvider theme={theme} currentColorScheme={currentColorTheme}>
+      <ErrorBoundary
+        user={user ?? ({} as TUser)}
+        version={pkgFile.version}
+        firebaseHelper={firebaseHelper}
+        currentDeviceType={currentDeviceType}
+        whiteLabelLogoUrls={logoUrls}
+        isNextJS
+        theme={theme}
+        i18n={i18n}
+        onError={onError}
+      >
+        {isShowDeepLink ? (
+          <DeepLink
+            fileInfo={fileInfo}
+            logoUrls={logoUrls}
+            userEmail={user?.email}
+            theme={theme}
+            currentDeviceType={currentDeviceType}
+            deepLinkConfig={settings?.deepLink}
+            setIsShowDeepLink={setIsShowDeepLink}
+          />
+        ) : error && error.message !== "unauthorized" ? (
+          <ErrorContainer
+            headerText={t?.("Common:Error")}
+            customizedBodyText={getErrorMessage()}
+            isEditor
+          />
+        ) : (
+          <>
+            {config && user && documentserverUrl && fileInfo && (
+              <Editor
+                config={config}
+                user={user}
+                view={IS_VIEW}
+                successAuth={successAuth}
+                doc={doc}
+                t={t}
+                documentserverUrl={documentserverUrl}
+                fileInfo={fileInfo}
+                onSDKRequestSaveAs={onSDKRequestSaveAs}
+                onSDKRequestInsertImage={onSDKRequestInsertImage}
+                onSDKRequestReferenceSource={onSDKRequestReferenceSource}
+                onSDKRequestSelectDocument={onSDKRequestSelectDocument}
+                onSDKRequestSelectSpreadsheet={onSDKRequestSelectSpreadsheet}
+              />
+            )}
+            <Toast />
+            {isVisibleSelectFolderDialog && !!socketHelper && (
+              <SelectFolderDialog
+                socketHelper={socketHelper}
+                isVisible={isVisibleSelectFolderDialog}
+                onSubmit={onSubmitSelectFolderDialog}
+                onClose={onCloseSelectFolderDialog}
+                titleSelectorFolder={titleSelectorFolderDialog}
+                fileInfo={fileInfo ?? ({} as TFile)}
+                getIsDisabled={getIsDisabledSelectFolderDialog}
+                i18n={i18n}
+              />
+            )}
+            {selectFileDialogVisible && !!socketHelper && (
+              <SelectFileDialog
+                socketHelper={socketHelper}
+                isVisible={selectFileDialogVisible}
+                onSubmit={onSubmitSelectFileDialog}
+                onClose={onCloseSelectFileDialog}
+                getIsDisabled={getIsDisabledSelectFileDialog}
+                fileTypeDetection={selectFileDialogFileTypeDetection}
+                fileInfo={fileInfo ?? ({} as TFile)}
+                i18n={i18n}
+              />
+            )}
+          </>
+        )}
+      </ErrorBoundary>
+    </ThemeProvider>
+    // </I18nextProvider>
   );
 };
 

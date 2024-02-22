@@ -7,7 +7,7 @@ import { Link } from "@docspace/shared/components/link";
 
 import CustomSettings from "./sub-components/CustomSettings";
 import { StyledComponent } from "./StyledComponent";
-import Loaders from "@docspace/common/components/Loaders";
+import { SettingsSMTPSkeleton } from "@docspace/shared/skeletons/settings";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 let timerId = null;
@@ -53,7 +53,7 @@ const SMTPSettings = (props) => {
 
   if (!isLoading && !isInit) return <></>;
 
-  if (isLoadingContent && !isInit) return <Loaders.SettingsSMTP />;
+  if (isLoadingContent && !isInit) return <SettingsSMTPSkeleton />;
 
   return (
     <StyledComponent>

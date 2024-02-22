@@ -4,7 +4,7 @@ import { withTranslation } from "react-i18next";
 
 import { StyledHistoryList, StyledHistorySubtitle } from "../../styles/history";
 
-import Loaders from "@docspace/common/components/Loaders";
+import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import { parseHistory } from "./../../helpers/HistoryHelper";
 import HistoryBlock from "./HistoryBlock";
 import NoHistory from "../NoItem/NoHistory";
@@ -45,7 +45,7 @@ const History = ({
       module,
       item.id,
       abortControllerRef.current?.signal,
-      item?.requestToken
+      item?.requestToken,
     )
       .then((data) => {
         if (isMount.current)
@@ -74,7 +74,7 @@ const History = ({
     };
   }, []);
 
-  if (!selectionHistory) return <Loaders.InfoPanelViewLoader view="history" />;
+  if (!selectionHistory) return <InfoPanelViewLoader view="history" />;
   if (!selectionHistory?.length) return <NoHistory t={t} />;
 
   return (
@@ -141,5 +141,5 @@ export default inject(
       isVisitor,
       isCollaborator,
     };
-  }
+  },
 )(withTranslation(["InfoPanel", "Common", "Translations"])(observer(History)));

@@ -1,5 +1,5 @@
 import Progress from "./Progress";
-import DataReassignmentLoader from "@docspace/common/components/Loaders/DataReassignmentLoader";
+import { DialogReassignmentSkeleton } from "@docspace/shared/skeletons/dialog";
 import AccountInfo from "./AccountInfo";
 import Description from "./Description";
 import NewOwner from "./NewOwner";
@@ -18,7 +18,7 @@ const Body = ({
   onTogglePeopleSelector,
   onTerminate,
 }) => {
-  if (!tReady) return <DataReassignmentLoader />;
+  if (!tReady) return <DialogReassignmentSkeleton />;
 
   if (showProgress)
     return (

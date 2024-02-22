@@ -25,6 +25,12 @@ export interface ToggleButtonProps {
   noAnimation?: boolean;
   /** Set loading state */
   isLoading?: boolean;
+  /** Used as HTML `name` property  */
+  name?: string;
+  /** Sets the font weight */
+  fontWeight?: number | string;
+  /** Sets the font size */
+  fontSize?: string;
 }
 
 export interface StyledToggleButtonProps {

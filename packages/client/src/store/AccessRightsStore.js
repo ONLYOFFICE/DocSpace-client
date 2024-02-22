@@ -177,6 +177,34 @@ class AccessRightsStore {
 
     return false;
   };
+
+  canChangeQuota = () => {
+    const { isOwner, isAdmin } = this.authStore.userStore.user;
+    const { isDefaultUsersQuotaSet } = this.authStore.currentQuotaStore;
+
+    if (!isOwner && !isAdmin) return false;
+
+    return isDefaultUsersQuotaSet;
+  };
+  canDisableQuota = () => {
+    const { isOwner, isAdmin } = this.authStore.userStore.user;
+    const { isDefaultUsersQuotaSet } = this.authStore.currentQuotaStore;
+
+    if (!isOwner && !isAdmin) return false;
+
+    return isDefaultUsersQuotaSet;
+  };
+
+  caResetCustomQuota = (user) => {
+    const { isOwner, isAdmin } = this.authStore.userStore.user;
+    const { isDefaultUsersQuotaSet } = this.authStore.currentQuotaStore;
+
+    if (!isDefaultUsersQuotaSet) return false;
+
+    if (!isOwner && !isAdmin) return false;
+
+    return user.isCustomQuota;
+  };
 }
 
 export default AccessRightsStore;

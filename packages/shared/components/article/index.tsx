@@ -108,8 +108,6 @@ const Article = ({
   const [correctTabletHeight, setCorrectTabletHeight] = React.useState<
     null | number
   >(null);
-  const [isVirtualKeyboardOpen, setIsVirtualKeyboardOpen] =
-    React.useState(false);
   const updateSizeRef = React.useRef<null | ReturnType<typeof setTimeout>>(
     null,
   );
@@ -209,10 +207,7 @@ const Article = ({
 
         if (target?.height) {
           const diff = window.innerHeight - target.height;
-          setIsVirtualKeyboardOpen(true);
           tableHeight -= diff;
-        } else {
-          setIsVirtualKeyboardOpen(false);
         }
       }
 
@@ -327,7 +322,6 @@ const Article = ({
             toggleShowText={toggleShowText}
             currentColorScheme={currentColorScheme}
             hideProfileBlock={hideProfileBlock}
-            isVirtualKeyboardOpen={isVirtualKeyboardOpen}
           />
         )}
 
@@ -339,7 +333,6 @@ const Article = ({
             <ArticleProfile
               showText={showText}
               currentDeviceType={currentDeviceType}
-              isVirtualKeyboardOpen={isVirtualKeyboardOpen}
               user={user}
               getActions={getActions}
               onProfileClick={onProfileClick}

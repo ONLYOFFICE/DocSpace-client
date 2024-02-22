@@ -13,7 +13,6 @@ const HideArticleMenuButton = ({
   showText,
   toggleShowText,
   currentColorScheme,
-  isVirtualKeyboardOpen,
   hideProfileBlock,
 }: ArticleHideMenuButtonProps) => {
   const { t } = useTranslation("Common");
@@ -23,7 +22,6 @@ const HideArticleMenuButton = ({
       showText={showText}
       onClick={toggleShowText}
       currentColorScheme={currentColorScheme}
-      isVirtualKeyboardOpen={isVirtualKeyboardOpen}
       hideProfileBlock={hideProfileBlock}
     >
       {showText ? (

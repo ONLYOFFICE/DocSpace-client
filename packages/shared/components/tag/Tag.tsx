@@ -40,7 +40,12 @@ export const TagPure = ({
 
   const onClickOutside = React.useCallback((e: Event) => {
     const target = e.target as HTMLElement;
-    if (target.className?.includes("advanced-tag") || !isMountedRef.current)
+    if (
+      (!!target &&
+        typeof target.className !== "object" &&
+        target.className?.includes("advanced-tag")) ||
+      !isMountedRef.current
+    )
       return;
 
     setOpenDropdown(false);

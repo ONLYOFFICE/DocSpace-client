@@ -10,8 +10,6 @@ const ArticleProfileLoader = ({
   className,
   style,
   showText,
-
-  isVirtualKeyboardOpen,
 }: ProfileLoaderProps) => {
   return (
     <StyledContainer
@@ -19,7 +17,6 @@ const ArticleProfileLoader = ({
       className={className}
       style={style}
       showText={showText}
-      isVirtualKeyboardOpen={isVirtualKeyboardOpen}
     >
       <StyledBlock>
         {showText ? (

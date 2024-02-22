@@ -147,7 +147,7 @@ body.desktop {
         flex-direction: column;
         gap: 4px;
 
-        @caontainer (max-width: 600px) {
+        @container (max-width: 600px) {
           margin-top: 8px;
         }
 
@@ -167,7 +167,7 @@ body.desktop {
         }
       }
 
-      @caontainer (max-width: 600px) {
+      @container (max-width: 600px) {
         gap: 8px;
       }
     }

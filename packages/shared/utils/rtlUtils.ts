@@ -1,4 +1,4 @@
-export type TInterfaceDirection = "rtl" | "ltr";
+import { TInterfaceDirection } from "../themes";
 
 /* Returns correct text-align value depending on interface direction (ltr/rtl) */
 export const getCorrectTextAlign = (

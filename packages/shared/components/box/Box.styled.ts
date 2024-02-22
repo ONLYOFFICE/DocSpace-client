@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 import {
-  TInterfaceDirection,
   getCorrectBorderRadius,
   getCorrectFourValuesStyle,
   getCorrectTextAlign,
 } from "../../utils";
+import { TInterfaceDirection } from "../../themes";
 
 import { BoxProps } from "./Box.types";
 

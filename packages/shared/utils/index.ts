@@ -105,3 +105,13 @@ export const getModalType = () => {
 export const isValidDate = (date: Date) => {
   return moment(date).tz(window.timezone).year() !== 9999;
 };
+
+export const presentInArray = (
+  array: string[],
+  search: string,
+  caseInsensitive = false,
+) => {
+  const pattern = caseInsensitive ? search.toLowerCase() : search;
+  const result = array?.findIndex((item) => item === pattern);
+  return result !== -1;
+};

@@ -94,6 +94,7 @@ export type TSettings = {
   formGallery: TFormGallery;
   wizardToken?: string;
   defaultPage?: string;
+  tagManagerId?: string;
 };
 
 export type TCustomSchema = {

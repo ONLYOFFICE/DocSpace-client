@@ -821,12 +821,8 @@ export function getObjectByLocation(location: Location) {
   }
 }
 
-const RoomsValues = Object.values(RoomsType).filter(
+const RoomsTypeValues = Object.values(RoomsType).filter(
   (item): item is number => typeof item === "number",
-);
-
-export const RoomsTypeValues = RoomsValues.filter(
-  (room) => room !== RoomsType.FormRoom,
 );
 
 export const RoomsTypes = RoomsTypeValues.reduce<Record<number, number>>(

@@ -1,7 +1,7 @@
 export type EmptyViewItemType = {
   key: React.Key;
   title: string;
-  descriptions: string;
+  description: string;
   icon: React.ReactElement;
   onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 };

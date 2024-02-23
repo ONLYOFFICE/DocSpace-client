@@ -7,7 +7,7 @@ import { EmptyViewItemBody, EmptyViewItemWrapper } from "./EmptyView.styled";
 import type { EmptyViewItemProps } from "./EmptyView.types";
 
 export const EmptyViewItem = ({
-  descriptions,
+  description,
   icon,
   title,
   onClick,
@@ -26,7 +26,7 @@ export const EmptyViewItem = ({
           {title}
         </Text>
         <Text as="p" fontSize="12px" className="ev-item-subheading" noSelect>
-          {descriptions}
+          {description}
         </Text>
       </EmptyViewItemBody>
       <ArrowIcon className="ev-item__arrow-icon" />

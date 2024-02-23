@@ -44,6 +44,7 @@ export const EmptyViewBody = styled.div`
 export const EmptyViewItemWrapper = styled.div`
   display: flex;
   align-items: center;
+  cursor: pointer;
 
   gap: 20px;
 

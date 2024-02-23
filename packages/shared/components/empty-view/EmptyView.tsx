@@ -11,7 +11,7 @@ import { EmptyViewItem } from "./EmptyView.item";
 import type { EmptyViewProps } from "./EmptyView.types";
 
 export const EmptyView = ({
-  descriptions,
+  description,
   icon,
   options,
   title,
@@ -30,7 +30,7 @@ export const EmptyView = ({
           {title}
         </Text>
         <Text as="p" fontSize="12px" className="ev-subheading" noSelect>
-          {descriptions}
+          {description}
         </Text>
       </EmptyViewHeader>
       <EmptyViewBody>

@@ -8,6 +8,8 @@ import withLoader from "@docspace/client/src/HOCs/withLoader";
 import RoomTypeListLoader from "@docspace/shared/skeletons/create-edit-room/RoomTypeList";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
 
+console.log({ RoomsTypeValues });
+
 const StyledRoomTypeList = styled.div`
   width: 100%;
   display: flex;

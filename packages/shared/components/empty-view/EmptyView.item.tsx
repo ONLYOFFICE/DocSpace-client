@@ -11,7 +11,10 @@ export const EmptyViewItem = ({
   icon,
   title,
   onClick,
+  disabled,
 }: EmptyViewItemProps) => {
+  if (disabled) return;
+
   return (
     <EmptyViewItemWrapper onClick={onClick}>
       {React.cloneElement(icon, { className: "ev-item__icon" })}

@@ -127,6 +127,8 @@
   "Error401BodyText": "Unauthorized request. To access this file, you must enter a password or be a registered user.",
   "Error403HeaderText": "403 Error!",
   "Error403BodyText": "Forbidden. You don't have permissions to access the requested resource.",
+  "Error404HeaderText": "404 Error!",
+  "Error404BodyText": "Page not found. The server cannot find the requested resource",
   "ErrorDeactivatedText": "This DocSpace is deactivated",
   "ErrorEmptyList": "The list of entities has been changed. Please check the contents and try again.",
   "ErrorInternalServer": "Internal server error. Try again later.",

@@ -2807,6 +2807,10 @@ const Dark: TTheme = {
       border: `1px solid ${darkErrorStatus}`,
       color: darkErrorStatus,
     },
+
+    backTitle: {
+      color: "#A3A9AE",
+    },
   },
 
   facebookButton: {

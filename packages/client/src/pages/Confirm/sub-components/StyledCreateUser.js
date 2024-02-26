@@ -133,6 +133,11 @@ export const RegisterContainer = styled.div`
         text-overflow: ellipsis;
         overflow: hidden;
         left: 0;
+        display: flex;
+        gap: 4px;
+        p {
+          color: ${(props) => props.theme.login.backTitle.color};
+        }
       }
     }
   }

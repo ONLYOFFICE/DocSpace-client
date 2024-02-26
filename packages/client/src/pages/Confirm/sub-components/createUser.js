@@ -1,4 +1,5 @@
 ﻿import SsoReactSvgUrl from "PUBLIC_DIR/images/sso.react.svg?url";
+import ArrowIcon from "PUBLIC_DIR/images/arrow.left.react.svg?url";
 
 import React, { useEffect, useState, useCallback } from "react";
 import { withTranslation, Trans } from "react-i18next";
@@ -24,13 +25,14 @@ import {
 } from "@docspace/shared/api/people";
 import {
   createPasswordHash,
-  getProviderTranslation,
   getOAuthToken,
   getLoginLink,
 } from "@docspace/shared/utils/common";
 import { login } from "@docspace/shared/utils/loginUtils";
 import { PROVIDERS_DATA } from "@docspace/shared/constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 import { getPasswordErrorMessage } from "@docspace/shared/utils/getPasswordErrorMessage";
 import DocspaceLogo from "SRC_DIR/components/DocspaceLogoWrapper";
@@ -55,13 +57,17 @@ const RegistrationFormGreeting = ({ email, t, setRegistrationForm, type }) => {
   const onClickBack = () => {
     setRegistrationForm(false);
   };
+
   return (
     <div className="greeting-container">
       <div className="back-sign-in-container">
         {type === "LinkInvite" && (
-          <Text fontWeight={600} onClick={onClickBack} className="back-button">
-            {t("Back")}
-          </Text>
+          <div className="back-button">
+            <IconButton size={16} iconName={ArrowIcon} onClick={onClickBack} />
+            <Text fontWeight={600} onClick={onClickBack}>
+              {t("Back")}
+            </Text>
+          </div>
         )}
 
         <Text fontWeight={600} fontSize={"16px"}>
@@ -78,7 +84,7 @@ const RegistrationFormGreeting = ({ email, t, setRegistrationForm, type }) => {
             email,
           }}
           components={{
-            1: <Link type="page" isHovered={false} />,
+            1: <ColorTheme tag="a" themeId={ThemeId.Link} isHovered={false} />,
           }}
         />
       </Text>

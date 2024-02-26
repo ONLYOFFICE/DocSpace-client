@@ -1,12 +1,13 @@
 import { Trans } from "react-i18next";
 import React from "react";
 
-import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
+import ArrowIcon from "PUBLIC_DIR/images/arrow.left.react.svg?url";
 
 import { EmailInput } from "@docspace/shared/components/email-input";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
+import { IconButton } from "@docspace/shared/components/icon-button";
 
 interface IEmailContainer {
   emailFromInvitation?: string;
@@ -43,10 +44,12 @@ const EmailContainer = ({
     return (
       <div className="invitation-info-container">
         <div className="sign-in-container">
-          <Text fontWeight={600} onClick={onClickBack}>
-            {t("Back")}
-          </Text>
-
+          <div className="back-title">
+            <IconButton size={16} iconName={ArrowIcon} onClick={onClickBack} />
+            <Text fontWeight={600} onClick={onClickBack}>
+              {t("Back")}
+            </Text>
+          </div>
           <Text fontWeight={600} fontSize={"16px"}>
             {t("Common:LoginButton")}
           </Text>

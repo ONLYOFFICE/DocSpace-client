@@ -80,12 +80,17 @@ export const LoginFormWrapper = styled.div`
       position: relative;
 
       margin-bottom: 16px;
-      p:first-child {
+      .back-title {
         position: absolute;
         max-width: 60px;
         text-overflow: ellipsis;
         overflow: hidden;
         left: 0;
+        display: flex;
+        gap: 4px;
+        p {
+          color: ${(props) => props.theme.login.backTitle.color};
+        }
       }
     }
   }

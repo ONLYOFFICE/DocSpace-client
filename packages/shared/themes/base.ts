@@ -2829,6 +2829,10 @@ export const getBaseTheme = () => {
         border: `1px solid ${lightErrorStatus}`,
         color: lightErrorStatus,
       },
+
+      backTitle: {
+        color: "#A3A9AE",
+      },
     },
 
     facebookButton: {

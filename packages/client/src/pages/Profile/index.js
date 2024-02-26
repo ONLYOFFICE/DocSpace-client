@@ -166,5 +166,5 @@ export default inject(
       setIsLoading,
       getTfaType,
     };
-  }
+  },
 )(observer(withTranslation(["Profile", "Common"])(withCultureNames(Profile))));

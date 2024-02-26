@@ -140,10 +140,12 @@ const Header = (props) => {
         className="arrow-button"
       />
 
-      <Headline className="header-headline" type="content">
-        {t("Profile:MyProfile")}
-        {profile?.isLDAP && ` (${t("PeopleTranslations:LDAPLbl")})`}
-      </Headline>
+      <div>
+        <Headline className="header-headline" type="content">
+          {t("Profile:MyProfile")}
+          {profile?.isLDAP && ` (${t("PeopleTranslations:LDAPLbl")})`}
+        </Headline>
+      </div>
       <div className="action-button">
         {((isAdmin && !profile?.isOwner) || isMe) && (
           <ContextMenuButton

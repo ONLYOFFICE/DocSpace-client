@@ -35,22 +35,14 @@ const EmptyViewContainer = observer(
     }, [setSelectFileDialogVisible]);
 
     const onCreateDocumentForm = useCallback(() => {
-      // const event = new CustomEvent<{ extension: string; id: number }>(
-      //     Events.CREATE,
-      //     {
-      //       detail: {
-      //         extension: "docxf",
-      //         id: -1,
-      //       },
-      //     },
-      //   );
-
-      const event: Event & { payload?: { extension: string; id: number } } =
-        new Event(Events.CREATE);
+      const event: Event & {
+        payload?: { extension: string; id: number; withoutDialog: boolean };
+      } = new Event(Events.CREATE);
 
       const payload = {
-        extension: "docxf",
         id: -1,
+        extension: "docxf",
+        withoutDialog: true,
       };
       event.payload = payload;
 

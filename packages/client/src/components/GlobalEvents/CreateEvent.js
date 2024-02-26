@@ -47,6 +47,7 @@ const CreateEvent = ({
   eventDialogVisible,
   keepNewFileName,
   setPortalTariff,
+  withoutDialog,
 }) => {
   const [headerTitle, setHeaderTitle] = React.useState(null);
   const [startValue, setStartValue] = React.useState("");
@@ -77,7 +78,7 @@ const CreateEvent = ({
 
     if (!extension) return setEventDialogVisible(true);
 
-    if (!keepNewFileName) {
+    if (!keepNewFileName && !withoutDialog) {
       setEventDialogVisible(true);
     } else {
       onSave(null, title || defaultName);
@@ -86,7 +87,7 @@ const CreateEvent = ({
     return () => {
       setEventDialogVisible(false);
     };
-  }, [extension, title, fromTemplate]);
+  }, [extension, title, fromTemplate, withoutDialog]);
 
   const onSave = (e, value, open = true) => {
     let item;
@@ -116,9 +117,9 @@ const CreateEvent = ({
             combineUrl(
               window.DocSpaceConfig?.proxy?.url,
               config.homepage,
-              `/doceditor`
+              `/doceditor`,
             ),
-            "_blank"
+            "_blank",
           )
         : null;
 
@@ -210,7 +211,7 @@ const CreateEvent = ({
           parentId,
           `${newValue}.${extension}`,
           undefined,
-          gallerySelected.id
+          gallerySelected.id,
         )
           .then((file) => {
             item = file;
@@ -248,7 +249,7 @@ const CreateEvent = ({
                 return api.files
                   .updateFileStream(file.id, encryptedFile, true, false)
                   .then(
-                    () => open && openDocEditor(file.id, file.providerKey, tab)
+                    () => open && openDocEditor(file.id, file.providerKey, tab),
                   );
               });
             }
@@ -369,5 +370,5 @@ export default inject(
 
       keepNewFileName,
     };
-  }
+  },
 )(observer(CreateEvent));

@@ -39,14 +39,18 @@ const useTheme = ({ user }: UseThemeProps) => {
   const getUserTheme = React.useCallback(() => {
     if (!currentColorTheme || !user?.theme) return;
     let theme = user.theme;
+
     if (user.theme === ThemeKeys.SystemStr) theme = SYSTEM_THEME;
 
-    if (theme === ThemeKeys.BaseStr)
+    if (theme === ThemeKeys.BaseStr) {
       setTheme({
         ...Base,
         currentColorScheme: currentColorTheme,
         interfaceDirection: "ltr",
       });
+
+      return;
+    }
 
     setTheme({
       ...Dark,

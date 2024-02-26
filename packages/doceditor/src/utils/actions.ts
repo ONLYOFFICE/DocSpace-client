@@ -26,6 +26,8 @@ export async function getData(
     const baseURL = `${proto}://${host}`;
     const baseAPIUrl = `${baseURL}/${API_PREFIX}`;
 
+    console.log(fileId);
+
     if (!fileId) return redirect(`${baseURL}/login`);
 
     const configURL = new URL(`${baseAPIUrl}/files/file/${fileId}/openedit`);
@@ -64,52 +66,58 @@ export async function getData(
     const [configRes, editorUrlRes, userRes, settingsRes] =
       await Promise.all(resActions);
 
-    if (!configRes.ok) return redirect(`${baseURL}`);
+    console.log(configRes);
 
     const actions = [];
 
-    actions.push(configRes.json());
-    actions.push(editorUrlRes.json());
-    actions.push(userRes.json());
-    actions.push(settingsRes.json());
+    if (configRes.ok) {
+      actions.push(configRes.json());
+      actions.push(editorUrlRes.json());
+      actions.push(userRes.json());
+      actions.push(settingsRes.json());
 
-    const [config, editorUrl, user, settings] = await Promise.all(actions);
+      const [config, editorUrl, user, settings] = await Promise.all(actions);
 
-    const response: TResponse = {
-      config: config.response,
-      editorUrl: editorUrl.response,
-      user: user.response,
-      settings: settings.response,
-      successAuth: false,
-      isSharingAccess: false,
-      doc,
-    };
+      const response: TResponse = {
+        config: config.response,
+        editorUrl: editorUrl.response,
+        user: user.response,
+        settings: settings.response,
+        successAuth: false,
+        isSharingAccess: false,
+        doc,
+      };
 
-    // needed to reset rtl language in Editor
-    response.config.editorConfig.lang = getLtrLanguageForEditor(
-      response.user?.cultureName,
-      response.settings.culture,
-      true,
-    );
+      // needed to reset rtl language in Editor
+      response.config.editorConfig.lang = getLtrLanguageForEditor(
+        response.user?.cultureName,
+        response.settings.culture,
+        true,
+      );
 
-    if (response.settings.tenantStatus === TenantStatus.PortalRestore) {
-      response.error = { message: "restore-backup" };
+      if (response.settings.tenantStatus === TenantStatus.PortalRestore) {
+        response.error = { message: "restore-backup" };
+      }
+
+      const successAuth = !!user;
+
+      if (!successAuth && !doc && !share) {
+        response.error = { message: "unauthorized" };
+      }
+
+      const isSharingAccess = response.config.file.canShare;
+
+      if (view) {
+        response.config.editorConfig.mode = "view";
+      }
+
+      response.successAuth = successAuth;
+      response.isSharingAccess = isSharingAccess;
+
+      return response;
     }
 
-    const successAuth = !!user;
-
-    if (!successAuth && !doc && !share) {
-      response.error = { message: "unauthorized" };
-    }
-
-    const isSharingAccess = response.config.file.canShare;
-
-    if (view) {
-      response.config.editorConfig.mode = "view";
-    }
-
-    response.successAuth = successAuth;
-    response.isSharingAccess = isSharingAccess;
+    const response: TResponse = { error: { message: "unauthorized" } };
 
     return response;
   } catch (e) {

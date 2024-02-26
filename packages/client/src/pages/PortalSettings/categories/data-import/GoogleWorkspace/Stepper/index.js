@@ -12,6 +12,7 @@ const StepContent = ({
   setShowReminder,
   onNextStep,
   onPrevStep,
+  setStep,
 }) => {
   const isFifthStep = currentStep === 5;
 
@@ -24,6 +25,7 @@ const StepContent = ({
           onPrevStep={onPrevStep}
           showReminder={showReminder}
           setShowReminder={setShowReminder}
+          setStep={setStep}
         />
       );
     case 2:

@@ -76,7 +76,7 @@ const ImportCompleteStep = ({
       <InfoText>
         {t("Settings:ImportedUsers", {
           selectedUsers: importResult.succeedUsers,
-          importedUsers: checkedUsers.result.length,
+          importedUsers: importResult.succeedUsers + importResult.failedUsers,
         })}
       </InfoText>
 

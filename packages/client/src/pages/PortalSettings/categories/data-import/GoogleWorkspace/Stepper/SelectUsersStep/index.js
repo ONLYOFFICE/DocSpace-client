@@ -20,6 +20,7 @@ const SelectUsersStep = ({
   setSearchValue,
   setResultUsers,
   areCheckedUsersEmpty,
+  cancelMigration,
 }) => {
   const [dataPortion, setDataPortion] = useState(withEmailUsers.slice(0, 25));
 
@@ -45,14 +46,19 @@ const SelectUsersStep = ({
     setResultUsers();
     onNextStep();
   };
+  
+  const goBack = () => {
+    cancelMigration();
+    onPrevStep();
+  };
 
   return (
     <>
       <SaveCancelButtons
         className="save-cancel-buttons"
         onSaveClick={handleStepIncrement}
-        onCancelClick={onPrevStep}
-        showReminder={showReminder}
+        onCancelClick={goBack}
+        showReminder
         saveButtonLabel={t("Settings:NextStep")}
         cancelButtonLabel={t("Common:Back")}
         displaySettings={true}
@@ -91,8 +97,8 @@ const SelectUsersStep = ({
         <SaveCancelButtons
           className="save-cancel-buttons"
           onSaveClick={handleStepIncrement}
-          onCancelClick={onPrevStep}
-          showReminder={showReminder}
+          onCancelClick={goBack}
+          showReminder
           saveButtonLabel={t("Settings:NextStep")}
           cancelButtonLabel={t("Common:Back")}
           displaySettings={true}
@@ -112,6 +118,7 @@ export default inject(({ importAccountsStore }) => {
     numberOfCheckedAccounts,
     areCheckedUsersEmpty,
     setResultUsers,
+    cancelMigration,
   } = importAccountsStore;
 
   return {
@@ -121,5 +128,6 @@ export default inject(({ importAccountsStore }) => {
     numberOfCheckedAccounts,
     areCheckedUsersEmpty,
     setResultUsers,
+    cancelMigration,
   };
 })(observer(SelectUsersStep));

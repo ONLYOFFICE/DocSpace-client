@@ -20,6 +20,7 @@ const SelectUsersStep = ({
   areCheckedUsersEmpty,
   searchValue,
   setSearchValue,
+  cancelMigration,
 }) => {
   const [dataPortion, setDataPortion] = useState(withEmailUsers.slice(0, 25));
 
@@ -45,17 +46,22 @@ const SelectUsersStep = ({
     setResultUsers();
     onNextStep();
   };
+  
+  const goBack = () => {
+    cancelMigration();
+    onPrevStep();
+  };
 
   return (
     <>
       <SaveCancelButtons
         className="save-cancel-buttons"
         onSaveClick={handleStepIncrement}
-        onCancelClick={onPrevStep}
-        showReminder={showReminder}
+        onCancelClick={goBack}
+        showReminder
         saveButtonLabel={t("Settings:NextStep")}
         cancelButtonLabel={t("Common:Back")}
-        displaySettings={true}
+        displaySettings
         saveButtonDisabled={areCheckedUsersEmpty}
         // saveButtonDisabled={numberOfCheckedAccounts > LICENSE_LIMIT}
       />
@@ -91,11 +97,11 @@ const SelectUsersStep = ({
         <SaveCancelButtons
           className="save-cancel-buttons"
           onSaveClick={handleStepIncrement}
-          onCancelClick={onPrevStep}
-          showReminder={showReminder}
+          onCancelClick={goBack}
+          showReminder
           saveButtonLabel={t("Settings:NextStep")}
           cancelButtonLabel={t("Common:Back")}
-          displaySettings={true}
+          displaySettings
           saveButtonDisabled={areCheckedUsersEmpty}
           // saveButtonDisabled={numberOfCheckedAccounts > LICENSE_LIMIT}
         />
@@ -111,6 +117,7 @@ export default inject(({ importAccountsStore }) => {
     setSearchValue,
     setResultUsers,
     areCheckedUsersEmpty,
+    cancelMigration,
   } = importAccountsStore;
 
   return {
@@ -119,5 +126,6 @@ export default inject(({ importAccountsStore }) => {
     withEmailUsers,
     searchValue,
     setSearchValue,
+    cancelMigration,
   };
 })(observer(SelectUsersStep));

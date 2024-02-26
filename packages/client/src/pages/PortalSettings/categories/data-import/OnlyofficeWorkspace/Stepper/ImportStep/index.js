@@ -159,7 +159,7 @@ const ImportStep = ({
         saveButtonLabel={t("Settings:NextStep")}
         cancelButtonLabel={t("Common:Back")}
         displaySettings
-        showReminder={showReminder}
+        showReminder
       />
     </Wrapper>
   );

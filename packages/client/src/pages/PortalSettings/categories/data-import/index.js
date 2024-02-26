@@ -16,7 +16,17 @@ import GoogleWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.google.r
 import NextcloudWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.nextcloud.react.svg?url";
 import OnlyofficeWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.onlyoffice.react.svg?url";
 
-const DataImport = ({ t, theme, services, setServices, getMigrationList }) => {
+const DataImport = ({
+  t,
+  theme,
+  services,
+  setServices,
+  getMigrationList,
+  getMigrationStatus,
+  setDocumentTitle,
+}) => {
+  setDocumentTitle(t("DataImport"));
+
   const navigate = useNavigate();
 
   const google = theme.isBase
@@ -44,8 +54,35 @@ const DataImport = ({ t, theme, services, setServices, getMigrationList }) => {
     }));
   }, [theme.isBase, services]);
 
+  const handleMigrationCheck = async () => {
+    const migrationStatus = await getMigrationStatus();
+
+    if (
+      migrationStatus &&
+      !(
+        migrationStatus.parseResult.successedUsers +
+          migrationStatus.parseResult.failedUsers >
+        0
+      )
+    ) {
+      const workspacesEnum = {
+        GoogleWorkspace: "google",
+        Nextcloud: "nextcloud",
+        Workspace: "onlyoffice",
+      };
+      const migratorName = migrationStatus.parseResult.migratorName;
+
+      navigate(`${workspacesEnum[migratorName]}?service=${migratorName}`);
+
+      return;
+    }
+
+    const migrationList = await getMigrationList();
+    setServices(migrationList);
+  };
+
   useEffect(() => {
-    getMigrationList().then((res) => setServices(res));
+    handleMigrationCheck();
   }, []);
 
   const redirectToWorkspace = (title) => {
@@ -71,11 +108,9 @@ const DataImport = ({ t, theme, services, setServices, getMigrationList }) => {
   return (
     <WorkspacesContainer>
       <Text className="data-import-description">
-        {t("Settings:DataImportDescription")}
+        {t("DataImportDescription")}
       </Text>
-      <Text className="data-import-subtitle">
-        {t("Settings:UploadBackupData")}
-      </Text>
+      <Text className="data-import-subtitle">{t("UploadBackupData")}</Text>
 
       <Box className="workspace-list">
         {filteredWorkspaces.map((workspace) => (
@@ -92,7 +127,7 @@ const DataImport = ({ t, theme, services, setServices, getMigrationList }) => {
               isHovered
               isTextOverflow
             >
-              {t("Settings:Import")}
+              {t("Import")}
             </Link>
           </Box>
         ))}
@@ -100,13 +135,18 @@ const DataImport = ({ t, theme, services, setServices, getMigrationList }) => {
     </WorkspacesContainer>
   );
 };
-export default inject(({ settingsStore, importAccountsStore }) => {
-  const { services, setServices, getMigrationList } = importAccountsStore;
+export default inject(({ authStore, settingsStore, importAccountsStore }) => {
+  const { services, setServices, getMigrationList, getMigrationStatus } =
+    importAccountsStore;
+
+  const { setDocumentTitle } = authStore;
 
   return {
     services,
     setServices,
     getMigrationList,
+    getMigrationStatus,
     theme: settingsStore.theme,
+    setDocumentTitle,
   };
 })(withTranslation(["Settings"])(observer(DataImport)));

@@ -76,6 +76,7 @@ const SelectFileStep = ({
   isFileLoading,
   setIsFileLoading,
   cancelMigration,
+  setStep,
 }) => {
   const [progress, setProgress] = useState(0);
   const [isFileError, setIsFileError] = useState(false);
@@ -83,10 +84,53 @@ const SelectFileStep = ({
   const uploadInterval = useRef(null);
   const navigate = useNavigate();
 
-  const goBack = () => navigate(-1);
+  const goBack = () => {
+    cancelMigration();
+    navigate(-1);
+  };
 
   useEffect(() => {
     setShowReminder(false);
+
+    getMigrationStatus().then((res) => {
+      if (
+        !res ||
+        res.parseResult.successedUsers + res.parseResult.failedUsers > 0
+      )
+        return;
+
+      if (!res.isCompleted && res.parseResult.users.length > 0) {
+        setStep(5);
+        return;
+      }
+
+      if (res.isCompleted) {
+        setUsers(res.parseResult);
+        setStep(2);
+        return;
+      }
+
+      setProgress(res.progress);
+      setIsFileError(false);
+      setShowReminder(true);
+      setIsFileLoading(true);
+
+      uploadInterval.current = setInterval(async () => {
+        const res = await getMigrationStatus();
+
+        if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
+          setIsFileError(true);
+          setIsFileLoading(false);
+          clearInterval(uploadInterval.current);
+        } else if (res.isCompleted) {
+          setIsFileLoading(false);
+          clearInterval(uploadInterval.current);
+          setUsers(res.parseResult);
+          setShowReminder(false);
+        }
+      }, 1000);
+    });
+    return () => clearInterval(uploadInterval.current);
   }, []);
 
   const onUploadFile = async (file) => {

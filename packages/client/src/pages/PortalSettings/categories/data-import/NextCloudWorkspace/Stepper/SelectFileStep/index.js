@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
@@ -86,6 +86,7 @@ const SelectFileStep = ({
   isFileLoading,
   setIsFileLoading,
   cancelMigration,
+  setStep,
 }) => {
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
   const [progress, setProgress] = useState(0);
@@ -94,7 +95,10 @@ const SelectFileStep = ({
   const uploadInterval = useRef(null);
   const navigate = useNavigate();
 
-  const goBack = () => navigate(-1);
+  const goBack = () => {
+    cancelMigration();
+    navigate(-1);
+  };
 
   const onUploadFile = async (file) => {
     await singleFileUploading(file, setProgress);
@@ -168,6 +172,48 @@ const SelectFileStep = ({
   };
 
   const hideCancelDialog = () => setCancelDialogVisibile(false);
+
+  useEffect(() => {
+    getMigrationStatus().then((res) => {
+      if (
+        !res ||
+        res.parseResult.successedUsers + res.parseResult.failedUsers > 0
+      )
+        return;
+
+      if (!res.isCompleted && res.parseResult.users.length > 0) {
+        setStep(6);
+        return;
+      }
+
+      if (res.isCompleted) {
+        setUsers(res.parseResult);
+        setStep(2);
+        return;
+      }
+
+      setProgress(res.progress);
+      setIsFileError(false);
+      setIsSaveDisabled(true);
+      setIsFileLoading(true);
+
+      uploadInterval.current = setInterval(async () => {
+        const res = await getMigrationStatus();
+
+        if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
+          setIsFileError(true);
+          setIsFileLoading(false);
+          clearInterval(uploadInterval.current);
+        } else if (res.isCompleted) {
+          setIsFileLoading(false);
+          clearInterval(uploadInterval.current);
+          setUsers(res.parseResult);
+          setIsSaveDisabled(false);
+        }
+      }, 1000);
+    });
+    return () => clearInterval(uploadInterval.current);
+  }, []);
 
   return (
     <Wrapper>

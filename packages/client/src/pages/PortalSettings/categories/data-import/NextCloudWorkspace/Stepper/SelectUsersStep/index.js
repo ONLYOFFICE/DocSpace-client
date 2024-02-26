@@ -23,6 +23,7 @@ const SelectUsersStep = (props) => {
     withEmailUsers,
     searchValue,
     setSearchValue,
+    cancelMigration,
   } = props;
 
   const [dataPortion, setDataPortion] = useState(withEmailUsers.slice(0, 25));
@@ -45,6 +46,11 @@ const SelectUsersStep = (props) => {
       data.email.toLowerCase().startsWith(searchValue.toLowerCase()),
   );
 
+  const goBack = () => {
+    cancelMigration();
+    decrementStep();
+  };
+
   return (
     <Wrapper>
       {withEmailUsers.length > 0 && (
@@ -56,7 +62,7 @@ const SelectUsersStep = (props) => {
           <SaveCancelButtons
             className="save-cancel-buttons"
             onSaveClick={incrementStep}
-            onCancelClick={decrementStep}
+            onCancelClick={goBack}
             saveButtonLabel={t("Settings:NextStep")}
             cancelButtonLabel={t("Common:Back")}
             showReminder
@@ -100,7 +106,7 @@ const SelectUsersStep = (props) => {
         <SaveCancelButtons
           className="save-cancel-buttons"
           onSaveClick={incrementStep}
-          onCancelClick={decrementStep}
+          onCancelClick={goBack}
           saveButtonLabel={t("Settings:NextStep")}
           cancelButtonLabel={t("Common:Back")}
           showReminder
@@ -113,13 +119,19 @@ const SelectUsersStep = (props) => {
 };
 
 export default inject(({ importAccountsStore }) => {
-  const { users, withEmailUsers, searchValue, setSearchValue } =
-    importAccountsStore;
+  const {
+    users,
+    withEmailUsers,
+    searchValue,
+    setSearchValue,
+    cancelMigration,
+  } = importAccountsStore;
 
   return {
     users,
     withEmailUsers,
     searchValue,
     setSearchValue,
+    cancelMigration,
   };
 })(observer(SelectUsersStep));

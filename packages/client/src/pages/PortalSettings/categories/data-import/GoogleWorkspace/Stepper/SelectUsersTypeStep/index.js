@@ -56,7 +56,7 @@ const SelectUsersTypeStep = ({
         className="save-cancel-buttons"
         onSaveClick={onNextStep}
         onCancelClick={onPrevStep}
-        showReminder={showReminder}
+        showReminder
         saveButtonLabel={t("Settings:NextStep")}
         cancelButtonLabel={t("Common:Back")}
         displaySettings={true}
@@ -87,7 +87,7 @@ const SelectUsersTypeStep = ({
           className="save-cancel-buttons"
           onSaveClick={onNextStep}
           onCancelClick={onPrevStep}
-          showReminder={showReminder}
+          showReminder
           saveButtonLabel={t("Settings:NextStep")}
           cancelButtonLabel={t("Common:Back")}
           displaySettings={true}

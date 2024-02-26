@@ -33,7 +33,7 @@ const NextcloudWorkspace = (props) => {
     setViewAs,
     currentDeviceType,
   } = props;
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState(1);
   const StepsData = getStepsData(t, currentStep, setCurrentStep);
 
   useViewEffect({

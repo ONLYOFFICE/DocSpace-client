@@ -195,7 +195,7 @@ const StyledSearchContainer = styled.div`
   border-radius: 0 0 6px 6px;
   background-color: ${(props) => props.theme.infoPanel.backgroundColor};
   z-index: 101;
-  box-shadow: 0px 5px 20px 0px rgba(4, 15, 27, 0.07);
+  box-shadow: ${({ theme }) => theme.infoPanel.search.boxShadow};
 `;
 
 const StyledLink = styled.div`

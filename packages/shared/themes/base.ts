@@ -2081,6 +2081,10 @@ export const getBaseTheme = () => {
         borderColor: "#d0d5da",
         descriptionColor: "#657077",
       },
+
+      search: {
+        boxShadow: "0px 5px 20px 0px rgba(4, 15, 27, 0.07)",
+      },
     },
 
     filesArticleBody: {

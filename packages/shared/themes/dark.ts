@@ -2053,6 +2053,10 @@ const Dark: TTheme = {
       borderColor: "#292929",
       descriptionColor: "#eeeeee",
     },
+
+    search: {
+      boxShadow: "0px 5px 20px 0px rgba(0, 0, 0, 0.16)",
+    },
   },
 
   filesArticleBody: {

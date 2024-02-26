@@ -190,6 +190,7 @@ const Root = ({
                   fileInfo={fileInfo}
                   onCancel={onCloseSharingDialog}
                   theme={theme}
+                  i18n={i18n}
                 />
               )}
             </>

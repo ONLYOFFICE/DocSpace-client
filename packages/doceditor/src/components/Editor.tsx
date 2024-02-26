@@ -11,8 +11,8 @@ import useInit from "@/hooks/useInit";
 import useEditorEvents from "@/hooks/useEditorEvents";
 
 import { FolderType } from "@docspace/shared/enums";
-import { getBackUrl, getIsZoom } from "@/utils";
-import { IS_DESKTOP_EDITOR } from "@/utils/constants";
+import { getBackUrl } from "@/utils";
+import { IS_DESKTOP_EDITOR, IZ_ZOOM } from "@/utils/constants";
 import {
   onSDKRequestHistoryClose,
   onSDKRequestEditRights,
@@ -32,7 +32,9 @@ const Editor = ({
   doc,
   documentserverUrl,
   fileInfo,
+  isSharingAccess,
   t,
+  onSDKRequestSharingSettings,
   onSDKRequestSaveAs,
   onSDKRequestInsertImage,
   onSDKRequestSelectSpreadsheet,
@@ -182,11 +184,14 @@ const Editor = ({
     newConfig.events.onRequestReferenceSource = onSDKRequestReferenceSource;
   }
 
+  if (isSharingAccess) {
+    newConfig.events.onRequestSharingSettings = onSDKRequestSharingSettings;
+  }
+
   if (!fileInfo.providerKey) {
     newConfig.events.onRequestReferenceData = onSDKRequestReferenceData;
-    const isZoom = getIsZoom();
 
-    if (!isZoom) {
+    if (!IZ_ZOOM) {
       newConfig.events.onRequestOpen = onSDKRequestOpen;
     }
   }

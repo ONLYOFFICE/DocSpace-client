@@ -116,7 +116,9 @@ const ComboButton = (props: ComboButtonProps) => {
       ) : null}
 
       {plusBadgeValue && (
-        <StyledPlusBadge>{`+ ${plusBadgeValue}`}</StyledPlusBadge>
+        <StyledPlusBadge
+          isOpen={isOpen}
+        >{`+${plusBadgeValue}`}</StyledPlusBadge>
       )}
 
       <StyledArrowIcon

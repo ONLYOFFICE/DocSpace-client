@@ -56,11 +56,6 @@ const StyledPeopleRow = styled(TableRow)`
               padding-right: 20px;
             `}
     }
-
-    .groups-combobox .combo-button {
-      background-color: ${(props) =>
-        `${props.theme.filesSection.tableView.row.backgroundActive}`};
-    }
   }
 
   .table-container_cell {
@@ -203,22 +198,6 @@ const StyledPeopleRow = styled(TableRow)`
               padding-left: 8px;
               margin-left: -8px;
             `}
-
-      &:hover {
-        background-color: #fff !important;
-      }
-
-      .combo-button-label {
-        font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
-        color: ${(props) => props.theme.peopleTableRow.sideInfoColor};
-        font-weight: 600;
-      }
-
-      .combo-buttons_arrow-icon {
-        svg path {
-          fill: ${(props) => props.theme.peopleTableRow.sideInfoColor};
-        }
-      }
     }
   }
 
@@ -238,16 +217,8 @@ const StyledGroupsComboBox = styled(ComboBox)`
     justify-content: center;
     gap: 4px;
     padding: 4px 8px;
-    background-color: ${({ isChecked, theme }) =>
-      !isChecked ? "#fff" : theme.filesSection.tableView.row.backgroundActive};
-
-    ${({ isOpened }) => isOpened && "background-color: #fff !important"}
 
     border-radius: 3px;
-
-    &:hover {
-      background-color: #fff;
-    }
   }
 
   .dropdown {

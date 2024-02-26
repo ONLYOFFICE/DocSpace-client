@@ -1687,6 +1687,12 @@ export const getBaseTheme = () => {
         color: black,
         selectedColor: black,
       },
+
+      plusBadge: {
+        color: white,
+        bgColor: gray,
+        selectedBgColor: grayMain,
+      },
     },
 
     toggleContent: {

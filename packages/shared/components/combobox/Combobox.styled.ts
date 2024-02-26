@@ -393,7 +393,7 @@ const StyledIcon = styled.div<{
 `;
 StyledIcon.defaultProps = { theme: Base };
 
-const StyledPlusBadge = styled.div<{}>`
+const StyledPlusBadge = styled.div<{ isOpen?: boolean }>`
   height: 12px;
   padding: 0px 3px;
   gap: 10px;
@@ -403,8 +403,16 @@ const StyledPlusBadge = styled.div<{}>`
   font-size: 9px;
   font-weight: 800;
 
-  background-color: #a3a9ae;
-  color: #ffffff;
+  background-color: ${({ theme, isOpen }) =>
+    isOpen
+      ? theme.comboBox.plusBadge.selectedBgColor
+      : theme.comboBox.plusBadge.bgColor};
+  color: ${({ theme }) => theme.comboBox.plusBadge.color};
+
+  ${StyledComboButton}:hover & {
+    background-color: ${({ theme }) =>
+      theme.comboBox.plusBadge.selectedBgColor};
+  }
 `;
 
 const StyledArrowIcon = styled.div<{

@@ -1659,6 +1659,12 @@ const Dark: TTheme = {
       color: white,
       selectedColor: white,
     },
+
+    plusBadge: {
+      color: black,
+      bgColor: grayDark,
+      selectedBgColor: "#ADADAD",
+    },
   },
 
   toggleContent: {

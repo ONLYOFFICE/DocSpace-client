@@ -26,8 +26,6 @@ export async function getData(
     const baseURL = `${proto}://${host}`;
     const baseAPIUrl = `${baseURL}/${API_PREFIX}`;
 
-    console.log(fileId);
-
     if (!fileId) return redirect(`${baseURL}/login`);
 
     const configURL = new URL(`${baseAPIUrl}/files/file/${fileId}/openedit`);
@@ -65,8 +63,6 @@ export async function getData(
 
     const [configRes, editorUrlRes, userRes, settingsRes] =
       await Promise.all(resActions);
-
-    console.log(configRes);
 
     const actions = [];
 

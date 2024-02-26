@@ -39,7 +39,6 @@ const useFilesSettings = (
       const isArchiveItem = isArchive(fileExst);
       const isImageItem = isImage(fileExst);
       const isSoundItem = isSound(fileExst);
-
       const isHtmlItem = isHtml(fileExst);
 
       let path = "";

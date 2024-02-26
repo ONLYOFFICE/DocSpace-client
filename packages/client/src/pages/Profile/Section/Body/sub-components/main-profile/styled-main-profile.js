@@ -107,6 +107,7 @@ export const StyledInfo = styled.div`
 
         .language-combo-box .combo-button {
           padding-inline-end: 0px;
+          padding-left: 0px;
         }
 
         @media ${tablet} {

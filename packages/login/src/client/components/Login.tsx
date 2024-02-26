@@ -63,8 +63,7 @@ const Login: React.FC<ILoginProps> = ({
       const queryParams = JSON.parse(decodeString);
 
       setInvitationLinkData(queryParams);
-      console.log("queryParams", queryParams);
-      //window.history.replaceState({}, document.title, window.location.pathname);
+      window.history.replaceState({}, document.title, window.location.pathname);
     }
 
     isRestoringPortal && window.location.replace("/preparation-portal");

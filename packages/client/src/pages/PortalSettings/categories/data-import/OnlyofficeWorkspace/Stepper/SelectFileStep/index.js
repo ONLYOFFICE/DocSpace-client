@@ -99,6 +99,17 @@ const SelectFileStep = ({
       )
         return;
 
+      if (res.parseResult.migratorName !== "Workspace") {
+        const workspacesEnum = {
+          GoogleWorkspace: "google",
+          Nextcloud: "nextcloud",
+          Workspace: "onlyoffice",
+        };
+        const migratorName = res.parseResult.migratorName;
+
+        navigate(`/portal-settings/data-import/migration/${workspacesEnum[migratorName]}?service=${migratorName}`);
+      }
+
       if (!res.isCompleted && res.parseResult.users.length > 0) {
         setStep(5);
         return;

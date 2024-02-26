@@ -2,19 +2,19 @@
   "folders": [
     {
       "name": "🌐 root",
-      "path": "."
+      "path": ".",
     },
     {
       "name": "🚀 @docspace/client",
-      "path": "packages/client"
+      "path": "packages/client",
     },
     {
       "name": "🔑 @docspace/login",
-      "path": "packages/login"
+      "path": "packages/login",
     },
     {
       "name": "📄 @docspace/editor",
-      "path": "packages/editor"
+      "path": "packages/editor",
     },
     {
       "name": "📄 @docspace/doceditor",
@@ -22,16 +22,12 @@
     },
     {
       "name": "🗂 @docspace/management",
-      "path": "packages/management"
-    },
-    {
-      "name": "📦 @docspace/common",
-      "path": "packages/common"
+      "path": "packages/management",
     },
     {
       "name": "📦 @docspace/shared",
-      "path": "packages/shared"
-    }
+      "path": "packages/shared",
+    },
   ],
   "settings": {
     "window.zoomLevel": 0,
@@ -46,10 +42,10 @@
       "🚀 @docspace/client",
       "📄 @docspace/editor",
       "📦 @docspace/common",
-      "🗂 @docspace/management"
+      "🗂 @docspace/management",
     ],
     "[javascript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
     "VsCodeTaskButtons.tasks": [
       {
@@ -58,55 +54,55 @@
           {
             "label": "Docker : Build-EE",
             "task": "Backend | build EE",
-            "tooltip": "🛠️ Start the \"backend docker build EE\" task"
+            "tooltip": "🛠️ Start the \"backend docker build EE\" task",
           },
           {
             "label": "Docker : ReBuild-EE",
             "task": "Backend | rebuild EE",
-            "tooltip": "🛠️ Start the \"backend docker rebuild EE\" task"
+            "tooltip": "🛠️ Start the \"backend docker rebuild EE\" task",
           },
           {
             "label": "Docker : Build-CE",
             "task": "Backend | build CE",
-            "tooltip": "🛠️ Start the \"backend docker build CE\" task"
+            "tooltip": "🛠️ Start the \"backend docker build CE\" task",
           },
           {
             "label": "Docker : Build-SAAS + dnsmasq",
             "task": "Backend | build SAAS + dnsmasq",
-            "tooltip": "🛠️ Start the \"backend docker build SAAS + dnsmasq\" task"
+            "tooltip": "🛠️ Start the \"backend docker build SAAS + dnsmasq\" task",
           },
           {
             "label": "Docker : ReBuild-SAAS + dnsmasq",
             "task": "Backend | rebuild SAAS + dnsmasq",
-            "tooltip": "🛠️ Start the \"backend docker rebuild SAAS + dnsmasq\" task"
+            "tooltip": "🛠️ Start the \"backend docker rebuild SAAS + dnsmasq\" task",
           },
           {
             "label": "Docker : Build-EE + dnsmasq",
             "task": "Backend | build EE + dnsmasq",
-            "tooltip": "🛠️ Start the \"backend docker build EE + dnsmasq\" task"
+            "tooltip": "🛠️ Start the \"backend docker build EE + dnsmasq\" task",
           },
           {
             "label": "Docker : Clear",
             "task": "Backend | clear",
-            "tooltip": "🛠️ Start the \"backend docker clear\" task"
+            "tooltip": "🛠️ Start the \"backend docker clear\" task",
           },
           {
             "label": "Docker : Stop",
             "task": "Backend | stop",
-            "tooltip": "🛠️ Start the \"backend docker stop\" task"
+            "tooltip": "🛠️ Start the \"backend docker stop\" task",
           },
           {
             "label": "Docker : Start",
             "task": "Backend | start",
-            "tooltip": "🛠️ Start the \"backend docker start\" task"
+            "tooltip": "🛠️ Start the \"backend docker start\" task",
           },
           {
             "label": "Docker : Restart",
             "task": "Backend | restart",
-            "tooltip": "🛠️ Start the \"backend docker restart\" task"
-          }
+            "tooltip": "🛠️ Start the \"backend docker restart\" task",
+          },
         ],
-        "tooltip": "🛠️ Server tasks"
+        "tooltip": "🛠️ Server tasks",
       },
       {
         "label": "Client",
@@ -114,55 +110,55 @@
           {
             "label": "Install",
             "task": "Frontend | install",
-            "tooltip": "🛠️ Start the \"frontend install packages\" task"
+            "tooltip": "🛠️ Start the \"frontend install packages\" task",
           },
           {
             "label": "Update yarn.lock",
             "task": "Frontend | update yarn.lock",
-            "tooltip": "🛠️ Start the \"frontend update yarn.lock\" task"
+            "tooltip": "🛠️ Start the \"frontend update yarn.lock\" task",
           },
           {
             "label": "Build",
             "task": "Frontend | build",
-            "tooltip": "🛠️ Start the \"frontend build\" task"
+            "tooltip": "🛠️ Start the \"frontend build\" task",
           },
           {
             "label": "Build and start prod",
             "task": "Frontend | build-and-start-prod",
-            "tooltip": "🛠️ Start the \"frontend build and start production\" task"
+            "tooltip": "🛠️ Start the \"frontend build and start production\" task",
           },
           {
             "label": "Start",
             "task": "Frontend | start",
-            "tooltip": "🛠️ Start the \"frontend start\" task"
+            "tooltip": "🛠️ Start the \"frontend start\" task",
           },
           {
             "label": "Start prod",
             "task": "Frontend | start-prod",
-            "tooltip": "🛠️ Start the \"frontend start production\" task"
+            "tooltip": "🛠️ Start the \"frontend start production\" task",
           },
           {
             "label": "Start storybook",
             "task": "Frontend | storybook",
-            "tooltip": "🛠️ Start the \"frontend start storybook\" task"
+            "tooltip": "🛠️ Start the \"frontend start storybook\" task",
           },
           {
             "label": "Start storybook prod",
             "task": "Frontend | storybook prod",
-            "tooltip": "🛠️ Start the \"frontend start storybook\" task"
+            "tooltip": "🛠️ Start the \"frontend start storybook\" task",
           },
           {
             "label": "Lint",
             "task": "Frontend | Eslint",
-            "tooltip": "🛠️ Start the \"frontend start storybook\" task"
+            "tooltip": "🛠️ Start the \"frontend start storybook\" task",
           },
           {
             "label": "Lint:fix",
             "task": "Frontend | Eslint:fix",
-            "tooltip": "🛠️ Start the \"frontend start storybook\" task"
-          }
+            "tooltip": "🛠️ Start the \"frontend start storybook\" task",
+          },
         ],
-        "tooltip": "🛠️ Client tasks"
+        "tooltip": "🛠️ Client tasks",
       },
       {
         "label": "Tests",
@@ -170,27 +166,27 @@
           {
             "label": "translations",
             "task": "Test | frontend-translations",
-            "tooltip": "🛠️ Start the \"frontend translation tests\" task"
+            "tooltip": "🛠️ Start the \"frontend translation tests\" task",
           },
           {
             "label": "spellcheck",
             "task": "Test | frontend-translations-spellcheck",
-            "tooltip": "🛠️ Start the \"frontend translation spellcheck tests\" task"
+            "tooltip": "🛠️ Start the \"frontend translation spellcheck tests\" task",
           },
           {
             "label": "spellcheck-force-save",
             "task": "Test | frontend-translations-spellcheck-force-save",
-            "tooltip": "🛠️ Start the \"frontend translation spellcheck tests\" task"
+            "tooltip": "🛠️ Start the \"frontend translation spellcheck tests\" task",
           },
           {
             "label": "unit",
             "task": "Test | Jest:unit",
-            "tooltip": "🛠️ Start the \"Test | Jest:unit\" task"
-          }
+            "tooltip": "🛠️ Start the \"Test | Jest:unit\" task",
+          },
         ],
-        "tooltip": "🛠️ Client tests tasks"
-      }
-    ]
+        "tooltip": "🛠️ Client tests tasks",
+      },
+    ],
   },
   "extensions": {
     "recommendations": [
@@ -203,7 +199,7 @@
       "formulahendry.auto-complete-tag",
       "formulahendry.auto-rename-tag",
       "mrmlnc.vscode-duplicate",
-      "ms-python.python"
-    ]
-  }
+      "ms-python.python",
+    ],
+  },
 }

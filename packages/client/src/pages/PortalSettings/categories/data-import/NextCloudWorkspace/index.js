@@ -65,13 +65,13 @@ const NextcloudWorkspace = (props) => {
           fontWeight={700}
           lineHeight="22px"
         >
-          {currentStep + 1}/{StepsData.length}. {StepsData[currentStep].title}
+          {currentStep}/{StepsData.length}. {StepsData[currentStep - 1].title}
         </Text>
         <div className="data-import-section-description">
-          {StepsData[currentStep].description}
+          {StepsData[currentStep - 1].description}
         </div>
       </NextcloudWrapper>
-      {StepsData[currentStep].component}
+      {StepsData[currentStep - 1].component}
     </>
   );
 };

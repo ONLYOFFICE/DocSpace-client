@@ -34,7 +34,7 @@ export const LoginFormWrapper = styled.div`
   box-sizing: border-box;
 
   @media ${mobile} {
-    height: calc(100vh - 48px);
+    height: calc(100% - 48px);
   }
 
   .bg-cover {

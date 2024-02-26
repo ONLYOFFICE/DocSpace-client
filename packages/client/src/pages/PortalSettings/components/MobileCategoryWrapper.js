@@ -2,7 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
-import { Link }  from "@docspace/shared/components/link";
+import { Badge } from "@docspace/shared/components/badge";
+import { Link } from "@docspace/shared/components/link";
 import { Base } from "@docspace/shared/themes";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import commonIconsStyles from "@docspace/shared/utils/common-icons-style";
@@ -53,8 +54,15 @@ const StyledMobileCategoryWrapper = styled.div`
 `;
 
 const MobileCategoryWrapper = (props) => {
-  const { title, url, subtitle, onClickLink, isDisabled, withPaidBadge } =
-    props;
+  const {
+    title,
+    url,
+    subtitle,
+    onClickLink,
+    isDisabled,
+    withPaidBadge,
+    badgeLabel,
+  } = props;
 
   const onClickProp = isDisabled ? {} : onClickLink;
   const onHrefProp = isDisabled

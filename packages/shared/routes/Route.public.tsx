@@ -1,14 +1,20 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { Navigate, Route, useLocation } from "react-router-dom";
-//import AppLoader from "../AppLoader";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { inject, observer } from "mobx-react";
-import { TenantStatus } from "@docspace/shared/enums";
+import { Navigate, useLocation } from "react-router-dom";
 
-export const PublicRoute = ({ children, ...rest }) => {
-  const { wizardCompleted, isAuthenticated, tenantStatus, isPortalDeactivate } =
-    rest;
+import { TenantStatus } from "@docspace/shared/enums";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+
+import type { PublicRouteProps } from "./Routers.types";
+
+export const PublicRoute = (props: PublicRouteProps) => {
+  const {
+    wizardCompleted,
+    isAuthenticated,
+    tenantStatus,
+    isPortalDeactivate,
+    children,
+  } = props;
 
   const location = useLocation();
 
@@ -34,7 +40,7 @@ export const PublicRoute = ({ children, ...rest }) => {
       (isAuthenticated && !isPortalRestoring && !isPortalDeactivate) ||
       (!location?.state?.isRestrictionError && isPortalRestriction)
     ) {
-      return <Navigate replace to={"/"} />;
+      return <Navigate replace to="/" />;
     }
 
     if (isAuthenticated && isPortalRestoring && !isPreparationPortalUrl) {
@@ -43,7 +49,7 @@ export const PublicRoute = ({ children, ...rest }) => {
           replace
           to={combineUrl(
             window.DocSpaceConfig?.proxy?.url,
-            "/preparation-portal"
+            "/preparation-portal",
           )}
         />
       );
@@ -57,7 +63,7 @@ export const PublicRoute = ({ children, ...rest }) => {
       );
     }
     if (!wizardCompleted && location.pathname !== "/wizard") {
-      return <Navigate replace to={"/wizard"} />;
+      return <Navigate replace to="/wizard" />;
     }
 
     if (
@@ -71,7 +77,7 @@ export const PublicRoute = ({ children, ...rest }) => {
           replace
           to={combineUrl(
             window.DocSpaceConfig?.proxy?.url,
-            "/preparation-portal"
+            "/preparation-portal",
           )}
         />
       );
@@ -97,7 +103,7 @@ export const PublicRoute = ({ children, ...rest }) => {
       !isPortalDeactivate
     ) {
       window.location.replace(
-        combineUrl(window.DocSpaceConfig?.proxy?.url, "/login")
+        combineUrl(window.DocSpaceConfig?.proxy?.url, "/login"),
       );
 
       return null;
@@ -110,16 +116,3 @@ export const PublicRoute = ({ children, ...rest }) => {
 
   return component;
 };
-
-export default inject(({ authStore, settingsStore }) => {
-  const { isAuthenticated, isLoaded } = authStore;
-  const { wizardCompleted, tenantStatus, isPortalDeactivate } = settingsStore;
-
-  return {
-    tenantStatus,
-    wizardCompleted,
-    isAuthenticated,
-    isLoaded,
-    isPortalDeactivate,
-  };
-})(observer(PublicRoute));

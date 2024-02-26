@@ -25,8 +25,10 @@ newInstance
     },
 
     backend: {
-      loadPath: loadLanguagePath(config.homepage, "About"),
+      loadPath: loadLanguagePath(config.homepage),
     },
+
+    ns: ["About", "Common"],
 
     react: {
       useSuspense: false,

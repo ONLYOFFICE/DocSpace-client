@@ -27,7 +27,6 @@ const ArticleProfile = (props: ArticleProfileProps) => {
     getActions,
     onProfileClick,
     currentDeviceType,
-    isVirtualKeyboardOpen,
   } = props;
   const { t } = useTranslation(["Common"]);
   const [isOpen, setIsOpen] = useState(false);
@@ -90,10 +89,7 @@ const ArticleProfile = (props: ArticleProfileProps) => {
   if (currentDeviceType === DeviceType.mobile) return null;
 
   return (
-    <StyledProfileWrapper
-      showText={showText}
-      isVirtualKeyboardOpen={isVirtualKeyboardOpen}
-    >
+    <StyledProfileWrapper showText={showText}>
       <StyledArticleProfile>
         <div ref={ref}>
           <Avatar

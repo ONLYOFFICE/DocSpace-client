@@ -4,7 +4,7 @@ import { withTranslation } from "react-i18next";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
-import withCultureNames from "@docspace/common/hoc/withCultureNames";
+import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 import { Base } from "@docspace/shared/themes";
 
 import LoaderCustomizationNavbar from "./sub-components/loaderCustomizationNavbar";
@@ -85,6 +85,6 @@ export default inject(({ common, settingsStore }) => {
   };
 })(
   withCultureNames(
-    observer(withTranslation(["Settings", "Common"])(CustomizationNavbar))
-  )
+    observer(withTranslation(["Settings", "Common"])(CustomizationNavbar)),
+  ),
 );

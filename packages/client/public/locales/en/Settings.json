@@ -103,6 +103,7 @@
   "EnterTitle": "Enter title",
   "ErrorMessageBruteForceProtection": "Specified argument was out of the range of valid values.",
   "ForcePathStyle": "Force Path Style",
+  "HexCode": "Hex code",
   "IncludedInBusiness": "Included in Business plan",
   "IntegrationRequest": "Missing a useful integration or component in ONLYOFFICE DocSpace? Leave a request to our team and we will look into that.",
   "IPSecurity": "IP Security",
@@ -236,6 +237,5 @@
   "WhiteLabelSubtitle": "Enter your company name, upload the logo, and customize the styling to match your branding.",
   "WhiteLabelTooltip": "The sizes are shown for the Retina displays. For the displays with standard resolutions the logo width and height will be resized accordingly upon upload.",
   "YouHaveUnsavedChanges": "You have unsaved changes",
-  "YourCurrentDomain": "Your current domain",
-  "HexCode": "Hex code"
+  "YourCurrentDomain": "Your current domain"
 }

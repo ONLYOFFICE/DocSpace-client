@@ -53,7 +53,13 @@ const DEFAULT_PORTAL_TEXT =
 const DEFAULT_CREATION_TEXT =
   "A DocSpace account will be created for {{email}}. Please, complete your registration:";
 
-const RegistrationFormGreeting = ({ email, t, setRegistrationForm, type }) => {
+const RegistrationFormGreeting = ({
+  email,
+  t,
+  setRegistrationForm,
+  type,
+  emailFromLink,
+}) => {
   const onClickBack = () => {
     setRegistrationForm(false);
   };
@@ -61,7 +67,7 @@ const RegistrationFormGreeting = ({ email, t, setRegistrationForm, type }) => {
   return (
     <div className="greeting-container">
       <div className="back-sign-in-container">
-        {type === "LinkInvite" && (
+        {type === "LinkInvite" && !emailFromLink && (
           <div className="back-button">
             <IconButton size={16} iconName={ArrowIcon} onClick={onClickBack} />
             <Text fontWeight={600} onClick={onClickBack}>
@@ -564,6 +570,7 @@ const CreateUserForm = (props) => {
                           t={t}
                           setRegistrationForm={setRegistrationForm}
                           type={linkData.type}
+                          emailFromLink={emailFromLink}
                         />
                         <FieldContainer
                           className="form-field"

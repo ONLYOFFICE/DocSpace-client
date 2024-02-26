@@ -355,6 +355,10 @@ export const getBaseTheme = () => {
       },
     },
 
+    socialButtonsGroup: {
+      border: "1px solid #D0D5DA",
+    },
+
     groupButton: {
       fontSize: "14px",
       lineHeight: "19px",

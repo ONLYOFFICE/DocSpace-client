@@ -16,12 +16,18 @@ const StyledSocialButtonsGroup = styled.div`
     .buttonWrapper {
       margin-bottom: 8px;
       width: 100%;
+
+      .social-button {
+        box-shadow: none;
+        border: ${(props) => props.theme.socialButtonsGroup.border};
+        border-radius: ${(props) => props.theme.socialButton.borderRadius};
+      }
     }
 
     .show-more-button {
       padding: 10px 16px;
       border-radius: ${(props) => props.theme.socialButton.borderRadius};
-      border: ${(props) => props.theme.socialButton.border};
+      border: ${(props) => props.theme.socialButtonsGroup.border};
 
       width: 52px;
       height: 40px;

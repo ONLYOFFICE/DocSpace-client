@@ -327,6 +327,10 @@ const Dark: TTheme = {
     },
   },
 
+  socialButtonsGroup: {
+    border: "1px solid #474747",
+  },
+
   groupButton: {
     fontSize: "14px",
     lineHeight: "19px",

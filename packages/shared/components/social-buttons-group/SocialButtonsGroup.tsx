@@ -58,6 +58,7 @@ export const SocialButtonsGroup = memo(
             data-url={url}
             data-providername={provider}
             onClick={onClick}
+            className="social-button"
           />
         </div>
       );

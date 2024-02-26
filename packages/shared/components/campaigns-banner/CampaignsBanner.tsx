@@ -1,6 +1,7 @@
 import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg?url";
 
 import React from "react";
+
 import { Text as TextComponent } from "../text";
 import { Link as LinkComponent } from "../link";
 import { IconButton } from "../icon-button";
@@ -11,6 +12,8 @@ import {
   BannerButton,
 } from "./CampaignsBanner.styled";
 import { CampaignsBannerProps } from "./CampaignsBanner.types";
+
+import useFitText from "./useFitText";
 
 const CampaignsBanner = (props: CampaignsBannerProps) => {
   const {
@@ -28,8 +31,11 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
   const hasText = !!Text;
   const isButton = action?.isButton;
 
+  const { fontSize, ref } = useFitText(campaignImage, body?.fontSize);
+
   return (
     <BannerWrapper
+      ref={ref}
       data-testid="campaigns-banner"
       background={campaignImage}
       borderColor={borderColor}
@@ -37,6 +43,7 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
       <BannerContent>
         {hasTitle && (
           <TextComponent
+            className="header"
             color={title?.color}
             fontSize={title?.fontSize}
             fontWeight={title?.fontWeight}
@@ -44,25 +51,26 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
             {Header}
           </TextComponent>
         )}
-        {hasBodyText && (
-          <TextComponent
-            color={body?.color}
-            fontSize={body?.fontSize}
-            fontWeight={body?.fontWeight}
-          >
-            {SubHeader}
-          </TextComponent>
-        )}
-        {hasText && (
-          <TextComponent
-            color={text?.color}
-            fontSize={text?.fontSize}
-            fontWeight={text?.fontWeight}
-          >
-            {Text}
-          </TextComponent>
-        )}
-
+        <div>
+          {hasBodyText && (
+            <TextComponent
+              color={body?.color}
+              fontSize={fontSize}
+              fontWeight={body?.fontWeight}
+            >
+              {SubHeader}
+            </TextComponent>
+          )}
+          {hasText && (
+            <TextComponent
+              color={text?.color}
+              fontSize={text?.fontSize}
+              fontWeight={text?.fontWeight}
+            >
+              {Text}
+            </TextComponent>
+          )}
+        </div>
         {isButton ? (
           <BannerButton
             buttonTextColor={action?.color}

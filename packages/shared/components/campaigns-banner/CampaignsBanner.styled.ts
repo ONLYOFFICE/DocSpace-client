@@ -6,6 +6,7 @@ const BannerWrapper = styled.div<{
   background?: string;
   borderColor?: string;
 }>`
+  overflow: hidden;
   position: relative;
   min-height: 140px;
   max-height: 140px;
@@ -32,10 +33,14 @@ const BannerWrapper = styled.div<{
 BannerWrapper.defaultProps = { theme: Base };
 
 const BannerContent = styled.div`
-  padding: 18px 14px;
+  padding: 16px 14px;
   display: flex;
   flex-direction: column;
   gap: 8px;
+
+  .header {
+    max-width: 167px;
+  }
 `;
 
 const BannerButton = styled.button<{

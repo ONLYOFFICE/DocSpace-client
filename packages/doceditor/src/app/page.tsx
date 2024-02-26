@@ -17,19 +17,27 @@ async function Page({
 }) {
   const {
     fileId,
+    fileid,
     fileVersion: version,
     doc,
     action,
     share,
   } = searchParams || {
     fileId: undefined,
+    fileid: undefined,
     fileVersion: undefined,
     doc: undefined,
     action: undefined,
     share: undefined,
   };
 
-  const data = await getData(fileId, version, doc, action === "view", share);
+  const data = await getData(
+    fileId ?? fileid,
+    version,
+    doc,
+    action === "view",
+    share,
+  );
 
   return <Root {...data} />;
 }

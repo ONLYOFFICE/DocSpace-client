@@ -281,6 +281,17 @@ const LoginForm: React.FC<ILoginFormProps> = ({
     setIsCaptchaSuccess(true);
   };
 
+  const errorMessage = () => {
+    if (!password.trim()) {
+      return t("Common:RequiredField");
+    }
+    if (emailFromInvitation) {
+      return errorText ? t(`Common:${errorText}`) : t("Common:RequiredField");
+    }
+  };
+
+  const passwordErrorMessage = errorMessage();
+
   return (
     <form className="auth-form-container">
       <EmailContainer
@@ -300,7 +311,7 @@ const LoginForm: React.FC<ILoginFormProps> = ({
         isVertical={true}
         labelVisible={false}
         hasError={!passwordValid}
-        errorMessage={!password.trim() ? t("Common:RequiredField") : ""} //TODO: Add wrong password server error
+        errorMessage={passwordErrorMessage} //TODO: Add wrong password server error
       >
         <PasswordInput
           className="password-input"

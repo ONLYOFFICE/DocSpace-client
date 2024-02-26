@@ -72,8 +72,8 @@ const DeepLink = ({
 
   const renderLogo = () => {
     const logoPath = theme.isBase
-      ? logoUrls[1]?.path?.light
-      : logoUrls[1]?.path?.dark;
+      ? logoUrls[0]?.path?.light
+      : logoUrls[0]?.path?.dark;
     const logo = getLogoFromPath(logoPath);
 
     if (currentDeviceType === DeviceType.mobile) {
@@ -101,14 +101,14 @@ const DeepLink = ({
       <FormWrapper>
         <StyledDeepLink>
           <StyledBodyWrapper>
-            <Text className="title">{t("OpeningDocument")}</Text>
+            <Text className="title">{t("DeepLink:OpeningDocument")}</Text>
             <StyledFileTile theme={theme}>
               <img src={getFileIcon()} alt="docspace-logo" />
               <Text fontSize="14px" fontWeight="600" truncate>
                 {getFileTitle()}
               </Text>
             </StyledFileTile>
-            <Text>{t("DeepLinkText")}</Text>
+            <Text>{t("DeepLink:DeepLinkText")}</Text>
           </StyledBodyWrapper>
           <StyledActionsWrapper>
             <Checkbox
@@ -119,7 +119,7 @@ const DeepLink = ({
             <Button
               size={ButtonSize.medium}
               primary
-              label={t("OpenInApp")}
+              label={t("DeepLink:OpenInApp")}
               onClick={onOpenAppClick}
             />
             <Link
@@ -131,7 +131,7 @@ const DeepLink = ({
               color={theme.currentColorScheme?.main?.accent}
               onClick={onStayBrowserClick}
             >
-              {t("StayInBrowser")}
+              {t("DeepLink:StayInBrowser")}
             </Link>
           </StyledActionsWrapper>
         </StyledDeepLink>

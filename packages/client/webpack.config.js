@@ -298,7 +298,6 @@ module.exports = (env, argv) => {
         "./NavMenu": "./src/components/NavMenu",
         "./PreparationPortalDialog":
           "./src/components/dialogs/PreparationPortalDialog/PreparationPortalDialogWrapper.js",
-        "./SharingDialog": "./src/components/panels/SharingDialog",
         "./utils": "./src/helpers/filesUtils.js",
         "./BrandingPage":
           "./src/pages/PortalSettings/categories/common/branding.js",

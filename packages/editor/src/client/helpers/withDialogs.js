@@ -58,10 +58,6 @@ const withDialogs = (WrappedComponent) => {
       });
     };
 
-    const onSDKRequestSharingSettings = () => {
-      setIsVisible(true);
-    };
-
     const onCancel = () => {
       setIsVisible(false);
     };

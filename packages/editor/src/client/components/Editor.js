@@ -100,10 +100,6 @@ function Editor({
     try {
       let onRequestSharingSettings;
 
-      if (isSharingAccess) {
-        onRequestSharingSettings = onSDKRequestSharingSettings;
-      }
-
       const events = {
         events: {
           onRequestSharingSettings,

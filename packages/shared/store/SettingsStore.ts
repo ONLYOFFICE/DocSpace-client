@@ -23,7 +23,12 @@ import {
 } from "../api/settings/types";
 import { TUser } from "../api/people/types";
 import { size as deviceSize, isTablet, getSystemTheme } from "../utils";
-import { frameCallEvent, getShowText, isPublicRoom } from "../utils/common";
+import {
+  frameCallEvent,
+  getShowText,
+  isPublicRoom,
+  insertTagManager,
+} from "../utils/common";
 import { setCookie, getCookie } from "../utils/cookie";
 import { combineUrl } from "../utils/combineUrl";
 import FirebaseHelper from "../utils/firebase";
@@ -576,6 +581,10 @@ class SettingsStore {
 
     if (origSettings?.domainValidator) {
       this.domainValidator = origSettings.domainValidator;
+    }
+
+    if (origSettings?.tagManagerId) {
+      insertTagManager(origSettings.tagManagerId);
     }
   };
 

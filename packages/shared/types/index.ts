@@ -111,6 +111,7 @@ declare global {
     Tiff: new (arg: object) => {
       toDataURL: () => string;
     };
+    dataLayer?: Record<string, unknown>[];
   }
 
   export type ContextMenuModel =

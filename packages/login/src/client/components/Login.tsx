@@ -6,11 +6,7 @@ import { useLocation } from "react-router-dom";
 import { LoginFormWrapper, LoginContent } from "./StyledLogin";
 import { Text } from "@docspace/shared/components/text";
 import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
-import {
-  getProviderTranslation,
-  getOAuthToken,
-  getLoginLink,
-} from "@docspace/shared/utils/common";
+import { getOAuthToken, getLoginLink } from "@docspace/shared/utils/common";
 import { Link } from "@docspace/shared/components/link";
 import { checkIsSSR } from "@docspace/shared/utils";
 import { PROVIDERS_DATA } from "@docspace/shared/constants";
@@ -20,7 +16,7 @@ import RecoverAccessModalDialog from "@docspace/shared/components/recover-access
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import Register from "./sub-components/register-container";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-import SSOIcon from "PUBLIC_DIR/images/sso.react.svg";
+import SSOIcon from "PUBLIC_DIR/images/sso.react.svg?url";
 import { Dark, Base } from "@docspace/shared/themes";
 import { useMounted } from "../helpers/useMounted";
 import { getBgPattern, frameCallCommand } from "@docspace/shared/utils/common";
@@ -195,7 +191,7 @@ const Login: React.FC<ILoginProps> = ({
   const ssoProps = ssoExists()
     ? {
         ssoUrl: ssoUrl,
-        ssoLabel: ssoLabel || getProviderTranslation("sso", t),
+        ssoLabel: ssoLabel,
         ssoSVG: SSOIcon,
       }
     : {};

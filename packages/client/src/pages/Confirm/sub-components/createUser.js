@@ -460,9 +460,7 @@ const CreateUserForm = (props) => {
   const ssoProps = ssoExists()
     ? {
         ssoUrl: capabilities?.ssoUrl,
-        ssoLabel:
-          capabilities?.ssoLabel ||
-          getProviderTranslation("sso", t, false, true),
+        ssoLabel: capabilities?.ssoLabel,
         ssoSVG: SsoReactSvgUrl,
       }
     : {};

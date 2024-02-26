@@ -1,6 +1,8 @@
 import React, { memo, useState } from "react";
 import equal from "fast-deep-equal/react";
 
+import { getProviderLabel } from "@docspace/shared/utils/common";
+
 import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/vertical-dots.react.svg?url";
 
 import { SocialButton } from "../social-button";
@@ -51,8 +53,8 @@ export const SocialButtonsGroup = memo(
           <SocialButton
             isDisabled={isDisabled}
             iconName={icon}
-            label={length > 2 ? "" : label}
-            $iconOptions={iconOptions}
+            label={length > 2 ? "" : getProviderLabel(label, t)}
+            iconOptions={iconOptions}
             data-url={url}
             data-providername={provider}
             onClick={onClick}
@@ -68,7 +70,7 @@ export const SocialButtonsGroup = memo(
             isDisabled={isDisabled}
             iconName={ssoSVG}
             className="sso-button"
-            label={ssoLabel}
+            label={ssoLabel || getProviderLabel("sso", t)}
             onClick={() => (window.location.href = ssoUrl)}
           />
         )}

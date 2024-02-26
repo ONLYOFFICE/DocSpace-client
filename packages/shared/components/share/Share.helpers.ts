@@ -52,7 +52,7 @@ export const getAccessOptions = (
     available.Read && {
       access: ShareAccessRights.ReadOnly,
       key: "viewing",
-      label: t("ReadOnly"),
+      label: t("Common:ReadOnly"),
       icon: EyeReactSvgUrl,
     },
     available.Restrict && {

@@ -106,7 +106,7 @@ const ExpiredComboBox = ({
       const date = `${dateObj?.date} ${dateObj?.label}`;
 
       return (
-        <Trans t={t} i18nKey="LinkExpireAfter" ns="SharingPanel">
+        <Trans t={t} i18nKey="LinkExpireAfter" ns="Common">
           The link will expire after
           <LinkWithDropdown
             className="expired-options"
@@ -116,7 +116,7 @@ const ExpiredComboBox = ({
             fontSize="12px"
             fontWeight={400}
             isDisabled={isDisabled}
-            directionY={"both"}
+            directionY="both"
           >
             {{ date }}
           </LinkWithDropdown>
@@ -126,7 +126,7 @@ const ExpiredComboBox = ({
     const date = t("Common:Unlimited");
 
     return (
-      <Trans t={t} i18nKey="LinkIsValid" ns="SharingPanel">
+      <Trans t={t} i18nKey="LinkIsValid" ns="Common">
         The link is valid for
         <LinkWithDropdown
           className="expired-options"

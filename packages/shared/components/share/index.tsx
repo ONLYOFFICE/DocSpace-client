@@ -195,14 +195,14 @@ const Share = (props: ShareProps) => {
       if (item.access === ShareAccessRights.None) {
         deleteLink(link.sharedTo.id);
         if (link.sharedTo.primary) {
-          toastr.success(t("GeneralAccessLinkRemove"));
+          toastr.success(t("Common:GeneralAccessLinkRemove"));
         } else {
-          toastr.success(t("AdditionalLinkRemove"));
+          toastr.success(t("Common:AdditionalLinkRemove"));
         }
       } else {
         updateLink(link, res);
         if (item.access === ShareAccessRights.DenyAccess) {
-          toastr.success(t("LinkAccessDenied"));
+          toastr.success(t("Common:LinkAccessDenied"));
         } else {
           copy(link.sharedTo.shareLink);
           toastr.success(t("Common:LinkSuccessfullyCopied"));
@@ -254,8 +254,8 @@ const Share = (props: ShareProps) => {
   return (
     <div>
       <PublicRoomBar
-        headerText={t("ShareDocument")}
-        bodyText={t("ShareDocumentDescription")}
+        headerText={t("Common:ShareDocument")}
+        bodyText={t("Common:ShareDocumentDescription")}
         iconName={InfoIcon}
       />
       {isLoading ? (

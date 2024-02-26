@@ -41,6 +41,10 @@ const Error403 = loadable(
   () => import("@docspace/shared/components/errors/Error403"),
 );
 
+const Error500 = loadable(
+  () => import("@docspace/shared/components/errors/Error500"),
+);
+
 const Error520 = loadable(() => import("../components/Error520Wrapper"));
 
 const ErrorAccessRestricted = loadable(
@@ -444,6 +448,16 @@ const ClientRoutes = [
       <PrivateRoute>
         <ErrorBoundary>
           <Error403 />
+        </ErrorBoundary>
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/error/500",
+    element: (
+      <PrivateRoute>
+        <ErrorBoundary>
+          <Error500 />
         </ErrorBoundary>
       </PrivateRoute>
     ),

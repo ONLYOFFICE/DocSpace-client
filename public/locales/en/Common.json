@@ -144,6 +144,8 @@
   "Error403BodyText": "Forbidden. You don't have permissions to access the requested resource.",
   "Error404HeaderText": "404 Error!",
   "Error404BodyText": "Page not found. The server cannot find the requested resource",
+  "Error500HeaderText": "500 Error!",
+  "Error500BodyText": "The server is currently unable to handle this request.",
   "ErrorDeactivatedText": "This DocSpace is deactivated",
   "ErrorEmptyList": "The list of entities has been changed. Please check the contents and try again.",
   "ErrorInternalServer": "Internal server error. Try again later.",

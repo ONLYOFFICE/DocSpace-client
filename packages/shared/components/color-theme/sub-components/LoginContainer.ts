@@ -70,7 +70,7 @@ const LoginContainer = styled.div<{ type: string }>`
 
   .or-label {
     color: ${(props) => props.theme.login.orTextColor};
-    margin: 0 32px;
+    margin: 0 8px;
   }
 
   .line {

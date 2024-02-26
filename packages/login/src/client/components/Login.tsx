@@ -24,6 +24,7 @@ import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 import { getLogoFromPath, getSystemTheme } from "@docspace/shared/utils";
 import { TenantStatus } from "@docspace/shared/enums";
 import GreetingContainer from "./sub-components/GreetingContainer";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 const themes = {
   Dark: Dark,
@@ -195,6 +196,8 @@ const Login: React.FC<ILoginProps> = ({
       }
     : {};
 
+  const isRegisterContainerVisible = !checkIsSSR() && enabledJoin;
+
   return (
     <LoginFormWrapper
       id="login-page"
@@ -203,82 +206,87 @@ const Login: React.FC<ILoginProps> = ({
       bgPattern={bgPattern}
     >
       <div className="bg-cover"></div>
-      <LoginContent enabledJoin={enabledJoin}>
-        <ColorTheme
-          themeId={ThemeId.LinkForgotPassword}
-          type={invitationLinkData.type}
-        >
-          <GreetingContainer
-            t={t}
-            roomName={invitationLinkData.roomName}
-            firstName={invitationLinkData.firstName}
-            lastName={invitationLinkData.lastName}
-            logoUrl={logoUrl}
-            greetingSettings={greetingSettings}
+      <Scrollbar id="customScrollBar">
+        <LoginContent enabledJoin={enabledJoin}>
+          <ColorTheme
+            themeId={ThemeId.LinkForgotPassword}
             type={invitationLinkData.type}
-          />
-          <FormWrapper id="login-form" theme={theme}>
-            <LoginForm
-              isBaseTheme={isBaseTheme}
-              recaptchaPublicKey={portalSettings?.recaptchaPublicKey}
-              isDesktop={!!isDesktopEditor}
-              isLoading={isLoading}
-              hashSettings={portalSettings?.passwordHash}
-              setIsLoading={setIsLoading}
-              match={match}
-              enableAdmMess={enableAdmMess}
-              cookieSettingsEnabled={cookieSettingsEnabled}
-              emailFromInvitation={invitationLinkData.email}
+            isRegisterContainerVisible={isRegisterContainerVisible}
+          >
+            <GreetingContainer
+              t={t}
+              roomName={invitationLinkData.roomName}
+              firstName={invitationLinkData.firstName}
+              lastName={invitationLinkData.lastName}
+              logoUrl={logoUrl}
+              greetingSettings={greetingSettings}
+              type={invitationLinkData.type}
             />
-            {(oauthDataExists() || ssoExists()) && (
-              <>
-                <div className="line">
-                  <Text className="or-label">{t("Common:orContinueWith")}</Text>
-                </div>
-                <SocialButtonsGroup
-                  providers={providers}
-                  onClick={onSocialButtonClick}
-                  t={t}
-                  isDisabled={isLoading}
-                  {...ssoProps}
-                />
-              </>
-            )}
+            <FormWrapper id="login-form" theme={theme}>
+              <LoginForm
+                isBaseTheme={isBaseTheme}
+                recaptchaPublicKey={portalSettings?.recaptchaPublicKey}
+                isDesktop={!!isDesktopEditor}
+                isLoading={isLoading}
+                hashSettings={portalSettings?.passwordHash}
+                setIsLoading={setIsLoading}
+                match={match}
+                enableAdmMess={enableAdmMess}
+                cookieSettingsEnabled={cookieSettingsEnabled}
+                emailFromInvitation={invitationLinkData.email}
+              />
+              {(oauthDataExists() || ssoExists()) && (
+                <>
+                  <div className="line">
+                    <Text className="or-label">
+                      {t("Common:orContinueWith")}
+                    </Text>
+                  </div>
+                  <SocialButtonsGroup
+                    providers={providers}
+                    onClick={onSocialButtonClick}
+                    t={t}
+                    isDisabled={isLoading}
+                    {...ssoProps}
+                  />
+                </>
+              )}
 
-            {enableAdmMess && (
-              <Link
-                fontWeight="600"
-                fontSize="13px"
-                type="action"
-                isHovered={true}
-                className="login-link recover-link"
-                onClick={openRecoverDialog}
-              >
-                {t("RecoverAccess")}
-              </Link>
-            )}
-          </FormWrapper>
-          <Toast />
+              {enableAdmMess && (
+                <Link
+                  fontWeight="600"
+                  fontSize="13px"
+                  type="action"
+                  isHovered={true}
+                  className="login-link recover-link"
+                  onClick={openRecoverDialog}
+                >
+                  {t("RecoverAccess")}
+                </Link>
+              )}
+            </FormWrapper>
+            <Toast />
 
-          <RecoverAccessModalDialog
-            visible={recoverDialogVisible}
-            onClose={closeRecoverDialog}
-            textBody={t("RecoverTextBody")}
-            emailPlaceholderText={t("RecoverContactEmailPlaceholder")}
-            id="recover-access-modal"
+            <RecoverAccessModalDialog
+              visible={recoverDialogVisible}
+              onClose={closeRecoverDialog}
+              textBody={t("RecoverTextBody")}
+              emailPlaceholderText={t("RecoverContactEmailPlaceholder")}
+              id="recover-access-modal"
+            />
+          </ColorTheme>
+        </LoginContent>
+
+        {isRegisterContainerVisible && (
+          <Register
+            id="login_register"
+            enabledJoin={enabledJoin}
+            currentColorScheme={currentColorScheme}
+            trustedDomains={portalSettings?.trustedDomains}
+            trustedDomainsType={portalSettings?.trustedDomainsType}
           />
-        </ColorTheme>
-      </LoginContent>
-
-      {!checkIsSSR() && enabledJoin && (
-        <Register
-          id="login_register"
-          enabledJoin={enabledJoin}
-          currentColorScheme={currentColorScheme}
-          trustedDomains={portalSettings?.trustedDomains}
-          trustedDomainsType={portalSettings?.trustedDomainsType}
-        />
-      )}
+        )}
+      </Scrollbar>
     </LoginFormWrapper>
   );
 };

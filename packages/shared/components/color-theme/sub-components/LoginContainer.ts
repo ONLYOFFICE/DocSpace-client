@@ -2,7 +2,10 @@ import styled from "styled-components";
 import { tablet, mobile } from "../../../utils";
 import { Base } from "../../../themes";
 
-const LoginContainer = styled.div<{ type: string }>`
+const LoginContainer = styled.div<{
+  type: string;
+  isRegisterContainerVisible: boolean;
+}>`
   user-select: none;
   display: flex;
   flex-direction: column;
@@ -10,6 +13,9 @@ const LoginContainer = styled.div<{ type: string }>`
   //margin: 56px auto 0 auto;
   max-width: 960px;
   z-index: 0;
+
+  margin-bottom: ${(props) =>
+    props.isRegisterContainerVisible ? "100px" : "16px"};
 
   .remember-wrapper {
     max-width: 170px;
@@ -28,7 +34,8 @@ const LoginContainer = styled.div<{ type: string }>`
   }
 
   @media ${mobile} {
-    margin: 0 auto 0 auto;
+    margin-left: auto;
+    margin-right: auto;
     max-width: 100%;
     width: calc(100% - 32px);
   }

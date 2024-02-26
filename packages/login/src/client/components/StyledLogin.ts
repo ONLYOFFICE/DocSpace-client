@@ -29,12 +29,12 @@ interface IStyledCaptchaProps {
 
 export const LoginFormWrapper = styled.div`
   width: 100%;
-  height: ${(props) => (props.enabledJoin ? "calc(100vh - 68px)" : "100vh")};
+  height: 100vh;
 
   box-sizing: border-box;
 
   @media ${mobile} {
-    height: 100%;
+    height: calc(100vh - 48px);
   }
 
   .bg-cover {
@@ -107,6 +107,8 @@ export const LoginContent = styled.div`
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   height: 100%;
+
+  margin-top: 32px;
 
   @media ${mobile} {
     width: 100%;

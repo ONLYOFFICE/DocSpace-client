@@ -86,9 +86,24 @@ export const LoginFormWrapper = styled.div`
         max-width: 60px;
         text-overflow: ellipsis;
         overflow: hidden;
-        left: 0;
+
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                right: 0;
+              `
+            : css`
+                left: 0;
+              `};
+
         display: flex;
         gap: 4px;
+        svg {
+          ${(props) =>
+            props.theme.interfaceDirection === "rtl" &&
+            " transform: rotate(180deg)"};
+        }
+
         p {
           color: ${(props) => props.theme.login.backTitle.color};
         }

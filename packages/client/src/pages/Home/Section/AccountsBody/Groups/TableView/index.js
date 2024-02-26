@@ -68,7 +68,7 @@ const GroupsTableView = ({
         hasMoreFiles={hasMoreGroups}
         itemCount={groupsFilterTotal}
         filesLength={groups.length}
-        itemHeight={49}
+        itemHeight={48}
         useReactWindow={!withPaging}
       >
         {groups.map((item, index) => (

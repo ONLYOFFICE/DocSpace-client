@@ -58,12 +58,6 @@ export const GroupsTableContainer = styled(TableContainer)`
   }
   .table-row-selected + .table-row-selected {
     .table-row {
-      .table-container_group-title-cell,
-      .table-container_row-context-menu-wrapper {
-        margin-top: -1px;
-        border-image-slice: 1;
-        border-top: 1px solid;
-      }
       .table-container_group-title-cell {
         ${groupTitleCss}
         border-left: 0; //for Safari macOS
@@ -86,11 +80,6 @@ export const GroupsTableContainer = styled(TableContainer)`
       .table-container_row-context-menu-wrapper {
         ${contextCss}
       }
-      .table-container_group-title-cell,
-      .table-container_row-context-menu-wrapper {
-        border-bottom: ${(props) =>
-          `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
-      }
     }
   }
 `;
@@ -102,13 +91,27 @@ export const GroupsRowWrapper = styled.div`
 `;
 
 export const GroupsRow = styled(TableRow)`
+  .table-container_cell:not(.table-container_row-checkbox-wrapper) {
+    height: auto;
+    max-height: 48;
+  }
+
   .table-container_cell {
-    height: 48px;
-    max-height: 48px;
+    border-top: ${(props) =>
+      `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+    margin-top: -1px;
+
     background: ${(props) =>
       (props.checked || props.isActive) &&
       `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
   }
+
+  .table-container_row-context-menu-wrapper {
+    height: 49px !important;
+    max-height: none !important;
+    box-sizing: border-box;
+  }
+
   .table-container_row-checkbox-wrapper {
     min-width: 48px;
     ${(props) =>
@@ -160,9 +163,6 @@ export const GroupsRow = styled(TableRow)`
       cursor: pointer;
       background: ${(props) =>
         `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
-      border-top: ${(props) =>
-        `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
-      margin-top: -1px;
     }
     .table-container_group-title-cell {
       ${(props) =>

@@ -10,6 +10,7 @@ import {
   StyledOptionalItem,
   StyledTriangleDownIcon,
   StyledLoader,
+  StyledPlusBadge,
 } from "../Combobox.styled";
 
 import { Text } from "../../text";
@@ -28,7 +29,7 @@ const ComboButton = (props: ComboButtonProps) => {
     innerContainer,
     innerContainerClassName = "innerContainer",
     selectedOption,
-    optionsLength,
+    optionsLength = 0,
     withOptions = true,
     withAdvancedOptions = false,
     isOpen,
@@ -40,6 +41,7 @@ const ComboButton = (props: ComboButtonProps) => {
     tabIndex,
     isLoading,
     type,
+    plusBadgeValue,
   } = props;
 
   const defaultOption = selectedOption?.default;
@@ -64,6 +66,7 @@ const ComboButton = (props: ComboButtonProps) => {
       isLoading={isLoading}
       type={type}
       selectedOption={selectedOption}
+      plusBadgeValue={plusBadgeValue}
     >
       {innerContainer && (
         <StyledOptionalItem
@@ -111,6 +114,11 @@ const ComboButton = (props: ComboButtonProps) => {
           {selectedOption?.label}
         </Text>
       ) : null}
+
+      {plusBadgeValue && (
+        <StyledPlusBadge>{`+ ${plusBadgeValue}`}</StyledPlusBadge>
+      )}
+
       <StyledArrowIcon
         displayArrow={displayArrow}
         isOpen={isOpen}

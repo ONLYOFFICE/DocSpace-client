@@ -448,6 +448,7 @@ const PeopleTableRow = (props) => {
             title: groups[0].name,
             label: groups[0].name + " ",
           }}
+          plusBadgeValue={groups.length - 1}
           onSelect={onOpenGroup}
           options={groupItems}
           scaled

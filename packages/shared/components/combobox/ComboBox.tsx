@@ -134,6 +134,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
     dropDownId,
     title,
     className,
+    plusBadgeValue,
   } = props;
 
   const { tabIndex, onClickSelectedItem } = props;
@@ -248,6 +249,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
         tabIndex={tabIndex}
         isLoading={isLoading}
         type={type}
+        plusBadgeValue={plusBadgeValue}
       />
 
       {displayType !== "toggle" && (

@@ -115,6 +115,7 @@ const StyledComboButton = styled.div<{
   withAdvancedOptions?: boolean;
   isLoading?: boolean;
   isSelected?: boolean;
+  plusBadgeValue?: number;
 }>`
   display: flex;
   align-items: center;
@@ -261,9 +262,11 @@ const StyledComboButton = styled.div<{
   .combo-button-label {
     visibility: ${(props) => (props.isLoading ? "hidden" : "visible")};
     margin-right: ${(props) =>
-      props.noBorder
-        ? props.theme.comboBox.label.marginRight
-        : props.theme.comboBox.label.marginRightWithBorder};
+      props.plusBadgeValue
+        ? 0
+        : props.noBorder
+          ? props.theme.comboBox.label.marginRight
+          : props.theme.comboBox.label.marginRightWithBorder};
     ${(props) =>
       props.theme.interfaceDirection === "rtl" &&
       css`
@@ -390,6 +393,20 @@ const StyledIcon = styled.div<{
 `;
 StyledIcon.defaultProps = { theme: Base };
 
+const StyledPlusBadge = styled.div<{}>`
+  height: 12px;
+  padding: 0px 3px;
+  gap: 10px;
+  border-radius: 12px;
+
+  line-height: 12px;
+  font-size: 9px;
+  font-weight: 800;
+
+  background-color: #a3a9ae;
+  color: #ffffff;
+`;
+
 const StyledArrowIcon = styled.div<{
   isLoading?: boolean;
   displayArrow?: boolean;
@@ -471,6 +488,7 @@ const StyledThemeComboButton = styled(StyledComboButton)(getDefaultStyles);
 
 export {
   StyledArrowIcon,
+  StyledPlusBadge,
   StyledIcon,
   StyledOptionalItem,
   StyledComboButton,

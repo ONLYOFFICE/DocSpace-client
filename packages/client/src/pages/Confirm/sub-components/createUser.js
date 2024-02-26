@@ -160,7 +160,6 @@ const CreateUserForm = (props) => {
       }
       window.authCallback = authCallback;
 
-      onCheckGreeting();
       focusInput();
     };
 

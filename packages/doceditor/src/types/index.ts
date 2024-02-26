@@ -2,6 +2,7 @@ import {
   TDocServiceLocation,
   TFile,
   TFileSecurity,
+  TFilesSettings,
   TFolder,
   TFolderSecurity,
   TGetReferenceData,
@@ -177,7 +178,9 @@ export type EditorProps = {
   doc?: string;
   documentserverUrl: string;
   fileInfo: TFile;
+  isSharingAccess: boolean;
   t: TTranslation | null;
+  onSDKRequestSharingSettings: () => void;
   onSDKRequestSaveAs: (event: object) => void;
   onSDKRequestInsertImage: (event: object) => void;
   onSDKRequestSelectSpreadsheet: (event: object) => void;
@@ -238,7 +241,7 @@ export interface SelectFolderDialogProps {
     selectedFileInfo: TSelectedFileInfo,
   ) => Promise<void>;
   fileInfo: TFile;
-
+  filesSettings: TFilesSettings;
   i18n: i18n;
 }
 
@@ -274,7 +277,7 @@ export interface SelectFileDialogProps {
     selectedFileInfo: TSelectedFileInfo,
   ) => Promise<void>;
   fileInfo: TFile;
-
+  filesSettings: TFilesSettings;
   i18n: i18n;
 }
 

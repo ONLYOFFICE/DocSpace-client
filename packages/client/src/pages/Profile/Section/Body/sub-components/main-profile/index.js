@@ -33,7 +33,7 @@ import {
 } from "./styled-main-profile";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Tooltip } from "@docspace/shared/components/tooltip";
-import withCultureNames from "@docspace/common/hoc/withCultureNames";
+import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 import { isMobile } from "@docspace/shared/utils";
 import { SSO_LABEL } from "SRC_DIR/helpers/constants";
 import { useTheme } from "styled-components";

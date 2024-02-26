@@ -45,6 +45,7 @@ const Header = (props) => {
 
     showProfileLoader,
     setIsLoading,
+    userId,
   } = props;
 
   const navigate = useNavigate();
@@ -113,10 +114,10 @@ const Header = (props) => {
       return navigate("/portal-settings/customization/general");
     }
 
-    const roomsFilter = RoomsFilter.getDefault();
+    const roomsFilter = RoomsFilter.getDefault(userId);
 
     roomsFilter.searchArea = RoomSearchArea.Active;
-    const urlParams = roomsFilter.toUrlParams();
+    const urlParams = roomsFilter.toUrlParams(userId);
     const backUrl = `/rooms/shared/filter?${urlParams}`;
 
     setIsLoading();
@@ -192,7 +193,7 @@ export default inject(
   }) => {
     const { isAdmin } = authStore;
 
-    const { isVisitor, isCollaborator } = userStore.user;
+    const { isVisitor, isCollaborator, user } = userStore.user;
 
     const { targetUserStore, filterStore, dialogStore } = peopleStore;
 
@@ -218,6 +219,7 @@ export default inject(
       setFilter: setFilterParams,
 
       profile: targetUser,
+      userId: user?.id,
       isMe,
       setChangeEmailVisible,
       setChangePasswordVisible,

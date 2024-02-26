@@ -6,7 +6,7 @@ import { SectionHeaderContent, SectionBodyContent } from "./Section";
 
 import Dialogs from "../Home/Section/AccountsBody/Dialogs";
 
-import withCultureNames from "@docspace/common/hoc/withCultureNames";
+import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 

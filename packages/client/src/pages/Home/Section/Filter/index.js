@@ -452,7 +452,7 @@ const SectionFilterContent = ({
           newFilter.searchArea === RoomSearchArea.Active
             ? "rooms/shared"
             : "rooms/archived";
-        navigate(`${path}/filter?${newFilter.toUrlParams()}`);
+        navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
       } else {
         const filterType = getFilterType(data) || null;
 
@@ -513,7 +513,7 @@ const SectionFilterContent = ({
     }
     setIsLoading(true);
     if (isRooms) {
-      const newFilter = RoomsFilter.getDefault();
+      const newFilter = RoomsFilter.clean();
       newFilter.searchArea = roomsFilter.searchArea;
 
       const path =
@@ -521,7 +521,7 @@ const SectionFilterContent = ({
           ? "rooms/shared"
           : "rooms/archived";
 
-      navigate(`${path}/filter?${newFilter.toUrlParams()}`);
+      navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
     } else {
       const newFilter = filter.clone();
       newFilter.page = 0;
@@ -584,7 +584,7 @@ const SectionFilterContent = ({
             ? "rooms/shared"
             : "rooms/archived";
 
-        navigate(`${path}/filter?${newFilter.toUrlParams()}`);
+        navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
       } else {
         const newFilter = filter.clone();
         newFilter.page = 0;
@@ -649,7 +649,7 @@ const SectionFilterContent = ({
             ? "rooms/shared"
             : "rooms/archived";
         setRoomsFilter(newFilter);
-        navigate(`${path}/filter?${newFilter.toUrlParams()}`);
+        navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
       } else {
         const path = location.pathname.split("/filter")[0];
 
@@ -2504,7 +2504,7 @@ const SectionFilterContent = ({
             ? "rooms/shared"
             : "rooms/archived";
 
-        navigate(`${path}/filter?${newFilter.toUrlParams()}`);
+        navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
       } else {
         const newFilter = filter.clone();
 
@@ -2568,7 +2568,7 @@ const SectionFilterContent = ({
 
       navigate(`${url}${newFilter.toUrlParams()}`);
     } else if (isRooms) {
-      const newFilter = RoomsFilter.getDefault();
+      const newFilter = RoomsFilter.clean();
 
       if (isArchiveFolder) {
         newFilter.searchArea = RoomSearchArea.Archive;
@@ -2579,7 +2579,7 @@ const SectionFilterContent = ({
           ? "rooms/shared"
           : "rooms/archived";
 
-      navigate(`${path}/filter?${newFilter.toUrlParams()}`);
+      navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
     } else {
       const newFilter = FilesFilter.getDefault();
 

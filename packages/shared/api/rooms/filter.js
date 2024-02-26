@@ -60,17 +60,23 @@ class RoomsFilter {
     );
 
     if (userId) {
-      const filterStorageItem =
-        defaultFilter.searchArea === RoomSearchArea.Active
-          ? JSON.parse(localStorage.getItem(`UserRoomsSharedFilter=${userId}`))
-          : JSON.parse(
-              localStorage.getItem(`UserRoomsArchivedFilter=${userId}`),
-            );
-      if (filterStorageItem) {
-        // eslint-disable-next-line no-restricted-syntax
-        for (const filterProperty in filterStorageItem) {
-          defaultFilter[filterProperty] = filterStorageItem[filterProperty];
+      try {
+        const filterStorageItem =
+          defaultFilter.searchArea === RoomSearchArea.Active
+            ? JSON.parse(
+                localStorage.getItem(`UserRoomsSharedFilter=${userId}`),
+              )
+            : JSON.parse(
+                localStorage.getItem(`UserRoomsArchivedFilter=${userId}`),
+              );
+        if (filterStorageItem) {
+          // eslint-disable-next-line no-restricted-syntax
+          for (const filterProperty in filterStorageItem) {
+            defaultFilter[filterProperty] = filterStorageItem[filterProperty];
+          }
         }
+      } catch (e) {
+        return defaultFilter;
       }
     }
 
@@ -161,7 +167,7 @@ class RoomsFilter {
       excludeSubject,
       withoutTags,
       subjectFilter,
-      quotaFilter
+      quotaFilter,
     );
 
     return newFilter;
@@ -184,7 +190,7 @@ class RoomsFilter {
     excludeSubject = DEFAULT_EXCLUDE_SUBJECT,
     withoutTags = DEFAULT_WITHOUT_TAGS,
     subjectFilter = DEFAULT_SUBJECT_FILTER,
-    quotaFilter = DEFAULT_QUOTA_FILTER
+    quotaFilter = DEFAULT_QUOTA_FILTER,
   ) {
     this.page = page;
     this.pageCount = pageCount;
@@ -347,13 +353,20 @@ class RoomsFilter {
     dtoFilter[SORT_ORDER] = sortOrder;
     dtoFilter[SEARCH_TYPE] = withSubfolders;
 
-    const archivedStorageFilter = JSON.parse(
-      localStorage.getItem(`UserRoomsArchivedFilter=${userId}`),
-    );
+    let archivedStorageFilter = null;
+    let sharedStorageFilter = null;
 
-    const sharedStorageFilter = JSON.parse(
-      localStorage.getItem(`UserRoomsSharedFilter=${userId}`),
-    );
+    try {
+      archivedStorageFilter = JSON.parse(
+        localStorage.getItem(`UserRoomsArchivedFilter=${userId}`),
+      );
+
+      sharedStorageFilter = JSON.parse(
+        localStorage.getItem(`UserRoomsSharedFilter=${userId}`),
+      );
+    } catch (e) {
+      //  console.log(e);
+    }
 
     const defaultFilter = new RoomsFilter(
       DEFAULT_PAGE,
@@ -422,7 +435,7 @@ class RoomsFilter {
       this.excludeSubject,
       this.withoutTags,
       this.subjectFilter,
-      this.quotaFilter
+      this.quotaFilter,
     );
   }
 

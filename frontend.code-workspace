@@ -13,12 +13,8 @@
       "path": "packages/login",
     },
     {
-      "name": "📄 @docspace/editor",
-      "path": "packages/editor",
-    },
-    {
       "name": "📄 @docspace/doceditor",
-      "path": "packages/doceditor"
+      "path": "packages/doceditor",
     },
     {
       "name": "🗂 @docspace/management",

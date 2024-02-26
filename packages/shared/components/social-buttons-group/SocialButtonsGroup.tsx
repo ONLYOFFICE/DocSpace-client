@@ -70,7 +70,7 @@ export const SocialButtonsGroup = memo(
           <SocialButton
             isDisabled={isDisabled}
             iconName={ssoSVG}
-            className="sso-button"
+            className="sso-button social-button"
             label={ssoLabel || getProviderLabel("sso", t)}
             onClick={() => (window.location.href = ssoUrl)}
           />

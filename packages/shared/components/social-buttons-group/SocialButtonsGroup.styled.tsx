@@ -8,20 +8,21 @@ const StyledSocialButtonsGroup = styled.div`
   .sso-button {
     margin-bottom: 8px;
   }
+
+  .social-button {
+    box-shadow: none;
+    border: ${(props) => props.theme.socialButtonsGroup.border};
+    border-radius: ${(props) => props.theme.socialButton.borderRadius};
+  }
   .social-buttons-group {
     display: flex;
     flex-direction: row;
     width: 100%;
     gap: 8px;
+
     .buttonWrapper {
       margin-bottom: 8px;
       width: 100%;
-
-      .social-button {
-        box-shadow: none;
-        border: ${(props) => props.theme.socialButtonsGroup.border};
-        border-radius: ${(props) => props.theme.socialButton.borderRadius};
-      }
     }
 
     .show-more-button {

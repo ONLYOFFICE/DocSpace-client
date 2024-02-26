@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import withLoader from "@docspace/client/src/HOCs/withLoader";
-import Loaders from "@docspace/common/components/Loaders";
+import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import { Link } from "@docspace/shared/components/link";
 
 import { Text } from "@docspace/shared/components/text";
@@ -243,33 +243,34 @@ const Accounts = (props) => {
           </Text>
           <div>Rooms list</div> */}
 
-          {infoPanelSelection?.groups?.length && <>
-            <Text
-            className={"info_field info_field_groups"}
-            noSelect
-            title={t("Common:Group")}
-          >
-            {t("Common:Group")}
-          </Text>
-
-          <div className={"info_groups"}>
-            {infoPanelSelection.groups.map((group) => (
-              <Link
-                key={group.id}
-                className={"info_data first-row info_group"}
-                isHovered={true}
-                fontSize={"13px"}
-                lineHeight={"20px"}
-                fontWeight={600}
-                title={group.name}
-                onClick={() => onGroupClick(group.id)}
+          {infoPanelSelection?.groups?.length && (
+            <>
+              <Text
+                className={"info_field info_field_groups"}
+                noSelect
+                title={t("Common:Group")}
               >
-                {group.name}
-              </Link>
-            ))}
-        </div>
-          </>}
+                {t("Common:Group")}
+              </Text>
 
+              <div className={"info_groups"}>
+                {infoPanelSelection.groups.map((group) => (
+                  <Link
+                    key={group.id}
+                    className={"info_data first-row info_group"}
+                    isHovered={true}
+                    fontSize={"13px"}
+                    lineHeight={"20px"}
+                    fontWeight={600}
+                    title={group.name}
+                    onClick={() => onGroupClick(group.id)}
+                  >
+                    {group.name}
+                  </Link>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </StyledAccountContent>
     </>
@@ -277,10 +278,16 @@ const Accounts = (props) => {
 };
 
 export default inject(
-  ({ userStore, peopleStore, accessRightsStore, infoPanelStore, currentQuotaStore }) => {
+  ({
+    userStore,
+    peopleStore,
+    accessRightsStore,
+    infoPanelStore,
+    currentQuotaStore,
+  }) => {
     const { isOwner, isAdmin, id: selfId } = userStore.user;
-  const { changeType: changeUserType, usersStore } = peopleStore;
-  const { canChangeUserType } = accessRightsStore;
+    const { changeType: changeUserType, usersStore } = peopleStore;
+    const { canChangeUserType } = accessRightsStore;
 
     const { setInfoPanelSelection } = infoPanelStore;
 
@@ -289,20 +296,20 @@ export default inject(
       setBufferSelection: setPeopleBufferSelection,
     } = peopleStore.selectionStore;
 
-  const { showStorageInfo } = currentQuotaStore;
-  return {
-    isOwner,
-    isAdmin,
-    changeUserType,
-    selfId,
-    canChangeUserType,
-    loading: usersStore.operationRunning,
-    getPeopleListItem: usersStore.getPeopleListItem,
-    setInfoPanelSelection,
+    const { showStorageInfo } = currentQuotaStore;
+    return {
+      isOwner,
+      isAdmin,
+      changeUserType,
+      selfId,
+      canChangeUserType,
+      loading: usersStore.operationRunning,
+      getPeopleListItem: usersStore.getPeopleListItem,
+      setInfoPanelSelection,
       setPeopleSelection,
       setPeopleBufferSelection,
-    showStorageInfo,
-  };
+      showStorageInfo,
+    };
   },
 )(
   withTranslation([
@@ -316,9 +323,5 @@ export default inject(
     "SmartBanner",
     "DeleteProfileEverDialog",
     "Translations",
-  ])(
-    withLoader(observer(Accounts))(
-      <Loaders.InfoPanelViewLoader view="accounts" />,
-    ),
-  ),
+  ])(withLoader(observer(Accounts))(<InfoPanelViewLoader view="accounts" />)),
 );

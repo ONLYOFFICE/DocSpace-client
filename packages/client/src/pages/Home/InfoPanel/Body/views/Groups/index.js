@@ -2,7 +2,7 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import * as Styled from "../../styles/groups.styled";
 import withLoader from "@docspace/client/src/HOCs/withLoader";
-import Loaders from "@docspace/common/components/Loaders";
+import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import GroupMember from "./GroupMember";
 import useFetchGroup from "./useFetchGroup";
 import { useParams } from "react-router-dom";
@@ -29,7 +29,7 @@ const Groups = ({ infoPanelSelection, currentGroup, setCurrentGroup }) => {
     <Styled.GroupsContent>
       {groupManager && <GroupMember groupMember={groupManager} isManager />}
       {!groupMembers ? (
-        <Loaders.InfoPanelViewLoader view="groups" />
+        <InfoPanelViewLoader view="groups" />
       ) : (
         groupMembers?.map((groupMember) => (
           <GroupMember key={groupMember.id} groupMember={groupMember} />
@@ -44,8 +44,6 @@ export default inject(({ peopleStore }) => ({
   setCurrentGroup: peopleStore.groupsStore.setCurrentGroup,
 }))(
   withTranslation([])(
-    withLoader(observer(Groups))(
-      <Loaders.InfoPanelViewLoader view="accounts" />,
-    ),
+    withLoader(observer(Groups))(<InfoPanelViewLoader view="accounts" />),
   ),
 );

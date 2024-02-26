@@ -17,4 +17,6 @@ export interface ColorPickerProps {
   cancelButtonLabel: string;
   /** Allows handling the changing values of the component */
   handleChange?: (color: string) => void;
+  /** Hex code text */
+  hexCodeLabel?: string;
 }

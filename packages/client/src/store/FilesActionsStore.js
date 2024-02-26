@@ -1188,8 +1188,8 @@ class FilesActionStore {
               folders.length !== 1 && Array.isArray(folders)
                 ? t("ArchivedRoomsAction")
                 : Array.isArray(folders)
-                  ? t("ArchivedRoomAction", { name: folders[0].title })
-                  : t("ArchivedRoomAction", { name: folders.title });
+                  ? t("Common:ArchivedRoomAction", { name: folders[0].title })
+                  : t("Common:ArchivedRoomAction", { name: folders.title });
 
             toastr.success(successTranslation);
           })
@@ -1277,20 +1277,26 @@ class FilesActionStore {
 
     const newFilter = roomsFilter.clone();
 
-    if (tag !== "no-tag") {
+    if (tag.label !== "no-tag") {
       const tags = newFilter.tags ? [...newFilter.tags] : [];
 
       if (tags.length > 0) {
-        const idx = tags.findIndex((item) => item === tag);
+        const idx = tags.findIndex((item) => item === tag.label);
 
         if (idx > -1) {
           //TODO: remove tag here if already selected
           return;
         }
       }
-      tags.push(tag);
 
-      newFilter.tags = [...tags];
+      if (tag.roomType) {
+        if (!!newFilter.type && +newFilter.type === tag.roomType) return;
+        newFilter.type = tag.roomType;
+      } else {
+        tags.push(tag.label);
+        newFilter.tags = [...tags];
+      }
+
       newFilter.withoutTags = false;
     } else {
       newFilter.withoutTags = true;

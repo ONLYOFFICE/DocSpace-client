@@ -593,6 +593,7 @@ const Appearance = (props) => {
           appliedColor={appliedColorButtons}
           applyButtonLabel={t("Common:ApplyButton")}
           cancelButtonLabel={t("Common:CancelButton")}
+          hexCodeLabel={t("Settings:HexCode")}
         />
       </DropDownItem>
     </DropDown>

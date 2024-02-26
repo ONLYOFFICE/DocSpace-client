@@ -697,6 +697,7 @@ class Tile extends React.PureComponent {
     } else {
       tags.push({
         isDefault: true,
+        roomType: item.roomType,
         label: t(ROOMS_TYPE_TRANSLATIONS[item.roomType]),
         onClick: () =>
           selectOption({

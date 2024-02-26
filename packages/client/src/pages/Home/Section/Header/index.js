@@ -40,7 +40,7 @@ import styled, { css } from "styled-components";
 import copy from "copy-to-clipboard";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 
-import Loaders from "@docspace/common/components/Loaders";
+import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 import Navigation from "@docspace/shared/components/navigation";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { resendInvitesAgain } from "@docspace/shared/api/people";
@@ -1100,7 +1100,7 @@ const SectionHeaderContent = (props) => {
   const isCurrentRoom =
     isLoading && typeof stateIsRoom === "boolean" ? stateIsRoom : isRoom;
 
-  if (showHeaderLoader) return <Loaders.SectionHeader />;
+  if (showHeaderLoader) return <SectionHeaderSkeleton />;
 
   const insideTheRoom =
     (categoryType === CategoryType.SharedRoom ||

@@ -1,10 +1,10 @@
 import React, { memo } from "react";
 
-import Loaders from "@docspace/common/components/Loaders";
 import VersionRow from "./VersionRow";
 import { inject, observer } from "mobx-react";
 import { VariableSizeList as List, areEqual } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
+import HistoryRowsSkeleton from "@docspace/shared/skeletons/history";
 import { CustomScrollbarsVirtualList } from "@docspace/shared/components/scrollbar";
 import { StyledBody, StyledVersionList } from "./StyledVersionHistory";
 class SectionBodyContent extends React.Component {
@@ -45,7 +45,7 @@ class SectionBodyContent extends React.Component {
           this.setState({
             isRestoreProcess: restoring,
           }),
-        100
+        100,
       );
     } else {
       clearTimeout(this.timerId);
@@ -130,7 +130,7 @@ class SectionBodyContent extends React.Component {
           </div>
         ) : (
           <div className="loader-history-rows">
-            <Loaders.HistoryRows />
+            <HistoryRowsSkeleton />
           </div>
         )}
       </StyledBody>
@@ -155,5 +155,5 @@ export default inject(
       setIsLoading: setIsSectionBodyLoading,
       fetchFileVersions,
     };
-  }
+  },
 )(observer(SectionBodyContent));

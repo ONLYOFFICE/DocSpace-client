@@ -130,6 +130,7 @@ const PureHome = (props) => {
     updateProfileCulture,
     getRooms,
     setSelectedFolder,
+    userId,
   } = props;
 
   const location = useLocation();
@@ -169,6 +170,7 @@ const PureHome = (props) => {
 
     gallerySelected,
     folderSecurity,
+    userId,
   });
 
   const { showUploadPanel } = useOperations({
@@ -528,6 +530,7 @@ export default inject(
       isRecycleBinFolder,
       isPrivacyFolder,
       isVisitor: userStore.user.isVisitor,
+      userId: userStore?.user?.id,
       folderSecurity,
       primaryProgressDataVisible,
       primaryProgressDataPercent,

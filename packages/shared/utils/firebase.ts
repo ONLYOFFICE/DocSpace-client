@@ -24,6 +24,8 @@ class FirebaseHelper {
   firebaseDB: firebase.database.Database | null = null;
 
   constructor(settings: TFirebaseSettings) {
+    if (typeof window === "undefined") return;
+
     this.firebaseConfig = settings;
 
     if (!this.isEnabled) return;

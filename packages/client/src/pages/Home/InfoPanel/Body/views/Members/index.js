@@ -127,7 +127,7 @@ const Members = ({
       publicRoomItems.push(
         <LinksBlock key="general-link_header">
           <Text fontSize="14px" fontWeight={600}>
-            {t("Files:SharedLinks")}
+            {t("Common:SharedLinks")}
           </Text>
 
           {!isArchiveFolder && (

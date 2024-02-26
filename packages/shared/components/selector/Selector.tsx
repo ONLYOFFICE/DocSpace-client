@@ -5,18 +5,29 @@ import { Body } from "./sub-components/Body";
 import { Footer } from "./sub-components/Footer";
 
 import { StyledSelector } from "./Selector.styled";
-import { AccessRight, SelectorProps, TSelectorItem } from "./Selector.types";
+import {
+  TAccessRight,
+  SelectorProps,
+  TSelectorBodySearch,
+  TSelectorBreadCrumbs,
+  TSelectorCancelButton,
+  TSelectorItem,
+  TSelectorSelectAll,
+  TSelectorAccessRights,
+  TSelectorFooterInput,
+  TSelectorFooterCheckbox,
+  TWithTabs,
+} from "./Selector.types";
 
 const Selector = ({
   id,
   className,
   style,
 
-  headerLabel,
-  withoutBackButton,
-  onBackClick,
+  withHeader,
+  headerProps,
 
-  isBreadCrumbsLoading,
+  isBreadCrumbsLoading = false,
   breadCrumbsLoader,
   withBreadCrumbs,
   breadCrumbs,
@@ -35,60 +46,62 @@ const Selector = ({
   selectAllIcon,
   onSelectAll,
 
-  items,
-  renderCustomItem,
-  isMultiSelect,
-  selectedItems,
-  acceptButtonLabel,
-  onSelect,
-  onAccept,
-  rowLoader,
+  emptyScreenImage,
+  emptyScreenHeader,
+  emptyScreenDescription,
+  searchEmptyScreenImage,
+  searchEmptyScreenHeader,
+  searchEmptyScreenDescription,
+
+  submitButtonLabel,
+  submitButtonId,
+  disableSubmitButton,
+  onSubmit,
+
+  withCancelButton,
+  cancelButtonLabel,
+  onCancel,
 
   withAccessRights,
   accessRights,
   selectedAccessRight,
   onAccessRightsChange,
 
-  withCancelButton,
-  cancelButtonLabel,
-  onCancel,
+  withFooterInput,
+  footerInputHeader,
+  currentFooterInputValue,
 
-  emptyScreenImage,
-  emptyScreenHeader,
-  emptyScreenDescription,
+  withFooterCheckbox,
+  footerCheckboxLabel,
+  isChecked,
+  setIsChecked,
 
-  searchEmptyScreenImage,
-  searchEmptyScreenHeader,
-  searchEmptyScreenDescription,
+  items,
+  renderCustomItem,
+  isMultiSelect,
+  selectedItems,
+
+  onSelect,
+
+  rowLoader,
 
   hasNextPage,
   isNextPageLoading,
   loadNextPage,
   totalItems,
   isLoading,
-
-  withHeader,
-
-  withFooterInput,
-  withFooterCheckbox,
-  footerInputHeader,
-  footerCheckboxLabel,
-  currentFooterInputValue,
+  disableFirstFetch,
 
   alwaysShowFooter,
-  disableAcceptButton,
 
   descriptionText,
-  acceptButtonId,
+
   cancelButtonId,
-  isChecked,
-  setIsChecked,
 
   withTabs,
   tabsData,
   activeTabId,
 }: SelectorProps) => {
-  const [areItemsUpdated, setAreItemsUpdated] = React.useState(false);
   const [footerVisible, setFooterVisible] = React.useState<boolean>(false);
   const [isSearch, setIsSearch] = React.useState<boolean>(false);
 
@@ -96,101 +109,68 @@ const Selector = ({
   const [newSelectedItems, setNewSelectedItems] = React.useState<
     TSelectorItem[]
   >([]);
+  const [selectedTabItems, setSelectedTabItems] = React.useState<{
+    [key: string]: TSelectorItem[];
+  }>({});
 
   const [newFooterInputValue, setNewFooterInputValue] = React.useState<string>(
     currentFooterInputValue || "",
   );
   const [isFooterCheckboxChecked, setIsFooterCheckboxChecked] =
     React.useState<boolean>(isChecked || false);
-
   const [selectedAccess, setSelectedAccess] =
-    React.useState<AccessRight | null>(null);
-
-  const onBackClickAction = React.useCallback(() => {
-    onBackClick?.();
-  }, [onBackClick]);
-
-  const onClearSearchAction = React.useCallback(() => {
-    onClearSearch?.(() => setIsSearch(false));
-  }, [onClearSearch]);
-
-  const onSearchAction = React.useCallback(
-    (value: string) => {
-      const v = value.trim();
-
-      if (v === "") return onClearSearchAction();
-
-      onSearch?.(v, () => setIsSearch(true));
-    },
-    [onSearch, onClearSearchAction],
-  );
-
-  const compareSelectedItems = React.useCallback(
-    (newList: TSelectorItem[]) => {
-      let isEqual = true;
-
-      if (selectedItems?.length !== newList.length) {
-        return setFooterVisible(true);
-      }
-
-      if (newList.length === 0 && selectedItems?.length === 0) {
-        return setFooterVisible(false);
-      }
-
-      newList.forEach((item) => {
-        isEqual = selectedItems.some((x) => x.id === item.id);
-      });
-
-      return setFooterVisible(!isEqual);
-    },
-    [selectedItems],
-  );
+    React.useState<TAccessRight | null>(null);
 
   const onSelectAction = (item: TSelectorItem) => {
     onSelect?.({
       ...item,
-      id: item.id,
-      email: item.email || "",
-      avatar: item.avatar,
-      icon: item.icon,
-      label: item.label,
-      shared: item.shared,
     });
 
     if (isMultiSelect) {
-      setRenderedItems((value) => {
-        const idx = value.findIndex((x) => item.id === x.id);
-
-        const newValue = value.map((i: TSelectorItem) => ({ ...i }));
-
-        if (idx === -1) return newValue;
-
-        newValue[idx].isSelected = !value[idx].isSelected;
-
-        return newValue;
-      });
-
       if (item.isSelected) {
         setNewSelectedItems((value) => {
-          const newValue = value
-            .filter((x) => x.id !== item.id)
-            .map((x) => ({ ...x }));
-          compareSelectedItems(newValue);
+          const newValue = value.filter((x) => x.id !== item.id);
+
           return newValue;
         });
+        if (activeTabId) {
+          setSelectedTabItems((value) => {
+            const newValue = { ...value };
+            newValue[activeTabId] = newValue[activeTabId].filter(
+              (x) => x.id !== item.id,
+            );
+
+            return newValue;
+          });
+        }
       } else {
         setNewSelectedItems((value) => {
           value.push({
-            id: item.id,
-            email: item.email,
             ...item,
           });
 
-          compareSelectedItems(value);
-
-          return value;
+          return [...value];
         });
+        if (activeTabId) {
+          setSelectedTabItems((value) => {
+            const newValue = { ...value };
+
+            if (newValue[activeTabId]) newValue[activeTabId].push(item);
+            else newValue[activeTabId] = [{ ...item }];
+
+            return newValue;
+          });
+        }
       }
+      setRenderedItems((value) => {
+        const idx = value.findIndex((x) => item.id === x.id);
+
+        if (idx === -1) return value;
+
+        value[idx] = { ...value[idx], isSelected: !value[idx].isSelected };
+
+        return value;
+      });
     } else {
       setRenderedItems((value) => {
         const idx = value.findIndex((x) => item.id === x.id);
@@ -204,22 +184,13 @@ const Selector = ({
 
         newValue[idx].isSelected = !item.isSelected;
 
-        return newValue;
+        return [...newValue];
       });
-
-      const newItem = {
-        id: item.id,
-        email: item.email,
-
-        ...item,
-      };
 
       if (item.isSelected) {
         setNewSelectedItems([]);
-        compareSelectedItems([]);
       } else {
-        setNewSelectedItems([newItem]);
-        compareSelectedItems([newItem]);
+        setNewSelectedItems([item]);
       }
     }
   };
@@ -229,31 +200,78 @@ const Selector = ({
 
     if (!items) return;
 
-    if (
-      newSelectedItems.length === 0 ||
-      newSelectedItems.length !== items.length
-    ) {
+    const query =
+      activeTabId && selectedTabItems[activeTabId]
+        ? selectedTabItems[activeTabId].length === 0 ||
+          selectedTabItems[activeTabId].length !== items.length
+        : newSelectedItems.length === 0 ||
+          newSelectedItems.length !== items.length;
+
+    if (query) {
       const cloneItems = items.map((x) => ({ ...x }));
 
-      const cloneRenderedItems = items.map((x) => ({ ...x, isSelected: true }));
+      setRenderedItems((i) => {
+        const cloneRenderedItems = i.map((x) => ({
+          ...x,
+          isSelected: true,
+        }));
 
-      setRenderedItems(cloneRenderedItems);
-      setNewSelectedItems(cloneItems);
-      compareSelectedItems(cloneItems);
+        return cloneRenderedItems;
+      });
+      // setNewSelectedItems(cloneItems);
+      if (activeTabId) {
+        setSelectedTabItems((value) => {
+          const newValue = { ...value };
+
+          newValue[activeTabId] = [...cloneItems];
+
+          return newValue;
+        });
+        setNewSelectedItems((value) => [...value, ...cloneItems]);
+      } else {
+        setNewSelectedItems(cloneItems);
+      }
     } else {
-      const cloneRenderedItems = items.map((x) => ({
-        ...x,
-        isSelected: false,
-      }));
+      setRenderedItems((i) => {
+        const cloneRenderedItems = i.map((x) => ({
+          ...x,
+          isSelected: false,
+        }));
 
-      setRenderedItems(cloneRenderedItems);
-      setNewSelectedItems([]);
-      compareSelectedItems([]);
+        return cloneRenderedItems;
+      });
+      // setNewSelectedItems([]);
+
+      if (activeTabId) {
+        setSelectedTabItems((value) => {
+          const newValue = { ...value };
+
+          newValue[activeTabId] = [];
+
+          return newValue;
+        });
+
+        setNewSelectedItems((value) => {
+          const newValue = value.filter(
+            (v) => items.findIndex((i) => i.id === v.id) === -1,
+          );
+
+          return newValue;
+        });
+      } else {
+        setNewSelectedItems([]);
+      }
     }
-  }, [compareSelectedItems, items, newSelectedItems.length, onSelectAll]);
+  }, [
+    activeTabId,
+    items,
+    newSelectedItems.length,
+    onSelectAll,
+    selectedTabItems,
+  ]);
 
-  const onAcceptAction = () => {
-    onAccept?.(
+  const onSubmitAction = () => {
+    onSubmit(
       newSelectedItems,
       selectedAccess,
       newFooterInputValue,
@@ -261,12 +279,8 @@ const Selector = ({
     );
   };
 
-  const onCancelAction = React.useCallback(() => {
-    onCancel?.();
-  }, [onCancel]);
-
   const onChangeAccessRightsAction = React.useCallback(
-    (access: AccessRight) => {
+    (access: TAccessRight) => {
       setSelectedAccess({ ...access });
       onAccessRightsChange?.(access);
     },
@@ -275,19 +289,55 @@ const Selector = ({
 
   const loadMoreItems = React.useCallback(
     (startIndex: number) => {
-      if (startIndex === 1) return; // fix double fetch of the first page
-      if (!isNextPageLoading) loadNextPage?.(startIndex - 1);
+      if (!isNextPageLoading) loadNextPage(startIndex - 1);
     },
     [isNextPageLoading, loadNextPage],
   );
 
   React.useEffect(() => {
+    if (disableFirstFetch) return;
+    loadNextPage(0);
+  }, [disableFirstFetch, loadNextPage]);
+
+  React.useEffect(() => {
     if (selectedAccessRight) setSelectedAccess({ ...selectedAccessRight });
   }, [selectedAccessRight]);
 
+  React.useEffect(() => {
+    let isEqual = true;
+
+    if (selectedItems && selectedItems.length !== newSelectedItems.length) {
+      return setFooterVisible(true);
+    }
+
+    if (
+      newSelectedItems.length === 0 &&
+      selectedItems &&
+      selectedItems.length === 0
+    ) {
+      return setFooterVisible(false);
+    }
+
+    if (selectedItems) {
+      newSelectedItems.forEach((item) => {
+        isEqual = selectedItems.some((x) => x.id === item.id);
+      });
+
+      return setFooterVisible(!isEqual);
+    }
+
+    isEqual = !!newSelectedItems.length;
+
+    setFooterVisible(isEqual);
+  }, [selectedItems, newSelectedItems]);
+
   React.useLayoutEffect(() => {
-    if (items && selectedItems) {
-      if (selectedItems.length === 0 || !isMultiSelect) {
+    if (items) {
+      if (
+        !selectedItems ||
+        (selectedItems && selectedItems.length === 0) ||
+        !isMultiSelect
+      ) {
         const cloneItems = items.map((x) => ({ ...x, isSelected: false }));
         return setRenderedItems(cloneItems);
       }
@@ -306,20 +356,111 @@ const Selector = ({
 
       setRenderedItems(newItems);
       setNewSelectedItems(cloneSelectedItems);
-      compareSelectedItems(cloneSelectedItems);
     }
-  }, [items, selectedItems, isMultiSelect, compareSelectedItems]);
+  }, [items, selectedItems, isMultiSelect]);
+
+  const breadCrumbsProps: TSelectorBreadCrumbs = withBreadCrumbs
+    ? {
+        withBreadCrumbs,
+        breadCrumbs,
+        onSelectBreadCrumb,
+        breadCrumbsLoader,
+        isBreadCrumbsLoading,
+      }
+    : ({} as TSelectorBreadCrumbs);
+
+  const isAllIndeterminate =
+    activeTabId && selectedTabItems[activeTabId]
+      ? selectedTabItems[activeTabId].length !== renderedItems.length &&
+        selectedTabItems[activeTabId].length !== 0
+      : newSelectedItems.length !== renderedItems.length &&
+        newSelectedItems.length !== 0;
+  const isAllChecked =
+    activeTabId && selectedTabItems[activeTabId]
+      ? selectedTabItems[activeTabId].length === renderedItems.length &&
+        renderedItems.length !== 0
+      : newSelectedItems.length === renderedItems.length &&
+        renderedItems.length !== 0;
+
+  const onSelectAllProps: TSelectorSelectAll = withSelectAll
+    ? {
+        withSelectAll,
+        selectAllLabel,
+        selectAllIcon,
+        onSelectAll: onSelectAllAction,
+        isAllIndeterminate,
+        isAllChecked,
+      }
+    : {
+        isAllIndeterminate,
+        isAllChecked,
+      };
+
+  const searchProps: TSelectorBodySearch = withSearch
+    ? {
+        withSearch,
+        searchPlaceholder,
+        searchLoader,
+        isSearchLoading,
+        searchValue,
+        setIsSearch,
+        onClearSearch,
+        isSearch,
+        onSearch,
+      }
+    : ({
+        isSearch,
+        setIsSearch,
+      } as TSelectorBodySearch);
+
+  const cancelButtonProps = withCancelButton
+    ? { withCancelButton, onCancel, cancelButtonLabel, cancelButtonId }
+    : ({} as TSelectorCancelButton);
+
+  const accessRightsProps = withAccessRights
+    ? {
+        withAccessRights,
+        accessRights,
+        selectedAccessRight: selectedAccess,
+        onAccessRightsChange: onChangeAccessRightsAction,
+      }
+    : ({} as TSelectorAccessRights);
+
+  const inputProps = withFooterInput
+    ? {
+        withFooterInput,
+        footerInputHeader,
+        currentFooterInputValue: newFooterInputValue,
+        setNewFooterInputValue,
+      }
+    : ({
+        currentFooterInputValue: newFooterInputValue,
+        setNewFooterInputValue,
+      } as TSelectorFooterInput);
+
+  const checkboxProps: TSelectorFooterCheckbox = withFooterCheckbox
+    ? {
+        withFooterCheckbox,
+        footerCheckboxLabel,
+        isChecked: isFooterCheckboxChecked,
+        setIsFooterCheckboxChecked,
+        setIsChecked,
+      }
+    : ({
+        isChecked: isFooterCheckboxChecked,
+        setIsFooterCheckboxChecked,
+        setIsChecked,
+      } as TSelectorFooterCheckbox);
+
+  const tabsProps: TWithTabs = withTabs
+    ? { withTabs, tabsData, activeTabId }
+    : {};
 
   React.useEffect(() => {
-    if (!areItemsUpdated) return;
-    if (!newSelectedItems.length || !isMultiSelect || !items) {
-      setAreItemsUpdated(false);
-      return;
-    }
-
+    if (!isMultiSelect) return;
     let hasConflict = false;
 
-    const cloneItems = items.map((x) => {
+    const cloneItems = renderedItems.map((x) => {
       if (x.isSelected) return { ...x };
 
       const isSelected = newSelectedItems.some(
@@ -334,12 +475,19 @@ const Selector = ({
     if (hasConflict) {
       setRenderedItems(cloneItems);
     }
-    setAreItemsUpdated(false);
-  }, [areItemsUpdated, isMultiSelect, items, newSelectedItems]);
+  }, [isMultiSelect, renderedItems, newSelectedItems]);
 
   React.useEffect(() => {
-    setAreItemsUpdated(true);
-  }, [items]);
+    setSelectedTabItems((value) => {
+      const newValue = { ...value };
+      tabsData?.forEach((tab) => {
+        if (!newValue[tab.id]) newValue[tab.id] = [];
+      });
+
+      return newValue;
+    });
+  }, [tabsData]);
+
   return (
     <StyledSelector
       id={id}
@@ -347,37 +495,14 @@ const Selector = ({
       style={style}
       data-testid="selector"
     >
-      {withHeader && (
-        <Header
-          onBackClickAction={onBackClickAction}
-          headerLabel={headerLabel}
-          withoutBackButton={withoutBackButton}
-        />
-      )}
-
+      {withHeader && <Header {...headerProps} />}
       <Body
         withHeader={withHeader}
         footerVisible={footerVisible || !!alwaysShowFooter}
-        isSearch={isSearch}
-        isAllIndeterminate={
-          newSelectedItems.length !== renderedItems.length &&
-          newSelectedItems.length !== 0
-        }
-        isAllChecked={
-          newSelectedItems.length === renderedItems.length &&
-          renderedItems.length !== 0
-        }
-        placeholder={searchPlaceholder}
-        value={searchValue}
-        onSearch={onSearchAction}
-        onClearSearch={onClearSearchAction}
-        items={renderedItems}
+        items={[...renderedItems]}
         isMultiSelect={isMultiSelect}
         onSelect={onSelectAction}
-        withSelectAll={withSelectAll}
-        selectAllLabel={selectAllLabel}
-        selectAllIcon={selectAllIcon}
-        onSelectAll={onSelectAllAction}
+        // empty screen
         emptyScreenImage={emptyScreenImage}
         emptyScreenHeader={emptyScreenHeader}
         emptyScreenDescription={emptyScreenDescription}
@@ -390,73 +515,40 @@ const Selector = ({
         renderCustomItem={renderCustomItem}
         totalItems={totalItems || 0}
         isLoading={isLoading}
-        searchLoader={searchLoader}
         rowLoader={rowLoader}
-        withBreadCrumbs={withBreadCrumbs}
-        breadCrumbs={breadCrumbs}
-        onSelectBreadCrumb={onSelectBreadCrumb}
-        breadCrumbsLoader={breadCrumbsLoader}
-        isBreadCrumbsLoading={isBreadCrumbsLoading}
-        isSearchLoading={isSearchLoading}
-        withSearch={withSearch}
         withFooterInput={withFooterInput}
         withFooterCheckbox={withFooterCheckbox}
         descriptionText={descriptionText}
-        withTabs={withTabs}
-        tabsData={tabsData}
-        activeTabId={activeTabId}
+        // bread crumbs
+        {...breadCrumbsProps}
+        // select all
+        {...onSelectAllProps}
+        // search
+        {...searchProps}
+        // tabs
+        {...tabsProps}
       />
 
       {(footerVisible || alwaysShowFooter) && (
         <Footer
           isMultiSelect={isMultiSelect}
-          acceptButtonLabel={acceptButtonLabel || ""}
           selectedItemsCount={newSelectedItems.length}
-          withCancelButton={withCancelButton}
-          cancelButtonLabel={cancelButtonLabel}
-          withAccessRights={withAccessRights}
-          accessRights={accessRights}
-          selectedAccessRight={selectedAccess}
-          onAccept={onAcceptAction}
-          onCancel={onCancelAction}
-          onChangeAccessRights={onChangeAccessRightsAction}
-          withFooterInput={withFooterInput}
-          withFooterCheckbox={withFooterCheckbox}
-          footerInputHeader={footerInputHeader}
-          footerCheckboxLabel={footerCheckboxLabel}
-          currentFooterInputValue={newFooterInputValue}
-          setNewFooterInputValue={setNewFooterInputValue}
-          isFooterCheckboxChecked={isFooterCheckboxChecked}
-          setIsFooterCheckboxChecked={setIsFooterCheckboxChecked}
-          setIsChecked={setIsChecked}
-          disableAcceptButton={
-            withFooterInput
-              ? disableAcceptButton
-              : disableAcceptButton && !newFooterInputValue.trim()
-          }
-          acceptButtonId={acceptButtonId}
-          cancelButtonId={cancelButtonId}
+          onSubmit={onSubmitAction}
+          submitButtonLabel={submitButtonLabel}
+          disableSubmitButton={disableSubmitButton}
+          submitButtonId={submitButtonId}
+          // cancel button
+          {...cancelButtonProps}
+          // access rights
+          {...accessRightsProps}
+          // input
+          {...inputProps}
+          // checkbox
+          {...checkboxProps}
         />
       )}
     </StyledSelector>
   );
-};
-
-Selector.defaultProps = {
-  isMultiSelect: false,
-  withSelectAll: false,
-  withAccessRights: false,
-  withCancelButton: false,
-  withoutBackButton: false,
-  isBreadCrumbsLoading: false,
-  withSearch: true,
-  withFooterInput: false,
-  alwaysShowFooter: false,
-  disableAcceptButton: false,
-  withHeader: true,
-  withTabs: false,
-
-  selectedItems: [],
 };
 
 export { Selector };

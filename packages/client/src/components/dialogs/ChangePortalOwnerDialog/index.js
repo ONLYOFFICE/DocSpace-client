@@ -69,7 +69,7 @@ const ChangePortalOwnerDialog = ({
         toastr.success(
           t("Settings:ConfirmEmailSended", {
             ownerName: selectedUser.label,
-          })
+          }),
         );
       })
       .catch((error) => {
@@ -112,12 +112,19 @@ const ChangePortalOwnerDialog = ({
         <ModalDialog.Container>
           <PeopleSelector
             withCancelButton
+            cancelButtonLabel=""
+            onCancel={onBackClick}
             filter={filter}
             excludeItems={[id]}
-            acceptButtonLabel={t("Common:SelectAction")}
-            onAccept={onAccept}
-            onCancel={onBackClick}
-            onBackClick={onBackClick}
+            submitButtonLabel={t("Common:SelectAction")}
+            onSubmit={onAccept}
+            disableSubmitButton={false}
+            withHeader
+            headerProps={{
+              onBackClick,
+              withoutBackButton: false,
+              headerLabel: "",
+            }}
             currentUserId={id}
           />
         </ModalDialog.Container>
@@ -242,5 +249,5 @@ export default inject(({ setup, userStore, settingsStore }) => {
     "Translations",
     "ProfileAction",
     "Settings",
-  ])(observer(ChangePortalOwnerDialog))
+  ])(observer(ChangePortalOwnerDialog)),
 );

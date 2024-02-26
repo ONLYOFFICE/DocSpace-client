@@ -155,6 +155,7 @@ export const Tags: FC<TagsProps> = ({
               label={tag.label}
               onClick={onSelectTag}
               isLast={idx === renderedTags.length - 1}
+              roomType={tag.roomType}
             />
           );
         })}

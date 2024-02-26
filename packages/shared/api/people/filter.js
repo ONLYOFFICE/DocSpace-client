@@ -12,6 +12,8 @@ const DEFAULT_SEARCH = "";
 const DEFAULT_GROUP = null;
 const DEFAULT_PAYMENTS = null;
 const DEFAULT_ACCOUNT_LOGIN_TYPE = null;
+const DEFAULT_WITHOUT_GROUP = false;
+const DEFAULT_QUOTA_FILTER = null;
 
 const ACTIVE_EMPLOYEE_STATUS = 1;
 
@@ -26,6 +28,8 @@ const PAGE = "page";
 const PAGE_COUNT = "pagecount";
 const PAYMENTS = "payments";
 const ACCOUNT_LOGIN_TYPE = "accountLoginType";
+const WITHOUT_GROUP = "withoutGroup";
+const QUOTA_FILTER = "quotaFilter";
 
 class Filter {
   static getDefault(total = DEFAULT_TOTAL) {
@@ -77,6 +81,8 @@ class Filter {
     const payments = urlFilter[PAYMENTS] || defaultFilter.payments;
     const accountLoginType =
       urlFilter[ACCOUNT_LOGIN_TYPE] || defaultFilter.accountLoginType;
+    const withoutGroup = urlFilter[WITHOUT_GROUP] || defaultFilter.withoutGroup;
+    const quotaFilter = urlFilter[QUOTA_FILTER] || defaultFilter.quotaFilter;
 
     const newFilter = new Filter(
       page,
@@ -91,6 +97,8 @@ class Filter {
       group,
       payments,
       accountLoginType,
+      withoutGroup,
+      quotaFilter
     );
 
     return newFilter;
@@ -109,6 +117,8 @@ class Filter {
     group = DEFAULT_GROUP,
     payments = DEFAULT_PAYMENTS,
     accountLoginType = DEFAULT_ACCOUNT_LOGIN_TYPE,
+    withoutGroup = DEFAULT_WITHOUT_GROUP,
+    quotaFilter = DEFAULT_QUOTA_FILTER
   ) {
     this.page = page;
     this.pageCount = pageCount;
@@ -122,6 +132,8 @@ class Filter {
     this.group = group;
     this.payments = payments;
     this.accountLoginType = accountLoginType;
+    this.withoutGroup = withoutGroup;
+    this.quotaFilter = quotaFilter;
   }
 
   getStartIndex = () => {
@@ -148,6 +160,8 @@ class Filter {
       group,
       payments,
       accountLoginType,
+      withoutGroup,
+      quotaFilter,
     } = this;
 
     let employeetype = null;
@@ -170,6 +184,8 @@ class Filter {
       fields,
       payments,
       accountLoginType,
+      withoutGroup,
+      quotaFilter,
     };
 
     dtoFilter = { ...dtoFilter, ...employeetype };
@@ -191,6 +207,8 @@ class Filter {
       page,
       payments,
       accountLoginType,
+      withoutGroup,
+      quotaFilter,
     } = this;
 
     const dtoFilter = {};
@@ -218,6 +236,12 @@ class Filter {
     if (pageCount !== DEFAULT_PAGE_COUNT) {
       dtoFilter[PAGE_COUNT] = pageCount;
     }
+
+    if (withoutGroup) {
+      dtoFilter[WITHOUT_GROUP] = withoutGroup;
+    }
+
+    if (quotaFilter) dtoFilter[QUOTA_FILTER] = quotaFilter;
 
     dtoFilter[PAGE] = page + 1;
     dtoFilter[SORT_BY] = sortBy;
@@ -252,6 +276,8 @@ class Filter {
           this.group,
           this.payments,
           this.accountLoginType,
+          this.withoutGroup,
+          this.quotaFilter
         );
   }
 
@@ -270,11 +296,12 @@ class Filter {
         idGroup,
         null,
         null,
+        false,
       );
     }
 
-    this.clone(true);
-  }
+      this.clone(true);
+    }
 
   equals(filter) {
     const equals =
@@ -288,7 +315,8 @@ class Filter {
       this.page === filter.page &&
       this.pageCount === filter.pageCount &&
       this.payments === filter.payments &&
-      this.accountLoginType === filter.accountLoginType;
+      this.accountLoginType === filter.accountLoginType &&
+      this.withoutGroup === filter.withoutGroup;
 
     return equals;
   }

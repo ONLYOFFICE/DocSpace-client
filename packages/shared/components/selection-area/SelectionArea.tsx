@@ -222,7 +222,7 @@ const SelectionArea = ({
               ?.split("_");
 
       const itemType = splitItem?.[0];
-      const itemIndex = splitItem?.[4];
+      const itemIndex = splitItem?.[splitItem.length - 1];
 
       // TODO: maybe do this line little bit better
       if (arrayOfTypes.current.findIndex((x) => x.type === itemType) === -1) {

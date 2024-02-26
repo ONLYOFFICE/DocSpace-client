@@ -187,13 +187,19 @@ const DataReassignmentDialog = ({
         />
         <ModalDialog.Container>
           <PeopleSelector
-            acceptButtonLabel={t("Common:SelectAction")}
+            submitButtonLabel={t("Common:SelectAction")}
+            onSubmit={onAccept}
+            disableSubmitButton={false}
             excludeItems={[user.id]}
             currentUserId={user.id}
-            onAccept={onAccept}
-            onCancel={onClosePeopleSelector}
-            onBackClick={onTogglePeopleSelector}
             withCancelButton
+            cancelButtonLabel=""
+            headerProps={{
+              onBackClick,
+              withoutBackButton: false,
+              headerLabel: "",
+            }}
+            onBackClick={onTogglePeopleSelector}
             withAbilityCreateRoomUsers
           />
         </ModalDialog.Container>
@@ -292,6 +298,6 @@ export default inject(({ settingsStore, peopleStore, setup, userStore }) => {
       "DataReassignmentDialog",
       "Translations",
       "ChangePortalOwner",
-    ])(DataReassignmentDialog)
-  )
+    ])(DataReassignmentDialog),
+  ),
 );

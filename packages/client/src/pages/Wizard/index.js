@@ -19,7 +19,7 @@ import { FileInput } from "@docspace/shared/components/file-input";
 
 import { Loader } from "@docspace/shared/components/loader";
 
-import withCultureNames from "@docspace/common/hoc/withCultureNames";
+import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 
 import {
   createPasswordHash,

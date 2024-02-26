@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
-import Loaders from "@docspace/common/components/Loaders";
+import { SettingsCommonSkeleton } from "@docspace/shared/skeletons/settings";
 
 import StyledWrapper from "./styled-file-management";
 
@@ -68,7 +68,7 @@ const FileManagement = ({
         .catch((err) => toastr.error(err))
         .finally(() => setIsLoadingFavorites(false));
     },
-    [setIsLoadingFavorites, setFavoritesSetting]
+    [setIsLoadingFavorites, setFavoritesSetting],
   );
 
   const onChangeRecent = React.useCallback(
@@ -78,12 +78,12 @@ const FileManagement = ({
         .catch((err) => toastr.error(err))
         .finally(() => setIsLoadingRecent(false));
     },
-    [setIsLoadingRecent, setRecentSetting]
+    [setIsLoadingRecent, setRecentSetting],
   );
 
   const thumbnailsSizeLabel = "Thumbnails 1280x720";
 
-  if (!ready) return <Loaders.SettingsCommon />;
+  if (!ready) return <SettingsCommonSkeleton />;
   return (
     <StyledWrapper showTitle={showTitle} hideAdminSettings={!showAdminSettings}>
       <Box className="settings-section">

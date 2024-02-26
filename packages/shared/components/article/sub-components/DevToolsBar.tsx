@@ -19,7 +19,7 @@ const ArticleDevToolsBar = ({
   currentDeviceType,
   toggleArticleOpen,
 }: ArticleDevToolsBarProps) => {
-  const { t } = useTranslation(["Settings"]);
+  const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
 
   const onClick = () => {
@@ -34,7 +34,7 @@ const ArticleDevToolsBar = ({
     <StyledWrapper onClick={onClick}>
       <ReactSVG src={DeveloperReactSvgUrl} className="icon" />
       <Text fontWeight={600} fontSize="12px" className="label">
-        {t("DeveloperTools")}
+        {t("Common:DeveloperTools")}
       </Text>
       <ReactSVG src={ArrowReactSvgUrl} className="arrow" />
     </StyledWrapper>

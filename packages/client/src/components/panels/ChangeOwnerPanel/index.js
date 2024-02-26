@@ -5,6 +5,7 @@ import { Aside } from "@docspace/shared/components/aside";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
+import { DialogAsideSkeleton } from "@docspace/shared/skeletons/dialog";
 import { withTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
 import {
@@ -15,7 +16,7 @@ import {
   StyledBody,
 } from "../StyledPanels";
 import { inject, observer } from "mobx-react";
-import Loaders from "@docspace/common/components/Loaders";
+
 import withLoader from "../../../HOCs/withLoader";
 
 class ChangeOwnerComponent extends React.Component {
@@ -127,7 +128,7 @@ class ChangeOwnerComponent extends React.Component {
 }
 
 const ChangeOwnerPanel = withTranslation(["ChangeOwnerPanel", "Common"])(
-  withLoader(ChangeOwnerComponent)(<Loaders.DialogAsideLoader isPanel />)
+  withLoader(ChangeOwnerComponent)(<DialogAsideSkeleton isPanel />),
 );
 
 export default inject(
@@ -156,5 +157,5 @@ export default inject(
       setFilesOwner,
       setBufferSelection,
     };
-  }
+  },
 )(observer(ChangeOwnerPanel));

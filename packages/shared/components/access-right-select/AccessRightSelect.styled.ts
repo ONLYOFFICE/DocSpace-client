@@ -7,13 +7,13 @@ import { ComboBox } from "../combobox";
 
 const StyledWrapper = styled(ComboBox)`
   .combo-button {
-    padding-left: 16px;
+    padding-left: 8px;
     padding-right: 8px;
     ${(props) =>
       props.theme.interfaceDirection === "rtl" &&
       css`
         padding-left: 8px;
-        padding-right: 16px;
+        padding-right: 8px;
       `}
   }
 

@@ -375,7 +375,7 @@ class ContextOptionsStore {
     if (primaryLink) {
       copy(primaryLink.sharedTo.shareLink);
       item.shared
-        ? toastr.success(t("Files:LinkSuccessfullyCopied"))
+        ? toastr.success(t("Common:LinkSuccessfullyCopied"))
         : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
 
       this.publicRoomStore.setExternalLink(primaryLink);

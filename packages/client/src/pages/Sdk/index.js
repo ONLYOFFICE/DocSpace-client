@@ -206,19 +206,29 @@ const Sdk = ({
 
   switch (mode) {
     case "room-selector":
+      const cancelButtonProps = frameConfig?.showSelectorCancel
+        ? {
+            withCancelButton: true,
+            cancelButtonLabel: frameConfig?.cancelButtonLabel,
+            onCancel: onClose,
+          }
+        : {};
+
+      const headerProps = frameConfig?.showSelectorHeader
+        ? { withHeader: true, headerProps: { headerLabel: "" } }
+        : {};
+
       component = (
         <RoomSelector
-          withCancelButton={frameConfig?.showSelectorCancel}
-          withHeader={frameConfig?.showSelectorHeader}
-          onAccept={onSelectRoom}
-          onCancel={onClose}
+          {...cancelButtonProps}
+          {...headerProps}
+          onSubmit={onSelectRoom}
           withSearch={frameConfig?.withSearch}
-          withoutBackButton
-          acceptButtonLabel={frameConfig?.acceptButtonLabel}
-          cancelButtonLabel={frameConfig?.cancelButtonLabel}
+          submitButtonLabel={frameConfig?.acceptButtonLabel}
           roomType={frameConfig?.roomType}
           onSelect={() => {}}
           setIsDataReady={setIsDataReady}
+          isMultiSelect={false}
         />
       );
       break;

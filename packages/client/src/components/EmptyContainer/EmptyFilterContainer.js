@@ -24,6 +24,7 @@ const EmptyFilterContainer = ({
   theme,
   isPublicRoom,
   publicRoomKey,
+  userId,
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -31,7 +32,7 @@ const EmptyFilterContainer = ({
   const subheadingText = t("EmptyFilterSubheadingText");
   const descriptionText = isRooms
     ? t("Common:SearchEmptyRoomsDescription")
-    : t("EmptyFilterDescriptionText");
+    : t("Common:EmptyFilterDescriptionText");
 
   const onResetFilter = () => {
     setIsLoading(true);
@@ -40,11 +41,10 @@ const EmptyFilterContainer = ({
       setClearSearch(true);
       return;
     }
-
     if (isRoomsFolder) {
-      const newFilter = RoomsFilter.getDefault();
+      const newFilter = RoomsFilter.clean();
 
-      navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
+      navigate(`${location.pathname}?${newFilter.toUrlParams(userId)}`);
     } else {
       const newFilter = FilesFilter.getDefault();
 
@@ -52,7 +52,7 @@ const EmptyFilterContainer = ({
 
       if (isPublicRoom) {
         navigate(
-          `${location.pathname}?key=${publicRoomKey}&${newFilter.toUrlParams()}`
+          `${location.pathname}?key=${publicRoomKey}&${newFilter.toUrlParams()}`,
         );
       } else {
         navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
@@ -97,11 +97,13 @@ export default inject(
     treeFoldersStore,
     clientLoadingStore,
     publicRoomStore,
+    userStore,
   }) => {
     const { isRoomsFolder, isArchiveFolder } = treeFoldersStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder;
     const { isPublicRoom, publicRoomKey } = publicRoomStore;
+    const { user } = userStore;
 
     return {
       selectedFolderId: selectedFolderStore.id,
@@ -111,9 +113,10 @@ export default inject(
       isRoomsFolder,
       setClearSearch: filesStore.setClearSearch,
       theme: settingsStore.theme,
+      userId: user?.id,
 
       isPublicRoom,
       publicRoomKey,
     };
-  }
+  },
 )(withTranslation(["Files", "Common"])(observer(EmptyFilterContainer)));

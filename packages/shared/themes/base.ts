@@ -1062,10 +1062,12 @@ export const getBaseTheme = () => {
       defaultImage: `url("${AvatarBaseReactSvgUrl}")`,
       initialsContainer: {
         color: white,
+        groupColor: black,
         left: "50%",
         top: "50%",
         transform: "translate(-50%, -50%)",
         fontWeight: "600",
+        groupFontWeight: "700",
 
         fontSize: {
           min: "12px",
@@ -1074,6 +1076,7 @@ export const getBaseTheme = () => {
           medium: "20px",
           big: "34px",
           max: "72px",
+          groupBig: "23px",
         },
       },
 
@@ -1110,6 +1113,7 @@ export const getBaseTheme = () => {
       imageContainer: {
         backgroundImage: blueMain,
         background: grayMid,
+        groupBackground: grayLightMid,
         borderRadius: "50%",
         height: "100%",
 
@@ -2958,7 +2962,13 @@ export const getBaseTheme = () => {
             tooltipColor: lightCumulus,
           },
           auditTrail: {
+            sideColor: "#A3A9AE",
+            nameColor: "#333333",
             downloadReportDescriptionColor: gray,
+          },
+          loginHistory: {
+            sideColor: "#A3A9AE",
+            nameColor: "#333333",
           },
         },
 
@@ -3042,6 +3052,11 @@ export const getBaseTheme = () => {
 
           warningColor: "#F21C0E",
           color: "#F97A0B",
+        },
+
+        storageManagement: {
+          grayBackgroundText: "#555F65",
+          descriptionColor: "#657077",
         },
       },
 

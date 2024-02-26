@@ -24,6 +24,7 @@
     ".storybook",
     "babel.config.ts",
     "index.d.ts",
-    "tsconfig.eslint.json"
+    "tsconfig.eslint.json",
+    "routes"
   ]
 }

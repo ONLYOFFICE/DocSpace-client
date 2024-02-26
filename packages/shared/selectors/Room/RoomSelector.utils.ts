@@ -12,4 +12,3 @@ export const convertToItems = (folders: TRoom[]) => {
 
   return items;
 };
-

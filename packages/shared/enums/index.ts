@@ -169,6 +169,7 @@ export const enum PageType {
   portalDeletion = "portalDeletion",
   payments = "payments",
   bonus = "bonus",
+  storageManagement = "storageManagement",
 }
 
 /**
@@ -301,8 +302,11 @@ export const enum Events {
   RENAME = "rename",
   ROOM_CREATE = "create_room",
   ROOM_EDIT = "edit_room",
+  GROUP_CREATE = "create_group",
+  GROUP_EDIT = "edit_group",
   CHANGE_COLUMN = "change_column",
   CHANGE_USER_TYPE = "change_user_type",
+  CHANGE_QUOTA = "change_quota",
   CREATE_PLUGIN_FILE = "create_plugin_file",
 }
 
@@ -367,6 +371,7 @@ export const enum FilterGroups {
   filterFolders = "filter-folders",
   filterRoom = "filter-room",
   filterContent = "filter-withContent",
+  filterQuota = "filter-quota",
   roomFilterProviderType = "filter-provider-type",
   roomFilterType = "filter-type",
   roomFilterSubject = "filter-subject",
@@ -374,6 +379,9 @@ export const enum FilterGroups {
   roomFilterTags = "filter-tags",
   roomFilterFolders = "filter-withSubfolders",
   roomFilterContent = "filter-content",
+  filterGroup = "filter-group",
+  groupsFilterMember = "filter-group-member",
+  groupsFilterManager = "filter-group-manager",
 }
 
 export const enum FilterKeys {
@@ -383,6 +391,11 @@ export const enum FilterKeys {
   me = "me",
   other = "other",
   user = "user",
+  withoutGroup = "withoutGroup",
+  selectedGroup = "selectedGroup",
+  byManager = "byManager",
+  customQuota = "2",
+  defaultQuota = "1",
 }
 
 export const enum IndexedDBStores {
@@ -392,6 +405,7 @@ export const enum IndexedDBStores {
 export const enum FilterSelectorTypes {
   people = "people-selector",
   rooms = "rooms-selector",
+  groups = "groups-selector",
 }
 
 export const enum DeviceType {
@@ -434,4 +448,10 @@ export enum RoomsType {
   // ReadOnlyRoom: 4, //TODO: Restore when certs will be done
   PublicRoom = 6,
   CustomRoom = 5,
+}
+
+export enum AccountsSearchArea {
+  People = "0",
+  Groups = "1",
+  Any = "2",
 }

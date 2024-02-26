@@ -8,7 +8,12 @@ import { getPortalTenantExtra } from "../api/portal";
 import { TUser } from "../api/people/types";
 import { TCapabilities, TThirdPartyProvider } from "../api/settings/types";
 import { logout as logoutDesktop } from "../utils/desktop";
-import { frameCallEvent, isAdmin, isPublicRoom } from "../utils/common";
+import {
+  frameCallEvent,
+  isAdmin,
+  isPublicRoom,
+  insertDataLayer,
+} from "../utils/common";
 import { getCookie, setCookie } from "../utils/cookie";
 import { TTenantExtraRes } from "../api/portal/types";
 import { TenantStatus } from "../enums";
@@ -85,6 +90,24 @@ class AuthStore {
         this.currentQuotaStore?.updateQuotaFeatureValue(featureId, value);
       });
     });
+    socketHelper.on("s:change-user-quota-used-value", (options) => {
+      console.log(`[WS] change-user-quota-used-value`, options);
+
+      runInAction(() => {
+        if (options.customQuotaFeature === "user_custom_quota") {
+          this.userStore?.updateUserQuota(
+            options.usedSpace,
+            options.quotaLimit,
+          );
+
+          return;
+        }
+
+        const { customQuotaFeature, ...updatableObject } = options;
+
+        this.currentQuotaStore?.updateTenantCustomQuota(updatableObject);
+      });
+    });
   }
 
   setIsUpdatingTariff = (isUpdatingTariff: boolean) => {
@@ -123,7 +146,7 @@ class AuthStore {
     ) {
       requests.push(
         this.userStore?.init(i18n).then(() => {
-          if (this.isQuotaAvailable && !isPortalRestore) {
+          if (!isPortalRestore) {
             this.getTenantExtra();
           }
         }),
@@ -145,6 +168,10 @@ class AuthStore {
 
     return Promise.all(requests).then(() => {
       const user = this.userStore?.user;
+
+      if (user?.id) {
+        insertDataLayer(user.id);
+      }
 
       if (
         user &&
@@ -255,13 +282,13 @@ class AuthStore {
     );
   }
 
-  get isQuotaAvailable() {
-    const user = this.userStore?.user;
+  // get isQuotaAvailable() {
+  //   const user = this.userStore?.user;
 
-    if (!user) return false;
+  //   if (!user) return false;
 
-    return user.isOwner || user.isAdmin || this.isRoomAdmin;
-  }
+  //   return user.isOwner || user.isAdmin || this.isRoomAdmin;
+  // }
 
   get isPaymentPageAvailable() {
     const user = this.userStore?.user;

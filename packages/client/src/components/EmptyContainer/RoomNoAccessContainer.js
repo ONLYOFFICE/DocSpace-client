@@ -24,6 +24,7 @@ const RoomNoAccessContainer = (props) => {
     sectionWidth,
     theme,
     isFrame,
+    userId,
   } = props;
 
   const descriptionRoomNoAccess = t("NoAccessRoomDescription");
@@ -40,7 +41,7 @@ const RoomNoAccessContainer = (props) => {
     if (isFrame) return;
     setIsLoading(true);
 
-    const filter = RoomsFilter.getDefault();
+    const filter = RoomsFilter.getDefault(userId);
 
     const filterParamsStr = filter.toUrlParams();
 
@@ -83,19 +84,22 @@ const RoomNoAccessContainer = (props) => {
   );
 };
 
-export default inject(({ settingsStore, filesStore, clientLoadingStore }) => {
-  const { setIsSectionFilterLoading } = clientLoadingStore;
+export default inject(
+  ({ settingsStore, filesStore, clientLoadingStore, userStore }) => {
+    const { setIsSectionFilterLoading } = clientLoadingStore;
 
-  const setIsLoading = (param) => {
-    setIsSectionFilterLoading(param);
-  };
-  const { isEmptyPage } = filesStore;
-  const { isFrame, theme } = settingsStore;
-  return {
-    setIsLoading,
+    const setIsLoading = (param) => {
+      setIsSectionFilterLoading(param);
+    };
+    const { isEmptyPage } = filesStore;
+    const { isFrame, theme } = settingsStore;
+    return {
+      setIsLoading,
 
-    isEmptyPage,
-    theme,
-    isFrame,
-  };
-})(withTranslation(["Files"])(observer(RoomNoAccessContainer)));
+      isEmptyPage,
+      theme,
+      isFrame,
+      userId: userStore?.user?.id,
+    };
+  },
+)(withTranslation(["Files"])(observer(RoomNoAccessContainer)));

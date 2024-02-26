@@ -165,7 +165,12 @@ const ColorTheme = forwardRef<
       }
 
       case ThemeId.SubmenuText: {
-        return <SubmenuTextTheme {...props} />;
+        return (
+          <SubmenuTextTheme
+            {...props}
+            $currentColorScheme={currentColorScheme}
+          />
+        );
       }
 
       default:

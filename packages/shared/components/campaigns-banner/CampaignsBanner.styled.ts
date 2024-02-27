@@ -10,7 +10,7 @@ const BannerWrapper = styled.div<{
   position: relative;
   min-height: 140px;
   max-height: 140px;
-  border-radius: 6px;
+  border-radius: 4px;
   border: 1px solid ${(props) => props.borderColor};
   background-image: url(${(props) => props.background});
   background-size: 100%;
@@ -26,7 +26,9 @@ const BannerWrapper = styled.div<{
   }
 
   @media ${mobile} {
-    min-height: 110px;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
   }
 `;
 

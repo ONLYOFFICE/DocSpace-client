@@ -4,6 +4,7 @@ import { withTranslation } from "react-i18next";
 import { isMobile } from "@docspace/shared/utils/device";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import { Text } from "@docspace/shared/components/text";
 import BreakpointWarning from "SRC_DIR/components/BreakpointWarning";
@@ -32,9 +33,13 @@ const NextcloudWorkspace = (props) => {
     viewAs,
     setViewAs,
     currentDeviceType,
+    getMigrationStatus,
+    setUsers,
   } = props;
   const [currentStep, setCurrentStep] = useState(1);
+  const [shouldRender, setShouldRender] = useState(false);
   const StepsData = getStepsData(t, currentStep, setCurrentStep);
+  const navigate = useNavigate();
 
   useViewEffect({
     view: viewAs,
@@ -42,12 +47,50 @@ const NextcloudWorkspace = (props) => {
     currentDeviceType,
   });
 
-  useEffect(() => clearCheckedAccounts, []);
+  useEffect(() => {
+    getMigrationStatus().then((res) => {
+      if (
+        !res ||
+        res.parseResult.successedUsers + res.parseResult.failedUsers > 0
+      ) {
+        setShouldRender(true);
+        return;
+      }
+
+      if (res.parseResult.migratorName !== "Nextcloud") {
+        const workspacesEnum = {
+          GoogleWorkspace: "google",
+          Nextcloud: "nextcloud",
+          Workspace: "onlyoffice",
+        };
+        const migratorName = res.parseResult.migratorName;
+
+        setShouldRender(true);
+        navigate(
+          `/portal-settings/data-import/migration/${workspacesEnum[migratorName]}?service=${migratorName}`,
+        );
+      }
+
+      if (!res.isCompleted && res.parseResult.users.length > 0) {
+        setCurrentStep(6);
+        setShouldRender(true);
+        return;
+      }
+
+      if (res.isCompleted) {
+        setUsers(res.parseResult);
+        setCurrentStep(2);
+        setShouldRender(true);
+      }
+    });
+
+    return clearCheckedAccounts;
+  }, []);
 
   if (isMobile())
     return <BreakpointWarning sectionName={t("Settings:DataImport")} />;
 
-  if (!tReady) return;
+  if (!tReady || !shouldRender) return;
 
   return (
     <>
@@ -77,7 +120,8 @@ const NextcloudWorkspace = (props) => {
 };
 
 export default inject(({ setup, settingsStore, importAccountsStore }) => {
-  const { clearCheckedAccounts } = importAccountsStore;
+  const { clearCheckedAccounts, getMigrationStatus, setUsers } =
+    importAccountsStore;
   const { initSettings, viewAs, setViewAs } = setup;
   const { currentDeviceType } = settingsStore;
 
@@ -88,6 +132,8 @@ export default inject(({ setup, settingsStore, importAccountsStore }) => {
     viewAs,
     setViewAs,
     currentDeviceType,
+    getMigrationStatus,
+    setUsers,
   };
 })(
   withTranslation(["Common, SMTPSettings, Settings"])(

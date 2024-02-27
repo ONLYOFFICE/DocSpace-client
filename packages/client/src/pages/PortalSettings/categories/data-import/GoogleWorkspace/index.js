@@ -5,6 +5,7 @@ import { getStepTitle, getGoogleStepDescription } from "../../../utils";
 import { tablet, isMobile } from "@docspace/shared/utils/device";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import styled, { css } from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import StepContent from "./Stepper";
 import BreakpointWarning from "SRC_DIR/components/BreakpointWarning";
@@ -70,9 +71,13 @@ const GoogleWorkspace = ({
   viewAs,
   setViewAs,
   currentDeviceType,
+  getMigrationStatus,
+  setUsers,
 }) => {
   const [showReminder, setShowReminder] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
+  const [shouldRender, setShouldRender] = useState(false);
+  const navigate = useNavigate();
 
   const onNextStep = () => {
     if (currentStep !== 6) {
@@ -124,10 +129,50 @@ const GoogleWorkspace = ({
     currentDeviceType,
   });
 
-  useEffect(() => clearCheckedAccounts, []);
+  useEffect(() => {
+    getMigrationStatus().then((res) => {
+      if (
+        !res ||
+        res.parseResult.successedUsers + res.parseResult.failedUsers > 0
+      ) {
+        setShouldRender(true);
+        return;
+      }
+
+      if (res.parseResult.migratorName !== "GoogleWorkspace") {
+        const workspacesEnum = {
+          GoogleWorkspace: "google",
+          Nextcloud: "nextcloud",
+          Workspace: "onlyoffice",
+        };
+        const migratorName = res.parseResult.migratorName;
+
+        setShouldRender(true);
+        navigate(
+          `/portal-settings/data-import/migration/${workspacesEnum[migratorName]}?service=${migratorName}`,
+        );
+      }
+
+      if (!res.isCompleted && res.parseResult.users.length > 0) {
+        setCurrentStep(6);
+        setShouldRender(true);
+        return;
+      }
+
+      if (res.isCompleted) {
+        setUsers(res.parseResult);
+        setCurrentStep(2);
+      }
+      setShouldRender(true);
+    });
+
+    return clearCheckedAccounts;
+  }, []);
 
   if (isMobile())
     return <BreakpointWarning sectionName={t("Settings:DataImport")} />;
+
+  if (!shouldRender) return;
 
   return (
     <GoogleWrapper>
@@ -159,9 +204,17 @@ const GoogleWorkspace = ({
 };
 
 export default inject(({ setup, settingsStore, importAccountsStore }) => {
-  const { clearCheckedAccounts } = importAccountsStore;
+  const { clearCheckedAccounts, getMigrationStatus, setUsers } =
+    importAccountsStore;
   const { viewAs, setViewAs } = setup;
   const { currentDeviceType } = settingsStore;
 
-  return { clearCheckedAccounts, viewAs, setViewAs, currentDeviceType };
+  return {
+    clearCheckedAccounts,
+    viewAs,
+    setViewAs,
+    currentDeviceType,
+    getMigrationStatus,
+    setUsers,
+  };
 })(withTranslation(["Common, Settings"])(observer(GoogleWorkspace)));

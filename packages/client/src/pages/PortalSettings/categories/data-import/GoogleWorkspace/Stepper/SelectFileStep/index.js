@@ -100,34 +100,8 @@ const SelectFileStep = ({
       )
         return;
 
-      if (res.parseResult.migratorName !== "GoogleWorkspace") {
-        const workspacesEnum = {
-          GoogleWorkspace: "google",
-          Nextcloud: "nextcloud",
-          Workspace: "onlyoffice",
-        };
-        const migratorName = res.parseResult.migratorName;
-
-        navigate(
-          `/portal-settings/data-import/migration/${workspacesEnum[migratorName]}?service=${migratorName}`,
-        );
-      }
-
-      if (!res.isCompleted && res.parseResult.users.length > 0) {
-        setStep(6);
-        return;
-      }
-
-      if (res.isCompleted) {
-        setUsers(res.parseResult);
-        setStep(2);
-        return;
-      }
-
-      setProgress(res.progress);
       setIsFileError(false);
       setShowReminder(true);
-      setIsFileLoading(true);
 
       uploadInterval.current = setInterval(async () => {
         const res = await getMigrationStatus();

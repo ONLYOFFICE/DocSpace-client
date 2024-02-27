@@ -49,8 +49,11 @@ class TableStore {
   createdTrashColumnIsEnabled = false;
   sizeTrashColumnIsEnabled = false;
   typeTrashColumnIsEnabled = false;
+
   typeAccountsColumnIsEnabled = true;
+  groupAccountsColumnIsEnabled = true;
   emailAccountsColumnIsEnabled = true;
+  storageAccountsColumnIsEnabled = true;
 
   constructor(authStore, treeFoldersStore, userStore, settingsStore) {
     makeAutoObservable(this);
@@ -124,14 +127,22 @@ class TableStore {
     (this.typeAccountsColumnIsEnabled = enable);
   setAccountsColumnEmail = (enable) =>
     (this.emailAccountsColumnIsEnabled = enable);
+  setAccountsColumnGroup = (enable) =>
+    (this.groupAccountsColumnIsEnabled = enable);
+  setAccountsColumnStorage = (enable) =>
+    (this.storageAccountsColumnIsEnabled = enable);
 
   setColumnsEnable = () => {
     const storageColumns = localStorage.getItem(this.tableStorageName);
     const splitColumns = storageColumns && storageColumns.split(",");
 
     if (splitColumns) {
-      const { isRoomsFolder, isArchiveFolder, isTrashFolder, isAccounts } =
-        this.treeFoldersStore;
+      const {
+        isRoomsFolder,
+        isArchiveFolder,
+        isTrashFolder,
+        isAccountsPeople,
+      } = this.treeFoldersStore;
       const isRooms = isRoomsFolder || isArchiveFolder;
 
       if (isRooms) {
@@ -143,9 +154,11 @@ class TableStore {
         return;
       }
 
-      if (isAccounts) {
+      if (isAccountsPeople) {
         this.setAccountsColumnType(splitColumns.includes("Type"));
         this.setAccountsColumnEmail(splitColumns.includes("Mail"));
+        this.setAccountsColumnGroup(splitColumns.includes("Department"));
+        this.setAccountsColumnStorage(splitColumns.includes("Storage"));
         return;
       }
 
@@ -171,7 +184,7 @@ class TableStore {
   };
 
   setColumnEnable = (key) => {
-    const { isRoomsFolder, isArchiveFolder, isTrashFolder, isAccounts  } =
+    const { isRoomsFolder, isArchiveFolder, isTrashFolder, isAccountsPeople } =
       this.treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
 
@@ -194,6 +207,10 @@ class TableStore {
         this.setCreatedTrashColumn(!this.createdTrashColumnIsEnabled);
         return;
 
+      case "Department":
+        this.setAccountsColumnGroup(!this.groupAccountsColumnIsEnabled);
+        return;
+
       case "Modified":
         this.setModifiedColumn(!this.modifiedColumnIsEnabled);
         return;
@@ -212,10 +229,11 @@ class TableStore {
       case "Type":
         isRooms
           ? this.setRoomColumnType(!this.roomColumnTypeIsEnabled)
-          : isAccounts
+          : isAccountsPeople
             ? this.setAccountsColumnType(!this.typeAccountsColumnIsEnabled)
-          : this.setTypeColumn(!this.typeColumnIsEnabled);
+            : this.setTypeColumn(!this.typeColumnIsEnabled);
         return;
+
       case "TypeTrash":
         this.setTypeTrashColumn(!this.typeTrashColumnIsEnabled);
         return;
@@ -244,7 +262,9 @@ class TableStore {
         this.setAccountsColumnEmail(!this.emailAccountsColumnIsEnabled);
         return;
       case "Storage":
-        this.setRoomColumnQuota(!this.roomQuotaColumnIsEnable);
+        isAccountsPeople
+          ? this.setAccountsColumnStorage(!this.storageAccountsColumnIsEnabled)
+          : this.setRoomColumnQuota(!this.roomQuotaColumnIsEnable);
         return;
 
       default:
@@ -278,7 +298,7 @@ class TableStore {
       isRoomsFolder,
       isArchiveFolder,
       isTrashFolder,
-      isAccounts,
+      isAccountsPeople,
       isRecentTab,
     } = this.treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
@@ -289,10 +309,10 @@ class TableStore {
 
     return isRooms
       ? `${TABLE_ROOMS_COLUMNS}=${userId}`
-      : isAccounts
+      : isAccountsPeople
         ? `${TABLE_ACCOUNTS_COLUMNS}=${userId}`
-      : isTrashFolder
-        ? `${TABLE_TRASH_COLUMNS}=${userId}`
+        : isTrashFolder
+          ? `${TABLE_TRASH_COLUMNS}=${userId}`
           : isRecentTab
             ? `${TABLE_RECENT_COLUMNS}=${userId}`
             : `${TABLE_COLUMNS}=${userId}`;
@@ -313,7 +333,7 @@ class TableStore {
         ? `${COLUMNS_TRASH_SIZE}=${userId}`
         : isRecentTab
           ? `${COLUMNS_RECENT_SIZE}=${userId}`
-        : `${COLUMNS_SIZE}=${userId}`;
+          : `${COLUMNS_SIZE}=${userId}`;
   }
 
   get columnInfoPanelStorageName() {
@@ -331,7 +351,7 @@ class TableStore {
         ? `${COLUMNS_TRASH_SIZE_INFO_PANEL}=${userId}`
         : isRecentTab
           ? `${COLUMNS_RECENT_SIZE_INFO_PANEL}=${userId}`
-        : `${COLUMNS_SIZE_INFO_PANEL}=${userId}`;
+          : `${COLUMNS_SIZE_INFO_PANEL}=${userId}`;
   }
 
   get filesColumnStorageName() {

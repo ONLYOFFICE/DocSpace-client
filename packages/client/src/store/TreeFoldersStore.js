@@ -163,7 +163,7 @@ class TreeFoldersStore {
 
   get favoritesFolder() {
     return this.treeFolders.find(
-      (x) => x.rootFolderType === FolderType.Favorites
+      (x) => x.rootFolderType === FolderType.Favorites,
     );
   }
 
@@ -177,13 +177,13 @@ class TreeFoldersStore {
 
   get archiveFolder() {
     return this.treeFolders.find(
-      (x) => x.rootFolderType === FolderType.Archive
+      (x) => x.rootFolderType === FolderType.Archive,
     );
   }
 
   get privacyFolder() {
     return this.treeFolders.find(
-      (x) => x.rootFolderType === FolderType.Privacy
+      (x) => x.rootFolderType === FolderType.Privacy,
     );
   }
 
@@ -215,8 +215,8 @@ class TreeFoldersStore {
     return this.recycleBinFolder ? this.recycleBinFolder.id : null;
   }
 
-  get isAccounts() {
-    return window.location.pathname.includes("accounts/filter");
+  get isAccountsPeople() {
+    return window.location.pathname.includes("accounts/people");
   }
 
   get isPersonalRoom() {

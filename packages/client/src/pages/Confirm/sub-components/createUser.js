@@ -579,6 +579,7 @@ const CreateUserForm = (props) => {
                           isDisabled={isLoading}
                           onChange={onChangeFname}
                           onKeyDown={onKeyPress}
+                          isAutoFocussed
                         />
                       </FieldContainer>
                       <FieldContainer

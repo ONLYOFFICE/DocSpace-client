@@ -20,7 +20,7 @@ const App = () => {
       <I18nextProvider i18n={i18n}>
         <ThemeProvider>
           <ErrorBoundary>
-            <RouterProvider router={router} />;
+            <RouterProvider router={router} />
           </ErrorBoundary>
         </ThemeProvider>
       </I18nextProvider>

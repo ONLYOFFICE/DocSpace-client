@@ -107,6 +107,15 @@ export const StyledInfo = styled.div`
 
         .language-combo-box .combo-button {
           padding-inline-end: 0px;
+
+          ${(props) =>
+            props.theme.interfaceDirection === "rtl"
+              ? css`
+                  padding-right: 0px;
+                `
+              : css`
+                  padding-left: 0px;
+                `}
         }
 
         @media ${tablet} {

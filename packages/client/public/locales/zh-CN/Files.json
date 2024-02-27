@@ -153,7 +153,7 @@
   "TrashErasureWarning": "垃圾箱中的文件在30天后会自动删除。",
   "UnarchivedRoomAction": "房间 '{{name}}' 已取消归档。",
   "UnarchivedRoomsAction": "房间已取消归档。",
-  "UnblockVersion": "取消阻止/签入",
+  "UnblockVersion": "锁定/解锁",
   "Unpin": "取消标记",
   "VersionBadge": "V.{{version}}",
   "VersionHistory": "版本历史",

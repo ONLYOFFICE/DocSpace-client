@@ -12,7 +12,7 @@ import PDFIcoUrl from "PUBLIC_DIR/images/pdf.ico?url";
 
 interface UseRootInitProps {
   documentType?: string;
-  fileType?: "pdf" | FileType;
+  fileType?: FileType;
 }
 
 const useRootInit = ({ documentType, fileType }: UseRootInitProps) => {
@@ -21,13 +21,16 @@ const useRootInit = ({ documentType, fileType }: UseRootInitProps) => {
 
     switch (documentType) {
       case "word":
-        icon = fileType === "pdf" ? PDFIcoUrl : TextIcoUrl;
+        icon = TextIcoUrl;
         break;
       case "slide":
         icon = PresentationIcoUrl;
         break;
       case "cell":
         icon = SpreadSheetIcoUrl;
+        break;
+      case "pdf":
+        icon = PDFIcoUrl;
         break;
       default:
         icon = TextIcoUrl;

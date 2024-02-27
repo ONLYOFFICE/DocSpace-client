@@ -160,18 +160,18 @@ const SelectFileStep = ({
     }
   };
 
-  const onCancel = () => {
-    setCancelDialogVisibile(true);
-  };
+  // const onCancel = () => {
+  //   setCancelDialogVisibile(true);
+  // };
 
-  const handleCancelMigration = () => {
-    setProgress(0);
-    setIsFileLoading(false);
-    clearInterval(uploadInterval.current);
-    cancelMigration();
-  };
+  // const handleCancelMigration = () => {
+  //   setProgress(0);
+  //   setIsFileLoading(false);
+  //   clearInterval(uploadInterval.current);
+  //   cancelMigration();
+  // };
 
-  const hideCancelDialog = () => setCancelDialogVisibile(false);
+  // const hideCancelDialog = () => setCancelDialogVisibile(false);
 
   useEffect(() => {
     getMigrationStatus().then((res) => {
@@ -180,8 +180,6 @@ const SelectFileStep = ({
         res.parseResult.successedUsers + res.parseResult.failedUsers > 0
       )
         return;
-
-      console.log(res);
 
       if (res.parseResult.migratorName !== "Nextcloud") {
         const workspacesEnum = {
@@ -252,11 +250,11 @@ const SelectFileStep = ({
             className="select-file-progress-bar"
             label={t("Settings:BackupFileUploading")}
           />
-          <Button
+          {/* <Button
             size={isTablet() ? "medium" : "small"}
             label={t("Common:CancelButton")}
             onClick={onCancel}
-          />
+          /> */}
         </FileUploadContainer>
       ) : (
         <ErrorBlock>
@@ -293,14 +291,14 @@ const SelectFileStep = ({
         </ErrorBlock>
       )}
 
-      {cancelDialogVisible && (
+      {/* {cancelDialogVisible && (
         <CancelUploadDialog
           visible={cancelDialogVisible}
           // loading={isFileLoading}
           onClose={hideCancelDialog}
           cancelMigration={handleCancelMigration}
         />
-      )}
+      )} */}
     </Wrapper>
   );
 };

@@ -26,7 +26,7 @@ const ImportProcessingStep = ({
   getMigrationStatus,
   setImportResult,
 }) => {
-  const [isVisible, setIsVisible] = useState(false);
+  // const [isVisible, setIsVisible] = useState(false);
   const [percent, setPercent] = useState(0);
   const uploadInterval = useRef(null);
 
@@ -52,16 +52,16 @@ const ImportProcessingStep = ({
     }
   };
 
-  const hideCancelDialog = () => setIsVisible(false);
+  // const hideCancelDialog = () => setIsVisible(false);
 
-  const onCancel = () => {
-    setIsVisible(true);
-  };
+  // const onCancel = () => {
+  //   setIsVisible(true);
+  // };
   
-  const handleCancelMigration = () => {
-    setIsLoading(false);
-    cancelMigration();
-  }
+  // const handleCancelMigration = () => {
+  //   setIsLoading(false);
+  //   cancelMigration();
+  // }
 
   useEffect(() => {
     handleFileMigration();
@@ -70,7 +70,7 @@ const ImportProcessingStep = ({
   return (
     <Wrapper>
       <ProgressBar percent={percent} className="data-import-progress-bar" />
-      <Button
+      {/* <Button
         size={isTablet() ? "medium" : "small"}
         label={t("Common:CancelButton")}
         onClick={onCancel}
@@ -84,7 +84,7 @@ const ImportProcessingStep = ({
           cancelMigration={handleCancelMigration}
           onClose={hideCancelDialog}
         />
-      )}
+      )} */}
     </Wrapper>
   );
 };

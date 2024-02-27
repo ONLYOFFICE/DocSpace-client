@@ -198,18 +198,18 @@ const SelectFileStep = ({
     }
   };
 
-  const onCancel = () => {
-    setCancelDialogVisible(true);
-  };
+  // const onCancel = () => {
+  //   setCancelDialogVisible(true);
+  // };
 
-  const handleCancelMigration = () => {
-    setProgress(0);
-    setIsFileLoading(false);
-    clearInterval(uploadInterval.current);
-    cancelMigration();
-  };
+  // const handleCancelMigration = () => {
+  //   setProgress(0);
+  //   setIsFileLoading(false);
+  //   clearInterval(uploadInterval.current);
+  //   cancelMigration();
+  // };
 
-  const hideCancelDialog = () => setCancelDialogVisible(false);
+  // const hideCancelDialog = () => setCancelDialogVisible(false);
 
   return (
     <>
@@ -234,11 +234,11 @@ const SelectFileStep = ({
             className="select-file-progress-bar"
             label={t("Settings:BackupFileUploading")}
           />
-          <Button
+          {/* <Button
             size={isTablet() ? "medium" : "small"}
             label={t("Common:CancelButton")}
             onClick={onCancel}
-          />
+          /> */}
         </Wrapper>
       ) : (
         <ErrorBlock>
@@ -275,14 +275,14 @@ const SelectFileStep = ({
         </ErrorBlock>
       )}
 
-      {cancelDialogVisble && (
+      {/* {cancelDialogVisble && (
         <CancelUploadDialog
           visible={cancelDialogVisble}
           // loading={isFileLoading}
           onClose={hideCancelDialog}
           cancelMigration={handleCancelMigration}
         />
-      )}
+      )} */}
     </>
   );
 };

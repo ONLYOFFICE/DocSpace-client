@@ -150,7 +150,7 @@ const GroupMenuItem = ({
   const onClickAction = (e: React.MouseEvent) => {
     if (isBlocked) return;
 
-    onClick(e);
+    onClick?.(e);
 
     if (withDropDown) {
       setOpen(true);

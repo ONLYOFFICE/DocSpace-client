@@ -267,13 +267,15 @@ const Login: React.FC<ILoginProps> = ({
             </FormWrapper>
             <Toast />
 
-            <RecoverAccessModalDialog
-              visible={recoverDialogVisible}
-              onClose={closeRecoverDialog}
-              textBody={t("RecoverTextBody")}
-              emailPlaceholderText={t("RecoverContactEmailPlaceholder")}
-              id="recover-access-modal"
-            />
+            {recoverDialogVisible && (
+              <RecoverAccessModalDialog
+                visible={recoverDialogVisible}
+                onClose={closeRecoverDialog}
+                textBody={t("RecoverTextBody")}
+                emailPlaceholderText={t("RecoverContactEmailPlaceholder")}
+                id="recover-access-modal"
+              />
+            )}
           </ColorTheme>
         </LoginContent>
 

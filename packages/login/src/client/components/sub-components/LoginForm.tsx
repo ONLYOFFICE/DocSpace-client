@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-import { EmailInput } from "@docspace/shared/components/email-input";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { HelpButton } from "@docspace/shared/components/help-button";
@@ -330,6 +329,7 @@ const LoginForm: React.FC<ILoginFormProps> = ({
           autoComplete="current-password"
           onChange={onChangePassword}
           onKeyDown={onKeyDown}
+          isAutoFocussed={!!emailFromInvitation}
         />
       </FieldContainer>
 

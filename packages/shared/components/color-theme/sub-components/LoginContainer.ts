@@ -142,7 +142,7 @@ const LoginContainer = styled.div<{
       .password-input > div {
         background: ${(props) => props.theme.input.backgroundColor};
         color: ${(props) => props.theme.input.color};
-        border-color: ${(props) => props.theme.input.borderColor};
+        //border-color: ${(props) => props.theme.input.borderColor};
       }
     }
 

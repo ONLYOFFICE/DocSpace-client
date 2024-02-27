@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Base } from "../../themes";
-import { mobile } from "../../utils/device";
+import { desktop, mobile } from "../../utils/device";
 
 const BannerWrapper = styled.div<{
   background?: string;
@@ -14,6 +14,11 @@ const BannerWrapper = styled.div<{
   border: 1px solid ${(props) => props.borderColor};
   background-image: url(${(props) => props.background});
   background-size: 100%;
+  direction: ltr !important;
+
+  p {
+    text-align: left !important;
+  }
 
   .close-icon {
     position: absolute;
@@ -40,8 +45,10 @@ const BannerContent = styled.div`
   flex-direction: column;
   gap: 8px;
 
-  .header {
-    max-width: 167px;
+  @media ${desktop} {
+    .header {
+      max-width: 167px;
+    }
   }
 `;
 

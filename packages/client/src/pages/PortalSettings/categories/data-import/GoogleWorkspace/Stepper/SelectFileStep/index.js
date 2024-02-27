@@ -84,6 +84,8 @@ const SelectFileStep = ({
   const [isFileError, setIsFileError] = useState(false);
   const uploadInterval = useRef(null);
   const navigate = useNavigate();
+  
+  const [fileName, setFileName] = useState(null);
 
   const goBack = () => {
     cancelMigration();
@@ -105,6 +107,8 @@ const SelectFileStep = ({
 
       uploadInterval.current = setInterval(async () => {
         const res = await getMigrationStatus();
+
+        setFileName(res.parseResult.files.join(", "));
 
         if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
           setIsFileError(true);
@@ -203,7 +207,7 @@ const SelectFileStep = ({
           scale
           onInput={onSelectFile}
           className="select-file-input"
-          placeholder={t("Settings:BackupFile")}
+          placeholder={fileName || t("Settings:BackupFile")}
           isDisabled={isFileLoading}
           accept={[".zip"]}
         />

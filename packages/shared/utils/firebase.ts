@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
 /* eslint-disable prefer-promise-reject-errors */
 /* eslint-disable class-methods-use-this */
-import firebase from "firebase/app";
-import "firebase/remote-config";
-import "firebase/storage";
-import "firebase/database";
+import firebase from "firebase/compat/app";
+import "firebase/compat/remote-config";
+import "firebase/compat/storage";
+import "firebase/compat/database";
 
 import CampaignsCloudPngUrl from "PUBLIC_DIR/images/campaigns.cloud.png";
 import CampaignsDesktopPngUrl from "PUBLIC_DIR/images/campaigns.desktop.png";

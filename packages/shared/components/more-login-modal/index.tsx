@@ -35,7 +35,7 @@ const MoreLoginModal: React.FC<MoreLoginModalProps> = (props) => {
       onClose={onClose}
       displayType={ModalDialogType.aside}
     >
-      <ModalDialog.Header>{t("Common:Authorization")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:ContinueWith")}</ModalDialog.Header>
       <ModalDialog.Body>
         {ssoUrl && (
           <ProviderRow key="ProviderItemSSO">

@@ -37,7 +37,7 @@ const useTheme = ({ user }: UseThemeProps) => {
   }, []);
 
   const getUserTheme = React.useCallback(() => {
-    if (!currentColorTheme || !user?.theme) return;
+    if (!user?.theme) return;
     let theme = user.theme;
 
     if (user.theme === ThemeKeys.SystemStr) theme = SYSTEM_THEME;

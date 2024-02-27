@@ -4,12 +4,10 @@ import ArrowIcon from "PUBLIC_DIR/images/arrow.left.react.svg?url";
 import React, { useEffect, useState, useCallback } from "react";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { isMobile } from "react-device-detect";
 import { useSearchParams } from "react-router-dom";
 import { Button } from "@docspace/shared/components/button";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { toastr } from "@docspace/shared/components/toast";
@@ -38,11 +36,12 @@ import { getPasswordErrorMessage } from "@docspace/shared/utils/getPasswordError
 import DocspaceLogo from "SRC_DIR/components/DocspaceLogoWrapper";
 import withLoader from "../withLoader";
 
-import { StyledPage, StyledContent } from "./StyledConfirm";
+import { StyledPage } from "./StyledConfirm";
 import {
   ConfirmContainer,
   GreetingContainer,
   RegisterContainer,
+  StyledCreateUserContent,
 } from "./StyledCreateUser";
 
 const DEFAULT_ROOM_TEXT =
@@ -461,7 +460,7 @@ const CreateUserForm = (props) => {
 
   return (
     <StyledPage>
-      <StyledContent>
+      <StyledCreateUserContent>
         <ConfirmContainer>
           <GreetingContainer>
             <DocspaceLogo className="docspace-logo" />
@@ -697,7 +696,7 @@ const CreateUserForm = (props) => {
             </RegisterContainer>
           </FormWrapper>
         </ConfirmContainer>
-      </StyledContent>
+      </StyledCreateUserContent>
     </StyledPage>
   );
 };

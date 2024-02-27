@@ -4,19 +4,27 @@
   "private": true,
   "scripts": {
     "build": "node ./scripts/buildTranslations.js && next build",
-    "start": "node ./scripts/buildTranslations.js && next dev -p 5013",
-    "start-prod": "next start -p 5013",
-    "lint": "next lint"
+    "start": "node ./scripts/buildTranslations.js && NODE_ENV=development node server.js",
+    "start-prod": "NODE_ENV=production node server.js",
+    "lint": "next lint",
+    "clean": "shx rm -rf .next",
+    "deploy": "shx --silent mkdir -p ../../../publish/web/editor && shx cp -r .next/* ../../../publish/web/editor && shx cp -f server.js ../../../publish/web/editor/server.js && shx cp -r lib/* ../../../publish/web/editor && shx cp -r config/* ../../../publish/web/editor"
   },
   "dependencies": {
+    "@aws-sdk/client-cloudwatch-logs": "^3.521.0",
     "@onlyoffice/document-editor-react": "^1.4.1",
+    "date-and-time": "^3.1.1",
     "i18next": "^20.6.1",
     "mobx": "^6.8.0",
+    "morgan": "^1.10.0",
     "next": "14.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^14.0.1",
-    "styled-components": "^5.3.9"
+    "styled-components": "^5.3.9",
+    "winston": "^3.11.0",
+    "winston-cloudwatch": "^6.2.0",
+    "winston-daily-rotate-file": "^5.0.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
@@ -26,6 +34,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
     "prettier": "^3.2.4",
+    "shx": "^0.3.4",
     "typescript": "^5"
   }
 }

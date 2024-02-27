@@ -32,6 +32,7 @@ export const EmptyViewHeader = styled.div`
     color: ${(props) => props.theme.emptyContent.description.color};
     text-align: center;
     text-wrap: balance;
+    max-width: 300px;
   }
 `;
 

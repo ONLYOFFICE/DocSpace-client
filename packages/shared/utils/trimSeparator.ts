@@ -9,7 +9,7 @@ export function trimSeparator(array: ContextMenuModel[]) {
 
     if (el?.isSeparator && result.length > 0) {
       if (!result[result.length - 1]?.isSeparator) result.push(el);
-    } else if (!el?.isSeparator) {
+    } else if (!el?.isSeparator && !el?.disabled) {
       result.push(el);
     }
   }

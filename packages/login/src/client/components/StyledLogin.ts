@@ -66,7 +66,6 @@ export const LoginFormWrapper = styled.div`
     @media ${mobile} {
       max-width: 100%;
       min-width: 100%;
-      margin-top: 32px;
     }
     p {
       text-align: center;
@@ -128,11 +127,12 @@ export const LoginContent = styled.div`
   -webkit-box-direction: normal;
   height: 100%;
 
-  margin-top: 32px;
+  margin-top: 88px;
 
   @media ${mobile} {
     width: 100%;
     justify-content: start;
+    margin-top: 34px;
   }
 `;
 

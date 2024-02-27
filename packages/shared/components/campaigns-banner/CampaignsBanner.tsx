@@ -44,7 +44,7 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
         {hasTitle && (
           <TextComponent
             className="header"
-            color={title?.color}
+            color={title?.color || "#333"}
             fontSize={title?.fontSize}
             fontWeight={title?.fontWeight}
           >
@@ -54,7 +54,7 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
         <div>
           {hasBodyText && (
             <TextComponent
-              color={body?.color}
+              color={body?.color || "#333"}
               fontSize={fontSize}
               fontWeight={body?.fontWeight}
             >
@@ -63,7 +63,7 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
           )}
           {hasText && (
             <TextComponent
-              color={text?.color}
+              color={text?.color || "#333"}
               fontSize={text?.fontSize}
               fontWeight={text?.fontWeight}
             >

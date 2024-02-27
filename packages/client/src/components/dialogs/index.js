@@ -37,8 +37,10 @@ import BackupToPublicRoom from "./BackupToPublicRoom";
 import SettingsPluginDialog from "./SettingsPluginDialog";
 import CancelUploadDialog from "./CancelUploadDialog";
 import PluginDialog from "./PluginDialog";
+import ChangeQuotaDialog from "./ChangeQuotaDialog";
 import DeletePluginDialog from "./DeletePluginDialog";
 import ShareFolderDialog from "./ShareFolderDialog";
+import ChangeStorageQuotaDialog from "./ChangeStorageQuotaDialog";
 
 export {
   EmptyTrashDialog,
@@ -82,4 +84,6 @@ export {
   PluginDialog,
   DeletePluginDialog,
   ShareFolderDialog,
+  ChangeQuotaDialog,
+  ChangeStorageQuotaDialog,
 };

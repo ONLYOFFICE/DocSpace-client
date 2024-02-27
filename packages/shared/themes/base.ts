@@ -2955,7 +2955,13 @@ export const getBaseTheme = () => {
             tooltipColor: lightCumulus,
           },
           auditTrail: {
+            sideColor: "#A3A9AE",
+            nameColor: "#333333",
             downloadReportDescriptionColor: gray,
+          },
+          loginHistory: {
+            sideColor: "#A3A9AE",
+            nameColor: "#333333",
           },
         },
 
@@ -3066,6 +3072,10 @@ export const getBaseTheme = () => {
           groupMenuBackground: "#fff",
           groupMenuBorder: "1px solid #fff",
           groupMenuBoxShadow: "rgba(4, 15, 27, 0.07) 0px 5px 5px 0px",
+        },
+        storageManagement: {
+          grayBackgroundText: "#555F65",
+          descriptionColor: "#657077",
         },
       },
 

@@ -291,41 +291,34 @@ module.exports = (env, argv) => {
     })
   );
 
+  const htmlTemplate = {
+    title: title,
+    template: "./public/index.html",
+    publicPath: homepage,
+    base: `${homepage}/`,
+  };
+
   if (!!env.hideText) {
-    config.plugins.push(
-      new HtmlWebpackPlugin({
-        title: title,
-        template: "./public/index.html",
-        publicPath: homepage,
-        base: `${homepage}/`,
-        custom: `<style type="text/css">
-          div,
-          p,
-          a,
-          span,
-          button,
-          h1,
-          h2,
-          h3,
-          h4,
-          h5,
-          h6,
-          ::placeholder {
-            color: rgba(0, 0, 0, 0) !important;
-        }
-        </style>`,
-      })
-    );
-  } else {
-    config.plugins.push(
-      new HtmlWebpackPlugin({
-        template: "./public/index.html",
-        publicPath: homepage,
-        title: title,
-        base: `${homepage}/`,
-      })
-    );
+    htmlTemplate.custom = `
+      <style type="text/css">
+      div,
+      p,
+      a,
+      span,
+      button,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      ::placeholder {
+        color: rgba(0, 0, 0, 0) !important;
+      }
+    </style>`;
   }
+
+  config.plugins.push(new HtmlWebpackPlugin(htmlTemplate));
 
   const defines = {
     VERSION: JSON.stringify(version),

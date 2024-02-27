@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";
-//import withCultureNames from "@docspace/common/hoc/withCultureNames";
 import LanguageAndTimeZone from "./Customization/language-and-time-zone";
 import WelcomePageSettings from "./Customization/welcome-page-settings";
 import PortalRenaming from "./Customization/portal-renaming";
@@ -141,5 +140,5 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     resetIsInit,
   };
 })(
-  withLoading(withTranslation(["Settings", "Common"])(observer(Customization)))
+  withLoading(withTranslation(["Settings", "Common"])(observer(Customization))),
 );

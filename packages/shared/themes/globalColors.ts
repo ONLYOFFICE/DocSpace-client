@@ -11,6 +11,7 @@ export const globalColors = {
   grayDarkMid: "#242424",
   gray: "#A3A9AE",
   grayMain: "#657077",
+
   shuttleGrey: "#63686A",
   veryLightGrey: "#CACACA",
   darkSilver: "#bbb",
@@ -34,6 +35,7 @@ export const globalColors = {
   lightGrayishBlue: "#DEE2E6",
   lightGrayishStrongBlue: "#DFE2E3",
   cyanBlueDarkShade: "#555F65",
+  grayBackgroundTextDark: "#5C5C5C",
 
   orangeMain: "#ED7309",
   orangeHover: "#FF8932",

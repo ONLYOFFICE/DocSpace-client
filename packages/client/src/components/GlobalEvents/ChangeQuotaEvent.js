@@ -1,0 +1,140 @@
+import { useState, useRef } from "react";
+import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
+
+import { toastr } from "@docspace/shared/components/toast";
+
+import { ChangeQuotaDialog } from "../dialogs";
+let timerId = null;
+const ChangeQuotaEvent = (props) => {
+  const {
+    visible,
+    type,
+    ids,
+    bodyDescription,
+    headerTitle,
+    onClose,
+    setCustomUserQuota,
+    setCustomRoomQuota,
+    successCallback,
+    abortCallback,
+    initialSize,
+    inRoom,
+    setNewInfoPanelSelection,
+    needResetSelection,
+    getPeopleListItem,
+    setInfoPanelSelection,
+  } = props;
+
+  const { t } = useTranslation("Common");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [size, setSize] = useState(initialSize);
+
+  const onSetQuotaBytesSize = (size) => {
+    setSize(size);
+  };
+
+  const updateFunction = (size) => {
+    return type === "user"
+      ? setCustomUserQuota(size, ids)
+      : setCustomRoomQuota(size, ids, inRoom);
+  };
+  const onSaveClick = async () => {
+    if (!size || size.trim() === "") {
+      setIsError(true);
+      return;
+    }
+
+    timerId = setTimeout(() => setIsLoading(true), 200);
+    let items;
+
+    try {
+      items = await updateFunction(size);
+      toastr.success(t("Common:StorageQuotaSet"));
+
+      successCallback && successCallback(items);
+
+      if (!needResetSelection) {
+        if (type === "user") {
+          const user = getPeopleListItem(items[0]);
+
+          setInfoPanelSelection(user);
+        } else {
+          setNewInfoPanelSelection();
+        }
+      }
+    } catch (e) {
+      toastr.error(e);
+
+      abortCallback && abortCallback();
+    }
+
+    timerId && clearTimeout(timerId);
+    timerId = null;
+
+    setIsLoading(false);
+    setIsError(false);
+
+    onClose && onClose();
+  };
+
+  const onCloseClick = () => {
+    timerId && clearTimeout(timerId);
+    timerId = null;
+
+    abortCallback && abortCallback();
+    onClose && onClose();
+  };
+
+  return (
+    <ChangeQuotaDialog
+      visible={visible}
+      onSaveClick={onSaveClick}
+      onCloseClick={onCloseClick}
+      onSetQuotaBytesSize={onSetQuotaBytesSize}
+      bodyDescription={bodyDescription}
+      headerTitle={headerTitle}
+      isError={isError}
+      isLoading={isLoading}
+      initialSize={initialSize}
+      size={size}
+    />
+  );
+};
+
+export default inject(
+  (
+    { peopleStore, filesStore, auth, currentQuotaStore, infoPanelStore },
+    { type },
+  ) => {
+    const { usersStore } = peopleStore;
+    const { setCustomUserQuota, getPeopleListItem, needResetUserSelection } =
+      usersStore;
+    const { setCustomRoomQuota, needResetFilesSelection } = filesStore;
+
+    const { defaultUsersQuota, defaultRoomsQuota } = currentQuotaStore;
+    const {
+      selection: infoPanelSelection,
+      setNewInfoPanelSelection,
+      setInfoPanelSelection,
+    } = infoPanelStore;
+
+    const initialSize = type === "user" ? defaultUsersQuota : defaultRoomsQuota;
+
+    const inRoom = infoPanelSelection?.inRoom;
+    const needResetSelection =
+      type === "user" ? needResetUserSelection : needResetFilesSelection;
+
+    return {
+      initialSize,
+      setCustomUserQuota,
+      setCustomRoomQuota,
+      inRoom,
+      setNewInfoPanelSelection,
+      getPeopleListItem,
+      needResetSelection,
+      setInfoPanelSelection,
+    };
+  },
+)(observer(ChangeQuotaEvent));

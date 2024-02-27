@@ -27,6 +27,7 @@ class DialogsStore {
   selectFileDialogVisible = false;
   convertPasswordDialogVisible = false;
   inviteUsersWarningDialogVisible = false;
+  changeQuotaDialogVisible = false;
   unsavedChangesDialogVisible = false;
   moveToPublicRoomVisible = false;
   moveToPublicRoomData = null;
@@ -218,6 +219,9 @@ class DialogsStore {
     this.destFolderId = destFolderId;
   };
 
+  setChangeQuotaDialogVisible = (changeQuotaDialogVisible) => {
+    this.changeQuotaDialogVisible = changeQuotaDialogVisible;
+  };
   setNewFilesPanelVisible = async (visible, newId, item) => {
     const { pathParts } = this.selectedFolderStore;
 

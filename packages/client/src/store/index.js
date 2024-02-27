@@ -10,6 +10,7 @@ import {
 } from "@docspace/shared/store";
 
 import PaymentStore from "./PaymentStore";
+import StorageManagement from "./StorageManagement";
 import WizardStore from "./WizardStore";
 import SettingsSetupStore from "./SettingsSetupStore";
 import ConfirmStore from "./ConfirmStore";
@@ -179,6 +180,7 @@ const filesActionsStore = new FilesActionsStore(
   userStore,
   currentTariffStatusStore,
   peopleStore,
+  currentQuotaStore
 );
 
 const contextOptionsStore = new ContextOptionsStore(
@@ -251,6 +253,11 @@ const createEditRoomStore = new CreateEditRoomStore(
 
 const webhooksStore = new WebhooksStore(settingsStore);
 const importAccountsStore = new ImportAccountsStore();
+const storageManagement = new StorageManagement(
+  filesStore,
+  peopleStore,
+  authStore
+);
 
 const store = {
   authStore,
@@ -302,6 +309,7 @@ const store = {
   publicRoomStore,
 
   pluginStore,
+  storageManagement,
 };
 
 export default store;

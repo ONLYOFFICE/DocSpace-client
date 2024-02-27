@@ -1,7 +1,7 @@
 import React from "react";
 
 import Section from "@docspace/shared/components/section";
-import Loaders from "@docspace/common/components/Loaders";
+import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 import { withTranslation } from "react-i18next";
 
 import { SectionHeaderContent, SectionBodyContent } from "./Section";
@@ -28,7 +28,7 @@ class PureVersionHistory extends React.Component {
               onClickBack={this.redirectToHomepage}
             />
           ) : (
-            <Loaders.SectionHeader />
+            <SectionHeaderSkeleton />
           )}
         </Section.SectionHeader>
 
@@ -60,5 +60,5 @@ export default inject(
 
       setIsVerHistoryPanel,
     };
-  }
+  },
 )(observer(VersionHistory));

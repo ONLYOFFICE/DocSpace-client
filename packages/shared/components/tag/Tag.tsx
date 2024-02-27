@@ -31,6 +31,7 @@ export const TagPure = ({
   className,
   style,
   icon,
+  roomType,
 }: TagProps) => {
   const [openDropdown, setOpenDropdown] = React.useState(false);
 
@@ -39,7 +40,12 @@ export const TagPure = ({
 
   const onClickOutside = React.useCallback((e: Event) => {
     const target = e.target as HTMLElement;
-    if (target.className?.includes("advanced-tag") || !isMountedRef.current)
+    if (
+      (!!target &&
+        typeof target.className !== "object" &&
+        target.className?.includes("advanced-tag")) ||
+      !isMountedRef.current
+    )
       return;
 
     setOpenDropdown(false);
@@ -73,10 +79,10 @@ export const TagPure = ({
     (e: React.MouseEvent | React.ChangeEvent) => {
       if (onClick && !isDisabled) {
         const target = e.target as HTMLDivElement;
-        onClick(target.dataset.tag);
+        onClick({ roomType, label: target.dataset.tag });
       }
     },
-    [onClick, isDisabled],
+    [onClick, isDisabled, roomType],
   );
 
   const onDeleteAction = React.useCallback(
@@ -119,7 +125,7 @@ export const TagPure = ({
             className="tag__dropdown-item tag"
             key={`${t}_${index * 50}`}
             onClick={onClickAction}
-            data-tag={tag}
+            data-tag={t}
           >
             <StyledDropdownIcon
               className="tag__dropdown-item-icon"
@@ -131,7 +137,7 @@ export const TagPure = ({
               fontSize="12px"
               truncate
             >
-              {tag}
+              {t}
             </StyledDropdownText>
           </DropDownItem>
         ))}

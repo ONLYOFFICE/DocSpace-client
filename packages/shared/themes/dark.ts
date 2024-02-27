@@ -2934,7 +2934,13 @@ const Dark: TTheme = {
           tooltipColor: "#F5E9BA",
         },
         auditTrail: {
+          sideColor: "#858585",
+          nameColor: "#eeeeee",
           downloadReportDescriptionColor: "#858585",
+        },
+        loginHistory: {
+          sideColor: "#858585",
+          nameColor: "#eeeeee",
         },
       },
 
@@ -3042,6 +3048,10 @@ const Dark: TTheme = {
         groupMenuBackground: "#333333",
         groupMenuBorder: "1px solid #474747",
         groupMenuBoxShadow: "rgba(0, 0, 0, 0.16) 0px 5px 5px 0px",
+      },
+      storageManagement: {
+        grayBackgroundText: "#858585",
+        descriptionColor: "#ADADAD",
       },
     },
 

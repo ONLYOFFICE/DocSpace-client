@@ -23,7 +23,7 @@ const SelectGroupMembersPanel = ({
   const { t } = useTranslation(["InviteDialog"]);
   const accessOptions = getAccessOptions(t, 5, false, true);
 
-  const selectedGroupMemebersIds = groupMembers
+  const selectedgroupMembersIds = groupMembers
     ? groupMembers.map((gm) => gm.id)
     : [];
 
@@ -44,7 +44,7 @@ const SelectGroupMembersPanel = ({
       withAccessRights={false}
       isEncrypted={true}
       defaultAccess={ShareAccessRights.FullAccess}
-      userIdsToFilterOut={[groupManager?.id, ...selectedGroupMemebersIds]}
+      userIdsToFilterOut={[groupManager?.id, ...selectedgroupMembersIds]}
       //   withoutBackground={isMobileView}
       //   withBlur={!isMobileView}
     />

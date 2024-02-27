@@ -39,7 +39,7 @@ const LinkRow = ({
 
   const onCopyLink = (link) => {
     copy(link.sharedTo.shareLink);
-    toastr.success(t("Files:LinkSuccessfullyCopied"));
+    toastr.success(t("Common:LinkSuccessfullyCopied"));
   };
 
   return (
@@ -55,7 +55,7 @@ const LinkRow = ({
             fontWeight={600}
             onClick={onAddClick}
           >
-            {t("CreateAndCopy")}
+            {t("Common:CreateAndCopy")}
           </Link>
         </StyledLinkRow>
       ) : (
@@ -108,7 +108,7 @@ const LinkRow = ({
                   size={16}
                   iconName={CopyIcon}
                   onClick={() => onCopyLink(link)}
-                  title={t("CreateAndCopy")}
+                  title={t("Common:CreateAndCopy")}
                   isDisabled={isExpiredLink || isLoaded}
                 />
                 <ComboBox

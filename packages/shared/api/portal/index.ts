@@ -319,3 +319,11 @@ export async function getPortal() {
 
   return res;
 }
+
+export function getPortalUsersCount() {
+  const options = {
+    method: "get",
+    url: "/portal/userscount",
+  };
+  return request(options);
+}

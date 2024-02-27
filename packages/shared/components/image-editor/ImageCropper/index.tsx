@@ -63,10 +63,10 @@ const ImageCropper = ({
   const handleImageChange = throttle(() => {
     try {
       if (!editorRef.current) return;
-      const newPreveiwImage = editorRef.current
+      const newPreviewImage = editorRef.current
         .getImageScaledToCanvas()
         ?.toDataURL();
-      setPreviewImage(newPreveiwImage);
+      setPreviewImage(newPreviewImage);
     } catch (e) {
       // console.error(e);
     }
@@ -86,17 +86,18 @@ const ImageCropper = ({
         <AvatarEditor
           ref={setEditorRef}
           image={uploadedFile}
-          width={216}
-          height={216}
+          width={648}
+          height={648}
           position={{ x: image.x, y: image.y }}
           scale={image.zoom}
           color={[6, 22, 38, 0.2]}
           border={0}
           rotate={0}
           borderRadius={108}
+          style={{ width: "216px", height: "216px" }}
           onPositionChange={handlePositionChange}
           onImageReady={handleImageChange}
-          disableHiDPIScaling
+          disableHiDPIScaling={false}
           crossOrigin="anonymous"
         />
       </div>
@@ -111,35 +112,38 @@ const ImageCropper = ({
         </div>
       </div>
 
-      <div className="icon_cropper-zoom-container">
-        <IconButton
-          className="icon_cropper-zoom-container-button"
-          size={16}
-          onClick={handleZoomOutClick}
-          iconName={ZoomMinusReactSvgUrl}
-          isFill
-          isClickable={false}
-          isDisabled={isDisabled}
-        />
-        <Slider
-          className="icon_cropper-zoom-container-slider"
-          max={5}
-          min={1}
-          onChange={handleSliderChange}
-          step={0.01}
-          value={image.zoom}
-          isDisabled={isDisabled}
-        />
-        <IconButton
-          className="icon_cropper-zoom-container-button"
-          size={16}
-          onClick={handleZoomInClick}
-          iconName={ZoomPlusReactSvgUrl}
-          isFill
-          isClickable={false}
-          isDisabled={isDisabled}
-        />
-      </div>
+      {uploadedFile?.name && (
+        <div className="icon_cropper-zoom-container">
+          <IconButton
+            className="icon_cropper-zoom-container-button"
+            size={16}
+            onClick={handleZoomOutClick}
+            iconName={ZoomMinusReactSvgUrl}
+            isFill
+            isClickable={false}
+            isDisabled={isDisabled}
+          />
+
+          <Slider
+            className="icon_cropper-zoom-container-slider"
+            max={5}
+            min={1}
+            onChange={handleSliderChange}
+            step={0.01}
+            value={image.zoom}
+            isDisabled={isDisabled}
+          />
+          <IconButton
+            className="icon_cropper-zoom-container-button"
+            size={16}
+            onClick={handleZoomInClick}
+            iconName={ZoomPlusReactSvgUrl}
+            isFill
+            isClickable={false}
+            isDisabled={isDisabled}
+          />
+        </div>
+      )}
     </StyledImageCropper>
   );
 };

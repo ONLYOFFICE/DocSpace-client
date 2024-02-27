@@ -80,7 +80,7 @@ export default function withBadges(WrappedComponent) {
       setMuteAction(
         "unmute",
         { id, rootFolderId: rootfolderid, new: data.new },
-        t
+        t,
       );
     };
 
@@ -96,7 +96,7 @@ export default function withBadges(WrappedComponent) {
       const primaryLink = await getPrimaryLink(item.id);
       if (primaryLink) {
         copy(primaryLink.sharedTo.shareLink);
-        toastr.success(t("Files:LinkSuccessfullyCopied"));
+        toastr.success(t("Common:LinkSuccessfullyCopied"));
       }
     };
 
@@ -179,7 +179,7 @@ export default function withBadges(WrappedComponent) {
         userStore,
         settingsStore,
       },
-      { item }
+      { item },
     ) => {
       const {
         isRecycleBinFolder,
@@ -228,6 +228,6 @@ export default function withBadges(WrappedComponent) {
         isPublicRoom: publicRoomStore.isPublicRoom,
         isRecentTab,
       };
-    }
+    },
   )(observer(WithBadges));
 }

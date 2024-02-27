@@ -98,6 +98,7 @@ export const LoginFormWrapper = styled.div`
 
         display: flex;
         gap: 4px;
+
         svg {
           ${(props) =>
             props.theme.interfaceDirection === "rtl" &&
@@ -106,6 +107,10 @@ export const LoginFormWrapper = styled.div`
 
         p {
           color: ${(props) => props.theme.login.backTitle.color};
+        }
+
+        p:hover {
+          cursor: pointer;
         }
       }
     }

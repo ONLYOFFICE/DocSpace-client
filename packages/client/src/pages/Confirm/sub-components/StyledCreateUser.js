@@ -152,6 +152,10 @@ export const RegisterContainer = styled.div`
         p {
           color: ${(props) => props.theme.login.backTitle.color};
         }
+
+        p:hover {
+          cursor: pointer;
+        }
       }
     }
   }

@@ -53,7 +53,7 @@ export const SocialButtonsGroup = memo(
           <SocialButton
             isDisabled={isDisabled}
             iconName={icon}
-            label={length > 2 ? "" : getProviderLabel(label, t)}
+            label={length >= 2 ? "" : getProviderLabel(label, t)}
             $iconOptions={iconOptions}
             data-url={url}
             data-providername={provider}

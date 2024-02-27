@@ -7,6 +7,10 @@ const TABLET_WIDTH = 480;
 
 export const StyledCreateUserContent = styled.div`
   margin: 88px auto;
+
+  @media ${mobile} {
+    margin-top: 0px;
+  }
 `;
 
 export const ConfirmContainer = styled(Box)`

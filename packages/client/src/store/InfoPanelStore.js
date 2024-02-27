@@ -317,8 +317,8 @@ class InfoPanelStore {
                 null,
                 item.roomType,
               )
-      : item.isFolder && item.folderType
-        ? this.filesSettingsStore.getIconByFolderType(item.folderType, size)
+      : item.isFolder
+        ? this.filesSettingsStore.getIconByFolderType(item.type, size)
         : this.filesSettingsStore.getIcon(size, item.fileExst || ".file");
   };
 

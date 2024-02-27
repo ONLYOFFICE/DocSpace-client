@@ -1304,7 +1304,7 @@ class FilesActionStore {
 
     setIsLoading(true);
     window.DocSpace.navigate(
-      `${window.DocSpace.location.pathname}?${newFilter.toUrlParams()}`,
+      `${window.DocSpace.location.pathname}?${newFilter.toUrlParams(this.userStore?.user?.id)}`
     );
   };
 
@@ -2466,7 +2466,7 @@ class FilesActionStore {
       filter.searchArea = RoomSearchArea.Archive;
     }
 
-    window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`, {
+    window.DocSpace.navigate(`${path}?${filter.toUrlParams(this.userStore?.user?.id, true)}`, {
       state,
       replace: true,
     });

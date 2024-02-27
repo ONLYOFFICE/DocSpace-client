@@ -6,6 +6,16 @@ import { iconSize32 } from "../../utils/image-helpers";
 
 import { DEFAULT_FILE_EXTS } from "./FilesSelector.constants";
 
+const isDisableFolder = (
+  folder: TFolder,
+  disabledItems: (number | string)[],
+  filterParam?: string,
+) => {
+  if (!folder.security.Create) return true;
+
+  return filterParam ? false : disabledItems?.includes(folder.id);
+};
+
 export const convertFoldersToItems: (
   folders: TFolder[],
   disabledItems: (number | string)[],
@@ -24,11 +34,14 @@ export const convertFoldersToItems: (
       foldersCount,
       security,
       parentId,
+      type,
       rootFolderType,
     } = folder;
 
-    const folderIconPath = getIconPathByFolderType(rootFolderType);
+    const folderIconPath = getIconPathByFolderType(type);
     const icon = iconSize32.get(folderIconPath) as string;
+
+    const isDisabled = isDisableFolder(folder, disabledItems, filterParam);
 
     return {
       id,
@@ -42,7 +55,7 @@ export const convertFoldersToItems: (
       rootFolderType,
       isFolder: true,
       //   roomType,
-      isDisabled: filterParam ? false : disabledItems?.includes(id),
+      isDisabled,
     };
   });
 

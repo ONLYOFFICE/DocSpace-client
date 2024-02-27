@@ -12,6 +12,7 @@ import ErrorContainer from "@docspace/shared/components/error-container/ErrorCon
 import FirebaseHelper from "@docspace/shared/utils/firebase";
 import { TFirebaseSettings } from "@docspace/shared/api/settings/types";
 import { TUser } from "@docspace/shared/api/people/types";
+import AppLoader from "@docspace/shared/components/app-loader";
 
 import { TResponse } from "@/types";
 import useError from "@/hooks/useError";
@@ -120,7 +121,9 @@ const Root = ({
           i18n={i18n}
           onError={onError}
         >
-          {isShowDeepLink ? (
+          {!fileInfo?.id ? (
+            <AppLoader />
+          ) : isShowDeepLink ? (
             <DeepLink
               fileInfo={fileInfo}
               logoUrls={logoUrls}

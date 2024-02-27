@@ -1,7 +1,6 @@
 "use server";
 
 import { headers } from "next/headers";
-import { redirect } from "next/navigation";
 
 import { getLtrLanguageForEditor } from "@docspace/shared/utils/common";
 import { TenantStatus } from "@docspace/shared/enums";
@@ -25,8 +24,6 @@ export async function getData(
 
     const baseURL = `${proto}://${host}`;
     const baseAPIUrl = `${baseURL}/${API_PREFIX}`;
-
-    if (!fileId) return redirect(`${baseURL}/login`);
 
     const configURL = new URL(`${baseAPIUrl}/files/file/${fileId}/openedit`);
     const editorURL = new URL(`${baseAPIUrl}/files/docservice`);

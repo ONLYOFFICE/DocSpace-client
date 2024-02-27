@@ -65,6 +65,7 @@ const RootFolderContainer = (props) => {
     myFolder,
     roomsFolder,
     isPublicRoom,
+    userId,
   } = props;
   const personalDescription = t("EmptyFolderDecription");
 
@@ -123,7 +124,7 @@ const RootFolderContainer = (props) => {
   };
 
   const onGoToShared = () => {
-    const newFilter = RoomsFilter.getDefault();
+    const newFilter = RoomsFilter.getDefault(userId);
 
     newFilter.searchArea = RoomSearchArea.Active;
 
@@ -369,6 +370,7 @@ export default inject(
       isPrivacyFolder,
       isDesktop: isDesktopClient,
       isVisitor: userStore?.user?.isVisitor,
+      userId: userStore?.user?.id,
       isCollaborator: userStore?.user?.isCollaborator,
       isEncryptionSupport,
       organizationName,

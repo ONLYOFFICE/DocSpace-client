@@ -44,6 +44,7 @@ const ArticleBodyContent = (props) => {
     setSelection,
     currentDeviceType,
     campaigns,
+    userId,
   } = props;
 
   const navigate = useNavigate();
@@ -86,9 +87,9 @@ const ArticleBodyContent = (props) => {
 
           break;
         case archiveFolderId:
-          const archiveFilter = RoomsFilter.getDefault();
+          const archiveFilter = RoomsFilter.getDefault(userId);
           archiveFilter.searchArea = RoomSearchArea.Archive;
-          params = archiveFilter.toUrlParams();
+          params = archiveFilter.toUrlParams(userId, true);
           path = getCategoryUrl(CategoryType.Archive);
           if (activeItemId === archiveFolderId && folderId === selectedFolderId)
             return;
@@ -126,9 +127,9 @@ const ArticleBodyContent = (props) => {
           return;
         case roomsFolderId:
         default:
-          const roomsFilter = RoomsFilter.getDefault();
+          const roomsFilter = RoomsFilter.getDefault(userId);
           roomsFilter.searchArea = RoomSearchArea.Active;
-          params = roomsFilter.toUrlParams();
+          params = roomsFilter.toUrlParams(userId, true);
           path = getCategoryUrl(CategoryType.Shared);
           if (activeItemId === roomsFolderId && folderId === selectedFolderId)
             return;
@@ -293,6 +294,7 @@ export default inject(
       showText,
       showArticleLoader,
       isVisitor: userStore.user.isVisitor,
+      userId: userStore.user?.id,
 
       setNewFilesPanelVisible,
 

@@ -48,6 +48,7 @@ const Root = ({
   isSharingAccess,
   editorUrl,
   doc,
+  fileId,
 }: TResponse) => {
   const documentserverUrl = editorUrl?.docServiceUrl;
   const fileInfo = config?.file;
@@ -121,7 +122,7 @@ const Root = ({
           i18n={i18n}
           onError={onError}
         >
-          {!fileInfo?.id ? (
+          {!fileId ? (
             <AppLoader />
           ) : isShowDeepLink ? (
             <DeepLink
@@ -139,8 +140,8 @@ const Root = ({
               customizedBodyText={getErrorMessage()}
               isEditor
             />
-          ) : (
-            <>
+          ) : isShowDeepLink ? null : (
+            <div style={{ width: "100%", height: "100%" }}>
               {config && user && documentserverUrl && fileInfo && (
                 <Editor
                   config={config}
@@ -196,7 +197,7 @@ const Root = ({
                   i18n={i18n}
                 />
               )}
-            </>
+            </div>
           )}
         </ErrorBoundary>
       </ThemeProvider>

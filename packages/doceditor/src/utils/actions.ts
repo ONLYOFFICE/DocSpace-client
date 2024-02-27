@@ -79,6 +79,7 @@ export async function getData(
         successAuth: false,
         isSharingAccess: false,
         doc,
+        fileId,
       };
 
       // needed to reset rtl language in Editor
@@ -110,7 +111,7 @@ export async function getData(
       return response;
     }
 
-    const response: TResponse = { error: { message: "unauthorized" } };
+    const response: TResponse = { error: { message: "unauthorized" }, fileId };
 
     return response;
   } catch (e) {

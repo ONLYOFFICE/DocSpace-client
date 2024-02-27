@@ -16,6 +16,7 @@ const useError = ({ error, editorUrl, t }: UseErrorProps) => {
   React.useEffect(() => {
     if (error?.message === "unauthorized") {
       sessionStorage.setItem("referenceUrl", window.location.href);
+
       window.open(
         combineUrl(window.DocSpaceConfig?.proxy?.url, "/login"),
         "_self",

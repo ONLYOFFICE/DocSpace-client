@@ -16,8 +16,7 @@ import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelecto
 import SocketIOHelper from "@docspace/shared/utils/socket";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
-import { Nullable, TPathParts, TTranslation } from "@docspace/shared/types";
-import { TTheme } from "@docspace/shared/themes";
+import { Nullable, TTranslation } from "@docspace/shared/types";
 import { i18n } from "i18next";
 
 export type TGoBack = {
@@ -158,6 +157,7 @@ export type TResponse =
       isSharingAccess: boolean;
       error?: TError;
       doc?: string;
+      fileId?: string;
     }
   | {
       error: TError;
@@ -168,6 +168,7 @@ export type TResponse =
       successAuth?: undefined;
       isSharingAccess?: undefined;
       doc?: undefined;
+      fileId?: string;
     };
 
 export type EditorProps = {

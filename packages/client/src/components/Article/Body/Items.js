@@ -70,7 +70,7 @@ const Item = ({
         startUpload(files, uploadToFolder, t);
       }
     },
-    [t, dragging, setDragging, startUpload, uploadEmptyFolders]
+    [t, dragging, setDragging, startUpload, uploadEmptyFolders],
   );
 
   const onDrop = React.useCallback(
@@ -85,7 +85,7 @@ const Item = ({
         onDropZoneUpload(items);
       }
     },
-    [item, startUpload, dragging, setDragging]
+    [item, startUpload, dragging, setDragging],
   );
 
   const onDragOver = React.useCallback(
@@ -94,7 +94,7 @@ const Item = ({
         setIsDragActive(dragActive);
       }
     },
-    [isDragActive]
+    [isDragActive],
   );
 
   const onDragLeave = React.useCallback(() => {
@@ -110,10 +110,10 @@ const Item = ({
           folderId,
           item.title,
           item.rootFolderType,
-          item.security.Create
+          item.security.Create,
         );
     },
-    [onClick, item.title, item.rootFolderType]
+    [onClick, item.title, item.rootFolderType],
   );
 
   return (
@@ -204,7 +204,7 @@ const Items = ({
           return false;
       }
     },
-    [docSpace]
+    [docSpace],
   );
 
   const getFolderIcon = React.useCallback((item) => {
@@ -220,13 +220,13 @@ const Items = ({
       if (
         !draggableItems ||
         draggableItems.find(
-          (x) => x.id === item.id && x.isFolder === item.isFolder
+          (x) => x.id === item.id && x.isFolder === item.isFolder,
         )
       )
         return false;
 
       const isArchive = draggableItems.find(
-        (f) => f.rootFolderType === FolderType.Archive
+        (f) => f.rootFolderType === FolderType.Archive,
       );
 
       if (
@@ -238,7 +238,7 @@ const Items = ({
 
       if (item.rootFolderType === FolderType.TRASH && startDrag && !isArchive) {
         return draggableItems.some(
-          (draggableItem) => draggableItem.security.Delete
+          (draggableItem) => draggableItem.security.Delete,
         );
       }
 
@@ -252,17 +252,17 @@ const Items = ({
 
       return false;
     },
-    [currentId, draggableItems, isAdmin]
+    [currentId, draggableItems, isAdmin],
   );
 
   const onMoveTo = React.useCallback(
     (destFolderId, title) => {
       moveDragItems(destFolderId, title, {
-        copy: t("Translations:CopyOperation"),
-        move: t("Translations:MoveToOperation"),
+        copy: t("Common:CopyOperation"),
+        move: t("Common:MoveToOperation"),
       });
     },
-    [moveDragItems, t]
+    [moveDragItems, t],
   );
 
   const onRemove = React.useCallback(() => {
@@ -338,7 +338,7 @@ const Items = ({
             key="accounts-item"
             onClick={onClick}
             isActive={activeItemId === "accounts"}
-          />
+          />,
         );
 
       if (!isVisitor) items.splice(3, 0, <CatalogDivider key="other-header" />);
@@ -368,7 +368,7 @@ const Items = ({
       firstLoad,
       activeItemId,
       emptyTrashInProgress,
-    ]
+    ],
   );
 
   return <>{getItems(data)}</>;
@@ -462,5 +462,5 @@ export default inject(
       currentDeviceType,
       folderAccess,
     };
-  }
+  },
 )(withTranslation(["Files", "Common", "Translations"])(observer(Items)));

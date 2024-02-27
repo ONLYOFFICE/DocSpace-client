@@ -39,6 +39,7 @@ const DeveloperToolsWrapper = (props) => {
     "Webhooks",
     "Settings",
     "WebPlugins",
+    "Common",
   ]);
   const [isPending, startTransition] = useTransition();
 
@@ -53,7 +54,7 @@ const DeveloperToolsWrapper = (props) => {
       {t("WebPlugins:PluginSDK")}
 
       <Badge
-        label={t("Settings:BetaLabel")}
+        label={t("Common:BetaLabel")}
         backgroundColor="#533ED1"
         fontSize="9px"
         borderRadius="50px"

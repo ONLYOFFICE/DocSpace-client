@@ -20,7 +20,7 @@ import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { isBetaLanguage } from "@docspace/shared/utils";
-import withCultureNames from "@docspace/common/hoc/withCultureNames";
+import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 
 import BetaBadge from "../../../../../components/BetaBadgeWrapper";
 

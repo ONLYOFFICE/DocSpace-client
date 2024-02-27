@@ -231,6 +231,17 @@ const getTags = (filterValues) => {
   return tags;
 };
 
+const getQuotaFilter = (filterValues) => {
+  const filterType = result(
+    find(filterValues, (value) => {
+      return value.group === FilterGroups.filterQuota;
+    }),
+    "key",
+  );
+
+  return filterType?.toString() ? +filterType : null;
+};
+
 const TABLE_COLUMNS = `filesTableColumns_ver-${TableVersions.Files}`;
 
 const COLUMNS_SIZE_INFO_PANEL = `filesColumnsSizeInfoPanel_ver-${TableVersions.Files}`;
@@ -302,6 +313,8 @@ const SectionFilterContent = ({
   standalone,
   currentDeviceType,
   isRoomAdmin,
+  showStorageInfo,
+  isDefaultRoomsQuotaSet,
 }) => {
   const location = useLocation();
   const { groupId } = useParams();
@@ -332,7 +345,7 @@ const SectionFilterContent = ({
         const role = getRole(data);
         const payments = getPayments(data);
         const accountLoginType = getAccountLoginType(data);
-
+        const quota = getQuotaFilter(data) || null;
         const newFilter = isInsideGroup
           ? insideGroupFilter.clone()
           : accountsFilter.clone();
@@ -348,6 +361,9 @@ const SectionFilterContent = ({
           newFilter.activationStatus = status;
         }
 
+        if (quota) {
+          newFilter.quotaFilter = quota;
+        }
         newFilter.page = 0;
 
         newFilter.role = role;
@@ -392,6 +408,7 @@ const SectionFilterContent = ({
 
         const providerType = getProviderType(data) || null;
         const tags = getTags(data) || null;
+        const quota = getQuotaFilter(data) || null;
 
         const newFilter = roomsFilter.clone();
 
@@ -401,6 +418,10 @@ const SectionFilterContent = ({
 
         newFilter.subjectFilter = null;
         newFilter.subjectId = null;
+
+        if (quota) {
+          newFilter.quotaFilter = quota;
+        }
 
         if (subjectId) {
           newFilter.subjectId = subjectId;
@@ -431,7 +452,7 @@ const SectionFilterContent = ({
           newFilter.searchArea === RoomSearchArea.Active
             ? "rooms/shared"
             : "rooms/archived";
-        navigate(`${path}/filter?${newFilter.toUrlParams()}`);
+        navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
       } else {
         const filterType = getFilterType(data) || null;
 
@@ -492,7 +513,7 @@ const SectionFilterContent = ({
     }
     setIsLoading(true);
     if (isRooms) {
-      const newFilter = RoomsFilter.getDefault();
+      const newFilter = RoomsFilter.clean();
       newFilter.searchArea = roomsFilter.searchArea;
 
       const path =
@@ -500,7 +521,7 @@ const SectionFilterContent = ({
           ? "rooms/shared"
           : "rooms/archived";
 
-      navigate(`${path}/filter?${newFilter.toUrlParams()}`);
+      navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
     } else {
       const newFilter = filter.clone();
       newFilter.page = 0;
@@ -563,7 +584,7 @@ const SectionFilterContent = ({
             ? "rooms/shared"
             : "rooms/archived";
 
-        navigate(`${path}/filter?${newFilter.toUrlParams()}`);
+        navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
       } else {
         const newFilter = filter.clone();
         newFilter.page = 0;
@@ -628,7 +649,7 @@ const SectionFilterContent = ({
             ? "rooms/shared"
             : "rooms/archived";
         setRoomsFilter(newFilter);
-        navigate(`${path}/filter?${newFilter.toUrlParams()}`);
+        navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
       } else {
         const path = location.pathname.split("/filter")[0];
 
@@ -788,7 +809,22 @@ const SectionFilterContent = ({
           });
         }
 
-        if (filter?.payments?.toString()) {
+        if (accountsFilter.quotaFilter) {
+          const key = +accountsFilter.quotaFilter;
+
+          const label =
+            key === FilterKeys.customQuota
+              ? t("Common:CustomQuota")
+              : t("Common:DefaultQuota");
+
+          filterValues.push({
+            key: accountsFilter.quotaFilter,
+            label: label,
+            group: FilterGroups.filterQuota,
+          });
+        }
+
+        if (accountsFilter?.payments?.toString()) {
           filterValues.push({
             key: filter.payments.toString(),
             label:
@@ -965,6 +1001,20 @@ const SectionFilterContent = ({
           key: key,
           label: label,
           group: FilterGroups.roomFilterType,
+        });
+      }
+      if (roomsFilter.quotaFilter) {
+        const key = roomsFilter.quotaFilter;
+
+        const label =
+          key === FilterKeys.customQuota
+            ? t("Common:CustomQuota")
+            : t("Common:DefaultQuota");
+
+        filterValues.push({
+          key: roomsFilter.quotaFilter,
+          label: label,
+          group: FilterGroups.filterQuota,
         });
       }
 
@@ -1145,6 +1195,7 @@ const SectionFilterContent = ({
     roomsFilter.tags?.length,
     roomsFilter.excludeSubject,
     roomsFilter.withoutTags,
+    roomsFilter.quotaFilter,
     // roomsFilter.withSubfolders,
     // roomsFilter.searchInContent,
     userId,
@@ -1174,6 +1225,28 @@ const SectionFilterContent = ({
   ]);
 
   const getFilterData = React.useCallback(async () => {
+    const quotaFilter = [
+      {
+        key: FilterGroups.filterQuota,
+        group: FilterGroups.filterQuota,
+        label: t("Common:StorageQuota"),
+        isHeader: true,
+        withoutSeparator: true,
+        withMultiItems: true,
+      },
+      {
+        id: "filter_custom-quota",
+        key: FilterKeys.customQuota,
+        group: FilterGroups.filterQuota,
+        label: t("Common:CustomQuota"),
+      },
+      {
+        id: "filter_default-quota",
+        key: FilterKeys.defaultQuota,
+        group: FilterGroups.filterQuota,
+        label: t("Common:DefaultQuota"),
+      },
+    ];
     if (isPeopleAccounts || isInsideGroup) {
       const groupItems = [
         {
@@ -1352,7 +1425,9 @@ const SectionFilterContent = ({
       if (!standalone) filterOptions.push(...accountItems);
       // filterOptions.push(...roomItems);
       filterOptions.push(...accountLoginTypeItems);
-
+      showStorageInfo &&
+        isDefaultRoomsQuotaSet &&
+        filterOptions.push(...quotaFilter);
       return filterOptions;
     }
 
@@ -1719,6 +1794,10 @@ const SectionFilterContent = ({
 
         filterOptions.push(...thirdPartyOptions);
       }
+
+      showStorageInfo &&
+        isDefaultRoomsQuotaSet &&
+        filterOptions.push(...quotaFilter);
     } else {
       if (!isRecentTab && !isFavoritesFolder && !isTrash) {
         const foldersOptions = [
@@ -1908,6 +1987,15 @@ const SectionFilterContent = ({
 
       options.push(firstName, lastName);
 
+      if (showStorageInfo) {
+        options.push({
+          id: "sort-quota",
+          key: SortByFieldName.UsedSpace,
+          label: t("Common:Storage"),
+          default: true,
+        });
+      }
+
       if ((viewAs = "table")) {
         const tableColumns = isInsideGroup
           ? TABLE_INSIDE_GROUP_COLUMNS
@@ -1936,6 +2024,8 @@ const SectionFilterContent = ({
               infoPanelColumnsSize[idx] === "0px";
 
             !hide && options.push(hideableColumns[columnTitle]);
+
+          
           }
         });
       }
@@ -2061,6 +2151,13 @@ const SectionFilterContent = ({
       default: true,
     };
 
+    const sortByStorage = {
+      id: "sort-by_storage",
+      key: SortByFieldName.UsedSpace,
+      label: t("Common:Storage"),
+      default: true,
+    };
+
     commonOptions.push(name);
 
     if (viewAs === "table") {
@@ -2073,44 +2170,43 @@ const SectionFilterContent = ({
           ?.getItem(`${COLUMNS_ROOMS_SIZE_INFO_PANEL}=${userId}`)
           ?.split(" ");
 
+        const hideOption = infoPanelVisible && infoPanelColumnsSize;
+
         if (availableSort?.includes("Type")) {
           const idx = availableSort.findIndex((x) => x === "Type");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
+          const hide = hideOption && infoPanelColumnsSize[idx] === "0px";
 
           !hide && commonOptions.push(roomType);
         }
 
         if (availableSort?.includes("Tags")) {
           const idx = availableSort.findIndex((x) => x === "Tags");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
+          const hide = hideOption && infoPanelColumnsSize[idx] === "0px";
 
           !hide && commonOptions.push(tags);
         }
 
         if (availableSort?.includes("Owner")) {
           const idx = availableSort.findIndex((x) => x === "Owner");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
+          const hide = hideOption && infoPanelColumnsSize[idx] === "0px";
 
           !hide && commonOptions.push(owner);
         }
 
         if (availableSort?.includes("Activity")) {
           const idx = availableSort.findIndex((x) => x === "Activity");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
+          const hide = hideOption && infoPanelColumnsSize[idx] === "0px";
 
           !hide && commonOptions.push(modifiedDate);
+        }
+
+        if (showStorageInfo && availableSort?.includes("Storage")) {
+          const idx = availableSort.findIndex(
+            (x) => x === SortByFieldName.UsedSpace,
+          );
+          const hide = hideOption && infoPanelColumnsSize[idx] === "0px";
+
+          !hide && commonOptions.push(sortByStorage);
         }
       } else if (isTrash) {
         const availableSort = localStorage
@@ -2264,6 +2360,7 @@ const SectionFilterContent = ({
         commonOptions.push(tags);
         commonOptions.push(owner);
         commonOptions.push(modifiedDate);
+        commonOptions.push(sortByStorage);
       } else if (isTrash) {
         // commonOptions.push(authorOption);
         // commonOptions.push(creationDate);
@@ -2325,7 +2422,9 @@ const SectionFilterContent = ({
         if (group === "filter-login-type") {
           newFilter.accountLoginType = null;
         }
-
+        if (group === FilterGroups.filterQuota) {
+          newFilter.quotaFilter = null;
+        }
         if (group === FilterGroups.filterGroup && isPeopleAccounts) {
           newFilter.withoutGroup = false;
           newFilter.group = null;
@@ -2359,6 +2458,10 @@ const SectionFilterContent = ({
 
         if (group === FilterGroups.roomFilterType) {
           newFilter.type = null;
+        }
+
+        if (group === FilterGroups.filterQuota) {
+          newFilter.quotaFilter = null;
         }
 
         if (group === FilterGroups.roomFilterSubject) {
@@ -2401,7 +2504,7 @@ const SectionFilterContent = ({
             ? "rooms/shared"
             : "rooms/archived";
 
-        navigate(`${path}/filter?${newFilter.toUrlParams()}`);
+        navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
       } else {
         const newFilter = filter.clone();
 
@@ -2465,7 +2568,7 @@ const SectionFilterContent = ({
 
       navigate(`${url}${newFilter.toUrlParams()}`);
     } else if (isRooms) {
-      const newFilter = RoomsFilter.getDefault();
+      const newFilter = RoomsFilter.clean();
 
       if (isArchiveFolder) {
         newFilter.searchArea = RoomSearchArea.Archive;
@@ -2476,7 +2579,7 @@ const SectionFilterContent = ({
           ? "rooms/shared"
           : "rooms/archived";
 
-      navigate(`${path}/filter?${newFilter.toUrlParams()}`);
+      navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
     } else {
       const newFilter = FilesFilter.getDefault();
 
@@ -2538,6 +2641,7 @@ export default inject(
     infoPanelStore,
     userStore,
     settingsStore,
+    currentQuotaStore,
   }) => {
     const {
       filter,
@@ -2575,6 +2679,7 @@ export default inject(
     const isRooms = isRoomsFolder || isArchiveFolder;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
+    const { showStorageInfo, isDefaultRoomsQuotaSet } = currentQuotaStore;
 
     const {
       filterStore,
@@ -2599,6 +2704,9 @@ export default inject(
 
     return {
       isRoomAdmin,
+      showStorageInfo,
+      isDefaultRoomsQuotaSet,
+
       user,
       userId: user?.id,
 

@@ -19,7 +19,7 @@ import {
   RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
-import withCultureNames from "@docspace/common/hoc/withCultureNames";
+import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 import { isBetaLanguage } from "@docspace/shared/utils";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
 

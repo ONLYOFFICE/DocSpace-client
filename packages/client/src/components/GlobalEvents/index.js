@@ -13,7 +13,7 @@ import CreateGroupEvent from "./GroupEvents/CreateGroupEvent";
 import EditGroupEvent from "./GroupEvents/EditGroupEvent";
 import ChangeUserTypeEvent from "./ChangeUserTypeEvent";
 import CreatePluginFile from "./CreatePluginFileEvent";
-
+import ChangeQuotaEvent from "./ChangeQuotaEvent";
 const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
   const [createDialogProps, setCreateDialogProps] = useState({
     visible: false,
@@ -58,7 +58,13 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
     visible: false,
     onClose: null,
   });
-
+  const [changeQuotaDialog, setChangeQuotaDialogProps] = useState({
+    visible: false,
+    type: null,
+    ids: null,
+    bodyDescription: null,
+    headerTitle: null,
+  });
   const [createPluginFileDialog, setCreatePluginFileProps] = useState({
     visible: false,
     props: null,
@@ -189,6 +195,31 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
     [enablePlugins],
   );
 
+  const onChangeQuota = useCallback((e) => {
+    const { payload } = e;
+
+    setChangeQuotaDialogProps({
+      visible: payload.visible,
+      type: payload.type,
+      ids: payload.ids,
+      bodyDescription: payload.bodyDescriptionKey,
+      headerTitle: payload.headerKey,
+      successCallback: payload.successCallback,
+      abortCallback: payload.abortCallback,
+      onClose: () => {
+        setChangeQuotaDialogProps({
+          visible: false,
+          type: null,
+          ids: null,
+          bodyDescription: null,
+          headerTitle: null,
+          successCallback: null,
+          abortCallback: null,
+          onClose: null,
+        });
+      },
+    });
+  }, []);
   useEffect(() => {
     window.addEventListener(Events.CREATE, onCreate);
     window.addEventListener(Events.RENAME, onRename);
@@ -197,7 +228,7 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
     window.addEventListener(Events.CHANGE_USER_TYPE, onChangeUserType);
     window.addEventListener(Events.GROUP_CREATE, onCreateGroup);
     window.addEventListener(Events.GROUP_EDIT, onEditGroup);
-
+    window.addEventListener(Events.CHANGE_QUOTA, onChangeQuota);
     if (enablePlugins) {
       window.addEventListener(
         Events.CREATE_PLUGIN_FILE,
@@ -284,6 +315,9 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
         key={Events.CREATE_PLUGIN_FILE}
         {...createPluginFileDialog}
       />
+    ),
+    changeQuotaDialog.visible && (
+      <ChangeQuotaEvent key={Events.CHANGE_QUOTA} {...changeQuotaDialog} />
     ),
   ];
 };

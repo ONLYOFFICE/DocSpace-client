@@ -4,7 +4,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { setDocumentTitle } from "@docspace/client/src/helpers/filesUtils";
-import Loaders from "@docspace/common/components/Loaders";
+import { PaymentsStandaloneLoader } from "@docspace/shared/skeletons/payments";
 
 import LicenseContainer from "./LicenseContainer";
 import { StyledComponent } from "./StyledComponent";
@@ -39,7 +39,7 @@ const StandalonePage = (props) => {
     !ready ||
     isUpdatingBasicSettings
   )
-    return <Loaders.PaymentsStandaloneLoader isEnterprise={!isTrial} />;
+    return <PaymentsStandaloneLoader isEnterprise={!isTrial} />;
 
   return (
     <StyledComponent>
@@ -52,7 +52,6 @@ const StandalonePage = (props) => {
 
 export default inject(
   ({ currentQuotaStore, paymentStore, currentTariffStatusStore }) => {
-
     const { standaloneInit, isInitPaymentPage, isUpdatingBasicSettings } =
       paymentStore;
     const { isLoaded: isLoadedCurrentQuota, isTrial } = currentQuotaStore;

@@ -148,6 +148,7 @@ const CommonButtons = (props) => {
     folderId,
     onClickInviteUsers,
     parentId,
+    userId,
   } = props;
 
   const navigate = useNavigate();
@@ -164,7 +165,7 @@ const CommonButtons = (props) => {
           ? getCategoryUrl(CategoryType.Archive)
           : getCategoryUrl(CategoryType.Shared);
 
-      const newFilter = RoomsFilter.getDefault();
+      const newFilter = RoomsFilter.getDefault(userId);
 
       newFilter.searchArea =
         rootFolderType === FolderType.Archive
@@ -235,6 +236,7 @@ export default inject(
     contextOptionsStore,
     clientLoadingStore,
     settingsStore,
+    userStore,
   }) => {
     const {
       navigationPath,
@@ -279,6 +281,7 @@ export default inject(
 
       theme: settingsStore.theme,
       isArchiveFolderRoot,
+      userId: userStore?.user?.user?.id,
     };
-  }
+  },
 )(withTranslation(["Files", "Translations"])(observer(CommonButtons)));

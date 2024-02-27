@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import { NotificationsType } from "@docspace/shared/enums";
 import { getNotificationSubscription } from "@docspace/shared/api/settings";
-import Loaders from "@docspace/common/components/Loaders";
+import NotificationsLoader from "@docspace/shared/skeletons/notifications";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { toastr } from "@docspace/shared/components/toast";
 
@@ -39,7 +39,7 @@ const Notifications = ({ setSubscriptions, isFirstSubscriptionsLoad }) => {
         badges.isEnabled,
         roomsActivity.isEnabled,
         dailyFeed.isEnabled,
-        tips.isEnabled
+        tips.isEnabled,
       );
 
       setIsLoading(false);
@@ -84,7 +84,7 @@ const Notifications = ({ setSubscriptions, isFirstSubscriptionsLoad }) => {
       </StyledTextContent>
       <div className="badges-container">
         {isLoadingContent ? (
-          <Loaders.Notifications />
+          <NotificationsLoader />
         ) : (
           <RoomsActionsContainer
             t={t}
@@ -108,7 +108,7 @@ const Notifications = ({ setSubscriptions, isFirstSubscriptionsLoad }) => {
         )}
       </StyledTextContent>
       {isLoadingContent ? (
-        <Loaders.Notifications count={3} />
+        <NotificationsLoader count={3} />
       ) : (
         <div className="badges-container">
           <RoomsActivityContainer

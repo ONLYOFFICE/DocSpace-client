@@ -44,10 +44,10 @@ const useError = ({ error, editorUrl, t }: UseErrorProps) => {
   }, [editorUrl, error]);
 
   const onError = React.useCallback(() => {
-    window.open(
-      combineUrl(window.DocSpaceConfig?.proxy?.url, "/login"),
-      "_self",
-    );
+    // window.open(
+    //   combineUrl(window.DocSpaceConfig?.proxy?.url, "/login"),
+    //   "_self",
+    // );
   }, []);
 
   const getErrorMessage = React.useCallback(() => {

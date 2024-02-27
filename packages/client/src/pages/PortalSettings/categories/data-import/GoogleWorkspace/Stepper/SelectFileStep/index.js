@@ -77,7 +77,6 @@ const SelectFileStep = ({
   isFileLoading,
   setIsFileLoading,
   cancelMigration,
-  setStep,
 }) => {
   const [progress, setProgress] = useState(0);
   const [searchParams] = useSearchParams();
@@ -125,7 +124,7 @@ const SelectFileStep = ({
     return () => clearInterval(uploadInterval.current);
   }, []);
 
-  // const hideCancelDialog = () => setCancelDialogVisible(false);
+  const hideCancelDialog = () => setCancelDialogVisible(false);
 
   const onUploadFile = async (file) => {
     if (file.length) {
@@ -186,16 +185,16 @@ const SelectFileStep = ({
     }
   };
 
-  // const onCancel = () => {
-  //   setCancelDialogVisible(true);
-  // };
+  const onCancel = () => {
+    setCancelDialogVisible(true);
+  };
 
-  // const handleCancelMigration = () => {
-  //   setProgress(0);
-  //   setIsFileLoading(false);
-  //   clearInterval(uploadInterval.current);
-  //   cancelMigration();
-  // };
+  const handleCancelMigration = () => {
+    setProgress(0);
+    setIsFileLoading(false);
+    clearInterval(uploadInterval.current);
+    cancelMigration();
+  };
 
   return (
     <>
@@ -220,11 +219,11 @@ const SelectFileStep = ({
             className="select-file-progress-bar"
             label={t("Settings:BackupFileUploading")}
           />
-          {/* <Button
+          <Button
             size={isTablet() ? "medium" : "small"}
             label={t("Common:CancelButton")}
             onClick={onCancel}
-          /> */}
+          />
         </Wrapper>
       ) : (
         <ErrorBlock>
@@ -261,14 +260,14 @@ const SelectFileStep = ({
         </ErrorBlock>
       )}
 
-      {/* {cancelDialogVisible && (
+      {cancelDialogVisible && (
         <CancelUploadDialog
           visible={cancelDialogVisible}
           // loading={isFileLoading}
           onClose={hideCancelDialog}
           cancelMigration={handleCancelMigration}
         />
-      )} */}
+      )}
     </>
   );
 };

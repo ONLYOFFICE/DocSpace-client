@@ -35,7 +35,6 @@ export const getStepsData = (t, currentStep, setCurrentStep) => {
           t={t}
           incrementStep={incrementStep}
           decrementStep={decrementStep}
-          setStep={setCurrentStep}
         />
       ),
     },

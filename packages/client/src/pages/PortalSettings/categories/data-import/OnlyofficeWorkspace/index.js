@@ -196,7 +196,6 @@ const OnlyofficeWorkspace = ({
           onPrevStep={onPrevStep}
           showReminder={showReminder}
           setShowReminder={setShowReminder}
-          setCurrentStep={setCurrentStep}
         />
       </div>
     </WorkspaceWrapper>

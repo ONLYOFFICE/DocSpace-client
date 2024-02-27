@@ -196,7 +196,6 @@ const GoogleWorkspace = ({
           onPrevStep={onPrevStep}
           showReminder={showReminder}
           setShowReminder={setShowReminder}
-          setStep={setCurrentStep}
         />
       </div>
     </GoogleWrapper>

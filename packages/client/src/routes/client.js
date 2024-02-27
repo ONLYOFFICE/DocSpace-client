@@ -2,8 +2,8 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 import loadable from "@loadable/component";
 
-import PrivateRoute from "@docspace/common/components/PrivateRoute";
-import PublicRoute from "@docspace/common/components/PublicRoute";
+import PrivateRoute from "../components/PrivateRouteWrapper";
+import PublicRoute from "../components/PublicRouteWrapper";
 import Error404 from "@docspace/shared/components/errors/Error404";
 
 import ErrorBoundary from "../components/ErrorBoundaryWrapper";
@@ -199,7 +199,15 @@ const ClientRoutes = [
             path: "accounts",
             element: (
               <PrivateRoute restricted withManager>
-                <Navigate to="/accounts/filter" replace />
+                <Navigate to="/accounts/people/filter" replace />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "accounts/filter",
+            element: (
+              <PrivateRoute restricted withManager>
+                <Navigate to="/accounts/people/filter" replace />
               </PrivateRoute>
             ),
           },
@@ -208,7 +216,7 @@ const ClientRoutes = [
             element: (
               <PrivateRoute restricted withManager>
                 <Navigate
-                  to="/accounts/filter"
+                  to="/accounts/people/filter"
                   state={{ openChangeOwnerDialog: true }}
                   replace
                 />
@@ -216,7 +224,47 @@ const ClientRoutes = [
             ),
           },
           {
-            path: "accounts/filter",
+            path: "accounts/people",
+            element: (
+              <PrivateRoute restricted withManager>
+                <Navigate to="/accounts/people/filter" replace />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "accounts/people/filter",
+            element: (
+              <PrivateRoute restricted withManager>
+                <AccountsView />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "accounts/groups",
+            element: (
+              <PrivateRoute restricted withManager>
+                <Navigate to="/accounts/groups/filter" replace />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "accounts/groups/filter",
+            element: (
+              <PrivateRoute restricted withManager>
+                <AccountsView />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "accounts/groups/:groupId",
+            element: (
+              <PrivateRoute restricted withManager>
+                <Navigate to="/accounts/groups/:groupId/filter" replace />
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: "accounts/groups/:groupId/filter",
             element: (
               <PrivateRoute restricted withManager>
                 <AccountsView />

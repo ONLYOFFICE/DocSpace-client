@@ -1,20 +1,9 @@
 import React from "react";
 
-// @ts-ignore
 import { getFolder, getFolderInfo } from "@docspace/shared/api/files";
-// @ts-ignore
 import FilesFilter from "@docspace/shared/api/files/filter";
-// @ts-ignore
 import { iconSize32 } from "@docspace/shared/utils/image-helpers";
 
-import { PAGE_COUNT, defaultBreadCrumb } from "../utils";
-
-import {
-  useFilesHelpersProps,
-  Item,
-  BreadCrumb,
-  Security,
-} from "../FilesSelector.types";
 import {
   ApplyFilterOption,
   FilesSelectorFilterTypes,
@@ -27,8 +16,14 @@ import {
   FolderTypeValueOf,
 } from "@docspace/shared/utils/common";
 
-//@ts-ignore
 import { toastr } from "@docspace/shared/components/toast";
+import {
+  useFilesHelpersProps,
+  Item,
+  BreadCrumb,
+  Security,
+} from "../FilesSelector.types";
+import { PAGE_COUNT, defaultBreadCrumb } from "../utils";
 
 type Room = {
   id: number;
@@ -46,7 +41,7 @@ const DEFAULT_FILE_EXTS = "file";
 export const convertFoldersToItems = (
   folders: any,
   disabledItems: any[],
-  filterParam?: string
+  filterParam?: string,
 ) => {
   const items = folders.map((room: Room) => {
     const {
@@ -76,7 +71,7 @@ export const convertFoldersToItems = (
       rootFolderType,
       isFolder: true,
       roomType,
-      isDisabled: !!filterParam ? false : disabledItems.includes(id),
+      isDisabled: filterParam ? false : disabledItems.includes(id),
     };
   });
 
@@ -86,7 +81,7 @@ export const convertFoldersToItems = (
 export const convertFilesToItems = (
   files: any,
   getIcon: (size: number, fileExst: string) => string,
-  filterParam?: string
+  filterParam?: string,
 ) => {
   const items = files.map((file: any) => {
     const {
@@ -150,15 +145,12 @@ export const useFilesHelper = ({
       startIndex: number,
       itemId: number | string | undefined,
       isInit?: boolean,
-      search?: string | null
+      search?: string | null,
     ) => {
       setIsNextPageLoading(true);
 
-      const currentSearch = search
-        ? search
-        : search === null
-          ? ""
-          : searchValue || "";
+      const currentSearch =
+        search || (search === null ? "" : searchValue || "");
 
       const page = startIndex / PAGE_COUNT;
 
@@ -195,16 +187,19 @@ export const useFilesHelper = ({
           case FilesSelectorFilterTypes.ALL:
             filter.filterType = FilterType.FilesOnly;
             break;
+
+          default:
+            break;
         }
       }
 
-      const id = itemId ? itemId : selectedItemId || "";
+      const id = itemId || selectedItemId || "";
 
       filter.folder = id.toString();
 
       const setSettings = async (
         folderId: string | number,
-        isErrorPath = false
+        isErrorPath = false,
       ) => {
         if (isInit && getRootData) {
           const folder = await getFolderInfo(folderId, true);
@@ -215,16 +210,16 @@ export const useFilesHelper = ({
             if (isRoomsOnly && getRoomList) {
               await getRoomList(0, true, null, true);
               toastr.error(
-                t("Files:ArchivedRoomAction", { name: folder.title })
+                t("Files:ArchivedRoomAction", { name: folder.title }),
               );
               return;
             }
             await getRootData();
 
             if (onSetBaseFolderPath && isArchive) {
-              onSetBaseFolderPath && onSetBaseFolderPath([]);
+              onSetBaseFolderPath([]);
               toastr.error(
-                t("Files:ArchivedRoomAction", { name: folder.title })
+                t("Files:ArchivedRoomAction", { name: folder.title }),
               );
             }
 
@@ -242,13 +237,13 @@ export const useFilesHelper = ({
         const foldersList: Item[] = convertFoldersToItems(
           folders,
           disabledItems,
-          filterParam
+          filterParam,
         );
 
         const filesList: Item[] = convertFilesToItems(
           files,
           getIcon,
-          filterParam
+          filterParam,
         );
 
         const itemList = [...foldersList, ...filesList];
@@ -259,8 +254,8 @@ export const useFilesHelper = ({
           setSelectedTreeNode({ ...current, path: pathParts });
 
         if (isInit) {
-          let foundParentId = false,
-            currentFolderIndex = -1;
+          let foundParentId = false;
+          let currentFolderIndex = -1;
 
           const breadCrumbs: BreadCrumb[] = pathParts.map(
             ({
@@ -288,11 +283,11 @@ export const useFilesHelper = ({
 
               return {
                 label: title,
-                id: id,
+                id,
                 isRoom: roomsFolderId === id,
                 roomType,
               };
-            }
+            },
           );
 
           !isThirdParty &&
@@ -345,10 +340,8 @@ export const useFilesHelper = ({
         }
       }
     },
-    [selectedItemId, searchValue, isFirstLoad, disabledItems, roomsFolderId]
+    [selectedItemId, searchValue, isFirstLoad, disabledItems, roomsFolderId],
   );
 
   return { getFileList };
 };
-
-export default useFilesHelper;

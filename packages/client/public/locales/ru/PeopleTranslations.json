@@ -1,8 +1,11 @@
 {
   "AccountLoginType": "Тип входа в аккаунт",
+  "AddMembers": "Добавить участников",
+  "CreateGroup": "Создать группу",
   "DeleteSelfProfile": "Удалить профиль",
   "DisabledEmployeeStatus": "Заблокирован",
   "DisableUserButton": "Заблокировать",
+  "EditGroup": "Изменить группу",
   "EmailChangeButton": "Изменить email",
   "EnableUserButton": "Разблокировать",
   "InviteLinkTitle": "Пригласительная ссылка",

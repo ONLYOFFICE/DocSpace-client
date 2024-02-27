@@ -21,7 +21,7 @@ const SelectAll = React.memo(
       if (e.target instanceof HTMLElement && e.target.closest(".checkbox"))
         return;
 
-      onSelectAll?.();
+      onSelectAll();
     };
 
     return (
@@ -32,7 +32,7 @@ const SelectAll = React.memo(
           <>
             <Avatar
               className="select-all_avatar"
-              source={icon || ""}
+              source={icon}
               role={AvatarRole.user}
               size={AvatarSize.min}
             />

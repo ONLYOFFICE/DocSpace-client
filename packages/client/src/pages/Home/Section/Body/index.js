@@ -226,7 +226,9 @@ const SectionBodyContent = (props) => {
       return;
     }
 
-    const folderId = value ? value.split("_")[1] : treeValue;
+    const folderId = value
+      ? value.split("_").slice(1, -3).join("_")
+      : treeValue;
     onMoveTo(folderId, title);
     return;
   };
@@ -235,7 +237,7 @@ const SectionBodyContent = (props) => {
     const id = isNaN(+destFolderId) ? destFolderId : +destFolderId;
     moveDragItems(id, title, {
       copy: t("Common:CopyOperation"),
-      move: t("Translations:MoveToOperation"),
+      move: t("Common:MoveToOperation"),
     });
   };
 

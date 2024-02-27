@@ -10,7 +10,7 @@ import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 import store from "client/store";
 import i18n from "./i18n";
 
-import "@docspace/common/custom.scss";
+import "@docspace/shared/styles/custom.scss";
 
 import router from "./router";
 
@@ -20,7 +20,7 @@ const App = () => {
       <I18nextProvider i18n={i18n}>
         <ThemeProvider>
           <ErrorBoundary>
-            <RouterProvider router={router} />;
+            <RouterProvider router={router} />
           </ErrorBoundary>
         </ThemeProvider>
       </I18nextProvider>

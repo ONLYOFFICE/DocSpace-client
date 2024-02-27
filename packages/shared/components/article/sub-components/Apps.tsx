@@ -29,7 +29,7 @@ const ArticleApps = React.memo(
     return (
       <StyledArticleApps showText={showText} withDevTools={withDevTools}>
         <Text className="download-app-text" fontSize="14px" noSelect>
-          {t("Translations:DownloadApps")}
+          {t("Common:DownloadApps")}
         </Text>
         <div className="download-app-list">
           <IconButton
@@ -38,7 +38,7 @@ const ArticleApps = React.memo(
             size={32}
             isFill
             hoverColor={theme.filesArticleBody.downloadAppList.winHoverColor}
-            title={t("Translations:MobileWin")}
+            title={t("Common:MobileWin")}
           />
           <IconButton
             onClick={() => window.open(desktopLink)}
@@ -46,7 +46,7 @@ const ArticleApps = React.memo(
             size={32}
             isFill
             hoverColor={theme.filesArticleBody.downloadAppList.macHoverColor}
-            title={t("Translations:MobileMac")}
+            title={t("Common:MobileMac")}
           />
           <IconButton
             onClick={() => window.open(desktopLink)}
@@ -54,7 +54,7 @@ const ArticleApps = React.memo(
             size={32}
             isFill
             hoverColor={theme.filesArticleBody.downloadAppList.linuxHoverColor}
-            title={t("Translations:MobileLinux")}
+            title={t("Common:MobileLinux")}
           />
           <IconButton
             onClick={() => window.open(androidLink)}
@@ -64,7 +64,7 @@ const ArticleApps = React.memo(
             hoverColor={
               theme.filesArticleBody.downloadAppList.androidHoverColor
             }
-            title={t("Translations:MobileAndroid")}
+            title={t("Common:MobileAndroid")}
           />
           <IconButton
             onClick={() => window.open(iosLink)}
@@ -72,7 +72,7 @@ const ArticleApps = React.memo(
             size={32}
             isFill
             hoverColor={theme.filesArticleBody.downloadAppList.iosHoverColor}
-            title={t("Translations:MobileIos")}
+            title={t("Common:MobileIos")}
           />
         </div>
       </StyledArticleApps>
@@ -83,3 +83,4 @@ const ArticleApps = React.memo(
 ArticleApps.displayName = "ArticleApps";
 
 export default ArticleApps;
+

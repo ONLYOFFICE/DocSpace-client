@@ -2,11 +2,10 @@ import styled, { css } from "styled-components";
 import { tablet } from "../../../utils";
 
 const StyledContainer = styled.div<{
-  isVirtualKeyboardOpen?: boolean;
   showText?: boolean;
 }>`
   z-index: 209;
-  position: ${(props) => (props.isVirtualKeyboardOpen ? "absolute" : "fixed")};
+  position: absolute;
   bottom: 0;
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
@@ -47,16 +46,16 @@ const StyledBlock = styled.div`
 
   .title {
     ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: 12px;`
-        : `margin-left: 12px;`}
+    theme.interfaceDirection === "rtl"
+      ? `margin-right: 12px;`
+      : `margin-left: 12px;`}
   }
 
   .option-button {
     ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: auto;`
-        : `margin-left: auto;`}
+    theme.interfaceDirection === "rtl"
+      ? `margin-right: auto;`
+      : `margin-left: auto;`}
   }
 `;
 

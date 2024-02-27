@@ -212,9 +212,9 @@ export const getUserRole = (user: TUser) => {
     user.access === ShareAccessRights.RoomManager ||
     user.access === ShareAccessRights.Collaborator
   )
-    // TODO: Change to People Product Id const
+    //TODO: Change to People Product Id const
     return "admin";
-  // TODO: Need refactoring
+  //TODO: Need refactoring
   if (user.isVisitor) return "user";
   if (user.isCollaborator) return "collaborator";
   if (user.isRoomAdmin) return "manager";
@@ -544,6 +544,15 @@ export const frameCallCommand = (commandName: string, commandData: unknown) => {
   );
 };
 
+export const getPowerFromBytes = (bytes: number, maxPower = 6) => {
+  const power = Math.floor(Math.log(bytes) / Math.log(1024));
+  return power <= maxPower ? power : maxPower;
+};
+
+export const getSizeFromBytes = (bytes: number, power: number) => {
+  return parseFloat((bytes / Math.pow(1024, power)).toFixed(2));
+};
+
 export const getConvertedSize = (t: (key: string) => string, bytes: number) => {
   let power = 0;
   let resultSize = bytes;
@@ -561,12 +570,38 @@ export const getConvertedSize = (t: (key: string) => string, bytes: number) => {
   if (bytes <= 0) return `${`0 ${t("Common:Bytes")}`}`;
 
   if (bytes >= 1024) {
-    power = Math.floor(Math.log(bytes) / Math.log(1024));
-    power = power < sizeNames.length ? power : sizeNames.length - 1;
-    resultSize = parseFloat((bytes / 1024 ** power).toFixed(2));
+    power = getPowerFromBytes(bytes, sizeNames.length - 1);
+    resultSize = getSizeFromBytes(bytes, power);
   }
 
   return `${resultSize} ${sizeNames[power]}`;
+};
+
+export const getConvertedQuota = (
+  t: (key: string) => string,
+  bytes: number,
+) => {
+  if (bytes === -1) return t("Common:Unlimited");
+  return getConvertedSize(t, bytes);
+};
+
+export const getSpaceQuotaAsText = (
+  t: (key: string) => string,
+  usedSpace: number,
+  quotaLimit: number,
+  isDefaultQuotaSet: boolean,
+) => {
+  const usedValue = getConvertedQuota(t, usedSpace);
+  const quotaValue = getConvertedQuota(t, quotaLimit);
+
+  if (isDefaultQuotaSet) return `${usedValue} / ${quotaValue}`;
+
+  return usedValue;
+};
+
+export const conversionToBytes = (size: number, power: number) => {
+  const value = Math.floor(size) * Math.pow(1024, power);
+  return value.toString();
 };
 
 export const getBgPattern = (colorSchemeId: number | undefined) => {
@@ -771,7 +806,11 @@ export const toUrlParams = (
       }
     } else if (typeof item === "object") {
       str += `${key}=${encodeURIComponent(JSON.stringify(item))}`;
-    } else if (typeof item === "string" || typeof item === "number") {
+    } else if (
+      typeof item === "string" ||
+      typeof item === "number" ||
+      typeof item === "boolean"
+    ) {
       str += `${key}=${encodeURIComponent(item)}`;
     }
   });
@@ -805,8 +844,12 @@ export function getObjectByLocation(location: Location) {
   }
 }
 
-export const RoomsTypeValues = Object.values(RoomsType).filter(
+const RoomsValues = Object.values(RoomsType).filter(
   (item): item is number => typeof item === "number",
+);
+
+export const RoomsTypeValues = RoomsValues.filter(
+  (room) => room !== RoomsType.FormRoom,
 );
 
 export const RoomsTypes = RoomsTypeValues.reduce<Record<number, number>>(
@@ -901,4 +944,25 @@ export const getIconPathByFolderType = (
   };
 
   return folderIconPath[folderType ?? FolderType.DEFAULT] ?? defaultPath;
+};
+
+export const insertTagManager = (id: string) => {
+  const script = document.createElement("script");
+  script.innerHTML = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','${id}');`;
+
+  const noScript = document.createElement("noscript");
+  noScript.innerHTML = `<iframe src="https://www.googletagmanager.com/ns.html?id=${id}"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe>`;
+
+  document.head.insertBefore(script, document.head.childNodes[0]);
+  document.body.insertBefore(noScript, document.body.childNodes[0]);
+};
+
+export const insertDataLayer = (id: string) => {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ user_id: id });
 };

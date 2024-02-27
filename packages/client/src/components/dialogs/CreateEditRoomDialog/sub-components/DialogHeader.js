@@ -3,8 +3,8 @@ import React from "react";
 import { withTranslation } from "react-i18next";
 
 import withLoader from "@docspace/client/src/HOCs/withLoader";
-import Loaders from "@docspace/common/components/Loaders";
 import { IconButton } from "@docspace/shared/components/icon-button";
+import CreateEditRoomDilogHeaderLoader from "@docspace/shared/skeletons/create-edit-room/DilogHeader";
 
 const DialogHeader = ({ t, isEdit, isChooseRoomType, onArrowClick }) => {
   return (
@@ -29,5 +29,5 @@ const DialogHeader = ({ t, isEdit, isChooseRoomType, onArrowClick }) => {
 };
 
 export default withTranslation(["CreateEditRoomDialog", "Files"])(
-  withLoader(DialogHeader)(<Loaders.CreateEditRoomDilogHeaderLoader />)
+  withLoader(DialogHeader)(<CreateEditRoomDilogHeaderLoader />),
 );

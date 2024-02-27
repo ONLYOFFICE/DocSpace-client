@@ -11,4 +11,5 @@ export interface CircleSkeletonProps {
   foregroundOpacity?: number;
   speed?: number;
   animate?: boolean;
+  className?: string;
 }

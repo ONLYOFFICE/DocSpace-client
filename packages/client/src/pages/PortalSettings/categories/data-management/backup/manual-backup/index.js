@@ -14,7 +14,7 @@ import ThirdPartyStorageModule from "./sub-components/ThirdPartyStorageModule";
 import { StyledModules, StyledManualBackup } from "./../StyledBackup";
 import { getFromLocalStorage, saveToLocalStorage } from "../../../../utils";
 //import { getThirdPartyCommonFolderTree } from "@docspace/shared/api/files";
-import DataBackupLoader from "@docspace/common/components/Loaders/DataBackupLoader";
+import DataBackupLoader from "@docspace/shared/skeletons/backup/DataBackup";
 import {
   getBackupStorage,
   getStorageRegions,
@@ -171,7 +171,7 @@ class ManualBackup extends React.Component {
     moduleName,
     moduleType,
     selectedStorageId,
-    selectedStorageTitle
+    selectedStorageTitle,
   ) => {
     const { isCheckedThirdPartyStorage } = this.state;
     const {
@@ -189,7 +189,7 @@ class ManualBackup extends React.Component {
     const storageParams = getStorageParams(
       isCheckedThirdPartyStorage,
       selectedFolder,
-      selectedStorageId
+      selectedStorageId,
     );
 
     const folderId = isCheckedThirdPartyStorage
@@ -200,7 +200,7 @@ class ManualBackup extends React.Component {
       isCheckedThirdPartyStorage,
       moduleName,
       folderId,
-      selectedStorageTitle
+      selectedStorageTitle,
     );
 
     try {
@@ -439,5 +439,5 @@ export default inject(
       dataBackupUrl,
       currentColorScheme,
     };
-  }
+  },
 )(withTranslation(["Settings", "Common"])(observer(ManualBackup)));

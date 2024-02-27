@@ -48,7 +48,6 @@ newInstance
       "CreateEditRoomDialog",
       "DeleteThirdPartyDialog",
       "PortalUnavailable",
-      "RoomSelector",
       "UploadPanel",
       "Files",
       "Errors",

@@ -4,7 +4,6 @@ import { withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 
 import withLoader from "@docspace/client/src/HOCs/withLoader";
-import Loaders from "@docspace/common/components/Loaders/index.js";
 
 import { Text } from "@docspace/shared/components/text";
 
@@ -85,7 +84,7 @@ const Gallery = ({
             {parseAndFormatDate(
               gallerySelected.attributes.updatedAt,
               personal,
-              culture
+              culture,
             )}
           </Text>
         </div>
@@ -119,9 +118,9 @@ export default inject(({ settingsStore, filesSettingsStore, oformsStore }) => {
   };
 })(
   withTranslation(["InfoPanel", "FormGallery", "Common", "Translations"])(
-    Gallery
+    Gallery,
     // withLoader(observer(Gallery))(
     //   <Loaders.InfoPanelViewLoader view="gallery" />
     // )
-  )
+  ),
 );

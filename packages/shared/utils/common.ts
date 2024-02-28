@@ -112,6 +112,33 @@ export const getUserTypeLabel = (
   }
 };
 
+export const validatePortalName = (
+  value: string,
+  nameValidator: { minLength: number; maxLength: number; regex: RegExp },
+  setError: Function,
+  t: (key: string) => string,
+) => {
+  const validName = new RegExp(nameValidator.regex);
+  switch (true) {
+    case value === "":
+      return setError(t("Settings:PortalNameEmpty"));
+    case value.length < nameValidator.minLength ||
+      value.length > nameValidator.maxLength:
+      return setError(
+        t("Settings:PortalNameLength", {
+          minLength: nameValidator.minLength,
+          maxLength: nameValidator.maxLength,
+        }),
+      );
+    case !validName.test(value):
+      return setError(t("Settings:PortalNameIncorrect"));
+
+    default:
+      setError(null);
+  }
+  return validName.test(value);
+};
+
 export const getShowText = () => {
   const showArticle = localStorage.getItem("showArticle");
 

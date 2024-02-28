@@ -71,8 +71,9 @@ const ImportCompleteStep = ({
     if (isChecked) {
       sendWelcomeLetter({ isSendWelcomeEmail: true });
     }
-    navigate(-1);
+    cancelMigration();
     clearCheckedAccounts();
+    setTimeout(() => navigate(-1), 1000);
   };
 
   useEffect(() => {

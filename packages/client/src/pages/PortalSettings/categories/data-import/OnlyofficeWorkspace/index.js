@@ -130,7 +130,13 @@ const OnlyofficeWorkspace = ({
 
   useEffect(() => {
     getMigrationStatus().then((res) => {
-      if (!res) {
+      if (
+        !res ||
+        res.parseResult.users.length +
+          res.parseResult.existUsers.length +
+          res.parseResult.withoutEmailUsers.length ===
+          0
+      ) {
         setShouldRender(true);
         return;
       }

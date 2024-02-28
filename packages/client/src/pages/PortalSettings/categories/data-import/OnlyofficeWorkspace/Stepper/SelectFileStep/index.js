@@ -82,7 +82,7 @@ const SelectFileStep = ({
   const [searchParams] = useSearchParams();
   const uploadInterval = useRef(null);
   const navigate = useNavigate();
-  
+
   const isAbort = useRef(false);
 
   const [fileName, setFileName] = useState(null);
@@ -96,7 +96,7 @@ const SelectFileStep = ({
     setShowReminder(false);
 
     getMigrationStatus().then((res) => {
-      if (!res) return;
+      if (!res || res.parseResult.migratorName !== "Workspace") return;
 
       if (res.parseResult.operation === "parse" && !res.isCompleted) {
         setProgress(res.progress);

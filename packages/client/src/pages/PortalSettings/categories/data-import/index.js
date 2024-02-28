@@ -57,7 +57,13 @@ const DataImport = ({
   const handleMigrationCheck = async () => {
     const migrationStatus = await getMigrationStatus();
 
-    if (migrationStatus) {
+    if (
+      migrationStatus &&
+      migrationStatus.parseResult.users.length +
+        migrationStatus.parseResult.existUsers.length +
+        migrationStatus.parseResult.withoutEmailUsers.length >
+        0
+    ) {
       const workspacesEnum = {
         GoogleWorkspace: "google",
         Nextcloud: "nextcloud",

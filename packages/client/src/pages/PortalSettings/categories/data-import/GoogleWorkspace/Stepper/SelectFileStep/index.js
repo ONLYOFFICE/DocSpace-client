@@ -97,7 +97,7 @@ const SelectFileStep = ({
     setShowReminder(false);
 
     getMigrationStatus().then((res) => {
-      if (!res) return;
+      if (!res || res.parseResult.migratorName !== "GoogleWorkspace") return;
 
       if (res.parseResult.operation === "parse" && !res.isCompleted) {
         setProgress(res.progress);
@@ -112,8 +112,6 @@ const SelectFileStep = ({
 
       uploadInterval.current = setInterval(async () => {
         const res = await getMigrationStatus();
-
-        setFileName(res.parseResult.files.join(", "));
 
         if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
           setIsFileError(true);

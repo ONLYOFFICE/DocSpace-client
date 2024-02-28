@@ -179,7 +179,7 @@ const SelectFileStep = ({
 
   useEffect(() => {
     getMigrationStatus().then((res) => {
-      if (!res) return;
+      if (!res || res.parseResult.migratorName !== "Nextcloud") return;
 
       if (res.parseResult.operation === "parse" && !res.isCompleted) {
         setProgress(res.progress);

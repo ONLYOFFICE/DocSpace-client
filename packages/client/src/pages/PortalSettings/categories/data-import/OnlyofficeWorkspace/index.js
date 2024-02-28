@@ -130,10 +130,7 @@ const OnlyofficeWorkspace = ({
 
   useEffect(() => {
     getMigrationStatus().then((res) => {
-      if (
-        !res ||
-        res.parseResult.successedUsers + res.parseResult.failedUsers > 0
-      ) {
+      if (!res) {
         setShouldRender(true);
         return;
       }
@@ -152,15 +149,17 @@ const OnlyofficeWorkspace = ({
         );
       }
 
-      if (!res.isCompleted && res.parseResult.users.length > 0) {
-        setCurrentStep(5);
-        setShouldRender(true);
-        return;
-      }
-
-      if (res.isCompleted) {
+      if (res.parseResult.operation === "parse" && res.isCompleted) {
         setUsers(res.parseResult);
         setCurrentStep(2);
+      }
+
+      if (res.parseResult.operation === "migration" && !res.isCompleted) {
+        setCurrentStep(5);
+      }
+
+      if (res.parseResult.operation === "migration" && res.isCompleted) {
+        setCurrentStep(6);
       }
       setShouldRender(true);
     });

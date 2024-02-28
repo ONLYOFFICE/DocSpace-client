@@ -131,10 +131,7 @@ const GoogleWorkspace = ({
 
   useEffect(() => {
     getMigrationStatus().then((res) => {
-      if (
-        !res ||
-        res.parseResult.successedUsers + res.parseResult.failedUsers > 0
-      ) {
+      if (!res) {
         setShouldRender(true);
         return;
       }
@@ -153,13 +150,15 @@ const GoogleWorkspace = ({
         );
       }
 
-      if (!res.isCompleted && res.parseResult.users.length > 0) {
-        setCurrentStep(6);
-        setShouldRender(true);
-        return;
+      if (res.parseResult.operation === "migration" && !res.isCompleted) {
+        setCurrentStep(5);
       }
 
-      if (res.isCompleted) {
+      if (res.parseResult.operation === "migration" && res.isCompleted) {
+        setCurrentStep(6);
+      }
+
+      if (res.parseResult.operation === "parse" && res.isCompleted) {
         setUsers(res.parseResult);
         setCurrentStep(2);
       }

@@ -87,32 +87,34 @@ const SelectFileStep = ({
 
   const goBack = () => {
     cancelMigration();
-    navigate(-1);
+    setTimeout(() => navigate(-1), 100);
   };
 
   useEffect(() => {
     setShowReminder(false);
 
     getMigrationStatus().then((res) => {
-      if (
-        !res ||
-        res.parseResult.successedUsers + res.parseResult.failedUsers > 0
-      )
-        return;
+      if (!res) return;
+
+      if (res.parseResult.operation === "parse" && !res.isCompleted) {
+        setProgress(res.progress);
+        setIsFileLoading(true);
+      }
 
       setIsFileError(false);
       setShowReminder(true);
 
+      res.parseResult.files.length > 0 &&
+        setFileName(res.parseResult.files.join(", "));
+
       uploadInterval.current = setInterval(async () => {
         const res = await getMigrationStatus();
-
-        setFileName(res.parseResult.files.join(", "));
 
         if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
           setIsFileError(true);
           setIsFileLoading(false);
           clearInterval(uploadInterval.current);
-        } else if (res.isCompleted) {
+        } else if (res.isCompleted || res.parseResult.progress === 100) {
           setIsFileLoading(false);
           clearInterval(uploadInterval.current);
           setUsers(res.parseResult);
@@ -134,7 +136,7 @@ const SelectFileStep = ({
         setIsFileError(true);
         setIsFileLoading(false);
         clearInterval(uploadInterval.current);
-      } else if (res.isCompleted) {
+      } else if (res.isCompleted || res.parseResult.progress === 100) {
         setIsFileLoading(false);
         clearInterval(uploadInterval.current);
         setUsers(res.parseResult);

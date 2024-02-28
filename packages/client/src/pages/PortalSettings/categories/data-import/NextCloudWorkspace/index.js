@@ -49,10 +49,7 @@ const NextcloudWorkspace = (props) => {
 
   useEffect(() => {
     getMigrationStatus().then((res) => {
-      if (
-        !res ||
-        res.parseResult.successedUsers + res.parseResult.failedUsers > 0
-      ) {
+      if (!res) {
         setShouldRender(true);
         return;
       }
@@ -71,17 +68,20 @@ const NextcloudWorkspace = (props) => {
         );
       }
 
-      if (!res.isCompleted && res.parseResult.users.length > 0) {
-        setCurrentStep(6);
-        setShouldRender(true);
-        return;
-      }
-
-      if (res.isCompleted) {
+      if (res.parseResult.operation === "parse" && res.isCompleted) {
         setUsers(res.parseResult);
         setCurrentStep(2);
-        setShouldRender(true);
       }
+
+      if (res.parseResult.operation === "migration" && !res.isCompleted) {
+        setCurrentStep(6);
+      }
+
+      if (res.parseResult.operation === "migration" && res.isCompleted) {
+        setCurrentStep(7);
+      }
+
+      setShouldRender(true);
     });
 
     return clearCheckedAccounts;

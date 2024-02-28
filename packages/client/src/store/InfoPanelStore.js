@@ -198,8 +198,11 @@ class InfoPanelStore {
   getViewItem = () => {
     const isRooms = this.getIsRooms();
 
+    const pathname = window.location.pathname.toLowerCase();
+    const isMedia = pathname.indexOf("view") !== -1;
+
     if (
-      isRooms &&
+      (isRooms || isMedia) &&
       this.roomsView === infoMembers &&
       !this.infoPanelSelectedItems[0]?.isRoom
     ) {

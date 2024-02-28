@@ -1,4 +1,5 @@
 import saveAs from "file-saver";
+import { deviceDetect } from "react-device-detect";
 
 export const getCrashReport = (
   userId: string,
@@ -21,6 +22,7 @@ export const getCrashReport = (
     errorStack: error?.stack,
     localStorage: lsObject,
     reportTime,
+    deviceInfo: deviceDetect(),
   };
 
   return report;

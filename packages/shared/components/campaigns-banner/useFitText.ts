@@ -6,19 +6,18 @@ const useFitText = (
 ) => {
   const ref = useRef(null);
 
-  const [fontSize, setFontSize] = useState(13);
+  const [fontSize, setFontSize] = useState(parseInt(currentFontSize, 10));
 
   useEffect(() => {
-    const cfs = Number(currentFontSize.replace("px", ""));
-    setFontSize(cfs);
-  }, [currentFontSize, campaignImage]);
+    setFontSize(parseInt(currentFontSize, 10));
+  }, [campaignImage, currentFontSize]);
 
   useEffect(() => {
     const isOverflow =
       !!ref.current && ref.current.scrollHeight > ref.current.offsetHeight;
 
     if (isOverflow) {
-      setFontSize(fontSize - 1);
+      setFontSize((prevFontSize) => prevFontSize - 1);
     }
   }, [currentFontSize, fontSize, ref?.current?.scrollHeight]);
 

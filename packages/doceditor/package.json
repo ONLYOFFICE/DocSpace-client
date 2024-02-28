@@ -8,7 +8,7 @@
     "start-prod": "NODE_ENV=production node server.js",
     "lint": "next lint",
     "clean": "shx rm -rf .next",
-    "deploy": "shx --silent mkdir -p ../../../publish/web/editor && shx cp -r .next/* ../../../publish/web/editor && shx cp -f server.js ../../../publish/web/editor/server.js && shx cp -r lib/* ../../../publish/web/editor && shx cp -r config/* ../../../publish/web/editor"
+    "deploy": "shx --silent mkdir -p ../../../publish/web/editor && shx --silent mkdir -p ../../../publish/web/editor/.next && shx --silent mkdir -p ../../../publish/web/editor/lib && shx --silent mkdir -p ../../../publish/web/editor/config && shx cp -r .next/* ../../../publish/web/editor/.next && shx cp -f server.js ../../../publish/web/editor/server.js && shx cp -r lib/* ../../../publish/web/editor/lib && shx cp -r config/* ../../../publish/web/editor/config"
   },
   "dependencies": {
     "@aws-sdk/client-cloudwatch-logs": "^3.521.0",

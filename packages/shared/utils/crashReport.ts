@@ -23,6 +23,7 @@ export const getCrashReport = (
     localStorage: lsObject,
     reportTime,
     deviceInfo: deviceDetect(),
+    errorUrl: window.location.href,
   };
 
   return report;

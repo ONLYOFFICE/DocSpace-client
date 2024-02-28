@@ -8,7 +8,7 @@ import GroupMemberRow from "../GroupMemberRow";
 
 interface MembersParamProps {
   groupManager: object | null;
-  groupMembers: object[];
+  groupMembers: object[] | null;
   setGroupMembers: (groupMembers: object[]) => void;
   onClose: () => void;
 }
@@ -28,8 +28,8 @@ const MembersParam = ({
   const onHideSelectMembersPanel = () => setSelectMembersPanelIsVisible(false);
 
   const onRemoveUserById = (id: string) => {
-    const newGroupMembers = groupMembers.filter((gm) => gm.id !== id);
-    setGroupMembers(newGroupMembers);
+    const newGroupMembers = groupMembers?.filter((gm) => gm.id !== id);
+    setGroupMembers(newGroupMembers || []);
   };
 
   if (selectMembersPanelIsVisible) {

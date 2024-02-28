@@ -21,6 +21,7 @@ import { ROOMS_TYPE_TRANSLATIONS } from "@docspace/shared/constants";
 
 import { getFileTypeName } from "../../../../../helpers/filesUtils";
 import { SortByFieldName } from "SRC_DIR/helpers/enums";
+import { getSpaceQuotaAsText } from "@docspace/shared/utils/common";
 
 const SimpleFilesRowContent = styled(RowContent)`
   .row-main-container-wrapper {
@@ -186,6 +187,9 @@ const FilesRowContent = ({
   filterSortBy,
   createdDate,
   fileOwner,
+  isDefaultRoomsQuotaSet,
+  isStatisticsAvailable,
+  showStorageInfo,
 }) => {
   const {
     contentLength,
@@ -198,6 +202,8 @@ const FilesRowContent = ({
     daysRemaining,
     fileType,
     tags,
+    quotaLimit,
+    usedSpace,
   } = item;
 
   const contentComponent = () => {
@@ -230,6 +236,39 @@ const FilesRowContent = ({
         return updatedDate;
     }
   };
+
+  const additionalComponent = () => {
+    if (
+      isRooms &&
+      isStatisticsAvailable &&
+      showStorageInfo &&
+      usedSpace !== undefined
+    ) {
+      let value = t(ROOMS_TYPE_TRANSLATIONS[item.roomType]);
+      const spaceQuota = getSpaceQuotaAsText(
+        t,
+        usedSpace,
+        quotaLimit,
+        isDefaultRoomsQuotaSet
+      );
+
+      if (!isMobile()) value = `${value} | ${spaceQuota}`;
+
+      return value;
+    }
+
+    if (!fileExst && !contentLength && !providerKey && !isMobile())
+      return `${foldersCount} ${t("Translations:Folders")} | ${filesCount} ${t(
+        "Translations:Files"
+      )}`;
+
+    if (fileExst) return `${fileExst.toUpperCase().replace(/^\./, "")}`;
+
+    return "";
+  };
+
+  const additionalInfo = additionalComponent();
+  const mainInfo = contentComponent();
 
   return (
     <>
@@ -265,7 +304,7 @@ const FilesRowContent = ({
           fontWeight={400}
           className="row_update-text"
         >
-          {contentComponent()}
+          {mainInfo}
         </Text>
 
         <Text
@@ -277,22 +316,14 @@ const FilesRowContent = ({
           fontWeight={400}
           truncate={true}
         >
-          {isRooms
-            ? t(ROOMS_TYPE_TRANSLATIONS[item.roomType])
-            : !fileExst && !contentLength && !providerKey
-              ? `${foldersCount} ${t(
-                  "Translations:Folders"
-                )} | ${filesCount} ${t("Translations:Files")}`
-              : fileExst
-                ? `${fileExst.toUpperCase().replace(/^\./, "")}`
-                : ""}
+          {additionalInfo}
         </Text>
       </SimpleFilesRowContent>
     </>
   );
 };
 
-export default inject(({ settingsStore, treeFoldersStore, filesStore }) => {
+export default inject(({ currentQuotaStore, settingsStore, treeFoldersStore, filesStore }) => {
   const { filter, roomsFilter } = filesStore;
   const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
     treeFoldersStore;
@@ -300,10 +331,15 @@ export default inject(({ settingsStore, treeFoldersStore, filesStore }) => {
   const isRooms = isRoomsFolder || isArchiveFolder;
   const filterSortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
 
+  const { isDefaultRoomsQuotaSet, isStatisticsAvailable, showStorageInfo } =
+    currentQuotaStore;
   return {
     filterSortBy,
     theme: settingsStore.theme,
     isTrashFolder: isRecycleBinFolder,
+    isDefaultRoomsQuotaSet,
+    isStatisticsAvailable,
+    showStorageInfo,
   };
 })(
   observer(

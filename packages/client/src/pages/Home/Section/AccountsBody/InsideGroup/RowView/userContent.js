@@ -1,10 +1,11 @@
 import React from "react";
 import styled, { css } from "styled-components";
-
+import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import { RowContent } from "@docspace/shared/components/row-content";
 import { Link } from "@docspace/shared/components/link";
+import { getSpaceQuotaAsText } from "@docspace/shared/utils/common";
 
 import Badges from "../../Badges";
 import { tablet, mobile } from "@docspace/shared/utils";
@@ -68,6 +69,9 @@ const UserContent = ({
   t,
   theme,
   standalone,
+
+  isDefaultUsersQuotaSet,
+  showStorageInfo,
 }) => {
   const {
     displayName,
@@ -77,6 +81,8 @@ const UserContent = ({
     isVisitor,
     isCollaborator,
     isSSO,
+    usedSpace,
+    quotaLimit,
   } = item;
 
   const nameColor =
@@ -100,6 +106,12 @@ const UserContent = ({
             : t("Common:RoomAdmin");
 
   const isPaidUser = !standalone && !isVisitor;
+  const spaceQuota = getSpaceQuotaAsText(
+    t,
+    usedSpace,
+    quotaLimit,
+    isDefaultUsersQuotaSet
+  );
 
   return (
     <StyledRowContent
@@ -151,8 +163,28 @@ const UserContent = ({
       >
         {email}
       </Link>
+
+      {showStorageInfo && (
+        <Link
+          containerMinWidth="140px"
+          containerWidth="17%"
+          type="page"
+          fontSize="12px"
+          fontWeight={400}
+          color={sideInfoColor}
+          isTextOverflow={true}
+        >
+          {spaceQuota}
+        </Link>
+      )}
     </StyledRowContent>
   );
 };
 
-export default withTranslation(["People", "Common"])(UserContent);
+export default inject(({ currentQuotaStore }) => {
+  const { isDefaultUsersQuotaSet, showStorageInfo } = currentQuotaStore;
+  return {
+    isDefaultUsersQuotaSet,
+    showStorageInfo,
+  };
+})(withTranslation(["People", "Common"])(observer(UserContent)));

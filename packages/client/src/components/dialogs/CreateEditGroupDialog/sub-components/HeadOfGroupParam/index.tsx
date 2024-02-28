@@ -9,12 +9,16 @@ import GroupMemberRow from "../GroupMemberRow";
 interface HeadOfGroupProps {
   groupManager: object | null;
   setGroupManager: (groupManager: object | null) => void;
+  groupMembers: object[] | null;
+  setGroupMembers: (groupMembers: object[]) => void;
   onClose: () => void;
 }
 
 const HeadOfGroup = ({
   groupManager,
   setGroupManager,
+  groupMembers,
+  setGroupMembers,
   onClose,
 }: HeadOfGroupProps) => {
   const { t } = useTranslation(["Common"]);
@@ -29,6 +33,9 @@ const HeadOfGroup = ({
 
   const onRemoveGroupManager = () => {
     setGroupManager(null);
+    setGroupMembers(
+      groupMembers?.filter((gm) => gm.id !== groupManager!.id) || [],
+    );
   };
 
   if (selectGroupMangerPanelIsVisible) {

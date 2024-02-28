@@ -63,9 +63,6 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
 
     const typeLabel = getUserTypeLabel(role, t);
 
-    const defaultIcon = !!color;
-    const isLogo = !!icon || defaultIcon;
-
     const onChangeAction = () => {
       onSelect?.(item);
     };
@@ -90,24 +87,25 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
         className="test-22"
         isDisabled={isDisabled}
       >
-        {!isLogo ? (
+        {avatar || isGroup ? (
           <Avatar
             className="user-avatar"
-            source={avatar || ""}
+            source={avatar ?? ""}
             role={currentRole}
             size={AvatarSize.min}
             isGroup={isGroup}
             userName={isGroup ? label : ""}
           />
-        ) : (
+        ) : color ? (
+          <RoomIcon color={color} title={label} showDefault />
+        ) : icon ? (
           <RoomIcon
-            color={color}
             title={label}
-            showDefault={defaultIcon}
             imgClassName="room-logo"
             imgSrc={icon}
+            showDefault={false}
           />
-        )}
+        ) : null}
         {renderCustomItem ? (
           renderCustomItem(label, typeLabel, email, isGroup)
         ) : (

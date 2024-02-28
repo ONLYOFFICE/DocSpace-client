@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
+import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import ExpanderDownReactSvgUrl from "PUBLIC_DIR/images/expander-down.react.svg?url";
 import { TableRow } from "@docspace/shared/components/table";
@@ -17,19 +18,24 @@ import { Base } from "@docspace/shared/themes";
 import { DropDown } from "@docspace/shared/components/drop-down";
 import { useNavigate } from "react-router-dom";
 
+import SpaceQuota from "SRC_DIR/components/SpaceQuota";
+
 const StyledWrapper = styled.div`
   display: contents;
 `;
 
 const StyledPeopleRow = styled(TableRow)`
+  .table-container_cell {
+    border-top: ${(props) =>
+      `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+    margin-top: -1px;
+  }
+
   :hover {
     .table-container_cell {
       cursor: pointer;
       background: ${(props) =>
         `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
-      border-top: ${(props) =>
-        `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
-      margin-top: -1px;
     }
 
     .table-container_user-name-cell {
@@ -58,10 +64,18 @@ const StyledPeopleRow = styled(TableRow)`
     }
   }
 
-  .table-container_cell {
-    height: 48px;
-    max-height: 48px;
+  .table-container_row-context-menu-wrapper {
+    height: 49px !important;
+    max-height: none !important;
+    box-sizing: border-box;
+  }
 
+  .table-container_cell:not(.table-container_row-checkbox-wrapper) {
+    height: auto;
+    max-height: 48;
+  }
+
+  .table-container_cell {
     background: ${(props) =>
       (props.checked || props.isActive) &&
       `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
@@ -267,6 +281,7 @@ const PeopleTableRow = (props) => {
     value,
     standalone,
     setCurrentGroup,
+    showStorageInfo,
   } = props;
 
   const {
@@ -642,11 +657,25 @@ const PeopleTableRow = (props) => {
             {email}
           </Link>
         </TableCell>
+
+        {showStorageInfo && (
+          <TableCell className={"table-cell_Storage/Quota"}>
+            <SpaceQuota hideColumns={hideColumns} item={item} type="user" />
+          </TableCell>
+        )}
       </StyledPeopleRow>
     </StyledWrapper>
   );
 };
 
-export default withTranslation(["People", "Common", "Settings"])(
-  withContent(PeopleTableRow),
+export default inject(({ currentQuotaStore }) => {
+  const { showStorageInfo } = currentQuotaStore;
+
+  return {
+    showStorageInfo,
+  };
+})(
+  withContent(
+    withTranslation(["People", "Common", "Settings"])(observer(PeopleTableRow)),
+  ),
 );

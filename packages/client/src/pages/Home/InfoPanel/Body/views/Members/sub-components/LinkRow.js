@@ -111,7 +111,7 @@ const LinkRow = (props) => {
 
   const onCopyExternalLink = () => {
     copy(shareLink);
-    toastr.success(t("Files:LinkSuccessfullyCopied"));
+    toastr.success(t("Common:LinkSuccessfullyCopied"));
     onCloseContextMenu();
   };
 
@@ -287,9 +287,9 @@ export default inject(
       theme,
       isPublicRoomType: infoPanelSelection.roomType === RoomsType.PublicRoom,
     };
-  }
+  },
 )(
   withTranslation(["SharingPanel", "Files", "Settings", "Translations"])(
-    observer(LinkRow)
-  )
+    observer(LinkRow),
+  ),
 );

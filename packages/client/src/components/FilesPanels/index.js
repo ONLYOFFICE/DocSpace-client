@@ -25,6 +25,7 @@ import {
   ChangeUserTypeDialog,
   SubmitToFormGallery,
   EditGroupMembersDialog,
+  ChangeQuotaDialog,
   UnsavedChangesDialog,
   DeleteLinkDialog,
   MoveToPublicRoom,
@@ -77,6 +78,7 @@ const Panels = (props) => {
     restoreRoomDialogVisible,
     submitToGalleryDialogVisible,
     editGroupMembersDialogVisible,
+    changeQuotaDialogVisible,
     editLinkPanelIsVisible,
     unsavedChangesDialogVisible,
     deleteLinkDialogVisible,
@@ -179,6 +181,7 @@ const Panels = (props) => {
     editGroupMembersDialogVisible && (
       <EditGroupMembersDialog key="edit-group-members-dialog" />
     ),
+    changeQuotaDialogVisible && <ChangeQuotaDialog key="change-quota-dialog" />,
     editLinkPanelIsVisible && <EditLinkPanel key="edit-link-panel" />,
     unsavedChangesDialogVisible && (
       <UnsavedChangesDialog key="unsaved-dialog" />
@@ -238,7 +241,7 @@ export default inject(
       invitePanelOptions,
       inviteUsersWarningDialogVisible,
       changeUserTypeDialogVisible,
-
+      changeQuotaDialogVisible,
       submitToGalleryDialogVisible,
       editGroupMembersDialogVisible,
       editLinkPanelIsVisible,
@@ -297,6 +300,7 @@ export default inject(
       restoreRoomDialogVisible,
       submitToGalleryDialogVisible,
       editGroupMembersDialogVisible,
+      changeQuotaDialogVisible,
       editLinkPanelIsVisible,
       unsavedChangesDialogVisible,
       deleteLinkDialogVisible,

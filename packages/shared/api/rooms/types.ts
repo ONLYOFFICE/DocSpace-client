@@ -52,6 +52,7 @@ export type TRoom = {
   rootFolderType: FolderType;
   updatedBy: TCreatedBy;
   isArchive?: boolean;
+  security: TRoomSecurity;
 };
 
 export type TGetRooms = {

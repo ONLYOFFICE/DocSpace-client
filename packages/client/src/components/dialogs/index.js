@@ -36,9 +36,11 @@ import MoveToPublicRoom from "./MoveToPublicRoom";
 import BackupToPublicRoom from "./BackupToPublicRoom";
 import SettingsPluginDialog from "./SettingsPluginDialog";
 import PluginDialog from "./PluginDialog";
+import ChangeQuotaDialog from "./ChangeQuotaDialog";
 import DeletePluginDialog from "./DeletePluginDialog";
 import ShareFolderDialog from "./ShareFolderDialog";
 import EditGroupMembersDialog from "./EditGroupMembersDialog";
+import ChangeStorageQuotaDialog from "./ChangeStorageQuotaDialog";
 
 export {
   EmptyTrashDialog,
@@ -82,4 +84,6 @@ export {
   DeletePluginDialog,
   ShareFolderDialog,
   EditGroupMembersDialog,
+  ChangeQuotaDialog,
+  ChangeStorageQuotaDialog,
 };

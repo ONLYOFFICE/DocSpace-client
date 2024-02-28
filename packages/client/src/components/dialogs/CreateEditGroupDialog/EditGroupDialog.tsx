@@ -8,7 +8,6 @@ import { useTranslation } from "react-i18next";
 
 import { EditGroupParams } from "./types";
 import {
-  createGroup,
   getGroupById,
   updateGroup,
 } from "@docspace/shared/api/groups";
@@ -49,25 +48,25 @@ const EditGroupDialog = ({
   });
 
   const onChangeGroupName = (e: ChangeEvent<HTMLInputElement>) =>
-    setGroupParams({ ...groupParams, groupName: e.target.value });
+    setGroupParams((prev) => ({ ...prev, groupName: e.target.value }));
 
   const setGroupManager = (groupManager: object | null) =>
-    setGroupParams({ ...groupParams, groupManager });
+    setGroupParams((prev) => ({ ...prev, groupManager }));
 
   const setGroupMembers = (groupMembers: object[]) =>
-    setGroupParams({ ...groupParams, groupMembers });
+    setGroupParams((prev) => ({ ...prev, groupMembers }));
 
   const onEditGroup = async () => {
     setCreateGroupIsLoading(true);
 
-    const groupManagerId = groupParams.groupManager?.id;
+    const groupManagerId = groupParams.groupManager?.id || undefined;
     const groupMembersIds = groupParams.groupMembers?.map((gm) => gm.id) || [];
 
     updateGroup(
       group.id,
       groupParams.groupName,
       groupManagerId,
-      groupMembersIds
+      groupMembersIds,
     )!
       .then(() => {
         navigate("/accounts/groups/filter");
@@ -112,11 +111,11 @@ const EditGroupDialog = ({
         <HeadOfGroup
           groupManager={groupParams.groupManager}
           setGroupManager={setGroupManager}
+          groupMembers={groupParams.groupMembers}
+          setGroupMembers={setGroupMembers}
           onClose={onClose}
         />
-        {isFetchMembersLoading ? (
-          <div>LOADING</div>
-        ) : (
+        {!isFetchMembersLoading && (
           <MembersParam
             groupManager={groupParams.groupManager}
             groupMembers={groupParams.groupMembers}
@@ -135,7 +134,10 @@ const EditGroupDialog = ({
           primary
           scale
           onClick={onEditGroup}
-          isDisabled={!groupParams.groupManager || !groupParams.groupName}
+          isDisabled={
+            !groupParams.groupName ||
+            (!groupParams.groupManager && !groupParams.groupMembers.length)
+          }
           isLoading={isCreateGroupLoading}
         />
         <Button

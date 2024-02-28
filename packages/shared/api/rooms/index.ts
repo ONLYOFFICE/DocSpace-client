@@ -423,3 +423,30 @@ export function validatePublicRoomPassword(key, passwordHash) {
     data: { password: passwordHash },
   });
 }
+
+export function setCustomRoomQuota(roomIds, quota) {
+  const data = {
+    roomIds,
+    quota,
+  };
+  const options = {
+    method: "put",
+    url: "files/rooms/roomquota",
+    data,
+  };
+
+  return request(options);
+}
+
+export function resetRoomQuota(roomIds) {
+  const data = {
+    roomIds,
+  };
+  const options = {
+    method: "put",
+    url: "files/rooms/resetquota",
+    data,
+  };
+
+  return request(options);
+}

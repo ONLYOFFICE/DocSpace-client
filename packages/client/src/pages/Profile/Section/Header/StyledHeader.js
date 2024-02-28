@@ -17,10 +17,10 @@ export const StyledHeader = styled.div`
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
-            margin-right: 16px;
+            margin-right: 17px;
           `
         : css`
-            margin-left: 16px;
+            margin-left: 17px;
           `}
     @media ${tablet} {
       flex-direction: row-reverse;
@@ -68,17 +68,23 @@ export const StyledHeader = styled.div`
       margin-left: -16px;
       margin-right: -16px;
     }
+
+    padding-top: 1px;
+    width: 17px;
+    min-width: 17px;
   }
 
   .header-headline {
     white-space: nowrap;
+    line-height: 25px;
+
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
-            margin-right: 16px;
+            margin-right: 17px;
           `
         : css`
-            margin-left: 16px;
+            margin-left: 17px;
           `}
   }
 `;

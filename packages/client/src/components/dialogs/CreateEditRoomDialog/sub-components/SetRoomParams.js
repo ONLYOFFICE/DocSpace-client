@@ -1,7 +1,7 @@
 import React from "react";
-import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 import { withTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
 
 import RoomTypeDropdown from "./RoomTypeDropdown";
 import TagInput from "./TagInput";
@@ -13,7 +13,7 @@ import ThirdPartyStorage from "./ThirdPartyStorage";
 // import IsPrivateParam from "./IsPrivateParam";
 
 import withLoader from "@docspace/client/src/HOCs/withLoader";
-import Loaders from "@docspace/common/components/Loaders";
+import SetRoomParamsLoader from "@docspace/shared/skeletons/create-edit-room/SetRoomParams";
 import { getRoomTypeDefaultTagTranslation } from "../data";
 
 import { ImageEditor } from "@docspace/shared/components/image-editor";
@@ -24,6 +24,8 @@ import SystemFolders from "./SystemFolders";
 import { RoomsType } from "@docspace/shared/enums";
 
 import ChangeRoomOwner from "./ChangeRoomOwner";
+import RoomQuota from "./RoomQuota";
+
 
 const StyledSetRoomParams = styled.div`
   display: flex;
@@ -59,6 +61,8 @@ const SetRoomParams = ({
   setIsWrongTitle,
   onKeyUp,
   enableThirdParty,
+  isDefaultRoomsQuotaSet,
+  currentColorScheme,
   setChangeRoomOwnerIsVisible,
   folderFormValidation,
 }) => {
@@ -87,7 +91,7 @@ const SetRoomParams = ({
 
   const onOwnerChange = () => {
     setChangeRoomOwnerIsVisible(true, true, (roomOwner) =>
-      setRoomParams({ ...roomParams, roomOwner })
+      setRoomParams({ ...roomParams, roomOwner }),
     );
   };
 
@@ -158,11 +162,21 @@ const SetRoomParams = ({
       {!isEdit && enableThirdParty && (
         <ThirdPartyStorage
           t={t}
+          roomType={roomParams.type}
           roomTitle={roomParams.title}
           storageLocation={roomParams.storageLocation}
           onChangeStorageLocation={onChangeStorageLocation}
           setIsScrollLocked={setIsScrollLocked}
           setIsOauthWindowOpen={setIsOauthWindowOpen}
+          isDisabled={isDisabled}
+        />
+      )}
+
+      {isDefaultRoomsQuotaSet && (
+        <RoomQuota
+          setRoomParams={setRoomParams}
+          roomParams={roomParams}
+          isEdit={isEdit}
           isDisabled={isDisabled}
         />
       )}
@@ -187,7 +201,7 @@ const SetRoomParams = ({
               isDisabled={isDisabled}
               defaultTagLabel={getRoomTypeDefaultTagTranslation(
                 roomParams.type,
-                t
+                t,
               )}
             />
           }
@@ -197,18 +211,21 @@ const SetRoomParams = ({
   );
 };
 
-export default inject(({ settingsStore, dialogsStore }) => {
+export default inject(({ settingsStore, dialogsStore, currentQuotaStore }) => {
+  const { isDefaultRoomsQuotaSet } = currentQuotaStore;
+
   const { setChangeRoomOwnerIsVisible } = dialogsStore;
   const { folderFormValidation } = settingsStore;
 
   return {
+    isDefaultRoomsQuotaSet,
     folderFormValidation,
     setChangeRoomOwnerIsVisible,
   };
 })(
   observer(
     withTranslation(["CreateEditRoomDialog", "Translations"])(
-      withLoader(SetRoomParams)(<Loaders.SetRoomParamsLoader />)
-    )
-  )
+      withLoader(SetRoomParams)(<SetRoomParamsLoader />),
+    ),
+  ),
 );

@@ -31,7 +31,7 @@ const Row = memo(({ data, index, style }) => {
   const item = inviteItems[index];
 
   return (
-    <StyledRow key={item.id} style={style} hasWarning={!!item.warning}>
+    <StyledRow key={item.id} style={style} className="row-item" hasWarning={!!item.warning}>
       <Item
         t={t}
         item={item}

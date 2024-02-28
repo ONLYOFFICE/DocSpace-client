@@ -261,20 +261,17 @@ const StyledComboButton = styled.div<{
   }
   .combo-button-label {
     visibility: ${(props) => (props.isLoading ? "hidden" : "visible")};
-    margin-right: ${(props) =>
-      props.plusBadgeValue
+
+    ${({ theme, plusBadgeValue, noBorder }) => {
+      const property = `margin-${theme.interfaceDirection === "rtl" ? "left" : "right"}`;
+      const value = plusBadgeValue
         ? 0
-        : props.noBorder
-          ? props.theme.comboBox.label.marginRight
-          : props.theme.comboBox.label.marginRightWithBorder};
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl" &&
-      css`
-        margin-right: 0;
-        margin-left: ${props.noBorder
-          ? props.theme.comboBox.label.marginRight
-          : props.theme.comboBox.label.marginRightWithBorder};
-      `}
+        : noBorder
+          ? theme.comboBox.label.marginRight
+          : theme.comboBox.label.marginRightWithBorder;
+
+      return `${property}: ${value};`;
+    }}
     color: ${(props) =>
       props.isDisabled
         ? props.theme.comboBox.label.disabledColor

@@ -21,26 +21,10 @@ const StyledRowContent = styled(RowContent)`
     .badges {
       flex-direction: row-reverse;
       margin-top: 9px;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 12px;
-            `
-          : css`
-              margin-right: 12px;
-            `}
+      margin-inline-end: 12px;
 
       .paid-badge {
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin-right: 8px;
-                margin-left: 0px;
-              `
-            : css`
-                margin-left: 8px;
-                margin-right: 0px;
-              `}
+        margin-inline: 8px 0;
       }
     }
   }

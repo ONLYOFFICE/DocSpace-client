@@ -76,7 +76,6 @@ class PeopleTableHeader extends React.Component {
         resizable: true,
         onChange: this.onColumnChange,
         onClick: this.onFilter,
-        minWidth: 179,
       });
 
     const columns = props.getColumns(defaultColumns);

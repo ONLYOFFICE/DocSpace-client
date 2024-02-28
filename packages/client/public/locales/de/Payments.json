@@ -29,7 +29,7 @@
   "PriceCalculation": "Berechnen Sie Ihren Preis",
   "RenewSubscription": "Abonnement des {{planName}}-Plans erneuern",
   "RoomManagerDescription": "Raumverwaltung und Archivierung, Benutzereinladung und -verwaltung. Dem Raum können mehrere Administratoren zugewiesen werden.",
-  "StartupSuggestion": "Mehr Möglichkeiten mit {{planName}} Plan",
+  "StartupSuggestion": "Mehr Möglichkeiten mit {{planName}}Plan",
   "StartupTitle": "Sie verwenden einen kostenlosen {{planName}}-Plan",
   "StripeCustomerPortal": "gehen Sie zum Stripe-Kundenportal",
   "TotalPricePerMonth": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/Monat</3>",

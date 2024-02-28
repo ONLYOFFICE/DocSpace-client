@@ -8,23 +8,16 @@
     "start-prod": "NODE_ENV=production node server.js",
     "lint": "next lint",
     "clean": "shx rm -rf .next",
-    "deploy": "shx --silent mkdir -p ../../../publish/web/editor && shx --silent mkdir -p ../../../publish/web/editor/.next && shx --silent mkdir -p ../../../publish/web/editor/lib && shx --silent mkdir -p ../../../publish/web/editor/config && shx cp -r .next/* ../../../publish/web/editor/.next && shx cp -f server.js ../../../publish/web/editor/server.js && shx cp -r lib/* ../../../publish/web/editor/lib && shx cp -r config/* ../../../publish/web/editor/config"
+    "deploy": "shx --silent mkdir -p ../../../publish/web/editor && shx --silent mkdir -p ../../../publish/web/editor/.next && shx --silent mkdir -p ../../../publish/web/editor/config && shx cp -r config/* ../../../publish/web/editor/config && shx --silent mkdir -p ../../../publish/web/editor/node_modules && shx --silent mkdir -p ../../../publish/web/editor/.next/static && shx cp -r .next/standalone/node_modules/* ../../../publish/web/editor/node_modules && shx cp -r .next/static/* ../../../publish/web/editor/.next/static    && shx cp -r .next/standalone/packages/doceditor/.next/* ../../../publish/web/editor/.next &&  shx cp -f server.prod.js ../../../publish/web/editor/server.js"
   },
   "dependencies": {
-    "@aws-sdk/client-cloudwatch-logs": "^3.521.0",
     "@onlyoffice/document-editor-react": "^1.4.1",
-    "date-and-time": "^3.1.1",
     "i18next": "^20.6.1",
-    "mobx": "^6.8.0",
-    "morgan": "^1.10.0",
     "next": "14.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^14.0.1",
-    "styled-components": "^5.3.9",
-    "winston": "^3.11.0",
-    "winston-cloudwatch": "^6.2.0",
-    "winston-daily-rotate-file": "^5.0.0"
+    "styled-components": "^5.3.9"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",

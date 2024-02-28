@@ -5,6 +5,7 @@ const pkg = require("./package.json");
 
 const nextConfig = {
   basePath: "/doceditor",
+  output: "standalone",
   compiler: {
     styledComponents: true,
   },

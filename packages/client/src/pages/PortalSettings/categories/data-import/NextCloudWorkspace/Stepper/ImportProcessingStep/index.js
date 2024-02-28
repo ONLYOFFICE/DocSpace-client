@@ -15,7 +15,6 @@ const ImportProcessingStep = ({
   proceedFileMigration,
   cancelMigration,
   getMigrationStatus,
-  setImportResult,
 }) => {
   // const [isVisible, setIsVisible] = useState(false);
   const [percent, setPercent] = useState(0);
@@ -30,10 +29,9 @@ const ImportProcessingStep = ({
 
         setPercent(res.progress);
 
-        if (res.isCompleted) {
+        if (res.isCompleted || res.progress === 100) {
           clearInterval(uploadInterval.current);
           setIsLoading(false);
-          setImportResult(res.parseResult);
           incrementStep();
         }
       }, 1000);
@@ -56,6 +54,8 @@ const ImportProcessingStep = ({
 
   useEffect(() => {
     handleFileMigration();
+
+    return () => clearInterval(uploadInterval.current);
   }, []);
 
   return (
@@ -87,7 +87,6 @@ export default inject(({ importAccountsStore }) => {
     proceedFileMigration,
     cancelMigration,
     getMigrationStatus,
-    setImportResult,
   } = importAccountsStore;
 
   return {
@@ -95,6 +94,5 @@ export default inject(({ importAccountsStore }) => {
     proceedFileMigration,
     cancelMigration,
     getMigrationStatus,
-    setImportResult,
   };
 })(observer(ImportProcessingStep));

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -18,13 +18,17 @@ const ErrorText = styled(Text)`
 
 const ImportCompleteStep = ({
   t,
-  checkedUsers,
-  importResult,
   getMigrationLog,
   clearCheckedAccounts,
   sendWelcomeLetter,
+  cancelMigration,
+  getMigrationStatus,
 }) => {
   const [isChecked, setIsChecked] = useState(false);
+  const [importResult, setImportResult] = useState({
+    succeedUsers: 0,
+    failedUsers: 0,
+  });
   const navigate = useNavigate();
 
   const onDownloadLog = async () => {
@@ -52,9 +56,19 @@ const ImportCompleteStep = ({
     if (isChecked) {
       sendWelcomeLetter({ isSendWelcomeEmail: true });
     }
-    navigate(-1);
     clearCheckedAccounts();
+    cancelMigration();
+    setTimeout(() => navigate(-1), 1000);
   };
+
+  useEffect(() => {
+    getMigrationStatus().then((res) =>
+      setImportResult({
+        succeedUsers: res.parseResult.succeedUsers,
+        failedUsers: res.parseResult.failedUsers,
+      }),
+    );
+  }, []);
 
   return (
     <Wrapper>
@@ -102,18 +116,18 @@ const ImportCompleteStep = ({
 
 export default inject(({ importAccountsStore }) => {
   const {
-    checkedUsers,
-    importResult,
     getMigrationLog,
     clearCheckedAccounts,
     sendWelcomeLetter,
+    cancelMigration,
+    getMigrationStatus,
   } = importAccountsStore;
 
   return {
-    checkedUsers,
-    importResult,
     getMigrationLog,
     clearCheckedAccounts,
     sendWelcomeLetter,
+    cancelMigration,
+    getMigrationStatus,
   };
 })(observer(ImportCompleteStep));

@@ -48,11 +48,6 @@ class ImportAccountsStore {
     importProjectFiles: true,
   };
 
-  importResult = {
-    succeedUsers: 0,
-    failedUsers: 0,
-  };
-
   constructor() {
     makeAutoObservable(this);
   }
@@ -78,13 +73,6 @@ class ImportAccountsStore {
       0
     );
   }
-
-  setImportResult = (parseResult) => {
-    this.importResult = {
-      succeedUsers: parseResult.successedUsers,
-      failedUsers: parseResult.failedUsers,
-    };
-  };
 
   setResultUsers = () => {
     const checkedIds = this.checkedUsers.withoutEmail.map(

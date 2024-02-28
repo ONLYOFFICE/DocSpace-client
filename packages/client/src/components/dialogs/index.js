@@ -38,6 +38,7 @@ import SettingsPluginDialog from "./SettingsPluginDialog";
 import PluginDialog from "./PluginDialog";
 import DeletePluginDialog from "./DeletePluginDialog";
 import ShareFolderDialog from "./ShareFolderDialog";
+import EditGroupMembersDialog from "./EditGroupMembersDialog";
 
 export {
   EmptyTrashDialog,
@@ -80,4 +81,5 @@ export {
   PluginDialog,
   DeletePluginDialog,
   ShareFolderDialog,
+  EditGroupMembersDialog,
 };

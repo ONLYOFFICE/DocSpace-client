@@ -24,6 +24,7 @@ import {
   CreateRoomConfirmDialog,
   ChangeUserTypeDialog,
   SubmitToFormGallery,
+  EditGroupMembersDialog,
   UnsavedChangesDialog,
   DeleteLinkDialog,
   MoveToPublicRoom,
@@ -75,6 +76,7 @@ const Panels = (props) => {
     changeUserTypeDialogVisible,
     restoreRoomDialogVisible,
     submitToGalleryDialogVisible,
+    editGroupMembersDialogVisible,
     editLinkPanelIsVisible,
     unsavedChangesDialogVisible,
     deleteLinkDialogVisible,
@@ -174,6 +176,9 @@ const Panels = (props) => {
     submitToGalleryDialogVisible && (
       <SubmitToFormGallery key="submit-to-form-gallery-dialog" />
     ),
+    editGroupMembersDialogVisible && (
+      <EditGroupMembersDialog key="edit-group-members-dialog" />
+    ),
     editLinkPanelIsVisible && <EditLinkPanel key="edit-link-panel" />,
     unsavedChangesDialogVisible && (
       <UnsavedChangesDialog key="unsaved-dialog" />
@@ -235,6 +240,7 @@ export default inject(
       changeUserTypeDialogVisible,
 
       submitToGalleryDialogVisible,
+      editGroupMembersDialogVisible,
       editLinkPanelIsVisible,
       deleteLinkDialogVisible,
       embeddingPanelIsVisible,
@@ -290,6 +296,7 @@ export default inject(
       changeUserTypeDialogVisible,
       restoreRoomDialogVisible,
       submitToGalleryDialogVisible,
+      editGroupMembersDialogVisible,
       editLinkPanelIsVisible,
       unsavedChangesDialogVisible,
       deleteLinkDialogVisible,
@@ -303,5 +310,5 @@ export default inject(
       deletePluginDialogVisible,
       shareFolderDialogVisible,
     };
-  }
+  },
 )(observer(Panels));

@@ -64,6 +64,13 @@ export const getGroupsByUserId = (userId) => {
   });
 };
 
+export const getGroupMembersInRoom = (folderId, groupId) => {
+  return request({
+    method: "get",
+    url: `/files/folder/${folderId}/group/${groupId}/share`,
+  });
+};
+
 // * Update
 
 export const updateGroup = (groupId, groupName, groupManager, members) => {

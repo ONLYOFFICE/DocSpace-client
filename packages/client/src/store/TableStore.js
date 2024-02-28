@@ -3,6 +3,7 @@ import { TableVersions } from "SRC_DIR/helpers/constants";
 
 const TABLE_COLUMNS = `filesTableColumns_ver-${TableVersions.Files}`;
 const TABLE_ACCOUNTS_COLUMNS = `peopleTableColumns_ver-${TableVersions.Accounts}`;
+const TABLE_ACCOUNTS_INSIDE_GROUP_COLUMNS = `insideGroupTableColumns_ver-${TableVersions.InsideGroup}`;
 const TABLE_ROOMS_COLUMNS = `roomsTableColumns_ver-${TableVersions.Rooms}`;
 const TABLE_TRASH_COLUMNS = `trashTableColumns_ver-${TableVersions.Trash}`;
 const TABLE_RECENT_COLUMNS = `recentTableColumns_ver-${TableVersions.Recent}`;
@@ -54,6 +55,10 @@ class TableStore {
   groupAccountsColumnIsEnabled = true;
   emailAccountsColumnIsEnabled = true;
   storageAccountsColumnIsEnabled = true;
+
+  typeAccountsInsideGroupColumnIsEnabled = true;
+  groupAccountsInsideGroupColumnIsEnabled = true;
+  emailAccountsInsideGroupColumnIsEnabled = true;
 
   constructor(authStore, treeFoldersStore, userStore, settingsStore) {
     makeAutoObservable(this);
@@ -132,6 +137,13 @@ class TableStore {
   setAccountsColumnStorage = (enable) =>
     (this.storageAccountsColumnIsEnabled = enable);
 
+  setAccountsInsideGroupColumnType = (enable) =>
+    (this.typeAccountsInsideGroupColumnIsEnabled = enable);
+  setAccountsInsideGroupColumnEmail = (enable) =>
+    (this.emailAccountsInsideGroupColumnIsEnabled = enable);
+  setAccountsInsideGroupColumnGroup = (enable) =>
+    (this.groupAccountsInsideGroupColumnIsEnabled = enable);
+
   setColumnsEnable = () => {
     const storageColumns = localStorage.getItem(this.tableStorageName);
     const splitColumns = storageColumns && storageColumns.split(",");
@@ -142,6 +154,7 @@ class TableStore {
         isArchiveFolder,
         isTrashFolder,
         isAccountsPeople,
+        isAccountsGroups,
       } = this.treeFoldersStore;
       const isRooms = isRoomsFolder || isArchiveFolder;
 
@@ -159,6 +172,15 @@ class TableStore {
         this.setAccountsColumnEmail(splitColumns.includes("Mail"));
         this.setAccountsColumnGroup(splitColumns.includes("Department"));
         this.setAccountsColumnStorage(splitColumns.includes("Storage"));
+        return;
+      }
+
+      if (isAccountsGroups) {
+        this.setAccountsInsideGroupColumnType(splitColumns.includes("Type"));
+        this.setAccountsInsideGroupColumnEmail(splitColumns.includes("Mail"));
+        this.setAccountsInsideGroupColumnGroup(
+          splitColumns.includes("Department"),
+        );
         return;
       }
 
@@ -184,8 +206,13 @@ class TableStore {
   };
 
   setColumnEnable = (key) => {
-    const { isRoomsFolder, isArchiveFolder, isTrashFolder, isAccountsPeople } =
-      this.treeFoldersStore;
+    const {
+      isRoomsFolder,
+      isArchiveFolder,
+      isTrashFolder,
+      isAccountsPeople,
+      isAccountsGroups,
+    } = this.treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
 
     switch (key) {
@@ -208,7 +235,11 @@ class TableStore {
         return;
 
       case "Department":
-        this.setAccountsColumnGroup(!this.groupAccountsColumnIsEnabled);
+        isAccountsPeople
+          ? this.setAccountsColumnGroup(!this.groupAccountsColumnIsEnabled)
+          : this.setAccountsInsideGroupColumnGroup(
+              !this.groupAccountsInsideGroupColumnIsEnabled,
+            );
         return;
 
       case "Modified":
@@ -231,7 +262,11 @@ class TableStore {
           ? this.setRoomColumnType(!this.roomColumnTypeIsEnabled)
           : isAccountsPeople
             ? this.setAccountsColumnType(!this.typeAccountsColumnIsEnabled)
-            : this.setTypeColumn(!this.typeColumnIsEnabled);
+            : isAccountsGroups
+              ? this.setAccountsInsideGroupColumnType(
+                  !this.typeAccountsInsideGroupColumnIsEnabled,
+                )
+              : this.setTypeColumn(!this.typeColumnIsEnabled);
         return;
 
       case "TypeTrash":
@@ -259,8 +294,13 @@ class TableStore {
         return;
 
       case "Mail":
-        this.setAccountsColumnEmail(!this.emailAccountsColumnIsEnabled);
+        isAccountsPeople
+          ? this.setAccountsColumnEmail(!this.emailAccountsColumnIsEnabled)
+          : this.setAccountsInsideGroupColumnEmail(
+              !this.emailAccountsInsideGroupColumnIsEnabled,
+            );
         return;
+
       case "Storage":
         isAccountsPeople
           ? this.setAccountsColumnStorage(!this.storageAccountsColumnIsEnabled)
@@ -299,6 +339,7 @@ class TableStore {
       isArchiveFolder,
       isTrashFolder,
       isAccountsPeople,
+      isAccountsGroups,
       isRecentTab,
     } = this.treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
@@ -311,11 +352,13 @@ class TableStore {
       ? `${TABLE_ROOMS_COLUMNS}=${userId}`
       : isAccountsPeople
         ? `${TABLE_ACCOUNTS_COLUMNS}=${userId}`
-        : isTrashFolder
-          ? `${TABLE_TRASH_COLUMNS}=${userId}`
-          : isRecentTab
-            ? `${TABLE_RECENT_COLUMNS}=${userId}`
-            : `${TABLE_COLUMNS}=${userId}`;
+        : isAccountsGroups
+          ? `${TABLE_ACCOUNTS_INSIDE_GROUP_COLUMNS}=${userId}`
+          : isTrashFolder
+            ? `${TABLE_TRASH_COLUMNS}=${userId}`
+            : isRecentTab
+              ? `${TABLE_RECENT_COLUMNS}=${userId}`
+              : `${TABLE_COLUMNS}=${userId}`;
   }
 
   get columnStorageName() {

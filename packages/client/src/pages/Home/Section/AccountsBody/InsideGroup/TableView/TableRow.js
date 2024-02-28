@@ -286,6 +286,10 @@ const InsideGroupTableRow = (props) => {
     value,
     standalone,
     setCurrentGroup,
+
+    typeAccountsInsideGroupColumnIsEnabled,
+    groupAccountsInsideGroupColumnIsEnabled,
+    emailAccountsInsideGroupColumnIsEnabled,
   } = props;
 
   const {
@@ -590,14 +594,22 @@ const InsideGroupTableRow = (props) => {
           <Badges statusType={statusType} isPaid={isPaidUser} isSSO={isSSO} />
         </TableCell>
 
-        <TableCell className={"table-cell_type"}>{typeCell}</TableCell>
+        {typeAccountsInsideGroupColumnIsEnabled ? (
+          <TableCell className={"table-cell_type"}>{typeCell}</TableCell>
+        ) : (
+          <div />
+        )}
 
-        <TableCell
-          className={"table-cell_groups"}
-          onClick={(e) => e.stopPropagation()}
-        >
-          {renderGroupsCell()}
-        </TableCell>
+        {groupAccountsInsideGroupColumnIsEnabled ? (
+          <TableCell
+            className={"table-cell_groups"}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {renderGroupsCell()}
+          </TableCell>
+        ) : (
+          <div />
+        )}
 
         {/* <TableCell className="table-cell_room">
           {!rooms?.length ? (
@@ -640,20 +652,24 @@ const InsideGroupTableRow = (props) => {
           )}
         </TableCell> */}
 
-        <TableCell>
-          <Link
-            type="page"
-            title={email}
-            fontSize="13px"
-            fontWeight={600}
-            color={sideInfoColor}
-            onClick={onEmailClick}
-            isTextOverflow
-            enableUserSelect
-          >
-            {email}
-          </Link>
-        </TableCell>
+        {emailAccountsInsideGroupColumnIsEnabled ? (
+          <TableCell>
+            <Link
+              type="page"
+              title={email}
+              fontSize="13px"
+              fontWeight={600}
+              color={sideInfoColor}
+              onClick={onEmailClick}
+              isTextOverflow
+              enableUserSelect
+            >
+              {email}
+            </Link>
+          </TableCell>
+        ) : (
+          <div />
+        )}
       </StyledPeopleRow>
     </StyledWrapper>
   );

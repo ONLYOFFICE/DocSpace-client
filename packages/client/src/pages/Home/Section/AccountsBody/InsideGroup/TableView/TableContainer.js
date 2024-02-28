@@ -137,8 +137,9 @@ const Table = ({
   withPaging,
   canChangeUserType,
   currentDeviceType,
-  typeAccountsColumnIsEnabled,
-  emailAccountsColumnIsEnabled,
+  typeAccountsInsideGroupColumnIsEnabled,
+  groupAccountsInsideGroupColumnIsEnabled,
+  emailAccountsInsideGroupColumnIsEnabled,
   setCurrentGroup,
 }) => {
   const ref = useRef(null);
@@ -190,8 +191,15 @@ const Table = ({
             canChangeUserType={canChangeUserType}
             hideColumns={hideColumns}
             itemIndex={index}
-            typeAccountsColumnIsEnabled={typeAccountsColumnIsEnabled}
-            emailAccountsColumnIsEnabled={emailAccountsColumnIsEnabled}
+            typeAccountsInsideGroupColumnIsEnabled={
+              typeAccountsInsideGroupColumnIsEnabled
+            }
+            groupAccountsInsideGroupColumnIsEnabled={
+              groupAccountsInsideGroupColumnIsEnabled
+            }
+            emailAccountsInsideGroupColumnIsEnabled={
+              emailAccountsInsideGroupColumnIsEnabled
+            }
             infoPanelVisible={infoPanelVisible}
             setCurrentGroup={setCurrentGroup}
           />
@@ -226,8 +234,11 @@ export default inject(
     const { isAdmin, isOwner, id: userId } = userStore.user;
 
     const { canChangeUserType } = accessRightsStore;
-    const { typeAccountsColumnIsEnabled, emailAccountsColumnIsEnabled } =
-      tableStore;
+    const {
+      typeAccountsInsideGroupColumnIsEnabled,
+      groupAccountsInsideGroupColumnIsEnabled,
+      emailAccountsInsideGroupColumnIsEnabled,
+    } = tableStore;
 
     return {
       peopleList,
@@ -243,9 +254,11 @@ export default inject(
 
       canChangeUserType,
       currentDeviceType,
-      typeAccountsColumnIsEnabled,
-      emailAccountsColumnIsEnabled,
-      setCurrentGroup:peopleStore.groupsStore.setCurrentGroup,
+      typeAccountsInsideGroupColumnIsEnabled,
+      groupAccountsInsideGroupColumnIsEnabled,
+      emailAccountsInsideGroupColumnIsEnabled,
+
+      setCurrentGroup: peopleStore.groupsStore.setCurrentGroup,
     };
   },
 )(observer(Table));

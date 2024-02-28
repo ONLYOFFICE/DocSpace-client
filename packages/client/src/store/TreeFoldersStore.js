@@ -219,6 +219,10 @@ class TreeFoldersStore {
     return window.location.pathname.includes("accounts/people");
   }
 
+  get isAccountsGroups() {
+    return window.location.pathname.includes("accounts/groups");
+  }
+
   get isPersonalRoom() {
     return (
       this.myFolder &&

@@ -1,11 +1,16 @@
 /** @type {import('next').NextConfig} */
 
 const path = require("path");
+const pkg = require("./package.json");
 
 const nextConfig = {
   basePath: "/doceditor",
   compiler: {
     styledComponents: true,
+  },
+  generateBuildId: async () => {
+    // This could be anything, using the latest git hash
+    return `${pkg.name} - ${pkg.version} `;
   },
   images: {
     unoptimized: true,

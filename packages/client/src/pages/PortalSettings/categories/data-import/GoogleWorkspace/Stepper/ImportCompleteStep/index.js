@@ -79,7 +79,7 @@ const ImportCompleteStep = ({
   useEffect(() => {
     getMigrationStatus().then((res) =>
       setImportResult({
-        succeedUsers: res.parseResult.succeedUsers,
+        succeedUsers: res.parseResult.successedUsers,
         failedUsers: res.parseResult.failedUsers,
       }),
     );

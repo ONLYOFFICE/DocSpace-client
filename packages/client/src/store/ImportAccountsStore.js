@@ -210,7 +210,7 @@ class ImportAccountsStore {
   //   return this.checkedAccounts.length;
   // }
 
-  multipleFileUploading = async (files, setProgress) => {
+  multipleFileUploading = async (files, setProgress, isAbort) => {
     try {
       const location = combineUrl(
         window.location.origin,
@@ -220,6 +220,8 @@ class ImportAccountsStore {
 
       const res = await axios.post(location + "?Init=true");
       const chunkUploadSize = res.data.ChunkSize;
+
+      if (isAbort.current) return;
 
       const chunksNumber = files
         .map((file) => Math.ceil(file.size / chunkUploadSize, chunkUploadSize))
@@ -241,6 +243,7 @@ class ImportAccountsStore {
       let chunk = 0;
 
       while (chunk < chunksNumber && this.isFileLoading) {
+        if (isAbort.current) return;
         await uploadFile(
           location + `?Name=${requestsDataArray[chunk].fileName}`,
           requestsDataArray[chunk].formData,
@@ -251,10 +254,12 @@ class ImportAccountsStore {
       }
     } catch (e) {
       console.error(e);
+    } finally {
+      isAbort.current = false;
     }
   };
 
-  singleFileUploading = async (file, setProgress) => {
+  singleFileUploading = async (file, setProgress, isAbort) => {
     try {
       const location = combineUrl(
         window.location.origin,
@@ -267,6 +272,8 @@ class ImportAccountsStore {
       const chunkUploadSize = res.data.ChunkSize;
       const chunks = Math.ceil(file.size / chunkUploadSize, chunkUploadSize);
 
+      if (isAbort.current) return;
+
       while (chunk < chunks) {
         const offset = chunk * chunkUploadSize;
         const formData = new FormData();
@@ -277,6 +284,7 @@ class ImportAccountsStore {
 
       chunk = 0;
       while (chunk < chunks && this.isFileLoading) {
+        if (isAbort.current) return;
         await uploadFile(
           location + `?Name=${file.name}`,
           requestsDataArray[chunk],
@@ -287,6 +295,8 @@ class ImportAccountsStore {
       }
     } catch (e) {
       console.error(e);
+    } finally {
+      isAbort.current = false;
     }
   };
 

@@ -83,6 +83,8 @@ const SelectFileStep = ({
   const [isFileError, setIsFileError] = useState(false);
   const uploadInterval = useRef(null);
   const navigate = useNavigate();
+  
+  const isAbort = useRef(false);
 
   const [fileName, setFileName] = useState(null);
 
@@ -132,9 +134,9 @@ const SelectFileStep = ({
 
   const onUploadFile = async (file) => {
     if (file.length) {
-      await multipleFileUploading(file, setProgress);
+      await multipleFileUploading(file, setProgress, isAbort);
     } else {
-      await singleFileUploading(file, setProgress);
+      await singleFileUploading(file, setProgress, isAbort);
     }
     await initMigrationName(searchParams.get("service"));
 
@@ -194,6 +196,7 @@ const SelectFileStep = ({
   };
 
   const handleCancelMigration = () => {
+    isAbort.current = true;
     setProgress(0);
     setIsFileLoading(false);
     clearInterval(uploadInterval.current);

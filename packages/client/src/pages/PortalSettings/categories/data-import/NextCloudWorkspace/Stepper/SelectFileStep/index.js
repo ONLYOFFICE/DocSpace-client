@@ -110,11 +110,6 @@ const SelectFileStep = ({
 
     uploadInterval.current = setInterval(async () => {
       const res = await getMigrationStatus();
-      // const res = {
-      //   parseResult: mockRes,
-      //   failedArchives: [],
-      //   isCompleted: true,
-      // };
 
       if (!res || res.parseResult.failedArchives.length > 0) {
         setIsFileError(true);

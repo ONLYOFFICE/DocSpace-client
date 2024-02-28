@@ -5,14 +5,14 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
 export const ProviderRow = styled.div`
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
 
   justify-content: flex-start;
   align-items: center;
   align-content: center;
   padding: 8px 0;
+
+  display: grid;
+  grid-template-columns: 32px minmax(100px, 501px) 100px;
 
   svg {
     height: 24px;
@@ -32,14 +32,10 @@ export const ProviderRow = styled.div`
   }
 
   .provider-name {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-right: 12px;
-          `
-        : css`
-            padding-left: 12px;
-          `}
+    overflow-wrap: break-word;
+
+    padding: 0 12px;
+
     line-height: 16px;
   }
 

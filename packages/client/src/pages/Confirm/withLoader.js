@@ -5,6 +5,7 @@ import { Loader } from "@docspace/shared/components/loader";
 import axios from "axios";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import ConfirmWrapper from "./ConfirmWrapper";
+import { getUserByEmail } from "@docspace/shared/api/people";
 
 let loadTimeout = null;
 export default function withLoader(WrappedComponent) {
@@ -24,8 +25,55 @@ export default function withLoader(WrappedComponent) {
 
     const type = linkData ? linkData.type : null;
     const confirmHeader = linkData ? linkData.confirmHeader : null;
+    const email = linkData ? linkData.email : null;
 
     const navigate = useNavigate();
+
+    const fetch = async () => {
+      if (type === "EmpInvite" && email) {
+        try {
+          await getUserByEmail(email, confirmHeader);
+
+          const loginData = window.btoa(
+            JSON.stringify({
+              type: "invitation",
+              email: email,
+            }),
+          );
+
+          window.location.href = combineUrl(
+            window.DocSpaceConfig?.proxy?.url,
+            "/login",
+            `?loginData=${loginData}`,
+          );
+
+          return;
+        } catch (e) {}
+      }
+
+      try {
+        await getPortalPasswordSettings(confirmHeader);
+      } catch (error) {
+        let errorMessage = "";
+        if (typeof error === "object") {
+          errorMessage =
+            error?.response?.data?.error?.message ||
+            error?.statusText ||
+            error?.message ||
+            "";
+        } else {
+          errorMessage = error;
+        }
+
+        console.error(errorMessage);
+        navigate(
+          combineUrl(
+            window.DocSpaceConfig?.proxy?.url,
+            `/login/error?message=${errorMessage}`,
+          ),
+        );
+      }
+    };
 
     useEffect(() => {
       if (
@@ -35,26 +83,7 @@ export default function withLoader(WrappedComponent) {
           type === "EmpInvite") &&
         !passwordSettings
       ) {
-        getPortalPasswordSettings(confirmHeader).catch((error) => {
-          let errorMessage = "";
-          if (typeof error === "object") {
-            errorMessage =
-              error?.response?.data?.error?.message ||
-              error?.statusText ||
-              error?.message ||
-              "";
-          } else {
-            errorMessage = error;
-          }
-
-          console.error(errorMessage);
-          navigate(
-            combineUrl(
-              window.DocSpaceConfig?.proxy?.url,
-              `/login/error?message=${errorMessage}`,
-            ),
-          );
-        });
+        fetch();
       }
     }, [passwordSettings]);
 

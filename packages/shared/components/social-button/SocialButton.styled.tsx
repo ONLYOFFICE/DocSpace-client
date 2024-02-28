@@ -166,6 +166,13 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
       fill: ${(props) => !props.theme.isBase && !props.isConnect && "#FFFFFF"};
     }
   }
+
+  .social-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+  }
 `;
 
 StyledSocialButton.defaultProps = { theme: Base };

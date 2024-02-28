@@ -10,7 +10,6 @@
   "MessageEmailConfirmed": "Váš e-mail byl úspěšně aktivován.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "Zadejte prosím e-mail, který jste použili při registraci. Budou na něj zaslány pokyny k obnovení hesla.",
   "NotFoundCode": "Nemůžete najít kód? Zkontrolujte složku «Spam».",
-  "Or": "NEBO",
   "PasswordRecoveryTitle": "Obnovení hesla",
   "RecoverAccess": "Obnovit přístup",
   "RecoverContactEmailPlaceholder": "Kontaktní emailová adresa",

@@ -5,11 +5,11 @@ import { TextInput } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
 import { ConfigurationWrapper } from "../StyledSpaces";
 import { useStore } from "SRC_DIR/store";
-import { parseDomain, validatePortalName } from "SRC_DIR/utils";
+import { parseDomain } from "SRC_DIR/utils";
 import { isMobile } from "react-device-detect";
 import { toastr } from "@docspace/shared/components/toast";
-
 import { TranslationType } from "SRC_DIR/types/spaces";
+import { validatePortalName } from "@docspace/shared/utils/common";
 
 type TConfigurationSection = {
   t: TranslationType;

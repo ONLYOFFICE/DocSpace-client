@@ -33,7 +33,7 @@ const observedKeys = [
 
 const infoMembers = "info_members";
 const infoHistory = "info_history";
-// const infoDetails = "info_details";
+const infoDetails = "info_details";
 
 class InfoPanelStore {
   userStore = null;
@@ -78,7 +78,15 @@ class InfoPanelStore {
   // Setters
 
   setIsVisible = (bool) => {
-    this.setView(infoMembers);
+    if (
+      this.infoPanelSelectedItems.length &&
+      !this.infoPanelSelectedItems[0]?.isRoom
+    ) {
+      this.setView(infoDetails);
+    } else {
+      this.setView(infoMembers);
+    }
+
     this.isVisible = bool;
     this.isScrollLocked = false;
   };

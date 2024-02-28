@@ -10,7 +10,6 @@
   "MessageEmailConfirmed": "Vaš e-mail naslov je bil uspešno aktiviran.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "Prosimo, vnesite e-mail naslov, ki ste ga uporabili za registracijo. Navodila za obnovitev gesla bodo poslana.",
   "NotFoundCode": "Ne najdete kode? Preverite vašo mapo z «Vsiljeno pošto».",
-  "Or": "ALI",
   "PasswordRecoveryTitle": "Obnova gesla",
   "RecoverAccess": "Obnova dostopa",
   "RecoverContactEmailPlaceholder": "Kontaktni email",

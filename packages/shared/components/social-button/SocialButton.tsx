@@ -29,16 +29,18 @@ export const SocialButton = memo(
         isDisabled={isDisabled}
         {...otherProps}
       >
-        {IconComponent ? (
-          <IconComponent className="iconWrapper" />
-        ) : (
-          <ReactSVG className="iconWrapper" src={iconName} />
-        )}
-        {label && (
-          <Text as="div" className="social_button_text">
-            {label}
-          </Text>
-        )}
+        <div className="social-button-container">
+          {IconComponent ? (
+            <IconComponent className="iconWrapper" />
+          ) : (
+            <ReactSVG className="iconWrapper" src={iconName} />
+          )}
+          {label && (
+            <Text as="div" className="social_button_text">
+              {label}
+            </Text>
+          )}
+        </div>
       </StyledSocialButton>
     );
   },

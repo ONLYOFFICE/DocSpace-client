@@ -105,4 +105,6 @@ export interface PasswordInputProps {
   generatePasswordTitle?: string;
   /** Setting display block to set element to full width */
   isFullWidth?: boolean;
+  /** Focus the input field on initial render */
+  isAutoFocussed?: boolean;
 }

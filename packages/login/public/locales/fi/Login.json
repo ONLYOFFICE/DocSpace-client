@@ -10,7 +10,6 @@
   "MessageEmailConfirmed": "Sähköpostisi aktivointi onnistui.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "Kirjoita rekisteröinnissä käyttämäsi sähköpostiosoite. Salasanan palautusohjeet lähetetään siihen.",
   "NotFoundCode": "Etkö löydä koodia? Tarkista «Roskaposti» -kansiosi.",
-  "Or": "TAI",
   "PasswordRecoveryTitle": "Salasanan palautus",
   "RecoverAccess": "Palauta käyttöoikeus",
   "RecoverContactEmailPlaceholder": "Sähköposti yhteydenottoa varten",

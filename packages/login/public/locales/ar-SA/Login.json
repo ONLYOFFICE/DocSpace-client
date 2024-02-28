@@ -10,7 +10,6 @@
   "MessageEmailConfirmed": "تم تفعيل عنوان بريدك الإلكتروني بنجاح.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "من فضلك، أدخل عنوان البريد الإلكتروني الذي استخدمته للتسجيل. سيتم إرسال تعليمات استعادة كلمة المرور إليه.",
   "NotFoundCode": "لا يمكنك العثور على الرمز؟ قم بالتأكد من ملف البريد غير المرغوب فيه.",
-  "Or": "أو",
   "PasswordRecoveryTitle": "استعادة كلمة السر",
   "RecoverAccess": "استعادة الوصول",
   "RecoverContactEmailPlaceholder": "تواصل بالبريد الاكتروني",

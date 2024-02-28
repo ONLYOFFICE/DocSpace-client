@@ -12,6 +12,7 @@ import { ProgressBar } from "@docspace/shared/components/progress-bar";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { Box } from "@docspace/shared/components/box";
 import { Link } from "@docspace/shared/components/link";
+import { toastr } from "@docspace/shared/components/toast";
 // import { mockRes } from "./tempMock";
 
 const Wrapper = styled.div`
@@ -138,6 +139,7 @@ const SelectFileStep = ({
     } catch (error) {
       console.log(error);
       setIsFileLoading(false);
+      toastr.error(error);
     }
   };
 
@@ -160,6 +162,7 @@ const SelectFileStep = ({
         });
     } catch (error) {
       console.log(error);
+      toastr.error(error);
     }
   };
 
@@ -178,35 +181,40 @@ const SelectFileStep = ({
   const hideCancelDialog = () => setCancelDialogVisibile(false);
 
   useEffect(() => {
-    getMigrationStatus().then((res) => {
-      if (!res || res.parseResult.migratorName !== "Nextcloud") return;
+    try {
+      getMigrationStatus().then((res) => {
+        if (!res || res.parseResult.migratorName !== "Nextcloud") return;
 
-      if (res.parseResult.operation === "parse" && !res.isCompleted) {
-        setProgress(res.progress);
-        setIsFileLoading(true);
-      }
-
-      setIsFileError(false);
-      setIsSaveDisabled(true);
-
-      res.parseResult.files.length > 0 &&
-        setFileName(res.parseResult.files.join(", "));
-
-      uploadInterval.current = setInterval(async () => {
-        const res = await getMigrationStatus();
-
-        if (!res || res.parseResult.failedArchives.length > 0) {
-          setIsFileError(true);
-          setIsFileLoading(false);
-          clearInterval(uploadInterval.current);
-        } else if (res.isCompleted || res.progress === 100) {
-          setIsFileLoading(false);
-          clearInterval(uploadInterval.current);
-          setUsers(res.parseResult);
-          setIsSaveDisabled(false);
+        if (res.parseResult.operation === "parse" && !res.isCompleted) {
+          setProgress(res.progress);
+          setIsFileLoading(true);
         }
-      }, 1000);
-    });
+
+        setIsFileError(false);
+        setIsSaveDisabled(true);
+
+        res.parseResult.files.length > 0 &&
+          setFileName(res.parseResult.files.join(", "));
+
+        uploadInterval.current = setInterval(async () => {
+          const res = await getMigrationStatus();
+
+          if (!res || res.parseResult.failedArchives.length > 0) {
+            setIsFileError(true);
+            setIsFileLoading(false);
+            clearInterval(uploadInterval.current);
+          } else if (res.isCompleted || res.progress === 100) {
+            setIsFileLoading(false);
+            clearInterval(uploadInterval.current);
+            setUsers(res.parseResult);
+            setIsSaveDisabled(false);
+          }
+        }, 1000);
+      });
+    } catch (error) {
+      toastr.error(error);
+    }
+
     return () => clearInterval(uploadInterval.current);
   }, []);
 

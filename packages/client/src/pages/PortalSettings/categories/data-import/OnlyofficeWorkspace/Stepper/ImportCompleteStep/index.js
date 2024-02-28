@@ -7,6 +7,7 @@ import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-butto
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { HelpButton } from "@docspace/shared/components/help-button";
+import { toastr } from "@docspace/shared/components/toast";
 
 const Wrapper = styled.div`
   margin: 0 0 16px;
@@ -60,6 +61,7 @@ const ImportCompleteStep = ({
         });
     } catch (error) {
       console.log(error);
+      toastr.error(error);
     }
   };
 
@@ -77,12 +79,16 @@ const ImportCompleteStep = ({
   };
 
   useEffect(() => {
-    getMigrationStatus().then((res) =>
-      setImportResult({
-        succeedUsers: res.parseResult.successedUsers,
-        failedUsers: res.parseResult.failedUsers,
-      }),
-    );
+    try {
+      getMigrationStatus().then((res) =>
+        setImportResult({
+          succeedUsers: res.parseResult.successedUsers,
+          failedUsers: res.parseResult.failedUsers,
+        }),
+      );
+    } catch (error) {
+      toastr.error(error);
+    }
   }, []);
 
   return (

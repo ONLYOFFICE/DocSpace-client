@@ -12,6 +12,7 @@ import BreakpointWarning from "SRC_DIR/components/BreakpointWarning";
 import { Text } from "@docspace/shared/components/text";
 import { Box } from "@docspace/shared/components/box";
 import { HelpButton } from "@docspace/shared/components/help-button";
+import { toastr } from "@docspace/shared/components/toast";
 
 const STEP_LENGTH = 6;
 
@@ -129,46 +130,50 @@ const OnlyofficeWorkspace = ({
   });
 
   useEffect(() => {
-    getMigrationStatus().then((res) => {
-      if (
-        !res ||
-        res.parseResult.users.length +
-          res.parseResult.existUsers.length +
-          res.parseResult.withoutEmailUsers.length ===
-          0
-      ) {
+    try {
+      getMigrationStatus().then((res) => {
+        if (
+          !res ||
+          res.parseResult.users.length +
+            res.parseResult.existUsers.length +
+            res.parseResult.withoutEmailUsers.length ===
+            0
+        ) {
+          setShouldRender(true);
+          return;
+        }
+
+        if (res.parseResult.migratorName !== "Workspace") {
+          const workspacesEnum = {
+            GoogleWorkspace: "google",
+            Nextcloud: "nextcloud",
+            Workspace: "onlyoffice",
+          };
+          const migratorName = res.parseResult.migratorName;
+
+          setShouldRender(true);
+          navigate(
+            `/portal-settings/data-import/migration/${workspacesEnum[migratorName]}?service=${migratorName}`,
+          );
+        }
+
+        if (res.parseResult.operation === "parse" && res.isCompleted) {
+          setUsers(res.parseResult);
+          setCurrentStep(2);
+        }
+
+        if (res.parseResult.operation === "migration" && !res.isCompleted) {
+          setCurrentStep(5);
+        }
+
+        // if (res.parseResult.operation === "migration" && res.isCompleted) {
+        //   setCurrentStep(6);
+        // }
         setShouldRender(true);
-        return;
-      }
-
-      if (res.parseResult.migratorName !== "Workspace") {
-        const workspacesEnum = {
-          GoogleWorkspace: "google",
-          Nextcloud: "nextcloud",
-          Workspace: "onlyoffice",
-        };
-        const migratorName = res.parseResult.migratorName;
-
-        setShouldRender(true);
-        navigate(
-          `/portal-settings/data-import/migration/${workspacesEnum[migratorName]}?service=${migratorName}`,
-        );
-      }
-
-      if (res.parseResult.operation === "parse" && res.isCompleted) {
-        setUsers(res.parseResult);
-        setCurrentStep(2);
-      }
-
-      if (res.parseResult.operation === "migration" && !res.isCompleted) {
-        setCurrentStep(5);
-      }
-
-      // if (res.parseResult.operation === "migration" && res.isCompleted) {
-      //   setCurrentStep(6);
-      // }
-      setShouldRender(true);
-    });
+      });
+    } catch (error) {
+      toastr.error(error);
+    }
 
     return clearCheckedAccounts;
   }, []);

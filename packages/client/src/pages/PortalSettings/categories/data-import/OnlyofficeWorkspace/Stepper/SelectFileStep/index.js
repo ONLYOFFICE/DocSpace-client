@@ -12,6 +12,7 @@ import { Button } from "@docspace/shared/components/button";
 import { FileInput } from "@docspace/shared/components/file-input";
 import { ProgressBar } from "@docspace/shared/components/progress-bar";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
+import { toastr } from "@docspace/shared/components/toast";
 
 const Wrapper = styled.div`
   max-width: 350px;
@@ -94,36 +95,40 @@ const SelectFileStep = ({
 
   useEffect(() => {
     setShowReminder(false);
+    try {
+      getMigrationStatus().then((res) => {
+        if (!res || res.parseResult.migratorName !== "Workspace") return;
 
-    getMigrationStatus().then((res) => {
-      if (!res || res.parseResult.migratorName !== "Workspace") return;
-
-      if (res.parseResult.operation === "parse" && !res.isCompleted) {
-        setProgress(res.progress);
-        setIsFileLoading(true);
-      }
-
-      setIsFileError(false);
-      setShowReminder(true);
-
-      res.parseResult.files.length > 0 &&
-        setFileName(res.parseResult.files.join(", "));
-
-      uploadInterval.current = setInterval(async () => {
-        const res = await getMigrationStatus();
-
-        if (!res || res.parseResult.failedArchives.length > 0) {
-          setIsFileError(true);
-          setIsFileLoading(false);
-          clearInterval(uploadInterval.current);
-        } else if (res.isCompleted || res.parseResult.progress === 100) {
-          setIsFileLoading(false);
-          clearInterval(uploadInterval.current);
-          setUsers(res.parseResult);
-          setShowReminder(false);
+        if (res.parseResult.operation === "parse" && !res.isCompleted) {
+          setProgress(res.progress);
+          setIsFileLoading(true);
         }
-      }, 1000);
-    });
+
+        setIsFileError(false);
+        setShowReminder(true);
+
+        res.parseResult.files.length > 0 &&
+          setFileName(res.parseResult.files.join(", "));
+
+        uploadInterval.current = setInterval(async () => {
+          const res = await getMigrationStatus();
+
+          if (!res || res.parseResult.failedArchives.length > 0) {
+            setIsFileError(true);
+            setIsFileLoading(false);
+            clearInterval(uploadInterval.current);
+          } else if (res.isCompleted || res.parseResult.progress === 100) {
+            setIsFileLoading(false);
+            clearInterval(uploadInterval.current);
+            setUsers(res.parseResult);
+            setShowReminder(false);
+          }
+        }, 1000);
+      });
+    } catch (error) {
+      toastr.error(error);
+    }
+
     return () => clearInterval(uploadInterval.current);
   }, []);
 
@@ -177,6 +182,7 @@ const SelectFileStep = ({
       onUploadFile(file);
     } catch (error) {
       console.log(error);
+      toastr.error(error);
       setIsFileLoading(false);
     }
   };

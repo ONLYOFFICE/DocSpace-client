@@ -7,6 +7,8 @@ import { Wrapper } from "../StyledStepper";
 import { ProgressBar } from "@docspace/shared/components/progress-bar";
 import { Button } from "@docspace/shared/components/button";
 
+import { toastr } from "@docspace/shared/components/toast";
+
 const ImportProcessingStep = ({
   t,
   incrementStep,

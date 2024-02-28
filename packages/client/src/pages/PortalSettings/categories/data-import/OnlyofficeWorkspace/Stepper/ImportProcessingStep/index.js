@@ -6,6 +6,7 @@ import styled from "styled-components";
 
 import { ProgressBar } from "@docspace/shared/components/progress-bar";
 import { Button } from "@docspace/shared/components/button";
+import { toastr } from "@docspace/shared/components/toast";
 
 const Wrapper = styled.div`
   max-width: 350px;
@@ -46,6 +47,7 @@ const ImportProcessingStep = ({
       }, 1000);
     } catch (error) {
       console.log(error);
+      toastr.error(error);
       setIsLoading(false);
     }
   };

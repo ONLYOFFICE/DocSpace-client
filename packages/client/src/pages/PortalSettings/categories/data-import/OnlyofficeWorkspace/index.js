@@ -164,9 +164,9 @@ const OnlyofficeWorkspace = ({
         setCurrentStep(5);
       }
 
-      if (res.parseResult.operation === "migration" && res.isCompleted) {
-        setCurrentStep(6);
-      }
+      // if (res.parseResult.operation === "migration" && res.isCompleted) {
+      //   setCurrentStep(6);
+      // }
       setShouldRender(true);
     });
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
@@ -27,6 +27,10 @@ const SelectUsersStep = (props) => {
   } = props;
 
   const [dataPortion, setDataPortion] = useState(withEmailUsers.slice(0, 25));
+
+  useEffect(() => {
+    setSearchValue("");
+  }, []);
 
   const handleDataChange = (leftBoundary, rightBoundary) => {
     setDataPortion(withEmailUsers.slice(leftBoundary, rightBoundary));

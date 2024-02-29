@@ -15,11 +15,11 @@ const InputBlock = ({
   onChange,
   size,
   iconSize,
-  hasError,
-  hasWarning,
-  isDisabled,
+  hasError = false,
+  hasWarning = false,
+  isDisabled = false,
   isReadOnly,
-  scale,
+  scale = false,
   className,
   style,
   iconColor,
@@ -28,22 +28,22 @@ const InputBlock = ({
   id,
   name,
   type,
-  value,
+  value = "",
   placeholder,
-  tabIndex,
-  maxLength,
+  tabIndex = -1,
+  maxLength = 255,
   onBlur,
   onFocus,
   isAutoFocussed,
-  autoComplete,
+  autoComplete = "off",
   onKeyDown,
   mask,
-  keepCharPositions,
+  keepCharPositions = false,
   forwardedRef,
-  iconButtonClassName,
-  iconName,
+  iconButtonClassName = "",
+  iconName = "",
   iconNode,
-  isIconFill,
+  isIconFill = false,
   onClick,
 }: InputBlockProps) => {
   const onIconClickAction = React.useCallback(
@@ -153,22 +153,6 @@ const InputBlock = ({
       </div>
     </StyledInputGroup>
   );
-};
-
-InputBlock.defaultProps = {
-  maxLength: 255,
-
-  scale: false,
-  tabIndex: -1,
-  hasError: false,
-  hasWarning: false,
-  autoComplete: "off",
-  value: "",
-  iconName: "",
-  isIconFill: false,
-  isDisabled: false,
-  keepCharPositions: false,
-  iconButtonClassName: "",
 };
 
 export { InputBlock };

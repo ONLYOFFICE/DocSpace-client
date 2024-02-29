@@ -101,30 +101,3 @@ export const parseDomain = (
 
   return parsedDomain.isValid();
 };
-
-export const validatePortalName = (
-  value: string,
-  nameValidator,
-  setError: Function,
-  t: TranslationType
-) => {
-  const validName = new RegExp(nameValidator.regex);
-  switch (true) {
-    case value === "":
-      return setError(t("Settings:PortalNameEmpty"));
-    case value.length < nameValidator.minLength ||
-      value.length > nameValidator.maxLength:
-      return setError(
-        t("Settings:PortalNameLength", {
-          minLength: nameValidator.minLength,
-          maxLength: nameValidator.maxLength,
-        })
-      );
-    case !validName.test(value):
-      return setError(t("Settings:PortalNameIncorrect"));
-
-    default:
-      setError(null);
-  }
-  return validName.test(value);
-};

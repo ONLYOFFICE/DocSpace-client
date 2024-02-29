@@ -49,6 +49,9 @@ const StyledHeader = styled.div`
     line-height: 28px;
   }
 `;
+
+StyledHeader.defaultProps = { theme: Base };
+
 const StyledBody = styled.div<{
   footerVisible: boolean;
   withHeader?: boolean;
@@ -265,6 +268,8 @@ const StyledBreadCrumbs = styled.div<{
     }
   }
 `;
+
+StyledBreadCrumbs.defaultProps = { theme: Base };
 
 const StyledItemText = styled(Text)<{ isCurrent: boolean; isLoading: boolean }>`
   ${(props) =>

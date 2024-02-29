@@ -309,12 +309,6 @@ class AuthStore {
     );
   }
 
-  get isSubmitToGalleryAlertAvailable() {
-    const user = this.userStore?.user;
-    if (!user) return false;
-    return !user.isVisitor;
-  }
-
   get isLiveChatAvailable() {
     const user = this.userStore?.user;
 

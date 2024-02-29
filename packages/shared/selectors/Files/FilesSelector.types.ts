@@ -1,6 +1,11 @@
 import { TSelectorItem } from "../../components/selector";
 import { TBreadCrumb } from "../../components/selector/Selector.types";
-import { TFileSecurity, TFolder, TFolderSecurity } from "../../api/files/types";
+import {
+  TFileSecurity,
+  TFilesSettings,
+  TFolder,
+  TFolderSecurity,
+} from "../../api/files/types";
 import SocketIOHelper from "../../utils/socket";
 import { DeviceType, FolderType } from "../../enums";
 import { TRoomSecurity } from "../../api/rooms/types";
@@ -97,7 +102,13 @@ export type TSelectedFileInfo = {
   inPublic?: boolean | undefined;
 } | null;
 
-export interface FilesSelectorProps {
+export type FilesSelectorProps = (
+  | {
+      getIcon: (size: number, fileExst: string) => string;
+      filesSettings?: never;
+    }
+  | { getIcon?: never; filesSettings: TFilesSettings }
+) & {
   socketHelper: SocketIOHelper;
   socketSubscribers: Set<string>;
   disabledItems: string[] | number[];
@@ -106,7 +117,7 @@ export interface FilesSelectorProps {
   withBreadCrumbs: boolean;
   withSearch: boolean;
   cancelButtonLabel: string;
-  getIcon?: (size: number, fileExst: string) => string;
+
   treeFolders?: TFolder[];
   onSetBaseFolderPath?: (
     value: number | string | undefined | TBreadCrumb[],
@@ -160,4 +171,4 @@ export interface FilesSelectorProps {
   isPanelVisible: boolean;
   currentDeviceType: DeviceType;
   getFilesArchiveError: (name: string) => string;
-}
+};

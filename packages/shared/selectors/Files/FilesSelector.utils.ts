@@ -3,7 +3,6 @@ import { TFile, TFolder } from "../../api/files/types";
 import { TRoom } from "../../api/rooms/types";
 import { getIconPathByFolderType } from "../../utils/common";
 import { iconSize32 } from "../../utils/image-helpers";
-
 import { DEFAULT_FILE_EXTS } from "./FilesSelector.constants";
 
 export const convertFoldersToItems: (

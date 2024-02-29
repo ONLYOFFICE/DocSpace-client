@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 
 import { Header } from "./sub-components/Header";
@@ -61,6 +63,7 @@ const Selector = ({
   withCancelButton,
   cancelButtonLabel,
   onCancel,
+  cancelButtonId,
 
   withAccessRights,
   accessRights,
@@ -95,8 +98,6 @@ const Selector = ({
   alwaysShowFooter,
 
   descriptionText,
-
-  cancelButtonId,
 
   withTabs,
   tabsData,
@@ -339,6 +340,7 @@ const Selector = ({
         !isMultiSelect
       ) {
         const cloneItems = items.map((x) => ({ ...x, isSelected: false }));
+
         return setRenderedItems(cloneItems);
       }
 

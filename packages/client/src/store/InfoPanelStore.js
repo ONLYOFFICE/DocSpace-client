@@ -33,7 +33,7 @@ const observedKeys = [
 
 const infoMembers = "info_members";
 const infoHistory = "info_history";
-// const infoDetails = "info_details";
+const infoDetails = "info_details";
 
 class InfoPanelStore {
   userStore = null;
@@ -78,7 +78,15 @@ class InfoPanelStore {
   // Setters
 
   setIsVisible = (bool) => {
-    this.setView(infoMembers);
+    if (
+      this.infoPanelSelectedItems.length &&
+      !this.infoPanelSelectedItems[0]?.isRoom
+    ) {
+      this.setView(infoDetails);
+    } else {
+      this.setView(infoMembers);
+    }
+
     this.isVisible = bool;
     this.isScrollLocked = false;
   };
@@ -198,8 +206,11 @@ class InfoPanelStore {
   getViewItem = () => {
     const isRooms = this.getIsRooms();
 
+    const pathname = window.location.pathname.toLowerCase();
+    const isMedia = pathname.indexOf("view") !== -1;
+
     if (
-      isRooms &&
+      (isRooms || isMedia) &&
       this.roomsView === infoMembers &&
       !this.infoPanelSelectedItems[0]?.isRoom
     ) {
@@ -646,14 +657,13 @@ class InfoPanelStore {
   ) => {
     const { getFileInfo } = this.filesStore;
 
-    const expDate = moment(expirationDate);
     const res = await editExternalLink(
       fileId,
       linkId,
       access,
       primary,
       internal,
-      expDate,
+      expirationDate,
     );
     await getFileInfo(fileId);
     return res;

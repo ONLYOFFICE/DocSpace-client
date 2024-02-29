@@ -29,7 +29,7 @@ class InsideGroupTableHeader extends React.Component {
       {
         key: "Type",
         title: t("Common:Type"),
-        enable: true,
+        enable: props.typeAccountsInsideGroupColumnIsEnabled,
         sortBy: "type",
         resizable: true,
         onChange: this.onColumnChange,
@@ -38,7 +38,7 @@ class InsideGroupTableHeader extends React.Component {
       {
         key: "Department",
         title: t("Common:Group"),
-        enable: true,
+        enable: props.groupAccountsInsideGroupColumnIsEnabled,
         sortBy: "department",
         resizable: true,
         onChange: this.onColumnChange,
@@ -54,7 +54,7 @@ class InsideGroupTableHeader extends React.Component {
       {
         key: "Mail",
         title: t("Common:Email"),
-        enable: true,
+        enable: props.emailAccountsInsideGroupColumnIsEnabled,
         resizable: true,
         sortBy: "email",
         onChange: this.onColumnChange,
@@ -62,37 +62,18 @@ class InsideGroupTableHeader extends React.Component {
       },
     ];
 
-    const columns = this.getColumns(defaultColumns);
+    const columns = props.getColumns(defaultColumns);
 
     this.state = { columns };
   }
-
-  getColumns = (defaultColumns) => {
-    const storageColumns = localStorage.getItem(
-      `${TABLE_COLUMNS}=${this.props.userId}`,
-    );
-    const columns = [];
-
-    if (storageColumns) {
-      const splitColumns = storageColumns.split(",");
-
-      for (let col of defaultColumns) {
-        const column = splitColumns.find((key) => key === col.key);
-        column ? (col.enable = true) : (col.enable = false);
-
-        columns.push(col);
-      }
-      return columns;
-    } else {
-      return defaultColumns;
-    }
-  };
 
   onColumnChange = (key, e) => {
     const { columns } = this.state;
     const columnIndex = columns.findIndex((c) => c.key === key);
 
     if (columnIndex === -1) return;
+
+    this.props.setColumnEnable(key);
 
     columns[columnIndex].enable = !columns[columnIndex].enable;
     this.setState({ columns });
@@ -193,6 +174,7 @@ export default inject(
     infoPanelStore,
     settingsStore,
     userStore,
+    tableStore,
   }) => {
     const { filterStore } = peopleStore;
 
@@ -200,6 +182,14 @@ export default inject(
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { withPaging } = settingsStore;
+
+    const {
+      getColumns,
+      setColumnEnable,
+      typeAccountsInsideGroupColumnIsEnabled,
+      groupAccountsInsideGroupColumnIsEnabled,
+      emailAccountsInsideGroupColumnIsEnabled,
+    } = tableStore;
 
     return {
       filter,
@@ -209,6 +199,12 @@ export default inject(
       userId: userStore.user?.id,
       infoPanelVisible,
       withPaging,
+
+      getColumns,
+      setColumnEnable,
+      typeAccountsInsideGroupColumnIsEnabled,
+      groupAccountsInsideGroupColumnIsEnabled,
+      emailAccountsInsideGroupColumnIsEnabled,
     };
   },
 )(

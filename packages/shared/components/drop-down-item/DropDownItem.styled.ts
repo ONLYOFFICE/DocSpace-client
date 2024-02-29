@@ -20,7 +20,7 @@ const disabledAndHeaderStyle = css`
   &:hover {
     cursor: default;
     background-color: ${(props) =>
-    props.theme.dropDownItem.hoverDisabledBackgroundColor};
+      props.theme.dropDownItem.hoverDisabledBackgroundColor};
   }
 `;
 
@@ -80,30 +80,30 @@ const StyledDropdownItem = styled.div<{
     svg {
       path[fill] {
         fill: ${(props) =>
-    props.disabled
-      ? props.theme.dropDownItem.icon.disableColor
-      : props.theme.dropDownItem.icon.color};
+          props.disabled
+            ? props.theme.dropDownItem.icon.disableColor
+            : props.theme.dropDownItem.icon.color};
       }
 
       path[stroke] {
         stroke: ${(props) =>
-    props.disabled
-      ? props.theme.dropDownItem.icon.disableColor
-      : props.theme.dropDownItem.icon.color};
+          props.disabled
+            ? props.theme.dropDownItem.icon.disableColor
+            : props.theme.dropDownItem.icon.color};
       }
 
       circle[fill] {
         fill: ${(props) =>
-    props.disabled
-      ? props.theme.dropDownItem.icon.disableColor
-      : props.theme.dropDownItem.icon.color};
+          props.disabled
+            ? props.theme.dropDownItem.icon.disableColor
+            : props.theme.dropDownItem.icon.color};
       }
 
       rect[fill] {
         fill: ${(props) =>
-    props.disabled
-      ? props.theme.dropDownItem.icon.disableColor
-      : props.theme.dropDownItem.icon.color};
+          props.disabled
+            ? props.theme.dropDownItem.icon.disableColor
+            : props.theme.dropDownItem.icon.color};
       }
     }
   }
@@ -120,13 +120,13 @@ const StyledDropdownItem = styled.div<{
 
   &:hover {
     ${(props) =>
-    !props.noHover &&
-    !props.isHeader &&
-    css`
+      !props.noHover &&
+      !props.isHeader &&
+      css`
         background-color: ${props.theme.dropDownItem.hoverBackgroundColor};
         text-align: left;
         ${props.theme.interfaceDirection === "rtl" &&
-      css`
+        css`
           text-align: right;
         `}
       `}
@@ -134,8 +134,8 @@ const StyledDropdownItem = styled.div<{
 
   &:active {
     ${({ isHeader, theme }) =>
-    !isHeader &&
-    css`
+      !isHeader &&
+      css`
         background-color: ${theme.dropDownItem.hoverBackgroundColor};
       `}
   }
@@ -160,7 +160,7 @@ const StyledDropdownItem = styled.div<{
     cursor: pointer;
 
     ${({ theme }) =>
-    theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+      theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
   }
 
   ${({ isHeader, theme }) =>
@@ -202,14 +202,14 @@ const StyledDropdownItem = styled.div<{
 
   .submenu-arrow {
     ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? `margin-right: auto;
+      props.theme.interfaceDirection === "rtl"
+        ? `margin-right: auto;
            transform: scaleX(-1);
         `
-      : `margin-left: auto;`}
+        : `margin-left: auto;`}
     ${(props) =>
-    props.isActive &&
-    css`
+      props.isActive &&
+      css`
         transform: rotate(90deg);
         height: auto;
       `}
@@ -265,7 +265,19 @@ const ElementWrapper = styled.div`
   display: flex;
   align-items: center;
   ${(props) =>
-    props.theme.interfaceDirection === "rtl" ? css`margin-right: auto;` : css`margin-left: auto;`}
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          margin-right: auto;
+        `
+      : css`
+          margin-left: auto;
+        `}
 `;
 
-export { StyledDropdownItem, IconWrapper, WrapperToggle, WrapperBadge, ElementWrapper };
+export {
+  StyledDropdownItem,
+  IconWrapper,
+  WrapperToggle,
+  WrapperBadge,
+  ElementWrapper,
+};

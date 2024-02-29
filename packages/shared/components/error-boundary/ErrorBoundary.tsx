@@ -1,5 +1,7 @@
 import React, { ErrorInfo } from "react";
 
+import { I18nextProvider } from "react-i18next";
+
 import Error520 from "../errors/Error520";
 
 import type {
@@ -25,7 +27,6 @@ class ErrorBoundary extends React.Component<
     // You can also log the error to an error reporting service
     // eslint-disable-next-line no-console
     console.error(error, errorInfo);
-
     const { onError } = this.props;
 
     onError?.();
@@ -41,10 +42,29 @@ class ErrorBoundary extends React.Component<
       currentDeviceType,
       whiteLabelLogoUrls,
       currentColorScheme,
+      isNextJS,
+      theme,
+      i18n,
     } = this.props;
 
     if (error) {
       // You can render any custom fallback UI
+
+      if (isNextJS && theme && i18n) {
+        return (
+          <I18nextProvider i18n={i18n}>
+            <Error520
+              user={user}
+              errorLog={error}
+              version={version}
+              firebaseHelper={firebaseHelper}
+              currentDeviceType={currentDeviceType}
+              whiteLabelLogoUrls={whiteLabelLogoUrls}
+              currentColorScheme={theme.currentColorScheme}
+            />
+          </I18nextProvider>
+        );
+      }
       return (
         <Error520
           user={user}

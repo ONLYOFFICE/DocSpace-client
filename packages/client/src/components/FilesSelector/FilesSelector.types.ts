@@ -32,10 +32,10 @@ export type FilesSelectorProps = {
 
   filterParam?: string;
 
-  currentFolderId?: number;
+  currentFolderId: number;
   fromFolderId?: number;
-  parentId?: number;
-  rootFolderType?: number;
+  parentId: number;
+  rootFolderType: number;
 
   treeFolders?: TFolder[];
 
@@ -90,8 +90,8 @@ export type FilesSelectorProps = {
 
   setInfoPanelIsMobileHidden: (arg: boolean) => void;
 
-  withFooterInput?: boolean;
-  withFooterCheckbox?: boolean;
+  withFooterInput: boolean;
+  withFooterCheckbox: boolean;
   footerInputHeader?: string;
   currentFooterInputValue?: string;
   footerCheckboxLabel?: string;

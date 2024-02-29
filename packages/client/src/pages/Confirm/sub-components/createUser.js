@@ -1,21 +1,16 @@
 ﻿import SsoReactSvgUrl from "PUBLIC_DIR/images/sso.react.svg?url";
-import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 
 import React, { useEffect, useState, useCallback } from "react";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { isMobile } from "react-device-detect";
 import { useSearchParams } from "react-router-dom";
-import { Avatar } from "@docspace/shared/components/avatar";
 import { Button } from "@docspace/shared/components/button";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { toastr } from "@docspace/shared/components/toast";
-import { SocialButton } from "@docspace/shared/components/social-button";
-import MoreLoginModal from "@docspace/shared/components/more-login-modal";
+import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
 import { EmailInput } from "@docspace/shared/components/email-input";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
@@ -23,34 +18,59 @@ import {
   getUserFromConfirm,
   createUser,
   signupOAuth,
+  getUserByEmail,
 } from "@docspace/shared/api/people";
 import {
   createPasswordHash,
-  getProviderTranslation,
   getOAuthToken,
   getLoginLink,
 } from "@docspace/shared/utils/common";
 import { login } from "@docspace/shared/utils/loginUtils";
 import { PROVIDERS_DATA } from "@docspace/shared/constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 import { getPasswordErrorMessage } from "@docspace/shared/utils/getPasswordErrorMessage";
 import DocspaceLogo from "SRC_DIR/components/DocspaceLogoWrapper";
 import withLoader from "../withLoader";
 
-import { StyledPage, StyledContent } from "./StyledConfirm";
+import { StyledPage } from "./StyledConfirm";
 import {
-  ButtonsWrapper,
-  ConfirmContainer,
   GreetingContainer,
   RegisterContainer,
+  StyledCreateUserContent,
 } from "./StyledCreateUser";
+import GreetingUserContainer from "./GreetingUserContainer";
 
+const DEFAULT_ROOM_TEXT =
+  "<strong>{{firstName}} {{lastName}}</strong> invites you to join the room <strong>{{roomName}}</strong> for secure document collaboration.";
+const DEFAULT_PORTAL_TEXT =
+  "<strong>{{firstName}} {{lastName}}</strong> invites you to join the room <strong>{{roomName}}</strong> for secure document collaboration.";
+
+const RegistrationFormGreeting = ({
+  email,
+  setRegistrationForm,
+  type,
+  emailFromLink,
+}) => {
+  const onClickBack = () => {
+    setRegistrationForm(false);
+  };
+
+  return (
+    <GreetingUserContainer
+      type={type}
+      emailFromLink={!!emailFromLink}
+      email={email}
+      onClickBack={onClickBack}
+    />
+  );
+};
 const CreateUserForm = (props) => {
   const {
     settings,
     t,
-    greetingTitle,
     providers,
     isDesktop,
     linkData,
@@ -65,7 +85,6 @@ const CreateUserForm = (props) => {
   const emailFromLink = linkData?.email ? linkData.email : "";
   const roomName = roomData?.title;
 
-  const [moreAuthVisible, setMoreAuthVisible] = useState(false);
   const [email, setEmail] = useState(emailFromLink);
   const [emailValid, setEmailValid] = useState(true);
   const [emailErrorText, setEmailErrorText] = useState("");
@@ -87,9 +106,9 @@ const CreateUserForm = (props) => {
   const [isEmailErrorShow, setIsEmailErrorShow] = useState(false);
   const [isPasswordErrorShow, setIsPasswordErrorShow] = useState(false);
 
-  const [showForm, setShowForm] = useState(true);
-  const [showGreeting, setShowGreeting] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const [registrationForm, setRegistrationForm] = useState(emailFromLink);
 
   const focusInput = () => {
     if (inputRef) {
@@ -97,22 +116,7 @@ const CreateUserForm = (props) => {
     }
   };
 
-  const onCheckGreeting = () => {
-    const isGreetingMode = oauthDataExists() && isMobile; /*!isDesktopUtil()*/
-    setShowForm(!isGreetingMode);
-  };
-
-  const onGreetingJoin = () => {
-    setShowForm(true);
-    setShowGreeting(false);
-  };
-
   const nameRegex = new RegExp(userNameRegex, "gu");
-
-  /*useEffect(() => {
-    window.addEventListener("resize", onCheckGreeting);
-    return () => window.removeEventListener("resize", onCheckGreeting);
-  }, []);*/
 
   useEffect(() => {
     const { linkData } = props;
@@ -126,13 +130,62 @@ const CreateUserForm = (props) => {
       }
       window.authCallback = authCallback;
 
-      onCheckGreeting();
       focusInput();
     };
 
     fetchData();
   }, []);
 
+  const onContinue = async () => {
+    const { linkData } = props;
+    setIsLoading(true);
+
+    let hasError = false;
+
+    const emailRegex = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$";
+    const validationEmail = new RegExp(emailRegex);
+
+    if (!validationEmail.test(email.trim())) {
+      hasError = true;
+      setEmailValid(!hasError);
+    }
+
+    if (hasError) {
+      setIsLoading(false);
+      return;
+    }
+
+    const headerKey = linkData.confirmHeader;
+
+    try {
+      const loginData = window.btoa(
+        JSON.stringify({
+          type: "invitation",
+          email,
+          roomName,
+          firstName: user.firstName,
+          lastName: user.lastName,
+        }),
+      );
+
+      await getUserByEmail(email, headerKey);
+
+      window.location.href = combineUrl(
+        window.DocSpaceConfig?.proxy?.url,
+        "/login",
+        `?loginData=${loginData}`,
+      );
+    } catch (err) {
+      const status = err?.response?.status;
+      const isNotExistUser = status === 404;
+
+      if (isNotExistUser) {
+        setRegistrationForm(true);
+      }
+    }
+
+    setIsLoading(false);
+  };
   const onSubmit = () => {
     const { linkData, hashSettings } = props;
     const type = parseInt(linkData.emplType);
@@ -270,19 +323,10 @@ const CreateUserForm = (props) => {
     window.location.replace(finalUrl);
   };
 
-  const moreAuthOpen = () => {
-    setMoreAuthVisible(true);
-  };
-
-  const moreAuthClose = () => {
-    setMoreAuthVisible(false);
-  };
-
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
     setIsEmailErrorShow(false);
   };
-
   const onChangeFname = (e) => {
     setFname(e.target.value);
     setFnameValid(nameRegex.test(e.target.value.trim()));
@@ -303,8 +347,19 @@ const CreateUserForm = (props) => {
 
   const onKeyPress = (event) => {
     if (event.key === "Enter") {
-      onSubmit();
+      registrationForm ? onSubmit() : onContinue();
     }
+  };
+  const onValidatePassword = (res) => {
+    setPasswordValid(res);
+  };
+
+  const onBlurEmail = () => {
+    setIsEmailErrorShow(true);
+  };
+
+  const onBlurPassword = () => {
+    setIsPasswordErrorShow(true);
   };
 
   const onSocialButtonClick = useCallback((e) => {
@@ -343,50 +398,6 @@ const CreateUserForm = (props) => {
     }
   }, []);
 
-  const providerButtons = () => {
-    const providerButtons =
-      providers &&
-      providers.map((item, index) => {
-        if (!PROVIDERS_DATA[item.provider]) return;
-        if (index > 1) return;
-
-        const { icon, label, iconOptions, className } =
-          PROVIDERS_DATA[item.provider];
-
-        return (
-          <div className="buttonWrapper" key={`${item.provider}ProviderItem`}>
-            <SocialButton
-              iconName={icon}
-              label={getProviderTranslation(label, t, false, true)}
-              className={`socialButton ${className ? className : ""}`}
-              $iconOptions={iconOptions}
-              data-url={item.url}
-              data-providername={item.provider}
-              onClick={onSocialButtonClick}
-            />
-          </div>
-        );
-      });
-
-    return providerButtons;
-  };
-
-  const ssoButton = () => {
-    return (
-      <div className="buttonWrapper">
-        <SocialButton
-          iconName={SsoReactSvgUrl}
-          className="socialButton"
-          label={
-            capabilities?.ssoLabel ||
-            getProviderTranslation("sso", t, false, true)
-          }
-          onClick={() => (window.location.href = capabilities?.ssoUrl)}
-        />
-      </div>
-    );
-  };
-
   const oauthDataExists = () => {
     if (!capabilities?.oauthEnabled) return false;
 
@@ -410,128 +421,53 @@ const CreateUserForm = (props) => {
     setEmailErrorText(res.errors[0]);
   };
 
-  const onValidatePassword = (res) => {
-    setPasswordValid(res);
-  };
-
-  const onBlurEmail = () => {
-    setIsEmailErrorShow(true);
-  };
-
-  const onBlurPassword = () => {
-    setIsPasswordErrorShow(true);
-  };
-
-  const onSignIn = () => {
-    return window.location.replace(
-      combineUrl(window.DocSpaceConfig?.proxy?.url, "/login"),
-    );
-  };
-
-  const userAvatar = user && user.hasAvatar ? user.avatar : DefaultUserPhoto;
+  const ssoProps = ssoExists()
+    ? {
+        ssoUrl: capabilities?.ssoUrl,
+        ssoLabel: capabilities?.ssoLabel,
+        ssoSVG: SsoReactSvgUrl,
+      }
+    : {};
 
   return (
     <StyledPage>
-      <StyledContent>
-        <ConfirmContainer>
-          <GreetingContainer>
-            <DocspaceLogo className="docspace-logo" />
-            <Text
-              fontSize="23px"
-              fontWeight={700}
-              textAlign="left"
-              className="greeting-title"
-            >
-              {greetingTitle}
-            </Text>
+      <StyledCreateUserContent>
+        <GreetingContainer>
+          <DocspaceLogo className="docspace-logo" />
+          {linkData.type === "LinkInvite" && (
+            <div className="tooltip">
+              <Text fontSize="16px">
+                <Trans
+                  t={t}
+                    i18nKey={
+                      roomName ? "InvitationToRoom" : "InvitationToPortal"
+                    }
+                    ns="Common"
+                    defaults={
+                      roomName ? DEFAULT_ROOM_TEXT : DEFAULT_PORTAL_TEXT
+                    }
+                  values={{
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    ...(roomName
+                      ? { roomName }
+                      : { spaceAddress: window.location.host }),
+                  }}
+                  components={{
+                    1: <Text fontWeight={600} as="strong" fontSize="16px" />,
+                  }}
+                />
+              </Text>
+            </div>
+          )}
+        </GreetingContainer>
 
-            {showGreeting && (
-              <>
-                {user && (
-                  <div className="greeting-block">
-                    <Avatar
-                      className="avatar"
-                      role="user"
-                      source={userAvatar}
-                    />
-                    <div className="user-info">
-                      <Text fontSize="15px" fontWeight={600}>
-                        {user.firstName} {user.lastName}
-                      </Text>
-                      <Text fontSize="12px" fontWeight={600} color="#A3A9AE">
-                        {user.department}
-                      </Text>
-                    </div>
-                  </div>
-                )}
-
-                <div className="tooltip">
-                  <p className="tooltiptext">
-                    {roomName ? (
-                      <Trans
-                        t={t}
-                        i18nKey="WelcomeToRoom"
-                        ns="Confirm"
-                        key={roomName}
-                      >
-                        Welcome to the <strong>{{ roomName }}</strong> room!
-                      </Trans>
-                    ) : (
-                      t("WelcomeToDocspace")
-                    )}
-                  </p>
-                  <p className="tooltiptext">
-                    {ssoExists() && !oauthDataExists()
-                      ? t("WelcomeRegisterViaSSO")
-                      : oauthDataExists()
-                        ? t("WelcomeRegisterViaSocial")
-                        : t("WelcomeRegister")}
-                  </p>
-                </div>
-              </>
-            )}
-          </GreetingContainer>
-
-          <FormWrapper>
+        <FormWrapper>
             <RegisterContainer>
-              {!emailFromLink && (
-                <>
-                  {ssoExists() && (
-                    <ButtonsWrapper>{ssoButton()}</ButtonsWrapper>
-                  )}
-
-                  {oauthDataExists() && (
-                    <>
-                      <ButtonsWrapper>{providerButtons()}</ButtonsWrapper>
-                      {providers && providers.length > 2 && (
-                        <Link
-                          isHovered
-                          type="action"
-                          fontSize="13px"
-                          fontWeight="600"
-                          color={currentColorScheme?.main?.accent}
-                          className="more-label"
-                          onClick={moreAuthOpen}
-                        >
-                          {t("Common:ShowMore")}
-                        </Link>
-                      )}
-                    </>
-                  )}
-
-                  {(oauthDataExists() || ssoExists()) && (
-                    <div className="line">
-                      <Text color="#A3A9AE" className="or-label">
-                        {t("Common:Or")}
-                      </Text>
-                    </div>
-                  )}
-                </>
-              )}
-
-              {showForm && (
-                <form className="auth-form-container">
-                  <div className="auth-form-fields">
+            <form className="auth-form-container">
+              <div className="auth-form-fields">
+                {!registrationForm && (
+                  <>
                     <FieldContainer
                       className="form-field"
                       isVertical={true}
@@ -563,7 +499,28 @@ const CreateUserForm = (props) => {
                         onKeyDown={onKeyPress}
                       />
                     </FieldContainer>
+                    <Button
+                      className="login-button"
+                      primary
+                      size="medium"
+                      scale={true}
+                      label={t("Common:ContinueButton")}
+                      tabIndex={1}
+                      isDisabled={isLoading}
+                      isLoading={isLoading}
+                      onClick={onContinue}
+                    />
+                  </>
+                )}
 
+                {registrationForm && (
+                  <div>
+                    <RegistrationFormGreeting
+                      email={email}
+                      setRegistrationForm={setRegistrationForm}
+                      type={linkData.type}
+                      emailFromLink={emailFromLink}
+                    />
                     <FieldContainer
                       className="form-field"
                       isVertical={true}
@@ -590,9 +547,9 @@ const CreateUserForm = (props) => {
                         isDisabled={isLoading}
                         onChange={onChangeFname}
                         onKeyDown={onKeyPress}
+                        isAutoFocussed
                       />
                     </FieldContainer>
-
                     <FieldContainer
                       className="form-field"
                       isVertical={true}
@@ -621,7 +578,6 @@ const CreateUserForm = (props) => {
                         onKeyDown={onKeyPress}
                       />
                     </FieldContainer>
-
                     <FieldContainer
                       className="form-field password-field"
                       isVertical={true}
@@ -675,10 +631,10 @@ const CreateUserForm = (props) => {
                       primary
                       size="medium"
                       scale={true}
-                      label={
-                        isLoading
-                          ? t("Common:LoadingProcessing")
-                          : t("LoginRegistryButton")
+                        label={
+                          isLoading
+                            ? t("Common:LoadingProcessing")
+                            : t("SignUp")
                       }
                       tabIndex={1}
                       isDisabled={isLoading}
@@ -686,54 +642,29 @@ const CreateUserForm = (props) => {
                       onClick={onSubmit}
                     />
                   </div>
-                  <div className="signin-container">
-                    <Link
-                      isHovered
-                      type="action"
-                      fontSize="13px"
-                      fontWeight="600"
-                      color={currentColorScheme?.main?.accent}
-                      className="signin-button"
-                      onClick={onSignIn}
-                    >
-                      {t("Common:LoginButton")}
-                    </Link>
-                  </div>
-                </form>
-              )}
+                )}
+              </div>
+            </form>
 
-              {!showForm && (
-                <Button
-                  className="login-button"
-                  primary
-                  size="medium"
-                  scale={true}
-                  label={
-                    isLoading
-                      ? t("Common:LoadingProcessing")
-                      : t("LoginRegistryButton")
-                  }
-                  tabIndex={1}
+            {!emailFromLink && (oauthDataExists() || ssoExists()) && (
+              <>
+                <div className="line">
+                  <Text color="#A3A9AE" className="or-label">
+                    {t("Common:orContinueWith")}
+                  </Text>
+                </div>
+                <SocialButtonsGroup
+                  providers={providers}
+                  onClick={onSocialButtonClick}
+                  t={t}
                   isDisabled={isLoading}
-                  isLoading={isLoading}
-                  onClick={onGreetingJoin}
+                  {...ssoProps}
                 />
-              )}
-
-              <MoreLoginModal
-                t={t}
-                visible={moreAuthVisible}
-                onClose={moreAuthClose}
-                providers={providers}
-                onSocialLoginClick={onSocialButtonClick}
-                ssoLabel={capabilities?.ssoLabel}
-                ssoUrl={capabilities?.ssoUrl}
-                isSignUp
-              />
-            </RegisterContainer>
-          </FormWrapper>
-        </ConfirmContainer>
-      </StyledContent>
+              </>
+            )}
+          </RegisterContainer>
+        </FormWrapper>
+      </StyledCreateUserContent>
     </StyledPage>
   );
 };
@@ -742,7 +673,6 @@ export default inject(({ settingsStore, authStore }) => {
   const { providers, thirdPartyLogin, capabilities } = authStore;
   const {
     passwordSettings,
-    greetingSettings,
     hashSettings,
     defaultPage,
     getSettings,
@@ -752,7 +682,6 @@ export default inject(({ settingsStore, authStore }) => {
   } = settingsStore;
   return {
     settings: passwordSettings,
-    greetingTitle: greetingSettings,
     hashSettings,
     defaultPage,
 

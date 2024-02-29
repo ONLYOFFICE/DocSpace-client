@@ -199,6 +199,10 @@ const PeopleTableRow = (props) => {
     standalone,
     setCurrentGroup,
     showStorageInfo,
+    typeAccountsColumnIsEnabled,
+    emailAccountsColumnIsEnabled,
+    groupAccountsColumnIsEnabled,
+    storageAccountsColumnIsEnabled,
   } = props;
 
   const {
@@ -507,14 +511,22 @@ const PeopleTableRow = (props) => {
           <Badges statusType={statusType} isPaid={isPaidUser} isSSO={isSSO} />
         </TableCell>
 
-        <TableCell className={"table-cell_type"}>{typeCell}</TableCell>
+        {typeAccountsColumnIsEnabled ? (
+          <TableCell className={"table-cell_type"}>{typeCell}</TableCell>
+        ) : (
+          <div />
+        )}
 
-        <TableCell
-          className={"table-cell_groups"}
-          onClick={(e) => e.stopPropagation()}
-        >
-          {renderGroupsCell()}
-        </TableCell>
+        {groupAccountsColumnIsEnabled ? (
+          <TableCell
+            className={"table-cell_groups"}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {renderGroupsCell()}
+          </TableCell>
+        ) : (
+          <div />
+        )}
 
         {/* <TableCell className="table-cell_room">
           {!rooms?.length ? (
@@ -557,26 +569,33 @@ const PeopleTableRow = (props) => {
           )}
         </TableCell> */}
 
-        <TableCell>
-          <Link
-            type="page"
-            title={email}
-            fontSize="13px"
-            fontWeight={600}
-            color={sideInfoColor}
-            onClick={onEmailClick}
-            isTextOverflow
-            enableUserSelect
-            dir="auto"
-          >
-            {email}
-          </Link>
-        </TableCell>
-
-        {showStorageInfo && (
-          <TableCell className={"table-cell_Storage/Quota"}>
-            <SpaceQuota hideColumns={hideColumns} item={item} type="user" />
+        {emailAccountsColumnIsEnabled ? (
+          <TableCell>
+            <Link
+              type="page"
+              title={email}
+              fontSize="13px"
+              fontWeight={600}
+              color={sideInfoColor}
+              onClick={onEmailClick}
+              isTextOverflow
+              enableUserSelect
+            >
+              {email}
+            </Link>
           </TableCell>
+        ) : (
+          <div />
+        )}
+
+        {storageAccountsColumnIsEnabled ? (
+          showStorageInfo && (
+            <TableCell className={"table-cell_Storage/Quota"}>
+              <SpaceQuota hideColumns={hideColumns} item={item} type="user" />
+            </TableCell>
+          )
+        ) : (
+          <div />
         )}
       </StyledPeopleRow>
     </StyledWrapper>

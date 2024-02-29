@@ -1,31 +1,30 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { ButtonsWrapper, LoginFormWrapper, LoginContent } from "./StyledLogin";
+import { useLocation } from "react-router-dom";
+
+import { LoginFormWrapper, LoginContent } from "./StyledLogin";
 import { Text } from "@docspace/shared/components/text";
-import { SocialButton } from "@docspace/shared/components/social-button";
-import {
-  getProviderTranslation,
-  getOAuthToken,
-  getLoginLink,
-} from "@docspace/shared/utils/common";
+import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
+import { getOAuthToken, getLoginLink } from "@docspace/shared/utils/common";
+import { Link } from "@docspace/shared/components/link";
 import { checkIsSSR } from "@docspace/shared/utils";
 import { PROVIDERS_DATA } from "@docspace/shared/constants";
-import { Link } from "@docspace/shared/components/link";
 import { Toast } from "@docspace/shared/components/toast";
 import LoginForm from "./sub-components/LoginForm";
 import RecoverAccessModalDialog from "@docspace/shared/components/recover-access-modal-dialog/RecoverAccessModalDialog";
-import MoreLoginModal from "@docspace/shared/components/more-login-modal";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import Register from "./sub-components/register-container";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-import SSOIcon from "PUBLIC_DIR/images/sso.react.svg";
+import SSOIcon from "PUBLIC_DIR/images/sso.react.svg?url";
 import { Dark, Base } from "@docspace/shared/themes";
 import { useMounted } from "../helpers/useMounted";
 import { getBgPattern, frameCallCommand } from "@docspace/shared/utils/common";
 import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 import { getLogoFromPath, getSystemTheme } from "@docspace/shared/utils";
 import { TenantStatus } from "@docspace/shared/enums";
+import GreetingContainer from "./sub-components/GreetingContainer";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 const themes = {
   Dark: Dark,
@@ -51,15 +50,38 @@ const Login: React.FC<ILoginProps> = ({
   logoUrls,
   isBaseTheme,
 }) => {
+  const location = useLocation();
+
+  const { search } = location;
   const isRestoringPortal =
     portalSettings?.tenantStatus === TenantStatus.PortalRestore;
 
   useEffect(() => {
+    if (search) {
+      const isInviteInfo = search.indexOf("loginData=");
+
+      if (isInviteInfo === -1) return;
+
+      const encodeString = search.slice(search.indexOf("=") + 1);
+
+      const decodeString = atob(encodeString);
+      const queryParams = JSON.parse(decodeString);
+
+      setInvitationLinkData(queryParams);
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+
     isRestoringPortal && window.location.replace("/preparation-portal");
   }, []);
   const [isLoading, setIsLoading] = useState(false);
-  const [moreAuthVisible, setMoreAuthVisible] = useState(false);
   const [recoverDialogVisible, setRecoverDialogVisible] = useState(false);
+  const [invitationLinkData, setInvitationLinkData] = useState({
+    email: "",
+    roomName: "",
+    firstName: "",
+    lastName: "",
+    type: "",
+  });
 
   const {
     enabledJoin,
@@ -68,7 +90,7 @@ const Login: React.FC<ILoginProps> = ({
     cookieSettingsEnabled,
   } = portalSettings || {
     enabledJoin: false,
-    greetingSettings: false,
+    greetingSettings: "",
     enableAdmMess: false,
     cookieSettingsEnabled: false,
   };
@@ -88,21 +110,6 @@ const Login: React.FC<ILoginProps> = ({
   const ssoExists = () => {
     if (ssoUrl) return true;
     else return false;
-  };
-
-  const ssoButton = () => {
-    const onClick = () => (window.location.href = ssoUrl);
-    return (
-      <div className="buttonWrapper">
-        <SocialButton
-          IconComponent={SSOIcon}
-          className="socialButton"
-          label={ssoLabel || getProviderTranslation("sso", t)}
-          onClick={onClick}
-          isDisabled={isLoading}
-        />
-      </div>
-    );
   };
 
   const oauthDataExists = () => {
@@ -165,43 +172,6 @@ const Login: React.FC<ILoginProps> = ({
     []
   );
 
-  const providerButtons = () => {
-    const providerButtons =
-      providers &&
-      providers.map((item, index) => {
-        if (!PROVIDERS_DATA[item.provider]) return;
-        if (index > 1) return;
-
-        const { icon, label, iconOptions, className } =
-          PROVIDERS_DATA[item.provider];
-
-        return (
-          <div className="buttonWrapper" key={`${item.provider}ProviderItem`}>
-            <SocialButton
-              iconName={icon}
-              label={getProviderTranslation(label, t)}
-              className={`socialButton ${className ? className : ""}`}
-              $iconOptions={iconOptions}
-              data-url={item.url}
-              data-providername={item.provider}
-              onClick={onSocialButtonClick}
-              isDisabled={isLoading}
-            />
-          </div>
-        );
-      });
-
-    return providerButtons;
-  };
-
-  const moreAuthOpen = () => {
-    setMoreAuthVisible(true);
-  };
-
-  const moreAuthClose = () => {
-    setMoreAuthVisible(false);
-  };
-
   const openRecoverDialog = () => {
     setRecoverDialogVisible(true);
   };
@@ -222,6 +192,16 @@ const Login: React.FC<ILoginProps> = ({
   if (!mounted) return <></>;
   if (isRestoringPortal) return <></>;
 
+  const ssoProps = ssoExists()
+    ? {
+        ssoUrl: ssoUrl,
+        ssoLabel: ssoLabel,
+        ssoSVG: SSOIcon,
+      }
+    : {};
+
+  const isRegisterContainerVisible = !checkIsSSR() && enabledJoin;
+
   return (
     <LoginFormWrapper
       id="login-page"
@@ -230,85 +210,89 @@ const Login: React.FC<ILoginProps> = ({
       bgPattern={bgPattern}
     >
       <div className="bg-cover"></div>
-      <LoginContent enabledJoin={enabledJoin}>
-        <ColorTheme themeId={ThemeId.LinkForgotPassword}>
-          <img src={logoUrl} className="logo-wrapper" />
-          <Text
-            fontSize="23px"
-            fontWeight={700}
-            textAlign="center"
-            className="greeting-title"
+      <Scrollbar id="customScrollBar">
+        <LoginContent enabledJoin={enabledJoin}>
+          <ColorTheme
+            themeId={ThemeId.LinkForgotPassword}
+            type={invitationLinkData.type}
+            isRegisterContainerVisible={isRegisterContainerVisible}
           >
-            {greetingSettings}
-          </Text>
-          <FormWrapper id="login-form" theme={theme}>
-            {ssoExists() && <ButtonsWrapper>{ssoButton()}</ButtonsWrapper>}
-            {oauthDataExists() && (
-              <>
-                <ButtonsWrapper>{providerButtons()}</ButtonsWrapper>
-                {providers && providers.length > 2 && (
-                  <Link
-                    isHovered
-                    type="action"
-                    fontSize="13px"
-                    fontWeight="600"
-                    color={currentColorScheme?.main?.accent}
-                    className="more-label"
-                    onClick={moreAuthOpen}
-                  >
-                    {t("Common:ShowMore")}
-                  </Link>
-                )}
-              </>
-            )}
-            {(oauthDataExists() || ssoExists()) && (
-              <div className="line">
-                <Text className="or-label">{t("Or")}</Text>
-              </div>
-            )}
-            <LoginForm
-              isBaseTheme={isBaseTheme}
-              recaptchaPublicKey={portalSettings?.recaptchaPublicKey}
-              isDesktop={!!isDesktopEditor}
-              isLoading={isLoading}
-              hashSettings={portalSettings?.passwordHash}
-              setIsLoading={setIsLoading}
-              openRecoverDialog={openRecoverDialog}
-              match={match}
-              enableAdmMess={enableAdmMess}
-              cookieSettingsEnabled={cookieSettingsEnabled}
+            <GreetingContainer
+              t={t}
+              roomName={invitationLinkData.roomName}
+              firstName={invitationLinkData.firstName}
+              lastName={invitationLinkData.lastName}
+              logoUrl={logoUrl}
+              greetingSettings={greetingSettings}
+              type={invitationLinkData.type}
             />
-          </FormWrapper>
-          <Toast />
-          <MoreLoginModal
-            visible={moreAuthVisible}
-            onClose={moreAuthClose}
-            providers={providers}
-            onSocialLoginClick={onSocialButtonClick}
-            ssoLabel={ssoLabel}
-            ssoUrl={ssoUrl}
-            t={t}
-          />
+            <FormWrapper id="login-form" theme={theme}>
+              <LoginForm
+                isBaseTheme={isBaseTheme}
+                recaptchaPublicKey={portalSettings?.recaptchaPublicKey}
+                isDesktop={!!isDesktopEditor}
+                isLoading={isLoading}
+                hashSettings={portalSettings?.passwordHash}
+                setIsLoading={setIsLoading}
+                match={match}
+                enableAdmMess={enableAdmMess}
+                cookieSettingsEnabled={cookieSettingsEnabled}
+                emailFromInvitation={invitationLinkData.email}
+              />
+              {(oauthDataExists() || ssoExists()) && (
+                <>
+                  <div className="line">
+                    <Text className="or-label">
+                      {t("Common:orContinueWith")}
+                    </Text>
+                  </div>
+                  <SocialButtonsGroup
+                    providers={providers}
+                    onClick={onSocialButtonClick}
+                    t={t}
+                    isDisabled={isLoading}
+                    {...ssoProps}
+                  />
+                </>
+              )}
 
-          <RecoverAccessModalDialog
-            visible={recoverDialogVisible}
-            onClose={closeRecoverDialog}
-            textBody={t("RecoverTextBody")}
-            emailPlaceholderText={t("RecoverContactEmailPlaceholder")}
-            id="recover-access-modal"
-          />
-        </ColorTheme>
-      </LoginContent>
+              {enableAdmMess && (
+                <Link
+                  fontWeight="600"
+                  fontSize="13px"
+                  type="action"
+                  isHovered={true}
+                  className="login-link recover-link"
+                  onClick={openRecoverDialog}
+                >
+                  {t("RecoverAccess")}
+                </Link>
+              )}
+            </FormWrapper>
+            <Toast />
 
-      {!checkIsSSR() && enabledJoin && (
-        <Register
-          id="login_register"
-          enabledJoin={enabledJoin}
-          currentColorScheme={currentColorScheme}
-          trustedDomains={portalSettings?.trustedDomains}
-          trustedDomainsType={portalSettings?.trustedDomainsType}
-        />
-      )}
+            {recoverDialogVisible && (
+              <RecoverAccessModalDialog
+                visible={recoverDialogVisible}
+                onClose={closeRecoverDialog}
+                textBody={t("RecoverTextBody")}
+                emailPlaceholderText={t("RecoverContactEmailPlaceholder")}
+                id="recover-access-modal"
+              />
+            )}
+          </ColorTheme>
+        </LoginContent>
+
+        {isRegisterContainerVisible && (
+          <Register
+            id="login_register"
+            enabledJoin={enabledJoin}
+            currentColorScheme={currentColorScheme}
+            trustedDomains={portalSettings?.trustedDomains}
+            trustedDomainsType={portalSettings?.trustedDomainsType}
+          />
+        )}
+      </Scrollbar>
     </LoginFormWrapper>
   );
 };

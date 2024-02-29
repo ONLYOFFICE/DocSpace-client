@@ -140,6 +140,8 @@ const DownloadContent = (props) => {
                 dropdownType="alwaysDashed"
                 fontSize="13px"
                 fontWeight={600}
+                isAside={true}
+                withoutBackground={true}
                 withExpander
               >
                 {titleFormat}

@@ -66,7 +66,7 @@ const SubmitToFormGallery = ({
       file,
       formItem.title,
       "en",
-      abortControllerRef.current?.signal
+      abortControllerRef.current?.signal,
     )
       .then((res) => {
         if (!res.data) throw new Error(res.statusText);
@@ -106,6 +106,8 @@ const SubmitToFormGallery = ({
       />
     );
 
+  console.log(formItem);
+
   return (
     <Styled.SubmitToGalleryDialog
       visible={visible}
@@ -139,21 +141,21 @@ const SubmitToFormGallery = ({
 
         {formItem && (
           <Styled.FormItem>
-            <ReactSVG className="icon" src={getIcon(24, formItem.exst)} />
+            <ReactSVG className="icon" src={getIcon(24, formItem.fileExst)} />
             <div className="item-title">
               {formItem?.title ? (
                 [
                   <span className="name" key="name">
                     {formItem.title}
                   </span>,
-                  formItem.exst && (
+                  formItem.fileExst && (
                     <span className="exst" key="exst">
-                      {formItem.exst}
+                      {formItem.fileExst}
                     </span>
                   ),
                 ]
               ) : (
-                <span className="name">{"" + formItem.exst}</span>
+                <span className="name">{"" + formItem.fileExst}</span>
               )}
             </div>
           </Styled.FormItem>
@@ -205,5 +207,5 @@ export default inject(
     currentColorScheme: settingsStore.currentColorScheme,
     canSubmitToFormGallery: accessRightsStore.canSubmitToFormGallery,
     submitToFormGallery: oformsStore.submitToFormGallery,
-  })
+  }),
 )(withTranslation("Common", "FormGallery")(observer(SubmitToFormGallery)));

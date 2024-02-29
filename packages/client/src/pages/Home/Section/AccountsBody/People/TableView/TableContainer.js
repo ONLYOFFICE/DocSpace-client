@@ -107,6 +107,8 @@ const Table = ({
   setCurrentGroup,
   typeAccountsColumnIsEnabled,
   emailAccountsColumnIsEnabled,
+  groupAccountsColumnIsEnabled,
+  storageAccountsColumnIsEnabled,
 }) => {
   const ref = useRef(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -160,6 +162,8 @@ const Table = ({
             setCurrentGroup={setCurrentGroup}
             typeAccountsColumnIsEnabled={typeAccountsColumnIsEnabled}
             emailAccountsColumnIsEnabled={emailAccountsColumnIsEnabled}
+            groupAccountsColumnIsEnabled={groupAccountsColumnIsEnabled}
+            storageAccountsColumnIsEnabled={storageAccountsColumnIsEnabled}
             infoPanelVisible={infoPanelVisible}
           />
         ))}
@@ -195,8 +199,12 @@ export default inject(
     const { isAdmin, isOwner, id: userId } = userStore.user;
 
     const { canChangeUserType } = accessRightsStore;
-    const { typeAccountsColumnIsEnabled, emailAccountsColumnIsEnabled } =
-      tableStore;
+    const {
+      typeAccountsColumnIsEnabled,
+      emailAccountsColumnIsEnabled,
+      groupAccountsColumnIsEnabled,
+      storageAccountsColumnIsEnabled,
+    } = tableStore;
 
     return {
       peopleList,
@@ -219,6 +227,8 @@ export default inject(
       setCurrentGroup: peopleStore.groupsStore.setCurrentGroup,
       typeAccountsColumnIsEnabled,
       emailAccountsColumnIsEnabled,
+      groupAccountsColumnIsEnabled,
+      storageAccountsColumnIsEnabled,
     };
   },
 )(observer(Table));

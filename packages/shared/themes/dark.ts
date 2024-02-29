@@ -320,13 +320,17 @@ const Dark: TTheme = {
     },
 
     svg: {
-      margin: "11px 16px",
+      margin: "11px 8px",
       width: "18px",
       height: "18px",
       minWidth: "18px",
       minHeight: "18px",
       fill: darkBlack,
     },
+  },
+
+  socialButtonsGroup: {
+    border: "1px solid #474747",
   },
 
   groupButton: {
@@ -2823,6 +2827,10 @@ const Dark: TTheme = {
     captcha: {
       border: `1px solid ${darkErrorStatus}`,
       color: darkErrorStatus,
+    },
+
+    backTitle: {
+      color: "#A3A9AE",
     },
   },
 

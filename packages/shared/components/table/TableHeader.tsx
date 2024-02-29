@@ -1305,7 +1305,7 @@ class TableHeader extends React.Component<
         tableInfoPanelContainer.forEach((item, index) => {
           const column = document.getElementById(`column_${index}`);
 
-          if (column?.dataset?.minWidth) {
+          if (column?.dataset?.minWidth && column?.dataset?.default) {
             gridTemplateColumns.push(
               `${containerWidth - defaultSize - settingsSize}px`,
             );

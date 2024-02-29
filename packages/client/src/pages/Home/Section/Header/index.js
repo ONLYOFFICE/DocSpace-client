@@ -275,8 +275,6 @@ const SectionHeaderContent = (props) => {
   const isGroupsPage =
     location.pathname.includes("/accounts/groups") && !isInsideGroup;
 
-  console.log("isGroupsPage", isGroupsPage);
-
   const isSettingsPage = location.pathname.includes("/settings");
 
   const onCreate = (format) => {

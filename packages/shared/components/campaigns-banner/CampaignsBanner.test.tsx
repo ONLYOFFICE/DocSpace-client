@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import CampaignsCloudPng from "PUBLIC_DIR/images/campaigns.cloud.png";
+import { translates, config } from "./campaign/CreateDocSpace";
 
 import { CampaignsBanner } from "./CampaignsBanner";
 
@@ -10,11 +10,11 @@ describe("<CampaignsBanner />", () => {
   it("renders without error", () => {
     render(
       <CampaignsBanner
-        headerLabel="ONLYOFFICE for business"
-        subHeaderLabel="Docs, projects, clients & emails"
-        buttonLabel="START FREE TRIAL"
-        img={CampaignsCloudPng}
-        link="https://onlyoffice.com"
+        campaignImage="" // TODO: add url on image
+        campaignTranslate={translates}
+        campaignConfig={config}
+        onClose={() => null}
+        onAction={() => null}
       />,
     );
 

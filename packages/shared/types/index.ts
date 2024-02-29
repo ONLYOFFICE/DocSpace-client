@@ -88,6 +88,11 @@ declare global {
         requestClose: boolean;
         openOnNewPage: boolean;
       };
+      firebase: {
+        fetchTimeoutMillis?: number;
+        minimumFetchIntervalMillis?: number;
+      };
+      campaigns?: string[];
     };
     AscDesktopEditor: {
       execCommand: (key: string, value: string) => void;

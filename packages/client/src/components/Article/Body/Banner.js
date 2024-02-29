@@ -1,83 +1,81 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { observer, inject } from "mobx-react";
+
 import { CampaignsBanner } from "@docspace/shared/components/campaigns-banner";
 import { ADS_TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
-import { LANGUAGE } from "@docspace/shared/constants";
-import { getLanguage } from "@docspace/shared/utils";
-import { getCookie } from "@docspace/shared/utils";
 
-const Banner = () => {
-  const [campaignImage, setCampaignImage] = useState();
-  const [campaignTranslate, setCampaignTranslate] = useState();
-
-  const campaigns = (localStorage.getItem("campaigns") || "")
-    .split(",")
-    .filter((campaign) => campaign.length > 0);
-
-  const lng = getCookie(LANGUAGE) || "en";
-  const language = getLanguage(lng instanceof Array ? lng[0] : lng);
-
-  const getImage = async (campaign) => {
-    const imageUrl = await window.firebaseHelper.getCampaignsImages(
-      campaign.toLowerCase()
-    );
-
-    return imageUrl;
+const Banner = ({
+  setSubmitToGalleryDialogVisible,
+  setClosedCampaigns,
+  getBanner,
+  campaignImage,
+  campaignTranslate,
+  campaignConfig,
+  currentCampaign,
+}) => {
+  const updateBanner = async () => {
+    await getBanner();
   };
 
-  const getTranslation = async (campaign, lng) => {
-    let translationUrl = await window.firebaseHelper.getCampaignsTranslations(
-      campaign,
-      lng
-    );
-
-    const res = await fetch(translationUrl);
-
-    if (!res.ok) {
-      translationUrl = await window.firebaseHelper.getCampaignsTranslations(
-        campaign,
-        "en"
-      );
-    }
-    return await res.json();
+  const onClose = () => {
+    setClosedCampaigns(currentCampaign);
+    updateBanner();
   };
 
-  const getBanner = async () => {
-    let index = Number(localStorage.getItem("bannerIndex") || 0);
-    const currentCampaign = campaigns[index];
-    if (campaigns.length < 1 || index + 1 >= campaigns.length) {
-      index = 0;
-    } else {
-      index++;
+  const onAction = (type, url) => {
+    switch (type) {
+      case "select-form":
+        setSubmitToGalleryDialogVisible(true);
+        break;
+      case "open-url":
+      default:
+        window.open(url, "_blank");
+        break;
     }
-
-    localStorage.setItem("bannerIndex", index);
-
-    const image = await getImage(currentCampaign);
-    const translate = await getTranslation(currentCampaign, language);
-
-    setCampaignImage(image);
-    setCampaignTranslate(translate);
   };
 
   useEffect(() => {
-    getBanner();
-    const adsInterval = setInterval(getBanner, ADS_TIMEOUT);
+    updateBanner();
+    const adsInterval = setInterval(updateBanner, ADS_TIMEOUT);
     return () => clearInterval(adsInterval);
   }, []);
 
   return (
     <>
-      {campaignImage && campaignTranslate && (
-        <CampaignsBanner
-          headerLabel={campaignTranslate.Header}
-          subHeaderLabel={campaignTranslate.SubHeader}
-          img={campaignImage}
-          buttonLabel={campaignTranslate.ButtonLabel}
-          link={campaignTranslate.Link}
-        />
-      )}
+      {campaignImage &&
+        campaignTranslate &&
+        campaignConfig &&
+        currentCampaign && (
+          <CampaignsBanner
+            campaignImage={campaignImage}
+            campaignTranslate={campaignTranslate}
+            campaignConfig={campaignConfig}
+            onAction={onAction}
+            onClose={onClose}
+          />
+        )}
     </>
   );
 };
 
-export default Banner;
+export default inject(({ dialogsStore, campaignsStore }) => {
+  const { setSubmitToGalleryDialogVisible } = dialogsStore;
+  const {
+    setClosedCampaigns,
+    getBanner,
+    campaignImage,
+    campaignTranslate,
+    campaignConfig,
+    currentCampaign,
+  } = campaignsStore;
+
+  return {
+    setSubmitToGalleryDialogVisible,
+    setClosedCampaigns,
+    getBanner,
+    campaignImage,
+    campaignTranslate,
+    campaignConfig,
+    currentCampaign,
+  };
+})(observer(Banner));

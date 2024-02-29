@@ -10,7 +10,6 @@
   "MessageEmailConfirmed": "Ваш email успешно активирован.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "Пожалуйста, введите адрес электронной почты, указанный при регистрации на портале. Инструкции для восстановления пароля будут отправлены на этот адрес электронной почты.",
   "NotFoundCode": "Не можете найти код? Проверьте папку «Спам».",
-  "Or": "ИЛИ",
   "PasswordRecoveryTitle": "Восстановление пароля",
   "RecoverAccess": "Доступ к порталу",
   "RecoverContactEmailPlaceholder": "Адрес email, по которому можно связаться с Вами",

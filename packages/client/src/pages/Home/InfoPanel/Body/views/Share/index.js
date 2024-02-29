@@ -35,6 +35,8 @@ const Share = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [loadingLinks, setLoadingLinks] = useState([]);
 
+  const [isLoadedAddLinks, setIsLoadedAddLinks] = useState(true);
+
   const hideSharePanel = isRooms || !infoPanelSelection?.canShare;
 
   useEffect(() => {
@@ -64,6 +66,10 @@ const Share = (props) => {
   };
 
   const addAdditionalLinks = async () => {
+    if (!isLoadedAddLinks) return;
+
+    setIsLoadedAddLinks(false);
+
     addLoaderLink();
     const newLink = await addFileLink(
       infoPanelSelection.id,
@@ -72,6 +78,8 @@ const Share = (props) => {
       false,
     );
     setFileLinks([...fileLinks, ...[newLink]]);
+
+    setIsLoadedAddLinks(true);
   };
 
   const addLoaderLink = () => {

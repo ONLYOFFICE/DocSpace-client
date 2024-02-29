@@ -346,13 +346,17 @@ export const getBaseTheme = () => {
       },
 
       svg: {
-        margin: "11px 16px",
+        margin: "11px 8px",
         width: "18px",
         height: "18px",
         minWidth: "18px",
         minHeight: "18px",
         fill: white,
       },
+    },
+
+    socialButtonsGroup: {
+      border: "1px solid #D0D5DA",
     },
 
     groupButton: {
@@ -2832,6 +2836,10 @@ export const getBaseTheme = () => {
       captcha: {
         border: `1px solid ${lightErrorStatus}`,
         color: lightErrorStatus,
+      },
+
+      backTitle: {
+        color: "#A3A9AE",
       },
     },
 

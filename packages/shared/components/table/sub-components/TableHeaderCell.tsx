@@ -21,7 +21,15 @@ const TableHeaderCell = ({
   sortingVisible,
   tagRef,
 }: TableHeaderCellProps) => {
-  const { title, enable, active, minWidth, withTagRef, checkbox } = column;
+  const {
+    title,
+    enable,
+    active,
+    minWidth,
+    withTagRef,
+    default: isDefault,
+    checkbox,
+  } = column;
 
   const isActive = (sortBy && column.sortBy === sortBy) || active;
 
@@ -45,6 +53,7 @@ const TableHeaderCell = ({
       showIcon={!!column.onClick}
       className="table-container_header-cell"
       id={`column_${index}`}
+      data-default={isDefault}
       data-enable={enable}
       data-min-width={minWidth}
       data-default-size={defaultSize}
@@ -84,6 +93,7 @@ const TableHeaderCell = ({
       className="table-container_header-cell"
       id={`column_${index}`}
       data-enable={enable}
+      data-default={isDefault}
       data-min-width={minWidth}
       data-default-size={defaultSize}
       sortingVisible={sortingVisible}
@@ -125,3 +135,4 @@ const TableHeaderCell = ({
 };
 
 export { TableHeaderCell };
+

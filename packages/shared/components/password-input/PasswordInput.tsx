@@ -75,6 +75,7 @@ const PasswordInput = React.forwardRef(
       isFullWidth,
       tooltipOffsetLeft,
       tooltipOffsetTop,
+      isAutoFocussed,
     }: PasswordInputProps,
     ref,
   ) => {
@@ -497,6 +498,7 @@ const PasswordInput = React.forwardRef(
             maxLength={maxLength}
             autoComplete={autoComplete}
             forwardedRef={forwardedRef}
+            isAutoFocussed={isAutoFocussed}
           />
 
           {!isDisableTooltip && !isDisabled && (
@@ -597,4 +599,3 @@ export { PasswordInput };
 // PasswordInput.displayName = "PasswordInput";
 
 // export { PasswordInput };
-

@@ -10,7 +10,6 @@
   "MessageEmailConfirmed": "이메일이 성공적으로 활성화되었습니다.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "가입에 사용하신 이메일을 입력해주세요. 해당 이메일로 비밀번호 복원 방법이 발송됩니다.",
   "NotFoundCode": "코드가 안 보이세요? «스팸» 폴더를 확인해 보세요.",
-  "Or": "또는",
   "PasswordRecoveryTitle": "비밀번호 복원",
   "RecoverAccess": "액세스 복구",
   "RecoverContactEmailPlaceholder": "연락처 이메일",

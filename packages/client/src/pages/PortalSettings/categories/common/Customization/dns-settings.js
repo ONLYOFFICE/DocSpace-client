@@ -20,6 +20,7 @@ import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { DeviceType } from "@docspace/shared/enums";
+import { validatePortalName } from "@docspace/shared/utils/common";
 
 const toggleStyle = {
   position: "static",
@@ -60,6 +61,7 @@ const DNSSettings = (props) => {
     isDefaultDNS,
     dnsSettingsUrl,
     currentDeviceType,
+    domainValidator,
   } = props;
   const [hasScroll, setHasScroll] = useState(false);
   const isLoadedSetting = isLoaded && tReady;
@@ -67,13 +69,14 @@ const DNSSettings = (props) => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState();
   const [isError, setIsError] = useState(false);
+  const [errorText, setErrorText] = useState("");
 
   useEffect(() => {
     setDocumentTitle(t("DNSSettings"));
 
     if (!isLoaded)
       initSettings(isMobileView ? "dns-settings" : "general").then(() =>
-        setIsLoaded(true)
+        setIsLoaded(true),
       );
 
     const checkScroll = checkScrollSettingsBlock();
@@ -101,26 +104,34 @@ const DNSSettings = (props) => {
     try {
       if (!dnsName?.trim()) {
         setIsError(true);
-        return;
       }
 
       timerId = setTimeout(() => {
         setIsLoading(true);
       }, [200]);
 
-      await saveDNSSettings();
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      const isValidPortalName = validatePortalName(
+        dnsName || "",
+        domainValidator,
+        setErrorText,
+        t,
+      );
+
+      if (isValidPortalName) {
+        await saveDNSSettings();
+        toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      } else {
+        setIsError(true);
+      }
     } catch (e) {
+      setIsError(true);
       toastr.error(e);
     }
 
     clearTimeout(timerId);
     timerId = null;
     setIsLoading(false);
-
-    setIsError(false);
   };
-
   const onClickToggle = (e) => {
     const checked = e.currentTarget.checked;
     setIsEnableDNS(checked);
@@ -128,6 +139,8 @@ const DNSSettings = (props) => {
 
   const onChangeTextInput = (e) => {
     const { value } = e.target;
+    isError && setIsError(false);
+    errorText && setErrorText("");
     setDNSName(value);
   };
   const checkInnerWidth = useCallback(() => {
@@ -136,7 +149,7 @@ const DNSSettings = (props) => {
 
       const currentUrl = window.location.href.replace(
         window.location.origin,
-        ""
+        "",
       );
 
       const newUrl = "/portal-settings/customization/general";
@@ -168,6 +181,11 @@ const DNSSettings = (props) => {
             onChange={onChangeTextInput}
             hasError={isError}
           />
+          <div style={{ marginTop: "5px" }}>
+            <Text fontSize="12px" fontWeight="400" color="#F24724">
+              {errorText}
+            </Text>
+          </div>
         </>
       ) : (
         <>
@@ -260,6 +278,7 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     standalone,
     dnsSettingsUrl,
     currentDeviceType,
+    domainValidator,
   } = settingsStore;
   const {
     isLoaded,
@@ -294,5 +313,6 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     saveDNSSettings,
     dnsSettingsUrl,
     currentDeviceType,
+    domainValidator,
   };
 })(withLoading(withTranslation(["Settings", "Common"])(observer(DNSSettings))));

@@ -10,7 +10,6 @@
   "MessageEmailConfirmed": "Имейлът Ви беше активиран успешно.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "Моля, въведете имейла, който използвахте при регистрацията. Инструкциите за възстановяване на паролата ще бъдат изпратени на него.",
   "NotFoundCode": "Не можете да намерите кода? Проверете папката «Спам».",
-  "Or": "ИЛИ",
   "PasswordRecoveryTitle": "Възстановяване на парола",
   "RecoverAccess": "Поднови достъп",
   "RecoverContactEmailPlaceholder": "Имейл за контакт",

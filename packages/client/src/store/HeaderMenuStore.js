@@ -87,19 +87,12 @@ class HeaderMenuStore {
   // Groups
 
   get isGroupsHeaderVisible() {
-    console.log("CALCULATE");
     const { selection } = this.peopleStore.groupsStore;
     return selection.length > 0;
   }
 
   get isGroupsHeaderIndeterminate() {
     const { selection, groups } = this.peopleStore.groupsStore;
-
-    console.log(
-      this.isGroupsHeaderVisible &&
-        !!selection.length &&
-        selection.length < groups.length,
-    );
 
     return (
       this.isGroupsHeaderVisible &&

@@ -1043,12 +1043,6 @@ const SectionHeaderContent = (props) => {
     isMobileView: currentDeviceType === DeviceType.mobile,
   };
 
-  console.log(
-    isAccountsHeaderVisible,
-    tableGroupMenuVisible,
-    headerMenu.some((x) => !x.disabled),
-  );
-
   if (isAccountsPage) {
     tableGroupMenuVisible =
       (!isGroupsPage ? isAccountsHeaderVisible : isGroupsHeaderVisible) &&
@@ -1068,8 +1062,6 @@ const SectionHeaderContent = (props) => {
     tableGroupMenuProps.isBlocked = isGroupMenuBlocked;
     tableGroupMenuProps.withoutInfoPanelToggler = isPublicRoom;
   }
-
-  console.log(tableGroupMenuProps);
 
   const stateTitle = location?.state?.title;
   const stateCanCreate = location?.state?.canCreate;

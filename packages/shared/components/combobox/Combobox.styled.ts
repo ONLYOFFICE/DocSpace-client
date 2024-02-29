@@ -10,6 +10,39 @@ import { Loader } from "../loader";
 import { ComboBoxSize } from "./Combobox.enums";
 import { TCombobox } from "./Combobox.types";
 
+// for ComboButton with plusBadge (StyledGroupsCombobox)
+const alternativeComboButtonStyles = css<{
+  isOpen?: boolean;
+  plusBadgeValue?: number;
+}>`
+  .combo-button-label {
+    color: ${({ theme, isOpen }) =>
+      theme.comboBox.label[isOpen ? "selectedColor" : "alternativeColor"]};
+  }
+
+  .combo-buttons_expander-icon {
+    path {
+      fill: ${({ theme, isOpen }) =>
+        theme.comboBox.plusBadge[
+          isOpen ? "selectedBgColor" : "bgColor"
+        ]} !important;
+    }
+  }
+
+  :hover {
+    .combo-button-label {
+      color: ${({ theme }) => theme.comboBox.label.selectedColor};
+    }
+
+    .combo-buttons_expander-icon {
+      path {
+        fill: ${({ theme }) =>
+          theme.comboBox.plusBadge.selectedBgColor} !important;
+      }
+    }
+  }
+`;
+
 const StyledComboBox = styled.div<{
   scaled?: boolean;
   size?: ComboBoxSize;
@@ -310,6 +343,8 @@ const StyledComboButton = styled.div<{
         }
       `}
   }
+
+  ${({ plusBadgeValue }) => plusBadgeValue && alternativeComboButtonStyles}
 `;
 StyledComboButton.defaultProps = { theme: Base };
 

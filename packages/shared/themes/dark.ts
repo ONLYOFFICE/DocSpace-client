@@ -1640,6 +1640,7 @@ const Dark: TTheme = {
 
       disabledColor: "#858585",
       color: "#858585",
+      alternativeColor: grayDark,
       selectedColor: white,
 
       maxWidth: "175px",

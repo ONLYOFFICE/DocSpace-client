@@ -1669,6 +1669,7 @@ export const getBaseTheme = () => {
 
         disabledColor: grayMid,
         color: black,
+        alternativeColor: gray,
         selectedColor: black,
         maxWidth: "175px",
 

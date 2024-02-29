@@ -272,7 +272,10 @@ const SectionHeaderContent = (props) => {
   const isInsideGroup = !!groupId;
 
   const isAccountsPage = location.pathname.includes("/accounts");
-  const isGroupsPage = location.pathname.includes("/accounts/groups");
+  const isGroupsPage =
+    location.pathname.includes("/accounts/groups") && !isInsideGroup;
+
+  console.log("isGroupsPage", isGroupsPage);
 
   const isSettingsPage = location.pathname.includes("/settings");
 

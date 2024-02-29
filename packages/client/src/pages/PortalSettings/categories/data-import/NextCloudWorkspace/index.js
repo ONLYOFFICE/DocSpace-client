@@ -85,9 +85,9 @@ const NextcloudWorkspace = (props) => {
           setCurrentStep(6);
         }
 
-        // if (res.parseResult.operation === "migration" && res.isCompleted) {
-        //   setCurrentStep(7);
-        // }
+        if (res.parseResult.operation === "migration" && res.isCompleted) {
+          setCurrentStep(7);
+        }
 
         setShouldRender(true);
       });

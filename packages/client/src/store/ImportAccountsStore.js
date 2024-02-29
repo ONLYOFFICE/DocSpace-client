@@ -10,6 +10,7 @@ import {
   migrationFinish,
   migrationLog,
   migrateFile,
+  migrationClear,
 } from "@docspace/shared/api/settings";
 
 class ImportAccountsStore {
@@ -330,6 +331,10 @@ class ImportAccountsStore {
 
   cancelMigration = () => {
     return migrationCancel();
+  };
+
+  clearMigration = () => {
+    return migrationClear();
   };
 
   getMigrationStatus = () => {

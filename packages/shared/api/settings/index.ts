@@ -1085,6 +1085,13 @@ export function migrationCancel() {
   });
 }
 
+export function migrationClear() {
+  return request({
+    method: "post",
+    url: `/migration/clear`,
+  });
+}
+
 export function migrationLog() {
   return axios.get("/api/2.0/migration/logs");
 }

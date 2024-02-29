@@ -48,7 +48,7 @@ const SelectUsersStep = (props) => {
 
   const goBack = () => {
     cancelMigration();
-    decrementStep();
+    setTimeout(decrementStep, 100);
   };
 
   return (

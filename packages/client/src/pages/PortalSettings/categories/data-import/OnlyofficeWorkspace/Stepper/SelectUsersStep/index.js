@@ -46,10 +46,10 @@ const SelectUsersStep = ({
     setResultUsers();
     onNextStep();
   };
-  
+
   const goBack = () => {
     cancelMigration();
-    onPrevStep();
+    setTimeout(onPrevStep, 100);
   };
 
   return (

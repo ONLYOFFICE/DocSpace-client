@@ -275,9 +275,7 @@ const ArticleBodyContent = (props) => {
           onClick={() => onSelect(item.key)}
           folderId={item.id}
           style={{
-            marginTop: `${
-              item.key.includes(7) || item.key.includes(8) ? "16px" : "0"
-            }`,
+            marginTop: `${item.key.includes(9) ? "16px" : "0"}`,
           }}
         />,
       );

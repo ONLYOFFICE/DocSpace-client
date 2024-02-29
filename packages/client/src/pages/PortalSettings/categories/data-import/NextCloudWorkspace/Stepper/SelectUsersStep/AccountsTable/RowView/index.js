@@ -117,8 +117,8 @@ const RowView = (props) => {
         <EmptyScreenContainer
           imageSrc={EmptyScreenUserReactSvgUrl}
           imageAlt="Empty Screen user image"
-          headerText={t("People:NotFoundUsers")}
-          descriptionText={t("People:NotFoundUsersDescription")}
+          headerText={t("Common:NotFoundUsers")}
+          descriptionText={t("Common:NotFoundUsersDescription")}
           buttons={
             <Box displayProp="flex" alignItems="center">
               <IconButton

@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { InputSize } from "@docspace/shared/components/text-input";
 import { SearchInput } from "@docspace/shared/components/search-input";
 import GroupMember from "./GroupMember";
+import EmptyContainer from "./EmptyContainer";
 
 interface EditGroupMembersProps {
   visible: boolean;
@@ -38,6 +39,10 @@ const EditGroupMembers = ({
   const [, startTransition] = useTransition();
 
   const onClose = () => setVisible(false);
+
+  const isSearchListEmpty =
+    filteredGroupMembers && !filteredGroupMembers.length;
+  const hasMembers = filteredGroupMembers && filteredGroupMembers.length !== 0;
 
   useEffect(() => {
     const fetchGroup = async () => {
@@ -75,7 +80,9 @@ const EditGroupMembers = ({
 
         <div style={{ height: "12px", width: "100%" }} />
 
-        {filteredGroupMembers &&
+        {isSearchListEmpty && <EmptyContainer />}
+
+        {hasMembers &&
           filteredGroupMembers.map(({ user, ...rest }) => (
             <GroupMember t={t} key={user.id} user={{ ...user, ...rest }} />
           ))}

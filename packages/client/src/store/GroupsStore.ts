@@ -357,7 +357,7 @@ class GroupsStore {
             .then(() => {
               toastr.success(t("Group was deleted successfully"));
               this.setSelection([]);
-              this.getGroups();
+              this.getGroups(this.groupsFilter, true);
             })
             .catch((err) => {
               toastr.error(err.message);

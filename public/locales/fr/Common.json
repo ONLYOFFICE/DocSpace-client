@@ -248,7 +248,7 @@
   "PayBeforeTheEndGracePeriod": "Veillez à effectuer le paiement avant l’expiration de la période de grâce.",
   "PaymentsTitle": "Paiements",
   "People": "Personnes",
-  "PerUserMonth": "<1>{{currencySymbol}}</1><1>{{price}}</1> par administrateur/utilisateur avancé /mois",
+  "PerUserMonth": "<1>{{currencySymbol}}</1><1>{{price}}</1> par administrateur/utilisateur avancé/mois",
   "Petabyte": "Po",
   "Phone": "Téléphone",
   "Plugins": "Modules complémentaires",

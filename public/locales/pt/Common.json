@@ -248,7 +248,7 @@
   "PayBeforeTheEndGracePeriod": "Certifique-se que faz o pagamento antes do período de tolerância terminar.",
   "PaymentsTitle": "Pagamentos",
   "People": "Pessoas",
-  "PerUserMonth": "<1>{{currencySymbol}}</1><1>{{price}}</1> por administrador/utilizadores com poder utilizador /mês",
+  "PerUserMonth": "<1>{{currencySymbol}}</1><1>{{price}}</1> por administrador/utilizadores com poder utilizador/mês",
   "Petabyte": "PB",
   "Phone": "Telemóvel",
   "Plugins": "Plugins",

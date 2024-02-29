@@ -21,10 +21,23 @@ export const StyledWrapper = styled.div`
   @media ${tablet} {
     max-width: 100%;
   }
+
+  @media ${mobile} {
+    background: none;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+    padding: 0;
+  }
 `;
 
 export const StyledAvatarWrapper = styled.div`
   display: flex;
+
+  @media ${mobile} {
+    width: 100%;
+    justify-content: center;
+  }
 
   .badges-wrapper {
     display: none;
@@ -56,6 +69,10 @@ export const StyledInfo = styled.div`
   flex-direction: column;
   gap: 11px;
   padding-top: 5px;
+
+  @media ${tablet} {
+    gap: 7px;
+  }
 
   .rows-container {
     display: grid;
@@ -227,43 +244,115 @@ export const StyledInfo = styled.div`
     display: flex;
   }
 
-  .mobile-profile-row {
-    background: ${(props) => props.theme.profile.main.mobileRowBackground};
-
-    .mobile-profile-field {
-      align-items: ${({ theme }) =>
-        theme.interfaceDirection === "rtl" ? `flex-start` : `baseline`};
+  @media ${mobile} {
+    .rows-container {
+      display: none;
     }
 
-    .mobile-profile-label {
-      font-size: ${(props) =>
-        props.theme.getCorrectFontSize("12px")} !important;
-    }
+    .mobile-profile-block {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      max-width: 100%;
 
-    .mobile-profile-label-field {
-      font-size: ${(props) =>
-        props.theme.getCorrectFontSize("12px")} !important;
-    }
+      .mobile-profile-row {
+        gap: 8px;
+        background: ${(props) => props.theme.profile.main.mobileRowBackground};
+        padding: 12px 16px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        line-height: 20px;
+        max-width: 100%;
 
-    .edit-button {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: auto;
-            `
-          : css`
-              margin-left: auto;
-            `}
-      min-width: 12px;
+        .mobile-profile-field {
+          display: flex;
+          align-items: ${({ theme }) =>
+            theme.interfaceDirection === "rtl" ? `flex-start` : `baseline`};
+          max-width: calc(100% - 28px);
+          flex-direction: column;
+          gap: 2px;
+        }
 
-      svg path {
-        fill: ${(props) => props.theme.isBase && `#657077`};
+        .mobile-profile-label {
+          min-width: 100%;
+          max-width: 100%;
+          font-size: ${(props) =>
+            props.theme.getCorrectFontSize("12px")} !important;
+          line-height: 16px !important;
+          white-space: nowrap;
+          color: rgb(163, 169, 174);
+        }
+
+        .mobile-profile-label-field {
+          padding-left: 0px;
+          max-width: 100%;
+          font-size: ${(props) =>
+            props.theme.getCorrectFontSize("12px")} !important;
+          line-height: 16px;
+        }
+
+        .email-container {
+          padding-left: 0px;
+
+          display: flex;
+          flex-wrap: wrap;
+          align-items: baseline;
+        }
+
+        .edit-button {
+          ${(props) =>
+            props.theme.interfaceDirection === "rtl"
+              ? css`
+                  margin-right: auto;
+                `
+              : css`
+                  margin-left: auto;
+                `}
+          min-width: 12px;
+
+          svg path {
+            fill: ${(props) => props.theme.isBase && `#657077`};
+          }
+        }
+
+        .mobile-profile-password {
+          max-width: 100%;
+          font-size: ${(props) =>
+            props.theme.getCorrectFontSize("12px")} !important;
+          line-height: 16px !important;
+        }
       }
-    }
 
-    .mobile-profile-password {
-      font-size: ${(props) =>
-        props.theme.getCorrectFontSize("12px")} !important;
+      .mobile-language {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        gap: 4px;
+
+        @media ${mobile} {
+          margin-top: 8px;
+        }
+
+        &__wrapper-combo-box {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .mobile-profile-label {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          min-width: 75px;
+          max-width: 75px;
+          white-space: nowrap;
+        }
+      }
+
+      @media ${mobile} {
+        gap: 8px;
+      }
     }
   }
 `;

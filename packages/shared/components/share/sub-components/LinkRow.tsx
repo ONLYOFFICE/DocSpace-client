@@ -121,7 +121,7 @@ const LinkRow = ({
               scaledOptions={false}
               showDisabledItems
               size={ComboBoxSize.content}
-              fillIcon
+              fillIcon={false}
               modernView
               type="onlyIcon"
               isDisabled={isExpiredLink || isLoaded}

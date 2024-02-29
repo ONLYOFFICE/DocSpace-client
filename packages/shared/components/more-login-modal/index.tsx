@@ -10,7 +10,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { getProviderTranslation } from "@docspace/shared/utils/common";
+import { getProviderLabel } from "@docspace/shared/utils/common";
 
 import { Modal, ProviderRow } from "./MoreLoginModal.styled";
 import type {
@@ -27,7 +27,6 @@ const MoreLoginModal: React.FC<MoreLoginModalProps> = (props) => {
     onSocialLoginClick,
     ssoLabel,
     ssoUrl,
-    isSignUp,
   } = props;
 
   return (
@@ -36,7 +35,7 @@ const MoreLoginModal: React.FC<MoreLoginModalProps> = (props) => {
       onClose={onClose}
       displayType={ModalDialogType.aside}
     >
-      <ModalDialog.Header>{t("Common:Authorization")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:ContinueWith")}</ModalDialog.Header>
       <ModalDialog.Body>
         {ssoUrl && (
           <ProviderRow key="ProviderItemSSO">
@@ -47,7 +46,7 @@ const MoreLoginModal: React.FC<MoreLoginModalProps> = (props) => {
               className="provider-name"
               noSelect
             >
-              {ssoLabel || getProviderTranslation("sso", t, false, isSignUp)}
+              {ssoLabel || getProviderLabel("sso-full", t)}
             </Text>
             <Button
               label={t("Common:LoginButton")}
@@ -72,7 +71,7 @@ const MoreLoginModal: React.FC<MoreLoginModalProps> = (props) => {
                 className="provider-name"
                 noSelect
               >
-                {getProviderTranslation(label, t, false, isSignUp)}
+                {getProviderLabel(label, t)}
               </Text>
               <Button
                 label={t("Common:LoginButton")}

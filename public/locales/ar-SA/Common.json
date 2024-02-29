@@ -248,7 +248,7 @@
   "PayBeforeTheEndGracePeriod": "تأكد من إجراء الدفع قبل فترة السماح.",
   "PaymentsTitle": "المدفوعات",
   "People": "الأشخاص",
-  "PerUserMonth": "<1>{{currencySymbol}}</1><1>{{price}}</1> لكل مشرف/قوة المستخدم / شهر",
+  "PerUserMonth": "<1>{{currencySymbol}}</1><1>{{price}}</1> لكل مشرف/قوة المستخدم /شهر",
   "Petabyte": "بيتابايت",
   "Phone": "هاتف",
   "Plugins": "الإضافات",

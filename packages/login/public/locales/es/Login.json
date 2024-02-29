@@ -10,7 +10,6 @@
   "MessageEmailConfirmed": "Su email se ha activado correctamente.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "Por favor, introduzca el email que ha utilizado para registrarse. Se le enviarán las instrucciones para recuperar la contraseña.",
   "NotFoundCode": "¿No encuentra el código? Compruebe su carpeta de correo no deseado.",
-  "Or": "O",
   "PasswordRecoveryTitle": "Recuperación de contraseña",
   "RecoverAccess": "Recuperar acceso",
   "RecoverContactEmailPlaceholder": "E-mail de contacto",

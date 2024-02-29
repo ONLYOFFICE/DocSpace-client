@@ -10,7 +10,6 @@
   "MessageEmailConfirmed": "ອິເມວ ຂອງທ່ານຖືກລົງທະບຽນສຳເລັດ",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "ກະລຸນາໃສ່ອີເມວທີ່ທ່ານໃຊ້ ສຳລັບການລົງທະບຽນ.  ໃນການກູ້ຂໍ້ມູນບັນຊີ, ລະຫັດຜ່ານຈະຖືກສົ່ງໄປຫາທ່ານຜ່ານທາງ ອິເມວ.",
   "NotFoundCode": "ບໍ່ສາມາດຊອກຫາລະຫັດໄດ້ບໍ? ກວດເບິ່ງໂຟນເດີ «Spam» ຂອງທ່ານ.",
-  "Or": "ຫຼື",
   "PasswordRecoveryTitle": "ກູ້ຄືນລະຫັດຜ່ານ",
   "RecoverAccess": "ກູ້ຄືນການເຂົ້າເຖິງ",
   "RecoverContactEmailPlaceholder": "ອີເມວຕິດຕໍ່",

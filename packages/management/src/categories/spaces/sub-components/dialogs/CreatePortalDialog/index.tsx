@@ -9,7 +9,7 @@ import { observer } from "mobx-react";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { useStore } from "SRC_DIR/store";
-import { validatePortalName } from "SRC_DIR/utils";
+import { validatePortalName } from "@docspace/shared/utils/common";
 
 const StyledModal = styled(ModalDialogContainer)`
   #modal-dialog {

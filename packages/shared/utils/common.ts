@@ -112,6 +112,33 @@ export const getUserTypeLabel = (
   }
 };
 
+export const validatePortalName = (
+  value: string,
+  nameValidator: { minLength: number; maxLength: number; regex: RegExp },
+  setError: Function,
+  t: (key: string) => string,
+) => {
+  const validName = new RegExp(nameValidator.regex);
+  switch (true) {
+    case value === "":
+      return setError(t("Settings:PortalNameEmpty"));
+    case value.length < nameValidator.minLength ||
+      value.length > nameValidator.maxLength:
+      return setError(
+        t("Settings:PortalNameLength", {
+          minLength: nameValidator.minLength,
+          maxLength: nameValidator.maxLength,
+        }),
+      );
+    case !validName.test(value):
+      return setError(t("Settings:PortalNameIncorrect"));
+
+    default:
+      setError(null);
+  }
+  return validName.test(value);
+};
+
 export const getShowText = () => {
   const showArticle = localStorage.getItem("showArticle");
 
@@ -301,7 +328,30 @@ export function getProviderTranslation(
       return "";
   }
 }
-
+export function getProviderLabel(provider: string, t: (key: string) => string) {
+  switch (provider) {
+    case "apple":
+      return t("Common:ProviderApple");
+    case "google":
+      return t("Common:ProviderGoogle");
+    case "facebook":
+      return t("Common:ProviderFacebook");
+    case "twitter":
+      return t("Common:ProviderTwitter");
+    case "linkedin":
+      return t("Common:ProviderLinkedIn");
+    case "microsoft":
+      return t("Common:ProviderMicrosoft");
+    case "sso":
+      return t("Common:ProviderSso");
+    case "zoom":
+      return t("Common:ProviderZoom");
+    case "sso-full":
+      return t("Common:ProviderSsoSetting");
+    default:
+      return "";
+  }
+}
 export const isLanguageRtl = (lng: string) => {
   if (!lng) return;
 

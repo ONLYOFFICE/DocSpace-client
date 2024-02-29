@@ -31,7 +31,7 @@ class ImportAccountsStore {
   UserTypes = {
     DocSpaceAdmin: "DocSpaceAdmin",
     RoomAdmin: "RoomAdmin",
-    User: "User",
+    User: "Collaborator",
   };
 
   isFileLoading = false;

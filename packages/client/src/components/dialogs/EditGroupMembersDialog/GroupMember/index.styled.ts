@@ -44,7 +44,7 @@ export const GroupMember = styled.div<{ isExpect: boolean }>`
   }
 
   .individual-rights-tooltip {
-    margin-left: auto;
+    margin-inline-start: auto;
   }
 
   .role-wrapper {

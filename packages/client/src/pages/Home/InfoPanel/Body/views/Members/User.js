@@ -36,10 +36,9 @@ const User = ({
   setInfoPanelMembers,
   searchValue,
   resendEmailInvitations,
-  setEditMembersGroupId,
+  setEditMembersGroup,
   setEditGroupMembersDialogVisible,
 }) => {
-  console.log(user);
   if (!infoPanelSelection) return null;
   if (!user.displayName && !user.name && !user.email) return null;
 
@@ -58,7 +57,6 @@ const User = ({
   );
 
   const userRole = membersHelper.getOptionByUserAccess(user.access, user);
-  console.log("userRole", userRole);
   const userRoleOptions = user.isGroup
     ? filterGroupRoleOptions(fullRoomRoleOptions)
     : filterUserRoleOptions(fullRoomRoleOptions, user);
@@ -239,8 +237,8 @@ const User = ({
     </div>
   );
 
-  const onOpenGroup = (groupId) => {
-    setEditMembersGroupId(groupId);
+  const onOpenGroup = (group) => {
+    setEditMembersGroup(group);
     setEditGroupMembersDialogVisible(true);
   };
 
@@ -292,7 +290,7 @@ const User = ({
             <Link
               className="name"
               type="action"
-              onClick={() => onOpenGroup(user.id)}
+              onClick={() => onOpenGroup(user)}
             >
               {decode(user.name)}
             </Link>
@@ -382,7 +380,7 @@ export default inject(
 
     const { changeType: changeUserType } = peopleStore;
 
-    const { setEditMembersGroupId, setEditGroupMembersDialogVisible } =
+    const { setEditMembersGroup, setEditGroupMembersDialogVisible } =
       dialogsStore;
 
     return {
@@ -397,7 +395,7 @@ export default inject(
       setInfoPanelMembers,
       fetchMembers,
       searchValue,
-      setEditMembersGroupId,
+      setEditMembersGroup,
       setEditGroupMembersDialogVisible,
     };
   },

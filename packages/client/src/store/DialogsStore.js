@@ -79,7 +79,7 @@ class DialogsStore {
   leaveRoomDialogVisible = false;
   changeRoomOwnerIsVisible = false;
   changeRoomOwnerData = null;
-  editMembersGroupId = null;
+  editMembersGroup = null;
 
   shareFolderDialogVisible = false;
 
@@ -290,8 +290,8 @@ class DialogsStore {
     this.editGroupMembersDialogVisible = editGroupMembersDialogVisible;
   };
 
-  setEditMembersGroupId = (editMembersGroupId) => {
-    this.editMembersGroupId = editMembersGroupId;
+  setEditMembersGroup = (editMembersGroup) => {
+    this.editMembersGroup = editMembersGroup;
   };
 
   setConflictResolveDialogVisible = (conflictResolveDialogVisible) => {

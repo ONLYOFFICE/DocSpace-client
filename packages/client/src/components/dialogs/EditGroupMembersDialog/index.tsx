@@ -5,27 +5,25 @@ import {
 import { observer, inject } from "mobx-react";
 import { useState, useEffect, useTransition } from "react";
 import { getGroupMembersInRoom } from "@docspace/shared/api/groups";
-import User from "SRC_DIR/pages/Home/InfoPanel/Body/views/Members/User";
-import MembersHelper from "SRC_DIR/pages/Home/InfoPanel/Body/helpers/MembersHelper";
 import { useTranslation } from "react-i18next";
 import { InputSize } from "@docspace/shared/components/text-input";
 import { SearchInput } from "@docspace/shared/components/search-input";
+import GroupMember from "./GroupMember";
 
 interface EditGroupMembersProps {
-  selfId: string;
   visible: boolean;
   setVisible: (visible: boolean) => void;
+  group: any;
+  infoPanelSelection: any;
 }
 
 const EditGroupMembers = ({
   infoPanelSelection,
-  selfId,
-  groupId,
+  group,
   visible,
   setVisible,
 }: EditGroupMembersProps) => {
   const { t } = useTranslation(["Common"]);
-  const membersHelper = new MembersHelper({ t });
 
   const [searchValue, setSearchValue] = useState<string>("");
   const onChangeSearchValue = (newValue: string) => {
@@ -37,27 +35,20 @@ const EditGroupMembers = ({
   const filteredGroupMembers = groupMembers?.filter((groupMember) =>
     groupMember.user.displayName.includes(searchValue),
   );
-  const [isLoading, setIsLoading] = useState(false);
   const [, startTransition] = useTransition();
 
   const onClose = () => setVisible(false);
 
   useEffect(() => {
     const fetchGroup = async () => {
-      if (!groupId) return;
-      setIsLoading(true);
+      if (!group) return;
 
-      console.log("infoPanelSelection", infoPanelSelection);
-      getGroupMembersInRoom(infoPanelSelection.id, groupId)!
-        .then((data: any) => {
-          startTransition(() => setGroupMembers(data.items));
-          console.log(data);
-        })
-        .catch((err: any) => console.error(err))
-        .finally(() => setIsLoading(false));
+      getGroupMembersInRoom(infoPanelSelection.id, group.id)!
+        .then((data: any) => startTransition(() => setGroupMembers(data.items)))
+        .catch((err: any) => console.error(err));
     };
     fetchGroup();
-  }, [groupId]);
+  }, [group, infoPanelSelection.id]);
 
   return (
     <ModalDialog
@@ -65,13 +56,13 @@ const EditGroupMembers = ({
       onClose={onClose}
       displayType={ModalDialogType.aside}
     >
-      <ModalDialog.Header>EditGroupMembers</ModalDialog.Header>
+      <ModalDialog.Header>{group.name}</ModalDialog.Header>
 
       <ModalDialog.Body>
         <SearchInput
           className="search-input"
-          placeholder={"Search by group members"}
-          value={""}
+          placeholder={t("Search by group members")}
+          value={searchValue}
           onChange={onChangeSearchValue}
           onClearSearch={onClearSearch}
           size={InputSize.base}
@@ -80,16 +71,8 @@ const EditGroupMembers = ({
         <div style={{ height: "12px", width: "100%" }} />
 
         {filteredGroupMembers &&
-          filteredGroupMembers.map(({ user, groupAccess, canEditAccess }) => (
-            <div key={user.id} style={{ paddingRight: "12px" }}>
-              <User
-                t={t}
-                key={user.id}
-                user={{ ...user, access: groupAccess, canEditAccess }}
-                membersHelper={membersHelper}
-                currentMember={{ id: selfId }}
-              />
-            </div>
+          filteredGroupMembers.map(({ user, ...rest }) => (
+            <GroupMember t={t} key={user.id} user={{ ...user, ...rest }} />
           ))}
       </ModalDialog.Body>
     </ModalDialog>
@@ -99,7 +82,7 @@ const EditGroupMembers = ({
 export default inject(({ infoPanelStore, userStore, dialogsStore }) => ({
   infoPanelSelection: infoPanelStore.infoPanelSelection,
   selfId: userStore.user.id,
-  groupId: dialogsStore.editMembersGroupId,
+  group: dialogsStore.editMembersGroup,
   visible: dialogsStore.editGroupMembersDialogVisible,
   setVisible: dialogsStore.setEditGroupMembersDialogVisible,
 }))(observer(EditGroupMembers));

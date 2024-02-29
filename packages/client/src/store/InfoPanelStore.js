@@ -657,14 +657,13 @@ class InfoPanelStore {
   ) => {
     const { getFileInfo } = this.filesStore;
 
-    const expDate = moment(expirationDate);
     const res = await editExternalLink(
       fileId,
       linkId,
       access,
       primary,
       internal,
-      expDate,
+      expirationDate,
     );
     await getFileInfo(fileId);
     return res;

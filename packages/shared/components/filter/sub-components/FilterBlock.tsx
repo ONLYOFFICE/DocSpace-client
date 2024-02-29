@@ -11,7 +11,7 @@ import { FilterBlockLoader } from "../../../skeletons/filter";
 
 import { Backdrop } from "../../backdrop";
 import { Button, ButtonSize } from "../../button";
-import { Heading, HeadingSize } from "../../heading";
+import { Heading, HeadingLevel, HeadingSize } from "../../heading";
 import { IconButton } from "../../icon-button";
 import { Scrollbar } from "../../scrollbar";
 import { Portal } from "../../portal";
@@ -504,7 +504,9 @@ const FilterBlock = ({
       ) : (
         <StyledFilterBlock showFooter={showFooter}>
           <StyledFilterBlockHeader>
-            <Heading size={HeadingSize.medium}>{filterHeader}</Heading>
+            <Heading size={HeadingSize.medium} level={HeadingLevel.h1}>
+              {filterHeader}
+            </Heading>
             {showFooter && (
               <IconButton
                 id="filter_search-options-clear"

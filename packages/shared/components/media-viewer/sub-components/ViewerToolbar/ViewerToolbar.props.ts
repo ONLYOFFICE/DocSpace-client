@@ -1,5 +1,5 @@
 import type { Dispatch, SetStateAction } from "react";
-import type { getCustomToolbar } from "../../MediaViewer.helper";
+import type { getCustomToolbar } from "../../MediaViewer.helpers";
 
 interface ImageViewerToolbarProps {
   toolbar: ReturnType<typeof getCustomToolbar>;

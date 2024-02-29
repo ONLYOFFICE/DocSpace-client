@@ -81,7 +81,7 @@ const RowLoader = ({
         className={className}
         style={style}
         isUser={isUser}
-        key={key}
+        key={`selector-row-${key}`}
         {...rest}
       >
         <RectangleSkeleton className="avatar" width="32px" height="32px" />
@@ -103,7 +103,13 @@ const RowLoader = ({
   };
 
   return isContainer ? (
-    <StyledContainer id={id} className={className} style={style} {...rest}>
+    <StyledContainer
+      id={id}
+      className={className}
+      key="test"
+      style={style}
+      {...rest}
+    >
       {withAllSelect && (
         <>
           {getRowItem(-1)}

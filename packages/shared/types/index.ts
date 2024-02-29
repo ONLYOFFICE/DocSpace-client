@@ -13,7 +13,10 @@ export type TDirectionY = "bottom" | "top" | "both";
 
 export type TViewAs = "tile" | "table" | "row" | "settings" | "profile";
 
-export type TTranslation = (key: string, prop?: unknown) => string;
+export type TTranslation = (
+  key: string,
+  params?: { [key: string]: string | string[] },
+) => string;
 
 export type Nullable<T> = T | null;
 
@@ -47,7 +50,7 @@ export type TI18n = {
 };
 
 declare module "styled-components" {
-  export interface DefaultTheme extends TTheme { }
+  export interface DefaultTheme extends TTheme {}
 }
 declare global {
   interface Window {
@@ -81,6 +84,10 @@ declare global {
         url?: string;
       };
       imageThumbnails?: boolean;
+      editor?: {
+        requestClose: boolean;
+        openOnNewPage: boolean;
+      };
       firebase: {
         fetchTimeoutMillis?: number;
         minimumFetchIntervalMillis?: number;
@@ -97,7 +104,7 @@ declare global {
     };
     cloudCryptoCommand: (
       type: string,
-      params: string[],
+      params: { [key: string]: string | boolean },
       callback: (obj?: {}) => void,
     ) => void;
     onSystemMessage: (e: {

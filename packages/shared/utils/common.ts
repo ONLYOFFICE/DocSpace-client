@@ -456,7 +456,7 @@ export function isElementInViewport(el: HTMLElement) {
     rect.top >= 0 &&
     rect.left >= 0 &&
     rect.bottom <=
-    (window.innerHeight || document.documentElement.clientHeight) &&
+      (window.innerHeight || document.documentElement.clientHeight) &&
     rect.right <= (window.innerWidth || document.documentElement.clientWidth)
   );
 }
@@ -530,7 +530,10 @@ export const frameCallEvent = (eventReturnData: unknown) => {
   );
 };
 
-export const frameCallCommand = (commandName: string, commandData: unknown) => {
+export const frameCallCommand = (
+  commandName: string,
+  commandData?: unknown,
+) => {
   window.parent.postMessage(
     JSON.stringify({
       type: "onCallCommand",
@@ -858,25 +861,29 @@ export const RoomsTypes = RoomsTypeValues.reduce<Record<number, number>>(
 );
 
 export const getSystemTheme = () => {
-  const isDesktopClient = window.AscDesktopEditor !== undefined;
-  const desktopClientTheme = window?.RendererProcessVariable?.theme;
-  const isDark =
-    desktopClientTheme?.id === "theme-dark" ||
-    desktopClientTheme?.id === "theme-contrast-dark" ||
-    (desktopClientTheme?.id === "theme-system" &&
-      desktopClientTheme?.system === "dark");
+  if (typeof window !== "undefined") {
+    const isDesktopClient = window?.AscDesktopEditor !== undefined;
+    const desktopClientTheme = window?.RendererProcessVariable?.theme;
+    const isDark =
+      desktopClientTheme?.id === "theme-dark" ||
+      desktopClientTheme?.id === "theme-contrast-dark" ||
+      (desktopClientTheme?.id === "theme-system" &&
+        desktopClientTheme?.system === "dark");
 
-  return isDesktopClient
-    ? isDark
-      ? ThemeKeys.DarkStr
-      : ThemeKeys.BaseStr
-    : window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? ThemeKeys.DarkStr
-      : ThemeKeys.BaseStr;
+    return isDesktopClient
+      ? isDark
+        ? ThemeKeys.DarkStr
+        : ThemeKeys.BaseStr
+      : window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? ThemeKeys.DarkStr
+        : ThemeKeys.BaseStr;
+  }
+
+  return ThemeKeys.BaseStr;
 };
 
-export const getEditorTheme = (theme: ThemeKeys) => {
+export const getEditorTheme = (theme?: ThemeKeys) => {
   switch (theme) {
     case ThemeKeys.BaseStr:
       return "default-light";

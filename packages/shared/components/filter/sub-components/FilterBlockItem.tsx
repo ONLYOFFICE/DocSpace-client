@@ -5,7 +5,7 @@ import XIcon from "PUBLIC_DIR/images/x.react.svg";
 import { FilterGroups, FilterKeys, FilterSelectorTypes } from "../../../enums";
 
 import { SelectorAddButton } from "../../selector-add-button";
-import { Heading, HeadingSize } from "../../heading";
+import { Heading, HeadingLevel, HeadingSize } from "../../heading";
 import { ComboBox } from "../../combobox";
 import { Checkbox } from "../../checkbox";
 import { ColorTheme, ThemeId } from "../../color-theme";
@@ -268,7 +268,9 @@ const FilterBlockItem = ({
     <StyledFilterBlockItem isFirst={isFirst} withoutHeader={withoutHeader}>
       {!withoutHeader && (
         <StyledFilterBlockItemHeader>
-          <Heading size={HeadingSize.xsmall}>{label}</Heading>
+          <Heading size={HeadingSize.xsmall} level={HeadingLevel.h1}>
+            {label}
+          </Heading>
         </StyledFilterBlockItemHeader>
       )}
 

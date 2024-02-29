@@ -1,46 +1,28 @@
 import React from "react";
 import { TFilesSettings } from "../../../api/files/types";
-import { getSettingsFiles } from "../../../api/files";
+
 import { presentInArray } from "../../../utils";
 import { iconSize32 } from "../../../utils/image-helpers";
 import { HTML_EXST } from "../../../constants";
 
 const useFilesSettings = (
   getIconProp?: (size: number, fileExst: string) => string,
+  settings?: TFilesSettings,
 ) => {
-  const [settings, setSettings] = React.useState({} as TFilesSettings);
-
-  const requestRunning = React.useRef(false);
-
-  const initSettings = React.useCallback(async () => {
-    if (requestRunning.current) return;
-
-    requestRunning.current = true;
-    if (getIconProp) return;
-    const res = await getSettingsFiles();
-
-    setSettings(res);
-    requestRunning.current = false;
-  }, [getIconProp]);
-
-  React.useEffect(() => {
-    if (settings.extsArchive) return;
-    initSettings();
-  }, [initSettings, settings.extsArchive]);
-
   const isArchive = React.useCallback(
-    (extension: string) => presentInArray(settings.extsArchive, extension),
-    [settings.extsArchive],
+    (extension: string) =>
+      presentInArray(settings?.extsArchive ?? [], extension),
+    [settings?.extsArchive],
   );
 
   const isImage = React.useCallback(
-    (extension: string) => presentInArray(settings.extsImage, extension),
-    [settings.extsImage],
+    (extension: string) => presentInArray(settings?.extsImage ?? [], extension),
+    [settings?.extsImage],
   );
 
   const isSound = React.useCallback(
-    (extension: string) => presentInArray(settings.extsAudio, extension),
-    [settings.extsAudio],
+    (extension: string) => presentInArray(settings?.extsAudio ?? [], extension),
+    [settings?.extsAudio],
   );
 
   const isHtml = React.useCallback(
@@ -51,6 +33,8 @@ const useFilesSettings = (
   const getIcon = React.useCallback(
     (fileExst: string) => {
       if (getIconProp) return getIconProp(32, fileExst);
+
+      if (!settings) return "";
 
       const isArchiveItem = isArchive(fileExst);
       const isImageItem = isImage(fileExst);
@@ -244,7 +228,7 @@ const useFilesSettings = (
 
       return iconSize32.get(path) ?? "";
     },
-    [getIconProp, isArchive, isHtml, isImage, isSound],
+    [getIconProp, isArchive, isHtml, isImage, isSound, settings],
   );
 
   return { getIcon };

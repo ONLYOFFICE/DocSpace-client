@@ -14,17 +14,17 @@ const AccountsTable = ({
 }) => {
   const typeOptions = [
     {
-      key: "DocSpaceAdmin",
+      key: UserTypes.DocSpaceAdmin,
       label: t("Common:DocSpaceAdmin"),
       onClick: () => changeGroupType(UserTypes.DocSpaceAdmin),
     },
     {
-      key: "RoomAdmin",
+      key: UserTypes.RoomAdmin,
       label: t("Common:RoomAdmin"),
       onClick: () => changeGroupType(UserTypes.RoomAdmin),
     },
     {
-      key: "User",
+      key: UserTypes.User,
       label: t("Common:PowerUser"),
       onClick: () => changeGroupType(UserTypes.User),
     },

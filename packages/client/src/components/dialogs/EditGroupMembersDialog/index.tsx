@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { InputSize } from "@docspace/shared/components/text-input";
 import { SearchInput } from "@docspace/shared/components/search-input";
 import GroupMember from "./GroupMember";
+import EmptyContainer from "./EmptyContainer";
 
 interface EditGroupMembersProps {
   visible: boolean;
@@ -70,10 +71,13 @@ const EditGroupMembers = ({
 
         <div style={{ height: "12px", width: "100%" }} />
 
-        {filteredGroupMembers &&
+        {filteredGroupMembers?.length ? (
           filteredGroupMembers.map(({ user, ...rest }) => (
             <GroupMember t={t} key={user.id} user={{ ...user, ...rest }} />
-          ))}
+          ))
+        ) : (
+          <EmptyContainer />
+        )}
       </ModalDialog.Body>
     </ModalDialog>
   );

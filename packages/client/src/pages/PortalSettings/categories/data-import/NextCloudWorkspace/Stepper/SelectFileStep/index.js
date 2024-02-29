@@ -111,7 +111,8 @@ const SelectFileStep = ({
     uploadInterval.current = setInterval(async () => {
       const res = await getMigrationStatus();
 
-      if (!res || res.parseResult.failedArchives.length > 0) {
+      if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
+        toastr.error(res.error);
         setIsFileError(true);
         setIsFileLoading(false);
         clearInterval(uploadInterval.current);
@@ -194,7 +195,8 @@ const SelectFileStep = ({
         uploadInterval.current = setInterval(async () => {
           const res = await getMigrationStatus();
 
-          if (!res || res.parseResult.failedArchives.length > 0) {
+          if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
+            toastr.error(res.error);
             setIsFileError(true);
             setIsFileLoading(false);
             clearInterval(uploadInterval.current);

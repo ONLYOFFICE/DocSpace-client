@@ -53,7 +53,7 @@ const SelectUsersStep = ({
 
   const goBack = () => {
     cancelMigration();
-    onPrevStep();
+    setTimeout(onPrevStep, 100);
   };
 
   return (

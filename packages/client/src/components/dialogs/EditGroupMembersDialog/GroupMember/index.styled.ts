@@ -43,18 +43,11 @@ export const GroupMember = styled.div<{ isExpect: boolean }>`
     margin-inline-start: -8px;
   }
 
-  .role-wrapper {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-right: 8px;
-            margin-right: auto;
-          `
-        : css`
-            padding-left: 8px;
-            margin-left: auto;
-          `}
+  .individual-rights-tooltip {
+    margin-left: auto;
+  }
 
+  .role-wrapper {
     font-weight: 600;
     font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     line-height: 20px;
@@ -66,22 +59,9 @@ export const GroupMember = styled.div<{ isExpect: boolean }>`
 
       margin-inline-end: 16px;
     }
-  }
 
-  .role-view_remove-icon {
-    cursor: pointer;
-    svg {
-      path {
-        fill: ${(props) => props.theme.iconButton.color};
-      }
-    }
-
-    :hover {
-      svg {
-        path {
-          fill: ${(props) => props.theme.iconButton.hoverColor};
-        }
-      }
+    .combo-button {
+      padding: 0 8px;
     }
   }
 `;

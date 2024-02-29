@@ -50,6 +50,11 @@ const EditGroupMembers = ({
     fetchGroup();
   }, [group, infoPanelSelection.id]);
 
+  if (!infoPanelSelection?.isRoom) {
+    onClose();
+    return;
+  }
+
   return (
     <ModalDialog
       visible={visible}

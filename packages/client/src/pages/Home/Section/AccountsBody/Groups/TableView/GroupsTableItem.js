@@ -125,7 +125,7 @@ const GroupsTableItem = ({
 
         <TableCell className={"table-container_group-manager"}>
           <Text
-            title={item.manager.displayName}
+            title={item.manager?.displayName}
             fontWeight="600"
             fontSize="13px"
             isTextOverflow
@@ -133,7 +133,7 @@ const GroupsTableItem = ({
             color={"#A3A9AE"}
             dir="auto"
           >
-            {item.manager.displayName}
+            {item.manager?.displayName}
           </Text>
         </TableCell>
       </Styled.GroupsRow>

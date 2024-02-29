@@ -11,6 +11,10 @@ import { Text } from "@docspace/shared/components/text";
 import * as Styled from "./index.styled";
 import { getUserRoleOptionsByUserAccess } from "@docspace/shared/utils/room-members/getUserRoleOptionsByUserAccess";
 import { getUserRoleOptionsByRoomType } from "@docspace/shared/utils/room-members/getUserRoleOptionsByRoomType";
+import { updateRoomMemberRole } from "@docspace/shared/api/rooms";
+import { toastr } from "@docspace/shared/components/toast";
+import { useState } from "react";
+import { HelpButton } from "@docspace/shared/components/help-button";
 
 interface GroupMemberProps {
   t: any;
@@ -19,12 +23,12 @@ interface GroupMemberProps {
 }
 
 const GroupMember = ({ t, user, infoPanelSelection }: GroupMemberProps) => {
-  const { roomType } = infoPanelSelection;
+  const [isLoading, setIsLoading] = useState(false);
 
   const fullRoomRoleOptions = getUserRoleOptionsByRoomType(
     t,
-    roomType,
-    user.canEditAccess,
+    infoPanelSelection.roomType,
+    false,
   );
   const selectedUserRoleCBOption = getUserRoleOptionsByUserAccess(
     t,
@@ -43,6 +47,18 @@ const GroupMember = ({ t, user, infoPanelSelection }: GroupMemberProps) => {
     fullRoomRoleOptions,
   );
 
+  const onChangeRole = async (userRoleOption) => {
+    setIsLoading(true);
+    updateRoomMemberRole(infoPanelSelection.id, {
+      invitations: [{ id: user.id, access: userRoleOption.access }],
+      notify: false,
+      sharingMessage: "",
+    })
+      .then(() => (user.userAccess = userRoleOption.access))
+      .catch((err) => toastr.error(err))
+      .finally(() => setIsLoading(false));
+  };
+
   return (
     <Styled.GroupMember isExpect={user.isExpect} key={user.id}>
       <Avatar
@@ -57,10 +73,6 @@ const GroupMember = ({ t, user, infoPanelSelection }: GroupMemberProps) => {
               ? user.avatar
               : DefaultUserPhotoUrl
         }
-        //
-        tooltipContent={undefined}
-        hideRoleIcon={false}
-        withTooltip={false}
       />
 
       <div className="user_body-wrapper">
@@ -72,6 +84,20 @@ const GroupMember = ({ t, user, infoPanelSelection }: GroupMemberProps) => {
             {decode(user.displayName)}
           </Text>
         </div>
+      </div>
+
+      <div className="individual-rights-tooltip">
+        {user.userAccess && user.userAccess !== user.groupAccess && (
+          <HelpButton
+            place="left"
+            offsetRight={0}
+            tooltipContent={
+              <Text fontSize="12px" fontWeight={600}>
+                {t("Individual rights in room")}
+              </Text>
+            }
+          />
+        )}
       </div>
 
       {selectedUserRoleCBOption && availableUserRoleCBOptions && (
@@ -90,10 +116,8 @@ const GroupMember = ({ t, user, infoPanelSelection }: GroupMemberProps) => {
               isMobileView={isMobileOnly}
               directionY="both"
               displaySelectedOption
-              //
-              onSelect={() => {}}
-              isLoading={false}
-              onToggle={() => {}}
+              onSelect={onChangeRole}
+              isLoading={isLoading}
             />
           ) : (
             <div className="disabled-role-combobox" title={t("Common:Role")}>

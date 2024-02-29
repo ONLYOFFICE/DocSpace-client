@@ -24,13 +24,7 @@ import BackgroundPatternPurpleReactSvgUrl from "PUBLIC_DIR/images/background.pat
 import BackgroundPatternLightBlueReactSvgUrl from "PUBLIC_DIR/images/background.pattern.lightBlue.react.svg?url";
 import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.pattern.black.react.svg?url";
 
-import {
-  ArticleAlerts,
-  FolderType,
-  RoomsType,
-  ShareAccessRights,
-  ThemeKeys,
-} from "../enums";
+import { FolderType, RoomsType, ShareAccessRights, ThemeKeys } from "../enums";
 import { LANGUAGE, RTL_LANGUAGES } from "../constants";
 
 import { TI18n } from "../types";
@@ -151,30 +145,6 @@ export const getShowText = () => {
 
 export const isManagement = () => {
   return window.location.pathname.includes("management");
-};
-
-export const initArticleAlertsData = () => {
-  const savedArticleAlertsData = localStorage.getItem("articleAlertsData");
-  if (savedArticleAlertsData)
-    return JSON.parse(savedArticleAlertsData) as {
-      current: ArticleAlerts;
-      available: ArticleAlerts[];
-    };
-
-  const articleAlertsArray = Object.values(ArticleAlerts).filter(
-    (item, index) => Object.values(ArticleAlerts).indexOf(item) === index,
-  );
-  const defaultArticleAlertsData = {
-    current: articleAlertsArray[0],
-    available: articleAlertsArray,
-  };
-
-  localStorage.setItem(
-    "articleAlertsData",
-    JSON.stringify(defaultArticleAlertsData),
-  );
-
-  return defaultArticleAlertsData;
 };
 
 export function updateTempContent(isAuth = false) {
@@ -486,7 +456,7 @@ export function isElementInViewport(el: HTMLElement) {
     rect.top >= 0 &&
     rect.left >= 0 &&
     rect.bottom <=
-      (window.innerHeight || document.documentElement.clientHeight) &&
+    (window.innerHeight || document.documentElement.clientHeight) &&
     rect.right <= (window.innerWidth || document.documentElement.clientWidth)
   );
 }
@@ -901,7 +871,7 @@ export const getSystemTheme = () => {
       ? ThemeKeys.DarkStr
       : ThemeKeys.BaseStr
     : window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches
+      window.matchMedia("(prefers-color-scheme: dark)").matches
       ? ThemeKeys.DarkStr
       : ThemeKeys.BaseStr;
 };

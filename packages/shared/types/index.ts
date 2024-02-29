@@ -47,7 +47,7 @@ export type TI18n = {
 };
 
 declare module "styled-components" {
-  export interface DefaultTheme extends TTheme {}
+  export interface DefaultTheme extends TTheme { }
 }
 declare global {
   interface Window {
@@ -81,6 +81,11 @@ declare global {
         url?: string;
       };
       imageThumbnails?: boolean;
+      firebase: {
+        fetchTimeoutMillis?: number;
+        minimumFetchIntervalMillis?: number;
+      };
+      campaigns?: string[];
     };
     AscDesktopEditor: {
       execCommand: (key: string, value: string) => void;

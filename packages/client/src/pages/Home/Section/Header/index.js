@@ -224,12 +224,16 @@ const SectionHeaderContent = (props) => {
 
     getAccountsHeaderMenu,
     isAccountsHeaderVisible,
+    isGroupsHeaderVisible,
+    isGroupsHeaderIndeterminate,
+    isGroupsHeaderChecked,
     isAccountsHeaderIndeterminate,
     isAccountsHeaderChecked,
     accountsCbMenuItems,
     getAccountsMenuItemId,
     getAccountsCheckboxItemLabel,
     setAccountsSelected,
+    setGroupsSelected,
     isOwner,
     isCollaborator,
     setInvitePanelOptions,
@@ -268,6 +272,7 @@ const SectionHeaderContent = (props) => {
   const isInsideGroup = !!groupId;
 
   const isAccountsPage = location.pathname.includes("/accounts");
+  const isGroupsPage = location.pathname.includes("/accounts/groups");
 
   const isSettingsPage = location.pathname.includes("/settings");
 
@@ -937,7 +942,9 @@ const SectionHeaderContent = (props) => {
 
   const onChange = (checked) => {
     isAccountsPage
-      ? setAccountsSelected(checked ? "all" : "none")
+      ? !isGroupsPage
+        ? setAccountsSelected(checked ? "all" : "none")
+        : setGroupsSelected(checked ? "all" : "none")
       : setSelected(checked ? "all" : "none");
   };
 
@@ -1021,7 +1028,7 @@ const SectionHeaderContent = (props) => {
   }, []);
 
   const headerMenu = isAccountsPage
-    ? getAccountsHeaderMenu(t)
+    ? getAccountsHeaderMenu(t, isGroupsPage)
     : getHeaderMenu(t);
 
   const menuItems = getMenuItems();
@@ -1036,13 +1043,23 @@ const SectionHeaderContent = (props) => {
     isMobileView: currentDeviceType === DeviceType.mobile,
   };
 
+  console.log(
+    isAccountsHeaderVisible,
+    tableGroupMenuVisible,
+    headerMenu.some((x) => !x.disabled),
+  );
+
   if (isAccountsPage) {
     tableGroupMenuVisible =
-      isAccountsHeaderVisible &&
+      (!isGroupsPage ? isAccountsHeaderVisible : isGroupsHeaderVisible) &&
       tableGroupMenuVisible &&
       headerMenu.some((x) => !x.disabled);
-    tableGroupMenuProps.isChecked = isAccountsHeaderChecked;
-    tableGroupMenuProps.isIndeterminate = isAccountsHeaderIndeterminate;
+    tableGroupMenuProps.isChecked = !isGroupsPage
+      ? isAccountsHeaderChecked
+      : isGroupsHeaderChecked;
+    tableGroupMenuProps.isIndeterminate = !isGroupsPage
+      ? isAccountsHeaderIndeterminate
+      : isGroupsHeaderIndeterminate;
     tableGroupMenuProps.withoutInfoPanelToggler = false;
   } else {
     tableGroupMenuVisible = isHeaderVisible && tableGroupMenuVisible;
@@ -1051,6 +1068,8 @@ const SectionHeaderContent = (props) => {
     tableGroupMenuProps.isBlocked = isGroupMenuBlocked;
     tableGroupMenuProps.withoutInfoPanelToggler = isPublicRoom;
   }
+
+  console.log(tableGroupMenuProps);
 
   const stateTitle = location?.state?.title;
   const stateCanCreate = location?.state?.canCreate;
@@ -1316,7 +1335,11 @@ export default inject(
     } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
-    const { currentGroup, getGroupContextOptions } = peopleStore.groupsStore;
+    const {
+      currentGroup,
+      getGroupContextOptions,
+      setSelected: setGroupsSelected,
+    } = peopleStore.groupsStore;
 
     const {
       enablePlugins,
@@ -1360,6 +1383,9 @@ export default inject(
 
     const {
       isHeaderVisible: isAccountsHeaderVisible,
+      isGroupsHeaderVisible,
+      isGroupsHeaderIndeterminate,
+      isGroupsHeaderChecked,
       isHeaderIndeterminate: isAccountsHeaderIndeterminate,
       isHeaderChecked: isAccountsHeaderChecked,
       cbMenuItems: accountsCbMenuItems,
@@ -1491,6 +1517,10 @@ export default inject(
 
       getAccountsHeaderMenu,
       isAccountsHeaderVisible,
+      isGroupsHeaderVisible,
+      isGroupsHeaderIndeterminate,
+      isGroupsHeaderChecked,
+      setGroupsSelected,
       isAccountsHeaderIndeterminate,
       isAccountsHeaderChecked,
       accountsCbMenuItems,

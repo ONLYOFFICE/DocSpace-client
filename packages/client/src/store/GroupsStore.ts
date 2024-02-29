@@ -28,6 +28,8 @@ class GroupsStore {
 
   bufferSelection = null;
 
+  selected = "none";
+
   groupsFilter = GroupsFilter.getDefault();
 
   groupsIsIsLoading = false;
@@ -257,8 +259,20 @@ class GroupsStore {
 
   setSelection = (selection) => (this.selection = selection);
 
-  setBufferSelection = (bufferSelection) =>
+  setBufferSelection = (bufferSelection: any) =>
     (this.bufferSelection = bufferSelection);
+
+  setSelected = (selected: "all" | "none") => {
+    this.bufferSelection = null;
+    this.selected = selected;
+    this.setSelection(this.getGroupsBySelected(selected));
+    return selected;
+  };
+
+  getGroupsBySelected = (selected: "all" | "none") => {
+    if (selected === "all" && this.groups) return [...this.groups];
+    return [];
+  };
 
   setSelections = (added, removed, clear = false) => {
     if (clear) this.selection = [];
@@ -342,6 +356,7 @@ class GroupsStore {
             .deleteGroup(groupId)!
             .then(() => {
               toastr.success(t("Group was deleted successfully"));
+              this.setSelection([]);
               this.getGroups();
             })
             .catch((err) => {

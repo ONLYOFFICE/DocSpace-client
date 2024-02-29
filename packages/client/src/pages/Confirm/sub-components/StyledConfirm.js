@@ -35,6 +35,12 @@ export const StyledPage = styled.div`
   .subtitle {
     margin-bottom: 32px;
   }
+
+  .language-combo-box {
+    position: absolute;
+    right: 28px;
+    top: 28px;
+  }
 `;
 
 export const StyledContent = styled.div`

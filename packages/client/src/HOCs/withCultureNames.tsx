@@ -34,7 +34,8 @@ export default function withCultureNames<
     props: Omit<T, keyof WrappedComponentProps> &
       ComponentWithCultureNamesProps,
   ) => {
-    const { tReady, cultures, i18n, getPortalCultures } = props;
+    const { tReady, cultures, i18n, getPortalCultures, isAuthenticated } =
+      props;
 
     useEffect(() => {
       if (cultures.length > 0) return;
@@ -48,9 +49,9 @@ export default function withCultureNames<
       return culturesArg.map((culture) => {
         return {
           key: culture,
-          label: t(`Culture_${culture}`),
+          ...(isAuthenticated && { label: t(`Culture_${culture}`) }),
           icon: flagsIcons?.get(`${culture}.react.svg`),
-          isBeta: isBetaLanguage(culture),
+          ...(isAuthenticated && { isBeta: isBetaLanguage(culture) }),
         };
       });
     };
@@ -67,11 +68,13 @@ export default function withCultureNames<
     );
   };
 
-  const Injected = inject<TStore>(({ settingsStore }) => {
+  const Injected = inject<TStore>(({ authStore, settingsStore }) => {
     const { cultures, getPortalCultures } = settingsStore;
+    const { isAuthenticated } = authStore;
     return {
       cultures,
       getPortalCultures,
+      isAuthenticated,
     };
   })(
     observer(withTranslation("Common")(ComponentWithCultureNames)),

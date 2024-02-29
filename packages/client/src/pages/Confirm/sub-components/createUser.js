@@ -25,9 +25,14 @@ import {
   createPasswordHash,
   getOAuthToken,
   getLoginLink,
+  convertLanguage,
 } from "@docspace/shared/utils/common";
 import { login } from "@docspace/shared/utils/loginUtils";
-import { PROVIDERS_DATA } from "@docspace/shared/constants";
+import {
+  COOKIE_EXPIRATION_YEAR,
+  LANGUAGE,
+  PROVIDERS_DATA,
+} from "@docspace/shared/constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
@@ -43,6 +48,10 @@ import {
   RegisterContainer,
   StyledCreateUserContent,
 } from "./StyledCreateUser";
+import { ComboBox } from "@docspace/shared/components/combobox";
+import { getCookie, setCookie } from "@docspace/shared/utils/cookie";
+import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
+import { isMobile } from "@docspace/shared/utils";
 
 const DEFAULT_ROOM_TEXT =
   "<strong>{{firstName}} {{lastName}}</strong> invites you to join the room <strong>{{roomName}}</strong> for secure document collaboration.";
@@ -108,7 +117,9 @@ const CreateUserForm = (props) => {
     currentColorScheme,
     userNameRegex,
     defaultPage,
+    cultureNames,
   } = props;
+
   const inputRef = React.useRef(null);
 
   const emailFromLink = linkData?.email ? linkData.email : "";
@@ -457,9 +468,39 @@ const CreateUserForm = (props) => {
         ssoSVG: SsoReactSvgUrl,
       }
     : {};
+  const cultureName = getCookie(LANGUAGE);
+  const language = convertLanguage(cultureName);
+  const selectedLanguage = cultureNames.find((item) => item.key === language);
+
+  const onLanguageSelect = (e) => {
+    setCookie(LANGUAGE, e.key, {
+      "max-age": COOKIE_EXPIRATION_YEAR,
+    });
+
+    location.reload();
+  };
 
   return (
     <StyledPage>
+      {!isMobile() && (
+        <ComboBox
+          className="language-combo-box"
+          directionY={"both"}
+          options={cultureNames}
+          selectedOption={selectedLanguage}
+          onSelect={onLanguageSelect}
+          isDisabled={false}
+          scaled={false}
+          scaledOptions={false}
+          size="content"
+          showDisabledItems={true}
+          dropDownMaxHeight={200}
+          manualWidth="70px"
+          fillIcon={false}
+          modernView
+          displaySelectedOption
+        />
+      )}
       <StyledCreateUserContent>
         <ConfirmContainer>
           <GreetingContainer>
@@ -726,7 +767,9 @@ export default inject(({ settingsStore, authStore }) => {
     userNameRegex,
   };
 })(
-  withTranslation(["Confirm", "Common", "Wizard"])(
-    withLoader(observer(CreateUserForm)),
+  withCultureNames(
+    withTranslation(["Confirm", "Common", "Wizard"])(
+      withLoader(observer(CreateUserForm)),
+    ),
   ),
 );

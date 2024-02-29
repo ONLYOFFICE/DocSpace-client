@@ -40,6 +40,10 @@ const EditGroupMembers = ({
 
   const onClose = () => setVisible(false);
 
+  const isSearchListEmpty =
+    filteredGroupMembers && !filteredGroupMembers.length;
+  const hasMembers = filteredGroupMembers && filteredGroupMembers.length !== 0;
+
   useEffect(() => {
     const fetchGroup = async () => {
       if (!group) return;
@@ -71,13 +75,12 @@ const EditGroupMembers = ({
 
         <div style={{ height: "12px", width: "100%" }} />
 
-        {filteredGroupMembers?.length ? (
+        {isSearchListEmpty && <EmptyContainer />}
+
+        {hasMembers &&
           filteredGroupMembers.map(({ user, ...rest }) => (
             <GroupMember t={t} key={user.id} user={{ ...user, ...rest }} />
-          ))
-        ) : (
-          <EmptyContainer />
-        )}
+          ))}
       </ModalDialog.Body>
     </ModalDialog>
   );

@@ -9,30 +9,14 @@ const marginCss = css`
 `;
 
 const groupTitleCss = css`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: -24px;
-          padding-right: 24px;
-        `
-      : css`
-          margin-left: -24px;
-          padding-left: 24px;
-        `}
+  margin-inline-start: -24px;
+  padding-inline-start: 24px;
   ${marginCss}
 `;
 
 const contextCss = css`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-left: -20px;
-          padding-left: 20px;
-        `
-      : css`
-          margin-right: -20px;
-          padding-right: 20px;
-        `}
+  margin-inline-end: -20px;
+  padding-inline-end: 20px;
   ${marginCss}
 `;
 
@@ -60,8 +44,7 @@ export const GroupsTableContainer = styled(TableContainer)`
     .table-row {
       .table-container_group-title-cell {
         ${groupTitleCss}
-        border-left: 0; //for Safari macOS
-        border-right: 0; //for Safari macOS
+        border-inline: 0; //for Safari macOS
         border-image-source: ${(props) => `linear-gradient(to right, 
           ${props.theme.filesSection.tableView.row.borderColorTransition} 17px, ${props.theme.filesSection.tableView.row.borderColor} 31px)`};
       }
@@ -93,7 +76,7 @@ export const GroupsRowWrapper = styled.div`
 export const GroupsRow = styled(TableRow)`
   .table-container_cell:not(.table-container_row-checkbox-wrapper) {
     height: auto;
-    max-height: 48;
+    max-height: 48px;
   }
 
   .table-container_cell {
@@ -114,49 +97,21 @@ export const GroupsRow = styled(TableRow)`
 
   .table-container_row-checkbox-wrapper {
     min-width: 48px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-left: 0px;
-          `
-        : css`
-            padding-right: 0px;
-          `}
+    padding-inline-end: 0;
     .table-container_row-checkbox {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: -4px;
-              padding: 16px 12px 16px 0px;
-            `
-          : css`
-              margin-left: -4px;
-              padding: 16px 0px 16px 12px;
-            `}
+      margin-inline-start: -4px;
+      padding-block: 16px;
+      padding-inline: 12px 0;
     }
     .table-container_element {
     }
   }
   .table-cell_group-title {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 12px;
-          `
-        : css`
-            margin-right: 12px;
-          `}
+    margin-inline-end: 12px;
   }
   .table-container_row-context-menu-wrapper {
     justify-content: flex-end;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-left: 0px;
-          `
-        : css`
-            padding-right: 0px;
-          `}
+    padding-inline-end: 0;
   }
   :hover {
     .table-container_cell {
@@ -165,28 +120,12 @@ export const GroupsRow = styled(TableRow)`
         `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
     }
     .table-container_group-title-cell {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: -24px;
-              padding-right: 24px;
-            `
-          : css`
-              margin-left: -24px;
-              padding-left: 24px;
-            `}
+      margin-inline-start: -24px;
+      padding-inline-start: 24px;
     }
     .table-container_row-context-menu-wrapper {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: -20px;
-              padding-left: 20px;
-            `
-          : css`
-              margin-right: -20px;
-              padding-right: 20px;
-            `}
+      margin-inline-end: -20px;
+      padding-inline-end: 20px;
     }
   }
 `;

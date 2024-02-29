@@ -28,28 +28,12 @@ const StyledPeopleRow = styled(TableRow)`
     }
 
     .table-container_user-name-cell {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: -24px;
-              padding-right: 24px;
-            `
-          : css`
-              margin-left: -24px;
-              padding-left: 24px;
-            `}
+      margin-inline-start: -24px;
+      padding-inline-start: 24px;
     }
     .table-container_row-context-menu-wrapper {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: -20px;
-              padding-left: 20px;
-            `
-          : css`
-              margin-right: -20px;
-              padding-right: 20px;
-            `}
+      margin-inline-end: -20px;
+      padding-inline-end: 20px;
     }
   }
 
@@ -63,76 +47,33 @@ const StyledPeopleRow = styled(TableRow)`
   }
 
   .table-container_row-checkbox-wrapper {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-left: 0px;
-          `
-        : css`
-            padding-right: 0px;
-          `}
+    padding-inline-end: 0;
     min-width: 48px;
 
     .table-container_row-checkbox {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: -4px;
-              padding: 16px 12px 16px 0px;
-            `
-          : css`
-              margin-left: -4px;
-              padding: 16px 0px 16px 12px;
-            `}
+      margin-inline-start: -4px;
+      padding-block: 16px;
+      padding-inline: 12px 0;
     }
   }
 
   .link-with-dropdown-group {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 12px;
-          `
-        : css`
-            margin-right: 12px;
-          `}
+    margin-inline-end: 12px;
   }
 
   .table-cell_username {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 12px;
-          `
-        : css`
-            margin-right: 12px;
-          `}
+    margin-inline-end: 12px;
   }
 
   .table-container_row-context-menu-wrapper {
     justify-content: flex-end;
-
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-left: 0px;
-          `
-        : css`
-            padding-right: 0px;
-          `}
+    padding-inline-end: 0;
   }
 
   .table-cell_type,
   .table-cell_groups,
   .table-cell_room {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: -8px;
-          `
-        : css`
-            margin-left: -8px;
-          `}
+    margin-inline-start: -8px;
   }
 
   .groups-combobox,
@@ -148,14 +89,7 @@ const StyledPeopleRow = styled(TableRow)`
   .type-combobox,
   .groups-combobox,
   .room-combobox {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-right: 8px;
-          `
-        : css`
-            padding-left: 8px;
-          `}
+    padding-inline-start: 8px;
     overflow: hidden;
   }
 
@@ -163,16 +97,8 @@ const StyledPeopleRow = styled(TableRow)`
   .groups-combobox,
   .room-combobox {
     .combo-button {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              padding-right: 8px;
-              margin-right: -8px;
-            `
-          : css`
-              padding-left: 8px;
-              margin-left: -8px;
-            `}
+      padding-inline-start: 8px;
+      margin-inline-start: -8px;
 
       .combo-button-label {
         font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
@@ -183,16 +109,8 @@ const StyledPeopleRow = styled(TableRow)`
 
   .groups-combobox {
     .combo-button {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              padding-right: 8px;
-              margin-right: -8px;
-            `
-          : css`
-              padding-left: 8px;
-              margin-left: -8px;
-            `}
+      padding-inline-start: 8px;
+      margin-inline-start: -8px;
     }
   }
 
@@ -200,6 +118,10 @@ const StyledPeopleRow = styled(TableRow)`
     .combo-buttons_arrow-icon {
       display: none;
     }
+  }
+
+  .plainTextItem {
+    padding-inline-start: 8px;
   }
 `;
 
@@ -222,11 +144,6 @@ const StyledGroupsComboBox = styled(ComboBox)`
 `;
 
 StyledGroupsComboBox.defaultProps = { theme: Base };
-
-const StyledTextWrapper = styled.div`
-  padding-inline-start: 8px;
-  overflow: hidden;
-`;
 
 const fakeRooms = [
   {
@@ -428,20 +345,19 @@ const InsideGroupTableRow = (props) => {
 
     if (groups.length === 1)
       return (
-        <StyledTextWrapper>
-          <Text
-            type="page"
-            title={position}
-            fontSize="13px"
-            fontWeight={600}
-            color={sideInfoColor}
-            truncate
-            noSelect
-            dir="auto"
-          >
-            {groups[0].name}
-          </Text>
-        </StyledTextWrapper>
+        <Text
+          className="plainTextItem"
+          type="page"
+          title={position}
+          fontSize="13px"
+          fontWeight={600}
+          color={sideInfoColor}
+          truncate
+          noSelect
+          dir="auto"
+        >
+          {groups[0].name}
+        </Text>
       );
 
     return null;
@@ -469,20 +385,19 @@ const InsideGroupTableRow = (props) => {
     );
 
     const text = (
-      <StyledTextWrapper>
-        <Text
-          type="page"
-          title={position}
-          fontSize="13px"
-          fontWeight={600}
-          color={sideInfoColor}
-          truncate
-          noSelect
-          dir="auto"
-        >
-          {typeLabel}
-        </Text>
-      </StyledTextWrapper>
+      <Text
+        className="plainTextItem"
+        type="page"
+        title={position}
+        fontSize="13px"
+        fontWeight={600}
+        color={sideInfoColor}
+        truncate
+        noSelect
+        dir="auto"
+      >
+        {typeLabel}
+      </Text>
     );
 
     const canChange = canChangeUserType(item);

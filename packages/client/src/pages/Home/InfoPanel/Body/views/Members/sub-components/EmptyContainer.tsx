@@ -12,7 +12,7 @@ const StyledEmptyScreen = styled(EmptyScreenContainer)`
 `;
 
 const EmptyContainer = () => {
-  const { t } = useTranslation("People");
+  const { t } = useTranslation("Common");
   const theme = useTheme();
 
   const imageSrc = theme.isBase

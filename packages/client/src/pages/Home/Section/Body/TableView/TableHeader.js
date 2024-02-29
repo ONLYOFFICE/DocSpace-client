@@ -103,7 +103,6 @@ class FilesTableHeader extends React.Component {
           resizable: true,
           onChange: this.onColumnChange,
           onClick: this.onRoomsFilter,
-          minWidth: 179,
         });
 
       defaultColumns.push(...columns);

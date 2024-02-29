@@ -12,12 +12,12 @@ export const getShareOptions = (t) => {
     {
       internal: false,
       key: "anyone",
-      label: t("Common:AnyoneWithLink"),
+      label: t("SharingPanel:AnyoneWithLink"),
     },
     {
       internal: true,
       key: "users",
-      label: t("Common:DoсSpaceUsersOnly"),
+      label: t("SharingPanel:DoсSpaceUsersOnly"),
     },
   ];
 };
@@ -27,31 +27,31 @@ export const getAccessOptions = (t, available) => {
     available.Editing && {
       access: ShareAccessRights.Editing,
       key: "editing",
-      label: t("Common:Editing"),
+      label: t("SharingPanel:Editing"),
       icon: AccessEditReactSvgUrl,
     },
     available.CustomFilter && {
       access: ShareAccessRights.CustomFilter,
       key: "custom-filter",
-      label: t("Common:CustomFilter"),
+      label: t("SharingPanel:CustomFilter"),
       icon: CustomFilterReactSvgUrl,
     },
     available.Comment && {
       access: ShareAccessRights.Comment,
       key: "commenting",
-      label: t("Common:Comment"),
+      label: t("SharingPanel:Comment"),
       icon: AccessCommentReactSvgUrl,
     },
     available.Read && {
       access: ShareAccessRights.ReadOnly,
       key: "viewing",
-      label: t("ReadOnly"),
+      label: t("SharingPanel:ReadOnly"),
       icon: EyeReactSvgUrl,
     },
     available.Restrict && {
       access: ShareAccessRights.DenyAccess,
       key: "deny-access",
-      label: t("Common:DenyAccess"),
+      label: t("SharingPanel:DenyAccess"),
       icon: EyeOffReactSvgUrl,
     },
     available.Review && {

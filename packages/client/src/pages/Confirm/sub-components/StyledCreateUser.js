@@ -13,27 +13,14 @@ export const StyledCreateUserContent = styled.div`
   }
 `;
 
-export const ConfirmContainer = styled(Box)`
-  width: 100%;
-  margin: 0px auto;
-
-  display: flex;
-  flex: 1fr;
-  flex-direction: column;
-  align-items: center;
-  gap: 32px;
-
-  @media ${mobile} {
-    margin-top: 0;
-  }
-`;
-
 export const GreetingContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: left;
   height: 100%;
   width: ${DESKTOP_WIDTH}px;
+
+  margin-bottom: 32px;
 
   @media ${tablet} {
     width: 100%;
@@ -65,9 +52,7 @@ export const GreetingContainer = styled.div`
 `;
 
 export const RegisterContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  
   height: 100%;
   width: 100%;
 
@@ -75,9 +60,6 @@ export const RegisterContainer = styled.div`
     margin: 0 8px;
   }
 
-  .more-label {
-    padding-top: 18px;
-  }
 
   .line {
     display: flex;
@@ -118,11 +100,6 @@ export const RegisterContainer = styled.div`
     width: 100%;
   }
 
-  .signin-container {
-    width: 100%;
-    margin-top: 24px;
-    text-align: center;
-  }
   .greeting-container{
     margin-bottom: 32px;
     p{

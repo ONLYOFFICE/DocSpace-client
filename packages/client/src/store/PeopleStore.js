@@ -368,7 +368,7 @@ class PeopleStore {
       selection,
     } = this.selectionStore;
 
-    const { selection: groupsSelection } = this.groupsStore;
+    const { selection: groupsSelection, groupsFilter } = this.groupsStore;
 
     const { setSendInviteDialogVisible } = this.dialogStore;
     const { toggleDeleteProfileEverDialog } = this.contextOptionsStore;
@@ -388,7 +388,7 @@ class PeopleStore {
               .then(() => {
                 toastr.success(t("Groups were deleted successfully"));
                 this.groupsStore.setSelection([]);
-                this.groupsStore.getGroups();
+                this.groupsStore.getGroups(groupsFilter, true);
               })
               .catch((err) => {
                 toastr.error(err.message);

@@ -62,7 +62,7 @@ const ActivateUserForm = (props) => {
     setIsPasswordErrorShow(true);
   };
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     setIsLoading(true);
     if (!name.trim()) setNameValid(false);
     if (!surName.trim()) setSurNameValid(false);
@@ -88,22 +88,23 @@ const ActivateUserForm = (props) => {
       lastname: surName,
     };
 
-    activateConfirmUser(
-      personalData,
-      loginData,
-      linkData.confirmHeader,
-      linkData.uid,
-      EmployeeActivationStatus.Activated,
-    )
-      .then(() => {
-        setIsLoading(false);
-        window.location.replace(defaultPage);
-      })
-      .catch((error) => {
-        //console.error(error);
-        setIsLoading(false);
-        toastr.error(error);
-      });
+    try {
+      await activateConfirmUser(
+        personalData,
+        loginData,
+        linkData.confirmHeader,
+        linkData.uid,
+        EmployeeActivationStatus.Activated,
+      );
+
+      setIsLoading(false);
+
+      window.location.replace(defaultPage);
+    } catch (error) {
+      //console.error(error);
+      setIsLoading(false);
+      toastr.error(error);
+    }
   };
 
   const activateConfirmUser = async (

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Base } from "../../themes";
 import { desktop, mobile } from "../../utils/device";
 
@@ -12,17 +12,29 @@ const BannerWrapper = styled.div<{
   max-height: 140px;
   border-radius: 4px;
   border: 1px solid ${(props) => props.borderColor};
-  background-image: url(${(props) => props.background});
-  background-size: 100%;
-  direction: ltr !important;
 
-  p {
-    text-align: left !important;
+  &::before {
+    content: "";
+    background-image: url(${(props) => props.background});
+    background-size: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1000;
+    ${(props) =>
+    props.theme.interfaceDirection === "rtl" &&
+    css`
+        transform: scaleX(-1);
+      `}
   }
 
   .close-icon {
     position: absolute;
-    right: 14px;
+    ${(props) =>
+    props.theme.interfaceDirection === "rtl" ? css`left: 14px;` : css`right: 14px;`}
+
     top: 18px;
 
     path {

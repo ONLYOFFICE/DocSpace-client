@@ -248,7 +248,7 @@ const IpSecurity = (props) => {
             fontWeight="700"
             className="warning-text"
           >
-            {t("Common:Warning")}!
+            {t("Common:Warning")}
           </Text>
           <Text className="ip-security_warning">
             {t("IPSecurityWarningHelper")}

@@ -321,6 +321,10 @@ const StyledProperties = styled.div`
       }
     }
   }
+
+  .info_details_comments {
+    align-items: start;
+  }
 `;
 
 StyledInfoPanelBody.defaultProps = { theme: Base };

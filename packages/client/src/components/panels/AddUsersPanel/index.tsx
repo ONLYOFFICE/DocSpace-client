@@ -279,6 +279,7 @@ const AddUsersPanel = ({
         : await getMembersList(searchArea, roomId, currentFilter);
 
       const totalDifferent = startIndex ? response.total - totalRef.current : 0;
+      const excludedCount = userIdsToFilterOut?.length || 0;
 
       let items = response.items.map((item) => toListItem(item));
 
@@ -290,7 +291,7 @@ const AddUsersPanel = ({
             !userIdsToFilterOut.includes(item.id),
         );
 
-      const newTotal = response.total - totalDifferent;
+      const newTotal = response.total - totalDifferent - excludedCount;
 
       if (isFirstLoad.current) {
         setItemsList([...items]);

@@ -588,15 +588,14 @@ const PeopleTableRow = (props) => {
           <div />
         )}
 
-        {storageAccountsColumnIsEnabled ? (
-          showStorageInfo && (
+        {showStorageInfo &&
+          (storageAccountsColumnIsEnabled ? (
             <TableCell className={"table-cell_Storage/Quota"}>
               <SpaceQuota hideColumns={hideColumns} item={item} type="user" />
             </TableCell>
-          )
-        ) : (
-          <div />
-        )}
+          ) : (
+            <div />
+          ))}
       </StyledPeopleRow>
     </StyledWrapper>
   );

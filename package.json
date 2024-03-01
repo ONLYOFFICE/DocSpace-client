@@ -44,5 +44,5 @@
     "shx": "^0.3.4",
     "terser": "^5.16.6"
   },
-  "packageManager": "yarn@4.1.0"
+  "packageManager": "yarn@4.0.2"
 }

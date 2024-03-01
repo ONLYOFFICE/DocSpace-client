@@ -40,14 +40,14 @@ const CheckboxPure = ({
   label,
   value,
   title,
-  truncate,
-  hasError,
+  truncate = false,
+  hasError = false,
   onChange,
-  isChecked,
-  isIndeterminate,
+  isChecked = false,
+  isIndeterminate = false,
   isDisabled,
   name,
-  tabIndex,
+  tabIndex = -1,
   helpButton,
   ...rest
 }: CheckboxProps) => {
@@ -130,12 +130,6 @@ const CheckboxPure = ({
   );
 };
 
-CheckboxPure.defaultProps = {
-  isChecked: false,
-  truncate: false,
-  tabIndex: -1,
-  hasError: false,
-};
 CheckboxPure.displayName = "CheckboxPure";
 
 const Checkbox = React.memo(CheckboxPure);

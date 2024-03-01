@@ -298,12 +298,7 @@ module.exports = (env, argv) => {
         "./NavMenu": "./src/components/NavMenu",
         "./PreparationPortalDialog":
           "./src/components/dialogs/PreparationPortalDialog/PreparationPortalDialogWrapper.js",
-        "./SharingDialog": "./src/components/panels/SharingDialog",
         "./utils": "./src/helpers/filesUtils.js",
-        "./SelectFileDialog":
-          "./src/components/FilesSelector/FilesSelectorWrapper",
-        "./SelectFolderDialog":
-          "./src/components/FilesSelector/FilesSelectorWrapper",
         "./BrandingPage":
           "./src/pages/PortalSettings/categories/common/branding.js",
         "./WhiteLabelPage":
@@ -350,6 +345,7 @@ module.exports = (env, argv) => {
         ::placeholder {
           color: rgba(0, 0, 0, 0) !important;
         }
+
       </style>`;
   } else {
     htmlTemplate.browserDetectorUrl = `/static/scripts/browserDetector.js?hash=${

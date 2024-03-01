@@ -8,9 +8,9 @@ export interface ToastProps {
   /** Accepts css style  */
   style?: React.CSSProperties;
   /** Title inside a toast */
-  title: string;
+  title?: string;
   /** Sets the color and icon of the toast */
-  type: ToastType;
+  type?: ToastType;
 }
 
 export type TData = {

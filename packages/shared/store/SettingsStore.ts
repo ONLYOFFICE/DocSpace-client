@@ -26,7 +26,6 @@ import { size as deviceSize, isTablet, getSystemTheme } from "../utils";
 import {
   frameCallEvent,
   getShowText,
-  initArticleAlertsData,
   isPublicRoom,
   insertTagManager,
 } from "../utils/common";
@@ -35,7 +34,7 @@ import { combineUrl } from "../utils/combineUrl";
 import FirebaseHelper from "../utils/firebase";
 import SocketIOHelper from "../utils/socket";
 import { TWhiteLabel } from "../utils/whiteLabelHelper";
-import { ThemeKeys, TenantStatus, DeviceType, ArticleAlerts } from "../enums";
+import { ThemeKeys, TenantStatus, DeviceType } from "../enums";
 import {
   LANGUAGE,
   COOKIE_EXPIRATION_YEAR,
@@ -269,8 +268,6 @@ class SettingsStore {
   domain = null;
 
   documentationEmail = null;
-
-  articleAlertsData = initArticleAlertsData();
 
   cspDomains: string[] = [];
 
@@ -880,7 +877,7 @@ class SettingsStore {
       default:
         theme =
           window.matchMedia &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches
+            window.matchMedia("(prefers-color-scheme: dark)").matches
             ? ThemeKeys.DarkStr
             : ThemeKeys.BaseStr;
         theme = getSystemTheme();
@@ -1011,43 +1008,6 @@ class SettingsStore {
     this.setAppearanceTheme(res.themes);
     this.setSelectThemeId(res.selected);
     if (currentColorScheme) this.setCurrentColorScheme(currentColorScheme);
-  };
-
-  updateArticleAlertsData = ({
-    current,
-    available,
-  }: {
-    current: ArticleAlerts;
-    available: ArticleAlerts[];
-  }) => {
-    this.articleAlertsData = {
-      current: current || this.articleAlertsData.current,
-      available: available || this.articleAlertsData.available,
-    };
-    localStorage.setItem(
-      "articleAlertsData",
-      JSON.stringify(this.articleAlertsData),
-    );
-  };
-
-  incrementIndexOfArticleAlertsData = () => {
-    const { current, available } = this.articleAlertsData;
-    if (!available.length) return;
-
-    let next = null;
-    const indexOfCurrent = available.indexOf(current);
-    if (indexOfCurrent + 1 === available.length) next = available[0];
-    else next = available[indexOfCurrent + 1];
-
-    if (next) this.updateArticleAlertsData({ current: next, available });
-  };
-
-  removeAlertFromArticleAlertsData = (alertToRemove: ArticleAlerts) => {
-    const { current, available } = this.articleAlertsData;
-    const filteredAvailable = available.filter(
-      (alert) => alert !== alertToRemove,
-    );
-    this.updateArticleAlertsData({ current, available: filteredAvailable });
   };
 
   setInterfaceDirection = (direction: string) => {

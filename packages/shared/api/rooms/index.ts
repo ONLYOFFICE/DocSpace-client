@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/default-param-last */
 import { AxiosRequestConfig } from "axios";
 
 import { FolderType } from "../../enums";

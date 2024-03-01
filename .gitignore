@@ -15,7 +15,7 @@ Logs/
 .eslintcache
 
 /public/debuginfo.md
-
+/public/campaigns/*
 
 .yarn/*
 !.yarn/patches

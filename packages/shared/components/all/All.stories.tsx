@@ -25,7 +25,7 @@ import { Textarea } from "../textarea";
 // import ContextMenuButton from "../context-menu-button";
 // import DatePicker from "../date-picker";
 import { FieldContainer } from "../field-container";
-import { Heading } from "../heading";
+import { Heading, HeadingSize } from "../heading";
 import { Link, LinkType } from "../link";
 import { Loader, LoaderTypes } from "../loader";
 import { Row } from "../row";
@@ -188,7 +188,7 @@ const Template = () => (
   >
     <div style={{ justifySelf: "center" }}>
       <div style={{ padding: "8px 0" }}>
-        <Heading level={1} title="Some title">
+        <Heading level={1} size={HeadingSize.medium} title="Some title">
           Heading text
         </Heading>
       </div>

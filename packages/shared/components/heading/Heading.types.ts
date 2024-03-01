@@ -3,7 +3,7 @@ import { HeadingLevel, HeadingSize } from "./Heading.enums";
 export interface HeadingProps {
   id?: string;
   /** The heading level. It corresponds to the number after the 'H' for the DOM tag. Sets the level for semantic accuracy and accessibility. */
-  level: HeadingLevel;
+  level?: HeadingLevel;
   /** Specifies the headline color */
   color?: string;
   /** Title */
@@ -13,7 +13,7 @@ export interface HeadingProps {
   /** Sets the 'display: inline-block' property */
   isInline?: boolean;
   /** Sets the size of headline */
-  size: HeadingSize;
+  size?: HeadingSize;
   /** Accepts css class */
   className?: string;
   children: React.ReactNode;

@@ -78,6 +78,7 @@ const FilesSelector = ({
   setIsDataReady,
   withSearch: withSearchProp,
   withBreadCrumbs: withBreadCrumbsProp,
+  filesSettings,
 }: FilesSelectorProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["Common"]);
@@ -112,7 +113,7 @@ const FilesSelector = ({
 
   const [isInit, setIsInit] = React.useState(true);
 
-  const { getIcon } = useFilesSettings(getIconProp);
+  const { getIcon } = useFilesSettings(getIconProp, filesSettings);
 
   const { subscribe, unsubscribe } = useSocketHelper({
     socketHelper,
@@ -177,7 +178,6 @@ const FilesSelector = ({
     disabledItems,
     setSelectedItemSecurity,
     isThirdParty,
-
     setSelectedTreeNode,
     filterParam,
     getRootData,

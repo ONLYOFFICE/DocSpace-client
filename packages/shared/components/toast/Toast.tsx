@@ -4,7 +4,6 @@ import { isMobileOnly } from "react-device-detect";
 
 import StyledToastContainer from "./Toast.styled";
 import { ToastProps } from "./Toast.type";
-import { ToastType } from "./Toast.enums";
 
 const Slide = cssTransition({
   enter: "SlideIn",
@@ -59,11 +58,6 @@ const Toast = (props: ToastProps) => {
       data-testid="toast"
     />
   );
-};
-
-Toast.defaultProps = {
-  title: "Demo title",
-  type: ToastType.success,
 };
 
 export { Toast };

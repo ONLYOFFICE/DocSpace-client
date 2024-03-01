@@ -7,10 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { EditGroupParams } from "./types";
-import {
-  getGroupById,
-  updateGroup,
-} from "@docspace/shared/api/groups";
+import { getGroupById, updateGroup } from "@docspace/shared/api/groups";
 
 import GroupNameParam from "./sub-components/GroupNameParam";
 import HeadOfGroup from "./sub-components/HeadOfGroupParam";
@@ -34,6 +31,8 @@ const EditGroupDialog = ({
 }: EditGroupDialogProps) => {
   const { t } = useTranslation(["PeopleTranslations", "Common"]);
   const navigate = useNavigate();
+
+  const [initialMembersIds, setInitialMembersIds] = useState<string[]>([]);
 
   const [isCreateGroupLoading, setCreateGroupIsLoading] =
     useState<boolean>(false);
@@ -60,13 +59,22 @@ const EditGroupDialog = ({
     setCreateGroupIsLoading(true);
 
     const groupManagerId = groupParams.groupManager?.id || undefined;
-    const groupMembersIds = groupParams.groupMembers?.map((gm) => gm.id) || [];
+
+    const newMembersIds =
+      groupParams.groupMembers?.map((gm: any) => gm.id) || [];
+    const membersToAdd = newMembersIds.filter(
+      (gm) => !initialMembersIds.includes(gm),
+    );
+    const membersToDelete = initialMembersIds.filter(
+      (gm) => !newMembersIds.includes(gm),
+    );
 
     updateGroup(
       group.id,
       groupParams.groupName,
       groupManagerId,
-      groupMembersIds,
+      membersToAdd,
+      membersToDelete,
     )!
       .then(() => {
         navigate("/accounts/groups/filter");
@@ -84,7 +92,10 @@ const EditGroupDialog = ({
     setFetchMembersIsLoading(true);
 
     getGroupById(group.id)!
-      .then((data: any) => setGroupMembers(data.members))
+      .then((data: any) => {
+        setInitialMembersIds(data.members.map((gm) => gm.id));
+        setGroupMembers(data.members);
+      })
       .catch((err) => console.error(err))
       .finally(() => setFetchMembersIsLoading(false));
   }, [group.id]);
@@ -136,7 +147,7 @@ const EditGroupDialog = ({
           onClick={onEditGroup}
           isDisabled={
             !groupParams.groupName ||
-            (!groupParams.groupManager && !groupParams.groupMembers.length)
+            (!groupParams.groupManager && !groupParams.groupMembers?.length)
           }
           isLoading={isCreateGroupLoading}
         />

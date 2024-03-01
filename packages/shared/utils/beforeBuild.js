@@ -8,7 +8,12 @@ const { readdir } = require("fs").promises;
 
 const appSettings = require("../../../../buildtools/config/appsettings.json");
 
-const beforeBuild = async (pathsToLocales, pathToFile, additionalPath) => {
+const beforeBuild = async (
+  pathsToLocales,
+  pathToFile,
+  additionalPath,
+  isSSR = false,
+) => {
   async function* getFiles(dir) {
     const dirents = await readdir(dir, { withFileTypes: true });
     for (const dirent of dirents) {
@@ -98,7 +103,7 @@ const beforeBuild = async (pathsToLocales, pathToFile, additionalPath) => {
           : "PUBLIC_DIR";
 
     importString = `${importString}
-      import ${fileName}${language}Url from "${alias}/${url}?url";\n`;
+      import ${fileName}${language}Url from "${alias}/${url}${isSSR ? "" : "?url"}";\n`;
   });
 
   let content = `//THIS FILE IS AUTO GENERATED\n//DO NOT EDIT AND DELETE IT\n

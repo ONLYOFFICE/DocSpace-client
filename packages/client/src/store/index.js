@@ -51,6 +51,7 @@ import ClientLoadingStore from "./ClientLoadingStore";
 
 import PluginStore from "./PluginStore";
 import InfoPanelStore from "./InfoPanelStore";
+import CampaignsStore from "./CampaignsStore";
 
 const selectedFolderStore = new SelectedFolderStore(settingsStore);
 
@@ -179,7 +180,7 @@ const filesActionsStore = new FilesActionsStore(
   userStore,
   currentTariffStatusStore,
   peopleStore,
-  currentQuotaStore
+  currentQuotaStore,
 );
 
 const contextOptionsStore = new ContextOptionsStore(
@@ -251,11 +252,14 @@ const createEditRoomStore = new CreateEditRoomStore(
 );
 
 const webhooksStore = new WebhooksStore(settingsStore);
+
 const storageManagement = new StorageManagement(
   filesStore,
   peopleStore,
-  authStore
+  authStore,
 );
+
+const campaignsStore = new CampaignsStore(settingsStore, userStore);
 
 const store = {
   authStore,
@@ -307,6 +311,7 @@ const store = {
 
   pluginStore,
   storageManagement,
+  campaignsStore,
 };
 
 export default store;

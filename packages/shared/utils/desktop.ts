@@ -2,7 +2,7 @@ import isEmpty from "lodash/isEmpty";
 import omit from "lodash/omit";
 
 import { toastr } from "../components/toast";
-import { TTranslation } from "../types";
+import { Nullable, TTranslation } from "../types";
 import { TUser } from "../api/people/types";
 import { ThemeKeys } from "../enums";
 
@@ -14,11 +14,13 @@ const isSSR = checkIsSSR();
 export function regDesktop(
   user: TUser,
   isEncryption: boolean,
-  keys: string[],
-  setEncryptionKeys: (value: string[]) => void,
-  isEditor: boolean,
-  getEncryptionAccess: (callback?: () => void) => void,
-  t: TTranslation,
+  keys?: { [key: string]: string | boolean },
+  setEncryptionKeys?: (value: { [key: string]: string | boolean }) => void,
+  isEditor?: boolean,
+  getEncryptionAccess?: (
+    callback?: (data: { keys: { [key: string]: string | boolean } }) => void,
+  ) => void,
+  t?: Nullable<TTranslation>,
 ) {
   if (!isSSR) {
     const data = {
@@ -60,11 +62,11 @@ export function regDesktop(
       window.cloudCryptoCommand = (type, params, callback) => {
         switch (type) {
           case "encryptionKeys": {
-            setEncryptionKeys(params);
+            setEncryptionKeys?.(params);
             break;
           }
           case "updateEncryptionKeys": {
-            setEncryptionKeys(params);
+            setEncryptionKeys?.(params);
             break;
           }
           case "relogin": {
@@ -92,13 +94,13 @@ export function regDesktop(
           if (!message) {
             switch (e.opType) {
               case 0:
-                message = t("Common:EncryptionFilePreparing");
+                message = t?.("Common:EncryptionFilePreparing");
                 break;
               case 1:
-                message = t("Common:EncryptingFile");
+                message = t?.("Common:EncryptingFile");
                 break;
               default:
-                message = t("Common:LoadingProcessing");
+                message = t?.("Common:LoadingProcessing");
             }
           }
           toastr.info(message);

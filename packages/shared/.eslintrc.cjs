@@ -62,6 +62,6 @@ module.exports = {
     "./tsconfig.json",
     "coverage/**",
     "storybook-static/**",
-    "./utils/custom-scrollbar/**",
+    "components/scrollbar/custom-scrollbar/**",
   ],
 };

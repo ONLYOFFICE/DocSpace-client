@@ -49,7 +49,7 @@ const ExternalLink = ({
       if (ref.current.contains(e.target)) return;
       setShareActionOpen((val) => !val);
     },
-    [ref.current]
+    [ref.current],
   );
 
   const onCopyLinkAction = React.useCallback(() => {
@@ -102,17 +102,17 @@ const ExternalLink = ({
   const options = [
     {
       key: "linkItem_0",
-      label: `${t("ShareVia")} e-mail`,
+      label: `${t("Common:ShareVia")} e-mail`,
       onClick: onShareEmail,
     },
     // {
     //   key: "linkItem_1",
-    //   label: `${t("ShareVia")} Facebook`,
+    //   label: `${t("Common:ShareVia")} Facebook`,
     //   onClick: this.onShareFacebook,
     // },
     {
       key: "linkItem_2",
-      label: `${t("ShareVia")} Twitter`,
+      label: `${t("Common:ShareVia")} Twitter`,
       onClick: onShareTwitter,
     },
   ];

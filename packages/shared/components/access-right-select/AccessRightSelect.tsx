@@ -84,12 +84,14 @@ export const AccessRightSelectPure = ({
       advancedOptions={formattedOptions}
       onSelect={onSelectCurrentItem}
       options={[]}
-      selectedOption={{
-        icon: currentItem?.icon,
-        default: true,
-        key: currentItem?.key,
-        label: currentItem?.label,
-      }}
+      selectedOption={
+        {
+          icon: currentItem?.icon,
+          default: true,
+          key: currentItem?.key,
+          label: currentItem?.label,
+        } as TOption
+      }
       forceCloseClickOutside
       {...props}
     />

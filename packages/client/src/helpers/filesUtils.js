@@ -10,7 +10,6 @@ import CloudServicesWebdavReactSvgUrl from "PUBLIC_DIR/images/cloud.services.web
 import { authStore, settingsStore } from "@docspace/shared/store";
 import { FileType, RoomsType } from "@docspace/shared/enums";
 import config from "PACKAGE_FILE";
-import { toUrlParams } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { addFileToRecentlyViewed } from "@docspace/shared/api/files";
 import i18n from "./i18n";
@@ -120,7 +119,7 @@ export const openDocEditor = async (
   url = null,
   isPrivacy,
   isPreview = false,
-  shareKey = null
+  shareKey = null,
 ) => {
   if (!providerKey && id && !isPrivacy && !shareKey) {
     await addFileToRecent(id);
@@ -133,7 +132,7 @@ export const openDocEditor = async (
     url = combineUrl(
       window.DocSpaceConfig?.proxy?.url,
       config.homepage,
-      `/doceditor?fileId=${encodeURIComponent(id)}${preview}${share}`
+      `/doceditor?fileId=${encodeURIComponent(id)}${preview}${share}`,
     );
   }
 
@@ -146,51 +145,11 @@ export const openDocEditor = async (
   } else {
     window.open(
       url,
-      window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self"
+      window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self",
     );
   }
 
   return Promise.resolve();
-};
-
-export const getDataSaveAs = async (params) => {
-  try {
-    const data = await request({
-      baseURL: combineUrl(window.DocSpaceConfig?.proxy?.url),
-      method: "get",
-      url: `/filehandler.ashx?${params}`,
-      responseType: "text",
-    });
-
-    return data;
-  } catch (e) {
-    console.error("error");
-  }
-};
-export const SaveAs = (title, url, folderId, openNewTab) => {
-  const options = {
-    action: "create",
-    fileuri: url,
-    title: title,
-    folderid: folderId,
-    response: openNewTab ? null : "message",
-  };
-
-  const params = toUrlParams(options, true);
-  if (!openNewTab) {
-    return getDataSaveAs(params);
-  } else {
-    const handlerUrl = combineUrl(
-      window.DocSpaceConfig?.proxy?.url,
-      config.homepage,
-      window["AscDesktopEditor"] !== undefined //FIX Save as with open new tab on DesktopEditors
-        ? "/Products/Files/HttpHandlers/"
-        : "",
-      `/filehandler.ashx?${params}`
-    );
-    //console.log({ handlerUrl });
-    window.open(handlerUrl, "_blank");
-  }
 };
 
 export const connectedCloudsTitleTranslation = (key, t) => {

@@ -16,11 +16,16 @@ const ErrorContainer = (props: ErrorContainerProps) => {
     children,
     customizedBodyText,
     isPrimaryButton = true,
+    isEditor = false,
     ...rest
   } = props;
 
   return (
-    <StyledErrorContainer {...rest} data-testid="ErrorContainer">
+    <StyledErrorContainer
+      {...rest}
+      isEditor={isEditor}
+      data-testid="ErrorContainer"
+    >
       <div id="container">
         <svg
           id="background"

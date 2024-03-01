@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { Scrollbar } from "../Scrollbar";
+import { ScrollbarComponent } from "../Scrollbar";
 import { CustomScrollbarsVirtualListProps } from "../Scrollbar.types";
+import { Scrollbar } from "../custom-scrollbar";
 
 const CustomScrollbars = ({
   onScroll,
@@ -11,7 +12,7 @@ const CustomScrollbars = ({
   className,
 }: CustomScrollbarsVirtualListProps) => {
   const refSetter = (
-    scrollbarsRef: React.RefObject<HTMLDivElement>,
+    scrollbarsRef: React.RefObject<Scrollbar>,
     forwardedRefArg: unknown,
   ) => {
     // @ts-expect-error Don`t know how fix it
@@ -24,8 +25,8 @@ const CustomScrollbars = ({
     }
   };
   return (
-    <Scrollbar
-      ref={(scrollbarsRef: React.RefObject<HTMLDivElement>) =>
+    <ScrollbarComponent
+      ref={(scrollbarsRef: React.RefObject<Scrollbar>) =>
         refSetter(scrollbarsRef, forwardedRef)
       }
       style={{ ...style, overflow: "hidden" }}
@@ -34,7 +35,7 @@ const CustomScrollbars = ({
     >
       {children}
       <div className="additional-scroll-height" />
-    </Scrollbar>
+    </ScrollbarComponent>
   );
 };
 

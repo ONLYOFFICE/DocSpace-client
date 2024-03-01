@@ -70,7 +70,7 @@ const confirmRoutes = [
   {
     path: "Activation",
     element: (
-      <ConfirmRoute doAuthenticated={AuthenticatedAction.Logout}>
+      <ConfirmRoute doAuthenticated={AuthenticatedAction.Redirect}>
         <ActivateUserForm />
       </ConfirmRoute>
     ),

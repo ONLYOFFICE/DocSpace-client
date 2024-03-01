@@ -14,15 +14,16 @@ const IconButton = ({
   hoverColor,
   clickColor,
 
-  isDisabled,
-  isFill,
-  isClickable,
+  isDisabled = false,
+  isFill = true,
+  isClickable = false,
   className,
-  size,
+  size = 25,
   title,
   id,
   style,
-  dataTip,
+  dataTip = "",
+  isStroke = false,
 
   onMouseEnter,
   onMouseLeave,
@@ -128,6 +129,7 @@ const IconButton = ({
       isFill={isFill}
       iconName={iconName}
       data-testid="icon-button"
+      isStroke={isStroke}
       {...rest}
     >
       {iconNode || (
@@ -138,15 +140,6 @@ const IconButton = ({
       )}
     </StyledOuter>
   );
-};
-
-IconButton.defaultProps = {
-  size: 25,
-  isFill: true,
-  isStroke: false,
-  isDisabled: false,
-  isClickable: false,
-  dataTip: "",
 };
 
 export { IconButton };

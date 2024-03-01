@@ -27,7 +27,7 @@ const BreadCrumbs = ({
   );
 
   const onClickItem = React.useCallback(
-    (e: React.MouseEvent, open: boolean, item: TBreadCrumb) => {
+    (e: React.MouseEvent<Element>, open: boolean, item: TBreadCrumb) => {
       if (isLoading) return;
       onSelectBreadCrumb(item);
     },

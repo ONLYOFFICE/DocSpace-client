@@ -1350,7 +1350,9 @@ class TableHeader extends React.Component<
             getSubstring(tableInfoPanelContainer[0])
           ) {
             const currentContentWidth =
-              contentWidth - +getSubstring(tableInfoPanelContainer[0]);
+              enabledColumnsCount > 0
+                ? contentWidth - +getSubstring(tableInfoPanelContainer[0])
+                : contentWidth;
 
             let overWidth = 0;
 
@@ -1370,10 +1372,12 @@ class TableHeader extends React.Component<
                   gridTemplateColumns.push("0px");
                 } else if (item !== `${settingsSize}px`) {
                   const percent =
-                    (getSubstring(item) /
-                      (changedWidth -
-                        +getSubstring(tableInfoPanelContainer[0]))) *
-                    100;
+                    enabledColumnsCount === 0
+                      ? 100
+                      : (getSubstring(item) /
+                          (changedWidth -
+                            +getSubstring(tableInfoPanelContainer[0]))) *
+                        100;
 
                   const newItemWidth = defaultColumnSize
                     ? `${defaultColumnSize}px`

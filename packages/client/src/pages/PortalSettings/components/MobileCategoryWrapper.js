@@ -5,7 +5,6 @@ import { Text } from "@docspace/shared/components/text";
 import { Badge } from "@docspace/shared/components/badge";
 import { Link } from "@docspace/shared/components/link";
 import { Base } from "@docspace/shared/themes";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import commonIconsStyles from "@docspace/shared/utils/common-icons-style";
 
 import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
@@ -64,10 +63,8 @@ const MobileCategoryWrapper = (props) => {
     badgeLabel,
   } = props;
 
-  const onClickProp = isDisabled ? {} : onClickLink;
-  const onHrefProp = isDisabled
-    ? {}
-    : { href: combineUrl(window.DocSpaceConfig?.proxy?.url, url) };
+  const onClickProp = isDisabled ? {} : { onClick: onClickLink };
+  const onHrefProp = isDisabled ? {} : { href: url };
 
   return (
     <StyledMobileCategoryWrapper isDisabled={isDisabled}>

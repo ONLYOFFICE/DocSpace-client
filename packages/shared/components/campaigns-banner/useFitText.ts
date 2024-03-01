@@ -4,7 +4,7 @@ const useFitText = (
   campaignImage: string,
   currentFontSize: string = "13px",
 ) => {
-  const ref = useRef(null);
+  const ref: React.RefObject<HTMLDivElement> = useRef(null);
 
   const [fontSize, setFontSize] = useState(parseInt(currentFontSize, 10));
 

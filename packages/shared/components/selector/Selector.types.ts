@@ -1,8 +1,8 @@
 import React from "react";
-import { TFileSecurity, TFolderSecurity } from "../../api/files/types";
-import { TRoomSecurity } from "../../api/rooms/types";
 import { RoomsType, ShareAccessRights } from "../../enums";
 import { AvatarRole } from "../avatar";
+import { TFileSecurity, TFolderSecurity } from "../../api/files/types";
+import { TRoomSecurity } from "../../api/rooms/types";
 import { TSubmenuItem } from "../submenu";
 
 // header

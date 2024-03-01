@@ -168,7 +168,11 @@ class AxiosClient {
 
       if (!response || !response.data || response.isAxiosError) return null;
 
-      if (response.data && "total" in response.data)
+      if (
+        response.data &&
+        typeof response.data === "object" &&
+        "total" in response.data
+      )
         return {
           total: response.data.total ? +response.data.total : 0,
           items: response.data.response,

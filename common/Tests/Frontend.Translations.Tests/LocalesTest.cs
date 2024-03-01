@@ -109,8 +109,6 @@ public class LocalesTest
         var moduleWorkspaces = new List<string>
         {
             Utils.ConvertPathToOS("packages/client"),
-            Utils.ConvertPathToOS("packages/common"),
-            Utils.ConvertPathToOS("packages/components"),
             Utils.ConvertPathToOS("packages/editor"),
             Utils.ConvertPathToOS("packages/login"),
             Utils.ConvertPathToOS("packages/shared"),
@@ -1565,58 +1563,15 @@ public class LocalesTest
         File.WriteAllText(pathToJson, sortedJsonString, Encoding.UTF8);
     }
 
-    //[Test]
+    [Test]
     public void MoveKeysToCommon()
     {
         var findKeys = new List<string> {
-            "Translations:DownloadApps",
-            "Translations:MobileWin",
-            "Translations:MobileMac",
-            "Translations:MobileLinux",
-            "Translations:MobileAndroid",
-            "Translations:MobileIos",
-            "Translations:MoveToOperation",
-            "Translations:CreateMasterFormFromFile",
-            "Translations:MoveHere",
-            "Translations:CopyHere",
-            "Settings:DeveloperTools",
-            "Settings:BetaLabel",
-            "FormGallery:SubmitToGalleryBlockHeader",
-            "FormGallery:SubmitToGalleryBlockBody",
-            "People:NotFoundUsers",
-            "People:NotFoundUsersDescription",
-            "PeopleSelector:ListAccounts",
-            "PeopleSelector:AllAccounts",
-            "PeopleSelector:EmptyHeader",
-            "PeopleSelector:EmptyDescription",
-            "RoomSelector:RoomList",
-            "RoomSelector:EmptyRoomsHeader",
-            "RoomSelector:EmptyRoomsDescription",
-            "Files:ArchivedRoomAction",
-            "Files:MoveToFolderMessage",
-            "Files:SelectorEmptyScreenHeader",
-            "Files:EmptyFilterDescriptionText",
-            "SharingPanel:GeneralAccessLinkCopied",
-            "SharingPanel:GeneralAccessLinkRemove",
-            "SharingPanel:AdditionalLinkRemove",
-            "SharingPanel:LinkAccessDenied",
-            "SharingPanel:ShareDocument",
-            "SharingPanel:ShareDocumentDescription",
-            "SharingPanel:GeneralAccessLink",
-            "SharingPanel:AdditionalLinks",
-            "SharginPanel:CreateAndCopy",
-            "SharingPanel:LinkExpired",
-            "SharginPanel:GeneralAccessLink",
-            "SharginPanel:Editing",
-            "SharginPanel:CustomFilter",
-            "SharginPanel:Comment",
-            "SharginPanel:ReadOnly",
-            "SharginPanel:DenyAccess",
-            "SharginPanel:AnyoneWithLink",
-            "SharginPanel:DoсSpaceUsersOnly",
-            "Files:LinkSuccessfullyCopied",
-            "Settings:Custom",
-            "Translations:Remove"
+            "SharingPanel:CustomFilter",
+            "SharingPanel:ReadOnly",
+            "SharingPanel:DenyAccess",
+            "SharingPanel:Comment",
+            "SharingPanel:ShareVia"
         };
 
         //var findKeys = new List<string> {

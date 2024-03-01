@@ -12,20 +12,20 @@ import { SearchInputProps } from "./SearchInput.types";
 
 const SearchInput = ({
   forwardedRef,
-  value,
-  autoRefresh,
-  refreshTimeout,
-  showClearButton,
+  value = "",
+  autoRefresh = true,
+  refreshTimeout = 1000,
+  showClearButton = false,
   onClearSearch,
   onChange,
   size,
   className,
   style,
-  scale,
+  scale = false,
   onClick,
   id,
   name,
-  isDisabled,
+  isDisabled = false,
   placeholder,
   children,
 }: SearchInputProps) => {
@@ -141,15 +141,6 @@ const SearchInput = ({
       </InputBlock>
     </StyledSearchInput>
   );
-};
-
-SearchInput.defaultProps = {
-  autoRefresh: true,
-  value: "",
-  scale: false,
-  isDisabled: false,
-  refreshTimeout: 1000,
-  showClearButton: false,
 };
 
 export { SearchInput };

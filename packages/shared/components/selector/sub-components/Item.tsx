@@ -45,7 +45,11 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
     const item: TSelectorItem = items[index];
 
     if (!item || (item && !item.id))
-      return <div style={style}>{rowLoader}</div>;
+      return (
+        <div key="row-loader" style={style}>
+          {rowLoader}
+        </div>
+      );
 
     const {
       label,
@@ -80,6 +84,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
 
     return (
       <StyledItem
+        key={`${label}-${avatar}-${role}`}
         isSelected={isSelected}
         isMultiSelect={isMultiSelect}
         style={style}

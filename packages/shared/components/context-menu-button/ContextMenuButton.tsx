@@ -12,7 +12,7 @@ import { DropDown } from "../drop-down";
 import { IconButton } from "../icon-button";
 import { Backdrop } from "../backdrop";
 import { Aside } from "../aside";
-import { Heading, HeadingSize } from "../heading";
+import { Heading, HeadingLevel, HeadingSize } from "../heading";
 import { Link } from "../link";
 import { ContextMenuModel } from "../context-menu";
 
@@ -258,7 +258,7 @@ const ContextMenuButtonPure = ({
           <>
             <Backdrop
               onClick={onCloseAction}
-              visible={state.isOpen}
+              visible={state.isOpen || false}
               zIndex={310}
               isAside
             />
@@ -273,6 +273,7 @@ const ContextMenuButtonPure = ({
                   <Heading
                     className="header"
                     size={HeadingSize.medium}
+                    level={HeadingLevel.h1}
                     truncate
                   >
                     {asideHeader}

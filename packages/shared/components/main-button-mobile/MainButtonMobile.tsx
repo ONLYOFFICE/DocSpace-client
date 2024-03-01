@@ -294,7 +294,7 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
 
   return (
     <>
-      <Backdrop zIndex={210} visible={isOpen} onClick={outsideClick} />
+      <Backdrop zIndex={210} visible={isOpen || false} onClick={outsideClick} />
       <div
         ref={ref}
         className={className}

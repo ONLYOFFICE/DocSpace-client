@@ -331,18 +331,6 @@ const StyledProfileWrapper = styled.div<{
   }
 `;
 
-const StyledArticleAlertsComponent = styled.div`
-  margin: 32px 0;
-
-  display: flex;
-  flex-wrap: wrap;
-  row-gap: 20px;
-
-  &:empty {
-    display: none;
-  }
-`;
-
 const StyledArticleApps = styled.div<{
   withDevTools: boolean;
   showText: boolean;
@@ -543,6 +531,5 @@ export {
   StyledArticleProfile,
   StyledUserName,
   StyledProfileWrapper,
-  StyledArticleAlertsComponent,
   StyledWrapper,
 };

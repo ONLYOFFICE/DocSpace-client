@@ -6,14 +6,14 @@ import {
 import { RoomsType } from "@docspace/shared/enums";
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
-import { presentInArray } from "../helpers/files-helpers";
+import { presentInArray } from "@docspace/shared/utils";
 import {
   iconSize24,
   iconSize32,
   iconSize64,
   iconSize96,
 } from "@docspace/shared/utils/image-helpers";
-
+import { HTML_EXST } from "@docspace/shared/constants";
 import { getIconPathByFolderType } from "@docspace/shared/utils/common";
 class FilesSettingsStore {
   thirdPartyStore;
@@ -66,7 +66,6 @@ class FilesSettingsStore {
   masterFormExtension = "";
   canSearchByContent = false;
 
-  html = [".htm", ".mht", ".html"];
   ebook = [".fb2", ".ibk", ".prc", ".epub"];
 
   constructor(
@@ -75,7 +74,7 @@ class FilesSettingsStore {
     publicRoomStore,
     pluginStore,
     authStore,
-    settingsStore
+    settingsStore,
   ) {
     makeAutoObservable(this);
 
@@ -204,7 +203,7 @@ class FilesSettingsStore {
     api.files.changeDocumentServiceLocation(
       docServiceUrl,
       internalUrl,
-      portalUrl
+      portalUrl,
     );
 
   setForcesave = (val) => (this.forcesave = val);
@@ -255,7 +254,7 @@ class FilesSettingsStore {
 
   isSound = (extension) => presentInArray(this.extsAudio, extension);
 
-  isHtml = (extension) => presentInArray(this.html, extension);
+  isHtml = (extension) => presentInArray(HTML_EXST, extension);
 
   isEbook = (extension) => presentInArray(this.ebook, extension);
 
@@ -276,7 +275,7 @@ class FilesSettingsStore {
     contentLength = null,
     roomType = null,
     isArchive = null,
-    folderType = null
+    folderType = null,
   ) => {
     if (fileExst || contentLength) {
       const isArchiveItem = this.isArchive(fileExst);
@@ -290,7 +289,7 @@ class FilesSettingsStore {
         isArchiveItem,
         isImageItem,
         isSoundItem,
-        isHtmlItem
+        isHtmlItem,
       );
       return icon;
     } else if (roomType) {
@@ -592,7 +591,7 @@ class FilesSettingsStore {
     archive = false,
     image = false,
     sound = false,
-    html = false
+    html = false,
   ) => {
     let path = "";
 
@@ -618,7 +617,7 @@ class FilesSettingsStore {
 
     if (presentInArray(this.extsAudio, ext, true)) path = "sound.svg";
 
-    if (presentInArray(this.html, ext, true)) path = "html.svg";
+    if (presentInArray(HTML_EXST, ext, true)) path = "html.svg";
 
     if (path) return this.getIconBySize(size, path);
 

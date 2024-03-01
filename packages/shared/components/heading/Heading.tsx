@@ -5,9 +5,10 @@ import { HeadingProps } from "./Heading.types";
 import { HeadingLevel, HeadingSize } from "./Heading.enums";
 
 export const HeadingPure = ({
-  level,
+  level = HeadingLevel.h1,
   color,
-  className,
+  className = "",
+  size = HeadingSize.large,
   ...rest
 }: HeadingProps) => {
   return (
@@ -16,18 +17,10 @@ export const HeadingPure = ({
       as={`h${level}`}
       colorProp={color}
       data-testid="heading"
+      size={size}
       {...rest}
     />
   );
-};
-
-HeadingPure.defaultProps = {
-  title: null,
-  truncate: false,
-  isInline: false,
-  size: HeadingSize.large,
-  level: HeadingLevel.h1,
-  className: "",
 };
 
 const Heading = React.memo(HeadingPure);

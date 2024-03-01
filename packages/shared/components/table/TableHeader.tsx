@@ -1658,6 +1658,9 @@ class TableHeader extends React.Component<
       infoPanelVisible,
     } = this.props;
 
+    localStorage.removeItem(columnStorageName);
+    localStorage.removeItem(columnInfoPanelStorageName);
+
     let str = "";
 
     const enableColumns = columns
@@ -1695,9 +1698,13 @@ class TableHeader extends React.Component<
       this.headerRef.current.style.width = `${containerWidth}px`;
     }
 
-    if (str)
-      if (!infoPanelVisible) localStorage.setItem(columnStorageName, str);
-      else localStorage.setItem(columnInfoPanelStorageName, str);
+    if (str) {
+      if (!infoPanelVisible) {
+        localStorage.setItem(columnStorageName, str);
+      } else {
+        localStorage.setItem(columnInfoPanelStorageName, str);
+      }
+    }
 
     this.onResize();
   };

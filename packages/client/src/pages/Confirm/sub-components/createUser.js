@@ -91,6 +91,18 @@ const CreateUserForm = (props) => {
     cultureNames,
   } = props;
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const culture = searchParams.get("culture");
+  const installedLanguage = culture ?? getCookie(LANGUAGE);
+
+  //const language = convertLanguage(cultureName);
+  const selectedLanguage = cultureNames.find(
+    (item) => item.key === installedLanguage,
+  );
+
+  const [cultureName, setCultureName] = useState(installedLanguage);
+
   const inputRef = React.useRef(null);
 
   const emailFromLink = linkData?.email ? linkData.email : "";
@@ -116,8 +128,6 @@ const CreateUserForm = (props) => {
 
   const [isEmailErrorShow, setIsEmailErrorShow] = useState(false);
   const [isPasswordErrorShow, setIsPasswordErrorShow] = useState(false);
-
-  const [searchParams, setSearchParams] = useSearchParams();
 
   const [registrationForm, setRegistrationForm] = useState(emailFromLink);
 
@@ -184,7 +194,7 @@ const CreateUserForm = (props) => {
       window.location.href = combineUrl(
         window.DocSpaceConfig?.proxy?.url,
         "/login",
-        `?loginData=${loginData}`,
+        `?culture=${cultureName}&loginData=${loginData}`,
       );
     } catch (err) {
       const status = err?.response?.status;
@@ -200,7 +210,7 @@ const CreateUserForm = (props) => {
   const onSubmit = () => {
     const { linkData, hashSettings } = props;
     const type = parseInt(linkData.emplType);
-    const culture = searchParams.get("culture");
+
     setIsLoading(true);
 
     setErrorText("");
@@ -247,7 +257,7 @@ const CreateUserForm = (props) => {
       firstname: fname.trim(),
       lastname: sname.trim(),
       email: email,
-      cultureName: culture,
+      cultureName: cultureName,
     };
 
     if (!!type) {
@@ -439,16 +449,15 @@ const CreateUserForm = (props) => {
         ssoSVG: SsoReactSvgUrl,
       }
     : {};
-  const cultureName = getCookie(LANGUAGE);
-  const language = convertLanguage(cultureName);
-  const selectedLanguage = cultureNames.find((item) => item.key === language);
 
   const onLanguageSelect = (e) => {
+    let url = location.href;
+
     setCookie(LANGUAGE, e.key, {
       "max-age": COOKIE_EXPIRATION_YEAR,
     });
 
-    location.reload();
+    location.href = url.replace(`culture=${culture}`, `culture=${e.key}`);
   };
 
   return (

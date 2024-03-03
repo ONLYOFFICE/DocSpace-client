@@ -58,11 +58,11 @@ const Login: React.FC<ILoginProps> = ({
 
   useEffect(() => {
     if (search) {
-      const isInviteInfo = search.indexOf("loginData=");
+      const startInviteIndex = search.indexOf("loginData=");
 
-      if (isInviteInfo === -1) return;
+      if (startInviteIndex === -1) return;
 
-      const encodeString = search.slice(search.indexOf("=") + 1);
+      const encodeString = search.slice(startInviteIndex + 10);
 
       const decodeString = atob(encodeString);
       const queryParams = JSON.parse(decodeString);

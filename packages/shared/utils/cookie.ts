@@ -11,6 +11,9 @@ export function getCookie(name: string) {
     if (url.pathname === "/confirm/LinkInvite" && culture) {
       return culture;
     }
+    if (url.pathname === "/login/" && culture) {
+      return culture;
+    }
   }
 
   const matches = document.cookie.match(

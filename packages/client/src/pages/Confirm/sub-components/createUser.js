@@ -3,7 +3,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { useSearchParams } from "react-router-dom";
 import { Button } from "@docspace/shared/components/button";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
@@ -24,17 +23,10 @@ import {
   createPasswordHash,
   getOAuthToken,
   getLoginLink,
-  convertLanguage,
 } from "@docspace/shared/utils/common";
 import { login } from "@docspace/shared/utils/loginUtils";
-import {
-  COOKIE_EXPIRATION_YEAR,
-  LANGUAGE,
-  PROVIDERS_DATA,
-} from "@docspace/shared/constants";
+import { PROVIDERS_DATA } from "@docspace/shared/constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 import { getPasswordErrorMessage } from "@docspace/shared/utils/getPasswordErrorMessage";
 import DocspaceLogo from "SRC_DIR/components/DocspaceLogoWrapper";
@@ -48,8 +40,7 @@ import {
 } from "./StyledCreateUser";
 import GreetingUserContainer from "./GreetingUserContainer";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
-import { getCookie, isMobile } from "@docspace/shared/utils";
-import { setCookie } from "@docspace/shared/utils/cookie";
+import { isMobile } from "@docspace/shared/utils";
 import { ComboBox } from "@docspace/shared/components/combobox";
 
 const DEFAULT_ROOM_TEXT =
@@ -89,19 +80,10 @@ const CreateUserForm = (props) => {
     userNameRegex,
     defaultPage,
     cultureNames,
+    selectedCultureObj,
+    currentCultureName,
+    onLanguageSelect,
   } = props;
-
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const culture = searchParams.get("culture");
-  const installedLanguage = culture ?? getCookie(LANGUAGE);
-
-  //const language = convertLanguage(cultureName);
-  const selectedLanguage = cultureNames.find(
-    (item) => item.key === installedLanguage,
-  );
-
-  const [cultureName, setCultureName] = useState(installedLanguage);
 
   const inputRef = React.useRef(null);
 
@@ -257,7 +239,7 @@ const CreateUserForm = (props) => {
       firstname: fname.trim(),
       lastname: sname.trim(),
       email: email,
-      cultureName: cultureName,
+      cultureName: currentCultureName,
     };
 
     if (!!type) {
@@ -450,16 +432,6 @@ const CreateUserForm = (props) => {
       }
     : {};
 
-  const onLanguageSelect = (e) => {
-    let url = location.href;
-
-    setCookie(LANGUAGE, e.key, {
-      "max-age": COOKIE_EXPIRATION_YEAR,
-    });
-
-    location.href = url.replace(`culture=${culture}`, `culture=${e.key}`);
-  };
-
   return (
     <StyledPage>
       {!isMobile() && (
@@ -467,7 +439,7 @@ const CreateUserForm = (props) => {
           className="language-combo-box"
           directionY={"both"}
           options={cultureNames}
-          selectedOption={selectedLanguage}
+          selectedOption={selectedCultureObj}
           onSelect={onLanguageSelect}
           isDisabled={false}
           scaled={false}

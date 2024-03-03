@@ -5,12 +5,9 @@ import { Box } from "@docspace/shared/components/box";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { Base } from "@docspace/shared/themes";
-import { getCookie, mobile } from "@docspace/shared/utils";
+import { mobile } from "@docspace/shared/utils";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
-import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "@docspace/shared/constants";
-import { convertLanguage } from "@docspace/shared/utils/common";
-import { setCookie } from "@docspace/shared/utils/cookie";
 
 const Header = styled.header`
   align-items: left;
@@ -69,23 +66,13 @@ const HeaderUnAuth = ({
   logoUrl,
   theme,
   cultureNames,
+  selectedCultureObj,
+  onLanguageSelect,
 }) => {
   const { t } = useTranslation("NavMenu");
 
   const logo = !theme.isBase ? logoUrl?.path?.dark : logoUrl?.path?.light;
 
-  const cultureName = getCookie(LANGUAGE);
-  const language = convertLanguage(cultureName);
-  const selectedLanguage = cultureNames.find((item) => item.key === language);
-
-  console.log("cultureNames", cultureNames, language);
-  const onLanguageSelect = (e) => {
-    setCookie(LANGUAGE, e.key, {
-      "max-age": COOKIE_EXPIRATION_YEAR,
-    });
-
-    location.reload();
-  };
   return (
     <Header isLoaded={isLoaded} className="navMenuHeaderUnAuth">
       <Box
@@ -109,7 +96,7 @@ const HeaderUnAuth = ({
         className="language-combo-box"
         directionY={"both"}
         options={cultureNames}
-        selectedOption={selectedLanguage}
+        selectedOption={selectedCultureObj}
         onSelect={onLanguageSelect}
         isDisabled={false}
         scaled={false}

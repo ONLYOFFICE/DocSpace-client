@@ -1,10 +1,11 @@
 import { observer, inject } from "mobx-react";
 import React, { useEffect, useMemo } from "react";
 import { withTranslation, I18nextProviderProps } from "react-i18next";
-
 import { isBetaLanguage } from "@docspace/shared/utils";
+import { getCookie, setCookie } from "@docspace/shared/utils/cookie";
 import { flagsIcons } from "@docspace/shared/utils/image-flags";
 import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
+import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "@docspace/shared/constants";
 
 type I18n = I18nextProviderProps["i18n"];
 
@@ -60,9 +61,34 @@ export default function withCultureNames<
       () => mapCulturesToArray(cultures, i18n),
       [cultures, i18n],
     );
+    const url = new URL(window.location.href);
+    const culture = url.searchParams.get("culture");
+    const currentCultureName = culture ?? getCookie(LANGUAGE);
+    const selectedCultureObj = cultureNames.find(
+      (item) => item.key === currentCultureName,
+    );
+
+    const onLanguageSelect = (e) => {
+      setCookie(LANGUAGE, e.key, {
+        "max-age": COOKIE_EXPIRATION_YEAR,
+      });
+
+      if (culture) {
+        location.href = url.replace(`culture=${culture}`, `culture=${e.key}`);
+        return;
+      }
+
+      location.reload();
+    };
 
     return cultures.length > 0 && tReady ? (
-      <WrappedComponent {...(props as T)} cultureNames={cultureNames} />
+      <WrappedComponent
+        {...(props as T)}
+        cultureNames={cultureNames}
+        currentCultureName={currentCultureName}
+        onLanguageSelect={onLanguageSelect}
+        selectedCultureObj={selectedCultureObj}
+      />
     ) : (
       <Loader className="pageLoader" type={LoaderTypes.rombs} size="40px" />
     );

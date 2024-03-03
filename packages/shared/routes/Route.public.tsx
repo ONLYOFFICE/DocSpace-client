@@ -32,7 +32,10 @@ export const PublicRoute = (props: PublicRouteProps) => {
       return children;
     }
 
-    if (location.pathname === "/rooms/share") {
+    if (
+      location.pathname === "/rooms/share" ||
+      location.pathname.includes("/rooms/share/media/view/")
+    ) {
       return children;
     }
 

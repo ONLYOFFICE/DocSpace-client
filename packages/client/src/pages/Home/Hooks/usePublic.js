@@ -63,7 +63,7 @@ const usePublic = ({ roomId, location, fetchFiles, setIsLoading }) => {
         setIsLoading(false);
         frameCallCommand("setIsLoaded");
       });
-  }, [location.pathname, location.search]);
+  }, [location.search]);
 };
 
 export default usePublic;

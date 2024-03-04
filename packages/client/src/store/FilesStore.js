@@ -14,7 +14,7 @@ import {
 import { RoomsTypes } from "@docspace/shared/utils";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { updateTempContent } from "@docspace/shared/utils/common";
+import { updateTempContent, isPublicRoom } from "@docspace/shared/utils/common";
 
 import { toastr } from "@docspace/shared/components/toast";
 import config from "PACKAGE_FILE";
@@ -1570,7 +1570,7 @@ class FilesStore {
           this.setCreatedItem(null);
         }
 
-        if (window.location.pathname === "/rooms/share") {
+        if (isPublicRoom()) {
           return Promise.resolve(data);
         } else {
           return Promise.resolve(selectedFolder);

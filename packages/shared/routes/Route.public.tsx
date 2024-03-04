@@ -4,6 +4,7 @@ import { Navigate, useLocation } from "react-router-dom";
 
 import { TenantStatus } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { isPublicRoom } from "@docspace/shared/utils/common";
 
 import type { PublicRouteProps } from "./Routers.types";
 
@@ -32,10 +33,7 @@ export const PublicRoute = (props: PublicRouteProps) => {
       return children;
     }
 
-    if (
-      location.pathname === "/rooms/share" ||
-      location.pathname.includes("/rooms/share/media/view/")
-    ) {
+    if (isPublicRoom()) {
       return children;
     }
 

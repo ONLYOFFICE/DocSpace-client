@@ -92,6 +92,7 @@ const PortalIntegration = (props) => {
 
   const navigate = useNavigate();
 
+  const navigateToDocspace = () => navigate("docspace");
   const navigateToPublicRoom = () => navigate("public-room");
   const navigateToCustom = () => navigate("custom");
   const navigateToRoomSelector = () => navigate("room-selector");
@@ -104,7 +105,7 @@ const PortalIntegration = (props) => {
       title: "DocSpace",
       description: t("DocspaceDescription"),
       image: theme.isBase ? DocspaceImg : DocspaceImgDark,
-      // handleOnClick: navigateToSimpleRoom,
+      handleOnClick: navigateToDocspace,
     },
     {
       title: t("Files:PublicRoom"),

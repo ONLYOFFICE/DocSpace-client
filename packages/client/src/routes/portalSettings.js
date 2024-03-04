@@ -173,6 +173,12 @@ const RestoreBackup = loadable(
 );
 const Bonus = loadable(() => import("../pages/Bonus"));
 
+const DocSpace = loadable(
+  () =>
+    import(
+      "../pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/DocSpace"
+    ),
+);
 const SimpleRoom = loadable(
   () =>
     import(
@@ -376,6 +382,10 @@ const PortalSettingsRoutes = {
     {
       path: "developer-tools/javascript-sdk",
       element: <DeveloperTools />,
+    },
+    {
+      path: "developer-tools/javascript-sdk/docspace",
+      element: <DocSpace />,
     },
     {
       path: "developer-tools/javascript-sdk/public-room",

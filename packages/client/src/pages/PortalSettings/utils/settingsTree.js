@@ -411,6 +411,13 @@ export const settingsTree = [
             link: "viewer",
             tKey: "JavascriptSdk:Viewer",
           },
+          {
+            id: "portal-settings_catalog-javascript-sdk_docspace",
+            key: "6-1-6",
+            icon: "",
+            link: "docspace",
+            tKey: "DocSpace",
+          },
         ],
       },
       {

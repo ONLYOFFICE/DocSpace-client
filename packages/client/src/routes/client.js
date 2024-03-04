@@ -5,7 +5,7 @@ import loadable from "@loadable/component";
 import PrivateRoute from "../components/PrivateRouteWrapper";
 import PublicRoute from "../components/PublicRouteWrapper";
 import Error404 from "@docspace/shared/components/errors/Error404";
-
+import componentLoader from "@docspace/shared/utils/component-loader";
 import ErrorBoundary from "../components/ErrorBoundaryWrapper";
 
 import FilesView from "SRC_DIR/pages/Home/View/Files";
@@ -14,41 +14,52 @@ import SettingsView from "SRC_DIR/pages/Home/View/Settings";
 
 import { generalRoutes } from "./general";
 
-const Client = loadable(() => import("../Client"));
+const Client = loadable(() => componentLoader(() => import("../Client")));
 
-const Home = loadable(() => import("../pages/Home"));
+const Home = loadable(() => componentLoader(() => import("../pages/Home")));
 
-const Sdk = loadable(() => import("../pages/Sdk"));
+const Sdk = loadable(() => componentLoader(() => import("../pages/Sdk")));
 
-const FormGallery = loadable(() => import("../pages/FormGallery"));
-const PublicRoom = loadable(() => import("../pages/PublicRoom"));
-const About = loadable(() => import("../pages/About"));
-const Wizard = loadable(() => import("../pages/Wizard"));
-const PreparationPortal = loadable(() => import("../pages/PreparationPortal"));
-const PortalUnavailable = loadable(() => import("../pages/PortalUnavailable"));
-const ErrorUnavailable = loadable(
-  () => import("../components/ErrorUnavailableWrapper"),
+const FormGallery = loadable(() =>
+  componentLoader(() => import("../pages/FormGallery")),
 );
-const AccessRestricted = loadable(
-  () => import("@docspace/shared/components/errors/AccessRestricted"),
+const PublicRoom = loadable(() =>
+  componentLoader(() => import("../pages/PublicRoom")),
 );
-
-const Error401 = loadable(
-  () => import("@docspace/shared/components/errors/Error401"),
+const About = loadable(() => componentLoader(() => import("../pages/About")));
+const Wizard = loadable(() => componentLoader(() => import("../pages/Wizard")));
+const PreparationPortal = loadable(() =>
+  componentLoader(() => import("../pages/PreparationPortal")),
 );
-
-const Error403 = loadable(
-  () => import("@docspace/shared/components/errors/Error403"),
+const PortalUnavailable = loadable(() =>
+  componentLoader(() => import("../pages/PortalUnavailable")),
+);
+const ErrorUnavailable = loadable(() =>
+  componentLoader(() => import("../components/ErrorUnavailableWrapper")),
 );
 
-const Error520 = loadable(() => import("../components/Error520Wrapper"));
-
-const ErrorAccessRestricted = loadable(
-  () => import("@docspace/shared/components/errors/AccessRestricted"),
+const Error401 = loadable(() =>
+  componentLoader(() => import("@docspace/shared/components/errors/Error401")),
 );
 
-const ErrorOffline = loadable(
-  () => import("@docspace/shared/components/errors/ErrorOffline"),
+const Error403 = loadable(() =>
+  componentLoader(() => import("@docspace/shared/components/errors/Error403")),
+);
+
+const Error520 = loadable(() =>
+  componentLoader(() => import("../components/Error520Wrapper")),
+);
+
+const ErrorAccessRestricted = loadable(() =>
+  componentLoader(
+    () => import("@docspace/shared/components/errors/AccessRestricted"),
+  ),
+);
+
+const ErrorOffline = loadable(() =>
+  componentLoader(
+    () => import("@docspace/shared/components/errors/ErrorOffline"),
+  ),
 );
 
 const ClientRoutes = [
@@ -413,7 +424,7 @@ const ClientRoutes = [
     element: (
       <PublicRoute>
         <ErrorBoundary>
-          <AccessRestricted />
+          <ErrorAccessRestricted />
         </ErrorBoundary>
       </PublicRoute>
     ),

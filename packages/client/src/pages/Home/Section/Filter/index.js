@@ -33,7 +33,7 @@ import { ROOMS_PROVIDER_TYPE_NAME } from "@docspace/shared/constants";
 
 import { getDefaultRoomName } from "SRC_DIR/helpers/filesUtils";
 
-import { SSO_LABEL, TableVersions } from "SRC_DIR/helpers/constants";
+import { TableVersions } from "SRC_DIR/helpers/constants";
 import { SortByFieldName } from "SRC_DIR/helpers/enums";
 
 import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
@@ -838,7 +838,7 @@ const SectionFilterContent = ({
         if (filter?.accountLoginType?.toString()) {
           const label =
             AccountLoginType.SSO === filter.accountLoginType.toString()
-              ? SSO_LABEL
+              ? t("Common:SSO")
               : AccountLoginType.LDAP === filter.accountLoginType.toString()
                 ? t("PeopleTranslations:LDAPLbl")
                 : t("PeopleTranslations:StandardLogin");
@@ -1401,7 +1401,7 @@ const SectionFilterContent = ({
         {
           key: AccountLoginType.SSO,
           group: "filter-login-type",
-          label: SSO_LABEL,
+          label: t("Common:SSO"),
         },
         //TODO: uncomment after ldap be ready
         /*{
@@ -2024,8 +2024,6 @@ const SectionFilterContent = ({
               infoPanelColumnsSize[idx] === "0px";
 
             !hide && options.push(hideableColumns[columnTitle]);
-
-          
           }
         });
       }

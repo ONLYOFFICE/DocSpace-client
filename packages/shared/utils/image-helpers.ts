@@ -75,6 +75,7 @@ const formatIcons = [
   ".wpt",
   ".xls",
   ".xlsm",
+  ".xlsb",
   ".xlsx",
   ".xml",
   ".xps",

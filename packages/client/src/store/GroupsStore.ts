@@ -311,7 +311,7 @@ class GroupsStore {
     this.setSelection(newSelections);
   };
 
-  getGroupContextOptions = (t, item) => {
+  getGroupContextOptions = (t, item, forInfoPanel = false) => {
     return [
       {
         id: "edit-group",
@@ -326,7 +326,7 @@ class GroupsStore {
           window.dispatchEvent(event);
         },
       },
-      {
+      !forInfoPanel && {
         id: "info",
         key: "group-info",
         className: "group-menu_drop-down",

@@ -19,7 +19,8 @@ const GroupsItemTitle = ({
 
   const itemTitleRef = useRef();
 
-  const getContextOptions = () => getGroupContextOptions(t, infoPanelSelection);
+  const getContextOptions = () =>
+    getGroupContextOptions(t, infoPanelSelection, true);
 
   const groupName = infoPanelSelection.name
     ? decode(infoPanelSelection.name).trim()

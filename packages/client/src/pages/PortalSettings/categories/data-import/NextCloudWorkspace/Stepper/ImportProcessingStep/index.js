@@ -18,8 +18,8 @@ const ImportProcessingStep = ({
   cancelMigration,
   getMigrationStatus,
 }) => {
-  // const [isVisible, setIsVisible] = useState(false);
   const [percent, setPercent] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
   const uploadInterval = useRef(null);
 
   const handleFileMigration = async () => {
@@ -28,8 +28,13 @@ const ImportProcessingStep = ({
 
       uploadInterval.current = setInterval(async () => {
         const res = await getMigrationStatus();
-
         setPercent(res.progress);
+
+        if (res.progress > 10) {
+          setIsVisible(false);
+        } else {
+          setIsVisible(true);
+        }
 
         if (res.isCompleted || res.progress === 100) {
           clearInterval(uploadInterval.current);
@@ -62,7 +67,11 @@ const ImportProcessingStep = ({
 
   return (
     <Wrapper>
-      <ProgressBar percent={percent} className="data-import-progress-bar" />
+      <ProgressBar
+        percent={percent}
+        isInfiniteProgress={isVisible}
+        className="data-import-progress-bar"
+      />
       {/* <Button
         size={isTablet() ? "medium" : "small"}
         className="cancel-button"

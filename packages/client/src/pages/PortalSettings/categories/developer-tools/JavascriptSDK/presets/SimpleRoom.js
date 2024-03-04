@@ -64,11 +64,9 @@ const SimpleRoom = (props) => {
   ];
 
   const [widthDimension, setWidthDimension] = useState(dataDimensions[0]);
-  const [heightDimension, setHeightDimension] = useState(dataDimensions[1]);
+  const [heightDimension, setHeightDimension] = useState(dataDimensions[0]);
   const [width, setWidth] = useState("100");
-  const [height, setHeight] = useState(
-    isTablet() ? "400" : isMobile() ? "206" : "600",
-  );
+  const [height, setHeight] = useState("100");
   const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
   const [showPreview, setShowPreview] = useState(
     window.innerWidth > showPreviewThreshold,

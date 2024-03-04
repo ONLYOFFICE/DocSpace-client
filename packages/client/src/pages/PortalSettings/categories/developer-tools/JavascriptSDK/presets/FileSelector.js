@@ -90,9 +90,9 @@ const FileSelector = (props) => {
     { key: FilesSelectorFilterTypes.XLSX, label: FilesSelectorFilterTypes.XLSX },
   ]);
 
-  const [widthDimension, setWidthDimension] = useState(dataDimensions[1]);
+  const [widthDimension, setWidthDimension] = useState(dataDimensions[0]);
   const [heightDimension, setHeightDimension] = useState(dataDimensions[0]);
-  const [width, setWidth] = useState("600");
+  const [width, setWidth] = useState("100");
   const [height, setHeight] = useState("100");
   const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
   const [showPreview, setShowPreview] = useState(window.innerWidth > showPreviewThreshold);

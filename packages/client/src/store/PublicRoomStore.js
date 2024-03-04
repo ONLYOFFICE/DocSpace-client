@@ -1,9 +1,17 @@
+import axios from "axios";
 import { makeAutoObservable } from "mobx";
+
 import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { LinkType, ValidationStatus } from "../helpers/constants";
+import {
+  frameCallCommand,
+  isPublicRoom as isPublicRoomUtil,
+} from "@docspace/shared/utils/common";
+
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+
+import { LinkType, ValidationStatus } from "../helpers/constants";
 
 class PublicRoomStore {
   externalLinks = [];
@@ -16,9 +24,17 @@ class PublicRoomStore {
   isLoaded = false;
   isLoading = false;
 
-  constructor() {
+  clientLoadingStore;
+
+  constructor(clientLoadingStore) {
+    this.clientLoadingStore = clientLoadingStore;
     makeAutoObservable(this);
   }
+
+  setIsSectionLoading = (param) => {
+    this.clientLoadingStore?.setIsSectionFilterLoading(param);
+    this.clientLoadingStore?.setIsSectionBodyLoading(param);
+  };
 
   setIsLoading = (isLoading) => {
     this.isLoading = isLoading;
@@ -33,6 +49,65 @@ class PublicRoomStore {
     this.roomType = roomType;
 
     if (status === ValidationStatus.Ok) this.isLoaded = true;
+  };
+
+  fetchPublicRoom = (fetchFiles) => {
+    let filterObj = FilesFilter.getFilter(window.location);
+
+    if (!filterObj) return;
+
+    if (filterObj.folder === "@my") {
+      filterObj.folder = this.roomId;
+    }
+
+    this.setIsSectionLoading(true);
+
+    let dataObj = { filter: filterObj };
+
+    if (filterObj && filterObj.authorType) {
+      const authorType = filterObj.authorType;
+      const indexOfUnderscore = authorType.indexOf("_");
+      const type = authorType.slice(0, indexOfUnderscore);
+      const itemId = authorType.slice(indexOfUnderscore + 1);
+
+      if (itemId) {
+        dataObj = {
+          type,
+          itemId,
+          filter: filterObj,
+        };
+      } else {
+        filterObj.authorType = null;
+        dataObj = { filter: filterObj };
+      }
+    }
+
+    if (!dataObj) return;
+
+    const { filter } = dataObj;
+    const newFilter = filter ? filter.clone() : FilesFilter.getDefault();
+    const requests = [Promise.resolve(newFilter)];
+
+    return axios
+      .all(requests)
+      .catch((err) => {
+        Promise.resolve(FilesFilter.getDefault());
+      })
+      .then((data) => {
+        const filter = data[0];
+
+        if (filter) {
+          const folderId = filter.folder;
+          return fetchFiles(folderId, filter);
+        }
+
+        return Promise.resolve();
+      })
+      .finally(() => {
+        this.setIsSectionLoading(false);
+
+        frameCallCommand("setIsLoaded");
+      });
   };
 
   fetchExternalLinks = (roomId) => {
@@ -123,11 +198,7 @@ class PublicRoomStore {
   };
 
   get isPublicRoom() {
-    return (
-      this.isLoaded &&
-      (window.location.pathname === "/rooms/share" ||
-        window.location.pathname.includes("/rooms/share/media/view"))
-    );
+    return this.isLoaded && isPublicRoomUtil();
   }
 
   get roomLinks() {

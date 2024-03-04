@@ -65,6 +65,8 @@ const FilesMediaViewer = (props) => {
     someDialogIsOpen,
     currentDeviceType,
     changeUrl,
+    fetchPublicRoom,
+    isPublicRoom,
   } = props;
 
   const navigate = useNavigate();
@@ -88,6 +90,12 @@ const FilesMediaViewer = (props) => {
   useEffect(() => {
     if (previewFile) {
       // fetch file after preview with
+
+      if (isPublicRoom) {
+        fetchPublicRoom(fetchFiles);
+        return;
+      }
+
       fetchFiles(previewFile.folderId).finally(() => {
         setIsLoading(false);
       });
@@ -291,6 +299,7 @@ export default inject(
     clientLoadingStore,
     pluginStore,
     settingsStore,
+    publicRoomStore,
   }) => {
     const { currentDeviceType } = settingsStore;
     const {
@@ -298,6 +307,8 @@ export default inject(
 
       setIsSectionFilterLoading,
     } = clientLoadingStore;
+
+    const { fetchPublicRoom, isPublicRoom } = publicRoomStore;
 
     const setIsLoading = (param) => {
       setIsSectionFilterLoading(param);
@@ -427,6 +438,8 @@ export default inject(
       pluginContextMenuItems,
       currentDeviceType,
       changeUrl,
+      fetchPublicRoom,
+      isPublicRoom,
     };
   },
 )(withTranslation(["Files", "Translations"])(observer(FilesMediaViewer)));

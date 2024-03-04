@@ -1,6 +1,9 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
-import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
+import {
+  MEDIA_VIEW_URL,
+  PUBLIC_MEDIA_VIEW_URL,
+} from "@docspace/shared/constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { thumbnailStatuses } from "SRC_DIR/helpers/filesConstants";
 import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
@@ -36,6 +39,33 @@ class MediaViewerDataStore {
     this.visible = mediaData.visible;
 
     if (!mediaData.visible) this.setCurrentItem(null);
+  };
+
+  fetchPreviewMediaFile = (id, fetchDefaultFiles) => {
+    const isMediaViewer = window.location.pathname.includes(
+      PUBLIC_MEDIA_VIEW_URL,
+    );
+    const isEmptyPlaylist = this.playlist.length === 0;
+
+    if (isEmptyPlaylist && isMediaViewer && !this.visible) {
+      this.filesStore
+        .getFileInfo(id)
+        .then((data) => {
+          const canOpenPlayer =
+            data.viewAccessibility.ImageView ||
+            data.viewAccessibility.MediaView;
+          const file = { ...data, canOpenPlayer };
+          this.setToPreviewFile(file, true);
+          this.filesStore.setIsPreview(true);
+        })
+        .catch((err) => {
+          toastr.error(err);
+          fetchDefaultFiles();
+        });
+      return true;
+    }
+
+    return false;
   };
 
   setToPreviewFile = (file, visible) => {

@@ -279,11 +279,15 @@ class GroupsStore {
 
     let newSelections = [...this.selection];
 
-    for (let row of added) {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const row of added) {
       if (!row) return;
 
       const [element] = row.getElementsByClassName("group-item");
-      const groupId = element?.getAttribute("value");
+      const value = element?.getAttribute("value");
+      const valueSplit = value && value.split("_");
+      const groupId = valueSplit.slice(1, -3).join("_");
+
       if (!groupId) return;
 
       const isNotSelected =
@@ -294,11 +298,15 @@ class GroupsStore {
       }
     }
 
-    for (let row of removed) {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const row of removed) {
       if (!row) return;
 
       const [element] = row.getElementsByClassName("group-item");
-      const groupId = element?.getAttribute("value");
+      const value = element?.getAttribute("value");
+      const valueSplit = value && value.split("_");
+      const groupId = valueSplit.slice(1, -3).join("_");
+
       if (!groupId) return;
 
       const isSelected =

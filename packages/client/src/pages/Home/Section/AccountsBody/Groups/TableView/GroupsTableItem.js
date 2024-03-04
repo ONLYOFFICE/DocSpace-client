@@ -17,6 +17,7 @@ import { Avatar } from "@docspace/shared/components/avatar";
 const GroupsTableItem = ({
   t,
   item,
+  itemIndex,
   theme,
   hideColumns,
   selection,
@@ -75,7 +76,7 @@ const GroupsTableItem = ({
       className={`group-item ${
         (isChecked || isActive) && "table-row-selected"
       }`}
-      value={item.id}
+      value={`folder_${item.id}_false_index_${itemIndex}`}
     >
       <Styled.GroupsRow
         key={item.id}

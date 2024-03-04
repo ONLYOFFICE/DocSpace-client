@@ -93,7 +93,7 @@ const PortalIntegration = (props) => {
   const navigate = useNavigate();
 
   const navigateToSimpleRoom = () => navigate("room");
-  const navigateToManager = () => navigate("manager");
+  const navigateToCustom = () => navigate("custom");
   const navigateToRoomSelector = () => navigate("room-selector");
   const navigateToFileSelector = () => navigate("file-selector");
   const navigateToEditor = () => navigate("editor");
@@ -140,7 +140,7 @@ const PortalIntegration = (props) => {
       title: t("Custom"),
       description: t("CustomDescription"),
       image: theme.isBase ? CustomImg : CustomImgDark,
-      handleOnClick: navigateToManager,
+      handleOnClick: navigateToCustom,
     },
   ];
 

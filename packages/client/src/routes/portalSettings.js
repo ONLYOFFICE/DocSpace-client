@@ -382,7 +382,7 @@ const PortalSettingsRoutes = {
       element: <SimpleRoom />,
     },
     {
-      path: "developer-tools/javascript-sdk/manager",
+      path: "developer-tools/javascript-sdk/custom",
       element: <Manager />,
     },
     {

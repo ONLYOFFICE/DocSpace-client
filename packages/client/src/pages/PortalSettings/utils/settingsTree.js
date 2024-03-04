@@ -377,11 +377,11 @@ export const settingsTree = [
             tKey: "Common:Room",
           },
           {
-            id: "portal-settings_catalog-javascript-sdk_manager",
+            id: "portal-settings_catalog-javascript-sdk_custom",
             key: "6-1-1",
             icon: "",
-            link: "manager",
-            tKey: "JavascriptSdk:Manager",
+            link: "custom",
+            tKey: "JavascriptSdk:Custom",
           },
           {
             id: "portal-settings_catalog-javascript-sdk_room-selector",

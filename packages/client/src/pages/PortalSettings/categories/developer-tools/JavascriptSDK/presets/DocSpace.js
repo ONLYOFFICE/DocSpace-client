@@ -167,8 +167,8 @@ const DocSpace = (props) => {
 
   const preview = (
     <Frame
-      width={width + widthDimension.label}
-      height={height + heightDimension.label}
+      width={widthDimension.label === "px" && width + widthDimension.label}
+      height={heightDimension.label === "px" && height + heightDimension.label}
       targetId={frameId}
     >
       <Box id={frameId}></Box>

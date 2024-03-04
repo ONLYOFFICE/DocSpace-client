@@ -161,8 +161,16 @@ const Editor = (props) => {
 
   const preview = (
     <Frame
-      width={width + widthDimension.label}
-      height={height + heightDimension.label}
+      width={
+        config.id !== undefined &&
+        widthDimension.label === "px" &&
+        width + widthDimension.label
+      }
+      height={
+        config.id !== undefined &&
+        heightDimension.label === "px" &&
+        height + heightDimension.label
+      }
       targetId={frameId}
     >
       {config.id !== undefined ? (
@@ -172,8 +180,8 @@ const Editor = (props) => {
       ) : (
         <EmptyIframeContainer
           text={t("SelectFile")}
-          width={width + widthDimension.label}
-          height={height + heightDimension.label}
+          width="100%"
+          height="100%"
         />
       )}
     </Frame>

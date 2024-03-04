@@ -516,6 +516,9 @@ class FilesSettingsStore {
       case ".xlsx":
         path = "xlsx.svg";
         break;
+      case ".xlsb":
+        path = "xlsb.svg";
+        break;
       case ".xps":
         path = "xps.svg";
         break;

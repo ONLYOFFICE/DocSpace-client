@@ -23,7 +23,8 @@ import BackgroundPatternRedReactSvgUrl from "PUBLIC_DIR/images/background.patter
 import BackgroundPatternPurpleReactSvgUrl from "PUBLIC_DIR/images/background.pattern.purple.react.svg?url";
 import BackgroundPatternLightBlueReactSvgUrl from "PUBLIC_DIR/images/background.pattern.lightBlue.react.svg?url";
 import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.pattern.black.react.svg?url";
-import { parseAddress } from "@docspace/shared/utils";
+import { parseAddress } from "./email";
+
 import {
   FolderType,
   RoomsType,
@@ -1017,3 +1018,4 @@ export const insertDataLayer = (id: string) => {
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({ user_id: id });
 };
+

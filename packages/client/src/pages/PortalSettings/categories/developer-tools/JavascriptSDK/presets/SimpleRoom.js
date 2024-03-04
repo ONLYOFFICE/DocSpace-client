@@ -56,9 +56,13 @@ const SimpleRoom = (props) => {
   const [widthDimension, setWidthDimension] = useState(dataDimensions[0]);
   const [heightDimension, setHeightDimension] = useState(dataDimensions[1]);
   const [width, setWidth] = useState("100");
-  const [height, setHeight] = useState(isTablet() ? "400" : isMobile() ? "206" : "600");
+  const [height, setHeight] = useState(
+    isTablet() ? "400" : isMobile() ? "206" : "600",
+  );
   const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
-  const [showPreview, setShowPreview] = useState(window.innerWidth > showPreviewThreshold);
+  const [showPreview, setShowPreview] = useState(
+    window.innerWidth > showPreviewThreshold,
+  );
   const [sharedLinks, setSharedLinks] = useState(null);
 
   const [config, setConfig] = useState({
@@ -100,7 +104,9 @@ const SimpleRoom = (props) => {
 
     const params = objectToGetParams(config);
 
-    loadScript(`${scriptUrl}${params}`, "integration", () => window.DocSpace.SDK.initFrame(config));
+    loadScript(`${scriptUrl}${params}`, "integration", () =>
+      window.DocSpace.SDK.initFrame(config),
+    );
   }, 500);
 
   useEffect(() => {
@@ -193,7 +199,8 @@ const SimpleRoom = (props) => {
 
   const onResize = () => {
     const isEnoughWidthForPreview = window.innerWidth > showPreviewThreshold;
-    if (isEnoughWidthForPreview !== showPreview) setShowPreview(isEnoughWidthForPreview);
+    if (isEnoughWidthForPreview !== showPreview)
+      setShowPreview(isEnoughWidthForPreview);
   };
 
   useEffect(() => {
@@ -227,7 +234,9 @@ const SimpleRoom = (props) => {
 
   const code = (
     <CodeWrapper>
-      <CategorySubHeader className="copy-window-code">{t("CopyWindowCode")}</CategorySubHeader>
+      <CategorySubHeader className="copy-window-code">
+        {t("CopyWindowCode")}
+      </CategorySubHeader>
       <Textarea value={codeBlock} heightTextArea={153} />
     </CodeWrapper>
   );
@@ -248,7 +257,7 @@ const SimpleRoom = (props) => {
   return (
     <SDKContainer>
       <CategoryDescription>
-        <Text className="sdk-description">{t("SimpleRoomPresetDescription")}</Text>
+        <Text className="sdk-description">{t("PublicRoomDescription")}</Text>
       </CategoryDescription>
       <CategoryHeader>{t("CreateSampleHeader")}</CategoryHeader>
       <Container>
@@ -270,22 +279,33 @@ const SimpleRoom = (props) => {
                 <HelpButton
                   offsetRight={0}
                   size={12}
-                  tooltipContent={<Text fontSize="12px">{t("RoomOrFolderDescription")}</Text>}
+                  tooltipContent={
+                    <Text fontSize="12px">{t("RoomOrFolderDescription")}</Text>
+                  }
                 />
               </LabelGroup>
               <FilesSelectorInputWrapper>
-                <FilesSelectorInput onSelectFolder={onChangeFolderId} isSelect isRoomsOnly />
+                <FilesSelectorInput
+                  onSelectFolder={onChangeFolderId}
+                  isSelect
+                  isRoomsOnly
+                />
               </FilesSelectorInputWrapper>
             </ControlsGroup>
             {sharedLinks && (
               <ControlsGroup>
                 <LabelGroup>
-                  <Label className="label" text={t("SharingPanel:ExternalLink")} />
+                  <Label
+                    className="label"
+                    text={t("SharingPanel:ExternalLink")}
+                  />
                   <HelpButton
                     offsetRight={0}
                     size={12}
                     tooltipContent={
-                      <Text fontSize="12px">{t("CreateEditRoomDialog:PublicRoomDescription")}</Text>
+                      <Text fontSize="12px">
+                        {t("CreateEditRoomDialog:PublicRoomDescription")}
+                      </Text>
                     }
                   />
                 </LabelGroup>

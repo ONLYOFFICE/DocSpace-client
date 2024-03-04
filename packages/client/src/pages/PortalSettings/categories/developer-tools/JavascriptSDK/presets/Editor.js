@@ -202,7 +202,7 @@ const Editor = (props) => {
   return (
     <SDKContainer>
       <CategoryDescription>
-        <Text className="sdk-description">{t("EditorPresetDescription")}</Text>
+        <Text className="sdk-description">{t("EditorDescription")}</Text>
       </CategoryDescription>
       <CategoryHeader>{t("CreateSampleHeader")}</CategoryHeader>
       <Container>

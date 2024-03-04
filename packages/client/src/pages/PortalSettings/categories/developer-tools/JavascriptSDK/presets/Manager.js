@@ -668,7 +668,7 @@ const Manager = (props) => {
   return (
     <SDKContainer>
       <CategoryDescription>
-        <Text className="sdk-description">{t("ManagerPresetDescription")}</Text>
+        <Text className="sdk-description">{t("CustomDescription")}</Text>
       </CategoryDescription>
       <CategoryHeader>{t("CreateSampleHeader")}</CategoryHeader>
       <Container>

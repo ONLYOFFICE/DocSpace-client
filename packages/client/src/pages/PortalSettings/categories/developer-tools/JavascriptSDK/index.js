@@ -101,14 +101,14 @@ const PortalIntegration = (props) => {
 
   const presetsData = [
     {
-      title: t("Common:Room"),
-      description: t("SimpleRoomDescription"),
+      title: "DocSpace",
+      description: t("DocspaceDescription"),
       image: theme.isBase ? DocspaceImg : DocspaceImgDark,
       handleOnClick: navigateToSimpleRoom,
     },
     {
-      title: t("Common:Room"),
-      description: t("SimpleRoomDescription"),
+      title: t("Files:PublicRoom"),
+      description: t("PublicRoomDescription"),
       image: theme.isBase ? PublicRoomImg : PublicRoomImgDark,
       handleOnClick: navigateToSimpleRoom,
     },
@@ -137,8 +137,8 @@ const PortalIntegration = (props) => {
       handleOnClick: navigateToFileSelector,
     },
     {
-      title: t("Manager"),
-      description: t("ManagerDescription"),
+      title: t("Custom"),
+      description: t("CustomDescription"),
       image: theme.isBase ? CustomImg : CustomImgDark,
       handleOnClick: navigateToManager,
     },

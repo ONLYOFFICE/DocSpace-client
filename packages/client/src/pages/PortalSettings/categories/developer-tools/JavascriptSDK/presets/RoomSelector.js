@@ -291,7 +291,7 @@ const RoomSelector = (props) => {
   return (
     <SDKContainer>
       <CategoryDescription>
-        <Text className="sdk-description">{t("RoomSelectorPresetDescription")}</Text>
+        <Text className="sdk-description">{t("RoomSelectorDescription")}</Text>
       </CategoryDescription>
       <CategoryHeader>{t("CreateSampleHeader")}</CategoryHeader>
       <Container>

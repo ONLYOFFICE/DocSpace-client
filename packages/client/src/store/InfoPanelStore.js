@@ -496,7 +496,7 @@ class InfoPanelStore {
     if (administrators.length && !hasPrevAdminsTitle) {
       administrators.unshift({
         id: "administration",
-        displayName: t("Administration"),
+        displayName: t("InfoPanel:Administration"),
         isTitle: true,
       });
     }
@@ -514,7 +514,11 @@ class InfoPanelStore {
     let hasPrevUsersTitle = this.getHasPrevTitle(users, "user");
 
     if (users.length && !hasPrevUsersTitle) {
-      users.unshift({ id: "user", displayName: t("Users"), isTitle: true });
+      users.unshift({
+        id: "user",
+        displayName: t("InfoPanel:Users"),
+        isTitle: true,
+      });
     }
 
     let hasPrevExpectedTitle = this.getHasPrevTitle(
@@ -525,7 +529,7 @@ class InfoPanelStore {
     if (expectedMembers.length && !hasPrevExpectedTitle) {
       expectedMembers.unshift({
         id: "expected",
-        displayName: t("ExpectUsers"),
+        displayName: t("InfoPanel:ExpectUsers"),
         isTitle: true,
         isExpect: true,
       });

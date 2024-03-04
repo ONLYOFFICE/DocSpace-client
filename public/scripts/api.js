@@ -75,14 +75,18 @@
     "The current domain is not set in the Content Security Policy (CSP) settings.";
 
   const validateCSP = async (targetSrc) => {
-    const currentSrc = window.location.origin;
+    let currentSrc = window.location.origin;
 
-    if (currentSrc.indexOf(targetSrc) !== -1) return; //TODO: try work with localhost
+    if (currentSrc.indexOf(targetSrc) !== -1) return; // skip check for the same domain
 
     const response = await fetch(`${targetSrc}/api/2.0/security/csp`);
     const res = await response.json();
+
+    currentSrc = window.location.host; // more flexible way to check
+
     const passed =
-      res.response.header && res.response.header.includes(currentSrc);
+      res.response.header &&
+      res.response.header.toLowerCase().includes(currentSrc.toLowerCase());
 
     if (!passed) throw new Error(cspErrorText);
 

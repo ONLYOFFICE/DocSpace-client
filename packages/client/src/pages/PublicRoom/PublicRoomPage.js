@@ -13,25 +13,25 @@ import { usePublic } from "../Home/Hooks";
 
 const PublicRoomPage = (props) => {
   const {
-    roomId,
     withPaging,
     fetchFiles,
     isEmptyPage,
-    setIsLoading,
 
     showSecondaryProgressBar,
     secondaryProgressBarValue,
     secondaryProgressBarIcon,
     showSecondaryButtonAlert,
+    fetchPublicRoom,
+    fetchPreviewMediaFile,
   } = props;
 
   const location = useLocation();
 
   usePublic({
-    roomId,
     location,
     fetchFiles,
-    setIsLoading,
+    fetchPublicRoom,
+    fetchPreviewMediaFile,
   });
 
   const sectionProps = {
@@ -79,10 +79,11 @@ export default inject(
     publicRoomStore,
     uploadDataStore,
     filesSettingsStore,
-    clientLoadingStore,
+    mediaViewerDataStore,
   }) => {
     const { withPaging } = settingsStore;
-    const { isLoaded, isLoading, roomStatus, roomId } = publicRoomStore;
+    const { isLoaded, isLoading, roomStatus, fetchPublicRoom } =
+      publicRoomStore;
 
     const { fetchFiles, isEmptyPage } = filesStore;
     const { getFilesSettings } = filesSettingsStore;
@@ -94,16 +95,9 @@ export default inject(
       alert: showSecondaryButtonAlert,
     } = uploadDataStore.secondaryProgressDataStore;
 
-    const { setIsSectionFilterLoading, setIsSectionBodyLoading } =
-      clientLoadingStore;
-
-    const setIsLoading = (param) => {
-      setIsSectionFilterLoading(param);
-      setIsSectionBodyLoading(param);
-    };
+    const { fetchPreviewMediaFile } = mediaViewerDataStore;
 
     return {
-      roomId,
       isLoaded,
       isLoading,
       roomStatus,
@@ -119,7 +113,8 @@ export default inject(
 
       isAuthenticated: authStore.isAuthenticated,
       isEmptyPage,
-      setIsLoading,
+      fetchPublicRoom,
+      fetchPreviewMediaFile,
     };
-  }
+  },
 )(observer(PublicRoomPage));

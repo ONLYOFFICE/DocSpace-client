@@ -23,7 +23,8 @@ import BackgroundPatternRedReactSvgUrl from "PUBLIC_DIR/images/background.patter
 import BackgroundPatternPurpleReactSvgUrl from "PUBLIC_DIR/images/background.pattern.purple.react.svg?url";
 import BackgroundPatternLightBlueReactSvgUrl from "PUBLIC_DIR/images/background.pattern.lightBlue.react.svg?url";
 import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.pattern.black.react.svg?url";
-import { parseAddress } from "@docspace/shared/utils";
+import { parseAddress } from "./email";
+
 import {
   FolderType,
   RoomsType,
@@ -31,7 +32,7 @@ import {
   ThemeKeys,
   ErrorKeys,
 } from "../enums";
-import { LANGUAGE, RTL_LANGUAGES } from "../constants";
+import { LANGUAGE, PUBLIC_MEDIA_VIEW_URL, RTL_LANGUAGES } from "../constants";
 
 import { TI18n } from "../types";
 import { TUser } from "../api/people/types";
@@ -89,7 +90,10 @@ export function createPasswordHash(
 }
 
 export const isPublicRoom = () => {
-  return window.location.pathname === "/rooms/share";
+  return (
+    window.location.pathname === "/rooms/share" ||
+    window.location.pathname.includes(PUBLIC_MEDIA_VIEW_URL)
+  );
 };
 
 export const getUserTypeLabel = (
@@ -1014,3 +1018,4 @@ export const insertDataLayer = (id: string) => {
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({ user_id: id });
 };
+

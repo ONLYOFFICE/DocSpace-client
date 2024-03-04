@@ -1998,7 +1998,7 @@ const SectionFilterContent = ({
 
       options.push(firstName, lastName);
 
-      if ((viewAs = "table")) {
+      if (accountsViewAs === "table") {
         const tableColumns = isInsideGroup
           ? TABLE_INSIDE_GROUP_COLUMNS
           : TABLE_PEOPLE_COLUMNS;
@@ -2028,6 +2028,9 @@ const SectionFilterContent = ({
             !hide && options.push(hideableColumns[columnTitle]);
           }
         });
+      } else {
+        options.push(type, department, email);
+        if (showStorageInfo) options.push(storage);
       }
 
       return options;
@@ -2052,7 +2055,7 @@ const SectionFilterContent = ({
 
       groupsOptions.push(title);
 
-      if ((viewAs = "table")) {
+      if (accountsViewAs === "table") {
         const availableSort = localStorage
           ?.getItem(`${TABLE_GROUPS_COLUMNS}=${userId}`)
           ?.split(",");
@@ -2070,6 +2073,8 @@ const SectionFilterContent = ({
 
           !hide && groupsOptions.push(manager);
         }
+      } else {
+        groupsOptions.push(manager);
       }
 
       return groupsOptions;
@@ -2388,6 +2393,7 @@ const SectionFilterContent = ({
     userId,
     infoPanelVisible,
     viewAs,
+    accountsViewAs,
     isPersonalRoom,
     isTrash,
   ]);

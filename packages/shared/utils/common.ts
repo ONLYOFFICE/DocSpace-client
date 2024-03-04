@@ -83,7 +83,10 @@ export function createPasswordHash(
 }
 
 export const isPublicRoom = () => {
-  return window.location.pathname === "/rooms/share";
+  return (
+    window.location.pathname === "/rooms/share" ||
+    window.location.pathname.includes("/rooms/share/media/view")
+  );
 };
 
 export const getUserTypeLabel = (

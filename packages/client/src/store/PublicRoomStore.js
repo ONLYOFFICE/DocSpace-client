@@ -50,7 +50,7 @@ class PublicRoomStore {
 
     if (link) {
       const linkIndex = externalLinks.findIndex(
-        (l) => l.sharedTo.id === linkId
+        (l) => l.sharedTo.id === linkId,
       );
       externalLinks[linkIndex] = link;
     } else {
@@ -62,7 +62,7 @@ class PublicRoomStore {
 
   setExternalLink = (link) => {
     const linkIndex = this.externalLinks.findIndex(
-      (l) => l.sharedTo.id === link.sharedTo.id
+      (l) => l.sharedTo.id === link.sharedTo.id,
     );
     const externalLinks = this.externalLinks;
 
@@ -95,7 +95,7 @@ class PublicRoomStore {
       linkType,
       password,
       disabled,
-      denyDownload
+      denyDownload,
     );
   };
 
@@ -123,7 +123,11 @@ class PublicRoomStore {
   };
 
   get isPublicRoom() {
-    return this.isLoaded && window.location.pathname === "/rooms/share";
+    return (
+      this.isLoaded &&
+      (window.location.pathname === "/rooms/share" ||
+        window.location.pathname.includes("/rooms/share/media/view"))
+    );
   }
 
   get roomLinks() {
@@ -132,7 +136,7 @@ class PublicRoomStore {
         (l) =>
           l.sharedTo.shareLink &&
           !l.sharedTo.isTemplate &&
-          l.sharedTo.linkType === LinkType.External
+          l.sharedTo.linkType === LinkType.External,
       );
     } else {
       return [];

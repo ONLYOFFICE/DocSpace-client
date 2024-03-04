@@ -3,4 +3,6 @@ export interface ProgressBarProps {
   percent: number;
   /** Text in progress-bar. */
   label?: string;
+  /** Show infinite progress */
+  isInfiniteProgress?: boolean;
 }

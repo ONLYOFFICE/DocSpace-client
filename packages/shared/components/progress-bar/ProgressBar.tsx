@@ -5,7 +5,12 @@ import { Text } from "../text";
 import StyledProgressBar from "./ProgressBar.styled";
 import { ProgressBarProps } from "./ProgressBar.types";
 
-const ProgressBar = ({ percent, label, ...rest }: ProgressBarProps) => {
+const ProgressBar = ({
+  percent,
+  label,
+  isInfiniteProgress,
+  ...rest
+}: ProgressBarProps) => {
   const progressPercent = percent > 100 ? 100 : percent;
 
   // console.log("ProgressBar render");
@@ -25,7 +30,11 @@ const ProgressBar = ({ percent, label, ...rest }: ProgressBarProps) => {
         percent={progressPercent}
         data-testid="progress-bar"
       >
-        <div className="progress-bar_percent" />
+        {isInfiniteProgress ? (
+          <div className="progress-bar_animation" />
+        ) : (
+          <div className="progress-bar_percent" />
+        )}
       </StyledProgressBar>
     </>
   );

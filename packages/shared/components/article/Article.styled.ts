@@ -40,7 +40,7 @@ const StyledArticle = styled.article<{
     max-width: ${(props) => (props.showText ? "243px" : "60px")};
 
     height: ${(props) =>
-    props.correctTabletHeight ? `${props.correctTabletHeight}px` : `100%`};
+      props.correctTabletHeight ? `${props.correctTabletHeight}px` : `100%`};
   }
 
   @media ${mobile} {
@@ -63,7 +63,7 @@ const StyledArticle = styled.article<{
 
   .article-body__scrollbar {
     height: ${(props) =>
-    `calc(100% - ${props.$withMainButton ? "190px" : "150px"})`} !important;
+      `calc(100% - ${props.$withMainButton ? "190px" : "150px"})`} !important;
 
     @media ${tablet} {
       height: calc(100% - 184px) !important;
@@ -111,14 +111,14 @@ StyledArticle.defaultProps = { theme: Base };
 const StyledArticleHeader = styled.div<{ showText?: boolean }>`
   height: 24px;
   padding: ${({ theme }) =>
-    getCorrectFourValuesStyle("22px 21px 23px 20px", theme.interfaceDirection)};
+    getCorrectFourValuesStyle("23px 21px 22px 20px", theme.interfaceDirection)};
   margin: 0;
   display: flex;
   justify-content: flex-start;
   align-items: center;
 
   @media ${tablet} {
-    padding: 18px 8px 19px;
+    padding: 20px 8px 17px;
     margin: 0;
     justify-content: ${(props) => (props.showText ? "flex-start" : "center")};
 
@@ -130,7 +130,7 @@ const StyledArticleHeader = styled.div<{ showText?: boolean }>`
 
   @media ${mobile} {
     border-bottom: ${(props) => props.theme.catalog.header.borderBottom};
-    padding: 12px 0 12px;
+    padding: 12px 0;
   }
 
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -161,16 +161,16 @@ const StyledHeading = styled.div<{ showText?: boolean }>`
   @media ${tablet} {
     display: ${(props) => (props.showText ? "block" : "none")};
     ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `margin-right: 9px;`
-      : `margin-left: 9px;`}
+      theme.interfaceDirection === "rtl"
+        ? `margin-right: 9px;`
+        : `margin-left: 9px;`}
   }
 
   @media ${mobile} {
     ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `margin-right: 0;`
-      : `margin-left: 0;`}
+      theme.interfaceDirection === "rtl"
+        ? `margin-right: 0;`
+        : `margin-left: 0;`}
   }
 `;
 
@@ -270,9 +270,9 @@ const StyledArticleProfile = styled.div`
 
   .option-button {
     ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `margin-right: auto;`
-      : `margin-left: auto;`}
+      theme.interfaceDirection === "rtl"
+        ? `margin-right: auto;`
+        : `margin-left: auto;`}
     height: 32px;
     width: 32px;
 
@@ -344,12 +344,12 @@ const StyledArticleApps = styled.div<{
 
   @media ${tablet} {
     ${(props) =>
-    props.showText &&
-    css`
+      props.showText &&
+      css`
         ${({ theme }) =>
-        theme.interfaceDirection === "rtl"
-          ? `margin-right: 8px;`
-          : `margin-left: 8px;`}
+          theme.interfaceDirection === "rtl"
+            ? `margin-right: 8px;`
+            : `margin-left: 8px;`}
       `}
   }
 
@@ -398,7 +398,7 @@ const StyledWrapper = styled.div`
 
     svg {
       ${({ theme }) =>
-    theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+        theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
     }
   }
 
@@ -450,20 +450,20 @@ const StyledHideArticleMenuButton = styled.div<{
   .article-hide-menu-container {
     align-items: center;
     ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
+      props.theme.interfaceDirection === "rtl"
+        ? css`
             margin-right: 16px;
           `
-      : css`
+        : css`
             margin-left: 16px;
           `}
     .article-hide-menu-text {
       ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
+        props.theme.interfaceDirection === "rtl"
+          ? css`
               margin-right: 8px;
             `
-      : css`
+          : css`
               margin-left: 8px;
             `}
       color: ${({ currentColorScheme }) => currentColorScheme?.main?.accent};
@@ -487,16 +487,16 @@ const StyledHideArticleMenuButton = styled.div<{
   .article-show-menu-icon_svg {
     height: 20px;
     ${(props) =>
-    props.theme.interfaceDirection === "rtl" &&
-    css`
+      props.theme.interfaceDirection === "rtl" &&
+      css`
         transform: scaleX(-1);
       `}
   }
 
   .article-hide-menu-icon_svg {
     ${(props) =>
-    props.theme.interfaceDirection === "rtl" &&
-    css`
+      props.theme.interfaceDirection === "rtl" &&
+      css`
         transform: scaleX(-1);
       `}
     svg {

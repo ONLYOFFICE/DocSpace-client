@@ -330,8 +330,8 @@ class GroupsStore {
         id: "info",
         key: "group-info",
         className: "group-menu_drop-down",
-        label: t("Info"),
-        title: t("Info"),
+        label: t("Common:Info"),
+        title: t("Common:Info"),
         icon: InfoReactSvgUrl,
         onClick: () => {
           const { setIsVisible } = this.infoPanelStore;
@@ -347,8 +347,8 @@ class GroupsStore {
         id: "delete-group",
         key: "delete-group",
         className: "group-menu_drop-down",
-        label: t("Delete"),
-        title: t("Delete"),
+        label: t("Common:Delete"),
+        title: t("Common:Delete"),
         icon: TrashReactSvgUrl,
         onClick: async () => {
           const groupId = item.id;

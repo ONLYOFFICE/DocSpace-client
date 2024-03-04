@@ -17,6 +17,7 @@ const ItemTitle = ({
   currentColorScheme,
   getIcon,
   getUserContextOptions,
+  getGroupContextOptions,
 }) => {
   if (!infoPanelSelection) return null;
   if (isNoItem) return null;
@@ -36,7 +37,7 @@ const ItemTitle = ({
       <GroupsItemTitle
         infoPanelSelection={infoPanelSelection}
         isSeveralItems={isSeveralItems}
-        getUserContextOptions={getUserContextOptions}
+        getGroupContextOptions={getGroupContextOptions}
         selectionLength={selectionLength}
       />
     );
@@ -58,12 +59,14 @@ export default inject(
     const { currentColorScheme } = settingsStore;
     const { getIcon } = filesSettingsStore;
     const { getUserContextOptions } = peopleStore.contextOptionsStore;
+    const { getGroupContextOptions } = peopleStore.groupsStore;
     const { gallerySelected } = oformsStore;
 
     return {
       currentColorScheme,
       gallerySelected,
       getUserContextOptions,
+      getGroupContextOptions,
       getIcon,
     };
   },

@@ -95,6 +95,7 @@ export default inject(
     filesStore,
     settingsStore,
     infoPanelStore,
+    userStore,
   }) => {
     const {
       usersStore,
@@ -117,7 +118,8 @@ export default inject(
     } = groupsStore;
 
     const { theme, withPaging, currentDeviceType } = settingsStore;
-    const { peopleList, hasMoreAccounts, fetchMoreAccounts } = usersStore;
+    const { hasMoreAccounts, fetchMoreAccounts } = usersStore;
+    const { id: userId } = userStore.user;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
@@ -133,6 +135,8 @@ export default inject(
       fetchMoreAccounts,
       hasMoreAccounts,
       currentDeviceType,
+
+      userId,
 
       fetchMoreGroups,
       hasMoreGroups,

@@ -211,18 +211,15 @@ const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme)<{
 }>`
   align-self: center;
 
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: 20px;
-          transform: scaleX(-1);
-        `
-      : css`
-          margin-left: 20px;
-        `}
+  margin-inline-start: 20px;
 
   margin-bottom: 1px;
   padding: 0;
+
+  svg {
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl" && `transform: scaleX(-1)`}
+  }
 
   .info-panel-toggle {
     margin-inline-end: 8px;

@@ -79,6 +79,7 @@ const CSP = ({ t, cspDomains, getCSPSettings, setCSPSettings }) => {
           isInline
           label={item}
           onClose={() => deleteDomain(item)}
+          title={item}
         />
       ))
     ) : (

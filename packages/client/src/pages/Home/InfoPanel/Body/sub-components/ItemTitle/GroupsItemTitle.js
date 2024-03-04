@@ -13,19 +13,13 @@ const GroupsItemTitle = ({
   t,
   isSeveralItems,
   infoPanelSelection,
-  getUserContextOptions,
+  getGroupContextOptions,
 }) => {
   if (isSeveralItems) return null;
 
   const itemTitleRef = useRef();
 
-  const getData = () => {
-    const newOptions = infoPanelSelection.options?.filter(
-      (o) => o !== "details",
-    );
-    return getUserContextOptions(t, newOptions || [], infoPanelSelection);
-  };
-  const contextOptions = getData();
+  const getContextOptions = () => getGroupContextOptions(t, infoPanelSelection);
 
   const groupName = infoPanelSelection.name
     ? decode(infoPanelSelection.name).trim()
@@ -60,13 +54,11 @@ const GroupsItemTitle = ({
         )}
       </div>
 
-      {!!contextOptions.length && (
-        <ContextMenuButton
-          id="info-accounts-options"
-          className="context-button"
-          getData={getData}
-        />
-      )}
+      <ContextMenuButton
+        id="info-accounts-options"
+        className="context-button"
+        getData={getContextOptions}
+      />
     </StyledAccountsItemTitle>
   );
 };

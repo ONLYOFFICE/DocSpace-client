@@ -612,20 +612,30 @@ class InfoPanelStore {
     };
   };
 
-  addInfoPanelMembers = (t, members, clearFilter) => {
-    const newMembers = this.convertMembers(t, members, clearFilter);
+  addInfoPanelMembers = (t, members) => {
+    const convertedMembers = this.convertMembers(t, members);
 
     if (this.infoPanelMembers) {
       const { roomId, administrators, users, expected, groups } =
         this.infoPanelMembers;
 
-      this.setInfoPanelMembers({
+      const mergedMembers = {
         roomId: roomId,
-        administrators: [...administrators, ...newMembers.administrators],
-        users: [...users, ...newMembers.users],
-        expected: [...expected, ...newMembers.expectedMembers],
-        groups: [...groups, ...newMembers.groups],
-      });
+        administrators: [...administrators, ...convertedMembers.administrators],
+        users: [...users, ...convertedMembers.users],
+        expected: [...expected, ...convertedMembers.expectedMembers],
+        groups: [...groups, ...convertedMembers.groups],
+      };
+
+      this.addMembersTitle(
+        t,
+        mergedMembers.administrators,
+        mergedMembers.users,
+        mergedMembers.expected,
+        mergedMembers.groups,
+      );
+
+      this.setInfoPanelMembers(mergedMembers);
     }
   };
 

@@ -75,14 +75,18 @@
     "The current domain is not set in the Content Security Policy (CSP) settings.";
 
   const validateCSP = async (targetSrc) => {
-    const currentSrc = window.location.origin;
+    let currentSrc = window.location.origin;
 
-    if (currentSrc.indexOf(targetSrc) !== -1) return; //TODO: try work with localhost
+    if (currentSrc.indexOf(targetSrc) !== -1) return; // skip check for the same domain
 
     const response = await fetch(`${targetSrc}/api/2.0/security/csp`);
     const res = await response.json();
+
+    currentSrc = window.location.host; // more flexible way to check
+
     const passed =
-      res.response.header && res.response.header.includes(currentSrc);
+      res.response.header &&
+      res.response.header.toLowerCase().includes(currentSrc.toLowerCase());
 
     if (!passed) throw new Error(cspErrorText);
 
@@ -213,9 +217,12 @@
               <body style="margin:0;">
                   <div id=${config.frameId}></div>
                   <script id="integration">
-                    const config = {...${JSON.stringify(config, function (key, val) {
-                      return typeof val === "function" ? "" + val : val;
-                    })}, width: "100%", height: "100%", events: {
+                    const config = {...${JSON.stringify(
+                      config,
+                      function (key, val) {
+                        return typeof val === "function" ? "" + val : val;
+                      }
+                    )}, width: "100%", height: "100%", events: {
                       onSelectCallback: eval(${config.events.onSelectCallback + ""}),
                       onCloseCallback: eval(${config.events.onCloseCallback + ""}),
                       onAppReady: eval(${config.events.onAppReady + ""}),
@@ -229,7 +236,9 @@
               </body>
           </html>`;
 
-        const winUrl = URL.createObjectURL(new Blob([winHtml], { type: "text/html" }));
+        const winUrl = URL.createObjectURL(
+          new Blob([winHtml], { type: "text/html" })
+        );
 
         window.open(winUrl, "_blank", `width=610,height=778`);
       });
@@ -461,7 +470,11 @@
 
     initButton(config) {
       const configFull = { ...defaultConfig, ...config };
-      this.config = { ...this.config, ...configFull, events: { ...defaultConfig.events } };
+      this.config = {
+        ...this.config,
+        ...configFull,
+        events: { ...defaultConfig.events },
+      };
 
       const target = document.getElementById(this.config.frameId);
 
@@ -473,7 +486,7 @@
         this.#classNames = target.className;
 
         const isSelfReplace = target.parentNode.isEqualNode(
-          document.getElementById(this.config.frameId + "-container"),
+          document.getElementById(this.config.frameId + "-container")
         );
 
         target && isSelfReplace
@@ -603,7 +616,9 @@
       target.innerHTML = this.config.destroyText;
       target.className = this.#classNames;
 
-      const targetFrame = document.getElementById(this.config.frameId + "-container");
+      const targetFrame = document.getElementById(
+        this.config.frameId + "-container"
+      );
 
       window.removeEventListener("message", this.#onMessage, false);
       this.#isConnected = false;

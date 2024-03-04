@@ -285,8 +285,9 @@ class GroupsStore {
 
       const [element] = row.getElementsByClassName("group-item");
       const value = element?.getAttribute("value");
-      const valueSplit = value && value.split("_");
-      const groupId = valueSplit.slice(1, -3).join("_");
+
+      const splitValue = value && value.split("_");
+      const groupId = splitValue.slice(1, -3).join("_");
 
       if (!groupId) return;
 
@@ -304,9 +305,9 @@ class GroupsStore {
 
       const [element] = row.getElementsByClassName("group-item");
       const value = element?.getAttribute("value");
-      const valueSplit = value && value.split("_");
-      const groupId = valueSplit.slice(1, -3).join("_");
 
+      const splitValue = value && value.split("_");
+      const groupId = splitValue.slice(1, -3).join("_");
       if (!groupId) return;
 
       const isSelected =

@@ -71,12 +71,14 @@ const GroupsTableItem = ({
     setSelection([item]);
   };
 
+  let value = `folder_${item.id}_false_index_${itemIndex}`;
+
   return (
     <Styled.GroupsRowWrapper
       className={`group-item ${
         (isChecked || isActive) && "table-row-selected"
       }`}
-      value={`folder_${item.id}_false_index_${itemIndex}`}
+      value={value}
     >
       <Styled.GroupsRow
         key={item.id}

@@ -54,7 +54,6 @@ const SelectUsersTypeStep = ({
         saveButtonLabel={t("Settings:NextStep")}
         cancelButtonLabel={t("Common:Back")}
         displaySettings
-        saveButtonDisabled={checkedUsers.result.length === 0}
       />
 
       <SearchInput
@@ -86,7 +85,6 @@ const SelectUsersTypeStep = ({
           saveButtonLabel={t("Settings:NextStep")}
           cancelButtonLabel={t("Common:Back")}
           displaySettings
-          saveButtonDisabled={checkedUsers.result.length === 0}
         />
       )}
     </>

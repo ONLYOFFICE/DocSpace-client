@@ -59,8 +59,7 @@ const SelectUsersTypeStep = ({
         showReminder
         saveButtonLabel={t("Settings:NextStep")}
         cancelButtonLabel={t("Common:Back")}
-        displaySettings={true}
-        saveButtonDisabled={checkedUsers.result.length === 0}
+        displaySettings
       />
 
       <StyledSearchInput
@@ -90,8 +89,7 @@ const SelectUsersTypeStep = ({
           showReminder
           saveButtonLabel={t("Settings:NextStep")}
           cancelButtonLabel={t("Common:Back")}
-          displaySettings={true}
-          saveButtonDisabled={checkedUsers.result.length === 0}
+          displaySettings
         />
       )}
     </>

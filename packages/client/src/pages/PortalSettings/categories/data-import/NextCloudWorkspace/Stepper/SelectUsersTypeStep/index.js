@@ -56,8 +56,7 @@ const SelectUsersTypeStep = (props) => {
         showReminder={true}
         saveButtonLabel={t("Settings:NextStep")}
         cancelButtonLabel={t("Common:Back")}
-        displaySettings={true}
-        saveButtonDisabled={checkedUsers.result.length === 0}
+        displaySettings
       />
 
       <SearchInput
@@ -88,8 +87,7 @@ const SelectUsersTypeStep = (props) => {
           showReminder={true}
           saveButtonLabel={t("Settings:NextStep")}
           cancelButtonLabel={t("Common:Back")}
-          displaySettings={true}
-          saveButtonDisabled={checkedUsers.result.length === 0}
+          displaySettings
         />
       )}
     </Wrapper>

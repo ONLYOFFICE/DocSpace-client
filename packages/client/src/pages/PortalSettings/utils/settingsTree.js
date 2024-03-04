@@ -370,11 +370,11 @@ export const settingsTree = [
         isCategory: true,
         children: [
           {
-            id: "portal-settings_catalog-javascript-sdk_simple-room",
+            id: "portal-settings_catalog-javascript-sdk_public-room",
             key: "6-1-0",
             icon: "",
-            link: "room",
-            tKey: "Common:Room",
+            link: "public-room",
+            tKey: "Files:PublicRoom",
           },
           {
             id: "portal-settings_catalog-javascript-sdk_custom",

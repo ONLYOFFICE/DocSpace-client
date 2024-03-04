@@ -15,11 +15,20 @@ import { inject, observer } from "mobx-react";
 import { isTablet, isMobile } from "@docspace/shared/utils/device";
 
 import { HelpButton } from "@docspace/shared/components/help-button";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 
 import GetCodeDialog from "../sub-components/GetCodeDialog";
 import { Button } from "@docspace/shared/components/button";
 
 import EmptyIframeContainer from "../sub-components/EmptyIframeContainer";
+
+import { TooltipContent } from "../sub-components/TooltipContent";
+
+import TitleUrl from "PUBLIC_DIR/images/sdk-presets_title.react.svg?url";
+import SearchUrl from "PUBLIC_DIR/images/sdk-presets_search.react.svg?url";
+
+import TitleDarkUrl from "PUBLIC_DIR/images/sdk-presets_title_dark.react.svg?url";
+import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.react.svg?url";
 
 const showPreviewThreshold = 720;
 
@@ -39,6 +48,7 @@ import {
   FilesSelectorInputWrapper,
   ControlsSection,
   CodeWrapper,
+  CheckboxGroup,
 } from "./StyledPresets";
 
 const SimpleRoom = (props) => {
@@ -191,6 +201,18 @@ const SimpleRoom = (props) => {
     });
 
     setHeightDimension(item);
+  };
+
+  const onChangeShowTitle = () => {
+    setConfig((config) => {
+      return { ...config, showTitle: !config.showTitle };
+    });
+  };
+
+  const onChangeShowFilter = (e) => {
+    setConfig((config) => {
+      return { ...config, showFilter: !config.showFilter };
+    });
   };
 
   const openGetCodeModal = () => setIsGetCodeDialogOpened(true);
@@ -375,6 +397,53 @@ const SimpleRoom = (props) => {
                 tabIndex={4}
               />
             </ControlsGroup>
+          </ControlsSection>
+
+          <ControlsSection>
+            <CategorySubHeader>{t("InterfaceElements")}</CategorySubHeader>
+
+            <CheckboxGroup>
+              <LabelGroup>
+                <Checkbox
+                  className="checkbox"
+                  label={t("Common:Title")}
+                  onChange={onChangeShowTitle}
+                  isChecked={config.showTitle}
+                />
+                <HelpButton
+                  place="right"
+                  offsetRight={4}
+                  size={12}
+                  tooltipContent={
+                    <TooltipContent
+                      title={t("Common:Title")}
+                      description={t("ManagerTitleDescription")}
+                      img={theme.isBase ? TitleUrl : TitleDarkUrl}
+                    />
+                  }
+                />
+              </LabelGroup>
+              <LabelGroup>
+                <Checkbox
+                  className="checkbox"
+                  label={t("Filter")}
+                  onChange={onChangeShowFilter}
+                  isChecked={config.showFilter}
+                />
+                <HelpButton
+                  place="right"
+                  offsetRight={4}
+                  size={12}
+                  tooltipContent={
+                    <TooltipContent
+                      title={t("SearchBlock")}
+                      description={t("ManagerSearchBlockDescription")}
+                      img={theme.isBase ? SearchUrl : SearchDarkUrl}
+                    />
+                  }
+                />
+              </LabelGroup>
+            </CheckboxGroup>
           </ControlsSection>
         </Controls>
       </Container>

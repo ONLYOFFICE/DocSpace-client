@@ -71,6 +71,12 @@ export const LoginFormWrapper = styled.div`
       text-align: center;
     }
   }
+
+  .language-combo-box {
+    position: absolute;
+    right: 28px;
+    top: 28px;
+  }
   .invitation-info-container {
     margin-bottom: 16px;
     .sign-in-container {

@@ -122,6 +122,7 @@ declare global {
     ssoSettings?: ISSOSettings;
     logoUrls: ILogoUrl[];
     error?: IError;
+    cultures: string[];
   }
 
   interface DevRequest {

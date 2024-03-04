@@ -5,7 +5,10 @@
 import find from "lodash/find";
 import moment from "moment-timezone";
 import { isMobile } from "react-device-detect";
+import { I18nextProviderProps } from "react-i18next";
 import sjcl from "sjcl";
+
+import { flagsIcons } from "@docspace/shared/utils/image-flags";
 
 import LoginPageSvgUrl from "PUBLIC_DIR/images/logo/loginpage.svg?url";
 import DarkLoginPageSvgUrl from "PUBLIC_DIR/images/logo/dark_loginpage.svg?url";
@@ -969,4 +972,30 @@ export const insertTagManager = (id: string) => {
 export const insertDataLayer = (id: string) => {
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({ user_id: id });
+};
+
+type I18n = I18nextProviderProps["i18n"];
+export const mapCulturesToArray = (
+  culturesArg: string[],
+  isAuthenticated: boolean,
+  i18nArg?: I18n,
+) => {
+  if (i18nArg) {
+    const t = i18nArg.getFixedT(null, "Common");
+    return culturesArg.map((culture) => {
+      return {
+        key: culture,
+        ...(isAuthenticated && { label: t(`Culture_${culture}`) }),
+        icon: flagsIcons?.get(`${culture}.react.svg`),
+        ...(isAuthenticated && { isBeta: isBetaLanguage(culture) }),
+      };
+    });
+  }
+
+  return culturesArg.map((culture) => {
+    return {
+      key: culture,
+      icon: flagsIcons?.get(`${culture}.react.svg`),
+    };
+  });
 };

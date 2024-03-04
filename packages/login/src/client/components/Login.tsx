@@ -1,15 +1,24 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useMemo } from "react";
+import {} from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 
 import { LoginFormWrapper, LoginContent } from "./StyledLogin";
 import { Text } from "@docspace/shared/components/text";
 import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
-import { getOAuthToken, getLoginLink } from "@docspace/shared/utils/common";
+import {
+  getOAuthToken,
+  getLoginLink,
+  mapCulturesToArray,
+} from "@docspace/shared/utils/common";
 import { Link } from "@docspace/shared/components/link";
-import { checkIsSSR } from "@docspace/shared/utils";
-import { PROVIDERS_DATA } from "@docspace/shared/constants";
+import { checkIsSSR, getCookie } from "@docspace/shared/utils";
+import {
+  COOKIE_EXPIRATION_YEAR,
+  LANGUAGE,
+  PROVIDERS_DATA,
+} from "@docspace/shared/constants";
 import { Toast } from "@docspace/shared/components/toast";
 import LoginForm from "./sub-components/LoginForm";
 import RecoverAccessModalDialog from "@docspace/shared/components/recover-access-modal-dialog/RecoverAccessModalDialog";
@@ -25,6 +34,9 @@ import { getLogoFromPath, getSystemTheme } from "@docspace/shared/utils";
 import { TenantStatus } from "@docspace/shared/enums";
 import GreetingContainer from "./sub-components/GreetingContainer";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
+
+import { setCookie } from "@docspace/shared/utils/cookie";
+import { ComboBox } from "@docspace/shared/components/combobox";
 
 const themes = {
   Dark: Dark,
@@ -49,12 +61,22 @@ const Login: React.FC<ILoginProps> = ({
   setTheme,
   logoUrls,
   isBaseTheme,
+  cultures,
 }) => {
   const location = useLocation();
 
   const { search } = location;
   const isRestoringPortal =
     portalSettings?.tenantStatus === TenantStatus.PortalRestore;
+
+  let [searchParams] = useSearchParams();
+
+  const cultureNames = useMemo(
+    () => mapCulturesToArray(cultures, false),
+    [cultures]
+  );
+
+  const culture = searchParams.get("culture");
 
   useEffect(() => {
     if (search) {
@@ -71,8 +93,13 @@ const Login: React.FC<ILoginProps> = ({
       window.history.replaceState({}, document.title, window.location.pathname);
     }
 
+    const cultureName = culture ?? getCookie(LANGUAGE);
+    setCurrantCultureName(cultureName);
+
     isRestoringPortal && window.location.replace("/preparation-portal");
   }, []);
+
+  const [currentCultureName, setCurrantCultureName] = useState("en");
   const [isLoading, setIsLoading] = useState(false);
   const [recoverDialogVisible, setRecoverDialogVisible] = useState(false);
   const [invitationLinkData, setInvitationLinkData] = useState({
@@ -93,6 +120,26 @@ const Login: React.FC<ILoginProps> = ({
     greetingSettings: "",
     enableAdmMess: false,
     cookieSettingsEnabled: false,
+  };
+
+  const selectedCultureObj = cultureNames.find(
+    (item) => item.key === currentCultureName
+  );
+
+  const onLanguageSelect = (e) => {
+    setCookie(LANGUAGE, e.key, {
+      "max-age": COOKIE_EXPIRATION_YEAR,
+    });
+
+    if (culture) {
+      window.location.href = window.location.href.replace(
+        `culture=${culture}`,
+        `culture=${e.key}`
+      );
+      return;
+    }
+
+    window.location.reload();
   };
 
   const ssoLabel = capabilities?.ssoLabel || "";
@@ -211,6 +258,23 @@ const Login: React.FC<ILoginProps> = ({
     >
       <div className="bg-cover"></div>
       <Scrollbar id="customScrollBar">
+        <ComboBox
+          className="language-combo-box"
+          directionY={"both"}
+          options={cultureNames}
+          selectedOption={selectedCultureObj}
+          onSelect={onLanguageSelect}
+          isDisabled={false}
+          scaled={false}
+          scaledOptions={false}
+          size="content"
+          showDisabledItems={true}
+          dropDownMaxHeight={200}
+          manualWidth="70px"
+          fillIcon={false}
+          modernView
+          displaySelectedOption
+        />
         <LoginContent enabledJoin={enabledJoin}>
           <ColorTheme
             themeId={ThemeId.LinkForgotPassword}

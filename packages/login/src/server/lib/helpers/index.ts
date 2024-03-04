@@ -9,6 +9,7 @@ import {
   getAppearanceTheme,
   getLogoUrls,
   getCurrentSsoSettings,
+  getPortalCultures,
 } from "@docspace/shared/api/settings";
 
 import { TenantStatus } from "@docspace/shared/enums";
@@ -53,7 +54,8 @@ export const getInitialState = async (
     capabilities: ICapabilities,
     availableThemes: IThemes,
     logoUrls: ILogoUrl[],
-    ssoSettings: ISSOSettings;
+    ssoSettings: ISSOSettings,
+    cultures: string[];
 
   const baseSettings = [
     getSettings(),
@@ -66,13 +68,15 @@ export const getInitialState = async (
     getAuthProviders(),
     getCapabilities(),
     getCurrentSsoSettings(),
+    getPortalCultures(),
   ];
 
   [portalSettings, buildInfo, availableThemes, logoUrls] =
     await Promise.all(baseSettings);
 
   if (portalSettings.tenantStatus !== TenantStatus.PortalRestore)
-    [providers, capabilities, ssoSettings] = await Promise.all(settings);
+    [providers, capabilities, ssoSettings, cultures] =
+      await Promise.all(settings);
 
   const currentColorScheme = availableThemes.themes.find((theme) => {
     return availableThemes.selected === theme.id;
@@ -87,6 +91,7 @@ export const getInitialState = async (
     currentColorScheme,
     logoUrls,
     ssoSettings,
+    cultures,
   };
 
   return initialState;

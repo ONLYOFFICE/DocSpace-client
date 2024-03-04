@@ -1,11 +1,11 @@
 import { observer, inject } from "mobx-react";
 import React, { useEffect, useMemo } from "react";
 import { withTranslation, I18nextProviderProps } from "react-i18next";
-import { isBetaLanguage } from "@docspace/shared/utils";
+
 import { getCookie, setCookie } from "@docspace/shared/utils/cookie";
-import { flagsIcons } from "@docspace/shared/utils/image-flags";
 import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "@docspace/shared/constants";
+import { mapCulturesToArray } from "@docspace/shared/utils/common";
 
 type I18n = I18nextProviderProps["i18n"];
 
@@ -45,20 +45,8 @@ export default function withCultureNames<
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const mapCulturesToArray = (culturesArg: string[], i18nArg: I18n) => {
-      const t = i18nArg.getFixedT(null, "Common");
-      return culturesArg.map((culture) => {
-        return {
-          key: culture,
-          ...(isAuthenticated && { label: t(`Culture_${culture}`) }),
-          icon: flagsIcons?.get(`${culture}.react.svg`),
-          ...(isAuthenticated && { isBeta: isBetaLanguage(culture) }),
-        };
-      });
-    };
-
     const cultureNames = useMemo(
-      () => mapCulturesToArray(cultures, i18n),
+      () => mapCulturesToArray(cultures, isAuthenticated, i18n),
       [cultures, i18n],
     );
     const url = new URL(window.location.href);

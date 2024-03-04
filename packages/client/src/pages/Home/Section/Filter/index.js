@@ -1979,22 +1979,24 @@ const SectionFilterContent = ({
         default: true,
       };
 
+      const storage = {
+        id: "sort-quota",
+        key: SortByFieldName.UsedSpace,
+        label: t("Common:Storage"),
+        default: true,
+      };
+
       const hideableColumns = {
         Type: type,
         Department: department,
         Mail: email,
       };
 
-      options.push(firstName, lastName);
-
       if (showStorageInfo) {
-        options.push({
-          id: "sort-quota",
-          key: SortByFieldName.UsedSpace,
-          label: t("Common:Storage"),
-          default: true,
-        });
+        hideableColumns.Storage = storage;
       }
+
+      options.push(firstName, lastName);
 
       if ((viewAs = "table")) {
         const tableColumns = isInsideGroup
@@ -2024,8 +2026,6 @@ const SectionFilterContent = ({
               infoPanelColumnsSize[idx] === "0px";
 
             !hide && options.push(hideableColumns[columnTitle]);
-
-          
           }
         });
       }

@@ -13,6 +13,7 @@ class CommonStore {
   whiteLabelLogoText = null;
   defaultLogoTextWhiteLabel = null;
 
+  portalName = null;
   dnsSettings = {
     defaultObj: {},
     customObj: {},
@@ -63,14 +64,14 @@ class CommonStore {
           requests.push(
             this.getWhiteLabelLogoUrls(),
             this.getWhiteLabelLogoText(),
-            this.getIsDefaultWhiteLabel()
+            this.getIsDefaultWhiteLabel(),
           );
           break;
         }
         case "language-and-time-zone":
           requests.push(
             this.settingsStore.getPortalTimezones(),
-            this.settingsStore.getPortalCultures()
+            this.settingsStore.getPortalCultures(),
           );
           break;
         case "dns-settings":
@@ -88,7 +89,7 @@ class CommonStore {
           {
             requests.push(
               this.settingsStore.getPortalTimezones(),
-              this.settingsStore.getPortalCultures()
+              this.settingsStore.getPortalCultures(),
             );
 
             if (standalone) {
@@ -100,7 +101,7 @@ class CommonStore {
           requests.push(
             this.getWhiteLabelLogoUrls(),
             this.getWhiteLabelLogoText(),
-            this.getIsDefaultWhiteLabel()
+            this.getIsDefaultWhiteLabel(),
           );
           break;
 
@@ -123,7 +124,7 @@ class CommonStore {
   setWhiteLabelSettings = async (data) => {
     const response = await api.settings.setWhiteLabelSettings(
       data,
-      isManagement()
+      isManagement(),
     );
     return Promise.resolve(response);
   };
@@ -185,6 +186,10 @@ class CommonStore {
 
   setDNSName = (value) => {
     this.dnsSettings.customObj.dnsName = value;
+  };
+
+  setPortalName = (value) => {
+    this.portalName = value;
   };
 
   setDNSSettings = (data) => {

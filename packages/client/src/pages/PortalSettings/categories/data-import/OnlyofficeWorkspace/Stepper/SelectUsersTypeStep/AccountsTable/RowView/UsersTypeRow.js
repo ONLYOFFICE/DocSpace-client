@@ -12,11 +12,7 @@ const UsersTypeRow = ({
   const roleSelectorRef = useRef();
 
   const handleAccountToggle = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    e.target.closest(".dropdown-container") ||
-      roleSelectorRef.current?.contains(e.target) ||
-      toggleAccount();
+    roleSelectorRef.current?.contains(e.target) || toggleAccount();
   };
 
   return (
@@ -25,8 +21,9 @@ const UsersTypeRow = ({
       key={data.key}
       data={data}
       checked={isChecked}
-      onClick={handleAccountToggle}
       contextButtonSpacerWidth="0"
+      onRowClick={handleAccountToggle}
+      onSelect={handleAccountToggle}
     >
       <UsersTypeRowContent
         id={data.key}

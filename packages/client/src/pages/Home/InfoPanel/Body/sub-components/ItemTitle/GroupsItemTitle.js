@@ -27,9 +27,6 @@ const GroupsItemTitle = ({
   };
   const contextOptions = getData();
 
-  const userAvatar = infoPanelSelection.hasAvatar
-    ? infoPanelSelection.avatar
-    : DefaultUserPhoto;
   const groupName = infoPanelSelection.name
     ? decode(infoPanelSelection.name).trim()
     : "";
@@ -56,9 +53,9 @@ const GroupsItemTitle = ({
         </div>
         {!!groupName && (
           <Text className={"info-text__email"} title={infoPanelSelection.email}>
-            {`${infoPanelSelection.members?.length} ${
-              infoPanelSelection.members?.length === 1 ? "person" : "people"
-            }`}
+            {t("PeopleTranslations:PeopleCount", {
+              count: infoPanelSelection.membersCount,
+            })}
           </Text>
         )}
       </div>

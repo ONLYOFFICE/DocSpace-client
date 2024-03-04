@@ -93,7 +93,7 @@ const GroupMember = ({ t, user, infoPanelSelection }: GroupMemberProps) => {
             offsetRight={0}
             tooltipContent={
               <Text fontSize="12px" fontWeight={600}>
-                {t("Individual rights in room")}
+                {t("PeopleTranslations:IndividualRights")}
               </Text>
             }
           />

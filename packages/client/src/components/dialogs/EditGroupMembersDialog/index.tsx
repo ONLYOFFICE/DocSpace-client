@@ -71,7 +71,7 @@ const EditGroupMembers = ({
       <ModalDialog.Body>
         <SearchInput
           className="search-input"
-          placeholder={t("Search by group members")}
+          placeholder={t("PeopleTranslations:SearchByGroupMembers")}
           value={searchValue}
           onChange={onChangeSearchValue}
           onClearSearch={onClearSearch}

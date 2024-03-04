@@ -269,7 +269,11 @@ class GroupsStore {
       if (!row) return;
 
       const [element] = row.getElementsByClassName("group-item");
-      const groupId = element?.getAttribute("value");
+      const value = element?.getAttribute("value");
+
+      const splitValue = value && value.split("_");
+      const groupId = splitValue.slice(1, -3).join("_");
+
       if (!groupId) return;
 
       const isNotSelected =
@@ -284,7 +288,10 @@ class GroupsStore {
       if (!row) return;
 
       const [element] = row.getElementsByClassName("group-item");
-      const groupId = element?.getAttribute("value");
+      const value = element?.getAttribute("value");
+
+      const splitValue = value && value.split("_");
+      const groupId = splitValue.slice(1, -3).join("_");
       if (!groupId) return;
 
       const isSelected =

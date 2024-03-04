@@ -196,9 +196,6 @@ const User = ({
     }
   };
 
-  const onToggle = (e, isOpen) => {
-    // setIsScrollLocked(isOpen);
-  };
   const getUserType = (item) => {
     if (item.isOwner) return "owner";
     if (item.isAdmin) return "admin";
@@ -339,7 +336,6 @@ const User = ({
               isLoading={isLoading}
               isMobileView={isMobileOnly}
               directionY="both"
-              onToggle={onToggle}
               displaySelectedOption
             />
           ) : (

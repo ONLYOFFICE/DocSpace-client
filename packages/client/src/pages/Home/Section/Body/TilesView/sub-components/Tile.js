@@ -299,7 +299,7 @@ const StyledFileTileTop = styled.div`
     border-radius: 6px 6px 0 0;
   }
 
-  .temporary-icon > .injected-svg {
+  .temporary-icon > div > .injected-svg {
     position: absolute;
     width: 100%;
     bottom: 16px;

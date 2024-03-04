@@ -2982,6 +2982,19 @@ class FilesStore {
     const url = getCategoryUrl(this.categoryType, id);
 
     if (canOpenPlayer) {
+      if (this.publicRoomStore.isPublicRoom) {
+        const key = this.publicRoomStore.publicRoomKey;
+        const filterObj = FilesFilter.getFilter(window.location);
+
+        return `${combineUrl(
+          proxyURL,
+          config.homepage,
+          "/rooms/share",
+          MEDIA_VIEW_URL,
+          id,
+        )}?key=${key}&${filterObj.toUrlParams()}`;
+      }
+
       return combineUrl(proxyURL, config.homepage, MEDIA_VIEW_URL, id);
     }
 

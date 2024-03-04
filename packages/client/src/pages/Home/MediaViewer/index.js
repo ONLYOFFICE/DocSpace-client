@@ -5,8 +5,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import queryString from "query-string";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
-import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import MediaViewer from "@docspace/shared/components/media-viewer/MediaViewer";
 
@@ -66,6 +64,7 @@ const FilesMediaViewer = (props) => {
     isOpenMediaViewer,
     someDialogIsOpen,
     currentDeviceType,
+    changeUrl,
   } = props;
 
   const navigate = useNavigate();
@@ -113,12 +112,10 @@ const FilesMediaViewer = (props) => {
 
   const onChangeUrl = useCallback(
     (id) => {
-      const url = combineUrl(MEDIA_VIEW_URL, id);
-
+      changeUrl(id);
       setCurrentId(id);
-      navigate(url);
     },
-    [setCurrentId, navigate],
+    [setCurrentId, changeUrl],
   );
 
   const resetSelection = () => {
@@ -335,6 +332,7 @@ export default inject(
       setCurrentId,
       nextMedia,
       prevMedia,
+      changeUrl,
     } = mediaViewerDataStore;
     const { deleteItemAction } = filesActionsStore;
     const { getIcon, extsImagePreviewed, extsMediaPreviewed } =
@@ -428,6 +426,7 @@ export default inject(
       setActiveFiles,
       pluginContextMenuItems,
       currentDeviceType,
+      changeUrl,
     };
   },
 )(withTranslation(["Files", "Translations"])(observer(FilesMediaViewer)));

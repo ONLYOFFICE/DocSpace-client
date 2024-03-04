@@ -302,13 +302,12 @@ const CreateUserForm = (props) => {
   const createConfirmUser = async (registerData, loginData, key) => {
     const { defaultPage } = props;
 
-    const fromInviteLink = linkData.type === "LinkInvite" ? true : false;
+    const fromInviteLink =
+      linkData.type === "LinkInvite" || linkData.type === "EmpInvite"
+        ? true
+        : false;
 
-    const data = Object.assign(
-      { fromInviteLink: fromInviteLink },
-      registerData,
-      loginData,
-    );
+    const data = Object.assign({ fromInviteLink }, registerData, loginData);
 
     await createUser(data, key);
 
@@ -449,13 +448,9 @@ const CreateUserForm = (props) => {
               <Text fontSize="16px">
                 <Trans
                   t={t}
-                    i18nKey={
-                      roomName ? "InvitationToRoom" : "InvitationToPortal"
-                    }
-                    ns="Common"
-                    defaults={
-                      roomName ? DEFAULT_ROOM_TEXT : DEFAULT_PORTAL_TEXT
-                    }
+                  i18nKey={roomName ? "InvitationToRoom" : "InvitationToPortal"}
+                  ns="Common"
+                  defaults={roomName ? DEFAULT_ROOM_TEXT : DEFAULT_PORTAL_TEXT}
                   values={{
                     firstName: user.firstName,
                     lastName: user.lastName,
@@ -641,10 +636,8 @@ const CreateUserForm = (props) => {
                       primary
                       size="medium"
                       scale={true}
-                        label={
-                          isLoading
-                            ? t("Common:LoadingProcessing")
-                            : t("SignUp")
+                      label={
+                        isLoading ? t("Common:LoadingProcessing") : t("SignUp")
                       }
                       tabIndex={1}
                       isDisabled={isLoading}

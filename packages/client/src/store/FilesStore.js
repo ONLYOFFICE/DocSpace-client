@@ -14,7 +14,7 @@ import {
 import { RoomsTypes } from "@docspace/shared/utils";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { updateTempContent } from "@docspace/shared/utils/common";
+import { updateTempContent, isPublicRoom } from "@docspace/shared/utils/common";
 
 import { toastr } from "@docspace/shared/components/toast";
 import config from "PACKAGE_FILE";
@@ -1570,7 +1570,7 @@ class FilesStore {
           this.setCreatedItem(null);
         }
 
-        if (window.location.pathname === "/rooms/share") {
+        if (isPublicRoom()) {
           return Promise.resolve(data);
         } else {
           return Promise.resolve(selectedFolder);
@@ -2982,6 +2982,19 @@ class FilesStore {
     const url = getCategoryUrl(this.categoryType, id);
 
     if (canOpenPlayer) {
+      if (this.publicRoomStore.isPublicRoom) {
+        const key = this.publicRoomStore.publicRoomKey;
+        const filterObj = FilesFilter.getFilter(window.location);
+
+        return `${combineUrl(
+          proxyURL,
+          config.homepage,
+          "/rooms/share",
+          MEDIA_VIEW_URL,
+          id,
+        )}?key=${key}&${filterObj.toUrlParams()}`;
+      }
+
       return combineUrl(proxyURL, config.homepage, MEDIA_VIEW_URL, id);
     }
 

@@ -32,7 +32,7 @@ import {
   ThemeKeys,
   ErrorKeys,
 } from "../enums";
-import { LANGUAGE, RTL_LANGUAGES } from "../constants";
+import { LANGUAGE, PUBLIC_MEDIA_VIEW_URL, RTL_LANGUAGES } from "../constants";
 
 import { TI18n } from "../types";
 import { TUser } from "../api/people/types";
@@ -90,7 +90,10 @@ export function createPasswordHash(
 }
 
 export const isPublicRoom = () => {
-  return window.location.pathname === "/rooms/share";
+  return (
+    window.location.pathname === "/rooms/share" ||
+    window.location.pathname.includes(PUBLIC_MEDIA_VIEW_URL)
+  );
 };
 
 export const getUserTypeLabel = (

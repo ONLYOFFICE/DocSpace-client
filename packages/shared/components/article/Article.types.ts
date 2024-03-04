@@ -1,5 +1,5 @@
 import { TColorScheme } from "../../themes";
-import { ArticleAlerts, DeviceType } from "../../enums";
+import { DeviceType } from "../../enums";
 import { TWhiteLabel } from "../../utils/whiteLabelHelper";
 import { TUser } from "../../api/people/types";
 import { TTranslation } from "../../types";
@@ -21,25 +21,7 @@ export interface ArticleHeaderProps {
   currentDeviceType: DeviceType;
 }
 
-export type TRemoveAlert = (alertName: ArticleAlerts) => void;
-
-export interface ArticleTeamTrainingAlertProps {
-  bookTrainingEmail?: string;
-  removeAlertFromArticleAlertsData?: TRemoveAlert;
-}
-
-export interface ArticleSubmitToFormGalleryAlertProps {
-  setSubmitToGalleryDialogVisible?: (value: boolean) => void;
-  removeAlertFromArticleAlertsData?: TRemoveAlert;
-}
-
 export type TToggleArticleOpen = () => void;
-
-export interface ArticlePaymentAlertProps {
-  isFreeTariff?: boolean;
-  currentTariffPlanTitle?: string;
-  toggleArticleOpen?: TToggleArticleOpen;
-}
 
 export interface ArticleProfileProps {
   user?: TUser;
@@ -47,15 +29,6 @@ export interface ArticleProfileProps {
   getActions?: (t: TTranslation) => ContextMenuModel[];
   onProfileClick?: () => void;
   currentDeviceType: DeviceType;
-}
-
-export interface ArticleEnterpriseAlertProps {
-  toggleArticleOpen?: TToggleArticleOpen;
-  isLicenseDateExpired?: boolean;
-  trialDaysLeft?: number;
-  isTrial?: boolean;
-  paymentDate?: Date;
-  isEnterprise?: boolean;
 }
 
 export interface ArticleZendeskProps {
@@ -67,17 +40,6 @@ export interface ArticleZendeskProps {
   isMobileArticle: boolean;
   zendeskKey: string;
   showProgress: boolean;
-}
-
-export interface ArticleAlertsProps {
-  articleAlertsData?: { current: string; available: string[] };
-  incrementIndexOfArticleAlertsData?: () => void;
-  showText?: boolean;
-  isTeamTrainingAlertAvailable?: boolean;
-  isSubmitToGalleryAlertAvailable?: boolean;
-  bookTrainingEmail?: string;
-  removeAlertFromArticleAlertsData?: TRemoveAlert;
-  setSubmitToGalleryDialogVisible?: (value: boolean) => void;
 }
 
 export interface ArticleAppsProps {
@@ -143,24 +105,16 @@ export interface ArticleProps {
   getActions?: (t: TTranslation) => ContextMenuModel[];
   onProfileClick?: () => void;
 
-  hideAlerts: boolean;
-  articleAlertsData?: { current: string; available: string[] };
-  incrementIndexOfArticleAlertsData?: () => void;
   isNonProfit?: boolean;
   isGracePeriod?: boolean;
   isFreeTariff?: boolean;
   isPaymentPageAvailable?: boolean;
-  isTeamTrainingAlertAvailable?: boolean;
-  isSubmitToGalleryAlertAvailable?: boolean;
   isLicenseExpiring?: boolean;
   isLicenseDateExpired?: boolean;
   isEnterprise?: boolean;
   isTrial?: boolean;
   standalone?: boolean;
   currentTariffPlanTitle?: string;
-  bookTrainingEmail?: string;
-  removeAlertFromArticleAlertsData?: TRemoveAlert;
-  setSubmitToGalleryDialogVisible?: (value: boolean) => void;
   trialDaysLeft?: number;
   paymentDate?: Date;
 }

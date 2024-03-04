@@ -104,8 +104,8 @@ const ExternalLinks = ({
       toastr.success(
         `${t("Translations:LinkCopySuccess")}. ${t(
           "Translations:LinkValidTime",
-          { days_count: 7 }
-        )}`
+          { days_count: 7 },
+        )}`,
       );
       copy(link);
     }
@@ -138,7 +138,7 @@ const ExternalLinks = ({
 
       closeActionLinks();
     },
-    [closeActionLinks, t]
+    [closeActionLinks, t],
   );
 
   const shareTwitter = useCallback(
@@ -155,7 +155,7 @@ const ExternalLinks = ({
 
       closeActionLinks();
     },
-    [closeActionLinks]
+    [closeActionLinks],
   );
 
   return (
@@ -179,11 +179,11 @@ const ExternalLinks = ({
               fixedDirection={true}
             >
               <DropDownItem
-                label={`${t("SharingPanel:ShareVia")} e-mail`}
+                label={`${t("Common:ShareVia")} e-mail`}
                 onClick={() => shareEmail(activeLink[0])}
               />
               <DropDownItem
-                label={`${t("SharingPanel:ShareVia")} Twitter`}
+                label={`${t("Common:ShareVia")} Twitter`}
                 onClick={() => shareTwitter(activeLink[0])}
               />
             </DropDown>

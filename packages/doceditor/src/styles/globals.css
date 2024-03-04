@@ -1,0 +1,26 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+
+  font-family: "Open Sans", sans-serif, Arial;
+  font-size: 13px;
+  overscroll-behavior: none;
+
+  padding: 0;
+  margin: 0;
+}
+
+#root {
+  min-height: 100%;
+
+  .pageLoader {
+    position: fixed;
+    left: calc(50% - 20px);
+    top: 35%;
+  }
+}
+
+body.loading * {
+  cursor: wait !important;
+}

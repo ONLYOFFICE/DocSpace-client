@@ -407,15 +407,24 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
                     />
                   ) : (
                     <div className="icon-wrapper">
-                      <RoomIcon
-                        color={header.color || ""}
-                        title={header.title}
-                        isArchive={isArchive}
-                        showDefault={defaultIcon}
-                        imgClassName="drop-down-item_icon"
-                        imgSrc={header.icon}
-                        badgeUrl={badgeUrl}
-                      />
+                      {header.icon ? (
+                        <RoomIcon
+                          title={header.title}
+                          isArchive={isArchive}
+                          showDefault={defaultIcon}
+                          imgClassName="drop-down-item_icon"
+                          imgSrc={header.icon}
+                          badgeUrl={badgeUrl}
+                        />
+                      ) : (
+                        <RoomIcon
+                          color={header.color || ""}
+                          title={header.title}
+                          isArchive={isArchive}
+                          showDefault={defaultIcon}
+                          badgeUrl={badgeUrl}
+                        />
+                      )}
                     </div>
                   ))}
                 {isAvatarExist && (
@@ -466,7 +475,7 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
     <>
       {withBackdrop && (
         <Backdrop
-          visible={visible && (changeView || ignoreChangeView)}
+          visible={(visible && (changeView || ignoreChangeView)) || false}
           withBackground
           withoutBlur={false}
           zIndex={baseZIndex}

@@ -4,7 +4,7 @@ import { globalColors } from "./globalColors";
 import { CommonTheme } from "./commonTheme";
 
 export type TColorScheme = {
-  id: string | number;
+  id: number;
   main: {
     accent: string;
     buttons: string;

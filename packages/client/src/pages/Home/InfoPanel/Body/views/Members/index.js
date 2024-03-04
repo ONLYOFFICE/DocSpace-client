@@ -9,8 +9,8 @@ import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import MembersHelper from "../../helpers/MembersHelper";
 import MembersList from "./sub-components/MembersList";
 import User from "./User";
-import PublicRoomBar from "./sub-components/PublicRoomBar";
-import { LinksBlock, StyledLinkRow } from "./sub-components/StyledPublicRoom";
+import PublicRoomBar from "@docspace/shared/components/public-room-bar";
+import { LinksBlock, StyledLinkRow } from "./sub-components/Styled";
 import EmptyContainer from "./sub-components/EmptyContainer";
 
 import { Text } from "@docspace/shared/components/text";

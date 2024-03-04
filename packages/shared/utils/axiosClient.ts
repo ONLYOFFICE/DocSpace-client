@@ -115,8 +115,9 @@ class AxiosClient {
 
     const proto = headers["x-forwarded-proto"]?.split(",").shift();
     const host = headers["x-forwarded-host"]?.split(",").shift();
+    const port = headers["x-forwarded-port"]?.split(",").shift();
 
-    const origin = apiOrigin || `${proto}://${host}`;
+    const origin = apiOrigin || `${proto}://${host}${port ? `:${port}` : ""}`;
 
     const apiBaseURL = combineUrl(origin, proxyURL, apiPrefix);
 
@@ -168,7 +169,11 @@ class AxiosClient {
 
       if (!response || !response.data || response.isAxiosError) return null;
 
-      if (response.data && "total" in response.data)
+      if (
+        response.data &&
+        typeof response.data === "object" &&
+        "total" in response.data
+      )
         return {
           total: response.data.total ? +response.data.total : 0,
           items: response.data.response,

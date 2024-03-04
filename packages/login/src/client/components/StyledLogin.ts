@@ -73,9 +73,14 @@ export const LoginFormWrapper = styled.div`
   }
 
   .language-combo-box {
-    position: absolute;
+    position: fixed;
     right: 28px;
     top: 28px;
+
+    @media ${mobile} {
+      top: 7px;
+      right: 8px;
+    }
   }
   .invitation-info-container {
     margin-bottom: 16px;

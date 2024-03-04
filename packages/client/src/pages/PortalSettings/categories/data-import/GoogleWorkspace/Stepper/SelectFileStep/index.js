@@ -214,13 +214,13 @@ const SelectFileStep = ({
     <>
       <Wrapper>
         <Text className="select-file-title">
-          {t("Settings:ChooseBackupFile")}
+          {t("Settings:ChooseBackupFiles")}
         </Text>
         <FileInput
           scale
           onInput={onSelectFile}
           className="select-file-input"
-          placeholder={fileName || t("Settings:BackupFile")}
+          placeholder={fileName || t("Settings:BackupFiles")}
           isDisabled={isFileLoading}
           accept={[".zip"]}
         />
@@ -231,7 +231,7 @@ const SelectFileStep = ({
           <ProgressBar
             percent={progress}
             className="select-file-progress-bar"
-            label={t("Settings:BackupFileUploading")}
+            label={t("Settings:BackupFilesUploading")}
           />
           <Button
             size={isTablet() ? "medium" : "small"}
@@ -249,7 +249,7 @@ const SelectFileStep = ({
                 label={t("Common:LoadingIsComplete")}
               />
               <Text className="error-text">
-                {t("Settings:UnsupportedArchivesDescription")}
+                {t("Settings:UnsupportedFilesDescription")}
               </Text>
               <Link
                 type="action"
@@ -257,20 +257,34 @@ const SelectFileStep = ({
                 fontWeight={600}
                 onClick={onDownloadArchives}
               >
-                {t("Settings:DownloadUnsupportedArchives")}
+                {t("Settings:CheckUnsupportedFiles")}
               </Link>
             </Box>
           )}
-          <SaveCancelButtons
-            className="save-cancel-buttons"
-            onSaveClick={onNextStep}
-            onCancelClick={goBack}
-            saveButtonLabel={t("Settings:UploadToServer")}
-            cancelButtonLabel={t("Common:Back")}
-            displaySettings
-            saveButtonDisabled={!showReminder}
-            showReminder
-          />
+
+          {!isFileError ? (
+            <SaveCancelButtons
+              className="save-cancel-buttons"
+              onSaveClick={onNextStep}
+              onCancelClick={goBack}
+              saveButtonLabel={t("Settings:NextStep")}
+              cancelButtonLabel={t("Common:Back")}
+              displaySettings
+              saveButtonDisabled={!showReminder}
+              showReminder
+            />
+          ) : (
+            <SaveCancelButtons
+              className="save-cancel-buttons"
+              onSaveClick={onNextStep}
+              onCancelClick={goBack}
+              saveButtonLabel={t("Settings:UploadToServer")}
+              cancelButtonLabel={t("Common:Back")}
+              displaySettings
+              saveButtonDisabled={!showReminder}
+              showReminder
+            />
+          )}
         </ErrorBlock>
       )}
 

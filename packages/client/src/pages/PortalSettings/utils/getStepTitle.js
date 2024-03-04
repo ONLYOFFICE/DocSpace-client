@@ -1,7 +1,10 @@
 export const getStepTitle = (t, stepIndex) => {
+  const isGoogleWorkspace = location.pathname.includes("google");
   switch (stepIndex) {
     case 1:
-      return t("Common:SelectFile");
+      return isGoogleWorkspace
+        ? t("Common:SelectFiles")
+        : t("Common:SelectFile");
     case 2:
       return t("Settings:SelectUsers");
     case 3:

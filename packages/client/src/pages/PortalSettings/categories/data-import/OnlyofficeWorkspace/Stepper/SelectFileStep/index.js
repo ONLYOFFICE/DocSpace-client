@@ -242,7 +242,7 @@ const SelectFileStep = ({
                 label={t("Common:LoadingIsComplete")}
               />
               <Text className="error-text">
-                {t("Settings:UnsupportedArchivesDescription")}
+                {t("Settings:UnsupportedFilesDescription")}
               </Text>
               <Link
                 type="action"
@@ -250,7 +250,7 @@ const SelectFileStep = ({
                 fontWeight={600}
                 onClick={onDownloadArchives}
               >
-                {t("Settings:DownloadUnsupportedArchives")}
+                {t("Settings:CheckUnsupportedFiles")}
               </Link>
             </Box>
           )}

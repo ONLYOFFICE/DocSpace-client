@@ -305,6 +305,7 @@
   "SelectDOCXFFormat": "Выбрать файл в формате .DOCXF",
   "SelectDOCXFormat": "Выбрать файл в формате .DOCX",
   "SelectFile": "Выбрать файл",
+  "SelectFiles": "Выбрать файлы",
   "SelectorEmptyScreenHeader": "Здесь пока нет файлов и папок",
   "SendButton": "Отправить",
   "Sending": "Отправка...",

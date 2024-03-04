@@ -30,6 +30,7 @@ const FilesSelectorInput = (props) => {
     className,
     isSelect,
     isRoomBackup,
+    isDocumentIcon,
   } = props;
 
   const isFilesSelection = !!filterParam;
@@ -86,6 +87,7 @@ const FilesSelectorInput = (props) => {
         isDisabled={isDisabled || isLoading}
         hasError={isError || isErrorPath}
         scale
+        isDocumentIcon={isDocumentIcon}
       />
 
       <FilesSelector

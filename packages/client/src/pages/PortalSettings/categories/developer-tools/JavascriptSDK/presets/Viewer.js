@@ -236,6 +236,7 @@ const Viewer = (props) => {
                   onSelectFile={onChangeFileId}
                   filterParam={FilesSelectorFilterTypes.ALL}
                   isSelect
+                  isDocumentIcon
                 />
               </FilesSelectorInputWrapper>
             </ControlsGroup>

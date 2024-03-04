@@ -6,18 +6,12 @@ import { TextInput } from "@docspace/shared/components/text-input";
 import { Textarea } from "@docspace/shared/components/textarea";
 import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { TabsContainer } from "@docspace/shared/components/tabs-container";
-import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { objectToGetParams, loadScript } from "@docspace/shared/utils/common";
 import { inject, observer } from "mobx-react";
-import { ImageEditor } from "@docspace/shared/components/image-editor";
-import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 
 import { isTablet, isMobile } from "@docspace/shared/utils/device";
-
-import EmptyIframeContainer from "../sub-components/EmptyIframeContainer";
 
 import GetCodeDialog from "../sub-components/GetCodeDialog";
 import { Button } from "@docspace/shared/components/button";
@@ -31,19 +25,16 @@ import {
   CategorySubHeader,
   CategoryDescription,
   ControlsGroup,
-  LabelGroup,
-  ControlsSection,
   Frame,
   Container,
   RowContainer,
-  ColumnContainer,
   Preview,
   GetCodeButtonWrapper,
-  FilesSelectorInputWrapper,
+  ControlsSection,
   CodeWrapper,
 } from "./StyledPresets";
 
-const Viewer = (props) => {
+const DocSpace = (props) => {
   const { t, setDocumentTitle } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
@@ -65,11 +56,25 @@ const Viewer = (props) => {
   );
 
   const [config, setConfig] = useState({
-    mode: "viewer",
+    mode: "manager",
     width: `${width}${widthDimension.label}`,
     height: `${height}${heightDimension.label}`,
     frameId: "ds-frame",
-    init: false,
+    showHeader: true,
+    showTitle: true,
+    showMenu: true,
+    showFilter: true,
+    disableActionButton: false,
+    infoPanelVisible: true,
+    init: true,
+    filter: {
+      count: 100,
+      page: 1,
+      sortorder: "descending",
+      sortby: "DateAndTime",
+      search: "",
+      withSubfolders: false,
+    },
   });
 
   const params = objectToGetParams(config);
@@ -119,15 +124,9 @@ const Viewer = (props) => {
     setHeight(e.target.value);
   };
 
-  const onChangeFileId = (file) => {
-    setConfig((config) => {
-      return { ...config, id: file.id };
-    });
-  };
-
   const onChangeFrameId = (e) => {
     setConfig((config) => {
-      return { ...config, frameId: e.target.value, init: true };
+      return { ...config, frameId: e.target.value };
     });
   };
 
@@ -168,29 +167,11 @@ const Viewer = (props) => {
 
   const preview = (
     <Frame
-      width={
-        config.id !== undefined &&
-        widthDimension.label === "px" &&
-        width + widthDimension.label
-      }
-      height={
-        config.id !== undefined &&
-        heightDimension.label === "px" &&
-        height + heightDimension.label
-      }
+      width={widthDimension.label === "px" && width + widthDimension.label}
+      height={heightDimension.label === "px" && height + heightDimension.label}
       targetId={frameId}
     >
-      {config.id !== undefined ? (
-        <>
-          <Box id={frameId}></Box>
-        </>
-      ) : (
-        <EmptyIframeContainer
-          text={t("SelectFile")}
-          width="100%"
-          height="100%"
-        />
-      )}
+      <Box id={frameId}></Box>
     </Frame>
   );
 
@@ -219,37 +200,16 @@ const Viewer = (props) => {
   return (
     <SDKContainer>
       <CategoryDescription>
-        <Text className="sdk-description">{t("ViewerDescription")}</Text>
+        <Text className="sdk-description">{t("DocspaceDescription")}</Text>
       </CategoryDescription>
       <CategoryHeader>{t("CreateSampleHeader")}</CategoryHeader>
       <Container>
         {showPreview && (
           <Preview>
-            <TabsContainer
-              isDisabled={config?.id === undefined}
-              onSelect={onChangeTab}
-              elements={dataTabs}
-            />
+            <TabsContainer onSelect={onChangeTab} elements={dataTabs} />
           </Preview>
         )}
         <Controls>
-          <ControlsSection>
-            <CategorySubHeader>{t("FileId")}</CategorySubHeader>
-            <ControlsGroup>
-              <LabelGroup>
-                <Label className="label" text={t("Common:SelectFile")} />
-              </LabelGroup>
-              <FilesSelectorInputWrapper>
-                <FilesSelectorInput
-                  onSelectFile={onChangeFileId}
-                  filterParam={FilesSelectorFilterTypes.ALL}
-                  isSelect
-                  isDocumentIcon
-                />
-              </FilesSelectorInputWrapper>
-            </ControlsGroup>
-          </ControlsSection>
-
           <ControlsSection>
             <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
             <ControlsGroup>
@@ -305,69 +265,6 @@ const Viewer = (props) => {
               />
             </ControlsGroup>
           </ControlsSection>
-
-          {/* <InterfaceElements>
-            <Label className="label">{t("InterfaceElements")}</Label>
-            <Checkbox
-              className="checkbox"
-              label={t("TabPlugins")}
-              onChange={() => {}}
-              isChecked={true}
-            />
-            <RowContainer>
-              <Checkbox label={t("Chat")} onChange={() => {}} isChecked={true} />
-              <Text color="gray">({t("InLeftPanel")})</Text>
-            </RowContainer>
-            <RowContainer>
-              <Checkbox label={t("FeedbackAndSupport")} onChange={() => {}} isChecked={true} />
-              <Text color="gray">({t("InLeftPanel")})</Text>
-            </RowContainer>
-          </InterfaceElements>
-          <CategorySubHeader>{t("AddWatermarks")}</CategorySubHeader>
-          <ControlsGroup>
-            <LabelGroup>
-              <Label className="label" text={t("SelectImage")} />
-            </LabelGroup>
-            <FilesSelectorInputWrapper>
-              <FilesSelectorInput onSelectFolder={onChangeFileId} isSelect />
-            </FilesSelectorInputWrapper>
-          </ControlsGroup>
-          <Label className="label" text={t("Scale")} />
-          <ComboBox
-            onSelect={() => {}}
-            options={[
-              { key: "1", label: "100%", default: true },
-              { key: "2", label: "50%" },
-              { key: "3", label: "25%" },
-            ]}
-            scaled={true}
-            selectedOption={{ key: "1", label: "100%", default: true }}
-            displaySelectedOption
-            directionY="top"
-          />
-          <Label className="label" text={t("Rotate")} />
-          <ComboBox
-            onSelect={() => {}}
-            options={[
-              { key: "1", label: "45%", default: true },
-              { key: "2", label: "75%" },
-              { key: "3", label: "90%" },
-              { key: "4", label: "180%" },
-            ]}
-            scaled={true}
-            selectedOption={{ key: "1", label: "45%", default: true }}
-            displaySelectedOption
-            directionY="top"
-          />
-          <Label className="label" text={t("CreateEditRoomDialog:Icon")} />
-          <ImageEditor
-            t={t}
-            className="wrapper-image-editor"
-            classNameWrapperImageCropper="avatar-editor"
-            image={{}}
-            setPreview={() => {}}
-            onChangeImage={() => {}}
-          /> */}
         </Controls>
       </Container>
 
@@ -410,6 +307,8 @@ export default inject(({ authStore, settingsStore }) => {
     "Files",
     "EmbeddingPanel",
     "Common",
-    "CreateEditRoomDialog",
-  ])(observer(Viewer)),
+    "Files",
+    "Translations",
+    "SharingPanel",
+  ])(observer(DocSpace)),
 );

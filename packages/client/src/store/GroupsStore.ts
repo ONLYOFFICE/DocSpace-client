@@ -334,9 +334,8 @@ class GroupsStore {
         title: t("Common:Info"),
         icon: InfoReactSvgUrl,
         onClick: () => {
-          const { setIsVisible } = this.infoPanelStore;
           this.selection = [item];
-          setIsVisible(true);
+          this.infoPanelStore.setIsVisible(true);
         },
       },
       {
@@ -358,6 +357,7 @@ class GroupsStore {
               toastr.success(t("Group was deleted successfully"));
               this.setSelection([]);
               this.getGroups(this.groupsFilter, true);
+              this.infoPanelStore.setInfoPanelSelection(null);
             })
             .catch((err) => {
               toastr.error(err.message);

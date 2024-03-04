@@ -51,6 +51,7 @@ import ClientLoadingStore from "./ClientLoadingStore";
 
 import PluginStore from "./PluginStore";
 import InfoPanelStore from "./InfoPanelStore";
+import CampaignsStore from "./CampaignsStore";
 
 const selectedFolderStore = new SelectedFolderStore(settingsStore);
 
@@ -76,7 +77,8 @@ const ssoStore = new SsoFormStore();
 
 const tagsStore = new TagsStore();
 
-const publicRoomStore = new PublicRoomStore();
+const clientLoadingStore = new ClientLoadingStore();
+const publicRoomStore = new PublicRoomStore(clientLoadingStore);
 
 const infoPanelStore = new InfoPanelStore(userStore);
 
@@ -85,8 +87,6 @@ const treeFoldersStore = new TreeFoldersStore(
   settingsStore,
   publicRoomStore,
 );
-
-const clientLoadingStore = new ClientLoadingStore();
 
 const filesSettingsStore = new FilesSettingsStore(
   thirdPartyStore,
@@ -179,7 +179,7 @@ const filesActionsStore = new FilesActionsStore(
   userStore,
   currentTariffStatusStore,
   peopleStore,
-  currentQuotaStore
+  currentQuotaStore,
 );
 
 const contextOptionsStore = new ContextOptionsStore(
@@ -251,11 +251,14 @@ const createEditRoomStore = new CreateEditRoomStore(
 );
 
 const webhooksStore = new WebhooksStore(settingsStore);
+
 const storageManagement = new StorageManagement(
   filesStore,
   peopleStore,
-  authStore
+  authStore,
 );
+
+const campaignsStore = new CampaignsStore(settingsStore, userStore);
 
 const store = {
   authStore,
@@ -307,6 +310,7 @@ const store = {
 
   pluginStore,
   storageManagement,
+  campaignsStore,
 };
 
 export default store;

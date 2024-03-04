@@ -12,7 +12,7 @@
 	<preset_collections/>
 	<framework>i18next</framework>
 	<filename>editor.babel</filename>
-	<source_root_dir>../packages/editor</source_root_dir>
+	<source_root_dir>../packages/doceditor</source_root_dir>
 	<folder_node>
 		<name/>
 		<children>
@@ -1685,115 +1685,115 @@
 			<name>main</name>
 			<translation_urls>
 				<translation_url>
-					<path>../packages/editor/public/locales/ar-SA</path>
+					<path>../packages/doceditor/public/locales/ar-SA</path>
 					<language>ar-SA</language>
 				</translation_url>
 				<translation_url>
-					<path>../packages/editor/public/locales/az</path>
+					<path>../packages/doceditor/public/locales/az</path>
 					<language>az-Latn-AZ</language>
 				</translation_url>
 				<translation_url>
-					<path>../packages/editor/public/locales/bg</path>
+					<path>../packages/doceditor/public/locales/bg</path>
 					<language>bg-BG</language>
 				</translation_url>
 				<translation_url>
-					<path>../packages/editor/public/locales/cs</path>
+					<path>../packages/doceditor/public/locales/cs</path>
 					<language>cs-CZ</language>
 				</translation_url>
 				<translation_url>
-					<path>../packages/editor/public/locales/de</path>
+					<path>../packages/doceditor/public/locales/de</path>
 					<language>de-DE</language>
 				</translation_url>
 				<translation_url>
-					<path>../packages/editor/public/locales/el-GR</path>
+					<path>../packages/doceditor/public/locales/el-GR</path>
 					<language>el-GR</language>
 				</translation_url>
 				<translation_url>
-					<path>../packages/editor/public/locales/en</path>
+					<path>../packages/doceditor/public/locales/en</path>
 					<language>en-US</language>
 				</translation_url>
 				<translation_url>
-					<path>../packages/editor/public/locales/es</path>
+					<path>../packages/doceditor/public/locales/es</path>
 					<language>es-ES</language>
 				</translation_url>
 				<translation_url>
-					<path>../packages/editor/public/locales/fi</path>
+					<path>../packages/doceditor/public/locales/fi</path>
 					<language>fi-FI</language>
 				</translation_url>
 				<translation_url>
-					<path>../packages/editor/public/locales/fr</path>
+					<path>../packages/doceditor/public/locales/fr</path>
 					<language>fr-FR</language>
 				</translation_url>
 				<translation_url>
-					<path>../packages/editor/public/locales/hy-AM</path>
+					<path>../packages/doceditor/public/locales/hy-AM</path>
 					<language>hy-AM</language>
 				</translation_url>
 				<translation_url>
-					<path>../packages/editor/public/locales/it</path>
+					<path>../packages/doceditor/public/locales/it</path>
 					<language>it-IT</language>
 				</translation_url>
 				<translation_url>
-					<path>../packages/editor/public/locales/ja-JP</path>
+					<path>../packages/doceditor/public/locales/ja-JP</path>
 					<language>ja-JP</language>
 				</translation_url>
 				<translation_url>
-					<path>../packages/editor/public/locales/ko-KR</path>
+					<path>../packages/doceditor/public/locales/ko-KR</path>
 					<language>ko-KR</language>
 				</translation_url>
 				<translation_url>
-					<path>../packages/editor/public/locales/lo-LA</path>
+					<path>../packages/doceditor/public/locales/lo-LA</path>
 					<language>lo-LA</language>
 				</translation_url>
 				<translation_url>
-					<path>../packages/editor/public/locales/lv</path>
+					<path>../packages/doceditor/public/locales/lv</path>
 					<language>lv-LV</language>
 				</translation_url>
 				<translation_url>
-					<path>../packages/editor/public/locales/nl</path>
+					<path>../packages/doceditor/public/locales/nl</path>
 					<language>nl-NL</language>
 				</translation_url>
 				<translation_url>
-					<path>../packages/editor/public/locales/pl</path>
+					<path>../packages/doceditor/public/locales/pl</path>
 					<language>pl-PL</language>
 				</translation_url>
 				<translation_url>
-					<path>../packages/editor/public/locales/pt-BR</path>
+					<path>../packages/doceditor/public/locales/pt-BR</path>
 					<language>pt-BR</language>
 				</translation_url>
 				<translation_url>
-					<path>../packages/editor/public/locales/pt</path>
+					<path>../packages/doceditor/public/locales/pt</path>
 					<language>pt-PT</language>
 				</translation_url>
 				<translation_url>
-					<path>../packages/editor/public/locales/ro</path>
+					<path>../packages/doceditor/public/locales/ro</path>
 					<language>ro-RO</language>
 				</translation_url>
 				<translation_url>
-					<path>../packages/editor/public/locales/ru</path>
+					<path>../packages/doceditor/public/locales/ru</path>
 					<language>ru-RU</language>
 				</translation_url>
 				<translation_url>
-					<path>../packages/editor/public/locales/sk</path>
+					<path>../packages/doceditor/public/locales/sk</path>
 					<language>sk-SK</language>
 				</translation_url>
 				<translation_url>
-					<path>../packages/editor/public/locales/sl</path>
+					<path>../packages/doceditor/public/locales/sl</path>
 					<language>sl-SI</language>
 				</translation_url>
 				<translation_url>
-					<path>../packages/editor/public/locales/tr</path>
+					<path>../packages/doceditor/public/locales/tr</path>
 					<language>tr-TR</language>
 				</translation_url>
 				<translation_url>
-					<path>../packages/editor/public/locales/uk-UA</path>
+					<path>../packages/doceditor/public/locales/uk-UA</path>
 					<language>uk-UA</language>
 				</translation_url>
 				<translation_url>
-					<path>../packages/editor/public/locales/vi</path>
+					<path>../packages/doceditor/public/locales/vi</path>
 					<language>vi-VN</language>
 				</translation_url>
 				<translation_url>
-					<path>../packages/editor/public/locales/zh-CN</path>
+					<path>../packages/doceditor/public/locales/zh-CN</path>
 					<language>zh-CN</language>
 				</translation_url>
 			</translation_urls>

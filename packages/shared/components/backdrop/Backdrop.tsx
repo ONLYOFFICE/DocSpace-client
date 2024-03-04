@@ -6,13 +6,15 @@ import { BackdropProps } from "./Backdrop.types";
 
 const Backdrop = (props: BackdropProps) => {
   const {
-    visible,
+    visible = false,
     className,
     withBackground = false,
     withoutBlur = false,
     isAside = false,
     withoutBackground = false,
     isModalDialog = false,
+
+    zIndex = 203,
   } = props;
 
   const backdropRef = React.useRef<HTMLDivElement | null>(null);
@@ -79,6 +81,7 @@ const Backdrop = (props: BackdropProps) => {
   return visible && (needBackdrop || isAside) ? (
     <StyledBackdrop
       {...props}
+      zIndex={zIndex}
       ref={backdropRef}
       className={modifiedClassName}
       needBackground={needBackground}
@@ -88,15 +91,6 @@ const Backdrop = (props: BackdropProps) => {
       data-testid="backdrop"
     />
   ) : null;
-};
-
-Backdrop.defaultProps = {
-  visible: false,
-  zIndex: 203,
-  withBackground: false,
-  isAside: false,
-  isModalDialog: false,
-  withoutBlur: false,
 };
 
 export { Backdrop };

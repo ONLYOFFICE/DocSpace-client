@@ -1,7 +1,9 @@
 import { Meta, StoryObj } from "@storybook/react";
-import CampaignsCloudPng from "PUBLIC_DIR/images/campaigns.cloud.png";
 
 import { CampaignsBanner } from "./CampaignsBanner";
+import { CampaignsBannerProps } from "./CampaignsBanner.types";
+
+import { translates, config } from "./campaign/CreateDocSpace";
 
 const meta = {
   title: "Components/CampaignsBanner",
@@ -18,12 +20,17 @@ type Story = StoryObj<typeof CampaignsBanner>;
 
 export default meta;
 
+const Template = (args: CampaignsBannerProps) => (
+  <div style={{ width: "208px" }}>
+    <CampaignsBanner {...args} />
+  </div>
+);
+
 export const Default: Story = {
+  render: (args) => <Template {...args} />,
   args: {
-    headerLabel: "ONLYOFFICE for business",
-    subHeaderLabel: "Docs, projects, clients & emails",
-    img: CampaignsCloudPng,
-    buttonLabel: "START FREE TRIAL",
-    link: "https://www.onlyoffice.com/ru/registration.aspx?utm_source=personal&utm_campaign=BannerPersonalCloud",
+    campaignImage: "", // TODO: add url on image
+    campaignTranslate: translates,
+    campaignConfig: config,
   },
 };

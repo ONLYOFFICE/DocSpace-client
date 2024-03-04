@@ -11,4 +11,6 @@ export interface ErrorContainerProps extends PropsWithChildren {
   customizedBodyText?: string;
 
   onClickButton?: VoidFunction;
+
+  isEditor?: boolean;
 }

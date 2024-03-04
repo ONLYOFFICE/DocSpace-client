@@ -7,10 +7,10 @@ const TextPure = ({
   title,
   tag,
   as,
-  fontSize,
+  fontSize = "13px",
   fontWeight,
   color,
-  textAlign,
+  textAlign = "left",
   onClick,
   ...rest
 }: TextProps) => {
@@ -27,16 +27,6 @@ const TextPure = ({
       {...rest}
     />
   );
-};
-
-TextPure.defaultProps = {
-  textAlign: "left",
-  fontSize: "13px",
-  truncate: false,
-  isBold: false,
-  isInline: false,
-  isItalic: false,
-  noSelect: false,
 };
 
 const Text = React.memo<TextProps>(TextPure);

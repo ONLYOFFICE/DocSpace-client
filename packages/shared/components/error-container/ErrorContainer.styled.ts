@@ -1,13 +1,18 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { Base } from "@docspace/shared/themes";
 import { desktop, mobile } from "@docspace/shared/utils";
 
-const StyledErrorContainer = styled.div`
+const StyledErrorContainer = styled.div<{ isEditor: boolean }>`
   background: ${(props) => props.theme.errorContainer.background};
   cursor: default;
-  width: auto;
-  height: 100vh;
+  width: ${(props) => (props.isEditor ? "100%" : "auto")};
+  height: ${(props) => (props.isEditor ? "100%" : "100vh")};
+  ${(props) =>
+    props.isEditor &&
+    css`
+      position: absolute;
+    `}
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
@@ -17,7 +22,7 @@ const StyledErrorContainer = styled.div`
   border: 0;
   box-sizing: border-box;
 
-  .error_description_link {
+  $ .error_description_link {
     color: #2da7db;
     font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
     font-weight: 600;

@@ -1,9 +1,13 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
-import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
+import {
+  MEDIA_VIEW_URL,
+  PUBLIC_MEDIA_VIEW_URL,
+} from "@docspace/shared/constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { thumbnailStatuses } from "SRC_DIR/helpers/filesConstants";
 import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
+import FilesFilter from "@docspace/shared/api/files/filter";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
@@ -37,6 +41,33 @@ class MediaViewerDataStore {
     if (!mediaData.visible) this.setCurrentItem(null);
   };
 
+  fetchPreviewMediaFile = (id, fetchDefaultFiles) => {
+    const isMediaViewer = window.location.pathname.includes(
+      PUBLIC_MEDIA_VIEW_URL,
+    );
+    const isEmptyPlaylist = this.playlist.length === 0;
+
+    if (isEmptyPlaylist && isMediaViewer && !this.visible) {
+      this.filesStore
+        .getFileInfo(id)
+        .then((data) => {
+          const canOpenPlayer =
+            data.viewAccessibility.ImageView ||
+            data.viewAccessibility.MediaView;
+          const file = { ...data, canOpenPlayer };
+          this.setToPreviewFile(file, true);
+          this.filesStore.setIsPreview(true);
+        })
+        .catch((err) => {
+          toastr.error(err);
+          fetchDefaultFiles();
+        });
+      return true;
+    }
+
+    return false;
+  };
+
   setToPreviewFile = (file, visible) => {
     if (file === null) {
       this.previewFile = null;
@@ -65,7 +96,27 @@ class MediaViewerDataStore {
     this.id = id;
   };
 
+  getUrl = (id) => {
+    if (this.publicRoomStore.isPublicRoom) {
+      const key = this.publicRoomStore.publicRoomKey;
+      const filterObj = FilesFilter.getFilter(window.location);
+
+      return `${combineUrl("/rooms/share", MEDIA_VIEW_URL, id)}?key=${key}&${filterObj.toUrlParams()}`;
+    }
+
+    return combineUrl(MEDIA_VIEW_URL, id);
+  };
+
   getFirstUrl = () => {
+    if (this.publicRoomStore.isPublicRoom) {
+      const key = this.publicRoomStore.publicRoomKey;
+      const filterObj = FilesFilter.getFilter(window.location);
+
+      const url = `${combineUrl("/rooms/share")}?key=${key}&${filterObj.toUrlParams()}`;
+
+      return url;
+    }
+
     const filter = this.filesStore.filter;
 
     const queryParams = filter.toUrlParams();
@@ -78,9 +129,7 @@ class MediaViewerDataStore {
   };
 
   changeUrl = (id) => {
-    if (this.publicRoomStore.isPublicRoom) return;
-
-    const url = combineUrl(MEDIA_VIEW_URL, id);
+    const url = this.getUrl(id);
     window.DocSpace.navigate(url);
   };
 

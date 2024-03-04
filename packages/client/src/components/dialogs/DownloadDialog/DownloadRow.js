@@ -80,6 +80,8 @@ const DownloadRow = (props) => {
             fontSize="13px"
             fontWeight={600}
             hasScroll={isMobile()}
+            isAside={true}
+            withoutBackground={true}
             withExpander
           >
             {file.format || t("OriginalFormat")}

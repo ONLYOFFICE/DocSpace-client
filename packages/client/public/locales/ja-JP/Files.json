@@ -33,7 +33,6 @@
   "CreateRoom": "ルームを作成する",
   "CustomRooms": "カスタム",
   "DaysRemaining": "残りの日数：{{daysRemaining}}",
-  "DeleteGeneralLink": "以前のリンクは使用できなくなります。新しい一般リンクが作成されます。",
   "DeleteLink": "リンクを削除する",
   "DeleteLinkNote": "リンクは永久に削除されます。この操作を元に戻すことはできません。",
   "DisableDownload": "ファイル内容のコピー、ファイルのダウンロード、印刷の制限",

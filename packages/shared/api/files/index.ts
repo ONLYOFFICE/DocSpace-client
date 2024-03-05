@@ -947,9 +947,9 @@ export function getSettingsThirdParty() {
   return request({ method: "get", url: "files/thirdparty/backup" });
 }
 
-// export function deleteThirdParty(providerId) {
-//   return request({ method: "delete", url: `files/thirdparty/${providerId}` });
-// }
+export function deleteThirdParty(providerId: string) {
+  return request({ method: "delete", url: `files/thirdparty/${providerId}` });
+}
 
 export async function getThirdPartyCapabilities() {
   const res = (await request({

@@ -31,6 +31,9 @@ const ImportProcessingStep = ({
   const uploadInterval = useRef(null);
 
   const handleFileMigration = async () => {
+    setIsLoading(true);
+    setPercent(0);
+    setIsVisible(true);
     try {
       await proceedFileMigration("Workspace");
 
@@ -47,7 +50,11 @@ const ImportProcessingStep = ({
         if (res.isCompleted || res.progress === 100) {
           clearInterval(uploadInterval.current);
           setIsLoading(false);
-          onNextStep();
+          setIsVisible(false);
+          setPercent(100);
+          setTimeout(() => {
+            onNextStep();
+          }, 1000);
         }
       }, 1000);
     } catch (error) {

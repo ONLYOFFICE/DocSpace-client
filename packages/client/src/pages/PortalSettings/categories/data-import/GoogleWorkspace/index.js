@@ -81,9 +81,10 @@ const GoogleWorkspace = ({
   const navigate = useNavigate();
 
   const onNextStep = () => {
-    if (currentStep !== 6) {
-      setCurrentStep((prev) => prev + 1);
-    }
+    setCurrentStep((prev) => {
+      const nextStep = prev < 6 ? prev + 1 : 6;
+      return nextStep;
+    });
   };
 
   const onPrevStep = () => {

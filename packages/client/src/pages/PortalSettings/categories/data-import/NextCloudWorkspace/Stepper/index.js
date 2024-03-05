@@ -15,9 +15,10 @@ export const getStepsData = (t, currentStep, setCurrentStep) => {
   const isSixthStep = currentStep === 6;
 
   const incrementStep = () => {
-    if (currentStep !== 7) {
-      setCurrentStep((prev) => prev + 1);
-    }
+    setCurrentStep((prev) => {
+      const nextStep = prev < 7 ? prev + 1 : 7;
+      return nextStep;
+    });
   };
 
   const decrementStep = () => {

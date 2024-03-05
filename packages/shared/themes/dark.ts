@@ -2019,7 +2019,7 @@ const Dark: TTheme = {
 
     backgroundColor: black,
     blurColor: "rgba(20, 20, 20, 0.8)",
-    borderColor: "#292929",
+    borderColor: "#474747",
     thumbnailBorderColor: grayLightMid,
     textColor: white,
 

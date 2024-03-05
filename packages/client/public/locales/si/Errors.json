@@ -1,0 +1,8 @@
+{
+  "Error401Text": "දැනට සම්පත වෙත ප්‍රවේශ වීමට නොහැකිය.",
+  "Error403Text": "ප්‍රවේශය ප්‍රතික්‍ෂේපිතයි.",
+  "Error404Text": "කණගාටුයි, සම්පත හමු නොවිණි.",
+  "ErrorEmptyResponse": "හිස් ප්‍රතිචාරයකි",
+  "ErrorOfflineText": "අන්තර්ජාලය නැත",
+  "ErrorUnavailableText": "DocSpace නොතිබේ"
+}

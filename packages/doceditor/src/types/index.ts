@@ -244,6 +244,7 @@ export interface SelectFolderDialogProps {
   fileInfo: TFile;
   filesSettings: TFilesSettings;
   i18n: i18n;
+  fileSaveAsExtension?: string;
 }
 
 export interface SelectFileDialogProps {

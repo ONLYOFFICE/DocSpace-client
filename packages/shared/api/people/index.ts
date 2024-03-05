@@ -433,7 +433,7 @@ export async function getMembersList(
       member.displayName = Encoder.htmlDecode(member.displayName);
     }
 
-    if ("manager" in member && member.manager) {
+    if ("membersCount" in member) {
       member.isGroup = true;
     }
 

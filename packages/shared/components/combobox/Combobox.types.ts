@@ -133,6 +133,7 @@ export interface ComboboxProps {
   isAside?: boolean;
   withBlur?: boolean;
   title?: string;
+  plusBadgeValue?: number;
 }
 
 export interface ComboButtonProps {
@@ -154,6 +155,7 @@ export interface ComboButtonProps {
   tabIndex?: number;
   isLoading?: boolean;
   type?: TCombobox;
+  plusBadgeValue?: number;
 }
 
 export interface ComboButtonThemeProps extends ComboButtonProps {

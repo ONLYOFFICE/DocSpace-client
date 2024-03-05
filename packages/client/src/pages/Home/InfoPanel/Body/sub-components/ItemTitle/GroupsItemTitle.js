@@ -13,23 +13,15 @@ const GroupsItemTitle = ({
   t,
   isSeveralItems,
   infoPanelSelection,
-  getUserContextOptions,
+  getGroupContextOptions,
 }) => {
   if (isSeveralItems) return null;
 
   const itemTitleRef = useRef();
 
-  const getData = () => {
-    const newOptions = infoPanelSelection.options?.filter(
-      (o) => o !== "details",
-    );
-    return getUserContextOptions(t, newOptions || [], infoPanelSelection);
-  };
-  const contextOptions = getData();
+  const getContextOptions = () =>
+    getGroupContextOptions(t, infoPanelSelection, true);
 
-  const userAvatar = infoPanelSelection.hasAvatar
-    ? infoPanelSelection.avatar
-    : DefaultUserPhoto;
   const groupName = infoPanelSelection.name
     ? decode(infoPanelSelection.name).trim()
     : "";
@@ -56,20 +48,18 @@ const GroupsItemTitle = ({
         </div>
         {!!groupName && (
           <Text className={"info-text__email"} title={infoPanelSelection.email}>
-            {`${infoPanelSelection.members?.length} ${
-              infoPanelSelection.members?.length === 1 ? "person" : "people"
-            }`}
+            {t("PeopleTranslations:PeopleCount", {
+              count: infoPanelSelection.membersCount,
+            })}
           </Text>
         )}
       </div>
 
-      {!!contextOptions.length && (
-        <ContextMenuButton
-          id="info-accounts-options"
-          className="context-button"
-          getData={getData}
-        />
-      )}
+      <ContextMenuButton
+        id="info-accounts-options"
+        className="context-button"
+        getData={getContextOptions}
+      />
     </StyledAccountsItemTitle>
   );
 };

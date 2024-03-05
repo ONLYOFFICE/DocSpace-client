@@ -74,8 +74,7 @@ const StyledTableContainer = styled(TableContainer)`
       }
       .table-container_user-name-cell {
         ${userNameCss}
-        border-left: 0; //for Safari macOS
-        border-right: 0; //for Safari macOS
+        border-inline: 0; //for Safari macOS
 
         border-image-source: ${(props) => `linear-gradient(to right, 
           ${props.theme.filesSection.tableView.row.borderColorTransition} 17px, ${props.theme.filesSection.tableView.row.borderColor} 31px)`};

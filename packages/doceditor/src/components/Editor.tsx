@@ -89,13 +89,18 @@ const Editor = ({
 
   newConfig.editorConfig = { ...config.editorConfig };
 
-  if (view && newConfig.editorConfig) newConfig.editorConfig.mode = "view";
+  const search = typeof window !== "undefined" ? window.location.search : "";
+  const type = new URLSearchParams(search).get("type");
+
+  //if (view && newConfig.editorConfig) newConfig.editorConfig.mode = "view";
+
+  if (type) config.type = type;
+
   if (isMobile) config.type = "mobile";
 
   let goBack: TGoBack = {} as TGoBack;
 
   if (fileInfo) {
-    const search = typeof window !== "undefined" ? window.location.search : "";
     const editorGoBack = new URLSearchParams(search).get("editorGoBack");
 
     if (editorGoBack === "false") {
@@ -125,15 +130,23 @@ const Editor = ({
     }
   }
 
+  const customization = new URLSearchParams(search).get("customization");
+  const sdkCustomization: NonNullable<
+    IConfig["editorConfig"]
+  >["customization"] = JSON.parse(customization || "{}");
+
+  const theme = sdkCustomization?.uiTheme || user?.theme;
+
   if (newConfig.editorConfig)
     newConfig.editorConfig.customization = {
       ...newConfig.editorConfig.customization,
+      ...sdkCustomization,
       goback: { ...goBack },
-      uiTheme: getEditorTheme(user?.theme),
+      uiTheme: getEditorTheme(theme),
     };
 
-  if (newConfig.document && newConfig.document.info)
-    newConfig.document.info.favorite = false;
+  //if (newConfig.document && newConfig.document.info)
+  //  newConfig.document.info.favorite = false;
 
   // const url = window.location.href;
 

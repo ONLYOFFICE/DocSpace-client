@@ -31,17 +31,17 @@ const Search = ({ setSearchValue, resetSearch }: SearchProps) => {
     }
   };
 
+  const debouncedSearch = useCallback(
+    debounce((debouncedValue: string) => setSearchValue(debouncedValue), 300),
+    [],
+  );
+
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.currentTarget.value;
     setValue(newValue);
 
     debouncedSearch(newValue.trim());
   };
-
-  const debouncedSearch = useCallback(
-    debounce((value: string) => setSearchValue(value), 300),
-    [],
-  );
 
   useEffect(() => {
     window.addEventListener("keyup", onEscapeUp);
@@ -55,7 +55,7 @@ const Search = ({ setSearchValue, resetSearch }: SearchProps) => {
         id="info_panel_search_input"
         type={InputType.text}
         size={InputSize.base}
-        scale={true}
+        scale
         onChange={onChange}
         value={value}
         isAutoFocussed

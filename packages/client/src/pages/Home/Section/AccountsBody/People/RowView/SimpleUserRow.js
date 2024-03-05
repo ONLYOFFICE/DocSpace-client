@@ -11,22 +11,20 @@ import UserContent from "./userContent";
 import { mobile, tablet } from "@docspace/shared/utils/device";
 
 const marginStyles = css`
-  margin-left: -24px;
-  padding-left: 24px;
-  padding-right: 24px;
+  margin-inline-start: -24px;
+  padding-inline: 24px;
 
   @media ${tablet} {
-    margin-left: -16px;
-    padding-left: 16px;
-    padding-right: 16px;
+    margin-inline-start: -16px;
+    padding-inline: 16px;
   }
 `;
 
 const marginStylesUserRowContainer = css`
-  margin-right: -48px !important;
+  margin-inline-end: -48px !important;
 
   @media ${tablet} {
-    margin-right: -32px !important;
+    margin-inline-end: -32px !important;
   }
 `;
 
@@ -38,16 +36,8 @@ const checkedStyle = css`
 const StyledWrapper = styled.div`
   .user-item {
     border: 1px solid transparent;
-    border-left: none;
-    border-right: none;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 0;
-          `
-        : css`
-            margin-left: 0;
-          `}
+    border-inline: none;
+    margin-inline-start: 0;
     height: 100%;
     user-select: none;
 
@@ -98,14 +88,7 @@ const StyledSimpleUserRow = styled(Row)`
 
   .styled-element {
     height: 32px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 12px;
-          `
-        : css`
-            margin-right: 12px;
-          `}
+    margin-inline-end: 12px;
   }
 `;
 

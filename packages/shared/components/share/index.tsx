@@ -186,7 +186,7 @@ const Share = (props: ShareProps) => {
         ? await editFileLink(
             infoPanelSelection.id,
             link.sharedTo.id,
-            link.access,
+            item.access || ShareAccessRights.ReadOnly,
             link.sharedTo.primary,
             item.internal || false,
             expDate,
@@ -194,7 +194,7 @@ const Share = (props: ShareProps) => {
         : await editExternalLink(
             infoPanelSelection.id,
             link.sharedTo.id,
-            link.access,
+            item.access || ShareAccessRights.ReadOnly,
             link.sharedTo.primary,
             item.internal || false,
             expDate,

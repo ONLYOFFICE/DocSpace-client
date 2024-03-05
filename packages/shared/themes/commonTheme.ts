@@ -1,6 +1,8 @@
+export type TInterfaceDirection = "rtl" | "ltr";
+
 export const CommonTheme = {
   rtlFontIncreaseValue: 2,
-  interfaceDirection: "ltr",
+  interfaceDirection: "ltr" as TInterfaceDirection,
 
   getCorrectFontSize(currentValue: string) {
     if (

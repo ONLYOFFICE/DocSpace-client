@@ -200,7 +200,7 @@ const QuotaForm = ({
           label={checkboxLabel}
           isChecked={isChecked}
           onChange={onChangeCheckbox}
-          isDisabled={isDisable}
+          isDisabled={isLoading || isDisabled}
         />
       )}
 

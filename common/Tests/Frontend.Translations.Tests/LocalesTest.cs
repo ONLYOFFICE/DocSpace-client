@@ -109,7 +109,7 @@ public class LocalesTest
         var moduleWorkspaces = new List<string>
         {
             Utils.ConvertPathToOS("packages/client"),
-            Utils.ConvertPathToOS("packages/editor"),
+            Utils.ConvertPathToOS("packages/doceditor"),
             Utils.ConvertPathToOS("packages/login"),
             Utils.ConvertPathToOS("packages/shared"),
             Utils.ConvertPathToOS("packages/management"),

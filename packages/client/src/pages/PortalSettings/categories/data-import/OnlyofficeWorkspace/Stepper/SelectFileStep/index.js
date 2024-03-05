@@ -176,11 +176,12 @@ const SelectFileStep = ({
           let a = document.createElement("a");
           const url = window.URL.createObjectURL(blob);
           a.href = url;
-          a.download = "unsupported_archives";
+          a.download = "unsupported_files";
           a.click();
           window.URL.revokeObjectURL(url);
         });
     } catch (error) {
+      toastr.error(error);
       console.log(error);
     }
   };

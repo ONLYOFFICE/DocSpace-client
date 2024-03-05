@@ -23,9 +23,16 @@ import BackgroundPatternRedReactSvgUrl from "PUBLIC_DIR/images/background.patter
 import BackgroundPatternPurpleReactSvgUrl from "PUBLIC_DIR/images/background.pattern.purple.react.svg?url";
 import BackgroundPatternLightBlueReactSvgUrl from "PUBLIC_DIR/images/background.pattern.lightBlue.react.svg?url";
 import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.pattern.black.react.svg?url";
+import { parseAddress } from "./email";
 
-import { FolderType, RoomsType, ShareAccessRights, ThemeKeys } from "../enums";
-import { LANGUAGE, RTL_LANGUAGES } from "../constants";
+import {
+  FolderType,
+  RoomsType,
+  ShareAccessRights,
+  ThemeKeys,
+  ErrorKeys,
+} from "../enums";
+import { LANGUAGE, PUBLIC_MEDIA_VIEW_URL, RTL_LANGUAGES } from "../constants";
 
 import { TI18n } from "../types";
 import { TUser } from "../api/people/types";
@@ -83,7 +90,10 @@ export function createPasswordHash(
 }
 
 export const isPublicRoom = () => {
-  return window.location.pathname === "/rooms/share";
+  return (
+    window.location.pathname === "/rooms/share" ||
+    window.location.pathname.includes(PUBLIC_MEDIA_VIEW_URL)
+  );
 };
 
 export const getUserTypeLabel = (
@@ -104,6 +114,44 @@ export const getUserTypeLabel = (
     default:
       return t("Common:User");
   }
+};
+
+export const parseDomain = (
+  domain: string,
+  setError: Function,
+  t: (key: string) => string,
+) => {
+  const parsedDomain = parseAddress("test@" + domain);
+
+  if (parsedDomain?.parseErrors.length > 0) {
+    const translatedErrors = parsedDomain.parseErrors.map((error) => {
+      switch (error.errorKey) {
+        case ErrorKeys.LocalDomain:
+          return t("Common:LocalDomain");
+        case ErrorKeys.IncorrectDomain:
+        case ErrorKeys.IncorrectEmail:
+          return t("Common:IncorrectDomain");
+        case ErrorKeys.DomainIpAddress:
+          return t("Common:DomainIpAddress");
+        case ErrorKeys.PunycodeDomain:
+          return t("Common:PunycodeDomain");
+        case ErrorKeys.PunycodeLocalPart:
+          return t("Common:PunycodeLocalPart");
+        case ErrorKeys.IncorrectLocalPart:
+          return t("Common:IncorrectLocalPart");
+        case ErrorKeys.SpacesInLocalPart:
+          return t("Common:SpacesInLocalPart");
+        case ErrorKeys.MaxLengthExceeded:
+          return t("Common:MaxLengthExceeded");
+        default:
+          return t("Common:IncorrectDomain");
+      }
+    });
+
+    setError(translatedErrors);
+  }
+
+  return parsedDomain.isValid();
 };
 
 export const validatePortalName = (
@@ -970,3 +1018,4 @@ export const insertDataLayer = (id: string) => {
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({ user_id: id });
 };
+

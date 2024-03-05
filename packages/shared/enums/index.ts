@@ -451,3 +451,11 @@ export enum AccountsSearchArea {
   Groups = "1",
   Any = "2",
 }
+
+export enum MembersSubjectType {
+  User = 0,
+  ExternalLink = 1,
+  Group = 2,
+  InvitationLink = 3,
+  PrimaryExternalLink = 4,
+}

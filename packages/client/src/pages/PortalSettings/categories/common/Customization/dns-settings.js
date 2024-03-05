@@ -20,7 +20,7 @@ import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { DeviceType } from "@docspace/shared/enums";
-import { validatePortalName } from "@docspace/shared/utils/common";
+import { parseDomain } from "@docspace/shared/utils/common";
 
 const toggleStyle = {
   position: "static",
@@ -61,7 +61,7 @@ const DNSSettings = (props) => {
     isDefaultDNS,
     dnsSettingsUrl,
     currentDeviceType,
-    domainValidator,
+    portalName,
   } = props;
   const [hasScroll, setHasScroll] = useState(false);
   const isLoadedSetting = isLoaded && tReady;
@@ -110,19 +110,8 @@ const DNSSettings = (props) => {
         setIsLoading(true);
       }, [200]);
 
-      const isValidPortalName = validatePortalName(
-        dnsName || "",
-        domainValidator,
-        setErrorText,
-        t,
-      );
-
-      if (isValidPortalName) {
-        await saveDNSSettings();
-        toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
-      } else {
-        setIsError(true);
-      }
+      await saveDNSSettings();
+      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
     } catch (e) {
       setIsError(true);
       toastr.error(e);
@@ -131,6 +120,8 @@ const DNSSettings = (props) => {
     clearTimeout(timerId);
     timerId = null;
     setIsLoading(false);
+
+    setIsError(false);
   };
   const onClickToggle = (e) => {
     const checked = e.currentTarget.checked;
@@ -138,10 +129,18 @@ const DNSSettings = (props) => {
   };
 
   const onChangeTextInput = (e) => {
-    const { value } = e.target;
     isError && setIsError(false);
-    errorText && setErrorText("");
-    setDNSName(value);
+    setErrorText("");
+
+    const { value } = e.target;
+    const dns = portalName ? value.slice(portalName.length + 1) : value;
+
+    const isValidDomain = parseDomain(dns || "", setErrorText, t);
+
+    if (!isValidDomain) {
+      setIsError(true);
+    }
+    setDNSName(dns);
   };
   const checkInnerWidth = useCallback(() => {
     if (!isMobile()) {
@@ -162,6 +161,8 @@ const DNSSettings = (props) => {
     }
   }, [isMobile, setIsCustomizationView]);
 
+  const domainExampleText = " team.ourcompany.com";
+
   const settingsBlock = (
     <div className="settings-block">
       {standalone ? (
@@ -177,13 +178,33 @@ const DNSSettings = (props) => {
           <TextInput
             {...textInputProps}
             isDisabled={isLoading || !enable}
-            value={dnsName?.trim()}
+            value={
+              portalName ? `${portalName}.${dnsName?.trim()}` : dnsName?.trim()
+            }
             onChange={onChangeTextInput}
             hasError={isError}
           />
           <div style={{ marginTop: "5px" }}>
-            <Text fontSize="12px" fontWeight="400" color="#F24724">
-              {errorText}
+            {errorText &&
+              errorText.map((err, index) => (
+                <Text
+                  key={index}
+                  fontSize="12px"
+                  fontWeight="400"
+                  color="#F24724"
+                >
+                  {err}
+                </Text>
+              ))}
+          </div>
+          <div style={{ marginTop: "3px" }}>
+            <Text
+              key="dns-hint"
+              fontSize="12px"
+              fontWeight="400"
+              color="#A3A9AE"
+            >
+              {`${t("Settings:DNSSettingsHint")}${domainExampleText}`}
             </Text>
           </div>
         </>
@@ -215,7 +236,7 @@ const DNSSettings = (props) => {
       size={currentDeviceType === DeviceType.desktop ? "small" : "normal"}
       label={t("Common:SaveButton")}
       onClick={onSaveSettings}
-      isDisabled={isLoading || isDefaultDNS}
+      isDisabled={isLoading || isDefaultDNS || isError}
       isLoading={isLoading}
     />
   ) : (
@@ -224,7 +245,7 @@ const DNSSettings = (props) => {
       size={currentDeviceType === DeviceType.desktop ? "small" : "normal"}
       label={t("Common:SendRequest")}
       onClick={onSendRequest}
-      isDisabled={!isSettingPaid}
+      isDisabled={!isSettingPaid || isError}
     />
   );
 
@@ -278,7 +299,6 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     standalone,
     dnsSettingsUrl,
     currentDeviceType,
-    domainValidator,
   } = settingsStore;
   const {
     isLoaded,
@@ -290,6 +310,7 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     setDNSName,
     saveDNSSettings,
     isDefaultDNS,
+    portalName,
   } = common;
 
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
@@ -313,6 +334,6 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     saveDNSSettings,
     dnsSettingsUrl,
     currentDeviceType,
-    domainValidator,
+    portalName,
   };
 })(withLoading(withTranslation(["Settings", "Common"])(observer(DNSSettings))));

@@ -22,6 +22,7 @@ class DialogsStore {
   downloadDialogVisible = false;
   emptyTrashDialogVisible = false;
   newFilesPanelVisible = false;
+  editGroupMembersDialogVisible = false;
   conflictResolveDialogVisible = false;
   convertDialogVisible = false;
   selectFileDialogVisible = false;
@@ -31,8 +32,6 @@ class DialogsStore {
   unsavedChangesDialogVisible = false;
   moveToPublicRoomVisible = false;
   moveToPublicRoomData = null;
-  cancelUploadDialogVisible = false;
-
   backupToPublicRoomVisible = false;
   backupToPublicRoomData = null;
   isFolderActions = false;
@@ -80,6 +79,7 @@ class DialogsStore {
   leaveRoomDialogVisible = false;
   changeRoomOwnerIsVisible = false;
   changeRoomOwnerData = null;
+  editMembersGroup = null;
 
   shareFolderDialogVisible = false;
 
@@ -89,7 +89,7 @@ class DialogsStore {
     filesStore,
     selectedFolderStore,
     versionHistoryStore,
-    infoPanelStore
+    infoPanelStore,
   ) {
     makeAutoObservable(this);
 
@@ -142,7 +142,12 @@ class DialogsStore {
   setRestorePanelVisible = (visible) => {
     !visible && this.deselectActiveFiles();
 
-    if (visible && !this.filesStore.hasSelection && !this.filesStore.hasBufferSelection) return;
+    if (
+      visible &&
+      !this.filesStore.hasSelection &&
+      !this.filesStore.hasBufferSelection
+    )
+      return;
 
     this.restorePanelVisible = visible;
   };
@@ -281,6 +286,14 @@ class DialogsStore {
     this.newFiles = files;
   };
 
+  setEditGroupMembersDialogVisible = (editGroupMembersDialogVisible) => {
+    this.editGroupMembersDialogVisible = editGroupMembersDialogVisible;
+  };
+
+  setEditMembersGroup = (editMembersGroup) => {
+    this.editMembersGroup = editMembersGroup;
+  };
+
   setConflictResolveDialogVisible = (conflictResolveDialogVisible) => {
     this.conflictResolveDialogVisible = conflictResolveDialogVisible;
   };
@@ -399,7 +412,11 @@ class DialogsStore {
     this.leaveRoomDialogVisible = visible;
   };
 
-  setChangeRoomOwnerIsVisible = (visible, showBackButton = false, setRoomParams) => {
+  setChangeRoomOwnerIsVisible = (
+    visible,
+    showBackButton = false,
+    setRoomParams,
+  ) => {
     this.changeRoomOwnerIsVisible = visible;
 
     this.changeRoomOwnerData = {
@@ -427,10 +444,6 @@ class DialogsStore {
   deselectActiveFiles = () => {
     this.filesStore.setSelected("none");
   };
-
-  setCancelUploadDialogVisible = (visible) => {
-    this.cancelUploadDialogVisible = visible;
-  }
 
   setShareFolderDialogVisible = (visible) => {
     this.shareFolderDialogVisible = visible;

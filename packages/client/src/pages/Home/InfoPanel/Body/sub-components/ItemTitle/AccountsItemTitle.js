@@ -10,7 +10,6 @@ import Badges from "@docspace/client/src/pages/Home/Section/AccountsBody/Badges"
 import { StyledAccountsItemTitle } from "../../styles/accounts";
 import { StyledTitle } from "../../styles/common";
 
-import { SSO_LABEL } from "SRC_DIR/helpers/constants";
 import { decode } from "he";
 
 const AccountsItemTitle = ({
@@ -31,7 +30,7 @@ const AccountsItemTitle = ({
 
   const getData = () => {
     const newOptions = infoPanelSelection.options?.filter(
-      (option) => option !== "details"
+      (option) => option !== "details",
     );
     return getUserContextOptions(t, newOptions || [], infoPanelSelection);
   };
@@ -82,7 +81,7 @@ const AccountsItemTitle = ({
         {isSSO && (
           <Badge
             className="sso-badge"
-            label={SSO_LABEL}
+            label={t("Common:SSO")}
             color={"#FFFFFF"}
             backgroundColor="#22C386"
             fontSize={"9px"}

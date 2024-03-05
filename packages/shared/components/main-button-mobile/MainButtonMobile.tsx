@@ -263,29 +263,29 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
             ))}
         </StyledProgressContainer>
 
-        <StyledButtonOptions withoutButton={withoutButton}>
-          {buttonOptions
-            ? buttonOptions.map((option: ButtonOption) =>
-                option.isSeparator ? (
-                  <div key={option.key} className="separator-wrapper">
-                    <div className="is-separator" />
-                  </div>
-                ) : (
-                  <StyledDropDownItem
-                    id={option.id}
-                    className={`drop-down-item-button ${
-                      option.isSeparator ? "is-separator" : ""
-                    }`}
-                    key={option.key}
-                    label={option.label}
-                    onClick={option.onClick}
-                    icon={option.icon ? option.icon : ""}
-                    // action={option.action}
-                  />
-                ),
-              )
-            : ""}
-        </StyledButtonOptions>
+        {buttonOptions && (
+          <StyledButtonOptions withoutButton={withoutButton}>
+            {buttonOptions.map((option: ButtonOption) =>
+              option.isSeparator ? (
+                <div key={option.key} className="separator-wrapper">
+                  <div className="is-separator" />
+                </div>
+              ) : (
+                <StyledDropDownItem
+                  id={option.id}
+                  className={`drop-down-item-button ${
+                    option.isSeparator ? "is-separator" : ""
+                  }`}
+                  key={option.key}
+                  label={option.label}
+                  onClick={option.onClick}
+                  icon={option.icon ? option.icon : ""}
+                  // action={option.action}
+                />
+              ),
+            )}
+          </StyledButtonOptions>
+        )}
       </StyledRenderItem>
     );
   };

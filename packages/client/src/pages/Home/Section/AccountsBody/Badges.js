@@ -12,8 +12,6 @@ import { commonIconsStyles } from "@docspace/shared/utils";
 import SendClockIcon from "PUBLIC_DIR/images/send.clock.react.svg";
 import CatalogSpamIcon from "PUBLIC_DIR/images/catalog.spam.react.svg";
 
-import { SSO_LABEL } from "SRC_DIR/helpers/constants";
-
 const StyledBadgesContainer = styled.div`
   height: 100%;
 
@@ -96,7 +94,7 @@ const Badges = ({
       {isSSO && (
         <Badge
           className="accounts-badge"
-          label={SSO_LABEL}
+          label={t("SSO")}
           color={"#FFFFFF"}
           backgroundColor="#22C386"
           fontSize={"9px"}

@@ -4,6 +4,7 @@ import Dropzone from "react-dropzone";
 import equal from "fast-deep-equal/react";
 
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
+import DocumentReactSvgUrl from "PUBLIC_DIR/images/document.react.svg?url";
 
 import { IconButton } from "../icon-button";
 import { Button, ButtonSize } from "../button";
@@ -29,6 +30,7 @@ const FileInputPure = ({
   fromStorage = false,
   path,
   idButton,
+  isDocumentIcon,
   ...rest
 }: FileInputProps) => {
   const { t } = useTranslation("Common");
@@ -143,7 +145,11 @@ const FileInputPure = ({
               ) : (
                 <IconButton
                   className="icon-button"
-                  iconName={CatalogFolderReactSvgUrl}
+                  iconName={
+                    isDocumentIcon
+                      ? DocumentReactSvgUrl
+                      : CatalogFolderReactSvgUrl
+                  }
                   color="#A3A9AE"
                   size={iconSize}
                   isDisabled={isDisabled}
@@ -164,6 +170,7 @@ FileInputPure.defaultProps = {
   isDisabled: false,
   isLoading: false,
   accept: [""],
+  isDocumentIcon: false,
 };
 
 export { FileInputPure };

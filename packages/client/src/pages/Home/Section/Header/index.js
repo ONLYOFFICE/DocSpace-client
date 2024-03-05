@@ -19,6 +19,8 @@ import ShareReactSvgUrl from "PUBLIC_DIR/images/share.react.svg?url";
 import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import PersonReactSvgUrl from "PUBLIC_DIR/images/person.react.svg?url";
+import PersonDefaultReactSvgUrl from "PUBLIC_DIR/images/person.default.react.svg?url";
+import GroupReactSvgUrl from "PUBLIC_DIR/images/group.react.svg?url";
 import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/catalog.trash.react.svg?url";
@@ -222,12 +224,16 @@ const SectionHeaderContent = (props) => {
 
     getAccountsHeaderMenu,
     isAccountsHeaderVisible,
+    isGroupsHeaderVisible,
+    isGroupsHeaderIndeterminate,
+    isGroupsHeaderChecked,
     isAccountsHeaderIndeterminate,
     isAccountsHeaderChecked,
     accountsCbMenuItems,
     getAccountsMenuItemId,
     getAccountsCheckboxItemLabel,
     setAccountsSelected,
+    setGroupsSelected,
     isOwner,
     isCollaborator,
     setInvitePanelOptions,
@@ -266,6 +272,8 @@ const SectionHeaderContent = (props) => {
   const isInsideGroup = !!groupId;
 
   const isAccountsPage = location.pathname.includes("/accounts");
+  const isGroupsPage =
+    location.pathname.includes("/accounts/groups") && !isInsideGroup;
 
   const isSettingsPage = location.pathname.includes("/settings");
 
@@ -354,7 +362,7 @@ const SectionHeaderContent = (props) => {
             {
               id: "accounts-add_collaborator",
               className: "main-button_drop-down",
-              icon: PersonReactSvgUrl,
+              icon: PersonDefaultReactSvgUrl,
               label: t("Common:PowerUser"),
               onClick: onInvite,
               "data-type": EmployeeType.Collaborator,
@@ -363,7 +371,7 @@ const SectionHeaderContent = (props) => {
             {
               id: "accounts-add_user",
               className: "main-button_drop-down",
-              icon: PersonUserReactSvgUrl,
+              icon: PersonDefaultReactSvgUrl,
               label: t("Common:User"),
               onClick: onInvite,
               "data-type": EmployeeType.Guest,
@@ -387,7 +395,7 @@ const SectionHeaderContent = (props) => {
         {
           id: "create_group",
           className: "main-button_drop-down",
-          icon: PersonUserReactSvgUrl,
+          icon: GroupReactSvgUrl,
           label: t("PeopleTranslations:CreateGroup"),
           onClick: onCreateGroup,
           action: "group",
@@ -935,7 +943,9 @@ const SectionHeaderContent = (props) => {
 
   const onChange = (checked) => {
     isAccountsPage
-      ? setAccountsSelected(checked ? "all" : "none")
+      ? !isGroupsPage
+        ? setAccountsSelected(checked ? "all" : "none")
+        : setGroupsSelected(checked ? "all" : "none")
       : setSelected(checked ? "all" : "none");
   };
 
@@ -1019,7 +1029,7 @@ const SectionHeaderContent = (props) => {
   }, []);
 
   const headerMenu = isAccountsPage
-    ? getAccountsHeaderMenu(t)
+    ? getAccountsHeaderMenu(t, isGroupsPage)
     : getHeaderMenu(t);
 
   const menuItems = getMenuItems();
@@ -1036,11 +1046,15 @@ const SectionHeaderContent = (props) => {
 
   if (isAccountsPage) {
     tableGroupMenuVisible =
-      isAccountsHeaderVisible &&
+      (!isGroupsPage ? isAccountsHeaderVisible : isGroupsHeaderVisible) &&
       tableGroupMenuVisible &&
       headerMenu.some((x) => !x.disabled);
-    tableGroupMenuProps.isChecked = isAccountsHeaderChecked;
-    tableGroupMenuProps.isIndeterminate = isAccountsHeaderIndeterminate;
+    tableGroupMenuProps.isChecked = !isGroupsPage
+      ? isAccountsHeaderChecked
+      : isGroupsHeaderChecked;
+    tableGroupMenuProps.isIndeterminate = !isGroupsPage
+      ? isAccountsHeaderIndeterminate
+      : isGroupsHeaderIndeterminate;
     tableGroupMenuProps.withoutInfoPanelToggler = false;
   } else {
     tableGroupMenuVisible = isHeaderVisible && tableGroupMenuVisible;
@@ -1314,7 +1328,11 @@ export default inject(
     } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
-    const { currentGroup, getGroupContextOptions } = peopleStore.groupsStore;
+    const {
+      currentGroup,
+      getGroupContextOptions,
+      setSelected: setGroupsSelected,
+    } = peopleStore.groupsStore;
 
     const {
       enablePlugins,
@@ -1358,6 +1376,9 @@ export default inject(
 
     const {
       isHeaderVisible: isAccountsHeaderVisible,
+      isGroupsHeaderVisible,
+      isGroupsHeaderIndeterminate,
+      isGroupsHeaderChecked,
       isHeaderIndeterminate: isAccountsHeaderIndeterminate,
       isHeaderChecked: isAccountsHeaderChecked,
       cbMenuItems: accountsCbMenuItems,
@@ -1489,6 +1510,10 @@ export default inject(
 
       getAccountsHeaderMenu,
       isAccountsHeaderVisible,
+      isGroupsHeaderVisible,
+      isGroupsHeaderIndeterminate,
+      isGroupsHeaderChecked,
+      setGroupsSelected,
       isAccountsHeaderIndeterminate,
       isAccountsHeaderChecked,
       accountsCbMenuItems,

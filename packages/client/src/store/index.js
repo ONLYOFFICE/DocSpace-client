@@ -78,7 +78,8 @@ const ssoStore = new SsoFormStore();
 
 const tagsStore = new TagsStore();
 
-const publicRoomStore = new PublicRoomStore();
+const clientLoadingStore = new ClientLoadingStore();
+const publicRoomStore = new PublicRoomStore(clientLoadingStore);
 
 const infoPanelStore = new InfoPanelStore(userStore);
 
@@ -87,8 +88,6 @@ const treeFoldersStore = new TreeFoldersStore(
   settingsStore,
   publicRoomStore,
 );
-
-const clientLoadingStore = new ClientLoadingStore();
 
 const filesSettingsStore = new FilesSettingsStore(
   thirdPartyStore,

@@ -33,7 +33,7 @@ import { ROOMS_PROVIDER_TYPE_NAME } from "@docspace/shared/constants";
 
 import { getDefaultRoomName } from "SRC_DIR/helpers/filesUtils";
 
-import { SSO_LABEL, TableVersions } from "SRC_DIR/helpers/constants";
+import { TableVersions } from "SRC_DIR/helpers/constants";
 import { SortByFieldName } from "SRC_DIR/helpers/enums";
 
 import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
@@ -838,7 +838,7 @@ const SectionFilterContent = ({
         if (filter?.accountLoginType?.toString()) {
           const label =
             AccountLoginType.SSO === filter.accountLoginType.toString()
-              ? SSO_LABEL
+              ? t("Common:SSO")
               : AccountLoginType.LDAP === filter.accountLoginType.toString()
                 ? t("PeopleTranslations:LDAPLbl")
                 : t("PeopleTranslations:StandardLogin");
@@ -1401,7 +1401,7 @@ const SectionFilterContent = ({
         {
           key: AccountLoginType.SSO,
           group: "filter-login-type",
-          label: SSO_LABEL,
+          label: t("Common:SSO"),
         },
         //TODO: uncomment after ldap be ready
         /*{
@@ -1979,24 +1979,26 @@ const SectionFilterContent = ({
         default: true,
       };
 
+      const storage = {
+        id: "sort-quota",
+        key: SortByFieldName.UsedSpace,
+        label: t("Common:Storage"),
+        default: true,
+      };
+
       const hideableColumns = {
         Type: type,
         Department: department,
         Mail: email,
       };
 
-      options.push(firstName, lastName);
-
       if (showStorageInfo) {
-        options.push({
-          id: "sort-quota",
-          key: SortByFieldName.UsedSpace,
-          label: t("Common:Storage"),
-          default: true,
-        });
+        hideableColumns.Storage = storage;
       }
 
-      if ((viewAs = "table")) {
+      options.push(firstName, lastName);
+
+      if (accountsViewAs === "table") {
         const tableColumns = isInsideGroup
           ? TABLE_INSIDE_GROUP_COLUMNS
           : TABLE_PEOPLE_COLUMNS;
@@ -2024,10 +2026,11 @@ const SectionFilterContent = ({
               infoPanelColumnsSize[idx] === "0px";
 
             !hide && options.push(hideableColumns[columnTitle]);
-
-          
           }
         });
+      } else {
+        options.push(type, department, email);
+        if (showStorageInfo) options.push(storage);
       }
 
       return options;
@@ -2052,7 +2055,7 @@ const SectionFilterContent = ({
 
       groupsOptions.push(title);
 
-      if ((viewAs = "table")) {
+      if (accountsViewAs === "table") {
         const availableSort = localStorage
           ?.getItem(`${TABLE_GROUPS_COLUMNS}=${userId}`)
           ?.split(",");
@@ -2070,6 +2073,8 @@ const SectionFilterContent = ({
 
           !hide && groupsOptions.push(manager);
         }
+      } else {
+        groupsOptions.push(manager);
       }
 
       return groupsOptions;
@@ -2388,6 +2393,7 @@ const SectionFilterContent = ({
     userId,
     infoPanelVisible,
     viewAs,
+    accountsViewAs,
     isPersonalRoom,
     isTrash,
   ]);

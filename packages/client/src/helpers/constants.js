@@ -142,5 +142,3 @@ export const LinkType = Object.freeze({
   Invite: 0,
   External: 1,
 });
-
-export const SSO_LABEL = "SSO";

@@ -126,7 +126,7 @@ const FileSelector = (props) => {
     // withBreadCrumbs: true,
     withSubtitle: true,
     filterParam: FilesSelectorFilterTypes.ALL,
-    isButtonMode: false,
+    isButtonMode: selectedElementType === "button",
     buttonWithLogo: true,
     events: {
       onSelectCallback: (items) => {
@@ -358,37 +358,18 @@ const FileSelector = (props) => {
     </CodeWrapper>
   );
 
-  const dataTabs =
-    selectedElementType === "element"
-      ? [
-          {
-            key: "preview",
-            title: t("Common:Preview"),
-            content: preview,
-          },
-          {
-            key: "code",
-            title: t("Code"),
-            content: code,
-          },
-        ]
-      : [
-          {
-            key: "preview",
-            title: t("Common:Preview"),
-            content: preview,
-          },
-          {
-            key: "selector-preview",
-            title: t("SelectorPreview"),
-            content: preview,
-          },
-          {
-            key: "code",
-            title: t("Code"),
-            content: code,
-          },
-        ];
+  const dataTabs = [
+    {
+      key: "preview",
+      title: t("Common:Preview"),
+      content: preview,
+    },
+    {
+      key: "code",
+      title: t("Code"),
+      content: code,
+    },
+  ];
 
   return (
     <SDKContainer>

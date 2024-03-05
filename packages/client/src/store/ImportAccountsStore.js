@@ -61,10 +61,7 @@ class ImportAccountsStore {
   }
 
   get finalUsers() {
-    const checkedIds = this.checkedUsers.result.map(
-      (checkedUser) => checkedUser.key,
-    );
-    return this.users.result.filter((user) => checkedIds.includes(user.key));
+    return this.users.result;
   }
 
   get areCheckedUsersEmpty() {

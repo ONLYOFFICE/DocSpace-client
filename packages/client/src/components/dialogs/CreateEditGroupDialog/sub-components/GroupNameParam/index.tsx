@@ -14,8 +14,7 @@ const GroupNameParam = ({
   groupName,
   onChangeGroupName,
 }: GroupNameParamProps) => {
-
-      const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Common"]);
 
   return (
     <Styled.GroupNameParam>

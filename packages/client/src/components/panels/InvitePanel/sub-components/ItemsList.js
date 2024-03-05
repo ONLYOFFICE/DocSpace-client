@@ -6,6 +6,7 @@ import useResizeObserver from "use-resize-observer";
 import Item from "./Item";
 
 import { StyledRow, ScrollList } from "../StyledInvitePanel";
+import { useTheme } from "styled-components";
 
 const FOOTER_HEIGHT = 73;
 const USER_ITEM_HEIGHT = 48;
@@ -70,6 +71,7 @@ const ItemsList = ({
   const [isOpenItemAccess, setIsOpenItemAccess] = useState(false);
   const bodyRef = useRef();
   const { height } = useResizeObserver({ ref: bodyRef });
+  const { interfaceDirection } = useTheme();
 
   const onBodyResize = useCallback(() => {
     const scrollHeight = bodyRef?.current?.firstChild.scrollHeight;
@@ -134,6 +136,7 @@ const ItemsList = ({
     >
       <List
         style={{ overflow: overflowStyle, willChange: willChangeStyle }}
+        direction={interfaceDirection}
         height={bodyHeight}
         width="auto"
         itemCount={inviteItems.length}

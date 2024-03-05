@@ -22,26 +22,10 @@ const StyledRowContent = styled(RowContent)`
     .badges {
       flex-direction: row-reverse;
       margin-top: 10px;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 12px;
-            `
-          : css`
-              margin-right: 12px;
-            `}
+      margin-inline-end: 12px;
 
       .paid-badge {
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin-right: 8px;
-                margin-left: 0px;
-              `
-            : css`
-                margin-left: 8px;
-                margin-right: 0px;
-              `}
+        margin-inline: 8px 0;
       }
     }
   }
@@ -89,7 +73,10 @@ const UserContent = ({
     statusType === "pending" || statusType === "disabled"
       ? theme.peopleTableRow.pendingNameColor
       : theme.peopleTableRow.nameColor;
-  const sideInfoColor = theme.peopleTableRow.pendingSideInfoColor;
+  const sideInfoColor =
+    statusType === "pending" || statusType === "disabled"
+      ? theme.peopleTableRow.pendingSideInfoColor
+      : theme.peopleTableRow.sideInfoColor;
 
   const roleLabel =
     role === "owner"
@@ -107,7 +94,7 @@ const UserContent = ({
     t,
     usedSpace,
     quotaLimit,
-    isDefaultUsersQuotaSet
+    isDefaultUsersQuotaSet,
   );
 
   return (

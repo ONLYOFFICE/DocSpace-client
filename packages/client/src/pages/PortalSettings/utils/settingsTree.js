@@ -370,18 +370,18 @@ export const settingsTree = [
         isCategory: true,
         children: [
           {
-            id: "portal-settings_catalog-javascript-sdk_simple-room",
+            id: "portal-settings_catalog-javascript-sdk_public-room",
             key: "6-1-0",
             icon: "",
-            link: "room",
-            tKey: "Common:Room",
+            link: "public-room",
+            tKey: "Files:PublicRoom",
           },
           {
-            id: "portal-settings_catalog-javascript-sdk_manager",
+            id: "portal-settings_catalog-javascript-sdk_custom",
             key: "6-1-1",
             icon: "",
-            link: "manager",
-            tKey: "JavascriptSdk:Manager",
+            link: "custom",
+            tKey: "JavascriptSdk:Custom",
           },
           {
             id: "portal-settings_catalog-javascript-sdk_room-selector",
@@ -410,6 +410,13 @@ export const settingsTree = [
             icon: "",
             link: "viewer",
             tKey: "JavascriptSdk:Viewer",
+          },
+          {
+            id: "portal-settings_catalog-javascript-sdk_docspace",
+            key: "6-1-6",
+            icon: "",
+            link: "docspace",
+            tKey: "DocSpace",
           },
         ],
       },

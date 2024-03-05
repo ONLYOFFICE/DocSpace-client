@@ -1,10 +1,10 @@
-import { IconButton } from "@docspace/shared/components/icon-button";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import PlusSvgUrl from "PUBLIC_DIR/images/plus.svg?url";
-import GroupMemberRow from "../GroupMemberRow";
-import SelectGroupManagerPanel from "./SelectGroupManagerPanel";
+import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
 import * as Styled from "./index.styled";
+import PlusSvgUrl from "PUBLIC_DIR/images/icons/16/button.plus.react.svg?url";
+import SelectGroupManagerPanel from "./SelectGroupManagerPanel";
+import GroupMemberRow from "../GroupMemberRow";
 
 interface HeadOfGroupProps {
   groupManager: object | null;
@@ -22,7 +22,6 @@ const HeadOfGroup = ({
   onClose,
 }: HeadOfGroupProps) => {
   const { t } = useTranslation(["Common"]);
-
   const [selectGroupMangerPanelIsVisible, setSelectGroupMangerPanelIsVisible] =
     useState<boolean>(false);
 
@@ -56,9 +55,7 @@ const HeadOfGroup = ({
 
       {!groupManager ? (
         <Styled.SelectGroupManager onClick={onShowSelectGroupManagerPanel}>
-          <div className="add-button">
-            <IconButton className="plus-icon" size="12" iconName={PlusSvgUrl} />
-          </div>
+          <SelectorAddButton iconName={PlusSvgUrl} />
           <div className="label">{t("Common:SelectAction")}</div>
         </Styled.SelectGroupManager>
       ) : (

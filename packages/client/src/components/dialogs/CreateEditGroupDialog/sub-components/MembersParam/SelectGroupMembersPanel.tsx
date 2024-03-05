@@ -2,6 +2,7 @@ import { ShareAccessRights } from "@docspace/shared/enums";
 import AddUsersPanel from "../../../../panels/AddUsersPanel";
 import { getAccessOptions } from "../../../../panels/InvitePanel/utils";
 import { useTranslation } from "react-i18next";
+import { toastr } from "@docspace/shared/components/toast";
 
 interface SelectGroupMembersPanelProps {
   isVisible: boolean;
@@ -23,13 +24,23 @@ const SelectGroupMembersPanel = ({
   const { t } = useTranslation(["InviteDialog"]);
   const accessOptions = getAccessOptions(t, 5, false, true);
 
-  const selectedgroupMembersIds = groupMembers
-    ? groupMembers.map((gm) => gm.id)
-    : [];
-
   const onAddGroupMembers = (newGroupMembers: object[]) => {
-    const items = [...groupMembers, ...newGroupMembers];
-    setGroupMembers(items);
+    const resultGroupMembers = [...groupMembers];
+    let showErrorWasSelected = false;
+
+    newGroupMembers.forEach((groupMember) => {
+      if (groupMembers.findIndex((gm) => gm.id === groupMember.id) !== -1) {
+        showErrorWasSelected = true;
+        return;
+      }
+      resultGroupMembers.push(groupMember);
+    });
+
+    if (showErrorWasSelected) {
+      toastr.warning("Some users have already been added");
+    }
+
+    setGroupMembers(resultGroupMembers);
   };
 
   return (
@@ -42,11 +53,8 @@ const SelectGroupMembersPanel = ({
       setDataItems={onAddGroupMembers}
       accessOptions={accessOptions}
       withAccessRights={false}
-      isEncrypted={true}
+      isEncrypted
       defaultAccess={ShareAccessRights.FullAccess}
-      userIdsToFilterOut={[groupManager?.id, ...selectedgroupMembersIds]}
-      //   withoutBackground={isMobileView}
-      //   withBlur={!isMobileView}
     />
   );
 };

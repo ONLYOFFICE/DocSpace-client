@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/default-param-last */
 import { AxiosRequestConfig } from "axios";
 
-import { FolderType } from "../../enums";
+import { FolderType, MembersSubjectType } from "../../enums";
 import { request } from "../client";
 import {
   checkFilterInstance,
@@ -66,7 +66,7 @@ export function getRoomMembers(id, filter) {
 
   return request(options).then((res) => {
     res.items.forEach((item) => {
-      if (item.sharedTo.manager) {
+      if (item.subjectType === MembersSubjectType.Group) {
         item.sharedTo.isGroup = true;
       }
     });
@@ -347,7 +347,7 @@ export const setRoomSecurity = async (id, data) => {
   const res = await request(options);
 
   res.members.forEach((item) => {
-    if (item.sharedTo.manager) {
+    if (item.subjectType === MembersSubjectType.Group) {
       item.sharedTo.isGroup = true;
     }
   });

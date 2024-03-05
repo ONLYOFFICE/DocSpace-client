@@ -90,9 +90,9 @@ const FileSelector = (props) => {
     { key: FilesSelectorFilterTypes.XLSX, label: FilesSelectorFilterTypes.XLSX },
   ]);
 
-  const [widthDimension, setWidthDimension] = useState(dataDimensions[1]);
+  const [widthDimension, setWidthDimension] = useState(dataDimensions[0]);
   const [heightDimension, setHeightDimension] = useState(dataDimensions[0]);
-  const [width, setWidth] = useState("600");
+  const [width, setWidth] = useState("100");
   const [height, setHeight] = useState("100");
   const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
   const [showPreview, setShowPreview] = useState(window.innerWidth > showPreviewThreshold);
@@ -335,8 +335,8 @@ const FileSelector = (props) => {
 
   const preview = (
     <Frame
-      width={width + widthDimension.label}
-      height={height + heightDimension.label}
+      width={widthDimension.label === "px" && width + widthDimension.label}
+      height={heightDimension.label === "px" && height + heightDimension.label}
       targetId={frameId}
     >
       <Box id={frameId}></Box>
@@ -385,7 +385,7 @@ const FileSelector = (props) => {
   return (
     <SDKContainer>
       <CategoryDescription>
-        <Text className="sdk-description">{t("FileSelectorPresetDescription")}</Text>
+        <Text className="sdk-description">{t("FileSelectorDescription")}</Text>
       </CategoryDescription>
       <CategoryHeader>{t("CreateSampleHeader")}</CategoryHeader>
       <Container>

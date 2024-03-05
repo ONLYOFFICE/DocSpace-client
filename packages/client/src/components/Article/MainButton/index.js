@@ -10,6 +10,8 @@ import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg
 import PersonAdminReactSvgUrl from "PUBLIC_DIR/images/person.admin.react.svg?url";
 import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg?url";
 import PersonReactSvgUrl from "PUBLIC_DIR/images/person.react.svg?url";
+import PersonDefaultReactSvgUrl from "PUBLIC_DIR/images/person.default.react.svg?url";
+import GroupReactSvgUrl from "PUBLIC_DIR/images/group.react.svg?url";
 import PersonUserReactSvgUrl from "PUBLIC_DIR/images/person.user.react.svg?url";
 import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
@@ -359,7 +361,7 @@ const ArticleMainButtonContent = (props) => {
               {
                 id: "invite_room-collaborator",
                 className: "main-button_drop-down",
-                icon: PersonReactSvgUrl,
+                icon: PersonDefaultReactSvgUrl,
                 label: t("Common:PowerUser"),
                 onClick: onInvite,
                 action: EmployeeType.Collaborator,
@@ -368,7 +370,7 @@ const ArticleMainButtonContent = (props) => {
               {
                 id: "invite_user",
                 className: "main-button_drop-down",
-                icon: PersonUserReactSvgUrl,
+                icon: PersonDefaultReactSvgUrl,
                 label: t("Common:User"),
                 onClick: onInvite,
                 action: EmployeeType.Guest,
@@ -392,7 +394,7 @@ const ArticleMainButtonContent = (props) => {
           {
             id: "create_group",
             className: "main-button_drop-down",
-            icon: PersonUserReactSvgUrl,
+            icon: GroupReactSvgUrl,
             label: t("PeopleTranslations:CreateGroup"),
             onClick: onCreateGroup,
             action: "group",

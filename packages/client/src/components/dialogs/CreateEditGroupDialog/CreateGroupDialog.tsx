@@ -44,7 +44,7 @@ const CreateGroupDialog = ({
     setGroupParams({ ...groupParams, groupManager });
 
   const setGroupMembers = (groupMembers: object[]) =>
-    setGroupParams({ ...groupParams, groupMembers });
+    setGroupParams((prevState) => ({ ...prevState, groupMembers }));
 
   const onCreateGroup = async () => {
     setIsLoading(true);

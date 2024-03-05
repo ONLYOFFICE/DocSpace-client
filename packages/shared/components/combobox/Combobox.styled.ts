@@ -10,6 +10,39 @@ import { Loader } from "../loader";
 import { ComboBoxSize } from "./Combobox.enums";
 import { TCombobox } from "./Combobox.types";
 
+// for ComboButton with plusBadge (StyledGroupsCombobox)
+const alternativeComboButtonStyles = css<{
+  isOpen?: boolean;
+  plusBadgeValue?: number;
+}>`
+  .combo-button-label {
+    color: ${({ theme, isOpen }) =>
+      theme.comboBox.label[isOpen ? "selectedColor" : "alternativeColor"]};
+  }
+
+  .combo-buttons_expander-icon {
+    path {
+      fill: ${({ theme, isOpen }) =>
+        theme.comboBox.plusBadge[
+          isOpen ? "selectedBgColor" : "bgColor"
+        ]} !important;
+    }
+  }
+
+  :hover {
+    .combo-button-label {
+      color: ${({ theme }) => theme.comboBox.label.selectedColor};
+    }
+
+    .combo-buttons_expander-icon {
+      path {
+        fill: ${({ theme }) =>
+          theme.comboBox.plusBadge.selectedBgColor} !important;
+      }
+    }
+  }
+`;
+
 const StyledComboBox = styled.div<{
   scaled?: boolean;
   size?: ComboBoxSize;
@@ -115,6 +148,7 @@ const StyledComboButton = styled.div<{
   withAdvancedOptions?: boolean;
   isLoading?: boolean;
   isSelected?: boolean;
+  plusBadgeValue?: number;
 }>`
   display: flex;
   align-items: center;
@@ -260,18 +294,17 @@ const StyledComboButton = styled.div<{
   }
   .combo-button-label {
     visibility: ${(props) => (props.isLoading ? "hidden" : "visible")};
-    margin-right: ${(props) =>
-      props.noBorder
-        ? props.theme.comboBox.label.marginRight
-        : props.theme.comboBox.label.marginRightWithBorder};
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl" &&
-      css`
-        margin-right: 0;
-        margin-left: ${props.noBorder
-          ? props.theme.comboBox.label.marginRight
-          : props.theme.comboBox.label.marginRightWithBorder};
-      `}
+
+    ${({ theme, plusBadgeValue, noBorder }) => {
+      const property = `margin-${theme.interfaceDirection === "rtl" ? "left" : "right"}`;
+      const value = plusBadgeValue
+        ? 0
+        : noBorder
+          ? theme.comboBox.label.marginRight
+          : theme.comboBox.label.marginRightWithBorder;
+
+      return `${property}: ${value};`;
+    }}
     color: ${(props) =>
       props.isDisabled
         ? props.theme.comboBox.label.disabledColor
@@ -310,6 +343,8 @@ const StyledComboButton = styled.div<{
         }
       `}
   }
+
+  ${({ plusBadgeValue }) => plusBadgeValue && alternativeComboButtonStyles}
 `;
 StyledComboButton.defaultProps = { theme: Base };
 
@@ -389,6 +424,28 @@ const StyledIcon = styled.div<{
   }
 `;
 StyledIcon.defaultProps = { theme: Base };
+
+const StyledPlusBadge = styled.div<{ isOpen?: boolean }>`
+  height: 12px;
+  padding: 0px 3px;
+  gap: 10px;
+  border-radius: 12px;
+
+  line-height: 12px;
+  font-size: 9px;
+  font-weight: 800;
+
+  background-color: ${({ theme, isOpen }) =>
+    isOpen
+      ? theme.comboBox.plusBadge.selectedBgColor
+      : theme.comboBox.plusBadge.bgColor};
+  color: ${({ theme }) => theme.comboBox.plusBadge.color};
+
+  ${StyledComboButton}:hover & {
+    background-color: ${({ theme }) =>
+      theme.comboBox.plusBadge.selectedBgColor};
+  }
+`;
 
 const StyledArrowIcon = styled.div<{
   isLoading?: boolean;
@@ -471,6 +528,7 @@ const StyledThemeComboButton = styled(StyledComboButton)(getDefaultStyles);
 
 export {
   StyledArrowIcon,
+  StyledPlusBadge,
   StyledIcon,
   StyledOptionalItem,
   StyledComboButton,

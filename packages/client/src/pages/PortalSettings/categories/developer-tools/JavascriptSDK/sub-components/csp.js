@@ -20,11 +20,12 @@ const CategoryHeader = styled.div`
 `;
 
 const Container = styled.div`
-  margin-bottom: 16px;
+  margin-bottom: 4px;
 
   &.description-holder {
     display: block;
     color: ${(props) => props.theme.sdkPresets.secondaryColor};
+    margin-bottom: 16px;
   }
 
   &.description-holder > div {
@@ -49,6 +50,7 @@ const ChipsContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 8px 4px;
+  margin-top: 8px;
   margin-bottom: 16px;
   flex-wrap: wrap;
 `;
@@ -79,6 +81,7 @@ const CSP = ({ t, cspDomains, getCSPSettings, setCSPSettings }) => {
           isInline
           label={item}
           onClose={() => deleteDomain(item)}
+          title={item}
         />
       ))
     ) : (
@@ -131,6 +134,9 @@ const CSP = ({ t, cspDomains, getCSPSettings, setCSPSettings }) => {
         />
         <SelectorAddButton onClick={addDomain} />
       </Container>
+      <Text lineHeight="20px" color="#A3A9AE">
+        {t("CSPUrlHelp")}
+      </Text>
       <ChipsContainer>{getChips(cspDomains)}</ChipsContainer>
     </>
   );

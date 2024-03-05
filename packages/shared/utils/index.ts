@@ -8,7 +8,6 @@ import {
   getCorrectTextAlign,
   getCorrectBorderRadius,
   getCorrectFourValuesStyle,
-  TInterfaceDirection,
 } from "./rtlUtils";
 import * as useClickOutside from "./useClickOutside";
 import { trimSeparator } from "./trimSeparator";
@@ -46,8 +45,6 @@ import {
   getLogoFromPath,
   isBetaLanguage,
 } from "./common";
-
-export type { TInterfaceDirection };
 
 export {
   isBetaLanguage,

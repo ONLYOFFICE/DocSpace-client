@@ -19,6 +19,7 @@ export const SelectedItemPure = (props: SelectedItemProps) => {
     group,
     forwardedRef,
     classNameCloseButton,
+    title,
   } = props;
   if (!label) return null;
 
@@ -42,6 +43,7 @@ export const SelectedItemPure = (props: SelectedItemProps) => {
       id={id}
       ref={forwardedRef}
       data-testid="selected-item"
+      title={title}
     >
       <StyledLabel
         className="selected-item_label"

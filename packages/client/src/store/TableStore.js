@@ -2,7 +2,7 @@ import { makeAutoObservable } from "mobx";
 import { TableVersions } from "SRC_DIR/helpers/constants";
 
 const TABLE_COLUMNS = `filesTableColumns_ver-${TableVersions.Files}`;
-const TABLE_ACCOUNTS_COLUMNS = `peopleTableColumns_ver-${TableVersions.Accounts}`;
+const TABLE_ACCOUNTS_PEOPLE_COLUMNS = `peopleTableColumns_ver-${TableVersions.People}`;
 const TABLE_ACCOUNTS_INSIDE_GROUP_COLUMNS = `insideGroupTableColumns_ver-${TableVersions.InsideGroup}`;
 const TABLE_ROOMS_COLUMNS = `roomsTableColumns_ver-${TableVersions.Rooms}`;
 const TABLE_TRASH_COLUMNS = `trashTableColumns_ver-${TableVersions.Trash}`;
@@ -351,7 +351,7 @@ class TableStore {
     return isRooms
       ? `${TABLE_ROOMS_COLUMNS}=${userId}`
       : isAccountsPeople
-        ? `${TABLE_ACCOUNTS_COLUMNS}=${userId}`
+        ? `${TABLE_ACCOUNTS_PEOPLE_COLUMNS}=${userId}`
         : isAccountsGroups
           ? `${TABLE_ACCOUNTS_INSIDE_GROUP_COLUMNS}=${userId}`
           : isTrashFolder

@@ -31,6 +31,8 @@ export interface FileInputProps {
   accept?: string[];
   /** Specifies the label for the upload button */
   buttonLabel?: string;
+  /** Indicates that icon is document. Otherwise, it is folder icon */
+  isDocumentIcon?: boolean;
   onClick?: (e: React.MouseEvent) => void;
   idButton?: string;
   path?: string;

@@ -241,8 +241,16 @@ const RoomSelector = (props) => {
 
   const preview = (
     <Frame
-      width={widthDimension.label === "px" && width + widthDimension.label}
-      height={heightDimension.label === "px" && height + heightDimension.label}
+      width={
+        config.id !== undefined && widthDimension.label === "px"
+          ? width + widthDimension.label
+          : undefined
+      }
+      height={
+        config.id !== undefined && heightDimension.label === "px"
+          ? height + heightDimension.label
+          : undefined
+      }
       targetId={frameId}
     >
       <Box id={frameId}></Box>

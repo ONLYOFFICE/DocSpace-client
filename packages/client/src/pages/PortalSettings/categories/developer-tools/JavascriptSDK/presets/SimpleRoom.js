@@ -235,14 +235,14 @@ const SimpleRoom = (props) => {
   const preview = (
     <Frame
       width={
-        config.id !== undefined &&
-        widthDimension.label === "px" &&
-        width + widthDimension.label
+        config.id !== undefined && widthDimension.label === "px"
+          ? width + widthDimension.label
+          : undefined
       }
       height={
-        config.id !== undefined &&
-        heightDimension.label === "px" &&
-        height + heightDimension.label
+        config.id !== undefined && heightDimension.label === "px"
+          ? height + heightDimension.label
+          : undefined
       }
       targetId={frameId}
     >

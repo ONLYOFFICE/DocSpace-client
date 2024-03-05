@@ -139,6 +139,8 @@ const RoomSelector = (props) => {
   }, 500);
 
   useEffect(() => {
+    const scroll = document.getElementsByClassName("section-scroll")[0];
+    scroll.scrollTop = 0;
     loadFrame();
     return destroyFrame;
   });

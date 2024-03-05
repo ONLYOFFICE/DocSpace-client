@@ -102,6 +102,7 @@ const useSelectFolderDialog = ({}: UseSelectFolderDialogProps) => {
     getIsDisabledSelectFolderDialog: getIsDisabled,
     isVisibleSelectFolderDialog: isVisible,
     titleSelectorFolderDialog: title,
+    extensionSelectorFolderDialog: extension,
   };
 };
 

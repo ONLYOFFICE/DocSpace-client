@@ -134,24 +134,33 @@ const SelectFileStep = ({
   }, []);
 
   const onUploadFile = async (file) => {
-    await singleFileUploading(file, setProgress, isAbort);
-    await initMigrationName(searchParams.get("service"));
+    try {
+      await singleFileUploading(file, setProgress, isAbort);
+      await initMigrationName(searchParams.get("service"));
 
-    uploadInterval.current = setInterval(async () => {
-      const res = await getMigrationStatus();
+      uploadInterval.current = setInterval(async () => {
+        const res = await getMigrationStatus();
 
-      if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
-        setIsFileError(true);
-        setIsFileLoading(false);
-        toastr.error(res.error);
+        if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
+          setIsFileError(true);
+          setIsFileLoading(false);
+          toastr.error(res.error);
+          clearInterval(uploadInterval.current);
+        } else if (res.isCompleted || res.parseResult.progress === 100) {
+          setIsFileLoading(false);
+          clearInterval(uploadInterval.current);
+          setUsers(res.parseResult);
+          setShowReminder(true);
+        }
+      }, 1000);
+    } catch (error) {
+      toastr.error(error.message);
+      setIsFileError(true);
+      setIsFileLoading(false);
+      if (uploadInterval.current) {
         clearInterval(uploadInterval.current);
-      } else if (res.isCompleted || res.parseResult.progress === 100) {
-        setIsFileLoading(false);
-        clearInterval(uploadInterval.current);
-        setUsers(res.parseResult);
-        setShowReminder(true);
       }
-    }, 1000);
+    }
   };
 
   const onDownloadArchives = async () => {

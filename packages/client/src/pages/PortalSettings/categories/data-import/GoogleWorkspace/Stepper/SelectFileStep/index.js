@@ -137,28 +137,37 @@ const SelectFileStep = ({
   const hideCancelDialog = () => setCancelDialogVisible(false);
 
   const onUploadFile = async (file) => {
-    if (file.length) {
-      await multipleFileUploading(file, setProgress, isAbort);
-    } else {
-      await singleFileUploading(file, setProgress, isAbort);
-    }
-    await initMigrationName(searchParams.get("service"));
-
-    uploadInterval.current = setInterval(async () => {
-      const res = await getMigrationStatus();
-
-      if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
-        toastr.error(res.error);
-        setIsFileError(true);
-        setIsFileLoading(false);
-        clearInterval(uploadInterval.current);
-      } else if (res.isCompleted || res.parseResult.progress === 100) {
-        setIsFileLoading(false);
-        clearInterval(uploadInterval.current);
-        setUsers(res.parseResult);
-        setShowReminder(true);
+    try {
+      if (file.length) {
+        await multipleFileUploading(file, setProgress, isAbort);
+      } else {
+        await singleFileUploading(file, setProgress, isAbort);
       }
-    }, 1000);
+      await initMigrationName(searchParams.get("service"));
+
+      uploadInterval.current = setInterval(async () => {
+        const res = await getMigrationStatus();
+
+        if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
+          toastr.error(res.error);
+          setIsFileError(true);
+          setIsFileLoading(false);
+          clearInterval(uploadInterval.current);
+        } else if (res.isCompleted || res.parseResult.progress === 100) {
+          setIsFileLoading(false);
+          clearInterval(uploadInterval.current);
+          setUsers(res.parseResult);
+          setShowReminder(true);
+        }
+      }, 1000);
+    } catch (error) {
+      toastr.error(error.message);
+      setIsFileError(true);
+      setIsFileLoading(false);
+      if (uploadInterval.current) {
+        clearInterval(uploadInterval.current);
+      }
+    }
   };
 
   const onSelectFile = (file) => {

@@ -88,6 +88,7 @@ const Root = ({
     getIsDisabledSelectFolderDialog,
     isVisibleSelectFolderDialog,
     titleSelectorFolderDialog,
+    extensionSelectorFolderDialog,
   } = useSelectFolderDialog({});
   const {
     onSDKRequestInsertImage,
@@ -173,6 +174,7 @@ const Root = ({
                   getIsDisabled={getIsDisabledSelectFolderDialog}
                   i18n={i18n}
                   filesSettings={filesSettings}
+                  fileSaveAsExtension={extensionSelectorFolderDialog}
                 />
               )}
               {selectFileDialogVisible && !!socketHelper && (

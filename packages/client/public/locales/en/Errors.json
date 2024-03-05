@@ -1,5 +1,9 @@
 {
+  "Error401Text": "",
+  "Error403Text": "",
+  "Error404Text": "",
   "ErrorEmptyResponse": "Empty response",
+  "ErrorOfflineText": "",
   "ErrorUnavailableText": "DocSpace unavailable",
   "InvalidLink": "Invalid link",
   "LinkDoesNotExist": "The link you are trying to open does not exist.",

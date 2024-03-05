@@ -28,14 +28,10 @@ const SelectGroupManagerPanel = ({
       visible={isVisible}
       onClose={onClose}
       onParentPanelClose={onParentPanelClose}
-      //   tempDataItems={inviteItems}
       setDataItems={onSelectGroupManager}
       accessOptions={accessOptions}
       isEncrypted={true}
       defaultAccess={ShareAccessRights.FullAccess}
-      //   withoutBackground={isMobileView}
-      //   withBlur={!isMobileView}
-      //   roomId={roomId}
     />
   );
 };

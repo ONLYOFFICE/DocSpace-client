@@ -28,6 +28,8 @@ class GroupsStore {
 
   bufferSelection = null;
 
+  selected = "none";
+
   groupsFilter = GroupsFilter.getDefault();
 
   groupsIsIsLoading = false;
@@ -257,15 +259,28 @@ class GroupsStore {
 
   setSelection = (selection) => (this.selection = selection);
 
-  setBufferSelection = (bufferSelection) =>
+  setBufferSelection = (bufferSelection: any) =>
     (this.bufferSelection = bufferSelection);
+
+  setSelected = (selected: "all" | "none") => {
+    this.bufferSelection = null;
+    this.selected = selected;
+    this.setSelection(this.getGroupsBySelected(selected));
+    return selected;
+  };
+
+  getGroupsBySelected = (selected: "all" | "none") => {
+    if (selected === "all" && this.groups) return [...this.groups];
+    return [];
+  };
 
   setSelections = (added, removed, clear = false) => {
     if (clear) this.selection = [];
 
     let newSelections = [...this.selection];
 
-    for (let row of added) {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const row of added) {
       if (!row) return;
 
       const [element] = row.getElementsByClassName("group-item");
@@ -284,7 +299,8 @@ class GroupsStore {
       }
     }
 
-    for (let row of removed) {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const row of removed) {
       if (!row) return;
 
       const [element] = row.getElementsByClassName("group-item");
@@ -304,7 +320,7 @@ class GroupsStore {
     this.setSelection(newSelections);
   };
 
-  getGroupContextOptions = (t, item) => {
+  getGroupContextOptions = (t, item, forInfoPanel = false) => {
     return [
       {
         id: "edit-group",
@@ -319,17 +335,16 @@ class GroupsStore {
           window.dispatchEvent(event);
         },
       },
-      {
+      !forInfoPanel && {
         id: "info",
         key: "group-info",
         className: "group-menu_drop-down",
-        label: t("Info"),
-        title: t("Info"),
+        label: t("Common:Info"),
+        title: t("Common:Info"),
         icon: InfoReactSvgUrl,
         onClick: () => {
-          const { setIsVisible } = this.infoPanelStore;
           this.selection = [item];
-          setIsVisible(true);
+          this.infoPanelStore.setIsVisible(true);
         },
       },
       {
@@ -340,8 +355,8 @@ class GroupsStore {
         id: "delete-group",
         key: "delete-group",
         className: "group-menu_drop-down",
-        label: t("Delete"),
-        title: t("Delete"),
+        label: t("Common:Delete"),
+        title: t("Common:Delete"),
         icon: TrashReactSvgUrl,
         onClick: async () => {
           const groupId = item.id;
@@ -349,7 +364,9 @@ class GroupsStore {
             .deleteGroup(groupId)!
             .then(() => {
               toastr.success(t("Group was deleted successfully"));
-              this.getGroups();
+              this.setSelection([]);
+              this.getGroups(this.groupsFilter, true);
+              this.infoPanelStore.setInfoPanelSelection(null);
             })
             .catch((err) => {
               toastr.error(err.message);

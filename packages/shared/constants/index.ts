@@ -120,6 +120,7 @@ export const WRONG_PORTAL_NAME_URL =
   `https://www.onlyoffice.com/wrongportalname.aspx`;
 
 export const MEDIA_VIEW_URL = "/media/view/";
+export const PUBLIC_MEDIA_VIEW_URL = "/rooms/share/media/view";
 
 export const RTL_LANGUAGES = Object.freeze([
   "ar",

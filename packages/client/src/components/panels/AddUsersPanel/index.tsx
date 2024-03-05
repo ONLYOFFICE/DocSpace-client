@@ -102,8 +102,6 @@ type AddUsersPanelProps = {
   withBlur: boolean;
 
   roomId: string | number;
-
-  userIdsToFilterOut?: string[];
   withGroups?: boolean;
 };
 
@@ -125,7 +123,6 @@ const AddUsersPanel = ({
   withBlur,
   roomId,
 
-  userIdsToFilterOut,
   withGroups,
 }: AddUsersPanelProps) => {
   const theme = useTheme();
@@ -281,15 +278,6 @@ const AddUsersPanel = ({
       const totalDifferent = startIndex ? response.total - totalRef.current : 0;
 
       let items = response.items.map((item) => toListItem(item));
-
-      if (userIdsToFilterOut && userIdsToFilterOut.length)
-        items = items.filter(
-          (item) =>
-            item.id &&
-            typeof item.id === "string" &&
-            !userIdsToFilterOut.includes(item.id),
-        );
-
       const newTotal = response.total - totalDifferent;
 
       if (isFirstLoad.current) {
@@ -328,7 +316,6 @@ const AddUsersPanel = ({
       roomId,
       searchValue,
       setIsLoading,
-      userIdsToFilterOut,
       withGroups,
     ],
   );

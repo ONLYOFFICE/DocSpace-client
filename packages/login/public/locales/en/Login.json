@@ -11,7 +11,6 @@
   "MessageEmailConfirmed": "Your email address was activated successfully.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "Please, enter the email address you used for registration. The password recovery instructions will be sent to it.",
   "NotFoundCode": "Can't find the code? Check your spam folder.",
-  "UserIsAlreadyRegistered": "User <1>{{email}}</1> is already registered in this DocSpace, enter your password or go back to continue with another email.",
   "PasswordRecoveryTitle": "Password recovery",
   "RecoverAccess": "Recover access",
   "RecoverContactEmailPlaceholder": "Contact email",
@@ -24,5 +23,6 @@
   "RememberHelper": "The default session lifetime is 20 minutes. Check this option to set it to 1 year. To set your own value, go to Settings.",
   "ResendCode": "Resend code",
   "SignInWithCode": "Sign in with secret code",
-  "SignInWithPassword": "Sign in with password"
+  "SignInWithPassword": "Sign in with password",
+  "UserIsAlreadyRegistered": "User <1>{{email}}</1> is already registered in this DocSpace, enter your password or go back to continue with another email."
 }

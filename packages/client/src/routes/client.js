@@ -373,6 +373,14 @@ const ClientRoutes = [
           </PublicRoute>
         ),
       },
+      {
+        path: "media/view/:id",
+        element: (
+          <PublicRoute>
+            <FilesView />
+          </PublicRoute>
+        ),
+      },
     ],
   },
   {

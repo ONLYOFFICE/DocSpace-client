@@ -12,7 +12,7 @@
     id: null,
     locale: null,
     theme: "Base",
-    editorType: "embedded", //TODO: ["desktop", "embedded"]
+    editorType: "desktop", //TODO: ["desktop", "embedded"]
     editorGoBack: true,
     selectorType: "exceptPrivacyTrashArchiveFolders", //TODO: ["roomsOnly", "userFolderOnly", "exceptPrivacyTrashArchiveFolders", "exceptSortedByTagsFolders"]
     showSelectorCancel: false,
@@ -42,6 +42,9 @@
       sortby: "DateAndTime", //TODO: ["DateAndTime", "AZ", "Type", "Size", "DateAndTimeCreation", "Author"]
       search: "",
       withSubfolders: false,
+    },
+    editorCustomization: {
+      integrationMode: "embed",
     },
     keysForReload: [
       "src",
@@ -345,6 +348,9 @@
 
         case "editor": {
           let goBack = config.editorGoBack;
+          config.editorCustomization.uiTheme = config.theme;
+
+          const customization = JSON.stringify(config.editorCustomization);
 
           if (
             config.events.onEditorCloseCallback &&
@@ -353,7 +359,7 @@
             goBack = "event";
           }
 
-          path = `/doceditor/?fileId=${config.id}&type=${config.editorType}&editorGoBack=${goBack}`;
+          path = `/doceditor/?fileId=${config.id}&type=${config.editorType}&editorGoBack=${goBack}&customization=${customization}`;
 
           if (config.requestToken) {
             path = `${path}&share=${config.requestToken}`;
@@ -364,6 +370,9 @@
 
         case "viewer": {
           let goBack = config.editorGoBack;
+          config.editorCustomization.uiTheme = config.theme;
+
+          const customization = JSON.stringify(config.editorCustomization);
 
           if (
             config.events.onEditorCloseCallback &&
@@ -372,7 +381,7 @@
             goBack = "event";
           }
 
-          path = `/doceditor/?fileId=${config.id}&type=${config.editorType}&action=view&editorGoBack=${goBack}`;
+          path = `/doceditor/?fileId=${config.id}&type=${config.editorType}&action=view&editorGoBack=${goBack}&customization=${customization}`;
 
           if (config.requestToken) {
             path = `${path}&share=${config.requestToken}`;

@@ -937,7 +937,7 @@ const Manager = (props) => {
                 <Label className="label" text={t("Files:Filter")} />
                 <ToggleButton
                   className="toggle"
-                  label="Author"
+                  label={t("Files:ByAuthor")}
                   onChange={toggleAuthor}
                   isChecked={isUserFilterSet}
                 />
@@ -947,7 +947,7 @@ const Manager = (props) => {
                       <TextInput
                         scale
                         onChange={onChangeAuthor}
-                        placeholder={"Search by name or email"}
+                        placeholder={t("Common:Search")}
                         value={author}
                         onFocus={openInviteInputPanel}
                         isAutoFocussed
@@ -973,7 +973,7 @@ const Manager = (props) => {
                 )}
                 <ToggleButton
                   className="toggle"
-                  label="Type"
+                  label={t("Common:Type")}
                   onChange={(e) => {
                     if (!e.target.checked) {
                       const filtered = { ...config.filter };
@@ -1000,7 +1000,7 @@ const Manager = (props) => {
                 <Label className="label" text={t("Files:Filter")} />
                 <ToggleButton
                   className="toggle"
-                  label="Member"
+                  label={t("Common:Member")}
                   onChange={toggleMembers}
                   isChecked={isUserFilterSet}
                 />
@@ -1022,7 +1022,7 @@ const Manager = (props) => {
                           <TextInput
                             scale
                             onChange={onChangeAuthor}
-                            placeholder={"Search by name or email"}
+                            placeholder={t("Common:Search")}
                             value={author}
                             onFocus={openInviteInputPanel}
                             isAutoFocussed
@@ -1049,7 +1049,7 @@ const Manager = (props) => {
 
                     <Checkbox
                       className="checkbox"
-                      label={"Search by Owners"}
+                      label={t("Translations:SearchByOwner")}
                       onChange={(e) => {
                         setConfig((config) => ({
                           ...config,
@@ -1062,7 +1062,7 @@ const Manager = (props) => {
                 )}
                 <ToggleButton
                   className="toggle"
-                  label="Type"
+                  label={t("Common:Type")}
                   onChange={(e) => {
                     if (!e.target.checked) {
                       const filtered = { ...config.filter };

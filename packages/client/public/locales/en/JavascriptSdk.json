@@ -52,6 +52,7 @@
   "ItemsCount": "Items count on one page",
   "ItemsCountDescription": "You can specify the number of files / folders displayed on one page, as well as specify which page to start displaying",
   "JavascriptSdk": "Javascript SDK",
+  "Logo": "Logo",
   "MainElementParameter": "Main element parameter",
   "ManagerSearchBlockDescription": "You can disable the search, filter and sort options.",
   "ManagerTitleDescription": "You can disable the title of the current section/room/folder.",

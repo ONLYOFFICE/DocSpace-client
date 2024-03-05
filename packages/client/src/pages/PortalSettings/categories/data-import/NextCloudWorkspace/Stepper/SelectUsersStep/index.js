@@ -24,6 +24,7 @@ const SelectUsersStep = (props) => {
     searchValue,
     setSearchValue,
     cancelMigration,
+    areCheckedUsersEmpty,
   } = props;
 
   const [dataPortion, setDataPortion] = useState(withEmailUsers.slice(0, 25));
@@ -71,7 +72,7 @@ const SelectUsersStep = (props) => {
             cancelButtonLabel={t("Common:Back")}
             showReminder
             displaySettings
-            // saveButtonDisabled={numberOfCheckedAccounts > LICENSE_LIMIT}
+            saveButtonDisabled={areCheckedUsersEmpty}
           />
 
           {/* <UsersInfoBlock
@@ -115,7 +116,7 @@ const SelectUsersStep = (props) => {
           cancelButtonLabel={t("Common:Back")}
           showReminder
           displaySettings
-          // saveButtonDisabled={numberOfCheckedAccounts > LICENSE_LIMIT}
+          saveButtonDisabled={areCheckedUsersEmpty}
         />
       )}
     </Wrapper>
@@ -129,6 +130,7 @@ export default inject(({ importAccountsStore }) => {
     searchValue,
     setSearchValue,
     cancelMigration,
+    areCheckedUsersEmpty,
   } = importAccountsStore;
 
   return {
@@ -137,5 +139,6 @@ export default inject(({ importAccountsStore }) => {
     searchValue,
     setSearchValue,
     cancelMigration,
+    areCheckedUsersEmpty,
   };
 })(observer(SelectUsersStep));

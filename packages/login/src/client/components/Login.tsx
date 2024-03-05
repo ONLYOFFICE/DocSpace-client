@@ -80,13 +80,24 @@ const Login: React.FC<ILoginProps> = ({
 
   useEffect(() => {
     if (search) {
-      const startInviteIndex = search.indexOf("loginData=");
+      const firstIndex = search.indexOf("loginData=");
 
-      if (startInviteIndex === -1) return;
+      if (firstIndex === -1) return;
+      const fromBinaryStr = (encodeString: string) => {
+        const decodeStr = atob(encodeString);
 
-      const encodeString = search.slice(startInviteIndex + 10);
+        const decoder = new TextDecoder();
+        const charCodeArray = Uint8Array.from(
+          { length: decodeStr.length },
+          (element, index) => decodeStr.charCodeAt(index)
+        );
 
-      const decodeString = atob(encodeString);
+        return decoder.decode(charCodeArray);
+      };
+
+      const encodeString = search.slice(search.indexOf("=") + 1);
+
+      const decodeString = fromBinaryStr(encodeString);
       const queryParams = JSON.parse(decodeString);
 
       setInvitationLinkData(queryParams);

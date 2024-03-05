@@ -1304,7 +1304,7 @@ class FilesActionStore {
 
     setIsLoading(true);
     window.DocSpace.navigate(
-      `${window.DocSpace.location.pathname}?${newFilter.toUrlParams(this.userStore?.user?.id)}`
+      `${window.DocSpace.location.pathname}?${newFilter.toUrlParams(this.userStore?.user?.id)}`,
     );
   };
 
@@ -2234,7 +2234,7 @@ class FilesActionStore {
 
     const { isLoading, setIsSectionFilterLoading } = this.clientLoadingStore;
     const { isRecycleBinFolder, isRecentTab } = this.treeFoldersStore;
-    const { setMediaViewerData } = this.mediaViewerDataStore;
+    const { setMediaViewerData, getUrl } = this.mediaViewerDataStore;
     const { setConvertDialogVisible, setConvertItem } = this.dialogsStore;
 
     const { roomType, title: currentTitle } = this.selectedFolderStore;
@@ -2333,9 +2333,7 @@ class FilesActionStore {
       if (isMediaOrImage) {
         setMediaViewerData({ visible: true, id });
 
-        const url = combineUrl(MEDIA_VIEW_URL, id);
-
-        if (this.publicRoomStore.isPublicRoom) return;
+        const url = getUrl(id);
 
         window.DocSpace.navigate(url);
         return;
@@ -2466,10 +2464,13 @@ class FilesActionStore {
       filter.searchArea = RoomSearchArea.Archive;
     }
 
-    window.DocSpace.navigate(`${path}?${filter.toUrlParams(this.userStore?.user?.id, true)}`, {
-      state,
-      replace: true,
-    });
+    window.DocSpace.navigate(
+      `${path}?${filter.toUrlParams(this.userStore?.user?.id, true)}`,
+      {
+        state,
+        replace: true,
+      },
+    );
   };
 
   moveToPublicRoom = (folderId) => {

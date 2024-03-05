@@ -35,7 +35,6 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 import { isMobile } from "@docspace/shared/utils";
-import { SSO_LABEL } from "SRC_DIR/helpers/constants";
 import { useTheme } from "styled-components";
 
 const MainProfile = (props) => {
@@ -171,7 +170,7 @@ const MainProfile = (props) => {
           <div className="badges-wrapper">
             <Badge
               className="sso-badge"
-              label={SSO_LABEL}
+              label={t("Common:SSO")}
               color={"#FFFFFF"}
               backgroundColor="#22C386"
               fontSize={"9px"}
@@ -224,7 +223,7 @@ const MainProfile = (props) => {
               {profile.isSSO && (
                 <Badge
                   className="sso-badge"
-                  label={SSO_LABEL}
+                  label={t("Common:SSO")}
                   color={"#FFFFFF"}
                   backgroundColor="#22C386"
                   fontSize={"9px"}

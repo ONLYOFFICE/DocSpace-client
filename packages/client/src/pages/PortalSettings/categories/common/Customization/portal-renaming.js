@@ -33,6 +33,8 @@ const PortalRenaming = (props) => {
     currentColorScheme,
     renamingSettingsUrl,
     domainValidator,
+    setPortalName,
+    portalName,
   } = props;
 
   const navigate = useNavigate();
@@ -54,10 +56,8 @@ const PortalRenaming = (props) => {
       ? tenantAlias
       : portalNameDefaultFromSessionStorage;
 
-  const [portalName, setPortalName] = useState(portalNameInitially);
-
   const [portalNameDefault, setPortalNameDefault] = useState(
-    portalNameDefaultInitially
+    portalNameDefaultInitially,
   );
 
   const [isLoadingPortalNameSave, setIsLoadingPortalNameSave] = useState(false);
@@ -78,6 +78,7 @@ const PortalRenaming = (props) => {
 
   useEffect(() => {
     setDocumentTitle(t("PortalRenaming"));
+    setPortalName(portalNameInitially);
     const page = isMobileView ? "language-and-time-zone" : "general";
     if (!isLoaded) initSettings(page).then(() => setIsLoaded(true));
 
@@ -193,14 +194,14 @@ const PortalRenaming = (props) => {
           t("PortalNameLength", {
             minLength: domainValidator.minLength,
             maxLength: domainValidator.maxLength,
-          })
+          }),
         );
         saveToSessionStorage(
           "errorValue",
           t("PortalNameLength", {
             minLength: domainValidator.minLength,
             maxLength: domainValidator.maxLength,
-          })
+          }),
         );
         break;
       case !validDomain.test(value):
@@ -242,7 +243,7 @@ const PortalRenaming = (props) => {
 
       const currentUrl = window.location.href.replace(
         window.location.origin,
-        ""
+        "",
       );
 
       const newUrl = "/portal-settings/customization/general";
@@ -353,8 +354,14 @@ export default inject(({ settingsStore, setup, common }) => {
     domainValidator,
   } = settingsStore;
   const { setPortalRename } = setup;
-  const { isLoaded, setIsLoadedPortalRenaming, initSettings, setIsLoaded } =
-    common;
+  const {
+    isLoaded,
+    setIsLoadedPortalRenaming,
+    initSettings,
+    setIsLoaded,
+    setPortalName,
+    portalName,
+  } = common;
 
   return {
     theme,
@@ -368,7 +375,11 @@ export default inject(({ settingsStore, setup, common }) => {
     currentColorScheme,
     renamingSettingsUrl,
     domainValidator,
+    portalName,
+    setPortalName,
   };
 })(
-  withLoading(withTranslation(["Settings", "Common"])(observer(PortalRenaming)))
+  withLoading(
+    withTranslation(["Settings", "Common"])(observer(PortalRenaming)),
+  ),
 );

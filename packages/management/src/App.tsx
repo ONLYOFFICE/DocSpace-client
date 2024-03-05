@@ -6,6 +6,7 @@ import { isMobileOnly } from "react-device-detect";
 import { ThemeKeys } from "@docspace/shared/enums";
 import { Toast } from "@docspace/shared/components/toast";
 import { Portal } from "@docspace/shared/components/portal";
+import AppLoader from "@docspace/shared/components/app-loader";
 import tryRedirectTo from "@docspace/shared/utils/tryRedirectTo";
 import Error403 from "@docspace/shared/components/errors/Error403";
 
@@ -35,7 +36,7 @@ const App = observer(() => {
 
   const userTheme = userStore?.user?.theme
     ? userStore?.user?.theme
-    : ThemeKeys.DarkStr;
+    : ThemeKeys.BaseStr;
 
   useEffect(() => {
     const initData = async () => {
@@ -56,6 +57,8 @@ const App = observer(() => {
   ) : (
     <Toast />
   );
+
+  if (!settingsStore?.isLoaded) return <AppLoader />;
 
   if ((userStore?.user && !userStore?.user?.isAdmin) || limitedAccessSpace)
     return <Error403 />;

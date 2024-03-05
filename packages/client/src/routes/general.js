@@ -1,11 +1,13 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-
 import loadable from "@loadable/component";
 
 import PrivateRoute from "../components/PrivateRouteWrapper";
+import componentLoader from "@docspace/shared/utils/component-loader";
 
-const Profile = loadable(() => import("../pages/Profile"));
+const Profile = loadable(() =>
+  componentLoader(() => import("../pages/Profile")),
+);
 
 const generalRoutes = [
   {

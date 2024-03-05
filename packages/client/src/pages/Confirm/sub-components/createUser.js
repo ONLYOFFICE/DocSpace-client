@@ -161,14 +161,22 @@ const CreateUserForm = (props) => {
     const headerKey = linkData.confirmHeader;
 
     try {
+      const toBinaryStr = (str) => {
+        const encoder = new TextEncoder();
+        const charCodes = encoder.encode(str);
+        return String.fromCharCode(...charCodes);
+      };
+
       const loginData = window.btoa(
-        JSON.stringify({
-          type: "invitation",
-          email,
-          roomName,
-          firstName: user.firstName,
-          lastName: user.lastName,
-        }),
+        toBinaryStr(
+          JSON.stringify({
+            type: "invitation",
+            email,
+            roomName,
+            firstName: user.firstName,
+            lastName: user.lastName,
+          }),
+        ),
       );
 
       await getUserByEmail(email, headerKey);
@@ -179,6 +187,8 @@ const CreateUserForm = (props) => {
         `?culture=${currentCultureName}&loginData=${loginData}`,
       );
     } catch (err) {
+      console.error(err);
+
       const status = err?.response?.status;
       const isNotExistUser = status === 404;
 
@@ -295,13 +305,12 @@ const CreateUserForm = (props) => {
   const createConfirmUser = async (registerData, loginData, key) => {
     const { defaultPage } = props;
 
-    const fromInviteLink = linkData.type === "LinkInvite" ? true : false;
+    const fromInviteLink =
+      linkData.type === "LinkInvite" || linkData.type === "EmpInvite"
+        ? true
+        : false;
 
-    const data = Object.assign(
-      { fromInviteLink: fromInviteLink },
-      registerData,
-      loginData,
-    );
+    const data = Object.assign({ fromInviteLink }, registerData, loginData);
 
     await createUser(data, key);
 

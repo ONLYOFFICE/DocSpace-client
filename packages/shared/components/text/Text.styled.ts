@@ -52,4 +52,11 @@ const StyledText = styled.p<TextProps & StyledTextProps>`
 
 StyledText.defaultProps = { theme: Base };
 
+export const StyledAutoDirSpan = styled.span`
+  display: inherit;
+  white-space: inherit;
+  overflow: inherit;
+  text-overflow: inherit;
+`;
+
 export default StyledText;

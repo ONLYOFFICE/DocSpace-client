@@ -5,8 +5,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import queryString from "query-string";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
-import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import MediaViewer from "@docspace/shared/components/media-viewer/MediaViewer";
 
@@ -66,6 +64,9 @@ const FilesMediaViewer = (props) => {
     isOpenMediaViewer,
     someDialogIsOpen,
     currentDeviceType,
+    changeUrl,
+    fetchPublicRoom,
+    isPublicRoom,
   } = props;
 
   const navigate = useNavigate();
@@ -89,6 +90,12 @@ const FilesMediaViewer = (props) => {
   useEffect(() => {
     if (previewFile) {
       // fetch file after preview with
+
+      if (isPublicRoom) {
+        fetchPublicRoom(fetchFiles);
+        return;
+      }
+
       fetchFiles(previewFile.folderId).finally(() => {
         setIsLoading(false);
       });
@@ -113,12 +120,10 @@ const FilesMediaViewer = (props) => {
 
   const onChangeUrl = useCallback(
     (id) => {
-      const url = combineUrl(MEDIA_VIEW_URL, id);
-
+      changeUrl(id);
       setCurrentId(id);
-      navigate(url);
     },
-    [setCurrentId, navigate],
+    [setCurrentId, changeUrl],
   );
 
   const resetSelection = () => {
@@ -294,6 +299,7 @@ export default inject(
     clientLoadingStore,
     pluginStore,
     settingsStore,
+    publicRoomStore,
   }) => {
     const { currentDeviceType } = settingsStore;
     const {
@@ -301,6 +307,8 @@ export default inject(
 
       setIsSectionFilterLoading,
     } = clientLoadingStore;
+
+    const { fetchPublicRoom, isPublicRoom } = publicRoomStore;
 
     const setIsLoading = (param) => {
       setIsSectionFilterLoading(param);
@@ -335,6 +343,7 @@ export default inject(
       setCurrentId,
       nextMedia,
       prevMedia,
+      changeUrl,
     } = mediaViewerDataStore;
     const { deleteItemAction } = filesActionsStore;
     const { getIcon, extsImagePreviewed, extsMediaPreviewed } =
@@ -428,6 +437,9 @@ export default inject(
       setActiveFiles,
       pluginContextMenuItems,
       currentDeviceType,
+      changeUrl,
+      fetchPublicRoom,
+      isPublicRoom,
     };
   },
 )(withTranslation(["Files", "Translations"])(observer(FilesMediaViewer)));

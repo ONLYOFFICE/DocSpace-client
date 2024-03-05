@@ -286,7 +286,7 @@ const InvitePanel = ({
       setIsLoading(false);
 
       if (isRooms) {
-        addInfoPanelMembers(t, result.members, true);
+        addInfoPanelMembers(t, result.members);
       }
 
       onClose();

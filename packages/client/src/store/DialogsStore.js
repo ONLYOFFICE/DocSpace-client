@@ -22,6 +22,7 @@ class DialogsStore {
   downloadDialogVisible = false;
   emptyTrashDialogVisible = false;
   newFilesPanelVisible = false;
+  editGroupMembersDialogVisible = false;
   conflictResolveDialogVisible = false;
   convertDialogVisible = false;
   selectFileDialogVisible = false;
@@ -78,6 +79,7 @@ class DialogsStore {
   leaveRoomDialogVisible = false;
   changeRoomOwnerIsVisible = false;
   changeRoomOwnerData = null;
+  editMembersGroup = null;
 
   shareFolderDialogVisible = false;
 
@@ -87,7 +89,7 @@ class DialogsStore {
     filesStore,
     selectedFolderStore,
     versionHistoryStore,
-    infoPanelStore
+    infoPanelStore,
   ) {
     makeAutoObservable(this);
 
@@ -284,6 +286,14 @@ class DialogsStore {
     this.newFiles = files;
   };
 
+  setEditGroupMembersDialogVisible = (editGroupMembersDialogVisible) => {
+    this.editGroupMembersDialogVisible = editGroupMembersDialogVisible;
+  };
+
+  setEditMembersGroup = (editMembersGroup) => {
+    this.editMembersGroup = editMembersGroup;
+  };
+
   setConflictResolveDialogVisible = (conflictResolveDialogVisible) => {
     this.conflictResolveDialogVisible = conflictResolveDialogVisible;
   };
@@ -405,7 +415,7 @@ class DialogsStore {
   setChangeRoomOwnerIsVisible = (
     visible,
     showBackButton = false,
-    setRoomParams
+    setRoomParams,
   ) => {
     this.changeRoomOwnerIsVisible = visible;
 

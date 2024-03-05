@@ -104,6 +104,7 @@
   "DocSpaceAdmin": "Администратор DocSpace",
   "DocSpaceOwner": "Владелец DocSpace",
   "Documents": "Документы",
+  "Domain": "Домен:",
   "DomainIpAddress": "IP адрес в качестве домена не поддерживается",
   "Done": "Успешно",
   "DontAskAgain": "Больше не запрашивать имя файла при создании",

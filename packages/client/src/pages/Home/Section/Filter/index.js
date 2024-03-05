@@ -1954,7 +1954,7 @@ const SectionFilterContent = ({
       const lastName = {
         id: "sort-by_last-name",
         key: "lastname",
-        label: t("Common:ByLastNameSorting"),
+        label: t("Common:LastName"),
         default: true,
       };
 

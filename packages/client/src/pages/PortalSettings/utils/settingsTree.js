@@ -381,7 +381,7 @@ export const settingsTree = [
             key: "6-1-1",
             icon: "",
             link: "custom",
-            tKey: "JavascriptSdk:Custom",
+            tKey: "Common:Custom",
           },
           {
             id: "portal-settings_catalog-javascript-sdk_room-selector",

@@ -138,7 +138,7 @@ const PortalIntegration = (props) => {
       handleOnClick: navigateToFileSelector,
     },
     {
-      title: t("Custom"),
+      title: t("Common:Custom"),
       description: t("CustomDescription"),
       image: theme.isBase ? CustomImg : CustomImgDark,
       handleOnClick: navigateToCustom,

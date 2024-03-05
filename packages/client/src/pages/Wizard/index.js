@@ -390,7 +390,7 @@ const Wizard = (props) => {
             )}
             <StyledInfo>
               <Text color="#A3A9AE" fontWeight={400}>
-                {t("Domain")}
+                {t("Common:Domain")}
               </Text>
               <Text fontWeight={600} className="machine-name">
                 {machineName}

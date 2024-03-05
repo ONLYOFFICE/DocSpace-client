@@ -18,7 +18,6 @@
   "EnterId": "IDを入力",
   "EnterPage": "ページ数を入力",
   "EnterWidth": "幅を入力",
-  "Filter": "検索、フィルタ、並び替え",
   "FrameId": "フレームID",
   "GetCode": "挿入するコードを取得する",
   "Header": "ヘッダー",
@@ -32,6 +31,7 @@
   "RoomOrFolder": "ルームまたはフォルダ",
   "RoomOrFolderDescription": "表示したいセクション、ルーム、フォルダを選択できます。",
   "SDKDescription": "JavaScript SDKを使用すると、ONLYOFFICE DocSpaceのルームやフォルダをiframeとしてWebインターフェイスに埋め込むことができます。ここでは、サンプルのiframeを作成するための設定と、CSPを設定するための設定を見つけることができます。完全なSDKを使用するには、をご参照ください",
+  "SearchFilterAndSort": "検索、フィルタ、並び替え",
   "SearchTerm": "検索語句",
   "SortOrder": "並べ替え順序",
   "Title": "ナビゲーションとタイトル"

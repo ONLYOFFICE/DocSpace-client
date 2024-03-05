@@ -1,13 +1,24 @@
 import React from "react";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
-import SelectionAreaComponent from "@docspace/components/selection-area";
+import { SelectionArea as SelectionAreaComponent } from "@docspace/shared/components/selection-area";
+import { useLocation, useParams } from "react-router-dom";
 
-const SelectionArea = (props) => {
-  const { viewAs, setSelections } = props;
+const SelectionArea = ({
+  viewAs,
+  setSelectionsPeople,
+  setSelectionsGroups,
+}) => {
+  const { groupId } = useParams();
+  const location = useLocation();
+
+  const isPeopleSelections =
+    !!groupId || location.pathname.includes("/accounts/people");
 
   const onMove = ({ added, removed, clear }) => {
-    setSelections(added, removed, clear);
+    isPeopleSelections
+      ? setSelectionsPeople(added, removed, clear)
+      : setSelectionsGroups(added, removed, clear);
   };
 
   return isMobile ? (
@@ -18,7 +29,7 @@ const SelectionArea = (props) => {
       scrollClass="section-scroll"
       itemsContainerClass="ReactVirtualized__Grid__innerScrollContainer"
       selectableClass="window-item"
-      itemClass="user-item"
+      itemClass={isPeopleSelections ? "user-item" : "group-item"}
       onMove={onMove}
       viewAs={viewAs}
     />
@@ -27,10 +38,13 @@ const SelectionArea = (props) => {
 
 export default inject(({ peopleStore }) => {
   const { viewAs } = peopleStore;
-  const { setSelections } = peopleStore.selectionStore;
+
+  const { setSelections: setSelectionsPeople } = peopleStore.selectionStore;
+  const { setSelections: setSelectionsGroups } = peopleStore.groupsStore;
 
   return {
     viewAs,
-    setSelections,
+    setSelectionsPeople,
+    setSelectionsGroups,
   };
 })(observer(SelectionArea));

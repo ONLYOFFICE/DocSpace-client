@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-import Button from "@docspace/components/button";
-import TextInput from "@docspace/components/text-input";
-import Text from "@docspace/components/text";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Textarea from "@docspace/components/textarea";
-import FieldContainer from "@docspace/components/field-container";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { Button } from "@docspace/shared/components/button";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { Text } from "@docspace/shared/components/text";
+import { Textarea } from "@docspace/shared/components/textarea";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+
 import { inject, observer } from "mobx-react";
-import { tablet } from "@docspace/components/utils/device";
+import { tablet } from "@docspace/shared/utils";
 
 const ModalDialogContainer = styled(ModalDialog)`
   .modal-dialog-aside-footer {
@@ -197,8 +198,8 @@ SalesDepartmentRequestDialog.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default inject(({ payments }) => {
-  const { sendPaymentRequest } = payments;
+export default inject(({ paymentStore }) => {
+  const { sendPaymentRequest } = paymentStore;
 
   return {
     sendPaymentRequest,

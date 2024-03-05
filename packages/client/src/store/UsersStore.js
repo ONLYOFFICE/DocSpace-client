@@ -1,36 +1,61 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
-import api from "@docspace/common/api";
+import api from "@docspace/shared/api";
 import {
   EmployeeStatus,
   EmployeeType,
   EmployeeActivationStatus,
-} from "@docspace/common/constants";
+} from "@docspace/shared/enums";
 const { Filter } = api;
 
 const fullAccessId = "00000000-0000-0000-0000-000000000000";
 
 class UsersStore {
   peopleStore = null;
-  authStore = null;
+  settingsStore = null;
+  infoPanelStore = null;
+  userStore = null;
 
   users = [];
   providers = [];
   accountsIsIsLoading = false;
   operationRunning = false;
 
-  constructor(peopleStore, authStore) {
+  constructor(peopleStore, settingsStore, infoPanelStore, userStore) {
     this.peopleStore = peopleStore;
-    this.authStore = authStore;
+    this.settingsStore = settingsStore;
+    this.infoPanelStore = infoPanelStore;
+    this.userStore = userStore;
     makeAutoObservable(this);
   }
 
-  getUsersList = async (filter, updateFilter = false) => {
+  getUsersList = async (
+    filter,
+    updateFilter = false,
+    withFilterLocalStorage = false,
+  ) => {
     const filterData = filter ? filter.clone() : Filter.getDefault();
 
-    if (!this.authStore.settingsStore.withPaging) {
-      filterData.page = 0;
-      filterData.pageCount = 100;
+    const filterStorageItem = localStorage.getItem(
+      `PeopleFilter=${this.userStore.user?.id}`,
+    );
+
+    if (filterStorageItem && withFilterLocalStorage) {
+      const splitFilter = filterStorageItem.split(",");
+
+      filterData.sortBy = splitFilter[0];
+      filterData.pageCount = +splitFilter[1];
+      filterData.sortOrder = splitFilter[2];
+    }
+
+    if (!this.settingsStore.withPaging) {
+      const isCustomCountPage =
+        filter && filter.pageCount !== 100 && filter.pageCount !== 25;
+
+      if (!isCustomCountPage) {
+        filterData.page = 0;
+        filterData.pageCount = 100;
+      }
     }
 
     if (filterData.group && filterData.group === "root")
@@ -42,11 +67,6 @@ class UsersStore {
     if (updateFilter) {
       this.peopleStore.filterStore.setFilterParams(filterData);
     }
-
-    /*     this.peopleStore.filterStore.setFilterParams(filterData);
-    this.peopleStore.selectedGroupStore.setSelectedGroup(
-      filterData.group || "root"
-    ); */
 
     this.setUsers(res.items);
 
@@ -93,7 +113,7 @@ class UsersStore {
   };
 
   get needResetUserSelection() {
-    const { isVisible: infoPanelVisible } = this.authStore.infoPanelStore;
+    const { isVisible: infoPanelVisible } = this.infoPanelStore;
     const { isOneUserSelection } = this.peopleStore.selectionStore;
 
     return !infoPanelVisible || !isOneUserSelection;
@@ -136,11 +156,30 @@ class UsersStore {
       throw new Error(e);
     }
 
-    await this.getUsersList(filter);
+    // await this.getUsersList(filter, true); // accounts loader
+    await this.getUsersList(filter); // rooms
 
     if (users && !this.needResetUserSelection) {
       this.peopleStore.selectionStore.updateSelection(this.peopleList);
     }
+
+    return users;
+  };
+
+  setCustomUserQuota = async (quotaSize, userIds) => {
+    const filter = this.peopleStore.filterStore.filter;
+    const users = await api.people.setCustomUserQuota(userIds, +quotaSize);
+
+    await this.getUsersList(filter, true);
+
+    return users;
+  };
+
+  resetUserQuota = async (userIds) => {
+    const filter = this.peopleStore.filterStore.filter;
+    const users = await api.people.resetUserQuota(userIds);
+
+    await this.getUsersList(filter, true);
 
     return users;
   };
@@ -169,7 +208,7 @@ class UsersStore {
     }
 
     const updatedUsers = this.users.map((user) =>
-      user.id === newProfile.id ? newProfile : user
+      user.id === newProfile.id ? newProfile : user,
     );
 
     this.setUsers(updatedUsers);
@@ -202,8 +241,7 @@ class UsersStore {
   };
 
   getUserContextOptions = (isMySelf, statusType, userRole, status) => {
-    const { isOwner, isAdmin, isVisitor, isCollaborator } =
-      this.peopleStore.authStore.userStore.user;
+    const { isOwner, isAdmin, isVisitor, isCollaborator } = this.userStore.user;
 
     const options = [];
 
@@ -391,19 +429,20 @@ class UsersStore {
       firstName,
       lastName,
       isSSO,
+      quotaLimit,
+      usedSpace,
+      isCustomQuota,
     } = user;
     const statusType = this.getStatusType(user);
     const role = this.getUserRole(user);
     const isMySelf =
-      this.peopleStore.authStore.userStore.user &&
-      user.userName === this.peopleStore.authStore.userStore.user.userName;
-    //const isViewerAdmin = this.peopleStore.authStore.isAdmin;
+      this.userStore.user && user.userName === this.userStore.user.userName;
 
     const options = this.getUserContextOptions(
       isMySelf,
       statusType,
       role,
-      status
+      status,
     );
 
     const currentAvatar = hasAvatar ? avatar : DefaultUserPhotoSize32PngUrl;
@@ -431,6 +470,9 @@ class UsersStore {
       firstName,
       lastName,
       isSSO,
+      quotaLimit,
+      usedSpace,
+      isCustomQuota,
     };
   };
 

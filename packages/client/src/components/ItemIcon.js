@@ -1,20 +1,9 @@
 ﻿import SecuritySvgUrl from "PUBLIC_DIR/images/security.svg?url";
-import React from "react";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
-import Base from "@docspace/components/themes/base";
-import NoUserSelect from "@docspace/components/utils/commonStyles";
-import RoomIcon from "@docspace/components/room-icon";
-
-const StyledIcon = styled.img`
-  ${NoUserSelect}
-  ${(props) =>
-    props.isRoom &&
-    css`
-      border-radius: 6px;
-      vertical-align: middle;
-    `}
-`;
+import { Base } from "@docspace/shared/themes";
+import { NoUserSelect } from "@docspace/shared/utils";
+import { RoomIcon } from "@docspace/shared/components/room-icon";
 
 const IconWrapper = styled.div`
   ${(props) =>
@@ -35,6 +24,16 @@ const IconWrapper = styled.div`
         overflow: hidden;
       }
     `}
+
+  .react-svg-icon {
+    ${NoUserSelect}
+    ${(props) =>
+      props.isRoom &&
+      css`
+        border-radius: 6px;
+        vertical-align: middle;
+      `}
+  }
 `;
 
 IconWrapper.defaultProps = { theme: Base };
@@ -64,6 +63,7 @@ const ItemIcon = ({
   logo,
   color,
   isArchive,
+  badgeUrl,
 }) => {
   const isLoadedRoomIcon = !!logo?.medium;
   const showDefaultRoomIcon = !isLoadedRoomIcon && isRoom;
@@ -71,15 +71,15 @@ const ItemIcon = ({
   return (
     <>
       <IconWrapper isRoom={isRoom}>
-        {showDefaultRoomIcon ? (
-          <RoomIcon color={color} title={title} isArchive={isArchive} />
-        ) : (
-          <StyledIcon
-            className={`react-svg-icon`}
-            isRoom={isRoom}
-            src={isRoom ? logo?.medium : icon}
-          />
-        )}
+        <RoomIcon
+          color={color}
+          title={title}
+          isArchive={isArchive}
+          showDefault={showDefaultRoomIcon}
+          imgClassName="react-svg-icon"
+          imgSrc={isRoom ? logo?.medium : icon}
+          badgeUrl={badgeUrl ? badgeUrl : ""}
+        />
       </IconWrapper>
       {isPrivacy && fileExst && <EncryptedFileIcon isEdit={false} />}
     </>

@@ -1,30 +1,35 @@
-import { useState, useEffect } from "react";
+import React from "react";
 import { withTranslation } from "react-i18next";
-import debounce from "lodash.debounce";
 import styled, { css } from "styled-components";
-import Box from "@docspace/components/box";
-import TextInput from "@docspace/components/text-input";
-import Textarea from "@docspace/components/textarea";
-import Label from "@docspace/components/label";
-import Text from "@docspace/components/text";
-import Checkbox from "@docspace/components/checkbox";
-import ComboBox from "@docspace/components/combobox";
-import TabContainer from "@docspace/components/tabs-container";
-import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
-import { mobile, tablet } from "@docspace/components/utils/device";
-import { objectToGetParams, loadScript } from "@docspace/common/utils";
+import { useNavigate } from "react-router-dom";
+import { RoomsType } from "@docspace/shared/constants";
 import { inject, observer } from "mobx-react";
+
+import { mobile, tablet } from "@docspace/shared/utils/device";
 import { isMobile } from "react-device-detect";
 
-import RectangleSkeleton from "@docspace/components/skeletons/rectangle";
-import HelpButton from "@docspace/components/help-button";
-import Link from "@docspace/components/link";
+import { Box } from "@docspace/shared/components/box";
+import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
 
-import GetCodeDialog from "./sub-components/GetCodeDialog";
 import CSP from "./sub-components/csp";
-import Button from "@docspace/components/button";
+import PresetTile from "./sub-components/PresetTile";
 
-const showPreviewThreshold = 720;
+import DocspaceImg from "PUBLIC_DIR/images/sdk-presets_docspace.react.svg?url";
+import PublicRoomImg from "PUBLIC_DIR/images/sdk-presets_public-room.react.svg?url";
+import RoomSelectorImg from "PUBLIC_DIR/images/sdk-presets_room-selector.react.svg?url";
+import FileSelectorImg from "PUBLIC_DIR/images/sdk-presets_file-selector.react.svg?url";
+import EditorImg from "PUBLIC_DIR/images/sdk-presets_editor.react.svg?url";
+import ViewerImg from "PUBLIC_DIR/images/sdk-presets_viewer.react.svg?url";
+import CustomImg from "PUBLIC_DIR/images/sdk-presets_custom.react.svg?url";
+
+import DocspaceImgDark from "PUBLIC_DIR/images/sdk-presets_docspace_dark.react.svg?url";
+import PublicRoomImgDark from "PUBLIC_DIR/images/sdk-presets_public-room_dark.react.svg?url";
+import RoomSelectorImgDark from "PUBLIC_DIR/images/sdk-presets_room-selector_dark.react.svg?url";
+import FileSelectorImgDark from "PUBLIC_DIR/images/sdk-presets_file-selector_dark.react.svg?url";
+import EditorImgDark from "PUBLIC_DIR/images/sdk-presets_editor_dark.react.svg?url";
+import ViewerImgDark from "PUBLIC_DIR/images/sdk-presets_viewer_dark.react.svg?url";
+import CustomImgDark from "PUBLIC_DIR/images/sdk-presets_custom_dark.react.svg?url";
 
 const SDKContainer = styled(Box)`
   @media ${tablet} {
@@ -37,35 +42,9 @@ const SDKContainer = styled(Box)`
   `}
 `;
 
-const Controls = styled(Box)`
-  max-width: 350px;
-  min-width: 350px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-
-  @media ${tablet} {
-    min-width: 0;
-  }
-
-  ${isMobile &&
-  css`
-    min-width: 0;
-  `}
-
-  .label {
-    min-width: fit-content;
-  }
-
-  .checkbox {
-    max-width: fit-content;
-  }
-`;
-
 const CategoryHeader = styled.div`
   margin-top: 40px;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   font-size: ${(props) => props.theme.getCorrectFontSize("16px")};
   font-style: normal;
   font-weight: 700;
@@ -81,406 +60,88 @@ const CategoryHeader = styled.div`
   `}
 `;
 
-const CategorySubHeader = styled.div`
-  margin-top: 8px;
-  margin-bottom: 8px;
-  font-size: ${(props) => props.theme.getCorrectFontSize("15px")};
-  font-style: normal;
-  font-weight: 600;
-  line-height: 16px;
-
-  @media ${tablet} {
-    &:not(&.copy-window-code) {
-      margin-bottom: 0;
-    }
-  }
-
-  ${isMobile &&
-  css`
-    &:not(&.copy-window-code) {
-      margin-bottom: 0;
-    }
-  `}
-
-  @media ${mobile} {
-    &:first-of-type {
-      margin-top: 0;
-    }
-  }
-`;
-
 const CategoryDescription = styled(Box)`
-  margin-top: 5px;
+  margin-top: 2px;
   max-width: 700px;
   .sdk-description {
+    display: inline;
     line-height: 20px;
     color: ${(props) => props.theme.client.settings.common.descriptionColor};
   }
 `;
 
-const ControlsGroup = styled(Box)`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-
-  @media ${tablet} {
-    gap: 4px;
-  }
-
-  ${isMobile &&
-  css`
-    gap: 4px;
-  `}
-`;
-
-const LabelGroup = styled(Box)`
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-`;
-
-const InterfaceElements = styled(Box)`
-  display: flex;
-  flex-direction: column;
+const PresetsContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, minmax(min(200px, 100%), 1fr));
   gap: 16px;
-  margin-top: 24px;
-`;
 
-const Frame = styled(Box)`
+  max-width: fit-content;
+
   margin-top: 16px;
-  position: relative;
-
-  @media ${tablet} {
-    margin-top: 4px;
-  }
-
-  ${isMobile &&
-  css`
-    margin-top: 4px;
-  `}
-
-  ${(props) =>
-    props.targetId &&
-    `
-    #${props.targetId} {
-      position: absolute;
-      border-radius: 6px;
-      border: 1px solid #d0d5da;
-      min-width: ${props.width ? props.width : "100%"};
-      min-height: ${props.height ? props.height : "400px"};
-    }
-  `}
-`;
-
-const Container = styled(Box)`
-  width: 100%;
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-  gap: 16px;
-
-  @media ${tablet} {
-    flex-direction: column;
-  }
-
-  ${isMobile &&
-  css`
-    flex-direction: column;
-  `}
-`;
-
-const RowContainer = styled(Box)`
-  flex-direction: row;
-  display: flex;
-  gap: 8px;
-
-  ${(props) =>
-    props.combo &&
-    `
-      height: 32px;
-      align-items: center;
-    `}
-`;
-
-const ColumnContainer = styled(Box)`
-  flex-direction: column;
-  display: flex;
-  gap: 8px;
-`;
-
-const Preview = styled(Box)`
-  width: 100%;
-  margin-top: 24px;
-  min-width: 660px;
-  flex-direction: row;
-
-  @media ${tablet} {
-    margin-top: 0;
-    min-width: 0;
-  }
-  ${isMobile &&
-  css`
-    margin-top: 0;
-    min-width: 0;
-  `}
-`;
-
-const GetCodeButtonWrapper = styled.div`
-  padding-block: 30px;
-  position: sticky;
-  bottom: 0;
-  margin-top: 32px;
-  background-color: ${({ theme }) => theme.backgroundColor};
 
   @media ${mobile} {
-    position: fixed;
-    padding-inline: 16px;
-    inset-inline: 0;
-  }
-`;
-
-const FilesSelectorInputWrapper = styled.div`
-  & > div {
-    margin: 0;
+    display: flex;
+    flex-direction: column;
   }
 `;
 
 const PortalIntegration = (props) => {
-  const { t, setDocumentTitle, currentColorScheme, sdkLink } = props;
+  const { t, setDocumentTitle, currentColorScheme, sdkLink, theme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
-  const scriptUrl = `${window.location.origin}/static/scripts/api.js`;
+  const navigate = useNavigate();
 
-  const dataSortBy = [
-    { key: "DateAndTime", label: t("Common:LastModifiedDate"), default: true },
-    { key: "AZ", label: t("Common:Title") },
-    { key: "Type", label: t("Common:Type") },
-    { key: "Size", label: t("Common:Size") },
-    { key: "DateAndTimeCreation", label: t("Files:ByCreation") },
-    { key: "Author", label: t("Files:ByAuthor") },
-  ];
+  const navigateToDocspace = () => navigate("docspace");
+  const navigateToPublicRoom = () => navigate("public-room");
+  const navigateToCustom = () => navigate("custom");
+  const navigateToRoomSelector = () => navigate("room-selector");
+  const navigateToFileSelector = () => navigate("file-selector");
+  const navigateToEditor = () => navigate("editor");
+  const navigateToViewer = () => navigate("viewer");
 
-  const dataSortOrder = [
-    { key: "descending", label: t("Descending"), default: true },
-    { key: "ascending", label: t("Ascending") },
-  ];
-
-  const dataDimensions = [
-    { key: "percent", label: "%", default: true },
-    { key: "pixel", label: "px" },
-  ];
-
-  const [sortBy, setSortBy] = useState(dataSortBy[0]);
-  const [sortOrder, setSortOrder] = useState(dataSortOrder[0]);
-  const [widthDimension, setWidthDimension] = useState(dataDimensions[0]);
-  const [heightDimension, setHeightDimension] = useState(dataDimensions[1]);
-  const [width, setWidth] = useState("100");
-  const [height, setHeight] = useState("600");
-  const [withSubfolders, setWithSubfolders] = useState(true);
-  const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
-  const [showPreview, setShowPreview] = useState(
-    window.innerWidth > showPreviewThreshold
-  );
-
-  const [config, setConfig] = useState({
-    hash: `${API_JS_HASH}`,
-    width: `${width}${widthDimension.label}`,
-    height: `${height}${heightDimension.label}`,
-    frameId: "ds-frame",
-    showHeader: true,
-    showTitle: true,
-    showMenu: true,
-    showFilter: true,
-    init: true,
-  });
-
-  const params = objectToGetParams(config);
-
-  const frameId = config.frameId || "ds-frame";
-
-  const destroyFrame = () => {
-    window.DocSpace?.SDK?.frames[frameId]?.destroyFrame();
-  };
-
-  const loadFrame = debounce(() => {
-    const script = document.getElementById("integration");
-
-    if (script) {
-      script.remove();
-    }
-
-    const params = objectToGetParams(config);
-
-    loadScript(`${scriptUrl}${params}`, "integration", () =>
-      window.DocSpace.SDK.initFrame(config)
-    );
-  }, 500);
-
-  useEffect(() => {
-    loadFrame();
-    return () => destroyFrame();
-  });
-
-  const onChangeTab = () => {
-    loadFrame();
-  };
-
-  const onChangeWidth = (e) => {
-    setConfig((config) => {
-      return { ...config, width: `${e.target.value}${widthDimension.label}` };
-    });
-
-    setWidth(e.target.value);
-  };
-
-  const onChangeHeight = (e) => {
-    setConfig((config) => {
-      return { ...config, height: `${e.target.value}${heightDimension.label}` };
-    });
-
-    setHeight(e.target.value);
-  };
-
-  const onChangeFolderId = (id) => {
-    setConfig((config) => {
-      return { ...config, id };
-    });
-  };
-
-  const onChangeFrameId = (e) => {
-    setConfig((config) => {
-      return { ...config, frameId: e.target.value };
-    });
-  };
-
-  const onChangeWithSubfolders = (e) => {
-    setConfig((config) => {
-      return { ...config, withSubfolders: !withSubfolders };
-    });
-
-    setWithSubfolders(!withSubfolders);
-  };
-
-  const onChangeSortBy = (item) => {
-    setConfig((config) => {
-      return { ...config, sortby: item.key };
-    });
-
-    setSortBy(item);
-  };
-
-  const onChangeSortOrder = (item) => {
-    setConfig((config) => {
-      return { ...config, sortorder: item.key };
-    });
-
-    setSortOrder(item);
-  };
-
-  const onChangeWidthDimension = (item) => {
-    setConfig((config) => {
-      return { ...config, width: `${width}${item.label}` };
-    });
-
-    setWidthDimension(item);
-  };
-
-  const onChangeHeightDimension = (item) => {
-    setConfig((config) => {
-      return { ...config, height: `${height}${item.label}` };
-    });
-
-    setHeightDimension(item);
-  };
-
-  const onChangeShowHeader = (e) => {
-    setConfig((config) => {
-      return { ...config, showHeader: !config.showHeader };
-    });
-  };
-
-  const onChangeShowTitle = () => {
-    setConfig((config) => {
-      return { ...config, showTitle: !config.showTitle };
-    });
-  };
-
-  const onChangeShowMenu = (e) => {
-    setConfig((config) => {
-      return { ...config, showMenu: !config.showMenu };
-    });
-  };
-
-  const onChangeShowFilter = (e) => {
-    setConfig((config) => {
-      return { ...config, showFilter: !config.showFilter };
-    });
-  };
-
-  const onChangeCount = (e) => {
-    setConfig((config) => {
-      return { ...config, count: e.target.value };
-    });
-  };
-
-  const onChangePage = (e) => {
-    setConfig((config) => {
-      return { ...config, page: e.target.value };
-    });
-  };
-
-  const onChangeSearch = (e) => {
-    setConfig((config) => {
-      return { ...config, search: e.target.value };
-    });
-  };
-
-  const openGetCodeModal = () => setIsGetCodeDialogOpened(true);
-
-  const closeGetCodeModal = () => setIsGetCodeDialogOpened(false);
-
-  const onResize = () => {
-    const isEnoughWidthForPreview = window.innerWidth > showPreviewThreshold;
-    if (isEnoughWidthForPreview !== showPreview)
-      setShowPreview(isEnoughWidthForPreview);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", onResize);
-    return () => {
-      window.removeEventListener("resize", onResize);
-    };
-  }, [showPreview]);
-
-  const codeBlock = `<div id="${frameId}">Fallback text</div>\n<script src="${scriptUrl}${params}"></script>`;
-
-  const preview = (
-    <Frame width={width} height={width} targetId={frameId}>
-      <Box id={frameId}></Box>
-      <RectangleSkeleton height={height} borderRadius="6px" />
-    </Frame>
-  );
-
-  const code = (
-    <>
-      <CategorySubHeader className="copy-window-code">
-        {t("CopyWindowCode")}
-      </CategorySubHeader>
-      <Textarea value={codeBlock} heightTextArea={153} />
-    </>
-  );
-
-  const dataTabs = [
+  const presetsData = [
     {
-      key: "preview",
-      title: t("Common:Preview"),
-      content: preview,
+      title: "DocSpace",
+      description: t("DocspaceDescription"),
+      image: theme.isBase ? DocspaceImg : DocspaceImgDark,
+      handleOnClick: navigateToDocspace,
     },
     {
-      key: "code",
-      title: t("Code"),
-      content: code,
+      title: t("Files:PublicRoom"),
+      description: t("PublicRoomDescription"),
+      image: theme.isBase ? PublicRoomImg : PublicRoomImgDark,
+      handleOnClick: navigateToPublicRoom,
+    },
+    {
+      title: t("Editor"),
+      description: t("EditorDescription"),
+      image: theme.isBase ? EditorImg : EditorImgDark,
+      handleOnClick: navigateToEditor,
+    },
+    {
+      title: t("Viewer"),
+      description: t("ViewerDescription"),
+      image: theme.isBase ? ViewerImg : ViewerImgDark,
+      handleOnClick: navigateToViewer,
+    },
+    {
+      title: t("RoomSelector"),
+      description: t("RoomSelectorDescription"),
+      image: theme.isBase ? RoomSelectorImg : RoomSelectorImgDark,
+      handleOnClick: navigateToRoomSelector,
+    },
+    {
+      title: t("FileSelector"),
+      description: t("FileSelectorDescription"),
+      image: theme.isBase ? FileSelectorImg : FileSelectorImgDark,
+      handleOnClick: navigateToFileSelector,
+    },
+    {
+      title: t("Custom"),
+      description: t("CustomDescription"),
+      image: theme.isBase ? CustomImg : CustomImgDark,
+      handleOnClick: navigateToCustom,
     },
   ];
 
@@ -490,221 +151,37 @@ const PortalIntegration = (props) => {
         <Text className="sdk-description">{t("SDKDescription")}</Text>
         <Link
           color={currentColorScheme?.main?.accent}
-          fontSize="12px"
+          fontSize="13px"
           fontWeight="400"
           onClick={() => window.open(sdkLink, "_blank")}
         >
+          {" "}
           {t("APILink")}.
         </Link>
         <CSP t={t} />
       </CategoryDescription>
       <CategoryHeader>{t("CreateSampleHeader")}</CategoryHeader>
-      <Container>
-        {showPreview && (
-          <Preview>
-            <TabContainer onSelect={onChangeTab} elements={dataTabs} />
-          </Preview>
-        )}
-        <Controls>
-          <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
-          <ControlsGroup>
-            <Label className="label" text={t("EmbeddingPanel:Width")} />
-            <RowContainer combo>
-              <TextInput
-                onChange={onChangeWidth}
-                placeholder={t("EnterWidth")}
-                value={width}
-                tabIndex={2}
-              />
-              <ComboBox
-                size="content"
-                scaled={false}
-                scaledOptions={true}
-                onSelect={onChangeWidthDimension}
-                options={dataDimensions}
-                selectedOption={widthDimension}
-                displaySelectedOption
-                directionY="bottom"
-              />
-            </RowContainer>
-          </ControlsGroup>
-          <ControlsGroup>
-            <Label className="label" text={t("EmbeddingPanel:Height")} />
-            <RowContainer combo>
-              <TextInput
-                onChange={onChangeHeight}
-                placeholder={t("EnterHeight")}
-                value={height}
-                tabIndex={3}
-              />
-              <ComboBox
-                size="content"
-                scaled={false}
-                scaledOptions={true}
-                onSelect={onChangeHeightDimension}
-                options={dataDimensions}
-                selectedOption={heightDimension}
-                displaySelectedOption
-                directionY="bottom"
-              />
-            </RowContainer>
-          </ControlsGroup>
-          <ControlsGroup>
-            <Label className="label" text={t("FrameId")} />
-            <TextInput
-              scale={true}
-              onChange={onChangeFrameId}
-              placeholder={t("EnterId")}
-              value={config.frameId}
-              tabIndex={4}
-            />
-          </ControlsGroup>
-          <InterfaceElements>
-            <Label className="label">{t("InterfaceElements")}</Label>
-            <Checkbox
-              className="checkbox"
-              label={t("Menu")}
-              onChange={onChangeShowMenu}
-              isChecked={config.showMenu}
-            />
-            <Checkbox
-              className="checkbox"
-              label={t("Header")}
-              onChange={onChangeShowHeader}
-              isChecked={config.showHeader}
-            />
-            <Checkbox
-              className="checkbox"
-              label={t("Filter")}
-              onChange={onChangeShowFilter}
-              isChecked={config.showFilter}
-            />
-            <RowContainer>
-              <Checkbox
-                label={t("Title")}
-                onChange={onChangeShowTitle}
-                isChecked={config.showTitle}
-              />
-              <Text color="gray">{`(${t("MobileOnly")})`}</Text>
-            </RowContainer>
-          </InterfaceElements>
-          <CategorySubHeader>{t("DataDisplay")}</CategorySubHeader>
-          <ControlsGroup>
-            <LabelGroup>
-              <Label className="label" text={t("RoomOrFolder")} />
-              <HelpButton
-                offsetRight={0}
-                size={12}
-                tooltipContent={
-                  <Text fontSize="12px">{t("RoomOrFolderDescription")}</Text>
-                }
-              />
-            </LabelGroup>
-            <FilesSelectorInputWrapper>
-              <FilesSelectorInput onSelectFolder={onChangeFolderId} isSelect />
-            </FilesSelectorInputWrapper>
-          </ControlsGroup>
-          <CategorySubHeader>{t("AdvancedDisplay")}</CategorySubHeader>
-          <ControlsGroup>
-            <Label className="label" text={t("SearchTerm")} />
-            <ColumnContainer>
-              <TextInput
-                scale={true}
-                onChange={onChangeSearch}
-                placeholder={t("Common:Search")}
-                value={config.search}
-                tabIndex={5}
-              />
-              <Checkbox
-                className="checkbox"
-                label={t("Files:WithSubfolders")}
-                onChange={onChangeWithSubfolders}
-                isChecked={withSubfolders}
-              />
-            </ColumnContainer>
-          </ControlsGroup>
-          <ControlsGroup>
-            <Label className="label" text={t("Common:SortBy")} />
-            <ComboBox
-              onSelect={onChangeSortBy}
-              options={dataSortBy}
-              scaled={true}
-              selectedOption={sortBy}
-              displaySelectedOption
-              directionY="top"
-            />
-          </ControlsGroup>
-          <ControlsGroup>
-            <Label className="label" text={t("SortOrder")} />
-            <ComboBox
-              onSelect={onChangeSortOrder}
-              options={dataSortOrder}
-              scaled={true}
-              selectedOption={sortOrder}
-              displaySelectedOption
-              directionY="top"
-            />
-          </ControlsGroup>
-          <ControlsGroup>
-            <LabelGroup>
-              <Label className="label" text={t("ItemsCount")} />
-              <HelpButton
-                offsetRight={0}
-                size={12}
-                tooltipContent={
-                  <Text fontSize="12px">{t("ItemsCountDescription")}</Text>
-                }
-              />
-            </LabelGroup>
-            <TextInput
-              scale={true}
-              onChange={onChangeCount}
-              placeholder={t("EnterCount")}
-              value={config.count}
-              tabIndex={6}
-            />
-          </ControlsGroup>
-          <ControlsGroup>
-            <Label className="label" text={t("Page")} />
-            <TextInput
-              scale={true}
-              onChange={onChangePage}
-              placeholder={t("EnterPage")}
-              value={config.page}
-              isDisabled={!config.count}
-              tabIndex={7}
-            />
-          </ControlsGroup>
-        </Controls>
-      </Container>
-
-      {!showPreview && (
-        <>
-          <GetCodeButtonWrapper>
-            <Button
-              id="get-sdk-code-button"
-              primary
-              size="normal"
-              scale
-              label={t("GetCode")}
-              onClick={openGetCodeModal}
-            />
-          </GetCodeButtonWrapper>
-
-          <GetCodeDialog
+      <Text lineHeight="20px" color={theme.sdkPresets.secondaryColor}>
+        {t("InitializeSDK")}
+      </Text>
+      <PresetsContainer>
+        {presetsData.map((data) => (
+          <PresetTile
             t={t}
-            visible={isGetCodeDialogOpened}
-            codeBlock={codeBlock}
-            onClose={closeGetCodeModal}
+            key={data.title}
+            title={data.title}
+            description={data.description}
+            image={data.image}
+            handleOnClick={data.handleOnClick}
           />
-        </>
-      )}
+        ))}
+      </PresetsContainer>
     </SDKContainer>
   );
 };
 
-export default inject(({ setup, auth }) => {
-  const { settingsStore, setDocumentTitle } = auth;
+export default inject(({ settingsStore, authStore, publicRoomStore }) => {
+  const { setDocumentTitle } = authStore;
   const { theme, currentColorScheme, sdkLink } = settingsStore;
 
   return {
@@ -714,7 +191,12 @@ export default inject(({ setup, auth }) => {
     sdkLink,
   };
 })(
-  withTranslation(["JavascriptSdk", "Files", "EmbeddingPanel", "Common"])(
-    observer(PortalIntegration)
-  )
+  withTranslation([
+    "JavascriptSdk",
+    "Files",
+    "EmbeddingPanel",
+    "CreateEditRoomDialog",
+    "SharingPanel",
+    "Common",
+  ])(observer(PortalIntegration)),
 );

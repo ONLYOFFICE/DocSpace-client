@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import { Base } from "@docspace/components/themes";
-import { mobile, tablet } from "@docspace/components/utils/device";
+import { Base } from "@docspace/shared/themes";
+import { mobile, tablet } from "@docspace/shared/utils";
 
 const StyledAccountsItemTitle = styled.div`
   min-height: 80px;
@@ -11,7 +11,7 @@ const StyledAccountsItemTitle = styled.div`
   justify-content: start;
   gap: 16px;
   position: fixed;
-  margin-top: -80px;
+  margin-top: -128px;
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
@@ -109,10 +109,10 @@ const StyledAccountContent = styled.div`
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
-          margin: 80px 0 0 auto;
+          margin: 128px 0 0 auto;
         `
       : css`
-          margin: 80px auto 0 0;
+          margin: 128px auto 0 0;
         `}
 
   .data__header {
@@ -128,7 +128,7 @@ const StyledAccountContent = styled.div`
 
   .data__body {
     display: grid;
-    grid-template-rows: 28px 28px 28px 28px;
+    grid-template-rows: 28px 28px 28px 1fr;
     grid-template-columns: 80px 1fr;
     grid-gap: 0 24px;
     align-items: center;
@@ -159,6 +159,23 @@ const StyledAccountContent = styled.div`
         width: 100%;
         z-index: 1000;
       }
+    }
+
+    .info_field {
+      line-height: 20px;
+      height: 20px;
+      padding: 4px 0;
+    }
+
+    .info_field_groups {
+      height: 100%;
+    }
+
+    .info_groups {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      justify-content: center;
     }
   }
 `;

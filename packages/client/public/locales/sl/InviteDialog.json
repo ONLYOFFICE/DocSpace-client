@@ -3,6 +3,7 @@
   "AddManuallyDescriptionAccounts": "Po e-mailu osebno povabite nove uporabnike v DocSpace",
   "AddManuallyDescriptionRoom": "Dodaj obstoječe DocSpace uporabnike v sobo z uporabo imena ali povabite nove uporabnike osebno po e-mailu",
   "EmailErrorMessage": "E-mail naslov ni veljaven. E-mail sporočilo lahko uredite tako, da nanj kliknete.",
+  "InvitationLanguage": "Jezik povabila",
   "InviteAccountSearchPlaceholder": "Povabite ljudi po e-mailu",
   "Invited": "Povabljeni",
   "InviteRoomSearchPlaceholder": "Povabite ljudi po imenu ali e-mailu",
@@ -10,5 +11,6 @@
   "InviteViaLinkDescriptionAccounts": "Ustvari univerzalno povezavo za samodejno avtorizacijo v DocSpace",
   "InviteViaLinkDescriptionRoom": "Ustvari univerzalno povezavo za samoavtorizacijo v sobi",
   "LinkCopySuccess": "Povezava je bila kopirana",
+  "ResetChange": "Ponastavi spremembe",
   "SendInvitation": "Pošlji povabilo"
 }

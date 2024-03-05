@@ -1,12 +1,13 @@
 import React from "react";
-import Backdrop from "@docspace/components/backdrop";
-import Heading from "@docspace/components/heading";
-import Aside from "@docspace/components/aside";
-import Button from "@docspace/components/button";
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Heading } from "@docspace/shared/components/heading";
+import { Aside } from "@docspace/shared/components/aside";
+import { Button } from "@docspace/shared/components/button";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { DialogAsideSkeleton } from "@docspace/shared/skeletons/dialog";
 import { withTranslation } from "react-i18next";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 import {
   StyledAsidePanel,
   StyledContent,
@@ -15,7 +16,7 @@ import {
   StyledBody,
 } from "../StyledPanels";
 import { inject, observer } from "mobx-react";
-import Loaders from "@docspace/common/components/Loaders";
+
 import withLoader from "../../../HOCs/withLoader";
 
 class ChangeOwnerComponent extends React.Component {
@@ -127,11 +128,11 @@ class ChangeOwnerComponent extends React.Component {
 }
 
 const ChangeOwnerPanel = withTranslation(["ChangeOwnerPanel", "Common"])(
-  withLoader(ChangeOwnerComponent)(<Loaders.DialogAsideLoader isPanel />)
+  withLoader(ChangeOwnerComponent)(<DialogAsideSkeleton isPanel />),
 );
 
 export default inject(
-  ({ auth, filesStore, dialogsStore, clientLoadingStore }) => {
+  ({ settingsStore, filesStore, dialogsStore, clientLoadingStore }) => {
     const {
       selection,
       bufferSelection,
@@ -144,7 +145,7 @@ export default inject(
     const { ownerPanelVisible, setChangeOwnerPanelVisible } = dialogsStore;
 
     return {
-      theme: auth.settingsStore.theme,
+      theme: settingsStore.theme,
       selection: selection.length ? selection : [bufferSelection],
       isLoading: clientLoadingStore.isLoading,
       visible: ownerPanelVisible,
@@ -156,5 +157,5 @@ export default inject(
       setFilesOwner,
       setBufferSelection,
     };
-  }
+  },
 )(observer(ChangeOwnerPanel));

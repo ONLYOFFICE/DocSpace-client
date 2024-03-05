@@ -1,4 +1,4 @@
-import Button from "@docspace/components/button";
+import { Button } from "@docspace/shared/components/button";
 import React, { useState, useEffect, useTransition, Suspense } from "react";
 import WebhookDialog from "./sub-components/WebhookDialog";
 import WebhookInfo from "./sub-components/WebhookInfo";
@@ -8,15 +8,15 @@ import { inject, observer } from "mobx-react";
 
 import styled from "styled-components";
 import { WebhookConfigsLoader } from "./sub-components/Loaders";
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 
-import { isMobile } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/shared/utils";
 
 import { useTranslation } from "react-i18next";
 
 import { DeleteWebhookDialog } from "./sub-components/DeleteWebhookDialog";
 import { NoBoxShadowToast } from "./styled-components";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 
 const MainWrapper = styled.div`
   width: 100%;
@@ -52,7 +52,6 @@ const Webhooks = (props) => {
   const {
     loadWebhooks,
     addWebhook,
-    isWebhookExist,
     isWebhooksEmpty,
     setDocumentTitle,
     currentWebhook,
@@ -77,20 +76,17 @@ const Webhooks = (props) => {
   const closeDeleteModal = () => setIsDeleteOpened(false);
   const openDeleteModal = () => setIsDeleteOpened(true);
 
-  const onCreateWebhook = async (webhookInfo) => {
-    if (!isWebhookExist(webhookInfo)) {
-      await addWebhook(webhookInfo);
-      closeCreateModal();
-    }
-  };
-
   const handleWebhookUpdate = async (webhookInfo) => {
     await editWebhook(currentWebhook, webhookInfo);
-    toastr.success(t("WebhookEditedSuccessfully"), <b>{t("Common:Done")}</b>);
   };
+
   const handleWebhookDelete = async () => {
-    await deleteWebhook(currentWebhook);
-    toastr.success(t("WebhookRemoved"), <b>{t("Common:Done")}</b>);
+    try {
+      await deleteWebhook(currentWebhook);
+      toastr.success(t("WebhookRemoved"));
+    } catch (error) {
+      toastr.error(error);
+    }
   };
 
   useEffect(() => {
@@ -121,13 +117,16 @@ const Webhooks = (props) => {
         )}
 
         {!isWebhooksEmpty && (
-          <WebhooksTable openSettingsModal={openSettingsModal} openDeleteModal={openDeleteModal} />
+          <WebhooksTable
+            openSettingsModal={openSettingsModal}
+            openDeleteModal={openDeleteModal}
+          />
         )}
         <WebhookDialog
           visible={isCreateOpened}
           onClose={closeCreateModal}
           header={t("CreateWebhook")}
-          onSubmit={onCreateWebhook}
+          onSubmit={addWebhook}
           additionalId="create-webhook"
           isSettingsModal={false}
         />
@@ -152,24 +151,22 @@ const Webhooks = (props) => {
   );
 };
 
-export default inject(({ webhooksStore, auth }) => {
+export default inject(({ webhooksStore, authStore }) => {
   const {
     state,
     loadWebhooks,
     addWebhook,
-    isWebhookExist,
     isWebhooksEmpty,
     currentWebhook,
     editWebhook,
     deleteWebhook,
   } = webhooksStore;
-  const { setDocumentTitle } = auth;
+  const { setDocumentTitle } = authStore;
 
   return {
     state,
     loadWebhooks,
     addWebhook,
-    isWebhookExist,
     isWebhooksEmpty,
     setDocumentTitle,
     currentWebhook,

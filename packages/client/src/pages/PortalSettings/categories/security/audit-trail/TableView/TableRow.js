@@ -2,10 +2,10 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
-import TableRow from "@docspace/components/table-container/TableRow";
-import TableCell from "@docspace/components/table-container/TableCell";
-import Text from "@docspace/components/text";
-import { convertTime } from "@docspace/common/utils/convertTime";
+import { TableRow } from "@docspace/shared/components/table";
+import { TableCell } from "@docspace/shared/components/table";
+import { Text } from "@docspace/shared/components/text";
+import { convertTime } from "@docspace/shared/utils/convertTime";
 
 import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 
@@ -99,9 +99,9 @@ const PeopleTableRow = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { culture } = auth.settingsStore;
-  const { user } = auth.userStore;
+export default inject(({ settingsStore, userStore }) => {
+  const { culture } = settingsStore;
+  const { user } = userStore;
   const locale = (user && user.cultureName) || culture || "en";
 
   return {

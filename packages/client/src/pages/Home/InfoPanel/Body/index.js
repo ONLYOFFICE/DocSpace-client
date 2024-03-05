@@ -1,51 +1,68 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 
 import ViewHelper from "./helpers/ViewHelper";
 import ItemTitle from "./sub-components/ItemTitle";
+import Search from "./sub-components/Search";
 
 import { StyledInfoPanelBody } from "./styles/common";
-import { getRoomInfo } from "@docspace/common/api/rooms";
+import { useParams } from "react-router-dom";
 
 const InfoPanelBodyContent = ({
-  selection,
-  setSelection,
-  calculateSelection,
-  normalizeSelection,
+  infoPanelSelection,
+  setNewInfoPanelSelection,
   isItemChanged,
-  selectionParentRoom,
-  setSelectionParentRoom,
   roomsView,
   fileView,
   getIsFiles,
   getIsRooms,
   getIsAccounts,
+  getIsPeople,
+  getIsGroups,
   getIsGallery,
   gallerySelected,
   isRootFolder,
+  showSearchBlock,
+  setShowSearchBlock,
   ...props
 }) => {
+  const { groupId } = useParams();
+
   const [selectedItems, setSelectedItems] = useState(props.selectedItems);
   const [selectedFolder, setSelectedFolder] = useState(props.selectedFolder);
 
   const isFiles = getIsFiles();
   const isRooms = getIsRooms();
-  const isAccounts = getIsAccounts();
   const isGallery = getIsGallery();
+  const isInsideGroup = getIsGroups() && groupId;
+  const isGroups =
+    getIsGroups() ||
+    (isInsideGroup && (!selectedItems.length || !!selectedItems[0].manager));
+  const isPeople =
+    getIsPeople() ||
+    (isInsideGroup && selectedItems.length && !selectedItems[0].manager);
 
   const isSeveralItems = props.selectedItems?.length > 1;
 
   const isNoItemGallery = isGallery && !gallerySelected;
-  const itemIsRoot =
-    selection?.isSelectedFolder && selection?.id === selection?.rootFolderId;
+  const isNoItemPeople = isPeople && !isInsideGroup && !selectedItems.length;
+  const isNoItemGroups = isGroups && !isInsideGroup && !selectedItems.length;
+  const isRoot =
+    infoPanelSelection?.isFolder &&
+    infoPanelSelection?.id === infoPanelSelection?.rootFolderId;
   const isNoItem =
-    !isSeveralItems && (isNoItemGallery || (itemIsRoot && !isGallery));
+    !infoPanelSelection ||
+    isNoItemPeople ||
+    isNoItemGallery ||
+    isNoItemGroups ||
+    (isRoot && !isGallery);
 
   const defaultProps = {
-    selection,
+    infoPanelSelection,
     isFiles,
     isRooms,
-    isAccounts,
+    isPeople,
+    isGroups,
     isGallery,
     isRootFolder: selectedFolder.id === selectedFolder.rootFolderId,
     isSeveralItems,
@@ -57,6 +74,7 @@ const InfoPanelBodyContent = ({
     membersProps: {},
     historyProps: { selectedFolder },
     accountsProps: {},
+    groupsProps: {},
     galleryProps: {},
     pluginProps: { isRooms, roomsView, fileView },
   });
@@ -66,8 +84,10 @@ const InfoPanelBodyContent = ({
 
     if (isNoItem) return viewHelper.NoItemView();
     if (isSeveralItems) return viewHelper.SeveralItemsView();
+
     if (isGallery) return viewHelper.GalleryView();
-    if (isAccounts) return viewHelper.AccountsView();
+    if (isPeople) return viewHelper.AccountsView();
+    if (isGroups) return viewHelper.GroupsView();
 
     switch (currentView) {
       case "info_members":
@@ -76,6 +96,8 @@ const InfoPanelBodyContent = ({
         return viewHelper.HistoryView();
       case "info_details":
         return viewHelper.DetailsView();
+      case "info_share":
+        return viewHelper.ShareView();
     }
 
     if (currentView.indexOf("info_plugin") > -1) return viewHelper.PluginView();
@@ -104,52 +126,29 @@ const InfoPanelBodyContent = ({
   useEffect(() => {
     const selectedFolderChanged = isItemChanged(
       selectedFolder,
-      props.selectedFolder
+      props.selectedFolder,
     );
     if (selectedFolderChanged) setSelectedFolder(props.selectedFolder);
   }, [props.selectedFolder]);
 
-  // Updating selectionParentRoom after selectFolder change
+  // Updating infoPanelSelection after selectFolder change
   // if it is located in another room
 
-  const updateSelectionParentRoomAction = useCallback(async () => {
-    if (!isRooms) return;
-    if (selection?.isRoom && roomsView === "members") return;
-
-    const currentFolderRoomId =
-      selectedFolder?.pathParts &&
-      selectedFolder?.pathParts?.length > 1 &&
-      selectedFolder.pathParts[1].id;
-
-    const storeRoomId = selectionParentRoom?.id;
-    if (!currentFolderRoomId || currentFolderRoomId === storeRoomId) return;
-
-    const newSelectionParentRoom = await getRoomInfo(currentFolderRoomId);
-
-    if (storeRoomId === newSelectionParentRoom.id) return;
-
-    setSelectionParentRoom(normalizeSelection(newSelectionParentRoom));
-  }, [selectedFolder]);
-
+  // Setting infoPanelSelection after selectedItems or selectedFolder update
   useEffect(() => {
-    updateSelectionParentRoomAction();
-  }, [selectedFolder, updateSelectionParentRoomAction]);
-
-  // Setting selection after selectedItems or selectedFolder update
-  useEffect(() => {
-    setSelection(calculateSelection());
-  }, [selectedItems, selectedFolder]);
+    setNewInfoPanelSelection();
+  }, [selectedItems, selectedFolder, groupId]);
 
   // * DEV-ONLY - Logs selection change
-  // useEffect(() => {
-  //   console.log("\nfor-dev  Selected items: ", selectedItems);
-  //   console.log("\nfor-dev  Selected folder: ", selectedFolder);
-  // }, [selectedItems, selectedFolder]);
-
-  if (!selection && !isGallery) return null;
+  useEffect(() => {
+    console.log("\nfor-dev  Selected items: ", selectedItems);
+    console.log("\nfor-dev  Selected folder: ", selectedFolder);
+  }, [selectedItems, selectedFolder]);
 
   return (
     <StyledInfoPanelBody>
+      {showSearchBlock && <Search />}
+
       {!isNoItem && (
         <ItemTitle
           {...defaultProps}
@@ -162,51 +161,51 @@ const InfoPanelBodyContent = ({
   );
 };
 
-export default inject(({ auth, selectedFolderStore, oformsStore }) => {
-  const {
-    selection,
-    setSelection,
-    calculateSelection,
-    normalizeSelection,
-    isItemChanged,
-    selectionParentRoom,
-    setSelectionParentRoom,
-    roomsView,
-    fileView,
-    getIsFiles,
-    getIsRooms,
-    getIsAccounts,
-    getIsGallery,
-  } = auth.infoPanelStore;
+export default inject(
+  ({ selectedFolderStore, oformsStore, infoPanelStore }) => {
+    const {
+      infoPanelSelection,
+      setNewInfoPanelSelection,
+      isItemChanged,
+      roomsView,
+      fileView,
+      getIsFiles,
+      getIsRooms,
+      getIsAccounts,
+      getIsGallery,
+      infoPanelSelectedItems,
+      getInfoPanelSelectedFolder,
+      getIsPeople,
+      getIsGroups,
+      showSearchBlock,
+      setShowSearchBlock,
+    } = infoPanelStore;
 
-  const { gallerySelected } = oformsStore;
+    const { gallerySelected } = oformsStore;
+    const { isRootFolder } = selectedFolderStore;
 
-  const { isRootFolder } = selectedFolderStore;
+    return {
+      infoPanelSelection,
+      setNewInfoPanelSelection,
+      isItemChanged,
 
-  const selectedItems = auth.infoPanelStore.getSelectedItems();
+      roomsView,
+      fileView,
+      getIsFiles,
+      getIsRooms,
+      getIsAccounts,
+      getIsPeople,
+      getIsGroups,
+      getIsGallery,
 
-  const selectedFolder = auth.infoPanelStore.getSelectedFolder();
+      selectedItems: infoPanelSelectedItems,
+      selectedFolder: getInfoPanelSelectedFolder(),
 
-  return {
-    selection,
-    setSelection,
-    calculateSelection,
-    normalizeSelection,
-    isItemChanged,
+      isRootFolder,
+      gallerySelected,
 
-    selectionParentRoom,
-    setSelectionParentRoom,
-    roomsView,
-    fileView,
-    getIsFiles,
-    getIsRooms,
-    getIsAccounts,
-    getIsGallery,
-
-    selectedItems,
-    selectedFolder,
-
-    isRootFolder,
-    gallerySelected,
-  };
-})(observer(InfoPanelBodyContent));
+      showSearchBlock,
+      setShowSearchBlock,
+    };
+  },
+)(observer(InfoPanelBodyContent));

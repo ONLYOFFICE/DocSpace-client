@@ -1,4 +1,4 @@
-import { isMobile } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/shared/utils";
 import React, { useState } from "react";
 import styled from "styled-components";
 import RoomType from "../RoomType";

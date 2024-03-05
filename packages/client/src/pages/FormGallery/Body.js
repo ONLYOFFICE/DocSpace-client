@@ -3,15 +3,15 @@ import EmptyScreenFilterAltDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_filte
 
 import { useEffect } from "react";
 import { observer, inject } from "mobx-react";
-import EmptyScreenContainer from "@docspace/components/empty-screen-container";
+import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 import { withTranslation } from "react-i18next";
 import TileContainer from "./TilesView/sub-components/TileContainer";
 import FileTile from "./TilesView/FileTile";
-import Loaders from "@docspace/common/components/Loaders";
+import { TilesSkeleton } from "@docspace/shared/skeletons/tiles";
 import SubmitToGalleryTile from "./TilesView/sub-components/SubmitToGalleryTile";
-import Link from "@docspace/components/link";
+import { Link } from "@docspace/shared/components/link";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
-import IconButton from "@docspace/components/icon-button";
+import { IconButton } from "@docspace/shared/components/icon-button";
 import styled from "styled-components";
 
 const StyledEmptyContainerLinks = styled.div`
@@ -45,6 +45,10 @@ const SectionBodyContent = ({
   resetFilters,
   submitToGalleryTileIsVisible,
   canSubmitToFormGallery,
+  setOformFilesLoaded,
+  categoryFilterLoaded,
+  languageFilterLoaded,
+  oformFilesLoaded,
 }) => {
   const onMouseDown = (e) => {
     if (
@@ -66,8 +70,12 @@ const SectionBodyContent = ({
     };
   }, [onMouseDown]);
 
-  return !tReady || !oformFiles ? (
-    <Loaders.Tiles foldersCount={0} withTitle={false} />
+  useEffect(() => {
+    setOformFilesLoaded(tReady && oformFiles);
+  }, [tReady, oformFiles]);
+
+  return !(categoryFilterLoaded && languageFilterLoaded && oformFilesLoaded) ? (
+    <TilesSkeleton foldersCount={0} withTitle={false} />
   ) : !hasGalleryFiles ? (
     <EmptyScreenContainer
       imageSrc={
@@ -112,12 +120,16 @@ const SectionBodyContent = ({
   );
 };
 
-export default inject(({ auth, accessRightsStore, oformsStore }) => ({
-  theme: auth.settingsStore.theme,
+export default inject(({ settingsStore, accessRightsStore, oformsStore }) => ({
+  theme: settingsStore.theme,
   oformFiles: oformsStore.oformFiles,
   hasGalleryFiles: oformsStore.hasGalleryFiles,
   setGallerySelected: oformsStore.setGallerySelected,
   resetFilters: oformsStore.resetFilters,
   submitToGalleryTileIsVisible: oformsStore.submitToGalleryTileIsVisible,
   canSubmitToFormGallery: accessRightsStore.canSubmitToFormGallery,
+  setOformFilesLoaded: oformsStore.setOformFilesLoaded,
+  categoryFilterLoaded: oformsStore.categoryFilterLoaded,
+  languageFilterLoaded: oformsStore.languageFilterLoaded,
+  oformFilesLoaded: oformsStore.oformFilesLoaded,
 }))(withTranslation("Common, FormGallery")(observer(SectionBodyContent)));

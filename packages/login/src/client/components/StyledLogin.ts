@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { tablet, mobile } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/shared/utils";
 
 export const ButtonsWrapper = styled.div`
   display: flex;
@@ -29,12 +29,12 @@ interface IStyledCaptchaProps {
 
 export const LoginFormWrapper = styled.div`
   width: 100%;
-  height: ${props => props.enabledJoin ? "calc(100vh - 68px)" : "100vh"};
+  height: 100vh;
 
   box-sizing: border-box;
 
-  @media ${mobile}{
-    height: 100%;
+  @media ${mobile} {
+    height: calc(100% - 48px);
   }
 
   .bg-cover {
@@ -52,6 +52,68 @@ export const LoginFormWrapper = styled.div`
       background-image: none;
     }
   }
+
+  .greeting-container {
+    margin-bottom: 40px;
+    max-width: 380px;
+    min-width: 380px;
+
+    @media ${tablet} {
+      max-width: 480px;
+      min-width: 480px;
+    }
+
+    @media ${mobile} {
+      max-width: 100%;
+      min-width: 100%;
+    }
+    p {
+      text-align: center;
+    }
+  }
+  .invitation-info-container {
+    margin-bottom: 16px;
+    .sign-in-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+
+      margin-bottom: 16px;
+      .back-title {
+        position: absolute;
+        max-width: 60px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                right: 0;
+              `
+            : css`
+                left: 0;
+              `};
+
+        display: flex;
+        gap: 4px;
+
+        svg {
+          ${(props) =>
+            props.theme.interfaceDirection === "rtl" &&
+            " transform: rotate(180deg)"};
+        }
+
+        p {
+          color: ${(props) => props.theme.login.backTitle.color};
+        }
+
+        p:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
 `;
 
 export const LoginContent = styled.div`
@@ -65,9 +127,12 @@ export const LoginContent = styled.div`
   -webkit-box-direction: normal;
   height: 100%;
 
+  margin-top: 88px;
+
   @media ${mobile} {
     width: 100%;
     justify-content: start;
+    margin-top: 34px;
   }
 `;
 
@@ -77,8 +142,8 @@ export const StyledCaptcha = styled.div`
   width: fit-content;
   .captcha-wrapper {
     ${(props: IStyledCaptchaProps) =>
-    props.isCaptchaError &&
-    css`
+      props.isCaptchaError &&
+      css`
         border: ${props.theme.login.captcha.border};
         padding: 4px 4px 4px 2px;
       `};

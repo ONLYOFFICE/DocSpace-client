@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 
-import Button from "@docspace/components/button";
-import toastr from "@docspace/components/toast/toastr";
+import { Button } from "@docspace/shared/components/button";
+import { toastr } from "@docspace/shared/components/toast";
 import {
   getSendingTestMailStatus,
   sendingTestMail,
-} from "@docspace/common/api/settings";
+} from "@docspace/shared/api/settings";
 
 import { ButtonStyledComponent } from "../StyledComponent";
 import { SMTPSettingsFields } from "../constants";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const {
   HOST,
@@ -215,7 +215,7 @@ const ButtonContainer = (props) => {
   );
 };
 
-export default inject(({ auth, setup }) => {
+export default inject(({ settingsStore, setup }) => {
   const {
     integration,
     setSMTPSettingsLoading,
@@ -227,7 +227,7 @@ export default inject(({ auth, setup }) => {
   const { smtpSettings } = integration;
   const { settings, isLoading, isDefaultSettings } = smtpSettings;
 
-  const { currentDeviceType } = auth.settingsStore;
+  const { currentDeviceType } = settingsStore;
 
   return {
     isSMTPInitialSettings,

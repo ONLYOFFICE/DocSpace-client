@@ -2,7 +2,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
 import ResetConfirmationModal from "./sub-components/ResetConfirmationModal";
 
@@ -18,6 +18,7 @@ const SubmitResetButtons = (props) => {
     hasErrors,
     hasChanges,
     isLoadingXml,
+    enableSso,
   } = props;
 
   return (
@@ -32,7 +33,9 @@ const SubmitResetButtons = (props) => {
         displaySettings={true}
         hasScroll={true}
         isSaving={isSubmitLoading}
-        saveButtonDisabled={hasErrors || !hasChanges || isLoadingXml}
+        saveButtonDisabled={
+          !enableSso || hasErrors || !hasChanges || isLoadingXml
+        }
         cancelEnable={!(isSubmitLoading || isLoadingXml)}
         additionalClassSaveButton="save-button"
         additionalClassCancelButton="restore-button"
@@ -53,6 +56,7 @@ export default inject(({ ssoStore }) => {
     hasErrors,
     hasChanges,
     isLoadingXml,
+    enableSso,
   } = ssoStore;
 
   return {
@@ -65,5 +69,6 @@ export default inject(({ ssoStore }) => {
     hasErrors,
     hasChanges,
     isLoadingXml,
+    enableSso,
   };
 })(observer(SubmitResetButtons));

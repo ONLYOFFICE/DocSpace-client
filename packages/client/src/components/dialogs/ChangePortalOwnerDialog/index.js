@@ -4,16 +4,17 @@ import { inject, observer } from "mobx-react";
 import { ReactSVG } from "react-svg";
 import { withTranslation } from "react-i18next";
 
-import PeopleSelector from "SRC_DIR/components/PeopleSelector";
+import PeopleSelector from "@docspace/shared/selectors/People";
 
-import Filter from "@docspace/common/api/people/filter";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Avatar from "@docspace/components/avatar";
-import Text from "@docspace/components/text";
-import SelectorAddButton from "@docspace/components/selector-add-button";
-import Button from "@docspace/components/button";
-import Link from "@docspace/components/link";
-import toastr from "@docspace/components/toast/toastr";
+import Filter from "@docspace/shared/api/people/filter";
+
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Avatar } from "@docspace/shared/components/avatar";
+import { Text } from "@docspace/shared/components/text";
+import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
+import { Button } from "@docspace/shared/components/button";
+import { Link } from "@docspace/shared/components/link";
+import { toastr } from "@docspace/shared/components/toast";
 
 import {
   StyledOwnerInfo,
@@ -68,7 +69,7 @@ const ChangePortalOwnerDialog = ({
         toastr.success(
           t("Settings:ConfirmEmailSended", {
             ownerName: selectedUser.label,
-          })
+          }),
         );
       })
       .catch((error) => {
@@ -111,12 +112,20 @@ const ChangePortalOwnerDialog = ({
         <ModalDialog.Container>
           <PeopleSelector
             withCancelButton
+            cancelButtonLabel=""
+            onCancel={onBackClick}
             filter={filter}
             excludeItems={[id]}
-            acceptButtonLabel={t("Common:SelectAction")}
-            onAccept={onAccept}
-            onCancel={onBackClick}
-            onBackClick={onBackClick}
+            submitButtonLabel={t("Common:SelectAction")}
+            onSubmit={onAccept}
+            disableSubmitButton={false}
+            withHeader
+            headerProps={{
+              onBackClick,
+              withoutBackButton: false,
+              headerLabel: "",
+            }}
+            currentUserId={id}
           />
         </ModalDialog.Container>
       )}
@@ -227,9 +236,9 @@ const ChangePortalOwnerDialog = ({
   );
 };
 
-export default inject(({ auth, setup }) => {
-  const { displayName, avatar, id } = auth.userStore.user;
-  const { currentColorScheme } = auth.settingsStore;
+export default inject(({ setup, userStore, settingsStore }) => {
+  const { displayName, avatar, id } = userStore.user;
+  const { currentColorScheme } = settingsStore;
   const { sendOwnerChange } = setup;
 
   return { displayName, avatar, id, sendOwnerChange, currentColorScheme };
@@ -240,5 +249,5 @@ export default inject(({ auth, setup }) => {
     "Translations",
     "ProfileAction",
     "Settings",
-  ])(observer(ChangePortalOwnerDialog))
+  ])(observer(ChangePortalOwnerDialog)),
 );

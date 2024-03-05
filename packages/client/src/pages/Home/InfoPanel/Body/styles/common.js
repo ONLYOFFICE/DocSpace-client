@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
-import { Base } from "@docspace/components/themes";
-import { mobile, tablet, desktop } from "@docspace/components/utils/device";
+import { Base } from "@docspace/shared/themes";
+import { mobile, tablet, desktop } from "@docspace/shared/utils";
 
 const StyledInfoPanelBody = styled.div`
   height: auto;
@@ -181,6 +181,23 @@ const StyledTitle = styled.div`
   }
 `;
 
+const StyledSearchContainer = styled.div`
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 68px;
+  width: 100%;
+  padding: 0 16px;
+  border-radius: 0 0 6px 6px;
+  background-color: ${(props) => props.theme.infoPanel.backgroundColor};
+  z-index: 101;
+  box-shadow: ${({ theme }) => theme.infoPanel.search.boxShadow};
+`;
+
 const StyledLink = styled.div`
   display: flex;
   padding: 8px 0;
@@ -216,6 +233,9 @@ const StyledProperties = styled.div`
     display: grid;
     grid-template-columns: 120px 1fr;
     grid-column-gap: 24px;
+
+    -webkit-box-align: center;
+    align-items: center;
 
     .property-title {
       font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
@@ -301,6 +321,10 @@ const StyledProperties = styled.div`
       }
     }
   }
+
+  .info_details_comments {
+    align-items: start;
+  }
 `;
 
 StyledInfoPanelBody.defaultProps = { theme: Base };
@@ -309,6 +333,7 @@ StyledTitle.defaultProps = { theme: Base };
 export {
   StyledInfoPanelBody,
   StyledTitle,
+  StyledSearchContainer,
   StyledSubtitle,
   StyledProperties,
   StyledLink,

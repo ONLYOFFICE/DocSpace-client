@@ -109,10 +109,10 @@ public class LocalesTest
         var moduleWorkspaces = new List<string>
         {
             Utils.ConvertPathToOS("packages/client"),
-            Utils.ConvertPathToOS("packages/common"),
-            Utils.ConvertPathToOS("packages/components"),
             Utils.ConvertPathToOS("packages/editor"),
-            Utils.ConvertPathToOS("packages/login")
+            Utils.ConvertPathToOS("packages/login"),
+            Utils.ConvertPathToOS("packages/shared"),
+            Utils.ConvertPathToOS("packages/management"),
         };
 
         Workspaces = new List<string>();
@@ -944,14 +944,14 @@ public class LocalesTest
         File.WriteAllText(pathToJson, sortedJsonString, Encoding.UTF8);
     }
 
-    public static void RemoveEmptyKeys(string pathToJson, List<string> emptyKeys)
+    public static void RemoveKeys(string pathToJson, List<string> keys)
     {
-        if (!File.Exists(pathToJson) || !emptyKeys.Any())
+        if (!File.Exists(pathToJson) || !keys.Any())
             return;
 
         var jsonTranslation = JObject.Parse(File.ReadAllText(pathToJson));
 
-        var properties = jsonTranslation.Properties().Where(p => !emptyKeys.Contains(p.Name)).ToList();
+        var properties = jsonTranslation.Properties().Where(p => !keys.Contains(p.Name)).ToList();
 
         var result = new JObject(properties);
 
@@ -1030,7 +1030,7 @@ public class LocalesTest
                 message += string.Join("\r\n", emptyKeys) + "\r\n\r\n";
 
                 // Uncomment if you want to remove empty keys
-                //RemoveEmptyKeys(lng.Path, emptyKeys);
+                //RemoveKeys(lng.Path, emptyKeys);
 
                 // Uncomment if new keys are available for saving
                 /*var fileName = Path.GetFileName(lng.Path);
@@ -1064,7 +1064,7 @@ public class LocalesTest
             message += string.Join("\r\n", emptyKeys) + "\r\n\r\n";
 
             // Uncomment if you want to remove empty keys
-            //RemoveEmptyKeys(lng.Path, emptyKeys);
+            //RemoveKeys(lng.Path, emptyKeys);
 
             // Uncomment if new keys are available for saving
             /*var newKeys = newTranslationFiles
@@ -1526,4 +1526,79 @@ public class LocalesTest
         }
 
     }*/
+
+    public static void AddKeyValue(string pathToJson, string key, string value)
+    {
+        if (!File.Exists(pathToJson) || string.IsNullOrEmpty(key))
+            return;
+
+        var jsonTranslation = JObject.Parse(File.ReadAllText(pathToJson));
+
+        var properties = jsonTranslation.Properties().Select(t => t).ToList();
+
+        properties.Add(new JProperty(key, value));
+
+        var orderedList = properties.OrderBy(t => t.Name);
+
+        var result = new JObject(orderedList);
+
+        var sortedJsonString = JsonConvert.SerializeObject(result, Formatting.Indented);
+
+        File.WriteAllText(pathToJson, sortedJsonString, Encoding.UTF8);
+    }
+
+    public static void RemoveKey(string pathToJson, string key)
+    {
+        if (!File.Exists(pathToJson) || string.IsNullOrEmpty(key))
+            return;
+
+        var jsonTranslation = JObject.Parse(File.ReadAllText(pathToJson));
+
+        var properties = jsonTranslation.Properties().Where(p => p.Name != key).ToList();
+
+        var result = new JObject(properties);
+
+        var sortedJsonString = JsonConvert.SerializeObject(result, Formatting.Indented);
+
+        File.WriteAllText(pathToJson, sortedJsonString, Encoding.UTF8);
+    }
+
+    [Test]
+    public void MoveKeysToCommon()
+    {
+        var findKeys = new List<string> {
+            "SharingPanel:CustomFilter",
+            "SharingPanel:ReadOnly",
+            "SharingPanel:DenyAccess",
+            "SharingPanel:Comment",
+            "SharingPanel:ShareVia"
+        };
+
+        //var findKeys = new List<string> {
+        //    "Translations:DownloadApps",
+        //};
+
+        foreach (var findKey in findKeys)
+        {
+            var splitted = findKey.Split(":");
+            var file = splitted[0];
+            var key = splitted[1];
+
+            var tFiles = TranslationFiles.Where(t => t.FileName.Equals($"{file}.json", StringComparison.InvariantCultureIgnoreCase));
+
+            foreach (var tFile in tFiles)
+            {
+                var tKeys = tFile.Translations.Where(t => t.Key == key);
+
+                foreach (var tKey in tKeys)
+                {
+                    var commonPath = Utils.ConvertPathToOS(Path.Combine(BasePath, "public/locales", tFile.Language, "Common.json"));
+
+                    AddKeyValue(commonPath, tKey.Key, tKey.Value);
+
+                    RemoveKey(tFile.FilePath, key);
+                }
+            }
+        }
+    }
 }

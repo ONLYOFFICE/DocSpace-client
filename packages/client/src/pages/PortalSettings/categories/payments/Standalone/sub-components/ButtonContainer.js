@@ -1,7 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import Button from "@docspace/components/button";
+import { Button } from "@docspace/shared/components/button";
 
 import { StyledButtonComponent } from "../StyledComponent";
 
@@ -21,8 +21,8 @@ const ButtonContainer = ({ t, buyUrl }) => {
   );
 };
 
-export default inject(({ payments }) => {
-  const { buyUrl } = payments;
+export default inject(({ paymentStore }) => {
+  const { buyUrl } = paymentStore;
 
   return {
     buyUrl,

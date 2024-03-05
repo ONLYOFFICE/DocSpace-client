@@ -1,10 +1,5 @@
 {
-  "Error401Text": " Xin lỗi, hiện không thể truy cập tài nguyên.",
-  "Error403Text": " Xin lỗi, truy cập bị từ chối.",
-  "Error404Text": " Xin lỗi, không thể tìm thấy tài nguyên.",
-  "ErrorDeactivatedText": "DocSpace này đã bị vô hiệu hóa",
   "ErrorEmptyResponse": "Không có hồi đáp",
-  "ErrorOfflineText": "Không tìm thấy kết nối internet",
   "ErrorUnavailableText": "DocSpace không khả dụng",
   "InvalidLink": "Liên kết không hợp lệ",
   "LinkDoesNotExist": "Liên kết bạn đang cố gắng mở không tồn tại.",

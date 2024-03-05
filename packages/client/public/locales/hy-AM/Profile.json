@@ -1,5 +1,5 @@
 {
-  "ActiveSessions": "Գործուն աշխատաշրջաններ ",
+  "ActiveSessions": "Ակտիվ սեսիաներ",
   "ChangeEmailSuccess": "Էլփոստը հաջողությամբ փոխվել է",
   "ChangePasswordAfterLoggingOut": "Դուրս գալուց հետո փոխեք գաղտնաբառը",
   "ConnectSocialNetworks": "Միացրեք ձեր սոցիալական ցանցերը",
@@ -15,7 +15,7 @@
   "LightTheme": "Բաց ոճ",
   "LogoutActiveConnection": "Դուրս եկեք ակտիվ կապից",
   "LogoutAllActiveConnections": "Դուրս եկեք բոլոր ակտիվ կապերից",
-  "LogoutAllActiveSessions": "Դուրս եկեք բոլոր ակտիվ նիստերից",
+  "LogoutAllActiveSessions": "Դուրս գալ բոլոր ակտիվ սեսիաներից",
   "LogoutAllActiveSessionsDescription": "Բոլոր ակտիվ կապերը, բացի այս կապից, դուրս կգրվեն, քանի որ այն ներկայումս օգտագործվում է:",
   "LogoutBtn": "Դուրս գալ",
   "LogoutDescription": "Նշում. Բոլոր ակտիվ կապերը, բացի այս կապից, դուրս կգրվեն, քանի որ այն ներկայումս օգտագործվում է:",

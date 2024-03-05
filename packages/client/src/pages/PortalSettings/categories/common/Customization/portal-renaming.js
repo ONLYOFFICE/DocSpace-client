@@ -1,12 +1,12 @@
 ﻿import React, { useState, useEffect, useCallback } from "react";
 import { withTranslation, Trans } from "react-i18next";
-import toastr from "@docspace/components/toast/toastr";
-import FieldContainer from "@docspace/components/field-container";
-import TextInput from "@docspace/components/text-input";
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
+import { toastr } from "@docspace/shared/components/toast";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
-import { isMobile } from "@docspace/components/utils/device";
+import { isMobile } from "@docspace/shared/utils";
 import checkScrollSettingsBlock from "../utils";
 import { StyledSettingsComponent, StyledScrollbar } from "./StyledSettings";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
@@ -14,8 +14,8 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import LoaderCustomization from "../sub-components/loaderCustomization";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { PortalRenamingDialog } from "SRC_DIR/components/dialogs";
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
 
 const PortalRenaming = (props) => {
   const {
@@ -33,6 +33,8 @@ const PortalRenaming = (props) => {
     currentColorScheme,
     renamingSettingsUrl,
     domainValidator,
+    setPortalName,
+    portalName,
   } = props;
 
   const navigate = useNavigate();
@@ -54,10 +56,8 @@ const PortalRenaming = (props) => {
       ? tenantAlias
       : portalNameDefaultFromSessionStorage;
 
-  const [portalName, setPortalName] = useState(portalNameInitially);
-
   const [portalNameDefault, setPortalNameDefault] = useState(
-    portalNameDefaultInitially
+    portalNameDefaultInitially,
   );
 
   const [isLoadingPortalNameSave, setIsLoadingPortalNameSave] = useState(false);
@@ -78,7 +78,9 @@ const PortalRenaming = (props) => {
 
   useEffect(() => {
     setDocumentTitle(t("PortalRenaming"));
-    if (!isLoaded) initSettings().then(() => setIsLoaded(true));
+    setPortalName(portalNameInitially);
+    const page = isMobileView ? "language-and-time-zone" : "general";
+    if (!isLoaded) initSettings(page).then(() => setIsLoaded(true));
 
     const checkScroll = checkScrollSettingsBlock();
     checkInnerWidth();
@@ -192,14 +194,14 @@ const PortalRenaming = (props) => {
           t("PortalNameLength", {
             minLength: domainValidator.minLength,
             maxLength: domainValidator.maxLength,
-          })
+          }),
         );
         saveToSessionStorage(
           "errorValue",
           t("PortalNameLength", {
             minLength: domainValidator.minLength,
             maxLength: domainValidator.maxLength,
-          })
+          }),
         );
         break;
       case !validDomain.test(value):
@@ -241,7 +243,7 @@ const PortalRenaming = (props) => {
 
       const currentUrl = window.location.href.replace(
         window.location.origin,
-        ""
+        "",
       );
 
       const newUrl = "/portal-settings/customization/general";
@@ -307,7 +309,7 @@ const PortalRenaming = (props) => {
         </Text>
         <Link
           className="link-learn-more"
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
           target="_blank"
           isHovered
           href={renamingSettingsUrl}
@@ -342,7 +344,7 @@ const PortalRenaming = (props) => {
   );
 };
 
-export default inject(({ auth, setup, common }) => {
+export default inject(({ settingsStore, setup, common }) => {
   const {
     theme,
     tenantAlias,
@@ -350,10 +352,16 @@ export default inject(({ auth, setup, common }) => {
     currentColorScheme,
     renamingSettingsUrl,
     domainValidator,
-  } = auth.settingsStore;
+  } = settingsStore;
   const { setPortalRename } = setup;
-  const { isLoaded, setIsLoadedPortalRenaming, initSettings, setIsLoaded } =
-    common;
+  const {
+    isLoaded,
+    setIsLoadedPortalRenaming,
+    initSettings,
+    setIsLoaded,
+    setPortalName,
+    portalName,
+  } = common;
 
   return {
     theme,
@@ -367,7 +375,11 @@ export default inject(({ auth, setup, common }) => {
     currentColorScheme,
     renamingSettingsUrl,
     domainValidator,
+    portalName,
+    setPortalName,
   };
 })(
-  withLoading(withTranslation(["Settings", "Common"])(observer(PortalRenaming)))
+  withLoading(
+    withTranslation(["Settings", "Common"])(observer(PortalRenaming)),
+  ),
 );

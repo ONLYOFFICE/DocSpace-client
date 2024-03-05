@@ -6,11 +6,10 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import EmptyContainer from "./EmptyContainer";
-import FilesFilter from "@docspace/common/api/files/filter";
-import RoomsFilter from "@docspace/common/api/rooms/filter";
-import Link from "@docspace/components/link";
-import IconButton from "@docspace/components/icon-button";
-import toastr from "@docspace/components/toast/toastr";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { Link } from "@docspace/shared/components/link";
 
 const EmptyFilterContainer = ({
   t,
@@ -25,6 +24,7 @@ const EmptyFilterContainer = ({
   theme,
   isPublicRoom,
   publicRoomKey,
+  userId,
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -32,7 +32,7 @@ const EmptyFilterContainer = ({
   const subheadingText = t("EmptyFilterSubheadingText");
   const descriptionText = isRooms
     ? t("Common:SearchEmptyRoomsDescription")
-    : t("EmptyFilterDescriptionText");
+    : t("Common:EmptyFilterDescriptionText");
 
   const onResetFilter = () => {
     setIsLoading(true);
@@ -41,11 +41,10 @@ const EmptyFilterContainer = ({
       setClearSearch(true);
       return;
     }
-
     if (isRoomsFolder) {
-      const newFilter = RoomsFilter.getDefault();
+      const newFilter = RoomsFilter.clean();
 
-      navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
+      navigate(`${location.pathname}?${newFilter.toUrlParams(userId)}`);
     } else {
       const newFilter = FilesFilter.getDefault();
 
@@ -53,7 +52,7 @@ const EmptyFilterContainer = ({
 
       if (isPublicRoom) {
         navigate(
-          `${location.pathname}?key=${publicRoomKey}&${newFilter.toUrlParams()}`
+          `${location.pathname}?key=${publicRoomKey}&${newFilter.toUrlParams()}`,
         );
       } else {
         navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
@@ -92,17 +91,19 @@ const EmptyFilterContainer = ({
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     filesStore,
     selectedFolderStore,
     treeFoldersStore,
     clientLoadingStore,
     publicRoomStore,
+    userStore,
   }) => {
     const { isRoomsFolder, isArchiveFolder } = treeFoldersStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder;
     const { isPublicRoom, publicRoomKey } = publicRoomStore;
+    const { user } = userStore;
 
     return {
       selectedFolderId: selectedFolderStore.id,
@@ -111,10 +112,11 @@ export default inject(
       isArchiveFolder,
       isRoomsFolder,
       setClearSearch: filesStore.setClearSearch,
-      theme: auth.settingsStore.theme,
+      theme: settingsStore.theme,
+      userId: user?.id,
 
       isPublicRoom,
       publicRoomKey,
     };
-  }
+  },
 )(withTranslation(["Files", "Common"])(observer(EmptyFilterContainer)));

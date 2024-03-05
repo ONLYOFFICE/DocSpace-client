@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import Text from "@docspace/components/text";
-import Button from "@docspace/components/button";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
 import { useTranslation } from "react-i18next";
 
 const RoundedButton = styled(Button)`
@@ -37,6 +37,7 @@ const StatusBadgeSelector = ({
       label={label}
       onClick={handleOnClick}
       primary={isStatusSelected(statusCode)}
+      size="extraSmall"
     />
   );
 };
@@ -77,7 +78,7 @@ const StatusPicker = ({ filters, setFilters }) => {
         handleStatusClick={handleStatusClick}
         key={code}
       />
-    )
+    ),
   );
 
   return (

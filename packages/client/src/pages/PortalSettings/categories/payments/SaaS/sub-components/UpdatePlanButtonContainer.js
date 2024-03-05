@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import Button from "@docspace/components/button";
+import { Button } from "@docspace/shared/components/button";
 import styled from "styled-components";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 import DowngradePlanButtonContainer from "./DowngradePlanButtonContainer";
-import api from "@docspace/common/api";
+import api from "@docspace/shared/api";
 import { Trans } from "react-i18next";
-import { updatePayment } from "@docspace/common/api/portal";
+import { updatePayment } from "@docspace/shared/api/portal";
 
 const StyledBody = styled.div`
   button {
@@ -63,7 +63,7 @@ const UpdatePlanButtonContainer = ({
   const resetIntervalSuccess = () => {
     intervalId &&
       toastr.success(
-        t("BusinessUpdated", { planName: currentTariffPlanTitle })
+        t("BusinessUpdated", { planName: currentTariffPlanTitle }),
       );
     clearInterval(intervalId);
     intervalId = null;
@@ -186,42 +186,43 @@ const UpdatePlanButtonContainer = ({
   );
 };
 
-export default inject(({ auth, payments }) => {
-  const { currentTariffStatusStore, currentQuotaStore } = auth;
-  const {
-    maxCountManagersByQuota,
-    setPortalQuotaValue,
-    currentTariffPlanTitle,
-  } = currentQuotaStore;
+export default inject(
+  ({ currentQuotaStore, paymentStore, currentTariffStatusStore }) => {
+    const {
+      maxCountManagersByQuota,
+      setPortalQuotaValue,
+      currentTariffPlanTitle,
+    } = currentQuotaStore;
 
-  const { isNotPaidPeriod, isGracePeriod } = currentTariffStatusStore;
+    const { isNotPaidPeriod, isGracePeriod } = currentTariffStatusStore;
 
-  const {
-    setIsLoading,
-    paymentLink,
-    isNeedRequest,
-    isLoading,
-    managersCount,
-    isLessCountThanAcceptable,
-    accountLink,
-    isAlreadyPaid,
-    canPayTariff,
-  } = payments;
+    const {
+      setIsLoading,
+      paymentLink,
+      isNeedRequest,
+      isLoading,
+      managersCount,
+      isLessCountThanAcceptable,
+      accountLink,
+      isAlreadyPaid,
+      canPayTariff,
+    } = paymentStore;
 
-  return {
-    canPayTariff,
-    isAlreadyPaid,
-    setIsLoading,
-    paymentLink,
-    isNeedRequest,
-    isLoading,
-    managersCount,
-    maxCountManagersByQuota,
-    isLessCountThanAcceptable,
-    isNotPaidPeriod,
-    isGracePeriod,
-    accountLink,
-    setPortalQuotaValue,
-    currentTariffPlanTitle,
-  };
-})(observer(UpdatePlanButtonContainer));
+    return {
+      canPayTariff,
+      isAlreadyPaid,
+      setIsLoading,
+      paymentLink,
+      isNeedRequest,
+      isLoading,
+      managersCount,
+      maxCountManagersByQuota,
+      isLessCountThanAcceptable,
+      isNotPaidPeriod,
+      isGracePeriod,
+      accountLink,
+      setPortalQuotaValue,
+      currentTariffPlanTitle,
+    };
+  },
+)(observer(UpdatePlanButtonContainer));

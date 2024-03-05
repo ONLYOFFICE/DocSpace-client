@@ -1,12 +1,16 @@
 import { action, makeObservable, observable } from "mobx";
-import Filter from "@docspace/common/api/people/filter";
+import Filter from "@docspace/shared/api/people/filter";
 import config from "PACKAGE_FILE";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 class FilterStore {
+  userStore = null;
+
   filter = Filter.getDefault();
 
-  constructor() {
+  constructor(userStore) {
+    this.userStore = userStore;
+
     makeObservable(this, {
       filter: observable,
       setFilterParams: action,
@@ -18,14 +22,14 @@ class FilterStore {
 
   setFilterUrl = (filter) => {
     const urlFilter = filter.toUrlParams();
+    const newPath = combineUrl(`/accounts/people/filter?${urlFilter}`);
+
+    if (window.location.pathname + window.location.search === newPath) return;
+
     window.history.replaceState(
       "",
       "",
-      combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
-        config.homepage,
-        `/accounts/filter?${urlFilter}`
-      )
+      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, newPath),
     );
   };
 
@@ -39,6 +43,10 @@ class FilterStore {
   };
 
   setFilter = (filter) => {
+    const key = `PeopleFilter=${this.userStore.user.id}`;
+    const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
+    localStorage.setItem(key, value);
+
     this.filter = filter;
   };
 
@@ -53,7 +61,9 @@ class FilterStore {
       this.filter.payments ||
       this.filter.search ||
       this.filter.role ||
-      this.filter.accountLoginType
+      this.filter.accountLoginType ||
+      this.filter.withoutGroup ||
+      this.filter.group
     );
   }
 }

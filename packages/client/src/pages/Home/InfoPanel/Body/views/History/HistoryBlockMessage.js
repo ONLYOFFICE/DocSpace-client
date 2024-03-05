@@ -1,7 +1,7 @@
 import React from "react";
 import { Trans } from "react-i18next";
 
-import { FeedActionTypes, FeedItemTypes } from "@docspace/common/constants";
+import { FeedActionTypes, FeedItemTypes } from "@docspace/shared/enums";
 
 import { StyledHistoryBlockMessage } from "../../styles/history";
 import getBlockMessageTranslation from "./HistroryBlockMessageTranslations";
@@ -10,9 +10,8 @@ const HistoryBlockMessage = ({
   t,
   action,
   groupedActions,
-  selection,
   selectedFolder,
-  selectionParentRoom,
+  infoPanelSelection,
 }) => {
   const message = getBlockMessageTranslation(
     t,
@@ -31,7 +30,7 @@ const HistoryBlockMessage = ({
 
     const itemLocationId = +action.ExtraLocation;
     if (selectedFolder?.id === itemLocationId) return "";
-    if (selection?.isRoom && selectionParentRoom?.id === itemLocationId)
+    if (infoPanelSelection?.isRoom && infoPanelSelection?.id === itemLocationId)
       return "";
 
     const folderTitle = action.ExtraLocationTitle;

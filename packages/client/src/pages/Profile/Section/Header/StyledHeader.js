@@ -1,29 +1,29 @@
 import styled, { css } from "styled-components";
-import { tablet } from "@docspace/components/utils/device";
+import { tablet } from "@docspace/shared/utils";
 
 export const StyledHeader = styled.div`
   position: relative;
 
-  display: grid;
-  grid-template-columns: ${(props) =>
-    props.showContextButton ? "auto auto auto 1fr" : "auto 1fr"};
+  display: flex;
   align-items: center;
 
-  @media ${tablet} {
-    grid-template-columns: ${(props) =>
-      props.showContextButton ? "auto 1fr auto" : "auto 1fr"};
-  }
-
   .action-button {
+    width: 100%;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-direction: row;
+
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
-            margin-right: 16px;
+            margin-right: 17px;
           `
         : css`
-            margin-left: 16px;
+            margin-left: 17px;
           `}
     @media ${tablet} {
+      flex-direction: row-reverse;
       ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
@@ -45,6 +45,17 @@ export const StyledHeader = styled.div`
               `}
       }
     }
+
+    .tariff-bar {
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-right: auto;
+            `
+          : css`
+              margin-left: auto;
+            `}
+    }
   }
   .arrow-button {
     ${(props) =>
@@ -57,16 +68,23 @@ export const StyledHeader = styled.div`
       margin-left: -16px;
       margin-right: -16px;
     }
+
+    padding-top: 1px;
+    width: 17px;
+    min-width: 17px;
   }
 
   .header-headline {
+    white-space: nowrap;
+    line-height: 25px;
+
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
-            margin-right: 16px;
+            margin-right: 17px;
           `
         : css`
-            margin-left: 16px;
+            margin-left: 17px;
           `}
   }
 `;

@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import Text from "@docspace/components/text";
-import HelpButton from "@docspace/components/help-button";
-import FieldContainer from "@docspace/components/field-container";
-import TextInput from "@docspace/components/text-input";
-import Button from "@docspace/components/button";
-import Badge from "@docspace/components/badge";
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
-import toastr from "@docspace/components/toast/toastr";
-
-import { size } from "@docspace/components/utils/device";
+import { Text } from "@docspace/shared/components/text";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { Button } from "@docspace/shared/components/button";
+import { Badge } from "@docspace/shared/components/badge";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
+import { toastr } from "@docspace/shared/components/toast";
+import { isManagement } from "@docspace/shared/utils/common";
+import { size } from "@docspace/shared/utils";
 
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import WhiteLabelWrapper from "./StyledWhitelabel";
@@ -26,6 +26,7 @@ import {
 } from "../../../utils/whiteLabelHelper";
 
 import isEqual from "lodash/isEqual";
+import { DeviceType } from "@docspace/shared/enums";
 
 const WhiteLabel = (props) => {
   const {
@@ -42,6 +43,9 @@ const WhiteLabel = (props) => {
     setLogoUrlsWhiteLabel,
     defaultLogoTextWhiteLabel,
     enableRestoreButton,
+
+    currentDeviceType,
+    resetIsInit,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -50,21 +54,35 @@ const WhiteLabel = (props) => {
   const [logoTextWhiteLabel, setLogoTextWhiteLabel] = useState("");
   const [isSaving, setIsSaving] = useState(false);
 
+  const isMobileView = currentDeviceType === DeviceType.mobile;
+
   const init = async () => {
-    await initSettings();
+    const isWhiteLabelPage = location.pathname.includes("white-label");
+
+    if ((isMobileView && isWhiteLabelPage) || !isMobileView) {
+      const page = isMobileView ? "white-label" : "branding";
+      await initSettings(page);
+    }
   };
 
   useEffect(() => {
     init();
     checkWidth();
     window.addEventListener("resize", checkWidth);
-    return () => window.removeEventListener("resize", checkWidth);
+    return () => {
+      window.removeEventListener("resize", checkWidth);
+      resetIsInit();
+    };
   }, []);
 
   const checkWidth = () => {
+    const url = isManagement()
+      ? "/branding"
+      : "/portal-settings/customization/branding";
+
     window.innerWidth > size.mobile &&
       location.pathname.includes("white-label") &&
-      navigate("/portal-settings/customization/branding");
+      navigate(url);
   };
 
   useEffect(() => {
@@ -130,7 +148,7 @@ const WhiteLabel = (props) => {
 
   const onRestoreDefault = async () => {
     try {
-      await restoreWhiteLabelSettings(true);
+      await restoreWhiteLabelSettings();
       await onResetCompanyName();
       toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
     } catch (error) {
@@ -491,7 +509,7 @@ const WhiteLabel = (props) => {
   );
 };
 
-export default inject(({ setup, auth, common }) => {
+export default inject(({ settingsStore, common, currentQuotaStore }) => {
   const {
     setLogoText,
     whiteLabelLogoText,
@@ -503,14 +521,16 @@ export default inject(({ setup, auth, common }) => {
     setLogoUrlsWhiteLabel,
     defaultLogoTextWhiteLabel,
     enableRestoreButton,
+    resetIsInit,
   } = common;
 
-  const { whiteLabelLogoUrls: defaultWhiteLabelLogoUrls } = auth.settingsStore;
-  const { isBrandingAndCustomizationAvailable } = auth.currentQuotaStore;
+  const { whiteLabelLogoUrls: defaultWhiteLabelLogoUrls, currentDeviceType } =
+    settingsStore;
+  const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
 
   return {
     setLogoText,
-    theme: auth.settingsStore.theme,
+    theme: settingsStore.theme,
     logoText: whiteLabelLogoText,
     getWhiteLabelLogoText,
     saveWhiteLabelSettings,
@@ -522,5 +542,8 @@ export default inject(({ setup, auth, common }) => {
     setLogoUrlsWhiteLabel,
     defaultLogoTextWhiteLabel,
     enableRestoreButton,
+
+    currentDeviceType,
+    resetIsInit,
   };
 })(withTranslation(["Settings", "Profile", "Common"])(observer(WhiteLabel)));

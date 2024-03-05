@@ -1,39 +1,36 @@
 import React, { useState } from "react";
 import { withTranslation } from "react-i18next";
-import Text from "@docspace/components/text";
-import TextInput from "@docspace/components/text-input";
-import PasswordInput from "@docspace/components/password-input";
-import Button from "@docspace/components/button";
-import FieldContainer from "@docspace/components/field-container";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { PasswordInput } from "@docspace/shared/components/password-input";
+import { Button } from "@docspace/shared/components/button";
+import { FieldContainer } from "@docspace/shared/components/field-container";
 import { inject, observer } from "mobx-react";
-import { EmployeeActivationStatus } from "@docspace/common/constants";
+import { EmployeeActivationStatus } from "@docspace/shared/enums";
 import {
   changePassword,
   updateActivationStatus,
   updateUser,
-} from "@docspace/common/api/people";
-import { createPasswordHash } from "@docspace/common/utils";
-import toastr from "@docspace/components/toast/toastr";
-import {
-  StyledPage,
-  StyledContent,
-  StyledBody,
-  StyledHeader,
-} from "./StyledConfirm";
+} from "@docspace/shared/api/people";
+import { createPasswordHash } from "@docspace/shared/utils/common";
+import { toastr } from "@docspace/shared/components/toast";
+import { getPasswordErrorMessage } from "@docspace/shared/utils/getPasswordErrorMessage";
+import { FormWrapper } from "@docspace/shared/components/form-wrapper";
+
+import { StyledPage, StyledHeader } from "./StyledConfirm";
 import withLoader from "../withLoader";
-import { getPasswordErrorMessage } from "SRC_DIR/helpers/utils";
+
+import {
+  GreetingContainer,
+  RegisterContainer,
+  StyledCreateUserContent,
+} from "./StyledCreateUser";
+import DocspaceLogo from "SRC_DIR/components/DocspaceLogoWrapper";
+import GreetingUserContainer from "./GreetingUserContainer";
 
 const ActivateUserForm = (props) => {
-  const {
-    t,
-    greetingTitle,
-    settings,
-    linkData,
-    hashSettings,
-    defaultPage,
-    login,
-  } = props;
+  const { t, settings, linkData, hashSettings, defaultPage, login } = props;
 
+  const emailFromLink = linkData?.email ? linkData.email : "";
   const [name, setName] = useState(linkData.firstname);
   const [nameValid, setNameValid] = useState(true);
   const [surName, setSurName] = useState(linkData.lastname);
@@ -65,7 +62,7 @@ const ActivateUserForm = (props) => {
     setIsPasswordErrorShow(true);
   };
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     setIsLoading(true);
     if (!name.trim()) setNameValid(false);
     if (!surName.trim()) setSurNameValid(false);
@@ -91,22 +88,23 @@ const ActivateUserForm = (props) => {
       lastname: surName,
     };
 
-    activateConfirmUser(
-      personalData,
-      loginData,
-      linkData.confirmHeader,
-      linkData.uid,
-      EmployeeActivationStatus.Activated
-    )
-      .then(() => {
-        setIsLoading(false);
-        window.location.replace(defaultPage);
-      })
-      .catch((error) => {
-        //console.error(error);
-        setIsLoading(false);
-        toastr.error(error);
-      });
+    try {
+      await activateConfirmUser(
+        personalData,
+        loginData,
+        linkData.confirmHeader,
+        linkData.uid,
+        EmployeeActivationStatus.Activated,
+      );
+
+      setIsLoading(false);
+
+      window.location.replace(defaultPage);
+    } catch (error) {
+      //console.error(error);
+      setIsLoading(false);
+      toastr.error(error);
+    }
   };
 
   const activateConfirmUser = async (
@@ -114,7 +112,7 @@ const ActivateUserForm = (props) => {
     loginData,
     key,
     userId,
-    activationStatus
+    activationStatus,
   ) => {
     const changedData = {
       id: userId,
@@ -138,134 +136,141 @@ const ActivateUserForm = (props) => {
 
   return (
     <StyledPage>
-      <StyledContent>
-        <StyledBody>
-          <StyledHeader>
-            <Text fontSize="23px" fontWeight="700" className="title">
-              {greetingTitle}
-            </Text>
+      <StyledCreateUserContent>
+        <StyledHeader>
+          <GreetingContainer>
+            <DocspaceLogo className="docspace-logo" />
+          </GreetingContainer>
+        </StyledHeader>
 
-            <Text className="subtitle">{t("InviteTitle")}</Text>
-          </StyledHeader>
+        <FormWrapper>
+          <RegisterContainer>
+            <form className="auth-form-container">
+              <GreetingUserContainer
+                emailFromLink={!!emailFromLink}
+                email={emailFromLink}
+              />
 
-          <FieldContainer
-            className="form-field"
-            isVertical={true}
-            labelVisible={false}
-            hasError={!nameValid}
-            errorMessage={t("Common:RequiredField")}
-          >
-            <TextInput
-              id="name"
-              name="name"
-              value={name}
-              placeholder={t("Common:FirstName")}
-              size="large"
-              scale={true}
-              tabIndex={1}
-              isAutoFocussed={true}
-              autoComplete="given-name"
-              onChange={onChangeName}
-              onKeyDown={onKeyPress}
-            />
-          </FieldContainer>
+              <FieldContainer
+                className="form-field"
+                isVertical={true}
+                labelVisible={false}
+                hasError={!nameValid}
+                errorMessage={t("Common:RequiredField")}
+              >
+                <TextInput
+                  id="name"
+                  name="name"
+                  value={name}
+                  placeholder={t("Common:FirstName")}
+                  size="large"
+                  scale={true}
+                  tabIndex={1}
+                  isAutoFocussed={true}
+                  autoComplete="given-name"
+                  onChange={onChangeName}
+                  onKeyDown={onKeyPress}
+                />
+              </FieldContainer>
 
-          <FieldContainer
-            className="form-field"
-            isVertical={true}
-            labelVisible={false}
-            hasError={!surNameValid}
-            errorMessage={t("Common:RequiredField")}
-          >
-            <TextInput
-              id="surname"
-              name="surname"
-              value={surName}
-              placeholder={t("Common:LastName")}
-              size="large"
-              scale={true}
-              tabIndex={2}
-              autoComplete="family-name"
-              onChange={onChangeSurName}
-              onKeyDown={onKeyPress}
-            />
-          </FieldContainer>
+              <FieldContainer
+                className="form-field"
+                isVertical={true}
+                labelVisible={false}
+                hasError={!surNameValid}
+                errorMessage={t("Common:RequiredField")}
+              >
+                <TextInput
+                  id="surname"
+                  name="surname"
+                  value={surName}
+                  placeholder={t("Common:LastName")}
+                  size="large"
+                  scale={true}
+                  tabIndex={2}
+                  autoComplete="family-name"
+                  onChange={onChangeSurName}
+                  onKeyDown={onKeyPress}
+                />
+              </FieldContainer>
 
-          <FieldContainer
-            className="form-field"
-            isVertical={true}
-            labelVisible={false}
-            hasError={isPasswordErrorShow && !passwordValid}
-            errorMessage={`${t(
-              "Common:PasswordLimitMessage"
-            )}: ${getPasswordErrorMessage(t, settings)}`}
-          >
-            <PasswordInput
-              className="confirm-input"
-              simpleView={false}
-              passwordSettings={settings}
-              id="password"
-              inputName="password"
-              placeholder={t("Common:Password")}
-              type="password"
-              inputValue={password}
-              hasError={isPasswordErrorShow && !passwordValid}
-              size="large"
-              scale={true}
-              tabIndex={1}
-              autoComplete="current-password"
-              onChange={onChangePassword}
-              onValidateInput={onValidatePassword}
-              onBlur={onBlurPassword}
-              onKeyDown={onKeyPress}
-              tooltipPasswordTitle={`${t("Common:PasswordLimitMessage")}:`}
-              tooltipPasswordLength={`${t("Common:PasswordMinimumLength")}: ${
-                settings ? settings.minLength : 8
-              }`}
-              tooltipPasswordDigits={`${t("Common:PasswordLimitDigits")}`}
-              tooltipPasswordCapital={`${t("Common:PasswordLimitUpperCase")}`}
-              tooltipPasswordSpecial={`${t(
-                "Common:PasswordLimitSpecialSymbols"
-              )}`}
-              generatePasswordTitle={t("Wizard:GeneratePassword")}
-              // If need copy credentials use t("EmailAndPasswordCopiedToClipboard")
-            />
-          </FieldContainer>
+              <FieldContainer
+                className="form-field password-field"
+                isVertical={true}
+                labelVisible={false}
+                hasError={isPasswordErrorShow && !passwordValid}
+                errorMessage={`${t(
+                  "Common:PasswordLimitMessage",
+                )}: ${getPasswordErrorMessage(t, settings)}`}
+              >
+                <PasswordInput
+                  className="confirm-input"
+                  simpleView={false}
+                  passwordSettings={settings}
+                  id="password"
+                  inputName="password"
+                  placeholder={t("Common:Password")}
+                  type="password"
+                  inputValue={password}
+                  hasError={isPasswordErrorShow && !passwordValid}
+                  size="large"
+                  scale={true}
+                  tabIndex={1}
+                  autoComplete="current-password"
+                  onChange={onChangePassword}
+                  onValidateInput={onValidatePassword}
+                  onBlur={onBlurPassword}
+                  onKeyDown={onKeyPress}
+                  tooltipPasswordTitle={`${t("Common:PasswordLimitMessage")}:`}
+                  tooltipPasswordLength={`${t("Common:PasswordMinimumLength")}: ${
+                    settings ? settings.minLength : 8
+                  }`}
+                  tooltipPasswordDigits={`${t("Common:PasswordLimitDigits")}`}
+                  tooltipPasswordCapital={`${t("Common:PasswordLimitUpperCase")}`}
+                  tooltipPasswordSpecial={`${t(
+                    "Common:PasswordLimitSpecialSymbols",
+                  )}`}
+                  generatePasswordTitle={t("Wizard:GeneratePassword")}
+                  // If need copy credentials use t("EmailAndPasswordCopiedToClipboard")
+                />
+              </FieldContainer>
 
-          <Button
-            className="confirm-button"
-            primary
-            size="normal"
-            label={t("LoginRegistryButton")}
-            tabIndex={5}
-            onClick={onSubmit}
-            isDisabled={isLoading}
-          />
-        </StyledBody>
-      </StyledContent>
+              <Button
+                scale
+                className="confirm-button"
+                primary
+                size="medium"
+                label={t("LoginRegistryButton")}
+                tabIndex={5}
+                onClick={onSubmit}
+                isDisabled={isLoading}
+              />
+            </form>
+          </RegisterContainer>
+        </FormWrapper>
+      </StyledCreateUserContent>
     </StyledPage>
   );
 };
 
-export default inject(({ auth }) => {
+export default inject(({ authStore, settingsStore }) => {
   const {
     greetingSettings,
     hashSettings,
     defaultPage,
     passwordSettings,
     theme,
-  } = auth.settingsStore;
+  } = settingsStore;
 
   return {
     theme,
     settings: passwordSettings,
-    greetingTitle: greetingSettings,
     hashSettings,
     defaultPage,
-    login: auth.login,
+    login: authStore.login,
   };
 })(
   withTranslation(["Confirm", "Common", "Wizard"])(
-    withLoader(observer(ActivateUserForm))
-  )
+    withLoader(observer(ActivateUserForm)),
+  ),
 );

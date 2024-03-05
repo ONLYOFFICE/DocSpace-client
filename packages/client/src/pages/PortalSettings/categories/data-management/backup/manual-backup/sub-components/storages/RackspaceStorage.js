@@ -1,9 +1,9 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import Button from "@docspace/components/button";
+import { Button } from "@docspace/shared/components/button";
 import RackspaceSettings from "../../../consumer-storage-settings/RackspaceSettings";
-import { ThirdPartyStorages } from "@docspace/common/constants";
+import { ThirdPartyStorages } from "@docspace/shared/enums";
 import { getFromLocalStorage } from "../../../../../../utils";
 
 class RackspaceStorage extends React.Component {

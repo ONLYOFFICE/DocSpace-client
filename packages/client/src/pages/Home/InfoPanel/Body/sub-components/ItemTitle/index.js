@@ -3,28 +3,41 @@ import { inject, observer } from "mobx-react";
 import AccountsItemTitle from "./AccountsItemTitle";
 import GalleryItemTitle from "./GalleryItemTitle";
 import RoomsItemHeader from "./Rooms";
+import GroupsItemTitle from "./GroupsItemTitle";
 
 const ItemTitle = ({
-  selection,
+  infoPanelSelection,
   gallerySelected,
   isNoItem,
-  isAccounts,
+  isPeople,
+  isGroups,
   isGallery,
   isSeveralItems,
   selectionLength,
   currentColorScheme,
   getIcon,
   getUserContextOptions,
+  getGroupContextOptions,
 }) => {
-  if (!selection) return null;
+  if (!infoPanelSelection) return null;
   if (isNoItem) return null;
 
-  if (isAccounts)
+  if (isPeople)
     return (
       <AccountsItemTitle
-        selection={selection}
+        infoPanelSelection={infoPanelSelection}
         isSeveralItems={isSeveralItems}
         getUserContextOptions={getUserContextOptions}
+        selectionLength={selectionLength}
+      />
+    );
+
+  if (isGroups)
+    return (
+      <GroupsItemTitle
+        infoPanelSelection={infoPanelSelection}
+        isSeveralItems={isSeveralItems}
+        getGroupContextOptions={getGroupContextOptions}
         selectionLength={selectionLength}
       />
     );
@@ -41,16 +54,20 @@ const ItemTitle = ({
   return <RoomsItemHeader />;
 };
 
-export default inject(({ auth, settingsStore, peopleStore, oformsStore }) => {
-  const { currentColorScheme } = auth.settingsStore;
-  const { getIcon } = settingsStore;
-  const { getUserContextOptions } = peopleStore.contextOptionsStore;
-  const { gallerySelected } = oformsStore;
+export default inject(
+  ({ settingsStore, filesSettingsStore, peopleStore, oformsStore }) => {
+    const { currentColorScheme } = settingsStore;
+    const { getIcon } = filesSettingsStore;
+    const { getUserContextOptions } = peopleStore.contextOptionsStore;
+    const { getGroupContextOptions } = peopleStore.groupsStore;
+    const { gallerySelected } = oformsStore;
 
-  return {
-    currentColorScheme,
-    gallerySelected,
-    getUserContextOptions,
-    getIcon,
-  };
-})(observer(ItemTitle));
+    return {
+      currentColorScheme,
+      gallerySelected,
+      getUserContextOptions,
+      getGroupContextOptions,
+      getIcon,
+    };
+  },
+)(observer(ItemTitle));

@@ -1,12 +1,12 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
-import TableCell from "@docspace/components/table-container/TableCell";
+import { TableCell } from "@docspace/shared/components/table";
 import FileNameCell from "./FileNameCell";
 import TypeCell from "./TypeCell";
 import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
 import SizeCell from "./SizeCell";
-import { classNames } from "@docspace/components/utils/classNames";
+import { classNames } from "@docspace/shared/utils";
 import {
   StyledBadgesContainer,
   StyledQuickButtonsContainer,
@@ -40,7 +40,7 @@ const RowDataComponent = (props) => {
         {...dragStyles}
         className={classNames(
           selectionProp?.className,
-          "table-container_file-name-cell"
+          "table-container_file-name-cell",
         )}
         value={value}
       >
@@ -151,7 +151,7 @@ const RowDataComponent = (props) => {
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
-            "table-container_quick-buttons-wrapper"
+            "table-container_quick-buttons-wrapper",
           )}
         >
           <StyledQuickButtonsContainer>

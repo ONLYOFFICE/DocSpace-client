@@ -1,10 +1,5 @@
 {
-  "Error401Text": "На жаль, ресурс наразі недоступний.",
-  "Error403Text": "На жаль, доступ заборонено.",
-  "Error404Text": "На жаль, ресурс неможливо знайти.",
-  "ErrorDeactivatedText": "Цей DocSpace деактивовано",
   "ErrorEmptyResponse": "Пуста відповідь",
-  "ErrorOfflineText": "Підключення до Інтернету не знайдено",
   "ErrorUnavailableText": "DocSpace недоступний",
   "InvalidLink": "Недійсне посилання",
   "LinkDoesNotExist": "Посилання, яке ви намагаєтеся відкрити, не існує.",

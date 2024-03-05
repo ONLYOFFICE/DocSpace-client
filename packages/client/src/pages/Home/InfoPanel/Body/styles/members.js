@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 
 const StyledUserTypeHeader = styled.div`
   display: flex;
@@ -37,10 +37,20 @@ const StyledUser = styled.div`
     min-height: 32px;
   }
 
+  .user_body-wrapper {
+    overflow: auto;
+  }
+
+  .name-wrapper,
+  .role-email {
+    display: flex;
+  }
+
   .name {
     font-weight: 600;
     font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
-    line-height: 16px;
+    line-height: ${({ theme }) =>
+      theme.interfaceDirection === "rtl" ? `20px` : `16px`};
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -51,16 +61,11 @@ const StyledUser = styled.div`
   .me-label {
     font-weight: 600;
     font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
-    line-height: 16px;
+    line-height: ${({ theme }) =>
+      theme.interfaceDirection === "rtl" ? `20px` : `16px`};
     color: ${(props) => props.theme.infoPanel.members.meLabelColor};
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: -8px;
-          `
-        : css`
-            margin-left: -8px;
-          `}
+    padding-inline-start: 8px;
+    margin-inline-start: -8px;
   }
 
   .role-wrapper {

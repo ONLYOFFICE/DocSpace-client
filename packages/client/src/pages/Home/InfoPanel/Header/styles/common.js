@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
-import { Base } from "@docspace/components/themes";
-import { tablet } from "@docspace/components/utils/device";
+import { Base } from "@docspace/shared/themes";
+import { tablet } from "@docspace/shared/utils";
 
 const getHeaderHeight = ({ withSubmenu, isTablet }) => {
   let res = isTablet ? 53 : 69;
@@ -17,25 +17,25 @@ const StyledInfoPanelHeader = styled.div`
   width: 100%;
   max-width: 100%;
 
-  height: ${props => getHeaderHeight(props)};
-  min-height: ${props => getHeaderHeight(props)};
+  height: ${(props) => getHeaderHeight(props)};
+  min-height: ${(props) => getHeaderHeight(props)};
   @media ${tablet} {
-    height: ${props => getHeaderHeight({ ...props, isTablet: true })};
-    min-height: ${props => getHeaderHeight({ ...props, isTablet: true })};
+    height: ${(props) => getHeaderHeight({ ...props, isTablet: true })};
+    min-height: ${(props) => getHeaderHeight({ ...props, isTablet: true })};
   }
 
   display: flex;
   flex-direction: column;
-  border-bottom: ${props =>
+  border-bottom: ${(props) =>
     props.withSubmenu
       ? "none"
       : `1px solid ${props.theme.infoPanel.borderColor}`};
   .main {
-    height: ${props => getMainHeight(props)};
-    min-height: ${props => getMainHeight(props)};
+    height: ${(props) => getMainHeight(props)};
+    min-height: ${(props) => getMainHeight(props)};
     @media ${tablet} {
-      height: ${props => getMainHeight({ ...props, isTablet: true })};
-      min-height: ${props => getMainHeight({ ...props, isTablet: true })};
+      height: ${(props) => getMainHeight({ ...props, isTablet: true })};
+      min-height: ${(props) => getMainHeight({ ...props, isTablet: true })};
     }
 
     display: flex;
@@ -43,7 +43,7 @@ const StyledInfoPanelHeader = styled.div`
     align-items: center;
     justify-content: space-between;
     .header-text {
-      ${props =>
+      ${(props) =>
         props.theme.interfaceDirection === "rtl"
           ? css`
               margin-right: 20px;
@@ -55,7 +55,7 @@ const StyledInfoPanelHeader = styled.div`
   }
 
   .info-panel-toggle-bg {
-    ${props =>
+    ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
             margin-left: 20px;
@@ -74,7 +74,7 @@ const StyledInfoPanelHeader = styled.div`
       flex-direction: column;
       align-items: center;
       .bottom-line {
-        background-color: ${props => props.theme.infoPanel.borderColor};
+        background-color: ${(props) => props.theme.infoPanel.borderColor};
       }
     }
   }

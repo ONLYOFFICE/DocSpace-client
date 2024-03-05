@@ -1,10 +1,11 @@
 import { makeAutoObservable } from "mobx";
-import { getFoldersTree, getSubfolders } from "@docspace/common/api/files";
-import { FolderType } from "@docspace/common/constants";
+import { getFoldersTree, getSubfolders } from "@docspace/shared/api/files";
+import { FolderType } from "@docspace/shared/enums";
 
 class TreeFoldersStore {
   selectedFolderStore;
-  authStore;
+  settingsStore;
+  publicRoomStore;
 
   treeFolders = [];
   selectedTreeNode = [];
@@ -12,14 +13,17 @@ class TreeFoldersStore {
   rootFoldersTitles = {};
   isLoadingNodes = false;
 
-  constructor(selectedFolderStore, authStore) {
+  constructor(selectedFolderStore, settingsStore, publicRoomStore) {
     makeAutoObservable(this);
 
     this.selectedFolderStore = selectedFolderStore;
-    this.authStore = authStore;
+    this.settingsStore = settingsStore;
+    this.publicRoomStore = publicRoomStore;
   }
 
   fetchTreeFolders = async () => {
+    if (this.publicRoomStore.isPublicRoom) return;
+
     const treeFolders = await getFoldersTree();
     this.setRootFoldersTitles(treeFolders);
     this.setTreeFolders(treeFolders);
@@ -28,7 +32,7 @@ class TreeFoldersStore {
   };
 
   listenTreeFolders = (treeFolders) => {
-    const { socketHelper } = this.authStore.settingsStore;
+    const { socketHelper } = this.settingsStore;
 
     if (treeFolders.length > 0) {
       socketHelper.emit({
@@ -92,7 +96,11 @@ class TreeFoldersStore {
     });
   };
 
-  getFoldersTree = () => getFoldersTree();
+  getFoldersTree = () => {
+    if (this.publicRoomStore.isPublicRoom) return;
+
+    getFoldersTree();
+  };
 
   setTreeFolders = (treeFolders) => {
     this.treeFolders = treeFolders;
@@ -155,7 +163,7 @@ class TreeFoldersStore {
 
   get favoritesFolder() {
     return this.treeFolders.find(
-      (x) => x.rootFolderType === FolderType.Favorites
+      (x) => x.rootFolderType === FolderType.Favorites,
     );
   }
 
@@ -169,13 +177,13 @@ class TreeFoldersStore {
 
   get archiveFolder() {
     return this.treeFolders.find(
-      (x) => x.rootFolderType === FolderType.Archive
+      (x) => x.rootFolderType === FolderType.Archive,
     );
   }
 
   get privacyFolder() {
     return this.treeFolders.find(
-      (x) => x.rootFolderType === FolderType.Privacy
+      (x) => x.rootFolderType === FolderType.Privacy,
     );
   }
 
@@ -205,6 +213,14 @@ class TreeFoldersStore {
 
   get recycleBinFolderId() {
     return this.recycleBinFolder ? this.recycleBinFolder.id : null;
+  }
+
+  get isAccountsPeople() {
+    return window.location.pathname.includes("accounts/people");
+  }
+
+  get isAccountsGroups() {
+    return window.location.pathname.includes("accounts/groups");
   }
 
   get isPersonalRoom() {
@@ -288,6 +304,14 @@ class TreeFoldersStore {
 
   get isPersonalFolderRoot() {
     return FolderType.USER === this.selectedFolderStore.rootFolderType;
+  }
+
+  get isRecentTab() {
+    return this.selectedFolderStore.rootFolderType === FolderType.Recent;
+  }
+
+  get isRoot() {
+    return this.selectedFolderStore?.pathParts?.length === 1;
   }
 
   get selectedKeys() {

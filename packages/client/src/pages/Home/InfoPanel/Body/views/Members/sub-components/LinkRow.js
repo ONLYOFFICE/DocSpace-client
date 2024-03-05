@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import copy from "copy-to-clipboard";
-import Avatar from "@docspace/components/avatar";
-import Link from "@docspace/components/link";
-import Text from "@docspace/components/text";
-import IconButton from "@docspace/components/icon-button";
-import ContextMenuButton from "@docspace/components/context-menu-button";
-import { toastr } from "@docspace/components";
+import { Avatar } from "@docspace/shared/components/avatar";
+import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
+import { toastr } from "@docspace/shared/components/toast";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
-import UniverseReactSvgUrl from "PUBLIC_DIR/images/universe.react.svg?url";
+import LinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.reat.svg?url";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
 import ShareReactSvgUrl from "PUBLIC_DIR/images/share.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
@@ -19,10 +19,10 @@ import LockedReactSvgUrl from "PUBLIC_DIR/images/locked.react.svg?url";
 import LoadedReactSvgUrl from "PUBLIC_DIR/images/loaded.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 import ClockReactSvg from "PUBLIC_DIR/images/clock.react.svg";
-import moment from "moment";
-import { RoomsType } from "@docspace/common/constants";
+import moment from "moment-timezone";
+import { RoomsType } from "@docspace/shared/enums";
 
-import { StyledLinkRow } from "./StyledPublicRoom";
+import { StyledLinkRow } from "./Styled";
 
 const LinkRow = (props) => {
   const {
@@ -56,7 +56,7 @@ const LinkRow = (props) => {
 
   const isLocked = !!password;
   const expiryDate = !!expirationDate;
-  const date = moment(expirationDate).format("LLL");
+  const date = moment(expirationDate).tz(window.timezone).format("LLL");
 
   const tooltipContent = isExpired
     ? t("Translations:LinkHasExpiredAndHasBeenDisabled")
@@ -111,7 +111,7 @@ const LinkRow = (props) => {
 
   const onCopyExternalLink = () => {
     copy(shareLink);
-    toastr.success(t("Files:LinkSuccessfullyCopied"));
+    toastr.success(t("Common:LinkSuccessfullyCopied"));
     onCloseContextMenu();
   };
 
@@ -127,7 +127,7 @@ const LinkRow = (props) => {
     return [
       {
         key: "edit-link-key",
-        label: t("Files:EditLink"),
+        label: t("Files:LinkSettings"),
         icon: SettingsReactSvgUrl,
         onClick: onEditLink,
       },
@@ -150,7 +150,7 @@ const LinkRow = (props) => {
 
       !disabled && {
         key: "copy-link-settings-key",
-        label: primary ? t("Files:CopyGeneralLink") : t("Files:CopyLink"),
+        label: t("Files:CopySharedLink"),
         icon: CopyToReactSvgUrl,
         onClick: onCopyExternalLink,
       },
@@ -189,10 +189,10 @@ const LinkRow = (props) => {
   const textColor = disabled ? theme.text.disableColor : theme.text.color;
 
   return (
-    <StyledLinkRow {...rest} isExpired={isExpired} isPrimary={primary}>
+    <StyledLinkRow {...rest} isExpired={isExpired}>
       <Avatar
         size="min"
-        source={UniverseReactSvgUrl}
+        source={LinkReactSvgUrl}
         roleIcon={expiryDate ? <ClockReactSvg /> : null}
         withTooltip={expiryDate}
         tooltipContent={tooltipContent}
@@ -235,7 +235,7 @@ const LinkRow = (props) => {
               size={16}
               iconName={CopyReactSvgUrl}
               onClick={onCopyExternalLink}
-              title={t("Files:CopyGeneralLink")}
+              title={t("Files:CopySharedLink")}
             />
           </>
         )}
@@ -256,9 +256,15 @@ const LinkRow = (props) => {
 };
 
 export default inject(
-  ({ auth, dialogsStore, publicRoomStore, treeFoldersStore }) => {
-    const { selectionParentRoom } = auth.infoPanelStore;
-    const { theme } = auth.settingsStore;
+  ({
+    settingsStore,
+    dialogsStore,
+    publicRoomStore,
+    treeFoldersStore,
+    infoPanelStore,
+  }) => {
+    const { infoPanelSelection } = infoPanelStore;
+    const { theme } = settingsStore;
 
     const {
       setEditLinkPanelIsVisible,
@@ -272,18 +278,18 @@ export default inject(
     return {
       setLinkParams,
       editExternalLink,
-      roomId: selectionParentRoom.id,
+      roomId: infoPanelSelection.id,
       setExternalLink,
       setEditLinkPanelIsVisible,
       setDeleteLinkDialogVisible,
       setEmbeddingPanelIsVisible,
       isArchiveFolder: isArchiveFolderRoot,
       theme,
-      isPublicRoomType: selectionParentRoom.roomType === RoomsType.PublicRoom,
+      isPublicRoomType: infoPanelSelection.roomType === RoomsType.PublicRoom,
     };
-  }
+  },
 )(
   withTranslation(["SharingPanel", "Files", "Settings", "Translations"])(
-    observer(LinkRow)
-  )
+    observer(LinkRow),
+  ),
 );

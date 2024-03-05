@@ -3,7 +3,7 @@ import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 import { StyledNoItemContainer } from "../../styles/noItem";
 
 const NoAccountsItem = ({ t, theme }) => {
@@ -23,8 +23,8 @@ const NoAccountsItem = ({ t, theme }) => {
   );
 };
 
-export default inject(({ auth }) => {
+export default inject(({ settingsStore }) => {
   return {
-    theme: auth.settingsStore.theme,
+    theme: settingsStore.theme,
   };
 })(observer(NoAccountsItem));

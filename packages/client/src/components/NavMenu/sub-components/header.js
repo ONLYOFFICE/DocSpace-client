@@ -7,12 +7,12 @@ import { Link as LinkWithoutRedirect } from "react-router-dom";
 import { isMobileOnly, isMobile } from "react-device-detect";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { isDesktop, tablet, mobile } from "@docspace/components/utils/device";
-import { combineUrl } from "@docspace/common/utils";
-import NoUserSelect from "@docspace/components/utils/commonStyles";
+import { isDesktop, tablet, mobile } from "@docspace/shared/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { NoUserSelect } from "@docspace/shared/utils";
 import HeaderCatalogBurger from "./header-catalog-burger";
-import { Base } from "@docspace/components/themes";
-import { getLogoFromPath } from "@docspace/common/utils";
+import { Base } from "@docspace/shared/themes";
+import { getLogoFromPath } from "@docspace/shared/utils";
 
 const Header = styled.header`
   display: flex;
@@ -131,6 +131,7 @@ const HeaderComponent = ({
   toggleArticleOpen,
   logoUrl,
 
+  customHeader,
   ...props
 }) => {
   const { t } = useTranslation("Common");
@@ -223,20 +224,24 @@ const HeaderComponent = ({
         {((isPersonal && location.pathname.includes("files")) ||
           (!isPersonal && currentProductId !== "home")) &&
           !isFormGallery && <HeaderCatalogBurger onClick={toggleArticleOpen} />}
-        <LinkWithoutRedirect className="header-logo-wrapper" to={defaultPage}>
-          {!isPersonal ? (
-            <img alt="logo" src={logo} className="header-logo-icon" />
-          ) : (
-            <img
-              alt="logo"
-              className="header-logo-icon"
-              src={combineUrl(
-                window.DocSpaceConfig?.proxy?.url,
-                PersonalLogoReactSvgUrl
-              )}
-            />
-          )}
-        </LinkWithoutRedirect>
+        {customHeader ? (
+          <>{customHeader}</>
+        ) : (
+          <LinkWithoutRedirect className="header-logo-wrapper" to={defaultPage}>
+            {!isPersonal ? (
+              <img alt="logo" src={logo} className="header-logo-icon" />
+            ) : (
+              <img
+                alt="logo"
+                className="header-logo-icon"
+                src={combineUrl(
+                  window.DocSpaceConfig?.proxy?.url,
+                  PersonalLogoReactSvgUrl
+                )}
+              />
+            )}
+          </LinkWithoutRedirect>
+        )}
         {/* {isNavAvailable &&
           isDesktopView &&
           !isPersonal &&
@@ -330,17 +335,14 @@ HeaderComponent.propTypes = {
   needNavMenu: PropTypes.bool,
 };
 
-export default inject(({ auth }) => {
+export default inject(({ settingsStore, authStore }) => {
   const {
-    settingsStore,
-    userStore,
-
     isLoaded,
     isAuthenticated,
     isAdmin,
 
     version,
-  } = auth;
+  } = authStore;
   const {
     logoUrl,
     defaultPage,
@@ -349,9 +351,6 @@ export default inject(({ auth }) => {
     theme,
     toggleArticleOpen,
   } = settingsStore;
-
-  //TODO: restore when chat will complete -> const mainModules = availableModules.filter((m) => !m.isolateMode);
-  const { user } = userStore;
 
   return {
     theme,

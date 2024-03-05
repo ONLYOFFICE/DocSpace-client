@@ -10,7 +10,6 @@
   "MessageEmailConfirmed": "Jūsu e-pasts tika veiksmīgi aktivizēts.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "Lūdzu, ievadiet reģistrācijā izmantoto e-pasta adresi. Uz to tiks nosūtīti norādījumi paroles atkopšanai.",
   "NotFoundCode": "Vai nevarat atrast kodu? Pārbaudiet mapi Surogātpasts.",
-  "Or": "VAI",
   "PasswordRecoveryTitle": "Paroles atgūšana",
   "RecoverAccess": "Atgūt piekļuvi",
   "RecoverContactEmailPlaceholder": "E-pasts saziņai",

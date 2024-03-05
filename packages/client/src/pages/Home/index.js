@@ -1,19 +1,20 @@
 import React from "react";
-import { useLocation, useNavigate, Outlet } from "react-router-dom";
+import { useLocation, useNavigate, Outlet, useParams } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { showLoader, hideLoader } from "@docspace/common/utils";
+import { showLoader, hideLoader } from "@docspace/shared/utils/common";
 
-import Section from "@docspace/common/components/Section";
-
+import Section from "@docspace/shared/components/section";
+import SectionWrapper from "SRC_DIR/components/Section";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
 
 import {
   SectionFilterContent,
   SectionHeaderContent,
   SectionPagingContent,
+  SectionSubmenuContent,
   SectionWarningContent,
 } from "./Section";
 import AccountsDialogs from "./Section/AccountsBody/Dialogs";
@@ -29,6 +30,8 @@ import {
   useOperations,
   useAccounts,
   useSettings,
+  useGroups,
+  useInsideGroup,
 } from "./Hooks";
 
 const PureHome = (props) => {
@@ -38,6 +41,7 @@ const PureHome = (props) => {
 
     //homepage,
     setIsLoading,
+    isLoading,
 
     setToPreviewFile,
     playlist,
@@ -72,7 +76,6 @@ const PureHome = (props) => {
     files,
     selection,
     filesList,
-    removeFirstUrl,
 
     createFile,
     createFolder,
@@ -109,6 +112,8 @@ const PureHome = (props) => {
 
     accountsViewAs,
     fetchPeople,
+    fetchGroups,
+    fetchGroup,
     setSelectedNode,
     onClickBack,
 
@@ -125,14 +130,19 @@ const PureHome = (props) => {
     updateProfileCulture,
     getRooms,
     setSelectedFolder,
+    userId,
   } = props;
 
   const location = useLocation();
+  const { groupId } = useParams();
 
   const isSettingsPage =
     location.pathname.includes("settings") &&
     !location.pathname.includes("settings/plugins");
   const isAccountsPage = location.pathname.includes("/accounts");
+  const isPeopleAccounts = location.pathname.includes("accounts/people");
+  const isGroupsAccounts =
+    location.pathname.includes("accounts/groups") && !groupId;
 
   const { onDrop } = useFiles({
     t,
@@ -157,10 +167,10 @@ const PureHome = (props) => {
     setIsPreview,
 
     setIsUpdatingRowItem,
-    removeFirstUrl,
 
     gallerySelected,
     folderSecurity,
+    userId,
   });
 
   const { showUploadPanel } = useOperations({
@@ -182,6 +192,7 @@ const PureHome = (props) => {
   useAccounts({
     t,
     isAccountsPage,
+    isPeopleAccounts,
     location,
 
     setIsLoading,
@@ -189,6 +200,27 @@ const PureHome = (props) => {
     setSelectedNode,
     fetchPeople,
     setPortalTariff,
+  });
+
+  useGroups({
+    t,
+    isAccountsPage,
+    isGroupsAccounts,
+    location,
+
+    setIsLoading,
+
+    setSelectedNode,
+    fetchGroups,
+  });
+
+  useInsideGroup({
+    t,
+    groupId,
+    location,
+    setIsLoading,
+    setPortalTariff,
+    fetchGroup,
   });
 
   useSettings({
@@ -221,6 +253,7 @@ const PureHome = (props) => {
     loadCurrentUser,
     updateProfileCulture,
     getRooms,
+    isLoading,
   });
 
   React.useEffect(() => {
@@ -245,6 +278,7 @@ const PureHome = (props) => {
       firstLoad,
       isLoaded: !firstLoad,
       viewAs: accountsViewAs,
+      isAccounts: isAccountsPage,
     };
 
     if (!isAccountsPage) {
@@ -260,6 +294,8 @@ const PureHome = (props) => {
 
       sectionProps.isEmptyPage = isEmptyPage;
       sectionProps.isTrashFolder = isRecycleBinFolder;
+    } else {
+      sectionProps.isAccounts = isAccountsPage;
     }
   }
 
@@ -289,16 +325,16 @@ const PureHome = (props) => {
         </>
       )}
       <MediaViewer />
-      <Section {...sectionProps}>
+      <SectionWrapper {...sectionProps}>
         {(!isErrorRoomNotAvailable || isAccountsPage || isSettingsPage) && (
           <Section.SectionHeader>
-            {isFrame ? (
-              showTitle && <SectionHeaderContent />
-            ) : (
-              <SectionHeaderContent />
-            )}
+            <SectionHeaderContent />
           </Section.SectionHeader>
         )}
+
+        <Section.SectionSubmenu>
+          <SectionSubmenuContent />
+        </Section.SectionSubmenu>
 
         {isRecycleBinFolder && !isEmptyPage && (
           <Section.SectionWarning>
@@ -318,7 +354,7 @@ const PureHome = (props) => {
             </Section.SectionFilter>
           )}
 
-        <Section.SectionBody>
+        <Section.SectionBody isAccounts={isAccountsPage}>
           <Outlet />
         </Section.SectionBody>
 
@@ -334,7 +370,7 @@ const PureHome = (props) => {
             <SectionPagingContent tReady={tReady} />
           </Section.SectionPaging>
         )}
-      </Section>
+      </SectionWrapper>
     </>
   );
 };
@@ -343,7 +379,7 @@ const Home = withTranslation(["Files", "People"])(PureHome);
 
 export default inject(
   ({
-    auth,
+    authStore,
     filesStore,
     uploadDataStore,
     treeFoldersStore,
@@ -354,6 +390,9 @@ export default inject(
     tagsStore,
     selectedFolderStore,
     clientLoadingStore,
+    userStore,
+    currentTariffStatusStore,
+    settingsStore,
   }) => {
     const { setSelectedFolder, security: folderSecurity } = selectedFolderStore;
     const {
@@ -454,9 +493,7 @@ export default inject(
       ? filesStore.selectionTitle
       : null;
 
-    const { setToPreviewFile, playlist, removeFirstUrl } = mediaViewerDataStore;
-
-    const { settingsStore, currentTariffStatusStore } = auth;
+    const { setToPreviewFile, playlist } = mediaViewerDataStore;
 
     const { setPortalTariff } = currentTariffStatusStore;
 
@@ -470,13 +507,10 @@ export default inject(
       getSettings,
     } = settingsStore;
 
-    const {
-      usersStore,
-
-      viewAs: accountsViewAs,
-    } = peopleStore;
+    const { usersStore, groupsStore, viewAs: accountsViewAs } = peopleStore;
 
     const { getUsersList: fetchPeople } = usersStore;
+    const { getGroups: fetchGroups, fetchGroup } = groupsStore;
 
     if (!firstLoad) {
       if (isLoading) {
@@ -495,7 +529,8 @@ export default inject(
       converted,
       isRecycleBinFolder,
       isPrivacyFolder,
-      isVisitor: auth.userStore.user.isVisitor,
+      isVisitor: userStore.user.isVisitor,
+      userId: userStore?.user?.id,
       folderSecurity,
       primaryProgressDataVisible,
       primaryProgressDataPercent,
@@ -529,6 +564,7 @@ export default inject(
 
       setDragging,
       setIsLoading,
+      isLoading,
       fetchFiles,
       fetchRooms,
 
@@ -539,7 +575,6 @@ export default inject(
       setToPreviewFile,
       setIsPreview,
       playlist,
-      removeFirstUrl,
 
       getFileInfo,
       gallerySelected,
@@ -550,7 +585,7 @@ export default inject(
       isFrame,
       showTitle: frameConfig?.showTitle,
       showFilter: frameConfig?.showFilter,
-      user: auth.userStore.user,
+      user: userStore.user,
       folders,
       files,
       selection,
@@ -568,22 +603,24 @@ export default inject(
 
       accountsViewAs,
       fetchPeople,
+      fetchGroups,
+      fetchGroup,
       setSelectedNode,
       onClickBack,
 
       showFilterLoader,
 
       getSettings,
-      logout: auth.logout,
-      login: auth.login,
+      logout: authStore.logout,
+      login: authStore.login,
 
       createTag,
       addTagsToRoom,
       removeTagsFromRoom,
-      loadCurrentUser: auth.userStore.loadCurrentUser,
+      loadCurrentUser: userStore.loadCurrentUser,
       updateProfileCulture,
       getRooms,
       setSelectedFolder,
     };
-  }
+  },
 )(observer(Home));

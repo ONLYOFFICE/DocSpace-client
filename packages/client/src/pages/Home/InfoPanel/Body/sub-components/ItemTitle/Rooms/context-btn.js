@@ -2,12 +2,11 @@ import { useRef, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
-import { ContextMenu, ContextMenuButton } from "@docspace/components";
+import { ContextMenu } from "@docspace/shared/components/context-menu";
+import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 
 const generalKeys = ["select", "show-info"];
 const roomKeys = ["separator0", "room-info"];
-const currentRoomKeys = ["pin-room", "unpin-room"];
-const currentFolderKeys = ["open", "separator0", "separator1"];
 
 const StyledItemContextOptions = styled.div`
   height: 16px;
@@ -22,15 +21,18 @@ const RoomsContextBtn = ({
 
   getItemContextOptionsKeys,
   getItemContextOptionsActions,
+  onSelectItem,
 }) => {
   const contextMenuRef = useRef();
 
   if (!selection) return null;
 
   const onContextMenu = (e) => {
+    onSelectItem();
+
     if (!contextMenuRef?.current.menuRef.current)
       itemTitleRef?.current.click(e);
-    contextMenuRef?.current.show(e);
+    contextMenuRef?.current?.show(e);
   };
 
   const getData = () => {
@@ -49,10 +51,6 @@ const RoomsContextBtn = ({
 
     generalKeys.forEach((key) => removeOptionByKey(key));
     if (selection.isRoom) roomKeys.forEach((key) => removeOptionByKey(key));
-    if (selection.isSelectedFolder && selection.isRoom)
-      currentRoomKeys.forEach((key) => removeOptionByKey(key));
-    if (selection.isSelectedFolder && !selection.isRoom)
-      currentFolderKeys.forEach((key) => removeOptionByKey(key));
 
     options.forEach((item, index) => {
       const isSeparator = item.key.includes("separator");
@@ -70,10 +68,6 @@ const RoomsContextBtn = ({
 
     return options;
   };
-
-  useEffect(() => {
-    contextMenuRef?.current.hide();
-  }, [selection]);
 
   return (
     <StyledItemContextOptions>

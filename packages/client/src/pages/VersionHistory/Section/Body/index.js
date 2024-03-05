@@ -1,11 +1,11 @@
 import React, { memo } from "react";
 
-import Loaders from "@docspace/common/components/Loaders";
 import VersionRow from "./VersionRow";
 import { inject, observer } from "mobx-react";
 import { VariableSizeList as List, areEqual } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
-import CustomScrollbarsVirtualList from "@docspace/components/scrollbar/custom-scrollbars-virtual-list";
+import HistoryRowsSkeleton from "@docspace/shared/skeletons/history";
+import { CustomScrollbarsVirtualList } from "@docspace/shared/components/scrollbar";
 import { StyledBody, StyledVersionList } from "./StyledVersionHistory";
 class SectionBodyContent extends React.Component {
   constructor(props) {
@@ -114,7 +114,8 @@ class SectionBodyContent extends React.Component {
             itemSize={this.getSize}
             itemCount={versions.length}
             itemData={versions}
-            outerElementType={CustomScrollbarsVirtualList}>
+            outerElementType={CustomScrollbarsVirtualList}
+          >
             {this.renderRow}
           </List>
         </StyledVersionList>
@@ -129,7 +130,7 @@ class SectionBodyContent extends React.Component {
           </div>
         ) : (
           <div className="loader-history-rows">
-            <Loaders.HistoryRows />
+            <HistoryRowsSkeleton />
           </div>
         )}
       </StyledBody>
@@ -137,27 +138,22 @@ class SectionBodyContent extends React.Component {
   }
 }
 
-export default inject(({ auth, versionHistoryStore, clientLoadingStore }) => {
-  const {
-    setFirstLoad,
-    isLoading,
-    setIsSectionBodyLoading,
-  } = clientLoadingStore;
-  const {
-    versions,
-    fetchFileVersions,
-    fileId,
-    fileSecurity,
-  } = versionHistoryStore;
+export default inject(
+  ({ settingsStore, versionHistoryStore, clientLoadingStore }) => {
+    const { setFirstLoad, isLoading, setIsSectionBodyLoading } =
+      clientLoadingStore;
+    const { versions, fetchFileVersions, fileId, fileSecurity } =
+      versionHistoryStore;
 
-  return {
-    culture: auth.settingsStore.culture,
-    isLoading,
-    versions,
-    fileId,
-    fileSecurity,
-    setFirstLoad,
-    setIsLoading: setIsSectionBodyLoading,
-    fetchFileVersions,
-  };
-})(observer(SectionBodyContent));
+    return {
+      culture: settingsStore.culture,
+      isLoading,
+      versions,
+      fileId,
+      fileSecurity,
+      setFirstLoad,
+      setIsLoading: setIsSectionBodyLoading,
+      fetchFileVersions,
+    };
+  },
+)(observer(SectionBodyContent));

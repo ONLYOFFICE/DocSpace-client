@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import styled, { css } from "styled-components";
-import Row from "@docspace/components/row";
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
+import { Row } from "@docspace/shared/components/row";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
 import LoadingButton from "./SubComponents/LoadingButton";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -10,8 +10,8 @@ import SimulatePassword from "../../../components/SimulatePassword";
 import ErrorFileUpload from "./SubComponents/ErrorFileUpload.js";
 import ActionsUploadedFile from "./SubComponents/ActionsUploadedFile";
 import { isMobile } from "react-device-detect";
-import NoUserSelect from "@docspace/components/utils/commonStyles";
-import Button from "@docspace/components/button";
+import { NoUserSelect } from "@docspace/shared/utils";
+import { Button } from "@docspace/shared/components/button";
 
 const StyledFileRow = styled(Row)`
   width: calc(100% - 16px);
@@ -361,6 +361,7 @@ class FileRow extends Component {
               <ErrorFileUpload
                 t={t}
                 item={item}
+                theme={theme}
                 onTextClick={this.onTextClick}
                 showPasswordInput={showPasswordInput}
               />
@@ -400,7 +401,12 @@ class FileRow extends Component {
 }
 export default inject(
   (
-    { auth, uploadDataStore, mediaViewerDataStore, settingsStore },
+    {
+      filesSettingsStore,
+      uploadDataStore,
+      mediaViewerDataStore,
+      settingsStore,
+    },
     { item }
   ) => {
     let ext;
@@ -425,8 +431,8 @@ export default inject(
 
     name = splitted.join(".");
 
-    const { personal, theme } = auth.settingsStore;
-    const { canViewedDocs, getIconSrc, isArchive } = settingsStore;
+    const { personal, theme } = settingsStore;
+    const { canViewedDocs, getIconSrc, isArchive } = filesSettingsStore;
     const {
       uploaded,
       cancelCurrentUpload,

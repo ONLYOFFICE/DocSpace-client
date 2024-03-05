@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
 import MobileLayout from "./MobileLayout";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -7,7 +7,7 @@ import {
   isTablet as isTabletUtils,
   isMobile as isMobileUtils,
   tablet,
-} from "@docspace/components/utils/device";
+} from "@docspace/shared/utils";
 import {
   isIOS,
   isMobile,
@@ -30,10 +30,21 @@ const StyledContainer = styled.div`
       -webkit-user-select: none;
     }
   }
+
+  ${(props) =>
+    isMobileOnly &&
+    !props.isPortrait &&
+    css`
+      display: flex;
+      width: auto;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right)
+        env(safe-area-inset-bottom) env(safe-area-inset-left);
+    `}
 `;
 
 const Layout = (props) => {
-  const { children, isTabletView, setIsTabletView, setWindowWidth } = props;
+  const { children, isTabletView, setIsTabletView, setWindowWidth, isFrame } =
+    props;
 
   const [contentHeight, setContentHeight] = useState();
   const [isPortrait, setIsPortrait] = useState();
@@ -69,7 +80,7 @@ const Layout = (props) => {
   useEffect(() => {
     window.addEventListener("resize", onResize);
 
-    if (isTabletUtils() || isMobileUtils()) {
+    if (isMobile || isTabletView || !isFrame) {
       window.addEventListener("orientationchange", onOrientationChange);
 
       if (isMobileOnly) {
@@ -86,7 +97,7 @@ const Layout = (props) => {
       window.removeEventListener("orientationchange", onOrientationChange);
       window?.visualViewport?.removeEventListener(
         "resize",
-        onOrientationChange
+        onOrientationChange,
       );
       window.removeEventListener("scroll", onScroll);
     };
@@ -107,6 +118,8 @@ const Layout = (props) => {
   };
 
   const onScroll = (e) => {
+    if (window.innerHeight < window.innerWidth) return;
+
     e.preventDefault();
     e.stopPropagation();
     window.scrollTo(0, 0);
@@ -212,7 +225,11 @@ const Layout = (props) => {
   };
 
   return (
-    <StyledContainer className="Layout" contentHeight={contentHeight}>
+    <StyledContainer
+      className="Layout"
+      contentHeight={contentHeight}
+      isPortrait={isPortrait}
+    >
       {isMobileUtils() ? <MobileLayout {...props} /> : children}
     </StyledContainer>
   );
@@ -224,9 +241,9 @@ Layout.propTypes = {
   setIsTabletView: PropTypes.func,
 };
 
-export default inject(({ auth, bannerStore }) => {
+export default inject(({ settingsStore }) => {
   const { isTabletView, setIsTabletView, setWindowWidth, isFrame } =
-    auth.settingsStore;
+    settingsStore;
   return {
     isTabletView,
     setIsTabletView,

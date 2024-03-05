@@ -4,52 +4,37 @@ import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import Text from "@docspace/components/text";
-import Button from "@docspace/components/button";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
 
-import { mobile, size } from "@docspace/components/utils/device";
+import { mobile, size } from "@docspace/shared/utils";
+import { DeviceType } from "@docspace/shared/enums";
 
 import MetadataUrlField from "./sub-components/MetadataUrlField";
-import { useIsMobileView } from "../../../utils/useIsMobileView";
 
 const StyledWrapper = styled.div`
   .button-wrapper {
-    margin-top: 24px;
-  }
+    padding-block: 16px;
+    position: sticky;
+    bottom: 0;
+    margin-top: 32px;
+    background-color: ${({ theme }) => theme.backgroundColor};
 
-  @media ${mobile} {
-    .button-wrapper {
-      box-sizing: border-box;
-      position: absolute;
-      bottom: 0;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              right: 0;
-            `
-          : css`
-              left: 0;
-            `}
-      width: 100%;
-      padding: 16px 16px 16px 24px;
+    @media ${mobile} {
+      position: fixed;
+      padding-inline: 16px;
+      inset-inline: 0;
     }
   }
-
-  @media ${mobile}{
-    .button-wrapper {
-      padding: 16px;
-    }
-  }
-}
 `;
 
 const ProviderMetadata = (props) => {
   const { t } = useTranslation("SingleSignOn");
-  const isMobileView = useIsMobileView();
   const navigate = useNavigate();
   const location = useLocation();
+  const { downloadMetadata, currentDeviceType } = props;
 
-  const { downloadMetadata } = props;
+  const isMobileView = currentDeviceType === DeviceType.mobile;
 
   const url = window.location.origin;
 
@@ -110,10 +95,12 @@ const ProviderMetadata = (props) => {
   );
 };
 
-export default inject(({ ssoStore }) => {
+export default inject(({ ssoStore, settingsStore }) => {
   const { downloadMetadata } = ssoStore;
+  const { currentDeviceType } = settingsStore;
 
   return {
     downloadMetadata,
+    currentDeviceType
   };
 })(observer(ProviderMetadata));

@@ -1,17 +1,17 @@
 import React from "react";
-import moment from "moment";
+import moment from "moment-timezone";
 import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";
 
 import { useNavigate, useParams } from "react-router-dom";
 
-import TableRow from "@docspace/components/table-container/TableRow";
-import TableCell from "@docspace/components/table-container/TableCell";
-import Text from "@docspace/components/text";
-import Checkbox from "@docspace/components/checkbox";
+import { TableRow } from "@docspace/shared/components/table";
+import { TableCell } from "@docspace/shared/components/table";
+import { Text } from "@docspace/shared/components/text";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 import StatusBadge from "../../../../sub-components/StatusBadge";
 
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 
 import RetryIcon from "PUBLIC_DIR/images/refresh.react.svg?url";
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
@@ -65,7 +65,8 @@ const HistoryTableRow = (props) => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const redirectToDetails = () => navigate(window.location.pathname + `/${item.id}`);
+  const redirectToDetails = () =>
+    navigate(window.location.pathname + `/${item.id}`);
   const handleRetryEvent = async () => {
     if (isRetryPending) {
       return;
@@ -97,7 +98,10 @@ const HistoryTableRow = (props) => {
   ];
 
   const formattedDelivery =
-    moment(item.delivery).locale(i18n.language).format("MMM D, YYYY, h:mm:ss A") +
+    moment(item.delivery)
+      .tz(window.timezone)
+      .locale(i18n.language)
+      .format("MMM D, YYYY, h:mm:ss A") +
     " " +
     t("Common:UTC");
 
@@ -121,11 +125,22 @@ const HistoryTableRow = (props) => {
   const isChecked = isIdChecked(item.id);
 
   return (
-    <StyledWrapper className={isChecked ? "selected-table-row" : ""} onClick={onRowClick}>
-      <StyledTableRow contextOptions={contextOptions} checked={isChecked} hideColumns={hideColumns}>
+    <StyledWrapper
+      className={isChecked ? "selected-table-row" : ""}
+      onClick={onRowClick}
+    >
+      <StyledTableRow
+        contextOptions={contextOptions}
+        checked={isChecked}
+        hideColumns={hideColumns}
+      >
         <TableCell>
           <TableCell checked={isChecked} className="checkboxWrapper">
-            <Checkbox className="checkbox" onChange={onCheckboxClick} isChecked={isChecked} />
+            <Checkbox
+              className="checkbox"
+              onChange={onCheckboxClick}
+              isChecked={isChecked}
+            />
           </TableCell>
 
           <Text fontWeight={600}>{item.id}</Text>

@@ -4,15 +4,13 @@ import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import { PaymentsType, AccountLoginType } from "@docspace/common/constants";
+import { PaymentsType, AccountLoginType } from "@docspace/shared/enums";
 
-import Badge from "@docspace/components/badge";
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
+import { Badge } from "@docspace/shared/components/badge";
+import { commonIconsStyles } from "@docspace/shared/utils";
 
 import SendClockIcon from "PUBLIC_DIR/images/send.clock.react.svg";
 import CatalogSpamIcon from "PUBLIC_DIR/images/catalog.spam.react.svg";
-
-import { SSO_LABEL } from "SRC_DIR/helpers/constants";
 
 const StyledBadgesContainer = styled.div`
   height: 100%;
@@ -20,10 +18,25 @@ const StyledBadgesContainer = styled.div`
   display: flex;
 
   align-items: center;
+
+  ${(props) =>
+    props.infoPanelVisible &&
+    css`
+      .accounts-badge:last-child {
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-left: 12px;
+              `
+            : css`
+                margin-right: 12px;
+              `}
+      }
+    `}
 `;
 
 const StyledPaidBadge = styled(Badge)`
-  ${props =>
+  ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
           margin-left: 8px;
@@ -52,7 +65,7 @@ const Badges = ({
   withoutPaid,
   isPaid = false,
   filter,
-
+  infoPanelVisible,
   isSSO = false,
 }) => {
   const navigate = useNavigate();
@@ -74,10 +87,14 @@ const Badges = ({
   };
 
   return (
-    <StyledBadgesContainer className="badges additional-badges">
+    <StyledBadgesContainer
+      className="badges additional-badges"
+      infoPanelVisible={infoPanelVisible}
+    >
       {isSSO && (
         <Badge
-          label={SSO_LABEL}
+          className="accounts-badge"
+          label={t("SSO")}
           color={"#FFFFFF"}
           backgroundColor="#22C386"
           fontSize={"9px"}
@@ -89,7 +106,7 @@ const Badges = ({
       )}
       {!withoutPaid && isPaid && (
         <StyledPaidBadge
-          className="paid-badge"
+          className="paid-badge accounts-badge"
           label={t("Paid")}
           backgroundColor={"#EDC409"}
           fontSize={"9px"}
@@ -101,10 +118,16 @@ const Badges = ({
         />
       )}
       {statusType === "pending" && (
-        <StyledSendClockIcon className="pending-badge" size="small" />
+        <StyledSendClockIcon
+          className="pending-badge accounts-badge"
+          size="small"
+        />
       )}
       {statusType === "disabled" && (
-        <StyledCatalogSpamIcon className="disabled-badge" size="small" />
+        <StyledCatalogSpamIcon
+          className="disabled-badge accounts-badge"
+          size="small"
+        />
       )}
     </StyledBadgesContainer>
   );

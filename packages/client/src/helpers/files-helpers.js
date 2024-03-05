@@ -7,14 +7,8 @@ import AccessCommentReactSvgUrl from "PUBLIC_DIR/images/access.comment.react.svg
 import AccessFormReactSvgUrl from "PUBLIC_DIR/images/access.form.react.svg?url";
 import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/custom.filter.react.svg?url";
 import { EDITOR_PROTOCOL } from "./filesConstants";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { homepage } from "PACKAGE_FILE";
-
-export const presentInArray = (array, search, caseInsensitive = false) => {
-  let pattern = caseInsensitive ? search.toLowerCase() : search;
-  const result = array.findIndex((item) => item === pattern);
-  return result === -1 ? false : true;
-};
 
 export const getAccessIcon = (access) => {
   switch (access) {
@@ -53,7 +47,7 @@ export const checkProtocol = (fileId, withRedirect) =>
       withRedirect &&
         window.open(
           combineUrl("", homepage, `private?fileId=${fileId}`),
-          "_blank"
+          "_blank",
         );
     }, 1000);
 
@@ -63,8 +57,8 @@ export const checkProtocol = (fileId, withRedirect) =>
       combineUrl(
         `${EDITOR_PROTOCOL}:${window.location.origin}`,
         homepage,
-        `doceditor?fileId=${fileId}`
+        `doceditor?fileId=${fileId}`,
       ),
-      "_self"
+      "_self",
     );
   });

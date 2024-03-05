@@ -1,4 +1,4 @@
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 import React from "react";
 import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";
@@ -49,14 +49,15 @@ const CurrentUsersCountContainer = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { settingsStore, currentQuotaStore, paymentQuotasStore } = auth;
-  const { maxCountManagersByQuota } = currentQuotaStore;
-  const { addedManagersCountTitle } = paymentQuotasStore;
-  const { theme } = settingsStore;
-  return {
-    theme,
-    maxCountManagersByQuota,
-    addedManagersCountTitle,
-  };
-})(observer(CurrentUsersCountContainer));
+export default inject(
+  ({ settingsStore, currentQuotaStore, paymentQuotasStore }) => {
+    const { maxCountManagersByQuota } = currentQuotaStore;
+    const { addedManagersCountTitle } = paymentQuotasStore;
+    const { theme } = settingsStore;
+    return {
+      theme,
+      maxCountManagersByQuota,
+      addedManagersCountTitle,
+    };
+  }
+)(observer(CurrentUsersCountContainer));

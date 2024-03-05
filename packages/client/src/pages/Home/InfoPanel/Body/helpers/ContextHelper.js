@@ -1,7 +1,5 @@
 const excludeGeneralOptions = ["select", "show-info"];
 const excludeRoomOptions = ["separator0", "room-info"];
-const excludeOptionsIntoRoom = ["pin-room", "unpin-room"];
-const excludeOptionsIntoFolder = ["open", "separator0", "separator1"];
 
 class ContextHelper {
   constructor(props) {
@@ -38,20 +36,7 @@ class ContextHelper {
         if (idx !== -1) options.splice(idx, 1);
       });
 
-      if (this.selection.isSelectedFolder) {
-        excludeOptionsIntoRoom.forEach((excludeOption) => {
-          const idx = options.findIndex((o) => o === excludeOption);
-          if (idx !== -1) options.splice(idx, 1);
-        });
-      }
-    }
 
-    if (this.selection?.isSelectedFolder && !this.selection?.isRoom) {
-      excludeOptionsIntoFolder.forEach((excludeOption) => {
-        const idx = options.findIndex((o) => o === excludeOption);
-        if (idx !== -1) options.splice(idx, 1);
-      });
-    }
 
     const length = options.length;
 

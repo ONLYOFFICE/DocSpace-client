@@ -9,10 +9,10 @@ import EmptyContainer from "../../../../components/EmptyContainer";
 import withLoader from "../../../../HOCs/withLoader";
 import TableView from "./TableView/TableContainer";
 import withHotkeys from "../../../../HOCs/withHotkeys";
-import { Consumer } from "@docspace/components/utils/context";
-import { isElementInViewport } from "@docspace/common/utils";
-import { isMobile, isTablet } from "@docspace/components/utils/device";
-import { DeviceType } from "@docspace/common/constants";
+import { Consumer, isMobile, isTablet } from "@docspace/shared/utils";
+import { isElementInViewport } from "@docspace/shared/utils/common";
+
+import { DeviceType } from "@docspace/shared/enums";
 
 let currentDroppable = null;
 let isDragActive = false;
@@ -42,7 +42,7 @@ const SectionBodyContent = (props) => {
     filesList,
     uploaded,
     onClickBack,
-
+    isEmptyPage,
     movingInProgress,
     currentDeviceType,
   } = props;
@@ -53,7 +53,7 @@ const SectionBodyContent = (props) => {
 
   useEffect(() => {
     const customScrollElm = document.querySelector(
-      "#customScrollBar > .scroll-wrapper > .scroller"
+      "#customScrollBar > .scroll-wrapper > .scroller",
     );
 
     if (isTablet() || isMobile() || currentDeviceType !== DeviceType.desktop) {
@@ -104,7 +104,7 @@ const SectionBodyContent = (props) => {
         const bodyScroll =
           isMobile() || currentDeviceType === DeviceType.mobile
             ? document.querySelector(
-                "#customScrollBar > .scroll-wrapper > .scroller"
+                "#customScrollBar > .scroll-wrapper > .scroller",
               )
             : document.querySelector(".section-scroll");
 
@@ -113,8 +113,8 @@ const SectionBodyContent = (props) => {
           (isMobile() || currentDeviceType === DeviceType.mobile
             ? 57
             : viewAs === "table"
-            ? 40
-            : 48);
+              ? 40
+              : 48);
 
         bodyScroll.scrollTo(0, count);
       }
@@ -226,7 +226,9 @@ const SectionBodyContent = (props) => {
       return;
     }
 
-    const folderId = value ? value.split("_")[1] : treeValue;
+    const folderId = value
+      ? value.split("_").slice(1, -3).join("_")
+      : treeValue;
     onMoveTo(folderId, title);
     return;
   };
@@ -235,7 +237,7 @@ const SectionBodyContent = (props) => {
     const id = isNaN(+destFolderId) ? destFolderId : +destFolderId;
     moveDragItems(id, title, {
       copy: t("Common:CopyOperation"),
-      move: t("Translations:MoveToOperation"),
+      move: t("Common:MoveToOperation"),
     });
   };
 
@@ -262,14 +264,17 @@ const SectionBodyContent = (props) => {
 
   if (isEmptyFilesList && movingInProgress) return <></>;
 
-  const isEmptyPage = isEmptyFilesList;
+  const showEmptyPage = isEmptyFilesList;
 
   return (
     <Consumer>
       {(context) =>
-        isEmptyPage ? (
+        showEmptyPage ? (
           <>
-            <EmptyContainer sectionWidth={context.sectionWidth} />
+            <EmptyContainer
+              sectionWidth={context.sectionWidth}
+              isEmptyPage={isEmptyPage}
+            />
           </>
         ) : viewAs === "tile" ? (
           <>
@@ -294,7 +299,7 @@ const SectionBodyContent = (props) => {
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     filesStore,
     selectedFolderStore,
     treeFoldersStore,
@@ -318,7 +323,7 @@ export default inject(
       scrollToItem,
       setScrollToItem,
       filesList,
-
+      isEmptyPage,
       movingInProgress,
     } = filesStore;
     return {
@@ -345,11 +350,12 @@ export default inject(
       uploaded: uploadDataStore.uploaded,
       onClickBack: filesActionsStore.onClickBack,
       movingInProgress,
-      currentDeviceType: auth.settingsStore,
+      currentDeviceType: settingsStore.currentDeviceType,
+      isEmptyPage,
     };
-  }
+  },
 )(
   withTranslation(["Files", "Common", "Translations"])(
-    withHotkeys(withLoader(observer(SectionBodyContent))())
-  )
+    withHotkeys(withLoader(observer(SectionBodyContent))()),
+  ),
 );

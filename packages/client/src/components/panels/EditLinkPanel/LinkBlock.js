@@ -1,8 +1,8 @@
 import React from "react";
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
-import TextInput from "@docspace/components/text-input";
-import FieldContainer from "@docspace/components/field-container";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { FieldContainer } from "@docspace/shared/components/field-container";
 
 const LinkBlock = (props) => {
   const {

@@ -3,9 +3,16 @@
   "DeletePluginDescription": "Šis spraudnis vairs nebūs pieejams DocSpace lietotājiem. Vai tiešām vēlaties turpināt?",
   "DeletePluginTitle": "Vai izdzēst spraudni?",
   "Description": "Varat pievienot spraudņus, lai paplašinātu DocSpace funkcionalitāti ar papildu funkcijām. Noklikšķiniet uz Augšupielādēt spraudni un ZIP arhīvā atlasiet spraudņa failu.",
+  "ExpandFunctionality": "Izvērst funkcionalitāti, izmantojot spraudņa SDK",
+  "GoToRepo": "Doties uz repozitoriju",
   "Metadata": "Metadati",
   "NeedSettings": "Nepieciešams ievadīt iestatījumus",
   "NoPlugins": "Nav pievienoti spraudņi",
+  "NotNeedSettings": "Nav jāievada iestatījumus",
+  "PluginSamples": "Spraudņu paraugi",
+  "PluginSDK": "Spraudņa SDK",
+  "PluginSDKDescription": "Izmantojot spraudņa SDK, varat paplašināt savu DocSpace funkcionalitāti, savienot trešās puses pakalpojumus vai uzlabot esošo lietotāja pieredzi. Šeit jūs varat atrast spraudņu paraugus ar koda avotu, kas pieejams GitHub. ",
+  "PluginSDKInstruction": "Noklikšķiniet uz pogas, lai iegūtu detalizētus norādījumus par to, kā izveidot savus spraudņus.",
   "PluginsHelp": "Spraudņi ļauj paplašināt DocSpace funkcionalitāti",
   "UploadPlugin": "Augšupielādēt spraudni"
 }

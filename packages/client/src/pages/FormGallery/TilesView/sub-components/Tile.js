@@ -1,9 +1,9 @@
 import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
-import ContextMenuButton from "@docspace/components/context-menu-button";
+import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import PropTypes from "prop-types";
-import ContextMenu from "@docspace/components/context-menu";
-import Link from "@docspace/components/link";
+import { ContextMenu } from "@docspace/shared/components/context-menu";
+import { Link } from "@docspace/shared/components/link";
 import { withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 import { useNavigate } from "react-router-dom";
@@ -16,8 +16,8 @@ import {
   StyledOptionButton,
   StyledContextMenu,
 } from "../StyledTileView";
-import Backdrop from "@docspace/components/backdrop";
-import { isMobile } from "@docspace/components/utils/device";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { isMobile } from "@docspace/shared/utils";
 
 const Tile = ({
   t,
@@ -145,13 +145,20 @@ Tile.defaultProps = {
 
 export default inject(
   (
-    { filesStore, settingsStore, auth, oformsStore, contextOptionsStore },
+    {
+      filesStore,
+      filesSettingsStore,
+
+      oformsStore,
+      contextOptionsStore,
+      infoPanelStore,
+    },
     { item }
   ) => {
     const { categoryType } = filesStore;
     const { gallerySelected, setGallerySelected } = oformsStore;
-    const { getIcon } = settingsStore;
-    const { isVisible, setIsVisible } = auth.infoPanelStore;
+    const { getIcon } = filesSettingsStore;
+    const { isVisible, setIsVisible } = infoPanelStore;
 
     const isSelected = item.id === gallerySelected?.id;
 

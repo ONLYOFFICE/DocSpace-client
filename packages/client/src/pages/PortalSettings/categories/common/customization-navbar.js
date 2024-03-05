@@ -4,8 +4,8 @@ import { withTranslation } from "react-i18next";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
-import withCultureNames from "@docspace/common/hoc/withCultureNames";
-import { Base } from "@docspace/components/themes";
+import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
+import { Base } from "@docspace/shared/themes";
 
 import LoaderCustomizationNavbar from "./sub-components/loaderCustomizationNavbar";
 import MobileCategoryWrapper from "../../components/MobileCategoryWrapper";
@@ -75,8 +75,8 @@ const CustomizationNavbar = ({
   );
 };
 
-export default inject(({ common, auth }) => {
-  const { enablePortalRename } = auth.settingsStore;
+export default inject(({ common, settingsStore }) => {
+  const { enablePortalRename } = settingsStore;
   const { isLoaded, setIsLoadedCustomizationNavbar } = common;
   return {
     isLoaded,
@@ -85,6 +85,6 @@ export default inject(({ common, auth }) => {
   };
 })(
   withCultureNames(
-    observer(withTranslation(["Settings", "Common"])(CustomizationNavbar))
-  )
+    observer(withTranslation(["Settings", "Common"])(CustomizationNavbar)),
+  ),
 );

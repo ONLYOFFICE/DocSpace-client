@@ -5,8 +5,8 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 
-import Loaders from "@docspace/common/components/Loaders";
-import Submenu from "@docspace/components/submenu";
+import { ProfileViewLoader } from "@docspace/shared/skeletons/profile";
+import { Submenu } from "@docspace/shared/components/submenu";
 
 import MainProfile from "./sub-components/main-profile";
 import LoginContent from "./sub-components/LoginContent";
@@ -14,8 +14,8 @@ import Notifications from "./sub-components/notifications";
 import FileManagement from "./sub-components/file-management";
 import InterfaceTheme from "./sub-components/interface-theme";
 
-import { tablet } from "@docspace/components/utils/device";
-import { DeviceType } from "@docspace/common/constants";
+import { tablet } from "@docspace/shared/utils";
+import { DeviceType } from "@docspace/shared/enums";
 
 const Wrapper = styled.div`
   display: flex;
@@ -72,7 +72,7 @@ const SectionBodyContent = (props) => {
     navigate(`${path}/${e.id}`, { state: { disableScrollToTop: true } });
   };
 
-  if (showProfileLoader) return <Loaders.ProfileView />;
+  if (showProfileLoader) return <ProfileViewLoader />;
   return (
     <Wrapper>
       <MainProfile />
@@ -84,21 +84,21 @@ const SectionBodyContent = (props) => {
           currentDeviceType === DeviceType.desktop
             ? 0
             : currentDeviceType === DeviceType.mobile
-            ? "53px"
-            : "61px"
+              ? "53px"
+              : "61px"
         }
       />
     </Wrapper>
   );
 };
 
-export default inject(({ auth, peopleStore, clientLoadingStore }) => {
+export default inject(({ settingsStore, peopleStore, clientLoadingStore }) => {
   const { showProfileLoader } = clientLoadingStore;
   const { targetUser: profile } = peopleStore.targetUserStore;
 
   return {
     profile,
-    currentDeviceType: auth.settingsStore.currentDeviceType,
+    currentDeviceType: settingsStore.currentDeviceType,
     showProfileLoader,
   };
 })(
@@ -113,6 +113,6 @@ export default inject(({ auth, peopleStore, clientLoadingStore }) => {
       "DeleteSelfProfileDialog",
       "Notifications",
       "ConnectDialog",
-    ])(SectionBodyContent)
-  )
+    ])(SectionBodyContent),
+  ),
 );

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
-import TextInput from "@docspace/components/text-input";
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import styled from "styled-components";
-import Button from "@docspace/components/button";
-import toastr from "@docspace/components/toast/toastr";
+import { Button } from "@docspace/shared/components/button";
+import { toastr } from "@docspace/shared/components/toast";
 import { UnavailableStyles } from "../../../utils/commonSettingsStyles";
-import { mobile, tablet } from "@docspace/components/utils/device";
-import Badge from "@docspace/components/badge";
+import { mobile, tablet } from "@docspace/shared/utils";
+import { Badge } from "@docspace/shared/components/badge";
 
 const StyledTextInput = styled(TextInput)`
   margin-top: 4px;
@@ -85,6 +85,18 @@ const DownLoadWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
+
+  padding-block: 16px 30px;
+  position: sticky;
+  bottom: 0;
+  margin-top: 32px;
+  background-color: ${({ theme }) => theme.backgroundColor};
+
+  @media ${mobile} {
+    position: fixed;
+    padding-inline: 16px;
+    inset-inline: 0;
+  }
 
   .download-report_button {
     width: auto;
@@ -352,7 +364,7 @@ const HistoryMainContent = (props) => {
           primary
           label={downloadReport}
           size="normal"
-          minwidth="auto"
+          minWidth="auto"
           onClick={() => getReport()}
           isDisabled={isSettingNotPaid}
           isLoading={isLoadingDownloadReport}

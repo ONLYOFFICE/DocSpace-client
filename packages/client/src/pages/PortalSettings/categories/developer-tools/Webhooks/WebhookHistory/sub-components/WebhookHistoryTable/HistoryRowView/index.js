@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import { isMobile } from "@docspace/components/utils/device";
-import RowContainer from "@docspace/components/row-container";
-import { Base } from "@docspace/components/themes";
+import { isMobile } from "@docspace/shared/utils";
+import { RowContainer } from "@docspace/shared/components/row-container";
+import { Base } from "@docspace/shared/themes";
 
 import HistoryRow from "./HistoryRow";
 
@@ -75,7 +75,7 @@ const HistoryRowView = (props) => {
   );
 };
 
-export default inject(({ setup, webhooksStore, auth }) => {
+export default inject(({ setup, webhooksStore, settingsStore }) => {
   const { viewAs, setViewAs } = setup;
   const {
     historyItems,
@@ -86,7 +86,7 @@ export default inject(({ setup, webhooksStore, auth }) => {
     formatFilters,
   } = webhooksStore;
 
-  const { currentDeviceType } = auth.settingsStore;
+  const { currentDeviceType } = settingsStore;
   return {
     viewAs,
     setViewAs,

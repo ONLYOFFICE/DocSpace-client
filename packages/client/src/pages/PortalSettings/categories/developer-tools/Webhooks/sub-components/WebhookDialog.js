@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Button from "@docspace/components/button";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Button } from "@docspace/shared/components/button";
 import { LabledInput } from "./LabledInput";
 import styled, { css } from "styled-components";
 import { Hint } from "../styled-components";
 import { SSLVerification } from "./SSLVerification";
 import SecretKeyInput from "./SecretKeyInput";
 import { useTranslation } from "react-i18next";
+import { toastr } from "@docspace/shared/components/toast";
 
 const ModalDialogContainer = styled(ModalDialog)`
   .modal-body {
@@ -51,10 +52,19 @@ function validateUrl(url) {
 }
 
 const WebhookDialog = (props) => {
-  const { visible, onClose, header, isSettingsModal, onSubmit, webhook, additionalId } = props;
+  const {
+    visible,
+    onClose,
+    header,
+    isSettingsModal,
+    onSubmit,
+    webhook,
+    additionalId,
+  } = props;
 
   const [isResetVisible, setIsResetVisible] = useState(isSettingsModal);
 
+  const [isLoading, setIsLoading] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [isValid, setIsValid] = useState({
     name: true,
@@ -111,20 +121,30 @@ const WebhookDialog = (props) => {
     validateForm() && submitButtonRef.current.click();
   };
 
-  const onFormSubmit = (e) => {
+  const onFormSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-    onSubmit(webhookInfo);
-    setWebhookInfo({
-      id: webhook ? webhook.id : 0,
-      name: "",
-      uri: "",
-      secretKey: "",
-      enabled: true,
-    });
-    setIsPasswordValid(false);
-    setPasswordInputKey((prevKey) => prevKey + 1);
-    onModalClose();
+    setIsLoading(true);
+    try {
+      await onSubmit(webhookInfo);
+      isSettingsModal
+        ? toastr.success(t("WebhookEditedSuccessfully"))
+        : toastr.success(t("WebhookCreated"));
+      setWebhookInfo({
+        id: webhook ? webhook.id : 0,
+        name: "",
+        uri: "",
+        secretKey: "",
+        enabled: true,
+      });
+      setIsPasswordValid(false);
+      setPasswordInputKey((prevKey) => prevKey + 1);
+      onModalClose();
+    } catch (error) {
+      toastr.error(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const cleanUpEvent = () => window.removeEventListener("keyup", onKeyPress);
@@ -145,14 +165,16 @@ const WebhookDialog = (props) => {
     });
   }, [webhook]);
 
-  const onKeyPress = (e) => (e.key === "Esc" || e.key === "Escape") && onModalClose();
+  const onKeyPress = (e) =>
+    (e.key === "Esc" || e.key === "Escape") && onModalClose();
 
   return (
     <ModalDialogContainer
       withFooterBorder
       visible={visible}
       onClose={onModalClose}
-      displayType="aside">
+      displayType="aside"
+    >
       <ModalDialog.Header>{header}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledWebhookForm onSubmit={onFormSubmit}>
@@ -166,6 +188,7 @@ const WebhookDialog = (props) => {
             onChange={onInputChange}
             hasError={!isValid.name}
             className={isSettingsModal ? "margin-0" : ""}
+            isDisabled={isLoading}
             required
           />
           <LabledInput
@@ -176,6 +199,7 @@ const WebhookDialog = (props) => {
             value={webhookInfo.uri}
             onChange={onInputChange}
             hasError={!isValid.uri}
+            isDisabled={isLoading}
             required
           />
           <SecretKeyInput
@@ -188,8 +212,13 @@ const WebhookDialog = (props) => {
             setIsResetVisible={setIsResetVisible}
             passwordInputKey={passwordInputKey}
             additionalId={additionalId}
+            isDisabled={isLoading}
           />
-          <SSLVerification value={webhookInfo.ssl} onChange={onInputChange} />
+          <SSLVerification
+            value={webhookInfo.ssl}
+            onChange={onInputChange}
+            isDisabled={isLoading}
+          />
 
           <button type="submit" ref={submitButtonRef} hidden></button>
         </StyledWebhookForm>
@@ -199,10 +228,14 @@ const WebhookDialog = (props) => {
         <Footer>
           <Button
             id={isSettingsModal ? "save-button" : "create-button"}
-            label={isSettingsModal ? t("Common:SaveButton") : t("Common:Create")}
+            label={
+              isSettingsModal ? t("Common:SaveButton") : t("Common:Create")
+            }
             size="normal"
             primary={true}
             onClick={handleSubmitClick}
+            isDisabled={isLoading}
+            isLoading={isLoading}
           />
           <Button
             id="cancel-button"

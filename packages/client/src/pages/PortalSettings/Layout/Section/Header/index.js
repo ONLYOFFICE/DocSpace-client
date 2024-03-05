@@ -6,21 +6,22 @@ import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
-import Headline from "@docspace/common/components/Headline";
-import IconButton from "@docspace/components/icon-button";
-import TableGroupMenu from "@docspace/components/table-container/TableGroupMenu";
-import DropDownItem from "@docspace/components/drop-down-item";
+import Headline from "@docspace/shared/components/headline/Headline";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { TableGroupMenu } from "@docspace/shared/components/table";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import LoaderSectionHeader from "../loaderSectionHeader";
-import { tablet, desktop } from "@docspace/components/utils/device";
+import { mobile, tablet, desktop } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
-import Badge from "@docspace/components/badge";
+import { Badge } from "@docspace/shared/components/badge";
 import {
   getKeyByLink,
   settingsTree,
   getTKeyByKey,
   checkPropertyByLink,
 } from "../../../utils";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import TariffBar from "SRC_DIR/components/TariffBar";
 
 const HeaderContainer = styled.div`
   position: relative;
@@ -105,6 +106,24 @@ const HeaderContainer = styled.div`
       line-height: 59px !important;
     }
   }
+
+  @media ${mobile} {
+    h1 {
+      line-height: 53px;
+      font-size: ${(props) => props.theme.getCorrectFontSize("18px")};
+    }
+  }
+
+  .tariff-bar {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: auto;
+          `
+        : css`
+            margin-left: auto;
+          `}
+  }
 `;
 
 const StyledContainer = styled.div`
@@ -176,12 +195,12 @@ const SectionHeaderContent = (props) => {
     const isCategory = checkPropertyByLink(
       arrayOfParams,
       settingsTree,
-      "isCategory"
+      "isCategory",
     );
     const isHeader = checkPropertyByLink(
       arrayOfParams,
       settingsTree,
-      "isHeader"
+      "isHeader",
     );
     const isCategoryOrHeader = isCategory || isHeader;
 
@@ -326,6 +345,10 @@ const SectionHeaderContent = (props) => {
               )}
             </div>
           </Headline>
+          <div className="tariff-bar">
+            <TariffBar />
+          </div>
+
           {props.addUsers && (
             <div className="action-wrapper">
               <IconButton
@@ -343,8 +366,7 @@ const SectionHeaderContent = (props) => {
   );
 };
 
-export default inject(({ auth, setup, common }) => {
-  const { currentQuotaStore } = auth;
+export default inject(({ currentQuotaStore, setup, common }) => {
   const {
     isBrandingAndCustomizationAvailable,
     isRestoreAndAutoBackupAvailable,
@@ -384,8 +406,8 @@ export default inject(({ auth, setup, common }) => {
   };
 })(
   withLoading(
-    withTranslation(["Settings", "SingleSignOn", "Common"])(
-      observer(SectionHeaderContent)
-    )
-  )
+    withTranslation(["Settings", "SingleSignOn", "Common", "JavascriptSdk"])(
+      observer(SectionHeaderContent),
+    ),
+  ),
 );

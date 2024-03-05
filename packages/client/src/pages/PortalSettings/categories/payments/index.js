@@ -10,8 +10,7 @@ const PaymentsPage = (props) => {
   return standalone ? <PaymentsEnterprise /> : <PaymentsSaaS />;
 };
 
-export default inject(({ auth }) => {
-  const { settingsStore } = auth;
+export default inject(({ settingsStore }) => {
   const { standalone } = settingsStore;
 
   return {

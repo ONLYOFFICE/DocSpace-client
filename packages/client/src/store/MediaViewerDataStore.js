@@ -1,16 +1,24 @@
 import { makeAutoObservable, runInAction } from "mobx";
+
 import {
-  isNullOrUndefined,
+  MEDIA_VIEW_URL,
+  PUBLIC_MEDIA_VIEW_URL,
+} from "@docspace/shared/constants";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { thumbnailStatuses } from "SRC_DIR/helpers/filesConstants";
+import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
+import FilesFilter from "@docspace/shared/api/files/filter";
+
+import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+
+import {
   findNearestIndex,
   isVideo,
-} from "@docspace/common/components/MediaViewer/helpers";
-import { thumbnailStatuses } from "SRC_DIR/helpers/filesConstants";
-
-const FirstUrlKey = "isFirstUrl";
+} from "@docspace/shared/components/media-viewer/MediaViewer.utils";
 
 class MediaViewerDataStore {
   filesStore;
-  settingsStore;
+
   publicRoomStore;
 
   id = null;
@@ -19,10 +27,10 @@ class MediaViewerDataStore {
   currentItem = null;
   prevPostionIndex = 0;
 
-  constructor(filesStore, settingsStore, publicRoomStore) {
+  constructor(filesStore, publicRoomStore) {
     makeAutoObservable(this);
     this.filesStore = filesStore;
-    this.settingsStore = settingsStore;
+
     this.publicRoomStore = publicRoomStore;
   }
 
@@ -31,6 +39,33 @@ class MediaViewerDataStore {
     this.visible = mediaData.visible;
 
     if (!mediaData.visible) this.setCurrentItem(null);
+  };
+
+  fetchPreviewMediaFile = (id, fetchDefaultFiles) => {
+    const isMediaViewer = window.location.pathname.includes(
+      PUBLIC_MEDIA_VIEW_URL,
+    );
+    const isEmptyPlaylist = this.playlist.length === 0;
+
+    if (isEmptyPlaylist && isMediaViewer && !this.visible) {
+      this.filesStore
+        .getFileInfo(id)
+        .then((data) => {
+          const canOpenPlayer =
+            data.viewAccessibility.ImageView ||
+            data.viewAccessibility.MediaView;
+          const file = { ...data, canOpenPlayer };
+          this.setToPreviewFile(file, true);
+          this.filesStore.setIsPreview(true);
+        })
+        .catch((err) => {
+          toastr.error(err);
+          fetchDefaultFiles();
+        });
+      return true;
+    }
+
+    return false;
   };
 
   setToPreviewFile = (file, visible) => {
@@ -61,22 +96,40 @@ class MediaViewerDataStore {
     this.id = id;
   };
 
-  saveFirstUrl = (url) => {
-    localStorage.setItem(FirstUrlKey, url);
+  getUrl = (id) => {
+    if (this.publicRoomStore.isPublicRoom) {
+      const key = this.publicRoomStore.publicRoomKey;
+      const filterObj = FilesFilter.getFilter(window.location);
+
+      return `${combineUrl("/rooms/share", MEDIA_VIEW_URL, id)}?key=${key}&${filterObj.toUrlParams()}`;
+    }
+
+    return combineUrl(MEDIA_VIEW_URL, id);
   };
 
   getFirstUrl = () => {
-    return localStorage.getItem(FirstUrlKey);
-  };
+    if (this.publicRoomStore.isPublicRoom) {
+      const key = this.publicRoomStore.publicRoomKey;
+      const filterObj = FilesFilter.getFilter(window.location);
 
-  removeFirstUrl = () => {
-    localStorage.removeItem(FirstUrlKey);
+      const url = `${combineUrl("/rooms/share")}?key=${key}&${filterObj.toUrlParams()}`;
+
+      return url;
+    }
+
+    const filter = this.filesStore.filter;
+
+    const queryParams = filter.toUrlParams();
+
+    const url = getCategoryUrl(this.filesStore.categoryType, filter.folder);
+
+    const pathname = `${url}?${queryParams}`;
+
+    return pathname;
   };
 
   changeUrl = (id) => {
-    if (this.publicRoomStore.isPublicRoom) return;
-
-    const url = "/products/files/#preview/" + id;
+    const url = this.getUrl(id);
     window.DocSpace.navigate(url);
   };
 

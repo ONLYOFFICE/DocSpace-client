@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import Box from "@docspace/components/box";
-import Text from "@docspace/components/text";
-import toastr from "@docspace/components/toast/toastr";
+import { Box } from "@docspace/shared/components/box";
+import { Text } from "@docspace/shared/components/text";
+import { toastr } from "@docspace/shared/components/toast";
 import RegisterModalDialog from "./register-modal-dialog";
 import styled from "styled-components";
-import { sendRegisterRequest } from "@docspace/common/api/settings";
+import { sendRegisterRequest } from "@docspace/shared/api/settings";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 
 interface IRegisterProps {
   language?: string;
@@ -21,7 +21,7 @@ interface IRegisterProps {
 }
 
 const StyledRegister = styled(Box)`
-  position: fixed;
+  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -115,7 +115,7 @@ const Register: React.FC<IRegisterProps> = (props) => {
   return enabledJoin && !isAuthenticated ? (
     <>
       <StyledRegister id={id} onClick={onRegisterClick}>
-        <Text as="span" color={currentColorScheme?.main.accent}>
+        <Text as="span" color={currentColorScheme?.main?.accent}>
           {t("Register")}
         </Text>
       </StyledRegister>
@@ -144,8 +144,8 @@ const Register: React.FC<IRegisterProps> = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { settingsStore, isAuthenticated, language } = auth;
+export default inject(({ authStore, settingsStore }) => {
+  const { isAuthenticated, language } = authStore;
   const { theme } = settingsStore;
   return {
     theme,

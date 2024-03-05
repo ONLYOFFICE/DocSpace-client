@@ -1,9 +1,9 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import Button from "@docspace/components/button";
+import { Button } from "@docspace/shared/components/button";
 import SelectelSettings from "../../../consumer-storage-settings/SelectelSettings";
-import { ThirdPartyStorages } from "@docspace/common/constants";
+import { ThirdPartyStorages } from "@docspace/shared/enums";
 import { getFromLocalStorage } from "../../../../../../utils";
 
 class SelectelStorage extends React.Component {

@@ -1,20 +1,19 @@
-import Checkbox from "@docspace/components/checkbox";
-import ContextMenuButton from "@docspace/components/context-menu-button";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import PropTypes from "prop-types";
 import React from "react";
 import { ReactSVG } from "react-svg";
 import styled, { css } from "styled-components";
-import ContextMenu from "@docspace/components/context-menu";
-import { tablet } from "@docspace/components/utils/device";
+import { ContextMenu } from "@docspace/shared/components/context-menu";
+import { tablet, isMobile as isMobileUtils } from "@docspace/shared/utils";
 import { isMobile } from "react-device-detect";
 import { withTheme } from "styled-components";
-import Link from "@docspace/components/link";
-import Loader from "@docspace/components/loader";
-import { Base } from "@docspace/components/themes";
-import Tags from "@docspace/components/tags";
-import Tag from "@docspace/components/tag";
-import { RoomsTypeTranslations } from "@docspace/common/constants";
-import { isMobile as isMobileUtils } from "@docspace/components/utils/device";
+import { Link } from "@docspace/shared/components/link";
+import { Loader } from "@docspace/shared/components/loader";
+import { Base } from "@docspace/shared/themes";
+import { Tags } from "@docspace/shared/components/tags";
+import { Tag } from "@docspace/shared/components/tag";
+import { ROOMS_TYPE_TRANSLATIONS } from "@docspace/shared/constants";
 
 const svgLoader = () => <div style={{ width: "96px" }} />;
 
@@ -300,7 +299,7 @@ const StyledFileTileTop = styled.div`
     border-radius: 6px 6px 0 0;
   }
 
-  .temporary-icon > .injected-svg {
+  .temporary-icon > div > .injected-svg {
     position: absolute;
     width: 100%;
     bottom: 16px;
@@ -532,8 +531,8 @@ class Tile extends React.PureComponent {
     const icon = item.isPlugin
       ? item.fileTileIcon
       : thumbnail && !this.state.errorLoadSrc
-      ? thumbnail
-      : temporaryIcon;
+        ? thumbnail
+        : temporaryIcon;
 
     return (
       <Link type="page" onClick={thumbnailClick}>
@@ -553,7 +552,7 @@ class Tile extends React.PureComponent {
 
   changeCheckbox = (e) => {
     const { onSelect, item } = this.props;
-    onSelect && onSelect(!e.target.checked, item);
+    onSelect && onSelect(e.target.checked, item);
   };
 
   onFileIconClick = () => {
@@ -638,12 +637,12 @@ class Tile extends React.PureComponent {
 
     const renderElement = Object.prototype.hasOwnProperty.call(
       this.props,
-      "element"
+      "element",
     );
 
     const renderContentElement = Object.prototype.hasOwnProperty.call(
       this.props,
-      "contentElement"
+      "contentElement",
     );
 
     const renderContext =
@@ -698,7 +697,8 @@ class Tile extends React.PureComponent {
     } else {
       tags.push({
         isDefault: true,
-        label: t(RoomsTypeTranslations[item.roomType]),
+        roomType: item.roomType,
+        label: t(ROOMS_TYPE_TRANSLATIONS[item.roomType]),
         onClick: () =>
           selectOption({
             option: "defaultTypeRoom",
@@ -814,7 +814,7 @@ class Tile extends React.PureComponent {
                 {/* ) : (
                     <Tag
                       isDefault
-                      label={t(RoomsTypeTranslations[item.roomType])}
+                      label={t(ROOMS_TYPE_TRANSLATIONS[item.roomType])}
                       onClick={() =>
                         selectOption({
                           option: "defaultTypeRoom",

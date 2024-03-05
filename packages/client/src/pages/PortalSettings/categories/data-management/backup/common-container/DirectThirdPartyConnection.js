@@ -2,19 +2,19 @@
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
 import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
 import React, { useEffect, useReducer } from "react";
-import Button from "@docspace/components/button";
+import { Button } from "@docspace/shared/components/button";
 import {
   getSettingsThirdParty,
   getThirdPartyCapabilities,
   saveSettingsThirdParty,
-} from "@docspace/common/api/files";
+} from "@docspace/shared/api/files";
 import { StyledBackup } from "../StyledBackup";
-import ComboBox from "@docspace/components/combobox";
-import toastr from "@docspace/components/toast/toastr";
+import { ComboBox } from "@docspace/shared/components/combobox";
+import { toastr } from "@docspace/shared/components/toast";
 import { inject, observer } from "mobx-react";
-import { ContextMenuButton } from "@docspace/components";
+import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import DeleteThirdPartyDialog from "../../../../../../components/dialogs/DeleteThirdPartyDialog";
-import { getOAuthToken } from "@docspace/common/utils";
+import { getOAuthToken } from "@docspace/shared/utils/common";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { useTranslation } from "react-i18next";
 let accounts = [],
@@ -335,7 +335,7 @@ const DirectThirdPartyConnection = (props) => {
   );
 };
 
-export default inject(({ backup, dialogsStore, settingsStore }) => {
+export default inject(({ backup, dialogsStore, filesSettingsStore }) => {
   const {
     clearLocalStorage,
     setSelectedThirdPartyAccount,
@@ -344,7 +344,7 @@ export default inject(({ backup, dialogsStore, settingsStore }) => {
     setConnectedThirdPartyAccount,
     isTheSameThirdPartyAccount,
   } = backup;
-  const { openConnectWindow } = settingsStore.thirdPartyStore;
+  const { openConnectWindow } = filesSettingsStore.thirdPartyStore;
 
   const {
     connectDialogVisible,

@@ -1,15 +1,14 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-import { getCookie } from "@docspace/components/utils/cookie";
-import { LANGUAGE } from "@docspace/common/constants";
+import { LANGUAGE } from "@docspace/shared/constants";
 
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
-import getCorrectDate from "@docspace/components/utils/getCorrectDate";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { getCorrectDate, getCookie } from "@docspace/shared/utils";
 
-import { PluginStatus } from "SRC_DIR/helpers/plugins/constants";
-import { Base } from "@docspace/components/themes";
+import { PluginStatus } from "SRC_DIR/helpers/plugins/enums";
+import { Base } from "@docspace/shared/themes";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -45,7 +44,7 @@ const StyledInfo = styled.div`
   gap: 8px 24px;
 `;
 
-const Info = ({ t, plugin, withDelete }) => {
+const Info = ({ t, plugin, withDelete, withSeparator }) => {
   const locale = getCookie(LANGUAGE) || "en";
   const uploadDate = plugin.createOn && getCorrectDate(locale, plugin.createOn);
 
@@ -56,7 +55,7 @@ const Info = ({ t, plugin, withDelete }) => {
 
   return (
     <StyledContainer withDelete={withDelete}>
-      <StyledSeparator />
+      {withSeparator && <StyledSeparator />}
       <Text fontSize={"14px"} fontWeight={600} lineHeight={"16px"} noSelect>
         {t("Metadata")}
       </Text>
@@ -122,7 +121,7 @@ const Info = ({ t, plugin, withDelete }) => {
               lineHeight={"20px"}
               noSelect
             >
-              {plugin.createBy}
+              {plugin.createBy.displayName}
             </Text>
           </>
         )}

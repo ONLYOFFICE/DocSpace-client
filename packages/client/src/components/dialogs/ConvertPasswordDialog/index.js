@@ -1,15 +1,18 @@
 import React, { useState, useCallback, useEffect } from "react";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Button from "@docspace/components/button";
-import Text from "@docspace/components/text";
+
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Button } from "@docspace/shared/components/button";
+import { Text } from "@docspace/shared/components/text";
+import { toastr } from "@docspace/shared/components/toast";
+
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import SimulatePassword from "../../SimulatePassword";
 import StyledComponent from "./StyledConvertPasswordDialog";
 import config from "PACKAGE_FILE";
 import { openDocEditor } from "@docspace/client/src/helpers/filesUtils";
-import combineUrl from "@docspace/common/utils/combineUrl";
-import toastr from "@docspace/components/toast/toastr";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+
 let tab, _isMounted;
 const ConvertPasswordDialogComponent = (props) => {
   const {
@@ -37,7 +40,7 @@ const ConvertPasswordDialogComponent = (props) => {
 
   const dialogHeading = makeForm
     ? t("Common:MakeForm")
-    : t("Translations:CreateMasterFormFromFile");
+    : t("Common:CreateMasterFormFromFile");
 
   const onClose = () => {
     setConvertPasswordDialogVisible(false);
@@ -63,9 +66,9 @@ const ConvertPasswordDialogComponent = (props) => {
             combineUrl(
               window.DocSpaceConfig?.proxy?.url,
               config.homepage,
-              "/doceditor"
+              "/doceditor",
             ),
-            "_blank"
+            "_blank",
           )
         : null;
 
@@ -92,7 +95,7 @@ const ConvertPasswordDialogComponent = (props) => {
       if (makeForm) {
         copyAsAction(id, newTitle, folderId, false, password)
           .then(() =>
-            toastr.success(t("SuccessfullyCreated", { fileTitle: newTitle }))
+            toastr.success(t("SuccessfullyCreated", { fileTitle: newTitle })),
           )
           .then(() => {
             onClose();
@@ -180,7 +183,7 @@ const ConvertPasswordDialogComponent = (props) => {
       !passwordValid && setPasswordValid(true);
       setPassword(password);
     },
-    [onChangePassword, passwordValid]
+    [onChangePassword, passwordValid],
   );
 
   return (
@@ -200,11 +203,11 @@ const ConvertPasswordDialogComponent = (props) => {
                 {makeForm
                   ? t("Translations:FileProtected").concat(
                       ". ",
-                      t("ConversionPasswordMasterFormCaption")
+                      t("ConversionPasswordMasterFormCaption"),
                     )
                   : t("Translations:FileProtected").concat(
                       ". ",
-                      t("ConversionPasswordFormCaption")
+                      t("ConversionPasswordFormCaption"),
                     )}
               </Text>
             </div>
@@ -255,7 +258,13 @@ const ConvertPasswordDialog = withTranslation([
 ])(ConvertPasswordDialogComponent);
 
 export default inject(
-  ({ filesStore, filesActionsStore, auth, dialogsStore, uploadDataStore }) => {
+  ({
+    filesStore,
+    filesActionsStore,
+    settingsStore,
+    dialogsStore,
+    uploadDataStore,
+  }) => {
     const {
       convertPasswordDialogVisible: visible,
       setConvertPasswordDialogVisible,
@@ -265,7 +274,7 @@ export default inject(
     const { copyAsAction, fileCopyAs } = uploadDataStore;
     const { setPasswordEntryProcess } = filesStore;
     const { completeAction } = filesActionsStore;
-    const { settingsStore } = auth;
+
     const { isTabletView, isDesktopClient } = settingsStore;
 
     return {
@@ -280,5 +289,5 @@ export default inject(
       isDesktop: isDesktopClient,
       completeAction,
     };
-  }
+  },
 )(observer(ConvertPasswordDialog));

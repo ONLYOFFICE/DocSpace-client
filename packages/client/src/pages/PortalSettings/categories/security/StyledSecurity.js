@@ -1,20 +1,7 @@
 import styled from "styled-components";
-import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
-import { Base } from "@docspace/components/themes";
-import { mobile } from "@docspace/components/utils/device";
 
-export const StyledArrowRightIcon = styled(ArrowRightIcon)`
-  ${commonIconsStyles}
-  path {
-    fill: ${(props) => props.theme.client.settings.security.arrowFill};
-  }
-
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
-`;
-
-StyledArrowRightIcon.defaultProps = { theme: Base };
+import { Base } from "@docspace/shared/themes";
+import { mobile } from "@docspace/shared/utils";
 
 export const MainContainer = styled.div`
   width: 100%;
@@ -140,8 +127,7 @@ export const StyledBruteForceProtection = styled.div`
     .link {
       line-height: 15px;
       font-weight: 600;
-      color: ${(props) =>
-        props.theme.client.settings.security.descriptionColor};
+
       text-decoration: underline;
     }
 

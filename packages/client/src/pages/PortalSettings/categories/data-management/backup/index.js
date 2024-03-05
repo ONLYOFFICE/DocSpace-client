@@ -1,11 +1,11 @@
 ﻿import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { combineUrl } from "@docspace/common/utils";
-import { DeviceType } from "@docspace/common/constants";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { DeviceType } from "@docspace/shared/enums";
 import ManualBackup from "./manual-backup";
 import AutoBackup from "./auto-backup";
-import Submenu from "@docspace/components/submenu";
+import { Submenu } from "@docspace/shared/components/submenu";
 import config from "PACKAGE_FILE";
 
 const Backup = ({ t, buttonSize, isNotPaidPeriod }) => {
@@ -41,8 +41,7 @@ const Backup = ({ t, buttonSize, isNotPaidPeriod }) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { settingsStore, currentTariffStatusStore } = auth;
+export default inject(({ settingsStore, currentTariffStatusStore }) => {
   const { isNotPaidPeriod } = currentTariffStatusStore;
   const { currentDeviceType, currentColorScheme } = settingsStore;
 

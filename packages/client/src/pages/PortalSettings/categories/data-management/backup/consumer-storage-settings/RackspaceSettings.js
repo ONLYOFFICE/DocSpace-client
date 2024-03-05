@@ -1,5 +1,5 @@
 import React from "react";
-import TextInput from "@docspace/components/text-input";
+import { TextInput } from "@docspace/shared/components/text-input";
 import { inject, observer } from "mobx-react";
 
 const region = "region";

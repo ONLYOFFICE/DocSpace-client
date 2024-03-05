@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import { useState, useRef } from "react";
 
-import { Base } from "@docspace/components/themes";
-import TableBody from "@docspace/components/table-container/TableBody";
-import TableContainer from "@docspace/components/table-container/TableContainer";
+import { Base } from "@docspace/shared/themes";
+import { TableBody } from "@docspace/shared/components/table";
+import { TableContainer } from "@docspace/shared/components/table";
 
 import HistoryTableRow from "./HistoryTableRow";
 import HistoryTableHeader from "./HistoryTableHeader";
@@ -140,7 +140,7 @@ const HistoryTableView = (props) => {
   );
 };
 
-export default inject(({ setup, webhooksStore, auth }) => {
+export default inject(({ setup, webhooksStore, settingsStore, userStore }) => {
   const { viewAs, setViewAs } = setup;
   const {
     historyItems,
@@ -150,8 +150,8 @@ export default inject(({ setup, webhooksStore, auth }) => {
     formatFilters,
     historyFilters,
   } = webhooksStore;
-  const { id: userId } = auth.userStore.user;
-  const { currentDeviceType } = auth.settingsStore;
+  const { id: userId } = userStore.user;
+  const { currentDeviceType } = settingsStore;
 
   return {
     viewAs,

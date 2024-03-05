@@ -7,19 +7,21 @@ import {
   isTablet,
   mobile,
   tablet,
-} from "@docspace/components/utils/device";
+  desktop,
+} from "@docspace/shared/utils";
 
-import Link from "@docspace/components/link";
-import Text from "@docspace/components/text";
-import RowContent from "@docspace/components/row-content";
+import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { RowContent } from "@docspace/shared/components/row-content";
 
 import withContent from "../../../../../HOCs/withContent";
 
-import { Base } from "@docspace/components/themes";
-import { RoomsTypeTranslations } from "@docspace/common/constants";
-import { desktop } from "@docspace/components/utils/device";
+import { Base } from "@docspace/shared/themes";
+import { ROOMS_TYPE_TRANSLATIONS } from "@docspace/shared/constants";
+
 import { getFileTypeName } from "../../../../../helpers/filesUtils";
-import { SortByFieldName } from "../../../../../helpers/constants";
+import { SortByFieldName } from "SRC_DIR/helpers/enums";
+import { getSpaceQuotaAsText } from "@docspace/shared/utils/common";
 
 const SimpleFilesRowContent = styled(RowContent)`
   .row-main-container-wrapper {
@@ -60,6 +62,17 @@ const SimpleFilesRowContent = styled(RowContent)`
           `
         : css`
             margin: -2px 6px -2px -2px;
+          `}
+  }
+
+  .bagde_alert {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-left: 8px;
+          `
+        : css`
+            margin-right: 8px;
           `}
   }
 
@@ -174,6 +187,9 @@ const FilesRowContent = ({
   filterSortBy,
   createdDate,
   fileOwner,
+  isDefaultRoomsQuotaSet,
+  isStatisticsAvailable,
+  showStorageInfo,
 }) => {
   const {
     contentLength,
@@ -186,6 +202,8 @@ const FilesRowContent = ({
     daysRemaining,
     fileType,
     tags,
+    quotaLimit,
+    usedSpace,
   } = item;
 
   const contentComponent = () => {
@@ -218,6 +236,39 @@ const FilesRowContent = ({
         return updatedDate;
     }
   };
+
+  const additionalComponent = () => {
+    if (
+      isRooms &&
+      isStatisticsAvailable &&
+      showStorageInfo &&
+      usedSpace !== undefined
+    ) {
+      let value = t(ROOMS_TYPE_TRANSLATIONS[item.roomType]);
+      const spaceQuota = getSpaceQuotaAsText(
+        t,
+        usedSpace,
+        quotaLimit,
+        isDefaultRoomsQuotaSet
+      );
+
+      if (!isMobile()) value = `${value} | ${spaceQuota}`;
+
+      return value;
+    }
+
+    if (!fileExst && !contentLength && !providerKey && !isMobile())
+      return `${foldersCount} ${t("Translations:Folders")} | ${filesCount} ${t(
+        "Translations:Files"
+      )}`;
+
+    if (fileExst) return `${fileExst.toUpperCase().replace(/^\./, "")}`;
+
+    return "";
+  };
+
+  const additionalInfo = additionalComponent();
+  const mainInfo = contentComponent();
 
   return (
     <>
@@ -253,7 +304,7 @@ const FilesRowContent = ({
           fontWeight={400}
           className="row_update-text"
         >
-          {contentComponent()}
+          {mainInfo}
         </Text>
 
         <Text
@@ -265,22 +316,14 @@ const FilesRowContent = ({
           fontWeight={400}
           truncate={true}
         >
-          {isRooms
-            ? t(RoomsTypeTranslations[item.roomType])
-            : !fileExst && !contentLength && !providerKey
-            ? `${foldersCount} ${t("Translations:Folders")} | ${filesCount} ${t(
-                "Translations:Files"
-              )}`
-            : fileExst
-            ? `${fileExst.toUpperCase().replace(/^\./, "")}`
-            : ""}
+          {additionalInfo}
         </Text>
       </SimpleFilesRowContent>
     </>
   );
 };
 
-export default inject(({ auth, treeFoldersStore, filesStore }) => {
+export default inject(({ currentQuotaStore, settingsStore, treeFoldersStore, filesStore }) => {
   const { filter, roomsFilter } = filesStore;
   const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
     treeFoldersStore;
@@ -288,10 +331,15 @@ export default inject(({ auth, treeFoldersStore, filesStore }) => {
   const isRooms = isRoomsFolder || isArchiveFolder;
   const filterSortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
 
+  const { isDefaultRoomsQuotaSet, isStatisticsAvailable, showStorageInfo } =
+    currentQuotaStore;
   return {
     filterSortBy,
-    theme: auth.settingsStore.theme,
+    theme: settingsStore.theme,
     isTrashFolder: isRecycleBinFolder,
+    isDefaultRoomsQuotaSet,
+    isStatisticsAvailable,
+    showStorageInfo,
   };
 })(
   observer(

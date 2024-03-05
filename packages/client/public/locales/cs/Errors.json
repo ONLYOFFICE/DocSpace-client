@@ -1,10 +1,5 @@
 {
-  "Error401Text": "Omlouváme se, ale tento zdroj není v současné době přístupný.",
-  "Error403Text": "Omlouváme se, přístup odepřen.",
-  "Error404Text": "Omlouváme se, zdroj nelze najít.",
-  "ErrorDeactivatedText": "Tento prostor DocSpace je deaktivován",
   "ErrorEmptyResponse": "Prázdná reakce",
-  "ErrorOfflineText": "Nebylo nalezeno připojení k internetu",
   "ErrorUnavailableText": "DocSpace není k dispozici",
   "InvalidLink": "Neplatný odkaz",
   "LinkDoesNotExist": "Odkaz, který se snažíte otevřít, neexistuje.",

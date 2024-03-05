@@ -1,12 +1,13 @@
 import React from "react";
 
-import AccountsFilter from "@docspace/common/api/people/filter";
+import AccountsFilter from "@docspace/shared/api/people/filter";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const useAccounts = ({
   t,
   isAccountsPage,
+  isPeopleAccounts,
   location,
 
   setIsLoading,
@@ -16,22 +17,22 @@ const useAccounts = ({
   setPortalTariff,
 }) => {
   React.useEffect(() => {
-    if (!isAccountsPage) return;
+    if (!isAccountsPage || !isPeopleAccounts) return;
     setIsLoading(true);
-    setSelectedNode(["accounts", "filter"]);
+    setSelectedNode(["accounts", "people", "filter"]);
 
     const newFilter = AccountsFilter.getFilter(location);
 
     setDocumentTitle(t("Common:Accounts"));
 
-    fetchPeople(newFilter, true)
+    fetchPeople(newFilter, true, true)
       .catch((err) => {
         if (err?.response?.status === 402) setPortalTariff();
       })
       .finally(() => {
         setIsLoading(false);
       });
-  }, [isAccountsPage, location.pathname, location.search]);
+  }, [isAccountsPage, isPeopleAccounts, location.pathname, location.search]);
 };
 
 export default useAccounts;

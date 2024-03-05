@@ -4,7 +4,7 @@ import {
   UnavailableStyles,
 } from "../../../utils/commonSettingsStyles";
 
-import { tablet, mobile } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/shared/utils";
 
 const INPUT_LENGTH = "350px";
 const TEXT_LENGTH = "700px";
@@ -397,6 +397,20 @@ const StyledRestoreBackup = styled.div`
 
   .backup_radio-button {
     margin-bottom: 16px;
+  }
+
+  .restore-backup_button-container {
+    padding-block: 30px;
+    position: sticky;
+    bottom: 0;
+    margin-top: 32px;
+    background-color: ${({ theme }) => theme.backgroundColor};
+
+    @media ${mobile} {
+      position: fixed;
+      padding-inline: 16px;
+      inset-inline: 0;
+    }
   }
 
   .restore-backup_button {

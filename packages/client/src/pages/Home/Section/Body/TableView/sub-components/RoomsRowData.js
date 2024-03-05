@@ -1,14 +1,15 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
-import TableCell from "@docspace/components/table-container/TableCell";
+import { TableCell } from "@docspace/shared/components/table";
 import FileNameCell from "./FileNameCell";
 import TypeCell from "./TypeCell";
 import TagsCell from "./TagsCell";
 import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
-import { classNames } from "@docspace/components/utils/classNames";
+import { classNames } from "@docspace/shared/utils";
 import { StyledBadgesContainer } from "../StyledTable";
 import { StyledQuickButtonsContainer } from "../StyledTable";
+import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 
 const RoomsRowDataComponent = (props) => {
   const {
@@ -17,6 +18,8 @@ const RoomsRowDataComponent = (props) => {
     roomColumnQuickButtonsIsEnabled,
     roomColumnTagsIsEnabled,
     roomColumnActivityIsEnabled,
+    roomQuotaColumnIsEnable,
+    showStorageInfo,
 
     dragStyles,
     selectionProp,
@@ -29,6 +32,7 @@ const RoomsRowDataComponent = (props) => {
     showHotkeyBorder,
     badgesComponent,
     quickButtonsComponent,
+    item,
   } = props;
 
   return (
@@ -125,6 +129,18 @@ const RoomsRowDataComponent = (props) => {
       ) : (
         <div />
       )}
+      {showStorageInfo &&
+        (roomQuotaColumnIsEnable ? (
+          <TableCell className={"table-cell_Storage/Quota"}>
+            <SpaceQuota
+              item={item}
+              type="room"
+              isReadOnly={!item?.security?.EditRoom}
+            />
+          </TableCell>
+        ) : (
+          <div />
+        ))}
 
       {roomColumnQuickButtonsIsEnabled ? (
         <TableCell
@@ -150,20 +166,24 @@ const RoomsRowDataComponent = (props) => {
   );
 };
 
-export default inject(({ tableStore }) => {
+export default inject(({ currentQuotaStore, tableStore }) => {
   const {
     roomColumnTypeIsEnabled,
     roomColumnOwnerIsEnabled,
     roomColumnQuickButtonsIsEnabled,
     roomColumnTagsIsEnabled,
     roomColumnActivityIsEnabled,
+    roomQuotaColumnIsEnable,
   } = tableStore;
 
+  const { showStorageInfo } = currentQuotaStore;
   return {
+    roomQuotaColumnIsEnable,
     roomColumnTypeIsEnabled,
     roomColumnOwnerIsEnabled,
     roomColumnQuickButtonsIsEnabled,
     roomColumnTagsIsEnabled,
     roomColumnActivityIsEnabled,
+    showStorageInfo,
   };
 })(observer(RoomsRowDataComponent));

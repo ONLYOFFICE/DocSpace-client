@@ -1,23 +1,22 @@
 import styled, { css } from "styled-components";
-import Heading from "@docspace/components/heading";
-import TextInput from "@docspace/components/text-input";
-import ComboBox from "@docspace/components/combobox";
-import Box from "@docspace/components/box";
-import DropDown from "@docspace/components/drop-down";
-import Text from "@docspace/components/text";
-import Button from "@docspace/components/button";
-import HelpButton from "@docspace/components/help-button";
-import Link from "@docspace/components/link";
-import ToggleButton from "@docspace/components/toggle-button";
-import { mobile } from "@docspace/components/utils/device";
+import { Heading } from "@docspace/shared/components/heading";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { ComboBox } from "@docspace/shared/components/combobox";
+import { Box } from "@docspace/shared/components/box";
+import { DropDown } from "@docspace/shared/components/drop-down";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { Link } from "@docspace/shared/components/link";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { mobile, commonIconsStyles } from "@docspace/shared/utils";
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 import CrossIconMobile from "PUBLIC_DIR/images/cross.react.svg";
 import DeleteIcon from "PUBLIC_DIR/images/mobile.actions.remove.react.svg";
+import { isMobile } from "@docspace/shared/utils";
 
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
-
-import Base from "@docspace/components/themes/base";
+import Base from "@docspace/shared/themes/base";
 
 const fillAvailableWidth = css`
   width: 100%;
@@ -67,10 +66,17 @@ const StyledInvitePanel = styled.div`
           : css`
               padding-right: 0px !important;
             `}
+
+      ${!isMobile() &&
+      css`
+        width: 480px;
+        min-width: auto !important;
+      `}
     }
 
     ${(props) =>
       !props.addUsersPanelVisible &&
+      isMobile() &&
       props.theme.interfaceDirection !== "rtl" &&
       css`
         .trackYVisible {
@@ -80,16 +86,6 @@ const StyledInvitePanel = styled.div`
         }
       `}
   }
-
-  ${(props) =>
-    !props.scrollAllPanelContent &&
-    css`
-      .trackYVisible {
-        .scroller {
-          margin-right: -20px !important;
-        }
-      }
-    `}
 `;
 
 const ScrollList = styled.div`
@@ -98,6 +94,13 @@ const ScrollList = styled.div`
     props.scrollAllPanelContent && props.isTotalListHeight
       ? "auto"
       : props.offsetTop && `calc(100% - ${props.offsetTop}px)`};
+
+  ${!isMobile() &&
+  css`
+    .row-item {
+      width: 448px !important;
+    }
+  `}
 `;
 
 const StyledBlock = styled.div`
@@ -106,6 +109,12 @@ const StyledBlock = styled.div`
 `;
 
 StyledBlock.defaultProps = { theme: Base };
+
+const StyledInviteUserBody = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+`;
 
 const StyledHeading = styled(Heading)`
   font-weight: 700;
@@ -150,14 +159,8 @@ const StyledRow = styled.div`
   gap: 8px;
 
   min-height: 41px;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: 16px;
-        `
-      : css`
-          margin-left: 16px;
-        `}
+
+  margin-inline-start: 16px;
   box-sizing: border-box;
   border-bottom: none;
 
@@ -168,16 +171,14 @@ const StyledRow = styled.div`
   }
 
   .invite-panel_access-selector {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: auto;
-            margin-left: 0;
-          `
-        : css`
-            margin-left: auto;
-            margin-right: 0;
-          `}
+    margin-inline-start: auto;
+    margin-inline-end: 0;
+
+    ${({ hasWarning }) => hasWarning && `margin-inline-start: 0;`}
+  }
+
+  .warning {
+    margin-inline-start: auto;
   }
 
   .combo-button-label {
@@ -200,9 +201,9 @@ const StyledInviteInput = styled.div`
           margin-left: 16px;
           margin-right: ${(props) => (props.hideSelector ? "16px" : "8px")};
         `}
-  
-  
-  .input-link {
+
+
+    .input-link {
     height: 32px;
 
     > input {
@@ -237,7 +238,7 @@ const StyledComboBox = styled(ComboBox)`
         `}
 
   .combo-button-label,
-  .combo-button-label:hover {
+    .combo-button-label:hover {
     text-decoration: none;
   }
 
@@ -288,17 +289,40 @@ const StyledDropDown = styled(DropDown)`
       text-overflow: ellipsis;
       overflow: hidden;
     }
+
+    .email-list_avatar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow: hidden;
+    }
+
+    .email-list_add-button {
+      display: flex;
+      margin-left: auto;
+      align-items: center;
+      gap: 4px;
+
+      p {
+        color: #4781d1;
+      }
+
+      svg path {
+        fill: #4781d1;
+      }
+    }
   }
 `;
 
 const SearchItemText = styled(Text)`
-  line-height: 16px;
+  line-height: ${({ theme }) =>
+    theme.interfaceDirection === "rtl" ? `20px` : `16px`};
 
   text-overflow: ellipsis;
   overflow: hidden;
   font-size: ${(props) =>
     props.theme.getCorrectFontSize(
-      props.primary ? "14px" : props.info ? "11px" : "12px"
+      props.primary ? "14px" : props.info ? "11px" : "12px",
     )};
   font-weight: ${(props) => (props.primary || props.info ? "600" : "400")};
 
@@ -306,7 +330,7 @@ const SearchItemText = styled(Text)`
     (props.primary && !props.disabled) || props.info
       ? props.theme.text.color
       : props.theme.text.emailColor};
-  ${(props) => props.info && `margin-left: auto`}
+  ${(props) => props.info && `margin-inline-start: auto`}
 `;
 
 SearchItemText.defaultProps = { theme: Base };
@@ -355,14 +379,7 @@ const StyledDeleteIcon = styled(DeleteIcon)`
 StyledDeleteIcon.defaultProps = { theme: Base };
 
 const StyledHelpButton = styled(HelpButton)`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-left: 8px;
-        `
-      : css`
-          margin-right: 8px;
-        `}
+  margin-inline-start: 8px;
 `;
 
 const StyledButtons = styled(Box)`
@@ -470,6 +487,12 @@ const StyledInviteLanguage = styled.div`
       }
     }
   }
+
+  .language-combo-box-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
 `;
 const StyledCrossIconMobile = styled(CrossIconMobile)`
   width: 17px;
@@ -508,4 +531,5 @@ export {
   StyledInviteLanguage,
   StyledControlContainer,
   StyledCrossIconMobile,
+  StyledInviteUserBody,
 };

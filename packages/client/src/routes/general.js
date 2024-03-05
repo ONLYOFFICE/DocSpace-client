@@ -1,11 +1,13 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-
 import loadable from "@loadable/component";
 
-import PrivateRoute from "@docspace/common/components/PrivateRoute";
+import PrivateRoute from "../components/PrivateRouteWrapper";
+import componentLoader from "@docspace/shared/utils/component-loader";
 
-const Profile = loadable(() => import("../pages/Profile"));
+const Profile = loadable(() =>
+  componentLoader(() => import("../pages/Profile")),
+);
 
 const generalRoutes = [
   {
@@ -13,7 +15,9 @@ const generalRoutes = [
     children: [
       {
         index: true,
-        element: <Navigate to="login" />,
+        Component: () => (
+          <Navigate to="login" state={window.DocSpace?.location?.state} />
+        ),
       },
       {
         path: "login",

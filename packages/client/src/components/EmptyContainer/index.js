@@ -4,7 +4,7 @@ import { observer, inject } from "mobx-react";
 import RootFolderContainer from "./RootFolderContainer";
 import EmptyFilterContainer from "./EmptyFilterContainer";
 import EmptyFolderContainer from "./EmptyFolderContainer";
-import { Events } from "@docspace/common/constants";
+import { Events } from "@docspace/shared/enums";
 import RoomNoAccessContainer from "./RoomNoAccessContainer";
 
 const linkStyles = {
@@ -20,11 +20,15 @@ const EmptyContainer = ({
   //isLoading,
   parentId,
   theme,
+  type,
 
   sectionWidth,
   isRoomNotFoundOrMoved,
   isGracePeriod,
   setInviteUsersWarningDialogVisible,
+  isRoot,
+  isPublicRoom,
+  isEmptyPage,
 }) => {
   //const location = useLocation();
 
@@ -63,7 +67,8 @@ const EmptyContainer = ({
     );
   }
 
-  const isRootEmptyPage = parentId === 0;
+  const isRootEmptyPage = parentId === 0 || (isPublicRoom && isRoot);
+
   //isLoading && location?.state ? location.state?.isRoot : parentId === 0;
 
   return isFiltered ? (
@@ -80,33 +85,40 @@ const EmptyContainer = ({
       sectionWidth={sectionWidth}
       onCreate={onCreate}
       linkStyles={linkStyles}
+      type={type}
+      isEmptyPage={isEmptyPage}
     />
   );
 };
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     filesStore,
     dialogsStore,
 
     selectedFolderStore,
     clientLoadingStore,
+    currentTariffStatusStore,
+    publicRoomStore,
   }) => {
     const { isErrorRoomNotAvailable, isFiltered } = filesStore;
     const { isLoading } = clientLoadingStore;
 
-    const { isGracePeriod } = auth.currentTariffStatusStore;
+    const { isGracePeriod } = currentTariffStatusStore;
 
     const { setInviteUsersWarningDialogVisible } = dialogsStore;
+    const { isPublicRoom } = publicRoomStore;
 
     const isRoomNotFoundOrMoved =
       isFiltered === null &&
       selectedFolderStore.parentId === null &&
       isErrorRoomNotAvailable;
 
+    const isRoot = selectedFolderStore.pathParts?.length === 1;
+
     return {
-      theme: auth.settingsStore.theme,
+      theme: settingsStore.theme,
       isFiltered,
       isLoading,
 
@@ -114,6 +126,9 @@ export default inject(
       isRoomNotFoundOrMoved,
       isGracePeriod,
       setInviteUsersWarningDialogVisible,
+      type: selectedFolderStore.type,
+      isRoot,
+      isPublicRoom,
     };
-  }
+  },
 )(observer(EmptyContainer));

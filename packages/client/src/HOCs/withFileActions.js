@@ -1,7 +1,8 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType, RoomsType } from "@docspace/shared/enums";
+import Planet12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/planet.react.svg?url";
 
 export default function withFileActions(WrappedFileItem) {
   class WithFileActions extends React.Component {
@@ -53,10 +54,12 @@ export default function withFileActions(WrappedFileItem) {
     };
 
     onDrop = (items) => {
-      const { isTrashFolder, dragging, setDragging } = this.props;
+      const { isTrashFolder, dragging, setDragging, isDisabledDropItem } =
+        this.props;
       const { fileExst, id } = this.props.item;
 
-      if (isTrashFolder) return dragging && setDragging(false);
+      if (isTrashFolder || isDisabledDropItem)
+        return dragging && setDragging(false);
 
       if (!fileExst) {
         this.onDropZoneUpload(items, id);
@@ -81,6 +84,7 @@ export default function withFileActions(WrappedFileItem) {
         isSelected,
         setSelection,
         currentDeviceType,
+        isDisabledItemId,
       } = this.props;
 
       const { isThirdPartyFolder } = item;
@@ -110,8 +114,8 @@ export default function withFileActions(WrappedFileItem) {
       const mouseButton = e.which
         ? e.which !== 1
         : e.button
-        ? e.button !== 0
-        : false;
+          ? e.button !== 0
+          : false;
       const label = e.currentTarget.getAttribute("label");
       if (mouseButton || e.currentTarget.tagName !== "DIV" || label) {
         return e;
@@ -174,6 +178,7 @@ export default function withFileActions(WrappedFileItem) {
 
     onFilesClick = (e) => {
       const {
+        t,
         item,
         openFileAction,
         setParentId,
@@ -200,10 +205,10 @@ export default function withFileActions(WrappedFileItem) {
         item.foldersCount === 0
       ) {
         setParentId(item.parentId);
-        setRoomType(item.roomType);
+        // setRoomType(item.roomType);
       }
 
-      openFileAction(item);
+      openFileAction(item, t);
     };
 
     onSelectTag = (tag) => {
@@ -249,10 +254,17 @@ export default function withFileActions(WrappedFileItem) {
 
         itemIndex,
         currentDeviceType,
+        isDisabledDropItem,
+        isRecentTab,
       } = this.props;
       const { access, id } = item;
 
-      const isDragging = isFolder && access < 2 && !isTrashFolder && !isPrivacy;
+      const isDragging =
+        !isDisabledDropItem &&
+        isFolder &&
+        access < 2 &&
+        !isTrashFolder &&
+        !isPrivacy;
 
       let className = isDragging ? " droppable" : "";
       if (draggable) className += " draggable";
@@ -260,8 +272,8 @@ export default function withFileActions(WrappedFileItem) {
       let value = item.isFolder
         ? `folder_${id}`
         : item.isDash
-        ? `dash_${id}`
-        : `file_${id}`;
+          ? `dash_${id}`
+          : `file_${id}`;
       value += draggable ? "_draggable" : "_false";
 
       value += `_index_${itemIndex}`;
@@ -273,10 +285,17 @@ export default function withFileActions(WrappedFileItem) {
       const displayShareButton = isMobileView
         ? "26px"
         : !isShareable
-        ? "38px"
-        : "96px";
+          ? "38px"
+          : "96px";
 
       const checkedProps = id <= 0 ? false : isSelected;
+
+      const showPlanetIcon =
+        (item.roomType === RoomsType.PublicRoom ||
+          item.roomType === RoomsType.CustomRoom) &&
+        item.shared;
+
+      const badgeUrl = showPlanetIcon ? Planet12ReactSvgUrl : null;
 
       return (
         <WrappedFileItem
@@ -301,6 +320,8 @@ export default function withFileActions(WrappedFileItem) {
           getContextModel={this.getContextModel}
           onDragOver={this.onDragOver}
           onDragLeave={this.onDragLeave}
+          badgeUrl={badgeUrl}
+          isRecentTab={isRecentTab}
           {...this.props}
         />
       );
@@ -310,7 +331,7 @@ export default function withFileActions(WrappedFileItem) {
   return inject(
     (
       {
-        auth,
+        settingsStore,
         filesActionsStore,
         dialogsStore,
         treeFoldersStore,
@@ -319,7 +340,7 @@ export default function withFileActions(WrappedFileItem) {
         uploadDataStore,
         contextOptionsStore,
       },
-      { item, t }
+      { item, t },
     ) => {
       const {
         selectRowAction,
@@ -336,6 +357,7 @@ export default function withFileActions(WrappedFileItem) {
         isRecycleBinFolder,
         isRoomsFolder,
         isArchiveFolder,
+        isRecentTab,
       } = treeFoldersStore;
       const {
         dragging,
@@ -361,10 +383,13 @@ export default function withFileActions(WrappedFileItem) {
       const { startUpload } = uploadDataStore;
 
       const selectedItem = selection.find(
-        (x) => x.id === item.id && x.fileExst === item.fileExst
+        (x) => x.id === item.id && x.fileExst === item.fileExst,
       );
 
-      const draggable = !isRecycleBinFolder && selectedItem;
+      const isDisabledDropItem = item.security?.Create === false;
+
+      const draggable =
+        !isRecycleBinFolder && selectedItem && !isDisabledDropItem;
 
       const isFolder = selectedItem ? false : !item.isFolder ? false : true;
 
@@ -377,11 +402,15 @@ export default function withFileActions(WrappedFileItem) {
         return destFolderId != id;
       };
 
-      const activeFileIndex = activeFiles.findIndex((x) => x.id === item.id);
+      const activeFileIndex = activeFiles.findIndex(
+        (x) =>
+          x.id === item.id &&
+          (Boolean(item.fileExst) || item.fileType !== undefined),
+      );
       const activeFolderIndex = activeFolders.findIndex(
         (x) =>
           x.id === item.id &&
-          (item.isFolder || (!item.fileExst && item.id === -1))
+          (item.isFolder || (!item.fileExst && item.id === -1)),
       );
 
       const isFileProgress = isProgress(activeFileIndex, activeFiles);
@@ -443,8 +472,10 @@ export default function withFileActions(WrappedFileItem) {
         withShiftSelect,
 
         setSelection,
-        currentDeviceType: auth.settingsStore.currentDeviceType,
+        currentDeviceType: settingsStore.currentDeviceType,
+        isDisabledDropItem,
+        isRecentTab,
       };
-    }
+    },
   )(observer(WithFileActions));
 }

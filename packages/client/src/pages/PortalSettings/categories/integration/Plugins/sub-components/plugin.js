@@ -1,14 +1,14 @@
-import Heading from "@docspace/components/heading";
-import IconButton from "@docspace/components/icon-button";
-import ToggleButton from "@docspace/components/toggle-button";
-import Badge from "@docspace/components/badge";
-import Text from "@docspace/components/text";
+import { Heading } from "@docspace/shared/components/heading";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { Badge } from "@docspace/shared/components/badge";
+import { Text } from "@docspace/shared/components/text";
 
 import PluginSettingsIconUrl from "PUBLIC_DIR/images/plugin.settings.react.svg?url";
 import PluginDefaultLogoUrl from "PUBLIC_DIR/images/plugin.default-logo.png";
 
 import { getPluginUrl } from "SRC_DIR/helpers/plugins/utils";
-import { PluginScopes } from "SRC_DIR/helpers/plugins/constants";
+import { PluginScopes } from "SRC_DIR/helpers/plugins/enums";
 
 import { StyledPluginItem, StyledPluginHeader } from "../StyledPlugins";
 

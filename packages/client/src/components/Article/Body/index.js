@@ -1,32 +1,22 @@
 import React from "react";
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import { useNavigate, useLocation } from "react-router-dom";
 
-import { DeviceType, RoomSearchArea } from "@docspace/common/constants";
+import { DeviceType, RoomSearchArea } from "@docspace/shared/enums";
 import Items from "./Items";
-import { tablet } from "@docspace/components/utils/device";
 
-import FilesFilter from "@docspace/common/api/files/filter";
-import RoomsFilter from "@docspace/common/api/rooms/filter";
-import AccountsFilter from "@docspace/common/api/people/filter";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import AccountsFilter from "@docspace/shared/api/people/filter";
 
 import Banner from "./Banner";
 
-import Loaders from "@docspace/common/components/Loaders";
-
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
-
-const StyledBlock = styled.div`
-  padding: 0 20px;
-
-  @media ${tablet} {
-    padding: ${(props) => (props.showText ? "0 16px" : 0)};
-  }
-`;
+import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
+import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
 const ArticleBodyContent = (props) => {
   const {
@@ -53,6 +43,8 @@ const ArticleBodyContent = (props) => {
     setIsBurgerLoading,
     setSelection,
     currentDeviceType,
+    campaigns,
+    userId,
   } = props;
 
   const navigate = useNavigate();
@@ -61,14 +53,10 @@ const ArticleBodyContent = (props) => {
   const [disableBadgeClick, setDisableBadgeClick] = React.useState(false);
   const [activeItemId, setActiveItemId] = React.useState(null);
 
-  const campaigns = (localStorage.getItem("campaigns") || "")
-    .split(",")
-    .filter((campaign) => campaign.length > 0);
-
   const isAccounts = location.pathname.includes("accounts/filter");
 
   const onClick = React.useCallback(
-    (folderId, title, rootFolderType) => {
+    (folderId, title, rootFolderType, canCreate) => {
       const { toggleArticleOpen } = props;
 
       let params = null;
@@ -79,6 +67,7 @@ const ArticleBodyContent = (props) => {
         isRoot: true,
         isPublicRoomType: false,
         rootFolderType,
+        canCreate,
       };
 
       let withTimer = !!selectedFolderId;
@@ -98,9 +87,9 @@ const ArticleBodyContent = (props) => {
 
           break;
         case archiveFolderId:
-          const archiveFilter = RoomsFilter.getDefault();
+          const archiveFilter = RoomsFilter.getDefault(userId);
           archiveFilter.searchArea = RoomSearchArea.Archive;
-          params = archiveFilter.toUrlParams();
+          params = archiveFilter.toUrlParams(userId, true);
           path = getCategoryUrl(CategoryType.Archive);
           if (activeItemId === archiveFolderId && folderId === selectedFolderId)
             return;
@@ -138,9 +127,9 @@ const ArticleBodyContent = (props) => {
           return;
         case roomsFolderId:
         default:
-          const roomsFilter = RoomsFilter.getDefault();
+          const roomsFilter = RoomsFilter.getDefault(userId);
           roomsFilter.searchArea = RoomSearchArea.Active;
-          params = roomsFilter.toUrlParams();
+          params = roomsFilter.toUrlParams(userId, true);
           path = getCategoryUrl(CategoryType.Shared);
           if (activeItemId === roomsFolderId && folderId === selectedFolderId)
             return;
@@ -165,7 +154,7 @@ const ArticleBodyContent = (props) => {
       selectedFolderId,
       isAccounts,
       setSelection,
-    ]
+    ],
   );
 
   const onShowNewFilesPanel = React.useCallback(
@@ -178,7 +167,7 @@ const ArticleBodyContent = (props) => {
 
       setDisableBadgeClick(false);
     },
-    [disableBadgeClick]
+    [disableBadgeClick],
   );
 
   React.useEffect(() => {
@@ -206,10 +195,7 @@ const ArticleBodyContent = (props) => {
     )
       return setActiveItemId(recycleBinFolderId);
 
-    if (
-      location.pathname.includes("/accounts/filter") &&
-      activeItemId !== "accounts"
-    )
+    if (location.pathname.includes("/accounts") && activeItemId !== "accounts")
       return setActiveItemId("accounts");
 
     if (location.pathname.includes("/settings") && activeItemId !== "settings")
@@ -220,7 +206,7 @@ const ArticleBodyContent = (props) => {
       return setActiveItemId(rootFolderId || roomsFolderId);
     }
 
-    if (location.pathname.includes("/products/files/#preview")) {
+    if (location.pathname.includes(MEDIA_VIEW_URL)) {
       setActiveItemId(rootFolderId);
     }
   }, [
@@ -238,7 +224,7 @@ const ArticleBodyContent = (props) => {
     setIsBurgerLoading(showArticleLoader);
   }, [showArticleLoader]);
 
-  if (showArticleLoader) return <Loaders.ArticleFolder />;
+  if (showArticleLoader) return <ArticleFolderLoader />;
 
   return (
     <>
@@ -250,25 +236,23 @@ const ArticleBodyContent = (props) => {
         activeItemId={activeItemId}
       />
 
-      {/* {!isDesktopClient && showText && (
-        <StyledBlock showText={showText}>
-          {(isDesktop || isTablet) && !firstLoad && campaigns.length > 0 && (
-            <Banner FirebaseHelper={FirebaseHelper} />
-          )}
-        </StyledBlock>
-      )} */}
+      {!isDesktopClient && showText && !firstLoad && campaigns.length > 0 && (
+        <Banner />
+      )}
     </>
   );
 };
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     filesStore,
     treeFoldersStore,
     dialogsStore,
     selectedFolderStore,
     clientLoadingStore,
+    userStore,
+    campaignsStore,
   }) => {
     const { clearFiles, setSelection } = filesStore;
     const {
@@ -301,13 +285,16 @@ export default inject(
       theme,
       setIsBurgerLoading,
       currentDeviceType,
-    } = auth.settingsStore;
+    } = settingsStore;
+
+    const { campaigns } = campaignsStore;
 
     return {
       toggleArticleOpen,
       showText,
       showArticleLoader,
-      isVisitor: auth.userStore.user.isVisitor,
+      isVisitor: userStore.user.isVisitor,
+      userId: userStore.user?.id,
 
       setNewFilesPanelVisible,
 
@@ -329,6 +316,7 @@ export default inject(
       setIsBurgerLoading,
       setSelection,
       currentDeviceType,
+      campaigns,
     };
-  }
+  },
 )(withTranslation([])(observer(ArticleBodyContent)));

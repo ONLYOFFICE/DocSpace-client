@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 import { inject, observer } from "mobx-react";
-import { getConvertedSize } from "@docspace/common/utils";
+import { getConvertedSize } from "@docspace/shared/utils/common";
 const StyledBody = styled.div`
   .select-total-size_title {
     margin-bottom: 8px;
@@ -43,11 +43,10 @@ const SelectTotalSizeContainer = ({
   );
 };
 
-export default inject(({ auth, payments }) => {
-  const { paymentQuotasStore } = auth;
+export default inject(({ settingsStore, paymentQuotasStore, paymentStore }) => {
   const { usedTotalStorageSizeTitle } = paymentQuotasStore;
-  const { theme } = auth.settingsStore;
-  const { allowedStorageSizeByQuota } = payments;
+  const { theme } = settingsStore;
+  const { allowedStorageSizeByQuota } = paymentStore;
 
   return {
     theme,

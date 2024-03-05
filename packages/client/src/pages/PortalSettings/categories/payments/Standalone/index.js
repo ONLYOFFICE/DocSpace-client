@@ -4,7 +4,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { setDocumentTitle } from "@docspace/client/src/helpers/filesUtils";
-import Loaders from "@docspace/common/components/Loaders";
+import { PaymentsStandaloneLoader } from "@docspace/shared/skeletons/payments";
 
 import LicenseContainer from "./LicenseContainer";
 import { StyledComponent } from "./StyledComponent";
@@ -39,7 +39,7 @@ const StandalonePage = (props) => {
     !ready ||
     isUpdatingBasicSettings
   )
-    return <Loaders.PaymentsStandaloneLoader isEnterprise={!isTrial} />;
+    return <PaymentsStandaloneLoader isEnterprise={!isTrial} />;
 
   return (
     <StyledComponent>
@@ -50,20 +50,20 @@ const StandalonePage = (props) => {
   );
 };
 
-export default inject(({ auth, payments }) => {
-  const { currentQuotaStore, currentTariffStatusStore } = auth;
+export default inject(
+  ({ currentQuotaStore, paymentStore, currentTariffStatusStore }) => {
+    const { standaloneInit, isInitPaymentPage, isUpdatingBasicSettings } =
+      paymentStore;
+    const { isLoaded: isLoadedCurrentQuota, isTrial } = currentQuotaStore;
+    const { isLoaded: isLoadedTariffStatus } = currentTariffStatusStore;
 
-  const { standaloneInit, isInitPaymentPage, isUpdatingBasicSettings } =
-    payments;
-  const { isLoaded: isLoadedCurrentQuota, isTrial } = currentQuotaStore;
-  const { isLoaded: isLoadedTariffStatus } = currentTariffStatusStore;
-
-  return {
-    isTrial,
-    standaloneInit,
-    isInitPaymentPage,
-    isLoadedTariffStatus,
-    isLoadedCurrentQuota,
-    isUpdatingBasicSettings,
-  };
-})(observer(StandalonePage));
+    return {
+      isTrial,
+      standaloneInit,
+      isInitPaymentPage,
+      isLoadedTariffStatus,
+      isLoadedCurrentQuota,
+      isUpdatingBasicSettings,
+    };
+  },
+)(observer(StandalonePage));

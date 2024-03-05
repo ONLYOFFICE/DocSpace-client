@@ -1,10 +1,12 @@
 {
   "Categories": "Kategoriler",
+  "EmptyFormGalleryScreenDescription": "Sorgunuzla eşleşen sonuç bulunamadı",
   "ErrorViewDescription": "Lütfen daha sonra tekrar deneyin",
+  "ErrorViewHeader": "Form galerisi geçici olarak kullanılamıyor",
   "SelectForm": "Formu Seç",
-  "SubmitToGalleryBlockBody": "ONLYOFFICE topluluğuyla paylaşmak için şablonlarınızı gönderin.",
-  "SubmitToGalleryBlockHeader": "ONLYOFFICE Form Galerisi",
   "SubmitToGalleryDialogGuideInfo": "<1>guide</1> mükemmel formlar oluşturmayı ve onay alma şansınızı nasıl artıracağınızı öğrenin.",
   "SubmitToGalleryDialogMainInfo": "Formunuzun başkalarının çalışmalarında kullanmasına izin vermek için genel galeriye gönderin. Form denetimden geçtikten sonra, katkınız için bilgilendirileceksiniz ve ödüllendirileceksiniz.",
-  "TemplateInfo": "Şablon bilgisi"
+  "SuggestChanges": "Değişiklik öner",
+  "TemplateInfo": "Şablon bilgisi",
+  "ViewAllTemplates": "Tüm şablonları görüntüle"
 }

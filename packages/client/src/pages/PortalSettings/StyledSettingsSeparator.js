@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 
 const StyledSettingsSeparator = styled.hr`
   margin: 24px 0;

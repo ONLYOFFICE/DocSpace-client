@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useTransition, Suspense } from "react";
 import styled, { css } from "styled-components";
-import Submenu from "@docspace/components/submenu";
+import { Submenu } from "@docspace/shared/components/submenu";
 
-import Box from "@docspace/components/box";
+import { Box } from "@docspace/shared/components/box";
 import { inject, observer } from "mobx-react";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 
 import { useNavigate } from "react-router-dom";
@@ -15,12 +15,12 @@ import Api from "./Api";
 
 import { useTranslation } from "react-i18next";
 import { isMobile, isMobileOnly } from "react-device-detect";
-import AppLoader from "@docspace/common/components/AppLoader";
+import AppLoader from "@docspace/shared/components/app-loader";
 import SSOLoader from "./sub-components/ssoLoader";
 import { WebhookConfigsLoader } from "./Webhooks/sub-components/Loaders";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 import PluginSDK from "./PluginSDK";
-import Badge from "@docspace/components/badge";
+import { Badge } from "@docspace/shared/components/badge";
 
 const StyledSubmenu = styled(Submenu)`
   .sticky {
@@ -39,6 +39,7 @@ const DeveloperToolsWrapper = (props) => {
     "Webhooks",
     "Settings",
     "WebPlugins",
+    "Common",
   ]);
   const [isPending, startTransition] = useTransition();
 
@@ -53,7 +54,7 @@ const DeveloperToolsWrapper = (props) => {
       {t("WebPlugins:PluginSDK")}
 
       <Badge
-        label={t("Settings:BetaLabel")}
+        label={t("Common:BetaLabel")}
         backgroundColor="#533ED1"
         fontSize="9px"
         borderRadius="50px"
@@ -87,7 +88,7 @@ const DeveloperToolsWrapper = (props) => {
   ];
 
   const [currentTab, setCurrentTab] = useState(
-    data.findIndex((item) => location.pathname.includes(item.id))
+    data.findIndex((item) => location.pathname.includes(item.id)),
   );
 
   const load = async () => {
@@ -111,8 +112,8 @@ const DeveloperToolsWrapper = (props) => {
       combineUrl(
         window.DocSpaceConfig?.proxy?.url,
         config.homepage,
-        `/portal-settings/developer-tools/${e.id}`
-      )
+        `/portal-settings/developer-tools/${e.id}`,
+      ),
     );
   };
 
@@ -128,18 +129,16 @@ const DeveloperToolsWrapper = (props) => {
           currentDeviceType === DeviceType.desktop
             ? 0
             : currentDeviceType === DeviceType.mobile
-            ? "53px"
-            : "61px"
+              ? "53px"
+              : "61px"
         }
       />
     </Suspense>
   );
 };
 
-export default inject(({ setup, auth }) => {
+export default inject(({ setup, settingsStore }) => {
   const { initSettings } = setup;
-
-  const { settingsStore } = auth;
 
   return {
     currentDeviceType: settingsStore.currentDeviceType,

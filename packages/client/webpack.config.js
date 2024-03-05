@@ -9,10 +9,10 @@ const BundleAnalyzerPlugin =
 
 const ExternalTemplateRemotesPlugin = require("external-remotes-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-//const combineUrl = require("@docspace/common/utils/combineUrl");
-const minifyJson = require("@docspace/common/utils/minifyJson");
-//const beforeBuild = require("@docspace/common/utils/beforeBuild");
-const sharedDeps = require("@docspace/common/constants/sharedDependencies");
+
+const minifyJson = require("@docspace/shared/utils/minifyJson");
+
+const sharedDeps = require("@docspace/shared/constants/sharedDependencies");
 //const fs = require("fs");
 //const { readdir } = require("fs").promises;
 
@@ -21,7 +21,7 @@ const path = require("path");
 const pkg = require("./package.json");
 const runtime = require("../runtime.json");
 const deps = pkg.dependencies || {};
-const homepage = pkg.homepage; //combineUrl(window.DocSpaceConfig?.proxy?.url, pkg.homepage);
+const homepage = pkg.homepage;
 const title = pkg.title;
 const version = pkg.version;
 const dateHash = runtime?.date || "";
@@ -292,76 +292,71 @@ module.exports = (env, argv) => {
       exposes: {
         "./shell": "./src/Shell",
         "./store": "./src/store",
-        "./Error404": "./src/pages/Errors/404/",
-        "./Error401": "./src/pages/Errors/401",
-        "./Error403": "./src/pages/Errors/403",
-        "./Error520": "./src/pages/Errors/520",
         "./Layout": "./src/components/Layout",
         "./Layout/context": "./src/components/Layout/context.js",
         "./Main": "./src/components/Main",
+        "./NavMenu": "./src/components/NavMenu",
         "./PreparationPortalDialog":
           "./src/components/dialogs/PreparationPortalDialog/PreparationPortalDialogWrapper.js",
-        "./SharingDialog": "./src/components/panels/SharingDialog",
         "./utils": "./src/helpers/filesUtils.js",
-        "./SelectFileDialog":
-          "./src/components/FilesSelector/FilesSelectorWrapper",
-        "./SelectFolderDialog":
-          "./src/components/FilesSelector/FilesSelectorWrapper",
-        "./PeopleSelector": "./src/components/PeopleSelector",
-        "./PeopleSelector/UserTooltip":
-          "./src/components/PeopleSelector/sub-components/UserTooltip.js",
+        "./BrandingPage":
+          "./src/pages/PortalSettings/categories/common/branding.js",
+        "./WhiteLabelPage":
+          "./src/pages/PortalSettings/categories/common/Branding/whitelabel.js",
+        "./AdditionalResPage":
+          "./src/pages/PortalSettings/categories/common/Branding/additionalResources.js",
+        "./CompanyInfoPage":
+          "./src/pages/PortalSettings/categories/common/Branding/companyInfoSettings.js",
+        "./BackupPage": "./src/pages/PortalSettings/categories/data-management",
+        "./RestorePage":
+          "./src/pages/PortalSettings/categories/data-management/backup/restore-backup",
+        "./PaymentsPage": "./src/pages/PortalSettings/categories/payments",
+        "./ChangeStorageQuotaDialog":
+          "./src/components/dialogs/ChangeStorageQuotaDialog",
       },
       shared: {
         ...deps,
         ...sharedDeps,
       },
-    })
+    }),
   );
 
+  const htmlTemplate = {
+    title: title,
+    template: "./public/index.html",
+    publicPath: homepage,
+    base: `${homepage}/`,
+  };
+
   if (!!env.hideText) {
-    config.plugins.push(
-      new HtmlWebpackPlugin({
-        title: title,
-        template: "./public/index.html",
-        publicPath: homepage,
-        base: `${homepage}/`,
-        custom: `<style type="text/css">
-          div,
-          p,
-          a,
-          span,
-          button,
-          h1,
-          h2,
-          h3,
-          h4,
-          h5,
-          h6,
-          ::placeholder {
-            color: rgba(0, 0, 0, 0) !important;
+    htmlTemplate.custom = `
+      <style type="text/css">
+        div,
+        p,
+        a,
+        span,
+        button,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        ::placeholder {
+          color: rgba(0, 0, 0, 0) !important;
         }
-        </style>`,
-      })
-    );
+
+      </style>`;
   } else {
-    config.plugins.push(
-      new HtmlWebpackPlugin({
-        template: "./public/index.html",
-        publicPath: homepage,
-        title: title,
-        base: `${homepage}/`,
-        browserDetectorUrl: `/static/scripts/browserDetector.js?hash=${
-          runtime.checksums["browserDetector.js"] || dateHash
-        }`,
-        configUrl: `/static/scripts/config.json?hash=${
-          runtime.checksums["config.json"] || dateHash
-        }`,
-        tiffUrl: `/static/scripts/tiff.min.js?hash=${
-          runtime.checksums["tiff.min.js"] || dateHash
-        }`,
-      })
-    );
+    htmlTemplate.browserDetectorUrl = `/static/scripts/browserDetector.js?hash=${
+      runtime.checksums["browserDetector.js"] || dateHash
+    }`;
+    htmlTemplate.configUrl = `/static/scripts/config.json?hash=${
+      runtime.checksums["config.json"] || dateHash
+    }`;
   }
+
+  config.plugins.push(new HtmlWebpackPlugin(htmlTemplate));
 
   const defines = {
     VERSION: JSON.stringify(version),
@@ -371,7 +366,6 @@ module.exports = (env, argv) => {
       return JSON.stringify(today.toISOString().split(".")[0] + "Z");
     }, true),
     IS_PERSONAL: env.personal || false,
-    API_JS_HASH: JSON.stringify(runtime.checksums["api.js"] || dateHash),
   };
 
   config.plugins.push(new DefinePlugin(defines));

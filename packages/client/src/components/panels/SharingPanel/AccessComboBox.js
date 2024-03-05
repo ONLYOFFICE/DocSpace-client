@@ -7,13 +7,13 @@ import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
 import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import React from "react";
-import ComboBox from "@docspace/components/combobox";
-import { ShareAccessRights } from "@docspace/common/constants";
-import DropDownItem from "@docspace/components/drop-down-item";
-import AccessRightSelect from "@docspace/components/access-right-select";
+import { ComboBox } from "@docspace/shared/components/combobox";
+import { ShareAccessRights } from "@docspace/shared/enums";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { AccessRightSelect } from "@docspace/shared/components/access-right-select";
 import { getAccessIcon } from "../../../helpers/files-helpers";
 import { ReactSVG } from "react-svg";
-import Backdrop from "@docspace/components/backdrop";
+import { Backdrop } from "@docspace/shared/components/backdrop";
 
 const {
   FullAccess,
@@ -68,7 +68,7 @@ const AccessComboBox = (props) => {
         onRemoveUserClick && onRemoveUserClick(e);
       }
     },
-    [availableOptions, onAccessChange, onRemoveUserClick]
+    [availableOptions, onAccessChange, onRemoveUserClick],
   );
 
   React.useEffect(() => {
@@ -96,8 +96,8 @@ const AccessComboBox = (props) => {
     if (accessOptions.includes("FilterEditing")) {
       const filterItem = {
         key: CustomFilter,
-        title: t("CustomFilter"),
-        label: t("CustomFilter"),
+        title: t("Common:CustomFilter"),
+        label: t("Common:CustomFilter"),
         icon: CustomFilterReactSvgUrl,
         itemId: itemId,
         dataAccess: CustomFilter,
@@ -147,8 +147,8 @@ const AccessComboBox = (props) => {
     if (accessOptions.includes("Comment")) {
       const commentItem = {
         key: Comment,
-        title: t("Comment"),
-        label: t("Comment"),
+        title: t("Common:Comment"),
+        label: t("Common:Comment"),
         icon: AccessCommentReactSvgUrl,
         itemId: itemId,
         dataAccess: Comment,
@@ -164,8 +164,8 @@ const AccessComboBox = (props) => {
     if (accessOptions.includes("ReadOnly")) {
       const readItem = {
         key: ReadOnly,
-        title: t("ReadOnly"),
-        label: t("ReadOnly"),
+        title: t("Common:ReadOnly"),
+        label: t("Common:ReadOnly"),
         icon: EyeReactSvgUrl,
         itemId: itemId,
         dataAccess: ReadOnly,
@@ -181,8 +181,8 @@ const AccessComboBox = (props) => {
     if (accessOptions.includes("DenyAccess")) {
       const denyItem = {
         key: DenyAccess,
-        title: t("DenyAccess"),
-        label: t("DenyAccess"),
+        title: t("Common:DenyAccess"),
+        label: t("Common:DenyAccess"),
         icon: AccessNoneReactSvgUrl,
         itemId: itemId,
         dataAccess: DenyAccess,

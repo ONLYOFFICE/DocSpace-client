@@ -4,9 +4,9 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";
 
-import { mobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/shared/utils";
 
-import MainButtonMobile from "@docspace/components/main-button-mobile";
+import { MainButtonMobile } from "@docspace/shared/components/main-button-mobile";
 
 const StyledMainButtonMobile = styled(MainButtonMobile)`
   position: fixed;
@@ -42,6 +42,8 @@ const MobileView = ({
   actionOptions,
   buttonOptions,
   isRooms,
+  withoutButton,
+  withMenu,
   files,
   clearUploadData,
   setUploadPanelVisible,
@@ -85,7 +87,7 @@ const MobileView = ({
     let currentPrimaryNumEl = primaryNumEl;
 
     const uploadedFileCount = files.filter(
-      (item) => item.percent === 100 && !item.cancel
+      (item) => item.percent === 100 && !item.cancel,
     ).length;
     const fileLength = files.filter((item) => !item.cancel).length;
 
@@ -111,7 +113,7 @@ const MobileView = ({
     const secondaryProgressStatus = secondaryProgressDataStoreIsDownload
       ? `${Math.floor(secondaryProgressDataStorePercent)}%`
       : `${Math.floor(
-          currentSecondaryProgressItem
+          currentSecondaryProgressItem,
         )}/${secondaryProgressDataStoreCurrentFilesCount}`;
 
     const newProgressOptions = [
@@ -184,9 +186,9 @@ const MobileView = ({
           percent={percentProgress}
           progressOptions={progressOptions}
           title={titleProp}
-          withoutButton={isRooms}
+          withoutButton={withoutButton}
           alert={primaryProgressDataAlert}
-          withMenu={!isRooms}
+          withMenu={withMenu}
           onClick={onMainButtonClick}
           onAlertClick={showUploadPanel}
           withAlertClick={isRoomsFolder}

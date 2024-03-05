@@ -3,6 +3,7 @@
   "AddManuallyDescriptionAccounts": "Pozvěte osobně nové uživatele do DocSpace prostřednictvím e-mailu",
   "AddManuallyDescriptionRoom": "Přidat stávající uživatele DocSpace do místnosti pomocí jmen nebo osobní pozvání nových uživatelů prostřednictvím e-mailu",
   "EmailErrorMessage": "E-mailová adresa není platná. E-mailovou adresu můžete upravit kliknutím na tuto adresu.",
+  "InvitationLanguage": "Jazyk pozvánky",
   "InviteAccountSearchPlaceholder": "Pozvat lidi e-mailem",
   "Invited": "Pozvánka na",
   "InviteRoomSearchPlaceholder": "Pozvat lidi podle jména nebo e-mailu",
@@ -10,5 +11,6 @@
   "InviteViaLinkDescriptionAccounts": "Vytvoření univerzálního odkazu pro samoautorizaci v DocSpace",
   "InviteViaLinkDescriptionRoom": "Vytvoření univerzálního odkazu pro sebeautorizaci v místnosti",
   "LinkCopySuccess": "Odkaz byl zkopírován",
+  "ResetChange": "Obnovit změnu",
   "SendInvitation": "Odeslat pozvánku"
 }

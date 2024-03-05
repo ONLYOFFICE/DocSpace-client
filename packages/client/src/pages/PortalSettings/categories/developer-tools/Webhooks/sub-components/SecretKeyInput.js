@@ -1,15 +1,15 @@
 import React, { useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
 
-import Link from "@docspace/components/link";
+import { Link } from "@docspace/shared/components/link";
 
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
 
 import { Hint } from "../styled-components";
-import HelpButton from "@docspace/components/help-button";
-import Text from "@docspace/components/text";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { Text } from "@docspace/shared/components/text";
 
-import PasswordInput from "@docspace/components/password-input";
+import { PasswordInput } from "@docspace/shared/components/password-input";
 import { inject, observer } from "mobx-react";
 
 import { useTranslation } from "react-i18next";
@@ -64,6 +64,7 @@ const SecretKeyInput = (props) => {
     webhooksGuideUrl,
     passwordInputKey,
     additionalId,
+    isDisabled,
   } = props;
 
   const { t } = useTranslation(["Webhooks"]);
@@ -75,6 +76,7 @@ const SecretKeyInput = (props) => {
   };
 
   const generatePassword = () => {
+    console.log("134");
     secretKeyInputRef.current.onGeneratePassword();
   };
 
@@ -90,7 +92,7 @@ const SecretKeyInput = (props) => {
   useEffect(() => {
     if (!isResetVisible) {
       onChange({
-        target: { name, value: secretKeyInputRef.current.state.inputValue },
+        target: { name, value: secretKeyInputRef.current.value },
       });
     }
   }, [isResetVisible]);
@@ -113,7 +115,7 @@ const SecretKeyInput = (props) => {
                 href={webhooksGuideUrl}
                 target="_blank"
                 className="link"
-                color="#333333">
+              >
                 {t("ReadMore")}
               </Link>
             </Text>
@@ -131,7 +133,8 @@ const SecretKeyInput = (props) => {
             isHovered={true}
             onClick={hideReset}
             className="link"
-            color="#333333">
+            color="#333333"
+          >
             {t("ResetKey")}
           </Link>
         </Hint>
@@ -151,14 +154,16 @@ const SecretKeyInput = (props) => {
           isFullWidth={true}
           passwordSettings={PASSWORD_SETTINGS}
           key={passwordInputKey}
+          isDisabled={isDisabled}
         />
         <Link
           id="generate-link"
           type="action"
           fontWeight={600}
           isHovered={true}
-          onClick={generatePassword}
-          className="link dotted">
+          onClick={isDisabled ? () => {} : generatePassword}
+          className="link dotted"
+        >
           {t("Generate")}
         </Link>
       </div>
@@ -166,8 +171,8 @@ const SecretKeyInput = (props) => {
   );
 };
 
-export default inject(({ auth, webhooksStore }) => {
-  const { webhooksGuideUrl } = auth.settingsStore;
+export default inject(({ settingsStore, webhooksStore }) => {
+  const { webhooksGuideUrl } = settingsStore;
   const { PASSWORD_SETTINGS } = webhooksStore;
 
   return {

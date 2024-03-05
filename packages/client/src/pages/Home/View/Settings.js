@@ -4,7 +4,10 @@ import { useLocation } from "react-router-dom";
 
 import { SettingsSectionBodyContent } from "../Section";
 
-import Loaders from "@docspace/common/components/Loaders";
+import {
+  SettingsAdminSkeleton,
+  SettingsCommonSkeleton,
+} from "@docspace/shared/skeletons/settings";
 
 const SettingsView = ({
   isLoading,
@@ -23,9 +26,9 @@ const SettingsView = ({
     <>
       {inLoad ? (
         setting === "personal" ? (
-          <Loaders.SettingsCommon isAdmin={isAdmin} />
+          <SettingsCommonSkeleton isAdmin={isAdmin} />
         ) : (
-          <Loaders.SettingsAdmin />
+          <SettingsAdminSkeleton />
         )
       ) : (
         <SettingsSectionBodyContent />
@@ -34,15 +37,17 @@ const SettingsView = ({
   );
 };
 
-export default inject(({ auth, clientLoadingStore, settingsStore }) => {
-  const { isLoading } = clientLoadingStore;
+export default inject(
+  ({ authStore, clientLoadingStore, filesSettingsStore }) => {
+    const { isLoading } = clientLoadingStore;
 
-  const { isLoadedSettingsTree } = settingsStore;
+    const { isLoadedSettingsTree } = filesSettingsStore;
 
-  return {
-    isLoading,
-    isLoadedSettingsTree,
+    return {
+      isLoading,
+      isLoadedSettingsTree,
 
-    isAdmin: auth.isAdmin,
-  };
-})(observer(SettingsView));
+      isAdmin: authStore.isAdmin,
+    };
+  },
+)(observer(SettingsView));

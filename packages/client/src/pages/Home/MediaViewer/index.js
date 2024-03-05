@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import queryString from "query-string";
-import MediaViewer from "@docspace/common/components/MediaViewer";
-import { PluginFileType } from "SRC_DIR/helpers/plugins/constants";
+
+import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
+
+import MediaViewer from "@docspace/shared/components/media-viewer/MediaViewer";
 
 const FilesMediaViewer = (props) => {
   const {
@@ -59,7 +61,12 @@ const FilesMediaViewer = (props) => {
     onClickDownloadAs,
     setActiveFiles,
     pluginContextMenuItems,
+    isOpenMediaViewer,
     someDialogIsOpen,
+    currentDeviceType,
+    changeUrl,
+    fetchPublicRoom,
+    isPublicRoom,
   } = props;
 
   const navigate = useNavigate();
@@ -83,6 +90,12 @@ const FilesMediaViewer = (props) => {
   useEffect(() => {
     if (previewFile) {
       // fetch file after preview with
+
+      if (isPublicRoom) {
+        fetchPublicRoom(fetchFiles);
+        return;
+      }
+
       fetchFiles(previewFile.folderId).finally(() => {
         setIsLoading(false);
       });
@@ -105,11 +118,13 @@ const FilesMediaViewer = (props) => {
     setMediaViewerData({ visible: true, id });
   };
 
-  const onChangeUrl = (id) => {
-    const url = "/products/files/#preview/" + id;
-    setCurrentId(id);
-    navigate(url);
-  };
+  const onChangeUrl = useCallback(
+    (id) => {
+      changeUrl(id);
+      setCurrentId(id);
+    },
+    [setCurrentId, changeUrl],
+  );
 
   const resetSelection = () => {
     setSelection([]);
@@ -135,100 +150,138 @@ const FilesMediaViewer = (props) => {
     }
   };
 
-  const onDeleteMediaFile = (id) => {
-    const translations = {
-      deleteOperation: t("Translations:DeleteOperation"),
-      successRemoveFolder: t("Files:FolderRemoved"),
-      successRemoveFile: t("Files:FileRemoved"),
-    };
+  const onDeleteMediaFile = useCallback(
+    (id) => {
+      const translations = {
+        deleteOperation: t("Translations:DeleteOperation"),
+        successRemoveFolder: t("Files:FolderRemoved"),
+        successRemoveFile: t("Files:FileRemoved"),
+      };
 
-    if (files.length > 0) {
-      let file = files.find((file) => file.id === id);
-      if (file) {
-        // try to fix with one check later (see deleteAction)
-        const isActiveFile = activeFiles.find((elem) => elem.id === file.id);
-        const isActiveFolder = activeFolders.find(
-          (elem) => elem.id === file.id
-        );
+      if (files.length > 0) {
+        let file = files.find((file) => file.id === id);
+        if (file) {
+          // try to fix with one check later (see deleteAction)
+          const isActiveFile = activeFiles.find((elem) => elem.id === file.id);
+          const isActiveFolder = activeFolders.find(
+            (elem) => elem.id === file.id,
+          );
 
-        if (isActiveFile || isActiveFolder) return;
+          if (isActiveFile || isActiveFolder) return;
 
-        setRemoveMediaItem(file);
-        deleteItemAction(file.id, translations, true, file.providerKey);
+          setRemoveMediaItem(file);
+          deleteItemAction(file.id, translations, true, file.providerKey);
+        }
       }
-    }
-  };
+    },
+    [
+      files,
+      t,
+      activeFiles,
+      activeFolders,
+      setRemoveMediaItem,
+      deleteItemAction,
+    ],
+  );
 
-  const onDownloadMediaFile = (id) => {
-    if (playlist.length > 0) {
-      let viewUrlFile = playlist.find((file) => file.fileId === id).src;
-      return window.open(viewUrlFile, "_self");
-    }
-  };
-
-  const onMediaViewerClose = (e) => {
-    if (isPreview) {
-      setIsPreview(false);
-      resetUrl();
-      if (previewFile) {
-        setScrollToItem({ id: previewFile.id, type: "file" });
-        setBufferSelection(previewFile);
+  const onDownloadMediaFile = useCallback(
+    (id) => {
+      if (playlist.length > 0) {
+        let viewUrlFile = playlist.find((file) => file.fileId === id).src;
+        return window.open(viewUrlFile, "_self");
       }
-      setToPreviewFile(null);
-    }
+    },
+    [playlist],
+  );
 
-    setMediaViewerData({ visible: false, id: null });
+  const onMediaViewerClose = useCallback(
+    (e) => {
+      if (isPreview) {
+        setIsPreview(false);
+        resetUrl();
+        if (previewFile) {
+          setScrollToItem({ id: previewFile.id, type: "file" });
+          setBufferSelection(previewFile);
+        }
+        setToPreviewFile(null);
+      }
 
-    // const url = localStorage.getItem("isFirstUrl");
-    const url = getFirstUrl();
+      setMediaViewerData({ visible: false, id: null });
+      const url = getFirstUrl();
 
-    if (!url) {
-      return;
-    }
+      if (!url) {
+        return;
+      }
 
-    const targetFile = files.find((item) => item.id === currentMediaFileId);
-    if (targetFile) setBufferSelection(targetFile);
+      const targetFile = files.find((item) => item.id === currentMediaFileId);
+      if (targetFile) {
+        setBufferSelection(targetFile);
+        setScrollToItem({ id: targetFile.id, type: "file" });
+      }
 
-    navigate(url, { replace: true });
-  };
+      navigate(url, {
+        state: {
+          ...location.state,
+          fromMediaViewer: true,
+        },
+      });
+    },
+    [
+      files,
+      isPreview,
+      previewFile,
+
+      resetUrl,
+      navigate,
+      getFirstUrl,
+      setIsPreview,
+      setScrollToItem,
+      setToPreviewFile,
+      setMediaViewerData,
+      setBufferSelection,
+    ],
+  );
+  useEffect(() => {
+    if (playlist.length === 0 && isOpenMediaViewer) onMediaViewerClose();
+  }, [isOpenMediaViewer, onMediaViewerClose, playlist.length]);
 
   return (
     visible && (
       <MediaViewer
         t={t}
-        userAccess={userAccess}
-        currentFileId={currentMediaFileId}
+        files={files}
+        getIcon={getIcon}
         visible={visible}
         playlist={playlist}
-        playlistPos={currentPostionIndex}
-        onDelete={onDeleteMediaFile}
-        onDownload={onDownloadMediaFile}
-        setBufferSelection={setBufferSelection}
-        archiveRoomsId={archiveRoomsId}
-        files={files}
-        onClickDownload={onClickDownload}
-        onShowInfoPanel={onShowInfoPanel}
-        onClickDelete={onClickDelete}
-        onClickRename={onClickRename}
+        prevMedia={prevMedia}
+        nextMedia={nextMedia}
+        onCopyLink={onCopyLink}
+        userAccess={userAccess}
+        onChangeUrl={onChangeUrl}
+        isPreviewFile={firstLoad}
+        onDuplicate={onDuplicate}
         onMoveAction={onMoveAction}
         onCopyAction={onCopyAction}
-        onDuplicate={onDuplicate}
-        onClickLinkEdit={onClickLinkEdit}
-        onPreviewClick={onPreviewClick}
-        onCopyLink={onCopyLink}
-        onClickDownloadAs={onClickDownloadAs}
         onClose={onMediaViewerClose}
-        getIcon={getIcon}
+        onDelete={onDeleteMediaFile}
+        onClickRename={onClickRename}
+        onClickDelete={onClickDelete}
+        setActiveFiles={setActiveFiles}
+        archiveRoomsId={archiveRoomsId}
+        onPreviewClick={onPreviewClick}
+        onDownload={onDownloadMediaFile}
+        onClickLinkEdit={onClickLinkEdit}
+        onClickDownload={onClickDownload}
+        onShowInfoPanel={onShowInfoPanel}
+        playlistPos={currentPostionIndex}
+        currentFileId={currentMediaFileId}
+        onClickDownloadAs={onClickDownloadAs}
+        currentDeviceType={currentDeviceType}
+        extsImagePreviewed={extsImagePreviewed}
+        setBufferSelection={setBufferSelection}
         onEmptyPlaylistError={onMediaViewerClose}
         deleteDialogVisible={deleteDialogVisible}
-        extsMediaPreviewed={extsMediaPreviewed}
-        extsImagePreviewed={extsImagePreviewed}
-        isPreviewFile={firstLoad}
-        onChangeUrl={onChangeUrl}
-        nextMedia={nextMedia}
-        prevMedia={prevMedia}
         pluginContextMenuItems={pluginContextMenuItems}
-        setActiveFiles={setActiveFiles}
       />
     )
   );
@@ -239,18 +292,23 @@ export default inject(
     filesStore,
     mediaViewerDataStore,
     filesActionsStore,
-    settingsStore,
+    filesSettingsStore,
     dialogsStore,
     treeFoldersStore,
     contextOptionsStore,
     clientLoadingStore,
     pluginStore,
+    settingsStore,
+    publicRoomStore,
   }) => {
+    const { currentDeviceType } = settingsStore;
     const {
       firstLoad,
 
       setIsSectionFilterLoading,
     } = clientLoadingStore;
+
+    const { fetchPublicRoom, isPublicRoom } = publicRoomStore;
 
     const setIsLoading = (param) => {
       setIsSectionFilterLoading(param);
@@ -285,9 +343,11 @@ export default inject(
       setCurrentId,
       nextMedia,
       prevMedia,
+      changeUrl,
     } = mediaViewerDataStore;
     const { deleteItemAction } = filesActionsStore;
-    const { getIcon, extsImagePreviewed, extsMediaPreviewed } = settingsStore;
+    const { getIcon, extsImagePreviewed, extsMediaPreviewed } =
+      filesSettingsStore;
     const { isFavoritesFolder, archiveRoomsId } = treeFoldersStore;
 
     const {
@@ -333,6 +393,7 @@ export default inject(
       nextMedia,
       prevMedia,
       userAccess,
+      isOpenMediaViewer: visible,
       visible: playlist.length > 0 && visible,
       currentMediaFileId,
       deleteItemAction,
@@ -375,6 +436,10 @@ export default inject(
       activeFolders,
       setActiveFiles,
       pluginContextMenuItems,
+      currentDeviceType,
+      changeUrl,
+      fetchPublicRoom,
+      isPublicRoom,
     };
-  }
+  },
 )(withTranslation(["Files", "Translations"])(observer(FilesMediaViewer)));

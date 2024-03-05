@@ -3,10 +3,12 @@ import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 import ProfileActions from "./profile-actions";
 import { useTranslation } from "react-i18next";
-import { mobile, tablet } from "@docspace/components/utils/device";
+import {
+  mobile,
+  tablet,
+  getCorrectFourValuesStyle,
+} from "@docspace/shared/utils";
 import { inject, observer } from "mobx-react";
-
-import { getCorrectFourValuesStyle } from "@docspace/components/utils/rtlUtils";
 
 const StyledNav = styled.nav`
   display: flex;
@@ -43,13 +45,14 @@ const HeaderNav = ({
   userIsUpdate,
   setUserIsUpdate,
   getActions,
+  hideProfileMenu,
 }) => {
   const { t } = useTranslation(["NavMenu", "Common", "About"]);
   const userActions = getActions(t);
 
   return (
     <StyledNav className="profileMenuIcon hidingHeader">
-      {isAuthenticated && user ? (
+      {isAuthenticated && user && !hideProfileMenu ? (
         <>
           <ProfileActions
             userActions={userActions}
@@ -72,8 +75,8 @@ HeaderNav.propTypes = {
   isAuthenticated: PropTypes.bool,
 };
 
-export default inject(({ auth, profileActionsStore }) => {
-  const { userStore, isAuthenticated } = auth;
+export default inject(({ authStore, profileActionsStore, userStore }) => {
+  const { isAuthenticated } = authStore;
   const { user, userIsUpdate, setUserIsUpdate } = userStore;
   const { getActions } = profileActionsStore;
 

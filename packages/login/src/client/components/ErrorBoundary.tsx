@@ -1,8 +1,9 @@
 import React from "react";
-import ErrorContainer from "@docspace/common/components/ErrorContainer";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
-import { Dark, Base } from "@docspace/components/themes";
+
+import { Dark, Base } from "@docspace/shared/themes";
+import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
 
 interface IError520Props {
   match?: {

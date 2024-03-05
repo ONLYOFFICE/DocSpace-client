@@ -1,114 +1,128 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { inject, observer } from "mobx-react";
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import { StyledUser } from "../../styles/members";
-import Avatar from "@docspace/components/avatar";
-import ComboBox from "@docspace/components/combobox";
+import { Avatar } from "@docspace/shared/components/avatar";
+import { ComboBox } from "@docspace/shared/components/combobox";
 import DefaultUserPhotoUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 import { isMobileOnly, isMobile } from "react-device-detect";
 import { decode } from "he";
-import { filterUserRoleOptions } from "SRC_DIR/helpers/utils";
-import { getUserRole } from "@docspace/common/utils";
-import Text from "@docspace/components/text";
+import { filterGroupRoleOptions, filterUserRoleOptions } from "SRC_DIR/helpers";
+
+import { getUserRole, getUserTypeLabel } from "@docspace/shared/utils/common";
+import { Text } from "@docspace/shared/components/text";
 import EmailPlusReactSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
 import { StyledUserTypeHeader } from "../../styles/members";
-import IconButton from "@docspace/components/icon-button";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { Tooltip } from "@docspace/shared/components/tooltip";
+import { Link } from "@docspace/shared/components/link";
 
 const User = ({
   t,
   user,
-  setMembers,
-  isExpect,
   membersHelper,
   currentMember,
   updateRoomMemberRole,
-  selectionParentRoom,
-  setSelectionParentRoom,
+  infoPanelSelection,
   changeUserType,
   setIsScrollLocked,
-  isTitle,
-  onRepeatInvitation,
-  showInviteIcon,
   membersFilter,
   setMembersFilter,
   fetchMembers,
   hasNextPage,
+  showTooltip,
+  infoPanelMembers,
+  setInfoPanelMembers,
+  searchValue,
+  resendEmailInvitations,
+  setEditMembersGroup,
+  setEditGroupMembersDialogVisible,
 }) => {
-  if (!selectionParentRoom) return null;
-  if (!user.displayName && !user.email) return null;
+  if (!infoPanelSelection) return null;
+  if (!user.displayName && !user.name && !user.email) return null;
 
-  //const [userIsRemoved, setUserIsRemoved] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  //if (userIsRemoved) return null;
-
+  const security = infoPanelSelection ? infoPanelSelection.security : {};
+  const isExpect = user.isExpect;
+  const canInviteUserInRoomAbility = security?.EditAccess;
+  const showInviteIcon = canInviteUserInRoomAbility && isExpect;
   const canChangeUserRole = user.canEditAccess;
+  const withoutTitles = !!searchValue;
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const fullRoomRoleOptions = membersHelper.getOptionsByRoomType(
-    selectionParentRoom.roomType,
-    canChangeUserRole
+    infoPanelSelection.roomType,
+    canChangeUserRole,
   );
 
   const userRole = membersHelper.getOptionByUserAccess(user.access, user);
+  const userRoleOptions = user.isGroup
+    ? filterGroupRoleOptions(fullRoomRoleOptions)
+    : filterUserRoleOptions(fullRoomRoleOptions, user);
 
-  const userRoleOptions = filterUserRoleOptions(fullRoomRoleOptions, user);
+  const onRepeatInvitation = async () => {
+    resendEmailInvitations(infoPanelSelection.id, true)
+      .then(() =>
+        toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios")),
+      )
+      .catch((err) => toastr.error(err));
+  };
 
   const updateRole = (option) => {
-    return updateRoomMemberRole(selectionParentRoom.id, {
+    return updateRoomMemberRole(infoPanelSelection.id, {
       invitations: [{ id: user.id, access: option.access }],
       notify: false,
       sharingMessage: "",
     })
       .then(async () => {
         setIsLoading(false);
-        const users = selectionParentRoom.members.users;
-        const administrators = selectionParentRoom.members.administrators;
-        const expectedMembers = selectionParentRoom.members.expected;
+
         if (option.key === "remove") {
           const newMembersFilter = JSON.parse(JSON.stringify(membersFilter));
 
           const newMembers = {
-            users: users?.filter((m) => m.id !== user.id),
-            administrators: administrators?.filter((m) => m.id !== user.id),
-            expected: expectedMembers?.filter((m) => m.id !== user.id),
+            users: infoPanelMembers.users?.filter((m) => m.id !== user.id),
+            administrators: infoPanelMembers.administrators?.filter(
+              (m) => m.id !== user.id,
+            ),
+            expected: infoPanelMembers.expected?.filter(
+              (m) => m.id !== user.id,
+            ),
+            groups: infoPanelMembers.groups?.filter((m) => m.id !== user.id),
           };
 
-          const roomId = selectionParentRoom.id;
-          const newUsers = newMembers.users.length > 1 ? newMembers?.users : [];
+          const roomId = infoPanelSelection.id;
+          const minItemsCount = withoutTitles ? 0 : 1;
+          const newUsers =
+            newMembers.users.length > minItemsCount ? newMembers?.users : [];
           const newAdministrators =
-            newMembers.administrators.length > 1
+            newMembers.administrators.length > minItemsCount
               ? newMembers?.administrators
               : [];
           const newExpected =
-            newMembers.expected.length > 1 ? newMembers?.expected : [];
+            newMembers.expected.length > minItemsCount
+              ? newMembers?.expected
+              : [];
+          const newGroups =
+            newMembers.groups.length > minItemsCount ? newMembers?.groups : [];
 
-          setMembers({
+          setInfoPanelMembers({
             roomId,
             users: newUsers,
             administrators: newAdministrators,
             expected: newExpected,
+            groups: newGroups,
           });
 
           newMembersFilter.total -= 1;
-
-          setSelectionParentRoom({
-            ...selectionParentRoom,
-            members: {
-              users: newUsers,
-              administrators: newAdministrators,
-              expected: newExpected,
-            },
-          });
 
           if (hasNextPage) {
             newMembersFilter.startIndex =
               (newMembersFilter.page + 1) * newMembersFilter.pageCount - 1;
             newMembersFilter.pageCount = 1;
 
-            const fetchedMembers = await fetchMembers(
-              selectionParentRoom.id,
-              false,
-              newMembersFilter
-            );
+            const fetchedMembers = await fetchMembers(t, false);
 
             const newMembers = {
               administrators: [
@@ -117,49 +131,31 @@ const User = ({
               ],
               users: [...newUsers, ...fetchedMembers.users],
               expected: [...newExpected, ...fetchedMembers.expected],
+              groups: [...newGroups, ...fetchedMembers.groups],
             };
 
-            setMembers({
-              roomId: selectionParentRoom.id,
+            setInfoPanelMembers({
+              roomId: infoPanelSelection.id,
               ...newMembers,
-            });
-
-            setSelectionParentRoom({
-              ...selectionParentRoom,
-              members: newMembers,
             });
           }
 
           setMembersFilter(newMembersFilter);
-
-          //setUserIsRemoved(true);
         } else {
-          setMembers({
-            roomId: selectionParentRoom.id,
-            users: users?.map((m) =>
-              m.id === user.id ? { ...m, access: option.access } : m
+          setInfoPanelMembers({
+            roomId: infoPanelSelection.id,
+            users: infoPanelMembers.users?.map((m) =>
+              m.id === user.id ? { ...m, access: option.access } : m,
             ),
-            administrators: administrators?.map((m) =>
-              m.id === user.id ? { ...m, access: option.access } : m
+            administrators: infoPanelMembers.administrators?.map((m) =>
+              m.id === user.id ? { ...m, access: option.access } : m,
             ),
-            expected: expectedMembers?.map((m) =>
-              m.id === user.id ? { ...m, access: option.access } : m
+            expected: infoPanelMembers.expected?.map((m) =>
+              m.id === user.id ? { ...m, access: option.access } : m,
             ),
-          });
-
-          setSelectionParentRoom({
-            ...selectionParentRoom,
-            members: {
-              users: users?.map((m) =>
-                m.id === user.id ? { ...m, access: option.access } : m
-              ),
-              administrators: administrators?.map((m) =>
-                m.id === user.id ? { ...m, access: option.access } : m
-              ),
-              expected: expectedMembers?.map((m) =>
-                m.id === user.id ? { ...m, access: option.access } : m
-              ),
-            },
+            groups: infoPanelMembers.groups?.map((m) =>
+              m.id === user.id ? { ...m, access: option.access } : m,
+            ),
           });
         }
       })
@@ -180,10 +176,10 @@ const User = ({
       option.key === "owner"
         ? "admin"
         : option.key === "roomAdmin"
-        ? "manager"
-        : option.key === "collaborator"
-        ? "collaborator"
-        : "user";
+          ? "manager"
+          : option.key === "collaborator"
+            ? "collaborator"
+            : "user";
 
     const successCallback = () => {
       updateRole(option);
@@ -202,21 +198,62 @@ const User = ({
     }
   };
 
-  const onToggle = (e, isOpen) => {
-    setIsScrollLocked(isOpen);
+  const getUserType = (item) => {
+    if (item.isOwner) return "owner";
+    if (item.isAdmin) return "admin";
+    if (item.isRoomAdmin) return "manager";
+    if (item.isCollaborator) return "collaborator";
+    return "user";
   };
 
-  const userAvatar = user.hasAvatar ? user.avatar : DefaultUserPhotoUrl;
+  const type = getUserType(user);
+  const role = getUserRole(user, userRole?.type);
 
-  const role = getUserRole(user);
+  const typeLabel =
+    (type === "user" && userRole?.type !== type) ||
+    (userRole?.type === "manager" && type !== "admin")
+      ? getUserTypeLabel(userRole?.type, t)
+      : getUserTypeLabel(type, t);
+
+  const getTooltipContent = () => (
+    <div>
+      <Text fontSize="14px" fontWeight={600} noSelect truncate>
+        {decode(user.displayName)}
+      </Text>
+      <Text
+        className="label"
+        fontWeight={400}
+        fontSize="12px"
+        noSelect
+        truncate
+        color="#A3A9AE !important"
+        dir="auto"
+      >
+        {`${typeLabel} | ${user.email}`}
+      </Text>
+    </div>
+  );
+
+  const onOpenGroup = (group) => {
+    setEditMembersGroup(group);
+    setEditGroupMembersDialogVisible(true);
+  };
+
+  const userAvatar = user.hasAvatar
+    ? user.avatar
+    : user.isGroup
+      ? ""
+      : DefaultUserPhotoUrl;
 
   const withTooltip = user.isOwner || user.isAdmin;
+
+  const uniqueTooltipId = `userTooltip_${Math.random()}`;
 
   const tooltipContent = `${
     user.isOwner ? t("Common:DocSpaceOwner") : t("Common:DocSpaceAdmin")
   }. ${t("Common:HasFullAccess")}`;
 
-  return isTitle ? (
+  return user.isTitle ? (
     <StyledUserTypeHeader isExpect={isExpect}>
       <Text className="title">{user.displayName}</Text>
 
@@ -238,18 +275,56 @@ const User = ({
         className="avatar"
         size="min"
         source={isExpect ? AtReactSvgUrl : userAvatar || ""}
-        userName={isExpect ? "" : user.displayName}
+        userName={isExpect ? "" : user.displayName || user.name}
         withTooltip={withTooltip}
         tooltipContent={tooltipContent}
         hideRoleIcon={!withTooltip}
+        isGroup={user.isGroup}
       />
-
-      <div className="name">
-        {isExpect ? user.email : decode(user.displayName) || user.email}
+      <div className="user_body-wrapper">
+        <div className="name-wrapper">
+          {user.isGroup ? (
+            <Link
+              className="name"
+              type="action"
+              onClick={() => onOpenGroup(user)}
+            >
+              {decode(user.name)}
+            </Link>
+          ) : (
+            <Text className="name" data-tooltip-id={uniqueTooltipId}>
+              {user?.displayName && decode(user.displayName)}
+            </Text>
+          )}
+          {/* TODO: uncomment when information about online statuses appears */}
+          {/* {showTooltip && (
+            <Tooltip
+              float
+              id={uniqueTooltipId}
+              getContent={getTooltipContent}
+              place="bottom"
+            />
+          )} */}
+          {currentMember?.id === user.id && (
+            <div className="me-label">&nbsp;{`(${t("Common:MeLabel")})`}</div>
+          )}
+        </div>
+        {!user.isGroup && (
+          <div className="role-email" style={{ display: "flex" }}>
+            <Text
+              className="label"
+              fontWeight={400}
+              fontSize="12px"
+              noSelect
+              truncate
+              color="#A3A9AE"
+              dir="auto"
+            >
+              {`${typeLabel} | ${user.email}`}
+            </Text>
+          </div>
+        )}
       </div>
-      {currentMember?.id === user.id && (
-        <div className="me-label">&nbsp;{`(${t("Common:MeLabel")})`}</div>
-      )}
 
       {userRole && userRoleOptions && (
         <div className="role-wrapper">
@@ -268,7 +343,6 @@ const User = ({
               isLoading={isLoading}
               isMobileView={isMobileOnly}
               directionY="both"
-              onToggle={onToggle}
               displaySelectedOption
             />
           ) : (
@@ -282,4 +356,43 @@ const User = ({
   );
 };
 
-export default User;
+export default inject(
+  ({ infoPanelStore, filesStore, peopleStore, dialogsStore }) => {
+    const {
+      infoPanelSelection,
+      setIsScrollLocked,
+      infoPanelMembers,
+      setInfoPanelMembers,
+      fetchMembers,
+      searchValue,
+    } = infoPanelStore;
+
+    const {
+      updateRoomMemberRole,
+      resendEmailInvitations,
+      membersFilter,
+      setMembersFilter,
+    } = filesStore;
+
+    const { changeType: changeUserType } = peopleStore;
+
+    const { setEditMembersGroup, setEditGroupMembersDialogVisible } =
+      dialogsStore;
+
+    return {
+      infoPanelSelection,
+      setIsScrollLocked,
+      updateRoomMemberRole,
+      resendEmailInvitations,
+      changeUserType,
+      membersFilter,
+      setMembersFilter,
+      infoPanelMembers,
+      setInfoPanelMembers,
+      fetchMembers,
+      searchValue,
+      setEditMembersGroup,
+      setEditGroupMembersDialogVisible,
+    };
+  },
+)(observer(User));

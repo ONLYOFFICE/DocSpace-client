@@ -32,13 +32,15 @@ import DataReassignmentDialog from "./DataReassignmentDialog";
 import SubmitToFormGallery from "./SubmitToFormGallery";
 import UnsavedChangesDialog from "./UnsavedChangesDialog";
 import DeleteLinkDialog from "./DeleteLinkDialog";
-import RoomSharingDialog from "./RoomSharingDialog";
 import MoveToPublicRoom from "./MoveToPublicRoom";
 import BackupToPublicRoom from "./BackupToPublicRoom";
 import SettingsPluginDialog from "./SettingsPluginDialog";
-import ReportDialog from "./ReportDialog";
 import PluginDialog from "./PluginDialog";
+import ChangeQuotaDialog from "./ChangeQuotaDialog";
 import DeletePluginDialog from "./DeletePluginDialog";
+import ShareFolderDialog from "./ShareFolderDialog";
+import EditGroupMembersDialog from "./EditGroupMembersDialog";
+import ChangeStorageQuotaDialog from "./ChangeStorageQuotaDialog";
 
 export {
   EmptyTrashDialog,
@@ -75,11 +77,13 @@ export {
   SubmitToFormGallery,
   UnsavedChangesDialog,
   DeleteLinkDialog,
-  RoomSharingDialog,
   MoveToPublicRoom,
   BackupToPublicRoom,
   SettingsPluginDialog,
-  ReportDialog,
   PluginDialog,
   DeletePluginDialog,
+  ShareFolderDialog,
+  EditGroupMembersDialog,
+  ChangeQuotaDialog,
+  ChangeStorageQuotaDialog,
 };

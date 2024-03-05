@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Submenu from "@docspace/components/submenu";
+import { Submenu } from "@docspace/shared/components/submenu";
 import { useNavigate } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 
 import SSO from "./SingleSignOn";
@@ -12,9 +12,9 @@ import ThirdParty from "./ThirdPartyServicesSettings";
 import SMTPSettings from "./SMTPSettings";
 import DocumentService from "./DocumentService";
 import PluginPage from "./Plugins";
-import { DeviceType } from "@docspace/common/constants";
-import Badge from "@docspace/components/badge";
-import Box from "@docspace/components/box";
+import { DeviceType } from "@docspace/shared/enums";
+import { Badge } from "@docspace/shared/components/badge";
+import { Box } from "@docspace/shared/components/box";
 
 const IntegrationWrapper = (props) => {
   const {
@@ -70,7 +70,7 @@ const IntegrationWrapper = (props) => {
         {t("Common:Plugins")}
 
         <Badge
-          label={t("Settings:BetaLabel")}
+          label={t("Common:BetaLabel")}
           backgroundColor="#533ED1"
           fontSize="9px"
           borderRadius="50px"
@@ -100,8 +100,8 @@ const IntegrationWrapper = (props) => {
       combineUrl(
         window.DocSpaceConfig?.proxy?.url,
         config.homepage,
-        `/portal-settings/integration/${e.id}`
-      )
+        `/portal-settings/integration/${e.id}`,
+      ),
     );
   };
 
@@ -114,18 +114,18 @@ const IntegrationWrapper = (props) => {
         currentDeviceType === DeviceType.desktop
           ? 0
           : currentDeviceType === DeviceType.mobile
-          ? "53px"
-          : "61px"
+            ? "53px"
+            : "61px"
       }
     />
   );
 };
 
-export default inject(({ auth, ssoStore }) => {
-  const { standalone, enablePlugins } = auth.settingsStore;
+export default inject(({ settingsStore, ssoStore, currentQuotaStore }) => {
+  const { standalone, enablePlugins, currentDeviceType } = settingsStore;
   const { load: toDefault } = ssoStore;
-  const { currentDeviceType } = auth.settingsStore;
-  const { isSSOAvailable } = auth.currentQuotaStore;
+
+  const { isSSOAvailable } = currentQuotaStore;
 
   return {
     toDefault,
@@ -135,7 +135,11 @@ export default inject(({ auth, ssoStore }) => {
     enablePlugins,
   };
 })(
-  withTranslation(["Settings", "SingleSignOn", "Translations", "WebPlugins"])(
-    observer(IntegrationWrapper)
-  )
+  withTranslation([
+    "Settings",
+    "SingleSignOn",
+    "Translations",
+    "WebPlugins",
+    "Common",
+  ])(observer(IntegrationWrapper)),
 );

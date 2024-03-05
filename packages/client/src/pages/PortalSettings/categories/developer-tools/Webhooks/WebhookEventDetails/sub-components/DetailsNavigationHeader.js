@@ -3,17 +3,17 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
 import { NoBoxShadowToast } from "../../styled-components";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 
 import { useNavigate } from "react-router-dom";
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import RetryIcon from "PUBLIC_DIR/images/refresh.react.svg?url";
 
-import Headline from "@docspace/common/components/Headline";
-import IconButton from "@docspace/components/icon-button";
+import Headline from "@docspace/shared/components/headline/Headline";
+import { IconButton } from "@docspace/shared/components/icon-button";
 
-import { tablet, mobile } from "@docspace/components/utils/device";
+import { tablet, mobile } from "@docspace/shared/utils";
 import { useTranslation } from "react-i18next";
 
 import { useParams } from "react-router-dom";

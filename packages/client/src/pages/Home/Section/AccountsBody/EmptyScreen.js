@@ -5,21 +5,27 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import EmptyScreenContainer from "@docspace/components/empty-screen-container";
-import IconButton from "@docspace/components/icon-button";
-import Link from "@docspace/components/link";
-import Box from "@docspace/components/box";
-import Grid from "@docspace/components/grid";
+import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { Link } from "@docspace/shared/components/link";
+import { Box } from "@docspace/shared/components/box";
+import { Grid } from "@docspace/shared/components/grid";
 
-const EmptyScreen = ({ resetFilter, setIsLoading, theme }) => {
+const EmptyScreen = ({
+  resetFilter,
+  resetInsideGroupFilter,
+  setIsLoading,
+  theme,
+}) => {
   const { t } = useTranslation(["People", "Common"]);
+  const isPeopleAccounts = window.location.pathname.includes("accounts/people");
 
-  const title = t("NotFoundUsers");
-  const description = t("NotFoundUsersDescription");
+  const title = t("Common:NotFoundUsers");
+  const description = t("Common:NotFoundUsersDescription");
 
   const onResetFilter = () => {
     setIsLoading(true);
-    resetFilter();
+    isPeopleAccounts ? resetFilter() : resetInsideGroupFilter();
   };
 
   const imageSrc = theme.isBase
@@ -64,8 +70,10 @@ const EmptyScreen = ({ resetFilter, setIsLoading, theme }) => {
   );
 };
 
-export default inject(({ auth, peopleStore, clientLoadingStore }) => {
-  const { resetFilter } = peopleStore;
+export default inject(({ peopleStore, clientLoadingStore, settingsStore }) => {
+  const { resetFilter, groupsStore } = peopleStore;
+
+  const { resetInsideGroupFilter } = groupsStore;
 
   const { setIsSectionBodyLoading } = clientLoadingStore;
 
@@ -74,8 +82,9 @@ export default inject(({ auth, peopleStore, clientLoadingStore }) => {
   };
   return {
     resetFilter,
+    resetInsideGroupFilter,
 
     setIsLoading,
-    theme: auth.settingsStore.theme,
+    theme: settingsStore.theme,
   };
 })(observer(EmptyScreen));

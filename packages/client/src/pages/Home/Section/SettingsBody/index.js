@@ -2,14 +2,14 @@ import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 
-import Error520 from "client/Error520";
+import Error520 from "../../../../components/Error520Wrapper";
 import { inject, observer } from "mobx-react";
-import { combineUrl } from "@docspace/common/utils";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
-import Submenu from "@docspace/components/submenu";
+import { Submenu } from "@docspace/shared/components/submenu";
 import PersonalSettings from "./CommonSettings";
 import GeneralSettings from "./AdminSettings";
-import { tablet } from "@docspace/components/utils/device";
+import { tablet } from "@docspace/shared/utils";
 
 const StyledContainer = styled.div`
   margin-top: -22px;
@@ -74,11 +74,11 @@ const SectionBodyContent = ({ isErrorSettings, user }) => {
   );
 };
 
-export default inject(({ auth, settingsStore }) => {
-  const { settingsIsLoaded } = settingsStore;
+export default inject(({ userStore, filesSettingsStore }) => {
+  const { settingsIsLoaded } = filesSettingsStore;
 
   return {
     settingsIsLoaded,
-    user: auth.userStore.user,
+    user: userStore.user,
   };
 })(observer(SectionBodyContent));

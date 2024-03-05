@@ -2,15 +2,14 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import Link from "@docspace/components/link";
-import LinkWithDropdown from "@docspace/components/link-with-dropdown";
-import Avatar from "@docspace/components/avatar";
+import { Link } from "@docspace/shared/components/link";
+import { LinkWithDropdown } from "@docspace/shared/components/link-with-dropdown";
+import { Avatar } from "@docspace/shared/components/avatar";
 
 export default function withContent(WrappedContent) {
   const WithContent = (props) => {
     const {
       item,
-      selectGroup,
       checked,
       selectUser,
       deselectUser,
@@ -39,63 +38,6 @@ export default function withContent(WrappedContent) {
       <Avatar size="min" role={role} userName={displayName} source={avatar} />
     );
 
-    const getFormattedGroups = () => {
-      let temp = [];
-      const groups = item.groups;
-      const linkColor =
-        item.statusType === "pending"
-          ? theme.peopleWithContent.pendingColor
-          : theme.peopleWithContent.color;
-
-      if (!groups) temp.push({ key: 0, label: "" });
-
-      groups &&
-        groups.map((group) =>
-          temp.push({
-            key: group.id,
-            label: group.name,
-            onClick: () => selectGroup(group.id),
-          })
-        );
-
-      if (temp.length <= 1) {
-        return (
-          <Link
-            isTextOverflow
-            containerMinWidth="120px"
-            containerWidth="15%"
-            type="action"
-            title={temp[0].label}
-            fontSize="12px"
-            fontWeight={400}
-            color={linkColor}
-            onClick={temp[0].onClick}
-          >
-            {temp[0].label}
-          </Link>
-        );
-      } else {
-        return (
-          <LinkWithDropdown
-            className="link-with-dropdown-group"
-            isTextOverflow
-            containerMinWidth="120px"
-            containerWidth="15%"
-            directionY="both"
-            title={temp[0].label}
-            fontSize="12px"
-            fontWeight={400}
-            color={linkColor}
-            data={temp}
-          >
-            {temp[0].label}
-          </LinkWithDropdown>
-        );
-      }
-    };
-
-    const groups = getFormattedGroups();
-
     const onPhoneClick = () => window.open(`sms:${mobilePhone}`);
     const onEmailClick = () => window.open(`mailto:${email}`);
 
@@ -107,7 +49,6 @@ export default function withContent(WrappedContent) {
       "Translations",
       "Files",
       "ChangeUserTypeDialog",
-      "RoomSelector",
       "DataReassignmentDialog",
     ]);
 
@@ -125,7 +66,7 @@ export default function withContent(WrappedContent) {
         onContentRowClick={onContentRowClick}
         onPhoneClick={onPhoneClick}
         onEmailClick={onEmailClick}
-        groups={groups}
+        groups={[]}
         checkedProps={checkedProps}
         element={element}
         contextOptionsProps={contextOptionsProps}
@@ -135,11 +76,9 @@ export default function withContent(WrappedContent) {
     );
   };
 
-  return inject(({ auth, peopleStore }, { item }) => {
-    const { userStore, settingsStore } = auth;
+  return inject(({ settingsStore, peopleStore, userStore }, { item }) => {
     const { theme, standalone } = settingsStore;
 
-    const { selectGroup } = peopleStore.selectedGroupStore;
     const { getTargetUser } = peopleStore.targetUserStore;
     const { selectionStore, contextOptionsStore } = peopleStore;
 
@@ -157,7 +96,6 @@ export default function withContent(WrappedContent) {
       theme,
       standalone,
       currentUserId: userStore.user.id,
-      selectGroup,
       fetchProfile: getTargetUser,
       checked: selection.some((el) => el.id === item.id),
       isSeveralSelection: selection.length > 1,

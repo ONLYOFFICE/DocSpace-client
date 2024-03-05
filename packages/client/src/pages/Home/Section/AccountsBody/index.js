@@ -1,30 +1,40 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
+import { useLocation, useParams } from "react-router-dom";
+
+import People from "./People";
+import Groups from "./Groups";
+import InsideGroup from "./InsideGroup";
+
 import { withTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
-
-import { Consumer } from "@docspace/components/utils/context";
-
+import { Consumer } from "@docspace/shared/utils";
 import withLoader from "SRC_DIR/HOCs/withLoader";
-
-import PeopleRowContainer from "./RowView/PeopleRowContainer";
-import TableView from "./TableView/TableContainer";
 
 const SectionBodyContent = (props) => {
   const {
     tReady,
     accountsViewAs,
-    setSelection,
-    setBufferSelection,
+    isFiltered,
+    setPeopleSelection,
+    setGroupsSelection,
+    setPeopleBufferSelection,
+    setGroupsBufferSelection,
     setChangeOwnerDialogVisible,
+    selectUser,
   } = props;
+
   const location = useLocation();
+  const { groupId } = useParams();
 
   useEffect(() => {
     window.addEventListener("mousedown", onMouseDown);
 
     if (location?.state?.openChangeOwnerDialog) {
       setChangeOwnerDialogVisible(true);
+    }
+
+    if (location?.state?.user) {
+      selectUser(location?.state?.user);
     }
 
     return () => {
@@ -36,6 +46,7 @@ const SectionBodyContent = (props) => {
     if (
       (e.target.closest(".scroll-body") &&
         !e.target.closest(".user-item") &&
+        !e.target.closest(".group-item") &&
         !e.target.closest(".not-selectable") &&
         !e.target.closest(".info-panel") &&
         !e.target.closest(".table-container_group-menu")) ||
@@ -43,46 +54,64 @@ const SectionBodyContent = (props) => {
       e.target.closest(".add-button") ||
       e.target.closest(".search-input-block")
     ) {
-      setSelection([]);
-      setBufferSelection(null);
+      setPeopleSelection([]);
+      setGroupsSelection([]);
+      setPeopleBufferSelection(null);
+      setGroupsBufferSelection(null);
       window?.getSelection()?.removeAllRanges();
     }
   };
 
+  useEffect(() => {
+    window.addEventListener("mousedown", onMouseDown);
+    if (location?.state?.openChangeOwnerDialog)
+      setChangeOwnerDialogVisible(true);
+
+    return () => window.removeEventListener("mousedown", onMouseDown);
+  }, []);
+
   return (
-    <Consumer>
-      {(context) =>
-        accountsViewAs === "table" ? (
-          <>
-            <TableView sectionWidth={context.sectionWidth} tReady={tReady} />
-          </>
-        ) : (
-          <>
-            <PeopleRowContainer
-              sectionWidth={context.sectionWidth}
-              tReady={tReady}
-            />
-          </>
-        )
-      }
-    </Consumer>
+    <>
+      {location.pathname.includes("/accounts/people") ? (
+        <People />
+      ) : !groupId ? (
+        <Groups />
+      ) : (
+        <InsideGroup />
+      )}
+    </>
   );
 };
 
 export default inject(({ peopleStore }) => {
-  const { viewAs: accountsViewAs } = peopleStore;
+  const { viewAs: accountsViewAs, filterStore } = peopleStore;
+  const { isFiltered } = filterStore;
 
-  const { setSelection, setBufferSelection } = peopleStore.selectionStore;
+  const {
+    setSelection: setPeopleSelection,
+    setBufferSelection: setPeopleBufferSelection,
+    selectUser,
+  } = peopleStore.selectionStore;
+
+  const {
+    setSelection: setGroupsSelection,
+    setBufferSelection: setGroupsBufferSelection,
+  } = peopleStore.groupsStore;
+
   const { setChangeOwnerDialogVisible } = peopleStore.dialogStore;
 
   return {
     accountsViewAs,
-    setSelection,
-    setBufferSelection,
+    isFiltered,
+    setPeopleSelection,
+    setGroupsSelection,
+    setPeopleBufferSelection,
+    setGroupsBufferSelection,
     setChangeOwnerDialogVisible,
+    selectUser,
   };
 })(
   withTranslation(["People", "Common", "PeopleTranslations"])(
-    withLoader(observer(SectionBodyContent))()
-  )
+    withLoader(observer(SectionBodyContent))(),
+  ),
 );

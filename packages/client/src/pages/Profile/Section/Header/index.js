@@ -9,16 +9,17 @@ import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 
-import IconButton from "@docspace/components/icon-button";
-import ContextMenuButton from "@docspace/components/context-menu-button";
-import Headline from "@docspace/common/components/Headline";
-import Loaders from "@docspace/common/components/Loaders";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
+import Headline from "@docspace/shared/components/headline/Headline";
+import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 import { DeleteSelfProfileDialog } from "SRC_DIR/components/dialogs";
 import { DeleteOwnerProfileDialog } from "SRC_DIR/components/dialogs";
 
 import { StyledHeader } from "./StyledHeader";
-import RoomsFilter from "@docspace/common/api/rooms/filter";
-import { RoomSearchArea } from "@docspace/common/constants";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import { RoomSearchArea } from "@docspace/shared/enums";
+import TariffBar from "SRC_DIR/components/TariffBar";
 
 const Header = (props) => {
   const {
@@ -44,6 +45,7 @@ const Header = (props) => {
 
     showProfileLoader,
     setIsLoading,
+    userId,
   } = props;
 
   const navigate = useNavigate();
@@ -112,10 +114,10 @@ const Header = (props) => {
       return navigate("/portal-settings/customization/general");
     }
 
-    const roomsFilter = RoomsFilter.getDefault();
+    const roomsFilter = RoomsFilter.getDefault(userId);
 
     roomsFilter.searchArea = RoomSearchArea.Active;
-    const urlParams = roomsFilter.toUrlParams();
+    const urlParams = roomsFilter.toUrlParams(userId);
     const backUrl = `/rooms/shared/filter?${urlParams}`;
 
     setIsLoading();
@@ -124,7 +126,7 @@ const Header = (props) => {
     // setFilter(filter);
   };
 
-  if (showProfileLoader) return <Loaders.SectionHeader />;
+  if (showProfileLoader) return <SectionHeaderSkeleton />;
 
   return (
     <StyledHeader
@@ -139,22 +141,29 @@ const Header = (props) => {
         className="arrow-button"
       />
 
-      <Headline className="header-headline" type="content" truncate={true}>
-        {t("Profile:MyProfile")}
-        {profile?.isLDAP && ` (${t("PeopleTranslations:LDAPLbl")})`}
-      </Headline>
-      {((isAdmin && !profile?.isOwner) || isMe) && (
-        <ContextMenuButton
-          className="action-button"
-          directionX="right"
-          title={t("Common:Actions")}
-          iconName={VerticalDotsReactSvgUrl}
-          size={17}
-          getData={getUserContextOptions}
-          isDisabled={false}
-          usePortal={false}
-        />
-      )}
+      <div>
+        <Headline className="header-headline" type="content">
+          {t("Profile:MyProfile")}
+          {profile?.isLDAP && ` (${t("PeopleTranslations:LDAPLbl")})`}
+        </Headline>
+      </div>
+      <div className="action-button">
+        {((isAdmin && !profile?.isOwner) || isMe) && (
+          <ContextMenuButton
+            directionX="right"
+            title={t("Common:Actions")}
+            iconName={VerticalDotsReactSvgUrl}
+            size={17}
+            getData={getUserContextOptions}
+            isDisabled={false}
+            usePortal={false}
+          />
+        )}
+
+        <div className="tariff-bar">
+          <TariffBar />
+        </div>
+      </div>
 
       {deleteSelfProfileDialog && (
         <DeleteSelfProfileDialog
@@ -175,10 +184,16 @@ const Header = (props) => {
 };
 
 export default inject(
-  ({ auth, peopleStore, clientLoadingStore, profileActionsStore }) => {
-    const { isAdmin } = auth;
+  ({
+    authStore,
+    userStore,
+    peopleStore,
+    clientLoadingStore,
+    profileActionsStore,
+  }) => {
+    const { isAdmin } = authStore;
 
-    const { isVisitor, isCollaborator } = auth.userStore.user;
+    const { isVisitor, isCollaborator, user } = userStore.user;
 
     const { targetUserStore, filterStore, dialogStore } = peopleStore;
 
@@ -204,6 +219,7 @@ export default inject(
       setFilter: setFilterParams,
 
       profile: targetUser,
+      userId: user?.id,
       isMe,
       setChangeEmailVisible,
       setChangePasswordVisible,
@@ -214,7 +230,9 @@ export default inject(
       showProfileLoader,
       profileClicked,
     };
-  }
+  },
 )(
-  observer(withTranslation(["Profile", "Common", "PeopleTranslations"])(Header))
+  observer(
+    withTranslation(["Profile", "Common", "PeopleTranslations"])(Header),
+  ),
 );

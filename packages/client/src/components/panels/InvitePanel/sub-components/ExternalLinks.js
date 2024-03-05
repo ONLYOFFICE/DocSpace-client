@@ -4,13 +4,13 @@ import React, { useState, useRef, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import copy from "copy-to-clipboard";
 
-import toastr from "@docspace/components/toast/toastr";
-import { objectToGetParams } from "@docspace/common/utils";
+import { toastr } from "@docspace/shared/components/toast";
+import { objectToGetParams } from "@docspace/shared/utils/common";
 
-import InputBlock from "@docspace/components/input-block";
-import IconButton from "@docspace/components/icon-button";
-import DropDown from "@docspace/components/drop-down";
-import DropDownItem from "@docspace/components/drop-down-item";
+import { InputBlock } from "@docspace/shared/components/input-block";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { DropDown } from "@docspace/shared/components/drop-down";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 
 import AccessSelector from "./AccessSelector";
 
@@ -22,7 +22,7 @@ import {
   StyledToggleButton,
   StyledDescription,
 } from "../StyledInvitePanel";
-import { RoomsType, ShareAccessRights } from "@docspace/common/constants";
+import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 
 const ExternalLinks = ({
   t,
@@ -63,7 +63,7 @@ const ExternalLinks = ({
   const editLink = async () => {
     const type =
       roomType === RoomsType.PublicRoom
-        ? ShareAccessRights.RoomManager
+        ? ShareAccessRights.Collaborator
         : ShareAccessRights.ReadOnly;
 
     const link = await setInvitationLinks(roomId, "Invite", type);
@@ -104,8 +104,8 @@ const ExternalLinks = ({
       toastr.success(
         `${t("Translations:LinkCopySuccess")}. ${t(
           "Translations:LinkValidTime",
-          { days_count: 7 }
-        )}`
+          { days_count: 7 },
+        )}`,
       );
       copy(link);
     }
@@ -138,7 +138,7 @@ const ExternalLinks = ({
 
       closeActionLinks();
     },
-    [closeActionLinks, t]
+    [closeActionLinks, t],
   );
 
   const shareTwitter = useCallback(
@@ -155,7 +155,7 @@ const ExternalLinks = ({
 
       closeActionLinks();
     },
-    [closeActionLinks]
+    [closeActionLinks],
   );
 
   return (
@@ -179,11 +179,11 @@ const ExternalLinks = ({
               fixedDirection={true}
             >
               <DropDownItem
-                label={`${t("SharingPanel:ShareVia")} e-mail`}
+                label={`${t("Common:ShareVia")} e-mail`}
                 onClick={() => shareEmail(activeLink[0])}
               />
               <DropDownItem
-                label={`${t("SharingPanel:ShareVia")} Twitter`}
+                label={`${t("Common:ShareVia")} Twitter`}
                 onClick={() => shareTwitter(activeLink[0])}
               />
             </DropDown>
@@ -230,8 +230,8 @@ const ExternalLinks = ({
   );
 };
 
-export default inject(({ auth, dialogsStore, filesStore }) => {
-  const { isOwner } = auth.userStore.user;
+export default inject(({ userStore, dialogsStore, filesStore }) => {
+  const { isOwner } = userStore.user;
   const { invitePanelOptions } = dialogsStore;
   const { setInvitationLinks } = filesStore;
   const { roomId, hideSelector, defaultAccess } = invitePanelOptions;

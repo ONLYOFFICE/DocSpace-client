@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import Button from "@docspace/components/button";
-import EmailInput from "@docspace/components/email-input";
-import Text from "@docspace/components/text";
-import ModalDialog from "@docspace/components/modal-dialog";
-import FieldContainer from "@docspace/components/field-container";
-import toastr from "@docspace/components/toast/toastr";
+import { Button } from "@docspace/shared/components/button";
+import { EmailInput } from "@docspace/shared/components/email-input";
+import { Text } from "@docspace/shared/components/text";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { toastr } from "@docspace/shared/components/toast";
 import ModalDialogContainer from "./modal-dialog-container";
-import { sendInstructionsToChangePassword } from "@docspace/common/api/people";
+import { sendInstructionsToChangePassword } from "@docspace/shared/api/people";
 import { useTranslation } from "react-i18next";
 
 interface IForgotPasswordDialogProps {

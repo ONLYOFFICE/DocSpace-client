@@ -1,10 +1,11 @@
 ﻿import PlusThemeSvgUrl from "PUBLIC_DIR/images/plus.theme.svg?url";
 import React, { useEffect } from "react";
-import ModalDialog from "@docspace/components/modal-dialog";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import styled, { css } from "styled-components";
-import Button from "@docspace/components/button";
+import { Button } from "@docspace/shared/components/button";
 import { withTranslation } from "react-i18next";
 import { isMobileOnly } from "react-device-detect";
+import { isMobile } from "@docspace/shared/utils";
 
 const StyledComponent = styled(ModalDialog)`
   .modal-dialog-aside-footer {
@@ -29,6 +30,11 @@ const StyledComponent = styled(ModalDialog)`
     :not(:last-child) {
       padding-bottom: 20px;
     }
+
+    ${!isMobile() &&
+    css`
+      max-width: 448px;
+    `}
   }
 
   .name-color {
@@ -46,8 +52,8 @@ const StyledComponent = styled(ModalDialog)`
       props.currentColorAccent
         ? props.currentColorAccent
         : props.theme.isBase
-        ? `#eceef1 url(${PlusThemeSvgUrl}) no-repeat center`
-        : `#474747 url(${PlusThemeSvgUrl}) no-repeat center`};
+          ? `#eceef1 url(${PlusThemeSvgUrl}) no-repeat center`
+          : `#474747 url(${PlusThemeSvgUrl}) no-repeat center`};
   }
 
   .buttons-box {
@@ -55,8 +61,8 @@ const StyledComponent = styled(ModalDialog)`
       props.currentColorButtons
         ? props.currentColorButtons
         : props.theme.isBase
-        ? `#eceef1 url(${PlusThemeSvgUrl}) no-repeat center`
-        : `#474747 url(${PlusThemeSvgUrl}) no-repeat center`};
+          ? `#eceef1 url(${PlusThemeSvgUrl}) no-repeat center`
+          : `#474747 url(${PlusThemeSvgUrl}) no-repeat center`};
   }
 
   .modal-add-theme {
@@ -82,6 +88,19 @@ const StyledComponent = styled(ModalDialog)`
     :hover {
       background-color: unset;
     }
+
+    ${!isMobile() &&
+    css`
+      max-width: 227px;
+
+      .hex-color-picker {
+        max-width: 195px;
+      }
+
+      .react-colorful__interactive {
+        max-width: 183px;
+      }
+    `}
   }
 `;
 
@@ -117,6 +136,7 @@ const ColorSchemeDialog = (props) => {
       currentColorAccent={currentColorAccent}
       currentColorButtons={currentColorButtons}
       withFooterBorder={showSaveButtonDialog}
+      withBodyScroll={true}
     >
       <ModalDialog.Header>{header}</ModalDialog.Header>
       <ModalDialog.Body>

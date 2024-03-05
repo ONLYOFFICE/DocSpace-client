@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
-import {
-  StyledLoadingButton,
-  StyledCircle,
-} from "@docspace/components/ColorTheme/styled/sub-components/StyledLoadingButton";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import StyledLoadingButton from "@docspace/shared/components/color-theme/sub-components/StyledLoadingButton";
+import StyledCircle from "@docspace/shared/components/color-theme/sub-components/StyledCircle";
 
 const LoadingButton = (props) => {
   const { id, className, style, percent, onClick, isConversion, inConversion } =
@@ -30,7 +28,7 @@ const LoadingButton = (props) => {
       className={className}
       style={style}
       onClick={onClick}
-      themeId={ThemeType.LoadingButton}
+      themeId={ThemeId.LoadingButton}
     >
       <StyledCircle
         percent={percent}

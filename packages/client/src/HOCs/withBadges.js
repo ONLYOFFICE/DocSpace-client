@@ -1,12 +1,12 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { ShareAccessRights, FileStatus } from "@docspace/common/constants";
-import { combineUrl } from "@docspace/common/utils";
+import { ShareAccessRights, FileStatus } from "@docspace/shared/enums";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import Badges from "../components/Badges";
 import config from "PACKAGE_FILE";
 import copy from "copy-to-clipboard";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 import { isMobileOnly } from "react-device-detect";
 
 export default function withBadges(WrappedComponent) {
@@ -76,11 +76,11 @@ export default function withBadges(WrappedComponent) {
       const elem = e.target.closest(".is-mute");
       const data = elem.dataset;
       const { id, rootfolderid } = data;
-      
+
       setMuteAction(
         "unmute",
         { id, rootFolderId: rootfolderid, new: data.new },
-        t
+        t,
       );
     };
 
@@ -96,7 +96,7 @@ export default function withBadges(WrappedComponent) {
       const primaryLink = await getPrimaryLink(item.id);
       if (primaryLink) {
         copy(primaryLink.sharedTo.shareLink);
-        toastr.success(t("Files:LinkSuccessfullyCopied"));
+        toastr.success(t("Common:LinkSuccessfullyCopied"));
       }
     };
 
@@ -111,22 +111,25 @@ export default function withBadges(WrappedComponent) {
         isAdmin,
         isVisitor,
         isDesktopClient,
-        sectionWidth,
         viewAs,
         isMutedBadge,
         isArchiveFolderRoot,
         isArchiveFolder,
+        isPublicRoom,
+        isRecentTab,
       } = this.props;
       const { fileStatus, access, mute } = item;
 
       const newItems =
         item.new ||
         (!mute && (fileStatus & FileStatus.IsNew) === FileStatus.IsNew);
-      const showNew = !!newItems;
+      const showNew = !!newItems && !isPublicRoom;
 
       const accessToEdit =
         access === ShareAccessRights.FullAccess ||
         access === ShareAccessRights.None; // TODO: fix access type for owner (now - None)
+
+      const canEditing = access === ShareAccessRights.Editing;
 
       const badgesComponent = (
         <Badges
@@ -137,7 +140,6 @@ export default function withBadges(WrappedComponent) {
           isVisitor={isVisitor}
           showNew={showNew}
           newItems={newItems}
-          sectionWidth={sectionWidth}
           isTrashFolder={isTrashFolder}
           isPrivacyFolder={isPrivacyFolder}
           isArchiveFolderRoot={isArchiveFolderRoot}
@@ -153,6 +155,8 @@ export default function withBadges(WrappedComponent) {
           isMutedBadge={isMutedBadge}
           onCopyPrimaryLink={this.onCopyPrimaryLink}
           isArchiveFolder={isArchiveFolder}
+          isRecentTab={isRecentTab}
+          canEditing={canEditing}
         />
       );
 
@@ -165,24 +169,27 @@ export default function withBadges(WrappedComponent) {
   return inject(
     (
       {
-        auth,
+        authStore,
         treeFoldersStore,
         filesActionsStore,
         versionHistoryStore,
         dialogsStore,
         filesStore,
         publicRoomStore,
+        userStore,
+        settingsStore,
       },
-      { item }
+      { item },
     ) => {
       const {
         isRecycleBinFolder,
         isPrivacyFolder,
         isArchiveFolderRoot,
         isArchiveFolder,
+        isRecentTab,
       } = treeFoldersStore;
       const { markAsRead, setPinAction, setMuteAction } = filesActionsStore;
-      const { isTabletView, isDesktopClient, theme } = auth.settingsStore;
+      const { isTabletView, isDesktopClient, theme } = settingsStore;
       const { setIsVerHistoryPanel, fetchFileVersions } = versionHistoryStore;
       const {
         setNewFilesPanelVisible,
@@ -199,8 +206,8 @@ export default function withBadges(WrappedComponent) {
       return {
         isArchiveFolderRoot,
         theme,
-        isAdmin: auth.isAdmin,
-        isVisitor: auth?.userStore?.user?.isVisitor,
+        isAdmin: authStore.isAdmin,
+        isVisitor: userStore?.user?.isVisitor || !userStore?.user,
         isTrashFolder: isRecycleBinFolder,
         isPrivacyFolder,
         homepage: config.homepage,
@@ -218,7 +225,9 @@ export default function withBadges(WrappedComponent) {
         isMutedBadge,
         getPrimaryLink,
         isArchiveFolder,
+        isPublicRoom: publicRoomStore.isPublicRoom,
+        isRecentTab,
       };
-    }
+    },
   )(observer(WithBadges));
 }

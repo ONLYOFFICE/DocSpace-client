@@ -2,8 +2,8 @@ import React from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { observer, inject } from "mobx-react";
 
-import Text from "@docspace/components/text";
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { Text } from "@docspace/shared/components/text";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 import StyledComponent from "../StyledComponent";
 
@@ -25,7 +25,7 @@ const OfficialDocumentation = ({ dataBackupUrl }) => {
           {t("UpgradeToProBannerInstructionItemDocker")}{" "}
           <ColorTheme
             tag="a"
-            themeId={ThemeType.Link}
+            themeId={ThemeId.Link}
             fontSize="13px"
             fontWeight="600"
             href={dockerLink}
@@ -40,7 +40,7 @@ const OfficialDocumentation = ({ dataBackupUrl }) => {
           {t("UpgradeToProBannerInstructionItemLinux")}{" "}
           <ColorTheme
             tag="a"
-            themeId={ThemeType.Link}
+            themeId={ThemeId.Link}
             fontSize="13px"
             fontWeight="600"
             href={linuxDocker}
@@ -55,7 +55,7 @@ const OfficialDocumentation = ({ dataBackupUrl }) => {
           {t("UpgradeToProBannerInstructionItemWindows")}{" "}
           <ColorTheme
             tag="a"
-            themeId={ThemeType.Link}
+            themeId={ThemeId.Link}
             fontSize="13px"
             fontWeight="600"
             href={windowsDocker}
@@ -76,7 +76,7 @@ const OfficialDocumentation = ({ dataBackupUrl }) => {
           We also recommend to
           <ColorTheme
             tag="a"
-            themeId={ThemeType.Link}
+            themeId={ThemeId.Link}
             fontWeight="600"
             href={dataBackupUrl}
             target="_blank"
@@ -90,8 +90,7 @@ const OfficialDocumentation = ({ dataBackupUrl }) => {
   );
 };
 
-export default inject(({ auth }) => {
-  const { settingsStore } = auth;
+export default inject(({ settingsStore }) => {
   const { dataBackupUrl } = settingsStore;
 
   return { dataBackupUrl };

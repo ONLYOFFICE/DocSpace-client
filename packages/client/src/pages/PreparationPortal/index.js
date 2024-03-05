@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import ErrorContainer from "@docspace/common/components/ErrorContainer";
+import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
 import { withTranslation } from "react-i18next";
 
 import { StyledPreparationPortal } from "./StyledPreparationPortal";
-import Text from "@docspace/components/text";
-import { getRestoreProgress } from "@docspace/common/api/portal";
+import { Text } from "@docspace/shared/components/text";
+import { getRestoreProgress } from "@docspace/shared/api/portal";
 import { observer, inject } from "mobx-react";
 import PropTypes from "prop-types";
-import { ColorTheme, ThemeType } from "@docspace/components/ColorTheme";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 const baseSize = 1073741824; //number of bytes in one GB
 const unSizeMultiplicationFactor = 3;
@@ -187,13 +187,21 @@ const PreparationPortal = (props) => {
 
       setPercent(progress);
     } catch (err) {
+      const status = err?.response?.status;
+      const needCreationTableTime = status === 404;
+
+      if (needCreationTableTime) {
+        getRecoveryProgress();
+        return;
+      }
+
       setErrorMessage(errorMessage(err));
     }
   };
   useEffect(() => {
     setTimeout(() => {
       getRecoveryProgress();
-    }, 4000);
+    }, 6000);
 
     return () => {
       clearAllIntervals();
@@ -215,7 +223,7 @@ const PreparationPortal = (props) => {
             <Text className="preparation-portal_error">{`${errorMessage}`}</Text>
           ) : (
             <ColorTheme
-              themeId={ThemeType.Progress}
+              themeId={ThemeId.Progress}
               percent={percent}
               errorMessage={errorMessage}
               className="preparation-portal_body-wrapper"
@@ -237,7 +245,7 @@ const PreparationPortal = (props) => {
   );
 };
 
-const PreparationPortalWrapper = inject(({ auth, backup }) => {
+const PreparationPortalWrapper = inject(({ backup }) => {
   const { backupSize, clearLocalStorage } = backup;
 
   const multiplicationFactor = backupSize
@@ -249,7 +257,7 @@ const PreparationPortalWrapper = inject(({ auth, backup }) => {
     multiplicationFactor,
   };
 })(
-  withTranslation(["PreparationPortal", "Common"])(observer(PreparationPortal))
+  withTranslation(["PreparationPortal", "Common"])(observer(PreparationPortal)),
 );
 
 PreparationPortal.propTypes = {

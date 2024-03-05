@@ -1,6 +1,6 @@
 {
   "AdvancedDisplay": "Ajustes avanzados de la visualización",
-  "APILink": "biblioteca de API",
+  "APILink": "la biblioteca de API",
   "Ascending": "Ascendente",
   "Code": "Código para insertar",
   "CopyWindowCode": "Copiar el código de incrustación de la ventana",
@@ -25,7 +25,7 @@
   "InterfaceElements": "Elementos de la interfaz",
   "ItemsCount": "Recuento de elementos en una página",
   "ItemsCountDescription": "Puede especificar el número de archivos / carpetas que se muestran en una página, así como especificar qué página debe empezar a mostrarse",
-  "JavascriptSdk": "SDK de Javascript",
+  "JavascriptSdk": "SDK de JavaScript",
   "Menu": "Menú izquierdo",
   "MobileOnly": "solo dispositivos móviles",
   "Page": "Mostrar página (número)",

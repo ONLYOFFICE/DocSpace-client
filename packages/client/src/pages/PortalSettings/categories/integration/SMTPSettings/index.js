@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
 
 import CustomSettings from "./sub-components/CustomSettings";
 import { StyledComponent } from "./StyledComponent";
-import Loaders from "@docspace/common/components/Loaders";
+import { SettingsSMTPSkeleton } from "@docspace/shared/skeletons/settings";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 let timerId = null;
@@ -19,7 +19,12 @@ const SMTPSettings = (props) => {
     integrationSettingsUrl,
   } = props;
 
-  const { t, ready } = useTranslation(["SMTPSettings", "Settings", "Common"]);
+  const { t, ready } = useTranslation([
+    "SMTPSettings",
+    "Settings",
+    "Common",
+    "UploadPanel",
+  ]);
   const [isInit, setIsInit] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -48,7 +53,7 @@ const SMTPSettings = (props) => {
 
   if (!isLoading && !isInit) return <></>;
 
-  if (isLoadingContent && !isInit) return <Loaders.SettingsSMTP />;
+  if (isLoadingContent && !isInit) return <SettingsSMTPSkeleton />;
 
   return (
     <StyledComponent>
@@ -58,7 +63,7 @@ const SMTPSettings = (props) => {
         </Text>
         <Link
           className="link-learn-more"
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
           isHovered
           target="_blank"
           href={integrationSettingsUrl}
@@ -72,8 +77,7 @@ const SMTPSettings = (props) => {
   );
 };
 
-export default inject(({ auth, setup }) => {
-  const { settingsStore } = auth;
+export default inject(({ settingsStore, setup }) => {
   const { organizationName, currentColorScheme, integrationSettingsUrl } =
     settingsStore;
   const { setInitSMTPSettings } = setup;

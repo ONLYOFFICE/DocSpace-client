@@ -1,10 +1,12 @@
 {
   "Categories": "Thể loại",
+  "EmptyFormGalleryScreenDescription": "Không tìm thấy kết quả nào phù hợp với truy vấn của bạn",
   "ErrorViewDescription": "Xin vui lòng thử lại sau",
+  "ErrorViewHeader": "Thư viện biểu mẫu tạm thời không khả dụng",
   "SelectForm": "Chọn Biểu mẫu",
-  "SubmitToGalleryBlockBody": "Gửi mẫu của bạn để chia sẻ với cộng đồng ONLYOFFICE.",
-  "SubmitToGalleryBlockHeader": "Bộ Sưu tập Biểu mẫu ONLYOFFICE",
   "SubmitToGalleryDialogGuideInfo": "Tìm hiểu cách tạo các biểu mẫu hoàn hảo và tăng cơ hội nhận được sự chấp thuận trong <1>guide</1> của chúng tôi.",
   "SubmitToGalleryDialogMainInfo": "Gửi biểu mẫu của bạn đến bộ sưu tập công cộng để cho phép người khác sử dụng biểu mẫu đó trong công việc của họ. Sau khi biểu mẫu được kiểm duyệt, bạn sẽ được thông báo và thưởng cho khoản đóng góp của mình.",
-  "TemplateInfo": "Thông tin biểu mẫu"
+  "SuggestChanges": "Đề xuất thay đổi",
+  "TemplateInfo": "Thông tin biểu mẫu",
+  "ViewAllTemplates": "Xem tất cả các mẫu"
 }

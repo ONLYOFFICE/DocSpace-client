@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 
-import Text from "@docspace/components/text";
+import { Text } from "@docspace/shared/components/text";
 
 import DetailsBar from "./sub-components/DetailsBar";
 import MessagesDetails from "./sub-components/MessagesDetails";

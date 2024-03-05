@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { CreateRoomDialog } from "../dialogs";
 
 const CreateRoomEvent = ({
+  title,
   visible,
   onClose,
 
@@ -47,8 +48,8 @@ const CreateRoomEvent = ({
   }, []);
 
   useEffect(() => {
-    fetchTagsAction;
-  }, []);
+    fetchTagsAction();
+  }, [fetchTagsAction]);
 
   useEffect(() => {
     setCreateRoomDialogVisible(true);
@@ -57,6 +58,7 @@ const CreateRoomEvent = ({
 
   return (
     <CreateRoomDialog
+      title={title}
       t={t}
       visible={
         visible &&
@@ -82,13 +84,13 @@ export default inject(
 
     tagsStore,
     dialogsStore,
-    settingsStore,
+    filesSettingsStore,
   }) => {
     const { fetchTags } = tagsStore;
 
     const { deleteThirdParty, fetchThirdPartyProviders } =
-      settingsStore.thirdPartyStore;
-    const { enableThirdParty } = settingsStore;
+      filesSettingsStore.thirdPartyStore;
+    const { enableThirdParty } = filesSettingsStore;
 
     const {
       createRoomConfirmDialogVisible,

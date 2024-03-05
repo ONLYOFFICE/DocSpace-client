@@ -4,29 +4,33 @@ import DisableReactSvgUrl from "PUBLIC_DIR/images/disable.react.svg?url";
 import ChangeToEmployeeReactSvgUrl from "PUBLIC_DIR/images/change.to.employee.react.svg?url";
 import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
 import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
+import ChangQuotaReactSvgUrl from "PUBLIC_DIR/images/change.quota.react.svg?url";
+import DisableQuotaReactSvgUrl from "PUBLIC_DIR/images/disable.quota.react.svg?url";
+import DefaultQuotaReactSvgUrl from "PUBLIC_DIR/images/default.quota.react.svg?url";
 import GroupsStore from "./GroupsStore";
 import UsersStore from "./UsersStore";
 import TargetUserStore from "./TargetUserStore";
-import SelectedGroupStore from "./SelectedGroupStore";
 import EditingFormStore from "./EditingFormStore";
 import FilterStore from "./FilterStore";
 import SelectionStore from "./SelectionPeopleStore";
 import HeaderMenuStore from "./HeaderMenuStore";
-import AvatarEditorStore from "./AvatarEditorStore";
+
 import InviteLinksStore from "./InviteLinksStore";
 import DialogStore from "./DialogStore";
 
 import AccountsContextOptionsStore from "./AccountsContextOptionsStore";
-import {
-  isMobile,
-  isTablet,
-  isDesktop,
-} from "@docspace/components/utils/device";
+import { isMobile, isTablet, isDesktop } from "@docspace/shared/utils";
 
-import toastr from "@docspace/components/toast/toastr";
-import { EmployeeStatus, Events } from "@docspace/common/constants";
-import Filter from "@docspace/common/api/people/filter";
+import { toastr } from "@docspace/shared/components/toast";
+import api from "@docspace/shared/api";
+import {
+  EmployeeActivationStatus,
+  EmployeeStatus,
+  Events,
+} from "@docspace/shared/enums";
+import Filter from "@docspace/shared/api/people/filter";
+import { deleteGroup } from "@docspace/shared/api/groups";
 
 class PeopleStore {
   contextOptionsStore = null;
@@ -35,40 +39,68 @@ class PeopleStore {
   groupsStore = null;
   usersStore = null;
   targetUserStore = null;
-  selectedGroupStore = null;
   editingFormStore = null;
   filterStore = null;
   selectionStore = null;
   headerMenuStore = null;
-  avatarEditorStore = null;
+
   inviteLinksStore = null;
   dialogStore = null;
   setupStore = null;
   accessRightsStore = null;
   profileActionsStore = null;
+  infoPanelStore = null;
+  userStore = null;
+
   isInit = false;
   viewAs = isDesktop() ? "table" : "row";
   isLoadedProfileSectionBody = false;
 
-  constructor(authStore, setupStore, accessRightsStore, dialogsStore) {
+  constructor(
+    authStore,
+    setupStore,
+    accessRightsStore,
+    dialogsStore,
+    infoPanelStore,
+    userStore,
+    tfaStore,
+    settingsStore,
+    clientLoadingStore,
+  ) {
     this.authStore = authStore;
-    this.groupsStore = new GroupsStore(this);
-    this.usersStore = new UsersStore(this, authStore);
-    this.targetUserStore = new TargetUserStore(this);
-    this.selectedGroupStore = new SelectedGroupStore(this);
+    this.infoPanelStore = infoPanelStore;
+    this.usersStore = new UsersStore(
+      this,
+      settingsStore,
+      infoPanelStore,
+      userStore,
+    );
+    this.groupsStore = new GroupsStore(
+      authStore,
+      this,
+      infoPanelStore,
+      clientLoadingStore,
+    );
+    this.targetUserStore = new TargetUserStore(this, userStore);
     this.editingFormStore = new EditingFormStore(this);
-    this.filterStore = new FilterStore();
+    this.filterStore = new FilterStore(userStore);
     this.selectionStore = new SelectionStore(this);
     this.headerMenuStore = new HeaderMenuStore(this);
-    this.avatarEditorStore = new AvatarEditorStore(this);
     this.inviteLinksStore = new InviteLinksStore(this);
     this.dialogStore = new DialogStore();
+    this.userStore = userStore;
 
     this.setupStore = setupStore;
     this.accessRightsStore = accessRightsStore;
     this.dialogsStore = dialogsStore;
 
-    this.contextOptionsStore = new AccountsContextOptionsStore(this);
+    this.contextOptionsStore = new AccountsContextOptionsStore(
+      this,
+      infoPanelStore,
+      userStore,
+      tfaStore,
+      settingsStore,
+    );
 
     makeAutoObservable(this);
   }
@@ -91,7 +123,7 @@ class PeopleStore {
   resetFilter = () => {
     const filter = Filter.getDefault();
 
-    window.DocSpace.navigate(`accounts/filter?${filter.toUrlParams()}`);
+    window.DocSpace.navigate(`accounts/people/filter?${filter.toUrlParams()}`);
   };
 
   onChangeType = (e) => {
@@ -114,7 +146,7 @@ class PeopleStore {
 
     if (users.length > 1) {
       fromType = fromType.filter(
-        (item, index) => fromType.indexOf(item) === index && item !== type
+        (item, index) => fromType.indexOf(item) === index && item !== type,
       );
 
       if (fromType.length === 0) fromType = [fromType[0]];
@@ -139,6 +171,76 @@ class PeopleStore {
     window.dispatchEvent(event);
 
     return true;
+  };
+
+  changeUserQuota = (users, successCallback, abortCallback) => {
+    const event = new Event(Events.CHANGE_QUOTA);
+
+    const userIDs = users.map((user) => {
+      return user?.id ? user.id : user;
+    });
+
+    const payload = {
+      visible: true,
+      type: "user",
+      ids: userIDs,
+      successCallback,
+      abortCallback,
+    };
+
+    event.payload = payload;
+
+    window.dispatchEvent(event);
+  };
+  disableUserQuota = async (users, t) => {
+    const { setCustomUserQuota, getPeopleListItem } = this.usersStore;
+    const { infoPanelStore } = this.authStore;
+    const { setInfoPanelSelection } = infoPanelStore;
+
+    const userIDs = users.map((user) => {
+      return user?.id ? user.id : user;
+    });
+
+    try {
+      const items = await setCustomUserQuota(-1, userIDs);
+      const users = [];
+      items.map((u) => users.push(getPeopleListItem(u)));
+
+      if (items.length === 1) {
+        setInfoPanelSelection(getPeopleListItem(items[0]));
+      } else {
+        setInfoPanelSelection(items);
+      }
+
+      toastr.success(t("Common:StorageQuotaDisabled"));
+    } catch (e) {
+      toastr.error(e);
+    }
+  };
+  resetUserQuota = async (users, t) => {
+    const { resetUserQuota, getPeopleListItem } = this.usersStore;
+    const { infoPanelStore } = this.authStore;
+    const { setInfoPanelSelection } = infoPanelStore;
+    const userIDs = users.map((user) => {
+      return user?.id ? user.id : user;
+    });
+
+    try {
+      const items = await resetUserQuota(userIDs);
+
+      const users = [];
+      items.map((u) => users.push(getPeopleListItem(u)));
+
+      if (items.length === 1) {
+        setInfoPanelSelection(getPeopleListItem(items[0]));
+      } else {
+        setInfoPanelSelection(items);
+      }
+
+      toastr.success(t("Common:StorageQuotaReset"));
+    } catch (e) {
+      toastr.error(e);
+    }
   };
 
   onChangeStatus = (status) => {
@@ -171,30 +273,14 @@ class PeopleStore {
   };
 
   onOpenInfoPanel = () => {
-    const { setIsVisible } = this.authStore.infoPanelStore;
+    const { setIsVisible } = this.infoPanelStore;
     setIsVisible(true);
   };
 
-  getHeaderMenu = (t) => {
-    const {
-      hasUsersToMakeEmployees,
-      hasUsersToActivate,
-      hasUsersToDisable,
-      hasUsersToInvite,
-      hasUsersToRemove,
-      hasOnlyOneUserToRemove,
-      hasFreeUsers,
-      userSelectionRole,
-      selection,
-    } = this.selectionStore;
+  getUsersRightsSubmenu = (t) => {
+    const { userSelectionRole, selectionUsersRights } = this.selectionStore;
 
-    const { setSendInviteDialogVisible, setDeleteProfileDialogVisible } =
-      this.dialogStore;
-    const { toggleDeleteProfileEverDialog } = this.contextOptionsStore;
-
-    const { isOwner } = this.authStore.userStore.user;
-
-    const { isVisible } = this.authStore.infoPanelStore;
+    const { isOwner } = this.userStore.user;
 
     const options = [];
 
@@ -218,22 +304,100 @@ class PeopleStore {
       key: "manager",
       isActive: userSelectionRole === "manager",
     };
-    const userOption = {
-      id: "menu_change-user_user",
-      className: "group-menu_drop-down",
-      label: t("Common:User"),
-      title: t("Common:User"),
+    // const userOption = {
+    //   id: "menu_change-user_user",
+    //   className: "group-menu_drop-down",
+    //   label: t("Common:User"),
+    //   title: t("Common:User"),
+    //   onClick: (e) => this.onChangeType(e),
+    //   "data-action": "user",
+    //   key: "user",
+    //   isActive: userSelectionRole === "user",
+    // };
+
+    const collaboratorOption = {
+      id: "menu_change-collaborator",
+      key: "collaborator",
+      title: t("Common:PowerUser"),
+      label: t("Common:PowerUser"),
+      "data-action": "collaborator",
       onClick: (e) => this.onChangeType(e),
-      "data-action": "user",
-      key: "user",
-      isActive: userSelectionRole === "user",
+      isActive: userSelectionRole === "collaborator",
     };
 
-    isOwner && options.push(adminOption);
+    const { isVisitor, isCollaborator, isRoomAdmin, isAdmin } =
+      selectionUsersRights;
 
-    options.push(managerOption);
+    if (isVisitor > 0) {
+      isOwner && options.push(adminOption);
+      options.push(managerOption);
+      options.push(collaboratorOption);
 
-    hasFreeUsers && options.push(userOption);
+      return options;
+    }
+
+    if (isCollaborator > 0 || (isRoomAdmin > 0 && isAdmin > 0)) {
+      isOwner && options.push(adminOption);
+      options.push(managerOption);
+
+      return options;
+    }
+
+    if (isRoomAdmin > 0) {
+      isOwner && options.push(adminOption);
+
+      return options;
+    }
+
+    if (isAdmin > 0) {
+      options.push(managerOption);
+
+      return options;
+    }
+  };
+  getHeaderMenu = (t, isGroupsPage = false) => {
+    const {
+      hasUsersToMakeEmployees,
+      hasUsersToActivate,
+      hasUsersToDisable,
+      hasUsersToInvite,
+      hasUsersToRemove,
+      hasUsersToChangeQuota,
+      hasUsersToResetQuota,
+      hasUsersToDisableQuota,
+      selection,
+    } = this.selectionStore;
+
+    const { selection: groupsSelection, groupsFilter } = this.groupsStore;
+
+    const { setSendInviteDialogVisible } = this.dialogStore;
+    const { toggleDeleteProfileEverDialog } = this.contextOptionsStore;
+
+    const { isVisible } = this.infoPanelStore;
+
+    if (isGroupsPage)
+      return [
+        {
+          id: "menu-delete",
+          key: "delete",
+          label: t("Common:Delete"),
+          onClick: () => {
+            Promise.all(
+              groupsSelection.map(async (group) => deleteGroup(group.id)),
+            )
+              .then(() => {
+                toastr.success(t("Groups were deleted successfully"));
+                this.groupsStore.setSelection([]);
+                this.groupsStore.getGroups(groupsFilter, true);
+              })
+              .catch((err) => {
+                toastr.error(err.message);
+                console.error(err);
+              });
+          },
+          iconUrl: DeleteReactSvgUrl,
+        },
+      ];
 
     const headerMenu = [
       {
@@ -243,7 +407,7 @@ class PeopleStore {
         disabled: !hasUsersToMakeEmployees,
         iconUrl: ChangeToEmployeeReactSvgUrl,
         withDropDown: true,
-        options: options,
+        options: this.getUsersRightsSubmenu(t),
       },
       {
         id: "menu-info",
@@ -281,6 +445,30 @@ class PeopleStore {
         iconUrl: DisableReactSvgUrl,
       },
       {
+        id: "menu-change-quota",
+        key: "change-quota",
+        label: t("Common:ChangeQuota"),
+        disabled: !hasUsersToChangeQuota,
+        iconUrl: ChangQuotaReactSvgUrl,
+        onClick: () => this.changeUserQuota(selection),
+      },
+      {
+        id: "menu-default-quota",
+        key: "default-quota",
+        label: t("Common:SetToDefault"),
+        disabled: !hasUsersToResetQuota,
+        iconUrl: DefaultQuotaReactSvgUrl,
+        onClick: () => this.resetUserQuota(selection, t),
+      },
+      {
+        id: "menu-disable-quota",
+        key: "disable-quota",
+        label: t("Common:DisableQuota"),
+        disabled: !hasUsersToDisableQuota,
+        iconUrl: DisableQuotaReactSvgUrl,
+        onClick: () => this.disableUserQuota(selection, t),
+      },
+      {
         id: "menu-delete",
         key: "delete",
         label: t("Common:Delete"),
@@ -299,6 +487,32 @@ class PeopleStore {
 
   setIsLoadedProfileSectionBody = (isLoadedProfileSectionBody) => {
     this.isLoadedProfileSectionBody = isLoadedProfileSectionBody;
+  };
+
+  getStatusType = (user) => {
+    if (
+      user.status === EmployeeStatus.Active &&
+      user.activationStatus === EmployeeActivationStatus.Activated
+    ) {
+      return "normal";
+    } else if (
+      user.status === EmployeeStatus.Active &&
+      user.activationStatus === EmployeeActivationStatus.Pending
+    ) {
+      return "pending";
+    } else if (user.status === EmployeeStatus.Disabled) {
+      return "disabled";
+    } else {
+      return "unknown";
+    }
+  };
+
+  getUserRole = (user) => {
+    if (user.isOwner) return "owner";
+    else if (user.isAdmin) return "admin";
+    else if (user.isCollaborator) return "collaborator";
+    else if (user.isVisitor) return "user";
+    else return "manager";
   };
 }
 

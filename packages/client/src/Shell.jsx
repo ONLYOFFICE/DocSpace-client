@@ -1,35 +1,33 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate, Outlet } from "react-router-dom";
-import { inject, observer, Provider as MobxProvider } from "mobx-react";
-import NavMenu from "./components/NavMenu";
-import Main from "./components/Main";
+import moment from "moment-timezone";
+import React, { useEffect } from "react";
+import { Outlet } from "react-router-dom";
+import { useTheme } from "styled-components";
+import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
+import { isMobile, isIOS, isFirefox } from "react-device-detect";
 
-import Layout from "./components/Layout";
-import ScrollToTop from "./components/Layout/ScrollToTop";
-import Toast from "@docspace/components/toast";
-import toastr from "@docspace/components/toast/toastr";
-import { getLogoFromPath, updateTempContent } from "@docspace/common/utils";
-
-import ThemeProvider from "@docspace/components/theme-provider";
-import store from "client/store";
+import { getLogoFromPath } from "@docspace/shared/utils";
+import { Portal } from "@docspace/shared/components/portal";
+import { SnackBar } from "@docspace/shared/components/snackbar";
+import { Toast, toastr } from "@docspace/shared/components/toast";
+import { getRestoreProgress } from "@docspace/shared/api/portal";
+import { updateTempContent } from "@docspace/shared/utils/common";
+import { DeviceType, IndexedDBStores } from "@docspace/shared/enums";
+import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
+import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
 
 import config from "PACKAGE_FILE";
-import { I18nextProvider, useTranslation } from "react-i18next";
-import i18n from "./i18n";
 
-import Snackbar from "@docspace/components/snackbar";
-import moment from "moment";
-//import ReactSmartBanner from "./components/SmartBanner";
-import { useThemeDetector } from "@docspace/common/utils/useThemeDetector";
-import { isMobile, isIOS, isFirefox } from "react-device-detect";
-import IndicatorLoader from "./components/IndicatorLoader";
-import DialogsWrapper from "./components/dialogs/DialogsWrapper";
+import Main from "./components/Main";
+import Layout from "./components/Layout";
+import NavMenu from "./components/NavMenu";
 import MainBar from "./components/MainBar";
-import { Portal } from "@docspace/components";
-import indexedDbHelper from "@docspace/common/utils/indexedDBHelper";
-import { DeviceType, IndexedDBStores } from "@docspace/common/constants";
-import { getRestoreProgress } from "@docspace/common/api/portal";
-import { useTheme } from "styled-components";
+import ScrollToTop from "./components/Layout/ScrollToTop";
+import IndicatorLoader from "./components/IndicatorLoader";
+import ErrorBoundary from "./components/ErrorBoundaryWrapper";
+import DialogsWrapper from "./components/dialogs/DialogsWrapper";
+
+// import ReactSmartBanner from "./components/SmartBanner";
 
 const Shell = ({ items = [], page = "home", ...rest }) => {
   const {
@@ -51,10 +49,9 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     userTheme,
     //user,
     whiteLabelLogoUrls,
-    standalone,
     userId,
     currentDeviceType,
-
+    timezone,
     showArticleLoader,
   } = rest;
 
@@ -106,13 +103,13 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     shortcutIconLink.href = favicon;
 
     const appleIconLink = document.querySelector(
-      "link[rel~='apple-touch-icon']"
+      "link[rel~='apple-touch-icon']",
     );
 
     if (appleIconLink) appleIconLink.href = favicon;
 
     const androidIconLink = document.querySelector(
-      "link[rel~='android-touch-icon']"
+      "link[rel~='android-touch-icon']",
     );
     if (androidIconLink) androidIconLink.href = favicon;
   }, [whiteLabelLogoUrls]);
@@ -122,19 +119,12 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       command: "subscribe",
       data: { roomParts: "backup-restore" },
     });
-
-    !standalone && // unlimited quota (standalone)
-      socketHelper.emit({
-        command: "subscribe",
-        data: { roomParts: "quota" },
-      });
-
     socketHelper.on("restore-backup", () => {
       getRestoreProgress()
         .then((response) => {
           if (!response) {
             console.log(
-              "Skip show <PreparationPortalDialog /> - empty progress response"
+              "Skip show <PreparationPortalDialog /> - empty progress response",
             );
             return;
           }
@@ -143,6 +133,16 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
         .catch((e) => {
           console.error("getRestoreProgress", e);
         });
+    });
+
+    socketHelper.emit({
+      command: "subscribe",
+      data: { roomParts: "quota" },
+    });
+
+    socketHelper.emit({
+      command: "subscribe",
+      data: { roomParts: "QUOTA", individual: true },
     });
   }, [socketHelper]);
 
@@ -174,7 +174,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     const { fromDate, toDate, desktop } = campaign;
 
     console.log(
-      `FB: 'bar/maintenance' desktop=${desktop} fromDate=${fromDate} toDate=${toDate}`
+      `FB: 'bar/maintenance' desktop=${desktop} fromDate=${fromDate} toDate=${toDate}`,
     );
 
     if (!campaign || !fromDate || !toDate) {
@@ -198,20 +198,20 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     if (now.isBefore(from)) {
       setSnackBarTimer(campaign);
 
-      Snackbar.close();
+      SnackBar.close();
       console.log(`Show snackBar has been delayed for 1 minute`, now);
       skipMaintenance = true;
     }
 
     if (now.isAfter(to)) {
       console.log("Skip snackBar by current date", now);
-      Snackbar.close();
+      SnackBar.close();
       skipMaintenance = true;
     }
 
     if (isDesktop && !desktop) {
       console.log("Skip snackBar by desktop", desktop);
-      Snackbar.close();
+      SnackBar.close();
       skipMaintenance = true;
     }
 
@@ -246,7 +246,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       onAction: () => {
         setMaintenanceExist(false);
         setSnackbarExist(false);
-        Snackbar.close();
+        SnackBar.close();
         localStorage.setItem(LS_CAMPAIGN_DATE, to.format(DATE_FORMAT));
       },
       opacity: 1,
@@ -258,7 +258,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       theme,
     };
 
-    Snackbar.show(barConfig);
+    SnackBar.show(barConfig);
   };
 
   const fetchMaintenance = () => {
@@ -271,7 +271,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
           if (!campaign) {
             setCheckedMaintenance(true);
             clearSnackBarTimer();
-            Snackbar.close();
+            SnackBar.close();
             return;
           }
 
@@ -298,7 +298,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 
     FirebaseHelper.checkCampaigns()
       .then((campaigns) => {
-        localStorage.setItem("campaigns", campaigns);
+        localStorage.setItem("docspace_campaigns", campaigns);
       })
       .catch((err) => {
         console.error(err);
@@ -349,7 +349,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       Array.from(document.querySelectorAll("style")).forEach((sheet) => {
         if (
           sheet?.textContent?.includes(
-            "-webkit-filter: hue-rotate(180deg) invert(100%) !important;"
+            "-webkit-filter: hue-rotate(180deg) invert(100%) !important;",
           )
         ) {
           sheet.parentNode?.removeChild(sheet);
@@ -405,10 +405,11 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   );
 };
 
-const ShellWrapper = inject(({ auth, backup, clientLoadingStore }) => {
+const ShellWrapper = inject(
+  ({ authStore, settingsStore, backup, clientLoadingStore, userStore }) => {
   const { i18n } = useTranslation();
 
-  const { init, isLoaded, settingsStore, setProductVersion, language } = auth;
+    const { init, isLoaded, setProductVersion, language } = authStore;
 
   const {
     personal,
@@ -422,20 +423,21 @@ const ShellWrapper = inject(({ auth, backup, clientLoadingStore }) => {
     socketHelper,
     setTheme,
     whiteLabelLogoUrls,
-    standalone,
     currentDeviceType,
+      isFrame,
+      frameConfig,
   } = settingsStore;
 
   const isBase = settingsStore.theme.isBase;
   const { setPreparationPortalDialogVisible } = backup;
 
   const userTheme = isDesktopClient
-    ? auth?.userStore?.user?.theme
-      ? auth?.userStore?.user?.theme
+      ? userStore?.user?.theme
+        ? userStore?.user?.theme
       : window.RendererProcessVariable?.theme?.type === "dark"
-      ? "Dark"
-      : "Base"
-    : auth?.userStore?.user?.theme;
+        ? "Dark"
+        : "Base"
+      : userStore?.user?.theme;
 
   return {
     loadBaseInfo: async () => {
@@ -462,42 +464,19 @@ const ShellWrapper = inject(({ auth, backup, clientLoadingStore }) => {
     setTheme,
     roomsMode,
     setSnackbarExist,
-    userTheme: userTheme,
-    userId: auth?.userStore?.user?.id,
+      userTheme: isFrame ? frameConfig?.theme : userTheme,
+      userId: userStore?.user?.id,
     whiteLabelLogoUrls,
-    standalone,
     currentDeviceType,
-
     showArticleLoader: clientLoadingStore.showArticleLoader,
   };
-})(observer(Shell));
+  },
+)(observer(Shell));
 
-const ThemeProviderWrapper = inject(({ auth, loginStore }) => {
-  const { settingsStore } = auth;
-  let currentColorScheme = false;
-  const { theme } = settingsStore;
-  const { i18n } = useTranslation();
-
-  if (loginStore) {
-    currentColorScheme = loginStore.currentColorScheme;
-  } else if (auth) {
-    currentColorScheme = settingsStore.currentColorScheme || false;
-  }
-
-  window.theme = theme;
-
-  return {
-    theme: { ...theme, interfaceDirection: i18n.dir() },
-    currentColorScheme,
-  };
-})(observer(ThemeProvider));
-
-export default () => (
-  <MobxProvider {...store}>
-    <I18nextProvider i18n={i18n}>
-      <ThemeProviderWrapper>
+const Root = () => (
+  <ErrorBoundary>
         <ShellWrapper />
-      </ThemeProviderWrapper>
-    </I18nextProvider>
-  </MobxProvider>
+  </ErrorBoundary>
 );
+
+export default Root;

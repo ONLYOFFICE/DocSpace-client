@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { getSettingsThirdParty } from "@docspace/common/api/files";
+import { getSettingsThirdParty } from "@docspace/shared/api/files";
 import {
   getBackupStorage,
   getStorageRegions,
-} from "@docspace/common/api/settings";
-import RestoreBackupLoader from "@docspace/common/components/Loaders/RestoreBackupLoader";
-import toastr from "@docspace/components/toast/toastr";
-import RadioButtonGroup from "@docspace/components/radio-button-group";
-import { BackupStorageType, DeviceType } from "@docspace/common/constants";
-import Checkbox from "@docspace/components/checkbox";
-import Text from "@docspace/components/text";
+} from "@docspace/shared/api/settings";
+import RestoreBackupLoader from "@docspace/shared/skeletons/backup/RestoreBackup";
+import { toastr } from "@docspace/shared/components/toast";
+import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
+import { BackupStorageType, DeviceType } from "@docspace/shared/enums";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Text } from "@docspace/shared/components/text";
 
 import LocalFileModule from "./sub-components/LocalFileModule";
 import ThirdPartyStoragesModule from "./sub-components/ThirdPartyStoragesModule";
@@ -266,8 +266,7 @@ const RestoreBackup = (props) => {
   );
 };
 
-export default inject(({ auth, backup }) => {
-  const { settingsStore, currentQuotaStore } = auth;
+export default inject(({ settingsStore, backup, currentQuotaStore }) => {
   const { currentDeviceType, standalone } = settingsStore;
   const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
   const {

@@ -1,19 +1,19 @@
 import React from "react";
 
-import Section from "@docspace/common/components/Section";
-import Loaders from "@docspace/common/components/Loaders";
+import Section from "@docspace/shared/components/section";
+import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 import { withTranslation } from "react-i18next";
 
 import { SectionHeaderContent, SectionBodyContent } from "./Section";
 //import { setDocumentTitle } from "@docspace/client/src/helpers/filesUtils";
 import { inject, observer } from "mobx-react";
-
+import SectionWrapper from "SRC_DIR/components/Section";
 class PureVersionHistory extends React.Component {
   render() {
     const { isLoading, versions, showProgressBar } = this.props;
 
     return (
-      <Section
+      <SectionWrapper
         withBodyAutoFocus={true}
         headerBorderBottom={true}
         showSecondaryProgressBar={showProgressBar}
@@ -28,14 +28,14 @@ class PureVersionHistory extends React.Component {
               onClickBack={this.redirectToHomepage}
             />
           ) : (
-            <Loaders.SectionHeader />
+            <SectionHeaderSkeleton />
           )}
         </Section.SectionHeader>
 
         <Section.SectionBody>
           <SectionBodyContent />
         </Section.SectionBody>
-      </Section>
+      </SectionWrapper>
     );
   }
 }
@@ -45,14 +45,14 @@ const VersionHistory = withTranslation("VersionHistory")(PureVersionHistory);
 VersionHistory.propTypes = {};
 
 export default inject(
-  ({ auth, filesStore, clientLoadingStore, versionHistoryStore }) => {
+  ({ settingsStore, filesStore, clientLoadingStore, versionHistoryStore }) => {
     const { filter } = filesStore;
     const { isLoading } = clientLoadingStore;
     const { setIsVerHistoryPanel, versions, showProgressBar } =
       versionHistoryStore;
 
     return {
-      isTabletView: auth.settingsStore.isTabletView,
+      isTabletView: settingsStore.isTabletView,
       isLoading,
       filter,
       versions,
@@ -60,5 +60,5 @@ export default inject(
 
       setIsVerHistoryPanel,
     };
-  }
+  },
 )(observer(VersionHistory));

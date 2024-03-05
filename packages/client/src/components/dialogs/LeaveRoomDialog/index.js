@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Button from "@docspace/components/button";
-import Text from "@docspace/components/text";
+import { useEffect, useState } from "react";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Button } from "@docspace/shared/components/button";
+import { Text } from "@docspace/shared/components/text";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { ShareAccessRights } from "@docspace/common/constants";
-import toastr from "@docspace/components/toast/toastr";
-import RoomsFilter from "@docspace/common/api/rooms/filter";
 
 const LeaveRoomDialog = (props) => {
   const {
@@ -17,18 +13,8 @@ const LeaveRoomDialog = (props) => {
     setIsVisible,
     setChangeRoomOwnerIsVisible,
     isOwner,
-    updateRoomMemberRole,
-    roomId,
-    userId,
-    removeFiles,
-    isAdmin,
-    setSelected,
-    isRoot,
-    folders,
-    setFolders,
+    onLeaveRoomAction,
   } = props;
-
-  const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -45,38 +31,15 @@ const LeaveRoomDialog = (props) => {
     if (e.keyCode === 13 || e.which === 13) onLeaveRoom();
   };
 
-  const onLeaveRoom = () => {
+  const onLeaveRoom = async () => {
     if (isOwner) {
       setChangeRoomOwnerIsVisible(true);
       onClose();
     } else {
       setIsLoading(true);
-      updateRoomMemberRole(roomId, {
-        invitations: [{ id: userId, access: ShareAccessRights.None }],
-      })
-        .then(() => {
-          if (!isAdmin) {
-            if (!isRoot) {
-              const filter = RoomsFilter.getDefault();
-              navigate(`rooms/shared/filter?${filter.toUrlParams()}`);
-            } else {
-              removeFiles(null, [roomId]);
-            }
-          } else {
-            const newFolders = folders;
-            const folderIndex = newFolders.findIndex((r) => r.id === roomId);
-            newFolders[folderIndex].inRoom = false;
-            setFolders(newFolders);
-          }
-
-          toastr.success(t("Files:YouLeftTheRoom"));
-        })
-
-        .finally(() => {
-          onClose();
-          setIsLoading(false);
-          setSelected("none");
-        });
+      await onLeaveRoomAction(t, isOwner);
+      setIsLoading(false);
+      onClose();
     }
   };
 
@@ -118,49 +81,32 @@ const LeaveRoomDialog = (props) => {
 };
 
 export default inject(
-  ({ auth, dialogsStore, filesStore, selectedFolderStore }) => {
+  ({
+    userStore,
+    dialogsStore,
+    filesStore,
+    selectedFolderStore,
+    filesActionsStore,
+  }) => {
     const {
       leaveRoomDialogVisible: visible,
       setLeaveRoomDialogVisible: setIsVisible,
       setChangeRoomOwnerIsVisible,
     } = dialogsStore;
-    const { user } = auth.userStore;
-    const {
-      selection,
-      bufferSelection,
-      updateRoomMemberRole,
-      removeFiles,
-      setSelected,
-      folders,
-      setFolders,
-    } = filesStore;
-
-    const roomId = selection.length
-      ? selection[0].id
-      : bufferSelection
-      ? bufferSelection.id
-      : selectedFolderStore.id;
+    const { user } = userStore;
+    const { selection, bufferSelection } = filesStore;
 
     const selections = selection.length ? selection : [bufferSelection];
     const folderItem = selections[0] ? selections[0] : selectedFolderStore;
 
     const isRoomOwner = folderItem?.createdBy?.id === user.id;
-    const isRoot = selectedFolderStore.isRootFolder;
 
     return {
       visible,
       setIsVisible,
       setChangeRoomOwnerIsVisible,
       isOwner: isRoomOwner,
-      updateRoomMemberRole,
-      roomId,
-      userId: user.id,
-      removeFiles,
-      isAdmin: user.isOwner || user.isAdmin,
-      setSelected,
-      isRoot,
-      folders,
-      setFolders,
+      onLeaveRoomAction: filesActionsStore.onLeaveRoom,
     };
   }
 )(observer(withTranslation(["Common", "Files"])(LeaveRoomDialog)));

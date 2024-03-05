@@ -79,10 +79,10 @@ const PluginPage = ({
   );
 };
 
-export default inject(({ auth, pluginStore }) => {
-  const { pluginOptions, currentColorScheme, theme } = auth.settingsStore;
+export default inject(({ settingsStore, pluginStore }) => {
+  const { pluginOptions, currentColorScheme, theme } = settingsStore;
 
-  const withUpload = pluginOptions.includes("upload");
+  const withUpload = pluginOptions.upload;
 
   const {
     pluginList,

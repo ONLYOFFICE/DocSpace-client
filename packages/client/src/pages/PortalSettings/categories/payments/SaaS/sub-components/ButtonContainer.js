@@ -1,10 +1,10 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
-import Button from "@docspace/components/button";
+import { Button } from "@docspace/shared/components/button";
 import styled from "styled-components";
 import RequestButtonContainer from "./RequestButtonContainer";
 import UpdatePlanButtonContainer from "./UpdatePlanButtonContainer";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 
 const StyledBody = styled.div`
   button {
@@ -49,9 +49,8 @@ const ButtonContainer = ({
   );
 };
 
-export default inject(({ auth, payments }) => {
-  const { currentTariffStatusStore } = auth;
-  const { isNeedRequest, isLoading, accountLink } = payments;
+export default inject(({ currentTariffStatusStore, paymentStore }) => {
+  const { isNeedRequest, isLoading, accountLink } = paymentStore;
   const { isNotPaidPeriod, isGracePeriod } = currentTariffStatusStore;
 
   return {

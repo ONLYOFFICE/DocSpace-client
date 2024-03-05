@@ -1,11 +1,10 @@
 import styled, { css } from "styled-components";
-import Base from "@docspace/components/themes/base";
-import TableRow from "@docspace/components/table-container/TableRow";
-import DragAndDrop from "@docspace/components/drag-and-drop";
+import Base from "@docspace/shared/themes/base";
+import { TableRow } from "@docspace/shared/components/table";
+import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
 import CursorPalmSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
 
 const hotkeyBorderStyle = css`
-  border-bottom: 1px solid;
   border-image-slice: 1;
   border-image-source: linear-gradient(to left, #2da7db 24px, #2da7db 24px);
 `;
@@ -47,6 +46,31 @@ const contextMenuWrapperDraggingStyle = css`
 `;
 
 const StyledTableRow = styled(TableRow)`
+  .table-container_cell:not(.table-container_element-wrapper) {
+    border-top: ${(props) =>
+      `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+    margin-top: -1px;
+    border-left: 0; //for Safari
+    border-right: 0; //for Safari
+  }
+
+  .table-container_cell:not(.table-container_element-wrapper) {
+    height: auto;
+    max-height: 48;
+  }
+
+  .table-container_row-context-menu-wrapper {
+    height: 49px !important;
+    max-height: none !important;
+    box-sizing: border-box;
+
+    ${(props) =>
+      props.showHotkeyBorder &&
+      css`
+        position: relative;
+      `}
+  }
+
   ${(props) =>
     props.isRoom &&
     css`
@@ -63,15 +87,6 @@ const StyledTableRow = styled(TableRow)`
           cursor: pointer;
           background: ${(props) =>
             `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
-
-          margin-top: ${(props) => (props.showHotkeyBorder ? "-2px" : "-1px")};
-
-          ${(props) =>
-            !props.showHotkeyBorder &&
-            css`
-              border-top: ${(props) =>
-                `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
-            `}
         }
         .table-container_file-name-cell {
           ${(props) =>
@@ -115,7 +130,12 @@ const StyledTableRow = styled(TableRow)`
         /* cursor: wait; */
       `}
 
-    ${(props) => props.showHotkeyBorder && "border-color: #2DA7DB"}
+    ${(props) =>
+      props.showHotkeyBorder &&
+      css`
+        z-index: 1;
+        border-color: #2da7db !important;
+      `}
   }
 
   .table-container_element-wrapper,
@@ -234,32 +254,6 @@ const StyledTableRow = styled(TableRow)`
   }
 
   ${(props) =>
-    props.showHotkeyBorder &&
-    css`
-      .table-container_cell {
-        margin-top: -2px;
-
-        border-top: 1px solid #2da7db !important;
-        border-right: 0;
-        border-left: 0;
-      }
-      .table-container_file-name-cell > .table-container_cell {
-        margin-top: 2px;
-        border-top: 0px !important;
-      }
-
-      .item-file-name,
-      .row_update-text,
-      .expandButton,
-      .badges,
-      .tag,
-      .author-cell,
-      .table-container_cell > p {
-        margin-top: 2px;
-      }
-    `}
-
-  ${(props) =>
     props.isHighlight &&
     css`
       .table-container_cell:not(.table-container_element-wrapper) {
@@ -274,20 +268,6 @@ const StyledTableRow = styled(TableRow)`
             background: none;
           }
         }
-      }
-
-      .table-container_cell:not(
-          .table-container_element-wrapper,
-          .table-container_file-name-cell
-        ) {
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                padding-left: ${(props) => props.hideColumns && `0px`};
-              `
-            : css`
-                padding-right: ${(props) => props.hideColumns && `0px`};
-              `}
       }
 
       .table-container_file-name-cell {
@@ -333,12 +313,6 @@ const StyledBadgesContainer = styled.div`
 
   display: flex;
   align-items: center;
-
-  ${(props) =>
-    props.showHotkeyBorder &&
-    css`
-      margin-top: 1px;
-    `}
 
   .badges {
     display: flex;
@@ -413,6 +387,17 @@ const StyledBadgesContainer = styled.div`
         font-weight: 800;
       }
     }
+  }
+
+  .bagde_alert {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin: 0 -2px -2px 5px;
+          `
+        : css`
+            margin: 0 5px -2px -2px;
+          `}
   }
 
   .badge-new-version {

@@ -60,6 +60,8 @@ class HeaderMenuStore {
     }
   };
 
+  // People
+
   get isHeaderVisible() {
     const { selection } = this.peopleStore.selectionStore;
     return selection.length > 0;
@@ -75,12 +77,33 @@ class HeaderMenuStore {
       selection.length < users.length
     );
   }
-
   get isHeaderChecked() {
     const { selection } = this.peopleStore.selectionStore;
     const { users } = this.peopleStore.usersStore;
 
     return this.isHeaderVisible && selection.length === users.length;
+  }
+
+  // Groups
+
+  get isGroupsHeaderVisible() {
+    const { selection } = this.peopleStore.groupsStore;
+    return selection.length > 0;
+  }
+
+  get isGroupsHeaderIndeterminate() {
+    const { selection, groups } = this.peopleStore.groupsStore;
+
+    return (
+      this.isGroupsHeaderVisible &&
+      !!selection.length &&
+      selection.length < groups.length
+    );
+  }
+
+  get isGroupsHeaderChecked() {
+    const { selection, groups } = this.peopleStore.groupsStore;
+    return this.isGroupsHeaderVisible && selection.length === groups.length;
   }
 }
 

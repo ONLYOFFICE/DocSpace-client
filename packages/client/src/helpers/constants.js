@@ -25,16 +25,6 @@ export const ConfirmType = Object.freeze({
 });
 
 /**
- * Enum for result of validation confirm link.
- * @readonly
- */
-export const ValidationResult = Object.freeze({
-  Ok: 0,
-  Invalid: 1,
-  Expired: 2,
-  TariffLimit: 3,
-});
-/**
  * Enum for result of validation public room keys.
  * @readonly
  */
@@ -47,7 +37,6 @@ export const ValidationStatus = Object.freeze({
 });
 export const GUID_EMPTY = "00000000-0000-0000-0000-000000000000";
 export const ID_NO_GROUP_MANAGER = "4a515a15-d4d6-4b8e-828e-e0586f18f3a3";
-export const ADS_TIMEOUT = 300000; // 5 min
 
 /**
  * Enum for type of confirm link.
@@ -74,8 +63,11 @@ export const CategoryType = Object.freeze({
 export const TableVersions = Object.freeze({
   Rooms: "2",
   Files: "2",
-  Accounts: "3",
+  People: "3",
   Trash: "4",
+  Groups: "5",
+  InsideGroup: "6",
+  Recent: "1",
 });
 
 /**
@@ -89,6 +81,8 @@ export const QuotaBarTypes = Object.freeze({
   UserQuota: "user-quota",
   UserAndStorageQuota: "user-storage-quota",
   RoomAndStorageQuota: "room-storage-quota",
+  PersonalUserQuota: "personal-user-quota",
+  TenantCustomQuota: "tenant-custom-quota",
 });
 
 export const BINDING_POST = "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST";
@@ -141,16 +135,10 @@ export const SortByFieldName = Object.freeze({
   Room: "Room",
   Tags: "Tags",
   RoomType: "roomType",
+  UsedSpace: "usedspace",
 });
 
 export const LinkType = Object.freeze({
   Invite: 0,
   External: 1,
-});
-
-export const SSO_LABEL = "SSO";
-
-export const ARTICLE_ALERTS = Object.freeze({
-  TeamTraining: "TeamTraining",
-  SubmitToFormGallery: "SubmitToFormGallery",
 });

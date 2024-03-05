@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
-import Button from "@docspace/components/button";
-import TextInput from "@docspace/components/text-input";
-import Text from "@docspace/components/text";
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
+import { Button } from "@docspace/shared/components/button";
+import { Text } from "@docspace/shared/components/text";
+import { TextInput } from "@docspace/shared/components/text-input";
+
+import { commonIconsStyles, tablet } from "@docspace/shared/utils";
 
 import CheckIcon from "PUBLIC_DIR/images/check.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/cross.react.svg";
-import { tablet } from "@docspace/components/utils/device";
-import { Base } from "@docspace/components/themes";
+
+import { Base } from "@docspace/shared/themes";
 
 const StyledCheckIcon = styled(CheckIcon)`
   ${commonIconsStyles}
@@ -88,8 +89,8 @@ const EditingWrapper = styled.div`
         props.viewAs === "table"
           ? "13px"
           : props.viewAs === "tile"
-          ? "14px"
-          : "15px"
+            ? "14px"
+            : "15px"
       )};
     outline: 0 !important;
     font-weight: 600;

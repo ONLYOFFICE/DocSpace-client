@@ -1,13 +1,13 @@
 import * as Styled from "./index.styled";
 
-import DropDownItem from "@docspace/components/drop-down-item";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import Scrollbar from "@docspace/components/scrollbar";
-import ComboButton from "@docspace/components/combobox/sub-components/combo-button";
-import Backdrop from "@docspace/components/backdrop";
-import { isMobile } from "@docspace/components/utils/device";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import { ComboButton } from "@docspace/shared/components/combobox/sub-components/ComboButton";
+import { Backdrop } from "@docspace/shared/components/backdrop";
+import { isMobile } from "@docspace/shared/utils";
 
 const CategoryFilterMobile = ({
   t,
@@ -99,7 +99,6 @@ const CategoryFilterMobile = ({
           <Scrollbar
             style={{ position: "absolute" }}
             scrollclass="section-scroll"
-            stype="mediumBlack"
             ref={scrollRef}
           >
             <DropDownItem

@@ -1,4 +1,4 @@
-import { mobile } from "@docspace/components/utils/device";
+import { mobile } from "@docspace/shared/utils";
 import styled from "styled-components";
 
 export const Location = styled.div`
@@ -53,18 +53,6 @@ export const LocationForm = styled.form`
 
     .subtitle {
       color: ${(props) => props.theme.client.settings.common.descriptionColor};
-    }
-  }
-
-  .form-buttons {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-
-    @media ${mobile} {
-      .button {
-        width: 100%;
-      }
     }
   }
 `;

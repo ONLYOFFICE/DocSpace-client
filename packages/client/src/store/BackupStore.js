@@ -1,15 +1,15 @@
-import { getBackupProgress } from "@docspace/common/api/portal";
+import { getBackupProgress } from "@docspace/shared/api/portal";
 import { makeAutoObservable } from "mobx";
 import {
   saveToLocalStorage,
   getFromLocalStorage,
   removeLocalStorage,
 } from "../pages/PortalSettings/utils";
-import toastr from "@docspace/components/toast/toastr";
-import { AutoBackupPeriod } from "@docspace/common/constants";
-import { combineUrl } from "@docspace/common/utils";
+import { toastr } from "@docspace/shared/components/toast";
+import { AutoBackupPeriod } from "@docspace/shared/enums";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
-import { uploadBackup } from "@docspace/common/api/files";
+import { uploadBackup } from "@docspace/shared/api/files";
 
 const { EveryDayType, EveryWeekType } = AutoBackupPeriod;
 

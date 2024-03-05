@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 
-import FileInput from "@docspace/components/file-input";
+import { FileInput } from "@docspace/shared/components/file-input";
 
 import FilesSelector from "../FilesSelector";
 import { StyledBodyWrapper } from "./StyledComponents";
@@ -30,6 +30,7 @@ const FilesSelectorInput = (props) => {
     className,
     isSelect,
     isRoomBackup,
+    isDocumentIcon,
   } = props;
 
   const isFilesSelection = !!filterParam;
@@ -55,7 +56,8 @@ const FilesSelectorInput = (props) => {
   };
 
   const onSelectFolder = (folderId, folders) => {
-    setSelectedFolder && setSelectedFolder(folderId);
+    const publicRoomInPath = folders.filter((folder) => folder.roomType === 6);
+    setSelectedFolder && setSelectedFolder(folderId, publicRoomInPath[0]);
 
     folders && setNewPath(folders);
   };
@@ -85,6 +87,7 @@ const FilesSelectorInput = (props) => {
         isDisabled={isDisabled || isLoading}
         hasError={isError || isErrorPath}
         scale
+        isDocumentIcon={isDocumentIcon}
       />
 
       <FilesSelector

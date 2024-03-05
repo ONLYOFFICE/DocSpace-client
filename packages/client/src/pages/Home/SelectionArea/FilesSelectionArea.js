@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
-import SelectionAreaComponent from "@docspace/components/selection-area";
+import { SelectionArea as SelectionAreaComponent } from "@docspace/shared/components/selection-area";
 
 const SelectionArea = (props) => {
   const {
@@ -81,7 +81,7 @@ const SelectionArea = (props) => {
   );
 };
 
-export default inject(({ auth, filesStore, treeFoldersStore }) => {
+export default inject(({ filesStore, treeFoldersStore, infoPanelStore }) => {
   const {
     dragging,
     viewAs,
@@ -91,7 +91,7 @@ export default inject(({ auth, filesStore, treeFoldersStore }) => {
     files,
   } = filesStore;
   const { isRoomsFolder, isArchiveFolder } = treeFoldersStore;
-  const { isVisible: isInfoPanelVisible } = auth.infoPanelStore;
+  const { isVisible: isInfoPanelVisible } = infoPanelStore;
 
   const isRooms = isRoomsFolder || isArchiveFolder;
 

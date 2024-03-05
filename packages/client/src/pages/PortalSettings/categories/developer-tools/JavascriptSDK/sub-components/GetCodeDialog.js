@@ -1,9 +1,9 @@
 import React from "react";
 import copy from "copy-to-clipboard";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Textarea from "@docspace/components/textarea";
-import Button from "@docspace/components/button";
-import toastr from "@docspace/components/toast/toastr";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Textarea } from "@docspace/shared/components/textarea";
+import { Button } from "@docspace/shared/components/button";
+import { toastr } from "@docspace/shared/components/toast";
 import styled from "styled-components";
 
 const StyledTextarea = styled(Textarea).attrs(({ theme }) => ({
@@ -27,7 +27,7 @@ const GetCodeDialog = (props) => {
     <ModalDialog visible={visible} isLarge onClose={onClose}>
       <ModalDialog.Header>{t("CopyWindowCode")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledTextarea isReadOnly heightTextArea={180} value={codeBlock} />
+        <StyledTextarea isReadOnly heightTextArea="180px" value={codeBlock} />
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

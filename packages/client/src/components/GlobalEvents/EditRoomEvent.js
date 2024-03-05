@@ -2,10 +2,10 @@ import React, { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { EditRoomDialog } from "../dialogs";
-import { Encoder } from "@docspace/common/utils/encoder";
-import api from "@docspace/common/api";
-import { getRoomInfo } from "@docspace/common/api/rooms";
-import toastr from "@docspace/components/toast/toastr";
+import { Encoder } from "@docspace/shared/utils/encoder";
+import api from "@docspace/shared/api";
+import { getRoomInfo } from "@docspace/shared/api/rooms";
+import { toastr } from "@docspace/shared/components/toast";
 
 const EditRoomEvent = ({
   addActiveItems,
@@ -44,7 +44,11 @@ const EditRoomEvent = ({
   updateLogoPathsCacheBreaker,
   removeLogoPaths,
 
-  reloadInfoPanelSelection,
+  updateInfoPanelSelection,
+  changeRoomOwner,
+
+  defaultRoomsQuota,
+  isDefaultRoomsQuotaSet,
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
 
@@ -75,6 +79,10 @@ const EditRoomEvent = ({
       zoom: 1,
     },
     roomOwner: item.createdBy,
+
+    ...(isDefaultRoomsQuotaSet && {
+      quota: item.quotaLimit,
+    }),
   };
 
   const updateRoom = (oldRoom, newRoom) => {
@@ -95,7 +103,12 @@ const EditRoomEvent = ({
   const onSave = async (roomParams) => {
     const editRoomParams = {
       title: roomParams.title || t("Files:NewRoom"),
+      ...(isDefaultRoomsQuotaSet && {
+        quota: roomParams.quota || item.quotaLimit,
+      }),
     };
+
+    const isOwnerChanged = roomParams?.roomOwner?.id !== item.createdBy.id;
 
     const tags = roomParams.tags.map((tag) => tag.name);
     const newTags = roomParams.tags.filter((t) => t.isNew).map((t) => t.name);
@@ -104,10 +117,16 @@ const EditRoomEvent = ({
     const uploadLogoData = new FormData();
     uploadLogoData.append(0, roomParams.icon.uploadedFile);
 
+    let room = null;
+
     try {
       setIsLoading(true);
 
-      let room = await editRoom(item.id, editRoomParams);
+      if (isOwnerChanged) {
+        await changeRoomOwner(t, roomParams?.roomOwner?.id);
+      }
+
+      room = await editRoom(item.id, editRoomParams);
 
       room.isLogoLoading = true;
 
@@ -115,8 +134,9 @@ const EditRoomEvent = ({
         await createTag(newTags[i]);
       }
 
-      room = await addTagsToRoom(room.id, tags);
-      room = await removeTagsFromRoom(room.id, removedTags);
+      tags.length && (room = await addTagsToRoom(room.id, tags));
+      removedTags.length &&
+        (room = await removeTagsFromRoom(room.id, removedTags));
 
       if (!!item.logo.original && !roomParams.icon.uploadedFile) {
         room = await removeLogoFromRoom(room.id);
@@ -146,15 +166,14 @@ const EditRoomEvent = ({
           }
 
           !withPaging && updateRoom(item, room);
-
-          reloadInfoPanelSelection();
+          // updateInfoPanelSelection();
           URL.revokeObjectURL(img.src);
           setActiveFolders([]);
         };
         img.src = url;
       } else {
         !withPaging && updateRoom(item, room);
-        reloadInfoPanelSelection();
+        // updateInfoPanelSelection();
       }
     } catch (err) {
       console.log(err);
@@ -165,13 +184,14 @@ const EditRoomEvent = ({
         updateEditedSelectedRoom(editRoomParams.title, tags);
         if (item.logo.original && !roomParams.icon.uploadedFile) {
           removeLogoPaths();
-          reloadInfoPanelSelection();
+          // updateInfoPanelSelection();
         } else if (!item.logo.original && roomParams.icon.uploadedFile)
           addDefaultLogoPaths();
         else if (item.logo.original && roomParams.icon.uploadedFile)
           updateLogoPathsCacheBreaker();
       }
 
+      updateInfoPanelSelection(room);
       setIsLoading(false);
       onClose();
     }
@@ -228,13 +248,15 @@ const EditRoomEvent = ({
 
 export default inject(
   ({
-    auth,
+    settingsStore,
     filesStore,
     tagsStore,
     filesActionsStore,
     selectedFolderStore,
     dialogsStore,
-    settingsStore,
+    filesSettingsStore,
+    infoPanelStore,
+    currentQuotaStore,
   }) => {
     const {
       editRoom,
@@ -259,12 +281,17 @@ export default inject(
       removeLogoPaths,
       updateLogoPathsCacheBreaker,
     } = selectedFolderStore;
-    const { updateCurrentFolder } = filesActionsStore;
-    const { getThirdPartyIcon } = settingsStore.thirdPartyStore;
+    const { updateCurrentFolder, changeRoomOwner } = filesActionsStore;
+    const { getThirdPartyIcon } = filesSettingsStore.thirdPartyStore;
     const { setCreateRoomDialogVisible } = dialogsStore;
-    const { withPaging } = auth.settingsStore;
-    const { reloadSelection: reloadInfoPanelSelection } = auth.infoPanelStore;
+    const { withPaging } = settingsStore;
+    const { updateInfoPanelSelection } = infoPanelStore;
+
+    const { defaultRoomsQuota, isDefaultRoomsQuotaSet } = currentQuotaStore;
+
     return {
+      defaultRoomsQuota,
+      isDefaultRoomsQuotaSet,
       addActiveItems,
       setActiveFolders,
 
@@ -296,7 +323,8 @@ export default inject(
       updateLogoPathsCacheBreaker,
       removeLogoPaths,
 
-      reloadInfoPanelSelection,
+      updateInfoPanelSelection,
+      changeRoomOwner,
     };
   }
 )(observer(EditRoomEvent));

@@ -1,9 +1,14 @@
 {
+  "ActionCannotBeUndone": "Valitut käytöstä poistetut käyttäjät poistetaan DocSpacesta. Tätä toimintoa ei voi peruuttaa.",
+  "CannotReassignFiles": "Jos poistat useita käyttäjiä kerralla, et voi siirtää heidän tiedostojaan muille käyttäjille.",
   "DeleteGroupUsersSuccessMessage": "Käyttäjät on poistettu.",
   "DeleteMyDocumentsUser": "Kaikki henkilökohtaiset tiedostot ja kansiot tämän käyttäjän Asiakirjani-osiossa poistetaan pysyvästi.",
   "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Tämän käyttäjän luomat huoneet ja näihin huoneisiin tallennetut asiakirjat siirretään automaattisesti järjestelmänvalvojalle, joka suorittaa poiston:<strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Siirrä tiedot manuaalisesti valitaksesi toinen kohdekäyttäjä tietojen siirrolle.",
   "DeleteUser": "Poista käyttäjä",
   "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong>käyttäjä poistetaan. Tätä toimintoa ei voi perua.",
+  "DeletingUsers": "Käyttäjien poistaminen",
+  "PleaseNote": "Ole hyvä ja huomioi:",
   "ReassignDataToAnotherUser": "Siirrä tiedot toiselle käyttäjälle",
-  "SuccessfullyDeleteUserInfoMessage": "Käyttäjä on poistettu onnistuneesti"
+  "SuccessfullyDeleteUserInfoMessage": "Käyttäjä on poistettu onnistuneesti",
+  "ToBeAbleToReassignData": "Poista yksi käyttäjä kerrallaan voidaksesi siirtää tietoja."
 }

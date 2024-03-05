@@ -17,14 +17,14 @@ import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import ReassignDataReactSvgUrl from "PUBLIC_DIR/images/reassign.data.svg?url";
 import { makeAutoObservable } from "mobx";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 
-import { combineUrl } from "@docspace/common/utils";
-import { EmployeeStatus, FilterSubject } from "@docspace/common/constants";
-import { resendUserInvites } from "@docspace/common/api/people";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { EmployeeStatus, FilterSubject } from "@docspace/shared/enums";
+import { resendUserInvites } from "@docspace/shared/api/people";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
-import RoomsFilter from "@docspace/common/api/rooms/filter";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
 
 const PROXY_HOMEPAGE_URL = combineUrl(window.DocSpaceConfig?.proxy?.url, "/");
@@ -32,15 +32,19 @@ const PROXY_HOMEPAGE_URL = combineUrl(window.DocSpaceConfig?.proxy?.url, "/");
 const PROFILE_SELF_URL = "/profile";
 
 class AccountsContextOptionsStore {
-  authStore = null;
-
+  settingsStore = null;
+  infoPanelStore = null;
   peopleStore = null;
+  userStore = null;
+  tfaStore = null;
 
-  constructor(peopleStore) {
+  constructor(peopleStore, infoPanelStore, userStore, tfaStore, settingsStore) {
     makeAutoObservable(this);
-    this.authStore = peopleStore.authStore;
-
+    this.settingsStore = settingsStore;
+    this.infoPanelStore = infoPanelStore;
     this.peopleStore = peopleStore;
+    this.userStore = userStore;
+    this.tfaStore = tfaStore;
   }
 
   getUserContextOptions = (t, options, item) => {
@@ -96,7 +100,7 @@ class AccountsContextOptionsStore {
           return {
             key: option,
             icon: FolderReactSvgUrl,
-            label: t("RoomSelector:RoomList"),
+            label: t("Common:RoomList"),
             onClick: () => this.openUserRoomList(item),
           };
         case "enable":
@@ -164,7 +168,7 @@ class AccountsContextOptionsStore {
             icon: RestoreAuthReactSvgUrl,
             label: t("PeopleTranslations:ResetAuth"),
             onClick: () => this.onResetAuth(item),
-            disabled: this.authStore.tfaStore.tfaSettings !== "app",
+            disabled: this.tfaStore.tfaSettings !== "app",
           };
         default:
           break;
@@ -190,9 +194,9 @@ class AccountsContextOptionsStore {
     const { setSendInviteDialogVisible, setDeleteProfileDialogVisible } =
       this.peopleStore.dialogStore;
 
-    const { isOwner } = this.authStore.userStore.user;
+    const { isOwner } = this.userStore.user;
 
-    const { setIsVisible, isVisible } = this.authStore.infoPanelStore;
+    const { setIsVisible, isVisible } = this.infoPanelStore;
 
     const options = [];
 
@@ -301,13 +305,11 @@ class AccountsContextOptionsStore {
 
     const filterParamsStr = filter.toUrlParams();
     const url = getCategoryUrl(CategoryType.Shared);
-    const type = this.authStore.settingsStore.isDesktopClient
-      ? "_self"
-      : "_blank";
+    const type = this.settingsStore.isDesktopClient ? "_self" : "_blank";
 
     window.open(
       combineUrl(PROXY_HOMEPAGE_URL, `${url}?${filterParamsStr}`),
-      type
+      type,
     );
   };
 
@@ -391,7 +393,7 @@ class AccountsContextOptionsStore {
   };
 
   onDetailsClick = (item) => {
-    const { setIsVisible } = this.authStore.infoPanelStore;
+    const { setIsVisible } = this.infoPanelStore;
     const { setBufferSelection } = this.peopleStore.selectionStore;
     setBufferSelection(item);
     setIsVisible(true);

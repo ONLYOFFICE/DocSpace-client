@@ -2,18 +2,17 @@ import React, { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";
-//import withCultureNames from "@docspace/common/hoc/withCultureNames";
 import LanguageAndTimeZone from "./Customization/language-and-time-zone";
 import WelcomePageSettings from "./Customization/welcome-page-settings";
 import PortalRenaming from "./Customization/portal-renaming";
 import DNSSettings from "./Customization/dns-settings";
 import CustomizationNavbar from "./customization-navbar";
-import { Base } from "@docspace/components/themes";
+import { Base } from "@docspace/shared/themes";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import LoaderDescriptionCustomization from "./sub-components/loaderDescriptionCustomization";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
-import { mobileMore } from "@docspace/components/utils/device";
+import { mobileMore } from "@docspace/shared/utils";
 
 const StyledComponent = styled.div`
   width: 100%;
@@ -79,12 +78,17 @@ const Customization = (props) => {
     viewMobile,
     isSettingPaid,
     enablePortalRename,
+    resetIsInit,
   } = props;
 
   const isLoadedSetting = isLoaded && tReady;
 
   useEffect(() => {
     setDocumentTitle(t("Customization"));
+
+    return () => {
+      resetIsInit();
+    };
   }, []);
 
   useEffect(() => {
@@ -123,18 +127,18 @@ const Customization = (props) => {
   );
 };
 
-export default inject(({ auth, common }) => {
-  const { currentQuotaStore, settingsStore } = auth;
+export default inject(({ settingsStore, common, currentQuotaStore }) => {
   const { enablePortalRename } = settingsStore;
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
-  const { isLoaded, setIsLoadedCustomization } = common;
+  const { isLoaded, setIsLoadedCustomization, resetIsInit } = common;
 
   return {
     isLoaded,
     setIsLoadedCustomization,
     isSettingPaid: isBrandingAndCustomizationAvailable,
     enablePortalRename,
+    resetIsInit,
   };
 })(
-  withLoading(withTranslation(["Settings", "Common"])(observer(Customization)))
+  withLoading(withTranslation(["Settings", "Common"])(observer(Customization))),
 );

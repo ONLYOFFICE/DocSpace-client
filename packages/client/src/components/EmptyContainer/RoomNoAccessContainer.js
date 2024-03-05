@@ -7,10 +7,9 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import EmptyContainer from "./EmptyContainer";
-import Link from "@docspace/components/link";
-
-import IconButton from "@docspace/components/icon-button";
-import RoomsFilter from "@docspace/common/api/rooms/filter";
+import { Link } from "@docspace/shared/components/link";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -25,6 +24,7 @@ const RoomNoAccessContainer = (props) => {
     sectionWidth,
     theme,
     isFrame,
+    userId,
   } = props;
 
   const descriptionRoomNoAccess = t("NoAccessRoomDescription");
@@ -41,7 +41,7 @@ const RoomNoAccessContainer = (props) => {
     if (isFrame) return;
     setIsLoading(true);
 
-    const filter = RoomsFilter.getDefault();
+    const filter = RoomsFilter.getDefault(userId);
 
     const filterParamsStr = filter.toUrlParams();
 
@@ -84,19 +84,22 @@ const RoomNoAccessContainer = (props) => {
   );
 };
 
-export default inject(({ auth, filesStore, clientLoadingStore }) => {
-  const { setIsSectionFilterLoading } = clientLoadingStore;
+export default inject(
+  ({ settingsStore, filesStore, clientLoadingStore, userStore }) => {
+    const { setIsSectionFilterLoading } = clientLoadingStore;
 
-  const setIsLoading = (param) => {
-    setIsSectionFilterLoading(param);
-  };
-  const { isEmptyPage } = filesStore;
-  const { isFrame } = auth.settingsStore;
-  return {
-    setIsLoading,
+    const setIsLoading = (param) => {
+      setIsSectionFilterLoading(param);
+    };
+    const { isEmptyPage } = filesStore;
+    const { isFrame, theme } = settingsStore;
+    return {
+      setIsLoading,
 
-    isEmptyPage,
-    theme: auth.settingsStore.theme,
-    isFrame,
-  };
-})(withTranslation(["Files"])(observer(RoomNoAccessContainer)));
+      isEmptyPage,
+      theme,
+      isFrame,
+      userId: userStore?.user?.id,
+    };
+  },
+)(withTranslation(["Files"])(observer(RoomNoAccessContainer)));

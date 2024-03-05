@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import moment from "moment";
+import moment from "moment-timezone";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
-import SelectedItem from "@docspace/components/selected-item";
-import Link from "@docspace/components/link";
+import { SelectedItem } from "@docspace/shared/components/selected-item";
+import { Link } from "@docspace/shared/components/link";
 
 const StatusBarWrapper = styled.div`
   margin-top: 9px;
@@ -42,11 +42,15 @@ const StatusBar = (props) => {
     return (
       <SelectedItem
         label={
-          moment(historyFilters.deliveryDate).format("DD MMM YYYY") +
+          moment(historyFilters.deliveryDate)
+            .tz(window.timezone)
+            .format("DD MMM YYYY") +
           " " +
-          moment(historyFilters.deliveryFrom).format("HH:mm") +
+          moment(historyFilters.deliveryFrom)
+            .tz(window.timezone)
+            .format("HH:mm") +
           " - " +
-          moment(historyFilters.deliveryTo).format("HH:mm")
+          moment(historyFilters.deliveryTo).tz(window.timezone).format("HH:mm")
         }
         onClose={clearDate}
         onClick={clearDate}

@@ -2,18 +2,18 @@ import React, { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import Text from "@docspace/components/text";
-import PasswordInput from "@docspace/components/password-input";
-import Button from "@docspace/components/button";
-import FieldContainer from "@docspace/components/field-container";
-import toastr from "@docspace/components/toast/toastr";
-import FormWrapper from "@docspace/components/form-wrapper";
+import { Text } from "@docspace/shared/components/text";
+import { PasswordInput } from "@docspace/shared/components/password-input";
+import { Button } from "@docspace/shared/components/button";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import { toastr } from "@docspace/shared/components/toast";
+import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
-import { createPasswordHash } from "@docspace/common/utils";
-import { login } from "@docspace/common/utils/loginUtils";
+import { createPasswordHash } from "@docspace/shared/utils/common";
+import { login } from "@docspace/shared/utils/loginUtils";
+import { getPasswordErrorMessage } from "@docspace/shared/utils/getPasswordErrorMessage";
 
-import DocspaceLogo from "../../../DocspaceLogo";
-import { getPasswordErrorMessage } from "../../../helpers/utils";
+import DocspaceLogo from "../../../components/DocspaceLogoWrapper";
 import withLoader from "../withLoader";
 import { StyledPage, StyledBody, StyledContent } from "./StyledConfirm";
 
@@ -129,7 +129,7 @@ const ChangePasswordForm = (props) => {
                 labelVisible={false}
                 hasError={isPasswordErrorShow && !passwordValid}
                 errorMessage={`${t(
-                  "Common:PasswordLimitMessage"
+                  "Common:PasswordLimitMessage",
                 )}: ${getPasswordErrorMessage(t, settings)}`}
               >
                 <PasswordInput
@@ -151,14 +151,14 @@ const ChangePasswordForm = (props) => {
                   onKeyDown={onKeyPress}
                   tooltipPasswordTitle={`${t("Common:PasswordLimitMessage")}:`}
                   tooltipPasswordLength={`${t(
-                    "Common:PasswordMinimumLength"
+                    "Common:PasswordMinimumLength",
                   )}: ${settings ? settings.minLength : 8}`}
                   tooltipPasswordDigits={`${t("Common:PasswordLimitDigits")}`}
                   tooltipPasswordCapital={`${t(
-                    "Common:PasswordLimitUpperCase"
+                    "Common:PasswordLimitUpperCase",
                   )}`}
                   tooltipPasswordSpecial={`${t(
-                    "Common:PasswordLimitSpecialSymbols"
+                    "Common:PasswordLimitSpecialSymbols",
                   )}`}
                   generatePasswordTitle={t("Wizard:GeneratePassword")}
                 />
@@ -181,7 +181,7 @@ const ChangePasswordForm = (props) => {
   );
 };
 
-export default inject(({ auth, setup }) => {
+export default inject(({ authStore, settingsStore, setup }) => {
   const {
     greetingSettings,
     hashSettings,
@@ -189,7 +189,7 @@ export default inject(({ auth, setup }) => {
     passwordSettings,
     theme,
     getSettings,
-  } = auth.settingsStore;
+  } = settingsStore;
   const { changePassword } = setup;
 
   return {
@@ -199,11 +199,11 @@ export default inject(({ auth, setup }) => {
     hashSettings,
     defaultPage,
     changePassword,
-    isAuthenticated: auth.isAuthenticated,
+    isAuthenticated: authStore.isAuthenticated,
     getSettings,
   };
 })(
   withTranslation(["Confirm", "Common", "Wizard"])(
-    withLoader(observer(ChangePasswordForm))
-  )
+    withLoader(observer(ChangePasswordForm)),
+  ),
 );

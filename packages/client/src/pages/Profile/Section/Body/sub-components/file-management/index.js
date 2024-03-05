@@ -2,24 +2,22 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import ToggleButton from "@docspace/components/toggle-button";
-import Box from "@docspace/components/box";
-import Text from "@docspace/components/text";
-import Loaders from "@docspace/common/components/Loaders";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { Box } from "@docspace/shared/components/box";
+import { Text } from "@docspace/shared/components/text";
+import { SettingsCommonSkeleton } from "@docspace/shared/skeletons/settings";
 
 import StyledWrapper from "./styled-file-management";
 
 const FileManagement = ({
   storeOriginalFiles,
   confirmDelete,
-  updateIfExist,
   forceSave,
 
   isVisitor,
   //favoritesSection,
   //recentSection,
 
-  setUpdateIfExist,
   setStoreOriginal,
 
   setConfirmDelete,
@@ -51,10 +49,6 @@ const FileManagement = ({
     setConfirmDelete(!confirmDelete, "confirmDelete");
   }, [setConfirmDelete, confirmDelete]);
 
-  const onChangeUpdateIfExist = React.useCallback(() => {
-    setUpdateIfExist(!updateIfExist, "updateIfExist");
-  }, [setUpdateIfExist, updateIfExist]);
-
   const onChangeForceSave = React.useCallback(() => {
     setForceSave(!forceSave);
   }, [setForceSave, forceSave]);
@@ -74,7 +68,7 @@ const FileManagement = ({
         .catch((err) => toastr.error(err))
         .finally(() => setIsLoadingFavorites(false));
     },
-    [setIsLoadingFavorites, setFavoritesSetting]
+    [setIsLoadingFavorites, setFavoritesSetting],
   );
 
   const onChangeRecent = React.useCallback(
@@ -84,12 +78,12 @@ const FileManagement = ({
         .catch((err) => toastr.error(err))
         .finally(() => setIsLoadingRecent(false));
     },
-    [setIsLoadingRecent, setRecentSetting]
+    [setIsLoadingRecent, setRecentSetting],
   );
 
   const thumbnailsSizeLabel = "Thumbnails 1280x720";
 
-  if (!ready) return <Loaders.SettingsCommon />;
+  if (!ready) return <SettingsCommonSkeleton />;
   return (
     <StyledWrapper showTitle={showTitle} hideAdminSettings={!showAdminSettings}>
       <Box className="settings-section">
@@ -131,16 +125,6 @@ const FileManagement = ({
               isChecked={confirmDelete}
             />
             <Text>{t("DisplayNotification")}</Text>
-          </div>
-        )}
-        {!isVisitor && (
-          <div className="toggle-btn-wrapper">
-            <ToggleButton
-              className="toggle-btn"
-              onChange={onChangeUpdateIfExist}
-              isChecked={updateIfExist}
-            />
-            <Text>{t("UpdateOrCreate")}</Text>
           </div>
         )}
       </Box>
@@ -200,14 +184,12 @@ const FileManagement = ({
   );
 };
 
-export default inject(({ auth, settingsStore, treeFoldersStore }) => {
+export default inject(({ userStore, filesSettingsStore, treeFoldersStore }) => {
   const {
     storeOriginalFiles,
     confirmDelete,
-    updateIfExist,
     forcesave,
 
-    setUpdateIfExist,
     setStoreOriginal,
 
     setConfirmDelete,
@@ -224,23 +206,21 @@ export default inject(({ auth, settingsStore, treeFoldersStore }) => {
 
     setThumbnails1280x720,
     thumbnails1280x720,
-  } = settingsStore;
+  } = filesSettingsStore;
 
   const { myFolderId, commonFolderId } = treeFoldersStore;
 
   return {
     storeOriginalFiles,
     confirmDelete,
-    updateIfExist,
     forceSave: forcesave,
 
     myFolderId,
     commonFolderId,
-    isVisitor: auth.userStore.user.isVisitor,
+    isVisitor: userStore.user.isVisitor,
     favoritesSection,
     recentSection,
 
-    setUpdateIfExist,
     setStoreOriginal,
 
     setConfirmDelete,

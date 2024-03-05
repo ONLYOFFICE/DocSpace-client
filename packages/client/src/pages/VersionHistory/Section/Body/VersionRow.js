@@ -4,22 +4,26 @@ import { useNavigate } from "react-router-dom";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Link from "@docspace/components/link";
-import Text from "@docspace/components/text";
-import Box from "@docspace/components/box";
-import Textarea from "@docspace/components/textarea";
-import Button from "@docspace/components/button";
+import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { Box } from "@docspace/shared/components/box";
+import { Textarea } from "@docspace/shared/components/textarea";
+import { Button } from "@docspace/shared/components/button";
 import { withTranslation } from "react-i18next";
 import VersionBadge from "./VersionBadge";
 import { StyledVersionRow } from "./StyledVersionHistory";
 import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.react.svg?url";
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
+import { commonIconsStyles, getCorrectDate } from "@docspace/shared/utils";
 import { inject, observer } from "mobx-react";
-import toastr from "@docspace/components/toast/toastr";
-import { Encoder } from "@docspace/common/utils/encoder";
-import { Base } from "@docspace/components/themes";
-import { MAX_FILE_COMMENT_LENGTH } from "@docspace/common/constants";
-import moment from "moment";
+import { toastr } from "@docspace/shared/components/toast";
+import { Encoder } from "@docspace/shared/utils/encoder";
+import { Base } from "@docspace/shared/themes";
+import {
+  MAX_FILE_COMMENT_LENGTH,
+  MEDIA_VIEW_URL,
+} from "@docspace/shared/constants";
+import moment from "moment-timezone";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 const StyledExternalLinkIcon = styled(ExternalLinkIcon)`
   ${commonIconsStyles}
@@ -66,9 +70,7 @@ const VersionRow = (props) => {
     }
   }, [info.comment]);
 
-  const versionDate = `${moment(info.updated)
-    .locale(culture)
-    .format("L, LTS")}`;
+  const versionDate = getCorrectDate(culture, info.updated, "L", "LTS");
 
   const title = `${Encoder.htmlDecode(info.updatedBy?.displayName)}`;
 
@@ -112,7 +114,7 @@ const VersionRow = (props) => {
 
     if (MediaView || ImageView) {
       return window.open(
-        "/products/files/#preview/" + info.id,
+        combineUrl(MEDIA_VIEW_URL, info.id),
         window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self"
       );
     }
@@ -272,7 +274,7 @@ const VersionRow = (props) => {
                   className="version_edit-comment"
                   onChange={onChange}
                   fontSize={12}
-                  heightTextArea={54}
+                  heightTextArea="54px"
                   value={commentValue}
                   isDisabled={isSavingComment}
                   autoFocus={true}
@@ -320,43 +322,51 @@ const VersionRow = (props) => {
   );
 };
 
-export default inject(({ auth, versionHistoryStore, pluginStore }) => {
-  const { user } = auth.userStore;
-  const { openUser, setIsVisible } = auth.infoPanelStore;
-  const { culture, isTabletView, enablePlugins, currentDeviceType } =
-    auth.settingsStore;
-  const language = (user && user.cultureName) || culture || "en";
+export default inject(
+  ({
+    settingsStore,
+    versionHistoryStore,
+    pluginStore,
+    infoPanelStore,
+    userStore,
+  }) => {
+    const { user } = userStore;
+    const { openUser, setIsVisible } = infoPanelStore;
+    const { culture, isTabletView, enablePlugins, currentDeviceType } =
+      settingsStore;
+    const language = (user && user.cultureName) || culture || "en";
 
-  const { fileItemsList } = pluginStore;
+    const { fileItemsList } = pluginStore;
 
-  const {
-    // markAsVersion,
-    restoreVersion,
-    updateCommentVersion,
-    isEditing,
-    isEditingVersion,
-    fileSecurity,
-  } = versionHistoryStore;
+    const {
+      // markAsVersion,
+      restoreVersion,
+      updateCommentVersion,
+      isEditing,
+      isEditingVersion,
+      fileSecurity,
+    } = versionHistoryStore;
 
-  const isEdit = isEditingVersion || isEditing;
-  const canChangeVersionFileHistory = !isEdit && fileSecurity?.EditHistory;
+    const isEdit = isEditingVersion || isEditing;
+    const canChangeVersionFileHistory = !isEdit && fileSecurity?.EditHistory;
 
-  return {
-    currentDeviceType,
-    fileItemsList,
-    enablePlugins,
-    theme: auth.settingsStore.theme,
-    culture: language,
-    isTabletView,
-    // markAsVersion,
-    restoreVersion,
-    updateCommentVersion,
-    isEditing: isEdit,
-    canChangeVersionFileHistory,
-    openUser,
-    setIsVisible,
-  };
-})(
+    return {
+      currentDeviceType,
+      fileItemsList,
+      enablePlugins,
+      theme: settingsStore.theme,
+      culture: language,
+      isTabletView,
+      // markAsVersion,
+      restoreVersion,
+      updateCommentVersion,
+      isEditing: isEdit,
+      canChangeVersionFileHistory,
+      openUser,
+      setIsVisible,
+    };
+  }
+)(
   withTranslation(["VersionHistory", "Common", "Translations"])(
     observer(VersionRow)
   )

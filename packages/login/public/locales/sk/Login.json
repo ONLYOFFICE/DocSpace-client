@@ -10,7 +10,6 @@
   "MessageEmailConfirmed": "Váš email bol úspešne aktivovaný.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "Zadajte e-mail, ktorý ste použili pri registrácii. Budú vám naň zaslané pokyny na obnovenie hesla.",
   "NotFoundCode": "Nemôžete nájsť kód? Skontrolujte priečinok «Spam».",
-  "Or": "Alebo",
   "PasswordRecoveryTitle": "Obnova hesla",
   "RecoverAccess": "Obnoviť prístup",
   "RecoverContactEmailPlaceholder": "Kontaktný email",

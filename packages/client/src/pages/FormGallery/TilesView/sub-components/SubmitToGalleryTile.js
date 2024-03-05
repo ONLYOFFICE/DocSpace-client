@@ -1,7 +1,7 @@
-import { Button } from "@docspace/components";
+import { Button } from "@docspace/shared/components/button";
 import styled, { css } from "styled-components";
-import commonIconsStyles from "@docspace/components/utils/common-icons-style";
-import { Base } from "@docspace/components/themes";
+import { commonIconsStyles } from "@docspace/shared/utils";
+import { Base } from "@docspace/shared/themes";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import hexToRgba from "hex-to-rgba";
@@ -17,10 +17,10 @@ export const StyledSubmitToGalleryTile = styled.div`
   box-sizing: border-box;
 
   border: 1px solid
-    ${({ currentColorScheme }) => currentColorScheme.main.accent};
+    ${({ currentColorScheme }) => currentColorScheme.main?.accent};
   border-radius: 6px;
   background-color: ${({ currentColorScheme }) =>
-    hexToRgba(currentColorScheme.main.accent, 0.03)};
+    hexToRgba(currentColorScheme.main?.accent, 0.03)};
 
   display: flex;
   flex-direction: column;
@@ -35,7 +35,7 @@ export const StyledSubmitToGalleryTile = styled.div`
     gap: 8px;
 
     .title {
-      color: ${({ currentColorScheme }) => currentColorScheme.main.accent};
+      color: ${({ currentColorScheme }) => currentColorScheme.main?.accent};
       font-weight: 600;
       font-size: ${(props) => props.theme.getCorrectFontSize("14px")};
       line-height: 16px;
@@ -94,10 +94,8 @@ const SubmitToGalleryTile = ({
       />
 
       <div className="info">
-        <div className="title">
-          {t("FormGallery:SubmitToGalleryBlockHeader")}
-        </div>
-        <div className="body">{t("FormGallery:SubmitToGalleryBlockBody")}</div>
+        <div className="title">{t("Common:SubmitToGalleryBlockHeader")}</div>
+        <div className="body">{t("Common:SubmitToGalleryBlockBody")}</div>
       </div>
 
       <Button
@@ -110,9 +108,9 @@ const SubmitToGalleryTile = ({
   );
 };
 
-export default inject(({ auth, oformsStore, dialogsStore }) => ({
+export default inject(({ settingsStore, oformsStore, dialogsStore }) => ({
   submitToGalleryTileIsVisible: oformsStore.submitToGalleryTileIsVisible,
   hideSubmitToGalleryTile: oformsStore.hideSubmitToGalleryTile,
   setSubmitToGalleryDialogVisible: dialogsStore.setSubmitToGalleryDialogVisible,
-  currentColorScheme: auth.settingsStore.currentColorScheme,
+  currentColorScheme: settingsStore.currentColorScheme,
 }))(withTranslation("Common", "FormGallery")(observer(SubmitToGalleryTile)));

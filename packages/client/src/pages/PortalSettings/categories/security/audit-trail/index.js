@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject } from "mobx-react";
-import { Consumer } from "@docspace/components/utils/context";
+import { Consumer } from "@docspace/shared/utils";
 import { Table } from "./TableView/TableView";
 import AuditRowContainer from "./RowView/AuditRowContainer";
 import HistoryMainContent from "../sub-components/HistoryMainContent";
@@ -25,9 +25,7 @@ const AuditTrail = (props) => {
   useEffect(() => {
     setDocumentTitle(t("AuditTrailNav"));
 
-    if (isAuditAvailable) {
-      getAuditTrail();
-    }
+    getAuditTrail();
 
     getLifetimeAuditSettings();
   }, []);
@@ -73,7 +71,7 @@ const AuditTrail = (props) => {
           securityLifetime={securityLifetime}
           lifetime={securityLifetime.auditTrailLifeTime}
           setLifetimeAuditSettings={setLifetimeAuditSettings}
-          content={isAuditAvailable && getContent()}
+          content={getContent()}
           downloadReport={t("DownloadReportBtnText")}
           downloadReportDescription={t("DownloadReportDescription")}
           getReport={getAuditTrailReport}
@@ -85,7 +83,7 @@ const AuditTrail = (props) => {
   );
 };
 
-export default inject(({ setup, auth }) => {
+export default inject(({ setup, settingsStore, currentQuotaStore }) => {
   const {
     getAuditTrail,
     security,
@@ -96,7 +94,7 @@ export default inject(({ setup, auth }) => {
     securityLifetime,
     isLoadingDownloadReport,
   } = setup;
-  const { settingsStore, currentQuotaStore } = auth;
+
   const { theme } = settingsStore;
   const { isAuditAvailable } = currentQuotaStore;
   return {

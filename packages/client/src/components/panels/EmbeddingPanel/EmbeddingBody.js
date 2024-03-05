@@ -1,15 +1,15 @@
 ﻿import React, { useState } from "react";
 import copy from "copy-to-clipboard";
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
-import toastr from "@docspace/components/toast/toastr";
-import TextInput from "@docspace/components/text-input";
-import Textarea from "@docspace/components/textarea";
-import IconButton from "@docspace/components/icon-button";
-import Button from "@docspace/components/button";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { toastr } from "@docspace/shared/components/toast";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { Textarea } from "@docspace/shared/components/textarea";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { Button } from "@docspace/shared/components/button";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 import { StyledBody } from "./StyledEmbeddingPanel";
-import { objectToGetParams } from "@docspace/common/utils";
+import { objectToGetParams } from "@docspace/shared/utils/common";
 
 const EmbeddingBody = ({ t, link, requestToken, roomId }) => {
   const [size, setSize] = useState("auto");
@@ -17,7 +17,6 @@ const EmbeddingBody = ({ t, link, requestToken, roomId }) => {
   const [heightValue, setHeightValue] = useState("100%");
 
   const config = {
-    hash: `${API_JS_HASH}`,
     width: `${widthValue}`,
     height: `${heightValue}`,
     frameId: "ds-frame-embedding",
@@ -146,7 +145,7 @@ const EmbeddingBody = ({ t, link, requestToken, roomId }) => {
             iconName={CopyReactSvgUrl}
             onClick={onCopyLink}
           />
-          <Textarea isReadOnly value={codeBlock} heightTextArea={150} />
+          <Textarea isReadOnly value={codeBlock} heightTextArea="150px" />
         </div>
       </div>
     </StyledBody>

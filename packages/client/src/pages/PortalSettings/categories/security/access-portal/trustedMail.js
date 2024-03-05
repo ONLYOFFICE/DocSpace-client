@@ -3,19 +3,19 @@ import styled from "styled-components";
 import { useLocation, useNavigate } from "react-router-dom";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
-import RadioButtonGroup from "@docspace/components/radio-button-group";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { LearnMoreWrapper } from "../StyledSecurity";
-import toastr from "@docspace/components/toast/toastr";
+import { toastr } from "@docspace/shared/components/toast";
 import UserFields from "../sub-components/user-fields";
-import { size } from "@docspace/components/utils/device";
+import { size } from "@docspace/shared/utils";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import isEqual from "lodash/isEqual";
-import SaveCancelButtons from "@docspace/components/save-cancel-buttons";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
 import TrustedMailLoader from "../sub-components/loaders/trusted-mail-loader";
-import { DeviceType } from "@docspace/common/constants";
+import { DeviceType } from "@docspace/shared/enums";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -173,7 +173,7 @@ const TrustedMail = (props) => {
         </Text>
         <Link
           className="link-learn-more"
-          color={currentColorScheme.main.accent}
+          color={currentColorScheme.main?.accent}
           target="_blank"
           isHovered
           href={trustedMailDomainSettingsUrl}
@@ -240,7 +240,7 @@ const TrustedMail = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
+export default inject(({ settingsStore }) => {
   const {
     trustedDomainsType,
     trustedDomains,
@@ -249,7 +249,7 @@ export default inject(({ auth }) => {
     currentColorScheme,
     trustedMailDomainSettingsUrl,
     currentDeviceType,
-  } = auth.settingsStore;
+  } = settingsStore;
 
   return {
     trustedDomainsType,

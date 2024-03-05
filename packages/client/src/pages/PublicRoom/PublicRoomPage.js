@@ -1,12 +1,11 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useLocation, Outlet } from "react-router-dom";
-import Section from "@docspace/common/components/Section";
+import Section from "@docspace/shared/components/section";
 import SectionHeaderContent from "../Home/Section/Header";
 import SectionFilterContent from "../Home/Section/Filter";
 import FilesPanels from "../../components/FilesPanels";
-
-import { RoomSharingDialog } from "../../components/dialogs";
+import SectionWrapper from "SRC_DIR/components/Section";
 import SelectionArea from "../Home/SelectionArea/FilesSelectionArea";
 import MediaViewer from "../Home/MediaViewer";
 
@@ -14,25 +13,25 @@ import { usePublic } from "../Home/Hooks";
 
 const PublicRoomPage = (props) => {
   const {
-    roomId,
     withPaging,
     fetchFiles,
     isEmptyPage,
-    setIsLoading,
 
     showSecondaryProgressBar,
     secondaryProgressBarValue,
     secondaryProgressBarIcon,
     showSecondaryButtonAlert,
+    fetchPublicRoom,
+    fetchPreviewMediaFile,
   } = props;
 
   const location = useLocation();
 
   usePublic({
-    roomId,
     location,
     fetchFiles,
-    setIsLoading,
+    fetchPublicRoom,
+    fetchPreviewMediaFile,
   });
 
   const sectionProps = {
@@ -44,7 +43,7 @@ const PublicRoomPage = (props) => {
 
   return (
     <>
-      <Section
+      <SectionWrapper
         withBodyScroll
         // withBodyAutoFocus={!isMobile}
         withPaging={withPaging}
@@ -63,7 +62,7 @@ const PublicRoomPage = (props) => {
         <Section.SectionBody>
           <Outlet />
         </Section.SectionBody>
-      </Section>
+      </SectionWrapper>
 
       <FilesPanels />
       <SelectionArea />
@@ -74,18 +73,20 @@ const PublicRoomPage = (props) => {
 
 export default inject(
   ({
-    auth,
+    authStore,
+    settingsStore,
     filesStore,
     publicRoomStore,
     uploadDataStore,
-    settingsStore,
-    clientLoadingStore,
+    filesSettingsStore,
+    mediaViewerDataStore,
   }) => {
-    const { withPaging } = auth.settingsStore;
-    const { isLoaded, isLoading, roomStatus, roomId } = publicRoomStore;
+    const { withPaging } = settingsStore;
+    const { isLoaded, isLoading, roomStatus, fetchPublicRoom } =
+      publicRoomStore;
 
     const { fetchFiles, isEmptyPage } = filesStore;
-    const { getFilesSettings } = settingsStore;
+    const { getFilesSettings } = filesSettingsStore;
 
     const {
       visible: showSecondaryProgressBar,
@@ -94,16 +95,9 @@ export default inject(
       alert: showSecondaryButtonAlert,
     } = uploadDataStore.secondaryProgressDataStore;
 
-    const { setIsSectionFilterLoading, setIsSectionBodyLoading } =
-      clientLoadingStore;
-
-    const setIsLoading = (param) => {
-      setIsSectionFilterLoading(param);
-      setIsSectionBodyLoading(param);
-    };
+    const { fetchPreviewMediaFile } = mediaViewerDataStore;
 
     return {
-      roomId,
       isLoaded,
       isLoading,
       roomStatus,
@@ -117,9 +111,10 @@ export default inject(
       secondaryProgressBarIcon,
       showSecondaryButtonAlert,
 
-      isAuthenticated: auth.isAuthenticated,
+      isAuthenticated: authStore.isAuthenticated,
       isEmptyPage,
-      setIsLoading,
+      fetchPublicRoom,
+      fetchPreviewMediaFile,
     };
-  }
+  },
 )(observer(PublicRoomPage));

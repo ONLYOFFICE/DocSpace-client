@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Section from "@docspace/common/components/Section";
-
+import Section from "@docspace/shared/components/section";
+import SectionWrapper from "SRC_DIR/components/Section";
 import { SectionHeaderContent, SectionBodyContent } from "./Section";
 
 import Dialogs from "../Home/Section/AccountsBody/Dialogs";
 
-import withCultureNames from "@docspace/common/hoc/withCultureNames";
+import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
@@ -87,7 +87,7 @@ class Profile extends React.Component {
 
     return (
       <>
-        <Section withBodyAutoFocus viewAs="profile">
+        <SectionWrapper withBodyAutoFocus viewAs="profile">
           <Section.SectionHeader>
             <SectionHeaderContent
               profile={profile}
@@ -98,7 +98,7 @@ class Profile extends React.Component {
           <Section.SectionBody>
             <SectionBodyContent profile={profile} />
           </Section.SectionBody>
-        </Section>
+        </SectionWrapper>
         <Dialogs />
       </>
     );
@@ -112,8 +112,16 @@ Profile.propTypes = {
 };
 
 export default inject(
-  ({ auth, peopleStore, clientLoadingStore, treeFoldersStore }) => {
-    const { setDocumentTitle, language, tfaStore } = auth;
+  ({
+    authStore,
+    settingsStore,
+    peopleStore,
+    userStore,
+    clientLoadingStore,
+    tfaStore,
+    treeFoldersStore,
+  }) => {
+    const { setDocumentTitle, language } = authStore;
 
     const {
       setIsProfileLoaded,
@@ -149,14 +157,14 @@ export default inject(
       isEditTargetUser,
       setIsEditTargetUser,
 
-      showCatalog: auth.settingsStore.showCatalog,
+      showCatalog: settingsStore.showCatalog,
 
       selectedTreeNode,
       setSelectedNode,
-      isVisitor: auth.userStore.user.isVisitor,
+      isVisitor: userStore.user.isVisitor,
       setIsProfileLoaded,
       setIsLoading,
       getTfaType,
     };
-  }
+  },
 )(observer(withTranslation(["Profile", "Common"])(withCultureNames(Profile))));

@@ -4,25 +4,25 @@ import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
-import ModalDialog from "@docspace/components/modal-dialog";
-import Text from "@docspace/components/text";
-import Button from "@docspace/components/button";
-import Link from "@docspace/components/link";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Text } from "@docspace/shared/components/text";
+import { Button } from "@docspace/shared/components/button";
+import { Link } from "@docspace/shared/components/link";
 import {
   deleteBackup,
   deleteBackupHistory,
   getBackupHistory,
   startRestore,
-} from "@docspace/common/api/portal";
-import toastr from "@docspace/components/toast/toastr";
-import Loaders from "@docspace/common/components/Loaders";
-import { combineUrl } from "@docspace/common/utils";
-import Checkbox from "@docspace/components/checkbox";
-import HelpButton from "@docspace/components/help-button";
+} from "@docspace/shared/api/portal";
+import { toastr } from "@docspace/shared/components/toast";
+import ListLoader from "@docspace/shared/skeletons/list";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { HelpButton } from "@docspace/shared/components/help-button";
 import config from "PACKAGE_FILE";
 import { StyledBackupList } from "../../../StyledBackup";
 import BackupListBody from "./BackupListBody";
-import { TenantStatus } from "@docspace/common/constants";
+import { TenantStatus } from "@docspace/shared/enums";
 import styled from "styled-components";
 
 const StyledModalDialog = styled(ModalDialog)`
@@ -71,7 +71,7 @@ const BackupListModalDialog = (props) => {
   React.useEffect(() => {
     getBackupHistory()
       .then((filesList) =>
-        setState((val) => ({ ...val, filesList, isLoading: false }))
+        setState((val) => ({ ...val, filesList, isLoading: false })),
       )
       .catch(() => setState((val) => ({ ...val, isLoading: false })));
   }, []);
@@ -94,7 +94,7 @@ const BackupListModalDialog = (props) => {
     deleteBackupHistory()
       .then(() => getBackupHistory())
       .then((filesList) =>
-        setState((val) => ({ ...val, filesList, isLoading: false }))
+        setState((val) => ({ ...val, filesList, isLoading: false })),
       )
       .catch((error) => {
         toastr.error(error);
@@ -114,7 +114,7 @@ const BackupListModalDialog = (props) => {
           isLoading: false,
           selectedFileIndex: null,
           selectedFileId: null,
-        }))
+        })),
       )
       .catch((error) => {
         toastr.error(error);
@@ -151,9 +151,9 @@ const BackupListModalDialog = (props) => {
           combineUrl(
             window.DocSpaceConfig?.proxy?.url,
             config.homepage,
-            "/preparation-portal"
-          )
-        )
+            "/preparation-portal",
+          ),
+        ),
       )
       .catch((error) => toastr.error(error))
       .finally(() =>
@@ -162,7 +162,7 @@ const BackupListModalDialog = (props) => {
           isLoading: false,
           selectedFileIndex: null,
           selectedFileId: null,
-        }))
+        })),
       );
   };
 
@@ -248,7 +248,7 @@ const BackupListModalDialog = (props) => {
                 )
               ) : (
                 <div className="loader" key="loader">
-                  <Loaders.ListLoader count={7} />
+                  <ListLoader count={7} />
                 </div>
               )}
             </div>
@@ -304,8 +304,7 @@ BackupListModalDialog.propTypes = {
   isVisibleDialog: PropTypes.bool.isRequired,
 };
 
-export default inject(({ auth, backup }) => {
-  const { settingsStore } = auth;
+export default inject(({ settingsStore, backup }) => {
   const { downloadingProgress } = backup;
   const { socketHelper, theme, setTenantStatus, standalone } = settingsStore;
   const isCopyingToLocal = downloadingProgress !== 100;
@@ -319,6 +318,6 @@ export default inject(({ auth, backup }) => {
   };
 })(
   withTranslation(["Settings", "Common", "Translations"])(
-    observer(BackupListModalDialog)
-  )
+    observer(BackupListModalDialog),
+  ),
 );

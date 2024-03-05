@@ -2,7 +2,7 @@ import { inject, observer } from "mobx-react";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import RowContainer from "@docspace/components/row-container";
+import { RowContainer } from "@docspace/shared/components/row-container";
 
 import { AuditUserRow } from "./AuditUserRow";
 
@@ -36,9 +36,9 @@ const AuditRowContainer = ({
   );
 };
 
-export default inject(({ setup, auth }) => {
+export default inject(({ setup, settingsStore }) => {
   const { viewAs, setViewAs, security } = setup;
-  const { theme, currentDeviceType } = auth.settingsStore;
+  const { theme, currentDeviceType } = settingsStore;
 
   return {
     viewAs,

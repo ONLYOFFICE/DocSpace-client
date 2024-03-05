@@ -1,10 +1,16 @@
 import { makeAutoObservable } from "mobx";
-import { EmployeeStatus } from "@docspace/common/constants";
+import { EmployeeStatus } from "@docspace/shared/enums";
 import { getUserStatus } from "../helpers/people-helpers";
 
 class SelectionStore {
   peopleStore = null;
   selection = [];
+  selectionUsersRights = {
+    isVisitor: 0,
+    isCollaborator: 0,
+    isRoomAdmin: 0,
+    isAdmin: 0,
+  };
   bufferSelection = null;
   selected = "none";
 
@@ -20,9 +26,33 @@ class SelectionStore {
     });
   };
 
+  resetUsersRight = () => {
+    for (const key in this.selectionUsersRights) {
+      this.selectionUsersRights[key] = 0;
+    }
+  };
+
+  incrementUsersRights = (selection) => {
+    for (const key in this.selectionUsersRights) {
+      if (selection[key]) {
+        this.selectionUsersRights[key]++;
+      }
+    }
+  };
+
+  decrementUsersRights = (selection) => {
+    for (const key in this.selectionUsersRights) {
+      if (selection[key]) {
+        this.selectionUsersRights[key]--;
+      }
+    }
+  };
+
   setSelection = (selection) => {
-    //console.log("setSelection", { selection });
+    // console.log("setSelection", { selection });
     this.selection = selection;
+
+    selection.length === 0 && this.resetUsersRight();
   };
 
   setSelections = (added, removed, clear = false) => {
@@ -45,10 +75,14 @@ class SelectionStore {
 
       const isFound = this.selection.findIndex((f) => f.id == id) === -1;
 
-      isFound &&
-        newSelections.push(
-          this.peopleStore.usersStore.peopleList.find((f) => f.id == id)
+      if (isFound) {
+        const user = this.peopleStore.usersStore.peopleList.find(
+          (f) => f.id == id
         );
+        newSelections.push(user);
+
+        this.incrementUsersRights(user);
+      }
     }
 
     for (let item of removed) {
@@ -61,7 +95,12 @@ class SelectionStore {
       const splitValue = value && value.split("_");
       const id = splitValue.slice(1, -3).join("_");
 
-      newSelections = newSelections.filter((f) => !(f.id == id));
+      const index = newSelections.findIndex((item) => item.id == id);
+
+      if (index !== -1) {
+        this.decrementUsersRights(newSelections[index]);
+        newSelections.splice(index, 1);
+      }
     }
 
     this.setSelection(newSelections);
@@ -70,9 +109,16 @@ class SelectionStore {
   setBufferSelection = (bufferSelection, addToSelection = true) => {
     this.bufferSelection = bufferSelection;
     //console.log("setBufferSelection", { bufferSelection });
-    bufferSelection
-      ? addToSelection && this.setSelection([bufferSelection])
-      : this.clearSelection();
+
+    if (bufferSelection) {
+      if (!addToSelection) return;
+      this.setSelection([bufferSelection]);
+      this.incrementUsersRights(bufferSelection);
+
+      return;
+    }
+
+    this.clearSelection();
   };
 
   selectUser = (user) => {
@@ -80,11 +126,13 @@ class SelectionStore {
 
     const exists = index > -1;
 
-    //console.log("selectUser", { user, selection: this.selection, exists });
+    // console.log("selectUser", { user, selection: this.selection, exists });
 
     if (exists) return;
 
     this.setSelection([...this.selection, user]);
+
+    this.incrementUsersRights(user);
   };
 
   deselectUser = (user) => {
@@ -99,6 +147,8 @@ class SelectionStore {
     const newData = [...this.selection];
 
     newData.splice(index, 1);
+
+    this.decrementUsersRights(this.selection[index]);
 
     this.setSelection(newData);
   };
@@ -170,7 +220,12 @@ class SelectionStore {
 
     return users.length > 0;
   }
+  get hasUsersToMakePowerUser() {
+    const { canMakePowerUser } = this.peopleStore.accessRightsStore;
+    const users = this.selection.filter((x) => canMakePowerUser(x));
 
+    return users.length > 0;
+  }
   get getUsersToMakeEmployees() {
     const { canMakeEmployeeUser } = this.peopleStore.accessRightsStore;
 
@@ -267,6 +322,30 @@ class SelectionStore {
     const users = this.selection.filter((x) => canRemoveUser(x));
 
     return users.map((u) => u.id);
+  }
+
+  get hasUsersToChangeQuota() {
+    const { canChangeQuota } = this.peopleStore.accessRightsStore;
+
+    const users = this.selection.filter(() => canChangeQuota());
+
+    return users.length > 0;
+  }
+
+  get hasUsersToDisableQuota() {
+    const { canDisableQuota } = this.peopleStore.accessRightsStore;
+
+    const users = this.selection.filter(() => canDisableQuota());
+
+    return users.length > 0;
+  }
+
+  get hasUsersToResetQuota() {
+    const { caResetCustomQuota } = this.peopleStore.accessRightsStore;
+
+    const users = this.selection.filter((x) => caResetCustomQuota(x));
+
+    return users.length > 0;
   }
 }
 

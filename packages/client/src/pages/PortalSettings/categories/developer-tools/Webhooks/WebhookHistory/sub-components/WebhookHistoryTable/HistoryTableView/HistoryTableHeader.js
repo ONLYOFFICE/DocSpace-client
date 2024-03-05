@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import TableHeader from "@docspace/components/table-container/TableHeader";
+import { TableHeader } from "@docspace/shared/components/table";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -44,7 +44,7 @@ const HistoryTableHeader = (props) => {
       enable: true,
       default: true,
       active: true,
-      minWidth: 150,
+      minWidth: 210,
       onChange: onColumnChange,
     },
     {
@@ -72,8 +72,8 @@ const HistoryTableHeader = (props) => {
 
     setColumns((prevColumns) =>
       prevColumns.map((item, index) =>
-        index === columnIndex ? { ...item, enable: !item.enable } : item,
-      ),
+        index === columnIndex ? { ...item, enable: !item.enable } : item
+      )
     );
 
     const tableColumns = columns.map((c) => c.enable && c.key);
@@ -101,8 +101,8 @@ const HistoryTableHeader = (props) => {
   );
 };
 
-export default inject(({ auth }) => {
+export default inject(({ userStore }) => {
   return {
-    userId: auth.userStore.user.id,
+    userId: userStore.user.id,
   };
 })(observer(HistoryTableHeader));

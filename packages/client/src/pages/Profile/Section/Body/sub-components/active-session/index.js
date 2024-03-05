@@ -5,13 +5,15 @@ import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
-import Text from "@docspace/components/text";
-import Link from "@docspace/components/link";
-import Box from "@docspace/components/box";
-import HelpButton from "@docspace/components/help-button";
-import toastr from "@docspace/components/toast/toastr";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { Box } from "@docspace/shared/components/box";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { toastr } from "@docspace/shared/components/toast";
 import { useTheme } from "styled-components";
-import Loaders from "@docspace/common/components/Loaders";
+import { convertTime } from "@docspace/shared/utils/convertTime";
+
+import { ProfileFooterLoader } from "@docspace/shared/skeletons/profile";
 
 import {
   LogoutConnectionDialog,
@@ -27,8 +29,8 @@ import {
   TableBody,
   TableDataCell,
 } from "./styled-active-sessions";
-import { DeviceType } from "@docspace/common/constants";
-import moment from "moment";
+import { DeviceType } from "@docspace/shared/enums";
+import moment from "moment-timezone";
 
 const removeIcon = (
   <ReactSVG className="remove-icon" src={RemoveSessionSvgUrl} />
@@ -82,7 +84,7 @@ const ActiveSessions = ({
     try {
       setLoading(true);
       await removeAllExecptThis().then(() =>
-        getAllSessions().then((res) => setSessions(res.items))
+        getAllSessions().then((res) => setSessions(res.items)),
       );
     } catch (error) {
       toastr.error(error);
@@ -97,13 +99,13 @@ const ActiveSessions = ({
     try {
       setLoading(true);
       await removeSession(foundSession.id).then(() =>
-        getAllSessions().then((res) => setSessions(res.items))
+        getAllSessions().then((res) => setSessions(res.items)),
       );
       toastr.success(
         t("Profile:SuccessLogout", {
           platform: foundSession.platform,
           browser: foundSession.browser,
-        })
+        }),
       );
     } catch (error) {
       toastr.error(error);
@@ -114,7 +116,7 @@ const ActiveSessions = ({
   };
 
   const convertTime = (date) => {
-    return moment(date).locale(locale).format("L, LTS");
+    return moment(date).tz(window.timezone).locale(locale).format("L, LTS");
   };
   const tableCell = (platform, browser) =>
     interfaceDirection === "rtl" && !isMobile ? (
@@ -132,7 +134,7 @@ const ActiveSessions = ({
         </span>
       </>
     );
-  if (!sessionsIsInit) return <Loaders.ProfileFooter isProfileFooter />;
+  if (!sessionsIsInit) return <ProfileFooterLoader isProfileFooter />;
   return (
     <StyledFooter>
       <Text fontSize="16px" fontWeight={700} lineHeight="22px">
@@ -257,9 +259,9 @@ const ActiveSessions = ({
   );
 };
 
-export default inject(({ auth, setup }) => {
-  const { culture, currentDeviceType } = auth.settingsStore;
-  const { user } = auth.userStore;
+export default inject(({ settingsStore, userStore, setup }) => {
+  const { culture, currentDeviceType } = settingsStore;
+  const { user } = userStore;
   const locale = (user && user.cultureName) || culture || "en";
 
   const {

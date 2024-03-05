@@ -1,14 +1,14 @@
 import React, { useEffect, useCallback, useState } from "react";
 import { inject, observer } from "mobx-react";
 
-import toastr from "@docspace/components/toast/toastr";
-import ModalDialog from "@docspace/components/modal-dialog";
-import TextInput from "@docspace/components/text-input";
-import Button from "@docspace/components/button";
-import ComboBox from "@docspace/components/combobox";
-import Checkbox from "@docspace/components/checkbox";
-import Box from "@docspace/components/box";
-import FieldContainer from "@docspace/components/field-container";
+import { toastr } from "@docspace/shared/components/toast";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { Button } from "@docspace/shared/components/button";
+import { ComboBox } from "@docspace/shared/components/combobox";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Box } from "@docspace/shared/components/box";
+import { FieldContainer } from "@docspace/shared/components/field-container";
 
 const Dialog = ({
   t,
@@ -52,9 +52,9 @@ const Dialog = ({
     (e) => {
       if (e.keyCode === 27) onCancelAction(e);
 
-      if (e.keyCode === 13 && !withForm) onSaveAction(e);
+      if (e.keyCode === 13 && !withForm && !isError) onSaveAction(e);
     },
-    [value]
+    [value, isError]
   );
 
   useEffect(() => {
@@ -186,9 +186,9 @@ const Dialog = ({
   );
 };
 
-export default inject(({ auth, settingsStore }) => {
-  const { folderFormValidation } = auth.settingsStore;
-  const { keepNewFileName, setKeepNewFileName } = settingsStore;
+export default inject(({ settingsStore, filesSettingsStore }) => {
+  const { folderFormValidation } = settingsStore;
+  const { keepNewFileName, setKeepNewFileName } = filesSettingsStore;
 
   return { folderFormValidation, keepNewFileName, setKeepNewFileName };
 })(observer(Dialog));

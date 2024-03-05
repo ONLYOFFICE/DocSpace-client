@@ -2,13 +2,15 @@ import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-import FilesFilter from "@docspace/common/api/files/filter";
-import RoomsFilter from "@docspace/common/api/rooms/filter";
-import { getGroup } from "@docspace/common/api/groups";
-import { getUserById } from "@docspace/common/api/people";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import { getGroup } from "@docspace/shared/api/groups";
+import { getUserById } from "@docspace/shared/api/people";
+import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
-import { Events, RoomSearchArea } from "@docspace/common/constants";
-import { getObjectByLocation } from "@docspace/common/utils";
+import { Events, RoomSearchArea } from "@docspace/shared/enums";
+import { getObjectByLocation } from "@docspace/shared/utils/common";
+import { useParams } from "react-router-dom";
 
 import { getCategoryType, getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -40,9 +42,11 @@ const useFiles = ({
   setIsUpdatingRowItem,
 
   gallerySelected,
-  removeFirstUrl,
+  folderSecurity,
+  userId,
 }) => {
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const fetchDefaultFiles = () => {
     const filter = FilesFilter.getDefault();
@@ -68,6 +72,13 @@ const useFiles = ({
   };
 
   const onDrop = (files, uploadToFolder) => {
+    if (
+      folderSecurity &&
+      folderSecurity.hasOwnProperty("Create") &&
+      !folderSecurity.Create
+    )
+      return;
+
     dragging && setDragging(false);
 
     if (disableDrag) return;
@@ -85,28 +96,31 @@ const useFiles = ({
   };
 
   React.useEffect(() => {
+    if (location.state?.fromMediaViewer) {
+      const { fromMediaViewer, ...state } = location.state;
+      // remove fromMediaViewer from location state
+      return navigate(location.pathname + location.search, {
+        replace: true,
+        state,
+      });
+    }
+
     if (isAccountsPage || isSettingsPage) return;
 
     if (location.pathname === "/") setIsLoading(true, true, true);
     else setIsLoading(true, false, false);
-
-    if (!window.location.href.includes("#preview")) {
-      // localStorage.removeItem("isFirstUrl");
-      // Media viewer
-      removeFirstUrl();
-    }
 
     const categoryType = getCategoryType(location);
 
     let filterObj = null;
     let isRooms = false;
 
-    if (window.location.href.indexOf("/#preview") > 1 && playlist.length < 1) {
-      const pathname = window.location.href;
-      const fileId = pathname.slice(pathname.indexOf("#preview") + 9);
-
+    if (
+      window.location.href.indexOf(MEDIA_VIEW_URL) > 1 &&
+      playlist.length < 1
+    ) {
       setTimeout(() => {
-        getFileInfo(fileId)
+        getFileInfo(id)
           .then((data) => {
             const canOpenPlayer =
               data.viewAccessibility.ImageView ||
@@ -124,7 +138,7 @@ const useFiles = ({
       return setIsLoading(false);
     }
 
-    if (window.location.href.indexOf("/#preview") > 1)
+    if (window.location.href.indexOf(MEDIA_VIEW_URL) > 1)
       return setIsLoading(false);
 
     const isRoomFolder = getObjectByLocation(window.location)?.folder;
@@ -198,13 +212,12 @@ const useFiles = ({
     const newFilter = filter
       ? filter.clone()
       : isRooms
-      ? RoomsFilter.getDefault()
-      : FilesFilter.getDefault();
+        ? RoomsFilter.getDefault(userId)
+        : FilesFilter.getDefault();
     const requests = [Promise.resolve(newFilter)];
 
-    if (type === "group") {
-      requests.push(getGroup(itemId));
-    } else if (type === "user") {
+
+     if (type === "user") {
       requests.push(getUserById(itemId));
     }
 
@@ -212,7 +225,7 @@ const useFiles = ({
       .all(requests)
       .catch((err) => {
         if (isRooms) {
-          Promise.resolve(RoomsFilter.getDefault());
+          Promise.resolve(RoomsFilter.getDefault(userId));
         } else {
           Promise.resolve(FilesFilter.getDefault());
         }
@@ -242,7 +255,7 @@ const useFiles = ({
               undefined,
               undefined,
               undefined,
-              true
+              true,
             );
           } else {
             const folderId = filter.folder;

@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
-import TextInput from "@docspace/components/text-input";
-import HelpButton from "@docspace/components/help-button";
-import Text from "@docspace/components/text";
-import SelectorAddButton from "@docspace/components/selector-add-button";
-import SelectedItem from "@docspace/components/selected-item";
-import { tablet } from "@docspace/components/utils/device";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { Text } from "@docspace/shared/components/text";
+import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
+import { SelectedItem } from "@docspace/shared/components/selected-item";
+import { tablet } from "@docspace/shared/utils";
+import Base from "@docspace/shared/themes/base";
 
 const CategoryHeader = styled.div`
   margin-top: 24px;
@@ -19,10 +20,12 @@ const CategoryHeader = styled.div`
 `;
 
 const Container = styled.div`
-  margin-bottom: 16px;
+  margin-bottom: 4px;
 
   &.description-holder {
     display: block;
+    color: ${(props) => props.theme.sdkPresets.secondaryColor};
+    margin-bottom: 16px;
   }
 
   &.description-holder > div {
@@ -41,10 +44,13 @@ const Container = styled.div`
   }
 `;
 
+Container.defaultProps = { theme: Base };
+
 const ChipsContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 8px 4px;
+  margin-top: 8px;
   margin-bottom: 16px;
   flex-wrap: wrap;
 `;
@@ -75,6 +81,7 @@ const CSP = ({ t, cspDomains, getCSPSettings, setCSPSettings }) => {
           isInline
           label={item}
           onClose={() => deleteDomain(item)}
+          title={item}
         />
       ))
     ) : (
@@ -84,7 +91,7 @@ const CSP = ({ t, cspDomains, getCSPSettings, setCSPSettings }) => {
   const deleteDomain = (value) => {
     const domains = cspDomains.filter((item) => item !== value);
 
-    setCSPSettings({ domains });
+    setCSPSettings({ domains, setDefaultIfEmpty: true });
   };
 
   const addDomain = () => {
@@ -127,13 +134,15 @@ const CSP = ({ t, cspDomains, getCSPSettings, setCSPSettings }) => {
         />
         <SelectorAddButton onClick={addDomain} />
       </Container>
+      <Text lineHeight="20px" color="#A3A9AE">
+        {t("CSPUrlHelp")}
+      </Text>
       <ChipsContainer>{getChips(cspDomains)}</ChipsContainer>
     </>
   );
 };
 
-export default inject(({ auth }) => {
-  const { settingsStore } = auth;
+export default inject(({ settingsStore }) => {
   const { cspDomains, getCSPSettings, setCSPSettings } = settingsStore;
   return { cspDomains, getCSPSettings, setCSPSettings };
 })(observer(CSP));

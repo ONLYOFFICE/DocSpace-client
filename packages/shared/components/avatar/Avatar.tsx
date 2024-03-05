@@ -94,6 +94,7 @@ const AvatarPure = ({
   className,
   onClick,
   isGroup = false,
+  roleIcon: roleIconProp,
 }: AvatarProps) => {
   const defaultTheme = useTheme();
 
@@ -121,7 +122,7 @@ const AvatarPure = ({
     <EmptyIcon size={IconSizeType.scale} />
   );
 
-  const roleIcon = getRoleIcon(role);
+  const roleIcon = roleIconProp ?? getRoleIcon(role);
 
   const uniqueTooltipId = withTooltip ? `roleTooltip_${Math.random()}` : "";
   const tooltipPlace = interfaceDirection === "rtl" ? "left" : "right";

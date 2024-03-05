@@ -934,7 +934,7 @@ const Manager = (props) => {
             {/* <ControlsGroup>
             {"id" in config ? (
               <>
-                <Label className="label" text={t("File Filter")} />
+                <Label className="label" text={t("Files:Filter")} />
                 <ToggleButton
                   className="toggle"
                   label="Author"
@@ -997,7 +997,7 @@ const Manager = (props) => {
               </>
             ) : (
               <>
-                <Label className="label" text={t("Room Filter")} />
+                <Label className="label" text={t("Files:Filter")} />
                 <ToggleButton
                   className="toggle"
                   label="Member"

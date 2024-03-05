@@ -2,6 +2,8 @@
   "AccountLoginType": "Account login type",
   "AddMembers": "Add members",
   "CreateGroup": "Create group",
+  "SuccessDeleteGroup": "Group was deleted successfully",
+  "SuccessDeleteGroups": "Groups were deleted successfully",
   "DeleteSelfProfile": "Delete profile",
   "DisabledEmployeeStatus": "Disabled",
   "DisableUserButton": "Disable",

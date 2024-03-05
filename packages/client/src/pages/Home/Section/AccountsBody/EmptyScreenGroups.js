@@ -19,7 +19,7 @@ const EmptyScreenGroups = ({
   setIsLoading,
   theme,
 }) => {
-  const { t } = useTranslation(["People", "Common"]);
+  const { t } = useTranslation(["People", "PeopleTranslations", "Common"]);
 
   const onCreateRoom = () => {
     const event = new Event(Events.GROUP_CREATE);
@@ -70,7 +70,7 @@ const EmptyScreenGroups = ({
                     fontWeight="600"
                     onClick={onCreateRoom}
                   >
-                    {t("Create group")}
+                    {t("PeopleTranslations:CreateGroup")}
                   </Link>
                 </Box>
               </>

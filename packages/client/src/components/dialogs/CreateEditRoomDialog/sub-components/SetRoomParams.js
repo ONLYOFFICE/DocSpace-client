@@ -172,7 +172,7 @@ const SetRoomParams = ({
         />
       )}
 
-      {isDefaultRoomsQuotaSet && (
+      {isDefaultRoomsQuotaSet && roomParams.type !== RoomsType.PublicRoom && (
         <RoomQuota
           setRoomParams={setRoomParams}
           roomParams={roomParams}

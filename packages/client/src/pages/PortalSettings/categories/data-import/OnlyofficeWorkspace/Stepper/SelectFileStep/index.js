@@ -79,59 +79,74 @@ const SelectFileStep = ({
   cancelMigration,
 }) => {
   const [progress, setProgress] = useState(0);
+  const [isError, setIsError] = useState(false);
   const [isFileError, setIsFileError] = useState(false);
+  const [fileName, setFileName] = useState(null);
   const [searchParams] = useSearchParams();
+  const isAbort = useRef(false);
   const uploadInterval = useRef(null);
   const navigate = useNavigate();
-
-  const isAbort = useRef(false);
-
-  const [fileName, setFileName] = useState(null);
 
   const goBack = () => {
     cancelMigration();
     setTimeout(() => navigate(-1), 100);
   };
 
+  const checkMigrationStatusAndUpdate = async () => {
+    try {
+      const res = await getMigrationStatus();
+
+      if (!res || res.parseResult.migratorName !== "Workspace") {
+        clearInterval(uploadInterval.current);
+        return;
+      }
+
+      if (res.parseResult.operation === "parse" && !res.isCompleted) {
+        setProgress(res.progress);
+        setIsFileLoading(true);
+      } else {
+        setIsFileLoading(false);
+      }
+
+      setIsFileError(false);
+      setShowReminder(true);
+
+      if (res.parseResult.files.length > 0) {
+        setFileName(res.parseResult.files.join(", "));
+      }
+
+      if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
+        toastr.error(res.error);
+        setIsFileError(true);
+        clearInterval(uploadInterval.current);
+      } else if (res.isCompleted || res.progress === 100) {
+        setUsers(res.parseResult);
+        setShowReminder(true);
+        onNextStep && onNextStep();
+        clearInterval(uploadInterval.current);
+      }
+    } catch (error) {
+      toastr.error(error.message);
+      setIsFileError(true);
+      clearInterval(uploadInterval.current);
+    }
+  };
+
   useEffect(() => {
     setShowReminder(false);
-    try {
-      getMigrationStatus().then((res) => {
-        if (!res || res.parseResult.migratorName !== "Workspace") return;
+    checkMigrationStatusAndUpdate();
 
-        if (res.parseResult.operation === "parse" && !res.isCompleted) {
-          setProgress(res.progress);
-          setIsFileLoading(true);
-        }
-
-        setIsFileError(false);
-        setShowReminder(true);
-
-        res.parseResult.files.length > 0 &&
-          setFileName(res.parseResult.files.join(", "));
-
-        uploadInterval.current = setInterval(async () => {
-          const res = await getMigrationStatus();
-
-          if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
-            toastr.error(res.error);
-            setIsFileError(true);
-            setIsFileLoading(false);
-            clearInterval(uploadInterval.current);
-          } else if (res.isCompleted || res.parseResult.progress === 100) {
-            setIsFileLoading(false);
-            clearInterval(uploadInterval.current);
-            setUsers(res.parseResult);
-            setShowReminder(false);
-          }
-        }, 1000);
-      });
-    } catch (error) {
-      toastr.error(error);
-    }
+    uploadInterval.current = setInterval(() => {
+      checkMigrationStatusAndUpdate();
+    }, 1000);
 
     return () => clearInterval(uploadInterval.current);
   }, []);
+
+  const onUploadToServer = () => {
+    setShowReminder(false);
+    checkMigrationStatusAndUpdate();
+  };
 
   const onUploadFile = async (file) => {
     try {
@@ -139,27 +154,44 @@ const SelectFileStep = ({
       await initMigrationName(searchParams.get("service"));
 
       uploadInterval.current = setInterval(async () => {
-        const res = await getMigrationStatus();
-
-        if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
+        try {
+          const res = await getMigrationStatus();
+          if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
+            setIsFileError(true);
+            setIsFileLoading(false);
+            toastr.error(res.error);
+            clearInterval(uploadInterval.current);
+          } else if (res.isCompleted || res.parseResult.progress === 100) {
+            setIsFileLoading(false);
+            clearInterval(uploadInterval.current);
+            setUsers(res.parseResult);
+            setShowReminder(true);
+          }
+        } catch (error) {
+          toastr.error(error.message);
           setIsFileError(true);
           setIsFileLoading(false);
-          toastr.error(res.error);
+          setIsError(true);
           clearInterval(uploadInterval.current);
-        } else if (res.isCompleted || res.parseResult.progress === 100) {
-          setIsFileLoading(false);
-          clearInterval(uploadInterval.current);
-          setUsers(res.parseResult);
-          setShowReminder(true);
         }
       }, 1000);
     } catch (error) {
       toastr.error(error.message);
       setIsFileError(true);
       setIsFileLoading(false);
-      if (uploadInterval.current) {
-        clearInterval(uploadInterval.current);
-      }
+    }
+  };
+
+  const onSelectFile = (file) => {
+    setProgress(0);
+    setIsFileError(false);
+    setShowReminder(false);
+    setIsFileLoading(true);
+    try {
+      onUploadFile(file);
+    } catch (error) {
+      toastr.error(error);
+      setIsFileLoading(false);
     }
   };
 
@@ -183,19 +215,6 @@ const SelectFileStep = ({
     } catch (error) {
       toastr.error(error);
       console.log(error);
-    }
-  };
-
-  const onSelectFile = (file) => {
-    setProgress(0);
-    setIsFileLoading(true);
-    setIsFileError(false);
-    try {
-      onUploadFile(file);
-    } catch (error) {
-      console.log(error);
-      toastr.error(error);
-      setIsFileLoading(false);
     }
   };
 
@@ -264,16 +283,31 @@ const SelectFileStep = ({
               </Link>
             </Box>
           )}
-          <SaveCancelButtons
-            className="save-cancel-buttons"
-            onSaveClick={onNextStep}
-            onCancelClick={goBack}
-            saveButtonLabel={t("Settings:UploadToServer")}
-            cancelButtonLabel={t("Common:Back")}
-            displaySettings
-            saveButtonDisabled={!showReminder}
-            showReminder
-          />
+
+          {isError ? (
+            <SaveCancelButtons
+              className="save-cancel-buttons"
+              onSaveClick={onUploadToServer}
+              onCancelClick={goBack}
+              saveButtonLabel={t("Settings:UploadToServer")}
+              cancelButtonLabel={t("Common:Back")}
+              isSaving={showReminder}
+              displaySettings
+              saveButtonDisabled={showReminder}
+              showReminder
+            />
+          ) : (
+            <SaveCancelButtons
+              className="save-cancel-buttons"
+              onSaveClick={onNextStep}
+              onCancelClick={goBack}
+              saveButtonLabel={t("Settings:NextStep")}
+              cancelButtonLabel={t("Common:Back")}
+              displaySettings
+              saveButtonDisabled={!showReminder}
+              showReminder
+            />
+          )}
         </ErrorBlock>
       )}
 

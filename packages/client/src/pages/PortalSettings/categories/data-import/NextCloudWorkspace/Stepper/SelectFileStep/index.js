@@ -88,20 +88,75 @@ const SelectFileStep = ({
   setIsFileLoading,
   cancelMigration,
 }) => {
-  const [isSaveDisabled, setIsSaveDisabled] = useState(true);
+  const [isSaveDisabled, setIsSaveDisabled] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [searchParams] = useSearchParams();
+  const [isError, setIsError] = useState(false);
   const [isFileError, setIsFileError] = useState(false);
+  const [fileName, setFileName] = useState(null);
+  const [searchParams] = useSearchParams();
+  const isAbort = useRef(false);
   const uploadInterval = useRef(null);
   const navigate = useNavigate();
-
-  const isAbort = useRef(false);
-
-  const [fileName, setFileName] = useState(null);
 
   const goBack = () => {
     cancelMigration();
     setTimeout(() => navigate(-1), 100);
+  };
+
+  const checkMigrationStatusAndUpdate = async () => {
+    try {
+      const res = await getMigrationStatus();
+
+      if (!res || res.parseResult.migratorName !== "Nextcloud") {
+        clearInterval(uploadInterval.current);
+        return;
+      }
+
+      if (res.parseResult.operation === "parse" && !res.isCompleted) {
+        setProgress(res.progress);
+        setIsFileLoading(true);
+      } else {
+        setIsFileLoading(false);
+      }
+
+      setIsFileError(false);
+      setIsSaveDisabled(true);
+
+      if (res.parseResult.files.length > 0) {
+        setFileName(res.parseResult.files.join(", "));
+      }
+
+      if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
+        toastr.error(res.error);
+        setIsFileError(true);
+        clearInterval(uploadInterval.current);
+      } else if (res.isCompleted || res.progress === 100) {
+        setUsers(res.parseResult);
+        setIsSaveDisabled(true);
+        incrementStep && incrementStep();
+        clearInterval(uploadInterval.current);
+      }
+    } catch (error) {
+      toastr.error(error.message);
+      setIsFileError(true);
+      clearInterval(uploadInterval.current);
+    }
+  };
+
+  useEffect(() => {
+    setIsSaveDisabled(false);
+    checkMigrationStatusAndUpdate();
+
+    uploadInterval.current = setInterval(() => {
+      checkMigrationStatusAndUpdate();
+    }, 1000);
+
+    return () => clearInterval(uploadInterval.current);
+  }, []);
+
+  const onUploadToServer = () => {
+    setIsSaveDisabled(false);
+    checkMigrationStatusAndUpdate();
   };
 
   const onUploadFile = async (file) => {
@@ -110,41 +165,44 @@ const SelectFileStep = ({
       await initMigrationName(searchParams.get("service"));
 
       uploadInterval.current = setInterval(async () => {
-        const res = await getMigrationStatus();
-
-        if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
-          toastr.error(res.error);
+        try {
+          const res = await getMigrationStatus();
+          if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
+            toastr.error(res.error);
+            setIsFileError(true);
+            setIsFileLoading(false);
+            clearInterval(uploadInterval.current);
+          } else if (res.isCompleted || res.parseResult.progress === 100) {
+            setIsFileLoading(false);
+            clearInterval(uploadInterval.current);
+            setUsers(res.parseResult);
+            setIsSaveDisabled(true);
+          }
+        } catch (error) {
+          toastr.error(error.message);
           setIsFileError(true);
           setIsFileLoading(false);
+          setIsError(true);
           clearInterval(uploadInterval.current);
-        } else if (res.isCompleted || res.parseResult.progress === 100) {
-          setIsFileLoading(false);
-          clearInterval(uploadInterval.current);
-          setUsers(res.parseResult);
-          setIsSaveDisabled(false);
         }
       }, 1000);
     } catch (error) {
       toastr.error(error.message);
       setIsFileError(true);
       setIsFileLoading(false);
-      if (uploadInterval.current) {
-        clearInterval(uploadInterval.current);
-      }
     }
   };
 
   const onSelectFile = (file) => {
     setProgress(0);
     setIsFileError(false);
-    setIsSaveDisabled(true);
+    setIsSaveDisabled(false);
     setIsFileLoading(true);
     try {
       onUploadFile(file);
     } catch (error) {
-      console.log(error);
-      setIsFileLoading(false);
       toastr.error(error);
+      setIsFileLoading(false);
     }
   };
 
@@ -184,45 +242,6 @@ const SelectFileStep = ({
   };
 
   const hideCancelDialog = () => setCancelDialogVisibile(false);
-
-  useEffect(() => {
-    try {
-      getMigrationStatus().then((res) => {
-        if (!res || res.parseResult.migratorName !== "Nextcloud") return;
-
-        if (res.parseResult.operation === "parse" && !res.isCompleted) {
-          setProgress(res.progress);
-          setIsFileLoading(true);
-        }
-
-        setIsFileError(false);
-        setIsSaveDisabled(true);
-
-        res.parseResult.files.length > 0 &&
-          setFileName(res.parseResult.files.join(", "));
-
-        uploadInterval.current = setInterval(async () => {
-          const res = await getMigrationStatus();
-
-          if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
-            toastr.error(res.error);
-            setIsFileError(true);
-            setIsFileLoading(false);
-            clearInterval(uploadInterval.current);
-          } else if (res.isCompleted || res.progress === 100) {
-            setIsFileLoading(false);
-            clearInterval(uploadInterval.current);
-            setUsers(res.parseResult);
-            setIsSaveDisabled(false);
-          }
-        }, 1000);
-      });
-    } catch (error) {
-      toastr.error(error);
-    }
-
-    return () => clearInterval(uploadInterval.current);
-  }, []);
 
   return (
     <Wrapper>
@@ -274,16 +293,31 @@ const SelectFileStep = ({
               </Link>
             </Box>
           )}
-          <SaveCancelButtons
-            className="upload-back-buttons"
-            onSaveClick={incrementStep}
-            onCancelClick={goBack}
-            saveButtonLabel={t("Settings:UploadToServer")}
-            cancelButtonLabel={t("Common:Back")}
-            displaySettings
-            showReminder
-            saveButtonDisabled={isSaveDisabled}
-          />
+
+          {isError ? (
+            <SaveCancelButtons
+              className="save-cancel-buttons"
+              onSaveClick={onUploadToServer}
+              onCancelClick={goBack}
+              saveButtonLabel={t("Settings:UploadToServer")}
+              cancelButtonLabel={t("Common:Back")}
+              isSaving={isSaveDisabled}
+              displaySettings
+              saveButtonDisabled={isSaveDisabled}
+              showReminder
+            />
+          ) : (
+            <SaveCancelButtons
+              className="save-cancel-buttons"
+              onSaveClick={incrementStep}
+              onCancelClick={goBack}
+              saveButtonLabel={t("Settings:NextStep")}
+              cancelButtonLabel={t("Common:Back")}
+              displaySettings
+              saveButtonDisabled={!isSaveDisabled}
+              showReminder
+            />
+          )}
         </ErrorBlock>
       )}
 

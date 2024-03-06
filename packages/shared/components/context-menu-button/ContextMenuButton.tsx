@@ -195,7 +195,6 @@ const ContextMenuButtonPure = ({
   };
 
   const iconButtonName = state.isOpen && iconOpenName ? iconOpenName : iconName;
-  const label = "label" in item ? item.label : "";
 
   return (
     <StyledOuter
@@ -246,7 +245,7 @@ const ContextMenuButtonPure = ({
                   {...item}
                   id={item.id}
                   key={item.key || index}
-                  label={label}
+                  label={"label" in item ? item.label : ""}
                   onClick={(
                     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
                   ) => onDropDownItemClick(item, e)}
@@ -298,7 +297,7 @@ const ContextMenuButtonPure = ({
                           fontWeight={600}
                           onClick={(e) => onDropDownItemClick(item, e)}
                         >
-                          {label}
+                          {"label" in item ? item.label : ""}
                         </Link>
                       ),
                   )}
@@ -342,4 +341,3 @@ const compare = (
 };
 
 export const ContextMenuButton = React.memo(ContextMenuButtonPure, compare);
-

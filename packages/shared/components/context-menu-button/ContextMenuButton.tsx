@@ -173,6 +173,10 @@ const ContextMenuButtonPure = ({
     onCloseAction();
   };
 
+  const getLabel = (item: ContextMenuModel) => {
+    return "label" in item ? item.label : "";
+  };
+
   const onDropDownItemClick = (
     item: ContextMenuModel,
     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
@@ -195,7 +199,6 @@ const ContextMenuButtonPure = ({
   };
 
   const iconButtonName = state.isOpen && iconOpenName ? iconOpenName : iconName;
-  const label = "label" in item ? item.label : "";
 
   return (
     <StyledOuter
@@ -246,7 +249,7 @@ const ContextMenuButtonPure = ({
                   {...item}
                   id={item.id}
                   key={item.key || index}
-                  label={label}
+                  label={getLabel(item)}
                   onClick={(
                     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
                   ) => onDropDownItemClick(item, e)}
@@ -298,7 +301,7 @@ const ContextMenuButtonPure = ({
                           fontWeight={600}
                           onClick={(e) => onDropDownItemClick(item, e)}
                         >
-                          {label}
+                          {getLabel(item)}
                         </Link>
                       ),
                   )}

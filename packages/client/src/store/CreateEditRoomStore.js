@@ -30,7 +30,7 @@ class CreateEditRoomStore {
     settingsStore,
     infoPanelStore,
     currentQuotaStore,
-    clientLoadingStore
+    clientLoadingStore,
   ) {
     makeAutoObservable(this);
 
@@ -95,6 +95,7 @@ class CreateEditRoomStore {
     const createRoomData = {
       roomType: roomParams.type,
       title: roomParams.title || t("Files:NewRoom"),
+      createAsNewFolder: roomParams.createAsNewFolder ?? false,
       ...(isDefaultRoomsQuotaSet && {
         quota: roomParams.quota || -2,
       }),

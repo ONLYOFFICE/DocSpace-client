@@ -139,4 +139,3 @@ export const RTL_LANGUAGES = Object.freeze([
 ]);
 
 export const HTML_EXST = [".htm", ".mht", ".html"];
-

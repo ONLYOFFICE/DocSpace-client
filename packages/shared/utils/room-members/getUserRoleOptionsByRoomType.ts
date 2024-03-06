@@ -1,8 +1,9 @@
-import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
+import { RoomsType, ShareAccessRights } from "../../enums";
+import { TTranslation } from "../../types";
 import { getUserRoleOptions } from "./getUserRoleOptions";
 
 export const getUserRoleOptionsByRoomType = (
-  t: any,
+  t: TTranslation,
   roomType: RoomsType,
   canChangeUserRole: boolean = false,
 ) => {

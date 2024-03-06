@@ -46,16 +46,16 @@ const StyledBlock = styled.div`
 
   .title {
     ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `margin-right: 12px;`
-      : `margin-left: 12px;`}
+      theme.interfaceDirection === "rtl"
+        ? `margin-right: 12px;`
+        : `margin-left: 12px;`}
   }
 
   .option-button {
     ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `margin-right: auto;`
-      : `margin-left: auto;`}
+      theme.interfaceDirection === "rtl"
+        ? `margin-right: auto;`
+        : `margin-left: auto;`}
   }
 `;
 

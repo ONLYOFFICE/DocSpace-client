@@ -1,6 +1,7 @@
-import { ShareAccessRights } from "@docspace/shared/enums";
+import { ShareAccessRights } from "../../enums";
+import { TTranslation } from "../../types";
 
-export const getUserRoleOptions = (t: any) => ({
+export const getUserRoleOptions = (t: TTranslation) => ({
   docSpaceAdmin: {
     key: "owner",
     label: t("Common:Owner"),

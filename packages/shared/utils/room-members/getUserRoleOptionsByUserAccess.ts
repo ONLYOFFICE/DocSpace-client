@@ -1,8 +1,9 @@
 import { ShareAccessRights } from "enums";
+import { TTranslation } from "../../types";
 import { getUserRoleOptions } from "./getUserRoleOptions";
 
 export const getUserRoleOptionsByUserAccess = (
-  t: any,
+  t: TTranslation,
   access: ShareAccessRights,
 ) => {
   if (!access) return;

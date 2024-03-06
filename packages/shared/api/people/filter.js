@@ -98,7 +98,7 @@ class Filter {
       payments,
       accountLoginType,
       withoutGroup,
-      quotaFilter
+      quotaFilter,
     );
 
     return newFilter;
@@ -118,7 +118,7 @@ class Filter {
     payments = DEFAULT_PAYMENTS,
     accountLoginType = DEFAULT_ACCOUNT_LOGIN_TYPE,
     withoutGroup = DEFAULT_WITHOUT_GROUP,
-    quotaFilter = DEFAULT_QUOTA_FILTER
+    quotaFilter = DEFAULT_QUOTA_FILTER,
   ) {
     this.page = page;
     this.pageCount = pageCount;
@@ -277,7 +277,7 @@ class Filter {
           this.payments,
           this.accountLoginType,
           this.withoutGroup,
-          this.quotaFilter
+          this.quotaFilter,
         );
   }
 
@@ -300,8 +300,8 @@ class Filter {
       );
     }
 
-      this.clone(true);
-    }
+    this.clone(true);
+  }
 
   equals(filter) {
     const equals =

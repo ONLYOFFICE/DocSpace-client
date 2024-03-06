@@ -24,8 +24,8 @@ const BannerWrapper = styled.div<{
     bottom: 0;
     z-index: -1000;
     ${(props) =>
-    props.theme.interfaceDirection === "rtl" &&
-    css`
+      props.theme.interfaceDirection === "rtl" &&
+      css`
         transform: scaleX(-1);
       `}
   }
@@ -33,7 +33,13 @@ const BannerWrapper = styled.div<{
   .close-icon {
     position: absolute;
     ${(props) =>
-    props.theme.interfaceDirection === "rtl" ? css`left: 14px;` : css`right: 14px;`}
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            left: 14px;
+          `
+        : css`
+            right: 14px;
+          `}
 
     top: 18px;
 

@@ -14,7 +14,6 @@ const SelectUsersStep = ({
   t,
   onNextStep,
   onPrevStep,
-  showReminder,
   withEmailUsers,
   setResultUsers,
   areCheckedUsersEmpty,
@@ -67,7 +66,6 @@ const SelectUsersStep = ({
         cancelButtonLabel={t("Common:Back")}
         displaySettings
         saveButtonDisabled={areCheckedUsersEmpty}
-        // saveButtonDisabled={numberOfCheckedAccounts > LICENSE_LIMIT}
       />
 
       {/* <UsersInfoBlock
@@ -107,7 +105,6 @@ const SelectUsersStep = ({
           cancelButtonLabel={t("Common:Back")}
           displaySettings
           saveButtonDisabled={areCheckedUsersEmpty}
-          // saveButtonDisabled={numberOfCheckedAccounts > LICENSE_LIMIT}
         />
       )}
     </>

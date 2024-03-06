@@ -14,7 +14,6 @@ const SelectUsersStep = ({
   t,
   onNextStep,
   onPrevStep,
-  showReminder,
   withEmailUsers,
   searchValue,
   setSearchValue,
@@ -67,7 +66,6 @@ const SelectUsersStep = ({
         cancelButtonLabel={t("Common:Back")}
         displaySettings={true}
         saveButtonDisabled={areCheckedUsersEmpty}
-        // saveButtonDisabled={numberOfCheckedAccounts > LICENSE_LIMIT}
       />
 
       {/* <UsersInfoBlock
@@ -107,7 +105,6 @@ const SelectUsersStep = ({
           cancelButtonLabel={t("Common:Back")}
           displaySettings={true}
           saveButtonDisabled={areCheckedUsersEmpty}
-          // saveButtonDisabled={numberOfCheckedAccounts > LICENSE_LIMIT}
         />
       )}
     </>
@@ -119,7 +116,6 @@ export default inject(({ importAccountsStore }) => {
     withEmailUsers,
     searchValue,
     setSearchValue,
-    numberOfCheckedAccounts,
     areCheckedUsersEmpty,
     setResultUsers,
     cancelMigration,
@@ -129,7 +125,6 @@ export default inject(({ importAccountsStore }) => {
     withEmailUsers,
     searchValue,
     setSearchValue,
-    numberOfCheckedAccounts,
     areCheckedUsersEmpty,
     setResultUsers,
     cancelMigration,

@@ -20,7 +20,6 @@ const AddEmailsStep = (props) => {
     t,
     incrementStep,
     decrementStep,
-    numberOfCheckedAccounts,
     users,
     searchValue,
     setSearchValue,
@@ -76,7 +75,6 @@ const AddEmailsStep = (props) => {
             showReminder
             displaySettings
             saveButtonDisabled={areCheckedUsersEmpty}
-            // saveButtonDisabled={numberOfCheckedAccounts > LICENSE_LIMIT}
           />
 
           {/* <UsersInfoBlock
@@ -120,7 +118,6 @@ const AddEmailsStep = (props) => {
         showReminder
         displaySettings
         saveButtonDisabled={areCheckedUsersEmpty}
-        // saveButtonDisabled={numberOfCheckedAccounts > LICENSE_LIMIT}
       />
     </Wrapper>
   );
@@ -129,7 +126,6 @@ const AddEmailsStep = (props) => {
 export default inject(({ setup, importAccountsStore }) => {
   const { viewAs } = setup;
   const {
-    numberOfCheckedAccounts,
     searchValue,
     setSearchValue,
     users,
@@ -139,7 +135,6 @@ export default inject(({ setup, importAccountsStore }) => {
 
   return {
     viewAs,
-    numberOfCheckedAccounts,
     searchValue,
     setSearchValue,
     users,

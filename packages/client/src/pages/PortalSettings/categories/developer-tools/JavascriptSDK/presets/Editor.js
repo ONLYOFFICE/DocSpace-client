@@ -181,7 +181,7 @@ const Editor = (props) => {
         </>
       ) : (
         <EmptyIframeContainer
-          text={t("SelectFile")}
+          text={t("FilePreview")}
           width="100%"
           height="100%"
         />

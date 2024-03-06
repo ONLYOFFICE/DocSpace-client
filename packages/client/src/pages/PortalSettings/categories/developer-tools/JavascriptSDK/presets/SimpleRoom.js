@@ -287,7 +287,7 @@ const SimpleRoom = (props) => {
         </>
       ) : (
         <EmptyIframeContainer
-          text={t("SelectFile")}
+          text={t("RoomPreview")}
           width="100%"
           height="100%"
         />

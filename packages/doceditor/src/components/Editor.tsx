@@ -10,7 +10,7 @@ import { EditorProps, TGoBack } from "@/types";
 import useInit from "@/hooks/useInit";
 import useEditorEvents from "@/hooks/useEditorEvents";
 
-import { FolderType } from "@docspace/shared/enums";
+import { FolderType, ThemeKeys } from "@docspace/shared/enums";
 import { getBackUrl } from "@/utils";
 import { IS_DESKTOP_EDITOR, IZ_ZOOM } from "@/utils/constants";
 import {
@@ -142,7 +142,7 @@ const Editor = ({
       ...newConfig.editorConfig.customization,
       ...sdkCustomization,
       goback: { ...goBack },
-      uiTheme: getEditorTheme(theme),
+      uiTheme: getEditorTheme(theme as ThemeKeys),
     };
 
   //if (newConfig.document && newConfig.document.info)

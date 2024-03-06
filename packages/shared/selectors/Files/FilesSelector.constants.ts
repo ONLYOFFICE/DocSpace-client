@@ -1,7 +1,8 @@
+import { DOCSPACE } from "../../constants";
 import { TBreadCrumb } from "../../components/selector/Selector.types";
 
 export const DEFAULT_BREAD_CRUMB: TBreadCrumb = {
-  label: "DocSpace",
+  label: DOCSPACE,
   id: 0,
   isRoom: false,
 };

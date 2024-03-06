@@ -1,4 +1,5 @@
 ﻿import { PageType } from "@docspace/shared/enums";
+import { DOCSPACE } from "@docspace/shared/constants";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/settings.react.svg?url";
 /**
  * Array for generation current settings tree.
@@ -425,7 +426,7 @@ export const settingsTree = [
             key: "7-1-1",
             icon: "",
             link: "custom",
-            tKey: "JavascriptSdk:Custom",
+            tKey: "Common:Custom",
           },
           {
             id: "portal-settings_catalog-javascript-sdk_room-selector",
@@ -460,7 +461,7 @@ export const settingsTree = [
             key: "7-1-6",
             icon: "",
             link: "docspace",
-            tKey: "DocSpace",
+            tKey: DOCSPACE,
           },
         ],
       },

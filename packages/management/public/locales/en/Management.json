@@ -7,7 +7,6 @@
   "CurrentSpace": "Current space",
   "DeletePortalText": "Please note: only the owner is able to delete the selected DocSpace. The owner of <1>{{domain}}</1> is <1>{{displayName}}</1> (<5>{{email}}</5>). If you are not the owner, you will not be able to access the DocSpace deletion settings by clicking the DELETE button and will be redirected to the Rooms section.",
   "DocSpaceName": "DocSpace name",
-  "Domain": "Domain",
   "DomainName": "Domain name",
   "DomainNotFound": "Domain not found, please check in DNS settings",
   "DomainSettings": "Domain settings",

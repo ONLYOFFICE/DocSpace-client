@@ -1,6 +1,5 @@
 {
   "Desc": "请设置协作空间的注册数据。",
-  "Domain": "域：",
   "ErrorEmail": "无效邮件地址",
   "ErrorInitWizard": "该服务目前不可用，请稍后重试。",
   "ErrorInitWizardButton": "再试一次",

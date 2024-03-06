@@ -27,7 +27,7 @@ const StatisticsComponent = (props) => {
     defaultRoomIcon,
     className,
     title,
-    color
+    color,
   ) => (
     <div className={className}>
       <ItemIcon
@@ -56,7 +56,7 @@ const StatisticsComponent = (props) => {
     <StyledStatistics>
       <div className="title-container">
         <StyledMainTitle fontWeight={700} fontSize={"16px"}>
-          {t("Statistic")}
+          {t("Statistics")}
         </StyledMainTitle>
         {!isStatisticsAvailable && (
           <Badge

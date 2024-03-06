@@ -18,7 +18,6 @@
   "EnterId": "Ievadiet id",
   "EnterPage": "Ievadiet lapas numuru",
   "EnterWidth": "Ievadiet platumu",
-  "Filter": "Meklēšana, filtrēšana un kārtošana",
   "FrameId": "Rāmja ID",
   "GetCode": "Iegūstiet ievietojamo kodu",
   "Header": "Galvene",
@@ -32,6 +31,7 @@
   "RoomOrFolder": "Telpa vai mape",
   "RoomOrFolderDescription": "Varat atlasīt sadaļu, telpu vai mapi, kuru vēlaties parādīt",
   "SDKDescription": "Izmantojot JavaScript SDK, varat iegult telpu vai mapi no ONLYOFFICE DocSpace savā tīmekļa saskarnē kā iframe. Šeit varat atrast iestatījumus IFRAME parauga izveidei un CSP konfigurēšanai. Lai izmantotu pilnu SDK, skatiet",
+  "SearchFilterAndSort": "Meklēšana, filtrēšana un kārtošana",
   "SearchTerm": "Meklēšanas vienums",
   "SortOrder": "Šķirošanas secība",
   "Title": "Pārvietošanās un nosaukums"

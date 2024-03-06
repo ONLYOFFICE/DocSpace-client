@@ -10,9 +10,9 @@ const DialogHeader = ({ t, isEdit, isChooseRoomType, onArrowClick }) => {
   return (
     <>
       {isEdit ? (
-        t("RoomEditing")
+        <span>{t("RoomEditing")}</span>
       ) : isChooseRoomType ? (
-        t("ChooseRoomType")
+        <span>{t("ChooseRoomType")}</span>
       ) : (
         <div className="header-with-button">
           <IconButton

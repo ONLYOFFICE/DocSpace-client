@@ -49,6 +49,9 @@ const StyledHeader = styled.div`
     line-height: 28px;
   }
 `;
+
+StyledHeader.defaultProps = { theme: Base };
+
 const StyledBody = styled.div<{
   footerVisible: boolean;
   withHeader?: boolean;
@@ -163,7 +166,8 @@ const StyledItem = styled.div<{
     width: 100%;
     max-width: 100%;
 
-    line-height: 18px;
+    line-height: ${({ theme }) =>
+      theme.interfaceDirection === "rtl" ? `20px` : `18px`};
 
     margin-left: 8px;
     ${(props) =>
@@ -264,6 +268,8 @@ const StyledBreadCrumbs = styled.div<{
     }
   }
 `;
+
+StyledBreadCrumbs.defaultProps = { theme: Base };
 
 const StyledItemText = styled(Text)<{ isCurrent: boolean; isLoading: boolean }>`
   ${(props) =>

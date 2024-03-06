@@ -1,8 +1,3 @@
-export enum ArticleAlerts {
-  TeamTraining = "TeamTraining",
-  SubmitToFormGallery = "SubmitToFormGallery",
-}
-
 /**
  * Enum for employee activation status.
  * @readonly
@@ -127,7 +122,7 @@ export const enum FileType {
  */
 export const enum RoomsProviderType {
   Box = 1,
-  DropBox = 2,
+  DropboxV2 = 2,
   GoogleDrive = 3,
   kDrive = 4,
   OneDrive = 5,
@@ -454,4 +449,12 @@ export enum AccountsSearchArea {
   People = "0",
   Groups = "1",
   Any = "2",
+}
+
+export enum MembersSubjectType {
+  User = 0,
+  ExternalLink = 1,
+  Group = 2,
+  InvitationLink = 3,
+  PrimaryExternalLink = 4,
 }

@@ -1,18 +1,21 @@
 /* eslint-disable no-console */
 /* eslint-disable prefer-promise-reject-errors */
 /* eslint-disable class-methods-use-this */
-import firebase from "firebase/app";
-import "firebase/remote-config";
-import "firebase/storage";
-import "firebase/database";
-
-import CampaignsCloudPngUrl from "PUBLIC_DIR/images/campaigns.cloud.png";
-import CampaignsDesktopPngUrl from "PUBLIC_DIR/images/campaigns.desktop.png";
-import CampaignsEducationPngUrl from "PUBLIC_DIR/images/campaigns.education.png";
-import CampaignsEnterprisePngUrl from "PUBLIC_DIR/images/campaigns.enterprise.png";
-import CampaignsIntegrationPngUrl from "PUBLIC_DIR/images/campaigns.integration.png";
+import firebase from "firebase/compat/app";
+import "firebase/compat/remote-config";
+import "firebase/compat/storage";
+import "firebase/compat/database";
 
 import { TFirebaseSettings } from "../api/settings/types";
+
+const fetchTimeoutMillis =
+  (typeof window !== "undefined" &&
+    window.DocSpaceConfig?.firebase?.fetchTimeoutMillis) ||
+  3600000;
+const minimumFetchIntervalMillis =
+  (typeof window !== "undefined" &&
+    window.DocSpaceConfig?.firebase?.minimumFetchIntervalMillis) ||
+  3600000;
 
 class FirebaseHelper {
   remoteConfig: firebase.remoteConfig.RemoteConfig | null = null;
@@ -24,6 +27,8 @@ class FirebaseHelper {
   firebaseDB: firebase.database.Database | null = null;
 
   constructor(settings: TFirebaseSettings) {
+    if (typeof window === "undefined") return;
+
     this.firebaseConfig = settings;
 
     if (!this.isEnabled) return;
@@ -41,8 +46,8 @@ class FirebaseHelper {
     this.firebaseDB = firebase.database();
 
     this.remoteConfig.settings = {
-      fetchTimeoutMillis: 3600000,
-      minimumFetchIntervalMillis: 3600000,
+      fetchTimeoutMillis,
+      minimumFetchIntervalMillis,
     };
 
     this.remoteConfig.defaultConfig = {
@@ -122,7 +127,7 @@ class FirebaseHelper {
     // const res = await this.remoteConfig?.fetchAndActivate();
     await this.remoteConfig?.fetchAndActivate();
 
-    const campaignsValue = this.remoteConfig?.getValue("campaigns");
+    const campaignsValue = this.remoteConfig?.getValue("docspace_campaigns");
     const campaignsString = campaignsValue && campaignsValue.asString();
 
     if (!campaignsValue || !campaignsString) {
@@ -140,30 +145,19 @@ class FirebaseHelper {
     return Promise.resolve(campaigns);
   }
 
-  async getCampaignsImages(banner: string) {
-    // const domain = this.config["authDomain"];
-
-    switch (banner) {
-      case "cloud":
-        return CampaignsCloudPngUrl;
-      case "desktop":
-        return CampaignsDesktopPngUrl;
-      case "education":
-        return CampaignsEducationPngUrl;
-      case "enterprise":
-        return CampaignsEnterprisePngUrl;
-      case "integration":
-        return CampaignsIntegrationPngUrl;
-      default:
-        return "";
-    }
-
-    // return `https://${domain}/images/campaigns.${banner}.png`;
+  async getCampaignsImages(campaign: string) {
+    const domain = this.config?.authDomain;
+    return `https://${domain}/images/campaign.${campaign.toLowerCase()}.svg`;
   }
 
-  async getCampaignsTranslations(banner: string, lng: string) {
+  async getCampaignsTranslations(campaign: string, lng: string) {
     const domain = this.config?.authDomain;
-    return `https://${domain}/locales/${lng}/CampaignPersonal${banner}.json`;
+    return `https://${domain}/locales/${lng}/Campaign${campaign}.json`;
+  }
+
+  async getCampaignConfig(campaign: string) {
+    const domain = this.config?.authDomain;
+    return `https://${domain}/configs/Campaign${campaign}.json`;
   }
 
   async sendCrashReport<T>(report: T) {

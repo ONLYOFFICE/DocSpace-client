@@ -4,7 +4,7 @@ import { globalColors } from "./globalColors";
 import { CommonTheme } from "./commonTheme";
 
 export type TColorScheme = {
-  id: string | number;
+  id: number;
   main: {
     accent: string;
     buttons: string;
@@ -346,13 +346,17 @@ export const getBaseTheme = () => {
       },
 
       svg: {
-        margin: "11px 16px",
+        margin: "11px 8px",
         width: "18px",
         height: "18px",
         minWidth: "18px",
         minHeight: "18px",
         fill: white,
       },
+    },
+
+    socialButtonsGroup: {
+      border: "1px solid #D0D5DA",
     },
 
     groupButton: {
@@ -1669,6 +1673,7 @@ export const getBaseTheme = () => {
 
         disabledColor: grayMid,
         color: black,
+        alternativeColor: gray,
         selectedColor: black,
         maxWidth: "175px",
 
@@ -1686,6 +1691,12 @@ export const getBaseTheme = () => {
         disabledColor: grayMid,
         color: black,
         selectedColor: black,
+      },
+
+      plusBadge: {
+        color: white,
+        bgColor: gray,
+        selectedBgColor: grayMain,
       },
     },
 
@@ -2080,6 +2091,10 @@ export const getBaseTheme = () => {
       gallery: {
         borderColor: "#d0d5da",
         descriptionColor: "#657077",
+      },
+
+      search: {
+        boxShadow: "0px 5px 20px 0px rgba(4, 15, 27, 0.07)",
       },
     },
 
@@ -2833,6 +2848,10 @@ export const getBaseTheme = () => {
         border: `1px solid ${lightErrorStatus}`,
         color: lightErrorStatus,
       },
+
+      backTitle: {
+        color: "#A3A9AE",
+      },
     },
 
     facebookButton: {
@@ -3228,6 +3247,10 @@ export const getBaseTheme = () => {
     sdkPresets: {
       borderColor: "#d0d5da",
       secondaryColor: "#657077",
+    },
+    sideBarRow: {
+      titleColor: black,
+      metaDataColor: gray,
     },
   };
 };

@@ -4,6 +4,12 @@ import { useNavigate } from "react-router-dom";
 import * as Styled from "./index.styled";
 import { Link } from "@docspace/shared/components/link";
 import { withTranslation } from "react-i18next";
+import {
+  Avatar,
+  AvatarRole,
+  AvatarSize,
+} from "@docspace/shared/components/avatar";
+import React from "react";
 
 const GroupsRow = ({
   t,
@@ -88,7 +94,15 @@ const GroupsRow = ({
           onSelect={onSelect}
           onDoubleClick={onOpenGroup}
           onFilesClick={onOpenGroup}
-          element={<div className="group-row-element">{groupName}</div>}
+          element={
+            <Avatar
+              size={AvatarSize.min}
+              userName={item.name}
+              isGroup={true}
+              role={AvatarRole.none}
+              source=""
+            />
+          }
           checked={isChecked}
           isActive={isActive}
           contextOptions={getGroupContextOptions(t, item)}
@@ -110,6 +124,7 @@ const GroupsRow = ({
                 title={item.name}
                 fontWeight={600}
                 fontSize="15px"
+                lineHeight="20px"
                 color={nameColor}
                 isTextOverflow={true}
                 onClick={onOpenGroup}

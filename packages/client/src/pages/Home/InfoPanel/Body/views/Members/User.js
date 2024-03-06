@@ -36,6 +36,8 @@ const User = ({
   setInfoPanelMembers,
   searchValue,
   resendEmailInvitations,
+  setEditMembersGroup,
+  setEditGroupMembersDialogVisible,
 }) => {
   if (!infoPanelSelection) return null;
   if (!user.displayName && !user.name && !user.email) return null;
@@ -196,9 +198,6 @@ const User = ({
     }
   };
 
-  const onToggle = (e, isOpen) => {
-    // setIsScrollLocked(isOpen);
-  };
   const getUserType = (item) => {
     if (item.isOwner) return "owner";
     if (item.isAdmin) return "admin";
@@ -235,8 +234,9 @@ const User = ({
     </div>
   );
 
-  const onOpenGroup = () => {
-    console.log("Open group: ", user.name);
+  const onOpenGroup = (group) => {
+    setEditMembersGroup(group);
+    setEditGroupMembersDialogVisible(true);
   };
 
   const userAvatar = user.hasAvatar
@@ -284,12 +284,16 @@ const User = ({
       <div className="user_body-wrapper">
         <div className="name-wrapper">
           {user.isGroup ? (
-            <Link className="name" type="action" onClick={onOpenGroup}>
+            <Link
+              className="name"
+              type="action"
+              onClick={() => onOpenGroup(user)}
+            >
               {decode(user.name)}
             </Link>
           ) : (
             <Text className="name" data-tooltip-id={uniqueTooltipId}>
-              {decode(user.displayName)}
+              {user?.displayName && decode(user.displayName)}
             </Text>
           )}
           {/* TODO: uncomment when information about online statuses appears */}
@@ -339,7 +343,6 @@ const User = ({
               isLoading={isLoading}
               isMobileView={isMobileOnly}
               directionY="both"
-              onToggle={onToggle}
               displaySelectedOption
             />
           ) : (
@@ -353,35 +356,43 @@ const User = ({
   );
 };
 
-export default inject(({ infoPanelStore, filesStore, peopleStore }) => {
-  const {
-    infoPanelSelection,
-    setIsScrollLocked,
-    infoPanelMembers,
-    setInfoPanelMembers,
-    fetchMembers,
-    searchValue,
-  } = infoPanelStore;
-  const {
-    updateRoomMemberRole,
-    resendEmailInvitations,
-    membersFilter,
-    setMembersFilter,
-  } = filesStore;
+export default inject(
+  ({ infoPanelStore, filesStore, peopleStore, dialogsStore }) => {
+    const {
+      infoPanelSelection,
+      setIsScrollLocked,
+      infoPanelMembers,
+      setInfoPanelMembers,
+      fetchMembers,
+      searchValue,
+    } = infoPanelStore;
 
-  const { changeType: changeUserType } = peopleStore;
+    const {
+      updateRoomMemberRole,
+      resendEmailInvitations,
+      membersFilter,
+      setMembersFilter,
+    } = filesStore;
 
-  return {
-    infoPanelSelection,
-    setIsScrollLocked,
-    updateRoomMemberRole,
-    resendEmailInvitations,
-    changeUserType,
-    membersFilter,
-    setMembersFilter,
-    infoPanelMembers,
-    setInfoPanelMembers,
-    fetchMembers,
-    searchValue,
-  };
-})(observer(User));
+    const { changeType: changeUserType } = peopleStore;
+
+    const { setEditMembersGroup, setEditGroupMembersDialogVisible } =
+      dialogsStore;
+
+    return {
+      infoPanelSelection,
+      setIsScrollLocked,
+      updateRoomMemberRole,
+      resendEmailInvitations,
+      changeUserType,
+      membersFilter,
+      setMembersFilter,
+      infoPanelMembers,
+      setInfoPanelMembers,
+      fetchMembers,
+      searchValue,
+      setEditMembersGroup,
+      setEditGroupMembersDialogVisible,
+    };
+  },
+)(observer(User));

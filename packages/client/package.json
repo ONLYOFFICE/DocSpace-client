@@ -1,6 +1,6 @@
 {
   "name": "@docspace/client",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "private": true,
   "homepage": "",
   "scripts": {
@@ -45,7 +45,7 @@
     "copy-to-clipboard": "^3.3.3",
     "element-resize-detector": "^1.2.4",
     "file-saver": "^2.0.5",
-    "firebase": "^8.10.1",
+    "firebase": "^10.8.0",
     "hex-to-rgba": "^2.0.1",
     "queue-promise": "2.2.1",
     "react-avatar-editor": "^13.0.0",

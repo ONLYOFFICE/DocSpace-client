@@ -12,7 +12,7 @@
     id: null,
     locale: null,
     theme: "Base",
-    editorType: "embedded", //TODO: ["desktop", "embedded"]
+    editorType: "desktop", //TODO: ["desktop", "embedded"]
     editorGoBack: true,
     selectorType: "exceptPrivacyTrashArchiveFolders", //TODO: ["roomsOnly", "userFolderOnly", "exceptPrivacyTrashArchiveFolders", "exceptSortedByTagsFolders"]
     showSelectorCancel: false,
@@ -42,6 +42,9 @@
       sortby: "DateAndTime", //TODO: ["DateAndTime", "AZ", "Type", "Size", "DateAndTimeCreation", "Author"]
       search: "",
       withSubfolders: false,
+    },
+    editorCustomization: {
+      integrationMode: "embed",
     },
     keysForReload: [
       "src",
@@ -75,14 +78,18 @@
     "The current domain is not set in the Content Security Policy (CSP) settings.";
 
   const validateCSP = async (targetSrc) => {
-    const currentSrc = window.location.origin;
+    let currentSrc = window.location.origin;
 
-    if (currentSrc.indexOf(targetSrc) !== -1) return; //TODO: try work with localhost
+    if (currentSrc.indexOf(targetSrc) !== -1) return; // skip check for the same domain
 
     const response = await fetch(`${targetSrc}/api/2.0/security/csp`);
     const res = await response.json();
+
+    currentSrc = window.location.host; // more flexible way to check
+
     const passed =
-      res.response.header && res.response.header.includes(currentSrc);
+      res.response.header &&
+      res.response.header.toLowerCase().includes(currentSrc.toLowerCase());
 
     if (!passed) throw new Error(cspErrorText);
 
@@ -139,22 +146,73 @@
       container.style.justifyContent = "center";
       container.style.alignItems = "center";
 
-      const loader = document.createElement("img");
-      loader.setAttribute("src", `${config.src}/static/images/loader.svg`);
-      loader.setAttribute("width", `64px`);
-      loader.setAttribute("height", `64px`);
+      // const loader = document.createElement("img");
+      // loader.setAttribute("src", `${config.src}/static/images/loader.svg`);
+      // loader.setAttribute("width", `64px`);
+      // loader.setAttribute("height", `64px`);
 
-      if (
-        config.theme === "Dark" ||
-        (config.theme === "System" &&
-          window.matchMedia("(prefers-color-scheme: dark)"))
-      ) {
-        container.style.backgroundColor = "#333333";
-        loader.style.filter =
-          "invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%)";
-      }
+      // if (
+      //   config.theme === "Dark" ||
+      //   (config.theme === "System" &&
+      //     window.matchMedia("(prefers-color-scheme: dark)"))
+      // ) {
+      //   container.style.backgroundColor = "#333333";
+      //   loader.style.filter =
+      //     "invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%)";
+      // }
+
+      const loader = document.createElement("div");
+      const loaderClass = `${config.frameId}-loader__element`;
+      loader.setAttribute("class", loaderClass);
 
       container.appendChild(loader);
+
+      const style = document.createElement("style");
+      style.innerHTML = `
+      @keyframes rotate {
+        0%{
+          transform: rotate(-45deg);
+        }
+        15%{
+          transform: rotate(45deg);
+        }
+        30%{
+          transform: rotate(135deg);
+        }
+        45%{
+          transform: rotate(225deg);
+        }
+        60%, 100%{
+          transform: rotate(315deg);
+        }
+      }
+      
+    .${loaderClass} {
+      width: 74px;
+      height: 74px;
+
+      border: 4px solid rgba(51,51,51, 0.1);
+      border-top-color: #333333;
+      border-radius: 50%;
+
+      transform: rotate(-45deg);
+     
+      position: relative;
+
+      box-sizing: border-box;
+
+      animation: 1s linear infinite rotate;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .${loaderClass} {
+        border-color: rgba(204, 204, 204, 0.1);
+        border-top-color: #CCCCCC;
+      }
+    }
+    `;
+
+      container.appendChild(style);
 
       container.setAttribute("id", config.frameId + "-loader");
 
@@ -213,9 +271,12 @@
               <body style="margin:0;">
                   <div id=${config.frameId}></div>
                   <script id="integration">
-                    const config = {...${JSON.stringify(config, function (key, val) {
-                      return typeof val === "function" ? "" + val : val;
-                    })}, width: "100%", height: "100%", events: {
+                    const config = {...${JSON.stringify(
+                      config,
+                      function (key, val) {
+                        return typeof val === "function" ? "" + val : val;
+                      }
+                    )}, width: "100%", height: "100%", events: {
                       onSelectCallback: eval(${config.events.onSelectCallback + ""}),
                       onCloseCallback: eval(${config.events.onCloseCallback + ""}),
                       onAppReady: eval(${config.events.onAppReady + ""}),
@@ -229,7 +290,9 @@
               </body>
           </html>`;
 
-        const winUrl = URL.createObjectURL(new Blob([winHtml], { type: "text/html" }));
+        const winUrl = URL.createObjectURL(
+          new Blob([winHtml], { type: "text/html" })
+        );
 
         window.open(winUrl, "_blank", `width=610,height=778`);
       });
@@ -285,6 +348,9 @@
 
         case "editor": {
           let goBack = config.editorGoBack;
+          config.editorCustomization.uiTheme = config.theme;
+
+          const customization = JSON.stringify(config.editorCustomization);
 
           if (
             config.events.onEditorCloseCallback &&
@@ -293,7 +359,7 @@
             goBack = "event";
           }
 
-          path = `/doceditor/?fileId=${config.id}&type=${config.editorType}&editorGoBack=${goBack}`;
+          path = `/doceditor/?fileId=${config.id}&type=${config.editorType}&editorGoBack=${goBack}&customization=${customization}`;
 
           if (config.requestToken) {
             path = `${path}&share=${config.requestToken}`;
@@ -304,6 +370,9 @@
 
         case "viewer": {
           let goBack = config.editorGoBack;
+          config.editorCustomization.uiTheme = config.theme;
+
+          const customization = JSON.stringify(config.editorCustomization);
 
           if (
             config.events.onEditorCloseCallback &&
@@ -312,7 +381,7 @@
             goBack = "event";
           }
 
-          path = `/doceditor/?fileId=${config.id}&type=${config.editorType}&action=view&editorGoBack=${goBack}`;
+          path = `/doceditor/?fileId=${config.id}&type=${config.editorType}&action=view&editorGoBack=${goBack}&customization=${customization}`;
 
           if (config.requestToken) {
             path = `${path}&share=${config.requestToken}`;
@@ -461,7 +530,11 @@
 
     initButton(config) {
       const configFull = { ...defaultConfig, ...config };
-      this.config = { ...this.config, ...configFull, events: { ...defaultConfig.events } };
+      this.config = {
+        ...this.config,
+        ...configFull,
+        events: { ...defaultConfig.events },
+      };
 
       const target = document.getElementById(this.config.frameId);
 
@@ -473,7 +546,7 @@
         this.#classNames = target.className;
 
         const isSelfReplace = target.parentNode.isEqualNode(
-          document.getElementById(this.config.frameId + "-container"),
+          document.getElementById(this.config.frameId + "-container")
         );
 
         target && isSelfReplace
@@ -519,8 +592,8 @@
         renderContainer.id = this.config.frameId + "-container";
         renderContainer.classList = ["frame-container"];
         renderContainer.style.position = "relative";
-        renderContainer.style.width = this.config.width;
-        renderContainer.style.height = this.config.height || "100%";
+        renderContainer.style.width = "100%";
+        renderContainer.style.height = "100%";
 
         renderContainer.appendChild(iframe);
         renderContainer.appendChild(frameLoader);
@@ -603,7 +676,9 @@
       target.innerHTML = this.config.destroyText;
       target.className = this.#classNames;
 
-      const targetFrame = document.getElementById(this.config.frameId + "-container");
+      const targetFrame = document.getElementById(
+        this.config.frameId + "-container"
+      );
 
       window.removeEventListener("message", this.#onMessage, false);
       this.#isConnected = false;

@@ -12,7 +12,7 @@ import { DropDown } from "../drop-down";
 import { IconButton } from "../icon-button";
 import { Backdrop } from "../backdrop";
 import { Aside } from "../aside";
-import { Heading, HeadingSize } from "../heading";
+import { Heading, HeadingLevel, HeadingSize } from "../heading";
 import { Link } from "../link";
 import { ContextMenuModel } from "../context-menu";
 
@@ -173,6 +173,10 @@ const ContextMenuButtonPure = ({
     onCloseAction();
   };
 
+  const getLabel = (item: ContextMenuModel) => {
+    return "label" in item ? item.label : "";
+  };
+
   const onDropDownItemClick = (
     item: ContextMenuModel,
     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
@@ -245,7 +249,7 @@ const ContextMenuButtonPure = ({
                   {...item}
                   id={item.id}
                   key={item.key || index}
-                  label={"label" in item ? item.label : ""}
+                  label={getLabel(item)}
                   onClick={(
                     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
                   ) => onDropDownItemClick(item, e)}
@@ -258,7 +262,7 @@ const ContextMenuButtonPure = ({
           <>
             <Backdrop
               onClick={onCloseAction}
-              visible={state.isOpen}
+              visible={state.isOpen || false}
               zIndex={310}
               isAside
             />
@@ -273,6 +277,7 @@ const ContextMenuButtonPure = ({
                   <Heading
                     className="header"
                     size={HeadingSize.medium}
+                    level={HeadingLevel.h1}
                     truncate
                   >
                     {asideHeader}
@@ -296,7 +301,7 @@ const ContextMenuButtonPure = ({
                           fontWeight={600}
                           onClick={(e) => onDropDownItemClick(item, e)}
                         >
-                          {"label" in item ? item.label : ""}
+                          {getLabel(item)}
                         </Link>
                       ),
                   )}
@@ -340,3 +345,4 @@ const compare = (
 };
 
 export const ContextMenuButton = React.memo(ContextMenuButtonPure, compare);
+

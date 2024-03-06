@@ -1,23 +1,43 @@
+import { ShareAccessRights } from "../../enums";
 import { TColorScheme } from "../../themes";
 import { TDirectionX, TDirectionY } from "../../types";
 import { ComboBoxDisplayType, ComboBoxSize } from "./Combobox.enums";
 
 export type TCombobox = null | "badge" | "onlyIcon";
 
-export type TOption = {
-  key: string | number;
-  icon?: string;
-  label: string;
-  color?: string;
-  backgroundColor?: string;
-  border?: string;
-  default?: boolean;
-  disabled?: boolean;
-  description?: string;
-  quota?: "free" | "paid";
-  isSeparator?: boolean;
-  isSelected?: boolean;
-};
+export type TOption =
+  | {
+      key: string | number;
+      icon?: string;
+      label: string;
+      color?: string;
+      backgroundColor?: string;
+      border?: string;
+      default?: boolean;
+      disabled?: boolean;
+      description?: string;
+      quota?: "free" | "paid";
+      isSeparator?: boolean;
+      isSelected?: boolean;
+      internal?: boolean;
+      access?: ShareAccessRights;
+    }
+  | {
+      key: string | number;
+      icon?: undefined;
+      label?: undefined;
+      color?: undefined;
+      backgroundColor?: undefined;
+      border?: undefined;
+      default?: undefined;
+      disabled?: undefined;
+      description?: undefined;
+      quota?: undefined;
+      isSeparator: true;
+      isSelected?: undefined;
+      internal?: undefined;
+      access?: undefined;
+    };
 
 export interface ComboboxProps {
   /** Displays advanced options */
@@ -113,6 +133,7 @@ export interface ComboboxProps {
   isAside?: boolean;
   withBlur?: boolean;
   title?: string;
+  plusBadgeValue?: number;
 }
 
 export interface ComboButtonProps {
@@ -134,6 +155,7 @@ export interface ComboButtonProps {
   tabIndex?: number;
   isLoading?: boolean;
   type?: TCombobox;
+  plusBadgeValue?: number;
 }
 
 export interface ComboButtonThemeProps extends ComboButtonProps {

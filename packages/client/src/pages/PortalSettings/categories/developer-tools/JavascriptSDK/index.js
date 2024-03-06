@@ -2,7 +2,7 @@ import React from "react";
 import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { RoomsType } from "@docspace/shared/constants";
+import { DOCSPACE } from "@docspace/shared/constants";
 import { inject, observer } from "mobx-react";
 
 import { mobile, tablet } from "@docspace/shared/utils/device";
@@ -15,18 +15,21 @@ import { Text } from "@docspace/shared/components/text";
 import CSP from "./sub-components/csp";
 import PresetTile from "./sub-components/PresetTile";
 
-import SimpleRoomImg from "PUBLIC_DIR/images/sdk-presets_simple-room.react.svg?url";
-import ManagerImg from "PUBLIC_DIR/images/sdk-presets_manager.react.svg?url";
+import DocspaceImg from "PUBLIC_DIR/images/sdk-presets_docspace.react.svg?url";
+import PublicRoomImg from "PUBLIC_DIR/images/sdk-presets_public-room.react.svg?url";
 import RoomSelectorImg from "PUBLIC_DIR/images/sdk-presets_room-selector.react.svg?url";
 import FileSelectorImg from "PUBLIC_DIR/images/sdk-presets_file-selector.react.svg?url";
 import EditorImg from "PUBLIC_DIR/images/sdk-presets_editor.react.svg?url";
 import ViewerImg from "PUBLIC_DIR/images/sdk-presets_viewer.react.svg?url";
-import SimpleRoomImgDark from "PUBLIC_DIR/images/sdk-presets_simple-room_dark.react.svg?url";
-import ManagerImgDark from "PUBLIC_DIR/images/sdk-presets_manager_dark.react.svg?url";
+import CustomImg from "PUBLIC_DIR/images/sdk-presets_custom.react.svg?url";
+
+import DocspaceImgDark from "PUBLIC_DIR/images/sdk-presets_docspace_dark.react.svg?url";
+import PublicRoomImgDark from "PUBLIC_DIR/images/sdk-presets_public-room_dark.react.svg?url";
 import RoomSelectorImgDark from "PUBLIC_DIR/images/sdk-presets_room-selector_dark.react.svg?url";
 import FileSelectorImgDark from "PUBLIC_DIR/images/sdk-presets_file-selector_dark.react.svg?url";
 import EditorImgDark from "PUBLIC_DIR/images/sdk-presets_editor_dark.react.svg?url";
 import ViewerImgDark from "PUBLIC_DIR/images/sdk-presets_viewer_dark.react.svg?url";
+import CustomImgDark from "PUBLIC_DIR/images/sdk-presets_custom_dark.react.svg?url";
 
 const SDKContainer = styled(Box)`
   @media ${tablet} {
@@ -89,8 +92,9 @@ const PortalIntegration = (props) => {
 
   const navigate = useNavigate();
 
-  const navigateToSimpleRoom = () => navigate("room");
-  const navigateToManager = () => navigate("manager");
+  const navigateToDocspace = () => navigate("docspace");
+  const navigateToPublicRoom = () => navigate("public-room");
+  const navigateToCustom = () => navigate("custom");
   const navigateToRoomSelector = () => navigate("room-selector");
   const navigateToFileSelector = () => navigate("file-selector");
   const navigateToEditor = () => navigate("editor");
@@ -98,16 +102,16 @@ const PortalIntegration = (props) => {
 
   const presetsData = [
     {
-      title: t("Common:Room"),
-      description: t("SimpleRoomDescription"),
-      image: theme.isBase ? SimpleRoomImg : SimpleRoomImgDark,
-      handleOnClick: navigateToSimpleRoom,
+      title: DOCSPACE,
+      description: t("DocspaceDescription"),
+      image: theme.isBase ? DocspaceImg : DocspaceImgDark,
+      handleOnClick: navigateToDocspace,
     },
     {
-      title: t("Manager"),
-      description: t("ManagerDescription"),
-      image: theme.isBase ? ManagerImg : ManagerImgDark,
-      handleOnClick: navigateToManager,
+      title: t("Files:PublicRoom"),
+      description: t("PublicRoomDescription"),
+      image: theme.isBase ? PublicRoomImg : PublicRoomImgDark,
+      handleOnClick: navigateToPublicRoom,
     },
     {
       title: t("Editor"),
@@ -132,6 +136,12 @@ const PortalIntegration = (props) => {
       description: t("FileSelectorDescription"),
       image: theme.isBase ? FileSelectorImg : FileSelectorImgDark,
       handleOnClick: navigateToFileSelector,
+    },
+    {
+      title: t("Common:Custom"),
+      description: t("CustomDescription"),
+      image: theme.isBase ? CustomImg : CustomImgDark,
+      handleOnClick: navigateToCustom,
     },
   ];
 

@@ -1,19 +1,24 @@
 import React from "react";
 
-import StyledText from "./Text.styled";
+import StyledText, { StyledAutoDirSpan } from "./Text.styled";
 import { TextProps } from "./Text.types";
 
 const TextPure = ({
   title,
   tag,
   as,
-  fontSize,
+  fontSize = "13px",
   fontWeight,
   color,
-  textAlign,
+  textAlign = "left",
   onClick,
+  dir,
+  children,
   ...rest
 }: TextProps) => {
+  const isAutoDir = dir === "auto";
+  const dirProp = isAutoDir ? {} : { dir };
+
   return (
     <StyledText
       fontSizeProp={fontSize}
@@ -24,19 +29,16 @@ const TextPure = ({
       title={title}
       data-testid="text"
       onClick={onClick}
+      {...dirProp}
       {...rest}
-    />
+    >
+      {isAutoDir ? (
+        <StyledAutoDirSpan dir="auto">{children}</StyledAutoDirSpan>
+      ) : (
+        children
+      )}
+    </StyledText>
   );
-};
-
-TextPure.defaultProps = {
-  textAlign: "left",
-  fontSize: "13px",
-  truncate: false,
-  isBold: false,
-  isInline: false,
-  isItalic: false,
-  noSelect: false,
 };
 
 const Text = React.memo<TextProps>(TextPure);

@@ -59,7 +59,7 @@ const RadioButtonGroup = ({
             key={option.value}
             name={name || ""}
             value={option.value}
-            isChecked={selectedOption === option.value}
+            isChecked={`${selectedOption}` === `${option.value}`}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               handleOptionChange(e);
               onClick(e);

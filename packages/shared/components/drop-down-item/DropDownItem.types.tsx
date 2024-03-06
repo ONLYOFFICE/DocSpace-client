@@ -49,4 +49,3 @@ export interface DropDownItemProps {
   isBeta?: boolean;
   additionalElement?: React.ReactNode;
 }
-

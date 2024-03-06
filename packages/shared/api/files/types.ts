@@ -43,6 +43,16 @@ export type TFileSecurity = {
   SubmitToFormGallery: boolean;
 };
 
+export type TAvailableExternalRights = {
+  Comment: boolean;
+  CustomFilter: boolean;
+  Editing: boolean;
+  None: boolean;
+  Read: boolean;
+  Restrict: boolean;
+  Review: boolean;
+};
+
 export type TFile = {
   access: ShareAccessRights;
   canShare: boolean;
@@ -72,6 +82,8 @@ export type TFile = {
   viewAccessibility: TFileViewAccessibility;
   viewUrl: string;
   webUrl: string;
+  availableExternalRights?: TAvailableExternalRights;
+  providerKey?: string;
 };
 
 export type TOpenEditRequest = {
@@ -81,6 +93,13 @@ export type TOpenEditRequest = {
   type: string;
   file: TFile;
   errorMessage: string;
+};
+
+export type TGetReferenceData = {
+  fileKey: number | string;
+  instanceId: string;
+  sourceFileId?: number;
+  path?: string;
 };
 
 export type TGetReferenceDataRequest = {
@@ -345,6 +364,8 @@ export type TFileLink = {
     requestToken: string;
     shareLink: string;
     title: string;
+    expirationDate?: string;
+    internal?: boolean;
   };
 };
 

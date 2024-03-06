@@ -18,7 +18,6 @@
   "EnterId": "Wpisz ID",
   "EnterPage": "Wpisz numer strony",
   "EnterWidth": "Wpisz szerokość",
-  "Filter": "Szukaj, Filtruj i Sortuj",
   "FrameId": "ID ramki",
   "GetCode": "Uzyskaj kod do wstawienia",
   "Header": "Nagłówek",
@@ -32,6 +31,7 @@
   "RoomOrFolder": "Pokój lub Katalog",
   "RoomOrFolderDescription": "Możesz wybrać sekcję, pokój lub katalog, który będzie się wyświetlać",
   "SDKDescription": "Korzystając z zestawu SDK JavaScript możesz osadzić pokój lub katalog z ONLYOFFICE DocSpace w interfejsie swojej strony internetowej jako iframe. Tutaj znajdziesz ustawienia umożliwiające utworzenie przykładowej ramki iframe i konfigurację Zasad zabezpieczeń zawartości (CSP). Aby skorzystać z pełnego zestawu SDK, sprawdź",
+  "SearchFilterAndSort": "Szukaj, Filtruj i Sortuj",
   "SearchTerm": "Wyszukaj frazę",
   "SortOrder": "Kolejność",
   "Title": "Nawigacja i tytuł"

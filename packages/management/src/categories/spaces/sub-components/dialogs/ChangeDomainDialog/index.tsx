@@ -8,8 +8,8 @@ import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { useStore } from "SRC_DIR/store";
-import { parseDomain } from "SRC_DIR/utils";
 import { toastr } from "@docspace/shared/components/toast";
+import { parseDomain } from "@docspace/shared/utils/common";
 
 const StyledModal = styled(ModalDialogContainer)`
   .create-docspace-input-block {

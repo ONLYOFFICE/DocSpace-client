@@ -33,7 +33,7 @@ const observedKeys = [
 
 const infoMembers = "info_members";
 const infoHistory = "info_history";
-// const infoDetails = "info_details";
+const infoDetails = "info_details";
 
 class InfoPanelStore {
   userStore = null;
@@ -78,7 +78,15 @@ class InfoPanelStore {
   // Setters
 
   setIsVisible = (bool) => {
-    this.setView(infoMembers);
+    if (
+      this.infoPanelSelectedItems.length &&
+      !this.infoPanelSelectedItems[0]?.isRoom
+    ) {
+      this.setView(infoDetails);
+    } else {
+      this.setView(infoMembers);
+    }
+
     this.isVisible = bool;
     this.isScrollLocked = false;
   };
@@ -198,8 +206,11 @@ class InfoPanelStore {
   getViewItem = () => {
     const isRooms = this.getIsRooms();
 
+    const pathname = window.location.pathname.toLowerCase();
+    const isMedia = pathname.indexOf("view") !== -1;
+
     if (
-      isRooms &&
+      (isRooms || isMedia) &&
       this.roomsView === infoMembers &&
       !this.infoPanelSelectedItems[0]?.isRoom
     ) {
@@ -485,7 +496,7 @@ class InfoPanelStore {
     if (administrators.length && !hasPrevAdminsTitle) {
       administrators.unshift({
         id: "administration",
-        displayName: t("Administration"),
+        displayName: t("InfoPanel:Administration"),
         isTitle: true,
       });
     }
@@ -503,7 +514,11 @@ class InfoPanelStore {
     let hasPrevUsersTitle = this.getHasPrevTitle(users, "user");
 
     if (users.length && !hasPrevUsersTitle) {
-      users.unshift({ id: "user", displayName: t("Users"), isTitle: true });
+      users.unshift({
+        id: "user",
+        displayName: t("InfoPanel:Users"),
+        isTitle: true,
+      });
     }
 
     let hasPrevExpectedTitle = this.getHasPrevTitle(
@@ -514,7 +529,7 @@ class InfoPanelStore {
     if (expectedMembers.length && !hasPrevExpectedTitle) {
       expectedMembers.unshift({
         id: "expected",
-        displayName: t("ExpectUsers"),
+        displayName: t("InfoPanel:ExpectUsers"),
         isTitle: true,
         isExpect: true,
       });
@@ -601,20 +616,30 @@ class InfoPanelStore {
     };
   };
 
-  addInfoPanelMembers = (t, members, clearFilter) => {
-    const newMembers = this.convertMembers(t, members, clearFilter);
+  addInfoPanelMembers = (t, members) => {
+    const convertedMembers = this.convertMembers(t, members);
 
     if (this.infoPanelMembers) {
       const { roomId, administrators, users, expected, groups } =
         this.infoPanelMembers;
 
-      this.setInfoPanelMembers({
+      const mergedMembers = {
         roomId: roomId,
-        administrators: [...administrators, ...newMembers.administrators],
-        users: [...users, ...newMembers.users],
-        expected: [...expected, ...newMembers.expectedMembers],
-        groups: [...groups, ...newMembers.groups],
-      });
+        administrators: [...administrators, ...convertedMembers.administrators],
+        users: [...users, ...convertedMembers.users],
+        expected: [...expected, ...convertedMembers.expectedMembers],
+        groups: [...groups, ...convertedMembers.groups],
+      };
+
+      this.addMembersTitle(
+        t,
+        mergedMembers.administrators,
+        mergedMembers.users,
+        mergedMembers.expected,
+        mergedMembers.groups,
+      );
+
+      this.setInfoPanelMembers(mergedMembers);
     }
   };
 
@@ -646,14 +671,13 @@ class InfoPanelStore {
   ) => {
     const { getFileInfo } = this.filesStore;
 
-    const expDate = moment(expirationDate);
     const res = await editExternalLink(
       fileId,
       linkId,
       access,
       primary,
       internal,
-      expDate,
+      expirationDate,
     );
     await getFileInfo(fileId);
     return res;

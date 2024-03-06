@@ -1,6 +1,10 @@
 import axios, { AxiosRequestConfig } from "axios";
-
-import { ConflictResolveType, FolderType } from "../../enums";
+import moment from "moment";
+import {
+  ConflictResolveType,
+  FolderType,
+  ShareAccessRights,
+} from "../../enums";
 import {
   checkFilterInstance,
   decodeDisplayName,
@@ -22,6 +26,7 @@ import {
   TFolder,
   TGetFolder,
   TGetFolderPath,
+  TGetReferenceData,
   TGetReferenceDataRequest,
   TOpenEditRequest,
   TOperation,
@@ -73,12 +78,7 @@ export async function openEdit(
   return res;
 }
 
-export async function getReferenceData(data: {
-  fileKey: number;
-  instanceId: string;
-  sourceFileId: number;
-  path: string;
-}) {
+export async function getReferenceData(data: TGetReferenceData) {
   const options: AxiosRequestConfig = {
     method: "post",
     url: `/files/file/referencedata`,
@@ -159,8 +159,16 @@ export async function getFoldersTree() {
 
   return folders.map((data, index) => {
     const { new: newItems, pathParts, current } = data;
-    const { foldersCount, filesCount } = current;
-    const { parentId, title, id, rootFolderType, security } = current;
+
+    const {
+      parentId,
+      title,
+      id,
+      rootFolderType,
+      security,
+      foldersCount,
+      filesCount,
+    } = current;
 
     const type = +rootFolderType;
 
@@ -180,6 +188,7 @@ export async function getFoldersTree() {
       filesCount,
       newItems,
       security,
+      new: newItems,
     } as TFolder;
   });
 }
@@ -346,8 +355,8 @@ export async function deleteFolder(
 export async function createFile(
   folderId: number,
   title: string,
-  templateId: number,
-  formId: number,
+  templateId?: number,
+  formId?: number,
 ) {
   const data = { title, templateId, formId };
   const options: AxiosRequestConfig = {
@@ -447,9 +456,9 @@ export async function getFileInfo(fileId: number) {
 }
 
 export async function updateFile(
-  fileId: string,
+  fileId: string | number,
   title: string,
-  lastVersion: number,
+  lastVersion?: number,
 ) {
   const data = { title, lastVersion };
   const options: AxiosRequestConfig = {
@@ -632,7 +641,7 @@ export async function getProgress() {
 }
 
 export async function checkFileConflicts(
-  destFolderId: number,
+  destFolderId: number | string,
   folderIds: number[],
   fileIds: number[],
 ) {
@@ -727,14 +736,18 @@ export async function getNewFiles(folderId: number) {
 }
 
 // TODO: update res type
-export async function convertFile(fileId: null, password = null, sync = false) {
+export async function convertFile(
+  fileId: string | number | null,
+  password = null,
+  sync = false,
+) {
   const data = { password, sync };
 
-  const res = await request({
+  const res = (await request({
     method: "put",
     url: `/files/file/${fileId}/checkconversion`,
     data,
-  });
+  })) as { result: { webUrl: string } }[];
 
   return res;
 }
@@ -934,9 +947,9 @@ export function getSettingsThirdParty() {
   return request({ method: "get", url: "files/thirdparty/backup" });
 }
 
-// export function deleteThirdParty(providerId) {
-//   return request({ method: "delete", url: `files/thirdparty/${providerId}` });
-// }
+export function deleteThirdParty(providerId: string) {
+  return request({ method: "delete", url: `files/thirdparty/${providerId}` });
+}
 
 export async function getThirdPartyCapabilities() {
   const res = (await request({
@@ -1022,12 +1035,14 @@ export async function getEncryptionKeys() {
 }
 
 // TODO: Need update res type
-export function getEncryptionAccess(fileId: number) {
-  return request({
+export async function getEncryptionAccess(fileId: number | string) {
+  const res = (await request({
     method: "get",
     url: `privacyroom/access/${fileId}`,
     data: fileId,
-  });
+  })) as { [key: string]: string | boolean };
+
+  return res;
 }
 
 // export function updateFileStream(file, fileId, encrypted, forcesave) {
@@ -1094,7 +1109,7 @@ export async function createThumbnails(fileIds: number[]) {
   return res;
 }
 
-export async function getPresignedUri(fileId: number) {
+export async function getPresignedUri(fileId: number | string) {
   const res = (await request({
     method: "get",
     url: `files/file/${fileId}/presigned`,
@@ -1103,13 +1118,14 @@ export async function getPresignedUri(fileId: number) {
   return res;
 }
 
-// TODO: Need update res type
-export function checkFillFormDraft(fileId: number) {
-  return request({
+export async function checkFillFormDraft(fileId: number | string) {
+  const res = (await request({
     method: "post",
     url: `files/masterform/${fileId}/checkfillformdraft`,
     data: { fileId },
-  });
+  })) as string;
+
+  return res;
 }
 
 export async function fileCopyAs(
@@ -1179,7 +1195,7 @@ export async function getSharedUsers(fileId: number) {
     url: `/files/file/${fileId}/sharedusers`,
   };
 
-  const res = (await request(options)) as TSharedUsers;
+  const res = (await request(options)) as TSharedUsers[];
 
   return res;
 }
@@ -1190,14 +1206,14 @@ export async function getProtectUsers(fileId: number) {
     url: `/files/file/${fileId}/protectusers`,
   };
 
-  const res = (await request(options)) as TSharedUsers;
+  const res = (await request(options)) as TSharedUsers[];
 
   return res;
 }
 
 export async function sendEditorNotify(
-  fileId: number,
-  actionLink: {},
+  fileId: number | string,
+  actionLink: string,
   emails: string[],
   message: string,
 ) {
@@ -1258,7 +1274,7 @@ export async function getFileLink(fileId: number) {
 }
 
 export async function getExternalLinks(
-  fileId: number,
+  fileId: number | string,
   startIndex = 0,
   count = 50,
 ) {
@@ -1267,7 +1283,7 @@ export async function getExternalLinks(
   const res = (await request({
     method: "get",
     url: `files/file/${fileId}/links${linkParams}`,
-  })) as TFileLink[];
+  })) as { items: TFileLink[] };
 
   return res;
 }
@@ -1282,12 +1298,12 @@ export async function getPrimaryLink(fileId: number) {
 }
 
 export async function editExternalLink(
-  fileId: number,
-  linkId: number,
+  fileId: number | string,
+  linkId: number | string,
   access: number,
   primary: boolean,
   internal: boolean,
-  expirationDate: string,
+  expirationDate: moment.Moment,
 ) {
   const res = (await request({
     method: "put",
@@ -1299,8 +1315,8 @@ export async function editExternalLink(
 }
 
 export async function addExternalLink(
-  fileId: number,
-  access: number,
+  fileId: number | string,
+  access: ShareAccessRights,
   primary: boolean,
   internal: boolean,
 ) {

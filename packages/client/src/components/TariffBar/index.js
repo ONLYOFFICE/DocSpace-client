@@ -27,7 +27,7 @@ const StyledWrapper = styled.div`
 
 const PROXY_BASE_URL = combineUrl(
   window.DocSpaceConfig?.proxy?.url,
-  "/portal-settings"
+  "/portal-settings",
 );
 
 const TariffBar = ({
@@ -50,7 +50,7 @@ const TariffBar = ({
   const onClick = () => {
     const paymentPageUrl = combineUrl(
       PROXY_BASE_URL,
-      "/payments/portal-payments"
+      "/payments/portal-payments",
     );
     navigate(paymentPageUrl);
   };
@@ -69,7 +69,7 @@ const TariffBar = ({
         isPaymentPageAvailable,
         isNonProfit,
         isFreeTariff,
-        isGracePeriod
+        isGracePeriod,
       )
     : getEnterpriseBar(
         t,
@@ -79,7 +79,7 @@ const TariffBar = ({
         isLicenseExpiring,
         isLicenseDateExpired,
         trialDaysLeft,
-        paymentDate
+        paymentDate,
       );
 
   if (!tariffBar) return <></>;
@@ -136,5 +136,5 @@ export default inject(
       paymentDate,
       trialDaysLeft,
     };
-  }
+  },
 )(observer(TariffBar));

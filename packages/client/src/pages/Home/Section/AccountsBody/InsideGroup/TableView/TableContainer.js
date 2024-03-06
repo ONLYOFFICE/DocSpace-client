@@ -17,12 +17,6 @@ import { TableVersions } from "SRC_DIR/helpers/constants";
 const COLUMNS_SIZE = `insideGroupColumnsSize_ver-${TableVersions.InsideGroup}`;
 const INFO_PANEL_COLUMNS_SIZE = `infoPanelInsideGroupPeopleColumnsSize_ver-${TableVersions.InsideGroup}`;
 
-const marginCss = css`
-  margin-top: -1px;
-  border-top: ${(props) =>
-    `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
-`;
-
 const userNameCss = css`
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
@@ -34,8 +28,6 @@ const userNameCss = css`
           margin-left: -24px;
           padding-left: 24px;
         `}
-
-  ${marginCss}
 `;
 
 const contextCss = css`
@@ -49,8 +41,6 @@ const contextCss = css`
           margin-right: -20px;
           padding-right: 20px;
         `}
-
-  ${marginCss}
 `;
 
 const StyledTableContainer = styled(TableContainer)`
@@ -80,14 +70,11 @@ const StyledTableContainer = styled(TableContainer)`
     .table-row {
       .table-container_user-name-cell,
       .table-container_row-context-menu-wrapper {
-        margin-top: -1px;
         border-image-slice: 1;
-        border-top: 1px solid;
       }
       .table-container_user-name-cell {
         ${userNameCss}
-        border-left: 0; //for Safari macOS
-        border-right: 0; //for Safari macOS
+        border-inline: 0; //for Safari macOS
 
         border-image-source: ${(props) => `linear-gradient(to right, 
           ${props.theme.filesSection.tableView.row.borderColorTransition} 17px, ${props.theme.filesSection.tableView.row.borderColor} 31px)`};
@@ -110,12 +97,6 @@ const StyledTableContainer = styled(TableContainer)`
       .table-container_row-context-menu-wrapper {
         ${contextCss}
       }
-
-      .table-container_user-name-cell,
-      .table-container_row-context-menu-wrapper {
-        border-bottom: ${(props) =>
-          `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
-      }
     }
   }
 `;
@@ -137,8 +118,9 @@ const Table = ({
   withPaging,
   canChangeUserType,
   currentDeviceType,
-  typeAccountsColumnIsEnabled,
-  emailAccountsColumnIsEnabled,
+  typeAccountsInsideGroupColumnIsEnabled,
+  groupAccountsInsideGroupColumnIsEnabled,
+  emailAccountsInsideGroupColumnIsEnabled,
   setCurrentGroup,
 }) => {
   const ref = useRef(null);
@@ -175,7 +157,7 @@ const Table = ({
         hasMoreFiles={false}
         itemCount={peopleList.length}
         filesLength={peopleList.length}
-        itemHeight={49}
+        itemHeight={48}
         useReactWindow={!withPaging}
       >
         {peopleList.map((item, index) => (
@@ -190,8 +172,15 @@ const Table = ({
             canChangeUserType={canChangeUserType}
             hideColumns={hideColumns}
             itemIndex={index}
-            typeAccountsColumnIsEnabled={typeAccountsColumnIsEnabled}
-            emailAccountsColumnIsEnabled={emailAccountsColumnIsEnabled}
+            typeAccountsInsideGroupColumnIsEnabled={
+              typeAccountsInsideGroupColumnIsEnabled
+            }
+            groupAccountsInsideGroupColumnIsEnabled={
+              groupAccountsInsideGroupColumnIsEnabled
+            }
+            emailAccountsInsideGroupColumnIsEnabled={
+              emailAccountsInsideGroupColumnIsEnabled
+            }
             infoPanelVisible={infoPanelVisible}
             setCurrentGroup={setCurrentGroup}
           />
@@ -226,8 +215,11 @@ export default inject(
     const { isAdmin, isOwner, id: userId } = userStore.user;
 
     const { canChangeUserType } = accessRightsStore;
-    const { typeAccountsColumnIsEnabled, emailAccountsColumnIsEnabled } =
-      tableStore;
+    const {
+      typeAccountsInsideGroupColumnIsEnabled,
+      groupAccountsInsideGroupColumnIsEnabled,
+      emailAccountsInsideGroupColumnIsEnabled,
+    } = tableStore;
 
     return {
       peopleList,
@@ -243,9 +235,11 @@ export default inject(
 
       canChangeUserType,
       currentDeviceType,
-      typeAccountsColumnIsEnabled,
-      emailAccountsColumnIsEnabled,
-      setCurrentGroup:peopleStore.groupsStore.setCurrentGroup,
+      typeAccountsInsideGroupColumnIsEnabled,
+      groupAccountsInsideGroupColumnIsEnabled,
+      emailAccountsInsideGroupColumnIsEnabled,
+
+      setCurrentGroup: peopleStore.groupsStore.setCurrentGroup,
     };
   },
 )(observer(Table));

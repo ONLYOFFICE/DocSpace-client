@@ -11,18 +11,33 @@ import IOSReactSvgUrl from "PUBLIC_DIR/images/iOS.react.svg?url";
 import { Text } from "../../text";
 import { IconButton } from "../../icon-button";
 
+import { LANGUAGE } from "../../../constants";
+import { getLanguage, getCookie } from "../../../utils";
+
 import { StyledArticleApps } from "../Article.styled";
 import { ArticleAppsProps } from "../Article.types";
+import { SUPPORTED_LANGUAGES } from "../Article.constants";
+
+const lng: string[] | string = getCookie(LANGUAGE) || "en";
+const language = getLanguage(typeof lng === "object" ? lng[0] : lng);
+
+const getLink = () => {
+  const currentLng = language.split("-")[0];
+  if (SUPPORTED_LANGUAGES.includes(currentLng)) {
+    return `https://www.onlyoffice.com/${currentLng}`;
+  }
+  return "https://www.onlyoffice.com";
+};
 
 const ArticleApps = React.memo(
   ({ showText, withDevTools }: ArticleAppsProps) => {
     const { t } = useTranslation(["Translations"]);
-
     const theme = useTheme();
 
-    const desktopLink = "https://www.onlyoffice.com/desktop.aspx";
-    const androidLink = "https://www.onlyoffice.com/office-for-android.aspx";
-    const iosLink = "https://www.onlyoffice.com/office-for-ios.aspx";
+    const baseUrl = getLink();
+    const desktopLink = `${baseUrl}/desktop.aspx`;
+    const androidLink = `${baseUrl}/office-for-android.aspx`;
+    const iosLink = `${baseUrl}/office-for-ios.aspx`;
 
     if (!showText) return null;
 
@@ -83,4 +98,3 @@ const ArticleApps = React.memo(
 ArticleApps.displayName = "ArticleApps";
 
 export default ArticleApps;
-

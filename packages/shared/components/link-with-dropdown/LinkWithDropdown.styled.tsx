@@ -240,4 +240,3 @@ export {
   StyledLinkWithDropdown,
   Caret,
 };
-

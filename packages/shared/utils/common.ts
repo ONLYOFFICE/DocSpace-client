@@ -23,15 +23,16 @@ import BackgroundPatternRedReactSvgUrl from "PUBLIC_DIR/images/background.patter
 import BackgroundPatternPurpleReactSvgUrl from "PUBLIC_DIR/images/background.pattern.purple.react.svg?url";
 import BackgroundPatternLightBlueReactSvgUrl from "PUBLIC_DIR/images/background.pattern.lightBlue.react.svg?url";
 import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.pattern.black.react.svg?url";
+import { parseAddress } from "./email";
 
 import {
-  ArticleAlerts,
   FolderType,
   RoomsType,
   ShareAccessRights,
   ThemeKeys,
+  ErrorKeys,
 } from "../enums";
-import { LANGUAGE, RTL_LANGUAGES } from "../constants";
+import { LANGUAGE, PUBLIC_MEDIA_VIEW_URL, RTL_LANGUAGES } from "../constants";
 
 import { TI18n } from "../types";
 import { TUser } from "../api/people/types";
@@ -89,7 +90,10 @@ export function createPasswordHash(
 }
 
 export const isPublicRoom = () => {
-  return window.location.pathname === "/rooms/share";
+  return (
+    window.location.pathname === "/rooms/share" ||
+    window.location.pathname.includes(PUBLIC_MEDIA_VIEW_URL)
+  );
 };
 
 export const getUserTypeLabel = (
@@ -112,6 +116,71 @@ export const getUserTypeLabel = (
   }
 };
 
+export const parseDomain = (
+  domain: string,
+  setError: Function,
+  t: (key: string) => string,
+) => {
+  const parsedDomain = parseAddress(`test@${domain}`);
+
+  if (parsedDomain?.parseErrors.length > 0) {
+    const translatedErrors = parsedDomain.parseErrors.map((error) => {
+      switch (error.errorKey) {
+        case ErrorKeys.LocalDomain:
+          return t("Common:LocalDomain");
+        case ErrorKeys.IncorrectDomain:
+        case ErrorKeys.IncorrectEmail:
+          return t("Common:IncorrectDomain");
+        case ErrorKeys.DomainIpAddress:
+          return t("Common:DomainIpAddress");
+        case ErrorKeys.PunycodeDomain:
+          return t("Common:PunycodeDomain");
+        case ErrorKeys.PunycodeLocalPart:
+          return t("Common:PunycodeLocalPart");
+        case ErrorKeys.IncorrectLocalPart:
+          return t("Common:IncorrectLocalPart");
+        case ErrorKeys.SpacesInLocalPart:
+          return t("Common:SpacesInLocalPart");
+        case ErrorKeys.MaxLengthExceeded:
+          return t("Common:MaxLengthExceeded");
+        default:
+          return t("Common:IncorrectDomain");
+      }
+    });
+
+    setError(translatedErrors);
+  }
+
+  return parsedDomain.isValid();
+};
+
+export const validatePortalName = (
+  value: string,
+  nameValidator: { minLength: number; maxLength: number; regex: RegExp },
+  setError: Function,
+  t: (key: string) => string,
+) => {
+  const validName = new RegExp(nameValidator.regex);
+  switch (true) {
+    case value === "":
+      return setError(t("Settings:PortalNameEmpty"));
+    case value.length < nameValidator.minLength ||
+      value.length > nameValidator.maxLength:
+      return setError(
+        t("Settings:PortalNameLength", {
+          minLength: nameValidator.minLength,
+          maxLength: nameValidator.maxLength,
+        }),
+      );
+    case !validName.test(value):
+      return setError(t("Settings:PortalNameIncorrect"));
+
+    default:
+      setError(null);
+  }
+  return validName.test(value);
+};
+
 export const getShowText = () => {
   const showArticle = localStorage.getItem("showArticle");
 
@@ -124,30 +193,6 @@ export const getShowText = () => {
 
 export const isManagement = () => {
   return window.location.pathname.includes("management");
-};
-
-export const initArticleAlertsData = () => {
-  const savedArticleAlertsData = localStorage.getItem("articleAlertsData");
-  if (savedArticleAlertsData)
-    return JSON.parse(savedArticleAlertsData) as {
-      current: ArticleAlerts;
-      available: ArticleAlerts[];
-    };
-
-  const articleAlertsArray = Object.values(ArticleAlerts).filter(
-    (item, index) => Object.values(ArticleAlerts).indexOf(item) === index,
-  );
-  const defaultArticleAlertsData = {
-    current: articleAlertsArray[0],
-    available: articleAlertsArray,
-  };
-
-  localStorage.setItem(
-    "articleAlertsData",
-    JSON.stringify(defaultArticleAlertsData),
-  );
-
-  return defaultArticleAlertsData;
 };
 
 export function updateTempContent(isAuth = false) {
@@ -212,9 +257,9 @@ export const getUserRole = (user: TUser) => {
     user.access === ShareAccessRights.RoomManager ||
     user.access === ShareAccessRights.Collaborator
   )
-    //TODO: Change to People Product Id const
+    // TODO: Change to People Product Id const
     return "admin";
-  //TODO: Need refactoring
+  // TODO: Need refactoring
   if (user.isVisitor) return "user";
   if (user.isCollaborator) return "collaborator";
   if (user.isRoomAdmin) return "manager";
@@ -301,7 +346,30 @@ export function getProviderTranslation(
       return "";
   }
 }
-
+export function getProviderLabel(provider: string, t: (key: string) => string) {
+  switch (provider) {
+    case "apple":
+      return t("Common:ProviderApple");
+    case "google":
+      return t("Common:ProviderGoogle");
+    case "facebook":
+      return t("Common:ProviderFacebook");
+    case "twitter":
+      return t("Common:ProviderTwitter");
+    case "linkedin":
+      return t("Common:ProviderLinkedIn");
+    case "microsoft":
+      return t("Common:ProviderMicrosoft");
+    case "sso":
+      return t("Common:ProviderSso");
+    case "zoom":
+      return t("Common:ProviderZoom");
+    case "sso-full":
+      return t("Common:ProviderSsoSetting");
+    default:
+      return "";
+  }
+}
 export const isLanguageRtl = (lng: string) => {
   if (!lng) return;
 
@@ -510,7 +578,10 @@ export const frameCallEvent = (eventReturnData: unknown) => {
   );
 };
 
-export const frameCallCommand = (commandName: string, commandData: unknown) => {
+export const frameCallCommand = (
+  commandName: string,
+  commandData?: unknown,
+) => {
   window.parent.postMessage(
     JSON.stringify({
       type: "onCallCommand",
@@ -527,7 +598,7 @@ export const getPowerFromBytes = (bytes: number, maxPower = 6) => {
 };
 
 export const getSizeFromBytes = (bytes: number, power: number) => {
-  return parseFloat((bytes / Math.pow(1024, power)).toFixed(2));
+  return parseFloat((bytes / 1024 ** power).toFixed(2));
 };
 
 export const getConvertedSize = (t: (key: string) => string, bytes: number) => {
@@ -577,7 +648,7 @@ export const getSpaceQuotaAsText = (
 };
 
 export const conversionToBytes = (size: number, power: number) => {
-  const value = Math.floor(size) * Math.pow(1024, power);
+  const value = Math.floor(size) * 1024 ** power;
   return value.toString();
 };
 
@@ -834,25 +905,29 @@ export const RoomsTypes = RoomsTypeValues.reduce<Record<number, number>>(
 );
 
 export const getSystemTheme = () => {
-  const isDesktopClient = window.AscDesktopEditor !== undefined;
-  const desktopClientTheme = window?.RendererProcessVariable?.theme;
-  const isDark =
-    desktopClientTheme?.id === "theme-dark" ||
-    desktopClientTheme?.id === "theme-contrast-dark" ||
-    (desktopClientTheme?.id === "theme-system" &&
-      desktopClientTheme?.system === "dark");
+  if (typeof window !== "undefined") {
+    const isDesktopClient = window?.AscDesktopEditor !== undefined;
+    const desktopClientTheme = window?.RendererProcessVariable?.theme;
+    const isDark =
+      desktopClientTheme?.id === "theme-dark" ||
+      desktopClientTheme?.id === "theme-contrast-dark" ||
+      (desktopClientTheme?.id === "theme-system" &&
+        desktopClientTheme?.system === "dark");
 
-  return isDesktopClient
-    ? isDark
-      ? ThemeKeys.DarkStr
-      : ThemeKeys.BaseStr
-    : window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? ThemeKeys.DarkStr
-      : ThemeKeys.BaseStr;
+    return isDesktopClient
+      ? isDark
+        ? ThemeKeys.DarkStr
+        : ThemeKeys.BaseStr
+      : window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? ThemeKeys.DarkStr
+        : ThemeKeys.BaseStr;
+  }
+
+  return ThemeKeys.BaseStr;
 };
 
-export const getEditorTheme = (theme: ThemeKeys) => {
+export const getEditorTheme = (theme?: ThemeKeys) => {
   switch (theme) {
     case ThemeKeys.BaseStr:
       return "default-light";

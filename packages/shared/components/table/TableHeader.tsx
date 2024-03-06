@@ -1305,7 +1305,7 @@ class TableHeader extends React.Component<
         tableInfoPanelContainer.forEach((item, index) => {
           const column = document.getElementById(`column_${index}`);
 
-          if (column?.dataset?.minWidth) {
+          if (column?.dataset?.minWidth && column?.dataset?.default) {
             gridTemplateColumns.push(
               `${containerWidth - defaultSize - settingsSize}px`,
             );
@@ -1350,7 +1350,9 @@ class TableHeader extends React.Component<
             getSubstring(tableInfoPanelContainer[0])
           ) {
             const currentContentWidth =
-              contentWidth - +getSubstring(tableInfoPanelContainer[0]);
+              enabledColumnsCount > 0
+                ? contentWidth - +getSubstring(tableInfoPanelContainer[0])
+                : contentWidth;
 
             let overWidth = 0;
 
@@ -1370,10 +1372,12 @@ class TableHeader extends React.Component<
                   gridTemplateColumns.push("0px");
                 } else if (item !== `${settingsSize}px`) {
                   const percent =
-                    (getSubstring(item) /
-                      (changedWidth -
-                        +getSubstring(tableInfoPanelContainer[0]))) *
-                    100;
+                    enabledColumnsCount === 0
+                      ? 100
+                      : (getSubstring(item) /
+                          (changedWidth -
+                            +getSubstring(tableInfoPanelContainer[0]))) *
+                        100;
 
                   const newItemWidth = defaultColumnSize
                     ? `${defaultColumnSize}px`
@@ -1658,6 +1662,9 @@ class TableHeader extends React.Component<
       infoPanelVisible,
     } = this.props;
 
+    localStorage.removeItem(columnStorageName);
+    localStorage.removeItem(columnInfoPanelStorageName);
+
     let str = "";
 
     const enableColumns = columns
@@ -1695,9 +1702,13 @@ class TableHeader extends React.Component<
       this.headerRef.current.style.width = `${containerWidth}px`;
     }
 
-    if (str)
-      if (!infoPanelVisible) localStorage.setItem(columnStorageName, str);
-      else localStorage.setItem(columnInfoPanelStorageName, str);
+    if (str) {
+      if (!infoPanelVisible) {
+        localStorage.setItem(columnStorageName, str);
+      } else {
+        localStorage.setItem(columnInfoPanelStorageName, str);
+      }
+    }
 
     this.onResize();
   };

@@ -159,14 +159,8 @@ const StyledRow = styled.div`
   gap: 8px;
 
   min-height: 41px;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: 16px;
-        `
-      : css`
-          margin-left: 16px;
-        `}
+
+  margin-inline-start: 16px;
   box-sizing: border-box;
   border-bottom: none;
 
@@ -321,7 +315,8 @@ const StyledDropDown = styled(DropDown)`
 `;
 
 const SearchItemText = styled(Text)`
-  line-height: 16px;
+  line-height: ${({ theme }) =>
+    theme.interfaceDirection === "rtl" ? `20px` : `16px`};
 
   text-overflow: ellipsis;
   overflow: hidden;
@@ -335,7 +330,7 @@ const SearchItemText = styled(Text)`
     (props.primary && !props.disabled) || props.info
       ? props.theme.text.color
       : props.theme.text.emailColor};
-  ${(props) => props.info && `margin-left: auto`}
+  ${(props) => props.info && `margin-inline-start: auto`}
 `;
 
 SearchItemText.defaultProps = { theme: Base };

@@ -19,6 +19,7 @@ class SettingsSetupStore {
   authStore = null;
   settingsStore = null;
   tfaStore = null;
+  thirdPartyStore = null;
   isInit = false;
   logoutVisible = false;
   logoutAllVisible = false;
@@ -83,11 +84,12 @@ class SettingsSetupStore {
   sessions = [];
   currentSession = [];
 
-  constructor(tfaStore, authStore, settingsStore) {
+  constructor(tfaStore, authStore, settingsStore, thirdPartyStore) {
     this.selectionStore = new SelectionStore(this);
     this.authStore = authStore;
     this.tfaStore = tfaStore;
     this.settingsStore = settingsStore;
+    this.thirdPartyStore = thirdPartyStore;
     makeAutoObservable(this);
   }
 
@@ -126,12 +128,14 @@ class SettingsSetupStore {
             break;
         }
       } else {
-        await this.settingsStore.getPortalPasswordSettings();
-        await this.tfaStore.getTfaType();
-        await this.settingsStore.getIpRestrictionsEnable();
-        await this.settingsStore.getIpRestrictions();
-        await this.settingsStore.getSessionLifetime();
-        await this.settingsStore.getBruteForceProtection();
+        await Promise.all([
+          this.settingsStore.getPortalPasswordSettings(),
+          this.tfaStore.getTfaType(),
+          this.settingsStore.getIpRestrictionsEnable(),
+          this.settingsStore.getIpRestrictions(),
+          this.settingsStore.getSessionLifetime(),
+          this.settingsStore.getBruteForceProtection(),
+        ]);
       }
     }
 
@@ -191,7 +195,7 @@ class SettingsSetupStore {
     const initialSettings = this.integration.smtpSettings.initialSettings;
 
     const fields = Object.keys(settings).filter(
-      (key) => settings[key] !== initialSettings[key]
+      (key) => settings[key] !== initialSettings[key],
     );
 
     return fields.length === 0;
@@ -222,7 +226,7 @@ class SettingsSetupStore {
 
   resetSMTPSettings = async () => {
     const result = await resetSMTPSettings(
-      this.integration.smtpSettings.settings
+      this.integration.smtpSettings.settings,
     );
 
     if (!result) return;
@@ -288,8 +292,8 @@ class SettingsSetupStore {
       combineUrl(
         window.DocSpaceConfig?.proxy?.url,
         `${config.homepage}/portal-settings/security/access-rights/admins`,
-        `/filter?page=${filter.page}` //TODO: Change url by category
-      )
+        `/filter?page=${filter.page}`, //TODO: Change url by category
+      ),
     );
   };
 
@@ -300,7 +304,7 @@ class SettingsSetupStore {
 
   changeAdmins = async (userIds, productId, isAdmin) => {
     const requests = userIds.map((userId) =>
-      api.people.changeProductAdmin(userId, productId, isAdmin)
+      api.people.changeProductAdmin(userId, productId, isAdmin),
     );
 
     await Promise.all(requests);
@@ -441,7 +445,7 @@ class SettingsSetupStore {
     regDateCaption,
     groupHeadCaption,
     guestCaption,
-    guestsCaption
+    guestsCaption,
   ) => {
     return api.settings.setCustomSchema(
       userCaption,
@@ -452,7 +456,7 @@ class SettingsSetupStore {
       regDateCaption,
       groupHeadCaption,
       guestCaption,
-      guestsCaption
+      guestsCaption,
     );
   };
 
@@ -466,9 +470,20 @@ class SettingsSetupStore {
   };
 
   updateConsumerProps = async (newProps) => {
-    const res = await api.settings.updateConsumerProps(newProps);
-    console.log("updateConsumerProps", res);
+    await api.settings.updateConsumerProps(newProps);
+
     await this.getConsumers();
+
+    await Promise.all([
+      api.files.getThirdPartyCapabilities(),
+      api.files.getThirdPartyList(),
+    ]).then(([capabilities, providers]) => {
+      for (let item of capabilities) {
+        item.splice(1, 1);
+      }
+      this.thirdPartyStore.setThirdPartyCapabilities(capabilities); //TODO: Out of bounds read: 1
+      this.thirdPartyStore.setThirdPartyProviders(providers);
+    });
   };
 
   changePassword = (userId, hash, key) => {

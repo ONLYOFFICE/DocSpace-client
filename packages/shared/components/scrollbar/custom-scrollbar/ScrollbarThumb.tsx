@@ -47,9 +47,9 @@ class ScrollbarThumb extends React.Component<ScrollbarThumbProps, unknown> {
   public componentDidMount(): void {
     if (!this.element) {
       this.setState(() => {
-        throw new Error(
-          "<ScrollbarThumb> Element was not created. Possibly you haven't provided HTMLDivElement to renderer's `elementRef` function.",
-        );
+        // throw new Error(
+        //   "<ScrollbarThumb> Element was not created. Possibly you haven't provided HTMLDivElement to renderer's `elementRef` function.",
+        // );
       });
     }
   }

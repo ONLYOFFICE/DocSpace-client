@@ -1,10 +1,10 @@
 import { AxiosRequestConfig } from "axios";
 
 import { AccountsSearchArea } from "@docspace/shared/enums";
-import { request } from "../client";
 // import axios from "axios";
 import { Encoder } from "@docspace/shared/utils/encoder";
 import { checkFilterInstance } from "@docspace/shared/utils/common";
+import { request } from "../client";
 
 import Filter from "./filter";
 
@@ -61,11 +61,15 @@ export async function getUser(userName = null, headers = null) {
   return user;
 }
 
-export async function getUserByEmail(userEmail: string) {
-  const user = (await request({
+export async function getUserByEmail(userEmail: string, confirmKey = null) {
+  const options = {
     method: "get",
     url: `/people/email?email=${userEmail}`,
-  })) as TUser;
+  };
+
+  if (confirmKey) options.headers = { confirm: confirmKey };
+
+  const user = (await request(options)) as TUser;
 
   if (user && user.displayName) {
     user.displayName = Encoder.htmlDecode(user.displayName);
@@ -429,7 +433,7 @@ export async function getMembersList(
       member.displayName = Encoder.htmlDecode(member.displayName);
     }
 
-    if ("manager" in member && member.manager) {
+    if ("membersCount" in member) {
       member.isGroup = true;
     }
 

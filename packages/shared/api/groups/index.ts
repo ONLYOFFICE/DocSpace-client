@@ -75,7 +75,10 @@ export const getGroupsByUserId = (userId: string) => {
   });
 };
 
-export const getGroupMembersInRoom = (folderId, groupId) => {
+export const getGroupMembersInRoom = (
+  folderId: string | number,
+  groupId: string,
+) => {
   return request({
     method: "get",
     url: `/files/folder/${folderId}/group/${groupId}/share`,

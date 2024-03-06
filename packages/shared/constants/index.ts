@@ -83,14 +83,17 @@ export const PROVIDERS_DATA = Object.freeze({
   appleid: {
     label: "apple",
     icon: ShareAppleReactSvgUrl,
+    iconOptions: undefined,
   },
   google: {
     label: "google",
     icon: ShareGoogleReactSvgUrl,
+    iconOptions: undefined,
   },
   facebook: {
     label: "facebook",
     icon: ShareFacebookReactSvgUrl,
+    iconOptions: undefined,
   },
   twitter: {
     label: "twitter",
@@ -100,14 +103,17 @@ export const PROVIDERS_DATA = Object.freeze({
   linkedin: {
     label: "linkedin",
     icon: ShareLinkedinReactSvgUrl,
+    iconOptions: undefined,
   },
   microsoft: {
     label: "microsoft",
     icon: ShareMicrosoftReactSvgUrl,
+    iconOptions: undefined,
   },
   zoom: {
     label: "zoom",
     icon: ShareZoomReactSvgUrl,
+    iconOptions: undefined,
   },
 });
 

@@ -34,7 +34,7 @@ import {
 } from "../enums";
 import { LANGUAGE, PUBLIC_MEDIA_VIEW_URL, RTL_LANGUAGES } from "../constants";
 
-import { TI18n } from "../types";
+import { TI18n, TTranslation } from "../types";
 import { TUser } from "../api/people/types";
 import { TFolder, TFile, TGetFolder } from "../api/files/types";
 import { TRoom } from "../api/rooms/types";
@@ -123,7 +123,7 @@ export const parseDomain = (
 ) => {
   const parsedDomain = parseAddress(`test@${domain}`);
 
-  if (parsedDomain?.parseErrors.length > 0) {
+  if (parsedDomain?.parseErrors && parsedDomain?.parseErrors.length > 0) {
     const translatedErrors = parsedDomain.parseErrors.map((error) => {
       switch (error.errorKey) {
         case ErrorKeys.LocalDomain:
@@ -158,7 +158,7 @@ export const validatePortalName = (
   value: string,
   nameValidator: { minLength: number; maxLength: number; regex: RegExp },
   setError: Function,
-  t: (key: string) => string,
+  t: TTranslation,
 ) => {
   const validName = new RegExp(nameValidator.regex);
   switch (true) {
@@ -168,8 +168,8 @@ export const validatePortalName = (
       value.length > nameValidator.maxLength:
       return setError(
         t("Settings:PortalNameLength", {
-          minLength: nameValidator.minLength,
-          maxLength: nameValidator.maxLength,
+          minLength: nameValidator.minLength.toString(),
+          maxLength: nameValidator.maxLength.toString(),
         }),
       );
     case !validName.test(value):

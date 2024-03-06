@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 // import { EmailSettings } from "../../utils";
+import { InputType } from "../text-input";
 import { EmailInput } from "./EmailInput";
 
 // const baseProps = {
@@ -23,7 +24,9 @@ describe("<EmailInput />", () => {
   it("Init invalid value test", () => {
     const email = "zzz";
 
-    render(<EmailInput value={email} onChange={() => {}} />);
+    render(
+      <EmailInput value={email} type={InputType.email} onChange={() => {}} />,
+    );
 
     expect(screen.getByTestId("email-input")).toBeInTheDocument();
   });

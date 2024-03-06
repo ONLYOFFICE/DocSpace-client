@@ -83,11 +83,23 @@ const FileSelector = (props) => {
   ];
 
   const [fileOptions, setFileOptions] = useState([
-    { key: FilesSelectorFilterTypes.DOCX, label: FilesSelectorFilterTypes.DOCX },
+    {
+      key: FilesSelectorFilterTypes.DOCX,
+      label: FilesSelectorFilterTypes.DOCX,
+    },
     { key: FilesSelectorFilterTypes.IMG, label: FilesSelectorFilterTypes.IMG },
-    { key: FilesSelectorFilterTypes.BackupOnly, label: FilesSelectorFilterTypes.BackupOnly },
-    { key: FilesSelectorFilterTypes.DOCXF, label: FilesSelectorFilterTypes.DOCXF },
-    { key: FilesSelectorFilterTypes.XLSX, label: FilesSelectorFilterTypes.XLSX },
+    {
+      key: FilesSelectorFilterTypes.BackupOnly,
+      label: FilesSelectorFilterTypes.BackupOnly,
+    },
+    {
+      key: FilesSelectorFilterTypes.DOCXF,
+      label: FilesSelectorFilterTypes.DOCXF,
+    },
+    {
+      key: FilesSelectorFilterTypes.XLSX,
+      label: FilesSelectorFilterTypes.XLSX,
+    },
   ]);
 
   const [widthDimension, setWidthDimension] = useState(dataDimensions[0]);
@@ -95,9 +107,13 @@ const FileSelector = (props) => {
   const [width, setWidth] = useState("100");
   const [height, setHeight] = useState("100");
   const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
-  const [showPreview, setShowPreview] = useState(window.innerWidth > showPreviewThreshold);
+  const [showPreview, setShowPreview] = useState(
+    window.innerWidth > showPreviewThreshold,
+  );
   const [sharedLinks, setSharedLinks] = useState(null);
-  const [selectedElementType, setSelectedElementType] = useState(elementDisplayOptions[1].value);
+  const [selectedElementType, setSelectedElementType] = useState(
+    elementDisplayOptions[1].value,
+  );
   const [typeDisplay, setTypeDisplay] = useState(fileTypeDisplay[0].value);
   const [selectedType, setSelectedType] = useState(fileOptions[0]);
   const [selectedFileTypes, setSelectedFileTypes] = useState([
@@ -158,7 +174,9 @@ const FileSelector = (props) => {
 
     const params = objectToGetParams(config);
 
-    loadScript(`${scriptUrl}${params}`, "integration", () => window.DocSpace.SDK.initFrame(config));
+    loadScript(`${scriptUrl}${params}`, "integration", () =>
+      window.DocSpace.SDK.initFrame(config),
+    );
   }, 500);
 
   useEffect(() => {
@@ -168,7 +186,10 @@ const FileSelector = (props) => {
 
   const toggleButtonMode = (e) => {
     setSelectedElementType(e.target.value);
-    setConfig((config) => ({ ...config, isButtonMode: e.target.value === "button" }));
+    setConfig((config) => ({
+      ...config,
+      isButtonMode: e.target.value === "button",
+    }));
   };
 
   const onChangeTab = (tab) => {
@@ -177,7 +198,10 @@ const FileSelector = (props) => {
     } else if (tab.key === "selector-preview") {
       setConfig((config) => ({ ...config, isButtonMode: false }));
     } else if (tab.key === "code") {
-      setConfig((config) => ({ ...config, isButtonMode: selectedElementType === "button" }));
+      setConfig((config) => ({
+        ...config,
+        isButtonMode: selectedElementType === "button",
+      }));
     }
   };
 
@@ -287,7 +311,9 @@ const FileSelector = (props) => {
 
   const deleteSelectedType = (option) => {
     setFileOptions((prevFileOptions) => [option, ...prevFileOptions]);
-    const filteredTypes = selectedFileTypes.filter((type) => type.key !== option.key);
+    const filteredTypes = selectedFileTypes.filter(
+      (type) => type.key !== option.key,
+    );
     setSelectedFileTypes(filteredTypes);
   };
 
@@ -317,7 +343,8 @@ const FileSelector = (props) => {
 
   const onResize = () => {
     const isEnoughWidthForPreview = window.innerWidth > showPreviewThreshold;
-    if (isEnoughWidthForPreview !== showPreview) setShowPreview(isEnoughWidthForPreview);
+    if (isEnoughWidthForPreview !== showPreview)
+      setShowPreview(isEnoughWidthForPreview);
   };
 
   const setButtonColor = (color) => {
@@ -344,8 +371,13 @@ const FileSelector = (props) => {
   );
 
   const code = (
-    <CodeWrapper width={width + widthDimension.label} height={height + heightDimension.label}>
-      <CategorySubHeader className="copy-window-code">{t("CopyWindowCode")}</CategorySubHeader>
+    <CodeWrapper
+      width={width + widthDimension.label}
+      height={height + heightDimension.label}
+    >
+      <CategorySubHeader className="copy-window-code">
+        {t("CopyWindowCode")}
+      </CategorySubHeader>
       <Textarea value={codeBlock} heightTextArea={153} />
     </CodeWrapper>
   );
@@ -407,17 +439,26 @@ const FileSelector = (props) => {
             />
             {config.isButtonMode && (
               <>
-                <CategorySubHeader>{t("ButtonCustomization")}</CategorySubHeader>
+                <CategorySubHeader>
+                  {t("ButtonCustomization")}
+                </CategorySubHeader>
                 <ControlsGroup>
                   <Label className="label" text={t("ButtonColor")} />
-                  <ColorInput scale handleChange={setButtonColor} defaultColor={"#5299E0"} />
+                  <ColorInput
+                    scale
+                    handleChange={setButtonColor}
+                    defaultColor={"#5299E0"}
+                  />
                 </ControlsGroup>
                 <ControlsGroup>
                   <Label className="label" text={t("ButtonText")} />
                   <TextInput
                     scale
                     onChange={(e) => {
-                      setConfig((config) => ({ ...config, buttonText: e.target.value }));
+                      setConfig((config) => ({
+                        ...config,
+                        buttonText: e.target.value,
+                      }));
                     }}
                     placeholder={t("SelectToDocSpace")}
                     value={config.buttonText}
@@ -425,7 +466,7 @@ const FileSelector = (props) => {
                   />
                   <Checkbox
                     className="checkbox"
-                    label={"Logo"}
+                    label={t("Logo")}
                     onChange={() => {
                       setConfig((config) => ({
                         ...config,
@@ -570,22 +611,32 @@ const FileSelector = (props) => {
                 <HelpButton
                   offsetRight={0}
                   size={12}
-                  tooltipContent={<Text fontSize="12px">{t("RoomOrFolderDescription")}</Text>}
+                  tooltipContent={
+                    <Text fontSize="12px">{t("RoomOrFolderDescription")}</Text>
+                  }
                 />
               </LabelGroup>
               <FilesSelectorInputWrapper>
-                <FilesSelectorInput onSelectFolder={onChangeFolderId} isSelect />
+                <FilesSelectorInput
+                  onSelectFolder={onChangeFolderId}
+                  isSelect
+                />
               </FilesSelectorInputWrapper>
             </ControlsGroup>
             {sharedLinks && (
               <ControlsGroup>
                 <LabelGroup>
-                  <Label className="label" text={t("SharingPanel:ExternalLink")} />
+                  <Label
+                    className="label"
+                    text={t("SharingPanel:ExternalLink")}
+                  />
                   <HelpButton
                     offsetRight={0}
                     size={12}
                     tooltipContent={
-                      <Text fontSize="12px">{t("CreateEditRoomDialog:PublicRoomDescription")}</Text>
+                      <Text fontSize="12px">
+                        {t("CreateEditRoomDialog:PublicRoomDescription")}
+                      </Text>
                     }
                   />
                 </LabelGroup>

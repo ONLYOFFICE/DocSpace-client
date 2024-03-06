@@ -18,7 +18,6 @@
   "EnterId": "Zadajte id",
   "EnterPage": "Zadajte číslo strany",
   "EnterWidth": "Zadajte šírku",
-  "Filter": "Hľadať, filtrovať a triediť",
   "FrameId": "ID rámu",
   "GetCode": "Získať kód na vloženie",
   "Header": "Hlavička",
@@ -32,6 +31,7 @@
   "RoomOrFolder": "Miestnosť alebo priečinok",
   "RoomOrFolderDescription": "Môžete vybrať sekciu, miestnosť alebo priečinok, ktorý chcete zobraziť",
   "SDKDescription": "Pomocou JavaScript SDK môžete vložiť miestnosť alebo priečinok z ONLYOFFICE DocSpace do svojho webového rozhrania ako iframe. Tu nájdete nastavenia na vytvorenie vzoru iframe a konfiguráciu CSP. Ak chcete používať kompletnú sadu SDK, pozrite si",
+  "SearchFilterAndSort": "Hľadať, filtrovať a triediť",
   "SearchTerm": "Hľadať termín",
   "SortOrder": "Zoradiť objednávku",
   "Title": "Navigovať a Pomenovať"

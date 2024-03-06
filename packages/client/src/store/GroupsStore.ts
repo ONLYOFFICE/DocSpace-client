@@ -363,7 +363,7 @@ class GroupsStore {
           groupsApi
             .deleteGroup(groupId)!
             .then(() => {
-              toastr.success(t("Group was deleted successfully"));
+              toastr.success(t("PeopleTranslations:SuccessDeleteGroup"));
               this.setSelection([]);
               this.getGroups(this.groupsFilter, true);
               this.infoPanelStore.setInfoPanelSelection(null);

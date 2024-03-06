@@ -110,7 +110,7 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
               fontWeight={600}
               className="spaces-domain-text"
             >
-              {t("Domain")}
+              {t("Common:Domain")}
             </Text>
             <Text color="#A3A9AE">(example.com)</Text>
           </div>

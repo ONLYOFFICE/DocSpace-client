@@ -63,7 +63,7 @@ export interface IControlButtonProps {
   showTitle?: boolean;
   navigationButtonLabel?: string;
   onNavigationButtonClick?: () => void;
-  tariffBar?: React.ReactNode;
+  tariffBar?: React.ReactElement;
   title?: string;
   isEmptyPage?: boolean;
 }
@@ -169,5 +169,5 @@ export interface INavigationProps {
   showTitle: boolean;
   navigationButtonLabel?: string;
   onNavigationButtonClick?: () => void;
-  tariffBar: React.ReactNode;
+  tariffBar: React.ReactElement;
 }

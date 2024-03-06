@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /* eslint-disable guard-for-in */
 import transform from "lodash/transform";
 import { RoomSearchArea } from "../../enums";
@@ -121,7 +122,7 @@ class RoomsFilter {
         urlFilter[SUBJECT_FILTER]?.toString()) ||
       defaultFilter.subjectFilter?.toString();
 
-    //TODO: remove it if search with subfolders and in content will be available
+    // TODO: remove it if search with subfolders and in content will be available
     // const searchInContent = urlFilter[SEARCH_IN_CONTENT]
     //   ? urlFilter[SEARCH_IN_CONTENT] === "true"
     //   : defaultFilter.searchInContent;
@@ -273,7 +274,7 @@ class RoomsFilter {
       excludeSubject,
       withoutTags,
       subjectFilter,
-      quotaFilter: quotaFilter,
+      quotaFilter,
     };
 
     const str = toUrlParams(dtoFilter, true);

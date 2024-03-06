@@ -105,9 +105,9 @@ const GroupMembersSelector = ({
   return (
     <Selector
       id="group-members-selector"
-      headerLabel={"group.name"}
+      headerLabel="group.name"
       onBackClick={onBackClick}
-      searchPlaceholder={"Search by group members"}
+      searchPlaceholder="Search by group members"
       searchValue={searchValue}
       onSearch={onSearch}
       onClearSearch={onClearSearch}

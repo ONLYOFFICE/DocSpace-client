@@ -77,7 +77,7 @@ const ImportStep = ({
         sectionName={t("Settings:PersonalFiles")}
         description={t("Settings:PersonalFilesDescription")}
         exportSection={{
-          sectionName: t("Settings:MyDocuments"),
+          sectionName: t("Common:MyDocuments"),
           workspace: serviceName,
           SectionIcon: UserSolidIcon,
         }}

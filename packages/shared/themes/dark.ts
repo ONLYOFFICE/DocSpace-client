@@ -3057,6 +3057,7 @@ const Dark: TTheme = {
         tableHeaderText: "#858585",
         tableRowHoverColor: "#3D3D3D",
         tableRowTextColor: "#858585",
+        comboBoxLabelColor: "#FFFFFF",
         importSectionBackground: "#282828",
         importSectionTextColor: "#858585",
         importItemBackground: "#333333",

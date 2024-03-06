@@ -38,7 +38,7 @@ const StyledTableRow = styled(TableRow)`
 
     .combo-button-label {
       color: ${(props) =>
-        props.theme.client.settings.migration.tableRowTextColor};
+        props.theme.client.settings.migration.comboBoxLabelColor};
     }
 
     .combo-buttons_arrow-icon {
@@ -49,7 +49,7 @@ const StyledTableRow = styled(TableRow)`
     svg {
       path {
         fill: ${(props) =>
-          props.theme.client.settings.migration.tableRowTextColor};
+          props.theme.client.settings.migration.comboBoxLabelColor};
       }
     }
   }

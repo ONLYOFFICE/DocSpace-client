@@ -3080,6 +3080,7 @@ export const getBaseTheme = () => {
           tableHeaderText: "#A3A9AE",
           tableRowHoverColor: "#F3F4F4",
           tableRowTextColor: "#A3A9AE",
+          comboBoxLabelColor: "#333333",
           importSectionBackground: "#F8F9F9",
           importSectionTextColor: "#A3A9AE",
           importItemBackground: "#eceef1",

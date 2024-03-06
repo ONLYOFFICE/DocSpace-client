@@ -96,7 +96,7 @@ const template: Template = (
 
   const page = `
     <!DOCTYPE html>
-    <html lang="en">
+    <html lang="en" translate="no">
       <head>
         <meta charset="utf-8">
         <title> ${documentTitle} </title>
@@ -106,6 +106,7 @@ const template: Template = (
           content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
         />
         <meta name="theme-color" content="#000000" />
+        <meta name="google" content="notranslate" />
         <link  rel="stylesheet preload" href=${fontsCssUrl}  as="style" type="text/css" crossorigin/>
 
         <link id="favicon" rel="shortcut icon" href=${favicon} />

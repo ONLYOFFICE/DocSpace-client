@@ -386,7 +386,7 @@ class PeopleStore {
               groupsSelection.map(async (group) => deleteGroup(group.id)),
             )
               .then(() => {
-                toastr.success(t("Groups were deleted successfully"));
+                toastr.success(t("PeopleTranslations:SuccessDeleteGroups"));
                 this.groupsStore.setSelection([]);
                 this.groupsStore.getGroups(groupsFilter, true);
               })

@@ -34,7 +34,7 @@ const RecalculateButton = (props) => {
     <div className="button-container">
       <Button
         size="small"
-        label={"Recalculate"}
+        label={t("Recalculate")}
         onClick={onRecalculateClick}
         isLoading={isRecalculating}
         isDisabled={isRecalculating}

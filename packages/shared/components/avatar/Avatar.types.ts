@@ -31,4 +31,6 @@ export interface AvatarProps {
   onClick?: (e: React.MouseEvent) => void;
   /** Display initials for group when `source` is set to blank */
   isGroup?: boolean;
+  /** Accepts roleIcon */
+  roleIcon?: React.ReactElement;
 }

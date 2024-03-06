@@ -18,7 +18,6 @@
   "EnterId": "Introduceţi ID-ul",
   "EnterPage": "Introduceți numărul de pagină",
   "EnterWidth": "Introduceți lățimea",
-  "Filter": "Căutare, filtrare și sortare",
   "FrameId": "ID cadru",
   "GetCode": "Obține codul pentru inserare",
   "Header": "Antet",
@@ -32,6 +31,7 @@
   "RoomOrFolder": "ală sau Folder",
   "RoomOrFolderDescription": "Puteți alege secțiunea, sala sau folderul pe care doriți să-l afișați",
   "SDKDescription": "Cu ajutorul JavaScript SDK puteți încorpora o sală sau un folder din spațiu ONLYOFFICE DocSpace în interfața site-lui dvs prin codul iframe. Aici puteti gasi setările pentru crearea unui model iframe și configurarea Furnizorului de soluții cloud. Pentru a utiliza un SDK complet, consultați",
+  "SearchFilterAndSort": "Căutare, filtrare și sortare",
   "SearchTerm": "Termen de căutare",
   "SortOrder": "Ordine de sortare",
   "Title": "Navigare și Titlu"

@@ -17,8 +17,9 @@ const StyledContainer = styled.div`
 
   overflow: hidden;
 
+  background-color: ${(props) => props.theme.sdkPresets.previewBackgroundColor};
+
   .emptyIframeText {
-    position: absolute;
     font-size: 44px;
     font-weight: 700;
     line-height: 59.92px;
@@ -30,7 +31,6 @@ StyledContainer.defaultProps = { theme: Base };
 const EmptyIframeContainer = ({ text, width, height }) => {
   return (
     <StyledContainer width={width} height={height}>
-      <RectangleSkeleton width="100%" height="100%" borderRadius="6px" />
       <span className="emptyIframeText">{text}</span>
     </StyledContainer>
   );

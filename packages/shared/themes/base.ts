@@ -3247,6 +3247,7 @@ export const getBaseTheme = () => {
     sdkPresets: {
       borderColor: "#d0d5da",
       secondaryColor: "#657077",
+      previewBackgroundColor: "#F3F4F4",
     },
     sideBarRow: {
       titleColor: black,

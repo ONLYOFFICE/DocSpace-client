@@ -177,7 +177,7 @@ const GroupMenuItem = ({
           zIndex={250}
         >
           {options.map((option) => (
-            <DropDownItem {...option} key={option.key} />
+            <DropDownItem {...option} key={option.key} setOpen={setOpen} />
           ))}
         </DropDown>
       )}

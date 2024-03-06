@@ -12,3 +12,8 @@ export { getFromLocalStorage } from "./getFromLocalStorage.js";
 export { saveToLocalStorage } from "./saveToLocalStorage.js";
 export { removeLocalStorage } from "./removeLocalStorage.js";
 export { resetSessionStorage } from "./resetSessionStorage";
+export { getStepTitle } from "./getStepTitle";
+export {
+  getGoogleStepDescription,
+  getWorkspaceStepDescription,
+} from "./getStepDescription";

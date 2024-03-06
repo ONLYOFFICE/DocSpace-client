@@ -1049,6 +1049,61 @@ export function getSendingTestMailStatus() {
   });
 }
 
+export function migrationList() {
+  return request({
+    method: "get",
+    url: `/migration/list`,
+  });
+}
+
+export function migrationName(name) {
+  return request({
+    method: "post",
+    url: `/migration/init/${name}`,
+  });
+}
+
+export function migrationStatus() {
+  return request({
+    method: "get",
+    url: `/migration/status`,
+  });
+}
+
+export function migrateFile(data) {
+  return request({
+    method: "post",
+    url: `/migration/migrate`,
+    data,
+  });
+}
+
+export function migrationCancel() {
+  return request({
+    method: "post",
+    url: `/migration/cancel`,
+  });
+}
+
+export function migrationClear() {
+  return request({
+    method: "post",
+    url: `/migration/clear`,
+  });
+}
+
+export function migrationLog() {
+  return axios.get("/api/2.0/migration/logs");
+}
+
+export function migrationFinish(data) {
+  return request({
+    method: "post",
+    url: `/migration/finish`,
+    data,
+  });
+}
+
 export async function setCSPSettings(data: string[]) {
   const res = (await request({
     method: "post",

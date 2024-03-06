@@ -158,14 +158,22 @@ const CreateUserForm = (props) => {
     const headerKey = linkData.confirmHeader;
 
     try {
+      const toBinaryStr = (str) => {
+        const encoder = new TextEncoder();
+        const charCodes = encoder.encode(str);
+        return String.fromCharCode(...charCodes);
+      };
+
       const loginData = window.btoa(
-        JSON.stringify({
-          type: "invitation",
-          email,
-          roomName,
-          firstName: user.firstName,
-          lastName: user.lastName,
-        }),
+        toBinaryStr(
+          JSON.stringify({
+            type: "invitation",
+            email,
+            roomName,
+            firstName: user.firstName,
+            lastName: user.lastName,
+          }),
+        ),
       );
 
       await getUserByEmail(email, headerKey);
@@ -176,6 +184,8 @@ const CreateUserForm = (props) => {
         `?loginData=${loginData}`,
       );
     } catch (err) {
+      console.error(err);
+
       const status = err?.response?.status;
       const isNotExistUser = status === 404;
 
@@ -292,13 +302,12 @@ const CreateUserForm = (props) => {
   const createConfirmUser = async (registerData, loginData, key) => {
     const { defaultPage } = props;
 
-    const fromInviteLink = linkData.type === "LinkInvite" ? true : false;
+    const fromInviteLink =
+      linkData.type === "LinkInvite" || linkData.type === "EmpInvite"
+        ? true
+        : false;
 
-    const data = Object.assign(
-      { fromInviteLink: fromInviteLink },
-      registerData,
-      loginData,
-    );
+    const data = Object.assign({ fromInviteLink }, registerData, loginData);
 
     await createUser(data, key);
 
@@ -439,13 +448,9 @@ const CreateUserForm = (props) => {
               <Text fontSize="16px">
                 <Trans
                   t={t}
-                    i18nKey={
-                      roomName ? "InvitationToRoom" : "InvitationToPortal"
-                    }
-                    ns="Common"
-                    defaults={
-                      roomName ? DEFAULT_ROOM_TEXT : DEFAULT_PORTAL_TEXT
-                    }
+                  i18nKey={roomName ? "InvitationToRoom" : "InvitationToPortal"}
+                  ns="Common"
+                  defaults={roomName ? DEFAULT_ROOM_TEXT : DEFAULT_PORTAL_TEXT}
                   values={{
                     firstName: user.firstName,
                     lastName: user.lastName,
@@ -463,7 +468,7 @@ const CreateUserForm = (props) => {
         </GreetingContainer>
 
         <FormWrapper>
-            <RegisterContainer>
+          <RegisterContainer>
             <form className="auth-form-container">
               <div className="auth-form-fields">
                 {!registrationForm && (
@@ -631,10 +636,8 @@ const CreateUserForm = (props) => {
                       primary
                       size="medium"
                       scale={true}
-                        label={
-                          isLoading
-                            ? t("Common:LoadingProcessing")
-                            : t("SignUp")
+                      label={
+                        isLoading ? t("Common:LoadingProcessing") : t("SignUp")
                       }
                       tabIndex={1}
                       isDisabled={isLoading}

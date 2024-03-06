@@ -15,11 +15,20 @@ import { inject, observer } from "mobx-react";
 import { isTablet, isMobile } from "@docspace/shared/utils/device";
 
 import { HelpButton } from "@docspace/shared/components/help-button";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 
 import GetCodeDialog from "../sub-components/GetCodeDialog";
 import { Button } from "@docspace/shared/components/button";
 
 import EmptyIframeContainer from "../sub-components/EmptyIframeContainer";
+
+import { TooltipContent } from "../sub-components/TooltipContent";
+
+import TitleUrl from "PUBLIC_DIR/images/sdk-presets_title.react.svg?url";
+import SearchUrl from "PUBLIC_DIR/images/sdk-presets_search.react.svg?url";
+
+import TitleDarkUrl from "PUBLIC_DIR/images/sdk-presets_title_dark.react.svg?url";
+import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.react.svg?url";
 
 const showPreviewThreshold = 720;
 
@@ -39,6 +48,7 @@ import {
   FilesSelectorInputWrapper,
   ControlsSection,
   CodeWrapper,
+  CheckboxGroup,
 } from "./StyledPresets";
 
 const SimpleRoom = (props) => {
@@ -54,11 +64,13 @@ const SimpleRoom = (props) => {
   ];
 
   const [widthDimension, setWidthDimension] = useState(dataDimensions[0]);
-  const [heightDimension, setHeightDimension] = useState(dataDimensions[1]);
+  const [heightDimension, setHeightDimension] = useState(dataDimensions[0]);
   const [width, setWidth] = useState("100");
-  const [height, setHeight] = useState(isTablet() ? "400" : isMobile() ? "206" : "600");
+  const [height, setHeight] = useState("100");
   const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
-  const [showPreview, setShowPreview] = useState(window.innerWidth > showPreviewThreshold);
+  const [showPreview, setShowPreview] = useState(
+    window.innerWidth > showPreviewThreshold,
+  );
   const [sharedLinks, setSharedLinks] = useState(null);
 
   const [config, setConfig] = useState({
@@ -100,7 +112,9 @@ const SimpleRoom = (props) => {
 
     const params = objectToGetParams(config);
 
-    loadScript(`${scriptUrl}${params}`, "integration", () => window.DocSpace.SDK.initFrame(config));
+    loadScript(`${scriptUrl}${params}`, "integration", () =>
+      window.DocSpace.SDK.initFrame(config),
+    );
   }, 500);
 
   useEffect(() => {
@@ -187,13 +201,26 @@ const SimpleRoom = (props) => {
     setHeightDimension(item);
   };
 
+  const onChangeShowTitle = () => {
+    setConfig((config) => {
+      return { ...config, showTitle: !config.showTitle };
+    });
+  };
+
+  const onChangeShowFilter = (e) => {
+    setConfig((config) => {
+      return { ...config, showFilter: !config.showFilter };
+    });
+  };
+
   const openGetCodeModal = () => setIsGetCodeDialogOpened(true);
 
   const closeGetCodeModal = () => setIsGetCodeDialogOpened(false);
 
   const onResize = () => {
     const isEnoughWidthForPreview = window.innerWidth > showPreviewThreshold;
-    if (isEnoughWidthForPreview !== showPreview) setShowPreview(isEnoughWidthForPreview);
+    if (isEnoughWidthForPreview !== showPreview)
+      setShowPreview(isEnoughWidthForPreview);
   };
 
   useEffect(() => {
@@ -207,8 +234,16 @@ const SimpleRoom = (props) => {
 
   const preview = (
     <Frame
-      width={width + widthDimension.label}
-      height={height + heightDimension.label}
+      width={
+        config.id !== undefined &&
+        widthDimension.label === "px" &&
+        width + widthDimension.label
+      }
+      height={
+        config.id !== undefined &&
+        heightDimension.label === "px" &&
+        height + heightDimension.label
+      }
       targetId={frameId}
     >
       {config.id !== undefined ? (
@@ -217,9 +252,9 @@ const SimpleRoom = (props) => {
         </>
       ) : (
         <EmptyIframeContainer
-          text={t("SelectRoom")}
-          width={width + widthDimension.label}
-          height={height + heightDimension.label}
+          text={t("SelectFile")}
+          width="100%"
+          height="100%"
         />
       )}
     </Frame>
@@ -227,7 +262,9 @@ const SimpleRoom = (props) => {
 
   const code = (
     <CodeWrapper>
-      <CategorySubHeader className="copy-window-code">{t("CopyWindowCode")}</CategorySubHeader>
+      <CategorySubHeader className="copy-window-code">
+        {t("CopyWindowCode")}
+      </CategorySubHeader>
       <Textarea value={codeBlock} heightTextArea={153} />
     </CodeWrapper>
   );
@@ -248,7 +285,7 @@ const SimpleRoom = (props) => {
   return (
     <SDKContainer>
       <CategoryDescription>
-        <Text className="sdk-description">{t("SimpleRoomPresetDescription")}</Text>
+        <Text className="sdk-description">{t("PublicRoomDescription")}</Text>
       </CategoryDescription>
       <CategoryHeader>{t("CreateSampleHeader")}</CategoryHeader>
       <Container>
@@ -270,22 +307,33 @@ const SimpleRoom = (props) => {
                 <HelpButton
                   offsetRight={0}
                   size={12}
-                  tooltipContent={<Text fontSize="12px">{t("RoomOrFolderDescription")}</Text>}
+                  tooltipContent={
+                    <Text fontSize="12px">{t("RoomOrFolderDescription")}</Text>
+                  }
                 />
               </LabelGroup>
               <FilesSelectorInputWrapper>
-                <FilesSelectorInput onSelectFolder={onChangeFolderId} isSelect isRoomsOnly />
+                <FilesSelectorInput
+                  onSelectFolder={onChangeFolderId}
+                  isSelect
+                  isRoomsOnly
+                />
               </FilesSelectorInputWrapper>
             </ControlsGroup>
             {sharedLinks && (
               <ControlsGroup>
                 <LabelGroup>
-                  <Label className="label" text={t("SharingPanel:ExternalLink")} />
+                  <Label
+                    className="label"
+                    text={t("SharingPanel:ExternalLink")}
+                  />
                   <HelpButton
                     offsetRight={0}
                     size={12}
                     tooltipContent={
-                      <Text fontSize="12px">{t("CreateEditRoomDialog:PublicRoomDescription")}</Text>
+                      <Text fontSize="12px">
+                        {t("CreateEditRoomDialog:PublicRoomDescription")}
+                      </Text>
                     }
                   />
                 </LabelGroup>
@@ -355,6 +403,53 @@ const SimpleRoom = (props) => {
                 tabIndex={4}
               />
             </ControlsGroup>
+          </ControlsSection>
+
+          <ControlsSection>
+            <CategorySubHeader>{t("InterfaceElements")}</CategorySubHeader>
+
+            <CheckboxGroup>
+              <LabelGroup>
+                <Checkbox
+                  className="checkbox"
+                  label={t("Common:Title")}
+                  onChange={onChangeShowTitle}
+                  isChecked={config.showTitle}
+                />
+                <HelpButton
+                  place="right"
+                  offsetRight={4}
+                  size={12}
+                  tooltipContent={
+                    <TooltipContent
+                      title={t("Common:Title")}
+                      description={t("ManagerTitleDescription")}
+                      img={theme.isBase ? TitleUrl : TitleDarkUrl}
+                    />
+                  }
+                />
+              </LabelGroup>
+              <LabelGroup>
+                <Checkbox
+                  className="checkbox"
+                  label={t("SearchFilterAndSort")}
+                  onChange={onChangeShowFilter}
+                  isChecked={config.showFilter}
+                />
+                <HelpButton
+                  place="right"
+                  offsetRight={4}
+                  size={12}
+                  tooltipContent={
+                    <TooltipContent
+                      title={t("SearchBlock")}
+                      description={t("ManagerSearchBlockDescription")}
+                      img={theme.isBase ? SearchUrl : SearchDarkUrl}
+                    />
+                  }
+                />
+              </LabelGroup>
+            </CheckboxGroup>
           </ControlsSection>
         </Controls>
       </Container>

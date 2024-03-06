@@ -18,7 +18,6 @@
   "EnterId": "Introduzir id",
   "EnterPage": "Introduzir o número de página",
   "EnterWidth": "Introduzir largura",
-  "Filter": "Procurar, Filtrar e Ordenar",
   "FrameId": "Id do frame",
   "GetCode": "Obtenha o código para inserir",
   "Header": "Cabeçalho",
@@ -32,6 +31,7 @@
   "RoomOrFolder": "Sala ou Pasta",
   "RoomOrFolderDescription": "Pode selecionar a secção, sala, ou pasta que que pretende visualizar",
   "SDKDescription": "Ao utilizar o JavaScript SDK, é possível incorporar uma sala ou uma pasta do ONLYOFFICE DocSpace na sua interface web como um iframe. Aqui, pode encontrar definições para criar um iframe de amostra e configurar o CSP. Para utilizar o SDK completo, consulte a",
+  "SearchFilterAndSort": "Procurar, Filtrar e Ordenar",
   "SearchTerm": "Termo de pesquisa",
   "SortOrder": "Sequência de ordenação",
   "Title": "Navegar e Título"

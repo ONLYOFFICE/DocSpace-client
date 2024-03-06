@@ -10,7 +10,6 @@ import { getOAuthToken, getLoginLink } from "@docspace/shared/utils/common";
 import { Link } from "@docspace/shared/components/link";
 import { checkIsSSR } from "@docspace/shared/utils";
 import { PROVIDERS_DATA } from "@docspace/shared/constants";
-import { Toast } from "@docspace/shared/components/toast";
 import LoginForm from "./sub-components/LoginForm";
 import RecoverAccessModalDialog from "@docspace/shared/components/recover-access-modal-dialog/RecoverAccessModalDialog";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
@@ -58,13 +57,24 @@ const Login: React.FC<ILoginProps> = ({
 
   useEffect(() => {
     if (search) {
-      const isInviteInfo = search.indexOf("loginData=");
+      const firstIndex = search.indexOf("loginData=");
 
-      if (isInviteInfo === -1) return;
+      if (firstIndex === -1) return;
+      const fromBinaryStr = (encodeString: string) => {
+        const decodeStr = atob(encodeString);
+
+        const decoder = new TextDecoder();
+        const charCodeArray = Uint8Array.from(
+          { length: decodeStr.length },
+          (element, index) => decodeStr.charCodeAt(index)
+        );
+
+        return decoder.decode(charCodeArray);
+      };
 
       const encodeString = search.slice(search.indexOf("=") + 1);
 
-      const decodeString = atob(encodeString);
+      const decodeString = fromBinaryStr(encodeString);
       const queryParams = JSON.parse(decodeString);
 
       setInvitationLinkData(queryParams);
@@ -269,7 +279,6 @@ const Login: React.FC<ILoginProps> = ({
                 </Link>
               )}
             </FormWrapper>
-            <Toast />
 
             {recoverDialogVisible && (
               <RecoverAccessModalDialog

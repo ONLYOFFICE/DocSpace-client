@@ -61,7 +61,7 @@ const DNSSettings = (props) => {
     isDefaultDNS,
     dnsSettingsUrl,
     currentDeviceType,
-    domainValidator,
+    portalName,
   } = props;
   const [hasScroll, setHasScroll] = useState(false);
   const isLoadedSetting = isLoaded && tReady;
@@ -133,12 +133,14 @@ const DNSSettings = (props) => {
     setErrorText("");
 
     const { value } = e.target;
-    const isValidDomain = parseDomain(value || "", setErrorText, t);
+    const dns = portalName ? value.slice(portalName.length + 1) : value;
+
+    const isValidDomain = parseDomain(dns || "", setErrorText, t);
 
     if (!isValidDomain) {
       setIsError(true);
     }
-    setDNSName(value);
+    setDNSName(dns);
   };
   const checkInnerWidth = useCallback(() => {
     if (!isMobile()) {
@@ -176,7 +178,9 @@ const DNSSettings = (props) => {
           <TextInput
             {...textInputProps}
             isDisabled={isLoading || !enable}
-            value={dnsName?.trim()}
+            value={
+              portalName ? `${portalName}.${dnsName?.trim()}` : dnsName?.trim()
+            }
             onChange={onChangeTextInput}
             hasError={isError}
           />
@@ -295,7 +299,6 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     standalone,
     dnsSettingsUrl,
     currentDeviceType,
-    domainValidator,
   } = settingsStore;
   const {
     isLoaded,
@@ -331,6 +334,6 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     saveDNSSettings,
     dnsSettingsUrl,
     currentDeviceType,
-    domainValidator,
+    portalName,
   };
 })(withLoading(withTranslation(["Settings", "Common"])(observer(DNSSettings))));

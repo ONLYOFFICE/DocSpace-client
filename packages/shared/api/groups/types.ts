@@ -7,4 +7,5 @@ export type TGroup = {
   name: string;
   parent: string;
   isGroup?: boolean;
+  membersCount: number;
 };

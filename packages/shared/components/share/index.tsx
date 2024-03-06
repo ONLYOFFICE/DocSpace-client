@@ -47,6 +47,8 @@ const Share = (props: ShareProps) => {
 
   const requestRunning = React.useRef(false);
 
+  const [isLoadedAddLinks, setIsLoadedAddLinks] = useState(true);
+
   const hideSharePanel = isRooms || !infoPanelSelection?.canShare;
 
   const fetchLinks = React.useCallback(async () => {
@@ -89,6 +91,10 @@ const Share = (props: ShareProps) => {
   };
 
   const addAdditionalLinks = async () => {
+    if (!isLoadedAddLinks) return;
+
+    setIsLoadedAddLinks(false);
+
     addLoaderLink();
     const newLink = addFileLink
       ? await addFileLink(
@@ -112,6 +118,8 @@ const Share = (props: ShareProps) => {
 
       return newLinks;
     });
+
+    setIsLoadedAddLinks(true);
   };
 
   const updateLink = (link: TFileLink, newItem: TFileLink) => {
@@ -178,7 +186,7 @@ const Share = (props: ShareProps) => {
         ? await editFileLink(
             infoPanelSelection.id,
             link.sharedTo.id,
-            link.access,
+            item.access || ShareAccessRights.ReadOnly,
             link.sharedTo.primary,
             item.internal || false,
             expDate,
@@ -186,7 +194,7 @@ const Share = (props: ShareProps) => {
         : await editExternalLink(
             infoPanelSelection.id,
             link.sharedTo.id,
-            link.access,
+            item.access || ShareAccessRights.ReadOnly,
             link.sharedTo.primary,
             item.internal || false,
             expDate,

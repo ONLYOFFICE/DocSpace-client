@@ -17,6 +17,7 @@ import { Avatar } from "@docspace/shared/components/avatar";
 const GroupsTableItem = ({
   t,
   item,
+  itemIndex,
   theme,
   hideColumns,
   selection,
@@ -70,12 +71,14 @@ const GroupsTableItem = ({
     setSelection([item]);
   };
 
+  let value = `folder_${item.id}_false_index_${itemIndex}`;
+
   return (
     <Styled.GroupsRowWrapper
       className={`group-item ${
         (isChecked || isActive) && "table-row-selected"
       }`}
-      value={item.id}
+      value={value}
     >
       <Styled.GroupsRow
         key={item.id}
@@ -117,6 +120,7 @@ const GroupsTableItem = ({
             fontSize="12px"
             isTextOverflow
             className="table-cell_group-manager"
+            dir="auto"
           >
             {item.name}
           </Link>
@@ -124,14 +128,15 @@ const GroupsTableItem = ({
 
         <TableCell className={"table-container_group-manager"}>
           <Text
-            title={item.manager.displayName}
+            title={item.manager?.displayName}
             fontWeight="600"
             fontSize="13px"
             isTextOverflow
             className="table-cell_group-manager"
             color={"#A3A9AE"}
+            dir="auto"
           >
-            {item.manager.displayName}
+            {item.manager?.displayName}
           </Text>
         </TableCell>
       </Styled.GroupsRow>

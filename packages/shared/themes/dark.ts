@@ -16,6 +16,7 @@ const {
   graySilver,
   gray,
   grayMain,
+  grayDark,
   shuttleGrey,
 
   blueMain,
@@ -1643,6 +1644,7 @@ const Dark: TTheme = {
 
       disabledColor: "#858585",
       color: "#858585",
+      alternativeColor: grayDark,
       selectedColor: white,
 
       maxWidth: "175px",
@@ -1661,6 +1663,12 @@ const Dark: TTheme = {
       disabledColor: "#858585",
       color: white,
       selectedColor: white,
+    },
+
+    plusBadge: {
+      color: black,
+      bgColor: grayDark,
+      selectedBgColor: "#ADADAD",
     },
   },
 
@@ -2011,7 +2019,7 @@ const Dark: TTheme = {
 
     backgroundColor: black,
     blurColor: "rgba(20, 20, 20, 0.8)",
-    borderColor: "#292929",
+    borderColor: "#474747",
     thumbnailBorderColor: grayLightMid,
     textColor: white,
 
@@ -2055,6 +2063,10 @@ const Dark: TTheme = {
     gallery: {
       borderColor: "#292929",
       descriptionColor: "#eeeeee",
+    },
+
+    search: {
+      boxShadow: "0px 5px 20px 0px rgba(0, 0, 0, 0.16)",
     },
   },
 
@@ -3212,6 +3224,11 @@ const Dark: TTheme = {
   sdkPresets: {
     borderColor: "#474747",
     secondaryColor: "#ADADAD",
+  },
+
+  sideBarRow: {
+    titleColor: white,
+    metaDataColor: grayDark,
   },
 };
 

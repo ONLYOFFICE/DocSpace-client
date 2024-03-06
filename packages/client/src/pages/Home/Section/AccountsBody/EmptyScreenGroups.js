@@ -19,7 +19,7 @@ const EmptyScreenGroups = ({
   setIsLoading,
   theme,
 }) => {
-  const { t } = useTranslation(["People", "Common"]);
+  const { t } = useTranslation(["People", "PeopleTranslations", "Common"]);
 
   const onCreateRoom = () => {
     const event = new Event(Events.GROUP_CREATE);
@@ -41,14 +41,14 @@ const EmptyScreenGroups = ({
         imageSrc={imageSrc}
         imageAlt="Empty Screen Filter image"
         headerText={
-          !groupsIsFiltered ? t("No groups here yet") : t("Nothing found")
+          !groupsIsFiltered
+            ? t("Common:EmptyGroupsHeader")
+            : t("Common:NotFoundGroups")
         }
         descriptionText={
           !groupsIsFiltered
-            ? t("Please create the first group.")
-            : t(
-                "No groups match this filter. Try a different one or clear filter to view all files. ",
-              )
+            ? t("Common:EmptyGroupsDescription")
+            : t("Common:NotFoundGroupsDescription")
         }
         buttons={
           <Grid gridColumnGap="8px" columnsProp={["12px 1fr"]}>
@@ -70,7 +70,7 @@ const EmptyScreenGroups = ({
                     fontWeight="600"
                     onClick={onCreateRoom}
                   >
-                    {t("Create group")}
+                    {t("PeopleTranslations:CreateGroup")}
                   </Link>
                 </Box>
               </>
@@ -92,7 +92,7 @@ const EmptyScreenGroups = ({
                     fontWeight="600"
                     onClick={onResetFilter}
                   >
-                    {t("Reset filter")}
+                    {t("Common:ClearFilter")}
                   </Link>
                 </Box>
               </>

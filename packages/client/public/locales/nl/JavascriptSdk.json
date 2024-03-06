@@ -18,7 +18,6 @@
   "EnterId": "Voor IDin",
   "EnterPage": "Voor nummer pagina in",
   "EnterWidth": "Voor breedte",
-  "Filter": "Zoeken, Filteren en Sorteren",
   "FrameId": "Frame ID",
   "GetCode": "Haal code om in te voegen",
   "Header": "Koptekst",
@@ -32,6 +31,7 @@
   "RoomOrFolder": "Kamer of Map",
   "RoomOrFolderDescription": "U kunt de sectie, kamer of map selecteren die u wilt weergeven",
   "SDKDescription": "Met behulp van JavaScript SDK kunt u een ruimte of map van ONLYOFFICE DocSpace in uw webinterface insluiten als een iframe. Hier vindt u instellingen voor het maken van een voorbeeld iframe en het configureren van CSP. Om de volledige SDK te gebruiken, raadpleegt u de",
+  "SearchFilterAndSort": "Zoeken, Filteren en Sorteren",
   "SearchTerm": "Zoekterm",
   "SortOrder": "Sorteer volgorde",
   "Title": "Navigeren en Titel"

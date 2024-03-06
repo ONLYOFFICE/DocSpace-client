@@ -5,7 +5,6 @@ import { Box } from "../../box";
 const getDefaultStyles = ({
   $currentColorScheme,
   $isVersion,
-  theme,
 }: {
   $currentColorScheme?: TColorScheme;
   $isVersion?: boolean;

@@ -30,6 +30,7 @@ import {
   Events,
 } from "@docspace/shared/enums";
 import Filter from "@docspace/shared/api/people/filter";
+import { deleteGroup } from "@docspace/shared/api/groups";
 
 class PeopleStore {
   contextOptionsStore = null;
@@ -354,7 +355,7 @@ class PeopleStore {
       return options;
     }
   };
-  getHeaderMenu = (t) => {
+  getHeaderMenu = (t, isGroupsPage = false) => {
     const {
       hasUsersToMakeEmployees,
       hasUsersToActivate,
@@ -367,10 +368,36 @@ class PeopleStore {
       selection,
     } = this.selectionStore;
 
+    const { selection: groupsSelection, groupsFilter } = this.groupsStore;
+
     const { setSendInviteDialogVisible } = this.dialogStore;
     const { toggleDeleteProfileEverDialog } = this.contextOptionsStore;
 
     const { isVisible } = this.infoPanelStore;
+
+    if (isGroupsPage)
+      return [
+        {
+          id: "menu-delete",
+          key: "delete",
+          label: t("Common:Delete"),
+          onClick: () => {
+            Promise.all(
+              groupsSelection.map(async (group) => deleteGroup(group.id)),
+            )
+              .then(() => {
+                toastr.success(t("PeopleTranslations:SuccessDeleteGroups"));
+                this.groupsStore.setSelection([]);
+                this.groupsStore.getGroups(groupsFilter, true);
+              })
+              .catch((err) => {
+                toastr.error(err.message);
+                console.error(err);
+              });
+          },
+          iconUrl: DeleteReactSvgUrl,
+        },
+      ];
 
     const headerMenu = [
       {
@@ -477,7 +504,7 @@ class PeopleStore {
       return "disabled";
     } else {
       return "unknown";
-}
+    }
   };
 
   getUserRole = (user) => {

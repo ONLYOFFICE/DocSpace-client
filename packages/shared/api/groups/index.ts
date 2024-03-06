@@ -75,18 +75,29 @@ export const getGroupsByUserId = (userId: string) => {
   });
 };
 
+export const getGroupMembersInRoom = (
+  folderId: string | number,
+  groupId: string,
+) => {
+  return request({
+    method: "get",
+    url: `/files/folder/${folderId}/group/${groupId}/share`,
+  });
+};
+
 // * Update
 
 export const updateGroup = (
   groupId: string,
   groupName: string,
   groupManager: string,
-  members: string,
+  membersToAdd: string[],
+  membersToRemove: string[],
 ) => {
   return request({
     method: "put",
     url: `/group/${groupId}`,
-    data: { groupName, groupManager, members },
+    data: { groupName, groupManager, membersToAdd, membersToRemove },
   });
 };
 

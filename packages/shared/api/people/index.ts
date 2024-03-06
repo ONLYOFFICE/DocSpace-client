@@ -1,10 +1,10 @@
 import { AxiosRequestConfig } from "axios";
 
 import { AccountsSearchArea } from "@docspace/shared/enums";
-import { request } from "../client";
 // import axios from "axios";
 import { Encoder } from "@docspace/shared/utils/encoder";
 import { checkFilterInstance } from "@docspace/shared/utils/common";
+import { request } from "../client";
 
 import Filter from "./filter";
 
@@ -433,7 +433,7 @@ export async function getMembersList(
       member.displayName = Encoder.htmlDecode(member.displayName);
     }
 
-    if ("manager" in member && member.manager) {
+    if ("membersCount" in member) {
       member.isGroup = true;
     }
 

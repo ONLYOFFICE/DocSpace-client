@@ -114,15 +114,18 @@ const FolderInput = ({
   isDisabled,
 }) => {
   const [treeNode, setTreeNode] = useState(null);
-
+  const [path, setPath] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+
   const onOpen = () => {
     if (isDisabled) return;
     setIsDialogOpen(true);
   };
-  const onClose = () => setIsDialogOpen(false);
+  const onClose = () => {
+    console.log("call close");
+    setIsDialogOpen(false);
+  };
 
-  const [path, setPath] = useState("");
   const getPathValue = () => {
     if (!treeNode) return;
 
@@ -132,7 +135,7 @@ const FolderInput = ({
 
     let result = "";
     path.map(
-      (node, i) => (result += node.title + (i !== path.length - 1 ? "/" : ""))
+      (node, i) => (result += node.title + (i !== path.length - 1 ? "/" : "")),
     );
 
     setPath(result);
@@ -143,6 +146,8 @@ const FolderInput = ({
     onChangeStorageFolderId(treeNode.id);
     getPathValue();
   }, [treeNode]);
+
+  console.log(thirdpartyAccount);
 
   if (!thirdpartyAccount.id) return null;
   return (
@@ -158,14 +163,16 @@ const FolderInput = ({
         </div>
       </StyledFolderInput>
 
-      <FilesSelector
-        isPanelVisible={isDialogOpen}
-        onClose={onClose}
-        isThirdParty={true}
-        onSelectTreeNode={setTreeNode}
-        passedFoldersTree={[thirdpartyAccount]}
-        id={thirdpartyAccount.id}
-      />
+      {isDialogOpen && (
+        <FilesSelector
+          isPanelVisible={isDialogOpen}
+          onClose={onClose}
+          isThirdParty
+          onSelectTreeNode={setTreeNode}
+          passedFoldersTree={[thirdpartyAccount]}
+          currentFolderId={thirdpartyAccount.id}
+        />
+      )}
     </>
   );
 };

@@ -5,7 +5,7 @@ export const Header = styled.div`
   padding: 8px 0 12px 0;
 
   color: #a3a9ae;
-  font-size: 14px;
+  font-size: ${({ theme }) => theme.getCorrectFontSize("14px")};
   font-weight: 600;
   line-height: 16px;
 `;
@@ -20,25 +20,8 @@ export const SelectGroupManager = styled.div<{}>`
   cursor: pointer;
   margin: 8px 0;
 
-  .add-button {
-    width: 32px;
-    height: 32px;
-    background-color: #eceef1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .plus-icon: {
-      svg {
-        path {
-          fill: #657077;
-        }
-      }
-    }
-  }
-
   .label {
-    font-size: 13px;
+    font-size: ${({ theme }) => theme.getCorrectFontSize("13px")};
     font-weight: 600;
     line-height: 20px;
     color: #a3a9ae;

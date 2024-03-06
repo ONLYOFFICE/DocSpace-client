@@ -1,4 +1,4 @@
-import type { PROVIDERS_DATA } from "@docspace/shared/constants";
+import type { PROVIDERS_DATA } from "../../constants";
 
 export type ProvidersDataType = typeof PROVIDERS_DATA;
 

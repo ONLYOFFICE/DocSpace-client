@@ -104,7 +104,10 @@ const FloatingButton = (props: FloatingButtonProps) => {
           classNames([className, "not-selectable"]) || "not-selectable"
         }
       >
-        <StyledCircle displayProgress={displayProgress} percent={percent}>
+        <StyledCircle
+          displayProgress={displayProgress}
+          percent={percent > 100 ? 0 : percent}
+        >
           <div className="circle__mask circle__full">
             <div className="circle__fill" />
           </div>

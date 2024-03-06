@@ -153,7 +153,7 @@ export default inject(
     setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
     userId: userStore.user?.id,
     infoPanelVisible: infoPanelStore.isVisible,
-    withPaging: settingsStore,
+    withPaging: settingsStore.withPaging,
   }),
 )(
   withTranslation(["People", "Common", "PeopleTranslations"])(

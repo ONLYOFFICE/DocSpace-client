@@ -39,33 +39,12 @@ const StyledPeopleRow = styled(TableRow)`
     }
 
     .table-container_user-name-cell {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: -24px;
-              padding-right: 24px;
-            `
-          : css`
-              margin-left: -24px;
-              padding-left: 24px;
-            `}
+      margin-inline-start: -24px;
+      padding-inline-start: 24px;
     }
     .table-container_row-context-menu-wrapper {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: -20px;
-              padding-left: 20px;
-            `
-          : css`
-              margin-right: -20px;
-              padding-right: 20px;
-            `}
-    }
-
-    .groups-combobox .combo-button {
-      background-color: ${(props) =>
-        `${props.theme.filesSection.tableView.row.backgroundActive}`};
+      margin-inline-end: -20px;
+      padding-inline-end: 20px;
     }
   }
 
@@ -77,7 +56,7 @@ const StyledPeopleRow = styled(TableRow)`
 
   .table-container_cell:not(.table-container_row-checkbox-wrapper) {
     height: auto;
-    max-height: 48;
+    max-height: 48px;
   }
 
   .table-container_cell {
@@ -87,76 +66,33 @@ const StyledPeopleRow = styled(TableRow)`
   }
 
   .table-container_row-checkbox-wrapper {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-left: 0px;
-          `
-        : css`
-            padding-right: 0px;
-          `}
+    padding-inline-end: 0;
     min-width: 48px;
 
     .table-container_row-checkbox {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: -4px;
-              padding: 16px 12px 16px 0px;
-            `
-          : css`
-              margin-left: -4px;
-              padding: 16px 0px 16px 12px;
-            `}
+      margin-inline-start: -4px;
+      padding-block: 16px;
+      padding-inline: 12px 0;
     }
   }
 
   .link-with-dropdown-group {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 12px;
-          `
-        : css`
-            margin-right: 12px;
-          `}
+    margin-inline-end: 12px;
   }
 
   .table-cell_username {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 12px;
-          `
-        : css`
-            margin-right: 12px;
-          `}
+    margin-inline-end: 12px;
   }
 
   .table-container_row-context-menu-wrapper {
     justify-content: flex-end;
-
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-left: 0px;
-          `
-        : css`
-            padding-right: 0px;
-          `}
+    padding-inline-end: 0;
   }
 
   .table-cell_type,
   .table-cell_groups,
   .table-cell_room {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: -8px;
-          `
-        : css`
-            margin-left: -8px;
-          `}
+    margin-inline-start: -8px;
   }
 
   .groups-combobox,
@@ -172,14 +108,7 @@ const StyledPeopleRow = styled(TableRow)`
   .type-combobox,
   .groups-combobox,
   .room-combobox {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-right: 8px;
-          `
-        : css`
-            padding-left: 8px;
-          `}
+    padding-inline-start: 8px;
     overflow: hidden;
   }
 
@@ -187,16 +116,8 @@ const StyledPeopleRow = styled(TableRow)`
   .groups-combobox,
   .room-combobox {
     .combo-button {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              padding-right: 8px;
-              margin-right: -8px;
-            `
-          : css`
-              padding-left: 8px;
-              margin-left: -8px;
-            `}
+      padding-inline-start: 8px;
+      margin-inline-start: -8px;
 
       .combo-button-label {
         font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
@@ -207,32 +128,8 @@ const StyledPeopleRow = styled(TableRow)`
 
   .groups-combobox {
     .combo-button {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              padding-right: 8px;
-              margin-right: -8px;
-            `
-          : css`
-              padding-left: 8px;
-              margin-left: -8px;
-            `}
-
-      &:hover {
-        background-color: #fff !important;
-      }
-
-      .combo-button-label {
-        font-size: ${(props) => props.theme.getCorrectFontSize("13px")};
-        color: ${(props) => props.theme.peopleTableRow.sideInfoColor};
-        font-weight: 600;
-      }
-
-      .combo-buttons_arrow-icon {
-        svg path {
-          fill: ${(props) => props.theme.peopleTableRow.sideInfoColor};
-        }
-      }
+      padding-inline-start: 8px;
+      margin-inline-start: -8px;
     }
   }
 
@@ -240,6 +137,10 @@ const StyledPeopleRow = styled(TableRow)`
     .combo-buttons_arrow-icon {
       display: none;
     }
+  }
+
+  .plainTextItem {
+    padding-inline-start: 8px;
   }
 `;
 
@@ -252,16 +153,8 @@ const StyledGroupsComboBox = styled(ComboBox)`
     justify-content: center;
     gap: 4px;
     padding: 4px 8px;
-    background-color: ${({ isChecked, theme }) =>
-      !isChecked ? "#fff" : theme.filesSection.tableView.row.backgroundActive};
-
-    ${({ isOpened }) => isOpened && "background-color: #fff !important"}
 
     border-radius: 3px;
-
-    &:hover {
-      background-color: #fff;
-    }
   }
 
   .dropdown {
@@ -462,6 +355,7 @@ const PeopleTableRow = (props) => {
             title: groups[0].name,
             label: groups[0].name + " ",
           }}
+          plusBadgeValue={groups.length - 1}
           onSelect={onOpenGroup}
           options={groupItems}
           scaled
@@ -476,6 +370,7 @@ const PeopleTableRow = (props) => {
     if (groups.length === 1)
       return (
         <Text
+          className="plainTextItem"
           type="page"
           title={position}
           fontSize="13px"
@@ -483,7 +378,7 @@ const PeopleTableRow = (props) => {
           color={sideInfoColor}
           truncate
           noSelect
-          style={{ paddingLeft: "8px" }}
+          dir="auto"
         >
           {groups[0].name}
         </Text>
@@ -515,6 +410,7 @@ const PeopleTableRow = (props) => {
 
     const text = (
       <Text
+        className="plainTextItem"
         type="page"
         title={position}
         fontSize="13px"
@@ -522,7 +418,7 @@ const PeopleTableRow = (props) => {
         color={sideInfoColor}
         truncate
         noSelect
-        style={{ paddingLeft: "8px" }}
+        dir="auto"
       >
         {typeLabel}
       </Text>
@@ -604,6 +500,7 @@ const PeopleTableRow = (props) => {
             isTextOverflow
             className="table-cell_username"
             noHover
+            dir="auto"
           >
             {statusType === "pending"
               ? email

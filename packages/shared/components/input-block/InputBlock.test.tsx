@@ -15,6 +15,7 @@ describe("<InputBlock />", () => {
     render(
       <InputBlock
         mask={mask}
+        value=""
         iconName={SearchReactSvgUrl}
         onIconClick={jest.fn}
         onChange={jest.fn}

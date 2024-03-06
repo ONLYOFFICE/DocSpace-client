@@ -142,7 +142,7 @@ export const Frame = styled(Box)`
   border: 1px solid ${(props) => props.theme.sdkPresets.borderColor};
 
   width: calc(${(props) => (props.width ? props.width : "100%")} + 2px);
-  height: calc(${(props) => (props.height ? props.height : "400px")} + 2px);
+  height: calc(${(props) => (props.height ? props.height : "100%")} + 2px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -150,6 +150,20 @@ export const Frame = styled(Box)`
   @media ${tablet} {
     margin-top: 4px;
   }
+
+  ${(props) =>
+    !props.width &&
+    css`
+      max-width: 800px;
+    `}
+
+  ${(props) =>
+    !props.height &&
+    css`
+      min-height: 400px;
+      max-height: 600px;
+    `}
+
 
   ${(props) =>
     props.targetId &&
@@ -166,10 +180,6 @@ export const Frame = styled(Box)`
 
   .frame-container {
     height: 100% !important;
-
-    & > iframe {
-      height: 100% !important;
-    }
   }
 `;
 

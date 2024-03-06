@@ -22,6 +22,9 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 import GetCodeDialog from "../sub-components/GetCodeDialog";
 import { Button } from "@docspace/shared/components/button";
 import { TooltipContent } from "../sub-components/TooltipContent";
+import { useNavigate } from "react-router-dom";
+import { Link } from "@docspace/shared/components/link";
+import FilesFilter from "@docspace/shared/api/files/filter";
 
 import LeftMenuUrl from "PUBLIC_DIR/images/sdk-presets_left-menu.react.svg?url";
 import TitleUrl from "PUBLIC_DIR/images/sdk-presets_title.react.svg?url";
@@ -135,7 +138,9 @@ import {
 } from "./StyledPresets";
 
 const Manager = (props) => {
-  const { t, setDocumentTitle, fetchExternalLinks, theme } = props;
+  const { t, setDocumentTitle, fetchExternalLinks, theme, currentColorScheme } =
+    props;
+  const navigate = useNavigate();
 
   setDocumentTitle(t("JavascriptSdk"));
 
@@ -169,6 +174,12 @@ const Manager = (props) => {
     { key: "Owner", label: t("Common:Owner") },
     { key: "Activity", label: t("Files:ByLastModified") },
   ]);
+
+  const settingsTranslations = {
+    password: t("Common:Password").toLowerCase(),
+    denyDownload: t("FileContentCopy").toLowerCase(),
+    expirationDate: t("LimitByTime").toLowerCase(),
+  };
 
   // const roomTypeOptions = [
   //   {
@@ -233,12 +244,15 @@ const Manager = (props) => {
     { key: "Type", label: t("Common:Type") },
     { key: "Tags", label: t("Common:Tags") },
   ]);
+
+  const [selectedLink, setSelectedLink] = useState(null);
+
   // const [filterBy, setFilterBy] = useState({
   //   key: "filter-type-default",
   //   label: t("Common:SelectAction"),
   //   default: true,
   // });
-  const [author, setAuthor] = useState("");
+  // const [author, setAuthor] = useState("");
 
   // const searchRef = useRef();
   // const [searchPanelVisible, setSearchPanelVisible] = useState(false);
@@ -327,20 +341,34 @@ const Manager = (props) => {
       if (links.length > 1) {
         const linksOptions = links.map((link) => {
           const { id, title, requestToken } = link.sharedTo;
+          const linkSettings = [];
+
+          if ("password" in link.sharedTo) {
+            linkSettings.push("password");
+          }
+          if ("expirationDate" in link.sharedTo) {
+            linkSettings.push("expirationDate");
+          }
+          if (link.sharedTo.denyDownload) {
+            linkSettings.push("denyDownload");
+          }
 
           return {
             key: id,
             label: title,
             requestToken: requestToken,
+            settings: linkSettings,
           };
         });
 
+        setSelectedLink(linksOptions[0]);
         setSharedLinks(linksOptions);
       }
 
       newConfig.requestToken = links[0].sharedTo?.requestToken;
       newConfig.rootPath = "/rooms/share";
     } else {
+      setSelectedLink(null);
       setSharedLinks(null);
     }
     // setAuthor("");
@@ -354,6 +382,7 @@ const Manager = (props) => {
   };
 
   const onChangeSharedLink = (link) => {
+    setSelectedLink(link);
     setConfig((config) => {
       return { ...config, requestToken: link.requestToken };
     });
@@ -499,6 +528,12 @@ const Manager = (props) => {
       viewTableColumns: filteredColumns.map((column) => column.key).join(","),
     }));
     setSelectedColumns(filteredColumns);
+  };
+
+  const navigateRoom = (id) => {
+    const filter = FilesFilter.getDefault();
+    filter.folder = id;
+    navigate(`/rooms/shared/${id}/filter?${filter.toUrlParams()}`);
   };
 
   const onResize = () => {
@@ -903,10 +938,86 @@ const Manager = (props) => {
                   scaled={true}
                   onSelect={onChangeSharedLink}
                   options={sharedLinks}
-                  selectedOption={sharedLinks[0]}
+                  selectedOption={selectedLink}
                   displaySelectedOption
                   directionY="bottom"
                 />
+
+                {selectedLink && selectedLink.settings.length === 1 ? (
+                  <div>
+                    <Text
+                      className="linkHelp"
+                      fontSize="12px"
+                      lineHeight="16px"
+                    >
+                      {t("LinkSettings", {
+                        parameter:
+                          settingsTranslations[selectedLink.settings[0]],
+                      })}
+                    </Text>
+                    <Link
+                      color={currentColorScheme?.main?.accent}
+                      fontSize="12px"
+                      lineHeight="16px"
+                      onClick={() => navigateRoom(config.id)}
+                    >
+                      {" "}
+                      {t("GoToRoom")}.
+                    </Link>
+                  </div>
+                ) : selectedLink.settings.length === 2 ? (
+                  <div>
+                    <Text
+                      className="linkHelp"
+                      fontSize="12px"
+                      lineHeight="16px"
+                    >
+                      {t("LinkSettings2", {
+                        parameter1:
+                          settingsTranslations[selectedLink.settings[0]],
+                        parameter2:
+                          settingsTranslations[selectedLink.settings[1]],
+                      })}
+                    </Text>
+                    <Link
+                      color={currentColorScheme?.main?.accent}
+                      fontSize="12px"
+                      lineHeight="16px"
+                      onClick={() => navigateRoom(config.id)}
+                    >
+                      {" "}
+                      {t("GoToRoom")}.
+                    </Link>
+                  </div>
+                ) : selectedLink.settings.length === 3 ? (
+                  <div>
+                    <Text
+                      className="linkHelp"
+                      fontSize="12px"
+                      lineHeight="16px"
+                    >
+                      {t("LinkSettings3", {
+                        parameter1:
+                          settingsTranslations[selectedLink.settings[0]],
+                        parameter2:
+                          settingsTranslations[selectedLink.settings[1]],
+                        parameter3:
+                          settingsTranslations[selectedLink.settings[2]],
+                      })}
+                    </Text>
+                    <Link
+                      color={currentColorScheme?.main?.accent}
+                      fontSize="12px"
+                      lineHeight="16px"
+                      onClick={() => navigateRoom(config.id)}
+                    >
+                      {" "}
+                      {t("GoToRoom")}.
+                    </Link>
+                  </div>
+                ) : (
+                  <></>
+                )}
               </ControlsGroup>
             )}
           </ControlsSection>
@@ -1223,13 +1334,14 @@ const Manager = (props) => {
 
 export default inject(({ authStore, settingsStore, publicRoomStore }) => {
   const { setDocumentTitle } = authStore;
-  const { theme } = settingsStore;
+  const { theme, currentColorScheme } = settingsStore;
   const { fetchExternalLinks } = publicRoomStore;
 
   return {
     theme,
     setDocumentTitle,
     fetchExternalLinks,
+    currentColorScheme,
   };
 })(
   withTranslation([

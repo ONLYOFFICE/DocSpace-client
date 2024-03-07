@@ -7,13 +7,23 @@ const StyledBody = styled.div`
   max-width: max-content;
 
   display: flex;
+  flex-wrap: nowrap;
+
   p {
     padding-top: 8px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
-  .combo-button {
-    padding-left: 8px;
-    padding-right: 0px;
+  .combobobox-space-quota {
+    flex: 1;
+    min-width: 0;
+    .combo-button {
+      padding-left: 8px;
+      padding-right: 0px;
+      width: auto;
+    }
   }
 `;
 

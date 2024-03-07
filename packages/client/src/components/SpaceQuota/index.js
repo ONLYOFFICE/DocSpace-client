@@ -148,11 +148,11 @@ const SpaceQuota = (props) => {
   }
 
   return (
-    <StyledBody hideColumns={hideColumns}>
+    <StyledBody hideColumns={hideColumns} className={className}>
       <Text fontWeight={600}>{usedQuota} / </Text>
 
       <ComboBox
-        className={className}
+        className="combobobox-space-quota"
         selectedOption={selectedOption}
         options={options}
         onSelect={onChange}

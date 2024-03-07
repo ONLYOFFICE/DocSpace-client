@@ -14,7 +14,7 @@ import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 import CrossIconMobile from "PUBLIC_DIR/images/cross.react.svg";
 import DeleteIcon from "PUBLIC_DIR/images/mobile.actions.remove.react.svg";
-import { isMobile } from "@docspace/shared/utils";
+import { isMobile, desktop } from "@docspace/shared/utils";
 
 import Base from "@docspace/shared/themes/base";
 
@@ -67,11 +67,10 @@ const StyledInvitePanel = styled.div`
               padding-right: 0px !important;
             `}
 
-      ${!isMobile() &&
-      css`
+      @media ${desktop} {
         width: 480px;
         min-width: auto !important;
-      `}
+      }
     }
 
     ${(props) =>

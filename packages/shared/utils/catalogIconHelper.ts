@@ -15,6 +15,7 @@ import CatalogSettingsSecurityReactSvgUrl from "PUBLIC_DIR/images/icons/16/catal
 import CatalogSettingsDataManagementReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-data-management.svg?url";
 import CatalogSettingsRestoreReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-restore.svg?url";
 import CatalogSettingsIntegrationReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-integration.svg?url";
+import CatalogSettingsDataReactSvgUrl from "PUBLIC_DIR/images/catalog.import.react.svg?url";
 import CatalogSettingsDeveloperReactSvgUrl from "PUBLIC_DIR/images/catalog.developer.react.svg?url";
 import CatalogSettingsPaymentReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-payment.svg?url";
 import CatalogSettingsGiftReactSvgUrl from "PUBLIC_DIR/images/gift.react.svg?url";
@@ -37,6 +38,7 @@ import CatalogSettingsSecurity20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/cat
 import CatalogSettingsDataManagement20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-data-management.svg?url";
 import CatalogSettingsRestore20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-restore.svg?url";
 import CatalogSettingsIntegration20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-integration.svg?url";
+import CatalogSettingsData20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-import.svg?url";
 import CatalogSettingsDeveloper20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-developer.svg?url";
 import CatalogSettingsPayment20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-payment.svg?url";
 import CatalogSettingsGift20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-gift.svg?url";
@@ -77,6 +79,7 @@ const icons: Record<SizeType, Partial<Record<PageUnionType, string>>> = {
     [PageType.backup]: CatalogSettingsDataManagementReactSvgUrl,
     [PageType.restore]: CatalogSettingsRestoreReactSvgUrl,
     [PageType.integration]: CatalogSettingsIntegrationReactSvgUrl,
+    [PageType.dataImport]: CatalogSettingsDataReactSvgUrl,
     [PageType.developerTools]: CatalogSettingsDeveloperReactSvgUrl,
     [PageType.portalDeletion]: CatalogTrashReactSvgUrl,
     [PageType.payments]: CatalogSettingsPaymentReactSvgUrl,
@@ -100,6 +103,7 @@ const icons: Record<SizeType, Partial<Record<PageUnionType, string>>> = {
     [PageType.backup]: CatalogSettingsDataManagement20ReactSvgUrl,
     [PageType.restore]: CatalogSettingsRestore20ReactSvgUrl,
     [PageType.integration]: CatalogSettingsIntegration20ReactSvgUrl,
+    [PageType.dataImport]: CatalogSettingsData20ReactSvgUrl,
     [PageType.developerTools]: CatalogSettingsDeveloper20ReactSvgUrl,
     [PageType.portalDeletion]: CatalogTrash20ReactSvgUrl,
     [PageType.payments]: CatalogSettingsPayment20ReactSvgUrl,

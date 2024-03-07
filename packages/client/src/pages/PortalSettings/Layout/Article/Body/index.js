@@ -109,24 +109,29 @@ const ArticleBodyContent = (props) => {
       if (location.pathname.includes("integration")) {
         setSelectedKeys(["4-0"]);
       }
-      if (location.pathname.includes("management")) {
+
+      if (location.pathname.includes("data-import")) {
         setSelectedKeys(["5-0"]);
       }
 
-      if (location.pathname.includes("developer")) {
+      if (location.pathname.includes("management")) {
         setSelectedKeys(["6-0"]);
       }
 
-      if (location.pathname.includes("delete-data")) {
+      if (location.pathname.includes("developer")) {
         setSelectedKeys(["7-0"]);
       }
 
-      if (location.pathname.includes("payments")) {
+      if (location.pathname.includes("delete-data")) {
         setSelectedKeys(["8-0"]);
       }
 
-      if (location.pathname.includes("bonus")) {
+      if (location.pathname.includes("payments")) {
         setSelectedKeys(["9-0"]);
+      }
+
+      if (location.pathname.includes("bonus")) {
+        setSelectedKeys(["10-0"]);
       }
     }
   }, [
@@ -198,6 +203,14 @@ const ArticleBodyContent = (props) => {
         return t("Common:Bonus");
       case "Common:FreeProFeatures":
         return "Common:FreeProFeatures";
+      case "DataImport":
+        return t("DataImport");
+      case "ImportFromGoogle":
+        return t("ImportFromGoogle");
+      case "ImportFromNextcloud":
+        return t("ImportFromNextcloud");
+      case "ImportFromOnlyoffice":
+        return t("ImportFromOnlyoffice");
       case "StorageManagement":
         return t("StorageManagement");
       default:
@@ -262,9 +275,7 @@ const ArticleBodyContent = (props) => {
           onClick={() => onSelect(item.key)}
           folderId={item.id}
           style={{
-            marginTop: `${
-              item.key.includes(7) || item.key.includes(8) ? "16px" : "0"
-            }`,
+            marginTop: `${item.key.includes(9) ? "16px" : "0"}`,
           }}
         />,
       );

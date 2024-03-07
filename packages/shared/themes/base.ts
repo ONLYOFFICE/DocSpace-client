@@ -1384,7 +1384,7 @@ export const getBaseTheme = () => {
     },
 
     progressBar: {
-      backgroundColor: "#DADDDF",
+      backgroundColor: "#F3F4F4",
 
       percent: {
         background: "#4781D1",
@@ -2936,6 +2936,7 @@ export const getBaseTheme = () => {
 
       settings: {
         iconFill: black,
+        headerTitleColor: "#333333",
         trashIcon: "#A3A9AE",
         article: {
           titleColor: grayMain,
@@ -3065,6 +3066,33 @@ export const getBaseTheme = () => {
           color: "#F97A0B",
         },
 
+        migration: {
+          descriptionColor: grayMain,
+          subtitleColor: "#333333",
+          workspaceBackground: "#FFFFFF",
+          workspaceBorder: "1px solid #d0d5da",
+          stepDescriptionColor: "#333333",
+          fileInputIconColor: "#A3A9AE",
+          infoBlockBackground: "#f8f9f9",
+          infoBlockTextColor: "#555F65",
+          errorTextColor: "#F21C0E",
+          existingTextColor: "#2db482",
+          tableHeaderText: "#A3A9AE",
+          tableRowHoverColor: "#F3F4F4",
+          tableRowTextColor: "#A3A9AE",
+          comboBoxLabelColor: "#333333",
+          importSectionBackground: "#F8F9F9",
+          importSectionTextColor: "#A3A9AE",
+          importItemBackground: "#eceef1",
+          importItemDisableBackground: "#F3F4F4",
+          importItemTextColor: "#555f65",
+          importItemDisableTextColor: "#A3A9AE",
+          importItemDescription: "#333333",
+          importIconColor: "#657077",
+          groupMenuBackground: "#fff",
+          groupMenuBorder: "1px solid #fff",
+          groupMenuBoxShadow: "rgba(4, 15, 27, 0.07) 0px 5px 5px 0px",
+        },
         storageManagement: {
           grayBackgroundText: "#555F65",
           descriptionColor: "#657077",
@@ -3247,6 +3275,7 @@ export const getBaseTheme = () => {
     sdkPresets: {
       borderColor: "#d0d5da",
       secondaryColor: "#657077",
+      previewBackgroundColor: "#F3F4F4",
     },
     sideBarRow: {
       titleColor: black,

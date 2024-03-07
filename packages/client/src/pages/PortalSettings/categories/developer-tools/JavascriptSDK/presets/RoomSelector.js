@@ -154,6 +154,8 @@ const RoomSelector = (props) => {
   }, 500);
 
   useEffect(() => {
+    const scroll = document.getElementsByClassName("section-scroll")[0];
+    scroll.scrollTop = 0;
     loadFrame();
     return destroyFrame;
   });
@@ -263,8 +265,16 @@ const RoomSelector = (props) => {
 
   const preview = (
     <Frame
-      width={widthDimension.label === "px" && width + widthDimension.label}
-      height={heightDimension.label === "px" && height + heightDimension.label}
+      width={
+        config.id !== undefined && widthDimension.label === "px"
+          ? width + widthDimension.label
+          : undefined
+      }
+      height={
+        config.id !== undefined && heightDimension.label === "px"
+          ? height + heightDimension.label
+          : undefined
+      }
       targetId={frameId}
     >
       <Box id={frameId}></Box>
@@ -283,44 +293,25 @@ const RoomSelector = (props) => {
     </CodeWrapper>
   );
 
-  const dataTabs =
-    selectedElementType === "element"
-      ? [
-          {
-            key: "preview",
-            title: t("Common:Preview"),
-            content: preview,
-          },
-          {
-            key: "code",
-            title: t("Code"),
-            content: code,
-          },
-        ]
-      : [
-          {
-            key: "preview",
-            title: t("Common:Preview"),
-            content: preview,
-          },
-          {
-            key: "selector-preview",
-            title: t("SelectorPreview"),
-            content: preview,
-          },
-          {
-            key: "code",
-            title: t("Code"),
-            content: code,
-          },
-        ];
+  const dataTabs = [
+    {
+      key: "preview",
+      title: t("Common:Preview"),
+      content: preview,
+    },
+    {
+      key: "code",
+      title: t("Code"),
+      content: code,
+    },
+  ];
 
   return (
     <SDKContainer>
       <CategoryDescription>
         <Text className="sdk-description">{t("RoomSelectorDescription")}</Text>
       </CategoryDescription>
-      <CategoryHeader>{t("CreateSampleHeader")}</CategoryHeader>
+      <CategoryHeader>{t("CreateSampleRoomSelector")}</CategoryHeader>
       <Container>
         {showPreview && (
           <Preview>

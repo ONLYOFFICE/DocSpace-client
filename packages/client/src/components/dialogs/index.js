@@ -35,6 +35,7 @@ import DeleteLinkDialog from "./DeleteLinkDialog";
 import MoveToPublicRoom from "./MoveToPublicRoom";
 import BackupToPublicRoom from "./BackupToPublicRoom";
 import SettingsPluginDialog from "./SettingsPluginDialog";
+import CancelUploadDialog from "./CancelUploadDialog";
 import PluginDialog from "./PluginDialog";
 import ChangeQuotaDialog from "./ChangeQuotaDialog";
 import DeletePluginDialog from "./DeletePluginDialog";
@@ -80,6 +81,7 @@ export {
   MoveToPublicRoom,
   BackupToPublicRoom,
   SettingsPluginDialog,
+  CancelUploadDialog,
   PluginDialog,
   DeletePluginDialog,
   ShareFolderDialog,

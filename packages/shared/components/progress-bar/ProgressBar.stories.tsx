@@ -26,5 +26,6 @@ export const Default: Story = {
   args: {
     label: "Operation in progress...",
     percent: 20,
+    isInfiniteProgress: false,
   },
 };

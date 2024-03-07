@@ -95,6 +95,8 @@ const Viewer = (props) => {
   }, 500);
 
   useEffect(() => {
+    const scroll = document.getElementsByClassName("section-scroll")[0];
+    scroll.scrollTop = 0;
     loadFrame();
     return () => destroyFrame();
   });
@@ -169,14 +171,14 @@ const Viewer = (props) => {
   const preview = (
     <Frame
       width={
-        config.id !== undefined &&
-        widthDimension.label === "px" &&
-        width + widthDimension.label
+        config.id !== undefined && widthDimension.label === "px"
+          ? width + widthDimension.label
+          : undefined
       }
       height={
-        config.id !== undefined &&
-        heightDimension.label === "px" &&
-        height + heightDimension.label
+        config.id !== undefined && heightDimension.label === "px"
+          ? height + heightDimension.label
+          : undefined
       }
       targetId={frameId}
     >
@@ -186,7 +188,7 @@ const Viewer = (props) => {
         </>
       ) : (
         <EmptyIframeContainer
-          text={t("SelectFile")}
+          text={t("FilePreview")}
           width="100%"
           height="100%"
         />
@@ -221,7 +223,7 @@ const Viewer = (props) => {
       <CategoryDescription>
         <Text className="sdk-description">{t("ViewerDescription")}</Text>
       </CategoryDescription>
-      <CategoryHeader>{t("CreateSampleHeader")}</CategoryHeader>
+      <CategoryHeader>{t("CreateSampleViewer")}</CategoryHeader>
       <Container>
         {showPreview && (
           <Preview>

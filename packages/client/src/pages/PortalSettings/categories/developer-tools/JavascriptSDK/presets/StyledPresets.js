@@ -16,6 +16,11 @@ export const SDKContainer = styled(Box)`
   .tabs_body {
     height: calc(100lvh - 260px);
   }
+
+  .linkHelp {
+    display: inline;
+    color: "#657077";
+  }
 `;
 
 export const Controls = styled(Box)`

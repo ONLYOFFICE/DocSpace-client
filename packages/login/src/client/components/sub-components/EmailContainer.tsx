@@ -47,7 +47,7 @@ const EmailContainer = ({
           <div className="back-title">
             <IconButton size={16} iconName={ArrowIcon} onClick={onClickBack} />
             <Text fontWeight={600} onClick={onClickBack}>
-              {t("Back")}
+              {t("Common:Back")}
             </Text>
           </div>
           <Text fontWeight={600} fontSize={"16px"}>

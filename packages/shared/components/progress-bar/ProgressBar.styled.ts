@@ -1,9 +1,21 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { Base } from "../../themes";
+
+const loadingAnimation = keyframes`
+ 0% {
+    transform: translateX(-50%);
+  }
+
+  100% {
+    transform: translateX(300%);
+  }
+`;
 
 const StyledProgressBar = styled.div<{ percent: number }>`
   position: relative;
+  width: 100%;
   height: 4px;
+  overflow: hidden;
   border-radius: 3px;
   background-color: ${(props) => props.theme.progressBar.backgroundColor};
 
@@ -22,6 +34,15 @@ const StyledProgressBar = styled.div<{ percent: number }>`
     border-radius: 3px;
     width: ${(props) => props.percent}%;
     background: ${(props) => props.theme.progressBar.percent.background};
+  }
+
+  .progress-bar_animation {
+    position: absolute;
+    height: 100%;
+    width: 25%;
+    border-radius: 3px;
+    background: ${(props) => props.theme.progressBar.percent.background};
+    animation: ${loadingAnimation} 2s linear infinite;
   }
 `;
 

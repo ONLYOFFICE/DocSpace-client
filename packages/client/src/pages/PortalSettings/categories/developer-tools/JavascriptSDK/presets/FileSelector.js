@@ -142,7 +142,7 @@ const FileSelector = (props) => {
     // withBreadCrumbs: true,
     withSubtitle: true,
     filterParam: FilesSelectorFilterTypes.ALL,
-    isButtonMode: false,
+    isButtonMode: selectedElementType === "button",
     buttonWithLogo: true,
     events: {
       onSelectCallback: (items) => {
@@ -180,6 +180,8 @@ const FileSelector = (props) => {
   }, 500);
 
   useEffect(() => {
+    const scroll = document.getElementsByClassName("section-scroll")[0];
+    scroll.scrollTop = 0;
     loadFrame();
     return () => destroyFrame();
   });
@@ -362,8 +364,14 @@ const FileSelector = (props) => {
 
   const preview = (
     <Frame
-      width={widthDimension.label === "px" && width + widthDimension.label}
-      height={heightDimension.label === "px" && height + heightDimension.label}
+      width={
+        widthDimension.label === "px" ? width + widthDimension.label : undefined
+      }
+      height={
+        heightDimension.label === "px"
+          ? height + heightDimension.label
+          : undefined
+      }
       targetId={frameId}
     >
       <Box id={frameId}></Box>
@@ -382,44 +390,25 @@ const FileSelector = (props) => {
     </CodeWrapper>
   );
 
-  const dataTabs =
-    selectedElementType === "element"
-      ? [
-          {
-            key: "preview",
-            title: t("Common:Preview"),
-            content: preview,
-          },
-          {
-            key: "code",
-            title: t("Code"),
-            content: code,
-          },
-        ]
-      : [
-          {
-            key: "preview",
-            title: t("Common:Preview"),
-            content: preview,
-          },
-          {
-            key: "selector-preview",
-            title: t("SelectorPreview"),
-            content: preview,
-          },
-          {
-            key: "code",
-            title: t("Code"),
-            content: code,
-          },
-        ];
+  const dataTabs = [
+    {
+      key: "preview",
+      title: t("Common:Preview"),
+      content: preview,
+    },
+    {
+      key: "code",
+      title: t("Code"),
+      content: code,
+    },
+  ];
 
   return (
     <SDKContainer>
       <CategoryDescription>
         <Text className="sdk-description">{t("FileSelectorDescription")}</Text>
       </CategoryDescription>
-      <CategoryHeader>{t("CreateSampleHeader")}</CategoryHeader>
+      <CategoryHeader>{t("CreateSampleFileSelector")}</CategoryHeader>
       <Container>
         {showPreview && (
           <Preview>

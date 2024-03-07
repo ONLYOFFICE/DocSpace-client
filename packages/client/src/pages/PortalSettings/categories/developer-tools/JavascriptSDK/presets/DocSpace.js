@@ -100,6 +100,8 @@ const DocSpace = (props) => {
   }, 500);
 
   useEffect(() => {
+    const scroll = document.getElementsByClassName("section-scroll")[0];
+    scroll.scrollTop = 0;
     loadFrame();
     return () => destroyFrame();
   });
@@ -167,8 +169,14 @@ const DocSpace = (props) => {
 
   const preview = (
     <Frame
-      width={widthDimension.label === "px" && width + widthDimension.label}
-      height={heightDimension.label === "px" && height + heightDimension.label}
+      width={
+        widthDimension.label === "px" ? width + widthDimension.label : undefined
+      }
+      height={
+        heightDimension.label === "px"
+          ? height + heightDimension.label
+          : undefined
+      }
       targetId={frameId}
     >
       <Box id={frameId}></Box>
@@ -202,7 +210,7 @@ const DocSpace = (props) => {
       <CategoryDescription>
         <Text className="sdk-description">{t("DocspaceDescription")}</Text>
       </CategoryDescription>
-      <CategoryHeader>{t("CreateSampleHeader")}</CategoryHeader>
+      <CategoryHeader>{t("CreateSampleDocSpace")}</CategoryHeader>
       <Container>
         {showPreview && (
           <Preview>

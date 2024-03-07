@@ -45,11 +45,11 @@ export const EmptyViewBody = styled.div`
 export const EmptyViewItemWrapper = styled.div`
   display: flex;
   align-items: center;
-  cursor: pointer;
-
   gap: 20px;
 
-  padding: 16px;
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 12px 16px;
 
   .ev-item__icon {
     width: 36px;
@@ -70,6 +70,16 @@ export const EmptyViewItemWrapper = styled.div`
 
   .ev-item__arrow-icon {
     flex: 1 0 12px;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: ${(props) => props.theme.emptyView.items.hoverColor};
+    }
+  }
+
+  :active {
+    background-color: ${(props) => props.theme.emptyView.items.pressColor};
   }
 `;
 

@@ -2560,6 +2560,13 @@ export const getBaseTheme = () => {
       },
     },
 
+    emptyView: {
+      items: {
+        hoverColor: grayLight,
+        pressColor: lightGrayishStrongBlue,
+      },
+    },
+
     filesPanels: {
       color: black,
 

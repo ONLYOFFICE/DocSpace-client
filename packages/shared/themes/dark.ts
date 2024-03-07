@@ -36,6 +36,8 @@ const {
   darkRed,
 
   darkErrorStatus,
+  charlestonGreen,
+  outerSpace,
 } = globalColors;
 
 const Dark: TTheme = {
@@ -2528,6 +2530,13 @@ const Dark: TTheme = {
     button: {
       colorLink: "#ADADAD",
       colorText: "#ADADAD",
+    },
+  },
+
+  emptyView: {
+    items: {
+      hoverColor: charlestonGreen,
+      pressColor: outerSpace,
     },
   },
 

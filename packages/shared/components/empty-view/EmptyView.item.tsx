@@ -16,7 +16,7 @@ export const EmptyViewItem = ({
   if (disabled) return;
 
   return (
-    <EmptyViewItemWrapper onClick={onClick}>
+    <EmptyViewItemWrapper onClick={onClick} role="button" aria-label={title}>
       {React.cloneElement(icon, { className: "ev-item__icon" })}
       <EmptyViewItemBody>
         <Text

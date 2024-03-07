@@ -351,6 +351,7 @@
   "SelectDOCXFormat": "Select .DOCX file",
   "SelectFile": "Select file",
   "SelectFiles": "Select files",
+  "SelectRoom": "Select room",
   "SelectIMGFormat": "Select IMG file",
   "SelectorEmptyScreenHeader": "No files and folders here yet",
   "SelectXLSXFormat": "Select .XLSX file",
@@ -441,6 +442,7 @@
   "WantToContinue": "Are you sure you want to continue?",
   "Warning": "Warning",
   "Website": "Website",
+  "Yes": "Yes",
   "No": "No",
   "Yesterday": "Yesterday",
   "You": "You"

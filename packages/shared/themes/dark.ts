@@ -3252,6 +3252,7 @@ const Dark: TTheme = {
   sdkPresets: {
     borderColor: "#474747",
     secondaryColor: "#ADADAD",
+    previewBackgroundColor: "#3D3D3D",
   },
 
   sideBarRow: {

@@ -210,7 +210,7 @@ public class LocalesTest
 
         JavaScriptFiles = new List<JavaScriptFile>();
 
-        var pattern1 = "[.{\\s\\(]t\\(\\s*[\"\'`]([a-zA-Z0-9_.:\\s{}/-]+)[\"\'`]\\s*[\\),]";
+        var pattern1 = "[.{\\s\\(]t\\??\\.?\\(\\s*[\"\'`]([a-zA-Z0-9_.:\\s{}/-]+)[\"\'`]\\s*[\\),]";
         var pattern2 = "i18nKey=\"([a-zA-Z0-9_.:-]+)\"";
         var pattern3 = "tKey:\\s\"([a-zA-Z0-9_.:-]+)\"";
         var pattern4 = "getTitle\\(\"([a-zA-Z0-9_.:-]+)\"\\)";

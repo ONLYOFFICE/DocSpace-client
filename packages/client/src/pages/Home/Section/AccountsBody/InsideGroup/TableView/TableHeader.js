@@ -163,9 +163,10 @@ export default inject(
     userStore,
     tableStore,
   }) => {
-    const { filterStore } = peopleStore;
+    const { groupsStore } = peopleStore;
 
-    const { filter, setFilter } = filterStore;
+    const { insideGroupFilter: filter, setInsideGroupFilter: setFilter } =
+      groupsStore;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { withPaging } = settingsStore;

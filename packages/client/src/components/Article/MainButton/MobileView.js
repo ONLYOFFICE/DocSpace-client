@@ -87,7 +87,7 @@ const MobileView = ({
     let currentPrimaryNumEl = primaryNumEl;
 
     const uploadedFileCount = files.filter(
-      (item) => item.percent === 100 && !item.cancel,
+      (item) => item.percent >= 100 && !item.cancel,
     ).length;
     const fileLength = files.filter((item) => !item.cancel).length;
 

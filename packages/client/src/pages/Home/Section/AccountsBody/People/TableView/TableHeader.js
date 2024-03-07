@@ -27,7 +27,6 @@ class PeopleTableHeader extends React.Component {
         sortBy: "AZ",
         minWidth: 210,
         onClick: this.onFilter,
-        onIconClick: this.onIconClick,
       },
       {
         key: "Type",
@@ -129,18 +128,6 @@ class PeopleTableHeader extends React.Component {
 
     setIsLoading(true);
     setFilter(newFilter);
-    navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
-  };
-
-  onIconClick = () => {
-    const { filter, setIsLoading, navigate, location } = this.props;
-    const newFilter = filter.clone();
-
-    newFilter.sortOrder =
-      newFilter.sortOrder === "ascending" ? "descending" : "ascending";
-
-    setIsLoading(true);
-
     navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
   };
 

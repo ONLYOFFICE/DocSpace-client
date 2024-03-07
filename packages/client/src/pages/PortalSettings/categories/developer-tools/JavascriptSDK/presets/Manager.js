@@ -734,7 +734,7 @@ const Manager = (props) => {
       <CategoryDescription>
         <Text className="sdk-description">{t("CustomDescription")}</Text>
       </CategoryDescription>
-      <CategoryHeader>{t("CreateSampleHeader")}</CategoryHeader>
+      <CategoryHeader>{t("CreateSampleDocSpace")}</CategoryHeader>
       <Container>
         {showPreview && (
           <Preview>

@@ -408,7 +408,7 @@ const FileSelector = (props) => {
       <CategoryDescription>
         <Text className="sdk-description">{t("FileSelectorDescription")}</Text>
       </CategoryDescription>
-      <CategoryHeader>{t("CreateSampleHeader")}</CategoryHeader>
+      <CategoryHeader>{t("CreateSampleFileSelector")}</CategoryHeader>
       <Container>
         {showPreview && (
           <Preview>

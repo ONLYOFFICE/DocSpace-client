@@ -210,7 +210,7 @@ const DocSpace = (props) => {
       <CategoryDescription>
         <Text className="sdk-description">{t("DocspaceDescription")}</Text>
       </CategoryDescription>
-      <CategoryHeader>{t("CreateSampleHeader")}</CategoryHeader>
+      <CategoryHeader>{t("CreateSampleDocSpace")}</CategoryHeader>
       <Container>
         {showPreview && (
           <Preview>

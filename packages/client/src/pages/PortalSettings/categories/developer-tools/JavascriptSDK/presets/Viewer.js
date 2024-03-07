@@ -223,7 +223,7 @@ const Viewer = (props) => {
       <CategoryDescription>
         <Text className="sdk-description">{t("ViewerDescription")}</Text>
       </CategoryDescription>
-      <CategoryHeader>{t("CreateSampleHeader")}</CategoryHeader>
+      <CategoryHeader>{t("CreateSampleViewer")}</CategoryHeader>
       <Container>
         {showPreview && (
           <Preview>

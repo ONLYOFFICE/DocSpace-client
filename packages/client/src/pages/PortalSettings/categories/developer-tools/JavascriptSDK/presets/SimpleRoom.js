@@ -322,7 +322,7 @@ const SimpleRoom = (props) => {
       <CategoryDescription>
         <Text className="sdk-description">{t("PublicRoomDescription")}</Text>
       </CategoryDescription>
-      <CategoryHeader>{t("CreateSampleHeader")}</CategoryHeader>
+      <CategoryHeader>{t("CreateSamplePublicRoom")}</CategoryHeader>
       <Container>
         {showPreview && (
           <Preview>

@@ -320,7 +320,12 @@ class GroupsStore {
     this.setSelection(newSelections);
   };
 
-  getGroupContextOptions = (t, item, forInfoPanel = false) => {
+  getGroupContextOptions = (
+    t,
+    item,
+    forInfoPanel = false,
+    forInsideGroup = false,
+  ) => {
     return [
       {
         id: "edit-group",
@@ -343,7 +348,12 @@ class GroupsStore {
         title: t("Common:Info"),
         icon: InfoReactSvgUrl,
         onClick: () => {
-          this.selection = [item];
+          if (!forInsideGroup) {
+            this.selection = [item];
+          } else {
+            this.peopleStore.selectionStore.setSelection([]);
+            this.peopleStore.selectionStore.setBufferSelection(null);
+          }
           this.infoPanelStore.setIsVisible(true);
         },
       },

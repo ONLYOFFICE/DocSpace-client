@@ -34,6 +34,7 @@ const InfoPanelHeaderContent = (props) => {
     resetView,
     myRoomsId,
     archiveRoomsId,
+    myFolderId,
   } = props;
 
   const [isTablet, setIsTablet] = useState(false);
@@ -184,8 +185,7 @@ const InfoPanelHeaderContent = (props) => {
 
       {withSubmenu && (
         <div className="submenu">
-          {selection?.rootFolderId == myRoomsId ||
-          selection?.rootFolderId == archiveRoomsId ? (
+          {selection?.rootFolderId !== myFolderId ? (
             <Submenu
               style={{ width: "100%" }}
               data={roomsSubmenu}
@@ -222,7 +222,7 @@ export default inject(
       resetView,
     } = infoPanelStore;
 
-    const { myRoomsId, archiveRoomsId } = treeFoldersStore;
+    const { myRoomsId, archiveRoomsId, myFolderId } = treeFoldersStore;
 
     const { enablePlugins } = settingsStore;
 
@@ -244,6 +244,7 @@ export default inject(
       archiveRoomsId,
 
       enablePlugins,
+      myFolderId,
     };
   },
 )(

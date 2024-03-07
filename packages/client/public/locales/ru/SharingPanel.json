@@ -1,13 +1,9 @@
 {
-  "AddGroupsForSharingButton": "Добавить группы",
-  "AddShareMessage": "Добавить сообщение",
   "CopyExternalLink": "Скопировать внешнюю ссылку",
   "EncryptedFileSharing": "К файлу <strong>{{title}}</strong> успешно предоставлен доступ",
   "ExternalLink": "Внешняя ссылка",
   "FormFilling": "Заполнение форм",
-  "InternalLink": "Внутренняя ссылка",
   "LinkName": "Имя ссылки",
-  "Notify users": "Уведомить пользователей",
   "ShareEmailBody": "Вам предоставлен доступ к документу {{itemName}}. Нажмите на ссылку ниже, чтобы открыть документ прямо сейчас: {{shareLink}}.",
   "ShareEmailSubject": "Вам предоставлен доступ к документу {{itemName}}",
   "SharingSettingsTitle": "Настройки доступа"

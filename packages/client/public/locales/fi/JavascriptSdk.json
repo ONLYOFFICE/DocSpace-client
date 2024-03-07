@@ -4,7 +4,6 @@
   "Ascending": "Nouseva",
   "Code": "Lisättävä koodi",
   "CopyWindowCode": "Kopioi ikkunan upotuskoodi",
-  "CreateSampleHeader": "Luo esimerkki DocSpace-upotuksesta",
   "CSPDescription": "Upottaaksesi DocSpacen iframeksi verkkosivulle, lisää sen URL sallittujen luetteloon.",
   "CSPHeader": "Upota DocSpace iframeksi",
   "CSPHelp": "Tämä asetus on suojausmekanismi, jota voidaan käyttää suojelemaan sisällön lisäyshyökkäyksiltä. CSP kuvaa suojatut resurssien latauslähteet. Lataaminen resursseista, jotka eivät sisälly \"valkoiseen listaan\", on estetty. Määritä toimialueet (yhdessä protokollan kanssa) joiden kanssa se toimii.",

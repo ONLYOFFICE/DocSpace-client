@@ -1,13 +1,9 @@
 {
-  "AddGroupsForSharingButton": "Qruplar əlavə et",
-  "AddShareMessage": "Mesaj əlavə et",
   "CopyExternalLink": "Xarici linki köçürmək",
   "EncryptedFileSharing": "<strong>{{title}}</strong> paylaşıldı",
   "ExternalLink": "Xarici keçid",
   "FormFilling": "Formanın doldurulması",
-  "InternalLink": "Daxili link",
   "LinkName": "Keçid adı",
-  "Notify users": "İstifadəçilərə məlumat ver",
   "ShareEmailBody": "Sizə {{itemName}} sənədinə giriş icazəsi verildi. Sənədi hazırda açmaq üçün aşağıdakı linki klikləyin: {{shareLink}}.",
   "ShareEmailSubject": "Sizə {{itemName}} sənədinə giriş icazəsi verildi ",
   "SharingSettingsTitle": "Paylaşma sazlamaları"

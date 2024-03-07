@@ -1,13 +1,9 @@
 {
-  "AddGroupsForSharingButton": "Adăugați grupe",
-  "AddShareMessage": "Adăugați mesaj",
   "CopyExternalLink": "Copierea linkului extern",
   "EncryptedFileSharing": "Fișier <strong>{{title}}</strong> a fost partajat cu succes",
   "ExternalLink": "Link extern",
   "FormFilling": "Completare formular",
-  "InternalLink": "Link intern",
   "LinkName": "Numele linkului",
-  "Notify users": "Notifică utilizatorii",
   "ShareEmailBody": "V-a fost acordat accesul la document {{itemName}}. Faceți clic pe link-ul de mai jos ca să deschideți documentul chiar acum: {{shareLink}}.",
   "ShareEmailSubject": "V-a fost acordat accesul la document {{itemName}}",
   "SharingSettingsTitle": "Setări partajare"

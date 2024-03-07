@@ -1,12 +1,8 @@
 {
-  "AddGroupsForSharingButton": "ເພີ່ມກຸ່ມ",
-  "AddShareMessage": "ເພີ່ມຂໍ້ຄວາມ",
   "CopyExternalLink": "ຄັດລອກລິ້ງພາຍນອກ",
   "EncryptedFileSharing": "File <strong>{{title}}</strong> ແບ່ງປັນສໍາເລັດແລ້ວ",
   "ExternalLink": "ລິງພາຍນອກ",
   "FormFilling": "ການຕື່ມແບບຟອມ",
-  "InternalLink": "ລິ້ງພາຍໃນ",
-  "Notify users": "ແຈ້ງເຕືອນຜູ້ໃຊ້",
   "ShareEmailBody": "ທ່ານໄດ້ຮັບອະນຸຍາດເຂົ້າເຖິງເອກະສານ {{itemName}}. ກົດທີ່ລິ້ງດ້ານລຸ່ມເພື່ອເປີດເອກະສານດຽວນີ້: {{shareLink}}.",
   "ShareEmailSubject": "ທ່ານໄດ້ຮັບອະນຸຍາດເຂົ້າເຖິງເອກະສານ {{itemName}}",
   "SharingSettingsTitle": "ຕັ້ງຄ່າການແບ່ງປັນ"

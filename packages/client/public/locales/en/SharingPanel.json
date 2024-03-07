@@ -1,14 +1,9 @@
 {
-  "AddGroupsForSharingButton": "Add groups",
-  "AddShareMessage": "Add message",
   "CopyExternalLink": "Copy external link",
   "EncryptedFileSharing": "File <strong>{{title}}</strong> successfully shared",
   "ExternalLink": "External link",
   "FormFilling": "Form filling",
-  "GeneralAccessLinkCreated": "General link for public viewing successfully created and copied to clipboard",
-  "InternalLink": "Internal link",
   "LinkName": "Link name",
-  "Notify users": "Notify users",
   "ShareEmailBody": "You have been granted access to the {{itemName}} document. Click the link below to open the document right now: {{shareLink}}.",
   "ShareEmailSubject": "You have been granted access to the {{itemName}} document",
   "SharingSettingsTitle": "Sharing settings"

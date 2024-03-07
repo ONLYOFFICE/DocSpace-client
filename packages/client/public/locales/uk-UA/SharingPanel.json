@@ -1,13 +1,9 @@
 {
-  "AddGroupsForSharingButton": "Додати групи",
-  "AddShareMessage": "Додати повідомлення",
   "CopyExternalLink": "Скопіювати зовнішнє посилання",
   "EncryptedFileSharing": "Спільний доступ до файлу <strong>{{title}}</strong> успішно надано",
   "ExternalLink": "Зовнішнє посилання",
   "FormFilling": "Заповнення форми",
-  "InternalLink": "Внутрішнє посилання",
   "LinkName": "Назва посилання",
-  "Notify users": "Сповістити користувачів",
   "ShareEmailBody": "Вам надано доступ до документа {{itemName}}. Клацніть посилання нижче, щоб відкрити документ зараз: {{shareLink}}.",
   "ShareEmailSubject": "Вам надано доступ до документа {{itemName}}",
   "SharingSettingsTitle": "Параметри спільного доступу"

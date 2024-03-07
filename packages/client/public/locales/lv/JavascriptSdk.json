@@ -4,7 +4,6 @@
   "Ascending": "Augoši",
   "Code": "Ievietojamais kods",
   "CopyWindowCode": "Kopējiet loga iegulšanas kodu",
-  "CreateSampleHeader": "Izveidot iegultā DocSpace paraugu",
   "CSPDescription": "Lai tīmekļa vietnē DocSpace droši iegultu kā iframe, pievienojiet tā vietrādi URL savam atļauju sarakstam.",
   "CSPHeader": "Iegult DocSpace kā iframe",
   "CSPHelp": "Šis iestatījums ir drošības mehānisms, ko var izmantot, lai aizsargātu pret satura ievadīšanas uzbrukumiem. CSP apraksta drošus resursu lejupielādes avotus. Lejupielāde no resursiem, kas nav iekļauti “baltajā sarakstā”, ir bloķēta. Norādiet domēnus (kopā ar protokolu), ar kuriem tas darbosies.",

@@ -21,7 +21,7 @@ export const getShareOptions = (t: TTranslation) => {
     {
       internal: true,
       key: "users",
-      label: t("Common:DoсSpaceUsersOnly"),
+      label: t("Common:SpaceUsersOnly"),
     },
   ];
 };
@@ -124,3 +124,4 @@ export const getExpiredOptions = (
     },
   ];
 };
+

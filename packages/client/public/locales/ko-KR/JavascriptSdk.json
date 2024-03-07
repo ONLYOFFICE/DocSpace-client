@@ -4,7 +4,6 @@
   "Ascending": "오름차순",
   "Code": "입력할 코드",
   "CopyWindowCode": "윈도우 임베드 코드 복사",
-  "CreateSampleHeader": "샘플 DocSpace 임베드 생성",
   "CSPDescription": "웹사이트에 DocSpace를 iframe으로 안전하게 임베드하려면 해당 URL을 허용 목록에 추가하세요.",
   "CSPHeader": "DocSpace를 iframe으로 임베드\\",
   "CSPHelp": "이 설정은 콘텐츠 주입 공격으로부터 보호하는 데 사용할 수 있는 보안 메커니즘입니다. CSP는 보안 리소스 다운로드 소스를 설명합니다. '화이트리스트'에 포함되지 않은 리소스로부터의 다운로드는 차단됩니다. (프로토콜과 함께) 작동할 도메인을 지정하세요.",

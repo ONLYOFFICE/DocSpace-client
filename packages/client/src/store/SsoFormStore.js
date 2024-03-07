@@ -160,7 +160,7 @@ class SsoFormStore {
       this.serviceProviderSettings = true;
     } else {
       this.enableSso = false;
-      !this.hasErrors && this.saveSsoSettings(t);
+      !this.hasErrors && this.entityId.trim() !== "" && this.saveSsoSettings(t);
     }
 
     for (let key in this) {

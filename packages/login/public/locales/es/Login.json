@@ -20,7 +20,5 @@
   "RegisterTitle": "Solicitud de registro",
   "RegistrationEmailWatermark": "Email",
   "RememberHelper": "La duración de la sesión por defecto es de 20 minutos. Marque esta opción para establecerla en 1 año. Para establecer su propio valor, vaya a Ajustes.",
-  "ResendCode": "Reenviar código",
-  "SignInWithCode": "Iniciar sesión con código secreto",
-  "SignInWithPassword": "Iniciar sesión con contraseña"
+  "ResendCode": "Reenviar código"
 }

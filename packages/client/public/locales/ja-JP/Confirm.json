@@ -28,10 +28,5 @@
   "SetAppTitle": "認証アプリケーションの設定",
   "SuccessDeactivate": "お客様のアカウントは正常に無効化されました。10秒後に<1>サイト</1>にリダイレクトされます。",
   "SuccessReactivate": "あなたのアカウントは正常に再有効化されました。10秒後に<1>ポータル</1>にリダイレクトされます。",
-  "SuccessRemoved": "お客様のアカウントは正常に削除されました。10秒後に<1>site</1>にリダイレクトされます。",
-  "WelcomeRegister": "開始するには、ご登録ください",
-  "WelcomeRegisterViaSocial": "開始するには、ご登録またはSNSでログインしてください",
-  "WelcomeRegisterViaSSO": "開始するには、ご登録またはSSOでログインしてください",
-  "WelcomeToDocspace": "DocSpaceへようこそ！",
-  "WelcomeToRoom": "<1>{{ roomName }}</1>ルームへようこそ！"
+  "SuccessRemoved": "お客様のアカウントは正常に削除されました。10秒後に<1>site</1>にリダイレクトされます。"
 }

@@ -20,7 +20,5 @@
   "RegisterTitle": "Rekisteröintipyyntö",
   "RegistrationEmailWatermark": "sähköposti",
   "RememberHelper": "Istunnon oletuskesto on 20 minuuttia. Valitse tämä vaihtoehto, jos haluat asettaa sen 1 vuodeksi. Voit asettaa oman arvon Asetuksissa.",
-  "ResendCode": "Lähetä koodi uudelleen",
-  "SignInWithCode": "Kirjaudu sisään salaisella koodilla",
-  "SignInWithPassword": "Kirjaudu sisään salasanalla"
+  "ResendCode": "Lähetä koodi uudelleen"
 }

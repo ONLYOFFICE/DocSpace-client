@@ -28,10 +28,5 @@
   "SetAppTitle": "Kimlik doğrulama uygulamanızı yapılandırın",
   "SuccessDeactivate": "Hesabınız başarıyla devre dışı bırakıldı. 10 saniye içinde <1>siteye</1> yönlendirileceksiniz",
   "SuccessReactivate": "Hesabınız başarıyla yeniden etkinleştirildi. 10 saniye içinde <1>portal</1>'a yönlendirileceksiniz.",
-  "SuccessRemoved": "Hesabınız başarıyla kaldırıldı. 10 saniye içinde <1>siteye</1> yönlendirileceksiniz.",
-  "WelcomeRegister": "Başlamak için kaydolun",
-  "WelcomeRegisterViaSocial": "Başlamak için kaydolun veya sosyal ağlar aracılığı ile giriş yapın",
-  "WelcomeRegisterViaSSO": "Başlamak için kaydolun veya SSO aracılığıyla giriş yapın",
-  "WelcomeToDocspace": "DocSpace'imize hoş geldiniz!",
-  "WelcomeToRoom": "<1>{{ roomName }}</1> odasına hoş geldiniz!"
+  "SuccessRemoved": "Hesabınız başarıyla kaldırıldı. 10 saniye içinde <1>siteye</1> yönlendirileceksiniz."
 }

@@ -377,9 +377,11 @@ const useEditorEvents = ({
         usersNotFound &&
           usersNotFound.length > 0 &&
           docEditor?.showMessage?.(
-            t?.("UsersWithoutAccess", {
-              users: usersNotFound,
-            }) ?? "",
+            t
+              ? t("UsersWithoutAccess", {
+                  users: usersNotFound,
+                })
+              : "",
           );
       } catch (e) {
         toastr.error(e as TData);
@@ -603,3 +605,4 @@ const useEditorEvents = ({
 };
 
 export default useEditorEvents;
+

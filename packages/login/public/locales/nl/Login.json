@@ -20,7 +20,5 @@
   "RegisterTitle": "Registratieverzoek",
   "RegistrationEmailWatermark": "E-mail",
   "RememberHelper": "De standaard sessieduur is 20 minuten. Vink deze optie aan om deze in te stellen op 1 jaar. Om uw eigen waarde in te stellen, ga naar Instellingen.",
-  "ResendCode": "Code opnieuw versturen",
-  "SignInWithCode": "Inloggen met geheime code",
-  "SignInWithPassword": "Inloggen met wachtwoord"
+  "ResendCode": "Code opnieuw versturen"
 }

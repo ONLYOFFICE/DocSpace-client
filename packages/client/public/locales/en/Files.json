@@ -32,6 +32,7 @@
   "CopyLinkPassword": "Copy link password",
   "CopyPassword": "Copy password",
   "CopySharedLink": "Copy shared link",
+  "CreateNewFolderInStorage": "Create a new folder in the storage",
   "CreateNewLink": "Create new link",
   "CreateRoom": "Create room",
   "CustomRooms": "Custom",
@@ -187,6 +188,5 @@
   "WantToRestoreTheRoom": "All shared links in this room will become active, and its contents will be available to everyone with the link. Do you want to restore the room?",
   "WantToRestoreTheRooms": "All shared links in restored rooms will become active, and their contents will be available to everyone with the room links. Do you want to restore the rooms?",
   "WithSubfolders": "With subfolders",
-  "YouLeftTheRoom": "You have left the room",
-  "CreateNewFolderInStorage": "Create a new folder in the storage"
+  "YouLeftTheRoom": "You have left the room"
 }

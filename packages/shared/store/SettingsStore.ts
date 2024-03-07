@@ -877,7 +877,7 @@ class SettingsStore {
       default:
         theme =
           window.matchMedia &&
-            window.matchMedia("(prefers-color-scheme: dark)").matches
+          window.matchMedia("(prefers-color-scheme: dark)").matches
             ? ThemeKeys.DarkStr
             : ThemeKeys.BaseStr;
         theme = getSystemTheme();

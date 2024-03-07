@@ -1353,10 +1353,10 @@ const Dark: TTheme = {
   },
 
   progressBar: {
-    backgroundColor: "#DADDDF",
+    backgroundColor: "#858585",
 
     percent: {
-      background: "#4781D1",
+      background: "#FFFFFF",
     },
   },
 
@@ -2019,7 +2019,7 @@ const Dark: TTheme = {
 
     backgroundColor: black,
     blurColor: "rgba(20, 20, 20, 0.8)",
-    borderColor: "#292929",
+    borderColor: "#474747",
     thumbnailBorderColor: grayLightMid,
     textColor: white,
 
@@ -2916,6 +2916,7 @@ const Dark: TTheme = {
 
     settings: {
       iconFill: white,
+      headerTitleColor: "#FFFFFF",
       trashIcon: "#858585",
       article: {
         titleColor: "#c4c4c4",
@@ -3042,6 +3043,33 @@ const Dark: TTheme = {
         color: "#E17415",
       },
 
+      migration: {
+        descriptionColor: "#ADADAD",
+        subtitleColor: "#FFFFFF",
+        workspaceBackground: "#333333",
+        workspaceBorder: "1px solid #474747",
+        stepDescriptionColor: "#FFFFFF",
+        fileInputIconColor: "#5c5c5c",
+        infoBlockBackground: "#282828",
+        infoBlockTextColor: "#858585",
+        errorTextColor: "#E06451",
+        existingTextColor: "#3BA420",
+        tableHeaderText: "#858585",
+        tableRowHoverColor: "#3D3D3D",
+        tableRowTextColor: "#858585",
+        comboBoxLabelColor: "#FFFFFF",
+        importSectionBackground: "#282828",
+        importSectionTextColor: "#858585",
+        importItemBackground: "#333333",
+        importItemDisableBackground: "#3D3D3D",
+        importItemTextColor: "#ADADAD",
+        importItemDisableTextColor: "#5C5C5C",
+        importItemDescription: "#A3A9AE",
+        importIconColor: "#a9a9a9",
+        groupMenuBackground: "#333333",
+        groupMenuBorder: "1px solid #474747",
+        groupMenuBoxShadow: "rgba(0, 0, 0, 0.16) 0px 5px 5px 0px",
+      },
       storageManagement: {
         grayBackgroundText: "#858585",
         descriptionColor: "#ADADAD",

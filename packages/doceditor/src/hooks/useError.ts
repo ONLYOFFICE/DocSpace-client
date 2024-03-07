@@ -33,7 +33,7 @@ const useError = ({ error, editorUrl, t }: UseErrorProps) => {
     } else {
       const tempElm = document.getElementById("loader");
 
-      const isLoadingDocumentError = error !== null;
+      const isLoadingDocumentError = !!error;
       const isLoadedDocument = !error && editorUrl;
 
       if (tempElm && (isLoadingDocumentError || isLoadedDocument))

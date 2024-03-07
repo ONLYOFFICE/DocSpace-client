@@ -1,6 +1,6 @@
 export default function componentLoader(
   lazyComponent: Function,
-  attemptsLeft: number = 3
+  attemptsLeft: number = 3,
 ) {
   return new Promise((resolve, reject) => {
     lazyComponent()
@@ -14,7 +14,7 @@ export default function componentLoader(
           }
           componentLoader(lazyComponent, attemptsLeft - 1).then(
             resolve,
-            reject
+            reject,
           );
         }, 1500);
       });

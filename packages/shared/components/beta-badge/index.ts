@@ -1,1 +1,3 @@
-export { default } from "./BetaBadge";
+import BetaBadge from "./BetaBadge";
+
+export { BetaBadge };

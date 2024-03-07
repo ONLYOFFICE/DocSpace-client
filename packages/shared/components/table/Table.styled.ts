@@ -366,12 +366,18 @@ const StyledTableHeaderCell = styled.div<{
 
   .header-container-text-wrapper {
     display: flex;
+    overflow: hidden;
   }
 
   .header-container-text {
     height: 38px;
-    display: flex;
-    align-items: center;
+    display: block;
+    line-height: 38px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
     color: ${(props) =>
       props.isActive
         ? props.theme.tableContainer.header.activeTextColor

@@ -45,9 +45,13 @@ const FileInputPure = ({
       return;
     }
 
-    setFileName(acceptedFiles[0].name);
+    setFileName(
+      acceptedFiles.length > 1
+        ? acceptedFiles.map((file) => file.name).join(", ")
+        : acceptedFiles[0].name,
+    );
 
-    onInput(acceptedFiles[0]);
+    onInput(acceptedFiles.length > 1 ? acceptedFiles : acceptedFiles[0]);
   };
 
   const getSize = () => {

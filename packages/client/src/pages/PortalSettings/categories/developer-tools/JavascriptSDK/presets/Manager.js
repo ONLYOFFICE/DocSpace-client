@@ -236,9 +236,13 @@ const Manager = (props) => {
   const [height, setHeight] = useState("100");
   const [withSubfolders, setWithSubfolders] = useState(false);
   const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
-  const [showPreview, setShowPreview] = useState(window.innerWidth > showPreviewThreshold);
+  const [showPreview, setShowPreview] = useState(
+    window.innerWidth > showPreviewThreshold,
+  );
   const [sharedLinks, setSharedLinks] = useState(null);
-  const [columnDisplay, setColumnDisplay] = useState(columnDisplayOptions[0].value);
+  const [columnDisplay, setColumnDisplay] = useState(
+    columnDisplayOptions[0].value,
+  );
   const [selectedColumns, setSelectedColumns] = useState([
     { key: "Name", label: t("Common:Name") },
     { key: "Type", label: t("Common:Type") },
@@ -302,7 +306,9 @@ const Manager = (props) => {
 
     const params = objectToGetParams(config);
 
-    loadScript(`${scriptUrl}${params}`, "integration", () => window.DocSpace.SDK.initFrame(config));
+    loadScript(`${scriptUrl}${params}`, "integration", () =>
+      window.DocSpace.SDK.initFrame(config),
+    );
   }, 500);
 
   useEffect(() => {
@@ -514,15 +520,22 @@ const Manager = (props) => {
     if (!selectedColumns.find((column) => column.key === option.key)) {
       setConfig((config) => ({
         ...config,
-        viewTableColumns: [...selectedColumns, option].map((column) => column.key).join(","),
+        viewTableColumns: [...selectedColumns, option]
+          .map((column) => column.key)
+          .join(","),
       }));
-      setSelectedColumns((prevSelectedColumns) => [...prevSelectedColumns, option]);
+      setSelectedColumns((prevSelectedColumns) => [
+        ...prevSelectedColumns,
+        option,
+      ]);
     }
   };
 
   const deleteSelectedColumn = (option) => {
     setColumnsOptions((prevColumnsOptions) => [option, ...prevColumnsOptions]);
-    const filteredColumns = selectedColumns.filter((column) => column.key !== option.key);
+    const filteredColumns = selectedColumns.filter(
+      (column) => column.key !== option.key,
+    );
     setConfig((config) => ({
       ...config,
       viewTableColumns: filteredColumns.map((column) => column.key).join(","),
@@ -538,7 +551,8 @@ const Manager = (props) => {
 
   const onResize = () => {
     const isEnoughWidthForPreview = window.innerWidth > showPreviewThreshold;
-    if (isEnoughWidthForPreview !== showPreview) setShowPreview(isEnoughWidthForPreview);
+    if (isEnoughWidthForPreview !== showPreview)
+      setShowPreview(isEnoughWidthForPreview);
   };
 
   // const onFilterSelect = (option) => {
@@ -691,8 +705,13 @@ const Manager = (props) => {
   );
 
   const code = (
-    <CodeWrapper width={width + widthDimension.label} height={height + heightDimension.label}>
-      <CategorySubHeader className="copy-window-code">{t("CopyWindowCode")}</CategorySubHeader>
+    <CodeWrapper
+      width={width + widthDimension.label}
+      height={height + heightDimension.label}
+    >
+      <CategorySubHeader className="copy-window-code">
+        {t("CopyWindowCode")}
+      </CategorySubHeader>
       <Textarea value={codeBlock} heightTextArea={153} />
     </CodeWrapper>
   );
@@ -867,7 +886,7 @@ const Manager = (props) => {
               <LabelGroup>
                 <Checkbox
                   className="checkbox"
-                  label={t("Filter")}
+                  label={t("SearchFilterAndSort")}
                   onChange={onChangeShowFilter}
                   isChecked={config.showFilter}
                 />
@@ -915,22 +934,32 @@ const Manager = (props) => {
                 <HelpButton
                   offsetRight={0}
                   size={12}
-                  tooltipContent={<Text fontSize="12px">{t("RoomOrFolderDescription")}</Text>}
+                  tooltipContent={
+                    <Text fontSize="12px">{t("RoomOrFolderDescription")}</Text>
+                  }
                 />
               </LabelGroup>
               <FilesSelectorInputWrapper>
-                <FilesSelectorInput onSelectFolder={onChangeFolderId} isSelect />
+                <FilesSelectorInput
+                  onSelectFolder={onChangeFolderId}
+                  isSelect
+                />
               </FilesSelectorInputWrapper>
             </ControlsGroup>
             {sharedLinks && (
               <ControlsGroup>
                 <LabelGroup>
-                  <Label className="label" text={t("SharingPanel:ExternalLink")} />
+                  <Label
+                    className="label"
+                    text={t("SharingPanel:ExternalLink")}
+                  />
                   <HelpButton
                     offsetRight={0}
                     size={12}
                     tooltipContent={
-                      <Text fontSize="12px">{t("CreateEditRoomDialog:PublicRoomDescription")}</Text>
+                      <Text fontSize="12px">
+                        {t("CreateEditRoomDialog:PublicRoomDescription")}
+                      </Text>
                     }
                   />
                 </LabelGroup>
@@ -1026,10 +1055,10 @@ const Manager = (props) => {
             {/* <ControlsGroup>
             {"id" in config ? (
               <>
-                <Label className="label" text={t("File Filter")} />
+                <Label className="label" text={t("Files:Filter")} />
                 <ToggleButton
                   className="toggle"
-                  label="Author"
+                  label={t("Files:ByAuthor")}
                   onChange={toggleAuthor}
                   isChecked={isUserFilterSet}
                 />
@@ -1039,7 +1068,7 @@ const Manager = (props) => {
                       <TextInput
                         scale
                         onChange={onChangeAuthor}
-                        placeholder={"Search by name or email"}
+                        placeholder={t("Common:Search")}
                         value={author}
                         onFocus={openInviteInputPanel}
                         isAutoFocussed
@@ -1065,7 +1094,7 @@ const Manager = (props) => {
                 )}
                 <ToggleButton
                   className="toggle"
-                  label="Type"
+                  label={t("Common:Type")}
                   onChange={(e) => {
                     if (!e.target.checked) {
                       const filtered = { ...config.filter };
@@ -1089,10 +1118,10 @@ const Manager = (props) => {
               </>
             ) : (
               <>
-                <Label className="label" text={t("Room Filter")} />
+                <Label className="label" text={t("Files:Filter")} />
                 <ToggleButton
                   className="toggle"
-                  label="Member"
+                  label={t("Common:Member")}
                   onChange={toggleMembers}
                   isChecked={isUserFilterSet}
                 />
@@ -1114,7 +1143,7 @@ const Manager = (props) => {
                           <TextInput
                             scale
                             onChange={onChangeAuthor}
-                            placeholder={"Search by name or email"}
+                            placeholder={t("Common:Search")}
                             value={author}
                             onFocus={openInviteInputPanel}
                             isAutoFocussed
@@ -1141,7 +1170,7 @@ const Manager = (props) => {
 
                     <Checkbox
                       className="checkbox"
-                      label={"Search by Owners"}
+                      label={t("Translations:SearchByOwner")}
                       onChange={(e) => {
                         setConfig((config) => ({
                           ...config,
@@ -1154,7 +1183,7 @@ const Manager = (props) => {
                 )}
                 <ToggleButton
                   className="toggle"
-                  label="Type"
+                  label={t("Common:Type")}
                   onChange={(e) => {
                     if (!e.target.checked) {
                       const filtered = { ...config.filter };
@@ -1241,7 +1270,9 @@ const Manager = (props) => {
                 <HelpButton
                   offsetRight={0}
                   size={12}
-                  tooltipContent={<Text fontSize="12px">{t("ItemsCountDescription")}</Text>}
+                  tooltipContent={
+                    <Text fontSize="12px">{t("ItemsCountDescription")}</Text>
+                  }
                 />
               </LabelGroup>
               <TextInput

@@ -17,7 +17,7 @@ export const DesktopDetails = ({
 }: DesktopDetailsProps) => {
   return (
     <DesktopDetailsContainer className={className}>
-      <Text dir="auto" isBold fontSize="14px" className="title">
+      <Text isBold fontSize="14px" className="title">
         {title}
       </Text>
       <ControlBtn onClick={onMaskClick} className="mediaPlayerClose">

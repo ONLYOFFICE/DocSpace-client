@@ -47,6 +47,7 @@ const HeaderContainer = styled.div`
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
+      color: ${(props) => props.theme.client.settings.headerTitleColor};
     }
   }
   .action-wrapper {
@@ -314,6 +315,7 @@ const SectionHeaderContent = (props) => {
             isChecked={isHeaderChecked}
             isIndeterminate={isHeaderIndeterminate}
             headerMenu={headerMenu}
+            withComboBox
           />
         </div>
       ) : !isLoadedSectionHeader ? (

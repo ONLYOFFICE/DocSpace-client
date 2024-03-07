@@ -24,6 +24,11 @@ export type TTableColumn = {
   defaultSize?: number;
   default?: boolean;
   resizable?: boolean;
+  checkbox?: {
+    value: boolean;
+    isIndeterminate: boolean;
+    onChange: (e?: React.ChangeEvent<HTMLInputElement>) => void;
+  };
 };
 
 export interface TableHeaderProps {
@@ -122,4 +127,5 @@ export interface TableGroupMenuProps {
   isMobileView?: boolean;
   isBlocked?: boolean;
   toggleInfoPanel: () => void;
+  withComboBox?: boolean;
 }

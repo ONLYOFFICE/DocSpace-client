@@ -67,13 +67,22 @@ const RoomSelector = (props) => {
   ];
 
   const roomTypeOptions = [
-    { key: "room-type-all", label: t("AllTypes"), roomType: undefined, default: true },
+    {
+      key: "room-type-all",
+      label: t("AllTypes"),
+      roomType: undefined,
+      default: true,
+    },
     {
       key: "room-type-collaboration",
       label: t("CreateEditRoomDialog:CollaborationRoomTitle"),
       roomType: RoomsType.EditingRoom,
     },
-    { key: "room-type-public", label: t("Files:PublicRoom"), roomType: RoomsType.PublicRoom },
+    {
+      key: "room-type-public",
+      label: t("Files:PublicRoom"),
+      roomType: RoomsType.PublicRoom,
+    },
     {
       key: "room-type-custom",
       label: t("CreateEditRoomDialog:CustomRoomTitle"),
@@ -86,8 +95,12 @@ const RoomSelector = (props) => {
   const [width, setWidth] = useState("100");
   const [height, setHeight] = useState("100");
   const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
-  const [showPreview, setShowPreview] = useState(window.innerWidth > showPreviewThreshold);
-  const [selectedElementType, setSelectedElementType] = useState(elementDisplayOptions[0].value);
+  const [showPreview, setShowPreview] = useState(
+    window.innerWidth > showPreviewThreshold,
+  );
+  const [selectedElementType, setSelectedElementType] = useState(
+    elementDisplayOptions[0].value,
+  );
   const [roomType, setRoomType] = useState(roomTypeOptions[0]);
 
   const debouncedOnSelect = debounce((items) => {
@@ -135,7 +148,9 @@ const RoomSelector = (props) => {
 
     const params = objectToGetParams(config);
 
-    loadScript(`${scriptUrl}${params}`, "integration", () => window.DocSpace.SDK.initFrame(config));
+    loadScript(`${scriptUrl}${params}`, "integration", () =>
+      window.DocSpace.SDK.initFrame(config),
+    );
   }, 500);
 
   useEffect(() => {
@@ -147,7 +162,10 @@ const RoomSelector = (props) => {
 
   const toggleButtonMode = (e) => {
     setSelectedElementType(e.target.value);
-    setConfig((config) => ({ ...config, isButtonMode: e.target.value === "button" }));
+    setConfig((config) => ({
+      ...config,
+      isButtonMode: e.target.value === "button",
+    }));
   };
 
   const changeRoomType = (option) => {
@@ -161,7 +179,10 @@ const RoomSelector = (props) => {
     } else if (tab.key === "selector-preview") {
       setConfig((config) => ({ ...config, isButtonMode: false }));
     } else if (tab.key === "code") {
-      setConfig((config) => ({ ...config, isButtonMode: selectedElementType === "button" }));
+      setConfig((config) => ({
+        ...config,
+        isButtonMode: selectedElementType === "button",
+      }));
     }
   };
 
@@ -225,7 +246,8 @@ const RoomSelector = (props) => {
 
   const onResize = () => {
     const isEnoughWidthForPreview = window.innerWidth > showPreviewThreshold;
-    if (isEnoughWidthForPreview !== showPreview) setShowPreview(isEnoughWidthForPreview);
+    if (isEnoughWidthForPreview !== showPreview)
+      setShowPreview(isEnoughWidthForPreview);
   };
 
   const setButtonColor = (color) => {
@@ -260,8 +282,13 @@ const RoomSelector = (props) => {
   );
 
   const code = (
-    <CodeWrapper width={width + widthDimension.label} height={height + heightDimension.label}>
-      <CategorySubHeader className="copy-window-code">{t("CopyWindowCode")}</CategorySubHeader>
+    <CodeWrapper
+      width={width + widthDimension.label}
+      height={height + heightDimension.label}
+    >
+      <CategorySubHeader className="copy-window-code">
+        {t("CopyWindowCode")}
+      </CategorySubHeader>
       <Textarea value={codeBlock} heightTextArea={153} />
     </CodeWrapper>
   );
@@ -304,17 +331,26 @@ const RoomSelector = (props) => {
             />
             {config.isButtonMode && (
               <>
-                <CategorySubHeader>{t("ButtonCustomization")}</CategorySubHeader>
+                <CategorySubHeader>
+                  {t("ButtonCustomization")}
+                </CategorySubHeader>
                 <ControlsGroup>
                   <Label className="label" text={t("ButtonColor")} />
-                  <ColorInput scale handleChange={setButtonColor} defaultColor={"#5299E0"} />
+                  <ColorInput
+                    scale
+                    handleChange={setButtonColor}
+                    defaultColor={"#5299E0"}
+                  />
                 </ControlsGroup>
                 <ControlsGroup>
                   <Label className="label" text={t("ButtonText")} />
                   <TextInput
                     scale
                     onChange={(e) => {
-                      setConfig((config) => ({ ...config, buttonText: e.target.value }));
+                      setConfig((config) => ({
+                        ...config,
+                        buttonText: e.target.value,
+                      }));
                     }}
                     placeholder={t("SelectToDocSpace")}
                     value={config.buttonText}
@@ -322,7 +358,7 @@ const RoomSelector = (props) => {
                   />
                   <Checkbox
                     className="checkbox"
-                    label={"Logo"}
+                    label={t("Logo")}
                     onChange={() => {
                       setConfig((config) => ({
                         ...config,
@@ -468,7 +504,11 @@ export default inject(({ authStore, settingsStore }) => {
     setDocumentTitle,
   };
 })(
-  withTranslation(["JavascriptSdk", "Files", "EmbeddingPanel", "Common", "CreateEditRoomDialog"])(
-    observer(RoomSelector),
-  ),
+  withTranslation([
+    "JavascriptSdk",
+    "Files",
+    "EmbeddingPanel",
+    "Common",
+    "CreateEditRoomDialog",
+  ])(observer(RoomSelector)),
 );

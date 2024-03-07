@@ -34,7 +34,7 @@ import {
 } from "../enums";
 import { LANGUAGE, PUBLIC_MEDIA_VIEW_URL, RTL_LANGUAGES } from "../constants";
 
-import { TI18n } from "../types";
+import { TI18n, TTranslation } from "../types";
 import { TUser } from "../api/people/types";
 import { TFolder, TFile, TGetFolder } from "../api/files/types";
 import { TRoom } from "../api/rooms/types";
@@ -121,9 +121,9 @@ export const parseDomain = (
   setError: Function,
   t: (key: string) => string,
 ) => {
-  const parsedDomain = parseAddress("test@" + domain);
+  const parsedDomain = parseAddress(`test@${domain}`);
 
-  if (parsedDomain?.parseErrors.length > 0) {
+  if (parsedDomain?.parseErrors && parsedDomain?.parseErrors.length > 0) {
     const translatedErrors = parsedDomain.parseErrors.map((error) => {
       switch (error.errorKey) {
         case ErrorKeys.LocalDomain:
@@ -158,7 +158,7 @@ export const validatePortalName = (
   value: string,
   nameValidator: { minLength: number; maxLength: number; regex: RegExp },
   setError: Function,
-  t: (key: string) => string,
+  t: TTranslation,
 ) => {
   const validName = new RegExp(nameValidator.regex);
   switch (true) {
@@ -168,8 +168,8 @@ export const validatePortalName = (
       value.length > nameValidator.maxLength:
       return setError(
         t("Settings:PortalNameLength", {
-          minLength: nameValidator.minLength,
-          maxLength: nameValidator.maxLength,
+          minLength: nameValidator.minLength.toString(),
+          maxLength: nameValidator.maxLength.toString(),
         }),
       );
     case !validName.test(value):
@@ -257,9 +257,9 @@ export const getUserRole = (user: TUser) => {
     user.access === ShareAccessRights.RoomManager ||
     user.access === ShareAccessRights.Collaborator
   )
-    //TODO: Change to People Product Id const
+    // TODO: Change to People Product Id const
     return "admin";
-  //TODO: Need refactoring
+  // TODO: Need refactoring
   if (user.isVisitor) return "user";
   if (user.isCollaborator) return "collaborator";
   if (user.isRoomAdmin) return "manager";
@@ -598,7 +598,7 @@ export const getPowerFromBytes = (bytes: number, maxPower = 6) => {
 };
 
 export const getSizeFromBytes = (bytes: number, power: number) => {
-  return parseFloat((bytes / Math.pow(1024, power)).toFixed(2));
+  return parseFloat((bytes / 1024 ** power).toFixed(2));
 };
 
 export const getConvertedSize = (t: (key: string) => string, bytes: number) => {
@@ -648,7 +648,7 @@ export const getSpaceQuotaAsText = (
 };
 
 export const conversionToBytes = (size: number, power: number) => {
-  const value = Math.floor(size) * Math.pow(1024, power);
+  const value = Math.floor(size) * 1024 ** power;
   return value.toString();
 };
 
@@ -1018,4 +1018,3 @@ export const insertDataLayer = (id: string) => {
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({ user_id: id });
 };
-

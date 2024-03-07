@@ -542,7 +542,7 @@ const SimpleRoom = (props) => {
               <LabelGroup>
                 <Checkbox
                   className="checkbox"
-                  label={t("Filter")}
+                  label={t("SearchFilterAndSort")}
                   onChange={onChangeShowFilter}
                   isChecked={config.showFilter}
                 />

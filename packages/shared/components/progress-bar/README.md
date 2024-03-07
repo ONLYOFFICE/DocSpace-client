@@ -14,7 +14,8 @@ import { ProgressBar } from "@docspace/shared/components";
 
 ### Properties
 
-|   Props   |   Type   | Required | Values | Default | Description                         |
-| :-------: | :------: | :------: | :----: | :-----: | ----------------------------------- |
-| `percent` | `number` |    ✅    |   -    |    -    | Progress value in %. Max value 100% |
-|  `label`  | `string` |    -     |   -    |    -    | Text in progress-bar.               |
+|        Props         |   Type    | Required | Values | Default | Description                                                    |
+| :------------------: | :-------: | :------: | :----: | :-----: | -------------------------------------------------------------- |
+|      `percent`       | `number`  |    ✅    |   -    |    -    | Progress value in %. Max value 100%                            |
+|       `label`        | `string`  |    -     |   -    |    -    | Text in progress-bar.                                          |
+| `isInfiniteProgress` | `boolean` |    -     |   -    |  false  | Whether the progress bar should display as an infinite loader. |

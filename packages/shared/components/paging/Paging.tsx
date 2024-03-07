@@ -43,7 +43,7 @@ const Paging = (props: PagingProps) => {
   return (
     <StyledPaging id={id} className={className} style={style}>
       <Button
-        className="not-selectable"
+        className="prev-button not-selectable"
         size={ButtonSize.small}
         scale
         label={previousLabel}
@@ -66,7 +66,7 @@ const Paging = (props: PagingProps) => {
         </StyledPage>
       )}
       <Button
-        className="not-selectable"
+        className="next-button not-selectable"
         size={ButtonSize.small}
         scale
         label={nextLabel}

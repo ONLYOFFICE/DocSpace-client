@@ -44,7 +44,7 @@ const StatisticsComponent = (props) => {
           isRoom,
           defaultRoomIcon,
           "user-icon",
-          displayName
+          displayName,
         )}
         {textElement(displayName)}
         {quotaElement(item, "user")}
@@ -60,7 +60,11 @@ const StatisticsComponent = (props) => {
       {usersList}
 
       {peopleListLength > 5 && (
-        <Button {...buttonProps} label={t("ShowMore")} onClick={onClickUsers} />
+        <Button
+          {...buttonProps}
+          label={t("Common:ShowMore")}
+          onClick={onClickUsers}
+        />
       )}
     </StyledStatistics>
   );

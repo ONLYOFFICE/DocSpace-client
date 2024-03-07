@@ -51,7 +51,7 @@ const RoomsListComponent = (props) => {
           defaultRoomIcon,
           null,
           title,
-          color
+          color,
         )}
         {textElement(title)}
         {quotaElement(item)}
@@ -72,7 +72,7 @@ const RoomsListComponent = (props) => {
         {filesListLength > 5 && (
           <Button
             {...buttonProps}
-            label={t("ShowMore")}
+            label={t("Common:ShowMore")}
             onClick={onClickRooms}
           />
         )}

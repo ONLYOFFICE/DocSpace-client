@@ -1,12 +1,14 @@
 import React from "react";
-import Login from "./components/Login";
 import { Routes, Route } from "react-router-dom";
+import { Provider as MobxProvider } from "mobx-react";
+import { Toast } from "@docspace/shared/components/toast";
+import { WRONG_PORTAL_NAME_URL } from "@docspace/shared/constants";
+
+import Login from "./components/Login";
+import SimpleNav from "../client/components/sub-components/SimpleNav";
 import InvalidRoute from "./components/Invalid";
 import CodeLogin from "./components/CodeLogin";
 import initLoginStore from "../store";
-import { Provider as MobxProvider } from "mobx-react";
-import SimpleNav from "../client/components/sub-components/SimpleNav";
-import { WRONG_PORTAL_NAME_URL } from "@docspace/shared/constants";
 
 interface ILoginProps extends IInitialState {
   isDesktopEditor?: boolean;
@@ -34,6 +36,7 @@ const App: React.FC<ILoginProps> = (props) => {
   return (
     <MobxProvider {...loginStore}>
       <SimpleNav {...props} />
+      <Toast />
       <Routes>
         <Route path="/login/error" element={<InvalidRoute {...props} />} />
         {/*<Route path="/login/code" element={<CodeLogin {...props} />} />*/}

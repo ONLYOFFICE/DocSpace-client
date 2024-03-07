@@ -31,7 +31,7 @@ import {Submenu } from "@docspace/shared/components";
       name: "File Input",
       content: (
         <FileInput
-          accept=".doc, .docx"
+          accept={[".doc, .docx"]}
           id="file-input-id"
           name="demoFileInputName"
           onInput={function noRefCheck() {}}

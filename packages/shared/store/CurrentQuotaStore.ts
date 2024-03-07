@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import { makeAutoObservable } from "mobx";
 
 import {
@@ -284,12 +285,12 @@ class CurrentQuotasStore {
   }
 
   updateTenantCustomQuota = (obj: {
-    [key: string]: string | number | boolean;
+    [key: string]: string | number | boolean | undefined;
   }) => {
-    for (let key in obj) {
+    Object.keys(obj).forEach((key) => {
       // @ts-expect-error is always writable property
       this.currentPortalQuota.tenantCustomQuota[key] = obj[key];
-    }
+    });
   };
 
   setPortalQuotaValue = (res: TPaymentQuota) => {
@@ -335,8 +336,8 @@ class CurrentQuotasStore {
         : t("MemoryQuotaDisabled");
 
       toastr.success(toastrText);
-    } catch (e: any) {
-      toastr.error(e);
+    } catch (e: unknown) {
+      toastr.error(e as TData);
     }
   };
 
@@ -350,8 +351,8 @@ class CurrentQuotasStore {
         : t("MemoryQuotaDisabled");
 
       toastr.success(toastrText);
-    } catch (e: any) {
-      toastr.error(e);
+    } catch (e: unknown) {
+      toastr.error(e as TData);
     }
   };
 }

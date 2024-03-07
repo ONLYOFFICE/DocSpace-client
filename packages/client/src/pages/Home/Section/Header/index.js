@@ -1140,7 +1140,7 @@ const SectionHeaderContent = (props) => {
           hideContextMenuInsideArchiveRoom={hideContextMenuInsideArchiveRoom}
         >
           {tableGroupMenuVisible ? (
-            <TableGroupMenu {...tableGroupMenuProps} />
+            <TableGroupMenu {...tableGroupMenuProps} withComboBox />
           ) : (
             <div className="header-container">
               <Navigation

@@ -82,6 +82,7 @@ class DialogsStore {
   editMembersGroup = null;
 
   shareFolderDialogVisible = false;
+  cancelUploadDialogVisible = false;
 
   constructor(
     authStore,
@@ -447,6 +448,10 @@ class DialogsStore {
 
   setShareFolderDialogVisible = (visible) => {
     this.shareFolderDialogVisible = visible;
+  };
+
+  setCancelUploadDialogVisible = (visible) => {
+    this.cancelUploadDialogVisible = visible;
   };
 }
 

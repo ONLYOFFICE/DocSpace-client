@@ -18,7 +18,6 @@
   "EnterId": "Kimliği girin",
   "EnterPage": "Numara sayfasını girin",
   "EnterWidth": "Genişliği girin",
-  "Filter": "Ara, Filtrele ve Sırala",
   "FrameId": "Çerçeve kimliği",
   "GetCode": "Eklenecek kodu alın",
   "Header": "Üst Bilgi",
@@ -32,6 +31,7 @@
   "RoomOrFolder": "Oda veya Klasör",
   "RoomOrFolderDescription": "Görüntülemek istediğiniz bölümü, odayı veya klasörü seçebilirsiniz.",
   "SDKDescription": "JavaScript SDK kullanarak ONLYOFFICE DocSpace'ten bir odayı veya klasörü web arayüzünüze iframe olarak yerleştirebilirsiniz. Örnek bir iframe oluşturmak ve CSP'yi yapılandırmak için ayarları burada bulabilirsiniz. Tam SDK'yı kullanmak için lütfen şuraya bakın",
+  "SearchFilterAndSort": "Ara, Filtrele ve Sırala",
   "SearchTerm": "Arama terimi",
   "SortOrder": "Sıralama düzeni",
   "Title": "Gezinme ve Başlık"

@@ -40,7 +40,7 @@ const UploadButton = ({ t, addPlugin }) => {
         id="customPluginInput"
         className="custom-file-input"
         type="file"
-        accept=".zip"
+        accept={[".zip"]}
         onChange={onFileChange}
         onClick={onInputClick}
         ref={pluginInputRef}

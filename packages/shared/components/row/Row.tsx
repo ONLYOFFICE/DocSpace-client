@@ -44,6 +44,7 @@ const Row = (props: RowProps) => {
     rowContextClose,
     className,
     badgeUrl,
+    isDisabled,
   } = props;
 
   const cm = useRef<null | {
@@ -142,6 +143,7 @@ const Row = (props: RowProps) => {
                 isChecked={checked}
                 isIndeterminate={indeterminate}
                 onChange={changeCheckbox}
+                isDisabled={isDisabled}
               />
             </StyledCheckbox>
           )}
@@ -161,6 +163,7 @@ const Row = (props: RowProps) => {
                 isChecked={checked}
                 isIndeterminate={indeterminate}
                 onChange={changeCheckbox}
+                isDisabled={isDisabled}
               />
             </StyledCheckbox>
           )}

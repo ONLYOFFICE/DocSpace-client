@@ -32,7 +32,7 @@ const Search = React.memo(
       <SearchInput
         className="search-input"
         placeholder={placeholder}
-        value={value}
+        value={value ?? ""}
         onChange={onSearchAction}
         onClearSearch={onClearSearchAction}
         size={InputSize.base}

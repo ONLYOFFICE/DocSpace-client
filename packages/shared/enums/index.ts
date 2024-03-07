@@ -122,7 +122,7 @@ export const enum FileType {
  */
 export const enum RoomsProviderType {
   Box = 1,
-  DropBox = 2,
+  DropboxV2 = 2,
   GoogleDrive = 3,
   kDrive = 4,
   OneDrive = 5,
@@ -164,6 +164,7 @@ export const enum PageType {
   portalDeletion = "portalDeletion",
   payments = "payments",
   bonus = "bonus",
+  dataImport = "dataImport",
   storageManagement = "storageManagement",
 }
 

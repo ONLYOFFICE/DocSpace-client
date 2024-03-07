@@ -32,6 +32,5 @@
   "SDKDescription": "Sử dụng JavaScript SDK, bạn có thể nhúng một phòng hoặc một thư mục từ ONLYOFFICE DocSpace vào giao diện web của bạn dưới dạng iframe. Tại đây, bạn có thể tìm thấy cài đặt để tạo iframe mẫu và định cấu hình CSP. Để sử dụng SDK hoàn chỉnh, xin vui lòng tham khảo",
   "SearchFilterAndSort": "Tìm kiếm, Lọc và Sắp xếp",
   "SearchTerm": "Cụm từ tìm kiếm",
-  "SortOrder": "Thứ tự sắp xếp",
-  "Title": "Điều hướng và Tiêu đề"
+  "SortOrder": "Thứ tự sắp xếp"
 }

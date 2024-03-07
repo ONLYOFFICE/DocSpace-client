@@ -32,6 +32,5 @@
   "SDKDescription": "JavaScript SDK kullanarak ONLYOFFICE DocSpace'ten bir odayı veya klasörü web arayüzünüze iframe olarak yerleştirebilirsiniz. Örnek bir iframe oluşturmak ve CSP'yi yapılandırmak için ayarları burada bulabilirsiniz. Tam SDK'yı kullanmak için lütfen şuraya bakın",
   "SearchFilterAndSort": "Ara, Filtrele ve Sırala",
   "SearchTerm": "Arama terimi",
-  "SortOrder": "Sıralama düzeni",
-  "Title": "Gezinme ve Başlık"
+  "SortOrder": "Sıralama düzeni"
 }

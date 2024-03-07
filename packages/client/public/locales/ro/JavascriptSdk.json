@@ -32,6 +32,5 @@
   "SDKDescription": "Cu ajutorul JavaScript SDK puteți încorpora o sală sau un folder din spațiu ONLYOFFICE DocSpace în interfața site-lui dvs prin codul iframe. Aici puteti gasi setările pentru crearea unui model iframe și configurarea Furnizorului de soluții cloud. Pentru a utiliza un SDK complet, consultați",
   "SearchFilterAndSort": "Căutare, filtrare și sortare",
   "SearchTerm": "Termen de căutare",
-  "SortOrder": "Ordine de sortare",
-  "Title": "Navigare și Titlu"
+  "SortOrder": "Ordine de sortare"
 }

@@ -32,6 +32,5 @@
   "SDKDescription": "Z uporabo JavaScript SDK lahko vdelate sobo ali mapo iz ONLYOFFICE DocSpace v svoj spletni vmesnik kot iframe. Tukaj lahko najdete nastavitve za ustvarjanje vzorca iframe in konfiguracijo CSP. Če želite uporabiti celoten SDK, si oglejte",
   "SearchFilterAndSort": "Iskanje, filtriranje in razvrščanje",
   "SearchTerm": "Išči izraz",
-  "SortOrder": "Vrstni red",
-  "Title": "Navigacija in naslov"
+  "SortOrder": "Vrstni red"
 }

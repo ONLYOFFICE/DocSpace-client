@@ -32,6 +32,5 @@
   "SDKDescription": "Käyttäen JavaScript SDK:ta voit upottaa huoneen tai kansion ONLYOFFICE DocSpace:sta oman käyttöliittymäsi iframe:ksi. Tästä löydät asetukset iframe:n mallin luomiseen ja CSP:n määrittämiseen. Käyttääksesi koko SDK:ta, katso",
   "SearchFilterAndSort": "Etsi, suodata ja järjestä",
   "SearchTerm": "Hakusana",
-  "SortOrder": "Lajittelujärjestys",
-  "Title": "Navigoi ja otsikoi"
+  "SortOrder": "Lajittelujärjestys"
 }

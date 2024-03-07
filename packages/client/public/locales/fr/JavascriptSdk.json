@@ -32,6 +32,5 @@
   "SDKDescription": "En utilisant le SDK JavaScript, vous pouvez intégrer une salle ou un dossier de ONLYOFFICE DocSpace dans votre interface web sous la forme d'une iframe. Vous trouverez ici les paramètres permettant de créer un exemple d'iframe et de configurer le CSP. Pour utiliser le SDK complet, veuillez vous référer à",
   "SearchFilterAndSort": "Rechercher, filtrer et trier",
   "SearchTerm": "Terme recherché",
-  "SortOrder": "Ordre de tri",
-  "Title": "Navigation et titre"
+  "SortOrder": "Ordre de tri"
 }

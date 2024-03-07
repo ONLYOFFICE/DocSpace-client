@@ -153,6 +153,7 @@ class ContextOptionsStore {
       customer_title: "NOTITLE",
       provider_key: provider.providerName,
       link: provider.oauthHref,
+      provider_id: item.providerId,
     };
 
     if (provider.isOauth) {

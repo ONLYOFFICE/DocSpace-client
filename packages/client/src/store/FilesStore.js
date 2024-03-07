@@ -3093,6 +3093,7 @@ class FilesStore {
         quotaLimit,
         usedSpace,
         isCustomQuota,
+        providerId,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3263,6 +3264,7 @@ class FilesStore {
         quotaLimit,
         usedSpace,
         isCustomQuota,
+        providerId,
       };
     });
 

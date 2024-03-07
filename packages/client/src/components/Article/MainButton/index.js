@@ -290,7 +290,7 @@ const ArticleMainButtonContent = (props) => {
     isSettingsPage,
   ]);
 
-  const createActinsForFormRoom = (actions) => {
+  const createActionsForFormRoom = (actions) => {
     const {
       formGallery,
       uploadActions,
@@ -306,7 +306,7 @@ const ArticleMainButtonContent = (props) => {
       id: "actions_template-PDF-form",
       className: "main-button_drop-down",
       icon: FormReactSvgUrl,
-      label: "Create PDF Form",
+      label: t("Common:CreatePDFForm"),
       key: "new-form",
       items: [
         createTemplateBlankDocxf,
@@ -315,7 +315,7 @@ const ArticleMainButtonContent = (props) => {
           id: "actions_template_from-oform",
           className: "main-button_drop-down_sub",
           icon: FormReactSvgUrl,
-          label: "From ready template",
+          label: t("Common:FromReadyTemplate"),
           onClick: onShowOFormSelectFileDialog,
           disabled: isPrivacy,
           key: "form-oform",
@@ -327,14 +327,14 @@ const ArticleMainButtonContent = (props) => {
       id: "actions_upload-ready-Pdf-from",
       className: "main-button_drop-down_sub",
       icon: ActionsUploadReactSvgUrl,
-      label: "Upload Ready PDF form",
+      label: t("Common:UploadReadyPDFForm"),
       key: "actions_upload-ready-Pdf-from",
       items: [
         {
           id: "actions_upload-from-docspace",
           className: "main-button_drop-down",
           icon: ActionsUploadReactSvgUrl,
-          label: "From DocSpace",
+          label: t("Common:FromDocSpace"),
           key: "actions_upload-from-docspace",
           onClick: () => {
             console.log("From DocSpace");
@@ -344,7 +344,7 @@ const ArticleMainButtonContent = (props) => {
           id: "actions_upload-from-device",
           className: "main-button_drop-down",
           icon: ActionsUploadReactSvgUrl,
-          label: "From device",
+          label: t("Common:FromDevice"),
           key: "actions_upload-from-device",
           onClick: onUploadPDFFilesClick,
         },
@@ -497,7 +497,7 @@ const ArticleMainButtonContent = (props) => {
     ];
 
     if (currentRoomType === RoomsType.FormRoom) {
-      const formRoomActions = createActinsForFormRoom({
+      const formRoomActions = createActionsForFormRoom({
         formGallery,
         uploadActions,
         createNewFolder,

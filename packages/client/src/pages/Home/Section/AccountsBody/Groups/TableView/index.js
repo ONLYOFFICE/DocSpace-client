@@ -30,6 +30,8 @@ const GroupsTableView = ({
   hasMoreGroups,
   groupsIsFiltered,
   groupsFilterTotal,
+
+  managerAccountsGroupsColumnIsEnabled,
 }) => {
   const ref = useRef(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -79,6 +81,9 @@ const GroupsTableView = ({
             isChecked={selection.includes(item)}
             hideColumns={hideColumns}
             itemIndex={index}
+            managerAccountsGroupsColumnIsEnabled={
+              managerAccountsGroupsColumnIsEnabled
+            }
           />
         ))}
       </TableBody>
@@ -96,6 +101,7 @@ export default inject(
     settingsStore,
     infoPanelStore,
     userStore,
+    tableStore,
   }) => {
     const {
       usersStore,
@@ -123,6 +129,8 @@ export default inject(
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
+    const { managerAccountsGroupsColumnIsEnabled } = tableStore;
+
     return {
       groups,
       selection,
@@ -142,6 +150,8 @@ export default inject(
       hasMoreGroups,
       groupsIsFiltered,
       groupsFilterTotal,
+
+      managerAccountsGroupsColumnIsEnabled,
     };
   },
 )(observer(GroupsTableView));

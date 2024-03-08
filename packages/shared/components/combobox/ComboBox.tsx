@@ -64,8 +64,9 @@ const ComboBoxPure = (props: ComboboxProps) => {
       disableItemClick ||
       isLoading ||
       (disableIconClick && e && target.closest(".optionalBlock")) ||
-      target.classList.contains("nav-thumb-vertical") ||
       target.classList.contains("ScrollbarsCustom") ||
+      target.classList.contains("ScrollbarsCustom-Thumb") ||
+      target.classList.contains("ScrollbarsCustom-Track") ||
       target.classList.contains("backdrop-active")
     )
       return;

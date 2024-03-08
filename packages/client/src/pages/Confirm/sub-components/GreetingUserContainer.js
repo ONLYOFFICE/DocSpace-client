@@ -37,7 +37,7 @@ const GreetingUserContainer = ({
       <Text>
         <Trans
           t={t}
-          i18nKey={"AccountWillBeCreated"}
+          i18nKey="AccountWillBeCreated"
           ns="Confirm"
           defaults={DEFAULT_CREATION_TEXT}
           values={{

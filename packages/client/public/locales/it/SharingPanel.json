@@ -1,13 +1,9 @@
 {
-  "AddGroupsForSharingButton": "Aggiungi gruppi",
-  "AddShareMessage": "Aggiungi messaggio",
   "CopyExternalLink": "Copia collegamento esterno",
   "EncryptedFileSharing": "Il file <strong>{{title}}</strong> è stato condiviso con successo",
   "ExternalLink": "Collegamento esterno",
   "FormFilling": "Compilare il modulo",
-  "InternalLink": "Collegamento interno",
   "LinkName": "Nome del link",
-  "Notify users": "Notifica utenti",
   "ShareEmailBody": "Ti è stato concesso l'accesso al documento {{itemName}}. Fare clic sul collegamento sottostante per aprire subito il documento: {{shareLink}}.",
   "ShareEmailSubject": "Ti è stato concesso l'accesso al documento: {{itemName}}",
   "SharingSettingsTitle": "Impostazioni di condivisione"

@@ -16,7 +16,6 @@
   "CreateSampleDocSpace": "Create sample DocSpace embed",
   "CreateSampleEditor": "Create sample Editor embed",
   "CreateSampleFileSelector": "Create sample File selector embed",
-  "CreateSampleHeader": "",
   "CreateSamplePublicRoom": "Create sample Public room embed",
   "CreateSampleRoomSelector": "Create sample Room selector embed",
   "CreateSampleViewer": "Create sample Viewer embed",
@@ -100,7 +99,6 @@
   "Subtitle": "Subtitle",
   "SubtitleDescription": "Subtitle with additional comments or descriptions for the current directory.",
   "TabPlugins": "Tab Plugins",
-  "Title": "",
   "Viewer": "Viewer",
   "ViewerDescription": "Embed a viewer to allow users to open a file for viewing from the corresponding room."
 }

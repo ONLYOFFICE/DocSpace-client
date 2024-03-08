@@ -14,7 +14,6 @@
   "EnterName": "Enter space name",
   "GoToSpace": "Go to space",
   "NewSpace": "New space",
-  "PortalExists": "Portal already exists",
   "PortalStats": "Rooms: {{roomCount}} | Users: {{userCount}} | Storage space used: {{storageSpace}}",
   "RestrictAccess": "Restrict access to managing spaces",
   "SpaceCreated": "Space created",

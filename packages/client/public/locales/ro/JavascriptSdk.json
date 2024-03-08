@@ -4,7 +4,6 @@
   "Ascending": "Ascendent",
   "Code": "Codul pentru inserare",
   "CopyWindowCode": "Copiere codul de încorporare al ferestrei",
-  "CreateSampleHeader": "Creare exemplu DocSpace pentru încorporare",
   "CSPDescription": "Pentru a încorpora spațiul DocSpace bazat pe iFrame într-o pagina web, adăugați adresa URL a spațiului la lista de permisiuni.",
   "CSPHeader": "Încorporare DocSpace bazat pe iframe",
   "CSPHelp": "Această setare reprezintă un mecanizm de securitate, care poate fi utilizat pentru a se proteja împortiva atacurilor prin injectare de conținut. CSP descrie sursele de descărcare securizată. Descărcare de la adresa care nu este inclusă în lista albă este blocată. Indicați domeniile (inclusiv protocolul) cu care va interacționa.",
@@ -33,6 +32,5 @@
   "SDKDescription": "Cu ajutorul JavaScript SDK puteți încorpora o sală sau un folder din spațiu ONLYOFFICE DocSpace în interfața site-lui dvs prin codul iframe. Aici puteti gasi setările pentru crearea unui model iframe și configurarea Furnizorului de soluții cloud. Pentru a utiliza un SDK complet, consultați",
   "SearchFilterAndSort": "Căutare, filtrare și sortare",
   "SearchTerm": "Termen de căutare",
-  "SortOrder": "Ordine de sortare",
-  "Title": "Navigare și Titlu"
+  "SortOrder": "Ordine de sortare"
 }

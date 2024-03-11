@@ -118,7 +118,7 @@ const SelectFileStep = ({
       }
 
       if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
-        toastr.error(res.error);
+        // toastr.error(res.error);
         setIsFileError(true);
         clearInterval(uploadInterval.current);
       } else if (res.isCompleted || res.progress === 100) {
@@ -173,7 +173,7 @@ const SelectFileStep = ({
           }
 
           if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
-            toastr.error(res.error);
+            // toastr.error(res.error);
             setIsFileError(true);
             setIsFileLoading(false);
             clearInterval(uploadInterval.current);

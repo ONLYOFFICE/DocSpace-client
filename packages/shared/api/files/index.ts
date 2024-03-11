@@ -1300,7 +1300,7 @@ export async function getPrimaryLink(fileId: number) {
 export async function editExternalLink(
   fileId: number | string,
   linkId: number | string,
-  access: number,
+  access: ShareAccessRights,
   primary: boolean,
   internal: boolean,
   expirationDate: moment.Moment,

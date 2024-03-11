@@ -460,3 +460,12 @@ export enum MembersSubjectType {
   InvitationLink = 3,
   PrimaryExternalLink = 4,
 }
+
+/**
+ * Enum for open url action.
+ * @readonly
+ */
+export const enum UrlActionType {
+  Download = 0,
+  Link = 1,
+}

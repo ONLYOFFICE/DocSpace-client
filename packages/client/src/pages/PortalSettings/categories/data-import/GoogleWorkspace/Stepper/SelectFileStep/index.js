@@ -118,8 +118,9 @@ const SelectFileStep = ({
       }
 
       if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
-        toastr.error(res.error || t("Common:SomethingWentWrong"));
-        setIsFileError(true);
+        setIsFileError(false);
+        setShowReminder(false);
+        setFileName(null);
         clearInterval(uploadInterval.current);
       } else if (res.isCompleted || res.progress === 100) {
         setUsers(res.parseResult);

@@ -114,6 +114,7 @@ export const enum FileType {
   Document = 7,
   OFormTemplate = 8,
   OForm = 9,
+  PDF = 10,
 }
 
 /**

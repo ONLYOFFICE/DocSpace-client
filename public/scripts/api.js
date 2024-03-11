@@ -33,6 +33,7 @@
     filterParam: "ALL",
     buttonColor: "#5299E0",
     infoPanelVisible: true,
+    downloadToEvent: false,
     filter: {
       // filterType: 0,
       // type: 0,
@@ -71,6 +72,7 @@
       onEditorCloseCallback: null,
       onAuthSuccess: null,
       onSignOut: null,
+      onDownload: null,
     },
   };
 

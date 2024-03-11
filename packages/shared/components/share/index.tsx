@@ -52,20 +52,21 @@ const Share = (props: ShareProps) => {
   const hideSharePanel = isRooms || !infoPanelSelection?.canShare;
 
   const fetchLinks = React.useCallback(async () => {
-    if (requestRunning.current) return;
+    if (requestRunning.current || hideSharePanel) return;
     requestRunning.current = true;
     const res = await getExternalLinks(infoPanelSelection.id);
 
     setFileLinks(res.items);
     setIsLoading(false);
     requestRunning.current = false;
-  }, [infoPanelSelection.id]);
+  }, [infoPanelSelection.id, hideSharePanel]);
 
   useEffect(() => {
     if (hideSharePanel) {
       setView?.("info_details");
+    } else {
+      fetchLinks();
     }
-    fetchLinks();
   }, [fetchLinks, hideSharePanel, setView]);
 
   useEffect(() => {
@@ -302,3 +303,4 @@ const Share = (props: ShareProps) => {
 };
 
 export default Share;
+

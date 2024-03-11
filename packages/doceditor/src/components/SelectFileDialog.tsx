@@ -43,7 +43,9 @@ const SelectFileDialog = ({
     const type = getFileTypeTranslation();
     return fileTypeDetection.filterParam === FilesSelectorFilterTypes.XLSX
       ? type
-      : t?.("Editor:SelectFilesType", { fileType: type }) ?? "";
+      : t
+        ? t("Editor:SelectFilesType", { fileType: type })
+        : "";
   }, [fileTypeDetection.filterParam, getFileTypeTranslation, t]);
 
   const listTitle = selectFilesListTitle();
@@ -89,3 +91,4 @@ const SelectFileDialog = ({
 };
 
 export default SelectFileDialog;
+

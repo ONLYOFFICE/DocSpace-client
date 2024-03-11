@@ -95,7 +95,7 @@ class CreateEditRoomStore {
     const createRoomData = {
       roomType: roomParams.type,
       title: roomParams.title || t("Files:NewRoom"),
-      createAsNewFolder: roomParams.createAsNewFolder ?? false,
+      createAsNewFolder: roomParams.createAsNewFolder ?? true,
       ...(isDefaultRoomsQuotaSet && {
         quota: roomParams.quota || -2,
       }),
@@ -125,13 +125,16 @@ class CreateEditRoomStore {
 
       room.isLogoLoading = true;
 
+      const actions = [];
+
       // delete thirdparty account if not needed
       if (!isThirdparty && storageFolderId)
         await deleteThirdParty(thirdpartyAccount.providerId);
 
       // create new tags
-      for (let i = 0; i < createTagsData.length; i++)
-        await createTag(createTagsData[i]);
+      for (let i = 0; i < createTagsData.length; i++) {
+        actions.push(createTag(createTagsData[i]));
+      }
 
       // add new tags to room
       if (!!addTagsData.length)

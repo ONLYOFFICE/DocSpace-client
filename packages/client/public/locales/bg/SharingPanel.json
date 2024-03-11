@@ -1,13 +1,9 @@
 {
-  "AddGroupsForSharingButton": "Добави групи",
-  "AddShareMessage": "Добави съобщение",
   "CopyExternalLink": "Копирай външна връзка",
   "EncryptedFileSharing": "Файлът <strong>{{title}}</strong> е споделен успешно",
   "ExternalLink": "Външна връзка",
   "FormFilling": "Попълване на формуляр",
-  "InternalLink": "Вътрешна връзка",
   "LinkName": "Име на линка",
-  "Notify users": "Извести потребители",
   "ShareEmailBody": "Даден Ви е достъп до документ {{itemName}}. Кликнете върху връзката долу, за да отворите документа сега: {{shareLink}}.",
   "ShareEmailSubject": "Даден Ви е достъп до документ {{itemName}}",
   "SharingSettingsTitle": "Настройки за споделяне"

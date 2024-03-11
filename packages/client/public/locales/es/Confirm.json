@@ -14,7 +14,6 @@
   "EnterCodePlaceholder": "Introduzca el código",
   "EnterPhone": "Introduzca el número de teléfono móvil",
   "GetCode": "Obtener código",
-  "InviteTitle": "¡Le invitamos a unirse a este espacio!",
   "LoginRegistryButton": "Unirse",
   "PassworResetTitle": "Ahora puede crear una nueva contraseña.",
   "PhoneSubtitle": "La autenticación de dos factores está activada para asegurar la seguridad adicional. Introduzca su número de teléfono móvil para continuar trabajando en DocSpace. Es necesario que introduzca el número de teléfono en el formato internacional con el código de país.",
@@ -28,10 +27,5 @@
   "SetAppTitle": "Configure su aplicación de autenticación",
   "SuccessDeactivate": "Su cuenta se ha desactivado correctamente. En 10 segundos será redirigido al <1>sitio</1>.",
   "SuccessReactivate": "Su cuenta se ha reactivado correctamente. En 10 segundos será redirigido al <1>portal</1>.",
-  "SuccessRemoved": "Su cuenta ha sido eliminada correctamente. En 10 segundos será redirigido a <1>site</1>.",
-  "WelcomeRegister": "Para empezar, regístrese",
-  "WelcomeRegisterViaSocial": "Para empezar, regístrese o inicie sesión a través de las redes sociales",
-  "WelcomeRegisterViaSSO": "Para empezar, regístrese o inicie sesión a través de SSO",
-  "WelcomeToDocspace": "¡Bienvenido/a a nuestro DocSpace!",
-  "WelcomeToRoom": "¡Bienvenido/a a la sala <1>{{ roomName }}</1>!"
+  "SuccessRemoved": "Su cuenta ha sido eliminada correctamente. En 10 segundos será redirigido a <1>site</1>."
 }

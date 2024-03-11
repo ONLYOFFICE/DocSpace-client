@@ -26,7 +26,6 @@ import { RoomsType } from "@docspace/shared/enums";
 import ChangeRoomOwner from "./ChangeRoomOwner";
 import RoomQuota from "./RoomQuota";
 
-
 const StyledSetRoomParams = styled.div`
   display: flex;
   flex-direction: column;
@@ -68,7 +67,7 @@ const SetRoomParams = ({
 }) => {
   const [previewIcon, setPreviewIcon] = useState(null);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
-    useState(false);
+    useState(true);
 
   const isFormRoom = roomParams.type === RoomsType.FormRoom;
 

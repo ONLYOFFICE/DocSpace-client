@@ -27,6 +27,7 @@ const GroupsTableItem = ({
   setCurrentGroup,
   getGroupContextOptions,
   setInsideGroupBackUrl,
+  managerAccountsGroupsColumnIsEnabled,
 }) => {
   const navigate = useNavigate();
 
@@ -126,19 +127,23 @@ const GroupsTableItem = ({
           </Link>
         </TableCell>
 
-        <TableCell className={"table-container_group-manager"}>
-          <Text
-            title={item.manager?.displayName}
-            fontWeight="600"
-            fontSize="13px"
-            isTextOverflow
-            className="table-cell_group-manager"
-            color={"#A3A9AE"}
-            dir="auto"
-          >
-            {item.manager?.displayName}
-          </Text>
-        </TableCell>
+        {managerAccountsGroupsColumnIsEnabled ? (
+          <TableCell className={"table-container_group-manager"}>
+            <Text
+              title={item.manager?.displayName}
+              fontWeight="600"
+              fontSize="13px"
+              isTextOverflow
+              className="table-cell_group-manager"
+              color={"#A3A9AE"}
+              dir="auto"
+            >
+              {item.manager?.displayName}
+            </Text>
+          </TableCell>
+        ) : (
+          <div />
+        )}
       </Styled.GroupsRow>
     </Styled.GroupsRowWrapper>
   );

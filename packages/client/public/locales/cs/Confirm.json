@@ -14,7 +14,6 @@
   "EnterCodePlaceholder": "Zadejte kód",
   "EnterPhone": "Zadejte telefonní číslo mobilního telefonu",
   "GetCode": "Získat kód",
-  "InviteTitle": "Zveme vás, abyste se připojili k tomuto prostoru!",
   "LoginRegistryButton": "Připojit se",
   "PassworResetTitle": "Nyní si můžete vytvořit nové heslo.",
   "PhoneSubtitle": "Dvoufázové ověření je povoleno k zajištění ještě větší bezpečnosti. Zadejte Vaše telefonní číslo, abyste mohli pokračovat v práci na DocSpace. Číslo mobilního telefonu musí být zadáno v mezinárodním formátu včetně kódu země.",
@@ -28,10 +27,5 @@
   "SetAppTitle": "Nastavení aplikace autentizačního zařízení",
   "SuccessDeactivate": "Váš účet byl úspěšně deaktivován. Za 10 sekund budete přesměrováni na <1>stránku</1>.",
   "SuccessReactivate": "Váš účet byl úspěšně reaktivován. Za 10 sekund budete přesměrováni na <1>prostor</1>.",
-  "SuccessRemoved": "Váš účet byl úspěšně odstraněn. Za 10 sekund budete přesměrováni na <1>stránku</1>.",
-  "WelcomeRegister": "Chcete-li začít, zaregistrujte se",
-  "WelcomeRegisterViaSocial": "Chcete-li začít, zaregistrujte se nebo se přihlaste prostřednictvím sociálních sítí",
-  "WelcomeRegisterViaSSO": "Chcete-li začít, zaregistrujte se nebo se přihlaste pomocí SSO",
-  "WelcomeToDocspace": "Vítejte v našem DocSpace!",
-  "WelcomeToRoom": "Vítejte v místnosti <1>{{ roomName }}</1>!"
+  "SuccessRemoved": "Váš účet byl úspěšně odstraněn. Za 10 sekund budete přesměrováni na <1>stránku</1>."
 }

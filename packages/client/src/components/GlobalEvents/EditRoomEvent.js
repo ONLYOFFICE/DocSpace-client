@@ -108,6 +108,7 @@ const EditRoomEvent = ({
       }),
     };
 
+    const isTitleChanged = roomParams?.title !== item.title;
     const isOwnerChanged = roomParams?.roomOwner?.id !== item.createdBy.id;
 
     const tags = roomParams.tags.map((tag) => tag.name);
@@ -122,21 +123,28 @@ const EditRoomEvent = ({
     try {
       setIsLoading(true);
 
-      if (isOwnerChanged) {
-        await changeRoomOwner(t, roomParams?.roomOwner?.id);
-      }
-
-      room = await editRoom(item.id, editRoomParams);
+      room = isTitleChanged ? await editRoom(item.id, editRoomParams) : item;
 
       room.isLogoLoading = true;
 
+      const createTagActions = [];
       for (let i = 0; i < newTags.length; i++) {
-        await createTag(newTags[i]);
+        createTagActions.push(createTag(newTags[i]));
       }
+      await Promise.all(createTagActions);
 
-      tags.length && (room = await addTagsToRoom(room.id, tags));
-      removedTags.length &&
-        (room = await removeTagsFromRoom(room.id, removedTags));
+      const actions = [];
+      if (isOwnerChanged) {
+        actions.push(changeRoomOwner(t, roomParams?.roomOwner?.id));
+      }
+      if (tags.length) {
+        actions.push(addTagsToRoom(room.id, tags));
+        room.tags = tags;
+      }
+      if (removedTags.length)
+        actions.push(removeTagsFromRoom(room.id, removedTags));
+
+      await Promise.all(actions);
 
       if (!!item.logo.original && !roomParams.icon.uploadedFile) {
         room = await removeLogoFromRoom(room.id);
@@ -205,7 +213,7 @@ const EditRoomEvent = ({
         (buf) =>
           new File([buf], "fetchedFile", {
             type: `image/${imgExst}`,
-          })
+          }),
       );
     setFetchedImage(file);
   }, []);
@@ -326,5 +334,5 @@ export default inject(
       updateInfoPanelSelection,
       changeRoomOwner,
     };
-  }
+  },
 )(observer(EditRoomEvent));

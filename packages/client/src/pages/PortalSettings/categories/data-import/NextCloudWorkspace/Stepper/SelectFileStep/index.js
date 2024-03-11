@@ -90,6 +90,7 @@ const SelectFileStep = ({
 }) => {
   const [isSaveDisabled, setIsSaveDisabled] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isFileError, setIsFileError] = useState(false);
   const [fileName, setFileName] = useState(null);
@@ -160,6 +161,8 @@ const SelectFileStep = ({
   };
 
   const onUploadFile = async (file) => {
+    setProgress(0);
+    setIsVisible(true);
     try {
       await singleFileUploading(file, setProgress, isAbort);
       await initMigrationName(searchParams.get("service"));
@@ -167,19 +170,29 @@ const SelectFileStep = ({
       uploadInterval.current = setInterval(async () => {
         try {
           const res = await getMigrationStatus();
+          setProgress(res.progress);
+
+          if (res.progress > 10) {
+            setIsVisible(false);
+          } else {
+            setIsVisible(true);
+          }
+
           if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
             toastr.error(res.error);
             setIsFileError(true);
             setIsFileLoading(false);
             clearInterval(uploadInterval.current);
           } else if (res.isCompleted || res.parseResult.progress === 100) {
-            setIsFileLoading(false);
             clearInterval(uploadInterval.current);
+            setIsFileLoading(false);
+            setIsVisible(false);
+            setProgress(100);
             setUsers(res.parseResult);
             setIsSaveDisabled(true);
           }
         } catch (error) {
-          toastr.error(error.message);
+          toastr.error(error || error.message);
           setIsFileError(true);
           setIsFileLoading(false);
           setIsError(true);
@@ -187,7 +200,7 @@ const SelectFileStep = ({
         }
       }, 1000);
     } catch (error) {
-      toastr.error(error.message);
+      toastr.error(error || error.message);
       setIsFileError(true);
       setIsFileLoading(false);
     }
@@ -262,6 +275,7 @@ const SelectFileStep = ({
         <FileUploadContainer>
           <ProgressBar
             percent={progress}
+            isInfiniteProgress={isVisible}
             className="select-file-progress-bar"
             label={t("Settings:BackupFileUploading")}
           />

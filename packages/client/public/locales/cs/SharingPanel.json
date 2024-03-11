@@ -1,13 +1,9 @@
 {
-  "AddGroupsForSharingButton": "Přidat skupiny",
-  "AddShareMessage": "Přidat zprávu",
   "CopyExternalLink": "Zkopírovat externí odkaz",
   "EncryptedFileSharing": "Soubor <strong>{{title}}</strong> úspěšně nasdílen",
   "ExternalLink": "Externí odkaz",
   "FormFilling": "Vyplňování formuláře",
-  "InternalLink": "Interní odkaz",
   "LinkName": "Název odkazu",
-  "Notify users": "Upozornit uživatele",
   "ShareEmailBody": "Byl vám udělen přístup k dokumentu {{itemName}}. Kliknutím na níže uvedený odkaz dokument právě teď otevřete: {{shareLink}}.",
   "ShareEmailSubject": "Byl vám udělen přístup k dokumentu {{itemName}}",
   "SharingSettingsTitle": "Nastavení sdílení"

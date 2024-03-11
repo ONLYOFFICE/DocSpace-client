@@ -282,10 +282,10 @@ const InsideGroupTableRow = (props) => {
     [item, changeUserType],
   );
 
-  const onOpenGroup = ({ action }) => {
+  const onOpenGroup = React.useCallback(({ action }) => {
     setCurrentGroup(null);
     navigate(`/accounts/groups/${action}`);
-  };
+  }, []);
 
   // const getRoomsOptions = React.useCallback(() => {
   //   const options = [];

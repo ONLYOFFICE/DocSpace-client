@@ -701,7 +701,7 @@ const SectionHeaderContent = (props) => {
     }
 
     if (isInsideGroup) {
-      return getGroupContextOptions(t, currentGroup);
+      return getGroupContextOptions(t, currentGroup, false, true);
     }
 
     return [

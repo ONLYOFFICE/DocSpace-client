@@ -1,13 +1,9 @@
 {
-  "AddGroupsForSharingButton": "أضف المجموعات",
-  "AddShareMessage": "اضافة رسالة",
   "CopyExternalLink": "انسخ الرابط الخارجي",
   "EncryptedFileSharing": "تمت مشاركة الملف <strong>{{title}}</strong> بنجاح",
   "ExternalLink": "رابط خارجي",
   "FormFilling": "تعبئة النموذج",
-  "InternalLink": "رابط داخلي",
   "LinkName": "اسم الرابط",
-  "Notify users": "أبلغ المستخدمين",
   "ShareEmailBody": "لقد تم منحك حق الوصول إلى المستند {{itemName}}. انقر فوق الرابط أدناه لفتح المستند الآن: {{shareLink}}.",
   "ShareEmailSubject": "لقد تم منحك حق الوصول إلى المستند {{itemName}}",
   "SharingSettingsTitle": "إعدادات المشاركة"

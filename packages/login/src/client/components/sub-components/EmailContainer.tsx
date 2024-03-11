@@ -57,7 +57,7 @@ const EmailContainer = ({
         <Text>
           <Trans
             t={t}
-            i18nKey={"UserIsAlreadyRegistered"}
+            i18nKey="UserIsAlreadyRegistered"
             ns="Login"
             defaults={DEFAULT_TEXT}
             values={{

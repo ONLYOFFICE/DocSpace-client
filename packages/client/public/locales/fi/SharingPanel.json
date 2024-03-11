@@ -1,13 +1,9 @@
 {
-  "AddGroupsForSharingButton": "Lisää ryhmiä",
-  "AddShareMessage": "Lisää viesti",
   "CopyExternalLink": "Kopioi ulkoinen linkki",
   "EncryptedFileSharing": "Tiedoston <strong> {{title}} </strong> jakaminen onnistui",
   "ExternalLink": "Ulkoinen linkki",
   "FormFilling": "Lomakkeen täyttö",
-  "InternalLink": "Sisäinen linkki",
   "LinkName": "Linkin nimi",
-  "Notify users": "Ilmoita käyttäjille",
   "ShareEmailBody": "Sinulle on myönnetty käyttöoikeus asiakirjaan {{itemName}}. Avaa asiakirja heti napsauttamalla alla olevaa linkkiä: {{shareLink}}.",
   "ShareEmailSubject": "Sinulle on myönnetty käyttöoikeus asiakirjaan {{itemName}}",
   "SharingSettingsTitle": "Jakamisen asetukset"

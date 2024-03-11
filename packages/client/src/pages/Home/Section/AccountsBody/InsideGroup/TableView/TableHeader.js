@@ -24,7 +24,6 @@ class InsideGroupTableHeader extends React.Component {
         sortBy: "AZ",
         minWidth: 210,
         onClick: this.onFilter,
-        onIconClick: this.onIconClick,
       },
       {
         key: "Type",
@@ -117,18 +116,6 @@ class InsideGroupTableHeader extends React.Component {
     navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
   };
 
-  onIconClick = () => {
-    const { filter, setIsLoading, navigate, location } = this.props;
-    const newFilter = filter.clone();
-
-    newFilter.sortOrder =
-      newFilter.sortOrder === "ascending" ? "descending" : "ascending";
-
-    setIsLoading(true);
-
-    navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
-  };
-
   render() {
     const { columns } = this.state;
     const {
@@ -176,9 +163,10 @@ export default inject(
     userStore,
     tableStore,
   }) => {
-    const { filterStore } = peopleStore;
+    const { groupsStore } = peopleStore;
 
-    const { filter, setFilter } = filterStore;
+    const { insideGroupFilter: filter, setInsideGroupFilter: setFilter } =
+      groupsStore;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { withPaging } = settingsStore;

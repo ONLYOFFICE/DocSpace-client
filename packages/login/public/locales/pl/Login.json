@@ -20,7 +20,5 @@
   "RegisterTitle": "Wniosek o rejestrację",
   "RegistrationEmailWatermark": "E-mail",
   "RememberHelper": "Domyślny czas trwania sesji to 20 min. Zaznacz tę opcję, aby ustawić go na 1 rok. Aby ustawić wartość niestandardową, przejdź do Ustawień.",
-  "ResendCode": "Wyślij kod jeszcze raz",
-  "SignInWithCode": "Zaloguj się za pomocą tajnego kodu",
-  "SignInWithPassword": "Zaloguj się za pomocą hasła"
+  "ResendCode": "Wyślij kod jeszcze raz"
 }

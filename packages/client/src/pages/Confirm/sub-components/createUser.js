@@ -446,22 +446,41 @@ const CreateUserForm = (props) => {
           {linkData.type === "LinkInvite" && (
             <div className="tooltip">
               <Text fontSize="16px">
-                <Trans
-                  t={t}
-                  i18nKey={roomName ? "InvitationToRoom" : "InvitationToPortal"}
-                  ns="Common"
-                  defaults={roomName ? DEFAULT_ROOM_TEXT : DEFAULT_PORTAL_TEXT}
-                  values={{
-                    firstName: user.firstName,
-                    lastName: user.lastName,
-                    ...(roomName
-                      ? { roomName }
-                      : { spaceAddress: window.location.host }),
-                  }}
-                  components={{
-                    1: <Text fontWeight={600} as="strong" fontSize="16px" />,
-                  }}
-                />
+                {roomName ? (
+                  <Trans
+                    t={t}
+                    i18nKey="InvitationToRoom"
+                    ns="Common"
+                    defaults={DEFAULT_ROOM_TEXT}
+                    values={{
+                      firstName: user.firstName,
+                      lastName: user.lastName,
+                      ...(roomName
+                        ? { roomName }
+                        : { spaceAddress: window.location.host }),
+                    }}
+                    components={{
+                      1: <Text fontWeight={600} as="strong" fontSize="16px" />,
+                    }}
+                  />
+                ) : (
+                  <Trans
+                    t={t}
+                    i18nKey="InvitationToPortal"
+                    ns="Common"
+                    defaults={DEFAULT_PORTAL_TEXT}
+                    values={{
+                      firstName: user.firstName,
+                      lastName: user.lastName,
+                      ...(roomName
+                        ? { roomName }
+                        : { spaceAddress: window.location.host }),
+                    }}
+                    components={{
+                      1: <Text fontWeight={600} as="strong" fontSize="16px" />,
+                    }}
+                  />
+                )}
               </Text>
             </div>
           )}

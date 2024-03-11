@@ -4,7 +4,6 @@
   "Ascending": "Artan",
   "Code": "Girilecek kod",
   "CopyWindowCode": "Pencere gömülü kodunu kopyala",
-  "CreateSampleHeader": "Örnek DocSpace yerleştirmesi oluştur",
   "CSPDescription": "DocSpace'i bir web sitesine iframe olarak güvenli bir şekilde gömmek için URL bağlantısını izin verilenler listenize ekleyin.",
   "CSPHeader": "DocSpace'i iframe olarak gömün",
   "CSPHelp": "Bu ayar, içerik yerleştirme saldırılarına karşı koruma sağlamak adına kullanılabilecek bir güvenlik mekanizmasıdır. CSP, güvenli kaynak indirme kaynaklarını niteler. 'Beyaz listede' yer almayan kaynaklardan indirme engellenmiştir. Çalışacağı etki alanlarını (protokol ile) belirtin.",
@@ -33,6 +32,5 @@
   "SDKDescription": "JavaScript SDK kullanarak ONLYOFFICE DocSpace'ten bir odayı veya klasörü web arayüzünüze iframe olarak yerleştirebilirsiniz. Örnek bir iframe oluşturmak ve CSP'yi yapılandırmak için ayarları burada bulabilirsiniz. Tam SDK'yı kullanmak için lütfen şuraya bakın",
   "SearchFilterAndSort": "Ara, Filtrele ve Sırala",
   "SearchTerm": "Arama terimi",
-  "SortOrder": "Sıralama düzeni",
-  "Title": "Gezinme ve Başlık"
+  "SortOrder": "Sıralama düzeni"
 }

@@ -79,7 +79,9 @@ const QuotaPerItemComponent = (props) => {
           isDisabled={isDisabled || isLoading}
         />
         <Text className="toggle_label" fontSize="12px">
-          {t("SetDefaultUserQuota")}
+          {type === "user"
+            ? t("SetDefaultUserQuota")
+            : t("SetDefaultRoomQuota")}
         </Text>
         {isToggleChecked && (
           <QuotaForm

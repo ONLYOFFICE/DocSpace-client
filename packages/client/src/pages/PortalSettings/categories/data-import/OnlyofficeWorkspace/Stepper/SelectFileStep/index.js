@@ -117,7 +117,7 @@ const SelectFileStep = ({
       }
 
       if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
-        toastr.error(res.error);
+        toastr.error(res.error || t("Common:SomethingWentWrong"));
         setIsFileError(true);
         clearInterval(uploadInterval.current);
       } else if (res.isCompleted || res.progress === 100) {
@@ -127,7 +127,7 @@ const SelectFileStep = ({
         clearInterval(uploadInterval.current);
       }
     } catch (error) {
-      toastr.error(error.message);
+      toastr.error(error.message || t("Common:SomethingWentWrong"));
       setIsFileError(true);
       clearInterval(uploadInterval.current);
     }
@@ -168,7 +168,7 @@ const SelectFileStep = ({
           }
 
           if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
-            toastr.error(res.error);
+            toastr.error(res.error || t("Common:SomethingWentWrong"));
             setIsFileError(true);
             setIsFileLoading(false);
             clearInterval(uploadInterval.current);
@@ -181,7 +181,7 @@ const SelectFileStep = ({
             setShowReminder(true);
           }
         } catch (error) {
-          toastr.error(error || error.message);
+          toastr.error(error || t("Common:SomethingWentWrong"));
           setIsFileError(true);
           setIsFileLoading(false);
           setIsError(true);
@@ -189,7 +189,7 @@ const SelectFileStep = ({
         }
       }, 1000);
     } catch (error) {
-      toastr.error(error || error.message);
+      toastr.error(error || t("Common:SomethingWentWrong"));
       setIsFileError(true);
       setIsFileLoading(false);
     }

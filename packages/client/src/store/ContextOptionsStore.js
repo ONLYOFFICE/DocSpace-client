@@ -232,7 +232,7 @@ class ContextOptionsStore {
   };
 
   onOpenLocation = (item) => {
-    this.filesActionsStore.openLocationAction(item);
+    this.filesActionsStore.checkAndOpenLocationAction(item);
   };
 
   onOwnerChange = () => {

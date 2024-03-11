@@ -1376,6 +1376,17 @@ class FilesActionStore {
     window.DocSpace.navigate(`${url}?${filter.toUrlParams()}`, { state });
   };
 
+  nameWithoutExtension = (title) => {
+    const indexPoint = title.lastIndexOf(".");
+    const splitTitle = title.split(".");
+    const splitTitleLength = splitTitle.length;
+
+    const titleWithoutExtension =
+      splitTitleLength <= 2 ? splitTitle[0] : title.slice(0, indexPoint);
+
+    return titleWithoutExtension;
+  };
+
   checkAndOpenLocationAction = async (item) => {
     const { categoryType } = this.filesStore;
     const { myRoomsId, myFolderId, archiveRoomsId, recycleBinFolderId } =
@@ -1387,7 +1398,7 @@ class FilesActionStore {
       setIsSectionFilterLoading(param);
     };
 
-    const { ExtraLocationTitle, ExtraLocation, fileExst } = item;
+    const { ExtraLocationTitle, ExtraLocation, fileExst, folderId } = item;
 
     const isRoot =
       ExtraLocation === myRoomsId ||
@@ -1409,8 +1420,10 @@ class FilesActionStore {
 
     const newFilter = FilesFilter.getDefault();
 
-    newFilter.search = item.title;
-    newFilter.folder = ExtraLocation;
+    const title = this.nameWithoutExtension(item.title);
+
+    newFilter.search = title;
+    newFilter.folder = ExtraLocation || folderId;
 
     setIsLoading(
       window.DocSpace.location.search !== `?${newFilter.toUrlParams()}` ||

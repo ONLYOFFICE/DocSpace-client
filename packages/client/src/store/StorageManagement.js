@@ -10,6 +10,7 @@ import {
   getQuotaSettings,
   recalculateQuota,
 } from "@docspace/shared/api/settings";
+import { getRooms } from "@docspace/shared/api/rooms";
 
 const FILTER_COUNT = 6;
 
@@ -20,7 +21,7 @@ class StorageManagement {
   filesUsedSpace = {};
   quotaSettings = {};
   intervalId = null;
-
+  rooms = [];
   needRecalculating = false;
   isRecalculating = false;
 
@@ -32,7 +33,7 @@ class StorageManagement {
   }
 
   basicRequests = async (isInit) => {
-    const { fetchRooms } = this.filesStore;
+    const { getFilesListItems } = this.filesStore;
     const { usersStore } = this.peopleStore;
     const { getUsersList } = usersStore;
 
@@ -41,9 +42,10 @@ class StorageManagement {
 
     const roomFilterData = RoomsFilter.getDefault();
     roomFilterData.pageCount = FILTER_COUNT;
+
     const requests = [
       getUsersList(userFilterData),
-      fetchRooms(null, roomFilterData),
+      getRooms(roomFilterData),
       getPortal(),
       getPortalUsersCount(),
       getFilesUsedSpace(),
@@ -52,15 +54,19 @@ class StorageManagement {
 
     isInit && requests.push(checkRecalculateQuota());
 
+    let roomsList, accountsList;
+
     [
       ,
-      ,
+      roomsList,
       this.portalInfo,
       this.activeUsersCount,
       this.filesUsedSpace,
       this.quotaSettings,
       this.needRecalculating,
     ] = await Promise.all(requests);
+
+    this.rooms = getFilesListItems(roomsList.folders);
 
     if (!this.quotaSettings.lastRecalculateDate && isInit) {
       await recalculateQuota();

@@ -13,13 +13,13 @@ import { StyledStatistics, StyledSimpleFilesRow } from "../StyledComponent";
 
 const RoomsListComponent = (props) => {
   const {
-    filesList,
+    rooms,
     iconElement,
     textElement,
     quotaElement,
     buttonProps,
     id,
-    filesListLength,
+    roomsListLength,
   } = props;
   const { t } = useTranslation("Settings");
 
@@ -35,7 +35,7 @@ const RoomsListComponent = (props) => {
     navigate(`/rooms/shared/filter?${urlFilter}`);
   };
 
-  const roomsList = filesList.map((item, index) => {
+  const roomsList = rooms.map((item, index) => {
     const { id, icon, fileExst, defaultRoomIcon, isRoom, title, logo } = item;
     const color = logo?.color;
 
@@ -52,6 +52,7 @@ const RoomsListComponent = (props) => {
           null,
           title,
           color,
+          logo,
         )}
         {textElement(title)}
         {quotaElement(item)}
@@ -59,7 +60,7 @@ const RoomsListComponent = (props) => {
     );
   });
 
-  if (filesListLength === 0) return <></>;
+  if (roomsListLength === 0) return <></>;
 
   return (
     <StyledStatistics>
@@ -69,7 +70,7 @@ const RoomsListComponent = (props) => {
         </Text>
         {roomsList}
 
-        {filesListLength > 5 && (
+        {roomsListLength > 5 && (
           <Button
             {...buttonProps}
             label={t("Common:ShowMore")}
@@ -81,15 +82,14 @@ const RoomsListComponent = (props) => {
   );
 };
 
-export default inject(({ userStore, filesStore }) => {
+export default inject(({ userStore, storageManagement }) => {
   const { user } = userStore;
-  const { filesList } = filesStore;
-
-  const filesListLength = filesList.length;
+  const { rooms } = storageManagement;
+  const roomsListLength = rooms.length;
 
   return {
-    filesList,
     id: user?.id,
-    filesListLength,
+    roomsListLength,
+    rooms,
   };
 })(observer(RoomsListComponent));

@@ -10,6 +10,8 @@ import {
   getQuotaSettings,
   recalculateQuota,
 } from "@docspace/shared/api/settings";
+import { getRooms } from "@docspace/shared/api/rooms";
+import { getUserList } from "@docspace/shared/api/people";
 
 const FILTER_COUNT = 6;
 
@@ -20,7 +22,8 @@ class StorageManagement {
   filesUsedSpace = {};
   quotaSettings = {};
   intervalId = null;
-
+  rooms = [];
+  accounts = [];
   needRecalculating = false;
   isRecalculating = false;
 
@@ -32,18 +35,19 @@ class StorageManagement {
   }
 
   basicRequests = async (isInit) => {
-    const { fetchRooms } = this.filesStore;
+    const { getFilesListItems } = this.filesStore;
     const { usersStore } = this.peopleStore;
-    const { getUsersList } = usersStore;
+    const { getPeopleListItem } = usersStore;
 
     const userFilterData = Filter.getDefault();
     userFilterData.pageCount = FILTER_COUNT;
 
     const roomFilterData = RoomsFilter.getDefault();
     roomFilterData.pageCount = FILTER_COUNT;
+
     const requests = [
-      getUsersList(userFilterData),
-      fetchRooms(null, roomFilterData),
+      getUserList(userFilterData),
+      getRooms(roomFilterData),
       getPortal(),
       getPortalUsersCount(),
       getFilesUsedSpace(),
@@ -52,15 +56,20 @@ class StorageManagement {
 
     isInit && requests.push(checkRecalculateQuota());
 
+    let roomsList, accountsList;
+
     [
-      ,
-      ,
+      accountsList,
+      roomsList,
       this.portalInfo,
       this.activeUsersCount,
       this.filesUsedSpace,
       this.quotaSettings,
       this.needRecalculating,
     ] = await Promise.all(requests);
+
+    this.rooms = getFilesListItems(roomsList.folders);
+    this.accounts = accountsList.items.map((user) => getPeopleListItem(user));
 
     if (!this.quotaSettings.lastRecalculateDate && isInit) {
       await recalculateQuota();
@@ -82,10 +91,10 @@ class StorageManagement {
   };
 
   updateQuotaInfo = async (type) => {
-    const { fetchRooms } = this.filesStore;
-    const { usersStore } = this.peopleStore;
-    const { getUsersList } = usersStore;
     const { getTenantExtra } = this.authStore;
+    const { getFilesListItems } = this.filesStore;
+    const { usersStore } = this.peopleStore;
+    const { getPeopleListItem } = usersStore;
 
     const userFilterData = Filter.getDefault();
     userFilterData.pageCount = FILTER_COUNT;
@@ -96,11 +105,17 @@ class StorageManagement {
     const requests = [getTenantExtra()];
 
     type === "user"
-      ? requests.push(getUsersList(userFilterData))
-      : requests.push(fetchRooms(null, roomFilterData));
+      ? requests.push(getUserList(userFilterData))
+      : requests.push(getRooms(roomFilterData));
 
     try {
-      await Promise.all(requests);
+      const [, items] = await Promise.all(requests);
+
+      if (type === "user") {
+        this.accounts = items.items.map((user) => getPeopleListItem(user));
+        return;
+      }
+      this.rooms = getFilesListItems(items.folders);
     } catch (e) {
       toastr.error(e);
     }

@@ -12,7 +12,7 @@ import { StyledStatistics, StyledSimpleFilesRow } from "../StyledComponent";
 
 const StatisticsComponent = (props) => {
   const {
-    peopleList,
+    accounts,
     iconElement,
     textElement,
     quotaElement,
@@ -30,7 +30,7 @@ const StatisticsComponent = (props) => {
     navigate(`/accounts/filter?${urlFilter}`);
   };
 
-  const usersList = peopleList.map((item, index) => {
+  const usersList = accounts.map((item, index) => {
     const { fileExst, avatar, id, displayName, isRoom, defaultRoomIcon } = item;
 
     if (index === 5) return;
@@ -70,14 +70,12 @@ const StatisticsComponent = (props) => {
   );
 };
 
-export default inject(({ peopleStore }) => {
-  const { usersStore } = peopleStore;
-  const { peopleList } = usersStore;
-
-  const peopleListLength = peopleList.length;
+export default inject(({ storageManagement }) => {
+  const { accounts } = storageManagement;
+  const peopleListLength = accounts.length;
 
   return {
-    peopleList,
+    accounts,
     peopleListLength,
   };
 })(observer(StatisticsComponent));

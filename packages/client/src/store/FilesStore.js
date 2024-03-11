@@ -3015,29 +3015,12 @@ class FilesStore {
     }
   };
 
-  get filesList() {
-    const { getIcon } = this.filesSettingsStore;
-    //return [...this.folders, ...this.files];
-
+  getFilesListItems = (items) => {
     const { fileItemsList } = this.pluginStore;
     const { enablePlugins } = this.settingsStore;
+    const { getIcon } = this.filesSettingsStore;
 
-    const newFolders = [...this.folders];
-
-    newFolders.sort((a, b) => {
-      const firstValue = a.roomType ? 1 : 0;
-      const secondValue = b.roomType ? 1 : 0;
-
-      return secondValue - firstValue;
-    });
-
-    const items = [...newFolders, ...this.files];
-
-    if (items.length > 0 && this.isEmptyPage) {
-      this.setIsEmptyPage(false);
-    }
-
-    const newItem = items.map((item) => {
+    return items.map((item) => {
       const {
         availableExternalRights,
         access,
@@ -3267,8 +3250,26 @@ class FilesStore {
         providerId,
       };
     });
+  };
+  get filesList() {
+    //return [...this.folders, ...this.files];
 
-    return newItem;
+    const newFolders = [...this.folders];
+
+    newFolders.sort((a, b) => {
+      const firstValue = a.roomType ? 1 : 0;
+      const secondValue = b.roomType ? 1 : 0;
+
+      return secondValue - firstValue;
+    });
+
+    const items = [...newFolders, ...this.files];
+
+    if (items.length > 0 && this.isEmptyPage) {
+      this.setIsEmptyPage(false);
+    }
+
+    return this.getFilesListItems(items);
   }
 
   get cbMenuItems() {

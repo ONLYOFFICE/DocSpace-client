@@ -341,7 +341,6 @@ const Manager = (props) => {
   };
 
   const onChangeFolderId = async (id, publicInPath) => {
-    console.log(id, publicInPath)
     let newConfig = { id, requestToken: null, rootPath: "/rooms/shared/" };
 
     if (!!publicInPath) {

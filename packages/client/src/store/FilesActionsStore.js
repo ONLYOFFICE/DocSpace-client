@@ -50,7 +50,7 @@ import { muteRoomNotification } from "@docspace/shared/api/settings";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import AccountsFilter from "@docspace/shared/api/people/filter";
-import { RoomSearchArea } from "@docspace/shared/enums";
+import { RoomSearchArea, UrlActionType } from "@docspace/shared/enums";
 import { getObjectByLocation } from "@docspace/shared/utils/common";
 import uniqueid from "lodash/uniqueId";
 import FilesFilter from "@docspace/shared/api/files/filter";
@@ -554,6 +554,7 @@ class FilesActionStore {
       this.uploadDataStore;
     const { setSecondaryProgressBarData, clearSecondaryProgressData } =
       secondaryProgressDataStore;
+    const { openUrl } = this.settingsStore;
 
     const { addActiveItems } = this.filesStore;
     const { label } = translations;
@@ -605,7 +606,7 @@ class FilesActionStore {
           this.setIsBulkDownload(false);
 
           if (item.url) {
-            window.location.href = item.url;
+            openUrl(item.url, UrlActionType.Download, true);
           } else {
             setSecondaryProgressBarData({
               visible: true,
@@ -633,6 +634,7 @@ class FilesActionStore {
 
   downloadAction = (label, item, folderId) => {
     const { bufferSelection } = this.filesStore;
+    const { openUrl } = this.settingsStore;
 
     const selection = item
       ? [item]
@@ -649,7 +651,7 @@ class FilesActionStore {
     const items = [];
 
     if (selection.length === 1 && selection[0].fileExst && !folderId) {
-      window.open(selection[0].viewUrl, "_self");
+      openUrl(selection[0].viewUrl, UrlActionType.Download);
       return Promise.resolve();
     }
 

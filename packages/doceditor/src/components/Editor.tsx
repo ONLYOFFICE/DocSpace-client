@@ -90,11 +90,11 @@ const Editor = ({
   newConfig.editorConfig = { ...config.editorConfig };
 
   const search = typeof window !== "undefined" ? window.location.search : "";
-  const type = new URLSearchParams(search).get("type");
+  const editorType = new URLSearchParams(search).get("editorType");
 
   //if (view && newConfig.editorConfig) newConfig.editorConfig.mode = "view";
 
-  if (type) config.type = type;
+  if (editorType) config.type = editorType;
 
   if (isMobile) config.type = "mobile";
 

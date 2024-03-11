@@ -1,4 +1,5 @@
 import { FolderType } from "@docspace/shared/enums";
+import type { TTranslation } from "@docspace/shared/types";
 
 import EmptyScreenPersonalUrl from "PUBLIC_DIR/images/empty_screen_personal.svg?url";
 import EmptyScreenPersonalDarkUrl from "PUBLIC_DIR/images/empty_screen_personal_dark.svg?url";
@@ -13,9 +14,6 @@ import EmptyScreenDoneSvgUrl from "PUBLIC_DIR/images/empty_screen_done.svg?url";
 import EmptyScreenDoneDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_done_dark.svg?url";
 
 type ThemeType = "light" | "dark";
-
-type FolderTypeOf = typeof FolderType;
-type FolderTypeValueOfType = FolderTypeOf[keyof FolderTypeOf];
 
 enum EmptyScreenTypeEnum {
   Done = "emptyScreenDone",
@@ -48,22 +46,44 @@ export const headerIconsUrl: Record<
   },
 };
 
-export const translateHeaderKey: Record<EmptyScreenTypeEnum, string> = {
-  [EmptyScreenTypeEnum.Done]: "EmptyFormFolderDoneHeaderText",
-  [EmptyScreenTypeEnum.InProgress]: "EmptyFormFolderProgressHeaderText",
-  [EmptyScreenTypeEnum.Default]: "EmptyScreenFolder",
-  [EmptyScreenTypeEnum.Corporate]: "RoomCreated",
-  [EmptyScreenTypeEnum.SubFolderDone]: "EmptyFormSubFolderHeaderText",
-  [EmptyScreenTypeEnum.SubFolderinProgress]: "EmptyFormSubFolderHeaderText",
+export const getTranslateHeaderKey = (
+  t: TTranslation,
+  type: EmptyScreenTypeEnum,
+) => {
+  const translateHeaderKey: Record<EmptyScreenTypeEnum, string> = {
+    [EmptyScreenTypeEnum.Done]: t("EmptyFormFolderDoneHeaderText"),
+    [EmptyScreenTypeEnum.InProgress]: t("EmptyFormFolderProgressHeaderText"),
+    [EmptyScreenTypeEnum.Default]: t("EmptyScreenFolder"),
+    [EmptyScreenTypeEnum.Corporate]: t("RoomCreated"),
+    [EmptyScreenTypeEnum.SubFolderDone]: t("EmptyFormSubFolderHeaderText"),
+    [EmptyScreenTypeEnum.SubFolderinProgress]: t(
+      "EmptyFormSubFolderHeaderText",
+    ),
+  };
+
+  return translateHeaderKey[type];
 };
-export const translateDescriptionKey: Record<EmptyScreenTypeEnum, string> = {
-  [EmptyScreenTypeEnum.Done]: "EmptyFormFolderDoneDescriptionText",
-  [EmptyScreenTypeEnum.InProgress]: "EmptyFormFolderProgressDescriptionText",
-  [EmptyScreenTypeEnum.Default]: "EmptyFolderDescriptionUser",
-  [EmptyScreenTypeEnum.Corporate]: "EmptyFolderDecription",
-  [EmptyScreenTypeEnum.SubFolderDone]: "EmptyFormSubFolderDoneDescriptionText",
-  [EmptyScreenTypeEnum.SubFolderinProgress]:
-    "EmptyFormSubFolderProgressDescriptionText",
+
+const getTranslateDescriptionKey = (
+  t: TTranslation,
+  type: EmptyScreenTypeEnum,
+) => {
+  const translateDescriptionKey: Record<EmptyScreenTypeEnum, string> = {
+    [EmptyScreenTypeEnum.Done]: t("EmptyFormFolderDoneDescriptionText"),
+    [EmptyScreenTypeEnum.InProgress]: t(
+      "EmptyFormFolderProgressDescriptionText",
+    ),
+    [EmptyScreenTypeEnum.Default]: t("EmptyFolderDescriptionUser"),
+    [EmptyScreenTypeEnum.Corporate]: t("EmptyFolderDecription"),
+    [EmptyScreenTypeEnum.SubFolderDone]: t(
+      "EmptyFormSubFolderDoneDescriptionText",
+    ),
+    [EmptyScreenTypeEnum.SubFolderinProgress]: t(
+      "EmptyFormSubFolderProgressDescriptionText",
+    ),
+  };
+
+  return translateDescriptionKey[type];
 };
 
 export const getThemeMode = (theme: { isBase: boolean }): ThemeType => {
@@ -71,8 +91,8 @@ export const getThemeMode = (theme: { isBase: boolean }): ThemeType => {
 };
 
 export const getEmptyScreenType = (
-  type: FolderTypeValueOfType | null,
-  displayRoomCondition: boolean
+  type: FolderType | null,
+  displayRoomCondition: boolean,
 ): EmptyScreenTypeEnum => {
   switch (true) {
     case type === FolderType.Done:
@@ -91,21 +111,21 @@ export const getEmptyScreenType = (
 };
 
 export const getHeaderText = (
-  type: FolderTypeValueOfType | null,
+  type: FolderType | null,
   displayRoomCondition: boolean,
-  t: Function
+  t: TTranslation,
 ): string => {
   const emptyType = getEmptyScreenType(type, displayRoomCondition);
-  const key = translateHeaderKey[emptyType];
-  return t(key);
+  const key = getTranslateHeaderKey(t, emptyType);
+  return key;
 };
 
 export const getDescriptionText = (
-  type: FolderTypeValueOfType | null,
+  type: FolderType | null,
   canCreateFiles: boolean,
-  t: Function
+  t: TTranslation,
 ) => {
   const emptyType = getEmptyScreenType(type, canCreateFiles);
-  const key = translateDescriptionKey[emptyType];
-  return t(key);
+  const key = getTranslateDescriptionKey(t, emptyType);
+  return key;
 };

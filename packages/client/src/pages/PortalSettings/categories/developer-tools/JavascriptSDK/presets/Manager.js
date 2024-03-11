@@ -313,7 +313,9 @@ const Manager = (props) => {
 
   useEffect(() => {
     const scroll = document.getElementsByClassName("section-scroll")[0];
-    scroll.scrollTop = 0;
+    if (scroll) {
+      scroll.scrollTop = 0;
+    }
     loadFrame();
     return () => destroyFrame();
   });
@@ -339,6 +341,7 @@ const Manager = (props) => {
   };
 
   const onChangeFolderId = async (id, publicInPath) => {
+    console.log(id, publicInPath)
     let newConfig = { id, requestToken: null, rootPath: "/rooms/shared/" };
 
     if (!!publicInPath) {

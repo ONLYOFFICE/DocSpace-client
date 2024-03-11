@@ -10,40 +10,21 @@ interface MembersParamProps {
   groupManager: object | null;
   groupMembers: object[] | null;
   setGroupMembers: (groupMembers: object[]) => void;
-  onClose: () => void;
+  onShowSelectMembersPanel: () => void;
 }
 
 const MembersParam = ({
   groupManager,
   groupMembers,
   setGroupMembers,
-  onClose,
+  onShowSelectMembersPanel,
 }: MembersParamProps) => {
   const { t } = useTranslation(["Common", "PeopleTranslation"]);
-
-  const [selectMembersPanelIsVisible, setSelectMembersPanelIsVisible] =
-    useState<boolean>(false);
-
-  const onShowSelectMembersPanel = () => setSelectMembersPanelIsVisible(true);
-  const onHideSelectMembersPanel = () => setSelectMembersPanelIsVisible(false);
 
   const onRemoveUserById = (id: string) => {
     const newGroupMembers = groupMembers?.filter((gm) => gm.id !== id);
     setGroupMembers(newGroupMembers || []);
   };
-
-  if (selectMembersPanelIsVisible) {
-    return (
-      <SelectGroupMembersPanel
-        isVisible={selectMembersPanelIsVisible}
-        onClose={onHideSelectMembersPanel}
-        onParentPanelClose={onClose}
-        groupManager={groupManager}
-        groupMembers={groupMembers}
-        setGroupMembers={setGroupMembers}
-      />
-    );
-  }
 
   return (
     <div>

@@ -375,6 +375,10 @@ const ArticleMainButtonContent = (props) => {
       ],
     };
 
+    const mobileMoreActions = {
+      ...moreActions,
+      items: moreActions.items.filter((item) => !item.isSeparator),
+    };
     const formRoomActions = [
       templatePDFForm,
       formGallery,
@@ -390,7 +394,17 @@ const ArticleMainButtonContent = (props) => {
       moreActions,
     ];
 
-    return formRoomActions;
+    const mobileFormRoomActions = [
+      templatePDFForm,
+      formGallery,
+      uploadReadyPDFFrom,
+    ];
+
+    return {
+      formRoomActions,
+      mobileFormRoomActions,
+      mobileMoreActions,
+    };
   };
 
   React.useEffect(() => {
@@ -497,20 +511,21 @@ const ArticleMainButtonContent = (props) => {
     ];
 
     if (currentRoomType === RoomsType.FormRoom) {
-      const formRoomActions = createActionsForFormRoom({
-        formGallery,
-        uploadActions,
-        createNewFolder,
-        showSelectorDocx,
-        createNewDocumentDocx,
-        createTemplateBlankDocxf,
-        createNewPresentationPptx,
-        createNewSpreadsheetXlsx,
-      });
+      const { formRoomActions, mobileFormRoomActions, mobileMoreActions } =
+        createActionsForFormRoom({
+          formGallery,
+          uploadActions,
+          createNewFolder,
+          showSelectorDocx,
+          createNewDocumentDocx,
+          createTemplateBlankDocxf,
+          createNewPresentationPptx,
+          createNewSpreadsheetXlsx,
+        });
 
       // for mobile
-      setUploadActions([]);
-      setActions(formRoomActions);
+      setUploadActions([mobileMoreActions]);
+      setActions(mobileFormRoomActions);
       // for PC
       setModel(formRoomActions);
 

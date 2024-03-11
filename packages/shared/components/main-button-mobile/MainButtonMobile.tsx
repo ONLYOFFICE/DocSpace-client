@@ -265,25 +265,40 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
 
         {buttonOptions && (
           <StyledButtonOptions withoutButton={withoutButton}>
-            {buttonOptions.map((option: ButtonOption) =>
-              option.isSeparator ? (
-                <div key={option.key} className="separator-wrapper">
-                  <div className="is-separator" />
-                </div>
-              ) : (
+            {buttonOptions.map((option: ButtonOption) => {
+              if (option.items) {
+                return (
+                  <SubmenuItem
+                    key={option.key}
+                    option={option}
+                    toggle={toggle}
+                    noHover={noHover}
+                    recalculateHeight={recalculateHeight}
+                    openedSubmenuKey={openedSubmenuKey}
+                    setOpenedSubmenuKey={setOpenedSubmenuKey}
+                  />
+                );
+              }
+
+              if (option.isSeparator)
+                return (
+                  <div key={option.key} className="separator-wrapper">
+                    <div className="is-separator" />
+                  </div>
+                );
+
+              return (
                 <StyledDropDownItem
                   id={option.id}
-                  className={`drop-down-item-button ${
-                    option.isSeparator ? "is-separator" : ""
-                  }`}
+                  className="drop-down-item-button"
                   key={option.key}
                   label={option.label}
                   onClick={option.onClick}
                   icon={option.icon ? option.icon : ""}
                   // action={option.action}
                 />
-              ),
-            )}
+              );
+            })}
           </StyledButtonOptions>
         )}
       </StyledRenderItem>

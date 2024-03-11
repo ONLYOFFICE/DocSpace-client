@@ -66,6 +66,7 @@ const Viewer = (props) => {
 
   const [config, setConfig] = useState({
     mode: "viewer",
+    editorType: "embedded",
     width: `${width}${widthDimension.label}`,
     height: `${height}${heightDimension.label}`,
     frameId: "ds-frame",

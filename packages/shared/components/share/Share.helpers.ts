@@ -43,6 +43,12 @@ export const getAccessOptions = (
       label: t("Common:CustomFilter"),
       icon: CustomFilterReactSvgUrl,
     },
+    available.Review && {
+      access: ShareAccessRights.Review,
+      key: "review",
+      label: t("Common:Review"),
+      icon: AccessReviewReactSvgUrl,
+    },
     available.Comment && {
       access: ShareAccessRights.Comment,
       key: "commenting",
@@ -60,12 +66,6 @@ export const getAccessOptions = (
       key: "deny-access",
       label: t("Common:DenyAccess"),
       icon: EyeOffReactSvgUrl,
-    },
-    available.Review && {
-      access: ShareAccessRights.Review,
-      key: "review",
-      label: t("Common:Review"),
-      icon: AccessReviewReactSvgUrl,
     },
     {
       key: "separator",
@@ -124,4 +124,3 @@ export const getExpiredOptions = (
     },
   ];
 };
-

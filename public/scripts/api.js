@@ -74,6 +74,11 @@
     },
   };
 
+  const lt = /</g;
+  const rlt = "&lt;";
+  const gt = />/g;
+  const rgt = "&rt;";
+
   const cspErrorText =
     "The current domain is not set in the Content Security Policy (CSP) settings.";
 
@@ -242,6 +247,12 @@
 
       const scriptUrl = `${window.location.origin}/static/scripts/api.js`;
 
+      const configStringify = JSON.stringify(config, function (key, val) {
+        return typeof val === "function" ? "" + val : val;
+      })
+        .replace(lt, rlt)
+        .replace(gt, rgt);
+
       button.addEventListener("click", () => {
         const winHtml = `<!DOCTYPE html>
           <html>
@@ -271,12 +282,7 @@
               <body style="margin:0;">
                   <div id=${config.frameId}></div>
                   <script id="integration">
-                    const config = {...${JSON.stringify(
-                      config,
-                      function (key, val) {
-                        return typeof val === "function" ? "" + val : val;
-                      }
-                    )}, width: "100%", height: "100%", events: {
+                    const config = {...${configStringify}, width: "100%", height: "100%", events: {
                       onSelectCallback: eval(${config.events.onSelectCallback + ""}),
                       onCloseCallback: eval(${config.events.onCloseCallback + ""}),
                       onAppReady: eval(${config.events.onAppReady + ""}),
@@ -567,6 +573,10 @@
 
     initFrame(config) {
       const configFull = { ...defaultConfig, ...config };
+      Object.entries(configFull).map(([key, value]) => {
+        if (typeof value === "string")
+          configFull[key] = value.replaceAll(rlt, "<").replaceAll(rgt, ">");
+      });
       this.config = { ...this.config, ...configFull };
 
       const target = document.getElementById(this.config.frameId);

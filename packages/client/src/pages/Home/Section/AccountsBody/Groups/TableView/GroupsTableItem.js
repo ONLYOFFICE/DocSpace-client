@@ -56,6 +56,8 @@ const GroupsTableItem = ({
 
   const onRowClick = (e) => {
     if (
+      e.target?.tagName === "SPAN" ||
+      e.target?.tagName === "A" ||
       e.target.closest(".checkbox") ||
       e.target.closest(".table-container_row-checkbox") ||
       e.detail === 0

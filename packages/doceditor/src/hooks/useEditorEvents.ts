@@ -253,8 +253,16 @@ const useEditorEvents = ({
         const version = fileHistory[i].version;
         const versionGroup = fileHistory[i].versionGroup;
 
+        const changesModified = [...changes];
+
+        changesModified.forEach((item) => {
+          item.created = `${new Date(item.created).toLocaleString(
+            config.editorConfig.lang,
+          )}`;
+        });
+
         let obj = {
-          ...(changes.length !== 0 && { changes }),
+          ...(changes.length !== 0 && { changes: changesModified }),
           created: `${new Date(fileHistory[i].created).toLocaleString(
             config.editorConfig.lang,
           )}`,
@@ -605,4 +613,3 @@ const useEditorEvents = ({
 };
 
 export default useEditorEvents;
-

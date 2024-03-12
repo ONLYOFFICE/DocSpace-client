@@ -204,8 +204,10 @@ class FilesStore {
         if (
           !socketSubscribers.has(pathParts) &&
           !socketSubscribers.has(`DIR-${data.id}`)
-        )
+        ) {
+          console.log("[WS] s:modify-folder: SKIP UNSUBSCRIBED", { data });
           return;
+        }
       }
 
       console.log("[WS] s:modify-folder", opt);
@@ -2659,7 +2661,7 @@ class FilesStore {
 
       this.folders.unshift(item);
 
-      console.log("[WS] subscribe to folder changes", item.id, item.title);
+      //console.log("[WS] subscribe to folder changes", item.id, item.title);
 
       socketHelper.emit({
         command: "subscribe",
@@ -2672,7 +2674,7 @@ class FilesStore {
       const foundIndex = this.files.findIndex((x) => x.id === item?.id);
       if (foundIndex > -1) return;
 
-      console.log("[WS] subscribe to file changes", item.id, item.title);
+      //console.log("[WS] subscribe to file changes", item.id, item.title);
 
       socketHelper.emit({
         command: "subscribe",

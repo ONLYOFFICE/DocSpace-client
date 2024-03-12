@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
@@ -10,7 +10,7 @@ import { ArticleZendeskProps } from "../Article.types";
 
 const baseConfig = {
   webWidget: {
-    zIndex: 201,
+    zIndex: 9999,
     chat: {
       menuOptions: { emailTranscript: false },
     },
@@ -26,6 +26,7 @@ const ArticleLiveChat = ({
   isMobileArticle,
   zendeskKey,
   showProgress,
+  isShowLiveChat,
 }: ArticleZendeskProps) => {
   const { t, ready } = useTranslation("Common");
   const { interfaceDirection } = useTheme();
@@ -88,12 +89,12 @@ const ArticleLiveChat = ({
     });
   }, [interfaceDirection]);
 
-  const onZendeskLoaded = () => {
-    const isShowLiveChat =
+  const onZendeskLoaded = useCallback(() => {
+    const isShowChat =
       localStorage.getItem(LIVE_CHAT_LOCAL_STORAGE_KEY) === "true" || false;
 
-    zendeskAPI.addChanges("webWidget", isShowLiveChat ? "show" : "hide");
-  };
+    zendeskAPI.addChanges("webWidget", isShowChat ? "show" : "hide");
+  }, []);
 
   return zendeskKey ? (
     <Zendesk
@@ -101,6 +102,7 @@ const ArticleLiveChat = ({
       zendeskKey={zendeskKey}
       onLoaded={onZendeskLoaded}
       config={baseConfig}
+      isShowLiveChat={isShowLiveChat}
     />
   ) : null;
 };

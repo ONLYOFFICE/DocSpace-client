@@ -14,6 +14,8 @@ import { createGroup } from "@docspace/shared/api/groups";
 import GroupNameParam from "./sub-components/GroupNameParam";
 import HeadOfGroup from "./sub-components/HeadOfGroupParam";
 import MembersParam from "./sub-components/MembersParam";
+import SelectGroupManagerPanel from "./sub-components/HeadOfGroupParam/SelectGroupManagerPanel";
+import SelectGroupMembersPanel from "./sub-components/MembersParam/SelectGroupMembersPanel";
 
 interface CreateGroupDialogProps {
   visible: boolean;
@@ -46,6 +48,20 @@ const CreateGroupDialog = ({
   const setGroupMembers = (groupMembers: object[]) =>
     setGroupParams((prevState) => ({ ...prevState, groupMembers }));
 
+  const [selectGroupMangerPanelIsVisible, setSelectGroupMangerPanelIsVisible] =
+    useState<boolean>(false);
+
+  const onShowSelectGroupManagerPanel = () =>
+    setSelectGroupMangerPanelIsVisible(true);
+  const onHideSelectGroupManagerPanel = () =>
+    setSelectGroupMangerPanelIsVisible(false);
+
+  const [selectMembersPanelIsVisible, setSelectMembersPanelIsVisible] =
+    useState<boolean>(false);
+
+  const onShowSelectMembersPanel = () => setSelectMembersPanelIsVisible(true);
+  const onHideSelectMembersPanel = () => setSelectMembersPanelIsVisible(false);
+
   const onCreateGroup = async () => {
     setIsLoading(true);
 
@@ -53,16 +69,36 @@ const CreateGroupDialog = ({
     const groupMembersIds = groupParams.groupMembers.map((gm) => gm.id);
 
     createGroup(groupParams.groupName, groupManagerId, groupMembersIds)
-      .then(() => {
-        navigate("/accounts/groups/filter");
-        getGroups();
-      })
+      .then(() => getGroups())
+      .then(() => navigate("/accounts/groups/filter"))
       .catch((err) => toastr.error(err.message))
       .finally(() => {
         setIsLoading(false);
         onClose();
       });
   };
+
+  if (selectGroupMangerPanelIsVisible)
+    return (
+      <SelectGroupManagerPanel
+        isVisible={selectGroupMangerPanelIsVisible}
+        onClose={onHideSelectGroupManagerPanel}
+        onParentPanelClose={onClose}
+        setGroupManager={setGroupManager}
+      />
+    );
+
+  if (selectMembersPanelIsVisible)
+    return (
+      <SelectGroupMembersPanel
+        isVisible={selectMembersPanelIsVisible}
+        onClose={onHideSelectMembersPanel}
+        onParentPanelClose={onClose}
+        groupManager={groupParams.groupManager}
+        groupMembers={groupParams.groupMembers}
+        setGroupMembers={setGroupMembers}
+      />
+    );
 
   return (
     <ModalDialog
@@ -88,13 +124,13 @@ const CreateGroupDialog = ({
           setGroupManager={setGroupManager}
           groupMembers={groupParams.groupMembers}
           setGroupMembers={setGroupMembers}
-          onClose={onClose}
+          onShowSelectGroupManagerPanel={onShowSelectGroupManagerPanel}
         />
         <MembersParam
           groupManager={groupParams.groupManager}
           groupMembers={groupParams.groupMembers}
           setGroupMembers={setGroupMembers}
-          onClose={onClose}
+          onShowSelectMembersPanel={onShowSelectMembersPanel}
         />
       </ModalDialog.Body>
 

@@ -18,6 +18,7 @@ import { inject, observer } from "mobx-react";
 import { toastr } from "@docspace/shared/components/toast";
 import { Encoder } from "@docspace/shared/utils/encoder";
 import { Base } from "@docspace/shared/themes";
+import { UrlActionType } from "@docspace/shared/enums";
 import {
   MAX_FILE_COMMENT_LENGTH,
   MEDIA_VIEW_URL,
@@ -56,6 +57,7 @@ const VersionRow = (props) => {
     fileItemsList,
     enablePlugins,
     currentDeviceType,
+    openUrl,
   } = props;
 
   const navigate = useNavigate();
@@ -75,7 +77,7 @@ const VersionRow = (props) => {
   const title = `${Encoder.htmlDecode(info.updatedBy?.displayName)}`;
 
   const onDownloadAction = () =>
-    window.open(`${info.viewUrl}&version=${info.version}`, "_self");
+    openUrl(`${info.viewUrl}&version=${info.version}`, UrlActionType.Download);
 
   const onEditComment = () => !isEditing && setShowEditPanel(!showEditPanel);
 
@@ -115,7 +117,7 @@ const VersionRow = (props) => {
     if (MediaView || ImageView) {
       return window.open(
         combineUrl(MEDIA_VIEW_URL, info.id),
-        window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self"
+        window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self",
       );
     }
 
@@ -140,7 +142,7 @@ const VersionRow = (props) => {
 
     window.open(
       info.webUrl,
-      window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self"
+      window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self",
     );
   };
 
@@ -194,7 +196,7 @@ const VersionRow = (props) => {
 
   useEffect(() => {
     const newRowHeight = document.getElementsByClassName(
-      `version-row_${index}`
+      `version-row_${index}`,
     )[0]?.clientHeight;
 
     newRowHeight && onUpdateHeight(index, newRowHeight);
@@ -332,7 +334,7 @@ export default inject(
   }) => {
     const { user } = userStore;
     const { openUser, setIsVisible } = infoPanelStore;
-    const { culture, isTabletView, enablePlugins, currentDeviceType } =
+    const { culture, isTabletView, enablePlugins, currentDeviceType, openUrl } =
       settingsStore;
     const language = (user && user.cultureName) || culture || "en";
 
@@ -364,10 +366,11 @@ export default inject(
       canChangeVersionFileHistory,
       openUser,
       setIsVisible,
+      openUrl,
     };
-  }
+  },
 )(
   withTranslation(["VersionHistory", "Common", "Translations"])(
-    observer(VersionRow)
-  )
+    observer(VersionRow),
+  ),
 );

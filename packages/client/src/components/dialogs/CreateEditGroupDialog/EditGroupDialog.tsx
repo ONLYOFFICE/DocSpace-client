@@ -12,6 +12,8 @@ import { getGroupById, updateGroup } from "@docspace/shared/api/groups";
 import GroupNameParam from "./sub-components/GroupNameParam";
 import HeadOfGroup from "./sub-components/HeadOfGroupParam";
 import MembersParam from "./sub-components/MembersParam";
+import SelectGroupManagerPanel from "./sub-components/HeadOfGroupParam/SelectGroupManagerPanel";
+import SelectGroupMembersPanel from "./sub-components/MembersParam/SelectGroupMembersPanel";
 
 interface EditGroupDialogProps {
   group: {
@@ -54,6 +56,20 @@ const EditGroupDialog = ({
 
   const setGroupMembers = (groupMembers: object[]) =>
     setGroupParams((prev) => ({ ...prev, groupMembers }));
+
+  const [selectGroupMangerPanelIsVisible, setSelectGroupMangerPanelIsVisible] =
+    useState<boolean>(false);
+
+  const onShowSelectGroupManagerPanel = () =>
+    setSelectGroupMangerPanelIsVisible(true);
+  const onHideSelectGroupManagerPanel = () =>
+    setSelectGroupMangerPanelIsVisible(false);
+
+  const [selectMembersPanelIsVisible, setSelectMembersPanelIsVisible] =
+    useState<boolean>(false);
+
+  const onShowSelectMembersPanel = () => setSelectMembersPanelIsVisible(true);
+  const onHideSelectMembersPanel = () => setSelectMembersPanelIsVisible(false);
 
   const onEditGroup = async () => {
     setCreateGroupIsLoading(true);
@@ -100,6 +116,28 @@ const EditGroupDialog = ({
       .finally(() => setFetchMembersIsLoading(false));
   }, [group.id]);
 
+  if (selectGroupMangerPanelIsVisible)
+    return (
+      <SelectGroupManagerPanel
+        isVisible={selectGroupMangerPanelIsVisible}
+        onClose={onHideSelectGroupManagerPanel}
+        onParentPanelClose={onClose}
+        setGroupManager={setGroupManager}
+      />
+    );
+
+  if (selectMembersPanelIsVisible)
+    return (
+      <SelectGroupMembersPanel
+        isVisible={selectMembersPanelIsVisible}
+        onClose={onHideSelectMembersPanel}
+        onParentPanelClose={onClose}
+        groupManager={groupParams.groupManager}
+        groupMembers={groupParams.groupMembers}
+        setGroupMembers={setGroupMembers}
+      />
+    );
+
   return (
     <ModalDialog
       displayType="aside"
@@ -124,14 +162,14 @@ const EditGroupDialog = ({
           setGroupManager={setGroupManager}
           groupMembers={groupParams.groupMembers}
           setGroupMembers={setGroupMembers}
-          onClose={onClose}
+          onShowSelectGroupManagerPanel={onShowSelectGroupManagerPanel}
         />
         {!isFetchMembersLoading && (
           <MembersParam
             groupManager={groupParams.groupManager}
             groupMembers={groupParams.groupMembers}
             setGroupMembers={setGroupMembers}
-            onClose={onClose}
+            onShowSelectMembersPanel={onShowSelectMembersPanel}
           />
         )}
       </ModalDialog.Body>

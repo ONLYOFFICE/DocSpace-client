@@ -8,6 +8,7 @@ import { ComboBox } from "@docspace/shared/components/combobox";
 import { toastr } from "@docspace/shared/components/toast";
 
 import { StyledBody, StyledText } from "./StyledComponent";
+import { connectedCloudsTypeTitleTranslation } from "SRC_DIR/helpers/filesUtils";
 
 const getOptions = (t, item, spaceLimited) => {
   const items = [
@@ -130,6 +131,14 @@ const SpaceQuota = (props) => {
   const action = item?.quotaLimit === -1 ? "no-quota" : "current-size";
 
   const selectedOption = options.find((elem) => elem.action === action);
+
+  if (item.providerType) {
+    return (
+      <Text fontWeight={600}>
+        {connectedCloudsTypeTitleTranslation(item.providerKey, t)}{" "}
+      </Text>
+    );
+  }
 
   if (withoutLimitQuota || item?.quotaLimit === undefined) {
     return (

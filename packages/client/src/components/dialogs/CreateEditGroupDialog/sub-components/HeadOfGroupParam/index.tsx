@@ -11,7 +11,6 @@ interface HeadOfGroupProps {
   setGroupManager: (groupManager: object | null) => void;
   groupMembers: object[] | null;
   setGroupMembers: (groupMembers: object[]) => void;
-  onClose: () => void;
 }
 
 const HeadOfGroup = ({
@@ -19,17 +18,9 @@ const HeadOfGroup = ({
   setGroupManager,
   groupMembers,
   setGroupMembers,
-  onClose,
+  onShowSelectGroupManagerPanel,
 }: HeadOfGroupProps) => {
   const { t } = useTranslation(["Common"]);
-  const [selectGroupMangerPanelIsVisible, setSelectGroupMangerPanelIsVisible] =
-    useState<boolean>(false);
-
-  const onShowSelectGroupManagerPanel = () =>
-    setSelectGroupMangerPanelIsVisible(true);
-
-  const onHideSelectGroupManagerPanel = () =>
-    setSelectGroupMangerPanelIsVisible(false);
 
   const onRemoveGroupManager = () => {
     setGroupManager(null);
@@ -37,17 +28,6 @@ const HeadOfGroup = ({
       groupMembers?.filter((gm) => gm.id !== groupManager!.id) || [],
     );
   };
-
-  if (selectGroupMangerPanelIsVisible) {
-    return (
-      <SelectGroupManagerPanel
-        isVisible={selectGroupMangerPanelIsVisible}
-        onClose={onHideSelectGroupManagerPanel}
-        onParentPanelClose={onClose}
-        setGroupManager={setGroupManager}
-      />
-    );
-  }
 
   return (
     <div>

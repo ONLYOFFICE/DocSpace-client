@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import queryString from "query-string";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
+import { UrlActionType } from "@docspace/shared/enums";
 
 import MediaViewer from "@docspace/shared/components/media-viewer/MediaViewer";
 
@@ -67,6 +68,7 @@ const FilesMediaViewer = (props) => {
     changeUrl,
     fetchPublicRoom,
     isPublicRoom,
+    openUrl,
   } = props;
 
   const navigate = useNavigate();
@@ -188,7 +190,7 @@ const FilesMediaViewer = (props) => {
     (id) => {
       if (playlist.length > 0) {
         let viewUrlFile = playlist.find((file) => file.fileId === id).src;
-        return window.open(viewUrlFile, "_self");
+        return openUrl(viewUrlFile, UrlActionType.Download);
       }
     },
     [playlist],
@@ -301,7 +303,7 @@ export default inject(
     settingsStore,
     publicRoomStore,
   }) => {
-    const { currentDeviceType } = settingsStore;
+    const { currentDeviceType, openUrl } = settingsStore;
     const {
       firstLoad,
 
@@ -440,6 +442,7 @@ export default inject(
       changeUrl,
       fetchPublicRoom,
       isPublicRoom,
+      openUrl,
     };
   },
 )(withTranslation(["Files", "Translations"])(observer(FilesMediaViewer)));

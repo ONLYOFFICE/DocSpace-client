@@ -204,8 +204,10 @@ class FilesStore {
         if (
           !socketSubscribers.has(pathParts) &&
           !socketSubscribers.has(`DIR-${data.id}`)
-        )
+        ) {
+          console.log("[WS] s:modify-folder: SKIP UNSUBSCRIBED", { data });
           return;
+        }
       }
 
       console.log("[WS] s:modify-folder", opt);
@@ -443,24 +445,25 @@ class FilesStore {
         });
       }, 300);
     } else if (opt?.type === "folder" && opt?.id) {
-      const foundIndex = this.folders.findIndex((x) => x.id === opt?.id);
+      const foundIndex = this.folders.findIndex((x) => x.id == opt?.id);
 
       if (foundIndex > -1) return;
 
       const folder = JSON.parse(opt?.data);
 
-      if (this.selectedFolderStore.id !== folder.parentId) {
+      if (this.selectedFolderStore.id != folder.parentId) {
         const movedToIndex = this.getFolderIndex(folder.parentId);
         if (movedToIndex > -1) this.folders[movedToIndex].foldersCount++;
       }
 
       if (
-        this.selectedFolderStore.id !== folder.parentId ||
+        this.selectedFolderStore.id != folder.parentId ||
         (folder.roomType &&
           folder.createdBy.id === this.userStore.user.id &&
           this.roomCreated)
-      )
+      ) {
         return (this.roomCreated = false);
+      }
 
       const folderInfo = await api.files.getFolderInfo(folder.id);
 
@@ -2659,7 +2662,7 @@ class FilesStore {
 
       this.folders.unshift(item);
 
-      console.log("[WS] subscribe to folder changes", item.id, item.title);
+      //console.log("[WS] subscribe to folder changes", item.id, item.title);
 
       socketHelper.emit({
         command: "subscribe",
@@ -2672,7 +2675,7 @@ class FilesStore {
       const foundIndex = this.files.findIndex((x) => x.id === item?.id);
       if (foundIndex > -1) return;
 
-      console.log("[WS] subscribe to file changes", item.id, item.title);
+      //console.log("[WS] subscribe to file changes", item.id, item.title);
 
       socketHelper.emit({
         command: "subscribe",
@@ -3015,29 +3018,12 @@ class FilesStore {
     }
   };
 
-  get filesList() {
-    const { getIcon } = this.filesSettingsStore;
-    //return [...this.folders, ...this.files];
-
+  getFilesListItems = (items) => {
     const { fileItemsList } = this.pluginStore;
     const { enablePlugins } = this.settingsStore;
+    const { getIcon } = this.filesSettingsStore;
 
-    const newFolders = [...this.folders];
-
-    newFolders.sort((a, b) => {
-      const firstValue = a.roomType ? 1 : 0;
-      const secondValue = b.roomType ? 1 : 0;
-
-      return secondValue - firstValue;
-    });
-
-    const items = [...newFolders, ...this.files];
-
-    if (items.length > 0 && this.isEmptyPage) {
-      this.setIsEmptyPage(false);
-    }
-
-    const newItem = items.map((item) => {
+    return items.map((item) => {
       const {
         availableExternalRights,
         access,
@@ -3267,8 +3253,26 @@ class FilesStore {
         providerId,
       };
     });
+  };
+  get filesList() {
+    //return [...this.folders, ...this.files];
 
-    return newItem;
+    const newFolders = [...this.folders];
+
+    newFolders.sort((a, b) => {
+      const firstValue = a.roomType ? 1 : 0;
+      const secondValue = b.roomType ? 1 : 0;
+
+      return secondValue - firstValue;
+    });
+
+    const items = [...newFolders, ...this.files];
+
+    if (items.length > 0 && this.isEmptyPage) {
+      this.setIsEmptyPage(false);
+    }
+
+    return this.getFilesListItems(items);
   }
 
   get cbMenuItems() {

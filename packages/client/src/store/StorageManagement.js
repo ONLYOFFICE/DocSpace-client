@@ -12,7 +12,7 @@ import {
 } from "@docspace/shared/api/settings";
 import { getRooms } from "@docspace/shared/api/rooms";
 import { getUserList } from "@docspace/shared/api/people";
-import { SortByFieldName } from "SRC_DIR/helpers/enums";
+import { SortByFieldName } from "SRC_DIR/helpers/constants";
 
 const FILTER_COUNT = 6;
 

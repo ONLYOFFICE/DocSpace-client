@@ -154,7 +154,7 @@ const RoomIcon = ({
     prefetchImage();
   }, [prefetchImage]);
 
-  return showDefault || !correctImage ? (
+  return (
     <StyledIcon
       color={color}
       size={size}
@@ -163,8 +163,15 @@ const RoomIcon = ({
       wrongImage={!correctImage}
       data-testid="room-icon"
     >
-      <div className="room-background" />
-      <Text className="room-title">{roomTitle}</Text>
+      {showDefault || !correctImage ? (
+        <>
+          <div className="room-background" />
+          <Text className="room-title">{roomTitle}</Text>
+        </>
+      ) : (
+        <img className={imgClassName} src={imgSrc} alt="room icon" />
+      )}
+
       {badgeUrl && (
         <div className="room-icon_badge">
           <IconButton
@@ -177,8 +184,6 @@ const RoomIcon = ({
         </div>
       )}
     </StyledIcon>
-  ) : (
-    <img className={imgClassName} src={imgSrc} alt="room icon" />
   );
 };
 

@@ -115,6 +115,7 @@ const Badges = ({
           noHover
           onClick={onClickPaid}
           isPaidBadge
+          maxWidth="65px"
         />
       )}
       {statusType === "pending" && (

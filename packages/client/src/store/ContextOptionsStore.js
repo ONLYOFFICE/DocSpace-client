@@ -54,7 +54,7 @@ import { Events } from "@docspace/shared/enums";
 import { connectedCloudsTypeTitleTranslation } from "@docspace/client/src/helpers/filesUtils";
 import { getOAuthToken } from "@docspace/shared/utils/common";
 import api from "@docspace/shared/api";
-import { FolderType } from "@docspace/shared/enums";
+import { FolderType, UrlActionType } from "@docspace/shared/enums";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { getFileLink } from "@docspace/shared/api/files";
 
@@ -232,7 +232,7 @@ class ContextOptionsStore {
   };
 
   onOpenLocation = (item) => {
-    this.filesActionsStore.openLocationAction(item);
+    this.filesActionsStore.checkAndOpenLocationAction(item);
   };
 
   onOwnerChange = () => {
@@ -441,6 +441,9 @@ class ContextOptionsStore {
     const { fileExst, contentLength, viewUrl } = item;
     const isFile = !!fileExst && contentLength;
 
+    const { openUrl } = this.settingsStore;
+    const { downloadAction } = this.filesActionsStore;
+
     if (isIOS && this.isPwa()) {
       const xhr = new XMLHttpRequest();
       xhr.open("GET", viewUrl);
@@ -459,10 +462,10 @@ class ContextOptionsStore {
     }
 
     isFile
-      ? window.open(viewUrl, "_self")
-      : this.filesActionsStore
-          .downloadAction(t("Translations:ArchivingData"), item)
-          .catch((err) => toastr.error(err));
+      ? openUrl(viewUrl, UrlActionType.Download)
+      : downloadAction(t("Translations:ArchivingData"), item).catch((err) =>
+          toastr.error(err),
+        );
   };
 
   onClickDownloadAs = () => {

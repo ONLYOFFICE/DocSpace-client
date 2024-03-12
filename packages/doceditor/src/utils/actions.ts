@@ -15,6 +15,7 @@ export async function getData(
   doc?: string,
   view?: boolean,
   share?: string,
+  editorType?: string,
 ) {
   try {
     const hdrs = headers();
@@ -37,6 +38,7 @@ export async function getData(
     }
     if (doc) configURL.searchParams.append("doc", doc);
     if (share) configURL.searchParams.append("share", share);
+    if (editorType) configURL.searchParams.append("editorType", editorType);
 
     const getConfig = new Request(configURL, {
       headers: hdrs,

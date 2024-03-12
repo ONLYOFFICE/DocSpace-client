@@ -66,6 +66,7 @@ const Viewer = (props) => {
 
   const [config, setConfig] = useState({
     mode: "viewer",
+    editorType: "embedded",
     width: `${width}${widthDimension.label}`,
     height: `${height}${heightDimension.label}`,
     frameId: "ds-frame",
@@ -96,7 +97,9 @@ const Viewer = (props) => {
 
   useEffect(() => {
     const scroll = document.getElementsByClassName("section-scroll")[0];
-    scroll.scrollTop = 0;
+    if (scroll) {
+      scroll.scrollTop = 0;
+    }
     loadFrame();
     return () => destroyFrame();
   });

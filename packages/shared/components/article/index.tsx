@@ -52,6 +52,7 @@ const Article = ({
   isBannerVisible,
 
   isLiveChatAvailable,
+  isShowLiveChat,
 
   onLogoClickAction,
 
@@ -282,6 +283,7 @@ const Article = ({
                   displayName={chatDisplayName}
                   zendeskKey={zendeskKey}
                   showProgress={showProgress}
+                  isShowLiveChat={isShowLiveChat}
                 />
               )}
             </>

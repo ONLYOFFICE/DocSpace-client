@@ -81,6 +81,7 @@ const SelectFileStep = ({
   const [progress, setProgress] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [showErrorText, setShowErrorText] = useState(false);
   const [isFileError, setIsFileError] = useState(false);
   const [fileName, setFileName] = useState(null);
   const [searchParams] = useSearchParams();
@@ -165,6 +166,12 @@ const SelectFileStep = ({
             setIsVisible(false);
           } else {
             setIsVisible(true);
+          }
+
+          if (res.error) {
+            setShowErrorText(true);
+          } else {
+            setShowErrorText(false);
           }
 
           if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
@@ -285,7 +292,9 @@ const SelectFileStep = ({
                 label={t("Common:LoadingIsComplete")}
               />
               <Text className="error-text">
-                {t("Settings:UnsupportedFilesDescription")}
+                {showErrorText
+                  ? t("Settings:UnsupportedFilesDescription")
+                  : t("Settings:UnsupportedFilesWithUploadDesc")}
               </Text>
               <Link
                 type="action"

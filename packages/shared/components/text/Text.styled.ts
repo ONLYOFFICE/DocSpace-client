@@ -57,6 +57,7 @@ export const StyledAutoDirSpan = styled.span`
   white-space: inherit;
   overflow: inherit;
   text-overflow: inherit;
+  pointer-events: none;
 `;
 
 export default StyledText;

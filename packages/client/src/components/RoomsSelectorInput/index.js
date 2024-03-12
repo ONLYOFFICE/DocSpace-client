@@ -49,12 +49,12 @@ const RoomsSelectorInput = (props) => {
 
   const handleOnSubmit = (rooms) => {
     setPath(BasePath + "/ " + rooms[0].label);
-    onSubmit(rooms);
+    onSubmit && onSubmit(rooms);
     setIsPanelVisible(false);
   };
 
   const handleOnCancel = (e) => {
-    onCancel(e);
+    onCancel && onCancel(e);
     setIsPanelVisible(false);
   };
 

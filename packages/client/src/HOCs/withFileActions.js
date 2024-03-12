@@ -87,14 +87,12 @@ export default function withFileActions(WrappedFileItem) {
         isDisabledItemId,
       } = this.props;
 
-      const elem = e.target === "A" ? e.target : e.target.parentElement;
-
       const { isThirdPartyFolder } = item;
 
-      const notSelectable = elem.closest(".not-selectable");
+      const notSelectable = e.target.closest(".not-selectable");
       const isFileName =
-        elem.classList.contains("item-file-name") ||
-        elem.classList.contains("row-content-link");
+        e.target.classList.contains("item-file-name") ||
+        e.target.classList.contains("row-content-link");
 
       if ((isRoomsFolder || isArchiveFolder) && isFileName && !isSelected)
         setBufferSelection(item);

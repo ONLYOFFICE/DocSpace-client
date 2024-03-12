@@ -7,9 +7,16 @@ interface Props {
   defer?: boolean;
   onLoaded?: () => void;
   config?: {};
+  isShowLiveChat: boolean;
 }
 
-const Zendesk = ({ zendeskKey, defer, onLoaded, config }: Props) => {
+const Zendesk = ({
+  zendeskKey,
+  defer,
+  onLoaded,
+  config,
+  isShowLiveChat,
+}: Props) => {
   const onScriptLoaded = useCallback(() => {
     const waitingChanges = zendeskAPI.getChanges();
     if (waitingChanges.length > 0) {
@@ -24,13 +31,19 @@ const Zendesk = ({ zendeskKey, defer, onLoaded, config }: Props) => {
 
   const insertScript = useCallback(
     (zdKey: string, d?: boolean) => {
+      const ZENDESK_ID = "ze-snippet";
+
+      const includeScript = Boolean(document?.getElementById(ZENDESK_ID));
+
+      if (includeScript) return;
+
       const script = document.createElement("script");
       if (d) {
         script.defer = true;
       } else {
         script.async = true;
       }
-      script.id = "ze-snippet";
+      script.id = ZENDESK_ID;
       script.src = `https://static.zdassets.com/ekr/snippet.js?key=${zdKey}`;
       script.addEventListener("load", onScriptLoaded);
       document.body.appendChild(script);
@@ -39,21 +52,16 @@ const Zendesk = ({ zendeskKey, defer, onLoaded, config }: Props) => {
   );
 
   useEffect(() => {
-    if (typeof window?.document?.createElement !== "undefined" && !window?.zE) {
+    if (
+      typeof window?.document?.createElement !== "undefined" &&
+      !window?.zE &&
+      isShowLiveChat
+    ) {
       insertScript(zendeskKey, defer);
 
       window.zESettings = { ...(config || {}) };
     }
-
-    return () => {
-      if (typeof window?.document?.createElement !== "undefined" && window.zE) {
-        // @ts-expect-error its ok
-        delete window.zE;
-        // @ts-expect-error its ok
-        delete window.zESettings;
-      }
-    };
-  }, [zendeskKey, defer, insertScript, config]);
+  }, [zendeskKey, defer, insertScript, config, isShowLiveChat]);
 
   return null;
 };

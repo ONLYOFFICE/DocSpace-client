@@ -7,7 +7,7 @@ const ArticleWrapper = (props: ArticleProps) => {
   return <Article {...props} />;
 };
 
-export default inject(
+export default inject<TStore>(
   ({
     authStore,
     uploadDataStore,
@@ -17,7 +17,7 @@ export default inject(
     currentTariffStatusStore,
     currentQuotaStore,
     settingsStore,
-  }: any) => {
+  }) => {
     const {
       isLiveChatAvailable,
 
@@ -25,7 +25,8 @@ export default inject(
       isEnterprise,
     } = authStore;
 
-    const { getActions, getUserRole, onProfileClick } = profileActionsStore;
+    const { getActions, getUserRole, onProfileClick, isShowLiveChat } =
+      profileActionsStore;
 
     const { withSendAgain, user } = userStore;
 
@@ -34,7 +35,7 @@ export default inject(
     const { primaryProgressDataStore, secondaryProgressDataStore } =
       uploadDataStore;
 
-    const { email, displayName } = user;
+    const { email, displayName } = user!;
 
     const isAdmin = user?.isAdmin;
 
@@ -119,10 +120,11 @@ export default inject(
       isBannerVisible,
 
       isLiveChatAvailable,
+      isShowLiveChat,
 
       currentDeviceType,
 
       isAdmin,
     };
-  }
+  },
 )(observer(ArticleWrapper));

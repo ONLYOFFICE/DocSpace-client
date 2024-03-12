@@ -40,6 +40,7 @@ export interface ArticleZendeskProps {
   isMobileArticle: boolean;
   zendeskKey: string;
   showProgress: boolean;
+  isShowLiveChat: boolean;
 }
 
 export interface ArticleAppsProps {
@@ -82,6 +83,7 @@ export interface ArticleProps {
   isBannerVisible: boolean;
 
   isLiveChatAvailable: boolean;
+  isShowLiveChat: boolean;
 
   onLogoClickAction?: () => void;
 

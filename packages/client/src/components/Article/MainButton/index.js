@@ -146,6 +146,9 @@ const ArticleMainButtonContent = (props) => {
 
     isFrame,
     disableActionButton,
+
+    parentRoomType,
+    isFolder,
   } = props;
 
   const navigate = useNavigate();
@@ -510,7 +513,10 @@ const ArticleMainButtonContent = (props) => {
       },
     ];
 
-    if (currentRoomType === RoomsType.FormRoom) {
+    if (
+      currentRoomType === RoomsType.FormRoom ||
+      (parentRoomType === RoomsType.FormRoom && isFolder)
+    ) {
       const { formRoomActions, mobileFormRoomActions, mobileMoreActions } =
         createActionsForFormRoom({
           formGallery,
@@ -673,6 +679,9 @@ const ArticleMainButtonContent = (props) => {
     isRoomsFolder,
     isOwner,
     isAdmin,
+
+    parentRoomType,
+    isFolder,
 
     onCreate,
     onCreateRoom,
@@ -839,6 +848,8 @@ export default inject(
 
     const currentFolderId = selectedFolderStore.id;
     const currentRoomType = selectedFolderStore.roomType;
+    const parentRoomType = selectedFolderStore.parentRoomType;
+    const isFolder = selectedFolderStore.isFolder;
 
     const { isAdmin, isOwner } = userStore.user;
     const { isGracePeriod } = currentTariffStatusStore;
@@ -894,6 +905,9 @@ export default inject(
 
       isFrame,
       disableActionButton: frameConfig?.disableActionButton,
+
+      parentRoomType,
+      isFolder,
     };
   },
 )(

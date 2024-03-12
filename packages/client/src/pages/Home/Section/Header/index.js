@@ -1463,6 +1463,8 @@ export default inject(
       access,
       canCopyPublicLink,
       rootFolderType,
+      parentRoomType,
+      isFolder,
     } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
@@ -1485,7 +1487,9 @@ export default inject(
     const isRoom = !!roomType;
     const isPublicRoomType = roomType === RoomsType.PublicRoom;
     const isCustomRoomType = roomType === RoomsType.CustomRoom;
-    const isFormRoomType = roomType === RoomsType.FormRoom;
+    const isFormRoomType =
+      roomType === RoomsType.FormRoom ||
+      (parentRoomType === RoomsType.FormRoom && isFolder);
 
     const {
       onClickEditRoom,

@@ -69,10 +69,8 @@ const CreateGroupDialog = ({
     const groupMembersIds = groupParams.groupMembers.map((gm) => gm.id);
 
     createGroup(groupParams.groupName, groupManagerId, groupMembersIds)
-      .then(() => {
-        navigate("/accounts/groups/filter");
-        getGroups();
-      })
+      .then(() => getGroups())
+      .then(() => navigate("/accounts/groups/filter"))
       .catch((err) => toastr.error(err.message))
       .finally(() => {
         setIsLoading(false);

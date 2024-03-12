@@ -369,19 +369,18 @@ const PeopleTableRow = (props) => {
 
     if (groups.length === 1)
       return (
-        <Text
+        <Link
           className="plainTextItem"
           type="page"
-          title={position}
+          title={email}
           fontSize="13px"
           fontWeight={600}
           color={sideInfoColor}
-          truncate
-          noSelect
-          dir="auto"
+          onClick={() => onOpenGroup({ action: groups[0].id })}
+          isTextOverflow
         >
           {groups[0].name}
-        </Text>
+        </Link>
       );
 
     return null;

@@ -4,9 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
-import Filter from "@docspace/shared/api/people/filter";
-
-import { SortByFieldName } from "SRC_DIR/helpers/enums";
 
 import { StyledStatistics, StyledSimpleFilesRow } from "../StyledComponent";
 
@@ -18,16 +15,17 @@ const StatisticsComponent = (props) => {
     quotaElement,
     buttonProps,
     peopleListLength,
+    userFilterData,
+    currentUserId,
   } = props;
   const { t } = useTranslation("Settings");
   const navigate = useNavigate();
 
   const onClickUsers = () => {
-    const newFilter = Filter.getDefault();
-    newFilter.sortBy = SortByFieldName.UsedSpace;
-    const urlFilter = newFilter.toUrlParams();
+    const urlFilter = userFilterData.toUrlParams();
 
-    navigate(`/accounts/filter?${urlFilter}`);
+    currentUserId && localStorage.removeItem(`PeopleFilter=${currentUserId}`);
+    navigate(`/accounts/people/filter?${urlFilter}`);
   };
 
   const usersList = accounts.map((item, index) => {
@@ -70,12 +68,15 @@ const StatisticsComponent = (props) => {
   );
 };
 
-export default inject(({ storageManagement }) => {
-  const { accounts } = storageManagement;
+export default inject(({ userStore, storageManagement }) => {
+  const { accounts, userFilterData } = storageManagement;
   const peopleListLength = accounts.length;
+  const { user } = userStore;
 
   return {
+    currentUserId: user?.id,
     accounts,
     peopleListLength,
+    userFilterData,
   };
 })(observer(StatisticsComponent));

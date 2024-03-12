@@ -12,6 +12,7 @@ import {
 } from "@docspace/shared/api/settings";
 import { getRooms } from "@docspace/shared/api/rooms";
 import { getUserList } from "@docspace/shared/api/people";
+import { SortByFieldName } from "SRC_DIR/helpers/enums";
 
 const FILTER_COUNT = 6;
 
@@ -26,6 +27,8 @@ class StorageManagement {
   accounts = [];
   needRecalculating = false;
   isRecalculating = false;
+  userFilterData = Filter.getDefault();
+  roomFilterData = RoomsFilter.getDefault();
 
   constructor(filesStore, peopleStore, authStore) {
     this.filesStore = filesStore;
@@ -39,15 +42,17 @@ class StorageManagement {
     const { usersStore } = this.peopleStore;
     const { getPeopleListItem } = usersStore;
 
-    const userFilterData = Filter.getDefault();
-    userFilterData.pageCount = FILTER_COUNT;
+    this.userFilterData.pageCount = FILTER_COUNT;
+    this.userFilterData.sortBy = SortByFieldName.UsedSpace;
+    this.userFilterData.sortOrder = "descending";
 
-    const roomFilterData = RoomsFilter.getDefault();
-    roomFilterData.pageCount = FILTER_COUNT;
+    this.roomFilterData.pageCount = FILTER_COUNT;
+    this.roomFilterData.sortBy = SortByFieldName.UsedSpace;
+    this.roomFilterData.sortOrder = "descending";
 
     const requests = [
-      getUserList(userFilterData),
-      getRooms(roomFilterData),
+      getUserList(this.userFilterData),
+      getRooms(this.roomFilterData),
       getPortal(),
       getPortalUsersCount(),
       getFilesUsedSpace(),

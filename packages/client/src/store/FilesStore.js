@@ -445,24 +445,25 @@ class FilesStore {
         });
       }, 300);
     } else if (opt?.type === "folder" && opt?.id) {
-      const foundIndex = this.folders.findIndex((x) => x.id === opt?.id);
+      const foundIndex = this.folders.findIndex((x) => x.id == opt?.id);
 
       if (foundIndex > -1) return;
 
       const folder = JSON.parse(opt?.data);
 
-      if (this.selectedFolderStore.id !== folder.parentId) {
+      if (this.selectedFolderStore.id != folder.parentId) {
         const movedToIndex = this.getFolderIndex(folder.parentId);
         if (movedToIndex > -1) this.folders[movedToIndex].foldersCount++;
       }
 
       if (
-        this.selectedFolderStore.id !== folder.parentId ||
+        this.selectedFolderStore.id != folder.parentId ||
         (folder.roomType &&
           folder.createdBy.id === this.userStore.user.id &&
           this.roomCreated)
-      )
+      ) {
         return (this.roomCreated = false);
+      }
 
       const folderInfo = await api.files.getFolderInfo(folder.id);
 

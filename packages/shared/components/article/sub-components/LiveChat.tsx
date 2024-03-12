@@ -10,7 +10,7 @@ import { ArticleZendeskProps } from "../Article.types";
 
 const baseConfig = {
   webWidget: {
-    zIndex: 201,
+    zIndex: 9999,
     chat: {
       menuOptions: { emailTranscript: false },
     },

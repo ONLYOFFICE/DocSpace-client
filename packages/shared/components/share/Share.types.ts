@@ -51,7 +51,7 @@ export type ShareProps = {
   editFileLink?: (
     fileId: number | string,
     linkId: number | string,
-    access: number,
+    access: ShareAccessRights,
     primary: boolean,
     internal: boolean,
     expirationDate: moment.Moment,

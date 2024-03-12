@@ -47,6 +47,8 @@ export type TFrameEvents = {
   onAppError: null | ((e: Event) => void);
   onEditorCloseCallback: null | ((e: Event) => void);
   onAuthSuccess: null | ((e: Event) => void);
+  onSignOut: null | ((e: Event) => void);
+  onDownload: null | ((e: Event) => void);
 };
 
 export type TFrameConfig = {
@@ -75,6 +77,7 @@ export type TFrameConfig = {
   viewAs: TFrameViewAs;
   viewTableColumns: string;
   checkCSP: boolean;
+  downloadToEvent: boolean;
   filter: TFrameFilter;
   keysForReload: string[];
   events: TFrameEvents;

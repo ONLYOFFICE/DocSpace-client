@@ -21,6 +21,9 @@ import EmptyIframeContainer from "../sub-components/EmptyIframeContainer";
 import GetCodeDialog from "../sub-components/GetCodeDialog";
 import { Button } from "@docspace/shared/components/button";
 
+import CodeMirror from "@uiw/react-codemirror";
+import { javascript } from "@codemirror/lang-javascript";
+
 const showPreviewThreshold = 720;
 
 import {
@@ -58,7 +61,9 @@ const Editor = (props) => {
   const [width, setWidth] = useState("100");
   const [height, setHeight] = useState("100");
   const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
-  const [showPreview, setShowPreview] = useState(window.innerWidth > showPreviewThreshold);
+  const [showPreview, setShowPreview] = useState(
+    window.innerWidth > showPreviewThreshold,
+  );
 
   const [config, setConfig] = useState({
     mode: "editor",
@@ -85,7 +90,9 @@ const Editor = (props) => {
 
     const params = objectToGetParams(config);
 
-    loadScript(`${scriptUrl}${params}`, "integration", () => window.DocSpace.SDK.initFrame(config));
+    loadScript(`${scriptUrl}${params}`, "integration", () =>
+      window.DocSpace.SDK.initFrame(config),
+    );
   }, 500);
 
   useEffect(() => {
@@ -151,7 +158,8 @@ const Editor = (props) => {
 
   const onResize = () => {
     const isEnoughWidthForPreview = window.innerWidth > showPreviewThreshold;
-    if (isEnoughWidthForPreview !== showPreview) setShowPreview(isEnoughWidthForPreview);
+    if (isEnoughWidthForPreview !== showPreview)
+      setShowPreview(isEnoughWidthForPreview);
   };
 
   useEffect(() => {
@@ -193,8 +201,23 @@ const Editor = (props) => {
 
   const code = (
     <CodeWrapper>
-      <CategorySubHeader className="copy-window-code">{t("CopyWindowCode")}</CategorySubHeader>
+      <CategorySubHeader className="copy-window-code">
+        {t("CopyWindowCode")}
+      </CategorySubHeader>
       <Textarea value={codeBlock} heightTextArea={153} />
+    </CodeWrapper>
+  );
+
+  const codeString = `const config = ${JSON.stringify(config, null, "\t")}\n\nconst script = document.createElement("script");\n\nscript.setAttribute("src", ${new URL(window.location).origin}/static/scripts/api.js);\nscript.onload=window.DocSpace.SDK.initFrame(config);\n\ndocument.body.appendChild(script);`;
+
+  const codeMirror = (
+    <CodeWrapper>
+      <CodeMirror
+        value={codeString}
+        width="800px"
+        theme="dark"
+        extensions={[javascript({ jsx: true })]}
+      />
     </CodeWrapper>
   );
 
@@ -208,6 +231,11 @@ const Editor = (props) => {
       key: "code",
       title: t("Code"),
       content: code,
+    },
+    {
+      key: "yolo",
+      title: "Code block",
+      content: codeMirror,
     },
   ];
 
@@ -360,4 +388,8 @@ export default inject(({ authStore, settingsStore }) => {
     theme,
     setDocumentTitle,
   };
-})(withTranslation(["JavascriptSdk", "Files", "EmbeddingPanel", "Common"])(observer(Editor)));
+})(
+  withTranslation(["JavascriptSdk", "Files", "EmbeddingPanel", "Common"])(
+    observer(Editor),
+  ),
+);

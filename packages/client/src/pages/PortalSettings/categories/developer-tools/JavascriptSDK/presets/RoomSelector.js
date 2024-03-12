@@ -23,6 +23,9 @@ import { RoomsType } from "@docspace/shared/enums";
 
 import { toastr } from "@docspace/shared/components/toast";
 
+import CodeMirror from "@uiw/react-codemirror";
+import { javascript } from "@codemirror/lang-javascript";
+
 const showPreviewThreshold = 720;
 
 import {
@@ -295,6 +298,19 @@ const RoomSelector = (props) => {
     </CodeWrapper>
   );
 
+  const codeString = `const config = ${JSON.stringify(config, null, "\t")}\n\nconst script = document.createElement("script");\n\nscript.setAttribute("src", ${new URL(window.location).origin}/static/scripts/api.js);\nscript.onload=window.DocSpace.SDK.initFrame(config);\n\ndocument.body.appendChild(script);`;
+
+  const codeMirror = (
+    <CodeWrapper>
+      <CodeMirror
+        value={codeString}
+        width="800px"
+        theme="dark"
+        extensions={[javascript({ jsx: true })]}
+      />
+    </CodeWrapper>
+  );
+
   const dataTabs = [
     {
       key: "preview",
@@ -305,6 +321,11 @@ const RoomSelector = (props) => {
       key: "code",
       title: t("Code"),
       content: code,
+    },
+    {
+      key: "yolo",
+      title: "Code block",
+      content: codeMirror,
     },
   ];
 

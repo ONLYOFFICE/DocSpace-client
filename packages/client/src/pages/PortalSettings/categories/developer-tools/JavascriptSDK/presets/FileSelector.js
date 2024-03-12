@@ -29,6 +29,9 @@ import { TooltipContent } from "../sub-components/TooltipContent";
 import SubtitleUrl from "PUBLIC_DIR/images/sdk-presets_subtitle.react.svg?url";
 import SearchUrl from "PUBLIC_DIR/images/sdk-presets_files-search.react.svg?url";
 
+import CodeMirror from "@uiw/react-codemirror";
+import { javascript } from "@codemirror/lang-javascript";
+
 import { toastr } from "@docspace/shared/components/toast";
 
 const showPreviewThreshold = 720;
@@ -392,6 +395,19 @@ const FileSelector = (props) => {
     </CodeWrapper>
   );
 
+  const codeString = `const config = ${JSON.stringify(config, null, "\t")}\n\nconst script = document.createElement("script");\n\nscript.setAttribute("src", ${new URL(window.location).origin}/static/scripts/api.js);\nscript.onload=window.DocSpace.SDK.initFrame(config);\n\ndocument.body.appendChild(script);`;
+
+  const codeMirror = (
+    <CodeWrapper>
+      <CodeMirror
+        value={codeString}
+        width="800px"
+        theme="dark"
+        extensions={[javascript({ jsx: true })]}
+      />
+    </CodeWrapper>
+  );
+
   const dataTabs = [
     {
       key: "preview",
@@ -402,6 +418,11 @@ const FileSelector = (props) => {
       key: "code",
       title: t("Code"),
       content: code,
+    },
+    {
+      key: "yolo",
+      title: "Code block",
+      content: codeMirror,
     },
   ];
 

@@ -6,6 +6,7 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import DownloadContent from "./DownloadContent";
+import { UrlActionType } from "@docspace/shared/enums";
 
 class DownloadDialogComponent extends React.Component {
   constructor(props) {
@@ -83,14 +84,14 @@ class DownloadDialogComponent extends React.Component {
   };
 
   onDownload = () => {
-    const { t, downloadFiles } = this.props;
+    const { t, downloadFiles, openUrl } = this.props;
     const [fileConvertIds, folderIds, singleFileUrl] = this.getDownloadItems();
     if (fileConvertIds.length === 1 && folderIds.length === 0) {
       // Single file download as
       const file = fileConvertIds[0];
       if (file.value && singleFileUrl) {
         const viewUrl = `${singleFileUrl}&outputtype=${file.value}`;
-        window.open(viewUrl, "_self");
+        openUrl(viewUrl, UrlActionType.Download);
       }
       this.props.setSelected("none");
       this.onClose();
@@ -135,7 +136,7 @@ class DownloadDialogComponent extends React.Component {
       newState[type].format = !fileId ? format : this.props.t("CustomFormat");
 
       const index = newState[type].files.findIndex(
-        (f) => f.format && f.format !== this.props.t("OriginalFormat")
+        (f) => f.format && f.format !== this.props.t("OriginalFormat"),
       );
 
       if (index === -1) {
@@ -405,7 +406,7 @@ export default inject(
   }) => {
     const { sortedFiles, setSelected } = filesStore;
     const { extsConvertible } = filesSettingsStore;
-    const { theme } = settingsStore;
+    const { theme, openUrl } = settingsStore;
 
     const { downloadDialogVisible: visible, setDownloadDialogVisible } =
       dialogsStore;
@@ -422,6 +423,7 @@ export default inject(
       downloadFiles,
 
       theme,
+      openUrl,
     };
-  }
+  },
 )(observer(DownloadDialog));

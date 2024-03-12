@@ -1,7 +1,8 @@
+import { useTranslation } from "react-i18next";
 import { ShareAccessRights } from "@docspace/shared/enums";
+import { Portal } from "@docspace/shared/components/portal";
 import AddUsersPanel from "../../../../panels/AddUsersPanel";
 import { getAccessOptions } from "../../../../panels/InvitePanel/utils";
-import { useTranslation } from "react-i18next";
 
 interface SelectGroupManagerPanelProps {
   isVisible: boolean;
@@ -24,14 +25,18 @@ const SelectGroupManagerPanel = ({
   };
 
   return (
-    <AddUsersPanel
-      visible={isVisible}
-      onClose={onClose}
-      onParentPanelClose={onParentPanelClose}
-      setDataItems={onSelectGroupManager}
-      accessOptions={accessOptions}
-      isEncrypted={true}
-      defaultAccess={ShareAccessRights.FullAccess}
+    <Portal
+      element={
+        <AddUsersPanel
+          visible={isVisible}
+          onClose={onClose}
+          onParentPanelClose={onParentPanelClose}
+          setDataItems={onSelectGroupManager}
+          accessOptions={accessOptions}
+          isEncrypted={true}
+          defaultAccess={ShareAccessRights.FullAccess}
+        />
+      }
     />
   );
 };

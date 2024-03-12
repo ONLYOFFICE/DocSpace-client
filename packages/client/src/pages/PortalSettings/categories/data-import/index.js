@@ -25,8 +25,6 @@ const DataImport = ({
   getMigrationStatus,
   setDocumentTitle,
 }) => {
-  setDocumentTitle(t("DataImport"));
-
   const navigate = useNavigate();
 
   const google = theme.isBase
@@ -81,6 +79,7 @@ const DataImport = ({
   };
 
   useEffect(() => {
+    setDocumentTitle(t("DataImport"));
     handleMigrationCheck();
   }, []);
 
@@ -100,10 +99,6 @@ const DataImport = ({
     }
   };
 
-  const filteredWorkspaces = workspaces.filter(
-    (workspace) => workspace.title !== "Owncloud",
-  );
-
   return (
     <WorkspacesContainer>
       <Text className="data-import-description">
@@ -112,7 +107,7 @@ const DataImport = ({
       <Text className="data-import-subtitle">{t("UploadBackupData")}</Text>
 
       <Box className="workspace-list">
-        {filteredWorkspaces.map((workspace) => (
+        {workspaces.map((workspace) => (
           <Box
             key={workspace.title}
             className="workspace-item"

@@ -9,6 +9,88 @@ import { TCatchError, TError, TResponse } from "@/types";
 
 const API_PREFIX = "api/2.0";
 
+export async function fileCopyAs(
+  fileId: string,
+  destTitle: string,
+  destFolderId: string,
+  enableExternalExt?: boolean,
+  password?: string,
+) {
+  try {
+    const hdrs = headers();
+
+    const host = hdrs.get("x-forwarded-host");
+    const proto = hdrs.get("x-forwarded-proto");
+    const cookie = hdrs.get("cookie");
+
+    const baseURL = `${proto}://${host}`;
+    const baseAPIUrl = `${baseURL}/${API_PREFIX}`;
+
+    const createFileUrl = new URL(`${baseAPIUrl}/files/file/${fileId}/copyas`);
+
+    const createFile = new Request(createFileUrl, {
+      headers: {
+        cookie: cookie ?? "",
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      method: "POST",
+      body: JSON.stringify({
+        destTitle,
+        destFolderId: +destFolderId,
+        enableExternalExt,
+        password,
+      }),
+    });
+
+    const file = await (await fetch(createFile)).json();
+
+    return {
+      file: file.response,
+      error: { ...file.error },
+    };
+  } catch (e) {
+    return { file: undefined, error: e as object | string };
+  }
+}
+
+export async function createFile(
+  parentId: string,
+  title: string,
+  templateId?: string,
+  formId?: string,
+) {
+  try {
+    const hdrs = headers();
+
+    const host = hdrs.get("x-forwarded-host");
+    const proto = hdrs.get("x-forwarded-proto");
+    const cookie = hdrs.get("cookie");
+
+    const baseURL = `${proto}://${host}`;
+    const baseAPIUrl = `${baseURL}/${API_PREFIX}`;
+
+    const createFileUrl = new URL(`${baseAPIUrl}/files/${parentId}/file`);
+
+    const createFile = new Request(createFileUrl, {
+      headers: {
+        cookie: cookie ?? "",
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      method: "POST",
+      body: JSON.stringify({ title, templateId, formId }),
+    });
+
+    const file = await (await fetch(createFile)).json();
+
+    return {
+      file: file.response,
+      error: { ...file.error },
+    };
+  } catch (e) {
+    return { file: undefined, error: e as object | string };
+  }
+}
+
 export async function getData(
   fileId?: string,
   version?: string,

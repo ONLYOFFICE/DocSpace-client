@@ -5,9 +5,6 @@ import { useNavigate } from "react-router-dom";
 
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
-import RoomsFilter from "@docspace/shared/api/rooms/filter";
-
-import { SortByFieldName } from "SRC_DIR/helpers/enums";
 
 import { StyledStatistics, StyledSimpleFilesRow } from "../StyledComponent";
 
@@ -20,17 +17,14 @@ const RoomsListComponent = (props) => {
     buttonProps,
     id,
     roomsListLength,
+    roomFilterData,
   } = props;
   const { t } = useTranslation("Settings");
 
   const navigate = useNavigate();
 
   const onClickRooms = () => {
-    const newFilter = RoomsFilter.getDefault();
-    newFilter.sortBy = SortByFieldName.UsedSpace;
-    const urlFilter = newFilter.toUrlParams();
-
-    localStorage.removeItem(`UserRoomsFilter=${id}`);
+    const urlFilter = roomFilterData.toUrlParams();
 
     navigate(`/rooms/shared/filter?${urlFilter}`);
   };
@@ -84,12 +78,13 @@ const RoomsListComponent = (props) => {
 
 export default inject(({ userStore, storageManagement }) => {
   const { user } = userStore;
-  const { rooms } = storageManagement;
+  const { rooms, roomFilterData } = storageManagement;
   const roomsListLength = rooms.length;
 
   return {
     id: user?.id,
     roomsListLength,
     rooms,
+    roomFilterData,
   };
 })(observer(RoomsListComponent));

@@ -79,6 +79,7 @@ const SelectFileStep = ({
   cancelMigration,
 }) => {
   const [progress, setProgress] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isFileError, setIsFileError] = useState(false);
   const [fileName, setFileName] = useState(null);
@@ -116,7 +117,7 @@ const SelectFileStep = ({
       }
 
       if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
-        toastr.error(res.error);
+        toastr.error(res.error || t("Common:SomethingWentWrong"));
         setIsFileError(true);
         clearInterval(uploadInterval.current);
       } else if (res.isCompleted || res.progress === 100) {
@@ -126,7 +127,7 @@ const SelectFileStep = ({
         clearInterval(uploadInterval.current);
       }
     } catch (error) {
-      toastr.error(error.message);
+      toastr.error(error.message || t("Common:SomethingWentWrong"));
       setIsFileError(true);
       clearInterval(uploadInterval.current);
     }
@@ -149,6 +150,8 @@ const SelectFileStep = ({
   };
 
   const onUploadFile = async (file) => {
+    setProgress(0);
+    setIsVisible(true);
     try {
       await singleFileUploading(file, setProgress, isAbort);
       await initMigrationName(searchParams.get("service"));
@@ -156,19 +159,29 @@ const SelectFileStep = ({
       uploadInterval.current = setInterval(async () => {
         try {
           const res = await getMigrationStatus();
+          setProgress(res.progress);
+
+          if (res.progress > 10) {
+            setIsVisible(false);
+          } else {
+            setIsVisible(true);
+          }
+
           if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
+            toastr.error(res.error || t("Common:SomethingWentWrong"));
             setIsFileError(true);
             setIsFileLoading(false);
-            toastr.error(res.error);
             clearInterval(uploadInterval.current);
           } else if (res.isCompleted || res.parseResult.progress === 100) {
-            setIsFileLoading(false);
             clearInterval(uploadInterval.current);
+            setIsFileLoading(false);
+            setIsVisible(false);
+            setProgress(100);
             setUsers(res.parseResult);
             setShowReminder(true);
           }
         } catch (error) {
-          toastr.error(error.message);
+          toastr.error(error || t("Common:SomethingWentWrong"));
           setIsFileError(true);
           setIsFileLoading(false);
           setIsError(true);
@@ -176,7 +189,7 @@ const SelectFileStep = ({
         }
       }, 1000);
     } catch (error) {
-      toastr.error(error.message);
+      toastr.error(error || t("Common:SomethingWentWrong"));
       setIsFileError(true);
       setIsFileLoading(false);
     }
@@ -252,6 +265,7 @@ const SelectFileStep = ({
         <Wrapper>
           <ProgressBar
             percent={progress}
+            isInfiniteProgress={isVisible}
             className="select-file-progress-bar"
             label={t("Settings:BackupFileUploading")}
           />

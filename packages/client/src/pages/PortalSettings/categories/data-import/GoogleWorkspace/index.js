@@ -167,7 +167,11 @@ const GoogleWorkspace = ({
           setCurrentStep(6);
         }
 
-        if (res.parseResult.operation === "parse" && res.isCompleted) {
+        if (
+          res.parseResult.operation === "parse" &&
+          res.isCompleted &&
+          res.error
+        ) {
           setUsers(res.parseResult);
           setCurrentStep(2);
         }

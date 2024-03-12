@@ -198,12 +198,14 @@ export const Container = styled(Box)`
   gap: 48px;
 
   @media ${tablet} {
-    flex-direction: column;
+    flex-direction: column-reverse;
+    gap: 48px;
   }
 
   ${isMobile() &&
   css`
-    flex-direction: column;
+    flex-direction: column-reverse;
+    gap: 48px;
   `}
 `;
 

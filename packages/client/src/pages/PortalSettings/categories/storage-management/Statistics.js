@@ -28,19 +28,21 @@ const StatisticsComponent = (props) => {
     className,
     title,
     color,
+	logo
   ) => (
-    <div className={className}>
-      <ItemIcon
-        id={id}
-        icon={icon}
-        fileExst={fileExst}
-        isRoom={isRoom}
-        defaultRoomIcon={defaultRoomIcon}
-        title={title}
-        color={color}
-      />
-    </div>
-  );
+      <div className={className}>
+        <ItemIcon
+          id={id}
+          icon={icon}
+          fileExst={fileExst}
+          isRoom={isRoom}
+          defaultRoomIcon={defaultRoomIcon}
+          title={title}
+          color={color}
+          logo={logo}
+        />
+      </div>
+    );
   const quotaElement = (item, type) => (
     <SpaceQuota isReadOnly item={item} type={type} />
   );

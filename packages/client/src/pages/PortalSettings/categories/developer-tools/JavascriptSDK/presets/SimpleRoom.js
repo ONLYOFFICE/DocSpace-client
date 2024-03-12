@@ -8,7 +8,7 @@ import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { TabsContainer } from "@docspace/shared/components/tabs-container";
-import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
+import RoomsSelectorInput from "SRC_DIR/components/RoomsSelectorInput";
 import { objectToGetParams, loadScript } from "@docspace/shared/utils/common";
 import { inject, observer } from "mobx-react";
 
@@ -26,6 +26,8 @@ import { TooltipContent } from "../sub-components/TooltipContent";
 import { useNavigate } from "react-router-dom";
 import { Link } from "@docspace/shared/components/link";
 import FilesFilter from "@docspace/shared/api/files/filter";
+
+import { RoomsType } from "@docspace/shared/enums";
 
 import TitleUrl from "PUBLIC_DIR/images/sdk-presets_title.react.svg?url";
 import SearchUrl from "PUBLIC_DIR/images/sdk-presets_search.react.svg?url";
@@ -131,7 +133,9 @@ const SimpleRoom = (props) => {
 
   useEffect(() => {
     const scroll = document.getElementsByClassName("section-scroll")[0];
-    scroll.scrollTop = 0;
+    if (scroll) {
+      scroll.scrollTop = 0;
+    }
     loadFrame();
     return () => destroyFrame();
   });
@@ -156,45 +160,47 @@ const SimpleRoom = (props) => {
     setHeight(e.target.value);
   };
 
-  const onChangeFolderId = async (id, publicInPath) => {
-    let newConfig = { id, requestToken: null, rootPath: "/rooms/shared/" };
+  const onChangeFolderId = async (rooms) => {
 
-    if (!!publicInPath) {
-      const links = await fetchExternalLinks(publicInPath.id);
+    const publicRoom = rooms[0];
 
-      if (links.length > 1) {
-        const linksOptions = links.map((link) => {
-          const { id, title, requestToken } = link.sharedTo;
-          const linkSettings = [];
+    let newConfig = {
+      id: publicRoom.id,
+      requestToken: null,
+      rootPath: "/rooms/shared/",
+    };
 
-          if ("password" in link.sharedTo) {
-            linkSettings.push("password");
-          }
-          if ("expirationDate" in link.sharedTo) {
-            linkSettings.push("expirationDate");
-          }
-          if (link.sharedTo.denyDownload) {
-            linkSettings.push("denyDownload");
-          }
+    const links = await fetchExternalLinks(publicRoom.id);
 
-          return {
-            key: id,
-            label: title,
-            requestToken: requestToken,
-            settings: linkSettings,
-          };
-        });
+    if (links.length > 1) {
+      const linksOptions = links.map((link) => {
+        const { id, title, requestToken } = link.sharedTo;
+        const linkSettings = [];
 
-        setSelectedLink(linksOptions[0]);
-        setSharedLinks(linksOptions);
-      }
+        if ("password" in link.sharedTo) {
+          linkSettings.push("password");
+        }
+        if ("expirationDate" in link.sharedTo) {
+          linkSettings.push("expirationDate");
+        }
+        if (link.sharedTo.denyDownload) {
+          linkSettings.push("denyDownload");
+        }
 
-      newConfig.requestToken = links[0].sharedTo?.requestToken;
-      newConfig.rootPath = "/rooms/share";
-    } else {
-      setSelectedLink(null);
-      setSharedLinks(null);
+        return {
+          key: id,
+          label: title,
+          requestToken: requestToken,
+          settings: linkSettings,
+        };
+      });
+
+      setSelectedLink(linksOptions[0]);
+      setSharedLinks(linksOptions);
     }
+
+    newConfig.requestToken = links[0].sharedTo?.requestToken;
+    newConfig.rootPath = "/rooms/share";
 
     setConfig((config) => {
       return { ...config, ...newConfig, init: true };
@@ -348,10 +354,13 @@ const SimpleRoom = (props) => {
                 />
               </LabelGroup>
               <FilesSelectorInputWrapper>
-                <FilesSelectorInput
-                  onSelectFolder={onChangeFolderId}
-                  isSelect
-                  isRoomsOnly
+                <RoomsSelectorInput
+                  roomType={RoomsType.PublicRoom}
+                  withSearch
+                  withCancelButton
+                  onSubmit={onChangeFolderId}
+                  withHeader
+                  headerProps={{ headerLabel: t("Common:SelectAction") }}
                 />
               </FilesSelectorInputWrapper>
             </ControlsGroup>

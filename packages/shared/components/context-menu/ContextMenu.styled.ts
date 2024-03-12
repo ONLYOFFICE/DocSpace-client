@@ -277,6 +277,15 @@ const StyledContextMenu = styled.div<{
     margin: ${(props) => props.theme.dropDownItem.margin};
   }
 
+  .p-contextmenu .scroll-body .p-menuitem {
+    margin-right: ${(props) => `-${props.theme.scrollbar.paddingInlineEnd}`};
+
+    @media ${mobile} {
+      margin-right: ${(props) =>
+        `-${props.theme.scrollbar.paddingInlineEndMobile}`};
+    }
+  }
+
   .p-menuitem-icon {
     max-height: ${(props) => props.theme.dropDownItem.lineHeight};
 

@@ -87,7 +87,7 @@ export default function withFileActions(WrappedFileItem) {
         isDisabledItemId,
       } = this.props;
 
-      const elem = e.target === "A" ? e.target : e.target.parentElement;
+      const elem = e.target.tagName === "A" ? e.target : e.target.parentElement;
 
       const { isThirdPartyFolder } = item;
 

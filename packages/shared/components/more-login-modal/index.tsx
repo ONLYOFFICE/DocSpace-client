@@ -74,7 +74,7 @@ const MoreLoginModal: React.FC<MoreLoginModalProps> = (props) => {
                 {getProviderLabel(label, t)}
               </Text>
               <Button
-                label={t("Common:LoginButton")}
+                label={t("Common:ContinueButton")}
                 className="signin-button"
                 size={ButtonSize.small}
                 data-url={item.url}

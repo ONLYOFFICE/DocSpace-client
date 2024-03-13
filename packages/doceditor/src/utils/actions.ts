@@ -106,7 +106,7 @@ export async function getData(
         response.error = { message: "restore-backup" };
       }
 
-      const successAuth = !!user || !share;
+      const successAuth = !!user;
 
       if (!successAuth && !doc && !share) {
         response.error = { message: "unauthorized" };

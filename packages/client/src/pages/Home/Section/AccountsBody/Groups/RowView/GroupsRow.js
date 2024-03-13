@@ -30,6 +30,8 @@ const GroupsRow = ({
   const isActive = bufferSelection?.id === item?.id;
 
   const onRowClick = (e) => {
+    if (e.target?.tagName === "SPAN" || e.target?.tagName === "A") return;
+
     setBufferSelection(item);
 
     if (selection.length === 1 && selection[0].id === item.id) {

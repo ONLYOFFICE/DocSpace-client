@@ -92,7 +92,9 @@ class CreateEditRoomStore {
 
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
 
-    const quotaLimit = isDefaultRoomsQuotaSet ? roomParams.quota : null;
+    const isThirdparty = roomParams.storageLocation.isThirdparty;
+    const quotaLimit =
+      isDefaultRoomsQuotaSet && !isThirdparty ? roomParams.quota : null;
 
     const createRoomData = {
       roomType: roomParams.type,
@@ -108,7 +110,6 @@ class CreateEditRoomStore {
       .map((t) => t.name);
     const addTagsData = roomParams.tags.map((tag) => tag.name);
 
-    const isThirdparty = roomParams.storageLocation.isThirdparty;
     const storageFolderId = roomParams.storageLocation.storageFolderId;
     const thirdpartyAccount = roomParams.storageLocation.thirdpartyAccount;
 

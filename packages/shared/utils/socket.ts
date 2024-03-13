@@ -110,7 +110,7 @@ class SocketIOHelper {
       !data || !data.roomParts
         ? []
         : typeof data.roomParts === "object"
-          ? data.roomParts.filter((id) => id)
+          ? data.roomParts
           : [data.roomParts];
 
     ids.forEach((id: string) => {

@@ -9,6 +9,8 @@ import { TCatchError, TError, TResponse } from "@/types";
 
 const API_PREFIX = "api/2.0";
 
+const skip_port_forward = process.env.NODE_PORT_FORWARD === "false";
+
 export async function fileCopyAs(
   fileId: string,
   destTitle: string,
@@ -22,7 +24,7 @@ export async function fileCopyAs(
     const host = hdrs.get("x-forwarded-host");
     const proto = hdrs.get("x-forwarded-proto");
     const cookie = hdrs.get("cookie");
-    const port = hdrs.get("x-forwarded-port");
+    const port = !skip_port_forward && hdrs.get("x-forwarded-port");
 
     const baseURL = `${proto}://${host}${port ? `:${port}` : ""}`;
     const baseAPIUrl = `${baseURL}/${API_PREFIX}`;
@@ -66,7 +68,7 @@ export async function createFile(
     const host = hdrs.get("x-forwarded-host");
     const proto = hdrs.get("x-forwarded-proto");
     const cookie = hdrs.get("cookie");
-    const port = hdrs.get("x-forwarded-port");
+    const port = !skip_port_forward && hdrs.get("x-forwarded-port");
 
     const baseURL = `${proto}://${host}${port ? `:${port}` : ""}`;
     const baseAPIUrl = `${baseURL}/${API_PREFIX}`;
@@ -107,7 +109,7 @@ export async function getData(
     const host = hdrs.get("x-forwarded-host");
     const proto = hdrs.get("x-forwarded-proto");
     const cookie = hdrs.get("cookie");
-    const port = hdrs.get("x-forwarded-port");
+    const port = !skip_port_forward && hdrs.get("x-forwarded-port");
 
     const baseURL = `${proto}://${host}${port ? `:${port}` : ""}`;
     const baseAPIUrl = `${baseURL}/${API_PREFIX}`;
@@ -237,3 +239,4 @@ export async function getData(
     return { error };
   }
 }
+

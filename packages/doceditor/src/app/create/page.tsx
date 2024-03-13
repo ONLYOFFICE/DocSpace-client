@@ -16,12 +16,16 @@ type TSearchParams = {
   fromTemplate?: string;
 };
 
+const skip_port_forward = process.env.NODE_PORT_FORWARD === "false";
+
 async function Page({ searchParams }: { searchParams: TSearchParams }) {
   const hdrs = headers();
 
   const host = hdrs.get("x-forwarded-host");
   const proto = hdrs.get("x-forwarded-proto");
-  const port = hdrs.get("x-forwarded-port");
+  const port = !skip_port_forward && hdrs.get("x-forwarded-port");
+
+  console.log({ host, proto, port, skip_port_forward });
 
   const baseURL = `${proto}://${host}${port ? `:${port}` : ""}`;
 
@@ -123,3 +127,4 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
 }
 
 export default Page;
+

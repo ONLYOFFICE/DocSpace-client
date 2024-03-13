@@ -59,6 +59,7 @@ import {
   DeviceType,
   FolderType,
   ShareAccessRights,
+  FilesSelectorFilterTypes,
 } from "@docspace/shared/enums";
 
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -244,6 +245,7 @@ const SectionHeaderContent = (props) => {
     emptyTrashInProgress,
     categoryType,
     isPublicRoom,
+    isFormRoomType,
     theme,
     whiteLabelLogoUrls,
     downloadAction,
@@ -263,6 +265,7 @@ const SectionHeaderContent = (props) => {
     onClickCreateRoom,
     onCreateAndCopySharedLink,
     showNavigationButton,
+    setSelectFileFormRoomDialogVisible,
   } = props;
 
   const navigate = useNavigate();
@@ -326,9 +329,121 @@ const SectionHeaderContent = (props) => {
     const element =
       type === "file"
         ? document.getElementById("customFileInput")
-        : document.getElementById("customFolderInput");
+        : type === "pdf"
+          ? document.getElementById("customPDFInput")
+          : document.getElementById("customFolderInput");
 
     element?.click();
+  };
+
+  const onShowFormRoomSelectFileDialog = React.useCallback(
+    (filter = FilesSelectorFilterTypes.DOCX) => {
+      setSelectFileFormRoomDialogVisible(true, filter);
+    },
+    [setSelectFileDialogVisible],
+  );
+
+  const getContextOptionsPlusFormRoom = (actions) => {
+    const {
+      createTemplateForm,
+      createTemplateSelectFormFile,
+      templateOformsGallery,
+      createNewFolder,
+      createNewDoc,
+      createNewPresentation,
+      createNewSpreadsheet,
+      uploadFiles,
+      uploadFolder,
+    } = actions;
+
+    const templatePDFForm = {
+      id: "personal_template-PDF-form",
+      className: "main-button_drop-down",
+      icon: FormReactSvgUrl,
+      label: t("Common:CreatePDFForm"),
+      key: "new-form",
+      items: [
+        createTemplateForm,
+        createTemplateSelectFormFile,
+        {
+          id: "personal_template_from-oform",
+          className: "main-button_drop-down_sub",
+          icon: FormReactSvgUrl,
+          label: t("Common:FromReadyTemplate"),
+          onClick: () =>
+            onShowFormRoomSelectFileDialog(FilesSelectorFilterTypes.DOCXF),
+          disabled: isPrivacyFolder,
+          key: "form-oform",
+        },
+      ],
+    };
+
+    const uploadReadyPDFFrom = {
+      id: "personal_upload-ready-Pdf-from",
+      className: "main-button_drop-down_sub",
+      icon: ActionsUploadReactSvgUrl,
+      label: t("Common:UploadReadyPDFForm"),
+      key: "personal_upload-ready-Pdf-from",
+      items: [
+        {
+          id: "personal_upload-from-docspace",
+          className: "main-button_drop-down",
+          icon: ActionsUploadReactSvgUrl,
+          label: t("Common:FromDocSpace"),
+          key: "personal_upload-from-docspace",
+          onClick: () =>
+            onShowFormRoomSelectFileDialog(FilesSelectorFilterTypes.PDF),
+        },
+        {
+          id: "personal_upload-from-device",
+          className: "main-button_drop-down",
+          icon: ActionsUploadReactSvgUrl,
+          label: t("Common:FromDevice"),
+          key: "personal_upload-from-device",
+          onClick: () => onUploadAction("pdf"),
+        },
+      ],
+    };
+
+    const moreActions = {
+      id: "personal_more-form",
+      className: "main-button_drop-down",
+      icon: PluginMoreReactSvgUrl,
+      label: t("Common:More"),
+      disabled: false,
+      key: "more-form",
+      items: [
+        createNewFolder,
+        {
+          isSeparator: true,
+          key: "personal_more-form__separator-1",
+        },
+        createNewDoc,
+        createNewPresentation,
+        createNewSpreadsheet,
+        {
+          isSeparator: true,
+          key: "personal_more-form__separator-2",
+        },
+        uploadFiles,
+        uploadFolder,
+      ],
+    };
+
+    return [
+      templatePDFForm,
+      templateOformsGallery,
+      {
+        isSeparator: true,
+        key: "separator",
+      },
+      uploadReadyPDFFrom,
+      {
+        isSeparator: true,
+        key: "separator-1",
+      },
+      moreActions,
+    ];
   };
 
   const getContextOptionsPlus = () => {
@@ -404,6 +519,101 @@ const SectionHeaderContent = (props) => {
       ];
     }
 
+    const createNewDoc = {
+      id: "personal_new-documnet",
+      key: "new-document",
+      label: t("Common:NewDocument"),
+      onClick: createDocument,
+      icon: ActionsDocumentsReactSvgUrl,
+    };
+
+    const createNewSpreadsheet = {
+      id: "personal_new-spreadsheet",
+      key: "new-spreadsheet",
+      label: t("Common:NewSpreadsheet"),
+      onClick: createSpreadsheet,
+      icon: SpreadsheetReactSvgUrl,
+    };
+
+    const createNewPresentation = {
+      id: "personal_new-presentation",
+      key: "new-presentation",
+      label: t("Common:NewPresentation"),
+      onClick: createPresentation,
+      icon: ActionsPresentationReactSvgUrl,
+    };
+
+    const createTemplateForm = {
+      id: "personal_template_black",
+      key: "new-form",
+      label: t("Translations:SubNewForm"),
+      icon: FormBlankReactSvgUrl,
+      onClick: createForm,
+    };
+
+    const createTemplateNewFormFile = {
+      id: "personal_template_new-form-file",
+      key: "new-form-file",
+      label: t("Translations:SubNewFormFile"),
+      icon: FormFileReactSvgUrl,
+      onClick: createFormFromFile,
+      disabled: isPrivacyFolder,
+    };
+
+    const createTemplateSelectFormFile = {
+      id: "personal_template_new-form-file",
+      key: "new-form-file",
+      label: t("Translations:SubNewFormFile"),
+      icon: FormFileReactSvgUrl,
+      onClick: onShowFormRoomSelectFileDialog,
+      disabled: isPrivacyFolder,
+    };
+
+    const templateOformsGallery = {
+      id: "personal_template_oforms-gallery",
+      key: "oforms-gallery",
+      label: t("Common:OFORMsGallery"),
+      icon: FormGalleryReactSvgUrl,
+      onClick: onShowGallery,
+      disabled: isPrivacyFolder || (isMobile && isTablet),
+    };
+
+    const createNewFolder = {
+      id: "personal_new-folder",
+      key: "new-folder",
+      label: t("Common:NewFolder"),
+      onClick: createFolder,
+      icon: CatalogFolderReactSvgUrl,
+    };
+
+    const uploadFiles = {
+      key: "upload-files",
+      label: t("Article:UploadFiles"),
+      onClick: () => onUploadAction("file"),
+      icon: ActionsUploadReactSvgUrl,
+    };
+
+    const uploadFolder = {
+      key: "upload-folder",
+      label: t("Article:UploadFolder"),
+      onClick: () => onUploadAction("folder"),
+      icon: ActionsUploadReactSvgUrl,
+    };
+
+    if (isFormRoomType) {
+      return getContextOptionsPlusFormRoom({
+        createTemplateForm,
+        createTemplateSelectFormFile,
+        templateOformsGallery,
+        createNewFolder,
+        createNewDoc,
+        createNewPresentation,
+        createNewSpreadsheet,
+        uploadFiles,
+        uploadFolder,
+      });
+    }
+
     const options = isRoomsFolder
       ? [
           {
@@ -414,78 +624,24 @@ const SectionHeaderContent = (props) => {
           },
         ]
       : [
-          {
-            id: "personal_new-documnet",
-            key: "new-document",
-            label: t("Common:NewDocument"),
-            onClick: createDocument,
-            icon: ActionsDocumentsReactSvgUrl,
-          },
-          {
-            id: "personal_new-spreadsheet",
-            key: "new-spreadsheet",
-            label: t("Common:NewSpreadsheet"),
-            onClick: createSpreadsheet,
-            icon: SpreadsheetReactSvgUrl,
-          },
-          {
-            id: "personal_new-presentation",
-            key: "new-presentation",
-            label: t("Common:NewPresentation"),
-            onClick: createPresentation,
-            icon: ActionsPresentationReactSvgUrl,
-          },
+          createNewDoc,
+          createNewSpreadsheet,
+          createNewPresentation,
           {
             id: "personal_form-template",
             icon: FormReactSvgUrl,
             label: t("Translations:NewForm"),
             key: "new-form-base",
             items: [
-              {
-                id: "personal_template_black",
-                key: "new-form",
-                label: t("Translations:SubNewForm"),
-                icon: FormBlankReactSvgUrl,
-                onClick: createForm,
-              },
-              {
-                id: "personal_template_new-form-file",
-                key: "new-form-file",
-                label: t("Translations:SubNewFormFile"),
-                icon: FormFileReactSvgUrl,
-                onClick: createFormFromFile,
-                disabled: isPrivacyFolder,
-              },
-              {
-                id: "personal_template_oforms-gallery",
-                key: "oforms-gallery",
-                label: t("Common:OFORMsGallery"),
-                icon: FormGalleryReactSvgUrl,
-                onClick: onShowGallery,
-                disabled: isPrivacyFolder || (isMobile && isTablet),
-              },
+              createTemplateForm,
+              createTemplateNewFormFile,
+              templateOformsGallery,
             ],
           },
-          {
-            id: "personal_new-folder",
-            key: "new-folder",
-            label: t("Common:NewFolder"),
-            onClick: createFolder,
-            icon: CatalogFolderReactSvgUrl,
-          },
+          createNewFolder,
           { key: "separator", isSeparator: true },
-          {
-            key: "upload-files",
-            label: t("Article:UploadFiles"),
-            onClick: () => onUploadAction("file"),
-            icon: ActionsUploadReactSvgUrl,
-          },
-          {
-            key: "upload-folder",
-            label: t("Article:UploadFolder"),
-            onClick: () => onUploadAction("folder"),
-            icon: ActionsUploadReactSvgUrl,
-          },
+          uploadFiles,
+          uploadFolder,
         ];
 
     if (mainButtonItemsList && enablePlugins) {
@@ -1287,6 +1443,7 @@ export default inject(
       setInvitePanelOptions,
       setInviteUsersWarningDialogVisible,
       setLeaveRoomDialogVisible,
+      setSelectFileFormRoomDialogVisible,
     } = dialogsStore;
 
     const {
@@ -1325,6 +1482,8 @@ export default inject(
       access,
       canCopyPublicLink,
       rootFolderType,
+      parentRoomType,
+      isFolder,
     } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
@@ -1347,6 +1506,9 @@ export default inject(
     const isRoom = !!roomType;
     const isPublicRoomType = roomType === RoomsType.PublicRoom;
     const isCustomRoomType = roomType === RoomsType.CustomRoom;
+    const isFormRoomType =
+      roomType === RoomsType.FormRoom ||
+      (parentRoomType === FolderType.FormRoom && isFolder);
 
     const {
       onClickEditRoom,
@@ -1501,6 +1663,7 @@ export default inject(
       onClickBack,
       isPublicRoomType,
       isCustomRoomType,
+      isFormRoomType,
       isPublicRoom,
       primaryLink,
       getPrimaryLink,
@@ -1542,6 +1705,7 @@ export default inject(
       onCreateAndCopySharedLink,
       showNavigationButton,
       haveLinksRight,
+      setSelectFileFormRoomDialogVisible,
     };
   },
 )(

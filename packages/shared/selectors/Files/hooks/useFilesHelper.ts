@@ -106,6 +106,10 @@ const useFilesHelper = ({
             filter.filterType = FilterType.SpreadsheetsOnly;
             break;
 
+          case FilesSelectorFilterTypes.PDF:
+            filter.extension = FilesSelectorFilterTypes.PDF;
+            break;
+
           case FilesSelectorFilterTypes.ALL:
             filter.filterType = FilterType.FilesOnly;
             break;

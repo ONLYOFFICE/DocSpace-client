@@ -20,12 +20,8 @@ import { ImageEditor } from "@docspace/shared/components/image-editor";
 import PreviewTile from "@docspace/shared/components/image-editor/PreviewTile";
 import { Text } from "@docspace/shared/components/text";
 
-import SystemFolders from "./SystemFolders";
-import { RoomsType } from "@docspace/shared/enums";
-
 import ChangeRoomOwner from "./ChangeRoomOwner";
 import RoomQuota from "./RoomQuota";
-
 
 const StyledSetRoomParams = styled.div`
   display: flex;
@@ -69,8 +65,6 @@ const SetRoomParams = ({
   const [previewIcon, setPreviewIcon] = useState(null);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
     useState(false);
-
-  const isFormRoom = roomParams.type === RoomsType.FormRoom;
 
   const onChangeName = (e) => {
     setIsValidTitle(true);
@@ -160,7 +154,6 @@ const SetRoomParams = ({
           onChangeIsPrivate={onChangeIsPrivate}
         />
       )} */}
-      {isFormRoom && <SystemFolders t={t} />}
 
       {isEdit && (
         <ChangeRoomOwner

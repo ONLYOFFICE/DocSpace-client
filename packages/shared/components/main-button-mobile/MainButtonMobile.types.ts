@@ -1,13 +1,14 @@
 import { TColorScheme, TTheme } from "../../themes";
 
 export type ButtonOption = {
-  key?: string;
-  label?: string;
+  key: string;
+  label: string;
   icon?: string;
   onClick?: () => void;
   error?: boolean;
   id?: string;
   isSeparator?: boolean;
+  items?: ButtonOption[];
 };
 export type ProgressOption = {
   open?: boolean;

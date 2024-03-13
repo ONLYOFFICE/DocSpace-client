@@ -29,6 +29,7 @@ export type FilesSelectorProps = {
   isRestore: boolean;
   isRestoreAll?: boolean;
   isSelect?: boolean;
+  isFormRoom?: boolean;
 
   filterParam?: string;
 

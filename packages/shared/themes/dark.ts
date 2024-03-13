@@ -36,6 +36,8 @@ const {
   darkRed,
 
   darkErrorStatus,
+  charlestonGreen,
+  outerSpace,
 } = globalColors;
 
 const Dark: TTheme = {
@@ -204,20 +206,20 @@ const Dark: TTheme = {
 
     dropDown: {
       position: "fixed",
-      right: "32px",
-      bottom: "32px",
+      right: "48px",
+      bottom: "48px",
 
       width: "400px",
 
       zIndex: "202",
 
       mobile: {
-        right: "24px",
-        bottom: "24px",
+        right: "32px",
+        bottom: "40px",
 
         marginLeft: "24px",
 
-        width: "calc(100vw - 48px)",
+        width: "calc(100vw - 64px)",
       },
 
       separatorBackground: white,
@@ -2528,6 +2530,13 @@ const Dark: TTheme = {
     button: {
       colorLink: "#ADADAD",
       colorText: "#ADADAD",
+    },
+  },
+
+  emptyView: {
+    items: {
+      hoverColor: charlestonGreen,
+      pressColor: outerSpace,
     },
   },
 

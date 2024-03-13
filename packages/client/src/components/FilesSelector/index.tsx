@@ -50,6 +50,7 @@ const FilesSelectorWrapper = ({
   isRestore,
   isRestoreAll,
   isSelect,
+  isFormRoom,
 
   currentFolderId,
   fromFolderId,
@@ -247,6 +248,7 @@ const FilesSelectorWrapper = ({
     isSelect,
     filterParam,
     isRestore,
+    isFormRoom,
   );
 
   const defaultAcceptButtonLabel = getAcceptButtonLabel(
@@ -258,6 +260,7 @@ const FilesSelectorWrapper = ({
     isSelect,
     filterParam,
     isRestore,
+    isFormRoom,
   );
 
   const getIsDisabledAction = (

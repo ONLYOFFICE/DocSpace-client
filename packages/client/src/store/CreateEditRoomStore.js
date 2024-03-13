@@ -92,12 +92,14 @@ class CreateEditRoomStore {
 
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
 
+    const quotaLimit = isDefaultRoomsQuotaSet ? roomParams.quota : null;
+
     const createRoomData = {
       roomType: roomParams.type,
       title: roomParams.title || t("Files:NewRoom"),
       createAsNewFolder: roomParams.createAsNewFolder ?? true,
-      ...(isDefaultRoomsQuotaSet && {
-        quota: roomParams.quota || -2,
+      ...(quotaLimit && {
+        quota: +quotaLimit,
       }),
     };
 

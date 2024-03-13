@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -8,10 +7,6 @@ const RoomQuota = (props) => {
   const { setRoomParams, roomParams, defaultRoomsQuota, isEdit, isDisabled } =
     props;
   const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
-
-  useEffect(() => {
-    !isEdit && setRoomParams({ ...roomParams, quota: defaultRoomsQuota });
-  }, []);
 
   const onSetQuotaBytesSize = (size) => {
     setRoomParams({ ...roomParams, quota: size });

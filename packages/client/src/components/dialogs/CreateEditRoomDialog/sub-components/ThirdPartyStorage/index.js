@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 import { Text } from "@docspace/shared/components/text";
@@ -11,10 +11,15 @@ import ThirdPartyComboBox from "./ThirdPartyComboBox";
 import FolderInput from "./FolderInput";
 import { getOAuthToken } from "@docspace/shared/utils/common";
 import { RoomsType } from "@docspace/shared/enums";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 
 const StyledThirdPartyStorage = styled(StyledParam)`
   flex-direction: column;
   gap: 12px;
+
+  .create-new-folder_checkbox {
+    margin-top: 1px;
+  }
 `;
 
 const ThirdPartyStorage = ({
@@ -42,6 +47,8 @@ const ThirdPartyStorage = ({
   currentColorScheme,
   isRoomAdmin,
   roomType,
+  createNewFolderIsChecked,
+  onCreateFolderChange,
 }) => {
   const onChangeIsThirdparty = () => {
     if (isDisabled) return;
@@ -130,13 +137,22 @@ const ThirdPartyStorage = ({
       )}
 
       {storageLocation.isThirdparty && storageLocation.thirdpartyAccount && (
-        <FolderInput
-          t={t}
-          roomTitle={roomTitle}
-          thirdpartyAccount={storageLocation.thirdpartyAccount}
-          onChangeStorageFolderId={onChangeStorageFolderId}
-          isDisabled={isDisabled}
-        />
+        <>
+          <FolderInput
+            t={t}
+            roomTitle={roomTitle}
+            thirdpartyAccount={storageLocation.thirdpartyAccount}
+            onChangeStorageFolderId={onChangeStorageFolderId}
+            isDisabled={isDisabled}
+          />
+
+          <Checkbox
+            className="create-new-folder_checkbox"
+            label={t("Files:CreateNewFolderInStorage")}
+            isChecked={createNewFolderIsChecked}
+            onChange={onCreateFolderChange}
+          />
+        </>
       )}
     </StyledThirdPartyStorage>
   );

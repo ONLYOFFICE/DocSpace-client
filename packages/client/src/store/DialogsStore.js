@@ -87,6 +87,7 @@ class DialogsStore {
   editMembersGroup = null;
 
   shareFolderDialogVisible = false;
+  cancelUploadDialogVisible = false;
 
   selectFileFormRoomFilterParam = FilesSelectorFilterTypes.DOCX;
 
@@ -484,6 +485,10 @@ class DialogsStore {
 
   setShareFolderDialogVisible = (visible) => {
     this.shareFolderDialogVisible = visible;
+  };
+
+  setCancelUploadDialogVisible = (visible) => {
+    this.cancelUploadDialogVisible = visible;
   };
 }
 

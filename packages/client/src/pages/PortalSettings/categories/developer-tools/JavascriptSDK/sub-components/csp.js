@@ -132,7 +132,7 @@ const CSP = ({ t, cspDomains, getCSPSettings, setCSPSettings }) => {
           placeholder={t("CSPInputPlaceholder")}
           tabIndex={1}
         />
-        <SelectorAddButton onClick={addDomain} />
+        <SelectorAddButton isDisabled={!domain.trim()} onClick={addDomain} />
       </Container>
       <Text lineHeight="20px" color="#A3A9AE">
         {t("CSPUrlHelp")}

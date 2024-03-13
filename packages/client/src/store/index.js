@@ -48,6 +48,7 @@ import PublicRoomStore from "./PublicRoomStore";
 
 import WebhooksStore from "./WebhooksStore";
 import ClientLoadingStore from "./ClientLoadingStore";
+import ImportAccountsStore from "./ImportAccountsStore";
 
 import PluginStore from "./PluginStore";
 import InfoPanelStore from "./InfoPanelStore";
@@ -256,7 +257,7 @@ const createEditRoomStore = new CreateEditRoomStore(
 );
 
 const webhooksStore = new WebhooksStore(settingsStore);
-
+const importAccountsStore = new ImportAccountsStore();
 const storageManagement = new StorageManagement(
   filesStore,
   peopleStore,
@@ -310,6 +311,7 @@ const store = {
   createEditRoomStore,
 
   webhooksStore,
+  importAccountsStore,
   clientLoadingStore,
   publicRoomStore,
 

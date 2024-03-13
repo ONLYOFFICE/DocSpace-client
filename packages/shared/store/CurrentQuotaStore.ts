@@ -285,7 +285,7 @@ class CurrentQuotasStore {
   }
 
   updateTenantCustomQuota = (obj: {
-    [key: string]: string | number | boolean;
+    [key: string]: string | number | boolean | undefined;
   }) => {
     Object.keys(obj).forEach((key) => {
       // @ts-expect-error is always writable property

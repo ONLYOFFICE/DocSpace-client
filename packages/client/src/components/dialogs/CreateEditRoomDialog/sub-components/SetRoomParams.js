@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -62,7 +62,9 @@ const SetRoomParams = ({
   setChangeRoomOwnerIsVisible,
   folderFormValidation,
 }) => {
-  const [previewIcon, setPreviewIcon] = React.useState(null);
+  const [previewIcon, setPreviewIcon] = useState(null);
+  const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
+    useState(false);
 
   const onChangeName = (e) => {
     setIsValidTitle(true);
@@ -87,6 +89,14 @@ const SetRoomParams = ({
     setChangeRoomOwnerIsVisible(true, true, (roomOwner) =>
       setRoomParams({ ...roomParams, roomOwner }),
     );
+  };
+
+  const onCreateFolderChange = () => {
+    setCreateNewFolderIsChecked(!createNewFolderIsChecked);
+    setRoomParams({
+      ...roomParams,
+      ...{ createAsNewFolder: !createNewFolderIsChecked },
+    });
   };
 
   return (
@@ -162,6 +172,8 @@ const SetRoomParams = ({
           setIsScrollLocked={setIsScrollLocked}
           setIsOauthWindowOpen={setIsOauthWindowOpen}
           isDisabled={isDisabled}
+          createNewFolderIsChecked={createNewFolderIsChecked}
+          onCreateFolderChange={onCreateFolderChange}
         />
       )}
 

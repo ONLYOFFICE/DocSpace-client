@@ -59,6 +59,7 @@ const Error520 = ({
     <Error520Wrapper>
       <DocspaceLogo className="logo" whiteLabelLogoUrls={whiteLabelLogoUrls} />
       <ErrorContainer
+        className="container"
         isPrimaryButton={false}
         headerText={t("SomethingWentWrong")}
       />

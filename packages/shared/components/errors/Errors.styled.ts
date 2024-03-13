@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { mobile } from "../../utils";
 
 export const ErrorUnavailableWrapper = styled.div`
   width: 100%;
@@ -16,6 +17,14 @@ export const Error520Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   margin: 0 16px;
+
+  @media ${mobile} {
+    justify-content: start;
+  }
+
+  .container {
+    height: auto !important;
+  }
 
   .logo {
     margin-bottom: 28px;

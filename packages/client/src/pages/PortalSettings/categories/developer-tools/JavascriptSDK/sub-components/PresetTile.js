@@ -25,6 +25,8 @@ const TileContainer = styled.div`
   justify-content: space-between;
   gap: 12px;
 
+  cursor: pointer;
+
   .tileContent {
     display: flex;
     flex-direction: column;
@@ -58,7 +60,7 @@ const PresetTile = (props) => {
   const { t, title, description, image, handleOnClick } = props;
 
   return (
-    <TileContainer>
+    <TileContainer onClick={handleOnClick}>
       <div className="tileContent">
         <Text fontSize="16px" lineHeight="22px" fontWeight={700}>
           {title}
@@ -73,7 +75,6 @@ const PresetTile = (props) => {
         scale
         isClicked
         size="small"
-        onClick={handleOnClick}
       />
     </TileContainer>
   );

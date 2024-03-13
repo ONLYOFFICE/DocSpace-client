@@ -25,7 +25,7 @@ const GreetingUserContainer = ({
           <div className="back-button">
             <IconButton size={16} iconName={ArrowIcon} onClick={onClickBack} />
             <Text fontWeight={600} onClick={onClickBack}>
-              {t("Back")}
+              {t("Common:Back")}
             </Text>
           </div>
         )}

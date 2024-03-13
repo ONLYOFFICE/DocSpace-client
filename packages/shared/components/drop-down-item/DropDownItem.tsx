@@ -39,6 +39,7 @@ const DropDownItem = (props: DropDownItemProps) => {
     isActiveDescendant,
     isBeta,
     additionalElement,
+    setOpen,
   } = props;
 
   const { t } = useTranslation(["Common"]);
@@ -51,6 +52,7 @@ const DropDownItem = (props: DropDownItemProps) => {
   ) => {
     if (onClick && !disabled) onClick(e);
     if (onClickSelectedItem && isSelected) onClickSelectedItem();
+    if (setOpen) setOpen(false);
   };
 
   const stopPropagation = (

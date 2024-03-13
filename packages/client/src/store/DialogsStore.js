@@ -1,7 +1,11 @@
 import { getNewFiles } from "@docspace/shared/api/files";
-import { ShareAccessRights } from "@docspace/shared/enums";
+import {
+  FilesSelectorFilterTypes,
+  ShareAccessRights,
+} from "@docspace/shared/enums";
 import { makeAutoObservable, runInAction } from "mobx";
 import { Events } from "@docspace/shared/enums";
+import { COPY_AS } from "@docspace/shared/constants";
 
 class DialogsStore {
   authStore;
@@ -26,6 +30,7 @@ class DialogsStore {
   conflictResolveDialogVisible = false;
   convertDialogVisible = false;
   selectFileDialogVisible = false;
+  selectFileFormRoomDialogVisible = false;
   convertPasswordDialogVisible = false;
   inviteUsersWarningDialogVisible = false;
   changeQuotaDialogVisible = false;
@@ -82,6 +87,8 @@ class DialogsStore {
   editMembersGroup = null;
 
   shareFolderDialogVisible = false;
+
+  selectFileFormRoomFilterParam = FilesSelectorFilterTypes.DOCX;
 
   constructor(
     authStore,
@@ -334,17 +341,46 @@ class DialogsStore {
     this.selectFileDialogVisible = visible;
   };
 
-  createMasterForm = async (fileInfo) => {
-    let newTitle = fileInfo.title;
-    newTitle = newTitle.substring(0, newTitle.lastIndexOf("."));
+  setSelectFileFormRoomDialogVisible = (
+    visible,
+    filterParam = FilesSelectorFilterTypes.DOCX,
+  ) => {
+    this.selectFileFormRoomDialogVisible = visible;
+    this.selectFileFormRoomFilterParam = filterParam;
+  };
+
+  createFromTemplateForm = (fileInfo) => {
+    this.createMasterForm(fileInfo, {
+      extension: COPY_AS[this.selectFileFormRoomFilterParam],
+      withoutDialog: true,
+      preview: true,
+    });
+  };
+
+  createMasterForm = async (fileInfo, options) => {
+    const { extension = "docxf", withoutDialog, preview } = options;
+
+    console.log({ extension, withoutDialog, preview });
+
+    const newTitle = fileInfo.title;
+
+    let lastIndex = newTitle.lastIndexOf(".");
+
+    if (lastIndex === -1) {
+      lastIndex = newTitle.length;
+    }
 
     const event = new Event(Events.CREATE);
 
+    const title = newTitle.substring(0, lastIndex);
+
     const payload = {
-      extension: "docxf",
+      extension,
       id: -1,
-      title: `${newTitle}.docxf`,
+      title: withoutDialog ? title : `${title}.${extension}`,
       templateId: fileInfo.id,
+      withoutDialog,
+      preview,
     };
 
     event.payload = payload;

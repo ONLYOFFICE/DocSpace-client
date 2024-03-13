@@ -63,6 +63,7 @@ export const enum ApplyFilterOption {
  */
 export const enum FilesSelectorFilterTypes {
   DOCX = "DOCX",
+  PDF = "PDF",
   IMG = "IMG",
   GZ = "GZ",
   DOCXF = "DOCXF",

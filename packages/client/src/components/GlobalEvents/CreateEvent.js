@@ -48,6 +48,7 @@ const CreateEvent = ({
   keepNewFileName,
   setPortalTariff,
   withoutDialog,
+  preview,
 }) => {
   const [headerTitle, setHeaderTitle] = React.useState(null);
   const [startValue, setStartValue] = React.useState("");
@@ -156,7 +157,22 @@ const CreateEvent = ({
             createdFileId = file.id;
             addActiveItems([file.id]);
 
-            open && openDocEditor(file.id, file.providerKey, tab);
+            const urlFormation = preview
+              ? combineUrl(
+                  window.DocSpaceConfig?.proxy?.url,
+                  config.homepage,
+                  `/doceditor?fileId=${encodeURIComponent(file.id)}&action=view`,
+                )
+              : null;
+
+            open &&
+              openDocEditor(
+                file.id,
+                file.providerKey,
+                tab,
+                urlFormation,
+                preview,
+              );
           })
           .then(() => completeAction(item, type))
           .catch((err) => {

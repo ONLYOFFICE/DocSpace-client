@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import {
@@ -64,6 +64,10 @@ const Panels = (props) => {
     createMasterForm,
     selectFileDialogVisible,
     setSelectFileDialogVisible,
+    selectFileFormRoomDialogVisible,
+    selectFileFormRoomFilterParam,
+    setSelectFileFormRoomDialogVisible,
+    createFromTemplateForm,
     hotkeyPanelVisible,
     invitePanelVisible,
     convertPasswordDialogVisible,
@@ -98,6 +102,20 @@ const Panels = (props) => {
   const onClose = () => {
     setSelectFileDialogVisible(false);
   };
+
+  const onCloseFileFormRoomDialog = () => {
+    setSelectFileFormRoomDialogVisible(false);
+  };
+
+  const descriptionTextFileFormRoomDialog = useMemo(() => {
+    const text = {
+      [FilesSelectorFilterTypes.DOCX]: t("Common:SelectDOCXFormat"),
+      [FilesSelectorFilterTypes.DOCXF]: t("Common:SelectDOCXFFormat"),
+      [FilesSelectorFilterTypes.PDF]: t("Common:SelectPDFFormat"),
+    };
+
+    return text[selectFileFormRoomFilterParam];
+  }, [selectFileFormRoomFilterParam, t]);
 
   return [
     settingsPluginDialogVisible && (
@@ -159,6 +177,18 @@ const Panels = (props) => {
         isPanelVisible={selectFileDialogVisible}
         onSelectFile={createMasterForm}
         onClose={onClose}
+      />
+    ),
+
+    selectFileFormRoomDialogVisible && (
+      <FilesSelector
+        isFormRoom
+        isPanelVisible
+        key="select-file-form-room-dialog"
+        onClose={onCloseFileFormRoomDialog}
+        onSelectFile={createFromTemplateForm}
+        filterParam={selectFileFormRoomFilterParam}
+        descriptionText={descriptionTextFileFormRoomDialog}
       />
     ),
 
@@ -238,6 +268,10 @@ export default inject(
       createMasterForm,
       selectFileDialogVisible,
       setSelectFileDialogVisible,
+      selectFileFormRoomDialogVisible,
+      selectFileFormRoomFilterParam,
+      setSelectFileFormRoomDialogVisible,
+      createFromTemplateForm,
       invitePanelOptions,
       inviteUsersWarningDialogVisible,
       changeUserTypeDialogVisible,
@@ -290,6 +324,10 @@ export default inject(
       selectFileDialogVisible,
       createMasterForm,
       setSelectFileDialogVisible,
+      selectFileFormRoomDialogVisible,
+      selectFileFormRoomFilterParam,
+      setSelectFileFormRoomDialogVisible,
+      createFromTemplateForm,
       hotkeyPanelVisible,
       restoreAllPanelVisible,
       invitePanelVisible: invitePanelOptions.visible,

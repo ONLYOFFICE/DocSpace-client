@@ -3309,7 +3309,7 @@ __metadata:
     react-scrollbars-custom: "npm:^4.1.1"
     react-svg: "npm:^16.1.33"
     react-text-mask: "npm:^5.5.0"
-    react-toastify: "npm:^7.0.4"
+    react-toastify: "npm:^10.0.4"
     react-tooltip: "npm:^5.23.0"
     react-transition-group: "npm:^4.4.5"
     react-values: "npm:^0.3.3"
@@ -12032,6 +12032,13 @@ __metadata:
   version: 1.2.1
   resolution: "clsx@npm:1.2.1"
   checksum: 5ded6f61f15f1fa0350e691ccec43a28b12fb8e64c8e94715f2a937bc3722d4c3ed41d6e945c971fc4dcc2a7213a43323beaf2e1c28654af63ba70c9968a8643
+  languageName: node
+  linkType: hard
+
+"clsx@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "clsx@npm:2.1.0"
+  checksum: 2e0ce7c3b6803d74fc8147c408f88e79245583202ac14abd9691e2aebb9f312de44270b79154320d10bb7804a9197869635d1291741084826cff20820f31542b
   languageName: node
   linkType: hard
 
@@ -24803,15 +24810,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-toastify@npm:^7.0.4":
-  version: 7.0.4
-  resolution: "react-toastify@npm:7.0.4"
+"react-toastify@npm:^10.0.4":
+  version: 10.0.4
+  resolution: "react-toastify@npm:10.0.4"
   dependencies:
-    clsx: "npm:^1.1.1"
+    clsx: "npm:^2.1.0"
   peerDependencies:
     react: ">=16"
     react-dom: ">=16"
-  checksum: 0ac5bd8bf538b9882b7f8c0dba2070d67518d5eb6f0ae4a86a1a2502b553ba62c3661100cfe36b3099045e9898f0ac87cca4ba0c8219639a3a75628afae7519d
+  checksum: 57f4d0032bf328381bdfeb78ab5efa988d425627a61ffa43b0caa184633a0ea44253a349d6b967247fa3d480ad82a2bbaa9063ce3f89be9550eb9b30398a6837
   languageName: node
   linkType: hard
 

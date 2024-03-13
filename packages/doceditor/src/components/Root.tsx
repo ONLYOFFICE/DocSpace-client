@@ -37,8 +37,6 @@ import SelectFileDialog from "./SelectFileDialog";
 import SelectFolderDialog from "./SelectFolderDialog";
 import SharingDialog from "./ShareDialog";
 
-toast.configure();
-
 const Root = ({
   settings,
   config,
@@ -208,3 +206,4 @@ const Root = ({
 };
 
 export default Root;
+

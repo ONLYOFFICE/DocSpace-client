@@ -12,6 +12,7 @@ import ActionsUploadedFile from "./SubComponents/ActionsUploadedFile";
 import { isMobile } from "react-device-detect";
 import { NoUserSelect } from "@docspace/shared/utils";
 import { Button } from "@docspace/shared/components/button";
+import { tablet } from "@docspace/shared/utils";
 
 const StyledFileRow = styled(Row)`
   width: calc(100% - 16px);
@@ -44,7 +45,11 @@ const StyledFileRow = styled(Row)`
     ${(props) =>
       props.showPasswordInput &&
       css`
-        margin-top: ${isMobile ? "-44px" : "-48px"};
+        margin-top: -40px;
+
+        @media ${tablet} {
+          margin-top: -44px;
+        }
       `}
   }
 
@@ -75,7 +80,7 @@ const StyledFileRow = styled(Row)`
   }
   .password-input {
     position: absolute;
-    top: 44px;
+    top: 48px;
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`

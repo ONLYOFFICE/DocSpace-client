@@ -79,7 +79,7 @@ export const SocialButtonsGroup = memo(
           <div className="social-buttons-group">
             {elements}
             {length > 2 && (
-              <div className="show-more-button">
+              <div className="show-more-button" onClick={moreAuthOpen}>
                 <IconButton
                   size={20}
                   onClick={moreAuthOpen}

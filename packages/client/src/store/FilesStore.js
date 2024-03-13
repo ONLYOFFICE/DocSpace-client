@@ -929,13 +929,21 @@ class FilesStore {
     if (folders.length === 0 && this.folders.length === 0) return;
 
     if (this.folders?.length > 0) {
-      socketHelper.emit({
-        command: "unsubscribe",
-        data: {
-          roomParts: this.folders.map((f) => `DIR-${f.id}`),
-          individual: true,
-        },
-      });
+      const ids = this.folders
+        .map((f) => {
+          if (this.selectedFolderStore.id === f.id) return "";
+          return `DIR-${f.id}`;
+        })
+        .filter((id) => id);
+
+      if (ids.length)
+        socketHelper.emit({
+          command: "unsubscribe",
+          data: {
+            roomParts: ids,
+            individual: true,
+          },
+        });
     }
 
     this.folders = folders;

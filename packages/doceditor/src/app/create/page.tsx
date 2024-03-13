@@ -61,8 +61,6 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
       password,
     );
 
-    console.log(file, error);
-
     if (!file)
       return redirect(
         `${baseURL}?createError=${JSON.stringify(

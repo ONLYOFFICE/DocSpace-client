@@ -11,6 +11,7 @@ export type TagType = {
   /** Accepts the tag styles as disabled and disables clicking */
   isDisabled?: boolean;
   roomType?: number;
+  icon?: string;
 };
 
 export interface TagsProps {

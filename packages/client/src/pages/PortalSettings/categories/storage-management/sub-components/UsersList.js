@@ -4,33 +4,31 @@ import { useNavigate } from "react-router-dom";
 
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
-import Filter from "@docspace/shared/api/people/filter";
-
-import { SortByFieldName } from "SRC_DIR/helpers/enums";
 
 import { StyledStatistics, StyledSimpleFilesRow } from "../StyledComponent";
 
 const StatisticsComponent = (props) => {
   const {
-    peopleList,
+    accounts,
     iconElement,
     textElement,
     quotaElement,
     buttonProps,
     peopleListLength,
+    userFilterData,
+    currentUserId,
   } = props;
   const { t } = useTranslation("Settings");
   const navigate = useNavigate();
 
   const onClickUsers = () => {
-    const newFilter = Filter.getDefault();
-    newFilter.sortBy = SortByFieldName.UsedSpace;
-    const urlFilter = newFilter.toUrlParams();
+    const urlFilter = userFilterData.toUrlParams();
 
-    navigate(`/accounts/filter?${urlFilter}`);
+    currentUserId && localStorage.removeItem(`PeopleFilter=${currentUserId}`);
+    navigate(`/accounts/people/filter?${urlFilter}`);
   };
 
-  const usersList = peopleList.map((item, index) => {
+  const usersList = accounts.map((item, index) => {
     const { fileExst, avatar, id, displayName, isRoom, defaultRoomIcon } = item;
 
     if (index === 5) return;
@@ -44,7 +42,7 @@ const StatisticsComponent = (props) => {
           isRoom,
           defaultRoomIcon,
           "user-icon",
-          displayName
+          displayName,
         )}
         {textElement(displayName)}
         {quotaElement(item, "user")}
@@ -60,20 +58,25 @@ const StatisticsComponent = (props) => {
       {usersList}
 
       {peopleListLength > 5 && (
-        <Button {...buttonProps} label={t("ShowMore")} onClick={onClickUsers} />
+        <Button
+          {...buttonProps}
+          label={t("Common:ShowMore")}
+          onClick={onClickUsers}
+        />
       )}
     </StyledStatistics>
   );
 };
 
-export default inject(({ peopleStore }) => {
-  const { usersStore } = peopleStore;
-  const { peopleList } = usersStore;
-
-  const peopleListLength = peopleList.length;
+export default inject(({ userStore, storageManagement }) => {
+  const { accounts, userFilterData } = storageManagement;
+  const peopleListLength = accounts.length;
+  const { user } = userStore;
 
   return {
-    peopleList,
+    currentUserId: user?.id,
+    accounts,
     peopleListLength,
+    userFilterData,
   };
 })(observer(StatisticsComponent));

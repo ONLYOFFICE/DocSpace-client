@@ -128,7 +128,6 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
   }, []);
 
   const onEditRoom = useCallback((e) => {
-    console.log(e);
     const visible = !!e.item;
 
     setEditRoomDialogProps({

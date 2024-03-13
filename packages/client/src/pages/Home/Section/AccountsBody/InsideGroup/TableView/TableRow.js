@@ -189,7 +189,7 @@ const InsideGroupTableRow = (props) => {
     hideColumns,
     value,
     standalone,
-    setCurrentGroup,
+    openGroupAction,
 
     typeAccountsInsideGroupColumnIsEnabled,
     groupAccountsInsideGroupColumnIsEnabled,
@@ -209,8 +209,6 @@ const InsideGroupTableRow = (props) => {
     isCollaborator,
     isSSO,
   } = item;
-
-  const navigate = useNavigate();
 
   const isPending = statusType === "pending" || statusType === "disabled";
 
@@ -282,10 +280,10 @@ const InsideGroupTableRow = (props) => {
     [item, changeUserType],
   );
 
-  const onOpenGroup = ({ action }) => {
-    setCurrentGroup(null);
-    navigate(`/accounts/groups/${action}`);
-  };
+  const onOpenGroup = React.useCallback(
+    ({ action, title }) => openGroupAction(action, false, title),
+    [openGroupAction],
+  );
 
   // const getRoomsOptions = React.useCallback(() => {
   //   const options = [];

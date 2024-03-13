@@ -47,23 +47,26 @@ const Share = (props: ShareProps) => {
 
   const requestRunning = React.useRef(false);
 
+  const [isLoadedAddLinks, setIsLoadedAddLinks] = useState(true);
+
   const hideSharePanel = isRooms || !infoPanelSelection?.canShare;
 
   const fetchLinks = React.useCallback(async () => {
-    if (requestRunning.current) return;
+    if (requestRunning.current || hideSharePanel) return;
     requestRunning.current = true;
     const res = await getExternalLinks(infoPanelSelection.id);
 
     setFileLinks(res.items);
     setIsLoading(false);
     requestRunning.current = false;
-  }, [infoPanelSelection.id]);
+  }, [infoPanelSelection.id, hideSharePanel]);
 
   useEffect(() => {
     if (hideSharePanel) {
       setView?.("info_details");
+    } else {
+      fetchLinks();
     }
-    fetchLinks();
   }, [fetchLinks, hideSharePanel, setView]);
 
   useEffect(() => {
@@ -77,18 +80,30 @@ const Share = (props: ShareProps) => {
   };
 
   const addGeneralLink = async () => {
-    addLoaderLink();
+    try {
+      addLoaderLink();
 
-    const link = getPrimaryFileLink
-      ? await getPrimaryFileLink(infoPanelSelection.id)
-      : await getPrimaryLink(infoPanelSelection.id);
+      const link = getPrimaryFileLink
+        ? await getPrimaryFileLink(infoPanelSelection.id)
+        : await getPrimaryLink(infoPanelSelection.id);
 
-    setFileLinks([link]);
-    copy(link.sharedTo.shareLink);
-    toastr.success(t("Common:GeneralAccessLinkCopied"));
+      setFileLinks([link]);
+      copy(link.sharedTo.shareLink);
+      toastr.success(t("Common:GeneralAccessLinkCopied"));
+    } catch (error) {
+      const message = (error as { message: string }).message
+        ? ((error as { message: string }).message as TData)
+        : (error as string);
+      toastr.error(message);
+      setFileLinks([]);
+    }
   };
 
   const addAdditionalLinks = async () => {
+    if (!isLoadedAddLinks) return;
+
+    setIsLoadedAddLinks(false);
+
     addLoaderLink();
     const newLink = addFileLink
       ? await addFileLink(
@@ -112,6 +127,8 @@ const Share = (props: ShareProps) => {
 
       return newLinks;
     });
+
+    setIsLoadedAddLinks(true);
   };
 
   const updateLink = (link: TFileLink, newItem: TFileLink) => {
@@ -178,7 +195,7 @@ const Share = (props: ShareProps) => {
         ? await editFileLink(
             infoPanelSelection.id,
             link.sharedTo.id,
-            link.access,
+            item.access,
             link.sharedTo.primary,
             item.internal || false,
             expDate,
@@ -186,7 +203,7 @@ const Share = (props: ShareProps) => {
         : await editExternalLink(
             infoPanelSelection.id,
             link.sharedTo.id,
-            link.access,
+            item.access,
             link.sharedTo.primary,
             item.internal || false,
             expDate,

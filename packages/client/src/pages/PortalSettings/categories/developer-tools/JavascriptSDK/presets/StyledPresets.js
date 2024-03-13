@@ -16,6 +16,11 @@ export const SDKContainer = styled(Box)`
   .tabs_body {
     height: calc(100lvh - 260px);
   }
+
+  .linkHelp {
+    display: inline;
+    color: "#657077";
+  }
 `;
 
 export const Controls = styled(Box)`
@@ -193,12 +198,14 @@ export const Container = styled(Box)`
   gap: 48px;
 
   @media ${tablet} {
-    flex-direction: column;
+    flex-direction: column-reverse;
+    gap: 48px;
   }
 
   ${isMobile() &&
   css`
-    flex-direction: column;
+    flex-direction: column-reverse;
+    gap: 48px;
   `}
 `;
 

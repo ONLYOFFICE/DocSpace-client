@@ -49,4 +49,6 @@ export interface RowProps {
   isArchive?: boolean;
   rowContextClose?: () => void;
   badgeUrl?: string;
+  /** Disables checkbox */
+  isDisabled?: boolean;
 }

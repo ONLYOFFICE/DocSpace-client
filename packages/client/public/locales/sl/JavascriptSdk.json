@@ -4,7 +4,6 @@
   "Ascending": "Naraščajoče",
   "Code": "Koda za vstavitev",
   "CopyWindowCode": "Kopiraj kodo za vdelavo okna",
-  "CreateSampleHeader": "Ustvarite vzorec vdelave DocSpace",
   "CSPDescription": "Če želite varno vdelati DocSpace kot iframe na spletno mesto, dodajte njegov URL na seznam dovoljenih.",
   "CSPHeader": "Vdelajte DocSpace kot iframe",
   "CSPHelp": "Ta nastavitev je varnostni mehanizem, ki se lahko uporablja za zaščito pred napadi z vnašanjem vsebine. CSP opisuje varne vire za prenos prenos. Prenos iz virov, ki niso na `belem seznamu`, je blokiran. Določite domene (skupaj s protokolom), s katerimi bo delovalo.",
@@ -18,7 +17,6 @@
   "EnterId": "Vnesi ID",
   "EnterPage": "Vnesi številko strani",
   "EnterWidth": "Vnesi širino",
-  "Filter": "Iskanje, filtriranje in razvrščanje",
   "FrameId": "ID okvirja",
   "GetCode": "Pridobite kodo za vstavljanje",
   "Header": "Glava",
@@ -32,7 +30,7 @@
   "RoomOrFolder": "Soba ali mapa",
   "RoomOrFolderDescription": "Izberete lahko razdelek, sobo ali mapo, ki jo želite prikazati",
   "SDKDescription": "Z uporabo JavaScript SDK lahko vdelate sobo ali mapo iz ONLYOFFICE DocSpace v svoj spletni vmesnik kot iframe. Tukaj lahko najdete nastavitve za ustvarjanje vzorca iframe in konfiguracijo CSP. Če želite uporabiti celoten SDK, si oglejte",
+  "SearchFilterAndSort": "Iskanje, filtriranje in razvrščanje",
   "SearchTerm": "Išči izraz",
-  "SortOrder": "Vrstni red",
-  "Title": "Navigacija in naslov"
+  "SortOrder": "Vrstni red"
 }

@@ -1,8 +1,9 @@
-import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
+import { RoomsType, ShareAccessRights } from "../../enums";
+import { TTranslation } from "../../types";
 import { getUserRoleOptions } from "./getUserRoleOptions";
 
 export const getUserRoleOptionsByRoomType = (
-  t: any,
+  t: TTranslation,
   roomType: RoomsType,
   canChangeUserRole: boolean = false,
 ) => {
@@ -22,6 +23,7 @@ export const getUserRoleOptionsByRoomType = (
     : [];
 
   switch (roomType) {
+    // @ts-expect-error it will be return
     case RoomsType.FillingFormsRoom:
       return [
         options.roomAdmin,
@@ -38,6 +40,7 @@ export const getUserRoleOptionsByRoomType = (
         options.viewer,
         ...deleteOption,
       ];
+    // @ts-expect-error it will be return
     case RoomsType.ReviewRoom:
       return [
         options.roomAdmin,
@@ -47,6 +50,7 @@ export const getUserRoleOptionsByRoomType = (
         options.viewer,
         ...deleteOption,
       ];
+    // @ts-expect-error it will be return
     case RoomsType.ReadOnlyRoom:
       return [
         options.roomAdmin,

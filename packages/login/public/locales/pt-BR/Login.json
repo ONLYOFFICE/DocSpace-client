@@ -20,7 +20,5 @@
   "RegisterTitle": "Pedido de registro",
   "RegistrationEmailWatermark": "Email",
   "RememberHelper": "A duração padrão da sessão é de 20 minutos. Marque esta opção para defini-la como 1 ano. Para definir seu próprio valor, vá para Configurações",
-  "ResendCode": "Reenviar código",
-  "SignInWithCode": "Entrar com código secreto",
-  "SignInWithPassword": "Entrar com senha"
+  "ResendCode": "Reenviar código"
 }

@@ -1,6 +1,7 @@
 import React from "react";
 
 import SortDescReactSvgUrl from "PUBLIC_DIR/images/sort.desc.react.svg?url";
+import { Checkbox } from "../../checkbox";
 
 import { Text } from "../../text";
 import { IconButton } from "../../icon-button";
@@ -27,6 +28,7 @@ const TableHeaderCell = ({
     minWidth,
     withTagRef,
     default: isDefault,
+    checkbox,
   } = column;
 
   const isActive = (sortBy && column.sortBy === sortBy) || active;
@@ -98,6 +100,14 @@ const TableHeaderCell = ({
     >
       <div className="table-container_header-item">
         <div className="header-container-text-wrapper" onClick={onClick}>
+          {checkbox && (checkbox.isIndeterminate || checkbox.value) && (
+            <Checkbox
+              onChange={checkbox.onChange}
+              isChecked={checkbox.value}
+              isIndeterminate={checkbox.isIndeterminate}
+            />
+          )}
+
           <Text fontWeight={600} className="header-container-text">
             {enable ? title : ""}
           </Text>
@@ -125,3 +135,4 @@ const TableHeaderCell = ({
 };
 
 export { TableHeaderCell };
+

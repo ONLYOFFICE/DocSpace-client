@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { RoomsType } from "@docspace/shared/constants";
+import { DOCSPACE } from "@docspace/shared/constants";
 import { inject, observer } from "mobx-react";
 
 import { mobile, tablet } from "@docspace/shared/utils/device";
@@ -40,6 +40,11 @@ const SDKContainer = styled(Box)`
   css`
     width: 100%;
   `}
+
+  .presets-flex {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const CategoryHeader = styled.div`
@@ -88,6 +93,16 @@ const PresetsContainer = styled.div`
 const PortalIntegration = (props) => {
   const { t, setDocumentTitle, currentColorScheme, sdkLink, theme } = props;
 
+  const isSmall = useRef(
+    (() => {
+      const content = document.querySelector(".section-wrapper-content");
+      const rect = content.getBoundingClientRect();
+      return rect.width <= 600;
+    })(),
+  );
+
+  const [isFlex, setIsFlex] = useState(isSmall.current);
+
   setDocumentTitle(t("JavascriptSdk"));
 
   const navigate = useNavigate();
@@ -102,7 +117,7 @@ const PortalIntegration = (props) => {
 
   const presetsData = [
     {
-      title: "DocSpace",
+      title: DOCSPACE,
       description: t("DocspaceDescription"),
       image: theme.isBase ? DocspaceImg : DocspaceImgDark,
       handleOnClick: navigateToDocspace,
@@ -138,12 +153,29 @@ const PortalIntegration = (props) => {
       handleOnClick: navigateToFileSelector,
     },
     {
-      title: t("Custom"),
+      title: t("Common:Custom"),
       description: t("CustomDescription"),
       image: theme.isBase ? CustomImg : CustomImgDark,
       handleOnClick: navigateToCustom,
     },
   ];
+
+  const onResize = (entries) => {
+    const belowThreshold = entries[0].contentRect.width <= 600;
+    if (belowThreshold !== isSmall.current) {
+      isSmall.current = belowThreshold;
+      setIsFlex(belowThreshold);
+    }
+  };
+
+  useEffect(() => {
+    const observer = new ResizeObserver(onResize);
+    const content = document.querySelector(".section-wrapper-content");
+    observer.observe(content);
+    return () => {
+      observer.unobserve(content);
+    };
+  }, []);
 
   return (
     <SDKContainer>
@@ -160,11 +192,11 @@ const PortalIntegration = (props) => {
         </Link>
         <CSP t={t} />
       </CategoryDescription>
-      <CategoryHeader>{t("CreateSampleHeader")}</CategoryHeader>
+      <CategoryHeader>{t("SelectModeEmbedding")}</CategoryHeader>
       <Text lineHeight="20px" color={theme.sdkPresets.secondaryColor}>
         {t("InitializeSDK")}
       </Text>
-      <PresetsContainer>
+      <PresetsContainer className={`${isFlex ? "presets-flex" : ""}`}>
         {presetsData.map((data) => (
           <PresetTile
             t={t}

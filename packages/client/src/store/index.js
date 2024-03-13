@@ -48,6 +48,7 @@ import PublicRoomStore from "./PublicRoomStore";
 
 import WebhooksStore from "./WebhooksStore";
 import ClientLoadingStore from "./ClientLoadingStore";
+import ImportAccountsStore from "./ImportAccountsStore";
 
 import PluginStore from "./PluginStore";
 import InfoPanelStore from "./InfoPanelStore";
@@ -68,7 +69,12 @@ const paymentStore = new PaymentStore(
   paymentQuotasStore,
 );
 const wizardStore = new WizardStore();
-const setupStore = new SettingsSetupStore(tfaStore, authStore, settingsStore);
+const setupStore = new SettingsSetupStore(
+  tfaStore,
+  authStore,
+  settingsStore,
+  thirdPartyStore,
+);
 const confirmStore = new ConfirmStore();
 const backupStore = new BackupStore();
 const commonStore = new CommonStore(settingsStore);
@@ -251,11 +257,13 @@ const createEditRoomStore = new CreateEditRoomStore(
 );
 
 const webhooksStore = new WebhooksStore(settingsStore);
-
+const importAccountsStore = new ImportAccountsStore();
 const storageManagement = new StorageManagement(
   filesStore,
   peopleStore,
   authStore,
+  currentQuotaStore,
+  settingsStore,
 );
 
 const campaignsStore = new CampaignsStore(settingsStore, userStore);
@@ -305,6 +313,7 @@ const store = {
   createEditRoomStore,
 
   webhooksStore,
+  importAccountsStore,
   clientLoadingStore,
   publicRoomStore,
 

@@ -4,7 +4,6 @@
   "Ascending": "Nouseva",
   "Code": "Lisättävä koodi",
   "CopyWindowCode": "Kopioi ikkunan upotuskoodi",
-  "CreateSampleHeader": "Luo esimerkki DocSpace-upotuksesta",
   "CSPDescription": "Upottaaksesi DocSpacen iframeksi verkkosivulle, lisää sen URL sallittujen luetteloon.",
   "CSPHeader": "Upota DocSpace iframeksi",
   "CSPHelp": "Tämä asetus on suojausmekanismi, jota voidaan käyttää suojelemaan sisällön lisäyshyökkäyksiltä. CSP kuvaa suojatut resurssien latauslähteet. Lataaminen resursseista, jotka eivät sisälly \"valkoiseen listaan\", on estetty. Määritä toimialueet (yhdessä protokollan kanssa) joiden kanssa se toimii.",
@@ -18,7 +17,6 @@
   "EnterId": "Syötä tunnus",
   "EnterPage": "Syötä numerosivu",
   "EnterWidth": "Syötä leveys",
-  "Filter": "Etsi, suodata ja järjestä",
   "FrameId": "Kehyksen tunnus",
   "GetCode": "Hanki koodi lisättäväksi",
   "Header": "Ylätunniste",
@@ -32,7 +30,7 @@
   "RoomOrFolder": "Huone tai kansio",
   "RoomOrFolderDescription": "Voit valita osion, huoneen tai kansion, jonka haluat näytettävän",
   "SDKDescription": "Käyttäen JavaScript SDK:ta voit upottaa huoneen tai kansion ONLYOFFICE DocSpace:sta oman käyttöliittymäsi iframe:ksi. Tästä löydät asetukset iframe:n mallin luomiseen ja CSP:n määrittämiseen. Käyttääksesi koko SDK:ta, katso",
+  "SearchFilterAndSort": "Etsi, suodata ja järjestä",
   "SearchTerm": "Hakusana",
-  "SortOrder": "Lajittelujärjestys",
-  "Title": "Navigoi ja otsikoi"
+  "SortOrder": "Lajittelujärjestys"
 }

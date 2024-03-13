@@ -149,6 +149,7 @@ export const Tags: FC<TagsProps> = ({
               {...tags}
               key={tag.label}
               tag={tag.label}
+              icon={tag.icon}
               advancedOptions={tag.advancedOptions}
               tagMaxWidth={tag.maxWidth}
               isNewTag={false}

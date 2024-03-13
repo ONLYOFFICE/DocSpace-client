@@ -89,6 +89,10 @@ const Editor = (props) => {
   }, 500);
 
   useEffect(() => {
+    const scroll = document.getElementsByClassName("section-scroll")[0];
+    if (scroll) {
+      scroll.scrollTop = 0;
+    }
     loadFrame();
     return () => destroyFrame();
   });
@@ -162,14 +166,14 @@ const Editor = (props) => {
   const preview = (
     <Frame
       width={
-        config.id !== undefined &&
-        widthDimension.label === "px" &&
-        width + widthDimension.label
+        config.id !== undefined && widthDimension.label === "px"
+          ? width + widthDimension.label
+          : undefined
       }
       height={
-        config.id !== undefined &&
-        heightDimension.label === "px" &&
-        height + heightDimension.label
+        config.id !== undefined && heightDimension.label === "px"
+          ? height + heightDimension.label
+          : undefined
       }
       targetId={frameId}
     >
@@ -179,7 +183,7 @@ const Editor = (props) => {
         </>
       ) : (
         <EmptyIframeContainer
-          text={t("SelectFile")}
+          text={t("FilePreview")}
           width="100%"
           height="100%"
         />
@@ -212,7 +216,7 @@ const Editor = (props) => {
       <CategoryDescription>
         <Text className="sdk-description">{t("EditorDescription")}</Text>
       </CategoryDescription>
-      <CategoryHeader>{t("CreateSampleHeader")}</CategoryHeader>
+      <CategoryHeader>{t("CreateSampleEditor")}</CategoryHeader>
       <Container>
         {showPreview && (
           <Preview>

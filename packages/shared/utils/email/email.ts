@@ -358,4 +358,3 @@ export const isEqualEmail = (email1: string, email2: string) => {
 
   return parsed1.email === parsed2.email;
 };
-

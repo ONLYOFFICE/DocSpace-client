@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -25,7 +25,6 @@ import { RoomsType } from "@docspace/shared/enums";
 
 import ChangeRoomOwner from "./ChangeRoomOwner";
 import RoomQuota from "./RoomQuota";
-
 
 const StyledSetRoomParams = styled.div`
   display: flex;
@@ -66,7 +65,9 @@ const SetRoomParams = ({
   setChangeRoomOwnerIsVisible,
   folderFormValidation,
 }) => {
-  const [previewIcon, setPreviewIcon] = React.useState(null);
+  const [previewIcon, setPreviewIcon] = useState(null);
+  const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
+    useState(true);
 
   const isFormRoom = roomParams.type === RoomsType.FormRoom;
 
@@ -93,6 +94,14 @@ const SetRoomParams = ({
     setChangeRoomOwnerIsVisible(true, true, (roomOwner) =>
       setRoomParams({ ...roomParams, roomOwner }),
     );
+  };
+
+  const onCreateFolderChange = () => {
+    setCreateNewFolderIsChecked(!createNewFolderIsChecked);
+    setRoomParams({
+      ...roomParams,
+      ...{ createAsNewFolder: !createNewFolderIsChecked },
+    });
   };
 
   return (
@@ -159,6 +168,15 @@ const SetRoomParams = ({
         />
       )}
 
+      {isDefaultRoomsQuotaSet && !roomParams.storageLocation.providerKey && (
+        <RoomQuota
+          setRoomParams={setRoomParams}
+          roomParams={roomParams}
+          isEdit={isEdit}
+          isLoading={isDisabled}
+        />
+      )}
+
       {!isEdit && enableThirdParty && (
         <ThirdPartyStorage
           t={t}
@@ -169,15 +187,8 @@ const SetRoomParams = ({
           setIsScrollLocked={setIsScrollLocked}
           setIsOauthWindowOpen={setIsOauthWindowOpen}
           isDisabled={isDisabled}
-        />
-      )}
-
-      {isDefaultRoomsQuotaSet && (
-        <RoomQuota
-          setRoomParams={setRoomParams}
-          roomParams={roomParams}
-          isEdit={isEdit}
-          isDisabled={isDisabled}
+          createNewFolderIsChecked={createNewFolderIsChecked}
+          onCreateFolderChange={onCreateFolderChange}
         />
       )}
 

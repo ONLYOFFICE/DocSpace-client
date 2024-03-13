@@ -132,28 +132,28 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
     let data = conflictResolveDialogData.newUploadData;
 
     if (conflictResolveType === ConflictResolveType.Skip) {
-      let filesSize = 0;
-      const newFiles = [];
-
-      for (let i = 0; i < data.files.length; i += 1) {
-        // @ts-expect-error need rewrite stores to typescript for fix this
-        if (!items.includes(data.files[i].file.name)) {
-          filesSize += +data.files[i].file.size;
-          newFiles.push(data.files[i]);
-        }
-      }
-
-      data = { ...data, files: newFiles, filesSize };
-    }
-
-    if (data.files.length === 0) {
       setSelected("none");
       onClosePanels();
       return;
     }
 
+    let filesSize = 0;
+    const newFiles = [];
+
+    for (let i = 0; i < data.files.length; i += 1) {
+      // @ts-expect-error need rewrite stores to typescript for fix this
+      if (!items.includes(data.files[i].file.name)) {
+        filesSize += +data.files[i].file.size;
+        newFiles.push(data.files[i]);
+      }
+    }
+
+    data = { ...data, files: newFiles, filesSize };
+
     setSelected("none");
     onClosePanels();
+
+    if (data.files.length === 0) return;
     try {
       handleFilesUpload(
         data,

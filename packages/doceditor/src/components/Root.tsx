@@ -88,6 +88,7 @@ const Root = ({
     getIsDisabledSelectFolderDialog,
     isVisibleSelectFolderDialog,
     titleSelectorFolderDialog,
+    extensionSelectorFolderDialog,
   } = useSelectFolderDialog({});
   const {
     onSDKRequestInsertImage,
@@ -142,7 +143,7 @@ const Root = ({
             />
           ) : isShowDeepLink ? null : (
             <div style={{ width: "100%", height: "100%" }}>
-              {config && user && documentserverUrl && fileInfo && (
+              {config && documentserverUrl && fileInfo && (
                 <Editor
                   config={config}
                   user={user}
@@ -173,6 +174,7 @@ const Root = ({
                   getIsDisabled={getIsDisabledSelectFolderDialog}
                   i18n={i18n}
                   filesSettings={filesSettings}
+                  fileSaveAsExtension={extensionSelectorFolderDialog}
                 />
               )}
               {selectFileDialogVisible && !!socketHelper && (

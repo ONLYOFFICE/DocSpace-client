@@ -19,6 +19,7 @@ class SettingsSetupStore {
   authStore = null;
   settingsStore = null;
   tfaStore = null;
+  thirdPartyStore = null;
   isInit = false;
   logoutVisible = false;
   logoutAllVisible = false;
@@ -83,11 +84,12 @@ class SettingsSetupStore {
   sessions = [];
   currentSession = [];
 
-  constructor(tfaStore, authStore, settingsStore) {
+  constructor(tfaStore, authStore, settingsStore, thirdPartyStore) {
     this.selectionStore = new SelectionStore(this);
     this.authStore = authStore;
     this.tfaStore = tfaStore;
     this.settingsStore = settingsStore;
+    this.thirdPartyStore = thirdPartyStore;
     makeAutoObservable(this);
   }
 
@@ -468,9 +470,20 @@ class SettingsSetupStore {
   };
 
   updateConsumerProps = async (newProps) => {
-    const res = await api.settings.updateConsumerProps(newProps);
-    console.log("updateConsumerProps", res);
+    await api.settings.updateConsumerProps(newProps);
+
     await this.getConsumers();
+
+    await Promise.all([
+      api.files.getThirdPartyCapabilities(),
+      api.files.getThirdPartyList(),
+    ]).then(([capabilities, providers]) => {
+      for (let item of capabilities) {
+        item.splice(1, 1);
+      }
+      this.thirdPartyStore.setThirdPartyCapabilities(capabilities); //TODO: Out of bounds read: 1
+      this.thirdPartyStore.setThirdPartyProviders(providers);
+    });
   };
 
   changePassword = (userId, hash, key) => {

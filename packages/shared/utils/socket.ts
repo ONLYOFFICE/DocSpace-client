@@ -18,6 +18,10 @@ let callbacks: { eventName: string; callback: (value: TOnCallback) => void }[] =
 
 const subscribers = new Set<string>();
 
+type TOptQuota =
+  | { customQuotaFeature: string; usedSpace: number; quotaLimit: number }
+  | { customQuotaFeature?: never; usedSpace?: never; quotaLimit?: never };
+
 export type TOptSocket = {
   featureId: string;
   value: number;
@@ -25,7 +29,7 @@ export type TOptSocket = {
   type?: "folder" | "file";
   id?: string;
   cmd?: "create" | "update" | "delete";
-};
+} & TOptQuota;
 
 export type TEmit = {
   command: string;
@@ -99,6 +103,8 @@ class SocketIOHelper {
 
   emit = ({ command, data, room = null }: TEmit) => {
     if (!this.isEnabled) return;
+
+    console.log("[WS] emit", command, data, room);
 
     const ids =
       !data || !data.roomParts

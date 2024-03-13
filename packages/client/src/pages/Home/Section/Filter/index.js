@@ -33,8 +33,7 @@ import { ROOMS_PROVIDER_TYPE_NAME } from "@docspace/shared/constants";
 
 import { getDefaultRoomName } from "SRC_DIR/helpers/filesUtils";
 
-import { TableVersions } from "SRC_DIR/helpers/constants";
-import { SortByFieldName } from "SRC_DIR/helpers/enums";
+import { SortByFieldName, TableVersions } from "SRC_DIR/helpers/constants";
 
 import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
@@ -1509,38 +1508,32 @@ const SectionFilterContent = ({
           ]
         : "";
 
-    const images = !isRecentTab
-      ? [
-          {
-            id: "filter_type-images",
-            key: FilterType.ImagesOnly.toString(),
-            group: FilterGroups.filterType,
-            label: t("Images").toLowerCase(),
-          },
-        ]
-      : "";
+    const images = [
+      {
+        id: "filter_type-images",
+        key: FilterType.ImagesOnly.toString(),
+        group: FilterGroups.filterType,
+        label: t("Images").toLowerCase(),
+      },
+    ];
 
-    const archives = !isRecentTab
-      ? [
-          {
-            id: "filter_type-archive",
-            key: FilterType.ArchiveOnly.toString(),
-            group: FilterGroups.filterType,
-            label: t("Archives").toLowerCase(),
-          },
-        ]
-      : "";
+    const archives = [
+      {
+        id: "filter_type-archive",
+        key: FilterType.ArchiveOnly.toString(),
+        group: FilterGroups.filterType,
+        label: t("Archives").toLowerCase(),
+      },
+    ];
 
-    const media = !isRecentTab
-      ? [
-          {
-            id: "filter_type-media",
-            key: FilterType.MediaOnly.toString(),
-            group: FilterGroups.filterType,
-            label: t("Media").toLowerCase(),
-          },
-        ]
-      : "";
+    const media = [
+      {
+        id: "filter_type-media",
+        key: FilterType.MediaOnly.toString(),
+        group: FilterGroups.filterType,
+        label: t("Media").toLowerCase(),
+      },
+    ];
 
     const typeOptions = isRooms
       ? [
@@ -1947,14 +1940,14 @@ const SectionFilterContent = ({
       const firstName = {
         id: "sort-by_first-name",
         key: "firstname",
-        label: t("Common:ByFirstNameSorting"),
+        label: t("Common:FirstName"),
         default: true,
       };
 
       const lastName = {
         id: "sort-by_last-name",
         key: "lastname",
-        label: t("Common:ByLastNameSorting"),
+        label: t("Common:LastName"),
         default: true,
       };
 

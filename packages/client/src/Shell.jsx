@@ -26,6 +26,7 @@ import ScrollToTop from "./components/Layout/ScrollToTop";
 import IndicatorLoader from "./components/IndicatorLoader";
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 import DialogsWrapper from "./components/dialogs/DialogsWrapper";
+import useCreateFileError from "./Hooks/useCreateFileError";
 
 // import ReactSmartBanner from "./components/SmartBanner";
 
@@ -53,9 +54,18 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     currentDeviceType,
     timezone,
     showArticleLoader,
+    setPortalTariff,
+    setFormCreationInfo,
+    setConvertPasswordDialogVisible,
   } = rest;
 
   const theme = useTheme();
+
+  useCreateFileError({
+    setPortalTariff,
+    setFormCreationInfo,
+    setConvertPasswordDialogVisible,
+  });
 
   useEffect(() => {
     const regex = /(\/){2,}/g;
@@ -406,76 +416,95 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 };
 
 const ShellWrapper = inject(
-  ({ authStore, settingsStore, backup, clientLoadingStore, userStore }) => {
-  const { i18n } = useTranslation();
+  ({
+    authStore,
+    settingsStore,
+    backup,
+    clientLoadingStore,
+    userStore,
+    currentTariffStatusStore,
+    dialogsStore,
+  }) => {
+    const { i18n } = useTranslation();
 
     const { init, isLoaded, setProductVersion, language } = authStore;
 
-  const {
-    personal,
-    roomsMode,
-    isDesktopClient,
-    firebaseHelper,
-    setModuleInfo,
-    setCheckedMaintenance,
-    setMaintenanceExist,
-    setSnackbarExist,
-    socketHelper,
-    setTheme,
-    whiteLabelLogoUrls,
-    currentDeviceType,
+    const {
+      personal,
+      roomsMode,
+      isDesktopClient,
+      firebaseHelper,
+      setModuleInfo,
+      setCheckedMaintenance,
+      setMaintenanceExist,
+      setSnackbarExist,
+      socketHelper,
+      setTheme,
+      whiteLabelLogoUrls,
+      currentDeviceType,
       isFrame,
       frameConfig,
-  } = settingsStore;
+    } = settingsStore;
 
-  const isBase = settingsStore.theme.isBase;
-  const { setPreparationPortalDialogVisible } = backup;
+    const isBase = settingsStore.theme.isBase;
+    const { setPreparationPortalDialogVisible } = backup;
 
-  const userTheme = isDesktopClient
+    const userTheme = isDesktopClient
       ? userStore?.user?.theme
         ? userStore?.user?.theme
-      : window.RendererProcessVariable?.theme?.type === "dark"
-        ? "Dark"
-        : "Base"
+        : window.RendererProcessVariable?.theme?.type === "dark"
+          ? "Dark"
+          : "Base"
       : userStore?.user?.theme;
 
-  return {
-    loadBaseInfo: async () => {
-      await init(false, i18n);
+    const { setPortalTariff } = currentTariffStatusStore;
 
-      setModuleInfo(config.homepage, "home");
-      setProductVersion(config.version);
+    const {
+      setConvertPasswordDialogVisible,
 
-      if (isDesktopClient) {
-        document.body.classList.add("desktop");
-      }
-    },
-    language,
-    isLoaded,
+      setFormCreationInfo,
+    } = dialogsStore;
 
-    isDesktop: isDesktopClient,
-    FirebaseHelper: firebaseHelper,
-    personal,
-    setCheckedMaintenance,
-    setMaintenanceExist,
-    socketHelper,
-    setPreparationPortalDialogVisible,
-    isBase,
-    setTheme,
-    roomsMode,
-    setSnackbarExist,
+    return {
+      loadBaseInfo: async () => {
+        await init(false, i18n);
+
+        setModuleInfo(config.homepage, "home");
+        setProductVersion(config.version);
+
+        if (isDesktopClient) {
+          document.body.classList.add("desktop");
+        }
+      },
+      language,
+      isLoaded,
+
+      isDesktop: isDesktopClient,
+      FirebaseHelper: firebaseHelper,
+      personal,
+      setCheckedMaintenance,
+      setMaintenanceExist,
+      socketHelper,
+      setPreparationPortalDialogVisible,
+      isBase,
+      setTheme,
+      roomsMode,
+      setSnackbarExist,
       userTheme: isFrame ? frameConfig?.theme : userTheme,
       userId: userStore?.user?.id,
-    whiteLabelLogoUrls,
-    currentDeviceType,
-    showArticleLoader: clientLoadingStore.showArticleLoader,
-  };
+      whiteLabelLogoUrls,
+      currentDeviceType,
+      showArticleLoader: clientLoadingStore.showArticleLoader,
+      setPortalTariff,
+      setFormCreationInfo,
+      setConvertPasswordDialogVisible,
+    };
   },
 )(observer(Shell));
 
 const Root = () => (
   <ErrorBoundary>
-        <ShellWrapper />
+    <ShellWrapper />
   </ErrorBoundary>
 );
 

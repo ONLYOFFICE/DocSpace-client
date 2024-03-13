@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { Base } from "../../themes";
 
@@ -33,6 +33,8 @@ const StyledSocialButtonsGroup = styled.div`
       width: 52px;
       height: 40px;
       box-sizing: border-box;
+      cursor: pointer;
+
       .icon-button_svg {
         transform: rotate(90deg);
       }

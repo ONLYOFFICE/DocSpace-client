@@ -1,13 +1,9 @@
 {
-  "AddGroupsForSharingButton": "그룹 추가",
-  "AddShareMessage": "메시지 추가",
   "CopyExternalLink": "외부 링크 복사",
   "EncryptedFileSharing": "<strong>{{title}}</strong> 파일이 성공적으로 공유되었습니다",
   "ExternalLink": "외부 링크",
   "FormFilling": "양식 작성",
-  "InternalLink": "내부 링크",
   "LinkName": "링크 이름",
-  "Notify users": "사용자에게 알림",
   "ShareEmailBody": "{{itemName}} 문서에 대한 액세스 권한을 부여 받았습니다. 아래 링크를 클릭하여 지금 바로 문서를 여세요: {{shareLink}}",
   "ShareEmailSubject": "{{itemName}} 문서에 대한 액세스 권한을 부여 받았습니다",
   "SharingSettingsTitle": "설정공유"

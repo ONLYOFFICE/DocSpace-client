@@ -62,11 +62,11 @@ public class ImagesTest
         {
             return new Dictionary<ModuleTypes, string>() {
                 { ModuleTypes.PUBLIC, Path.Combine(BasePath,Utils.ConvertPathToOS("public")) },
-                { ModuleTypes.COMMON, Path.Combine(BasePath,Utils.ConvertPathToOS("packages/common")) },
-                { ModuleTypes.COMPONENTS, Path.Combine(BasePath,Utils.ConvertPathToOS("packages/components")) },
+                { ModuleTypes.SHARED, Path.Combine(BasePath,Utils.ConvertPathToOS("packages/shared")) },
                 { ModuleTypes.CLIENT, Path.Combine(BasePath,Utils.ConvertPathToOS("packages/client")) },
-                { ModuleTypes.EDITOR, Path.Combine(BasePath,Utils.ConvertPathToOS("packages/editor")) },
-                { ModuleTypes.LOGIN, Path.Combine(BasePath,Utils.ConvertPathToOS("packages/login")) }
+                { ModuleTypes.EDITOR, Path.Combine(BasePath,Utils.ConvertPathToOS("packages/doceditor")) },
+                { ModuleTypes.LOGIN, Path.Combine(BasePath,Utils.ConvertPathToOS("packages/login")) },
+                { ModuleTypes.MANAGEMENT, Path.Combine(BasePath,Utils.ConvertPathToOS("packages/management")) }
             };
         }
     }

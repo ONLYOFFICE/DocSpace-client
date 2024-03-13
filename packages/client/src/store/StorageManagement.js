@@ -10,6 +10,9 @@ import {
   getQuotaSettings,
   recalculateQuota,
 } from "@docspace/shared/api/settings";
+import { getRooms } from "@docspace/shared/api/rooms";
+import { getUserList } from "@docspace/shared/api/people";
+import { SortByFieldName } from "SRC_DIR/helpers/constants";
 
 const FILTER_COUNT = 6;
 
@@ -20,55 +23,88 @@ class StorageManagement {
   filesUsedSpace = {};
   quotaSettings = {};
   intervalId = null;
-
+  rooms = [];
+  accounts = [];
   needRecalculating = false;
   isRecalculating = false;
+  userFilterData = Filter.getDefault();
+  roomFilterData = RoomsFilter.getDefault();
 
-  constructor(filesStore, peopleStore, authStore) {
+  constructor(
+    filesStore,
+    peopleStore,
+    authStore,
+    currentQuotaStore,
+    settingsStore,
+  ) {
     this.filesStore = filesStore;
     this.peopleStore = peopleStore;
     this.authStore = authStore;
+    this.currentQuotaStore = currentQuotaStore;
+    this.settingsStore = settingsStore;
     makeAutoObservable(this);
   }
 
   basicRequests = async (isInit) => {
-    const { fetchRooms } = this.filesStore;
+    const { getFilesListItems } = this.filesStore;
     const { usersStore } = this.peopleStore;
-    const { getUsersList } = usersStore;
+    const { getPeopleListItem } = usersStore;
+    const { isFreeTariff } = this.currentQuotaStore;
+    const { standalone } = this.settingsStore;
 
-    const userFilterData = Filter.getDefault();
-    userFilterData.pageCount = FILTER_COUNT;
+    this.userFilterData.pageCount = FILTER_COUNT;
+    this.userFilterData.sortBy = SortByFieldName.UsedSpace;
+    this.userFilterData.sortOrder = "descending";
 
-    const roomFilterData = RoomsFilter.getDefault();
-    roomFilterData.pageCount = FILTER_COUNT;
+    this.roomFilterData.pageCount = FILTER_COUNT;
+    this.roomFilterData.sortBy = SortByFieldName.UsedSpace;
+    this.roomFilterData.sortOrder = "descending";
     const requests = [
-      getUsersList(userFilterData),
-      fetchRooms(null, roomFilterData),
       getPortal(),
       getPortalUsersCount(),
       getFilesUsedSpace(),
       getQuotaSettings(),
     ];
 
-    isInit && requests.push(checkRecalculateQuota());
+ 
 
-    [
-      ,
-      ,
-      this.portalInfo,
-      this.activeUsersCount,
-      this.filesUsedSpace,
-      this.quotaSettings,
-      this.needRecalculating,
-    ] = await Promise.all(requests);
-
-    if (!this.quotaSettings.lastRecalculateDate && isInit) {
-      await recalculateQuota();
-      this.getIntervalCheckRecalculate();
-      return;
+    if (!isFreeTariff || standalone) {
+      requests.push(
+        getUserList(this.userFilterData),
+        getRooms(this.roomFilterData),
+      );
     }
 
-    if (this.needRecalculating) this.getIntervalCheckRecalculate();
+    try {
+      if (isInit) this.needRecalculating = await checkRecalculateQuota();
+
+      let roomsList, accountsList;
+      [
+        this.portalInfo,
+        this.activeUsersCount,
+        this.filesUsedSpace,
+        this.quotaSettings,
+        accountsList,
+        roomsList,
+      ] = await Promise.all(requests);
+
+      if (roomsList) this.rooms = getFilesListItems(roomsList?.folders);
+
+      if (accountsList)
+        this.accounts = accountsList.items.map((user) =>
+          getPeopleListItem(user),
+        );
+
+      if (!this.quotaSettings.lastRecalculateDate && isInit) {
+        await recalculateQuota();
+        this.getIntervalCheckRecalculate();
+        return;
+      }
+
+      if (this.needRecalculating) this.getIntervalCheckRecalculate();
+    } catch (e) {
+      toastr.error(e);
+    }
   };
 
   init = async () => {
@@ -82,10 +118,10 @@ class StorageManagement {
   };
 
   updateQuotaInfo = async (type) => {
-    const { fetchRooms } = this.filesStore;
-    const { usersStore } = this.peopleStore;
-    const { getUsersList } = usersStore;
     const { getTenantExtra } = this.authStore;
+    const { getFilesListItems } = this.filesStore;
+    const { usersStore } = this.peopleStore;
+    const { getPeopleListItem } = usersStore;
 
     const userFilterData = Filter.getDefault();
     userFilterData.pageCount = FILTER_COUNT;
@@ -96,11 +132,17 @@ class StorageManagement {
     const requests = [getTenantExtra()];
 
     type === "user"
-      ? requests.push(getUsersList(userFilterData))
-      : requests.push(fetchRooms(null, roomFilterData));
+      ? requests.push(getUserList(userFilterData))
+      : requests.push(getRooms(roomFilterData));
 
     try {
-      await Promise.all(requests);
+      const [, items] = await Promise.all(requests);
+
+      if (type === "user") {
+        this.accounts = items.items.map((user) => getPeopleListItem(user));
+        return;
+      }
+      this.rooms = getFilesListItems(items.folders);
     } catch (e) {
       toastr.error(e);
     }

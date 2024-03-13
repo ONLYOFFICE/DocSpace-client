@@ -27,20 +27,22 @@ const StatisticsComponent = (props) => {
     defaultRoomIcon,
     className,
     title,
-    color
+    color,
+	logo
   ) => (
-    <div className={className}>
-      <ItemIcon
-        id={id}
-        icon={icon}
-        fileExst={fileExst}
-        isRoom={isRoom}
-        defaultRoomIcon={defaultRoomIcon}
-        title={title}
-        color={color}
-      />
-    </div>
-  );
+      <div className={className}>
+        <ItemIcon
+          id={id}
+          icon={icon}
+          fileExst={fileExst}
+          isRoom={isRoom}
+          defaultRoomIcon={defaultRoomIcon}
+          title={title}
+          color={color}
+          logo={logo}
+        />
+      </div>
+    );
   const quotaElement = (item, type) => (
     <SpaceQuota isReadOnly item={item} type={type} />
   );
@@ -56,7 +58,7 @@ const StatisticsComponent = (props) => {
     <StyledStatistics>
       <div className="title-container">
         <StyledMainTitle fontWeight={700} fontSize={"16px"}>
-          {t("Statistic")}
+          {t("Statistics")}
         </StyledMainTitle>
         {!isStatisticsAvailable && (
           <Badge

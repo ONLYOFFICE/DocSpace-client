@@ -10,7 +10,7 @@ import { EditorProps, TGoBack } from "@/types";
 import useInit from "@/hooks/useInit";
 import useEditorEvents from "@/hooks/useEditorEvents";
 
-import { FolderType } from "@docspace/shared/enums";
+import { FolderType, ThemeKeys } from "@docspace/shared/enums";
 import { getBackUrl } from "@/utils";
 import { IS_DESKTOP_EDITOR, IZ_ZOOM } from "@/utils/constants";
 import {
@@ -89,13 +89,18 @@ const Editor = ({
 
   newConfig.editorConfig = { ...config.editorConfig };
 
-  if (view && newConfig.editorConfig) newConfig.editorConfig.mode = "view";
+  const search = typeof window !== "undefined" ? window.location.search : "";
+  const editorType = new URLSearchParams(search).get("editorType");
+
+  //if (view && newConfig.editorConfig) newConfig.editorConfig.mode = "view";
+
+  if (editorType) config.type = editorType;
+
   if (isMobile) config.type = "mobile";
 
   let goBack: TGoBack = {} as TGoBack;
 
   if (fileInfo) {
-    const search = typeof window !== "undefined" ? window.location.search : "";
     const editorGoBack = new URLSearchParams(search).get("editorGoBack");
 
     if (editorGoBack === "false") {
@@ -120,20 +125,28 @@ const Editor = ({
           typeof window !== "undefined"
             ? window.DocSpaceConfig?.editor?.openOnNewPage ?? true
             : false;
-        goBack.url = getBackUrl(fileInfo.rootFolderId, fileInfo.folderId);
+        goBack.url = getBackUrl(fileInfo.rootFolderType, fileInfo.folderId);
       }
     }
   }
 
+  const customization = new URLSearchParams(search).get("customization");
+  const sdkCustomization: NonNullable<
+    IConfig["editorConfig"]
+  >["customization"] = JSON.parse(customization || "{}");
+
+  const theme = sdkCustomization?.uiTheme || user?.theme;
+
   if (newConfig.editorConfig)
     newConfig.editorConfig.customization = {
       ...newConfig.editorConfig.customization,
+      ...sdkCustomization,
       goback: { ...goBack },
-      uiTheme: getEditorTheme(user?.theme),
+      uiTheme: getEditorTheme(theme as ThemeKeys),
     };
 
-  if (newConfig.document && newConfig.document.info)
-    newConfig.document.info.favorite = false;
+  //if (newConfig.document && newConfig.document.info)
+  //  newConfig.document.info.favorite = false;
 
   // const url = window.location.href;
 
@@ -167,7 +180,7 @@ const Editor = ({
       newConfig.events.onRequestUsers = onSDKRequestUsers;
       newConfig.events.onRequestSendNotify = onSDKRequestSendNotify;
     }
-    if (!user.isVisitor) {
+    if (!user?.isVisitor) {
       newConfig.events.onRequestSaveAs = onSDKRequestSaveAs;
       if (
         IS_DESKTOP_EDITOR ||

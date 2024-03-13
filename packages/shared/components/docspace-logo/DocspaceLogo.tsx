@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { ReactSVG } from "react-svg";
 import { useTheme } from "styled-components";
 

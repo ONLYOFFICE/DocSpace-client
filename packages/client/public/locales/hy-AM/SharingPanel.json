@@ -1,13 +1,9 @@
 {
-  "AddGroupsForSharingButton": "Ավելացնել խմբեր",
-  "AddShareMessage": "Ավելացնել հաղորդագրություն",
   "CopyExternalLink": "Պատճենել արտաքին հղումը",
   "EncryptedFileSharing": "Ֆայլը <strong>{{title}}</strong> հաջողությամբ համօգտագործած է",
   "ExternalLink": "Արտաքին հղում",
   "FormFilling": "Ձևաթղթի լրացում",
-  "InternalLink": "Ներքին հղում",
   "LinkName": "Հղման անվանում",
-  "Notify users": "Տեղեկացնել օգտվողներին",
   "ShareEmailBody": "Ձեզ տրվել է մատչում դեպի {{itemName}} փաստաթուղթ: Փաստաթուղթը հենց հիմա բացելու համար սեղմեք ստորև նշված հղումը՝ {{shareLink}}.",
   "ShareEmailSubject": "Ձեզ տրվել է մատչում դեպի {{itemName}} փաստաթուղթ:",
   "SharingSettingsTitle": "Համօգտագործման կարգավորումներ"

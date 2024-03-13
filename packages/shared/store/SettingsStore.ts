@@ -34,7 +34,7 @@ import { combineUrl } from "../utils/combineUrl";
 import FirebaseHelper from "../utils/firebase";
 import SocketIOHelper from "../utils/socket";
 import { TWhiteLabel } from "../utils/whiteLabelHelper";
-import { ThemeKeys, TenantStatus, DeviceType } from "../enums";
+import { ThemeKeys, TenantStatus, DeviceType, UrlActionType } from "../enums";
 import {
   LANGUAGE,
   COOKIE_EXPIRATION_YEAR,
@@ -877,7 +877,7 @@ class SettingsStore {
       default:
         theme =
           window.matchMedia &&
-            window.matchMedia("(prefers-color-scheme: dark)").matches
+          window.matchMedia("(prefers-color-scheme: dark)").matches
             ? ThemeKeys.DarkStr
             : ThemeKeys.BaseStr;
         theme = getSystemTheme();
@@ -1064,6 +1064,18 @@ class SettingsStore {
       !this.standalone || (this.standalone && this.baseDomain !== "localhost")
     );
   }
+
+  openUrl = (url: string, action: UrlActionType, replace: boolean = false) => {
+    if (action === UrlActionType.Download) {
+      return this.isFrame &&
+        this.frameConfig?.downloadToEvent &&
+        this.frameConfig?.events.onDownload
+        ? frameCallEvent({ event: "onDownload", data: url })
+        : replace
+          ? (window.location.href = url)
+          : window.open(url, "_self");
+    }
+  };
 }
 
 export { SettingsStore };

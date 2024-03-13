@@ -219,8 +219,17 @@ class TreeFoldersStore {
     return window.location.pathname.includes("accounts/people");
   }
 
+  get isAccountsInsideGroup() {
+    const insideGroupPattern = /accounts\/groups\/.*\/filter/;
+
+    return insideGroupPattern.test(window.location.pathname);
+  }
+
   get isAccountsGroups() {
-    return window.location.pathname.includes("accounts/groups");
+    return (
+      window.location.pathname.includes("accounts/groups") &&
+      !this.isAccountsInsideGroup
+    );
   }
 
   get isPersonalRoom() {

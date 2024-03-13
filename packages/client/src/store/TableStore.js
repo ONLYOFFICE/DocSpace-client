@@ -3,6 +3,7 @@ import { TableVersions } from "SRC_DIR/helpers/constants";
 
 const TABLE_COLUMNS = `filesTableColumns_ver-${TableVersions.Files}`;
 const TABLE_ACCOUNTS_PEOPLE_COLUMNS = `peopleTableColumns_ver-${TableVersions.People}`;
+const TABLE_ACCOUNTS_GROUPS_COLUMNS = `groupsTableColumns_ver-${TableVersions.Groups}`;
 const TABLE_ACCOUNTS_INSIDE_GROUP_COLUMNS = `insideGroupTableColumns_ver-${TableVersions.InsideGroup}`;
 const TABLE_ROOMS_COLUMNS = `roomsTableColumns_ver-${TableVersions.Rooms}`;
 const TABLE_TRASH_COLUMNS = `trashTableColumns_ver-${TableVersions.Trash}`;
@@ -55,6 +56,8 @@ class TableStore {
   groupAccountsColumnIsEnabled = true;
   emailAccountsColumnIsEnabled = true;
   storageAccountsColumnIsEnabled = true;
+
+  managerAccountsGroupsColumnIsEnabled = true;
 
   typeAccountsInsideGroupColumnIsEnabled = true;
   groupAccountsInsideGroupColumnIsEnabled = true;
@@ -137,6 +140,9 @@ class TableStore {
   setAccountsColumnStorage = (enable) =>
     (this.storageAccountsColumnIsEnabled = enable);
 
+  setAccountsGroupsColumnManager = (enable) =>
+    (this.managerAccountsGroupsColumnIsEnabled = enable);
+
   setAccountsInsideGroupColumnType = (enable) =>
     (this.typeAccountsInsideGroupColumnIsEnabled = enable);
   setAccountsInsideGroupColumnEmail = (enable) =>
@@ -155,6 +161,7 @@ class TableStore {
         isTrashFolder,
         isAccountsPeople,
         isAccountsGroups,
+        isAccountsInsideGroup,
       } = this.treeFoldersStore;
       const isRooms = isRoomsFolder || isArchiveFolder;
 
@@ -176,6 +183,13 @@ class TableStore {
       }
 
       if (isAccountsGroups) {
+        this.setAccountsGroupsColumnManager(
+          splitColumns.includes("Head of Group"),
+        );
+        return;
+      }
+
+      if (isAccountsInsideGroup) {
         this.setAccountsInsideGroupColumnType(splitColumns.includes("Type"));
         this.setAccountsInsideGroupColumnEmail(splitColumns.includes("Mail"));
         this.setAccountsInsideGroupColumnGroup(
@@ -212,6 +226,7 @@ class TableStore {
       isTrashFolder,
       isAccountsPeople,
       isAccountsGroups,
+      isAccountsInsideGroup,
     } = this.treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
 
@@ -262,7 +277,7 @@ class TableStore {
           ? this.setRoomColumnType(!this.roomColumnTypeIsEnabled)
           : isAccountsPeople
             ? this.setAccountsColumnType(!this.typeAccountsColumnIsEnabled)
-            : isAccountsGroups
+            : isAccountsInsideGroup
               ? this.setAccountsInsideGroupColumnType(
                   !this.typeAccountsInsideGroupColumnIsEnabled,
                 )
@@ -307,6 +322,12 @@ class TableStore {
           : this.setRoomColumnQuota(!this.roomQuotaColumnIsEnable);
         return;
 
+      case "Head of Group":
+        this.setAccountsGroupsColumnManager(
+          !this.managerAccountsGroupsColumnIsEnabled,
+        );
+        return;
+
       default:
         return;
     }
@@ -341,6 +362,7 @@ class TableStore {
       isAccountsPeople,
       isAccountsGroups,
       isRecentTab,
+      isAccountsInsideGroup,
     } = this.treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
     const userId = this.userStore.user?.id;
@@ -353,12 +375,14 @@ class TableStore {
       : isAccountsPeople
         ? `${TABLE_ACCOUNTS_PEOPLE_COLUMNS}=${userId}`
         : isAccountsGroups
-          ? `${TABLE_ACCOUNTS_INSIDE_GROUP_COLUMNS}=${userId}`
-          : isTrashFolder
-            ? `${TABLE_TRASH_COLUMNS}=${userId}`
-            : isRecentTab
-              ? `${TABLE_RECENT_COLUMNS}=${userId}`
-              : `${TABLE_COLUMNS}=${userId}`;
+          ? `${TABLE_ACCOUNTS_GROUPS_COLUMNS}=${userId}`
+          : isAccountsInsideGroup
+            ? `${TABLE_ACCOUNTS_INSIDE_GROUP_COLUMNS}=${userId}`
+            : isTrashFolder
+              ? `${TABLE_TRASH_COLUMNS}=${userId}`
+              : isRecentTab
+                ? `${TABLE_RECENT_COLUMNS}=${userId}`
+                : `${TABLE_COLUMNS}=${userId}`;
   }
 
   get columnStorageName() {

@@ -22,6 +22,7 @@ async function Page({
     doc,
     action,
     share,
+    editorType,
   } = searchParams || {
     fileId: undefined,
     fileid: undefined,
@@ -29,6 +30,7 @@ async function Page({
     doc: undefined,
     action: undefined,
     share: undefined,
+    editorType: undefined,
   };
 
   const data = await getData(
@@ -37,6 +39,7 @@ async function Page({
     doc,
     action === "view",
     share,
+    editorType,
   );
 
   return <Root {...data} />;

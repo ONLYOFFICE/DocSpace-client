@@ -19,6 +19,7 @@ const SelectFolderDialog = ({
   getIsDisabled,
   filesSettings,
   i18n,
+  fileSaveAsExtension,
 }: SelectFolderDialogProps) => {
   const { t } = useTranslation();
   const sessionPath = sessionStorage.getItem("filesSelectorPath");
@@ -29,6 +30,9 @@ const SelectFolderDialog = ({
     cancelButtonLabel: t?.("Common:CancelButton") ?? "",
     cancelButtonId: "select-file-modal-cancel",
   };
+
+  const withFooterCheckbox =
+    fileSaveAsExtension !== "zip" && fileInfo.fileExst !== "fb2";
 
   return (
     <FilesSelectorWrapper
@@ -57,7 +61,7 @@ const SelectFolderDialog = ({
       rootFolderType={fileInfo.rootFolderType}
       embedded={false}
       withFooterInput
-      withFooterCheckbox={fileInfo.fileExst !== "fb2"}
+      withFooterCheckbox={withFooterCheckbox}
       descriptionText=""
       currentDeviceType={DeviceType.desktop}
       getFilesArchiveError={() => ""}

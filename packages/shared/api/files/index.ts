@@ -947,9 +947,9 @@ export function getSettingsThirdParty() {
   return request({ method: "get", url: "files/thirdparty/backup" });
 }
 
-// export function deleteThirdParty(providerId) {
-//   return request({ method: "delete", url: `files/thirdparty/${providerId}` });
-// }
+export function deleteThirdParty(providerId: string) {
+  return request({ method: "delete", url: `files/thirdparty/${providerId}` });
+}
 
 export async function getThirdPartyCapabilities() {
   const res = (await request({
@@ -1300,7 +1300,7 @@ export async function getPrimaryLink(fileId: number) {
 export async function editExternalLink(
   fileId: number | string,
   linkId: number | string,
-  access: number,
+  access: ShareAccessRights,
   primary: boolean,
   internal: boolean,
   expirationDate: moment.Moment,

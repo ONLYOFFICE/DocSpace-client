@@ -195,12 +195,13 @@ const DataReassignmentDialog = ({
             withCancelButton
             cancelButtonLabel=""
             headerProps={{
-              onBackClick,
+              onBackClick: onClosePeopleSelector,
               withoutBackButton: false,
               headerLabel: "",
             }}
             onBackClick={onTogglePeopleSelector}
             withAbilityCreateRoomUsers
+            withHeader={true}
           />
         </ModalDialog.Container>
       </StyledModalDialog>

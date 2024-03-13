@@ -114,6 +114,7 @@ export const enum FileType {
   Document = 7,
   OFormTemplate = 8,
   OForm = 9,
+  PDF = 10,
 }
 
 /**
@@ -122,7 +123,7 @@ export const enum FileType {
  */
 export const enum RoomsProviderType {
   Box = 1,
-  DropBox = 2,
+  DropboxV2 = 2,
   GoogleDrive = 3,
   kDrive = 4,
   OneDrive = 5,
@@ -164,6 +165,7 @@ export const enum PageType {
   portalDeletion = "portalDeletion",
   payments = "payments",
   bonus = "bonus",
+  dataImport = "dataImport",
   storageManagement = "storageManagement",
 }
 
@@ -457,4 +459,13 @@ export enum MembersSubjectType {
   Group = 2,
   InvitationLink = 3,
   PrimaryExternalLink = 4,
+}
+
+/**
+ * Enum for open url action.
+ * @readonly
+ */
+export const enum UrlActionType {
+  Download = 0,
+  Link = 1,
 }

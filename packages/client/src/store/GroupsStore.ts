@@ -40,6 +40,8 @@ class GroupsStore {
 
   insideGroupBackUrl: string | null = null;
 
+  insideGroupTempTitle: string | null = null;
+
   constructor(
     authStore: any,
     peopleStore: any,
@@ -156,6 +158,10 @@ class GroupsStore {
     this.insideGroupBackUrl = url;
   };
 
+  setInsideGroupTempTitle = (title: string | null) => {
+    this.insideGroupTempTitle = title;
+  };
+
   getGroups = async (
     filter = GroupsFilter.getDefault(),
     updateFilter = false,
@@ -173,6 +179,16 @@ class GroupsStore {
       filterData.sortBy = splitFilter[0];
       filterData.pageCount = +splitFilter[1];
       filterData.sortOrder = splitFilter[2];
+    }
+
+    if (!this.authStore.settingsStore.withPaging) {
+      const isCustomCountPage =
+        filter && filter.pageCount !== 100 && filter.pageCount !== 25;
+
+      if (!isCustomCountPage) {
+        filterData.page = 0;
+        filterData.pageCount = 100;
+      }
     }
 
     const res = await groupsApi.getGroups(filterData);
@@ -320,7 +336,12 @@ class GroupsStore {
     this.setSelection(newSelections);
   };
 
-  getGroupContextOptions = (t, item, forInfoPanel = false) => {
+  getGroupContextOptions = (
+    t,
+    item,
+    forInfoPanel = false,
+    forInsideGroup = false,
+  ) => {
     return [
       {
         id: "edit-group",
@@ -343,7 +364,12 @@ class GroupsStore {
         title: t("Common:Info"),
         icon: InfoReactSvgUrl,
         onClick: () => {
-          this.selection = [item];
+          if (!forInsideGroup) {
+            this.selection = [item];
+          } else {
+            this.peopleStore.selectionStore.setSelection([]);
+            this.peopleStore.selectionStore.setBufferSelection(null);
+          }
           this.infoPanelStore.setIsVisible(true);
         },
       },
@@ -363,7 +389,7 @@ class GroupsStore {
           groupsApi
             .deleteGroup(groupId)!
             .then(() => {
-              toastr.success(t("Group was deleted successfully"));
+              toastr.success(t("PeopleTranslations:SuccessDeleteGroup"));
               this.setSelection([]);
               this.getGroups(this.groupsFilter, true);
               this.infoPanelStore.setInfoPanelSelection(null);
@@ -380,7 +406,24 @@ class GroupsStore {
   clearInsideGroup = () => {
     this.currentGroup = null;
     this.insideGroupBackUrl = null;
+    this.insideGroupTempTitle = null;
     this.peopleStore.usersStore.setUsers([]);
+  };
+
+  openGroupAction = (
+    groupId: string,
+    withBackURL: boolean,
+    tempTitle: string,
+  ) => {
+    this.setCurrentGroup(null);
+    this.setInsideGroupTempTitle(tempTitle);
+
+    if (withBackURL) {
+      const url = `${window.location.pathname}${window.location.search}`;
+      this.setInsideGroupBackUrl(url);
+    }
+
+    window.DocSpace.navigate(`/accounts/groups/${groupId}`);
   };
 }
 

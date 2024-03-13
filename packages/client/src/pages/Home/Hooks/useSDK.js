@@ -178,7 +178,7 @@ const useSDK = ({
     return () => {
       window.removeEventListener("message", handleMessage, false);
     };
-  }, []);
+  }, [handleMessage]);
 
   useEffect(() => {
     frameCallCommand("setConfig");

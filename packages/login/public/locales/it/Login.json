@@ -20,7 +20,5 @@
   "RegisterTitle": "Richiesta di inscrizione ",
   "RegistrationEmailWatermark": "Email",
   "RememberHelper": "‎La durata predefinita della sessione è di 20 minuti. Selezionare questa opzione per impostarla su 1 anno. Per impostare il proprio valore, passare a Impostazioni.‎",
-  "ResendCode": "Invia nuovamente il codice",
-  "SignInWithCode": "Accedi con codice segreto",
-  "SignInWithPassword": "Accedi con password"
+  "ResendCode": "Invia nuovamente il codice"
 }

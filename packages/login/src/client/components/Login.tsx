@@ -19,7 +19,6 @@ import {
   LANGUAGE,
   PROVIDERS_DATA,
 } from "@docspace/shared/constants";
-import { Toast } from "@docspace/shared/components/toast";
 import LoginForm from "./sub-components/LoginForm";
 import RecoverAccessModalDialog from "@docspace/shared/components/recover-access-modal-dialog/RecoverAccessModalDialog";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
@@ -344,7 +343,6 @@ const Login: React.FC<ILoginProps> = ({
                   </Link>
                 )}
               </FormWrapper>
-              <Toast />
 
               {recoverDialogVisible && (
                 <RecoverAccessModalDialog

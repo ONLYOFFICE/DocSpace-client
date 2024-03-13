@@ -66,6 +66,7 @@ const Viewer = (props) => {
 
   const [config, setConfig] = useState({
     mode: "viewer",
+    editorType: "embedded",
     width: `${width}${widthDimension.label}`,
     height: `${height}${heightDimension.label}`,
     frameId: "ds-frame",
@@ -95,6 +96,10 @@ const Viewer = (props) => {
   }, 500);
 
   useEffect(() => {
+    const scroll = document.getElementsByClassName("section-scroll")[0];
+    if (scroll) {
+      scroll.scrollTop = 0;
+    }
     loadFrame();
     return () => destroyFrame();
   });
@@ -121,7 +126,7 @@ const Viewer = (props) => {
 
   const onChangeFileId = (file) => {
     setConfig((config) => {
-      return { ...config, id: file.id };
+      return { ...config, id: file.id, init: true };
     });
   };
 
@@ -169,14 +174,14 @@ const Viewer = (props) => {
   const preview = (
     <Frame
       width={
-        config.id !== undefined &&
-        widthDimension.label === "px" &&
-        width + widthDimension.label
+        config.id !== undefined && widthDimension.label === "px"
+          ? width + widthDimension.label
+          : undefined
       }
       height={
-        config.id !== undefined &&
-        heightDimension.label === "px" &&
-        height + heightDimension.label
+        config.id !== undefined && heightDimension.label === "px"
+          ? height + heightDimension.label
+          : undefined
       }
       targetId={frameId}
     >
@@ -186,7 +191,7 @@ const Viewer = (props) => {
         </>
       ) : (
         <EmptyIframeContainer
-          text={t("SelectFile")}
+          text={t("FilePreview")}
           width="100%"
           height="100%"
         />
@@ -221,7 +226,7 @@ const Viewer = (props) => {
       <CategoryDescription>
         <Text className="sdk-description">{t("ViewerDescription")}</Text>
       </CategoryDescription>
-      <CategoryHeader>{t("CreateSampleHeader")}</CategoryHeader>
+      <CategoryHeader>{t("CreateSampleViewer")}</CategoryHeader>
       <Container>
         {showPreview && (
           <Preview>

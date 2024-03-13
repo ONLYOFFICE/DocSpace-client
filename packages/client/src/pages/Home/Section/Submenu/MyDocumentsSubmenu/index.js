@@ -13,16 +13,16 @@ const MyDocumentsSubmenu = ({
   showBodyLoader,
   isRoot,
 }) => {
-  const { t } = useTranslation("Files");
+  const { t } = useTranslation(["Common", "Files"]);
 
   const submenu = [
     {
       id: "my",
-      name: t("MyDocuments"),
+      name: t("Common:MyDocuments"),
     },
     {
       id: "recent",
-      name: t("RecentlyAccessible"),
+      name: t("Files:RecentlyAccessible"),
     },
   ];
 

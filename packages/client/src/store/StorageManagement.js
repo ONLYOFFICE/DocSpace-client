@@ -59,7 +59,6 @@ class StorageManagement {
     this.roomFilterData.pageCount = FILTER_COUNT;
     this.roomFilterData.sortBy = SortByFieldName.UsedSpace;
     this.roomFilterData.sortOrder = "descending";
-
     const requests = [
       getPortal(),
       getPortalUsersCount(),
@@ -67,7 +66,7 @@ class StorageManagement {
       getQuotaSettings(),
     ];
 
-    isInit && requests.push(checkRecalculateQuota());
+ 
 
     if (!isFreeTariff || standalone) {
       requests.push(
@@ -76,29 +75,36 @@ class StorageManagement {
       );
     }
 
-    let roomsList, accountsList;
-    [
-      this.portalInfo,
-      this.activeUsersCount,
-      this.filesUsedSpace,
-      this.quotaSettings,
-      this.needRecalculating,
-      accountsList,
-      roomsList,
-    ] = await Promise.all(requests);
+    try {
+      if (isInit) this.needRecalculating = await checkRecalculateQuota();
 
-    if (roomsList) this.rooms = getFilesListItems(roomsList?.folders);
+      let roomsList, accountsList;
+      [
+        this.portalInfo,
+        this.activeUsersCount,
+        this.filesUsedSpace,
+        this.quotaSettings,
+        accountsList,
+        roomsList,
+      ] = await Promise.all(requests);
 
-    if (accountsList)
-      this.accounts = accountsList.items.map((user) => getPeopleListItem(user));
+      if (roomsList) this.rooms = getFilesListItems(roomsList?.folders);
 
-    if (!this.quotaSettings.lastRecalculateDate && isInit) {
-      await recalculateQuota();
-      this.getIntervalCheckRecalculate();
-      return;
+      if (accountsList)
+        this.accounts = accountsList.items.map((user) =>
+          getPeopleListItem(user),
+        );
+
+      if (!this.quotaSettings.lastRecalculateDate && isInit) {
+        await recalculateQuota();
+        this.getIntervalCheckRecalculate();
+        return;
+      }
+
+      if (this.needRecalculating) this.getIntervalCheckRecalculate();
+    } catch (e) {
+      toastr.error(e);
     }
-
-    if (this.needRecalculating) this.getIntervalCheckRecalculate();
   };
 
   init = async () => {

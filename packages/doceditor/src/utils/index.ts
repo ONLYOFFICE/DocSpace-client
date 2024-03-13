@@ -22,7 +22,11 @@ export const getBackUrl = (
       backUrl = `/rooms/shared/${folderId}/filter?folder=${folderId}`;
     }
   } else {
-    backUrl = `/rooms/personal/filter?folder=${folderId}`;
+    if (rootFolderType === FolderType.SHARE) {
+      backUrl = `/rooms/personal/filter?folder=recent`;
+    } else {
+      backUrl = `/rooms/personal/filter?folder=${folderId}`;
+    }
   }
 
   const url = window.location.href;

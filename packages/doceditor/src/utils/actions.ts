@@ -22,6 +22,7 @@ export async function getData(
 
     const host = hdrs.get("x-forwarded-host");
     const proto = hdrs.get("x-forwarded-proto");
+    const cookie = hdrs.get("cookie");
 
     const baseURL = `${proto}://${host}`;
     const baseAPIUrl = `${baseURL}/${API_PREFIX}`;
@@ -29,7 +30,9 @@ export async function getData(
     const configURL = new URL(`${baseAPIUrl}/files/file/${fileId}/openedit`);
     const editorURL = new URL(`${baseAPIUrl}/files/docservice`);
     const userURL = new URL(`${baseAPIUrl}/people/@self`);
-    const settingsURL = new URL(`${baseAPIUrl}/settings?withPassword=false`);
+    const settingsURL = new URL(
+      `${baseAPIUrl}/settings?withPassword=${cookie?.includes("asc_auth_key") ? "false" : "true"}`,
+    );
 
     if (view) configURL.searchParams.append("view", view ? "true" : "false");
     if (version) {
@@ -40,27 +43,35 @@ export async function getData(
     if (share) configURL.searchParams.append("share", share);
     if (editorType) configURL.searchParams.append("editorType", editorType);
 
+    const headersList: HeadersInit = [];
+
+    hdrs.forEach((value, key) => headersList.push([key, value]));
+
+    if (share) headersList.push(["Request-Token", share]);
+
     const getConfig = new Request(configURL, {
-      headers: hdrs,
+      headers: headersList,
     });
     const getEditorUrl = new Request(editorURL, {
-      headers: hdrs,
+      headers: headersList,
     });
-    const getUser = new Request(userURL, {
-      headers: hdrs,
-    });
+
     const getSettings = new Request(settingsURL, {
-      headers: hdrs,
+      headers: headersList,
     });
 
     const resActions = [];
 
     resActions.push(fetch(getConfig));
     resActions.push(fetch(getEditorUrl));
-    resActions.push(fetch(getUser));
     resActions.push(fetch(getSettings));
+    const getUser = new Request(userURL, {
+      headers: headersList,
+    });
 
-    const [configRes, editorUrlRes, userRes, settingsRes] =
+    resActions.push(fetch(getUser));
+
+    const [configRes, editorUrlRes, settingsRes, userRes] =
       await Promise.all(resActions);
 
     const actions = [];
@@ -68,15 +79,15 @@ export async function getData(
     if (configRes.ok) {
       actions.push(configRes.json());
       actions.push(editorUrlRes.json());
-      actions.push(userRes.json());
       actions.push(settingsRes.json());
+      if (userRes.status !== 401) actions.push(userRes.json());
 
-      const [config, editorUrl, user, settings] = await Promise.all(actions);
+      const [config, editorUrl, settings, user] = await Promise.all(actions);
 
       const response: TResponse = {
         config: config.response,
         editorUrl: editorUrl.response,
-        user: user.response,
+        user: user?.response,
         settings: settings.response,
         successAuth: false,
         isSharingAccess: false,
@@ -95,7 +106,7 @@ export async function getData(
         response.error = { message: "restore-backup" };
       }
 
-      const successAuth = !!user;
+      const successAuth = !!user || !share;
 
       if (!successAuth && !doc && !share) {
         response.error = { message: "unauthorized" };

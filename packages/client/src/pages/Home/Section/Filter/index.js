@@ -33,8 +33,7 @@ import { ROOMS_PROVIDER_TYPE_NAME } from "@docspace/shared/constants";
 
 import { getDefaultRoomName } from "SRC_DIR/helpers/filesUtils";
 
-import { TableVersions } from "SRC_DIR/helpers/constants";
-import { SortByFieldName } from "SRC_DIR/helpers/enums";
+import { SortByFieldName, TableVersions } from "SRC_DIR/helpers/constants";
 
 import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";

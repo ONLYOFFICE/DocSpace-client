@@ -126,7 +126,7 @@ const Viewer = (props) => {
 
   const onChangeFileId = (file) => {
     setConfig((config) => {
-      return { ...config, id: file.id };
+      return { ...config, id: file.id, init: true };
     });
   };
 

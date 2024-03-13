@@ -121,6 +121,11 @@ export const DEFAULT_SELECT_LANGUAGE = {
   icon: EnUSReactSvgUrl,
 };
 
+export const LinkType = Object.freeze({
+  Invite: 0,
+  External: 1,
+});
+
 /**
  * Enum for sort by field name
  * @readonly
@@ -135,10 +140,6 @@ export const SortByFieldName = Object.freeze({
   Room: "Room",
   Tags: "Tags",
   RoomType: "roomType",
+  LastOpened: "LastOpened",
   UsedSpace: "usedspace",
-});
-
-export const LinkType = Object.freeze({
-  Invite: 0,
-  External: 1,
 });

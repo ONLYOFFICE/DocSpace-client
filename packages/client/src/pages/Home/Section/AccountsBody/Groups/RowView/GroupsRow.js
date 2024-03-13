@@ -1,6 +1,5 @@
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
-
 import * as Styled from "./index.styled";
 import { Link } from "@docspace/shared/components/link";
 import { withTranslation } from "react-i18next";
@@ -116,22 +115,39 @@ const GroupsRow = ({
             nameColor={nameColor}
             sideInfoColor={sideInfoColor}
           >
-            {[
-              <Link
-                key={"group-title"}
-                containerWidth="28%"
-                target="_blank"
-                title={item.name}
-                fontWeight={600}
-                fontSize="15px"
-                lineHeight="20px"
-                color={nameColor}
-                isTextOverflow={true}
-                onClick={onOpenGroup}
-              >
-                {item.name}
-              </Link>,
-            ]}
+            <Link
+              key={"group-title"}
+              containerWidth="28%"
+              target="_blank"
+              title={item.name}
+              fontWeight={600}
+              fontSize="15px"
+              lineHeight="20px"
+              color={nameColor}
+              isTextOverflow={true}
+              onClick={onOpenGroup}
+            >
+              {item.name}
+            </Link>
+
+            <div></div>
+
+            <Link
+              key={"group-title"}
+              containerWidth="28%"
+              target="_blank"
+              title={item.name}
+              fontWeight={600}
+              fontSize="15px"
+              lineHeight="20px"
+              color={nameColor}
+              isTextOverflow={true}
+              onClick={onOpenGroup}
+            >
+              {t("PeopleTranslations:PeopleCount", {
+                count: item.membersCount,
+              })}
+            </Link>
           </Styled.GroupsRowContent>
         </Styled.GroupsRow>
       </div>

@@ -121,6 +121,7 @@ const StyledTableRow = styled(TableRow)`
     cursor: ${(props) =>
       !props.isThirdPartyFolder &&
       (props.checked || props.isActive) &&
+      props.canDrag &&
       `url(${CursorPalmSvgUrl}), auto !important`};
 
     ${(props) =>

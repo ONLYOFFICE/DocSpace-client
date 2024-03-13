@@ -21,7 +21,9 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
 
   const host = hdrs.get("x-forwarded-host");
   const proto = hdrs.get("x-forwarded-proto");
-  const baseURL = `${proto}://${host}`;
+  const port = hdrs.get("x-forwarded-port");
+
+  const baseURL = `${proto}://${host}${port ? `:${port}` : ""}`;
 
   if (!searchParams) redirect(baseURL);
 

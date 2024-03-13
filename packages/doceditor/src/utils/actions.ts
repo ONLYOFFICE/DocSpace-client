@@ -22,8 +22,9 @@ export async function fileCopyAs(
     const host = hdrs.get("x-forwarded-host");
     const proto = hdrs.get("x-forwarded-proto");
     const cookie = hdrs.get("cookie");
+    const port = hdrs.get("x-forwarded-port");
 
-    const baseURL = `${proto}://${host}`;
+    const baseURL = `${proto}://${host}${port ? `:${port}` : ""}`;
     const baseAPIUrl = `${baseURL}/${API_PREFIX}`;
 
     const createFileUrl = new URL(`${baseAPIUrl}/files/file/${fileId}/copyas`);
@@ -65,8 +66,9 @@ export async function createFile(
     const host = hdrs.get("x-forwarded-host");
     const proto = hdrs.get("x-forwarded-proto");
     const cookie = hdrs.get("cookie");
+    const port = hdrs.get("x-forwarded-port");
 
-    const baseURL = `${proto}://${host}`;
+    const baseURL = `${proto}://${host}${port ? `:${port}` : ""}`;
     const baseAPIUrl = `${baseURL}/${API_PREFIX}`;
 
     const createFileUrl = new URL(`${baseAPIUrl}/files/${parentId}/file`);
@@ -104,8 +106,9 @@ export async function getData(
 
     const host = hdrs.get("x-forwarded-host");
     const proto = hdrs.get("x-forwarded-proto");
+    const port = hdrs.get("x-forwarded-port");
 
-    const baseURL = `${proto}://${host}`;
+    const baseURL = `${proto}://${host}${port ? `:${port}` : ""}`;
     const baseAPIUrl = `${baseURL}/${API_PREFIX}`;
 
     const configURL = new URL(`${baseAPIUrl}/files/file/${fileId}/openedit`);

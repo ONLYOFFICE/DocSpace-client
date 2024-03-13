@@ -125,7 +125,7 @@ const Editor = ({
           typeof window !== "undefined"
             ? window.DocSpaceConfig?.editor?.openOnNewPage ?? true
             : false;
-        goBack.url = getBackUrl(fileInfo.rootFolderId, fileInfo.folderId);
+        goBack.url = getBackUrl(fileInfo.rootFolderType, fileInfo.folderId);
       }
     }
   }

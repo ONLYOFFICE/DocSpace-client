@@ -197,7 +197,7 @@ const PeopleTableRow = (props) => {
     hideColumns,
     value,
     standalone,
-    setCurrentGroup,
+    openGroupAction,
     showStorageInfo,
     typeAccountsColumnIsEnabled,
     emailAccountsColumnIsEnabled,
@@ -218,8 +218,6 @@ const PeopleTableRow = (props) => {
     isCollaborator,
     isSSO,
   } = item;
-
-  const navigate = useNavigate();
 
   const isPending = statusType === "pending" || statusType === "disabled";
 
@@ -291,10 +289,10 @@ const PeopleTableRow = (props) => {
     [item, changeUserType],
   );
 
-  const onOpenGroup = React.useCallback(({ action }) => {
-    setCurrentGroup(null);
-    navigate(`/accounts/groups/${action}`);
-  }, []);
+  const onOpenGroup = React.useCallback(
+    ({ action, title }) => openGroupAction(action, true, title),
+    [openGroupAction],
+  );
 
   // const getRoomsOptions = React.useCallback(() => {
   //   const options = [];
@@ -600,11 +598,14 @@ const PeopleTableRow = (props) => {
   );
 };
 
-export default inject(({ currentQuotaStore }) => {
+export default inject(({ currentQuotaStore, peopleStore }) => {
   const { showStorageInfo } = currentQuotaStore;
+
+  const { openGroupAction } = peopleStore.groupsStore;
 
   return {
     showStorageInfo,
+    openGroupAction,
   };
 })(
   withContent(

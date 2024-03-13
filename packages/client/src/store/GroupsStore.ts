@@ -40,6 +40,8 @@ class GroupsStore {
 
   insideGroupBackUrl: string | null = null;
 
+  insideGroupTempTitle: string | null = null;
+
   constructor(
     authStore: any,
     peopleStore: any,
@@ -154,6 +156,10 @@ class GroupsStore {
 
   setInsideGroupBackUrl = (url: string) => {
     this.insideGroupBackUrl = url;
+  };
+
+  setInsideGroupTempTitle = (title: string | null) => {
+    this.insideGroupTempTitle = title;
   };
 
   getGroups = async (
@@ -400,7 +406,24 @@ class GroupsStore {
   clearInsideGroup = () => {
     this.currentGroup = null;
     this.insideGroupBackUrl = null;
+    this.insideGroupTempTitle = null;
     this.peopleStore.usersStore.setUsers([]);
+  };
+
+  openGroupAction = (
+    groupId: string,
+    withBackURL: boolean,
+    tempTitle: string,
+  ) => {
+    this.setCurrentGroup(null);
+    this.setInsideGroupTempTitle(tempTitle);
+
+    if (withBackURL) {
+      const url = `${window.location.pathname}${window.location.search}`;
+      this.setInsideGroupBackUrl(url);
+    }
+
+    window.DocSpace.navigate(`/accounts/groups/${groupId}`);
   };
 }
 

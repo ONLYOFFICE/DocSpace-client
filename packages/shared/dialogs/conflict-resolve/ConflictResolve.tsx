@@ -35,8 +35,8 @@ const ConflictResolve = (props: ConflictResolveProps) => {
   const onSelectResolveType = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target;
 
-    const type = target.value as unknown;
-    setResolveType(type as ConflictResolveType);
+    const type = Number(target.value) as ConflictResolveType;
+    setResolveType(type);
   };
 
   const onSubmitAction = () => {

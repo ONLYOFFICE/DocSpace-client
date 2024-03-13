@@ -45,6 +45,7 @@ const FilesTableRow = (props) => {
     onDragLeave,
     badgeUrl,
     isRecentTab,
+    canDrag,
   } = props;
   const { acceptBackground, background } = theme.dragAndDrop;
 
@@ -156,6 +157,7 @@ const FilesTableRow = (props) => {
         isHighlight={isHighlight}
         hideColumns={hideColumns}
         badgeUrl={badgeUrl}
+        canDrag={canDrag}
       >
         {isRooms ? (
           <RoomsRowDataComponent

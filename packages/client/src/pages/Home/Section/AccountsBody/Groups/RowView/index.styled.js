@@ -95,6 +95,7 @@ export const GroupsRow = styled(Row)`
 
   .row_content {
     height: 58px;
+    justify-content: center;
   }
 
   height: 59px;
@@ -131,19 +132,16 @@ export const GroupsRow = styled(Row)`
 
 export const GroupsRowContent = styled(RowContent)`
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+
   @media ${tablet} {
     .row-main-container-wrapper {
       width: 100%;
       display: flex;
-      justify-content: space-between;
       max-width: inherit;
       margin: 0;
-    }
-  }
-  @media ${mobile} {
-    .row-main-container-wrapper {
-      justify-content: flex-start;
     }
   }
 `;

@@ -101,14 +101,17 @@ const EditRoomEvent = ({
   };
 
   const onSave = async (roomParams) => {
+    const quotaLimit = roomParams?.quota || item.quotaLimit;
+
     const editRoomParams = {
       title: roomParams.title || t("Files:NewRoom"),
       ...(isDefaultRoomsQuotaSet && {
-        quota: roomParams.quota || item.quotaLimit,
+        quota: +quotaLimit,
       }),
     };
 
     const isTitleChanged = roomParams?.title !== item.title;
+    const isQuotaChanged = quotaLimit !== item.quotaLimit;
     const isOwnerChanged = roomParams?.roomOwner?.id !== item.createdBy.id;
 
     const tags = roomParams.tags.map((tag) => tag.name);
@@ -123,7 +126,10 @@ const EditRoomEvent = ({
     try {
       setIsLoading(true);
 
-      room = isTitleChanged ? await editRoom(item.id, editRoomParams) : item;
+      room =
+        isTitleChanged || isQuotaChanged
+          ? await editRoom(item.id, editRoomParams)
+          : item;
 
       room.isLogoLoading = true;
 

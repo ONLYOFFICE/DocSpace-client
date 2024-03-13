@@ -125,7 +125,7 @@ const Editor = ({
           typeof window !== "undefined"
             ? window.DocSpaceConfig?.editor?.openOnNewPage ?? true
             : false;
-        goBack.url = getBackUrl(fileInfo.rootFolderId, fileInfo.folderId);
+        goBack.url = getBackUrl(fileInfo.rootFolderType, fileInfo.folderId);
       }
     }
   }
@@ -180,7 +180,7 @@ const Editor = ({
       newConfig.events.onRequestUsers = onSDKRequestUsers;
       newConfig.events.onRequestSendNotify = onSDKRequestSendNotify;
     }
-    if (!user.isVisitor) {
+    if (!user?.isVisitor) {
       newConfig.events.onRequestSaveAs = onSDKRequestSaveAs;
       if (
         IS_DESKTOP_EDITOR ||

@@ -121,7 +121,7 @@ const Table = ({
   typeAccountsInsideGroupColumnIsEnabled,
   groupAccountsInsideGroupColumnIsEnabled,
   emailAccountsInsideGroupColumnIsEnabled,
-  setCurrentGroup,
+  openGroupAction,
 }) => {
   const ref = useRef(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -182,7 +182,7 @@ const Table = ({
               emailAccountsInsideGroupColumnIsEnabled
             }
             infoPanelVisible={infoPanelVisible}
-            setCurrentGroup={setCurrentGroup}
+            openGroupAction={openGroupAction}
           />
         ))}
       </TableBody>
@@ -221,6 +221,8 @@ export default inject(
       emailAccountsInsideGroupColumnIsEnabled,
     } = tableStore;
 
+    const { openGroupAction } = peopleStore.groupsStore;
+
     return {
       peopleList,
       accountsViewAs,
@@ -239,7 +241,7 @@ export default inject(
       groupAccountsInsideGroupColumnIsEnabled,
       emailAccountsInsideGroupColumnIsEnabled,
 
-      setCurrentGroup: peopleStore.groupsStore.setCurrentGroup,
+      openGroupAction,
     };
   },
 )(observer(Table));

@@ -27,7 +27,7 @@ const useCreateFileError = ({
 
     const error = JSON.parse(createError);
 
-    if (error?.response?.status === 402) setPortalTariff?.();
+    if (error?.status === 402) setPortalTariff?.();
 
     if (error?.fromFile) {
       let errorMessage = "";

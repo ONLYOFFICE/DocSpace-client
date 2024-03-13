@@ -6,6 +6,7 @@ import { getLtrLanguageForEditor } from "@docspace/shared/utils/common";
 import { TenantStatus } from "@docspace/shared/enums";
 
 import { TCatchError, TError, TResponse } from "@/types";
+import { error } from "console";
 
 const API_PREFIX = "api/2.0";
 const SKIP_PORT_FORWARD = process.env.NODE_PORT_FORWARD === "false";
@@ -36,6 +37,7 @@ export const createRequest = (
   body?: string,
 ) => {
   const hdrs = new Headers(headers());
+
   const apiURL = getAPIUrl();
 
   newHeaders.forEach((hdr) => {
@@ -73,12 +75,32 @@ export async function fileCopyAs(
 
     const file = await (await fetch(createFile)).json();
 
+    console.log("File copyas success ", file);
+
     return {
       file: file.response,
-      error: { ...file.error },
+      error:
+        typeof file.error === "string"
+          ? error
+          : {
+              message: file.error.message,
+              status: file.error.statusCode,
+              type: file.error.type,
+            },
     };
-  } catch (e) {
-    return { file: undefined, error: e as object | string };
+  } catch (e: any) {
+    console.log("File copyas error ", e);
+    return {
+      file: undefined,
+      error:
+        typeof e === "string"
+          ? e
+          : {
+              message: e.message,
+              status: e.statusCode,
+              type: e.type,
+            },
+    };
   }
 }
 
@@ -97,13 +119,31 @@ export async function createFile(
     );
 
     const file = await (await fetch(createFile)).json();
-
+    console.log("File create success ", file);
     return {
       file: file.response,
-      error: { ...file.error },
+      error:
+        typeof file.error === "string"
+          ? error
+          : {
+              message: file.error.message,
+              status: file.error.statusCode,
+              type: file.error.type,
+            },
     };
-  } catch (e) {
-    return { file: undefined, error: e as object | string };
+  } catch (e: any) {
+    console.log("File create error ", e);
+    return {
+      file: undefined,
+      error:
+        typeof e === "string"
+          ? e
+          : {
+              message: e.message,
+              status: e.statusCode,
+              type: e.type,
+            },
+    };
   }
 }
 

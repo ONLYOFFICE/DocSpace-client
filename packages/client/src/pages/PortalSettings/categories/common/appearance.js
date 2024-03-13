@@ -447,8 +447,6 @@ const Appearance = (props) => {
     const g = rgba.green;
     const b = rgba.blue;
 
-    console.log("r g b ", r, g, b);
-
     const textColor =
       (r * 299 + g * 587 + b * 114) / 1000 > 128 ? black : white;
 

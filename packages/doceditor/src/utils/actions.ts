@@ -136,8 +136,8 @@ export async function getData(
       [
         `/files/file/${fileId}/openedit?${searchParams.toString()}`,
         `/files/docservice?${editorSearchParams.toString()}`,
-        `/people/@self`,
         `/settings?withPassword=${cookie?.includes("asc_auth_key") ? "false" : "true"}`,
+        `/people/@self`,
       ],
       [share ? ["Request-Token", share] : ["", ""]],
       "GET",

@@ -30,10 +30,18 @@ class StorageManagement {
   userFilterData = Filter.getDefault();
   roomFilterData = RoomsFilter.getDefault();
 
-  constructor(filesStore, peopleStore, authStore) {
+  constructor(
+    filesStore,
+    peopleStore,
+    authStore,
+    currentQuotaStore,
+    settingsStore,
+  ) {
     this.filesStore = filesStore;
     this.peopleStore = peopleStore;
     this.authStore = authStore;
+    this.currentQuotaStore = currentQuotaStore;
+    this.settingsStore = settingsStore;
     makeAutoObservable(this);
   }
 
@@ -41,6 +49,8 @@ class StorageManagement {
     const { getFilesListItems } = this.filesStore;
     const { usersStore } = this.peopleStore;
     const { getPeopleListItem } = usersStore;
+    const { isFreeTariff } = this.currentQuotaStore;
+    const { standalone } = this.settingsStore;
 
     this.userFilterData.pageCount = FILTER_COUNT;
     this.userFilterData.sortBy = SortByFieldName.UsedSpace;
@@ -51,8 +61,6 @@ class StorageManagement {
     this.roomFilterData.sortOrder = "descending";
 
     const requests = [
-      getUserList(this.userFilterData),
-      getRooms(this.roomFilterData),
       getPortal(),
       getPortalUsersCount(),
       getFilesUsedSpace(),
@@ -61,20 +69,28 @@ class StorageManagement {
 
     isInit && requests.push(checkRecalculateQuota());
 
-    let roomsList, accountsList;
+    if (!isFreeTariff || standalone) {
+      requests.push(
+        getUserList(this.userFilterData),
+        getRooms(this.roomFilterData),
+      );
+    }
 
+    let roomsList, accountsList;
     [
-      accountsList,
-      roomsList,
       this.portalInfo,
       this.activeUsersCount,
       this.filesUsedSpace,
       this.quotaSettings,
       this.needRecalculating,
+      accountsList,
+      roomsList,
     ] = await Promise.all(requests);
 
-    this.rooms = getFilesListItems(roomsList.folders);
-    this.accounts = accountsList.items.map((user) => getPeopleListItem(user));
+    if (roomsList) this.rooms = getFilesListItems(roomsList?.folders);
+
+    if (accountsList)
+      this.accounts = accountsList.items.map((user) => getPeopleListItem(user));
 
     if (!this.quotaSettings.lastRecalculateDate && isInit) {
       await recalculateQuota();

@@ -262,6 +262,8 @@ const storageManagement = new StorageManagement(
   filesStore,
   peopleStore,
   authStore,
+  currentQuotaStore,
+  settingsStore,
 );
 
 const campaignsStore = new CampaignsStore(settingsStore, userStore);

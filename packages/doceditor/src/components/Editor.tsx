@@ -180,7 +180,7 @@ const Editor = ({
       newConfig.events.onRequestUsers = onSDKRequestUsers;
       newConfig.events.onRequestSendNotify = onSDKRequestSendNotify;
     }
-    if (!user.isVisitor) {
+    if (!user?.isVisitor) {
       newConfig.events.onRequestSaveAs = onSDKRequestSaveAs;
       if (
         IS_DESKTOP_EDITOR ||

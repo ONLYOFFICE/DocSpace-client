@@ -113,7 +113,7 @@ class SelectedFolderStore {
 
   canShare = false;
 
-  parentRoomType: Nullable<RoomsType> = null;
+  parentRoomType: Nullable<FolderType> = null;
 
   constructor(settingsStore: SettingsStore) {
     makeAutoObservable(this);

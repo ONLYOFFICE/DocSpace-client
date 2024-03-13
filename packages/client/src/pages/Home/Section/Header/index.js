@@ -1489,7 +1489,7 @@ export default inject(
     const isCustomRoomType = roomType === RoomsType.CustomRoom;
     const isFormRoomType =
       roomType === RoomsType.FormRoom ||
-      (parentRoomType === RoomsType.FormRoom && isFolder);
+      (parentRoomType === FolderType.FormRoom && isFolder);
 
     const {
       onClickEditRoom,

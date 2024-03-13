@@ -35,6 +35,7 @@ import {
   DeviceType,
   RoomsType,
   FilesSelectorFilterTypes,
+  FolderType,
 } from "@docspace/shared/enums";
 
 import styled, { css } from "styled-components";
@@ -535,7 +536,7 @@ const ArticleMainButtonContent = (props) => {
 
     if (
       currentRoomType === RoomsType.FormRoom ||
-      (parentRoomType === RoomsType.FormRoom && isFolder)
+      (parentRoomType === FolderType.FormRoom && isFolder)
     ) {
       const { formRoomActions, mobileFormRoomActions, mobileMoreActions } =
         createActionsForFormRoom({

@@ -185,6 +185,11 @@ export const enum FolderType {
   Templates = 12,
   Privacy = 13,
   Rooms = 14,
+  FormRoom = 15,
+  EditingRoom = 16,
+  ReviewRoom = 17,
+  ReadOnlyRoom = 18,
+  CustomRoom = 19,
   Archive = 20,
 
   Done = 25,

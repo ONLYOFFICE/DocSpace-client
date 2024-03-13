@@ -266,14 +266,22 @@ class SelectedFolderStore {
   ) => {
     const socketHelper = this.settingsStore?.socketHelper;
 
-    if (this.id !== null && socketHelper) {
+    if (
+      this.id !== null &&
+      socketHelper &&
+      !socketHelper.socketSubscribers.has(`DIR-${this.id}`)
+    ) {
       socketHelper.emit({
         command: "unsubscribe",
         data: { roomParts: `DIR-${this.id}`, individual: true },
       });
     }
 
-    if (selectedFolder && socketHelper) {
+    if (
+      selectedFolder &&
+      socketHelper &&
+      !socketHelper.socketSubscribers.has(`DIR-${this.id}`)
+    ) {
       socketHelper.emit({
         command: "subscribe",
         data: { roomParts: `DIR-${selectedFolder.id}`, individual: true },

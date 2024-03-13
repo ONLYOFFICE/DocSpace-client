@@ -561,7 +561,7 @@ const useEditorEvents = ({
     const tempEvents: IConfigEvents = {};
 
     setEvents(tempEvents);
-  }, [successAuth, user.isVisitor, config?.documentType, fileInfo]);
+  }, [successAuth, user?.isVisitor, config?.documentType, fileInfo]);
 
   React.useEffect(() => {
     if (

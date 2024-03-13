@@ -16,9 +16,9 @@ const useDeepLink = ({ settings, fileInfo, email }: UseDeepLinkProps) => {
   const [isShowDeepLink, setIsShowDeepLink] = React.useState(false);
 
   React.useEffect(() => {
-    const androidID = settings?.deepLink.androidPackageName;
-    const iOSId = settings?.deepLink.iosPackageId;
-    const deepLinkUrl = settings?.deepLink.url;
+    const androidID = settings?.deepLink?.androidPackageName;
+    const iOSId = settings?.deepLink?.iosPackageId;
+    const deepLinkUrl = settings?.deepLink?.url;
     const isAndroidWebView =
       window.navigator.userAgent.includes("AscAndroidWebView");
 

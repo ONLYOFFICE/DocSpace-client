@@ -613,6 +613,8 @@ export const getBaseTheme = () => {
       bgColor: "rgba(6, 22, 38, 0.16)",
       hoverBgColor: "rgba(6, 22, 38, 0.32)",
       pressBgColor: "rgba(6, 22, 38, 0.5)",
+      paddingInlineEnd: "17px !important",
+      paddingInlineEndMobile: "8px !important",
     },
 
     modalDialog: {

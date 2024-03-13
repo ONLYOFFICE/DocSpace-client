@@ -9,7 +9,7 @@ export interface EmptyViewContainerProps {
   security?: Nullable<TFolderSecurity | TRoomSecurity>;
 
   onClickInviteUsers?: (folderId: string | number, roomType: RoomsType) => void;
-  setSelectFileDialogVisible?: (visible: boolean) => void;
+  setSelectFileFormRoomDialogVisible?: TStore["dialogsStore"]["setSelectFileFormRoomDialogVisible"];
 }
 
 export type OptionActions = {

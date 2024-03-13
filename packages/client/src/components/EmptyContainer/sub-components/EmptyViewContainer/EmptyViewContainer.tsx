@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import React, { useMemo, useCallback } from "react";
 
-import { Events } from "@docspace/shared/enums";
+import { Events, FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { EmptyView } from "@docspace/shared/components/empty-view";
 
 import {
@@ -21,7 +21,7 @@ const EmptyViewContainer = observer(
     folderId,
     security,
     onClickInviteUsers,
-    setSelectFileDialogVisible,
+    setSelectFileFormRoomDialogVisible,
   }: EmptyViewContainerProps) => {
     const { t } = useTranslation();
     const theme = useTheme();
@@ -31,8 +31,8 @@ const EmptyViewContainer = observer(
     }, [onClickInviteUsers, folderId, type]);
 
     const createFormFromFile = useCallback(() => {
-      setSelectFileDialogVisible?.(true);
-    }, [setSelectFileDialogVisible]);
+      setSelectFileFormRoomDialogVisible?.(true, FilesSelectorFilterTypes.DOCX);
+    }, [setSelectFileFormRoomDialogVisible]);
 
     const onCreateDocumentForm = useCallback(() => {
       const event: Event & {
@@ -84,11 +84,11 @@ const injectedEmptyViewContainer = inject<TStore>(
   ({ contextOptionsStore, selectedFolderStore, dialogsStore }) => {
     const { onClickInviteUsers } = contextOptionsStore;
 
-    const { setSelectFileDialogVisible } = dialogsStore;
+    const { setSelectFileFormRoomDialogVisible } = dialogsStore;
 
     const { security } = selectedFolderStore;
 
-    return { onClickInviteUsers, security, setSelectFileDialogVisible };
+    return { onClickInviteUsers, security, setSelectFileFormRoomDialogVisible };
   },
 )(EmptyViewContainer);
 

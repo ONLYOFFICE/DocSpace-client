@@ -57,21 +57,6 @@ const ConvertPasswordDialogComponent = (props) => {
 
     if (hasError) return;
 
-    tab =
-      !isDesktop &&
-      window.DocSpaceConfig?.editor?.openOnNewPage &&
-      formCreationInfo.fileInfo.fileExst &&
-      formCreationInfo.open
-        ? window.open(
-            combineUrl(
-              window.DocSpaceConfig?.proxy?.url,
-              config.homepage,
-              "/doceditor",
-            ),
-            "_blank",
-          )
-        : null;
-
     setIsLoading(true);
   };
 
@@ -88,12 +73,8 @@ const ConvertPasswordDialogComponent = (props) => {
   };
 
   useEffect(() => {
-    const { newTitle, fileInfo, open, actionId } = formCreationInfo;
+    const { newTitle, fileInfo, open } = formCreationInfo;
     const { id, folderId } = fileInfo;
-
-    console.log(formCreationInfo);
-
-    console.log(folderId, +folderId);
 
     if (isLoading) {
       const searchParams = new URLSearchParams();
@@ -111,8 +92,6 @@ const ConvertPasswordDialogComponent = (props) => {
         config.homepage,
         `/doceditor/create?${searchParams.toString()}`,
       );
-
-      console.log(url);
 
       window.open(
         url,

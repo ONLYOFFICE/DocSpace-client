@@ -19,7 +19,7 @@ import Loader from "./sub-components/loaderAppearance";
 import { StyledComponent, StyledTheme } from "./Appearance/StyledApperance.js";
 import { ReactSVG } from "react-svg";
 import ModalDialogDelete from "./sub-components/modalDialogDelete";
-import hexToRgba from "hex-to-rgba";
+import hexRgb from "hex-rgb";
 import { isMobile } from "@docspace/shared/utils";
 import { DeviceType } from "@docspace/shared/enums";
 
@@ -65,10 +65,10 @@ const Appearance = (props) => {
     useState(false);
 
   const [appliedColorAccent, setAppliedColorAccent] = useState(
-    defaultAppliedColorAccent
+    defaultAppliedColorAccent,
   );
   const [appliedColorButtons, setAppliedColorButtons] = useState(
-    defaultAppliedColorButtons
+    defaultAppliedColorButtons,
   );
 
   const [changeCurrentColorAccent, setChangeCurrentColorAccent] =
@@ -84,14 +84,14 @@ const Appearance = (props) => {
   const [isAddThemeDialog, setIsAddThemeDialog] = useState(false);
 
   const [previewAccent, setPreviewAccent] = useState(
-    currentColorScheme.main?.accent
+    currentColorScheme.main?.accent,
   );
 
   const [colorCheckImg, setColorCheckImg] = useState(
-    currentColorScheme.text?.accent
+    currentColorScheme.text?.accent,
   );
   const [colorCheckImgHover, setColorCheckImgHover] = useState(
-    currentColorScheme.text?.accent
+    currentColorScheme.text?.accent,
   );
 
   const [selectThemeId, setSelectThemeId] = useState(selectedThemeId);
@@ -139,7 +139,7 @@ const Appearance = (props) => {
         ),
       },
     ],
-    [previewAccent, selectThemeId, colorCheckImg, tReady]
+    [previewAccent, selectThemeId, colorCheckImg, tReady],
   );
 
   const getSettings = () => {
@@ -276,7 +276,7 @@ const Appearance = (props) => {
 
       setColorCheckImg(colorCheckImg);
     },
-    [selectThemeId]
+    [selectThemeId],
   );
 
   const onColorCheckImgHover = useCallback(
@@ -289,7 +289,7 @@ const Appearance = (props) => {
 
       setColorCheckImgHover(colorCheckImg);
     },
-    [appearanceTheme]
+    [appearanceTheme],
   );
 
   const onCheckView = () => {
@@ -312,7 +312,7 @@ const Appearance = (props) => {
       saveToSessionStorage("selectColorId", id);
       saveToSessionStorage("selectColorAccent", accent);
     },
-    [appearanceTheme, setPreviewAccent, setSelectThemeId]
+    [appearanceTheme, setPreviewAccent, setSelectThemeId],
   );
 
   const onSave = useCallback(async () => {
@@ -362,7 +362,7 @@ const Appearance = (props) => {
       saveToSessionStorage("selectColorId", appearanceTheme[0].id);
       saveToSessionStorage(
         "selectColorAccent",
-        appearanceTheme[0].main?.accent
+        appearanceTheme[0].main?.accent,
       );
 
       onCloseDialogDelete();
@@ -441,14 +441,13 @@ const Appearance = (props) => {
     const black = "#333333";
     const white = "#FFFFFF";
 
-    const rgba = hexToRgba(color)
-      .replace("rgba(", "")
-      .replace(")", "")
-      .split(", ");
+    const rgba = hexRgb(color);
 
-    const r = rgba[0];
-    const g = rgba[1];
-    const b = rgba[2];
+    const r = rgba.red;
+    const g = rgba.green;
+    const b = rgba.blue;
+
+    console.log("r g b ", r, g, b);
 
     const textColor =
       (r * 299 + g * 587 + b * 114) / 1000 > 128 ? black : white;
@@ -471,7 +470,7 @@ const Appearance = (props) => {
       currentColorAccent,
       setChangeCurrentColorAccent,
       setOpenHexColorPickerAccent,
-    ]
+    ],
   );
 
   const onAppliedColorButtons = useCallback(
@@ -488,7 +487,7 @@ const Appearance = (props) => {
       currentColorButtons,
       setChangeCurrentColorButtons,
       setOpenHexColorPickerButtons,
-    ]
+    ],
   );
 
   const onSaveNewThemes = useCallback(
@@ -502,7 +501,7 @@ const Appearance = (props) => {
         toastr.error(error);
       }
     },
-    [getAppearanceTheme]
+    [getAppearanceTheme],
   );
 
   const onSaveChangedThemes = useCallback(
@@ -517,7 +516,7 @@ const Appearance = (props) => {
         toastr.error(error);
       }
     },
-    [getAppearanceTheme]
+    [getAppearanceTheme],
   );
 
   const onSaveColorSchemeDialog = () => {

@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
-import { headers } from "next/headers";
 
-import { createFile, fileCopyAs } from "@/utils/actions";
+import { createFile, fileCopyAs, getBaseUrl } from "@/utils/actions";
 
 type TSearchParams = {
   parentId: string;
@@ -16,18 +15,8 @@ type TSearchParams = {
   fromTemplate?: string;
 };
 
-const skip_port_forward = process.env.NODE_PORT_FORWARD === "false";
-
 async function Page({ searchParams }: { searchParams: TSearchParams }) {
-  const hdrs = headers();
-
-  const host = hdrs.get("x-forwarded-host");
-  const proto = hdrs.get("x-forwarded-proto");
-  const port = !skip_port_forward && hdrs.get("x-forwarded-port");
-
-  console.log({ host, proto, port, skip_port_forward });
-
-  const baseURL = `${proto}://${host}${port ? `:${port}` : ""}`;
+  const baseURL = getBaseUrl();
 
   if (!searchParams) redirect(baseURL);
 
@@ -127,4 +116,3 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
 }
 
 export default Page;
-

@@ -4,7 +4,7 @@ import { commonIconsStyles } from "@docspace/shared/utils";
 import { Base } from "@docspace/shared/themes";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import hexToRgba from "hex-to-rgba";
+import hexRgb from "hex-rgb";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 
 export const StyledSubmitToGalleryTile = styled.div`
@@ -20,7 +20,7 @@ export const StyledSubmitToGalleryTile = styled.div`
     ${({ currentColorScheme }) => currentColorScheme.main?.accent};
   border-radius: 6px;
   background-color: ${({ currentColorScheme }) =>
-    hexToRgba(currentColorScheme.main?.accent, 0.03)};
+    hexRgb(currentColorScheme.main?.accent, { alpha: 0.03, format: "css" })};
 
   display: flex;
   flex-direction: column;

@@ -41,6 +41,7 @@ const Article = ({
   children,
 
   withMainButton,
+  isInfoPanelVisible,
 
   hideProfileBlock,
   hideAppsBlock,
@@ -274,6 +275,7 @@ const Article = ({
               {!isMobile && isLiveChatAvailable && (
                 <ArticleLiveChat
                   currentColorScheme={currentColorScheme}
+                  isInfoPanelVisible={isInfoPanelVisible}
                   withMainButton={
                     (withMainButton || false) && !!articleMainButtonContent
                   }

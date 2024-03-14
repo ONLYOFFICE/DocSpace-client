@@ -6,10 +6,53 @@ import { getLtrLanguageForEditor } from "@docspace/shared/utils/common";
 import { TenantStatus } from "@docspace/shared/enums";
 
 import { TCatchError, TError, TResponse } from "@/types";
+import { error } from "console";
 
 const API_PREFIX = "api/2.0";
+const SKIP_PORT_FORWARD = process.env.NODE_PORT_FORWARD === "false";
 
-const skip_port_forward = process.env.NODE_PORT_FORWARD === "false";
+export const getBaseUrl = () => {
+  const hdrs = headers();
+
+  const host = hdrs.get("x-forwarded-host");
+  const proto = hdrs.get("x-forwarded-proto");
+  const port = !SKIP_PORT_FORWARD ? hdrs.get("x-forwarded-port") : "";
+
+  // const baseURL = `${proto}://${host}${port ? `:${port}` : ""}`;
+  const baseURL = `${proto}://${host}`;
+
+  return baseURL;
+};
+
+export const getAPIUrl = () => {
+  const baseUrl = getBaseUrl();
+  const baseAPIUrl = `${baseUrl}/${API_PREFIX}`;
+
+  return baseAPIUrl;
+};
+
+export const createRequest = (
+  paths: string[],
+  newHeaders: [string, string][],
+  method: string,
+  body?: string,
+) => {
+  const hdrs = new Headers(headers());
+
+  const apiURL = getAPIUrl();
+
+  newHeaders.forEach((hdr) => {
+    if (hdr[0]) hdrs.set(hdr[0], hdr[1]);
+  });
+
+  const urls = paths.map((path) => `${apiURL}${path}`);
+
+  const requests = urls.map(
+    (url) => new Request(url, { headers: hdrs, method, body }),
+  );
+
+  return requests;
+};
 
 export async function fileCopyAs(
   fileId: string,
@@ -19,40 +62,47 @@ export async function fileCopyAs(
   password?: string,
 ) {
   try {
-    const hdrs = headers();
-
-    const host = hdrs.get("x-forwarded-host");
-    const proto = hdrs.get("x-forwarded-proto");
-    const cookie = hdrs.get("cookie");
-    const port = !skip_port_forward && hdrs.get("x-forwarded-port");
-
-    const baseURL = `${proto}://${host}${port ? `:${port}` : ""}`;
-    const baseAPIUrl = `${baseURL}/${API_PREFIX}`;
-
-    const createFileUrl = new URL(`${baseAPIUrl}/files/file/${fileId}/copyas`);
-
-    const createFile = new Request(createFileUrl, {
-      headers: {
-        cookie: cookie ?? "",
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      method: "POST",
-      body: JSON.stringify({
+    const [createFile] = createRequest(
+      [`/files/file/${fileId}/copyas`],
+      [["Content-Type", "application/json;charset=utf-8"]],
+      "POST",
+      JSON.stringify({
         destTitle,
         destFolderId: +destFolderId,
         enableExternalExt,
         password,
       }),
-    });
+    );
 
     const file = await (await fetch(createFile)).json();
 
+    console.log("File copyas success ", file);
+
     return {
       file: file.response,
-      error: { ...file.error },
+      error: file.error
+        ? typeof file.error === "string"
+          ? error
+          : {
+              message: file.error?.message,
+              status: file.error?.statusCode,
+              type: file.error?.type,
+            }
+        : undefined,
     };
-  } catch (e) {
-    return { file: undefined, error: e as object | string };
+  } catch (e: any) {
+    console.log("File copyas error ", e);
+    return {
+      file: undefined,
+      error:
+        typeof e === "string"
+          ? e
+          : {
+              message: e.message,
+              status: e.statusCode,
+              type: e.type,
+            },
+    };
   }
 }
 
@@ -63,35 +113,40 @@ export async function createFile(
   formId?: string,
 ) {
   try {
-    const hdrs = headers();
-
-    const host = hdrs.get("x-forwarded-host");
-    const proto = hdrs.get("x-forwarded-proto");
-    const cookie = hdrs.get("cookie");
-    const port = !skip_port_forward && hdrs.get("x-forwarded-port");
-
-    const baseURL = `${proto}://${host}${port ? `:${port}` : ""}`;
-    const baseAPIUrl = `${baseURL}/${API_PREFIX}`;
-
-    const createFileUrl = new URL(`${baseAPIUrl}/files/${parentId}/file`);
-
-    const createFile = new Request(createFileUrl, {
-      headers: {
-        cookie: cookie ?? "",
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      method: "POST",
-      body: JSON.stringify({ title, templateId, formId }),
-    });
+    const [createFile] = createRequest(
+      [`/files/${parentId}/file`],
+      [["Content-Type", "application/json;charset=utf-8"]],
+      "POST",
+      JSON.stringify({ title, templateId, formId }),
+    );
 
     const file = await (await fetch(createFile)).json();
-
+    console.log("File create success ", file);
     return {
       file: file.response,
-      error: { ...file.error },
+      error: file.error
+        ? typeof file.error === "string"
+          ? error
+          : {
+              message: file.error?.message,
+              status: file.error?.statusCode,
+              type: file.error?.type,
+            }
+        : undefined,
     };
-  } catch (e) {
-    return { file: undefined, error: e as object | string };
+  } catch (e: any) {
+    console.log("File create error ", e);
+    return {
+      file: undefined,
+      error:
+        typeof e === "string"
+          ? e
+          : {
+              message: e.message,
+              status: e.statusCode,
+              type: e.type,
+            },
+    };
   }
 }
 
@@ -106,56 +161,36 @@ export async function getData(
   try {
     const hdrs = headers();
 
-    const host = hdrs.get("x-forwarded-host");
-    const proto = hdrs.get("x-forwarded-proto");
     const cookie = hdrs.get("cookie");
-    const port = !skip_port_forward && hdrs.get("x-forwarded-port");
 
-    const baseURL = `${proto}://${host}${port ? `:${port}` : ""}`;
-    const baseAPIUrl = `${baseURL}/${API_PREFIX}`;
+    const searchParams = new URLSearchParams();
+    const editorSearchParams = new URLSearchParams();
 
-    const configURL = new URL(`${baseAPIUrl}/files/file/${fileId}/openedit`);
-    const editorURL = new URL(`${baseAPIUrl}/files/docservice`);
-    const userURL = new URL(`${baseAPIUrl}/people/@self`);
-    const settingsURL = new URL(
-      `${baseAPIUrl}/settings?withPassword=${cookie?.includes("asc_auth_key") ? "false" : "true"}`,
-    );
-
-    if (view) configURL.searchParams.append("view", view ? "true" : "false");
+    if (view) searchParams.append("view", view ? "true" : "false");
     if (version) {
-      configURL.searchParams.append("version", version);
-      editorURL.searchParams.append("version", version);
+      searchParams.append("version", version);
+      editorSearchParams.append("version", version);
     }
-    if (doc) configURL.searchParams.append("doc", doc);
-    if (share) configURL.searchParams.append("share", share);
-    if (editorType) configURL.searchParams.append("editorType", editorType);
+    if (doc) searchParams.append("doc", doc);
+    if (share) searchParams.append("share", share);
+    if (editorType) searchParams.append("editorType", editorType);
 
-    const headersList: HeadersInit = [];
-
-    hdrs.forEach((value, key) => headersList.push([key, value]));
-
-    if (share) headersList.push(["Request-Token", share]);
-
-    const getConfig = new Request(configURL, {
-      headers: headersList,
-    });
-    const getEditorUrl = new Request(editorURL, {
-      headers: headersList,
-    });
-
-    const getSettings = new Request(settingsURL, {
-      headers: headersList,
-    });
+    const [getConfig, getEditorUrl, getSettings, getUser] = createRequest(
+      [
+        `/files/file/${fileId}/openedit?${searchParams.toString()}`,
+        `/files/docservice?${editorSearchParams.toString()}`,
+        `/settings?withPassword=${cookie?.includes("asc_auth_key") ? "false" : "true"}`,
+        `/people/@self`,
+      ],
+      [share ? ["Request-Token", share] : ["", ""]],
+      "GET",
+    );
 
     const resActions = [];
 
     resActions.push(fetch(getConfig));
     resActions.push(fetch(getEditorUrl));
     resActions.push(fetch(getSettings));
-    const getUser = new Request(userURL, {
-      headers: headersList,
-    });
-
     resActions.push(fetch(getUser));
 
     const [configRes, editorUrlRes, settingsRes, userRes] =
@@ -239,4 +274,3 @@ export async function getData(
     return { error };
   }
 }
-

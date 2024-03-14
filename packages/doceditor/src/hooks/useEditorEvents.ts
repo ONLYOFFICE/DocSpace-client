@@ -165,7 +165,11 @@ const useEditorEvents = ({
         backUrl = `/rooms/shared/${fileInfo.folderId}/filter?folder=${fileInfo.folderId}`;
       }
     } else {
-      backUrl = `/rooms/personal/filter?folder=${fileInfo.folderId}`;
+      if (fileInfo.rootFolderType === FolderType.SHARE) {
+        backUrl = `/rooms/personal/filter?folder=recent`;
+      } else {
+        backUrl = `/rooms/personal/filter?folder=${fileInfo.folderId}`;
+      }
     }
 
     const url = window.location.href;

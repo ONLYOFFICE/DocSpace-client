@@ -1508,38 +1508,32 @@ const SectionFilterContent = ({
           ]
         : "";
 
-    const images = !isRecentTab
-      ? [
-          {
-            id: "filter_type-images",
-            key: FilterType.ImagesOnly.toString(),
-            group: FilterGroups.filterType,
-            label: t("Images").toLowerCase(),
-          },
-        ]
-      : "";
+    const images = [
+      {
+        id: "filter_type-images",
+        key: FilterType.ImagesOnly.toString(),
+        group: FilterGroups.filterType,
+        label: t("Images").toLowerCase(),
+      },
+    ];
 
-    const archives = !isRecentTab
-      ? [
-          {
-            id: "filter_type-archive",
-            key: FilterType.ArchiveOnly.toString(),
-            group: FilterGroups.filterType,
-            label: t("Archives").toLowerCase(),
-          },
-        ]
-      : "";
+    const archives = [
+      {
+        id: "filter_type-archive",
+        key: FilterType.ArchiveOnly.toString(),
+        group: FilterGroups.filterType,
+        label: t("Archives").toLowerCase(),
+      },
+    ];
 
-    const media = !isRecentTab
-      ? [
-          {
-            id: "filter_type-media",
-            key: FilterType.MediaOnly.toString(),
-            group: FilterGroups.filterType,
-            label: t("Media").toLowerCase(),
-          },
-        ]
-      : "";
+    const media = [
+      {
+        id: "filter_type-media",
+        key: FilterType.MediaOnly.toString(),
+        group: FilterGroups.filterType,
+        label: t("Media").toLowerCase(),
+      },
+    ];
 
     const typeOptions = isRooms
       ? [

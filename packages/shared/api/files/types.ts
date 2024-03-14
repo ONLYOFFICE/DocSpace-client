@@ -280,14 +280,14 @@ export type TEditHistoryUser = {
 };
 
 export type TEditHistoryChanges = {
-  created: Date;
+  created: string;
   user: TEditHistoryUser;
 };
 
 export type TEditHistory = {
   changes: TEditHistoryChanges[];
   changesHistory: string;
-  created: Date;
+  created: string;
   id: number;
   key: string;
   serverVersion?: string;

@@ -87,7 +87,7 @@ export interface ContextMenuProps {
   ) => void;
   /** Specifies a callback function that is invoked when a popup menu is hidden */
   onHide?: (
-    e:
+    e?:
       | React.MouseEvent
       | MouseEvent
       | Event

@@ -32,6 +32,7 @@
   "CopyLinkPassword": "Copy link password",
   "CopyPassword": "Copy password",
   "CopySharedLink": "Copy shared link",
+  "CreateNewFolderInStorage": "Create a new folder in the storage",
   "CreateNewLink": "Create new link",
   "CreateRoom": "Create room",
   "CustomRooms": "Custom",
@@ -45,7 +46,6 @@
   "DisableNotifications": "Disable notifications",
   "Document": "Document",
   "DocumentEdited": "Cannot perform the action because the document is being edited.",
-  "DownloadAll": "Download all",
   "EditAdditionalLink": "Edit additional link",
   "EditLink": "Edit link",
   "EditRoom": "Edit room",
@@ -136,7 +136,6 @@
   "PrivateRoomHeader": "Welcome to ONLYOFFICE private room where every symbol you type is encrypted",
   "PrivateRoomSupport": "Work in Private Room is available via {{organizationName}} desktop app. <3>Instructions</3>",
   "PublicRoom": "Public room",
-  "RecentEmptyContainerDescription": "Your last viewed or edited docs will be displayed in this section.",
   "RecentlyAccessible": "Recently accessible via link",
   "RecentViaLinkEmptyContainerDescription": "Here you will find a list of the recently opened files shared with you via an external link.",
   "RecycleBinAction": "Empty trash",
@@ -187,6 +186,5 @@
   "WantToRestoreTheRoom": "All shared links in this room will become active, and its contents will be available to everyone with the link. Do you want to restore the room?",
   "WantToRestoreTheRooms": "All shared links in restored rooms will become active, and their contents will be available to everyone with the room links. Do you want to restore the rooms?",
   "WithSubfolders": "With subfolders",
-  "YouLeftTheRoom": "You have left the room",
-  "CreateNewFolderInStorage": "Create a new folder in the storage"
+  "YouLeftTheRoom": "You have left the room"
 }

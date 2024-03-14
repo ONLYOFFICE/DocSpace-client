@@ -4,7 +4,6 @@
   "Ascending": "Vzostupne",
   "Code": "Kód na vloženie",
   "CopyWindowCode": "Kopírovať kód na vloženie okna",
-  "CreateSampleHeader": "Vytvoriť vzor vloženia DocSpace",
   "CSPDescription": "Pokiaľ chcete bezpečne umiestniť DocSpace na webovú stránku ako iframe, pridajte jeho URL do zoznamu povolených adries.",
   "CSPHeader": "Vložiť DocSpace ako iframe",
   "CSPHelp": "Toto nastavenie je bezpečnostný mechanizmus, ktorý sa môže použiť na ochranu pred útokmi formou vstrekovania obsahu. CSP popisuje bezpečné zdroje na sťahovanie obsahu. Sťahovanie zo zdrojov, ktoré nie sú na zozname povolených, je zablokované. Zadajte domény (spolu s protokolom), s ktorými bude pracovať.",
@@ -33,6 +32,5 @@
   "SDKDescription": "Pomocou JavaScript SDK môžete vložiť miestnosť alebo priečinok z ONLYOFFICE DocSpace do svojho webového rozhrania ako iframe. Tu nájdete nastavenia na vytvorenie vzoru iframe a konfiguráciu CSP. Ak chcete používať kompletnú sadu SDK, pozrite si",
   "SearchFilterAndSort": "Hľadať, filtrovať a triediť",
   "SearchTerm": "Hľadať termín",
-  "SortOrder": "Zoradiť objednávku",
-  "Title": "Navigovať a Pomenovať"
+  "SortOrder": "Zoradiť objednávku"
 }

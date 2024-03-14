@@ -57,10 +57,10 @@ const PureConnectDialogContainer = (props) => {
 
   const isAccount = !!link;
   const showUrlField =
-    provider_key === "WebDav" ||
     provider_key === "SharePoint" ||
-    key === "WebDav" ||
-    key === "SharePoint";
+    key === "SharePoint" ||
+    (!isConnectDialogReconnect &&
+      (provider_key === "WebDav" || key === "WebDav"));
 
   const header = isConnectDialogReconnect
     ? t("Common:ReconnectStorage")
@@ -141,7 +141,7 @@ const PureConnectDialogContainer = (props) => {
         false,
         customerTitle,
         provider_key,
-        provider_id
+        provider_id,
       )
         .then(() => {
           onClose();
@@ -167,7 +167,7 @@ const PureConnectDialogContainer = (props) => {
       customerTitle,
       provider_key || key,
       provider_id,
-      roomCreation
+      roomCreation,
     )
       .then(async (res) => {
         setSaveThirdpartyResponse(res);
@@ -204,13 +204,13 @@ const PureConnectDialogContainer = (props) => {
     let authModal = window.open(
       "",
       t("Common:Authorization"),
-      "height=600, width=1020"
+      "height=600, width=1020",
     );
     openConnectWindow(provider_key, authModal).then((modal) =>
       getOAuthToken(modal).then((token) => {
         authModal.close();
         setToken(token);
-      })
+      }),
     );
   };
 
@@ -218,7 +218,7 @@ const PureConnectDialogContainer = (props) => {
     (e) => {
       if (e.keyCode === 13) onSave();
     },
-    [onSave]
+    [onSave],
   );
 
   useEffect(() => {
@@ -436,5 +436,5 @@ export default inject(
       setSaveAfterReconnectOAuth,
       setIsConnectDialogReconnect,
     };
-  }
+  },
 )(observer(ConnectDialog));

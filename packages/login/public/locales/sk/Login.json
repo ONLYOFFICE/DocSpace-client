@@ -20,7 +20,5 @@
   "RegisterTitle": "Požiadavka registrácie",
   "RegistrationEmailWatermark": "E-mail",
   "RememberHelper": "Predvolená doba trvania relácie je 20 minút. Začiarknutím tejto možnosti ju nastavíte na 1 rok. Ak chcete nastaviť vlastnú hodnotu, prejdite do časti Nastavenia.",
-  "ResendCode": "Poslať kód ešte raz",
-  "SignInWithCode": "Prihláste sa pomocou tajného kódu",
-  "SignInWithPassword": "Prihlásiť sa pomocou hesla"
+  "ResendCode": "Poslať kód ešte raz"
 }

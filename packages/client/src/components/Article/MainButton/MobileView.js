@@ -63,6 +63,7 @@ const MobileView = ({
   onMainButtonClick,
   isRoomsFolder,
   mainButtonMobileVisible,
+  uploaded,
 }) => {
   const [isOpenButton, setIsOpenButton] = React.useState(false);
   const [percentProgress, setPercentProgress] = React.useState(0);
@@ -125,7 +126,9 @@ const MobileView = ({
         icon: CrossSidebarReactSvgUrl,
         percent: primaryProgressDataPercent,
         status:
-          primaryProgressDataPercent === 100 && !primaryProgressDataErrors
+          primaryProgressDataPercent === 100 &&
+          !primaryProgressDataErrors &&
+          uploaded
             ? t("FilesUploaded")
             : `${uploadedFileCount}/${fileLength}`,
         onClick: showUploadPanel,
@@ -161,6 +164,7 @@ const MobileView = ({
     setPercentProgress(newPercentProgress);
     setProgressOptions([...newProgressOptions]);
   }, [
+    uploaded,
     files.length,
     showUploadPanel,
     clearUploadPanel,
@@ -207,6 +211,7 @@ export default inject(({ uploadDataStore, treeFoldersStore }) => {
     secondaryProgressDataStore,
     primaryProgressDataStore,
     clearUploadData,
+    uploaded,
   } = uploadDataStore;
 
   const {
@@ -244,5 +249,6 @@ export default inject(({ uploadDataStore, treeFoldersStore }) => {
     secondaryProgressDataStoreCurrentFilesCount,
     clearSecondaryProgressData,
     isRoomsFolder,
+    uploaded,
   };
 })(observer(MobileView));

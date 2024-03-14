@@ -1,13 +1,9 @@
 {
-  "AddGroupsForSharingButton": "Groepen toevoegen",
-  "AddShareMessage": "Bericht toevoegen",
   "CopyExternalLink": "Kopieer externe link",
   "EncryptedFileSharing": "Bestand <strong>{{title}}</strong> met succes gedeeld",
   "ExternalLink": "Externe link",
   "FormFilling": "Formulieren invullen",
-  "InternalLink": "Interne link",
   "LinkName": "Link naam",
-  "Notify users": "Gebruikers informeren",
   "ShareEmailBody": "U heeft toegang gekregen tot het {{itemName}} document. Klik op de onderstaande link om het document nu meteen te openen: {{shareLink}}.",
   "ShareEmailSubject": "U heeft toegang gekregen tot het {{itemName}} document",
   "SharingSettingsTitle": "Instellingen voor delen"

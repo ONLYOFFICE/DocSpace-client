@@ -270,7 +270,7 @@ const ClientRoutes = [
             path: "accounts/groups/:groupId",
             element: (
               <PrivateRoute restricted withManager>
-                <Navigate to="/accounts/groups/:groupId/filter" replace />
+                <Navigate to="filter" replace />
               </PrivateRoute>
             ),
           },

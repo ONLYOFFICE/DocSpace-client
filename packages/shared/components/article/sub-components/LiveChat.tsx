@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
@@ -26,21 +26,30 @@ const ArticleLiveChat = ({
   isMobileArticle,
   zendeskKey,
   showProgress,
+  isShowLiveChat,
+  isInfoPanelVisible,
 }: ArticleZendeskProps) => {
   const { t, ready } = useTranslation("Common");
   const { interfaceDirection } = useTheme();
+  const infoPanelOffset = isInfoPanelVisible ? 400 : 0;
+
   useEffect(() => {
     // console.log("Zendesk useEffect", { withMainButton, isMobileArticle });
     zendeskAPI.addChanges("webWidget", "updateSettings", {
       offset:
         withMainButton && isMobileArticle
-          ? { horizontal: "68px", vertical: "11px" }
+          ? {
+              horizontal: "68px",
+              vertical: "11px",
+            }
           : {
-              horizontal: showProgress ? "90px" : "4px",
+              horizontal: showProgress
+                ? `${`${infoPanelOffset + 90}px`}`
+                : `${`${infoPanelOffset + 4}px`}`,
               vertical: "11px",
             },
     });
-  }, [withMainButton, isMobileArticle, showProgress]);
+  }, [withMainButton, isMobileArticle, showProgress, isInfoPanelVisible]);
 
   useEffect(() => {
     // console.log("Zendesk useEffect", { languageBaseName });
@@ -88,12 +97,12 @@ const ArticleLiveChat = ({
     });
   }, [interfaceDirection]);
 
-  const onZendeskLoaded = () => {
-    const isShowLiveChat =
+  const onZendeskLoaded = useCallback(() => {
+    const isShowChat =
       localStorage.getItem(LIVE_CHAT_LOCAL_STORAGE_KEY) === "true" || false;
 
-    zendeskAPI.addChanges("webWidget", isShowLiveChat ? "show" : "hide");
-  };
+    zendeskAPI.addChanges("webWidget", isShowChat ? "show" : "hide");
+  }, []);
 
   return zendeskKey ? (
     <Zendesk
@@ -101,6 +110,7 @@ const ArticleLiveChat = ({
       zendeskKey={zendeskKey}
       onLoaded={onZendeskLoaded}
       config={baseConfig}
+      isShowLiveChat={isShowLiveChat}
     />
   ) : null;
 };

@@ -154,6 +154,7 @@ const SectionHeaderContent = (props) => {
   const {
     currentFolderId,
     currentGroup,
+    insideGroupTempTitle,
     getGroupContextOptions,
     setSelectFileDialogVisible,
     t,
@@ -857,7 +858,7 @@ const SectionHeaderContent = (props) => {
     }
 
     if (isInsideGroup) {
-      return getGroupContextOptions(t, currentGroup);
+      return getGroupContextOptions(t, currentGroup, false, true);
     }
 
     return [
@@ -1232,11 +1233,17 @@ const SectionHeaderContent = (props) => {
       ? stateIsRoot
       : isRootFolder || isAccountsPage || isSettingsPage;
 
+  const getInsideGroupTitle = () => {
+    return isLoading || !currentGroup?.name
+      ? insideGroupTempTitle
+      : currentGroup?.name;
+  };
+
   const currentTitle = isSettingsPage
     ? t("Common:Settings")
     : isAccountsPage
-      ? isInsideGroup && currentGroup
-        ? currentGroup.name
+      ? isInsideGroup
+        ? getInsideGroupTitle()
         : t("Common:Accounts")
       : isLoading && stateTitle
         ? stateTitle
@@ -1491,6 +1498,7 @@ export default inject(
       currentGroup,
       getGroupContextOptions,
       setSelected: setGroupsSelected,
+      insideGroupTempTitle,
     } = peopleStore.groupsStore;
 
     const {
@@ -1700,6 +1708,7 @@ export default inject(
       currentDeviceType,
       setLeaveRoomDialogVisible,
       inRoom,
+      insideGroupTempTitle,
       currentGroup,
       getGroupContextOptions,
       onCreateAndCopySharedLink,

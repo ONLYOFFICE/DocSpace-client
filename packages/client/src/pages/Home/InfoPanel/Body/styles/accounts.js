@@ -33,14 +33,6 @@ const StyledAccountsItemTitle = styled.div`
 
   @media ${mobile} {
     width: calc(100vw - 32px);
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding: 24px 16px 24px 0;
-          `
-        : css`
-            padding: 24px 0 24px 16px;
-          `}
   }
 
   .avatar {

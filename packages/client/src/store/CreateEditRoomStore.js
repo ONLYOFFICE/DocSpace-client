@@ -92,12 +92,16 @@ class CreateEditRoomStore {
 
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
 
+    const isThirdparty = roomParams.storageLocation.isThirdparty;
+    const quotaLimit =
+      isDefaultRoomsQuotaSet && !isThirdparty ? roomParams.quota : null;
+
     const createRoomData = {
       roomType: roomParams.type,
       title: roomParams.title || t("Files:NewRoom"),
-      createAsNewFolder: roomParams.createAsNewFolder ?? false,
-      ...(isDefaultRoomsQuotaSet && {
-        quota: roomParams.quota || -2,
+      createAsNewFolder: roomParams.createAsNewFolder ?? true,
+      ...(quotaLimit && {
+        quota: +quotaLimit,
       }),
     };
 
@@ -106,7 +110,6 @@ class CreateEditRoomStore {
       .map((t) => t.name);
     const addTagsData = roomParams.tags.map((tag) => tag.name);
 
-    const isThirdparty = roomParams.storageLocation.isThirdparty;
     const storageFolderId = roomParams.storageLocation.storageFolderId;
     const thirdpartyAccount = roomParams.storageLocation.thirdpartyAccount;
 
@@ -125,13 +128,16 @@ class CreateEditRoomStore {
 
       room.isLogoLoading = true;
 
+      const actions = [];
+
       // delete thirdparty account if not needed
       if (!isThirdparty && storageFolderId)
         await deleteThirdParty(thirdpartyAccount.providerId);
 
       // create new tags
-      for (let i = 0; i < createTagsData.length; i++)
-        await createTag(createTagsData[i]);
+      for (let i = 0; i < createTagsData.length; i++) {
+        actions.push(createTag(createTagsData[i]));
+      }
 
       // add new tags to room
       if (!!addTagsData.length)

@@ -20,7 +20,7 @@ import { Base } from "@docspace/shared/themes";
 import { ROOMS_TYPE_TRANSLATIONS } from "@docspace/shared/constants";
 
 import { getFileTypeName } from "../../../../../helpers/filesUtils";
-import { SortByFieldName } from "SRC_DIR/helpers/enums";
+import { SortByFieldName } from "SRC_DIR/helpers/constants";
 import { getSpaceQuotaAsText } from "@docspace/shared/utils/common";
 
 const SimpleFilesRowContent = styled(RowContent)`
@@ -249,7 +249,7 @@ const FilesRowContent = ({
         t,
         usedSpace,
         quotaLimit,
-        isDefaultRoomsQuotaSet
+        isDefaultRoomsQuotaSet,
       );
 
       if (!isMobile()) value = `${value} | ${spaceQuota}`;
@@ -259,7 +259,7 @@ const FilesRowContent = ({
 
     if (!fileExst && !contentLength && !providerKey && !isMobile())
       return `${foldersCount} ${t("Translations:Folders")} | ${filesCount} ${t(
-        "Translations:Files"
+        "Translations:Files",
       )}`;
 
     if (fileExst) return `${fileExst.toUpperCase().replace(/^\./, "")}`;
@@ -323,28 +323,30 @@ const FilesRowContent = ({
   );
 };
 
-export default inject(({ currentQuotaStore, settingsStore, treeFoldersStore, filesStore }) => {
-  const { filter, roomsFilter } = filesStore;
-  const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
-    treeFoldersStore;
+export default inject(
+  ({ currentQuotaStore, settingsStore, treeFoldersStore, filesStore }) => {
+    const { filter, roomsFilter } = filesStore;
+    const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
+      treeFoldersStore;
 
-  const isRooms = isRoomsFolder || isArchiveFolder;
-  const filterSortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
+    const isRooms = isRoomsFolder || isArchiveFolder;
+    const filterSortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
 
-  const { isDefaultRoomsQuotaSet, isStatisticsAvailable, showStorageInfo } =
-    currentQuotaStore;
-  return {
-    filterSortBy,
-    theme: settingsStore.theme,
-    isTrashFolder: isRecycleBinFolder,
-    isDefaultRoomsQuotaSet,
-    isStatisticsAvailable,
-    showStorageInfo,
-  };
-})(
+    const { isDefaultRoomsQuotaSet, isStatisticsAvailable, showStorageInfo } =
+      currentQuotaStore;
+    return {
+      filterSortBy,
+      theme: settingsStore.theme,
+      isTrashFolder: isRecycleBinFolder,
+      isDefaultRoomsQuotaSet,
+      isStatisticsAvailable,
+      showStorageInfo,
+    };
+  },
+)(
   observer(
     withTranslation(["Files", "Translations", "Notifications"])(
-      withContent(FilesRowContent)
-    )
-  )
+      withContent(FilesRowContent),
+    ),
+  ),
 );

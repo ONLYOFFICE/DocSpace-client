@@ -466,6 +466,7 @@ const InviteInput = ({
             value={inputValue}
             isAutoFocussed={true}
             onKeyDown={onKeyDown}
+            type="search"
           />
         </StyledInviteInput>
         {isAddEmailPanelBlocked ? (

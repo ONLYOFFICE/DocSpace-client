@@ -41,6 +41,7 @@ const Article = ({
   children,
 
   withMainButton,
+  isInfoPanelVisible,
 
   hideProfileBlock,
   hideAppsBlock,
@@ -52,6 +53,7 @@ const Article = ({
   isBannerVisible,
 
   isLiveChatAvailable,
+  isShowLiveChat,
 
   onLogoClickAction,
 
@@ -273,6 +275,7 @@ const Article = ({
               {!isMobile && isLiveChatAvailable && (
                 <ArticleLiveChat
                   currentColorScheme={currentColorScheme}
+                  isInfoPanelVisible={isInfoPanelVisible}
                   withMainButton={
                     (withMainButton || false) && !!articleMainButtonContent
                   }
@@ -282,6 +285,7 @@ const Article = ({
                   displayName={chatDisplayName}
                   zendeskKey={zendeskKey}
                   showProgress={showProgress}
+                  isShowLiveChat={isShowLiveChat}
                 />
               )}
             </>

@@ -90,11 +90,11 @@ const Editor = ({
   newConfig.editorConfig = { ...config.editorConfig };
 
   const search = typeof window !== "undefined" ? window.location.search : "";
-  const type = new URLSearchParams(search).get("type");
+  const editorType = new URLSearchParams(search).get("editorType");
 
   //if (view && newConfig.editorConfig) newConfig.editorConfig.mode = "view";
 
-  if (type) config.type = type;
+  if (editorType) config.type = editorType;
 
   if (isMobile) config.type = "mobile";
 
@@ -125,7 +125,7 @@ const Editor = ({
           typeof window !== "undefined"
             ? window.DocSpaceConfig?.editor?.openOnNewPage ?? true
             : false;
-        goBack.url = getBackUrl(fileInfo.rootFolderId, fileInfo.folderId);
+        goBack.url = getBackUrl(fileInfo.rootFolderType, fileInfo.folderId);
       }
     }
   }
@@ -180,7 +180,7 @@ const Editor = ({
       newConfig.events.onRequestUsers = onSDKRequestUsers;
       newConfig.events.onRequestSendNotify = onSDKRequestSendNotify;
     }
-    if (!user.isVisitor) {
+    if (!user?.isVisitor) {
       newConfig.events.onRequestSaveAs = onSDKRequestSaveAs;
       if (
         IS_DESKTOP_EDITOR ||

@@ -1,4 +1,5 @@
 import React from "react";
+import { matchPath } from "react-router";
 
 import AccountsFilter from "@docspace/shared/api/people/filter";
 
@@ -13,8 +14,13 @@ const useInsideGroup = ({
   fetchGroup,
   setPortalTariff,
 }) => {
+  const isInsideGroup = matchPath(
+    "/accounts/groups/:groupId/filter",
+    location.pathname,
+  );
+
   React.useEffect(() => {
-    if (!groupId) return;
+    if (!isInsideGroup || !groupId) return;
     setIsLoading(true);
 
     const newFilter = AccountsFilter.getFilter(location);

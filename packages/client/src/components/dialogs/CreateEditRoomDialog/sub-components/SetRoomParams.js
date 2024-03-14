@@ -64,7 +64,7 @@ const SetRoomParams = ({
 }) => {
   const [previewIcon, setPreviewIcon] = useState(null);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
-    useState(false);
+    useState(true);
 
   const onChangeName = (e) => {
     setIsValidTitle(true);
@@ -162,6 +162,15 @@ const SetRoomParams = ({
         />
       )}
 
+      {isDefaultRoomsQuotaSet && !roomParams.storageLocation.providerKey && (
+        <RoomQuota
+          setRoomParams={setRoomParams}
+          roomParams={roomParams}
+          isEdit={isEdit}
+          isLoading={isDisabled}
+        />
+      )}
+
       {!isEdit && enableThirdParty && (
         <ThirdPartyStorage
           t={t}
@@ -174,15 +183,6 @@ const SetRoomParams = ({
           isDisabled={isDisabled}
           createNewFolderIsChecked={createNewFolderIsChecked}
           onCreateFolderChange={onCreateFolderChange}
-        />
-      )}
-
-      {isDefaultRoomsQuotaSet && (
-        <RoomQuota
-          setRoomParams={setRoomParams}
-          roomParams={roomParams}
-          isEdit={isEdit}
-          isDisabled={isDisabled}
         />
       )}
 

@@ -585,6 +585,8 @@ const Dark: TTheme = {
     bgColor: "rgba(20, 20, 20, 0.4)",
     hoverBgColor: "rgba(20, 20, 20, 0.64)",
     pressBgColor: "rgba(20, 20, 20, 0.8)",
+    paddingInlineEnd: "17px !important",
+    paddingInlineEndMobile: "8px !important",
   },
 
   modalDialog: {

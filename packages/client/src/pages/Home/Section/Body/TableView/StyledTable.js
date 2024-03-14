@@ -121,6 +121,7 @@ const StyledTableRow = styled(TableRow)`
     cursor: ${(props) =>
       !props.isThirdPartyFolder &&
       (props.checked || props.isActive) &&
+      props.canDrag &&
       `url(${CursorPalmSvgUrl}), auto !important`};
 
     ${(props) =>
@@ -250,7 +251,7 @@ const StyledTableRow = styled(TableRow)`
   }
 
   .item-file-name {
-    padding: 12px 0;
+    padding: 14px 8px 14px 0px;
   }
 
   ${(props) =>
@@ -302,15 +303,6 @@ const StyledDragAndDrop = styled(DragAndDrop)`
 `;
 
 const StyledBadgesContainer = styled.div`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: 8px;
-        `
-      : css`
-          margin-left: 8px;
-        `}
-
   display: flex;
   align-items: center;
 

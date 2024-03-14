@@ -90,6 +90,7 @@ const StyledDownloadContent = styled.div`
 
     .download-dialog-actions {
       .download-dialog-link {
+        width: max-content;
         a {
           ${({ theme }) =>
             theme.interfaceDirection === "rtl"

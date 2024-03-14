@@ -165,7 +165,11 @@ const useEditorEvents = ({
         backUrl = `/rooms/shared/${fileInfo.folderId}/filter?folder=${fileInfo.folderId}`;
       }
     } else {
-      backUrl = `/rooms/personal/filter?folder=${fileInfo.folderId}`;
+      if (fileInfo.rootFolderType === FolderType.SHARE) {
+        backUrl = `/rooms/personal/filter?folder=recent`;
+      } else {
+        backUrl = `/rooms/personal/filter?folder=${fileInfo.folderId}`;
+      }
     }
 
     const url = window.location.href;
@@ -253,8 +257,16 @@ const useEditorEvents = ({
         const version = fileHistory[i].version;
         const versionGroup = fileHistory[i].versionGroup;
 
+        const changesModified = [...changes];
+
+        changesModified.forEach((item) => {
+          item.created = `${new Date(item.created).toLocaleString(
+            config.editorConfig.lang,
+          )}`;
+        });
+
         let obj = {
-          ...(changes.length !== 0 && { changes }),
+          ...(changes.length !== 0 && { changes: changesModified }),
           created: `${new Date(fileHistory[i].created).toLocaleString(
             config.editorConfig.lang,
           )}`,
@@ -377,9 +389,11 @@ const useEditorEvents = ({
         usersNotFound &&
           usersNotFound.length > 0 &&
           docEditor?.showMessage?.(
-            t?.("UsersWithoutAccess", {
-              users: usersNotFound,
-            }) ?? "",
+            t
+              ? t("UsersWithoutAccess", {
+                  users: usersNotFound,
+                })
+              : "",
           );
       } catch (e) {
         toastr.error(e as TData);
@@ -551,7 +565,7 @@ const useEditorEvents = ({
     const tempEvents: IConfigEvents = {};
 
     setEvents(tempEvents);
-  }, [successAuth, user.isVisitor, config?.documentType, fileInfo]);
+  }, [successAuth, user?.isVisitor, config?.documentType, fileInfo]);
 
   React.useEffect(() => {
     if (

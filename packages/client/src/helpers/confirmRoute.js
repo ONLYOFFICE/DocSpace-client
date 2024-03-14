@@ -9,7 +9,7 @@ import { getObjectByLocation } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import SectionWrapper from "SRC_DIR/components/Section";
-import { AuthenticatedAction, ValidationResult } from "./enums";
+import { AuthenticatedAction, ValidationResult } from "SRC_DIR/helpers/enums";
 
 const ConfirmRoute = ({
   doAuthenticated,

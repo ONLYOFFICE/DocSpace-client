@@ -115,6 +115,7 @@ export const enum FileType {
   Document = 7,
   OFormTemplate = 8,
   OForm = 9,
+  PDF = 10,
 }
 
 /**
@@ -464,4 +465,13 @@ export enum MembersSubjectType {
   Group = 2,
   InvitationLink = 3,
   PrimaryExternalLink = 4,
+}
+
+/**
+ * Enum for open url action.
+ * @readonly
+ */
+export const enum UrlActionType {
+  Download = 0,
+  Link = 1,
 }

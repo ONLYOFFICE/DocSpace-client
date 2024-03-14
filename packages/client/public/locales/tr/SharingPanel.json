@@ -1,13 +1,9 @@
 {
-  "AddGroupsForSharingButton": "Gruplar ekle",
-  "AddShareMessage": "Mesaj ekle",
   "CopyExternalLink": "Harici bağlantıyı kopyala",
   "EncryptedFileSharing": "<strong>{{title}}</strong> dosyası başarıyla paylaşıldı",
   "ExternalLink": "Harici bağlantı",
   "FormFilling": "Form doldurma",
-  "InternalLink": "Dahili bağlantı",
   "LinkName": "Bağlantı adı",
-  "Notify users": "Kullanıcıları bilgilendir",
   "ShareEmailBody": "{{itemName}} belgesine erişim izni aldınız. Belgeyi hemen açmak için aşağıdaki bağlantıya tıklayın: {{shareLink}}.",
   "ShareEmailSubject": "{{itemName}} dokümanına erişim izni aldınız",
   "SharingSettingsTitle": "Paylaşım ayarları"

@@ -17,12 +17,11 @@ class GroupsTableHeader extends React.Component {
         key: "Name",
         title: props.t("Common:Title"),
         resizable: true,
-        enable: true,
+        enable: props.managerAccountsGroupsColumnIsEnabled,
         default: true,
         sortBy: "title",
         minWidth: 210,
         onClick: this.onFilter,
-        onIconClick: this.onIconClick,
       },
       {
         key: "Head of Group",
@@ -35,36 +34,19 @@ class GroupsTableHeader extends React.Component {
       },
     ];
 
-    const columns = this.getColumns(defaultColumns);
+    const columns = props.getColumns(defaultColumns);
 
     this.state = { columns };
   }
-
-  getColumns = (defaultColumns) => {
-    const columns = [];
-    const storageColumns = localStorage.getItem(
-      `${TABLE_COLUMNS}=${this.props.userId}`,
-    );
-
-    if (storageColumns) {
-      const splitColumns = storageColumns.split(",");
-
-      for (let col of defaultColumns) {
-        const column = splitColumns.find((key) => key === col.key);
-        column ? (col.enable = true) : (col.enable = false);
-        columns.push(col);
-      }
-      return columns;
-    }
-
-    return defaultColumns;
-  };
 
   onColumnChange = (key) => {
     const { columns } = this.state;
 
     const columnIndex = columns.findIndex((c) => c.key === key);
     if (columnIndex === -1) return;
+
+    this.props.setColumnEnable(key);
+
     columns[columnIndex].enable = !columns[columnIndex].enable;
     this.setState({ columns });
 
@@ -92,18 +74,6 @@ class GroupsTableHeader extends React.Component {
 
     setIsLoading(true);
     setFilter(newFilter);
-    navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
-  };
-
-  onIconClick = () => {
-    const { filter, setIsLoading, navigate, location } = this.props;
-    const newFilter = filter.clone();
-
-    newFilter.sortOrder =
-      newFilter.sortOrder === "ascending" ? "descending" : "ascending";
-
-    setIsLoading(true);
-
     navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
   };
 
@@ -147,6 +117,7 @@ export default inject(
     userStore,
     infoPanelStore,
     settingsStore,
+    tableStore,
   }) => ({
     filter: peopleStore.groupsStore.groupsFilter,
     setFilter: peopleStore.groupsStore.setGroupsFilter,
@@ -154,6 +125,10 @@ export default inject(
     userId: userStore.user?.id,
     infoPanelVisible: infoPanelStore.isVisible,
     withPaging: settingsStore.withPaging,
+    getColumns: tableStore.getColumns,
+    setColumnEnable: tableStore.setColumnEnable,
+    managerAccountsGroupsColumnIsEnabled:
+      tableStore.managerAccountsGroupsColumnIsEnabled,
   }),
 )(
   withTranslation(["People", "Common", "PeopleTranslations"])(

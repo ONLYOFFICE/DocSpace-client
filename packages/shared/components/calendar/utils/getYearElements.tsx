@@ -33,8 +33,8 @@ export const getYearElements = (
       key={year}
       onClick={() => onDateClick(year)}
       disabled={
-        moment(year.toString()).endOf("year").endOf("month") < minDate ||
-        moment(year.toString()) > maxDate
+        moment(year).endOf("year").endOf("month") < minDate ||
+        moment(year) > maxDate
       }
       isMobile={isMobile}
     >
@@ -51,8 +51,8 @@ export const getYearElements = (
         key={years[i]}
         onClick={() => onDateClick(years[i])}
         disabled={
-          moment(years[i].toString()).endOf("year").endOf("month") < minDate ||
-          moment(years[i].toString()) > maxDate
+          moment(years[i]).endOf("year").endOf("month") < minDate ||
+          moment(years[i]) > maxDate
         }
         isMobile={isMobile}
       >
@@ -72,10 +72,8 @@ export const getYearElements = (
         key={years[selectedYearIndex]}
         onClick={() => onDateClick(years[selectedYearIndex])}
         disabled={
-          moment(years[selectedYearIndex].toString())
-            .endOf("year")
-            .endOf("month") < minDate ||
-          moment(years[selectedYearIndex].toString()) > maxDate
+          moment(years[selectedYearIndex]).endOf("year").endOf("month") <
+            minDate || moment(years[selectedYearIndex]) > maxDate
         }
         isMobile={isMobile}
       >
@@ -93,10 +91,8 @@ export const getYearElements = (
         key={years[currentYearIndex]}
         onClick={() => onDateClick(years[currentYearIndex])}
         disabled={
-          moment(years[currentYearIndex].toString())
-            .endOf("year")
-            .endOf("month") < minDate ||
-          moment(years[currentYearIndex].toString()) > maxDate
+          moment(years[currentYearIndex]).endOf("year").endOf("month") <
+            minDate || moment(years[currentYearIndex]) > maxDate
         }
         isMobile={isMobile}
       >

@@ -104,6 +104,8 @@ class SocketIOHelper {
   emit = ({ command, data, room = null }: TEmit) => {
     if (!this.isEnabled) return;
 
+    console.log("[WS] emit", command, data, room);
+
     const ids =
       !data || !data.roomParts
         ? []

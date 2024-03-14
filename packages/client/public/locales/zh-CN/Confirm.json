@@ -14,7 +14,6 @@
   "EnterCodePlaceholder": "输入代码",
   "EnterPhone": "请填写您的手机号码",
   "GetCode": "获取代码",
-  "InviteTitle": "欢迎您加入此协作空间！",
   "LoginRegistryButton": "加入",
   "PassworResetTitle": "现在您可创建新密码。",
   "PhoneSubtitle": "双因素身份验证功能可提供额外的协作空间安全性。请输入您的手机号码，以继续在协作空间上工作。必须使用具有国家/地区代码的国际格式输入手机号码。",
@@ -28,10 +27,5 @@
   "SetAppTitle": "配置您的身份验证应用",
   "SuccessDeactivate": "您的账户已成功停用。10 秒后您将被重定向至<1>站点</1>。",
   "SuccessReactivate": "您的账户已成功重新启用。10 秒后您将被重定向至<1>门户</1>。",
-  "SuccessRemoved": "您的账户已删除成功。10 秒钟后，您将被重新转到<1>site</1>。",
-  "WelcomeRegister": "即刻注册",
-  "WelcomeRegisterViaSocial": "通过社交网络帐号注册或登录",
-  "WelcomeRegisterViaSSO": "通过 SSO 注册或登录",
-  "WelcomeToDocspace": "欢迎访问我们的协作空间！",
-  "WelcomeToRoom": "欢迎访问 <1>{{ roomName }}</1> 房间！"
+  "SuccessRemoved": "您的账户已删除成功。10 秒钟后，您将被重新转到<1>site</1>。"
 }

@@ -20,7 +20,5 @@
   "RegisterTitle": "ලියාපදිංචි ඉල්ලීම",
   "RegistrationEmailWatermark": "වි-තැපෑල",
   "RememberHelper": "පෙරනිමි වාරයේ ආයුකාලය විනාඩි 20 කි. එය වසරකට සැකසීමට මෙම විකල්පය බලන්න. සැකසුම් වෙත ගොස් ඔබ කැමති අගයක් සැකසීමට ද හැකිය.",
-  "ResendCode": "නැවත යවන්න",
-  "SignInWithCode": "රහස් කේතයකින් පිවිසෙන්න",
-  "SignInWithPassword": "මුරපදයෙන් පිවිසෙන්න"
+  "ResendCode": "නැවත යවන්න"
 }

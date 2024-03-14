@@ -1,13 +1,13 @@
-import { useEffect, useState, ChangeEvent } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
-import { observer, inject } from "mobx-react";
+import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
-import { EditGroupParams } from "./types";
 import { getGroupById, updateGroup } from "@docspace/shared/api/groups";
+import { compareGroupParams } from "./utils";
+import { EditGroupParams } from "./types";
 
 import GroupNameParam from "./sub-components/GroupNameParam";
 import HeadOfGroup from "./sub-components/HeadOfGroupParam";
@@ -47,6 +47,8 @@ const EditGroupDialog = ({
     groupManager: group.manager,
     groupMembers: null,
   });
+
+  const prevGroupParams = useRef({ ...groupParams });
 
   const onChangeGroupName = (e: ChangeEvent<HTMLInputElement>) =>
     setGroupParams((prev) => ({ ...prev, groupName: e.target.value }));
@@ -103,12 +105,22 @@ const EditGroupDialog = ({
       });
   };
 
+  const notEnoughGroupParamsToEdit =
+    !groupParams.groupName ||
+    (!groupParams.groupManager && !groupParams.groupMembers?.length);
+
+  const groupParamsNotChanged = compareGroupParams(
+    groupParams,
+    prevGroupParams.current,
+  );
+
   useEffect(() => {
     if (groupParams.groupMembers) return;
     setFetchMembersIsLoading(true);
 
     getGroupById(group.id)!
       .then((data: any) => {
+        prevGroupParams.current.groupMembers = data.members;
         setInitialMembersIds(data.members.map((gm) => gm.id));
         setGroupMembers(data.members);
       })
@@ -183,10 +195,7 @@ const EditGroupDialog = ({
           primary
           scale
           onClick={onEditGroup}
-          isDisabled={
-            !groupParams.groupName ||
-            (!groupParams.groupManager && !groupParams.groupMembers?.length)
-          }
+          isDisabled={notEnoughGroupParamsToEdit || groupParamsNotChanged}
           isLoading={isCreateGroupLoading}
         />
         <Button

@@ -29,7 +29,6 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     children,
     restricted,
     tenantStatus,
-    limitedAccessSpace,
     enablePortalRename,
   } = props;
 
@@ -102,10 +101,6 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
         (isEnterprise && isBonusPage))
     ) {
       return <Navigate replace to="/" />;
-    }
-
-    if (isLoaded && limitedAccessSpace && isPortalDeletionUrl) {
-      return <Error403 />;
     }
 
     if (

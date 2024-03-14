@@ -100,6 +100,7 @@ const notify = (
       </StyledDiv>
     </Box>,
     {
+      data,
       type,
       closeOnClick: !withCross,
       closeButton: withCross && <CloseButton />,

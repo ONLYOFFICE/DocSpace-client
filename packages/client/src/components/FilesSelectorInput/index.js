@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
+import { withTranslation } from "react-i18next";
 
 import { FileInput } from "@docspace/shared/components/file-input";
 
@@ -8,6 +9,7 @@ import { StyledBodyWrapper } from "./StyledComponents";
 
 const FilesSelectorInput = (props) => {
   const {
+    t,
     id,
     isThirdParty,
     isRoomsOnly,
@@ -74,7 +76,7 @@ const FilesSelectorInput = (props) => {
 
   const foldersSelectionProps = {
     onSelectFolder: onSelectFolder,
-    onSetBaseFolderPath: onSetBasePath,
+    // onSetBaseFolderPath: onSetBasePath,
   };
 
   return (
@@ -88,6 +90,7 @@ const FilesSelectorInput = (props) => {
         hasError={isError || isErrorPath}
         scale
         isDocumentIcon={isDocumentIcon}
+        placeholder={t("SelectAction")}
       />
 
       <FilesSelector
@@ -119,4 +122,4 @@ export default inject(({ filesSelectorInput }) => {
     setNewPath,
     toDefault,
   };
-})(observer(FilesSelectorInput));
+})(withTranslation(["Common"])(observer(FilesSelectorInput)));

@@ -3,7 +3,7 @@ import {
   setFavoritesSetting,
   setRecentSetting,
 } from "@docspace/shared/api/files";
-import { RoomsType } from "@docspace/shared/enums";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
 import { presentInArray } from "@docspace/shared/utils";
@@ -14,7 +14,10 @@ import {
   iconSize96,
 } from "@docspace/shared/utils/image-helpers";
 import { HTML_EXST } from "@docspace/shared/constants";
-import { getIconPathByFolderType } from "@docspace/shared/utils/common";
+import {
+  getIconPathByFolderType,
+  isPublicPreview,
+} from "@docspace/shared/utils/common";
 class FilesSettingsStore {
   thirdPartyStore;
   treeFoldersStore;
@@ -124,7 +127,11 @@ class FilesSettingsStore {
         this.setFilesSettings(settings);
         this.setIsLoaded(true);
 
-        if (!settings.enableThirdParty || this.publicRoomStore.isPublicRoom)
+        if (
+          !settings.enableThirdParty ||
+          this.publicRoomStore.isPublicRoom ||
+          isPublicPreview()
+        )
           return;
 
         return axios
@@ -268,6 +275,17 @@ class FilesSettingsStore {
   isSpreadsheet = (extension) =>
     presentInArray(this.extsSpreadsheet, extension);
 
+  /**
+   *
+   * @param {number} [size = 24]
+   * @param {string } [fileExst = null]
+   * @param {string} [pproviderKey
+   * @param {*} contentLength
+   * @param {RoomsType | null} roomType
+   * @param {boolean | null} isArchive
+   * @param {FolderType} folderType
+   * @returns {string | undefined}
+   */
   getIcon = (
     size = 24,
     fileExst = null,

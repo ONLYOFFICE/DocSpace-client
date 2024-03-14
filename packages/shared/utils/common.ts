@@ -96,6 +96,10 @@ export const isPublicRoom = () => {
   );
 };
 
+export const isPublicPreview = () => {
+  return window.location.pathname.includes("/share/preview/");
+};
+
 export const getUserTypeLabel = (
   role: AvatarRole | undefined,
   t: (key: string) => string,

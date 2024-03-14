@@ -18,7 +18,8 @@ export const getBaseUrl = () => {
   const proto = hdrs.get("x-forwarded-proto");
   const port = !SKIP_PORT_FORWARD ? hdrs.get("x-forwarded-port") : "";
 
-  const baseURL = `${proto}://${host}${port ? `:${port}` : ""}`;
+  // const baseURL = `${proto}://${host}${port ? `:${port}` : ""}`;
+  const baseURL = `${proto}://${host}`;
 
   return baseURL;
 };

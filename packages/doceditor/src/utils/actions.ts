@@ -18,7 +18,8 @@ export const getBaseUrl = () => {
   const proto = hdrs.get("x-forwarded-proto");
   const port = !SKIP_PORT_FORWARD ? hdrs.get("x-forwarded-port") : "";
 
-  const baseURL = `${proto}://${host}${port ? `:${port}` : ""}`;
+  // const baseURL = `${proto}://${host}${port ? `:${port}` : ""}`;
+  const baseURL = `${proto}://${host}`;
 
   return baseURL;
 };
@@ -79,14 +80,15 @@ export async function fileCopyAs(
 
     return {
       file: file.response,
-      error:
-        typeof file.error === "string"
+      error: file.error
+        ? typeof file.error === "string"
           ? error
           : {
-              message: file.error.message,
-              status: file.error.statusCode,
-              type: file.error.type,
-            },
+              message: file.error?.message,
+              status: file.error?.statusCode,
+              type: file.error?.type,
+            }
+        : undefined,
     };
   } catch (e: any) {
     console.log("File copyas error ", e);
@@ -122,14 +124,15 @@ export async function createFile(
     console.log("File create success ", file);
     return {
       file: file.response,
-      error:
-        typeof file.error === "string"
+      error: file.error
+        ? typeof file.error === "string"
           ? error
           : {
-              message: file.error.message,
-              status: file.error.statusCode,
-              type: file.error.type,
-            },
+              message: file.error?.message,
+              status: file.error?.statusCode,
+              type: file.error?.type,
+            }
+        : undefined,
     };
   } catch (e: any) {
     console.log("File create error ", e);

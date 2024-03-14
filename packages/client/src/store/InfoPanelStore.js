@@ -69,6 +69,8 @@ class InfoPanelStore {
   showSearchBlock = false;
   searchValue = "";
 
+  infoPanelSelectedGroup = null;
+
   constructor(userStore) {
     this.userStore = userStore;
 
@@ -76,6 +78,10 @@ class InfoPanelStore {
   }
 
   // Setters
+
+  setInfoPanelSelectedGroup = (group) => {
+    this.infoPanelSelectedGroup = group;
+  };
 
   setIsVisible = (bool) => {
     if (

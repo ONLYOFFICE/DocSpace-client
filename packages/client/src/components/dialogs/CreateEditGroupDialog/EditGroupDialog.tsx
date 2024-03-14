@@ -1,11 +1,9 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
-import { toastr } from "@docspace/shared/components/toast";
 import { inject, observer } from "mobx-react";
-import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { getGroupById, updateGroup } from "@docspace/shared/api/groups";
+import { getGroupById } from "@docspace/shared/api/groups";
 import { compareGroupParams } from "./utils";
 import { EditGroupParams } from "./types";
 
@@ -22,17 +20,22 @@ interface EditGroupDialogProps {
   };
   visible: boolean;
   onClose: () => void;
-  getGroups: () => void;
+  updateGroup: (
+    groupId: string,
+    groupName: string,
+    groupManager: string,
+    membersToAdd: string[],
+    membersToRemove: string[],
+  ) => Promise<void>;
 }
 
 const EditGroupDialog = ({
   group,
   visible,
   onClose,
-  getGroups,
+  updateGroup,
 }: EditGroupDialogProps) => {
   const { t } = useTranslation(["PeopleTranslations", "Common"]);
-  const navigate = useNavigate();
 
   const [initialMembersIds, setInitialMembersIds] = useState<string[]>([]);
 
@@ -87,22 +90,16 @@ const EditGroupDialog = ({
       (gm) => !newMembersIds.includes(gm),
     );
 
-    updateGroup(
+    await updateGroup(
       group.id,
       groupParams.groupName,
       groupManagerId,
       membersToAdd,
       membersToDelete,
-    )!
-      .then(() => {
-        navigate("/accounts/groups/filter");
-        getGroups();
-      })
-      .catch((err) => toastr.error(err.message))
-      .finally(() => {
-        setCreateGroupIsLoading(false);
-        onClose();
-      });
+    );
+
+    setCreateGroupIsLoading(false);
+    onClose();
   };
 
   const notEnoughGroupParamsToEdit =
@@ -213,5 +210,5 @@ const EditGroupDialog = ({
 };
 
 export default inject(({ peopleStore }) => ({
-  getGroups: peopleStore.groupsStore.getGroups,
+  updateGroup: peopleStore.groupsStore.updateGroup,
 }))(observer(EditGroupDialog));

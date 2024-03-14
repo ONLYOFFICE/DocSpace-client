@@ -66,16 +66,9 @@ class AxiosClient {
       };
     }
 
-    const shareIndex = window.location.pathname.indexOf("share");
-    const sharedIndex = window.location.pathname.indexOf("shared");
-
-    const lastKeySymbol = window.location.search.indexOf("&");
-    const lastIndex =
-      lastKeySymbol === -1 ? window.location.search.length : lastKeySymbol;
-    const publicRoomKey =
-      shareIndex > -1 && sharedIndex === -1
-        ? window.location.search.substring(5, lastIndex)
-        : null;
+    const publicRoomKey = new URLSearchParams(window.location.search).get(
+      "key",
+    );
 
     if (publicRoomKey) {
       headers = { ...headers, "Request-Token": publicRoomKey };

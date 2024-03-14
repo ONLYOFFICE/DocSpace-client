@@ -322,16 +322,26 @@ const ContextMenu = React.forwardRef((props: ContextMenuProps, ref) => {
       document.removeEventListener("contextmenu", documentContextMenuListener);
       document.removeEventListener("click", documentClickListener);
       document.removeEventListener("mousedown", documentClickListener);
-      window.removeEventListener("resize", documentResizeListener);
 
       DomHelpers.revertZIndex();
     };
-  }, [
-    documentClickListener,
-    documentContextMenuListener,
-    documentResizeListener,
-    global,
-  ]);
+  }, [documentClickListener, documentContextMenuListener, global]);
+
+  React.useEffect(() => {
+    return () => {
+      if (visible && onHide) {
+        onHide();
+        setVisible(false);
+        setReshow(false);
+        prevReshow.current = false;
+        setChangeView(false);
+        setShowMobileMenu(false);
+        setArticleWidth(0);
+      }
+
+      window.removeEventListener("resize", documentResizeListener);
+    };
+  }, [documentResizeListener, onHide, visible]);
 
   const onMobileItemClick = (
     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,

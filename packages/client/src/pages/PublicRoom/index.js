@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { observer, inject } from "mobx-react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import Section from "@docspace/shared/components/section";
 import { Loader } from "@docspace/shared/components/loader";
 import { ValidationStatus } from "../../helpers/constants";
@@ -27,10 +27,8 @@ const PublicRoom = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const lastKeySymbol = location.search.indexOf("&");
-  const lastIndex =
-    lastKeySymbol === -1 ? location.search.length : lastKeySymbol;
-  const key = location.search.substring(5, lastIndex);
+  const [searchParams] = useSearchParams();
+  const key = searchParams.get("key");
 
   useEffect(() => {
     validatePublicRoomKey(key);
@@ -122,5 +120,5 @@ export default inject(
       setPublicRoomKey,
       setIsArticleLoading,
     };
-  }
+  },
 )(observer(PublicRoom));

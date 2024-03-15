@@ -8,15 +8,20 @@ import useFetchGroup from "./useFetchGroup";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 
-const Groups = ({ infoPanelSelection, currentGroup, setCurrentGroup }) => {
+const Groups = ({
+  infoPanelSelection,
+  currentGroup,
+  setCurrentGroup,
+  infoPanelSelectedGroup,
+  setInfoPanelSelectedGroup,
+}) => {
   const { groupId: paramsGroupId } = useParams();
   const isInsideGroup = !!paramsGroupId;
 
-  const [fetchedGroup, setFetchedGroup] = useState(null);
-  const group = isInsideGroup ? currentGroup : fetchedGroup;
+  const group = isInsideGroup ? currentGroup : infoPanelSelectedGroup;
 
   const groupId = isInsideGroup ? paramsGroupId : infoPanelSelection?.id;
-  const setGroup = isInsideGroup ? setCurrentGroup : setFetchedGroup;
+  const setGroup = isInsideGroup ? setCurrentGroup : setInfoPanelSelectedGroup;
 
   useFetchGroup(groupId, group?.id, setGroup);
 
@@ -39,9 +44,11 @@ const Groups = ({ infoPanelSelection, currentGroup, setCurrentGroup }) => {
   );
 };
 
-export default inject(({ peopleStore }) => ({
+export default inject(({ peopleStore, infoPanelStore }) => ({
   currentGroup: peopleStore.groupsStore.currentGroup,
   setCurrentGroup: peopleStore.groupsStore.setCurrentGroup,
+  infoPanelSelectedGroup: infoPanelStore.infoPanelSelectedGroup,
+  setInfoPanelSelectedGroup: infoPanelStore.setInfoPanelSelectedGroup,
 }))(
   withTranslation([])(
     withLoader(observer(Groups))(<InfoPanelViewLoader view="accounts" />),

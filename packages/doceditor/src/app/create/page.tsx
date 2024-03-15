@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 
 import { createFile, fileCopyAs, getBaseUrl } from "@/utils/actions";
+import CreateFileError from "@/components/CreateFileError";
 
 type TSearchParams = {
   parentId: string;
@@ -45,6 +46,9 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
     open,
   };
 
+  let fileId = undefined;
+  let fileError: Error | undefined = undefined;
+
   if (fromFile) {
     if (!templateId) redirect(baseURL);
 
@@ -56,23 +60,12 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
       password,
     );
 
-    if (!file)
-      return redirect(
-        `${baseURL}?createError=${JSON.stringify(
-          typeof error === "string"
-            ? { error, fileInfo, fromFile: true, isString: true }
-            : { ...error, fileInfo, fromFile: true },
-        )}`,
-      );
+    if (!file) {
+      fileError = error as unknown as Error;
+    }
 
-    const redirectURL = `${baseURL}/doceditor/?fileId=${file.id}`;
-
-    return redirect(redirectURL);
-  }
-
-  if (fromTemplate) {
-    if (!fromTemplate) redirect(baseURL);
-
+    if (file?.id) fileId = file.id;
+  } else if (fromTemplate) {
     const { file, error } = await createFile(
       parentId,
       fileTitle,
@@ -80,39 +73,40 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
       formId,
     );
 
-    if (!file)
-      return redirect(
-        `${baseURL}?createError=${JSON.stringify(
-          typeof error === "string"
-            ? { error, fileInfo, fromTemplate: true, isString: true }
-            : { ...error, fileInfo, fromTemplate: true },
-        )}`,
-      );
+    if (!file) {
+      fileError = error as unknown as Error;
+    }
 
-    const redirectURL = `${baseURL}/doceditor/?fileId=${file.id}`;
+    if (file?.id) fileId = file.id;
+  } else {
+    const { file, error } = await createFile(
+      parentId,
+      fileTitle,
+      templateId,
+      formId,
+    );
+
+    if (!file) {
+      fileError = error as unknown as Error;
+    }
+
+    if (file?.id) fileId = file.id;
+  }
+
+  if (fileId || !fileError) {
+    const redirectURL = `${baseURL}/doceditor/?fileId=${fileId}`;
 
     return redirect(redirectURL);
   }
 
-  const { file, error } = await createFile(
-    parentId,
-    fileTitle,
-    templateId,
-    formId,
+  return (
+    <CreateFileError
+      error={fileError}
+      fileInfo={fileInfo}
+      fromFile={!!fromFile}
+      fromTemplate={!!fromTemplate}
+    />
   );
-
-  if (!file)
-    return redirect(
-      `${baseURL}?createError=${JSON.stringify(
-        typeof error === "string"
-          ? { error, fileInfo, isString: true }
-          : { ...error, fileInfo },
-      )}`,
-    );
-
-  const redirectURL = `${baseURL}/doceditor/?fileId=${file.id}`;
-
-  redirect(redirectURL);
 }
 
 export default Page;

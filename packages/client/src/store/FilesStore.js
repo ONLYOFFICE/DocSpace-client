@@ -1591,7 +1591,9 @@ class FilesStore {
         if (err?.response?.status === 402)
           this.currentTariffStatusStore.setPortalTariff();
 
-        if (requestCounter > 0) return;
+        const isThirdPartyError = isNaN(+folderId);
+
+        if (requestCounter > 0 && !isThirdPartyError) return;
 
         requestCounter++;
         const isUserError = [
@@ -1601,10 +1603,8 @@ class FilesStore {
           UnauthorizedHttpCode,
         ].includes(err?.response?.status);
 
-        if (isUserError) {
-          runInAction(() => {
-            this.isErrorRoomNotAvailable = true;
-          });
+        if (isUserError && !isThirdPartyError) {
+          setIsErrorRoomNotAvailable(true);
         } else {
           if (axios.isCancel(err)) {
             console.log("Request canceled", err.message);

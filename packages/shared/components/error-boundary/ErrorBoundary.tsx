@@ -50,6 +50,8 @@ class ErrorBoundary extends React.Component<
     if (error) {
       // You can render any custom fallback UI
 
+      if (isNextJS && !i18n?.language) return null;
+
       if (isNextJS && theme && i18n) {
         return (
           <I18nextProvider i18n={i18n}>
@@ -65,6 +67,7 @@ class ErrorBoundary extends React.Component<
           </I18nextProvider>
         );
       }
+
       return (
         <Error520
           user={user}

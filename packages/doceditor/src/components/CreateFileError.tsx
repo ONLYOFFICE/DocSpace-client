@@ -40,9 +40,7 @@ const CreateFileError = ({
   settings,
   user,
 }: CreateFileErrorProps) => {
-  const firebaseHelper = new FirebaseHelper(
-    settings?.firebase ?? ({} as TFirebaseSettings),
-  );
+  const firebaseHelper = new FirebaseHelper({} as TFirebaseSettings);
 
   const { i18n } = useI18N({ settings, user });
   const { currentDeviceType } = useDeviceType();

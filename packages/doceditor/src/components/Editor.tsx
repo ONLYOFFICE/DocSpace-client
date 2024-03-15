@@ -10,7 +10,7 @@ import { FolderType, ThemeKeys } from "@docspace/shared/enums";
 import { getEditorTheme } from "@docspace/shared/utils";
 
 import { getBackUrl } from "@/utils";
-import { IS_DESKTOP_EDITOR, IZ_ZOOM } from "@/utils/constants";
+import { IS_DESKTOP_EDITOR, IS_ZOOM } from "@/utils/constants";
 import { EditorProps, TGoBack } from "@/types";
 import {
   onSDKRequestHistoryClose,
@@ -202,7 +202,7 @@ const Editor = ({
   if (!fileInfo.providerKey) {
     newConfig.events.onRequestReferenceData = onSDKRequestReferenceData;
 
-    if (!IZ_ZOOM) {
+    if (!IS_ZOOM) {
       newConfig.events.onRequestOpen = onSDKRequestOpen;
     }
   }

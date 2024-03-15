@@ -1,4 +1,4 @@
-export const IZ_ZOOM =
+export const IS_ZOOM =
   typeof window !== "undefined" &&
   (window?.navigator?.userAgent?.includes("ZoomWebKit") ||
     window?.navigator?.userAgent?.includes("ZoomApps"));

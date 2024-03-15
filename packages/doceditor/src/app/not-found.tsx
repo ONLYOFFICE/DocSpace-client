@@ -1,5 +1,5 @@
-import NotFoundComponent from "@/components/NotFound";
+import NotFoundError from "@/components/NotFoundError";
 
 export default function NotFound() {
-  return <NotFoundComponent />;
+  return <NotFoundError />;
 }

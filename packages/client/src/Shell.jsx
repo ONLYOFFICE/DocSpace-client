@@ -5,16 +5,19 @@ import { useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { isMobile, isIOS, isFirefox } from "react-device-detect";
+import { toast as toastify } from "react-toastify";
 
 import { getLogoFromPath } from "@docspace/shared/utils";
 import { Portal } from "@docspace/shared/components/portal";
 import { SnackBar } from "@docspace/shared/components/snackbar";
 import { Toast, toastr } from "@docspace/shared/components/toast";
+import { ToastType } from "@docspace/shared/components/toast/Toast.enums";
 import { getRestoreProgress } from "@docspace/shared/api/portal";
 import { updateTempContent } from "@docspace/shared/utils/common";
 import { DeviceType, IndexedDBStores } from "@docspace/shared/enums";
 import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
 import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
+import { sendToastReport } from "@docspace/shared/utils/crashReport";
 
 import config from "PACKAGE_FILE";
 
@@ -57,6 +60,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     setPortalTariff,
     setFormCreationInfo,
     setConvertPasswordDialogVisible,
+    version,
   } = rest;
 
   const theme = useTheme();
@@ -386,6 +390,21 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       setTheme(systemTheme);
   }, [systemTheme]);
 
+  useEffect(() => {
+    if (!FirebaseHelper.isEnabled || !isLoaded) return;
+    toastify.onChange((payload) => {
+      if (payload.status === "added" && payload.type === ToastType.error) {
+        sendToastReport(
+          userId,
+          version,
+          language,
+          payload?.data,
+          FirebaseHelper,
+        );
+      }
+    });
+  }, [isLoaded]);
+
   const rootElement = document.getElementById("root");
 
   const toast =
@@ -427,7 +446,7 @@ const ShellWrapper = inject(
   }) => {
     const { i18n } = useTranslation();
 
-    const { init, isLoaded, setProductVersion, language } = authStore;
+    const { init, isLoaded, setProductVersion, language, version } = authStore;
 
     const {
       personal,
@@ -498,6 +517,7 @@ const ShellWrapper = inject(
       setPortalTariff,
       setFormCreationInfo,
       setConvertPasswordDialogVisible,
+      version,
     };
   },
 )(observer(Shell));

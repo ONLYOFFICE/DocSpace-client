@@ -195,7 +195,7 @@ const StyledToastContainer = styled(ToastContainer)<{ $topOffset: number }>`
       `}
   }
 
-  @media only screen and ${mobile} {
+  @media only screen and (${mobile}) {
     left: 0;
     margin: auto;
     right: 0;

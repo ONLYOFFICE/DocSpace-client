@@ -3049,7 +3049,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@docspace/doceditor@workspace:packages/doceditor"
   dependencies:
-    "@onlyoffice/document-editor-react": "npm:^1.4.1"
+    "@onlyoffice/document-editor-react": "file:./onlyoffice-document-editor-react-v1.4.1.tgz"
     "@svgr/webpack": "npm:^8.1.0"
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
@@ -5073,13 +5073,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@onlyoffice/document-editor-react@npm:^1.4.1":
+"@onlyoffice/document-editor-react@file:./onlyoffice-document-editor-react-v1.4.1.tgz::locator=%40docspace%2Fdoceditor%40workspace%3Apackages%2Fdoceditor":
   version: 1.4.1
-  resolution: "@onlyoffice/document-editor-react@npm:1.4.1"
+  resolution: "@onlyoffice/document-editor-react@file:./onlyoffice-document-editor-react-v1.4.1.tgz#./onlyoffice-document-editor-react-v1.4.1.tgz::hash=e29463&locator=%40docspace%2Fdoceditor%40workspace%3Apackages%2Fdoceditor"
+  dependencies:
+    lodash: "npm:^4.17.21"
   peerDependencies:
     react: ^16.9.0 || ^17 || ^18
     react-dom: ^16.9.0 || ^17 || ^18
-  checksum: cedd7a13107e3f776207715456abea38733ea76d659ac205e22268910854d2b2fb273e708544baeb7b652f5465c5d3100c135e5bdcb56c82a732951ff316d1d4
+  checksum: ec4713519891b41353b01190c96d023677301c3b086b015a6ee67ac41acb104aa28e02a1d471b679f847f1ba58b94f0a9bdad4b3203e3368b3ec16f4add8edc6
   languageName: node
   linkType: hard
 

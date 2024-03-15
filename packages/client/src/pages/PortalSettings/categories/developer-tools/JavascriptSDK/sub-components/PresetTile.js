@@ -13,7 +13,7 @@ const TileContainer = styled.div`
 
   width: 100%;
   max-width: 342px;
-  height: 354px;
+  height: 334px;
 
   padding: 12px 16px;
 
@@ -45,11 +45,10 @@ const TileContainer = styled.div`
     }
 
     :hover {
-      ${() =>
-        css`
-          border: ${(props) => props.theme.button.border.baseHover};
-          box-sizing: ${(props) => props.theme.button.boxSizing};
-        `}
+      ${() => css`
+        border: ${(props) => props.theme.button.border.baseHover};
+        box-sizing: ${(props) => props.theme.button.boxSizing};
+      `}
     }
   }
 `;

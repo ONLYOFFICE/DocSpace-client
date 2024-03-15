@@ -1,7 +1,10 @@
 import { redirect } from "next/navigation";
 
 import { createFile, fileCopyAs, getBaseUrl } from "@/utils/actions";
+
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+
+import CreateFileError from "@/components/CreateFileError";
 
 type TSearchParams = {
   parentId: string;
@@ -49,6 +52,9 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
     action,
   };
 
+  let fileId = undefined;
+  let fileError: Error | undefined = undefined;
+
   if (fromFile) {
     if (!templateId) redirect(baseURL);
 
@@ -60,30 +66,12 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
       password,
     );
 
-    if (!file)
-      return redirect(
-        `${baseURL}?createError=${JSON.stringify(
-          typeof error === "string"
-            ? { error, fileInfo, fromFile: true, isString: true }
-            : { ...error, fileInfo, fromFile: true },
-        )}`,
-      );
-
-    const url = new URL(combineUrl(baseURL, `/doceditor/?fileId=${file.id}`));
-    if (action) {
-      url.searchParams.set("action", action);
+    if (!file) {
+      fileError = error as unknown as Error;
     }
 
-    const redirectURL = url.toString();
-
-    console.log("redirectURL", redirectURL);
-
-    return redirect(redirectURL);
-  }
-
-  if (fromTemplate) {
-    if (!fromTemplate) redirect(baseURL);
-
+    if (file?.id) fileId = file.id;
+  } else if (fromTemplate) {
     const { file, error } = await createFile(
       parentId,
       fileTitle,
@@ -91,16 +79,28 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
       formId,
     );
 
-    if (!file)
-      return redirect(
-        `${baseURL}?createError=${JSON.stringify(
-          typeof error === "string"
-            ? { error, fileInfo, fromTemplate: true, isString: true }
-            : { ...error, fileInfo, fromTemplate: true },
-        )}`,
-      );
+    if (!file) {
+      fileError = error as unknown as Error;
+    }
 
-    const url = new URL(combineUrl(baseURL, `/doceditor/?fileId=${file.id}`));
+    if (file?.id) fileId = file.id;
+  } else {
+    const { file, error } = await createFile(
+      parentId,
+      fileTitle,
+      templateId,
+      formId,
+    );
+
+    if (!file) {
+      fileError = error as unknown as Error;
+    }
+
+    if (file?.id) fileId = file.id;
+  }
+
+  if (fileId || !fileError) {
+    const url = new URL(combineUrl(baseURL, `/doceditor/?fileId=${fileId}`));
     if (action) {
       url.searchParams.set("action", action);
     }
@@ -112,32 +112,14 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
     return redirect(redirectURL);
   }
 
-  const { file, error } = await createFile(
-    parentId,
-    fileTitle,
-    templateId,
-    formId,
+  return (
+    <CreateFileError
+      error={fileError}
+      fileInfo={fileInfo}
+      fromFile={!!fromFile}
+      fromTemplate={!!fromTemplate}
+    />
   );
-
-  if (!file)
-    return redirect(
-      `${baseURL}?createError=${JSON.stringify(
-        typeof error === "string"
-          ? { error, fileInfo, isString: true }
-          : { ...error, fileInfo },
-      )}`,
-    );
-
-  const url = new URL(combineUrl(baseURL, `/doceditor/?fileId=${file.id}`));
-  if (action) {
-    url.searchParams.set("action", action);
-  }
-
-  const redirectURL = url.toString();
-
-  console.log("redirectURL", redirectURL);
-
-  redirect(redirectURL);
 }
 
 export default Page;

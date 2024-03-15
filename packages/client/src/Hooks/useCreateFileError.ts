@@ -27,43 +27,21 @@ const useCreateFileError = ({
 
     const error = JSON.parse(createError);
 
-    if (error?.status === 402) setPortalTariff?.();
+    toastr.error(t("Translations:FileProtected"), t("Common:Warning"));
 
-    if (error?.fromFile) {
-      let errorMessage = "";
-      if (typeof error === "object") {
-        errorMessage =
-          error?.response?.data?.error?.message ||
-          error?.statusText ||
-          error?.message ||
-          "";
-      } else {
-        errorMessage = error;
-      }
-
-      if (errorMessage.indexOf("password") === -1) {
-        toastr.error(errorMessage, t("Common:Warning"));
-        return;
-      }
-
-      toastr.error(t("Translations:FileProtected"), t("Common:Warning"));
-
-      setFormCreationInfo?.({
-        newTitle: error?.fileInfo?.title,
-        fromExst: ".docx",
-        toExst: error?.fileInfo?.extension,
-        open: error?.fileInfo?.open === "true",
-        actionId: error?.fileInfo?.id,
-        fileInfo: {
-          id: error?.fileInfo?.templateId,
-          folderId: Number(error?.fileInfo?.parentId),
-          fileExst: error?.fileInfo?.extension,
-        },
-      });
-      setConvertPasswordDialogVisible?.(true);
-    } else {
-      toastr.error(error);
-    }
+    setFormCreationInfo?.({
+      newTitle: error?.fileInfo?.title,
+      fromExst: ".docx",
+      toExst: error?.fileInfo?.extension,
+      open: error?.fileInfo?.open === "true",
+      actionId: error?.fileInfo?.id,
+      fileInfo: {
+        id: error?.fileInfo?.templateId,
+        folderId: Number(error?.fileInfo?.parentId),
+        fileExst: error?.fileInfo?.extension,
+      },
+    });
+    setConvertPasswordDialogVisible?.(true);
   }, [
     setConvertPasswordDialogVisible,
     setFormCreationInfo,

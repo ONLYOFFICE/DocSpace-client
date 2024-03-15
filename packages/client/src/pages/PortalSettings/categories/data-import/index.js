@@ -15,6 +15,7 @@ import OnlyofficeWorkspaceSvgUrl from "PUBLIC_DIR/images/workspace.onlyoffice.re
 import GoogleWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.google.react.svg?url";
 import NextcloudWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.nextcloud.react.svg?url";
 import OnlyofficeWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.onlyoffice.react.svg?url";
+import DataImportLoader from "./sub-components/DataImportLoader";
 
 const DataImport = ({
   t,
@@ -24,6 +25,8 @@ const DataImport = ({
   getMigrationList,
   getMigrationStatus,
   setDocumentTitle,
+  isMigrationInit,
+  setIsMigrationInit,
 }) => {
   const navigate = useNavigate();
 
@@ -75,6 +78,7 @@ const DataImport = ({
     }
 
     const migrationList = await getMigrationList();
+    setIsMigrationInit(true);
     setServices(migrationList);
   };
 
@@ -99,6 +103,7 @@ const DataImport = ({
     }
   };
 
+  if (!isMigrationInit) return <DataImportLoader />;
   return (
     <WorkspacesContainer>
       <Text className="data-import-description">
@@ -130,8 +135,14 @@ const DataImport = ({
   );
 };
 export default inject(({ authStore, settingsStore, importAccountsStore }) => {
-  const { services, setServices, getMigrationList, getMigrationStatus } =
-    importAccountsStore;
+  const {
+    services,
+    setServices,
+    getMigrationList,
+    getMigrationStatus,
+    isMigrationInit,
+    setIsMigrationInit,
+  } = importAccountsStore;
 
   const { setDocumentTitle } = authStore;
 
@@ -142,5 +153,7 @@ export default inject(({ authStore, settingsStore, importAccountsStore }) => {
     getMigrationStatus,
     theme: settingsStore.theme,
     setDocumentTitle,
+    isMigrationInit,
+    setIsMigrationInit,
   };
 })(withTranslation(["Settings"])(observer(DataImport)));

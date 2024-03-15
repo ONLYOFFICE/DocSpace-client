@@ -126,6 +126,36 @@ const processFillFormDraft = async (
   return [queryFileId, newConfig.response, newEditorUrl?.response];
 };
 
+export async function getErrorData() {
+  const hdrs = headers();
+  const cookie = hdrs.get("cookie");
+
+  const [getSettings, getUser] = createRequest(
+    [
+      `/settings?withPassword=${cookie?.includes("asc_auth_key") ? "false" : "true"}`,
+      `/people/@self`,
+    ],
+    [["", ""]],
+    "GET",
+  );
+
+  const resActions = [];
+
+  resActions.push(fetch(getSettings));
+  resActions.push(fetch(getUser));
+
+  const [settingsRes, userRes] = await Promise.all(resActions);
+
+  const actions = [];
+
+  actions.push(settingsRes.json());
+  if (userRes.status !== 401) actions.push(userRes.json());
+
+  const [settings, user] = await Promise.all(actions);
+
+  return { settings: settings.response, user: user?.response };
+}
+
 export async function fileCopyAs(
   fileId: string,
   destTitle: string,
@@ -159,6 +189,7 @@ export async function fileCopyAs(
               message: file.error?.message,
               status: file.error?.statusCode,
               type: file.error?.type,
+              stack: file.error?.stack,
             }
         : undefined,
     };
@@ -173,6 +204,7 @@ export async function fileCopyAs(
               message: e.message,
               status: e.statusCode,
               type: e.type,
+              stack: e.stack,
             },
     };
   }
@@ -203,6 +235,7 @@ export async function createFile(
               message: file.error?.message,
               status: file.error?.statusCode,
               type: file.error?.type,
+              stack: file.error?.stack,
             }
         : undefined,
     };
@@ -217,6 +250,7 @@ export async function createFile(
               message: e.message,
               status: e.statusCode,
               type: e.type,
+              stack: e.stack,
             },
     };
   }
@@ -270,14 +304,14 @@ export async function getData(
 
     const actions = [];
 
+    actions.push(configRes.json());
+    actions.push(editorUrlRes.json());
+    actions.push(settingsRes.json());
+    if (userRes.status !== 401) actions.push(userRes.json());
+
+    const [config, editorUrl, settings, user] = await Promise.all(actions);
+
     if (configRes.ok) {
-      actions.push(configRes.json());
-      actions.push(editorUrlRes.json());
-      actions.push(settingsRes.json());
-      if (userRes.status !== 401) actions.push(userRes.json());
-
-      const [config, editorUrl, settings, user] = await Promise.all(actions);
-
       const response: TResponse = {
         config: config.response,
         editorUrl: editorUrl.response,
@@ -335,7 +369,14 @@ export async function getData(
       return response;
     }
 
-    const response: TResponse = { error: { message: "unauthorized" }, fileId };
+    console.log("initDocEditor failed", config.error);
+
+    const response: TResponse = {
+      error: user ? config.error : { message: "unauthorized" },
+      user: user?.response,
+      settings: settings?.response,
+      fileId,
+    };
 
     return response;
   } catch (e) {

@@ -979,8 +979,9 @@ class SettingsStore {
   };
 
   get isFrame() {
-    // console.log("get isFrame:", this.frameConfig?.name === window.name);
-    return this.frameConfig?.name === window.name;
+    const isFrame = this.frameConfig?.name === window.name;
+    window.DocSpaceConfig.isFrame = isFrame;
+    return isFrame;
   }
 
   setAppearanceTheme = (theme: TColorScheme[]) => {

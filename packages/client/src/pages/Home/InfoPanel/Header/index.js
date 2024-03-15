@@ -16,6 +16,7 @@ import {
 import { StyledInfoPanelHeader } from "./styles/common";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
+import { FolderType } from "@docspace/shared/enums";
 
 const InfoPanelHeaderContent = (props) => {
   const {
@@ -161,6 +162,10 @@ const InfoPanelHeaderContent = (props) => {
     });
   }
 
+  const isRoomsType =
+    selection?.rootFolderType === FolderType.Rooms ||
+    selection?.rootFolderType === FolderType.Archive;
+
   return (
     <StyledInfoPanelHeader isTablet={isTablet} withSubmenu={withSubmenu}>
       <div className="main">
@@ -185,7 +190,7 @@ const InfoPanelHeaderContent = (props) => {
 
       {withSubmenu && (
         <div className="submenu">
-          {selection?.rootFolderId !== myFolderId ? (
+          {isRoomsType ? (
             <Submenu
               style={{ width: "100%" }}
               data={roomsSubmenu}

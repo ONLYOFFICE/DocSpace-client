@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import { i18n } from "i18next";
+import { I18nextProvider, useTranslation } from "react-i18next";
 
 import { getCrashReport } from "@docspace/shared/utils/crashReport";
 
@@ -87,6 +88,20 @@ const Error520 = ({
 };
 
 export default Error520;
+
+export const Error520SSR = ({
+  i18nProp,
+  ...rest
+}: {
+  i18nProp: i18n;
+} & Error520Props) => {
+  if (!i18nProp.language) return null;
+  return (
+    <I18nextProvider i18n={i18nProp}>
+      <Error520 {...rest} />
+    </I18nextProvider>
+  );
+};
 
 // const Error520Wrapper = inject(({ authStore, settingsStore, userStore }) => {
 //   const { currentColorScheme, firebaseHelper } = settingsStore;

@@ -59,11 +59,16 @@ export default class DomHelpers {
 
   static getHiddenElementOuterWidth(element: HTMLElement | null) {
     if (element) {
+      const prevVisibility = element.style.visibility;
+      const prevDisplay = element.style.display;
+
       element.style.visibility = "hidden";
       element.style.display = "block";
+
       const elementWidth = element.offsetWidth;
-      element.style.display = "none";
-      element.style.visibility = "visible";
+
+      element.style.display = prevDisplay;
+      element.style.visibility = prevVisibility;
 
       return elementWidth;
     }
@@ -72,11 +77,16 @@ export default class DomHelpers {
 
   static getHiddenElementOuterHeight(element: HTMLElement | null) {
     if (element) {
+      const prevVisibility = element.style.visibility;
+      const prevDisplay = element.style.display;
+
       element.style.visibility = "hidden";
       element.style.display = "block";
+
       const elementHeight = element.offsetHeight;
-      element.style.display = "none";
-      element.style.visibility = "visible";
+
+      element.style.display = prevDisplay;
+      element.style.visibility = prevVisibility;
 
       return elementHeight;
     }

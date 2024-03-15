@@ -269,7 +269,7 @@ class SelectedFolderStore {
     if (
       this.id !== null &&
       socketHelper &&
-      !socketHelper.socketSubscribers.has(`DIR-${this.id}`)
+      socketHelper.socketSubscribers.has(`DIR-${this.id}`)
     ) {
       socketHelper.emit({
         command: "unsubscribe",
@@ -280,7 +280,7 @@ class SelectedFolderStore {
     if (
       selectedFolder &&
       socketHelper &&
-      !socketHelper.socketSubscribers.has(`DIR-${this.id}`)
+      !socketHelper.socketSubscribers.has(`DIR-${selectedFolder.id}`)
     ) {
       socketHelper.emit({
         command: "subscribe",

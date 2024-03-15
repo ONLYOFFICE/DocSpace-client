@@ -173,7 +173,7 @@ function error(
   ) {
     message =
       data?.response?.data?.error?.message || data?.statusText || data?.message;
-  } else if (typeof data !== "object") {
+  } else if (React.isValidElement(data)) {
     message = data;
   }
 

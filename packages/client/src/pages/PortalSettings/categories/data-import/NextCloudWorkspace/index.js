@@ -2,14 +2,15 @@ import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { isMobile } from "@docspace/shared/utils/device";
+import { useNavigate } from "react-router-dom";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 
 import { Text } from "@docspace/shared/components/text";
-import BreakpointWarning from "SRC_DIR/components/BreakpointWarning";
-import { getStepsData } from "./Stepper";
 import { toastr } from "@docspace/shared/components/toast";
+import { getStepsData } from "./Stepper";
+import BreakpointWarning from "SRC_DIR/components/BreakpointWarning";
+import SelectFileLoader from "../sub-components/SelectFileLoader";
 
 const NextcloudWrapper = styled.div`
   max-width: 700px;
@@ -101,7 +102,7 @@ const NextcloudWorkspace = (props) => {
   if (isMobile())
     return <BreakpointWarning sectionName={t("Settings:DataImport")} />;
 
-  if (!tReady || !shouldRender) return;
+  if (!tReady || !shouldRender) return <SelectFileLoader />;
 
   return (
     <>

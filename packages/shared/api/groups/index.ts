@@ -98,7 +98,7 @@ export const updateGroup = (
     method: "put",
     url: `/group/${groupId}`,
     data: { groupName, groupManager, membersToAdd, membersToRemove },
-  });
+  }) as Promise<TGroup>;
 };
 
 export const addGroupMembers = (groupId: string, members: string) => {

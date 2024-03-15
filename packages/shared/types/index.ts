@@ -93,6 +93,7 @@ declare global {
         minimumFetchIntervalMillis?: number;
       };
       campaigns?: string[];
+      isFrame?: boolean;
     };
     AscDesktopEditor: {
       execCommand: (key: string, value: string) => void;

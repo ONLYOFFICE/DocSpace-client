@@ -49,49 +49,18 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
   let fileId = undefined;
   let fileError: Error | undefined = undefined;
 
-  if (fromFile) {
-    if (!templateId) redirect(baseURL);
+  if (!templateId && fromFile) redirect(baseURL);
 
-    const { file, error } = await fileCopyAs(
-      templateId,
-      fileTitle,
-      parentId,
-      false,
-      password,
-    );
+  const { file, error } =
+    fromFile && templateId
+      ? await fileCopyAs(templateId, fileTitle, parentId, false, password)
+      : await createFile(parentId, fileTitle, templateId, formId);
 
-    if (!file) {
-      fileError = error as unknown as Error;
-    }
-
-    if (file?.id) fileId = file.id;
-  } else if (fromTemplate) {
-    const { file, error } = await createFile(
-      parentId,
-      fileTitle,
-      undefined,
-      formId,
-    );
-
-    if (!file) {
-      fileError = error as unknown as Error;
-    }
-
-    if (file?.id) fileId = file.id;
-  } else {
-    const { file, error } = await createFile(
-      parentId,
-      fileTitle,
-      templateId,
-      formId,
-    );
-
-    if (!file) {
-      fileError = error as unknown as Error;
-    }
-
-    if (file?.id) fileId = file.id;
+  if (!file) {
+    fileError = error as unknown as Error;
   }
+
+  if (file?.id) fileId = file.id;
 
   if (fileId || !fileError) {
     const redirectURL = `${baseURL}/doceditor/?fileId=${fileId}`;

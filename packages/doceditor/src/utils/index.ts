@@ -1,9 +1,13 @@
 import { toUrlParams } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { request } from "@docspace/shared/api/client";
-import { checkFillFormDraft, convertFile } from "@docspace/shared/api/files";
+import { convertFile } from "@docspace/shared/api/files";
 import { TEditHistory } from "@docspace/shared/api/files/types";
 import { FolderType } from "@docspace/shared/enums";
+
+import type { IInitialConfig } from "@/types";
+
+import { IS_VIEW } from "./constants";
 
 export const getBackUrl = (
   rootFolderType: FolderType,
@@ -35,11 +39,20 @@ export const getBackUrl = (
   return `${combineUrl(origin, backUrl)}`;
 };
 
-export const initForm = async (id: string | number) => {
-  const formUrl = await checkFillFormDraft(id);
-  history.pushState({}, "", formUrl);
+export const isTemplateFile = (
+  config: IInitialConfig | undefined,
+): config is IInitialConfig => {
+  const fileMeta = config?.file;
 
-  document.location.reload();
+  return (
+    !IS_VIEW &&
+    !!fileMeta &&
+    fileMeta.viewAccessibility.WebRestrictedEditing &&
+    fileMeta.security.FillForms &&
+    fileMeta.rootFolderType === FolderType.Rooms &&
+    !fileMeta.security.Edit &&
+    !config.document.isLinkedForMe
+  );
 };
 
 export const showDocEditorMessage = async (

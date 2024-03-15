@@ -27,6 +27,7 @@ import useSelectFolderDialog from "@/hooks/useSelectFolderDialog";
 import useSocketHelper from "@/hooks/useSocketHelper";
 import useShareDialog from "@/hooks/useShareDialog";
 import useFilesSettings from "@/hooks/useFilesSettings";
+import useUpdateSearchParamId from "@/hooks/useUpdateId";
 import { IS_VIEW } from "@/utils/constants";
 
 import pkgFile from "../../package.json";
@@ -108,6 +109,8 @@ const Root = ({
     onCloseSharingDialog,
     onSDKRequestSharingSettings,
   } = useShareDialog();
+
+  useUpdateSearchParamId(fileId);
 
   return (
     <I18nextProvider i18n={i18n}>

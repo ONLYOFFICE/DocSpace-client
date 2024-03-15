@@ -219,12 +219,14 @@ class AxiosClient {
             break;
           case 403: {
             const pathname = window.location.pathname;
+            const isFrame = window?.DocSpaceConfig?.isFrame;
+
             const isArchived = pathname.indexOf("/rooms/archived") !== -1;
 
             const isRooms =
               pathname.indexOf("/rooms/shared") !== -1 || isArchived;
 
-            if (isRooms && !skipRedirect) {
+            if (isRooms && !skipRedirect && !isFrame) {
               setTimeout(() => {
                 window.DocSpace.navigate(isArchived ? "/archived" : "/");
               }, 1000);

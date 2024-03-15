@@ -70,6 +70,8 @@ const StyledFolderInput = styled.div`
         ? `padding-left: 8px;`
         : `padding-right: 8px;`}
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .icon-wrapper {

@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { Checkbox } from "@docspace/shared/components/checkbox";
+import toLower from "lodash/toLower";
 import { useStore } from "SRC_DIR/store";
 import { validatePortalName } from "@docspace/shared/utils/common";
 
@@ -57,7 +58,7 @@ const CreatePortalDialog = () => {
   const [name, setName] = React.useState<string>("");
 
   const onHandleName = (e) => {
-    setName(e.target.value);
+    setName(toLower(e.target.value));
     if (registerError) setRegisterError(null);
   };
 

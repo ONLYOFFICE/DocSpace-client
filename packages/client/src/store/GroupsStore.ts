@@ -12,6 +12,7 @@ import config from "PACKAGE_FILE";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import AccountsFilter from "@docspace/shared/api/people/filter";
 import api from "@docspace/shared/api";
+import { TGroup } from "@docspace/shared/api/groups/types";
 
 class GroupsStore {
   authStore;
@@ -34,7 +35,7 @@ class GroupsStore {
 
   groupsIsIsLoading = false;
 
-  currentGroup = null;
+  currentGroup: TGroup | null = null;
 
   insideGroupFilter = InsideGroupFilter.getDefault();
 
@@ -150,7 +151,7 @@ class GroupsStore {
     );
   };
 
-  setCurrentGroup = (currentGroup = null) => {
+  setCurrentGroup = (currentGroup: TGroup | null = null) => {
     this.currentGroup = currentGroup;
   };
 
@@ -424,6 +425,50 @@ class GroupsStore {
     }
 
     window.DocSpace.navigate(`/accounts/groups/${groupId}`);
+  };
+
+  updateGroup = async (
+    groupId: string,
+    groupName: string,
+    groupManagerId: string,
+    membersToAdd: string[],
+    membersToRemove: string[],
+  ) => {
+    const {
+      infoPanelSelection,
+      setInfoPanelSelection,
+      setInfoPanelSelectedGroup,
+      getIsInsideGroup,
+    } = this.peopleStore.infoPanelStore;
+
+    try {
+      const res = await groupsApi.updateGroup(
+        groupId,
+        groupName,
+        groupManagerId,
+        membersToAdd,
+        membersToRemove,
+      );
+
+      if (this.groups && this.groups.length > 0) {
+        this.groups = this.groups.map((g) => (g.id === groupId ? res : g));
+      }
+
+      if (getIsInsideGroup() && this.currentGroup?.id === groupId) {
+        this.setCurrentGroup(res);
+        const members = await api.people.getUserList(
+          this.insideGroupFilter.clone(),
+        );
+        this.peopleStore.usersStore.setUsers(members.items);
+      }
+
+      if (infoPanelSelection?.id === res.id) {
+        setInfoPanelSelection({ ...infoPanelSelection, ...res });
+        setInfoPanelSelectedGroup(res);
+      }
+    } catch (err: any) {
+      toastr.error(err.message);
+    }
   };
 }
 

@@ -7,6 +7,7 @@ import { ConfigurationWrapper } from "../StyledSpaces";
 import { useStore } from "SRC_DIR/store";
 import { isMobile } from "react-device-detect";
 import { toastr } from "@docspace/shared/components/toast";
+import toLower from "lodash/toLower";
 import { TranslationType } from "SRC_DIR/types/spaces";
 import { parseDomain, validatePortalName } from "@docspace/shared/utils/common";
 
@@ -81,13 +82,13 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
   const onHandleDomain = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (checkDomainError) setCheckDomainError(null);
     if (domainNameError) setDomainNameError(null);
-    setDomain(e.target.value);
+    setDomain(toLower(e.target.value));
   };
 
   const onHandleName = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (checkDomainError) setCheckDomainError(null);
     if (portalNameError) setPortalNameError(null);
-    setName(e.target.value);
+    setName(toLower(e.target.value));
   };
 
   return (

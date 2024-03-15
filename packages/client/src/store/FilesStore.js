@@ -1604,7 +1604,7 @@ class FilesStore {
         ].includes(err?.response?.status);
 
         if (isUserError && !isThirdPartyError) {
-          setIsErrorRoomNotAvailable(true);
+          this.setIsErrorRoomNotAvailable(true);
         } else {
           if (axios.isCancel(err)) {
             console.log("Request canceled", err.message);

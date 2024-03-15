@@ -37,6 +37,7 @@ class ImportAccountsStore {
 
   isFileLoading = false;
   isLoading = false;
+  isMigrationInit = false;
 
   searchValue = "";
 
@@ -115,6 +116,10 @@ class ImportAccountsStore {
 
   setIsLoading = (isLoading) => {
     this.isLoading = isLoading;
+  };
+
+  setIsMigrationInit = (isMigrationInit) => {
+    this.isMigrationInit = isMigrationInit;
   };
 
   setSearchValue = (value) => {

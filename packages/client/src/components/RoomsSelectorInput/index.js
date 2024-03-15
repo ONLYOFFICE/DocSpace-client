@@ -45,7 +45,7 @@ const RoomsSelectorInput = (props) => {
 
   const [isPanelVisible, setIsPanelVisible] = useState(false);
   const BasePath = `DocSpace / ${t("Common:Rooms")} `;
-  const [path, setPath] = useState(BasePath);
+  const [path, setPath] = useState("");
 
   const handleOnSubmit = (rooms) => {
     setPath(BasePath + "/ " + rooms[0].label);
@@ -96,6 +96,7 @@ const RoomsSelectorInput = (props) => {
         hasError={isError}
         scale
         isDocumentIcon={isDocumentIcon}
+        placeholder={t("SelectAction")}
       />
 
       <Backdrop

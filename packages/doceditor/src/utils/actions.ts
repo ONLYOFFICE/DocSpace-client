@@ -62,7 +62,7 @@ const processFillFormDraft = async (
   editorSearchParams: URLSearchParams,
   share?: string,
 ): Promise<
-  [string, IInitialConfig, TDocServiceLocation | undefined] | undefined
+  [string, IInitialConfig, TDocServiceLocation | undefined] | void
 > => {
   const templateFileId = config.file.id;
 
@@ -82,22 +82,29 @@ const processFillFormDraft = async (
 
   const { response: formUrl } = await response.json();
 
-  const queryParams = new URLSearchParams(formUrl.split("?")[1]);
-  const queryFileId = queryParams.get("fileid");
-  const queryVersion = queryParams.get("version");
+  const basePath = getBaseUrl();
+  const url = new URL(basePath + formUrl);
+
+  const queryFileId = url.searchParams.get("fileid");
+  const queryVersion = url.searchParams.get("version");
 
   if (!queryFileId) return;
 
-  if (queryVersion) {
-    searchParams.set("version", queryVersion);
-    editorSearchParams.set("version", queryVersion);
-  }
+  url.searchParams.delete("fileid");
+
+  const combinedSearchParams = new URLSearchParams({
+    ...Object.fromEntries(searchParams),
+    ...Object.fromEntries(url.searchParams),
+  });
+
+  const editorVersion = editorSearchParams.get("version");
 
   const queries = [
-    `/files/file/${queryFileId}/openedit?${searchParams.toString()}`,
+    `/files/file/${queryFileId}/openedit?${combinedSearchParams.toString()}`,
   ];
 
-  if (queryVersion) {
+  if (queryVersion && queryVersion !== editorVersion) {
+    editorSearchParams.set("version", queryVersion);
     queries.push(`/files/docservice?${editorSearchParams.toString()}`);
   }
 

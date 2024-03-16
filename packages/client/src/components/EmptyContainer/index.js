@@ -111,9 +111,7 @@ export default inject(
     const { isPublicRoom } = publicRoomStore;
 
     const isRoomNotFoundOrMoved =
-      isFiltered === null &&
-      selectedFolderStore.parentId === null &&
-      isErrorRoomNotAvailable;
+      isFiltered === null && isErrorRoomNotAvailable;
 
     const isRoot = selectedFolderStore.pathParts?.length === 1;
 

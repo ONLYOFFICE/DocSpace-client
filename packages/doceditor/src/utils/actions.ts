@@ -6,8 +6,183 @@ import { getLtrLanguageForEditor } from "@docspace/shared/utils/common";
 import { TenantStatus } from "@docspace/shared/enums";
 
 import { TCatchError, TError, TResponse } from "@/types";
+import { error } from "console";
 
 const API_PREFIX = "api/2.0";
+const SKIP_PORT_FORWARD = process.env.NODE_PORT_FORWARD === "false";
+
+export const getBaseUrl = () => {
+  const hdrs = headers();
+
+  const host = hdrs.get("x-forwarded-host");
+  const proto = hdrs.get("x-forwarded-proto");
+  const port = !SKIP_PORT_FORWARD ? hdrs.get("x-forwarded-port") : "";
+
+  // const baseURL = `${proto}://${host}${port ? `:${port}` : ""}`;
+  const baseURL = `${proto}://${host}`;
+
+  return baseURL;
+};
+
+export const getAPIUrl = () => {
+  const baseUrl = getBaseUrl();
+  const baseAPIUrl = `${baseUrl}/${API_PREFIX}`;
+
+  return baseAPIUrl;
+};
+
+export const createRequest = (
+  paths: string[],
+  newHeaders: [string, string][],
+  method: string,
+  body?: string,
+) => {
+  const hdrs = new Headers(headers());
+
+  const apiURL = getAPIUrl();
+
+  newHeaders.forEach((hdr) => {
+    if (hdr[0]) hdrs.set(hdr[0], hdr[1]);
+  });
+
+  const urls = paths.map((path) => `${apiURL}${path}`);
+
+  const requests = urls.map(
+    (url) => new Request(url, { headers: hdrs, method, body }),
+  );
+
+  return requests;
+};
+
+export async function getErrorData() {
+  const hdrs = headers();
+  const cookie = hdrs.get("cookie");
+
+  const [getSettings, getUser] = createRequest(
+    [
+      `/settings?withPassword=${cookie?.includes("asc_auth_key") ? "false" : "true"}`,
+      `/people/@self`,
+    ],
+    [["", ""]],
+    "GET",
+  );
+
+  const resActions = [];
+
+  resActions.push(fetch(getSettings));
+  resActions.push(fetch(getUser));
+
+  const [settingsRes, userRes] = await Promise.all(resActions);
+
+  const actions = [];
+
+  actions.push(settingsRes.json());
+  if (userRes.status !== 401) actions.push(userRes.json());
+
+  const [settings, user] = await Promise.all(actions);
+
+  return { settings: settings.response, user: user?.response };
+}
+
+export async function fileCopyAs(
+  fileId: string,
+  destTitle: string,
+  destFolderId: string,
+  enableExternalExt?: boolean,
+  password?: string,
+) {
+  try {
+    const [createFile] = createRequest(
+      [`/files/file/${fileId}/copyas`],
+      [["Content-Type", "application/json;charset=utf-8"]],
+      "POST",
+      JSON.stringify({
+        destTitle,
+        destFolderId: +destFolderId,
+        enableExternalExt,
+        password,
+      }),
+    );
+
+    const file = await (await fetch(createFile)).json();
+
+    console.log("File copyas success ", file);
+
+    return {
+      file: file.response,
+      error: file.error
+        ? typeof file.error === "string"
+          ? error
+          : {
+              message: file.error?.message,
+              status: file.error?.statusCode,
+              type: file.error?.type,
+              stack: file.error?.stack,
+            }
+        : undefined,
+    };
+  } catch (e: any) {
+    console.log("File copyas error ", e);
+    return {
+      file: undefined,
+      error:
+        typeof e === "string"
+          ? e
+          : {
+              message: e.message,
+              status: e.statusCode,
+              type: e.type,
+              stack: e.stack,
+            },
+    };
+  }
+}
+
+export async function createFile(
+  parentId: string,
+  title: string,
+  templateId?: string,
+  formId?: string,
+) {
+  try {
+    const [createFile] = createRequest(
+      [`/files/${parentId}/file`],
+      [["Content-Type", "application/json;charset=utf-8"]],
+      "POST",
+      JSON.stringify({ title, templateId, formId }),
+    );
+
+    const file = await (await fetch(createFile)).json();
+    console.log("File create success ", file);
+    return {
+      file: file.response,
+      error: file.error
+        ? typeof file.error === "string"
+          ? error
+          : {
+              message: file.error?.message,
+              status: file.error?.statusCode,
+              type: file.error?.type,
+              stack: file.error?.stack,
+            }
+        : undefined,
+    };
+  } catch (e: any) {
+    console.log("File create error ", e);
+    return {
+      file: undefined,
+      error:
+        typeof e === "string"
+          ? e
+          : {
+              message: e.message,
+              status: e.statusCode,
+              type: e.type,
+              stack: e.stack,
+            },
+    };
+  }
+}
 
 export async function getData(
   fileId?: string,
@@ -20,63 +195,55 @@ export async function getData(
   try {
     const hdrs = headers();
 
-    const host = hdrs.get("x-forwarded-host");
-    const proto = hdrs.get("x-forwarded-proto");
+    const cookie = hdrs.get("cookie");
 
-    const baseURL = `${proto}://${host}`;
-    const baseAPIUrl = `${baseURL}/${API_PREFIX}`;
+    const searchParams = new URLSearchParams();
+    const editorSearchParams = new URLSearchParams();
 
-    const configURL = new URL(`${baseAPIUrl}/files/file/${fileId}/openedit`);
-    const editorURL = new URL(`${baseAPIUrl}/files/docservice`);
-    const userURL = new URL(`${baseAPIUrl}/people/@self`);
-    const settingsURL = new URL(`${baseAPIUrl}/settings?withPassword=false`);
-
-    if (view) configURL.searchParams.append("view", view ? "true" : "false");
+    if (view) searchParams.append("view", view ? "true" : "false");
     if (version) {
-      configURL.searchParams.append("version", version);
-      editorURL.searchParams.append("version", version);
+      searchParams.append("version", version);
+      editorSearchParams.append("version", version);
     }
-    if (doc) configURL.searchParams.append("doc", doc);
-    if (share) configURL.searchParams.append("share", share);
-    if (editorType) configURL.searchParams.append("editorType", editorType);
+    if (doc) searchParams.append("doc", doc);
+    if (share) searchParams.append("share", share);
+    if (editorType) searchParams.append("editorType", editorType);
 
-    const getConfig = new Request(configURL, {
-      headers: hdrs,
-    });
-    const getEditorUrl = new Request(editorURL, {
-      headers: hdrs,
-    });
-    const getUser = new Request(userURL, {
-      headers: hdrs,
-    });
-    const getSettings = new Request(settingsURL, {
-      headers: hdrs,
-    });
+    const [getConfig, getEditorUrl, getSettings, getUser] = createRequest(
+      [
+        `/files/file/${fileId}/openedit?${searchParams.toString()}`,
+        `/files/docservice?${editorSearchParams.toString()}`,
+        `/settings?withPassword=${cookie?.includes("asc_auth_key") ? "false" : "true"}`,
+        `/people/@self`,
+      ],
+      [share ? ["Request-Token", share] : ["", ""]],
+      "GET",
+    );
 
     const resActions = [];
 
     resActions.push(fetch(getConfig));
     resActions.push(fetch(getEditorUrl));
-    resActions.push(fetch(getUser));
     resActions.push(fetch(getSettings));
+    resActions.push(fetch(getUser));
 
-    const [configRes, editorUrlRes, userRes, settingsRes] =
+    const [configRes, editorUrlRes, settingsRes, userRes] =
       await Promise.all(resActions);
 
     const actions = [];
 
+    actions.push(configRes.json());
+    actions.push(editorUrlRes.json());
+    actions.push(settingsRes.json());
+    if (userRes.status !== 401) actions.push(userRes.json());
+
+    const [config, editorUrl, settings, user] = await Promise.all(actions);
+
     if (configRes.ok) {
-      actions.push(configRes.json());
-      actions.push(editorUrlRes.json());
-      actions.push(userRes.json());
-      actions.push(settingsRes.json());
-
-      const [config, editorUrl, user, settings] = await Promise.all(actions);
-
       const response: TResponse = {
         config: config.response,
         editorUrl: editorUrl.response,
-        user: user.response,
+        user: user?.response,
         settings: settings.response,
         successAuth: false,
         isSharingAccess: false,
@@ -113,7 +280,14 @@ export async function getData(
       return response;
     }
 
-    const response: TResponse = { error: { message: "unauthorized" }, fileId };
+    console.log("initDocEditor failed", config.error);
+
+    const response: TResponse = {
+      error: user ? config.error : { message: "unauthorized" },
+      user: user?.response,
+      settings: settings?.response,
+      fileId,
+    };
 
     return response;
   } catch (e) {

@@ -5,14 +5,13 @@ import { isMobile } from "react-device-detect";
 
 import { DocumentEditor } from "@onlyoffice/document-editor-react";
 import IConfig from "@onlyoffice/document-editor-react/dist/esm/types/model/config";
-import { EditorProps, TGoBack } from "@/types";
-
-import useInit from "@/hooks/useInit";
-import useEditorEvents from "@/hooks/useEditorEvents";
 
 import { FolderType, ThemeKeys } from "@docspace/shared/enums";
+import { getEditorTheme } from "@docspace/shared/utils";
+
 import { getBackUrl } from "@/utils";
-import { IS_DESKTOP_EDITOR, IZ_ZOOM } from "@/utils/constants";
+import { IS_DESKTOP_EDITOR, IS_ZOOM } from "@/utils/constants";
+import { EditorProps, TGoBack } from "@/types";
 import {
   onSDKRequestHistoryClose,
   onSDKRequestEditRights,
@@ -21,8 +20,8 @@ import {
   onSDKError,
   onSDKRequestRename,
 } from "@/utils/events";
-
-import { getEditorTheme } from "@docspace/shared/utils";
+import useInit from "@/hooks/useInit";
+import useEditorEvents from "@/hooks/useEditorEvents";
 
 const Editor = ({
   config,
@@ -57,9 +56,8 @@ const Editor = ({
     onMetaChange,
     onMakeActionLink,
 
-    createUrl,
     documentReady,
-    usersInRoom,
+
     setDocTitle,
   } = useEditorEvents({
     user,
@@ -125,7 +123,7 @@ const Editor = ({
           typeof window !== "undefined"
             ? window.DocSpaceConfig?.editor?.openOnNewPage ?? true
             : false;
-        goBack.url = getBackUrl(fileInfo.rootFolderId, fileInfo.folderId);
+        goBack.url = getBackUrl(fileInfo.rootFolderType, fileInfo.folderId);
       }
     }
   }
@@ -180,7 +178,7 @@ const Editor = ({
       newConfig.events.onRequestUsers = onSDKRequestUsers;
       newConfig.events.onRequestSendNotify = onSDKRequestSendNotify;
     }
-    if (!user.isVisitor) {
+    if (!user?.isVisitor) {
       newConfig.events.onRequestSaveAs = onSDKRequestSaveAs;
       if (
         IS_DESKTOP_EDITOR ||
@@ -204,7 +202,7 @@ const Editor = ({
   if (!fileInfo.providerKey) {
     newConfig.events.onRequestReferenceData = onSDKRequestReferenceData;
 
-    if (!IZ_ZOOM) {
+    if (!IS_ZOOM) {
       newConfig.events.onRequestOpen = onSDKRequestOpen;
     }
   }

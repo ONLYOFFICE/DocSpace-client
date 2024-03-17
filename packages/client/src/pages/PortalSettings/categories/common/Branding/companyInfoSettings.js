@@ -1,21 +1,24 @@
 import React, { useState, useEffect, useCallback } from "react";
+import styled from "styled-components";
 import { Trans, withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
+import { inject, observer } from "mobx-react";
+import isEqual from "lodash/isEqual";
+
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import { inject, observer } from "mobx-react";
-import isEqual from "lodash/isEqual";
-import withLoading from "SRC_DIR/HOCs/withLoading";
-import styled from "styled-components";
 import { Link } from "@docspace/shared/components/link";
+import { mobile, size } from "@docspace/shared/utils";
+import { isManagement } from "@docspace/shared/utils/common";
+
+import withLoading from "SRC_DIR/HOCs/withLoading";
 import LoaderCompanyInfoSettings from "../sub-components/loaderCompanyInfoSettings";
 import AboutDialog from "../../../../About/AboutDialog";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
-import { mobile, size } from "@docspace/shared/utils";
-import { isManagement } from "@docspace/shared/utils/common";
+
 const StyledComponent = styled.div`
   .link {
     font-weight: 600;
@@ -66,14 +69,6 @@ const CompanyInfoSettings = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const defaultCompanySettingsData = {
-    address: companyInfoSettingsData.address,
-    companyName: companyInfoSettingsData.companyName,
-    email: companyInfoSettingsData.email,
-    phone: companyInfoSettingsData.phone,
-    site: companyInfoSettingsData.site,
-  };
-
   const defaultCompanySettingsError = {
     hasErrorAddress: false,
     hasErrorCompanyName: false,
@@ -82,9 +77,7 @@ const CompanyInfoSettings = (props) => {
     hasErrorSite: false,
   };
 
-  const [companySettings, setCompanySettings] = useState(
-    defaultCompanySettingsData,
-  );
+  const [companySettings, setCompanySettings] = useState({});
   const [companySettingsError, setCompanySettingsError] = useState(
     defaultCompanySettingsError,
   );
@@ -124,9 +117,16 @@ const CompanyInfoSettings = (props) => {
     setIsLoadedCompanyInfoSettingsData(true);
   }, [companyInfoSettingsData, tReady]);
 
-  const getSettings = async () => {
-    await getCompanyInfoSettings();
+  const getSettings = () => {
+    //await getCompanyInfoSettings();
     const companySettings = getFromSessionStorage("companySettings");
+    const defaultCompanySettingsData = {
+      address: companyInfoSettingsData?.address,
+      companyName: companyInfoSettingsData?.companyName,
+      email: companyInfoSettingsData?.email,
+      phone: companyInfoSettingsData?.phone,
+      site: companyInfoSettingsData?.site,
+    };
 
     saveToSessionStorage("defaultCompanySettings", defaultCompanySettingsData);
 
@@ -145,7 +145,7 @@ const CompanyInfoSettings = (props) => {
 
   useEffect(() => {
     getSettings();
-  }, [isLoading]);
+  }, [companyInfoSettingsData]);
 
   useEffect(() => {
     const defaultCompanySettings = getFromSessionStorage(
@@ -337,7 +337,7 @@ const CompanyInfoSettings = (props) => {
         onClose={onCloseModal}
         buildVersionInfo={buildVersionInfo}
         personal={personal}
-        previewData={defaultCompanySettingsData}
+        previewData={companySettings}
       />
 
       <StyledComponent isSettingPaid={isSettingPaid}>

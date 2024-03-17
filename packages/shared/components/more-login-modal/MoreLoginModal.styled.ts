@@ -39,16 +39,7 @@ export const ProviderRow = styled.div`
     line-height: 16px;
   }
 
-  .signin-button {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: auto;
-          `
-        : css`
-            margin-left: auto;
-          `}
-  }
+
 `;
 
 export const Modal = styled(ModalDialog)`

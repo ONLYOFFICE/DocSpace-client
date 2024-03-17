@@ -840,7 +840,7 @@ const Manager = (props) => {
                     <TooltipContent
                       title={t("Menu")}
                       description={t("MenuDescription")}
-                      img={theme.isBase ? LeftMenuUrl : LeftMenuDarkUrl}
+                      img={LeftMenuUrl}
                     />
                   }
                 />
@@ -861,7 +861,7 @@ const Manager = (props) => {
                     <TooltipContent
                       title={t("Common:Title")}
                       description={t("ManagerTitleDescription")}
-                      img={theme.isBase ? TitleUrl : TitleDarkUrl}
+                      img={TitleUrl}
                     />
                   }
                 />
@@ -881,7 +881,7 @@ const Manager = (props) => {
                     <TooltipContent
                       title={t("SettingUpColumns")}
                       description={t("SettingUpColumnsDescription")}
-                      img={theme.isBase ? ColumnsUrl : ColumnsDarkUrl}
+                      img={ColumnsUrl}
                     />
                   }
                 />
@@ -901,7 +901,7 @@ const Manager = (props) => {
                     <TooltipContent
                       title={t("ActionButton")}
                       description={t("ActionButtonDescription")}
-                      img={theme.isBase ? ActionButtonUrl : ActionButtonDarkUrl}
+                      img={ActionButtonUrl}
                     />
                   }
                 />
@@ -921,7 +921,7 @@ const Manager = (props) => {
                     <TooltipContent
                       title={t("SearchBlock")}
                       description={t("ManagerSearchBlockDescription")}
-                      img={theme.isBase ? SearchUrl : SearchDarkUrl}
+                      img={SearchUrl}
                     />
                   }
                 />
@@ -942,7 +942,7 @@ const Manager = (props) => {
                     <TooltipContent
                       title={t("Header")}
                       description={t("HeaderDescription")}
-                      img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
+                      img={HeaderUrl}
                     />
                   }
                 />

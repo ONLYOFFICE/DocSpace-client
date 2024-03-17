@@ -80,15 +80,23 @@ const Share = (props: ShareProps) => {
   };
 
   const addGeneralLink = async () => {
-    addLoaderLink();
+    try {
+      addLoaderLink();
 
-    const link = getPrimaryFileLink
-      ? await getPrimaryFileLink(infoPanelSelection.id)
-      : await getPrimaryLink(infoPanelSelection.id);
+      const link = getPrimaryFileLink
+        ? await getPrimaryFileLink(infoPanelSelection.id)
+        : await getPrimaryLink(infoPanelSelection.id);
 
-    setFileLinks([link]);
-    copy(link.sharedTo.shareLink);
-    toastr.success(t("Common:GeneralAccessLinkCopied"));
+      setFileLinks([link]);
+      copy(link.sharedTo.shareLink);
+      toastr.success(t("Common:GeneralAccessLinkCopied"));
+    } catch (error) {
+      const message = (error as { message: string }).message
+        ? ((error as { message: string }).message as TData)
+        : (error as string);
+      toastr.error(message);
+      setFileLinks([]);
+    }
   };
 
   const addAdditionalLinks = async () => {

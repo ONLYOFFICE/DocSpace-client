@@ -628,7 +628,7 @@ class FilesActionStore {
         operationId,
       });
       setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
-      return toastr.error(err.message ? err.message : err);
+      return toastr.error(err);
     }
   };
 

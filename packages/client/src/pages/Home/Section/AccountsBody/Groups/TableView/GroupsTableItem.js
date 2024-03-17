@@ -24,13 +24,10 @@ const GroupsTableItem = ({
   setSelection,
   bufferSelection,
   setBufferSelection,
-  setCurrentGroup,
   getGroupContextOptions,
-  setInsideGroupBackUrl,
+  openGroupAction,
   managerAccountsGroupsColumnIsEnabled,
 }) => {
-  const navigate = useNavigate();
-
   const isChecked = selection.includes(item);
   const isActive = bufferSelection?.id === item.id;
 
@@ -46,16 +43,13 @@ const GroupsTableItem = ({
   const onOpenGroup = () => {
     setSelection([]);
     setBufferSelection(null);
-    setCurrentGroup(null);
-    setInsideGroupBackUrl(
-      `${window.location.pathname}${window.location.search}`,
-    );
-
-    navigate(`/accounts/groups/${item.id}/filter`);
+    openGroupAction(item.id, true, item.name);
   };
 
   const onRowClick = (e) => {
     if (
+      e.target?.tagName === "SPAN" ||
+      e.target?.tagName === "A" ||
       e.target.closest(".checkbox") ||
       e.target.closest(".table-container_row-checkbox") ||
       e.detail === 0
@@ -154,9 +148,8 @@ export default inject(({ peopleStore }) => ({
   setSelection: peopleStore.groupsStore.setSelection,
   bufferSelection: peopleStore.groupsStore.bufferSelection,
   setBufferSelection: peopleStore.groupsStore.setBufferSelection,
-  setCurrentGroup: peopleStore.groupsStore.setCurrentGroup,
   getGroupContextOptions: peopleStore.groupsStore.getGroupContextOptions,
-  setInsideGroupBackUrl: peopleStore.groupsStore.setInsideGroupBackUrl,
+  openGroupAction: peopleStore.groupsStore.openGroupAction,
 }))(
   withTranslation(
     "People",

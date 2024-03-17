@@ -5,16 +5,19 @@ import { useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { isMobile, isIOS, isFirefox } from "react-device-detect";
+import { toast as toastify } from "react-toastify";
 
 import { getLogoFromPath } from "@docspace/shared/utils";
 import { Portal } from "@docspace/shared/components/portal";
 import { SnackBar } from "@docspace/shared/components/snackbar";
 import { Toast, toastr } from "@docspace/shared/components/toast";
+import { ToastType } from "@docspace/shared/components/toast/Toast.enums";
 import { getRestoreProgress } from "@docspace/shared/api/portal";
 import { updateTempContent } from "@docspace/shared/utils/common";
 import { DeviceType, IndexedDBStores } from "@docspace/shared/enums";
 import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
 import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
+import { sendToastReport } from "@docspace/shared/utils/crashReport";
 
 import config from "PACKAGE_FILE";
 
@@ -26,6 +29,7 @@ import ScrollToTop from "./components/Layout/ScrollToTop";
 import IndicatorLoader from "./components/IndicatorLoader";
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 import DialogsWrapper from "./components/dialogs/DialogsWrapper";
+import useCreateFileError from "./Hooks/useCreateFileError";
 
 // import ReactSmartBanner from "./components/SmartBanner";
 
@@ -53,9 +57,19 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     currentDeviceType,
     timezone,
     showArticleLoader,
+    setPortalTariff,
+    setFormCreationInfo,
+    setConvertPasswordDialogVisible,
+    version,
   } = rest;
 
   const theme = useTheme();
+
+  useCreateFileError({
+    setPortalTariff,
+    setFormCreationInfo,
+    setConvertPasswordDialogVisible,
+  });
 
   useEffect(() => {
     const regex = /(\/){2,}/g;
@@ -376,6 +390,21 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       setTheme(systemTheme);
   }, [systemTheme]);
 
+  useEffect(() => {
+    if (!FirebaseHelper.isEnabled || !isLoaded) return;
+    toastify.onChange((payload) => {
+      if (payload.status === "added" && payload.type === ToastType.error) {
+        sendToastReport(
+          userId,
+          version,
+          language,
+          payload?.data,
+          FirebaseHelper,
+        );
+      }
+    });
+  }, [isLoaded]);
+
   const rootElement = document.getElementById("root");
 
   const toast =
@@ -406,76 +435,96 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 };
 
 const ShellWrapper = inject(
-  ({ authStore, settingsStore, backup, clientLoadingStore, userStore }) => {
-  const { i18n } = useTranslation();
+  ({
+    authStore,
+    settingsStore,
+    backup,
+    clientLoadingStore,
+    userStore,
+    currentTariffStatusStore,
+    dialogsStore,
+  }) => {
+    const { i18n } = useTranslation();
 
-    const { init, isLoaded, setProductVersion, language } = authStore;
+    const { init, isLoaded, setProductVersion, language, version } = authStore;
 
-  const {
-    personal,
-    roomsMode,
-    isDesktopClient,
-    firebaseHelper,
-    setModuleInfo,
-    setCheckedMaintenance,
-    setMaintenanceExist,
-    setSnackbarExist,
-    socketHelper,
-    setTheme,
-    whiteLabelLogoUrls,
-    currentDeviceType,
+    const {
+      personal,
+      roomsMode,
+      isDesktopClient,
+      firebaseHelper,
+      setModuleInfo,
+      setCheckedMaintenance,
+      setMaintenanceExist,
+      setSnackbarExist,
+      socketHelper,
+      setTheme,
+      whiteLabelLogoUrls,
+      currentDeviceType,
       isFrame,
       frameConfig,
-  } = settingsStore;
+    } = settingsStore;
 
-  const isBase = settingsStore.theme.isBase;
-  const { setPreparationPortalDialogVisible } = backup;
+    const isBase = settingsStore.theme.isBase;
+    const { setPreparationPortalDialogVisible } = backup;
 
-  const userTheme = isDesktopClient
+    const userTheme = isDesktopClient
       ? userStore?.user?.theme
         ? userStore?.user?.theme
-      : window.RendererProcessVariable?.theme?.type === "dark"
-        ? "Dark"
-        : "Base"
+        : window.RendererProcessVariable?.theme?.type === "dark"
+          ? "Dark"
+          : "Base"
       : userStore?.user?.theme;
 
-  return {
-    loadBaseInfo: async () => {
-      await init(false, i18n);
+    const { setPortalTariff } = currentTariffStatusStore;
 
-      setModuleInfo(config.homepage, "home");
-      setProductVersion(config.version);
+    const {
+      setConvertPasswordDialogVisible,
 
-      if (isDesktopClient) {
-        document.body.classList.add("desktop");
-      }
-    },
-    language,
-    isLoaded,
+      setFormCreationInfo,
+    } = dialogsStore;
 
-    isDesktop: isDesktopClient,
-    FirebaseHelper: firebaseHelper,
-    personal,
-    setCheckedMaintenance,
-    setMaintenanceExist,
-    socketHelper,
-    setPreparationPortalDialogVisible,
-    isBase,
-    setTheme,
-    roomsMode,
-    setSnackbarExist,
+    return {
+      loadBaseInfo: async () => {
+        await init(false, i18n);
+
+        setModuleInfo(config.homepage, "home");
+        setProductVersion(config.version);
+
+        if (isDesktopClient) {
+          document.body.classList.add("desktop");
+        }
+      },
+      language,
+      isLoaded,
+
+      isDesktop: isDesktopClient,
+      FirebaseHelper: firebaseHelper,
+      personal,
+      setCheckedMaintenance,
+      setMaintenanceExist,
+      socketHelper,
+      setPreparationPortalDialogVisible,
+      isBase,
+      setTheme,
+      roomsMode,
+      setSnackbarExist,
       userTheme: isFrame ? frameConfig?.theme : userTheme,
       userId: userStore?.user?.id,
-    whiteLabelLogoUrls,
-    currentDeviceType,
-    showArticleLoader: clientLoadingStore.showArticleLoader,
-  };
+      whiteLabelLogoUrls,
+      currentDeviceType,
+      showArticleLoader: clientLoadingStore.showArticleLoader,
+      setPortalTariff,
+      setFormCreationInfo,
+      setConvertPasswordDialogVisible,
+      version,
+    };
   },
 )(observer(Shell));
 
 const Root = () => (
   <ErrorBoundary>
-        <ShellWrapper />
+    <ShellWrapper />
   </ErrorBoundary>
 );
 

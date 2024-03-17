@@ -8,6 +8,7 @@ import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 import StepContent from "./Stepper";
+import SelectFileLoader from "../sub-components/SelectFileLoader";
 import BreakpointWarning from "SRC_DIR/components/BreakpointWarning";
 import { Text } from "@docspace/shared/components/text";
 import { Box } from "@docspace/shared/components/box";
@@ -187,7 +188,7 @@ const GoogleWorkspace = ({
   if (isMobile())
     return <BreakpointWarning sectionName={t("Settings:DataImport")} />;
 
-  if (!shouldRender) return;
+  if (!shouldRender) return <SelectFileLoader />;
 
   return (
     <GoogleWrapper>

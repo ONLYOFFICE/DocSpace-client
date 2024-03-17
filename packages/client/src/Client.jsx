@@ -28,9 +28,11 @@ const ClientArticle = React.memo(
     setIsHeaderLoading,
     setIsFilterLoading,
     showArticleLoader,
+    isInfoPanelVisible,
   }) => {
     return (
       <ArticleWrapper
+        isInfoPanelVisible={isInfoPanelVisible}
         withMainButton={withMainButton}
         onLogoClickAction={() => {
           setIsFilterLoading(true, false);
@@ -51,7 +53,7 @@ const ClientArticle = React.memo(
         </Article.Body>
       </ArticleWrapper>
     );
-  }
+  },
 );
 
 const ClientContent = (props) => {
@@ -67,6 +69,7 @@ const ClientContent = (props) => {
     isDesktop,
     showMenu,
     isFrame,
+    isInfoPanelVisible,
     withMainButton,
     t,
 
@@ -102,7 +105,7 @@ const ClientContent = (props) => {
         setEncryptionKeys,
         isEditor,
         null,
-        t
+        t,
       );
       //   console.log(
       //     "%c%s",
@@ -138,6 +141,7 @@ const ClientContent = (props) => {
         isFrame ? (
           showMenu && (
             <ClientArticle
+              isInfoPanelVisible={isInfoPanelVisible}
               withMainButton={withMainButton}
               setIsHeaderLoading={setIsHeaderLoading}
               setIsFilterLoading={setIsFilterLoading}
@@ -146,6 +150,7 @@ const ClientContent = (props) => {
           )
         ) : (
           <ClientArticle
+            isInfoPanelVisible={isInfoPanelVisible}
             withMainButton={withMainButton}
             setIsHeaderLoading={setIsHeaderLoading}
             setIsFilterLoading={setIsFilterLoading}
@@ -169,6 +174,7 @@ const Client = inject(
     pluginStore,
     userStore,
     settingsStore,
+    infoPanelStore,
   }) => {
     const {
       frameConfig,
@@ -197,6 +203,8 @@ const Client = inject(
 
     const { isInit: isInitPlugins, initPlugins } = pluginStore;
 
+    const { isVisible } = infoPanelStore;
+
     return {
       isDesktop: isDesktopClient,
       isDesktopClientInit,
@@ -210,6 +218,7 @@ const Client = inject(
       isLoaded: authStore.isLoaded && clientLoadingStore.isLoaded,
       setIsLoaded: clientLoadingStore.setIsLoaded,
       withMainButton,
+      isInfoPanelVisible: isVisible,
       setIsFilterLoading: setIsSectionFilterLoading,
       setIsHeaderLoading: setIsSectionHeaderLoading,
       isLoading,
@@ -224,7 +233,7 @@ const Client = inject(
         await Promise.all(actions);
       },
     };
-  }
+  },
 )(withTranslation("Common")(observer(ClientContent)));
 
 export default () => <Client />;

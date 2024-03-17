@@ -1,6 +1,5 @@
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
-
 import * as Styled from "./index.styled";
 import { Link } from "@docspace/shared/components/link";
 import { withTranslation } from "react-i18next";
@@ -19,18 +18,17 @@ const GroupsRow = ({
   setSelection,
   bufferSelection,
   setBufferSelection,
-  setCurrentGroup,
   getGroupContextOptions,
   sectionWidth,
   theme,
-  setInsideGroupBackUrl,
+  openGroupAction,
 }) => {
-  const navigate = useNavigate();
-
   const isChecked = selection.some((el) => el.id === item.id);
   const isActive = bufferSelection?.id === item?.id;
 
   const onRowClick = (e) => {
+    if (e.target?.tagName === "SPAN" || e.target?.tagName === "A") return;
+
     setBufferSelection(item);
 
     if (selection.length === 1 && selection[0].id === item.id) {
@@ -53,12 +51,7 @@ const GroupsRow = ({
   const onOpenGroup = () => {
     setSelection([]);
     setBufferSelection(null);
-    setCurrentGroup(null);
-    setInsideGroupBackUrl(
-      `${window.location.pathname}${window.location.search}`,
-    );
-
-    navigate(`/accounts/groups/${item.id}/filter`);
+    openGroupAction(item.id, true, item.name);
   };
 
   const nameColor =
@@ -116,22 +109,39 @@ const GroupsRow = ({
             nameColor={nameColor}
             sideInfoColor={sideInfoColor}
           >
-            {[
-              <Link
-                key={"group-title"}
-                containerWidth="28%"
-                target="_blank"
-                title={item.name}
-                fontWeight={600}
-                fontSize="15px"
-                lineHeight="20px"
-                color={nameColor}
-                isTextOverflow={true}
-                onClick={onOpenGroup}
-              >
-                {item.name}
-              </Link>,
-            ]}
+            <Link
+              key={"group-title"}
+              containerWidth="28%"
+              target="_blank"
+              title={item.name}
+              fontWeight={600}
+              fontSize="15px"
+              lineHeight="20px"
+              color={nameColor}
+              isTextOverflow={true}
+              onClick={onOpenGroup}
+            >
+              {item.name}
+            </Link>
+
+            <div></div>
+
+            <Link
+              key={"group-title"}
+              containerWidth="28%"
+              target="_blank"
+              title={item.name}
+              fontWeight={600}
+              fontSize="15px"
+              lineHeight="20px"
+              color={nameColor}
+              isTextOverflow={true}
+              onClick={onOpenGroup}
+            >
+              {t("PeopleTranslations:PeopleCount", {
+                count: item.membersCount,
+              })}
+            </Link>
           </Styled.GroupsRowContent>
         </Styled.GroupsRow>
       </div>
@@ -144,9 +154,8 @@ export default inject(({ peopleStore, settingsStore }) => ({
   setSelection: peopleStore.groupsStore.setSelection,
   bufferSelection: peopleStore.groupsStore.bufferSelection,
   setBufferSelection: peopleStore.groupsStore.setBufferSelection,
-  setCurrentGroup: peopleStore.groupsStore.setCurrentGroup,
   getGroupContextOptions: peopleStore.groupsStore.getGroupContextOptions,
-  setInsideGroupBackUrl: peopleStore.groupsStore.setInsideGroupBackUrl,
+  openGroupAction: peopleStore.groupsStore.openGroupAction,
   theme: settingsStore.theme,
 }))(
   withTranslation(

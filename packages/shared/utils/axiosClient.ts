@@ -66,16 +66,9 @@ class AxiosClient {
       };
     }
 
-    const shareIndex = window.location.pathname.indexOf("share");
-    const sharedIndex = window.location.pathname.indexOf("shared");
-
-    const lastKeySymbol = window.location.search.indexOf("&");
-    const lastIndex =
-      lastKeySymbol === -1 ? window.location.search.length : lastKeySymbol;
-    const publicRoomKey =
-      shareIndex > -1 && sharedIndex === -1
-        ? window.location.search.substring(5, lastIndex)
-        : null;
+    const publicRoomKey = new URLSearchParams(window.location.search).get(
+      "key",
+    );
 
     if (publicRoomKey) {
       headers = { ...headers, "Request-Token": publicRoomKey };
@@ -226,12 +219,14 @@ class AxiosClient {
             break;
           case 403: {
             const pathname = window.location.pathname;
+            const isFrame = window?.DocSpaceConfig?.isFrame;
+
             const isArchived = pathname.indexOf("/rooms/archived") !== -1;
 
             const isRooms =
               pathname.indexOf("/rooms/shared") !== -1 || isArchived;
 
-            if (isRooms && !skipRedirect) {
+            if (isRooms && !skipRedirect && !isFrame) {
               setTimeout(() => {
                 window.DocSpace.navigate(isArchived ? "/archived" : "/");
               }, 1000);

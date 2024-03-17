@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { cssTransition } from "react-toastify";
+import { ToastClassName, cssTransition } from "react-toastify";
 import { isMobileOnly } from "react-device-detect";
 
 import StyledToastContainer from "./Toast.styled";
@@ -31,6 +31,21 @@ const Toast = (props: ToastProps) => {
     }
   }, []);
 
+  const toastClassName: ToastClassName = (context) => {
+    switch (context?.type) {
+      case "success":
+        return "Toastify__toast Toastify__toast--success";
+      case "error":
+        return "Toastify__toast Toastify__toast--error";
+      case "info":
+        return "Toastify__toast Toastify__toast--info";
+      case "warning":
+        return "Toastify__toast Toastify__toast--warning";
+      default:
+        return "Toastify__toast";
+    }
+  };
+
   useEffect(() => {
     if (isMobileOnly) {
       window.addEventListener("resize", onResize);
@@ -48,11 +63,14 @@ const Toast = (props: ToastProps) => {
       className={className}
       draggable
       position="top-right"
+      toastClassName={toastClassName}
+      rtl
       hideProgressBar
       newestOnTop
       pauseOnFocusLoss={false}
       style={style}
       transition={Slide}
+      icon={false}
       onClick={onToastClick}
       $topOffset={offset}
       data-testid="toast"

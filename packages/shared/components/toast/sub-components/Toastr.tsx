@@ -13,6 +13,7 @@ import commonIconsStyles, {
 import { getCookie } from "../../../utils/cookie";
 
 import { Text } from "../../text";
+import { Box } from "../../box";
 
 import {
   StyledCloseWrapper,
@@ -86,7 +87,7 @@ const notify = (
   centerPosition = false,
 ) => {
   return toast(
-    <>
+    <Box displayProp="flex" alignItems="center">
       <IconWrapper>
         <Icon size={IconSizeType.medium} type={type} />
       </IconWrapper>
@@ -97,13 +98,14 @@ const notify = (
           ? data && <Text className="toast-text">{data}</Text>
           : data}
       </StyledDiv>
-    </>,
+    </Box>,
     {
+      data,
       type,
       closeOnClick: !withCross,
       closeButton: withCross && <CloseButton />,
       autoClose: timeout === 0 ? false : timeout < 750 ? 5000 : timeout || 5000,
-      position: centerPosition ? toast.POSITION.TOP_CENTER : undefined,
+      position: centerPosition ? "top-center" : undefined,
     },
   );
 };
@@ -171,7 +173,7 @@ function error(
   ) {
     message =
       data?.response?.data?.error?.message || data?.statusText || data?.message;
-  } else if (typeof data !== "object") {
+  } else if (React.isValidElement(data)) {
     message = data;
   }
 

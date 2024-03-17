@@ -343,6 +343,11 @@ class ContextOptionsStore {
       return toastr.success(t("Translations:LinkCopySuccess"));
     }
 
+    if (item.rootFolderType === FolderType.SHARE) {
+      copy(item.webUrl);
+      return toastr.success(t("Translations:LinkCopySuccess"));
+    }
+
     if (href) {
       copy(href);
 

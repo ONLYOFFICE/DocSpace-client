@@ -99,6 +99,7 @@ const StyledSimpleFilesRow = styled(Row)`
   cursor: ${(props) =>
     !props.isThirdPartyFolder &&
     (props.checked || props.isActive) &&
+    props.canDrag &&
     `url(${CursorPalmReactSvgUrl}), auto`};
   ${(props) =>
     props.inProgress &&
@@ -334,6 +335,7 @@ const SimpleFilesRow = (props) => {
     onDragLeave,
     itemIndex,
     badgeUrl,
+    canDrag,
   } = props;
 
   const isMobileDevice = isMobileUtile();
@@ -449,6 +451,7 @@ const SimpleFilesRow = (props) => {
           withoutBorder={true}
           isHighlight={isHighlight}
           badgeUrl={badgeUrl}
+          canDrag={canDrag}
         >
           <FilesRowContent
             item={item}

@@ -73,42 +73,33 @@ export default function withFileActions(WrappedFileItem) {
         draggable,
         setTooltipPosition,
         setStartDrag,
-        isPrivacy,
-        isTrashFolder,
         isRoomsFolder,
         isArchiveFolder,
         item,
         setBufferSelection,
         isActive,
-        inProgress,
         isSelected,
         setSelection,
-        currentDeviceType,
-        isDisabledItemId,
+        canDrag,
+        viewAs,
       } = this.props;
-
-      const elem = e.target === "A" ? e.target : e.target.parentElement;
 
       const { isThirdPartyFolder } = item;
 
-      const notSelectable = elem.closest(".not-selectable");
+      const notSelectable = e.target.closest(".not-selectable");
       const isFileName =
-        elem.classList.contains("item-file-name") ||
-        elem.classList.contains("row-content-link");
+        e.target.classList.contains("item-file-name") ||
+        e.target.classList.contains("row-content-link") ||
+        viewAs === "tile";
 
       if ((isRoomsFolder || isArchiveFolder) && isFileName && !isSelected)
         setBufferSelection(item);
 
       if (
-        isPrivacy ||
-        isTrashFolder ||
-        isRoomsFolder ||
-        isArchiveFolder ||
+        !canDrag ||
         (!draggable && !isFileName && !isActive) ||
-        currentDeviceType !== DeviceType.desktop ||
         notSelectable ||
-        isThirdPartyFolder ||
-        inProgress
+        isThirdPartyFolder
       ) {
         return e;
       }
@@ -258,6 +249,7 @@ export default function withFileActions(WrappedFileItem) {
         currentDeviceType,
         isDisabledDropItem,
         isRecentTab,
+        canDrag,
       } = this.props;
       const { access, id } = item;
 
@@ -324,6 +316,7 @@ export default function withFileActions(WrappedFileItem) {
           onDragLeave={this.onDragLeave}
           badgeUrl={badgeUrl}
           isRecentTab={isRecentTab}
+          canDrag={canDrag}
           {...this.props}
         />
       );
@@ -420,6 +413,14 @@ export default function withFileActions(WrappedFileItem) {
 
       const inProgress = isFileProgress || isFolderProgress;
 
+      const dragIsDisabled =
+        isPrivacyFolder ||
+        isRecycleBinFolder ||
+        isRoomsFolder ||
+        isArchiveFolder ||
+        settingsStore.currentDeviceType !== DeviceType.desktop ||
+        inProgress;
+
       let isActive = false;
 
       if (
@@ -477,6 +478,8 @@ export default function withFileActions(WrappedFileItem) {
         currentDeviceType: settingsStore.currentDeviceType,
         isDisabledDropItem,
         isRecentTab,
+
+        canDrag: !dragIsDisabled,
       };
     },
   )(observer(WithFileActions));

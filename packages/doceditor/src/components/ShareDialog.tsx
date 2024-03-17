@@ -7,7 +7,6 @@ import Share from "@docspace/shared/components/share/Share.wrapper";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Aside } from "@docspace/shared/components/aside";
 import { Text } from "@docspace/shared/components/text";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { NoUserSelect } from "@docspace/shared/utils/commonStyles";
 import { Base, TTheme } from "@docspace/shared/themes";
 import { TFile } from "@docspace/shared/api/files/types";
@@ -32,12 +31,6 @@ const StyledWrapper = styled.div`
 
   .share-file_body {
     padding: 16px;
-  }
-
-  .share-file_footer {
-    margin-top: auto;
-    padding: 16px;
-    border-top: ${(props) => props.theme.filesPanels.sharing.borderBottom};
   }
 `;
 
@@ -77,15 +70,6 @@ const SharingDialog = ({
           </div>
           <div className="share-file_body">
             <Share infoPanelSelection={fileInfo} i18nProp={i18n} />
-          </div>
-
-          <div className="share-file_footer">
-            <Button
-              size={ButtonSize.normal}
-              scale
-              label={t("Common:CancelButton")}
-              onClick={onCancel}
-            />
           </div>
         </StyledWrapper>
       </Aside>

@@ -178,7 +178,7 @@ const Item = ({
             color="#A3A9AE"
             truncate
           >
-            {`${capitalize(role)} | ${email}`}
+            {`${typeLabel} | ${email}`}
           </Text>
         )}
       </StyledInviteUserBody>

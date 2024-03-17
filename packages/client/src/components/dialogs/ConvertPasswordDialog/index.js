@@ -57,21 +57,6 @@ const ConvertPasswordDialogComponent = (props) => {
 
     if (hasError) return;
 
-    tab =
-      !isDesktop &&
-      window.DocSpaceConfig?.editor?.openOnNewPage &&
-      formCreationInfo.fileInfo.fileExst &&
-      formCreationInfo.open
-        ? window.open(
-            combineUrl(
-              window.DocSpaceConfig?.proxy?.url,
-              config.homepage,
-              "/doceditor",
-            ),
-            "_blank",
-          )
-        : null;
-
     setIsLoading(true);
   };
 
@@ -88,83 +73,34 @@ const ConvertPasswordDialogComponent = (props) => {
   };
 
   useEffect(() => {
-    const { newTitle, fileInfo, open, actionId } = formCreationInfo;
+    const { newTitle, fileInfo, open } = formCreationInfo;
     const { id, folderId } = fileInfo;
 
     if (isLoading) {
-      if (makeForm) {
-        copyAsAction(id, newTitle, folderId, false, password)
-          .then(() =>
-            toastr.success(t("SuccessfullyCreated", { fileTitle: newTitle })),
-          )
-          .then(() => {
-            onClose();
-          })
-          .catch((err) => {
-            let errorMessage = "";
-            if (typeof err === "object") {
-              errorMessage =
-                err?.response?.data?.error?.message ||
-                err?.statusText ||
-                err?.message ||
-                "";
-            } else {
-              errorMessage = err;
-            }
+      const searchParams = new URLSearchParams();
 
-            if (errorMessage.indexOf("password") == -1) {
-              toastr.error(errorMessage, t("Common:Warning"));
-              return;
-            }
+      searchParams.append("parentId", folderId);
+      searchParams.append("fileTitle", newTitle);
+      searchParams.append("open", open);
+      searchParams.append("templateId", id);
+      searchParams.append("password", password);
+      searchParams.append("fromFile", true);
 
-            toastr.error(t("CreationError"), t("Common:Warning"));
-            if (_isMounted) {
-              setPasswordValid(false);
-              focusInput();
-            }
-          })
-          .finally(() => {
-            _isMounted && setIsLoading(false);
-          });
-      } else {
-        fileCopyAs(id, newTitle, folderId, false, password)
-          .then((file) => {
-            toastr.success(t("SuccessfullyCreated", { fileTitle: newTitle }));
-            onClose();
+      const url = combineUrl(
+        window.location.origin,
+        window.DocSpaceConfig?.proxy?.url,
+        config.homepage,
+        `/doceditor/create?${searchParams.toString()}`,
+      );
 
-            open && openDocEditor(file.id, file.providerKey, tab);
-          })
-          .then(() => {
-            completeAction(fileInfo);
-          })
-          .catch((err) => {
-            let errorMessage = "";
-            if (typeof err === "object") {
-              errorMessage =
-                err?.response?.data?.error?.message ||
-                err?.statusText ||
-                err?.message ||
-                "";
-            } else {
-              errorMessage = err;
-            }
-            if (errorMessage.indexOf("password") == -1) {
-              toastr.error(errorMessage, t("Common:Warning"));
-              return;
-            }
+      window.open(
+        url,
+        window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self",
+      );
 
-            toastr.error(t("CreationError"), t("Common:Warning"));
-
-            // open && openDocEditor(null, null, tab);
-            if (_isMounted) {
-              setPasswordValid(false);
-              focusInput();
-            }
-          })
-          .finally(() => {
-            _isMounted && setIsLoading(false);
-          });
-      }
+      setIsLoading(false);
+      onClose();
+      return;
     }
   }, [isLoading]);
 

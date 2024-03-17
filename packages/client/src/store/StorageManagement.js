@@ -12,7 +12,7 @@ import {
 } from "@docspace/shared/api/settings";
 import { getRooms } from "@docspace/shared/api/rooms";
 import { getUserList } from "@docspace/shared/api/people";
-import { SortByFieldName } from "SRC_DIR/helpers/enums";
+import { SortByFieldName } from "SRC_DIR/helpers/constants";
 
 const FILTER_COUNT = 6;
 
@@ -30,10 +30,18 @@ class StorageManagement {
   userFilterData = Filter.getDefault();
   roomFilterData = RoomsFilter.getDefault();
 
-  constructor(filesStore, peopleStore, authStore) {
+  constructor(
+    filesStore,
+    peopleStore,
+    authStore,
+    currentQuotaStore,
+    settingsStore,
+  ) {
     this.filesStore = filesStore;
     this.peopleStore = peopleStore;
     this.authStore = authStore;
+    this.currentQuotaStore = currentQuotaStore;
+    this.settingsStore = settingsStore;
     makeAutoObservable(this);
   }
 
@@ -41,6 +49,8 @@ class StorageManagement {
     const { getFilesListItems } = this.filesStore;
     const { usersStore } = this.peopleStore;
     const { getPeopleListItem } = usersStore;
+    const { isFreeTariff } = this.currentQuotaStore;
+    const { standalone } = this.settingsStore;
 
     this.userFilterData.pageCount = FILTER_COUNT;
     this.userFilterData.sortBy = SortByFieldName.UsedSpace;
@@ -49,40 +59,52 @@ class StorageManagement {
     this.roomFilterData.pageCount = FILTER_COUNT;
     this.roomFilterData.sortBy = SortByFieldName.UsedSpace;
     this.roomFilterData.sortOrder = "descending";
-
     const requests = [
-      getUserList(this.userFilterData),
-      getRooms(this.roomFilterData),
       getPortal(),
       getPortalUsersCount(),
       getFilesUsedSpace(),
       getQuotaSettings(),
     ];
 
-    isInit && requests.push(checkRecalculateQuota());
+ 
 
-    let roomsList, accountsList;
-
-    [
-      accountsList,
-      roomsList,
-      this.portalInfo,
-      this.activeUsersCount,
-      this.filesUsedSpace,
-      this.quotaSettings,
-      this.needRecalculating,
-    ] = await Promise.all(requests);
-
-    this.rooms = getFilesListItems(roomsList.folders);
-    this.accounts = accountsList.items.map((user) => getPeopleListItem(user));
-
-    if (!this.quotaSettings.lastRecalculateDate && isInit) {
-      await recalculateQuota();
-      this.getIntervalCheckRecalculate();
-      return;
+    if (!isFreeTariff || standalone) {
+      requests.push(
+        getUserList(this.userFilterData),
+        getRooms(this.roomFilterData),
+      );
     }
 
-    if (this.needRecalculating) this.getIntervalCheckRecalculate();
+    try {
+      if (isInit) this.needRecalculating = await checkRecalculateQuota();
+
+      let roomsList, accountsList;
+      [
+        this.portalInfo,
+        this.activeUsersCount,
+        this.filesUsedSpace,
+        this.quotaSettings,
+        accountsList,
+        roomsList,
+      ] = await Promise.all(requests);
+
+      if (roomsList) this.rooms = getFilesListItems(roomsList?.folders);
+
+      if (accountsList)
+        this.accounts = accountsList.items.map((user) =>
+          getPeopleListItem(user),
+        );
+
+      if (!this.quotaSettings.lastRecalculateDate && isInit) {
+        await recalculateQuota();
+        this.getIntervalCheckRecalculate();
+        return;
+      }
+
+      if (this.needRecalculating) this.getIntervalCheckRecalculate();
+    } catch (e) {
+      toastr.error(e);
+    }
   };
 
   init = async () => {

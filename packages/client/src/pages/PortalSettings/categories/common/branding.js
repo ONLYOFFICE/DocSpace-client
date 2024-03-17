@@ -60,7 +60,8 @@ const Branding = ({
   isLoadedCompanyInfoSettingsData,
   isSettingPaid,
   standalone,
-  currentDeviceType
+  currentDeviceType,
+  portals,
 }) => {
   const isMobileView = currentDeviceType === DeviceType.mobile;
 
@@ -81,10 +82,11 @@ const Branding = ({
       <MobileView isSettingPaid={isSettingPaid} isManagement={isManagement()} />
     );
 
+  const hideBlock = isManagement() ? false : portals?.length > 1 ? true : false;
   return (
     <StyledComponent isSettingPaid={isSettingPaid}>
       <Whitelabel />
-      {standalone && (
+      {standalone && !hideBlock && (
         <>
           <hr />
           {isLoadedCompanyInfoSettingsData ? (
@@ -105,12 +107,13 @@ const Branding = ({
 export default inject(({ settingsStore, currentQuotaStore, common }) => {
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
   const { isLoadedCompanyInfoSettingsData } = common;
-  const { standalone, currentDeviceType } = settingsStore;
+  const { standalone, currentDeviceType, portals } = settingsStore;
 
   return {
     isLoadedCompanyInfoSettingsData,
     isSettingPaid: isBrandingAndCustomizationAvailable,
     standalone,
-    currentDeviceType
+    currentDeviceType,
+    portals,
   };
 })(withLoading(withTranslation(["Settings", "Common"])(observer(Branding))));

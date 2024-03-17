@@ -1,18 +1,21 @@
 import React, { useState, useEffect, useCallback } from "react";
+import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
+import { inject, observer } from "mobx-react";
+import isEqual from "lodash/isEqual";
+
 import api from "@docspace/shared/api";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import { inject, observer } from "mobx-react";
-import withLoading from "SRC_DIR/HOCs/withLoading";
-import styled, { css } from "styled-components";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { toastr } from "@docspace/shared/components/toast";
-import LoaderAdditionalResources from "../sub-components/loaderAdditionalResources";
-import isEqual from "lodash/isEqual";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import { mobile, size } from "@docspace/shared/utils";
 import { isManagement } from "@docspace/shared/utils/common";
+
+import withLoading from "SRC_DIR/HOCs/withLoading";
+import LoaderAdditionalResources from "../sub-components/loaderAdditionalResources";
+import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
+
 const StyledComponent = styled.div`
   margin-top: 40px;
 
@@ -83,7 +86,7 @@ const AdditionalResources = (props) => {
     const defaultData = {
       feedbackAndSupportEnabled:
         additionalResourcesData?.feedbackAndSupportEnabled,
-      videoGuidesEnabled: additionalResourcesData?.videoGuidesEnabled,
+      // videoGuidesEnabled: additionalResourcesData?.videoGuidesEnabled,
       helpCenterEnabled: additionalResourcesData?.helpCenterEnabled,
     };
 
@@ -93,7 +96,7 @@ const AdditionalResources = (props) => {
       setAdditionalSettings({
         feedbackAndSupportEnabled:
           additionalSettings?.feedbackAndSupportEnabled,
-        videoGuidesEnabled: additionalSettings?.videoGuidesEnabled,
+        // videoGuidesEnabled: additionalSettings?.videoGuidesEnabled,
         helpCenterEnabled: additionalSettings?.helpCenterEnabled,
       });
     } else {
@@ -118,15 +121,15 @@ const AdditionalResources = (props) => {
 
   useEffect(() => {
     getSettings();
-  }, [isLoading]);
+  }, [additionalResourcesData]);
 
   useEffect(() => {
     const defaultAdditionalSettings = getFromSessionStorage(
-      "defaultAdditionalSettings"
+      "defaultAdditionalSettings",
     );
     const newSettings = {
       feedbackAndSupportEnabled: additionalSettings.feedbackAndSupportEnabled,
-      videoGuidesEnabled: additionalSettings.videoGuidesEnabled,
+      // videoGuidesEnabled: additionalSettings.videoGuidesEnabled,
       helpCenterEnabled: additionalSettings.helpCenterEnabled,
     };
     saveToSessionStorage("additionalSettings", newSettings);
@@ -151,7 +154,7 @@ const AdditionalResources = (props) => {
       .setAdditionalResources(
         feedbackAndSupportEnabled,
         videoGuidesEnabled,
-        helpCenterEnabled
+        helpCenterEnabled,
       )
       .then(() => {
         toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
@@ -307,6 +310,6 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
   };
 })(
   withLoading(
-    withTranslation(["Settings", "Common"])(observer(AdditionalResources))
-  )
+    withTranslation(["Settings", "Common"])(observer(AdditionalResources)),
+  ),
 );

@@ -27,21 +27,29 @@ const ArticleLiveChat = ({
   zendeskKey,
   showProgress,
   isShowLiveChat,
+  isInfoPanelVisible,
 }: ArticleZendeskProps) => {
   const { t, ready } = useTranslation("Common");
   const { interfaceDirection } = useTheme();
+  const infoPanelOffset = isInfoPanelVisible ? 400 : 0;
+
   useEffect(() => {
     // console.log("Zendesk useEffect", { withMainButton, isMobileArticle });
     zendeskAPI.addChanges("webWidget", "updateSettings", {
       offset:
         withMainButton && isMobileArticle
-          ? { horizontal: "68px", vertical: "11px" }
+          ? {
+              horizontal: "68px",
+              vertical: "11px",
+            }
           : {
-              horizontal: showProgress ? "90px" : "4px",
+              horizontal: showProgress
+                ? `${`${infoPanelOffset + 90}px`}`
+                : `${`${infoPanelOffset + 4}px`}`,
               vertical: "11px",
             },
     });
-  }, [withMainButton, isMobileArticle, showProgress]);
+  }, [withMainButton, isMobileArticle, showProgress, isInfoPanelVisible]);
 
   useEffect(() => {
     // console.log("Zendesk useEffect", { languageBaseName });

@@ -15,7 +15,6 @@ const PrivateRouteWrapper = ({
   isLogout,
   isNotPaidPeriod,
   isPortalDeactivate,
-  limitedAccessSpace,
   tenantStatus,
   user,
   restricted,
@@ -39,7 +38,6 @@ const PrivateRouteWrapper = ({
       withCollaborator={withCollaborator}
       isPortalDeactivate={isPortalDeactivate!}
       enablePortalRename={enablePortalRename!}
-      limitedAccessSpace={limitedAccessSpace!}
     >
       {children}
     </PrivateRoute>
@@ -65,7 +63,6 @@ export default inject<TStore>(
       tenantStatus,
       isPortalDeactivate,
       enablePortalRename,
-      limitedAccessSpace,
     } = settingsStore;
 
     return {
@@ -81,7 +78,6 @@ export default inject<TStore>(
       isLogout,
       isEnterprise,
       enablePortalRename,
-      limitedAccessSpace,
     };
   },
 )(observer(PrivateRouteWrapper));

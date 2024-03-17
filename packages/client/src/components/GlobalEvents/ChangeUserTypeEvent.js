@@ -15,7 +15,6 @@ const ChangeUserTypeEvent = ({
   peopleDialogData,
   peopleFilter,
   updateUserType,
-  getUsersList,
   onClose,
   setSelected,
   getPeopleListItem,
@@ -54,7 +53,7 @@ const ChangeUserTypeEvent = ({
   const onClickPayments = () => {
     const paymentPageUrl = combineUrl(
       "/portal-settings",
-      "/payments/portal-payments"
+      "/payments/portal-payments",
     );
 
     toastr.clear();
@@ -88,7 +87,7 @@ const ChangeUserTypeEvent = ({
           false,
           0,
           true,
-          true
+          true,
         );
 
         abortCallback && abortCallback();
@@ -104,7 +103,6 @@ const ChangeUserTypeEvent = ({
   };
 
   const onCloseAction = async () => {
-    await getUsersList(peopleFilter);
     abortCallback && abortCallback();
     onClosePanel();
   };
@@ -150,12 +148,8 @@ export default inject(
 
     const { data: peopleDialogData } = dialogStore;
     const { filter: peopleFilter } = filterStore;
-    const {
-      updateUserType,
-      getUsersList,
-      getPeopleListItem,
-      needResetUserSelection,
-    } = usersStore;
+    const { updateUserType, getPeopleListItem, needResetUserSelection } =
+      usersStore;
     const { setSelected } = peopleStore.selectionStore;
     return {
       isRoomAdmin,
@@ -169,7 +163,6 @@ export default inject(
       peopleDialogData,
       peopleFilter,
       updateUserType,
-      getUsersList,
     };
-  }
+  },
 )(observer(ChangeUserTypeEvent));

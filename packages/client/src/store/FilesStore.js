@@ -445,24 +445,25 @@ class FilesStore {
         });
       }, 300);
     } else if (opt?.type === "folder" && opt?.id) {
-      const foundIndex = this.folders.findIndex((x) => x.id === opt?.id);
+      const foundIndex = this.folders.findIndex((x) => x.id == opt?.id);
 
       if (foundIndex > -1) return;
 
       const folder = JSON.parse(opt?.data);
 
-      if (this.selectedFolderStore.id !== folder.parentId) {
+      if (this.selectedFolderStore.id != folder.parentId) {
         const movedToIndex = this.getFolderIndex(folder.parentId);
         if (movedToIndex > -1) this.folders[movedToIndex].foldersCount++;
       }
 
       if (
-        this.selectedFolderStore.id !== folder.parentId ||
+        this.selectedFolderStore.id != folder.parentId ||
         (folder.roomType &&
           folder.createdBy.id === this.userStore.user.id &&
           this.roomCreated)
-      )
+      ) {
         return (this.roomCreated = false);
+      }
 
       const folderInfo = await api.files.getFolderInfo(folder.id);
 
@@ -928,13 +929,21 @@ class FilesStore {
     if (folders.length === 0 && this.folders.length === 0) return;
 
     if (this.folders?.length > 0) {
-      socketHelper.emit({
-        command: "unsubscribe",
-        data: {
-          roomParts: this.folders.map((f) => `DIR-${f.id}`),
-          individual: true,
-        },
-      });
+      const ids = this.folders
+        .map((f) => {
+          if (this.selectedFolderStore.id === f.id) return "";
+          return `DIR-${f.id}`;
+        })
+        .filter((id) => id);
+
+      if (ids.length)
+        socketHelper.emit({
+          command: "unsubscribe",
+          data: {
+            roomParts: ids,
+            individual: true,
+          },
+        });
     }
 
     this.folders = folders;
@@ -1582,7 +1591,9 @@ class FilesStore {
         if (err?.response?.status === 402)
           this.currentTariffStatusStore.setPortalTariff();
 
-        if (requestCounter > 0) return;
+        const isThirdPartyError = isNaN(+folderId);
+
+        if (requestCounter > 0 && !isThirdPartyError) return;
 
         requestCounter++;
         const isUserError = [
@@ -1592,10 +1603,8 @@ class FilesStore {
           UnauthorizedHttpCode,
         ].includes(err?.response?.status);
 
-        if (isUserError) {
-          runInAction(() => {
-            this.isErrorRoomNotAvailable = true;
-          });
+        if (isUserError && !isThirdPartyError) {
+          this.setIsErrorRoomNotAvailable(true);
         } else {
           if (axios.isCancel(err)) {
             console.log("Request canceled", err.message);

@@ -1,5 +1,6 @@
 import saveAs from "file-saver";
 import { deviceDetect } from "react-device-detect";
+import type FirebaseHelper from "@docspace/shared/utils/firebase";
 
 export const getCrashReport = (
   userId: string,
@@ -27,6 +28,21 @@ export const getCrashReport = (
   };
 
   return report;
+};
+
+export const sendToastReport = async (
+  id: string,
+  version: string,
+  cultureName: string,
+  message: string,
+  firebaseHelper: FirebaseHelper,
+) => {
+  const error = new Error(message);
+  const report = getCrashReport(id, version, cultureName, error);
+  const reportWithDescription = Object.assign(report, {
+    description: "TOAST REPORT",
+  });
+  await firebaseHelper.sendToastReport(reportWithDescription);
 };
 
 export const downloadJson = <T>(json: T, fileName: string) => {

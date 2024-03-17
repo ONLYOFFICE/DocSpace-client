@@ -37,8 +37,6 @@ import SelectFileDialog from "./SelectFileDialog";
 import SelectFolderDialog from "./SelectFolderDialog";
 import SharingDialog from "./ShareDialog";
 
-toast.configure();
-
 const Root = ({
   settings,
   config,
@@ -143,7 +141,7 @@ const Root = ({
             />
           ) : isShowDeepLink ? null : (
             <div style={{ width: "100%", height: "100%" }}>
-              {config && user && documentserverUrl && fileInfo && (
+              {config && documentserverUrl && fileInfo && (
                 <Editor
                   config={config}
                   user={user}
@@ -208,3 +206,4 @@ const Root = ({
 };
 
 export default Root;
+

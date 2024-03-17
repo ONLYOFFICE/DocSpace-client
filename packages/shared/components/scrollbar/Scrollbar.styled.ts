@@ -12,13 +12,14 @@ const StyledScrollbar = styled(Scrollbar)<{ $fixedSize?: boolean }>`
   }
 
   .scroll-body {
-    padding-inline-end: 17px !important;
+    padding-inline-end: ${(props) => props.theme.scrollbar.paddingInlineEnd};
     position: relative;
     outline: none;
     tab-index: -1;
 
     @media ${mobile} {
-      padding-inline-end: 8px !important;
+      padding-inline-end: ${(props) =>
+        props.theme.scrollbar.paddingInlineEndMobile};
     }
   }
 

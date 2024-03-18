@@ -118,6 +118,7 @@ export const convertRoomsToItems: (rooms: TRoom[]) => TSelectorItem[] = (
       security,
       parentId,
       rootFolderType,
+      shared,
     } = room;
 
     const icon = logo.medium || "";
@@ -135,6 +136,7 @@ export const convertRoomsToItems: (rooms: TRoom[]) => TSelectorItem[] = (
       rootFolderType,
       isFolder: true,
       roomType,
+      shared,
       ...iconProp,
     };
   });

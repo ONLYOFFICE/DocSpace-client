@@ -1,5 +1,5 @@
 {
-  "AboutDataImport": "Data import includes several steps: data upload, parcing, import configuration, and import. Your backup file will be stored in ONLYOFFICE DocSpace servers for 24 hours, and then it will be automatically deleted.",
+  "AboutDataImport": "Data import includes several steps: data upload, parsing, import configuration, and import. Your backup file will be stored in ONLYOFFICE DocSpace servers for 24 hours, and then it will be automatically deleted.",
   "AccentColor": "Accent",
   "AccessRightsAccessToProduct": "Access to {{product}} module is given to",
   "AccessRightsAllUsers": "All {{users}}",
@@ -147,7 +147,7 @@
   "LanguageAndTimeZoneSettingsNavDescription": "Language and Time Zone Settings is a way to change the language of the whole portal for all portal users and to configure the time zone so that all the events of the portal will be shown with the correct date and time.",
   "LastUpdate": "Last update: {{date}}",
   "LicenseLimitCounter": "License limit Admins/Power:",
-  "LicenseLimitDescription": "The license limit counter consists of: already existing accounts in DocSapce and new users that you want to import. If you import users who already have an DocSpace account, they will not be counted again in the counter. Your DocSpace license allows you to have a maximum of 100 users.",
+  "LicenseLimitDescription": "The license limit counter consists of: already existing accounts in DocSapce and new users that you want to import. If you import users who already have a DocSpace account, they will not be counted again in the counter. Your DocSpace license allows you to have a maximum of 100 users.",
   "Lifetime": "Lifetime (min)",
   "LimitThemesTooltip": "You can only create 3 custom themes. To create a new one, you must delete one of the previous themes.",
   "LocalFile": "Local file",

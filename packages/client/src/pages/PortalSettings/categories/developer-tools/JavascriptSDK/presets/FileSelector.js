@@ -48,6 +48,7 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 import { Button } from "@docspace/shared/components/button";
 
 import GetCodeDialog from "../sub-components/GetCodeDialog";
+import CodeBlock from "../sub-components/CodeBlock";
 
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { TooltipContent } from "../sub-components/TooltipContent";
@@ -423,6 +424,11 @@ const FileSelector = (props) => {
       key: "preview",
       title: t("Common:Preview"),
       content: preview,
+    },
+    {
+      key: "js",
+      title: "JavaScript",
+      content: <CodeBlock config={config} />,
     },
     {
       key: "code",

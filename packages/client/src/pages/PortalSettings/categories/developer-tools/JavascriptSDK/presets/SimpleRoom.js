@@ -47,6 +47,7 @@ import GetCodeDialog from "../sub-components/GetCodeDialog";
 import { Button } from "@docspace/shared/components/button";
 
 import EmptyIframeContainer from "../sub-components/EmptyIframeContainer";
+import CodeBlock from "../sub-components/CodeBlock";
 
 import { TooltipContent } from "../sub-components/TooltipContent";
 import { useNavigate } from "react-router-dom";
@@ -187,7 +188,6 @@ const SimpleRoom = (props) => {
   };
 
   const onChangeFolderId = async (rooms) => {
-
     const publicRoom = rooms[0];
 
     let newConfig = {
@@ -341,6 +341,11 @@ const SimpleRoom = (props) => {
       key: "preview",
       title: t("Common:Preview"),
       content: preview,
+    },
+    {
+      key: "js",
+      title: "JavaScript",
+      content: <CodeBlock config={config} />,
     },
     {
       key: "code",

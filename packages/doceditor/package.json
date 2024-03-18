@@ -11,7 +11,7 @@
     "deploy": "shx --silent mkdir -p ../../../publish/web/editor && shx --silent mkdir -p ../../../publish/web/editor/.next && shx --silent mkdir -p ../../../publish/web/editor/config && shx cp -r config/* ../../../publish/web/editor/config && shx --silent mkdir -p ../../../publish/web/editor/node_modules && shx --silent mkdir -p ../../../publish/web/editor/.next/static && shx cp -r .next/standalone/node_modules/* ../../../publish/web/editor/node_modules && shx cp -r .next/static/* ../../../publish/web/editor/.next/static    && shx cp -r .next/standalone/packages/doceditor/.next/* ../../../publish/web/editor/.next &&  shx cp -f server.prod.js ../../../publish/web/editor/server.js"
   },
   "dependencies": {
-    "@onlyoffice/document-editor-react": "^1.4.1",
+    "@onlyoffice/document-editor-react": "file:./onlyoffice-document-editor-react-v1.4.1.tgz",
     "i18next": "^20.6.1",
     "next": "14.0.4",
     "react": "^18.2.0",

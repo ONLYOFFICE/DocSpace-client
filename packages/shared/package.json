@@ -62,7 +62,7 @@
     "react-scrollbars-custom": "^4.1.1",
     "react-svg": "^16.1.33",
     "react-text-mask": "^5.5.0",
-    "react-toastify": "^7.0.4",
+    "react-toastify": "^10.0.4",
     "react-tooltip": "^5.23.0",
     "react-transition-group": "^4.4.5",
     "react-viewer": "^3.2.2",

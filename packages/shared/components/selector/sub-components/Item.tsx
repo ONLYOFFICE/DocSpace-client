@@ -26,6 +26,7 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
+import Planet12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/planet.react.svg?url";
 import { getUserTypeLabel } from "../../../utils/common";
 import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
 import { Text } from "../../text";
@@ -34,6 +35,7 @@ import { RoomIcon } from "../../room-icon";
 
 import { StyledItem } from "../Selector.styled";
 import { ItemProps, Data, TSelectorItem } from "../Selector.types";
+import { RoomsType } from "../../../enums";
 
 const compareFunction = (prevProps: ItemProps, nextProps: ItemProps) => {
   const prevData = prevProps.data;
@@ -89,6 +91,13 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       isGroup,
     } = item;
 
+    const showPlanetIcon =
+      (item.roomType === RoomsType.PublicRoom ||
+        item.roomType === RoomsType.CustomRoom) &&
+      item.shared;
+
+    const badgeUrl = showPlanetIcon ? Planet12ReactSvgUrl : null;
+
     const currentRole = role || AvatarRole.user;
 
     const typeLabel = getUserTypeLabel(role, t);
@@ -128,13 +137,19 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
             userName={isGroup ? label : ""}
           />
         ) : color ? (
-          <RoomIcon color={color} title={label} showDefault />
+          <RoomIcon
+            color={color}
+            title={label}
+            showDefault
+            badgeUrl={badgeUrl ?? ""}
+          />
         ) : icon ? (
           <RoomIcon
             title={label}
             imgClassName="room-logo"
             imgSrc={icon}
             showDefault={false}
+            badgeUrl={badgeUrl ?? ""}
           />
         ) : null}
         {renderCustomItem ? (

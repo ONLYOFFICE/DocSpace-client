@@ -62,6 +62,15 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
     ? EmptyScreenGroupSvgUrl
     : EmptyScreenGroupSvgDarkUrl;
 
+  const onSelect = (
+    item: TSelectorItem,
+    isDoubleClick: boolean,
+    doubleClickCallback: () => void,
+  ) => {
+    if (isDoubleClick) {
+      doubleClickCallback();
+    }
+  };
   const onSearch = useCallback((value: string, callback?: Function) => {
     isFirstLoad.current = true;
     afterSearch.current = true;
@@ -160,6 +169,7 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
       loadNextPage={onLoadNextPage}
       isLoading={isFirstLoad.current}
       searchLoader={<SearchLoader />}
+      onSelect={onSelect}
       rowLoader={
         <RowLoader
           isMultiSelect={false}

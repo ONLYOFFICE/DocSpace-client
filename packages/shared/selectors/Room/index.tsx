@@ -86,6 +86,17 @@ const RoomSelector = ({
   const isFirstLoad = React.useRef(true);
   const afterSearch = React.useRef(false);
 
+  const onSelect = (
+    item: TSelectorItem,
+    isDoubleClick: boolean,
+    doubleClickCallback: () => void,
+  ) => {
+    setSelectedItem(item);
+    if (isDoubleClick && !isMultiSelect) {
+      doubleClickCallback();
+    }
+  };
+
   useEffect(() => {
     setIsDataReady?.(!isFirstLoad.current);
   }, [setIsDataReady]);
@@ -196,7 +207,7 @@ const RoomSelector = ({
       {...headerSelectorProps}
       {...cancelButtonSelectorProps}
       {...searchSelectorProps}
-      onSelect={(item) => setSelectedItem(item)}
+      onSelect={onSelect}
       items={items}
       submitButtonLabel={submitButtonLabel || t("Common:SelectAction")}
       onSubmit={onSubmit}

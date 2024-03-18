@@ -178,16 +178,18 @@ type TSelectorEmptyScreen = {
   searchEmptyScreenDescription: string;
 };
 
+type TOnSubmit = (
+  selectedItems: TSelectorItem[],
+  access: TAccessRight | null,
+  fileName: string,
+  isFooterCheckboxChecked: boolean,
+) => void | Promise<void>;
+
 // submit button
 export type TSelectorSubmitButton = {
   submitButtonLabel: string;
   disableSubmitButton: boolean;
-  onSubmit: (
-    selectedItems: TSelectorItem[],
-    access: TAccessRight | null,
-    fileName: string,
-    isFooterCheckboxChecked: boolean,
-  ) => void | Promise<void>;
+  onSubmit: TOnSubmit;
   submitButtonId?: string;
 };
 
@@ -288,7 +290,11 @@ export type SelectorProps = TSelectorHeader &
     style?: React.CSSProperties;
 
     items: TSelectorItem[];
-    onSelect?: (item: TSelectorItem) => void;
+    onSelect?: (
+      item: TSelectorItem,
+      isDoubleClick: boolean,
+      doubleClickCallback: () => Promise<void>,
+    ) => void;
 
     isMultiSelect: boolean;
     selectedItems?: TSelectorItem[];
@@ -332,7 +338,7 @@ export type BodyProps = TSelectorBreadCrumbs &
       role?: string,
       email?: string,
     ) => React.ReactNode | null;
-    onSelect: (item: TSelectorItem) => void;
+    onSelect: (item: TSelectorItem, isDoubleClick: boolean) => void;
 
     loadMoreItems: (startIndex: number) => void;
     hasNextPage: boolean;
@@ -490,7 +496,7 @@ export type TSelectorItem = TSelectorItemLogo &
 
 export type Data = {
   items: TSelectorItem[];
-  onSelect?: (item: TSelectorItem) => void;
+  onSelect?: (item: TSelectorItem, isDoubleClick?: boolean) => void;
   isMultiSelect: boolean;
   isItemLoaded: (index: number) => boolean;
   rowLoader: React.ReactNode;

@@ -150,10 +150,25 @@ const Selector = ({
 
   const requestRunning = React.useRef<boolean>(false);
 
-  const onSelectAction = (item: TSelectorItem) => {
-    onSelect?.({
-      ...item,
-    });
+  const onSubmitAction = async () => {
+    requestRunning.current = true;
+    await onSubmit(
+      newSelectedItems,
+      selectedAccess,
+      newFooterInputValue,
+      isFooterCheckboxChecked,
+    );
+    requestRunning.current = false;
+  };
+
+  const onSelectAction = (item: TSelectorItem, isDoubleClick: boolean) => {
+    onSelect?.(
+      {
+        ...item,
+      },
+      isDoubleClick,
+      onSubmitAction,
+    );
 
     if (isMultiSelect) {
       if (item.isSelected) {
@@ -298,17 +313,6 @@ const Selector = ({
     onSelectAll,
     selectedTabItems,
   ]);
-
-  const onSubmitAction = async () => {
-    requestRunning.current = true;
-    await onSubmit(
-      newSelectedItems,
-      selectedAccess,
-      newFooterInputValue,
-      isFooterCheckboxChecked,
-    );
-    requestRunning.current = false;
-  };
 
   const onChangeAccessRightsAction = React.useCallback(
     (access: TAccessRight) => {

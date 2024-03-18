@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { mobile } from "../../utils";
 import { Base } from "../../themes";
 
@@ -93,7 +93,7 @@ const StyledDropzone = styled.div<{ $isLoading?: boolean }>`
   }
 `;
 
-const StyledImageCropper = styled.div`
+const StyledImageCropper = styled.div<{ disableImageRescaling?: boolean }>`
   max-width: 216px;
 
   .icon_cropper-crop_area {
@@ -118,6 +118,14 @@ const StyledImageCropper = styled.div`
         }
       }
     }
+
+    ${(props) =>
+      props.disableImageRescaling &&
+      css`
+        .icon_cropper-avatar-editor {
+          cursor: default !important;
+        }
+      `};
   }
 
   .icon_cropper-delete_button {

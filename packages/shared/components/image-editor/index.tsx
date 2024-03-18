@@ -39,6 +39,7 @@ const ImageEditor = ({
   isDisabled,
   classNameWrapperImageCropper,
   className,
+  disableImageRescaling,
 }: ImageEditorProps) => {
   const setUploadedFile = (f?: File) => {
     onChangeImage({ ...image, uploadedFile: f });
@@ -60,6 +61,7 @@ const ImageEditor = ({
             setUploadedFile={setUploadedFile}
             setPreviewImage={setPreview}
             isDisabled={isDisabled}
+            disableImageRescaling={disableImageRescaling}
           />
           {Preview}
         </div>

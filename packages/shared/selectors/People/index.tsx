@@ -127,6 +127,17 @@ const PeopleSelector = ({
   const afterSearch = useRef(false);
   const totalRef = useRef(0);
 
+  const onSelect = (
+    item: TSelectorItem,
+    isDoubleClick: boolean,
+    doubleClickCallback: () => void,
+  ) => {
+    setSelectedItem(item);
+    if (isDoubleClick) {
+      doubleClickCallback();
+    }
+  };
+
   const moveCurrentUserToTopOfList = useCallback(
     (listUser: TSelectorItem[]) => {
       const currentUserIndex = listUser.findIndex(
@@ -320,7 +331,7 @@ const PeopleSelector = ({
       isLoading={isFirstLoad.current}
       searchLoader={<SearchLoader />}
       rowLoader={<RowLoader isUser isContainer={isFirstLoad.current} />}
-      onSelect={(item) => setSelectedItem(item)}
+      onSelect={onSelect}
     />
   );
 };

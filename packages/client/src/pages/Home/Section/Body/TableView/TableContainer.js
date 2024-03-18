@@ -234,6 +234,7 @@ const Table = ({
         setHideColumns={setHideColumns}
         navigate={navigate}
         location={location}
+        isRooms={isRooms}
       />
 
       <TableBody

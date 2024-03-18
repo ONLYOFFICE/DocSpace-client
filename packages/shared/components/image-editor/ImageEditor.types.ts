@@ -43,6 +43,7 @@ export interface ImageEditorProps {
   isDisabled: boolean;
   classNameWrapperImageCropper?: string;
   className?: string;
+  disableImageRescaling?: boolean;
 }
 
 export interface ImageCropperProps {
@@ -53,4 +54,5 @@ export interface ImageCropperProps {
   setUploadedFile: (uploadedFile?: File) => void;
   setPreviewImage: TSetPreview;
   isDisabled: boolean;
+  disableImageRescaling?: boolean;
 }

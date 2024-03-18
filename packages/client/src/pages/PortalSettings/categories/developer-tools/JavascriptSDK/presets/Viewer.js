@@ -46,6 +46,7 @@ import { isTablet, isMobile } from "@docspace/shared/utils/device";
 import EmptyIframeContainer from "../sub-components/EmptyIframeContainer";
 
 import GetCodeDialog from "../sub-components/GetCodeDialog";
+import CodeBlock from "../sub-components/CodeBlock";
 import { Button } from "@docspace/shared/components/button";
 
 const showPreviewThreshold = 720;
@@ -239,6 +240,11 @@ const Viewer = (props) => {
       key: "preview",
       title: t("Common:Preview"),
       content: preview,
+    },
+    {
+      key: "js",
+      title: "JavaScript",
+      content: <CodeBlock config={config} />,
     },
     {
       key: "code",

@@ -614,9 +614,7 @@ export default inject(
       roomsFilter,
       setRoomsFilter,
     } = filesStore;
-    const { isRecentTab, isRoomsFolder, isArchiveFolder, isTrashFolder } =
-      treeFoldersStore;
-    const isRooms = isRoomsFolder || isArchiveFolder;
+    const { isRecentTab, isArchiveFolder, isTrashFolder } = treeFoldersStore;
     const withContent = canShare;
     const sortingVisible = true;
     const { withPaging, isFrame, frameConfig } = settingsStore;
@@ -702,7 +700,6 @@ export default inject(
 
       getColumns,
       setColumnEnable,
-      isRooms,
       isTrashFolder,
       isPublicRoom,
       publicRoomKey,

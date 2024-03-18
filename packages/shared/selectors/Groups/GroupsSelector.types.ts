@@ -38,7 +38,7 @@ export type GroupsSelectorProps = TSelectorHeader & {
     access?: TAccessRight | null,
     fileName?: string,
     isFooterCheckboxChecked?: boolean,
-  ) => void;
+  ) => void | Promise<void>;
 };
 
 export type GroupsSelectorItem = Pick<TSelectorItem, "id" | "label">;

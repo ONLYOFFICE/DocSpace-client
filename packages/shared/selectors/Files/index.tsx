@@ -413,7 +413,7 @@ const FilesSelector = ({
         breadCrumbs.findIndex((f) => f.roomType === RoomsType.PublicRoom) > -1;
       const folderTitle = breadCrumbs[breadCrumbs.length - 1].label;
 
-      onSubmit(
+      await onSubmit(
         selectedItemId,
         folderTitle,
         isPublic,

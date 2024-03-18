@@ -245,6 +245,7 @@ const PreparationPortal = (props) => {
       <ErrorContainer
         headerText={withoutHeader ? "" : headerText}
         style={style}
+        className="restoring-portal"
       >
         <div className="preparation-portal_body-wrapper">
           {errorMessage ? (

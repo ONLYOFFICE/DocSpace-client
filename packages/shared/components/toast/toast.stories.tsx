@@ -39,17 +39,17 @@ const meta = {
   title: "Components/Toast",
   component: Toast,
   argTypes: {
-    // withCross: {
-    //   description:
-    //     "If `false`: toast disappeared after clicking on any area of toast. If `true`: toast disappeared after clicking on close button",
-    // },
-    // timeout: {
-    //   description:
-    //     "Time (in milliseconds) for showing your toast. Setting in `0` let you to show toast constantly until clicking on it",
-    // },
-    // data: {
-    //   description: "Any components or data inside a toast",
-    // },
+    withCross: {
+      description:
+        "If `false`: toast disappeared after clicking on any area of toast. If `true`: toast disappeared after clicking on close button",
+    },
+    timeout: {
+      description:
+        "Time (in milliseconds) for showing your toast. Setting in `0` let you to show toast constantly until clicking on it",
+    },
+    data: {
+      description: "Any components or data inside a toast",
+    },
   },
 
   parameters: {
@@ -65,7 +65,7 @@ export default meta;
 
 const BaseTemplate = ({
   type,
-
+  data,
   title,
   timeout = 5000,
   withCross = false,
@@ -75,6 +75,23 @@ const BaseTemplate = ({
   data?: React.ReactNode | string;
   timeout?: number;
 }) => {
+  const showToast = () => {
+    switch (type) {
+      case ToastType.error:
+        toastr.error(data, title, timeout, withCross);
+        break;
+      case ToastType.warning:
+        toastr.warning(data, title, timeout, withCross);
+        break;
+      case ToastType.info:
+        toastr.info(data, title, timeout, withCross);
+        break;
+      default:
+        toastr.success(data, title, timeout, withCross);
+        break;
+    }
+  };
+
   return (
     <>
       <Toast {...args} />
@@ -82,22 +99,7 @@ const BaseTemplate = ({
         label="Show toast"
         primary
         size={ButtonSize.small}
-        onClick={() => {
-          switch (type) {
-            case ToastType.error:
-              toastr.error("Demo text for Toast", title, timeout, withCross);
-              break;
-            case ToastType.warning:
-              toastr.warning("Demo text for Toast", title, timeout, withCross);
-              break;
-            case ToastType.info:
-              toastr.info("Demo text for Toast", title, timeout, withCross);
-              break;
-            default:
-              toastr.success("Demo text for Toast", title, timeout, withCross);
-              break;
-          }
-        }}
+        onClick={showToast}
       />
     </>
   );
@@ -107,88 +109,15 @@ export const basic: Story = {
   render: (args) => <BaseTemplate {...args} />,
   args: {
     type: ToastType.success,
-
+    data: "Demo text for Toast",
     title: "Demo title",
+    timeout: 5000,
+    withCross: false,
   },
 };
 
 const AllTemplate = () => {
   const renderAllToast = () => {
-    toastr.success(
-      "Demo text for success Toast closes in 30 seconds or on click",
-      undefined,
-      30000,
-    );
-
-    toastr.error(
-      "Demo text for error Toast closes in 28 seconds or on click",
-      undefined,
-      28000,
-    );
-
-    toastr.warning(
-      "Demo text for warning Toast closes in 25 seconds or on click",
-      undefined,
-      25000,
-    );
-
-    toastr.info(
-      "Demo text for info Toast closes in 15 seconds or on click",
-      undefined,
-      15000,
-    );
-
-    toastr.success(
-      "Demo text for success Toast with title closes in 12 seconds or on click",
-      "Demo title",
-      12000,
-    );
-
-    toastr.error(
-      "Demo text for error Toast with title closes in 10 seconds or on click",
-      "Demo title",
-      10000,
-    );
-
-    toastr.warning(
-      "Demo text for warning Toast with title closes in 8 seconds or on click",
-      "Demo title",
-      8000,
-    );
-
-    toastr.info(
-      "Demo text for info Toast with title closes in 6 seconds or on click",
-      "Demo title",
-      6000,
-    );
-    toastr.success(
-      "Demo text for success manual closed Toast",
-      undefined,
-      0,
-      true,
-      true,
-    );
-    toastr.error(
-      "Demo text for error manual closed Toast",
-      undefined,
-      0,
-      true,
-      true,
-    );
-    toastr.warning(
-      "Demo text for warning manual closed Toast",
-      undefined,
-      0,
-      true,
-      true,
-    );
-    toastr.info(
-      "Demo text for info manual closed Toast",
-      undefined,
-      0,
-      true,
-      true,
-    );
     toastr.success(
       <>
         Demo text for success manual closed Toast with title and contains{" "}

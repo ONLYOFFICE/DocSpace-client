@@ -40,7 +40,7 @@ export type RoomSelectorProps = TSelectorHeader &
 
     isMultiSelect: boolean;
 
-    onSubmit: (items: TSelectorItem[]) => void;
+    onSubmit: (items: TSelectorItem[]) => void | Promise<void>;
     roomType?: RoomsType;
     excludeItems?: number[];
     setIsDataReady?: (value: boolean) => void;

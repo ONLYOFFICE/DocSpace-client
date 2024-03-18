@@ -166,7 +166,7 @@ export type FilesSelectorProps = (
     isChecked: boolean,
     selectedTreeNode: TFolder,
     selectedFileInfo: TSelectedFileInfo,
-  ) => void;
+  ) => void | Promise<void>;
   getIsDisabled: (
     isFirstLoad: boolean,
     isSelectedParentFolder: boolean,

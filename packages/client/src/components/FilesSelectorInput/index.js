@@ -102,7 +102,7 @@ const FilesSelectorInput = (props) => {
 
   const foldersSelectionProps = {
     onSelectFolder: onSelectFolder,
-    // onSetBaseFolderPath: onSetBasePath,
+    onSetBaseFolderPath: onSetBasePath,
   };
 
   return (

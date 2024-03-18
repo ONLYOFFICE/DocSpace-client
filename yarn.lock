@@ -2636,8 +2636,8 @@ __metadata:
   linkType: hard
 
 "@codemirror/autocomplete@npm:^6.0.0":
-  version: 6.14.0
-  resolution: "@codemirror/autocomplete@npm:6.14.0"
+  version: 6.15.0
+  resolution: "@codemirror/autocomplete@npm:6.15.0"
   dependencies:
     "@codemirror/language": "npm:^6.0.0"
     "@codemirror/state": "npm:^6.0.0"
@@ -2648,7 +2648,7 @@ __metadata:
     "@codemirror/state": ^6.0.0
     "@codemirror/view": ^6.0.0
     "@lezer/common": ^1.0.0
-  checksum: 203ed79336ad3594f86c59814b280f870af2209c48218f458e463623d0e3b8a50ee7829ea33fcbaa106126d484466e846278ac34ee42c87ac03cb02c4b6a71fd
+  checksum: 5ef009826113459532b836347afd73759588edb1cbe507834b2b06de665c8b36fdf6de0685bcae4b1204fbb0ba4294af732da57a44b57b350339228164ba49e1
   languageName: node
   linkType: hard
 
@@ -3027,13 +3027,13 @@ __metadata:
   linkType: hard
 
 "@codemirror/view@npm:^6.0.0, @codemirror/view@npm:^6.17.0, @codemirror/view@npm:^6.23.0":
-  version: 6.25.1
-  resolution: "@codemirror/view@npm:6.25.1"
+  version: 6.26.0
+  resolution: "@codemirror/view@npm:6.26.0"
   dependencies:
     "@codemirror/state": "npm:^6.4.0"
     style-mod: "npm:^4.1.0"
     w3c-keyname: "npm:^2.2.4"
-  checksum: bbf26984a095ea3a96be3af1f34ce7880a1cb94e287f4a46ffbdc5d5a84d6293e257619d82b23e930f26c11e80d704a6c8b39f10c209fae5117a21420412ab92
+  checksum: d4ef249044cbc293a7267c83e08671a68646fd7bbe1efb8d205c01385f157c93918eabeaedb62a4cc10598ab63818ac749cec4f6355fe0404d9d4beb7857c31f
   languageName: node
   linkType: hard
 
@@ -3100,10 +3100,14 @@ __metadata:
     "@babel/preset-env": "npm:^7.20.2"
     "@babel/preset-react": "npm:^7.18.6"
     "@babel/preset-typescript": "npm:^7.21.0"
+    "@codemirror/lang-javascript": "npm:^6.2.2"
+    "@lezer/highlight": "npm:^1.2.0"
     "@svgr/webpack": "npm:^5.5.0"
     "@types/eslint": "npm:^8.44.7"
     "@typescript-eslint/eslint-plugin": "npm:^6.12.0"
     "@typescript-eslint/parser": "npm:^6.12.0"
+    "@uiw/codemirror-themes": "npm:^4.21.24"
+    "@uiw/react-codemirror": "npm:^4.21.24"
     babel-loader: "npm:^8.3.0"
     clean-webpack-plugin: "npm:^4.0.0"
     copy-to-clipboard: "npm:^3.3.3"
@@ -4949,7 +4953,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lezer/highlight@npm:^1.0.0, @lezer/highlight@npm:^1.1.3":
+"@lezer/highlight@npm:^1.0.0, @lezer/highlight@npm:^1.1.3, @lezer/highlight@npm:^1.2.0":
   version: 1.2.0
   resolution: "@lezer/highlight@npm:1.2.0"
   dependencies:
@@ -9632,6 +9636,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@uiw/codemirror-themes@npm:^4.21.24":
+  version: 4.21.24
+  resolution: "@uiw/codemirror-themes@npm:4.21.24"
+  dependencies:
+    "@codemirror/language": "npm:^6.0.0"
+    "@codemirror/state": "npm:^6.0.0"
+    "@codemirror/view": "npm:^6.0.0"
+  peerDependencies:
+    "@codemirror/language": ">=6.0.0"
+    "@codemirror/state": ">=6.0.0"
+    "@codemirror/view": ">=6.0.0"
+  checksum: f4e04c304f195f36b99a2f596dfa74cf04ada1038fe64629ac6655e97a670793a6c65af8e2c8ddd543faa87a042e3be70e22bacee778d776bb0300500860e281
+  languageName: node
+  linkType: hard
+
 "@uiw/react-codemirror@npm:^4.21.24":
   version: 4.21.24
   resolution: "@uiw/react-codemirror@npm:4.21.24"
@@ -14101,9 +14120,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "docspace@workspace:."
   dependencies:
-    "@codemirror/lang-javascript": "npm:^6.2.2"
     "@types/react-text-mask": "npm:^5.4.14"
-    "@uiw/react-codemirror": "npm:^4.21.24"
     he: "npm:^1.2.0"
     madge: "npm:^6.1.0"
     shx: "npm:^0.3.4"

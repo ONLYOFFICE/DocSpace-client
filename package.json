@@ -44,9 +44,5 @@
     "shx": "^0.3.4",
     "terser": "^5.16.6"
   },
-  "packageManager": "yarn@4.0.2",
-  "dependencies": {
-    "@codemirror/lang-javascript": "^6.2.2",
-    "@uiw/react-codemirror": "^4.21.24"
-  }
+  "packageManager": "yarn@4.0.2"
 }

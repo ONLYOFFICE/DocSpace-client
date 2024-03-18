@@ -14,10 +14,8 @@ import { inject, observer } from "mobx-react";
 import { isTablet, isMobile } from "@docspace/shared/utils/device";
 
 import GetCodeDialog from "../sub-components/GetCodeDialog";
+import CodeBlock from "../sub-components/CodeBlock";
 import { Button } from "@docspace/shared/components/button";
-
-import CodeMirror from "@uiw/react-codemirror";
-import { javascript } from "@codemirror/lang-javascript";
 
 const showPreviewThreshold = 720;
 
@@ -197,19 +195,6 @@ const DocSpace = (props) => {
     </CodeWrapper>
   );
 
-  const codeString = `const config = ${JSON.stringify(config, null, "\t")}\n\nconst script = document.createElement("script");\n\nscript.setAttribute("src", ${new URL(window.location).origin}/static/scripts/api.js);\nscript.onload=window.DocSpace.SDK.initFrame(config);\n\ndocument.body.appendChild(script);`;
-
-  const codeMirror = (
-    <CodeWrapper>
-      <CodeMirror
-        value={codeString}
-        width="800px"
-        theme="dark"
-        extensions={[javascript({ jsx: true })]}
-      />
-    </CodeWrapper>
-  );
-
   const dataTabs = [
     {
       key: "preview",
@@ -217,14 +202,14 @@ const DocSpace = (props) => {
       content: preview,
     },
     {
+      key: "js",
+      title: "JavaScript",
+      content: <CodeBlock config={config} />,
+    },
+    {
       key: "code",
       title: t("Code"),
       content: code,
-    },
-    {
-      key: "yolo",
-      title: "Code block",
-      content: codeMirror,
     },
   ];
 

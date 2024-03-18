@@ -30,7 +30,7 @@ import { isIOS, deviceType } from "react-device-detect";
 import { FolderType } from "@docspace/shared/enums";
 
 import { UseInitProps } from "@/types";
-import { initForm, setDocumentTitle, showDocEditorMessage } from "@/utils";
+import { setDocumentTitle, showDocEditorMessage } from "@/utils";
 import initDesktop from "@/utils/initDesktop";
 import { IS_DESKTOP_EDITOR, IS_VIEW } from "@/utils/constants";
 
@@ -49,24 +49,6 @@ const useInit = ({
       document.documentElement.style.setProperty("--vh", `${vh}px`);
     }
   }, []);
-
-  React.useEffect(() => {
-    if (
-      !IS_VIEW &&
-      fileInfo &&
-      fileInfo.viewAccessibility.WebRestrictedEditing &&
-      fileInfo.security.FillForms &&
-      fileInfo.rootFolderType === FolderType.Rooms &&
-      !fileInfo.security.Edit &&
-      !config.document.isLinkedForMe
-    ) {
-      try {
-        initForm(fileInfo.id);
-      } catch (err) {
-        console.error(err);
-      }
-    }
-  }, [config.document.isLinkedForMe, fileInfo]);
 
   React.useEffect(() => {
     if (!config) return;

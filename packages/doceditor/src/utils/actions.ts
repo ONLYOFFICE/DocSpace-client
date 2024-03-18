@@ -31,8 +31,10 @@ import { headers } from "next/headers";
 import { getLtrLanguageForEditor } from "@docspace/shared/utils/common";
 import { TenantStatus } from "@docspace/shared/enums";
 
-import { TCatchError, TError, TResponse } from "@/types";
+import { IInitialConfig, TCatchError, TError, TResponse } from "@/types";
 import { error } from "console";
+import { isTemplateFile } from ".";
+import { TDocServiceLocation } from "@docspace/shared/api/files/types";
 
 const API_PREFIX = "api/2.0";
 const SKIP_PORT_FORWARD = process.env.NODE_PORT_FORWARD === "false";
@@ -78,6 +80,83 @@ export const createRequest = (
   );
 
   return requests;
+};
+
+const processFillFormDraft = async (
+  config: IInitialConfig,
+  searchParams: URLSearchParams,
+  editorSearchParams: URLSearchParams,
+  share?: string,
+): Promise<
+  [string, IInitialConfig, TDocServiceLocation | undefined] | void
+> => {
+  const templateFileId = config.file.id;
+
+  const [checkFillFormDraft] = createRequest(
+    [`/files/masterform/${templateFileId}/checkfillformdraft`],
+    [
+      share ? ["Request-Token", share] : ["", ""],
+      ["Content-Type", "application/json;charset=utf-8"],
+    ],
+    "POST",
+    JSON.stringify({ fileId: templateFileId }),
+  );
+
+  const response = await fetch(checkFillFormDraft);
+
+  if (!response.ok) return;
+
+  const { response: formUrl } = await response.json();
+
+  const basePath = getBaseUrl();
+  const url = new URL(basePath + formUrl);
+
+  const queryFileId = url.searchParams.get("fileid");
+  const queryVersion = url.searchParams.get("version");
+
+  if (!queryFileId) return;
+
+  url.searchParams.delete("fileid");
+
+  const combinedSearchParams = new URLSearchParams({
+    ...Object.fromEntries(searchParams),
+    ...Object.fromEntries(url.searchParams),
+  });
+
+  const editorVersion = editorSearchParams.get("version");
+
+  const queries = [
+    `/files/file/${queryFileId}/openedit?${combinedSearchParams.toString()}`,
+  ];
+
+  if (queryVersion && queryVersion !== editorVersion) {
+    editorSearchParams.set("version", queryVersion);
+    queries.push(`/files/docservice?${editorSearchParams.toString()}`);
+  }
+
+  const [getConfig, getEditorUrl] = createRequest(
+    queries,
+    [share ? ["Request-Token", share] : ["", ""]],
+    "GET",
+  );
+
+  const resActions = [];
+
+  resActions.push(fetch(getConfig));
+  getEditorUrl && resActions.push(fetch(getEditorUrl));
+
+  const [configRes, editorUrlRes] = await Promise.all(resActions);
+
+  if (!configRes.ok) return;
+
+  const actions = [];
+
+  actions.push(configRes.json());
+  editorUrlRes && actions.push(editorUrlRes.json());
+
+  const [newConfig, newEditorUrl] = await Promise.all(actions);
+
+  return [queryFileId, newConfig.response, newEditorUrl?.response];
 };
 
 export async function getErrorData() {
@@ -276,6 +355,23 @@ export async function getData(
         doc,
         fileId,
       };
+
+      if (isTemplateFile(response.config)) {
+        const result = await processFillFormDraft(
+          response.config,
+          searchParams,
+          editorSearchParams,
+          share,
+        );
+
+        if (result) {
+          const [newFileId, newConfig, newEditorUrl] = result;
+
+          response.fileId = newFileId;
+          response.config = newConfig;
+          if (newEditorUrl) response.editorUrl = newEditorUrl;
+        }
+      }
 
       // needed to reset rtl language in Editor
       response.config.editorConfig.lang = getLtrLanguageForEditor(

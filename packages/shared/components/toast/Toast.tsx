@@ -30,6 +30,7 @@ import { isMobileOnly } from "react-device-detect";
 
 import StyledToastContainer from "./Toast.styled";
 import { ToastProps } from "./Toast.type";
+import { Portal } from "../portal";
 
 const Slide = cssTransition({
   enter: "SlideIn",
@@ -83,8 +84,9 @@ const Toast = (props: ToastProps) => {
   }, [onResize]);
 
   const { className, style } = props;
+  const rootElement = document.getElementById("root");
 
-  return (
+  const element = (
     <StyledToastContainer
       className={className}
       draggable
@@ -96,11 +98,14 @@ const Toast = (props: ToastProps) => {
       pauseOnFocusLoss={false}
       style={style}
       transition={Slide}
-      icon={false}
       onClick={onToastClick}
       $topOffset={offset}
       data-testid="toast"
     />
+  );
+
+  return (
+    <Portal element={element} appendTo={rootElement || undefined} visible />
   );
 };
 

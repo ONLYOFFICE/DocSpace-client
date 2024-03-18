@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2010-2024
+// 
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+// 
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+// 
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+// 
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+// 
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+// 
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import moment from "moment-timezone";
 import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
@@ -5,16 +31,19 @@ import { useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { isMobile, isIOS, isFirefox } from "react-device-detect";
+import { toast as toastify } from "react-toastify";
 
 import { getLogoFromPath } from "@docspace/shared/utils";
 import { Portal } from "@docspace/shared/components/portal";
 import { SnackBar } from "@docspace/shared/components/snackbar";
 import { Toast, toastr } from "@docspace/shared/components/toast";
+import { ToastType } from "@docspace/shared/components/toast/Toast.enums";
 import { getRestoreProgress } from "@docspace/shared/api/portal";
 import { updateTempContent } from "@docspace/shared/utils/common";
 import { DeviceType, IndexedDBStores } from "@docspace/shared/enums";
 import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
 import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
+import { sendToastReport } from "@docspace/shared/utils/crashReport";
 
 import config from "PACKAGE_FILE";
 
@@ -57,6 +86,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     setPortalTariff,
     setFormCreationInfo,
     setConvertPasswordDialogVisible,
+    version,
   } = rest;
 
   const theme = useTheme();
@@ -386,6 +416,21 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       setTheme(systemTheme);
   }, [systemTheme]);
 
+  useEffect(() => {
+    if (!FirebaseHelper.isEnabled || !isLoaded) return;
+    toastify.onChange((payload) => {
+      if (payload.status === "added" && payload.type === ToastType.error) {
+        sendToastReport(
+          userId,
+          version,
+          language,
+          payload?.data,
+          FirebaseHelper,
+        );
+      }
+    });
+  }, [isLoaded]);
+
   const rootElement = document.getElementById("root");
 
   const toast =
@@ -427,7 +472,7 @@ const ShellWrapper = inject(
   }) => {
     const { i18n } = useTranslation();
 
-    const { init, isLoaded, setProductVersion, language } = authStore;
+    const { init, isLoaded, setProductVersion, language, version } = authStore;
 
     const {
       personal,
@@ -498,6 +543,7 @@ const ShellWrapper = inject(
       setPortalTariff,
       setFormCreationInfo,
       setConvertPasswordDialogVisible,
+      version,
     };
   },
 )(observer(Shell));

@@ -196,4 +196,5 @@ export interface INavigationProps {
   navigationButtonLabel?: string;
   onNavigationButtonClick?: () => void;
   tariffBar: React.ReactElement;
+  showNavigationButton: boolean;
 }

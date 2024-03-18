@@ -76,8 +76,6 @@ const processFillFormDraft = async (
     JSON.stringify({ fileId: templateFileId }),
   );
 
-  throw new Error("Error test");
-
   const response = await fetch(checkFillFormDraft);
 
   if (!response.ok) return;

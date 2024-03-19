@@ -52,5 +52,6 @@ export type PeopleSelectorProps = TSelectorHeader &
     currentUserId: string;
     withOutCurrentAuthorizedUser?: boolean;
     withAbilityCreateRoomUsers?: boolean;
+    withoutNotActivatedUsers?: boolean;
     filterUserId?: string;
   };

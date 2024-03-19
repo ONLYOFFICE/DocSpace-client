@@ -186,7 +186,7 @@ const Root = ({
                   onSDKRequestSelectSpreadsheet={onSDKRequestSelectSpreadsheet}
                 />
               )}
-              <Toast />
+              <Toast isSSR />
               {isVisibleSelectFolderDialog && !!socketHelper && (
                 <SelectFolderDialog
                   socketHelper={socketHelper}

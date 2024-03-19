@@ -232,7 +232,9 @@ const useFilesHelper = ({
               return {
                 label: title,
                 id: breadCrumbId,
-                isRoom: roomsFolderId === id || index === 0,
+                isRoom:
+                  roomsFolderId === id ||
+                  (index === 0 && typeof roomType !== "undefined"),
                 roomType,
               };
             },

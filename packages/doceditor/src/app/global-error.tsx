@@ -26,87 +26,81 @@
 
 "use client";
 
-import React from "react";
-import { toast } from "react-toastify";
+import { useCallback, useState, useLayoutEffect, useMemo } from "react";
 
-import { Toast } from "@docspace/shared/components/toast";
 import { ThemeProvider } from "@docspace/shared/components/theme-provider";
-import { toastr } from "@docspace/shared/components/toast";
 import { Error520SSR } from "@docspace/shared/components/errors/Error520";
-import { TUser } from "@docspace/shared/api/people/types";
-import {
+import { getUser } from "@docspace/shared/api/people";
+import { getSettings } from "@docspace/shared/api/settings";
+import type { TUser } from "@docspace/shared/api/people/types";
+import type {
   TFirebaseSettings,
   TSettings,
 } from "@docspace/shared/api/settings/types";
-import FirebaseHelper from "@docspace/shared/utils/firebase";
 
-import useDeviceType from "@/hooks/useDeviceType";
-import useWhiteLabel from "@/hooks/useWhiteLabel";
-import useI18N from "@/hooks/useI18N";
 import useTheme from "@/hooks/useTheme";
+import useDeviceType from "@/hooks/useDeviceType";
+import useI18N from "@/hooks/useI18N";
+import useWhiteLabel from "@/hooks/useWhiteLabel";
+import FirebaseHelper from "@docspace/shared/utils/firebase";
 
 import pkg from "../../package.json";
 
-type CreateFileErrorProps = {
-  error: Error;
-  fileInfo: object;
-  fromTemplate: boolean;
-  fromFile: boolean;
-  settings?: TSettings;
-  user?: TUser;
-};
-
-const CreateFileError = ({
-  error,
-  fileInfo,
-  fromFile,
-  fromTemplate,
-  settings,
-  user,
-}: CreateFileErrorProps) => {
-  const firebaseHelper = new FirebaseHelper({} as TFirebaseSettings);
+export default function GlobalError({ error }: { error: Error }) {
+  const [user, setUser] = useState<TUser>();
+  const [settings, setSettings] = useState<TSettings>();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isError, setError] = useState<boolean>(false);
 
   const { i18n } = useI18N({ settings, user });
   const { currentDeviceType } = useDeviceType();
   const { logoUrls } = useWhiteLabel();
   const { theme } = useTheme({ user });
+  const firebaseHelper = useMemo(() => {
+    return new FirebaseHelper(settings?.firebase ?? ({} as TFirebaseSettings));
+  }, [settings?.firebase]);
 
-  const t = i18n.t ? i18n.t.bind(i18n) : null;
-  const message = error.message ?? error ?? "";
+  const getData = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      const [userData, settingsData] = await Promise.all([
+        getUser(),
+        getSettings(),
+      ]);
 
-  const showingToast = React.useRef(false);
-
-  React.useEffect(() => {
-    if (fromFile && message.includes("password")) {
-      const searchParams = new URLSearchParams();
-      searchParams.append("createError", JSON.stringify({ fileInfo }));
-
-      window.location.replace(
-        `${window.location.origin}?${searchParams.toString()}`,
-      );
-    } else {
-      if (!t || showingToast.current) return;
-      showingToast.current = true;
-      toastr.error(message, t?.("Common:Warning"));
+      setSettings(settingsData);
+      setUser(userData);
+    } catch (error) {
+      setError(true);
+      console.error(error);
+    } finally {
+      setIsLoading(false);
     }
-  }, [fileInfo, fromFile, message, t]);
+  }, []);
 
-  if (fromFile && message.includes("password")) return null;
+  useLayoutEffect(() => {
+    getData();
+  }, [getData]);
+
+  if (isError) return;
 
   return (
-    <ThemeProvider theme={theme}>
-      <Toast />
-      <Error520SSR
-        i18nProp={i18n}
-        errorLog={error}
-        user={user ?? ({} as TUser)}
-        currentDeviceType={currentDeviceType}
-        version={pkg.version}
-        firebaseHelper={firebaseHelper}
-        whiteLabelLogoUrls={logoUrls}
-      />
-    </ThemeProvider>
+    <html>
+      <body>
+        {!isLoading && (
+          <ThemeProvider theme={theme}>
+            <Error520SSR
+              i18nProp={i18n}
+              errorLog={error}
+              version={pkg.version}
+              user={user ?? ({} as TUser)}
+              whiteLabelLogoUrls={logoUrls}
+              firebaseHelper={firebaseHelper}
+              currentDeviceType={currentDeviceType}
+            />
+          </ThemeProvider>
+        )}
+      </body>
+    </html>
   );
-};
-
-export default CreateFileError;
+}

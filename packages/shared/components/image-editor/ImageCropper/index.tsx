@@ -47,12 +47,13 @@ const ImageCropper = ({
   setUploadedFile,
   setPreviewImage,
   isDisabled,
+  disableImageRescaling,
 }: ImageCropperProps) => {
   const editorRef = React.useRef<null | AvatarEditor>(null);
   const setEditorRef = (editor: AvatarEditor) => (editorRef.current = editor);
 
   const handlePositionChange = (position: Position) => {
-    if (isDisabled) return;
+    if (isDisabled || disableImageRescaling) return;
 
     onChangeImage({ ...image, x: position.x, y: position.y });
   };
@@ -106,10 +107,14 @@ const ImageCropper = ({
   }, [handleImageChange, image, setPreviewImage]);
 
   return (
-    <StyledImageCropper className="icon_cropper">
+    <StyledImageCropper
+      className="icon_cropper"
+      disableImageRescaling={disableImageRescaling}
+    >
       <div className="icon_cropper-crop_area">
         <ReactSVG className="icon_cropper-grid" src={IconCropperGridSvgUrl} />
         <AvatarEditor
+          className="icon_cropper-avatar-editor"
           ref={setEditorRef}
           image={uploadedFile}
           width={648}
@@ -138,7 +143,7 @@ const ImageCropper = ({
         </div>
       </div>
 
-      {uploadedFile?.name && (
+      {uploadedFile?.name && !disableImageRescaling && (
         <div className="icon_cropper-zoom-container">
           <IconButton
             className="icon_cropper-zoom-container-button"

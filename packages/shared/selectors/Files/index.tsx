@@ -221,7 +221,11 @@ const FilesSelector = ({
   });
 
   const onSelectAction = React.useCallback(
-    (item: TSelectorItem) => {
+    (
+      item: TSelectorItem,
+      isDoubleClick: boolean,
+      doubleClickCallback: () => Promise<void>,
+    ) => {
       if (item.isFolder) {
         setIsFirstLoad(true);
 
@@ -256,6 +260,10 @@ const FilesSelector = ({
           fileExst: item.fileExst,
           inPublic,
         });
+
+        if (isDoubleClick) {
+          doubleClickCallback();
+        }
       }
     },
     [breadCrumbs, setIsFirstLoad],

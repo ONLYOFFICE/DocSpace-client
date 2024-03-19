@@ -1,31 +1,31 @@
 // (c) Copyright Ascensio System SIA 2010-2024
-// 
+//
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
 // of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
 // Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
 // to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
 // any third-party rights.
-// 
+//
 // This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
 // of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
 // the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-// 
+//
 // You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-// 
+//
 // The  interactive user interfaces in modified source and object code versions of the Program must
 // display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-// 
+//
 // Pursuant to Section 7(b) of the License you must retain the original Product logo when
 // distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
 // trademark law for use of our trademarks.
-// 
+//
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -58,12 +58,19 @@ const StyledSetRoomParams = styled.div`
   .icon-editor_text {
     margin-bottom: 6px;
   }
+
   .icon-editor {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     justify-content: start;
     gap: 16px;
+
+    ${(props) =>
+      props.disableImageRescaling &&
+      css`
+        margin-bottom: 24px;
+      `};
   }
 `;
 
@@ -91,6 +98,7 @@ const SetRoomParams = ({
   const [previewIcon, setPreviewIcon] = useState(null);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
     useState(true);
+  const [disableImageRescaling, setDisableImageRescaling] = useState(isEdit);
 
   const onChangeName = (e) => {
     setIsValidTitle(true);
@@ -109,7 +117,12 @@ const SetRoomParams = ({
   const onChangeStorageLocation = (storageLocation) =>
     setRoomParams({ ...roomParams, storageLocation });
 
-  const onChangeIcon = (icon) => setRoomParams({ ...roomParams, icon: icon });
+  const onChangeIcon = (icon) => {
+    if (!icon.uploadedFile !== disableImageRescaling)
+      setDisableImageRescaling(!icon.uploadedFile);
+
+    setRoomParams({ ...roomParams, icon: icon });
+  };
 
   const onOwnerChange = () => {
     setChangeRoomOwnerIsVisible(true, true, (roomOwner) =>
@@ -126,7 +139,7 @@ const SetRoomParams = ({
   };
 
   return (
-    <StyledSetRoomParams>
+    <StyledSetRoomParams disableImageRescaling={disableImageRescaling}>
       {isEdit ? (
         <RoomType t={t} roomType={roomParams.type} type="displayItem" />
       ) : (
@@ -223,6 +236,7 @@ const SetRoomParams = ({
           setPreview={setPreviewIcon}
           onChangeImage={onChangeIcon}
           classNameWrapperImageCropper={"icon-editor"}
+          disableImageRescaling={disableImageRescaling}
           Preview={
             <PreviewTile
               t={t}

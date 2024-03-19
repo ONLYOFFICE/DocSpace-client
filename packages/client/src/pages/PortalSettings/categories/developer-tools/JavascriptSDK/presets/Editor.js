@@ -45,6 +45,7 @@ import { isTablet, isMobile } from "@docspace/shared/utils/device";
 import EmptyIframeContainer from "../sub-components/EmptyIframeContainer";
 
 import GetCodeDialog from "../sub-components/GetCodeDialog";
+import CodeBlock from "../sub-components/CodeBlock";
 import { Button } from "@docspace/shared/components/button";
 
 const showPreviewThreshold = 720;
@@ -84,7 +85,9 @@ const Editor = (props) => {
   const [width, setWidth] = useState("100");
   const [height, setHeight] = useState("100");
   const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
-  const [showPreview, setShowPreview] = useState(window.innerWidth > showPreviewThreshold);
+  const [showPreview, setShowPreview] = useState(
+    window.innerWidth > showPreviewThreshold,
+  );
 
   const [config, setConfig] = useState({
     mode: "editor",
@@ -111,7 +114,9 @@ const Editor = (props) => {
 
     const params = objectToGetParams(config);
 
-    loadScript(`${scriptUrl}${params}`, "integration", () => window.DocSpace.SDK.initFrame(config));
+    loadScript(`${scriptUrl}${params}`, "integration", () =>
+      window.DocSpace.SDK.initFrame(config),
+    );
   }, 500);
 
   useEffect(() => {
@@ -177,7 +182,8 @@ const Editor = (props) => {
 
   const onResize = () => {
     const isEnoughWidthForPreview = window.innerWidth > showPreviewThreshold;
-    if (isEnoughWidthForPreview !== showPreview) setShowPreview(isEnoughWidthForPreview);
+    if (isEnoughWidthForPreview !== showPreview)
+      setShowPreview(isEnoughWidthForPreview);
   };
 
   useEffect(() => {
@@ -219,7 +225,9 @@ const Editor = (props) => {
 
   const code = (
     <CodeWrapper>
-      <CategorySubHeader className="copy-window-code">{t("CopyWindowCode")}</CategorySubHeader>
+      <CategorySubHeader className="copy-window-code">
+        {t("CopyWindowCode")}
+      </CategorySubHeader>
       <Textarea value={codeBlock} heightTextArea={153} />
     </CodeWrapper>
   );
@@ -229,6 +237,11 @@ const Editor = (props) => {
       key: "preview",
       title: t("Common:Preview"),
       content: preview,
+    },
+    {
+      key: "js",
+      title: "JavaScript",
+      content: <CodeBlock config={config} />,
     },
     {
       key: "code",
@@ -386,4 +399,8 @@ export default inject(({ authStore, settingsStore }) => {
     theme,
     setDocumentTitle,
   };
-})(withTranslation(["JavascriptSdk", "Files", "EmbeddingPanel", "Common"])(observer(Editor)));
+})(
+  withTranslation(["JavascriptSdk", "Files", "EmbeddingPanel", "Common"])(
+    observer(Editor),
+  ),
+);

@@ -31,6 +31,7 @@ import { isMobileOnly } from "react-device-detect";
 import StyledToastContainer from "./Toast.styled";
 import { ToastProps } from "./Toast.type";
 import { Portal } from "../portal";
+import { useIsServer } from "../../hooks/useIsServer";
 
 const Slide = cssTransition({
   enter: "SlideIn",
@@ -39,6 +40,8 @@ const Slide = cssTransition({
 
 const Toast = (props: ToastProps) => {
   const [offset, setOffset] = useState(0);
+
+  const isServer = useIsServer();
 
   const onToastClick = () => {
     const documentElement = document.getElementsByClassName("Toastify__toast");
@@ -83,8 +86,7 @@ const Toast = (props: ToastProps) => {
     };
   }, [onResize]);
 
-  const { className, style } = props;
-  const rootElement = document.getElementById("root");
+  const { className, style, isSSR } = props;
 
   const element = (
     <StyledToastContainer
@@ -97,12 +99,17 @@ const Toast = (props: ToastProps) => {
       newestOnTop
       pauseOnFocusLoss={false}
       style={style}
+      icon={false}
       transition={Slide}
       onClick={onToastClick}
       $topOffset={offset}
       data-testid="toast"
     />
   );
+
+  if (isServer && isSSR) return null;
+
+  const rootElement = document?.getElementById("root");
 
   return (
     <Portal element={element} appendTo={rootElement || undefined} visible />

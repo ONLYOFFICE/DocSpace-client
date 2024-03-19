@@ -114,7 +114,9 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       )
         return;
 
-      onSelect?.(item);
+      const isDoubleClick = e.detail === 2;
+
+      onSelect?.(item, isDoubleClick);
     };
 
     return (

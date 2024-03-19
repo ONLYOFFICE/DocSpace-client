@@ -42,6 +42,10 @@
     "test:ui:mobile": "cross-env DEVICE_TYPE=mobile npx codecept-ui"
   },
   "dependencies": {
+    "@codemirror/lang-javascript": "^6.2.2",
+    "@lezer/highlight": "^1.2.0",
+    "@uiw/codemirror-themes": "^4.21.24",
+    "@uiw/react-codemirror": "^4.21.24",
     "copy-to-clipboard": "^3.3.3",
     "element-resize-detector": "^1.2.4",
     "file-saver": "^2.0.5",

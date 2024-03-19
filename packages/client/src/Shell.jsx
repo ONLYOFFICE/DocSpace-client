@@ -400,7 +400,10 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   useEffect(() => {
     if (!FirebaseHelper.isEnabled || !isLoaded) return;
     toastify.onChange((payload) => {
-      if (payload.status === "added" && payload.type === ToastType.error) {
+      if (
+        payload.status === "added" &&
+        (payload.type === ToastType.error || payload.type === ToastType.warning)
+      ) {
         sendToastReport(
           userId,
           version,

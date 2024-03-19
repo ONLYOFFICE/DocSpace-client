@@ -342,7 +342,7 @@ const WhiteLabel = (props) => {
               title={t("Profile:DarkTheme")}
               src={logoUrlsWhiteLabel[0].path.dark}
               imageClass="logo-header background-dark"
-              inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}__dark`}
+              inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_dark`}
               linkId="link-space-header-dark"
               onChangeText={t("ChangeLogoButton")}
               onChange={onChangeLogo}

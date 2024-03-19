@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { ReactSVG } from "react-svg";
 import { useTheme } from "styled-components";
 
 import { classNames, getLogoFromPath } from "@docspace/shared/utils";
@@ -45,9 +44,10 @@ const DocspaceLogo = ({ className, whiteLabelLogoUrls }: DocspaceLogoProps) => {
   return (
     <StyledWrapper>
       {logo && (
-        <ReactSVG
+        <img
           src={logo}
           className={classNames("logo-wrapper", className)}
+          alt=""
         />
       )}
     </StyledWrapper>

@@ -495,3 +495,14 @@ export const enum UrlActionType {
   Download = 0,
   Link = 1,
 }
+
+export const enum WhiteLabelLogoType {
+  LightSmall = 1,
+  LoginPage = 2,
+  Favicon = 3,
+  DocsEditor = 4,
+  DocsEditorEmbed = 5,
+  LeftMenu = 6,
+  AboutPage = 7,
+  Notification = 8,
+}

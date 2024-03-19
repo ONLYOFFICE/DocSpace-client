@@ -11,7 +11,7 @@
   "NotNeedSettings": "Not need enter settings",
   "PluginSamples": "Plugin samples",
   "PluginSDK": "Plugin SDK",
-  "PluginSDKDescription": "Using Plugin SDK you can extend your DocSpace functionality, connect the third-party services or enhance the existing user experience. Here you can find the plugin samples with code source available on GitHub. ",
+  "PluginSDKDescription": "Using Plugin SDK you can extend your DocSpace functionality, connect the third-party services or enhance the existing user experience. Here you can find the plugin samples with code source available on GitHub.",
   "PluginSDKInstruction": "Click the button for the detailed instructions on how to create your own plugins.",
   "PluginsHelp": "Plugins allow you to extend the functionality of DocSpace",
   "UploadPlugin": "Upload plugin"

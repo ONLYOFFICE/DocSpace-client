@@ -19,7 +19,7 @@
   "LogoutAllActiveSessionsDescription": "Todas las conexiones activas excepto esta conexión se desconectarán, ya que está actualmente en uso.",
   "LogoutBtn": "Cerrar sesión",
   "LogoutDescription": "Aviso. Todas las conexiones activas excepto esta conexión se desconectarán, ya que está actualmente en uso.",
-  "LogoutFrom": "¿Cerrar sesión en {{platform}} {{browser}} ? ",
+  "LogoutFrom": "¿Cerrar sesión en {{platform}} {{browser}}? ",
   "MyProfile": "Mi perfil",
   "ProviderSuccessfullyConnected": "El proveedor se ha conectado correctamente",
   "ProviderSuccessfullyDisconnected": "El proveedor se ha desconectado correctamente",

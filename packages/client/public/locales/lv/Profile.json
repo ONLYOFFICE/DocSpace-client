@@ -19,7 +19,7 @@
   "LogoutAllActiveSessionsDescription": "Visi aktīvie savienojumi, izņemot šo savienojumu, tiks izrakstīti, jo tas pašlaik tiek lietots.",
   "LogoutBtn": "Izrakstīties",
   "LogoutDescription": "Piezīme. Visi aktīvie savienojumi, izņemot šo savienojumu, tiks izrakstīti, jo tas pašlaik tiek lietots.",
-  "LogoutFrom": "Vai izrakstīties no {{platform}} {{browser}} ?",
+  "LogoutFrom": "Vai izrakstīties no {{platform}} {{browser}}?",
   "MyProfile": "Mans profils",
   "ProviderSuccessfullyConnected": "Piegādātājs ir veiksmīgi savienots",
   "ProviderSuccessfullyDisconnected": "Piegādātājs ir veiksmīgi atvienots",

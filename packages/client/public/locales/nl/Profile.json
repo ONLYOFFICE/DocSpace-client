@@ -19,7 +19,7 @@
   "LogoutAllActiveSessionsDescription": "Alle actieve verbindingen behalve deze verbinding worden uitgelogd, omdat deze momenteel in gebruik is.",
   "LogoutBtn": "Uitloggen",
   "LogoutDescription": "Opmerking. Alle actieve verbindingen behalve deze verbinding worden uitgelogd, omdat deze momenteel in gebruik is.",
-  "LogoutFrom": "Uitloggen van {{platform}} {{browser}} ?",
+  "LogoutFrom": "Uitloggen van {{platform}} {{browser}}?",
   "MyProfile": "Mijn profiel",
   "ProviderSuccessfullyConnected": "Provider met succes verbonden",
   "ProviderSuccessfullyDisconnected": "Provider met succes losgekoppeld",

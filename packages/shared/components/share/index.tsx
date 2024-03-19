@@ -223,7 +223,7 @@ const Share = (props: ShareProps) => {
             link.sharedTo.id,
             item.access,
             link.sharedTo.primary,
-            item.internal || false,
+            link.sharedTo.internal || false,
             expDate,
           )
         : await editExternalLink(
@@ -231,7 +231,7 @@ const Share = (props: ShareProps) => {
             link.sharedTo.id,
             item.access,
             link.sharedTo.primary,
-            item.internal || false,
+            link.sharedTo.internal || false,
             expDate,
           );
 

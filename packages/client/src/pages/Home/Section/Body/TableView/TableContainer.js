@@ -191,6 +191,7 @@ const Table = ({
   }, [isRooms]);
 
   const filesListNode = useMemo(() => {
+    console.log("TableContainer isRooms", isRooms);
     return filesList.map((item, index) => (
       <TableRow
         id={`${item?.isFolder ? "folder" : "file"}_${item.id}`}

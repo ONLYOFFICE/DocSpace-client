@@ -50,10 +50,9 @@ const ArticleDevToolsBar = ({
   const navigate = useNavigate();
 
   const onClick = (e) => {
- 	const path = "/portal-settings/developer-tools";
+    const path = "/portal-settings/developer-tools";
 
     if (e.ctrlKey || e.metaKey) {
-    
       const url = combineUrl(window.DocSpaceConfig?.proxy?.url, path);
 
       window.open(url, "_blank");

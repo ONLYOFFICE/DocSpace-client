@@ -43,6 +43,8 @@ export interface ToastProps {
   withCross?: boolean;
   /** Time (in milliseconds) for showing your toast. Setting in 0 let you to show toast constantly until clicking on it */
   timeout?: number;
+
+  isSSR?: boolean;
 }
 
 export type TData = {

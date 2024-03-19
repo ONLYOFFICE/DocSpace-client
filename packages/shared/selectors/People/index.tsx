@@ -40,7 +40,7 @@ import {
   TSelectorItem,
   TSelectorSearch,
 } from "../../components/selector/Selector.types";
-import { EmployeeStatus } from "../../enums";
+import { EmployeeActivationStatus, EmployeeStatus } from "../../enums";
 import { TTranslation } from "../../types";
 import { getUserRole } from "../../utils/common";
 import Filter from "../../api/people/filter";
@@ -102,6 +102,7 @@ const PeopleSelector = ({
   excludeItems,
   currentUserId,
   withOutCurrentAuthorizedUser,
+  withoutNotActivatedUsers,
   withAbilityCreateRoomUsers,
   filterUserId,
 
@@ -178,6 +179,9 @@ const PeopleSelector = ({
       currentFilter.page = startIndex / pageCount;
       currentFilter.pageCount = pageCount;
 
+      if (withoutNotActivatedUsers)
+        currentFilter.activationStatus = `${EmployeeActivationStatus.NotActivated}`;
+
       currentFilter.search = searchValue || null;
 
       const response = await getUserList(currentFilter);
@@ -240,6 +244,7 @@ const PeopleSelector = ({
       searchValue,
       withAbilityCreateRoomUsers,
       withOutCurrentAuthorizedUser,
+      withoutNotActivatedUsers,
     ],
   );
 

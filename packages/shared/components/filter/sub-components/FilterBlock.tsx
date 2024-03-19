@@ -497,6 +497,7 @@ const FilterBlock = ({
                 withoutBackButton: false,
               }}
               currentUserId={userId}
+              withoutNotActivatedUsers
             />
           ) : showSelector.type === FilterSelectorTypes.groups ? (
             <GroupsSelector

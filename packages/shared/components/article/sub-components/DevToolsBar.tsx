@@ -38,6 +38,7 @@ import { Text } from "../../text";
 
 import { ArticleDevToolsBarProps } from "../Article.types";
 import { StyledWrapper } from "../Article.styled";
+import { combineUrl } from "../../../utils/combineUrl";
 
 const ArticleDevToolsBar = ({
   showText,
@@ -48,8 +49,20 @@ const ArticleDevToolsBar = ({
   const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
 
-  const onClick = () => {
-    navigate("/portal-settings/developer-tools");
+  const onClick = (e) => {
+ 	const path = "/portal-settings/developer-tools";
+
+    if (e.ctrlKey || e.metaKey) {
+    
+      const url = combineUrl(window.DocSpaceConfig?.proxy?.url, path);
+
+      window.open(url, "_blank");
+
+      return;
+    }
+
+    navigate(path);
+
     if (articleOpen && currentDeviceType === DeviceType.mobile)
       toggleArticleOpen();
   };

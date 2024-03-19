@@ -69,8 +69,8 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
     badgeTitle,
   } = props;
 
-  const onClickAction = () => {
-    onClick?.(id);
+  const onClickAction = (e) => {
+    onClick?.(e, id);
   };
 
   const onClickBadgeAction = (e: React.MouseEvent) => {

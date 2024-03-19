@@ -97,6 +97,7 @@ const Toast = (props: ToastProps) => {
       newestOnTop
       pauseOnFocusLoss={false}
       style={style}
+      icon={false}
       transition={Slide}
       onClick={onToastClick}
       $topOffset={offset}

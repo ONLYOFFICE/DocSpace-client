@@ -64,7 +64,6 @@ import {
 } from "../helpers/plugins/enums";
 
 import SelectedFolderStore from "./SelectedFolderStore";
-import { getCSPSettings } from "@docspace/shared/api/settings";
 
 const { api: apiConf, proxy: proxyConf } = defaultConfig;
 const { origin: apiOrigin, prefix: apiPrefix } = apiConf;
@@ -263,6 +262,8 @@ class PluginStore {
     try {
       const plugin = await api.plugins.addPlugin(data);
 
+      window.location.reload();
+
       this.initPlugin(plugin);
     } catch (e) {
       const err = e as { response: { data: { error: { message: string } } } };
@@ -433,7 +434,9 @@ class PluginStore {
 
     plugin.enabled = true;
 
-    this.installPlugin(plugin, false);
+    window.location.reload();
+
+    // this.installPlugin(plugin, false);
   };
 
   deactivatePlugin = async (name: string) => {

@@ -618,6 +618,10 @@ class SettingsStore {
     return this.tenantStatus === TenantStatus.PortalDeactivate;
   }
 
+  get isPortalRestoring() {
+    return this.tenantStatus === TenantStatus.PortalRestore;
+  }
+
   init = async () => {
     this.setIsLoading(true);
     const requests = [];

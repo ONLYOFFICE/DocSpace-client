@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Meta, StoryObj } from "@storybook/react";
 
@@ -75,6 +75,20 @@ const BaseTemplate = ({
   data?: React.ReactNode | string;
   timeout?: number;
 }) => {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    // const isDocs = window.location.href.includes("docs");
+
+    const timeoutId = setTimeout(() => {
+      setVisible(true);
+    }, 0);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, []);
+
   const showToast = () => {
     switch (type) {
       case ToastType.error:
@@ -94,7 +108,7 @@ const BaseTemplate = ({
 
   return (
     <>
-      <Toast {...args} />
+      {visible && <Toast {...args} />}
       <Button
         label="Show toast"
         primary

@@ -44,6 +44,16 @@ export const getImage = async (
   return imageUrl;
 };
 
+const checkExists = async (url: string) => {
+  try {
+    const res = await fetch(url, { method: "HEAD" });
+    return res.ok;
+  } catch (e) {
+    console.error(e);
+    return false;
+  }
+};
+
 export const getTranslation = async (
   campaign: string,
   lng: string,
@@ -58,22 +68,31 @@ export const getTranslation = async (
       lng,
     );
   }
-  const res = await fetch(translationUrl);
 
-  if (!res.ok) {
-    if (standalone) {
-      translationUrl = `/static/campaigns/locales/en/Campaign${campaign}.json`;
-    } else {
-      translationUrl = await window.firebaseHelper.getCampaignsTranslations(
-        campaign,
-        "en",
-      );
-    }
+  let exists = await checkExists(translationUrl);
+
+  if (exists) {
+    const res = await fetch(translationUrl);
+    return Promise.resolve(res.json());
+  }
+
+  if (standalone) {
+    translationUrl = `/static/campaigns/locales/en/Campaign${campaign}.json`;
+  } else {
+    translationUrl = await window.firebaseHelper.getCampaignsTranslations(
+      campaign,
+      "en",
+    );
+  }
+
+  exists = await checkExists(translationUrl);
+
+  if (exists) {
     const enRes = await fetch(translationUrl);
     return Promise.resolve(enRes.json());
   }
 
-  return Promise.resolve(res.json());
+  return Promise.resolve(null);
 };
 
 export const getConfig = async (campaign: string, standalone: boolean) => {
@@ -83,8 +102,14 @@ export const getConfig = async (campaign: string, standalone: boolean) => {
   } else {
     configUrl = await window.firebaseHelper.getCampaignConfig(campaign);
   }
-  const res = await fetch(configUrl);
-  return Promise.resolve(res.json());
+  const exists = await checkExists(configUrl);
+
+  if (exists) {
+    const res = await fetch(configUrl);
+    return Promise.resolve(res.json());
+  }
+
+  return Promise.resolve(null);
 };
 
 export const isHideBannerForUser = (userType: string, hideFor: string[]) => {

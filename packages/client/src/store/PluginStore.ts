@@ -64,6 +64,7 @@ import {
 } from "../helpers/plugins/enums";
 
 import SelectedFolderStore from "./SelectedFolderStore";
+import { getCSPSettings } from "@docspace/shared/api/settings";
 
 const { api: apiConf, proxy: proxyConf } = defaultConfig;
 const { origin: apiOrigin, prefix: apiPrefix } = apiConf;

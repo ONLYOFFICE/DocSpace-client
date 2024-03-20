@@ -23,17 +23,17 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
 import React, { useEffect, useState } from "react";
-import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
 import { withTranslation } from "react-i18next";
+import PropTypes from "prop-types";
+import { observer, inject } from "mobx-react";
+
+import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
 
 import { StyledPreparationPortal } from "./StyledPreparationPortal";
-import { Text } from "@docspace/shared/components/text";
-import { getRestoreProgress } from "@docspace/shared/api/portal";
-import { observer, inject } from "mobx-react";
-import PropTypes from "prop-types";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { Text } from "../../components/text";
+import { getRestoreProgress } from "../../api/portal";
+import { ColorTheme, ThemeId } from "../../components/color-theme";
 
 const baseSize = 1073741824; //number of bytes in one GB
 const unSizeMultiplicationFactor = 3;

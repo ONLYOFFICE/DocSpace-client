@@ -63,18 +63,7 @@ type Story = StoryObj<typeof Toast>;
 
 export default meta;
 
-const BaseTemplate = ({
-  type,
-  data,
-  title,
-  timeout = 5000,
-  withCross = false,
-  ...args
-}: ToastProps & {
-  withCross?: boolean;
-  data?: React.ReactNode | string;
-  timeout?: number;
-}) => {
+const useVisible = () => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -88,6 +77,23 @@ const BaseTemplate = ({
       clearTimeout(timeoutId);
     };
   }, []);
+
+  return visible;
+};
+
+const BaseTemplate = ({
+  type,
+  data,
+  title,
+  timeout = 5000,
+  withCross = false,
+  ...args
+}: ToastProps & {
+  withCross?: boolean;
+  data?: React.ReactNode | string;
+  timeout?: number;
+}) => {
+  const visible = useVisible();
 
   const showToast = () => {
     switch (type) {
@@ -131,6 +137,8 @@ export const basic: Story = {
 };
 
 const AllTemplate = () => {
+  const visible = useVisible();
+
   const renderAllToast = () => {
     toastr.success(
       <>
@@ -168,7 +176,7 @@ const AllTemplate = () => {
   };
   return (
     <>
-      <Toast />
+      {visible && <Toast />}
       <Button
         label="Show all toast"
         primary

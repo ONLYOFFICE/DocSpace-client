@@ -1728,12 +1728,14 @@ class FilesStore {
                 tags,
                 withoutTags,
                 quotaFilter,
+                provider,
               } = filter;
 
               const isFiltered =
                 subjectId ||
                 filterValue ||
                 type ||
+                provider ||
                 withRoomsSubfolders ||
                 searchInContentRooms ||
                 tags ||
@@ -4137,6 +4139,7 @@ class FilesStore {
       tags,
       withoutTags,
       quotaFilter,
+      provider,
     } = this.roomsFilter;
 
     const {
@@ -4152,6 +4155,7 @@ class FilesStore {
       isRoomsFolder || isArchiveFolder
         ? filterValue ||
           type ||
+          provider ||
           withRoomsSubfolders ||
           searchInContentRooms ||
           subjectId ||

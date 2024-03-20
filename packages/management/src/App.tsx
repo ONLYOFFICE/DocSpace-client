@@ -105,7 +105,7 @@ const App = observer(() => {
       <NavMenu hideProfileMenu customHeader={<SimpleHeader />} />
       <Main isDesktop={false}>
         <div className="main-container">
-          <MainLayout>
+          <MainLayout isPortalRestoring={settingsStore?.isPortalRestoring}>
             <Outlet />
           </MainLayout>
         </div>

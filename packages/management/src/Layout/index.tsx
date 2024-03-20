@@ -36,7 +36,6 @@ type TLayoutProps = {
 };
 
 const MainLayout = ({ children, isPortalRestoring }: TLayoutProps) => {
-  console.log("isPortalRestoring", isPortalRestoring);
   return (
     <>
       {!isPortalRestoring && <ArticleWrapper />}

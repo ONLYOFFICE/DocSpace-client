@@ -104,6 +104,7 @@ const SetRoomParams = ({
   const [disableImageRescaling, setDisableImageRescaling] = useState(isEdit);
 
   const isFormRoom = roomParams.type === RoomsType.FormRoom;
+  const isPublicRoom = roomParams.type === RoomsType.PublicRoom;
 
   const onChangeName = (e) => {
     setIsValidTitle(true);
@@ -216,10 +217,9 @@ const SetRoomParams = ({
         />
       )}
 
-      {!isEdit && enableThirdParty && (
+      {!isEdit && enableThirdParty && isPublicRoom && (
         <ThirdPartyStorage
           t={t}
-          roomType={roomParams.type}
           roomTitle={roomParams.title}
           storageLocation={roomParams.storageLocation}
           onChangeStorageLocation={onChangeStorageLocation}

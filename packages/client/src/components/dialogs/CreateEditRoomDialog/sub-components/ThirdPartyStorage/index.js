@@ -36,7 +36,6 @@ import ThirdPartyComboBox from "./ThirdPartyComboBox";
 
 import FolderInput from "./FolderInput";
 import { getOAuthToken } from "@docspace/shared/utils/common";
-import { RoomsType } from "@docspace/shared/enums";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 
 const StyledThirdPartyStorage = styled(StyledParam)`
@@ -72,7 +71,6 @@ const ThirdPartyStorage = ({
   isDisabled,
   currentColorScheme,
   isRoomAdmin,
-  roomType,
   createNewFolderIsChecked,
   onCreateFolderChange,
 }) => {
@@ -127,19 +125,15 @@ const ThirdPartyStorage = ({
       storageFolderId,
     });
 
-  const isPublicRoom = roomType === RoomsType.PublicRoom;
-
   return (
     <StyledThirdPartyStorage>
-      {isPublicRoom && (
-        <ToggleParam
-          id="shared_third-party-storage-toggle"
-          title={t("Common:ThirdPartyStorage")}
-          description={t("ThirdPartyStorageDescription")}
-          isChecked={storageLocation.isThirdparty}
-          onCheckedChange={onChangeIsThirdparty}
-        />
-      )}
+      <ToggleParam
+        id="shared_third-party-storage-toggle"
+        title={t("Common:ThirdPartyStorage")}
+        description={t("ThirdPartyStorageDescription")}
+        isChecked={storageLocation.isThirdparty}
+        onCheckedChange={onChangeIsThirdparty}
+      />
 
       {storageLocation.isThirdparty && (
         <ThirdPartyComboBox

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-﻿import ExpanderDownReactSvgUrl from "PUBLIC_DIR/images/expander-down.react.svg?url";
+import ExpanderDownReactSvgUrl from "PUBLIC_DIR/images/expander-down.react.svg?url";
 import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import { ReactSVG } from "react-svg";
@@ -39,6 +39,8 @@ import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { connectedCloudsTypeTitleTranslation as ProviderKeyTranslation } from "@docspace/client/src/helpers/filesUtils";
 import { Base } from "@docspace/shared/themes";
 import { toastr } from "@docspace/shared/components/toast";
+
+import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
 
 const StyledStorageLocation = styled.div`
   display: flex;
@@ -125,6 +127,19 @@ const StyledStorageLocation = styled.div`
 
 StyledStorageLocation.defaultProps = { theme: Base };
 
+const services = {
+  GoogleDrive: "google",
+  Box: "box",
+  DropboxV2: "dropbox",
+  OneDrive: "skydrive",
+  Nextcloud: "nextcloud",
+  kDrive: "kdrive",
+  Yandex: "yandex",
+  ownCloud: "owncloud",
+  WebDav: "webdav",
+  SharePoint: "sharepoint",
+};
+
 const ThirdPartyComboBox = ({
   t,
 
@@ -170,7 +185,14 @@ const ThirdPartyComboBox = ({
     setIsOpen(!isOpen);
   };
 
-  const setStorageLocaiton = (thirparty) => {
+  const setStorageLocaiton = (thirparty, isAvailable) => {
+    if (!isAvailable) {
+      window.open(
+        `/portal-settings/integration/third-party-services?service=${services[thirparty.id]}`,
+        "_blank",
+      );
+      return;
+    }
     onChangeProvider(thirparty);
     setIsOpen(false);
     setIsScrollLocked(false);
@@ -290,17 +312,29 @@ const ThirdPartyComboBox = ({
           marginTop={dropdownDirection === "bottom" ? "4px" : "-36px"}
           hasItems={isOpen}
         >
-          {thirdparties.map((thirdparty) => (
-            <DropDownItem
-              id={thirdparty.id}
-              className={`dropdown-item ${thirdparty.className ?? ""}`}
-              label={thirdparty.title}
-              key={thirdparty.id}
-              height={32}
-              heightTablet={32}
-              onClick={() => setStorageLocaiton(thirdparty)}
-            />
-          ))}
+          {thirdparties
+            .sort((a) => (a.isAvailable ? -1 : 1))
+            .map((thirdparty) => (
+              <DropDownItem
+                id={thirdparty.id}
+                className={`dropdown-item ${thirdparty.isAvailable ? "" : "flex-reverse"} ${thirdparty.className ?? ""}`}
+                label={
+                  thirdparty.title +
+                  (thirdparty.isAvailable
+                    ? ""
+                    : ` (${t("ActivationRequired")})`)
+                }
+                key={thirdparty.id}
+                height={32}
+                heightTablet={32}
+                onClick={() =>
+                  setStorageLocaiton(thirdparty, thirdparty.isAvailable)
+                }
+                icon={
+                  !thirdparty.isAvailable ? ExternalLinkReactSvgUrl : undefined
+                }
+              />
+            ))}
         </StyledDropDown>
       </StyledDropDownWrapper>
     </StyledStorageLocation>

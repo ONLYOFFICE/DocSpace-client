@@ -202,36 +202,65 @@ export default inject(
     const thirdPartyStore = filesSettingsStore.thirdPartyStore;
 
     const connectItems = [
-      thirdPartyStore.googleConnectItem,
-      thirdPartyStore.boxConnectItem,
-      thirdPartyStore.dropboxConnectItem,
-      thirdPartyStore.oneDriveConnectItem,
-      thirdPartyStore.nextCloudConnectItem && [
-        ...thirdPartyStore.nextCloudConnectItem,
-        "Nextcloud",
-      ],
-      thirdPartyStore.kDriveConnectItem,
-      thirdPartyStore.yandexConnectItem,
-      thirdPartyStore.ownCloudConnectItem && [
-        ...thirdPartyStore.ownCloudConnectItem,
-        "ownCloud",
-      ],
-      thirdPartyStore.webDavConnectItem,
-      thirdPartyStore.sharePointConnectItem,
+      {
+        name: thirdPartyStore.googleConnectItem || ["GoogleDrive"],
+        isAvailable: !!thirdPartyStore.googleConnectItem,
+      },
+      {
+        name: thirdPartyStore.boxConnectItem || ["Box"],
+        isAvailable: !!thirdPartyStore.boxConnectItem,
+      },
+      {
+        name: thirdPartyStore.dropboxConnectItem || ["DropboxV2"],
+        isAvailable: !!thirdPartyStore.dropboxConnectItem,
+      },
+      {
+        name: thirdPartyStore.oneDriveConnectItem || ["OneDrive"],
+        isAvailable: !!thirdPartyStore.oneDriveConnectItem,
+      },
+      {
+        name: (thirdPartyStore.nextCloudConnectItem && [
+          ...thirdPartyStore.nextCloudConnectItem,
+          "Nextcloud",
+        ]) || ["NextCloud"],
+        isAvailable: !!thirdPartyStore.nextCloudConnectItem,
+      },
+      {
+        name: thirdPartyStore.kDriveConnectItem || ["kDrive"],
+        isAvailable: !!thirdPartyStore.kDriveConnectItem,
+      },
+      {
+        name: thirdPartyStore.yandexConnectItem || ["Yandex"],
+        isAvailable: !!thirdPartyStore.yandexConnectItem,
+      },
+      {
+        name: (thirdPartyStore.ownCloudConnectItem && [
+          ...thirdPartyStore.ownCloudConnectItem,
+          "ownCloud",
+        ]) || ["ownCloud"],
+
+        isAvailable: !!thirdPartyStore.ownCloudConnectItem,
+      },
+      {
+        name: thirdPartyStore.webDavConnectItem || ["WebDav"],
+        isAvailable: !!thirdPartyStore.webDavConnectItem,
+      },
+      {
+        name: thirdPartyStore.sharePointConnectItem || ["SharePoint"],
+        isAvailable: !!thirdPartyStore.sharePointConnectItem,
+      },
     ]
-      .map(
-        (item) =>
-          item && {
-            id: item[0],
-            className: `storage_${item[0].toLowerCase()}`,
-            providerKey: item[0],
-            isOauth: item.length > 1 && item[0] !== "WebDav",
-            oauthHref: item.length > 1 && item[0] !== "WebDav" ? item[1] : "",
-            ...(item[0] === "WebDav" && {
-              category: item[item.length - 1],
-            }),
-          },
-      )
+      .map(({ name, isAvailable }) => ({
+        id: name[0],
+        className: `storage_${name[0].toLowerCase()}`,
+        providerKey: name[0],
+        isOauth: name.length > 1 && name[0] !== "WebDav",
+        oauthHref: name.length > 1 && name[0] !== "WebDav" ? name[1] : "",
+        ...(name[0] === "WebDav" && {
+          category: name[name.length - 1],
+        }),
+        isAvailable,
+      }))
       .filter((item) => !!item);
 
     const { isRoomAdmin } = authStore;

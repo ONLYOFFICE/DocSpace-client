@@ -116,9 +116,19 @@ class ThirdPartyServices extends React.Component {
   }
 
   componentDidMount() {
-    const { getConsumers } = this.props;
+    const { getConsumers, fetchAndSetConsumers } = this.props;
     showLoader();
-    getConsumers().finally(() => hideLoader());
+    const urlParts = window.location.href.split("?");
+    if (urlParts.length > 1) {
+      setTimeout(() => {
+        const queryValue = urlParts[1].split("=")[1];
+        fetchAndSetConsumers(queryValue)
+          .then((isConsumerExist) => isConsumerExist && this.onModalOpen())
+          .finally(() => hideLoader());
+      }, 100);
+    } else {
+      getConsumers().finally(() => hideLoader());
+    }
   }
 
   onChangeLoading = (status) => {
@@ -339,6 +349,7 @@ export default inject(
       integration,
       updateConsumerProps,
       setSelectedConsumer,
+      fetchAndSetConsumers,
     } = setup;
     const { consumers } = integration;
     const { isThirdPartyAvailable } = currentQuotaStore;
@@ -350,6 +361,7 @@ export default inject(
       getConsumers,
       updateConsumerProps,
       setSelectedConsumer,
+      fetchAndSetConsumers,
       setDocumentTitle,
       currentColorScheme,
       isThirdPartyAvailable,

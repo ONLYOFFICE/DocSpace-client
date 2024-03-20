@@ -89,6 +89,13 @@ const StyledDropDown = styled(DropDown)`
       max-height: 7px !important;
     }
   }
+
+  .flex-reverse {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+  }
 `;
 
 StyledDropDown.defaultProps = { theme: Base };

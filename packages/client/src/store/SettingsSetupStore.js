@@ -495,6 +495,15 @@ class SettingsSetupStore {
     this.setConsumers(res);
   };
 
+  fetchAndSetConsumers = async (consumerName) => {
+    const res = await api.settings.getConsumersList();
+    const consumer = res.find((c) => c.name === consumerName);
+    this.integration.selectedConsumer = consumer || {};
+    this.setConsumers(res);
+
+    return !!consumer
+  };
+
   updateConsumerProps = async (newProps) => {
     await api.settings.updateConsumerProps(newProps);
 

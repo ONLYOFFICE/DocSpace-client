@@ -262,6 +262,8 @@ class PluginStore {
     try {
       const plugin = await api.plugins.addPlugin(data);
 
+      window.location.reload();
+
       this.initPlugin(plugin);
     } catch (e) {
       const err = e as { response: { data: { error: { message: string } } } };
@@ -432,7 +434,9 @@ class PluginStore {
 
     plugin.enabled = true;
 
-    this.installPlugin(plugin, false);
+    window.location.reload();
+
+    // this.installPlugin(plugin, false);
   };
 
   deactivatePlugin = async (name: string) => {
@@ -817,6 +821,7 @@ class PluginStore {
 
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
+    const storeId = this.selectedFolderStore.id;
 
     Array.from(items).forEach(([key, value]) => {
       const correctUserType = value.usersType
@@ -830,7 +835,7 @@ class PluginStore {
       if (!correctUserType || !correctDevice) return;
 
       const newItems: IMainButtonItem[] = [];
-      const storeId = this.selectedFolderStore.id;
+
       if (value.items && storeId) {
         value.items.forEach((i) => {
           const onClick = async () => {
@@ -868,9 +873,10 @@ class PluginStore {
 
       const onClick = async () => {
         if (!value.onClick) return;
-        if (!storeId) return;
+        const currStoreId = this.selectedFolderStore.id;
+        if (!currStoreId) return;
 
-        const message = await value.onClick(storeId);
+        const message = await value.onClick(currStoreId);
 
         messageActions(
           message,

@@ -38,7 +38,7 @@ import { Text } from "../../text";
 
 import { ArticleDevToolsBarProps } from "../Article.types";
 import { StyledWrapper } from "../Article.styled";
-import { combineUrl } from "../../../utils/combineUrl";
+import { openingNewTab } from "../../../utils/openingNewTab";
 
 const ArticleDevToolsBar = ({
   showText,
@@ -52,13 +52,7 @@ const ArticleDevToolsBar = ({
   const onClick = (e) => {
     const path = "/portal-settings/developer-tools";
 
-    if (e.ctrlKey || e.metaKey) {
-      const url = combineUrl(window.DocSpaceConfig?.proxy?.url, path);
-
-      window.open(url, "_blank");
-
-      return;
-    }
+    if (openingNewTab(path, e)) return;
 
     navigate(path);
 

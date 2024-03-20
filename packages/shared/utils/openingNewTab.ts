@@ -24,51 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { inject, observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
+import { combineUrl } from "./combineUrl";
 
-import { ArticleItem } from "@docspace/shared/components/article-item";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { useNavigate } from "react-router-dom";
-import GiftReactSvgUrl from "PUBLIC_DIR/images/gift.react.svg?url";
-import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
+export const openingNewTab = (url: string, e: React.MouseEvent) => {
+  if (e.ctrlKey || e.metaKey || e.button === 1) {
+    const path = combineUrl(window.DocSpaceConfig?.proxy?.url, url);
 
-const PROXY_BASE_URL = combineUrl(
-  window.DocSpaceConfig?.proxy?.url,
-  "/portal-settings",
-);
+    window.open(path, "_blank");
 
-const bonusUrl = combineUrl(PROXY_BASE_URL, "/bonus");
-const BonusItem = ({ showText, toggleArticleOpen }) => {
-  const { t } = useTranslation("Common");
+    return true;
+  }
 
-  const navigate = useNavigate();
-
-  const onClick = React.useCallback((e) => {
-    if (openingNewTab(bonusUrl, e)) return;
-
-    navigate(bonusUrl);
-    toggleArticleOpen();
-  }, []);
-
-  return (
-    <ArticleItem
-      key="bonus"
-      text={t("Common:Bonus")}
-      icon={GiftReactSvgUrl}
-      showText={showText}
-      onClick={onClick}
-      folderId="document_catalog-bonus"
-      style={{ marginTop: "16px" }}
-    />
-  );
+  return false;
 };
-
-export default inject(({ settingsStore }) => {
-  const { showText, toggleArticleOpen } = settingsStore;
-  return {
-    showText,
-    toggleArticleOpen,
-  };
-})(observer(BonusItem));

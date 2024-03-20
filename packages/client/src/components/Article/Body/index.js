@@ -44,6 +44,7 @@ import { CategoryType } from "SRC_DIR/helpers/constants";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 
 const ArticleBodyContent = (props) => {
   const {
@@ -160,13 +161,7 @@ const ArticleBodyContent = (props) => {
 
       path += `?${params}`;
 
-      if (e.ctrlKey || e.metaKey) {
-        const url = combineUrl(window.DocSpaceConfig?.proxy?.url, path);
-
-        window.open(url, "_blank");
-
-        return;
-      }
+      if (openingNewTab(path, e)) return;
 
       if (folderId === "accounts" || folderId === "settings") clearFiles();
 

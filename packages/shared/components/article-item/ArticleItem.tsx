@@ -112,6 +112,7 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
           isDragActive={isDragActive}
           onClick={onClickAction}
           onMouseUp={onMouseUpAction}
+          onMouseDown={onClickAction}
         />
         <StyledArticleItemImg isActive={isActive}>
           <ReactSVG className="icon" src={icon} />

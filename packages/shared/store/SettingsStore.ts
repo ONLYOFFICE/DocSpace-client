@@ -634,17 +634,6 @@ class SettingsStore {
       await this.getBuildVersionInfo();
     }
 
-    if (window?.AscDesktopEditor !== undefined) {
-      const favicon = this.whiteLabelLogoUrls?.find(
-        (url) => url.name === "Favicon",
-      );
-
-      window.AscDesktopEditor?.execCommand(
-        "portal:icon",
-        JSON.stringify({ url: favicon?.path.light }),
-      );
-    }
-
     this.setIsLoading(false);
     this.setIsLoaded(true);
   };

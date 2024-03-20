@@ -63,7 +63,7 @@ const ArticleDevToolsBar = ({
   if (!showText) return null;
 
   return (
-    <StyledWrapper onClick={onClick}>
+    <StyledWrapper onClick={onClick} onMouseDown={onClick}>
       <ReactSVG src={DeveloperReactSvgUrl} className="icon" />
       <Text fontWeight={600} fontSize="12px" className="label">
         {t("Common:DeveloperTools")}

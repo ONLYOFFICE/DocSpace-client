@@ -108,13 +108,13 @@ const ListComponent = ({
     style: React.CSSProperties;
     key: string;
   }) => {
+    if (!columnInfoPanelStorageName || !columnStorageName) {
+      throw new Error("columnStorageName is required for a table view");
+    }
+
     const storageSize = infoPanelVisible
-      ? columnInfoPanelStorageName
-        ? localStorage.getItem(columnInfoPanelStorageName) || undefined
-        : undefined
-      : columnStorageName
-        ? localStorage.getItem(columnStorageName) || undefined
-        : undefined;
+      ? localStorage.getItem(columnInfoPanelStorageName)
+      : localStorage.getItem(columnStorageName);
 
     const isLoaded = isItemLoaded({ index });
     if (!isLoaded) return getLoader(style, key);
@@ -125,7 +125,7 @@ const ListComponent = ({
         style={{
           ...style,
           display: "grid",
-          gridTemplateColumns: storageSize,
+          gridTemplateColumns: storageSize!,
         }}
         key={key}
       >

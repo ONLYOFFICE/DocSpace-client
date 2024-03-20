@@ -1718,6 +1718,7 @@ const SectionFilterContent = ({
         group: FilterGroups.roomFilterOwner,
         label: t("Translations:SearchByOwner"),
         isCheckbox: true,
+        isDisabled: false,
       },
     ];
 

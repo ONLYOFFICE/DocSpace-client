@@ -51,4 +51,5 @@ export interface TagProps {
   isDefault?: boolean;
   isLast?: boolean;
   roomType?: number;
+  providerType?: number;
 }

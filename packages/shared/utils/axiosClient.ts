@@ -134,9 +134,8 @@ class AxiosClient {
 
     const proto = headers["x-forwarded-proto"]?.split(",").shift();
     const host = headers["x-forwarded-host"]?.split(",").shift();
-    const port = headers["x-forwarded-port"]?.split(",").shift();
 
-    const origin = apiOrigin || `${proto}://${host}${port ? `:${port}` : ""}`;
+    const origin = apiOrigin || `${proto}://${host}`;
 
     const apiBaseURL = combineUrl(origin, proxyURL, apiPrefix);
 

@@ -402,7 +402,7 @@ export async function getData(
     console.log("initDocEditor failed", config.error);
 
     const response: TResponse = {
-      error: user ? config.error : { message: "unauthorized" },
+      error: user || share ? config.error : { message: "unauthorized" },
       user: user?.response,
       settings: settings?.response,
       fileId,

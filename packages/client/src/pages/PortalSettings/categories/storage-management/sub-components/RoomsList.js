@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,7 +34,6 @@ import { Button } from "@docspace/shared/components/button";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 
 import { StyledStatistics, StyledSimpleFilesRow } from "../StyledComponent";
-
 
 const RoomsListComponent = (props) => {
   const {

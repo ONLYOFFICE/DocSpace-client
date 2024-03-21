@@ -1,5 +1,5 @@
 /**
- * (c) Copyright Ascensio System SIA 2010-2024
+ * (c) Copyright Ascensio System SIA 2009-2024
  * 
  * This program is a free software product.
  * You can redistribute it and/or modify it under the terms
@@ -41,7 +41,9 @@
   width: 100%;
   height: 80px;
   line-height: 80px;
-  font-family: Helvetica Neue, sans-serif;
+  font-family:
+    Helvetica Neue,
+    sans-serif;
   background: #f4f4f4;
   z-index: 100;
   -webkit-font-smoothing: antialiased;
@@ -199,7 +201,8 @@
   background: #1c1e21;
   text-shadow: 0 1px 1px #000;
   text-decoration: none;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.8),
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.8),
     0 1px 1px hsla(0, 0%, 100%, 0.3);
   cursor: pointer;
 }
@@ -226,7 +229,9 @@
   padding: 0;
   background: none;
   border-radius: 0;
-  box-shadow: 0 0 0 1px #333, 0 0 0 2px #dddcdc;
+  box-shadow:
+    0 0 0 1px #333,
+    0 0 0 2px #dddcdc;
 }
 .smartbanner-android .smartbanner-button:active,
 .smartbanner-android .smartbanner-button:hover {
@@ -292,7 +297,9 @@
   background: #efefef;
   background: linear-gradient(180deg, #efefef, #dcdcdc);
   border-radius: 3px;
-  box-shadow: inset 0 0 0 1px #bfbfbf, 0 1px 0 hsla(0, 0%, 100%, 0.6),
+  box-shadow:
+    inset 0 0 0 1px #bfbfbf,
+    0 1px 0 hsla(0, 0%, 100%, 0.6),
     inset 0 2px 0 hsla(0, 0%, 100%, 0.7);
 }
 .smartbanner-kindle .smartbanner-button:active,

@@ -1,25 +1,25 @@
 // (c) Copyright Ascensio System SIA 2010-2024
-// 
+//
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
 // of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
 // Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
 // to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
 // any third-party rights.
-// 
+//
 // This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
 // of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
 // the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-// 
+//
 // You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-// 
+//
 // The  interactive user interfaces in modified source and object code versions of the Program must
 // display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-// 
+//
 // Pursuant to Section 7(b) of the License you must retain the original Product logo when
 // distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
 // trademark law for use of our trademarks.
-// 
+//
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
@@ -68,8 +68,6 @@ const NewFilesPanel = (props) => {
     newFiles,
     markAsRead,
     setMediaViewerData,
-    addFileToRecentlyViewed,
-    playlist,
     currentFolderId,
     setIsLoading,
     t,
@@ -196,26 +194,19 @@ const NewFilesPanel = (props) => {
     } else {
       const canEdit = [5, 6, 7].includes(fileType); //TODO: maybe dirty
 
-      const isMediaActive = playlist.findIndex((el) => el.fileId === id) !== -1;
-
       const isMedia =
         item?.viewAccessibility?.ImageView ||
         item?.viewAccessibility?.MediaView;
 
       if (canEdit && providerKey) {
-        return addFileToRecentlyViewed(id)
-          .then(() => console.log("Pushed to recently viewed"))
-          .catch((e) => console.error(e))
-          .finally(
-            window.open(
-              combineUrl(
-                window.DocSpaceConfig?.proxy?.url,
-                config.homepage,
-                `/doceditor?fileId=${id}`,
-              ),
-              window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self",
-            ),
-          );
+        return window.open(
+          combineUrl(
+            window.DocSpaceConfig?.proxy?.url,
+            config.homepage,
+            `/doceditor?fileId=${id}`,
+          ),
+          window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self",
+        );
       }
 
       if (isMedia) {
@@ -374,7 +365,7 @@ export default inject(
     clientLoadingStore,
     pluginStore,
   }) => {
-    const { addFileToRecentlyViewed, hasNew, refreshFiles } = filesStore;
+    const { hasNew, refreshFiles } = filesStore;
 
     const { setIsSectionFilterLoading, isLoading } = clientLoadingStore;
 
@@ -382,8 +373,7 @@ export default inject(
       setIsSectionFilterLoading(param);
     };
 
-    const { playlist, setMediaViewerData, setCurrentItem } =
-      mediaViewerDataStore;
+    const { setMediaViewerData, setCurrentItem } = mediaViewerDataStore;
     const { getIcon, getFolderIcon } = filesSettingsStore;
     const { markAsRead } = filesActionsStore;
     const { id: currentFolderId } = selectedFolderStore;
@@ -404,11 +394,9 @@ export default inject(
       newFiles,
       newFilesIds,
       isLoading,
-      playlist,
       setCurrentItem,
       currentFolderId,
       setMediaViewerData,
-      addFileToRecentlyViewed,
       getIcon,
       getFolderIcon,
       markAsRead,

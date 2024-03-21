@@ -2359,18 +2359,12 @@ class FilesActionStore {
               )
             : null;
 
-        const isPreview = item.isForm
-          ? !item.security.FillForms
-          : isRecentTab
-            ? false
-            : !item.security.Edit;
-
         const shareWebUrl = new URL(webUrl);
         const shareKey = isRecentTab
           ? getObjectByLocation(shareWebUrl)?.share
           : "";
 
-        return openDocEditor(id, providerKey, tab, null, isPreview, shareKey);
+        return openDocEditor(id, providerKey, tab, null, false, shareKey);
       }
 
       if (isMediaOrImage) {

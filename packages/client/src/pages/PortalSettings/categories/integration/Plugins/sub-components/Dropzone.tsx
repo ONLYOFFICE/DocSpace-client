@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,55 +26,30 @@
 
 import React from "react";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 
-import { Button } from "@docspace/shared/components/button";
+import DropzoneComponent from "@docspace/shared/components/dropzone";
 
-const StyledUploadButton = styled.div`
-  width: auto;
+import { PluginDropzoneProps } from "../Plugins.types";
+
+const StyledDropzoneComponent = styled(DropzoneComponent)`
+  height: 135px;
 `;
 
-const UploadButton = ({ t, addPlugin, inputProps }) => {
-  const pluginInputRef = React.useRef(null);
-
-  const onAddAction = () => {
-    pluginInputRef.current.click();
-  };
-
-  const onInputClick = (e) => {
-    e.target.value = null;
-  };
-
-  const onFileChange = (e) => {
-    let formData = new FormData();
-
-    formData.append("file", e.target.files[0]);
-
-    addPlugin(formData);
-  };
+const Dropzone = ({ onDrop, isLoading, isDisabled }: PluginDropzoneProps) => {
+  const { t } = useTranslation(["Article", "Common"]);
 
   return (
-    <StyledUploadButton>
-      <Button
-        className={"add-button"}
-        label={t("UploadPlugin")}
-        primary
-        size={"small"}
-        scale={false}
-        onClick={onAddAction}
-      />
-      <input
-        id="customPluginInput"
-        className="custom-file-input"
-        type="file"
-        accept={[".zip"]}
-        onChange={onFileChange}
-        onClick={onInputClick}
-        ref={pluginInputRef}
-        style={{ display: "none" }}
-      />
-      {inputProps && <input {...inputProps} />}
-    </StyledUploadButton>
+    <StyledDropzoneComponent
+      isDisabled={isDisabled}
+      isLoading={isLoading}
+      onDrop={onDrop}
+      accept={[".zip"]}
+      linkMainText={t("Article:Upload")}
+      linkSecondaryText={t("Common:DropzoneTitleSecondary")}
+      exstsText="(ZIP)"
+    />
   );
 };
 
-export default UploadButton;
+export default Dropzone;

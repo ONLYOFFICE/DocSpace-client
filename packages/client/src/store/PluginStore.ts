@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -115,6 +115,8 @@ class PluginStore {
 
   isEmptyList = false;
 
+  needPageReload = false;
+
   constructor(
     settingsStore: SettingsStore,
     selectedFolderStore: SelectedFolderStore,
@@ -126,6 +128,10 @@ class PluginStore {
 
     makeAutoObservable(this);
   }
+
+  setNeedPageReload = (value: boolean) => {
+    this.needPageReload = value;
+  };
 
   setIsLoading = (value: boolean) => {
     this.isLoading = value;
@@ -262,7 +268,7 @@ class PluginStore {
     try {
       const plugin = await api.plugins.addPlugin(data);
 
-      window.location.reload();
+      this.setNeedPageReload(true);
 
       this.initPlugin(plugin);
     } catch (e) {
@@ -303,7 +309,7 @@ class PluginStore {
 
       newPlugin.scopes =
         typeof newPlugin.scopes === "string"
-          ? newPlugin.scopes.split(",")
+          ? (newPlugin.scopes.split(",") as PluginScopes[])
           : newPlugin.scopes;
 
       newPlugin.iconUrl = getPluginUrl(newPlugin.url, "");
@@ -434,9 +440,9 @@ class PluginStore {
 
     plugin.enabled = true;
 
-    window.location.reload();
+    this.setNeedPageReload(true);
 
-    // this.installPlugin(plugin, false);
+    this.installPlugin(plugin, false);
   };
 
   deactivatePlugin = async (name: string) => {

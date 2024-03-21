@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -2505,15 +2505,6 @@ class FilesStore {
 
       return folderOptions;
     }
-  };
-
-  addFileToRecentlyViewed = (fileId) => {
-    if (
-      this.treeFoldersStore.isPrivacyFolder ||
-      this.publicRoomStore.isPublicRoom
-    )
-      return Promise.resolve();
-    return api.files.addFileToRecentlyViewed(fileId);
   };
 
   createFile = (folderId, title, templateId, formId) => {

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,45 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+export interface DropzoneProps {
+  isLoading: boolean;
+  isDisabled?: boolean;
 
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
+  linkMainText: string;
+  linkSecondaryText: string;
+  exstsText: string;
 
-import EmptyScreenPluginsUrl from "PUBLIC_DIR/images/empty_screen_plugins.svg?url";
-import EmptyScreenPluginsDarkUrl from "PUBLIC_DIR/images/empty_screen_plugins_dark.svg?url";
+  accept: string[];
+  maxFiles?: number;
 
-import EmptyFolderContainer from "SRC_DIR/components/EmptyContainer/EmptyContainer";
+  onDrop?: <T extends File>(acceptedFiles: T[]) => void;
 
-import UploadButton from "./button";
-
-const EmptyScreen = ({
-  t,
-  onAddAction,
-  theme,
-  currentColorScheme,
-
-  withUpload,
-  inputProps,
-}) => {
-  const imageSrc = theme.isBase
-    ? EmptyScreenPluginsUrl
-    : EmptyScreenPluginsDarkUrl;
-
-  return (
-    <EmptyFolderContainer
-      headerText={t("NoPlugins")}
-      descriptionText={<Text>{withUpload && t("Description")}</Text>}
-      style={{ gridColumnGap: "39px" }}
-      buttonStyle={{ marginTop: "16px" }}
-      imageSrc={imageSrc}
-      buttons={
-        withUpload && (
-          <UploadButton t={t} addPlugin={onAddAction} inputProps={inputProps} />
-        )
-      }
-    />
-  );
-};
-
-export default EmptyScreen;
+  children?: React.ReactNode;
+}

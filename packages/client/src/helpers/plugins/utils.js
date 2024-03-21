@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,11 +26,11 @@
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { toastr } from "@docspace/shared/components/toast";
+import { Events } from "@docspace/shared/enums";
 
 import config from "PACKAGE_FILE";
 
 import { PluginActions, PluginToastType } from "./enums";
-import { Events } from "@docspace/shared/enums";
 
 export const messageActions = (
   message,

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -2362,18 +2362,12 @@ class FilesActionStore {
               )
             : null;
 
-        const isPreview = item.isForm
-          ? !item.security.FillForms
-          : isRecentTab
-            ? false
-            : !item.security.Edit;
-
         const shareWebUrl = new URL(webUrl);
         const shareKey = isRecentTab
           ? getObjectByLocation(shareWebUrl)?.share
           : "";
 
-        return openDocEditor(id, providerKey, tab, null, isPreview, shareKey);
+        return openDocEditor(id, providerKey, tab, null, false, shareKey);
       }
 
       if (isMediaOrImage) {

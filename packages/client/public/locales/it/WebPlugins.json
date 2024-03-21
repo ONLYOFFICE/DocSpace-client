@@ -2,7 +2,6 @@
   "DeletePlugin": "Elimina plugin",
   "DeletePluginDescription": "Questo plugin non sarà più disponibile per gli utenti di DocSpace. Sei sicuro di voler continuare?",
   "DeletePluginTitle": "Eliminare il plugin?",
-  "Description": "Puoi aggiungere plugin per estendere le funzionalità di DocSpace con funzionalità extra. Fai clic su Carica plugin e seleziona il file del plugin nell'archivio ZIP.",
   "ExpandFunctionality": "Espandi le funzionalità utilizzando l'SDK del plugin",
   "GoToRepo": "Vai su GitHub",
   "Metadata": "Metadata",
@@ -12,7 +11,5 @@
   "PluginSamples": "Esempi di plugin",
   "PluginSDK": "SDK di Plugin",
   "PluginSDKDescription": "Utilizzando Plugin SDK puoi estendere le funzionalità di DocSpace, connettere servizi di terze parti o migliorare l'esperienza utente esistente. Qui puoi trovare gli esempi di plugin con il codice sorgente disponibile su GitHub.",
-  "PluginSDKInstruction": "Fai clic sul pulsante per istruzioni dettagliate su come creare i tuoi plugin.",
-  "PluginsHelp": "I plugin ti consentono di estendere le funzionalità di DocSpace",
-  "UploadPlugin": "Carica plugin"
+  "PluginSDKInstruction": "Fai clic sul pulsante per istruzioni dettagliate su come creare i tuoi plugin."
 }

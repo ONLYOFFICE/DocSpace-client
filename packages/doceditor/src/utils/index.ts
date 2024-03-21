@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -218,3 +218,4 @@ export const getIsZoom = () =>
   typeof window !== "undefined" &&
   (window?.navigator?.userAgent?.includes("ZoomWebKit") ||
     window?.navigator?.userAgent?.includes("ZoomApps"));
+

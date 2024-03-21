@@ -303,7 +303,7 @@ class PluginStore {
 
       newPlugin.scopes =
         typeof newPlugin.scopes === "string"
-          ? newPlugin.scopes.split(",")
+          ? (newPlugin.scopes.split(",") as PluginScopes[])
           : newPlugin.scopes;
 
       newPlugin.iconUrl = getPluginUrl(newPlugin.url, "");

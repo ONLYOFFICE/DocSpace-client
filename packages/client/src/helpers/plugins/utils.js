@@ -26,11 +26,11 @@
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { toastr } from "@docspace/shared/components/toast";
+import { Events } from "@docspace/shared/enums";
 
 import config from "PACKAGE_FILE";
 
 import { PluginActions, PluginToastType } from "./enums";
-import { Events } from "@docspace/shared/enums";
 
 export const messageActions = (
   message,

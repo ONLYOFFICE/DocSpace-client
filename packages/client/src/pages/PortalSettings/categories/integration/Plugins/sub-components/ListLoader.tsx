@@ -24,45 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
+import { PluginListContainer } from "../Plugins.styled";
+import { ListLoaderProps } from "../Plugins.types";
 
-import EmptyScreenPluginsUrl from "PUBLIC_DIR/images/empty_screen_plugins.svg?url";
-import EmptyScreenPluginsDarkUrl from "PUBLIC_DIR/images/empty_screen_plugins_dark.svg?url";
-
-import EmptyFolderContainer from "SRC_DIR/components/EmptyContainer/EmptyContainer";
-
-import UploadButton from "./button";
-
-const EmptyScreen = ({
-  t,
-  onAddAction,
-  theme,
-  currentColorScheme,
-
-  withUpload,
-  inputProps,
-}) => {
-  const imageSrc = theme.isBase
-    ? EmptyScreenPluginsUrl
-    : EmptyScreenPluginsDarkUrl;
-
+const ListLoader = ({ withUpload }: ListLoaderProps) => {
   return (
-    <EmptyFolderContainer
-      headerText={t("NoPlugins")}
-      descriptionText={<Text>{withUpload && t("Description")}</Text>}
-      style={{ gridColumnGap: "39px" }}
-      buttonStyle={{ marginTop: "16px" }}
-      imageSrc={imageSrc}
-      buttons={
-        withUpload && (
-          <UploadButton t={t} addPlugin={onAddAction} inputProps={inputProps} />
-        )
-      }
-    />
+    <>
+      {withUpload && <RectangleSkeleton width="144px" height="32px" />}
+      <PluginListContainer>
+        <RectangleSkeleton width="340px" height="135px" />
+        <RectangleSkeleton width="340px" height="135px" />
+        <RectangleSkeleton width="340px" height="135px" />
+      </PluginListContainer>
+    </>
   );
 };
 
-export default EmptyScreen;
+export default ListLoader;

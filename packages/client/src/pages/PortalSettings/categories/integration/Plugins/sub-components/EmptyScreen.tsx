@@ -27,54 +27,45 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Button } from "@docspace/shared/components/button";
+import { Text } from "@docspace/shared/components/text";
 
-const StyledUploadButton = styled.div`
-  width: auto;
+import EmptyScreenPluginsUrl from "PUBLIC_DIR/images/empty_screen_plugins.svg?url";
+import EmptyScreenPluginsDarkUrl from "PUBLIC_DIR/images/empty_screen_plugins_dark.svg?url";
+
+import EmptyFolderContainer from "SRC_DIR/components/EmptyContainer/EmptyContainer";
+import { PluginsEmptyScreen } from "../Plugins.types";
+
+import Dropzone from "./Dropzone";
+
+const StyledEmptyScreen = styled(EmptyFolderContainer)`
+  .ec-buttons {
+    width: 100%;
+  }
 `;
 
-const UploadButton = ({ t, addPlugin, inputProps }) => {
-  const pluginInputRef = React.useRef(null);
-
-  const onAddAction = () => {
-    pluginInputRef.current.click();
-  };
-
-  const onInputClick = (e) => {
-    e.target.value = null;
-  };
-
-  const onFileChange = (e) => {
-    let formData = new FormData();
-
-    formData.append("file", e.target.files[0]);
-
-    addPlugin(formData);
-  };
+const EmptyScreen = ({ t, theme, withUpload, onDrop }: PluginsEmptyScreen) => {
+  const imageSrc = theme.isBase
+    ? EmptyScreenPluginsUrl
+    : EmptyScreenPluginsDarkUrl;
 
   return (
-    <StyledUploadButton>
-      <Button
-        className={"add-button"}
-        label={t("UploadPlugin")}
-        primary
-        size={"small"}
-        scale={false}
-        onClick={onAddAction}
-      />
-      <input
-        id="customPluginInput"
-        className="custom-file-input"
-        type="file"
-        accept={[".zip"]}
-        onChange={onFileChange}
-        onClick={onInputClick}
-        ref={pluginInputRef}
-        style={{ display: "none" }}
-      />
-      {inputProps && <input {...inputProps} />}
-    </StyledUploadButton>
+    <StyledEmptyScreen
+      headerText={t("NoPlugins")}
+      descriptionText={<Text>{withUpload && t("UploadDescription")}</Text>}
+      style={{ gridColumnGap: "39px" }}
+      buttonStyle={{ marginTop: "16px" }}
+      imageSrc={imageSrc}
+      buttons={
+        withUpload && (
+          <Dropzone
+            isDisabled={!withUpload}
+            isLoading={false}
+            onDrop={onDrop}
+          />
+        )
+      }
+    />
   );
 };
 
-export default UploadButton;
+export default EmptyScreen;

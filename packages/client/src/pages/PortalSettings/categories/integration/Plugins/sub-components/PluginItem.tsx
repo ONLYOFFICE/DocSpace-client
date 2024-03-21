@@ -36,7 +36,8 @@ import PluginDefaultLogoUrl from "PUBLIC_DIR/images/plugin.default-logo.png";
 import { getPluginUrl } from "SRC_DIR/helpers/plugins/utils";
 import { PluginScopes } from "SRC_DIR/helpers/plugins/enums";
 
-import { StyledPluginItem, StyledPluginHeader } from "../StyledPlugins";
+import { StyledPluginItem, StyledPluginHeader } from "../Plugins.styled";
+import { PluginItemProps } from "../Plugins.types";
 
 const PluginItem = ({
   name,
@@ -51,17 +52,17 @@ const PluginItem = ({
 
   image,
   url,
-}) => {
+}: PluginItemProps) => {
   const imgSrc = image ? getPluginUrl(url, `/assets/${image}`) : null;
 
   const withSettings = scopes.includes(PluginScopes.Settings);
 
   const onChangeStatus = () => {
-    updatePlugin && updatePlugin(name, !enabled);
+    updatePlugin?.(name, !enabled);
   };
 
   const onOpenSettingsDialog = () => {
-    openSettingsDialog && openSettingsDialog(name);
+    openSettingsDialog?.(name);
   };
 
   return (
@@ -69,11 +70,11 @@ const PluginItem = ({
       <img
         className="plugin-logo"
         src={imgSrc || PluginDefaultLogoUrl}
-        alt={"Plugin logo"}
+        alt="Plugin logo"
       />
       <div className="plugin-info">
         <StyledPluginHeader>
-          <Heading className={"plugin-name"}>{name}</Heading>
+          <Heading className="plugin-name">{name}</Heading>
           <div className="plugin-controls">
             {withSettings && (
               <IconButton
@@ -92,17 +93,17 @@ const PluginItem = ({
 
         <Badge
           label={version}
-          fontSize={"12px"}
+          fontSize="12px"
           fontWeight={700}
-          noHover={true}
-          backgroundColor={"#22C386"}
+          noHover
+          backgroundColor="#22C386"
         />
 
         {imgSrc && description && (
           <Text
-            className={"plugin-description"}
+            className="plugin-description"
             fontWeight={400}
-            lineHeight={"20px"}
+            lineHeight="20px"
           >
             {description}
           </Text>

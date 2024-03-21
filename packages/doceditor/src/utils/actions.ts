@@ -37,16 +37,13 @@ import { error } from "console";
 import { isTemplateFile } from ".";
 
 const API_PREFIX = "api/2.0";
-const SKIP_PORT_FORWARD = process.env.NODE_PORT_FORWARD === "false";
 
 export const getBaseUrl = () => {
   const hdrs = headers();
 
   const host = hdrs.get("x-forwarded-host");
   const proto = hdrs.get("x-forwarded-proto");
-  const port = !SKIP_PORT_FORWARD ? hdrs.get("x-forwarded-port") : "";
 
-  // const baseURL = `${proto}://${host}${port ? `:${port}` : ""}`;
   const baseURL = `${proto}://${host}`;
 
   return baseURL;
@@ -437,3 +434,4 @@ export async function getData(
     return { error };
   }
 }
+

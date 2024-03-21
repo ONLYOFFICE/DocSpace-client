@@ -75,7 +75,13 @@ const ArticleLiveChat = ({
               vertical: "11px",
             },
     });
-  }, [withMainButton, isMobileArticle, showProgress, isInfoPanelVisible]);
+  }, [
+    withMainButton,
+    isMobileArticle,
+    showProgress,
+    isInfoPanelVisible,
+    infoPanelOffset,
+  ]);
 
   useEffect(() => {
     // console.log("Zendesk useEffect", { languageBaseName });

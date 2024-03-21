@@ -67,6 +67,7 @@ export interface ArticleZendeskProps {
   zendeskKey: string;
   showProgress: boolean;
   isShowLiveChat: boolean;
+  isInfoPanelVisible?: boolean;
 }
 
 export interface ArticleAppsProps {

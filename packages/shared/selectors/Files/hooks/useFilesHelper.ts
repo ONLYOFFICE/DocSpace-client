@@ -229,12 +229,14 @@ const useFilesHelper = ({
                 setIsSelectedParentFolder(true);
               }
 
+              const nextItem = pathParts[index + 1];
+
               return {
                 label: title,
                 id: breadCrumbId,
                 isRoom:
                   roomsFolderId === id ||
-                  (index === 0 && typeof roomType !== "undefined"),
+                  (index === 0 && typeof nextItem?.roomType !== "undefined"),
                 roomType,
               };
             },

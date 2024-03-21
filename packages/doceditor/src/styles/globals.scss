@@ -26,6 +26,10 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+$font-family-base: "Open Sans", sans-serif;
+
+@import url(../../../../public/css/fonts.css);
+
 html,
 body {
   height: 100%;

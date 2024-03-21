@@ -58,6 +58,7 @@ export const TagPure = ({
   style,
   icon,
   roomType,
+  providerType,
 }: TagProps) => {
   const [openDropdown, setOpenDropdown] = React.useState(false);
 
@@ -105,10 +106,10 @@ export const TagPure = ({
     (e: React.MouseEvent | React.ChangeEvent) => {
       if (onClick && !isDisabled) {
         const target = e.target as HTMLDivElement;
-        onClick({ roomType, label: target.dataset.tag });
+        onClick({ roomType, label: target.dataset.tag, providerType });
       }
     },
-    [onClick, isDisabled, roomType],
+    [onClick, isDisabled, roomType, providerType],
   );
 
   const onDeleteAction = React.useCallback(

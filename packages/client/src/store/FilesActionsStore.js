@@ -1320,6 +1320,10 @@ class FilesActionStore {
       if (tag.roomType) {
         if (!!newFilter.type && +newFilter.type === tag.roomType) return;
         newFilter.type = tag.roomType;
+      } else if (tag.providerType) {
+        if (!!newFilter.provider && +newFilter.provider === tag.providerType)
+          return;
+        newFilter.provider = tag.providerType;
       } else {
         tags.push(tag.label);
         newFilter.tags = [...tags];
@@ -1329,7 +1333,6 @@ class FilesActionStore {
     } else {
       newFilter.withoutTags = true;
     }
-
     setIsLoading(true);
     window.DocSpace.navigate(
       `${window.DocSpace.location.pathname}?${newFilter.toUrlParams(this.userStore?.user?.id)}`,

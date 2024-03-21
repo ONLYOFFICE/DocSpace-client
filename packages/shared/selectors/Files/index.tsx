@@ -279,13 +279,6 @@ const FilesSelector = ({
   React.useEffect(() => {
     setIsFirstLoad(true);
 
-    console.log(
-      currentFolderId,
-      isRoomsOnly,
-      parentId,
-      roomsFolderId,
-      rootFolderType,
-    );
     const needRoomList = isRoomsOnly && !currentFolderId;
 
     if (needRoomList) {

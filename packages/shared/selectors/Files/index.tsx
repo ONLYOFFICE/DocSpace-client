@@ -278,6 +278,14 @@ const FilesSelector = ({
 
   React.useEffect(() => {
     setIsFirstLoad(true);
+
+    console.log(
+      currentFolderId,
+      isRoomsOnly,
+      parentId,
+      roomsFolderId,
+      rootFolderType,
+    );
     const needRoomList = isRoomsOnly && !currentFolderId;
 
     if (needRoomList) {
@@ -295,7 +303,7 @@ const FilesSelector = ({
     if (
       needRoomList ||
       (!isThirdParty &&
-        parentId === roomsFolderId &&
+        currentFolderId === roomsFolderId &&
         rootFolderType === FolderType.Rooms)
     ) {
       setSelectedItemType("rooms");

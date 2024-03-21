@@ -60,6 +60,7 @@ const EditGroupDialog = ({
   visible,
   onClose,
   updateGroup,
+  setInfoPanelSelectedGroup,
 }: EditGroupDialogProps) => {
   const { t } = useTranslation(["PeopleTranslations", "Common"]);
 
@@ -146,6 +147,9 @@ const EditGroupDialog = ({
         prevGroupParams.current.groupMembers = data.members;
         setInitialMembersIds(data.members.map((gm) => gm.id));
         setGroupMembers(data.members);
+      })
+      .then((data) => {
+        setInfoPanelSelectedGroup(data);
       })
       .catch((err) => console.error(err))
       .finally(() => setFetchMembersIsLoading(false));
@@ -235,6 +239,7 @@ const EditGroupDialog = ({
   );
 };
 
-export default inject(({ peopleStore }) => ({
+export default inject(({ peopleStore, infoPanelStore }) => ({
   updateGroup: peopleStore.groupsStore.updateGroup,
+  setInfoPanelSelectedGroup: infoPanelStore.setInfoPanelSelectedGroup,
 }))(observer(EditGroupDialog));

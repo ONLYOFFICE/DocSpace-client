@@ -148,17 +148,18 @@ const Selector = ({
   const [selectedAccess, setSelectedAccess] =
     React.useState<TAccessRight | null>(null);
 
-  const requestRunning = React.useRef<boolean>(false);
+  const [requestRunning, setRequestRunning] = React.useState<boolean>(false);
 
   const onSubmitAction = async () => {
-    requestRunning.current = true;
+    setRequestRunning(true);
     await onSubmit(
       newSelectedItems,
       selectedAccess,
       newFooterInputValue,
       isFooterCheckboxChecked,
     );
-    requestRunning.current = false;
+
+    setRequestRunning(false);
   };
 
   const onSelectAction = (item: TSelectorItem, isDoubleClick: boolean) => {
@@ -573,7 +574,7 @@ const Selector = ({
           submitButtonLabel={submitButtonLabel}
           disableSubmitButton={disableSubmitButton}
           submitButtonId={submitButtonId}
-          requestRunning={requestRunning.current}
+          requestRunning={requestRunning}
           // cancel button
           {...cancelButtonProps}
           // access rights

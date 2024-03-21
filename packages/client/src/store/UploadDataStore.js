@@ -1856,7 +1856,8 @@ class UploadDataStore {
     const { clearSecondaryProgressData, setSecondaryProgressBarData, label } =
       this.secondaryProgressDataStore;
     const { withPaging } = this.settingsStore;
-    const isMovingCurrentFolder = !isCopy && this.dialogsStore.isFolderActions;
+    const isMovingSelectedFolder =
+      !isCopy && folderIds && this.selectedFolderStore.id === folderIds[0];
 
     let receivedFolder = destFolderId;
     let updatedFolder = this.selectedFolderStore.id;
@@ -1876,7 +1877,7 @@ class UploadDataStore {
           () => clearSecondaryProgressData(pbData.operationId),
           TIMEOUT,
         );
-        isMovingCurrentFolder &&
+        isMovingSelectedFolder &&
           this.navigateToNewFolderLocation(this.selectedFolderStore.id);
         this.dialogsStore.setIsFolderActions(false);
         return;
@@ -1898,7 +1899,7 @@ class UploadDataStore {
           () => clearSecondaryProgressData(pbData.operationId),
           TIMEOUT,
         );
-        isMovingCurrentFolder &&
+        isMovingSelectedFolder &&
           this.navigateToNewFolderLocation(this.selectedFolderStore.id);
         this.dialogsStore.setIsFolderActions(false);
       });

@@ -60,7 +60,10 @@ const useSelectFolderDialog = ({}: UseSelectFolderDialogProps) => {
     }
   }, []);
 
-  const onClose = () => setIsVisible(false);
+  const onClose = () => {
+    if (requestRunning.current) return;
+    setIsVisible(false);
+  };
 
   const onSubmit = async (
     selectedItemId: string | number | undefined,

@@ -196,6 +196,7 @@ const useSelectFileDialog = ({ instanceId }: UseSelectFileDialogProps) => {
   }, [filesType, getFileTypeDetection]);
 
   const onClose = () => {
+    if (requestRunning.current) return;
     setIsVisible(false);
     setActionEvent({} as TEvent);
   };

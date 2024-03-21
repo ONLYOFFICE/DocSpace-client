@@ -95,7 +95,7 @@ const ArticleHeader = ({
             onClick={onLogoClick}
           />
         ) : (
-          <Link to="/">
+          <Link to="/" onClick={onLogoClick}>
             <img className="logo-icon_svg" alt="burger-logo" src={logo} />
           </Link>
         )}

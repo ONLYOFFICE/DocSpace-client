@@ -39,9 +39,18 @@ import HistoryHeader from "../categories/developer-tools/Webhooks/WebhookHistory
 import DetailsNavigationHeader from "../categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/DetailsNavigationHeader";
 import ArticleWrapper from "SRC_DIR/components/ArticleWrapper";
 
-const ArticleSettings = React.memo(({ showArticleLoader }) => {
+const ArticleSettings = React.memo(({ showArticleLoader, needPageReload }) => {
+  const onLogoClickAction = () => {
+    if (needPageReload) {
+      window.location.replace("/");
+    }
+  };
+
   return (
-    <ArticleWrapper showArticleLoader={showArticleLoader}>
+    <ArticleWrapper
+      showArticleLoader={showArticleLoader}
+      onLogoClickAction={onLogoClickAction}
+    >
       <Article.Header>
         <ArticleHeaderContent />
       </Article.Header>
@@ -65,6 +74,7 @@ const Layout = ({
   initPlugins,
 
   isLoadedArticleBody,
+  needPageReload,
 }) => {
   useEffect(() => {
     currentProductId !== "settings" && setCurrentProductId("settings");
@@ -82,7 +92,10 @@ const Layout = ({
 
   return (
     <>
-      <ArticleSettings showArticleLoader={!isLoadedArticleBody} />
+      <ArticleSettings
+        showArticleLoader={!isLoadedArticleBody}
+        needPageReload={needPageReload}
+      />
       {!isGeneralPage && (
         <SectionWrapper
           viewAs={"settings"}
@@ -122,7 +135,7 @@ export default inject(({ authStore, settingsStore, setup, pluginStore }) => {
     isLoadedArticleBody,
   } = settingsStore;
 
-  const { isInit: isInitPlugins, initPlugins } = pluginStore;
+  const { isInit: isInitPlugins, initPlugins, needPageReload } = pluginStore;
 
   return {
     language,
@@ -134,5 +147,6 @@ export default inject(({ authStore, settingsStore, setup, pluginStore }) => {
     initPlugins,
 
     isLoadedArticleBody,
+    needPageReload,
   };
 })(withLoading(observer(Layout)));

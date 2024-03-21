@@ -87,7 +87,7 @@ export default function GlobalError({ error }: { error: Error }) {
   return (
     <html>
       <body>
-        {!isLoading && (
+        {!isLoading && logoUrls && (
           <ThemeProvider theme={theme}>
             <Error520SSR
               i18nProp={i18n}
@@ -104,4 +104,3 @@ export default function GlobalError({ error }: { error: Error }) {
     </html>
   );
 }
-

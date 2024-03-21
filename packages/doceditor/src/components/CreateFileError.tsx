@@ -96,18 +96,19 @@ const CreateFileError = ({
   return (
     <ThemeProvider theme={theme}>
       <Toast />
-      <Error520SSR
-        i18nProp={i18n}
-        errorLog={error}
-        user={user ?? ({} as TUser)}
-        currentDeviceType={currentDeviceType}
-        version={pkg.version}
-        firebaseHelper={firebaseHelper}
-        whiteLabelLogoUrls={logoUrls}
-      />
+      {logoUrls && (
+        <Error520SSR
+          i18nProp={i18n}
+          errorLog={error}
+          user={user ?? ({} as TUser)}
+          currentDeviceType={currentDeviceType}
+          version={pkg.version}
+          firebaseHelper={firebaseHelper}
+          whiteLabelLogoUrls={logoUrls}
+        />
+      )}
     </ThemeProvider>
   );
 };
 
 export default CreateFileError;
-

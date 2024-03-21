@@ -52,11 +52,12 @@ const TagsCell = ({
       isThirdParty: true,
       icon: item.thirdPartyIcon,
       label: item.providerKey,
-      onClick: () =>
-        onSelectOption({
-          option: "typeProvider",
-          value: item.providerType,
-        }),
+      providerType: item.providerType,
+      // onClick: () =>
+      //   onSelectOption({
+      //     option: "typeProvider",
+      //     value: item.providerType,
+      //   }),
     });
   }
 

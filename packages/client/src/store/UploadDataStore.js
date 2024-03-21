@@ -548,25 +548,7 @@ class UploadDataStore {
           if (!error) error = data[0].error;
 
           if (!error && isOpen && data && data[0]) {
-            let tab =
-              !this.settingsStore.isDesktopClient &&
-              window.DocSpaceConfig?.editor?.openOnNewPage &&
-              fileInfo.fileExst
-                ? window.open(
-                    combineUrl(
-                      window.DocSpaceConfig?.proxy?.url,
-                      config.homepage,
-                      `/doceditor`,
-                    ),
-                    "_blank",
-                  )
-                : null;
-
-            this.filesStore.openDocEditor(
-              fileInfo.id,
-              fileInfo.providerKey,
-              tab,
-            );
+            this.filesStore.openDocEditor(fileInfo.id);
           }
 
           runInAction(() => {

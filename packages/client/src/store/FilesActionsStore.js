@@ -2345,26 +2345,12 @@ class FilesActionStore {
         this.onMarkAsRead(item);
 
       if (canWebEdit || canViewedDocs) {
-        let tab =
-          !this.settingsStore.isDesktopClient &&
-          window.DocSpaceConfig?.editor?.openOnNewPage &&
-          !isFolder
-            ? window.open(
-                combineUrl(
-                  window.DocSpaceConfig?.proxy?.url,
-                  config.homepage,
-                  `/doceditor?fileId=${id}`,
-                ),
-                "_blank",
-              )
-            : null;
-
         const shareWebUrl = new URL(webUrl);
         const shareKey = isRecentTab
           ? getObjectByLocation(shareWebUrl)?.share
           : "";
 
-        return openDocEditor(id, providerKey, tab, null, false, shareKey);
+        return openDocEditor(id, false, shareKey);
       }
 
       if (isMediaOrImage) {

@@ -129,42 +129,6 @@ export const getUnexpectedErrorText = () => {
   return i18n.t("Common:UnexpectedError");
 };
 
-export const openDocEditor = async (
-  id,
-  providerKey = null,
-  tab = null,
-  url = null,
-  isPrivacy,
-  isPreview = false,
-  shareKey = null,
-) => {
-  const share = shareKey ? `&share=${shareKey}` : "";
-  const preview = isPreview ? "&action=view" : "";
-
-  if (!url && id) {
-    url = combineUrl(
-      window.DocSpaceConfig?.proxy?.url,
-      config.homepage,
-      `/doceditor?fileId=${encodeURIComponent(id)}${preview}${share}`,
-    );
-  }
-
-  if (tab) {
-    if (url) {
-      tab.location = url.indexOf("share") !== -1 ? url : `${url}${share}`;
-    } else {
-      tab.close();
-    }
-  } else {
-    window.open(
-      url,
-      window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self",
-    );
-  }
-
-  return Promise.resolve();
-};
-
 export const connectedCloudsTitleTranslation = (key, t) => {
   switch (key) {
     case "Box":

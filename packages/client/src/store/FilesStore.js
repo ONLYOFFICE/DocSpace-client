@@ -45,7 +45,6 @@ import { updateTempContent, isPublicRoom } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/shared/components/toast";
 import config from "PACKAGE_FILE";
 import { thumbnailStatuses } from "@docspace/client/src/helpers/filesConstants";
-import { openDocEditor as openEditor } from "@docspace/client/src/helpers/filesUtils";
 import { getDaysRemaining } from "@docspace/shared/utils/common";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
@@ -3743,14 +3742,7 @@ class FilesStore {
     return folderInfo;
   };
 
-  openDocEditor = (
-    id,
-    providerKey = null,
-    tab = null,
-    url = null,
-    preview = false,
-    shareKey = null,
-  ) => {
+  openDocEditor = (id, preview = false, shareKey = null) => {
     const foundIndex = this.files.findIndex((x) => x.id === id);
     const file = foundIndex !== -1 ? this.files[foundIndex] : undefined;
     if (
@@ -3765,10 +3757,24 @@ class FilesStore {
       this.updateFileStatus(foundIndex, newStatus);
     }
 
-    const isPrivacy = this.treeFoldersStore.isPrivacyFolder;
     const share = shareKey ? shareKey : this.publicRoomStore.publicRoomKey;
 
-    return openEditor(id, providerKey, tab, url, isPrivacy, preview, share);
+    const searchParams = new URLSearchParams();
+
+    searchParams.append("fileId", id);
+    if (share) searchParams.append("share", share);
+    if (preview) searchParams.append("action", "view");
+
+    const url = combineUrl(
+      window.DocSpaceConfig?.proxy?.url,
+      config.homepage,
+      `/doceditor?${searchParams.toString()}`,
+    );
+
+    window.open(
+      url,
+      window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self",
+    );
   };
 
   createThumbnails = async (files = null) => {

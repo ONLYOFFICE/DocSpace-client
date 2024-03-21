@@ -115,6 +115,8 @@ class PluginStore {
 
   isEmptyList = false;
 
+  needPageReload = false;
+
   constructor(
     settingsStore: SettingsStore,
     selectedFolderStore: SelectedFolderStore,
@@ -126,6 +128,10 @@ class PluginStore {
 
     makeAutoObservable(this);
   }
+
+  setNeedPageReload = (value: boolean) => {
+    this.needPageReload = value;
+  };
 
   setIsLoading = (value: boolean) => {
     this.isLoading = value;
@@ -262,7 +268,7 @@ class PluginStore {
     try {
       const plugin = await api.plugins.addPlugin(data);
 
-      window.location.reload();
+      this.setNeedPageReload(true);
 
       this.initPlugin(plugin);
     } catch (e) {
@@ -434,9 +440,9 @@ class PluginStore {
 
     plugin.enabled = true;
 
-    window.location.reload();
+    this.setNeedPageReload(true);
 
-    // this.installPlugin(plugin, false);
+    this.installPlugin(plugin, false);
   };
 
   deactivatePlugin = async (name: string) => {

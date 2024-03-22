@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -75,7 +75,13 @@ const ArticleLiveChat = ({
               vertical: "11px",
             },
     });
-  }, [withMainButton, isMobileArticle, showProgress, isInfoPanelVisible]);
+  }, [
+    withMainButton,
+    isMobileArticle,
+    showProgress,
+    isInfoPanelVisible,
+    infoPanelOffset,
+  ]);
 
   useEffect(() => {
     // console.log("Zendesk useEffect", { languageBaseName });

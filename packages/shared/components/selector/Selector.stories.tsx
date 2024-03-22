@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,7 +31,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import CustomSvgUrl from "PUBLIC_DIR/images/icons/32/room/custom.svg?url";
 import ArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import EmptyScreenFilter from "PUBLIC_DIR/images/empty_screen_filter.png";
-
+import { RoomsType } from "../../enums";
 import { Selector } from "./Selector";
 import { SelectorProps, TSelectorItem } from "./Selector.types";
 
@@ -92,22 +92,29 @@ const getItems = (count: number) => {
   for (let i = 0; i < count / 2; i += 1) {
     const label = makeName();
     items.push({
-      key: `user_${i}`,
-      id: `user_${i}`,
+      key: `${label} ${i}`,
+      id: `${label} ${i}`,
       label: `${label} ${i}`,
-      icon: CustomSvgUrl,
-      shared: false,
+      email: "test",
+      isOwner: false,
+      isAdmin: false,
+      isVisitor: false,
+      isCollaborator: false,
+      avatar: "",
     });
   }
 
   for (let i = 0; i < count / 2; i += 1) {
     const label = makeName();
+
     items.push({
       key: `room_${i}`,
       id: `room_${i}`,
       label: `${label} ${i}`,
       icon: CustomSvgUrl,
       shared: false,
+      isFolder: true,
+      roomType: RoomsType.CustomRoom,
     });
   }
 
@@ -181,6 +188,7 @@ const Template = (args: SelectorProps) => {
         margin: "auto",
       }}
     >
+      {/* @ts-expect-error args is good */}
       <Selector
         {...args}
         items={rendItems}
@@ -192,7 +200,9 @@ const Template = (args: SelectorProps) => {
   );
 };
 
+// @ts-expect-error args is good
 export const Default: Story = {
+  // @ts-expect-error args is good
   render: (args) => <Template {...args} />,
   args: {
     headerLabel: "Room list",
@@ -240,7 +250,7 @@ export const Default: Story = {
     descriptionText: "",
   },
 };
-
+// @ts-expect-error args is good
 export const BreadCrumbs: Story = {
   render: (args) => <Template {...args} />,
   args: {
@@ -299,7 +309,7 @@ export const BreadCrumbs: Story = {
     descriptionText: "",
   },
 };
-
+// @ts-expect-error args is good
 export const NewName: Story = {
   render: (args) => <Template {...args} />,
   args: {

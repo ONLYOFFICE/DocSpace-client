@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -233,10 +233,14 @@ const useFilesHelper = ({
                 setIsSelectedParentFolder(true);
               }
 
+              const nextItem = pathParts[index + 1];
+
               return {
                 label: title,
                 id: breadCrumbId,
-                isRoom: roomsFolderId === id || index === 0,
+                isRoom:
+                  roomsFolderId === id ||
+                  (index === 0 && typeof nextItem?.roomType !== "undefined"),
                 roomType,
               };
             },

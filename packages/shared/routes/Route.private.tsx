@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,6 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
 
-import Error403 from "@docspace/shared/components/errors/Error403";
 import AppLoader from "@docspace/shared/components/app-loader";
 
 import { TenantStatus } from "@docspace/shared/enums";
@@ -70,7 +69,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
         return null;
       }
 
-      console.log("PrivateRoute returned null");
+      // console.log("PrivateRoute returned null");
       return null;
     }
 

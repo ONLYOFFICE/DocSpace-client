@@ -1,25 +1,25 @@
-// (c) Copyright Ascensio System SIA 2010-2024
-// 
+// (c) Copyright Ascensio System SIA 2009-2024
+//
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
 // of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
 // Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
 // to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
 // any third-party rights.
-// 
+//
 // This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
 // of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
 // the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-// 
+//
 // You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-// 
+//
 // The  interactive user interfaces in modified source and object code versions of the Program must
 // display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-// 
+//
 // Pursuant to Section 7(b) of the License you must retain the original Product logo when
 // distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
 // trademark law for use of our trademarks.
-// 
+//
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
@@ -30,23 +30,20 @@ import { headers } from "next/headers";
 
 import { getLtrLanguageForEditor } from "@docspace/shared/utils/common";
 import { TenantStatus } from "@docspace/shared/enums";
+import type { TDocServiceLocation } from "@docspace/shared/api/files/types";
 
-import { IInitialConfig, TCatchError, TError, TResponse } from "@/types";
-import { error } from "console";
+import type { IInitialConfig, TCatchError, TError, TResponse } from "@/types";
+
 import { isTemplateFile } from ".";
-import { TDocServiceLocation } from "@docspace/shared/api/files/types";
 
 const API_PREFIX = "api/2.0";
-const SKIP_PORT_FORWARD = process.env.NODE_PORT_FORWARD === "false";
 
 export const getBaseUrl = () => {
   const hdrs = headers();
 
   const host = hdrs.get("x-forwarded-host");
   const proto = hdrs.get("x-forwarded-proto");
-  const port = !SKIP_PORT_FORWARD ? hdrs.get("x-forwarded-port") : "";
 
-  // const baseURL = `${proto}://${host}${port ? `:${port}` : ""}`;
   const baseURL = `${proto}://${host}`;
 
   return baseURL;
@@ -82,13 +79,49 @@ export const createRequest = (
   return requests;
 };
 
+export async function getErrorData() {
+  const hdrs = headers();
+  const cookie = hdrs.get("cookie");
+
+  const [getSettings, getUser] = createRequest(
+    [
+      `/settings?withPassword=${cookie?.includes("asc_auth_key") ? "false" : "true"}`,
+      `/people/@self`,
+    ],
+    [["", ""]],
+    "GET",
+  );
+
+  const resActions = [];
+
+  resActions.push(fetch(getSettings));
+  resActions.push(fetch(getUser));
+
+  const [settingsRes, userRes] = await Promise.all(resActions);
+
+  const actions = [];
+
+  actions.push(settingsRes.json());
+  if (userRes.status !== 401) actions.push(userRes.json());
+
+  const [settings, user] = await Promise.all(actions);
+
+  return { settings: settings.response, user: user?.response };
+}
+
 const processFillFormDraft = async (
   config: IInitialConfig,
   searchParams: URLSearchParams,
   editorSearchParams: URLSearchParams,
   share?: string,
 ): Promise<
-  [string, IInitialConfig, TDocServiceLocation | undefined] | void
+  | [
+      string,
+      IInitialConfig,
+      TDocServiceLocation | undefined,
+      string | undefined,
+    ]
+  | void
 > => {
   const templateFileId = config.file.id;
 
@@ -106,7 +139,7 @@ const processFillFormDraft = async (
 
   if (!response.ok) return;
 
-  const { response: formUrl } = await response.json();
+  const { response: formUrl, ...rest } = await response.json();
 
   const basePath = getBaseUrl();
   const url = new URL(basePath + formUrl);
@@ -156,38 +189,13 @@ const processFillFormDraft = async (
 
   const [newConfig, newEditorUrl] = await Promise.all(actions);
 
-  return [queryFileId, newConfig.response, newEditorUrl?.response];
+  return [
+    queryFileId,
+    newConfig.response,
+    newEditorUrl?.response,
+    url.hash ?? "",
+  ];
 };
-
-export async function getErrorData() {
-  const hdrs = headers();
-  const cookie = hdrs.get("cookie");
-
-  const [getSettings, getUser] = createRequest(
-    [
-      `/settings?withPassword=${cookie?.includes("asc_auth_key") ? "false" : "true"}`,
-      `/people/@self`,
-    ],
-    [["", ""]],
-    "GET",
-  );
-
-  const resActions = [];
-
-  resActions.push(fetch(getSettings));
-  resActions.push(fetch(getUser));
-
-  const [settingsRes, userRes] = await Promise.all(resActions);
-
-  const actions = [];
-
-  actions.push(settingsRes.json());
-  if (userRes.status !== 401) actions.push(userRes.json());
-
-  const [settings, user] = await Promise.all(actions);
-
-  return { settings: settings.response, user: user?.response };
-}
 
 export async function fileCopyAs(
   fileId: string,
@@ -217,7 +225,7 @@ export async function fileCopyAs(
       file: file.response,
       error: file.error
         ? typeof file.error === "string"
-          ? error
+          ? file.error
           : {
               message: file.error?.message,
               status: file.error?.statusCode,
@@ -263,7 +271,7 @@ export async function createFile(
       file: file.response,
       error: file.error
         ? typeof file.error === "string"
-          ? error
+          ? file.error
           : {
               message: file.error?.message,
               status: file.error?.statusCode,
@@ -365,11 +373,12 @@ export async function getData(
         );
 
         if (result) {
-          const [newFileId, newConfig, newEditorUrl] = result;
+          const [newFileId, newConfig, newEditorUrl, hash] = result;
 
           response.fileId = newFileId;
           response.config = newConfig;
           if (newEditorUrl) response.editorUrl = newEditorUrl;
+          if (hash) response.hash = hash;
         }
       }
 
@@ -405,7 +414,7 @@ export async function getData(
     console.log("initDocEditor failed", config.error);
 
     const response: TResponse = {
-      error: user ? config.error : { message: "unauthorized" },
+      error: user || share ? config.error : { message: "unauthorized" },
       user: user?.response,
       settings: settings?.response,
       fileId,
@@ -437,3 +446,4 @@ export async function getData(
     return { error };
   }
 }
+

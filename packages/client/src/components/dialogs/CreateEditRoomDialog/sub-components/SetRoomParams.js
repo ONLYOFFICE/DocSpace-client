@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -48,6 +48,7 @@ import { Text } from "@docspace/shared/components/text";
 
 import ChangeRoomOwner from "./ChangeRoomOwner";
 import RoomQuota from "./RoomQuota";
+import { RoomsType } from "@docspace/shared/enums";
 
 const StyledSetRoomParams = styled.div`
   display: flex;
@@ -99,6 +100,8 @@ const SetRoomParams = ({
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
     useState(true);
   const [disableImageRescaling, setDisableImageRescaling] = useState(isEdit);
+
+  const isPublicRoom = roomParams.type === RoomsType.PublicRoom;
 
   const onChangeName = (e) => {
     setIsValidTitle(true);
@@ -210,10 +213,9 @@ const SetRoomParams = ({
         />
       )}
 
-      {!isEdit && enableThirdParty && (
+      {!isEdit && enableThirdParty && isPublicRoom && (
         <ThirdPartyStorage
           t={t}
-          roomType={roomParams.type}
           roomTitle={roomParams.title}
           storageLocation={roomParams.storageLocation}
           onChangeStorageLocation={onChangeStorageLocation}

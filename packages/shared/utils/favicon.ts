@@ -7,19 +7,21 @@ export const setFavicon = (whiteLabelLogoUrls: TWhiteLabel[]) => {
 
   if (!favicon) return;
 
-  const link: HTMLLinkElement = document.querySelector("#favicon-icon");
-  link.href = favicon;
+  const link: HTMLLinkElement | null = document.querySelector("#favicon-icon");
+  if (link) link.href = favicon;
 
-  const shortcutIconLink: HTMLLinkElement = document.querySelector("#favicon");
-  shortcutIconLink.href = favicon;
+  const shortcutIconLink: HTMLLinkElement | null =
+    document.querySelector("#favicon");
 
-  const appleIconLink: HTMLLinkElement = document.querySelector(
+  if (shortcutIconLink) shortcutIconLink.href = favicon;
+
+  const appleIconLink: HTMLLinkElement | null = document.querySelector(
     "link[rel~='apple-touch-icon']",
   );
 
   if (appleIconLink) appleIconLink.href = favicon;
 
-  const androidIconLink: HTMLLinkElement = document.querySelector(
+  const androidIconLink: HTMLLinkElement | null = document.querySelector(
     "link[rel~='android-touch-icon']",
   );
   if (androidIconLink) androidIconLink.href = favicon;

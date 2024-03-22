@@ -64,6 +64,7 @@ export const renderDivWithRenderer = (
 
     delete props.renderer;
 
+    // @ts-expect-error error from custom scrollbar
     return renderer(props);
   }
 
@@ -82,13 +83,15 @@ const getInnerSize = (
 
   if (styles.boxSizing === "border-box") {
     return Math.max(
-      0,
+      0, // @ts-expect-error error from custom scrollbar
       (Number.parseFloat(styles[dimension] as string) || 0) -
+        // @ts-expect-error error from custom scrollbar
         (Number.parseFloat(styles[padding1] as string) || 0) -
+        // @ts-expect-error error from custom scrollbar
         (Number.parseFloat(styles[padding2] as string) || 0),
     );
   }
-
+  // @ts-expect-error error from custom scrollbar
   return Number.parseFloat(styles[dimension] as string) || 0;
 };
 

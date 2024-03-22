@@ -52,6 +52,7 @@ const CustomScrollbars = ({
   };
   return (
     <ScrollbarComponent
+      // @ts-expect-error error from custom scrollbar
       ref={(scrollbarsRef: React.RefObject<Scrollbar>) =>
         refSetter(scrollbarsRef, forwardedRef)
       }

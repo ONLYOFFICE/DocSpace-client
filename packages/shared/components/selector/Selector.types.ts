@@ -496,7 +496,7 @@ export type TSelectorItem = TSelectorItemLogo &
 
 export type Data = {
   items: TSelectorItem[];
-  onSelect?: (item: TSelectorItem, isDoubleClick?: boolean) => void;
+  onSelect?: (item: TSelectorItem, isDoubleClick: boolean) => void;
   isMultiSelect: boolean;
   isItemLoaded: (index: number) => boolean;
   rowLoader: React.ReactNode;

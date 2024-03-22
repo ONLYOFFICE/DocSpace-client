@@ -172,6 +172,7 @@ const TabsContainer = ({
       <StyledScrollbar
         autoHide={state.onScrollHide}
         className="scrollbar"
+        // @ts-expect-error error from custom scrollbar
         ref={scrollRef}
       >
         <NavItem className="className_items">

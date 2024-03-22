@@ -58,7 +58,7 @@ const LinkRow = ({
 }: LinkRowProps) => {
   const { t } = useTranslation(["Common"]);
 
-  const shareOptions = getShareOptions(t);
+  const shareOptions = getShareOptions(t) as TOption[];
   const accessOptions = getAccessOptions(t, availableExternalRights);
 
   const onCopyLink = (link: TFileLink) => {

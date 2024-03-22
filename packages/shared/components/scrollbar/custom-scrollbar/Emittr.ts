@@ -41,6 +41,7 @@ type OnceHandlerState = {
 export default class Emittr {
   private _handlers: EmitterEventHandlers;
 
+  // @ts-expect-error error from custom scrollbar
   private _maxHandlers: number;
 
   constructor(maxHandlers = 10) {
@@ -91,9 +92,13 @@ export default class Emittr {
   };
 
   private static _onceWrapper = function _onceWrapper(...args: unknown[]) {
+    // @ts-expect-error error from custom scrollbar
     if (!this.fired) {
+      // @ts-expect-error error from custom scrollbar
       this.fired = true;
+      // @ts-expect-error error from custom scrollbar
       this.emitter.off(this.event, this.wrappedHandler);
+      // @ts-expect-error error from custom scrollbar
       Reflect.apply(this.handler, this.emitter, args);
     }
   };
@@ -237,6 +242,7 @@ export default class Emittr {
       emitter: this,
       event: name,
     };
+    // @ts-expect-error error from custom scrollbar
     const wrappedHandler: OnceHandler = Emittr._onceWrapper.bind(onceState);
     onceState.wrappedHandler = wrappedHandler;
     wrappedHandler.handler = handler;

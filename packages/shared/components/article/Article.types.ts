@@ -112,6 +112,8 @@ export interface ArticleProps {
   isLiveChatAvailable: boolean;
   isShowLiveChat: boolean;
 
+  isInfoPanelVisible?: boolean;
+
   onLogoClickAction?: () => void;
 
   currentDeviceType: DeviceType;

@@ -38,6 +38,7 @@ export type TagType = {
   isDisabled?: boolean;
   roomType?: number;
   icon?: string;
+  providerType?: number;
 };
 
 export interface TagsProps {

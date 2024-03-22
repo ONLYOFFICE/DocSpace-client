@@ -50,6 +50,7 @@ const ClearScrollbar = ({
   hasError?: boolean;
   heightTextAreaProp?: string;
   ref?: React.Ref<HTMLDivElement>;
+  // @ts-expect-error error from custom scrollbar
 } & ScrollbarProps) => <Scrollbar {...props} />;
 
 const StyledScrollbar = styled(ClearScrollbar)`

@@ -56,7 +56,7 @@ const Template = (args: FileInputProps) => {
   return (
     <FileInputPure
       {...args}
-      onInput={(file: File) => {
+      onInput={(file: File | File[]) => {
         onInput?.(file);
       }}
     />

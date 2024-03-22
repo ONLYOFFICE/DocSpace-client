@@ -43,6 +43,7 @@ const SubInfoPanelBody = ({
 
   return (
     <StyledScrollbar
+      // @ts-expect-error error from custom scrollbar
       ref={scrollRef}
       $isScrollLocked={scrollLocked}
       noScrollY={scrollLocked}

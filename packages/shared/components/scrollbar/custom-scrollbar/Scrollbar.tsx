@@ -243,11 +243,15 @@ class Scrollbar extends React.Component<ScrollbarProps, ScrollbarState> {
 
     this.eventEmitter = new Emittr(15);
 
+    // @ts-expect-error error from custom scrollbar
     if (props.onUpdate) this.eventEmitter.on("update", props.onUpdate);
+    // @ts-expect-error error from custom scrollbar
     if (props.onScroll) this.eventEmitter.on("scroll", props.onScroll);
     if (props.onScrollStart)
+      // @ts-expect-error error from custom scrollbar
       this.eventEmitter.on("scrollStart", props.onScrollStart);
     if (props.onScrollStop)
+      // @ts-expect-error error from custom scrollbar
       this.eventEmitter.on("scrollStop", props.onScrollStop);
 
     this.id = util.uuid();
@@ -534,27 +538,35 @@ class Scrollbar extends React.Component<ScrollbarProps, ScrollbarState> {
 
     if (prevProps.onUpdate !== props.onUpdate) {
       if (prevProps.onUpdate)
+        // @ts-expect-error error from custom scrollbar
         this.eventEmitter.off("update", prevProps.onUpdate);
+      // @ts-expect-error error from custom scrollbar
       if (props.onUpdate) this.eventEmitter.on("update", props.onUpdate);
     }
 
     if (prevProps.onScroll !== props.onScroll) {
       if (prevProps.onScroll)
+        // @ts-expect-error error from custom scrollbar
         this.eventEmitter.off("scroll", prevProps.onScroll);
+      // @ts-expect-error error from custom scrollbar
       if (props.onScroll) this.eventEmitter.on("scroll", props.onScroll);
     }
 
     if (prevProps.onScrollStart !== props.onScrollStart) {
       if (prevProps.onScrollStart)
+        // @ts-expect-error error from custom scrollbar
         this.eventEmitter.off("scrollStart", prevProps.onScrollStart);
       if (props.onScrollStart)
+        // @ts-expect-error error from custom scrollbar
         this.eventEmitter.on("scrollStart", props.onScrollStart);
     }
 
     if (prevProps.onScrollStop !== props.onScrollStop) {
       if (prevProps.onScrollStop)
+        // @ts-expect-error error from custom scrollbar
         this.eventEmitter.off("scrollStop", prevProps.onScrollStop);
       if (props.onScrollStop)
+        // @ts-expect-error error from custom scrollbar
         this.eventEmitter.on("scrollStop", props.onScrollStop);
     }
   }
@@ -1020,6 +1032,7 @@ class Scrollbar extends React.Component<ScrollbarProps, ScrollbarState> {
       children: createContext ? (
         // eslint-disable-next-line react/jsx-no-constructed-context-values
         <ScrollbarContext.Provider value={{ parentScrollbar: this }}>
+          {/* @ts-expect-error error from custom scrollbar */}
           {children}
         </ScrollbarContext.Provider>
       ) : (

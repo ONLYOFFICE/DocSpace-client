@@ -103,7 +103,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
     const typeLabel = getUserTypeLabel(role, t);
 
     const onChangeAction = () => {
-      onSelect?.(item);
+      onSelect?.(item, false);
     };
 
     const onClick = (e: React.MouseEvent<HTMLDivElement>) => {

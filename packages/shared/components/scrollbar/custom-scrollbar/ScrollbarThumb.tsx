@@ -55,9 +55,9 @@ class ScrollbarThumb extends React.Component<ScrollbarThumbProps, unknown> {
 
   public initialOffsetY = 0;
 
-  private prevUserSelect: string;
+  private prevUserSelect: string = "";
 
-  private prevOnSelectStart: ((ev: Event) => boolean) | null;
+  private prevOnSelectStart: ((ev: Event) => boolean) | null = null;
 
   private elementRefHack = React.createRef<HTMLElement>();
 

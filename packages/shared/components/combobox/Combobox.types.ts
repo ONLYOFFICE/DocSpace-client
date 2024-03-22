@@ -46,7 +46,7 @@ export type TOption =
       isSeparator?: boolean;
       isSelected?: boolean;
       internal?: boolean;
-      access: ShareAccessRights;
+      access?: ShareAccessRights;
     }
   | {
       key: string | number;
@@ -62,7 +62,7 @@ export type TOption =
       isSeparator: true;
       isSelected?: undefined;
       internal?: undefined;
-      access: ShareAccessRights;
+      access?: ShareAccessRights;
     };
 
 export interface ComboboxProps {

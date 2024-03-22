@@ -33,7 +33,7 @@ import { TenantStatus } from "@docspace/shared/enums";
 import type { TDocServiceLocation } from "@docspace/shared/api/files/types";
 
 import type { IInitialConfig, TCatchError, TError, TResponse } from "@/types";
-import { error } from "console";
+
 import { isTemplateFile } from ".";
 
 const API_PREFIX = "api/2.0";
@@ -115,7 +115,13 @@ const processFillFormDraft = async (
   editorSearchParams: URLSearchParams,
   share?: string,
 ): Promise<
-  [string, IInitialConfig, TDocServiceLocation | undefined] | void
+  | [
+      string,
+      IInitialConfig,
+      TDocServiceLocation | undefined,
+      string | undefined,
+    ]
+  | void
 > => {
   const templateFileId = config.file.id;
 
@@ -133,7 +139,7 @@ const processFillFormDraft = async (
 
   if (!response.ok) return;
 
-  const { response: formUrl } = await response.json();
+  const { response: formUrl, ...rest } = await response.json();
 
   const basePath = getBaseUrl();
   const url = new URL(basePath + formUrl);
@@ -183,7 +189,12 @@ const processFillFormDraft = async (
 
   const [newConfig, newEditorUrl] = await Promise.all(actions);
 
-  return [queryFileId, newConfig.response, newEditorUrl?.response];
+  return [
+    queryFileId,
+    newConfig.response,
+    newEditorUrl?.response,
+    url.hash ?? "",
+  ];
 };
 
 export async function fileCopyAs(
@@ -214,7 +225,7 @@ export async function fileCopyAs(
       file: file.response,
       error: file.error
         ? typeof file.error === "string"
-          ? error
+          ? file.error
           : {
               message: file.error?.message,
               status: file.error?.statusCode,
@@ -260,7 +271,7 @@ export async function createFile(
       file: file.response,
       error: file.error
         ? typeof file.error === "string"
-          ? error
+          ? file.error
           : {
               message: file.error?.message,
               status: file.error?.statusCode,
@@ -362,11 +373,12 @@ export async function getData(
         );
 
         if (result) {
-          const [newFileId, newConfig, newEditorUrl] = result;
+          const [newFileId, newConfig, newEditorUrl, hash] = result;
 
           response.fileId = newFileId;
           response.config = newConfig;
           if (newEditorUrl) response.editorUrl = newEditorUrl;
+          if (hash) response.hash = hash;
         }
       }
 
@@ -434,4 +446,3 @@ export async function getData(
     return { error };
   }
 }
-

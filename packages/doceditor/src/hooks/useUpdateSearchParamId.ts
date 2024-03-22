@@ -1,6 +1,9 @@
 import React from "react";
 
-const useUpdateSearchParamId = (fileId: string | undefined) => {
+const useUpdateSearchParamId = (
+  fileId: string | undefined,
+  hash: string | undefined,
+) => {
   React.useLayoutEffect(() => {
     if (!fileId) return;
 
@@ -11,9 +14,9 @@ const useUpdateSearchParamId = (fileId: string | undefined) => {
 
     if (id !== fileId) {
       url.searchParams.set("fileId", fileId);
-      history.pushState({}, "", `${url.pathname}${url.search}`);
+      history.pushState({}, "", `${url.pathname}${url.search}${hash}`);
     }
-  }, [fileId]);
+  }, [fileId, hash]);
 };
 
 export default useUpdateSearchParamId;

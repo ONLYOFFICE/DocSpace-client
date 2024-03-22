@@ -74,6 +74,7 @@ const Root = ({
   editorUrl,
   doc,
   fileId,
+  hash,
 }: TResponse) => {
   const documentserverUrl = editorUrl?.docServiceUrl;
   const fileInfo = config?.file;
@@ -134,7 +135,7 @@ const Root = ({
     onSDKRequestSharingSettings,
   } = useShareDialog();
 
-  useUpdateSearchParamId(fileId);
+  useUpdateSearchParamId(fileId, hash);
 
   return (
     <I18nextProvider i18n={i18n}>
@@ -235,4 +236,3 @@ const Root = ({
 };
 
 export default Root;
-

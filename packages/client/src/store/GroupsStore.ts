@@ -126,6 +126,10 @@ class GroupsStore {
     return this.groups.length < this.groupsFilterTotal;
   }
 
+  get insideGroupFilterTotal() {
+    return this.insideGroupFilter.total;
+  }
+
   get groupsIsFiltered() {
     if (this.groupsFilter.search !== "") return true;
     if (this.groupsFilter.userId !== null) return true;
@@ -298,6 +302,32 @@ class GroupsStore {
     }
 
     return Promise.resolve(filteredMembersRes.items);
+  };
+
+  get hasMoreInsideGroupUsers() {
+    return (
+      this.peopleStore.usersStore.users.length < this.insideGroupFilter.total
+    );
+  }
+
+  fetchMoreInsideGroupUsers = async () => {
+    if (!this.hasMoreInsideGroupUsers || this.groupsIsIsLoading) return;
+    this.groupsIsIsLoading = true;
+
+    const newFilter = this.insideGroupFilter.clone();
+    newFilter.page += 1;
+    this.setInsideGroupFilterParams(newFilter);
+
+    const res = await api.people.getUserList(newFilter);
+
+    runInAction(() => {
+      this.peopleStore.usersStore.setUsers([
+        ...this.peopleStore.usersStore.users,
+        ...res.items,
+      ]);
+      this.insideGroupFilter = newFilter;
+      this.groupsIsIsLoading = false;
+    });
   };
 
   setSelection = (selection) => (this.selection = selection);

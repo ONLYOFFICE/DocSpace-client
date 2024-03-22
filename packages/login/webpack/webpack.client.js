@@ -34,6 +34,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const ExternalTemplateRemotesPlugin = require("external-remotes-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const BannerPlugin = require("webpack").BannerPlugin;
 
 const minifyJson = require("@docspace/shared/utils/minifyJson");
 const sharedDeps = require("@docspace/shared/constants/sharedDependencies");
@@ -42,6 +43,7 @@ const baseConfig = require("./webpack.base.js");
 const runtime = require("../../runtime.json");
 const pkg = require("../package.json");
 const deps = pkg.dependencies || {};
+const version = pkg.version;
 const dateHash = runtime?.date || "";
 
 for (let dep in sharedDeps) {
@@ -169,13 +171,35 @@ const clientConfig = {
   ],
 };
 
+const getBuildDate = () => {
+  const timeElapsed = Date.now();
+  const today = new Date(timeElapsed);
+  return JSON.stringify(today.toISOString().split(".")[0] + "Z");
+};
+
+const getBuildYear = () => {
+  const timeElapsed = Date.now();
+  const today = new Date(timeElapsed);
+  return today.getFullYear();
+};
+
 module.exports = (env, argv) => {
   if (argv.mode === "production") {
+    clientConfig.devtool = "source-map";
     clientConfig.mode = "production";
     clientConfig.optimization = {
       splitChunks: { chunks: "all" },
       minimize: !env.minimize,
-      minimizer: [new TerserPlugin()],
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            format: {
+              comments: /\*\s*\(c\)\s+Copyright\s+Ascensio\s+System\s+SIA/i,
+            },
+          },
+          extractComments: false,
+        }),
+      ],
     };
   } else {
     clientConfig.mode = "development";
@@ -199,6 +223,16 @@ module.exports = (env, argv) => {
           runtime.checksums["config.json"] || dateHash
         }`
       ),
+    }),
+    new BannerPlugin({
+      raw: true,
+      banner: `/*
+* (c) Copyright Ascensio System SIA 2009-${getBuildYear()}. All rights reserved
+*
+* https://www.onlyoffice.com/
+*
+* Version: ${version} (build: ${getBuildDate()})
+*/`,
     }),
   ];
 

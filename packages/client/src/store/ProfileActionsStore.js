@@ -44,7 +44,11 @@ import { isMobile } from "react-device-detect";
 import { zendeskAPI } from "@docspace/shared/components/zendesk/Zendesk.utils";
 import { LIVE_CHAT_LOCAL_STORAGE_KEY } from "@docspace/shared/constants";
 import { toastr } from "@docspace/shared/components/toast";
-import { isDesktop, isTablet } from "@docspace/shared/utils";
+import {
+  isDesktop,
+  isTablet,
+  isMobile as isMobileView,
+} from "@docspace/shared/utils";
 import TariffBar from "SRC_DIR/components/TariffBar";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 
@@ -98,6 +102,18 @@ class ProfileActionsStore {
     makeAutoObservable(this);
   }
 
+  get supportUrl() {
+    return this.settingsStore.additionalResourcesData?.feedbackAndSupportUrl;
+  }
+  get helpUrl() {
+    return this.settingsStore.helpLink;
+  }
+
+  get trainingEmail() {
+    const email = this.settingsStore?.bookTrainingEmail;
+
+    return `mailto:${email}`;
+  }
   getStateLiveChat = () => {
     const state = localStorage.getItem(LIVE_CHAT_LOCAL_STORAGE_KEY) === "true";
 
@@ -172,9 +188,7 @@ class ProfileActionsStore {
   };
 
   onHelpCenterClick = () => {
-    const helpUrl = this.settingsStore.helpLink;
-
-    window.open(helpUrl, "_blank");
+    window.open(this.helpUrl, "_blank");
   };
 
   onLiveChatClick = (t) => {
@@ -188,16 +202,11 @@ class ProfileActionsStore {
   };
 
   onSupportClick = () => {
-    const supportUrl =
-      this.settingsStore.additionalResourcesData?.feedbackAndSupportUrl;
-
-    window.open(supportUrl, "_blank");
+    window.open(this.supportUrl, "_blank");
   };
 
   onBookTraining = () => {
-    const trainingEmail = this.settingsStore?.bookTrainingEmail;
-
-    trainingEmail && window.open(`mailto:${trainingEmail}`, "_blank");
+    this.trainingEmail && window.open(this.trainingEmail, "_blank");
   };
 
   //onVideoGuidesClick = () => {
@@ -343,6 +352,8 @@ class ProfileActionsStore {
         key: "user-menu-book-training",
         icon: BookTrainingReactSvgUrl,
         label: t("Common:BookTraining"),
+        url: this.trainingEmail,
+        target: "_blank",
         onClick: this.onBookTraining,
       };
     }
@@ -388,6 +399,8 @@ class ProfileActionsStore {
         icon: HelpCenterReactSvgUrl,
         label: t("Common:HelpCenter"),
         onClick: this.onHelpCenterClick,
+        url: this.helpUrl,
+        target: "_blank",
       },
       /*videoGuidesEnabled && {
         key: "user-menu-video",
@@ -406,6 +419,8 @@ class ProfileActionsStore {
         icon: EmailReactSvgUrl,
         label: t("Common:FeedbackAndSupport"),
         onClick: this.onSupportClick,
+        url: this.supportUrl,
+        target: "_blank",
       },
       bookTraining,
       {
@@ -413,6 +428,7 @@ class ProfileActionsStore {
         icon: InfoOutlineReactSvgUrl,
         label: t("Common:AboutCompanyTitle"),
         onClick: this.onAboutClick,
+        ...(isMobileView() && { url: ABOUT_URL, target: "_blank" }),
       },
     ];
 

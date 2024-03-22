@@ -3,6 +3,7 @@
   "AddManuallyDescriptionAccounts": "Հրավիրեք նոր օգտվողներին DocSpace անձամբ էլփոստի միջոցով",
   "AddManuallyDescriptionRoom": "Ավելացրեք DocSpace-ի առկա օգտատերերին սենյակին՝ օգտագործելով անունները կամ անձամբ հրավիրեք նոր օգտատերերի էլփոստի միջոցով",
   "EmailErrorMessage": "Էլփոստի հասցեն վավեր չէ: Դուք կարող եք խմբագրել էլփոստը՝ սեղմելով դրա վրա:",
+  "GroupMaxAvailableRoleWarning": "Խմբերն ունեն առավելագույն հասանելի դերը՝ “{{role}}”: Դուք կարող եք ավելացնել իրավունքների ավելացում սենյակում խումբ ավելացնելուց հետո:",
   "InvitationLanguage": "Հրավերների լեզու",
   "InviteAccountSearchPlaceholder": "Հրավիրեք մարդկանց էլ փոստով",
   "Invited": "Հրավիրված",
@@ -12,5 +13,6 @@
   "InviteViaLinkDescriptionRoom": "Ստեղծեք համընդհանուր հղում սենյակում ինքնալիազորման համար",
   "LinkCopySuccess": "Հղումը պատճենվել է",
   "ResetChange": "Վերականգնել փոփոխությունը",
-  "SendInvitation": "Ուղարկել հրավոր"
+  "SendInvitation": "Ուղարկել հրավոր",
+  "UsersAlreadyAdded": "Որոշ օգտվողներ արդեն ավելացվել են"
 }

@@ -29,6 +29,7 @@
   "BetaLabel": "BETA",
   "Bonus": "Бонус",
   "BookTraining": "Заказать обучающее занятие",
+  "Button": "Кнопка",
   "Bytes": "байт",
   "CancelButton": "Отмена",
   "ChangeButton": "Изменить",
@@ -159,6 +160,7 @@
   "FullAccess": "Полный доступ",
   "Gigabyte": "Гб",
   "GoBack": "Назад",
+  "Group": "Группа",
   "Groups": "Группы",
   "HasFullAccess": "У него есть полный доступ в комнату",
   "HeadOfGroup": "Глава группы",
@@ -373,5 +375,6 @@
   "Warning": "Внимание",
   "Website": "Веб-сайт",
   "Yes": "Да",
-  "Yesterday": "Вчера"
+  "Yesterday": "Вчера",
+  "You": "Вы"
 }

@@ -53,7 +53,7 @@ export interface ArticleProfileProps {
   user?: TUser;
   showText: boolean;
   getActions?: (t: TTranslation) => ContextMenuModel[];
-  onProfileClick?: () => void;
+  onProfileClick?: (obj: { originalEvent: React.MouseEvent }) => void;
   currentDeviceType: DeviceType;
 }
 

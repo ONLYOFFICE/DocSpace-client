@@ -27,7 +27,7 @@
 import { combineUrl } from "./combineUrl";
 
 export const openingNewTab = (url: string, e: React.MouseEvent) => {
-  if (e.ctrlKey || e.metaKey || e.button === 1) {
+  if (e?.ctrlKey || e?.metaKey || e?.button === 1) {
     const path = combineUrl(window.DocSpaceConfig?.proxy?.url, url);
 
     window.open(path, "_blank");

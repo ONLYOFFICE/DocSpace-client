@@ -163,6 +163,7 @@ const AvatarPure = ({
       data-testid="avatar"
       className={className}
       onClick={onClick}
+      onMouseDown={onClick}
     >
       <AvatarWrapper
         source={source}

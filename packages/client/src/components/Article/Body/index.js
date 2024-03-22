@@ -43,6 +43,8 @@ import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 
 const ArticleBodyContent = (props) => {
   const {
@@ -82,7 +84,7 @@ const ArticleBodyContent = (props) => {
   const isAccounts = location.pathname.includes("accounts/filter");
 
   const onClick = React.useCallback(
-    (folderId, title, rootFolderType, canCreate) => {
+    (e, folderId, title, rootFolderType, canCreate) => {
       const { toggleArticleOpen } = props;
 
       let params = null;
@@ -97,8 +99,6 @@ const ArticleBodyContent = (props) => {
       };
 
       let withTimer = !!selectedFolderId;
-
-      setSelection && setSelection([]);
 
       switch (folderId) {
         case myFolderId:
@@ -132,7 +132,6 @@ const ArticleBodyContent = (props) => {
             return;
           break;
         case "accounts":
-          clearFiles();
           const accountsFilter = AccountsFilter.getDefault();
           params = accountsFilter.toUrlParams();
           path = getCategoryUrl(CategoryType.Accounts);
@@ -142,8 +141,6 @@ const ArticleBodyContent = (props) => {
 
           break;
         case "settings":
-          clearFiles();
-
           path = getCategoryUrl(CategoryType.Settings);
           navigate(path);
 
@@ -162,9 +159,15 @@ const ArticleBodyContent = (props) => {
           break;
       }
 
-      setIsLoading(true, withTimer);
       path += `?${params}`;
 
+      if (openingNewTab(path, e)) return;
+
+      if (folderId === "accounts" || folderId === "settings") clearFiles();
+
+      setSelection && setSelection([]);
+
+      setIsLoading(true, withTimer);
       navigate(path, { state });
 
       if (currentDeviceType === DeviceType.mobile) {

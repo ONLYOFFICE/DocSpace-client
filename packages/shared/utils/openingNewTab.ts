@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2010-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,44 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { inject, observer } from "mobx-react";
-import { withTranslation } from "react-i18next";
+import { combineUrl } from "./combineUrl";
 
-import { PageType } from "@docspace/shared/enums";
-import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
+export const openingNewTab = (url: string, e: React.MouseEvent) => {
+  if (e?.ctrlKey || e?.metaKey || e?.button === 1) {
+    const path = combineUrl(window.DocSpaceConfig?.proxy?.url, url);
 
-import { ArticleItem } from "@docspace/shared/components/article-item";
+    window.open(path, "_blank");
 
-const PureAccountsItem = ({ showText, isActive, onClick, t }) => {
-  const onClickAction = React.useCallback(
-    (e, id) => {
-      onClick && onClick(e, "accounts");
-    },
-    [onClick],
-  );
+    return true;
+  }
 
-  const icon = getCatalogIconUrlByType(PageType.account);
-
-  return (
-    <ArticleItem
-      key="accounts"
-      text={t("Accounts")}
-      icon={icon}
-      showText={showText}
-      onClick={onClickAction}
-      isActive={isActive}
-      folderId="document_catalog-accounts"
-    />
-  );
+  return false;
 };
-
-const AccountsItem = withTranslation(["Common"])(PureAccountsItem);
-
-export default inject(({ settingsStore }) => {
-  const { showText } = settingsStore;
-
-  return {
-    showText,
-  };
-})(observer(AccountsItem));

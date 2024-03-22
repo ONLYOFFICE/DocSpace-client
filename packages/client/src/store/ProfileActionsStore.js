@@ -46,6 +46,7 @@ import { LIVE_CHAT_LOCAL_STORAGE_KEY } from "@docspace/shared/constants";
 import { toastr } from "@docspace/shared/components/toast";
 import { isDesktop, isTablet } from "@docspace/shared/utils";
 import TariffBar from "SRC_DIR/components/TariffBar";
+import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 
 const PROXY_HOMEPAGE_URL = combineUrl(window.DocSpaceConfig?.proxy?.url, "/");
 const PROFILE_SELF_URL = combineUrl(PROXY_HOMEPAGE_URL, "/profile");
@@ -131,14 +132,19 @@ class ProfileActionsStore {
     return "manager";
   };
 
-  onProfileClick = () => {
+  onProfileClick = (obj) => {
     const { isAdmin, isOwner } = this.userStore.user;
     const { isRoomAdmin } = this.authStore;
 
-    this.profileClicked = true;
     const prefix = window.DocSpace.location.pathname.includes("portal-settings")
       ? "/portal-settings"
       : "";
+
+    const profileUrl = `${prefix}${PROFILE_SELF_URL}`;
+
+    if (openingNewTab(profileUrl, obj.originalEvent)) return;
+
+    this.profileClicked = true;
 
     if ((isAdmin || isOwner || isRoomAdmin) && !prefix) {
       this.selectedFolderStore.setSelectedFolder(null);
@@ -148,10 +154,12 @@ class ProfileActionsStore {
       fromUrl: `${window.DocSpace.location.pathname}${window.DocSpace.location.search}`,
     };
 
-    window.DocSpace.navigate(`${prefix}${PROFILE_SELF_URL}`, { state });
+    window.DocSpace.navigate(profileUrl, { state });
   };
 
-  onSettingsClick = (settingsUrl) => {
+  onSettingsClick = (settingsUrl, obj) => {
+    if (openingNewTab(settingsUrl, obj.originalEvent)) return;
+
     this.selectedFolderStore.setSelectedFolder(null);
     window.DocSpace.navigate(settingsUrl);
   };
@@ -161,7 +169,9 @@ class ProfileActionsStore {
     window.open(SPACES_URL, "_blank");
   };
 
-  onPaymentsClick = () => {
+  onPaymentsClick = (obj) => {
+    if (openingNewTab(PAYMENTS_URL, obj.originalEvent)) return;
+
     this.selectedFolderStore.setSelectedFolder(null);
     window.DocSpace.navigate(PAYMENTS_URL);
   };
@@ -243,7 +253,6 @@ class ProfileActionsStore {
 
     // const settingsModule = modules.find((module) => module.id === "settings");
     // const peopleAvailable = modules.some((m) => m.appName === "people");
-    const settingsUrl = "/portal-settings";
     //   settingsModule && combineUrl(PROXY_HOMEPAGE_URL, settingsModule.link);
 
     const {
@@ -257,7 +266,7 @@ class ProfileActionsStore {
           key: "user-menu-settings",
           icon: CatalogSettingsReactSvgUrl,
           label: t("Common:Settings"),
-          onClick: () => this.onSettingsClick(settingsUrl),
+          onClick: (obj) => this.onSettingsClick("/portal-settings", obj),
         }
       : null;
 
@@ -353,7 +362,7 @@ class ProfileActionsStore {
         key: "user-menu-profile",
         icon: ProfileReactSvgUrl,
         label: t("Common:Profile"),
-        onClick: this.onProfileClick,
+        onClick: (obj) => this.onProfileClick(obj),
       },
       settings,
       management,
@@ -362,7 +371,7 @@ class ProfileActionsStore {
           key: "user-menu-payments",
           icon: PaymentsReactSvgUrl,
           label: t("Common:PaymentsTitle"),
-          onClick: this.onPaymentsClick,
+          onClick: (obj) => this.onPaymentsClick(obj),
           additionalElement: <TariffBar />,
         },
       {

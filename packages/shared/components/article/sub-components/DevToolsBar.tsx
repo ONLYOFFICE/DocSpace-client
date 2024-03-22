@@ -38,6 +38,7 @@ import { Text } from "../../text";
 
 import { ArticleDevToolsBarProps } from "../Article.types";
 import { StyledWrapper } from "../Article.styled";
+import { openingNewTab } from "../../../utils/openingNewTab";
 
 const ArticleDevToolsBar = ({
   showText,
@@ -48,16 +49,27 @@ const ArticleDevToolsBar = ({
   const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
 
-  const onClick = () => {
-    navigate("/portal-settings/developer-tools");
+  const onClick = (e: React.MouseEvent) => {
+    const path = "/portal-settings/developer-tools";
+
+    if (openingNewTab(path, e)) return;
+
+    navigate(path);
+
     if (articleOpen && currentDeviceType === DeviceType.mobile)
       toggleArticleOpen();
+  };
+
+  const onMouseDown = (e: React.MouseEvent) => {
+    if (e.button !== 1) return;
+
+    onClick(e);
   };
 
   if (!showText) return null;
 
   return (
-    <StyledWrapper onClick={onClick}>
+    <StyledWrapper onClick={onClick} onMouseDown={onMouseDown}>
       <ReactSVG src={DeveloperReactSvgUrl} className="icon" />
       <Text fontWeight={600} fontSize="12px" className="label">
         {t("Common:DeveloperTools")}

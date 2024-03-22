@@ -128,11 +128,13 @@ const Item = ({
   }, []);
 
   const onClickAction = React.useCallback(
-    (folderId) => {
+    (e, folderId) => {
+
       setBufferSelection(null);
 
       onClick &&
         onClick(
+          e,
           folderId,
           item.title,
           item.rootFolderType,

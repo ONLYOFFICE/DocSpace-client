@@ -38,6 +38,7 @@ import { getItemByLink } from "SRC_DIR/utils";
 import { TSettingsTreeItem } from "SRC_DIR/types/index";
 
 import { useStore } from "SRC_DIR/store";
+import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 
 const ArticleBodyContent = () => {
   const navigate = useNavigate();
@@ -58,8 +59,11 @@ const ArticleBodyContent = () => {
     setIsBurgerLoading(false);
   }, []);
 
-  const onClickItem = (item: TSettingsTreeItem) => {
+  const onClickItem = (item: TSettingsTreeItem, e: React.MouseEvent) => {
     const path = item.link;
+
+    if (openingNewTab(path, e)) return;
+
     setSelectedKey(item.key);
 
     if (isMobileOnly || isMobile()) {
@@ -84,7 +88,7 @@ const ArticleBodyContent = () => {
           text={t(item.tKey)}
           value={item.link}
           isActive={item.key === selectedKey}
-          onClick={() => onClickItem(item)}
+          onClick={(e) => onClickItem(item, e)}
           folderId={item.id}
         />
       );

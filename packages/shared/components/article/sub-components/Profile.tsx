@@ -81,8 +81,17 @@ const ArticleProfile = (props: ArticleProfileProps) => {
     if (isTabletView && !showText) {
       toggle(e, !isOpen, menuRef);
     } else {
-      onProfileClick?.();
+      onProfileClick?.({ originalEvent: e });
     }
+  };
+
+  const onNameClick = (e: React.MouseEvent) => {
+    onProfileClick?.({ originalEvent: e });
+  };
+
+  const onNameMouseDownClick = (e: React.MouseEvent) => {
+    if (e.button !== 1) return;
+    onNameClick(e);
   };
 
   const onHide = () => {
@@ -139,7 +148,10 @@ const ArticleProfile = (props: ArticleProfileProps) => {
         </div>
         {(!isTabletView || showText) && (
           <>
-            <StyledUserName onClick={onProfileClick}>
+            <StyledUserName
+              onMouseDown={onNameMouseDownClick}
+              onClick={onNameClick}
+            >
               <Text fontWeight={600} noSelect truncate dir="auto">
                 {firstTerm}
                 &nbsp;

@@ -146,6 +146,16 @@ const SubMenu = (props: {
 
     if (subMenuRef.current) {
       subMenuRef.current.style.top = "0px";
+
+      const submenuRects = subMenuRef.current.getBoundingClientRect();
+
+      if (submenuRects.bottom > viewport.height) {
+        const submenuMargin = 16;
+        const topOffset = submenuRects.bottom - viewport.height + submenuMargin;
+
+        subMenuRef.current.style.top = `${-1 * topOffset}px`;
+      }
+
       if (isRtl) {
         if (subListWidth < parseInt(`${containerOffset.left}`, 10)) {
           subMenuRef.current.style.left = `${-1 * subListWidth}px`;

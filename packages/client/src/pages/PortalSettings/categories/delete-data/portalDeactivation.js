@@ -76,7 +76,7 @@ const PortalDeactivation = (props) => {
   };
 
   const notActivatedEmail =
-    owner.activationStatus === EmployeeActivationStatus.NotActivated;
+    owner?.activationStatus === EmployeeActivationStatus.NotActivated;
 
   return (
     <MainContainer>

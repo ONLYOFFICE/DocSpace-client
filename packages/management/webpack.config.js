@@ -30,6 +30,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin =
   require("webpack").container.ModuleFederationPlugin;
 const DefinePlugin = require("webpack").DefinePlugin;
+const BannerPlugin = require("webpack").BannerPlugin;
 
 const ExternalTemplateRemotesPlugin = require("external-remotes-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
@@ -37,8 +38,6 @@ const TerserPlugin = require("terser-webpack-plugin");
 const minifyJson = require("@docspace/shared/utils/minifyJson");
 
 const sharedDeps = require("@docspace/shared/constants/sharedDependencies");
-const fs = require("fs");
-const { readdir } = require("fs").promises;
 
 const path = require("path");
 
@@ -47,8 +46,6 @@ const deps = pkg.dependencies || {};
 const homepage = pkg.homepage;
 const title = pkg.title;
 const version = pkg.version;
-
-const isAlreadyBuilding = false;
 
 const config = {
   entry: "./src/index",
@@ -288,13 +285,36 @@ const config = {
   ],
 };
 
+const getBuildDate = () => {
+  const timeElapsed = Date.now();
+  const today = new Date(timeElapsed);
+  return JSON.stringify(today.toISOString().split(".")[0] + "Z");
+};
+
+const getBuildYear = () => {
+  const timeElapsed = Date.now();
+  const today = new Date(timeElapsed);
+  return today.getFullYear();
+};
+
 module.exports = (env, argv) => {
+  config.devtool = "source-map";
+
   if (argv.mode === "production") {
     config.mode = "production";
     config.optimization = {
       splitChunks: { chunks: "all" },
       minimize: !env.minimize,
-      minimizer: [new TerserPlugin()],
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            format: {
+              comments: /\*\s*\(c\)\s+Copyright\s+Ascensio\s+System\s+SIA/i,
+            },
+          },
+          extractComments: false,
+        }),
+      ],
     };
   } else {
     config.devtool = "cheap-module-source-map";
@@ -356,6 +376,19 @@ module.exports = (env, argv) => {
   };
 
   config.plugins.push(new DefinePlugin(defines));
+
+  config.plugins.push(
+    new BannerPlugin({
+      raw: true,
+      banner: `/*
+* (c) Copyright Ascensio System SIA 2009-${getBuildYear()}. All rights reserved
+*
+* https://www.onlyoffice.com/
+*
+* Version: ${version} (build: ${getBuildDate()})
+*/`,
+    })
+  );
 
   return config;
 };

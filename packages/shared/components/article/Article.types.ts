@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -67,6 +67,7 @@ export interface ArticleZendeskProps {
   zendeskKey: string;
   showProgress: boolean;
   isShowLiveChat: boolean;
+  isInfoPanelVisible?: boolean;
 }
 
 export interface ArticleAppsProps {
@@ -110,6 +111,8 @@ export interface ArticleProps {
 
   isLiveChatAvailable: boolean;
   isShowLiveChat: boolean;
+
+  isInfoPanelVisible?: boolean;
 
   onLogoClickAction?: () => void;
 

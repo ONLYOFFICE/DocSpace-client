@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Meta, StoryObj } from "@storybook/react";
 
@@ -63,6 +63,24 @@ type Story = StoryObj<typeof Toast>;
 
 export default meta;
 
+const useVisible = () => {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    // const isDocs = window.location.href.includes("docs");
+
+    const timeoutId = setTimeout(() => {
+      setVisible(true);
+    }, 0);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, []);
+
+  return visible;
+};
+
 const BaseTemplate = ({
   type,
   data,
@@ -75,6 +93,8 @@ const BaseTemplate = ({
   data?: React.ReactNode | string;
   timeout?: number;
 }) => {
+  const visible = useVisible();
+
   const showToast = () => {
     switch (type) {
       case ToastType.error:
@@ -94,7 +114,7 @@ const BaseTemplate = ({
 
   return (
     <>
-      <Toast {...args} />
+      {visible && <Toast {...args} />}
       <Button
         label="Show toast"
         primary
@@ -117,6 +137,8 @@ export const basic: Story = {
 };
 
 const AllTemplate = () => {
+  const visible = useVisible();
+
   const renderAllToast = () => {
     toastr.success(
       <>
@@ -154,7 +176,7 @@ const AllTemplate = () => {
   };
   return (
     <>
-      <Toast />
+      {visible && <Toast />}
       <Button
         label="Show all toast"
         primary

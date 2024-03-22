@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -134,9 +134,8 @@ class AxiosClient {
 
     const proto = headers["x-forwarded-proto"]?.split(",").shift();
     const host = headers["x-forwarded-host"]?.split(",").shift();
-    const port = headers["x-forwarded-port"]?.split(",").shift();
 
-    const origin = apiOrigin || `${proto}://${host}${port ? `:${port}` : ""}`;
+    const origin = apiOrigin || `${proto}://${host}`;
 
     const apiBaseURL = combineUrl(origin, proxyURL, apiPrefix);
 

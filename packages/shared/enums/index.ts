@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -494,4 +494,15 @@ export enum MembersSubjectType {
 export const enum UrlActionType {
   Download = 0,
   Link = 1,
+}
+
+export const enum WhiteLabelLogoType {
+  LightSmall = 1,
+  LoginPage = 2,
+  Favicon = 3,
+  DocsEditor = 4,
+  DocsEditorEmbed = 5,
+  LeftMenu = 6,
+  AboutPage = 7,
+  Notification = 8,
 }

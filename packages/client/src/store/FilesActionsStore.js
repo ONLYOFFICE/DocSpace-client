@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -38,6 +38,7 @@ import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/catalog.rooms.react.svg?u
 import ChangQuotaReactSvgUrl from "PUBLIC_DIR/images/change.quota.react.svg?url";
 import DisableQuotaReactSvgUrl from "PUBLIC_DIR/images/disable.quota.react.svg?url";
 import DefaultQuotaReactSvgUrl from "PUBLIC_DIR/images/default.quota.react.svg?url";
+import RemoveOutlineSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import {
   checkFileConflicts,
   deleteFile,
@@ -1321,6 +1322,10 @@ class FilesActionStore {
       if (tag.roomType) {
         if (!!newFilter.type && +newFilter.type === tag.roomType) return;
         newFilter.type = tag.roomType;
+      } else if (tag.providerType) {
+        if (!!newFilter.provider && +newFilter.provider === tag.providerType)
+          return;
+        newFilter.provider = tag.providerType;
       } else {
         tags.push(tag.label);
         newFilter.tags = [...tags];
@@ -1330,7 +1335,6 @@ class FilesActionStore {
     } else {
       newFilter.withoutTags = true;
     }
-
     setIsLoading(true);
     window.DocSpace.navigate(
       `${window.DocSpace.location.pathname}?${newFilter.toUrlParams(this.userStore?.user?.id)}`,
@@ -2066,6 +2070,13 @@ class FilesActionStore {
             },
             iconUrl: DeleteReactSvgUrl,
           };
+      case "remove-from-recent":
+        return {
+          id: "menu-remove-from-recent",
+          label: t("RemoveFromList"),
+          onClick: () => this.onClickRemoveFromRecent(selection),
+          iconUrl: RemoveOutlineSvgUrl,
+        };
     }
   };
 
@@ -2131,13 +2142,14 @@ class FilesActionStore {
     const downloadAs = this.getOption("downloadAs", t);
     const copy = this.getOption("copy", t);
     const showInfo = this.getOption("showInfo", t);
+    const removeFromRecent = this.getOption("remove-from-recent", t);
 
     itemsCollection
-
       .set("download", download)
       .set("downloadAs", downloadAs)
       .set("copy", copy)
-      .set("showInfo", showInfo);
+      .set("showInfo", showInfo)
+      .set("removeFromRecent", removeFromRecent);
 
     return this.convertToArray(itemsCollection);
   };
@@ -2236,12 +2248,12 @@ class FilesActionStore {
   getHeaderMenu = (t) => {
     const {
       isFavoritesFolder,
-      isRecentFolder,
       isRecycleBinFolder,
       isPrivacyFolder,
       isShareFolder,
       isRoomsFolder,
       isArchiveFolder,
+      isRecentTab,
     } = this.treeFoldersStore;
 
     let itemsCollection = new Map();
@@ -2256,7 +2268,7 @@ class FilesActionStore {
 
     if (isShareFolder) return this.getShareFolderOptions(itemsCollection, t);
 
-    if (isRecentFolder) return this.getRecentFolderOptions(itemsCollection, t);
+    if (isRecentTab) return this.getRecentFolderOptions(itemsCollection, t);
 
     if (isArchiveFolder)
       return this.getArchiveRoomsFolderOptions(itemsCollection, t);
@@ -2350,30 +2362,12 @@ class FilesActionStore {
         this.onMarkAsRead(item);
 
       if (canWebEdit || canViewedDocs) {
-        let tab =
-          !this.settingsStore.isDesktopClient &&
-          window.DocSpaceConfig?.editor?.openOnNewPage &&
-          !isFolder
-            ? window.open(
-                combineUrl(
-                  window.DocSpaceConfig?.proxy?.url,
-                  config.homepage,
-                  `/doceditor?fileId=${id}`,
-                ),
-                "_blank",
-              )
-            : null;
-
-        const isPreview = item.isForm
-          ? !item.security.FillForms
-          : !item.security.Edit;
-
         const shareWebUrl = new URL(webUrl);
         const shareKey = isRecentTab
           ? getObjectByLocation(shareWebUrl)?.share
           : "";
 
-        return openDocEditor(id, providerKey, tab, null, isPreview, shareKey);
+        return openDocEditor(id, false, shareKey);
       }
 
       if (isMediaOrImage) {
@@ -2711,6 +2705,13 @@ class FilesActionStore {
       .finally(() => {
         setSelected("none");
       });
+  };
+
+  onClickRemoveFromRecent = (selection) => {
+    const { setSelected } = this.filesStore;
+    const ids = selection.map((item) => item.id);
+    this.removeFilesFromRecent(ids);
+    setSelected("none");
   };
 
   removeFilesFromRecent = async (fileIds) => {

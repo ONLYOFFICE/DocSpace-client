@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -35,6 +35,7 @@ import { toastr } from "./sub-components/Toastr";
 describe("<Textarea />", () => {
   it("renders without error", () => {
     const { container } = render(
+      // @ts-expect-error maybe its old version toast
       <Toast>{toastr.success("Some text for toast")}</Toast>,
     );
 

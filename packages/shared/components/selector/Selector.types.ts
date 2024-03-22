@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2010-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -496,7 +496,7 @@ export type TSelectorItem = TSelectorItemLogo &
 
 export type Data = {
   items: TSelectorItem[];
-  onSelect?: (item: TSelectorItem, isDoubleClick?: boolean) => void;
+  onSelect?: (item: TSelectorItem, isDoubleClick: boolean) => void;
   isMultiSelect: boolean;
   isItemLoaded: (index: number) => boolean;
   rowLoader: React.ReactNode;

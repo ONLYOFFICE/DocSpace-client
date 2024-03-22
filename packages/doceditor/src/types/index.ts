@@ -184,6 +184,7 @@ export type TResponse =
       error?: TError;
       doc?: string;
       fileId?: string;
+      hash?: string;
     }
   | {
       error: TError;
@@ -195,6 +196,7 @@ export type TResponse =
       isSharingAccess?: undefined;
       doc?: undefined;
       fileId?: string;
+      hash?: string;
     };
 
 export type EditorProps = {
@@ -376,4 +378,3 @@ export type TCatchError =
   | { statusText: string }
   | { message: string }
   | string;
-

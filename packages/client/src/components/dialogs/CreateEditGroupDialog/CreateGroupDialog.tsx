@@ -35,8 +35,8 @@ import { observer, inject } from "mobx-react";
 
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { GroupParams } from "./types";
 import { createGroup } from "@docspace/shared/api/groups";
+import { GroupParams } from "./types";
 import GroupNameParam from "./sub-components/GroupNameParam";
 import HeadOfGroup from "./sub-components/HeadOfGroupParam";
 import MembersParam from "./sub-components/MembersParam";
@@ -104,88 +104,88 @@ const CreateGroupDialog = ({
       });
   };
 
-  if (selectGroupMangerPanelIsVisible)
-    return (
-      <SelectGroupManagerPanel
-        isVisible={selectGroupMangerPanelIsVisible}
-        onClose={onHideSelectGroupManagerPanel}
-        onParentPanelClose={onClose}
-        setGroupManager={setGroupManager}
-      />
-    );
-
-  if (selectMembersPanelIsVisible)
-    return (
-      <SelectGroupMembersPanel
-        isVisible={selectMembersPanelIsVisible}
-        onClose={onHideSelectMembersPanel}
-        onParentPanelClose={onClose}
-        groupManager={groupParams.groupManager}
-        groupMembers={groupParams.groupMembers}
-        setGroupMembers={setGroupMembers}
-      />
-    );
-
   return (
-    <ModalDialog
-      displayType={ModalDialogType.aside}
-      withBodyScroll
-      visible={visible}
-      onClose={onClose}
-      withFooterBorder
-      //   isScrollLocked={isScrollLocked}
-      //   isOauthWindowOpen={isOauthWindowOpen}
-    >
-      <ModalDialog.Header>
-        {t("PeopleTranslations:CreateGroup")}
-      </ModalDialog.Header>
+    <>
+      <ModalDialog
+        displayType={ModalDialogType.aside}
+        withBodyScroll
+        visible={visible}
+        onClose={onClose}
+        withFooterBorder
+        //   isScrollLocked={isScrollLocked}
+        //   isOauthWindowOpen={isOauthWindowOpen}
+      >
+        <ModalDialog.Header>
+          {t("PeopleTranslations:CreateGroup")}
+        </ModalDialog.Header>
 
-      <ModalDialog.Body>
-        <GroupNameParam
-          groupName={groupParams.groupName}
-          onChangeGroupName={onChangeGroupName}
-        />
-        <HeadOfGroup
-          groupManager={groupParams.groupManager}
+        <ModalDialog.Body>
+          <GroupNameParam
+            groupName={groupParams.groupName}
+            onChangeGroupName={onChangeGroupName}
+          />
+          <HeadOfGroup
+            groupManager={groupParams.groupManager}
+            setGroupManager={setGroupManager}
+            groupMembers={groupParams.groupMembers}
+            setGroupMembers={setGroupMembers}
+            onShowSelectGroupManagerPanel={onShowSelectGroupManagerPanel}
+          />
+          <MembersParam
+            groupManager={groupParams.groupManager}
+            groupMembers={groupParams.groupMembers}
+            setGroupMembers={setGroupMembers}
+            onShowSelectMembersPanel={onShowSelectMembersPanel}
+          />
+        </ModalDialog.Body>
+
+        <ModalDialog.Footer>
+          <Button
+            id="create-group-modal_submit"
+            tabIndex={5}
+            label={t("Common:Create")}
+            size={ButtonSize.normal}
+            primary
+            scale
+            onClick={onCreateGroup}
+            isDisabled={
+              !groupParams.groupName ||
+              (!groupParams.groupManager && !groupParams.groupMembers.length)
+            }
+            isLoading={isLoading}
+          />
+          <Button
+            id="create-group-modal_cancel"
+            tabIndex={5}
+            label={t("Common:CancelButton")}
+            size={ButtonSize.normal}
+            scale
+            isDisabled={isLoading}
+            onClick={onClose}
+          />
+        </ModalDialog.Footer>
+      </ModalDialog>
+
+      {selectGroupMangerPanelIsVisible && (
+        <SelectGroupManagerPanel
+          isVisible={selectGroupMangerPanelIsVisible}
+          onClose={onHideSelectGroupManagerPanel}
+          onParentPanelClose={onClose}
           setGroupManager={setGroupManager}
-          groupMembers={groupParams.groupMembers}
-          setGroupMembers={setGroupMembers}
-          onShowSelectGroupManagerPanel={onShowSelectGroupManagerPanel}
         />
-        <MembersParam
+      )}
+
+      {selectMembersPanelIsVisible && (
+        <SelectGroupMembersPanel
+          isVisible={selectMembersPanelIsVisible}
+          onClose={onHideSelectMembersPanel}
+          onParentPanelClose={onClose}
           groupManager={groupParams.groupManager}
           groupMembers={groupParams.groupMembers}
           setGroupMembers={setGroupMembers}
-          onShowSelectMembersPanel={onShowSelectMembersPanel}
         />
-      </ModalDialog.Body>
-
-      <ModalDialog.Footer>
-        <Button
-          id="create-group-modal_submit"
-          tabIndex={5}
-          label={t("Common:Create")}
-          size={ButtonSize.normal}
-          primary
-          scale
-          onClick={onCreateGroup}
-          isDisabled={
-            !groupParams.groupName ||
-            (!groupParams.groupManager && !groupParams.groupMembers.length)
-          }
-          isLoading={isLoading}
-        />
-        <Button
-          id="create-group-modal_cancel"
-          tabIndex={5}
-          label={t("Common:CancelButton")}
-          size={ButtonSize.normal}
-          scale
-          isDisabled={isLoading}
-          onClick={onClose}
-        />
-      </ModalDialog.Footer>
-    </ModalDialog>
+      )}
+    </>
   );
 };
 

@@ -1799,6 +1799,14 @@ class ContextOptionsStore {
         disabled: !deleteItems || isRootThirdPartyFolder,
       },
       {
+        key: "remove-from-recent",
+        label: t("RemoveFromList"),
+        icon: RemoveOutlineSvgUrl,
+        onClick: () =>
+          this.filesActionsStore.onClickRemoveFromRecent(selection),
+        disabled: !this.treeFoldersStore.isRecentTab,
+      },
+      {
         key: "delete",
         label: t("Common:Delete"),
         icon: TrashReactSvgUrl,

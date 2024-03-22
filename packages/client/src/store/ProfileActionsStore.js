@@ -308,6 +308,8 @@ class ProfileActionsStore {
                       key: "spaces-management",
                       label: t("Common:SpaceManagement"),
                       onClick: this.onSpacesClick,
+                      url: SPACES_URL,
+                      target: "_blank",
                     },
                   ]
                 : null,

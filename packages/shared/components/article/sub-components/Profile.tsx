@@ -89,6 +89,11 @@ const ArticleProfile = (props: ArticleProfileProps) => {
     onProfileClick?.({ originalEvent: e });
   };
 
+  const onNameMouseDownClick = (e: React.MouseEvent) => {
+    if (e.button !== 1) return;
+    onNameClick(e);
+  };
+
   const onHide = () => {
     setIsOpen(false);
   };
@@ -143,7 +148,10 @@ const ArticleProfile = (props: ArticleProfileProps) => {
         </div>
         {(!isTabletView || showText) && (
           <>
-            <StyledUserName onClick={onNameClick} onMouseDown={onNameClick}>
+            <StyledUserName
+              onMouseDown={onNameMouseDownClick}
+              onClick={onNameClick}
+            >
               <Text fontWeight={600} noSelect truncate dir="auto">
                 {firstTerm}
                 &nbsp;

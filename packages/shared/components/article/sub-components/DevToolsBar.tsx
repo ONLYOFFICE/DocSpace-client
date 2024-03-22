@@ -49,7 +49,7 @@ const ArticleDevToolsBar = ({
   const { t } = useTranslation(["Common"]);
   const navigate = useNavigate();
 
-  const onClick = (e) => {
+  const onClick = (e: React.MouseEvent) => {
     const path = "/portal-settings/developer-tools";
 
     if (openingNewTab(path, e)) return;
@@ -60,10 +60,16 @@ const ArticleDevToolsBar = ({
       toggleArticleOpen();
   };
 
+  const onMouseDown = (e: React.MouseEvent) => {
+    if (e.button !== 1) return;
+
+    onClick(e);
+  };
+
   if (!showText) return null;
 
   return (
-    <StyledWrapper onClick={onClick} onMouseDown={onClick}>
+    <StyledWrapper onClick={onClick} onMouseDown={onMouseDown}>
       <ReactSVG src={DeveloperReactSvgUrl} className="icon" />
       <Text fontWeight={600} fontSize="12px" className="label">
         {t("Common:DeveloperTools")}

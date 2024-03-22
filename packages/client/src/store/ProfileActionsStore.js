@@ -44,11 +44,7 @@ import { isMobile } from "react-device-detect";
 import { zendeskAPI } from "@docspace/shared/components/zendesk/Zendesk.utils";
 import { LIVE_CHAT_LOCAL_STORAGE_KEY } from "@docspace/shared/constants";
 import { toastr } from "@docspace/shared/components/toast";
-import {
-  isDesktop,
-  isTablet,
-  isMobile as isMobileView,
-} from "@docspace/shared/utils";
+import { isDesktop, isTablet } from "@docspace/shared/utils";
 import TariffBar from "SRC_DIR/components/TariffBar";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 
@@ -62,7 +58,7 @@ const PAYMENTS_URL = combineUrl(
 );
 
 //const VIDEO_GUIDES_URL = "https://onlyoffice.com/";
-let profilePrefix;
+
 const SPACES_URL = combineUrl(PROXY_HOMEPAGE_URL, "/management");
 class ProfileActionsStore {
   authStore = null;
@@ -102,18 +98,6 @@ class ProfileActionsStore {
     makeAutoObservable(this);
   }
 
-  get supportUrl() {
-    return this.settingsStore.additionalResourcesData?.feedbackAndSupportUrl;
-  }
-  get helpUrl() {
-    return this.settingsStore.helpLink;
-  }
-
-  get trainingEmail() {
-    const email = this.settingsStore?.bookTrainingEmail;
-
-    return `mailto:${email}`;
-  }
   getStateLiveChat = () => {
     const state = localStorage.getItem(LIVE_CHAT_LOCAL_STORAGE_KEY) === "true";
 
@@ -152,7 +136,12 @@ class ProfileActionsStore {
     const { isAdmin, isOwner } = this.userStore.user;
     const { isRoomAdmin } = this.authStore;
 
-    const profileUrl = `${profilePrefix}${PROFILE_SELF_URL}`;
+    const prefix = window.DocSpace.location.pathname.includes("portal-settings")
+      ? "/portal-settings"
+      : "";
+
+    const profileUrl = `${prefix}${PROFILE_SELF_URL}`;
+
     if (openingNewTab(profileUrl, obj.originalEvent)) return;
 
     this.profileClicked = true;
@@ -188,7 +177,9 @@ class ProfileActionsStore {
   };
 
   onHelpCenterClick = () => {
-    window.open(this.helpUrl, "_blank");
+    const helpUrl = this.settingsStore.helpLink;
+
+    window.open(helpUrl, "_blank");
   };
 
   onLiveChatClick = (t) => {
@@ -202,11 +193,16 @@ class ProfileActionsStore {
   };
 
   onSupportClick = () => {
-    window.open(this.supportUrl, "_blank");
+    const supportUrl =
+      this.settingsStore.additionalResourcesData?.feedbackAndSupportUrl;
+
+    window.open(supportUrl, "_blank");
   };
 
   onBookTraining = () => {
-    this.trainingEmail && window.open(this.trainingEmail, "_blank");
+    const trainingEmail = this.settingsStore?.bookTrainingEmail;
+
+    trainingEmail && window.open(`mailto:${trainingEmail}`, "_blank");
   };
 
   //onVideoGuidesClick = () => {
@@ -257,7 +253,6 @@ class ProfileActionsStore {
 
     // const settingsModule = modules.find((module) => module.id === "settings");
     // const peopleAvailable = modules.some((m) => m.appName === "people");
-    const settingsUrl = "/portal-settings";
     //   settingsModule && combineUrl(PROXY_HOMEPAGE_URL, settingsModule.link);
 
     const {
@@ -271,8 +266,7 @@ class ProfileActionsStore {
           key: "user-menu-settings",
           icon: CatalogSettingsReactSvgUrl,
           label: t("Common:Settings"),
-          onClick: (obj) => this.onSettingsClick(settingsUrl, obj),
-          url: settingsUrl,
+          onClick: (obj) => this.onSettingsClick("/portal-settings", obj),
         }
       : null;
 
@@ -308,8 +302,6 @@ class ProfileActionsStore {
                       key: "spaces-management",
                       label: t("Common:SpaceManagement"),
                       onClick: this.onSpacesClick,
-                      url: SPACES_URL,
-                      target: "_blank",
                     },
                   ]
                 : null,
@@ -354,8 +346,6 @@ class ProfileActionsStore {
         key: "user-menu-book-training",
         icon: BookTrainingReactSvgUrl,
         label: t("Common:BookTraining"),
-        url: this.trainingEmail,
-        target: "_blank",
         onClick: this.onBookTraining,
       };
     }
@@ -367,19 +357,12 @@ class ProfileActionsStore {
     const helpCenterEnabled =
       this.settingsStore.additionalResourcesData?.helpCenterEnabled;
 
-    profilePrefix = window.DocSpace.location.pathname.includes(
-      "portal-settings",
-    )
-      ? "/portal-settings"
-      : "";
-
     const actions = [
       {
         key: "user-menu-profile",
         icon: ProfileReactSvgUrl,
         label: t("Common:Profile"),
         onClick: (obj) => this.onProfileClick(obj),
-        url: `${profilePrefix}${PROFILE_SELF_URL}`,
       },
       settings,
       management,
@@ -390,7 +373,6 @@ class ProfileActionsStore {
           label: t("Common:PaymentsTitle"),
           onClick: (obj) => this.onPaymentsClick(obj),
           additionalElement: <TariffBar />,
-          url: PAYMENTS_URL,
         },
       {
         isSeparator: true,
@@ -401,8 +383,6 @@ class ProfileActionsStore {
         icon: HelpCenterReactSvgUrl,
         label: t("Common:HelpCenter"),
         onClick: this.onHelpCenterClick,
-        url: this.helpUrl,
-        target: "_blank",
       },
       /*videoGuidesEnabled && {
         key: "user-menu-video",
@@ -421,8 +401,6 @@ class ProfileActionsStore {
         icon: EmailReactSvgUrl,
         label: t("Common:FeedbackAndSupport"),
         onClick: this.onSupportClick,
-        url: this.supportUrl,
-        target: "_blank",
       },
       bookTraining,
       {
@@ -430,7 +408,6 @@ class ProfileActionsStore {
         icon: InfoOutlineReactSvgUrl,
         label: t("Common:AboutCompanyTitle"),
         onClick: this.onAboutClick,
-        ...(isMobileView() && { url: ABOUT_URL, target: "_blank" }),
       },
     ];
 

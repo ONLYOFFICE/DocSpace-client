@@ -147,6 +147,10 @@ const Table = ({
   typeAccountsInsideGroupColumnIsEnabled,
   groupAccountsInsideGroupColumnIsEnabled,
   emailAccountsInsideGroupColumnIsEnabled,
+
+  fetchMoreInsideGroupUsers,
+  insideGroupFilterTotal,
+  hasMoreInsideGroupUsers,
   openGroupAction,
 }) => {
   const ref = useRef(null);
@@ -179,9 +183,9 @@ const Table = ({
         infoPanelVisible={infoPanelVisible}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
         columnStorageName={columnStorageName}
-        fetchMoreFiles={() => {}}
-        hasMoreFiles={false}
-        itemCount={peopleList.length}
+        fetchMoreFiles={fetchMoreInsideGroupUsers}
+        hasMoreFiles={hasMoreInsideGroupUsers}
+        itemCount={insideGroupFilterTotal}
         filesLength={peopleList.length}
         itemHeight={48}
         useReactWindow={!withPaging}
@@ -247,7 +251,12 @@ export default inject(
       emailAccountsInsideGroupColumnIsEnabled,
     } = tableStore;
 
-    const { openGroupAction } = peopleStore.groupsStore;
+    const {
+      openGroupAction,
+      insideGroupFilterTotal,
+      hasMoreInsideGroupUsers,
+      fetchMoreInsideGroupUsers,
+    } = peopleStore.groupsStore;
 
     return {
       peopleList,
@@ -267,6 +276,9 @@ export default inject(
       groupAccountsInsideGroupColumnIsEnabled,
       emailAccountsInsideGroupColumnIsEnabled,
 
+      fetchMoreInsideGroupUsers,
+      insideGroupFilterTotal,
+      hasMoreInsideGroupUsers,
       openGroupAction,
     };
   },

@@ -122,4 +122,4 @@ export default inject(({ settingsStore, userStore }) => {
     currentColorScheme,
     sendActivationLink,
   };
-})(withTranslation("Settings", "MainBar", "People")(PortalDeactivation));
+})(withTranslation(["Settings", "MainBar", "People"])(PortalDeactivation));

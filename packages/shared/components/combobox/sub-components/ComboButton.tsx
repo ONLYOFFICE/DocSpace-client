@@ -71,7 +71,7 @@ const ComboButton = (props: ComboButtonProps) => {
   } = props;
 
   const defaultOption = selectedOption?.default;
-  const isSelected = selectedOption?.key !== 0;
+  // const isSelected = selectedOption?.key !== 0;
   const displayArrow = withOptions || withAdvancedOptions;
 
   return (
@@ -84,7 +84,7 @@ const ComboButton = (props: ComboButtonProps) => {
       onClick={onClick}
       scaled={scaled}
       size={size}
-      isSelected={isSelected}
+      //  isSelected={isSelected}
       modernView={modernView}
       className="combo-button"
       tabIndex={tabIndex}
@@ -110,7 +110,7 @@ const ComboButton = (props: ComboButtonProps) => {
           className="forceColor"
           isDisabled={isDisabled}
           defaultOption={defaultOption}
-          isSelected={isSelected}
+          // isSelected={isSelected}
           isLoading={isLoading}
         >
           <ReactSVG

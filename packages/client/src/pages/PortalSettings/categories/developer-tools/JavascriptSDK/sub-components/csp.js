@@ -25,8 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect, useState } from "react";
+import { ReactSVG } from "react-svg";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
+
+import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
 import { TextInput } from "@docspace/shared/components/text-input";
 import { HelpButton } from "@docspace/shared/components/help-button";
@@ -81,7 +84,48 @@ const ChipsContainer = styled.div`
   flex-wrap: wrap;
 `;
 
-const CSP = ({ t, cspDomains, getCSPSettings, setCSPSettings }) => {
+const InfoBar = styled.div`
+  display: flex;
+  background-color: ${(props) => props.theme.infoBar.background};
+  color: #333;
+  font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  margin: -4px 0px 20px;
+
+  .text-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header-body {
+    display: flex;
+    height: fit-content;
+    width: 100%;
+    gap: 8px;
+    font-weight: 600;
+    .header-icon {
+      svg {
+        path {
+          fill: #ed7309;
+        }
+      }
+    }
+
+    &__title {
+      color: ${(props) => props.theme.infoBar.title};
+    }
+  }
+
+  .body-container {
+    color: ${(props) => props.theme.infoBar.description};
+    font-weight: 400;
+  }
+`;
+
+const CSP = ({ t, cspDomains, getCSPSettings, setCSPSettings, standalone }) => {
   useEffect(() => {
     getCSPSettings();
   }, []);
@@ -160,6 +204,25 @@ const CSP = ({ t, cspDomains, getCSPSettings, setCSPSettings }) => {
           tooltipContent={<Text fontSize="12px">{t("CSPHelp")}</Text>}
         />
       </Container>
+      {standalone && window.location.protocol !== "https:" && (
+        <InfoBar>
+          <div className="text-container">
+            <div className="header-body">
+              <div className="header-icon">
+                <ReactSVG src={InfoIcon} />
+              </div>
+              <Text
+                className="header-body__title"
+                fontSize="12px"
+                fontWeight={600}
+              >
+                {t("CSPInfoBarHeader")}
+              </Text>
+            </div>
+            <div className="body-container">{t("CSPInfoBarDescription")}</div>
+          </div>
+        </InfoBar>
+      )}
       <Container className="input-holder">
         <TextInput
           onChange={onChangeDomain}
@@ -182,6 +245,7 @@ const CSP = ({ t, cspDomains, getCSPSettings, setCSPSettings }) => {
 };
 
 export default inject(({ settingsStore }) => {
-  const { cspDomains, getCSPSettings, setCSPSettings } = settingsStore;
-  return { cspDomains, getCSPSettings, setCSPSettings };
+  const { cspDomains, getCSPSettings, setCSPSettings, standalone } =
+    settingsStore;
+  return { cspDomains, getCSPSettings, setCSPSettings, standalone };
 })(observer(CSP));

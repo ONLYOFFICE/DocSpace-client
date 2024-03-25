@@ -150,10 +150,11 @@ const Selector = ({
 
   const [requestRunning, setRequestRunning] = React.useState<boolean>(false);
 
-  const onSubmitAction = async () => {
+  const onSubmitAction = async (item?: TSelectorItem) => {
     setRequestRunning(true);
+
     await onSubmit(
-      newSelectedItems,
+      item ? [item] : newSelectedItems,
       selectedAccess,
       newFooterInputValue,
       isFooterCheckboxChecked,
@@ -168,7 +169,7 @@ const Selector = ({
         ...item,
       },
       isDoubleClick,
-      onSubmitAction,
+      () => onSubmitAction(item),
     );
 
     if (isMultiSelect) {
@@ -232,7 +233,7 @@ const Selector = ({
         return [...newValue];
       });
 
-      if (item.isSelected) {
+      if (item.isSelected && !isDoubleClick) {
         setNewSelectedItems([]);
       } else {
         setNewSelectedItems([item]);

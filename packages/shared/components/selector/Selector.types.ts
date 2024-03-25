@@ -193,8 +193,8 @@ export type TSelectorSubmitButton = {
   submitButtonId?: string;
 };
 
-type TSelectorFooterSubmitButton = TSelectorSubmitButton & {
-  onSubmit: () => void;
+type TSelectorFooterSubmitButton = Omit<TSelectorSubmitButton, "onSubmit"> & {
+  onSubmit: (item?: TSelectorItem) => Promise<void>;
 };
 
 // cancel button

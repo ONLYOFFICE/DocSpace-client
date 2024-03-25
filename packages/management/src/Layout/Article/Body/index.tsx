@@ -39,6 +39,12 @@ import { TSettingsTreeItem } from "SRC_DIR/types/index";
 
 import { useStore } from "SRC_DIR/store";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+
+const PROXY_BASE_URL = combineUrl(
+  window.DocSpaceConfig?.proxy?.url,
+  "/management"
+);
 
 const ArticleBodyContent = () => {
   const navigate = useNavigate();
@@ -61,8 +67,9 @@ const ArticleBodyContent = () => {
 
   const onClickItem = (item: TSettingsTreeItem, e: React.MouseEvent) => {
     const path = item.link;
+    const url = combineUrl(PROXY_BASE_URL, path);
 
-    if (openingNewTab(path, e)) return;
+    if (openingNewTab(url, e)) return;
 
     setSelectedKey(item.key);
 

@@ -32,7 +32,6 @@ import { getProviderLabel } from "@docspace/shared/utils/common";
 import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/vertical-dots.react.svg?url";
 
 import { SocialButton } from "../social-button";
-import { IconButton } from "../icon-button";
 import StyledSocialButtonsGroup from "./SocialButtonsGroup.styled";
 import type {
   SocialButtonProps,

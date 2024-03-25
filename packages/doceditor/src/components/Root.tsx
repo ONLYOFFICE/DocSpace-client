@@ -39,6 +39,7 @@ import FirebaseHelper from "@docspace/shared/utils/firebase";
 import { TFirebaseSettings } from "@docspace/shared/api/settings/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import AppLoader from "@docspace/shared/components/app-loader";
+import { Error520SSR } from "@docspace/shared/components/errors/Error520";
 
 import { TResponse } from "@/types";
 import useError from "@/hooks/useError";
@@ -163,11 +164,21 @@ const Root = ({
               deepLinkConfig={settings?.deepLink}
               setIsShowDeepLink={setIsShowDeepLink}
             />
-          ) : error && error.message !== "unauthorized" ? (
+          ) : error && error.message === "restore-backup" ? (
             <ErrorContainer
               headerText={t?.("Common:Error")}
               customizedBodyText={getErrorMessage()}
               isEditor
+            />
+          ) : error && error.message !== "unauthorized" ? (
+            <Error520SSR
+              i18nProp={i18n}
+              errorLog={error as Error}
+              version={pkgFile.version}
+              user={user ?? ({} as TUser)}
+              whiteLabelLogoUrls={logoUrls}
+              firebaseHelper={firebaseHelper}
+              currentDeviceType={currentDeviceType}
             />
           ) : isShowDeepLink ? null : (
             <div style={{ width: "100%", height: "100%" }}>

@@ -86,7 +86,7 @@ export default function template(
   // <script defer="defer" src="${assets["vendor.js"]}"></script>
   const page = `
     <!DOCTYPE html>
-      <html lang="en">
+      <html lang="en"  translate="no">
         <head>
           <meta charset="utf-8">
           <title> ${title} </title>
@@ -96,6 +96,7 @@ export default function template(
             content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
           />
           <meta name="theme-color" content="#000000" />
+          <meta name="google" content="notranslate" />
           <link rel="stylesheet" type="text/css" href="${fontsCssUrl}" />
           
           <link id="favicon" rel="shortcut icon" href="${faviconHref}" type="image/x-icon"/>

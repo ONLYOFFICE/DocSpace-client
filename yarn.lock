@@ -3183,6 +3183,29 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@docspace/login-next@workspace:packages/login-next":
+  version: 0.0.0-use.local
+  resolution: "@docspace/login-next@workspace:packages/login-next"
+  dependencies:
+    "@svgr/webpack": "npm:^8.1.0"
+    "@types/node": "npm:^20"
+    "@types/react": "npm:^18"
+    "@types/react-dom": "npm:^18"
+    eslint: "npm:^8"
+    eslint-config-next: "npm:14.0.4"
+    i18next: "npm:^20.6.1"
+    next: "npm:14.0.4"
+    prettier: "npm:^3.2.4"
+    react: "npm:^18.2.0"
+    react-dom: "npm:^18.2.0"
+    react-i18next: "npm:^13.2.1"
+    sass: "npm:^1.59.3"
+    shx: "npm:^0.3.4"
+    styled-components: "npm:^5.3.9"
+    typescript: "npm:^5"
+  languageName: unknown
+  linkType: soft
+
 "@docspace/login@workspace:packages/login":
   version: 0.0.0-use.local
   resolution: "@docspace/login@workspace:packages/login"

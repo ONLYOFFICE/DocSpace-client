@@ -1,0 +1,33 @@
+{
+  "name": "@docspace/login-next",
+  "version": "2.5.0",
+  "private": true,
+  "scripts": {
+    "build": "node ./scripts/buildTranslations.js && next build",
+    "start": "node ./scripts/buildTranslations.js && NODE_ENV=development node server.js",
+    "start-prod": "NODE_ENV=production node server.js",
+    "lint": "next lint",
+    "clean": "shx rm -rf .next",
+    "deploy": "shx --silent mkdir -p ../../../publish/web/editor && shx --silent mkdir -p ../../../publish/web/editor/.next && shx --silent mkdir -p ../../../publish/web/editor/config && shx cp -r config/* ../../../publish/web/editor/config && shx --silent mkdir -p ../../../publish/web/editor/node_modules && shx --silent mkdir -p ../../../publish/web/editor/.next/static && shx cp -r .next/standalone/node_modules/* ../../../publish/web/editor/node_modules && shx cp -r .next/static/* ../../../publish/web/editor/.next/static    && shx cp -r .next/standalone/packages/doceditor/.next/* ../../../publish/web/editor/.next &&  shx cp -f server.prod.js ../../../publish/web/editor/server.js"
+  },
+  "dependencies": {
+    "i18next": "^20.6.1",
+    "next": "14.0.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-i18next": "^13.2.1",
+    "sass": "^1.59.3",
+    "styled-components": "^5.3.9"
+  },
+  "devDependencies": {
+    "@svgr/webpack": "^8.1.0",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.4",
+    "prettier": "^3.2.4",
+    "shx": "^0.3.4",
+    "typescript": "^5"
+  }
+}

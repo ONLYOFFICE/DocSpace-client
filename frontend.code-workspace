@@ -13,6 +13,10 @@
       "path": "packages/login",
     },
     {
+      "name": "🔑 @docspace/login-next",
+      "path": "packages/login-next",
+    },
+    {
       "name": "📄 @docspace/doceditor",
       "path": "packages/doceditor",
     },

@@ -563,7 +563,7 @@ class FilesTableHeader extends React.Component {
     const sortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
     const sortOrder = isRooms ? roomsFilter.sortOrder : filter.sortOrder;
 
-    console.log("TableHeader isRooms", isRooms);
+    console.log("Table log TableHeader columnStorageName", columnStorageName);
 
     return (
       <TableHeader

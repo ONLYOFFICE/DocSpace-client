@@ -46,7 +46,7 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
   isConnect: props.isConnect,
 }))`
   font-family: ${(props) => props.theme.fontFamily};
-  border: none;
+
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -54,14 +54,19 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
   font-weight: ${(props) => props.theme.socialButton.fontWeight};
   text-decoration: ${(props) => props.theme.socialButton.textDecoration};
   padding: ${(props) => props.theme.socialButton.padding};
-  border-radius: ${(props) => props.theme.socialButton.borderRadius};
+
   width: ${(props) => props.theme.socialButton.width};
   height: ${(props) =>
     props.size === "base"
       ? props.theme.socialButton.height
       : props.theme.socialButton.heightSmall};
   text-align: ${(props) => props.theme.socialButton.textAlign};
-  border: ${(props) => props.theme.socialButton.border};
+  border: ${(props) =>
+    props.isConnect
+      ? props.theme.socialButton.borderConnect
+      : props.theme.socialButton.border};
+  border-radius: ${(props) => props.theme.socialButton.borderRadius};
+
   touch-callout: none;
   -o-touch-callout: none;
   -moz-touch-callout: none;
@@ -89,7 +94,6 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
             props.isConnect
               ? theme.socialButton.connectBackground
               : theme.socialButton.background};
-          box-shadow: ${(Cssprops) => Cssprops.theme.socialButton.boxShadow};
 
           ${() =>
             !props.noHover &&
@@ -97,8 +101,6 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
               :hover,
               :active {
                 cursor: pointer;
-                box-shadow: ${(cssProps) =>
-                  cssProps.theme.socialButton.boxShadow};
 
                 .social_button_text {
                   color: ${({ theme }) =>
@@ -111,17 +113,25 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
                   props.isConnect
                     ? theme.socialButton.hoverConnectBackground
                     : theme.socialButton.hoverBackground};
+
+                border: ${props.isConnect
+                  ? props.theme.socialButton.hoverConnectBorder
+                  : props.theme.socialButton.hoverBorder};
               }
 
               :active {
                 background: ${({ theme }) =>
-                  theme.socialButton.activeBackground};
-                border: none;
+                  props.isConnect
+                    ? theme.socialButton.activeConnectBackground
+                    : theme.socialButton.activeBackground};
+                border: ${props.isConnect
+                  ? props.theme.socialButton.activeConnectBorder
+                  : props.theme.socialButton.activeBorder};
               }
             `}
         `
       : css`
-          box-shadow: none;
+     
           background: ${({ theme }) =>
             theme.socialButton.disableBackgroundColor};
           color: ${({ theme }) => theme.socialButton.disableColor};

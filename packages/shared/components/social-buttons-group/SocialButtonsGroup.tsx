@@ -105,15 +105,11 @@ export const SocialButtonsGroup = memo(
           <div className="social-buttons-group">
             {elements}
             {length > 2 && (
-              <div className="show-more-button" onClick={moreAuthOpen}>
-                <IconButton
-                  size={20}
-                  onClick={moreAuthOpen}
-                  iconName={VerticalDotsReactSvgUrl}
-                  isFill
-                  isClickable={false}
-                />
-              </div>
+              <SocialButton
+                iconName={VerticalDotsReactSvgUrl}
+                onClick={moreAuthOpen}
+                className="show-more-button"
+              />
             )}
 
             <MoreLoginModal

@@ -312,23 +312,29 @@ const Dark: TTheme = {
     outline: "none",
     width: "100%",
 
+    border: "1px solid #474747",
     background: black,
-    disableBackgroundColor: "rgba(0, 0, 0, 0.08)",
+
+    borderConnect: "none",
     connectBackground:
       "linear-gradient(0deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)), #333333",
-    hoverBackground: "#292929",
-    hoverConnectBackground: "#FFFFFF",
-    activeBackground: "#292929",
-    hoverBorder: "#858585",
 
-    boxShadow: "none",
-    hoverBoxShadow: "none",
+    disableBackgroundColor: "rgba(0, 0, 0, 0.08)",
+
+    hoverBackground: black,
+    hoverBorder: "1px solid #858585",
+    hoverConnectBackground: "#FFFFFF",
+    hoverConnectBorder: "none",
+
+    activeBackground: "#282828",
+    activeBorder: "1px solid #CCCCCC",
+    activeConnectBackground: "rgba(255, 255, 255, 0.64)",
+    activeConnectBorder: "none",
 
     color: "rgba(0, 0, 0, 0.54)",
     disableColor: "rgba(0, 0, 0, 0.4)",
     disabledSvgColor: "#474747",
 
-    border: "1px solid #474747",
     text: {
       width: "100%",
       height: "18px",
@@ -353,10 +359,6 @@ const Dark: TTheme = {
       minHeight: "18px",
       fill: darkBlack,
     },
-  },
-
-  socialButtonsGroup: {
-    border: "1px solid #474747",
   },
 
   groupButton: {

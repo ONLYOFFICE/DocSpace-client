@@ -339,22 +339,28 @@ export const getBaseTheme = () => {
       outline: "none",
       width: "100%",
 
+      border: "1px solid #D0D5DA",
       background: white,
-      disableBackgroundColor: "#F8F9F9",
-      connectBackground: "#3B72A7",
-      hoverBackground: white,
-      hoverConnectBackground: "#265A8F",
-      activeBackground: "grayMaxLight",
-      hoverBorder: "#1877f2",
 
-      boxShadow:
-        "0px 1px 1px rgba(0, 0, 0, 0.24),0px 0px 1px rgba(0, 0, 0, 0.12)",
-      hoverBoxShadow: "none",
+      borderConnect: "none",
+      connectBackground: "#3B72A7",
+
+      disableBackgroundColor: "#F8F9F9",
+
+      hoverBackground: white,
+      hoverBorder: "1px solid #5299E0",
+      hoverConnectBackground: "#316DAA",
+      hoverConnectBorder: "none",
+
+      activeBorder: "1px solid #D0D5DA",
+      activeBackground: "#ECEEF1",
+      activeConnectBorder: "none",
+      activeConnectBackground: "#265A8F",
 
       color: "rgba(0, 0, 0, 0.54)",
       disableColor: "#333333",
       disabledSvgColor: "none",
-      border: "none",
+
       text: {
         width: "100%",
         height: "18px",
@@ -379,10 +385,6 @@ export const getBaseTheme = () => {
         minHeight: "18px",
         fill: white,
       },
-    },
-
-    socialButtonsGroup: {
-      border: "1px solid #D0D5DA",
     },
 
     groupButton: {

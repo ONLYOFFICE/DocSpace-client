@@ -114,7 +114,8 @@ const FileInputPure = ({
 
   const { iconSize, buttonSize } = getSize();
 
-  const onClickProp = fromStorage ? { onClick: rest.onClick } : {};
+  const onClickProp =
+    fromStorage && !isDisabled ? { onClick: rest.onClick } : {};
 
   return (
     <Dropzone onDrop={onDrop} noClick={isDisabled || isLoading} accept={accept}>

@@ -1011,6 +1011,8 @@ class SettingsStore {
   get isFrame() {
     const isFrame = this.frameConfig?.name === window.name;
     window.DocSpaceConfig.isFrame = isFrame;
+
+    console.log("Table log isFrame", isFrame);
     return isFrame;
   }
 
@@ -1067,6 +1069,8 @@ class SettingsStore {
       return domains;
     } catch (e) {
       toastr.error(e as TData);
+
+      throw e;
     }
   };
 

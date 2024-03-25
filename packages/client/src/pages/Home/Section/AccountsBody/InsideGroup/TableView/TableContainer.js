@@ -148,6 +148,7 @@ const Table = ({
   groupAccountsInsideGroupColumnIsEnabled,
   emailAccountsInsideGroupColumnIsEnabled,
 
+  insideGroupIsLoading,
   fetchMoreInsideGroupUsers,
   insideGroupFilterTotal,
   hasMoreInsideGroupUsers,
@@ -168,7 +169,9 @@ const Table = ({
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
-  return !!peopleList?.length ? (
+  console.log(peopleList);
+
+  return (
     <StyledTableContainer useReactWindow={!withPaging} forwardedRef={ref}>
       <TableHeader
         columnStorageName={columnStorageName}
@@ -217,8 +220,6 @@ const Table = ({
         ))}
       </TableBody>
     </StyledTableContainer>
-  ) : (
-    <EmptyScreen />
   );
 };
 
@@ -252,6 +253,7 @@ export default inject(
     } = tableStore;
 
     const {
+      insideGroupIsLoading,
       openGroupAction,
       insideGroupFilterTotal,
       hasMoreInsideGroupUsers,
@@ -276,6 +278,7 @@ export default inject(
       groupAccountsInsideGroupColumnIsEnabled,
       emailAccountsInsideGroupColumnIsEnabled,
 
+      insideGroupIsLoading,
       fetchMoreInsideGroupUsers,
       insideGroupFilterTotal,
       hasMoreInsideGroupUsers,

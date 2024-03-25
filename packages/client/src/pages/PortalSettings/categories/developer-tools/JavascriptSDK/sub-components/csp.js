@@ -87,6 +87,7 @@ const CSP = ({ t, cspDomains, getCSPSettings, setCSPSettings }) => {
   }, []);
 
   const [domain, changeDomain] = useState("");
+  const [error, setError] = useState(null);
 
   const onKeyPress = (e) => {
     if (e.key === "Enter" && !!domain.length) {
@@ -117,10 +118,12 @@ const CSP = ({ t, cspDomains, getCSPSettings, setCSPSettings }) => {
   const deleteDomain = (value) => {
     const domains = cspDomains.filter((item) => item !== value);
 
+    if (error) setError(null);
+
     setCSPSettings({ domains, setDefaultIfEmpty: true });
   };
 
-  const addDomain = () => {
+  const addDomain = async () => {
     const domainsSetting = [...cspDomains];
     const trimmedDomain = domain.trim();
     const domains = trimmedDomain.split(" ");
@@ -131,11 +134,17 @@ const CSP = ({ t, cspDomains, getCSPSettings, setCSPSettings }) => {
       domainsSetting.push(domain);
     });
 
-    setCSPSettings({ domains: domainsSetting });
-    changeDomain("");
+    try {
+      await setCSPSettings({ domains: domainsSetting });
+    } catch (error) {
+      setError(error?.response?.data?.error?.message);
+    } finally {
+      changeDomain("");
+    }
   };
 
   const onChangeDomain = (e) => {
+    if (error) setError(null);
     changeDomain(e.target.value);
   };
 
@@ -157,11 +166,15 @@ const CSP = ({ t, cspDomains, getCSPSettings, setCSPSettings }) => {
           value={domain}
           placeholder={t("CSPInputPlaceholder")}
           tabIndex={1}
+          hasError={error}
         />
         <SelectorAddButton isDisabled={!domain.trim()} onClick={addDomain} />
       </Container>
-      <Text lineHeight="20px" color="#A3A9AE">
-        {t("CSPUrlHelp")}
+      <Text
+        lineHeight="20px"
+        color={error ? theme?.input.focusErrorBorderColor : "#A3A9AE"}
+      >
+        {error ? error : t("CSPUrlHelp")}
       </Text>
       <ChipsContainer>{getChips(cspDomains)}</ChipsContainer>
     </>

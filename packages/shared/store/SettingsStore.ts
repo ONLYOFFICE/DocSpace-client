@@ -1069,6 +1069,8 @@ class SettingsStore {
       return domains;
     } catch (e) {
       toastr.error(e as TData);
+
+      throw e;
     }
   };
 

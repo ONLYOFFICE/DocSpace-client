@@ -491,7 +491,9 @@ export type TSelectorItem = TSelectorItemLogo &
     displayName?: string;
 
     isSelected?: boolean;
+
     isDisabled?: boolean;
+    disabledText?: string;
   };
 
 export type Data = {

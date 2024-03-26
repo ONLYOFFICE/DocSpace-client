@@ -213,7 +213,18 @@ const StyledItem = styled.div<{
   ${(props) =>
     props.isDisabled
       ? css`
-          opacity: 0.5;
+          .item-logo,
+          .user-avatar {
+            opacity: 0.5;
+          }
+
+          .label {
+            color: #a3a9ae;
+          }
+
+          .disabled-text {
+            text-align: end;
+          }
         `
       : css`
           ${props.isSelected && !props.isMultiSelect && selectedCss}

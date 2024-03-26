@@ -150,11 +150,14 @@ const Selector = ({
 
   const [requestRunning, setRequestRunning] = React.useState<boolean>(false);
 
-  const onSubmitAction = async (item?: TSelectorItem) => {
+  const onSubmitAction = async (
+    item?: TSelectorItem,
+    fromCallback?: boolean,
+  ) => {
     setRequestRunning(true);
 
     await onSubmit(
-      item ? [item] : newSelectedItems,
+      fromCallback && item ? [item] : newSelectedItems,
       selectedAccess,
       newFooterInputValue,
       isFooterCheckboxChecked,
@@ -169,7 +172,7 @@ const Selector = ({
         ...item,
       },
       isDoubleClick,
-      () => onSubmitAction(item),
+      () => onSubmitAction(item, true),
     );
 
     if (isMultiSelect) {

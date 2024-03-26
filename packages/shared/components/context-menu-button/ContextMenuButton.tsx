@@ -365,9 +365,10 @@ const compare = (
     prevProps.displayType === nextProps.displayType &&
     prevProps.isDisabled === nextProps.isDisabled
   ) {
-    return false;
+    return true;
   }
-  return true;
+
+  return false;
 };
 
 export const ContextMenuButton = React.memo(ContextMenuButtonPure, compare);

@@ -1,4 +1,4 @@
-{
+﻿{
   "AccentColor": "Akcent",
   "AccessRightsAccessToProduct": "Prístup do modulu {{product}} má",
   "AccessRightsAllUsers": "Všetci {{users}}",
@@ -76,7 +76,6 @@
   "DeleteTheme": "Vymazať tému",
   "DeleteThemeForever": "Chcete natrvalo vymazať tému?",
   "DeleteThemeNotice": "Téma bude natrvalo vymazaná. Túto akciu nebudete môcť vrátiť späť.",
-  "Disabled": "Vypnuté",
   "DNSSettings": "Nastavenia DNS",
   "DNSSettingsDescription": "Nastavenia DNS predstavujú spôsob, ako nastaviť alternatívnu adresu URL pre váš priestor.",
   "DNSSettingsMobile": "Pošlite svoju požiadavku nášmu tímu podpory a naši špecialisti vám pomôžu s nastavením.",

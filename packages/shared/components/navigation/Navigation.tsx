@@ -168,6 +168,7 @@ const Navigation = ({
     <div className="title-block">
       {titleIcon && <ReactSVG className="title-icon" src={titleIcon} />}
       <Text
+        className="title-block-text"
         title={title}
         isOpen={isOpen}
         isRootFolder={isRootFolder}

@@ -32,6 +32,7 @@ import { ArticleItem } from "@docspace/shared/components/article-item";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { useNavigate } from "react-router-dom";
 import GiftReactSvgUrl from "PUBLIC_DIR/images/gift.react.svg?url";
+import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 
 const PROXY_BASE_URL = combineUrl(
   window.DocSpaceConfig?.proxy?.url,
@@ -44,7 +45,9 @@ const BonusItem = ({ showText, toggleArticleOpen }) => {
 
   const navigate = useNavigate();
 
-  const onClick = React.useCallback(() => {
+  const onClick = React.useCallback((e) => {
+    if (openingNewTab(bonusUrl, e)) return;
+
     navigate(bonusUrl);
     toggleArticleOpen();
   }, []);

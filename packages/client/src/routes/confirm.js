@@ -137,7 +137,7 @@ const confirmRoutes = [
   {
     path: "PasswordChange",
     element: (
-      <ConfirmRoute doAuthenticated={AuthenticatedAction.Logout}>
+      <ConfirmRoute>
         <ChangePasswordForm />
       </ConfirmRoute>
     ),

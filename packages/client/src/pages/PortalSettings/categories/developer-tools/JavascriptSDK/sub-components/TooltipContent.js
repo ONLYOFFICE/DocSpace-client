@@ -55,6 +55,10 @@ const HeaderContainer = styled.header`
 
 const ImgWrapper = styled.div`
   margin-top: 16px;
+
+  img {
+    width: 100%;
+  }
 `;
 
 export const TooltipContent = ({ title, description, img }) => {

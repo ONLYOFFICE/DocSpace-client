@@ -35,11 +35,6 @@ const StyledSocialButtonsGroup = styled.div`
     margin-bottom: 8px;
   }
 
-  .social-button {
-    box-shadow: none;
-    border: ${(props) => props.theme.socialButtonsGroup.border};
-    border-radius: ${(props) => props.theme.socialButton.borderRadius};
-  }
   .social-buttons-group {
     display: flex;
     flex-direction: row;
@@ -53,15 +48,9 @@ const StyledSocialButtonsGroup = styled.div`
 
     .show-more-button {
       padding: 10px 16px;
-      border-radius: ${(props) => props.theme.socialButton.borderRadius};
-      border: ${(props) => props.theme.socialButtonsGroup.border};
-
       width: 52px;
-      height: 40px;
-      box-sizing: border-box;
-      cursor: pointer;
 
-      .icon-button_svg {
+      svg {
         transform: rotate(90deg);
       }
     }

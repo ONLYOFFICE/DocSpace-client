@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Haqqında",
   "AboutCompanyTitle": "Proqram haqqında",
   "AccessDenied": "Giriş qadağandır",
@@ -96,6 +96,7 @@
   "DenyAccess": "Girişə icazə vermə",
   "Description": "Təsvir",
   "DeveloperTools": "Tərtibatçı Alətləri",
+  "Disabled": "Deaktiv edildi",
   "Disconnect": "Bağlantını kəs",
   "DocSpaceAdmin": "DocSpace admini",
   "DocSpaceOwner": "DocSpace sahibi",
@@ -169,6 +170,7 @@
   "Info": "Məlumat",
   "InfoPanel": "Məlumat paneli",
   "Invite": "Dəvət edin",
+  "Invited": "Dəvət edildi",
   "InviteUsers": "İstifadəçiləri dəvət edin",
   "IpAddress": "IP ünvanı",
   "Kilobyte": "KB",

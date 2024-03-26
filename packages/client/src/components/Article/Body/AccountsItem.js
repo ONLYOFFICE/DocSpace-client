@@ -34,9 +34,12 @@ import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelpe
 import { ArticleItem } from "@docspace/shared/components/article-item";
 
 const PureAccountsItem = ({ showText, isActive, onClick, t }) => {
-  const onClickAction = React.useCallback(() => {
-    onClick && onClick("accounts");
-  }, [onClick]);
+  const onClickAction = React.useCallback(
+    (e, id) => {
+      onClick && onClick(e, "accounts");
+    },
+    [onClick],
+  );
 
   const icon = getCatalogIconUrlByType(PageType.account);
 

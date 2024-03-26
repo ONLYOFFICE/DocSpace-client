@@ -1,4 +1,4 @@
-{
+﻿{
   "AccentColor": "Ara değer",
   "AccessRightsAccessToProduct": "{{product}} modülüne erişim şu kişilere verildi:",
   "AccessRightsAllUsers": "Tüm {{users}}",
@@ -76,7 +76,6 @@
   "DeleteTheme": "Temayı sil",
   "DeleteThemeForever": "Tema sonsuza kadar silinsin mi?",
   "DeleteThemeNotice": "Tema kalıcı olarak silinecek. Bu işlemi geri alamazsınız.",
-  "Disabled": "Devre dışı bırakıldı",
   "DNSSettings": "DNS Ayarlar",
   "DNSSettingsDescription": "DNS Ayarları, alanınız için alternatif bir URL belirlemenin bir yoludur.",
   "DNSSettingsMobile": "İsteğinizi destek ekibimize gönderin, uzmanlarımız ayarlar konusunda size yardımcı olacaktır.",

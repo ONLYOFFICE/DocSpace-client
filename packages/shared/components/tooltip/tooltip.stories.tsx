@@ -30,14 +30,14 @@ import { Link } from "../link";
 import { Text } from "../text";
 import { Tooltip } from ".";
 
-import TooltipDocs from "./Tooltip.mdx";
+// import TooltipDocs from "./Tooltip.mdx";
 
 const meta = {
   title: "Components/Tooltip",
   component: Tooltip,
   parameters: {
     docs: {
-      page: TooltipDocs,
+      // page: TooltipDocs,
     },
     design: {
       type: "figma",

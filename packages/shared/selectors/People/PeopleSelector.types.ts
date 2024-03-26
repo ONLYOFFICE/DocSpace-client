@@ -48,10 +48,16 @@ export type PeopleSelectorProps = TSelectorHeader &
     style?: React.CSSProperties;
 
     filter?: PeopleFilter | Function;
-    excludeItems?: string[];
+
+    isMultiSelect?: boolean;
+
     currentUserId: string;
     withOutCurrentAuthorizedUser?: boolean;
     withAbilityCreateRoomUsers?: boolean;
-    withoutNotActivatedUsers?: boolean;
+
     filterUserId?: string;
+
+    excludeItems?: string[];
+    disableInvitedUsers?: string[];
+    disableDisabledUsers?: boolean;
   };

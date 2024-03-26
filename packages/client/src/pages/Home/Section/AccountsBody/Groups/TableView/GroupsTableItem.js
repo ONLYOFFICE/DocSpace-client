@@ -58,6 +58,7 @@ const GroupsTableItem = ({
   const isActive = bufferSelection?.id === item.id;
 
   const onChange = (e) => {
+    setBufferSelection(null);
     if (!isChecked) setSelection([...selection, item]);
     else setSelection(selection.filter((g) => g.id !== item.id));
   };
@@ -82,13 +83,13 @@ const GroupsTableItem = ({
     )
       return;
 
-    setBufferSelection(item);
-
     if (selection.length === 1 && selection[0].id === item.id) {
+      setBufferSelection(null);
       setSelection([]);
       return;
     }
 
+    setBufferSelection(item);
     setSelection([item]);
   };
 

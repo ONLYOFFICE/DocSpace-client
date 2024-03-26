@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Over",
   "AboutCompanyTitle": "Over dit programma",
   "AccessDenied": "Toegang geweigerd",
@@ -96,6 +96,7 @@
   "DenyAccess": "Toegang weigeren",
   "Description": "Beschrijving",
   "DeveloperTools": "Developer Tools",
+  "Disabled": "Uitgeschakeld",
   "Disconnect": "Loskoppelen",
   "DocSpaceAdmin": "DocSpace beheerder",
   "DocSpaceOwner": "DocSpace eigenaar",
@@ -169,6 +170,7 @@
   "Info": "Info",
   "InfoPanel": "Infopaneel",
   "Invite": "Uitnodigen",
+  "Invited": "Uitgenodigd",
   "InviteUsers": "Gebruikers uitnodigen",
   "IpAddress": "IP-adres",
   "Kilobyte": "KB",

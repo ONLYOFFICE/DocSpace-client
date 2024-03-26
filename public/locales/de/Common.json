@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Informationen",
   "AboutCompanyTitle": "Über diese Software",
   "AccessDenied": "Zugriff verweigert",
@@ -96,6 +96,7 @@
   "DenyAccess": "Zugriff verweigern",
   "Description": "Beschreibung",
   "DeveloperTools": "Entwicklungstools",
+  "Disabled": "Deaktiviert",
   "Disconnect": "Trennen Sie die Verbindung",
   "DocSpaceAdmin": "DocSpace-Verwaltung",
   "DocSpaceOwner": "DocSpace-Besitzer",
@@ -169,6 +170,7 @@
   "Info": "Informationen",
   "InfoPanel": "Info-Panel",
   "Invite": "Einladen",
+  "Invited": "Eingeladen",
   "InviteUsers": "Benutzer einladen",
   "IpAddress": "IP-Adresse",
   "Kilobyte": "KB",

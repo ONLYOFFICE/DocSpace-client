@@ -895,22 +895,21 @@ export const toUrlParams = (
 export function getObjectByLocation(location: Location) {
   if (!location.search || !location.search.length) return null;
 
-  const searchUrl = location.search.substring(1);
-  const decodedString = decodeURIComponent(searchUrl)
-    .replace(/\["/g, '["')
-    .replace(/"\]/g, '"]')
-    .replace(/"/g, '\\"')
-    .replace(/&/g, '","')
-    .replace(/=/g, '":"')
-    .replace(/\\/g, "\\\\")
-    .replace(/\[\\\\"/g, '["')
-    .replace(/\\\\"\]/g, '"]')
-    .replace(/"\[/g, "[")
-    .replace(/\]"/g, "]")
-    .replace(/\\\\",\\\\"/g, '","')
-    .replace(/\\\\\\\\"/g, '\\"');
-
   try {
+    const searchUrl = location.search.substring(1);
+    const decodedString = decodeURIComponent(searchUrl)
+      .replace(/\["/g, '["')
+      .replace(/"\]/g, '"]')
+      .replace(/"/g, '\\"')
+      .replace(/&/g, '","')
+      .replace(/=/g, '":"')
+      .replace(/\\/g, "\\\\")
+      .replace(/\[\\\\"/g, '["')
+      .replace(/\\\\"\]/g, '"]')
+      .replace(/"\[/g, "[")
+      .replace(/\]"/g, "]")
+      .replace(/\\\\",\\\\"/g, '","')
+      .replace(/\\\\\\\\"/g, '\\"');
     const object = JSON.parse(`{"${decodedString}"}`);
     return object;
   } catch (e) {

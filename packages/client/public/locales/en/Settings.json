@@ -1,4 +1,4 @@
-{
+﻿{
   "AboutDataImport": "Data import includes several steps: data upload, parcing, import configuration, and import. Your backup file will be stored in ONLYOFFICE DocSpace servers for 24 hours, and then it will be automatically deleted.",
   "AccentColor": "Accent",
   "AccessRightsAccessToProduct": "Access to {{product}} module is given to",
@@ -96,7 +96,6 @@
   "DeleteTheme": "Delete theme",
   "DeleteThemeForever": "Delete theme forever?",
   "DeleteThemeNotice": "The theme will be deleted permanently. You will not be able to undo this action.",
-  "Disabled": "Disabled",
   "DiskSpaceUsed": "Disk space used",
   "DNSSettings": "DNS Settings",
   "DNSSettingsDescription": "Set an alternative URL address for your space. Send your request to our support team to get help with the settings.",

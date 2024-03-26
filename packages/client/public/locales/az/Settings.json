@@ -1,4 +1,4 @@
-{
+﻿{
   "AccentColor": "Vurğu",
   "AccessRightsAccessToProduct": "{{product}} moduluna giriş hüququ verilmişdir",
   "AccessRightsAllUsers": "Bütün {{users}}",
@@ -76,7 +76,6 @@
   "DeleteTheme": "Temanı silin",
   "DeleteThemeForever": "Tema həmişəlik silinsin?",
   "DeleteThemeNotice": "Tema həmişəlik silinəcək. Bu əməliyyatı geri qaytara bilməzsiniz.",
-  "Disabled": "Deaktiv edildi",
   "DNSSettings": "DNS Parametrləri",
   "DNSSettingsDescription": "DNS Parametrləri domeniniz üçün alternativ URL ",
   "DNSSettingsMobile": "Sorğunuzu dəstək komandamıza göndərin və mütəxəssislərimiz sizə parametrlərdə kömək edəcəklər.",

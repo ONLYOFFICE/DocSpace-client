@@ -157,11 +157,18 @@ const AvatarPure = ({
     <Text fontSize="12px">{content}</Text>
   );
 
+  const onMouseDown = (e: React.MouseEvent) => {
+    if (e.button !== 1) return;
+
+    if (onClick) onClick(e);
+  };
+
   return (
     <StyledAvatar
       size={size}
       data-testid="avatar"
       className={className}
+      onMouseDown={onMouseDown}
       onClick={onClick}
     >
       <AvatarWrapper

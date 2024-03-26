@@ -24,6 +24,8 @@
   "CSPHelp": "This setting is a security mechanism that can be used to protect against content injection attacks. The CSP describes secure resource download sources. Downloading from resources not included in the `white list` is blocked. Specify the domains (together with the protocol) with which it will work.",
   "CSPInputPlaceholder": "Enter URL like this: https://example.com",
   "CSPUrlHelp": "Enter the DocSpace domain name without URL paths or additional characters.",
+  "CSPInfoBarHeader": "HTTPS required",
+  "CSPInfoBarDescription": "Please enable the HTTPS protocol for your DocSpace to ensure the correct setup work.",
   "CustomDescription": "Manually configure the parameters for embedding your DocSpace.",
   "CustomizingDisplay": "Customizing the display",
   "DataDisplay": "Data display settings",

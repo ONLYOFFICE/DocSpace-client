@@ -191,7 +191,6 @@ const Table = ({
   }, [isRooms]);
 
   const filesListNode = useMemo(() => {
-    console.log("TableContainer isRooms", isRooms);
     return filesList.map((item, index) => (
       <TableRow
         id={`${item?.isFolder ? "folder" : "file"}_${item.id}`}
@@ -225,6 +224,8 @@ const Table = ({
     highlightFile.isExst,
     isTrashFolder,
   ]);
+
+  console.log("Table log TableContainer columnStorageName", columnStorageName);
 
   return (
     <StyledTableContainer useReactWindow={!withPaging} forwardedRef={ref}>

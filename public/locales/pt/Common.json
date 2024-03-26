@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Sobre",
   "AboutCompanyTitle": "Sobre este programa",
   "AccessDenied": "Acesso negado",
@@ -96,6 +96,7 @@
   "DenyAccess": "Negar acesso",
   "Description": "Descrição",
   "DeveloperTools": "Ferramentas de Desenvolvedor",
+  "Disabled": "Desativado",
   "Disconnect": "Desligar",
   "DocSpaceAdmin": "Administrador do DocSpace",
   "DocSpaceOwner": "Proprietário do DocSpace ",
@@ -169,6 +170,7 @@
   "Info": "Informação",
   "InfoPanel": "Painel de informação",
   "Invite": "Convidar",
+  "Invited": "Convidados",
   "InviteUsers": "Convidar utilizadores",
   "IpAddress": "Endereço de IP",
   "Kilobyte": "KB",

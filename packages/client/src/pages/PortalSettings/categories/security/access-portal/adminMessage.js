@@ -179,7 +179,7 @@ const AdminMessage = (props) => {
         options={[
           {
             id: "admin-message-disabled",
-            label: t("Disabled"),
+            label: t("Common:Disabled"),
             value: "disabled",
           },
           {

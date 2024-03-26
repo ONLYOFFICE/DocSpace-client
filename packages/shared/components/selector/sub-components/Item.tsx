@@ -89,6 +89,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       color,
       email,
       isGroup,
+      disabledText,
     } = item;
 
     const showPlanetIcon =
@@ -144,10 +145,12 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
             title={label}
             showDefault
             badgeUrl={badgeUrl ?? ""}
+            className="item-logo"
           />
         ) : icon ? (
           <RoomIcon
             title={label}
+            className="item-logo"
             imgClassName="room-logo"
             imgSrc={icon}
             showDefault={false}
@@ -158,7 +161,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
           renderCustomItem(label, typeLabel, email, isGroup)
         ) : (
           <Text
-            className="label"
+            className="label label-disabled"
             fontWeight={600}
             fontSize="14px"
             noSelect
@@ -169,12 +172,25 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
           </Text>
         )}
 
-        {isMultiSelect && (
-          <Checkbox
-            className="checkbox"
-            isChecked={isSelected}
-            onChange={onChangeAction}
-          />
+        {isDisabled && disabledText ? (
+          <Text
+            className="label disabled-text"
+            fontWeight={600}
+            fontSize="13px"
+            lineHeight="20px"
+            noSelect
+          >
+            {disabledText}
+          </Text>
+        ) : (
+          isMultiSelect && (
+            <Checkbox
+              className="checkbox"
+              isChecked={isSelected}
+              isDisabled={isDisabled}
+              onChange={onChangeAction}
+            />
+          )
         )}
       </StyledItem>
     );

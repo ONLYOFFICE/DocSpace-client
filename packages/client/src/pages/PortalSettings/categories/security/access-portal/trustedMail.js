@@ -218,7 +218,7 @@ const TrustedMail = (props) => {
         options={[
           {
             id: "trusted-mail-disabled",
-            label: t("Disabled"),
+            label: t("Common:Disabled"),
             value: "0",
           },
           {

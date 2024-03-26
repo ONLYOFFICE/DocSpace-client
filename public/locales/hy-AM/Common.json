@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Մասին",
   "AboutCompanyTitle": "Ծրագրի մասին",
   "AccessDenied": "Մուտքն արգելված է",
@@ -96,6 +96,7 @@
   "DenyAccess": "Մերժել մատչումը",
   "Description": "Նկարագրություն",
   "DeveloperTools": "Մշակողի գործիքներ",
+  "Disabled": "Անջատված է",
   "Disconnect": "Ապակապակցել",
   "DocSpaceAdmin": "DocSpace-ի ադմինիստրատոր",
   "DocSpaceOwner": "DocSpace-ի տնօրինող",
@@ -169,6 +170,7 @@
   "Info": "Տեղեկություններ",
   "InfoPanel": "Տեղեկատվական վահանակ",
   "Invite": "Հրավիրել",
+  "Invited": "Հրավիրված",
   "InviteUsers": "Հրավիրեք օգտվողներին",
   "IpAddress": "IP հասցե",
   "Kilobyte": "ԿԲ",

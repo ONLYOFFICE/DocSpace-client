@@ -1,4 +1,4 @@
-{
+﻿{
   "AccentColor": "强调",
   "AccessRightsAccessToProduct": "对于{{product}}的访问权限已授予",
   "AccessRightsAllUsers": "所有{{users}}",
@@ -76,7 +76,6 @@
   "DeleteTheme": "删除主题",
   "DeleteThemeForever": "永久性删除主题？",
   "DeleteThemeNotice": "主题将被永久删除。您将无法撤销此操作。",
-  "Disabled": "已禁用",
   "DNSSettings": "DNS 设置",
   "DNSSettingsDescription": "DNS 设置是一种为空间设置替代 URL 的方式。",
   "DNSSettingsMobile": "您可向我们的支持团队发送请求，我们将有专员帮助您进行设置。",

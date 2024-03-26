@@ -84,6 +84,8 @@ const SelectGroupMembersPanel = ({
           withAccessRights={false}
           isEncrypted
           defaultAccess={ShareAccessRights.FullAccess}
+          withoutBackground
+          withBlur={false}
         />
       }
     />

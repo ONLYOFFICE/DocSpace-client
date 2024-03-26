@@ -28,6 +28,10 @@
 
 const path = require("path");
 const pkg = require("./package.json");
+const BannerPlugin = require("webpack").BannerPlugin;
+const TerserPlugin = require("terser-webpack-plugin");
+
+const version = pkg.version;
 
 const nextConfig = {
   basePath: "/doceditor",
@@ -56,8 +60,52 @@ const nextConfig = {
   },
 };
 
+const getBuildDate = () => {
+  const timeElapsed = Date.now();
+  const today = new Date(timeElapsed);
+  return JSON.stringify(today.toISOString().split(".")[0] + "Z");
+};
+
+const getBuildYear = () => {
+  const timeElapsed = Date.now();
+  const today = new Date(timeElapsed);
+  return today.getFullYear();
+};
+
 module.exports = {
   webpack(config) {
+    config.devtool = "source-map";
+
+    if (config.mode === "production") {
+      config.optimization = {
+        splitChunks: { chunks: "all" },
+        minimize: true,
+        minimizer: [
+          new TerserPlugin({
+            terserOptions: {
+              format: {
+                comments: /\*\s*\(c\)\s+Copyright\s+Ascensio\s+System\s+SIA/i,
+              },
+            },
+            extractComments: false,
+          }),
+        ],
+      };
+
+      config.plugins.push(
+        new BannerPlugin({
+          raw: true,
+          banner: `/*
+* (c) Copyright Ascensio System SIA 2009-${getBuildYear()}. All rights reserved
+*
+* https://www.onlyoffice.com/
+*
+* Version: ${version} (build: ${getBuildDate()})
+*/`,
+        }),
+      );
+    }
+
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>
       rule.test?.test?.(".svg"),

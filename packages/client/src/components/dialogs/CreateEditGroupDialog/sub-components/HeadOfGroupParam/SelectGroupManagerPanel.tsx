@@ -59,8 +59,10 @@ const SelectGroupManagerPanel = ({
           onParentPanelClose={onParentPanelClose}
           setDataItems={onSelectGroupManager}
           accessOptions={accessOptions}
-          isEncrypted={true}
+          isEncrypted
           defaultAccess={ShareAccessRights.FullAccess}
+          withoutBackground
+          withBlur={false}
         />
       }
     />

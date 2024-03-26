@@ -48,6 +48,7 @@ import { getUserList } from "../../api/people";
 import { TUser } from "../../api/people/types";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 import { AvatarRole } from "../../components/avatar";
+import { Text } from "../../components/text";
 
 import { PeopleSelectorProps } from "./PeopleSelector.types";
 
@@ -329,11 +330,49 @@ const PeopleSelector = ({
       }
     : {};
 
+  const renderCustomItem = (
+    label: string,
+    userType?: string,
+    email?: string,
+    isGroup?: boolean,
+  ) => {
+    return (
+      <div style={{ width: "100%" }}>
+        <Text
+          className="label"
+          fontWeight={600}
+          fontSize="14px"
+          noSelect
+          truncate
+          dir="auto"
+        >
+          {label}
+        </Text>
+        {!isGroup && (
+          <div style={{ display: "flex" }}>
+            <Text
+              className="label"
+              fontWeight={400}
+              fontSize="12px"
+              noSelect
+              truncate
+              color="#A3A9AE"
+              dir="auto"
+            >
+              {`${userType} | ${email}`}
+            </Text>
+          </div>
+        )}
+      </div>
+    );
+  };
+
   return (
     <Selector
       id={id}
       className={className}
       style={style}
+      renderCustomItem={renderCustomItem}
       {...headerSelectorProps}
       {...searchSelectorProps}
       {...checkboxSelectorProps}

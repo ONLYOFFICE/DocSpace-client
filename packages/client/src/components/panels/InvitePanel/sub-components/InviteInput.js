@@ -290,6 +290,8 @@ const InviteInput = ({
   };
 
   const addEmail = () => {
+    if (!inputValue.trim()) return;
+
     const items = toUserItems(inputValue);
 
     const newItems =

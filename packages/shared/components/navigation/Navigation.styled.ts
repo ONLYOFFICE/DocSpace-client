@@ -645,6 +645,14 @@ const StyledBox = styled.div<{
     grid-template-columns: minmax(1px, max-content) auto;
   }
 
+  .title-block-text {
+    margin-top: 1px;
+
+    @media ${tablet} {
+      margin: 0;
+    }
+  }
+
   @media ${tablet} {
     width: ${({ dropBoxWidth }) => `${dropBoxWidth}px`};
     ${(props) =>

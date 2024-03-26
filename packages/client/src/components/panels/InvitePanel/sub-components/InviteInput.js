@@ -413,8 +413,6 @@ const InviteInput = ({
     [inviteItems],
   );
 
-  console.log(inviteItems);
-
   return (
     <>
       <StyledSubHeader>

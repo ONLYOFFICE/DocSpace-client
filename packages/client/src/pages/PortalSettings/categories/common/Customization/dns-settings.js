@@ -87,7 +87,6 @@ const DNSSettings = (props) => {
     isDefaultDNS,
     dnsSettingsUrl,
     currentDeviceType,
-    portalName,
   } = props;
   const [hasScroll, setHasScroll] = useState(false);
   const isLoadedSetting = isLoaded && tReady;
@@ -159,15 +158,13 @@ const DNSSettings = (props) => {
     setErrorText("");
 
     const { value } = e.target;
-    const dns =
-      portalName && !isDefaultDNS ? value.slice(portalName.length + 1) : value;
 
-    const isValidDomain = parseDomain(dns || "", setErrorText, t);
+    const isValidDomain = parseDomain(value || "", setErrorText, t);
 
     if (!isValidDomain) {
       setIsError(true);
     }
-    setDNSName(dns);
+    setDNSName(value);
   };
   const checkInnerWidth = useCallback(() => {
     if (!isMobile()) {
@@ -188,7 +185,7 @@ const DNSSettings = (props) => {
     }
   }, [isMobile, setIsCustomizationView]);
 
-  const domainExampleText = " team.ourcompany.com";
+  const domainExampleText = " ourcompany.com";
 
   const settingsBlock = (
     <div className="settings-block">
@@ -205,11 +202,7 @@ const DNSSettings = (props) => {
           <TextInput
             {...textInputProps}
             isDisabled={isLoading || !enable}
-            value={
-              portalName && !isDefaultDNS
-                ? `${portalName}.${dnsName?.trim()}`
-                : dnsName?.trim()
-            }
+            value={dnsName?.trim()}
             onChange={onChangeTextInput}
             hasError={isError}
           />
@@ -265,7 +258,7 @@ const DNSSettings = (props) => {
       size={currentDeviceType === DeviceType.desktop ? "small" : "normal"}
       label={t("Common:SaveButton")}
       onClick={onSaveSettings}
-      isDisabled={isLoading || isDefaultDNS || isError}
+      isDisabled={isLoading || isDefaultDNS || isError || !dnsName}
       isLoading={isLoading}
     />
   ) : (
@@ -339,7 +332,6 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     setDNSName,
     saveDNSSettings,
     isDefaultDNS,
-    portalName,
   } = common;
 
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
@@ -363,6 +355,5 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     saveDNSSettings,
     dnsSettingsUrl,
     currentDeviceType,
-    portalName,
   };
 })(withLoading(withTranslation(["Settings", "Common"])(observer(DNSSettings))));

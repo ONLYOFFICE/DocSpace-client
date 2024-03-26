@@ -227,7 +227,8 @@ const DataReassignmentDialog = ({
             }}
             onBackClick={onTogglePeopleSelector}
             withAbilityCreateRoomUsers
-            withHeader={true}
+            withHeader
+            disableDisabledUsers
           />
         </ModalDialog.Container>
       </StyledModalDialog>

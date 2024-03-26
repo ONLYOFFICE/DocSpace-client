@@ -1,4 +1,4 @@
-{
+﻿{
   "AccentColor": "ສຳນຽງ",
   "AccessRightsAccessToProduct": "ການເຂົ້າເຖິງໂມດູນ {{product}} ທີ່ມອບໃຫ້",
   "AccessRightsAllUsers": "{{users}} ທັງຫມົດ",
@@ -65,7 +65,6 @@
   "DeleteTheme": "ລຶບຮູບແບບສີສັນ",
   "DeleteThemeForever": "ລຶບຮູບແບບສີສັນຖາວອນບໍ?",
   "DeleteThemeNotice": "Το θέμα θα διαγραφεί οριστικά. Δεν θα μπορείτε να αναιρέσετε αυτήν την ενέργεια.",
-  "Disabled": "ປິດສິດ",
   "DNSSettings": "ການຕັ້ງຄ່າ DNS",
   "DNSSettingsDescription": "ການຕັ້ງຄ່າ DNS ແມ່ນວິທີທີ່ຈະຕັ້ງ URL ທາງເລືອກສໍາລັບພື້ນທີ່ຂອງທ່ານ.",
   "DNSSettingsMobile": "ສົ່ງຄໍາຮ້ອງຂໍຂອງທ່ານໄປຫາທີມງານສະຫນັບສະຫນູນຂອງພວກເຮົາ, ແລະຜູ້ຊ່ຽວຊານຂອງພວກເຮົາຈະຊ່ວຍທ່ານໃນການຕັ້ງຄ່າ.",

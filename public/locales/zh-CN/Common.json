@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "关于",
   "AboutCompanyTitle": "关于本计划",
   "AccessDenied": "拒绝访问",
@@ -96,6 +96,7 @@
   "DenyAccess": "拒绝访问",
   "Description": "说明",
   "DeveloperTools": "开发人员工具",
+  "Disabled": "已禁用",
   "Disconnect": "断开连接",
   "DocSpaceAdmin": "协作空间管理员",
   "DocSpaceOwner": "协作空间所有者",
@@ -169,6 +170,7 @@
   "Info": "信息",
   "InfoPanel": "信息面板",
   "Invite": "邀请",
+  "Invited": "已邀请",
   "InviteUsers": "邀请用户",
   "IpAddress": "IP 地址",
   "Kilobyte": "KB",

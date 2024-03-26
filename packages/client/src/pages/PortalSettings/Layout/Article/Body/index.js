@@ -33,6 +33,7 @@ import { DeviceType } from "@docspace/shared/enums";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 
 import { isArrayEqual } from "@docspace/shared/utils";
+import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 
@@ -168,21 +169,22 @@ const ArticleBodyContent = (props) => {
     selectedKeys,
   ]);
 
-  const onSelect = (value) => {
+  const onSelect = (value, e) => {
     if (isArrayEqual([value], selectedKeys)) {
       return;
-    }
-
-    // setSelectedKeys([value + "-0"]);
-
-    if (currentDeviceType === DeviceType.mobile) {
-      toggleArticleOpen();
     }
 
     const settingsPath = `/portal-settings${getSelectedLinkByKey(
       value + "-0",
       settingsTree,
     )}`;
+
+    if (openingNewTab(settingsPath, e)) return;
+    // setSelectedKeys([value + "-0"]);
+
+    if (currentDeviceType === DeviceType.mobile) {
+      toggleArticleOpen();
+    }
 
     if (settingsPath === location.pathname) return;
 
@@ -298,7 +300,7 @@ const ArticleBodyContent = (props) => {
           text={mapKeys(item.tKey)}
           value={item.link}
           isActive={item.key === selectedKeys[0][0]}
-          onClick={() => onSelect(item.key)}
+          onClick={(e) => onSelect(item.key, e)}
           folderId={item.id}
           style={{
             marginTop: `${item.key.includes(9) ? "16px" : "0"}`,

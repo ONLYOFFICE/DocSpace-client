@@ -1,4 +1,4 @@
-{
+﻿{
   "AccentColor": "アクセント",
   "AccessRightsAccessToProduct": "{{product}} モジュールへのアクセス権は",
   "AccessRightsAllUsers": "すべて {{users}}",
@@ -76,7 +76,6 @@
   "DeleteTheme": "テーマを解除する",
   "DeleteThemeForever": "このテーマを永遠に解除しますか？",
   "DeleteThemeNotice": "このテーマは永久に削除されます。このアクションを元に戻すことはできません。",
-  "Disabled": "無効",
   "DNSSettings": "DNS設定",
   "DNSSettingsDescription": "DNS設定は、自分のスペースの代替URLを設定する方法です。",
   "DNSSettingsMobile": "弊社サポートチームまでご連絡いただければ、専門スタッフが設定をお手伝いさせていただきます。",

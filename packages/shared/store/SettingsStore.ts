@@ -54,12 +54,14 @@ import {
   getShowText,
   isPublicRoom,
   insertTagManager,
+  isManagement,
 } from "../utils/common";
 import { setCookie, getCookie } from "../utils/cookie";
 import { combineUrl } from "../utils/combineUrl";
 import FirebaseHelper from "../utils/firebase";
 import SocketIOHelper from "../utils/socket";
 import { TWhiteLabel } from "../utils/whiteLabelHelper";
+
 import { ThemeKeys, TenantStatus, DeviceType, UrlActionType } from "../enums";
 import {
   LANGUAGE,
@@ -469,6 +471,10 @@ class SettingsStore {
     return `${this.helpLink}/userguides/docspace-managing-users.aspx`;
   }
 
+  get installationGuidesUrl() {
+    return `${this.helpLink}/installation/docspace-enterprise-index.aspx`;
+  }
+
   get sdkLink() {
     return `${this.apiDocsLink}/docspace/jssdk/`;
   }
@@ -722,7 +728,7 @@ class SettingsStore {
   };
 
   getWhiteLabelLogoUrls = async () => {
-    const res = await api.settings.getLogoUrls();
+    const res = await api.settings.getLogoUrls(null, isManagement());
 
     this.setLogoUrls(Object.values(res));
     this.setLogoUrl(Object.values(res));
@@ -1011,6 +1017,8 @@ class SettingsStore {
   get isFrame() {
     const isFrame = this.frameConfig?.name === window.name;
     window.DocSpaceConfig.isFrame = isFrame;
+
+    console.log("Table log isFrame", isFrame);
     return isFrame;
   }
 
@@ -1067,6 +1075,8 @@ class SettingsStore {
       return domains;
     } catch (e) {
       toastr.error(e as TData);
+
+      throw e;
     }
   };
 

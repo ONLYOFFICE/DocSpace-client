@@ -1,4 +1,4 @@
-{
+﻿{
   "AccentColor": "Акцентний колір",
   "AccessRightsAccessToProduct": "Доступ до модуля {{product}} надано",
   "AccessRightsAllUsers": "Усі {{users}}",
@@ -76,7 +76,6 @@
   "DeleteTheme": "Видалити тему",
   "DeleteThemeForever": "Видалити тему назавжди?",
   "DeleteThemeNotice": "Тему буде видалено назавжди. Ви не зможете скасувати цю дію.",
-  "Disabled": "Вимкнено",
   "DNSSettings": "Параметри DNS",
   "DNSSettingsDescription": "Параметри DNS — це спосіб установити альтернативну URL-адресу для вашого простору.",
   "DNSSettingsMobile": "Надішліть запит до нашої служби підтримки, і наші спеціалісти допоможуть вам із параметрами.",

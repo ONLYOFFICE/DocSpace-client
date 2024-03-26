@@ -86,6 +86,7 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
+import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 
 class FilesActionStore {
   settingsStore;
@@ -2279,7 +2280,7 @@ class FilesActionStore {
 
   onMarkAsRead = (item) => this.markAsRead([], [`${item.id}`], item);
 
-  openFileAction = (item, t) => {
+  openFileAction = (item, t, e) => {
     const { openDocEditor, isPrivacyFolder, setSelection } = this.filesStore;
     const { currentDeviceType } = this.settingsStore;
     const { fileItemsList } = this.pluginStore;
@@ -2324,8 +2325,6 @@ class FilesActionStore {
     if (isFolder) {
       const { isRoom, rootFolderType, title, roomType: itemRoomType } = item;
 
-      setIsLoading(true);
-
       const path = getCategoryUrl(
         getCategoryTypeByFolderType(rootFolderType, id),
         id,
@@ -2333,6 +2332,12 @@ class FilesActionStore {
 
       const filter = FilesFilter.getDefault();
       filter.folder = id;
+
+      const url = `${path}?${filter.toUrlParams()}`;
+
+      if (openingNewTab(url, e)) return;
+
+      setIsLoading(true);
 
       const state = {
         title,
@@ -2345,7 +2350,7 @@ class FilesActionStore {
 
       setSelection([]);
 
-      window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`, { state });
+      window.DocSpace.navigate(url, { state });
     } else {
       if (canConvert) {
         setConvertItem({ ...item, isOpen: true });

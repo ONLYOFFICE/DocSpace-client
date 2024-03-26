@@ -150,10 +150,14 @@ const Selector = ({
 
   const [requestRunning, setRequestRunning] = React.useState<boolean>(false);
 
-  const onSubmitAction = async () => {
+  const onSubmitAction = async (
+    item?: TSelectorItem,
+    fromCallback?: boolean,
+  ) => {
     setRequestRunning(true);
+
     await onSubmit(
-      newSelectedItems,
+      fromCallback && item ? [item] : newSelectedItems,
       selectedAccess,
       newFooterInputValue,
       isFooterCheckboxChecked,
@@ -168,7 +172,7 @@ const Selector = ({
         ...item,
       },
       isDoubleClick,
-      onSubmitAction,
+      () => onSubmitAction(item, true),
     );
 
     if (isMultiSelect) {
@@ -232,7 +236,7 @@ const Selector = ({
         return [...newValue];
       });
 
-      if (item.isSelected) {
+      if (item.isSelected && !isDoubleClick) {
         setNewSelectedItems([]);
       } else {
         setNewSelectedItems([item]);
@@ -253,12 +257,14 @@ const Selector = ({
           newSelectedItems.length !== items.length;
 
     if (query) {
-      const cloneItems = items.map((x) => ({ ...x }));
+      const cloneItems = items
+        .map((x) => ({ ...x }))
+        .filter((x) => !x.isDisabled);
 
       setRenderedItems((i) => {
         const cloneRenderedItems = i.map((x) => ({
           ...x,
-          isSelected: true,
+          isSelected: !x.isDisabled,
         }));
 
         return cloneRenderedItems;

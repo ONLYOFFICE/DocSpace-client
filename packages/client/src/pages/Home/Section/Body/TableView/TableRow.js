@@ -75,8 +75,6 @@ const FilesTableRow = (props) => {
   } = props;
   const { acceptBackground, background } = theme.dragAndDrop;
 
-  console.log("TableRow isRooms", isRooms);
-
   const element = (
     <ItemIcon
       id={item.id}

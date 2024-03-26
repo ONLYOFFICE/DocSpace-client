@@ -1,4 +1,4 @@
-{
+﻿{
   "AccentColor": "강조 ",
   "AccessRightsAccessToProduct": "{{product}} 모듈에 대한 액세스 부여:",
   "AccessRightsAllUsers": "전체 {{users}}",
@@ -76,7 +76,6 @@
   "DeleteTheme": "테마 삭제",
   "DeleteThemeForever": "테마를 영구히 삭제하시겠습니까?",
   "DeleteThemeNotice": "테마가 영구적으로 삭제됩니다. 그리고 이 작업은 취소할 수 없습니다.",
-  "Disabled": "비활성화",
   "DNSSettings": "DNS 설정",
   "DNSSettingsDescription": "DNS 설정은 스페이스에 대한 대체 URL을 설정하는 방법입니다.",
   "DNSSettingsMobile": "지원팀에 요청을 보내면 저희측 전문가가 설정을 도와드릴 것입니다.",

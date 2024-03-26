@@ -40,7 +40,7 @@ import {
   TSelectorItem,
   TSelectorSearch,
 } from "../../components/selector/Selector.types";
-import { EmployeeActivationStatus, EmployeeStatus } from "../../enums";
+import { EmployeeStatus } from "../../enums";
 import { TTranslation } from "../../types";
 import { getUserRole } from "../../utils/common";
 import Filter from "../../api/people/filter";
@@ -48,10 +48,16 @@ import { getUserList } from "../../api/people";
 import { TUser } from "../../api/people/types";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 import { AvatarRole } from "../../components/avatar";
+import { Text } from "../../components/text";
 
 import { PeopleSelectorProps } from "./PeopleSelector.types";
 
-const toListItem = (item: TUser) => {
+const toListItem = (
+  item: TUser,
+  t: TTranslation,
+  disableDisabledUsers?: boolean,
+  disableInvitedUsers?: string[],
+) => {
   const {
     id: userId,
     email,
@@ -62,11 +68,21 @@ const toListItem = (item: TUser) => {
     isAdmin,
     isVisitor,
     isCollaborator,
+    status,
   } = item;
 
   const role = getUserRole(item);
 
   const userAvatar = hasAvatar ? avatar : DefaultUserPhoto;
+
+  const isInvited = disableInvitedUsers?.includes(userId);
+  const isDisabled = disableDisabledUsers && status === EmployeeStatus.Disabled;
+
+  const disabledText = isDisabled
+    ? t("Common:Disabled")
+    : isInvited
+      ? t("Common:Invited")
+      : "";
 
   const i = {
     id: userId,
@@ -79,6 +95,8 @@ const toListItem = (item: TUser) => {
     isVisitor,
     isCollaborator,
     hasAvatar,
+    isDisabled: isInvited || isDisabled,
+    disabledText,
   } as TSelectorItem;
 
   return i;
@@ -102,7 +120,7 @@ const PeopleSelector = ({
   excludeItems,
   currentUserId,
   withOutCurrentAuthorizedUser,
-  withoutNotActivatedUsers,
+
   withAbilityCreateRoomUsers,
   filterUserId,
 
@@ -113,6 +131,10 @@ const PeopleSelector = ({
 
   withHeader,
   headerProps,
+
+  disableDisabledUsers,
+  disableInvitedUsers,
+  isMultiSelect,
 }: PeopleSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
@@ -179,9 +201,6 @@ const PeopleSelector = ({
       currentFilter.page = startIndex / pageCount;
       currentFilter.pageCount = pageCount;
 
-      if (withoutNotActivatedUsers)
-        currentFilter.activationStatus = `${EmployeeActivationStatus.NotActivated}`;
-
       currentFilter.search = searchValue || null;
 
       const response = await getUserList(currentFilter);
@@ -191,11 +210,10 @@ const PeopleSelector = ({
       const data = response.items
         .filter((item) => {
           const excludeUser =
-            (!!withAbilityCreateRoomUsers &&
-              !item.isAdmin &&
-              !item.isOwner &&
-              !item.isRoomAdmin) ||
-            item.status === EmployeeStatus.Disabled;
+            withAbilityCreateRoomUsers &&
+            !item.isAdmin &&
+            !item.isOwner &&
+            !item.isRoomAdmin;
 
           if ((excludeItems && excludeItems.includes(item.id)) || excludeUser) {
             totalDifferent += 1;
@@ -203,7 +221,9 @@ const PeopleSelector = ({
           }
           return true;
         })
-        .map((item) => toListItem(item));
+        .map((item) =>
+          toListItem(item, t, disableDisabledUsers, disableInvitedUsers),
+        );
 
       const newTotal = withOutCurrentAuthorizedUser
         ? response.total - totalDifferent - 1
@@ -237,14 +257,16 @@ const PeopleSelector = ({
       isFirstLoad.current = false;
     },
     [
+      disableDisabledUsers,
+      disableInvitedUsers,
       excludeItems,
       filter,
       moveCurrentUserToTopOfList,
       removeCurrentUserFromList,
       searchValue,
+      t,
       withAbilityCreateRoomUsers,
       withOutCurrentAuthorizedUser,
-      withoutNotActivatedUsers,
     ],
   );
 
@@ -308,11 +330,49 @@ const PeopleSelector = ({
       }
     : {};
 
+  const renderCustomItem = (
+    label: string,
+    userType?: string,
+    email?: string,
+    isGroup?: boolean,
+  ) => {
+    return (
+      <div style={{ width: "100%" }}>
+        <Text
+          className="label"
+          fontWeight={600}
+          fontSize="14px"
+          noSelect
+          truncate
+          dir="auto"
+        >
+          {label}
+        </Text>
+        {!isGroup && (
+          <div style={{ display: "flex" }}>
+            <Text
+              className="label"
+              fontWeight={400}
+              fontSize="12px"
+              noSelect
+              truncate
+              color="#A3A9AE"
+              dir="auto"
+            >
+              {`${userType} | ${email}`}
+            </Text>
+          </div>
+        )}
+      </div>
+    );
+  };
+
   return (
     <Selector
       id={id}
       className={className}
       style={style}
+      renderCustomItem={renderCustomItem}
       {...headerSelectorProps}
       {...searchSelectorProps}
       {...checkboxSelectorProps}
@@ -331,7 +391,7 @@ const PeopleSelector = ({
       hasNextPage={hasNextPage}
       isNextPageLoading={isNextPageLoading}
       loadNextPage={loadNextPage}
-      isMultiSelect={false}
+      isMultiSelect={isMultiSelect ?? false}
       totalItems={total}
       isLoading={isFirstLoad.current}
       searchLoader={<SearchLoader />}

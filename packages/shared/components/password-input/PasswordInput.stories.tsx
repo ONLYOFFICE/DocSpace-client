@@ -32,7 +32,7 @@ import { InputSize, InputType, TextInput } from "../text-input";
 
 import { PasswordInput } from "./PasswordInput";
 
-import PasswordInputDocs from "./PasswordInput.mdx";
+// import PasswordInputDocs from "./PasswordInput.mdx";
 import { PasswordInputProps, TPasswordValidation } from "./PasswordInput.types";
 
 // const disable = {
@@ -49,7 +49,7 @@ const meta = {
       description: {
         component: "Paging is used to navigate med content pages",
       },
-      page: PasswordInputDocs,
+      // page: PasswordInputDocs,
     },
   },
   argTypes: {

@@ -1,4 +1,4 @@
-{
+﻿{
   "AccentColor": "Aksentti",
   "AccessRightsAccessToProduct": "Pääsy moduuliin {{product}} on myönnetty",
   "AccessRightsAllUsers": "Kaikki {{users}}",
@@ -76,7 +76,6 @@
   "DeleteTheme": "Poista teema",
   "DeleteThemeForever": "Poista teema lopullisesti?",
   "DeleteThemeNotice": "Teema poistetaan lopullisesti. Et voi kumota tätä toimintoa.",
-  "Disabled": "Poistettu käytöstä",
   "DNSSettings": "DNS-asetukset",
   "DNSSettingsDescription": "DNS-asetukset on tapa asettaa vaihtoehtoinen URL tilallesi.",
   "DNSSettingsMobile": "Lähetä pyyntösi tukitiimillemme ja asiantuntijamme auttavat sinua asetusten kanssa.",

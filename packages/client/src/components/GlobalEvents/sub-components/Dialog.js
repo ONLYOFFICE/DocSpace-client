@@ -141,6 +141,7 @@ const Dialog = ({
       displayType={"modal"}
       scale={true}
       onClose={onCloseAction}
+      zIndex={405}
     >
       <ModalDialog.Header>{title}</ModalDialog.Header>
       <ModalDialog.Body>

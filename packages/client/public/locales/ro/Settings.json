@@ -1,4 +1,4 @@
-{
+﻿{
   "AccentColor": "Accent",
   "AccessRightsAccessToProduct": "Accesul la modul {{product}} este acordat lui",
   "AccessRightsAllUsers": "Toți {{users}}",
@@ -76,7 +76,6 @@
   "DeleteTheme": "Ștergere temă",
   "DeleteThemeForever": "Doriţi să ştergeţi tema pentru totdeauna?",
   "DeleteThemeNotice": "Tema va fi ştearsă definitiv. Această acţiune nu poate fi anulată.",
-  "Disabled": "Dezactivat",
   "DNSSettings": "Setări DNS",
   "DNSSettingsDescription": "Setări DNS este o modalitate de setare a adresei URL alternative pentru spaţiul dvs.",
   "DNSSettingsMobile": "Trimiteţi solicitarea către echipa noastră de asistenţă, care este gata să vă ajute cu setarea.",

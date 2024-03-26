@@ -90,11 +90,33 @@ const StyledDropDown = styled(DropDown)`
     }
   }
 
-  .flex-reverse {
+  .storage-unavailable {
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: row-reverse;
+
+    .drop-down-item_icon {
+      svg {
+        path[fill] {
+          fill: ${(props) => props.theme.dropDownItem.icon.disableColor};
+        }
+
+        path[stroke] {
+          stroke: ${(props) => props.theme.dropDownItem.icon.disableColor};
+        }
+
+        circle[fill] {
+          fill: ${(props) => props.theme.dropDownItem.icon.disableColor};
+        }
+
+        rect[fill] {
+          fill: ${(props) => props.theme.dropDownItem.icon.disableColor};
+        }
+      }
+    }
+
+    color: ${(props) => props.theme.dropDownItem.disableColor};
   }
 `;
 

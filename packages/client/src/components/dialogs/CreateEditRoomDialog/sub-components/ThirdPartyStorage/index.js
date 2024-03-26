@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 import { Text } from "@docspace/shared/components/text";
@@ -75,6 +75,8 @@ const ThirdPartyStorage = ({
   roomType,
   createNewFolderIsChecked,
   onCreateFolderChange,
+
+  fetchConnectingStorages,
 }) => {
   const onChangeIsThirdparty = () => {
     if (isDisabled) return;
@@ -128,6 +130,10 @@ const ThirdPartyStorage = ({
     });
 
   const isPublicRoom = roomType === RoomsType.PublicRoom;
+
+  useEffect(() => {
+    fetchConnectingStorages();
+  }, []);
 
   return (
     <StyledThirdPartyStorage>
@@ -201,67 +207,7 @@ export default inject(
 
     const thirdPartyStore = filesSettingsStore.thirdPartyStore;
 
-    const connectItems = [
-      {
-        name: thirdPartyStore.googleConnectItem || ["GoogleDrive"],
-        isAvailable: !!thirdPartyStore.googleConnectItem,
-      },
-      {
-        name: thirdPartyStore.boxConnectItem || ["Box"],
-        isAvailable: !!thirdPartyStore.boxConnectItem,
-      },
-      {
-        name: thirdPartyStore.dropboxConnectItem || ["DropboxV2"],
-        isAvailable: !!thirdPartyStore.dropboxConnectItem,
-      },
-      {
-        name: thirdPartyStore.oneDriveConnectItem || ["OneDrive"],
-        isAvailable: !!thirdPartyStore.oneDriveConnectItem,
-      },
-      {
-        name: (thirdPartyStore.nextCloudConnectItem && [
-          ...thirdPartyStore.nextCloudConnectItem,
-          "Nextcloud",
-        ]) || ["NextCloud"],
-        isAvailable: !!thirdPartyStore.nextCloudConnectItem,
-      },
-      {
-        name: thirdPartyStore.kDriveConnectItem || ["kDrive"],
-        isAvailable: !!thirdPartyStore.kDriveConnectItem,
-      },
-      {
-        name: thirdPartyStore.yandexConnectItem || ["Yandex"],
-        isAvailable: !!thirdPartyStore.yandexConnectItem,
-      },
-      {
-        name: (thirdPartyStore.ownCloudConnectItem && [
-          ...thirdPartyStore.ownCloudConnectItem,
-          "ownCloud",
-        ]) || ["ownCloud"],
-
-        isAvailable: !!thirdPartyStore.ownCloudConnectItem,
-      },
-      {
-        name: thirdPartyStore.webDavConnectItem || ["WebDav"],
-        isAvailable: !!thirdPartyStore.webDavConnectItem,
-      },
-      {
-        name: thirdPartyStore.sharePointConnectItem || ["SharePoint"],
-        isAvailable: !!thirdPartyStore.sharePointConnectItem,
-      },
-    ]
-      .map(({ name, isAvailable }) => ({
-        id: name[0],
-        className: `storage_${name[0].toLowerCase()}`,
-        providerKey: name[0],
-        isOauth: name.length > 1 && name[0] !== "WebDav",
-        oauthHref: name.length > 1 && name[0] !== "WebDav" ? name[1] : "",
-        ...(name[0] === "WebDav" && {
-          category: name[name.length - 1],
-        }),
-        isAvailable,
-      }))
-      .filter((item) => !!item);
+    const connectItems = thirdPartyStore.connectingStorages;
 
     const { isRoomAdmin } = authStore;
 
@@ -282,6 +228,7 @@ export default inject(
       getOAuthToken,
       currentColorScheme,
       isRoomAdmin,
+      fetchConnectingStorages: thirdPartyStore.fetchConnectingStorages,
     };
   },
 )(observer(ThirdPartyStorage));

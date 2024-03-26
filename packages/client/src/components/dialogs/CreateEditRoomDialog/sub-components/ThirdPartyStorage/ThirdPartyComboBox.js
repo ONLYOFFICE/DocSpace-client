@@ -165,12 +165,7 @@ const ThirdPartyComboBox = ({
 }) => {
   const dropdownRef = useRef(null);
 
-  const thirdparties = connectItems.map((item) => ({
-    ...item,
-    title: item.category
-      ? item.category
-      : ProviderKeyTranslation(item.providerKey, t),
-  }));
+  const thirdparties = connectItems;
 
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownDirection, setDropdownDirection] = useState("bottom");
@@ -317,7 +312,7 @@ const ThirdPartyComboBox = ({
             .map((thirdparty) => (
               <DropDownItem
                 id={thirdparty.id}
-                className={`dropdown-item ${thirdparty.isAvailable ? "" : "flex-reverse"} ${thirdparty.className ?? ""}`}
+                className={`dropdown-item ${thirdparty.isAvailable ? "" : "storage-unavailable"} ${thirdparty.className ?? ""}`}
                 label={
                   thirdparty.title +
                   (thirdparty.isAvailable

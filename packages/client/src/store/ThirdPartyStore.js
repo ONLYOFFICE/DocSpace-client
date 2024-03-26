@@ -51,6 +51,7 @@ import i18n from "../helpers/i18n";
 class ThirdPartyStore {
   capabilities = null;
   providers = [];
+  connectingStorages = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -69,6 +70,95 @@ class ThirdPartyStore {
   fetchThirdPartyProviders = async () => {
     const list = await api.files.getThirdPartyList();
     this.setThirdPartyProviders(list);
+  };
+
+  fetchConnectingStorages = async () => {
+    const storages = await new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(
+          [
+            {
+              id: "WebDav",
+              className: "storage_webdav",
+              providerKey: "WebDav",
+              isOauth: false,
+              oauthHref: "",
+              category: "WebDav",
+              isAvailable: true,
+              title: "WebDav",
+            },
+            {
+              id: "WebDav",
+              className: "storage_webdav",
+              providerKey: "WebDav",
+              isOauth: false,
+              oauthHref: "",
+              category: "ownCloud",
+              isAvailable: true,
+              title: "ownCloud",
+            },
+            {
+              id: "kDrive",
+              className: "storage_kdrive",
+              providerKey: "kDrive",
+              isOauth: false,
+              oauthHref: "",
+              isAvailable: true,
+              title: "kDrive",
+            },
+            {
+              id: "WebDav",
+              className: "storage_webdav",
+              providerKey: "WebDav",
+              isOauth: false,
+              oauthHref: "",
+              category: "Nextcloud",
+              isAvailable: true,
+              title: "Nextcloud",
+            },
+            {
+              id: "GoogleDrive",
+              className: "storage_googledrive",
+              providerKey: "GoogleDrive",
+              isOauth: false,
+              oauthHref: "",
+              isAvailable: false,
+              title: "Google Drive",
+            },
+            {
+              id: "Box",
+              className: "storage_box",
+              providerKey: "Box",
+              isOauth: false,
+              oauthHref: "",
+              isAvailable: false,
+              title: "Box",
+            },
+            {
+              id: "DropboxV2",
+              className: "storage_dropboxv2",
+              providerKey: "DropboxV2",
+              isOauth: false,
+              oauthHref: "",
+              isAvailable: false,
+              title: "Dropbox",
+            },
+            {
+              id: "OneDrive",
+              className: "storage_onedrive",
+              providerKey: "OneDrive",
+              isOauth: false,
+              oauthHref: "",
+              isAvailable: false,
+              title: "OneDrive",
+            },
+          ],
+          2000,
+        );
+      });
+    });
+
+    this.connectingStorages = storages;
   };
 
   saveThirdParty = (

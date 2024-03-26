@@ -284,7 +284,7 @@ const InviteInput = ({
           </SearchItemText>
           <SearchItemText>{email}</SearchItemText>
         </div>
-        {shared && <SearchItemText info>{t("Invited")}</SearchItemText>}
+        {shared && <SearchItemText info>{t("Common:Invited")}</SearchItemText>}
       </DropDownItem>
     );
   };
@@ -575,4 +575,10 @@ export default inject(({ settingsStore, dialogsStore, userStore }) => {
     defaultAccess: invitePanelOptions.defaultAccess,
     isOwner,
   };
-})(withCultureNames(withTranslation(["InviteDialog"])(observer(InviteInput))));
+})(
+  withCultureNames(
+    withTranslation(["InviteDialog", "Common", "Translations"])(
+      observer(InviteInput),
+    ),
+  ),
+);

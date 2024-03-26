@@ -117,12 +117,7 @@ const ChangeRoomOwner = (props) => {
 
   const asideComponent = (
     <StyledChangeRoomOwner showBackButton={showBackButton}>
-      <Backdrop
-        onClick={onClose}
-        visible={visible}
-        zIndex={320}
-        isAside={true}
-      />
+      <Backdrop onClick={onClose} visible={visible} zIndex={320} isAside />
       <Aside
         currentDeviceType={currentDeviceType}
         className="header_aside-panel"
@@ -154,6 +149,7 @@ const ChangeRoomOwner = (props) => {
           withOutCurrentAuthorizedUser
           filterUserId={roomOwnerId}
           currentUserId={userId}
+          disableDisabledUsers
         />
       </Aside>
     </StyledChangeRoomOwner>

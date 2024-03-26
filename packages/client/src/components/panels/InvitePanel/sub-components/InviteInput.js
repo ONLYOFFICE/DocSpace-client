@@ -27,7 +27,7 @@
 import debounce from "lodash.debounce";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useMemo, useState, useCallback, useEffect, useRef } from "react";
 
 import { Avatar } from "@docspace/shared/components/avatar";
 import { Text } from "@docspace/shared/components/text";
@@ -408,6 +408,13 @@ const InviteInput = ({
     isBeta: isBetaLanguage(item.key),
   }));
 
+  const invitedUsers = useMemo(
+    () => inviteItems.map((item) => item.id),
+    [inviteItems],
+  );
+
+  console.log(inviteItems);
+
   return (
     <>
       <StyledSubHeader>
@@ -540,6 +547,8 @@ const InviteInput = ({
             roomId={roomId}
             withGroups={!isPublicRoomType}
             withAccessRights
+            invitedUsers={invitedUsers}
+            disableDisabledUsers
           />
         )}
       </StyledInviteInputContainer>

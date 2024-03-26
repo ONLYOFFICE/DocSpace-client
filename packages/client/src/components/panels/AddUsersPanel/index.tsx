@@ -49,16 +49,27 @@ import useLoadingWithTimeout from "@docspace/shared/hooks/useLoadingWithTimeout"
 import { getUserRole } from "@docspace/shared/utils/common";
 import Filter from "@docspace/shared/api/people/filter";
 import { getMembersList, getUserList } from "@docspace/shared/api/people";
-import { AccountsSearchArea, ShareAccessRights } from "@docspace/shared/enums";
+import {
+  AccountsSearchArea,
+  EmployeeStatus,
+  ShareAccessRights,
+} from "@docspace/shared/enums";
 import { RowLoader, SearchLoader } from "@docspace/shared/skeletons/selector";
 import { TUser } from "@docspace/shared/api/people/types";
 import { TGroup } from "@docspace/shared/api/groups/types";
 import { MIN_LOADER_TIMER } from "@docspace/shared/selectors/Files/FilesSelector.constants";
+import { TTranslation } from "@docspace/shared/types";
 
 const PEOPLE_TAB_ID = "0";
 const GROUP_TAB_ID = "1";
 
-const toListItem = (item: TUser | TGroup) => {
+const toListItem = (
+  item: TUser | TGroup,
+  t: TTranslation,
+  invitedUsers?: string[],
+  disableDisabledUsers?: boolean,
+  isRoom: boolean,
+) => {
   if ("displayName" in item) {
     const {
       id,
@@ -72,11 +83,23 @@ const toListItem = (item: TUser | TGroup) => {
       isVisitor,
       isCollaborator,
       isRoomAdmin,
+      status,
+      shared,
     } = item;
 
     const role = getUserRole(item);
 
     const userAvatar = hasAvatar ? avatar : DefaultUserPhoto;
+
+    const isInvited = invitedUsers?.includes(id) || (isRoom && shared);
+    const isDisabled =
+      disableDisabledUsers && status === EmployeeStatus.Disabled;
+
+    const disabledText = isDisabled
+      ? t("Common:Disabled")
+      : isInvited
+        ? t("Common:Invited")
+        : "";
 
     return {
       id,
@@ -89,6 +112,8 @@ const toListItem = (item: TUser | TGroup) => {
       isVisitor,
       isCollaborator,
       isRoomAdmin,
+      isDisabled: isInvited || isDisabled,
+      disabledText,
     } as TSelectorItem;
   }
 
@@ -127,7 +152,10 @@ type AddUsersPanelProps = {
   withoutBackground: boolean;
   withBlur: boolean;
 
-  roomId: string | number;
+  invitedUsers?: string[];
+  disableDisabledUsers?: boolean;
+
+  roomId?: string | number;
   withGroups?: boolean;
 };
 
@@ -150,6 +178,9 @@ const AddUsersPanel = ({
   roomId,
 
   withGroups,
+
+  invitedUsers,
+  disableDisabledUsers,
 }: AddUsersPanelProps) => {
   const theme = useTheme();
   const { t } = useTranslation([
@@ -169,10 +200,6 @@ const AddUsersPanel = ({
     (isEncrypted ? ShareAccessRights.FullAccess : ShareAccessRights.ReadOnly);
 
   const onBackClick = () => onClose();
-  const getFilterWithOutDisabledUser = useCallback(
-    () => Filter.getFilterWithOutDisabledUser(),
-    [],
-  );
 
   const onKeyPress = (e: KeyboardEvent) => {
     if (e.key === "Esc" || e.key === "Escape") onClose();
@@ -289,12 +316,13 @@ const AddUsersPanel = ({
 
       setIsNextPageLoading(true);
 
-      const currentFilter = getFilterWithOutDisabledUser();
+      const currentFilter = Filter.getDefault();
 
       currentFilter.page = startIndex / pageCount;
       currentFilter.pageCount = pageCount;
-      // @ts-expect-error think its ok
-      currentFilter.excludeShared = true;
+
+      // show all users, but disabled invited
+      // currentFilter.excludeShared = true;
       currentFilter.search = searchValue || "";
 
       const response = !roomId
@@ -303,7 +331,9 @@ const AddUsersPanel = ({
 
       const totalDifferent = startIndex ? response.total - totalRef.current : 0;
 
-      let items = response.items.map((item) => toListItem(item));
+      const items = response.items.map((item) =>
+        toListItem(item, t, invitedUsers, disableDisabledUsers, !!roomId),
+      );
       const newTotal = response.total - totalDifferent;
 
       if (isFirstLoad.current) {
@@ -338,10 +368,12 @@ const AddUsersPanel = ({
     },
     [
       activeTabId,
-      getFilterWithOutDisabledUser,
+      disableDisabledUsers,
+      invitedUsers,
       roomId,
       searchValue,
       setIsLoading,
+      t,
       withGroups,
     ],
   );

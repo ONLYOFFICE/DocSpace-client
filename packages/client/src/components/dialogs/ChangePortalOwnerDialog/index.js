@@ -52,10 +52,6 @@ import {
   StyledSelectedOwner,
 } from "./StyledDialog";
 
-const filter = new Filter();
-
-filter.employeeStatus = 1;
-
 const ChangePortalOwnerDialog = ({
   t,
   visible,
@@ -140,7 +136,6 @@ const ChangePortalOwnerDialog = ({
             withCancelButton
             cancelButtonLabel=""
             onCancel={onBackClick}
-            filter={filter}
             excludeItems={[id]}
             submitButtonLabel={t("Common:SelectAction")}
             onSubmit={onAccept}
@@ -152,6 +147,7 @@ const ChangePortalOwnerDialog = ({
               headerLabel: "",
             }}
             currentUserId={id}
+            disableDisabledUsers
           />
         </ModalDialog.Container>
       )}

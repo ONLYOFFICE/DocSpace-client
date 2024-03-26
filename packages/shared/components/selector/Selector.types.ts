@@ -194,7 +194,7 @@ export type TSelectorSubmitButton = {
 };
 
 type TSelectorFooterSubmitButton = Omit<TSelectorSubmitButton, "onSubmit"> & {
-  onSubmit: (item?: TSelectorItem) => Promise<void>;
+  onSubmit: (item?: TSelectorItem | React.MouseEvent) => Promise<void>;
 };
 
 // cancel button

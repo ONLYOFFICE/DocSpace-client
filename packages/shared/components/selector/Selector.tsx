@@ -151,13 +151,13 @@ const Selector = ({
   const [requestRunning, setRequestRunning] = React.useState<boolean>(false);
 
   const onSubmitAction = async (
-    item?: TSelectorItem,
+    item?: TSelectorItem | React.MouseEvent,
     fromCallback?: boolean,
   ) => {
     setRequestRunning(true);
 
     await onSubmit(
-      fromCallback && item ? [item] : newSelectedItems,
+      fromCallback && item && "label" in item ? [item] : newSelectedItems,
       selectedAccess,
       newFooterInputValue,
       isFooterCheckboxChecked,

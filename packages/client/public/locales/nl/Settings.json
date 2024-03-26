@@ -1,4 +1,4 @@
-{
+﻿{
   "AccentColor": "Accent",
   "AccessRightsAccessToProduct": "Toegang tot {{product}} module wordt gegeven aan",
   "AccessRightsAllUsers": "Alle {{users}}",
@@ -76,7 +76,6 @@
   "DeleteTheme": "Thema verwijderen",
   "DeleteThemeForever": "Thema voorgoed verwijderen?",
   "DeleteThemeNotice": "Het thema wordt definitief verwijderd. U kunt deze actie niet ongedaan maken.",
-  "Disabled": "Uitgeschakeld",
   "DNSSettings": "DNS instellingen",
   "DNSSettingsDescription": "DNS Instellingen is een manier om een alternatieve URL voor uw ruimte in te stellen.",
   "DNSSettingsMobile": "Stuur uw verzoek naar ons ondersteuningsteam, en onze specialisten zullen u helpen met de instellingen.",

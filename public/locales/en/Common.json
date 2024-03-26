@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "About",
   "AboutCompanyTitle": "About this program",
   "AccessDenied": "Access denied",
@@ -107,6 +107,7 @@
   "DenyAccess": "Deny access",
   "Description": "Description",
   "DeveloperTools": "Developer Tools",
+  "Disabled": "Disabled",
   "DisableQuota": "Disable quota",
   "DisableStorageQuota": "Disable storage quota",
   "Disconnect": "Disconnect",
@@ -197,6 +198,7 @@
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> invites you to join the DocSpace <1>{{spaceAddress}}</1> for secure document collaboration.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> invites you to join the room <1>{{roomName}}</1> for secure document collaboration.",
   "Invite": "Invite",
+  "Invited": "Invited",
   "InviteUsers": "Invite users",
   "IpAddress": "IP address",
   "Kilobyte": "KB",

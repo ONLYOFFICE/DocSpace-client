@@ -181,7 +181,7 @@ const TwoFactorAuth = (props) => {
         options={[
           {
             id: "tfa-disabled",
-            label: t("Disabled"),
+            label: t("Common:Disabled"),
             value: "none",
           },
           //TODO: hide while 2fa by sms is not working

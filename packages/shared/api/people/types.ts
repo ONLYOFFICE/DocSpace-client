@@ -70,6 +70,7 @@ export type TUser = {
   mobilePhone?: string;
   cultureName?: string;
   groups?: TUserGroup[];
+  shared?: boolean;
 };
 
 export type TGetUserList = {

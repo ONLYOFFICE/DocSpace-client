@@ -1,4 +1,4 @@
-{
+﻿{
   "AccentColor": "Akzent",
   "AccessRightsAccessToProduct": "Das Modul {{product}} ist zugreifbar für",
   "AccessRightsAllUsers": "Alle Mitglieder mit dem Status {{users}}",
@@ -76,7 +76,6 @@
   "DeleteTheme": "Thema löschen",
   "DeleteThemeForever": "Thema für immer löschen?",
   "DeleteThemeNotice": "Das Thema wird endgültig gelöscht. Sie können diese Aktion nicht rückgängig machen.",
-  "Disabled": "Deaktiviert",
   "DNSSettings": "DNS-Einstellungen",
   "DNSSettingsDescription": "Mit DNS-Einstellungen können Sie eine alternative URL für Ihren Bereich festlegen.",
   "DNSSettingsMobile": "Senden Sie Ihre Anfrage an unser Support-Team, und unsere Spezialisten werden Ihnen bei den Einstellungen helfen.",

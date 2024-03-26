@@ -54,12 +54,14 @@ import {
   getShowText,
   isPublicRoom,
   insertTagManager,
+  isManagement,
 } from "../utils/common";
 import { setCookie, getCookie } from "../utils/cookie";
 import { combineUrl } from "../utils/combineUrl";
 import FirebaseHelper from "../utils/firebase";
 import SocketIOHelper from "../utils/socket";
 import { TWhiteLabel } from "../utils/whiteLabelHelper";
+
 import { ThemeKeys, TenantStatus, DeviceType, UrlActionType } from "../enums";
 import {
   LANGUAGE,
@@ -726,7 +728,7 @@ class SettingsStore {
   };
 
   getWhiteLabelLogoUrls = async () => {
-    const res = await api.settings.getLogoUrls();
+    const res = await api.settings.getLogoUrls(null, isManagement());
 
     this.setLogoUrls(Object.values(res));
     this.setLogoUrl(Object.values(res));

@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Giới thiệu",
   "AboutCompanyTitle": "Giới thiệu về chương trình này",
   "AccessDenied": "Truy cập bị từ chối",
@@ -96,6 +96,7 @@
   "DenyAccess": "Từ chối quyền truy cập",
   "Description": "Mô tả",
   "DeveloperTools": "Công cụ nhà phát triển",
+  "Disabled": "Đã vô hiệu hóa",
   "Disconnect": "Ngắt kết nối",
   "DocSpaceAdmin": "Quản trị viên DocSpace",
   "DocSpaceOwner": "Chủ sở hữu DocSpace",
@@ -169,6 +170,7 @@
   "Info": "Thông tin",
   "InfoPanel": "Bảng thông tin",
   "Invite": "Mời",
+  "Invited": "Đã mời",
   "InviteUsers": "Mời người dùng",
   "IpAddress": "Địa chỉ IP",
   "Kilobyte": "KB",

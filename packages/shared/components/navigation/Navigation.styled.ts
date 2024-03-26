@@ -421,16 +421,24 @@ const StyledTrashWarning = styled.div`
   padding: 8px 12px;
   border-radius: 6px;
 
-  display: flex;
-  align-items: center;
+  display: grid;
   justify-content: ${({ theme }) =>
     theme.interfaceDirection === "rtl" ? `right` : `left`};
 
-  font-weight: 400;
-  font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
-  line-height: 16px;
+  .warning-text {
+    color: ${({ theme }) => theme.section.header.trashErasureLabelText};
 
-  color: ${({ theme }) => theme.section.header.trashErasureLabelText};
+    font-weight: 400;
+    font-size: ${(props) => props.theme.getCorrectFontSize("12px")};
+    line-height: 16px;
+
+    width: 100%;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   background: ${({ theme }) =>
     theme.section.header.trashErasureLabelBackground};
 

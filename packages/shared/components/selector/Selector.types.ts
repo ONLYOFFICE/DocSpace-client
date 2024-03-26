@@ -193,8 +193,8 @@ export type TSelectorSubmitButton = {
   submitButtonId?: string;
 };
 
-type TSelectorFooterSubmitButton = TSelectorSubmitButton & {
-  onSubmit: () => void;
+type TSelectorFooterSubmitButton = Omit<TSelectorSubmitButton, "onSubmit"> & {
+  onSubmit: (item?: TSelectorItem | React.MouseEvent) => Promise<void>;
 };
 
 // cancel button
@@ -491,7 +491,9 @@ export type TSelectorItem = TSelectorItemLogo &
     displayName?: string;
 
     isSelected?: boolean;
+
     isDisabled?: boolean;
+    disabledText?: string;
   };
 
 export type Data = {

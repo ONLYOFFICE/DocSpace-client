@@ -34,6 +34,7 @@ import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
 import { SelectedItem } from "@docspace/shared/components/selected-item";
 import { tablet } from "@docspace/shared/utils";
@@ -125,7 +126,15 @@ const InfoBar = styled.div`
   }
 `;
 
-const CSP = ({ t, cspDomains, getCSPSettings, setCSPSettings, standalone }) => {
+const CSP = ({
+  cspDomains,
+  currentColorScheme,
+  getCSPSettings,
+  installationGuidesUrl,
+  setCSPSettings,
+  standalone,
+  t,
+}) => {
   useEffect(() => {
     getCSPSettings();
   }, []);
@@ -219,7 +228,17 @@ const CSP = ({ t, cspDomains, getCSPSettings, setCSPSettings, standalone }) => {
                 {t("CSPInfoBarHeader")}
               </Text>
             </div>
-            <div className="body-container">{t("CSPInfoBarDescription")}</div>
+            <div className="body-container">
+              {t("CSPInfoBarDescription")}{" "}
+              <Link
+                color={currentColorScheme?.main?.accent}
+                fontSize="13px"
+                fontWeight="400"
+                onClick={() => window.open(installationGuidesUrl, "_blank")}
+              >
+                {t("Common:LearnMore")}
+              </Link>
+            </div>
           </div>
         </InfoBar>
       )}
@@ -245,7 +264,20 @@ const CSP = ({ t, cspDomains, getCSPSettings, setCSPSettings, standalone }) => {
 };
 
 export default inject(({ settingsStore }) => {
-  const { cspDomains, getCSPSettings, setCSPSettings, standalone } =
-    settingsStore;
-  return { cspDomains, getCSPSettings, setCSPSettings, standalone };
+  const {
+    cspDomains,
+    currentColorScheme,
+    getCSPSettings,
+    installationGuidesUrl,
+    setCSPSettings,
+    standalone,
+  } = settingsStore;
+  return {
+    cspDomains,
+    currentColorScheme,
+    getCSPSettings,
+    installationGuidesUrl,
+    setCSPSettings,
+    standalone,
+  };
 })(observer(CSP));

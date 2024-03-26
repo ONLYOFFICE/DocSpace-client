@@ -469,6 +469,10 @@ class SettingsStore {
     return `${this.helpLink}/userguides/docspace-managing-users.aspx`;
   }
 
+  get installationGuidesUrl() {
+    return `${this.helpLink}/installation/docspace-enterprise-index.aspx`;
+  }
+
   get sdkLink() {
     return `${this.apiDocsLink}/docspace/jssdk/`;
   }

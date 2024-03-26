@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Hakkında",
   "AboutCompanyTitle": "Bu program hakkında",
   "AccessDenied": "Erişim engellendi",
@@ -96,6 +96,7 @@
   "DenyAccess": "Erişimi reddet",
   "Description": "Tanım",
   "DeveloperTools": "Geliştirici Araçları",
+  "Disabled": "Devre dışı bırakıldı",
   "Disconnect": "Bağlantıyı kes",
   "DocSpaceAdmin": "DocSpace yöneticisi",
   "DocSpaceOwner": "DocSpace sahibi",
@@ -169,6 +170,7 @@
   "Info": "Bilgi",
   "InfoPanel": "Bilgi paneli",
   "Invite": "Davet et",
+  "Invited": "Davet edildi",
   "InviteUsers": "Kullanıcıları davet et",
   "IpAddress": "IP adresi",
   "Kilobyte": "KB",

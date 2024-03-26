@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Tietoja",
   "AboutCompanyTitle": "Tietoja tästä ohjelmasta",
   "AccessDenied": "Pääsy evätty",
@@ -96,6 +96,7 @@
   "DenyAccess": "Estä pääsy",
   "Description": "Kuvaus",
   "DeveloperTools": "Kehittäjän työkalut",
+  "Disabled": "Poistettu käytöstä",
   "Disconnect": "Katkaise",
   "DocSpaceAdmin": "DocSpace- järjestelmänvalvoja",
   "DocSpaceOwner": "DocSpace omistaja",
@@ -169,6 +170,7 @@
   "Info": "Info",
   "InfoPanel": "Tietopaneeli",
   "Invite": "Kutsu",
+  "Invited": "Kutsuttu",
   "InviteUsers": "Kutsu käyttäjiä",
   "IpAddress": "IP-osoite",
   "Kilobyte": "KB",

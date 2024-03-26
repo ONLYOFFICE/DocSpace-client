@@ -1,4 +1,4 @@
-{
+﻿{
   "AccentColor": "Akcent",
   "AccessRightsAccessToProduct": "Dostęp do modułu {{product}} został udzielony",
   "AccessRightsAllUsers": "Wszyscy {{users}}",
@@ -76,7 +76,6 @@
   "DeleteTheme": "Usuń motyw",
   "DeleteThemeForever": "Usunąć motyw na zawsze?",
   "DeleteThemeNotice": "Motyw zostanie trwale usunięty. Nie będziesz w stanie cofnąć tego działania.",
-  "Disabled": "Wyłączono",
   "DNSSettings": "Ustawienia DNS",
   "DNSSettingsDescription": "Ustawienia DNS to sposób, by skonfigurować alternatywny URL dla Twojego obszaru roboczego.",
   "DNSSettingsMobile": "Wyślij prośbę do naszego zespołu obsługi klienta, a nasi specjaliści pomogą Ci w konfiguracji.",

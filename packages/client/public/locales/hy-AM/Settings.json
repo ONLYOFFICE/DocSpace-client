@@ -1,4 +1,4 @@
-{
+﻿{
   "AccentColor": "Շեշտ",
   "AccessRightsAccessToProduct": "Մատչում դեպի {{product}} մոդուլը տրվում է",
   "AccessRightsAllUsers": "Բոլոր {{users}}",
@@ -76,7 +76,6 @@
   "DeleteTheme": "Ջնջել ոճը",
   "DeleteThemeForever": "Ջնջե՞լ ոճը ընդմիշտ:",
   "DeleteThemeNotice": "Թեման ընդմիշտ կջնջվի: Դուք չեք կարողանա հետարկել այս գործողությունը:",
-  "Disabled": "Անջատված է",
   "DNSSettings": "DNS կարգավորումներ",
   "DNSSettingsDescription": "DNS-ի կարգավորումները ձեր տարածքի համար այլընտրանքային URL սահմանելու միջոց է:",
   "DNSSettingsMobile": "Ուղարկեք ձեր հարցումը մեր աջակցման թիմին, և մեր մասնագետները կօգնեն ձեզ կարգավորումներում:",

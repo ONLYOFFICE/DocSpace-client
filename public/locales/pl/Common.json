@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "O",
   "AboutCompanyTitle": "O tym programie",
   "AccessDenied": "Odmowa dostępu",
@@ -96,6 +96,7 @@
   "DenyAccess": "Odmów dostępu",
   "Description": "Opis",
   "DeveloperTools": "Narzędzia programistyczne",
+  "Disabled": "Wyłączono",
   "Disconnect": "Rozłącz",
   "DocSpaceAdmin": "Administrator DocSpace",
   "DocSpaceOwner": "Właściciel DocSpace",
@@ -169,6 +170,7 @@
   "Info": "Info",
   "InfoPanel": "Panel informacyjny",
   "Invite": "Zaprosić",
+  "Invited": "Zaproszono",
   "InviteUsers": "Zaproś użytkowników",
   "IpAddress": "Adres IP",
   "Kilobyte": "KB",
